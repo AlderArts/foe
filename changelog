@@ -1,0 +1,523 @@
+CHANGELOG for Fall of Eden
+--------------------------
+
+--------------------------------------------
+                  CURRENT
+--------------------------------------------
+
+Version 0.3e
+------------
+* Added an ugly fallback solution for save to file not working offline (save to text button in data menu)
+* Typos etc
+* Added an exploration encounter to the den, for people who thought things were going too easy. Good luck with that one. Might need balancing later.
+* Added new Gwendy loss scenes:
+ - Orgasm denial
+* Significantly fleshed out the Lady's Blessing inn in Rigard, written by Del. There is a hidden encounter involving a quite extensive sex scene, if you can find it.
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
+Version 0.3d2
+-------------
+* Minor Magnus fix
+* Fixed various bugs in the save/load code of body, causing various problems (Object 0.3 has no method 'Get')
+* You can no longer kill the intro demon boss with Venom (nice try though!)
+
+Version 0.3d
+-------------
+* Job level mastery fix
+* Some fixes to the introdemon AI that was causing occasional runtime bugs
+* Fixed bug in Miranda chat scene
+* Fixed bug in Lizard anal scene (FINALLY found it, the new debug thing rocks!)
+* Added mothgirl and wolf enemies to the forest (no scenes for them yet)
+* Added a scorpion girl enemy to the desert (no scenes for her yet). She ought to be rather tough, and can poison you.
+* Added a status effect spell, venom, that deals damage over time. For the time being, it is added to the Scholar job (cannot be learnt).
+* Added a status effect, burn, that deals damage over time. For the time being it is a random effect of the fireball spell.
+* Added a status effect, freeze, that randomly slows you down. For the time being it is a random effect of the Freeze spell.
+* Added a status effect, numb, that randomly stuns you. For the time being it is a random effect of the Bolt spell.
+* Added Magnus the mage ("Scholar") to the camp. With his help, you may be able to unlock new powers within you.
+* Added the mage job (needs to be unlocked). The text mentions the Mystic and Healer jobs, those will also be unlocked once I've made their abilities.
+
+Version 0.3c
+------------
+* Minor tweaks and bug fixes
+* Character job levels now shows correctly when you have maxed out the job.
+* New Gwendy challenge win scenes: Blowjob/Cunnilingus/Vag fuck/Trib/Anal/Various toy scenes.
+ - The strapon scenes are not written yet and will be added later.
+ - The D.Dildo scene might not be possible to trigger right now, as it needs you to increase your butt capacity.
+* Added a new farm work scene (talk to gwendy->work) where you see Danie again. It is pretty innocent.
+* A few scenes for Miranda added:
+ - There is a minor one-time event you can find during the daytime, exploring the streets of Rigard (various areas).
+ - There is a two part one-time event at the tavern the maidens' bane, located in the slums outside Rigard.
+ - There is a repeatable chat scene with Miranda after the initial scenes, but it is little more than a placeholder right now.
+* Added bug catcher for scenes. Sorta.
+ - When the game gets a runtime error, you'll get a popup with some info. Mail this to me and I'll fix it as quickly as possible.
+ - The game tries to continue on if possible. If it was parser related, the harmful piece of text will show up in red. Send this as well.
+ - While not perfect, it will help me see what problems are actually occuring and fix them instead of trying to reproduce them.
+
+Version 0.3b
+------------
+* Fixed debug mode bug
+* For now, removed repeat loss abductions by rabbits (until I make a proper repeat scene)
+* Lust gain over time, both in and out of combat.
+* Cum and milk gain over time added (not finished).
+* Job level added to portrait (level/sexlevel/joblevel). Will show a * when the job is maxed out.
+* Job description added to job selection prompt.
+* Kiai can now access the standard starter jobs (though they are tough to level).
+* A slew of other assorted bugs and typos.
+* Hopefully squashed the initiative bug. For those playing on IE (only place it seems to show up), please holler if you are still seeing characters going into negative initiative.
+* Fixed an annoying bug with the starter job in the save format. Unfortunately this means that everyones saves will default to fighter (don't worry, it has no long term impact except the slight xp bonus to that one job). Starting a new character (or loading an older save which lets you pick) sets the save correctly.
+
+Version 0.3a
+------------
+* Cavalcade pictures, drawn by Jass Befrold, colored by me. Hopefully this enables you to visualize your hand quickly.
+* Updated credits screen a bit.
+* Intro to Burrows added (Fight the rabbits at the crossroads to get it). Followup in progress.
+* A fantasize option added to the players party options, to quickly raise your lust. Intended to have dreamlike sequences later.
+* Added more black magic spells, based on a new system of elemental damage.
+* Added a whole lot of physical and supportive abilities, rewrote the ones already implemented.
+* Cleaned up the way abilities are presented in combat. There are now 4 static categories that are always in the same position:
+ - Skills (physical abilities)
+ - Spells (attack magic)
+ - Support (healing magic, buffs etc)
+ - Seduce (lust based abilities)
+* Added and refined starter body types (the buttons actually do something now!)
+* New job system used to learn abilities. Still a work in progress. Ask the chief about how it works.
+* Some minor changes to the intro, involving starting job and equipment. If you load an old game, you will get the same perks.
+* Added an aggro system. The abilities Charm, Allure, Provoke and Taunt can tweak how enemies attack you. Only Charm is available for use atm (Courtesan job).
+* A whole slew of gear added, currently only available through the starter job choice.
+
+Version 0.2z
+------------
+* Minor bugfixes and typos
+* New Gwendy challenge win scenes: Handjob/Frig/Titjob/Tease
+* New Gwendy challenge loss scenes: Make-out
+* Added one really complex and strange scene to the daytime merchants' street in Rigard. (X)plore the area between 6 and 18 to get it. There are so many variations to it that some parser error might have slipped through, so report if you find anything.
+
+Version 0.2y
+------------
+* Fixed a bunch of bugs in the new scene for Kiakai.
+* Fixed a bunch of lizard related bugs.
+* Changed the way virginities are tracked, since there seems to be some trouble with how it is currently tracked. Sadly, this kind of breaks a few things, so if you were a virgin, you likely aren't anymore.
+* To somewhat address the above point, a new option is added to the cocksmith/elfcalibrator to reset your virginity. There are still a few NPCs that currently track virginities that will likely be deflowered until you start a new game (or saveedit, check for virgin entries in the file, put 1 for virgin, 0 for deflowered).
+* A new Kiakai sex scene has been added.
+* The initial scenes for a character named Lei has been added (not 100% finished, so you may come across placeholders). He can be found in the plaza inn in Rigard (Debug mode).
+* Added equippable sex toys (can only be obtained by cheating atm). At the moment, they only work with Kiakai's sex scenes, and nothing else. Test equipping one of them on a female character (or on female Kia) and it should open up new scenes. If you have a real cock, it will automatically use that for the scene (though there is no real reason the opposite can't be used in some scenes).
+
+Version 0.2x
+-------------
+* A new, very extensive and much anticipated scene for Kiakai. It requires some unlocking. The reverse scene will probably come next week, it hasn't been fully written yet.
+
+[SPOILER]: First, you need to do the healing sex multiple times. Eventually, "Sex" will become an option in the interact menu. Pick it, you then need to unlock the scene by talking with him/her (Talk->Priesthood->Diciplines->Confront). Now you can unlock the actual scene by picking Sex again. Only pitch is actually implemented.
+
+Version 0.2w2
+-------------
+* Bugfix: Rosalin Equinium is no longer bugged for female Rosalin.
+* Bugfix: Cavalcade draw no longer hangs the game.
+
+Version 0.2w
+------------
+* Balanced the intro fight more to your advantage (after the stats revamp, the demon got his turn way too often).
+* Restructured TF item backend (should have fixed a bunch of inconsitent TF effects in the process, may have introduced new bugs).
+* Added several random NPC chatter scenes you will get when walking/exploring the streets of Rigard.
+* Lizards win scenes. Not 100% finished quite yet, females should have at least one more scene. The female lizard has one "hidden" scene, that require you to grind to sex level 3. More delicious lizard sex from Salrith!
+* Added human and avian TF items (cheat).
+* Added a cock worship scene for Rosalin, written by Fenoxo!
+* Added a new dommy 69 scene for Kiakai, with multiple options (other than minor touch-ups, this concludes the tier 1 Kiai content).
+* Added the cardgame Cavalcade (can be played at the campfire). Later updates will add visual representations of the cards, making it easier to evaluate your hand at a glance.
+
+Version 0.2v
+------------
+* Typos etc.
+* Fixed save bug that would mess up horns/tails
+* Added a demon TF, dog TF, fox TF and wolf TF. Can currently not be found/made in the game (see next point).
+* Added a debug option in the tent called ITEM. It will give you one of every item currently in the game. Cheater.
+* Added a dominant cunnilingus scene for Kiakai.
+* Updated the breast and butt descriptions to be more correct.
+
+Version 0.2u
+------------
+* Cheat menu for Kiakai added in debug mode, in the tent.
+* Kia/Kia seduce scene finished (the female variations)
+* Some new dialog scenes for Rosalin, talking about her past
+
+Version 0.2t2
+-------------
+* Clear saves now has a confirm button.
+* Pleasure Kia bug fixed.
+* Minor typo fixes.
+
+Version 0.2t
+------------
+* Bovia fix.
+* You can't sell grass for free monies anymore (I set the "value" of the item to zero, and made shops not show the option to sell value-less items).
+* Miranda the dog-morph basic encounter added to Rigard (going to the gates now possible outside of Debug mode). Going inside the city still requires Debug mode. Miranda currently has no followup.
+* Sex scenes for Fera the catgirl added (need Debug mode to enter the city).
+* A slightly incomplete nice healing scene for Kiakai added. In reality it is like 6 scenes, but the variations for female Kia is missing. I'll try to write those for next week's update.
+
+Version 0.2s
+------------
+* Minor bugfixes (Bovia should drop correctly when the game indicates it should in Gwendy's scene)
+* Kiakai got a new, slightly longer cuddle scene, courtesy to Del.
+* You can now help Gwendy both in the barn and fields area (same scenes, different time of day).
+* Gwendy's first challenge won/lost scenes are coded (courtesy of Kiro). Much more to come.
+* If you for some reason want to pick grass on the fields at the farm, you now can.
+* If you manage to find all the ingredients, you can have Rosalin create the Bovia potion.
+* 2 random Rigard scenes written by Del added (still locked behind a debug barrier). Go to the plaza and explore if you are interested.
+* The Silken Delights clothing store in Rigard (written by Resar) is starting to take form. Some basic talky scenes are in place (much more to come).
+
+Version 0.2r
+-------------
+* Fixed various bugs: Combat initiative bug in IE should hopefully be fixed.
+
+Content:
+* The scene you get when pumping Rosalin full of Equinium now has a followup (still pretty unfinished).
+* Gwendy is starting to make her presence known on the farm. Expect a lot of placeholder text. If you get lucky, you can recieve a new TF item.
+* Linked in the city of Rigard (only available in debug mode, and highly unfinished). If you want, you can run around there and look around. Don't make any bug reports regarding Miranda, her content is going to be rewritten (this is oooold stuff).
+
+Note on playability: running the game on IE offline won't work (even if you allow for ActiveX controls to run). This is due to IE's policy on localstorage, and isn't something I know how to fix (even if I fixed the particular problem causing it to crash, you wouldn't be able to save). Get a better browser or play online.
+
+Version 0.2q2
+-------------
+* Fixed various bugs: Rosalin repeat equinium scene works. Fight with Maria works. Party exp bug fixed.
+
+Version 0.2q
+------------
+* Changed the damage formula, might still be very unbalanced.
+* You can now switch characters in and out (player is always part of active party). Companions in the reserve will not participate in combat (or post combat scenes). Specific scene depending on a character being there (such as when showing Rosalin the gem) will still trigger, even if the character is in the reserve. Characters in the reserve still receive combat exp (though slightly less).
+* Changed the way leveling works. Might be a bit obtuse, I'll explain later.
+* Fixed errors in the new Blowjob scene.
+* Fixed minor bug regarding debug mode.
+* Fixed some wonkyness in the GUI I caused trying to reenable screen reader stuff last week.
+* Changed how arms and legs are tracked. This might have left some bugs in the code, so report if things are acting wonky.
+
+Content:
+* Added a new encounter in the forest. Explore and find out (between 6-20)! You might get beaten up if you haven't leveled up though... There is currently no followup to this content.
+* Added some fun scenes for Rosalin (also, learn more alchemy!). To get the new scenes, get some ingredients and ask her to combine them. There is a special scene if you stock up on horse stuff and get lucky. There is currently only one implemented scene for sex for the alchemist, more coming later.
+
+Version 0.2p
+------------
+* Put explore and people in the same tab
+* Fixed save-restores-all-health (on a totally unrelated note, toggling debug no longer gives you full hp. Can't have everything)
+* Seduce scenes are now available at full health too (with a slightly different introduction scene)
+* One new scene for Kiakai: Assertive blowjob. There is a variation for longer cocks (>20cm)
+* Changing cock length and thickness is now available at cocksmith in debug mode
+
+Version 0.2o
+------------
+* Added some new healing scenes for KiaKai (seduce->eat out)
+* Fixed a save bug that was breaking save to file in previous version
+* Removed the ability for the screen to overflow (restricting the page size to the canvas).
+
+Combat stuff:
+* Changed combat calculations (still needs a lot of balancing)
+* Added hit/miss for physical attacks
+* Reduced the effectiveness of lust attacks
+* Removed the loss-by-lust, lust is used as combat resource for powerful attacks instead
+
+Added four special attacks:
+* Bash - Hits for slightly higher damage, stuns enemy. Lower accuracy
+* Pinpoint - Hits for higher damage, with higher accuracy
+* Pierce - Hits an enemy's weak point, ignoring part of their defense
+* D.Attack - Attacks an enemy twice, with lower hit chance (two separate hits)
+All attacks drain your SP. The player has all four for now, and I gave one of each to each of the enemy types
+
+Added four attack spells:
+* Erupt - Fireball, focuses on raw magical power
+* Freeze - Ice, focuses on piercing enemy defense
+* Shock - Thunder, slightly weaker, but adds a small stun effect
+* Hellfire - Hits all enemies for massive damage (slightly less serious, as it is horribly OP atm)
+Player starts with all
+
+Added two defensive spells:
+* Toughen - Increases stamina of one character (effect resets after combat. Does not stack)
+* Empower - Increases stength of one character (effect resets after combat. Does not stack)
+Kiakai has them
+
+Added some lust based attacks (targets hp, uses lp as resource):
+* Rut - Deals damage for a small lust cost
+* Fantasize - raises own lust
+Player has both
+
+Version 0.2n
+------------
+* Bug fixes
+* Removed the thing blocking CTRL+C etc. The reason for it was that some people reported that keyboard shortcuts were disabled (somehow some search function was enabling instead). Report if you have any problems like that.
+* Added hidden text fields behind buttons. Screen readers, let me know how that works! One problem is that the Data, Explore etc buttons will probably always show up (on screen readers).
+Debugging stuff:
+* Added debug printouts for stat gains
+* Added debug printouts for item gain/loss
+* Added debug printouts for relationship scores
+* Added a debug shop to the tent, where you can modify your body
+* Added introductory scenes to Rosalin the alchemist, including a quest ending in you being able to do alchemy on your own.
+* Hopefully fixed the bug that made saves prior to version 0.2m unable to save again.
+* Implemented sexual experience gain. If you activate debug mode, you can see exp/sexp gain. Gaining sex levels does nothing atm. If you find a scene (there are many) where the player doesn't gain any sexp (and you think they should), report it!
+* Added a lizard TF item, and associated ingredient drops.
+* Restructured the way flags are stored in the save format. Hopefully didn't break anything.
+
+Version 0.2m2
+-------------
+* Bug fixes in Kiakai content
+* Fixed a bug where the Data option would be available in party interaction scenes.
+
+Version 0.2m
+------------
+GUI stuff:
+* The keyboard shortcut hints can be toggled (the setting is saved between sessions)
+* Added a keyboard shortcut for the Data menu
+* Added tooltips to the Wait, Sleep and Explore (looking glass) buttons
+
+* Added Gwendy's farm (written by Kiro) (can be found while exploring the plains between 7 and 17): About 11k words worth of scenes, including some sex.
+* Added Lizard loss scenes (written by Salrith): About 10k words worth of scenes. Pretty damn hot.
+* Kiakai has a bunch of new talky scenes. The old stuff should move on a rotation now, so you can get all the info in a timely manner instead of holding out for random scenes.
+* Kiakai has a bunch of healing scenes reachable from his/her menu. They are unfinished, so for now you need a cock to get the most of it. You get different scenes depending on your current health.
+
+* Changed the way initiative works, which should make dex less overpowered. Basically, the higher your DEX and INT is, the more often you can attack (though it doesn't scale the same as before).
+
+* Now supports IE10. Possibly supports IE prior to 10 (not tested). WILL NOT WORK OFFLINE.
+
+Version 0.2l
+------------
+* Implemented a speed fix that should really help for people who have been complaining about 100% CPU usage.
+
+* Added dialogue and more detailed text to the nomad camp, and the camp chief.
+* Added another prototype NPC, Estevan the satyr hunter (not implemented yet)
+* Added some dialogue for Kia/Kai
+* Added loss scenes for the equine encounters
+* Added a new mob, the lizard, to the desert
+* To make it easier to view loss scenes, I added a submit button to combat
+* To make it easier to view win scenes, I added a cheat button to combat (only in debug mode)
+
+* Added saving to file using a php backend (will only work with the online version)
+* Added loading from file (works both off- and online)
+
+* Toggle to remove avatars/pictures
+
+* Removed the fight/wait/sleep options. They are replaced by icons to the left of the regular options. Wait/Sleep are tied to 'Z', explore/search is tied to 'X'
+* Added a tiny letter for keyboard shortcut to buttons that have them
+
+* Added tail and ears TF to current items
+* As a temporary measure, made 100% lust incapacitating. This will probably change down the line when I figure out what to do with it.
+
+Version 0.2k3
+-------------
+* There is now two different portraits for the main character, one male and one female. Both are kind of ambiguous. This will have to do until I implement a proper CV style portrait.
+* Debug button in credits/data that adds 50 to all stats, allowing you to maul pretty much anything. Debug also reduces the cost of all items to zero.
+* Fixed bird bug
+* Fix starting stats (cock length starts at 15cm)
+* TF framework is slightly changed. It should no longer be possible to get negative cock length from overuse of leporine, for example.
+* Imps no longer lose their virginity all the time.
+* A growth stat added. Old saves will have a new oppurtunity to apply Uru's gift that includes this. When a stat has a higher growth, each stat point added will increase it slightly more (2points -> +3 instead of +2)
+
+* Fixed a clitCock save format bug. If you started as a herm you may need to restart your character for everything to work as intended.
+* Fixed a bug in the save format with the weight/height.
+
+* Made the UI slightly more tightly packed and reduced the resolution. The game should now be playable on a 1280x720 screen without getting any scrollbars. Tested in fullscreen mode in Firefox and Chrome.
+* The UI move-around allows for showing up to five party members and enemies at once. Larger party!
+* Two new background colors added: Light (low opacity) and None (no solid bg color). It is also possible to set a custom color.
+* Added ability to set a custom font/font size
+
+* Slightly improved appearance screen (now applies to Kia/Kai too)
+
+Version 0.2k2
+-------------
+* Data menu should be disabled during events!
+* Uru should no longer be referred to as a virgin in her scenes
+* Added another save point in the "Garden" area during the intro, if you want to replay Kia's initial scenes or make a different choice during the outset.
+* A popup prompts you when overwriting old saves
+* Selectable bg color (can be found on the credits screen and in the Data menu). This setting is saved.
+* Removed the previously "greyed out" options when selecting dead enemies in combat, unusable items in the inventory etc.
+
+Version 0.2k
+------------
+* Bug fixes
+* Items drop from enemies
+* Inventory added. Loads/saves.
+* Shopkeeper "Patchwork" added under People at the Nomad fireplace
+ - You can buy ingredients for exorbiant prices
+ - You can sell items dropped by enemies for gold
+* Alchemist "Rosalin" added under People at the Nomad fireplace
+ - You can combine some items into other items (atm for free)
+* Commands in combat have fixed positions
+* New enemy
+ - Wildcats
+* Usable items (TFs)
+ - Equinium
+ - Leporine
+ - Felinix
+* Abilities are now usable outside of combat from the "Abilities" menu.
+ - Only some abilities can be used from here (currently Heal)
+* New content!
+ - When the imp fight during the intro is over (win or lose), you can interact with the imps (under the People tab). There is about 4500 words of scenes in total, depending on gender.
+ - When either of the imp scenes are finished, the demon will offer to "sexually improve" your body. You can use this gift up to 3 times.
+
+Version 0.2j
+------------
+* Gui restructuring
+ - Combat
+  + Enemy list (portraits)
+  + Targetting enemies
+  + Highlight active char (green for active, red for passive action)
+  + Combat skills/menues etc
+* Abilities
+ - Basic placeholders for Attack, Tease, Wait and Run
+ - Healing ability
+* Combat
+ - Lagomorphs and Equines as enemies
+ - Added portraits for all enemies currently in the game
+* Stats screen
+ - Level up stats
+ - Gain exp/level up at end of combat
+ - Level up is indicated by green text on character portrait
+ - Required exp increses at each level up
+
+Version 0.2i
+------------
+* Modified the gui slightly
+ - Moved text area to middle
+ - Added right button pane
+ - Restructured how exploration is handled
+* Fixed a bunch of typos
+* Added a level indicator to character portrait
+* Gui restructuring
+ - Tooltip on hover button
+
+WARNING: Saves from previous versions are now invalid!
+
+Version 0.2h
+------------
+* Managed to prevent select bg bug (bg flashing) through use of JQuery
+* Added a parser:
+
+  parseOptions = {HeShe: kiakai.HeShe(), name: kiakai.name};
+  Text.AddOutput("[name] is an elf. [HeShe] is pious.", parseOptions);
+  
+* Fixed some issues that would cause 2nd playthrough players to get multiple genetalia
+* Code conforms with closure compiler
+* Fixed a bunch of typos
+* Intro flags etc for KiaKai
+
+Version 0.2g
+------------
+* Added some stuff to the credits screen
+* Fixed the text scrolling issue
+* Fixed manly mounds error
+
+* Save/Load added
+
+* Write intro scenes
+ - Kia/Kai the elf
+
+Version 0.2f
+------------
+* Write intro scenes
+ - Light aspect (up until arriving on Eden)
+ 
+* Locking off locations
+ - Removed Ranch
+ - Locked off Nomad camp temporarily (effectively sealing off the explorable world)
+
+* Improve way that clitCocks are handled (too much hassle as it is)
+ - Find a way to add clitCock to cock array and treat as ordinary cock
+ 
+* Improved appearance screen slightly
+* Fixed setting eye, skin and hair color
+* Fixed adding/removing appendages (tail, horns)
+
+Version 0.2e
+------------
+* Credits screen
+* Basic character creation
+* Sane default values in bodypart constructors
+* Minor bugfixes in Mirandas scenes
+* AddLustFraction function, adds a fraction 0..1 of the entitys maximum lust to its current lust
+* Combat system
+* "Body-building"
+
+* Characters
+ - Uru
+ - Aria
+ - Kia/Kai
+ - Gwendy
+ - Adrian
+
+* Combat
+ - Enemies [town]: Bandit/ruffian class (humans/light morphs)
+
+* Location
+ - Plains
+  * Nomads (start point) [Kia]
+  * Crossroads
+  * Farm [Gwendy, Adrian]
+  * Ranch [Equine]
+  * Burrows [Roa]
+
+* Write intro scenes
+ - Character creation
+ - Old house (added reference to portal gem)
+ - Dark aspect
+
+Version 0.2d
+------------
+* Added initial part of "Hey there" encounter for Miranda in the bar
+ - fixed bugs
+ 
+* Button graphics
+* Explore and People tabs are sorted lexically
+* Design HP/MP bars for squadbased combat
+
+* Added Roa and Sylistraxia characters, with basic stats
+* Party container
+* Party interaction function (barebones)
+
+* Convenience functions for biggestCock, multiCock etc in Entity
+
+Version 0.2c
+------------
+* Time, callbacks (use EntityStorage to update)
+* Avatars in text (speaking)
+* Fleshed out town (added locations)
+* Added plains location
+* Flesh out town (descriptions, conditions)
+* Local tab in PrintDefaults
+ - Add to event.events (Array)
+ - Acts identical to "links"
+* Added Miranda as an encounter at the gates.
+* Hide navbuttons when not appliable
+ - make the back button optional
+* Make a call stack for events
+
+Version 0.2b
+------------
+* String descriptions for bodyparts
+ - Cock
+ - Vag
+ - Breasts
+* Grammar
+* List style navigation
+* Improved exploration menu
+
+Version 0.2a
+------------
+* Locations
+* Exploration
+
+Version 0.1b
+------------
+* Body representation
+ - Gender
+ - Racial
+* Calculate gender
+* Player entity (simple description)
+
+Version 0.1a
+------------
+* Input handling
+* Entity skeleton
+ - fleshed out stats
+ - functions for combat
+* Entity storage
+* Button layout
+* Keyboard shortcuts for buttons
+* Print player stats

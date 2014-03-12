@@ -1,0 +1,9 @@
+*.class
+*.pyc
+*.pyo
+*#
+foe.min.js
+build/*
+/docs/Contacts.txt
+*.zip
+*.fenoxo

@@ -1,0 +1,387 @@
+TODO for Fall of Eden
+---------------------
+
+-----------------
+    IMMEDIATE
+-----------------
+
+IDEAS:
+------
+
+Orgasm/Load/Preg code
+Fix party.Alone etc code (can become problematic later)
+
+
+FoE2
+----
+Strategy
+Evolve strains
+Manage minions
+Repopulate
+
+
+
+
+
+
+
+Version 0.3
+-----------
+* Pregnancy
+* Status effects
+ - abilities
+ - jobs
+
+* Mothgirl (adjust savin's writin)
+* Wolf - write
+
+* Rewrite farm stuff
+ - Gwendy
+  - Loss scenes
+  - Talky scenes
+  - E+
+
+
+
+
+* Input structuring (layers) - needed?
+* Map - show where?
+* Name generation
+* Items
+* Abilities
+
+
+
+
+
+
+* Stuff for KiaKai
+ - Healing scenes (final touches)
+  * Punish scene
+  * Anal toy scene (regular dommy anal)
+
+* Rosalin scenes
+ - Write after TF sex
+ - Write night scenes
+ - More TFs
+
+* Miranda stuff
+
+* Burrows
+
+* Party strength calculator - use level for now
+
+
+
+Feedback:
+* Party appearance, more emotional responses to emphasize state
+* Split power/attitude choice in intro scene when talking to Kia
+* TF balancing
+* Save editing
+
+
+
+* Gui restructuring
+ - Images in tooltip
+ - Images when hovering location
+
+
+
+* Body builds
+ - Functions for making default builds (weight, height, muscularity, femininity etc)
+ - Use in intro sequence
+* Starting "classes" for initial abilities and gear
+
+* Location
+ - Plains - flesh out
+ - Burrows
+ - Farm
+ 
+ - Forest
+  * Enterance
+  * Camp [Lindy, Wolfy]
+  * Deep forest
+  * Goblins
+ - Lake
+  * Docks
+  * Island
+  * Beach
+
+ - Flesh out town (descriptions, conditions)
+
+* Combat
+ - Enemies [plains]: Generic morphs
+ - Enemies [plains]: Kobolds? Goblins? Centaurs?
+
+* Implement schedules
+
+
+* Restructure Desc() to return an object:
+ { Full, Short, ... etc. } ???
+
+* String descriptions for bodyparts
+ - Nips (+ nip cunts, nip cocks, multiple nips)
+ - Head
+ - Vag (improve)
+ - Arms
+ - Legs
+* Add racial and color to desc
+* Handle plural correctly (a brace of mixed cocks etc.)
+* Scale adjectives properly
+* Randomize some adjectives
+
+* Randomize sentence structure of desc
+* Better complete description
+
+* Prison/cell area at guard house
+* Standing with the guard
+
+
+------------------------
+        BUGFIXES
+------------------------
+* Scale input on a common scale dependent on window size
+
+* Replace placeholder art (bg)
+
+------------------------
+       IDEAS
+------------------------
+
+* Timer callbacks
+* Temporary TFs
+* Item screens
+ - Use item on X (set up callback function)
+ - Select number of items (sell x, convert x etc) -> slider?
+* Alchemy
+ - Base ingredients
+ - Distill -> increase potency
+ - Purify -> remove negative effects
+ - Recepies
+ - Drafts (can be used after combat for temp effects)
+* Hunting grounds
+ - Hunting specific enemies
+ - Traps
+ - Enemy affinity
+* Combat
+ - Leaders
+  + Grant bonus effects when in combat
+  + Demoralized when leader is downed
+* Sub-dom score
+ - player score + entity score
+ - player score changes slower
+  (reflects general attitude)
+
+* The generic scene
+ - Stanzas
+ - Dialogue packs
+
+
+
+---------------
+ WRITING IDEAS
+---------------
+
+* Burrows
+ - Corrupted horny rabbits running rampant (mostly males)
+ - A bunch of females and herms are used as sexslaves and for breeding
+ - Males are discarded by the alpha, who wants to breed everyone himself
+ - An older alpha male runs the whole incest show
+ - One of his daughters, an alchemist herm, wants to take over
+ - Roa is a runaway son (took something?)
+  + Roa's special item
+
+ - Possible ideas for quests in the burrows
+  + Help alpha by retrieving Roa
+  + Help alpha by finding the alchemist formula for MPreg(?)
+   - Allows him to keep the males for breeding
+  + Help the daughter take over
+   - Aquire the MPreg(?) formula and use it on the alpha
+   - Beat him in combat (difficult)
+   - Help Roa/don't retrieve the item
+  + Random quests from other daughters
+
+
+
+* Gwendy's farm
+ - Breeding season
+  + Help out, breed the cows
+  + Help out, relieve the bulls
+ - Gwendy and Adrian's romance
+  + Nudge them into a relationship
+  + Dom/Sub balance in relationship
+  + Horse morph item
+   - Turns Adrian into hulk, or
+   - Turns Gwendy into herm
+   - Another dose (later) turn her into shemale?
+   
+   - Herm path opens new options
+    + Dom/Sub balance in relationship
+    + New breeding scenes
+ - Other NPCs?
+  + Sheep
+  + Wolf preying on the sheep?
+  + Bovines/Equines
+   - Lactation/Milk machine?
+ - Planting/growing
+  + Spread your seed?
+
+
+
+* Forest
+ - Bandits
+ - Goblins
+ - Ninetails
+  + Extensive questline + boss battles
+
+
+
+* Forest camp
+ - Outlaws
+ - Hidden way into town (goes through the odd shop)
+ - Mainly canids
+ 
+ - "Wolfy" - give this dude a name!
+  + Alpha leader of the pack (male)
+ - Lindy
+  + Miranda's sister (female)
+
+
+
+----------------------
+ MAIN STORYLINE IDEAS
+----------------------
+
+* The surface
+
+
+* Eden
+ - Floating island where the fabric of reality is thin
+  + easier to open portals to/from here
+ - Island floats due to the big tree at its center
+ - Inhabited by many races
+ 
+ - Edens underbelly
+  + A hidden large demon citadel inside/underneath the island
+  + Can be accessed through dragon, desert nomads or subterranian tunnels
+
+
+
+* Alliser
+ - The "old man"
+ - Known as a reclusive sage in the land of Eden
+ - A magician/alchemist with knowledge of the planes
+ - Important to the endgame
+
+
+
+* Jeanne
+ - Female mage at the kings court
+ - Skilled in many fields of magic
+ - Dabbling alchemist
+  + Weird and dangerous formulas
+ - Knows of Alister
+
+
+
+* Planes concept
+ - For example, Light/Dark aspect
+ - Other dimensions with different rules
+  + Time/space works differently
+ - Portals can be opened between the planes (with great difficulty)
+ - Once you know the rules of a plane, your powers there will increase manifold
+ 
+ - Different planes for extra fun?
+  + Underwater world
+  + Giant world
+   - Player is tiny in comparison to everything else
+   - Hyper TFs?
+  + Goo world
+
+
+
+* Uru, demon omnibus
+ - Ruler of the dark aspect
+ - Vily, horny
+ - Seeks conquest of Eden, and as many planes as she can
+
+
+
+* Aria, angelic being (female)
+ - Ruler of the light aspect
+ - Serene
+ - Seeks to prevent Uru's plans
+ - Agenda to close off the planes?
+
+
+
+* The dragons
+ - Syliztraxia, the queen, herm
+
+
+-------------------------------------------------
+               VERSION MILESTONES
+-------------------------------------------------
+
+Version 0.4
+-----------
+* More combat encounters - fleshed out
+* Story progressed to the point that gem is active
+* Subworlds
+* Summon spirits
+
+Version 0.5
+-----------
+* Interactive scenes
+* Party management
+
+
+
+HALFWAY POINT
+--------------------
+* Publishing/Hosting
+--------------------
+
+
+
+Version 0.6
+-----------
+* Quest system
+* Customizable dialogue system
+* More combat encounters
+* Pregnancy and offspring
+
+Version 0.7
+-----------
+* Special NPCs:
+ - Miranda
+ - Roa
+ - Gwendy
+ - Wolfy
+* Thumbnail art
+* More combat encounters
+
+Version 0.8
+-----------
+* Followers
+* Tutorial
+* More combat encounters
+
+Version 0.9
+-----------
+* Main storyline
+* Balancing
+* More combat encounters
+
+Version 1.0
+-----------
+* Release of a playable game
+
+Version 1.x
+-----------
+* Content patches
+ - NPCs
+ - New enemies
+ - New locations
+ - Continuation of storyline
+

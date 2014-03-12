@@ -1,0 +1,445 @@
+
+
+
+
+
+Scenes.Rigard.Plaza = {}
+
+//
+// Plaza
+//
+world.loc.Rigard.Plaza.description = function() {
+	Text.AddOutput("You are in a large open square surrounded by posh houses.<br/>");
+
+	Text.AddOutput("In the middle of the plaza there is a large fountain in white marble, full of clear water. In the middle of the fountain on a raised pedestal stands a stone statue of the goddess of fertility, in all of her naked glory.<br/>");
+}
+
+world.loc.Rigard.Plaza.onEntry = function() {
+	if(Math.random() < 0.2)
+		Scenes.Rigard.Chatter(true);
+	else
+		PrintDefaultOptions();
+}
+
+world.loc.Rigard.Plaza.enc = new EncounterTable();
+world.loc.Rigard.Plaza.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
+world.loc.Rigard.Plaza.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
+world.loc.Rigard.Plaza.enc.AddEnc(function() { return Scenes.Rigard.Plaza.LetterDelivery; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21); });
+world.loc.Rigard.Plaza.enc.AddEnc(function() { return Scenes.Rigard.Plaza.StatueInfo; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21) && (rigard.flags["TalkedStatue"] == 0 || (party.InParty(kiakai) && kiakai.flags["TalkedStatue"] == 0)); });
+
+world.loc.Rigard.Plaza.links.push(new Link(
+	"Gate", true, true,
+	function() {
+		Text.AddOutput("Gate is over there.<br/>");
+	},
+	function() {
+		MoveToLocation(world.loc.Rigard.Gate, {minute: 20});
+	}
+));
+world.loc.Rigard.Plaza.links.push(new Link(
+	"Residential", true, true,
+	function() {
+		Text.AddOutput("There are residential area.<br/>");
+	},
+	function() {
+		MoveToLocation(world.loc.Rigard.Residental.street, {minute: 10});
+	}
+));
+world.loc.Rigard.Plaza.links.push(new Link(
+	"Merchants", true, true,
+	function() {
+		Text.AddOutput("There are merchant street.<br/>");
+	},
+	function() {
+		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 10});
+	}
+));
+world.loc.Rigard.Plaza.links.push(new Link(
+	"Plaza", true, false
+));
+
+world.loc.Rigard.Plaza.links.push(new Link(
+	"Inn", true, true,
+	function() {
+		Text.AddOutput("Inn is over there.<br/>");
+	},
+	function() {
+		MoveToLocation(world.loc.Rigard.Inn.common);
+	}
+));
+world.loc.Rigard.Plaza.links.push(new Link(
+	"Castle", true, true,
+	function() {
+		Text.AddOutput("The outer walls of the royal grounds stand near, and the castle looms on the hill above.<br/>");
+	},
+	function() {
+		MoveToLocation(world.loc.Rigard.Castle.Grounds, {minute: 10});
+	}
+));
+
+world.loc.Rigard.Plaza.links.push(new Link(
+	"Mansion", function() { return rigard.flags["KrawitzQ"] != 0; }, true,
+	function() {
+		Text.AddOutput("Krawitz's estate is nearby.<br/>");
+	},
+	function() {
+		MoveToLocation(world.loc.Rigard.Krawitz.street, {minute: 10});
+	}
+));
+
+world.loc.Rigard.Plaza.endDescription = function() {
+	Text.AddOutput("What you do?<br/>");
+}
+
+Scenes.Rigard.Plaza.StatueInfo = function() {
+	var parse = {
+		playername : player.name,
+		name   : kiakai.name,
+		heshe  : kiakai.heshe(),
+		HeShe  : kiakai.HeShe(),
+		himher : kiakai.himher(),
+		hisher : kiakai.hisher(),
+		HisHer : kiakai.HisHer()
+	};
+
+	rigard.flags["TalkedStatue"] = 1;
+
+	Text.Clear();
+	Text.AddOutput("Walking around, you eventually reach the base of the statue you've seen towering above the plaza. It's even more impressive up close, standing about twice the height of the surrounding three-story buildings. While walking over, you thought you saw the dress stirring gently in the mild breeze, but had decided it was just a trick of your eyes.", parse);
+	Text.Newline();
+	Text.AddOutput("Now, standing before it, you see that the statue is indeed wearing an enormous white dress with gold trim, not unlike the one you saw on Aria herself. The face of the goddess, however, doesn't look anything like you remember, and you note, blushing slightly, that the statue's breasts are actually quite a bit smaller.", parse);
+	Text.Newline();
+	Text.AddOutput("As you stand there, looking at the enormous sculpture, a well-dressed old man comes up to you. You wonder if he caught you staring at the statue's breasts. <i>\"You are new to the city, are you not?\"</i> To your relief, he doesn't mention where you were looking. <i>\"It's really a most grand statue we have, but those of us who have lived here our whole lives have grown used to it.\"</i>", parse);
+	Text.Newline();
+	Text.AddOutput("You ask if the city follows Aria devoutly.", parse);
+	Text.Newline();
+	Text.AddOutput("<i>\"Most of us certainly do. Although there are always certain elements...\"</i> He shakes his head disapprovingly. <i>\"And the youth these days seems more interested in entertainment and games than in learning the things that made this city strong!\"</i>", parse);
+	Text.Newline();
+	Text.AddOutput("You quickly interrupt him before he has a chance to go on a rant about moral degeneration, and ask about the statue's clothing.", parse);
+	Text.Newline();
+	Text.AddOutput("<i>\"Ah, now that is a tale worth telling. You see, it is said that the clothing was actually obtained first, and the statue was made to accommodate it.\"</i>", parse);
+	Text.Newline();
+	Text.AddOutput("<i>\"A long long time ago, when the kingdom was first founded and the castle was just being built, there was a great crisis on Eden. There are many tales of what occurred. Some say dragons came through a portal, attacking humans; others that a devastating disease swept the land; yet others that a massive storm buffeted the Great Tree, threatening to tip it over, sending gigantic branches tumbling across the land. Be that as it may, lady Aria visited the world to aid us, for she appeared more often back then.\"</i>", parse);
+	Text.Newline();
+	Text.AddOutput("<i>\"And aid us she did, and then, as she rested, Riorbane the trickster came across her. He told the goddess that he had seen a great evil resting in a cave in the roots of the Great Tree, begging for her aid, for, he said, the need was dire. Unfortunately, she had come to the world in giant stature, and her enormous form could not fit inside the small cave. So, she bid Riorbane face away and await her outside.\"</i>", parse);
+	Text.Newline();
+	Text.AddOutput("<i>\"She shrank down to a size that could pass inside, but her dress did not shrink, but instead collapsed where it was. As Aria entered the cave, Riorbane snatched up the dress, and carried it off, hiding it securely. When Aria re-emerged, bemused by the lack of anything but a stream in the grotto, he confronted her in her nakedness, and said he would only return the dress if she spent the night with him.\"</i> The old man looks much happier telling the story, than a professed devout follower of Aria really should be.", parse);
+	Text.Newline();
+	Text.AddOutput("<i>\"Though lady Aria simply cloaked herself in mist and refused, she was still wroth with him. She told him, ‘Though you may keep my dress if you so wish, all clothing of yours shall be stolen or lost again and again.'\"</i> The old man's imitation of Aria's voice makes you cringe a little. <i>\"Now, Riorbane was none too happy to be denied his lay, though stories tell that he wasn't too upset at the curse that was bestowed upon him. Either way, he found himself in possession the goddess's dress, not knowing what use to put it to.\"</i>", parse);
+	Text.Newline();
+	Text.AddOutput("<i>\"It was enormous and impervious to not only wear and water, but also shears and knife. In the end, he could do nothing with it, and traded it to his brother, Riordain, gaining a favor he had desired in exchange. With the dress in hand, before his castle, to show respect for the goddess and ask for her blessing in the establishment of the kingdom, Riordain erected a statue for the goddess in her exact likeness, and adorned it in her garment.\"</i> The old man speaks with pride in his voice, and you decide not to disillusion him about how alike the statue is.", parse);
+	Text.Newline();
+	Text.AddOutput("<i>\"Though it is told that Riorbane had some hand in the statue's construction also, and underneath the garment, it bears far more detail than is needful, if you understand what I mean,\"</i> he adds, a lascivious grin splitting his wizened face.", parse);
+	Text.Newline();
+	
+	player.AddExp(10);
+	
+	Text.AddOutput("A little embarrassed, you nonetheless thank him for telling you the story ", parse);
+	if(!party.InParty(kiakai)) {
+		Text.AddOutput("and set off on your way, glad to have learned a little of the city's history.", parse);
+		Gui.NextPrompt();
+	}
+	else {
+		kiakai.flags["TalkedStatue"] = 1;
+		
+		Text.AddOutput("and are about to set off on your way when [name] speaks up.", parse);
+		Text.Newline();
+		Text.AddOutput("<i>\"I hope you do not take that story seriously, [playername]!\"</i> [name] exclaims. <i>\"It is surely just something the humans made up. They probably enchanted the dress, forgot they did it, and then made up this story to explain the whole thing,\"</i> the elf declares, sounding contemptuous.", parse);
+		Text.Newline();
+		Text.AddOutput("You tell [himher] that the story <i>does</i> sound a little far-fetched. Besides, you ask, did Aria even really come to Eden?", parse);
+		Text.Newline();
+		Text.AddOutput("<i>\"W-well...\"</i> [name] looks slightly embarrassed. <i>\"That part is true enough. I was never told what happened, for it was not in the lore scrolls of my village, but I do know she manifested in this world around the time of the kingdom's founding. The rest is surely made up, however!\"</i> [heshe] hastily adds.", parse);
+		
+		//[Accept][Tease][Investigate]
+		var options = new Array();
+		options.push({ nameStr : "Accept",
+			func : function() {
+				Text.Clear();
+				Text.AddOutput("You tell the elf that from what you saw of Aria, the story indeed does not fit very well.", parse);
+				Text.Newline();
+				Text.AddOutput("<i>\"That is so! She would not be tricked so easily by some mortal, and she could just shrink her dress, and...\"</i> The elf goes on for some time about why nothing in the story makes sense. You smile - [heshe] looks quite cute when flustered.", parse);
+				Text.Newline();
+				Text.AddOutput("When [name] stops for breath, you gently interrupt [himher], pointing out that it's time you got going.", parse);
+				//#+nice, +rel
+				kiakai.relation.IncreaseStat(100,3);
+				kiakai.subDom.IncreaseStat(0, 2);
+				Gui.NextPrompt();
+			}, enabled : true,
+			tooltip : "The story did sound rather ridiculous..."
+		});
+		options.push({ nameStr : "Tease",
+			func : function() {
+				Text.Clear();
+				Text.AddOutput("You start telling the elf that the story does sound quite implausible, and as [heshe] starts nodding, you add how implausible it is that Aria would refuse to sleep with Riorbane. Despite your best efforts, you can't quite suppress your laughter, as [name]'s expression goes from open-mouthed astonishment, to red-faced embarrassment, to obvious consternation. [HisHer] mouth tries to start moving again and again, but no words come out for a good half minute.", parse);
+				Text.Newline();
+				Text.AddOutput("<i>\"T-the goddess is not as obsessed with sex as some people I know!\"</i> [heshe] finally manages, and stalks off, with you following, still grinning with mirth.", parse);
+				//#+naughty
+				kiakai.subDom.DecreaseStat(-100, 2);
+				Gui.NextPrompt();
+			}, enabled : true,
+			tooltip : "'Agree' that Aria refusing to sleep with Riorbane seems implausible."
+		});
+		options.push({ nameStr : "Investigate",
+			func : function() {
+				Text.Clear();
+				Text.AddOutput("You tell the elf that while many elements of the story sound implausible, clearly it does bear some resemblance to reality. Further study will be required to disentangle truth from myth.", parse);
+				Text.Newline();
+				Text.AddOutput("[name] looks thoughtful, mulling over your words. <i>\"You know, you have a point, [playername]. Though I am sure the embarrassing trickery aspect is untrue, there are enough hints in the story that it bears looking into.\"</i> [HeShe] smiles, [hisher] curiosity clearly piqued.", parse);
+				Text.Newline();
+				Text.AddOutput("You agree that the two of you can look into it when you have the chance, and set off on your way.", parse);
+				//#+1 int, (+rel?)
+				player.intelligence.IncreaseStat(100,1);
+				kiakai.relation.IncreaseStat(100,1);
+				Gui.NextPrompt();
+			}, enabled : true,
+			tooltip : "It might be true, it might not, you'll need more information to decide."
+		});
+		Gui.SetButtonsFromList(options);
+	}
+}
+
+Scenes.Rigard.Plaza.LetterDelivery = function() {
+	var letters     = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	var animals     = ["stallion", "dog", "eel", "python", "pony", "wildcat", "mare"];
+	var colors      = ["green", "red", "blue", "purple", "pink", "grey", "orange"];
+	var races       = ["fox", "dog", "cat", "horse", "rabbit"];
+	var reactions   = ["shrug", "glance through the message a final time", "ponder over the message", "briefly consider the message", "smile in bemusement"];
+	var residencies = ["a massive ornate building", "a three-story palatial structure", "a posh-looking house", "an out-of-place hovel of a building", "an old derelict mansion", "a fresco-covered house", "an odd [color] building"];
+	var nobles      = ["a richly dressed noble[manwoman]", "a noble[manwoman] dressed in all [color]", "a haggard-looking noble[manwoman]", "an aged noble[manwoman]", "an excited young noble[manwoman]", "a foppish young noble[manwoman]", "a shady noble[manwoman]"];
+	var recips      = ["an elderly noble[manwoman]", "a busy-looking [mp]atriarch", "a dusty librarian", "a badly underdressed [manwoman]", "a serious-looking [race]-morph", "a stern watch[manwoman]", "a priest[ess] of Aria"];
+	
+	var coin  = 5  + Rand(10);
+	var coin2 = 10 + Rand(10);
+	
+	var parse = {
+		name    : kiakai.name,
+		heshe   : kiakai.heshe(),
+		hisher  : kiakai.hisher(),
+		BoyGirl : player.Femininity() > 0 ? "Girl" : "Boy",
+		letter  : function() { return letters.charAt(Math.floor(Math.random() * letters.length)); },
+	    animal  : function() { return animals[Math.floor(Math.random() * animals.length)]; },
+	    color   : function() { return colors[Math.floor(Math.random() * colors.length)]; },
+	    race    : function() { return races[Math.floor(Math.random() * races.length)]; },
+	    playerReaction : function() { return reactions[Math.floor(Math.random() * reactions.length)]; },
+	    residenceDesc : function() { return Text.Parse(residencies[Math.floor(Math.random() * residencies.length)], parse); },
+	    lordLady : function() {return Math.random() < 0.5 ? "lord" : "lady"; },
+	    coin     : Text.NumToText(coin),
+	    coin2    : Text.NumToText(coin2)
+	};
+	
+	// Sender
+	if(Math.random() < 0.5) { // MALE
+		parse["manwoman"]    = "man";
+		parse["sheshe"]      = "he";
+		parse["shisher"]     = "his";
+		parse["shimher"]     = "him";
+		parse["sHeShe"]      = "He";
+		parse["sDaddyMommy"] = "daddy";
+		parse["sCockPussy"]  = "cock";
+	}
+	else { // FEMALE
+		parse["manwoman"]    = "woman";
+		parse["sheshe"]      = "she";
+		parse["shisher"]     = "her";
+		parse["shimher"]     = "her";
+		parse["sHeShe"]      = "She";
+		parse["sDaddyMommy"] = "mommy";
+		parse["sCockPussy"]  = Math.random() < 0.2 ? "cock" : "pussy"; // cause
+	}
+	parse["nobleDesc"] = Text.Parse(nobles[Math.floor(Math.random() * nobles.length)], parse);
+	
+	// Recipient
+	if(Math.random() < 0.5) { // MALE
+		parse["SirMadam"]    = "Sir";
+		parse["manwoman"]    = "man";
+		parse["rheshe"]      = "he";
+		parse["rhisher"]     = "his";
+		parse["rhimher"]     = "him";
+		parse["rHeShe"]      = "He";
+		parse["ess"]         = "";
+		parse["mp"]          = "p";
+	}
+	else { // FEMALE
+		parse["SirMadam"]    = "Madam";
+		parse["manwoman"]    = "woman";
+		parse["rheshe"]      = "she";
+		parse["rhisher"]     = "her";
+		parse["rhimher"]     = "her";
+		parse["rHeShe"]      = "She";
+		parse["ess"]         = "ess";
+		parse["mp"]          = "m";
+	}
+	parse["recipient"] = Text.Parse(recips[Math.floor(Math.random() * recips.length)], parse);
+	
+	Text.Clear();
+	Text.AddOutput("You walk around the plaza district, looking around at the many grand residences competing for space around the wide streets. As you're about to walk past [residenceDesc], [nobleDesc] shouts at you from the entrance, waving a small envelope in [shisher] hand.", parse);
+	Text.Newline();
+	Text.AddOutput("<i>\"[BoyGirl]! Deliver this for me!\"</i>", parse);
+	Text.Newline();
+	Text.AddOutput("You decide it'd be better not to agitate the haughty noble, and approach [shimher].", parse);
+	Text.Newline();
+	Text.AddOutput("<i>\"Good,\"</i> [sheshe] tells you, <i>\"here's some coin for you trouble.\"</i> [sHeShe] gives you [coin] coins, and tells you the message's destination. <i>\"Now, off you go!\"</i> [sHeShe] waves at you dismissively.", parse);
+	Text.Newline();
+	
+	party.coin += coin;
+	
+	Text.AddOutput("As you walk away from [shimher], you wonder if you should really bother with the job. After all, you didn't actually agree to anything. The crazy noble just assumed everything [shimher]self.", parse);
+	
+	//[Deliver][Open]
+	var options = new Array();
+	options.push({ nameStr : "Deliver",
+		func : function() {
+			Text.Clear();
+			Text.AddOutput("The task is a little demeaning, but you decide it's worth a small effort to get a few more coins. Occasionally asking for directions, you quickly reach your destination, and hand over the note to the recipient, [recipient].", parse);
+			Text.Newline();
+			Text.AddOutput("[rHeShe] gives you [coin2] coins for your trouble, and you go on your way.", parse);
+			
+			party.coin += coin2;
+			
+			world.TimeStep({minute: 30});
+			Gui.NextPrompt();
+		}, enabled : true,
+		tooltip : "Deliver the note as the noble wants."
+	});
+	options.push({ nameStr : "Open",
+		func : function() {
+			Text.Clear();
+			Text.AddOutput("You decide people shouldn't assume others will do what they demand without consulting them. You break the plain wax seal, tossing it to the side of the road, and have a look at the note.", parse);
+			Text.Newline();
+			
+			var sexy = false;
+			
+			// RANDOM SCENE (USING ENCOUNTER TABLE)
+		 
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.AddOutput("<i>\"Dear [SirMadam],", parse);
+				Text.Newline();
+				Text.AddOutput("I feel grievously insulted by your allegation of my behavior with that [animal]. Please withdraw these slanderous words at once, and I may yet invite you with me next time! -[letter].[letter].\"</i>", parse);
+				sexy = true;
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.AddOutput("<i>\"I am being held prisoner here. They are forcing me to learn to get along with people. Please send help!</i>", parse);
+				Text.Newline();
+				Text.AddOutput("<i>-[letter].[letter].\"</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.AddOutput("<i>\"I fear they are on to me. Our rendezvous will have to be postponed. Let us try to meet tomorrow at the same place.</i>", parse);
+				Text.Newline();
+				Text.AddOutput("<i>-[letter].[letter].\"</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.AddOutput("The letter is written in a barely legible hand, but you manage to make it out:", parse);
+				Text.Newline();
+				Text.AddOutput("<i>\"I hope ur asociates wil consider me for publicaton. I'll snd my manucrpit alng directli. It is qute heavi.</i>", parse);
+				Text.Newline();
+				Text.AddOutput("<i>-[letter].[letter].\"</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.AddOutput("<i>\"Why do you torment me so? You know I cannot visit you, so at least grace this tortured soul with a response.</i>", parse);
+				Text.Newline();
+				Text.AddOutput("<i>-[letter].\"</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.AddOutput("<i>\"Hello [SirMadam],</i>", parse);
+				Text.Newline();
+				Text.AddOutput("<i>I am considering starting a business helping people write letters. If you would like to help come up with stock letters to send, please contact Alder at your earliest convenience.\"</i>", parse);
+				Text.Newline();
+				Text.AddOutput("The letter is oddly unsigned.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.AddOutput("<i>\"Hi, slut, [sDaddyMommy]'s expecting you, [shisher] [sCockPussy] drooling, waiting for your tongue. Come soon or I'll have to punish you.</i>", parse);
+				Text.Newline();
+				Text.AddOutput("<i>XOXO, [letter].\"</i>", parse);
+				sexy = true;
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.AddOutput("<i>\"I have heard rumors that your son wishes to challenge that Lei man. I would advise you to stop him to avoid humiliation. -[letter].[letter].\"</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.AddOutput("<i>\"Meet me at the Lady's Blessing tonight. Their musicians are excellent, and I've rented a room upstairs. -[letter].\"</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.AddOutput("<i>\"I have found companionship at the Shadow Lady. Come join me tonight, I am sure you will also grow to love how pleasurable it is. -[letter].[letter].\"</i>", parse);
+				sexy = true;
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.AddOutput("<i>\"Cannot make it to the party this night. Cancel the order we previously discussed. -[letter].[letter].\"</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.AddOutput("The note seems to be some written in some sort of code. You are unable to decipher it. Crafty.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.AddOutput("<i>\"Yesterday is still a blur... you are as skilled as ever. - love, [letter].\"</i>", parse);
+				sexy = true;
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.AddOutput("<i>\"Cannot stand to be apart from you for any longer, return quickly! -[letter].[letter].\"</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				// Recipient
+				if(Math.random() < 0.5) { // MALE
+					parse["lordLady"]    = "lord";
+					parse["Lhisher"]    = "his";
+				}
+				else { // FEMALE
+					parse["lordLady"]    = "lady";
+					parse["Lhisher"]    = "her";
+				}
+				Text.AddOutput("<i>\"Did you hear about that [lordLady] who was found with [Lhisher] servants the other night? Such debauchery... -[letter].[letter].\"</i>", parse);
+				sexy = true;
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.AddOutput("<i>\"You. Me. A bottle of the finest wine. Tonight under the stars in our usual spot. -love, [letter].[letter].\"</i>", parse);
+				sexy = true;
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				// Recipient
+				if(Math.random() < 0.5) { // MALE
+					parse["Sboygirl"]    = "boy";
+					parse["Shimher"]    = "him";
+				}
+				else { // FEMALE
+					parse["Sboygirl"]    = "girl";
+					parse["Shimher"]    = "her";
+				}
+				Text.AddOutput("<i>\"The servant [Sboygirl] suspects. We may have to deal with [Shimher]. -[letter].[letter].\"</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.AddOutput("<i>\"Would you believe those royal guards? Paid the usual amount this month, yet they start snooping around the warehouse! Move the stock to a safe location as quickly as possible, or I fear we may be found out. -X\"</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.AddOutput("<i>\"The stars are aligning in a peculiar pattern. Had word from the mother superior the other day. She says that strange things are afoot. We might have to leave for another expedition. -[letter].[letter].\"</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				parse["boygirl"] = Math.random() < 0.3 ? "boy" : "girl";
+				Text.AddOutput("<i>\"Did you see the new [boygirl] at the Shadow Lady? Was a while since we had a [race]-morph... What say you we split the price, for old times' sake? -[letter].\"</i>", parse);
+				sexy = true;
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.AddOutput("<i>\"Candles. Leather straps. Whip (the big one!). Two fathoms of rope. Thirty gallons of syrup.\"</i>", parse);
+				Text.Newline();
+				Text.AddOutput("If it is a shopping list, it is certainly a rather odd one...", parse);
+				sexy = true;
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.AddOutput("Rather than text, the note contains a hastily scribbled image of a horsecock. The hell...", parse);
+				sexy = true;
+			}, 1.0, function() { return true; });
+
+			scenes.Get();
+			
+			Text.Newline();
+			if(party.InParty(kiakai) && sexy) {
+				Text.AddOutput("[name] leans over and reads the note along with you, curiously. As [hisher] eyes scan the lines, you see a deep crimson spread through [hisher] cheeks. <i>\"O-oh!\"</i> [heshe] exclaims, and turns away, biting [hisher] lower lip.", parse);
+				Text.Newline();
+			}
+			Text.AddOutput("You [playerReaction], and crumple the paper into a little ball before tossing it away. Oh well, it wasn't very important anyway.", parse);
+			world.TimeStep({minute: 15});
+			Gui.NextPrompt();
+		}, enabled : true,
+		tooltip : "Have a look at the note and throw it away."
+	});
+	Gui.SetButtonsFromList(options);
+	
+}
