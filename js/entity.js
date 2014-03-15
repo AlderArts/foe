@@ -2018,23 +2018,6 @@ Entity.prototype.PrintDescription = function() {
 	if(cocks[0])
 		Text.NL();
 	
-	// TODO: vagina
-	var vags = this.body.vagina;
-	if(vags.length == 1) {
-		var vag = vags[0];
-		var vagDesc = vag.Desc();
-		Text.Add("[name] [has] " + vagDesc.a + " " + vagDesc.adj + " " + vag.noun() + ".", parse);
-	}
-	else if(vags.length > 1) {
-		var vag = vags[0];
-		Text.Add("[name] [has] multiple " + vag.nounPlural() + ". [HisHer] first " + vag.noun() + " is slutty.<br/>", parse);
-		for(i = 1; i < vags.length; i++) {
-			Text.Add("<br/>Another of [hisher] " + vag.nounPlural() + " is slutty.", parse);
-		}
-	}
-	if(vags[0])
-		Text.NL();
-	
 	// TODO: balls
 	if(this.HasBalls())
 	{
@@ -2052,6 +2035,23 @@ Entity.prototype.PrintDescription = function() {
 		Text.Add("[name] [has] a smooth, featureless crotch.", parse);
 		Text.NL();
 	}
+	
+	// TODO: vagina
+	var vags = this.body.vagina;
+	if(vags.length == 1) {
+		var vag = vags[0];
+		var vagDesc = vag.Desc();
+		Text.Add("[name] [has] " + vagDesc.a + " " + vagDesc.adj + " " + vag.noun() + ".", parse);
+	}
+	else if(vags.length > 1) {
+		var vag = vags[0];
+		Text.Add("[name] [has] multiple " + vag.nounPlural() + ". [HisHer] first " + vag.noun() + " is slutty.<br/>", parse);
+		for(i = 1; i < vags.length; i++) {
+			Text.Add("<br/>Another of [hisher] " + vag.nounPlural() + " is slutty.", parse);
+		}
+	}
+	if(vags[0])
+		Text.NL();
 	
 	// TODO TEMP
 	var balls = this.Balls();

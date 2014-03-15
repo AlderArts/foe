@@ -872,7 +872,7 @@ Vagina.prototype.Desc = function() {
 	if     (vagArea <= 5  ) ret = {a:"an", adj: "extremely tight"};
 	else if(vagArea <= 10 ) ret = {a:"a", adj: "very tight"};
 	else if(vagArea <= 20 ) ret = {a:"a", adj: "tight"};
-	else if(vagArea <= 30 ) ret = {a:"an", adj: "average"};
+	else if(vagArea <= 30 ) ret = {a:"a", adj: "well-proportioned"};
 	else if(vagArea <= 40 ) ret = {a:"a", adj: "flexible"};
 	else if(vagArea <= 50 ) ret = {a:"a", adj: "very flexible"};
 	else if(vagArea <= 70 ) ret = {a:"a", adj: "loose"};
@@ -1036,7 +1036,7 @@ Butt.prototype.AnalDesc = function() {
 	if     (area <= 5  ) ret = {a:"an", adj: "extremely tight"};
 	else if(area <= 10 ) ret = {a:"a", adj: "very tight"};
 	else if(area <= 20 ) ret = {a:"a", adj: "tight"};
-	else if(area <= 30 ) ret = {a:"an", adj: "average"};
+	else if(area <= 30 ) ret = {a:"a", adj: "well-proportioned"};
 	else if(area <= 40 ) ret = {a:"a", adj: "flexible"};
 	else if(area <= 50 ) ret = {a:"a", adj: "very flexible"};
 	else if(area <= 70 ) ret = {a:"a", adj: "loose"};
@@ -1146,7 +1146,7 @@ Cock.prototype.Desc = function() {
 	if     (cockArea <= 10 ) ret = {a:"a", adj: "tiny"};
 	else if(cockArea <= 20 ) ret = {a:"a", adj: "small"};
 	else if(cockArea <= 30 ) ret = {a:"a", adj: "below average"};
-	else if(cockArea <= 40 ) ret = {a:"an", adj: "average"};
+	else if(cockArea <= 40 ) ret = {a:"a", adj: "well-proportioned"};
 	else if(cockArea <= 50 ) ret = {a:"a", adj: "strapping"};
 	else if(cockArea <= 70 ) ret = {a:"a", adj: "big"};
 	else if(cockArea <= 90 ) ret = {a:"a", adj: "large"};
@@ -1260,7 +1260,7 @@ Balls.prototype.adj = function() {
 		adjs.push("tiny");
 	}
 	if(size >= 2 && size < 5) {
-		adjs.push("average");
+		adjs.push("well-proportioned");
 	}
 	if(size >= 4 && size < 8) {
 		adjs.push("large");
@@ -1430,7 +1430,7 @@ Breasts.prototype.Desc = function() {
 		adjs.push("small");
 	}
 	if(size > 5 && size <= 10) {
-		adjs.push("average");
+		adjs.push("well-proportioned");
 		adjs.push("perky");
 		adjs.push("ample");
 		adjs.push("pert");
@@ -1961,7 +1961,7 @@ Body.prototype.HipsDesc = function() {
 			adjs.push("tight");
 	}
 	if(size >= 2 && size < 5) {
-		adjs.push("average");
+		adjs.push("well-proportioned");
 		if(this.femininity.Get() < 0)
 			adjs.push("girly");
 		adjs.push("unnoticable");

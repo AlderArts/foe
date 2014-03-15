@@ -1363,7 +1363,7 @@ Scenes.Gwendy.ChallengeSexVag = function(fuck, hangout) {
 		Text.Add("You grind[oneof] your [multiCockDesc] against her cleft, dipping the [cockTip] into the damp patch between her legs. ", parse);
 		if(first)
 			Text.Add("Finally! You are tired of simple little flings with the flirty farmgirl, this time, you are going to get something more substantial. Judging by the uncertain and slightly fearful look she gives you, you must have an almost savage appearance as you stare down at her. She says nothing, waiting for you to act, bringing a playful smile to your lips. It seems like all her losses have mollified her rebellious spirit, and she is ready to accept your dominance. ", parse);
-		Text.Add("You push the girl onto the table, letting her rest on her back. With your hands freed, you make short work of the pesky clothes, revealing your long-awaited price, her sopping wet cunt.", parse);
+		Text.Add("You push the girl onto the table, letting her rest on her back. With your hands freed, you make short work of the pesky clothes, revealing your long-awaited prize, her sopping wet cunt.", parse);
 		Text.NL();
 		if(gwendy.FirstCock()) {
 			Text.Add("Despite - or due to - your rough treatment, Gwendy’s prominent equine member juts up, its rigid mass throbbing erratically, wanting to join in on the fun. You see a pleading look on Gwendy’s face that begs for you to attend to her cock as well. Unfortunately for her, you have other plans in mind. Perhaps another time.", parse);
@@ -1403,7 +1403,7 @@ Scenes.Gwendy.ChallengeSexVag = function(fuck, hangout) {
 	}
 	// trib
 	else {
-		Text.Add("You nib lightly on Gwendy’s ear as you lean over her, whispering to her to pull off her clothes. Her crotch now bared, you press your dripping [vagDesc] against Gwendy’s, grinning arduously. Leaning in, you kiss her fiercely, causing her to gasp in surprise before returning the kiss, melting into your lips as her lust overtakes her. Your tongues entwine as you wrap her fingers in yours, the two of you intimately connected.", parse);
+		Text.Add("You nib lightly on Gwendy’s ear as you lean over her, whispering to her to pull off her clothes. Her crotch now bared, you press your dripping [vagDesc] against Gwendy’s, grinning amorously. Leaning in, you kiss her fiercely, causing her to gasp in surprise before returning the kiss, melting into your lips as her lust overtakes her. Your tongues entwine as you wrap her fingers in yours, the two of you intimately connected.", parse);
 		Text.NL();
 		parse["c"] = gwendy.FirstCock() ? ", nested just below her heavy scrotum" : "";
 		Text.Add("Pulling back, you work Gwendy onto the table, having her lie on her back with her legs spread. It’s hard to do anything but admire her glistening nether lips[c]. After planting a soft kiss on her tiny clit, you wrap her in your arms, whispering to her to just relax and be yours. Gwendy blushes, letting out a submissive moan in response.", parse);
@@ -1532,7 +1532,7 @@ Scenes.Gwendy.ChallengeSexAnal = function(toys, hangout) {
 			Text.NL();
 			Text.Add("<i>”G-going through a girl’s private stuff like that,”</i> the farmer huffs, embarrassed as you let your curious gaze wander across her collection. Ignoring her, you ask if this is all of it, or if she is hiding more somewhere else. <i>”Yes!”</i> she pipes, though her eyes betray her, as she throws a brief glance towards a huge chest on the other end of the room. Chuckling, you walk over to it to see what she is hiding.", parse);
 			Text.NL();
-			Text.Add("Inside the chest, below some clothes, bed sheets and smaller trinkets, you find Gwendy’s old sword. Surely, this wasn’t what she meant... You are just about to close the chest when you spot a large bulge under one of the sheets. Pulling it aside, you reveal the biggest toy of her collection so far, an immense, double-ended horsecock dildo, at least fifteen inches to each side. It is quite well made, with flared heads, thick veiny sheats. In addition to the obviously equine features of it, it’s covered in nubs, made to rub the user in all the right places.", parse);
+			Text.Add("Inside the chest, below some clothes, bed sheets and smaller trinkets, you find Gwendy’s old sword. Surely, this wasn’t what she meant... You are just about to close the chest when you spot a large bulge under one of the sheets. Pulling it aside, you reveal the biggest toy of her collection so far, an immense, double-ended horsecock dildo, at least fifteen inches to each side. It is quite well made, with flared heads and thick veiny sheaths. In addition to the obviously equine features of it, it’s covered in nubs, made to rub the user in all the right places.", parse);
 			Text.NL();
 			Text.Add("Grinning like an expectant child on the night of the winter solstice, you grab it and bring it over to the growing pile. Now, which one will you use?", parse);
 			
@@ -1740,7 +1740,7 @@ Scenes.Gwendy.ChallengeSexAnalToys = function(toy, hangout, first) {
 		Sex.Anal(null, gwendy);
 		gwendy.FuckAnal(gwendy.Butt(), Items.Toys.LargeAnalBeads.cock, 2);
 		
-		Text.Add("<i>”Hah! Something like this is nothing!”</i> the farmer scoffs, blushing slightly as she adjusts her stance slightly, perhaps more aroused by the beads than she wants to let on.", parse);
+		Text.Add("<i>”Hah! Something like this is nothing!”</i> the farmer scoffs, blushing slightly as she adjusts her stance, perhaps more aroused by the beads than she wants to let on.", parse);
 		if(gwendy.FirstCock())
 			Text.Add(" If her erect [gMultiCockDesc] [gisAre] any indication, she <i>really</i> likes it.", parse);
 		Text.Flush();
@@ -1996,7 +1996,7 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout) {
 			Text.Newline();
 			Text.AddOutput("It's just a kiss, simply a kiss, though she does make it a little more amorous than simply kissing. All the while she flicks her tongue around in your mouth, wrapping around yours and exploring your mouth.", parse);
 			Text.Newline();
-			Text.AddOutput("It's simple and sweet, but she breaks the kiss with you before long. When the two of you part, she looks at you with a somewhat harmless look, but in her eyes you see the excitement and joy her face doesn't portrait.", parse);
+			Text.AddOutput("It's simple and sweet, but she breaks the kiss with you before long. When the two of you separate, she looks at your almost innocently, but her eyes betray the spark of excitement and lust she's hiding from her face.", parse);
 			Text.Newline();
 			if(hangout) {
 				var scenes = new EncounterTable();
@@ -2037,7 +2037,8 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout) {
 					Text.Add("You wonder if she’s just going to repeat the same thing she did last time, as her tongue begins to stroke and caress yours. Your question is answered when you feel your back press against something solid. The girl is a <i>lot</i> more forceful this time.", parse);
 					Text.NL();
 				}
-				Text.Add("She keeps kissing you, constantly nuzzling and feeling you up. Her hands move from your face to your [breastDesc], moving them in slow circles, coaxing a small wave of arousal to flush over you. The girl relentlessly explores your body, touching just about every part of you as she moans and presses herself against you. The entire time, you fight to keep up, letting out a few whimpering moans while getting more and more aroused by her fire.", parse);
+				parse["them"] = player.FirstBreastRow().Size() > 3 ? " them" : "";
+				Text.Add("She keeps kissing you, constantly nuzzling and feeling you up. Her hands move from your face to your [breastDesc], moving[them] in slow circles, coaxing a small wave of arousal to flush over you. The girl relentlessly explores your body, touching just about every part of you as she moans and presses herself against you. The entire time, you fight to keep up, letting out a few whimpering moans while getting more and more aroused by her fire.", parse);
 				Text.NL();
 				
 				if(gwendy.FirstCock()) {
@@ -2048,7 +2049,7 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout) {
 					Text.NL();
 				}
 				if(player.FirstCock()) {
-					Text.Add("Breathing heavily, you quickly lose yourself to baser thoughts, just enjoying the attention you are receiving. The dominant farm girl has no qualms about using you in whatever way she can, teasing you mercilessly. A worried moan escapes your lips as Gwendy slips a hand into your [bottomArmorDesc], lightly masturbating your [multiCockDesc] on the spot. It feels good, but it isn’t enough to drive you to the point of orgasm, something Gwendy clearly avoids, keeping you on the edge at all times.", parse);
+					Text.Add("Breathing heavily, you quickly lose yourself to baser thoughts, just enjoying the attention you are receiving. The dominant farm girl has no qualms about using you in whatever way she can, teasing you mercilessly. A worried moan escapes your lips as Gwendy slips a hand into your [bottomArmorDesc], lightly masturbating your [multiCockDesc] on the spot. It feels good, but it isn’t enough to drive you to the point of orgasm, something Gwendy clearly avoids, keeping you carefully on the edge.", parse);
 					Text.NL();
 				}
 				if(player.FirstVag()) {
@@ -2088,7 +2089,7 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout) {
 					scenes.Get();
 				}
 				else {
-					Text.Add("After making out with you for a good twenty minutes, she breaks her last kiss, though not before copping a quick feel of your [genDesc] one last time before walking off. It leaves you turned on, but you feel a little ashamed about it. Not wanting to linger on it anymore, you head on your way, trying to clear your head.", parse);
+					Text.Add("After making out with you for a good twenty minutes, she breaks her last kiss, though not before copping a quick feel of your [genDesc] one last time before walking off. It leaves you turned on, but you feel a little ashamed about it. Not wanting to dwell on it anymore, you head on your way, trying to clear your head.", parse);
 					Text.Flush();
 					Gui.NextPrompt();
 				}
@@ -2109,7 +2110,7 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout) {
 					if(first) {
 						player.libido.IncreaseStat(100, 2);
 						
-						Text.Add("As she lets out a happy sigh, you find yourself a little nervous about what she might do this time. The times prior, she just aggressively kissed and groped you, leaving you somewhat aroused but you’re sure this streak won’t continue.", parse);
+						Text.Add("As she lets out a happy sigh, you find yourself a little nervous about what she might do this time. The previous times, she just aggressively kissed and groped you, leaving you somewhat aroused but you’re sure this streak won’t continue.", parse);
 						Text.NL();
 						Text.Add("As if reading your exact thoughts, she approaches you. However, instead of doing something then and there she grabs your arm and pulls you towards her room. After climbing up the ladder, she pulls a chair from the table for you to sit in, while she stands and looks at you with a curious expression. Is she going to do something to get you off this time? That wasn’t something you’d expect from the victor, but you don’t mind it at all.", parse);
 						Text.NL();
@@ -2151,9 +2152,9 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout) {
 					Text.NL();
 					Text.Add("It feels great, and you even feel the pending surge of ejaculation welling from her skilled handjob. You realize that your torment has just begun, however, when her supple fingers forcefully squeeze your [multiCockDesc], halting your seed’s exit.", parse);
 					Text.NL();
-					Text.Add("<i>“Now, who said you could cum, [playername]?”</i> she whispers in your ear. <i>”<b>I’m</b> the one that decide if and when you release, okay?”</i> You begin protesting, but she squeezes tighter, making you cry out as she torments your erect [multicockDesc]. With a low whimper, you agree reluctantly, if only in the hopes of her taking away some pressure.", parse);
+					Text.Add("<i>“Now, who said you could cum, [playername]?”</i> she whispers in your ear. <i>”<b>I’m</b> the one that decide if and when you release, okay?”</i> You begin protesting, but she squeezes tighter, making you cry out as she torments your erect [multiCockDesc]. With a low whimper, you agree reluctantly, if only in the hopes of her taking away some pressure.", parse);
 					Text.NL();
-					Text.Add("She does, but only by a small margin. She continues to stroke and play with the length of your [multicockDesc], fixating a playful, yet sadistic gaze on your face to monitor how close you are to cumming. Every time you’re about to get off, she grips and twists brutally, a sadistic smile on her face as you howl in pain.", parse);
+					Text.Add("She does, but only by a small margin. She continues to stroke and play with the length of your [multiCockDesc], fixating a playful, yet sadistic gaze on your face to monitor how close you are to cumming. Every time you’re about to get off, she grips and twists brutally, a sadistic smile on her face as you howl in pain.", parse);
 					Text.NL();
 					Text.Add("As the cycle of erotic torture repeats itself, your perception of time is clouded by the constant need to release. Despite knowing harm will come to your [multiCockDesc], you can’t help but lose yourself to the feel of her silky hands masturbating you. After what feel like hours of torture, Gwendy relaxes her grip slightly, just enough for a small bead of pre to emerge, before tightening again. ", parse);
 					Text.NL();
