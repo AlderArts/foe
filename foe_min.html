@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<!-- Main page title -->
+		<title>Fall of Eden</title>
+		
+		<!-- Set up CSS styles -->
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<!--[if IE]><script type="text/javascript" src="excanvas.compiled.js"></script><![endif]-->
+	</head>
+	
+	<body>
+		<div id="container">
+			<!-- Main body containing the canvas object -->
+			<canvas id="canvas" width="1260" height="700">
+				<!-- Fallback for bad browsers -->
+				<p>You fail! Get a browser that supports HTML5 canvas!</p>
+			</canvas>
+		
+			<div id="mainTextArea"> </div>
+			<input id="textInputArea"/>
+			<div id="tooltipTextArea"> </div>
+			
+			<div class="overlay" id="overlay_load">
+				<div>
+					<p>Load a file from disk:</p>
+					<input type="file" id="loadFileFiles" />
+					<br/>
+					<button type="submit" id="loadFileOk" onclick="Saver.OnLoadFromFileClick()">Ok</button>
+					<button type="button" id="loadFileCancel" onclick="loadfileOverlay()">Cancel</button>
+				</div>
+			</div>
+			
+			<div class="overlay" id="overlay_assets">
+				<div>
+					<p id="progressDiv">Loading</p>
+				</div>
+			</div>
+		</div>
+		<!-- Load script files -->
+		<script type="application/javascript" src="foe.js"></script>
+	</body>
+</html>
