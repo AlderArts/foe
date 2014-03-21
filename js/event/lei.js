@@ -774,7 +774,7 @@ Scenes.Lei.InnFirstLeaving = function() {
 world.loc.Rigard.Inn.common.events.push(new Link(
 	function() {
 		return lei.flags["Met"] >= 3 ? "Lei" : "Stranger";
-	}, function() { return lei.IsAtLocation(world.loc.Rigard.Inn.common); }, true,
+	}, function() { return lei.IsAtLocation(world.loc.Rigard.Inn.common) && rigard.flags["RoyalAccessTalk"] > 0; }, true,
 	function() {
 		if(lei.IsAtLocation(world.loc.Rigard.Inn.common)) {
 			if(lei.flags["Met"] < 2) {

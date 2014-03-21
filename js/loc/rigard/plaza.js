@@ -73,7 +73,92 @@ world.loc.Rigard.Plaza.links.push(new Link(
 		Text.AddOutput("The outer walls of the royal grounds stand near, and the castle looms on the hill above.<br/>");
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.Castle.Grounds, {minute: 10});
+		var parse = {
+			stride : player.LowerBodyType() == LowerBodyType.Single ? "slither" : "stride"
+		};
+		if(rigard.flags["RoyalAccess"] == 0) {
+			Text.Clear();
+			if(rigard.flags["RoyalAccessTalk"] < 1) {
+				Text.Add("The innermost tier of the city of Rigard rests on a large hilltop surrounded by tall stone walls, crowned by the Royal castle. You can see guards patrolling along the bulwarks, and more stationed at the main gates. The guards all wear a different livery from those you have seen walking the streets, so you guess they belong to a different order than the city watch.", parse);
+				Text.NL();
+				if(rosalin.flags["Met"] == 0)
+					Text.Add("Though you don’t have a concrete objective at the moment, there are bound to be people inside those walls that would prove of use to you.", parse);
+				else
+					Text.Add("You need to find your way inside those walls if you are going to find the royal alchemist, and get to the bottom of the mystery behind the gem.", parse);
+				Text.Add(" Confidently, you [stride] up to the pair of bored-looking guards manning the gates.", parse);
+				Text.NL();
+				Text.Add("Before you’ve had a chance to as much as open your mouth, you are faced with drawn swords.", parse);
+				Text.NL();
+				
+				var racescore = new RaceScore(player.body);
+				var humanScore = new RaceScore();
+				humanScore.score[Race.human] = 1;
+				var humanity = racescore.Compare(humanScore);
+				
+				if(humanity < 0.95) {
+					Text.Add("<i>”Stand back, filthy creature!”</i> one of the guards snarl, spitting at your feet.", parse);
+					Text.NL();
+					Text.Add("<i>”Your kind is not welcome here, run back to your master,”</i> the other one adds, his voice reeking with hostility.", parse);
+				}
+				else {
+					Text.Add("<i>”Halt citizen! No one enters here without an invitation from the nobility.”</i> The guard eyes you up and down, and snidely adds, <i>”Which, by the looks of you, you don’t have.”</i>", parse);
+				}
+				Text.Add(" No matter how you try, the pair seems unwilling to budge. Seems like you need some form of identification or invitation to get through the checkpoint.", parse);
+				Text.NL();
+				Text.Add("From what you gather these men belong to the royal guard, whose only task is to protect the nobility and the royal family. It seems like you are causing a bit of a scene, and a few curious passersby stop to watch, whispering among themselves. Frustrated, you decide to back down for now.", parse);
+				Text.NL();
+				Text.Add("You return to the plaza, leaving the unfriendly watchmen behind you. Now, where would you be able to find an invitation? You probably need to find some nobleman and get on their good side, and you doubt waltzing into one of the fancier estates and asking for their aid would do you much good.", parse);
+				Text.NL();
+				if(rigard.LB["Visit"] != 0)
+					Text.Add("Perhaps someone at the Lady’s Blessing could point you in the right direction. Being an establishment in the richer parts of Rigard, the clientele ought to be well versed in the ways of the nobility.", parse);
+				else
+					Text.Add("The din of carousing distracts you from your musings, and you notice a nearby building you have yet to visit - an inn located at the plaza. A place like that could perhaps have customers who frequent the castle, and who might know a way inside.", parse);
+				
+				rigard.flags["RoyalAccessTalk"] = 1;
+			}
+			else {
+				Text.Add("You briefly consider trying to approach the gates to the royal grounds again, but the guards look no friendlier than they did the last time.", parse);
+			}
+			Text.Flush();
+			world.TimeStep({minute: 10});
+			Gui.NextPrompt();
+		}
+		else {
+			if(rigard.flags["RoyalAccessTalk"] < 2) {
+				Text.Clear();
+				Text.Add("Once again, you approach the hostile royal guardsmen manning the entrance to the innermost parts of Rigard.", parse);
+				Text.NL();
+				
+				var racescore = new RaceScore(player.body);
+				var humanScore = new RaceScore();
+				humanScore.score[Race.human] = 1;
+				var humanity = racescore.Compare(humanScore);
+				
+				parse["plebFilth"] = humanity > 0.95 ? "pleb" : "filth";
+				
+				Text.Add("<i>”I thought we told you not to come here, [plebFilth]!”</i> the officer in charge growls as you saunter up. You grin at him smugly as you present him with the sealed letter you received from the royal twins. The man looks suspiciously at the envelope, his eyebrows rising as he sees the seal. Wordlessly, he breaks the seal and opens it, mulling over the contents, his face paling as he goes down the page.", parse);
+				Text.NL();
+				Text.Add("He looks very confused as he hands back the piece of paper, muttering that you are free to enter, to the surprise of his companion. Whatever instructions the note contained, it seemed to have been enough to convince him. You pass through a smaller door just next to the closed main gates, and find yourself within the royal grounds.", parse);
+				Text.NL();
+				Text.Add("As you step through, it is like entering another world. From the busy hubbub of the streets of Rigard, the royal grounds are eerily quiet. There are relatively few people moving around, and those that do have an air of self-importance. You spot groups of noblemen and women walking the paved paths, servants in tow. The entire grounds is like a large park, snaking paths weaving through lush greenery, with posh estates scattered throughout.", parse);
+				Text.NL();
+				Text.Add("Far above, on top of the rocky hill at the back of the area, you can see the stone walls of the castle jutting out of the bedrock. The approach is quite steep, snaking back and forth up the hillside. From a military perspective, the fortress would be a nightmare to take, the rough terrain further fortified by the works of men. Bright pennants snap in the wind on top of the tall towers overlooking the city.", parse);
+				Text.NL();
+				Text.Add("Speaking of towers, you spy a strange structure close by. The tower looks very out of place compared to the rich estates dotting the grounds - a crumbling obelisk of rock, neglected and worn down over the course of centuries. There is an eerie glow emanating from the windows on its upper levels, flickering between strange colors that have no business coming from a natural fire. ", parse);
+				if(rosalin.flags["Met"] == 0)
+					Text.Add("Most likely, there is magic at work here.", parse);
+				else
+					Text.Add("Your search for the court magician should probably start here.", parse);
+				Text.Flush();
+				
+				rigard.flags["RoyalAccessTalk"] = 2;
+				Gui.NextPrompt(function() {
+					MoveToLocation(world.loc.Rigard.Castle.Grounds, {minute: 10});
+				});
+			}
+			else
+				MoveToLocation(world.loc.Rigard.Castle.Grounds, {minute: 10});
+		}
 	}
 ));
 

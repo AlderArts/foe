@@ -217,6 +217,7 @@ Scenes.Gwendy.Talk = function(backfunc) {
 	};
 	
 	Text.Clear();
+	//TODO
 	Text.Add("", parse);
 	Text.NL();
 	Text.Flush();

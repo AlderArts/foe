@@ -335,8 +335,7 @@ Scenes.Kiakai.TalkQuest = function() {
 		Text.AddOutput("<i>\"About that cat girl... we should probably try to find someone more, so to speak, sane,\"</i> the elf shakes [hisher] head. <i>\"We could probably find someone in the city - many folk pass through there.\"</i>", parse);
 		
 		Text.Newline();
-		// TODO: If not gained entry to the city
-		if(true) {
+		if(rigard.flags["Access"] == 0) {
 			Text.AddOutput("<i>\"Question is, how do we get in?\"</i>", parse);
 			
 			Text.Newline();
@@ -344,12 +343,13 @@ Scenes.Kiakai.TalkQuest = function() {
 			Text.Newline();
 			Text.AddOutput("<i>\"I am sure we will be able to find other ways of gaining entrance eventually as well.\"</i>", parse);
 		}
-		else if(true) {
+		else if(rigard.flags["RoyalAccess"] == 0) {
 			Text.AddOutput("<i>\"I hear that the court mage is a skilled alchemist, perhaps we could seek an audience with her?\"</i>", parse);
 		}
 		else {
 			Text.AddOutput("<i>\"We should find the court mage and ask her about the gem.\"</i>", parse);
 		}
+		// TODO: Further down main quest
 	}
 	
 	Gui.NextPrompt(kiakai.TalkPrompt);

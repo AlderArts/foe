@@ -64,6 +64,7 @@ function Rigard(storage) {
 	this.flags["CityHistory"] = 0;
 	// Have access to royal grounds (not necessarily free access)
 	this.flags["RoyalAccess"] = 0;
+	this.flags["RoyalAccessTalk"] = 0;
 	
 	this.flags["TalkedStatue"] = 0;
 	
