@@ -95,11 +95,13 @@ world.loc.Rigard.Krawitz.street.description = function() {
 world.SaveSpots["Krawitz"] = world.loc.Rigard.Krawitz.street;
 world.loc.Rigard.Krawitz.street.SaveSpot = "Krawitz";
 
+world.loc.Rigard.Krawitz.street.onEntry = function() {
+	Scenes.Krawitz.Scouting();
+}
+
 world.loc.Rigard.Krawitz.street.links.push(new Link(
 	"Plaza", true, true,
-	function() {
-		Text.AddOutput("Go back to plaza?<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Plaza, {minute: 10});
 	}
@@ -116,14 +118,8 @@ world.loc.Rigard.Krawitz.street.links.push(new Link(
 	function() {
 		Text.AddOutput("Enter the main grounds?<br/>");
 	},
-	function() {
-		MoveToLocation(world.loc.Rigard.Krawitz.grounds);
-	}
+	Scenes.Krawitz.SneakingIn
 ));
-
-world.loc.Rigard.Krawitz.street.endDescription = function() {
-	Text.AddOutput("What you do?<br/>");
-}
 
 //
 // Servants
@@ -342,6 +338,7 @@ Scenes.Krawitz.Scouting = function() {
 	Text.Add("On the opposite side of the garden, a low building of cheaper make covers one side of the garden, probably intended for servants. The grounds are surrounded by a stone wall on the sides and a metal fence in front, barring unauthorized entry. The gates seems to be locked, but you guess that the servants probably have a back entrance.", parse);
 	
 	if(rigard.Krawitz["Work"] == 0 && world.time.hour >= 6 && world.time.hour < 20) {
+		Text.NL();
 		Text.Add("As you approach the estate, you become aware of a commotion down a side street. Curious, you peek down the alleyway that seems to lead to the servants’ entrance. There is a small gathering of people there, most of them morphs of various kinds, embroiled in an argument.", parse);
 		Text.NL();
 		Text.Add("<i>”I keep tellin’ ya, it’s not worth the pay, not this shit!”</i> The speaker, a dog-morph in his twenties, spits on the ground. <i>”I’m used to people lookin’ down dere noses at me in this city, but lord-fucking-almighty is a cut above the rest.”</i> There is some grudging agreement from the people around him, all of them dressed in blue servants’ livery. Most likely, they all work for Krawitz.", parse);
@@ -418,8 +415,11 @@ Scenes.Krawitz.Scouting = function() {
 		});
 		Gui.SetButtonsFromList(options);
 	}
-	else
+	else {
+		Text.NL();
+		Text.Flush();
 		PrintDefaultOptions(true);
+	}
 }
 
 Scenes.Krawitz.WorkWork = function() {
@@ -502,7 +502,7 @@ Scenes.Krawitz.EnteringTheWork = function() {
 	Text.NL();
 	Text.Add("<i>”Understand? Once you are done tending the grounds, go to the kitchens and fetch food for the night staff. The ladies of the house are currently in the bathhouse, so stay clear of that. At this time of the night, master Krawitz is probably in his study, you are not to disturb him under any circumstances.”</i>", parse);
 	Text.NL();
-	Text.Add("You nod amiably. This is going to be almost too easy...", parse);
+	Text.Add("You nod amiably, leaving the servants' quarters for the grounds. This is going to be almost too easy...", parse);
 	Text.NL();
 	Text.Add("<b>You received 50 coins!</b>", parse);
 	Text.Flush();
@@ -511,7 +511,7 @@ Scenes.Krawitz.EnteringTheWork = function() {
 	
 	party.coin += 50;
 	
-	MoveToLocation(world.loc.Rigard.Krawitz.servants, {minute: 30});
+	MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 30});
 }
 
 Scenes.Krawitz.ApproachGates = function() {
