@@ -32,6 +32,7 @@ Scenes.Krawitz.SetupStats = function() {
 	Scenes.Krawitz.stat.SpikedWine        = false;
 	Scenes.Krawitz.stat.ServantFood       = false;
 	Scenes.Krawitz.stat.KrawitzFood       = false;
+	Scenes.Krawitz.stat.ChestLocKnown     = false;
 	Scenes.Krawitz.stat.TFItem            = false;
 	Scenes.Krawitz.stat.TFdKrawitz        = false;
 	Scenes.Krawitz.stat.SexedGirls        = false;
@@ -41,6 +42,8 @@ Scenes.Krawitz.SetupStats = function() {
 	Scenes.Krawitz.stat.HasBinder         = false;
 	
 	Scenes.Krawitz.stat.Suspicion         = 0;
+	Scenes.Krawitz.stat.guardRot          = 0;
+	Scenes.Krawitz.stat.servantRot        = 0;
 }
 
 Scenes.Krawitz.GuardDex = function(entity, num) {
@@ -498,7 +501,7 @@ Scenes.Krawitz.ServantConvinced = function(gender) {
 }
 
 
-Scenes.Krawitz.FoundOut = function(entity, num) {
+Scenes.Krawitz.FoundOut = function(entity, num, gender) {
 	var parse = {
 		entity : entity == Scenes.Krawitz.EncType.Guard ? "the guard" : "the servant",
 		s          : num > 1 ? "s" : "",
@@ -508,7 +511,7 @@ Scenes.Krawitz.FoundOut = function(entity, num) {
 		spiked     : Scenes.Krawitz.stat.SpikedWine ? "spiked " : ""
 	};
 	
-	var gender = Math.random() > 0.5 ? Gender.male : Gender.female;
+	gender = gender || Math.random() > 0.5 ? Gender.male : Gender.female;
 	
 	if(num > 1) {
 		parse["HeShe"]  = "They";
@@ -626,6 +629,235 @@ Scenes.Krawitz.AddSuspicion = function(num) {
 	Gui.NextPrompt();
 }
 
+
+Scenes.Krawitz.PatrollingGuards = function() {
+	var parse = {
+		
+	};
+	
+	var gender = Math.random() > 0.5 ? Gender.male : Gender.female;
+	
+	if(gender == Gender.male) {
+		parse["HeShe"]  = "He";
+		parse["heshe"]  = "he";
+		parse["hisher"] = "his";
+		parse["himher"] = "him";
+	}
+	else {
+		parse["HeShe"]  = "She";
+		parse["heshe"]  = "she";
+		parse["hisher"] = "her";
+		parse["himher"] = "her";
+	}
+	
+	Text.Clear();
+	Text.Add("You spot a pair of guards treading along a pathway, patrolling the garden in front of the mansion. As they walk past you, you catch part of their discussion.", parse);
+	Text.NL();
+	
+	var scenes = [];
+	
+	// Long
+	scenes.push(function() {
+		//this.Krawitz["Duel"] = 0; // 0 = no, 1 = superwin, 2 = win, 3 = loss
+		if(rigard.Krawitz["Duel"] == 3) { //loss
+			Text.Add("<i>”I heard some moron tried to challenge Krawitz to a duel,”</i> one of the guards tells [hisher] buddy.", parse);
+			Text.NL();
+			Text.Add("<i>”Ouch, can’t imagine that ended well,”</i> the other guard winces, <i>”no one died this time though, right?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>”They got their ass handed to them, but managed to keep their skin at least. Krawitz seems to be in a good mood since then - I think he’s working on something in his study right now.”</i>", parse);
+		}
+		else if(rigard.Krawitz["Duel"] == 1 || rigard.Krawitz["Duel"] == 2) { //win
+			Text.Add("<i>”Hah! Did you hear about what happened when Krawitz visited the plaza earlier?”</i> one of the guard retells the story of Krawitz’ drubbing at your hands, which has become much more dramatic than what you recall.", parse);
+			Text.NL();
+			Text.Add("<i>”Really? Wish I could’ve been there,”</i> the other guard chortles. <i>”That ass deserves to be knocked down a peg or two.”</i> He looks about nervously. <i>”Sure it’s alright to talk about it though?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>”Who’s gonna care?”</i> The guard shrugs dismissively. <i>”He’s been holed up in his study on the second floor ever since, biting his nails about the whole thing.”</i>", parse);
+		}
+		else { //didn't duel
+			Text.Add("<i>”One of the servants got chewed out by Krawitz down by the plaza,”</i> one of the guards tells [hisher] buddy. <i>”He was sent to buy something, but apparently they just sold out. Master was furious with him.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>”What was it that he wanted anyways?”</i> the other guard asks.", parse);
+			Text.NL();
+			Text.Add("<i>”I dunno, perhaps some expensive wine - he keeps quite the collection. One of the maids told me that she brings at least three cups a night to him in his study.”</i>", parse);
+		}
+	});
+	// Long
+	scenes.push(function() {
+		Text.Add("<i>”Hear that?”</i> The two pause, listening to the peals of laughter coming from the bathhouse. <i>”Wouldn’t mind joining them,”</i> one of the guards says, grinning lecherously.", parse);
+		Text.NL();
+		Text.Add("<i>”You’ll be thrown out on your ass the moment Krawitz hears of you peeping on his wife and daughter,”</i> the other one warns [himher].", parse);
+		Text.NL();
+		Text.Add("<i>”Almost worth it. The new wife is a looker, and the young lady is a fair flower, just waiting to be plucked,”</i> the guard looks longingly towards the stone pillars, [hisher] view blocked by some offending bushes. More giggling and splashing ensue. <i>”Damn old lecher,”</i> one of them mutter. <i>”I heard the new wife is actually a friend of his daughter, almost the same age too.”</i>", parse);
+	});
+	// Long
+	scenes.push(function() {
+		Text.Add("<i>”What’s the deal with that sword Krawitz’ totes around anyways?”</i> one of the guard asks the other. <i>”I know he isn’t exactly the wealthiest noble around, but he treats it like it’s some priceless treasure.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>”It is, you dolt,”</i> the other guard replies, <i>”I hear that blade has been in the family for generations. Probably the single most valuable thing in his possession, save this estate.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>”Then why does that moron carry it with him everywhere he goes? Someone’s gonna steal it from him one of these days.”</i>", parse);
+	});
+	// Long
+	scenes.push(function() {
+		Text.Add("<i>”Bah, sure could use some grub right now,”</i> one of the guards grumbles.", parse);
+		Text.NL();
+		Text.Add("<i>”We still got another hour left on this shift, you can stuff your fat gut after that,”</i> [hisher] partner taunts.", parse);
+		Text.NL();
+		Text.Add("<i>”Come on, one can dream, right?”</i> the first complains. <i>”Krawitz may be a massive cheapskate when it comes to hiring, but that cook is amazing. Have you tried his cherry pies? Delicious.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>”And how would you know? Only the servants are allowed in the kitchens, and I doubt he’d feed something like that to you.”</i>", parse);
+	});
+	
+	var sceneId = Scenes.Krawitz.stat.guardRot;
+	if(sceneId >= scenes.length) sceneId = 0;
+	
+	Scenes.Krawitz.stat.guardRot = sceneId + 1;
+	
+	// Play scene
+	scenes[sceneId]();
+
+	Text.NL();
+	
+	var rand = Math.random();
+	if(rand < 0.2) {
+		Text.Add("The guards pass by you, apparently not noticing you.", parse);
+		
+		Text.Flush();
+		Gui.NextPrompt();
+	}
+	else if(Scenes.Krawitz.stat.HasServantClothes && rand < 0.5) {
+		Text.Add("The guards pass by you, apparently assuming you are one of the regular servants.", parse);
+		
+		Text.Flush();
+		Gui.NextPrompt();
+	}
+	else {
+		Text.Add("<i>”Hey, who goes there!”</i> one of the guards calls in your direction, noticing someone hiding in the bushes.", parse);
+		
+		Text.Flush();
+		Scenes.Krawitz.FoundOut(Scenes.Krawitz.EncType.Guard, 2, gender);
+	}
+}
+
+//Overhear servants (grounds/servants/mansion)
+Scenes.Krawitz.WanderingServants = function() {
+	var parse = {
+		
+	};
+	var gender = Math.random() > 0.5 ? Gender.male : Gender.female;
+	
+	if(gender == Gender.male) {
+		parse["HeShe"]  = "He";
+		parse["heshe"]  = "he";
+		parse["hisher"] = "his";
+		parse["himher"] = "him";
+	}
+	else {
+		parse["HeShe"]  = "She";
+		parse["heshe"]  = "she";
+		parse["hisher"] = "her";
+		parse["himher"] = "her";
+	}
+	
+	Text.Clear();
+	Text.Add("A small group of servants pass your hiding spot, carrying an assortment of wares. They banter and gossip like a bunch of old wives.", parse);
+	Text.NL();
+	
+	var scenes = [];
+	
+	// Long
+	scenes.push(function() {
+		Text.Add("<i>”Hey, the master’s been holed up in his study for a really long time now... what’s he doing up there?”</i> one of the maids ask her companions.", parse);
+		Text.NL();
+		Text.Add("<i>”Probably working the numbers,”</i> one of the servants reply, <i>”Krawitz doesn’t have as much money as he used to. I hear he is trying to get into trading, and it isn’t really paying off.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>”What, really? I thought he was really really rich!”</i>", parse);
+		Text.NL();
+		Text.Add("<i>”Look, why do you think he pays us so little? What little he still has goes to satisfying the whims of his little princess and his trophy wife.”</i>", parse);
+		Text.NL();
+		Text.Add("The group is nearing your hiding spot.", parse);
+	});
+	// Long
+	scenes.push(function() {
+		Text.Add("<i>”So, like I said, I was fetching some beddings from the storeroom,”</i> one of the servants narrates. <i>”There was this chest, way in the back, and it was slightly open, see?”</i>", parse);
+		Text.NL();
+		parse["s2hisher"] = Math.random() > 0.5 ? "his" : "her";
+		Text.Add("<i>”You are going to get hurt if someone catches you doing that,”</i> another one of the servants warns [himher], <i>”Lord Krawitz doesn’t appreciate people snooping around. ‘Specially not people like us.”</i> The servant sweeps [s2hisher] bushy tail back and forth to emphasize [s2hisher] point.", parse);
+		Text.NL();
+		Text.Add("<i>”Never mind that, don’t you want to know what I found?”</i> the adventurous servant continues, lowering [hisher] voice. <i>”I looked inside it, and there were all these vials of strange liquids in there.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>”So you found a perfume stash,”</i> one of the servants dismisses [himher].", parse);
+		Text.NL();
+		Text.Add("<i>”No! It really was something weird, there were strange markings on it and all. Looked mysterious!”</i> [heshe] exclaims.", parse);
+		Text.NL();
+		Text.Add("<i>”Can you even read?”</i> one of the others mutter.", parse);
+		Text.NL();
+		Text.Add("<i>”Only, next time I went there, the chest was moved. I think it’s somewhere in the back, hidden behind the drapes.”</i>", parse);
+		Text.NL();
+		Text.Add("Hmm. Maybe it could be worth checking out.", parse);
+		
+		Scenes.Krawitz.stat.ChestLocKnown = true;
+	});
+	// Long
+	scenes.push(function() {
+		Text.Add("<i>”How much can those damn women drink?”</i> one of the maids exclaims. She waves two empty flagons at her companions. <i>”Third time I have to fetch more tonight! Not to mention...”</i> she looks around, lowering her voice.", parse);
+		Text.NL();
+		Text.Add("<i>”Just now, I swear I caught the young lady cupping a feel! On her own mother!”</i>", parse);
+		Text.NL();
+		Text.Add("<i>”Step-mother,”</i> one of the others point out, <i>”she’s the daughter of the old wife, you know. Still, doesn’t surprise me.”</i>", parse);
+		Text.NL();
+		Text.Add("The maid looks at her companion in shock.", parse);
+		Text.NL();
+		Text.Add("<i>”The way I hear it, those two knew each other before she married into the family. Might even be the young lady was the one who introduced the new wife to her father.”</i>", parse);
+		Text.NL();
+		Text.Add("The maid huffs a bit, shaking her head disapprovingly. <i>”Still not right, that.”</i>", parse);
+	});
+	// Long
+	scenes.push(function() {
+		Text.Add("<i>”So, you got something going with Ibben, that sullen looking brute of a guard?”</i> one of the servants quips. It seems to hit home, as one of the maids starts blushing furiously, blabbering as she tries to change the subject.", parse);
+		Text.NL();
+		Text.Add("<i>”No use denying it, girl, I overheard the two of you ‘talking’ behind the shed the other day. It sounded pretty serious.”</i> The servant purses [hisher] lips, pretending to think carefully about the matter. <i>”What did he say now... ‘I’ll plow your fertile fields and plant my seed’. I didn’t know you were planning to start a farm!”</i>", parse);
+		Text.NL();
+		Text.Add("<i>”N-not true! Stop that!”</i> the girl squeaks in panic.", parse);
+		Text.NL();
+		Text.Add("<i>”As I recall, you answered ‘fuck my horny cunt with your throbbing dick’. More straightforward, though not quite as poetic,”</i> the servant teases, changing the pitch of [hisher] voice to match the girl’s.", parse);
+		Text.NL();
+		Text.Add("<i>”I... I don’t know none of that flowery stuff!”</i> The poor girl squirms. She looks at the others, a little worried. <i>”Do you think he would like that?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>”Your blunt approach seems to be working, don’t worry about it,”</i> the third servant consoles her. They continue chatting as they walk past you.", parse);
+	});
+	
+	var sceneId = Scenes.Krawitz.stat.servantRot;
+	if(sceneId >= scenes.length) sceneId = 0;
+	
+	Scenes.Krawitz.stat.servantRot = sceneId + 1;
+	
+	// Play scene
+	scenes[sceneId]();
+	
+	Text.NL();
+	
+	var rand = Math.random();
+	if(rand < 0.4) {
+		Text.Add("They are so engrossed in their conversation, they pass by your hiding spot without noticing you.", parse);
+		
+		Text.Flush();
+		Gui.NextPrompt();
+	}
+	else if((Scenes.Krawitz.stat.IsServant && rand < 0.8) || (Scenes.Krawitz.stat.HasServantClothes && rand < 0.3)) {
+		Text.Add("<i>”Hey there, want to come help us out?”</i> one of them asks, noticing your servant livery. You decline, explaining you have some other duties to tend to.", parse);
+		
+		Text.Flush();
+		
+		Scenes.Krawitz.AddSuspicion(Scenes.Krawitz.ServantSuspicion());
+	}
+	else {
+		Text.Add("<i>”Is there someone there?”</i> one of the maids peers into the shadows nervously.", parse);
+		
+		Text.Flush();
+		Scenes.Krawitz.FoundOut(Scenes.Krawitz.EncType.Servant, Math.random() < 0.5 ? 3 : 4, gender);
+	}
+}
 
 Scenes.Krawitz.Scouting = function() {
 	var parse = {
