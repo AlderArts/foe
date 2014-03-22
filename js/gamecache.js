@@ -270,6 +270,12 @@ CacheToGame = function() {
 			player.jobs["Figther"] = null;
 		}
 	}
+	if(gameCache.version < 13) {
+	    if(rigard.flags["KrawitzQ"]) {
+	        rigard.Krawitz["Q"]      = rigard.flags["KrawitzQ"];
+	        rigard.flags["KrawitzQ"] = null;
+	    }
+	}
 }
 
 GameToCache = function() {

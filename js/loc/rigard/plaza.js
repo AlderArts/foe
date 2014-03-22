@@ -163,7 +163,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 ));
 
 world.loc.Rigard.Plaza.links.push(new Link(
-	"Mansion", function() { return rigard.flags["KrawitzQ"] != 0; }, true,
+	"Mansion", function() { return rigard.Krawitz["Q"] == 1; }, true,
 	function() {
 		Text.AddOutput("Krawitz's estate is nearby.<br/>");
 	},

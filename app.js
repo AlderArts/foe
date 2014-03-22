@@ -9,7 +9,7 @@ VERSION_MINOR = 3;
 VERSION_SUBSCRIPT = "e";
 VERSION_NAME = "Domming Gwendy again";
 
-SAVE_VERSION = 12;
+SAVE_VERSION = 13;
 // Save version 1: Initial
 // Save version 2: Added inventory
 // Save version 3: Fixed clitcock restoration + height, weigth
@@ -22,6 +22,7 @@ SAVE_VERSION = 12;
 // Save version 10: Rosalin eyes
 // Save version 11: Jobs
 // Save version 12: Job fix "Figther"
+// Save version 13: Krawitz
 
 
 VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + VERSION_SUBSCRIPT + ": " + VERSION_NAME;

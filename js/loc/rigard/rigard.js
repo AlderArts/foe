@@ -90,8 +90,10 @@ function Rigard(storage) {
 	// Non-permanent
 	this.RotOrvinInnTalk = 0;
 	
-	this.flags["KrawitzQ"] = 0; // Krawitz quest status
-	this.flags["KrawitzDuel"] = 0; // 0 = no, 1 = superwin, 2 = win, 3 = loss
+	this.Krawitz = {};
+    this.Krawitz["Q"] = 0; // Krawitz quest status
+    this.Krawitz["Work"] = 0; // 
+	this.Krawitz["Duel"] = 0; // 0 = no, 1 = superwin, 2 = win, 3 = loss
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -99,9 +101,10 @@ function Rigard(storage) {
 Rigard.prototype.ToStorage = function() {
 	var storage = {};
 	
-	storage.flags  = this.flags;
-	storage.LB     = this.LB;
-	storage.LBroom = this.LBroomTimer.ToStorage();
+	storage.flags   = this.flags;
+    storage.Krawitz = this.Krawitz;
+	storage.LB      = this.LB;
+	storage.LBroom  = this.LBroomTimer.ToStorage();
 	
 	return storage;
 }
@@ -111,6 +114,8 @@ Rigard.prototype.FromStorage = function(storage) {
 	// Load flags
 	for(var flag in storage.flags)
 		this.flags[flag] = parseInt(storage.flags[flag]);
+    for(var flag in storage.Krawitz)
+        this.Krawitz[flag] = parseInt(storage.Krawitz[flag]);
 	for(var flag in storage.LB)
 		this.LB[flag] = parseInt(storage.LB[flag]);
 }
@@ -385,12 +390,12 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		Text.Newline();
 		Text.AddOutput("<i>\"Oh? How'd it go?\"</i>", parse);
 		Text.Newline();
-		if(rigard.flags["KrawitzDuel"] == 1) {
+		if(rigard.flags["Duel"] == 1) {
 			Text.AddOutput("<i>\"He got annihilated! I heard his clothes were in shreds and he has a scar on his cheek to show for the trouble.\"</i>", parse);
 			Text.Newline();
 			Text.AddOutput("The [NPC2] beams happily. <i>\"It's about time someone showed that bastard what for!\"</i>", parse);
 		}
-		else if(rigard.flags["KrawitzDuel"] == 2) {
+		else if(rigard.flags["Duel"] == 2) {
 			Text.AddOutput("<i>\"I was told it was a spectacular fight! His opponent just barely managed to beat him in the end, and he was just really angry and slunk off.\"</i>", parse);
 			Text.Newline();
 			Text.AddOutput("The [NPC2] smiles in pleasure. <i>\"It's about time someone put that bastard in his place.\"</i>", parse);
@@ -400,7 +405,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 			Text.Newline();
 			Text.AddOutput("The [NPC2] shakes [hisher2] head in disappointment. <i>\"He might be a bastard, but you have to hand it to him - he's a master with that blade.\"</i>", parse);
 		}
-	}, 1.0, function() { return rigard.flags["KrawitzDuel"] != 0; });
+	}, 1.0, function() { return rigard.flags["Duel"] != 0; });
 	// TODO: MORE RUMORS AFTER NIGHT INFILTRATION
 	scenes.Get();
 	

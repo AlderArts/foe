@@ -614,7 +614,7 @@ Scenes.Lei.RequestMain = function() {
 
 				twins.flags["Met"] = 1;
 				// Start KrawitzQ
-				rigard.flags["KrawitzQ"] = 1;
+				rigard.Krawitz["Q"] = 1;
 				
 				Gui.NextPrompt();
 			}, enabled : true,

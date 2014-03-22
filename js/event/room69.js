@@ -218,7 +218,7 @@ Scenes.Room69.Discovering69WhatNow = function() {
 				Text.NL();
 				Text.Add("<i>\"I-I’ll have you know I clean myself every day,\"</i> an almost whimpering voice answers. <i>\"Okay, every month anyway! And if I’m a little small, it’s no fault of mine. Go blame that innkeeper downstairs and his stingy ancestors. I’m still great in all the ways that matter. Won’t you stay with me? Please?\"</i>", parse);
 				Text.NL();
-				Text.Add("You can’t help but feel a little bad for the room, but you see your chance to drive home your point and get out. <i>\"No way. No how. I think something bit me while I was sitting here, you flee-ridden dump.\"</i>", parse);
+				Text.Add("You can’t help but feel a little bad for the room, but you see your chance to drive home your point and get out. <i>\"No way. No how. I think something bit me while I was sitting here, you flea-ridden dump.\"</i>", parse);
 				Text.NL();
 				Text.Add("<i>\"J-just go. You’re so mean,\"</i> the voice is sounding more feminine and on the verge of tears. The door swings open wide, and as you rise to leave you see the table edging towards you, as if to push you out.", parse);
 				Text.NL();
