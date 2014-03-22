@@ -1378,11 +1378,10 @@ Scenes.Krawitz.Bathhouse = function() {
 							});
 						}
 						else {
-							Text.Add("", parse);
+							Text.Add("From the sound of it, it seems like the young noblewomen will get exactly what they crave, as you hear a group of carousing servants heading towards the bathhouse. It sure took them a while to find their way across the yard… though this wine is potent stuff, perhaps they had to make a few stops on the way.", parse);
 							Text.NL();
-							Text.Add("", parse);
 							
-							Text.Flush();
+							Scenes.Krawitz.OrgyEntrypoint();
 						}
 					}, enabled : true,
 					tooltip : ""
