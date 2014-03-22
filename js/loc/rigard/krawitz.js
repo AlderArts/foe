@@ -36,6 +36,8 @@ Scenes.Krawitz.SetupStats = function() {
 	Scenes.Krawitz.stat.TFItem            = false;
 	Scenes.Krawitz.stat.TFdKrawitz        = false;
 	Scenes.Krawitz.stat.BathhouseVisit    = false;
+	Scenes.Krawitz.stat.BathhouseWine     = false;
+	Scenes.Krawitz.stat.BathhouseSpiked   = false;
 	Scenes.Krawitz.stat.SexedGirls        = false;
 	Scenes.Krawitz.stat.ServantWine       = false;
 	Scenes.Krawitz.stat.ServantSpikedWine = false;
@@ -1227,7 +1229,8 @@ Scenes.Krawitz.Bathhouse = function() {
 	party.location = world.loc.Rigard.Krawitz.bathhouse;
 	
 	Text.Clear();
-	if(Scenes.Krawitz.stat.BathhouseVisit) {
+	if(!Scenes.Krawitz.stat.BathhouseVisit) {
+		Scenes.Krawitz.stat.BathhouseVisit = true;
 		Text.Add("Lured in by the sounds of carousing, you sneak closer to the open air bathhouse, peeking through the pillars to the lit pool beyond. Two young women are having some sort of private party, involving a lot of tickling, groping and giggling, not to mention copious amounts of wine. The water is clear, and you see that both of the submerged beauties are completely nude. Licking your lips, you draw closer, wanting to get a closer look at the noble ladies.", parse);
 		Text.NL();
 		Text.Add("You are betrayed by the fickle winds, a sudden gust causing the hanging oil lamps to sway, stripping you of the cover of shadows. ", parse);
@@ -1260,18 +1263,101 @@ Scenes.Krawitz.Bathhouse = function() {
 			Scenes.Krawitz.Aftermath();
 		}
 	}
+	else if(Scenes.Krawitz.stat.Orgy) {
+		Text.Add("The big orgy is still going on. As much as you’d like to join in, the wiser move is to leave now and explore the mansion while you still have the chance.", parse);
+		Text.Flush();
+		Gui.NextPrompt(function() {
+			MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+		});
+	}
+	else if(Scenes.Krawitz.stat.BathhouseSpiked) {
+		Text.Add("The ladies are still recovering, reclining in the pool cuddling up next to each other, though the effects of the drug you gave them still have a firm hold.", parse);
+		Text.Flush();
+		if(Scenes.Krawitz.stat.ServantOrgySetup) {
+			Text.Add(" They are about to receive all the company they can handle, as you hear the sounds of the drunken servants closing in on the bathhouse. Things are about to become very interesting. You settle down, deciding to enjoy the show for a bit.", parse);
+			Text.NL();
+			
+			Scenes.Krawitz.OrgyEntrypoint();
+		}
+		Gui.NextPrompt(function() {
+			MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+		});
+	}
+	else if(Scenes.Krawitz.stat.BathhouseWine) {
+		Text.Add("The ladies seems deeply engrossed in each other, cuddling in the big pool. You don’t think they’d appreciate the intrusion.", parse);
+		Text.Flush();
+		Gui.NextPrompt(function() {
+			MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+		});
+	}
+	else {
+		Text.Add("The ladies are cuddled close together in the big pool, and look a bit irritated as you return. Seems like you interrupted something.", parse);
+		Text.Flush();
+		
+		//[Leave][Wine]
+		var options = new Array();
+		options.push({ nameStr : "Leave",
+			func : function() {
+				Text.Clear();
+				Text.Add("You quickly retreat, catching lady Krawitz’ command to “fetch that wine, pronto!”", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+				});
+			}, enabled : true,
+			tooltip : "Leave the two alone for now."
+		});
+		options.push({ nameStr : "Wine",
+			func : function() {
+				Text.Clear();
+				Scenes.Krawitz.BathhouseWine();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Flush();
+			}, enabled : true,
+			tooltip : "Serve them wine."
+		});
+		options.push({ nameStr : "Spiked Wine",
+			func : function() {
+				Text.Clear();
+				Scenes.Krawitz.BathhouseWine();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Flush();
+			}, enabled : true,
+			tooltip : "Serve them the wine, but add some of the aphrodisiac you found."
+		});
+		Gui.SetButtonsFromList(options);
+	}
 	
-	// TODO
+	
+	/*
+	 * 
+	 */
+}
+
+Scenes.Krawitz.BathhouseWine = function() {
+	var parse = {
+	};
+	
+	Text.Add("Krawitz’ wife coos in delight as you show her the wine you brought, hurrying quickly to the side of the basin, not even attempting to hide her nudity as she rises to meet you. The younger woman remains were she is, eyes drowsy with drink, following the movements of her companion’s jiggling ass attentively.", parse);
+	Text.NL();
+	Text.Add("You get a good look at the woman as she pours wine into two large cups, dripping water from her well-shaped body. She looks to be in her early twenties, with auburn hair cascading in pretty curls, framing her beautiful face. You feel a bit sorry for her, having to be holed up with someone like Krawitz. A political marriage, perhaps? She leans down as she hands a cup to her younger companion, curving her back and leaving nothing to your imagination.", parse);
+	Text.NL();
+	Text.Add("<i>”Marlene, you are indecent!”</i> the daughter exclaims, giggling. She takes a sip of the rich wine and sighs in pleasure. Slightly younger than the wife, she is also quite the beauty, with straight raven hair reaching down her back. Both the women have soft C-cup breasts, crowned by pert nipples.", parse);
+	Text.NL();
+	Text.Add("<i>”Oh, I’ll show you indecent, Gina,”</i> the older woman purrs, downing a cup of wine in a single draft before pouring herself a new one. Swaying slightly, she glides into the water, curling up next to the black-haired girl. She put an arm around the younger woman, still carefully holding the wine cup in her hand, while her other arm dips beneath the waters, reaching between her companion’s legs.", parse);
+	Text.NL();
+	Text.Add("<i>”’L-Lene, we have… ah… company,”</i> Gina gasps, noting your presence.", parse);
+}
+
+Scenes.Krawitz.OrgyEntrypoint = function() {
+	var parse = {
+		
+	};
 	
 	Text.Add("", parse);
 	Text.NL();
-	Text.Add("", parse);
-	Text.NL();
-	Text.Add("", parse);
-	Text.NL();
-	Text.Add("", parse);
-	Text.NL();
-	Text.Add("", parse);
 	Text.Flush();
 }
 
