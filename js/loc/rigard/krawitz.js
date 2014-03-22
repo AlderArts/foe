@@ -30,18 +30,22 @@ Scenes.Krawitz.SetupStats = function() {
 	Scenes.Krawitz.stat.HasServantClothes = Scenes.Krawitz.stat.IsServant;
 	Scenes.Krawitz.stat.HasWine           = false;
 	Scenes.Krawitz.stat.SpikedWine        = false;
-	Scenes.Krawitz.stat.ServantFood       = false;
+	Scenes.Krawitz.stat.ServantFood       = 0;
 	Scenes.Krawitz.stat.KrawitzFood       = false;
 	Scenes.Krawitz.stat.ChestLocKnown     = false;
 	Scenes.Krawitz.stat.TFItem            = false;
 	Scenes.Krawitz.stat.TFdKrawitz        = false;
+	Scenes.Krawitz.stat.BathhouseVisit    = false;
 	Scenes.Krawitz.stat.SexedGirls        = false;
-	Scenes.Krawitz.stat.OrgySetup         = false;
+	Scenes.Krawitz.stat.ServantWine       = false;
+	Scenes.Krawitz.stat.ServantSpikedWine = false;
+	Scenes.Krawitz.stat.ServantOrgySetup  = false;
 	Scenes.Krawitz.stat.Orgy              = false;
 	Scenes.Krawitz.stat.HasSword          = false;
 	Scenes.Krawitz.stat.HasBinder         = false;
 	
 	Scenes.Krawitz.stat.Suspicion         = 0;
+	Scenes.Krawitz.stat.AlarmRaised       = false;
 	Scenes.Krawitz.stat.guardRot          = 0;
 	Scenes.Krawitz.stat.servantRot        = 0;
 }
@@ -122,37 +126,6 @@ world.loc.Rigard.Krawitz.street.links.push(new Link(
 ));
 
 //
-// Servants
-//
-world.loc.Rigard.Krawitz.servants.description = function() {
-	Text.AddOutput("You are in the servants' quarters of Krawitz's estate.<br/>");
-}
-
-world.loc.Rigard.Krawitz.servants.links.push(new Link(
-	"Leave", true, true,
-	function() {
-		Text.AddOutput("Leave the mansion?<br/>");
-	},
-	function() {
-		MoveToLocation(world.loc.Rigard.Krawitz.street);
-	}
-));
-world.loc.Rigard.Krawitz.servants.links.push(new Link(
-	"Grounds", true, true,
-	function() {
-		Text.AddOutput("Enter the main grounds?<br/>");
-	},
-	function() {
-		MoveToLocation(world.loc.Rigard.Krawitz.grounds);
-	}
-));
-
-world.loc.Rigard.Krawitz.servants.endDescription = function() {
-	Text.AddOutput("What you do?<br/>");
-}
-
-
-//
 // Grounds
 //
 world.loc.Rigard.Krawitz.grounds.description = function() {
@@ -162,18 +135,175 @@ world.loc.Rigard.Krawitz.grounds.description = function() {
 }
 
 world.loc.Rigard.Krawitz.grounds.links.push(new Link(
-	"Leave", true, true,
-	null,
+	"Street", true, true,
 	function() {
-		//TODO Warn about leaving
-		MoveToLocation(world.loc.Rigard.Krawitz.street);
+		Text.AddOutput("If you feel you’ve caused enough trouble for one night, you could leave over the fence. You won’t be able to return again, as people will be a lot more suspicious of newcomers now.");
+	},
+	function() {
+		Text.Clear();
+		Text.Add("You’ve managed to avoid detection so far, but you can feel your luck growing thin. Perhaps it is time to call it quits. Eyeing your surroundings carefully, you confirm that no guards are around at the moment. Silently, you slip over the fence, back into the streets. You shed your servants’ garb, hiding it in an alley.");
+		Text.NL();
+		Text.Add("While it might take a while before the mansion discovers your activities, you decide it’s better to make yourself scarce, and quickly leave the area. Returning at a later time will likely be impossible.");
+		Text.Flush();
+		
+		Scenes.Krawitz.Aftermath();
 	}
 ));
+
 world.loc.Rigard.Krawitz.grounds.links.push(new Link(
 	"Servants'", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Rigard.Krawitz.servants);
+		var parse = {
+			
+		};
+		party.location = world.loc.Rigard.Krawitz.servants;
+		
+		var ServantPrompt = function() {
+			Text.Clear();
+			//[Grounds]
+			var options = new Array();
+			options.push({ nameStr : "Grounds",
+				func : function() {
+					MoveToLocation(world.loc.Rigard.Krawitz.grounds);
+				}, enabled : true,
+				tooltip : "Move back to the grounds"
+			});
+			
+			if(Scenes.Krawitz.stat.ServantOrgySetup) {
+				Text.Add("The servants’ quarters are just about deserted, with everyone off somewhere to revel. Perhaps you should head over to the bathhouse to see what they are doing? Lewd noises from some of the bunks in the back indicate that at least some of the staff are still present, though quite busy at the moment.", parse);
+			}
+			else if(Scenes.Krawitz.stat.ServantSpikedWine) {
+				Text.Add("The servants’ quarters are a mess of sexual sounds and smells, as the drug you fed them runs its course. At this point, you doubt you could even get them to understand you until they’ve cum themselves dry and had a few cold showers.", parse);
+			}
+			else {
+				if(Scenes.Krawitz.stat.ServantWine)
+					Text.Add("The servants wave at you amiably, lulled by the good wine you gave them. Most of them seem to have gone to sleep it off.", parse);
+				else
+					Text.Add("Not much is going on in the servants’ quarters. The decor is rather sparse, and from what you can gather, men and women share the same rooms. Some people have tucked in for the night, sleeping restlessly on stacked bunk beds, while a few sits around a wooden table, playing cards.", parse);
+				Text.NL();
+				if(Scenes.Krawitz.stat.IsServant)
+					Text.Add("There shouldn’t be any problems with you visiting. You have a legitimate reason for being here, and there shouldn’t be any suspicion raised so long as you don’t do anything weird.", parse);
+				else
+					Text.Add("While your clothes are probably enough to fool people at a distance, wandering around the servants’ quarters is likely to get you caught quickly. Better be very careful.", parse);
+				
+				if(Scenes.Krawitz.stat.ServantFood == 1) {
+					options.push({ nameStr : "Food",
+						func : function() {
+							Text.Clear();
+							Text.Add("<i>”Many thanks, [brotherSister]!”</i> one of the resting servants calls out. He and his friends gather around, digging into the food. You feel as if a bit of the suspicion surrounding you has dissipated, and that the servants act slightly more trusting towards you.", parse);
+							Scenes.Krawitz.stat.ServantFood = 2;
+							Scenes.Krawitz.AddSuspicion(-25, true);
+							Text.Flush();
+							
+							Gui.NextPrompt(ServantPrompt);
+						}, enabled : true,
+						tooltip : "Deliver the servants' food."
+					});
+				}
+				if(Scenes.Krawitz.stat.HasWine && !Scenes.Krawitz.stat.ServantWine) {
+					options.push({ nameStr : "Wine",
+						func : function() {
+							Text.Clear();
+							Text.Add("<i>”Hey, what do you have there?”</i> A half-dressed servant asks you, pointing to the bottle of wine sticking out of your pack. You pull it out and show it to him, and he almost reverently cradles the bottle.", parse);
+							Text.NL();
+							Text.Add("<i>”Where did you get this?”</i> he asks, looking at you suspiciously. <i>”This is from the master’s stock, and a hell of a good one too!”</i> Thinking on your feet, you explain that the bottle is a gift to all the servants, from the ladies of the house.", parse);
+							Text.NL();
+							Text.Add("<i>”Really now.”</i> He still looks a bit suspicious, but shrugs it off when some of the others gather around, too pleased at the treat to bother about its origins. It seems you are in the clear, as the servants begin a celebration, calling a few sleepy maids from their beds to join the fun. There isn’t much to go around, but everyone gets at least a cup of the rich red wine.", parse);
+							Text.NL();
+							Text.Add("<i>”Such a kingly gift,”</i> one of them sighs. <i>”Perhaps this place isn’t so bad after all.”</i> The servants thank you, slightly drowsy after the potent wine.", parse);
+							
+							Scenes.Krawitz.AddSuspicion(-25, true);
+							Scenes.Krawitz.stat.ServantWine = true;
+							Text.Flush();
+							
+							Gui.NextPrompt(ServantPrompt);
+						}, enabled : true,
+						tooltip : "Offer the servants some wine."
+					});
+				}
+				if(Scenes.Krawitz.stat.SpikedWine && !Scenes.Krawitz.stat.ServantSpikedWine) {
+					options.push({ nameStr : "Spiked Wine",
+						func : function() {
+							Text.Clear();
+							
+							Scenes.Krawitz.stat.ServantWine = true;
+							
+							if(Scenes.Krawitz.stat.ServantWine) {
+								Text.Add("<i>”Ah, the generous lord has seen fit to offer us even more wine? I’m not complaining!”</i> The servants give a great whooping cheer as you pass around the bottle of spiked wine.", parse);
+							}
+							else {
+								Text.Add("<i>”Hey, what do you have there?”</i> A half-dressed servant asks you, pointing to the bottle of wine sticking out of your pack. You pull it out and show it to him, and he almost reverently cradles the bottle.", parse);
+								Text.NL();
+								Text.Add("<i>”Where did you get this?”</i> he asks, looking at you suspiciously. <i>”This is from the master’s stock, and a hell of a good one too!”</i> Thinking on your feet, you explain that the bottle is a gift to all the servants, from the ladies of the house.", parse);
+								Text.NL();
+								Text.Add("<i>”Really now.”</i> He still looks a bit suspicious, but shrugs it off when some of the others gather around, too pleased at the treat to bother about its origins. It seems you are in the clear, as the servants begin a celebration, calling a few sleepy maids from their beds to join the fun. There isn’t much to go around, but everyone gets at least a cup of the rich red wine.", parse);
+								Scenes.Krawitz.AddSuspicion(-25, true);
+							}
+							Text.NL();
+							Text.Add("<i>”Oh, this packs quite a punch!”</i> one of the servants exclaims, eyes blinking blearily as he tries to stay on his feet. After swaying unsteadily for a few moments, he topples over on his back, confused. <i>”Must ‘ave tripped on something,”</i> he mutters drunkenly. Splayed out on his back as he is, the tent in his pants is clearly visible to everyone in the room.", parse);
+							Text.NL();
+							Text.Add("You notice that everyone around you is breathing heavily as the potent drug you gave them begins to set in. In a few moments, one of the maids has thrown herself over the fallen servant, desperately clawing at his pants. She quickly frees his stiff member, giving it a long lick before she starts sucking on it, her hands busy between her legs. The wordless impromptu orgy quickly spreads around you, as the inebriated staff try to sate their drug-induced arousal.", parse);
+							Text.NL();
+							Text.Add("You could leave them like this, or...", parse);
+							Text.Flush();
+							
+							Scenes.Krawitz.stat.ServantSpikedWine = true;
+							
+							//[Leave][Bathhouse]
+							var options = new Array();
+							options.push({ nameStr : "Leave",
+								func : function() {
+									Text.Clear();
+									Text.Add("Satisfied that you won’t have to run into any more of the servants, you quickly leave the servants quarters before you are tempted to join. You have more important business to tend to here tonight.", parse);
+									Text.Flush();
+									
+									Gui.NextPrompt(function() {
+										MoveToLocation(world.loc.Rigard.Krawitz.grounds);
+									});
+								}, enabled : true,
+								tooltip : "Leave them to it, they likely won’t bother you for the rest of the night."
+							});
+							options.push({ nameStr : "Bathhouse",
+								func : function() {
+									Text.Clear();
+									Text.Add("You slyly suggest that they ought to thank the kind ladies who provided such a fine gift for them. Some of them are too far gone in their lust to hear you, but you manage to gather a substantial group to listen to your plan. They nod eagerly as you tell them of the ladies partying in the bathhouse, their clouded minds trying to process your words.", parse);
+									Text.NL();
+									Text.Add("They set off into the garden, swaying slightly and singing lewd tunes. In their state, it will probably take them a substantial time to even <i>find</i> the bathhouse, but it will be pretty interesting when they do. Among their number you see both men and women, and hulking above them all, two huge equine handymen packing rather significant erections.", parse);
+									Text.NL();
+									Text.Add("This is turning out pretty well… now, where should you go to wreak havoc next?", parse);
+									Text.Flush();
+									
+									Scenes.Krawitz.stat.ServantOrgySetup = true;
+									
+									Gui.NextPrompt(function() {
+										MoveToLocation(world.loc.Rigard.Krawitz.grounds);
+									});
+								}, enabled : true,
+								tooltip : "Why not direct the mob somewhere else?"
+							});
+							Gui.SetButtonsFromList(options);
+						}, enabled : true,
+						tooltip : "Offer the servants some wine spiked with aphrodisiac."
+					});
+				}
+			}
+			
+			Text.Flush();
+			
+			Gui.SetButtonsFromList(options);
+			
+			//[Street]
+			Input.buttons[11].Setup("Street", function() {
+					Text.Clear();
+					Text.Add("You’ve managed to avoid discovery so far, but you can feel your luck growing thin. Perhaps it’s time to call it quits. You methodically shed your servants’ garb, returning it to the storeroom before you step out the back door into the street, just another wanderer in the night.", parse);
+					Text.NL();
+					Text.Add("While it might take a while before the mansion discovers your activities, you decide it’s better to make yourself scarce, and quickly leave the area. Returning at a later time will likely be impossible.", parse);
+					Text.Flush();
+					
+					Scenes.Krawitz.Aftermath();
+			}, true, null, "You’ve caused enough trouble for one night, time to call it quits. You won’t be able to return again, as people will be a lot more suspicious of newcomers now.");
+		}
 	}
 ));
 world.loc.Rigard.Krawitz.grounds.links.push(new Link(
@@ -789,10 +919,19 @@ Scenes.Krawitz.FoundOut = function(entity, num, gender) {
 Scenes.Krawitz.AddSuspicion = function(num, surpressNext) {
 	Scenes.Krawitz.stat.Suspicion += num;
 	
+	if(Scenes.Krawitz.stat.Suspicion > 100) Scenes.Krawitz.stat.Suspicion = 100;
+	if(Scenes.Krawitz.stat.Suspicion < 0) Scenes.Krawitz.stat.Suspicion = 0;
+	
 	if(DEBUG) {
 		Text.NL();
 		Text.Add("<b>Suspicion + " + num + ": " + Scenes.Krawitz.stat.Suspicion + "/100</b>");
 		Text.Flush();
+	}
+	
+	if(Scenes.Krawitz.stat.Suspicion >= 100) {
+		Scenes.Krawitz.stat.AlarmRaised = true;
+		
+		//TODO
 	}
 	
 	if(!surpressNext)
@@ -1078,6 +1217,76 @@ Scenes.Krawitz.StealingClothes = function() {
 		tooltip : "There is too much risk of getting caught."
 	});
 	Gui.SetButtonsFromList(options);
+}
+
+Scenes.Krawitz.Bathhouse = function() {
+	var parse = {
+		
+	};
+	
+	party.location = world.loc.Rigard.Krawitz.bathhouse;
+	
+	Text.Clear();
+	if(Scenes.Krawitz.stat.BathhouseVisit) {
+		Text.Add("Lured in by the sounds of carousing, you sneak closer to the open air bathhouse, peeking through the pillars to the lit pool beyond. Two young women are having some sort of private party, involving a lot of tickling, groping and giggling, not to mention copious amounts of wine. The water is clear, and you see that both of the submerged beauties are completely nude. Licking your lips, you draw closer, wanting to get a closer look at the noble ladies.", parse);
+		Text.NL();
+		Text.Add("You are betrayed by the fickle winds, a sudden gust causing the hanging oil lamps to sway, stripping you of the cover of shadows. ", parse);
+		if(Scenes.Krawitz.stat.HasServantClothes) {
+			Text.Add("<i>”Don’t tarry about in the shadows,”</i> the older of the women calls out. Her voice carries authority, even if it’s slightly slurred in her drunken state. Though she looks very young, you would guess this woman is lord Krawitz’ wife, which would make the other one his daughter. The two seems to be almost of an age.", parse);
+			Text.NL();
+			Text.Add("Slightly nervous at getting caught, you step forward, trying to maintain the appearance of a humble servant. The ladies, however, seem too far gone to care about your voyeurism, or their own compromising state.", parse);
+			Text.NL();
+			Text.Add("<i>”Servant, bring us wine!”</i> she cries out as she stands up, revealing herself in her full glory and drawing peals of laughter from her younger companion. <i>”Haven’t you had enough, ‘Lene?”</i> she murmurs, caressing the older womans’ hip familiarly.", parse);
+			Text.NL();
+			Text.Add("<i>”Nonsense, Ginny!”</i> the woman called Lene - Helen? Marlene? - scoffs, swaying slightly, her breasts bouncing hypnotically. She definitely has had a few too many, and a misstep causes her to topple over her companion, causing loud splashes, gasps and peals of laughter as the two women disentangle themselves. To you, it seems the last part involves a lot of unnecessary groping from both parties. Apparently, they have a quite friendly relationship.", parse);
+			Text.NL();
+			Text.Add("<i>”Wine!”</i> they chorus, waving you away. You probably won’t get much more from them until you bring them something to drink. Shaking your head and blushing slightly, you leave them to their carousing.", parse);
+			Text.Flush();
+			
+			player.AddLustFraction(0.2);
+			
+			Gui.NextPrompt(function () {
+				MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 15});
+			});
+		}
+		else {
+			Text.Add("The younger of the noblewomen looks at you blearily, whispering something to her companion. The older woman, presumably the lady of the house, gasps when she sees you there wearing street clothes.", parse);
+			Text.NL();
+			Text.Add("You dash away over the grounds as she cries out in alarm, calling guards to the bathhouse. Curse your thoughtlessness! You manage to scramble over the fence, stinging yourself on the sharp spikes along its top. Limping slightly, you scurry off into the dark, leaving the roused manor behind you.", parse);
+			Text.NL();
+			Text.Add("Drunk though they may have been, the ladies of the house have probably warned the guards to be on the look-out for you now. It's unlikely you'll have the opportunity to go back any time soon.", parse);
+			Text.Flush();
+			
+			Scenes.Krawitz.Aftermath();
+		}
+	}
+	
+	// TODO
+	
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.Flush();
+}
+
+// TODO
+Scenes.Krawitz.Aftermath = function() {
+	var parse = {
+		
+	};
+	
+	party.location = world.loc.Rigard.Krawitz.street;
+	
+	Text.Clear();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
 }
 
 Scenes.Krawitz.Scouting = function() {
