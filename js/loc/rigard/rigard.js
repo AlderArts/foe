@@ -91,8 +91,9 @@ function Rigard(storage) {
 	this.RotOrvinInnTalk = 0;
 	
 	this.Krawitz = {};
-    this.Krawitz["Q"] = 0; // Krawitz quest status
+    this.Krawitz["Q"]    = 0; // Krawitz quest status
     this.Krawitz["Work"] = 0; // 
+    this.KrawitzWorkDay  = null; // Time
 	this.Krawitz["Duel"] = 0; // 0 = no, 1 = superwin, 2 = win, 3 = loss
 	
 	if(storage) this.FromStorage(storage);
@@ -105,12 +106,18 @@ Rigard.prototype.ToStorage = function() {
     storage.Krawitz = this.Krawitz;
 	storage.LB      = this.LB;
 	storage.LBroom  = this.LBroomTimer.ToStorage();
+	if(this.KrawitzWorkDay)
+		storage.KWork   = this.KrawitzWorkDay.ToStorage();
 	
 	return storage;
 }
 
 Rigard.prototype.FromStorage = function(storage) {
 	this.LBroomTimer.FromStorage(storage.LBroom);
+	if(storage.KWork) {
+		this.KrawitzWorkDay = new Time();
+		this.KrawitzWorkDay.FromStorage(storage.KWork);
+	}
 	// Load flags
 	for(var flag in storage.flags)
 		this.flags[flag] = parseInt(storage.flags[flag]);

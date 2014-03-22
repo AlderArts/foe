@@ -92,6 +92,9 @@ world.loc.Rigard.Krawitz.street.description = function() {
 	Text.AddOutput("You are in front of Krawitz's estate.<br/>");
 }
 
+world.SaveSpots["Krawitz"] = world.loc.Rigard.Krawitz.street;
+world.loc.Rigard.Krawitz.street.SaveSpot = "Krawitz";
+
 world.loc.Rigard.Krawitz.street.links.push(new Link(
 	"Plaza", true, true,
 	function() {
@@ -106,9 +109,7 @@ world.loc.Rigard.Krawitz.street.links.push(new Link(
 	function() {
 		Text.AddOutput("Enter the servants' quarters through the back entrance?<br/>");
 	},
-	function() {
-		MoveToLocation(world.loc.Rigard.Krawitz.servants);
-	}
+	Scenes.Krawitz.WorkWork
 ));
 world.loc.Rigard.Krawitz.street.links.push(new Link(
 	"Grounds", true, false,
@@ -159,41 +160,36 @@ world.loc.Rigard.Krawitz.servants.endDescription = function() {
 // Grounds
 //
 world.loc.Rigard.Krawitz.grounds.description = function() {
-	Text.AddOutput("You are in the main grounds of Krawitz's estate.<br/>");
+	Text.AddOutput("There is a lush garden spreading out before you, providing many hiding spots, should you need to avoid patrolling guardsmen or servants. Three buildings line the side of the grounds; if your guesses are correct, the one to your left houses the servants and the one on the right is some sort of bathhouse. Sounds of decidedly feminine laughter echo between the stone pillars. Clearly someone has a party going on.");
+	Text.Newline();
+	Text.AddOutput("At the back of the estate stands the main building, a two storey mansion.");
 }
 
 world.loc.Rigard.Krawitz.grounds.links.push(new Link(
 	"Leave", true, true,
+	null,
 	function() {
-		Text.AddOutput("Leave the mansion?<br/>");
-	},
-	function() {
+		//TODO Warn about leaving
 		MoveToLocation(world.loc.Rigard.Krawitz.street);
 	}
 ));
 world.loc.Rigard.Krawitz.grounds.links.push(new Link(
 	"Servants'", true, true,
-	function() {
-		Text.AddOutput("Go to the servants' quarters?<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Krawitz.servants);
 	}
 ));
 world.loc.Rigard.Krawitz.grounds.links.push(new Link(
 	"Mansion", true, true,
-	function() {
-		Text.AddOutput("Enter the main building?<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Krawitz.Mansion.hall);
 	}
 ));
 world.loc.Rigard.Krawitz.grounds.links.push(new Link(
 	"Bathhouse", true, true,
-	function() {
-		Text.AddOutput("Go to the bathhouse?<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Krawitz.bathhouse);
 	}
@@ -426,6 +422,179 @@ Scenes.Krawitz.Scouting = function() {
 		PrintDefaultOptions(true);
 }
 
+Scenes.Krawitz.WorkWork = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	
+	if(world.time.hour < 6) {
+		Text.Add("There doesn’t seem to be anyone at the back door at the moment, and it is locked shut.", parse);
+		Text.Flush();
+		Gui.NextPrompt();
+	}
+	else if(rigard.KrawitzWorkDay.Leq(world.time)) { // Late
+		Text.Add("<i>”And what do you think you are doing here?”</i> the old manservant greets you gruffly. <i>”I don’t have any use for people who can’t keep track of time.”</i> Before you can mouth an excuse, he curtly dismisses you, locking the door behind him as he returns inside the estate.", parse);
+		Text.NL();
+		Text.Add("<b>It seems you lost your chance on this one. You should try to get in some other way.</b>", parse);
+		Text.Flush();
+		
+		rigard.Krawitz["Work"] = 2;
+		
+		Gui.NextPrompt();
+	}
+	else if(world.time.hour < 20) {
+		Text.Add("It isn’t time to go to work yet. You decide to return later.", parse);
+		Text.NL();
+		Text.Add("<b>The old man said you should show up at the back entrance between 20 and 24 tonight.</b>", parse);
+		Text.Flush();
+		Gui.NextPrompt();
+	}
+	else {
+		Text.Add("You get a feeling you’ll only get one shot at this, so you’d best be prepared.", parse);
+		Text.NL();
+		Text.Add("<b>Do you want to save before entering?</b>", parse);
+		Text.Flush();
+		
+		//[Yes][No][Wait]
+		var options = new Array();
+		options.push({ nameStr : "Yes",
+			func : function() {
+				LimitedDataPrompt(Scenes.Krawitz.EnteringTheWork);
+			}, enabled : true, tooltip : ""
+		});
+		options.push({ nameStr : "No",
+			func : Scenes.Krawitz.EnteringTheWork, enabled : true, tooltip : ""
+		});
+		options.push({ nameStr : "Wait",
+			func : function() {
+				Text.NL();
+				Text.Add("Deciding that you still need to prepare, you hold off on entering the estate.", parse);
+				Text.Flush();
+				Gui.NextPrompt();
+			}, enabled : true,
+			tooltip : "You are not quite ready to enter the estate yet."
+		});
+		Gui.SetButtonsFromList(options);
+	}
+}
+
+Scenes.Krawitz.EnteringTheWork = function() {
+	var parse = {
+		name : function() { return party.Get(1).name; }
+	};
+	
+	Text.Clear();
+	if(party.NumTotal() == 2) {
+		Text.Add("Figuring that one person can move around easier than two, you ask [name] to wait for you outside the estate.", parse);
+		Text.NL();
+	}
+	else if(party.NumTotal() > 2) {
+		Text.Add("Figuring that one person can move around easier than a group, you ask your companions to wait for you outside the estate.", parse);
+		Text.NL();
+	}
+	Text.Add("The old man from before shuffles over and unlocks the servants’ entrance on your third knock. He impatiently waves you inside, closing the door behind you.", parse);
+	Text.NL();
+	Text.Add("<i>”Now then, here is a small advance payment,”</i> he says, handing you a small bag of coins. <i>”Go to the back room and find yourself some livery, then return to me and I shall explain your duties for the night.”</i> You are directed to a small storeroom near the door leading to the grounds. Inside, you find a number of blue tunics and dresses, just like the ones you saw the servants wearing earlier.", parse);
+	Text.NL();
+	Text.Add("You take your time finding one that fits, glad you’ll be able to move around comfortably. Once properly dressed, you return to the old man. He briefly goes through your basic duties, stressing a few key points.", parse);
+	Text.NL();
+	Text.Add("<i>”Understand? Once you are done tending the grounds, go to the kitchens and fetch food for the night staff. The ladies of the house are currently in the bathhouse, so stay clear of that. At this time of the night, master Krawitz is probably in his study, you are not to disturb him under any circumstances.”</i>", parse);
+	Text.NL();
+	Text.Add("You nod amiably. This is going to be almost too easy...", parse);
+	Text.NL();
+	Text.Add("<b>You received 50 coins!</b>", parse);
+	Text.Flush();
+	
+	Scenes.Krawitz.SetupStats();
+	
+	party.coin += 50;
+	
+	MoveToLocation(world.loc.Rigard.Krawitz.servants, {minute: 30});
+}
+
+Scenes.Krawitz.ApproachGates = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	if(world.time.hour >= 4 && world.time.hour < 20) {
+		Text.Add("The guards at the gate don’t look too friendly. You’d best wait until the cover of night if you want to covertly enter the estate.", parse);
+		Text.Flush();
+		Gui.NextPrompt();
+	}
+	else {
+		Text.Add("The gate in the fence surrounding the estate is lit by a torch, and you see a bored guard posted outside. Approaching that way seems out of the picture. You note, however, that the light of the torch doesn’t reach very far. You should be able to slip over the fence without anyone noticing.", parse);
+		Text.NL();
+		Text.Add("You get a feeling you’ll only get one shot at this, so you’d best be prepared.", parse);
+		Text.NL();
+		Text.Add("<b>Do you want to save before entering?</b>", parse);
+		
+		Text.Flush();
+		
+		//[Yes][No][Wait]
+		var options = new Array();
+		options.push({ nameStr : "Yes",
+			func : function() {
+				LimitedDataPrompt(Scenes.Krawitz.SneakingIn);
+			}, enabled : true, tooltip : ""
+		});
+		options.push({ nameStr : "No",
+			func : Scenes.Krawitz.SneakingIn, enabled : true, tooltip : ""
+		});
+		options.push({ nameStr : "Wait",
+			func : function() {
+				Text.NL();
+				Text.Add("Deciding that you still need to prepare, you hold off on entering the estate.", parse);
+				Text.Flush();
+				Gui.NextPrompt();
+			}, enabled : true,
+			tooltip : "You are not quite ready to enter the estate yet."
+		});
+		Gui.SetButtonsFromList(options);
+	}
+}
+
+Scenes.Krawitz.SneakingIn = function() {
+	var parse = {
+		name : function() { return party.Get(1).name; }
+	};
+	
+	Text.Clear();
+	if(party.NumTotal() == 2) {
+		Text.Add("Figuring that one person can move around easier than two, you ask [name] to wait for you outside the estate.", parse);
+		Text.NL();
+	}
+	else if(party.NumTotal() > 2) {
+		Text.Add("Figuring that one person can move around easier than a group, you ask your companions to wait for you outside the estate.", parse);
+		Text.NL();
+	}
+	Text.Add("You take a breath to prepare yourself. Confirming once again that the guard isn’t looking, you quietly approach the metal fence. This shouldn’t be much of a problem.", parse);
+	Text.NL();
+	
+	Scenes.Krawitz.SetupStats();
+	
+	// Skillcheck
+	if(player.Dex() + Math.random() * 20 > 30) {
+		Text.Add("You scale the fence, taking care to avoid the sharp spikes crowning each steel rod, and vault over into the grounds. You quickly hide behind some bushes, and glance around.", parse);
+		Text.NL();
+		Text.Add("So far so good: seems like no one noticed your entry.", parse);
+	}
+	else {
+		Text.Add("The way up is no problem, but as you vault over the fence, something catches on one of the sharp tips crowning the metal rods. Cursing under your breath, you wobble slightly before completely losing your balance and crashing down into a bush in the garden with a loud noise.", parse);
+		Text.NL();
+		Text.Add("You quickly scamper off, finding yourself a place to hide before the guard arrives. He takes his sweet time searching, but you manage to avoid him without much trouble.", parse);
+		Text.NL();
+		Scenes.Krawitz.GuardLost(Gender.male);
+		
+		Scenes.Krawitz.AddSuspicion(30, true);
+	}
+	
+	Text.Flush();
+	MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+}
 
 Scenes.Krawitz.GuardLost = function(gender) {
 	var parse = {
@@ -548,9 +717,9 @@ Scenes.Krawitz.FoundOut = function(entity, num, gender) {
 			Text.NL();
 			
 			if(entity == Scenes.Krawitz.EncType.Guard)
-				Scenes.Krawitz.GuardLost();
+				Scenes.Krawitz.GuardLost(gender);
 			else
-				Scenes.Krawitz.ServantLost();
+				Scenes.Krawitz.ServantLost(gender);
 			Text.Flush();
 			
 			Scenes.Krawitz.AddSuspicion(Scenes.Krawitz.EntitySuspicion(entity));
@@ -564,9 +733,9 @@ Scenes.Krawitz.FoundOut = function(entity, num, gender) {
 			Text.NL();
 			
 			if(entity == Scenes.Krawitz.EncType.Guard)
-				Scenes.Krawitz.GuardConvinced();
+				Scenes.Krawitz.GuardConvinced(gender);
 			else
-				Scenes.Krawitz.ServantConvinced();
+				Scenes.Krawitz.ServantConvinced(gender);
 			Text.Flush();
 			
 			Scenes.Krawitz.AddSuspicion(Scenes.Krawitz.EntitySuspicion(entity));
@@ -617,7 +786,7 @@ Scenes.Krawitz.FoundOut = function(entity, num, gender) {
 }
 
 // TODO: Trigger found out
-Scenes.Krawitz.AddSuspicion = function(num) {
+Scenes.Krawitz.AddSuspicion = function(num, surpressNext) {
 	Scenes.Krawitz.stat.Suspicion += num;
 	
 	if(DEBUG) {
@@ -626,7 +795,8 @@ Scenes.Krawitz.AddSuspicion = function(num) {
 		Text.Flush();
 	}
 	
-	Gui.NextPrompt();
+	if(!surpressNext)
+		Gui.NextPrompt();
 }
 
 
@@ -859,6 +1029,57 @@ Scenes.Krawitz.WanderingServants = function() {
 	}
 }
 
+Scenes.Krawitz.StealingClothes = function() {
+	var parse = {
+		
+	};
+	Text.Clear();
+	Text.Add("You carefully sneak up to the door leading into what you assume is the servants’ quarters, a plain low building in the back of the garden hidden behind rows of bushes. There seems to be some activity inside. You hear unintelligible snatches of dialogue, and someone apparently snoring extremely loudly.", parse);
+	Text.NL();
+	Text.Add("Nudging the door open a crack, you spot a storeroom close to the entrance. Perhaps you could find something useful inside, but you run the risk of being found out.", parse);
+	Text.Flush();
+	
+	//[Scavenge][Leave]
+	var options = new Array();
+	options.push({ nameStr : "Scavenge",
+		func : function() {
+			Text.Clear();
+			Text.Add("You slip inside the building, quickly entering the storeroom.", parse);
+			Text.NL();
+			if(player.Dex() + Math.random() * 20 > 30) {
+				Text.Add("As it happens, no one seems to have noticed you. Not wishing to push your luck too far, you grab one of the blue servants’ garbs from a nearby bin, and make your exit.", parse);
+			}
+			else {
+				Scenes.Krawitz.AddSuspicion(10, true);
+				Text.Add("In your haste, you stumble and almost fall, causing a little noise.", parse);
+				Text.NL();
+				Text.Add("<i>”Who’s there?”</i> you hear a voice from inside the building. Cursing under your breath, you snatch a garment at random and race out of the building. A sleepy servant peers out of the doorway, blinking the sand from his bleary eyes.", parse);
+				Text.NL();
+				Scenes.Krawitz.ServantLost(Gender.male);
+			}
+			Text.NL();
+			Text.Add("Once you have found a safe place to hide, you try on the clothes you snatched up. They aren’t the right size, but you manage to make them fit. This should give you an easier time moving around, as the regular staff could probably mistake you for one of them in the dark.", parse);
+			Text.Flush();
+			
+			Scenes.Krawitz.stat.HasServantClothes = true;
+			
+			MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+		}, enabled : true,
+		tooltip : "Perhaps you could find some servants’ garb in the storeroom, to better blend in?"
+	});
+	options.push({ nameStr : "Leave",
+		func : function() {
+			Text.NL();
+			Text.Add("You carefully withdraw from the servants’ quarters, judging it too difficult to sneak in unnoticed.", parse);
+			Text.Flush();
+			
+			MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+		}, enabled : true,
+		tooltip : "There is too much risk of getting caught."
+	});
+	Gui.SetButtonsFromList(options);
+}
+
 Scenes.Krawitz.Scouting = function() {
 	var parse = {
 		
@@ -868,4 +1089,3 @@ Scenes.Krawitz.Scouting = function() {
 	Text.NL();
 	Text.Flush();
 }
-

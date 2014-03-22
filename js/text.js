@@ -232,6 +232,9 @@ Text.Ordinal = function(num) {
 
 /*
 	// REGULAR TEXT (NEW METHOD)
+	var parse = {
+		
+	};
 	
 	Text.Clear();
 	Text.Add("", parse);

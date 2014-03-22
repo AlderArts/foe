@@ -83,6 +83,59 @@ SetExploreButtons = function() {
 	}
 }
 
+LimitedDataPrompt = function(backFunc) {
+	gameState = GameState.Event;
+	
+	Text.Clear();
+	Gui.ClearButtons();
+	
+	Text.AddOutput("Fall of Eden saves using JavaScript localStorage (also known as Web Storage). Exactly how and where this will put your save is up to browser implementation, but the standard ensures at least 5MB of storage space, more than enough for 12 full save slots.");
+	Text.Newline();
+	Text.AddOutput("You can only save at 'safe' locations in the world (the same places you can sleep), but you can load/start a new game from anywhere.");
+	Text.Newline();
+	Text.AddOutput("<b>NEW:</b> Use the save to text if you are having problems using save to file. Copy the text that appears into a text file, and save it. You will be able to use it with load from file.");
+	
+	Input.buttons[0].Setup("Save game", function() {
+		Saver.SavePrompt(LimitedDataPrompt);
+    }, true);
+    
+    Input.buttons[2].Setup("Save file", function() {
+    	var filename = prompt("SAVE TO FILE WILL NOT WORK IN OFFLINE MODE!\n\n Enter name of save file.");
+    	if(filename && filename != "") {
+    		GameToCache();
+			var seen = [];
+    		GenerateFile({filename: filename, content: JSON.stringify(gameCache,
+    			function(key, val) {
+				   if (typeof val == "object") {
+				        if (seen.indexOf(val) >= 0)
+				            return;
+				        seen.push(val);
+				    }
+				    return val;
+				})
+			});
+		}
+	}, true);
+    
+    Input.buttons[6].Setup("Save text", function() {
+		GameToCache();
+		var seen = [];
+		var data = JSON.stringify(gameCache,
+			function(key, val) {
+			   if (typeof val == "object") {
+			        if (seen.indexOf(val) >= 0)
+			            return;
+			        seen.push(val);
+			    }
+			    return val;
+			});
+		Text.Clear();
+		Text.AddOutput(data);	
+	}, true);
+	
+    Input.buttons[11].Setup("Back", backFunc, true);
+}
+
 DataPrompt = function() {
 	gameState = GameState.Event;
 	// At safe locations you can sleep and save
