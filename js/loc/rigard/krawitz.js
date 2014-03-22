@@ -24,20 +24,62 @@ Scenes.Krawitz.EncType = {
 	Guard   : 0,
 	Servant : 1
 }
+
+Scenes.Krawitz.SetupStats = function() {
+	Scenes.Krawitz.stat.IsServant         = rigard.Krawitz["Work"] == 1;
+	Scenes.Krawitz.stat.HasServantClothes = Scenes.Krawitz.stat.IsServant;
+	Scenes.Krawitz.stat.HasWine           = false;
+	Scenes.Krawitz.stat.SpikedWine        = false;
+	Scenes.Krawitz.stat.ServantFood       = false;
+	Scenes.Krawitz.stat.KrawitzFood       = false;
+	Scenes.Krawitz.stat.TFItem            = false;
+	Scenes.Krawitz.stat.TFdKrawitz        = false;
+	Scenes.Krawitz.stat.SexedGirls        = false;
+	Scenes.Krawitz.stat.OrgySetup         = false;
+	Scenes.Krawitz.stat.Orgy              = false;
+	Scenes.Krawitz.stat.HasSword          = false;
+	Scenes.Krawitz.stat.HasBinder         = false;
+	
+	Scenes.Krawitz.stat.Suspicion         = 0;
+}
+
 Scenes.Krawitz.GuardDex = function(entity, num) {
 	num = num || 1;
 	var dex = (entity == Scenes.Krawitz.EncType.Guard) ? 10 : 15;
 	return num * dex;
 }
-Scenes.Krawitz.GuardStr = function(entity, num) {
+Scenes.Krawitz.GuardAtk = function(entity, num) {
 	num = num || 1;
-	var str = (entity == Scenes.Krawitz.EncType.Guard) ? 15 : 10;
+	var str = (entity == Scenes.Krawitz.EncType.Guard) ? 40 : 20;
 	return num * str;
 }
 Scenes.Krawitz.GuardCha = function(entity, num) {
 	num = num || 1;
-	var cha = (entity == Scenes.Krawitz.EncType.Guard) ? 8 : 15;
+	var cha = (entity == Scenes.Krawitz.EncType.Guard) ? 15 : 10;
+	if(entity == Scenes.Krawitz.EncType.Guard) {
+		if(Scenes.Krawitz.stat.HasServantClothes) cha /= 2;
+	}
+	else { //Servants
+		if(Scenes.Krawitz.stat.IsServant) cha /= 4;
+		else if(Scenes.Krawitz.stat.HasServantClothes) cha *= 1.5;
+	}
+	
 	return num * cha;
+}
+Scenes.Krawitz.ServantSuspicion = function() {
+	if(Scenes.Krawitz.stat.IsServant) return 1;
+	else if(Scenes.Krawitz.stat.HasServantClothes) return 3;
+	else return 2;
+}
+Scenes.Krawitz.GuardSuspicion = function() {
+	if(Scenes.Krawitz.stat.HasServantClothes) return 1;
+	else return 3;
+}
+Scenes.Krawitz.EntitySuspicion = function(entity) {
+	if(entity == Scenes.Krawitz.EncType.Guard)
+		return Scenes.Krawitz.GuardSuspicion();
+	else
+		return Scenes.Krawitz.ServantSuspicion();
 }
 
 //
@@ -288,6 +330,9 @@ world.loc.Rigard.Krawitz.Mansion.study.endDescription = function() {
 	Text.AddOutput("What you do?<br/>");
 }
 
+
+
+
 Scenes.Krawitz.Scouting = function() {
 	var parse = {
 		
@@ -379,8 +424,207 @@ Scenes.Krawitz.Scouting = function() {
 }
 
 
+Scenes.Krawitz.GuardLost = function(gender) {
+	var parse = {
+		HeShe  : gender == Gender.male ? "He" : "She",
+		heshe  : gender == Gender.male ? "he" : "she",
+		hisher : gender == Gender.male ? "his" : "her"
+	}
+	
+	var texts = [
+	"<i>”Huh, must have been nothing,”</i> the guard mutters, returning to [hisher] post.",
+	"<i>”I could have sworn I heard something,”</i> the guard mutters, looking around.",
+	"<i>”Probably just a rat,”</i> the guard shrugs.",
+	"<i>”I must be imagining things,”</i> the guard mutters, shaking [hisher] head."
+	];
+	var text = texts[Math.floor(Math.random() * texts.length)];
+	
+	return Text.Add(text, parse);
+}
+
+Scenes.Krawitz.GuardConvinced = function(gender) {
+	var parse = {
+		HeShe  : gender == Gender.male ? "He" : "She",
+		heshe  : gender == Gender.male ? "he" : "she",
+		hisher : gender == Gender.male ? "his" : "her"
+	}
+	
+	var texts = [
+	"<i>”Huh, new faces every day,”</i> the guard mutters.",
+	"<i>”They all look the same,”</i> the guard mutters under [hisher] breath as [heshe] wanders off.",
+	"<i>”Thought I had met all of the servants...”</i> the guard mutters."
+	];
+	var text = texts[Math.floor(Math.random() * texts.length)];
+	
+	return Text.Add(text, parse);
+}
+
+Scenes.Krawitz.ServantLost = function(gender) {
+	var parse = {
+		HeShe   : gender == Gender.male ? "He" : "She",
+		heshe   : gender == Gender.male ? "he" : "she",
+		hisher  : gender == Gender.male ? "his" : "her",
+		servant : gender == Gender.male ? "servant" : "maid"
+	}
+	
+	var texts = [
+	"<i>”Probably nothing,”</i> the [servant] shrugs, continuing on [hisher] errands.",
+	"<i>”Hate working late at night, I start seeing things,”</i> the [servant] mutters.",
+	"<i>”I’ll... just move along then,”</i> the [servant] shuffles away, looking about nervously.",
+	"The [servant] peers into the shadows, but doesn’t seem to spot you."
+	];
+	var text = texts[Math.floor(Math.random() * texts.length)];
+	
+	return Text.Add(text, parse);
+}
+
+Scenes.Krawitz.ServantConvinced = function(gender) {
+	var parse = {
+		HeShe   : gender == Gender.male ? "He" : "She",
+		heshe   : gender == Gender.male ? "he" : "she",
+		hisher  : gender == Gender.male ? "his" : "her",
+		servant : gender == Gender.male ? "servant" : "maid",
+		guygirl : player.mfFem("guy", "girl")
+	}
+	
+	var texts = [
+	"<i>”Oh yeah, I remember you now!”</i> the [servant] exclaims, <i>”Silly me, go on.”</i>",
+	"<i>”Ah, you are the new [guygirl],”</i> the [servant] says, nodding, <i>”sorry I didn’t recognize you.”</i>.",
+	"<i>”Hm.”</i> The [servant] looks at you suspiciously, but lets you get on your way."
+	];
+	var text = texts[Math.floor(Math.random() * texts.length)];
+	
+	return Text.Add(text, parse);
+}
 
 
+Scenes.Krawitz.FoundOut = function(entity, num) {
+	var parse = {
+		entity : entity == Scenes.Krawitz.EncType.Guard ? "the guard" : "the servant",
+		s          : num > 1 ? "s" : "",
+		notS       : num > 1 ? "" : "s",
+		oneof      : num > 1 ? " one of" : "",
+		bodyBodies : num > 1 ? "bodies" : "body",
+		spiked     : Scenes.Krawitz.stat.SpikedWine ? "spiked " : ""
+	};
+	
+	var gender = Math.random() > 0.5 ? Gender.male : Gender.female;
+	
+	if(num > 1) {
+		parse["HeShe"]  = "They";
+		parse["heshe"]  = "they";
+		parse["hisher"] = "their";
+	}
+	else if(gender == Gender.male) {
+		parse["HeShe"]  = "He";
+		parse["heshe"]  = "he";
+		parse["hisher"] = "his";
+	}
+	else {
+		parse["HeShe"]  = "She";
+		parse["heshe"]  = "she";
+		parse["hisher"] = "her";
+	}
+	
+	//[Run][Hide][Charm][Attack!][Wine]
+	var options = new Array();
+	options.push({ nameStr : "Run",
+		func : function() {
+			Text.Clear();
+			Text.Add("You leg it, somehow managing to hide from [entity][s].", parse);
+			Text.Flush();
+			
+			Scenes.Krawitz.AddSuspicion(Scenes.Krawitz.EntitySuspicion(entity) * 3);
+		}, enabled : true,
+		tooltip : Text.Parse("Avoid [entity][s], potentially raising the alarm.", parse)
+	});
+	options.push({ nameStr : "Hide",
+		func : function() {
+			Text.Clear();
+			Text.Add("Quickly, you fade into the shadows, avoiding detection.", parse);
+			Text.NL();
+			
+			if(entity == Scenes.Krawitz.EncType.Guard)
+				Scenes.Krawitz.GuardLost();
+			else
+				Scenes.Krawitz.ServantLost();
+			Text.Flush();
+			
+			Scenes.Krawitz.AddSuspicion(Scenes.Krawitz.EntitySuspicion(entity));
+		}, enabled : player.Dex() >= Scenes.Krawitz.GuardDex(entity, num),
+		tooltip : Text.Parse("Use your cunning to hide from [entity][s].", parse)
+	});
+	options.push({ nameStr : "Charm",
+		func : function() {
+			Text.Clear();
+			Text.Add("With your charm and wit, you try to convince [entity][s] that you are one of the staff.", parse);
+			Text.NL();
+			
+			if(entity == Scenes.Krawitz.EncType.Guard)
+				Scenes.Krawitz.GuardConvinced();
+			else
+				Scenes.Krawitz.ServantConvinced();
+			Text.Flush();
+			
+			Scenes.Krawitz.AddSuspicion(Scenes.Krawitz.EntitySuspicion(entity));
+		}, enabled : true,
+		tooltip : Text.Parse("Use your guile to convince [entity][s] you belong there.", parse)
+	});
+	options.push({ nameStr : "Attack!",
+		func : function() {
+			Text.Clear();
+			var s = 1;
+			if(Math.random() > 0.5) {
+				Text.Add("With some stealth and a few precise strikes, you manage to incapacitate [entity][s] without raising an alarm.", parse);
+			}
+			else {
+				Text.Add("There is a slight scuffle, but you manage to knock out [entity][s].", parse);
+				s = 4;
+			}
+			
+			Text.NL();
+			Text.Add("You quickly hide the unconscious [bodyBodies] before anyone has a chance to find you.", parse);
+			
+			Text.Flush();
+			
+			Scenes.Krawitz.AddSuspicion(s);
+		}, enabled : (player.Str() + player.Dex() + player.Sta()) >= Scenes.Krawitz.GuardAtk(entity, num),
+		tooltip : Text.Parse("Incapacitate [entity][s].", parse)
+	});
+	if(Scenes.Krawitz.stat.HasWine) {
+		options.push({ nameStr : Scenes.Krawitz.stat.SpikedWine ? "Spiked Wine" : "Wine",
+			func : function() {
+				var s = Scenes.Krawitz.EntitySuspicion(entity);
+				Text.Clear();
+				Text.Add("Brushing aside any questions, you offer a cup of spiked wine to [entity][s]. [HeShe] seem a little surprised, but accept gladly. With the the friendlier mood, you manage to slip away while [heshe] enjoy[notS] [hisher] drink[s].", parse);
+				if(Scenes.Krawitz.stat.SpikedWine) {
+					Text.NL();
+					Text.Add("<i>”Ooh! That one went right to the groin,”</i>[oneof] the [entity][s] chuckles, the potent drugged wine quickly taking effect.", parse);
+					s = 0;
+				}
+				Text.Flush();
+				
+				Scenes.Krawitz.AddSuspicion(s);
+			}, enabled : true,
+			tooltip : Text.Parse("Offer [entity][s] some [spiked]wine.", parse)
+		});
+	}
+	
+	Gui.SetButtonsFromList(options);
+}
+
+// TODO: Trigger found out
+Scenes.Krawitz.AddSuspicion = function(num) {
+	Scenes.Krawitz.stat.Suspicion += num;
+	
+	if(DEBUG) {
+		Text.NL();
+		Text.Add("<b>Suspicion + " + num + ": " + Scenes.Krawitz.stat.Suspicion + "/100</b>");
+		Text.Flush();
+	}
+	
+	Gui.NextPrompt();
+}
 
 
 Scenes.Krawitz.Scouting = function() {
