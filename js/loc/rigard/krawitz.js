@@ -1311,9 +1311,16 @@ Scenes.Krawitz.Bathhouse = function() {
 			func : function() {
 				Text.Clear();
 				Scenes.Krawitz.BathhouseWine();
-				Text.Add("", parse);
 				Text.NL();
+				Text.Add("<i>”Why… you are right!”</i> Krawitz’ wife, apparently named Marlene, acknowledges you, shooing you away impatiently, her hand never leaving her companions nethers. As you hastily retreat, Gina cries out in pleasure loudly enough to wake the entire neighborhood.", parse);
+				Text.NL();
+				Text.Add("What a family.", parse);
 				Text.Flush();
+				
+				player.AddLustFraction(0.2);
+				Gui.NextPrompt(function() {
+					MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+				});
 			}, enabled : true,
 			tooltip : "Serve them wine."
 		});
@@ -1321,9 +1328,66 @@ Scenes.Krawitz.Bathhouse = function() {
 			func : function() {
 				Text.Clear();
 				Scenes.Krawitz.BathhouseWine();
-				Text.Add("", parse);
 				Text.NL();
+				Text.Add("<i>”Hah… yes, how… rude of me,”</i> Krawitz’ wife, apparently named Marlene, throws a lustful gaze in your direction. It seems that, even diluted, the aphrodisiac is very potent. <i>”Why don’t you come join us?”</i> She motions you over seductively, stifling Gina’s protests with a kiss full on the lips. Her hand returns to its previous task, rubbing the inebriated young woman between her legs.", parse);
 				Text.Flush();
+				
+				player.AddLustFraction(0.3);
+				
+				//[Sex][Leave]
+				var options = new Array();
+				options.push({ nameStr : "Leave",
+					func : function() {
+						Text.Clear();
+						Text.Add("You respectfully decline her offer. For a brief moment, Marlene looks disappointed, but she’s soon forgotten you were even there, focusing all of her attention on her companion, lavishing her body with kisses as a lusty haze clouds her mind.", parse);
+						Text.NL();
+						Text.Add("The two women are panting heavily, their bodies grinding against each other, dripping water and sweat. Gina has been pushed onto her back in the shallow end of the pool, legs spread invitingly as she lets the older woman take control, sighing languidly as fingers spread her nether lips, probing her depths.", parse);
+						Text.NL();
+						Text.Add("Although you were about to leave, you give in to temptation and settle down to watch the show. The ladies don’t seem to mind either way - if they even notice. Wife and daughter are sinking deeper and deeper into the drug-induced fog of rampant lust, Marlene’s lips closing around one of Gina’s puffy nipples. The young woman’s mouth hangs open in rapture as her stepmother thrusts several digits into her sex, making her legs tremble with pleasure.", parse);
+						Text.NL();
+						Text.Add("The younger woman cries out in ecstasy as she cums, her legs clenching tightly around Marlene’s arm. Impatient to get her own pleasure, ‘Lene climbs on top of Gina, grinding her labia on the limp girl’s face. With no hesitation, the raven-haired girl stick out her tongue, burying it in her stepmother’s folds.", parse);
+						Text.NL();
+						Text.Add("<i>”Haaah… G-Ginny...”</i> A throaty moan seems to be all that Lady Krawitz can muster, her muddled mind no longer capable of forming rational thought. It isn’t long before the two of them collapse in each others arms, exhausted for the moment, but raring to have another go.", parse);
+						Text.NL();
+						Text.Add("About half of the neighbourhood ought to be alerted to the semi-incestous coitus happening in Krawitz’ front yard. Better leg it before you attract undue attention.", parse);
+						Text.Flush();
+						
+						player.AddLustFraction(0.5);
+						
+						Gui.NextPrompt(function() {
+							MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 20});
+						});
+					}, enabled : true,
+					tooltip : "Decline her offer - you have to keep your cool if you are going to stay out of trouble tonight."
+				});
+				options.push({ nameStr : "Nah",
+					func : function() {
+						Text.Clear();
+						Text.Add("", parse);
+						Text.NL();
+						Text.Add("", parse);
+						Text.NL();
+						Text.Add("", parse);
+						Text.NL();
+						
+						if(!Scenes.Krawitz.stat.ServantOrgySetup) {
+							Text.Add("About half of the neighbourhood ought to be alerted to the semi-incestous coitus happening in Krawitz’ front yard. Better leg it before you attract undue attention.", parse);
+							Text.Flush();
+							Gui.NextPrompt(function() {
+								MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 20});
+							});
+						}
+						else {
+							Text.Add("", parse);
+							Text.NL();
+							Text.Add("", parse);
+							
+							Text.Flush();
+						}
+					}, enabled : true,
+					tooltip : ""
+				});
+				Gui.SetButtonsFromList(options);
 			}, enabled : true,
 			tooltip : "Serve them the wine, but add some of the aphrodisiac you found."
 		});
