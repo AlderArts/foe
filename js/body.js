@@ -1168,22 +1168,24 @@ Cock.prototype.Desc = function() {
 Cock.prototype.Short = function() {
 	var desc = this.Desc();
 	var noun = this.noun();
-	var knotted = this.knot && Math.random() < 0.5 ? " knotted," : "";
-	var sheath = this.sheath && Math.random() < 0.5 ? " sheathed," : "";
+	var knotted = this.knot   && Math.random() < 0.5 ? " knotted,"  : "";
+	var sheath  = this.sheath && Math.random() < 0.5 ? " sheathed," : "";
 	return desc.adj + knotted + sheath + " " + Race.Desc(this.race) + " " + noun;
 }
 // TODO
 Cock.prototype.TipShort = function() {
+	var qualifier = "";
+	
 	switch(this.race) {
-		case Race.horse: return "flared head";
+		case Race.horse: qualifier = "flared "; break;
 		
 		case Race.wolf:
 		case Race.dragon:
 		case Race.lizard:
 		case Race.fox:
-		case Race.dog: return "tapered tip";
+		case Race.dog: qualifier = "tapered "; break;
 		
-		case Race.cat: return "barbed tip";
+		case Race.cat: qualifier = "barbed "; break;
 		
 		case Race.demon:
 		case Race.cow:
@@ -1194,8 +1196,16 @@ Cock.prototype.TipShort = function() {
 		case Race.dryad:
 		case Race.elf:
 		case Race.human:
-		default: return "tip";
+		default: break;
 	}
+	
+	var nouns = [
+	"tip",
+	"head"
+	];
+	var noun = nouns[Math.floor(Math.random() * nouns.length)];
+	
+	return qualifier + noun;
 }
 // TODO (knot size?)
 Cock.prototype.KnotShort = function() {
@@ -1203,18 +1213,18 @@ Cock.prototype.KnotShort = function() {
 }
 // TODO: Better descriptions
 Cock.prototype.aLong = function() {
-	var desc = this.Desc();
-	var noun = this.noun();
-	var knotted = this.knot ? " knotted" : "";
-	var sheath = this.sheath ? " sheathed," : "";
+	var desc    = this.Desc();
+	var noun    = this.noun();
+	var knotted = this.knot   ? " knotted" : "";
+	var sheath  = this.sheath ? " sheathed," : "";
 	return desc.a + " " + desc.adj + knotted + sheath + " " + Race.Desc(this.race) + " " + noun + ", " + desc.len + " long and " + desc.thickness + " thick";
 }
 // TODO: Better descriptions
 Cock.prototype.Long = function() {
-	var desc = this.Desc();
-	var noun = this.noun();
-	var knotted = this.knot ? " knotted" : "";
-	var sheath = this.sheath ? " sheathed," : "";
+	var desc    = this.Desc();
+	var noun    = this.noun();
+	var knotted = this.knot   ? " knotted" : "";
+	var sheath  = this.sheath ? " sheathed," : "";
 	return desc.adj + knotted + sheath + " " + Race.Desc(this.race) + " " + cock.noun() + ", " + desc.len + " long and " + desc.thickness + " thick";
 }
 
