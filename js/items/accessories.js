@@ -14,6 +14,15 @@ Items.Accessories.IronBangle.Long = function() { return "a crude lump of iron, f
 Items.Accessories.IronBangle.EquipType = ItemType.Accessory;
 Items.Accessories.IronBangle.effect.maxHp = 20;
 
+Items.Accessories.RaniFavor = new Item("neck0", "Rani's favor");
+Items.Accessories.RaniFavor.price = 1000;
+Items.Accessories.RaniFavor.Short = function() { return "silver necklace"; }
+Items.Accessories.RaniFavor.Long = function() { return "an elaborate silver necklace, gifted to you by Rani, prince of Rigard."; }
+Items.Accessories.RaniFavor.EquipType = ItemType.Accessory;
+Items.Accessories.RaniFavor.effect.maxHp = 100;
+Items.Accessories.RaniFavor.effect.spirit = 5;
+Items.Accessories.RaniFavor.effect.charisma = 5;
+
 Items.Accessories.SimpleCuffs = new Item("cuffs0", "S.Cuffs");
 Items.Accessories.SimpleCuffs.price = 20;
 Items.Accessories.SimpleCuffs.Short = function() { return "simple cuffs"; }

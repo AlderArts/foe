@@ -26,6 +26,7 @@ world.loc.Rigard.Plaza.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
 world.loc.Rigard.Plaza.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
 world.loc.Rigard.Plaza.enc.AddEnc(function() { return Scenes.Rigard.Plaza.LetterDelivery; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21); });
 world.loc.Rigard.Plaza.enc.AddEnc(function() { return Scenes.Rigard.Plaza.StatueInfo; }, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 21) && (rigard.flags["TalkedStatue"] == 0 || (party.InParty(kiakai) && kiakai.flags["TalkedStatue"] == 0)); });
+world.loc.Rigard.Plaza.enc.AddEnc(function() { return Scenes.Krawitz.Duel;}, 3.0, function() { return rigard.Krawitz["Q"] == 1 && rigard.Krawitz["Duel"] == 0 && (world.time.hour >= 10 && world.time.hour < 20);});
 
 world.loc.Rigard.Plaza.links.push(new Link(
 	"Gate", true, true,

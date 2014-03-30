@@ -32,11 +32,12 @@ world.loc.Rigard = {
 	Plaza        : new Event("Plaza"),
 	Inn          :
 	{
-		common   : new Event("Lady's Blessing"),
-		backroom : new Event("Back room"),
-		cellar   : new Event("Cellar"),
-		room     : new Event(function() { return "Room " + rigard.LB["RoomNr"]; }),
-		room69   : new Event("Room 369")
+		common    : new Event("Lady's Blessing"),
+		backroom  : new Event("Back room"),
+		cellar    : new Event("Cellar"),
+		room      : new Event(function() { return "Room " + rigard.LB["RoomNr"]; }),
+		room69    : new Event("Room 369"),
+		penthouse : new Event("Penthouse")
 	},
 	
 	Slums        :

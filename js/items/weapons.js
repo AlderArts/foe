@@ -9,6 +9,16 @@ Items.Weapons.ShortSword.effect.atkMod = 0.1;
 Items.Weapons.ShortSword.effect.strength = 1;
 Items.Weapons.ShortSword.effect.apSlash = 1;
 
+Items.Weapons.KrawitzSword = new Item("swrd1", "K.Sword");
+Items.Weapons.KrawitzSword.price = 2000;
+Items.Weapons.KrawitzSword.Short = function() { return "fine rapier"; }
+Items.Weapons.KrawitzSword.Long = function() { return "Krawitz' fine rapier"; }
+Items.Weapons.KrawitzSword.EquipType = ItemType.Weapon;
+Items.Weapons.KrawitzSword.effect.atkMod    = 0.7;
+Items.Weapons.KrawitzSword.effect.strength  = 3;
+Items.Weapons.KrawitzSword.effect.dexterity = 10;
+Items.Weapons.KrawitzSword.effect.apPierce  = 1;
+
 Items.Weapons.WoodenStaff = new Item("staff0", "W.Staff");
 Items.Weapons.WoodenStaff.price = 30;
 Items.Weapons.WoodenStaff.Short = function() { return "wooden staff"; }
@@ -23,6 +33,6 @@ Items.Weapons.LWhip.price = 40;
 Items.Weapons.LWhip.Short = function() { return "leather whip"; }
 Items.Weapons.LWhip.Long = function() { return "a simple leather whip"; }
 Items.Weapons.LWhip.EquipType = ItemType.Weapon;
-Items.Weapons.LWhip.effect.atkMod = 0;
-Items.Weapons.LWhip.effect.libido = 1;
+Items.Weapons.LWhip.effect.atkMod  = 0;
+Items.Weapons.LWhip.effect.libido  = 1;
 Items.Weapons.LWhip.effect.apSlash = 1;

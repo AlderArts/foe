@@ -9,6 +9,7 @@ function Twins(storage) {
 	
 	this.flags = {};
 	this.flags["Met"] = 0;
+	this.flags["SexOpen"] = 0;
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -46,12 +47,14 @@ Twins.prototype.IsAtLocation = function(location) {
 function Rumi() {
 	Entity.call(this);
 	
-	
 }
 Rumi.prototype = new Entity();
 Rumi.prototype.constructor = Rumi;
 
 Rumi.prototype.FromStorage = function(storage) {
+	this.subDom.base         = parseFloat(storage.subDom)  || this.subDom.base;
+	this.slut.base           = parseFloat(storage.slut)    || this.slut.base;
+	this.relation.base       = parseFloat(storage.rel)     || this.relation.base;
 	// Load flags
 	for(var flag in storage.flags)
 		this.flags[flag] = parseInt(storage.flags[flag]);
@@ -78,6 +81,9 @@ Rani.prototype = new Entity();
 Rani.prototype.constructor = Rani;
 
 Rani.prototype.FromStorage = function(storage) {
+	this.subDom.base         = parseFloat(storage.subDom)  || this.subDom.base;
+	this.slut.base           = parseFloat(storage.slut)    || this.slut.base;
+	this.relation.base       = parseFloat(storage.rel)     || this.relation.base;
 	// Load flags
 	for(var flag in storage.flags)
 		this.flags[flag] = parseInt(storage.flags[flag]);
