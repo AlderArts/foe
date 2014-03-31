@@ -1507,20 +1507,19 @@ Scenes.Rigard.LB.GotoRoom = function() {
 }
 
 
-// TODO: Adjust arriving at 69 for repeat scenes
-//room69.flags["Rel"]
+
 Scenes.Rigard.LB.RandomRoom = function(companion) {
 	var parse = {
 		roomNr : rigard.LB["RoomNr"]
 	};
 	Text.NL();
-	if(Math.random() < 0.5 || room69.flags["Rel"] != Room69.RelFlags.NotMet) { // actual room
+	if(Math.random() < 0.5) { // actual room
 		parse["c"] = companion ? Text.Parse(", [comp] behind you", {comp: companion.name}) : "";
 		Text.Add("Room [roomNr] - perfect. You shuffle inside[c], happy with your accomplishment.", parse);
 		Text.Flush();
 		Scenes.Rigard.LB.RegularRoom(companion);
 	}
-	else {
+	else if(room69.flags["Rel"] == Room69.RelFlags.NotMet) {
 		// First time
 		Text.Add("Room 369 - perfect. You shove open the door, a little surprised to find it unlocked, and push through, stumbling slightly.", parse);
 		Text.NL();
@@ -1531,6 +1530,14 @@ Scenes.Rigard.LB.RandomRoom = function(companion) {
 		Text.Flush();
 		
 		Gui.NextPrompt(Scenes.Room69.Discovering69);
+	}
+	else {
+		// TODO: Adjust arriving at 69 for repeat scenes. For now. Finds the regular room
+		// COPIED
+		parse["c"] = companion ? Text.Parse(", [comp] behind you", {comp: companion.name}) : "";
+		Text.Add("Room [roomNr] - perfect. You shuffle inside[c], happy with your accomplishment.", parse);
+		Text.Flush();
+		Scenes.Rigard.LB.RegularRoom(companion);
 	}
 }
 
@@ -1715,4 +1722,23 @@ world.loc.Rigard.Inn.common.events.push(new Link(
 		}
 	},
 	Scenes.Rigard.LB.GotoRoom
+));
+
+world.loc.Rigard.Inn.common.events.push(new Link(
+	"Room 369", function() { return room69.flags["Rel"] != Room69.RelFlags.NotMet; }, true,
+	function() {
+		if(room69.flags["Rel"] != Room69.RelFlags.NotMet) {
+			Text.Add("You could head up to the sentient room Sixtynine.");
+			Text.NL();
+			Text.Flush();
+		}
+	},
+	function() {
+		if(room69.flags["Rel"] == Room69.RelFlags.BadTerms)
+			Scenes.Room69.ApologizeTo69ForBeingMean();
+		else if(room69.flags["Rel"] == Room69.RelFlags.BrokeDoor)
+			Scenes.Room69.ApologizeTo69ForBreakingDoor();
+		else // TODO: Additional options?
+			Scenes.Room69.Normal69();
+	}
 ));

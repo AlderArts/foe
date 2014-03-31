@@ -14,9 +14,10 @@ function Room69(storage) {
 	
 	this.level = 0;
 	
-	this.flags["Rel"]     = Room69.RelFlags.NotMet;
-	this.flags["Sexed"]   = 0;
+	this.flags["Rel"]      = Room69.RelFlags.NotMet;
+	this.flags["Sexed"]    = 0;
 	this.flags["BadStart"] = 0;
+	this.flags["Hinges"]   = Room69.HingesFlags.No;
 	
 	this.SetLevelBonus();
 	this.RestFull();
@@ -31,6 +32,15 @@ Room69.RelFlags = {
 	BrokeDoor : 1,
 	BadTerms  : 2,
 	GoodTerms : 3
+};
+
+Room69.HingesFlags = {
+	No                : 0,
+	Asked             : 1,
+	TalkedToGoldsmith : 2,
+	TalkedToSmith     : 3,
+	HaveHinges        : 4,
+	Delivered         : 5
 };
 
 Room69.prototype.FromStorage = function(storage) {
@@ -639,6 +649,7 @@ Scenes.Room69.Discovering69Sex = function() {
 		world.TimeStep({hour : 3});
 		room69.flags["Sexed"]++;
 		room69.flags["Rel"] = Room69.RelFlags.GoodTerms;
+		room69.relation.IncreaseStat(100, 10);
 		
 		if(party.NumTotal() <= 1) {
 			Gui.NextPrompt(function() {
@@ -714,6 +725,223 @@ Scenes.Room69.Discovering69Sex = function() {
 	});
 }
 
+Scenes.Room69.ApologizeTo69ForBreakingDoor = function() {
+	var parse = {
+		
+	};
+	Text.Clear();
+	
+	if(room69.flags["Hinges"] == Room69.HingesFlags.No) {
+		Text.Add("You head up to the third floor, feeling a little guilty about the way your last encounter with Sixtynine ended.", parse);
+		Text.NL();
+		Text.Add("An oak door has been installed to replace the one you broke, making the room blatantly stand out compared to the ones around it. Looks like they managed to finish the repairs very quickly, though you wonder if they sacrificed quality to get it done.", parse);
+		Text.NL();
+		Text.Add("You hesitate for a moment before the entrance, before raising your hand and gently knocking. There is no response, and you are about to knock again when the door flinches away from your hand, swinging inwards.", parse);
+		Text.NL();
+		Text.Add("<i>\"How about you not hit my door?\"</i> Sixtynine finally speaks up, sounding petulant. <i>\"I’m still getting flashbacks to the last time you did that. In fact, why don’t you go away and never come back.\"</i>", parse);
+		Text.Flush();
+		
+		//[Apologize][Leave]
+		var options = new Array();
+		options.push({ nameStr : "Apologize",
+			func : function() {
+				Text.Clear();
+				Text.Add("Trying to look meek, you stand awkwardly in the empty-looking room, and stammer out an apology. You tell Sixtynine that you were still more than a little drunk, and felt really trapped and confused, and you're deeply sorry you hurt it.", parse);
+				Text.NL();
+				parse["psonDaughter"] = player.mfTrue("son", "daughter");
+				Text.Add("<i>\"Well, well, the prodigal [psonDaughter] comes around,\"</i> the ethereal voice says, decidedly smug. Why are you apologizing to this thing again? <i>\"But that’s really not good enough. You broke a part of me. It hurt, both physically and mentally, I will have you know, and I still can’t move this door anywhere near as well as the last one.\"</i>", parse);
+				Text.NL();
+				Text.Add("<i>\"No, if you want to make it up, then you will have to bring me something. Hmm...\"</i> Sixtynine hesitates, thinking over what to demand. <i>\"I want golden hinges! The new door is decent enough, but the hinges could really use work. Bring me a pair and I’ll forgive you.\"</i>", parse);
+				Text.NL();
+				Text.Add("You hesitantly point out that gold is soft and really wouldn’t work very well for hinges. Not to mention, it’s outrageously expensive.", parse);
+				Text.NL();
+				Text.Add("The room huffs, sheets and pillows slumping in annoyance. <i>\"Fine. Get me gilded ones at least. I’m sure someone in this bleeding city knows how to make those. Now go!\"</i>", parse);
+				Text.NL();
+				Text.Add("You nod and take your leave. Looks like you’ll have to find a smith to make those hinges if you want to get back in the room’s good graces. But at least you made an effort and said you’re sorry, so this will probably be enough to get the innkeeper to let you stay at the inn again.", parse);
+				Text.Flush();
+				room69.flags["Hinges"] = Room69.HingesFlags.Asked;
+				world.TimeStep({minute: 30});
+				Gui.NextPrompt();
+			}, enabled : true,
+			tooltip : "You came here to apologize to the room."
+		});
+		options.push({ nameStr : "Leave",
+			func : function() {
+				world.TimeStep({minute: 10});
+				PrintDefaultOptions();
+			}, enabled : true,
+			tooltip : "Fine, maybe you <b>will</b> go!"
+		});
+		Gui.SetButtonsFromList(options);
+	}
+	else { // Not delivered hinges
+		Text.Add("<i>\"Well. It’s you,\"</i> Sixtynine greets you, still sulky despite letting you in. <i>\"Does this mean you brought me my hinges?\"</i>", parse);
+		Text.NL();
+		if(room69.flags["Hinges"] != Room69.HingesFlags.HaveHinges) {
+			Text.Add("You tell the room that you don’t have the hinges just yet, but you’re working on it.", parse);
+			Text.NL();
+			Text.Add("<i>\"No hinges, no you being here!\"</i> the voice exclaims imperiously. <i>\"Begone!\"</i>", parse);
+			Text.NL();
+			Text.Add("The room’s lone chair advances menacingly towards you, and you decide you might as well go to avoid making the relationship any worse.", parse);
+			Text.Flush();
+			world.TimeStep({minute: 10});
+			Gui.NextPrompt();
+		}
+		else {
+			Text.Add("You tell the room that, yes, in fact you’ve got them with you. You pull the gilded hinges out of your bag and awkwardly hold them out in the air for inspection.", parse);
+			Text.NL();
+			Text.Add("A pair of twisted sheets snake out like tentacles from the bed and snatch the hinges from your hands, holding them up with no apparent effort. <i>\"Mm, yes, very nice…\"</i> Sixtynine murmurs. <i>\"These will do very well.\"</i> The cloth tendrils stroke the hinges up and down, poking into the screw holes, bending them back and forth.", parse);
+			Text.NL();
+			Text.Add("<i>\"Oh, you’re still here!\"</i> the voice exclaims, sounding a little embarrassed. <i>\"Thank you for the gift, but you should leave for now. I want to get these installed right away, you see. You can come back later, and I might just show you how grateful I am…\"</i>", parse);
+			Text.NL();
+			Text.Add("You wonder just how the room is going to install the hinges, but accept its wishes and head out.", parse);
+			Text.Flush();
+			
+			room69.flags["Hinges"] = Room69.HingesFlags.Delivered; // delivered
+			room69.flags["Rel"]    = Room69.RelFlags.GoodTerms;
+			
+			room69.relation.IncreaseStat(100, 10); //-15
+			
+			world.TimeStep({minute: 30});
+			Gui.NextPrompt();
+		}
+	}
+}
+
+Scenes.Room69.ApologizeTo69ForBeingMean = function() {
+	var parse = {
+		hisher : player.mfTrue("his", "her")
+	};
+	
+	Text.Clear();
+	Text.Add("You head up to the third floor, feeling a little guilty about the way your last encounter with Sixtynine ended.", parse);
+	Text.NL();
+	Text.Add("It doesn’t take you long to find the right room. The door stands out, being clearly older than the others on the floor and even having a <i>\"Staff Only\"</i> sign on it. How you managed to miss that when you first came here is beyond you.", parse);
+	Text.NL();
+	Text.Add("You knock tentatively, and after a pause just long enough for you to consider knocking again, the door swings slowly inwards.", parse);
+	Text.NL();
+	Text.Add("<i>\"It’s you,\"</i> Sixtynine offers, sounding less than pleased by your presence. <i>\"Come to tell me about my fleas again? Or perhaps this time you’re going to wax loquacious about all the cockroaches you have spotted? One does tend to thinking of [hisher] own kind, I suppose.\"</i>", parse);
+	Text.NL();
+	Text.Add("Ah, this isn’t starting so well. You came here thinking of making up with Sixtynine, but damn if it doesn’t tempt you into bickering with it...", parse);
+	Text.Flush();
+	
+	
+	//[Apologize][Insult Fight][Leave]
+	var options = new Array();
+	options.push({ nameStr : "Apologize",
+		func : function() {
+			Text.Clear();
+			Text.Add("It feels silly to speak to the empty air, even though you know a sentient room is listening, but you persevere and tell Sixtynine that you are sorry about what happened earlier. You just felt trapped, and it was the only way out you saw...", parse);
+			Text.NL();
+			
+			var racescore = new RaceScore(player.body);
+			var majorRace = racescore.Sorted()[0];
+			var undef = false;
+			switch(majorRace) {
+				case Race.human:  parse["race"] = " monkeys";    break;
+				case Race.horse:  parse["race"] = " horsies";    break;
+				case Race.dog:    parse["race"] = " doggies";    break;
+				case Race.cat:    parse["race"] = " kitties";    break;
+				case Race.fox:    parse["race"] = " foxies";     break;
+				case Race.avian:  parse["race"] = " birdies";    break;
+				case Race.lizard: parse["race"] = " hatchlings"; break;
+				case Race.rabbit: parse["race"] = " bunnies";    break;
+				case Race.sheep:  parse["race"] = " lambs";      break;
+				case Race.wolf:   parse["race"] = " wolfies";    break;
+				default:          parse["race"] = "... whatever you are"; undef = true; break;
+			}
+			
+			Text.Add("<i>\"Well... I suppose, someone like you might start panicking in that situation. I will admit I made a mistake. I knew that one should not corner dangerous animals, for they are likely to then attack,\"</i> the voice remarks coolly. <i>\"I just had not realized the same applied to[race].\"</i>", parse);
+			Text.NL();
+			parse["race"] = undef ? "You seethe a little, but" : "Well, at least you got compared to a cute animal. That’s good. Probably. Right? In any case,";
+			Text.Add("[race] your apology has been accepted, so it’s probably best to leave it at that, and avoid making things worse.", parse);
+			Text.NL();
+			Text.Add("You nod slightly, say something non-committal and back out the door, beating a hasty retreat. That’s enough for now - maybe you can come back later, once the mood is a bit more settled.", parse);
+			Text.Flush();
+			
+			room69.flags["Rel"] = Room69.RelFlags.GoodTerms;
+			room69.relation.IncreaseStat(100, 10); //0
+			
+			world.TimeStep({minute: 30});
+			Gui.NextPrompt();
+		}, enabled : true,
+		tooltip : "Provocation or no, you probably went a little too far..."
+	});
+	options.push({ nameStr : "Insult Fight",
+		func : function() {
+			Text.NL();
+			if(player.Int() > 40) {
+				Text.Add("<i>\"Is <b>that</b> how it works? Then I’m surprised you don’t spend more time thinking about oaks,\"</i> you retort. You tap your foot on the floor, regarding it sceptically. <i>\"Well, not oaks, clearly. I guess any kind of decent tree would be too dignified for you. Maybe about beetle-chewed pines.\"</i>", parse);
+				Text.NL();
+				Text.Add("<i>\"You really do have insects on your mind, don’t you?\"</i> the haughty voice responds. <i>\"If you are this interested in eating me, you shouldn’t have run away that first time. Or maybe you are just presently incapable of sex, since it’s not housefly mating season...\"</i>", parse);
+				Text.NL();
+				Text.Add("The two of you continue in the same vein for some time, the jibes growing increasingly outlandish. In this latest retort, you find yourself accusing Sixtynine of being <i>\"the bastard sprout of a willow and a walnut - one cries all day, and the other tries to drop nuts on your head.\"</i>", parse);
+				Text.NL();
+				Text.Add("Well, you aren’t quite sure where that came from, but at least it seems to silence the room for a few seconds. You begin to wonder if you managed to really offend it, when the silence is broken by a quiet giggle. It is follow by laughter like the peal of a bell and a hyena’s barking all at once, growing louder, until the room echoes with merriment and you can’t help but join in.", parse);
+				Text.NL();
+				Text.Add("<i>\"Ha... that was good,\"</i> Sixtynine finally says, between hiccups of amusement. <i>\"I didn’t think just letting loose with you would be so much fun. Alright, I forgive you, you can come by any time you want.\"</i>", parse);
+				Text.NL();
+				Text.Add("You agree, smiling grudgingly. That <b>was</b> fun. Still, you should probably get going - you can come back to visit the room later if you want, but for now it’s time to get back to your adventures.", parse);
+				Text.NL();
+				Text.Add("And how does a disembodied voice get hiccups, anyway?", parse);
+				
+				room69.relation.IncreaseStat(100, 5); //-5
+			}
+			else { // if low int
+				Text.Add("<i>\"Well, you’re an even worse insect than me. If I’m a cockroach, you’re like a... a dung beetle!\"</i> You’re not quite sure what you mean by that, but it’s a struggle to come up with something clever on the spot like this.", parse);
+				Text.NL();
+				Text.Add("<i>\"Oh, do you mean because I invited something like you inside? Do not misunderstand, I merely made a mistake, as I have to admit you hid your stench well,\"</i> the voice declaims the jibes smoothly. <i>\"Next time, I’ll be sure to let a maid know that something rolled in from the stable.\"</i>", parse);
+				Text.NL();
+				Text.Add("The duel continues in the same vein, with your retorts sounding lamer and lamer with each bout. Sixtynine dances verbal circles around you, twisting every insult you give into a worse insinuation about you. By the time the room dryly remarks that with you it seems to have gotten the one meaning of <i>\"ass\"</i> mixed up with the other, you feel utterly defeated and slump in dejection.", parse);
+				Text.NL();
+				Text.Add("A chortle sounds from the air. <i>\"Well, that was quite good, I have to admit,\"</i> the ethereal voice says, pleased. <i>\"I never knew a verbal punching bag could be so pleasant. Do come back some time - I’ll even spare you if you behave well for a change. Probably.\"</i>", parse);
+				Text.NL();
+				Text.Add("Looks like you managed to make up with the room, after a fashion. Not the fashion you would have liked, but you decide that at this point it will do, and take the chance slink off towards the exit.", parse);
+				// rel still -10
+			}
+			Text.Flush();
+			
+			room69.flags["Rel"] = Room69.RelFlags.GoodTerms;
+			
+			world.TimeStep({minute: 30});
+			Gui.NextPrompt();
+		}, enabled : true,
+		tooltip : "You are <b>not</b> letting it get away with that. If it wants to fight, you’re sure your wits are up to the challenge!"
+	});
+	options.push({ nameStr : "Leave",
+		func : function() {
+			world.TimeStep({minute: 10});
+			PrintDefaultOptions();
+		}, enabled : true,
+		tooltip : "With a start like that, it shouldn’t be any worse if you just try another time."
+	});
+	Gui.SetButtonsFromList(options);
+}
+
+// TODO: PLACEHOLDER
+Scenes.Room69.Normal69 = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("You trace the familiar steps to visit Sixtynine, and the door swings open, as if it is expecting you.", parse);
+	Text.NL();
+	Text.Add("<i>\"Why, it is delightful to see you, old chap,\"</i> the room remarks.", parse);
+	Text.NL();
+	Text.Add("<i>\"No, no, the pleasure is mine. It is always so nice to have your company,\"</i> you return, smiling.", parse);
+	Text.NL();
+	Text.Add("<i>\"‘Tis truly wonderful. You should come by more often. I shall send for tea and crumpets. Oh, and a bottle of that sensational raspberry jam - I know you love it so.\"</i>", parse);
+	Text.NL();
+	Text.Add("<i>\"Oh, that would astounding!\"</i> You clap your hands in delight.", parse);
+	Text.NL();
+	Text.Add("You continue chatting about sweet nothings, and the minor troubles of your days over tea, until it is time for you to depart. You thank the room with a gracious bow, and take your leave, promising to come by more often. That was most excellent. Most.", parse);
+	Text.NL();
+	Text.Add("<b>Note: this is a placeholder and does not improve your relationship with Sixtynine.</b>", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt();
+}
 
 /*
 Scenes.Room69.Discovering69 = function() {

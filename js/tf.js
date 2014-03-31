@@ -211,6 +211,28 @@ RaceScore.prototype.Compare = function(racescore) {
 	return dot / (this.len * racescore.len);
 }
 
+RaceScore.prototype.Sorted = function() {
+	var copiedScore = [];
+	var sorted = [];
+	for(var i = 0; i < Race.numRaces; i++)
+		copiedScore[i] = this.score[i];
+	
+	for(var num = 0; num < Race.numRaces; num++) {	
+		var highest    = -1;
+		var highestIdx =  0;
+		for(var i = 0; i < Race.numRaces; i++) {
+			if(copiedScore[i] > highest) {
+				highest    = copiedScore[i];
+				highestIdx = i;
+			}
+		}
+		
+		sorted[num] = highestIdx;
+		copiedScore[highestIdx] = -1;
+	}
+	
+	return sorted;
+}
 
 /*
  * TF ITEMS
