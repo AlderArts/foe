@@ -1786,6 +1786,9 @@ Scenes.Krawitz.Bathhouse = function() {
 							else
 								Text.Add("Gina whines piteously at being left out, and Marlene grudgingly concedes, allowing her stepdaughter to offer worship to your [cockDesc]. The two women take turns sucking you off, each throwing jealous looks at the other while waiting for her turn.", parse);
 							Text.NL();
+							
+							player.Fuck(player.FirstCock(), 2);
+							Sex.Blowjob(null, player);
 						}
 						if(player.FirstVag()) {
 							Text.Add("Lady Krawitz gives your [vagDesc] a long lick with her dainty tongue, sighing blissfully as she tastes you. She places her hands on your hips, holding you in place as if she’s afraid you might suddenly run away, unwilling to let as much as a drop of your juices escape her predatory lapping.", parse);
@@ -1798,6 +1801,9 @@ Scenes.Krawitz.Bathhouse = function() {
 								Text.Add("Gina crawls up behind you, pressing her nude, dripping body against your bare back. Her stiff nipples grind against you insistently as her hands caress and explore your body[skin]. Slowly, she works her way down your body, falling to her knees as she kneads your [buttDesc]. You gasp in surprise as you feel her fingers prying your cheeks apart, her tongue slipping insider your [anusDesc], probing the sensitive passage.", parse);
 							}
 							Text.NL();
+							
+							player.Fuck(player.FirstCock(), 2);
+							Sex.Cunnilingus(null, player);
 						}
 						Text.Add("You sigh contentedly as both of the Krawitz ladies work your nethers, hands and tongues exploring every nook and cranny of your aroused body. You lean down and pat their heads, commending them for being such good sluts, telling them how pleased Lord Krawitz would be if he saw them now.", parse);
 						if(Scenes.Krawitz.stat.TFdKrawitz)
@@ -1807,6 +1813,10 @@ Scenes.Krawitz.Bathhouse = function() {
 						Gui.NextPrompt(function() {
 							var playerCock = player.FirstCock() || (player.strapOn ? player.strapOn.cock : Items.StrapOn.LargeStrapon.cock);
 							Text.Clear();
+							
+							player.Fuck(playerCock, 10);
+							Sex.Vaginal(player, null);
+							
 							Text.Add("Well, time to move on to the main course.", parse);
 							if(player.FirstCock()) {
 								Text.Add("The ladies have been kind enough to prepare your [multiCockDesc] for penetration, lathering your length[s] generously with their hungry tongues.", parse);
@@ -1830,6 +1840,9 @@ Scenes.Krawitz.Bathhouse = function() {
 							Text.Add("Gina and Marlene pull you down on your back, rubbing their wet crotches against your stiff [multiCockDesc], each eager to be the first one taken. The younger of the two eventually wins out, her tongue lolling as she eases herself down on[oneof] your[towering] pillar[s].", parse);
 							Text.NL();
 							if(player.NumCocks() > 1) {
+								player.Fuck(player.AllCocks()[1], 10);
+								Sex.Vaginal(player, null);
+							
 								Text.Add("Krawitz’ wife doesn’t tarry in mounting[oneof2] your remaining cock[s2], hugging her stepdaughter tightly as she impales herself on your [cockDesc2]. The two women moan in ecstasy as they bounce in time on top of you, their breasts mashing against each other as stepmother and stepdaughter lock lips.", parse);
 								Text.NL();
 								Text.Add("Before long, both of the cocks drilling into the noblewomen are glistening with their sweet cuntjuices. Marlene and Gina are seemingly locked in a competition to see who can pleasure you most, their round buttocks jiggling delightfully as they bounce up and down on your stiff rods.", parse);
