@@ -173,6 +173,36 @@ world.loc.Rigard.Plaza.links.push(new Link(
 	}
 ));
 
+
+world.loc.Rigard.Plaza.events.push(new Link(
+	"Goldsmith", function() { return room69.flags["Hinges"] == Room69.HingesFlags.Asked; }, function() { return world.time.hour >= 9 && world.time.hour < 18; },
+	function() {
+		if(room69.flags["Hinges"] == Room69.HingesFlags.Asked)
+			Text.AddOutput("You see a rich establishment nearby, claiming to be the best goldsmith in town. Perhaps you could as the owner about making hinges for Sixtynine's door?");
+			Text.Newline();
+	},
+	function() {
+		Text.Clear();
+		Text.Add("You approach the luxurious building housing one of the city’s prominent goldsmiths. You’ve heard he dabbles in banking as well, and generally caters to the upper classes. Hopefully the charge for hinges won’t be too high.");
+		Text.NL();
+		Text.Add("A cadre of guards is spread around the interior, protecting the gold works on exhibit. There is a variety of coins, statues, jewelry, chandeliers... No hinges though. Maybe it’s not quite the right place, but it can’t hurt to ask. Well, unless they throw you out on your face.");
+		Text.NL();
+		Text.Add("You tentatively approach the counter and ask the owner if he can make you gold hinges. Gilded ones, that is.");
+		Text.NL();
+		Text.Add("<i>\"Gilded? We don’t stoop to that here. This establishment handles only the pure metal,\"</i> he tells you, frowning, <i>\"and its alloys of course. Now if you wanted solid gold... But you would need a light door, or the hinges would not hold it. Perhaps silver wrought over a thin frysan frame...?\"</i>");
+		Text.NL();
+		Text.Add("He glances over you, remembering himself. <i>\"But you would not be able to afford it. Go visit that oaf Martello in the merchant district. He should be more appropriate to your level.\"</i>");
+		Text.NL();
+		Text.Add("Hearing the dismissal in his words, you thank him and leave. A bit pompous, but he did direct you at least.");
+		Text.Flush();
+		
+		room69.flags["Hinges"] = Room69.HingesFlags.TalkedToGoldsmith;
+		
+		world.TimeStep({minute: 10});
+		Gui.NextPrompt();
+	}
+));
+
 world.loc.Rigard.Plaza.endDescription = function() {
 	Text.AddOutput("What you do?<br/>");
 }

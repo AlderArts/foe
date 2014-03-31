@@ -861,6 +861,7 @@ Scenes.Rigard.LB.EfriPrompt = function() {
 
 Scenes.Rigard.LB.DrinksPrompt = function(innPrompt) {
 	var parse = {
+		playername : player.name,
 		IkName   : rigard.LB["Orvin"] == 0 ? "The innkeeper" : "Orvin",
 		ikname   : rigard.LB["Orvin"] == 0 ? "the innkeeper" : "Orvin"
 	};

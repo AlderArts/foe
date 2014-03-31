@@ -102,6 +102,77 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	}
 ));
 
+world.loc.Rigard.ShopStreet.street.events.push(new Link(
+	"Martello", function() { return room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith || room69.flags["Hinges"] == Room69.HingesFlags.TalkedToSmith; }, function() { return world.time.hour >= 9 && world.time.hour < 18; },
+	function() {
+		if(room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith) {
+			Text.AddOutput("You could ask the smith Martello to make gilded hinges for Sixtynine’s door.");
+			Text.Newline();
+		}
+		else if(room69.flags["Hinges"] == Room69.HingesFlags.TalkedToSmith) {
+			Text.AddOutput("You could ask the smith Martello how the work on the gilded hinges for Sixtynine’s door is progressing.");
+			Text.Newline();
+		}
+	},
+	function() {
+		Text.Clear();
+		if(room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith) {
+			Text.Add("You ask around and quickly find your way to Martello’s smithy. It’s plain, especially after the goldsmith’s establishment, but seems well-kept and prosperous enough.");
+			Text.NL();
+			Text.Add("Inside, you are met by the smith’s assistant, and, when he hears your request, forced to wait for a few minutes for Martello to finish up with his current task. You hear clanging from the forge room, and it seems that the man is observing one of his apprentices work on a horseshoe, checking her technique.");
+			Text.NL();
+			var parse = {
+				str : player.Str() > 35 ?
+				", and you return it in kind, your hands briefly locking in an immovable bond. The smith smiles at you, in apparent approval" :
+				", and you shake your hand a little to adjust your joints once he releases you"
+			};
+			Text.Add("After a few minutes, Martello comes around to greet you. His handshake is like a vice[str]. You explain what you need to him, and he scratches his beard, thinking it over.", parse);
+			Text.NL();
+			Text.Add("<i>\"Shouldn’t be a problem. A bit tricky to work the gold leaf like that, but I’ll manage,\"</i> he tells you. <i>\"Hundred twenty coins, and I’ll have ‘em for you within a day or so.\"</i>");
+			Text.Flush();
+			
+			//[Pay][Leave]
+			var options = new Array();
+			options.push({ nameStr : "Pay",
+				func : function() {
+					Text.Clear();
+					
+					party.coin -= 120;
+					
+					Text.Add("<b>You pay 120 gold.</b>", parse);
+					Text.NL();
+					Text.Add("You agree to the price, and shake hands on it. Martello asks his assistant to make a note in the workbook, and says he’ll have your hinges ready as fast as he can - you should come by to pick them up then.", parse);
+					Text.NL();
+					Text.Add("<b>You should come back later to retrieve the hinges.</b>", parse);
+					Text.Flush();
+					
+					room69.flags["Hinges"] = Room69.HingesFlags.TalkedToSmith;
+					
+					world.TimeStep({hour: 1});
+					Gui.NextPrompt();
+				}, enabled : party.coin >= 120,
+				tooltip : "Pay 120 coins for the hinges."
+			});
+			options.push({ nameStr : "Leave",
+				func : PrintDefaultOptions, enabled : true,
+				tooltip : "Leave for now. You can always get the hinges later."
+			});
+			Gui.SetButtonsFromList(options);
+		}
+		else {
+			Text.Add("The smith's assistant remembers your order, and promptly brings it out for you after greeting you.");
+			Text.NL();
+			Text.Add("You examine the hinges, turning them over in your hands. Very hinge-like. The gilding is well done - were it not for the light weight, you could very easily believe these are actually made of gold.");
+			Text.NL();
+			Text.Add("Seeing no problem with the order, you thank the assistant, and head out. Looks like you can fulfill Sixtynine's request now, if you want. Which you probably do, unless you can think of another pressing use for gilded door hinges...");
+			Text.Flush();
+			
+			room69.flags["Hinges"] = Room69.HingesFlags.HaveHinges;
+			Gui.NextPrompt();
+		}
+	}
+));
+
 world.loc.Rigard.ShopStreet.street.endDescription = function() {
 	Text.AddOutput("Where you go?<br/>");
 }
