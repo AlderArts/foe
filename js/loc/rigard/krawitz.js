@@ -136,7 +136,7 @@ world.loc.Rigard.Krawitz.street.links.push(new Link(
 		Text.AddOutput("Sneak into the main grounds? Better do this in the late hours of the day, though not too late. You suspect you'll need all the time you can get once inside.<br/>");
 	},
 	function() {
-		Scenes.Krawitz.SneakingIn();
+		Scenes.Krawitz.ApproachGates();
 	}
 ));
 
@@ -294,6 +294,7 @@ world.loc.Rigard.Krawitz.grounds.links.push(new Link(
 									
 									Gui.NextPrompt(function() {
 										MoveToLocation(world.loc.Rigard.Krawitz.grounds);
+										Scenes.Krawitz.AddSuspicion(5, true);
 									});
 								}, enabled : true,
 								tooltip : "Why not direct the mob somewhere else?"
@@ -442,6 +443,7 @@ world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
 		Text.Flush();
 		Gui.NextPrompt(function() {
 			MoveToLocation(world.loc.Rigard.Krawitz.Mansion.hall, {minute: 10});
+			Scenes.Krawitz.AddSuspicion(3, true);
 		});
 	}
 ));
@@ -545,6 +547,7 @@ world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
 						
 						Gui.NextPrompt(function() {
 							MoveToLocation(world.loc.Rigard.Krawitz.Mansion.hall, {minute: 10});
+							Scenes.Krawitz.AddSuspicion(1, true);
 						});
 					}, enabled : true,
 					tooltip : "Serve the lord his food."
@@ -568,6 +571,7 @@ world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
 							
 							Gui.NextPrompt(function() {
 								MoveToLocation(world.loc.Rigard.Krawitz.Mansion.hall, {minute: 10});
+								Scenes.Krawitz.AddSuspicion(3, true);
 							});
 						}, enabled : true,
 						tooltip : "Serve the lord his food, but pour a bit of the alchemical vial onto the dish first."
@@ -604,6 +608,7 @@ Scenes.Krawitz.KrawitzPrompt = function() {
 			
 			Gui.NextPrompt(function() {
 				MoveToLocation(world.loc.Rigard.Krawitz.Mansion.hall, {minute: 10});
+				Scenes.Krawitz.AddSuspicion(1, true);
 			});
 		}, enabled : true,
 		tooltip : "Excuse yourself."
@@ -881,7 +886,6 @@ Scenes.Krawitz.Scouting = function() {
 					rigard.KrawitzWorkDay.hour   = 0;
 					rigard.KrawitzWorkDay.minute = 0;
 					rigard.KrawitzWorkDay.Inc({day: 1});
-					// TODO #Unlocks new event, must be 20-24 the same day.
 					
 					Gui.NextPrompt();
 				}
@@ -1292,13 +1296,23 @@ Scenes.Krawitz.AddSuspicion = function(num, surpressNext) {
 	if(DEBUG) {
 		Text.NL();
 		Text.Add("<b>Suspicion + " + num + ": " + Scenes.Krawitz.stat.Suspicion + "/100</b>");
+		Text.NL();
 		Text.Flush();
 	}
 	
 	if(Scenes.Krawitz.stat.Suspicion >= 100) {
 		Scenes.Krawitz.stat.AlarmRaised = true;
 		
-		//TODO
+		Gui.NextPrompt(function() {
+			Text.Clear();
+			Text.Add("As you move along, you hear confused shouting, and the shuffling of boots running rapidly in your direction. Seems like your actions have finally caught up to you, and from the sounds of it, you have managed to rouse the entire mansion. And you were just causing some peaceful mayhem, how rude.");
+			Text.NL();
+			Text.Add("You throw one last look of regret towards the mansion grounds as you vault over the fence and onto the street. There is no way you could avoid detection in the pandemonium inside. Before long, the city guard will probably arrive as well, so you’d best leave the area while you still can.");
+			Text.Flush();
+
+			Scenes.Krawitz.stat.AlarmRaised = true;
+			Gui.NextPrompt(Scenes.Krawitz.Aftermath);
+		});
 	}
 	
 	if(!surpressNext)
@@ -1646,6 +1660,7 @@ Scenes.Krawitz.Bathhouse = function() {
 			
 			Gui.NextPrompt(function () {
 				MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 15});
+				Scenes.Krawitz.AddSuspicion(3, true);
 			});
 		}
 		else {
@@ -1700,6 +1715,7 @@ Scenes.Krawitz.Bathhouse = function() {
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+					Scenes.Krawitz.AddSuspicion(1, true);
 				});
 			}, enabled : true,
 			tooltip : "Leave the two alone for now."
@@ -1717,6 +1733,7 @@ Scenes.Krawitz.Bathhouse = function() {
 				player.AddLustFraction(0.2);
 				Gui.NextPrompt(function() {
 					MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+					Scenes.Krawitz.AddSuspicion(1, true);
 				});
 			}, enabled : true,
 			tooltip : "Serve them wine."
@@ -1738,6 +1755,7 @@ Scenes.Krawitz.Bathhouse = function() {
 						Text.Flush();
 						Gui.NextPrompt(function() {
 							MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 20});
+							Scenes.Krawitz.AddSuspicion(5, true);
 						});
 					}
 					else {
@@ -1941,6 +1959,7 @@ Scenes.Krawitz.OrgyEntrypoint = function() {
 		
 		Gui.NextPrompt(function() {
 			MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 20});
+			Scenes.Krawitz.AddSuspicion(5, true);
 		});
 	}
 	else {
@@ -1983,7 +2002,6 @@ Scenes.Krawitz.Aftermath = function() {
 	
 	if(!Scenes.Krawitz.stat.AlarmRaised) points += 1;
 	
-	//TODO
 	Gui.NextPrompt(function() {
 		party.location = world.loc.Rigard.Inn.penthouse;
 		

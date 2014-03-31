@@ -828,6 +828,13 @@ Scenes.Rigard.LB.EfriPrompt = function() {
 		
 	};
 	
+	//TODO
+	Text.Clear();
+	Text.Add("PLACEHOLDER", parse);
+	Text.Flush();
+	Gui.NextPrompt();
+	return;
+	
 	var task = Scenes.Rigard.LB.efriaction;
 	
 	Text.Clear();
