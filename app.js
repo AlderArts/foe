@@ -7,7 +7,7 @@ APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 3;
 VERSION_SUBSCRIPT = "e";
-VERSION_NAME = "Domming Gwendy again";
+VERSION_NAME = "Metal Gear Eden";
 
 SAVE_VERSION = 13;
 // Save version 1: Initial
