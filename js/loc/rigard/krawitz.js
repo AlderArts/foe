@@ -159,11 +159,10 @@ world.loc.Rigard.Krawitz.grounds.description = function() {
 
 world.loc.Rigard.Krawitz.grounds.onEntry = function() {
 	var enc = new EncounterTable();
-	enc.AddEnc(function() { return Scenes.Krawitz.PatrollingGuards;}, 1.0, function() { return !Scenes.Krawitz.stat.Orgy; });
-	enc.AddEnc(function() { return Scenes.Krawitz.WanderingServants;}, 1.0, function() { return !Scenes.Krawitz.stat.ServantSpikedWine; });
+	enc.AddEnc(Scenes.Krawitz.PatrollingGuards,  1.0, function() { return !Scenes.Krawitz.stat.Orgy; });
+	enc.AddEnc(Scenes.Krawitz.WanderingServants, 1.0, function() { return !Scenes.Krawitz.stat.ServantSpikedWine; });
 	enc.AddEnc(PrintDefaultOptions, 1.0, true);
-	var func = enc.Get();
-	func();
+	enc.Get();
 }
 
 world.loc.Rigard.Krawitz.grounds.links.push(new Link(
@@ -312,13 +311,28 @@ world.loc.Rigard.Krawitz.grounds.links.push(new Link(
 			
 			//[Street]
 			Input.buttons[11].Setup("Street", function() {
-					Text.Clear();
-					Text.Add("You’ve managed to avoid discovery so far, but you can feel your luck growing thin. Perhaps it’s time to call it quits. You methodically shed your servants’ garb, returning it to the storeroom before you step out the back door into the street, just another wanderer in the night.", parse);
-					Text.NL();
-					Text.Add("While it might take a while before the mansion discovers your activities, you decide it’s better to make yourself scarce, and quickly leave the area. Returning at a later time will likely be impossible.", parse);
-					Text.Flush();
-					
-					Gui.NextPrompt(Scenes.Krawitz.Aftermath);
+				Text.Clear();
+				Text.Add("Are you sure you would like to leave? You will not be able to return later.");
+				Text.Flush();
+				
+				var options = new Array();
+				options.push({ nameStr : "Yes",
+					func : function() {
+						Text.Clear();
+						Text.Add("You’ve managed to avoid discovery so far, but you can feel your luck growing thin. Perhaps it’s time to call it quits. You methodically shed your servants’ garb, returning it to the storeroom before you step out the back door into the street, just another wanderer in the night.", parse);
+						Text.NL();
+						Text.Add("While it might take a while before the mansion discovers your activities, you decide it’s better to make yourself scarce, and quickly leave the area. Returning at a later time will likely be impossible.", parse);
+						Text.Flush();
+						
+						Gui.NextPrompt(Scenes.Krawitz.Aftermath);
+					}, enabled : true,
+					tooltip : "Leave the estate, you've done enough for one night."
+				});
+				options.push({ nameStr : "No",
+					func : ServantPrompt, enabled : true,
+					tooltip : "Stay for a while longer."
+				});
+				Gui.SetButtonsFromList(options);
 			}, true, null, "You’ve caused enough trouble for one night, time to call it quits. You won’t be able to return again, as people will be a lot more suspicious of newcomers now.");
 		}
 		if(!Scenes.Krawitz.stat.HasServantClothes)
@@ -362,12 +376,27 @@ world.loc.Rigard.Krawitz.grounds.links.push(new Link(
 	},
 	function() {
 		Text.Clear();
-		Text.Add("You’ve managed to avoid detection so far, but you can feel your luck growing thin. Perhaps it is time to call it quits. Eyeing your surroundings carefully, you confirm that no guards are around at the moment. Silently, you slip over the fence, back into the streets. You shed your servants’ garb, hiding it in an alley.");
-		Text.NL();
-		Text.Add("While it might take a while before the mansion discovers your activities, you decide it’s better to make yourself scarce, and quickly leave the area. Returning at a later time will likely be impossible.");
+		Text.Add("Are you sure you would like to leave? You will not be able to return later.");
 		Text.Flush();
 		
-		Gui.NextPrompt(Scenes.Krawitz.Aftermath);
+		var options = new Array();
+		options.push({ nameStr : "Yes",
+			func : function() {
+				Text.Clear();
+				Text.Add("You’ve managed to avoid detection so far, but you can feel your luck growing thin. Perhaps it is time to call it quits. Eyeing your surroundings carefully, you confirm that no guards are around at the moment. Silently, you slip over the fence, back into the streets. You shed your servants’ garb, hiding it in an alley.");
+				Text.NL();
+				Text.Add("While it might take a while before the mansion discovers your activities, you decide it’s better to make yourself scarce, and quickly leave the area. Returning at a later time will likely be impossible.");
+				Text.Flush();
+				
+				Gui.NextPrompt(Scenes.Krawitz.Aftermath);
+			}, enabled : true,
+			tooltip : "Leave the estate, you've done enough for one night."
+		});
+		options.push({ nameStr : "No",
+			func : PrintDefaultOptions, enabled : true,
+			tooltip : "Stay for a while longer."
+		});
+		Gui.SetButtonsFromList(options);
 	}
 ));
 
@@ -1997,7 +2026,7 @@ Scenes.Krawitz.Aftermath = function() {
 	Text.Add("<b>Final Score:</b><br/>", parse);
 	Text.Add("Suspicion raised: " + Scenes.Krawitz.stat.Suspicion + "/100<br/>", parse);
 	Text.Add("Mayhem spread: " + points + "/10<br/>", parse);
-	Text.Add("Alarm raised: " + Scenes.Krawitz.stat.AlarmRaised ? "yes" : "no", parse);
+	Text.Add("Alarm raised: " + (Scenes.Krawitz.stat.AlarmRaised ? "yes" : "no"), parse);
 	Text.Flush();
 	
 	if(!Scenes.Krawitz.stat.AlarmRaised) points += 1;
@@ -2069,88 +2098,92 @@ Scenes.Krawitz.Aftermath = function() {
 			Text.Add("You finish by explaining how you slipped out without alerting anyone of your presence, a ghost in the night. The pair complement you on your craftiness.", parse);
 		else
 			Text.Add("You finish by telling of your daring escape from the mansion, dodging pursuing guards through the streets of Rigard. This gains you a whooping round of applause.", parse);
-		Text.NL();
-		if(points <= 1)
-			Text.Add("<i>”Though I expected more, you’ve still shown your dedication,”</i> the man grudgingly admits. <i>”If nothing else, you <b>did</b> risk yourself by sneaking into the mansion. I guess that we can see that as proof of your loyalty, at least.”</i>", parse);
-		else if(points <= 5)
-			Text.Add("<i>”This isn’t a night the old man Krawitz is likely to forget soon,”</i> the man chuckles. <i>”You’ve done us a great service, [playername], and earned our trust.”</i> The woman nods her agreement.", parse);
-		else if(points <= 9)
-			Text.Add("<i>”This will be one for the bards, [playername],”</i> the man chortles, <i>”I’d be surprised if the old fart dares show his face after your actions tonight. He’ll be the laughingstock of Rigard!”</i> He shakes your hand heartily, very pleased with your efforts.", parse);
-		else {
-			Text.Add("After you have finished, the pair sits in stunned silence, gawking at your story. At last, the man clears his throat.", parse);
-			Text.NL();
-			Text.Add("<i>”Remind me to never get on your bad side, [playername],”</i> the man breathes, amazed, <i>”to have accomplished all this in a single night… you’ve all but ruined Krawitz reputation. Truly, you went above and beyond. You have earned our trust.”</i> The woman nods in agreement, looking at you slightly apprehensively.", parse);
-		}
-		Text.NL();
-		if(points > 0) {
-			Text.Add("<i>”As a bonus for your service,”</i> the man motions to a purse on the table in front of him.", parse);
-			Text.NL();
-			twins.rumi.relation.IncreaseStat(100, points * 2);
-			twins.rani.relation.IncreaseStat(100, points * 3);
-			var coin = 100 * points;
-			party.coin += coin;
-			Text.Add("<b>You earned [coin] coins!</b>", {coin: coin});
-			if(points >= 6) {
+		Text.Flush();
+		
+		
+		Gui.NextPrompt(function() {
+			if(points <= 1)
+				Text.Add("<i>”Though I expected more, you’ve still shown your dedication,”</i> the man grudgingly admits. <i>”If nothing else, you <b>did</b> risk yourself by sneaking into the mansion. I guess that we can see that as proof of your loyalty, at least.”</i>", parse);
+			else if(points <= 5)
+				Text.Add("<i>”This isn’t a night the old man Krawitz is likely to forget soon,”</i> the man chuckles. <i>”You’ve done us a great service, [playername], and earned our trust.”</i> The woman nods her agreement.", parse);
+			else if(points <= 9)
+				Text.Add("<i>”This will be one for the bards, [playername],”</i> the man chortles, <i>”I’d be surprised if the old fart dares show his face after your actions tonight. He’ll be the laughingstock of Rigard!”</i> He shakes your hand heartily, very pleased with your efforts.", parse);
+			else {
+				Text.Add("After you have finished, the pair sits in stunned silence, gawking at your story. At last, the man clears his throat.", parse);
 				Text.NL();
-				Text.Add("<i>”I think an additional reward is in order,”</i> the woman declares, pulling out an elaborate silver necklace, with a rose at its center.", parse);
-				Text.NL();
-				Text.Add("<b>Received woman’s favor!</b>", parse);
-				Text.NL();
-				party.inventory.AddItem(Items.Accessories.RaniFavor);
+				Text.Add("<i>”Remind me to never get on your bad side, [playername],”</i> the man breathes, amazed, <i>”to have accomplished all this in a single night… you’ve all but ruined Krawitz reputation. Truly, you went above and beyond. You have earned our trust.”</i> The woman nods in agreement, looking at you slightly apprehensively.", parse);
 			}
-			if(points >= 10) {
-				Text.Add("<i>”Why, I’d say you’ve made quite the impression on my companion,”</i> the man grins. <i>”If you are looking for more ‘favors’, I’m sure she wouldn’t mind providing them.”</i> The woman blushes deeply at this, but nods nervously.", parse);
-				
-				twins.flags["SexOpen"] = 1;
-				
-				var options = new Array();
-				
-				//[Sure][Nah]
-				if(player.FirstCock()) {
+			Text.NL();
+			if(points > 0) {
+				Text.Add("<i>”As a bonus for your service,”</i> the man motions to a purse on the table in front of him.", parse);
+				Text.NL();
+				twins.rumi.relation.IncreaseStat(100, points * 2);
+				twins.rani.relation.IncreaseStat(100, points * 3);
+				var coin = 100 * points;
+				party.coin += coin;
+				Text.Add("<b>You earned [coin] coins!</b>", {coin: coin});
+				if(points >= 6) {
 					Text.NL();
-					Text.Add("She is eyeing the bulge at your crotch with a slightly hungry look in her eyes.", parse);
-					options.push({ nameStr : "Blowjob",
+					Text.Add("<i>”I think an additional reward is in order,”</i> the woman declares, pulling out an elaborate silver necklace, with a rose at its center.", parse);
+					Text.NL();
+					Text.Add("<b>Received woman’s favor!</b>", parse);
+					Text.NL();
+					party.inventory.AddItem(Items.Accessories.RaniFavor);
+				}
+				if(points >= 10) {
+					Text.Add("<i>”Why, I’d say you’ve made quite the impression on my companion,”</i> the man grins. <i>”If you are looking for more ‘favors’, I’m sure she wouldn’t mind providing them.”</i> The woman blushes deeply at this, but nods nervously.", parse);
+					
+					twins.flags["SexOpen"] = 1;
+					
+					var options = new Array();
+					
+					//[Sure][Nah]
+					if(player.FirstCock()) {
+						Text.NL();
+						Text.Add("She is eyeing the bulge at your crotch with a slightly hungry look in her eyes.", parse);
+						options.push({ nameStr : "Blowjob",
+							func : function() {
+								Text.Clear();
+								Text.Add("<i>”While that would be really amusing, I think we should get the introductions out of the way first,”</i> the man interjects, grinning as he ruffles his blushing companion’s hair.", parse);
+								Text.Flush();
+								Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
+							}, enabled : true,
+							tooltip : "Have the woman give you a blowjob as a reward."
+						});
+					}
+					if(player.FirstVag()) {
+						options.push({ nameStr : "Cunnilingus",
+							func : function() {
+								Text.Clear();
+								Text.Add("<i>”You don’t bandy words, do you,”</i> the man laughs merrily, his voice light and melodical. <i>”How about we get the introductions out of the way first?”</i>", parse);
+								Text.Flush();
+								Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
+							}, enabled : true,
+							tooltip : "Have the woman eat you out as a reward."
+						});
+					}
+					options.push({ nameStr : "Not now",
 						func : function() {
 							Text.Clear();
-							Text.Add("<i>”While that would be really amusing, I think we should get the introductions out of the way first,”</i> the man interjects, grinning as he ruffles his blushing companion’s hair.", parse);
+							Text.Add("<i>”Well, the offer is standing.”</i> Both of them look slightly disappointed when you turn them down.", parse);
 							Text.Flush();
 							Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
 						}, enabled : true,
-						tooltip : "Have the woman give you a blowjob as a reward."
+						tooltip : "Not right now."
 					});
+					Text.Flush();
+					Gui.SetButtonsFromList(options);
 				}
-				if(player.FirstVag()) {
-					options.push({ nameStr : "Cunnilingus",
-						func : function() {
-							Text.Clear();
-							Text.Add("<i>”You don’t bandy words, do you,”</i> the man laughs merrily, his voice light and melodical. <i>”How about we get the introductions out of the way first?”</i>", parse);
-							Text.Flush();
-							Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
-						}, enabled : true,
-						tooltip : "Have the woman eat you out as a reward."
-					});
+				else {
+					Text.Flush();
+					Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
 				}
-				options.push({ nameStr : "Not now",
-					func : function() {
-						Text.Clear();
-						Text.Add("<i>”Well, the offer is standing.”</i> Both of them look slightly disappointed when you turn them down.", parse);
-						Text.Flush();
-						Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
-					}, enabled : true,
-					tooltip : "Not right now."
-				});
-				Text.Flush();
-				Gui.SetButtonsFromList(options);
 			}
 			else {
 				Text.Flush();
 				Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
 			}
-		}
-		else {
-			Text.Flush();
-			Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
-		}
+		});
 	});
 }
 

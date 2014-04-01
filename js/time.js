@@ -46,12 +46,15 @@ Time.prototype.FromStorage = function(storage) {
 	this.minute = parseInt(storage.m) || this.minute;
 }
 
-Time.prototype.Clone = function(time) {
-	this.year   = time.year;
-	this.season = time.season;
-	this.day    = time.day;
-	this.hour   = time.hour;
-	this.minute = time.minute;
+Time.prototype.Clone = function() {
+	var time = new Time(
+		this.year,
+		this.season,
+		this.day,
+		this.hour,
+		this.minute
+	);
+	return time;
 }
 
 Time.prototype.Leq = function(time) {

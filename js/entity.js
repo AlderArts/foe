@@ -2001,6 +2001,8 @@ Entity.prototype.PrintDescription = function() {
 	
 	// Genetalia
 	var cocks = this.body.cock;
+	var vags = this.body.vagina;
+	
 	if(cocks.length == 1) {
 		var cock = cocks[0];
 		parse.cockDesc = cock.aLong();
@@ -2040,7 +2042,6 @@ Entity.prototype.PrintDescription = function() {
 	}
 	
 	// TODO: vagina
-	var vags = this.body.vagina;
 	if(vags.length == 1) {
 		var vag = vags[0];
 		var vagDesc = vag.Desc();
