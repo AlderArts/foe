@@ -697,10 +697,16 @@ Entity.prototype.NameDesc = function() {
 	return this.MonsterName || this.name;
 }
 Entity.prototype.possessive = function() {
-	return (this.monsterName || this.name) + "'s";
+	var name = this.monsterName || this.name || "the entity";
+	var letter = name[name.length-1];
+	var s = (letter == 's' || letter == 'x') ? "'" : "'s";
+	return name + s;
 }
 Entity.prototype.Possessive = function() {
-	return (this.MonsterName || this.name) + "'s";
+	var name = this.MonsterName || this.name || "The entity";
+	var letter = name[name.length-1];
+	var s = (letter == 's' || letter == 'x') ? "'" : "'s";
+	return name + s;
 }
 Entity.prototype.heshe = function() {
 	var gender = this.body.Gender();
