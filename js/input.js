@@ -1,5 +1,7 @@
 
 Input = {
+	
+	//TODO: Raphael sets?
 	buttons        : new Array(),
 	navButtons     : new Array(),
 	exploreButtons : new Array(),
@@ -21,13 +23,13 @@ Input.Init = function() {
 
     window.onkeydown   = Input.Keydown;
     window.onkeyup     = Input.Keyup;
+    /*
     canvas.onmousedown = Mousedown;
     canvas.onmouseup   = Mouseup;
     canvas.onmousemove = Mousemove;
-    
+    */
     Input.InitButtons();
     
-    // TODO: For now, don't init menu since it doesn't do anything
     Input.InitMenuButtons();
 }
 
@@ -35,7 +37,7 @@ Input.Init = function() {
 Input.InitButtons = function() {
 	// Temporary stuff
 	var onClick1 = function() { Text.AddOutput(" " + this.text); }
-	var offset = {x: 270, y:580};
+	var offset = {x: 270, y:600};
 	
 	var x, y;
 	for(y = 0; y < 3; y++) {
@@ -45,7 +47,7 @@ Input.InitButtons = function() {
 		Input.navButtons.push(new Button({x : offset.x + 162*4, y : offset.y + 40*y, w : 75, h : 35}, "Nav" + y, onClick1, true, Images.imgNavButtonEnabled, Images.imgNavButtonDisabled));
 	}
 	for(y = 0; y < 8; y++) {
-		Input.exploreButtons.push(new Button({x : 1055, y : 375 + 40 * y, w : 155, h : 35}, "Exp"+y, onClick1, true, Images.imgButtonEnabled, Images.imgButtonDisabled));
+		Input.exploreButtons.push(new Button({x : 1100, y : 375 + 40 * y, w : 155, h : 35}, "Exp"+y, onClick1, true, Images.imgButtonEnabled, Images.imgButtonDisabled));
 	}
 	Input.exploreButtons.push(new Button({x : 150, y : 590, w : 50, h : 50}, "", null, true, Images.imgWaitEnabled, Images.imgWaitDisabled));
 	Input.exploreButtons.push(new Button({x : 150, y : 590, w : 50, h : 50}, "", null, true, Images.imgSleepEnabled, Images.imgSleepDisabled));
@@ -60,28 +62,6 @@ Input.InitMenuButtons = function() {
 	// TOP, Data menu
 	Input.menuButtons.push(new Button({x : 10, y : 10, w : 155, h : 35}, "DATA", onClick1, true, Images.imgButtonEnabled, Images.imgButtonDisabled));
 };
-
-Input.HandleClick = function(pos) {
-	// TODO: Prioritze layers
-	var i;
-	switch(gameState) {
-		case GameState.Game:
-			for(i = 0; i < Input.menuButtons.length; i++)
-				Input.menuButtons[i].HandleClick(pos);
-			for(i = 0; i < Input.exploreButtons.length; i++)
-				Input.exploreButtons[i].HandleClick(pos);
-		case GameState.Event:
-		case GameState.Credits:
-		case GameState.Combat:
-		case GameState.Cavalcade:
-			for(i = 0; i < Input.buttons.length; i++)
-				Input.buttons[i].HandleClick(pos);
-			for(i = 0; i < Input.navButtons.length; i++)
-				Input.navButtons[i].HandleClick(pos);
-		break;
-	}
-
-}
 
 Input.RenderButtons = function(context) {
 	// Debugging
@@ -253,55 +233,10 @@ Input.Keyup = function(event) {
 	return true;
 }
 
-// Returns the relative mouse position inside the object
-// Return format {x,y} in the range 0 to 1
-function RelativeMousePos(event, object) {
-	var totalOffsetX = 0;
-    var totalOffsetY = 0;
-    var canvasX = 0;
-    var canvasY = 0;
-    var currentElement = object;
-
-    do {
-        totalOffsetX += currentElement.offsetLeft;
-        totalOffsetY += currentElement.offsetTop;
-    }
-    while(currentElement = currentElement.offsetParent)
-
-    var mouseX = (event.pageX - totalOffsetX) / windowWidth;
-    var mouseY = (event.pageY - totalOffsetY) / windowHeight;
-    
-    return {x:mouseX, y:mouseY};
-}
-
-// Catches mouse click events
-function Mousedown(event) {
-	Input.MousePos = new RelativeMousePos(event, this);
-	Input.mousebutton = true;
-	
-	Input.HandleClick(Input.MousePos);
-	UpdateTooltip();
-	
-	return true;
-}
-
-// Catches mouse up events
-function Mouseup(event) {
-	Input.MousePos = new RelativeMousePos(event, this);
-	Input.mousebutton = false;
-	return true;
-}
-
-// Catches mouse move events
-function Mousemove(event) {
-	Input.MousePos = new RelativeMousePos(event, this);
-	UpdateTooltip();
-	return true;
-}
-
 Input.tooltip = false;
 
 // Updates tooltip (called one mouse events and on keydown events, so no old tooltips linger)
+//TODO: Tooltip
 function UpdateTooltip() {
 	Input.tooltipVisible = false;
 	

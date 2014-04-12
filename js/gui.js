@@ -3,11 +3,26 @@ Gui = {}
 Gui.w = 1280;
 Gui.h = 720;
 
+Gui.textArea = {
+	x: 270,
+	y: 65,
+	w: 800,
+	h: 530,
+	inset: 4,
+	pad: {x: 20, y:10}
+};
+
 Gui.Init = function() {
 	Gui.canvas = Raphael("wrap");
 	Gui.canvas.setViewBox(0,0,Gui.w,Gui.h,true);
 	Gui.canvas.setSize('100%', '100%');
-	Gui.bg = Gui.canvas.image("data/paper.jpg", 0, 0, 1280, 720);
+	Gui.bg = Gui.canvas.image("data/paper.jpg", 0, 0, Gui.w, Gui.h);
+	var svg = document.querySelector("svg");
+	svg.removeAttribute("width");
+	svg.removeAttribute("height");
+	
+	Gui.canvas.rect(Gui.textArea.x, Gui.textArea.y, Gui.textArea.w, Gui.textArea.h).attr({"stroke-width": Gui.textArea.inset});
+	Gui.onresize();
 
     // Set up key listeners (input.js)
     Input.Init();
@@ -55,17 +70,26 @@ Gui.Init = function() {
 }
 
 Gui.onresize = function() {
-	var bodyrect = document.body.getBoundingClientRect();
-	var wrap = document.getElementById("wrap");
-	var rect = wrap.getBoundingClientRect();
-	var w = rect.right - rect.left;
-	var h = rect.bottom - rect.top;
+	var w = $(window).width();
+	var h = $(window).height();
 	var ratioW = w/Gui.w;
 	var ratioH = h/Gui.h;
-	var textarea = document.getElementById("mainTextArea");
-	textarea.style.left     = (wrap.left - bodyrect.left) + ratioW * 270 +"px";
-	textarea.style.top      = (wrap.top  - bodyrect.top)  + ratioH * 65  +"px";
+	var xpos = 0, ypos = 0, ratio = 1;
+	//alert("R:" + ratio + " RW:" + ratioW + " RH:" + ratioH);
+	if(ratioW / ratioH > 1) {
+		xpos  = (w-ratioH*Gui.w) / 2;
+		ratio = ratioH;
+	}
+	else {
+		ypos  = (h-ratioW*Gui.h) / 2;
+		ratio = ratioW;
+	}
 	
+	var textarea = document.getElementById("mainTextWrapper");
+	textarea.style.left   = xpos + ratio * (Gui.textArea.inset/2+Gui.textArea.x) +"px";
+	textarea.style.top    = ypos + ratio * (Gui.textArea.inset/2+Gui.textArea.y) +"px";
+	textarea.style.width  = -2*Gui.textArea.pad.x + ratio * (-Gui.textArea.inset+Gui.textArea.w) +"px";
+	textarea.style.height = -2*Gui.textArea.pad.y + ratio * (-Gui.textArea.inset+Gui.textArea.h) +"px";
 }
 
 Gui.Callstack = new Array();

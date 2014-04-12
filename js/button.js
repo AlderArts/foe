@@ -18,8 +18,11 @@ function Button(rect, text, func, enabled, image, disabledImage) {
 	this.set     = Gui.canvas.set();
 	this.image   = Gui.canvas.image(image, rect.x, rect.y, rect.w, rect.h);
 	this.text    = Gui.canvas.text(rect.x + rect.w/2, rect.y + rect.h/2, text).attr({stroke: "#FFF", fill:"#FFF", font: TINY_FONT});
+	this.glow    = this.image.glow({width: 5, color: "green"});
+	//this.glow.hide();
 	this.set.push(this.image);
 	this.set.push(this.text);
+	this.set.push(this.glow);
 	
 	this.set.attr({
 		cursor: "pointer"
@@ -151,13 +154,6 @@ Button.prototype.Render = function(context, glow) {
 	*/
 }
 
-Button.prototype.Intersects = function(mousePos) {
-	if(windowWidth*mousePos.x > this.rect.x + this.rect.w) return false;
-	if(windowWidth*mousePos.x < this.rect.x) return false;
-	if(windowHeight*mousePos.y > this.rect.y + this.rect.h) return false;
-	if(windowHeight*mousePos.y < this.rect.y) return false;
-	return true;
-}
 
 Button.prototype.HandleKeydown = function(key) {
 	if(this.enabled == false) return;
