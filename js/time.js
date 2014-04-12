@@ -205,3 +205,11 @@ Time.prototype.ToHours = function() {
 	hour += this.year * Season.LAST * 30 * 24;
 	return hour;
 }
+Time.prototype.ToMinutes = function() {
+	var minute = this.minute;
+	minute += this.hour * 60;
+	minute += this.day * 24 * 60;
+	minute += this.season * 30 * 24 * 60;
+	minute += this.year * Season.LAST * 30 * 24 * 60;
+	return minute;
+}

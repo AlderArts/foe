@@ -34,6 +34,7 @@ Gui.Init = function() {
 	svg.removeAttribute("height");
 	
 	Gui.canvas.rect(Gui.textArea.x, Gui.textArea.y, Gui.textArea.w, Gui.textArea.h).attr({"stroke-width": Gui.textArea.inset});
+	Gui.debug = Gui.canvas.text(1230, 700, "Debug").attr({stroke: "#F00", fill:"#F00", font: SMALL_FONT}).hide();
 	Gui.onresize();
 
     // Set up key listeners (input.js)
@@ -504,35 +505,6 @@ Gui.Render = function(context) {
 		
 		break;
 	}
-	
-	// Render buttons etc
-	Input.RenderButtons(context);
-	
-	
-	//------------ TEMP
-	/*
-	context.fillStyle = "red";
-	var statename;
-	if(gameState == GameState.Alchemy) statename = "Alchemy";
-	if(gameState == GameState.Game) statename = "Game";
-	if(gameState == GameState.Event) statename = "Event";
-	if(gameState == GameState.Combat) statename = "Combat";
-	if(gameState == GameState.Credits) statename = "Credits";
-	if(gameState == GameState.Hunting) statename = "Hunting";
-	context.fillText(statename, 10, 30);
-	*/
-	//------------
-	
-	
-	//------------ TEMP
-	context.fillStyle   = "red";
-	context.lineWidth   = 4;
-	context.strokeStyle = "black";
-	if(DEBUG) {
-		context.strokeText("Debug ", 1170, 690);
-		context.fillText("Debug", 1170, 690);
-	}
-	//------------
 	
 	// TODO, use on stats screen
 	// Render character stats (temp)

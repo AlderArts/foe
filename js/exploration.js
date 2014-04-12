@@ -184,6 +184,7 @@ DataPrompt = function() {
     
     Input.buttons[4].Setup("Toggle debug", function() {
     	DEBUG = !DEBUG;
+    	if(DEBUG) Gui.debug.show(); else Gui.debug.hide();
     	for(var i = 0; i < party.members.length; i++) {
     		party.members[i].DebugMode(DEBUG);
     	}
