@@ -11,21 +11,7 @@ Input = {
 	
 	// Mouse button states and mouse position
 	mousebutton    : false,
-	MousePos       : {x: 0, y: 0},
-	
-	// Graphics
-	imgButtonEnabled     : new Image(),
-	imgButtonEnabled2    : new Image(),
-	imgButtonDisabled    : new Image(),
-	imgNavButtonEnabled  : new Image(),
-	imgNavButtonDisabled : new Image(),
-	
-	imgSearchEnabled     : new Image(),
-	imgSearchDisabled    : new Image(),
-	imgWaitEnabled       : new Image(),
-	imgWaitDisabled      : new Image(),
-	imgSleepEnabled      : new Image(),
-	imgSleepDisabled     : new Image()
+	MousePos       : {x: 0, y: 0}
 }
 
 
@@ -54,16 +40,16 @@ Input.InitButtons = function() {
 	var x, y;
 	for(y = 0; y < 3; y++) {
 		for(x = 0; x < 4; x++)
-			Input.buttons.push(new Button({x : offset.x + 162*x, y : offset.y + 40*y, w : 155, h : 35}, "Button" + (x + y*5), onClick1, true, Input.imgButtonEnabled, Input.imgButtonDisabled));
+			Input.buttons.push(new Button({x : offset.x + 162*x, y : offset.y + 40*y, w : 155, h : 35}, "Button" + (x + y*5), onClick1, true, Images.imgButtonEnabled, Images.imgButtonDisabled));
 		
-		Input.navButtons.push(new Button({x : offset.x + 162*4, y : offset.y + 40*y, w : 75, h : 35}, "Nav" + y, onClick1, true, Input.imgNavButtonEnabled, Input.imgNavButtonDisabled));
+		Input.navButtons.push(new Button({x : offset.x + 162*4, y : offset.y + 40*y, w : 75, h : 35}, "Nav" + y, onClick1, true, Images.imgNavButtonEnabled, Images.imgNavButtonDisabled));
 	}
-	for(y = 0; y < 10; y++) {
-		Input.exploreButtons.push(new Button({x : 1055, y : 375 + 40 * y, w : 155, h : 35}, "Exp"+y, onClick1, true, Input.imgButtonEnabled, Input.imgButtonDisabled));
+	for(y = 0; y < 8; y++) {
+		Input.exploreButtons.push(new Button({x : 1055, y : 375 + 40 * y, w : 155, h : 35}, "Exp"+y, onClick1, true, Images.imgButtonEnabled, Images.imgButtonDisabled));
 	}
-	Input.exploreButtons.push(new Button({x : 150, y : 590, w : 50, h : 50}, "", null, true, Input.imgWaitEnabled, Input.imgWaitDisabled));
-	Input.exploreButtons.push(new Button({x : 150, y : 590, w : 50, h : 50}, "", null, true, Input.imgSleepEnabled, Input.imgSleepDisabled));
-	Input.exploreButtons.push(new Button({x : 210, y : 590, w : 50, h : 50}, "", null, true, Input.imgSearchEnabled, Input.imgSearchDisabled));
+	Input.exploreButtons.push(new Button({x : 150, y : 590, w : 50, h : 50}, "", null, true, Images.imgWaitEnabled, Images.imgWaitDisabled));
+	Input.exploreButtons.push(new Button({x : 150, y : 590, w : 50, h : 50}, "", null, true, Images.imgSleepEnabled, Images.imgSleepDisabled));
+	Input.exploreButtons.push(new Button({x : 210, y : 590, w : 50, h : 50}, "", null, true, Images.imgSearchEnabled, Images.imgSearchDisabled));
 }
 
 Input.InitMenuButtons = function() {
@@ -72,7 +58,7 @@ Input.InitMenuButtons = function() {
 	var offset = {x: 15, y:620};
 	
 	// TOP, Data menu
-	Input.menuButtons.push(new Button({x : 10, y : 10, w : 155, h : 35}, "DATA", onClick1, true, Input.imgButtonEnabled, Input.imgButtonDisabled));
+	Input.menuButtons.push(new Button({x : 10, y : 10, w : 155, h : 35}, "DATA", onClick1, true, Images.imgButtonEnabled, Images.imgButtonDisabled));
 };
 
 Input.HandleClick = function(pos) {

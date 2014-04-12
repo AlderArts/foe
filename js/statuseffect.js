@@ -29,16 +29,16 @@ StatusEffect = {
 	LAST    : 20
 };
 
-LoadStatusImages = function(ready) {
+LoadStatusImages = function() {
 	Images.status = [];
 	for(var i = 0; i < StatusEffect.LAST; i++)
-		Images.status[i]  = new Image();
+		Images.status[i]  = "";
 	
 	// Status effects
-	LoadImage(Images.status[StatusEffect.Burn],   "data/status/burn.png", ready);
-	LoadImage(Images.status[StatusEffect.Freeze], "data/status/freeze.png", ready);
-	LoadImage(Images.status[StatusEffect.Numb],   "data/status/numb.png", ready);
-	LoadImage(Images.status[StatusEffect.Venom],  "data/status/venom.png", ready);
+	Images.status[StatusEffect.Burn]   = "data/status/burn.png";
+	Images.status[StatusEffect.Freeze] = "data/status/freeze.png";
+	Images.status[StatusEffect.Numb]   = "data/status/numb.png";
+	Images.status[StatusEffect.Venom]  = "data/status/venom.png";
 }
 
 function StatusList() {

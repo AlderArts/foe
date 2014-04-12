@@ -10,7 +10,10 @@
 		<!--[if IE]><script type="text/javascript" src="js/excanvas.compiled.js"></script><![endif]-->
 	</head>
 	
-	<body>
+	<body onresize="Gui.onresize()">
+		<div id=wrap></div>/>
+		
+		
 		<div id="container">
 			<!-- Main body containing the canvas object -->
 			<canvas id="canvas" width="1260" height="700">

@@ -43,9 +43,9 @@ ExploreButtonIndex = {
 	Ability : 3,
 	Alchemy : 4,
 	
-	Wait    : 10,
-	Sleep   : 11,
-	Look    : 12
+	Wait    : 8,
+	Sleep   : 9,
+	Look    : 10
 };
 
 SetExploreButtons = function() {

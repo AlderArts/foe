@@ -4,38 +4,44 @@
  * 
  */
 function Button(rect, text, func, enabled, image, disabledImage) {
-	this.rect    = rect;
-	this.image   = image;
+	var that = this;
+	
 	this.disabledImage = disabledImage;
 	this.visible = true;
 	this.enabled = enabled;
-	this.text    = text;
 	this.func    = func;
 	this.obj     = null;
 	this.tooltip = null;
 	this.key     = -1;
 	this.state   = null; // No change
 	
-	this.dom = $("<div>TEXT</div>").addClass("hiddenButton");
-	this.dom.css("top", rect.y + "px").css("left", rect.x + "px");
-	this.dom.css("width", rect.w + "px").css("height", rect.h + "px");
-	this.dom.appendTo("#container");
+	this.set     = Gui.canvas.set();
+	this.image   = Gui.canvas.image(image, rect.x, rect.y, rect.w, rect.h);
+	this.text    = Gui.canvas.text(rect.x + rect.w/2, rect.y + rect.h/2, text).attr({stroke: "#FFF", fill:"#FFF", font: TINY_FONT});
+	this.set.push(this.image);
+	this.set.push(this.text);
+	
+	this.set.attr({
+		cursor: "pointer"
+	}).click(function() {
+		that.HandleClick();
+	});
 }
 
-Button.prototype.setHTML = function() {
-	var str = "";
-	if(this.visible) {
-		if(this.enabled) {
-			if(this.key != -1) str += "(" + KeyToText[this.key] + ") ";
-			if(this.text)      str += this.text;
-			if(this.tooltip)   str += " - " + this.tooltip;
+Button.prototype.HandleClick = function() {
+	if(this.enabled == false) return;
+	if(this.visible == false) return;
+
+	if(this.func) {
+		if(this.state && gameState != GameState.Combat)
+			gameState = this.state;
+		try {
+			this.func(this.obj);
 		}
-		else {
-			str += this.text + " (DISABLED)";
+		catch(e) {
+			alert(e.message + "........." + e.stack);
 		}
 	}
-	
-	this.dom.text(str);
 }
 
 /*
@@ -47,27 +53,27 @@ Button.prototype.SetKey = function(key) {
 
 Button.prototype.SetEnabled = function(value) {
 	this.enabled = value;
-	this.setHTML();
 }
 
 Button.prototype.SetVisible = function(value) {
 	this.visible = value;
-	this.setHTML();
+	if(value)
+		this.set.show();
+	else
+		this.set.hide();
 }
 
 /*
  * This function is used to set the state of a button after it is created
  */
 Button.prototype.Setup = function(text, func, enabled, obj, tooltip, state) {
-	this.text    = text;
+	this.text.attr({text: text});
 	this.func    = func;
 	this.obj     = obj;
-	this.visible = true;
+	this.SetVisible(true);
 	this.enabled = enabled;
 	this.tooltip = tooltip;
 	this.state   = state;
-	
-	this.setHTML();
 }
 
 /*
@@ -82,11 +88,10 @@ Button.prototype.SetFromAbility = function(encounter, caster, ability, backPromp
 	this.func = function() {
 		ability.OnSelect(encounter, caster, backPrompt);
 	}
-	
-	this.setHTML();
 }
 
 Button.prototype.Render = function(context, glow) {
+	/*
 	if(this.visible != true)
 		return;
 	
@@ -143,6 +148,7 @@ Button.prototype.Render = function(context, glow) {
 	}
 	
 	context.restore();
+	*/
 }
 
 Button.prototype.Intersects = function(mousePos) {
@@ -151,25 +157,6 @@ Button.prototype.Intersects = function(mousePos) {
 	if(windowHeight*mousePos.y > this.rect.y + this.rect.h) return false;
 	if(windowHeight*mousePos.y < this.rect.y) return false;
 	return true;
-}
-
-Button.prototype.HandleClick = function(mousePos) {
-	if(this.enabled == false) return;
-	if(this.visible == false) return;
-	
-	if(this.Intersects(mousePos) && this.func) {
-		if(this.state && gameState != GameState.Combat)
-			gameState = this.state;
-		try {
-			this.func(this.obj);
-		}
-		catch(e) {
-			alert(e.message + "........." + e.stack);
-		}
-		finally {
-			Render();
-		}
-	}
 }
 
 Button.prototype.HandleKeydown = function(key) {
@@ -186,9 +173,6 @@ Button.prototype.HandleKeydown = function(key) {
 		}
 		catch(e) {
 			alert(e.message + "........." + e.stack);
-		}
-		finally {
-			Render();
 		}
 	}
 }

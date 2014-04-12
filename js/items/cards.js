@@ -86,28 +86,22 @@ Items.Cards.Shadow[4].Long = function() { return "The Dancer of Shadow, a playin
 
 Images.card_back    = new Image();
 
-LoadCardImages = function(ready) {
-	for(var i=0; i<5; i++) {
-		Items.Cards.Light[i].Img    = new Image();
-		Items.Cards.Darkness[i].Img = new Image();
-		Items.Cards.Shadow[i].Img   = new Image();
-	};
+LoadCardImages = function() {
+	Items.Cards.Light[0].Img    = "data/cards/L1.png";
+	Items.Cards.Light[1].Img    = "data/cards/L2.png";
+	Items.Cards.Light[2].Img    = "data/cards/L3.png";
+	Items.Cards.Light[3].Img    = "data/cards/L4.png";
+	Items.Cards.Light[4].Img    = "data/cards/L5.png";
+	Items.Cards.Darkness[0].Img = "data/cards/D1.png";
+	Items.Cards.Darkness[1].Img = "data/cards/D2.png";
+	Items.Cards.Darkness[2].Img = "data/cards/D3.png";
+	Items.Cards.Darkness[3].Img = "data/cards/D4.png";
+	Items.Cards.Darkness[4].Img = "data/cards/D5.png";
+	Items.Cards.Shadow[0].Img   = "data/cards/S1.png";
+	Items.Cards.Shadow[1].Img   = "data/cards/S2.png";
+	Items.Cards.Shadow[2].Img   = "data/cards/S3.png";
+	Items.Cards.Shadow[3].Img   = "data/cards/S4.png";
+	Items.Cards.Shadow[4].Img   = "data/cards/S5.png";
 	
-	LoadImage(Items.Cards.Light[0].Img,    "data/cards/L1.png", ready);
-	LoadImage(Items.Cards.Light[1].Img,    "data/cards/L2.png", ready);
-	LoadImage(Items.Cards.Light[2].Img,    "data/cards/L3.png", ready);
-	LoadImage(Items.Cards.Light[3].Img,    "data/cards/L4.png", ready);
-	LoadImage(Items.Cards.Light[4].Img,    "data/cards/L5.png", ready);
-	LoadImage(Items.Cards.Darkness[0].Img, "data/cards/D1.png", ready);
-	LoadImage(Items.Cards.Darkness[1].Img, "data/cards/D2.png", ready);
-	LoadImage(Items.Cards.Darkness[2].Img, "data/cards/D3.png", ready);
-	LoadImage(Items.Cards.Darkness[3].Img, "data/cards/D4.png", ready);
-	LoadImage(Items.Cards.Darkness[4].Img, "data/cards/D5.png", ready);
-	LoadImage(Items.Cards.Shadow[0].Img,   "data/cards/S1.png", ready);
-	LoadImage(Items.Cards.Shadow[1].Img,   "data/cards/S2.png", ready);
-	LoadImage(Items.Cards.Shadow[2].Img,   "data/cards/S3.png", ready);
-	LoadImage(Items.Cards.Shadow[3].Img,   "data/cards/S4.png", ready);
-	LoadImage(Items.Cards.Shadow[4].Img,   "data/cards/S5.png", ready);
-	
-	LoadImage(Images.card_back,            "data/cards/back.png", ready);
+	Images.card_back            = "data/cards/back.png";
 }

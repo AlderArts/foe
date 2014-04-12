@@ -1,7 +1,14 @@
 
 Gui = {}
+Gui.w = 1280;
+Gui.h = 720;
 
 Gui.Init = function() {
+	Gui.canvas = Raphael("wrap");
+	Gui.canvas.setViewBox(0,0,Gui.w,Gui.h,true);
+	Gui.canvas.setSize('100%', '100%');
+	Gui.bg = Gui.canvas.image("data/paper.jpg", 0, 0, 1280, 720);
+
     // Set up key listeners (input.js)
     Input.Init();
     
@@ -38,13 +45,27 @@ Gui.Init = function() {
     Input.navButtons[2].SetKey(KEY_G);
     
     // Explore buttons
-    Input.exploreButtons[10].SetKey(KEY_Z);
-    Input.exploreButtons[11].SetKey(KEY_Z);
-    Input.exploreButtons[12].SetKey(KEY_X);
+    Input.exploreButtons[ExploreButtonIndex.Wait].SetKey(KEY_Z);
+    Input.exploreButtons[ExploreButtonIndex.Sleep].SetKey(KEY_Z);
+    Input.exploreButtons[ExploreButtonIndex.Look].SetKey(KEY_X);
     
     Input.menuButtons[0].SetKey(KEY_CONSOLE);
     
     Gui.ClearButtons();
+}
+
+Gui.onresize = function() {
+	var bodyrect = document.body.getBoundingClientRect();
+	var wrap = document.getElementById("wrap");
+	var rect = wrap.getBoundingClientRect();
+	var w = rect.right - rect.left;
+	var h = rect.bottom - rect.top;
+	var ratioW = w/Gui.w;
+	var ratioH = h/Gui.h;
+	var textarea = document.getElementById("mainTextArea");
+	textarea.style.left     = (wrap.left - bodyrect.left) + ratioW * 270 +"px";
+	textarea.style.top      = (wrap.top  - bodyrect.top)  + ratioH * 65  +"px";
+	
 }
 
 Gui.Callstack = new Array();
@@ -152,7 +173,7 @@ Gui.BgColorPicker = function(back) {
 			localStorage["bgcolor"] = Gui.BgColor;
 		    document.getElementById("mainTextArea").style.backgroundColor = Gui.BgColor;
 		}, enabled : true
-	});
+	});Input.exploreButtons
 	options.push({ nameStr : "Custom",
 		func : function() {
 			var col = prompt("Please enter desired background color. Format is rgba(R,G,B,A). Colors are in the range 0-255. Opacity is in the range 0-1.", Gui.BgColor || "rgba(255,255,255,1.0)")
