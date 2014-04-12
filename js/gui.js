@@ -12,6 +12,13 @@ Gui.textArea = {
 	pad: {x: 20, y:10}
 };
 
+Gui.tooltipArea = {
+	x: 1075,
+	y: 195,
+	w: 190,
+	h: 390
+};
+
 Gui.Init = function() {
 	Gui.canvas = Raphael("wrap");
 	Gui.canvas.setViewBox(0,0,Gui.w,Gui.h,true);
@@ -90,6 +97,12 @@ Gui.onresize = function() {
 	textarea.style.top    = ypos + ratio * (Gui.textArea.inset/2+Gui.textArea.y) +"px";
 	textarea.style.width  = -2*Gui.textArea.pad.x + ratio * (-Gui.textArea.inset+Gui.textArea.w) +"px";
 	textarea.style.height = -2*Gui.textArea.pad.y + ratio * (-Gui.textArea.inset+Gui.textArea.h) +"px";
+	
+	var tooltip = document.getElementById("tooltipTextArea");
+	tooltip.style.left   = xpos + ratio * Gui.tooltipArea.x +"px";
+	tooltip.style.top    = ypos + ratio * Gui.tooltipArea.y +"px";
+	tooltip.style.width  =        ratio * Gui.tooltipArea.w +"px";
+	tooltip.style.height =        ratio * Gui.tooltipArea.h +"px";
 }
 
 Gui.Callstack = new Array();
