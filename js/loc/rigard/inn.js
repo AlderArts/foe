@@ -1590,7 +1590,7 @@ world.loc.Rigard.Inn.room.SleepFunc = function() {
 		parse["heshe"]   = comp.heshe();
 		parse["hishers"] = comp.hishers();
 	}
-	gameState = GameState.Event;
+	SetGameState(GameState.Event);
 	Text.Clear();
 	if(player.Drunk() < 0.5) {
 		Text.Add("You undress and climb into bed,");

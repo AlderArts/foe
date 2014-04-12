@@ -19,7 +19,7 @@ ItemType = {
 function Item(id, name) {
 	this.id     = id;
 	this.name   = name;
-	this.image  = new Image();
+	this.image  = new Image(); // TODO
 	this.price  = 0;
 	// Alchemical recipe, an array of {it: Item, num: Number} pairs
 	this.Recipe = [];

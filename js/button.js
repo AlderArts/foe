@@ -6,7 +6,8 @@
 function Button(rect, text, func, enabled, image, disabledImage) {
 	var that = this;
 	
-	this.disabledImage = disabledImage;
+	this.enabledImage  = image || Images.imgButtonEnabled;
+	this.disabledImage = disabledImage || Images.imgButtonDisabled;
 	this.visible = true;
 	this.enabled = enabled;
 	this.func    = func;
@@ -16,9 +17,9 @@ function Button(rect, text, func, enabled, image, disabledImage) {
 	this.state   = null; // No change
 	
 	this.set     = Gui.canvas.set();
-	this.image   = Gui.canvas.image(image, rect.x, rect.y, rect.w, rect.h);
+	this.image   = Gui.canvas.image(this.enabledImage, rect.x, rect.y, rect.w, rect.h);
 	this.text    = Gui.canvas.text(rect.x + rect.w/2, rect.y + rect.h/2, text).attr({stroke: "#FFF", fill:"#FFF", font: TINY_FONT});
-	this.glow    = this.image.glow({width: 5, color: "green"});
+	this.glow    = this.image.glow({width: 5, color: "green"}); // TODO
 	//this.glow.hide();
 	this.set.push(this.image);
 	this.set.push(this.text);
@@ -28,6 +29,10 @@ function Button(rect, text, func, enabled, image, disabledImage) {
 		cursor: "pointer"
 	}).click(function() {
 		that.HandleClick();
+	}).hover(function() {
+		that.HoverIn();
+	}, function() {
+		document.getElementById("tooltipTextArea").style.visibility = "hidden";
 	});
 }
 
@@ -37,7 +42,7 @@ Button.prototype.HandleClick = function() {
 
 	if(this.func) {
 		if(this.state && gameState != GameState.Combat)
-			gameState = this.state;
+			SetGameState(this.state);
 		try {
 			this.func(this.obj);
 		}
@@ -45,6 +50,18 @@ Button.prototype.HandleClick = function() {
 			alert(e.message + "........." + e.stack);
 		}
 	}
+}
+
+Button.prototype.HoverIn = function() {
+	if(this.visible && this.enabled && this.tooltip) {
+		if(isFunction(this.tooltip))
+			this.tooltip(this.obj);
+		else
+			Text.SetTooltip(this.tooltip);
+		document.getElementById("tooltipTextArea").style.visibility = "visible";
+	}
+	else
+		document.getElementById("tooltipTextArea").style.visibility = "hidden";
 }
 
 /*
@@ -55,6 +72,10 @@ Button.prototype.SetKey = function(key) {
 }
 
 Button.prototype.SetEnabled = function(value) {
+	if(value)
+		this.image.attr({src: this.enabledImage});
+	else
+		this.image.attr({src: this.disabledImage});
 	this.enabled = value;
 }
 
@@ -66,15 +87,19 @@ Button.prototype.SetVisible = function(value) {
 		this.set.hide();
 }
 
+Button.prototype.SetText = function(text) {
+	this.text.attr({text: text});
+}
+
 /*
  * This function is used to set the state of a button after it is created
  */
 Button.prototype.Setup = function(text, func, enabled, obj, tooltip, state) {
-	this.text.attr({text: text});
+	this.SetText(text);
 	this.func    = func;
 	this.obj     = obj;
 	this.SetVisible(true);
-	this.enabled = enabled;
+	this.SetEnabled(enabled);
 	this.tooltip = tooltip;
 	this.state   = state;
 }
@@ -83,10 +108,10 @@ Button.prototype.Setup = function(text, func, enabled, obj, tooltip, state) {
  * Set from ability
  */
 Button.prototype.SetFromAbility = function(encounter, caster, ability, backPrompt) {
-	this.text    = ability.name;
+	this.SetText(ability.name);
 	this.tooltip = ability.tooltip;
-	this.visible = true;
-	this.enabled = ability.enabledCondition ? ability.enabledCondition(encounter, caster) : true;
+	this.SetVisible(true);
+	this.SetEnabled(ability.enabledCondition ? ability.enabledCondition(encounter, caster) : true);
 	
 	this.func = function() {
 		ability.OnSelect(encounter, caster, backPrompt);
@@ -95,13 +120,7 @@ Button.prototype.SetFromAbility = function(encounter, caster, ability, backPromp
 
 Button.prototype.Render = function(context, glow) {
 	/*
-	if(this.visible != true)
-		return;
-	
-	context.save();
-	context.translate(this.rect.x + this.rect.w/2, this.rect.y + this.rect.h / 2);
-	
-	
+	//TODO Glow
 	if(glow) {
 		context.save();
 		context.translate(-this.rect.w/2, -this.rect.h/2);
@@ -109,37 +128,8 @@ Button.prototype.Render = function(context, glow) {
 		context.restore();
 	}
 	
-	// Draw the box
-	if(this.image && this.enabled) {
-		context.drawImage(this.image, -this.rect.w/2, -this.rect.h/2, this.rect.w, this.rect.h);
-	}
-	else if(this.disabledImage && this.enabled == false) {
-		context.drawImage(this.disabledImage, -this.rect.w/2, -this.rect.h/2, this.rect.w, this.rect.h);
-	}
-	else {
-		if(this.enabled == true)
-			context.fillStyle = "green";
-		else
-			context.fillStyle = "red";
-		context.fillRect(-this.rect.w/2, -this.rect.h/2, this.rect.w, this.rect.h);
-	}
 	
-	if(this.text.constructor == String && this.text != "")
-	{
-		// Set up context for drawing text
-		context.lineWidth = 4;
-		context.font = DEFAULT_FONT;
-		
-		// Calculate the size of the text given the font and text
-		var metrics = context.measureText(this.text);
-		
-		// Render the text centered
-		context.strokeStyle = "black";
-		context.strokeText(this.text, -metrics.width/2, 7);
-		context.fillStyle = "white";
-		context.fillText(this.text, -metrics.width/2, 7);
-	}
-	
+	//TODO keybind tooltip
 	var keybinding = KeyToText[this.key];
 	if(Gui.ShortcutsVisible && keybinding) {
 		// Render the text centered
@@ -149,8 +139,6 @@ Button.prototype.Render = function(context, glow) {
 		context.fillStyle = "rgba(255,255,255,0.8)";
 		context.fillText(keybinding, this.rect.w/2-8, this.rect.h/2-2);
 	}
-	
-	context.restore();
 	*/
 }
 
@@ -163,9 +151,10 @@ Button.prototype.HandleKeydown = function(key) {
 	
 	if(this.func) {
 		if(this.state && gameState != GameState.Combat)
-			gameState = this.state;
+			SetGameState(this.state);
 		try {
 			this.func(this.obj);
+			this.HoverIn();
 		}
 		catch(e) {
 			alert(e.message + "........." + e.stack);

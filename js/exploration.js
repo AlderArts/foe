@@ -28,7 +28,7 @@ PrintDefaultOptions = function(preventClear) {
 		return;
 	}
 	
-	gameState = GameState.Game;
+	SetGameState(GameState.Game);
 	
 	if(LastSubmenu)
     	LastSubmenu.func();
@@ -84,7 +84,7 @@ SetExploreButtons = function() {
 }
 
 LimitedDataPrompt = function(backFunc) {
-	gameState = GameState.Event;
+	SetGameState(GameState.Event);
 	
 	Text.Clear();
 	Gui.ClearButtons();
@@ -137,7 +137,7 @@ LimitedDataPrompt = function(backFunc) {
 }
 
 DataPrompt = function() {
-	gameState = GameState.Event;
+	SetGameState(GameState.Event);
 	// At safe locations you can sleep and save
 	var safeLocation = false;
 	if(party.location.safe)
@@ -246,7 +246,7 @@ Explore = function() {
 	var arr = [];
 	for(var i = 0; i < party.location.links.length; i++) {
 		var evt = party.location.links[i];
-		evt.image = Input.imgButtonEnabled2;
+		evt.image = Images.imgButtonEnabled2;
 		arr.push(evt);
 	}
 	for(var i = 0; i < party.location.events.length; i++) {

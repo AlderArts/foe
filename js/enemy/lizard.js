@@ -168,7 +168,7 @@ world.loc.Desert.Drylands.enc.AddEnc(function() {
 }, 1.0);
 
 Scenes.Lizards.WinPrompt = function() {
-	gameState = GameState.Event;
+	SetGameState(GameState.Event);
 	Text.Clear();
 	
 	var enc = this;
@@ -1411,7 +1411,7 @@ Scenes.Lizards.WinPowerbottomDeny = function(enc) {
 }
 
 Scenes.Lizards.LossPrompt = function() {
-	gameState = GameState.Event;
+	SetGameState(GameState.Event);
 	Text.Clear();
 	
 	var enc = this;

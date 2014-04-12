@@ -280,7 +280,7 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 }, 1.0);
 
 Scenes.Lagomorph.GroupLossOnPlains = function() {
-	gameState = GameState.Event;
+	SetGameState(GameState.Event);
 	Text.Clear();
 	
 	var enc = this;
@@ -401,7 +401,7 @@ Scenes.Lagomorph.GroupLossOnPlainsToBurrows = function(enc) {
 }
 
 Scenes.Lagomorph.GroupWinOnPlainsPrompt = function() {
-	gameState = GameState.Event;
+	SetGameState(GameState.Event);
 	Text.Clear();
 	
 	var enc = this;

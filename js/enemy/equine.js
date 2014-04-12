@@ -152,7 +152,7 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 }, 1.0);
 
 Scenes.Equine.LossPrompt = function() {
-	gameState = GameState.Event;
+	SetGameState(GameState.Event);
 	Text.Clear();
 	
 	// this = encounter

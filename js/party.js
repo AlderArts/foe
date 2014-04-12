@@ -233,7 +233,7 @@ Party.prototype.Sleep = function() {
 Party.prototype.Interact = function() {
 	Text.Clear();
 	Text.AddOutput("PlaceHolder: Party");
-	gameState = GameState.Game;
+	SetGameState(GameState.Game);
 	var list = new Array();
 	
 	// Interacting with self opens options for masturbation etc

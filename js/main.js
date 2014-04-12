@@ -27,13 +27,18 @@ GameState = {
 
 var gameState = GameState.Credits;
 
+SetGameState = function(state) {
+	gameState = state;
+	Gui.SetGameState(state);
+}
+
 // TODO: Stats, newgame+ etc
 GameOver = function() {
 	SplashScreen();
 }
 
 SplashScreen = function() {
-	gameState = GameState.Credits;
+	SetGameState(GameState.Credits);
 	Text.Clear();
 	Gui.ClearButtons();
 	

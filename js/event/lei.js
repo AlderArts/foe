@@ -827,7 +827,7 @@ Scenes.Lei.BarFight = function() {
 	enc.onLoss = function() {
 		lei.RestFull();
 		party.RestFull();
-		gameState = GameState.Event;
+		SetGameState(GameState.Event);
 		
 		var downed = true;
 		for(var i = 0; i < party.members.length; i++) {
@@ -949,7 +949,7 @@ Scenes.Lei.BarFight = function() {
 	enc.onVictory = function() {
 		lei.RestFull();
 		party.RestFull();
-		gameState = GameState.Event;
+		SetGameState(GameState.Event);
 		
 		lei.flags["Fought"] = LeiFight.Win;
 		lei.relation.IncreaseStat(100, 2);

@@ -11,14 +11,10 @@
 	</head>
 	
 	<body>
-		<div id="container">
-			<!-- Main body containing the canvas object -->
-			<canvas id="canvas" width="1260" height="700">
-				<!-- Fallback for bad browsers -->
-				<p>You fail! Get a browser that supports HTML5 canvas!</p>
-			</canvas>
-		
-			<div id="mainTextArea"> </div>
+		<div id=wrap>
+			<div id="mainTextWrapper">
+				<div id="mainTextArea"> </div>
+			</div>
 			<input id="textInputArea"/>
 			<div id="tooltipTextArea"> </div>
 			
@@ -29,12 +25,6 @@
 					<br/>
 					<button type="submit" id="loadFileOk" onclick="Saver.OnLoadFromFileClick()">Ok</button>
 					<button type="button" id="loadFileCancel" onclick="loadfileOverlay()">Cancel</button>
-				</div>
-			</div>
-			
-			<div class="overlay" id="overlay_assets">
-				<div>
-					<p id="progressDiv">Loading</p>
 				</div>
 			</div>
 		</div>

@@ -19,6 +19,11 @@ Gui.tooltipArea = {
 	h: 390
 };
 
+Gui.inputtextArea = {
+	x: 500,
+	y: 175
+};
+
 Gui.Init = function() {
 	Gui.canvas = Raphael("wrap");
 	Gui.canvas.setViewBox(0,0,Gui.w,Gui.h,true);
@@ -76,6 +81,24 @@ Gui.Init = function() {
     Gui.ClearButtons();
 }
 
+Gui.SetGameState = function(state) {
+	switch(gameState) {
+		case GameState.Game:
+			Input.menuButtonSet.show();
+			Input.exploreButtonSet.show();
+			break;
+		case GameState.Event:
+		case GameState.Credits:
+		case GameState.Combat:
+		case GameState.Cavalcade:
+			Input.menuButtonSet.hide();
+			Input.exploreButtonSet.hide();
+		break;
+	}
+	Input.buttonSet.show();
+	Input.navButtonSet.show();
+}
+
 Gui.onresize = function() {
 	var w = $(window).width();
 	var h = $(window).height();
@@ -97,6 +120,10 @@ Gui.onresize = function() {
 	textarea.style.top    = ypos + ratio * (Gui.textArea.inset/2+Gui.textArea.y) +"px";
 	textarea.style.width  = -2*Gui.textArea.pad.x + ratio * (-Gui.textArea.inset+Gui.textArea.w) +"px";
 	textarea.style.height = -2*Gui.textArea.pad.y + ratio * (-Gui.textArea.inset+Gui.textArea.h) +"px";
+	
+	var inputtext = document.getElementById("textInputArea");
+	inputtext.style.left   = xpos + ratio * Gui.inputtextArea.x +"px";
+	inputtext.style.top    = ypos + ratio * Gui.inputtextArea.y +"px";
 	
 	var tooltip = document.getElementById("tooltipTextArea");
 	tooltip.style.left   = xpos + ratio * Gui.tooltipArea.x +"px";
@@ -232,8 +259,8 @@ Gui.ClearChoiceButtons = function() {
 
 Gui.ClearButtons = function() {
 	for(var i = 0; i < Input.buttons.length; i++) {
+		Input.buttons[i].enabledImage = Images.imgButtonEnabled;
 		Input.buttons[i].SetVisible(false);
-		Input.buttons[i].image = Input.imgButtonEnabled;
 	}
 	for(var i = 0; i < Input.navButtons.length; i++)
 		Input.navButtons[i].SetVisible(false);
@@ -254,8 +281,8 @@ Gui.SetButtonPage = function(list, page, state) {
 		var name = list[j].nameStr || "NULL";
 		var func = list[j].func;
 		var en = list[j].enabled || false;
+		Input.buttons[i].enabledImage = list[j].image || Images.imgButtonEnabled;
 		Input.buttons[i].Setup(name, func, en, list[j].obj, list[j].tooltip, state);
-		Input.buttons[i].image = list[j].image || Input.imgButtonEnabled;
 	}
 }
 

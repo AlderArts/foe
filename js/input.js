@@ -28,6 +28,12 @@ Input.Init = function() {
     canvas.onmouseup   = Mouseup;
     canvas.onmousemove = Mousemove;
     */
+
+    Input.buttonSet        = Gui.canvas.set();
+    Input.navButtonSet     = Gui.canvas.set();
+    Input.exploreButtonSet = Gui.canvas.set();
+    Input.menuButtonSet    = Gui.canvas.set();
+
     Input.InitButtons();
     
     Input.InitMenuButtons();
@@ -35,32 +41,43 @@ Input.Init = function() {
 
 // Init functions for the button sets
 Input.InitButtons = function() {
-	// Temporary stuff
-	var onClick1 = function() { Text.AddOutput(" " + this.text); }
 	var offset = {x: 270, y:600};
 	
-	var x, y;
+	var x, y, button;
 	for(y = 0; y < 3; y++) {
-		for(x = 0; x < 4; x++)
-			Input.buttons.push(new Button({x : offset.x + 162*x, y : offset.y + 40*y, w : 155, h : 35}, "Button" + (x + y*5), onClick1, true, Images.imgButtonEnabled, Images.imgButtonDisabled));
+		for(x = 0; x < 4; x++) {
+			button = new Button({x : offset.x + 162*x, y : offset.y + 40*y, w : 155, h : 35}, "Button" + (x + y*5), null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
+			Input.buttons.push(button);
+			Input.buttonSet.push(button.set);
+		}
 		
-		Input.navButtons.push(new Button({x : offset.x + 162*4, y : offset.y + 40*y, w : 75, h : 35}, "Nav" + y, onClick1, true, Images.imgNavButtonEnabled, Images.imgNavButtonDisabled));
+		button = new Button({x : offset.x + 162*4, y : offset.y + 40*y, w : 75, h : 35}, "Nav" + y, null, true, Images.imgNavButtonEnabled, Images.imgNavButtonDisabled);
+		Input.navButtons.push(button);
+		Input.navButtonSet.push(button.set);
 	}
 	for(y = 0; y < 8; y++) {
-		Input.exploreButtons.push(new Button({x : 1100, y : 375 + 40 * y, w : 155, h : 35}, "Exp"+y, onClick1, true, Images.imgButtonEnabled, Images.imgButtonDisabled));
+		button = new Button({x : 1100, y : 375 + 40 * y, w : 155, h : 35}, "Exp"+y, null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
+		Input.exploreButtons.push(button);
+		Input.exploreButtonSet.push(button.set);
 	}
-	Input.exploreButtons.push(new Button({x : 150, y : 590, w : 50, h : 50}, "", null, true, Images.imgWaitEnabled, Images.imgWaitDisabled));
-	Input.exploreButtons.push(new Button({x : 150, y : 590, w : 50, h : 50}, "", null, true, Images.imgSleepEnabled, Images.imgSleepDisabled));
-	Input.exploreButtons.push(new Button({x : 210, y : 590, w : 50, h : 50}, "", null, true, Images.imgSearchEnabled, Images.imgSearchDisabled));
+	button = new Button({x : 150, y : 590, w : 50, h : 50}, "", null, true, Images.imgWaitEnabled, Images.imgWaitDisabled);
+	Input.exploreButtons.push(button);
+	Input.exploreButtonSet.push(button.set);
+	button = new Button({x : 150, y : 590, w : 50, h : 50}, "", null, true, Images.imgSleepEnabled, Images.imgSleepDisabled);
+	Input.exploreButtons.push(button);
+	Input.exploreButtonSet.push(button.set);
+	button = new Button({x : 210, y : 590, w : 50, h : 50}, "", null, true, Images.imgSearchEnabled, Images.imgSearchDisabled);
+	Input.exploreButtons.push(button);
+	Input.exploreButtonSet.push(button.set);
 }
 
 Input.InitMenuButtons = function() {
-	// Temporary stuff
-	var onClick1 = function() { Text.AddOutput(" " + this.text); }
 	var offset = {x: 15, y:620};
 	
 	// TOP, Data menu
-	Input.menuButtons.push(new Button({x : 10, y : 10, w : 155, h : 35}, "DATA", onClick1, true, Images.imgButtonEnabled, Images.imgButtonDisabled));
+	var button = new Button({x : 10, y : 10, w : 155, h : 35}, "DATA", null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
+	Input.menuButtons.push(button);
+	Input.menuButtonSet.push(button.set);
 };
 
 Input.RenderButtons = function(context) {
@@ -208,8 +225,6 @@ Input.Keydown = function(event) {
 				Input.navButtons[i].HandleKeydown(event.keyCode);
 		break;
 	}
-
-	UpdateTooltip();
 	
 	/* TODO Not really used atm
 	switch(event.keyCode) {
@@ -234,37 +249,3 @@ Input.Keyup = function(event) {
 }
 
 Input.tooltip = false;
-
-// Updates tooltip (called one mouse events and on keydown events, so no old tooltips linger)
-//TODO: Tooltip
-function UpdateTooltip() {
-	Input.tooltipVisible = false;
-	
-	for(i = 0; i < Input.buttons.length; i++) {
-		var button = Input.buttons[i];
-		if(button.visible && button.enabled && button.Intersects(Input.MousePos) && button.tooltip) {
-			if(isFunction(button.tooltip))
-				button.tooltip(button.obj);
-			else
-				Text.SetTooltip(button.tooltip);
-			Input.tooltipVisible = true;
-			break;
-		}
-	}
-	
-	if(!Input.tooltipVisible) {
-		for(i = 0; i < Input.exploreButtons.length; i++) {
-			var button = Input.exploreButtons[i];
-			if(button.visible && button.enabled && button.Intersects(Input.MousePos) && button.tooltip) {
-				if(isFunction(button.tooltip))
-					button.tooltip(button.obj);
-				else
-					Text.SetTooltip(button.tooltip);
-				Input.tooltipVisible = true;
-				break;
-			}
-		}
-	}
-	
-	document.getElementById("tooltipTextArea").style.visibility = Input.tooltipVisible ? "visible" : "hidden";
-}

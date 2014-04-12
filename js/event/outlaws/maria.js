@@ -211,7 +211,7 @@ Scenes.Maria.ForestConfront = function() {
 			
 			enc.canRun = false;
 			enc.onLoss = function() {
-				gameState = GameState.Event;
+				SetGameState(GameState.Event);
 				party.members = enc.oldParty;
 				Scenes.Maria.fight = 3;
 				Text.Clear();
@@ -236,7 +236,7 @@ Scenes.Maria.ForestConfront = function() {
 				Gui.NextPrompt(Scenes.Maria.ForestFollow);
 			};
 			enc.onVictory = function() {
-				gameState = GameState.Event;
+				SetGameState(GameState.Event);
 				party.members = enc.oldParty;
 				Scenes.Maria.ForestConfrontWin();
 			}

@@ -48,7 +48,7 @@ Cavalcade.prototype.PullCard = function() {
 }
 
 Cavalcade.prototype.PrepGame = function() {
-	gameState = GameState.Cavalcade;
+	SetGameState(GameState.Cavalcade);
 	cavalcade = this;
 	
 	for(var i = 0; i < this.players.length; i++) {

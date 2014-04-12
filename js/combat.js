@@ -14,7 +14,7 @@ function Encounter(enemy)
 }
 
 Encounter.prototype.Start = function() {
-	gameState = GameState.Event;
+	SetGameState(GameState.Event);
 	
 	if(this.onEncounter)
 		this.onEncounter();
@@ -27,7 +27,7 @@ var currentActiveChar = null;
 
 // Set up the fight
 Encounter.prototype.PrepCombat = function() {
-	gameState = GameState.Combat;
+	SetGameState(GameState.Combat);
 	
 	if(party.members.length == 0)
 		throw "Errol: no members in party";

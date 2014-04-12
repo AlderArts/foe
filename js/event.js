@@ -37,7 +37,7 @@ MoveToLocation = function(location, timestep) {
 }
 
 Event.prototype.SleepFunc = function() {
-	gameState = GameState.Event;
+	SetGameState(GameState.Event);
 	Text.Newline();
 	Text.AddOutput("You sleep for 8 hours.");
 	Gui.NextPrompt(function() {
@@ -48,7 +48,7 @@ Event.prototype.SleepFunc = function() {
 }
 
 Event.prototype.WaitFunc = function() {
-	gameState = GameState.Event;
+	SetGameState(GameState.Event);
 	Text.Newline();
 	Text.AddOutput("You wait for 1 hour.");
 	Gui.NextPrompt(function() {

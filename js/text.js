@@ -31,7 +31,7 @@ Text.AddOutput = function(text, parseStrings) {
 
 Text.SetTooltip = function(text, parseStrings) {
 	var textbox = document.getElementById("tooltipTextArea");
-	textbox.innerHTML = Text.Parse(text);
+	textbox.innerHTML = Text.Parse(text, parseStrings);
 }
 
 Text.Parse = function(text, parseStrings) {
