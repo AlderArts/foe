@@ -2,6 +2,7 @@
 
 java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/jquery-1.9.1.min.js \
+	js/raphael-min.js \
 	app.js \
 	js/assets.js \
 	js/utility.js \
