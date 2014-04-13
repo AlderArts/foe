@@ -49,6 +49,9 @@ Button.prototype.HandleClick = function() {
 		catch(e) {
 			alert(e.message + "........." + e.stack);
 		}
+		finally {
+			Render();
+		}
 	}
 }
 
@@ -158,6 +161,9 @@ Button.prototype.HandleKeydown = function(key) {
 		}
 		catch(e) {
 			alert(e.message + "........." + e.stack);
+		}
+		finally {
+			Render();
 		}
 	}
 }

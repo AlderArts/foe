@@ -36,7 +36,15 @@ Gui.Init = function() {
 	Gui.canvas.rect(Gui.textArea.x, Gui.textArea.y, Gui.textArea.w, Gui.textArea.h).attr({"stroke-width": Gui.textArea.inset});
 	Gui.debug = Gui.canvas.text(1230, 700, "Debug").attr({stroke: "#F00", fill:"#F00", font: SMALL_FONT}).hide();
 	Gui.onresize();
-
+	
+	Gui.party = Gui.canvas.set();
+	
+	Gui.enemy = Gui.canvas.set();
+	
+	Gui.overlay = Gui.canvas.set();
+	Gui.location = Gui.canvas.text(300, 30, "LOC").attr({stroke: "#FFF", fill: "#FFF", font: LARGE_FONT});
+	Gui.overlay.push(Gui.location);
+	
     // Set up key listeners (input.js)
     Input.Init();
     
@@ -368,7 +376,60 @@ Gui.SetButtonsFromCollection = function(encounter, caster, list, ret, backFunc) 
 	updateNav();
 }
 
-Gui.Render = function(context) {
+Gui.RenderLocation = function() {
+	var name = party.location.nameFunc;
+	var nameStr;
+	if(isFunction(name))
+		nameStr = name();
+	else if(name)
+		nameStr = name;
+	else
+		nameStr = "???";
+	Gui.location.attr({text: nameStr});
+}
+
+Gui.Render = function() {
+	switch (gameState) {
+		case GameState.Credits:
+			Gui.overlay.hide();
+			Gui.party.hide();
+			Gui.enemy.hide();
+			break;
+		
+		case GameState.Combat:
+			if(enemyParty) {
+				// TODO: Draw enemy
+				Gui.enemy.show();
+			}
+			else
+				Gui.enemy.hide();
+			
+		case GameState.Game:
+		case GameState.Event:
+			// TODO: Draw party
+			Gui.party.show();
+			
+			// TODO: Time
+			Gui.RenderLocation();
+			Gui.overlay.show();
+			
+			break;
+		case GameState.Cavalcade:
+			
+			
+			// TODO: Time
+			Gui.RenderLocation();
+			Gui.overlay.show();
+			break;
+	}
+	
+	
+	return;
+	
+	
+	
+	
+	
 	
 	switch(gameState) {
 	case GameState.Credits:
@@ -545,34 +606,6 @@ Gui.RenderTime = function(context) {
 	context.fillText(dateStr, 0, 0);
 	context.fillText(timeStr, 0, 30);
 	
-	context.restore();
-}
-
-Gui.RenderLocation = function(context) {
-	context.save();
-	// Set up context for drawing text
-	context.textAlign = 'start';
-	context.font = LARGE_FONT;
-	context.strokeStyle = "black";
-	context.fillStyle = "white";
-	context.lineWidth = 4;
-	
-	if(party.location)
-	{		
-		context.translate(350, 45);
-	
-		var name = party.location.nameFunc;
-		var nameStr;
-		if(isFunction(name))
-			nameStr = name();
-		else if(name)
-			nameStr = name;
-		else
-			nameStr = "???";
-
-		context.strokeText(nameStr, 0,0);
-		context.fillText(nameStr, 0,0);
-	}
 	context.restore();
 }
 

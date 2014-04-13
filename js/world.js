@@ -40,7 +40,7 @@ world.HandleTimers = function() {
 }
 	
 // Render function
-world.Render = function(context) {
+world.Render = function() {
 	
 }
 

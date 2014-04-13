@@ -116,19 +116,8 @@ SplashScreen = function() {
 
 // Animation loop Rendering
 function Render() {
-	var canvas = document.getElementById("canvas");
-	// Fallback
-	if(!canvas.getContext)
-		return;	
-	var context = canvas.getContext("2d");
-	
-	context.save();
-	
-	context.drawImage(Images.bg, 0, 0, windowWidth, windowHeight);
-	world.Render(context);
-	Gui.Render(context);
-	
-	context.restore();
+	world.Render();
+	Gui.Render();
 }
 
 function Setup() {
@@ -137,4 +126,6 @@ function Setup() {
     
     // Load assets
     LoadImages();
+    
+    Render();
 }
