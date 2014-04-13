@@ -42,7 +42,16 @@ Gui.Init = function() {
 	Gui.enemy = Gui.canvas.set();
 	
 	Gui.overlay = Gui.canvas.set();
-	Gui.location = Gui.canvas.text(300, 30, "LOC").attr({stroke: "#FFF", fill: "#FFF", font: LARGE_FONT});
+	Gui.location = Gui.canvas.text(300, 30, "LOC").attr({"text-anchor": "start", stroke: "#FFF", fill: "#FFF", font: LARGE_FONT});
+	Gui.overlay.push(Gui.canvas.text(10, 690, "Coin:").attr({"text-anchor": "start", stroke: "#FFF", fill: "#FFF", font: DEFAULT_FONT}));
+	Gui.overlay.push(Gui.canvas.text(880, 15, "Date:").attr({"text-anchor": "start", stroke: "#FFF", fill: "#FFF", font: DEFAULT_FONT}));
+	Gui.overlay.push(Gui.canvas.text(880, 45, "Time:").attr({"text-anchor": "start", stroke: "#FFF", fill: "#FFF", font: DEFAULT_FONT}));
+	Gui.coin = Gui.canvas.text(250, 690, "COIN").attr({"text-anchor": "end", stroke: "#FFF", fill: "#FFF", font: DEFAULT_FONT});
+	Gui.date = Gui.canvas.text(1245, 15, "DATE").attr({"text-anchor": "end", stroke: "#FFF", fill: "#FFF", font: DEFAULT_FONT});
+	Gui.time = Gui.canvas.text(1245, 45, "TIME").attr({"text-anchor": "end", stroke: "#FFF", fill: "#FFF", font: DEFAULT_FONT});
+	Gui.overlay.push(Gui.coin);
+	Gui.overlay.push(Gui.date);
+	Gui.overlay.push(Gui.time);
 	Gui.overlay.push(Gui.location);
 	
     // Set up key listeners (input.js)
@@ -410,6 +419,7 @@ Gui.Render = function() {
 			Gui.party.show();
 			
 			// TODO: Time
+			Gui.RenderTime();
 			Gui.RenderLocation();
 			Gui.overlay.show();
 			
@@ -418,6 +428,7 @@ Gui.Render = function() {
 			
 			
 			// TODO: Time
+			Gui.RenderTime();
 			Gui.RenderLocation();
 			Gui.overlay.show();
 			break;
@@ -572,41 +583,15 @@ Gui.Render = function() {
 	//Gui.RenderStatsScreen(context);
 }
 
-Gui.RenderTime = function(context) {
-	context.save();
-	context.lineWidth = 4;
-	context.strokeStyle = "black";
-	context.fillStyle = "white";
-	context.font = DEFAULT_FONT;
-
-	var coinStr = party.coin;	
+Gui.RenderTime = function() {
+	var coinStr = party.coin;
+	Gui.coin.attr({text: coinStr});
+	
 	var dateStr = world.time.DateString();
+	Gui.date.attr({text: dateStr});
+	
 	var timeStr = world.time.TimeString();
-	
-	context.textAlign = 'start';
-	context.strokeText("Coin: ", 10, 690);
-	context.fillText("Coin: ", 10, 690);
-	context.textAlign = 'right';
-	context.strokeText(coinStr, 250, 690);
-	context.fillText(coinStr, 250, 690);
-
-	context.translate(880, 25);
-	
-	context.textAlign = 'start';
-	context.strokeText("Date: ", 0, 0);
-	context.strokeText("Time: ", 0, 30);
-	context.fillText("Date: ", 0, 0);
-	context.fillText("Time: ", 0, 30);
-	
-	context.translate(365, 0);
-	
-	context.textAlign = 'right';
-	context.strokeText(dateStr, 0, 0);
-	context.strokeText(timeStr, 0, 30);
-	context.fillText(dateStr, 0, 0);
-	context.fillText(timeStr, 0, 30);
-	
-	context.restore();
+	Gui.time.attr({text: timeStr});
 }
 
 Gui.RenderStatsScreen = function(context) {
