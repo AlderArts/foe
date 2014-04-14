@@ -994,7 +994,7 @@ Entity.prototype.RenderHealthbar = function(context, glowColor) {
 	}
 	
 	this.combatStatus.Render(context);
-	
+	/*
 	context.save();
 	
 	context.translate(barStart, 20);
@@ -1066,6 +1066,7 @@ Entity.prototype.RenderHealthbar = function(context, glowColor) {
 	
 	context.strokeText(levelText, -10, 105);
 	context.fillText(levelText, -10, 105);
+	*/
 }
 
 DrunkLevel = {

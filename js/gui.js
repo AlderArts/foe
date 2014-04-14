@@ -60,16 +60,23 @@ Gui.Init = function() {
 			spStr   : Gui.canvas.text(barStart+barWidth-5, 15, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}).transform("t"+(20+offsetX)+","+(85+offsetY+120*i)),
 			lpBack  : Gui.canvas.rect(barStart, 0, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#fff"}).transform("t"+(20+2*offsetX)+","+(85+2*offsetY+120*i)),
 			lpBar   : Gui.canvas.rect(barStart, 0, barWidth, barHeigth).attr({fill: "#f0f"}).transform("t"+(20+2*offsetX)+","+(85+2*offsetY+120*i)),
-			lpStr   : Gui.canvas.text(barStart+barWidth-5, 15, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}).transform("t"+(20+2*offsetX)+","+(85+2*offsetY+120*i))
+			lpStr   : Gui.canvas.text(barStart+barWidth-5, 15, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}).transform("t"+(20+2*offsetX)+","+(85+2*offsetY+120*i)),
+			name    : Gui.canvas.text(-5, -10, "NAME").attr({"text-anchor": "start", fill:"#fff", font: LARGE_FONT}).transform("t"+20+","+(85+120*i)),
+			lvl     : Gui.canvas.text(-3, 86, "X/Y").attr({"text-anchor": "start", fill:"#fff", font: SMALL_FONT}).transform("t"+20+","+(85+120*i))
 		};
 		
 		charSet.push(local.portrait);
 		charSet.push(local.hpBack);
 		charSet.push(local.hpBar);
+		charSet.push(local.hpStr);
 		charSet.push(local.spBack);
 		charSet.push(local.spBar);
+		charSet.push(local.spStr);
 		charSet.push(local.lpBack);
 		charSet.push(local.lpBar);
+		charSet.push(local.lpStr);
+		charSet.push(local.name);
+		charSet.push(local.lvl);
 		Gui.party.push(charSet);
 		Gui.partyObj.push(local);
 	}
@@ -87,16 +94,23 @@ Gui.Init = function() {
 			spStr   : Gui.canvas.text(barStart+barWidth-5, 15, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}).transform("t"+(1020+offsetX)+","+(85+offsetY+120*i)),
 			lpBack  : Gui.canvas.rect(barStart, 0, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#fff"}).transform("t"+(1020+2*offsetX)+","+(85+2*offsetY+120*i)),
 			lpBar   : Gui.canvas.rect(barStart, 0, barWidth, barHeigth).attr({fill: "#f0f"}).transform("t"+(1020+2*offsetX)+","+(85+2*offsetY+120*i)),
-			lpStr   : Gui.canvas.text(barStart+barWidth-5, 15, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}).transform("t"+(1020+2*offsetX)+","+(85+2*offsetY+120*i))
+			lpStr   : Gui.canvas.text(barStart+barWidth-5, 15, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}).transform("t"+(1020+2*offsetX)+","+(85+2*offsetY+120*i)),
+			name    : Gui.canvas.text(-5, -10, "NAME").attr({"text-anchor": "start", fill:"#fff", font: LARGE_FONT}).transform("t"+1020+","+(85+120*i)),
+			lvl     : Gui.canvas.text(-3, 86, "X/Y").attr({"text-anchor": "start", fill:"#fff", font: SMALL_FONT}).transform("t"+1020+","+(85+120*i))
 		};
 		
 		charSet.push(local.portrait);
 		charSet.push(local.hpBack);
 		charSet.push(local.hpBar);
+		charSet.push(local.hpStr);
 		charSet.push(local.spBack);
 		charSet.push(local.spBar);
+		charSet.push(local.spStr);
 		charSet.push(local.lpBack);
 		charSet.push(local.lpBar);
+		charSet.push(local.lpStr);
+		charSet.push(local.name);
+		charSet.push(local.lvl);
 		Gui.enemy.push(charSet);
 		Gui.enemyObj.push(local);
 	}
@@ -445,6 +459,19 @@ Gui.SetButtonsFromCollection = function(encounter, caster, list, ret, backFunc) 
 	updateNav();
 }
 
+Gui.RenderParty = function(p, set, obj) {
+	var i = 0;
+	for(; i < p.Num(); ++i) {
+		Gui.RenderEntity(p.Get(i), obj[i]);
+		set[i].show();
+	}
+	for(; i < 4; ++i)
+		set[i].hide();
+}
+Gui.RenderEntity = function(entity, obj) {
+	
+}
+
 Gui.RenderLocation = function() {
 	var name = party.location.nameFunc;
 	var nameStr;
@@ -461,22 +488,20 @@ Gui.Render = function() {
 	switch (gameState) {
 		case GameState.Credits:
 			Gui.overlay.hide();
-			//Gui.party.hide();
-			//Gui.enemy.hide();
+			Gui.party.hide();
+			Gui.enemy.hide();
 			break;
 		
 		case GameState.Combat:
-			if(enemyParty) {
-				// TODO: Draw enemy
-				Gui.enemy.show();
-			}
+			if(enemyParty)
+				Gui.RenderParty(enemyParty, Gui.enemy, Gui.enemyObj);
 			else
 				Gui.enemy.hide();
 			
 		case GameState.Game:
 		case GameState.Event:
-			// TODO: Draw party
-			Gui.party.show();
+			// TODO: !RENDER_PICTURES
+			Gui.RenderParty(party, Gui.party, Gui.partyObj);
 			
 			// TODO: Time
 			Gui.RenderTime();
@@ -503,28 +528,7 @@ Gui.Render = function() {
 	
 	
 	switch(gameState) {
-	case GameState.Credits:
-		// TODO: STUFF (Splash screen?)
-	
-		break;
-	case GameState.Combat:
-		// Render enemies
-		context.save();
-		context.translate(1020, 75);
-		if(enemyParty)
-			enemyParty.RenderParty(context);
-		context.restore();
-	case GameState.Game:
-	case GameState.Event:
-		// Render party
-		context.save();
-		context.translate(20, 75);
-		party.RenderParty(context);
-		context.restore();
 		
-		Gui.RenderTime(context);
-		Gui.RenderLocation(context);
-		break;
 	case GameState.Cavalcade:
 		// Render party
 		context.save();
