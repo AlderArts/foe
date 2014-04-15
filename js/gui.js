@@ -39,81 +39,14 @@ Gui.Init = function() {
 	Gui.debug = Gui.canvas.text(1230, 700, "Debug").attr({stroke: "#F00", fill:"#F00", font: SMALL_FONT}).hide();
 	Gui.onresize();
 	
-	var barStart   = 85;
-	var barWidth   = Gui.barWidth;
-	var barHeigth  = 30;
-	var border     = 6;
-	var offsetX    = 6;
-	var offsetY    = 30;
-	
 	Gui.party = Gui.canvas.set();
 	Gui.partyObj = [];
-	for(var i = 0; i < 4; ++i) {
-		var charSet = Gui.canvas.set();
-		var local = {
-			portrait: Gui.canvas.image(Images.pc_male, 0, 0, 100, 100).transform("t"+20+","+(75+120*i)),
-			hpBack  : Gui.canvas.rect(barStart, 0, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#fff"}).transform("t"+20+","+(85+120*i)),
-			hpBar   : Gui.canvas.rect(barStart, 0, barWidth, barHeigth).attr({fill: "#f00"}).transform("t"+20+","+(85+120*i)),
-			hpStr   : Gui.canvas.text(barStart+barWidth-5, 15, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}).transform("t"+20+","+(85+120*i)),
-			spBack  : Gui.canvas.rect(barStart, 0, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#fff"}).transform("t"+(20+offsetX)+","+(85+offsetY+120*i)),
-			spBar   : Gui.canvas.rect(barStart, 0, barWidth, barHeigth).attr({fill: "#00f"}).transform("t"+(20+offsetX)+","+(85+offsetY+120*i)),
-			spStr   : Gui.canvas.text(barStart+barWidth-5, 15, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}).transform("t"+(20+offsetX)+","+(85+offsetY+120*i)),
-			lpBack  : Gui.canvas.rect(barStart, 0, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#fff"}).transform("t"+(20+2*offsetX)+","+(85+2*offsetY+120*i)),
-			lpBar   : Gui.canvas.rect(barStart, 0, barWidth, barHeigth).attr({fill: "#f0f"}).transform("t"+(20+2*offsetX)+","+(85+2*offsetY+120*i)),
-			lpStr   : Gui.canvas.text(barStart+barWidth-5, 15, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}).transform("t"+(20+2*offsetX)+","+(85+2*offsetY+120*i)),
-			name    : Gui.canvas.text(-5, -10, "NAME").attr({"text-anchor": "start", fill:"#fff", font: LARGE_FONT}).transform("t"+20+","+(85+120*i)),
-			lvl     : Gui.canvas.text(-3, 86, "X/Y").attr({"text-anchor": "start", fill:"#fff", font: SMALL_FONT}).transform("t"+20+","+(85+120*i))
-		};
-		
-		charSet.push(local.portrait);
-		charSet.push(local.hpBack);
-		charSet.push(local.hpBar);
-		charSet.push(local.hpStr);
-		charSet.push(local.spBack);
-		charSet.push(local.spBar);
-		charSet.push(local.spStr);
-		charSet.push(local.lpBack);
-		charSet.push(local.lpBar);
-		charSet.push(local.lpStr);
-		charSet.push(local.name);
-		charSet.push(local.lvl);
-		Gui.party.push(charSet);
-		Gui.partyObj.push(local);
-	}
+	for(var i = 0; i < 4; ++i)
+		Gui.SetupPortrait(20, 75+120*i, Gui.party, Gui.partyObj);
 	Gui.enemy = Gui.canvas.set();
 	Gui.enemyObj = [];
-	for(var i = 0; i < 4; ++i) {
-		var charSet = Gui.canvas.set();
-		var local = {
-			portrait: Gui.canvas.image(Images.pc_male, 0, 0, 100, 100).transform("t"+1020+","+(75+120*i)),
-			hpBack  : Gui.canvas.rect(barStart, 0, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#fff"}).transform("t"+1020+","+(85+120*i)),
-			hpBar   : Gui.canvas.rect(barStart, 0, barWidth, barHeigth).attr({fill: "#f00"}).transform("t"+1020+","+(85+120*i)),
-			hpStr   : Gui.canvas.text(barStart+barWidth-5, 15, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}).transform("t"+1020+","+(85+120*i)),
-			spBack  : Gui.canvas.rect(barStart, 0, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#fff"}).transform("t"+(1020+offsetX)+","+(85+offsetY+120*i)),
-			spBar   : Gui.canvas.rect(barStart, 0, barWidth, barHeigth).attr({fill: "#00f"}).transform("t"+(1020+offsetX)+","+(85+offsetY+120*i)),
-			spStr   : Gui.canvas.text(barStart+barWidth-5, 15, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}).transform("t"+(1020+offsetX)+","+(85+offsetY+120*i)),
-			lpBack  : Gui.canvas.rect(barStart, 0, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#fff"}).transform("t"+(1020+2*offsetX)+","+(85+2*offsetY+120*i)),
-			lpBar   : Gui.canvas.rect(barStart, 0, barWidth, barHeigth).attr({fill: "#f0f"}).transform("t"+(1020+2*offsetX)+","+(85+2*offsetY+120*i)),
-			lpStr   : Gui.canvas.text(barStart+barWidth-5, 15, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}).transform("t"+(1020+2*offsetX)+","+(85+2*offsetY+120*i)),
-			name    : Gui.canvas.text(-5, -10, "NAME").attr({"text-anchor": "start", fill:"#fff", font: LARGE_FONT}).transform("t"+1020+","+(85+120*i)),
-			lvl     : Gui.canvas.text(-3, 86, "X/Y").attr({"text-anchor": "start", fill:"#fff", font: SMALL_FONT}).transform("t"+1020+","+(85+120*i))
-		};
-		
-		charSet.push(local.portrait);
-		charSet.push(local.hpBack);
-		charSet.push(local.hpBar);
-		charSet.push(local.hpStr);
-		charSet.push(local.spBack);
-		charSet.push(local.spBar);
-		charSet.push(local.spStr);
-		charSet.push(local.lpBack);
-		charSet.push(local.lpBar);
-		charSet.push(local.lpStr);
-		charSet.push(local.name);
-		charSet.push(local.lvl);
-		Gui.enemy.push(charSet);
-		Gui.enemyObj.push(local);
-	}
+	for(var i = 0; i < 4; ++i)
+		Gui.SetupPortrait(1020, 75+120*i, Gui.enemy, Gui.enemyObj);
 	
 	Gui.overlay = Gui.canvas.set();
 	Gui.location = Gui.canvas.text(300, 30, "LOC").attr({"text-anchor": "start", stroke: "#FFF", fill: "#FFF", font: LARGE_FONT});
@@ -171,6 +104,46 @@ Gui.Init = function() {
     Input.menuButtons[0].SetKey(KEY_CONSOLE);
     
     Gui.ClearButtons();
+}
+
+Gui.SetupPortrait = function(xoffset, yoffset, set, obj) {
+	var barStart   = 85;
+	var barWidth   = Gui.barWidth;
+	var barHeigth  = 30;
+	var border     = 6;
+	var barOffsetX = 6;
+	var barOffsetY = 30;
+	
+	var charSet = Gui.canvas.set();
+	var local = {
+		portrait: Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100),
+		hpBack  : Gui.canvas.rect(xoffset+barStart, yoffset+10, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#000"}),
+		hpBar   : Gui.canvas.rect(xoffset+barStart, yoffset+10, barWidth, barHeigth).attr({fill: "#f00"}),
+		hpStr   : Gui.canvas.text(xoffset+barStart+barWidth-5, yoffset+25, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}),
+		spBack  : Gui.canvas.rect(xoffset+barStart+barOffsetX, yoffset+10+barOffsetY, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#000"}),
+		spBar   : Gui.canvas.rect(xoffset+barStart+barOffsetX, yoffset+10+barOffsetY, barWidth, barHeigth).attr({fill: "#00f"}),
+		spStr   : Gui.canvas.text(xoffset+barStart+barWidth-5+barOffsetX, yoffset+25+barOffsetY, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}),
+		lpBack  : Gui.canvas.rect(xoffset+barStart+2*barOffsetX, yoffset+10+2*barOffsetY, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#000"}),
+		lpBar   : Gui.canvas.rect(xoffset+barStart+2*barOffsetX, yoffset+10+2*barOffsetY, barWidth, barHeigth).attr({fill: "#f0f"}),
+		lpStr   : Gui.canvas.text(xoffset+barStart+barWidth-5+2*barOffsetX, yoffset+25+2*barOffsetY, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}),
+		name    : Gui.canvas.text(xoffset-5, yoffset, "NAME").attr({"text-anchor": "start", fill:"#fff", font: LARGE_FONT}),
+		lvl     : Gui.canvas.text(xoffset-3, yoffset+96, "X/Y").attr({"text-anchor": "start", fill:"#fff", font: SMALL_FONT})
+	};
+	
+	charSet.push(local.portrait);
+	charSet.push(local.hpBack);
+	charSet.push(local.hpBar);
+	charSet.push(local.hpStr);
+	charSet.push(local.spBack);
+	charSet.push(local.spBar);
+	charSet.push(local.spStr);
+	charSet.push(local.lpBack);
+	charSet.push(local.lpBar);
+	charSet.push(local.lpStr);
+	charSet.push(local.name);
+	charSet.push(local.lvl);
+	set.push(charSet);
+	obj.push(local);
 }
 
 Gui.SetGameState = function(state) {
@@ -469,7 +442,56 @@ Gui.RenderParty = function(p, set, obj) {
 		set[i].hide();
 }
 Gui.RenderEntity = function(entity, obj) {
+	/*
+	var local = {
+		portrait: Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100),
+		hpBack  : Gui.canvas.rect(xoffset+barStart, yoffset+10, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#fff"}),
+		hpBar   : Gui.canvas.rect(xoffset+barStart, yoffset+10, barWidth, barHeigth).attr({fill: "#f00"}),
+		hpStr   : Gui.canvas.text(xoffset+barStart+barWidth-5, yoffset+25, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}),
+		spBack  : Gui.canvas.rect(xoffset+barStart+barOffsetX, yoffset+10+barOffsetY, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#fff"}),
+		spBar   : Gui.canvas.rect(xoffset+barStart+barOffsetX, yoffset+10+barOffsetY, barWidth, barHeigth).attr({fill: "#00f"}),
+		spStr   : Gui.canvas.text(xoffset+barStart+barWidth-5+barOffsetX, yoffset+25+barOffsetY, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}),
+		lpBack  : Gui.canvas.rect(xoffset+barStart+2*barOffsetX, yoffset+10+2*barOffsetY, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#fff"}),
+		lpBar   : Gui.canvas.rect(xoffset+barStart+2*barOffsetX, yoffset+10+2*barOffsetY, barWidth, barHeigth).attr({fill: "#f0f"}),
+		lpStr   : Gui.canvas.text(xoffset+barStart+barWidth-5+2*barOffsetX, yoffset+25+2*barOffsetY, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}),
+		name    : Gui.canvas.text(xoffset-5, yoffset, "NAME").attr({"text-anchor": "start", fill:"#fff", font: LARGE_FONT}),
+		lvl     : Gui.canvas.text(xoffset-3, yoffset+96, "X/Y").attr({"text-anchor": "start", fill:"#fff", font: SMALL_FONT})
+	};
+	*/
 	
+	if(entity.avatar.combat) {
+		obj.portrait.attr({src: entity.avatar.combat});
+		obj.portrait.show();
+	}
+	else
+		obj.portrait.hide();
+	obj.name.attr({text: entity.name});
+	
+	var hp = Math.floor(entity.curHp) / Math.floor(entity.HP());
+	var hpText = Math.floor(entity.curHp) + "/" + Math.floor(entity.HP());
+	obj.hpStr.attr({text: hpText});
+	obj.hpBar.stop().animate({width: hp*Gui.barWidth}, 500, "<>");
+	var sp = Math.floor(entity.curSp) / Math.floor(entity.SP());
+	var spText = Math.floor(entity.curSp) + "/" + Math.floor(entity.SP());
+	obj.spStr.attr({text: spText});
+	obj.spBar.stop().animate({width: sp*Gui.barWidth}, 500, "<>");
+	var lust = Math.floor(entity.curLust) / Math.floor(entity.Lust());
+	var lustText = Math.floor(entity.curLust) + "/" + Math.floor(entity.Lust());
+	obj.lpStr.attr({text: lustText});
+	obj.lpBar.stop().animate({width: lust*Gui.barWidth}, 500, "<>");
+	
+	var levelText = "Lvl " + entity.level + "/" + entity.sexlevel;
+	if(entity.currentJob) {
+		var jd  = entity.jobs[entity.currentJob.name];
+		if(jd) {
+			// Check for maxed out job
+			var master   = jd.job.Master(entity);
+			if(master) levelText += "/*";
+			else       levelText += "/" + jd.level;
+		}
+	}
+	obj.lvl.attr({text: levelText,
+		          color: entity.pendingStatPoints > 0 ? "green" : "white"});
 }
 
 Gui.RenderLocation = function() {
