@@ -20,6 +20,16 @@ Fix party.Alone etc code (can become problematic later)
 
 
 
+REWRITE OF GUI:
+---------------
+* Time indicator (animate)
+* Cavalcade
+* Text glow (use cufon+print?)
+* Animations
+* Gem
+* Level up screen
+* Job screen
+* Combat screen?
 
 
 
