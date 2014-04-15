@@ -61,6 +61,9 @@ Gui.Init = function() {
 	Gui.overlay.push(Gui.time);
 	Gui.overlay.push(Gui.location);
 	
+	//TODO: Use instead of text
+	//var t = Gui.Print(500, 30, "Texttexttexttestestetsetsetset", "Kimberley Bl", 30, "end").attr({fill: "#fff"}).glow({opacity: 1});
+
     // Set up key listeners (input.js)
     Input.Init();
     
@@ -104,6 +107,17 @@ Gui.Init = function() {
     Input.menuButtons[0].SetKey(KEY_CONSOLE);
     
     Gui.ClearButtons();
+}
+
+Gui.Print = function(x, y, text, font, size, align) {
+	align = align || "start";
+	var t = Gui.canvas.print(x, y, text, Gui.canvas.getFont(font), size);
+	var bb = t.getBBox();
+	if(align == "middle")
+		t.translate(-bb.width/2, 0);
+	else if(align == "end")
+		t.translate(-bb.width, 0);
+	return t;
 }
 
 Gui.SetupPortrait = function(xoffset, yoffset, set, obj) {
