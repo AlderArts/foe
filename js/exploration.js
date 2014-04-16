@@ -243,6 +243,7 @@ Explore = function() {
 		Text.Newline();
 		return;
 	}
+	Text.Clear();
 	
 	var arr = [];
 	for(var i = 0; i < party.location.links.length; i++) {

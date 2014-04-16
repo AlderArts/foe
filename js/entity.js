@@ -972,30 +972,6 @@ Entity.prototype.PregnancyOverTime = function(hours) {
 	
 }
 
-Entity.prototype.RenderHealthbar = function(context, glowColor) {
-	var barStart = 85;
-	var barWidth = 145;
-	var barHeigth = 35;
-	var border = 3;
-	var barOffset = 3;
-	
-	if(glowColor) {
-		RenderGlow(context, {w:100, h:100}, 10, glowColor);
-		if(!RENDER_PICTURES) {
-			context.fillStyle = glowColor;
-			context.fillRect(0,0,100,100);
-		}
-	}
-	if(RENDER_PICTURES && this.avatar && this.avatar.combat)
-		context.drawImage(this.avatar.combat, 0, 0);
-	else {
-		barWidth = 200;
-		barStart = 30;
-	}
-	
-	this.combatStatus.Render(context);
-}
-
 DrunkLevel = {
 	Sober   : 0.25,
 	Tipsy   : 0.50,

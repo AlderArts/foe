@@ -3,7 +3,7 @@
  * Button class, includes input handling
  * 
  */
-function Button(rect, text, func, enabled, image, disabledImage) {
+function Button(rect, text, func, enabled, image, disabledImage, glow) {
 	var that = this;
 	
 	this.enabledImage  = image || Images.imgButtonEnabled;
@@ -19,11 +19,12 @@ function Button(rect, text, func, enabled, image, disabledImage) {
 	this.set     = Gui.canvas.set();
 	this.image   = Gui.canvas.image(this.enabledImage, rect.x, rect.y, rect.w, rect.h);
 	this.text    = Gui.canvas.text(rect.x + rect.w/2, rect.y + rect.h/2, text).attr({stroke: "#FFF", fill:"#FFF", font: TINY_FONT});
-	this.glow    = this.image.glow({width: 5, color: "green"}); // TODO
-	//this.glow.hide();
 	this.set.push(this.image);
 	this.set.push(this.text);
-	this.set.push(this.glow);
+	if(glow) {
+		this.glow = this.image.glow({width: 5, color: "green", opacity: 1});
+		this.set.push(this.glow);
+	}
 	
 	this.set.attr({
 		cursor: "pointer"
@@ -120,31 +121,6 @@ Button.prototype.SetFromAbility = function(encounter, caster, ability, backPromp
 		ability.OnSelect(encounter, caster, backPrompt);
 	}
 }
-
-Button.prototype.Render = function(context, glow) {
-	/*
-	//TODO Glow
-	if(glow) {
-		context.save();
-		context.translate(-this.rect.w/2, -this.rect.h/2);
-		RenderGlow(context, this.rect, 5, glow);
-		context.restore();
-	}
-	
-	
-	//TODO keybind tooltip
-	var keybinding = KeyToText[this.key];
-	if(Gui.ShortcutsVisible && keybinding) {
-		// Render the text centered
-		context.font = TINY_FONT;
-		context.strokeStyle = "rgba(255,0,0,0.8)";
-		context.strokeText(keybinding, this.rect.w/2-8, this.rect.h/2-2);
-		context.fillStyle = "rgba(255,255,255,0.8)";
-		context.fillText(keybinding, this.rect.w/2-8, this.rect.h/2-2);
-	}
-	*/
-}
-
 
 Button.prototype.HandleKeydown = function(key) {
 	if(this.enabled == false) return;

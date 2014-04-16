@@ -22,9 +22,6 @@ Fix party.Alone etc code (can become problematic later)
 
 REWRITE OF GUI:
 ---------------
-* Text glow (use cufon+print?) - works
-
-* Time indicator (animate)
 * Cavalcade
 * Animations
 * Gem

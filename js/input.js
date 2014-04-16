@@ -56,7 +56,7 @@ Input.InitButtons = function() {
 		Input.navButtonSet.push(button.set);
 	}
 	for(y = 0; y < 8; y++) {
-		button = new Button({x : 1100, y : 375 + 40 * y, w : 155, h : 35}, "Exp"+y, null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
+		button = new Button({x : 1100, y : 375 + 40 * y, w : 155, h : 35}, "Exp"+y, null, true, Images.imgButtonEnabled, Images.imgButtonDisabled, true);
 		Input.exploreButtons.push(button);
 		Input.exploreButtonSet.push(button.set);
 	}
@@ -80,35 +80,27 @@ Input.InitMenuButtons = function() {
 	Input.menuButtonSet.push(button.set);
 };
 
-Input.RenderButtons = function(context) {
-	// Debugging
-	context.fillStyle = "black";
-	context.font = DEFAULT_FONT;
-	
-	//context.fillText(Input.MousePos.x, 950, 30);
-	//context.fillText(Input.MousePos.y, 950, 60);
-	
-	var i;
-	switch(gameState) {
-		case GameState.Game:
-			for(i = 0; i < Input.menuButtons.length; i++)
-				Input.menuButtons[i].Render(context);
-			if(Input.tooltip == false) {
-				// Add a glow effect if this button is the currently choosen exploration option
-				for(i = 0; i < Input.exploreButtons.length; i++) {
-					var glow = (Input.exploreButtons[i] == LastSubmenu) ? 'green' : null;
-					Input.exploreButtons[i].Render(context, glow);
-				}
-			}
-		case GameState.Event:
-		case GameState.Credits:
-		case GameState.Combat:
-		case GameState.Cavalcade:
-			for(i = 0; i < Input.buttons.length; i++)
-				Input.buttons[i].Render(context);
-			for(i = 0; i < Input.navButtons.length; i++)
-				Input.navButtons[i].Render(context);
-		break;
+Input.RenderExploreButtonGlow = function() {
+	/*
+	//TODO keybind tooltip
+	var keybinding = KeyToText[this.key];
+	if(Gui.ShortcutsVisible && keybinding) {
+		// Render the text centered
+		context.font = TINY_FONT;
+		context.strokeStyle = "rgba(255,0,0,0.8)";
+		context.strokeText(keybinding, this.rect.w/2-8, this.rect.h/2-2);
+		context.fillStyle = "rgba(255,255,255,0.8)";
+		context.fillText(keybinding, this.rect.w/2-8, this.rect.h/2-2);
+	}
+	*/
+	// Add a glow effect if this button is the currently choosen exploration option
+	for(var i = 0; i < Input.exploreButtons.length; i++) {
+		if(!Input.exploreButtons[i].image.is_visible()) continue;
+		if(!Input.exploreButtons[i].glow) continue;
+		if(Input.exploreButtons[i] == LastSubmenu)
+			Input.exploreButtons[i].glow.show();
+		else
+			Input.exploreButtons[i].glow.hide();
 	}
 }
 

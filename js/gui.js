@@ -26,6 +26,10 @@ Gui.inputtextArea = {
 
 Gui.barWidth = 145;
 
+Raphael.el.is_visible = function() {
+    return (this.node.style.display !== "none");
+}
+
 Gui.Init = function() {
 	Gui.canvas = Raphael("wrap");
 	Gui.canvas.setViewBox(0,0,Gui.w,Gui.h,true);
@@ -35,6 +39,10 @@ Gui.Init = function() {
 	svg.removeAttribute("width");
 	svg.removeAttribute("height");
 	
+	Gui.fonts = {
+		Kimberley : Gui.canvas.getFont("Kimberley Bl")
+	};
+	
 	Gui.canvas.rect(Gui.textArea.x, Gui.textArea.y, Gui.textArea.w, Gui.textArea.h).attr({"stroke-width": Gui.textArea.inset});
 	Gui.debug = Gui.canvas.text(1230, 700, "Debug").attr({stroke: "#F00", fill:"#F00", font: SMALL_FONT}).hide();
 	Gui.onresize();
@@ -42,28 +50,43 @@ Gui.Init = function() {
 	Gui.party = Gui.canvas.set();
 	Gui.partyObj = [];
 	for(var i = 0; i < 4; ++i)
-		Gui.SetupPortrait(20, 75+120*i, Gui.party, Gui.partyObj);
+		Gui.SetupPortrait(20, 75+120*i, Gui.party, Gui.partyObj, true);
 	Gui.enemy = Gui.canvas.set();
 	Gui.enemyObj = [];
 	for(var i = 0; i < 4; ++i)
-		Gui.SetupPortrait(1020, 75+120*i, Gui.enemy, Gui.enemyObj);
+		Gui.SetupPortrait(1020, 75+120*i, Gui.enemy, Gui.enemyObj, false);
 	
-	Gui.overlay = Gui.canvas.set();
-	Gui.location = Gui.canvas.text(300, 30, "LOC").attr({"text-anchor": "start", stroke: "#FFF", fill: "#FFF", font: LARGE_FONT});
-	Gui.overlay.push(Gui.canvas.text(10, 690, "Coin:").attr({"text-anchor": "start", stroke: "#FFF", fill: "#FFF", font: DEFAULT_FONT}));
-	Gui.overlay.push(Gui.canvas.text(880, 15, "Date:").attr({"text-anchor": "start", stroke: "#FFF", fill: "#FFF", font: DEFAULT_FONT}));
-	Gui.overlay.push(Gui.canvas.text(880, 45, "Time:").attr({"text-anchor": "start", stroke: "#FFF", fill: "#FFF", font: DEFAULT_FONT}));
-	Gui.coin = Gui.canvas.text(250, 690, "COIN").attr({"text-anchor": "end", stroke: "#FFF", fill: "#FFF", font: DEFAULT_FONT});
-	Gui.date = Gui.canvas.text(1245, 15, "DATE").attr({"text-anchor": "end", stroke: "#FFF", fill: "#FFF", font: DEFAULT_FONT});
-	Gui.time = Gui.canvas.text(1245, 45, "TIME").attr({"text-anchor": "end", stroke: "#FFF", fill: "#FFF", font: DEFAULT_FONT});
-	Gui.overlay.push(Gui.coin);
-	Gui.overlay.push(Gui.date);
-	Gui.overlay.push(Gui.time);
-	Gui.overlay.push(Gui.location);
-	
-	//TODO: Use instead of text
-	//var t = Gui.Print(500, 30, "Texttexttexttestestetsetsetset", "Kimberley Bl", 30, "end").attr({fill: "#fff"}).glow({opacity: 1});
+	Gui.overlay   = Gui.canvas.set();
+	Gui.location  = {};
+	Gui.coinFixed = {};
+	Gui.coin      = {};
+	Gui.PrintGlow(Gui.overlay, Gui.coinFixed, 10, 690, "Coin:", Gui.fonts.Kimberley, 20, "start", {opacity: 1});
+	Gui.dateFixed = {};
+	Gui.date      = {};
+	Gui.PrintGlow(Gui.overlay, Gui.dateFixed, 880, 15, "Date:", Gui.fonts.Kimberley, 20, "start", {opacity: 1});
+	Gui.timeFixed = {};
+	Gui.time      = {};
+	Gui.PrintGlow(Gui.overlay, Gui.timeFixed, 880, 45, "Time:", Gui.fonts.Kimberley, 20, "start", {opacity: 1});
 
+	Gui.clock = {};
+	Gui.clock.x = 840;
+	Gui.clock.y = 33;
+	Gui.clock.r = 25;
+	Gui.overlay.push(Gui.canvas.circle(Gui.clock.x, Gui.clock.y, Gui.clock.r).attr({"fill": "#000"}));
+	Gui.overlay.push(Gui.canvas.circle(Gui.clock.x, Gui.clock.y, Gui.clock.r*0.97).attr({fill: "rhsb(.1 , .5, .95)-hsb(.1 , 1, .45)"}));
+	for(var i = 0; i < 12; i++) {
+		var start_x = Gui.clock.x+Math.round(Gui.clock.r*0.8*Math.cos(30*i*Math.PI/180));
+		var start_y = Gui.clock.y+Math.round(Gui.clock.r*0.8*Math.sin(30*i*Math.PI/180));
+		var end_x   = Gui.clock.x+Math.round(Gui.clock.r*Math.cos(30*i*Math.PI/180));
+		var end_y   = Gui.clock.y+Math.round(Gui.clock.r*Math.sin(30*i*Math.PI/180));    
+		Gui.overlay.push(Gui.canvas.path("M"+start_x+" "+start_y+"L"+end_x+" "+end_y).attr({stroke: "#000", "stroke-width": 3}));
+	}
+    Gui.clock.hour   = Gui.canvas.path("M"+Gui.clock.x+" "+Gui.clock.y+"L"+Gui.clock.x+" "+(Gui.clock.y-Gui.clock.r/2)).attr({stroke: "#000", "stroke-width": 5});
+    Gui.clock.minute = Gui.canvas.path("M"+Gui.clock.x+" "+Gui.clock.y+"L"+Gui.clock.x+" "+(Gui.clock.y-5*Gui.clock.r/6)).attr({stroke: "#000", "stroke-width": 3});
+    Gui.overlay.push(Gui.canvas.circle(Gui.clock.x, Gui.clock.y, Gui.clock.r/20).attr("fill", "#000"));
+    Gui.overlay.push(Gui.clock.hour);
+    Gui.overlay.push(Gui.clock.minute);
+    
     // Set up key listeners (input.js)
     Input.Init();
     
@@ -111,7 +134,7 @@ Gui.Init = function() {
 
 Gui.Print = function(x, y, text, font, size, align) {
 	align = align || "start";
-	var t = Gui.canvas.print(x, y, text, Gui.canvas.getFont(font), size);
+	var t = Gui.canvas.print(x, y, text, font, size);
 	var bb = t.getBBox();
 	if(align == "middle")
 		t.translate(-bb.width/2, 0);
@@ -120,7 +143,23 @@ Gui.Print = function(x, y, text, font, size, align) {
 	return t;
 }
 
-Gui.SetupPortrait = function(xoffset, yoffset, set, obj) {
+Gui.PrintGlow = function(set, obj, x, y, text, font, size, align, glow) {
+	if(text != obj.str) {
+		obj.str = text;
+		if(obj.text) {
+			set.exclude(obj.text);
+			set.exclude(obj.glow);
+			obj.text.remove();
+			obj.glow.remove();
+		}
+		obj.text = Gui.Print(x, y, text, font, size, align).attr({fill: "#fff"});
+		obj.glow = obj.text.glow(glow);
+		set.push(obj.text);
+		set.push(obj.glow);
+	}
+}
+
+Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty) {
 	var barStart   = 85;
 	var barWidth   = Gui.barWidth;
 	var barHeigth  = 30;
@@ -128,9 +167,17 @@ Gui.SetupPortrait = function(xoffset, yoffset, set, obj) {
 	var barOffsetX = 6;
 	var barOffsetY = 30;
 	
+	var glowColor = (isParty) ? "green" : "red";
+	
 	var charSet = Gui.canvas.set();
+	var portrait = Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100);
 	var local = {
-		portrait: Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100),
+		xoffset : xoffset,
+		yoffset : yoffset,
+		portrait: portrait,
+		name    : {},
+		lvl     : {},
+		glow    : portrait.glow({opacity: 1, color: glowColor}),
 		hpBack  : Gui.canvas.rect(xoffset+barStart, yoffset+10, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#000"}),
 		hpBar   : Gui.canvas.rect(xoffset+barStart, yoffset+10, barWidth, barHeigth).attr({fill: "#f00"}),
 		hpStr   : Gui.canvas.text(xoffset+barStart+barWidth-5, yoffset+25, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}),
@@ -139,12 +186,11 @@ Gui.SetupPortrait = function(xoffset, yoffset, set, obj) {
 		spStr   : Gui.canvas.text(xoffset+barStart+barWidth-5+barOffsetX, yoffset+25+barOffsetY, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}),
 		lpBack  : Gui.canvas.rect(xoffset+barStart+2*barOffsetX, yoffset+10+2*barOffsetY, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#000"}),
 		lpBar   : Gui.canvas.rect(xoffset+barStart+2*barOffsetX, yoffset+10+2*barOffsetY, barWidth, barHeigth).attr({fill: "#f0f"}),
-		lpStr   : Gui.canvas.text(xoffset+barStart+barWidth-5+2*barOffsetX, yoffset+25+2*barOffsetY, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}),
-		name    : Gui.canvas.text(xoffset-5, yoffset, "NAME").attr({"text-anchor": "start", fill:"#fff", font: LARGE_FONT}),
-		lvl     : Gui.canvas.text(xoffset-3, yoffset+96, "X/Y").attr({"text-anchor": "start", fill:"#fff", font: SMALL_FONT})
+		lpStr   : Gui.canvas.text(xoffset+barStart+barWidth-5+2*barOffsetX, yoffset+25+2*barOffsetY, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT})
 	};
 	
 	charSet.push(local.portrait);
+	charSet.push(local.glow);
 	charSet.push(local.hpBack);
 	charSet.push(local.hpBar);
 	charSet.push(local.hpStr);
@@ -154,28 +200,8 @@ Gui.SetupPortrait = function(xoffset, yoffset, set, obj) {
 	charSet.push(local.lpBack);
 	charSet.push(local.lpBar);
 	charSet.push(local.lpStr);
-	charSet.push(local.name);
-	charSet.push(local.lvl);
 	set.push(charSet);
 	obj.push(local);
-}
-
-Gui.SetGameState = function(state) {
-	switch(gameState) {
-		case GameState.Game:
-			Input.menuButtonSet.show();
-			Input.exploreButtonSet.show();
-			break;
-		case GameState.Event:
-		case GameState.Credits:
-		case GameState.Combat:
-		case GameState.Cavalcade:
-			Input.menuButtonSet.hide();
-			Input.exploreButtonSet.hide();
-		break;
-	}
-	Input.buttonSet.show();
-	Input.navButtonSet.show();
 }
 
 Gui.onresize = function() {
@@ -449,13 +475,16 @@ Gui.SetButtonsFromCollection = function(encounter, caster, list, ret, backFunc) 
 Gui.RenderParty = function(p, set, obj) {
 	var i = 0;
 	for(; i < p.Num(); ++i) {
-		Gui.RenderEntity(p.Get(i), obj[i]);
+		var c = p.Get(i);
+		Gui.RenderEntity(c, set[i], obj[i]);
 		set[i].show();
+		if(c != currentActiveChar)
+			obj[i].glow.hide();
 	}
 	for(; i < 4; ++i)
 		set[i].hide();
 }
-Gui.RenderEntity = function(entity, obj) {
+Gui.RenderEntity = function(entity, set, obj) {
 	/*
 	var local = {
 		portrait: Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100),
@@ -473,13 +502,10 @@ Gui.RenderEntity = function(entity, obj) {
 	};
 	*/
 	
-	if(entity.avatar.combat) {
+	if(entity.avatar.combat)
 		obj.portrait.attr({src: entity.avatar.combat});
-		obj.portrait.show();
-	}
-	else
-		obj.portrait.hide();
-	obj.name.attr({text: entity.name});
+	
+	Gui.PrintGlow(set, obj.name, obj.xoffset-5, obj.yoffset, entity.name, Gui.fonts.Kimberley, 30, "start", {opacity: 1});
 	
 	var hp = Math.floor(entity.curHp) / Math.floor(entity.HP());
 	var hpText = Math.floor(entity.curHp) + "/" + Math.floor(entity.HP());
@@ -504,8 +530,10 @@ Gui.RenderEntity = function(entity, obj) {
 			else       levelText += "/" + jd.level;
 		}
 	}
-	obj.lvl.attr({text: levelText,
-		          color: entity.pendingStatPoints > 0 ? "green" : "white"});
+	
+	Gui.PrintGlow(set, obj.lvl, obj.xoffset-3, obj.yoffset+96, levelText, Gui.fonts.Kimberley, 14, "start", {opacity: 1, width: 5});
+	
+	obj.lvl.text.attr({fill: entity.pendingStatPoints > 0 ? "green" : "white"});
 }
 
 Gui.RenderLocation = function() {
@@ -517,7 +545,51 @@ Gui.RenderLocation = function() {
 		nameStr = name;
 	else
 		nameStr = "???";
-	Gui.location.attr({text: nameStr});
+
+	Gui.PrintGlow(Gui.overlay, Gui.location, 300, 30, nameStr, Gui.fonts.Kimberley, 30, "start", {opacity: 1});
+}
+
+Gui.RenderTime = function() {
+	var coinStr = party.coin;
+	Gui.PrintGlow(Gui.overlay, Gui.coin, 250, 690, coinStr, Gui.fonts.Kimberley, 20, "end", {opacity: 1});
+
+	var dateStr = world.time.DateString();
+	Gui.PrintGlow(Gui.overlay, Gui.date, 1245, 15, dateStr, Gui.fonts.Kimberley, 20, "end", {opacity: 1});
+	
+	var timeStr = world.time.TimeString();
+	Gui.PrintGlow(Gui.overlay, Gui.time, 1245, 45, timeStr, Gui.fonts.Kimberley, 20, "end", {opacity: 1});
+	
+	var hour   = world.time.ToHours();
+	var minute = world.time.ToMinutes();
+	
+	if(Gui.clock.hourNum) {
+		Gui.clock.hour.stop().animate({transform:"r"+(hour/12*360)+","+Gui.clock.x+","+Gui.clock.y}, 2000, "<>");
+		Gui.clock.minute.stop().animate({transform:"r"+(minute/60*360)+","+Gui.clock.x+","+Gui.clock.y}, 2000, "<>");
+	}
+	else {
+		Gui.clock.hour.transform("r"+(hour/12*360)+","+Gui.clock.x+","+Gui.clock.y);
+		Gui.clock.minute.transform("r"+(minute/60*360)+","+Gui.clock.x+","+Gui.clock.y);
+	}
+	Gui.clock.hourNum   = hour;
+	Gui.clock.minuteNum = minute;
+}
+
+Gui.SetGameState = function(state) {
+	switch(gameState) {
+		case GameState.Game:
+			Input.menuButtonSet.show();
+			Input.exploreButtonSet.show();
+			break;
+		case GameState.Event:
+		case GameState.Credits:
+		case GameState.Combat:
+		case GameState.Cavalcade:
+			Input.menuButtonSet.hide();
+			Input.exploreButtonSet.hide();
+		break;
+	}
+	Input.buttonSet.show();
+	Input.navButtonSet.show();
 }
 
 Gui.Render = function() {
@@ -536,6 +608,12 @@ Gui.Render = function() {
 			
 		case GameState.Game:
 		case GameState.Event:
+			if(gameState == GameState.Game) {
+				Input.RenderExploreButtonGlow();
+			}
+			if(gameState == GameState.Game || gameState == GameState.Event) {
+				Gui.enemy.hide();
+			}
 			// TODO: !RENDER_PICTURES
 			Gui.RenderParty(party, Gui.party, Gui.partyObj);
 			
@@ -681,17 +759,6 @@ Gui.Render = function() {
 	// TODO, use on stats screen
 	// Render character stats (temp)
 	//Gui.RenderStatsScreen(context);
-}
-
-Gui.RenderTime = function() {
-	var coinStr = party.coin;
-	Gui.coin.attr({text: coinStr});
-	
-	var dateStr = world.time.DateString();
-	Gui.date.attr({text: dateStr});
-	
-	var timeStr = world.time.TimeString();
-	Gui.time.attr({text: timeStr});
 }
 
 Gui.RenderStatsScreen = function(context) {

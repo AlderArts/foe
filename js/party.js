@@ -207,15 +207,6 @@ Party.prototype.SwitchOut = function(member) {
 	this.AddReserve(member);
 }
 
-Party.prototype.RenderParty = function(context) {
-	var glow = (this == party) ? "green" : "red";
-	for(var i=0,j=this.members.length; i<j; i++){
-		// If this is the current active character, show glow
-		this.members[i].RenderHealthbar(context, (this.members[i] == currentActiveChar) ? glow : null);
-		context.translate(0, 120);
-	};
-}
-
 Party.prototype.RestFull = function() {
 	for (var i=0; i < this.members.length; i++)
 		this.members[i].RestFull();
