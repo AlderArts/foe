@@ -43,7 +43,6 @@ svg { width: 100%; height: 100%; }
 	visibility:  hidden;
 }
 
-
 .overlay {
 	visibility: hidden;
 	position:   absolute;
@@ -63,3 +62,11 @@ svg { width: 100%; height: 100%; }
     padding:          15px;
     text-align:       center;
 }
+#progressDiv{
+    width:            300px;
+    margin:           auto;
+    background-color: #fff;
+    padding:          15px;
+    text-align:       center;
+}
+
