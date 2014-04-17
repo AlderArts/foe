@@ -55,8 +55,6 @@ Images.imgSleepDisabled     = "data/gui/sleep_disabled.png";
 
 var NUM_ASSETS = 0;
 
-var Preload = {};
-
 function LoadImages() {
 	assetsOverlay();
 	
@@ -64,10 +62,8 @@ function LoadImages() {
 	
 	var ready = function() { count++; };
 	
-	for(var image in Images) {
-		Preload[image] = new Image();
-		LoadImage(Preload[image], Images[image], ready);
-	}
+	for(var image in Images)
+		LoadImage(Images[image], ready);
 	
 	LoadCardImages(ready);
 	
@@ -94,8 +90,9 @@ function assetsOverlay() {
 	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 }
 
-LoadImage = function(image, src, func) {
+LoadImage = function(src, func) {
+	var Preload = new Image();
 	NUM_ASSETS++;
-	image.src    = src;
-	image.onload = func;
+	Preload.src    = src;
+	Preload.onload = func;
 }

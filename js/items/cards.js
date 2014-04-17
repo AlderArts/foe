@@ -85,8 +85,6 @@ Items.Cards.Shadow[4].Short = function() { return "The Dancer of Shadow"; }
 Items.Cards.Shadow[4].Long = function() { return "The Dancer of Shadow, a playing card from the game Cavalcade."; }
 
 LoadCardImages = function(ready) {
-	Preload.cards = [];
-	
 	Items.Cards.Light[0].Img    = "data/cards/L1.png";
 	Items.Cards.Light[1].Img    = "data/cards/L2.png";
 	Items.Cards.Light[2].Img    = "data/cards/L3.png";
@@ -124,8 +122,6 @@ LoadCardImages = function(ready) {
 		Images.card_back
 	];
 	
-	for(var i = 0; i < cards.length; i++) {
-		Preload.cards[i] = new Image();
-		LoadImage(Preload.cards[i], cards[i], ready);
-	}
+	for(var i = 0; i < cards.length; i++)
+		LoadImage(cards[i], ready);
 }

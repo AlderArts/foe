@@ -31,7 +31,6 @@ StatusEffect = {
 
 LoadStatusImages = function(ready) {
 	Images.status = [];
-	Preload.status = [];
 	for(var i = 0; i < StatusEffect.LAST; i++) {
 		Images.status[i]  = "";
 	}
@@ -44,8 +43,7 @@ LoadStatusImages = function(ready) {
 	
 	for(var i = 0; i < StatusEffect.LAST; i++) {
 		if(Images.status[i] == "") continue;
-		Preload.status[i] = new Image();
-		LoadImage(Preload.status[i], Images.status[i], ready);
+		LoadImage(Images.status[i], ready);
 	}
 }
 
