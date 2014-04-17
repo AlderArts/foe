@@ -53,10 +53,49 @@ Images.imgWaitDisabled      = "data/gui/wait_disabled.png";
 Images.imgSleepEnabled      = "data/gui/sleep_enabled.png";
 Images.imgSleepDisabled     = "data/gui/sleep_disabled.png";
 
+var NUM_ASSETS = 0;
+
+var Preload = {};
+
 function LoadImages() {
-	LoadCardImages();
+	assetsOverlay();
 	
-	LoadStatusImages();
+	var count = 0;
 	
-	SplashScreen();
+	var ready = function() { count++; };
+	
+	for(var image in Images) {
+		Preload[image] = new Image();
+		LoadImage(Preload[image], Images[image], ready);
+	}
+	
+	LoadCardImages(ready);
+	
+	LoadStatusImages(ready);
+	
+	var loaderFunc = setInterval(function() {
+		var el = document.getElementById("progressDiv");
+		el.innerHTML = "Loading assets: " + count + "/" + NUM_ASSETS;
+		
+		if(count == NUM_ASSETS) {
+			clearInterval(loaderFunc);
+    		assetsOverlay();
+    		
+			// Go to credits screen
+			SplashScreen();
+			// Render first frame
+			setTimeout(Render, 100);
+		}
+	}, 100);
+}
+
+function assetsOverlay() {
+	var el = document.getElementById("overlay_assets");
+	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+}
+
+LoadImage = function(image, src, func) {
+	NUM_ASSETS++;
+	image.src    = src;
+	image.onload = func;
 }
