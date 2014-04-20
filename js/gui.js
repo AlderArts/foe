@@ -55,6 +55,30 @@ Gui.Init = function() {
 	Gui.enemyObj = [];
 	for(var i = 0; i < 4; ++i)
 		Gui.SetupPortrait(1020, 75+120*i, Gui.enemy, Gui.enemyObj, false);
+		
+	// Cavalcade
+	Gui.cavalcade = Gui.canvas.set();
+	Gui.cavalcadeObj = {};
+	Gui.cavalcadeObj.p = [];
+	Gui.SetupCavalcadeHand(20, 75, Gui.cavalcade, Gui.cavalcadeObj.p);
+	Gui.SetupCavalcadeHand(1020, 75+120*0, Gui.cavalcade, Gui.cavalcadeObj.p);
+	Gui.SetupCavalcadeHand(1020, 75+200*1, Gui.cavalcade, Gui.cavalcadeObj.p);
+	Gui.SetupCavalcadeHand(1020, 75+200*2, Gui.cavalcade, Gui.cavalcadeObj.p);
+	
+	var houseObj = [];
+	for(var i = 0; i < 3; ++i) {
+		var card = Gui.canvas.image(Images.card_back, 25+60*i, 380+25*i, 106, 150);
+		houseObj.push(card);
+		Gui.cavalcade.push(card);
+	}
+	Gui.cavalcadeObj.house = houseObj;
+	
+	Gui.cavalcadeObj.round      = {};
+	Gui.cavalcadeObj.roundFixed = {};
+	Gui.cavalcadeObj.pot        = {};
+	Gui.cavalcadeObj.potFixed   = {};
+	Gui.PrintGlow(Gui.cavalcade, Gui.cavalcadeObj.roundFixed, 550, 620, "Round:", Gui.fonts.Kimberley, 20, "start", {opacity: 1});
+	Gui.PrintGlow(Gui.cavalcade, Gui.cavalcadeObj.potFixed,   550, 670, "Pot:",   Gui.fonts.Kimberley, 20, "start", {opacity: 1});
 	
 	Gui.overlay   = Gui.canvas.set();
 	Gui.location  = {};
@@ -157,6 +181,15 @@ Gui.PrintGlow = function(set, obj, x, y, text, font, size, align, glow) {
 		set.push(obj.text);
 		set.push(obj.glow);
 	}
+	else {
+		obj.text.show();
+		obj.glow.show();
+	}
+}
+
+Gui.PrintShow = function(obj) {
+	obj.text.show();
+	obj.glow.show();
 }
 
 Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty) {
@@ -200,6 +233,29 @@ Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty) {
 	charSet.push(local.lpBack);
 	charSet.push(local.lpBar);
 	charSet.push(local.lpStr);
+	set.push(charSet);
+	obj.push(local);
+}
+
+Gui.SetupCavalcadeHand = function(xoffset, yoffset, set, obj) {
+	var charSet = Gui.canvas.set();
+	
+	//var portrait = Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100);
+	var cards = [];
+	cards.push(Gui.canvas.image(Images.card_back, xoffset, yoffset, 106, 150));
+	cards.push(Gui.canvas.image(Images.card_back, 110+xoffset, yoffset, 106, 150));
+	
+	var local = {
+		xoffset  : xoffset,
+		yoffset  : yoffset,
+		name     : {},
+//		portrait : portrait,
+		cards    : cards
+	};
+	
+//	charSet.push(portrait);
+	charSet.push(cards[0]);
+	charSet.push(cards[1]);
 	set.push(charSet);
 	obj.push(local);
 }
@@ -472,16 +528,17 @@ Gui.SetButtonsFromCollection = function(encounter, caster, list, ret, backFunc) 
 	updateNav();
 }
 
-Gui.RenderParty = function(p, set, obj) {
+Gui.RenderParty = function(p, set, obj, max) {
+	max = max || 4;
 	var i = 0;
-	for(; i < p.Num(); ++i) {
+	for(; i < p.Num() && i < max; ++i) {
 		var c = p.Get(i);
 		Gui.RenderEntity(c, set[i], obj[i]);
 		set[i].show();
 		if(c != currentActiveChar)
 			obj[i].glow.hide();
 	}
-	for(; i < 4; ++i)
+	for(; i < 4 && i < max; ++i)
 		set[i].hide();
 }
 Gui.RenderEntity = function(entity, set, obj) {
@@ -503,7 +560,7 @@ Gui.RenderEntity = function(entity, set, obj) {
 	*/
 	
 	if(entity.avatar.combat)
-		obj.portrait.attr({src: entity.avatar.combat});
+		obj.portrait.attr({src: entity.avatar.combat, opacity: entity.Incapacitated() ? .5 : 1});
 	
 	Gui.PrintGlow(set, obj.name, obj.xoffset-5, obj.yoffset, entity.name, Gui.fonts.Kimberley, 30, "start", {opacity: 1});
 	
@@ -593,6 +650,9 @@ Gui.SetGameState = function(state) {
 }
 
 Gui.Render = function() {
+	
+	Gui.cavalcade.hide();
+	
 	switch (gameState) {
 		case GameState.Credits:
 			Gui.overlay.hide();
@@ -624,7 +684,54 @@ Gui.Render = function() {
 			
 			break;
 		case GameState.Cavalcade:
+			Gui.party.hide();
+			Gui.enemy.hide();
+			var set  = Gui.cavalcade;
 			
+			for(var i=0,j=cavalcade.players.length; i<j; i++) {
+				var p    = cavalcade.players[i];
+				var obj  = Gui.cavalcadeObj.p[i];
+				/*
+				if(p.avatar.combat) {
+					obj.portrait.attr({src: p.avatar.combat, opacity: p.folded ? .5 : 1}).show();
+				}
+				*/
+				Gui.PrintGlow(set, obj.name, obj.xoffset-5, obj.yoffset, p.name, Gui.fonts.Kimberley, 30, "start", {opacity: 1});
+				
+				var cards = obj.cards;
+				
+				for(var k=0; k < 2; k++) {
+					// Show cards when game is complete
+					var showCard = cavalcade.round > 4;
+					// don't show folded opponents
+					if(p.folded) showCard = false;
+					showCard |= p == player; // always show own
+	
+					if(showCard)
+						cards[k].attr({src: p.hand[k].Img}).show();
+					else
+						cards[k].attr({src: Images.card_back}).show();
+				}
+			}
+			
+			for(var i=0,j=cavalcade.house.length; i<j; i++) {
+				var card = Gui.cavalcadeObj.house[i];
+				// Show cards when game is complete
+				var showCard = cavalcade.round > i + 1;
+				if(showCard)
+					card.attr({src: cavalcade.house[i].Img}).show();
+				else
+					card.attr({src: Images.card_back}).show();
+			}
+			
+			var potStr   = cavalcade.pot;
+			var roundStr = cavalcade.round - 1;
+			if(roundStr < 1) roundStr = 1;
+			if(roundStr > 3) roundStr = 3;
+			Gui.PrintGlow(set, Gui.cavalcadeObj.round, 850, 620, roundStr, Gui.fonts.Kimberley, 20, "end", {opacity: 1});
+			Gui.PrintGlow(set, Gui.cavalcadeObj.pot,   850, 670, potStr,   Gui.fonts.Kimberley, 20, "end", {opacity: 1});
+			Gui.PrintShow(Gui.cavalcadeObj.roundFixed);
+			Gui.PrintShow(Gui.cavalcadeObj.potFixed);
 			
 			// TODO: Time
 			Gui.RenderTime();
@@ -632,133 +739,6 @@ Gui.Render = function() {
 			Gui.overlay.show();
 			break;
 	}
-	
-	
-	return;
-	
-	
-	
-	
-	
-	
-	switch(gameState) {
-		
-	case GameState.Cavalcade:
-		// Render party
-		context.save();
-		context.translate(20, 75);
-		
-		for(var i=0,j=cavalcade.players.length; i<j; i++) {
-			context.save();
-			
-			var p = cavalcade.players[i];
-			
-			// Draw portrait, if any
-			if(RENDER_PICTURES && p.avatar && p.avatar.combat)
-				context.drawImage(p.avatar.combat, 0, 0);
-			
-			// Draw a shaded rect and a red X over pic if folded
-			if(p.folded) {
-				context.fillStyle = "rgba(0, 0, 0, 0.5)";
-				context.fillRect(0,0,100,100);
-				context.strokeStyle = "red";
-				context.beginPath();
-				context.moveTo(0,0);
-				context.lineTo(100,100);
-				context.moveTo(100,0);
-				context.lineTo(0,100);
-				context.lineWidth = 4;
-				context.stroke();
-			}
-			
-			// Draw name
-			context.font = LARGE_FONT;
-			context.textAlign = 'start';
-			context.lineWidth = 4;
-			context.strokeText(p.name, -10, 15);
-			context.fillStyle = "white";
-			context.fillText(p.name, -10, 15);
-			
-			// Draw player hand
-			context.translate(20, 115);
-			for(var k=0; k < 2; k++) {
-				// Show cards when game is complete
-				var showCard = cavalcade.round > 4;
-				// don't show folded opponents
-				if(p.folded) showCard = false;
-				showCard |= p == player; // always show own
-
-				if(showCard)
-					context.drawImage(p.hand[k].Img, 0, 0);
-				else
-					context.drawImage(Images.card_back, 0 ,0);
-				context.translate(110, 0);
-			}
-			
-			context.restore();
-			
-			if(i==0) {
-				context.restore();
-				context.save();
-				context.translate(1020, 75);
-			}
-			else
-				context.translate(0, 300);
-		}
-		
-		context.restore();
-		
-		// Draw house hand
-		context.save();
-		context.translate(25, 380);
-		for(var i=0,j=cavalcade.house.length; i<j; i++) {
-			// Show cards when game is complete
-			var showCard = cavalcade.round > i + 1;
-			if(showCard)
-				context.drawImage(cavalcade.house[i].Img, 0, 0);
-			else
-				context.drawImage(Images.card_back, 0 ,0);
-			context.translate(60, 25);
-		}
-		context.restore();
-		
-		Gui.RenderTime(context);
-		Gui.RenderLocation(context);
-		
-		context.save();
-		
-		context.lineWidth = 4;
-		context.strokeStyle = "black";
-		context.fillStyle = "white";
-		context.font = LARGE_FONT;
-	
-		var potStr   = cavalcade.pot;
-		var roundStr = cavalcade.round - 1;
-		if(roundStr < 1) roundStr = 1;
-		if(roundStr > 3) roundStr = 3;
-		
-		context.textAlign = 'start';
-		context.strokeText("Round: ", 550, 620);
-		context.fillText("Round: ", 550, 620);
-		context.textAlign = 'right';
-		context.strokeText(roundStr, 850, 620);
-		context.fillText(roundStr, 850, 620);
-		
-		context.textAlign = 'start';
-		context.strokeText("Pot: ", 550, 670);
-		context.fillText("Pot: ", 550, 670);
-		context.textAlign = 'right';
-		context.strokeText(potStr, 850, 670);
-		context.fillText(potStr, 850, 670);
-		
-		context.restore();
-		
-		break;
-	}
-	
-	// TODO, use on stats screen
-	// Render character stats (temp)
-	//Gui.RenderStatsScreen(context);
 }
 
 Gui.RenderStatsScreen = function(context) {
