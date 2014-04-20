@@ -16,9 +16,12 @@ function Button(rect, text, func, enabled, image, disabledImage, glow) {
 	this.key     = -1;
 	this.state   = null; // No change
 	
+	this.oldEnImagePath  = this.enabledImage;
+	this.oldDisImagePath = this.disabledImage;
+	
 	this.set     = Gui.canvas.set();
 	this.image   = Gui.canvas.image(this.enabledImage, rect.x, rect.y, rect.w, rect.h);
-	this.text    = Gui.canvas.text(rect.x + rect.w/2, rect.y + rect.h/2, text).attr({stroke: "#FFF", fill:"#FFF", font: TINY_FONT});
+	this.text    = Gui.canvas.text(rect.x + rect.w/2, rect.y + rect.h/2, text).attr({fill:"#FFF", font: TINY_FONT});
 	this.set.push(this.image);
 	this.set.push(this.text);
 	if(glow) {
@@ -76,10 +79,18 @@ Button.prototype.SetKey = function(key) {
 }
 
 Button.prototype.SetEnabled = function(value) {
-	if(value)
-		this.image.attr({src: this.enabledImage});
-	else
-		this.image.attr({src: this.disabledImage});
+	if(value) {
+		if(this.oldEnImagePath != this.enabledImage) {
+			this.image.attr({src: this.enabledImage});
+			this.oldEnImagePath  = this.enabledImage;
+		}
+	}
+	else {
+		if(this.oldDisImagePath != this.disabledImage) {
+			this.image.attr({src: this.disabledImage});
+			this.oldDisImagePath = this.disabledImage;
+		}
+	}
 	this.enabled = value;
 }
 
