@@ -59,6 +59,8 @@ function GolemBoss() {
 	// Set hp and mana to full
 	this.SetLevelBonus();
 	this.RestFull();
+
+	if(storage) this.FromStorage(storage);
 }
 GolemBoss.prototype = new BossEntity();
 GolemBoss.prototype.constructor = GolemBoss;
