@@ -45,6 +45,9 @@ InitCache = function() {
 	
 	fera    = new Fera(gameCache.fera);
 	
+	jeanne  = new Jeanne(gameCache.jeanne);
+	golem   = new GolemBoss(gameCache.golem);
+	
 	// Don't load for now
 	aria        = new Aria();
 	uru         = new Uru();
@@ -312,6 +315,9 @@ GameToCache = function() {
 	gameCache.danie   = danie.ToStorage();
 	
 	gameCache.fera    = fera.ToStorage();
+	
+	gameCache.jeanne  = jeanne.ToStorage();
+	gameCache.golem   = golem.ToStorage();
 	
 	// Current party
 	gameCache.party   = party.ToStorage();

@@ -6,6 +6,7 @@ function Encounter(enemy)
 	
 	this.onEncounter = null;
 	this.onTick = null;
+	this.onRun  = null;
 	
 	// Party filled with entitys
 	this.enemy = enemy;

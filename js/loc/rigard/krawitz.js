@@ -2102,6 +2102,7 @@ Scenes.Krawitz.Aftermath = function() {
 		
 		
 		Gui.NextPrompt(function() {
+			Text.Clear();
 			if(points <= 1)
 				Text.Add("<i>”Though I expected more, you’ve still shown your dedication,”</i> the man grudgingly admits. <i>”If nothing else, you <b>did</b> risk yourself by sneaking into the mansion. I guess that we can see that as proof of your loyalty, at least.”</i>", parse);
 			else if(points <= 5)

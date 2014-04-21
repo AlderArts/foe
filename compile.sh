@@ -22,6 +22,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/party.js \
 	js/effect.js \
 	js/combat.js \
+	js/enemy/boss.js \
 	js/time.js \
 	js/event.js \
 	js/world.js \
@@ -61,6 +62,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/loc/rigard/castle.js \
 	js/loc/rigard/clothstore.js \
 	js/loc/rigard/inn.js \
+	js/loc/rigard/magetower.js \
 	js/loc/treecity/treecity.js \
 	js/loc/plains.js \
 	js/loc/highlands.js \
@@ -90,7 +92,8 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/wolfie.js \
 	js/event/magnus.js \
 	js/event/outlaws/maria.js \
-	js/enemy/boss.js \
+	js/event/jeanne.js \
+	js/event/golem.js \
 	js/enemy/bandit.js \
 	js/enemy/imp.js \
 	js/enemy/introdemon.js \
@@ -102,7 +105,6 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/enemy/feralwolf.js \
 	js/enemy/scorp.js \
 	js/enemy/drake.js \
-	js/enemy/golemboss.js \
 	js/main.js \
 	js/credits.js \
 	js/cheats.js \
