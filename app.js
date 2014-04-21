@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 3;
-VERSION_SUBSCRIPT = "e";
-VERSION_NAME = "Metal Gear Eden";
+VERSION_SUBSCRIPT = "f2";
+VERSION_NAME = "GUI rework";
 
 SAVE_VERSION = 13;
 // Save version 1: Initial
@@ -28,7 +28,7 @@ SAVE_VERSION = 13;
 VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + VERSION_SUBSCRIPT + ": " + VERSION_NAME;
 
 HEADER_FONT  = "bold 30pt Calibri";
-TINY_FONT    = "14pt Calibri";
+BUTTON_FONT    = "bold 14pt Impact";
 SMALL_FONT   = "16pt Calibri";
 DEFAULT_FONT = "20pt Calibri";
 LARGE_FONT   = "26pt Calibri";

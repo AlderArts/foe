@@ -21,7 +21,17 @@ function Button(rect, text, func, enabled, image, disabledImage, glow) {
 	
 	this.set     = Gui.canvas.set();
 	this.image   = Gui.canvas.image(this.enabledImage, rect.x, rect.y, rect.w, rect.h);
-	this.text    = Gui.canvas.text(rect.x + rect.w/2, rect.y + rect.h/2, text).attr({fill:"#FFF", font: TINY_FONT});
+	this.text    = Gui.canvas.text(rect.x + rect.w/2, rect.y + rect.h/2, text).attr(
+		{fill:"#FFF", stroke:"#000", font: BUTTON_FONT});
+	//Disable text selection
+	$(this.text.node).css({
+		"-webkit-touch-callout": "none",
+		"-webkit-user-select": "none",
+		"-khtml-user-select": "none",
+		"-moz-user-select": "none",
+		"-ms-user-select": "none",
+		"user-select": "none"
+	});
 	this.set.push(this.image);
 	this.set.push(this.text);
 	if(glow) {
@@ -80,13 +90,13 @@ Button.prototype.SetKey = function(key) {
 
 Button.prototype.SetEnabled = function(value) {
 	if(value) {
-		if(this.oldEnImagePath != this.enabledImage) {
+		if(this.oldEnImagePath != this.enabledImage || this.enabled != value) {
 			this.image.attr({src: this.enabledImage});
 			this.oldEnImagePath  = this.enabledImage;
 		}
 	}
 	else {
-		if(this.oldDisImagePath != this.disabledImage) {
+		if(this.oldDisImagePath != this.disabledImage || this.enabled != value) {
 			this.image.attr({src: this.disabledImage});
 			this.oldDisImagePath = this.disabledImage;
 		}

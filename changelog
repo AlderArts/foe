@@ -5,16 +5,25 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.3f2
+-------------
+* Fixed a bug with disabled buttons not rendering properly.
+* Removed text selections on the buttons (it is still technically possible, but not by pressing/dragging on the buttons)
+* Changed the default button font to Impact and added a black outline for readability.
+* Known GUI bugs:
+ - Toggle pictures option doesn't do anything.
+ - Toggle key shortcuts doesn't do anything.
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.3f
 ------------
 * Complete rewrite of the Graphical User Interface, based on Raphael.js (a wrapper around SVG). Still a few kinks left to work out with it, especially testing browser compatability.
 * Known GUI bugs:
  - Button flicker in Chrome (works in firefox).
  - Slight lag at start of combat when old sprites might show up.
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.3e
 ------------
