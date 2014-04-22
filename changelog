@@ -5,6 +5,14 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.3f3
+-------------
+* Fixed minor bug in drake AI
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.3f2
 -------------
 * Fixed a bug with disabled buttons not rendering properly.
@@ -13,10 +21,6 @@ Version 0.3f2
 * Known GUI bugs:
  - Toggle pictures option doesn't do anything.
  - Toggle key shortcuts doesn't do anything.
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.3f
 ------------
