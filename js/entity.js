@@ -90,6 +90,8 @@ function Entity() {
 	this.name         = "ENTITY";
 	this.monsterName  = undefined;
 	this.MonsterName  = undefined;
+	this.groupName    = undefined;
+	this.GroupName    = undefined;
 	// Titles are achieved by performing feats or by achieving great strength
 	this.title        = new Array();
 	
@@ -707,6 +709,14 @@ Entity.prototype.Possessive = function() {
 	var letter = name[name.length-1];
 	var s = (letter == 's' || letter == 'x') ? "'" : "'s";
 	return name + s;
+}
+Entity.prototype.possessivePlural = function() {
+	var name = this.groupName || this.name || "the entities";
+	return name + "'";
+}
+Entity.prototype.PossessivePlural = function() {
+	var name = this.GroupName || this.name || "The entities";
+	return name + "'";
 }
 Entity.prototype.heshe = function() {
 	var gender = this.body.Gender();
