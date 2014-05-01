@@ -583,7 +583,7 @@ Scenes.Rosalin.FirstFuck = function() {
 		rVagDesc      : function() { return rosalin.FirstVag().Short(); }
 	};
 	
-	var cocks         = player.CocksThatFitLen(35);
+	var cocks         = player.CocksThatFit(rosalin.FirstVag());
 	parse.cockDesc    = function() { return cocks[0].Short(); };
 	parse.cockTipDesc = function() { return cocks[0].TipShort(); }
 	
@@ -880,7 +880,7 @@ Scenes.Rosalin.FirstFuckPegWolf = function() {
 		wAnusDesc     : function() { return wolfie.Butt().AnalShort(); }
 	};
 	
-	var cocks         = player.CocksThatFitLen(35);
+	var cocks         = player.CocksThatFit(wolfie.Butt());
 	parse.cockDesc    = function() { return cocks[0].Short(); };
 	parse.cockTipDesc = function() { return cocks[0].TipShort(); }
 	

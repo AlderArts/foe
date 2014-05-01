@@ -1090,22 +1090,15 @@ Entity.prototype.BiggestCock = function() {
 	}
 	return c;
 }
-Entity.prototype.CocksThatFitLen = function(capacity) {
+Entity.prototype.CocksThatFit = function(orifice) {
 	ret = new Array();
 	for(var i=0,j=this.body.cock.length; i<j; i++) {
-		var size = this.body.cock[i].length.Get();
-		if(size <= capacity)
-			ret.push(this.body.cock[i]);
+		var c = this.body.cock[i];
+		if(orifice.Fits(c))
+			ret.push(c);
 	};
-	return ret;
-}
-Entity.prototype.CocksThatFitThk = function(capacity) {
-	ret = new Array();
-	for(var i=0,j=this.body.cock.length; i<j; i++) {
-		var size = this.body.cock[i].thickness.Get();
-		if(size <= capacity)
-			ret.push(this.body.cock[i]);
-	};
+	if(this.strapOn && orifice.Fits(this.strapOn.cock))
+		ret.push(this.strapOn.cock);
 	return ret;
 }
 Entity.prototype.AllCocks = function() {
@@ -1206,11 +1199,10 @@ Entity.prototype.AllOrfices = function(capacity) {
 	return ret;
 }
 
-Entity.prototype.AllPenetrators = function(capacity) {
-	capacity = capacity || Infinity;
+Entity.prototype.AllPenetrators = function(orifice) {
 	var ret = new Array();
 	
-	var cocks = this.CocksThatFitLen(capacity);
+	var cocks = this.CocksThatFitLen(orifice);
 	for(var i=0,j=cocks.length; i<j; i++)
 		ret.push({type: BodyPartType.cock, obj: cocks[i]});
 	// TODO: Tongue, Nipple-cock, Clitcock
@@ -1382,18 +1374,23 @@ Entity.prototype.CumOutput = function(mult) {
 	cum = Math.min(cum, balls.cum.Get());
 	return cum;
 }
-// TODO
+// TODO test
 Entity.prototype.OrgasmCum = function(mult) {
 	mult = mult || 1;
 	var balls = this.Balls();
-	var cumQ = this.CumOutput(mult);
-	
-	balls.cum.DecreaseStat(0, cumQ);
+	var cumQ  = this.CumOutput(mult);
 	
 	this.AddLustFraction(-1);
+	
+	balls.cum.DecreaseStat(0, cumQ);
+	if(DEBUG) {
+		Text.Newline();
+		Text.AddOutput("<b>[name] came ([cum]).</b>", {name: this.NameDesc(), cum: cumQ});
+		Text.Newline();
+	}
 	return cumQ;
 }
-// TODO
+// TODO preggo (wombs)
 Entity.prototype.StomachDesc = function() {
 	return this.body.StomachDesc();
 }

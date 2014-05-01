@@ -827,6 +827,10 @@ function Vagina() {
 	
 	this.virgin        = true;
 }
+// TODO
+Vagina.prototype.Fits = function(cock) {
+	return cock.length.Get() <= this.capacity.Get();
+}
 
 // Create a clitcock from a vagina
 // Returns the cock
@@ -968,6 +972,10 @@ function Butt() {
 	
 	this.virgin   = true;
 }
+// TODO
+Butt.prototype.Fits = function(cock) {
+	return cock.length.Get() <= this.capacity.Get();
+}
 Butt.prototype.noun = function() {
 	var size = this.buttSize.Get();
 	var nouns = new Array();
@@ -1077,6 +1085,7 @@ function Cock(race, color) {
 	this.vag       = null; // For clitcock
 	this.knot      = 0;
 	this.sheath    = 0;
+	this.isStrapon = false;
 }
 Cock.prototype = new BodyPart();
 Cock.prototype.constructor = Cock;

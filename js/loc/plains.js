@@ -167,8 +167,11 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
  	var enemy = new Party();
 	enemy.AddMember(new Wildcat(Gender.female));
 	enemy.AddMember(new Wildcat(Gender.male));
-	enemy.AddMember(new Wildcat(Gender.male));
+	enemy.AddMember(new Wildcat(Gender.herm));
 	var enc = new Encounter(enemy);
+	
+	enc.onEncounter = Scenes.Felines.Intro;
+	enc.onVictory = Scenes.Felines.WinPrompt;
 	/*
 	enc.canRun = false;
 	enc.onEncounter = ...
