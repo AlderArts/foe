@@ -82,11 +82,20 @@ GolemBoss.prototype.ToStorage = function() {
 
 GolemBoss.prototype.Act = function(encounter, activeChar) {
 	// TODO: AI!
+	Text.AddOutput(this.name + " shuffles around cumbersomely.");
+	Text.Newline();
+	
+	// Pick a random target
+	var t = this.GetSingleTarget(encounter, activeChar);
 	
 	
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
+	var choice = Math.random();
+	if(choice < 0.2 && Abilities.Physical.Bash.enabledCondition(encounter, this))
+		Abilities.Physical.Bash.CastInternal(encounter, this, party);
+	else if(choice < 0.4 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
+		Abilities.Physical.CrushingStrike.CastInternal(encounter, this, party);
+	else
+		Abilities.Attack.CastInternal(encounter, this, t);
 }
 
 
