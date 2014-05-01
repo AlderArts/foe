@@ -270,6 +270,10 @@ Scenes.Felines.WinPrompt = function() {
 		heshe        : group ? "they" : mainCat.heshe()
 	};
 	
+	enc.finalize = function() {
+		Encounter.prototype.onVictory.call(enc);
+	};
+	
 	Text.Clear();
 	Text.Add("Your [enemyEnemies] lie[notS] defeated, rolling over on [hisher] back[s] in submission to your authority. You consider what you are going to do with the feline[s].", parse);
 	if(player.LustLevel() > 0.5)
@@ -388,6 +392,17 @@ Scenes.Felines.WinPrompt = function() {
 			tooltip : ""
 		});
 	*/
+	options.push({ nameStr : "Leave",
+		func : function() {
+			Text.Clear();
+			Text.Add("You gather up your belongings and leave the defeated feline[s] behind you.", {s: group ? "s" : ""});
+			world.TimeStep({minute : 30});
+			Text.Flush();
+			
+			Gui.NextPrompt(enc.finalize);
+		}, enabled : true,
+		tooltip : Text.Parse("Just leave [himher] and be on your way.", parse)
+	});
 	Gui.SetButtonsFromList(options);
 }
 
@@ -444,6 +459,10 @@ Scenes.Felines.WinFuckVag = function(cat, group, enc, cocks) {
 	parse["s"]     = player.NumCocks() > 1 && !pCock.isStrapon ? "s" : ""; 
 	Text.Add("The cat is breathing heavily as you line up[oneof] your cock[s] with her pussy, rubbing the [cockTip] against her sensitive labia. She is nice and wet already, providing you with plenty of lubrication. With a single thrust of your hips, you’ve pushed inside her, her walls wrapping tightly around your shaft. You allow her a short period of time to adjust before you start moving.", parse);
 	Text.NL();
+	
+	Sex.Vaginal(player, cat);
+	player.Fuck(pCock, 3);
+	
 	Text.Add("The feline, used to rough but brief copulations, has little preparation for the fucking you are about to give her, moaning in surprised delight as you explore her depths with your [cockDesc].", parse);
 	if(player.NumCocks() > 1) {
 		parse["s2"] = player.NumCocks() > 2 ? "s" : "";
@@ -503,7 +522,7 @@ Scenes.Felines.WinFuckVag = function(cat, group, enc, cocks) {
 		
 		world.TimeStep({hour: 1});
 		
-		Gui.NextPrompt();
+		Gui.NextPrompt(enc.finalize);
 	});
 	
 	
@@ -629,29 +648,434 @@ Scenes.Felines.WinFuckVag = function(cat, group, enc, cocks) {
 }
 
 Scenes.Felines.WinFuckButt = function(cat, group, enc, cocks) {
+	var pCock = cocks[0];
+	
 	var parse = {
-		
+		oneof    : group ? " one of" : "",
+		s        : group ? "s" : "",
+		Name     : cat.nameDesc(),
+		name     : cat.nameDesc(),
+		HeShe    : cat.HeShe(),
+		heshe    : cat.heshe(),
+		HisHer   : cat.HisHer(),
+		hisher   : cat.hisher(),
+		himher   : cat.himher(),
+		Possessive  : cat.Possessive(),
+		possessive  : cat.possessive(),
+		cockDesc    : function() { return pCock.Short(); },
+		multiCockDesc : function() { return player.MultiCockDesc(); },
+		cockTip     : function() { return pCock.TipShort(); },
+		hand        : function() { return player.HandDesc(); },
+		tongueDesc  : function() { return player.TongueDesc(); },
+		stomachDesc : function() { return player.StomachDesc(); },
+		hipsDesc    : function() { return player.HipsDesc(); },
+		skinDesc    : function() { return player.SkinDesc(); },
+		breastDesc  : function() { return player.FirstBreastRow().Short(); },
+		ballsDesc   : function() { return player.BallsDesc(); },
+		clitCock    : cat.FirstCock() ? "clitcock" : "clit",
+		vagDesc     : function() { return player.FirstVag() ? player.FirstVag().Short() : "crotch"; }
 	};
 	
 	Text.Clear();
-	Text.Add("PLACEHOLDER", parse);
+	Text.Add("You tell[oneof] the defeated feline[s] that you are going to have some fun with [himher], motioning [himher] to roll over on [hisher] back, legs spread. [HeShe] complies, whimpering fearfully. Following your instructions [name] pulls [hisher] ass cheeks wide, exposing [hisher] tight rosebud. The shy cat tries to block your view by curling [hisher] tail in your way, but you easily push it aside, probing [possessive] tailhole with one of your fingers, slick from your saliva.", parse);
 	Text.NL();
-	Text.Flush();
+	Text.Add("<i>”P-please,”</i> [name] whines pitifully, moaning softly as your digit slips inside. Please get right to the main course and fuck [himher] silly? If [heshe] puts it that way…", parse);
+	Text.NL();
+	Text.Add("In response, you thrust your finger in to the knuckle, drawing a surprised yelp from the vulnerable feline.", parse);
+	if(cat.FirstCock())
+		Text.Add(" [HisHer] cock twitches at the sudden intrusion, seeming far more into the prospect of [hisher] imminent buttfucking than its owner is.", parse);
+	if(cat.HasBalls())
+		Text.Add(" You smile, caressing [possessive] full sack. Before this is over, you are going to empty this.", parse);
+	if(cat.FirstVag())
+		Text.Add(" [Possessive] cunt is wet and ready, but it’ll have to wait for now. You have another target in mind.", parse);
+	Text.NL();
+	if(pCock.isStrapon) {
+		Text.Add("While busy preparing [name], you hurriedly slip off your gear, pulling out and securing your [cockDesc]. [Name] looks at the artificial member with confusion, though from [hisher] deep blush, you suspect that [heshe] knows full well what you intend to use it for.", parse);
+	}
+	else {
+		parse["ItThey"] = player.NumCocks() > 1 ? "they" : "it";
+		parse["isAre"]  = player.NumCocks() > 1 ? "are" : "is";
+		Text.Add("While you are busy preparing [name], you hurriedly slip off your gear, pulling out your stiffening [multiCockDesc]. [ItThey] [isAre] more than ready for the task at hand, yearning to be plunged into [possessive] blissfully tight hole.", parse);
+	}
+	Text.NL();
+	Text.Add("By now, you are thrusting two fingers into [hisher] anus, [hisher] weakening defenses soon allowing you to work in a third. [Name] moans in pleasure, [hisher] legs squirming and [hisher] tail swishing back and forth erratically.", parse);
+	Text.NL();
+	if(cat.FirstVag())
+		Text.Add("<i>”No, that is the wrong hole!”</i> she whimpers, though she doesn’t seem as resistant as her words imply.", parse);
+	else
+		Text.Add("<i>”Do you intend to take me like one would a female?”</i> he pants, blushing at the alien concept.", parse);
+	Text.Add(" You respond by increasing your pace, grinning at the way [name] arches [hisher] back. With a start, you realize that the horny kitty has begun to purr.", parse);
+	Text.NL();
+	if(cat.FirstCock()) {
+		Text.Add("No matter how much [heshe] complains, [hisher] rigid shaft is betraying [hisher] true feelings. A bead of precum has started to form on the barbed tip of the feline cock, much to the dismay of its owner. [Name] looks up at you hopefully, wanting you to aid [himher], but you’ve got something else in mind. Coyly, you motion [himher] to raise [hisher] head, scratching the obedient kitty behind one ear as [heshe] complies.", parse);
+		Text.NL();
+		Text.Add("Slowly, you guide [himher] toward [hisher] crotch, [hisher] flexible back bending to accommodate for your raunchy plan. [Name] submissively obey, closing [hisher] eyes as [hisher] open mouth draws closer and closer to [hisher] needy cock. The feline shudders happily as [heshe] licks up [hisher] own pre, dick twitching as [hisher] rough tongue laps up the salty cream.", parse);
+		Text.NL();
+		Text.Add("However, instead of releasing the pressure on the back of [hisher] head, you push [himher] down further, so that [hisher] lips wraps around the slick feline shaft. Only when [heshe] has swallowed every inch of [hisher] own cock do you relent, softening your grip slightly to allow [name] some room to move. Breathing heavily, you command the kitty to suck, your fingers still busy probing [hisher] rear entrance.", parse);
+	}
+	else {
+		Text.Add("The female moans despite herself, one of her trembling hands instinctively moving toward her wet pussy. Even left untended, the feline’s snatch is brimming with her juices, begging to be bred by her dominant victor. A swat with your free [hand] cruelly denies her pleasure, and she whimpers pitifully, wordlessly begging you to allow her release.", parse);
+		Text.NL();
+		Text.Add("[Name] holds her breath raptly as your [hand] hovers over her needy sex, only a fraction of an inch separating you and [possessive] wet nether lips. In a desperate attempt to sate herself, the horny kitty grinds back against your probing fingers, impaling herself on your digits while she arches her back, trying to brush her pussy against your teasing [hand].", parse);
+		Text.NL();
+		Text.Add("Mocking her eagerness, you withdraw, staying just outside the reach of her shaking hips. You tell her that she isn’t allowed to use her hands, but that you’ll grant her the use of her tongue. Her restrictions released, the feline greedily lunges for her own crotch, her back twisting and bending like an acrobat’s. [Name] shudders in pleasure as she sinks her tongue into her folds. In a sultry voice, you commend the feline for her obedience, your  fingers still busy probing [hisher] rear entrance.", parse);
+	}
+	Text.NL();
+	Text.Add("[Possessive] flexible nature provides so many fun possibilities, but you are beginning to get riled up yourself. Time to find out if [hisher] butt is as stretchy [hisher] back! Letting [name] tend to [himher]self orally, you slowly withdraw your fingers from [hisher] stretched hole. The tight rosebud quickly clenching behind you, promising for a fun challenge ahead. No matter, you’ll soon have [himher] gaping wide.", parse);
+	Text.NL();
 	
-	Gui.NextPrompt();
+	parse["oneof"] = player.NumCocks() > 1 && !pCock.strapOn ? " one of" : "";
+	parse["cock"] = pCock.strapOn ? pCock.Short() : player.MultiCockDesc();
+	Text.Add("The kitty gulps nervously as you line up[oneof] your [cock] with [hisher] puckered ass, though by now, [hisher] fear has been all but squashed by [hisher] lust. As a further testament to this, [heshe] betrays [hisher] eagerness to be fucked by grasping [hisher] buttcheeks with [hisher] paws, spreading them wide and welcoming you to ravage [himher]. ", parse);
+	if(player.sex.gAnal >= 20)
+		Text.Add("Always happy to introduce another slut to the joys of anal sex, you gleefully thrust your [cockDesc] into [hisher] butt. [HeShe] is in for quite a ride.", parse);
+	else if(player.sex.gAnal > 5)
+		Text.Add("With an experienced thrust of your [hipsDesc], you plunge your [cockDesc] inside the kitty’s offered butt.", parse);
+	else
+		Text.Add("In your bumbling eagerness, you have to take a moment to adjust your aim before your probing [cockDesc] pushes inside [himher].", parse);
+	Text.NL();
+	
+	//#PC fucks cat
+	Sex.Anal(player, cat);
+	player.Fuck(pCock, 3);
+	
+	parse["cock"] = cat.FirstCock() ? Text.Parse("around [hisher] cock", parse) : "into her cunt";
+	Text.Add("At first, you are only able to force your [cockTip] past [possessive] withering defenses, but after a bit of work, more and more of [hisher] anal passage falls to your advancing [cockDesc]. Grunting with pleasure, you rock your [hipsDesc], digging deeper and deeper inside the pliant kitty. [HeShe] adapts surprisingly quickly to the rough pace you set, moaning appreciatively [cock]. [Name] seems to be having a good time so far, but you are barely getting started.", parse);
+	Text.NL();
+	if(pCock.length.Get() > 30)
+		Text.Add("The feline is protesting every bit of the way, [hisher] cries and moans alternating between pain at being stretched wide open and the pleasure of being fucked like the subservient slut [heshe] is. Eventually you realize that you are simply too big for [himher], not that this fact will stop you from fucking [possessive] brains out.", parse);
+	else
+		Text.Add("You are easily able to bottom out inside your subservient slut. Easy for you, if not for [himher]. The sounds of your hips slamming against [possessive] bum echo across the wide plains, and [hisher] muffled cries of mixed pleasure and pain announcing [hisher] anal debut to everyone within earshot.", parse);
+	Text.NL();
+	if(player.NumCocks() > 1) {
+		parse["s"] = player.NumCocks() > 2 ? "s" : "";
+		parse["isAre"] = player.NumCocks() > 2 ? "are" : "is";
+		parse["cock"] = cat.FirstCock() ? Text.Parse("sucking [hisher] cock", parse) : "lapping at her cunt";
+		Text.Add("Your other bobbing shaft[s] [isAre] dancing hypnotizingly in front of [possessive] half-closed eyes. Taking some time off from [cock], [heshe] raises [hisher] head to give you a lick. The kitty runs [hisher] rough tongue along the bottom of[oneof] your dick[s], lathering it from root to tip.", parse);
+		Text.NL();
+	}
+	Text.NL();
+	Text.Add("The two of you settle into a rhythm, you providing thrusting power and [name] doing all [heshe] can to receive you. [HisHer] claws are digging into [hisher] furry behind, pulling [hisher] cheeks wide and opening [hisher] passage for your fervent onslaught. At some point, [name] abandons [hisher] oral enterprise, head rolling back and tongue lolling freely as [hisher] body is wrecked by wave after wave of pleasure. The cat pants rapidly, breathlessly begging you to fuck [himher] harder, deeper, to punish [himher] for being such a bad kitty.", parse);
+	Text.NL();
+	Text.Add("You respond with action rather than words, giving [name] just what [heshe] wants. Hoisting the flexible feline’s stretchy butt up higher, you push [hisher] legs back behind [hisher] head, the angle allowing you to go even deeper than before.", parse);
+	if(cat.FirstCock())
+		Text.Add(" Each violent thrust into [possessive] depths rub against [hisher] battered prostate, bringing [himher] closer and closer to a very messy climax.", parse);
+	Text.NL();
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("<i>”Y-you fuck like the king of the plains! S-so good!”</i> [name] moans breathlessly. Perhaps [heshe] isn’t as inexperienced at taking cocks in the ass as you thought.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>”Mmh… Ahn!”</i> [name] moans lustily, tail swishing back and forth erratically, the bushy tip brushing against your [skinDesc].", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		parse["masterMistress"] = player.mfTrue("master", "mistress");
+		Text.Add("<i>”I love your cock, [masterMistress]!”</i> [name] pants breathlessly. <i>”Stretching me so wide...”</i>", parse);
+	}, 1.0, function() { return true; });
+	
+	scenes.Get();
+
+	Text.NL();
+	Text.Add("With a last groaning roar, the large feline shudders in your arms, ass clenching tightly around your [cockDesc] as [heshe] cums.", parse);
+	if(cat.FirstCock())
+		Text.Add(" [HisHer] precarious position puts [himher] in the direct trajectory of [hisher] seed, which jets out in long, thick strands of white, covering the kitty in [hisher] own sticky cream.", parse);
+	if(cat.FirstVag())
+		Text.Add(" [Possessive] pussy erupts in a tiny fountain of girlcum, small beads of the clear liquid sticking to [hisher] matted fur.", parse);
+	Text.NL();
+	Text.Add("You’d give [himher] a moment to recover… but you are so close yourself! Grinning feverishly, you redouble your efforts, taking great advantage of [possessive] tightening muscles and little care for [hisher] feelings. Each thrust pushes you closer and closer, until finally, it all comes crashing down on you.", parse);
+	Text.NL();
+	
+	
+	Gui.Callstack.push(function() {
+		Text.Add("Once [heshe] has recovered sufficiently, [name] sets to cleaning [himher]self up using [hisher] tongue. Every now and then, [heshe] pauses to eye you warily, unsure whether you are finished with [himher] or not.", parse);
+		Text.NL();
+		if(party.NumTotal() == 2)
+			parse["comp"] = " and " + party.Get(1).name;
+		else if(party.NumTotal() > 1)
+			parse["comp"] = " and your companions";
+		else
+			parse["comp"] = "";
+		Text.Add("Even if keeping the cat as a pet would be fun, you have to get back to your quest. You[comp] gather your gear and once again set out on your journey.", parse);
+		Text.Flush();
+		
+		player.subDom.IncreaseStat(50, 1);
+		world.TimeStep({hour: 1});
+		
+		Gui.NextPrompt(enc.finalize);
+	});
+	
+	
+	if(!pCock.isStrapon) {
+		Text.Add("Moments away from flooding [possessive] insides with your cum, you pause. Where do you want to finish?", parse);
+		Text.Flush();
+		
+		var load = player.OrgasmCum();
+		
+		Gui.Callstack.push(function() {
+			Text.NL();
+			Text.Add("Before leaving the kitty in a panting, sticky heap, you wipe your [multiCockDesc] clean on [hisher] fur. A little more cream surely can’t hurt.", parse);
+			
+			PrintDefaultOptions();
+		});
+		
+		//[Inside][Mouth][Body]
+		var options = new Array();
+		options.push({ nameStr : "Inside",
+			func : function() {
+				Text.Clear();
+				Text.Add("No going back now! Grunting, you make a final thrust, pushing your [cockDesc] deep in [possessive] formerly tight ass. [HisHer] eyes widen as [heshe] feels the first warm splatters of your seed pouring into [himher], forever marking the kitty as your slut.", parse);
+				Text.NL();
+				if(load > 6) {
+					Text.Add("[Possessive] eyes widen further as the first few blasts all but inflate [hisher] insides, the rushing seed reaching [hisher] stomach with most of your load yet to be unleashed. Each ram of your hips deposits another massive glob of spunk into [possessive] bowels, rapidly inflating [hisher] tummy to huge proportions.", parse);
+					Text.NL();
+					if(load > 10) {
+						Text.Add("The poor kitty gags, briefly trying to keep down the rising flood of semen rushing up [hisher] windpipe, but it is a futile effort. In a final gush, your cum fountains from [possessive] mouth, raining down on both of you. After a lot of coughing, [heshe] manages to clear [hisher] throat, allowing air to flow again.", parse);
+						Text.NL();
+					}
+					Text.Add("[Name] carefully rubs [hisher] bloated stomach, feeling your seed settling inside [himher].", parse);
+				}
+				else if(load > 3) {
+					Text.Add("[Name] looks down in surprise at [hisher] slowly swelling stomach, astonished by your impressive output. Gulping uncertainly, [heshe] squirms a bit, though with your [cockDesc] firmly lodged in [hisher] ass,  [heshe] can do little but lie there and take it.", parse);
+				}
+				else {
+					Text.Add("You rest for a while after cumming inside [name], letting [himher] feel you spunk settle inside [himher].", parse);
+				}
+				Text.Add(" With a sloppy plop, you pull out your [cockDesc], leaving behind a strand of cum connecting to [possessive] gaping asshole.", parse);
+				
+				PrintDefaultOptions();
+			}, enabled : true,
+			tooltip : Text.Parse("Just keep ramming [himher] until [heshe]’s leaking cum from [hisher] ears!", parse)
+		});
+		options.push({ nameStr : "Mouth",
+			func : function() {
+				Text.Clear();
+				Text.Add("Just before you go over the edge, you pull out of the moaning feline, leaving [hisher] ass gaping. Jutting your [hipsDesc] forward, you take hold of the back of [possessive] head, shoving [himher] down on your [cockDesc]. [HeShe] protests weakly,  but pipes down as you pour your cream into [hisher] mouth and against the back of [hisher] throat.", parse);
+				Text.NL();
+				if(load > 6) {
+					Text.Add("No matter how valiantly [name] tries to swallow your seed, your load is simply too big for [himher] to handle. [HisHer] stomach swells rapidly, and when [heshe] can no longer keep up, [hisher] cheeks bulge, eyes going wide as the high pressure causes your cum to jet out from [hisher] nostrils. Coughing feebly and clutching [hisher] inflated belly, [name] takes the last few blasts in the face; eyes lowered in shame.", parse);
+					Text.NL();
+					Text.Add("[HeShe] insists on lapping up the last quivering bead of thick cum lingering on your [cockTip], wrapping [hisher] lips around your [cockDesc] and meekly cleaning you up.", parse);
+				}
+				else if(load > 3) {
+					Text.Add("[Name] meekly slurps up your plentiful seed, swallowing every drop even as [hisher] belly starts to expand, straining from the immense amount of fluid being poured down [hisher] throat. When you’ve finally deposited the last of your last load into the willing feline, you wait a while, letting [himher] savour the thickness of your shaft.", parse);
+				}
+				else {
+					Text.Add("You shoot your load into [possessive] eager maw, your seed splattering across [hisher] tongue. [HeShe] looks like [heshe] is enjoying the taste, eyes half-lidded and a faint blush on [hisher] cheeks.", parse);
+				}
+				Text.Add(" [Name] actually sucks on the [cockTip] of your cock as you attempt to withdraw it, unwilling to let any of your seed go to waste. [HeShe] looks very satisfied, licking [hisher] lips and purring softly. [HeShe] looks very tired after the ordeal, to the point of being unable to raise [hisher] head.", parse);
+				
+				PrintDefaultOptions();
+			}, enabled : true,
+			tooltip : Text.Parse("Give the kitty a tasty treat as your farewell gift!", parse)
+		});
+		options.push({ nameStr : "Body",
+			func : function() {
+				Text.Clear();
+				parse["s"]        = player.NumCocks() > 1 ? "s" : "";
+				parse["itsTheir"] = player.NumCocks() > 1 ? "their" : "its";
+				Text.Add("Just as you are about to blow, you pull out, leaving [possessive] ass gaping wide. Rapidly jerking your [multiCockDesc], you prepare to give [himher] a creamy shower. The panting kitty looks up at you expectantly, tongue hanging out in the hopes of catching some of your seed. With a last tug, you feel your cock[s] throb, ready to unleash [itsTheir] load.", parse);
+				Text.NL();
+				if(load > 6) {
+					Text.Add("The first shot slams into [name] like a large, sloppy battering ram, punching the air from [hisher] lungs. After the next few, [possessive] front is thoroughly plastered in your jizz, [himher] and the immediate area around [himher]. [HeShe] gasps for air, trying to swat off the thick ropes of spunk draping [hisher] face, only to have them replaced with your next shot. When you are done, the feline is soaked, [hisher] fur painted white from your excessive hosing.", parse);
+				}
+				else if(load > 3) {
+					Text.Add("You use [possessive] body like an artist would a canvas, rapidly painting [himher] in thick, ropey strands of cum. Before long, [name] is covered from head to toe in your spunk. The feline looks pleasantly surprised at your massive output, licking [hisher] lips tentatively, tasting you.", parse);
+				}
+				else {
+					Text.Add("You spill your load across [possessive] stomach, a stray strand of cum jetting farther than the other and landing across [hisher] muzzle. Draped in your spunk, [name] makes an unsteady attempt to clean [hisher] fur, only succeeding in spreading the mess and working it in.", parse);
+				}
+				
+				PrintDefaultOptions();
+			}, enabled : true,
+			tooltip : Text.Parse("Mark the kitty as yours by showering [himher] in your seed!", parse)
+		});
+		Gui.SetButtonsFromList(options);
+	}
+	else {
+		Text.Add("The base of the artificial cock grinds against your [vagDesc], triggering your own climax. For a long while, you remain there, your [cockDesc] buried deep inside [possessive] overstimulated colon. Both of you are panting, sweat dripping from your exhausted bodies. When you do pull out, you leave [hisher] hole gaping, twitching slightly as if grasping after the withdrawn toy.", parse);
+		
+		PrintDefaultOptions();
+	}
 }
 
 Scenes.Felines.WinGetBlowjob = function(cat, group, enc) {
 	var parse = {
-		
+		oneof    : group ? " one of" : "",
+		s        : group ? "s" : "",
+		Name     : cat.nameDesc(),
+		name     : cat.nameDesc(),
+		HeShe    : cat.HeShe(),
+		heshe    : cat.heshe(),
+		HisHer   : cat.HisHer(),
+		hisher   : cat.hisher(),
+		himher   : cat.himher(),
+		boyGirl  : cat.mfTrue("boy", "girl"),
+		Possessive  : cat.Possessive(),
+		possessive  : cat.possessive(),
+		cockDesc    : function() { return player.FirstCock().Short(); },
+		multiCockDesc : function() { return player.MultiCockDesc(); },
+		cockTip     : function() { return player.FirstCock().TipShort(); },
+		hand        : function() { return player.HandDesc(); },
+		tongueDesc  : function() { return player.TongueDesc(); },
+		stomachDesc : function() { return player.StomachDesc(); },
+		hipsDesc    : function() { return player.HipsDesc(); },
+		skinDesc    : function() { return player.SkinDesc(); },
+		breastDesc  : function() { return player.FirstBreastRow().Short(); },
+		ballsDesc   : function() { return player.BallsDesc(); },
+		vagDesc     : function() { return player.FirstVag() ? player.FirstVag().Short() : "crotch"; }
 	};
 	
 	Text.Clear();
-	Text.Add("PLACEHOLDER", parse);
+	Text.Add("[Name] looks like [heshe] is about to protest when you pull out your [multiCockDesc] and commands [himher] to suck, but a displeased look from you is all it takes to change [hisher] mind. From the outcome of the fight, [name] knows very well that [heshe] cannot win against you. Looking mopey, [heshe] crawls over to you, looking up at you a bit uncertainly.", parse);
 	Text.NL();
+	Text.Add("Impatient, you nod for [himher] to get to it, even stroking[oneof] your cock[s], placing your other [hand] on top of [hisher] head. Taking a firm grip of [hisher] hair, you put [hisher] lips right in front of your [cockTip], instructing [himher] to be a good [boyGirl] and say aah. [Name] grudgingly agrees, licking you hesitantly. You let [himher] continue for a while before you grow bored at [hisher] apprehensive behavior, taking a firm grip at the back of [hisher] head and pushing your way inside.", parse);
+	Text.NL();
+	
+	Sex.Blowjob(cat, player);
+	player.Fuck(player.FirstCock(), 2);
+	
+	Text.Add("[Name] looks a bit panicked at first, but gradually gets used to the feeling of your [cockDesc] pumping into [hisher] mouth. You can even feel [himher] trying to help you along, [hisher] sandpapery tongue playing along the shaft.", parse);
+	Text.NL();
+	if(cat.FirstCock())
+		Text.Add("Much to your amusement, [possessive] own cock is poking out of its sheath, becoming erect even as its owner is busy sucking another person off. You point this out, much to [hisher] embarrassment, but tell [himher] that [heshe] is free to pleasure [himher]self if [heshe] wants to… just as long as [heshe] doesn’t lose track of what is important. [Name] mutters discontentedly - as much as that is possible with a cock rammed down [hisher] throat - but after a while, one of [hisher] paws strays, grasping the erect member furtively.", parse);
+	else
+		Text.Add("The kitty is getting quite hot and bothered, and you can see that one of her hands is busy between her legs, probing her wet pussy and pinching her clit. You shrug - as long as she gets the job done, why complain?", parse);
+	Text.NL();
+	Text.Add("With your insistent urging and [possessive] grudging cooperation, you soon build a rhythm. ", parse);
+	if(player.FirstCock().length.Get() > 35)
+		Text.Add("Though [heshe] is able to swallow much of your [cockDesc], [hisher] eyes desperately plead with you to not force [himher] to take all of your massive erection. Probably for the best, as you don’t think [heshe]’d survive the ordeal. You resolve to make the most of it, each careful thrust pushing a tiny bit more down [hisher] straining throat.", parse);
+	else if(player.FirstCock().length.Get() > 20)
+		Text.Add("Somehow, [name] is able to take all of your [cockDesc], even though you see [hisher] throat bulging dangerously at the massive insertion. Sighing happily, you make a habit of pausing for a second when [possessive] lips are pressing against your crotch, making the feline growl uncomfortably.", parse);
+	else
+		Text.Add("[Name] is easily able to take your entire length, though it doesn’t make [himher] look any more comfortable doing it. [HeShe] probably just needs practice. Lots of practice.", parse);
+	Text.NL();
+	Text.Add("You tell [himher] that [heshe] is such a good cocksucker that [heshe] ought to do this more. One should always make sure to harness their talents, after all. ", parse);
+	if(player.SubDom() > 30)
+		Text.Add("Going on to tell [himher] that [heshe] ought to be the slut of the plains, you keep degrading [himher] playfully, driving your words home with your [cockDesc]. By now, you’re holding [possessive] head with both hands, making sure that [heshe] can’t get away from your incessant rutting.", parse);
+	else if(player.SubDom() < -30)
+		Text.Add("Caressing [hisher] hair gently, you urge [himher] on, letting [himher] become confident. You sigh euphorically as you feel furred paws grip your hips, holding you in place as [name] takes the lead, sucking your [cockDesc] like a champion.", parse);
+	else
+		Text.Add("Putting a bit more pressure on [name], you start rocking your hips a bit, keeping a light but firm hand on the back of [hisher] head. [HeShe] balks a little, but is somehow able to keep up.", parse);
+	Text.NL();
+	if(player.HasBalls()) {
+		Text.Add("Much to your surprise, one of [possessive] paws hesitantly reach up to cradle your [ballsDesc], feeling their weight. Chuckling, you promise [himher] that you’ll soon give the good little kitty [hisher] cream, just like [heshe] wants. All [heshe] has to do is continue to be a good kitty.", parse);
+		Text.NL();
+	}
+	Text.Add("You can feel that you aren’t going to last much longer, as [name] has gotten quite enthusiastic about [hisher] task. You briefly consider telling [himher], but figure it’ll be more fun if [heshe] discovered it on [hisher] own.", parse);
+	Text.NL();
+	Text.Add("Where do you want to spill your seed?", parse);
 	Text.Flush();
 	
-	Gui.NextPrompt();
+	var load = player.OrgasmCum();
+	var throat = false;
+	
+	
+	
+	
+	//[Face][Mouth][Throat]
+	var options = new Array();
+	options.push({ nameStr : "Face",
+		func : function() {
+			Text.Clear();
+			Text.Add("Just before you are about to blow, you roughly grab [name] by [hisher] hair, pulling [himher] off your [cockDesc]. For a brief moment, [heshe] looks confused, bereft of [hisher] new favorite toy, but your intentions quickly dawn on [himher] when [heshe] sees your throbbing [cockDesc] in its full glory.", parse);
+			Text.NL();
+			Text.Add("[Name] demurely closes [hisher] eyes, turns [hisher] face upward and waits for [hisher] shower. With the aid of your trusty [hand], you quickly comply, splattering your seed all over [hisher] visage.", parse);
+			Text.NL();
+			if(load > 6) {
+				Text.Add("The force of your first blast looks like it almost knocks [name] off [hisher] knees, but [heshe] champions it out, rocking unsteadily as each shot hits [himher] like a cannonball. When you are done, [possessive] entire front is thoroughly coated in your semen, so much so it’ll probably take at least a day to clean [hisher] fur after this.", parse);
+			}
+			else if(load > 3) {
+				Text.Add("[HeShe] looks surprised as you spill your larger than average load on [himher], glazing not only [hisher] hair and face, but also generously coating [hisher] chest and stomach area.", parse);
+			}
+			else {
+				Text.Add("When you are done, a generous amount of seed is coating [possessive] face and hair, dripping down on [hisher] chest.", parse);
+			}
+			Text.Add(" Almost absently, [name] licks [hisher] lips, tasting your sticky treat.", parse);
+			PrintDefaultOptions();
+		}, enabled : true,
+		tooltip : Text.Parse("Shoot your load all over [hisher] face.", parse)
+	});
+	options.push({ nameStr : "Mouth",
+		func : function() {
+			Text.Clear();
+			Text.Add("You pull out until only the [cockTip] of your [cockDesc] remains in [possessive] mouth, and then tell [himher] to start sucking. It quickly dawns on [himher] what your intention is, as you start to stroke your free length, but at this point, [name] seems to be resigned to [hisher] fate. If [heshe] is going to be a cocksucking slut from now on, [heshe] may as well try to enjoy it.", parse);
+			Text.NL();
+			if(load > 6) {
+				Text.Add("[Possessive] eyes jump open in surprise as the first jet of cum all but fills [hisher] mouth. By the second shot, [hisher] cheeks are bulging, and the feline is making strangled noises as your semen flows freely down [hisher] throat. After bravely swallowing two more loads, the poor kitty gasps for air, coughing as [heshe] forces [himher]self off your [cockDesc]. Several more shots hit the embarrassed cat right in the face, sticking to [hisher] fur in long strands. In a final urge to please you, [name] squares [hisher] shoulders and wraps [hisher] lips around your [cockTip] to take the final blast, lapping it up eagerly.", parse);
+			}
+			else if(load > 3) {
+				Text.Add("From [possessive] surprised expression, the sheer size of your load took [himher] unprepared. [HeShe] gags slightly as your semen slides its way down [hisher] throat, excess dripping freely from [hisher] lips.", parse);
+			}
+			else {
+				Text.Add("You grunt as you finally come, shooting your load into [possessive] gaping maw. [Heshe] lets the semen linger for a while, some of it spilling out past [hisher] lips.", parse);
+			}
+			Text.Add(" With a loud pop, you pull out, and [name] swallows any of your seed still in [hisher] mouth without having to be told to.", parse);
+			
+			PrintDefaultOptions();
+		}, enabled : true,
+		tooltip : Text.Parse("Pour it in [hisher] mouth and let [himher] taste it.", parse)
+	});
+	options.push({ nameStr : "Throat",
+		func : function() {
+			throat = true;
+			Text.Clear();
+			parse["deep"] = player.FirstCock().length.Get() > 30 ? Text.Parse("wrapping as much of your enormous shaft in the warm embrace of [possessive] straining mouth", parse) : Text.Parse("connecting [possessive] lips with your crotch", parse)
+			Text.Add("Showing little regard for the safety of the poor kitty, you continue ramming your [cockDesc] down [hisher] throat, ignoring [hisher] panicked pleas. So close… so close… with a final thrust, [deep], you reach your climax, your seed jetting down the feline’s waiting maw.", parse);
+			Text.NL();
+			if(load > 6) {
+				Text.Add("If not for the fact that you are already jammed halfway down [hisher] throat, [name] would never have been able to swallow your massive load. [Possessive] eyes widen in panic as you keep pouring wad after thick wad of your seed directly into [hisher] stomach, which is beginning to swell dangerously. By the time you feel the torrent of semen abating, [possessive] tummy is swollen like as if [heshe] was pregnant. On your way out, you deposit one last glob of spunk right on [hisher] tongue, granting [himher] the privilege of your taste. [Name] looks down at [hisher] stomach in wonder, rubbing it tenderly and", parse);
+			}
+			else if(load > 3) {
+				Text.Add("It’s impossible for [name] to miss what is happening, as you unload wad after thick wad of your cream down [hisher] accommodating throat. You see [hisher] eyes widen slightly as you just keep coming and coming, perhaps worrying if [heshe] will be able to take it all. When you are done, you rub the [cockTip] of your [cockDesc] on [possessive] tongue, making sure that [heshe] gets a taste of you. [HeShe] looks down at [hisher] stomach apprehensively, rubbing it tenderly and", parse);
+			}
+			else {
+				Text.Add("From your sudden twitching motions and the thick cream flowing down [hisher] throat, [name] understands what just happened. [HisHer] suspicions are confirmed when [heshe] tastes the salty tang of your sperm as you pull out, letting the [cockTip] of your [cockDesc] rest on [hisher] tongue for a moment. [Name] looks more humiliated than discomforted,", parse);
+			}
+			Text.Add(" gulping as [heshe] awaits what you have in store for [himher] next.", parse);
+			
+			player.subDom.IncreaseStat(70, 1);
+			
+			PrintDefaultOptions();
+		}, enabled : player.FirstCock().length.Get() > 20,
+		tooltip : Text.Parse("Ram your [cockDesc] as far down [hisher] throat as it will go.", parse)
+	});
+	Gui.SetButtonsFromList(options);
+	
+	
+	Gui.Callstack.push(function() {
+		Text.NL();
+		if(cat.FirstCock())
+			Text.Add("From the mess on the ground, you can tell that sometime during the process, [name] shot his own load, as evident by the sticky strands dripping from [hisher] softening barbed cock.", parse);
+		Text.NL();
+		Text.Add("You ask [himher] if [heshe] enjoyed [hisher] cream, not really expecting an answer.", parse);
+		Text.NL();
+		
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			Text.Add("<i>”I-it wasn’t that bad,”</i> [heshe] mutters, blushing. [Name] refuses to meet your eye.", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>”Cleaning this up will take me all day,”</i> [name] grumbles sullenly. Apparently, [heshe] wants to get started at it right away, as [heshe] starts licking your semen from [hisher] fur with [hisher] rough tongue.", parse);
+		}, 1.0, function() { return !throat; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>”Your cream is very… thick,”</i> [name] mutters. That almost sounded like a compliment.", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>”So full...”</i> [heshe] moans joyfully, caressing [hisher] distended stomach.", parse);
+		}, 1.0, function() { return throat && load > 3; });
+		
+		scenes.Get();
+		
+		Text.NL();
+		Text.Add("Gathering up your things, you leave the satisfied feline and continue your adventures.", parse);
+		Text.Flush();
+		
+		player.subDom(40, 1);
+		world.TimeStep({minute: 45});
+		
+		Gui.NextPrompt(enc.finalize);
+	});
 }
 
 /*

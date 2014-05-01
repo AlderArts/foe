@@ -298,6 +298,7 @@ Scenes.Equine.FuckFemale = function(enc) {
 	Text.AddOutput("With nothing else standing in your way, you put both of your palms in between her head and the cool ground. She squirms below you, her lower lips squishing against the tip. You ease inside of her hole as she releases a pent up breath. As you hilt yourself inside of her [mobVagDesc], she moans quietly, her eyes trained on yours. The base of your [cockDesc] is tickled by her labia, her pubic mound getting mixed up against yours.", parse);
 	Text.Newline();
 	
+	Sex.Vaginal(player, enc.mare);
 	player.Fuck(player.FirstCock(), 3);
 	
 	Text.AddOutput("You savor the moment, but not for long. You withdraw from her hot, tight cavern, every inch feeling her every rip. The sweet, indescribable feeling of her wet flesh squeezing against yours is something simply to be experienced. Once you feel the cool air brush against the last, soaked inch of your [cockDesc], you thrust back inside of her [mobVagDesc]. She rocks forward, moans a little louder, and you soak up every detail of her expression. As your hips drive in and out of her, your eyes drink in every detail of her ecstatic eyes.", parse);
@@ -403,6 +404,7 @@ Scenes.Equine.GetFucked = function(enc) {
 	Text.AddOutput("With not a moment to spare, you give him an invitation inside, and his base RSVP's to the party in your [vagDesc]. An ecstasy filled moment later, your womb thanks the tip for arriving. His thickness fills you to the brim, no questions asked. Your hospitality is appreciated, and he shows that appreciation by rubbing and tweaking your tits. Neither of you move as your hands press into his lower torso, savoring the moment. Your breaths become heavy and labored.", parse);
 	Text.Newline();
 	
+	Sex.Vaginal(enc.stallion, player);
 	player.FuckVag(player.FirstVag(), enc.stallion.FirstCock(), 3);
 	
 	Text.AddOutput("The experience becomes amplified as your hips begin sliding up, riding the stallion for everything he's worth. He grunts every time you squeeze your insides around him, and you could probably make him cry out with just the manipulation of your hips if you weren't so distracted by your own pleasure. You continue to slide just a few inches off, then wetly slam back down to his balls.", parse);
@@ -472,11 +474,13 @@ Scenes.Equine.Threesome1 = function(enc) {
 	Text.AddOutput("Face to face with the mare you stare into her eyes for a moment, before she places her hands on the ground under your arms, and gives you a suggestive pose. Your hand reaches down to your [cockDesc], and you guide yourself to her buried treasure, feeling her sloppy hole welcome you with the red carpet. She rolls her full hips into you, swallowing your [cockDesc] inside of her tight holding cell.", parse);
 	Text.Newline();
 	
+	Sex.Vaginal(player, enc.mare);
 	player.Fuck(player.FirstCock(), 3);
 	
 	Text.AddOutput("With her body bent over yours, you notice the stallion behind her, unsure of where to insert himself. You think it best to suggest one to him.", parse);
 	Text.Newline();
 	
+	//TODO variations
 	// BREAK POINT
 	
 	Gui.NextPrompt(function() {
@@ -527,6 +531,7 @@ Scenes.Equine.Threesome2 = function(enc) {
 	Text.AddOutput("Distracted by the tits in your hands, you almost forget about the stallion, until you feel that flat tip press up against your [vagDesc]. You giddily continue rubbing the mare's chest, moaning into her tongue as he presses several inches inside of you.", parse);
 	Text.Newline();
 	
+	Sex.Vaginal(enc.stallion, player);
 	player.FuckVag(player.FirstVag(), enc.stallion.FirstCock());
 	
 	Text.AddOutput("The mare greedily presses her slit against his cock, rubbing her wet lips into his shaft. He presses his hands on your hips, latching onto them. The horse hilts himself inside of your [vagDesc], your lips breaking contact with the mare as you moan into her face.", parse);
