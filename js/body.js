@@ -3,7 +3,8 @@ Gender = {
 	male   : 0,
 	female : 1,
 	herm   : 2,
-	none   : 3
+	none   : 3,
+	LAST   : 4
 }
 Gender.Desc = function(gender) {
 	var r;
@@ -24,6 +25,23 @@ Gender.Short = function(gender) {
 	case Gender.herm: return "H";
 	default: return "-";
 	}
+}
+Gender.Rand = function(odds) {
+	odds = odds || [1, 1, 1];
+	var sum = 0;
+	for(var i = 0; i < Gender.LAST; i++) {
+		if(odds[i]) sum += odds[i];
+	}
+	
+	var step = Math.random() * sum;
+	
+	for(var i = 0; i < Gender.LAST; i++) {
+		if(odds[i])
+			step -= odds[i];
+		if(step <= 0.0)
+			return i;
+	}
+	return Gender.none;
 }
 
 // TODO: Palette instead?

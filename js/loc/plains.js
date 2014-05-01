@@ -165,9 +165,25 @@ world.loc.Plains.Crossroads.enc = new EncounterTable();
 
 world.loc.Plains.Crossroads.enc.AddEnc(function() {
  	var enemy = new Party();
-	enemy.AddMember(new Wildcat(Gender.female));
-	enemy.AddMember(new Wildcat(Gender.male));
-	enemy.AddMember(new Wildcat(Gender.herm));
+ 	var r = Math.random();
+ 	if(r < 0.2) {
+		enemy.AddMember(new Wildcat(Gender.herm));
+		enemy.AddMember(new Wildcat(Gender.male));
+		enemy.AddMember(new Wildcat(Gender.female));
+	}
+	else if(r < 0.4) {
+		enemy.AddMember(new Wildcat(Gender.male));
+		enemy.AddMember(new Wildcat(Gender.female));
+		enemy.AddMember(new Wildcat(Gender.female));
+		enemy.AddMember(new Wildcat(Gender.female));
+	}
+	else {
+		enemy.AddMember(new Wildcat(Gender.Rand([3,4,1])));
+		for(var i = 0; i < 3; i++) {
+			if(Math.random() < 0.2)
+				enemy.AddMember(new Wildcat(Gender.Rand([3,4,1])));
+		}
+	}
 	var enc = new Encounter(enemy);
 	
 	enc.onEncounter = Scenes.Felines.Intro;

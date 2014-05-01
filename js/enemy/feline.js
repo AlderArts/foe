@@ -308,8 +308,8 @@ Scenes.Felines.WinPrompt = function() {
 	
 	var options = new Array();
 	if(female) {
-		var cocksInVag = player.CocksThatFit(mainCat.FirstVag());
-		var cocksInAss = player.CocksThatFit(mainCat.Butt());
+		var cocksInVag = player.CocksThatFit(female.FirstVag());
+		var cocksInAss = player.CocksThatFit(female.Butt());
 		
 		if(cocksInVag.length > 0) {
 			options.push({ nameStr : "Fuck vag(F)",
@@ -337,7 +337,7 @@ Scenes.Felines.WinPrompt = function() {
 		}
 	}
 	if(male) {
-		var cocksInAss = player.CocksThatFit(mainCat.Butt());
+		var cocksInAss = player.CocksThatFit(male.Butt());
 		
 		if(cocksInAss.length > 0) {
 			options.push({ nameStr : "Fuck ass(M)",
@@ -357,8 +357,8 @@ Scenes.Felines.WinPrompt = function() {
 		}
 	}
 	if(herm) {
-		var cocksInVag = player.CocksThatFit(mainCat.FirstVag());
-		var cocksInAss = player.CocksThatFit(mainCat.Butt());
+		var cocksInVag = player.CocksThatFit(herm.FirstVag());
+		var cocksInAss = player.CocksThatFit(herm.Butt());
 		
 		if(cocksInVag.length > 0) {
 			options.push({ nameStr : "Fuck vag(H)",
