@@ -177,6 +177,7 @@ Scenes.Felines.IntroRegular = function() {
 		Text.Add("<i>”Stepping in on my turf, are you? Wrong move!”</i> With that, [m1heshe] roars and lunges toward you.", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
+		parse["youYourParty"] = party.Num() > 1 ? "your party" : "you";
 		Text.Add("<i>”Look what the cat dragged in, ladies,”</i> [m1name] purrs confidently, [m1hisher] harem’s eyes glinting hungrily as they study [youYourParty]. <i>”...Bring it to me!”</i>", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
@@ -396,7 +397,6 @@ Scenes.Felines.WinPrompt = function() {
 		func : function() {
 			Text.Clear();
 			Text.Add("You gather up your belongings and leave the defeated feline[s] behind you.", {s: group ? "s" : ""});
-			world.TimeStep({minute : 30});
 			Text.Flush();
 			
 			Gui.NextPrompt(enc.finalize);
@@ -1045,9 +1045,10 @@ Scenes.Felines.WinGetBlowjob = function(cat, group, enc) {
 	
 	Gui.Callstack.push(function() {
 		Text.NL();
-		if(cat.FirstCock())
+		if(cat.FirstCock()) {
 			Text.Add("From the mess on the ground, you can tell that sometime during the process, [name] shot his own load, as evident by the sticky strands dripping from [hisher] softening barbed cock.", parse);
-		Text.NL();
+			Text.NL();
+		}
 		Text.Add("You ask [himher] if [heshe] enjoyed [hisher] cream, not really expecting an answer.", parse);
 		Text.NL();
 		
@@ -1071,8 +1072,8 @@ Scenes.Felines.WinGetBlowjob = function(cat, group, enc) {
 		Text.Add("Gathering up your things, you leave the satisfied feline and continue your adventures.", parse);
 		Text.Flush();
 		
-		player.subDom(40, 1);
-		world.TimeStep({minute: 45});
+		player.subDom.IncreaseStat(40, 1);
+		world.TimeStep({minute: 30});
 		
 		Gui.NextPrompt(enc.finalize);
 	});
