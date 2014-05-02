@@ -1632,15 +1632,7 @@ world.loc.Rigard.Inn.room.SleepFunc = function() {
 	Gui.NextPrompt(function() {
 		Text.Clear();
 		
-		var ret = Scenes.Dreams.Entry();
-		if(ret) {
-			Text.Flush();
-			
-			Gui.NextPrompt(function() {
-				func(true);
-			});
-		}
-		else func();
+		Scenes.Dreams.Entry(func);
 	});
 }
 

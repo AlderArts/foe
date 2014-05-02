@@ -49,13 +49,7 @@ Event.prototype.SleepFunc = function() {
 			PrintDefaultOptions();
 		}
 		
-		var ret = Scenes.Dreams.Entry();
-		if(ret) {
-			Text.Flush();
-			
-			Gui.NextPrompt(func);
-		}
-		else func();
+		Scenes.Dreams.Entry(func);
 	});
 }
 
