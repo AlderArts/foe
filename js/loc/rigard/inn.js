@@ -1603,12 +1603,14 @@ world.loc.Rigard.Inn.room.SleepFunc = function() {
 		Text.Add("You clumsily strip off your clothes before collapsing onto the bed. Somehow, you manage to remember to down the glass of water on the nightstand before you pass out into a deep sleep, without even bothering to [light].", parse);
 	}
 	Text.Flush();
-	Gui.NextPrompt(function() {
+	
+	var func = function(dream) {
 		world.TimeStep({hour: 8});
 		party.Sleep();
 		
-		Text.Clear();
-		Text.Add("You wake up well rested and feeling completely refreshed. You’re are a bit reluctant to climb out of the bed, but you do so and get dressed, feeling energized, and knowing there is much you can still accomplish today.");
+		if(!dream) {
+			Text.Add("You wake up well rested and feeling completely refreshed. You’re are a bit reluctant to climb out of the bed, but you do so and get dressed, feeling energized, and knowing there is much you can still accomplish today.");
+		}
 		Text.NL();
 		
 		if(rigard.LBroomTimer.Expired()) {
@@ -1626,6 +1628,19 @@ world.loc.Rigard.Inn.room.SleepFunc = function() {
 		
 		Text.Flush();
 		PrintDefaultOptions(true);
+	}
+	Gui.NextPrompt(function() {
+		Text.Clear();
+		
+		var ret = Scenes.Dreams.Entry();
+		if(ret) {
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				func(true);
+			});
+		}
+		else func();
 	});
 }
 

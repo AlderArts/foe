@@ -71,6 +71,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/loc/desert.js \
 	js/loc/farm.js \
 	js/loc/burrows.js \
+	js/event/dreams.js \
 	js/event/fera.js \
 	js/event/miranda.js \
 	js/event/roa.js \

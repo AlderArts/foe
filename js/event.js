@@ -41,9 +41,21 @@ Event.prototype.SleepFunc = function() {
 	Text.Newline();
 	Text.AddOutput("You sleep for 8 hours.");
 	Gui.NextPrompt(function() {
-		world.TimeStep({hour: 8});
-		party.Sleep();
-		PrintDefaultOptions();
+		Text.Clear();
+		var func = function() {
+			world.TimeStep({hour: 8});
+			party.Sleep();
+			
+			PrintDefaultOptions();
+		}
+		
+		var ret = Scenes.Dreams.Entry();
+		if(ret) {
+			Text.Flush();
+			
+			Gui.NextPrompt(func);
+		}
+		else func();
 	});
 }
 

@@ -90,6 +90,8 @@ Party.prototype.GetRandom = function(includePlayer) {
 	}
 	var num = Math.random() * len;
 	num = Math.floor(num);
+	// Assume player is always first pos
+	if(!includePlayer) num++;
 	
 	return this.Get(num);
 }
@@ -221,8 +223,10 @@ Party.prototype.Sleep = function() {
 		this.reserve[i].Sleep();
 }
 
-Party.prototype.Interact = function() {
-	Text.Clear();
+Party.prototype.Interact = function(preventClear) {
+	if(!preventClear)
+		Text.Clear();
+	
 	Text.AddOutput("PlaceHolder: Party");
 	SetGameState(GameState.Game);
 	var list = new Array();

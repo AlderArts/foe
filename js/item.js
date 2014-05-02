@@ -193,10 +193,11 @@ Inventory.prototype.Print = function() {
 	}
 }
 
-Inventory.prototype.ShowInventory = function() {
+Inventory.prototype.ShowInventory = function(preventClear) {
 	var inv = this;
 	var backPrompt = function() { inv.ShowInventory(); }
-	Text.Clear();
+	if(!preventClear)
+		Text.Clear();
 	
 	var list = [];
 	for(var i = 0; i < this.items.length; i++) {

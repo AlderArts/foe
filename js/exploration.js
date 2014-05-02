@@ -31,7 +31,7 @@ PrintDefaultOptions = function(preventClear) {
 	SetGameState(GameState.Game);
 	
 	if(LastSubmenu)
-    	LastSubmenu.func();
+    	LastSubmenu.func(preventClear);
     else
     	Explore();
 }
@@ -237,13 +237,15 @@ DataPrompt = function() {
 //                                                   //
 //***************************************************//
 
-Explore = function() {
+Explore = function(preventClear) {
+	if(!preventClear)
+		Text.Clear();
+	
 	if(party.location == null) {
 		Text.AddOutput("ERROR, LOCATION IS NULL");
 		Text.Newline();
 		return;
 	}
-	Text.Clear();
 	
 	var arr = [];
 	for(var i = 0; i < party.location.links.length; i++) {
@@ -262,15 +264,16 @@ Explore = function() {
 	SetExploreButtons();
 }
 
-PartyInteraction = function() {
-	party.Interact();
+PartyInteraction = function(preventClear) {
+	party.Interact(preventClear);
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Party];
 	
 	SetExploreButtons();
 }
 
-Fight = function() {
-	Text.Clear();
+Fight = function(preventClear) {
+	if(!preventClear)
+		Text.Clear();
 	if(party.location == null) {
 		Text.AddOutput("ERROR, LOCATION IS NULL");
 		Text.Newline();
@@ -290,8 +293,9 @@ Fight = function() {
 	}
 }
 
-ShowInventory = function() {
-	Text.Clear();
+ShowInventory = function(preventClear) {
+	if(!preventClear)
+		Text.Clear();
 	if(party.inventory == null) {
 		Text.AddOutput("ERROR, INVENTORY IS NULL");
 		Text.Newline();
@@ -299,14 +303,15 @@ ShowInventory = function() {
 	}
 	Gui.ClearButtons();
 	
-	party.inventory.ShowInventory();
+	party.inventory.ShowInventory(preventClear);
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Items];
 	
 	SetExploreButtons();
 }
 
-ShowAbilities = function() {
-	Text.Clear();
+ShowAbilities = function(preventClear) {
+	if(!preventClear)
+		Text.Clear();
 	Gui.ClearButtons();
 	
 	party.ShowAbilities();
@@ -315,8 +320,9 @@ ShowAbilities = function() {
 	SetExploreButtons();
 }
 
-ShowAlchemy = function() {
-	Text.Clear();
+ShowAlchemy = function(preventClear) {
+	if(!preventClear)
+		Text.Clear();
 	Gui.ClearButtons();
 	
 	Alchemy.AlchemyPrompt(player, party.inventory);
