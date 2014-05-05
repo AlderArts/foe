@@ -770,7 +770,7 @@ Scenes.Room69.ApologizeTo69ForBreakingDoor = function() {
 				world.TimeStep({minute: 10});
 				PrintDefaultOptions();
 			}, enabled : true,
-			tooltip : "Fine, maybe you <b>will</b> go!"
+			tooltip : "Fine, maybe you <i>will</i> go!"
 		});
 		Gui.SetButtonsFromList(options);
 	}
@@ -881,7 +881,7 @@ Scenes.Room69.ApologizeTo69ForBeingMean = function() {
 				Text.NL();
 				Text.Add("<i>\"Ha... that was good,\"</i> Sixtynine finally says, between hiccups of amusement. <i>\"I didn’t think just letting loose with you would be so much fun. Alright, I forgive you, you can come by any time you want.\"</i>", parse);
 				Text.NL();
-				Text.Add("You agree, smiling grudgingly. That <b>was</b> fun. Still, you should probably get going - you can come back to visit the room later if you want, but for now it’s time to get back to your adventures.", parse);
+				Text.Add("You agree, smiling grudgingly. That <i>was</i> fun. Still, you should probably get going - you can come back to visit the room later if you want, but for now it’s time to get back to your adventures.", parse);
 				Text.NL();
 				Text.Add("And how does a disembodied voice get hiccups, anyway?", parse);
 				
@@ -906,7 +906,7 @@ Scenes.Room69.ApologizeTo69ForBeingMean = function() {
 			world.TimeStep({minute: 30});
 			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : "You are <b>not</b> letting it get away with that. If it wants to fight, you’re sure your wits are up to the challenge!"
+		tooltip : "You are <i>not</i> letting it get away with that. If it wants to fight, you’re sure your wits are up to the challenge!"
 	});
 	options.push({ nameStr : "Leave",
 		func : function() {
