@@ -40,7 +40,7 @@ AttackPhysical.prototype.CastInternal = function(encounter, caster, target) {
 			var atkDmg     = atkMod * caster.PAttack();
 			var def = e.PDefense();
 			var hit = hitMod * caster.PHit();
-			var evade = target.PEvade();
+			var evade = e.PEvade();
 			var toHit = this.ToHit(hit, evade);
 			if(Math.random() < toHit) {
 				//var dmg = atkDmg - def;
@@ -117,7 +117,32 @@ Abilities.Physical.Bash.OnHit = function(encounter, caster, target, dmg) {
 	Text.Newline();
 }
 
-
+Abilities.Physical.GrandSlam = new AttackPhysical();
+Abilities.Physical.GrandSlam.name = "Grand Slam";
+Abilities.Physical.GrandSlam.Short = function() { return "Stun effect, low accuracy to multiple targets."; }
+Abilities.Physical.GrandSlam.cost = { hp: null, sp: 50, lp: null};
+Abilities.Physical.GrandSlam.atkMod = 1.1;
+Abilities.Physical.GrandSlam.hitMod = 0.9;
+Abilities.Physical.GrandSlam.damageType.pBlunt = 1;
+Abilities.Physical.GrandSlam.targetMode = TargetMode.Enemies;
+Abilities.Physical.GrandSlam.OnCast = function(encounter, caster, target) {
+	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), y : caster.plural() ? "y" : "ies", s : caster.plural() ? "" : "s" };
+	Text.AddOutput("[name] read[y] a powerful blow, aiming to stun any who stand in [hisher] way!", parse);
+	Text.Newline();
+}
+Abilities.Physical.GrandSlam.OnHit = function(encounter, caster, target, dmg) {
+	if(Math.random() < 0.5) {
+		for(var i = 0; i < encounter.combatOrder.length; i++) {
+			if(encounter.combatOrder[i].entity == target)
+				encounter.combatOrder[i].initiative -= 50;
+		}
+	}
+	
+	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : target.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
+	
+	Text.AddOutput("[name] slam[s] [tName] for " + Text.BoldColor(dmg, "#800000") + " damage, staggering [himher]!", parse);
+	Text.Newline();
+}
 
 Abilities.Physical.Pierce = new AttackPhysical();
 Abilities.Physical.Pierce.name = "Pierce";
