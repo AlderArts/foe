@@ -27,8 +27,8 @@ function IntroDemon() {
 	this.level             = 35;
 	this.sexlevel          = 25;
 	
-	this.combatExp         = 0;
-	this.coinDrop          = 0;
+	this.combatExp         = 6000 + this.level * 60;
+	this.coinDrop          = 4000 + this.level * 40;
 	
 	this.body              = new Body();
 	
@@ -51,6 +51,48 @@ IntroDemon.prototype.constructor = IntroDemon;
 
 IntroDemon.prototype.PoisonResist = function() {
 	return 0.8;
+}
+
+introdemon.prototype.DropTable = function() {
+	var drops = [];
+	if(Math.random() < 0.05) drops.push({ it: Items.Infernum });
+	if(Math.random() < 0.5)  drops.push({ it: Items.CorruptPlant });
+	if(Math.random() < 0.5)  drops.push({ it: Items.BlackGem });
+	if(Math.random() < 0.95)  drops.push({ it: Items.CorruptSeed });
+	return drops;
+}
+
+IntroDemon.prototype.Act = function(encounter, activeChar) {
+	// TODO: Very TEMP
+	Text.AddOutput(this.name + " acts! ROOOAR!");
+	Text.Newline();
+	
+	// Pick a random target
+	var t = this.GetSingleTarget(encounter, activeChar);
+
+	var parseVars = {
+		name   : this.name,
+		hisher : this.hisher(),
+		tName  : t.name
+	};
+
+	var choice = Math.random();
+	if(choice < 0.2)
+		Abilities.Attack.CastInternal(encounter, this, t);
+	else if(choice < 0.3 && Abilities.Black.ThunderStorm.enabledCondition(encounter, this))
+		Abilities.Black.ThunderStorm.CastInternal(encounter, this, party);
+	else if(choice < 0.4 && Abilities.Black.WindShear.enabledCondition(encounter, this))
+		Abilities.Black.WindShear.CastInternal(encounter, this, t);
+	else if(choice < 0.6 && Abilities.Physical.QAttack.enabledCondition(encounter, this))
+		Abilities.Physical.QAttack.CastInternal(encounter, this, t);
+	else if(choice < 0.7 && Abilities.Physical.Frenzy.enabledCondition(encounter, this))
+		Abilities.Physical.Frenzy.CastInternal(encounter, this, t);
+	else if(choice < 0.8 && Abilities.Black.Hellfire.enabledCondition(encounter, this))
+		Abilities.Black.Hellfire.CastInternal(encounter, this, party);
+	else if(choice < 0.9 && Abilities.Seduction.Rut.enabledCondition(encounter, this))
+		Abilities.Seduction.Rut.CastInternal(encounter, this, t);
+	else
+		Abilities.Attack.CastInternal(encounter, this, t);
 }
 
 IntroDemon.prototype.Act = function(encounter, activeChar) {

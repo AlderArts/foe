@@ -27,8 +27,8 @@ function Imp() {
 	this.level             = 1;
 	this.sexlevel          = 1;
 	
-	this.combatExp         = 1;
-	this.coinDrop          = 1;
+	this.combatExp          = 8 + this.level;
+	this.coinDrop           = 7 + this.level * 6;
 	
 	this.body.DefMale();
 	this.Butt().virgin = false;
@@ -54,6 +54,17 @@ function Imp() {
 }
 Imp.prototype = new Entity();
 Imp.prototype.constructor = Imp;
+
+
+Imp.prototype.DropTable = function() {
+	var drops = [];
+	if(Math.random() < 0.05) drops.push({ it: Items.Infernum });
+	if(Math.random() < 0.5)  drops.push({ it: Items.CorruptPlant });
+	if(Math.random() < 0.5)  drops.push({ it: Items.BlackGem });
+	if(Math.random() < 0.95)  drops.push({ it: Items.CorruptSeed });
+	return drops;
+}
+
 
 // Intro scenes
 
@@ -637,7 +648,7 @@ Intro.DemonGift = function() {
 		options.push({ nameStr : "Larger cock",
 			func : function() {
 				player.FirstCock().thickness.base++;
-				player.FirstCock().length.base += 5;
+				player.FirstCock().length.base += 35;
 				
 				Text.AddOutput("You have hardly uttered the words before you feel your cock swell, gaining a good number of centimeters. Even though you just got off, your new [cockLen] long cock is stiff and aches for release.", parse);
 				
@@ -652,7 +663,7 @@ Intro.DemonGift = function() {
 		func : function() {
 			Text.AddOutput("Groaning, you feel your insides shift around, allowing for larger things being to be put in you butt!");
 			
-			player.Butt().capacity.base += 15;
+			player.Butt().capacity.base += 35;
 			
 			Intro.timesTakenDemonGift++;
 			
@@ -664,9 +675,9 @@ Intro.DemonGift = function() {
 		func : function() {
 			Text.AddOutput("You moan as your chest fill out, gaining at least a few cup sizes. You carefully touch your stiff nipples, apparently they grew a bit too.");
 			
-			player.FirstBreastRow().size.base += 5;
-			player.FirstBreastRow().nippleLength.base += 0.5;
-			player.FirstBreastRow().nippleThickness.base += 0.5;
+			player.FirstBreastRow().size.base += 8;
+			player.FirstBreastRow().nippleLength.base += 1.5;
+			player.FirstBreastRow().nippleThickness.base += 2.5;
 			
 			Intro.timesTakenDemonGift++;
 			
