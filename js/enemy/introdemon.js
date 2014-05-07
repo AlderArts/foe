@@ -27,8 +27,8 @@ function IntroDemon() {
 	this.level             = 35;
 	this.sexlevel          = 25;
 	
-	this.combatExp         = 6000 + this.level * 60;
-	this.coinDrop          = 4000 + this.level * 40;
+	this.combatExp         = 600 + this.level * 30;
+	this.coinDrop          = 400 + this.level * 20;
 	
 	this.body              = new Body();
 	

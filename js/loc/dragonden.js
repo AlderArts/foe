@@ -31,3 +31,46 @@ world.loc.DragonDen.Entry.endDescription = function() {
 }
 
 world.loc.DragonDen.Entry.enc = new EncounterTable();
+
+// FUCK YOU ENCOUNTER
+world.loc.DragonDen.Entry.enc.AddEnc(function() {
+ 	var enemy    = new Party();
+	enemy.AddMember(new Drake());
+	var enc      = new Encounter(enemy);
+	
+	/*
+	enc.canRun = false;
+	enc.onEncounter = ...
+	enc.onLoss = ...
+	enc.onVictory = ...
+	enc.VictoryCondition = ...
+	*/
+	return enc;
+}, 1.0);
+
+
+
+world.loc.DragonDen.Entry.enc.AddEnc(function() {
+ 	var enemy = new Party();
+	enemy.AddMember(new IntroDemon());
+	enemy.AddMember(new Imp());
+	enemy.AddMember(new Imp());
+	enemy.AddMember(new Imp());
+	enemy.AddMember(new Imp());
+	enemy.AddMember(new Imp());
+	enemy.AddMember(new Imp());
+
+
+	var enc = new Encounter(enemy);
+	
+
+
+	/*
+	enc.canRun = false;
+	enc.onEncounter = ...
+	enc.onLoss = ...
+	enc.onVictory = ...
+	enc.VictoryCondition = ...
+	*/
+	return enc;
+}, 1.0);
