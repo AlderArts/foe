@@ -52,8 +52,7 @@ world.loc.DragonDen.Entry.enc.AddEnc(function() {
 
 world.loc.DragonDen.Entry.enc.AddEnc(function() {
  	var enemy = new Party();
-	enemy.AddMember(new IntroDemon());
-	enemy.AddMember(new Imp());
+	enemy.AddMember(new AlphaDemon());
 	enemy.AddMember(new Imp());
 	enemy.AddMember(new Imp());
 	enemy.AddMember(new Imp());

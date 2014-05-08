@@ -117,9 +117,10 @@ Race = {
 	avian    : 16,
 	moth     : 17,
 	scorpion : 18,
+	serpent  : 19,
 	
 	// TODO: Keep updated!
-	numRaces : 18
+	numRaces : 19
 }
 Race.Desc = function(race) {
 	var r;
@@ -172,6 +173,10 @@ Race.Desc = function(race) {
 		if(r == 0) return "avian";
 		else       return "bird";
 	case Race.moth: return "moth";
+	
+		case Race.serpent: return "serpent";
+
+
 	case Race.scorpion: return "scorpion";
 	default: return "undefined";
 	}
@@ -227,7 +232,10 @@ Race.Quantifier = function(race) {
 	case Race.avian: r = Rand(2);
 		if(r == 0) return "an avian";
 		else       return "a bird";
-	case Race.moth: return "a moth";
+
+	case Race.serpent: return "a serpent";
+		
+		case Race.moth: return "a moth";
 	case Race.scorpion: return "a scorpion";
 	default: return "an undefined";
 	}
@@ -747,6 +755,8 @@ Appendage.prototype.Prehensile = function() {
 			case Race.lizard:
 			case Race.dragon:
 			case Race.demon:
+				case Race.serpent:
+			
 			return true;
 			
 			default: return false;
@@ -772,7 +782,8 @@ Race = {
 	goat   : 13,
 	cow    : 14,
 	wolf   : 15,
-	avian  : 16
+	avian  : 16,
+	serpent : 17
 }
  */
 Appendage.prototype.Long = function() {
@@ -806,6 +817,9 @@ Appendage.prototype.Long = function() {
 			case Race.lizard: return "long, scaled lizard-like tail";
 			case Race.demon:  return "long, thin demonic tail, with a spaded tip";
 			case Race.dragon: return "long, scaled draconic tail";
+			case Race.serpent:  return "long, scaley serpentine tail.";
+			
+			
 			
 			case Race.avian:  return "tail feathers";
 			
@@ -1215,6 +1229,7 @@ Cock.prototype.TipShort = function() {
 		case Race.cat: qualifier = "barbed "; break;
 		
 		case Race.demon:
+		case Race.serpent:
 		case Race.cow:
 		case Race.rabbit:
 		case Race.goat:
@@ -1624,13 +1639,15 @@ Race = {
 	goat   : 13,
 	cow    : 14,
 	wolf   : 15,
-	avian  : 16
+	avian  : 16,
+	serpent : 17
 }
 */
 Body.prototype.SkinDesc = function() {
 	var col = Color.Desc(this.torso.color);
 	switch(this.torso.race) {
 		case Race.lizard:
+		case Race.serpent:
 		case Race.dragon: return "a body covered with " + col + " scales";
 		
 		case Race.avian: return col + " feathers";
@@ -1671,6 +1688,7 @@ Body.prototype.HasFur = function() {
 Body.prototype.HasScales = function() {
 	switch(this.torso.race) {
 		case Race.lizard:
+		case Race.serpent:
 		case Race.dragon:
 			return true;
 		default:
@@ -1700,6 +1718,7 @@ Body.prototype.FaceDesc = function() {
 		case Race.wolf:
 		case Race.dog:    return "canid face";
 		case Race.lizard: return "lizard-like face";
+		case Race.serpent: return "serpent-like face";
 			
 		case Race.elf:    return "elven face";
 		default:          return "face";
@@ -1709,6 +1728,7 @@ Body.prototype.FaceDescLong = function() {
 	switch(this.head.race) {
 		case Race.human:  return "a human face with smooth skin";
 		case Race.horse:  return "a long, flat, horse-like face";
+case Race.serpent: return "a human face covered with scales in different places.";
 		case Race.cat:    return "a triangular face with feline properties";
 		case Race.rabbit: return "a narrow, rabbit-like face";
 		case Race.fox:
@@ -1723,7 +1743,9 @@ Body.prototype.EyeDesc = function() {
 	var eyes = this.head.eyes;
 	switch(eyes.race) {
 		case Race.lizard:
+		case Race.serpent:
 		case Race.dragon: return "reptilian eye";
+		
 		
 		case Race.demon: return "demonic eye";
 		
@@ -1745,6 +1767,7 @@ Body.prototype.EarDesc = function() {
 	var ears = this.head.ears;
 	switch(ears.race) {
 		case Race.lizard:
+		case Race.serpent:
 		case Race.dragon: return "pointed, scaled ears";
 		
 		case Race.elf:
@@ -1782,7 +1805,8 @@ Race = {
 	goat   : 13,
 	cow    : 14,
 	wolf   : 15,
-	avian  : 16
+	avian  : 16,
+	serpent : 17
 }
  */
 Body.prototype.HasLongSnout = function() {
@@ -1799,6 +1823,7 @@ Body.prototype.HasLongSnout = function() {
 		case Race.elf:
 		case Race.dryad:
 		case Race.demon:
+		case Race.serpent:
 		case Race.rabbit:
 		case Race.fox:
 		case Race.dog:
@@ -1828,6 +1853,8 @@ Body.prototype.FeetDesc = function() {
 		case Race.lizard:
 		case Race.demon: return "clawed feet";
 		
+		case Race.serpent: return "a serpent-like lower body.";
+		
 		case Race.rabbit:
 		case Race.fox:
 		case Race.wolf:
@@ -1846,7 +1873,9 @@ Body.prototype.LegDesc = function() {
 	if(!legs) return "body";
 	
 	switch(legs.race) {
-		case Race.cow:
+
+		case Race.serpent: return "a serpent-like lower body.";
+	case Race.cow:
 		case Race.goat:
 		case Race.sheep:
 		case Race.satyr:
@@ -1874,6 +1903,7 @@ Body.prototype.LegsDesc = function() {
 	if(!legs) return "body";
 	
 	switch(legs.race) {
+			case Race.serpent: return "a serpent-like lower body.";
 		case Race.cow:
 		case Race.goat:
 		case Race.sheep:
@@ -1911,6 +1941,7 @@ Body.prototype.ArmDesc = function() {
 		case Race.dryad:
 		case Race.horse:
 		
+		case Race.serpent:
 		case Race.dragon:
 		case Race.lizard:
 		case Race.demon:
@@ -1949,7 +1980,7 @@ Body.prototype.HandDesc = function() {
 		case Race.dragon:
 		case Race.lizard:
 		case Race.demon:
-		
+		case Race.serpent:
 		case Race.elf:
 		case Race.human:
 		default: return "hand";
@@ -1965,6 +1996,7 @@ Body.prototype.TongueDesc = function() {
 		
 		case Race.dragon:
 		case Race.lizard:
+		case Race.serpent:
 		case Race.demon: return "forked tongue";
 		
 		case Race.fox:

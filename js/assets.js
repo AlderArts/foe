@@ -16,6 +16,7 @@ Images.sylistraxia  = "data/sylistraxia_avatar.png";
 Images.lei          = "data/lei_avatar.png";
 
 Images.imp          = "data/imp.png";
+Images.alphademon   = "data/alphademon.png";
 Images.introdemon   = "data/introdemon.png";
 Images.stallion     = "data/stallion.png";
 Images.mare         = "data/mare.png";
@@ -28,6 +29,7 @@ Images.wildcat_fem  = "data/wildcat_fem.png";
 Images.lizard_male  = "data/lizard_male.png";
 Images.lizard_fem   = "data/lizard_fem.png";
 Images.mothgirl     = "data/moth.png";
+Images.nagagirl    =  "data/naga.png";
 Images.wolf         = "data/wolf.png";
 Images.scorp        = "data/scorp.png";
 Images.drake        = "data/drake.png";
