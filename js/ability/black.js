@@ -212,18 +212,6 @@ Abilities.Black.Glow.TargetEffect = function(encounter, caster, target) {
 	}
 }
 
-Abilities.Black.Brightlight = new AttackSpell();
-Abilities.Black.Brightlight.name = "Brightlight";
-Abilities.Black.Brightlight.Short = function() { return "Light magic, multiple targets."; }
-Abilities.Black.Brightlight.cost = { hp: null, sp: 40, lp: null};
-Abilities.Black.Brightlight.damageType.mLight = 1;
-Abilities.Black.Brightlight.atkMod = 0.90;
-Abilities.Black.Brightlight.OnCast = function(encounter, caster, target) {
-	var parse = { possessive : caster.possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("[name] slam your [hand]s on the ground causing a bright light to appear, blinding the opposing side, while your enemies are blinded, you start chanting and making hand gestures,light start gathering above the opposing side until it forms different shapes of swords, with a flick of your hand, the swords pierces the opposing side!", parse);
-}
-
-
 
 
 Abilities.Black.Shade = new AttackSpell();
@@ -248,16 +236,6 @@ Abilities.Black.Engulf.OnCast = function(encounter, caster, target) {
 	Text.AddOutput("[name] starts performing large body movements and then kneels to the ground, in an instant, the entire area is shrouded with darkness, a tall body hovers close to [tName] and stabs [himher] in the back! ", parse);
 }
 
-Abilities.Black.Nightmare = new AttackSpell();
-Abilities.Black.Nightmare.name = "Nightmare";
-Abilities.Black.Nightmare.Short = function() { return "A tier of dark magic that resembles to demon magic, single target."; }
-Abilities.Black.Nightmare.cost = { hp: null, sp: 50, lp: null};
-Abilities.Black.Nightmare.damageType.mDark = 1;
-Abilities.Black.Nightmare.atkMod = 1.7;
-Abilities.Black.Nightmare.OnCast = function(encounter, caster, target) {
-	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("You start glaring [tName] intensely, you then left your [hand] towards [tName], [tName] starts losing their sight until [tName] is completely blind, [tName]'s eyes is now covered with dark matter, the dark matter slowly burrows into [tName]'s skull and dissolves [tName]'s brain. ", parse);
-}
 
 
 Abilities.Black.Thorn = new AttackSpell();
@@ -342,19 +320,6 @@ Abilities.Black.Spread.OnCast = function(encounter, caster, target) {
 	Text.AddOutput("[name] summon[s] a wave of rushing water, sprouting forth from the ground. The great torrent sweeps over the opposing party! ", parse);
 }
 
-Abilities.Black.Tsunami = new AttackSpell();
-Abilities.Black.Tsunami.name = "Tsunami";
-Abilities.Black.Tsunami.Short = function() { return "Greatest water magic, targets all enemies."; }
-Abilities.Black.Tsunami.cost = { hp: null, sp: 100, lp: null};
-Abilities.Black.Tsunami.targetMode = TargetMode.Enemies;
-Abilities.Black.Tsunami.damageType.mWater = 1.9;
-Abilities.Black.Tsunami.OnCast = function(encounter, caster, target) {
-	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s" };
-	Text.AddOutput("[name] lefts [hisher] [hand]s in the are and starts performing a circling motion, from afar, you hear the sound of the rampaging tidal wave heading towards the opposing party, the tidal wave crashes into the opposing party with great force!", parse);
-}
-
-
-
 Abilities.Black.Shock = new AttackSpell();
 Abilities.Black.Shock.name = "Shock";
 Abilities.Black.Shock.Short = function() { return "Thunder magic, single target. Moderate chance of stunning the enemy."; }
@@ -413,6 +378,7 @@ Abilities.Black.Venom = new AttackSpell();
 Abilities.Black.Venom.name = "Venom";
 Abilities.Black.Venom.Short = function() { return "Poisons single target."; }
 Abilities.Black.Venom.cost = { hp: null, sp: 15, lp: null};
+
 Abilities.Black.Venom.OnHit = null;
 Abilities.Black.Venom.OnAbsorb = null;
 Abilities.Black.Venom.OnCast = function(encounter, caster, target) {
@@ -428,10 +394,6 @@ Abilities.Black.Venom.TargetEffect = function(encounter, caster, target) {
 		Text.AddOutput("[target] resist[s] the attack! ", parse);
 	}
 }
-
-
-
-
 
 
 Abilities.Black.Acidrain = new AttackSpell();
@@ -504,5 +466,4 @@ Abilities.Black.Amaterasu.OnCast = function(encounter, caster, target) {
 	var parse = { possessive : caster.possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s"};
 	Text.AddOutput("[name] summons a small orb of light, the orb floats and digs into the ground, [name] performs a ritualistic dance and chants as the orb burrows into the ground, within a few moment, the ground trembles as beams of light start piercing it until a wall of light surrounds [name]'s enemies. In a blink of an eye, the wall forms into a giant sphere and collapse onto [name]'s enemies ! ", parse);
 }
-
 

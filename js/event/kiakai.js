@@ -14,16 +14,6 @@ function Kiakai(storage) {
 	
 	this.currentJob = Jobs.Acolyte;
 	this.jobs["Acolyte"]   = new JobDesc(Jobs.Acolyte);
-		this.jobs["Mystic"]   = new JobDesc(Jobs.Mystic);
-					this.jobs["Corrupter"]   = new JobDesc(Jobs.Corrupter);
-					this.jobs["Defiler"]   = new JobDesc(Jobs.Defiler);
-					
-										this.jobs["Harlot"]   = new JobDesc(Jobs.Harlot);
-						this.jobs["Whore"]   = new JobDesc(Jobs.Whore);
-	this.jobs["Apostle"]   = new JobDesc(Jobs.Apostle);
-		this.jobs["Saint"]   = new JobDesc(Jobs.Saint);
-				this.jobs["Sacredkin"]   = new JobDesc(Jobs.Sacredkin);
-					this.jobs["Angel"]   = new JobDesc(Jobs.Angel);
 	
 	this.jobs["Fighter"]   = new JobDesc(Jobs.Fighter);   this.jobs["Fighter"].mult = 5;
 	this.jobs["Scholar"]   = new JobDesc(Jobs.Scholar);   this.jobs["Scholar"].mult = 3;
@@ -143,10 +133,10 @@ Kiakai.prototype.InitCharacter = function(gender) {
 		this.body.breasts[0].size.base = 4;
 		
 		this.name = "Kia";
-		this.body.femininity.base = 0.8;
-		this.Butt().buttSize.base = 6;
+		this.body.femininity.base = 0.2;
+		this.Butt().buttSize.base = 3;
 	}
-	this.body.torso.hipSize.base    = 6;
+	this.body.torso.hipSize.base    = 3;
 	this.body.height.base      = 165;
 	this.body.weigth.base      = 52;
 }

@@ -179,6 +179,9 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 				enemy.AddMember(new Wildcat(Gender.herm));
 		enemy.AddMember(new Wildcat(Gender.female));
 	}
+else if (r < 1) {
+		enemy.AddMember(new Imp());
+}
 	else {
 		enemy.AddMember(new Wildcat(Gender.Rand([3,4,1])));
 		for(var i = 0; i < 3; i++) {
