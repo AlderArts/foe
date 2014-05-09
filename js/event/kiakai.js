@@ -3,6 +3,7 @@
  * Define Kia/Kai
  * 
  */
+ 
 function Kiakai(storage) {
 	Entity.call(this);
 	// Character stats
@@ -14,9 +15,36 @@ function Kiakai(storage) {
 	
 	this.currentJob = Jobs.Acolyte;
 	this.jobs["Acolyte"]   = new JobDesc(Jobs.Acolyte);
-	
+		this.jobs["Mystic"]   = new JobDesc(Jobs.Mystic);
+					this.jobs["Corrupter"]   = new JobDesc(Jobs.Corrupter);
+					this.jobs["Defiler"]   = new JobDesc(Jobs.Defiler);
+					this.jobs["Violator"]   = new JobDesc(Jobs.Violator);
+										this.jobs["Sinner"]   = new JobDesc(Jobs.Sinner);
+					this.jobs["Hellspawn"]   = new JobDesc(Jobs.Hellspawn);
+
+
+					this.jobs["Harlot"]   = new JobDesc(Jobs.Harlot);
+				this.jobs["Whore"]   = new JobDesc(Jobs.Whore);
+									this.jobs["Fellatrix"]   = new JobDesc(Jobs.Fellatrix);
+					this.jobs["Breeder"]   = new JobDesc(Jobs.Breeder);
+					this.jobs["Broodmother"]   = new JobDesc(Jobs.Broodmother);
+
+					
+					
+	this.jobs["Apostle"]   = new JobDesc(Jobs.Apostle);
+		this.jobs["Saint"]   = new JobDesc(Jobs.Saint);
+				this.jobs["Sacredkin"]   = new JobDesc(Jobs.Sacredkin);
+					this.jobs["Angel"]   = new JobDesc(Jobs.Angel);
 	this.jobs["Fighter"]   = new JobDesc(Jobs.Fighter);   this.jobs["Fighter"].mult = 5;
 	this.jobs["Scholar"]   = new JobDesc(Jobs.Scholar);   this.jobs["Scholar"].mult = 3;
+					this.jobs["Mage"]   = new JobDesc(Jobs.Mage);
+						this.jobs["Sage"]   = new JobDesc(Jobs.Sage);
+					this.jobs["Hermit"]   = new JobDesc(Jobs.Hermit);
+					this.jobs["Merlin"]   = new JobDesc(Jobs.Merlin);
+					this.jobs["Sorcerer"]   = new JobDesc(Jobs.Sorcerer);
+
+	
+	
 	this.jobs["Courtesan"] = new JobDesc(Jobs.Courtesan); this.jobs["Courtesan"].mult = 4;
 	
 	this.weaponSlot   = Items.Weapons.WoodenStaff;
@@ -40,7 +68,7 @@ function Kiakai(storage) {
 	// Note, since kia has no fixed gender, create body later
 	this.body                  = new Body();
 	this.body.head.hair.color  = Color.silver;
-	this.body.head.hair.length.base = 15;
+	this.body.head.hair.length.base = 25;
 	this.body.head.eyes.color  = Color.purple;
 	this.body.SetRace(Race.elf);
 	
@@ -6172,4 +6200,5 @@ Scenes.Kiakai.AnalCatchFinish = function() {
 	
 	Gui.NextPrompt();
 }
+
 

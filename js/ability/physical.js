@@ -170,6 +170,21 @@ Abilities.Physical.FocusStrike.OnCast = function(encounter, caster, target) {
 }
 
 
+Abilities.Physical.Foblivion = new AttackPhysical();
+Abilities.Physical.Foblivion.name = "Foblivion";
+Abilities.Physical.Foblivion.Short = function() { return "Fury of the oblivion."; }
+Abilities.Physical.Foblivion.cost = { hp: null, sp: 450, lp: null};
+Abilities.Physical.Foblivion.damageType = null;
+Abilities.Physical.Foblivion.atkMod = 0.150;
+Abilities.Physical.Foblivion.nrAttacks = 75;
+Abilities.Physical.Foblivion.OnCast = function(encounter, caster, target) {
+	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
+	Text.AddOutput("[name] utter a load battle cry that can be heard even in the mountains, [name] charge towards [tName], [name] jump into the air and focus all of your teachings, memories, pains and happiness into yourself, as [name] closely approach [tName], [name] release all that focus onto [tName]!", parse);
+	Text.Newline();
+}
+
+
+
 Abilities.Physical.DAttack = new AttackPhysical();
 Abilities.Physical.DAttack.name = "D.Attack";
 Abilities.Physical.DAttack.Short = function() { return "Perform two low accuracy hits."; }
