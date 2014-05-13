@@ -69,12 +69,9 @@ AttackSpell.prototype.OnAbsorb = function(encounter, caster, target, dmg) {
 	Text.Newline();
 }
 
-//I added Text.Newline() to all of the skills after text.addoutput to separate it from the onhit messages and to make reading the  
-//text.addoutput easier to read 
 
 
 
-// added Text.Newline()
 Abilities.Black = {};
 Abilities.Black.Surge = new AttackSpell();
 Abilities.Black.Surge.name = "Surge";
@@ -89,7 +86,6 @@ Abilities.Black.Surge.OnCast = function(encounter, caster, target) {
 
 	}
 	
-//added force, a higher tier of non-element magic, also added Text.Newline()
 Abilities.Black.Force = new AttackSpell();
 Abilities.Black.Force.name = "Force";
 Abilities.Black.Force.Short = function() { return "may the force be with you, single target."; }
@@ -102,7 +98,6 @@ Abilities.Black.Force.OnCast = function(encounter, caster, target) {
     Text.Newline();
 	}
 	
-//added negative space, a powerful void type magic, added next.newline()
 Abilities.Black.NSpace = new AttackSpell();
 Abilities.Black.NSpace.name = "Negative space";
 Abilities.Black.NSpace.Short = function() { return "stop being so pessimistic, single target."; }
@@ -117,7 +112,6 @@ Abilities.Black.NSpace.OnCast = function(encounter, caster, target) {
 	
 
 
-	//added Text.Newline()
 Abilities.Black.Fireball = new AttackSpell();
 Abilities.Black.Fireball.name = "Fireball";
 Abilities.Black.Fireball.Short = function() { return "Fire magic, single target."; }
@@ -144,7 +138,6 @@ Text.Newline();
 }
 
 
-//added Text.Newline()
 Abilities.Black.Freeze = new AttackSpell();
 Abilities.Black.Freeze.name = "Freeze";
 Abilities.Black.Freeze.Short = function() { return "Ice magic, single target."; }
@@ -165,7 +158,6 @@ Text.Newline();
 		}
 }
 
-//added Text.Newline()
 Abilities.Black.Bolt = new AttackSpell();
 Abilities.Black.Bolt.name = "Bolt";
 Abilities.Black.Bolt.Short = function() { return "Thunder magic, single target."; }
@@ -191,7 +183,6 @@ Text.Newline();
 		}
 }
 
-//added Text.Newline()
 Abilities.Black.Gust = new AttackSpell();
 Abilities.Black.Gust.name = "Gust";
 Abilities.Black.Gust.Short = function() { return "Slashing wind magic, single target."; }
@@ -205,7 +196,6 @@ Text.Newline();
 
 	}
 
-//added Text.Newline()
 	Abilities.Black.Spire = new AttackSpell();
 Abilities.Black.Spire.name = "Spire";
 Abilities.Black.Spire.Short = function() { return "Bashing earth magic, single target."; }
@@ -219,7 +209,6 @@ Text.Newline();
 	}
 
 
-//added Text.Newline()	
 Abilities.Black.Spray = new AttackSpell();
 Abilities.Black.Spray.name = "Spray";
 Abilities.Black.Spray.Short = function() { return "Water magic, single target."; }
@@ -232,7 +221,6 @@ Text.Newline();
 
 	}
 
-//added Text.Newline()	
 Abilities.Black.Shimmer = new AttackSpell();
 Abilities.Black.Shimmer.name = "Shimmer";
 Abilities.Black.Shimmer.Short = function() { return "Light magic, single target."; }
@@ -246,7 +234,6 @@ Text.Newline();
 
 	}
 
-	//added Text.Newline()
 Abilities.Black.Glow = new AttackSpell();
 Abilities.Black.Glow.name = "Glow";
 Abilities.Black.Glow.Short = function() { return "A higher tier of light magic, single target."; }
@@ -267,7 +254,6 @@ Text.Newline();
 }
 
 
-//added Text.Newline()
 Abilities.Black.Brightlight = new AttackSpell();
 Abilities.Black.Brightlight.name = "Brightlight";
 Abilities.Black.Brightlight.Short = function() { return "set the brightness to 100%, hits multiple targets."; }
@@ -281,7 +267,6 @@ Text.Newline();
 	}
 
 
-	//added Text.Newline()
 Abilities.Black.Angelshand = new AttackSpell();
 Abilities.Black.Angelshand.name = "Angel's hand";
 Abilities.Black.Angelshand.Short = function() { return "An angel descends to aid you, single target."; }
@@ -303,7 +288,6 @@ Text.Newline();
 
 
 
-// added Text.Newline()
 Abilities.Black.Shade = new AttackSpell();
 Abilities.Black.Shade.name = "Shade";
 Abilities.Black.Shade.Short = function() { return "Dark magic, single target."; }
@@ -317,7 +301,6 @@ Text.Newline();
 	}
 
 
-	//added Text.Newline()
 Abilities.Black.Engulf = new AttackSpell();
 Abilities.Black.Engulf.name = "Engulf";
 Abilities.Black.Engulf.Short = function() { return "A higher tier of dark magic, single target."; }
@@ -330,7 +313,6 @@ Abilities.Black.Engulf.OnCast = function(encounter, caster, target) {
 Text.Newline();
 	}
 
-	//added Text.Newline()
 Abilities.Black.Nightmare = new AttackSpell();
 Abilities.Black.Nightmare.name = "Nightmare";
 Abilities.Black.Nightmare.Short = function() { return "A tier of dark magic that resembles to demon magic, single target."; }
@@ -343,7 +325,6 @@ Abilities.Black.Nightmare.OnCast = function(encounter, caster, target) {
 Text.Newline();
 	}
 
-//added Text.Newline()
 Abilities.Black.Thorn = new AttackSpell();
 Abilities.Black.Thorn.name = "Thorn";
 Abilities.Black.Thorn.Short = function() { return "Nature magic, single target."; }
@@ -355,7 +336,6 @@ Abilities.Black.Thorn.OnCast = function(encounter, caster, target) {
 Text.Newline();
 	}
 
-//added Text.Newline()
 Abilities.Black.WindShear = new AttackSpell();
 Abilities.Black.WindShear.name = "WindShear";
 Abilities.Black.WindShear.Short = function() { return "Wind magic, single target."; }
@@ -369,7 +349,6 @@ Abilities.Black.WindShear.OnCast = function(encounter, caster, target) {
 Text.Newline();
 	}
 
-//added Text.Newline()
 Abilities.Black.Tornado = new AttackSpell();
 Abilities.Black.Tornado.name = "Tornado";
 Abilities.Black.Tornado.Short = function() { return "no cowgirls were harmed during the tornado, single target."; }
@@ -383,7 +362,6 @@ Abilities.Black.Tornado.OnCast = function(encounter, caster, target) {
 Text.Newline();
 	}
 
-//added Text.Newline()
 Abilities.Black.Hurricane = new AttackSpell();
 Abilities.Black.Hurricane.name = "Hurricane";
 Abilities.Black.Hurricane.Short = function() { return "A wind magic that sweeps you off your feet, single target."; }
@@ -397,7 +375,6 @@ Abilities.Black.Hurricane.OnCast = function(encounter, caster, target) {
 Text.Newline();
 	}
 
-//added Text.Newline()
 Abilities.Black.Stalagmite = new AttackSpell();
 Abilities.Black.Stalagmite.name = "Stalagmite";
 Abilities.Black.Stalagmite.Short = function() { return "Earth magic, single target."; }
@@ -413,7 +390,6 @@ Text.Newline();
 	}
 
 
-//added back-up, a strong earth type attack, added text.newline()
 Abilities.Black.Backup = new AttackSpell();
 Abilities.Black.Backup.name = "Backup";
 Abilities.Black.Backup.Short = function() { return "tag a random stone monster for assistance, single target."; }
@@ -429,13 +405,12 @@ Text.Newline();
 	
 	
 
-//added Text.Newline()
 Abilities.Black.CTitan = new AttackSpell();
 Abilities.Black.CTitan.name = "Call a Titan";
 Abilities.Black.CTitan.Short = function() { return "call a titan for assistance, no biggie, single target."; }
-Abilities.Black.CTitan.cost = { hp: null, sp: 70, lp: null};
+Abilities.Black.CTitan.cost = { hp: null, sp:190, lp: null};
 Abilities.Black.CTitan.damageType.mEarth = 1;
-Abilities.Black.CTitan.atkMod = 1.8;
+Abilities.Black.CTitan.atkMod = 1.9;
 Abilities.Black.CTitan.OnCast = function(encounter, caster, target) {
 	var parse = { possessive : caster.possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
 	Text.AddOutput("[possessive] grabs the soil beneath [himher], weaves ancient symbols to the soil then tosses it, the soil drifts with the passing winds and in the distance, an odd figure can be seen, as the mysterious figure approaches, each step causes an earth, it was a gigantic being wearing a skull mask, it approaches [tName] and lifts its enormous foot and stomps [tName], leaving a crater upon impact. ", parse);
@@ -443,7 +418,6 @@ Text.Newline();
 	}
 
 
-//added Text.Newline()
 Abilities.Black.Whirlwind = new AttackSpell();
 Abilities.Black.Whirlwind.name = "Whirlwind";
 Abilities.Black.Whirlwind.Short = function() { return "Wind magic, targets all enemies."; }
@@ -457,7 +431,6 @@ Abilities.Black.Whirlwind.OnCast = function(encounter, caster, target) {
 Text.Newline();
 	}
 
-//added Text.Newline()
 Abilities.Black.Eruption = new AttackSpell();
 Abilities.Black.Eruption.name = "Eruption";
 Abilities.Black.Eruption.Short = function() { return "Fire magic, targets all enemies."; }
@@ -470,7 +443,6 @@ Abilities.Black.Eruption.OnCast = function(encounter, caster, target) {
 Text.Newline();
 	}
 
-//added Text.Newline() 
 Abilities.Black.Spread = new AttackSpell();
 Abilities.Black.Spread.name = "Spread";
 Abilities.Black.Spread.Short = function() { return "Water magic, targets all enemies."; }
@@ -485,7 +457,6 @@ Text.Newline();
 	}
 
 
-//added tsunami, a stronger water type magic, also added Text.Newline()
 Abilities.Black.Tsunami = new AttackSpell();
 Abilities.Black.Tsunami.name = "Tsunami";
 Abilities.Black.Tsunami.Short = function() { return "hope you got your swimming shorts, targets all enemies."; }
@@ -499,7 +470,6 @@ Text.Newline();
 	}
 
 
-//added Text.Newline() 
 Abilities.Black.Shock = new AttackSpell();
 Abilities.Black.Shock.name = "Shock";
 Abilities.Black.Shock.Short = function() { return "Thunder magic, single target. Moderate chance of stunning the enemy."; }
@@ -527,7 +497,6 @@ Abilities.Black.Shock.TargetEffect = function(encounter, caster, target) {
 	}
 }
 
-//added Text.Newline()
 Abilities.Black.ThunderStorm = new AttackSpell();
 Abilities.Black.ThunderStorm.name = "T.Storm";
 Abilities.Black.ThunderStorm.Short = function() { return "Thunder magic, targets all enemies. Moderate chance of stunning the enemy."; }
@@ -556,7 +525,6 @@ Abilities.Black.ThunderStorm.TargetEffect = function(encounter, caster, target) 
 	}
 }
 
-//added text.newline()
 Abilities.Black.Venom = new AttackSpell();
 Abilities.Black.Venom.name = "Venom";
 Abilities.Black.Venom.Short = function() { return "Poisons single target."; }
@@ -609,7 +577,6 @@ Abilities.Black.Acidrain.TargetEffect = function(encounter, caster) {
 }
 */
 
-// added text.newline()
 Abilities.Black.Ivy = new AttackSpell();
 Abilities.Black.Ivy.name = "Ivy";
 Abilities.Black.Ivy.Short = function() { return "Nature magic, targets all enemies."; }
@@ -624,7 +591,6 @@ Abilities.Black.Ivy.OnCast = function(encounter, caster, target) {
 	}
 
 
-//added fallingmoon, a powerful dark magic, also added text.newline() 
 Abilities.Black.Fallingmoon = new AttackSpell();
 Abilities.Black.Fallingmoon.name = "Falling moon";
 Abilities.Black.Fallingmoon.Short = function() { return "Its the end of the world as we know it, targets all enemies."; }
@@ -639,7 +605,6 @@ Abilities.Black.Fallingmoon.OnCast = function(encounter, caster, target) {
 	}
 
 
-//added text.newline()
 Abilities.Black.Hellfire = new AttackSpell();
 Abilities.Black.Hellfire.name = "Hellfire";
 Abilities.Black.Hellfire.Short = function() { return "Demon magic, targets all enemies."; }
@@ -660,7 +625,6 @@ Abilities.Black.Hellfire.OnCast = function(encounter, caster, target) {
 
 	}
 
-//added amaterasu, the strongest light magic in the game, also added text.newline() 
 Abilities.Black.Amaterasu = new AttackSpell();
 Abilities.Black.Amaterasu.name = "Amaterasu";
 Abilities.Black.Amaterasu.Short = function() { return "The strongest light magic of all, targets all enemies."; }
@@ -682,7 +646,6 @@ Abilities.Black.Amaterasu.OnCast = function(encounter, caster, target) {
 	
 	}
 
-// added tsukuyomi, the strongest dark type magic, also added text.newline()
 Abilities.Black.Tsukuyomi = new AttackSpell();
 Abilities.Black.Tsukuyomi.name = "Tsukuyomi";
 Abilities.Black.Tsukuyomi.Short = function() { return "The strongest dark magic of all, targets all enemies."; }
