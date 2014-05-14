@@ -119,7 +119,7 @@ Race = {
 	scorpion : 18,
 	
 	// TODO: Keep updated!
-	numRaces : 18
+	numRaces : 19
 }
 Race.Desc = function(race) {
 	var r;
