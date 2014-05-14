@@ -51,15 +51,20 @@ function RavenMother(storage) {
 RavenMother.prototype = new Entity();
 RavenMother.prototype.constructor = RavenMother;
 
+RavenMother.Stage = {
+	ravenstage2 : 8,
+	ravenstage3 : 12
+}
+
 RavenMother.prototype.Ravenness = function() {
-	return this.flags["Stage"] / 100;
+	return Math.floor(this.flags["Stage"] / 100);
 }
 
 // Increase ravenness and return trigger
 RavenMother.prototype.RavenTrigger = function() {
-	var oldVal = Math.floor(this.flags["Stage"] / 100);
+	var oldVal = this.Ravenness();
 	this.flags["Stage"] += Math.floor(10 + Math.random() * 70);
-	var newVal = Math.floor(this.flags["Stage"] / 100);
+	var newVal = this.Ravenness();
 	
 	return newVal > oldVal;
 }
