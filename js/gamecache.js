@@ -48,6 +48,8 @@ InitCache = function() {
 	jeanne  = new Jeanne(gameCache.jeanne);
 	golem   = new GolemBoss(gameCache.golem);
 	
+	ravenmother = new RavenMother(gameCache.raven);
+	
 	// Don't load for now
 	aria        = new Aria();
 	uru         = new Uru();
@@ -89,6 +91,11 @@ InitCache = function() {
 	world.EntityStorage.push(maria);
 	
 	world.EntityStorage.push(fera);
+	
+	world.EntityStorage.push(jeanne);
+	world.EntityStorage.push(golem);
+	
+	world.EntityStorage.push(ravenmother);
 	
 	// Stuff that also has update methods
 	world.EntityStorage.push(rigard);
@@ -318,6 +325,8 @@ GameToCache = function() {
 	
 	gameCache.jeanne  = jeanne.ToStorage();
 	gameCache.golem   = golem.ToStorage();
+	
+	gameCache.raven   = ravenmother.ToStorage();
 	
 	// Current party
 	gameCache.party   = party.ToStorage();

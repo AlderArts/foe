@@ -40,7 +40,6 @@ Scenes.Dreams.Entry = function(func) {
 
 
 
-
 // Dreams
 Scenes.Dreams.Ocean = function() {
 	var parse = {

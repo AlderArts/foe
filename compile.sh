@@ -95,6 +95,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/outlaws/maria.js \
 	js/event/jeanne.js \
 	js/event/golem.js \
+	js/event/raven.js \
 	js/enemy/bandit.js \
 	js/enemy/imp.js \
 	js/enemy/introdemon.js \
