@@ -28,6 +28,10 @@ Scenes.Dreams.Entry = function(func) {
 		scenes.AddEnc(Scenes.Dreams.GwendyBarn, 1.0, function() { return gwendy.flags["Met"] != 0; }, ravenTrigger);
 		scenes.AddEnc(Scenes.Dreams.FeraKittens, 1.0, function() { return fera.FirstVag().virgin == false; }, ravenTrigger);
 		scenes.AddEnc(Scenes.Dreams.MirandaJailed, 1.0, function() { return miranda.flags["Met"] != 0; }, ravenTrigger);
+		scenes.AddEnc(Scenes.Dreams.BlowjobGive, 2.0, function() { return player.sex.gBlow >= 25; }, ravenTrigger);
+		scenes.AddEnc(Scenes.Dreams.BlowjobRec, 2.0, function() { return player.sex.rBlow >= 25; }, ravenTrigger);
+		scenes.AddEnc(Scenes.Dreams.CunnilingusGive, 2.0, function() { return player.sex.gCunn >= 25; }, ravenTrigger);
+		scenes.AddEnc(Scenes.Dreams.CunnilingusRec, 2.0, function() { return player.sex.rCunn >= 25; }, ravenTrigger);
 		
 		var ret = scenes.Get();
 		
@@ -661,6 +665,146 @@ Scenes.Dreams.MirandaJailed = function(ravenTrigger) {
 	Text.Add("You wake up, still uncertain what your crime was.", parse);
 }
 
+Scenes.Dreams.BlowjobGive = function(ravenTrigger) {
+	var parse = {
+		raven : Scenes.Dreams.RavenText(ravenTrigger, " As you look up, the raven’s black eyes meet yours, nodding sagely as you dig in.", " You freeze slightly as you look up at the cock’s owner, a slight smirk on his beak. Well, lets see how the spy likes this.")
+	};
+	
+	Text.Add("You swallow greedily, euphoric as wad after wad of thick seed pours down your throat, joining the steadily growing pool inside your stomach. No sooner does the spent cock retreat from your thirsty lips, than it is replaced with another one. The throbbing shaft is huge, as long and as thick as your forearms.[raven]", parse);
+	Text.NL();
+	Text.Add("Another would have been easily overwhelmed to have the veiny monster shoved down their throats, but you are in bliss, sucking eagerly in anticipation of your sticky reward. You close your eyes as you feel it twitch in your mouth, almost cumming yourself as the first splatter of semen hits your tongue. This taste could sustain you forever.", parse);
+	Text.NL();
+	Text.Add("By the looks of the endless line of erect shafts stretching out in front of you, it will. When you awake, you still remember the feel of the salty cream sliding down your throat.", parse);
+	
+	player.AddLustFraction(0.5);
+}
+
+Scenes.Dreams.BlowjobRec = function(ravenTrigger) {
+	var parse = {
+		raven : Scenes.Dreams.RavenText(ravenTrigger, " On the back of the couch, four ravens sit, watching you with interest.", " You glance up, noting your feathered observers sitting on the edge of the couch. Naughty birds.")
+	};
+	
+	Text.Add("You are reclining on a couch among soft pillows, comfortable on your back. Between your legs, your lover’s lips are wrapped around your shaft, bobbing up and down. Sighing in pleasure, you lean back, enjoying their expert attentions.[raven]", parse);
+	Text.NL();
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		parse["HeShe"] = Math.random() > 0.8 ? "He" : "She";
+		Text.Add("[HeShe] is no one special, just another worshipper at the altar of your manhood. These days, you need a blowjob just to get going in the morning. Fortunately, there has been no end of prospective suitors to sate your desires. Even now, two others hover nearby, eyeing your lover jealously. Perhaps you will have to go a few more rounds today.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("Uru’s long flexible tongue wraps itself around your cock, a small smile playing on the demon’s full lips. The succubus is, as always, a master fellatrix, sucking your shaft greedily, trying to coax out your seed. Somewhere in the back of your head, a small voice is trying to scream something at you, but it feels so good… You shake away the uneasy feeling.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		var p1 = party.GetRandom();
+		parse["Name"]   = p1.name;
+		parse["HeShe"]  = p1.HeShe();
+		parse["heshe"]  = p1.heshe();
+		parse["hisher"] = p1.hisher();
+		parse["himher"] = p1.himher();
+		Text.Add("[Name] surfaces briefly for air, before redoubling [hisher] efforts, sucking greedily on your cock. [HeShe] has improved so much since you first asked [himher] to do this, by dedicated training or through sheer natural talent, you are unsure. Either way, [heshe] is right where [heshe] belongs.", parse);
+	}, 1.0, function() { return party.NumTotal() > 1; });
+	
+	scenes.Get();
+	
+	Text.NL();
+	Text.Add("You are just about to cum, so very close, your thick member buried deep inside your lover's throat, when…", parse);
+	Text.NL();
+	Text.Add("Blearily, you stir, back in reality again. ", parse);
+	if(player.FirstCock())
+		Text.Add("With the biggest morning wood ever, of course.", parse);
+	else
+		Text.Add("Wistfully, you recall the time you had a cock...", parse);
+	
+	player.AddLustFraction(0.5);
+}
+
+Scenes.Dreams.CunnilingusGive = function(ravenTrigger) {
+	var parse = {
+		raven : Scenes.Dreams.RavenText(ravenTrigger, " A raven peeks over her shoulder, peering at you curiously.", " Here too, the ravens are watching, peeking down at you over her shoulder. Why do they follow you?")
+	};
+	
+	Text.Add("The amazon queen is reclining on a grand dais, fanned by barely-clothed attendants. Her bronze skin shines with scented oils, perfectly accentuating her well-toned muscle and full breasts. The queen herself only wears jewelry, large bands of gold and iron, studded with pretty gemstones.[raven] From your kneeling position, you have an excellent view of her shaved crotch, which she flaunts casually, her legs spread as she looks down on you.", parse);
+	Text.NL();
+	Text.Add("She speaks a single word, pointing towards her pussy, a triumphant smile playing on her lips. The language isn’t one that you understand, but the meaning is clear - Lick. You need no further encouragement, eager to please your mistress - or was it captor? The details seem a bit fuzzy. Far more important is the taste of the amazon’s sweet nectar, which you lap up greedily. Your queen moans as you plunge your flexible tongue into her folds, using every technique within your considerable repertoire to please her.", parse);
+	Text.NL();
+	Text.Add("Her powerful legs wrap around your head, trapping you in an intimate embrace as she arches her back, shaking as she cries out. Clear nectar flows onto your tongue, a deliciously sweet ambrosia. You drink and drink from her ceaseless fountain, getting your fill and then some. Shakily, you raise your head, peering left and right at the queen’s guards. With the same triumphant smile, the amazon repeats her command, pointing to one of them.", parse);
+	Text.NL();
+	Text.Add("When you wake up, you are drooling slightly.", parse);
+	
+	player.AddLustFraction(0.5);
+}
+
+Scenes.Dreams.CunnilingusRec = function(ravenTrigger) {
+	var parse = {
+		raven : Scenes.Dreams.RavenText(ravenTrigger, " A raven settles down on your shoulders, ruffling its feathers uncertainly as it bobs up and down with your movements.", " A raven settles down a little way off, eyeing you warily. Perhaps it suspects that you are onto them."),
+		multiCockDesc : function() { return player.MultiCockDesc(); },
+		itThem : player.NumCocks() > 1 ? "them" : "it",
+		itThey : player.NumCocks() > 1 ? "they" : "it"
+	};
+	
+	var gender = Math.random() < 0.5 ? Gender.male : Gender.female;
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		parse["Name"] = "The wildcat";
+		parse["name"] = "the wildcat";
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		parse["Name"] = "The lagomorph";
+		parse["name"] = "the lagomorph";
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		parse["Name"] = "The equine";
+		parse["name"] = "the equine";
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		parse["Name"] = "The mothgirl";
+		parse["name"] = "the mothgirl";
+		gender = Gender.female;
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		parse["Name"] = "The bandit";
+		parse["name"] = "the bandit";
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		parse["Name"] = "Uru";
+		parse["name"] = "Uru";
+		gender = Gender.female;
+	}, 1.0, function() { return true; });
+	
+	scenes.Get();
+	
+	if(gender == Gender.male) {
+		parse["HeShe"]  = "He";
+		parse["heshe"]  = "he";
+		parse["HisHer"] = "His";
+		parse["hisher"] = "his";
+		parse["himher"] = "him";
+	}
+	else {
+		parse["HeShe"]  = "She";
+		parse["heshe"]  = "she";
+		parse["HisHer"] = "Her";
+		parse["hisher"] = "her";
+		parse["himher"] = "her";
+	}
+	
+	Text.Add("You smile down haughtily at your defeated opponent, huffing slightly while enjoying the elation of victory. [Name] lies on [hisher] back, no longer able to resist you. Time to put [himher] to work. Shedding your armor and undergarments, you squat down, giving [himher] a better look at you. ", parse);
+	if(player.FirstCock())
+		Text.Add("[Name] blanches at the sight of your [multiCockDesc], but [itThey] will be the least of [hisher] worries. You pull [itThem] aside to reveal your glistening pussy.", parse);
+	else
+		Text.Add("[Name] blushes, having your glistening pussy only inches from [hisher] face.", parse);
+	Text.Add(" Slowly, you lower yourself onto [himher], letting out a soft moan as you rub against [hisher] face.", parse);
+	Text.NL();
+	Text.Add("There is no need for you to give [himher] any orders, or exchange any words at all. [Name] digs in, trying to look resigned. [HeShe] is as good as any you’ve had, lapping at your labia hungrily, [hisher] nose pressing against your clit. Rocking your hips, you grind against your fallen foe, further humiliating [himher].[raven]", parse);
+	Text.NL();
+	Text.Add("You arch your back, crying out as you climax, collapsing on top of [name]. [HisHer] muffled protests only serve to heighten the sensation, sending shivers up your spine.", parse);
+	Text.NL();
+	Text.Add("When you come to, still half asleep, your heart is beating fast.", parse);
+	
+	player.AddLustFraction(0.5);
+}
 /*
 Scenes.Dreams.Ocean = function(ravenTrigger) {
 	var parse = {
