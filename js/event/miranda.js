@@ -43,6 +43,10 @@ function Miranda(storage) {
 	this.flags["Thief"]    = 0;
 	this.flags["RotGuard"] = 0;
 	this.flags["Forest"]   = 0;
+	
+	//Peasants' gate antics
+	this.flags["gBJ"]      = 0;
+	this.flags["gAnal"]    = 0;
 
 	if(storage) this.FromStorage(storage);
 }
@@ -53,8 +57,12 @@ Miranda.Attitude = {
 	Hate    : -2,
 	Dismiss : -1,
 	Neutral : 0,
-	Forward : 1
+	Nice    : 1
 };
+
+Miranda.prototype.Attitude = function() {
+	return this.flags["Attitude"];
+}
 
 Miranda.prototype.FromStorage = function(storage) {
 	this.subDom.base         = parseFloat(storage.subDom)  || this.subDom.base;
@@ -79,7 +87,19 @@ Miranda.prototype.ToStorage = function() {
 
 // Schedule
 Miranda.prototype.IsAtLocation = function(location) {
-	return true;
+	if(party.InParty(miranda)) return false;
+	location = location || party.location;
+	if(world.time.hour >= 7 && world.time.hour < 19) {
+		//Work
+		if(world.time.day % 2)
+			return (location == world.loc.Plains.Gate) || (location == world.loc.Rigard.Gate);
+		else
+			return (location == world.loc.Rigard.Slums.gate);
+	}
+	else if(world.time.hour >= 19 || world.time.hour < 2)
+		return (location == world.loc.Rigard.Tavern.common);
+	else
+		return (location == world.loc.Rigard.Residental.miranda);
 }
 
 Miranda.prototype.OnPatrol = function() {
@@ -113,8 +133,120 @@ Miranda.prototype.Interact = function() {
 // Events
 Scenes.Miranda = {};
 
-Scenes.Miranda.GatesInteract = function() {
+Scenes.Miranda.RigardGatesDesc = function() {
+	Text.Add("<i>”Ho!”</i> Miranda greets you as you approach the gate. The dog-morph is lounging beside the gatehouse, ");
 	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("toying with the pommel of her sword.");
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("stretching out sore muscles.");
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("sneaking a drink from a small hip flask while the commanding officer isn’t looking.");
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("her bored gaze drifting over the scenery.");
+	}, 1.0, function() { return true; });
+	
+	scenes.Get();
+	
+	Text.NL();
+}
+
+Scenes.Miranda.RigardGatesInteract = function() {
+	var parse = {};
+	
+	Text.Clear();
+	if(rigard.flags["Visa"] == 0) {
+		Text.Add("<i>”Still no luck getting a pass? Sorry, but you know I can’t let you in without one,”</i> Miranda tells you bluntly.", parse);
+		Text.NL();
+	}
+	
+	if(miranda.Attitude() > Miranda.Attitude.Neutral)
+		Text.Add("<i>”If you feel brave enough, I could treat you to another night on the town,”</i> the guardswoman suggests, winking at you. <i>”Meet me at the tavern in the slums after dark and we’ll party hard!”</i>", parse);
+	else if(miranda.Attitude() < Miranda.Attitude.Neutral)
+		Text.Add("<i>”So you come crawling back here, eh?”</i> The guardswoman looks at you dismissively. <i>”I really don’t have the time for you right now, but meet me in the slums later if you are feeling brave. Brave or stupid.”</i>", parse);
+	else
+		Text.Add("<i>”Head over to the Maidens’ Bane tavern in the slums once in a while, we can have a drink and chat a bit.”</i>", parse);
+	Text.Flush();
+	
+	// TODO: Add interactions (sex)
+	Gui.NextPrompt();
+}
+
+Scenes.Miranda.RigardGatesEnter = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	if(miranda.Attitude() < Miranda.Attitude.Neutral) { // bad
+		Text.Add("<i>”What now?”</i> Miranda asks shortly as you approach the gates.", parse);
+		if(miranda.Relation() < 25)
+			Text.Add(" She doesn’t look too happy to see you.");
+		if(rigard.GatesOpen())
+			Text.Add(" <i>”You are not getting inside the city during night hours, pass or no pass,”</i> she growls. <i>”Not through this gate.”</i>", parse);
+		else if(rigard.Visa()) {
+			Text.Add("You show her your visa to enter the city, but she seems unwilling to let you in either way. <i>”Come over here, standard procedure,”</i> she growls. During the next hour or so, she hounds you with questions about your business in the city, though you can tell she is clearly just fucking with you and wasting time.", parse);
+			Text.NL();
+			Text.Add("Something tells you that you are lucky though, as you suspect that if not for the other guard posted there, you’d be up for a cavity search. Eventually, the vindictive guardswoman lets you through the gates into Rigard.", parse);
+			Text.NL();
+			Text.Add("<i>”Why not come by the peasants’ gate more?”</i> Miranda calls after you. <i>”It’s a much more… comfortable environment.”</i>", parse);
+			if(miranda.flags["gBJ"] > 0)
+				Text.Add(" Your cheeks burn, but at least she let you inside, and with less humiliation than usual.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				MoveToLocation(world.loc.Rigard.Gate, {hour: 1});
+			});
+			return;
+		}
+		else {
+			Text.Add("<i>”You know damn well you aren’t getting through here without a pass,”</i> she growls. There is a dangerous glint in her eyes as she adds: <i>”Come by the slum-side gate when I’m on duty sometime, I might show mercy on you.”</i>", parse);
+		}
+	}
+	else if(miranda.Attitude() > Miranda.Attitude.Neutral) { // good
+		Text.Add("<i>”Heading in?”</i> Miranda asks you as you approach the gates. <i>”Don’t be a stranger now!”</i>", parse);
+		Text.NL();
+		if(rigard.Visa()) {
+			if(rigard.GatesOpen()) {
+				Text.Add("The guardswoman waves you through, feeling you up familiarly as you pass her. <i>”Come join me for a drink or two later, okay?”</i>", parse);
+			}
+			else { // !open
+				Text.Add("The guardswoman looks around her quickly, studying her half asleep companion. She quickly gestures for you to come with her, leading you to a side gate. <i>”Don’t tell anyone I let you in, okay? The gates are supposed to be shut at this hour.”</i>", parse);
+			}
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				MoveToLocation(world.loc.Rigard.Gate, {minute: 5});
+			});
+			return;
+		}
+		else
+			Text.Add("<i>”Sorry, I can’t let you through without a pass, [playername]. Come by the pub when I’m off duty, perhaps I can help you get one.”</i>", parse);
+	}
+	else { // neutral
+		if(rigard.GatesOpen()) {
+			Text.Add("<i>”Pass please,”</i> the guardswoman drones as you inquire about entry to the city.", parse);
+			if(rigard.Visa()) {
+				Text.Add("<i>”All seem to be in order, welcome to Rigard.”</i> She ushers you through the gates, already busy with the next person in line.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					MoveToLocation(world.loc.Rigard.Gate, {minute: 5});
+				});
+				return;
+			}
+			else
+				Text.Add("<i>”No pass, no entry. Sorry, those are the rules.”</i> She adds that she’s still up for a drink after work at the pub.", parse);
+		}
+		else
+			Text.Add("<i>”Gates are closed, ‘m afraid. Come back during daytime. Check in between eight in the morning and five in the evening.”</i>", parse);
+	}
+	Text.NL();
+	Text.Flush();
+	PrintDefaultOptions(true);
 }
 
 Scenes.Miranda.WelcomeToRigard = function() {
@@ -539,7 +671,7 @@ Scenes.Miranda.HeyThereCatPorn = function() {
 						Text.Add("<i>\"We have to do that again sometime honey... sometime soon.\"</i> She grins wickedly, <i>\"you should probably get yourself cleaned up for now though.\"</i> She tucks her now softening member back into her tight leather pants, its size making you wonder how it could ever fit there in the first place. She leaves you standing in the dark street, covered in sticky girl-cum.", parse);
 						Text.Flush();
 						
-						miranda.flags["Attitude"] = Miranda.Attitude.Forward;
+						miranda.flags["Attitude"] = Miranda.Attitude.Nice;
 						miranda.relation.IncreaseStat(100, 5);
 						miranda.subDom.IncreaseStat(100, 10);
 						
@@ -606,7 +738,7 @@ Scenes.Miranda.HeyThereCatPorn = function() {
 						Text.Add("You snuggle with Miranda for a while longer, enjoying the mead, until the two of you decide to leave for the night. Before the two of you part on the street outside, Miranda pulls you close into a deep kiss, her hands groping your ass roughly. <i>\"I think I'll be seeing more of you, and better sooner than later,\"</i> she announce as she saunters of into the night, <i>\"you know where to find me.\"</i>", parse);
 						Text.Flush();
 						
-						miranda.flags["Attitude"] = Miranda.Attitude.Forward;
+						miranda.flags["Attitude"] = Miranda.Attitude.Nice;
 						miranda.relation.IncreaseStat(100, 10);
 						miranda.subDom.IncreaseStat(100, 15);
 						
@@ -828,7 +960,7 @@ Scenes.Miranda.JustOneMore = function() {
 	
 	miranda.flags["Met"] = 3;
 	
-	if(miranda.flags["Attitude"] == Miranda.Attitude.Forward) {
+	if(miranda.flags["Attitude"] == Miranda.Attitude.Nice) {
 		Text.Add("<i>”Well, I honestly didn't think I would see you again after last time,”</i> she laughs softly as you squirm a bit, then pats the bench beside her. Miranda seems very happy that you decided to return, which she makes more clear as she reaches over and whispers in your ear:", parse);
 		Text.NL();
 		Text.Add("<i>”If you decided to come back, I guess that means you liked my extra equipment. Perhaps you are yearning for round two?”</i> She gently reaches down into your pants, ", parse);
@@ -949,7 +1081,7 @@ Scenes.Miranda.JustOneMore = function() {
 		});
 		options.push({ nameStr : "Touch it",
 			func : function() {
-				miranda.flags["Attitude"] = Miranda.Attitude.Forward;
+				miranda.flags["Attitude"] = Miranda.Attitude.Nice;
 				
 				Text.Clear();
 				Text.Add("Fascinated by the long member, you move closer and study it meticulously.", parse);

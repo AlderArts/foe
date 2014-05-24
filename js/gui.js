@@ -635,8 +635,10 @@ Gui.RenderTime = function() {
 Gui.SetGameState = function(state) {
 	switch(gameState) {
 		case GameState.Game:
-			Input.menuButtonSet.show();
-			Input.exploreButtonSet.show();
+			for(var i = 0; i < Input.menuButtons.length; i++)
+				Input.menuButtons[i].SetVisibility();
+			for(var i = 0; i < Input.exploreButtons.length; i++)
+				Input.exploreButtons[i].SetVisibility();
 			break;
 		case GameState.Event:
 		case GameState.Credits:
@@ -646,12 +648,13 @@ Gui.SetGameState = function(state) {
 			Input.exploreButtonSet.hide();
 		break;
 	}
-	Input.buttonSet.show();
-	Input.navButtonSet.show();
+	for(var i = 0; i < Input.buttons.length; i++)
+		Input.buttons[i].SetVisibility();
+	for(var i = 0; i < Input.navButtons.length; i++)
+		Input.navButtons[i].SetVisibility();
 }
 
 Gui.Render = function() {
-	
 	Gui.cavalcade.hide();
 	
 	switch (gameState) {

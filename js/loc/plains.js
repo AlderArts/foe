@@ -259,15 +259,23 @@ world.loc.Plains.Gate.onEntry = function() {
 		PrintDefaultOptions();
 }
 world.loc.Plains.Gate.description = function() {
-	Text.AddOutput("You stand on a stone paved road leading up to Rigard.");
-	Text.Newline();
+	Text.Add("You stand on a stone paved road leading up to Rigard.");
+	Text.NL();
+	
+	if(miranda.IsAtLocation())
+		Scenes.Miranda.RigardGatesDesc();
+	else {
+		Text.Add("There is a guard you don’t know stationed at the gates. They greet you, with a bored look on their face.");
+		Text.NL();
+	}
 	
 	// Town reaction if been there before
 	
 	// Town events
 	
-	Text.AddOutput("There is a deep forest to the north, some of the trees creeping quite close to the walls. You spy a lake to the south.");
-	Text.Newline();
+	Text.Add("There is a deep forest to the north, some of the trees creeping quite close to the walls. You spy a lake to the south.");
+	Text.NL();
+	Text.Flush();
 }
 world.loc.Plains.Gate.links.push(new Link(
 	"Crossroads", true, true,
@@ -279,12 +287,41 @@ world.loc.Plains.Gate.links.push(new Link(
 	}
 ));
 world.loc.Plains.Gate.links.push(new Link(
-	"Rigard", true, function() { return DEBUG; },
+	"Rigard", true, true,
 	function() {
 		Text.AddOutput("Enter the city? ");
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.Gate, {minute: 5});
+		// TODO
+		Text.Clear();
+		if(miranda.IsAtLocation()) {
+			Scenes.Miranda.RigardGatesEnter();
+		}
+		else {
+			if(!rigard.GatesOpen()) {
+				Text.Add("The guard explains to you that no-one enters or leaves the city during the night hours. You try to argue for a bit, but they are quite adamant. The open hours are between eight and five in the evening.");
+				Text.NL();
+			}
+			else if(rigard.Visa()) {
+				if(Math.random() < 0.1) {
+					Text.Add("The guard holds you up for way longer than necessary, checking your papers and asking questions as to your purpose in the city. By the time you’re done, your head feels like mush from the continuous barrage of repetitive questioning. Finally, you are allowed inside the city.");
+					world.TimeStep({hour:2});
+				}
+				else
+					Text.Add("You show your visa to the guard, who nods and waves you through.");
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					MoveToLocation(world.loc.Rigard.Gate, {minute: 5});
+				});
+				return;
+			}
+			else {
+				Text.Add("The guard explains that you need a pass to enter the city. When you confront them with how you are supposed to get one if the only way is to apply for one within the city, they just shrug.");
+				Text.NL();
+			}
+			Text.Flush();
+			PrintDefaultOptions(true);
+		}
 	}
 ));
 world.loc.Plains.Gate.links.push(new Link(
@@ -296,8 +333,14 @@ world.loc.Plains.Gate.links.push(new Link(
 		MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 15});
 	}
 ));
+world.loc.Plains.Gate.events.push(new Link(
+	"Miranda", function() { return miranda.IsAtLocation(); }, true,
+	null,
+	function() {
+		Scenes.Miranda.RigardGatesInteract();
+	}
+))
 world.loc.Plains.Gate.endDescription = function() {
 	Text.AddOutput("You weigh your options.<br/>");
 }
-
 

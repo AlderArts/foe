@@ -61,7 +61,7 @@ function Rigard(storage) {
 	this.ClothShop.AddItem(Items.Equinium, 5);
 	
 	// Have accessed town (not necessarily free access)
-	this.flags["Access"] = 0;
+	this.flags["Visa"] = 0;
 	this.flags["CityHistory"] = 0;
 	// Have access to royal grounds (not necessarily free access)
 	this.flags["RoyalAccess"] = 0;
@@ -130,6 +130,19 @@ Rigard.prototype.FromStorage = function(storage) {
 
 Rigard.prototype.Update = function(step) {
 	this.LBroomTimer.Dec(step);
+}
+
+Rigard.prototype.Visa = function() {
+	return this.flags["Visa"] != 0;
+}
+
+// TODO: add other ways
+Rigard.prototype.Access = function() {
+	return this.Visa();
+}
+
+Rigard.prototype.GatesOpen = function() {
+	return world.time.hour >= 8 && world.time.hour < 5;
 }
 
 Scenes.Rigard.CityHistory = function() {

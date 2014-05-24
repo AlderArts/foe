@@ -335,7 +335,7 @@ Scenes.Kiakai.TalkQuest = function() {
 		Text.AddOutput("<i>\"About that cat girl... we should probably try to find someone more, so to speak, sane,\"</i> the elf shakes [hisher] head. <i>\"We could probably find someone in the city - many folk pass through there.\"</i>", parse);
 		
 		Text.Newline();
-		if(rigard.flags["Access"] == 0) {
+		if(rigard.Access()) {
 			Text.AddOutput("<i>\"Question is, how do we get in?\"</i>", parse);
 			
 			Text.Newline();

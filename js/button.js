@@ -8,7 +8,7 @@ function Button(rect, text, func, enabled, image, disabledImage, glow) {
 	
 	this.enabledImage  = image || Images.imgButtonEnabled;
 	this.disabledImage = disabledImage || Images.imgButtonDisabled;
-	this.visible = true;
+	this.visible = false;
 	this.enabled = enabled;
 	this.func    = func;
 	this.obj     = null;
@@ -107,6 +107,13 @@ Button.prototype.SetEnabled = function(value) {
 Button.prototype.SetVisible = function(value) {
 	this.visible = value;
 	if(value)
+		this.set.show();
+	else
+		this.set.hide();
+}
+
+Button.prototype.SetVisibility = function() {
+	if(this.visible)
 		this.set.show();
 	else
 		this.set.hide();

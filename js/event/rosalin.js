@@ -389,7 +389,7 @@ Scenes.Rosalin.TalkPrompt = function() {
 				Text.AddOutput("<i>\"It worked!\"</i> [heshe] exclaims excitedly, <i>\"though... perhaps a bit <b>too</b> well. They had to tow him away in a wheelbarrow.\"</i> Rosalin shrugs dismissively. <i>\"First prototype.\"</i>", parse);
 				Text.Newline();
 				Text.AddOutput("<i>\"Anyway, the elven hag threw me out of there after that. Good riddance, I say. Her lectures were always so boring, only stupid healing remedies. She was only keeping me back.\"</i> There is a slightly mad look in Rosalin's eyes, and you detect traces of hurt pride in [hisher] voice.", parse);
-				if(rigard.flags["Access"] != 0) {
+				if(rigard.Access()) {
 					Text.Newline();
 					Text.AddOutput("It sounds like the court mage could be a good person to ask about the gemstone, but to reach her you have to enter the City of Rigard first, and then somehow get to her tower.", parse);
 				}
