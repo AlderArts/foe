@@ -8,8 +8,26 @@
 // Slums
 //
 world.loc.Rigard.Slums.gate.description = function() {
-	Text.AddOutput(Text.BoldColor("Placeholder area.") + " You are in slums.");
-	Text.Newline();
+	Text.Add("The slums of Rigard is a wretched cesspool of bustling activity, at all times of the day. The sprawling ghetto spreads out along the riverfront, crawling along the walls of the city as if trying to get inside. Most houses you see are built of sturdy but cheap wood, intended to weather the cold winters but not designed for comfort of esthetics.");
+	Text.NL();
+	Text.Add("The ‘streets’ are mostly mud[, a dirty slush at this time of year], battered every day by countless feet. The smell of the docks reach you even here, near the gates to the inner city.");
+	Text.NL();
+	
+	if(miranda.IsAtLocation()) {
+		Scenes.Miranda.RigardSlumGatesDesc();
+	}
+	else {
+		var fucked = miranda.flags["gBJ"] + miranda.flags["gAnal"];
+		if(fucked > 10)
+			Text.Add("You recognize almost every guard manning the gates by this point, and they certainly recognize you, having seen you get used by Miranda on more than one occasion.");
+		else if(fucked > 0 && Math.random() > 0.5)
+			Text.Add("Most of the guards manning the gates look unfamiliar to you, though you hear a snicker indicating that someone recognizes you for your exploits. News travel fast, you guess.");
+		else
+			Text.Add("The guards regard you with rather disinterested looks, lounging at a table beside the gate.");
+		Text.NL();
+	}
+	
+	Text.Flush();
 }
 
 world.loc.Rigard.Slums.gate.enc = new EncounterTable();
@@ -23,12 +41,33 @@ world.loc.Rigard.Slums.gate.onEntry = function() {
 }
 
 world.loc.Rigard.Slums.gate.links.push(new Link(
-	"Residential", true, function() { return DEBUG; },
+	"Rigard", true, function() { return DEBUG; },
 	function() {
 		Text.AddOutput("Enter the city? ");
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.Residental.street, {minute: 10});
+		Text.Clear();
+		if(miranda.IsAtLocation()) {
+			Scenes.Miranda.RigardSlumGatesEnter();
+		}
+		else {
+			if(!rigard.GatesOpen()) {
+				Text.Add("One of the guards tell you that the gates are closed for the night, and that you should return at another time. The gates are open between eight in the morning and five in the evening.");
+			}
+			else if(rigard.Visa()) {
+				Text.Add("The guards lazily check your papers before letting you through the gates into the city. They apparently found no issue, or simply didn’t want to bother with search you, as the process is quick and painless.");
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					MoveToLocation(world.loc.Rigard.Residental.street, {minute: 5});
+				});
+				return;
+			}
+			else {
+				Text.Add("One of the guards explain that you can’t get through if you don’t have a city issued visa. They don’t seem particularly interested in helping you getting one.");
+			}
+			Text.Flush();
+			PrintDefaultOptions(true);
+		}
 	}
 ));
 world.loc.Rigard.Slums.gate.links.push(new Link(
@@ -50,6 +89,13 @@ world.loc.Rigard.Slums.gate.links.push(new Link(
 	}
 ));
 
+world.loc.Rigard.Slums.gate.events.push(new Link(
+	"Miranda", function() { return miranda.IsAtLocation(); }, true,
+	null,
+	function() {
+		Scenes.Miranda.RigardGatesInteract();
+	}
+))
 world.loc.Rigard.Slums.gate.endDescription = function() {
 	Text.AddOutput("Nothing else to see here.<br/>");
 }
