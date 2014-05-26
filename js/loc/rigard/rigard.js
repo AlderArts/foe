@@ -42,7 +42,8 @@ world.loc.Rigard = {
 	
 	Slums        :
 	{
-		gate     : new Event("Peasants' Gate")
+		gate     : new Event("Peasants' Gate"),
+		docks    : new Event("Docks")
 	},
 	Tavern       :
 	{

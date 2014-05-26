@@ -38,7 +38,7 @@ function Miranda(storage) {
 	this.SetLevelBonus();
 	this.RestFull();
 	
-	this.flags["Met"]      = 0;
+	this.flags["Met"]      = Miranda.Met.NotMet;
 	this.flags["Attitude"] = Miranda.Attitude.Neutral;
 	this.flags["Thief"]    = 0;
 	this.flags["RotGuard"] = 0;
@@ -63,6 +63,13 @@ Miranda.Attitude = {
 	Nice    : 1
 };
 
+Miranda.Met = {
+	NotMet : 0,
+	Met    : 1,
+	Tavern : 2,
+	TavernAftermath : 3
+}
+
 Miranda.Public = {
 	Nothing : 0,
 	Oral    : 1,
@@ -83,6 +90,8 @@ Miranda.prototype.FromStorage = function(storage) {
 	// Load flags
 	for(var flag in storage.flags)
 		this.flags[flag] = parseInt(storage.flags[flag]);
+	for(var flag in storage.sex)
+		this.sex[flag] = parseInt(storage.sex[flag]);
 }
 
 Miranda.prototype.ToStorage = function() {
@@ -91,6 +100,7 @@ Miranda.prototype.ToStorage = function() {
 	if(this.slut.base     != 0) storage.slut   = this.slut.base;
 	if(this.relation.base != 0) storage.rel    = this.relation.base;
 	storage.flags = this.flags;
+	storage.sex   = this.SaveSexStats();
 	
 	return storage;
 }
@@ -761,7 +771,7 @@ Scenes.Miranda.WelcomeToRigard = function() {
 		HisHer : kiakai.HisHer()
 	};
 	
-	miranda.flags["Met"] = 1;
+	miranda.flags["Met"] = Miranda.Met.Met;
 	
 	if(party.Two())
 		parse["comp"] = " and " + party.Get(1).name;
@@ -988,7 +998,7 @@ Scenes.Miranda.HeyThere = function() {
 		boygirl : function() { return player.mfFem("boy", "girl"); }
 	};
 	
-	miranda.flags["Met"] = 2;
+	miranda.flags["Met"] = Miranda.Met.Tavern;
 	
 	Text.Add("As you walk into the dimly lit bar your eyes find Miranda, the guardswoman, sitting in a corner by herself. The tall and curvy dog-morph is wearing tight leather pants laced with green cloth tucked into her high boots, and a very suggestive top piece exposing a fair amount of her cleavage. She notices you and motions you over, patting the bench beside her.", parse);
 	Text.NL();
@@ -1433,6 +1443,14 @@ Scenes.Miranda.Chat = function() {
 		}, enabled : true,
 		tooltip : "Just chat for a while."
 	});
+	
+	if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
+		options.push({ nameStr : "Date",
+			func : Scenes.Miranda.DatingEntry, enabled : true,
+			tooltip : "Ask her out on a walk."
+		});
+	}
+	
 	Gui.SetButtonsFromList(options);
 }
 
@@ -1459,7 +1477,7 @@ Scenes.Miranda.JustOneMore = function() {
 	parse["oneof"]    = player.NumCocks() > 1 ? " one of" : "";
 	parse["yourA"]    = player.NumCocks() > 2 ? " a" : "your";
 	
-	miranda.flags["Met"] = 3;
+	miranda.flags["Met"] = Miranda.Met.TavernAftermath;
 	
 	if(miranda.flags["Attitude"] == Miranda.Attitude.Nice) {
 		Text.Add("<i>”Well, I honestly didn't think I would see you again after last time,”</i> she laughs softly as you squirm a bit, then pats the bench beside her. Miranda seems very happy that you decided to return, which she makes more clear as she reaches over and whispers in your ear:", parse);
@@ -1796,7 +1814,7 @@ Scenes.Miranda.JustOneMore = function() {
 Scenes.Miranda.MaidensBaneTalk = function() {
 	Text.Clear();
 	
-	if(miranda.flags["Met"] == 1) {
+	if(miranda.flags["Met"] == Miranda.Met.Met) {
 		Scenes.Miranda.HeyThere();
 	}
 	else
@@ -1808,7 +1826,7 @@ Scenes.Miranda.MaidensBaneTalk = function() {
 			Text.Add("You walk over to Miranda, who is lounging on one of the benches in the shady tavern. When she notices you, her eyes narrow dangerously. Looks like she isn't particularly happy about seeing you.");
 		Text.NL();
 		
-		if(miranda.flags["Met"] == 2) {
+		if(miranda.flags["Met"] == Miranda.Met.Tavern) {
 			Scenes.Miranda.JustOneMore();
 		}
 		else if(miranda.flags["Attitude"] >= Miranda.Attitude.Neutral) {
@@ -1831,4 +1849,361 @@ function() {
 Scenes.Miranda.MaidensBaneTalk,
 "Miranda is lounging at a table in the shady tavern."));
 
+Scenes.Miranda.DatingEntry = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	if(miranda.flags["Dates"] == 0) { // first
+		if(miranda.Attitude() >= Miranda.Attitude.Neutral)
+			Text.Add("<i>”You coming on to me, [playername]?”</i> Miranda looks amused, but nods. <i>”Sure, I’m game. Let’s ditch this place.”</i> Saying so, she drains her beer in one go, slamming the empty cup to the table.", parse);
+		else {
+			Text.Add("<i>”You are certainly singing a different tune now than when we first met.”</i> Miranda growls suspiciously. <i>”What’s your game?”</i> Grudgingly, she agrees to go with you, draining her beer and slamming the empty cup to the table.", parse);
+			if(miranda.flags["gBJ"] > 0) {
+				Text.NL();
+				Text.Add("<i>”If nothing else, at least I’ll get to fuck you at the end of it,”</i> she mutters to herself.", parse);
+			}
+		}
+		Text.NL();
+		Text.Add("<i>”I’m quite picky with who I date, you should know. Put on your best face, or whatever other bodypart you’d like to flaunt.”</i>", parse);
+		Text.NL();
+		Text.Add("You leave the sordid tavern behind, walking aimlessly through the pittoresque slums on the large city. For once, Miranda isn’t very talkative, seeming to be preoccupied with her own thoughts. Just when the silence is starting to get uncomfortable, she yips in surprised joy.", parse);
+		Text.NL();
+		Text.Add("<i>”Oh, this place! Haven’t been through here in a while.”</i> You follow the excited canine through an archway into what looks like a small secluded park of sorts, containing a few trees and bushes, a cracked stone table and a few simple wooden benches. The small space would easily fit inside the common room of the Maidens’ Bane.", parse);
+		Text.NL();
+		Text.Add("<i>”This is the place I lost my virginity,”</i> Miranda gestures around the place with sparkling eyes like if it was a grand ball room. <i>”Oh how young I was… Both me and my boyfriend were rather drunk. Still, I enjoyed myself greatly.”</i> She looks thoughtful for a moment. <i>”My boyfriend, not so much.”</i>", parse);
+		Text.NL();
+		if(miranda.Sexed()) {
+			Text.Add("<i>”As you may have noticed, I have a hard time holding back,”</i> the herm blushes faintly. You’ve sort of gotten that impression.", parse);
+			Text.NL();
+		}
+		Text.Add("<i>”So, what do you think, [playername]?”</i>", parse);
+		
+		party.location = world.loc.Rigard.Slums.gate;
+		world.TimeStep({minute: 20});
+		
+		Text.Flush();
+		
+		Scenes.Miranda.DatingScore = miranda.Attitude();
+		
+		//[Polite][Rude][Sultry]
+		var options = new Array();
+		options.push({ nameStr : "Polite",
+			func : function() {
+				Text.Clear();
+				Text.Add("You rather guardedly tell her it’s a nice place, not really sure what she’s expecting you to say.", parse);
+				Text.NL();
+				Text.Add("<i>”Aww, you are no fun.”</i> Miranda looks disappointed.", parse);
+				Text.NL();
+				Scenes.Miranda.DatingFirstDocks();
+			}, enabled : true,
+			tooltip : "Very nice. No, really."
+		});
+		options.push({ nameStr : "Rude",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”Nostalgia is what it is. I have some good memories here, and I’m not ashamed of that.”</i> Miranda looks grumpy at your reaction.", parse);
+				Text.NL();
+				
+				miranda.relation.DecreaseStat(-100, 2);
+				Scenes.Miranda.DatingScore--;
+				
+				Scenes.Miranda.DatingFirstDocks();
+			}, enabled : true,
+			tooltip : "A rather crude place to take someone on a date, isn’t it?"
+		});
+		options.push({ nameStr : "Sultry",
+			func : function() {
+				Text.Clear();
+				Text.Add("Rather than being taken aback, Miranda takes your counter in a stride.", parse);
+				Text.NL();
+				Text.Add("<i>”Several times. My first relationship didn’t last very long, but me and my boyfriend stole back here quite often while it did.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>”Was a while since last time, though. You offering?”</i> Before you can respond, she shakes her head, grinning at you. <i>”My tastes have refined over time. I’d prefer to ram you in my own bed instead. Consider it an offer.”</i>", parse);
+				Text.NL();
+				if(miranda.flags["gAnal"] != 0) {
+					Text.Add("<i>”Who knows, perhaps you’ll prefer it over a dirty alleyway,”</i> she adds, jabbing you in the ribs with her elbow.", parse);
+					Text.NL();
+				}
+				
+				miranda.relation.IncreaseStat(100, 3);
+				Scenes.Miranda.DatingScore++;
+				
+				Scenes.Miranda.DatingFirstDocks();
+			}, enabled : true,
+			tooltip : "So… she took her first here, has she repeated the feat?"
+		});
+		Gui.SetButtonsFromList(options);
+	}
+	else {
+		// TODO: repeat dates
+	}
+}
+
+Scenes.Miranda.DatingFirstDocks = function() {
+	
+	var parse = {
+		
+	};
+	
+	party.location = world.loc.Rigard.Slums.docks;
+	world.TimeStep({minute: 20});
+	
+	Text.Add("Leaving the small garden behind, the two of you head down a well-trodden road, not quite deserted, even at this hour. After a while, you begin to notice the smell of brine and fish, as your steps takes you closer to the dock area. There are large crates lining the sides of large warehouses, mostly empty but sure to be filled with a new catch the next morning. Along the riverside, a minor fleet of small fishing boats lie tied.", parse);
+	Text.NL();
+	Text.Add("<i>”Fish is a major food supply for Rigard,”</i> Miranda explains. <i>”Not only that, but the river provides other treasures.”</i> She points toward a larger barge moored near a giant warehouse, bustling with activity. <i>”It is one of the safer ways to reach the other nations on Eden, and the ocean cities. Traders make regular journeys there, though with the recent surge in attacks from outlaws, they need to hire escorts.”</i>", parse);
+	Text.NL();
+	Text.Add("The guardswoman looks to be in her element. <i>”I used to run around here all the time when I was a kid, talking with the sailors and exploring abandoned warehouses. Such good adventures!”</i>", parse);
+	Text.Flush();
+	
+	//[Polite][Rude][Sultry]
+	var options = new Array();
+	options.push({ nameStr : "Polite",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>”Hey, you making fun of me?”</i> Miranda growls playfully, nudging you. <i>”I know it doesn’t look like much, but for a kid, there was so much to see and learn. The sailors may seem a bit rough around the edges, but they had much to teach.”</i>", parse);
+			Text.NL();
+			Text.Add("She certainly seems to have picked up their language.", parse);
+			Text.NL();
+			
+			miranda.relation.IncreaseStat(100, 2);
+			Scenes.Miranda.DatingScore++;
+			
+			Scenes.Miranda.DatingFirstMercs();
+		}, enabled : true,
+		tooltip : "Seems like a nice place to grow up."
+	});
+	options.push({ nameStr : "Rude",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>”Well… true,”</i> Miranda grudgingly admits. <i>”Still, it’s not that bad. For a little eight-year old, this place was cool as fuck.”</i>", parse);
+			Text.NL();
+			Scenes.Miranda.DatingFirstMercs();
+		}, enabled : true,
+		tooltip : "It stinks of fish and worse."
+	});
+	options.push({ nameStr : "Sultry",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>”Hey… I think of things other than sex, you know.”</i> Miranda frowns at you. <i>”’Sides, I was just a kid at the time.”</i> Seems like you upset her a bit.", parse);
+			Text.NL();
+
+			miranda.relation.DecreaseStat(-100, 2);
+			Scenes.Miranda.DatingScore--;
+			
+			Scenes.Miranda.DatingFirstMercs();
+		}, enabled : true,
+		tooltip : "You’re sure she had some ‘adventures’ here, alright."
+	});
+	Gui.SetButtonsFromList(options);
+}
+
+Scenes.Miranda.DatingFirstMercs = function() {
+	var parse = {
+		
+	};
+	
+	world.TimeStep({minute: 20});
+	
+	Text.Add("<i>”I mentioned escorts, didn’t I?”</i> Miranda murmurs thoughtfully. <i>”Which brings us to this place.”</i> You are standing before a large two-story building at the edge of the docks district, far enough away from it to alleviate the smell slightly, but close enough to have the local water holes within close distance. It looks to be in relatively good shape for the slums, though the thick wooden door is marred with what looks like sword slashes.", parse);
+	Text.NL();
+	Text.Add("<i>”This is home to one of the larger mercenary guilds in Rigard, the Black Hounds. I used to work for them, before I became all nice and proper.”</i> Proper? What was she like before? <i>”As you can see, it’s a rough business. Pay is decent and you get to travel a lot though. All in all, this building probably holds some of the worst scum Rigard has to offer.”</i> You can tell that she means it, but there is a small touch of fondness and pride in her voice.", parse);
+	Text.Flush();
+	
+	//[Polite][Rude][Sultry]
+	var options = new Array();
+	options.push({ nameStr : "Polite",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>”Nice?”</i> Miranda scoffs. <i>”Did you listen to a word I just said? This place is a cesspool for the lowest criminal scum in the city, anyone who can handle a weapon is welcome to join. Only reason they didn’t try to rape the pretty young doggie’s brains out when she entered was that I had already gotten a bit of a reputation at that point. Anyone brave enough to assault me would end up with a broken arm or two, and be unable to sit properly for a few weeks. I was strong, even back then.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>”I was glad to leave this shithole behind when better opportunities opened up.”</i>", parse);
+			Text.NL();
+			
+			miranda.relation.DecreaseStat(-100, 1);
+			Scenes.Miranda.DatingScore--;
+			
+			Scenes.Miranda.DatingFirstCity();
+		}, enabled : true,
+		tooltip : "How come she left if this is such a nice place?"
+	});
+	options.push({ nameStr : "Rude",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>”My thoughts exactly. It was nice work. Shame about the crowd I had to hang with though.”</i> There is a wicked smile playing on Miranda’s lips. <i>”I still bump into some of them these days, but usually in work-related matters. Being the law has its perks at times.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>”Let’s ditch this place anyways, I got better things to do than chat about the old days.”</i>", parse);
+			Text.NL();
+			
+			miranda.relation.IncreaseStat(100, 3);
+			Scenes.Miranda.DatingScore++;
+			
+			Scenes.Miranda.DatingFirstCity();
+		}, enabled : true,
+		tooltip : "What a dungheap."
+	});
+	options.push({ nameStr : "Sultry",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>”Very funny, asshole,”</i> she chuckles. <i>”True, though. Not much else to do between missions. Of course, I gave as much as I took, if not more.”</i> The guardswoman looks thoughtful.", parse);
+			Text.NL();
+			Text.Add("<i>”Then there was the matter of the reward for finished jobs. Coming from the slums, I didn’t really have a good hand with money anyways, so I tended to accept substitutes at times.”</i> She grins widely at your raised eyebrow. <i>”Got problems with bandits? I’ll fuck them up. Then I’ll come back and fuck you… probably a lot more and a lot rougher than you were hoping for.”</i>", parse);
+			Text.NL();
+			
+			miranda.relation.IncreaseStat(100, 1);
+			
+			Scenes.Miranda.DatingFirstCity();
+		}, enabled : true,
+		tooltip : " Lots of travel with a rowdy band of thugs? So she’s been around, so to speak?"
+	});
+	Gui.SetButtonsFromList(options);
+}
+
+Scenes.Miranda.DatingFirstCity = function() {
+	var parse = {
+		boyGirl : player.mfTrue("boy", "girl"),
+		tongueDesc : function() { return player.TongueDesc(); },
+		breastDesc : function() { return player.FirstBreastRow().Short(); }
+	};
+	
+	party.location = world.loc.Rigard.Residental.street;
+	world.TimeStep({minute: 20});
+	
+	Text.Add("<i>”Seen enough of the slums to last you for tonight?”</i> The two of you are nearing the outer walls of Rigard, close to the peasants’ gate. ", parse);
+	if(rigard.Visa()) {
+		if(miranda.Attitude() < Miranda.Attitude.Neutral)
+			Text.Add("<i>”That piece of paper they give you won’t help at this hour, but I know a way.”</i> Miranda grins. <i>”’Course, if we run into a patrol, you are on your own buddy.”</i>", parse);
+		else
+			Text.Add("<i>”You have a pass, right? Not that it matters at this hour. Don’t worry, we’ll use a back gate, bypass the security.”</i>", parse);
+	}
+	else {
+		if(miranda.Attitude() < Miranda.Attitude.Neutral)
+			Text.Add("<i>”You’ll be an interloper, prowling around town illegally,”</i> Miranda almost purrs, a dangerous glint in her eyes. <i>”One could say you are at my mercy...”</i>", parse);
+		else
+			Text.Add("<i>”I’ll sneak you in. Don’t worry about the guards, I know a gate that isn’t guarded at this time.”</i>", parse);
+	}
+	Text.Add(" The guardswoman seems excited as she covertly leads you through a small inconspicuous door - one which you would have never found on your own. A short twisting tunnel later, you make your way into the inner city.", parse);
+	Text.NL();
+	Text.Add("<i>”One of the perks of working for the city watch is that I can afford a house inside the walls. Saves me from most of the regular thugs and thieves that prowl the slums. Then again, the inner city houses a different class of thugs and thieves. Worst of em all up there.”</i> The herm points to the castle looming atop the hill at the center of the city.", parse);
+	Text.NL();
+	Text.Add("<i>”It ain’t easy to get a posh job in a town like this as a morph, but I happen to be very good at what I do. And what I do is take out the trash.”</i> She flashes an evil grin full of sharp, pointy teeth. <i>”’Course, someone like me could never get work as an officer. Not that I’d want to sit at a desk pushing papers all day anyways.”</i>", parse);
+	Text.NL();
+	if(DEBUG) {
+		Text.Add("<b>TOTAL SCORE: [x]</b>", {x: Scenes.Miranda.DatingScore});
+		Text.NL();
+	}
+	
+	if(rigard.Visa()) {
+		Text.Add("The two of you wander through the town, heading towards the residential district. Miranda points out a few of local water holes, and some places that serve decent food.", parse);
+	}
+	else {
+		if(miranda.Attitude() < Miranda.Attitude.Neutral) {
+			if(Scenes.Miranda.DatingScore > 0) {
+				Text.Add("<i>”Listen, I might have been a bit harsh on you before,”</i> Miranda grudgingly admits. <i>”I don’t take negative feedback very well… You think I could make it up to you by getting you a city visa? The procedure is rather quick. We can save the fun stuff for later.”</i> She smiles, winking at you.", parse);
+				
+				miranda.flags["Attitude"] = Miranda.Attitude.Nice;
+			}
+			else {
+				Text.Add("<i>”Now I’ve got you here, deep within the city and without a visa,”</i> Miranda grins evilly at you. <i>”Wouldn’t it just be shame if one of the guards caught word of this? A good thing you have such a <b>nice</b> friend as me helping you out, isn’t it?”</i>", parse);
+			}
+		}
+		else { // Nice
+			if(Scenes.Miranda.DatingScore < 0) {
+				Text.Add("<i>”I had planned on getting you a city visa while we were here, but I’ve been thinking,”</i> Miranda tells you bluntly. <i>”I’m not really impressed by your performance so far. Frankly, I think you’re a bit of an ass. You can still salvage this if you want to, though.”</i>", parse);
+			}
+			else {
+				Text.Add("<i>”While we are passing through, I’ll help you get a city visa. It’ll allow you to pass the guards into the city any time you want. The procedure is rather quick. We can save the fun stuff for later.”</i> She smiles, winking at you.", parse);
+			}
+		}
+		Text.NL();
+		Text.Add("The two of you arrive at a small booth, manned by a bored-looking city official. A sign beside it announces it as a city identification office. You find it rather curious that it would be open at this hour, but shrug it off as an oddity of the city administration.", parse);
+		Text.NL();
+		if(miranda.Attitude() >= Miranda.Attitude.Neutral && Scenes.Miranda.DatingScore >= 0) {
+			Text.Add("The guardswoman explains that you are here to write out a pass for you, and that she’ll vouch for you. The administrator eyes you curtly, disapproval clear in his furrowed brow. In the end you get your pass, though it takes some time for all the necessary papers to be filled out.", parse);
+			Text.NL();
+			Text.Add("<i>”Now, be sure to come visit often,”</i> your friendly guide urges you. <i>”Lets head somewhere more… comfortable, shall we?”</i>", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(Scenes.Miranda.DatingFirstHome);
+		}
+		else { // nasty or bad score
+			Text.Add("Rather than leading you to the booth, Miranda pulls you into a nearby alleyway. She steps in close, trapping you with her full breasts, a dangerous glint in her eyes.", parse);
+			Text.NL();
+			Text.Add("<i>”Now, listen close. If you’d like me to do you this favor, you’d better do <b>me</b> a favor.”</i> the herm grabs hold of your hand and moves it to her crotch. You can feel her thick cock straining against the leather of her pants.", parse);
+			Text.NL();
+			if(miranda.Attitude() >= Miranda.Attitude.Neutral && Scenes.Miranda.DatingScore < 0) {
+				Text.Add("<i>”Last chance to get on my good side, [boyGirl],”</i> she whispers through clenched teeth, grinding against you. <i>”Get down on your knees and suck like a good little slut, and all is forgiven.”</i>", parse);
+			}
+			else {
+				Text.Add("<i>”You know what I want, my little slut,”</i> she whispers through clenched teeth, grinding against you. <i>”If you ever hope to get that visa, why don’t you try to convince me of your good intentions? Don’t bother with words, your mouth can be put to far better use.”</i>", parse);
+			}
+			Text.Flush();
+			
+			//[Blow her][Fuck no]
+			var options = new Array();
+			options.push({ nameStr : "Blow her",
+				func : function() {
+					Text.Clear();
+					Text.Add("<i>”That’s the spirit,”</i> Miranda purrs as you lower yourself into position. <i>”Swallow your pride. Swallow a lot more.”</i> As she’s talking, she undoes her britches, releasing her stiff red cock. You gulp, getting second thoughts. It looks a lot bigger up close…", parse);
+					Text.NL();
+					Text.Add("The dommy herm doesn’t give you a lot of time to contemplate your hastily made choice, quickly prying the pointed tip of her shaft past your lips. <i>”Now, suck!”</i> Not that you have much to say in the matter. She inches her cock further in, leaving a trail of salty pre along your [tongueDesc]. Though you can sense that she’s eager to go all out and fuck your throat, she eases up, letting you do the work.", parse);
+					Text.NL();
+					
+					Sex.Blowjob(player, miranda);
+					miranda.Fuck(miranda.FirstCock(), 2);
+					player.FuckOral(player.Mouth(), miranda.FirstCock(), 2);
+					
+					Text.Add("You dutifully bob your head up and down Miranda’s dick, struggling slightly with her girth. <i>”Yeees, keep it up my little slut. You do want your reward, don’t you? Suck that cock like you mean it!”</i> She keeps up a steady stream of mocking commentary, a bit louder than necessary. You suddenly realize that considering how close you are, the administrator can probably hear everything that she’s saying.", parse);
+					Text.NL();
+					Text.Add("<i>”Feel how it throbs?”</i> the guardswoman moans softly, breathing heavily. <i>”I’ve got a big fat load stored up in these balls of mine, bet you want it, don’t you?”</i> She’s not lying. Her large sack is hot to the touch, her cream ready to shoot down your throat. Her shaft is rock hard, twitching as she approaches the height of pleasure. <i>”...Too bad for you!”</i>", parse);
+					Text.NL();
+					Text.Add("Before you have time to react, Miranda withdraws from your mouth, grabbing the back of your head with one hand and jerking herself off with the other. The first blast splashes onto your [tongueDesc], but the following stream is less discriminatory, drenching your face and splattering on your [breastDesc]. The herm rubs the last drops of cum off the tip of her cock on your cheek, before hastily pulling up her pants again.", parse);
+					Text.NL();
+					Text.Add("Huffing slightly, Miranda pulls you out of the alleyway, smiling disarmingly at the city official as she drags you over to the booth. The guardswoman talks as if nothing is amiss, explaining that you need a visa and that she’ll vouch for you. When the flustered administrator starts to protest, she shows her identification as a member of the city watch, which speeds up the process considerably. From the burning in your cheeks, you are probably wearing a blush at least as deep as the clerk - though you doubt he can see it through the thick layer of cum dripping down your face.", parse);
+					Text.NL();
+					Text.Add("<i>”Here you go, a city visa with Miranda’s compliments.”</i> The guardswoman hands over your prize, grinning mockingly. <i>”There is more where that came from too.”</i> Showing mercy on the poor official, she drags you off, heading toward the residential district. Swallowing your shame, you wipe off your face - though after this, you’ll need a long shower before you feel clean again.", parse);
+					Text.Flush();
+					
+					Scenes.Miranda.DatingScore++;
+					
+					Gui.NextPrompt(Scenes.Miranda.DatingFirstHome);
+				}, enabled : true,
+				tooltip : "Fine, lets do this."
+			});
+			options.push({ nameStr : "Fuck no",
+				func : function() {
+					Text.Clear();
+					Text.Add("<i>”Your choice.”</i> She shrugs, stepping back. <i>”Just for your information, it was the wrong one.”</i> Looking disappointed, the guardswoman heads off, motioning for you to follow her. Still affronted, you follow her into the residential district.", parse);
+					Text.Flush();
+					
+					Scenes.Miranda.DatingScore--;
+					
+					miranda.flags["Attitude"] = Miranda.Attitude.Hate;
+					
+					Gui.NextPrompt(Scenes.Miranda.DatingFirstHome);
+				}, enabled : true,
+				tooltip : "What does she think you are, a whore?"
+			});
+			Gui.SetButtonsFromList(options);
+		}
+	}
+}
+
+Scenes.Miranda.DatingFirstHome = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	miranda.flags["Dates"]++;
+}
+
+/*
+
+ */
 

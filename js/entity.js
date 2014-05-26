@@ -1284,6 +1284,12 @@ Sex.Preg = function(father, mother, num) {
 	if(mother) mother.sex.birth += num;
 }
 
+Entity.prototype.Sexed = function() {
+	for(var flag in this.sex)
+		if(this.sex[flag] != 0) return true;
+	return false;
+}
+
 Entity.prototype.Height = function() {
 	return this.body.height.Get();
 }
