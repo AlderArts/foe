@@ -20,7 +20,8 @@ world.loc.Rigard = {
 	{
 		street   : new Event("Residental street"), // Will also contain gate to slums
 		tavern   : new Event("Maidens' bane"),
-		miranda  : new Event("Miranda's house")
+		miranda  : new Event("Miranda's house"),
+		mDungeon : new Event("Miranda's dungeon")
 	},
 	
 	Brothel      :

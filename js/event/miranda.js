@@ -1938,6 +1938,10 @@ Scenes.Miranda.DatingEntry = function() {
 	}
 	else {
 		// TODO: repeat dates
+		Text.Add("PLACEHOLDER", parse);
+		Text.NL();
+		Flush();
+		Gui.NextPrompt();
 	}
 }
 
@@ -2122,6 +2126,9 @@ Scenes.Miranda.DatingFirstCity = function() {
 		if(miranda.Attitude() >= Miranda.Attitude.Neutral && Scenes.Miranda.DatingScore >= 0) {
 			Text.Add("The guardswoman explains that you are here to write out a pass for you, and that she’ll vouch for you. The administrator eyes you curtly, disapproval clear in his furrowed brow. In the end you get your pass, though it takes some time for all the necessary papers to be filled out.", parse);
 			Text.NL();
+			Text.Add("<b>Acquired citizen’s visa!</b>");
+			rigard.flags["Visa"] = 1;
+			Text.NL();
 			Text.Add("<i>”Now, be sure to come visit often,”</i> your friendly guide urges you. <i>”Lets head somewhere more… comfortable, shall we?”</i>", parse);
 			Text.Flush();
 			
@@ -2162,6 +2169,9 @@ Scenes.Miranda.DatingFirstCity = function() {
 					Text.NL();
 					Text.Add("Huffing slightly, Miranda pulls you out of the alleyway, smiling disarmingly at the city official as she drags you over to the booth. The guardswoman talks as if nothing is amiss, explaining that you need a visa and that she’ll vouch for you. When the flustered administrator starts to protest, she shows her identification as a member of the city watch, which speeds up the process considerably. From the burning in your cheeks, you are probably wearing a blush at least as deep as the clerk - though you doubt he can see it through the thick layer of cum dripping down your face.", parse);
 					Text.NL();
+					Text.Add("<b>Acquired citizen’s visa!</b>");
+					rigard.flags["Visa"] = 1;
+					Text.NL();
 					Text.Add("<i>”Here you go, a city visa with Miranda’s compliments.”</i> The guardswoman hands over your prize, grinning mockingly. <i>”There is more where that came from too.”</i> Showing mercy on the poor official, she drags you off, heading toward the residential district. Swallowing your shame, you wipe off your face - though after this, you’ll need a long shower before you feel clean again.", parse);
 					Text.Flush();
 					
@@ -2192,18 +2202,247 @@ Scenes.Miranda.DatingFirstCity = function() {
 
 Scenes.Miranda.DatingFirstHome = function() {
 	var parse = {
+		guyGirl : player.mfTrue("guy", "girl"),
+		playername : player.name
+	};
+	
+	world.TimeStep({minute: 30});
+	
+	miranda.flags["Dates"]++;
+	
+	Text.Clear();
+	Text.Add("After walking for a while longer, Miranda leads you down a cramped alleyway, stopping in front of a wooden doorway. Apparently, this is where the dog-morph lives. Your heart beats a bit faster.", parse);
+	Text.NL();
+	
+	var options = new Array();
+	
+	if(Scenes.Miranda.DatingScore > 2) {
+		Text.Add("<i>”All good nights come to an end, but this one doesn’t have to end here.”</i> Miranda looks at you suggestively. <i>”You are my kind of [guyGirl], [playername]. Would you like to come inside for a bit of fun?”</i>", parse);
+		Text.Flush();
+		
+		//[Take charge][Passive][Decline]
+		options.push({ nameStr : "Take charge",
+			func : function() {
+				Text.Clear();
+				Text.Add("In response, you go in for a kiss, pushing the surprised woman inside. <i>”I wouldn’t do this for just anyone, you know,”</i> Miranda huffs, a faint blush visible on her cheeks. You close the door with your shoulder, glancing around the room.", parse);
+				Scenes.Miranda.HomeDommySex();
+			}, enabled : miranda.SubDom() - (miranda.Relation() + player.SubDom()) < 0,
+			tooltip : "Heck yeah! Take her for a ride she won’t forget."
+		});
+		options.push({ nameStr : "Passive",
+			func : function() {
+				Text.Clear();
+				Text.Add("You nod, smiling demurely and waiting for her to make a move. <i>”Just what I want to hear,”</i> Miranda grins as she pulls you inside, slamming the door behind you.", parse);
+				Scenes.Miranda.HomeSubbySex();
+			}, enabled : true,
+			tooltip : "Let her call the shots."
+		});
+		options.push({ nameStr : "Decline",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”You don’t know what you’re missing.”</i> Miranda gives you a kiss before seeing you off, adding: <i>”You know where to find me, should you change your mind. I had a good time tonight, [playername], I want to show you my appreciation...”</i>", parse);
+				Text.NL();
+				if(party.Alone())
+					parse["comp"] = "";
+				else if(party.Two()) {
+					parse["comp"] = ", joining up with " + party.Get(1).name;
+				}
+				else
+					parse["comp"] = ", joining up with your companions";
+				Text.Add("You decide to leave the inner city[comp], returning to the slums for time being.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 20});
+				});
+			}, enabled : true,
+			tooltip : "Thank her for the evening, but politely decline her invitation."
+		});
+		Gui.SetButtonsFromList(options);
+	}
+	else if(Scenes.Miranda.DatingScore <= -2) {
+		Text.Add("<i>”I don’t know about you, but I’m up for a romp. How do you feel about biting the pillow for a few hours?”</i> For all of her nasty talk, you guess she still likes you enough to fuck you. Or perhaps she wants another chance to humiliate you, who knows.", parse);
+		Text.Flush();
+		
+		//[Get fucked][Decline]
+		var options = new Array();
+		options.push({ nameStr : "Get fucked",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”Of course you are.”</i> She grins as she pulls you inside, slamming the door behind her. <i>”Had you pinned for a bitch from the moment I saw you.”</i>", parse);
+				Scenes.Miranda.HomeSubbySex();
+			}, enabled : true,
+			tooltip : "If she’s offering, you’re willing."
+		});
+		options.push({ nameStr : "Decline",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”You are no fun,”</i> she huffs, <i>”as if I wanted to hang out with you just for your company. Well, fuck off then.”</i> With that, she slams the door in your face. From what you can tell, she’s not used to being turned down.", parse);
+				Text.NL();
+				if(party.Alone()) {
+					Text.Add("You are left standing in the street, wondering what to do next.", parse);
+					Text.Flush();
+					Gui.NextPrompt();
+				}
+				else {
+					parse["name"]   = party.Two() ? party.Get(1).name     : "your party";
+					parse["himher"] = party.Two() ? party.Get(1).himher() : "them";
+					Text.Add("First, you need to rendezvous with [name]. You make your way outside the inner walls and meet up with [himher] outside the dingy old tavern.", parse);
+					Text.Flush();
+					
+					Gui.NextPrompt(function() {
+						MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 20});
+					});
+				}
+			}, enabled : true,
+			tooltip : "No thanks."
+		});
+		Gui.SetButtonsFromList(options);
+	}
+	else {
+		Text.Add("<i>”You know, I think I’ve actually changed my mind about you,”</i> Miranda declares, smiling sweetly. <i>”I’ve had <b>such</b> a <b>good</b> time tonight, I’d just <b>love</b> to have you stay over.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>”I’m so horny right now,”</i> she breathes, pulling you close, <i>”get inside and make love to me, make me scream!”</i> Her cock is straining against her insufficient clothes, rubbing against your thigh.", parse);
+		Text.NL();
+		Text.Add("You’d have to be dead drunk, or perhaps straight up dead, to miss the malevolence in the herm’s eyes. This could end really badly…", parse);
+		Text.Flush();
+		
+		//[Follow][Decline]
+		var options = new Array();
+		options.push({ nameStr : "Follow",
+			func : function() {
+				Text.Clear();
+				Text.Add("…It’s probably nothing, you tell yourself. And you are about to score, all right! Miranda leads you inside, smiling encouragingly. You have a few moments to look around the room before the floor rushes to meet you, and everything goes black.", parse);
+				Scenes.Miranda.HomeDommyDungeonFirst();
+			}, enabled : true,
+			tooltip : "She is begging for it. After all, what could she do, knock you out and tie you up in her cellar?"
+		});
+		options.push({ nameStr : "Decline",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”Well this was a lousy day,”</i> Miranda grumbles. <i>”Ditched on my own doorstep. Well, fuck you too.”</i> She slams the door in your face, leaving you alone on the street. That could have gone better, you suppose. You’re just about to walk off, a bit unfamiliar with the neighbourhood, when you hear a bell ringing loudly. Glancing up, you see that Miranda is watching you from her window, grinning widely as she clangs a small brass bell.", parse);
+				Text.NL();
+				Text.Add("<i>”Bit of a send-off gift,”</i> she purrs. <i>”I’d say the guard will be here in a minute or two. You still got a bit of a head start, if you don’t want to spend the night in a cell.”</i> ", parse);
+				if(rigard.Visa())
+					Text.Add("Even if you’ve done no wrong, better not take the chance of having to put your word against hers. You suspect the guards would be rather biased on the point.", parse);
+				else
+					Text.Add("Shit! You realize that since you don’t have a visa, the guards could well lock you up for wandering the city.", parse);
+				Text.NL();
+				Text.Add("Deciding that the best thing to do at the moment is to leg it, you leave the laughing dog behind, heading for the gates. It takes a bit of weaving into cramped alleyways to avoid your pursuers, but you are somehow able to find the door you entered through, and make your way outside the walls.", parse);
+				Text.NL();
+				Text.Add("Back in the relative safety of the slums, you allow yourself to rest for a bit. Most likely the exit you used will be locked or better guarded from now on.", parse);
+				if(!party.Alone()) {
+					parse["name"]   = party.Two() ? party.Get(1).name     : "your companions";
+					parse["himher"] = party.Two() ? party.Get(1).himher() : "them";
+					Text.Add(" You are able to reunite with [comp] shortly after, though you don’t feel particularly inclined to tell [himher] about tonight’s escapades.", parse);
+				}
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 20});
+				});
+			}, enabled : true,
+			tooltip : "You are getting seriously bad vibes here, better get out while you still can."
+		});
+		Gui.SetButtonsFromList(options);
+	}
+}
+
+Scenes.Miranda.HomeDommySex = function() {
+	var parse = {
 		
 	};
 	
-	Text.Clear();
+	party.location = world.loc.Rigard.Residental.miranda;
+	
+	Text.NL();
+	Text.Add("PLACEHOLDER", parse);
+	Text.NL();
 	Text.Add("", parse);
 	Text.NL();
 	Text.Flush();
 	
-	miranda.flags["Dates"]++;
+	Gui.NextPrompt(function() {
+		MoveToLocation(world.loc.Rigard.Slums.gate);
+	});
 }
 
-/*
+Scenes.Miranda.HomeSubbySex = function() {
+	
+	var parse = {
+		
+	};
+	
+	party.location = world.loc.Rigard.Residental.miranda;
+	
+	Text.NL();
+	Text.Add("PLACEHOLDER", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		MoveToLocation(world.loc.Rigard.Slums.gate);
+	});
+}
 
- */
+Scenes.Miranda.HomeDommyDungeonFirst = function() {
+	
+	var parse = {
+		
+	};
+	
+	party.location = world.loc.Rigard.Residental.mDungeon;
+	
+	Text.NL();
+	Text.Add("PLACEHOLDER", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		MoveToLocation(world.loc.Rigard.Slums.gate);
+	});
+}
 
+Scenes.Miranda.HomeDommyDungeon = function() {
+	
+	var parse = {
+		
+	};
+	
+	party.location = world.loc.Rigard.Residental.mDungeon;
+	
+	Text.NL();
+	Text.Add("PLACEHOLDER", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		MoveToLocation(world.loc.Rigard.Slums.gate);
+	});
+}
+
+Scenes.Miranda.HomeSubbyDungeon = function() {
+	
+	var parse = {
+		
+	};
+	
+	party.location = world.loc.Rigard.Residental.mDungeon;
+	
+	Text.NL();
+	Text.Add("PLACEHOLDER", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		MoveToLocation(world.loc.Rigard.Slums.gate);
+	});
+}
