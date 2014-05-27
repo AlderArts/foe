@@ -10,7 +10,7 @@
 world.loc.Rigard.Slums.gate.description = function() {
 	Text.Add("The slums of Rigard is a wretched cesspool of bustling activity, at all times of the day. The sprawling ghetto spreads out along the riverfront, crawling along the walls of the city as if trying to get inside. Most houses you see are built of sturdy but cheap wood, intended to weather the cold winters but not designed for comfort of esthetics.");
 	Text.NL();
-	Text.Add("The ‘streets’ are mostly mud[, a dirty slush at this time of year], battered every day by countless feet. The smell of the docks reach you even here, near the gates to the inner city.");
+	Text.Add("The ‘streets’ are mostly mud[winter], battered every day by countless feet. The smell of the docks reach you even here, near the gates to the inner city.", {winter: world.time.season == Season.Winter ? ", a dirty slush at this time of year" : ""});
 	Text.NL();
 	
 	if(miranda.IsAtLocation()) {
@@ -41,7 +41,7 @@ world.loc.Rigard.Slums.gate.onEntry = function() {
 }
 
 world.loc.Rigard.Slums.gate.links.push(new Link(
-	"Rigard", true, function() { return DEBUG; },
+	"Rigard", true, true,
 	function() {
 		Text.AddOutput("Enter the city? ");
 	},

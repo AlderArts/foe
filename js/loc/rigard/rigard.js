@@ -144,7 +144,7 @@ Rigard.prototype.Access = function() {
 }
 
 Rigard.prototype.GatesOpen = function() {
-	return world.time.hour >= 8 && world.time.hour < 5;
+	return world.time.hour >= 8 && world.time.hour < 17;
 }
 
 Scenes.Rigard.CityHistory = function() {

@@ -50,6 +50,7 @@ function Miranda(storage) {
 	this.flags["gBribe"]   = 0;
 
 	this.flags["public"]   = 0;
+	this.flags["Dates"]    = 0;
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -1836,7 +1837,16 @@ Scenes.Miranda.MaidensBaneTalk = function() {
 			Text.Add("[PLACEHOLDER] Bad interactions.");
 			Text.Flush();
 			
-			Gui.NextPrompt();
+			
+			var options = new Array();
+			if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
+				options.push({ nameStr : "Date",
+					func : Scenes.Miranda.DatingEntry, enabled : true,
+					tooltip : "Ask her out on a walk."
+				});
+			}
+			
+			Gui.SetButtonsFromList(options, true);			
 		}
 	}
 }
@@ -1940,7 +1950,7 @@ Scenes.Miranda.DatingEntry = function() {
 		// TODO: repeat dates
 		Text.Add("PLACEHOLDER", parse);
 		Text.NL();
-		Flush();
+		Text.Flush();
 		Gui.NextPrompt();
 	}
 }
