@@ -933,7 +933,7 @@ Intro.UruGiveClitcock = function() {
 	
 	Text.AddOutput("<i>\"Heh, don't you lack the equipment for that, honey? No matter, that can easily be fixed...\"</i> Before you have time to protest, the omnibus reaches down between your legs and gives your clit a gentle touch, elicting a gasp from you. A sudden wave of pleasure fills your body and causes you to cry out and almost making you black out. Dizzied, you gasp as your gaze fall between your legs on your new equipment.");
 	Text.Newline();
-	Text.AddOutput("The previous, rather innocent-looking, button gracing your vagina has grown and swelled to a four-inch pillar as thick as an average penis. When you give your girl-cock a probing touch, the feeling makes your knees go weak, this is going to take time to get used to.");
+	Text.AddOutput("The previously rather innocent-looking button gracing your vagina has grown and swelled to a four-inch pillar as thick as an average penis. When you give your girl-cock a probing touch, the feeling makes your knees go weak, this is going to take time to get used to.");
 	Text.Newline();
 	Text.AddOutput("Time that the horny demon is obviously unwilling to grant you, as she unceremoniously swallows your entire length. Your mind goes blank as an unfamiliar sensation flows through your nether regions, and your new appendage erupts like a fountain into the mouth of the eager omnibus.");
 	Text.Newline();
@@ -941,6 +941,7 @@ Intro.UruGiveClitcock = function() {
 
 	// Gain clit cock
 	var cc = player.FirstVag().CreateClitcock();
+	cc.length.base = 10;
 	player.body.cock.push(cc);
 
 	var options = new Array();
@@ -2347,7 +2348,7 @@ Intro.KiaNiceSex = function() {
 				Text.AddOutput("Your stiff " + cockDesc() + " springs to attention as it is bared, almost slapping the elf in the face. Using careful touches and light kisses, " + name + " gently nurses it to full stiffness.");
 			}
 			else {
-				Text.AddOutput("Your strapping " + cockDesc() + " springs to attention as it is bared, almost slapping the elf in the face. <i>\"W-woah, I wasn't expecting it to be so... big,\"</i> " + name + " reverently whispers. Apparently the elf got " + himher + "self a good look at your unusual genitalia when clothing you, though it did not seem to prepare " + himher + " for your full erection. " + HeShe + " teases your female parts with one hand while planting hot kisses and licks on your " + cockDesc() + ".");
+				Text.AddOutput("Your " + cockDesc() + " springs to attention as it is bared, almost slapping the elf in the face. <i>\"W-woah, I wasn't expecting it to be so... big,\"</i> " + name + " reverently whispers. Apparently the elf got " + himher + "self a good look at your unusual genitalia when clothing you, though it did not seem to prepare " + himher + " for your full erection. " + HeShe + " teases your female parts with one hand while planting hot kisses and licks on your " + cockDesc() + ".");
 			}
 			Text.Newline();
 			

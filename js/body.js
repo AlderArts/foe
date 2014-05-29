@@ -1197,7 +1197,10 @@ Cock.prototype.Short = function() {
 	var noun = this.noun();
 	var knotted = this.knot   && Math.random() < 0.5 ? " knotted,"  : "";
 	var sheath  = this.sheath && Math.random() < 0.5 ? " sheathed," : "";
-	return desc.adj + knotted + sheath + " " + Race.Desc(this.race) + " " + noun;
+	var race = " ";
+	if(this.race == Race.human && Math.random() < 0.1) race += Race.Desc(this.race);
+	if(this.race != Race.human && Math.random() < 0.5) race += Race.Desc(this.race);
+	return desc.adj + knotted + sheath + race + " " + noun;
 }
 // TODO
 Cock.prototype.TipShort = function() {
