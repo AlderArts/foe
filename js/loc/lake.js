@@ -1,28 +1,28 @@
 /*
  * 
- * Forest
+ * Lake
  * 
  */
 
 // Create namespace
-world.loc.Forest = {
-	Outskirts         : new Event("Forest outskirts")
+world.loc.Lake = {
+	Outskirts         : new Event("Lake outskirts")
 }
 
 //
-// Forest
+// Lake
 //
 
-world.loc.Forest.Outskirts.description = function() {
-	Text.AddOutput("You are at the outskirts of a deep forest. With trees and stuff.<br/>");
+world.loc.Lake.Outskirts.description = function() {
+	Text.AddOutput("You are at the outskirts of a deep Lake.<br/>");
 }
 
-world.loc.Forest.Outskirts.enc = new EncounterTable();
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
+world.loc.Lake.Outskirts.enc = new EncounterTable();
+world.loc.Lake.Outskirts.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
 
-		Text.AddOutput("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.");
+		Text.AddOutput("Not having much else to do, you wander the outskirts of the Lake for a few minutes.");
 		Text.Newline();
 		Text.AddOutput(Text.BoldColor("You pick up some fresh grass."));
 		party.inventory.AddItem(Items.FreshGrass);
@@ -31,11 +31,11 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return world.time.season != Season.Winter; });
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
+world.loc.Lake.Outskirts.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
 
-		Text.AddOutput("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.");
+		Text.AddOutput("Not having much else to do, you wander the outskirts of the Lake for a few minutes..");
 		Text.Newline();
 		Text.AddOutput(Text.BoldColor("You pick up a Infernum."));
 		party.inventory.AddItem(Items.Infernum);
@@ -44,11 +44,11 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return world.time.season != Season.Winter; });
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
+world.loc.Lake.Outskirts.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
 
-		Text.AddOutput("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up an odd root. Who knows, could be useful for something.");
+		Text.AddOutput("Not having much else to do, you wander the outskirts of the Lake for a few minutes.");
 		Text.Newline();
 		Text.AddOutput(Text.BoldColor("You pick up a Canis root."));
 		party.inventory.AddItem(Items.CanisRoot);
@@ -59,7 +59,7 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 }, 1.0, function() { return world.time.season != Season.Winter; });
 
 // Temp mothgirl enemy
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
+world.loc.Lake.Outskirts.enc.AddEnc(function() {
  	var enemy = new Party();
 	enemy.AddMember(new Mothgirl());
 	var enc = new Encounter(enemy);
@@ -74,7 +74,7 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 }, 1.0);
 
 // Temp nagagirl enemy
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
+world.loc.Lake.Outskirts.enc.AddEnc(function() {
  	var enemy = new Party();
 	enemy.AddMember(new Nagagirl());
 	var enc = new Encounter(enemy);
@@ -88,7 +88,7 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 	return enc;
 }, 1.0);
 
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
+world.loc.Lake.Outskirts.enc.AddEnc(function() {
  	var enemy = new Party();
 	enemy.AddMember(new FeralWolf(Gender.male));
 	enemy.AddMember(new FeralWolf(Gender.female));
@@ -106,7 +106,7 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 }, 1.0);
 
 
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
+world.loc.Lake.Outskirts.enc.AddEnc(function() {
  	var enemy = new Party();
 	enemy.AddMember(new Imp());
 	enemy.AddMember(new Imp());
@@ -129,7 +129,7 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 
 
 
-world.loc.Forest.Outskirts.links.push(new Link(
+world.loc.Lake.Outskirts.links.push(new Link(
 	"Crossroads", true, true,
 	function() {
 		Text.AddOutput("Behind you is the way back to the crossroads.<br/>");
@@ -139,6 +139,6 @@ world.loc.Forest.Outskirts.links.push(new Link(
 	}
 ));
 
-world.loc.Forest.Outskirts.endDescription = function() {
+world.loc.Lake.Outskirts.endDescription = function() {
 	Text.AddOutput("What do you do?<br/>");
 }

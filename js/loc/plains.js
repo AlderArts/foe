@@ -168,15 +168,20 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
  	var r = Math.random();
  	if(r < 0.2) {
 		enemy.AddMember(new Wildcat(Gender.herm));
+		enemy.AddMember(new Wildcat(Gender.herm));
 		enemy.AddMember(new Wildcat(Gender.male));
 		enemy.AddMember(new Wildcat(Gender.female));
 	}
-	else if(r < 0.4) {
+	else if(r < 0.94) {
 		enemy.AddMember(new Wildcat(Gender.male));
 		enemy.AddMember(new Wildcat(Gender.female));
 		enemy.AddMember(new Wildcat(Gender.female));
+				enemy.AddMember(new Wildcat(Gender.herm));
 		enemy.AddMember(new Wildcat(Gender.female));
 	}
+else if (r < 1) {
+		enemy.AddMember(new Imp());
+}
 	else {
 		enemy.AddMember(new Wildcat(Gender.Rand([3,4,1])));
 		for(var i = 0; i < 3; i++) {
@@ -235,6 +240,17 @@ world.loc.Plains.Crossroads.links.push(new Link(
 		MoveToLocation(world.loc.Forest.Outskirts, {minute: 15});
 	}
 ));
+
+world.loc.Plains.Crossroads.links.push(new Link(
+	"Lake", true, true,
+	function() {
+		Text.AddOutput(" ");
+	},
+	function() {
+		MoveToLocation(world.loc.Lake.Outskirts, {minute: 15});
+	}
+));
+
 world.loc.Plains.Crossroads.links.push(new Link(
 	"Desert", true, true,
 	function() {
