@@ -38,7 +38,7 @@ Scenes.Dreams.Entry = function(func) {
 		Text.Flush();
 		
 		var end = function() {
-			Scenes.Dreams.RavenAfterDream();
+			Scenes.Dreams.RavenAfterDream(ravenTrigger);
 			func(true);
 		}
 		
@@ -51,7 +51,7 @@ Scenes.Dreams.Entry = function(func) {
 		func();
 }
 
-Scenes.Dreams.RavenAfterDream = function() {
+Scenes.Dreams.RavenAfterDream = function(ravenTrigger) {
 	if(ravenTrigger) {
 		var r = ravenmother.Ravenness();
 		if     (r == RavenMother.Stage.ravenstage2) {
@@ -201,7 +201,7 @@ Scenes.Dreams.PredatorPack = function(ravenTrigger) {
 		raven2 : Scenes.Dreams.RavenText(ravenTrigger, "the deer", "the deer", "her")
 	};
 	
-	Text.Add("Paws pound the snow to behind you and to your sides, as you lope through the trees. Your brothers and sisters are fast, but you are faster. You all smell the deer ahead, the distance narrowing as she tires.[raven]", parse);
+	Text.Add("Paws pound the snow behind you and to your sides, as you lope through the trees. Your brothers and sisters are fast, but you are faster. You all smell the deer ahead, the distance narrowing as she tires.[raven]", parse);
 	Text.NL();
 	Text.Add("You hear [raven2] turning and darting out through the treeline. She’s desperate, but clever. Humans live out there. It’s dangerous to chase too far. You bare your teeth, and push harder, your claws pounding through the thin layer of snow and finding purchase in the dirt underneath. There are snarls from your pack, as they try to match your pace, but you’ll have to do this alone.", parse);
 	Text.NL();
