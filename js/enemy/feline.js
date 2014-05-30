@@ -1388,8 +1388,8 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 	}
 	Text.NL();
 	parse["herm"] = cat.mfTrue("", ", gently pressing her boobs against you");
-	parse["tits"] = player.FirstBreastRow().Size() > 3 ? Text.Parse(" massage your [breast] and ", parse) : "";
-	Text.Add("Once the feline deems you ready, [heshe] begins pumping lowly. First at a slow, drawn-out rhythm, but as your juices mix with [hisher] own, [heshe] hastens the pace. [Name] leans over your back[herm]. [HisHer] hands trail along your sides to gently[tits] pinch your [nipsDesc].", parse);
+	parse["tits"] = player.FirstBreastRow().Size() > 3 ? Text.Parse(" massage your [breastDesc] and ", parse) : "";
+	Text.Add("Once the feline deems you ready, [heshe] begins pumping slowly. First at a slow, drawn-out rhythm, but as your juices mix with [hisher] own, [heshe] hastens the pace. [Name] leans over your back[herm]. [HisHer] hands trail along your sides to gently[tits] pinch your [nipsDesc].", parse);
 	Text.NL();
 	parse["dom"] = dom ? "However involuntarily, y" : "Y";
 	Text.Add("You shudder as [heshe] tweaks and plays with you, rewarding [himher] by clenching down on [hisher] cock. You can feel [hisher] bristles inside of you, each fleshy barb dragging against a different point inside of you with each thrust [heshe] makes. The sensation is indescribable, a strange tickling feeling from dozens of points inside of you that only stokes the pleasure of [hisher] thrusts. [dom]ou start to thrust your [buttDesc] back into [hisher] crotch, trying to match [hisher] rhythm, coaxing [himher] to go faster.", parse);
