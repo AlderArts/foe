@@ -1078,6 +1078,8 @@ Scenes.Felines.WinGetBlowjob = function(cat, group, enc) {
 }
 
 Scenes.Felines.LossRegular = function() {
+	SetGameState(GameState.Event);
+	
 	var enc = this;
 	var enemy   = enc.enemy;
 	var group   = enemy.Num() > 1;
@@ -1397,7 +1399,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 			Text.NL();
 			parse["s"] = enc.enemy.Num() > 2 ? "s" : "";
 			parse["comp"] = group ? Text.Parse(", calling [hisher] companion[s] to follow after [himher]", parse) : "";
-			Text.Add("<i>”Mmm, delicious,”</i> [heshe] states, licking [hisher] lips. <i>”I’ll be going now, dear. But I hope to run into you again.”</i> He gives your [buttDesc] a parting kiss and walks away[comp].", parse);
+			Text.Add("<i>”Mmm, delicious,”</i> [heshe] states, licking [hisher] lips. <i>”I’ll be going now, dear. But I hope to run into you again.”</i> [HeShe] gives your [buttDesc] a parting kiss and walks away[comp].", parse);
 			Text.Flush();
 			
 			player.AddLustFraction(-1);
