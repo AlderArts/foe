@@ -135,7 +135,7 @@ Abilities.Black.Bolt.OnAbsorb = function(encounter, caster, target, dmg) {
 }
 Abilities.Black.Bolt.TargetEffect = function(encounter, caster, target) {
 	var parse = { target : target.NameDesc(), has : target.has() };
-	if(Status.Freeze(target, { hit : 0.2, turns : 3, turnsR : 5, proc : 0.25 })) {
+	if(Status.Numb(target, { hit : 0.2, turns : 3, turnsR : 5, proc : 0.25 })) {
 		Text.AddOutput("[target] [has] been afflicted with numb! ", parse);
 	}
 }

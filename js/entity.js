@@ -923,6 +923,9 @@ Entity.prototype.BurnResist = function() {
 Entity.prototype.FreezeResist = function() {
 	return 0;
 }
+Entity.prototype.NumbResist = function() {
+	return 0;
+}
 
 // Should return an array of drops (if any) in the form of {it: Item, num: amount}
 Entity.prototype.DropTable = function() {
