@@ -385,7 +385,7 @@ Encounter.prototype.CombatTick = function() {
 			if(activeChar.entity == player)
 				Text.AddOutput("It's your turn.");
 			else
-				Text.AddOutput(activeChar.entity.name + "s turn.");
+				Text.AddOutput(activeChar.entity.Possessive() + " turn.");
 			Text.Newline();
 		}
 		
