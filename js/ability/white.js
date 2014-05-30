@@ -155,6 +155,55 @@ Abilities.White.Cheer.CastInternal = function(encounter, caster, target) {
 }
 
 
+Abilities.White.Springwind = new Ability();
+Abilities.White.Springwind.name = "Springwind";
+Abilities.White.Springwind.Short = function() { return "I like the smell of fresh cut grass, raises spirit and stamina (doesn't stack)."; }
+Abilities.White.Springwind.targetMode = TargetMode.Party;
+Abilities.White.Springwind.cost = { hp: null, sp: 50, lp: null};
+Abilities.White.Springwind.CastInternal = function(encounter, caster, target) {
+	var parse = {
+		name : caster.name
+	}
+
+	Text.AddOutput("[name] summon[s] the winds of spring. The calming wind soothes everyone!", parse);
+	Text.Newline();
+	
+	for(var i = 0; i < target.members.length; i++) {
+		var e = target.members[i];
+		e.stamina.temp = Math.max(e.stamina.temp, caster.MAttack() / 3);
+		e.spirit.temp = Math.max(e.spirit.temp, caster.MAttack() / 3);
+	}
+	
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
+
+Abilities.White.Minos = new Ability();
+Abilities.White.Minos.name = "Minotaur Sweat";
+Abilities.White.Minos.Short = function() { return "Makes an ally drink a vial of minotaur sweat, increases strength and stamina and lust (doesn't stack)."; }
+Abilities.White.Minos.targetMode = TargetMode.Ally;
+Abilities.White.Minos.cost = { hp: null, sp: 40, lp: null};
+Abilities.White.Minos.CastInternal = function(encounter, caster, target) {
+	target.stamina.temp = Math.max(target.dexterity.temp, caster.MAttack() / 2.9);
+	target.strength.temp = Math.max(target.dexterity.temp, caster.MAttack() / 3);
+	target.libido.temp = Math.max(target.dexterity.temp, caster.MAttack() / 2);
+	var parse = {
+		name : caster.name,
+		hisher : caster.hisher(),
+		tName : target.name
+	}
+
+	// TODO: Make more flavor text
+	Text.AddOutput("[name] place[s] [hisher] hand in [hisher] pocket and reveals a vial that has a picture of a minotaur on it (possibly taken from rosalin's stack of potions), [name] toss[es] the vial to [tName], [tName] looks at the vial then looks at [name] with a lifted eyebrow, [name] force[s] [tName] to drink the vial, [tName] drinks the vial, [tName] feels more powerful and more hornier!", parse);
+	Text.Newline();
+	
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
+
+
 // TODO: Flavor text, status effects
 Abilities.White.Pinpoint = new Ability();
 Abilities.White.Pinpoint.name = "Pinpoint";
@@ -170,7 +219,7 @@ Abilities.White.Pinpoint.CastInternal = function(encounter, caster, target) {
 	}
 
 	// TODO: Make more flavor text
-	Text.AddOutput("[name] casts pinpoint on [tName], making them more limber!", parse);
+	Text.AddOutput("[name] cast[s] pinpoint on [tName], making them more limber!", parse);
 	Text.Newline();
 	
 	Gui.NextPrompt(function() {
@@ -178,6 +227,26 @@ Abilities.White.Pinpoint.CastInternal = function(encounter, caster, target) {
 	});
 }
 
+Abilities.White.Lavaarmor = new Ability();
+Abilities.White.Lavaarmor.name = "Lava armor";
+Abilities.White.Lavaarmor.Short = function() { return "Become engulfed with lava, increases ally strength (doesn't stack)."; }
+Abilities.White.Lavaarmor.targetMode = TargetMode.Ally;
+Abilities.White.Lavaarmor.cost = { hp: null, sp: 30, lp: null};
+Abilities.White.Lavaarmor.CastInternal = function(encounter, caster, target) {
+	target.strength.temp = Math.max(target.strength.temp, caster.MAttack() / 3);
+	
+	var parse = {
+		name : caster.name,
+		tName : target.name
+	}
+
+	Text.AddOutput("A river of lava emerges from the ground and starts engulfing [tName], the lava then hardens and forms an armor around [tName] , making them more stronger!", parse);
+	Text.Newline();
+	
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
 
 /*
  * TODO: Remake into a status effect?
@@ -203,6 +272,95 @@ Abilities.White.Toughen.CastInternal = function(encounter, caster, target) {
 		encounter.CombatTick();
 	});
 }
+
+
+Abilities.White.Charge = new Ability();
+Abilities.White.Charge.name = "Charge";
+Abilities.White.Charge.Short = function() { return "Recharge your ally's batteries, increase ally intelligence  (doesn't stack)."; }
+Abilities.White.Charge.targetMode = TargetMode.Ally;
+Abilities.White.Charge.cost = { hp: null, sp: 50, lp: null};
+Abilities.White.Charge.CastInternal = function(encounter, caster, target) {
+	target.intelligence.temp = Math.max(target.intelligence.temp, caster.MAttack() / 2);
+	
+	var parse = {
+		name : caster.name,
+		heshe : caster.heshe(),
+		hisher : caster.hisher(),
+		tName : target.name
+	}
+
+	Text.AddOutput("[name] approach[es] [tName] and place[s] [hisher] hands on [tName]'s head, [name] release[s] a powerful electrical current through [hisher] hand to [tName]'s head, the shock increased [tName]'s brain activity, making them smarter!", parse);
+	Text.Newline();
+	
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
+
+
+Abilities.White.Bodyofwater = new Ability();
+Abilities.White.Bodyofwater.name = "Body of water";
+Abilities.White.Bodyofwater.Short = function() { return "Moisture is your friend, increases ally stamina (doesn't stack)."; }
+Abilities.White.Bodyofwater.targetMode = TargetMode.Ally;
+Abilities.White.Bodyofwater.cost = { hp: null, sp: 50, lp: null};
+Abilities.White.Bodyofwater.CastInternal = function(encounter, caster, target) {
+	target.stamina.temp = Math.max(target.stamina.temp, caster.MAttack() / 3);
+	
+	var parse = {
+		name : caster.name,
+		tName : target.name
+	}
+
+	Text.AddOutput("Moisture starts gathering around [tName], slowly forming a protective bubble, protecting them from harm!", parse);
+	Text.Newline();
+	
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
+
+
+
+Abilities.White.Purify = new Ability();
+Abilities.White.Purify.name = "Purify";
+Abilities.White.Purify.Short = function() { return "Remove the doubts within your ally. Restore ally SP."; }
+Abilities.White.Purify.targetMode = TargetMode.Ally;
+Abilities.White.Purify.cost = { hp: null, sp: 200, lp: null};
+Abilities.White.Purify.CastInternal = function(encounter, caster, target) {
+	var restore = caster.MAttack() / 4
+	if(restore < 0) restore = 0;
+	restore = Math.floor(restore);
+	
+	var def   = target.MDefense();
+	
+	//var dmg = atkDmg - def;
+	var dmg = this.Damage(restore, def, caster.level, target.level);
+	if(dmg < 0) dmg = 0;
+	dmg = Math.floor(dmg);
+
+	var parse = {
+		name  : caster.NameDesc(),
+		s     : caster.plural() ? "" : "s",
+		s2    : target.plural() ? "" : "s",
+		tName : target.nameDesc(),
+		hisher : target.hisher(),
+		heshe : target.heshe()
+	}
+
+		Text.Newline();
+	{	target.AddSPAbs(+dmg);
+		
+		Text.AddOutput("A beam of light shines in the heavens, it pierces the clouds and descends upon [tName], [hisher] doubts slowly fade away!, [tName] have restored" + Text.BoldColor(dmg, "#000080") + " SP!", parse);
+	}
+	Text.Newline();
+	
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+	}
+
+
+
 
 
 /*
@@ -329,7 +487,7 @@ Abilities.White.Sermon.CastInternal = function(encounter, caster, target) {
 		HeShe : caster.HeShe()
 	}
 	
-	Text.AddOutput("[name] start[s] proselytizing to the enemy party. [HeShe] somehow manage[s] to sound extremely condensending, but immensly boring at the same time!", parse);
+	Text.AddOutput("[name] start[s] proselytizing to the enemy party. [HeShe] somehow manage[s] to sound extremely condensing, but immensely boring at the same time!", parse);
 
 	for(var i = 0; i < target.length; i++) {
 		var e      = target[i];
