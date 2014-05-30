@@ -43,32 +43,29 @@ Scenes.Felines = {};
 function Wildcat(gender) {
 	Entity.call(this);
 	
+	this.monsterName       = "the wildcat";
+	this.MonsterName       = "The wildcat";
+		
 	if(gender == Gender.male) {
 		this.avatar.combat     = Images.wildcat_male;
-		this.name              = "Wildcat";
-		this.monsterName       = "the wildcat";
-		this.MonsterName       = "The wildcat";
+		this.name              = "Wildcat(M)";
 		this.body.DefMale();
 	}
 	else if(gender == Gender.female) {
 		this.avatar.combat     = Images.wildcat_fem;
-		this.name              = "Wildcat";
-		this.monsterName       = "the wildcat";
-		this.MonsterName       = "The wildcat";
+		this.name              = "Wildcat(F)";
 		this.body.DefFemale();
 		if(Math.random() < 0.8)
 			this.FirstVag().virgin = false;
 	}
 	else {
 		this.avatar.combat     = Images.wildcat_fem;
-		this.name              = "Wildcat";
-		this.monsterName       = "the wildcat";
-		this.MonsterName       = "The wildcat";
+		this.name              = "Wildcat(H)";
 		this.body.DefHerm(true);
 		if(Math.random() < 0.6)
 			this.FirstVag().virgin = false;
 	}
-	this.desc = "large wildcat";
+	this.desc      = "large wildcat";
 	this.GroupName = "The wildcats";
 	this.groupName = "the wildcats";
 	
@@ -106,17 +103,106 @@ Wildcat.prototype.constructor = Wildcat;
 Wildcat.prototype.DropTable = Feline.DropTable;
 Wildcat.prototype.Act = Feline.Act;
 
+function Puma(gender) {
+	Wildcat.call(this, gender);
+	
+	this.monsterName = "the puma";
+	this.MonsterName = "The puma";
+	this.desc        = "lithe puma";
+	this.GroupName   = "The pumas";
+	this.groupName   = "the pumas";
+	
+	if(gender == Gender.male) {
+		this.avatar.combat = Images.puma_male;
+		this.name          = "Puma(M)";
+	}
+	else if(gender == Gender.female) {
+		this.avatar.combat = Images.puma_fem;
+		this.name          = "Puma(F)";
+	}
+	else {
+		this.avatar.combat = Images.puma_fem;
+		this.name          = "Puma(H)";
+	}
+}
+Puma.prototype = new Wildcat();
+Puma.prototype.constructor = Puma;
+
+function Jaguar(gender) {
+	Wildcat.call(this, gender);
+	
+	this.monsterName = "the jaguar";
+	this.MonsterName = "The jaguar";
+	this.desc        = "swift jaguar";
+	this.GroupName   = "The jaguars";
+	this.groupName   = "the jaguars";
+	
+	if(gender == Gender.male) {
+		this.avatar.combat = Images.jaguar_male;
+		this.name          = "Jaguar(M)";
+	}
+	else if(gender == Gender.female) {
+		this.avatar.combat = Images.jaguar_fem;
+		this.name          = "Jaguar(F)";
+	}
+	else {
+		this.avatar.combat = Images.jaguar_fem;
+		this.name          = "Jaguar(H)";
+	}
+}
+Jaguar.prototype = new Wildcat();
+Jaguar.prototype.constructor = Jaguar;
+
+function Lynx(gender) {
+	Wildcat.call(this, gender);
+	
+	this.monsterName = "the lynx";
+	this.MonsterName = "The lynx";
+	this.desc        = "proud lynx";
+	this.GroupName   = "The lynx";
+	this.groupName   = "the lynx";
+	
+	if(gender == Gender.male) {
+		this.avatar.combat = Images.lynx_male;
+		this.name          = "Lynx(M)";
+	}
+	else if(gender == Gender.female) {
+		this.avatar.combat = Images.lynx_fem;
+		this.name          = "Lynx(F)";
+	}
+	else {
+		this.avatar.combat = Images.lynx_fem;
+		this.name          = "Lynx(H)";
+	}
+}
+Lynx.prototype = new Wildcat();
+Lynx.prototype.constructor = Lynx;
 
 // TODO
 function Lion(gender) {
-	Entity.call(this);
+	Wildcat.call(this, gender);
 	
-	this.desc = "hulking lion";
-	this.GroupName = "The lions";
-	this.groupName = "the lions";
+	this.monsterName = "the lion";
+	this.MonsterName = "The lion";
+	this.desc        = "hulking lion";
+	this.GroupName   = "The lions";
+	this.groupName   = "the lions";
 	this.isLion = true;
+	
+	if(gender == Gender.male) {
+		//this.avatar.combat = Images.lion_male;
+		this.name          = "Lion(M)";
+	}
+	else if(gender == Gender.female) {
+		//this.avatar.combat = Images.lion_fem;
+		this.name          = "Lion(F)";
+	}
+	else {
+		//this.avatar.combat = Images.lion_fem;
+		this.name          = "Lion(H)";
+	}
 }
-Lion.prototype = new Entity();
+Lion.prototype = new Wildcat();
 Lion.prototype.constructor = Lion;
 
 

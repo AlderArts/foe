@@ -199,6 +199,114 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	return enc;
 }, 1.0);
 
+world.loc.Plains.Crossroads.enc.AddEnc(function() {
+ 	var enemy = new Party();
+ 	var r = Math.random();
+ 	if(r < 0.2) {
+		enemy.AddMember(new Puma(Gender.herm));
+		enemy.AddMember(new Puma(Gender.male));
+		enemy.AddMember(new Puma(Gender.female));
+	}
+	else if(r < 0.4) {
+		enemy.AddMember(new Puma(Gender.male));
+		enemy.AddMember(new Puma(Gender.female));
+		enemy.AddMember(new Puma(Gender.female));
+		enemy.AddMember(new Puma(Gender.female));
+	}
+	else {
+		enemy.AddMember(new Puma(Gender.Rand([3,4,1])));
+		for(var i = 0; i < 3; i++) {
+			if(Math.random() < 0.2)
+				enemy.AddMember(new Puma(Gender.Rand([3,4,1])));
+		}
+	}
+	var enc = new Encounter(enemy);
+	
+	enc.onEncounter = Scenes.Felines.Intro;
+	enc.onVictory   = Scenes.Felines.WinPrompt;
+	enc.onLoss      = Scenes.Felines.LossRegular;
+	/*
+	enc.canRun = false;
+	enc.onEncounter = ...
+	enc.onLoss = ...
+	enc.onVictory = ...
+	enc.VictoryCondition = ...
+	*/
+	return enc;
+}, 1.0);
+
+world.loc.Plains.Crossroads.enc.AddEnc(function() {
+ 	var enemy = new Party();
+ 	var r = Math.random();
+ 	if(r < 0.2) {
+		enemy.AddMember(new Jaguar(Gender.herm));
+		enemy.AddMember(new Jaguar(Gender.male));
+		enemy.AddMember(new Jaguar(Gender.female));
+	}
+	else if(r < 0.4) {
+		enemy.AddMember(new Jaguar(Gender.male));
+		enemy.AddMember(new Jaguar(Gender.female));
+		enemy.AddMember(new Jaguar(Gender.female));
+		enemy.AddMember(new Jaguar(Gender.female));
+	}
+	else {
+		enemy.AddMember(new Jaguar(Gender.Rand([3,4,1])));
+		for(var i = 0; i < 3; i++) {
+			if(Math.random() < 0.2)
+				enemy.AddMember(new Jaguar(Gender.Rand([3,4,1])));
+		}
+	}
+	var enc = new Encounter(enemy);
+	
+	enc.onEncounter = Scenes.Felines.Intro;
+	enc.onVictory   = Scenes.Felines.WinPrompt;
+	enc.onLoss      = Scenes.Felines.LossRegular;
+	/*
+	enc.canRun = false;
+	enc.onEncounter = ...
+	enc.onLoss = ...
+	enc.onVictory = ...
+	enc.VictoryCondition = ...
+	*/
+	return enc;
+}, 1.0);
+
+world.loc.Plains.Crossroads.enc.AddEnc(function() {
+ 	var enemy = new Party();
+ 	var r = Math.random();
+ 	if(r < 0.2) {
+		enemy.AddMember(new Lynx(Gender.herm));
+		enemy.AddMember(new Lynx(Gender.male));
+		enemy.AddMember(new Lynx(Gender.female));
+	}
+	else if(r < 0.4) {
+		enemy.AddMember(new Lynx(Gender.male));
+		enemy.AddMember(new Lynx(Gender.female));
+		enemy.AddMember(new Lynx(Gender.female));
+		enemy.AddMember(new Lynx(Gender.female));
+	}
+	else {
+		enemy.AddMember(new Lynx(Gender.Rand([3,4,1])));
+		for(var i = 0; i < 3; i++) {
+			if(Math.random() < 0.2)
+				enemy.AddMember(new Lynx(Gender.Rand([3,4,1])));
+		}
+	}
+	var enc = new Encounter(enemy);
+	
+	enc.onEncounter = Scenes.Felines.Intro;
+	enc.onVictory   = Scenes.Felines.WinPrompt;
+	enc.onLoss      = Scenes.Felines.LossRegular;
+	/*
+	enc.canRun = false;
+	enc.onEncounter = ...
+	enc.onLoss = ...
+	enc.onVictory = ...
+	enc.VictoryCondition = ...
+	*/
+	return enc;
+}, 1.0);
+
 world.loc.Plains.Crossroads.links.push(new Link(
 	"Nomads", true, true,
 	function() {
