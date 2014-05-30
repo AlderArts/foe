@@ -152,6 +152,7 @@ Scenes.Felines.IntroRegular = function() {
 		heshe      : group ? "they" : mainCat.heshe(),
 		HisHer     : group ? "Their" : mainCat.HisHer(),
 		hisher     : group ? "their" : mainCat.hisher(),
+		m1Name     : mainCat.NameDesc(),
 		m1name     : mainCat.nameDesc(),
 		m1HeShe    : mainCat.HeShe(),
 		m1heshe    : mainCat.heshe(),
@@ -163,7 +164,7 @@ Scenes.Felines.IntroRegular = function() {
 		GroupName  : mainCat.GroupName,
 		groupName  : mainCat.groupName
 	};
-	parse["Oneof"] = group ? Text.Parse("One of [groupName]", parse) : parse["GroupName"];
+	parse["Oneof"] = group ? Text.Parse("One of [groupName]", parse) : parse["m1Name"];
 	parse["selfSelves"] = party.Alone() ? "self" : "selves";
 	parse["grp"] = group ? ", shifting uncomfortably as your foes spread out, trying to surround you" : "";
 	
@@ -1301,7 +1302,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 	}
 	Text.NL();
 	parse["herm"] = cat.mfTrue("", ", gently pressing her boobs against you");
-	parse["tits"] = player.FirstBreastRow().Size() > 3 ? Text.Parse(" massage your [breastDesc] and ", parse) : "";
+	parse["tits"] = player.FirstBreastRow().Size() > 3 ? Text.Parse(" massage your [breast] and ", parse) : "";
 	Text.Add("Once the feline deems you ready, [heshe] begins pumping lowly. First at a slow, drawn-out rhythm, but as your juices mix with [hisher] own, [heshe] hastens the pace. [Name] leans over your back[herm]. [HisHer] hands trail along your sides to gently[tits] pinch your [nipsDesc].", parse);
 	Text.NL();
 	parse["dom"] = dom ? "However involuntarily, y" : "Y";
