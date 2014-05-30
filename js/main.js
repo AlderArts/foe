@@ -121,11 +121,11 @@ function Render() {
 }
 
 function Setup() {
-    // Intialize GUI (set key shortcuts, buttons etc)
-    Gui.Init();
-    
     // Load assets
     LoadImages();
+    
+    // Intialize GUI (set key shortcuts, buttons etc)
+    Gui.Init();
     
     Render();
 }

@@ -53,18 +53,25 @@ function StatusList() {
 	this.stats = [];
 }
 
+StatusList.NumStatus = 6;
+
 StatusList.prototype.Clear = function() {
 	for(var i = 0; i < StatusEffect.LAST; i++)
 		this.stats[i] = null;
 }
 
-StatusList.prototype.Render = function(context) {
-	var xOffset = 5;
+StatusList.prototype.Render = function(obj) {
+	var j = 0;
+	
 	for(var i = 0; i < StatusEffect.LAST; i++) {
 		if(this.stats[i]) {
-			context.drawImage(Images.status[i], xOffset, 70);
-			xOffset += 16;
+			if(Images.status[i]) obj[j].attr({src: Images.status[i]});
+			j++;
 		}
+	}
+	
+	for(; j < StatusList.NumStatus; j++) {
+		obj[j].hide();
 	}
 }
 

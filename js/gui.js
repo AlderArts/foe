@@ -202,14 +202,16 @@ Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty) {
 	
 	var glowColor = (isParty) ? "green" : "red";
 	
-	var charSet = Gui.canvas.set();
-	var portrait = Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100);
+	var charSet   = Gui.canvas.set();
+	var statusSet = Gui.canvas.set();
+	var portrait  = Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100);
 	var local = {
 		xoffset : xoffset,
 		yoffset : yoffset,
 		portrait: portrait,
 		name    : {},
 		lvl     : {},
+		status  : [],
 		glow    : portrait.glow({opacity: 1, color: glowColor}),
 		hpBack  : Gui.canvas.rect(xoffset+barStart, yoffset+10, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#000"}),
 		hpBar   : Gui.canvas.rect(xoffset+barStart, yoffset+10, barWidth, barHeigth).attr({fill: "#f00"}),
@@ -222,6 +224,11 @@ Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty) {
 		lpStr   : Gui.canvas.text(xoffset+barStart+barWidth-5+2*barOffsetX, yoffset+25+2*barOffsetY, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT})
 	};
 	
+	for(var i = 0; i < StatusList.NumStatus; i++) {
+		local.status[i] = Gui.canvas.image(Images.status[StatusEffect.Burn], xoffset + 16*i + 2, yoffset + 70, 15, 15);
+		statusSet.push(local.status[i]);
+	}
+	
 	charSet.push(local.portrait);
 	charSet.push(local.glow);
 	charSet.push(local.hpBack);
@@ -233,6 +240,7 @@ Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty) {
 	charSet.push(local.lpBack);
 	charSet.push(local.lpBar);
 	charSet.push(local.lpStr);
+	charSet.push(statusSet);
 	set.push(charSet);
 	obj.push(local);
 }
@@ -533,8 +541,8 @@ Gui.RenderParty = function(p, set, obj, max) {
 	var i = 0;
 	for(; i < p.Num() && i < max; ++i) {
 		var c = p.Get(i);
-		Gui.RenderEntity(c, set[i], obj[i]);
 		set[i].show();
+		Gui.RenderEntity(c, set[i], obj[i]);
 		if(c != currentActiveChar)
 			obj[i].glow.hide();
 	}
@@ -592,6 +600,8 @@ Gui.RenderEntity = function(entity, set, obj) {
 	Gui.PrintGlow(set, obj.lvl, obj.xoffset-3, obj.yoffset+96, levelText, Gui.fonts.Kimberley, 14, "start", {opacity: 1, width: 5});
 	
 	obj.lvl.text.attr({fill: entity.pendingStatPoints > 0 ? "green" : "white"});
+	
+	entity.combatStatus.Render(obj.status);
 }
 
 Gui.RenderLocation = function() {
