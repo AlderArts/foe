@@ -20,6 +20,8 @@ CreditsScreen = function() {
 	Text.AddOutput("Silken Delights & Fera: Resar<br/>");
 	Text.AddOutput("Outlaws: Derp wolf<br/>");
 	Text.AddOutput("Rosalin cock worship scene: Fenoxo<br/>");
+	Text.AddOutput("Dreams & ravens: About half of them, Del<br/>");
+	Text.AddOutput("Cats loss scenes: LukaDoc and QuietBrowser<br/>");
 	
 	Text.Newline();
 	

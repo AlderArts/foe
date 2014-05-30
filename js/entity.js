@@ -1286,7 +1286,7 @@ Sex.Preg = function(father, mother, num) {
 
 Entity.prototype.Sexed = function() {
 	for(var flag in this.sex)
-		if(this.sex[flag] != 0) return true;
+		if(this.sex[flag] != 0)
 	return false;
 }
 
@@ -1437,6 +1437,12 @@ Entity.prototype.Back = function() {
 Entity.prototype.HasTail = function() {
 	for(var i = 0; i < this.body.backSlots.length; i++)
 		if(this.body.backSlots[i].type == AppendageType.tail)
+			return this.body.backSlots[i];
+	return null;
+}
+Entity.prototype.HasWings = function() {
+	for(var i = 0; i < this.body.backSlots.length; i++)
+		if(this.body.backSlots[i].type == AppendageType.wing)
 			return this.body.backSlots[i];
 	return null;
 }

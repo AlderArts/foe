@@ -187,7 +187,8 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	var enc = new Encounter(enemy);
 	
 	enc.onEncounter = Scenes.Felines.Intro;
-	enc.onVictory = Scenes.Felines.WinPrompt;
+	enc.onVictory   = Scenes.Felines.WinPrompt;
+	enc.onLoss      = Scenes.Felines.LossRegular;
 	/*
 	enc.canRun = false;
 	enc.onEncounter = ...
