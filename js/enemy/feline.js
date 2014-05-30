@@ -1140,7 +1140,7 @@ Scenes.Felines.LossRegular = function() {
 	var scenes = new EncounterTable();
 	if(male) {
 		scenes.AddEnc(function() {
-			Scenes.Felines.LossCatchVaginal(male, group, enc);
+			return Scenes.Felines.LossCatchVaginal(male, group, enc);
 		}, 1.0, function() { return player.FirstVag(); });
 	}
 	/*
@@ -1153,7 +1153,7 @@ Scenes.Felines.LossRegular = function() {
 	*/
 	if(herm) {
 		scenes.AddEnc(function() {
-			Scenes.Felines.LossCatchVaginal(herm, group, enc);
+			return Scenes.Felines.LossCatchVaginal(herm, group, enc);
 		}, 1.0, function() { return player.FirstVag(); });
 	}
 	
@@ -1176,6 +1176,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 		hisher   : cat.hisher(),
 		himher   : cat.himher(),
 		manherm  : cat.mfTrue("man", "herm"),
+		maleherm : cat.mfTrue("male", "herm"),
 		Possessive  : cat.Possessive(),
 		possessive  : cat.possessive(),
 		cockDesc    : function() { return player.FirstCock().Short(); },
@@ -1188,8 +1189,10 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 		legsDesc    : function() { return player.LegsDesc(); },
 		tailDesc    : function() { return player.HasTail().Short(); },
 		wingDesc    : function() { return player.HasWings().Short(); },
+		hair        : function() { return player.Hair().Short(); },
 		skin        : function() { return player.SkinDesc(); },
 		breastDesc  : function() { return player.FirstBreastRow().Short(); },
+		nipsDesc    : function() { return player.FirstBreastRow().NipsShort(); },
 		ballsDesc   : function() { return player.BallsDesc(); },
 		buttDesc    : function() { return player.Butt().Short(); },
 		vagDesc     : function() { return player.FirstVag() ? player.FirstVag().Short() : "crotch"; }
@@ -1262,7 +1265,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 	Text.NL();
 	var tail = player.HasTail();
 	parse["tail"] = tail ? "and gently stroking your [tailDesc] with the other" : "";
-	Text.Add("[Name] approaches you from behind, laying a hand on your [hips] [tail]. Without saying a word [heshe] leans forward to kiss your lower back, trailing soft pecks along your spine as [heshe] simultaneously aligns [himher]self with your [vagDesc].", parse);
+	Text.Add("[Name] approaches you from behind, laying a hand on your [hipsDesc] [tail]. Without saying a word [heshe] leans forward to kiss your lower back, trailing soft pecks along your spine as [heshe] simultaneously aligns [himher]self with your [vagDesc].", parse);
 	Text.NL();
 	parse["bitingbackUttering"] = dom > 0 ? "biting back" : "uttering";
 	Text.Add("Involuntarily you arch your back, [bitingbackUttering] a moan of desire as you feel [hisher] feather-light touch dancing down your back. You're intimately aware of the warmth of [hisher] cock as it hovers temptingly just outside your [vagDesc], and you feel the ache for [himher] to start claiming you well inside your stomach.", parse);
@@ -1297,7 +1300,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 	Text.NL();
 	parse["herm"] = cat.mfTrue("", ", gently pressing her boobs against you");
 	parse["tits"] = player.FirstBreastRow().Size() > 3 ? Text.Parse(" massage your [breasts] and ", parse) : "";
-	Text.Add("Once the feline deems you ready, [heshe] begins pumping lowly. First at a slow, drawn-out rhythm, but as your juices mix with [hisher] own, [heshe] hastens the pace. [Name] leans over your back[herm]. [HisHer] hands trail along your sides to gently[tits] pinch your [nipples].", parse);
+	Text.Add("Once the feline deems you ready, [heshe] begins pumping lowly. First at a slow, drawn-out rhythm, but as your juices mix with [hisher] own, [heshe] hastens the pace. [Name] leans over your back[herm]. [HisHer] hands trail along your sides to gently[tits] pinch your [nipsDesc].", parse);
 	Text.NL();
 	parse["dom"] = dom ? "However involuntarily, y" : "Y";
 	Text.Add("You shudder as [heshe] tweaks and plays with you, rewarding [himher] by clenching down on [hisher] cock. You can feel [hisher] bristles inside of you, each fleshy barb dragging against a different point inside of you with each thrust [heshe] makes. The sensation is indescribable, a strange tickling feeling from dozens of points inside of you that only stokes the pleasure of [hisher] thrusts. [dom]ou start to thrust your [buttDesc] back into [hisher] crotch, trying to match [hisher] rhythm, coaxing [himher] to go faster.", parse);
@@ -1358,7 +1361,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 				Text.NL();
 				Text.Add("<i>”A sweet thing like you? Of course you will,”</i> [heshe] purrs.", parse);
 				Text.NL();
-				parse["tail"] = player.HasTail() ? player.HasTail().Short() : "butt".
+				parse["tail"] = player.HasTail() ? player.HasTail().Short() : "butt";
 				Text.Add("The two of you stay locked in this position for a moment longer before [heshe] finally announces, <i>“I’m sorry, my dear. But I can’t stay with you.”</i> [HeShe] extracts [himher]self from your used [vagDesc] and gently pats you on your [tail].", parse);
 			}
 			Text.NL();
