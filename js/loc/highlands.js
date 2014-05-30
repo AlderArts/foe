@@ -36,6 +36,80 @@ world.loc.Highlands.Hills.links.push(new Link(
 	}
 ));
 
+world.loc.Highlands.Hills.enc = new EncounterTable();
+
+world.loc.Highlands.Hills.enc.AddEnc(function() {
+ 	var enemy = new Party();
+ 	var r = Math.random();
+ 	if(r < 0.2) {
+		enemy.AddMember(new Puma(Gender.herm));
+		enemy.AddMember(new Puma(Gender.male));
+		enemy.AddMember(new Puma(Gender.female));
+	}
+	else if(r < 0.4) {
+		enemy.AddMember(new Puma(Gender.male));
+		enemy.AddMember(new Puma(Gender.female));
+		enemy.AddMember(new Puma(Gender.female));
+		enemy.AddMember(new Puma(Gender.female));
+	}
+	else {
+		enemy.AddMember(new Puma(Gender.Rand([3,4,1])));
+		for(var i = 0; i < 3; i++) {
+			if(Math.random() < 0.2)
+				enemy.AddMember(new Puma(Gender.Rand([3,4,1])));
+		}
+	}
+	var enc = new Encounter(enemy);
+	
+	enc.onEncounter = Scenes.Felines.Intro;
+	enc.onVictory   = Scenes.Felines.WinPrompt;
+	enc.onLoss      = Scenes.Felines.LossRegular;
+	/*
+	enc.canRun = false;
+	enc.onEncounter = ...
+	enc.onLoss = ...
+	enc.onVictory = ...
+	enc.VictoryCondition = ...
+	*/
+	return enc;
+}, 1.0);
+
+world.loc.Highlands.Hills.enc.AddEnc(function() {
+ 	var enemy = new Party();
+ 	var r = Math.random();
+ 	if(r < 0.2) {
+		enemy.AddMember(new Lynx(Gender.herm));
+		enemy.AddMember(new Lynx(Gender.male));
+		enemy.AddMember(new Lynx(Gender.female));
+	}
+	else if(r < 0.4) {
+		enemy.AddMember(new Lynx(Gender.male));
+		enemy.AddMember(new Lynx(Gender.female));
+		enemy.AddMember(new Lynx(Gender.female));
+		enemy.AddMember(new Lynx(Gender.female));
+	}
+	else {
+		enemy.AddMember(new Lynx(Gender.Rand([3,4,1])));
+		for(var i = 0; i < 3; i++) {
+			if(Math.random() < 0.2)
+				enemy.AddMember(new Lynx(Gender.Rand([3,4,1])));
+		}
+	}
+	var enc = new Encounter(enemy);
+	
+	enc.onEncounter = Scenes.Felines.Intro;
+	enc.onVictory   = Scenes.Felines.WinPrompt;
+	enc.onLoss      = Scenes.Felines.LossRegular;
+	/*
+	enc.canRun = false;
+	enc.onEncounter = ...
+	enc.onLoss = ...
+	enc.onVictory = ...
+	enc.VictoryCondition = ...
+	*/
+	return enc;
+}, 1.0);
+
 world.loc.Highlands.Hills.endDescription = function() {
 	Text.AddOutput("What do you do?<br/>");
 }
