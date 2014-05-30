@@ -1301,7 +1301,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 	}
 	Text.NL();
 	parse["herm"] = cat.mfTrue("", ", gently pressing her boobs against you");
-	parse["tits"] = player.FirstBreastRow().Size() > 3 ? Text.Parse(" massage your [breasts] and ", parse) : "";
+	parse["tits"] = player.FirstBreastRow().Size() > 3 ? Text.Parse(" massage your [breastDesc] and ", parse) : "";
 	Text.Add("Once the feline deems you ready, [heshe] begins pumping lowly. First at a slow, drawn-out rhythm, but as your juices mix with [hisher] own, [heshe] hastens the pace. [Name] leans over your back[herm]. [HisHer] hands trail along your sides to gently[tits] pinch your [nipsDesc].", parse);
 	Text.NL();
 	parse["dom"] = dom ? "However involuntarily, y" : "Y";
