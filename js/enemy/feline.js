@@ -399,7 +399,7 @@ Scenes.Felines.WinPrompt = function() {
 		if(cocksInVag.length > 0) {
 			options.push({ nameStr : "Fuck vag(F)",
 				func : function() {
-					Scenes.Felines.WinFuckVag(female, group, enc, cocksInVag);
+					Scenes.Felines.WinFuckVag(female, group, enc, cocksInVag, numFemales);
 				}, enabled : cocksInVag,
 				tooltip : "Get some pussy."
 			});
@@ -448,7 +448,7 @@ Scenes.Felines.WinPrompt = function() {
 		if(cocksInVag.length > 0) {
 			options.push({ nameStr : "Fuck vag(H)",
 				func : function() {
-					Scenes.Felines.WinFuckVag(herm, group, enc, cocksInVag);
+					Scenes.Felines.WinFuckVag(herm, group, enc, cocksInVag, numHerms);
 				}, enabled : true,
 				tooltip : "Get some pussy."
 			});
@@ -491,11 +491,11 @@ Scenes.Felines.WinPrompt = function() {
 	Gui.SetButtonsFromList(options);
 }
 
-Scenes.Felines.WinFuckVag = function(cat, group, enc, cocks) {
+Scenes.Felines.WinFuckVag = function(cat, group, enc, cocks, numFemales) {
 	var pCock = cocks[0];
 	
 	var parse = {
-		Name     : cat.nameDesc(),
+		Name     : cat.NameDesc(),
 		name     : cat.nameDesc(),
 		HeShe    : cat.HeShe(),
 		heshe    : cat.heshe(),
@@ -522,9 +522,12 @@ Scenes.Felines.WinFuckVag = function(cat, group, enc, cocks) {
 		var tmpParse = {
 			hisher       : group ? "their" : enc.enemy.Get(1).hisher(),
 			s            : num > 1 ? "s" : "",
-			notS         : num > 1 ? "s" : ""
+			notS         : num > 1 ? "s" : "",
+			oneof        : numFemales > 1 ? " one of" : "",
+			s2           : numFemales > 1 ? "s" : "",
+			herm         : cat.FirstCock() ? "herm" : "female"
 		}
-		Text.Add("You pick out one of the females in particular, sauntering over to her. The other feline[s] keep[notS] [hisher] distance, but seem[notS] intent on watching whatever you are about to do.", tmpParse);
+		Text.Add("You pick out[oneof] the [herm][s2] in particular, sauntering over to her. The other feline[s] keep[notS] [hisher] distance, but seem[notS] intent on watching whatever you are about to do.", tmpParse);
 		Text.NL();
 	}
 	Text.Add("The she-cat whines pitifully, acknowledging her defeat as you loom over her. Her lower lips are moist and ready for you, and she looks like she knows what is coming, spreading her legs slightly and looking at you expectantly.", parse);
@@ -738,7 +741,7 @@ Scenes.Felines.WinFuckButt = function(cat, group, enc, cocks) {
 	var parse = {
 		oneof    : group ? " one of" : "",
 		s        : group ? "s" : "",
-		Name     : cat.nameDesc(),
+		Name     : cat.NameDesc(),
 		name     : cat.nameDesc(),
 		HeShe    : cat.HeShe(),
 		heshe    : cat.heshe(),
@@ -988,7 +991,7 @@ Scenes.Felines.WinGetBlowjob = function(cat, group, enc) {
 	var parse = {
 		oneof    : group ? " one of" : "",
 		s        : group ? "s" : "",
-		Name     : cat.nameDesc(),
+		Name     : cat.NameDesc(),
 		name     : cat.nameDesc(),
 		HeShe    : cat.HeShe(),
 		heshe    : cat.heshe(),
@@ -1257,7 +1260,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 	var parse = {
 		oneof    : group ? " one of" : "",
 		s        : group ? "s" : "",
-		Name     : cat.nameDesc(),
+		Name     : cat.NameDesc(),
 		name     : cat.nameDesc(),
 		HeShe    : cat.HeShe(),
 		heshe    : cat.heshe(),
