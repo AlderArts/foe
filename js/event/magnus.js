@@ -110,7 +110,7 @@ Scenes.Magnus.Interact = function() {
 						Text.Add("<i>”Ah, there isn’t really much to tell,”</i> the young man scratches his scraggly attempt at a beard thoughtfully. ", parse);
 					}
 					
-					Text.Add("<i>”Ah, there isn’t really much to tell,”</i> the young man scratches his scraggly attempt at a beard thoughtfully. <i>”I come from the other side of Eden, beyond the mountains. The power of the kingdom doesn’t reach there, and there are a number of free cities that govern themselves.”</i>", parse);
+					Text.Add("<i>”I come from the other side of Eden, beyond the mountains. The power of the kingdom doesn’t reach there, and there are a number of free cities that govern themselves.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>”The largest center of study on Eden is found there, the Academy of Higher Arts. Though they study all sorts of subjects, my interest has always been in magic. It is such a fickle and playful force, yet more powerful than anything you could imagine if wielded correctly.”</i>", parse);
 					Text.NL();
@@ -118,7 +118,7 @@ Scenes.Magnus.Interact = function() {
 					Text.NL();
 					Text.Add("<i>”But alas, one day I was not welcome at the academy anymore.”</i> Magnus sighs to himself, despairing at the unfair nature of the world. <i>”I couldn’t even get a rational statement out of my teachers, they just chucked me out on the street and told me to never come back. They seemed almost… afraid. I’m not sure why, I mostly studied and meditated, never harmed a fly.”</i> The apprentice shrugs and gestures to the old tome he is currently reading.", parse);
 					Text.NL();
-					Text.Add("<i>”This and a few others were books I had borrowed from the library. Since they didn’t seem to want them back, I bought them with me to further my studies. For every page I read, I feel like I know less and less about how the world really works.”</i>", parse);
+					Text.Add("<i>”This and a few others were books I had borrowed from the library. Since they didn’t seem to want them back, I brought them with me to further my studies. For every page I read, I feel like I know less and less about how the world really works.”</i>", parse);
 					Text.NL();
 					Text.Add("Him bringing it up seems to have rekindled his drive for learning. Magnus dives back down into his book, poring over the strange symbols, having seemingly forgotten about you.", parse);
 					Text.Flush();
