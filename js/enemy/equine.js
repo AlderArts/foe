@@ -427,7 +427,7 @@ Scenes.Equine.GetFucked = function(enc) {
 		Text.Newline();
 		Text.AddOutput("Failing miserably at holding up to his methods, you cry out as your [vagDesc] clamps against his tongue, shooting girl-cum onto his muzzle. You swallow his tip and a few inches beyond that, furiously jerking the rest of his horse cock. Feeling the release come through the large rod, cum floods your mouth. At first, you try to gulp down his slightly sweet release, but it comes far too quick for that. You release his cock from your lips and the shaft shoots several ropes onto your expression, even on your chest. The immediate aftermath of your climax only makes you lustfully open your mouth for the falling seed.", parse);
 		Text.Newline();
-		Text.AddOutput("After a minute or so, you and the equine lazily get to your feet, clean up, redress, and head your different paths. When you pay more attention, you notice that the mare seems to be gone.", parse);
+		Text.AddOutput("After a minute or so, you and the equine lazily get to your feet, clean up, dress, and head your different paths. When you pay more attention, you notice that the mare seems to be gone.", parse);
 		if(!party.Alone())
 			Text.AddOutput(" Your party eventually meets you on the path, and when you ask them where they were, they seem unwilling to tell you. You suspect the mare had something to do with that!", parse);
 			

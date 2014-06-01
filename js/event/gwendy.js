@@ -1114,7 +1114,7 @@ Scenes.Gwendy.ChallengeSexBody = function(titjob, hangout) {
 		world.TimeStep({minute: 30});
 		
 		if(!hangout) {
-			Text.Add("As her body recovers from nearly orgasming, you tease her while redressing, saying she's even more of a slut than you figured. She starts to voice a complaint, but you remind her of the pants and moans she made while you kissed and touched her, saying only a slut could get off to that. Before she can say anything in her defense you leave, glad her fiery attitude is still alive. A challenge is what you live for, right?", parse);
+			Text.Add("As her body recovers from nearly orgasming, you tease her while she gets dressed, saying she's even more of a slut than you figured. She starts to voice a complaint, but you remind her of the pants and moans she made while you kissed and touched her, saying only a slut could get off to that. Before she can say anything in her defense you leave, glad her fiery attitude is still alive. A challenge is what you live for, right?", parse);
 			Text.Flush();
 			Gui.NextPrompt();
 		}
