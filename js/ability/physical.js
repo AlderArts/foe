@@ -160,13 +160,13 @@ Abilities.Physical.Pierce.OnCast = function(encounter, caster, target) {
 
 Abilities.Physical.Rrocket = new AttackPhysical();
 Abilities.Physical.Rrocket.name = "Rock Rocket";
-Abilities.Physical.Rrocket.Short = function() { return "I kick this rock and you catch it with your face, hits a single enemy."; }
+Abilities.Physical.Rrocket.Short = function() { return "Kick a large boulder into an enemy's face, hits a single enemy."; }
 Abilities.Physical.Rrocket.cost = { hp: null, sp: 50, lp: null};
 Abilities.Physical.Rrocket.atkMod = 1.9;
 Abilities.Physical.Rrocket.damageType.pBlunt = 1.2;
 Abilities.Physical.Rrocket.OnCast = function(encounter, caster, target) {
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("[name] thrust[s] [hisher] hands into the ground, pulling out a large boulder. [name] toss[es] the large boulder into the air, [name] position[s] [himher]self as the large boulder falls to the ground, before the large boulder hits the ground, [name] pull[s] [hisher] foot back and kick[s] the boulder with all [hisher] might, sending the boulder speeding towards [tName]!", parse);
+	Text.AddOutput("[name] thrust[s] [hisher] hands into the ground, pulling out a large boulder. [name] toss[es] the large boulder into the air. As the large boulder falls to the ground, [name] jump[s] into the air and kick[s] the boulder with all [hisher] might, sending the boulder speeding towards [tName]!", parse);
 	Text.Newline();
 }
 
@@ -183,19 +183,6 @@ Abilities.Physical.FocusStrike.OnCast = function(encounter, caster, target) {
 	Text.Newline();
 }
 
-
-Abilities.Physical.Foblivion = new AttackPhysical();
-Abilities.Physical.Foblivion.name = "Fury of Oblivion";
-Abilities.Physical.Foblivion.Short = function() { return "Fury of the oblivion."; }
-Abilities.Physical.Foblivion.cost = { hp: null, sp: 450, lp: null};
-Abilities.Physical.Foblivion.damageType = null;
-Abilities.Physical.Foblivion.atkMod = 0.150;
-Abilities.Physical.Foblivion.nrAttacks = 75;
-Abilities.Physical.Foblivion.OnCast = function(encounter, caster, target) {
-	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("[name] utter[s] a loud battle cry that can be heard even in the mountains, [name] charge[s] towards [tName], [name] jump[s] into the air and focus[es] all of [hisher] teachings, memories, pains and happiness into [hisher]self, as [name] closely approaches [tName], [name] release[s] all that focus onto [tName]!", parse);
-	Text.Newline();
-}
 
 
 
@@ -287,35 +274,9 @@ Abilities.Physical.CrushingStrike.OnHit = function(encounter, caster, target, dm
 }
 
 
-Abilities.Physical.PileDriver = new AttackPhysical();
-Abilities.Physical.PileDriver.name = "PileDriver";
-Abilities.Physical.PileDriver.Short = function() { return "Slam an enemy's head so hard, they disappear into oblivion."; }
-Abilities.Physical.PileDriver.cost = { hp: 350, sp: 350, lp: 150};
-Abilities.Physical.PileDriver.damageType = null;
-Abilities.Physical.PileDriver.atkMod = 9.5;
-Abilities.Physical.PileDriver.hitMod = 0.9;
-Abilities.Physical.PileDriver.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.NameDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("[name] Charge[s] towards [tName], grabbing [tName] from the behind, stomping [hisher] feet, [name] and [tName] both fly to the sky. as [name] and [tName] fall[s] to the ground, [name] spin[s] with immense speed as if though a top. upon impact, [tName]'s head collides with the ground causing it to break and shatter!", parse);
-	Text.Newline();
-}
-Abilities.Physical.PileDriver.OnHit = function(encounter, caster, target, dmg) {
-	if(Math.random() < 0.8) {
-		for(var i = 0; i < encounter.combatOrder.length; i++) {
-			if(encounter.combatOrder[i].entity == target)
-				encounter.combatOrder[i].initiative -= 75;
-		}
-	}
-	
-	var parse = { name : caster.NameDesc(), himher : target.himher(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	
-	Text.AddOutput("[name] deliver[s] a crushing blow to [tName] for " + Text.BoldColor(dmg, "#800000") + " damage, staggering [himher]!", parse);
-	Text.Newline();
-}
-
 
 Abilities.Physical.Buppercut = new AttackPhysical();
-Abilities.Physical.Buppercut.name = "Burning uppercut";
+Abilities.Physical.Buppercut.name = "Burning Uppercut";
 Abilities.Physical.Buppercut.Short = function() { return "Does a powerful uppercut to an opponent, has a chance of burning the opponent."; }
 Abilities.Physical.Buppercut.cost = { hp: null, sp: 90, lp: null};
 Abilities.Physical.Buppercut.atkMod = 1.5;
@@ -397,33 +358,4 @@ Abilities.Physical.Taunt.OnMiss = function(encounter, caster, target) {
 	Text.Newline();
 }
 
-Abilities.Physical.Mock = new AttackPhysical();
-Abilities.Physical.Mock.name = "Mock";
-Abilities.Physical.Mock.Short = function() { return "Mock the enemy to focus on you. Single target."; }
-Abilities.Physical.Mock.cost = { hp: null, sp: 17, lp: null};
-Abilities.Physical.Mock.atkMod = 0.9;
-Abilities.Physical.Mock.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.AddOutput("[name] Mock[s] [tName]! ", parse);
-}
-Abilities.Physical.Mock.OnHit = function(encounter, caster, target, dmg) {
-	var activeChar;
-	for(var i = 0; i < encounter.combatOrder.length; i++) {
-		if(encounter.combatOrder[i].entity == target)
-			activeChar = encounter.combatOrder[i];
-	}
-	var aggroEntry = GetAggroEntry(activeChar, caster);
-	if(aggroEntry)
-		aggroEntry.aggro += 5;
-	
-	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.AddOutput("[tName] has became embarrassed , [tName] is now very aggressive towards [name]!", parse);
-	Text.Newline();
-}
-Abilities.Physical.Mock.OnAbsorb = Abilities.Physical.Mock.OnHit;
-Abilities.Physical.Mock.OnMiss = function(encounter, caster, target) {
-	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() , hisher : target.hisher() };
-	Text.AddOutput("[tName] is laughing [hisher] ass out.", parse);
-	Text.Newline();
-}
 

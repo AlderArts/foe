@@ -207,33 +207,3 @@ Abilities.Seduction.Allure.OnHit = function(encounter, caster, target, dmg) {
 	Text.AddOutput("[tName] become[s] charmed, gaining " + Text.BoldColor(dmg, "#FF8080") + " lust! [HeShe] become[s] less aggressive towards [name].", parse);
 	Text.Newline();
 }
-
-Abilities.Seduction.Tsundere = new TeaseSkill();
-Abilities.Seduction.Tsundere.name = "Tsundere";
-Abilities.Seduction.Tsundere.Short = function() { return "I don't like you because I don't like you not because I like you."; }
-Abilities.Seduction.Tsundere.cost = { hp: null, sp: 35, lp: 65};
-Abilities.Seduction.Tsundere.atkMod = 0.49;
-Abilities.Seduction.Tsundere.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.AddOutput("[name] approach [tName] with an angry and blushing face, [name] stand infront of [tName], (I am fighting you because I don't like,okey? so don't get the impression that I like you) [name] tell [tName] and slap [tName], [name] then walk away with a tear in your eye.", parse);
-}
-Abilities.Seduction.Tsundere.OnHit = function(encounter, caster, target, dmg) {
-	var activeChar;
-	for(var i = 0; i < encounter.combatOrder.length; i++) {
-		if(encounter.combatOrder[i].entity == target)
-			activeChar = encounter.combatOrder[i];
-	}
-	var aggroEntry = GetAggroEntry(activeChar, caster);
-	if(aggroEntry) {
-		aggroEntry.aggro -= 1.3;
-		if(aggroEntry.aggro < 0) aggroEntry.aggro = 0;
-	}
-	
-	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.AddOutput("[tName] is now utterly confused, gaining " + Text.BoldColor(dmg, "#FF8080") + " lust! [tName] feels very sorry for [name].", parse);
-	Text.Newline();
-}
-
-
-
-

@@ -157,7 +157,7 @@ Abilities.White.Cheer.CastInternal = function(encounter, caster, target) {
 
 Abilities.White.Springwind = new Ability();
 Abilities.White.Springwind.name = "Springwind";
-Abilities.White.Springwind.Short = function() { return "I like the smell of fresh cut grass, raises spirit and stamina (doesn't stack)."; }
+Abilities.White.Springwind.Short = function() { return "Summon the soothing winds to calm everyone's soul, raises spirit and stamina (doesn't stack)."; }
 Abilities.White.Springwind.targetMode = TargetMode.Party;
 Abilities.White.Springwind.cost = { hp: null, sp: 50, lp: null};
 Abilities.White.Springwind.CastInternal = function(encounter, caster, target) {
@@ -195,7 +195,9 @@ Abilities.White.Minos.CastInternal = function(encounter, caster, target) {
 	}
 
 	// TODO: Make more flavor text
-	Text.AddOutput("[name] place[s] [hisher] hand in [hisher] pocket and reveals a vial that has a picture of a minotaur on it (possibly taken from rosalin's stack of potions), [name] toss[es] the vial to [tName], [tName] looks at the vial then looks at [name] with a lifted eyebrow, [name] force[s] [tName] to drink the vial, [tName] drinks the vial, [tName] feels more powerful and more hornier!", parse);
+	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
+
+	Text.AddOutput("[name] place[s] [hisher] hand in [hisher] pocket and reveal[s] a vial that has a picture of a minotaur on it (possibly taken from rosalin's stack of potions). [name] toss[es] the vial to [tName], [tName] look[s] at the vial then look[s] at [name] with a lifted eyebrow, [name] force[s] [tName] to drink the vial, [tName] drinks the vial, [tName] feels more powerful and more hornier!", parse);
 	Text.Newline();
 	
 	Gui.NextPrompt(function() {
@@ -239,8 +241,9 @@ Abilities.White.Lavaarmor.CastInternal = function(encounter, caster, target) {
 		name : caster.name,
 		tName : target.name
 	}
+	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
 
-	Text.AddOutput("A river of lava emerges from the ground and starts engulfing [tName], the lava then hardens and forms an armor around [tName] , making them more stronger!", parse);
+	Text.AddOutput("A river of lava emerges from the ground and starts engulfing [tName], the lava then hardens and forms an armor around [tName]!", parse);
 	Text.Newline();
 	
 	Gui.NextPrompt(function() {
@@ -288,6 +291,7 @@ Abilities.White.Charge.CastInternal = function(encounter, caster, target) {
 		hisher : caster.hisher(),
 		tName : target.name
 	}
+	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
 
 	Text.AddOutput("[name] approach[es] [tName] and place[s] [hisher] hands on [tName]'s head, [name] release[s] a powerful electrical current through [hisher] hand to [tName]'s head, the shock increased [tName]'s brain activity, making them smarter!", parse);
 	Text.Newline();
@@ -300,7 +304,7 @@ Abilities.White.Charge.CastInternal = function(encounter, caster, target) {
 
 Abilities.White.Bodyofwater = new Ability();
 Abilities.White.Bodyofwater.name = "Body of water";
-Abilities.White.Bodyofwater.Short = function() { return "Moisture is your friend, increases ally stamina (doesn't stack)."; }
+Abilities.White.Bodyofwater.Short = function() { return "Form a bubble around your ally to protect them, increases ally stamina (doesn't stack)."; }
 Abilities.White.Bodyofwater.targetMode = TargetMode.Ally;
 Abilities.White.Bodyofwater.cost = { hp: null, sp: 50, lp: null};
 Abilities.White.Bodyofwater.CastInternal = function(encounter, caster, target) {
@@ -310,6 +314,7 @@ Abilities.White.Bodyofwater.CastInternal = function(encounter, caster, target) {
 		name : caster.name,
 		tName : target.name
 	}
+	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
 
 	Text.AddOutput("Moisture starts gathering around [tName], slowly forming a protective bubble, protecting them from harm!", parse);
 	Text.Newline();
@@ -349,8 +354,9 @@ Abilities.White.Purify.CastInternal = function(encounter, caster, target) {
 
 		Text.Newline();
 	{	target.AddSPAbs(+dmg);
-		
-		Text.AddOutput("A beam of light shines in the heavens, it pierces the clouds and descends upon [tName], [hisher] doubts slowly fade away!, [tName] have restored" + Text.BoldColor(dmg, "#000080") + " SP!", parse);
+			var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
+
+		Text.AddOutput("A beam of light shines in the heavens, it pierces the clouds and descends upon [tName], [tName] doubts slowly fade away!, [tName] have restored" + Text.BoldColor(dmg, "#000080") + " SP!", parse);
 	}
 	Text.Newline();
 	
