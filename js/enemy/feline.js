@@ -1097,7 +1097,7 @@ Scenes.Felines.WinGetBlowjob = function(cat, group, enc) {
 				Text.Add("From [possessive] surprised expression, the sheer size of your load took [himher] unprepared. [HeShe] gags slightly as your semen slides its way down [hisher] throat, excess dripping freely from [hisher] lips.", parse);
 			}
 			else {
-				Text.Add("You grunt as you finally come, shooting your load into [possessive] gaping maw. [Heshe] lets the semen linger for a while, some of it spilling out past [hisher] lips.", parse);
+				Text.Add("You grunt as you finally come, shooting your load into [possessive] gaping maw. [HeShe] lets the semen linger for a while, some of it spilling out past [hisher] lips.", parse);
 			}
 			Text.Add(" With a loud pop, you pull out, and [name] swallows any of your seed still in [hisher] mouth without having to be told to.", parse);
 			
