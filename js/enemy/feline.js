@@ -876,6 +876,7 @@ Scenes.Felines.WinFuckButt = function(cat, group, enc, cocks) {
 	
 	
 	Gui.Callstack.push(function() {
+		Text.NL();
 		Text.Add("Once [heshe] has recovered sufficiently, [name] sets to cleaning [himher]self up using [hisher] tongue. Every now and then, [heshe] pauses to eye you warily, unsure whether you are finished with [himher] or not.", parse);
 		Text.NL();
 		if(party.NumTotal() == 2)

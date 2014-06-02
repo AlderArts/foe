@@ -1704,7 +1704,7 @@ Entity.prototype.EquipPrompt = function(backfunc) {
 		options.push({ nameStr : "Toy",
 			func : function() {
 				Text.NL();
-				Text.Add("<i>What secondary accessory do[es] [heshe] equip?</i>", parse);
+				Text.Add("<i>What strapon do[es] [heshe] equip?</i>", parse);
 				Text.Flush();
 				party.inventory.ShowEquippable(that, ItemType.StrapOn, equipFunc);
 			}, enabled : true,

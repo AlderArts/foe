@@ -1288,7 +1288,7 @@ Scenes.Miranda.Chat = function() {
 			var scenes = [];
 			
 			scenes.push(function() {
-				Text.Add("<i>”Walking the beat keeps the coin coming, though it isn’t as exciting as mercenary work. Believe it or not, usually things are pretty quiet here.”</> She shrugs irritably. <i>”I hate doing paper work, give me a thug to beat up any day of the week.”</i>", parse);
+				Text.Add("<i>”Walking the beat keeps the coin coming, though it isn’t as exciting as mercenary work. Believe it or not, usually things are pretty quiet here.”</i> She shrugs irritably. <i>”I hate doing paper work, give me a thug to beat up any day of the week.”</i>", parse);
 				if(miranda.Relation() >= 25) {
 					Text.NL();
 					Text.Add("She brightens up a bit. <i>\"You could show up at the barracks sometime and keep me company!\"</i> she suggests. <i>\"You know... take my mind of things for a while,\"</i> she grins wickedly.", parse);
@@ -1337,7 +1337,7 @@ Scenes.Miranda.Chat = function() {
 			// First
 			if(miranda.flags["Forest"] == 0) {
 				miranda.flags["Forest"] = 1;
-				Text.Add("<i>\"You said you have been in the big forest, didn't you?\"</i> She asks you. <i>\"Not that you could miss it, it's practically crawling over our walls.\"</i> You nod and tell her about the various strange creatures you've heard inhabits it. <i>\"It's a very wild place, where one shouldn't walk around unprepared,\"</i> she notes, <i>\you might get some nasty surprises otherwise.\"</i>", parse);
+				Text.Add("<i>\"You said you have been in the big forest, didn't you?\"</i> She asks you. <i>\"Not that you could miss it, it's practically crawling over our walls.\"</i> You nod and tell her about the various strange creatures you've heard inhabits it. <i>\"It's a very wild place, where one shouldn't walk around unprepared,\"</i> she notes, <i>\"you might get some nasty surprises otherwise.\"</i>", parse);
 				Text.Flush();
 				
 				//[Sure][Nah]
@@ -1556,7 +1556,7 @@ Scenes.Miranda.JustOneMore = function() {
 		Text.NL();
 		Text.Add("<i>”Please close the door, hun,”</i> she tells you over her shoulder, placing the booze on the table. Turning around, she gives you a measuring look. <i>”I think the best way to do this is to show you,”</i> she murmurs with an sultry look on her face. With her eyes still fixed on you, Miranda reaches for her belt and starts undoing it. When she is done, she turns around, slowly pulling down her tight pants over her curvy hips, exposing more and more dark fur.", parse);
 		Text.NL();
-		Text.Add("You are thoroughly enjoying the show, but is a bit unsure where this is going. With her back to you, she pulls her pants down to her knees, giving you a glimpse of her tight anus and moist pussy lips. Then... she turns around to face you. Between her long fur-clad legs, just above her juicy slit, you see something you definitely didn't expect. Half hidden in a soft sheet is a very large canid cock, complete with a pointed tip, a set of apple-size balls and a thick knot at the base.", parse);
+		Text.Add("You are thoroughly enjoying the show, but is a bit unsure where this is going. With her back to you, she pulls her pants down to her knees, giving you a glimpse of her tight anus and moist pussy lips. Then... she turns around to face you. Between her long fur-clad legs, just above her juicy slit, you see something you definitely didn't expect. Half hidden in a soft sheath is a very large canid cock, complete with a pointed tip, a set of apple-size balls and a thick knot at the base.", parse);
 		Text.NL();
 		Text.Add("Even soft, it’s still almost nine inches long and as thick as her arm. You unconsciously lick your lips nervously, contemplating this new development. Miranda takes a challenging pose, legs wide and member jutting out aggressively.", parse);
 		Text.NL();
@@ -1606,7 +1606,7 @@ Scenes.Miranda.JustOneMore = function() {
 				Text.Clear();
 				Text.Add("Fascinated by the long member, you move closer and study it meticulously.", parse);
 				Text.NL();
-				Text.Add("You ask her if you can touch it. Almost a bit flustered, she nods and leans back against the wall, shuffling her legs apart a bit to give you room. You get down on your knees to get closer to the object of your study. You softly move your hands up and down the shaft, lightly touching here and there, drawing increasingly loud moans from Miranda. The administrations of your hands seem to bear fruit, as her cock is slowly hardening and rising up.", parse);
+				Text.Add("You ask her if you can touch it. Almost a bit flustered, she nods and leans back against the wall, shuffling her legs apart a bit to give you room. You get down on your knees to get closer to the object of your study. You softly move your hands up and down the shaft, lightly touching here and there, drawing increasingly loud moans from Miranda. Your caresses seem to bear fruit, as her cock is slowly hardening and rising up.", parse);
 				Text.NL();
 				Text.Add("Finally you lean back and admire your handiwork. Fully erect, Miranda's huge rod push out eleven inches from her crotch, even without the support of your hands. As you look up at the hermaphrodite, you see that she is very aroused, and is gazing at you with a wicked smile playing on her lips. Satisfied with your survey, you start to rise up to your feet.", parse);
 				Text.NL();
