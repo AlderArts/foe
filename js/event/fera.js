@@ -436,7 +436,7 @@ Scenes.Fera.SexPrompt = function() {
 	var cocksInVag = player.CocksThatFit(fera.FirstVag());
 	var cocksInAss = player.CocksThatFit(fera.Butt());
 	
-	var p1Cock = cocksInVag[0];
+	var p1Cock = player.BiggestCock(cocksInVag);
 	
 	var parse = {
 		playername     : player.name,
@@ -961,7 +961,7 @@ Scenes.Fera.SexPrompt = function() {
 		{
 			options.push({ nameStr : "Anal",
 				func : function() {
-					p1Cock = cocksInAss[0];
+					p1Cock = player.BiggestCock(cocksInAss);
 					Text.Clear();
 					Text.AddOutput("You order Fera to lift up her dress and take off her panties. Meanwhile, you take off your [lowerArmorDesc], letting your [multiCockDesc][balls] hang free. She watches you unabashedly, waiting to hear what you have planned. Pressing her tightly against you, you reach around and grab her ass firmly. You tell her you are going to fuck her [fanusDesc].", parse);
 					Text.Newline();

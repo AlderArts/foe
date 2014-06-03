@@ -1585,6 +1585,13 @@ Breasts.prototype.Long = function() {
 	return desc.a + " " + desc.adj + " " + this.nounPlural();
 }
 
+// TODO: Lactation
+Body.prototype.Lactation = function() {
+	if(this.breasts.length == 0)
+		return false;
+	else
+		return this.breasts[0].lactationRate.Get() > 0;
+}
 
 // For pregnancies
 // TODO: Needs some timers/callbacks

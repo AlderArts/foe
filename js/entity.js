@@ -1079,15 +1079,16 @@ Entity.prototype.FirstClitCockIdx = function() {
 	}
 	return -1;
 }
-Entity.prototype.BiggestCock = function() {
-	var c = this.body.cock[0];
+Entity.prototype.BiggestCock = function(cocks) {
+	cocks = cocks || this.body.cock;
+	var c = cocks[0];
 	if(c) {
-		var cSize = this.body.cock[0].length.Get() * this.body.cock[0].thickness.Get();
-		for(var i=1,j=this.body.cock.length; i<j; i++) {
-			var newSize = this.body.cock[i].length.Get() * this.body.cock[i].thickness.Get();
+		var cSize = cocks[0].length.Get() * cocks[0].thickness.Get();
+		for(var i=1,j=cocks.length; i<j; i++) {
+			var newSize = cocks[i].length.Get() * cocks[i].thickness.Get();
 			if(newSize > cSize) {
 				cSize = newSize;
-				c = this.body.cock[i];
+				c = cocks[i];
 			}
 		};
 	}
@@ -1108,12 +1109,13 @@ Entity.prototype.AllCocks = function() {
 	return this.body.cock;
 }
 // TODO: Race too
-Entity.prototype.MultiCockDesc = function() {
-	if(this.body.cock.length == 0) return "[NO COCKS]";
-	else if(this.body.cock.length == 1)
-		return this.FirstCock().Short();
+Entity.prototype.MultiCockDesc = function(cocks) {
+	cocks = cocks || this.body.cock;
+	if(cocks.length == 0) return "[NO COCKS]";
+	else if(cocks.length == 1)
+		return cocks[0].Short();
 	else
-		return Text.Quantify(this.body.cock.length) + " of " + this.body.cock[0].Desc().adj + " " + this.body.cock[0].nounPlural();
+		return Text.Quantify(cocks.length) + " of " + cocks[0].Desc().adj + " " + cocks[0].nounPlural();
 }
 
 
@@ -1211,6 +1213,10 @@ Entity.prototype.AllPenetrators = function(orifice) {
 	// TODO: Tongue, Nipple-cock, Clitcock
 	
 	return ret;
+}
+
+Entity.prototype.Lactation = function() {
+	return this.body.Lactation();
 }
 
 Entity.prototype.Fuck = function(cock, expMult) {
