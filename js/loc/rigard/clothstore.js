@@ -140,7 +140,7 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 					Text.Clear();
 					Text.AddOutput("You ask Miss Nexelle about herself.", parse);
 					Text.Newline();
-					Text.AddOutput("She stops working and looks up as she sighs deeply. <i>\"I really used to be someone in Rigard, back before the Merchant Guild back before it was broken up. My family, being one of the three most influential merchant families, had a lot of power in the guild.  Fortunately, I had saved plenty of money and had built up some connections in high places so I can still afford to buy high quality materials for my shop, keep all of my equipment, and keep my guards.\"</i>", parse);
+					Text.AddOutput("She stops working and looks up as she sighs deeply. <i>\"I really used to be someone in Rigard, back before the Merchant Guild was broken up. My family, being one of the three most influential merchant families, had a lot of power in the guild.  Fortunately, I had saved plenty of money and had built up some connections in high places so I can still afford to buy high quality materials for my shop, keep all of my equipment, and keep my guards.\"</i>", parse);
 				}, enabled : true,
 				tooltip : "Ask the tailor about herself."
 			});

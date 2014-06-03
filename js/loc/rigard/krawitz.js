@@ -206,6 +206,7 @@ world.loc.Rigard.Krawitz.grounds.links.push(new Link(
 					options.push({ nameStr : "Food",
 						func : function() {
 							Text.Clear();
+							parse["brotherSister"] = player.mfFem("brother", "sister");
 							Text.Add("<i>\"</i>Many thanks, [brotherSister]!\"</i></i> one of the resting servants calls out. He and his friends gather around, digging into the food. You feel as if a bit of the suspicion surrounding you has dissipated, and that the servants act slightly more trusting towards you.", parse);
 							Scenes.Krawitz.stat.ServantFood = 3;
 							Scenes.Krawitz.AddSuspicion(-25, true);
@@ -774,7 +775,7 @@ world.loc.Rigard.Krawitz.Mansion.storeroom.events.push(new Link(
 		Text.Clear();
 		Text.Add("You open the cabinet, surveying the vials within. They seem to be different types of perfume, ranging from red to pink in color. Curious, you pick one at random and open the stopper. Just a sniff...");
 		Text.NL();
-		Text.Add("<i>...Uncalled for, perverse visions of depravity roll over your unprepared senses. It is more than the smell - you want to <b>taste</b> it, to bathe in it, to have it enter your pores. You can already feel the taste on your [tongueDesc], a mixture of salty cum and sweet nectar, the pure essence of sin. A burning heat is rising within you, wanting to fuck, to be fucked, to join in the orgy, a writhing mass of flesh and sweat...</i>");
+		Text.Add("<i>...Uncalled for, perverse visions of depravity roll over your unprepared senses. It is more than the smell - you want to <b>taste</b> it, to bathe in it, to have it enter your pores. You can already feel the taste on your [tongueDesc], a mixture of salty cum and sweet nectar, the pure essence of sin. A burning heat is rising within you, wanting to fuck, to be fucked, to join in the orgy, a writhing mass of flesh and sweat...</i>", { tongueDesc: player.TongueDesc() });
 		Text.NL();
 		Text.Add("...Wow. Hurriedly replacing the stopper, you shake your head, trying to clear your thoughts. That is some potent stuff. Pursing your lips, you pocket the vial and a few similar ones. This could be used for a great distraction...");
 		Text.NL();
@@ -1883,7 +1884,7 @@ Scenes.Krawitz.Bathhouse = function() {
 							if(playerCock.Size() > 150)
 								Text.Add("You are a bit worried that you’ll hurt them with the sheer size of your equipment, but the horny women don’t seem to have a care in the world.", parse);
 							Text.NL();
-							parse["towering"] = (playerCock.Size() > 150) ? "towering" : "";
+							parse["towering"] = (playerCock.Size() > 150) ? " towering" : "";
 							Text.Add("Gina and Marlene pull you down on your back, rubbing their wet crotches against your stiff [multiCockDesc], each eager to be the first one taken. The younger of the two eventually wins out, her tongue lolling as she eases herself down on[oneof] your[towering] pillar[s].", parse);
 							Text.NL();
 							if(player.NumCocks() > 1) {

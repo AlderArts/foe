@@ -453,7 +453,7 @@ Scenes.Lagomorph.GroupWinInterrorigate = function(enc) {
 	else
 		parse["comp"] = "";
 	
-	Text.Add("The rabbit horde scatters, scrambling desperately to escape your wrath. You hone in on their leader, determined to get to the bottom of this. Before the beaten alpha can join [m1hisher] minions, you block off [m1hisher] path of escape.", parse);
+	Text.Add("The rabbit horde scatters, scrambling desperately to escape your wrath. You home in on their leader, determined to get to the bottom of this. Before the beaten alpha can join [m1hisher] minions, you block off [m1hisher] path of escape.", parse);
 	Text.NL();
 	Text.Add("Why were you attacked? What are these critters after? How come there are so damn many of them? The alpha petulantly shakes [m1hisher] head at your questions, unwilling or unable to answer. No matter what you ask, [m1heshe] ignores you, gaze quickly flicking from side to side, looking for a chance to escape.", parse);
 	Text.Flush();
