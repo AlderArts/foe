@@ -741,6 +741,9 @@ Scenes.FarmIntro.HornyDanie = function() {
 }
 
 Scenes.FarmIntro.DanieFuckOptions = function() {
+	var cocksInVag = player.CocksThatFit(danie.FirstVag());
+	var cocksInAss = player.CocksThatFit(danie.Butt());
+	
 	var parse = {
 		playername : player.name
 	};
@@ -754,16 +757,14 @@ Scenes.FarmIntro.DanieFuckOptions = function() {
 			enabled : true,
 			tooltip : "Oral seems to be the safest option, honestly. Give her a taste of your cock."
 		});
-		if(player.FirstCock().length.Get() < 30) {
-			options.push({ nameStr : "Vaginal",
-				func : Scenes.FarmIntro.DanieVaginalSex, enabled : true,
-				tooltip : "Introduce the sheep to your pork sword, y'know?"
-			});
-			options.push({ nameStr : "Anal",
-				func : Scenes.FarmIntro.DanieAnalSex, enabled : true,
-				tooltip : "You must admit, you wonder if she'd mind some butt fun."
-			});
-		}
+		options.push({ nameStr : "Vaginal",
+			func : Scenes.FarmIntro.DanieVaginalSex, enabled : cocksInVag.length > 0,
+			tooltip : "Introduce the sheep to your pork sword, y'know?"
+		});
+		options.push({ nameStr : "Anal",
+			func : Scenes.FarmIntro.DanieAnalSex, enabled : cocksInAss.length > 0,
+			tooltip : "You must admit, you wonder if she'd mind some butt fun."
+		});
 	}
 	if(player.FirstVag()) {
 		options.push({ nameStr : "Cunnilingus",
@@ -871,6 +872,7 @@ Scenes.FarmIntro.DanieOralSex = function(bits) {
 	player.AddLustFraction(-1);
 	player.AddSexExp(3);
 	danie.AddSexExp(3);
+	Sex.Blowjob(danie, player);
 	
 	Gui.NextPrompt(Scenes.FarmIntro.ReturnToGwendy);
 }
@@ -881,9 +883,13 @@ Scenes.FarmIntro.DanieVaginalSex = function() {
 	danie.slut.IncreaseStat(100, 5);
 	Scenes.FarmIntro.fuckedDanie = true;
 	
+	var cocksInVag = player.CocksThatFit(danie.FirstVag());
+	
+	var p1Cock = player.BiggestCock(cocksInVag);
+	
 	var parse = {
 		playername : player.name,
-		cockDesc   : function() { return player.FirstCock().Short(); },
+		cockDesc   : function() { return p1Cock.Short(); },
 		cuntDesc   : function() { return danie.FirstVag().Short(); },
 		breastDesc : function() { return player.FirstBreastRow().Short(); }
 	};
@@ -898,8 +904,9 @@ Scenes.FarmIntro.DanieVaginalSex = function() {
 	Text.Newline();
 	
 	// Plow that virginity
-	player.Fuck(player.FirstCock(), 5);
-	danie.FuckVag(danie.FirstVag(), player.FirstCock());
+	Sex.Vaginal(player, danie);
+	player.Fuck(p1Cock, 5);
+	danie.FuckVag(danie.FirstVag(), p1Cock);
 	
 	Text.AddOutput("You look into her eyes to see how she's doing, but it seems she's a lot better off than you expected, eyes glowing with lust, replacing the previous innocent light. She wraps her arms around your neck and begins bouncing up and down slowly, causing quiet moans to escape you. <i>\"There's no need to dillydally, right? I have to help you, [playername],\"</i> Danie tells you, the heat evident in her voice, as she presses her hand-consuming tits against your [breastDesc]. You nod in agreement, and she begins moving faster and faster. It seems Danie wants to decide the pace, so you reach around and squeeze her big, soft butt, making her let out a moan.", parse);
 	Text.Newline();
@@ -918,9 +925,13 @@ Scenes.FarmIntro.DanieAnalSex = function() {
 	danie.slut.IncreaseStat(100, 10);
 	Scenes.FarmIntro.fuckedDanie = true;
 	
+	var cocksInAss = player.CocksThatFit(danie.Butt());
+	
+	var p1Cock = player.BiggestCock(cocksInAss);
+	
 	var parse = {
 		playername : player.name,
-		cockDesc   : function() { return player.FirstCock().Short(); },
+		cockDesc   : function() { return p1Cock.Short(); },
 		anusDesc   : function() { return danie.Butt().AnalShort(); },
 		buttDesc   : function() { return danie.Butt().Short(); }
 	};
@@ -932,8 +943,9 @@ Scenes.FarmIntro.DanieAnalSex = function() {
 	Text.AddOutput("You smile calmly as you grab her thighs, gently pulling her closer before spreading her cheeks and kissing her [anusDesc], making her tail to brush against your nose as it twitches. The girl moans in surprise as you continue to kiss, coat, and tease her [anusDesc] until it's nearly dripping with your saliva. Finally prepared, you guide her down to your [cockDesc] and push against her, grimacing as you work against the resistance, until you slide in.", parse);
 	Text.Newline();
 	
-	player.Fuck(player.FirstCock(), 5);
-	danie.FuckAnal(danie.Butt(), player.FirstCock());
+	Sex.Anal(player, danie);
+	player.Fuck(p1Cock, 5);
+	danie.FuckAnal(danie.Butt(), p1Cock);
 	
 	Text.AddOutput("Danie lets out a cute, prolonged whimper and her tail flits some more while you take a moment to get accustomed to one another. Turns out she was right about being a virgin; her [anusDesc] is quite possibly hotter than anything you've felt so far, and so tight it actually hurts a bit to just sit there. After a minute or so, you give an experimental push, at which Danie lets out another whimper as she takes more of your [cockDesc] inside. The process continues until your groin is flush against her [buttDesc], her tail continuing to wag, brushing against your stomach.", parse);
 	Text.Newline();
