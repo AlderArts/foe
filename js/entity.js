@@ -1095,7 +1095,7 @@ Entity.prototype.BiggestCock = function(cocks) {
 	return c;
 }
 Entity.prototype.CocksThatFit = function(orifice) {
-	ret = new Array();
+	var ret = new Array();
 	for(var i=0,j=this.body.cock.length; i<j; i++) {
 		var c = this.body.cock[i];
 		if(orifice.Fits(c))
@@ -1103,6 +1103,14 @@ Entity.prototype.CocksThatFit = function(orifice) {
 	};
 	if(this.strapOn && orifice.Fits(this.strapOn.cock))
 		ret.push(this.strapOn.cock);
+	return ret;
+}
+Entity.prototype.AllCocksCopy = function() {
+	var ret = [];
+	for(var i=0,j=this.body.cock.length; i<j; i++) {
+		var c = this.body.cock[i];
+			ret.push(c);
+	};
 	return ret;
 }
 Entity.prototype.AllCocks = function() {

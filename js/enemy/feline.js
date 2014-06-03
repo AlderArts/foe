@@ -1511,19 +1511,20 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 
 Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 	var pCock  = player.BiggestCock(cocksInVag);
-	for(var i = 0; i < cocksInVag.length; i++) {
-		if(cocksInVag[i] == pCock) {
-			cocksInVag.remove(i);
+	var allCocks = player.AllCocksCopy();
+	for(var i = 0; i < allCocks.length; i++) {
+		if(allCocks[i] == pCock) {
+			allCocks.remove(i);
 			break;
 		}
 	}
 	var pCock2;
-	if(cocksInVag.length > 0) {
-		pCock2 = player.BiggestCock(cocksInVag);
+	if(allCocks.length > 0) {
+		pCock2 = player.BiggestCock(allCocks);
 		
-		for(var i = 0; i < cocksInVag.length; i++) {
-			if(cocksInVag[i] == pCock2) {
-				cocksInVag.remove(i);
+		for(var i = 0; i < allCocks.length; i++) {
+			if(allCocks[i] == pCock2) {
+				allCocks.remove(i);
 				break;
 			}
 		}
@@ -1544,7 +1545,7 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 		Possessive  : cat.Possessive(),
 		possessive  : cat.possessive(),
 		multiCockDesc : function() { return player.MultiCockDesc(); },
-		cockOtherDesc : function() { return player.MultiCockDesc(cocksInVag); },
+		cockOtherDesc : function() { return player.MultiCockDesc(allCocks); },
 		cockDesc    : function() { return pCock.Short(); },
 		cock2Desc   : function() { return pCock2.Short(); },
 		cockTip     : function() { return pCock.TipShort(); },
