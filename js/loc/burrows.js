@@ -119,10 +119,10 @@ world.loc.Burrows.Enterance.onEntry = function() {
 				// Create a new alpha
 				var alpha = new LagomorphAlpha();
 				parse["m1HeShe"]  = function() { return alpha.HeShe(); };
-				parse["m1heshe"]  = function() { return alpha.HeShe(); };
-				parse["m1HisHer"] = function() { return alpha.HeShe(); };
-				parse["m1hisher"] = function() { return alpha.HeShe(); };
-				parse["m1himher"] = function() { return alpha.HeShe(); };
+				parse["m1heshe"]  = function() { return alpha.heshe(); };
+				parse["m1HisHer"] = function() { return alpha.HisHer(); };
+				parse["m1hisher"] = function() { return alpha.hisher(); };
+				parse["m1himher"] = function() { return alpha.himher(); };
 				
 				Text.Add("After enduring their odd behavior for a few minutes, the messenger returns with one of the lagomorph alphas, a ", parse);
 				if(alpha.Gender() == Gender.male)

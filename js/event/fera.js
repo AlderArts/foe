@@ -391,7 +391,7 @@ Scenes.Fera.TouchPrompt = function() {
 					Text.AddOutput("A young noblewoman walks around the rack you are hiding behind and sees what you two are doing. She gasps quietly and quickly walks back the way she came. Before she gets very far, however, you hear her footsteps stop, and spot her head barely poking around the corner. Clearly she wants to watch the rest and you have no intention of disappointing her.", parse);
 					Text.Newline();
 				}
-				if(p1Cock) {
+				if(player.FirstCock()) {
 					Text.AddOutput("As you continue to play with her [fnipsDesc], you feel a hand on your [lowerArmorDesc], feeling for your [multiCockDesc]. She finds what she is looking for, her hand rubbing up and down your [multiCockDesc] as you continue to play with her [fbreastDesc]. As you fondle her [fbreastDesc] harder, she accelerates her pace on your [multiCockDesc]. The two of you moan almost in unison as you please each other.", parse);
 					Text.Newline();
 				}
@@ -580,7 +580,7 @@ Scenes.Fera.SexPrompt = function() {
 						Text.AddOutput("Your [multiCockDesc] spray[notS] [itsTheir] seed, and the catgirl struggles to try and swallow your enitre load. ", parse);
 						if(player.NumCocks() > 1)
 							Text.AddOutput("As she gulps futilely, your other [multiCockDesc] cum all over the floor and make a mess. ", parse);
-						Text.AddOutput("She pulls your [cockOrClit] out of her mouth, wiping it as she catches her breath.", parse);
+						Text.AddOutput("She pulls your [cockDesc] out of her mouth, wiping it as she catches her breath.", parse);
 						Text.Newline();
 						Text.AddOutput("Afterwards, the catgirl licks[eachof] your [multiCockDesc][balls] as well as her hands clean. She gives your softening [multiCockDesc] a few playful strokes as she kisses you one more time. Fera then helps you get dressed and you help her clean up before she leads out of the dressing room.", parse);
 					}
