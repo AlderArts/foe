@@ -52,6 +52,7 @@ world.loc.Plains.Nomads.Tent.links.push(new Link(
 		MoveToLocation(world.loc.Plains.Nomads.Fireplace, {minute: 5});
 	}
 ));
+
 world.loc.Plains.Nomads.Tent.endDescription = function() {
 	Text.AddOutput("You weigh your options.<br/>");
 }

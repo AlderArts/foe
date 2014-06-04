@@ -519,7 +519,9 @@ Scenes.RavenMother.RavenPrompt = function(back) {
 			Text.Add("Good. You’re pretty sure she’ll keep her word.", parse);
 			Text.Flush();
 			ravenmother.flags["RBlock"] = 1;
-			Scenes.RavenMother.RavenPrompt();
+			Gui.NextPrompt(function() {
+				Scenes.RavenMother.RavenPrompt(back);
+			});
 		}, enabled : ravenmother.flags["RBlock"] == 0,
 		tooltip : "Ask her to stop sending ravens to watch your dreams."
 	});
@@ -533,7 +535,9 @@ Scenes.RavenMother.RavenPrompt = function(back) {
 			Text.Add("Well, sounds like you can look forward to receiving feathered visitors again.", parse);
 			Text.Flush();
 			ravenmother.flags["RBlock"] = 0;
-			Scenes.RavenMother.RavenPrompt();
+			Gui.NextPrompt(function() {
+				Scenes.RavenMother.RavenPrompt(back);
+			});
 		}, enabled : ravenmother.flags["RBlock"] != 0,
 		tooltip : "Ask her to send ravens to your dreams again."
 	});
