@@ -3,55 +3,85 @@ Scenes.Dreams = {}
 
 Scenes.Dreams.Entry = function(func) {
 	if(Math.random() < 0.5) {
-		var ravenTrigger = ravenmother.RavenTrigger();
+		var ravenTrigger = false;
+		if(ravenmother.flags["RBlock"] == 0)
+			ravenTrigger = ravenmother.RavenTrigger();
 		
-		var scenes = new EncounterTable();
-		scenes.AddEnc(Scenes.Dreams.Ocean, 1.0, function() { return true; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.Forest, 1.0, function() { return true; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.Harem, 1.0, function() { return true; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.BackHome, 1.0, function() { return true; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.Heartstone, 1.0, function() { return true; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.CoC, 1.0, function() { return true; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.EndlessClassroom, 1.0, function() { return true; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.PredatorPack, 1.0, function() { return true; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.FirePet, 1.0, function() { return true; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.House, 1.0, function() { return true; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.Hermit, 1.0, function() { return true; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.Alchemy, 1.0, function() { return player.alchemyLevel >= 1; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.UruChoice, 1.0, function() { return true; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.UruRun, 1.0, function() { return true; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.AriaTemple, 1.0, function() { return true; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.KiakaiMonster, 1.0, function() { return party.location == world.loc.Rigard.Inn.room && party.InParty(kiakai); }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.Kiakai63, 1.0, function() { return party.InParty(kiakai); }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.RosalinNursing, 1.0, function() { return rosalin.flags["PastDialog"] > Rosalin.PastDialog.Past; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.RosalinTransformation, 1.0, function() { return rosalin.flags["Met"] != 0; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.GwendyBarn, 1.0, function() { return gwendy.flags["Met"] != 0; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.FeraKittens, 1.0, function() { return fera.FirstVag().virgin == false; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.MirandaJailed, 1.0, function() { return miranda.flags["Met"] != 0; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.BlowjobGive, 2.0, function() { return player.sex.gBlow >= 25; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.BlowjobRec, 2.0, function() { return player.sex.rBlow >= 25; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.CunnilingusGive, 2.0, function() { return player.sex.gCunn >= 25; }, ravenTrigger);
-		scenes.AddEnc(Scenes.Dreams.CunnilingusRec, 2.0, function() { return player.sex.rCunn >= 25; }, ravenTrigger);
-		
-		var ret = scenes.Get();
-		
-		Text.Flush();
-		
-		var end = function() {
-			Scenes.Dreams.RavenAfterDream(ravenTrigger);
-			func(true);
+		var dream = function() {
+			var scenes = new EncounterTable();
+			scenes.AddEnc(Scenes.Dreams.Ocean, 1.0, function() { return true; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.Forest, 1.0, function() { return true; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.Harem, 1.0, function() { return true; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.BackHome, 1.0, function() { return true; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.Heartstone, 1.0, function() { return true; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.CoC, 1.0, function() { return true; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.EndlessClassroom, 1.0, function() { return true; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.PredatorPack, 1.0, function() { return true; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.FirePet, 1.0, function() { return true; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.House, 1.0, function() { return true; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.Hermit, 1.0, function() { return true; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.Alchemy, 1.0, function() { return player.alchemyLevel >= 1; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.UruChoice, 1.0, function() { return true; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.UruRun, 1.0, function() { return true; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.AriaTemple, 1.0, function() { return true; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.KiakaiMonster, 1.0, function() { return party.location == world.loc.Rigard.Inn.room && party.InParty(kiakai); }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.Kiakai63, 1.0, function() { return party.InParty(kiakai); }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.RosalinNursing, 1.0, function() { return rosalin.flags["PastDialog"] > Rosalin.PastDialog.Past; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.RosalinTransformation, 1.0, function() { return rosalin.flags["Met"] != 0; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.GwendyBarn, 1.0, function() { return gwendy.flags["Met"] != 0; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.FeraKittens, 1.0, function() { return fera.FirstVag().virgin == false; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.MirandaJailed, 1.0, function() { return miranda.flags["Met"] != 0; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.BlowjobGive, 2.0, function() { return player.sex.gBlow >= 25; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.BlowjobRec, 2.0, function() { return player.sex.rBlow >= 25; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.CunnilingusGive, 2.0, function() { return player.sex.gCunn >= 25; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.CunnilingusRec, 2.0, function() { return player.sex.rCunn >= 25; }, ravenTrigger);
+			
+			var ret = scenes.Get();
+			
+			Text.Flush();
+			
+			var end = function() {
+				Scenes.Dreams.RavenAfterDream(ravenTrigger, func);
+			}
+			
+			if(ret)
+				Gui.Callstack.push(end);
+			else
+				Gui.NextPrompt(end);
 		}
 		
-		if(ret)
-			Gui.Callstack.push(end);
+		
+		if(ravenTrigger && ravenmother.Ravenness() >= RavenMother.Stage.ravenstage3 && ravenmother.flags["Met"] == 0) {
+			Text.Add("You prepare for sleep, and lie down, fiddling with the gemstone in your hands. Do you really want to pursue these ravens? They have not harmed you so far, and what if it turns out to be dangerous? Most of your dreams don’t mean much anyway, so perhaps it’s not so bad to have them watched.");
+			Text.NL();
+			Text.Add("You feel like once you plunge ahead into this chase, you won’t be able to back out. Are you sure you want to do it?");
+			Text.Flush();
+
+			//[Onward][Not now]
+			var options = new Array();
+			options.push({ nameStr : "Onward",
+				func : function() {
+					Scenes.RavenMother.TheHunt(func);
+				}, enabled : true,
+				tooltip : "Focus on the crystal, pursue the ravens. You <i>will</i> know why they are intruding on your mind."
+			});
+			options.push({ nameStr : "Not now",
+				func : function() {
+					Text.Clear();
+					dream();
+				}, enabled : true,
+				tooltip : "You don’t feel quite ready yet. You’ll tolerate the ravens for another night if they come."
+			});
+			Gui.SetButtonsFromList(options);
+		}
 		else
-			Gui.NextPrompt(end);
+			dream();
 	}
 	else
 		func();
 }
 
-Scenes.Dreams.RavenAfterDream = function(ravenTrigger) {
+Scenes.Dreams.RavenAfterDream = function(ravenTrigger, func) {
 	if(ravenTrigger) {
 		var r = ravenmother.Ravenness();
 		if     (r == RavenMother.Stage.ravenstage2) {
@@ -67,6 +97,40 @@ Scenes.Dreams.RavenAfterDream = function(ravenTrigger) {
 		else if(r == RavenMother.Stage.ravenstage2 + 2) {
 			Text.NL();
 			Text.Add("You turn your mind to the dream, and in moments find the veiled spot. In your mind, you examine it closer and closer, willing it to resolve, and finally it clears, and you see a raven. But what’s the significance of it being part of your dream? There is still something you’re missing.");
+			if(party.InParty(kiakai)) {
+				var parse = {
+					name : kiakai.name,
+					HeShe : kiakai.HeShe(),
+					heshe : kiakai.heshe()
+				};
+				Text.NL();
+				Text.Add("Musing about the ravens, it takes some time for you to fully notice your surroundings. You find a concerned-looking [name] almost hovering over you. <i>“You were stirring, muttering something in your sleep,”</i> the elf says, noticing your attention. <i>“Is everything well?”<i>", parse);
+				Text.Flush();
+				
+				//[Ravens][Fine]
+				var options = new Array();
+				options.push({ nameStr : "Ravens",
+					func : function() {
+						Scenes.Kiakai.RavenDreams();
+						
+						func(true);
+					}, enabled : true,
+					tooltip : Text.Parse("Ask [name] if [heshe] knows anything about the ravens that have been appearing in your dreams.", parse)
+				});
+				options.push({ nameStr : "Fine",
+					func : function() {
+						Text.Clear();
+						Text.Add("You tell [name] that you’re alright - you just had a strange dream. [HeShe] smiles, looking only a little skeptical.", parse);
+						Text.Flush();
+						
+						func(true);
+					}, enabled : true,
+					tooltip : Text.Parse("You’ll keep your concerns to yourself for now. You can always talk to [name] about the birds later if you decide it’s prudent.", parse)
+				});
+				Gui.SetButtonsFromList(options);
+				
+				return;
+			}
 			Text.Flush();
 		}
 		else if(r == RavenMother.Stage.ravenstage2 + 3) {
@@ -79,6 +143,8 @@ Scenes.Dreams.RavenAfterDream = function(ravenTrigger) {
 			Text.Flush();
 		}
 	}
+	
+	func(true);
 }
 
 Scenes.Dreams.RavenText = function(trigger, stage1, stage2, no) {

@@ -1956,7 +1956,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 					Text.Newline();
 					Text.AddOutput("Rosalin, rushing after you in pursuit, boulders into the poor wolf-morph, and the two of them roll around on the ground. After a brief tussle, the [raceDesc] alchemist comes out on top, panting slightly. [HeShe] moves to go after you, but stops when [heshe] notices the wolf pinned face-down underneath [himher]. Rosalin's aggressive snarl slowly turn into a wide grin as [heshe] makes a few experimental thrusts with [hisher] hips, letting [hisher] [rMultiCockDesc] lightly brush against [wName]'s taint.", parse);
 					Text.Newline();
-					Text.AddOutput("<i>\"R-rosie, let me go!\"</i> the wolf-morph begs piteously, trying to reason with the alchemist. One look at Rosalin's flushed expression tells you that's not likely to work. <i>\"I don't think so! You always so nice, helping me out when I get horny.\"</i> The [raceDesc] leans in close, hotdogging [hisher] [rMultiCockDesc] between the increasingly desperate wolf's cheeks. <i>\"And right now, I very, very horny,\"</i> [heshe] purrs.", parse);
+					Text.AddOutput("<i>\"R-rosie, let me go!\"</i> the wolf-morph begs piteously, trying to reason with the alchemist. One look at Rosalin's flushed expression tells you that's not likely to work. <i>\"I don't think so! You always so nice, helping me out when I get horny.\"</i> The [raceDesc] leans in close, hotdogging [hisher] [rMultiCockDesc] between the increasingly desperate wolf's cheeks. <i>\"And right now, I'm very, very horny,\"</i> [heshe] purrs.", parse);
 					Text.Newline();
 					Text.AddOutput("Seems you are off the hook for now, as Rosalin has found a new toy to play with. You could use this opportunity to escape, or...", parse);
 					

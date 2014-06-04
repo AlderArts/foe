@@ -284,6 +284,18 @@ Kiakai.prototype.TalkPrompt = function() {
 		func : Scenes.Kiakai.TalkPriest, enabled : true,
 		tooltip : "Ask about the priests of Aria."
 	});
+	// TALK RAVENS
+	var r = ravenmother.Ravenness();
+	if(r >= RavenMother.Stage.ravenstage2 + 2 &&
+	   ravenmother.flags["Met"] == 0) {
+		options.push({ nameStr : "Ravens",
+			func : function() {
+				Scenes.Kiakai.RavenDreams();
+				Gui.NextPrompt(kiakai.TalkPrompt);
+			}, enabled : true,
+			tooltip : Text.Parse("Ask [name] if [heshe] knows anything about the ravens that have been appearing in your dreams.", parse)
+		});
+	}
 	/*
 	options.push({nameStr : kiakai.name,
 		func : function() {
@@ -298,6 +310,30 @@ Kiakai.prototype.TalkPrompt = function() {
 }
 
 Scenes.Kiakai = {};
+
+Scenes.Kiakai.RavenDreams = function() {
+	var parse = {
+		playername : player.name,
+		name   : kiakai.name,
+		heshe  : kiakai.heshe(),
+		HeShe  : kiakai.HeShe(),
+		himher : kiakai.himher(),
+		hisher : kiakai.hisher(),
+		HisHer : kiakai.HisHer()
+	};
+	
+	Text.Clear();
+	Text.Add("You briefly tell [name] about the ravens you’ve noticed watching you in your dreams.", parse);
+	Text.NL();
+	Text.Add("<i>“That is very strange, [playername],”</i> [heshe] responds. <i>“Of course there are legends of demons and spirits appearing in people’s dreams, but I have never thought that anyone but lady Aria could actually do so. Yet I admit that what you say does not sound like a coincidence. It must be some form of powerful magic. You must be careful, [playername]!”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“As to ravens themselves, there is something peculiar about them. There is a connection that elves feel with almost all life on Eden, with all the plants, and all the animals. Yet, that connection is not present with ravens.”</i> [name] rubs [hisher] chin pensively. <i>“I have heard that in some of our oldest scrolls, a time is mentioned when ravens simply appeared in the world.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Where they came from or how they came to be here, even those scrolls do not say. It may be that this is somehow connected with what is happening in your dreams, but I am afraid you will have to find how for yourself.”</i>", parse);
+	Text.NL();
+	Text.Add("You thank the elf for [hisher] help, your curiosity piqued by the information. There really is something strange about the ravens in this world. You’ll just have to find out what it is.", parse);
+	Text.Flush();
+}
 
 Scenes.Kiakai.TalkQuest = function() {
 	
