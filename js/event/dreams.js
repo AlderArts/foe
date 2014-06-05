@@ -88,11 +88,19 @@ Scenes.Dreams.RavenAfterDream = function(ravenTrigger, func) {
 			Text.NL();
 			Text.Add("Most of the dream you just experienced is clear in your mind, though fading fast. But there is some part that feels strangely obscured... clawing at your memory, wishing to be recalled, but just beyond your reach.");
 			Text.Flush();
+			Gui.NextPrompt(function() {
+				func(true);
+			});
+			return;
 		}
 		else if(r == RavenMother.Stage.ravenstage2 + 1) {
 			Text.NL();
 			Text.Add("The memories come clearer this time. And amid the clear memories, you distinguish one spot that is veiled in blackness, as if excised from your mind. You grab at it, pushing the veil aside with a mental effort, but it’s already faded too far. Next time you will be quicker.");
 			Text.Flush();
+			Gui.NextPrompt(function() {
+				func(true);
+			});
+			return;
 		}
 		else if(r == RavenMother.Stage.ravenstage2 + 2) {
 			Text.NL();
@@ -113,7 +121,9 @@ Scenes.Dreams.RavenAfterDream = function(ravenTrigger, func) {
 					func : function() {
 						Scenes.Kiakai.RavenDreams();
 						
-						func(true);
+						Gui.NextPrompt(function() {
+							func(true);
+						});
 					}, enabled : true,
 					tooltip : Text.Parse("Ask [name] if [heshe] knows anything about the ravens that have been appearing in your dreams.", parse)
 				});
@@ -123,7 +133,9 @@ Scenes.Dreams.RavenAfterDream = function(ravenTrigger, func) {
 						Text.Add("You tell [name] that you’re alright - you just had a strange dream. [HeShe] smiles, looking only a little skeptical.", parse);
 						Text.Flush();
 						
-						func(true);
+						Gui.NextPrompt(function() {
+							func(true);
+						});
 					}, enabled : true,
 					tooltip : Text.Parse("You’ll keep your concerns to yourself for now. You can always talk to [name] about the birds later if you decide it’s prudent.", parse)
 				});
@@ -132,6 +144,10 @@ Scenes.Dreams.RavenAfterDream = function(ravenTrigger, func) {
 				return;
 			}
 			Text.Flush();
+			Gui.NextPrompt(function() {
+				func(true);
+			});
+			return;
 		}
 		else if(r == RavenMother.Stage.ravenstage2 + 3) {
 			Text.NL();
@@ -141,6 +157,10 @@ Scenes.Dreams.RavenAfterDream = function(ravenTrigger, func) {
 			Text.NL();
 			Text.Add("You do however feel that it’s somehow the power of the gem that’s letting you see through their obfuscations, and gain greater awareness while you sleep. Perhaps if you focus on it before going to sleep the next time, you’ll be able to figure something out within the dream.");
 			Text.Flush();
+			Gui.NextPrompt(function() {
+				func(true);
+			});
+			return;
 		}
 	}
 	
