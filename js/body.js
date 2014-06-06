@@ -845,6 +845,9 @@ function Vagina() {
 	
 	this.virgin        = true;
 }
+Vagina.prototype.Pregnant = function() {
+	return this.womb.pregnant;
+}
 // TODO
 Vagina.prototype.Fits = function(cock) {
 	return cock.length.Get() <= this.capacity.Get();
@@ -989,6 +992,9 @@ function Butt() {
 	this.womb     = new Womb();
 	
 	this.virgin   = true;
+}
+Butt.prototype.Pregnant = function() {
+	return this.womb.pregnant;
 }
 // TODO
 Butt.prototype.Fits = function(cock) {

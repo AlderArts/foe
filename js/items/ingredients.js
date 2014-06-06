@@ -117,7 +117,7 @@ Items.LizardEgg.Use = function(target) {
 	Text.AddOutput("[name] eat[s] a lizard egg. It is slightly invigorating.", parse);
 	Text.Newline();
 	
-	return true;
+	return {consume: true};
 }
 
 Items.Lacertium = new TFItem("rept0", "Lacertium");
@@ -155,7 +155,7 @@ Items.GoatMilk.Use = function(target) {
 	Text.AddOutput("[name] drink[s] a bottle of milk. It is slightly invigorating.", parse);
 	Text.Newline();
 	
-	return true;
+	return {consume: true};
 }
 
 // TODO: GOAT TF
@@ -170,7 +170,7 @@ Items.SheepMilk.Use = function(target) {
 	Text.AddOutput("[name] drink[s] a bottle of milk. It is slightly invigorating.", parse);
 	Text.Newline();
 	
-	return true;
+	return {consume: true};
 }
 
 // TODO: SHEEP TF
@@ -186,7 +186,7 @@ Items.CowMilk.Use = function(target) {
 	Text.AddOutput("[name] drink[s] a bottle of milk. It is slightly invigorating.", parse);
 	Text.Newline();
 	
-	return true;
+	return {consume: true};
 }
 Items.CowBell = new Item("bov2", "Cowbell");
 Items.CowBell.price = 2;
@@ -257,7 +257,7 @@ Items.DogBiscuit.Use = function(target) {
 	Text.AddOutput("[name] chew[s] on a dog biscuit. It is slightly invigorating.", parse);
 	Text.Newline();
 	
-	return true;
+	return {consume: true};
 }
 
 Items.Canis = new TFItem("dog0", "Canis");
@@ -376,7 +376,7 @@ Items.Hummus.Use = function(target) {
 	var parse = { name: target.NameDesc(), s: target == player ? "" : "s" };
 	Text.AddOutput("[name] eat[s] some hummus. It is slightly invigorating.", parse);
 	Text.Newline();
-	return true;
+	return {consume: true};
 }
 
 Items.SpringWater = new Item("human2", "Spring water");

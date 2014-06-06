@@ -41,6 +41,8 @@ function Player(storage) {
 	
 	this.flags["startJob"] = JobEnum.Fighter;
 	
+	this.summons = [];
+	
 	// Set hp and mana to full
 	this.SetLevelBonus();
 	this.RestFull();
@@ -111,6 +113,10 @@ Player.prototype.is = function() {
 }
 Player.prototype.plural = function() {
 	return true;
+}
+
+Player.prototype.Magic = function() {
+	return gameCache.flags["LearnedMagic"] != 0;
 }
 
 Player.prototype.HandleDrunknessOverTime = function(hours, suppressText) {

@@ -222,7 +222,7 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 					  	nameStr : t.name,
 					  	func    : function(t) {
 					  		Text.Clear();
-					  		if(item.Use(t)) // Consume?
+					  		if(item.Use(t).consume) // Consume?
 					  			inv.RemoveItem(item);
 					  		Gui.NextPrompt(backPrompt);
 					  	},

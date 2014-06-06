@@ -241,8 +241,8 @@ RaceScore.prototype.Sorted = function() {
  */
 function TFItem(id, name) {
 	Item.call(this, id, name);
-	this.Use = TF.UseItem;
-	this.useStr = TF.UseItemDesc;
+	this.Use     = TF.UseItem;
+	this.useStr  = TF.UseItemDesc;
 	this.effects = [];
 }
 TFItem.prototype = new Item();
@@ -252,15 +252,19 @@ TFItem.prototype.PushEffect = function(func, opts) {
 	this.effects.push({ func: func, opts: opts});
 }
 
-TF.UseItem = function(target) {
-	if(this.useStr)
+TF.UseItem = function(target, suppressUse) {
+	var changed = TF.Effect.Unchanged;
+	if(!suppressUse && this.useStr)
 		this.useStr(target);
 	for(var i = 0; i < this.effects.length; i++) {
 		var effect = this.effects[i];
-		if(effect.func)
-			effect.func(target, effect.opts);
+		if(effect.func) {
+			var ret = effect.func(target, effect.opts);
+			if(ret != TF.Effect.Unchanged)
+				changed = ret;
+		}
 	}
-	return true;
+	return {consume: true, changed: changed};
 }
 
 TF.UseItemDesc = function(target) {
@@ -280,11 +284,13 @@ TF.ItemEffects = {};
 
 // odds, race, str
 TF.ItemEffects.SetCock = function(target, opts) {
+	var changed = TF.Effect.Unchanged;
 	var parse = { poss: target.possessive(), Poss: target.Possessive(), str: opts.str };
 	var odds = opts.odds || 1;
 	var cocks = target.AllCocks();
 	if(Math.random() < odds) {
-		if(TF.SetRaceOne(cocks, opts.race)) {
+		changed = TF.SetRaceOne(cocks, opts.race);
+		if(changed != TF.Effect.Unchanged) {
 			if(cocks.length > 1)
 				Text.AddOutput("One of [poss] cocks turns into [str]!", parse);
 			else
@@ -292,19 +298,23 @@ TF.ItemEffects.SetCock = function(target, opts) {
 			Text.Newline();
 		}
 	}
+	return changed;
 }
 
 // odds, race, str
 TF.ItemEffects.SetEars = function(target, opts) {
+	var changed = TF.Effect.Unchanged;
 	var parse = { Poss: target.Possessive(), str: opts.str };
 	var odds = opts.odds || 1;
 	var ears = target.Ears();
 	if(Math.random() < odds) {
-		if(TF.SetRaceOne(ears, opts.race)) {
+		changed = TF.SetRaceOne(ears, opts.race);
+		if(changed == TF.Effect.Unchanged) {
 			Text.AddOutput("[Poss] ears turn into [str]!", parse);
 			Text.Newline();
 		}
 	}
+	return changed;
 }
 
 // odds, value, num
@@ -369,11 +379,13 @@ TF.ItemEffects.SetSheath = function(target, opts) {
 
 // odds, race, str, color
 TF.ItemEffects.SetTail = function(target, opts) {
+	var changed = TF.Effect.Unchanged;
 	var parse = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
 	
 	var odds = opts.odds || 1;
 	if(Math.random() < odds) {
-		switch(TF.SetAppendage(target.Back(), AppendageType.tail, opts.race, opts.color)) {
+		changed = TF.SetAppendage(target.Back(), AppendageType.tail, opts.race, opts.color);
+		switch(changed) {
 			case TF.Effect.Changed:
 				Text.AddOutput("[Poss] tail changes, turning into [str]!", parse);
 				Text.Newline();
@@ -384,14 +396,17 @@ TF.ItemEffects.SetTail = function(target, opts) {
 				break;
 		}
 	}
+	return changed;
 }
 
 // odds, count
 TF.ItemEffects.RemTail = function(target, opts) {
+	var changed = TF.Effect.Unchanged;
 	var parse = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
 	var odds = opts.odds || 1;
 	if(Math.random() < odds) {
-		switch(TF.RemoveAppendage(target.Back(), AppendageType.tail, opts.count)) {
+		changed = TF.RemoveAppendage(target.Back(), AppendageType.tail, opts.count);
+		switch(changed) {
 			case TF.Effect.Changed:
 				Text.AddOutput("[name] lose [count] of [hisher] tails!", parse);
 				Text.Newline();
@@ -402,15 +417,18 @@ TF.ItemEffects.RemTail = function(target, opts) {
 				break;
 		}
 	}
+	return changed;
 }
 
 // odds, race, str, color, count
 TF.ItemEffects.SetHorn = function(target, opts) {
+	var changed = TF.Effect.Unchanged;
 	var parse = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
 	
 	var odds = opts.odds || 1;
 	if(Math.random() < odds) {
-		switch(TF.SetAppendage(target.Appendages(), AppendageType.horn, opts.race, opts.color, opts.count)) {
+		changed = TF.SetAppendage(target.Appendages(), AppendageType.horn, opts.race, opts.color, opts.count);
+		switch(changed) {
 			case TF.Effect.Changed:
 				Text.AddOutput("[Poss] horns change, turning into [str]!", parse);
 				Text.Newline();
@@ -421,14 +439,17 @@ TF.ItemEffects.SetHorn = function(target, opts) {
 				break;
 		}
 	}
+	return changed;
 }
 
 // odds, count
 TF.ItemEffects.RemHorn = function(target, opts) {
+	var changed = TF.Effect.Unchanged;
 	var parse = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
 	var odds = opts.odds || 1;
 	if(Math.random() < odds) {
-		switch(TF.RemoveAppendage(target.Appendages(), AppendageType.horn, opts.count)) {
+		changed = TF.RemoveAppendage(target.Appendages(), AppendageType.horn, opts.count);
+		switch(changed) {
 			case TF.Effect.Changed:
 				Text.AddOutput("[name] lose [count] of [hisher] horns!", parse);
 				Text.Newline();
@@ -439,15 +460,18 @@ TF.ItemEffects.RemHorn = function(target, opts) {
 				break;
 		}
 	}
+	return changed;
 }
 
 // odds, race, str, color, count
 TF.ItemEffects.SetAntenna = function(target, opts) {
+	var changed = TF.Effect.Unchanged;
 	var parse = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
 	
 	var odds = opts.odds || 1;
 	if(Math.random() < odds) {
-		switch(TF.SetAppendage(target.Appendages(), AppendageType.antenna, opts.race, opts.color, opts.count)) {
+		changed = TF.SetAppendage(target.Appendages(), AppendageType.antenna, opts.race, opts.color, opts.count);
+		switch(changed) {
 			case TF.Effect.Changed:
 				Text.AddOutput("[Poss] antenna change, turning into [str]!", parse);
 				Text.Newline();
@@ -458,14 +482,17 @@ TF.ItemEffects.SetAntenna = function(target, opts) {
 				break;
 		}
 	}
+	return changed;
 }
 
 // odds, count
 TF.ItemEffects.RemAntenna = function(target, opts) {
+	var changed = TF.Effect.Unchanged;
 	var parse = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
 	var odds = opts.odds || 1;
 	if(Math.random() < odds) {
-		switch(TF.RemoveAppendage(target.Appendages(), AppendageType.antenna, opts.count)) {
+		changed = TF.RemoveAppendage(target.Appendages(), AppendageType.antenna, opts.count);
+		switch(changed) {
 			case TF.Effect.Changed:
 				Text.AddOutput("[name] lose [count] of [hisher] antenna!", parse);
 				Text.Newline();
@@ -476,15 +503,18 @@ TF.ItemEffects.RemAntenna = function(target, opts) {
 				break;
 		}
 	}
+	return changed;
 }
 
 // odds, race, str, color, count
 TF.ItemEffects.SetWings = function(target, opts) {
+	var changed = TF.Effect.Unchanged;
 	var parse = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
 	
 	var odds = opts.odds || 1;
 	if(Math.random() < odds) {
-		switch(TF.SetAppendage(target.Back(), AppendageType.wing, opts.race, opts.color, opts.count)) {
+		changed = TF.SetAppendage(target.Back(), AppendageType.wing, opts.race, opts.color, opts.count);
+		switch(changed) {
 			case TF.Effect.Changed:
 				Text.AddOutput("[Poss] wings change, turning into [str]!", parse);
 				Text.Newline();
@@ -495,14 +525,17 @@ TF.ItemEffects.SetWings = function(target, opts) {
 				break;
 		}
 	}
+	return changed;
 }
 
 // odds, count
 TF.ItemEffects.RemWings = function(target, opts) {
+	var changed = TF.Effect.Unchanged;
 	var parse = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
 	var odds = opts.odds || 1;
 	if(Math.random() < odds) {
-		switch(TF.RemoveAppendage(target.Back(), AppendageType.wing, opts.count)) {
+		changed = TF.RemoveAppendage(target.Back(), AppendageType.wing, opts.count);
+		switch(changed) {
 			case TF.Effect.Changed:
 				Text.AddOutput("[name] lose [count] of [hisher] wings!", parse);
 				Text.Newline();
@@ -513,14 +546,17 @@ TF.ItemEffects.RemWings = function(target, opts) {
 				break;
 		}
 	}
+	return changed;
 }
 
 // odds, race, color, ideal, count
 TF.ItemEffects.SetBalls = function(target, opts) {
+	var changed = TF.Effect.Unchanged;
 	var parse = { name: target.NameDesc(), s: target == player ? "" : "s", count: Text.NumToText(opts.count), ballsDesc: function() { return target.BallsDesc(); } };
 	var odds = opts.odds || 1;
 	if(Math.random() < odds) {
-		switch(TF.SetBalls(target.body.balls, opts.ideal, opts.count)) {
+		changed = TF.SetBalls(target.body.balls, opts.ideal, opts.count);
+		switch(changed) {
 			case TF.Effect.Changed:
 				Text.AddOutput("[name] grow[s] an extra [count] testicles!", parse);
 				Text.Newline();
@@ -531,14 +567,17 @@ TF.ItemEffects.SetBalls = function(target, opts) {
 				break;
 		}
 	}
+	return changed;
 }
 
 // odds, ideal, count
 TF.ItemEffects.RemBalls = function(target, opts) {
+	var changed = TF.Effect.Unchanged;
 	var parse = { name: target.NameDesc(), count: Text.NumToText(opts.count), hisher: target.hisher(), ballsDesc: target.BallsDesc() };
 	var odds = opts.odds || 1;
 	if(Math.random() < odds) {
-		switch(TF.RemoveAppendage(target.body.balls, opts.ideal, opts.count)) {
+		changed = TF.RemoveAppendage(target.body.balls, opts.ideal, opts.count);
+		switch(changed) {
 			case TF.Effect.Changed:
 				Text.AddOutput("[name] lose [count] of [hisher] testicles!", parse);
 				Text.Newline();
@@ -549,6 +588,7 @@ TF.ItemEffects.RemBalls = function(target, opts) {
 				break;
 		}
 	}
+	return changed;
 }
 
 // odds, ideal, max

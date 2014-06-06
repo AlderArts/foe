@@ -110,6 +110,7 @@ InitCache = function() {
 	gameCache.flags = gameCache.flags || {};
 	
 	gameCache.flags["LearnedMagic"]            = gameCache.flags["LearnedMagic"] || 0;
+	gameCache.flags["Portals"]                 = gameCache.flags["Portals"] || 0;
 	
 	// Intro flags
 	gameCache.flags["IntroLostToImps"]         = gameCache.flags["IntroLostToImps"] || 0;
