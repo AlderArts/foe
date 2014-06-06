@@ -4,6 +4,51 @@
  * 
  */
 
+/*
+ * Structure to hold farm management minigame
+ */
+function Farm(storage) {
+	this.coin = 1000;
+	
+	this.flags = {};
+	//this.flags["flag"] = 0;
+	
+	if(storage) this.FromStorage(storage);
+}
+
+Farm.prototype.FromStorage = function(storage) {
+	this.coin = parseInt(storage.coin) || this.coin;
+	// Load flags
+	for(var flag in storage.flags)
+		this.flags[flag] = parseInt(storage.flags[flag]);
+}
+
+Farm.prototype.ToStorage = function() {
+	var storage   = {};
+	storage.coin  = this.coin;
+	storage.flags = this.flags;
+	
+	return storage;
+}
+
+Farm.prototype.Update = function(step) {
+	// TODO: Farm produce etc
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Create namespace
 world.loc.Farm = {
 	Fields : new Event("Gwendy's farm"),
@@ -1570,6 +1615,7 @@ Scenes.Farm.Market = function(haul, next) {
 	Text.Add("<b>You receive [coin] coins!</b>", parse);
 	Text.Flush();
 	
+	farm.coin  += gcoin;
 	party.coin += coin;
 	
 	world.TimeStep({hour: 4});

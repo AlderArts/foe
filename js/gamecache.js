@@ -19,6 +19,7 @@ InitCache = function() {
 	};
 	
 	rigard   = new Rigard(gameCache.rigard);
+	farm     = new Farm(gameCache.farm);
 	burrows  = new Burrows(gameCache.burrows);
 	treecity = new TreeCity(gameCache.treecity);
 	
@@ -99,6 +100,7 @@ InitCache = function() {
 	
 	// Stuff that also has update methods
 	world.EntityStorage.push(rigard);
+	world.EntityStorage.push(farm);
 	
 	// PARTY
 	party = new Party();
@@ -296,6 +298,7 @@ GameToCache = function() {
 	gameCache.time    = world.time;
 	
 	gameCache.rigard   = rigard.ToStorage();
+	gameCache.farm     = farm.ToStorage();
 	gameCache.burrows  = burrows.ToStorage();
 	gameCache.treecity = treecity.ToStorage();
 	
