@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 3;
-VERSION_SUBSCRIPT = "g";
-VERSION_NAME = "Cats, golems and Miranda";
+VERSION_SUBSCRIPT = "h";
+VERSION_NAME = "Magnus, Gwendy and Ravens";
 
 SAVE_VERSION = 13;
 // Save version 1: Initial
