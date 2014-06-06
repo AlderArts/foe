@@ -1304,6 +1304,7 @@ Sex.Preg = function(father, mother, num) {
 Entity.prototype.Sexed = function() {
 	for(var flag in this.sex)
 		if(this.sex[flag] != 0)
+			return true;
 	return false;
 }
 

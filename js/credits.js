@@ -11,7 +11,8 @@ CreditsScreen = function() {
 	Text.AddOutput(Text.BoldColor("Writing:"));
 	Text.Newline();
 	Text.AddOutput("Horse encounter: gber1<br/>");
-	Text.AddOutput("Gwendy's farm: Kiro<br/>");
+	Text.AddOutput("Gwendy's farm, sex: Kiro<br/>");
+	Text.AddOutput("Gwendy's farm, market: QB, LD and Alder<br/>");
 	Text.AddOutput("Lizard encounter: Salrith<br/>");
 	Text.AddOutput("Much of Kiakai's dialogue: Del<br/>");
 	Text.AddOutput("Rigard random scenes: Del<br/>");

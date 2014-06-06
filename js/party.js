@@ -73,6 +73,22 @@ Party.prototype.InParty = function(member, onlyActive) {
 	return false;
 }
 
+Party.prototype.GetActiveParty = function() {
+	var ret = [];
+	for(var i = 0; i < this.members.length; ++i)
+		ret.push(this.members[i]);
+	return ret;
+}
+Party.prototype.ClearActiveParty = function() {
+	while(this.members.length > 1)
+		this.SwitchOut(this.members[1]);
+}
+Party.prototype.SwitchInActiveParty = function(arr) {
+	this.ClearActiveParty();
+	for(var i = 0; i < arr.length; ++i) {
+		this.SwitchIn(arr[i]);
+	}
+}
 // From "Total"
 Party.prototype.Get = function(num) {
 	if(num < this.members.length) return this.members[num];

@@ -44,6 +44,7 @@ function Gwendy(storage) {
 	this.RestFull();
 	
 	this.flags["Met"]  = 0;
+	this.flags["Market"] = 0;
 	this.flags["Toys"] = 0; // seen/used toys
 	
 	this.flags["WorkMilked"] = 0;
@@ -60,11 +61,26 @@ function Gwendy(storage) {
 Gwendy.prototype = new Entity();
 Gwendy.prototype.constructor = Gwendy;
 
+Gwendy.Market = {
+	NotAsked : 0,
+	Asked    : 1,
+	GoneToMarket : 2
+}
+
 Gwendy.Toys = {
 	Strapon  : 1,
 	RStrapon : 2,
 	Beads    : 3,
 	DDildo   : 4
+}
+
+Gwendy.prototype.Sexed = function() {
+	for(var flag in this.sex)
+		if(this.sex[flag] != 0)
+			return true;
+	if(this.flags["ChallengeWinScene"]  != 0) return true;
+	if(this.flags["ChallengeLostScene"] != 0) return true;
+	return false;
 }
 
 Gwendy.prototype.FromStorage = function(storage) {
@@ -146,9 +162,39 @@ Scenes.Gwendy.LoftPrompt = function() {
 		func : Scenes.Gwendy.Talk, obj : Scenes.Gwendy.LoftPrompt, enabled : true,
 		tooltip : "Chat with Gwendy."
 	});
-	Gui.SetButtonsFromList(options);
+	options.push({ nameStr : "Sex",
+		func : Scenes.Gwendy.LoftSexPrompt, obj : Scenes.Gwendy.LoftPrompt, enabled : gwendy.Sexed(),
+		tooltip : "Proposition her for sex."
+	});
+	Gui.SetButtonsFromList(options, true);
+}
+
+Scenes.Gwendy.LoftSexPrompt = function(back) {
+	var parse = {};
+	var options = new Array();
+	Scenes.Gwendy.ChallengeSexWonPrompt(true, options);
+	Scenes.Gwendy.ChallengeSexLostPrompt(true, options);
+	options.push({ nameStr : "Sleep",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>”Ah, could use to work out some of my kinks - if you know what I mean - but if you are tired, fair enough.”</i> Gwendy yawns, stretching. <i>”I guess I need some sleep as well, running this farm is tiring work.”</i>", parse);
+			Text.NL();
+			Text.Add("With that said, the farm girl undresses, putting on quite a show for you. There is a slight sheen of perspiration on her freckled skin, and she dries herself off with a towel before heading for her bed, stark naked. She sways her butt enticingly as she walks, showing off the horseshoe tattoo on her lower back.", parse);
+			Text.NL();
+			Text.Add("<i>”Sure you haven’t changed your mind?”</i> Gwendy asks sultrily, noticing your stare. You shake your head a bit, trying to clear it. Undressing, you join her in bed. You fall asleep to the calm beat of her heart, her skin warm against yours.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				world.loc.Farm.Loft.SleepFunc();
+			});
+		}, enabled : true,
+		tooltip : "Just sleep for now."
+	});
 	
-	Gui.NextPrompt();
+	if(back)
+		Gui.SetButtonsFromList(options, true, back);
+	else
+		Gui.SetButtonsFromList(options);
 }
 
 Scenes.Gwendy.BarnPrompt = function() {
@@ -179,7 +225,7 @@ Scenes.Gwendy.BarnPrompt = function() {
 		func : Scenes.Gwendy.Work, enabled : true,
 		tooltip : "Be a little productive, lend an able hand."
 	});
-	Gui.SetButtonsFromList(options);
+	Gui.SetButtonsFromList(options, true);
 }
 
 Scenes.Gwendy.FieldsPrompt = function() {
@@ -208,12 +254,12 @@ Scenes.Gwendy.FieldsPrompt = function() {
 		func : Scenes.Gwendy.Work, enabled : true,
 		tooltip : "Be a little productive, lend an able hand."
 	});
-	Gui.SetButtonsFromList(options);
+	Gui.SetButtonsFromList(options, true);
 }
 
 Scenes.Gwendy.Talk = function(backfunc) {
 	var parse = {
-		
+		playername : player.name
 	};
 	
 	Text.Clear();
@@ -263,6 +309,91 @@ Scenes.Gwendy.Talk = function(backfunc) {
 		}, enabled : true,
 		tooltip : "Talk about random things."
 	});
+	
+	if(gwendy.flags["Market"] == Gwendy.Market.NotAsked) {
+		options.push({ nameStr : "Rigard",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”Looking to get inside Rigard are you? I don’t see why. That place is full of pompous jerks and bigots,”</i> she says, sighing. <i>”I don’t go near the place, myself, if I can avoid it. I do have to head there at times in order to sell my crops and produce, however. You could tag along when I head for the market, I guess.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>”Just make sure to catch me early, it usually takes most of the day before I finish. Of course, with your help it will hopefully be quicker.”</i>", parse);
+				Text.Flush();
+				gwendy.flags["Market"] = Gwendy.Market.Asked;
+				
+				Gui.NextPrompt(function() {
+					Scenes.Gwendy.Talk(backfunc);
+				});
+			}, enabled : true,
+			tooltip : "Ask her for a way to get into the city of Rigard."
+		});
+	}
+	else if(gwendy.flags["Market"] == Gwendy.Market.Asked) {
+		options.push({ nameStr : "Market",
+			func : function() {
+				Text.Clear();
+				if(world.time.hour >= 7) {
+					Text.Add("<i>”[playername], can we talk about this tomorrow morning? I’m busy right now, and just not in the mood to talk about the city, okay?”</i>", parse);
+					Text.Flush();
+					Gui.NextPrompt(function() {
+						Scenes.Gwendy.Talk(backfunc);
+					});
+					return;
+				}
+				else if(gwendy.Relation() < 30) {
+					Text.Add("<i>”While I do have a pass to get within the gates, you wouldn’t believe what I had to go through just to get one. No offense, [playername]. But I think we should get to know each other a little more before I’m willing to vouch for you. If you do something bad within the city limits, I’d be the one taking the fall.</i>", parse);
+					Text.NL();
+					Text.Add("You nod in understanding. That seems reasonable.", parse);
+					Text.NL();
+					Text.Add("<i>“Good, anything else you’d like to talk about? There is so much work to do, but I can spare some time to chat if you want,”</i> she smiles.", parse);
+					Text.Flush();
+					
+					Gui.NextPrompt(function() {
+						Scenes.Gwendy.Talk(backfunc);
+					});
+					return;
+				}
+				
+				var racescore = new RaceScore(player.body);
+				var humanScore = new RaceScore();
+				humanScore.score[Race.human] = 1;
+				var humanity = racescore.Compare(humanScore);
+				
+				Text.Add("<i>”You’d like to help me? Great, but you should know this first. Rigard isn’t a particularly nice city, just warning you. There is a reason I usually do this alone and don’t bring Adrian along.”</i>", parse);
+				Text.NL();
+				if(humanity < 0.95)
+					Text.Add("<i>”That place is going to give you a hard time [playername]. They’re not very fond of morphs, or anything that doesn’t look… well… human in general. Are you sure you want to go?”</i>", parse);
+				else
+					Text.Add("<i>”You being a ‘pure’ human helps, but I wouldn’t expect any kind of niceties from that lot. I think they might hate on you just for associating, given my reputation.”</i> She sighs. <i>“You still wanna go?”</i>", parse);
+				Text.Flush();
+			
+				//[Yes][No]
+				var options = new Array();
+				options.push({ nameStr : "Yes",
+					func : Scenes.Farm.GoToMarketFirst, enabled : true,
+					tooltip : "Despite all adversities, you still want to go. Besides, if it‘s that bad, she probably needs some company, right?"
+				});
+				options.push({ nameStr : "No",
+					func : function() {
+						Text.Clear();
+						Text.Add("Gwendy smiles as she hears your reply.", parse);
+						Text.NL();
+						Text.Add("<i>”Good choice! They’re a bunch of hypocrites, if you ask me. They hate on morphs, but sure don’t see to have a problem using their wool or drinking their milk when I go there to ship my produce,”</i> she comments angrily. <i>”Trust me, you’re doing yourself a favor by staying away from that place.”</i>", parse);
+						Text.NL();
+						Text.Add("<i>”Anyway, anything else you’d like to talk about?”</i>", parse);
+						Text.Flush();
+						
+						Gui.NextPrompt(function() {
+							Scenes.Gwendy.Talk(backfunc);
+						});
+					}, enabled : true,
+					tooltip : "On second thought, you’ve changed your mind."
+				});
+				Gui.SetButtonsFromList(options);
+			}, enabled : true,
+			tooltip : "Ask her if the two of you can make a trip to the market in Rigard."
+		});
+	}
+	
 	/* TODO
 	options.push({ nameStr : "Placeholder",
 		func : function() {
@@ -616,7 +747,10 @@ Scenes.Gwendy.ChallengeSex = function(skillcheck, lose) {
 			Text.AddOutput("Face it, when she puts her mind to it, you can't win. At this point, you have to wonder if you actually accept your defeat and are just taking the challenges to get off. Who knows, maybe it's not so bad losing to the sexy girl? In any event, she gets to have her way with you again.", parse);
 		
 		Gui.NextPrompt(function() {
-			Scenes.Gwendy.ChallengeSexLostPrompt(false);
+			var options = new Array();
+			var ret = Scenes.Gwendy.ChallengeSexLostPrompt(false, options);
+			if(ret)
+				Gui.SetButtonsFromList(options);
 		});
 	}
 	else {
@@ -631,21 +765,25 @@ Scenes.Gwendy.ChallengeSex = function(skillcheck, lose) {
 		else
 			Text.AddOutput("At this point, it's hard to call it a challenge. Despite that, Gwendy has definitely given it her all to best you, it just that her best isn't good enough. A shame, but it means you're going to have some fun...", parse);
 		
-		Scenes.Gwendy.ChallengeSexWonPrompt(false);
+		var options = new Array();
+		Scenes.Gwendy.ChallengeSexWonPrompt(false, options);
+		Gui.SetButtonsFromList(options);
 	}
 }
 
-Scenes.Gwendy.ChallengeSexWonPrompt = function(hangout) {
+Scenes.Gwendy.ChallengeSexWonPrompt = function(hangout, options) {
 	var parse = {
 		playername : player.name
 	};
+	
+	var wins = gwendy.flags["ChallengeWinScene"];
+	if(hangout) wins--;
 
-	var options = new Array();
 	options.push({ nameStr : "Kiss",
 		func : function() {
 			Text.Clear();
 			// If first time
-			if(gwendy.flags["ChallengeWinScene"] == 0) {
+			if(wins == 0 && !hangout) {
 				if(gwendy.flags["LostChallenge"] > 0)
 					Text.AddOutput("Since Gwendy went easy on you when you lost the first time, you decide to start things off light.", parse);
 				else
@@ -685,7 +823,7 @@ Scenes.Gwendy.ChallengeSexWonPrompt = function(hangout) {
 		}, enabled : true,
 		tooltip : "Just a peck, please."
 	});
-	if(gwendy.flags["ChallengeWinScene"] >= 1) {
+	if(wins >= 1) {
 		if(player.FirstCock()) {
 			options.push({ nameStr : "Handjob",
 				func : function() {
@@ -703,7 +841,7 @@ Scenes.Gwendy.ChallengeSexWonPrompt = function(hangout) {
 			});
 		}
 	}
-	if(gwendy.flags["ChallengeWinScene"] >= 2) {
+	if(wins >= 2) {
 		if(player.FirstCock()) {
 			options.push({ nameStr : "Titfuck",
 				func : function() {
@@ -719,7 +857,7 @@ Scenes.Gwendy.ChallengeSexWonPrompt = function(hangout) {
 			tooltip : "Play a little with her body, teasing her."
 		});
 	}
-	if(gwendy.flags["ChallengeWinScene"] >= 3) {
+	if(wins >= 3) {
 		if(player.FirstCock()) {
 			options.push({ nameStr : "Blowjob",
 				func : function() {
@@ -737,7 +875,7 @@ Scenes.Gwendy.ChallengeSexWonPrompt = function(hangout) {
 			});
 		}
 	}
-	if(gwendy.flags["ChallengeWinScene"] >= 4) {
+	if(wins >= 4) {
 		if(gwendy.FirstVag()) {
 			if(player.FirstCock()) {
 				options.push({ nameStr : "Fuck her",
@@ -757,7 +895,7 @@ Scenes.Gwendy.ChallengeSexWonPrompt = function(hangout) {
 			}
 		}
 	}
-	if(gwendy.flags["ChallengeWinScene"] >= 5) {
+	if(wins >= 5) {
 		if(player.FirstCock()) {
 			options.push({ nameStr : "Anal",
 				func : function() {
@@ -801,7 +939,6 @@ Scenes.Gwendy.ChallengeSexWonPrompt = function(hangout) {
 			});
 		}
 	}
-	Gui.SetButtonsFromList(options);
 }
 
 Scenes.Gwendy.ChallengeSexHands = function(cock, hangout) {
@@ -1145,9 +1282,7 @@ Scenes.Gwendy.ChallengeSexBody = function(titjob, hangout) {
 					Text.Add("<i>”Say... are you really just going to leave it like that?\"</i> she manages to pant, grinding back against your body. <i>”Come on... I need it...\"</i>", parse);
 					Text.Flush();
 					
-					// TODO #Goto sex options
-					
-					Gui.NextPrompt();
+					Scenes.Gwendy.LoftSexPrompt();					
 				}, enabled : true,
 				tooltip : "She is ready and more than willing."
 			});
@@ -1982,6 +2117,9 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout) {
 
 	// gwendy.flags["ChallengeLostScene"]
 	var lossScene = gwendy.flags["ChallengeLostScene"];
+	var wonScene  = gwendy.flags["ChallengeWonScene"];
+	if(hangout) lossScene--;
+	if(hangout) wonScene--;
 	
 	var options = new Array();
 	options.push({ nameStr : "Kiss",
@@ -2007,11 +2145,9 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout) {
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
 					Text.AddOutput("As she breaks the kiss, you find yourself slightly aroused. The same could be said for Gwendy and her amorous glance. <i>\"Heheh, sorry, [playername], but that's all for now.\"</i> She smiles upon noticing your disappointment, though she makes up with another, longer kiss. <i>\"Then again, I might not be able to resist so easily... whaddaya say we kick it up a notch?\"</i>", parse);
-					Text.Newline();
-					Text.AddOutput("<b>TEMP, SCENE MISSING</b>");
-					// TODO: SEX PROMPT
-					Gui.NextPrompt();
-				}, 1.0, function() { return true; });
+					
+					Scenes.Gwendy.LoftSexPrompt();
+				}, 1.0, function() { return lossScene >= 1 || wonScene >= 1; });
 				
 				scenes.Get();
 			}
@@ -2228,7 +2364,7 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout) {
 	}
 	*/
 	if(hangout)
-		Gui.SetButtonsFromList(options);
+		return true;
 	else if(lossScene < options.length) {
 		player.subDom.DecreaseStat(-100, 3);
 		gwendy.subDom.IncreaseStat(100, 5);
@@ -2236,10 +2372,12 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout) {
 		options[lossScene].func();
 		
 		gwendy.flags["ChallengeLostScene"]++;
+		
+		return false;
 	}
 	else {
 		Text.AddOutput("<i>\"Today, I'll be a kind mistress and allow my pet to choose [phisher] own humiliation,\"</i> Gwendy tells you gracefully.", parse);
-		Gui.SetButtonsFromList(options);
+		return true;
 	}
 }
 
