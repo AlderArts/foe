@@ -1442,6 +1442,7 @@ Scenes.Gwendy.ChallengeSexVag = function(fuck, hangout) {
 		cockTip        : function() { return player.FirstCock().TipShort(); },
 		vagDesc        : function() { return player.FirstVag().Short(); },
 		clitDesc       : function() { return player.FirstVag().ClitShort(); },
+		buttDesc       : function() { return player.Butt().Short(); },
 		anusDesc       : function() { return player.Butt().AnalShort(); },
 		ballsDesc      : function() { return player.BallsDesc(); },
 		armorDesc      : function() { return player.ArmorDesc(); },
@@ -1544,7 +1545,7 @@ Scenes.Gwendy.ChallengeSexVag = function(fuck, hangout) {
 		parse["c"] = gwendy.FirstCock() ? ", nested just below her heavy scrotum" : "";
 		Text.Add("Pulling back, you work Gwendy onto the table, having her lie on her back with her legs spread. It’s hard to do anything but admire her glistening nether lips[c]. After planting a soft kiss on her tiny clit, you wrap her in your arms, whispering to her to just relax and be yours. Gwendy blushes, letting out a submissive moan in response.", parse);
 		Text.NL();
-		Text.Add("You mount her, your [vagDesc] pressing against hers, and begin grinding on her lap. You rut against her, aiming your [clitDesc] at Gwendy’s, striking true as the two of begin panting moaning in pleasure. You make sure she knows who’s in control, you doing most of the work, letting Gwendy writhe desperately under you.", parse);
+		Text.Add("You mount her, your [vagDesc] pressing against hers, and begin grinding on her lap. You rut against her, aiming your [clitDesc] at Gwendy’s, striking true as the two of begin panting and moaning in pleasure. You make sure she knows who’s in control, you doing most of the work, letting Gwendy writhe desperately under you.", parse);
 		Text.NL();
 		Text.Add("You close in for a kiss, unable to resist the cute demure blush Gwendy has on her face, completely at odds with the desperate moans she exhales into your mouth. Your bodies press together eagerly, rocking and grinding in languid motions.", parse)
 		if(player.FirstCock()) {

@@ -5,16 +5,22 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.3h3
+-------------
+* Broken Magnus is fixed.
+* Bug in golem combat fixed.
+* Fixed some minor typos/parser errors in Gwendy.
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.3h2
 -------------
 * Fixed a bug in Magnus where he would show the wrong text when prompted for sex.
 * Added stretching your capacity to Magnus' scenes. Quite a lot.
 * Fixed a bug I introduced in the Gwendy loss prompt.
 * Changed the named of the Gwendy Kiss scenes for clarification (since you can get both in the same menu now)
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.3h
 ------------

@@ -6,7 +6,7 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 3;
-VERSION_SUBSCRIPT = "h2";
+VERSION_SUBSCRIPT = "h3";
 VERSION_NAME = "Magnus, Gwendy bugfix";
 
 SAVE_VERSION = 13;
