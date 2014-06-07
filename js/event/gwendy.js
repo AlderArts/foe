@@ -779,7 +779,7 @@ Scenes.Gwendy.ChallengeSexWonPrompt = function(hangout, options) {
 	var wins = gwendy.flags["ChallengeWinScene"];
 	if(hangout) wins--;
 
-	options.push({ nameStr : "Kiss",
+	options.push({ nameStr : "KissDom",
 		func : function() {
 			Text.Clear();
 			// If first time
@@ -2089,7 +2089,7 @@ Scenes.Gwendy.ChallengeSexAnalToys = function(toy, hangout, first) {
 	}
 }
 
-Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout) {
+Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout, options) {
 	Text.Clear();
 	
 	var parse = {
@@ -2121,8 +2121,7 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout) {
 	if(hangout) lossScene--;
 	if(hangout) wonScene--;
 	
-	var options = new Array();
-	options.push({ nameStr : "Kiss",
+	options.push({ nameStr : "KissSub",
 		func : function() {
 			Text.Clear();
 			

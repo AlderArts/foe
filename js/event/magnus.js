@@ -210,7 +210,7 @@ Scenes.Magnus.Interact = function() {
 				options.push({ nameStr : "Sex",
 					func : function() {
 						Text.Clear();
-						if(magnus.flags["Confronted"] != 0) {
+						if(magnus.flags["Confronted"] == 0) {
 							Text.Add("<i>”W-what?”</i> The magician looks at you, bewildered. <i>”I hardly think that would be appropriate!”</i> he stutters, blushing as he goes back to his book, reading with renewed intensity. You smile slightly as you catch him throwing furtive glances in your direction.", parse);
 							Text.NL();
 							Text.Add("Guess that approach isn’t going to work.", parse);
@@ -598,6 +598,10 @@ Scenes.Magnus.Meditation = function() {
 					Text.NL();
 					Text.Add("The main trunk of tentacles working your throat withdraw down into your stomach again, leaving a thin layer of tendrils to keep your abused windpipe spread. Your jaw aches from the strain, but the worst is yet to come. Packing them together with one of its tentacles, the demon force-feeds you not one, not two, but all three of Magnus’ immense cocks, jamming them down your recently vacated throat. The switch is so sudden you hardly even have time to catch your breath.", parse);
 					Text.NL();
+					
+					Sex.Blowjob(player, magnus);
+					player.FuckOral(player.Mouth(), magnus.FirstCock(), 3);
+					
 					Text.Add("If being slowly spitroasted by the invasive tentacles was agonizing, the massive throatfucking you are receiving now is torment. You keep telling yourself that this is impossible, but that does little to change your situation. The demon’s raspy voice laughs maliciously as it shoves the thick trio of corrupted cocks down your gullet, the members so long that they easily reach your overcrowded stomach.", parse);
 					Text.NL();
 					Text.Add("Once it has grown bored of raping your throat, the demon jerks itself off inside your stomach using its tentacles, hissing and chuckling as it brings Magnus to climax. When it comes, it is like a sudden expansion, an explosion of cum originating in your stomach and trying to escape in every direction at the same time.", parse);
@@ -612,6 +616,15 @@ Scenes.Magnus.Meditation = function() {
 				}, 1.0, function() { return !first; });
 				
 				scenes.Get();
+				
+				if(player.Butt().capacity.IncreseStat(60, 5) > 0) {
+					Text.NL();
+					Text.Add("<b>Your ass feels stretched, forced to accomodate larger insertions.</b>", parse);
+				}
+				if(player.FirstVag().capacity.IncreseStat(50, 5) > 0) {
+					Text.NL();
+					Text.Add("<b>Your vagina feels stretched, forced to accomodate larger insertions.</b>", parse);
+				}
 				
 				Text.NL();
 				Text.Add("Finally sated, the betentacled demon discards you on the ground, throwing you aside like a used rag, leaking at the seams.", parse);
