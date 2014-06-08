@@ -5,15 +5,20 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.3h4
+-------------
+* Broken Magnus is fixed. Again.
+* Fixed a logical inconsistency in the game flow. Gwendy and Maria can no longer be encountered before you've met Miranda for the first time (talked to her at the gates of Rigard for the first time).
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.3h3
 -------------
 * Broken Magnus is fixed.
 * Bug in golem combat fixed.
 * Fixed some minor typos/parser errors in Gwendy.
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.3h2
 -------------
