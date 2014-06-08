@@ -621,7 +621,7 @@ Scenes.Magnus.Meditation = function() {
 					Text.NL();
 					Text.Add("<b>Your ass feels stretched, forced to accomodate larger insertions.</b>", parse);
 				}
-				if(player.FirstVag().capacity.IncreaseStat(50, 5) > 0) {
+				if(player.FirstVag() && player.FirstVag().capacity.IncreaseStat(50, 5) > 0) {
 					Text.NL();
 					Text.Add("<b>Your vagina feels stretched, forced to accomodate larger insertions.</b>", parse);
 				}
