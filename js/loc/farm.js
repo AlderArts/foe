@@ -59,7 +59,7 @@ world.loc.Farm = {
 // Add initial event, only trigger 7-17
 world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	return Scenes.FarmIntro.Start;
-}, 3.0, function() { return gameCache.flags["FarmFound"] == 0 && (world.time.hour >= 7 && world.time.hour < 17); });
+}, 3.0, function() { return miranda.flags["Met"] >= Miranda.Met.Met && gameCache.flags["FarmFound"] == 0 && (world.time.hour >= 7 && world.time.hour < 17); });
 
 world.loc.Plains.Crossroads.links.push(new Link(
 	"Farm",
