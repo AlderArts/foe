@@ -157,9 +157,23 @@ Abilities.Physical.Pierce.OnCast = function(encounter, caster, target) {
 }
 
 
+
+Abilities.Physical.Rrocket = new AttackPhysical();
+Abilities.Physical.Rrocket.name = "Rock Rocket";
+Abilities.Physical.Rrocket.Short = function() { return "Kick a large boulder into an enemy's face, hits a single enemy."; }
+Abilities.Physical.Rrocket.cost = { hp: null, sp: 50, lp: null};
+Abilities.Physical.Rrocket.atkMod = 1.9;
+Abilities.Physical.Rrocket.damageType.pBlunt = 1.2;
+Abilities.Physical.Rrocket.OnCast = function(encounter, caster, target) {
+	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
+	Text.AddOutput("[name] thrust[s] [hisher] hands into the ground, pulling out a large boulder. [name] toss[es] the large boulder into the air. As the large boulder falls to the ground, [name] jump[s] into the air and kick[s] the boulder with all [hisher] might, sending the boulder speeding towards [tName]!", parse);
+	Text.Newline();
+}
+
+
 Abilities.Physical.FocusStrike = new AttackPhysical();
 Abilities.Physical.FocusStrike.name = "FocusStrike";
-Abilities.Physical.FocusStrike.Short = function() { return "Bypass defenses."; }
+Abilities.Physical.FocusStrike.Short = function() { return "Bypass defences at ease."; }
 Abilities.Physical.FocusStrike.cost = { hp: null, sp: 50, lp: null};
 Abilities.Physical.FocusStrike.defMod = 0.2;
 Abilities.Physical.FocusStrike.damageType.pPierce = 1.5;
@@ -168,6 +182,8 @@ Abilities.Physical.FocusStrike.OnCast = function(encounter, caster, target) {
 	Text.AddOutput("[name] aims [hisher] strike on a weak point in [tPossessive] guard!", parse);
 	Text.Newline();
 }
+
+
 
 
 Abilities.Physical.DAttack = new AttackPhysical();
@@ -258,6 +274,29 @@ Abilities.Physical.CrushingStrike.OnHit = function(encounter, caster, target, dm
 }
 
 
+
+Abilities.Physical.Buppercut = new AttackPhysical();
+Abilities.Physical.Buppercut.name = "Burning Uppercut";
+Abilities.Physical.Buppercut.Short = function() { return "Does a powerful uppercut to an opponent, has a chance of burning the opponent."; }
+Abilities.Physical.Buppercut.cost = { hp: null, sp: 90, lp: null};
+Abilities.Physical.Buppercut.atkMod = 1.5;
+Abilities.Physical.Buppercut.hitMod = 0.7;
+Abilities.Physical.Buppercut.damageType.mFire = 1.5;
+Abilities.Physical.Buppercut.OnCast = function(encounter, caster, target) {
+	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), y : caster.plural() ? "y" : "ies", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
+	Text.AddOutput("[tName] attacks [name] but [name] dodge[s] the attack and counter[s] it with a powerful uppercut!", parse);
+	Text.Newline();
+}
+Abilities.Black.Buppercut.TargetEffect = function(encounter, caster, target) {
+	var parse = { target : target.NameDesc(), has : target.has(), s : target.plural() ? "" : "s" };
+	if(Status.Burn(target, { hit : 0.2, turns : 3, turnsR : 5, str : 1, dmg : 0.2 })) {
+		Text.AddOutput("[target] [has] been burned! ", parse);
+Text.Newline();
+
+		}
+}
+
+
 Abilities.Physical.Provoke = new AttackPhysical();
 Abilities.Physical.Provoke.name = "Provoke";
 Abilities.Physical.Provoke.Short = function() { return "Try to provoke the enemy to focus on you. Single target."; }
@@ -318,4 +357,5 @@ Abilities.Physical.Taunt.OnMiss = function(encounter, caster, target) {
 	Text.AddOutput("[tName] doesn't look very impressed.", parse);
 	Text.Newline();
 }
+
 
