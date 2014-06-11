@@ -5,14 +5,19 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
-Version 0.3h4
--------------
-* Broken Magnus is fixed. Again.
-* Fixed a logical inconsistency in the game flow. Gwendy and Maria can no longer be encountered before you've met Miranda for the first time (talked to her at the gates of Rigard for the first time).
+Version 0.3i
+------------
+* Fixed a bug in the Miranda date logic, triggering the wrong ending scene.
+* Fixed the problem in Miranda's date where the scene would lock if you already had the Visa from Gwendy.
 
 --------------------------------------------
              PREVIOUS VERSIONS
 --------------------------------------------
+
+Version 0.3h4
+-------------
+* Broken Magnus is fixed. Again.
+* Fixed a logical inconsistency in the game flow. Gwendy and Maria can no longer be encountered before you've met Miranda for the first time (talked to her at the gates of Rigard for the first time).
 
 Version 0.3h3
 -------------

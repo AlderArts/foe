@@ -46,6 +46,7 @@ world.loc.Rigard.Slums.gate.links.push(new Link(
 		Text.AddOutput("Enter the city? ");
 	},
 	function() {
+		Text.Clear();
 		if(miranda.IsAtLocation()) {
 			Scenes.Miranda.RigardSlumGatesEnter();
 		}

@@ -2110,6 +2110,9 @@ Scenes.Miranda.DatingFirstCity = function() {
 	
 	if(rigard.Visa()) {
 		Text.Add("The two of you wander through the town, heading towards the residential district. Miranda points out a few of local water holes, and some places that serve decent food.", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(Scenes.Miranda.DatingFirstHome);
 	}
 	else {
 		if(miranda.Attitude() < Miranda.Attitude.Neutral) {
@@ -2270,7 +2273,7 @@ Scenes.Miranda.DatingFirstHome = function() {
 		});
 		Gui.SetButtonsFromList(options);
 	}
-	else if(Scenes.Miranda.DatingScore <= -2) {
+	else if(Scenes.Miranda.DatingScore >= -2) {
 		Text.Add("<i>”I don’t know about you, but I’m up for a romp. How do you feel about biting the pillow for a few hours?”</i> For all of her nasty talk, you guess she still likes you enough to fuck you. Or perhaps she wants another chance to humiliate you, who knows.", parse);
 		Text.Flush();
 		
