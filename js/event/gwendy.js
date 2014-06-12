@@ -2125,43 +2125,45 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout, options) {
 	if(hangout) lossScene--;
 	if(hangout) wonScene--;
 	
-	options.push({ nameStr : "KissSub",
-		func : function() {
-			Text.Clear();
-			
-			player.AddLustFraction(0.1);
-			if(hangout) {
-				Text.AddOutput("Smiling delightfully, Gwendy leans in, pressing her lips against your. You moan gently as her soft, full lips explore your own.", parse);
-			}
-			else
-				Text.AddOutput("Gwendy lets out an excited squeal, knowing she bested you in the challenge. A part of you wonders just what she has in store, but you're answered when she embraces you and presses her lips against yours.", parse);
-			Text.Newline();
-			Text.AddOutput("It's just a kiss, simply a kiss, though she does make it a little more amorous than simply kissing. All the while she flicks her tongue around in your mouth, wrapping around yours and exploring your mouth.", parse);
-			Text.Newline();
-			Text.AddOutput("It's simple and sweet, but she breaks the kiss with you before long. When the two of you separate, she looks at your almost innocently, but her eyes betray the spark of excitement and lust she's hiding from her face.", parse);
-			Text.Newline();
-			if(hangout) {
-				var scenes = new EncounterTable();
-				scenes.AddEnc(function() {
-					Text.AddOutput("Once she breaks the kiss, you feel the need to kiss more, maybe even more! Gwendy chuckles seeing your desperation. <i>\"Nope, no more from me. After all, isn't it better to wait?\"</i> You pout a bit, but she pats your [buttDesc] as she heads back to work. <i>\"Maybe next time, there'll be a little more.\"</i> As always, tease and taunt enough to get you coming back for more. Maybe next time, indeed...", parse);
-					Gui.NextPrompt();
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
-					Text.AddOutput("As she breaks the kiss, you find yourself slightly aroused. The same could be said for Gwendy and her amorous glance. <i>\"Heheh, sorry, [playername], but that's all for now.\"</i> She smiles upon noticing your disappointment, though she makes up with another, longer kiss. <i>\"Then again, I might not be able to resist so easily... whaddaya say we kick it up a notch?\"</i>", parse);
+	if(lossScene >= 0) {
+		options.push({ nameStr : "KissSub",
+			func : function() {
+				Text.Clear();
+				
+				player.AddLustFraction(0.1);
+				if(hangout) {
+					Text.AddOutput("Smiling delightfully, Gwendy leans in, pressing her lips against your. You moan gently as her soft, full lips explore your own.", parse);
+				}
+				else
+					Text.AddOutput("Gwendy lets out an excited squeal, knowing she bested you in the challenge. A part of you wonders just what she has in store, but you're answered when she embraces you and presses her lips against yours.", parse);
+				Text.Newline();
+				Text.AddOutput("It's just a kiss, simply a kiss, though she does make it a little more amorous than simply kissing. All the while she flicks her tongue around in your mouth, wrapping around yours and exploring your mouth.", parse);
+				Text.Newline();
+				Text.AddOutput("It's simple and sweet, but she breaks the kiss with you before long. When the two of you separate, she looks at your almost innocently, but her eyes betray the spark of excitement and lust she's hiding from her face.", parse);
+				Text.Newline();
+				if(hangout) {
+					var scenes = new EncounterTable();
+					scenes.AddEnc(function() {
+						Text.AddOutput("Once she breaks the kiss, you feel the need to kiss more, maybe even more! Gwendy chuckles seeing your desperation. <i>\"Nope, no more from me. After all, isn't it better to wait?\"</i> You pout a bit, but she pats your [buttDesc] as she heads back to work. <i>\"Maybe next time, there'll be a little more.\"</i> As always, tease and taunt enough to get you coming back for more. Maybe next time, indeed...", parse);
+						Gui.NextPrompt();
+					}, 1.0, function() { return true; });
+					scenes.AddEnc(function() {
+						Text.AddOutput("As she breaks the kiss, you find yourself slightly aroused. The same could be said for Gwendy and her amorous glance. <i>\"Heheh, sorry, [playername], but that's all for now.\"</i> She smiles upon noticing your disappointment, though she makes up with another, longer kiss. <i>\"Then again, I might not be able to resist so easily... whaddaya say we kick it up a notch?\"</i>", parse);
+						
+						Scenes.Gwendy.LoftSexPrompt();
+					}, 1.0, function() { return lossScene >= 1 || wonScene >= 1; });
 					
-					Scenes.Gwendy.LoftSexPrompt();
-				}, 1.0, function() { return lossScene >= 1 || wonScene >= 1; });
-				
-				scenes.Get();
-			}
-			else {
-				Text.AddOutput("In any event, she parts with you saying, <i>\"That wasn't too bad at all, [playername]... though you'd better be prepared for next time. I won't be as nice as this time. Take care!\"</i> Seems like she's already thinking of ways to keep you in check should you lose again, meaning either you've got to step your game up, stop the challenge, or give up. Still, that kiss was rather hot...", parse);
-				
-				Gui.NextPrompt();
-			}
-		}, enabled : true,
-		tooltip : "Let Gwendy kiss you."
-	});
+					scenes.Get();
+				}
+				else {
+					Text.AddOutput("In any event, she parts with you saying, <i>\"That wasn't too bad at all, [playername]... though you'd better be prepared for next time. I won't be as nice as this time. Take care!\"</i> Seems like she's already thinking of ways to keep you in check should you lose again, meaning either you've got to step your game up, stop the challenge, or give up. Still, that kiss was rather hot...", parse);
+					
+					Gui.NextPrompt();
+				}
+			}, enabled : true,
+			tooltip : "Let Gwendy kiss you."
+		});
+	}
 	if(lossScene >= 1) {
 		options.push({ nameStr : "Make-out",
 			func : function() {
