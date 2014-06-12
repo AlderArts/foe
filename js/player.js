@@ -22,7 +22,7 @@ function Player(storage) {
 	
 	this.jobs["Mage"]      = new JobDesc(Jobs.Mage);
 	this.jobs["Mystic"]    = new JobDesc(Jobs.Mystic);
-	//this.jobs["Healer"]    = new JobDesc(Jobs.Healer);
+	this.jobs["Healer"]    = new JobDesc(Jobs.Healer);
 	
 	//this.jobs["Elementalist"]    = new JobDesc(Jobs.Elementalist);
 	

@@ -106,13 +106,82 @@ Abilities.White.Detox.Short = function() { return "Heals minor venom, single tar
 Abilities.White.Detox.targetMode = TargetMode.Ally;
 Abilities.White.Detox.cost = { hp: null, sp: 10, lp: null};
 Abilities.White.Detox.CastInternal = function(encounter, caster, target) {
-	var parse = { name : caster.NameDesc(), HeShe : caster.HeShe(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hand : caster.HandDesc(), tName : target.nameDesc(), y : caster.plural() ? "y" : "ies", possessive : target.possessive(), skin : target.SkinDesc()
+	var parse = { Name : caster.NameDesc(), s : caster.plural() ? "" : "s", tname : target.nameDesc(), Possessive : caster.Possessive(), tPossessive : target.Possessive(), tpossessive : target.possessive()
 	}
-	Text.AddOutput("[name] prepare[s] some soothing salves, gently applying it to [possessive] [skin] with [hisher] [hand]s.", parse);
-	Text.Newline();
 	
+	var venom = target.combatStatus.stats[StatusEffect.Venom];
+	if(venom) {
+		Text.Add("[Name] prepare[s] a purifying spell, purging the venom from [tpossessive] body.", parse);
+		venom.str -= 1;
+		if(venom.str <= 0) {
+			Text.NL();
+			Text.Add("[tPossessive] venom has been completely purged!", parse);
+			target.combatStatus.stats[StatusEffect.Venom] = null;
+		}
+	}
+	else {
+		Text.Add("[Possessive] purifying spell has no effect on [tname].", parse);
+	}
 	
+	Text.Flush();
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
+
+Abilities.White.Cool = new Ability();
+Abilities.White.Cool.name = "Cool";
+Abilities.White.Cool.Short = function() { return "Heals minor burn, single target."; }
+Abilities.White.Cool.targetMode = TargetMode.Ally;
+Abilities.White.Cool.cost = { hp: null, sp: 10, lp: null};
+Abilities.White.Cool.CastInternal = function(encounter, caster, target) {
+	var parse = { Name : caster.NameDesc(), s : caster.plural() ? "" : "s", tname : target.nameDesc(), Possessive : caster.Possessive(), tPossessive : target.Possessive(), tpossessive : target.possessive()
+	}
 	
+	var burn = target.combatStatus.stats[StatusEffect.Burn];
+	if(burn) {
+		Text.Add("[Name] prepare[s] a soothing spell, easing the burning sensation from [tpossessive] body.", parse);
+		burn.str -= 1;
+		if(burn.str <= 0) {
+			Text.NL();
+			Text.Add("[tPossessive] burn has been completely cooled!", parse);
+			target.combatStatus.stats[StatusEffect.Burn] = null;
+		}
+	}
+	else {
+		Text.Add("[Possessive] cooling spell has no effect on [tname].", parse);
+	}
+	
+	Text.Flush();
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
+
+Abilities.White.Warm = new Ability();
+Abilities.White.Warm.name = "Warm";
+Abilities.White.Warm.Short = function() { return "Heals minor freeze, single target."; }
+Abilities.White.Warm.targetMode = TargetMode.Ally;
+Abilities.White.Warm.cost = { hp: null, sp: 10, lp: null};
+Abilities.White.Warm.CastInternal = function(encounter, caster, target) {
+	var parse = { Name : caster.NameDesc(), s : caster.plural() ? "" : "s", tname : target.nameDesc(), Possessive : caster.Possessive(), tPossessive : target.Possessive(), tpossessive : target.possessive()
+	}
+	
+	var freeze = target.combatStatus.stats[StatusEffect.Freeze];
+	if(freeze) {
+		Text.Add("[Name] prepare[s] a warming spell, heating up [tpossessive] frozen body.", parse);
+		freeze.str -= 1;
+		if(freeze.str <= 0) {
+			Text.NL();
+			Text.Add("[tPossessive] freeze has been completely removed!", parse);
+			target.combatStatus.stats[StatusEffect.Freeze] = null;
+		}
+	}
+	else {
+		Text.Add("[Possessive] warming spell has no effect on [tname].", parse);
+	}
+	
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
 	});

@@ -276,15 +276,14 @@ Jobs["Healer"] = new Job("Healer");
 Jobs["Healer"].Long = function(entity) { return Text.Parse("A proficient healer knows the bare essentials of caring for the wounded in [hisher] party, keeping them alive in any and all situations. [HisHer] healing hands can ease the pain of minor wounds and nurse people back to health.", {hisher: entity.hisher(), HisHer: entity.HisHer()}); }
 Jobs["Healer"].preqs.push({job : Jobs["Scholar"], lvl : 3});
 Jobs["Healer"].abilities.AddAbility(Abilities.White.Detox);
-Jobs["Healer"].abilities.AddAbility(Abilities.White.Heal);
-//TODO
-Jobs["Healer"].abilities.AddAbility(Abilities.White.Heal);
+Jobs["Healer"].abilities.AddAbility(Abilities.White.Cool);
+Jobs["Healer"].abilities.AddAbility(Abilities.White.Warm);
 Jobs["Healer"].abilities.AddAbility(Abilities.White.Heal);
 Jobs["Healer"].levels.push(new JobLevel(20,   [{ab: Abilities.White.Detox, set: "Support"}], {"spi" : 0.3}));
 Jobs["Healer"].levels.push(new JobLevel(40,   null, {"int" : 0.2, "cha" : 0.1}));
-Jobs["Healer"].levels.push(new JobLevel(80,   [{ab: Abilities.White.Heal, set: "Support"}], {"sta" : 0.2, "spi" : 0.1}));
+Jobs["Healer"].levels.push(new JobLevel(80,   [{ab: Abilities.White.Cool, set: "Support"}], {"sta" : 0.2, "spi" : 0.1}));
 Jobs["Healer"].levels.push(new JobLevel(160,  null, {"spi" : 0.2, "int" : 0.1}));
-Jobs["Healer"].levels.push(new JobLevel(320,  [{ab: Abilities.White.Heal, set: "Support"}], {"int" : 0.3}));
+Jobs["Healer"].levels.push(new JobLevel(320,  [{ab: Abilities.White.Warm, set: "Support"}], {"int" : 0.3}));
 Jobs["Healer"].levels.push(new JobLevel(640,  null, {"cha" : 0.2, "sta" : 0.1}));
 Jobs["Healer"].levels.push(new JobLevel(1280, [{ab: Abilities.White.Heal, set: "Support"}], {"spi" : 0.4, "int" : 0.1}));
 Jobs["Healer"].Unlocked = function(entity) {
