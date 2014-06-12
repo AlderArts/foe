@@ -14,6 +14,8 @@ Images.miranda      = "data/miranda.png";
 Images.roa          = "data/roa_avatar.png";
 Images.sylistraxia  = "data/sylistraxia_avatar.png";
 Images.lei          = "data/lei_avatar.png";
+Images.terry        = "data/terry.png";
+Images.terry_c      = "data/terry_c.png";
 
 Images.imp          = "data/imp.png";
 Images.introdemon   = "data/introdemon.png";
