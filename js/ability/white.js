@@ -100,6 +100,25 @@ Abilities.White.FirstAid.OnCast = function(encounter, caster, target) {
 }
 
 
+Abilities.White.Detox = new Ability();
+Abilities.White.Detox.name = "Detox";
+Abilities.White.Detox.Short = function() { return "Heals minor venom, single target."; }
+Abilities.White.Detox.targetMode = TargetMode.Ally;
+Abilities.White.Detox.cost = { hp: null, sp: 10, lp: null};
+Abilities.White.Detox.CastInternal = function(encounter, caster, target) {
+	var parse = { name : caster.NameDesc(), HeShe : caster.HeShe(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hand : caster.HandDesc(), tName : target.nameDesc(), y : caster.plural() ? "y" : "ies", possessive : target.possessive(), skin : target.SkinDesc()
+	}
+	Text.AddOutput("[name] prepare[s] some soothing salves, gently applying it to [possessive] [skin] with [hisher] [hand]s.", parse);
+	Text.Newline();
+	
+	
+	
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
+
+
 Abilities.White.Heal = new HealingSpell();
 Abilities.White.Heal.name = "Heal";
 Abilities.White.Heal.Short = function() { return "Heals some damage, single target."; }

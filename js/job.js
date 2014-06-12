@@ -182,9 +182,6 @@ Jobs["Scholar"].abilities.AddAbility(Abilities.White.Tirade);
 Jobs["Scholar"].abilities.AddAbility(Abilities.White.FirstAid);
 Jobs["Scholar"].abilities.AddAbility(Abilities.White.Pinpoint);
 Jobs["Scholar"].abilities.AddAbility(Abilities.White.Cheer);
-
-Jobs["Scholar"].abilities.AddAbility(Abilities.Black.Venom);
-
 Jobs["Scholar"].levels.push(new JobLevel(10,  [{ab: Abilities.White.Tirade, set: "Support"}], {"int" : 0.2}));
 Jobs["Scholar"].levels.push(new JobLevel(20,  null, {"int" : 0.1, "spi" : 0.1}));
 Jobs["Scholar"].levels.push(new JobLevel(40,  [{ab: Abilities.White.FirstAid, set: "Support"}], {"int" : 0.1, "dex" : 0.1}));
@@ -253,26 +250,65 @@ Jobs["Mage"].levels.push(new JobLevel(320,  [{ab: Abilities.Black.Freeze, set: "
 Jobs["Mage"].levels.push(new JobLevel(640,  null, {"int" : 0.1, "spi" : 0.2}));
 Jobs["Mage"].levels.push(new JobLevel(1280, [{ab: Abilities.Black.Bolt, set: "Spells"}], {"int" : 0.4, "spi" : 0.1}));
 Jobs["Mage"].Unlocked = function(entity) {
-	return gameCache.flags["LearnedMagic"] != 0;
+	return gameCache.flags["LearnedMagic"] >= 1;
+}
+
+Jobs["Mystic"] = new Job("Mystic");
+Jobs["Mystic"].Long = function(entity) { return Text.Parse("The mystic takes the first steps in mastering the  power of nature, commanding water and plants to bend to [hisher] will.", {hisher: entity.hisher()}); }
+Jobs["Mystic"].preqs.push({job : Jobs["Scholar"], lvl : 3});
+Jobs["Mystic"].abilities.AddAbility(Abilities.Black.Thorn);
+Jobs["Mystic"].abilities.AddAbility(Abilities.Black.Spray);
+Jobs["Mystic"].abilities.AddAbility(Abilities.Black.Spire);
+Jobs["Mystic"].abilities.AddAbility(Abilities.Black.Gust);
+Jobs["Mystic"].abilities.AddAbility(Abilities.Black.Venom);
+Jobs["Mystic"].levels.push(new JobLevel(20,   [{ab: Abilities.Black.Thorn, set: "Spells"}], {"sta" : 0.3}));
+Jobs["Mystic"].levels.push(new JobLevel(40,   null, {"int" : 0.1, "spi" : 0.2}));
+Jobs["Mystic"].levels.push(new JobLevel(80,   [{ab: Abilities.Black.Spray, set: "Spells"}], {"spi" : 0.3}));
+Jobs["Mystic"].levels.push(new JobLevel(160,  null, {"sta" : 0.2, "spi" : 0.1}));
+Jobs["Mystic"].levels.push(new JobLevel(320,  [{ab: Abilities.Black.Spire, set: "Spells"}], {"int" : 0.2, "str" : 0.1}));
+Jobs["Mystic"].levels.push(new JobLevel(640,  [{ab: Abilities.Black.Gust, set: "Spells"}], {"int" : 0.1, "lib" : 0.2}));
+Jobs["Mystic"].levels.push(new JobLevel(1280, [{ab: Abilities.Black.Venom, set: "Spells"}], {"spi" : 0.4, "sta" : 0.1}));
+Jobs["Mystic"].Unlocked = function(entity) {
+	return gameCache.flags["LearnedMagic"] >= 1;
 }
 
 Jobs["Healer"] = new Job("Healer");
-Jobs["Healer"].Unlocked = function() { return false; } // TODO Tier 2 condition
+Jobs["Healer"].Long = function(entity) { return Text.Parse("A proficient healer knows the bare essentials of caring for the wounded in [hisher] party, keeping them alive in any and all situations. [HisHer] healing hands can ease the pain of minor wounds and nurse people back to health.", {hisher: entity.hisher(), HisHer: entity.HisHer()}); }
 Jobs["Healer"].preqs.push({job : Jobs["Scholar"], lvl : 3});
+Jobs["Healer"].abilities.AddAbility(Abilities.White.Detox);
 Jobs["Healer"].abilities.AddAbility(Abilities.White.Heal);
-Jobs["Healer"].levels.push(new JobLevel(20,   null, {"str" : 0.2}));
-Jobs["Healer"].levels.push(new JobLevel(40,   null, {"str" : 0.2}));
-Jobs["Healer"].levels.push(new JobLevel(80,   [{ab: Abilities.White.Heal, set: "Support"}], {"int" : 0.1, "dex" : 0.1}));
-Jobs["Healer"].levels.push(new JobLevel(160,  null, {"str" : 0.2}));
-Jobs["Healer"].levels.push(new JobLevel(320,  null, {"str" : 0.2}));
-Jobs["Healer"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
-Jobs["Healer"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
-
+//TODO
+Jobs["Healer"].abilities.AddAbility(Abilities.White.Heal);
+Jobs["Healer"].abilities.AddAbility(Abilities.White.Heal);
+Jobs["Healer"].levels.push(new JobLevel(20,   [{ab: Abilities.White.Detox, set: "Support"}], {"spi" : 0.3}));
+Jobs["Healer"].levels.push(new JobLevel(40,   null, {"int" : 0.2, "cha" : 0.1}));
+Jobs["Healer"].levels.push(new JobLevel(80,   [{ab: Abilities.White.Heal, set: "Support"}], {"sta" : 0.2, "spi" : 0.1}));
+Jobs["Healer"].levels.push(new JobLevel(160,  null, {"spi" : 0.2, "int" : 0.1}));
+Jobs["Healer"].levels.push(new JobLevel(320,  [{ab: Abilities.White.Heal, set: "Support"}], {"int" : 0.3}));
+Jobs["Healer"].levels.push(new JobLevel(640,  null, {"cha" : 0.2, "sta" : 0.1}));
+Jobs["Healer"].levels.push(new JobLevel(1280, [{ab: Abilities.White.Heal, set: "Support"}], {"spi" : 0.4, "int" : 0.1}));
+Jobs["Healer"].Unlocked = function(entity) {
+	return gameCache.flags["LearnedMagic"] >= 1;
+}
 
 ////////////
 // TIER 3 //
 ////////////
 
+Jobs["Elementalist"] = new Job("Elementalist");
+Jobs["Elementalist"].Long = function(entity) { return Text.Parse("", {hisher: entity.hisher(), HisHer: entity.HisHer()}); }
+Jobs["Elementalist"].preqs.push({job : Jobs["Mage"], lvl : 3});
+Jobs["Elementalist"].abilities.AddAbility(Abilities.White.Heal);
+Jobs["Elementalist"].levels.push(new JobLevel(20,   null, {"str" : 0.2}));
+Jobs["Elementalist"].levels.push(new JobLevel(40,   null, {"str" : 0.2}));
+Jobs["Elementalist"].levels.push(new JobLevel(80,   [{ab: Abilities.White.Heal, set: "Support"}], {"int" : 0.1, "dex" : 0.1}));
+Jobs["Elementalist"].levels.push(new JobLevel(160,  null, {"str" : 0.2}));
+Jobs["Elementalist"].levels.push(new JobLevel(320,  null, {"str" : 0.2}));
+Jobs["Elementalist"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
+Jobs["Elementalist"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
+Jobs["Elementalist"].Unlocked = function(entity) {
+	return gameCache.flags["LearnedMagic"] >= 3;
+}
 
 ////////////
 // TIER 4 //
