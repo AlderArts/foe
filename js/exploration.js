@@ -79,7 +79,7 @@ SetExploreButtons = function() {
 	    
 	    // FIGHT/SEARCH
 	    Input.exploreButtons[ExploreButtonIndex.Look].Setup("", Fight, party.location.enc != null, null,
-		    "Explore the immediate surroundings, possibly finding enemies, new locations or hidden treasures.");
+		    "Explore the immediate surroundings, possibly finding enemies, new locations or hidden treasures.", GameState.Event);
 	}
 }
 

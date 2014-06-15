@@ -201,7 +201,6 @@ Scenes.Rigard.CityHistory = function() {
 }
 
 Scenes.Rigard.Chatter = function(enteringArea) {
-	SetGameState(GameState.Event);
 	Text.Clear();
 	var parse = {};
 	

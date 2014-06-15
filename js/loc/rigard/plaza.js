@@ -208,8 +208,6 @@ world.loc.Rigard.Plaza.endDescription = function() {
 }
 
 Scenes.Rigard.Plaza.StatueInfo = function() {
-	SetGameState(GameState.Event);
-	
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name,
@@ -317,8 +315,6 @@ Scenes.Rigard.Plaza.StatueInfo = function() {
 }
 
 Scenes.Rigard.Plaza.LetterDelivery = function() {
-	SetGameState(GameState.Event);
-	
 	var letters     = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	var animals     = ["stallion", "dog", "eel", "python", "pony", "wildcat", "mare"];
 	var colors      = ["green", "red", "blue", "purple", "pink", "grey", "orange"];
