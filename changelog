@@ -9,6 +9,9 @@ Version 0.3i
 ------------
 * Fixed a bug in the Miranda date logic, triggering the wrong ending scene.
 * Fixed the problem in Miranda's date where the scene would lock if you already had the Visa from Gwendy.
+* Fixed a problem with exploration where the Data button would still show (enabling you to skip out of certain scenes.) Holler if this broke anything.
+* Added a talk prompt to Jeanne. She can teach you magic (except that the jobs are not implemented yet).
+* Implemented the level 2 magic jobs: Mage, Mystic and Healer. You can get them both through Magnus and Jeanne.
 
 --------------------------------------------
              PREVIOUS VERSIONS
