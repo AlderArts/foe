@@ -41,7 +41,6 @@ function Sylistraxia(storage) {
 Sylistraxia.prototype = new Entity();
 Sylistraxia.prototype.constructor = Sylistraxia;
 
-
 // Schedule
 Sylistraxia.prototype.IsAtLocation = function(location) {
 	return true;

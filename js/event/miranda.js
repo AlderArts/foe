@@ -106,7 +106,6 @@ Miranda.prototype.ToStorage = function() {
 	return storage;
 }
 
-
 // Schedule
 Miranda.prototype.IsAtLocation = function(location) {
 	if(party.InParty(miranda)) return false;

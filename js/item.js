@@ -222,11 +222,18 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 					  	nameStr : t.name,
 					  	func    : function(t) {
 					  		Text.Clear();
-					  		if(item.Use(t).consume) // Consume?
-					  			inv.RemoveItem(item);
-					  		Gui.NextPrompt(backPrompt);
+					  		var use = t.ItemUse(item, backPrompt);
+					  		if(use.grab) {
+					  			if(use.consume)
+					  				inv.RemoveItem(item);
+					  		}
+					  		else {
+						  		if(item.Use(t).consume) // Consume?
+						  			inv.RemoveItem(item);
+						  		Gui.NextPrompt(backPrompt);
+					  		}
 					  	},
-					  	enabled : true,
+					  	enabled : t.ItemUsable(item),
 					  	obj     : t
 					});
 				};

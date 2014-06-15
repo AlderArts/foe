@@ -104,6 +104,10 @@ Kiakai.Attitude = {
 	Lover   : 3
 }
 
+Kiakai.prototype.ItemUsable = function(item) {
+	return true;
+}
+
 Kiakai.prototype.JobDesc = function() {
 	return "acolyte";
 }

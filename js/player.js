@@ -67,6 +67,9 @@ function Player(storage) {
 Player.prototype = new Entity();
 Player.prototype.constructor = Player;
 
+Player.prototype.ItemUsable = function(item) {
+	return true;
+}
 
 Player.prototype.InitCharacter = function(gender) {
 	if(gender == Gender.male)

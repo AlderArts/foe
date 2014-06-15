@@ -485,6 +485,16 @@ Entity.prototype.Equip = function() {
 	this.BalanceStats();
 }
 
+Entity.prototype.ItemUsable = function(item) {
+	if(item.isTF)
+		return false;
+	return true;
+}
+
+Entity.prototype.ItemUse = function(item, backPrompt) {
+	return {grab : false, consume : true};
+}
+
 Entity.prototype.AddExp = function(exp) {
 	if(DEBUG) {
 		Text.NL();

@@ -41,8 +41,6 @@ function Roa(storage) {
 Roa.prototype = new Entity();
 Roa.prototype.constructor = Roa;
 
-
-
 // Schedule
 Roa.prototype.IsAtLocation = function(location) {
 	return true;

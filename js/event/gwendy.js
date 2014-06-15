@@ -92,6 +92,8 @@ Gwendy.prototype.FromStorage = function(storage) {
 	// Load flags
 	for(var flag in storage.flags)
 		this.flags[flag] = parseInt(storage.flags[flag]);
+	for(var flag in storage.sex)
+		this.sex[flag] = parseInt(storage.sex[flag]);
 }
 
 Gwendy.prototype.ToStorage = function() {
@@ -100,6 +102,7 @@ Gwendy.prototype.ToStorage = function() {
 	if(this.slut.base     != 0) storage.slut   = this.slut.base;
 	if(this.relation.base != 0) storage.rel    = this.relation.base;
 	storage.flags = this.flags;
+	storage.sex   = this.SaveSexStats();
 	
 	return storage;
 }

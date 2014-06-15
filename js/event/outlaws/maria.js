@@ -78,7 +78,6 @@ Maria.prototype.ToStorage = function() {
 	return storage;
 }
 
-
 // Schedule
 Maria.prototype.IsAtLocation = function(location) {
 	return true;

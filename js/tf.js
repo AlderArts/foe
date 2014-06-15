@@ -244,6 +244,7 @@ function TFItem(id, name) {
 	this.Use     = TF.UseItem;
 	this.useStr  = TF.UseItemDesc;
 	this.effects = [];
+	this.isTF    = true;
 }
 TFItem.prototype = new Item();
 TFItem.prototype.constructor = TFItem;
