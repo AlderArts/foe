@@ -24,7 +24,7 @@ world.loc.Rigard.Castle.MageTower.events.push(new Link(
 		}
 	},
 	function() {
-		Jeanne.prototype.Interact();
+		Scenes.Jeanne.Interact();
 	}
 ));
 world.loc.Rigard.Castle.MageTower.events.push(new Link(
