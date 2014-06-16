@@ -43,6 +43,7 @@ function Miranda(storage) {
 	this.flags["Thief"]    = 0;
 	this.flags["RotGuard"] = 0;
 	this.flags["Forest"]   = 0;
+	this.flags["Floor"]    = 0;
 	
 	//Peasants' gate antics
 	this.flags["gBJ"]      = 0;
@@ -2360,24 +2361,508 @@ Scenes.Miranda.DatingFirstHome = function() {
 	}
 }
 
-Scenes.Miranda.HomeDommySex = function() {
+
+Scenes.Miranda.HomeDescFloor1 = function() {
 	var parse = {
 		
+	};
+	Text.NL();
+	Text.Add("What you can see of Miranda’s home is spartan, simple furniture and only sparsely decorated. The stove that you glimpse in the kitchen looks barely used. You assume that she usually eats her food either at the barracks or at the pub. Straight ahead, there is a small living room with several couches arranged in front of a stone hearth. On the wooden floor, there is a large pelt from some huge animal, like a bear. Various weapons are littering around the room, the most conspicuous being the huge two-handed sword hanging over the fireplace.", parse);
+	Text.NL();
+	Text.Add("Directly on your left inside the hall, there is a locked door, presumably leading down to a cellar. Curiously, there is a heavy bar placed across the door, preventing anything or anyone from opening the door from inside.", parse);
+	Text.NL();
+	Text.Add("Next to the cellar door is a steep stairway leading up to the second floor, which presumably contains Miranda’s sleeping quarters.", parse);
+
+	miranda.flags["Floor"] = 1;
+}
+
+Scenes.Miranda.HomeDescFloor2 = function() {
+	var parse = {
+		
+	};
+	Text.NL();
+	Text.Add("You take a moment to survey Miranda’s bedroom. The room looks like it takes up most of the second floor of the building, barring a tiny study. It feels like you’re walking into a warzone. The floor is littered with discarded clothes - some of some of which don’t seem to belong to Miranda - and a generous selection of sex toys.", parse);
+	Text.NL();
+	Text.Add("<i>”See anything that catches your fancy? A girl gotta keep herself entertained, you know.”</i> The guardswoman picks up a particularly girthy dildo, over two inches thick and covered in tiny nubs. <i>”The Shop of Oddities has quite a selection.”</i>", parse);
+	Text.NL();
+	Text.Add("Pushed against the wall, there is a huge bed, able to easily hold four or five people. No doubt, it has seen much use during its lifetime. Investigating the room further, you see a small balcony facing the main street, and a window overlooking the alleyway.", parse);
+	
+	miranda.flags["Floor"] = 2;
+}
+
+Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	if(party.InParty(miranda)) {
+		Text.Add("The two of you set out, returning to your quest.", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt();
+	}
+	else {
+		var dom = miranda.SubDom() - player.SubDom();
+		if(dom > 0)
+			Text.Add("<i>”Leaving already? I haven’t returned the favor yet,”</i> Miranda moans voluptuously. Perhaps another time. <i>”Stop by again some time… little Miranda is always up to fucking a tight hole.”</i>", parse);
+		else
+			Text.Add("<i>”Mmm… I like it when you’re rough, [playername],”</i> Miranda moans, fingering herself. <i>”You can come back for more of that <b>any</b> time!”</i>", parse);
+		Text.NL();
+		
+		Gui.Callstack.push(function() {
+			Text.NL();
+			parse["night"] = world.time.DayTime();
+			Text.Add("You bid her farewell and step out into the [night].", parse);
+			if(party.NumTotal() > 1) {
+				Text.NL();
+				parse["comp"] = party.NumTotal() > 2 ? "the rest of your party" : party.Get(1).name;
+				Text.Add("Somehow, you make it out the gates in order to rejoin [comp].", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 30});
+				});
+			}
+			else {
+				Text.Flush();
+				Gui.NextPrompt();
+			}
+		});
+		
+		if(world.time.hour > 20 || world.time.hour < 4) {
+			Text.Add("<i>”Ya know? It’s kinda late. Why don’t you stay over? I wouldn’t mind sharing my bed with you. Maybe we can squeeze in a quickie before I have to leave in the morning?”</i> she grins.", parse);
+			Text.Flush();
+			
+			//[Stay][Don’t]
+			var options = new Array();
+			options.push({ nameStr : "Stay",
+				func : function() {
+					Text.Clear();
+					Text.Add("Miranda scoots over and pats a relatively clean spot beside her. You strip down and join her, using her arm as a pillow. With a grin, she draws you close, resting your head against her breast as her breathing levels out. Soon enough you join her in a restful slumber.", parse);
+					Text.NL();
+					Text.Add("You sleep for 8 hours.");
+					
+					var func = function() {
+						world.TimeStep({hour: 8});
+						party.Sleep();
+						
+						PrintDefaultOptions();
+					};
+					
+					Gui.NextPrompt(function() {
+						Text.Clear();
+						
+						Scenes.Dreams.Entry(func);
+					});
+				}, enabled : true,
+				tooltip : "Why not? You’re feeling pretty tired after all."
+			});
+			options.push({ nameStr : "Don’t",
+				func : function() {
+					Text.Clear();
+					Text.Add("<i>”Pity, I guess I’ll see you around then,”</i> she says, turning to take a nap.", parse);
+					PrintDefaultOptions();
+				}, enabled : true,
+				tooltip : "Unfortunately the day isn’t over for you. You’ll have to decline."
+			});
+			Gui.SetButtonsFromList(options);
+		}
+		else {
+			Text.Add("<i>”I’m going to rest for a while, you can see yourself out right?”</i> she asks, turning to settle herself in for a more comfortable nap.", parse);
+			PrintDefaultOptions();
+		}
+	}
+}	
+
+Scenes.Miranda.HomeDommySex = function() {
+	var parse = {
+		buttDesc : function() { return player.Butt().Short(); }
 	};
 	
 	party.location = world.loc.Rigard.Residental.miranda;
 	
 	Text.NL();
-	Text.Add("PLACEHOLDER", parse);
+	Text.Add("You are standing in the murky hallway just inside Miranda’s house, the doggie herself huffing and panting in your arms. She is really starting to get into it, kissing your neck and caressing your back and [buttDesc] with her hands.", parse);
+	if(miranda.flags["Floor"] == 0) {
+		Scenes.Miranda.HomeDescFloor1();
+	}
 	Text.NL();
-	Text.Add("", parse);
-	Text.NL();
+	Text.Add("<i>”How do you want me?”</i> she moans softly in your ear. <i>”Decide quickly, or I might decide myself.”</i> One of her hands trail downwards, pawing at her britches in order to free her stiffening monster cock from its confines.", parse);
 	Text.Flush();
 	
-	Gui.NextPrompt(function() {
-		MoveToLocation(world.loc.Rigard.Slums.gate);
+	var cocksInVag = player.CocksThatFit(miranda.FirstVag());
+	var cocksInAss = player.CocksThatFit(miranda.Butt());
+	
+	//[Fuck vag][Fuck anal][Ride vag][Ride anal][Cellar/Dungeon]
+	var options = new Array();
+	options.push({ nameStr : "Fuck vag",
+		func : function() {
+			Scenes.Miranda.HomeDommySexFuckDobieVag(cocksInVag);
+		}, enabled : cocksInVag.length > 0,
+		tooltip : "Take her upstairs and fuck her."
 	});
+	/*
+	options.push({ nameStr : "Nah",
+		func : function() {
+			Scenes.Miranda.HomeDommySexFuckDobieAss(cocksInAss);
+		}, enabled : cocksInAss.length > 0,
+		tooltip : ""
+	});
+	options.push({ nameStr : "Nah",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	*/
+	// TODO: Remove
+	options.push({ nameStr : "GETMEOUT",
+		func : function() {
+			Gui.NextPrompt();
+		}, enabled : true,
+		tooltip : "PLACEHOLDER"
+	});
+	Gui.SetButtonsFromList(options);
 }
+
+Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
+	var pCock = cocks[0];
+	
+	var parse = {
+		playername    : player.name,
+		hairDesc      : function() { return player.Hair().Short(); },
+		boyGirl       : player.mfTrue("boy", "girl"),
+		buttDesc      : function() { return player.Butt().Short(); },
+		multiCockDesc : function() { return player.MultiCockDesc(); },
+		cockDesc      : function() { return pCock.Short(); },
+		cockTip       : function() { return pCock.TipShort(); },
+		s             : player.NumCocks() > 1 ? "s" : "",
+		notS          : player.NumCocks() > 1 ? "" : "s",
+		oneof         : player.NumCocks() > 1 ? " one of" : "",
+		itsTheir      : player.NumCocks() > 1 ? "their" : "its",
+		mvagDesc      : function() { return miranda.FirstVag().Short(); },
+		mstomachDesc  : function() { return miranda.StomachDesc(); }
+	};
+	
+	var dom = miranda.SubDom() - player.SubDom();
+	
+	if(pCock.isStrapon)
+		parse["multiCockDesc"] = function() { return pCock.Short(); };
+	
+	Text.Clear();
+	Text.Add("You eagerly reply you want her splayed across her bed and moaning as you ram her with your [multiCockDesc]. Twirling her around, you give the doggie a slap on her butt, sending her in the direction of the stairs. Before she takes her first step, you ask her to slowly undress as she ascends the stairs. The guardswoman gives you a nice show, swaying her hips side to side as she slowly climb the stairs. Under her short tail and between her toned thighs, you catch glimpses of your target; her wet and eager pussy. Just beyond it, her heavy sack sways back and forth.", parse);
+	Text.NL();
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("<i>”Like what you see?”</i> Miranda smirks over her shoulder, giving her hips a shake.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>”Huff… look at me, getting all hot and bothered,”</i> Miranda pants shamefully, squirming a bit under your close scrutiny.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>”Hehe… looks like I’m ready for you, love,”</i> Miranda shake her hips, spreading her cheeks with her cunt fully exposed.", parse);
+	}, 1.0, function() { return miranda.SubDom() < 0; });
+	scenes.Get();
+	
+	Text.Add(" She pauses on the entrance to her room, looking around before sashaying towards her bed with hips swaying side to side.", parse);
+	
+	if(miranda.flags["Floor"] < 2)
+		Scenes.Miranda.HomeDescFloor2();
+	else {
+		Text.NL();
+		Text.Add("Her room is in the same disarray as usual; clothes and toys of several varieties strewn all about.", parse);
+	}
+	Text.NL();
+	Text.Add("The herm hops onto the bed, turning to face you with a sultry expression. <i>”Now what, bad [boyGirl]?”</i> she asks, parting her legs slightly. At this angle, all you can see of her crotch is her thick puppy-pecker - grown erect during her ascent - and her balls. This won’t do.", parse);
+	Text.NL();
+	
+	var mode;
+	var Mode = {
+		back  : 0,
+		doggy : 1
+	};
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("Now, she is going to lie back and spread ‘em as wide as she can. With a heave, you push Miranda over on her back, grabbing her legs and pulling them to the sides. Splayed out, her red cock stands up like a thick pillar, throbbing with excitement. The herm quickly gets the idea, pulling her balls aside to reveal her wet slit. She watches you intently, idly stroking her member while she waits for you to act.", parse);
+		
+		mode = Mode.back;
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("She’s a doggie, so there is only one way to go. On all fours, naughty doggie!", parse);
+		Text.NL();
+		Text.Add("<i>”Doggy-style, huh? How clever.”</i> Her words are mocking, but she doesn’t waste time in rolling over, wiggling her butt at you. Miranda plants her knees wide on the bed, giving you full access to her nethers. Her wet slit looks as ready as it’ll ever be.", parse);
+		
+		mode = Mode.doggy;
+	}, 1.0, function() { return true; });
+	
+	scenes.Get();
+	
+	Text.NL();
+	Text.Add("You take your time stripping off your gear, taking every chance to tease the guardswoman. Here you are, the high and mighty Miranda begging for you to fuck her. Quite different from her usual dominating facade, isn’t it?", parse);
+	Text.NL();
+	if(dom > 25)
+		Text.Add("<i>”Hey, who’s begging?”</i> she growls, annoyed. <i>”Don’t leave me waiting, I’m getting bored here.”</i>", parse);
+	else if(dom > -25)
+		Text.Add("<i>”What I do in my bedroom is my own business,”</i> she retorts. <i>”We’ll, in this case, your business too, I guess.”</i>", parse);
+	else
+		Text.Add("<i>”J-just fuck me already,”</i> she growls, blushing fiercely.", parse);
+	Text.NL();
+	if(!pCock.isStrapon) {
+		Text.Add("Freed from [itsTheir] confines, your [multiCockDesc] flop[notS] out, quickly becoming erect as you ravage the horny herm with your eyes. You can hardly wait to plunge inside her sopping wet pussy.", parse);
+	}
+	else {
+		Text.Add("You quickly equip your [cockDesc], securing the artificial member. It’s going to see a lot of action in the coming hours.", parse);
+	}
+	Text.Add(" Placing[oneof] your [multiCockDesc] at her entrance, you rub the tip in her juices. A shiver runs through the canid as you slowly push inside her, and she bites her lip, trying to suppress a moan.", parse);
+	Text.NL();
+	if(miranda.sex.rVag < 5)
+		Text.Add("Miranda is deliciously tight, her seldom used pussy clamping down on your [cockDesc] like a warm, wet vice.", parse);
+	else if(miranda.sex.rVag < 15)
+		Text.Add("Miranda opens up, welcoming an old customer into her wet folds. No matter how many times you do her, it’s always a great feeling to thrust inside the sexy herm.", parse);
+	else
+		Text.Add("Miranda’s pussy is slick with her juices, still blissfully tight despite how many times you’ve taken her.", parse);
+	Text.Add(" Her composure breaks when you adjust your stance and begin thrusting with vigor and ferocity.", parse);
+	Text.NL();
+	
+	Sex.Vaginal(player, miranda);
+	player.Fuck(pCock, 3);
+	miranda.FuckVag(miranda.FirstVag(), pCock, 3);
+	
+	if(dom > 25)
+		Text.Add("<i>”Hngh, you call that fucking?”</i> she moans between gritted teeth. <i>”By now, I’d have you - aah! - screaming for more!”</i>", parse);
+	else if(dom > -25)
+		Text.Add("<i>”I could - aah! - grow to like this,”</i> she moans. <i>”N-not too bad.”</i>", parse);
+	else {
+		Text.Add("<i>”Y-yes! You are way too good, [playername]!”</i> the slutty herm moans. <i>”Make me your bitch, fuck me senseless!”</i>", parse);
+		miranda.subDom.DecreaseStat(-50, 1);
+	}
+	Text.NL();
+	if(mode == Mode.back) {
+		Text.Add("As you pick up speed, you grab her by the ankles, spreading her legs wide. Miranda has thrown her head back, tongue lolling about. Her paws are busy between her thighs, feverishly jerking on her leaking cock. The guardswoman moans and squirms as you jackhammer her tight pussy as her heavy tits bounce from her arching back.", parse);
+	}
+	else if(mode == Mode.doggy) {
+		Text.Add("You adjust your hold on her hips, pulling her back onto your [cockDesc]. Soon, you’ve established a rhythm - rough and deep, just the way she likes it. The guardswoman is resting on her elbows, her tits bouncing back and forth each time you drive into her. Between her spread legs lie her pride and glory flopping about uselessly, staining the sheets with her pre.", parse);
+	}
+	Text.NL();
+	var cap = pCock.length.Get() - miranda.FirstVag().capacity.Get();
+	if(cap > 10) {
+		Text.Add("Miranda grunts, gritting her teeth as your grind against her cervix. Before she met you, you doubt she had taken any cock bigger than her own, and certainly nothing like yours. It must be a humbling experience for her.", parse);
+		miranda.subDom.DecreaseStat(-75, 1);
+	}
+	else if(cap > -5)
+		Text.Add("You somehow manage to fit all of your [cockDesc] in her cunt, though it is pushing her limits. She’s a tough girl though, she can take it.", parse);
+	else
+		Text.Add("Each thrusts slams your hips into her butt as you hilt your [cockDesc] in her accomodating vagina.", parse);
+	Text.Add(" Beads of sweat - yours and hers - matten the doggie’s short and dark fur, giving her coat a glossy shine. Somehow, her hair had come undone and her pink ribbon discarded somewhere in the pile of clothes strewn across the rooms. Her long strands flow and pool onto the sheets, spreading out around the guardswoman.", parse);
+	Text.NL();
+	
+	var widenButt = false;
+	if(mode == Mode.doggy && player.SubDom() > 30) {
+		Text.Add("Just above her ravaged pussy, Miranda’s tight rosebud winks at you. The opportunity is just too good to not take advantage of. Licking your fingers thoroughly, you coat them in a thick layer of saliva to ease your entry.", parse);
+		Text.NL();
+		Text.Add("<i>”Hey, what are you up to back th- Ahh!”</i> Miranda’s question is quickly answered by you thumb digging into her tunnel, prying her anus open. ", parse);
+		
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			Text.Add("<i>”Hngh, think you’re so tough, I can take that easily!”</i> she grunts.", parse);
+		}, 1.0, function() { return miranda.sex.rAnal > 10; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>”Hey, that’s my schtick,”</i> she complains. <i>”If you keep doing that, you’ll get it back tenfold!”</i>", parse);
+			player.subDom.IncreaseStat(0, 1);
+		}, 1.0, function() { return miranda.sex.gAnal > 10; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>”T-thank you for using my butt too,”</i> she pants. <i>”Will you fuck me there if I’m a good girl?”</i>", parse);
+		}, 1.0, function() { return miranda.SubDom() < -25; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>”S-such a naughty [boyGirl],”</i> she pants. <i>”I’ll get back at you for that.”</i>", parse);
+		}, 1.0, function() { return true; });
+		
+		scenes.Get();
+		
+		Text.Add("You ignore her banter, inserting your other thumb. The guardswoman groans wordlessly as you start slowly widening her sphincter, all while retaining the momentum of your rocking hips.", parse);
+		Text.NL();
+		
+		widenButt = true;
+	}
+	Text.NL();
+	if(dom < -25) {
+		Text.Add("<i>”F-fuck, you are good, [playername]!”</i> Miranda moans. <i>”I need to come so bad, fuck me, hard and deep!”</i>", parse);
+	}
+	else if(dom < 25) {
+		Text.Add("<i>”Just - haah - keep going like that, [playername],”</i> Miranda moans, encouraging you to speed up.", parse);
+	}
+	else {
+		Text.Add("<i>”That all you got?”</i> she moans defiantly. <i>”At this rate, I’ll have to - haah! - do it myself!”</i> ", parse);
+		if(mode == Mode.back)
+			Text.Add("Keeping one hand busy on her cock, Miranda moves her other one to squeeze her boobs, sighing as she pinches her nipples.", parse);
+		else if(mode == Mode.doggy)
+			Text.Add("True to her word, the herm begins to rock her hips back against you, fucking herself on your [cockDesc].", parse);
+	}
+	parse["dommy"] = (dom >= 25) ? " - despite her words -" : "";
+	Text.Add(" Her [mvagDesc] is clenching down on your shaft with a powerful grip, and[dommy] you can sense that the guardswoman is almost at her limit.", parse);
+	Text.NL();
+	
+	parse["artificial"] = pCock.isStrapon ? " artificial" : "";
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("Just where you want her. Grinning widely, you slow down a bit, retaining the depth of your thrusts but keeping the dog-morph just a hairs-breadth away from the orgasm she so desperately craves. When Miranda realizes what you are up to, she growls, cursing you. Her complaints gradually turn to whines and pleas and finally into full on begging as you break down her will with your pistoning [cockDesc].", parse);
+		Text.NL();
+		Text.Add("After another ten minutes, she finally crack, her thighs twitching and pussy clamping down on your[artificial] shaft. The dog-morph throws back her head and howls, tongue lolling and eyes rolling back as she rides out her climax.", parse);
+		miranda.subDom.DecreaseStat(-75, 1);
+	}, 1.0, function() { return player.SubDom() > 0 && player.sexlevel > 3; });
+	scenes.AddEnc(function() {
+		Text.Add("With a final thrust, you send her over the edge, gripping the guardswoman’s hips tightly as you drive into her, triggering her climax. The doggie’s pussy clamps down on your[artificial] shaft, clenching you tightly even as it stains your pillar with its sweet nectar.", parse);
+	}, 1.0, function() { return true; });
+	
+	var load;
+	var LoadIn = {
+		vag : 0,
+		ass : 1,
+		out : 2
+	};
+	var loadIn;
+	
+	var cont = function() {
+		Text.Add(" The two of you collapse on top of each other, exhausted from your wild romp.", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			Text.Clear();
+			Text.Add("You stay like that for a while, recovering in each others arms.", parse);
+			if(loadIn == LoadIn.out || player.NumCocks() > 1) {
+				if(dom > 0)
+					Text.Add(" Miranda has you clean her up by licking your own cum from her matted fur. <i>”Good [boyGirl],”</i> she murmurs, stroking your [hairDesc] gently.", parse);
+				else
+					Text.Add(" Miranda sets to cleaning herself up, meticulously licking the cum from her matted fur. <i>”Would be a shame to have it go to waste,”</i> she murmurs, swallowing greedily.", parse);
+			}
+			Text.Add(" Eventually, you disentangle yourself and set to re-adorning your gear.", parse);
+			Text.NL();
+			
+			player.subDom.IncreaseStat(75, 1);
+			miranda.subDom.DecreaseStat(-75, 3);
+			
+			Scenes.Miranda.HomeDommySexLeavingFuckedHer();
+		});
+	}
+	
+	scenes.Get();
+	if(mode == Mode.back)
+		Text.Add(" Miranda’s cock violently erupts, spraying her plentiful seed all over her [mstomachDesc], face and hair.", parse);
+	else if(mode == Mode.doggy)
+		Text.Add(" Between her legs, Miranda’s cock sprays its load, making a sticky pool on her sheets. Laundry is probably in order after this.", parse);
+	Text.Add(" The herm’s knot has swollen to its full size, mindlessly trying to tie her together with her non-existent mate’s cunt. Her tail is wagging uncontrollably, telling you just how far gone she is.", parse);
+	Text.NL();
+	if(!pCock.isStrapon) {
+		Text.Add("Your own orgasm is not far behind. You have only seconds to decide where you are going to cum.", parse);
+		Text.Flush();
+		
+		var loads = function() {
+			if(loadIn == LoadIn.out) {
+				if(load > 6) {
+					Text.NL();
+					Text.Add("Before you are even halfway done, Miranda is thoroughly coated in your semen, thick white stripes covering her short dark fur. You wipe your [multiCockDesc] off on her thigh, further adding to the mess.", parse);
+				}
+				else if(load > 3) {
+					Text.NL();
+					Text.Add("Your cum splatters all over the herm, painting her dark fur with thick white stripes.", parse);
+				}
+			}
+			else { // vag/ass
+				if(load > 6) {
+					Text.NL();
+					Text.Add("Within a few shots, Miranda’s belly is bulging with your seed. The excess fountains out around your [cockDesc], splattering on the bed and floor below.", parse);
+				}
+				else if(load > 3) {
+					Text.NL();
+					Text.Add("You remain inside her while you shoot your load, causing her belly to swell slowly as more and more cum is pumped into her body.", parse);
+				}
+				if(player.NumCocks() > 1) {
+					var allCocks = player.AllCocksCopy();
+					for(var i = 0; i < allCocks.length; i++) {
+						if(allCocks[i] == pCock) {
+							allCocks.remove(i);
+							break;
+						}
+					}
+					
+					parse["other"]          = allCocks.length > 1 ? "The rest of" : "Your other";
+					parse["multiCockDesc1"] = player.MultiCockDesc(allCocks);
+					parse["s"]              = allCocks.length > 1 ? "s" : "";
+					parse["notS"]           = allCocks.length > 1 ? "" : "s";
+					parse["itTheir"]        = allCocks.length > 1 ? "their" : "it";
+					Text.NL();
+					Text.Add("[other] [multiCockDesc1] shoot[notS] [itTheir] load[s] all over her body, painting her dark fur with thick white stripes.", parse);
+				}
+			}
+			Text.NL();
+			Text.Add("<i>”Mmm… nice and thick,”</i> Miranda purrs contentedly.", parse);
+			cont();
+		};
+		
+		//[Inside][Outside][Ass]
+		var options = new Array();
+		options.push({ nameStr : "Inside",
+			func : function() {
+				Text.Clear();
+				Text.Add("You are not about to stop here. With a rapid series of thrusts, you go over the edge and pour your cum into the horny herm.", parse);
+				
+				load = player.OrgasmCum();
+				
+				// TODO PREG
+				
+				loadIn = LoadIn.vag;
+				loads();
+			}, enabled : true,
+			tooltip : "Pour your load into the dommy herm."
+		});
+		options.push({ nameStr : "Outside",
+			func : function() {
+				Text.Clear();
+				load = player.OrgasmCum();
+				if(mode == Mode.back) {
+					if(dom > 25) {
+						Text.Add("You try to pull out your [cockDesc], but quickly meet resistance.", parse);
+						Text.NL();
+						Text.Add("<i>”Oh no you don’t,”</i> she growls, locking her legs around your hips and pulling you back in. <i>”Finish what you started,”</i> she commands, gazing deep into your eyes as you cry out, unleashing your load inside her.", parse);
+					}
+					else
+						Text.Add("You pull out your [cockDesc], just in time to unleash your cum all over the waiting herm. Your load mingles with her own, further coating her in thick, white stripes.", parse);
+				}
+				else if(mode == Mode.doggy) {
+					Text.Add("Just before you blow, you manage to pull out of Miranda’s tight pussy, spending your load across her naked back, sticking to her hair.", parse);
+				}
+				loadIn = LoadIn.out;
+				loads();
+			}, enabled : true,
+			tooltip : "Pull out and shoot your load all over her body."
+		});
+		if(widenButt) {
+			options.push({ nameStr : "Ass",
+				func : function() {
+					Text.Clear();
+					Text.Add("By now, you’ve worked your thumbs into her ass to the knuckle, giving her a thorough anal workout even as you rail her pussy. Just before you are about to blow, you pull out and plunge your [cockDesc] into Miranda’s butt. The guardswoman gives a surprised yelp, trailing off into a moan as you pour your hot cum inside her.", parse);
+					
+					load = player.OrgasmCum();
+					
+					loadIn = LoadIn.ass;
+					loads();
+				}, enabled : true,
+				tooltip : "Change your target at the last instant."
+			});
+		}
+		Gui.SetButtonsFromList(options);
+	}
+	else {
+		Text.Add("<i>”You know how to handle that thing pretty well,”</i> Miranda pants after she’s cooled down a bit. <i>”Perhaps I should add it to my collection.”</i>", parse);
+		cont();
+	}
+}
+
+
 
 Scenes.Miranda.HomeSubbySex = function() {
 	
