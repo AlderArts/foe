@@ -2878,6 +2878,7 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 		
 		player.subDom.IncreaseStat(75, 1);
 		miranda.subDom.DecreaseStat(-75, 3);
+		miranda.relation.IncreaseStat(40, 2);
 		player.AddLustFraction(-1);
 		miranda.AddLustFraction(-1);
 		
@@ -3203,6 +3204,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 					
 					player.subDom.IncreaseStat(75, 1);
 					miranda.subDom.DecreaseStat(-75, 3);
+					miranda.relation.IncreaseStat(60, 3);
 					
 					world.TimeStep({minute: 30});
 					
@@ -3229,6 +3231,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 				
 				player.subDom.IncreaseStat(75, 1);
 				miranda.subDom.DecreaseStat(-75, 3);
+				miranda.relation.IncreaseStat(60, 3);
 				player.AddLustFraction(-1);
 				miranda.AddLustFraction(-1);
 					
@@ -3459,6 +3462,7 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 			
 			player.subDom.IncreaseStat(75, 1);
 			miranda.subDom.DecreaseStat(-75, 3);
+			miranda.relation.IncreaseStat(40, 2);
 			player.AddLustFraction(-1);
 			miranda.AddLustFraction(-1);
 			
