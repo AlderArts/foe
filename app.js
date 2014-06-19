@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 3;
-VERSION_SUBSCRIPT = "h4";
-VERSION_NAME = "Magnus, Gwendy bugfix";
+VERSION_SUBSCRIPT = "i";
+VERSION_NAME = "Miranda dommy sexings";
 
 SAVE_VERSION = 13;
 // Save version 1: Initial
