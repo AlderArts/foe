@@ -1445,14 +1445,96 @@ Scenes.Miranda.Chat = function() {
 		tooltip : "Just chat for a while."
 	});
 	
+	// TODO: Restructure this...
+	
 	if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
 		options.push({ nameStr : "Date",
 			func : Scenes.Miranda.DatingEntry, enabled : true,
 			tooltip : "Ask her out on a walk."
 		});
+		// TODO: Unlocked either after X dates or after reaching X level of relationship. Until the repeatable dates are written, this will have NO REQUIREMENT.
+		if(miranda.flags["Dates"] >= 1) {
+			options.push({ nameStr : "Take home",
+				func : Scenes.Miranda.TakeHome, enabled : true,
+				tooltip : "You both know where this is going to end, so why not skip straight to dessert?"
+			});
+		}
 	}
 	
 	Gui.SetButtonsFromList(options);
+}
+
+Scenes.Miranda.TakeHome = function() {
+	var parse = {
+		masterMistress : player.mfTrue("master", "mistress")
+	};
+	
+	Text.Clear();
+	if(miranda.Attitude() < Miranda.Attitude.Neutral) {
+		Text.Add("</i>”Heh, craving some cock are you?”</i> Miranda chortles, draining the last of her drink and slamming the mug down on the table. </i>”Very well then, slut. Dating you is a waste of time anyway, so let’s get your sweet ass back to my den and skip straight to part you love above all else, my cock,”</i> she says grabbing your arm and dragging you after her as she exits the bar.", parse);
+		Text.NL();
+		if(player.SubDom() > 0)
+			Text.Add("Whatever last-second doubts you may have, you can't do anything to stop her now. Her grip around your wrist is like iron and you have no choice but to follow her as she leads you towards her home.", parse);
+		else
+			Text.Add("Shame and excitement chase each other through your mind as your alpha bitch drags you back to her den. Lost in the throes of lust, you eagerly keep up with her, anxious to let her decide what to do with you.", parse);
+		Text.NL();
+		Text.Add("Once you’re at her doorstep, Miranda opens the door and hauls you inside, slamming the door shut and locking it behind her. <i>”Alright then, let’s begin,”</i> she grins, licking her lips.", parse);
+		
+		world.TimeStep({hour: 1});
+		
+		Scenes.Miranda.HomeSubbySex();
+	}
+	else {
+		var dom = miranda.SubDom() - player.SubDom();
+		if(dom < -25) {
+			Text.Add("A smirk curling your lips, you reach around the table and run your hand appreciatively over the firmly toned cheeks of Miranda's ass, reaching through the hole in her pants to scratch at the base of her tail, eliciting a moan from the doberherm. Sliding yourself closer to her, your thigh touching hers, your other hand reaches up to her chest, caressing her tits as best you can through the studded leather armor she wears. An appreciative growl rumbles out of her throat, but it's not the reaction you're after.", parse);
+			Text.NL();
+			Text.Add("Your hand traces its way down her belly, to a much more vulnerable target. Her maleness is far less protected as you cup her between her legs, stroking and fondling her sheath and her bulging balls with abandon. Miranda's ears flick and she fidgets in her seat, and you can feel her bulging through her pants as her foot-long girlcock begins poking forth and tenting her pants.", parse);
+			Text.NL();
+			Text.Add("With a playful smile, you coyly scold your naughty bitch for getting so hot and bothered in a place like this. But, since you're such a nice [guyGirl], you'll take her home and let her have some fun. To emphasize your last word, you squeeze her, firmly but gently, through her pants.", parse);
+			Text.NL();
+			Text.Add("<i>”T-Thank you, [masterMistress],”</i> she whispers, holding back a moan at your ministrations.", parse);
+			Text.NL();
+			Text.Add("Grinning, you tell her to come on then, giving her one last squeeze to the ass before you remove your hands from her body and imperiously begin heading towards the door. Out of the corner of your eye, you watch the aroused morph eagerly following you, her blatantly tented pants attracting a chorus of whispers and smirks as she follows.", parse);
+			Text.NL();
+			Text.Add("Meeting her at the door, you sling your arm around her and blatantly grope her ass, squeezing her and worming your fingers between her cheeks. Miranda moans lustfully and wriggles her hips in delight, allowing you to lead her in the direction of her home without the slightest protest.", parse);
+		}
+		else {
+			Text.Add("</i>”Hmm, on one hand I do like spending time with you. On the other hand I also like dessert. So which one should I pick? Should I make you wine and dine me before we get to the good bits?”</i> she muses with a mischievous grin.", parse);
+			Text.NL();
+			Text.Add("You casually quip to her that if she does skip straight to dessert, that leaves the both of you with a lot more time to have nookie.", parse);
+			Text.NL();
+			Text.Add("<i>”Sold!”</i> she exclaims, draining the last of her drink and slamming the mug down. She gets up and walks towards the door at a brisk pace. <i>”Come on, slowpoke,”</i> she signals for you to follow.", parse);
+			Text.NL();
+			Text.Add("With a smile and a shake of your head at Miranda's antics, you hasten to follow the eager morph.", parse);
+		}
+		Text.NL();
+		parse["dom"] = dom < -25 ? "fumbles to open" : "opens";
+		Text.Add("You reach her home in record time, where Miranda [dom] the door. Once she’s inside she looks at you expectantly, holding the door for you.", parse);
+		Text.Flush();
+		
+		world.TimeStep({hour: 1});
+		
+		//[Take Charge][Let Her Lead]
+		var options = new Array();
+		options.push({ nameStr : "Take Charge",
+			func : function() {
+				Text.Clear();
+				Text.Add("You lunge forward, wrapping your arms around her and pulling her into a passionate kiss. Idly you slam the door shut behind, blatantly squeezing her ass cheeks as you feel her tented erection rubbing against your midriff.", parse);
+				Scenes.Miranda.HomeDommySex();
+			}, enabled : true,
+			tooltip : "This time you get to run this show."
+		});
+		options.push({ nameStr : "Passive",
+			func : function() {
+				Text.Clear();
+				Text.Add("With a smile, you simply stand there on the doorstep and spread your arms, making it clear that you are welcoming Miranda to do with you as she wills. A hungry grin crosses the morph's lips, eyes alight as she promptly grabs you and bodily drags you in over the threshold, slamming the door shut behind you.", parse);
+				Scenes.Miranda.HomeSubbySex();
+			}, enabled : true,
+			tooltip : "Why not let her take the lead this time?"
+		});
+		Gui.SetButtonsFromList(options);
+	}
 }
 
 Scenes.Miranda.JustOneMore = function() {
