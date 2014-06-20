@@ -1466,7 +1466,8 @@ Scenes.Miranda.Chat = function() {
 
 Scenes.Miranda.TakeHome = function() {
 	var parse = {
-		masterMistress : player.mfTrue("master", "mistress")
+		masterMistress : player.mfTrue("master", "mistress"),
+		guyGirl : player.mfTrue("guy", "girl")
 	};
 	
 	Text.Clear();
@@ -2494,7 +2495,7 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 		Gui.Callstack.push(function() {
 			Text.NL();
 			parse["night"] = world.time.DayTime();
-			Text.Add("You bid her farewell and step out into the [night].", parse);
+			Text.Add("You bid Miranda farewell and step out into the [night].", parse);
 			if(party.NumTotal() > 1) {
 				Text.NL();
 				parse["comp"] = party.NumTotal() > 2 ? "the rest of your party" : party.Get(1).name;
