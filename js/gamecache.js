@@ -45,6 +45,7 @@ InitCache = function() {
 	maria   = new Maria(gameCache.maria);
 	
 	fera    = new Fera(gameCache.fera);
+	kyna    = new Kyna(gameCache.kyna);
 	
 	jeanne  = new Jeanne(gameCache.jeanne);
 	golem   = new GolemBoss(gameCache.golem);
@@ -326,6 +327,7 @@ GameToCache = function() {
 	gameCache.danie   = danie.ToStorage();
 	
 	gameCache.fera    = fera.ToStorage();
+	gameCache.kyna    = kyna.ToStorage();
 	
 	gameCache.jeanne  = jeanne.ToStorage();
 	gameCache.golem   = golem.ToStorage();

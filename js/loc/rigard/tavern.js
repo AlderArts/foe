@@ -25,3 +25,12 @@ world.loc.Rigard.Tavern.common.links.push(new Link(
 world.loc.Rigard.Tavern.common.endDescription = function() {
 	Text.AddOutput("Nothing else to see here.<br/>");
 }
+
+world.loc.Rigard.Tavern.common.onEntry = function() {
+	if(kyna.flags["Met"] == Kyna.MetFlags.NotMet && world.time.hour > 17 && Math.random() < 0.2) {
+		Scenes.Kyna.Intro();
+	}
+	else {
+		PrintDefaultOptions();
+	}
+}

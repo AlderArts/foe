@@ -24,6 +24,7 @@ CreditsScreen = function() {
 	Text.AddOutput("Dreams & ravens: About half of them, Del<br/>");
 	Text.AddOutput("Cats loss scenes: LukaDoc and QuietBrowser<br/>");
 	Text.AddOutput("Some of Miranda's sex scenes: LukaDoc and QuietBrowser<br/>");
+	Text.AddOutput("Kyna Moran: Reaper<br/>");
 	
 	Text.Newline();
 	

@@ -117,9 +117,10 @@ Race = {
 	avian    : 16,
 	moth     : 17,
 	scorpion : 18,
+	ferret   : 19,
 	
 	// TODO: Keep updated!
-	numRaces : 19
+	numRaces : 20
 }
 Race.Desc = function(race) {
 	var r;
@@ -173,6 +174,7 @@ Race.Desc = function(race) {
 		else       return "bird";
 	case Race.moth: return "moth";
 	case Race.scorpion: return "scorpion";
+	case Race.ferret: return "ferret";
 	default: return "undefined";
 	}
 }
@@ -229,6 +231,7 @@ Race.Quantifier = function(race) {
 		else       return "a bird";
 	case Race.moth: return "a moth";
 	case Race.scorpion: return "a scorpion";
+	case Race.ferret: return "a ferret";
 	default: return "an undefined";
 	}
 }
@@ -806,6 +809,7 @@ Appendage.prototype.Long = function() {
 			case Race.lizard: return "long, scaled lizard-like tail";
 			case Race.demon:  return "long, thin demonic tail, with a spaded tip";
 			case Race.dragon: return "long, scaled draconic tail";
+			case Race.ferret: return "long, fluffy ferret tail";
 			
 			case Race.avian:  return "tail feathers";
 			
@@ -1223,6 +1227,7 @@ Cock.prototype.TipShort = function() {
 		
 		case Race.cat: qualifier = "barbed "; break;
 		
+		case Race.ferret:
 		case Race.demon:
 		case Race.cow:
 		case Race.rabbit:
@@ -1654,6 +1659,7 @@ Body.prototype.SkinDesc = function() {
 		case Race.cow:
 		case Race.horse: return "a thick " + col + "hide";
 		
+		case Race.ferret:
 		case Race.wolf:
 		case Race.sheep:
 		case Race.goat:
@@ -1679,6 +1685,7 @@ Body.prototype.HasFur = function() {
 		case Race.dog:
 		case Race.fox:
 		case Race.rabbit:
+		case Race.ferret:
 			return true;
 		default:
 			return false;
@@ -1711,6 +1718,7 @@ Body.prototype.FaceDesc = function() {
 		case Race.human:  return "human face";
 		case Race.horse:  return "horse-like face";
 		case Race.cat:    return "feline face";
+		case Race.ferret: return "pointed, ferret-like face";
 		case Race.rabbit: return "narrow, rabbit-like face";
 		case Race.fox:
 		case Race.wolf:
@@ -1726,6 +1734,7 @@ Body.prototype.FaceDescLong = function() {
 		case Race.human:  return "a human face with smooth skin";
 		case Race.horse:  return "a long, flat, horse-like face";
 		case Race.cat:    return "a triangular face with feline properties";
+		case Race.ferret: return "a pointed, ferret-like face";
 		case Race.rabbit: return "a narrow, rabbit-like face";
 		case Race.fox:
 		case Race.wolf:
@@ -1743,6 +1752,7 @@ Body.prototype.EyeDesc = function() {
 		
 		case Race.demon: return "demonic eye";
 		
+		case Race.ferret:
 		case Race.cat:
 		case Race.fox:
 		case Race.wolf:
@@ -1769,6 +1779,7 @@ Body.prototype.EarDesc = function() {
 		
 		case Race.horse: return "long equine ears";
 		
+		case Race.ferret: return "furred ferret ears";
 		case Race.cat: return "fuzzy feline ears";
 		case Race.fox: return "fuzzy vulpine ears";
 		case Race.wolf:
@@ -1822,6 +1833,7 @@ Body.prototype.HasLongSnout = function() {
 		case Race.cat:
 		case Race.human:
 		case Race.avian:
+		case Race.ferret:
 		default:
 		return false;
 	}
@@ -1844,6 +1856,7 @@ Body.prototype.FeetDesc = function() {
 		case Race.lizard:
 		case Race.demon: return "clawed feet";
 		
+		case Race.ferret:
 		case Race.rabbit:
 		case Race.fox:
 		case Race.wolf:
@@ -1873,6 +1886,7 @@ Body.prototype.LegDesc = function() {
 		case Race.lizard:
 		case Race.demon:
 		
+		case Race.ferret:
 		case Race.rabbit:
 		case Race.fox:
 		case Race.wolf:
@@ -1901,6 +1915,7 @@ Body.prototype.LegsDesc = function() {
 		case Race.lizard:
 		case Race.demon:
 		
+		case Race.ferret:
 		case Race.rabbit:
 		case Race.fox:
 		case Race.wolf:
@@ -1931,6 +1946,7 @@ Body.prototype.ArmDesc = function() {
 		case Race.lizard:
 		case Race.demon:
 		
+		case Race.ferret:
 		case Race.rabbit:
 		case Race.fox:
 		case Race.wolf:
@@ -1949,6 +1965,7 @@ Body.prototype.HandDesc = function() {
 	if(!arm) return "body";
 	
 	switch(arm.race) {
+		case Race.ferret:
 		case Race.rabbit:
 		case Race.fox:
 		case Race.wolf:
@@ -1989,6 +2006,7 @@ Body.prototype.TongueDesc = function() {
 		
 		case Race.cat: return "barbed tongue";
 		
+		case Race.ferret:
 		case Race.rabbit:
 		case Race.goat:
 		case Race.sheep:
