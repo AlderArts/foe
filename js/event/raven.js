@@ -192,7 +192,7 @@ Scenes.RavenMother.TheHuntWolf = function() {
 		Text.NL();
 		Text.Add("Fire licks at your back, but you come to a stop and ignore it. It cannot harm you in a dream. <i>“Has the little ant found a small courage?”</i> Uru demands, floating above you. <i>“But you should run, little ant. Your feet will serve you much better here.”</i>", parse);
 		Text.NL();
-		Text.Add("Paying the demon no mind, you scan the sky, and finally spot the raven behind her. This time, you realize there is no reason for you to jump or fly. It’s your dream, and it’s you can be anywhere you want in it.", parse);
+		Text.Add("Paying the demon no mind, you scan the sky, and finally spot the raven behind her. This time, you realize there is no reason for you to jump or fly. It’s your dream, and you can be anywhere you want in it.", parse);
 		Text.NL();
 		Text.Add("You stand behind the raven in the air, your arms already extended, your hands grabbing a firm hold of the bird. A smile crosses your lips - you’ve finally got it.", parse);
 		Text.NL();
@@ -309,7 +309,7 @@ Scenes.RavenMother.TheHuntGladeCont = function() {
 			Text.NL();
 			Text.Add("She’s silent, and you wonder if she’s misunderstanding something, but taking another look, you realize she’s concentrating intently. Even your raven observers have gone silent on the trees, apparently expecting something.", parse);
 			Text.NL();
-			Text.Add("Finally, the Raven Mother waves her hand and a vision appears, overlaying the glade. The illusion is as clear as life at the center, and fades out to translucence at the edges. You feel a little disoriented, as beside the real Raven Mother, a duplicate sits now sits, and a copy of yourself stands beside you.", parse);
+			Text.Add("Finally, the Raven Mother waves her hand and a vision appears, overlaying the glade. The illusion is as clear as life at the center, and fades out to translucence at the edges. You feel a little disoriented, as beside the real Raven Mother, a duplicate now sits, and a copy of yourself stands beside you.", parse);
 			Text.NL();
 			Text.Add("Something’s different, though. The feathered girl is identical, and sits in the same way, but the vision you is not quite the same. It’s not a dream version, for one. In the dream, your clothing shimmers, never quite retaining a constant form, but in the vision the clothing looks more real, oddly enough. But there’s more - the appearance is off. You don’t look quite like that.", parse);
 			Text.NL();
