@@ -60,7 +60,8 @@ function Rigard(storage) {
 	
 	// TODO: Store
 	this.ClothShop = new Shop();
-	this.ClothShop.AddItem(Items.Equinium, 5);
+	this.ClothShop.AddItem(Items.Armor.SimpleRobes, 5);
+	this.ClothShop.AddItem(Items.Armor.StylizedClothes, 5);
 	
 	// Have accessed town (not necessarily free access)
 	this.flags["Visa"] = 0;
