@@ -253,66 +253,52 @@ Scenes.Lizards.WinMale = function(enc) {
 	Text.Clear();
 	Text.Add("You grin triumphantly, standing over the reptile you just trounced, looking down at him victoriously. He lays there on the ground, his chest heaving and his breath coming as a sibilant hiss. He gazes to your feet, his slitted eyes defeated.", parse);
 	Text.NL();
-	if(player.LustLevel() > 0.3) {
-		Text.Add("You smirk at him. The creatures are known for abusing those they beat, perhaps you should return the favour?", parse);
-		
-		Text.NL();
-		if(player.FirstCock() && player.FirstVag()) {
-			Text.Add("You feel a steady ache in your quivering pussy, and a similar one as your [multiCockDesc] gently begin to throb to life. It quickly reminds you of just what you could do with the defeated reptile... What do you do?", parse);
-		}
-		else if(player.FirstCock()) {
-			Text.Add("The steady stirring in your groin tells you that your body is more than willing... What do you do?", parse);
-		}
-		else if(player.FirstVag()) {
-			Text.Add("The dull ache in your [vagDesc] and the feeling of your nipples hardening under your [clothesDesc] sends shivers down your spine... What do you do?", parse);
-		}
-		
-		var options = new Array();
-		if(player.FirstCock()) {
-			options.push({ nameStr : "Anal",
-				func : function() {
-					Scenes.Lizards.WinClaimAss(enc, enc.male);
-				}, enabled : true,
-				tooltip : "He's not going to put up much of a fight now, why not put his ass to good use?"
-			});
-			options.push({ nameStr : "Blowjob",
-				func : function() {
-					Scenes.Lizards.WinBlowjob(enc, enc.male);
-				}, enabled : true,
-				tooltip : "With a muzzle that long, you bet he could take every inch..."
-			});
-		}
-		
-		//[Powerbottom][Leave]
-		options.push({ nameStr : "Powerbottom",
-			func : function() {
-				Scenes.Lizards.WinPowerbottom(enc);
-			}, enabled : true,
-			tooltip : "Who says the winner has to be on top? You like a good ride, when you're in charge."
-		});
-		options.push({ nameStr : "Leave",
-			func : function() {
-				Text.Clear();
-				Text.Add("You shake your head, looking down at [m1name]. He gazes up at you warily, as if expecting something bad to happen. Lucky for him, you're not in the mood for reptile today.", parse);
-				Text.Flush();
-				Gui.NextPrompt(enc.finalize);
-			}, enabled : true,
-			tooltip : "It's tempting, but you have better things to do than teach a reptile his place."
-		});
-		Gui.SetButtonsFromList(options);
+	Text.Add("You smirk at him. The creatures are known for abusing those they beat, perhaps you should return the favour?", parse);
+	
+	Text.NL();
+	if(player.FirstCock() && player.FirstVag()) {
+		Text.Add("You feel a steady ache in your quivering pussy, and a similar one as your [multiCockDesc] gently begin to throb to life. It quickly reminds you of just what you could do with the defeated reptile... What do you do?", parse);
 	}
-	else {
-		Text.Add("You smirk in satisfaction at seeing such a creature beaten. Were you a little more in the mood, you might even be inclined to give him a taste of his own medicine, but for now you simply claim the spoils of victory and leave.", parse);
-		if(party.Two()) {
-			Text.NL();
-			Text.Add("[p1name] joins you with a nod.", parse);
-		}
-		else if(!party.Alone()) {
-			Text.NL();
-			Text.Add("Your party joins you.", parse);
-		}
-		Gui.NextPrompt(enc.finalize);
+	else if(player.FirstCock()) {
+		Text.Add("The steady stirring in your groin tells you that your body is more than willing... What do you do?", parse);
 	}
+	else if(player.FirstVag()) {
+		Text.Add("The dull ache in your [vagDesc] and the feeling of your nipples hardening under your [clothesDesc] sends shivers down your spine... What do you do?", parse);
+	}
+	
+	var options = new Array();
+	if(player.FirstCock()) {
+		options.push({ nameStr : "Anal",
+			func : function() {
+				Scenes.Lizards.WinClaimAss(enc, enc.male);
+			}, enabled : true,
+			tooltip : "He's not going to put up much of a fight now, why not put his ass to good use?"
+		});
+		options.push({ nameStr : "Blowjob",
+			func : function() {
+				Scenes.Lizards.WinBlowjob(enc, enc.male);
+			}, enabled : true,
+			tooltip : "With a muzzle that long, you bet he could take every inch..."
+		});
+	}
+	
+	//[Powerbottom][Leave]
+	options.push({ nameStr : "Powerbottom",
+		func : function() {
+			Scenes.Lizards.WinPowerbottom(enc);
+		}, enabled : true,
+		tooltip : "Who says the winner has to be on top? You like a good ride, when you're in charge."
+	});
+	options.push({ nameStr : "Leave",
+		func : function() {
+			Text.Clear();
+			Text.Add("You shake your head, looking down at [m1name]. He gazes up at you warily, as if expecting something bad to happen. Lucky for him, you're not in the mood for reptile today.", parse);
+			Text.Flush();
+			Gui.NextPrompt(enc.finalize);
+		}, enabled : true,
+		tooltip : "It's tempting, but you have better things to do than teach a reptile his place."
+	});
+	Gui.SetButtonsFromList(options);
 	Text.Flush();
 }
 
@@ -331,67 +317,53 @@ Scenes.Lizards.WinFemale = function(enc) {
 	Text.Add("You can't help but grin as you overcome the reptilian warrior who so eagerly tried to beat you down.  You stare at her for a few minutes, calming your breathing as she gazes at the ground. Her scales glint in the light, and you find yourself struck by an odd sort of attraction to the creature.", parse);
 	Text.NL();
 	
-	if(player.LustLevel() > 0.3) {
-		Text.Add("She's actually rather pretty, at least in a reptilian, monstrous way. You find your thoughts trailing to what she would feel like, then slowly to more lewd thoughts.", parse);
-		Text.NL();
-		if(player.FirstCock() && player.FirstVag()) {
-			Text.Add("You feel a stirring in your groin, both your [multiCockDesc] and your [vagDesc] feeling flushed with heat. You bite your lip for a moment in thought, then nod, having decided.", parse);
-		}
-		else if(player.FirstCock()) {
-			Text.Add("You feel yourself rapidly growing hard, and take a deep breath. The lizard looks up at you, her eyes seeming oddly sultry. She quickly glances back down. What do you do?", parse);
-		}
-		else if(player.FirstVag()) {
-			Text.Add("You feel your [vagDesc] growing wet, and idly wonder what you could do with hers... The lizard looks up at you, her eyes seeming oddly sultry. She quickly glances back down. What do you do?", parse);
-		}
-		
-		var options = new Array();
-		if(player.FirstCock()) {
-			options.push({ nameStr : "Anal",
-				func : function() {
-					Scenes.Lizards.WinClaimAss(enc, enc.female);
-				}, enabled : true,
-				tooltip : "She's not going to put up much of a fight now, why not put her ass to good use?"
-			});
-			options.push({ nameStr : "Blowjob",
-				func : function() {
-					Scenes.Lizards.WinBlowjob(enc, enc.female);
-				}, enabled : true,
-				tooltip : "With a muzzle that long, you bet she could take every inch..."
-			});
-		}
-		
-		//[Tailpeg][Leave]
-		if(player.sexlevel > 2) {
-			options.push({ nameStr : "Tailpeg",
-				func : function() {
-					Scenes.Lizards.WinTailpeg(enc);
-				}, enabled : true,
-				tooltip : "Your experience points out a lovely idea. Perhaps her tail could be put to a wonderful use..."
-			});
-		}
-		options.push({ nameStr : "Leave",
+	Text.Add("She's actually rather pretty, at least in a reptilian, monstrous way. You find your thoughts trailing to what she would feel like, then slowly to more lewd thoughts.", parse);
+	Text.NL();
+	if(player.FirstCock() && player.FirstVag()) {
+		Text.Add("You feel a stirring in your groin, both your [multiCockDesc] and your [vagDesc] feeling flushed with heat. You bite your lip for a moment in thought, then nod, having decided.", parse);
+	}
+	else if(player.FirstCock()) {
+		Text.Add("You feel yourself rapidly growing hard, and take a deep breath. The lizard looks up at you, her eyes seeming oddly sultry. She quickly glances back down. What do you do?", parse);
+	}
+	else if(player.FirstVag()) {
+		Text.Add("You feel your [vagDesc] growing wet, and idly wonder what you could do with hers... The lizard looks up at you, her eyes seeming oddly sultry. She quickly glances back down. What do you do?", parse);
+	}
+	
+	var options = new Array();
+	if(player.FirstCock()) {
+		options.push({ nameStr : "Anal",
 			func : function() {
-				Text.Clear();
-				Text.Add("You shake your head, looking down at [m1name]. She gazes up at you warily, as if expecting something bad to happen. Lucky for her, you're not in the mood for reptile today.", parse);
-				Text.Flush();
-				Gui.NextPrompt(enc.finalize);
+				Scenes.Lizards.WinClaimAss(enc, enc.female);
 			}, enabled : true,
-			tooltip : "It's tempting, but you have better things to do than teach a reptile her place."
+			tooltip : "She's not going to put up much of a fight now, why not put her ass to good use?"
 		});
-		Gui.SetButtonsFromList(options);
+		options.push({ nameStr : "Blowjob",
+			func : function() {
+				Scenes.Lizards.WinBlowjob(enc, enc.female);
+			}, enabled : true,
+			tooltip : "With a muzzle that long, you bet she could take every inch..."
+		});
 	}
-	else {
-		Text.Add("She's rather pretty. Not in a way that has any impact on you - merely objectively pretty, like any well-built creature might be. Uninterested, you simply claim the spoils of victory and leave her sitting there, watching you go.", parse);
-		if(party.Two()) {
-			Text.NL();
-			Text.Add("[p1name] joins you with a nod.", parse);
-		}
-		else if(!party.Alone()) {
-			Text.NL();
-			Text.Add("Your party joins you.", parse);
-		}
-		Gui.NextPrompt(enc.finalize);
+	
+	//[Tailpeg][Leave]
+	if(player.sexlevel > 2) {
+		options.push({ nameStr : "Tailpeg",
+			func : function() {
+				Scenes.Lizards.WinTailpeg(enc);
+			}, enabled : true,
+			tooltip : "Your experience points out a lovely idea. Perhaps her tail could be put to a wonderful use..."
+		});
 	}
+	options.push({ nameStr : "Leave",
+		func : function() {
+			Text.Clear();
+			Text.Add("You shake your head, looking down at [m1name]. She gazes up at you warily, as if expecting something bad to happen. Lucky for her, you're not in the mood for reptile today.", parse);
+			Text.Flush();
+			Gui.NextPrompt(enc.finalize);
+		}, enabled : true,
+		tooltip : "It's tempting, but you have better things to do than teach a reptile her place."
+	});
+	Gui.SetButtonsFromList(options);
 	Text.Flush();
 }
 
