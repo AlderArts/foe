@@ -320,11 +320,12 @@ Scenes.Kyna.IntroSexPrompt = function() {
 		cockDesc      : function() { return p1Cock.Short(); },
 		cockTip       : function() { return p1Cock.TipShort(); },
 		oneof         : player.NumCocks() > 1 ? " one of" : "",
+		s             : player.NumCocks() > 1 ? "s" : "",
+		notS          : player.NumCocks() > 1 ? "" : "s",
 		breastDesc    : function() { return player.FirstBreastRow().Short(); },
 		vagDesc       : function() { return player.FirstVag().Short(); },
 		clitDesc      : function() { return player.FirstVag().ClitShort(); }
 	};
-	
 	
 	//[Fuck her][Scissoring][Oral][Female 69]
 	var options = new Array();
@@ -380,6 +381,8 @@ Scenes.Kyna.IntroSexPrompt = function() {
 		});
 		options.push({ nameStr : "Blowjob",
 			func : function() {
+				p1Cock = player.BiggestCock();
+				
 				Text.Clear();
 				Text.Add("Stepping forward, you close the distance between you and Kyna, bringing your [cockDesc] just in front of her face while stroking yourself with a free hand, telling her to blow you. <i>”W-Wha?”</i> She stammers nervously, <i>”I-I’ve never… It’s so... Oh f-fine!”</i> she says, resigning herself to the task as you stare down at her.", parse);
 				Text.NL();
@@ -432,7 +435,7 @@ Scenes.Kyna.IntroSexPrompt = function() {
 					Text.Clear();
 					Text.Add("<i>”That was fast!”</i> you say to her happily, looking at the panting ferret laid out on the bed. <i>”I… Told you… I’d never… Done that before.”</i> she puffs breathlessly. You’re happy to have introduced the young ferret to feminine pleasures, yet you can’t help but feel left out. Your nethers tingle in a heated need for release. Feeling that one good turn deserves another, you lift yourself onto the bed and position your moist womanhood above her face.", parse);
 					if(player.FirstCock())
-						Text.Add(" Your erect cock juts out eagerly, casting a shadow on her breasts.", parse);
+						Text.Add(" Your erect cock[s] juts[notS] out eagerly, casting a shadow on her breasts.", parse);
 					Text.NL();
 					Text.Add("Kyna lies there panting for a few moments longer before she stirs and notices your intimate parts hovering above her. <i>”Umm, ah dunno…”</i> she mumbles nervously. Growing impatient, you lower your dripping cunt to her mouth, insistently rubbing it against her muzzle. Getting the message, Kyna tentatively licks your folds, tasting pussy juices for the first time in her life.", parse);
 					Text.NL();
