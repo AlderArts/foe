@@ -2725,7 +2725,8 @@ Scenes.Kiakai.HealingNice = function() {
 								Text.AddOutput("Reclining comfortably, you allow the elf free reign", parse);
 								if(player.FirstCock())
 									Text.AddOutput(", idly stroking your [multiCockDesc]", parse);
-								Text.AddOutput(". [name]'s slender fingers reach deep inside you, stretching your sphincter[ and prodding at your sensitive prostate]. Edged on by your increasingly erratic moans, [heshe] adds another finger to [hisher] pounding, spreading you even further.", parse);
+								parse["c"] = player.FirstCock() ? " and prodding at your sensitive prostate" : "";
+								Text.AddOutput(". [name]'s slender fingers reach deep inside you, stretching your sphincter[c]. Edged on by your increasingly erratic moans, [heshe] adds another finger to [hisher] pounding, spreading you even further.", parse);
 								Text.Newline();
 								Text.AddOutput("Before long, you groan in ecstasy as the elf's multi-pronged attentions bear fruit, drenching [hisher] pretty face in your girly juices.", parse);
 								if(player.FirstCock()) {

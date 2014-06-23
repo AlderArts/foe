@@ -132,6 +132,7 @@ Items.Lacertium.PushEffect(function(target) {
 	if(cocks.length == 1 && cocks[0].race == Race.lizard && Math.random() < 0.1) {
 		cocks.push(cocks[0].Clone());
 		Text.AddOutput("[Poss] reptilian cock splits in two identical dicks!", { Poss: target.Possessive() });
+		Text.Newline();
 	}
 });
 Items.Lacertium.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.lizard, str: "lizard nubs"});

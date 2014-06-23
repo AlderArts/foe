@@ -310,7 +310,7 @@ TF.ItemEffects.SetEars = function(target, opts) {
 	var ears = target.Ears();
 	if(Math.random() < odds) {
 		changed = TF.SetRaceOne(ears, opts.race);
-		if(changed == TF.Effect.Unchanged) {
+		if(changed != TF.Effect.Unchanged) {
 			Text.AddOutput("[Poss] ears turn into [str]!", parse);
 			Text.Newline();
 		}

@@ -551,7 +551,13 @@ Scenes.Lagomorph.GroupWinInterrorigate = function(enc) {
 					Text.NL();
 					Text.Flush();
 					
-					Scenes.Burrows.Arrival(alpha);
+					Gui.Callstack.push(function() {
+						Scenes.Burrows.Arrival(alpha);
+					});
+					
+					Gui.NextPrompt(function() {
+						enc.finalize();
+					});
 				}, enabled : true,
 				tooltip : "Follow the alpha into the crowd."
 			});
