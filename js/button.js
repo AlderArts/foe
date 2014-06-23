@@ -21,7 +21,9 @@ function Button(rect, text, func, enabled, image, disabledImage, glow) {
 	
 	this.set     = Gui.canvas.set();
 	this.image   = Gui.canvas.image(this.enabledImage, rect.x, rect.y, rect.w, rect.h);
-	this.text    = Gui.canvas.text(rect.x + rect.w/2, rect.y + rect.h/2, text).attr(
+	this.text    = Gui.canvas.text((rect.x + rect.w/2)+2, (rect.y + rect.h/2)+2, text).attr(
+		{fill:"#000", /*stroke:"#000",*/ font: BUTTON_FONT});
+	this.text2   = Gui.canvas.text(rect.x + rect.w/2, rect.y + rect.h/2, text).attr(
 		{fill:"#FFF", /*stroke:"#000",*/ font: BUTTON_FONT});
 	//Disable text selection
 	$(this.text.node).css({
@@ -32,8 +34,17 @@ function Button(rect, text, func, enabled, image, disabledImage, glow) {
 		"-ms-user-select": "none",
 		"user-select": "none"
 	});
+	$(this.text2.node).css({
+		"-webkit-touch-callout": "none",
+		"-webkit-user-select": "none",
+		"-khtml-user-select": "none",
+		"-moz-user-select": "none",
+		"-ms-user-select": "none",
+		"user-select": "none"
+	});
 	this.set.push(this.image);
 	this.set.push(this.text);
+	this.set.push(this.text2);
 	if(glow) {
 		this.glow = this.image.glow({width: 5, color: "green", opacity: 1});
 		this.set.push(this.glow);
@@ -121,6 +132,7 @@ Button.prototype.SetVisibility = function() {
 
 Button.prototype.SetText = function(text) {
 	this.text.attr({text: text});
+	this.text2.attr({text: text});
 }
 
 /*
