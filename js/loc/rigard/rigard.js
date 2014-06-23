@@ -199,6 +199,7 @@ Scenes.Rigard.CityHistory = function() {
 	Text.Flush();
 	
 	world.TimeStep({minute: 20});
+	Gui.NextPrompt();
 }
 
 Scenes.Rigard.Chatter = function(enteringArea) {
