@@ -196,7 +196,11 @@ Scenes.Kyna.Intro = function() {
 			Text.NL();
 			Text.Add("Kyna’s face immediately drops again, and she buries her face in her folded arms, trying to hide it against the table. <i>”Um... I guess a meal and a decent bed would be nice. But… I dunno,”</i> she says uncertainly as she slowly looks up at you, her face wearing an increasingly embarrassed expression. After a little pushing and a quiet moment of thought, Kyna looks you in the eye and says <i>”... Okay, but nothin’... funny, and be gentle! I-I’m only doing it for the money, okay?”</i>", parse);
 			Text.NL();
-			Text.Add("Agreeing to her terms, you both finish your drinks and go pay for a room. You eagerly head up the stairs to it, the nervous looking ferret in tow. Once inside, though, Kyna jumps on the bed and lies back, taking in its softness. <i>”Ohh, it’s been too long since ah slept in a proper bed,”</i> she says lazily. The sounds of you striding over to her, your clothes dropping to the floor piece by piece, wakes her from her daze.", parse);
+			Text.Add("Agreeing to her terms, you both finish your drinks and set out to complete your deal. The nervous ferret insists on getting a room, which you somewhat dubiously ask the barkeep about. He eyes the two of you knowingly, agreeing to let you rent a room. Curious, you didn’t think the Maidens’ Bane had rooms for hire.", parse);
+			Text.NL();
+			Text.Add("A few coins change hands - since she is the one insisting on it, you take it out of Kyna’s payment - and the two of you head up a rickety staircase. The barkeep lets you into your room - barely a storage closet with only a single bed in it. The ferret jumps onto it eagerly, lying down on her back as the bed gives off alarmed squeaks.", parse);
+			Text.NL();
+			Text.Add("<i>”Ohh, it’s been too long since ah slept in a proper bed,”</i> Kyna says drowsily, apparently oblivious to the poor condition of the room. No matter. The sounds of you striding over to her, your clothes dropping to the floor piece by piece, wakes her from her daze.", parse);
 			Text.NL();
 			Text.Add("<i>”W-well... uh, I guess you want tah get started then? So, umm... where do we start?”</i> she asks shyly, clutching her tail in her lap.", parse);
 			Text.NL();
@@ -531,6 +535,8 @@ Scenes.Kyna.IntroMorningAfter = function() {
 	Text.Add("<i>”Fuck! Where are me knickers!?”</i> she asks, annoyed. Coughing to get her attention, you hold up the requested garment. <i>”GAH! Give em here!”</i> she demands, jumping after them. Laughing, you resist for a few moments, planting a sneaky kiss on her cheek. Kyna hops back in surprise, unaware that she managed to free her panties from your grasp. After a brief pause, she comes out of her daze and starts to get dressed.", parse);
 	Text.NL();
 	Text.Add("You slide out of the bed and put your [armorDesc] on, occasionally looking up to watch Kyna dress. Buckling up the last straps of her armor, Kyna turns to you and says <i>”Look, I’m thankful for the money. Ah needed it, but I am goin’ tah find a job in Regard today. It’ll probably mean I’ll have to travel for a while, but I’ll be coming back here for mah pay anyway. Maybe I’ll see ya again.”</i> Nodding, you say goodbye, and she leaves you to gather the last of your gear and head out yourself.", parse);
+	Text.NL();
+	Text.Add("Leaving the rather questionable accommodation behind you - you’ve slept better while out in the wilds - you return down into the tavern, stretching your aching limbs.", parse);
 	Text.Flush();
 	
 	Gui.NextPrompt();
