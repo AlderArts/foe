@@ -4239,7 +4239,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 				parse.numFingers = Text.NumToText(numFingers);
 				parse.s = numFingers > 1 ? "s" : "";
 				
-				Text.AddOutput("<i>\"Now then...\"</i> in a sultry voice, you coax [name] to shuffle around in your lap, presenting you with [hisher] butt. Knowing what to expect, the elf shudders in pleasure as you insert your first finger into [hisher] [anusDesc].", parse);
+				Text.AddOutput("<i>\"Now then...\"</i> in a sultry voice, you coax [name] to shuffle around in your lap, presenting you with [hisher] butt. Knowing what to expect, the elf shudders in pleasure as you insert your first finger into [hisher] [kAnusDesc].", parse);
 				if(numFingers > 1) {
 					Text.Newline();
 					Text.AddOutput("Gradually spreading [name]'s back passage for easier access, you put another finger in.", parse);
@@ -4258,7 +4258,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 				if(numFingers < 5) {
 					Text.AddOutput("<i>\"I think you are growing to like this,\"</i> you comment on [name]'s whimpering moans. <i>\"I-it is just to see that I am healthy, right?\"</i> the elf gasps between [hisher] cries of pleasure.", parse);
 					Text.Newline();
-					Text.AddOutput("<i>\"Oh, you seem to be <b>very</b> healthy indeed,\"</i> you congratulate your companion, one hand busy caressing [hisher] silky hair, the other deep inside [hisher] [anusDesc].", parse);
+					Text.AddOutput("<i>\"Oh, you seem to be <b>very</b> healthy indeed,\"</i> you congratulate your companion, one hand busy caressing [hisher] silky hair, the other deep inside [hisher] [kAnusDesc].", parse);
 					Text.Newline();
 					Text.AddOutput("Increasing your pace, you bring the horny elf to a shuddering climax", parse);
 					if(kiakai.FirstCock())
@@ -4268,9 +4268,9 @@ Scenes.Kiakai.HealingAssertive = function() {
 					Text.AddOutput(".", parse);
 				}
 				else {
-					Text.AddOutput("<i>\"You asked for it, horny little elf,\"</i> you mutter under your breath, slowly pushing more and more of your hand into [hisher] [anusDesc]. [name] cries out loudly, if in pleasure or pain you cannot tell, as the widest part of your hand suddenly pops past [hisher] formerly tight ring.", parse);
+					Text.AddOutput("<i>\"You asked for it, horny little elf,\"</i> you mutter under your breath, slowly pushing more and more of your hand into [hisher] [kAnusDesc]. [name] cries out loudly, if in pleasure or pain you cannot tell, as the widest part of your hand suddenly pops past [hisher] formerly tight ring.", parse);
 					Text.Newline();
-					Text.AddOutput("Almost surprised yourself, you chuckle as you allow the elf some time to relax before exploring the extent of your newfound reach. You can push a fair bit of your arm up [hisher] [anusDesc] before encountering resistance.", parse);
+					Text.AddOutput("Almost surprised yourself, you chuckle as you allow the elf some time to relax before exploring the extent of your newfound reach. You can push a fair bit of your arm up [hisher] [kAnusDesc] before encountering resistance.", parse);
 					Text.Newline();
 					Text.AddOutput("<i>\"Mm, seems I have trained you well, [name],\"</i> you tease the elf as your fist wreak havoc on [hisher] insides.", parse);
 					Text.Newline();
