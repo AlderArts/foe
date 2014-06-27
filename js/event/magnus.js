@@ -848,7 +848,7 @@ Scenes.Magnus.LearnMagic = function() {
 		player.AddSPFraction(-1);
 		
 		gameCache.flags["LearnedMagic"] = 1;
-		magnus.flags["Teach"] == Magnus.Teaching.Done;
+		magnus.flags["Teach"] = Magnus.Teaching.Done;
 		
 		Gui.NextPrompt();
 	});
