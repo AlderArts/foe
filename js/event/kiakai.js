@@ -4946,7 +4946,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 						
 						// TODO: Butt stretch
 						kiakai.Butt().stretch.IncreaseStat(10, 1);
-						kiakai.subDom.DecreaseStat(-30, 1);
+						kiakai.subDom.DecreaseStat(0, 1);
 						player.AddLustFraction(-1);
 						kiakai.AddLustFraction(-1);
 						
