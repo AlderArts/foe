@@ -95,13 +95,21 @@ function Rigard(storage) {
 	this.RotOrvinInnTalk = 0;
 	
 	this.Krawitz = {};
-    this.Krawitz["Q"]    = 0; // Krawitz quest status
+    this.Krawitz["Q"]    = Rigard.KrawitzQ.NotStarted; // Krawitz quest status
     this.Krawitz["Work"] = 0; // 
     this.KrawitzWorkDay  = null; // Time
 	this.Krawitz["Duel"] = 0; // 0 = no, 1 = superwin, 2 = win, 3 = loss
 	
 	if(storage) this.FromStorage(storage);
 }
+
+Rigard.KrawitzQ = {
+	NotStarted   : 0,
+	Started      : 1,
+	HeistDone    : 2,
+	HuntingTerry : 3,
+	CaughtTerry  : 4
+};
 
 Rigard.prototype.ToStorage = function() {
 	var storage = {};

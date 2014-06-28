@@ -2021,7 +2021,7 @@ Scenes.Krawitz.Aftermath = function() {
 	if(Scenes.Krawitz.stat.Orgy)            points += 2;
 	
 	if(rigard.Krawitz["Duel"] <= 0) rigard.Krawitz["Duel"] = 0;
-	rigard.Krawitz["Q"] = 2;
+	rigard.Krawitz["Q"] = Rigard.KrawitzQ.HeistDone;
 	
 	Text.Clear();
 	Text.Add("<b>Final Score:</b><br/>", parse);

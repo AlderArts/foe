@@ -69,7 +69,7 @@ world.loc.Rigard.Inn.common.links.push(new Link(
 */
 
 world.loc.Rigard.Inn.common.endDescription = function() {
-	if(rigard.Krawitz["Q"] < 2) {
+	if(rigard.Krawitz["Q"] < Rigard.KrawitzQ.HeistDone) {
 		Text.Add("You see the daintily attractive vixen-morph hard at work cleaning up the various dishes and tankards left behind by previous customers. She scurries ceaselessly back and forth, gathering dirty kitchenware and conveying it to the kitchens, only to return for a fresh load.");
 		if(player.Int() > 30) {
 			Text.NL();
@@ -701,6 +701,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 				Text.NL();
 				Text.Add("<i>\"Other than that, I can’t tell you much. He gets a beer, and drinks it slowly. Always pays right away, and doesn’t bother the staff, so I take his money and don’t bother him.\"</i> He frowns, thinking. <i>\"I’m just afraid that one of these days he’ll do something. I can’t say why, but that’s the feeling I get from him.\"</i>", parse);
 				Text.Flush();
+				Scenes.Rigard.LB.OrvinTalkPrompt(innPrompt);
 			}, enabled : true,
 			tooltip : Text.Parse("Ask him about the stranger [saw]sitting by the wall.", { saw : leiPresent ? "" : "you saw "})
 		});
@@ -736,6 +737,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 				Text.Add("Orvin looks rather worried, despite his words.", parse);
 				
 				Text.Flush();
+				Scenes.Rigard.LB.OrvinTalkPrompt(innPrompt);
 			}, enabled : true,
 			tooltip : "Ask him if he knows anything about Lei."
 		});
@@ -784,6 +786,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 						Text.Add(" <i>\"So you can see why I was upset that you hurt her. Hurt it.\"</i>", parse);
 				}
 				Text.Flush();
+				Scenes.Rigard.LB.OrvinTalkPrompt(innPrompt);
 			}, enabled : true,
 			tooltip : "Ask about the apparently sentient room 369."
 		});
@@ -851,11 +854,23 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 			scenes[sceneId]();
 			
 			Text.Flush();
-	
-			
-			Text.Flush();
+			Scenes.Rigard.LB.OrvinTalkPrompt(innPrompt);
 		}, enabled : true,
 		tooltip : "Ask him if there are any interesting rumors going around."
+	});
+	options.push({ nameStr : "Vixen",
+		func : function() {
+			Text.Clear();
+			if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry)
+				Text.Add("<i>”Yep, I heard all about it. Who’d think that she was actually a he? And a thief to boot? Shows that you can never fully trust anyone,”</i> he sighs.", parse);
+			else if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.HeistDone)
+				Text.Add("<i>”She left not too long ago. Said she was done with her business in this city, so she’d be going back home. She’s a good girl, so I wouldn’t mind offering her a place to stay if she ever comes back,”</i> he notes.", parse);
+			else
+				Text.Add("<i>”Her? She’s rather pretty, isn’t she? Her kind isn’t exactly my cup of tea, but I’ll give credit where credit is due. This place has been a bit more lively since she showed up,”</i> he explains. <i>“Apparently she’s here to take care of some family business. Poor girl had nowhere to stay and didn’t have any money when she got here, so I offered to let her stay as a waitress.”</i>", parse);
+			Text.Flush();
+			Scenes.Rigard.LB.OrvinTalkPrompt(innPrompt);
+		}, enabled : true,
+		tooltip : Text.Parse("Ask him about the vixen who work[sed] at the inn.", {sed: rigard.Krawitz["Q"] < Rigard.KrawitzQ.CaughtTerry ? "s" : "ed"})
 	});
 	
 	Gui.SetButtonsFromList(options, true, function() {
