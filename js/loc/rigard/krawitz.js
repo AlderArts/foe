@@ -2013,6 +2013,7 @@ Scenes.Krawitz.Aftermath = function() {
 		playername : player.name
 	};
 	
+	Scenes.Krawitz.stat = Scenes.Krawitz.stat | {};
 	party.location = world.loc.Rigard.Krawitz.street;
 	
 	var points = 0;
@@ -2050,265 +2051,290 @@ Scenes.Krawitz.Aftermath = function() {
 		
 		//[OfferHelp][IgnoreIt]
 		var options = new Array();
-		options.push({ nameStr : "OfferHelp",
+		options.push({ nameStr : "Offer help",
 			func : function() {
 				Text.Clear();
-				Text.Add("", parse);
-				Text.NL();
-				Text.Add("", parse);
-				Text.NL();
-				Text.Add("", parse);
-				Text.NL();
-				Text.Add("", parse);
-				Text.NL();
-				Text.Add("", parse);
+				Text.Add("<i>“Oh? Thank you for the offer, [sir], but I don’t wish to trouble you with my own affairs,”</i> she smiles.", parse);
 				Text.Flush();
+				
+				terry.relation.IncreaseStat(100, 1);
+				
+				//[Insist][HoldDoor][Leave]
+				var options = new Array();
+				options.push({ nameStr : "Insist",
+					func : function() {
+						Text.Clear();
+						parse["fem"] = player.mfFem("handsome", "beautiful");
+						parse["gender"] = player.mfFem("man", "lady");
+						Text.Add("<i>“Umm, if you insist, then I’d be very glad to have the aid of a such a [fem] [gender] such as yourself,”</i> she says, bowing out of respect.", parse);
+						Text.NL();
+						Text.Add("As she hands you the neck of the bag, you move it to hoist it up onto your own shoulders. ", parse);
+						if(player.Str() > 35)
+							Text.Add("Despite your own considerable strength, you are surprised at the sheer weight of the sack. Whatever could she be carrying around in it to make it so heavy? No wonder she was having such a problem with it.", parse);
+						else
+							Text.Add("You almost topple over at the sheer weight of it! Damn, this is heavy! What in the world does she have in this thing? It takes a few moments to re-adjust yourself, and you almost drop it in the process, but finally you have it safely balanced over your back and are confident you can move with it.", parse);
+						Text.Flush();
+						
+						//[Ask] [Don'tAsk]
+						var options = new Array();
+						options.push({ nameStr : "Ask",
+							func : function() {
+								Text.Clear();
+								Text.Add("<i>“Old tools and crafts from my recently deceased father,”</i> she explains, ears drooping in sadness. <i>“I’m just clearing out his things before I move back to my hometown,”</i> she adds.", parse);
+								Text.Flush();
+								
+								//[Sympathize] [Continue]
+								var options = new Array();
+								options.push({ nameStr : "Sympathize",
+									func : function() {
+										Text.Clear();
+										Text.Add("<i>“Thank you, I appreciate it [sir],”</i> she smiles a bit under her grimace.", parse);
+										Text.NL();
+										PrintDefaultOptions();
+									}, enabled : true,
+									tooltip : "Express your sympathies for her loss."
+								});
+								options.push({ nameStr : "Continue",
+									func : function() {
+										Text.Clear();
+										PrintDefaultOptions();
+									}, enabled : true,
+									tooltip : "Time you both were getting inside the inn."
+								});
+								Gui.SetButtonsFromList(options, false, null);
+								
+								Gui.Callstack.push(function() {
+									Text.Add("With the package taking up both hands, you ask her to mind the door, and step inside the inn as she holds it open for you.", parse);
+									Text.NL();
+									Text.Add("The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei. He stares at the vixen with his sharp eyes as she makes her way inside, then immediately turn his gaze to you and motions for you to follow him upstairs.", parse);
+									Text.NL();
+									Text.Add("<i>“Thanks a lot for your help. I can take things from here,”</i> she glances at Lei, not wanting to keep you from your business. ", parse);
+									Text.NL();
+									Text.Add("You bid her farewell and trudge after him wordlessly, feeling the long night in your joints. Your eyebrows rise slightly as the two of you enter the landing to the fourth floor, and head towards the penthouse suite at the end of the hallway.", parse);
+									
+									terry.relation.IncreaseStat(100, 6);
+									
+									PrintDefaultOptions();
+								});
+							}, enabled : true,
+							tooltip : "Your curiosity is piqued; you just have to know what she's carrying to make it so heavy."
+						});
+						options.push({ nameStr : "Don’t ask",
+							func : function() {
+								Text.Clear();
+								Text.Add("With the package taking up both hands, you ask her to mind the door, and step inside the inn as she holds it open for you.", parse);
+								Text.NL();
+								Text.Add("The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei. He stares at the vixen with his sharp eyes as she makes her way inside, then immediately turn his gaze to you and motions for you to follow him upstairs.", parse);
+								Text.NL();
+								Text.Add("You trudge after him wordlessly, feeling the long night in your joints. Your eyebrows rise slightly as the two of you enter the landing to the fourth floor, and head towards the penthouse suite at the end of the hallway.", parse);
+								
+								terry.relation.IncreaseStat(100, 4);
+								
+								PrintDefaultOptions();
+							}, enabled : true,
+							tooltip : "You don’t want to pry, so you resolve to remain silent."
+						});
+						Gui.SetButtonsFromList(options, false, null);
+					}, enabled : true,
+					tooltip : "You can't just let her brush you off that easily; she really does look like she needs help."
+				});
+				options.push({ nameStr : "Hold door",
+					func : function() {
+						Text.Clear();
+						Text.Add("“Thank you very much, [sir],” she replies pleasantly, tail wagging as she drags the bag through the door.", parse);
+						Text.NL();
+						Text.Add("The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei. He stares at the vixen with his sharp eyes as she makes her way inside, then immediately turn his gaze to you and motions for you to follow him upstairs.", parse);
+						Text.NL();
+						Text.Add("You trudge after him wordlessly, feeling the long night in your joints. Your eyebrows rise slightly as the two of you enter the landing to the fourth floor, and head towards the penthouse suite at the end of the hallway.", parse);
+						
+						terry.relation.IncreaseStat(100, 2);
+						PrintDefaultOptions();
+					}, enabled : true,
+					tooltip : "Even if she doesn't want you to carry it for her, you could at least make it easier for her to get through with it."
+				});
+				options.push({ nameStr : "Leave",
+					func : function() {
+						Text.Clear();
+						Text.Add("Accepting her wishes, you push on through the door and head inside the inn yourself.", parse);
+						Text.NL();
+						Text.Add("The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei.", parse);
+						Text.NL();
+						Text.Add("His sharp eyes find you the moment you step inside, and he motions for you to follow him upstairs. You trudge after him wordlessly, feeling the long night in your joints. Your eyebrows rise slightly as the two of you enter the landing to the fourth floor, and head towards the penthouse suite at the end of the hallway.", parse);
+						
+						PrintDefaultOptions();
+					}, enabled : true,
+					tooltip : "Alright, if that's how she wants it. You may as well go on in ahead of her."
+				});
+				Gui.SetButtonsFromList(options, false, null);
+				
 			}, enabled : true,
 			tooltip : "The poor thing's clearly struggling with that load of hers; why not ask if you can help her?"
 		});
-		options.push({ nameStr : "IgnoreIt",
+		options.push({ nameStr : "Ignore her",
 			func : function() {
 				Text.Clear();
-				Text.Add("", parse);
+				Text.Add("Not keen on being questioned about your nightly activities, you quickly excuse yourself and step into the inn. The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei.", parse);
 				Text.NL();
-				Text.Flush();
+				Text.Add("His sharp eyes find you the moment you step inside, and he motions for you to follow him upstairs. You trudge after him wordlessly, feeling the long night in your joints. Your eyebrows rise slightly as the two of you enter the landing to the fourth floor, and head towards the penthouse suite at the end of the hallway.", parse);
+				
+				PrintDefaultOptions();
 			}, enabled : true,
-			tooltip : ""
+			tooltip : "What she does in her own time is none of your business. Bid farewell and get on with your <b>own</b> business."
 		});
 		Gui.SetButtonsFromList(options, false, null);
 		
-		/*
-[=OfferHelp=] - 
-
-<i>“Oh? Thank you for the offer, [sirMa’am], but I don’t wish to trouble you with my own affairs,”</i> she smiles.
-
-+1 relationship
-
-[Insist][HoldDoor][Leave]
-
-[=Insist=] - You can't just let her brush you off that easily; she really does look like she needs help.
-<i>“Umm, if you insist, then I’d be very glad to have the aid of a such a [handsomeBeautiful] [manLady] such as yourself,”</i> she says, bowing out of respect.
-
-As she hands you the neck of the bag, you move it to hoist it up onto your own shoulders.
-#if Strength =< X (same line)
-You almost topple over at the sheer weight of it! Damn, this is heavy! What in the world does she have in this thing? It takes a few moments to re-adjust yourself, and you almost drop it in the process, but finally you have it safely balanced over your back and are confident you can move with it.
-
-#else if Strength > X (same line)
-Despite your own considerable strength, you are surprised at the sheer weight of the sack. Whatever could she be carrying around in it to make it so heavy? No wonder she was having such a problem with it.
-
-#Converge
-[Ask] [Don'tAsk]
-
-[=Ask=] - Your curiosity is piqued; you just have to know what she's carrying to make it so heavy.
-
-<i>“Old tools and crafts from my recently deceased father,”</i> she explains, ears drooping in sadness. <i>“I’m just clearing out his things before I move back to my hometown,”</i> she adds.
-
-[Sympathize] [Continue]
-[==Sympathize==] - Express your sympathies for her loss.
-
-<i>“Thank you, I appreciate it [sirMa’am],”</i> she smiles a bit under her grimace. 
-
-[==Continue==] - Time you both were getting inside the inn.
-(No text)
-
-#Both options converge here
-
-With the package taking up both hands, you ask her to mind the door, and step inside the inn as she holds it open for you.
-
-The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei. He stares at the vixen with his sharp eyes as she makes her way inside, then immediately turn his gaze to you and motions for you to follow him upstairs.
-
-<i>“Thanks a lot for your help. I can take things from here,”</i> she glances at Lei, not wanting to keep you from your business. 
-
-+6 relationship
-
-You bid her farewell and trudge after him wordlessly, feeling the long night in your joints. Your eyebrows rise slightly as the two of you enter the landing to the fourth floor, and head towards the penthouse suite at the end of the hallway.
-
-(Rest of scene goes on as usual.)
-
-[=Don’tAsk=] - You don’t want to pry, so you resolve to remain silent.
-With the package taking up both hands, you ask her to mind the door, and step inside the inn as she holds it open for you.
-
-The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei. He stares at the vixen with his sharp eyes as she makes her way inside, then immediately turn his gaze to you and motions for you to follow him upstairs.
-
-(Rest of scene goes on as usual.)
-
-+4 relationship
-
-[=HoldDoor=] - Even if she doesn't want you to carry it for her, you could at least make it easier for her to get through with it.
-
-“Thank you very much, [sirMa’am],” she replies pleasantly, tail wagging as she drags the bag through the door.
- 
-+2 relationship
-
-The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei. He stares at the vixen with his sharp eyes as she makes her way inside, then immediately turn his gaze to you and motions for you to follow him upstairs.
-
-(Rest of scene goes on as usual.)
-
-[=Leave=] - Alright, if that's how she wants it. You may as well go on in ahead of her.
-Accepting her wishes, you push on through the door and head inside the inn yourself.
-
-The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei.
-
-(Rest of scene goes on as usual.)
-
-[=IgnoreIt=] - What she does in her own time is none of your business. Bid farewell and get on with your <b>own</b> business.
-
-Not keen on being questioned about your nightly activities, you quickly excuse yourself and step into the inn. The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei.
-
-(Rest of scene goes on as usual.)
-
-		 */
-		
-		party.location = world.loc.Rigard.Inn.penthouse;
-		Text.Add("The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei. His sharp eyes find you the moment you step inside, and he motions for you to follow him upstairs. You trudge after him wordlessly, feeling the long night in your joints. Your eyebrows rise slightly as the two of you enter the landing to the fourth floor, and head towards the penthouse suite at the end of the hallway. Renting this place must cost a fortune.", parse);
-		Text.NL();
-		parse["hotcold"] = world.time.season == Season.Winter ? "a cosy fire warming up the interior" : "though at the moment, it isn’t lit";
-		Text.Add("Even for the Lady’s Blessing, the interior of the room is lavish, well beyond the usual fare at the inn. There are several pieces of antique furniture that look to have been made in a florid old style, decorated with elaborate carved patterns. Richly embroidered carpets and hangings abundantly adorn the room, the crowning jewel being a large tapestry hanging on one wall. While it is very well made, the images depicted on it are decidedly vulgar, showing a series of couples involved in suggestive or outright sexual acts. The room has its own stone fireplace connected to the central chimney, [hotcold].", parse);
-		Text.NL();
-		Text.Add("Lei motions you inside, closing the door behind you and leaving you alone with the red-headed couple from before. You can spy the woman resting a the gigantic bed in the next room, while the man is lounging on a couch. He waves you over, eager to hear of your exploits. The woman puts on a robe and joins you on the couch, her hair in sleepy, scarlet tousles.", parse);
-		Text.NL();
-		parse["duel"] = rigard.Krawitz["Duel"] > 0 ? " met Krawitz for a duel, and then" : "";
-		Text.Add("You recount the events of the night, describing how you[duel] got inside the Krawitz estate, and what you did there.", parse);
-		Text.NL();
-		if(rigard.Krawitz["Duel"] == 1) {
-			Text.Add("<i>”No need to tell me, word has already spread across town,”</i> the young man replies as you tell him about your duel against Krawitz. <i>”I can hardly believe it - you wiped the floor with him! Even I have some trouble besting him!”</i> The two look at you admiringly.", parse);
+		Gui.Callstack.push(function() {
+			party.location = world.loc.Rigard.Inn.penthouse;
+			Text.Add(" Renting this place must cost a fortune.", parse);
 			Text.NL();
-		}
-		else if(rigard.Krawitz["Duel"] == 2) {
-			Text.Add("<i>”Hah, I can’t believe that you managed to best the old fool at his own game!”</i> The man laughs as you tell him about your duel against Krawitz. <i>”I didn’t know you were such a fighter!”</i>", parse);
+			parse["hotcold"] = world.time.season == Season.Winter ? "a cosy fire warming up the interior" : "though at the moment, it isn’t lit";
+			Text.Add("Even for the Lady’s Blessing, the interior of the room is lavish, well beyond the usual fare at the inn. There are several pieces of antique furniture that look to have been made in a florid old style, decorated with elaborate carved patterns. Richly embroidered carpets and hangings abundantly adorn the room, the crowning jewel being a large tapestry hanging on one wall. While it is very well made, the images depicted on it are decidedly vulgar, showing a series of couples involved in suggestive or outright sexual acts. The room has its own stone fireplace connected to the central chimney, [hotcold].", parse);
 			Text.NL();
-		}
-		else if(rigard.Krawitz["Duel"] == 3) {
-			Text.Add("The red-haired man shakes his head as you tell him of your fight against Krawitz. <i>”Taking him head-on might be a few years too soon for you,”</i> he grudgingly admits. <i>”Just be glad that you escaped relatively unscathed.”</i>", parse);
+			Text.Add("Lei motions you inside, closing the door behind you and leaving you alone with the red-headed couple from before. You can spy the woman resting a the gigantic bed in the next room, while the man is lounging on a couch. He waves you over, eager to hear of your exploits. The woman puts on a robe and joins you on the couch, her hair in sleepy, scarlet tousles.", parse);
 			Text.NL();
-		}
-		if(rigard.Krawitz["Work"] == 2)
-			Text.Add("<i>”You entered into his service as a servant?”</i> the man chortles. <i>”So let me get this straight, on top of it all, he paid you from his own coffers? Brilliant!”</i>", parse);
-		else
-			Text.Add("<i>”Sneaking in like a thief in the night, how exciting!”</i> the woman exclaims. <i>”Wait for the rest of it, pet,”</i> the man tells her, though there is a spark in his eyes.", parse);
-		Text.NL();
-		if(Scenes.Krawitz.stat.HasBinder) {
-			Text.Add("You hand over the binder you found in Krawitz’ study. The man leafs through it idly as you speak, his eyes growing wider and wider. He whistles as he finds something particularly interesting.", parse);
+			parse["duel"] = rigard.Krawitz["Duel"] > 0 ? " met Krawitz for a duel, and then" : "";
+			Text.Add("You recount the events of the night, describing how you[duel] got inside the Krawitz estate, and what you did there.", parse);
 			Text.NL();
-			Text.Add("<i>”Do you know what this is? We always suspected the old fart was low on money, but this tells quite an interesting tale… according to his own book, the Krawitz estate is just about bankrupt.”</i> The red-haired man leans over to his companion showing a section to her. <i>”What is even more interesting is where he gets the money to fund his lifestyle. What kind of moron would put this stuff in ink… half of this stuff is borderline illegal.”</i>", parse);
-			Text.NL();
-			Text.Add("<i>”And a quarter quite a bit more than borderline!”</i> the woman adds.", parse);
-			Text.NL();
-			Text.Add("He closes the binder, putting it on the table. <i>”Spreading the information in this book to the right people could make life for Lord Krawitz very… uncomfortable. His name will still protect him to a certain extent, mind you, but this is still going to strike a hard blow against him.”</i>", parse);
-			Text.NL();
-		}
-		if(Scenes.Krawitz.stat.HasSword) {
-			Text.Add("Grinning, you pull out Lord Krawitz’ blade and present it to the pair. <i>”How in… oh this is going to sting him something fierce!”</i> the man chuckles, admiring the sword. <i>”One almost feels a bit bad for him… this sword is just about the most valuable thing in his possession, an heirloom that has been in his family for generations. Until now, that is.”</i> He hands it back to you. <i>”You’ve earned it. Make good use of it - it is a fine blade.”</i>", parse);
-			Text.NL();
-			Text.Flush();
-			party.inventory.AddItem(Items.Weapons.KrawitzSword);
-		}
-		if(Scenes.Krawitz.stat.TFdKrawitz) {
-			Text.Add("You tell them how you slipped something extra into the lord’s food. <i>”Oh, that is too rich!”</i> the man laughs out loud, slapping his knees in mirth. <i>”I look forward to seeing that bastard trying to show up in court with animal ears and a tail on him, that ought to lend less credence to his damn xenophobic politics!”</i>", parse);
-			Text.NL();
-			Text.Add("...Court? Just who are these two?", parse);
-			Text.NL();
-		}
-		if(Scenes.Krawitz.stat.BathhouseSpiked) {
-			Text.Add("<i>”You didn’t!”</i> the woman exclaims when you tell them of your escapades with the Krawitz ladies. <i>”I mean, they are kinda known for being sluts, but really?”</i> Her eyes widen when you tell her about the aphrodisiac, and where you found it.", parse);
-			Text.NL();
-			Text.Add("<i>”Now, why would he have something like that?”</i> the man muses thoughtfully.", parse);
-			Text.NL();
-		}
-		if(Scenes.Krawitz.stat.Orgy) {
-			Text.Add("You’re not done yet though, and you continue to explain what happened after the drugged servants arrived at the scene. The pair are blushing fiercely by the end of it, looking slightly apprehensive. <i>”I, uh, I hope they are alright,”</i> the woman looks a bit worried.", parse);
-			Text.NL();
-		}
-		if(!Scenes.Krawitz.stat.AlarmRaised)
-			Text.Add("You finish by explaining how you slipped out without alerting anyone of your presence, a ghost in the night. The pair complement you on your craftiness.", parse);
-		else
-			Text.Add("You finish by telling of your daring escape from the mansion, dodging pursuing guards through the streets of Rigard. This gains you a whooping round of applause.", parse);
-		Text.Flush();
-		
-		
-		Gui.NextPrompt(function() {
-			Text.Clear();
-			if(points <= 1)
-				Text.Add("<i>”Though I expected more, you’ve still shown your dedication,”</i> the man grudgingly admits. <i>”If nothing else, you <b>did</b> risk yourself by sneaking into the mansion. I guess that we can see that as proof of your loyalty, at least.”</i>", parse);
-			else if(points <= 5)
-				Text.Add("<i>”This isn’t a night the old man Krawitz is likely to forget soon,”</i> the man chuckles. <i>”You’ve done us a great service, [playername], and earned our trust.”</i> The woman nods her agreement.", parse);
-			else if(points <= 9)
-				Text.Add("<i>”This will be one for the bards, [playername],”</i> the man chortles, <i>”I’d be surprised if the old fart dares show his face after your actions tonight. He’ll be the laughingstock of Rigard!”</i> He shakes your hand heartily, very pleased with your efforts.", parse);
-			else {
-				Text.Add("After you have finished, the pair sits in stunned silence, gawking at your story. At last, the man clears his throat.", parse);
+			if(rigard.Krawitz["Duel"] == 1) {
+				Text.Add("<i>”No need to tell me, word has already spread across town,”</i> the young man replies as you tell him about your duel against Krawitz. <i>”I can hardly believe it - you wiped the floor with him! Even I have some trouble besting him!”</i> The two look at you admiringly.", parse);
 				Text.NL();
-				Text.Add("<i>”Remind me to never get on your bad side, [playername],”</i> the man breathes, amazed, <i>”to have accomplished all this in a single night… you’ve all but ruined Krawitz reputation. Truly, you went above and beyond. You have earned our trust.”</i> The woman nods in agreement, looking at you slightly apprehensively.", parse);
 			}
-			Text.NL();
-			if(points > 0) {
-				Text.Add("<i>”As a bonus for your service,”</i> the man motions to a purse on the table in front of him.", parse);
+			else if(rigard.Krawitz["Duel"] == 2) {
+				Text.Add("<i>”Hah, I can’t believe that you managed to best the old fool at his own game!”</i> The man laughs as you tell him about your duel against Krawitz. <i>”I didn’t know you were such a fighter!”</i>", parse);
 				Text.NL();
-				twins.rumi.relation.IncreaseStat(100, points * 2);
-				twins.rani.relation.IncreaseStat(100, points * 3);
-				var coin = 100 * points;
-				party.coin += coin;
-				Text.Add("<b>You earned [coin] coins!</b>", {coin: coin});
-				if(points >= 6) {
+			}
+			else if(rigard.Krawitz["Duel"] == 3) {
+				Text.Add("The red-haired man shakes his head as you tell him of your fight against Krawitz. <i>”Taking him head-on might be a few years too soon for you,”</i> he grudgingly admits. <i>”Just be glad that you escaped relatively unscathed.”</i>", parse);
+				Text.NL();
+			}
+			if(rigard.Krawitz["Work"] == 2)
+				Text.Add("<i>”You entered into his service as a servant?”</i> the man chortles. <i>”So let me get this straight, on top of it all, he paid you from his own coffers? Brilliant!”</i>", parse);
+			else
+				Text.Add("<i>”Sneaking in like a thief in the night, how exciting!”</i> the woman exclaims. <i>”Wait for the rest of it, pet,”</i> the man tells her, though there is a spark in his eyes.", parse);
+			Text.NL();
+			if(Scenes.Krawitz.stat.HasBinder) {
+				Text.Add("You hand over the binder you found in Krawitz’ study. The man leafs through it idly as you speak, his eyes growing wider and wider. He whistles as he finds something particularly interesting.", parse);
+				Text.NL();
+				Text.Add("<i>”Do you know what this is? We always suspected the old fart was low on money, but this tells quite an interesting tale… according to his own book, the Krawitz estate is just about bankrupt.”</i> The red-haired man leans over to his companion showing a section to her. <i>”What is even more interesting is where he gets the money to fund his lifestyle. What kind of moron would put this stuff in ink… half of this stuff is borderline illegal.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>”And a quarter quite a bit more than borderline!”</i> the woman adds.", parse);
+				Text.NL();
+				Text.Add("He closes the binder, putting it on the table. <i>”Spreading the information in this book to the right people could make life for Lord Krawitz very… uncomfortable. His name will still protect him to a certain extent, mind you, but this is still going to strike a hard blow against him.”</i>", parse);
+				Text.NL();
+			}
+			if(Scenes.Krawitz.stat.HasSword) {
+				Text.Add("Grinning, you pull out Lord Krawitz’ blade and present it to the pair. <i>”How in… oh this is going to sting him something fierce!”</i> the man chuckles, admiring the sword. <i>”One almost feels a bit bad for him… this sword is just about the most valuable thing in his possession, an heirloom that has been in his family for generations. Until now, that is.”</i> He hands it back to you. <i>”You’ve earned it. Make good use of it - it is a fine blade.”</i>", parse);
+				Text.NL();
+				Text.Flush();
+				party.inventory.AddItem(Items.Weapons.KrawitzSword);
+			}
+			if(Scenes.Krawitz.stat.TFdKrawitz) {
+				Text.Add("You tell them how you slipped something extra into the lord’s food. <i>”Oh, that is too rich!”</i> the man laughs out loud, slapping his knees in mirth. <i>”I look forward to seeing that bastard trying to show up in court with animal ears and a tail on him, that ought to lend less credence to his damn xenophobic politics!”</i>", parse);
+				Text.NL();
+				Text.Add("...Court? Just who are these two?", parse);
+				Text.NL();
+			}
+			if(Scenes.Krawitz.stat.BathhouseSpiked) {
+				Text.Add("<i>”You didn’t!”</i> the woman exclaims when you tell them of your escapades with the Krawitz ladies. <i>”I mean, they are kinda known for being sluts, but really?”</i> Her eyes widen when you tell her about the aphrodisiac, and where you found it.", parse);
+				Text.NL();
+				Text.Add("<i>”Now, why would he have something like that?”</i> the man muses thoughtfully.", parse);
+				Text.NL();
+			}
+			if(Scenes.Krawitz.stat.Orgy) {
+				Text.Add("You’re not done yet though, and you continue to explain what happened after the drugged servants arrived at the scene. The pair are blushing fiercely by the end of it, looking slightly apprehensive. <i>”I, uh, I hope they are alright,”</i> the woman looks a bit worried.", parse);
+				Text.NL();
+			}
+			if(!Scenes.Krawitz.stat.AlarmRaised)
+				Text.Add("You finish by explaining how you slipped out without alerting anyone of your presence, a ghost in the night. The pair complement you on your craftiness.", parse);
+			else
+				Text.Add("You finish by telling of your daring escape from the mansion, dodging pursuing guards through the streets of Rigard. This gains you a whooping round of applause.", parse);
+			Text.Flush();
+			
+			
+			Gui.NextPrompt(function() {
+				Text.Clear();
+				if(points <= 1)
+					Text.Add("<i>”Though I expected more, you’ve still shown your dedication,”</i> the man grudgingly admits. <i>”If nothing else, you <b>did</b> risk yourself by sneaking into the mansion. I guess that we can see that as proof of your loyalty, at least.”</i>", parse);
+				else if(points <= 5)
+					Text.Add("<i>”This isn’t a night the old man Krawitz is likely to forget soon,”</i> the man chuckles. <i>”You’ve done us a great service, [playername], and earned our trust.”</i> The woman nods her agreement.", parse);
+				else if(points <= 9)
+					Text.Add("<i>”This will be one for the bards, [playername],”</i> the man chortles, <i>”I’d be surprised if the old fart dares show his face after your actions tonight. He’ll be the laughingstock of Rigard!”</i> He shakes your hand heartily, very pleased with your efforts.", parse);
+				else {
+					Text.Add("After you have finished, the pair sits in stunned silence, gawking at your story. At last, the man clears his throat.", parse);
 					Text.NL();
-					Text.Add("<i>”I think an additional reward is in order,”</i> the woman declares, pulling out an elaborate silver necklace, with a rose at its center.", parse);
-					Text.NL();
-					Text.Add("<b>Received woman’s favor!</b>", parse);
-					Text.NL();
-					party.inventory.AddItem(Items.Accessories.RaniFavor);
+					Text.Add("<i>”Remind me to never get on your bad side, [playername],”</i> the man breathes, amazed, <i>”to have accomplished all this in a single night… you’ve all but ruined Krawitz reputation. Truly, you went above and beyond. You have earned our trust.”</i> The woman nods in agreement, looking at you slightly apprehensively.", parse);
 				}
-				if(points >= 10) {
-					Text.Add("<i>”Why, I’d say you’ve made quite the impression on my companion,”</i> the man grins. <i>”If you are looking for more ‘favors’, I’m sure she wouldn’t mind providing them.”</i> The woman blushes deeply at this, but nods nervously.", parse);
-					
-					twins.flags["SexOpen"] = 1;
-					
-					var options = new Array();
-					
-					//[Sure][Nah]
-					if(player.FirstCock()) {
+				Text.NL();
+				if(points > 0) {
+					Text.Add("<i>”As a bonus for your service,”</i> the man motions to a purse on the table in front of him.", parse);
+					Text.NL();
+					twins.rumi.relation.IncreaseStat(100, points * 2);
+					twins.rani.relation.IncreaseStat(100, points * 3);
+					var coin = 100 * points;
+					party.coin += coin;
+					Text.Add("<b>You earned [coin] coins!</b>", {coin: coin});
+					if(points >= 6) {
 						Text.NL();
-						Text.Add("She is eyeing the bulge at your crotch with a slightly hungry look in her eyes.", parse);
-						options.push({ nameStr : "Blowjob",
+						Text.Add("<i>”I think an additional reward is in order,”</i> the woman declares, pulling out an elaborate silver necklace, with a rose at its center.", parse);
+						Text.NL();
+						Text.Add("<b>Received woman’s favor!</b>", parse);
+						Text.NL();
+						party.inventory.AddItem(Items.Accessories.RaniFavor);
+					}
+					if(points >= 10) {
+						Text.Add("<i>”Why, I’d say you’ve made quite the impression on my companion,”</i> the man grins. <i>”If you are looking for more ‘favors’, I’m sure she wouldn’t mind providing them.”</i> The woman blushes deeply at this, but nods nervously.", parse);
+						
+						twins.flags["SexOpen"] = 1;
+						
+						var options = new Array();
+						
+						//[Sure][Nah]
+						if(player.FirstCock()) {
+							Text.NL();
+							Text.Add("She is eyeing the bulge at your crotch with a slightly hungry look in her eyes.", parse);
+							options.push({ nameStr : "Blowjob",
+								func : function() {
+									Text.Clear();
+									Text.Add("<i>”While that would be really amusing, I think we should get the introductions out of the way first,”</i> the man interjects, grinning as he ruffles his blushing companion’s hair.", parse);
+									Text.Flush();
+									Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
+								}, enabled : true,
+								tooltip : "Have the woman give you a blowjob as a reward."
+							});
+						}
+						if(player.FirstVag()) {
+							options.push({ nameStr : "Cunnilingus",
+								func : function() {
+									Text.Clear();
+									Text.Add("<i>”You don’t bandy words, do you,”</i> the man laughs merrily, his voice light and melodical. <i>”How about we get the introductions out of the way first?”</i>", parse);
+									Text.Flush();
+									Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
+								}, enabled : true,
+								tooltip : "Have the woman eat you out as a reward."
+							});
+						}
+						options.push({ nameStr : "Not now",
 							func : function() {
 								Text.Clear();
-								Text.Add("<i>”While that would be really amusing, I think we should get the introductions out of the way first,”</i> the man interjects, grinning as he ruffles his blushing companion’s hair.", parse);
+								Text.Add("<i>”Well, the offer is standing.”</i> Both of them look slightly disappointed when you turn them down.", parse);
 								Text.Flush();
 								Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
 							}, enabled : true,
-							tooltip : "Have the woman give you a blowjob as a reward."
+							tooltip : "Not right now."
 						});
+						Text.Flush();
+						Gui.SetButtonsFromList(options);
 					}
-					if(player.FirstVag()) {
-						options.push({ nameStr : "Cunnilingus",
-							func : function() {
-								Text.Clear();
-								Text.Add("<i>”You don’t bandy words, do you,”</i> the man laughs merrily, his voice light and melodical. <i>”How about we get the introductions out of the way first?”</i>", parse);
-								Text.Flush();
-								Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
-							}, enabled : true,
-							tooltip : "Have the woman eat you out as a reward."
-						});
+					else {
+						Text.Flush();
+						Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
 					}
-					options.push({ nameStr : "Not now",
-						func : function() {
-							Text.Clear();
-							Text.Add("<i>”Well, the offer is standing.”</i> Both of them look slightly disappointed when you turn them down.", parse);
-							Text.Flush();
-							Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
-						}, enabled : true,
-						tooltip : "Not right now."
-					});
-					Text.Flush();
-					Gui.SetButtonsFromList(options);
 				}
 				else {
 					Text.Flush();
 					Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
 				}
-			}
-			else {
-				Text.Flush();
-				Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
-			}
+			});
 		});
 	});
 }

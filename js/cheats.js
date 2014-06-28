@@ -1,4 +1,17 @@
 
+
+world.loc.Plains.Nomads.Tent.events.push(new Link(
+	"TESTBUTTON", function() { return DEBUG; }, true,
+	function() {
+		Text.Add(Text.BoldColor("DEBUG: " + "Terry"));
+		Text.NL();
+		Text.Flush();
+	},
+	function() {
+		Scenes.Krawitz.Aftermath();
+	}
+));
+
 world.loc.Plains.Nomads.Tent.events.push(new Link(
 	"CockSmith", function() { return DEBUG; }, true,
 	function() {

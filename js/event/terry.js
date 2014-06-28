@@ -27,9 +27,9 @@ function Terry(storage) {
 	this.sexlevel = 1;
 	
 	this.body.DefMale();
-	this.Butt().buttSize.base = 7;
-	this.FirstCock().length.base = 28;
-	this.FirstCock().thickness.base = 7;
+	this.Butt().buttSize.base = 3;
+	this.FirstCock().length.base = 15;
+	this.FirstCock().thickness.base = 3;
 	this.body.SetRace(Race.fox);
 	
 	this.SetLevelBonus();
@@ -53,6 +53,11 @@ Terry.prototype.FromStorage = function(storage) {
 		this.flags[flag] = parseInt(storage.flags[flag]);
 	for(var flag in storage.sex)
 		this.sex[flag] = parseInt(storage.sex[flag]);
+		
+	if(this.flags["Met"] != 0) {
+		this.name = "Terry";
+		this.avatar.combat = Images.terry_c;
+	}
 }
 
 Terry.prototype.ToStorage = function() {
