@@ -96,6 +96,7 @@ function Rigard(storage) {
 	
 	this.Krawitz = {};
     this.Krawitz["Q"]    = Rigard.KrawitzQ.NotStarted; // Krawitz quest status
+    this.Krawitz["F"]    = 0; // Aftermath flags
     this.Krawitz["Work"] = 0; // 
     this.KrawitzWorkDay  = null; // Time
 	this.Krawitz["Duel"] = 0; // 0 = no, 1 = superwin, 2 = win, 3 = loss

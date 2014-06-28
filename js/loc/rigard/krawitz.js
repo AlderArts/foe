@@ -25,6 +25,17 @@ Scenes.Krawitz.EncType = {
 	Servant : 1
 }
 
+Scenes.Krawitz.Flags = {
+	Clothes        : 1,
+	Binder         : 2,
+	Sword          : 4,
+	SpikedLadies   : 8,
+	Sex            : 16,
+	SpikedServants : 32,
+	Orgy           : 64,
+	TF             : 128
+}
+
 Scenes.Krawitz.SetupStats = function() {
 	Scenes.Krawitz.stat = {};
 	
@@ -2027,6 +2038,17 @@ Scenes.Krawitz.Aftermath = function() {
 	
 	if(rigard.Krawitz["Duel"] <= 0) rigard.Krawitz["Duel"] = 0;
 	rigard.Krawitz["Q"] = Rigard.KrawitzQ.HeistDone;
+	
+	// Save flags
+	rigard.Krawitz["F"] = 0;
+	if(Scenes.Krawitz.stat.HasServantClothes) rigard.Krawitz["F"] |= Scenes.Krawitz.Flags.Clothes;
+	if(Scenes.Krawitz.stat.HasBinder) rigard.Krawitz["F"] |= Scenes.Krawitz.Flags.Binder;
+	if(Scenes.Krawitz.stat.HasSword) rigard.Krawitz["F"] |= Scenes.Krawitz.Flags.Sword;
+	if(Scenes.Krawitz.stat.BathhouseSpiked) rigard.Krawitz["F"] |= Scenes.Krawitz.Flags.SpikedLadies;
+	if(Scenes.Krawitz.stat.SexedGirls) rigard.Krawitz["F"] |= Scenes.Krawitz.Flags.Sex;
+	if(Scenes.Krawitz.stat.ServantSpikedWine) rigard.Krawitz["F"] |= Scenes.Krawitz.Flags.SpikedServants;
+	if(Scenes.Krawitz.stat.Orgy) rigard.Krawitz["F"] |= Scenes.Krawitz.Flags.Orgy;
+	if(Scenes.Krawitz.stat.TFdKrawitz) rigard.Krawitz["F"] |= Scenes.Krawitz.Flags.TF;
 	
 	Text.Clear();
 	Text.Add("<b>Final Score:</b><br/>", parse);
