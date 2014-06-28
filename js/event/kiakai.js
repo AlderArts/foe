@@ -4950,6 +4950,8 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 						player.AddLustFraction(-1);
 						kiakai.AddLustFraction(-1);
 						
+						world.TimeStep({hour: 1});
+						
 						Gui.NextPrompt();
 					});
 				}, enabled : true,
@@ -5039,6 +5041,8 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 						
 						player.AddLustFraction(-1);
 						kiakai.AddLustFraction(-1);
+						
+						world.TimeStep({hour: 1});
 						
 						Gui.NextPrompt();
 					});

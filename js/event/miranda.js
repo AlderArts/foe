@@ -1934,9 +1934,9 @@ Scenes.Miranda.MaidensBaneTalk = function() {
 	}
 }
 
-world.loc.Rigard.Tavern.common.events.push(new Link("Miranda", function() { return world.time.hour >= 17 || world.time.hour < 2; }, true,
+world.loc.Rigard.Tavern.common.events.push(new Link("Miranda", function() { return miranda.IsAtLocation(); }, true,
 function() {
-	if(world.time.hour >= 17 || world.time.hour < 2)
+	if(miranda.IsAtLocation())
 		Text.AddOutput("Miranda is lounging at a table in the shady tavern. ");
 },
 Scenes.Miranda.MaidensBaneTalk,
