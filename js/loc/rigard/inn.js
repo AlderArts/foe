@@ -69,6 +69,14 @@ world.loc.Rigard.Inn.common.links.push(new Link(
 */
 
 world.loc.Rigard.Inn.common.endDescription = function() {
+	if(rigard.Krawitz["Q"] < 2) {
+		Text.Add("You see the daintily attractive vixen-morph hard at work cleaning up the various dishes and tankards left behind by previous customers. She scurries ceaselessly back and forth, gathering dirty kitchenware and conveying it to the kitchens, only to return for a fresh load.");
+		if(player.Int() > 30) {
+			Text.NL();
+			Text.Add("Your keen eyes spot that, though she feigns politely ignoring the people around her as one would expect of a maid, her ears visibly yet stealthily prick up whenever she approaches or passes by a group of patrons talking. She's definitely listening in on the people around her. Perhaps there is more to this vixen than meets the eye...");
+		}
+	}
+	Text.Flush();
 }
 
 //TODO: Companion reactions?
@@ -86,7 +94,9 @@ world.loc.Rigard.Inn.common.DrunkHandler = function() {
 
 world.loc.Rigard.Inn.common.onEntry = function() {
 	Text.Clear();
-	if(rigard.LB["Visit"] == 0) {
+	var busy = Rigard.LB.Busy();
+	var first = rigard.LB["Visit"] == 0;
+	if(first) {
 		rigard.LB["Visit"] = 1;
 		
 		Text.Add("You head over to the Lady’s Blessing inn. It is a large, four-story building, with a clean, blue-and-orange facade, painted to suggest the rays of a setting sun over some body of water. Large windows of tinted blue glass face the street, ");
@@ -97,10 +107,8 @@ world.loc.Rigard.Inn.common.onEntry = function() {
 		Text.NL();
 		Text.Add("Before its entrance hangs a sign showing a scantily dressed woman, who you assume is supposed to be Aria, her hands spread in a welcoming gesture. Apparently, it being one of the nicer inns in town doesn’t stop it from relying on sex appeal.");
 		Text.NL();
+		
 	}
-	
-	var busy = Rigard.LB.Busy();
-
 	Text.Add("As you push open the door and enter, ");
 	if(busy == Rigard.LB.BusyState.busy)
 		Text.Add("you hear music and snatches of song coming from a group of minstrels playing in the corner, almost lost under the chatter of people in the busy bar. The large room is filled nearly to capacity with easily a hundred patrons sitting, eating, drinking, and playing.");
@@ -112,6 +120,41 @@ world.loc.Rigard.Inn.common.onEntry = function() {
 	Text.Add("At the left side of the common room, you see stairs leading up to the rooms on the next floor. Assorted tables are scattered around the room. Most are sized to seat only a few people so that they may enjoy a meal on their own, but a few are large enough for bigger groups, perhaps meant for gaming.");
 	Text.NL();
 	Text.Add("The room as a whole is pristine, kept perfectly clean despite the daily spills of drink and dropped food that are an inevitable occurrence in such a busy bar.");
+	
+	if(first) {
+		var parse = {
+			sir : player.mfFem("sir", "ma’am")
+		};
+		Text.NL();
+		Text.Add("A petite vixen wearing a maid’s uniform approaches you. She stands at about five foot five, her fur an orange-tinted gold with predominant white marking. Though her uniform does a nice job of preserving her modesty and hiding her curves, you can see she’s rounded in all the right places. She has a pair of soft-looking cushions adorning her bosom, and she walks with just a slight sway in her gait. Her cute triangular ears turn this way and that before focusing on you.", parse);
+		Text.NL();
+		Text.Add("<i>”Welcome to the Lady’s Blessing, [sir],”</i> she greets you with a bow and a collected smile. ", parse);
+		if(party.NumTotal() == 1)
+			parse["comp"] = "";
+		else if(party.NumTotal() == 1)
+			parse["comp"] = " and your friend";
+		else
+			parse["comp"] = " and your friends";
+		if(busy == Rigard.LB.BusyState.busy) {
+			Text.Add("<i>“We’re a bit crowded right now, but if you[comp] would accompany me, I’ll have you seated momentarily,”</i> she bows.", parse);
+			Text.NL();
+			Text.Add("You thank her for the hospitality and follow her as she leads you through a maze of tables and busy waiters, finally finding an empty table to sit you down. As you do so, she picks up a cloth, wiping the table clean of any lingering dirt from the previous patrons.", parse);
+		}
+		else if(busy == Rigard.LB.BusyState.midbusy) {
+			Text.Add("<i>”We have plenty tables to accommodate you[comp]. Please, follow me,”</i> she bows.", parse);
+			Text.NL();
+			Text.Add("You thank her for the hospitality and follow her as she leads you past a few tables and the occasional busy waiter. Once you’re seated, she picks up a cloth and wipes the table clean of any lingering dirt left by the previous patrons.", parse);
+		}
+		else {
+			Text.Add("<i>”Please follow me and I’ll have you[comp] seated momentarily,”</i> she bows.", parse);
+			Text.NL();
+			Text.Add("You thank her for the hospitality, following her to an empty table nearby. Once you’ve been seated, she takes a cloth and wipes the table clean of any lingering dirt left by the previous patrons.", parse);
+		}
+		Text.NL();
+		parse["selfSelves"] = party.NumTotal() > 1 ? "selves" : "self";
+		Text.Add("<i>”Make your[selfSelves] at home. If you would like to order food, just wave one of the waiters over, and if you’re looking for drinks or a room, you can talk to my boss over at the bar. Enjoy your stay,”</i> she bows with a smile before leaving you to clean up after a couple guests.", parse);
+	}
+	
 	Text.NL();
 	if(busy == Rigard.LB.BusyState.busy)
 		Text.Add("With some difficulty, you manage to find an empty table, and sit down");

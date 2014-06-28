@@ -787,11 +787,12 @@ world.loc.Rigard.Inn.common.events.push(new Link(
 				Text.Add("You see Lei back at his table in the corner of the room. He seems to be scanning the room much as he was last time. You quietly wonder to yourself what happened between him and that couple.");
 			else
 				Text.Add("You see Lei sitting in the corner of the room, nursing his habitual drink. He seems vigilant, as always, scanning the room slowly between sips.");
+			Text.NL();
 		}
 		else if(lei.flags["Met"] >= 3) {
 			Text.Add("Lei is not in his usual spot.");
+			Text.NL();
 		}
-		Text.NL();
 		Text.Flush();
 	},
 	Scenes.Lei.InnPrompt
