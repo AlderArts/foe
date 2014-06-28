@@ -27,6 +27,7 @@ InitCache = function() {
 	player  = new Player(gameCache.player);
 	kiakai  = new Kiakai(gameCache.kiakai);
 	miranda = new Miranda(gameCache.miranda);
+	terry   = new Terry(gameCache.terry);
 	lei     = new Lei(gameCache.lei);
 	twins   = new Twins(gameCache.twins);
 	room69  = new Room69(gameCache.room69);
@@ -84,6 +85,7 @@ InitCache = function() {
 	
 	world.EntityStorage.push(roa);
 	world.EntityStorage.push(miranda);
+	world.EntityStorage.push(terry);
 	
 	world.EntityStorage.push(lei);
 	world.EntityStorage.push(twins.rumi);
@@ -308,6 +310,7 @@ GameToCache = function() {
 	gameCache.player  = player.ToStorage();
 	gameCache.kiakai  = kiakai.ToStorage();
 	gameCache.miranda = miranda.ToStorage();
+	gameCache.terry   = terry.ToStorage();
 	gameCache.lei     = lei.ToStorage();
 	gameCache.twins   = twins.ToStorage();
 	gameCache.room69  = room69.ToStorage();

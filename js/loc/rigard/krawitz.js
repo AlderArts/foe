@@ -405,7 +405,11 @@ world.loc.Rigard.Krawitz.grounds.links.push(new Link(
 // Mansion: Hall
 //
 world.loc.Rigard.Krawitz.Mansion.hall.description = function() {
-	Text.Add("You are in the main building of the Krawitz estate. The interior of the mansion, while richly decorated, has clearly seen better days. It’s a rather jarring contrast to see an ornate antique statue, no doubt very expensive, standing beside a huge staircase with visibly flaky paint. Though the main hallway is spotless, you can see tufts of dust gathering in the more dimly lit side corridors. The intricately designed carpet you are standing on exudes a faint smell of mold. Either Krawitz has been a massive cheapskate with maintenance lately, or the servants aren’t doing a very good job keeping this place in shape.");
+	if(Math.random() < 0.3) {
+		Text.Add("As you step inside the main building of the Krawitz estate, a shiver crawls up your spine and you have a distinct feeling that something is amiss. You quickly scan your surroundings and spot a shadow out of the corner of your eye. On pure reflex, you give chase! Upon turning towards the hallway from which the phantasm disappeared to, you’re baffled and somewhat relieved when you don’t find anything… was that just your imagination?");
+		Text.NL();
+	}
+	Text.Add("You are in the main building of the Krawitz estate. The interior of the mansion, while richly decorated, has clearly seen better days. The huge staircase nearby is in disrepair, with visibly flaky paint. Though the main hallway is spotless, you can see tufts of dust gathering in the more dimly lit side corridors. The intricately designed carpet you are standing on exudes a faint smell of mold. Either Krawitz has been a massive cheapskate with maintenance lately, or the servants aren’t doing a very good job keeping this place in shape.");
 	Text.NL();
 	Text.Add("The hallway you are in is currently deserted, but a servant or maid could probably come by at any moment. Best not linger.");
 	Text.NL();
@@ -2033,10 +2037,130 @@ Scenes.Krawitz.Aftermath = function() {
 	if(!Scenes.Krawitz.stat.AlarmRaised) points += 1;
 	
 	Gui.NextPrompt(function() {
-		party.location = world.loc.Rigard.Inn.penthouse;
+		party.location = world.loc.Rigard.Inn.common;
 		
 		Text.Clear();
-		Text.Add("You make your way back to the inn, snaking your way through alleyways to shake any possible pursuers. The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei. His sharp eyes find you the moment you step inside, and he motions for you to follow him upstairs. You trudge after him wordlessly, feeling the long night in your joints. Your eyebrows rise slightly as the two of you enter the landing to the fourth floor, and head towards the penthouse suite at the end of the hallway. Renting this place must cost a fortune.", parse);
+		Text.Add("You make your way back to the inn, snaking your way through alleyways to shake any possible pursuers. As you’re about to step inside the Lady’s Blessing, you’re surprised to bump into the vixen waitress you normally see cleaning tables.", parse);
+		Text.NL();
+		parse["sir"] = player.mfFem("sir", "ma’am");
+		Text.Add("<i>“Good evening, [sir],”</i> she greets you.", parse);
+		Text.NL();
+		Text.Add("You return the greeting absently, still somewhat preoccupied with the recent events. Not so much, however, that you fail to notice the bulging pack she's carrying. Well, 'carrying' is a bit of an overstatement; it looks so heavy that she doesn't even try to hold it in her arms or support it on her shoulder. Instead, she settles for dragging it awkwardly over the ground.", parse);
+		Text.Flush();
+		
+		//[OfferHelp][IgnoreIt]
+		var options = new Array();
+		options.push({ nameStr : "OfferHelp",
+			func : function() {
+				Text.Clear();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Add("", parse);
+				Text.Flush();
+			}, enabled : true,
+			tooltip : "The poor thing's clearly struggling with that load of hers; why not ask if you can help her?"
+		});
+		options.push({ nameStr : "IgnoreIt",
+			func : function() {
+				Text.Clear();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Flush();
+			}, enabled : true,
+			tooltip : ""
+		});
+		Gui.SetButtonsFromList(options, false, null);
+		
+		/*
+[=OfferHelp=] - 
+
+<i>“Oh? Thank you for the offer, [sirMa’am], but I don’t wish to trouble you with my own affairs,”</i> she smiles.
+
++1 relationship
+
+[Insist][HoldDoor][Leave]
+
+[=Insist=] - You can't just let her brush you off that easily; she really does look like she needs help.
+<i>“Umm, if you insist, then I’d be very glad to have the aid of a such a [handsomeBeautiful] [manLady] such as yourself,”</i> she says, bowing out of respect.
+
+As she hands you the neck of the bag, you move it to hoist it up onto your own shoulders.
+#if Strength =< X (same line)
+You almost topple over at the sheer weight of it! Damn, this is heavy! What in the world does she have in this thing? It takes a few moments to re-adjust yourself, and you almost drop it in the process, but finally you have it safely balanced over your back and are confident you can move with it.
+
+#else if Strength > X (same line)
+Despite your own considerable strength, you are surprised at the sheer weight of the sack. Whatever could she be carrying around in it to make it so heavy? No wonder she was having such a problem with it.
+
+#Converge
+[Ask] [Don'tAsk]
+
+[=Ask=] - Your curiosity is piqued; you just have to know what she's carrying to make it so heavy.
+
+<i>“Old tools and crafts from my recently deceased father,”</i> she explains, ears drooping in sadness. <i>“I’m just clearing out his things before I move back to my hometown,”</i> she adds.
+
+[Sympathize] [Continue]
+[==Sympathize==] - Express your sympathies for her loss.
+
+<i>“Thank you, I appreciate it [sirMa’am],”</i> she smiles a bit under her grimace. 
+
+[==Continue==] - Time you both were getting inside the inn.
+(No text)
+
+#Both options converge here
+
+With the package taking up both hands, you ask her to mind the door, and step inside the inn as she holds it open for you.
+
+The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei. He stares at the vixen with his sharp eyes as she makes her way inside, then immediately turn his gaze to you and motions for you to follow him upstairs.
+
+<i>“Thanks a lot for your help. I can take things from here,”</i> she glances at Lei, not wanting to keep you from your business. 
+
++6 relationship
+
+You bid her farewell and trudge after him wordlessly, feeling the long night in your joints. Your eyebrows rise slightly as the two of you enter the landing to the fourth floor, and head towards the penthouse suite at the end of the hallway.
+
+(Rest of scene goes on as usual.)
+
+[=Don’tAsk=] - You don’t want to pry, so you resolve to remain silent.
+With the package taking up both hands, you ask her to mind the door, and step inside the inn as she holds it open for you.
+
+The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei. He stares at the vixen with his sharp eyes as she makes her way inside, then immediately turn his gaze to you and motions for you to follow him upstairs.
+
+(Rest of scene goes on as usual.)
+
++4 relationship
+
+[=HoldDoor=] - Even if she doesn't want you to carry it for her, you could at least make it easier for her to get through with it.
+
+“Thank you very much, [sirMa’am],” she replies pleasantly, tail wagging as she drags the bag through the door.
+ 
++2 relationship
+
+The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei. He stares at the vixen with his sharp eyes as she makes her way inside, then immediately turn his gaze to you and motions for you to follow him upstairs.
+
+(Rest of scene goes on as usual.)
+
+[=Leave=] - Alright, if that's how she wants it. You may as well go on in ahead of her.
+Accepting her wishes, you push on through the door and head inside the inn yourself.
+
+The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei.
+
+(Rest of scene goes on as usual.)
+
+[=IgnoreIt=] - What she does in her own time is none of your business. Bid farewell and get on with your <b>own</b> business.
+
+Not keen on being questioned about your nightly activities, you quickly excuse yourself and step into the inn. The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei.
+
+(Rest of scene goes on as usual.)
+
+		 */
+		
+		party.location = world.loc.Rigard.Inn.penthouse;
+		Text.Add("The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei. His sharp eyes find you the moment you step inside, and he motions for you to follow him upstairs. You trudge after him wordlessly, feeling the long night in your joints. Your eyebrows rise slightly as the two of you enter the landing to the fourth floor, and head towards the penthouse suite at the end of the hallway. Renting this place must cost a fortune.", parse);
 		Text.NL();
 		parse["hotcold"] = world.time.season == Season.Winter ? "a cosy fire warming up the interior" : "though at the moment, it isn’t lit";
 		Text.Add("Even for the Lady’s Blessing, the interior of the room is lavish, well beyond the usual fare at the inn. There are several pieces of antique furniture that look to have been made in a florid old style, decorated with elaborate carved patterns. Richly embroidered carpets and hangings abundantly adorn the room, the crowning jewel being a large tapestry hanging on one wall. While it is very well made, the images depicted on it are decidedly vulgar, showing a series of couples involved in suggestive or outright sexual acts. The room has its own stone fireplace connected to the central chimney, [hotcold].", parse);
