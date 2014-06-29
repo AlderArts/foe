@@ -2031,7 +2031,7 @@ Scenes.Krawitz.Aftermath = function() {
 		playername : player.name
 	};
 	
-	Scenes.Krawitz.stat = Scenes.Krawitz.stat | {};
+	Scenes.Krawitz.stat = Scenes.Krawitz.stat || {};
 	party.location = world.loc.Rigard.Krawitz.street;
 	
 	var points = 0;
