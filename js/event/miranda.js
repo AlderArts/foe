@@ -3989,6 +3989,8 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 		armorDesc : function() { return player.ArmorDesc(); }
 	};
 	
+	var dom = player.SubDom() - miranda.SubDom();
+	
 	if(miranda.Attitude() >= Miranda.Attitude.Neutral)
 		Text.Add("<i>“Alright, [playername]. You know what to do, so open up,”</i> she says, brandishing her hardening prick and nestling it against your lips.", parse);
 	else
