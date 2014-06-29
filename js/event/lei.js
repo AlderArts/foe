@@ -824,6 +824,8 @@ Scenes.Lei.BarFight = function() {
 	enemy.AddMember(lei);
 	var enc = new Encounter(enemy);
 	
+	lei.RestFull();
+	
 	enc.canRun = false;
 	enc.onLoss = function() {
 		lei.RestFull();
