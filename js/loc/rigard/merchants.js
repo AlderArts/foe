@@ -24,14 +24,21 @@ world.loc.Rigard.ShopStreet =
 // Shopping street
 //
 world.loc.Rigard.ShopStreet.street.description = function() {
-	Text.AddOutput("This streets in this area of the city are lined with small merchant stalls and shops of all kinds. ");
+	Text.Add("This streets in this area of the city are lined with small merchant stalls and shops of all kinds. ");
 	if(world.time.hour >= 6 && world.time.hour < 9)
-		Text.AddOutput("A few early birds prowl the streets as the merchant district starts to wake up. A few street vendors selling fresh foods are just opening up, and the smells of baked bread and spices fill the morning air.");
+		Text.Add("A few early birds prowl the streets as the merchant district starts to wake up. A few street vendors selling fresh foods are just opening up, and the smells of baked bread and spices fill the morning air.");
 	else if(world.time.hour >= 9 && world.time.hour < 18)
-		Text.AddOutput("People of all shapes and sizes wander the streets, browsing the wares on display.");
+		Text.Add("People of all shapes and sizes wander the streets, browsing the wares on display.");
 	else
-		Text.AddOutput("Usually this place is bustling with people, but with all the shops closed for the night, no one is about.");
-	Text.AddOutput("<br/>");
+		Text.Add("Usually this place is bustling with people, but with all the shops closed for the night, no one is about.");
+	Text.NL();
+	
+	if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry) {
+		Text.Add("Most of the shops are closed, and even at the open ones there's very little activity. The occasional guard wanders past on patrol and nods absently to Miranda in recognition, but it's clear that they're a token effort at best.");
+		Text.NL();
+		Text.Add("Despite its calmness, indeed because of it, this actually seems like a very good place for an enterprising thief to try and hide from the eyes and arms of the law.");
+		Text.NL();
+	}
 }
 
 world.loc.Rigard.ShopStreet.street.enc = new EncounterTable();
@@ -47,18 +54,14 @@ world.loc.Rigard.ShopStreet.street.onEntry = function() {
 
 world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	"Gate", true, true,
-	function() {
-		Text.AddOutput("Gate is somewhere.<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Gate, {minute: 10});
 	}
 ));
 world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	"Residential", true, true,
-	function() {
-		Text.AddOutput("There are residential area.<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Residental.street, {minute: 20});
 	}
@@ -68,9 +71,7 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 ));
 world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	"Plaza", true, true,
-	function() {
-		Text.AddOutput("There are plaza.<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Plaza, {minute: 10});
 	}
@@ -174,7 +175,7 @@ world.loc.Rigard.ShopStreet.street.events.push(new Link(
 ));
 
 world.loc.Rigard.ShopStreet.street.endDescription = function() {
-	Text.AddOutput("Where you go?<br/>");
+	Text.Flush();
 }
 
 

@@ -13,7 +13,12 @@ world.loc.Rigard.Plaza.description = function() {
 	Text.NL();
 	Text.Add("In the middle of the plaza there is a large fountain in white marble, full of clear water. In the middle of the fountain on a raised pedestal, stands a stone statue of the Lady Aria, covered in robes of silk that sway in the wind.");
 	Text.NL();
-	Text.Flush();
+	if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry) {
+		Text.Add("The place is absolutely swarming with people as frazzled guards, irate merchants and angry residents swarm and flock and mingle in the now surprisingly cramped-feeling square.");
+		Text.NL();
+		Text.Add("There's not a lot of hiding places here, as even a cursory glance tells you, but the confusion and roving groups of people could be used as a kind of mobile camouflage, so it might be worth checking out.");
+		Text.NL();
+	}
 }
 
 world.loc.Rigard.Plaza.onEntry = function() {
@@ -32,27 +37,21 @@ world.loc.Rigard.Plaza.enc.AddEnc(function() { return Scenes.Krawitz.Duel;}, 3.0
 
 world.loc.Rigard.Plaza.links.push(new Link(
 	"Gate", true, true,
-	function() {
-		Text.AddOutput("Gate is over there.<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Gate, {minute: 20});
 	}
 ));
 world.loc.Rigard.Plaza.links.push(new Link(
 	"Residential", true, true,
-	function() {
-		Text.AddOutput("There are residential area.<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Residental.street, {minute: 10});
 	}
 ));
 world.loc.Rigard.Plaza.links.push(new Link(
 	"Merchants", true, true,
-	function() {
-		Text.AddOutput("There are merchant street.<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 10});
 	}
@@ -64,7 +63,8 @@ world.loc.Rigard.Plaza.links.push(new Link(
 world.loc.Rigard.Plaza.links.push(new Link(
 	"Inn", true, true,
 	function() {
-		Text.AddOutput("Inn is over there.<br/>");
+		// TODO
+		Text.Add("Inn is over there. ");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Inn.common);
@@ -73,7 +73,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 world.loc.Rigard.Plaza.links.push(new Link(
 	"Castle", true, true,
 	function() {
-		Text.AddOutput("The outer walls of the royal grounds stand near, and the castle looms on the hill above.<br/>");
+		Text.Add("The outer walls of the royal grounds stand near, and the castle looms on the hill above. ");
 	},
 	function() {
 		var parse = {
@@ -168,7 +168,8 @@ world.loc.Rigard.Plaza.links.push(new Link(
 world.loc.Rigard.Plaza.links.push(new Link(
 	"Mansion", function() { return rigard.Krawitz["Q"] == 1; }, true,
 	function() {
-		Text.AddOutput("Krawitz's estate is nearby.<br/>");
+		Text.Add("Krawitz's estate is nearby.");
+		Text.NL();
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Krawitz.street, {minute: 10});
@@ -179,9 +180,10 @@ world.loc.Rigard.Plaza.links.push(new Link(
 world.loc.Rigard.Plaza.events.push(new Link(
 	"Goldsmith", function() { return room69.flags["Hinges"] == Room69.HingesFlags.Asked; }, function() { return world.time.hour >= 9 && world.time.hour < 18; },
 	function() {
-		if(room69.flags["Hinges"] == Room69.HingesFlags.Asked)
-			Text.AddOutput("You see a rich establishment nearby, claiming to be the best goldsmith in town. Perhaps you could as the owner about making hinges for Sixtynine's door?");
-			Text.Newline();
+		if(room69.flags["Hinges"] == Room69.HingesFlags.Asked) {
+			Text.Add("You see a rich establishment nearby, claiming to be the best goldsmith in town. Perhaps you could as the owner about making hinges for Sixtynine's door?");
+			Text.NL();
+		}
 	},
 	function() {
 		Text.Clear();
@@ -206,7 +208,7 @@ world.loc.Rigard.Plaza.events.push(new Link(
 ));
 
 world.loc.Rigard.Plaza.endDescription = function() {
-	Text.AddOutput("What you do?<br/>");
+	Text.Flush();
 }
 
 Scenes.Rigard.Plaza.StatueInfo = function() {

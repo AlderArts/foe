@@ -29,8 +29,6 @@ world.loc.Rigard.Gate.description = function() {
 			Text.Add(" It looks like the gates are shut for the night, you can't leave the city until dawn.");
 		}
 	}
-	
-	Text.Flush();
 }
 
 
@@ -87,7 +85,7 @@ world.loc.Rigard.Gate.links.push(new Link(
 ));
 
 world.loc.Rigard.Gate.endDescription = function() {
-	Text.AddOutput("Nothing else to see here.<br/>");
+	Text.Flush();
 }
 
 

@@ -2,7 +2,7 @@
 
 
 
-
+//TODO: Split doc
 //
 // Brothel
 //
@@ -30,7 +30,15 @@ world.loc.Rigard.Brothel.brothel.endDescription = function() {
 // Residential area
 //
 world.loc.Rigard.Residental.street.description = function() {
-	Text.AddOutput("The common residential area is clearly a shadier part of the town. The closely spaced buildings here are shabbier than you would see elsewhere, hardly letting you see the sky for all the laundry hanging out on display for all to see.<br/>");
+	Text.Add("The common residential area is clearly a shadier part of the town. The closely spaced buildings here are shabbier than you would see elsewhere, hardly letting you see the sky for all the laundry hanging out on display for all to see.");
+	Text.NL();
+	
+	if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry) {
+		Text.Add("Though many residents are still going about their normal business, even here, the lockdown has caused disruptions. There's a sizable group of residents standing near the gate, trying in vain to get past the guards and arguing quite vehemently as they try and make their case. An even larger group is watching the argument; some simply for entertainment, undoubtedly, but most of them are glaring at the guards.");
+		Text.NL();
+		Text.Add("It's not a very likely hiding place, but there's enough nooks, crannies and people here that a bold or desperate thief could try and conceal themselves.");
+		Text.NL();
+	}
 }
 
 world.loc.Rigard.Residental.street.enc = new EncounterTable();
@@ -67,9 +75,7 @@ world.loc.Rigard.Residental.street.onEntry = function() {
 
 world.loc.Rigard.Residental.street.links.push(new Link(
 	"Gate", true, true,
-	function() {
-		Text.AddOutput("Go gate?<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Gate, {minute: 10});
 	}
@@ -79,18 +85,14 @@ world.loc.Rigard.Residental.street.links.push(new Link(
 ));
 world.loc.Rigard.Residental.street.links.push(new Link(
 	"Merchants", true, true,
-	function() {
-		Text.AddOutput("Go merchants?<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 20});
 	}
 ));
 world.loc.Rigard.Residental.street.links.push(new Link(
 	"Plaza", true, true,
-	function() {
-		Text.AddOutput("Go plaza?<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Plaza, {minute: 10});
 	}
@@ -98,9 +100,7 @@ world.loc.Rigard.Residental.street.links.push(new Link(
 
 world.loc.Rigard.Residental.street.links.push(new Link(
 	"Slums", true, function() { return rigard.Krawitz["Q"] != Rigard.KrawitzQ.HuntingTerry; },
-	function() {
-		Text.AddOutput("Go slums?<br/>");
-	},
+	null,
 	function() {
 		if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HeistDone)
 			Scenes.Rigard.Lockdown();
@@ -111,7 +111,8 @@ world.loc.Rigard.Residental.street.links.push(new Link(
 world.loc.Rigard.Residental.street.links.push(new Link(
 	"Brothel", true, true,
 	function() {
-		Text.AddOutput("Brothel is over there.<br/>");
+		Text.Add("A rather discreet sign on a large nearby building invites you to the brothel ‘The Shadow Lady’. The facade is richer than the regular houses of the district, and the establishment is bustling with activity.");
+		Text.NL();
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Brothel.brothel);
@@ -119,14 +120,12 @@ world.loc.Rigard.Residental.street.links.push(new Link(
 ));
 world.loc.Rigard.Residental.street.links.push(new Link(
 	"Miranda's", true, false,
-	function() {
-		Text.AddOutput("Go to Miranda's place?<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Residental.miranda);
 	}
 ));
 
 world.loc.Rigard.Residental.street.endDescription = function() {
-	Text.AddOutput("What you do?<br/>");
+	Text.Flush();
 }
