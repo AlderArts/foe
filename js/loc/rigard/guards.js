@@ -2,13 +2,35 @@
 
 
 
+/*
+ * 
 
+
+ */
 
 //
 // Gate house
 //
 world.loc.Rigard.Gate.description = function() {
-	Text.AddOutput("You are standing just inside the city gates. Three larger roads head off into different areas of the city.<br/>");
+	Text.Add("The gate area is where most of the merchandise enters the city. It houses a stable for mounts and several checkpoints where you’re supposed to have your cargo inspected, though not everyone is ordered to head there. You wonder if there is an actual process for screening out shady sorts or if the watch simply chooses at random. Overall this place seems well guarded, and you have a slight suspicion that the fact the Watch’s Barracks are located nearby might have something to do with it.");
+	Text.NL();
+	Text.Add("Ahead of you the path splits into three. One path leads to the residential district, where most of the citizens live. Another path leads you to the merchant district, where most of the commerce is handled, and the merchant warehouses are located. The last path leads you toward Rigard’s richer areas - toward the Castle, which seems to be even more fortified than the front gates.");
+	Text.NL();
+	
+	if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry) {
+		Text.Add("With the lockdown, the whole place is in a near-riot, the usual commotion and clamour amplified tenfold as caravans try and fail to get past the blockade in either direction and merchants and guards argue with one another, devolving into screaming matches as much to try and be heard over the noise as from sheer frustration.");
+		Text.NL();
+		Text.Add("The gates certainly won't be opening anytime soon, but this is still a pretty good place for a thief to try hiding. All this chaos will easily cover someone sneaking around.");
+	}
+	else {
+		Text.Add("Just outside the city walls are the expansive plains.");
+		if(!(world.time.hour >= 6 && world.time.hour < 22)) // Nighttime
+		{
+			Text.Add(" It looks like the gates are shut for the night, you can't leave the city until dawn.");
+		}
+	}
+	
+	Text.Flush();
 }
 
 
@@ -27,50 +49,38 @@ world.loc.Rigard.Gate.links.push(new Link(
 ));
 world.loc.Rigard.Gate.links.push(new Link(
 	"Residential", true, true,
-	function() {
-		Text.AddOutput("To the right, a street lead to the seedier part of time, where the residential area is located.<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Residental.street, {minute: 10});
 	}
 ));
 world.loc.Rigard.Gate.links.push(new Link(
 	"Merchants", true, true,
-	function() {
-		Text.AddOutput("To the left a broad street heads to the merchant district.<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.ShopStreet.street, {minute: 10});
 	}
 ));
 world.loc.Rigard.Gate.links.push(new Link(
 	"Plaza", true, true,
-	function() {
-		Text.AddOutput("The largest street seems to lead to the richer part of town. In the distance, you can spy a castle.<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Plaza, {minute: 20});
 	}
 ));
 world.loc.Rigard.Gate.links.push(new Link(
-	"Leave", true, function() { return (world.time.hour >= 6 && world.time.hour < 22); },
+	"Leave", true, function() { return (world.time.hour >= 6 && world.time.hour < 22) && rigard.Krawitz["Q"] != Rigard.KrawitzQ.HuntingTerry; },
+	null,
 	function() {
-		Text.AddOutput("Just outside the city walls are the expansive plains.");
-		if(!(world.time.hour >= 6 && world.time.hour < 22)) // Nighttime
-		{
-			Text.AddOutput(" It looks like the gates are shut for the night, you can't leave the city until dawn.");
-		}
-		Text.AddOutput("<br/>");
-	},
-	function() {
-		MoveToLocation(world.loc.Plains.Gate, {minute: 5});
+		if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HeistDone)
+			Scenes.Rigard.Lockdown();
+		else
+			MoveToLocation(world.loc.Plains.Gate, {minute: 5});
 	}
 ));
 world.loc.Rigard.Gate.links.push(new Link(
 	"Barracks", true, true,
-	function() {
-		Text.AddOutput("A large blocky building connects directly to the gate house. Judging from the military look, this should be the barracks of the city guard.<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Barracks.common, {minute: 5});
 	}

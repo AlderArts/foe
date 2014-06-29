@@ -39,6 +39,7 @@ function Miranda(storage) {
 	this.RestFull();
 	
 	this.flags["Met"]      = Miranda.Met.NotMet;
+	this.flags["Herm"]     = 0; // Know she is a herm
 	this.flags["Attitude"] = Miranda.Attitude.Neutral;
 	this.flags["Thief"]    = 0;
 	this.flags["RotGuard"] = 0;
@@ -189,7 +190,7 @@ Scenes.Miranda.RigardGatesInteract = function() {
 	if(miranda.Attitude() > Miranda.Attitude.Neutral)
 		Text.Add("<i>”If you feel brave enough, I could treat you to another night on the town,”</i> the guardswoman suggests, winking at you. <i>”Meet me at the tavern in the slums after dark and we’ll party hard!”</i>", parse);
 	else if(miranda.Attitude() < Miranda.Attitude.Neutral)
-		Text.Add("<i>”So you come crawling back here, eh?”</i> The guardswoman looks at you dismissively. <i>”I really don’t have the time for you right now, but meet me in the slums later if you are feeling brave. Brave or stupid.”</i>", parse);
+		Text.Add("<i>”So you come crawling back here, eh?”</i> The guardswoman looks at you dismissively. <i>”I really don’t have the time for you right now. What do you want?”</i>", parse);
 	else
 		Text.Add("<i>”Head over to the Maidens’ Bane tavern in the slums once in a while, we can have a drink and chat a bit.”</i>", parse);
 	Text.Flush();
@@ -1145,6 +1146,8 @@ Scenes.Miranda.HeyThereCatPorn = function() {
 				Text.Add("<b>You now know Miranda is a herm (duh).</b>", parse);
 				Text.Flush();
 				
+				miranda.flags["Herm"] = 1;
+				
 				//[Flee!][Watch][Help her]
 				var options = new Array();
 				options.push({ nameStr : "Flee!",
@@ -1606,7 +1609,7 @@ Scenes.Miranda.JustOneMore = function() {
 				Text.Add("<i>”So... now what, pet?”</i> she asks, looking into your eyes. You suggest that the two of you grab a few drinks and have a chat. <i>”Well… a good start, I guess,”</i> she smirks.", parse);
 				Text.NL();
 				
-				miranda.flags["Attitude"] = Miranda.Attitude.Neutral;
+				miranda.flags["Attitude"] = Miranda.Attitude.Nice;
 				
 				miranda.relation.IncreaseStat(100, 5);
 				
@@ -1648,6 +1651,8 @@ Scenes.Miranda.JustOneMore = function() {
 		Text.Add("<b>You now know Miranda is a herm (duh).</b>", parse);
 		Text.Flush();
 		
+		miranda.flags["Herm"] = 1;
+		
 		//[Accept][Leave][Touch it]
 		var options = new Array();
 		options.push({ nameStr : "Accept",
@@ -1658,7 +1663,7 @@ Scenes.Miranda.JustOneMore = function() {
 				Text.Add("<i>”Friendship accepted,”</i> the guardswoman murmurs. <i>”And who knows, perhaps something more down the line?”</i> she adds playfully.", parse);
 				Text.NL();
 				
-				miranda.flags["Attitude"] = Miranda.Attitude.Neutral;
+				miranda.flags["Attitude"] = Miranda.Attitude.Nice;
 				
 				miranda.relation.IncreaseStat(100, 5);
 				

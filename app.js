@@ -9,7 +9,7 @@ VERSION_MINOR = 3;
 VERSION_SUBSCRIPT = "i";
 VERSION_NAME = "Miranda dommy sexings";
 
-SAVE_VERSION = 13;
+SAVE_VERSION = 14;
 // Save version 1: Initial
 // Save version 2: Added inventory
 // Save version 3: Fixed clitcock restoration + height, weigth
@@ -23,6 +23,7 @@ SAVE_VERSION = 13;
 // Save version 11: Jobs
 // Save version 12: Job fix "Figther"
 // Save version 13: Krawitz
+// Save version 14: Miranda herm fix
 
 
 VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + VERSION_SUBSCRIPT + ": " + VERSION_NAME;

@@ -292,6 +292,9 @@ CacheToGame = function() {
 	        rigard.flags["KrawitzQ"] = null;
 	    }
 	}
+	if(gameCache.version < 14) {
+		miranda.flags["Herm"] = (miranda.flags["Met"] >= Miranda.Met.TavernAftermath) ? 1 : 0;
+	}
 }
 
 GameToCache = function() {

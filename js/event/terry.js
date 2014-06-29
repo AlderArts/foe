@@ -11,25 +11,25 @@ function Terry(storage) {
 	
 	this.avatar.combat = Images.terry;
 	
-	this.maxHp.base        = 100;
-	this.maxSp.base        = 10;
+	this.maxHp.base        = 50;
+	this.maxSp.base        = 60;
 	this.maxLust.base      = 50;
 	// Main stats
-	this.strength.base     = 23;
-	this.stamina.base      = 19;
-	this.dexterity.base    = 19;
-	this.intelligence.base = 12;
-	this.spirit.base       = 11;
-	this.libido.base       = 24;
-	this.charisma.base     = 14;
+	this.strength.base     = 13;
+	this.stamina.base      = 10;
+	this.dexterity.base    = 24;
+	this.intelligence.base = 15;
+	this.spirit.base       = 13;
+	this.libido.base       = 15;
+	this.charisma.base     = 20;
 	
 	this.level    = 1;
 	this.sexlevel = 1;
 	
 	this.body.DefMale();
 	this.Butt().buttSize.base = 3;
-	this.FirstCock().length.base = 15;
-	this.FirstCock().thickness.base = 3;
+	this.FirstCock().length.base = 11;
+	this.FirstCock().thickness.base = 2.5;
 	this.body.SetRace(Race.fox);
 	
 	this.SetLevelBonus();
@@ -72,3 +72,6 @@ Terry.prototype.ToStorage = function() {
 	
 	return storage;
 }
+
+Scenes.Terry = {};
+

@@ -39,7 +39,9 @@ world.loc.Rigard.Residental.street.enc.AddEnc(function() { return Scenes.Rigard.
 
 world.loc.Rigard.Residental.street.onEntry = function() {
 	
+	// TODO
 	// During nighttime, sometimes groups of bandits will try to attack!
+	/*
 	if(!(world.time.hour >= 6 && world.time.hour < 22)) // Nighttime
 	{
 		if(Math.random() < 0.2) {
@@ -56,7 +58,7 @@ world.loc.Rigard.Residental.street.onEntry = function() {
 			return;
 		}
 	}
-	
+	*/
 	if(Math.random() < 0.2)
 		Scenes.Rigard.Chatter(true);
 	else
@@ -95,12 +97,15 @@ world.loc.Rigard.Residental.street.links.push(new Link(
 ));
 
 world.loc.Rigard.Residental.street.links.push(new Link(
-	"Slums", true, true,
+	"Slums", true, function() { return rigard.Krawitz["Q"] != Rigard.KrawitzQ.HuntingTerry; },
 	function() {
 		Text.AddOutput("Go slums?<br/>");
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 10});
+		if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HeistDone)
+			Scenes.Rigard.Lockdown();
+		else
+			MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 10});
 	}
 ));
 world.loc.Rigard.Residental.street.links.push(new Link(
