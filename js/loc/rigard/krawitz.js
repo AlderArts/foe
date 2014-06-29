@@ -63,6 +63,8 @@ Scenes.Krawitz.SetupStats = function() {
 	Scenes.Krawitz.stat.HasSword          = false;
 	Scenes.Krawitz.stat.HasBinder         = false;
 	
+	Scenes.Krawitz.stat.Swiped            = false;
+	
 	Scenes.Krawitz.stat.Suspicion         = 0;
 	Scenes.Krawitz.stat.AlarmRaised       = false;
 	Scenes.Krawitz.stat.guardRot          = 0;
@@ -419,8 +421,13 @@ world.loc.Rigard.Krawitz.Mansion.hall.description = function() {
 	if(Math.random() < 0.3) {
 		Text.Add("As you step inside the main building of the Krawitz estate, a shiver crawls up your spine and you have a distinct feeling that something is amiss. You quickly scan your surroundings and spot a shadow out of the corner of your eye. On pure reflex, you give chase! Upon turning towards the hallway from which the phantasm disappeared to, you’re baffled and somewhat relieved when you don’t find anything… was that just your imagination?");
 		Text.NL();
+		
+		Scenes.Krawitz.stat.Swiped = true;
 	}
-	Text.Add("You are in the main building of the Krawitz estate. The interior of the mansion, while richly decorated, has clearly seen better days. The huge staircase nearby is in disrepair, with visibly flaky paint. Though the main hallway is spotless, you can see tufts of dust gathering in the more dimly lit side corridors. The intricately designed carpet you are standing on exudes a faint smell of mold. Either Krawitz has been a massive cheapskate with maintenance lately, or the servants aren’t doing a very good job keeping this place in shape.");
+	var parse = {
+		vase : Scenes.Krawitz.stat.Swiped ? "The huge staircase nearby is in disrepair, with visibly flaky paint." : "It’s a rather jarring contrast to see an ornate antique statue, no doubt very expensive, standing beside a huge staircase with visibly flaky paint."
+	}
+	Text.Add("You are in the main building of the Krawitz estate. The interior of the mansion, while richly decorated, has clearly seen better days. [vase] Though the main hallway is spotless, you can see tufts of dust gathering in the more dimly lit side corridors. The intricately designed carpet you are standing on exudes a faint smell of mold. Either Krawitz has been a massive cheapskate with maintenance lately, or the servants aren’t doing a very good job keeping this place in shape.", parse);
 	Text.NL();
 	Text.Add("The hallway you are in is currently deserted, but a servant or maid could probably come by at any moment. Best not linger.");
 	Text.NL();
