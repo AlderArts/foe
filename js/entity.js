@@ -1343,6 +1343,9 @@ Entity.prototype.TongueDesc = function() {
 Entity.prototype.Hair = function() {
 	return this.body.head.hair;
 }
+Entity.prototype.HasHair = function() {
+	return this.body.head.hair.Bald() == false;
+}
 Entity.prototype.Mouth = function() {
 	return this.body.head.mouth;
 }
@@ -1444,8 +1447,17 @@ Entity.prototype.LegDesc = function() {
 Entity.prototype.LegsDesc = function() {
 	return this.body.LegsDesc();
 }
+Entity.prototype.ThighDesc = function() {
+	return this.body.ThighDesc();
+}
+Entity.prototype.ThighsDesc = function() {
+	return this.body.ThighsDesc();
+}
 Entity.prototype.FeetDesc = function() {
 	return this.body.FeetDesc();
+}
+Entity.prototype.FootDesc = function() {
+	return this.body.FootDesc();
 }
 Entity.prototype.StomachDesc = function() {
 	return this.body.StomachDesc();

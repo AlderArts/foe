@@ -1839,6 +1839,36 @@ Body.prototype.HasLongSnout = function() {
 	}
 }
 
+Body.prototype.SoftFeet = function() {
+	var legs = this.legs;
+	if(!legs) return false;
+	
+	switch(legs.race) {
+		case Race.cow:
+		case Race.goat:
+		case Race.sheep:
+		case Race.satyr:
+		case Race.dryad:
+		case Race.horse: return false;
+		
+		case Race.avian:
+		case Race.dragon:
+		case Race.lizard:
+		case Race.demon:
+		
+		case Race.ferret:
+		case Race.rabbit:
+		case Race.fox:
+		case Race.wolf:
+		case Race.dog:
+		case Race.cat:
+		
+		case Race.elf:
+		case Race.human:
+		default: return true;
+	}
+}
+
 Body.prototype.FeetDesc = function() {
 	var legs = this.legs;
 	if(!legs) return "body";
@@ -1866,6 +1896,35 @@ Body.prototype.FeetDesc = function() {
 		case Race.elf:
 		case Race.human:
 		default: return "feet";
+	}
+}
+Body.prototype.FootDesc = function() {
+	var legs = this.legs;
+	if(!legs) return "body";
+	
+	switch(legs.race) {
+		case Race.cow:
+		case Race.goat:
+		case Race.sheep:
+		case Race.satyr:
+		case Race.dryad:
+		case Race.horse: return "hoof";
+		
+		case Race.avian:
+		case Race.dragon:
+		case Race.lizard:
+		case Race.demon: return "clawed foot";
+		
+		case Race.ferret:
+		case Race.rabbit:
+		case Race.fox:
+		case Race.wolf:
+		case Race.dog:
+		case Race.cat: return "paw";
+		
+		case Race.elf:
+		case Race.human:
+		default: return "foot";
 	}
 }
 
@@ -1928,7 +1987,65 @@ Body.prototype.LegsDesc = function() {
 		default: return "legs";
 	}
 }
-
+// TODO
+Body.prototype.ThighDesc = function() {
+	var legs = this.legs;
+	if(!legs) return "body";
+	
+	switch(legs.race) {
+		case Race.cow:
+		case Race.goat:
+		case Race.sheep:
+		case Race.satyr:
+		case Race.dryad:
+		case Race.horse:
+		
+		case Race.dragon:
+		case Race.lizard:
+		case Race.demon:
+		
+		case Race.ferret:
+		case Race.rabbit:
+		case Race.fox:
+		case Race.wolf:
+		case Race.dog:
+		case Race.cat:
+		
+		case Race.elf:
+		case Race.human:
+		default: return "thigh";
+	}
+}
+// TODO
+Body.prototype.ThighsDesc = function() {
+	var legs = this.legs;
+	if(!legs) return "body";
+	
+	switch(legs.race) {
+		case Race.cow:
+		case Race.goat:
+		case Race.sheep:
+		case Race.satyr:
+		case Race.dryad:
+		case Race.horse:
+		
+		case Race.dragon:
+		case Race.lizard:
+		case Race.demon:
+		
+		case Race.ferret:
+		case Race.rabbit:
+		case Race.fox:
+		case Race.wolf:
+		case Race.dog:
+		case Race.cat:
+		
+		case Race.elf:
+		case Race.human:
+		
+		default: return "thighs";
+	}
+}
 // TODO
 Body.prototype.ArmDesc = function() {
 	var arm = this.arms;

@@ -478,6 +478,9 @@ Scenes.Rigard.Lockdown = function() {
 		armorDesc : function() { return player.ArmorDesc(); }
 	};
 	
+	//TODO
+	//rigard.Krawitz["Q"] = Rigard.KrawitzQ.HuntingTerry;
+	
 	var dom = miranda.SubDom() - player.SubDom();
 	
 	Text.Clear();
@@ -660,7 +663,7 @@ Scenes.Rigard.Lockdown = function() {
 							Text.NL();
 							Text.Flush();
 							
-							//TODO
+							Scenes.Miranda.TerryTavernSexSubbyVag(cocksInVag);
 						}, enabled : cocksInVag.length > 0,
 						tooltip : "She wants sex, but who says she has to get it on her terms? Why not take charge of scratching her itch?"
 					});
@@ -671,7 +674,7 @@ Scenes.Rigard.Lockdown = function() {
 							Text.NL();
 							Text.Flush();
 							
-							//TODO
+							Scenes.Miranda.TerryTavernSexDommyBJ();
 						}, enabled : true,
 						tooltip : "If she wants her itch scratched, then she can come and get it."
 					});
@@ -729,7 +732,7 @@ Scenes.Rigard.Lockdown = function() {
 						Text.Add("For several long, pleasant moments the two of you tongue-wrestle, softly moaning and mumbling your pleasure into each other's lips, before you release her. Smirking down at the panting herm, her erection visibly tenting her pants from this angle, you mockingly ask her how she intends to have you sex her whilst she insists on keeping that pretty rump of hers all covered up in her uniform.", parse);
 						Text.Flush();
 						
-						//TODO
+						Scenes.Miranda.TerryTavernSexSubbyVag(cocksInVag);
 					}, enabled : cocksInVag.length > 0,
 					tooltip : "Even if she wants sex, who says she has to get it on her terms? Why not take charge of scratching her itch?"
 				});
@@ -739,7 +742,7 @@ Scenes.Rigard.Lockdown = function() {
 						Text.Add("The dog-herm wastes no time in hopping on her feet, stripping off her armor as she approaches you to help you take off your [armorDesc]. Though she fumbles with both your outfits she has you naked in record time. Without so much as a word, she takes you by the arm and sets you down on your knees atop the cushions in the corner of the room.", parse);
 						Text.Flush();
 						
-						//TODO
+						Scenes.Miranda.TerryTavernSexDommyBJ();
 					}, enabled : true,
 					tooltip : "If she wants her itch scratched, then she can come and get it."
 				});
@@ -823,7 +826,7 @@ Scenes.Rigard.Lockdown = function() {
 					Text.Add("Miranda's eyes never leave you, her lips curled into a smirk and her fingers brushing almost mockingly against the bulge in her trousers as she watches you finish undressing. As her gaze hungrily follows you, you [reluctantlyEagerly] head for the cushioned corner of the room and obediently kneel there, just waiting for her to claim you.", parse);
 					Text.Flush();
 					
-					//TODO
+					Scenes.Miranda.TerryTavernSexDommyBJ();
 				});
 			}
 		}
