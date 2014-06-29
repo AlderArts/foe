@@ -478,8 +478,7 @@ Scenes.Rigard.Lockdown = function() {
 		armorDesc : function() { return player.ArmorDesc(); }
 	};
 	
-	//TODO
-	//rigard.Krawitz["Q"] = Rigard.KrawitzQ.HuntingTerry;
+	rigard.Krawitz["Q"] = Rigard.KrawitzQ.HuntingTerry;
 	
 	var dom = miranda.SubDom() - player.SubDom();
 	
@@ -520,11 +519,12 @@ Scenes.Rigard.Lockdown = function() {
 		parse["comp"] = party.NumTotal() == 2 ? party.Get(1).name : "your companions";
 		Text.Add("You tell [comp] to wait for you at the Lady’s Blessing, looks like this is going to take some time.", parse);
 		Text.NL();
-		
-		Scenes.Terry.activeParty = party.GetActiveParty();
-		party.ClearActiveParty();
-		party.AddMember(miranda);
 	}
+	
+	Scenes.Terry.activeParty = party.GetActiveParty();
+	party.ClearActiveParty();
+	party.AddMember(miranda);
+	
 	if(miranda.Sexed()) {
 		if(miranda.SubDom() > 25) {
 			Text.Add("As you make your way past the gates, the dog-morph pulls you close by the shoulders to whisper into your [earDesc], <i>“Bet you can’t wait for us to have a duck down a dark corner.</i>", parse);

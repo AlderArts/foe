@@ -3411,7 +3411,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 				parse["oneof"] = player.NumCocks() > 1 ? " one of" : "";
 				parse["s"] = player.NumCocks() > 1 ? "s" : "";
 				
-				if(kiakai.flags["Sexed"] < 10) {
+				if(kiakai.flags["Sexed"] < 3) {
 					Text.AddOutput("<i>\"A-a blowjob?\"</i> [name] looks at you, flustered and embarrassed. <i>\"I want you-\"</i> You point a finger at the elf, pressing your fingertip against [hisher] nose, <i>\"-to suck my cock.\"</i> You helpfully point out the appendage, as if [heshe] could miss it. <i>\"Now get to it before I grow bored.\"</i> You motion for the elf to begin.", parse);
 					Text.Newline();
 					Text.AddOutput("Uncertainly eyeing[oneof] your [multiCockDesc], [name] leans forward and gives it a tentative lick, placing a kiss on the crown. Sighing impatiently, you grasp the back of [hisher] head firmly, forcing the first few inches of your [cockDesc] into the protesting elf's hot mouth.", parse);
