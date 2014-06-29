@@ -75,3 +75,16 @@ Terry.prototype.ToStorage = function() {
 
 Scenes.Terry = {};
 
+Scenes.Terry.ExploreGates = function() {
+	
+}
+Scenes.Terry.ExploreResidential = function() {
+	
+}
+Scenes.Terry.ExploreMerchants = function() {
+	
+}
+Scenes.Terry.ExplorePlaza = function() {
+	
+}
+

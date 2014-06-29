@@ -101,6 +101,9 @@ function Rigard(storage) {
     this.KrawitzWorkDay  = null; // Time
 	this.Krawitz["Duel"] = 0; // 0 = no, 1 = superwin, 2 = win, 3 = loss
 	
+	this.Brothel = {};
+	this.Brothel["Visit"] = 0;
+	
 	if(storage) this.FromStorage(storage);
 }
 

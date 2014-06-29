@@ -2,30 +2,6 @@
 
 
 
-//TODO: Split doc
-//
-// Brothel
-//
-world.loc.Rigard.Brothel.brothel.description = function() {
-	Text.AddOutput("You are in brothel (Shadow Lady).<br/>");
-}
-
-world.loc.Rigard.Brothel.brothel.links.push(new Link(
-	"Outside", true, true,
-	function() {
-		Text.AddOutput("Go outside?<br/>");
-	},
-	function() {
-		MoveToLocation(world.loc.Rigard.Residental.street);
-	}
-));
-
-world.loc.Rigard.Brothel.brothel.endDescription = function() {
-	Text.AddOutput("What you do?<br/>");
-}
-
-
-
 //
 // Residential area
 //
@@ -44,7 +20,7 @@ world.loc.Rigard.Residental.street.description = function() {
 world.loc.Rigard.Residental.street.enc = new EncounterTable();
 world.loc.Rigard.Residental.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
 world.loc.Rigard.Residental.street.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
-
+world.loc.Rigard.Residental.street.enc.AddEnc(function() { return Scenes.Terry.ExploreResidential; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
 world.loc.Rigard.Residental.street.onEntry = function() {
 	
 	// TODO
@@ -115,7 +91,7 @@ world.loc.Rigard.Residental.street.links.push(new Link(
 		Text.NL();
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.Brothel.brothel);
+		MoveToLocation(world.loc.Rigard.Brothel.brothel, {minute: 5});
 	}
 ));
 world.loc.Rigard.Residental.street.links.push(new Link(

@@ -35,6 +35,7 @@ world.loc.Rigard.Gate.description = function() {
 world.loc.Rigard.Gate.enc = new EncounterTable();
 world.loc.Rigard.Gate.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
 world.loc.Rigard.Gate.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
+world.loc.Rigard.Gate.enc.AddEnc(function() { return Scenes.Terry.ExploreGates; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
 world.loc.Rigard.Gate.onEntry = function() {
 	if(Math.random() < 0.2)
 		Scenes.Rigard.Chatter(true);
