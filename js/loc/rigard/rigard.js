@@ -427,12 +427,12 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		Text.Newline();
 		Text.AddOutput("<i>\"Oh? How'd it go?\"</i>", parse);
 		Text.Newline();
-		if(rigard.flags["Duel"] == 1) {
+		if(rigard.Krawitz["Duel"] == 1) {
 			Text.AddOutput("<i>\"He got annihilated! I heard his clothes were in shreds and he has a scar on his cheek to show for the trouble.\"</i>", parse);
 			Text.Newline();
 			Text.AddOutput("The [NPC2] beams happily. <i>\"It's about time someone showed that bastard what for!\"</i>", parse);
 		}
-		else if(rigard.flags["Duel"] == 2) {
+		else if(rigard.Krawitz["Duel"] == 2) {
 			Text.AddOutput("<i>\"I was told it was a spectacular fight! His opponent just barely managed to beat him in the end, and he was just really angry and slunk off.\"</i>", parse);
 			Text.Newline();
 			Text.AddOutput("The [NPC2] smiles in pleasure. <i>\"It's about time someone put that bastard in his place.\"</i>", parse);
@@ -442,7 +442,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 			Text.Newline();
 			Text.AddOutput("The [NPC2] shakes [hisher2] head in disappointment. <i>\"He might be a bastard, but you have to hand it to him - he's a master with that blade.\"</i>", parse);
 		}
-	}, 1.0, function() { return rigard.flags["Duel"] != 0; });
+	}, 1.0, function() { return rigard.Krawitz["Duel"] != 0; });
 	// TODO: MORE RUMORS AFTER NIGHT INFILTRATION
 	scenes.Get();
 	
