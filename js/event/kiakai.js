@@ -5822,12 +5822,12 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 				Text.Add("", parse);
 				Text.Flush();
 				
+				world.TimeStep({hour: 1});
 				player.AddLustFraction(-1);
 				kiakai.AddLustFraction(-1);
 				kiakai.subDom.DecreaseStat(-75, 2);
 				player.subDom.IncreaseStat(40, 1);
 				kiakai.flags["SexCatchAnal"] = 1;
-				world.TimeStep({hour: 1});
 				Gui.NextPrompt();
 			});
 		}, enabled : true,
@@ -5956,12 +5956,12 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 				
 				Text.Flush();
 				
+				world.TimeStep({hour: 1});
 				player.AddLustFraction(-1);
 				kiakai.AddLustFraction(-1);
 				kiakai.subDom.IncreaseStat(25, 1);
 				kiakai.relation.IncreaseStat(75, 1);
 				kiakai.flags["SexCatchAnal"] = 1;
-				world.TimeStep({hour: 1});
 				Gui.NextPrompt();
 			});
 		}, enabled : true,
@@ -6210,13 +6210,13 @@ Scenes.Kiakai.AnalCatchFinish = function() {
 	Text.Add("You spend a good quarter of an hour cuddled together before regretfully parting to gather your gear. Once you are cleaned up and equipped, you set out for your next destination.", parse);
 	
 	Text.Flush();
-				
+	
+	world.TimeStep({hour: 1});
 	player.AddLustFraction(-1);
 	kiakai.AddLustFraction(-1);
 	kiakai.subDom.IncreaseStat(50, 3);
 	player.subDom.DecreaseStat(-40, 1);
 	kiakai.flags["SexCatchAnal"] = 1;
-	world.TimeStep({hour: 1});
 	
 	Gui.NextPrompt();
 }
