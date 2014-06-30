@@ -606,10 +606,10 @@ Scenes.Fera.SexPrompt = function() {
 					Text.AddOutput("Afterwards, she helps you get dressed and leads you out.", parse);
 				}
 				
+				world.TimeStep({minute: 30});
 				player.AddSexExp(1);
 				player.AddLustFraction(-1);
 				fera.relation.IncreaseStat(20, 2);
-				world.TimeStep({minute: 30});
 			}
 			
 			Gui.NextPrompt(Scenes.Fera.Interact);
@@ -633,10 +633,10 @@ Scenes.Fera.SexPrompt = function() {
 				Text.Newline();
 				Text.AddOutput("<i>\"Thanks, [playername]. That felt really good...\"</i> she says as she fixes her dress. You kiss and head back into the store.", parse);
 				
+				world.TimeStep({minute: 30});
 				player.AddSexExp(1);
 				player.AddLustFraction(0.3);
 				fera.relation.IncreaseStat(30, 2);
-				world.TimeStep({minute: 30});
 				Gui.NextPrompt(Scenes.Fera.Interact);
 			}, enabled : true,
 			tooltip : "Eat out Fera."
@@ -718,9 +718,9 @@ Scenes.Fera.SexPrompt = function() {
 				
 				player.AddSexExp(1);
 				
+				world.TimeStep({minute: 30});
 				player.AddLustFraction(-1);
 				fera.relation.IncreaseStat(20, 2);
-				world.TimeStep({minute: 30});
 				Gui.NextPrompt(Scenes.Fera.Interact);
 			}, enabled : player.FirstVag() || player.FirstCock(),
 			tooltip : "Ask Fera to service you."
@@ -763,9 +763,9 @@ Scenes.Fera.SexPrompt = function() {
 					Text.AddOutput(". With small gulps she slowly swallows it all, taking time to savor her favorite salty treat. After she's done, she licks the rest of your [multiCockDesc][balls] clean, and grabs one of the rags under the small bench to wipe off the walls. You get your [lowerArmorDesc] back on, and give her a kiss. Together, you exit the dressing room.", parse);
 				}
 				
+				world.TimeStep({minute: 30});
 				player.AddLustFraction(-1);
 				fera.relation.IncreaseStat(20, 2);
-				world.TimeStep({minute: 30});
 				Gui.NextPrompt(Scenes.Fera.Interact);
 			}, enabled : player.FirstCock(),
 			tooltip : Text.Parse("Have Fera please you with her [fbreastDesc].", parse)
@@ -822,9 +822,9 @@ Scenes.Fera.SexPrompt = function() {
 					Text.AddOutput("You help each other get dressed and you kiss her again before you leave. <i>\"If you want to do it again... let me know,\"</i> she says quietly. The two of you exit the dressing room together and return to the main area of the store.", parse);
 				}
 			
+				world.TimeStep({minute: 30});
 				player.AddLustFraction(-1);
 				fera.relation.IncreaseStat(100, 3);
-				world.TimeStep({minute: 30});
 				Gui.NextPrompt(Scenes.Fera.Interact);
 			}, enabled : cocksInVag.length >= 1,
 			tooltip : "Have sex with Fera."
@@ -885,9 +885,9 @@ Scenes.Fera.SexPrompt = function() {
 				}
 				
 				fera.flags["Standing"]++;
+				world.TimeStep({minute: 30});
 				player.AddLustFraction(-1);
 				fera.relation.IncreaseStat(100, 2);
-				world.TimeStep({minute: 30});
 				Gui.NextPrompt(Scenes.Fera.Interact);
 			}, enabled : cocksInVag.length >= 1,
 			tooltip : "Do it while standing."
@@ -950,9 +950,9 @@ Scenes.Fera.SexPrompt = function() {
 				}
 				
 				fera.flags["Behind"]++;
+				world.TimeStep({minute: 30});
 				player.AddLustFraction(-1);
 				fera.relation.IncreaseStat(100, 2);
-				world.TimeStep({minute: 30});
 				Gui.NextPrompt(Scenes.Fera.Interact);
 			}, enabled : cocksInVag.length >= 1,
 			tooltip : "Fuck her from behind."
@@ -1032,9 +1032,9 @@ Scenes.Fera.SexPrompt = function() {
 					}
 
 					fera.flags["Anal"]++;
+					world.TimeStep({minute: 30});
 					player.AddLustFraction(-1);
 					fera.relation.IncreaseStat(100, 2);
-					world.TimeStep({minute: 30});
 					Gui.NextPrompt(Scenes.Fera.Interact);
 				}, enabled : cocksInAss.length >= 1,
 				tooltip : "Fuck Fera's ass."
@@ -1099,9 +1099,9 @@ Scenes.Fera.SexPrompt = function() {
 						Text.Newline();
 						Text.AddOutput("Once you're clean, you grab a rag and help her clean up, grabbing your [lowerArmorDesc][toparmor]. After helping each other get dressed, you hug the cute catgirl tightly. <i>\"Come visit again soon, [playername],\"</i> she tells you as you leave the dressing room with her.", parse);
 					}
+					world.TimeStep({minute: 30});
 					player.AddLustFraction(-1);
 					fera.relation.IncreaseStat(100, 2);
-					world.TimeStep({minute: 30});
 					Gui.NextPrompt(Scenes.Fera.Interact);
 				}, enabled : cocksInVag.length >= 1,
 				tooltip : "Have Fera sit on your lap and ride you."
