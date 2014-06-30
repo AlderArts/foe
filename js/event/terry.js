@@ -679,6 +679,8 @@ Scenes.Terry.Release = function() {
 		armorTopDesc : function() { return player.ArmorDesc(); }
 	};
 	
+	terry.flags["Saved"] = Terry.Saved.Saved;
+	
 	Text.Clear();
 	Text.Add("<i>”Halt! What business do you have here?”</i> You are quickly stopped by a guard as you approach the entrance to the jail. Remembering the letter that Rumi gave you, you fish through your belongings and retrieve it. Adopting your best officious expression, you present it to the guard on duty.", parse);
 	Text.NL();

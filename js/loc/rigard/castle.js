@@ -47,6 +47,13 @@ world.loc.Rigard.Castle.Grounds.links.push(new Link(
 		MoveToLocation(world.loc.Rigard.Castle.MageTower);
 	}
 ));
+world.loc.Rigard.Castle.Grounds.links.push(new Link(
+	"Jail", function() { return terry.flags["Saved"] == Terry.Saved.TalkedTwins2; }, true,
+	null,
+	function() {
+		Scenes.Terry.Release();
+	}
+));
 world.loc.Rigard.Castle.Grounds.endDescription = function() {
 	Text.Flush();
 }
