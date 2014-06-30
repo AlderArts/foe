@@ -55,6 +55,7 @@ function Miranda(storage) {
 
 	this.flags["public"]   = 0;
 	this.flags["Dates"]    = 0;
+	this.flags["Cellar"]   = 0;
 	
 	if(storage) this.FromStorage(storage);
 }

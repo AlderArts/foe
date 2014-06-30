@@ -495,6 +495,10 @@ Entity.prototype.ItemUse = function(item, backPrompt) {
 	return {grab : false, consume : true};
 }
 
+Entity.prototype.Strapon = function() {
+	return this.strapOn;
+}
+
 Entity.prototype.AddExp = function(exp) {
 	if(DEBUG) {
 		Text.NL();
