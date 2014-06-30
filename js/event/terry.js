@@ -315,6 +315,8 @@ Scenes.Terry.CaughtTheThief = function() {
 		masterMistress : player.mfTrue("master", "mistress")
 	};
 	
+	rigard.Krawitz["Q"] = Rigard.KrawitzQ.CaughtTerry;
+	
 	var dom = player.SubDom() - miranda.SubDom();
 	
 	Text.Clear();

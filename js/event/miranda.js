@@ -1450,6 +1450,32 @@ Scenes.Miranda.Chat = function() {
 		}, enabled : true,
 		tooltip : "Just chat for a while."
 	});
+	if((rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry) && (terry.flags["Saved"] == Terry.Saved.NotStarted)) {
+		options.push({ nameStr : "Thief",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”The thief? Why do you care?”</i>", parse);
+				Text.NL();
+				Text.Add("<i>”Just curious,”</i> you reply.", parse);
+				Text.NL();
+				Text.Add("<i>”Little bastard’s been sentenced to death. He had a long list of infractions, plus he pissed off the higher-ups. And let’s not forget the fact that he’s a morph to boot, ”</i> Miranda explains.", parse);
+				Text.NL();
+				if(rigard.Krawitz["F"] != 0)
+					Text.Add("...Okay, now you really feel guilty for shifting blame onto the fox, even if he <b>is</b> a thief himself. ", parse);
+				Text.Add("You ask Miranda when he’s going to be executed.", parse);
+				Text.NL();
+				Text.Add("<i>”Not in a while, I s’pose they want to beat him up a bit before ending it all,”</i> she takes another swig and slams her mug down on the table. <i>”Bah, let’s talk about something else. I don’t wanna think about how those assholes from the royal guard stole my credit for catching the little bastard.”</i>", parse);
+				Text.NL();
+				Text.Add("Maybe you should do something about that fox’s execution. Perhaps the royal twins might be willing to help?", parse);
+				Text.Flush();
+				
+				terry.flags["Saved"] = Terry.Saved.TalkedMiranda;
+				
+				Gui.NextPrompt();
+			}, enabled : true,
+			tooltip : "Ask Miranda about the thief the two of you caught."
+		});
+	}
 	
 	// TODO: Restructure this...
 	
