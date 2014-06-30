@@ -671,3 +671,156 @@ Scenes.Terry.CaughtTheThief = function() {
 		});
 	});
 }
+
+Scenes.Terry.Release = function() {
+	var parse = {
+		playername : player.name,
+		masterMistress : player.mfTrue("master", "mistress"),
+		armorTopDesc : function() { return player.ArmorDesc(); }
+	};
+	
+	Text.Clear();
+	Text.Add("<i>”Halt! What business do you have here?”</i> You are quickly stopped by a guard as you approach the entrance to the jail. Remembering the letter that Rumi gave you, you fish through your belongings and retrieve it. Adopting your best officious expression, you present it to the guard on duty.", parse);
+	Text.NL();
+	Text.Add("The guard examines the seal of the letter before breaking it open and reading its contents. Once finished he returns the letter and mutters, <i>”Lucky mutt...”</i>", parse);
+	Text.NL();
+	if(party.InParty(miranda)) {
+		Text.Add("You tell Miranda to hold back a bit. You don’t think it’d be a good idea to have her meet the thief right now.", parse);
+		Text.NL();
+	}
+	
+	Text.Add("He procures a keychain from his belt, and unlocks the door leading to the cells. <i>”Follow me.”</i>", parse);
+	Text.NL();
+	Text.Add("The two of you walk towards the back of the jail, passing through two more doors before arriving at an empty area where the guards leads you to a cell. Inside you see the fox thief, resting on his cot and looking at the roof. <i>”Hey mutt! Today’s your lucky day. Your ticket out of here has arrived.”</i>", parse);
+	Text.NL();
+	Text.Add("The fox chuckles at that. <i>“Yeah right, ain’t I lucky...”</i>", parse);
+	Text.NL();
+	Text.Add("Turning to you, the guard says, <i>“I’ll leave you two to socialize while I fetch his belongings.”</i> Having said that, he promptly turns on his heels and walks away.", parse);
+	Text.NL();
+	Text.Add("Stretching languidly, he moves to get himself up. <i>”Alright, let’s meet my bene-”</i> as soon as his eyes set on you he stops dead in his tracks. <i>”You!”</i>", parse);
+	Text.NL();
+	Text.Add("So, he remembers you then?", parse);
+	Text.NL();
+	if(terry.flags["Met"] == Terry.Met.LetHer) {
+		Text.Add("<i>”You let that dog rape me! What’re you here for? Want to finish what you started?”</i>", parse);
+		Text.NL();
+		Text.Add("You tell him that, actually, no; you came to see him released.", parse);
+		Text.NL();
+		Text.Add("<i>”Oh I get it. You’re going to let that dog have another go at me! What are you? Some kind of sick voyeur?”</i>", parse);
+		Text.NL();
+		Text.Add("Miranda isn't even here, you inform him. This is a bail-out, pure and simple.", parse);
+	}
+	else if(terry.flags["Met"] == Terry.Met.StopHer) {
+		Text.Add("<i>”Why are releasing me? Weren’t you working with that dog to have me arrested?”</i>", parse);
+		Text.NL();
+		Text.Add("You admit that's true, but circumstances have changed.", parse);
+		Text.NL();
+		Text.Add("<i>”What do you mean, circumstances have changed? That dog… oh no, she’s not here is she?”</i>", parse);
+		Text.NL();
+		Text.Add("You assure him that Miranda isn't here. It's just you and him now.", parse);
+	}
+	else {
+		Text.Add("<i>”You were going to rape me along with that dog! Why the hell are you here? Came to finish what you started?”</i>", parse);
+		Text.NL();
+		Text.Add("You reply that your actual intention was to save his life, but if he wants to pick up where the two of you were left off...", parse);
+		Text.NL();
+		Text.Add("<i>”Hell no! Keep your hands to yourself, I’m not going!”</i>", parse);
+		Text.NL();
+		Text.Add("So, he'd rather wait here for the executioner's axe? Or noose, or whatever it is they have planned for him? ", parse);
+		Text.NL();
+		Text.Add("<i>”No, but-”</i>", parse);
+		Text.NL();
+		Text.Add("Before he can get any further, you interrupt him. You're not going to make any excuses for what happened at the warehouse, but right now, all you intend is to get him out of jail and save his life. He can either trust you and keep his neck, or stay here and be executed.", parse);
+	}
+	Text.NL();
+	Text.Add("The fox looks at you with distrust for a few moments, but then he visibly calms down. <i>”I suppose I don’t have a choice.”</i>", parse);
+	Text.NL();
+	Text.Add("That’s better. That wasn’t so difficult now, was it?", parse);
+	Text.NL();
+	Text.Add("<i>”They’re calling away the death sentence… what’s the catch?”</i> he asks.", parse);
+	Text.NL();
+	Text.Add("As part of the terms for his release, he needs to wear this, you inform him as you show him the collar. It has an enchantment in it that will prevent him from disobeying any command you give him, as well as preventing him from escaping. He needs to wear this before you can take him out of the cell. Having explained it, you hold it out to him and instruct him to fasten it around his neck.", parse);
+	Text.NL();
+	Text.Add("The fox thief takes the collar, examining it in his hands. He looks at you, then back at the collar, obviously unsure if this is actually better than a death sentence. Finally with a sigh, he acquiesces and puts the collar around his neck. <i>”Tch, out of the pan and into the fire...”</i> he mumbles as he connects the iron tips, holding the collar around his neck. It looks a bit loose… maybe if he tried he could get it off? Still you resolve to trust the twins’ word.", parse);
+	Text.NL();
+	Text.Add("You promptly say the word ‘Featherfall’, as you were instructed before.", parse);
+	Text.NL();
+	Text.Add("The collar emanates a faint pink glow, tightening up until it’s snug against the fox’s neck. He tries to grip the collar, scared that it might tighten enough to strangle him, but he’s ultimately unable to stop the magic from running its course. He moves to undo the binding, but the metallic tips refuse to let go. Seems like the enchantment worked its magic, literally. <i>”There, it’s on,”</i> he says with disdain. <i>”I suppose you want me to call you [masterMistress] now?”</i>", parse);
+	Text.NL();
+	Text.Add("You think the matter over, and then tell him that he doesn’t have to. You might change your mind later, but for now, [playername] is all you expect him to call you.", parse);
+	Text.NL();
+	Text.Add("The guard returns, carrying with him a bag containing the thief’s stuff. <i>Here.</i> He hands it to you. <i>”Are you done yet? Can I open the cell?”</i>", parse);
+	Text.NL();
+	Text.Add("Yes, you reply. The guardsmen takes a key and twists it in the lock, opening the door. Without so much as a word, he takes the fox by the shoulder and shove him out of the cell and in your direction. <i>”He’s all yours, now get this mangy mutt out of my jail. Gonna have to kill all the fleas he left behind.”<i>", parse);
+	Text.NL();
+	Text.Add("<i>”Don’t worry, I’m pretty sure your stench will do the job just fine,”</i> he quips back pinching his nose.", parse);
+	Text.NL();
+	Text.Add("Seeing the guard's angry expression, you tell your new... recruit... to follow you, before turning and heading for the jail's exit.", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 30});
+	
+	Gui.NextPrompt(function() {
+		Text.Clear();
+		
+		party.location = world.loc.Rigard.Plaza;
+		
+		Text.Add("Once you’re back in the city, the fox pulls on your [armorTopDesc]. <i>”Hey, do you mind if I duck out in an alleyway to get dressed? These prison clothes are all itchy,”</i> he scratches his arm for emphasis.", parse);
+		Text.NL();
+		Text.Add("After a moment's thought, you tell him that'd be fine, privately trusting that the collar's magic will work as you were promised.", parse);
+		Text.NL();
+		Text.Add("<i>”Some privacy?”</i> he asks with a raised brow.", parse);
+		Text.NL();
+		Text.Add("A little less certainly, you nod your head and turn around, pointedly looking away from the effeminate fox-morph.", parse);
+		Text.NL();
+		Text.Add("You hear the sound of ruffling cloth for a few moment, before he says, <i>”Done.”</i>", parse);
+		Text.NL();
+		Text.Add("Turning around, you take a good long look at the newly re-garbed fox. He's traded his former barmaid's dress and leather armor for a simple but good quality tunic and pants, both a little on the tight side. A leather cuirass drapes over his torso, and it looks like the guard even gave him back his chest holster, whilst his paw-like feet have been squeezed into knee-high leather boots.", parse);
+		Text.NL();
+		Text.Add("<i>”This isn’t as good as my previous gear, but it’ll have to do. Bet the bastard didn’t even look to see if it was the right bag… Thank Aria it fits.”</i> He kicks the bag and the prison clothes into a corner. <i>”Thanks chief.”</i>", parse);
+		Text.NL();
+		Text.Add("You inform him that it's no problem. Better he wasn't walking around in a prisoner's outfit anyway.", parse);
+		Text.NL();
+		Text.Add("As the two of you continue to walk in silence, he moves to walk beside you. <i>”Y’know, I didn’t really thank you for saving my neck. ", parse);
+		if(terry.flags["Met"] == Terry.Met.StopHer)
+			Text.Add("And for protecting me from that dog. ", parse);
+		Text.Add("They say you should never look a gift horse in the mouth, but after our little encounter in the warehouse you gotta understand, I had my doubts.”</i>", parse);
+		Text.NL();
+		Text.Add("You tell him that's understandable.", parse);
+		Text.NL();
+		Text.Add("<i>”By the way, my name is Theodore. But everyone just calls me Terry. Thanks for rescuing me, [playername].”</i>", parse);
+		Text.NL();
+		Text.Add("Terry, huh? Well, it's no problem, you inform him; you couldn't let him get killed for stealing from the likes of Krawitz.", parse);
+		Text.NL();
+		Text.Add("<i>”So… out of curiosity, what exactly happens if I disobey you or try to run?”</i> he asks, tail swaying behind.", parse);
+		Text.NL();
+		parse["j"] = jeanne.flags["Met"] != 0 ? "Jeanne, " : "";
+		Text.Add("You consider it for a moment, then finally decide to tell him the truth, admitting you don't really know. But you know the collar was made by [j]the Royal Court Mage, so he can probably figure it out himself.", parse);
+		Text.NL();
+		Text.Add("<i>”I see… so I guess I’m at your mercy. Lead away then?”</i>", parse);
+		if(party.InParty(miranda)) {
+			Text.NL();
+			Text.Add("Terry looks a bit nervous as you set out, constantly looking around as if he was being watched. His fears turn out to be justified, as Miranda steps out from a side street, a wide grin on her face.", parse);
+			Text.NL();
+			Text.Add("<i>”So the little thief is roaming the streets again, guess that means you are fair game!”</i> You tell her to stop teasing Terry, and introduce him to her.", parse);
+			Text.NL();
+			Text.Add("<i>”W-w-what?! She’s with you? B-but you said-!”</i> Terry swivels this way and that, desperately looking for a way to escape. You tell him to calm down, and remind him of the collar. For a moment, the effeminate fox looks like he’s going to chance it, but then he lowers his head, shuffling to stand behind you.", parse);
+			Text.NL();
+			Text.Add("You explain that Miranda is travelling together with you, and he’ll just have to deal with that.", parse);
+			Text.NL();
+			Text.Add("<i>”I don’t see how I could,”</i> he mutters. The former prisoner looks more miserable than when he was on death row, however that is possible. Miranda teases him a bit more, but eventually leaves the unhappy fox alone.", parse);
+			Text.NL();
+			Text.Add("Looks like his hopes for the future just took a dive into the gutter.", parse);
+			
+			terry.relation.DecreaseStat(-100, 10);
+		}
+		
+		terry.name = "Terry";
+		terry.avatar.combat = Images.terry_c;
+		party.AddMember(terry);
+		
+		Text.Flush();
+		
+		Gui.NextPrompt();
+	});
+}
