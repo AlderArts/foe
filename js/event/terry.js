@@ -92,6 +92,26 @@ Terry.prototype.ToStorage = function() {
 	return storage;
 }
 
+Terry.prototype.Act = function(encounter, activeChar) {
+	// TODO: AI!
+	Text.AddOutput("The thief hops around nimbly.");
+	Text.Newline();
+	
+	// Pick a random target
+	var t = this.GetSingleTarget(encounter, activeChar);
+	
+	
+	var choice = Math.random();
+	/*
+	if(choice < 0.2 && Abilities.Physical.Bash.enabledCondition(encounter, this))
+		Abilities.Physical.Bash.CastInternal(encounter, this, t);
+	else if(choice < 0.4 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
+		Abilities.Physical.CrushingStrike.CastInternal(encounter, this, t);
+	else
+	*/
+		Abilities.Attack.CastInternal(encounter, this, t);
+}
+
 Scenes.Terry = {};
 
 Scenes.Terry.ExploreGates = function() {
@@ -297,7 +317,26 @@ Scenes.Terry.CombatVsMiranda = function() {
 		Text.Add("You nod and follow after Miranda.", parse);
 		Text.Flush();
 		
+		world.TimeStep({minute: 30});
+		
 		party.RestFull();
+		
+		// Move Terry
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			terry.hidingSpot = world.loc.Rigard.Gate;
+		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Gate; });
+		scenes.AddEnc(function() {
+			terry.hidingSpot = world.loc.Rigard.Residental.street;
+		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Residental.street; });
+		scenes.AddEnc(function() {
+			terry.hidingSpot = world.loc.Rigard.ShopStreet.street;
+		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.ShopStreet.street; });
+		scenes.AddEnc(function() {
+			terry.hidingSpot = world.loc.Rigard.Plaza;
+		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Plaza; });
+		
+		scenes.Get();
 		
 		Gui.NextPrompt();
 	}
@@ -336,6 +375,8 @@ Scenes.Terry.CaughtTheThief = function() {
 		Text.Add("<i>”I… I hid it in a warehouse in the merchant district!”</i> she squeaks, eyeing Miranda fearfully.", parse);
 	Text.Flush();
 	
+	world.TimeStep({minute: 30});
+	
 	Gui.NextPrompt(function() {
 		Text.Clear();Text.Add("Following the thief’s directions, you make your way into the appointed warehouse. The doors are locked, not that it makes any difference. Miranda shatters the lock, and latch, with a well placed kick, making both you and the thieving vixen cringe. ", parse);
 		Text.NL();
@@ -359,6 +400,8 @@ Scenes.Terry.CaughtTheThief = function() {
 		Text.NL();
 		Text.Add("You realise that Miranda's serious about this; she's in one of her moods again. What should you do?", parse);
 		Text.Flush();
+		
+		world.TimeStep({minute: 30});
 		
 		//[LetHer][StopHer][TakeHim]
 		var options = new Array();
