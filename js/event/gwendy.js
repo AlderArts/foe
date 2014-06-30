@@ -1077,8 +1077,8 @@ Scenes.Gwendy.ChallengeSexHands = function(cock, hangout) {
 	
 	Text.Flush();
 	
-	player.AddLustFraction(-1);
 	world.TimeStep({minute: 20});
+	player.AddLustFraction(-1);
 	
 	Gui.NextPrompt();
 }
@@ -1178,8 +1178,8 @@ Scenes.Gwendy.ChallengeSexBody = function(titjob, hangout) {
 		
 		Text.Flush();
 		
-		player.AddLustFraction(-1);
 		world.TimeStep({minute: 30});
+		player.AddLustFraction(-1);
 		
 		Gui.NextPrompt();
 	}
@@ -1250,8 +1250,8 @@ Scenes.Gwendy.ChallengeSexBody = function(titjob, hangout) {
 		Text.Add("But, keeping to your internal promise, you only do this to tease her. After a few moments, you stop moving your fingers, but leave them in and settle on lightly spanking Gwendy. Based on the the clenching felt around your fingers, she's getting a bit too close to orgasm, so you withdraw your hand altogether.", parse);
 		Text.NL();
 		
-		player.AddLustFraction(0.5);
 		world.TimeStep({minute: 30});
+		player.AddLustFraction(0.5);
 		
 		if(!hangout) {
 			Text.Add("As her body recovers from nearly orgasming, you tease her while she gets dressed, saying she's even more of a slut than you figured. She starts to voice a complaint, but you remind her of the pants and moans she made while you kissed and touched her, saying only a slut could get off to that. Before she can say anything in her defense you leave, glad her fiery attitude is still alive. A challenge is what you live for, right?", parse);
@@ -1431,8 +1431,8 @@ Scenes.Gwendy.ChallengeSexOral = function(blow, hangout) {
 	
 	Text.Flush();
 	
-	player.AddLustFraction(-1);
 	world.TimeStep({minute: 30});
+	player.AddLustFraction(-1);
 	
 	Gui.NextPrompt();
 }
@@ -1586,8 +1586,8 @@ Scenes.Gwendy.ChallengeSexVag = function(fuck, hangout) {
 	
 	Text.Flush();
 	
-	player.AddLustFraction(-1);
 	world.TimeStep({minute: 30});
+	player.AddLustFraction(-1);
 	
 	Gui.NextPrompt();
 }
@@ -1800,8 +1800,8 @@ Scenes.Gwendy.ChallengeSexAnal = function(toys, hangout) {
 		
 		Text.Flush();
 		
-		player.AddLustFraction(-1);
 		world.TimeStep({minute: 30});
+		player.AddLustFraction(-1);
 		
 		Gui.NextPrompt();
 	}
@@ -1999,8 +1999,8 @@ Scenes.Gwendy.ChallengeSexAnalToys = function(toy, hangout, first) {
 			
 			Text.Flush();
 			
-			player.AddLustFraction(0.2);
 			world.TimeStep({minute: 30});
+			player.AddLustFraction(0.2);
 			
 			Gui.NextPrompt();
 		});
@@ -2088,8 +2088,8 @@ Scenes.Gwendy.ChallengeSexAnalToys = function(toy, hangout, first) {
 		
 		Text.Flush();
 		
-		player.AddLustFraction(-1);
 		world.TimeStep({minute: 30});
+		player.AddLustFraction(-1);
 		
 		Gui.NextPrompt();
 	}
@@ -2133,6 +2133,7 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout, options) {
 			func : function() {
 				Text.Clear();
 				
+				world.TimeStep({minute: 30});
 				player.AddLustFraction(0.1);
 				if(hangout) {
 					Text.AddOutput("Smiling delightfully, Gwendy leans in, pressing her lips against your. You moan gently as her soft, full lips explore your own.", parse);
@@ -2202,6 +2203,7 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout, options) {
 					Text.NL();
 				}
 
+				world.TimeStep({minute: 30});
 				player.AddLustFraction(0.5);
 				
 				if(hangout) {
@@ -2331,6 +2333,7 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout, options) {
 
 				Text.Add("The voice is playful, but does little to mask the obvious threat she’s laid out. As best you can, you get dressed and leave in haste, not wanting to risk incurring her sexual wrath on you.", parse);
 				
+				world.TimeStep({hour: 1});
 				player.AddLustFraction(0.9);
 				Text.Flush();
 				
