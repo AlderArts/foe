@@ -375,7 +375,7 @@ world.loc.Plains.Gate.description = function() {
 	if(miranda.IsAtLocation())
 		Scenes.Miranda.RigardGatesDesc();
 	else {
-		Text.Add("There is a guard you don’t know stationed at the gates. They greet you, with a bored look on their face.");
+		Text.Add("There is a guard you don’t know stationed at the gates. He greets you with a bored look on his face.");
 		Text.NL();
 	}
 	
