@@ -1851,8 +1851,8 @@ Scenes.Gwendy.ChallengeSexAnalToys = function(toy, hangout, first) {
 		
 		Text.Flush();
 		
-		player.AddLustFraction(-1);
 		world.TimeStep({minute: 30});
+		player.AddLustFraction(-1);
 		
 		Gui.NextPrompt();
 	}
@@ -1863,8 +1863,8 @@ Scenes.Gwendy.ChallengeSexAnalToys = function(toy, hangout, first) {
 		
 		Text.Flush();
 		
-		player.AddLustFraction(-1);
 		world.TimeStep({minute: 30});
+		player.AddLustFraction(-1);
 		
 		Gui.NextPrompt();
 	}
