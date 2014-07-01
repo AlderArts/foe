@@ -1456,7 +1456,7 @@ Scenes.Rigard.LB.GotoRoom = function() {
 						Text.Flush();
 						Scenes.Rigard.LB.RegularRoom(comp);
 					}, enabled : true,
-					tooltip : "Have [comp] stay with you tonight."
+					tooltip : Text.Parse("Have [comp] stay with you tonight.", parse)
 				});
 			}
 			options.push({ nameStr : "No one",
