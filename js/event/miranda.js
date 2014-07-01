@@ -697,6 +697,8 @@ Scenes.Miranda.RigardGatesBribe = function() {
 				}, 1.0, function() { return audience; });
 				
 				scenes.Get();
+				
+				world.TimeStep({hour: 1});
 
 				Text.NL();
 				Text.Add("The guardswoman is not quite done with you, further breaking down your anal defenses but repeatedly pulling her knot out of your [anusDesc], followed by slamming it home again. Just like with the initial penetration, the pain soon gives way to pleasure so intense you fear it will break your mind.", parse);
@@ -728,11 +730,12 @@ Scenes.Miranda.RigardGatesBribe = function() {
 					Text.Add("<i>”I wonder how many times I have to come before it comes out the other end,”</i> Miranda ponders, rubbing your [stomachDesc]. From the tone in her voice, you can tell it isn’t just her making a jab at you, she really wants to know. You just hope she doesn’t decide to test it.", parse);
 				Text.Flush();
 				
+				player.AddLustFraction(-1);
+				miranda.AddLustFraction(-1);
 				miranda.relation.IncreaseStat(50, 1);
 				miranda.subDom.IncreaseStat(100, 1);
 				player.subDom.DecreaseStat(-100, 1);
 				player.slut.IncreaseStat(80, 1);
-				world.TimeStep({hour: 1});
 				
 				miranda.flags["gAnal"]++;
 				
@@ -1777,11 +1780,10 @@ Scenes.Miranda.JustOneMore = function() {
 							miranda.relation.IncreaseStat(100, 10);
 							miranda.subDom.DecreaseStat(-100, 10);
 							
-							player.AddLustFraction(-1);
-							miranda.AddLustFraction(-1);
-							
 							Gui.NextPrompt(function() {
 								MoveToLocation(world.loc.Rigard.Slums.gate, {hour: 4});
+								player.AddLustFraction(-1);
+								miranda.AddLustFraction(-1);
 							});
 						}, enabled : true,
 						tooltip : "While it might not be what she was hoping for, you got just the thing to fill her."
@@ -1839,11 +1841,10 @@ Scenes.Miranda.JustOneMore = function() {
 						miranda.relation.IncreaseStat(100, 10);
 						miranda.subDom.IncreaseStat(100, 10);
 						
-						player.AddLustFraction(-1);
-						miranda.AddLustFraction(-1);
-						
 						Gui.NextPrompt(function() {
 							MoveToLocation(world.loc.Rigard.Slums.gate, {hour: 4});
+							player.AddLustFraction(-1);
+							miranda.AddLustFraction(-1);
 						});
 					}, enabled : true,
 					tooltip : "Give her relief by riding her thick cock."
@@ -1912,11 +1913,11 @@ Scenes.Miranda.JustOneMore = function() {
 						miranda.relation.IncreaseStat(100, 15);
 						miranda.subDom.IncreaseStat(100, 20);
 						
-						player.AddLustFraction(-1);
-						miranda.AddLustFraction(-1);
 						
 						Gui.NextPrompt(function() {
 							MoveToLocation(world.loc.Rigard.Slums.gate, {hour: 4});
+							player.AddLustFraction(-1);
+							miranda.AddLustFraction(-1);
 						});
 					}, enabled : true,
 					tooltip : "Let her take the lead. Things might get a bit rough."
@@ -3311,6 +3312,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 					Text.Add("<i>”Crap, I didn’t know getting used like that could feel this good. If this is your idea of domming you can dom me anytime, [playername].”</i>", parse);
 				Text.Flush();
 				
+				world.TimeStep({minute: 30});
 				player.AddLustFraction(-1);
 				miranda.AddLustFraction(-1);
 				
@@ -3322,8 +3324,6 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 					player.subDom.IncreaseStat(75, 1);
 					miranda.subDom.DecreaseStat(-75, 3);
 					miranda.relation.IncreaseStat(60, 3);
-					
-					world.TimeStep({minute: 30});
 					
 					Scenes.Miranda.HomeDommySexLeavingFuckedHer();
 				});
