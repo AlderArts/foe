@@ -178,7 +178,8 @@ world.loc.Rigard.Inn.common.onEntry = function() {
 // SCENES
 Scenes.Rigard.LB.OrderFood = function() {
 	var parse = {
-		sirmadam : player.mfFem("sir", "madam")
+		sirmadam : player.mfFem("sir", "madam"),
+		dname : rigard.LB["Efri"] == 0 ? "the girl" : "Efri"
 	};
 	var randW = Math.random() * 5;
 	if(randW < 1) {
