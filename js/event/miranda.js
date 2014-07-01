@@ -3518,7 +3518,7 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 		
 		scenes.Get();
 		
-		Text.Add("You ignore her banter, inserting your other thumb. The guardswoman groans wordlessly as you start slowly widening her sphincter, all while retaining the momentum of your rocking hips.", parse);
+		Text.Add(" You ignore her banter, inserting your other thumb. The guardswoman groans wordlessly as you start slowly widening her sphincter, all while retaining the momentum of your rocking hips.", parse);
 		Text.NL();
 		
 		widenButt = true;
@@ -4334,7 +4334,7 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 				Text.NL();
 				Text.Add("You press down a little harder with your foot, making her groan at the sensation, then tell her not to say such stupid things - she's not getting out of this, and you both know it. Then, smiling, you lift your foot from her cock and place it higher up her midriff, pushing down so that she flattens herself onto the floor again. Just relax, you instruct her, even as you return your [footDesc] to its former place on her erection. You know what she likes, and you're going to give it to her...", parse);
 				Text.NL();
-				Text.Add("Grinning, you begin to stroke and caress the doberherm's dick with your [footDesc], gliding up and down along the soft, sensitive skin, gently pinching it between your toes and flexing to  squeeze it against her belly with just the right amount of pressure. Grinding up its length to her glans, you roll the tip of your foot against her pointy prick-tip, rubbing it up and down with each flex of your foot.", parse);
+				Text.Add("Grinning, you begin to stroke and caress the doberherm's dick with your [footDesc], gliding up and down along the soft, sensitive skin. You gently pinch it between your toes, flexing to squeeze it against her belly with just the right amount of pressure. Grinding up its length to her glans, you roll the tip of your foot against her pointy prick-tip, rubbing it up and down with each flex of your foot.", parse);
 				Text.NL();
 				Text.Add("The morph growls throatily beneath you as you continue to toy with her cock. You look down and smile as you see her panting for breath, eyes screwed closed and tongue hanging out, whimpering softly as your stroking [footDesc] touches a sensitive spot. From the insistent grin her lips curl into, and the way you can feel her prickflesh throbbing beneath your foot, you know she can't hold out much longer.", parse);
 				Text.NL();
