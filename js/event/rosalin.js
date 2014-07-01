@@ -587,6 +587,8 @@ Scenes.Rosalin.FirstFuck = function() {
 	parse.cockDesc    = function() { return cocks[0].Short(); };
 	parse.cockTipDesc = function() { return cocks[0].TipShort(); }
 	
+	world.TimeStep({minute: 45});
+	
 	var options = new Array();
 	options.push({ nameStr : "Fuck her",
 		func : function() {
@@ -926,8 +928,6 @@ Scenes.Rosalin.FirstFuckFollowup = function(outcome) {
 	var parse = {
 		
 	};
-	
-	world.TimeStep({minute: 45});
 	
 	Text.AddOutput("<b>Later...</b>", parse);
 	Text.Newline();
