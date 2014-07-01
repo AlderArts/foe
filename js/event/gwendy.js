@@ -504,6 +504,7 @@ Scenes.Gwendy.WorkFeedingDanie = function() {
 	
 	scenes.Get();
 	
+	Text.NL();
 	Text.Add("Like all good things, your time with the cute sheep-girl comes to an end, and she parts ways with you to return to her paddock. With her help, you’ve finished your task relatively quickly. Returning the borrowed equipment to the shed, you go to find Gwendy again. When you do, you see she’s still taking care of her own chores. Although you’d rather not leave without saying anything to her, you respect that she’s still busy and head out on your travels again.", parse);
 	Text.NL();
 	Text.Add("Spending time with Danie ", parse);
@@ -1780,10 +1781,10 @@ Scenes.Gwendy.ChallengeSexAnal = function(toys, hangout) {
 		Text.Add("Gwendy’s sphincter tightens around your [cockDesc], announcing that she is the first one to come. ", parse);
 		var scenes = new EncounterTable();
 		scenes.AddEnc(function() {
-			Text.Add("Her balls lets loose the flood of her pent up cum,[geachof] her horsecock[gs] painting her bed in strands of sticky white goo.", parse);
+			Text.Add("Her balls lets loose the flood of her pent up cum,[geachof] her horsecock[gs] painting her bed in strands of sticky white goo. ", parse);
 		}, 1.0, function() { return gwendy.FirstCock(); });
 		scenes.AddEnc(function() {
-			Text.Add("She cries out, and from the wetness trailing down her legs, she’ll have to change the sheets after you are done here.", parse);
+			Text.Add("She cries out, and from the wetness trailing down her legs, she’ll have to change the sheets after you are done here. ", parse);
 		}, 1.0, function() { return gwendy.FirstVag(); });
 		
 		scenes.Get();
@@ -1793,7 +1794,7 @@ Scenes.Gwendy.ChallengeSexAnal = function(toys, hangout) {
 		if(hangout) {
 			Text.Add("Satisfied with your romp, you rise and gear up. Behind you, Gwendy gets up, shivering slightly as she carefully balances on the edge of the bed. You ask her if she’ll be fine, but she dismisses your concerns.", parse);
 			Text.NL();
-			Text.Add("<i>“I’m just a little tired, is all. Thanks... for that, but I’ve gotta go.”</i> Leading the two of you out of the loft, you part ways with Gwendy.", parse);
+			Text.Add("<i>“I’m just a little tired, is all. Thanks... for that, but I’ve got work to do.”</i> She looks a bit disoriented as she gets up.", parse);
 		}
 		else
 			Text.Add("Satisfied, you gear up and get ready to go on your way, but not before reminding Gwendy that you’ll still accept her challenge her if she wants another go. Not waiting for her response, you head on about your day.", parse);
