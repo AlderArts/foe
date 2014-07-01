@@ -93,7 +93,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/patchwork.js \
 	js/event/rosalin.js \
 	js/event/estevan.js \
-	js/event/wolfie.js \
+	js/event/cale.js \
 	js/event/magnus.js \
 	js/event/outlaws/maria.js \
 	js/event/jeanne.js \

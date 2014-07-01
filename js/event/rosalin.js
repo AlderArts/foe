@@ -141,7 +141,7 @@ Scenes.Rosalin.Interact = function() {
 	// First time meeting
 	if(rosalin.flags["Met"] == 0) {
 		rosalin.flags["Met"] = 1;
-		wolfie.flags["Met"]  = 1;
+		cale.flags["Met"]  = 1;
 		Scenes.Rosalin.FirstTime();
 		return;
 	}
@@ -417,7 +417,7 @@ Scenes.Rosalin.TalkPrompt = function() {
 				Text.AddOutput("<i>\"I... tried to find the tree city, figuring it would be perfect, but I never managed to find it.\"</i> The alchemist sighs regretfully. <i>\"Estevan was the one who found me, wandering around the forest. Running low on water and food... ah, what don't I do for science! He told me of this great place here, and I've been here since.\"</i> The [raceDesc] waves around [himher] at the camp.", parse);
 				Text.Newline();
 				
-				parse["Cale"] = wolfie.name == "Cale" ? "Cale" : "the friendly wolf-morph";
+				parse["Cale"] = cale.name == "Cale" ? "Cale" : "the friendly wolf-morph";
 				Text.AddOutput("<i>\"Free reign to run my experiments, and even some willing participants at times! They don't even get angry if I mix a little in the food once in a while!\"</i>", parse);
 				Text.Newline();
 				Text.AddOutput("And helpful assistance in her times of need, you add slyly, mentioning [Cale].", parse);
@@ -736,8 +736,8 @@ Scenes.Rosalin.FirstFuck = function() {
 			options.push({ nameStr : "Get fucked",
 				func : function() {
 					player.subDom.DecreaseStat(-100, 3);
-					wolfie.subDom.IncreaseStat(100, 10);
-					wolfie.flags["Sexed"]++;
+					cale.subDom.IncreaseStat(100, 10);
+					cale.flags["Sexed"]++;
 					
 					Text.AddOutput("Deciding to have a taste yourself, you drop to your knees beside Rosalin, hungrily eyeing the wolf-morph's thick member. He almost has to force Rosalin off it to allow you to get access. Getting far more of a treat than he expected, the wolf leans back languidly, enjoying the dual blowjob.", parse);
 					Text.Newline();
@@ -773,9 +773,9 @@ Scenes.Rosalin.FirstFuck = function() {
 					Text.Newline();
 					
 					if(targetType == BodyPartType.ass)
-						player.FuckAnal(target, wolfie.FirstCock(), 3);
+						player.FuckAnal(target, cale.FirstCock(), 3);
 					else
-						player.FuckVag(target, wolfie.FirstCock(), 3);
+						player.FuckVag(target, cale.FirstCock(), 3);
 					
 					Text.AddOutput("<i>\"Ah... not bad,\"</i> the wolf sighs, repeatedly pounding your [targetDesc], trying to build a rhythm. Being so close to the edge already pushes his instincts to the forefront, and soon you feel an even thicker mass press against your [targetDesc]. <i>\"Gonna breed you, little slut,\"</i> he hisses into your ear as his knot forces it's way inside your [targetDesc]", parse);
 					if(targetType == BodyPartType.ass)
@@ -863,8 +863,8 @@ Scenes.Rosalin.FirstFuckPegWolf = function() {
 	Text.Clear();
 	
 	player.subDom.IncreaseStat(100, 5);
-	wolfie.subDom.DecreaseStat(-100, 10);
-	wolfie.flags["Sexed"]++;
+	cale.subDom.DecreaseStat(-100, 10);
+	cale.flags["Sexed"]++;
 	
 	var parse = {
 		armorDesc     : function() { return player.ArmorDesc(); },
@@ -879,10 +879,10 @@ Scenes.Rosalin.FirstFuckPegWolf = function() {
 		faceDesc      : function() { return player.FaceDesc(); },
 		
 		rVagDesc      : function() { return rosalin.FirstVag().Short(); },
-		wAnusDesc     : function() { return wolfie.Butt().AnalShort(); }
+		wAnusDesc     : function() { return cale.Butt().AnalShort(); }
 	};
 	
-	var cocks         = player.CocksThatFit(wolfie.Butt());
+	var cocks         = player.CocksThatFit(cale.Butt());
 	parse.cockDesc    = function() { return cocks[0].Short(); };
 	parse.cockTipDesc = function() { return cocks[0].TipShort(); }
 	
@@ -895,8 +895,9 @@ Scenes.Rosalin.FirstFuckPegWolf = function() {
 	Text.AddOutput("His annoyed growl changes to a slightly fearful whimper as you grab one of his buttcheeks, stroking yourself with your other hand. <i>\"J-just what do you think yo-\"</i> he begins uncertainly, his complaints deteriorating into an incoherent drawn-out moan as you bury your [cockDesc] in his ass.", parse);
 	Text.Newline();
 	
+	Sex.Anal(player, cale);
 	player.Fuck(cocks[0], 5);
-	wolfie.FuckAnal(wolfie.Butt(), cocks[0]);
+	cale.FuckAnal(cale.Butt(), cocks[0]);
 	
 	Text.AddOutput("<i>\"I... I'll get back at you for this!\"</i> The wolf's moans make the claim far from convincing, as he is clearly enjoying the treatment you are giving his [wAnusDesc]. Rosalin groans as your thrusts transfer to her. Still locked within her, the wolf collapses on top of the catgirl.", parse);
 	Text.Newline();
@@ -1689,8 +1690,8 @@ Scenes.Rosalin.SexPrompt = function(state) {
 		rSkinDesc      : function() { return rosalin.SkinDesc(); },
 		rEyesDesc      : function() { return rosalin.EyeDesc() + "s"; },
 		
-		wName          : wolfie.name,
-		wCockDesc      : function() { return wolfie.FirstCock().Short(); },
+		wName          : cale.name,
+		wCockDesc      : function() { return cale.FirstCock().Short(); },
 		
 		playername     : player.name,
 		boygirl        : player.body.Gender() == Gender.male ? "boy" : "girl",
@@ -1895,7 +1896,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 			tooltip : ""
 		});
 		*/
-		options.push({ nameStr : wolfie.name,
+		options.push({ nameStr : cale.name,
 			func : function() {
 				Text.Clear();
 				Text.AddOutput("Fuck, looks like [heshe]'s lost it. You begin to edge back from the horny [raceDesc], not really wanting to deal with [himher] right now. Rosalin follows you, [hisher] eyes glued to you like a cat stalking a mouse. Before you know it [heshe] has you cornered between a wagon and a tent.", parse);
@@ -1904,7 +1905,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 				parse["genDesc"] = player.FirstCock() ? function() { return player.MultiCockDesc(); } : player.FirstVag() ? function() { return player.FirstVag().Short(); } : "featureless crotch";
 				
 				// Cale is DOM as fuck
-				if(wolfie.subDom.Get() >= 50) {
+				if(cale.subDom.Get() >= 50) {
 					Text.AddOutput("<i>\"Well well, what do we have here?\"</i> a mocking voice murmur into your ear. Surprised, you cast a glance over your shoulder. [wName] is standing just behind you, blocking your escape. You plead with him to help you out, but he just shakes his head, grinning at you. Catching you in a rough hug, the wolf-morph traps your arms to your sides, holding you in place.", parse);
 					Text.Newline();
 					Text.AddOutput("<i>\"No running away now,\"</i> he hisses maliciously in your ear, <i>\"it's my job here to keep the alchemist calm, but I'd rather not deal with [himher] when [heshe] is like this.\"</i> You can feel his stirring [wCockDesc] prodding you in the back, poking out from his sheath. Before you can voice a complaint, he cuts you off abruptly.", parse);
@@ -1930,7 +1931,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 					Text.Newline();
 				}
 				// Cale is SUB as fuck
-				else if(wolfie.subDom.Get() <= -50) {
+				else if(cale.subDom.Get() <= -50) {
 					// TODO: FINISH SUBBY SCENES
 					Text.AddOutput("PLACEHOLDER: unfinished scene (sub).", parse);
 					Gui.NextPrompt();

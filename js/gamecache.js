@@ -34,7 +34,7 @@ InitCache = function() {
 	
 	chief   = new Chief(gameCache.chief);
 	rosalin = new Rosalin(gameCache.rosalin);
-	wolfie  = new Wolfie(gameCache.wolfie);
+	cale    = new Cale(gameCache.wolfie);
 	magnus  = new Magnus(gameCache.magnus);
 	
 	lagon   = new Lagon(gameCache.lagon);
@@ -80,7 +80,7 @@ InitCache = function() {
 	world.EntityStorage.push(patchwork);
 	world.EntityStorage.push(rosalin);
 	world.EntityStorage.push(estevan);
-	world.EntityStorage.push(wolfie);
+	world.EntityStorage.push(cale);
 	world.EntityStorage.push(magnus);
 	
 	world.EntityStorage.push(roa);
@@ -323,7 +323,7 @@ GameToCache = function() {
 	// Other NPCs
 	gameCache.chief   = chief.ToStorage();
 	gameCache.rosalin = rosalin.ToStorage();
-	gameCache.wolfie  = wolfie.ToStorage();
+	gameCache.wolfie  = cale.ToStorage();
 	gameCache.magnus  = magnus.ToStorage();
 	
 	gameCache.lagon   = lagon.ToStorage();

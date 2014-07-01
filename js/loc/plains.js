@@ -120,7 +120,7 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 		Text.Add(Text.BoldColor("END PLACEHOLDER TEXT"));
 		Text.NL();
 		
-		var players = [player, rosalin, wolfie];
+		var players = [player, rosalin, cale];
 		var g = new Cavalcade(players, {bet: 5});
 		g.PrepGame();
 	}
