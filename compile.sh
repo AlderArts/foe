@@ -52,7 +52,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/cavalcade.js \
 	js/event/introduction.js \
 	js/loc/rigard/rigard.js \
-	js/loc/rigard/backstreets.js \
+	js/loc/rigard/residential.js \
 	js/loc/rigard/guards.js \
 	js/loc/rigard/merchants.js \
 	js/loc/rigard/plaza.js \
