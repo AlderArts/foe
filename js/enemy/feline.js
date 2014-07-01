@@ -636,7 +636,7 @@ Scenes.Felines.WinFuckVag = function(cat, group, enc, cocks, numFemales) {
 			Text.Add("For a while, you continue like that, sweating bodies rocking against each other, joined at the hip. [Possessive] tail is like a living snake, trying to escape your snug grip, though you can tell she is receiving a huge amount of pleasure from the stimulation.", parse);
 		}
 		parse["throbbing"] = player.FirstCock() ? "throbbing" : "";
-		Text.Add("She cries out as she reaches her second climax, her tunnel hugging your[throbbing] shaft[s] tightly. It looks like losing to you is the greatest thing the girl has had happen to her, if her encouraging moans are any indication.", parse);
+		Text.Add(" She cries out as she reaches her second climax, her tunnel hugging your[throbbing] shaft[s] tightly. It looks like losing to you is the greatest thing the girl has had happen to her, if her encouraging moans are any indication.", parse);
 		Text.NL();
 		
 		var scenes = new EncounterTable();
@@ -653,7 +653,7 @@ Scenes.Felines.WinFuckVag = function(cat, group, enc, cocks, numFemales) {
 		scenes.Get();
 		
 		parse["breed"] = pCock.isStrapon ? "" : " and breed";
-		Text.Add("Grunting, you tell her that you’re more than happy to give it to her any time. You can always use a distraction from this whole ‘saving the world’ business, and a moaning, slutty kitty to fuck[breed] provides just that.", parse);
+		Text.Add(" Grunting, you tell her that you’re more than happy to give it to her any time. You can always use a distraction from this whole ‘saving the world’ business, and a moaning, slutty kitty to fuck[breed] provides just that.", parse);
 		if(group) {
 			Text.NL();
 			parse["s"] = enc.enemy.Num() > 2 ? "s" : "";
