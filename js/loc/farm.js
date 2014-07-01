@@ -1551,6 +1551,7 @@ Scenes.Farm.Market = function(haul, next) {
 			Text.Add(" Though there's still some grumbling from the bigots about your success, the promotions and sales you offer keep feathers smoothed so successfully that nobody really objects to you, no matter how prejudiced.", parse);
 		score += 3;
 	}
+	Text.NL();
 	Text.Add("Eventually, your goods are all sold off and it's time for Gwendy to close her stall and call it a day. You help her with the final cleanup, and then join her in counting out the day's profits.", parse);
 	if(haul.enclost) {
 		Text.Add(" No matter how good your efforts, you can only do so well with the tattered remains of the original haul. Once again, you curse the [enemy] for ruining your chances of success.", parse);
