@@ -79,7 +79,7 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 ));
 
 world.loc.Rigard.ShopStreet.street.links.push(new Link(
-	"Tailor", true, function() { return (world.time.hour >= 9 && world.time.hour < 20); },
+	"Tailor", true, function() { return (world.time.hour >= 9 && world.time.hour < 20) && !rigard.UnderLockdown(); },
 	function() {
 		Text.AddOutput("There is a large two floor shop in the center of the street, with two guards watching the large, well crafted doors. The fancy sign above the door reads <i>Silken Delights</i>, and there are many beautiful and intricately crafted articles of clothing on display in the windows. The clothing store seems large, and there are pretty decorations bordering the display windows. A decorated sign next the the door informs you that the shops business hours are from 9 to 20.");
 		if(!(world.time.hour >= 9 && world.time.hour < 18))

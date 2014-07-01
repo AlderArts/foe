@@ -160,6 +160,10 @@ Rigard.prototype.GatesOpen = function() {
 	return world.time.hour >= 8 && world.time.hour < 17;
 }
 
+Rigard.prototype.UnderLockdown = function() {
+	return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry;
+}
+
 Scenes.Rigard.CityHistory = function() {
 	Text.Clear();
 	var parse = {};

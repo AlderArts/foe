@@ -68,7 +68,7 @@ world.loc.Rigard.Gate.links.push(new Link(
 	}
 ));
 world.loc.Rigard.Gate.links.push(new Link(
-	"Leave", true, function() { return (world.time.hour >= 6 && world.time.hour < 22) && rigard.Krawitz["Q"] != Rigard.KrawitzQ.HuntingTerry; },
+	"Leave", true, function() { return (world.time.hour >= 6 && world.time.hour < 22) && !rigard.UnderLockdown(); },
 	null,
 	function() {
 		if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HeistDone)
@@ -78,7 +78,7 @@ world.loc.Rigard.Gate.links.push(new Link(
 	}
 ));
 world.loc.Rigard.Gate.links.push(new Link(
-	"Barracks", true, true,
+	"Barracks", true, function() { return !rigard.UnderLockdown(); },
 	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Barracks.common, {minute: 5});
