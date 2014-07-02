@@ -522,14 +522,15 @@ Scenes.Rigard.Lockdown = function() {
 	Text.NL();
 	Text.Add("<i>”Knew I could count on you!</i> Miranda exclaims with a grin. <i>”Now let’s get out of here and get started on our investigation.</i>”", parse);
 	Text.NL();
-	if(party.NumTotal() > 1) {
-		parse["comp"] = party.NumTotal() == 2 ? party.Get(1).name : "your companions";
+	if(party.Num() > 1) {
+		parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
 		Text.Add("You tell [comp] to wait for you at the Lady’s Blessing, looks like this is going to take some time.", parse);
 		Text.NL();
 	}
 	
-	Scenes.Terry.activeParty = party.GetActiveParty();
+	party.SaveActiveParty();
 	party.ClearActiveParty();
+	party.SwitchIn(player);
 	party.AddMember(miranda);
 	
 	if(miranda.Sexed()) {

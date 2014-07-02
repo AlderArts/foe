@@ -62,7 +62,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 ));
 
 world.loc.Rigard.Plaza.links.push(new Link(
-	"Inn", true, true,
+	"Inn", true, function() { return !rigard.UnderLockdown(); },
 	function() {
 		// TODO
 		Text.Add("Inn is over there. ");
@@ -72,7 +72,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 	}
 ));
 world.loc.Rigard.Plaza.links.push(new Link(
-	"Castle", true, true,
+	"Castle", true, function() { return !rigard.UnderLockdown(); },
 	function() {
 		Text.Add("The outer walls of the royal grounds stand near, and the castle looms on the hill above. ");
 	},

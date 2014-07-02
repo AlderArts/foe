@@ -7,6 +7,7 @@
 function Party(storage) {
 	this.members = [];
 	this.reserve = [];
+	this.saved   = [];
 	this.coin = 0;
 	this.location = null;
 	this.inventory = new Inventory();
@@ -14,32 +15,47 @@ function Party(storage) {
 	if(storage) this.FromStorage(storage);
 }
 
+Party.prototype.SaveMember = function(storage, entity, str) {
+	if(this.InParty(entity))   storage["members"].push(str);
+	if(this.InReserve(entity)) storage["reserve"].push(str);
+	if(this.InSaved(entity))   storage["saved"].push(str);
+}
+
 Party.prototype.ToStorage = function() {
 	var storage = {};
 	storage["members"] = [];
 	storage["reserve"] = [];
+	storage["saved"]   = [];
 	
-	if(this.InParty(player, true)) storage["members"].push("player");
-	if(this.InParty(kiakai, true)) storage["members"].push("kiakai");
-	
-	if(this.InReserve(kiakai)) storage["reserve"].push("kiakai");
+	this.SaveMember(storage, player, "player");
+	this.SaveMember(storage, kiakai, "kiakai");
+	this.SaveMember(storage, miranda, "miranda");
+	this.SaveMember(storage, terry, "terry");
 	
 	storage["coin"] = this.coin;
-	storage["loc"] = this.location.SaveSpot;
-	storage["inv"] = this.inventory.ToStorage();
+	storage["loc"]  = this.location.SaveSpot;
+	storage["inv"]  = this.inventory.ToStorage();
 	
 	return storage;
 }
 
+Party.prototype.LoadMember = function(storage, entity, str) {
+	if(storage["members"].indexOf(str) != -1) this.AddMember(entity);
+	if(storage["reserve"].indexOf(str) != -1) this.AddReserve(entity);
+	if(storage["saved"].indexOf(str)   != -1) this.AddReserve(entity);
+}
+
 Party.prototype.FromStorage = function(storage) {
 	if(!storage) return;
-	if(storage["members"]) {
-		if(storage["members"].indexOf("player") != -1) this.AddMember(player);
-		if(storage["members"].indexOf("kiakai") != -1) this.AddMember(kiakai);
-	}
-	if(storage["reserve"]) {
-		if(storage["reserve"].indexOf("kiakai") != -1) this.AddReserve(kiakai);
-	}
+	storage["members"] = storage["members"] || [];
+	storage["reserve"] = storage["reserve"] || [];
+	storage["saved"]   = storage["saved"]   || [];
+	
+	this.LoadMember(storage, player, "player");
+	this.LoadMember(storage, kiakai, "kiakai");
+	this.LoadMember(storage, miranda, "miranda");
+	this.LoadMember(storage, terry, "terry");
+	
 	
 	this.coin = parseInt(storage["coin"]) || this.coin;
 	this.location = world.SaveSpots[storage["loc"]];
@@ -54,6 +70,10 @@ Party.prototype.NumTotal = function() {
 	return this.members.length + this.reserve.length;
 }
 
+Party.prototype.NumSaved = function() {
+	return this.saved.length;
+}
+
 Party.prototype.Alone = function() {
 	return (this.members.length == 1);
 }
@@ -62,32 +82,31 @@ Party.prototype.Two = function() {
 	return (this.members.length == 2);
 }
 
-Party.prototype.InParty = function(member, onlyActive) {
+Party.prototype.InParty = function(member, reserve) {
 	var idx = this.members.indexOf(member); // Find the index
 	if(idx!=-1) return true;
 	
-	if(!onlyActive) {
+	if(reserve) {
 		idx = this.reserve.indexOf(member);
 		return (idx!=-1);
 	}
 	return false;
 }
 
-Party.prototype.GetActiveParty = function() {
-	var ret = [];
+Party.prototype.SaveActiveParty = function() {
+	this.saved = [];
 	for(var i = 0; i < this.members.length; ++i)
-		ret.push(this.members[i]);
-	return ret;
+		this.saved.push(this.members[i]);
 }
+
 Party.prototype.ClearActiveParty = function() {
-	while(this.members.length > 1)
-		this.SwitchOut(this.members[1]);
+	while(this.members.length > 0)
+		this.SwitchOut(this.members[0]);
 }
-Party.prototype.SwitchInActiveParty = function(arr) {
+Party.prototype.LoadActiveParty = function() {
 	this.ClearActiveParty();
-	for(var i = 0; i < arr.length; ++i) {
-		this.SwitchIn(arr[i]);
-	}
+	for(var i = 0; i < this.saved.length; ++i)
+		this.SwitchIn(this.saved[i]);
 }
 // From "Total"
 Party.prototype.Get = function(num) {
@@ -98,8 +117,10 @@ Party.prototype.Get = function(num) {
 		else return null;
 	}
 }
-Party.prototype.GetRandom = function(includePlayer) {
-	var len = this.members.length + this.reserve.length;
+Party.prototype.GetRandom = function(incReserve, includePlayer) {
+	var len = this.members.length;
+	if(incReserve)
+		len += this.reserve.length;
 	if(!includePlayer) {
 		len--;
 		if(len <= 0) return null;
@@ -121,7 +142,7 @@ Party.prototype.AddMember = function(member) {
 	var idx = this.members.indexOf(member); // Find the index
 	if(idx==-1) {
 		if(this.members.length >= 4)
-			this.reserve.push(member);
+			this.AddReserve(member);
 		else
 			this.members.push(member); // Only add if not already added
 	}
@@ -139,6 +160,8 @@ Party.prototype.RemoveMember = function(member) {
 	if(idx!=-1) this.members.splice(idx, 1); // Remove it if really found!
 	var idx = this.reserve.indexOf(member);  // Find the index
 	if(idx!=-1) this.reserve.splice(idx, 1); // Remove it if really found!
+	var idx = this.saved.indexOf(member);  // Find the index
+	if(idx!=-1) this.saved.splice(idx, 1); // Remove it if really found!
 	if(this == party) member.DebugMode(false);
 }
 
@@ -148,7 +171,7 @@ Party.prototype.SwitchPrompt = function(member) {
 		himher: member.himher(),
 		HeShe:  member.HeShe()
 	};
-	var active = this.InParty(member, true);
+	var active = this.InParty(member);
 	var that = this;
 	Text.Clear();
 	Text.AddOutput("Switch [name] with who?", parse);
@@ -239,7 +262,7 @@ Party.prototype.Sleep = function() {
 		this.reserve[i].Sleep();
 }
 
-Party.prototype.Interact = function(preventClear) {
+Party.prototype.Interact = function(preventClear, switchSpot) {
 	if(!preventClear)
 		Text.Clear();
 	
@@ -252,10 +275,12 @@ Party.prototype.Interact = function(preventClear) {
 		var member = this.members[i];
 		list.push({nameStr: member.name, func: member.Interact, enabled: true, image: Input.imgButtonEnabled2});
 	}
-	// Add reserve too
-	for(var i = 0; i < this.reserve.length; i++) {
-		var member = this.reserve[i];
-		list.push({nameStr: member.name, func: member.Interact, enabled: true});
+	if(switchSpot) {
+		// Add reserve too
+		for(var i = 0; i < this.reserve.length; i++) {
+			var member = this.reserve[i];
+			list.push({nameStr: member.name, func: member.Interact, enabled: true});
+		}
 	}
 	// Don't sort, use same order as in menu
 	//list.sort( function(a, b) { return a.nameStr > b.nameStr; } );
@@ -270,8 +295,6 @@ Party.prototype.ShowAbilities = function() {
 	var ents = [];
 	for(var i = 0; i < this.members.length; i++)
 		ents.push(this.members[i]);
-	for(var i = 0; i < this.reserve.length; i++)
-		ents.push(this.reserve[i]);
 	
 	// Go through each member, add available abilities to list
 	for(var i = 0; i < ents.length; i++) {

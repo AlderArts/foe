@@ -880,9 +880,9 @@ Scenes.Felines.WinFuckButt = function(cat, group, enc, cocks) {
 		Text.NL();
 		Text.Add("Once [heshe] has recovered sufficiently, [name] sets to cleaning [himher]self up using [hisher] tongue. Every now and then, [heshe] pauses to eye you warily, unsure whether you are finished with [himher] or not.", parse);
 		Text.NL();
-		if(party.NumTotal() == 2)
+		if(party.Num() == 2)
 			parse["comp"] = " and " + party.Get(1).name;
-		else if(party.NumTotal() > 1)
+		else if(party.Num() > 1)
 			parse["comp"] = " and your companions";
 		else
 			parse["comp"] = "";

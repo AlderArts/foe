@@ -621,12 +621,12 @@ Scenes.Terry.CaughtTheThief = function() {
 						Text.NL();
 						
 						party.RemoveMember(miranda);
-						party.SwitchInActiveParty(Scenes.Terry.activeParty);
+						party.LoadActiveParty();
 						party.location = world.loc.Rigard.Inn.common;
 						world.TimeStep({hour: 1});
 						
-						if(party.NumTotal() > 1) {
-							parse["comp"] = party.NumTotal() > 2 ? "Your companions are" : party.Get(1).name + " is";
+						if(party.Num() > 1) {
+							parse["comp"] = party.Num() > 2 ? "Your companions are" : party.Get(1).name + " is";
 							Text.Add("[comp] probably tired of waiting for you, you should hurry to the Lady’s Blessing.", parse);
 							Text.NL();
 						}
@@ -646,13 +646,13 @@ Scenes.Terry.CaughtTheThief = function() {
 						Text.Clear();
 						
 						party.RemoveMember(miranda);
-						party.SwitchInActiveParty(Scenes.Terry.activeParty);
+						party.LoadActiveParty();
 						party.location = world.loc.Rigard.Inn.common;
 						world.TimeStep({hour: 1});
 						
 						
-						if(party.NumTotal() > 1) {
-							parse["comp"] = party.NumTotal() > 2 ? "your companions" : party.Get(1).name;
+						if(party.Num() > 1) {
+							parse["comp"] = party.Num() > 2 ? "your companions" : party.Get(1).name;
 							Text.Add("You pat Miranda on the back, announcing that you’re leaving and return to the Lady’s Blessing to find [comp].", parse);
 						}
 						else {

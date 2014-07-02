@@ -234,9 +234,9 @@ Scenes.Room69.Discovering69WhatNow = function() {
 				Text.NL();
 				Text.Add("As you make your way out into the hallway, a petulant <i>\"And don’t come back!\"</i> comes from Sixtynine as the door slams shut behind you.", parse);
 				
-				if(party.NumTotal() == 2)
+				if(party.Num() == 2)
 					Text.Add(" Glancing around, you are greeted by a relieved [comp].", {comp: party.Get(1).name});
-				else if(party.NumTotal() > 2)
+				else if(party.Num() > 2)
 					Text.Add(" Glancing around, you are greeted by your relieved companions.");
 				Text.Flush();
 				
@@ -338,11 +338,11 @@ Scenes.Room69.Discovering69OrvinRant = function() {
 	Text.Add(" The glimpse you caught of his face showed a peculiar mixture of dread and what could be anger.", parse);
 	Text.NL();
 	
-	if(party.NumTotal() <= 1)
+	if(party.Num() <= 1)
 		parse["comp"] = "";
-	else if(party.NumTotal() == 2)
+	else if(party.Num() == 2)
 		parse["comp"] = Text.Parse(", leaving a bemused [comp] to again wait outside", {comp: party.Get(1).name});
-	else // (party.NumTotal() > 2)
+	else // (party.Num() > 2)
 		parse["comp"] = ", leaving your bemused companions to again wait outside";
 	Text.Add("He slams the door shut behind the two of you, spinning to confront you[comp]. <i>\"Look, you, that thing has been here for generations, and no one asked you to go stumbling into a room that’s not your own. It’s harmless enough in its way. It’s never hurt anyone, and... and some have even found pleasure in it.\"</i>", parse);
 	Text.NL();
@@ -361,11 +361,11 @@ Scenes.Room69.Discovering69ForceOutro = function() {
 	Text.NL();
 	Text.Add("<i>\"I will it to move, but it lies there, dead. Why? What did I do to you?\"</i>", parse);
 	Text.NL();
-	if(party.NumTotal() <= 1)
+	if(party.Num() <= 1)
 		parse["comp"] = "";
-	else if(party.NumTotal() == 2)
+	else if(party.Num() == 2)
 		parse["comp"] = Text.Parse(", where you are greeted by a relieved [comp]", {comp: party.Get(1).name});
-	else // (party.NumTotal() > 2)
+	else // (party.Num() > 2)
 		parse["comp"] = ", where you are greeted by your relieved companions";
 	Text.Add("You are not sure what to say to the distraught room, and step quietly out into the hallway[comp].", parse);
 	Text.NL();
@@ -624,7 +624,7 @@ Scenes.Room69.Discovering69Sex = function() {
 		Text.NL();
 		Text.Add("<i>\"Well, what I mean is that [heshe] will love it once the training is complete,\"</i> the first speaker says and giggles. <i>\"Do you not want to have such a cute pet?\"</i>", parse);
 		Text.NL();
-		parse["comp"] = party.NumTotal() > 1 ? Text.Parse(" [heshe] has companions with [himher], and", parse) : "";
+		parse["comp"] = party.Num() > 1 ? Text.Parse(" [heshe] has companions with [himher], and", parse) : "";
 		Text.Add("<i>\"Th-that is of no relevance. We must respect [hisher] freedom, and, anyway,[comp] there will be no end of trouble if we take [himher]. They might even try to destroy us.\"</i>", parse);
 		Text.NL();
 		Text.Add("At this, a clamor of overlapping alarmed voices rises up, filling the chamber with a quiet din of concern. By the time they finally settle down, the initial two voices are carried away with them as well, and the room returns to temporary silence.", parse);
@@ -637,9 +637,9 @@ Scenes.Room69.Discovering69Sex = function() {
 		Text.NL();
 		Text.Add("<i>\"Well, of course, my door is always open to you. I do hope you’ll come again to visit.\"</i>", parse);
 		Text.NL();
-		if(party.NumTotal() > 2)
+		if(party.Num() > 2)
 			parse["comp"] = "It’s time to find your companions and decide what you’re going to do next.";
-		if(party.NumTotal() == 2)
+		if(party.Num() == 2)
 			parse["comp"] = Text.Parse("It’s time to find [name] and decide what you’re going to do next.", {name: party.Get(1).name});
 		else
 			parse["comp"] = "It’s time to decide what you’re going to do next.";
@@ -651,7 +651,7 @@ Scenes.Room69.Discovering69Sex = function() {
 		room69.flags["Rel"] = Room69.RelFlags.GoodTerms;
 		room69.relation.IncreaseStat(100, 10);
 		
-		if(party.NumTotal() <= 1) {
+		if(party.Num() <= 1) {
 			Gui.NextPrompt(function() {
 				MoveToLocation(world.loc.Rigard.Inn.common);
 			});
@@ -659,16 +659,16 @@ Scenes.Room69.Discovering69Sex = function() {
 		else {
 			Gui.NextPrompt(function() {
 				Text.Clear();
-				parse["s"] = party.NumTotal() > 2 ? "s" : "";
+				parse["s"] = party.Num() > 2 ? "s" : "";
 				Text.Add("After wandering through the hallways and seeing no one, you finally head down to ask [ikname] where your companion[s] went.", parse);
-				if(party.NumTotal() > 2) {
+				if(party.Num() > 2) {
 					parse["comp"]   = "them";
 					parse["himher"] = "them";
 					parse["hisher"] = "their";
 					parse["heshe"]  = "they";
 					parse["internal"]  = "";
 				}
-				else { //if(party.NumTotal() == 2)
+				else { //if(party.Num() == 2)
 					var p1 = party.Get(1);
 					parse["comp"] = p1.name;
 					parse["himher"] = p1.himher();

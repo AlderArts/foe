@@ -92,7 +92,7 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 ));
 
 world.loc.Rigard.ShopStreet.street.links.push(new Link(
-	"Odd shop", true, function() { return (world.time.hour >= 9 && world.time.hour < 18); },
+	"Odd shop", true, function() { return (world.time.hour >= 9 && world.time.hour < 18) && !rigard.UnderLockdown();; },
 	function() {
 		Text.AddOutput("One particular shop catch your eye. A garish sign hanging outside announce it the \"Shoppe of oddities\", though from just the exterior it is a bit unclear what is actually on sale.");
 		if(!(world.time.hour >= 9 && world.time.hour < 18))

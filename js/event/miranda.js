@@ -2531,9 +2531,9 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 			Text.NL();
 			parse["night"] = world.time.DayTime();
 			Text.Add("You bid Miranda farewell and step out into the [night].", parse);
-			if(party.NumTotal() > 1) {
+			if(party.Num() > 1) {
 				Text.NL();
-				parse["comp"] = party.NumTotal() > 2 ? "the rest of your party" : party.Get(1).name;
+				parse["comp"] = party.Num() > 2 ? "the rest of your party" : party.Get(1).name;
 				Text.Add("Somehow, you make it out the gates in order to rejoin [comp].", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {

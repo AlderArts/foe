@@ -1253,11 +1253,11 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 	Text.NL();
 	Text.Add("<i>”Looks like that’ll be all,”</i> the buxom farmer affirms, after a final check. <i>”Ready to go?”</i> she asks you with a smile.", parse);
 	Text.NL();
-	if(party.NumTotal() > 1) {
+	if(party.Num() > 1) {
 		var p1 = party.Get(1);
-		parse["comp"]  = party.NumTotal() > 2 ? "your companions" : p1.name;
-		parse["HeShe"] = party.NumTotal() > 2 ? "they" : p1.HeShe();
-		parse["notS"]  = party.NumTotal() > 2 ? "" : "s";
+		parse["comp"]  = party.Num() > 2 ? "your companions" : p1.name;
+		parse["HeShe"] = party.Num() > 2 ? "they" : p1.HeShe();
+		parse["notS"]  = party.Num() > 2 ? "" : "s";
 		Text.Add("Before going, you instruct [comp] to take care of the farm while you two are away. [HeShe] nod[notS] in understanding and bid you a safe journey. You promise you’ll be back soon.", parse);
 		Text.NL();
 	}
@@ -1275,8 +1275,9 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 	Text.Add("<i>”You better be ready, [playername]. I think we’re walking straight into an ambush,”</i> she utters, slowing down as she prepares for the worst. You grip your [wepDesc] tightly as you feel the tension building up.", parse);
 
 
-	Scenes.Farm.GoToMarketFirstParty = party.GetActiveParty();
+	party.SaveActiveParty();
 	party.ClearActiveParty();
+	party.SwitchIn(player);
 	party.AddMember(gwendy);
 
 	party.location = world.loc.Plains.Crossroads;
@@ -1654,7 +1655,7 @@ Scenes.Farm.GoToMarketFirstFinale = function() {
 	Text.Flush();
 	
 	party.RemoveMember(gwendy);
-	party.SwitchInActiveParty(Scenes.Farm.GoToMarketFirstParty);
+	party.LoadActiveParty();
 	party.location = world.loc.Farm.Fields;
 	world.TimeStep({hour: 2});
 	
@@ -1680,11 +1681,11 @@ Scenes.Farm.GoToMarketFirstFinale = function() {
 		func : function() {
 			Text.Clear();
 			Text.Add("<i>”It’s alright, I understand,”</i> Gwendy says, though she looks a bit lonely. <i>”See you around, I suppose?”</i> You nod, promising you’ll return later.", parse);
-			if(party.NumTotal() > 1) {
+			if(party.Num() > 1) {
 				Text.NL();
 				var p1 = party.Get(1);
-				parse["comp"] = party.NumTotal() > 2 ? "your companions" : p1.name;
-				parse["himher"] = party.NumTotal() > 2 ? "them" : p1.himher();
+				parse["comp"] = party.Num() > 2 ? "your companions" : p1.name;
+				parse["himher"] = party.Num() > 2 ? "them" : p1.himher();
 				Text.Add("You call for [comp], telling [himher] that it is time for you to leave. As you walk, you explain the events of the day to [himher].", parse);
 			}
 			Text.Flush();

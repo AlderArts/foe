@@ -69,6 +69,10 @@ Scenes.Krawitz.SetupStats = function() {
 	Scenes.Krawitz.stat.AlarmRaised       = false;
 	Scenes.Krawitz.stat.guardRot          = 0;
 	Scenes.Krawitz.stat.servantRot        = 0;
+	
+	party.SaveActiveParty();
+	party.ClearActiveParty();
+	party.SwitchIn(player);
 }
 
 Scenes.Krawitz.GuardDex = function(entity, num) {
@@ -1031,14 +1035,15 @@ Scenes.Krawitz.EnteringTheWork = function() {
 	};
 	
 	Text.Clear();
-	if(party.NumTotal() == 2) {
+	if(party.Num() == 2) {
 		Text.Add("Figuring that one person can move around easier than two, you ask [name] to wait for you outside the estate.", parse);
 		Text.NL();
 	}
-	else if(party.NumTotal() > 2) {
+	else if(party.Num() > 2) {
 		Text.Add("Figuring that one person can move around easier than a group, you ask your companions to wait for you outside the estate.", parse);
 		Text.NL();
 	}
+	
 	Text.Add("The old man from before shuffles over and unlocks the servants’ entrance on your third knock. He impatiently waves you inside, closing the door behind you.", parse);
 	Text.NL();
 	Text.Add("<i>\"</i>Now then, here is a small advance payment,\"</i></i> he says, handing you a small bag of coins. <i>\"</i>Go to the back room and find yourself some livery, then return to me and I shall explain your duties for the night.\"</i></i> You are directed to a small storeroom near the door leading to the grounds. Inside, you find a number of blue tunics and dresses, just like the ones you saw the servants wearing earlier.", parse);
@@ -1114,14 +1119,15 @@ Scenes.Krawitz.SneakingIn = function() {
 	};
 	
 	Text.Clear();
-	if(party.NumTotal() == 2) {
+	if(party.Num() == 2) {
 		Text.Add("Figuring that one person can move around easier than two, you ask [name] to wait for you outside the estate.", parse);
 		Text.NL();
 	}
-	else if(party.NumTotal() > 2) {
+	else if(party.Num() > 2) {
 		Text.Add("Figuring that one person can move around easier than a group, you ask your companions to wait for you outside the estate.", parse);
 		Text.NL();
 	}
+	
 	Text.Add("You take a breath to prepare yourself. Confirming once again that the guard isn’t looking, you quietly approach the metal fence. This shouldn’t be much of a problem.", parse);
 	Text.NL();
 	
@@ -2068,6 +2074,8 @@ Scenes.Krawitz.Aftermath = function() {
 	
 	Gui.NextPrompt(function() {
 		party.location = world.loc.Rigard.Inn.common;
+		
+		party.LoadActiveParty();
 		
 		Text.Clear();
 		Text.Add("You make your way back to the inn, snaking your way through alleyways to shake any possible pursuers. As you’re about to step inside the Lady’s Blessing, you’re surprised to bump into the vixen waitress you normally see cleaning tables.", parse);

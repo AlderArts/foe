@@ -107,7 +107,7 @@ Scenes.RavenMother.TheHunt = function(func) {
 		}
 	}
 	else {
-		var person = party.GetRandom();
+		var person = party.GetRandom(true);
 		parse["person"]  = person.name;
 		parse["pheshe"]  = person.heshe();
 		parse["phisher"] = person.hisher();

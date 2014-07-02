@@ -101,7 +101,7 @@ GolemBoss.prototype.Act = function(encounter, activeChar) {
 
 Scenes.Golem.FirstApproach = function() {
 	var parse = {
-		s : party.NumTotal() > 1 ? "s" : ""
+		s : party.Num() > 1 ? "s" : ""
 	};
 	
 	golem.flags["Met"] = Scenes.Golem.State.Met_ran;
@@ -112,9 +112,9 @@ Scenes.Golem.FirstApproach = function() {
 	Text.Add("Then again, perhaps any workers were dissuaded by the ethereal atmosphere surrounding the tower. You are vaguely reminded of the mound near the crossroads where you first entered into Eden - another spot where the fabric of reality seemed tenuous at best. An eerie glow emanates from windows in the upper levels of the tower, flickering between strange colors - some of which you aren’t even sure you could name.", parse);
 	Text.NL();
 	Text.Add("The tower doesn’t seem to have any obvious entrance, no doors or windows close to the ground level. A quick survey of the area reveals no hidden caves or other such means of entry. ", parse);
-	if(party.NumTotal() > 2)
+	if(party.Num() > 2)
 		Text.Add("None of your companions are able to find any means of entry either. ", parse);
-	else if(party.NumTotal() == 2)
+	else if(party.Num() == 2)
 		Text.Add("[name] looks a bit perplexed, also unable to find any mean to enter the tower. ", {name: party.Get(1).name});
 	Text.Add("There is something though…", parse);
 	Text.NL();
@@ -184,9 +184,9 @@ Scenes.Golem.OnWin = function() {
 		Text.Add(" You are slightly disappointed that the golem didn’t assume its other form, robbing you of the opportunity to return the favor.", parse);
 	Text.Add(" Behind it, the dense darkness filling the interior of the tower lifts, revealing a number of strange devices and a narrow staircase leading to the upper floors.", parse);
 	Text.NL();
-	if(party.NumTotal() > 2)
+	if(party.Num() > 2)
 		parse["comp"] = " and checking on your companions";
-	else if(party.NumTotal() == 2)
+	else if(party.Num() == 2)
 		parse["comp"] = Text.Parse(" and checking on [name]", {name: party.Get(1).name});
 	else
 		parse["comp"] = "";
@@ -200,9 +200,9 @@ Scenes.Golem.OnWin = function() {
 	Text.NL();
 	Text.Add("The next floor contains a bedroom, and this place has clearly been in use, and not just for sleeping either. The sheets of the large bed - a beautiful piece of woodwork looking like a huge leaf - are ruffled and stained with sexual fluids. Large glass bottles containing a luminescent fluid are neatly lined up on a shelf in a nearby bookcase, stored for who knows what purpose.", parse);
 	Text.NL();
-	if(party.NumTotal() > 2)
+	if(party.Num() > 2)
 		parse["comp"] = ", followed by your companions";
-	else if(party.NumTotal() == 2)
+	else if(party.Num() == 2)
 		parse["comp"] = Text.Parse(", followed by [name]", {name: party.Get(1).name});
 	else
 		parse["comp"] = "";
