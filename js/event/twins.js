@@ -113,6 +113,36 @@ Rani.prototype.ToStorage = function() {
 	return storage;
 }
 
+// TODO
+Scenes.Twins.Interact = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("PLACEHOLDER", parse);
+	Text.NL();
+	Text.Flush();
+	
+	//[Talk]
+	var options = new Array();
+	options.push({ nameStr : "Talk",
+		func : Scenes.Twins.TalkPrompt, enabled : true,
+		tooltip : "Talkie talkie."
+	});
+	options.push({ nameStr : "Leave",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		}, enabled : true,
+		tooltip : "Leave."
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
 
 Scenes.Twins.TalkPrompt = function() {
 	var parse = {
@@ -169,6 +199,7 @@ Scenes.Twins.TalkPrompt = function() {
 					Text.Add("<b>Received royal letter!</b>", parse);
 					terry.flags["Saved"] = Terry.Saved.TalkedTwins2;
 				}
+				// TODO
 				else {
 					Text.Add("", parse);
 					Text.NL();
@@ -184,5 +215,5 @@ Scenes.Twins.TalkPrompt = function() {
 			tooltip : "Ask them if they can intervene on behalf of the thief on death row."
 		});
 	}
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, true, Scenes.Twins.Interact);
 }
