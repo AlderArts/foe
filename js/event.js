@@ -26,6 +26,10 @@ function Event(nameFunc) {
 	this.enc = null;
 }
 
+Event.prototype.switchSpot = function() {
+	return false;
+}
+
 MoveToLocation = function(location, timestep) {
 	party.location = location;
 

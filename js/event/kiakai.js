@@ -150,7 +150,7 @@ Kiakai.prototype.InitCharacter = function(gender) {
 }
 
 // Party interaction
-Kiakai.prototype.Interact = function() {
+Kiakai.prototype.Interact = function(switchSpot) {
 	Text.Clear();
 	var that = kiakai;
 	
@@ -236,13 +236,14 @@ Kiakai.prototype.Interact = function() {
 			that.JobPrompt(that.Interact);
 		}, enabled : true
 	});
-	options.push({ nameStr: party.InParty(that, true) ? "Switch out" : "Switch in",
-		func : function() {
-			party.SwitchPrompt(that);
-		}, enabled : true,
-		tooltip: party.InParty(that, true) ? "Send to reserve." : "Switch into active party."
-	});
-	
+	if(switchSpot) {
+		options.push({ nameStr: party.InParty(that) ? "Switch out" : "Switch in",
+			func : function() {
+				party.SwitchPrompt(that);
+			}, enabled : true,
+			tooltip: party.InParty(that) ? "Send to reserve." : "Switch into active party."
+		});
+	}
 	Gui.SetButtonsFromList(options, true, PartyInteraction);
 }
 

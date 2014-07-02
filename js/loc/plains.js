@@ -87,6 +87,9 @@ world.loc.Plains.Nomads.Fireplace.links.push(new Link(
 		MoveToLocation(world.loc.Plains.Nomads.Tent, {minute: 5});
 	}
 ));
+world.loc.Plains.Nomads.Fireplace.switchSpot = function() {
+	return gameCache.flags["Portals"] == 0;
+}
 
 // TODO TEMP CAVALCADE
 world.loc.Plains.Nomads.Fireplace.events.push(new Link(

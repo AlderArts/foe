@@ -59,6 +59,7 @@ SetExploreButtons = function() {
 	Input.exploreButtons[ExploreButtonIndex.Explore].Setup("Explore", Explore, true);
 
 	if(!Intro.active) {
+		Input.exploreButtons[ExploreButtonIndex.Party].enabledImage = (party.location.switchSpot()) ? Images.imgButtonEnabled2 : Images.imgButtonEnabled;
 	    Input.exploreButtons[ExploreButtonIndex.Party].Setup("Party", PartyInteraction, true);
 	    if(party.members.length == 0) Input.exploreButtons[ExploreButtonIndex.Party].SetEnabled(false);
 	    
@@ -265,7 +266,7 @@ Explore = function(preventClear) {
 }
 
 PartyInteraction = function(preventClear) {
-	party.Interact(preventClear);
+	party.Interact(preventClear, party.location.switchSpot());
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Party];
 	
 	SetExploreButtons();

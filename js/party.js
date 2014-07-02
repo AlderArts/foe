@@ -137,6 +137,10 @@ Party.prototype.InReserve = function(member) {
 	var idx = this.reserve.indexOf(member); // Find the index
 	return (idx!=-1);
 }
+Party.prototype.InSaved = function(member) {
+	var idx = this.saved.indexOf(member); // Find the index
+	return (idx!=-1);
+}
 
 Party.prototype.AddMember = function(member) {
 	var idx = this.members.indexOf(member); // Find the index
@@ -262,7 +266,7 @@ Party.prototype.Sleep = function() {
 		this.reserve[i].Sleep();
 }
 
-Party.prototype.Interact = function(preventClear, switchSpot) {
+Party.prototype.Interact = function(preventClear, switchSpot, back) {
 	if(!preventClear)
 		Text.Clear();
 	
@@ -273,19 +277,19 @@ Party.prototype.Interact = function(preventClear, switchSpot) {
 	// Interacting with self opens options for masturbation etc
 	for(var i = 0; i < this.members.length; i++) {
 		var member = this.members[i];
-		list.push({nameStr: member.name, func: member.Interact, enabled: true, image: Input.imgButtonEnabled2});
+		list.push({nameStr: member.name, func: member.Interact, obj: switchSpot, enabled: true, image: Input.imgButtonEnabled2});
 	}
 	if(switchSpot) {
 		// Add reserve too
 		for(var i = 0; i < this.reserve.length; i++) {
 			var member = this.reserve[i];
-			list.push({nameStr: member.name, func: member.Interact, enabled: true});
+			list.push({nameStr: member.name, func: member.Interact, obj: switchSpot, enabled: true});
 		}
 	}
 	// Don't sort, use same order as in menu
 	//list.sort( function(a, b) { return a.nameStr > b.nameStr; } );
 	
-	Gui.SetButtonsFromList(list, false, false, GameState.Event);
+	Gui.SetButtonsFromList(list, back, false, GameState.Event);
 }
 
 Party.prototype.ShowAbilities = function() {
