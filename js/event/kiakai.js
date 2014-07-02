@@ -3365,6 +3365,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 		kVagDesc     : function() { return kiakai.FirstVag().Short(); },
 		kClitDesc    : function() { return kiakai.FirstVag().ClitShort(); },
 		kBreastDesc  : function() { return kiakai.FirstBreastRow().Short(); },
+		kNipsDesc    : function() { return kiakai.FirstBreastRow().NipsShort(); },
 		kTongueDesc  : function() { return kiakai.TongueDesc(); },
 		kAnusDesc    : function() { return kiakai.Butt().AnalShort(); },
 		kSkinDesc    : function() { return kiakai.SkinDesc(); },
