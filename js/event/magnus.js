@@ -659,6 +659,7 @@ Scenes.Magnus.Meditation = function() {
 					magnus.flags["Sexed"]++;
 					
 					world.TimeStep({hour : 4});
+					player.AddLustFraction(-1);
 					
 					if(first) {
 						Text.Flush();
