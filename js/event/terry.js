@@ -345,7 +345,9 @@ Scenes.Terry.CombatVsMiranda = function() {
 	enc.onEncounter = ...
 	enc.VictoryCondition = ...
 	*/
-	enc.Start();
+	Gui.NextPrompt(function() {
+		enc.Start();
+	});
 }
 
 Scenes.Terry.CaughtTheThief = function() {
@@ -354,6 +356,7 @@ Scenes.Terry.CaughtTheThief = function() {
 		masterMistress : player.mfTrue("master", "mistress")
 	};
 	
+	SetGameState(GameState.Event);
 	rigard.Krawitz["Q"] = Rigard.KrawitzQ.CaughtTerry;
 	
 	var dom = player.SubDom() - miranda.SubDom();
