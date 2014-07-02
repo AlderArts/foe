@@ -405,6 +405,7 @@ Scenes.Kyna.IntroSexPrompt = function() {
 				Text.Add("Inevitably, the sustained fellatio you’ve been receiving is too much for you to take anymore. You instinctively put a hand on the back of her head and hold her down, spraying your cum right down her gullet. Kyna immediately snaps out of her cock-induced daze, the feeling of your cum being injected into her making her gag and swallow in order to breathe. As your orgasm tapers off, you realise what you’ve done, quickly taking your hand off of Kyna’s head.", parse);
 				Text.NL();
 				
+				world.TimeStep({hour: 1});
 				var load = player.OrgasmCum();
 				
 				Text.Add("Springing upright, Kyna coughs several times before looking at you. <i>”YOU COULD HAVE WARNED ME!”</i> she exclaims, <i>”You almost fecking suffocated me!”</i> Coughing again, she looks down and sees her hand still gently rubbing against her feminine entrance. <i>”U-umm, could ya help me with this?”</i> she asks, looking up to see you’ve laid back on the bed, staring at her expectantly. <i>”W-what are ya oglin’ me like that for? Y-you don’t want me to… Finish meself do ya?”</i> She looks to you nervously, and you nod in reply.", parse);
