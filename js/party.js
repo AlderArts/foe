@@ -107,6 +107,7 @@ Party.prototype.LoadActiveParty = function() {
 	this.ClearActiveParty();
 	for(var i = 0; i < this.saved.length; ++i)
 		this.SwitchIn(this.saved[i]);
+	this.saved = [];
 }
 // From "Total"
 Party.prototype.Get = function(num) {
@@ -164,8 +165,6 @@ Party.prototype.RemoveMember = function(member) {
 	if(idx!=-1) this.members.splice(idx, 1); // Remove it if really found!
 	var idx = this.reserve.indexOf(member);  // Find the index
 	if(idx!=-1) this.reserve.splice(idx, 1); // Remove it if really found!
-	var idx = this.saved.indexOf(member);  // Find the index
-	if(idx!=-1) this.saved.splice(idx, 1); // Remove it if really found!
 	if(this == party) member.DebugMode(false);
 }
 

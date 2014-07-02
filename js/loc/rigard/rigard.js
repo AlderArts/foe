@@ -349,127 +349,128 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 	// Introductory text
 	var introText = new EncounterTable();
 	introText.AddEnc(function() {
-		Text.AddOutput("As you are entering the area, you overhear [aAn1] [NPC1] and [aAn2] [NPC2] talking.", parse);
+		Text.Add("As you are entering the area, you overhear [aAn1] [NPC1] and [aAn2] [NPC2] talking.", parse);
 	}, 1.0, enteringArea);
 	introText.AddEnc(function() {
-		Text.AddOutput("Coming back to the core of the [areaname], you can't help but overhear [aAn1] [NPC1] and [aAn2] [NPC2] talking.", parse);
+		Text.Add("Coming back to the core of the [areaname], you can't help but overhear [aAn1] [NPC1] and [aAn2] [NPC2] talking.", parse);
 	}, 1.0, !enteringArea);
 	introText.AddEnc(function() {
-		Text.AddOutput("Walking along the street, you overhear a conversation between [aAn1] [NPC1] and [aAn2] [NPC2].", parse);
+		Text.Add("Walking along the street, you overhear a conversation between [aAn1] [NPC1] and [aAn2] [NPC2].", parse);
 	}, 1.0);
 	introText.Get();
 	
-	Text.Newline();
+	Text.NL();
 	
 	// Main rumor body
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
-		Text.AddOutput("<i>\"You know, the other day I heard that a new portal opened up out in the plains and a [randommanWoman] came through,\"</i> the [NPC1] says.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>\"Nonsense! Everyone knows there haven't been any portals in ten years!\"</i> The [NPC2] waves a hand dismissively.", parse);
+		Text.Add("<i>\"You know, the other day I heard that a new portal opened up out in the plains and a [randommanWoman] came through,\"</i> the [NPC1] says.", parse);
+		Text.NL();
+		Text.Add("<i>\"Nonsense! Everyone knows there haven't been any portals in ten years!\"</i> The [NPC2] waves a hand dismissively.", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.AddOutput("<i>\"Have you heard? Some merchant caravan came in yesterday from the oasis, and they say lone travellers have been disappearing out there,\"</i> the [NPC1] says.", parse);
-		Text.Newline();
+		Text.Add("<i>\"Have you heard? Some merchant caravan came in yesterday from the oasis, and they say lone travellers have been disappearing out there,\"</i> the [NPC1] says.", parse);
+		Text.NL();
 		var opts = [];
 		opts.push("The [NPC2] shakes his head dismissively. <i>\"Bah, they probably just wandered off into the dunes like fools and died where their bodies will never be found.\"</i>");
 		opts.push("<i>\"Greedy bastards are probably just making up stories so they'll have an excuse to drive up prices. It's never enough for them,\"</i> the [NPC2] responds.");
 		opts.push("<i>\"That does sound bad. What other mess is stirring in this poor land?\"</i> the [NPC2] answers, looking dejected.");
-		Text.AddOutput(opts[Rand(opts.length)], parse);
+		Text.Add(opts[Rand(opts.length)], parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.AddOutput("<i>\"You know, I bought some fish from a [randommanWoman] who comes in from over by the lake yesterday, and [rheshe] saw the strangest thing,\"</i> the [NPC1] says.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>\"Oh? Fishermen have the best tales.\"</i> The [NPC2] rolls [hisher2] eyes.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>\"Don't be that way! [rHeShe] said [rheshe] saw a woman emerge from the lake, but when [rheshe] looked at her, her lower body was that of a fish! And then--\"</i>", parse);
+		Text.Add("<i>\"You know, I bought some fish from a [randommanWoman] who comes in from over by the lake yesterday, and [rheshe] saw the strangest thing,\"</i> the [NPC1] says.", parse);
+		Text.NL();
+		Text.Add("<i>\"Oh? Fishermen have the best tales.\"</i> The [NPC2] rolls [hisher2] eyes.", parse);
+		Text.NL();
+		Text.Add("<i>\"Don't be that way! [rHeShe] said [rheshe] saw a woman emerge from the lake, but when [rheshe] looked at her, her lower body was that of a fish! And then--\"</i>", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.AddOutput("<i>\"I spoke to one of the farmers at the market the other day, and [rheshe]'s been complaining about rabbits,\"</i> the [NPC1] remarks.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>\"Rabbits? Really?\"</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>\"Apparently [rheshe]'s seen huge groups of them gathering together and just wandering around. [rHeShe]'s afraid they'll come attack his farm or something.\"</i>", parse);
-		Text.Newline();
-		Text.AddOutput("The [NPC2] half-smiles. <i>\"[rHeShe]'s afraid of a rabbit attack? Bizarre.\"</i>", parse);
+		Text.Add("<i>\"I spoke to one of the farmers at the market the other day, and [rheshe]'s been complaining about rabbits,\"</i> the [NPC1] remarks.", parse);
+		Text.NL();
+		Text.Add("<i>\"Rabbits? Really?\"</i>", parse);
+		Text.NL();
+		Text.Add("<i>\"Apparently [rheshe]'s seen huge groups of them gathering together and just wandering around. [rHeShe]'s afraid they'll come attack his farm or something.\"</i>", parse);
+		Text.NL();
+		Text.Add("The [NPC2] half-smiles. <i>\"[rHeShe]'s afraid of a rabbit attack? Bizarre.\"</i>", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.AddOutput("<i>\"I wish they'd get rid of these ridiculous security measures. It's become so annoying to get into the city or leave again,\"</i> the [NPC1] complains.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>\"They're there for good reason!\"</i> The [NPC2] sounds offended. <i>\"You don't want the outlaws to come and murder us in our sleep, do you?\"</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>\"Bah, I bet it's just a small group, hiding in the woods and hunting game. How dangerous could they be?\"</i>", parse);
+		Text.Add("<i>\"I wish they'd get rid of these ridiculous security measures. It's become so annoying to get into the city or leave again,\"</i> the [NPC1] complains.", parse);
+		Text.NL();
+		Text.Add("<i>\"They're there for good reason!\"</i> The [NPC2] sounds offended. <i>\"You don't want the outlaws to come and murder us in our sleep, do you?\"</i>", parse);
+		Text.NL();
+		Text.Add("<i>\"Bah, I bet it's just a small group, hiding in the woods and hunting game. How dangerous could they be?\"</i>", parse);
 	}, 1.0, function() { return party.location != world.loc.Rigard.Slums.gate; });
 	scenes.AddEnc(function() {
 		if(poshList) {
-			Text.AddOutput("<i>\"I had a chance to visit the royal guard the other day, you know,\"</i> the [NPC1] remarks.", parse);
-			Text.Newline();
-			Text.AddOutput("<i>\"Oh, how did it go?\"</i>", parse);
-			Text.Newline();
-			Text.AddOutput("<i>\"They were most gracious and accommodating. Just really nice people.\"</i>", parse);
-			Text.Newline();
-			Text.AddOutput("The [NPC2] smiles in approval. <i>\"I'm glad at least some in this city still understand who they're supposed to listen to.\"</i>", parse);
+			Text.Add("<i>\"I had a chance to visit the royal guard the other day, you know,\"</i> the [NPC1] remarks.", parse);
+			Text.NL();
+			Text.Add("<i>\"Oh, how did it go?\"</i>", parse);
+			Text.NL();
+			Text.Add("<i>\"They were most gracious and accommodating. Just really nice people.\"</i>", parse);
+			Text.NL();
+			Text.Add("The [NPC2] smiles in approval. <i>\"I'm glad at least some in this city still understand who they're supposed to listen to.\"</i>", parse);
 		}
 		else {
-			Text.AddOutput("<i>\"Have I told you how I ran into one of those royal guard assholes the other day?\"</i> the [NPC1] asks.", parse);
-			Text.Newline();
-			Text.AddOutput("<i>\"No, what happened?\"</i>", parse);
-			Text.Newline();
+			Text.Add("<i>\"Have I told you how I ran into one of those royal guard assholes the other day?\"</i> the [NPC1] asks.", parse);
+			Text.NL();
+			Text.Add("<i>\"No, what happened?\"</i>", parse);
+			Text.NL();
 			
 			var opts = [];
 			opts.push("<i>\"He said I was loitering, and my clothes were of a cut not allowed in the city. Ugh...\"</i> [heshe1] groans in frustration. <i>\"Basically, he was demanding a bribe, and I had no choice but to buy him off.\"</i>");
 			opts.push("<i>\"He said that I was too non-human, that being so morphed is beyond lady Aria's will. I think he was just looking for an excuse to beat me up, but I managed to run off.\"</i>");
 			opts.push("<i>\"He said my kind didn't belong here. I think that stupid noble I got into an argument with last week just sent him to harass me.\"</i> [HeShe1] sounds disgusted.");
 			opts.push("<i>\"He said I had best stay away from my favorite merchant's shop. I think [rheshe]'s in competition with some noble, and they sent the guard to try and drive [rhimher] out of business.\"</i>");
-			Text.AddOutput(opts[Rand(opts.length)], parse);
+			Text.Add(opts[Rand(opts.length)], parse);
 		}
 	}, 1.0, function() { return !hasRoyalGuard; });
 	// KRAWITZ RUMORS
 	scenes.AddEnc(function() {
 		// 0 = no, 1 = superwin, 2 = win, 3 = loss
-		Text.AddOutput("<i>\"Have you heard? Lord Krawitz fought a duel out in the middle of a street,\"</i> the [NPC1] says.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>\"Oh? How'd it go?\"</i>", parse);
-		Text.Newline();
+		Text.Add("<i>\"Have you heard? Lord Krawitz fought a duel out in the middle of a street,\"</i> the [NPC1] says.", parse);
+		Text.NL();
+		Text.Add("<i>\"Oh? How'd it go?\"</i>", parse);
+		Text.NL();
 		if(rigard.Krawitz["Duel"] == 1) {
-			Text.AddOutput("<i>\"He got annihilated! I heard his clothes were in shreds and he has a scar on his cheek to show for the trouble.\"</i>", parse);
-			Text.Newline();
-			Text.AddOutput("The [NPC2] beams happily. <i>\"It's about time someone showed that bastard what for!\"</i>", parse);
+			Text.Add("<i>\"He got annihilated! I heard his clothes were in shreds and he has a scar on his cheek to show for the trouble.\"</i>", parse);
+			Text.NL();
+			Text.Add("The [NPC2] beams happily. <i>\"It's about time someone showed that bastard what for!\"</i>", parse);
 		}
 		else if(rigard.Krawitz["Duel"] == 2) {
-			Text.AddOutput("<i>\"I was told it was a spectacular fight! His opponent just barely managed to beat him in the end, and he was just really angry and slunk off.\"</i>", parse);
-			Text.Newline();
-			Text.AddOutput("The [NPC2] smiles in pleasure. <i>\"It's about time someone put that bastard in his place.\"</i>", parse);
+			Text.Add("<i>\"I was told it was a spectacular fight! His opponent just barely managed to beat him in the end, and he was just really angry and slunk off.\"</i>", parse);
+			Text.NL();
+			Text.Add("The [NPC2] smiles in pleasure. <i>\"It's about time someone put that bastard in his place.\"</i>", parse);
 		}
 		else { // Loss, 3
-			Text.AddOutput("<i>\"He won quite convincingly, unfortunately.\"</i>", parse);
-			Text.Newline();
-			Text.AddOutput("The [NPC2] shakes [hisher2] head in disappointment. <i>\"He might be a bastard, but you have to hand it to him - he's a master with that blade.\"</i>", parse);
+			Text.Add("<i>\"He won quite convincingly, unfortunately.\"</i>", parse);
+			Text.NL();
+			Text.Add("The [NPC2] shakes [hisher2] head in disappointment. <i>\"He might be a bastard, but you have to hand it to him - he's a master with that blade.\"</i>", parse);
 		}
 	}, 1.0, function() { return rigard.Krawitz["Duel"] != 0; });
 	// TODO: MORE RUMORS AFTER NIGHT INFILTRATION
 	scenes.Get();
 	
-	Text.Newline();
+	Text.NL();
 	// Outro text
 	var outroText = new EncounterTable();
 	outroText.AddEnc(function() {
-		Text.AddOutput("Their conversation fades behind you as you walk on.", parse);
+		Text.Add("Their conversation fades behind you as you walk on.", parse);
 	});
 	outroText.AddEnc(function() {
-		Text.AddOutput("Your steps take you out of hearing range of their conversation.", parse);
+		Text.Add("Your steps take you out of hearing range of their conversation.", parse);
 	});
 	outroText.AddEnc(function() {
-		Text.AddOutput("A sudden surge in the noise coming from the crowd makes the rest of the conversation impossible to hear.", parse);
+		Text.Add("A sudden surge in the noise coming from the crowd makes the rest of the conversation impossible to hear.", parse);
 	}, 1.0, function() { return world.time.hour >= 8 && world.time.hour < 19; });
 	outroText.AddEnc(function() {
-		Text.AddOutput("You turn a corner, and the conversation grows inaudible behind you.", parse);
+		Text.Add("You turn a corner, and the conversation grows inaudible behind you.", parse);
 	});
 	outroText.Get();
 	
 	if(!enteringArea)
 		world.TimeStep({minute: 10});
 	
+	Text.Flush();
 	// Next button
 	Gui.NextPrompt();
 }
