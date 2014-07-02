@@ -604,7 +604,6 @@ Scenes.Room69.Discovering69Sex = function() {
 	}
 	Text.Flush();
 	
-	player.AddLustFraction(-1);
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
@@ -647,6 +646,7 @@ Scenes.Room69.Discovering69Sex = function() {
 		Text.Add("You smile, thinking about what kind of ‘visit’ the room has in mind, and hurry outside, finally noticing how oddly clean you are. [comp] Maybe you could ask the innkeeper about the room...", parse);
 		Text.Flush();
 		world.TimeStep({hour : 3});
+		player.AddLustFraction(-1);
 		room69.flags["Sexed"]++;
 		room69.flags["Rel"] = Room69.RelFlags.GoodTerms;
 		room69.relation.IncreaseStat(100, 10);

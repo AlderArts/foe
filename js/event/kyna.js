@@ -372,12 +372,11 @@ Scenes.Kyna.IntroSexPrompt = function() {
 				Text.Add("This is the last sensation you need as you slam your [cockDesc] home one last time and release your load deep into the former virgin's womb, causing her to have the largest orgasm of her life to date and pass out beneath you.", parse);
 				Text.NL();
 				
+				world.TimeStep({hour: 1});
 				var load = player.OrgasmCum();
 				
 				Text.Add("Exhausted yourself, you forgo pulling out, cuddle up to the sleeping ferret, and fall asleep until morning.", parse);
 				Text.Flush();
-				
-				world.TimeStep({hour: 1});
 				
 				Gui.NextPrompt(Scenes.Kyna.IntroMorningAfter);
 			}, enabled : p1Cock,
@@ -456,12 +455,11 @@ Scenes.Kyna.IntroSexPrompt = function() {
 					Text.Add("Lapping at her fountaining juices, you feel her muscles twitching more and more, getting closer and closer to her second release. You’re growing near to your climax as well, her tongue and fingers persistent at probing your depths. Sealing your lips around her clit, you tease it fiercely, bringing Kyna to a wet and heavy orgasm. Her tongue dances against your dripping muff, stroking your clit and making you squeal as you cum over Kyna’s face.", parse);
 					Text.NL();
 					
+					world.TimeStep({hour: 1});
 					var load = player.OrgasmCum();
 				
 					Text.Add("Exhausted, you cuddle up to the barely conscious ferret, and kiss her good night before sleeping yourself.", parse);
 					Text.Flush();
-					
-					world.TimeStep({hour: 1});
 					
 					Gui.NextPrompt(Scenes.Kyna.IntroMorningAfter);
 				});
@@ -497,13 +495,12 @@ Scenes.Kyna.IntroSexPrompt = function() {
 				Text.NL();
 				Text.Add("Your cries grow louder under her attack on your nethers, very quickly approaching your climax. Hearing this, her ears perk and her lips pop off of your painfully stiff clit. But you don’t get the chance to complain, as she then grinds her clit upon yours. This final bit of stimulation causes both of you to cry out in orgasm, your back arching up in hard-fought release. Kyna, now thoroughly exhausted, flops down onto you bonelessly.", parse);
 				Text.NL();
-				
+
+				world.TimeStep({hour: 1});				
 				var load = player.OrgasmCum();
 				
 				Text.Add("Giggling softly, you kiss her once more, and pull the blanket up over both of you.", parse);
 				Text.Flush();
-				
-				world.TimeStep({hour: 1});
 				
 				Gui.NextPrompt(Scenes.Kyna.IntroMorningAfter);
 			}, enabled : true,

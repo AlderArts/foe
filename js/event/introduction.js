@@ -2487,11 +2487,10 @@ Intro.KiaNiceSex69 = function() {
 		
 		Text.AddOutput(name + " swallows your fluids, licking " + hisher + " lips with a satisfied smile on " + hisher + " face before silently turning around to face you. The two of you rest for a bit, before restoring your clothes in a slightly embarrassed silence. You have a feeling that the elf would be happy healing you a few more times, were you to ask. It would seem you have found yourself quite the horny travel companion.");
 
-		player.AddLustFraction(-1);
 		kiakai.slut.IncreaseStat(100, 5);
 		kiakai.relation.IncreaseStat(100, 5);
 		world.TimeStep({minute: 20});
-		
+		player.AddLustFraction(-1);
 
 		Gui.NextPrompt(Intro.Finalizing);
 	});
@@ -2546,12 +2545,12 @@ Intro.KiaNaughtySex = function() {
 				Text.Newline();
 				Text.AddOutput("Neither of you speak as you put your clothes on again. You get a feeling that your slutty companion might be receptive of more of this later, and that " + heshe + " will be more subdued from now on.");
 				
-				player.AddLustFraction(-1);
 				player.subDom.IncreaseStat(100, 5);
 				kiakai.subDom.DecreaseStat(-100, 5);
 				kiakai.slut.IncreaseStat(100, 5);
 				kiakai.relation.DecreaseStat(-100, 5);
 				world.TimeStep({minute: 20});
+				player.AddLustFraction(-1);
 				
 				Gui.NextPrompt(Intro.Finalizing);
 			}, enabled : true
@@ -2584,12 +2583,12 @@ Intro.KiaNaughtySex = function() {
 				Text.Newline();
 				Text.AddOutput("Neither of you speak as you put your clothes on again. You get a feeling that your slutty companion might be receptive of more of this later, and that " + heshe + " will be more subdued from now on.");
 				
-				player.AddLustFraction(-1);
 				player.subDom.IncreaseStat(100, 5);
 				kiakai.subDom.DecreaseStat(-100, 5);
 				kiakai.slut.IncreaseStat(100, 5);
 				kiakai.relation.DecreaseStat(-100, 5);
 				world.TimeStep({minute: 20});
+				player.AddLustFraction(-1);
 				
 				Gui.NextPrompt(Intro.Finalizing);
 			}, enabled : true
