@@ -308,6 +308,10 @@ Scenes.Terry.CombatVsMiranda = function() {
 	enc.canRun = false;
 	
 	enc.onLoss = function() {
+		var parse = {
+			
+		};
+		
 		SetGameState(GameState.Event);
 		Text.Clear();
 		Text.Add("Smirking, the vixen jumps over you and dashes away. You rub your sore spots and with some effort manage to get back up. Miranda looks like she’s going to pop a vein…", parse);

@@ -161,7 +161,7 @@ Scenes.Twins.TalkPrompt = function() {
 		options.push({ nameStr : "Thief",
 			func : function() {
 				Text.Clear();
-				if(terry.flags["Saved"] == Terry.Saved.TalkedMiranda) {
+				if(terry.flags["Saved"] <= Terry.Saved.TalkedMiranda) {
 					Text.Add("You explain to them that you have been feeling guilty about the sentence of death decreed for the vulpine thief who inadvertently took the blame for your own raid on the Krawitz estate, as well as his own crimes there. You ask if they couldn't intervene somehow - at least to lighten his sentence, if they can't arrange a pardon?", parse);
 					Text.NL();
 					Text.Add("<i>”Well, I appreciate the fact that he robbed Krawitz, but it’s not so simple, [playername]. I don’t think-”</i>", parse);
@@ -172,7 +172,7 @@ Scenes.Twins.TalkPrompt = function() {
 					Text.NL();
 					Text.Add("You thank them for their efforts and excuse yourself, heading back to the main room of the inn.", parse);
 					
-					twins.terryTimeout = new Time(0, 0, 0, 24 - world.time.hour);
+					twins.terryTimer = new Time(0, 0, 0, 24 - world.time.hour);
 					
 					terry.flags["Saved"] = Terry.Saved.TalkedTwins1;
 				}
@@ -207,7 +207,7 @@ Scenes.Twins.TalkPrompt = function() {
 				}
 				// TODO
 				else {
-					Text.Add("", parse);
+					Text.Add("PLACEHOLDER", parse);
 					Text.NL();
 					Text.Add("", parse);
 					Text.NL();
@@ -217,8 +217,8 @@ Scenes.Twins.TalkPrompt = function() {
 				}
 				Text.Flush();
 				Gui.NextPrompt();
-			}, enabled : twins.terryTimeout.Expired(),
-			tooltip : "Ask them if they can intervene on behalf of the thief on death row."
+			}, enabled : twins.terryTimer.Expired(),
+			tooltip : Text.Parse("Ask them if they can intervene on behalf of the thief[death].", {death: terry.flags["Saved"] >= Terry.Saved.TalkedMiranda ? " on death row" : ""})
 		});
 	}
 	Gui.SetButtonsFromList(options, true, Scenes.Twins.Interact);
