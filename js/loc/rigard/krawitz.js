@@ -2222,6 +2222,9 @@ Scenes.Krawitz.Aftermath = function() {
 		
 		Gui.Callstack.push(function() {
 			party.location = world.loc.Rigard.Inn.penthouse;
+				
+			twins.flags["Met"] = Twins.Met.Access;
+			
 			Text.Add(" Renting this place must cost a fortune.", parse);
 			Text.NL();
 			parse["hotcold"] = world.time.season == Season.Winter ? "a cosy fire warming up the interior" : "though at the moment, it isn’t lit";

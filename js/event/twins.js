@@ -8,13 +8,19 @@ function Twins(storage) {
 	this.rani = new Rani();
 	
 	this.flags = {};
-	this.flags["Met"] = 0;
+	this.flags["Met"] = Twins.Met.Access;
 	this.flags["SexOpen"] = 0;
 	
 	this.terryTimer = new Time();
 	
 	if(storage) this.FromStorage(storage);
 }
+
+Twins.Met = {
+	NotMet : 0,
+	Met : 1,
+	Access : 2
+};
 
 Twins.prototype.Update = function(step) {
 	Entity.prototype.Update.call(this, step);

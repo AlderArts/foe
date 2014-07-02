@@ -46,6 +46,39 @@ world.loc.Rigard.Inn.common.links.push(new Link(
 	}
 ));
 
+world.loc.Rigard.Inn.common.links.push(new Link(
+	"Penthouse", function() { return twins.flags["Met"] >= Twins.Met.Access; }, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.Rigard.Inn.penthouse, {minute: 5});
+	}
+));
+
+
+
+// Twins' room
+world.loc.Rigard.Inn.penthouse.description = function() {
+	Text.Add("You are in the Lady's Blessing's penthouse.");
+	Text.NL();
+	Text.Flush();
+}
+world.loc.Rigard.Inn.penthouse.links.push(new Link(
+	"Downstairs", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.Rigard.Inn.common, {minute: 5});
+	}
+));
+world.loc.Rigard.Inn.penthouse.events.push(new Link(
+	"Twins", true, true,
+	null,
+	function() {
+		Scenes.Twins.Interact();
+	}
+));
+
+
+
 
 /* TODO: Keep?
 world.loc.Rigard.Inn.common.links.push(new Link(

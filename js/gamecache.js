@@ -295,6 +295,11 @@ CacheToGame = function() {
 	if(gameCache.version < 14) {
 		miranda.flags["Herm"] = (miranda.flags["Met"] >= Miranda.Met.TavernAftermath) ? 1 : 0;
 	}
+	if(gameCache.version < 15) {
+		if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.HeistDone) 
+			twins.flags["Met"] = Twins.Met.Access;
+	}
+	
 }
 
 GameToCache = function() {
