@@ -1511,7 +1511,7 @@ Scenes.Gwendy.ChallengeSexVag = function(fuck, hangout) {
 			Text.Add("Despite - or due to - your rough treatment, Gwendy’s prominent equine member juts up, its rigid mass throbbing erratically, wanting to join in on the fun. You see a pleading look on Gwendy’s face that begs for you to attend to her cock as well. Unfortunately for her, you have other plans in mind. Perhaps another time.", parse);
 			Text.NL();
 		}
-		Text.Add("Taking a moment to drink in her beauty, you tease her outer lips a bit before plunging two eager fingers in, moving them in circular motions. Within moments, your probing hand is soaked in her juices, the clear liquid flowing down into your palm. Withdrawing your fingers, you line [oneof] you cock[s] against the lubricated tunnel. With equal parts lust and greed, you unceremoniously push inside, penetrating her in one, deft motion. The shock is sudden, sending an electric tingle down your spine, as Gwendy cries out in fervent joy.", parse);
+		Text.Add("Taking a moment to drink in her beauty, you tease her outer lips a bit before plunging two eager fingers in, moving them in circular motions. Within moments, your probing hand is soaked in her juices, the clear liquid flowing down into your palm. Withdrawing your fingers, you line [oneof] your cock[s] against the lubricated tunnel. With equal parts lust and greed, you unceremoniously push inside, penetrating her in one, deft motion. The shock is sudden, sending an electric tingle down your spine, as Gwendy cries out in fervent joy.", parse);
 		Text.NL();
 		
 		Sex.Vaginal(player, gwendy);
