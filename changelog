@@ -16,6 +16,7 @@ Version 0.3j
 * Terry's introduction scenes. I'd suggest you replay the mansion heist to get the most of this (old saves may be slightly weird).
 * Rigard brothel is now... there. Not quite open for business yet.
 * Fixed tons of bugs and inconsistencies courtesy of trixymoon on github. Thanks a lot!
+* Changed how the party switching system works. You can now only switch party members in specific areas. Currently, the party hang out around the campfire in the Nomads' camp when not on duty. Notice the green explore button! This change should also be reflected in scenes that involve other party members (they variations will only trigger if the follower is in your active party).
 
 --------------------------------------------
              PREVIOUS VERSIONS
