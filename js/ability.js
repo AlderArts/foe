@@ -110,7 +110,7 @@ Ability.prototype.CastInternal = function(encounter, caster, target) {
 		encounter.CombatTick();
 	});
 }
-	
+
 // Used as entrypoint for PC/Party (active selection)
 Ability.prototype.OnSelect = function(encounter, caster, backPrompt) {
 	var ability = this;
