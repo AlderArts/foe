@@ -2117,11 +2117,11 @@ Entity.prototype.Weapon = function() {
 }
 // TODO
 Entity.prototype.WeaponDesc = function() {
-	return this.weaponSlot ? this.weaponSlot.Short() : "stick";
+	return this.weaponSlot ? this.weaponSlot.short() : "stick";
 }
 // TODO
 Entity.prototype.WeaponDescLong = function() {
-	return this.weaponSlot ? this.weaponSlot.Long() : "a stick";
+	return this.weaponSlot ? this.weaponSlot.long() : "a stick";
 }
 // TODO
 Entity.prototype.Armor = function() {
@@ -2133,18 +2133,18 @@ Entity.prototype.LowerArmor = function() {
 }
 // TODO
 Entity.prototype.LowerArmorDesc = function() {
-	return this.botArmorSlot ? this.botArmorSlot.Short() : this.ArmorDesc();
+	return this.botArmorSlot ? this.botArmorSlot.short() : this.ArmorDesc();
 }
 // TODO
 Entity.prototype.LowerArmorDescLong = function() {
-	return this.botArmorSlot ? this.botArmorSlot.Long() : this.ArmorDescLong();
+	return this.botArmorSlot ? this.botArmorSlot.long() : this.ArmorDescLong();
 }
 // TODO
 Entity.prototype.ArmorDesc = function() {
-	return this.topArmorSlot ? this.topArmorSlot.Short() : "comfortable clothes";
+	return this.topArmorSlot ? this.topArmorSlot.short() : "comfortable clothes";
 }
 Entity.prototype.ArmorDescLong = function() {
-	return this.topArmorSlot ? this.topArmorSlot.Long() : "a set of comfortable clothes";
+	return this.topArmorSlot ? this.topArmorSlot.long() : "a set of comfortable clothes";
 }
 Entity.prototype.Accessories = function() {
 	return [this.acc1Slot, this.acc2Slot];

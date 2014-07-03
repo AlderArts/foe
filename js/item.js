@@ -26,8 +26,6 @@ function Item(id, name) {
 	//function(target)
 	this.Use        = null;
 	this.EquipType  = ItemType.None;
-	this.UseCombat  = null;
-	this.targetMode = TargetMode.Ally;
 	/* 
 	 * effect = {
 	 * 	 maxHp
