@@ -49,6 +49,23 @@ function Uru(storage) {
 Uru.prototype = new Entity();
 Uru.prototype.constructor = Uru;
 
+Uru.prototype.FromStorage = function(storage) {
+	this.LoadPersonalityStats(storage);
+	
+	// Load flags
+	for(var flag in storage.flags)
+		this.flags[flag] = parseInt(storage.flags[flag]);
+}
+
+Uru.prototype.ToStorage = function() {
+	var storage = {};
+	
+	this.SavePersonalityStats(storage);
+	
+	storage.flags = this.flags;
+	
+	return storage;
+}
 
 // Flags
 

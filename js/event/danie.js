@@ -49,10 +49,8 @@ Danie.prototype.constructor = Danie;
 Danie.prototype.FromStorage = function(storage) {
 	this.Butt().virgin       = parseInt(storage.avirgin) == 1;
 	this.FirstVag().virgin   = parseInt(storage.virgin) == 1;
-	// Personality stats
-	this.subDom.base         = parseFloat(storage.subDom)  || this.subDom.base;
-	this.slut.base           = parseFloat(storage.slut)    || this.slut.base;
-	this.relation.base       = parseFloat(storage.rel)     || this.relation.base;
+
+	this.LoadPersonalityStats(storage);
 	
 	// Load flags
 	for(var flag in storage.flags)
@@ -64,9 +62,9 @@ Danie.prototype.ToStorage = function() {
 		avirgin : this.Butt().virgin ? 1 : 0,
 		virgin  : this.FirstVag().virgin ? 1 : 0
 	};
-	if(this.subDom.base   != 0) storage.subDom = this.subDom.base;
-	if(this.slut.base     != 0) storage.slut   = this.slut.base;
-	if(this.relation.base != 0) storage.rel    = this.relation.base;
+	
+	this.SavePersonalityStats(storage);
+	
 	storage.flags = this.flags;
 	
 	return storage;

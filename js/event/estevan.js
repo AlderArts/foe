@@ -23,6 +23,24 @@ function Estevan(storage) {
 Estevan.prototype = new Entity();
 Estevan.prototype.constructor = Estevan;
 
+Estevan.prototype.FromStorage = function(storage) {
+	this.LoadPersonalityStats(storage);
+	
+	// Load flags
+	for(var flag in storage.flags)
+		this.flags[flag] = parseInt(storage.flags[flag]);
+}
+
+Estevan.prototype.ToStorage = function() {
+	var storage = {};
+	
+	this.SavePersonalityStats(storage);
+	
+	storage.flags = this.flags;
+	
+	return storage;
+}
+
 Scenes.Estevan = {};
 
 Scenes.Estevan.Interact = function() {

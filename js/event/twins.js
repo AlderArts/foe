@@ -18,7 +18,7 @@ function Twins(storage) {
 
 Twins.Met = {
 	NotMet : 0,
-	Met : 1,
+	Met    : 1,
 	Access : 2
 };
 
@@ -70,9 +70,8 @@ Rumi.prototype = new Entity();
 Rumi.prototype.constructor = Rumi;
 
 Rumi.prototype.FromStorage = function(storage) {
-	this.subDom.base         = parseFloat(storage.subDom)  || this.subDom.base;
-	this.slut.base           = parseFloat(storage.slut)    || this.slut.base;
-	this.relation.base       = parseFloat(storage.rel)     || this.relation.base;
+	this.LoadPersonalityStats(storage);
+	
 	// Load flags
 	for(var flag in storage.flags)
 		this.flags[flag] = parseInt(storage.flags[flag]);
@@ -82,9 +81,9 @@ Rumi.prototype.ToStorage = function() {
 	var storage = {
 		
 	};
-	if(this.subDom.base   != 0) storage.subDom = this.subDom.base;
-	if(this.slut.base     != 0) storage.slut   = this.slut.base;
-	if(this.relation.base != 0) storage.rel    = this.relation.base;
+	
+	this.SavePersonalityStats(storage);
+	
 	storage.flags = this.flags;
 	
 	return storage;
@@ -99,9 +98,8 @@ Rani.prototype = new Entity();
 Rani.prototype.constructor = Rani;
 
 Rani.prototype.FromStorage = function(storage) {
-	this.subDom.base         = parseFloat(storage.subDom)  || this.subDom.base;
-	this.slut.base           = parseFloat(storage.slut)    || this.slut.base;
-	this.relation.base       = parseFloat(storage.rel)     || this.relation.base;
+	this.LoadPersonalityStats(storage);
+	
 	// Load flags
 	for(var flag in storage.flags)
 		this.flags[flag] = parseInt(storage.flags[flag]);
@@ -111,9 +109,9 @@ Rani.prototype.ToStorage = function() {
 	var storage = {
 		
 	};
-	if(this.subDom.base   != 0) storage.subDom = this.subDom.base;
-	if(this.slut.base     != 0) storage.slut   = this.slut.base;
-	if(this.relation.base != 0) storage.rel    = this.relation.base;
+	
+	this.SavePersonalityStats(storage);
+	
 	storage.flags = this.flags;
 	
 	return storage;

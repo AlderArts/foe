@@ -29,7 +29,7 @@ function Terry(storage) {
 	this.body.DefMale();
 	this.Butt().buttSize.base = 3;
 	this.FirstCock().length.base = 11;
-	this.FirstCock().thickness.base = 2.5;
+	this.FirstCock().thickness.base = 2;
 	this.body.SetRace(Race.fox);
 	
 	this.SetLevelBonus();
@@ -63,9 +63,8 @@ Terry.Saved = {
 
 Terry.prototype.FromStorage = function(storage) {
 	this.Butt().virgin       = parseInt(storage.virgin) == 1;
-	this.subDom.base         = parseFloat(storage.subDom)  || this.subDom.base;
-	this.slut.base           = parseFloat(storage.slut)    || this.slut.base;
-	this.relation.base       = parseFloat(storage.rel)     || this.relation.base;
+	
+	this.LoadPersonalityStats(storage);
 	
 	// Load flags
 	for(var flag in storage.flags)
@@ -83,9 +82,9 @@ Terry.prototype.ToStorage = function() {
 	var storage = {
 		virgin : this.Butt().virgin ? 1 : 0
 	};
-	if(this.subDom.base   != 0) storage.subDom = this.subDom.base;
-	if(this.slut.base     != 0) storage.slut   = this.slut.base;
-	if(this.relation.base != 0) storage.rel    = this.relation.base;
+	
+	this.SavePersonalityStats(storage);
+	
 	storage.flags = this.flags;
 	storage.sex   = this.SaveSexStats();
 	
