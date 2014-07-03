@@ -2844,7 +2844,7 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 				
 				if(load > 6)
 					parse["load"] = "tremendous";
-				if(load > 3)
+				else if(load > 3)
 					parse["load"] = "considerable";
 				else
 					parse["load"] = "meager";
@@ -2883,7 +2883,7 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 				
 				if(load > 6)
 					parse["load"] = "tremendous";
-				if(load > 3)
+				else if(load > 3)
 					parse["load"] = "considerable";
 				else
 					parse["load"] = "meager";
@@ -2982,7 +2982,7 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 				Text.Add("unleashing the pent up seed trapped in her colon.", parse);
 		}
 		else {
-			parse["sticky"] = pCock.isStrapon ? "" : "sticky";
+			parse["sticky"] = pCock.isStrapon ? "" : " sticky";
 			Text.Add("You pull your[sticky] member out of her, sighing contentedly. You are pretty sure she liked that as much as you did.", parse);
 		}
 		Text.NL();

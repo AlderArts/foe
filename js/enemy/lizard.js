@@ -756,7 +756,7 @@ Scenes.Lizards.WinBlowjob = function(enc, enemy) {
 			Text.NL();
 		}
 		parse["boygirl"] = enemy.body.Gender() == Gender.male ? "boy" : "girl";
-		Text.Add("When your orgasm tapers down, the last vestibules of your spunk dripping through the tip of your cockDesc], you gaze down at [m1name], your cheeks flush with the afterglow of climax. <i>\"Swallow,\"</i> you order. [m1HeShe] pauses, looking up at you meekly. [m1HisHer] tail flicks in indecision behind [m1himher], before [m1heshe] takes a heavy <i>gulp</i>. You pat [m1hisher] muzzle. <i>\"Good [boygirl],\"</i> you mutter, pulling your dick from [m1hisher] muzzle. You take the spoils of the encounter, and turn to leave without another word, your pleasure taken.", parse);
+		Text.Add("When your orgasm tapers down, the last vestibules of your spunk dripping through the tip of your [cockDesc], you gaze down at [m1name], your cheeks flush with the afterglow of climax. <i>\"Swallow,\"</i> you order. [m1HeShe] pauses, looking up at you meekly. [m1HisHer] tail flicks in indecision behind [m1himher], before [m1heshe] takes a heavy <i>gulp</i>. You pat [m1hisher] muzzle. <i>\"Good [boygirl],\"</i> you mutter, pulling your dick from [m1hisher] muzzle. You take the spoils of the encounter, and turn to leave without another word, your pleasure taken.", parse);
 		
 		player.Fuck(player.FirstCock(), 2);
 		Sex.Blowjob(enemy, player);
