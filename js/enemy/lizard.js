@@ -432,7 +432,8 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 		Sex.Vaginal(enemy, player);
 	}
 	else {
-		Text.Add("your [anusDesc] slowly stretching around it. You lift one hand, licking the palm of it, then bring it back down to lubricate her tail slightly. As you rub your saliva along the length of her scaled tail, it starts to slide in much more easily.", parse);if(player.FirstCock()) {
+		Text.Add("your [anusDesc] slowly stretching around it. You lift one hand, licking the palm of it, then bring it back down to lubricate her tail slightly. As you rub your saliva along the length of her scaled tail, it starts to slide in much more easily.", parse);
+		if(player.FirstCock()) {
 			parse["itThey"] = player.NumCocks() > 1 ? "they throb" : "it throbs";
 			Text.Add(" Her eyes roam hungrily over your [multiCockDesc] as [itThey] to life, beginning to feel much heavier between your legs.", parse);
 		}
