@@ -24,8 +24,9 @@ function Item(id, name) {
 	// Alchemical recipe, an array of {it: Item, num: Number} pairs
 	this.Recipe = [];
 	//function(target)
-	this.Use    = null;
-	this.EquipType = ItemType.None;
+	this.Use        = null;
+	this.EquipType  = ItemType.None;
+	this.UseCombat  = null;
 	this.targetMode = TargetMode.Ally;
 	/* 
 	 * effect = {
