@@ -37,6 +37,9 @@ function Terry(storage) {
 	this.SetEyeColor(Color.blue);
 	this.body.SetRace(Race.fox);
 	
+	this.weaponSlot   = Items.Weapons.Dagger;
+	
+	this.Equip();
 	this.SetLevelBonus();
 	this.RestFull();
 	

@@ -1,5 +1,14 @@
 Items.Weapons = {};
 
+Items.Weapons.Dagger = new Item("dag0", "Dagger");
+Items.Weapons.Dagger.price = 25;
+Items.Weapons.Dagger.Short = function() { return "dagger"; }
+Items.Weapons.Dagger.Long = function() { return "a simple dagger"; }
+Items.Weapons.Dagger.EquipType = ItemType.Weapon;
+Items.Weapons.Dagger.effect.atkMod  = 0.1;
+Items.Weapons.Dagger.effect.dexterity = 1;
+Items.Weapons.Dagger.effect.apPierce = 1;
+
 Items.Weapons.ShortSword = new Item("swrd0", "S.Sword");
 Items.Weapons.ShortSword.price = 50;
 Items.Weapons.ShortSword.Short = function() { return "short sword"; }
@@ -18,6 +27,15 @@ Items.Weapons.KrawitzSword.effect.atkMod    = 0.7;
 Items.Weapons.KrawitzSword.effect.strength  = 3;
 Items.Weapons.KrawitzSword.effect.dexterity = 10;
 Items.Weapons.KrawitzSword.effect.apPierce  = 1;
+
+Items.Weapons.GreatSword = new Item("swrd2", "G.Sword");
+Items.Weapons.GreatSword.price = 100;
+Items.Weapons.GreatSword.Short = function() { return "greatsword"; }
+Items.Weapons.GreatSword.Long = function() { return "a large greatsword"; }
+Items.Weapons.GreatSword.EquipType = ItemType.Weapon;
+Items.Weapons.GreatSword.effect.atkMod = 1;
+Items.Weapons.GreatSword.effect.strength = 4;
+Items.Weapons.GreatSword.effect.apSlash = 1;
 
 Items.Weapons.WoodenStaff = new Item("staff0", "W.Staff");
 Items.Weapons.WoodenStaff.price = 30;

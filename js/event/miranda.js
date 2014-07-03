@@ -38,6 +38,9 @@ function Miranda(storage) {
 	this.SetHairColor(Color.blue);
 	this.SetEyeColor(Color.green);
 	
+	this.weaponSlot   = Items.Weapons.GreatSword;
+	
+	this.Equip();
 	this.SetLevelBonus();
 	this.RestFull();
 	
