@@ -18,6 +18,7 @@ Version 0.3j
 * Fixed tons of bugs and inconsistencies courtesy of trixymoon on github. Thanks a lot!
 * Changed how the party switching system works. You can now only switch party members in specific areas. Currently, the party hang out around the campfire in the Nomads' camp when not on duty. Notice the green explore button! This change should also be reflected in scenes that involve other party members (they variations will only trigger if the follower is in your active party).
 * Three new dreams added.
+* A reworking of the item system. Not noticable so far, but it will allow use of certain items in combat later on.
 
 --------------------------------------------
              PREVIOUS VERSIONS
