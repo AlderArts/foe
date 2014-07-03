@@ -14,6 +14,8 @@ function Lizard(gender) {
 		this.MonsterName       = "The male lizard";
 		this.body.cock.push(new Cock());
 		this.body.cock.push(new Cock());
+		if(Math.random() < 0.1)
+		    this.Butt().virgin = false;
 	}
 	else if(gender == Gender.female) {
 		this.avatar.combat     = Images.lizard_fem;
@@ -24,6 +26,8 @@ function Lizard(gender) {
 		this.Butt().buttSize.base = 4;
 		if(Math.random() < 0.9)
 			this.FirstVag().virgin = false;
+		if(Math.random() < 0.4)
+		    this.Butt().virgin = false;
 	}
 	else {
 		this.avatar.combat     = Images.lizard_fem;
@@ -32,9 +36,11 @@ function Lizard(gender) {
 		this.MonsterName       = "The herm lizard";
 		this.body.DefHerm(false);
 		this.Butt().buttSize.base = 4;
-		if(Math.random() < 0.3)
+		if(Math.random() < 0.5)
 			this.FirstVag().virgin = false;
 		this.body.cock.push(new Cock());
+		if(Math.random() < 0.5)
+		    this.Butt().virgin = false;
 	}
 	
 	this.maxHp.base        = 40;
