@@ -23,13 +23,18 @@ function Terry(storage) {
 	this.libido.base       = 15;
 	this.charisma.base     = 20;
 	
-	this.level    = 1;
+	this.level    = 5;
 	this.sexlevel = 1;
 	
 	this.body.DefMale();
+	this.body.muscleTone.base = 0.1;
+	this.body.femininity.base = 0.8;
 	this.Butt().buttSize.base = 3;
 	this.FirstCock().length.base = 11;
 	this.FirstCock().thickness.base = 2;
+	this.SetSkinColor(Color.gold);
+	this.SetHairColor(Color.red);
+	this.SetEyeColor(Color.blue);
 	this.body.SetRace(Race.fox);
 	
 	this.SetLevelBonus();

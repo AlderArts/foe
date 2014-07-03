@@ -23,8 +23,8 @@ function Miranda(storage) {
 	this.libido.base       = 24;
 	this.charisma.base     = 14;
 	
-	this.level    = 1;
-	this.sexlevel = 1;
+	this.level    = 8;
+	this.sexlevel = 3;
 	
 	this.body.DefHerm(true);
 	this.FirstBreastRow().size.base = 12.5;
@@ -34,6 +34,9 @@ function Miranda(storage) {
 	this.FirstVag().virgin = false;
 	this.Butt().virgin = false;
 	this.body.SetRace(Race.dog);
+	this.SetSkinColor(Color.black);
+	this.SetHairColor(Color.blue);
+	this.SetEyeColor(Color.green);
 	
 	this.SetLevelBonus();
 	this.RestFull();
