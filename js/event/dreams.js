@@ -29,8 +29,11 @@ Scenes.Dreams.Entry = function(func) {
 			scenes.AddEnc(Scenes.Dreams.RosalinNursing, 1.0, function() { return rosalin.flags["PastDialog"] > Rosalin.PastDialog.Past; }, ravenTrigger);
 			scenes.AddEnc(Scenes.Dreams.RosalinTransformation, 1.0, function() { return rosalin.flags["Met"] != 0; }, ravenTrigger);
 			scenes.AddEnc(Scenes.Dreams.GwendyBarn, 1.0, function() { return gwendy.flags["Met"] != 0; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.GwendyStallion, 1.0, function() { return gwendy.flags["Met"] != 0; }, ravenTrigger);
 			scenes.AddEnc(Scenes.Dreams.FeraKittens, 1.0, function() { return fera.FirstVag().virgin == false; }, ravenTrigger);
 			scenes.AddEnc(Scenes.Dreams.MirandaJailed, 1.0, function() { return miranda.flags["Met"] != 0; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.MirandaMerc, 1.0, function() { return miranda.flags["Dates"] >= 1; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.TwinsMaids, 1.0, function() { return twins.flags["Met"] >= Twins.Met.Access; }, ravenTrigger);
 			scenes.AddEnc(Scenes.Dreams.BlowjobGive, 2.0, function() { return player.sex.gBlow >= 25; }, ravenTrigger);
 			scenes.AddEnc(Scenes.Dreams.BlowjobRec, 2.0, function() { return player.sex.rBlow >= 25; }, ravenTrigger);
 			scenes.AddEnc(Scenes.Dreams.CunnilingusGive, 2.0, function() { return player.sex.gCunn >= 25; }, ravenTrigger);
@@ -718,6 +721,27 @@ Scenes.Dreams.GwendyBarn = function(ravenTrigger) {
 	Text.Add("You wake up feeling a bit confused, mind still moving sluggishly.", parse);
 }
 
+Scenes.Dreams.GwendyStallion = function(ravenTrigger) {
+	var parse = {
+		playername : player.name,
+		skinDesc : function() { return player.SkinDesc(); },
+		raven : Scenes.Dreams.RavenText(ravenTrigger, " Outside, you hear the solemn caw of a raven.", " Outside, the ravens caw, announcing their presence in the dream."),
+		cuntAss : player.FirstVag() ? "cunt" : "ass"
+	};
+	
+	Text.Add("<i>”Don’t worry, it’ll be over soon,”</i> Gwendy assures you, patting your head fondly as she secures the restraints on your wrists. For a moment, you are left to your own devices in the cramped stall, awkwardly propped up over a waist high wooden frame, all your four limbs restricted with large leather bands. Even here inside the barn, you can feel a faint waft of a chill wind, making a shiver run over your naked [skinDesc].[raven]", parse);
+	Text.NL();
+	Text.Add("When Gwendy returns, she is leading a large stallion, one of the biggest in her stall. As she parades the stud in front of you, caressing his immense horsecock into its full size, you start to get an inkling to just what you have agreed to. Your fears are confirmed as she wraps a breeding bag over the horse’s flared cock, pouring a generous amount of lubricant over the enormous package. <i>”I’m so glad that you are helping me with this, [playername],”</i> the farmer tells you as she leads the aroused stud around the other end of the stall, out of your eyesight.", parse);
+	Text.NL();
+	Text.Add("<i>”Now, just relax,”</i> she says as you feel the stallion positioning himself over you, his forelegs resting on the frame in front of you. A heavy weight falls across your back as he mounts you, and the air is driven from your lungs as the massive animal rams its cock inside your protesting [cuntAss].", parse);
+	Text.NL();
+	Text.Add("<i>”I’ll leave the two of you to it,”</i> Gwendy tells you over her shoulder, her voice barely audible to you as the stud begins to move, fucking you with long, deep thrusts. <i>”I’ll go and get the next one...”</i>", parse);
+	Text.NL();
+	Text.Add("You aren’t quite sure what to think as you wake up.", parse);
+	
+	player.AddLustFraction(0.3);
+}
+
 Scenes.Dreams.FeraKittens = function(ravenTrigger) {
 	var parse = {
 		raven : Scenes.Dreams.RavenText(ravenTrigger, " For some reason a scrawny baby raven is also nestled among the kittens.", " A scrawny baby raven is nestled among the kittens. It’s a little cute, but that doesn’t make the fact that it’s watching you better. You’ll have to remember this when you wake up."),
@@ -749,6 +773,43 @@ Scenes.Dreams.MirandaJailed = function(ravenTrigger) {
 	Text.Add("Without further ado, you are hauled away to a grand court hall, with dozens of red-skinned imps acting as the jury. The grand judge is the dark succubus queen herself, Uru. <i>”Guilty! Guilty!”</i> the jury hollers. <i>”Guilty!”</i> the judge agrees smugly.[raven] Thus, you are dragged off to jail, given only the advice to never drop the soap. Miranda will be watching.", parse);
 	Text.NL();
 	Text.Add("You wake up, still uncertain what your crime was.", parse);
+}
+
+Scenes.Dreams.MirandaMerc = function(ravenTrigger) {
+	var parse = {
+		playername : player.name, 
+		raven : Scenes.Dreams.RavenText(ravenTrigger, " A flock of ravens welcome you home, croaking from the roof of the house.", " You notice that a flock of ravens are studying you intently from their vantage point atop the roof. Here too.")
+	};
+	
+	Text.Add("You and your band of mercenaries ribald and tell raunchy jokes as you pass through the slums of Rigard, on the home stretch of a successful mission. The Black Hounds have had a good run this year, and you are all eager to waste all your spoils on drinks and whores. Miranda jabs you in the side, sniggering that she can’t wait to have some with you without distractions. Other-Miranda chimes in, licking her lips.", parse);
+	Text.NL();
+	Text.Add("Your party reaches the guild hall, a rickety building home to your comrades, a gang of friendly luck seekers willing to do just about anything for money and pussy.[raven] Barging inside, you are greeted by thirty identical dobie muzzles sweeping your way.", parse);
+	Text.NL();
+	Text.Add("<i>”[playername]!”</i> Miranda greets you, raising her tankard with a wide grin on her face. <i>”You left me waiting too long, we have so many things to… catch up on.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>”All of us are pretty pent up,”</i> Miranda agrees, patting her bulging crotch, <i>”you better take responsibility for this!”</i>", parse);
+	Text.NL();
+	Text.Add("<i>”You’ll have to get in line,”</i> Miranda growls, roughly pushing you down on all fours, her thick cock pressing against your rear entrance. With gleaming eyes and glistening cocks, the rest of the herms close in on you…", parse);
+	Text.NL();
+	Text.Add("You wake up with your heart beating rapidly in your chest. Somehow, you are glad there is only one Miranda that you have to deal with.", parse);
+	
+	player.AddLustFraction(0.3);
+}
+
+Scenes.Dreams.TwinsMaids = function(ravenTrigger) {
+	var parse = {
+		raven : Scenes.Dreams.RavenText(ravenTrigger, ", served on a plate with a raven motif", ". The raven depicted on the plate peer up at you intently, but you are not going to let that spoil your evening")
+	};
+	
+	Text.Add("You really like the Lady’s Blessing, you conclude as you set your teeth into a particularly well prepared meal[raven]. Compliments to the cook, you tell your scantily clad waitress. She gives you a pretty blush, matching her red hair. And compliments on the service, you grin as you look down on her twin, who is busy lapping away at your crotch.", parse);
+	Text.NL();
+	Text.Add("The other maid looks up at you with adoration in her eyes, beaming happily at your compliments. Rumi or Rani - you could never tell them apart - returns to her task with increased fervor.", parse);
+	Text.NL();
+	Text.Add("Perhaps you should order a nice wine for dessert. But first, you ask the other royal to help her twin finish the job.", parse);
+	Text.NL();
+	Text.Add("You awaken, feeling hot and bothered at the thought of having your way with the heirs to the throne.", parse);
+	
+	player.AddLustFraction(0.3);
 }
 
 Scenes.Dreams.BlowjobGive = function(ravenTrigger) {
