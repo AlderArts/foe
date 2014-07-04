@@ -6,7 +6,6 @@ function Encounter(enemy)
 	
 	this.onEncounter = null;
 	this.onTick = null;
-	this.onRun  = null;
 	
 	// Party filled with entitys
 	this.enemy = enemy;
@@ -180,11 +179,34 @@ Encounter.prototype.LossCondition = function() {
 	return downed;
 }
 
+Encounter.prototype.onRun = function() {
+	for(var i = 0; i < this.enemy.members.length; i++) {
+		var e = this.enemy.members[i];
+		e.ClearCombatBonuses();
+		e.combatStatus.EndOfCombat();
+	}
+	for(var i = 0; i < party.members.length; i++) {
+		var e = party.members[i];
+		e.ClearCombatBonuses();
+		e.combatStatus.EndOfCombat();
+	}
+	
+	// TEMP TODO
+	world.TimeStep({hour: 1});
+	
+	PrintDefaultOptions();
+}
+
 Encounter.prototype.onLoss = function() {
 	Text.Clear();
 	Text.AddOutput("Defeat!");
 	// TODO: XP loss? 
 	
+	for(var i = 0; i < this.enemy.members.length; i++) {
+		var e = this.enemy.members[i];
+		e.ClearCombatBonuses();
+		e.combatStatus.EndOfCombat();
+	}
 	for(var i = 0; i < party.members.length; i++) {
 		var e = party.members[i];
 		e.ClearCombatBonuses();
@@ -216,6 +238,7 @@ Encounter.prototype.onVictory = function() {
 	for(var i = 0; i < this.enemy.members.length; i++) {
 		var e = this.enemy.members[i];
 		e.ClearCombatBonuses();
+		e.combatStatus.EndOfCombat();
 		exp  += e.combatExp;
 		coin += e.coinDrop;
 		

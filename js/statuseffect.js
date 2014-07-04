@@ -5,11 +5,11 @@
 var Status = {};
 
 StatusEffect = {
-	Burn    : 0,
-	Freeze  : 1,
-	Numb    : 2,
+	Burn    : 0, //OK
+	Freeze  : 1, //OK
+	Numb    : 2, //OK
 	Petrify : 3,
-	Venom   : 4,
+	Venom   : 4, //OK
 	Blind   : 5,
 	Siphon  : 6,
 	Seal    : 7,
@@ -21,11 +21,11 @@ StatusEffect = {
 	Slow    : 13,
 	Regen   : 14,
 	Boon    : 15,
-	Horny   : 16,
+	Horny   : 16, //OK
 	Aroused : 17,
 	Limp    : 18,
 	Bimbo   : 19,
-	Decoy   : 20,
+	Decoy   : 20, //OK
 	
 	LAST    : 21
 };

@@ -112,11 +112,11 @@ Item.prototype.Long = function() {
 }
 
 // Used as entrypoint for PC/Party (active selection)
-Item.prototype.OnSelect = function(encounter, caster, backPrompt) {
+Item.prototype.OnSelect = function(inv, encounter, caster, backPrompt) {
 	var item = this;
 	// TODO: Buttons (use portraits for target?)
 	if(this.targetMode == TargetMode.Self) {
-		this.UseCombat(encounter, caster);
+		this.UseCombat(inv, encounter, caster);
 	}
 	else if(this.targetMode == TargetMode.Ally) {
 		var target = new Array();
@@ -126,7 +126,7 @@ Item.prototype.OnSelect = function(encounter, caster, backPrompt) {
 			target.push({
 			  	nameStr : t.name,
 			  	func    : function(t) {
-			  		item.UseCombat(encounter, caster, t);
+			  		item.UseCombat(inv, encounter, caster, t);
 			  	},
 			  	enabled : true,
 			  	obj     : t
@@ -145,7 +145,7 @@ Item.prototype.OnSelect = function(encounter, caster, backPrompt) {
 			target.push({
 			  	nameStr : t.name,
 			  	func    : function(t) {
-			  		item.UseCombat(encounter, caster, t);
+			  		item.UseCombat(inv, encounter, caster, t);
 			  	},
 			  	enabled : true,
 			  	obj     : t
@@ -164,7 +164,7 @@ Item.prototype.OnSelect = function(encounter, caster, backPrompt) {
 			target.push({
 			  	nameStr : t.name,
 			  	func    : function(t) {
-			  		item.UseCombat(encounter, caster, t);
+			  		item.UseCombat(inv, encounter, caster, t);
 			  	},
 			  	enabled : true,
 			  	obj     : t
@@ -182,7 +182,7 @@ Item.prototype.OnSelect = function(encounter, caster, backPrompt) {
 			target.push({
 			  	nameStr : t.name,
 			  	func    : function(t) {
-			  		item.UseCombat(encounter, caster, t);
+			  		item.UseCombat(inv, encounter, caster, t);
 			  	},
 			  	enabled : true,
 			  	obj     : t
@@ -192,10 +192,10 @@ Item.prototype.OnSelect = function(encounter, caster, backPrompt) {
 		Gui.SetButtonsFromList(target, true, backPrompt);
 	}
 	else if(this.targetMode == TargetMode.Party) {
-		this.UseCombat(encounter, caster, party);
+		this.UseCombat(inv, encounter, caster, party);
 	}
 	else if(this.targetMode == TargetMode.Enemies) {
-		this.UseCombat(encounter, caster, encounter.enemy);
+		this.UseCombat(inv, encounter, caster, encounter.enemy);
 	}
 	// Fallback
 	else
@@ -367,7 +367,7 @@ Inventory.prototype.CombatInventory = function(encounter, entity, back) {
 				Text.Add("Use [it] on whom?", {it: item.name});
 				Text.Flush();
 				
-				it.onSelect(encounter, entity, backPrompt);
+				it.OnSelect(inv, encounter, entity, backPrompt);
 			}
 		});
 	}

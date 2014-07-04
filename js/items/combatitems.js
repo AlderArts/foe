@@ -9,7 +9,7 @@ CombatItem.prototype.constructor = CombatItem;
 
 CombatItem.prototype.UseCombat = function(inv, encounter, caster, target) {
 	if(inv && this.consume) {
-		inv.RemoveItem(item);
+		inv.RemoveItem(this);
 	}
 	
 	this.UseCombatInternal(encounter, caster, target);
@@ -24,7 +24,7 @@ CombatItem.prototype.UseCombatInternal = function(encounter, caster, target) {
 
 Items.Combat = {};
 
-Items.Combat.HPotion = new Item("pot0", "H.Potion");
+Items.Combat.HPotion = new CombatItem("pot0", "H.Potion");
 Items.Combat.HPotion.price = 25;
 Items.Combat.HPotion.Short = function() { return "Health potion"; }
 Items.Combat.HPotion.Long = function() { return "A weak health potion."; }
@@ -44,7 +44,7 @@ Items.Combat.HPotion.UseCombatInternal = function(encounter, caster, target) {
 	});
 }
 
-Items.Combat.DecoyStick = new Item("decoy0", "Decoy");
+Items.Combat.DecoyStick = new CombatItem("decoy0", "Decoy");
 Items.Combat.DecoyStick.price = 250;
 Items.Combat.DecoyStick.Short = function() { return "A decoy stick"; }
 Items.Combat.DecoyStick.Long = function() { return "A stick containing the shards of an enchanted mirror, when broken it will generate illusory copies of the user, confusing targets."; }
@@ -53,7 +53,7 @@ Items.Combat.DecoyStick.UseCombatInternal = function(encounter, caster) {
 	var parse = {
 		Name : caster.NameDesc(),
 		name : caster.nameDesc(),
-		s    : caster.Plural() ? "" : "s",
+		s    : caster.plural() ? "" : "s",
 		has  : caster.has()
 	};
 	

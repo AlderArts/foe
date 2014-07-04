@@ -689,6 +689,7 @@ Entity.prototype.PhysDmgHP = function(encounter, val) {
 		parse["oneof"] = num > 1 ? " one of" : "";
 		parse["copy"]  = num > 1 ? "copies" : "copy";
 		Text.AddOutput("The attack is absorbed by[oneof] [possessive] [copy]!", parse);
+		Text.Newline();
 		this.combatStatus.stats[StatusEffect.Decoy].copies--;
 		if(this.combatStatus.stats[StatusEffect.Decoy].copies <= 0)
 			this.combatStatus.stats[StatusEffect.Decoy] = null;
@@ -2143,11 +2144,11 @@ Entity.prototype.Weapon = function() {
 }
 // TODO
 Entity.prototype.WeaponDesc = function() {
-	return this.weaponSlot ? this.weaponSlot.short() : "stick";
+	return this.weaponSlot ? this.weaponSlot.sDesc() : "stick";
 }
 // TODO
 Entity.prototype.WeaponDescLong = function() {
-	return this.weaponSlot ? this.weaponSlot.long() : "a stick";
+	return this.weaponSlot ? this.weaponSlot.lDesc() : "a stick";
 }
 // TODO
 Entity.prototype.Armor = function() {
@@ -2159,18 +2160,18 @@ Entity.prototype.LowerArmor = function() {
 }
 // TODO
 Entity.prototype.LowerArmorDesc = function() {
-	return this.botArmorSlot ? this.botArmorSlot.short() : this.ArmorDesc();
+	return this.botArmorSlot ? this.botArmorSlot.sDesc() : this.ArmorDesc();
 }
 // TODO
 Entity.prototype.LowerArmorDescLong = function() {
-	return this.botArmorSlot ? this.botArmorSlot.long() : this.ArmorDescLong();
+	return this.botArmorSlot ? this.botArmorSlot.lDesc() : this.ArmorDescLong();
 }
 // TODO
 Entity.prototype.ArmorDesc = function() {
-	return this.topArmorSlot ? this.topArmorSlot.short() : "comfortable clothes";
+	return this.topArmorSlot ? this.topArmorSlot.sDesc() : "comfortable clothes";
 }
 Entity.prototype.ArmorDescLong = function() {
-	return this.topArmorSlot ? this.topArmorSlot.long() : "a set of comfortable clothes";
+	return this.topArmorSlot ? this.topArmorSlot.lDesc() : "a set of comfortable clothes";
 }
 Entity.prototype.Accessories = function() {
 	return [this.acc1Slot, this.acc2Slot];
