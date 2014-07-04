@@ -116,24 +116,17 @@ Gwendy.prototype.IsAtLocation = function(location) {
 }
 
 // Party interaction
-Gwendy.prototype.Interact = function() {
+Gwendy.prototype.Interact = function(switchSpot) {
 	Text.Clear();
-	Text.AddOutput("Rawr Imma humie farmer.");
+	var that = gwendy;
 	
+	that.PrintDescription();
 	
-	if(DEBUG) {
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: relation: " + gwendy.relation.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: subDom: " + gwendy.subDom.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: slut: " + gwendy.slut.Get()));
-		Text.Newline();
-	}
+	var options = new Array();
+	//Equip, stats, job, switch
+	that.InteractDefault(options, switchSpot, true, true, true, true);
 	
-	Gui.NextPrompt(function() {
-		PartyInteraction();
-	});
+	Gui.SetButtonsFromList(options, true, PartyInteraction);
 }
 
 

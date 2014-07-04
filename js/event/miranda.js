@@ -37,6 +37,8 @@ function Miranda(storage) {
 	this.SetSkinColor(Color.black);
 	this.SetHairColor(Color.blue);
 	this.SetEyeColor(Color.green);
+	this.body.height.base      = 180;
+	this.body.weigth.base      = 75;
 	
 	this.weaponSlot   = Items.Weapons.GreatSword;
 	this.topArmorSlot = Items.Armor.WatchChest;
@@ -114,6 +116,20 @@ Miranda.prototype.ToStorage = function() {
 	return storage;
 }
 
+// Party interaction
+Miranda.prototype.Interact = function(switchSpot) {
+	Text.Clear();
+	var that = miranda;
+	
+	that.PrintDescription();
+	
+	var options = new Array();
+	//Equip, stats, job, switch
+	that.InteractDefault(options, switchSpot, !rigard.UnderLockdown(), true, !rigard.UnderLockdown(), true);
+	
+	Gui.SetButtonsFromList(options, true, PartyInteraction);
+}
+
 // Schedule
 Miranda.prototype.IsAtLocation = function(location) {
 	if(party.InParty(miranda)) return false;
@@ -136,27 +152,6 @@ Miranda.prototype.OnPatrol = function() {
 		return false;
 	else
 		return (world.time.hour >= 7 && world.time.hour < 17);
-}
-
-// Party interaction
-Miranda.prototype.Interact = function() {
-	Text.Clear();
-	Text.AddOutput("Woof Imma doggie.");
-	
-	
-	if(DEBUG) {
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: relation: " + miranda.relation.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: subDom: " + miranda.subDom.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: slut: " + miranda.slut.Get()));
-		Text.Newline();
-	}
-	
-	Gui.NextPrompt(function() {
-		PartyInteraction();
-	});
 }
 
 // Events

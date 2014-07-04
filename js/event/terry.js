@@ -38,6 +38,8 @@ function Terry(storage) {
 	this.SetHairColor(Color.red);
 	this.SetEyeColor(Color.blue);
 	this.body.SetRace(Race.fox);
+	this.body.height.base      = 157;
+	this.body.weigth.base      = 45;
 	
 	this.weaponSlot   = Items.Weapons.Dagger;
 	
@@ -135,6 +137,19 @@ Terry.prototype.hishers = function() {
 	else return "hers";
 }
 
+// Party interaction
+Terry.prototype.Interact = function(switchSpot) {
+	Text.Clear();
+	var that = terry;
+	
+	that.PrintDescription();
+	
+	var options = new Array();
+	//Equip, stats, job, switch
+	that.InteractDefault(options, switchSpot, true, true, true, true);
+	
+	Gui.SetButtonsFromList(options, true, PartyInteraction);
+}
 
 Terry.prototype.Act = function(encounter, activeChar) {
 	// TODO: AI!

@@ -527,6 +527,33 @@ Entity.prototype.RecallAbilities = function() {
 	}
 }
 
+Entity.prototype.InteractDefault = function(options, switchSpot, enableEquip, enableStats, enableJob, enableSwitch) {
+	var that = this;
+	options.push({ nameStr: "Equip",
+		func : function() {
+			that.EquipPrompt(that.Interact);
+		}, enabled : enableEquip
+	});
+	options.push({ nameStr: that.pendingStatPoints != 0 ? "Level up" : "Stats",
+		func : function() {
+			that.LevelUpPrompt(that.Interact);
+		}, enabled : enableStats
+	});
+	options.push({ nameStr: "Job",
+		func : function() {
+			that.JobPrompt(that.Interact);
+		}, enabled : enableJob
+	});
+	if(switchSpot) {
+		options.push({ nameStr: party.InParty(that) ? "Switch out" : "Switch in",
+			func : function() {
+				party.SwitchPrompt(that);
+			}, enabled : enableSwitch,
+			tooltip: party.InParty(that) ? "Send to reserve." : "Switch into active party."
+		});
+	}
+}
+
 Entity.prototype.Equip = function() {
 	this.maxHp.bonus        = 0;
 	this.maxSp.bonus        = 0;
@@ -1523,7 +1550,7 @@ Entity.prototype.OrgasmCum = function(mult) {
 	balls.cum.DecreaseStat(0, cumQ);
 	if(DEBUG) {
 		Text.Newline();
-		Text.AddOutput("<b>[name] came ([cum]).</b>", {name: this.NameDesc(), cum: cumQ});
+		Text.AddOutput("<b>[name] came ([cum]).</b>", {name: this.NameDesc(), cum: cumQ.toFixed(2)});
 		Text.Newline();
 	}
 	return cumQ;
@@ -2129,9 +2156,9 @@ Entity.prototype.PrintDescription = function() {
 	
 	// TODO TEMP
 	var balls = this.Balls();
-	Text.Add("Cum: " + balls.cum.Get() + " / " + balls.cumCap.Get());
+	Text.Add("Cum: " + balls.cum.Get().toFixed(2) + " / " + balls.cumCap.Get().toFixed(2));
 	Text.NL();
-	Text.Add("Milk: " + this.body.milk.Get() + " / " + this.body.milkCap.Get());
+	Text.Add("Milk: " + this.body.milk.Get().toFixed(2) + " / " + this.body.milkCap.Get().toFixed(2));
 	Text.NL();
 	
 	// TODO: Ass
