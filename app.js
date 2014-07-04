@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 3;
-VERSION_SUBSCRIPT = "i";
-VERSION_NAME = "Miranda dommy sexings";
+VERSION_SUBSCRIPT = "j";
+VERSION_NAME = "Terry the thief";
 
 SAVE_VERSION = 16;
 // Save version 1: Initial
