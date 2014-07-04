@@ -23,8 +23,6 @@ Twins.Met = {
 };
 
 Twins.prototype.Update = function(step) {
-	Entity.prototype.Update.call(this, step);
-	
 	this.terryTimer.Dec(step);
 }
 
