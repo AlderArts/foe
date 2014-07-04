@@ -23,8 +23,8 @@ JobDesc = function(job) {
 JobDesc.prototype.ToStorage = function() {
 	if(this.level <= 1 && this.experience == 0) return null;
 	var storage = {};
-	if(this.level      != 1) storage["lvl"] = this.level;
-	if(this.experience != 0) storage["exp"] = this.experience;
+	if(this.level      != 1) storage["lvl"] = Math.floor(this.level);
+	if(this.experience != 0) storage["exp"] = Math.floor(this.experience);
 	return storage;
 }
 JobDesc.prototype.FromStorage = function(storage) {

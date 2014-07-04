@@ -33,8 +33,7 @@ Cale.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
 	
 	// Load flags
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
+	this.LoadFlags(storage);
 	
 	if(this.flags["Met"] != 0)
 		this.name = "Cale";
@@ -47,7 +46,7 @@ Cale.prototype.ToStorage = function() {
 	
 	this.SavePersonalityStats(storage);
 	
-	storage.flags = this.flags;
+	this.SaveFlags(storage);
 	
 	return storage;
 }

@@ -79,10 +79,8 @@ Terry.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
 	
 	// Load flags
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
-	for(var flag in storage.sex)
-		this.sex[flag] = parseInt(storage.sex[flag]);
+	this.LoadFlags(storage);
+	this.LoadSexFlags(storage);
 		
 	if(this.flags["Met"] >= Terry.Met.Caught) {
 		this.name = "Terry";
@@ -99,8 +97,8 @@ Terry.prototype.ToStorage = function() {
 	
 	this.SavePersonalityStats(storage);
 	
-	storage.flags = this.flags;
-	storage.sex   = this.SaveSexStats();
+	this.SaveFlags(storage);
+	this.SaveSexStats(storage);
 	
 	return storage;
 }

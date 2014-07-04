@@ -27,8 +27,7 @@ Estevan.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
 	
 	// Load flags
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
+	this.LoadFlags(storage);
 }
 
 Estevan.prototype.ToStorage = function() {
@@ -36,7 +35,7 @@ Estevan.prototype.ToStorage = function() {
 	
 	this.SavePersonalityStats(storage);
 	
-	storage.flags = this.flags;
+	this.SaveFlags(storage);
 	
 	return storage;
 }
