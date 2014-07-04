@@ -826,6 +826,17 @@ Scenes.Terry.Release = function() {
 		Text.Add("You consider it for a moment, then finally decide to tell him the truth, admitting you don't really know. But you know the collar was made by [j]the Royal Court Mage, so he can probably figure it out himself.", parse);
 		Text.NL();
 		Text.Add("<i>”I see… so I guess I’m at your mercy. Lead away then?”</i>", parse);
+		
+		terry.topArmorSlot = Items.Armor.LeatherChest;
+		terry.botArmorSlot = Items.Armor.LeatherPants;
+		terry.Equip();
+		
+		terry.name = "Terry";
+		terry.avatar.combat = Images.terry_c;
+		terry.monsterName = null;
+		terry.MonsterName = null;
+		party.AddMember(terry);
+		
 		if(party.InParty(miranda)) {
 			Text.NL();
 			Text.Add("Terry looks a bit nervous as you set out, constantly looking around as if he was being watched. His fears turn out to be justified, as Miranda steps out from a side street, a wide grin on her face.", parse);
@@ -842,14 +853,6 @@ Scenes.Terry.Release = function() {
 			
 			terry.relation.DecreaseStat(-100, 10);
 		}
-		
-		terry.topArmorSlot = Items.Armor.LeatherChest;
-		terry.botArmorSlot = Items.Armor.LeatherPants;
-		terry.Equip();
-		
-		terry.name = "Terry";
-		terry.avatar.combat = Images.terry_c;
-		party.AddMember(terry);
 		
 		Text.Flush();
 		
