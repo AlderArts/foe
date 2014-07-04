@@ -276,11 +276,11 @@ Status.Horny = function(target, opts) {
 Status.Horny.Tick = function(target) {
 	var damageType = new DamageType({mLust : this.str});
 	var atkRand = 0.2 * (Math.random() - 0.5) + 1;
-	var dmg = this.dmg * atkRand * target.LP();
+	var dmg = this.dmg * atkRand * target.Lust();
 	dmg = damageType.ApplyDmgType(target.elementDef, dmg);
 	dmg = Math.floor(dmg);
 	
-	target.AddLPAbs(dmg);
+	target.AddLustAbs(dmg);
 	
 	this.turns--;
 	// Remove venom effect

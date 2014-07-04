@@ -38,13 +38,13 @@ AttackPhysical.prototype.CastInternal = function(encounter, caster, target) {
 		
 		for(var j = 0; j < nrAttacks; j++) {
 			var atkDmg     = atkMod * caster.PAttack();
-			var def = e.PDefense();
+			var def = defMod * e.PDefense();
 			var hit = hitMod * caster.PHit();
 			var evade = e.PEvade();
-			var toHit = this.ToHit(hit, evade);
+			var toHit = Ability.ToHit(hit, evade);
 			if(Math.random() < toHit) {
 				//var dmg = atkDmg - def;
-				var dmg = this.Damage(atkDmg, def, caster.level, e.level);
+				var dmg = Ability.Damage(atkDmg, def, caster.level, e.level);
 				if(dmg < 0) dmg = 0;
 				
 				dmg = damageType.ApplyDmgType(e.elementDef, dmg);

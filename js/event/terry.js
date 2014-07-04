@@ -49,6 +49,7 @@ function Terry(storage) {
 	this.flags["Saved"] = 0;
 	this.flags["PrefGender"] = Gender.female;
 	
+	this.sbombs = 3;
 	this.hidingSpot = world.loc.Rigard.ShopStreet.street;
 	
 	if(storage) this.FromStorage(storage);
@@ -154,13 +155,20 @@ Terry.prototype.Act = function(encounter, activeChar) {
 	}
 	
 	var choice = Math.random();
+	
+	if(this.turnCounter > 4 && this.sbombs > 0)
+		Items.Combat.SmokeBomb.UseCombatInternal(encounter, this);
+	else if(choice < 0.2)
+		Items.Combat.PoisonDart.UseCombatInternal(encounter, this, t);
+	else if(choice < 0.4)
+		Items.Combat.LustDart.UseCombatInternal(encounter, this, t);
 	/*
 	if(choice < 0.2 && Abilities.Physical.Bash.enabledCondition(encounter, this))
 		Abilities.Physical.Bash.CastInternal(encounter, this, t);
 	else if(choice < 0.4 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
 		Abilities.Physical.CrushingStrike.CastInternal(encounter, this, t);
-	else
 	*/
+	else
 		Abilities.Attack.CastInternal(encounter, this, t);
 }
 
@@ -374,9 +382,45 @@ Scenes.Terry.CombatVsMiranda = function() {
 		Text.Add("You nod and follow after Miranda.", parse);
 		Text.Flush();
 		
+		party.location = world.loc.Rigard.Gate;
 		world.TimeStep({minute: 30});
 		
 		party.RestFull();
+		
+		// Move Terry
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			terry.hidingSpot = world.loc.Rigard.Gate;
+		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Gate; });
+		scenes.AddEnc(function() {
+			terry.hidingSpot = world.loc.Rigard.Residental.street;
+		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Residental.street; });
+		scenes.AddEnc(function() {
+			terry.hidingSpot = world.loc.Rigard.ShopStreet.street;
+		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.ShopStreet.street; });
+		scenes.AddEnc(function() {
+			terry.hidingSpot = world.loc.Rigard.Plaza;
+		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Plaza; });
+		
+		scenes.Get();
+		
+		Gui.NextPrompt();
+	}
+	enc.onRun = function() {
+		var parse = {
+			
+		};
+		terry.sbombs--;
+		SetGameState(GameState.Event);
+		Text.Clear();
+		Text.Add("When the smoke clears, the vixen is nowhere to be seen. Miranda looks like she’s going to pop a vein…", parse);
+		Text.NL();
+		Text.Add("<i>”That damn bitch! I’m gonna get her, get her good next time!”</i> she fumes. Looking at you, she calms down some and sheathes her sword. <i>”She can’t have gone far, lets continue looking!”</i>", parse);
+		Text.NL();
+		Text.Add("You nod and follow after Miranda.", parse);
+		Text.Flush();
+		
+		world.TimeStep({minute: 30});
 		
 		// Move Terry
 		var scenes = new EncounterTable();
@@ -866,6 +910,7 @@ Scenes.Terry.Release = function() {
 		terry.topArmorSlot = Items.Armor.LeatherChest;
 		terry.botArmorSlot = Items.Armor.LeatherPants;
 		terry.Equip();
+		terry.RestFull();
 		
 		terry.name = "Terry";
 		terry.avatar.combat = Images.terry_c;
