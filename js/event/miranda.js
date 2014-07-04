@@ -13,15 +13,15 @@ function Miranda(storage) {
 	
 	this.maxHp.base        = 100;
 	this.maxSp.base        = 10;
-	this.maxLust.base      = 50;
+	this.maxLust.base      = 50; this.maxLust.growth      = 6;
 	// Main stats
-	this.strength.base     = 23;
-	this.stamina.base      = 19;
-	this.dexterity.base    = 19;
-	this.intelligence.base = 12;
-	this.spirit.base       = 11;
-	this.libido.base       = 24;
-	this.charisma.base     = 14;
+	this.strength.base     = 23; this.strength.growth     = 1.7;
+	this.stamina.base      = 19; this.stamina.growth      = 1.4;
+	this.dexterity.base    = 19; this.dexterity.growth    = 1.1;
+	this.intelligence.base = 12; this.intelligence.growth = 1;
+	this.spirit.base       = 11; this.spirit.growth       = 1.2;
+	this.libido.base       = 24; this.libido.growth       = 1.5;
+	this.charisma.base     = 14; this.charisma.growth     = 1.1;
 	
 	this.level    = 8;
 	this.sexlevel = 3;

@@ -8,20 +8,22 @@ function Terry(storage) {
 	
 	// Character stats
 	this.name = "Thief";
+	this.monsterName = "the thief";
+	this.MonsterName = "The thief";
 	
 	this.avatar.combat = Images.terry;
 	
 	this.maxHp.base        = 50;
-	this.maxSp.base        = 60;
+	this.maxSp.base        = 60; this.maxSp.growth        = 6;
 	this.maxLust.base      = 50;
 	// Main stats
 	this.strength.base     = 13;
 	this.stamina.base      = 10;
-	this.dexterity.base    = 24;
-	this.intelligence.base = 15;
+	this.dexterity.base    = 24; this.dexterity.growth    = 1.5;
+	this.intelligence.base = 15; this.intelligence.growth = 1.2;
 	this.spirit.base       = 13;
-	this.libido.base       = 15;
-	this.charisma.base     = 20;
+	this.libido.base       = 15; this.libido.growth       = 1.1;
+	this.charisma.base     = 20; this.charisma.growth     = 1.3;
 	
 	this.level    = 5;
 	this.sexlevel = 1;
@@ -83,6 +85,8 @@ Terry.prototype.FromStorage = function(storage) {
 	if(this.flags["Met"] >= Terry.Met.Caught) {
 		this.name = "Terry";
 		this.avatar.combat = Images.terry_c;
+		this.monsterName = null;
+		this.MonsterName = null;
 	}
 }
 
@@ -107,6 +111,13 @@ Terry.prototype.Act = function(encounter, activeChar) {
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);
 	
+	var first = this.turnCounter == 0;
+	this.turnCounter++;
+	
+	if(first) {
+		Items.Combat.DecoyStick.UseCombatInternal(encounter, this);
+		return;
+	}
 	
 	var choice = Math.random();
 	/*
@@ -311,6 +322,7 @@ Scenes.Terry.CombatVsMiranda = function() {
 	var enc = new Encounter(enemy);
 	
 	terry.RestFull();
+	terry.turnCounter = 0;
 	
 	enc.canRun = false;
 	
