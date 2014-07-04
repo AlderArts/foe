@@ -674,6 +674,29 @@ Entity.prototype.AddLustFraction = function(fraction) { // 0..1
 	if(this.curLust < 0) this.curLust = 0;
 }
 
+Entity.prototype.PhysDmgHP = function(encounter, val) {
+	var parse = {
+		possessive : this.possessive()
+	};
+	
+	// Check for decoy
+	if(this.combatStatus.stats[StatusEffect.Decoy] != null) {
+		var num = this.combatStatus.stats[StatusEffect.Decoy].copies;
+		var toHit = 1 / (num + 1);
+		if(Math.random() < toHit)
+			return true;
+		
+		parse["oneof"] = num > 1 ? " one of" : "";
+		parse["copy"]  = num > 1 ? "copies" : "copy";
+		Text.AddOutput("The attack is absorbed by[oneof] [possessive] [copy]!", parse);
+		this.combatStatus.stats[StatusEffect.Decoy].copies--;
+		if(this.combatStatus.stats[StatusEffect.Decoy].copies <= 0)
+			this.combatStatus.stats[StatusEffect.Decoy] = null;
+		return false;
+	}
+	
+	return true;
+}
 Entity.prototype.AddHPAbs = function(val) {
 	val = val || 0;
 	this.curHp += val;
@@ -990,6 +1013,9 @@ Entity.prototype.FreezeResist = function() {
 	return 0;
 }
 Entity.prototype.NumbResist = function() {
+	return 0;
+}
+Entity.prototype.HornyResist = function() {
 	return 0;
 }
 

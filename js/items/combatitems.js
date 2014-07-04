@@ -61,6 +61,8 @@ Items.Combat.DecoyStick.UseCombatInternal = function(encounter, caster) {
 	Text.Add("[Name] grab[s] a decoy stick and breaks it. A flash of light emanates, and when it subsides [name] [has] split into four copies.", parse);
 	Text.Flush();
 	
+	Status.Decoy(caster, {copies: 3});
+	
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
 	});

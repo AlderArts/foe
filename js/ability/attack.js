@@ -26,11 +26,13 @@ Abilities.Attack.CastInternal = function(encounter, caster, target) {
 		if(dmg < 0) dmg = 0;
 		dmg = caster.elementAtk.ApplyDmgType(target.elementDef, dmg);
 		dmg = Math.floor(dmg);
+		
+		if(target.PhysDmgHP(encounter, dmg)) {
+			target.AddHPAbs(-dmg);
 	
-		target.AddHPAbs(-dmg);
-	
-		// TODO: Make more flavor text	
-		Text.AddOutput("[name] attacks [tName] for " + Text.BoldColor(dmg, "#800000") + " damage! Waagh!", parse);
+			// TODO: Make more flavor text	
+			Text.AddOutput("[name] attacks [tName] for " + Text.BoldColor(dmg, "#800000") + " damage! Waagh!", parse);
+		}
 	}
 	else {
 		Text.AddOutput("[name] attacks [tName], but the blow misses!", parse);
