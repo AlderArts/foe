@@ -1512,6 +1512,8 @@ Scenes.Gwendy.ChallengeSexVag = function(fuck, hangout) {
 		Text.NL();
 		
 		Sex.Vaginal(player, gwendy);
+		gwendy.FuckVag(gwendy.FirstVag(), player.FirstCock(), 3);
+		player.Fuck(player.FirstCock(), 3);
 		
 		Text.Add("You stay still for a second, letting her slick folds squeeze around your [cockDesc], briefly revelling in the feeling of her [gVagDesc] before you ravage her. The farm girl looks up at you with her large blue eyes, silently begging you to take her, hard and fast. Not one to keep a lady waiting, you begin to move, your [cockDesc] gripped tightly by her folds. For every thrust you make, she lets out a cute squeal, escalating to moans and cries as your thrusts build her arousal, her sweet tenor a pleasing accompaniment to the sounds of flesh grinding against flesh.", parse);
 		Text.NL();
