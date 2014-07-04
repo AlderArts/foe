@@ -47,6 +47,7 @@ function Terry(storage) {
 	
 	this.flags["Met"]   = 0;
 	this.flags["Saved"] = 0;
+	this.flags["PrefGender"] = Gender.female;
 	
 	this.hidingSpot = world.loc.Rigard.ShopStreet.street;
 	
@@ -102,6 +103,39 @@ Terry.prototype.ToStorage = function() {
 	
 	return storage;
 }
+
+
+Terry.prototype.heshe = function() {
+	var gender = this.flags["PrefGender"];
+	if(gender == Gender.male) return "he";
+	else return "she";
+}
+Terry.prototype.HeShe = function() {
+	var gender = this.flags["PrefGender"];
+	if(gender == Gender.male) return "He";
+	else return "She";
+}
+Terry.prototype.himher = function() {
+	var gender = this.flags["PrefGender"];
+	if(gender == Gender.male) return "him";
+	else return "her";
+}
+Terry.prototype.hisher = function() {
+	var gender = this.flags["PrefGender"];
+	if(gender == Gender.male) return "his";
+	else return "her";
+}
+Terry.prototype.HisHer = function() {
+	var gender = this.flags["PrefGender"];
+	if(gender == Gender.male) return "His";
+	else return "Her";
+}
+Terry.prototype.hishers = function() {
+	var gender = this.flags["PrefGender"];
+	if(gender == Gender.male) return "his";
+	else return "hers";
+}
+
 
 Terry.prototype.Act = function(encounter, activeChar) {
 	// TODO: AI!
@@ -381,6 +415,8 @@ Scenes.Terry.CaughtTheThief = function() {
 	
 	SetGameState(GameState.Event);
 	rigard.Krawitz["Q"] = Rigard.KrawitzQ.CaughtTerry;
+	
+	terry.flags["PrefGender"] = Gender.male;
 	
 	var dom = player.SubDom() - miranda.SubDom();
 	
@@ -838,6 +874,8 @@ Scenes.Terry.Release = function() {
 		party.AddMember(terry);
 		
 		if(party.InParty(miranda)) {
+			var dom = player.SubDom() - miranda.SubDom();
+			
 			Text.NL();
 			Text.Add("Terry looks a bit nervous as you set out, constantly looking around as if he was being watched. His fears turn out to be justified, as Miranda steps out from a side street, a wide grin on her face.", parse);
 			Text.NL();
@@ -847,15 +885,68 @@ Scenes.Terry.Release = function() {
 			Text.NL();
 			Text.Add("You explain that Miranda is travelling together with you, and he’ll just have to deal with that.", parse);
 			Text.NL();
-			Text.Add("<i>”I don’t see how I could,”</i> he mutters. The former prisoner looks more miserable than when he was on death row, however that is possible. Miranda teases him a bit more, but eventually leaves the unhappy fox alone.", parse);
+			Text.Add("<i>”You’re asking too much! I’m not going to travel with this stupid bitch!”</i> he protests.", parse);
 			Text.NL();
-			Text.Add("Looks like his hopes for the future just took a dive into the gutter.", parse);
+			Text.Add("Miranda cracks her knuckles, she looks like she’s about to teach him a lesson, but you stop her. You inform Terry that it’s either this or death row, so the faster he gets used to this, the better. Likewise, you tell Miranda not to provoke Terry. The last thing you need is infighting.", parse);
+			Text.NL();
+			parse["mastermistress"] = dom > 50 ? player.mfTrue(" master", " mistress") : "";
+			Text.Add("<i>”Whatever you say…[mastermistress],”</i> Miranda replies. Terry just glares at her, keeping his distance.", parse);
+			Text.NL();
+			Text.Add("You’re just about to get going when Miranda stops you. <i>”You know, [playername]. I think there’s a perfect way for us to settle our differences. How about you let me finish what we started back then? In the warehouse?”</i> she asks with an insidious smile.", parse);
+			Text.NL();
+			Text.Add("<i>”Oh, no! No way! You gotta be kidding me! Listen here if you-”</i> You swiftly shush him by telling him to be silent. You need to consider this. On one hand… maybe doing this will put an end to their animosity, though you admit that seems unlikely. On the other… you’re pretty sure your relationship with the fox thief is going to take a hit if you let Miranda have her way.", parse);
+			Text.Flush();
 			
-			terry.relation.DecreaseStat(-100, 10);
+			//[Let her][Nope]
+			var options = new Array();
+			options.push({ nameStr : "Let her",
+				func : function() {
+					Text.Clear();
+					Text.Add("Terry’s ears droop as you watch the fox swallow what looks like lead.", parse);
+					Text.NL();
+					Text.Add("<i>”Sweet, let’s go somewhere more private, shall we?”</i> she suggests, looking at both you and Terry.", parse);
+					Text.NL();
+					Text.Add("The three of you duck out in a nearby alleyway…", parse);
+					Text.Flush();
+					
+					miranda.relation.IncreaseStat(100, 5);
+					terry.relation.DecreaseStat(-100, 5);
+					
+					// TODO: Repeatable YES
+				}, enabled : true,
+				tooltip : "You’re pretty sure Miranda will appreciate this, unlike Terry."
+			});
+			options.push({ nameStr : "Nope",
+				func : function() {
+					Text.Clear();
+					Text.Add("Miranda groans. ", parse);
+					if(dom > 50) {
+						parse["mastermistress"] = player.mfTrue("master", "mistress");
+						Text.Add("<i>”As you wish, [mastermistress],”</i> she says rolling her eyes.", parse);
+					}
+					else
+						Text.Add("<i>”After all the hell this little bastard’s put me through you’re not even going to let me have a shot at him? Bah! Do whatever you want!”</i> Miranda exclaims dismissively.", parse);
+					Text.NL();
+					Text.Add("Terry breathes a sigh of relief, and you’re pretty sure you caught the faintest hint of a smile when he glanced at you just now.", parse);
+					Text.NL();
+					Text.Add("You motion for them to follow you as you continue on your way.", parse);
+					Text.Flush();
+					
+					terry.relation.IncreaseStat(100, 3);
+					miranda.relation.DecreaseStat(-100, 10);
+					
+					Gui.NextPrompt();
+				}, enabled : true,
+				tooltip : "It wouldn’t be very nice of you to submit the fox thief to this after he’s just gotten out of the death row."
+			});
+			Gui.SetButtonsFromList(options, false, null);
+			
+			terry.relation.DecreaseStat(-100, 5);
 		}
-		
-		Text.Flush();
-		
-		Gui.NextPrompt();
+		else {
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		}
 	});
 }
