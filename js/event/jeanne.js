@@ -374,6 +374,8 @@ Scenes.Jeanne.First = function() {
 		hisher     : function() { return kiakai.hisher(); }
 	};
 	
+	jeanne.flags["Met"] = 1;
+	
 	Text.Clear();
 	Text.Add("You make the trek up the final set of stairs into a large laboratory, every nook and cranny the home of some strange arcane device or alchemical concoction. Parchments and books are strewn about on tables and chairs, and a half-eaten meal is growing cold, forgotten on a bookshelf.", parse);
 	Text.NL();
