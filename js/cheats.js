@@ -1,5 +1,5 @@
 
-
+/*
 world.loc.Plains.Nomads.Tent.events.push(new Link(
 	"TESTBUTTON", function() { return DEBUG; }, true,
 	function() {
@@ -11,6 +11,7 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		Scenes.Krawitz.Aftermath();
 	}
 ));
+*/
 
 world.loc.Plains.Nomads.Tent.events.push(new Link(
 	"CockSmith", function() { return DEBUG; }, true,
