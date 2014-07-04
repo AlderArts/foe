@@ -843,6 +843,10 @@ Scenes.Terry.Release = function() {
 			terry.relation.DecreaseStat(-100, 10);
 		}
 		
+		terry.topArmorSlot = Items.Armor.LeatherChest;
+		terry.botArmorSlot = Items.Armor.LeatherPants;
+		terry.Equip();
+		
 		terry.name = "Terry";
 		terry.avatar.combat = Images.terry_c;
 		party.AddMember(terry);

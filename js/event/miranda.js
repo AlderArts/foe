@@ -39,6 +39,7 @@ function Miranda(storage) {
 	this.SetEyeColor(Color.green);
 	
 	this.weaponSlot   = Items.Weapons.GreatSword;
+	this.topArmorSlot = Items.Armor.WatchChest;
 	
 	this.Equip();
 	this.SetLevelBonus();
