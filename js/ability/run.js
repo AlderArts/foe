@@ -12,15 +12,12 @@ Abilities.Run.enabledCondition = function(encounter, caster) {
 }
 Abilities.Run.CastInternal = function(encounter, caster) {
 	// TODO: Make more flavor text	
-	Text.AddOutput("You run away!");
+	Text.AddOutput("You try to run away!");
 	Text.Newline();
 	
 	// TODO: random chance on success
 	
 	Gui.NextPrompt(function() {
-		if(encounter.onRun)
-			encounter.onRun(encounter, caster);
-		else
-			PrintDefaultOptions();
+		encounter.onRun();
 	});
 }

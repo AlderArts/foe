@@ -8,30 +8,40 @@ function Terry(storage) {
 	
 	// Character stats
 	this.name = "Thief";
+	this.monsterName = "the thief";
+	this.MonsterName = "The thief";
 	
 	this.avatar.combat = Images.terry;
 	
 	this.maxHp.base        = 50;
-	this.maxSp.base        = 60;
+	this.maxSp.base        = 60; this.maxSp.growth        = 6;
 	this.maxLust.base      = 50;
 	// Main stats
 	this.strength.base     = 13;
 	this.stamina.base      = 10;
-	this.dexterity.base    = 24;
-	this.intelligence.base = 15;
+	this.dexterity.base    = 24; this.dexterity.growth    = 1.5;
+	this.intelligence.base = 15; this.intelligence.growth = 1.2;
 	this.spirit.base       = 13;
-	this.libido.base       = 15;
-	this.charisma.base     = 20;
+	this.libido.base       = 15; this.libido.growth       = 1.1;
+	this.charisma.base     = 20; this.charisma.growth     = 1.3;
 	
-	this.level    = 1;
+	this.level    = 5;
 	this.sexlevel = 1;
 	
 	this.body.DefMale();
+	this.body.muscleTone.base = 0.1;
+	this.body.femininity.base = 0.8;
 	this.Butt().buttSize.base = 3;
 	this.FirstCock().length.base = 11;
-	this.FirstCock().thickness.base = 2.5;
+	this.FirstCock().thickness.base = 2;
+	this.SetSkinColor(Color.gold);
+	this.SetHairColor(Color.red);
+	this.SetEyeColor(Color.blue);
 	this.body.SetRace(Race.fox);
 	
+	this.weaponSlot   = Items.Weapons.Dagger;
+	
+	this.Equip();
 	this.SetLevelBonus();
 	this.RestFull();
 	
@@ -63,9 +73,8 @@ Terry.Saved = {
 
 Terry.prototype.FromStorage = function(storage) {
 	this.Butt().virgin       = parseInt(storage.virgin) == 1;
-	this.subDom.base         = parseFloat(storage.subDom)  || this.subDom.base;
-	this.slut.base           = parseFloat(storage.slut)    || this.slut.base;
-	this.relation.base       = parseFloat(storage.rel)     || this.relation.base;
+	
+	this.LoadPersonalityStats(storage);
 	
 	// Load flags
 	for(var flag in storage.flags)
@@ -76,6 +85,8 @@ Terry.prototype.FromStorage = function(storage) {
 	if(this.flags["Met"] >= Terry.Met.Caught) {
 		this.name = "Terry";
 		this.avatar.combat = Images.terry_c;
+		this.monsterName = null;
+		this.MonsterName = null;
 	}
 }
 
@@ -83,9 +94,9 @@ Terry.prototype.ToStorage = function() {
 	var storage = {
 		virgin : this.Butt().virgin ? 1 : 0
 	};
-	if(this.subDom.base   != 0) storage.subDom = this.subDom.base;
-	if(this.slut.base     != 0) storage.slut   = this.slut.base;
-	if(this.relation.base != 0) storage.rel    = this.relation.base;
+	
+	this.SavePersonalityStats(storage);
+	
 	storage.flags = this.flags;
 	storage.sex   = this.SaveSexStats();
 	
@@ -100,6 +111,13 @@ Terry.prototype.Act = function(encounter, activeChar) {
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);
 	
+	var first = this.turnCounter == 0;
+	this.turnCounter++;
+	
+	if(first) {
+		Items.Combat.DecoyStick.UseCombatInternal(encounter, this);
+		return;
+	}
 	
 	var choice = Math.random();
 	/*
@@ -304,6 +322,7 @@ Scenes.Terry.CombatVsMiranda = function() {
 	var enc = new Encounter(enemy);
 	
 	terry.RestFull();
+	terry.turnCounter = 0;
 	
 	enc.canRun = false;
 	
@@ -807,6 +826,17 @@ Scenes.Terry.Release = function() {
 		Text.Add("You consider it for a moment, then finally decide to tell him the truth, admitting you don't really know. But you know the collar was made by [j]the Royal Court Mage, so he can probably figure it out himself.", parse);
 		Text.NL();
 		Text.Add("<i>”I see… so I guess I’m at your mercy. Lead away then?”</i>", parse);
+		
+		terry.topArmorSlot = Items.Armor.LeatherChest;
+		terry.botArmorSlot = Items.Armor.LeatherPants;
+		terry.Equip();
+		
+		terry.name = "Terry";
+		terry.avatar.combat = Images.terry_c;
+		terry.monsterName = null;
+		terry.MonsterName = null;
+		party.AddMember(terry);
+		
 		if(party.InParty(miranda)) {
 			Text.NL();
 			Text.Add("Terry looks a bit nervous as you set out, constantly looking around as if he was being watched. His fears turn out to be justified, as Miranda steps out from a side street, a wide grin on her face.", parse);
@@ -823,10 +853,6 @@ Scenes.Terry.Release = function() {
 			
 			terry.relation.DecreaseStat(-100, 10);
 		}
-		
-		terry.name = "Terry";
-		terry.avatar.combat = Images.terry_c;
-		party.AddMember(terry);
 		
 		Text.Flush();
 		

@@ -84,10 +84,7 @@ Gwendy.prototype.Sexed = function() {
 }
 
 Gwendy.prototype.FromStorage = function(storage) {
-	// Personality stats
-	this.subDom.base         = parseFloat(storage.subDom)  || this.subDom.base;
-	this.slut.base           = parseFloat(storage.slut)    || this.slut.base;
-	this.relation.base       = parseFloat(storage.rel)     || this.relation.base;
+	this.LoadPersonalityStats(storage);
 	
 	// Load flags
 	for(var flag in storage.flags)
@@ -98,9 +95,9 @@ Gwendy.prototype.FromStorage = function(storage) {
 
 Gwendy.prototype.ToStorage = function() {
 	var storage = {};
-	if(this.subDom.base   != 0) storage.subDom = this.subDom.base;
-	if(this.slut.base     != 0) storage.slut   = this.slut.base;
-	if(this.relation.base != 0) storage.rel    = this.relation.base;
+	
+	this.SavePersonalityStats(storage);
+	
 	storage.flags = this.flags;
 	storage.sex   = this.SaveSexStats();
 	

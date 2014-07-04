@@ -242,62 +242,80 @@ Entity.prototype.SaveSexStats = function() {
 	return sex;
 }
 
-// Convert to a format easy to write to/from memory
-Entity.prototype.ToStorage = function() {
-	var storage = {
-		name    : this.name,
-		exp     : this.experience,
-		points  : this.pendingStatPoints,
-		exp2lvl : this.expToLevel,
-		lvl     : this.level,
-		sexp    : this.sexperience,
-		sxp2lvl : this.sexpToLevel,
-		slvl    : this.sexlevel,
-		alvl    : this.alchemyLevel,
-		curHp   : this.curHp,
-		maxHp   : this.maxHp.base,
-		curSp   : this.curSp,
-		maxSp   : this.maxSp.base,
-		curLust : this.curLust,
-		maxLust : this.maxLust.base,
-		// Main stats
-		str     : this.strength.base,
-		sta     : this.stamina.base,
-		dex     : this.dexterity.base,
-		inte    : this.intelligence.base,
-		spi     : this.spirit.base,
-		lib     : this.libido.base,
-		cha     : this.charisma.base,
-		// Growth
-		maxHpG   : this.maxHp.growth,
-		maxSpG   : this.maxSp.growth,
-		maxLustG : this.maxLust.growth,
-		strG     : this.strength.growth,
-		staG     : this.stamina.growth,
-		dexG     : this.dexterity.growth,
-		inteG    : this.intelligence.growth,
-		spiG     : this.spirit.growth,
-		libG     : this.libido.growth,
-		chaG     : this.charisma.growth
-	};
+Entity.prototype.SaveCombatStats = function(storage) {
+	storage = storage || {};
+	
+	storage.name     = this.name;
+	storage.exp      = this.experience;
+	storage.points   = this.pendingStatPoints;
+	storage.exp2lvl  = this.expToLevel;
+	storage.lvl      = this.level;
+	storage.sexp     = this.sexperience;
+	storage.sxp2lvl  = this.sexpToLevel;
+	storage.slvl     = this.sexlevel;
+	storage.alvl     = this.alchemyLevel;
+	storage.curHp    = this.curHp;
+	storage.maxHp    = this.maxHp.base;
+	storage.curSp    = this.curSp;
+	storage.maxSp    = this.maxSp.base;
+	storage.curLust  = this.curLust;
+	storage.maxLust  = this.maxLust.base;
+	// Main stats
+	storage.str      = this.strength.base;
+	storage.sta      = this.stamina.base;
+	storage.dex      = this.dexterity.base;
+	storage.inte     = this.intelligence.base;
+	storage.spi      = this.spirit.base;
+	storage.lib      = this.libido.base;
+	storage.cha      = this.charisma.base;
+	// Growth
+	storage.maxHpG   = this.maxHp.growth;
+	storage.maxSpG   = this.maxSp.growth;
+	storage.maxLustG = this.maxLust.growth;
+	storage.strG     = this.strength.growth;
+	storage.staG     = this.stamina.growth;
+	storage.dexG     = this.dexterity.growth;
+	storage.inteG    = this.intelligence.growth;
+	storage.spiG     = this.spirit.growth;
+	storage.libG     = this.libido.growth;
+	storage.chaG     = this.charisma.growth;
+	
+	if(this.monsterName) storage.mName = this.monsterName;
+	if(this.MonsterName) storage.MName = this.MonsterName;
+}
+
+Entity.prototype.SavePersonalityStats = function(storage) {
+	storage = storage || {};
 	
 	// Personality stats
 	if(this.subDom.base   != 0) storage.subDom = this.subDom.base;
 	if(this.slut.base     != 0) storage.slut   = this.slut.base;
 	if(this.relation.base != 0) storage.rel    = this.relation.base;
 	if(this.drunkLevel    != 0) storage.drunk  = this.drunkLevel;
+}
+
+Entity.prototype.SaveRecipes = function(storage) {
+	storage = storage || {};
 	
 	if(this.recipes) {
 		storage.recipes = [];
 		for(var i = 0; i < this.recipes.length; i++)
 			storage.recipes.push(this.recipes[i].id);
 	}
+}
+
+Entity.prototype.SaveEffects = function(storage) {
+	storage = storage || {};
 	
 	if(this.effects) {
 		storage.effects = [];
 		for(var i = 0; i < this.effects.length; i++)
 			storage.effects.push(this.effects[i].ToStorage());
 	}
+}
+
+Entity.prototype.SaveJobs = function(storage) {
+	storage = storage || {};
 	
 	storage.jobs = {};
 	for(var job in this.jobs) {
@@ -308,6 +326,10 @@ Entity.prototype.ToStorage = function() {
 	}
 	if(this.currentJob)
 		storage.curJob = this.currentJob.name;
+}
+
+Entity.prototype.SaveEquipment = function(storage) {
+	storage = storage || {};
 	
 	// Equipment
 	if(this.weaponSlot)   storage.wep    = this.weaponSlot.id;
@@ -317,12 +339,23 @@ Entity.prototype.ToStorage = function() {
 	if(this.acc2Slot)     storage.acc2   = this.acc2Slot.id;
 	
 	if(this.strapOn)      storage.toy    = this.strapOn.id;
+}
+
+// Convert to a format easy to write to/from memory
+Entity.prototype.ToStorage = function() {
+	var storage = {
+		
+	};
+	
+	this.SaveCombatStats(storage);
+	this.SavePersonalityStats(storage);
+	this.SaveRecipes(storage);
+	this.SaveEffects(storage);
+	this.SaveJobs(storage);
+	this.SaveEquipment(storage);
 	
 	storage.flags = this.flags;
 	storage.sex   = this.SaveSexStats();
-	
-	if(this.monsterName) storage.mName = this.monsterName;
-	if(this.MonsterName) storage.MName = this.MonsterName;
 	
 	storage.body = this.body.ToStorage();
 	
@@ -333,11 +366,11 @@ Entity.prototype.ToStorage = function() {
 	// Where timer = 10 is the amount of ticks until the timer runs out, and
 	// callback is the function to call (use closures)
 	this.timers = new Array();
-	*/	
+	*/
 	return storage;
 }
 
-Entity.prototype.FromStorage = function(storage) {
+Entity.prototype.LoadCombatStats = function(storage) {
 	this.name              = storage.name  || this.name;
 	this.monsterName       = storage.mName || this.monsterName;
 	this.MonsterName       = storage.MName || this.MonsterName;
@@ -375,32 +408,34 @@ Entity.prototype.FromStorage = function(storage) {
 	this.spirit.growth       = parseFloat(storage.spiG)     || this.spirit.growth;
 	this.libido.growth       = parseFloat(storage.libG)     || this.libido.growth;
 	this.charisma.growth     = parseFloat(storage.chaG)     || this.charisma.growth;
-	
+}
+
+Entity.prototype.LoadPersonalityStats = function(storage) {
 	// Personality stats
 	this.subDom.base         = parseFloat(storage.subDom)  || this.subDom.base;
 	this.slut.base           = parseFloat(storage.slut)    || this.slut.base;
 	this.relation.base       = parseFloat(storage.rel)     || this.relation.base;
 	this.drunkLevel          = parseFloat(storage.drunk)   || this.drunkLevel;
-	
-	// Load flags
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
-	for(var flag in storage.sex)
-		this.sex[flag] = parseInt(storage.sex[flag]);
-	
+}
+
+Entity.prototype.LoadRecipes = function(storage) {
 	if(storage.recipes) {
 		this.recipes = [];
 		for(var i = 0; i < storage.recipes.length; i++)
 			this.recipes.push(ItemIds[storage.recipes[i]]);
 	}
-	
+}
+
+Entity.prototype.LoadEffects = function(storage) {
 	if(storage.effects) {
 		this.effects = [];
 		for(var i = 0; i < storage.effects.length; i++) {
 			this.effects.push(EffectFromStorage(storage.effects[i]));
 		}
 	}
-	
+}
+
+Entity.prototype.LoadJobs = function(storage) {
 	if(storage.jobs) {
 		for(job in this.jobs) {
 			var jd = this.jobs[job];
@@ -409,7 +444,9 @@ Entity.prototype.FromStorage = function(storage) {
 	}
 	if(storage.curJob)
 		this.currentJob = Jobs[storage.curJob];
-	
+}
+
+Entity.prototype.LoadEquipment = function(storage) {
 	if(storage.wep)    this.weaponSlot   = ItemIds[storage.wep];
 	if(storage.toparm) this.topArmorSlot = ItemIds[storage.toparm];
 	if(storage.botarm) this.botArmorSlot = ItemIds[storage.botarm];
@@ -417,6 +454,21 @@ Entity.prototype.FromStorage = function(storage) {
 	if(storage.acc2)   this.acc2Slot     = ItemIds[storage.acc2];
 	
 	if(storage.toy)    this.strapOn      = ItemIds[storage.toy];
+}
+
+Entity.prototype.FromStorage = function(storage) {
+	this.LoadCombatStats(storage);
+	this.LoadPersonalityStats(storage);
+	this.LoadRecipes(storage);
+	this.LoadEffects(storage);
+	this.LoadJobs(storage);
+	this.LoadEquipment(storage);
+	
+	// Load flags
+	for(var flag in storage.flags)
+		this.flags[flag] = parseInt(storage.flags[flag]);
+	for(var flag in storage.sex)
+		this.sex[flag] = parseInt(storage.sex[flag]);
 	
 	if(storage.body) {
 		this.body = new Body();
@@ -622,6 +674,30 @@ Entity.prototype.AddLustFraction = function(fraction) { // 0..1
 	if(this.curLust < 0) this.curLust = 0;
 }
 
+Entity.prototype.PhysDmgHP = function(encounter, val) {
+	var parse = {
+		possessive : this.possessive()
+	};
+	
+	// Check for decoy
+	if(this.combatStatus.stats[StatusEffect.Decoy] != null) {
+		var num = this.combatStatus.stats[StatusEffect.Decoy].copies;
+		var toHit = 1 / (num + 1);
+		if(Math.random() < toHit)
+			return true;
+		
+		parse["oneof"] = num > 1 ? " one of" : "";
+		parse["copy"]  = num > 1 ? "copies" : "copy";
+		Text.AddOutput("The attack is absorbed by[oneof] [possessive] [copy]!", parse);
+		Text.Newline();
+		this.combatStatus.stats[StatusEffect.Decoy].copies--;
+		if(this.combatStatus.stats[StatusEffect.Decoy].copies <= 0)
+			this.combatStatus.stats[StatusEffect.Decoy] = null;
+		return false;
+	}
+	
+	return true;
+}
 Entity.prototype.AddHPAbs = function(val) {
 	val = val || 0;
 	this.curHp += val;
@@ -938,6 +1014,9 @@ Entity.prototype.FreezeResist = function() {
 	return 0;
 }
 Entity.prototype.NumbResist = function() {
+	return 0;
+}
+Entity.prototype.HornyResist = function() {
 	return 0;
 }
 
@@ -2065,11 +2144,11 @@ Entity.prototype.Weapon = function() {
 }
 // TODO
 Entity.prototype.WeaponDesc = function() {
-	return this.weaponSlot ? this.weaponSlot.Short() : "stick";
+	return this.weaponSlot ? this.weaponSlot.sDesc() : "stick";
 }
 // TODO
 Entity.prototype.WeaponDescLong = function() {
-	return this.weaponSlot ? this.weaponSlot.Long() : "a stick";
+	return this.weaponSlot ? this.weaponSlot.lDesc() : "a stick";
 }
 // TODO
 Entity.prototype.Armor = function() {
@@ -2081,18 +2160,18 @@ Entity.prototype.LowerArmor = function() {
 }
 // TODO
 Entity.prototype.LowerArmorDesc = function() {
-	return this.botArmorSlot ? this.botArmorSlot.Short() : this.ArmorDesc();
+	return this.botArmorSlot ? this.botArmorSlot.sDesc() : this.ArmorDesc();
 }
 // TODO
 Entity.prototype.LowerArmorDescLong = function() {
-	return this.botArmorSlot ? this.botArmorSlot.Long() : this.ArmorDescLong();
+	return this.botArmorSlot ? this.botArmorSlot.lDesc() : this.ArmorDescLong();
 }
 // TODO
 Entity.prototype.ArmorDesc = function() {
-	return this.topArmorSlot ? this.topArmorSlot.Short() : "comfortable clothes";
+	return this.topArmorSlot ? this.topArmorSlot.sDesc() : "comfortable clothes";
 }
 Entity.prototype.ArmorDescLong = function() {
-	return this.topArmorSlot ? this.topArmorSlot.Long() : "a set of comfortable clothes";
+	return this.topArmorSlot ? this.topArmorSlot.lDesc() : "a set of comfortable clothes";
 }
 Entity.prototype.Accessories = function() {
 	return [this.acc1Slot, this.acc2Slot];

@@ -88,6 +88,7 @@ InitCache = function() {
 	world.EntityStorage.push(terry);
 	
 	world.EntityStorage.push(lei);
+	world.EntityStorage.push(twins);
 	world.EntityStorage.push(twins.rumi);
 	world.EntityStorage.push(twins.rani);
 	world.EntityStorage.push(room69);

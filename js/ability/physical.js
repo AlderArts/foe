@@ -49,16 +49,18 @@ AttackPhysical.prototype.CastInternal = function(encounter, caster, target) {
 				
 				dmg = damageType.ApplyDmgType(e.elementDef, dmg);
 				dmg = Math.floor(dmg);
-			
-				e.AddHPAbs(-dmg);
 				
-				if(dmg >= 0) {
-					if(this.OnHit) this.OnHit(encounter, caster, e, dmg);
+				if(e.PhysDmgHP(encounter, dmg)) {
+					e.AddHPAbs(-dmg);
+					
+					if(dmg >= 0) {
+						if(this.OnHit) this.OnHit(encounter, caster, e, dmg);
+					}
+					else {
+						if(this.OnAbsorb) this.OnAbsorb(encounter, caster, e, -dmg);
+					}
+					if(this.TargetEffect) this.TargetEffect(encounter, caster, e);
 				}
-				else {
-					if(this.OnAbsorb) this.OnAbsorb(encounter, caster, e, -dmg);
-				}
-				if(this.TargetEffect) this.TargetEffect(encounter, caster, e);
 			}
 			else
 				if(this.OnMiss) this.OnMiss(encounter, caster, e);

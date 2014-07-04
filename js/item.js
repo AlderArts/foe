@@ -24,8 +24,8 @@ function Item(id, name) {
 	// Alchemical recipe, an array of {it: Item, num: Number} pairs
 	this.Recipe = [];
 	//function(target)
-	this.Use    = null;
-	this.EquipType = ItemType.None;
+	this.Use        = null;
+	this.EquipType  = ItemType.None;
 	/* 
 	 * effect = {
 	 * 	 maxHp
@@ -109,6 +109,97 @@ Item.prototype.Short = function() {
 
 Item.prototype.Long = function() {
 	return this.name;
+}
+
+// Used as entrypoint for PC/Party (active selection)
+Item.prototype.OnSelect = function(inv, encounter, caster, backPrompt) {
+	var item = this;
+	// TODO: Buttons (use portraits for target?)
+	if(this.targetMode == TargetMode.Self) {
+		this.UseCombat(inv, encounter, caster);
+	}
+	else if(this.targetMode == TargetMode.Ally) {
+		var target = new Array();
+		for(var i=0,j=party.members.length; i<j; i++){
+			var t = party.members[i];
+			if(t.Incapacitated()) continue;
+			target.push({
+			  	nameStr : t.name,
+			  	func    : function(t) {
+			  		item.UseCombat(inv, encounter, caster, t);
+			  	},
+			  	enabled : true,
+			  	obj     : t
+			});
+		};
+		
+		Gui.SetButtonsFromList(target, true, backPrompt);
+	}
+	else if(this.targetMode == TargetMode.AllyNotSelf) {
+		var target = new Array();
+		for(var i=0,j=party.members.length; i<j; i++){
+			var t = party.members[i];
+			// Skip self
+			if(t == caster) continue;
+			if(t.Incapacitated()) continue;
+			target.push({
+			  	nameStr : t.name,
+			  	func    : function(t) {
+			  		item.UseCombat(inv, encounter, caster, t);
+			  	},
+			  	enabled : true,
+			  	obj     : t
+			});
+		};
+		
+		Gui.SetButtonsFromList(target, true, backPrompt);
+	}
+	else if(this.targetMode == TargetMode.AllyFallen) {
+		var target = new Array();
+		for(var i=0,j=party.members.length; i<j; i++){
+			var t = party.members[i];
+			// Skip self (as you are obviously not fallen)
+			if(t == caster) continue;
+			if(!t.Incapacitated()) continue;
+			target.push({
+			  	nameStr : t.name,
+			  	func    : function(t) {
+			  		item.UseCombat(inv, encounter, caster, t);
+			  	},
+			  	enabled : true,
+			  	obj     : t
+			});
+		};
+		
+		Gui.SetButtonsFromList(target, true, backPrompt);
+	}
+	else if(this.targetMode == TargetMode.Enemy) {
+		var enemies = encounter.enemy.members;
+		var target = new Array();
+		for(var i=0,j=enemies.length; i<j; i++){
+			var t = enemies[i];
+			if(t.Incapacitated()) continue;
+			target.push({
+			  	nameStr : t.name,
+			  	func    : function(t) {
+			  		item.UseCombat(inv, encounter, caster, t);
+			  	},
+			  	enabled : true,
+			  	obj     : t
+			});
+		};
+		
+		Gui.SetButtonsFromList(target, true, backPrompt);
+	}
+	else if(this.targetMode == TargetMode.Party) {
+		this.UseCombat(inv, encounter, caster, party);
+	}
+	else if(this.targetMode == TargetMode.Enemies) {
+		this.UseCombat(inv, encounter, caster, encounter.enemy);
+	}
+	// Fallback
+	else
+		encounter.CombatTick();
 }
 
 // Inventory
@@ -202,7 +293,7 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 	var list = [];
 	for(var i = 0; i < this.items.length; i++) {
 		var it = this.items[i].it;
-		Text.AddOutput(this.items[i].num + "x " + it.name + " - " + it.Short() + "<br/>");
+		Text.Add(this.items[i].num + "x " + it.name + " - " + it.Short() + "<br/>");
 		if(!it.Use) continue;
 		list.push({
 			nameStr: it.name,
@@ -211,9 +302,10 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 			obj: it,
 			func: function(item) {
 				Text.Clear();
-				Text.AddOutput(item.Long());
-				Text.Newline();
-				Text.AddOutput("Use [it] on which partymember?", {it: item.name});
+				Text.Add(item.Long());
+				Text.NL();
+				Text.Add("Use [it] on which partymember?", {it: item.name});
+				Text.Flush();
 				
 				var target = new Array();
 				for(var i=0,j=party.members.length; i<j; i++){
@@ -245,9 +337,45 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 	Gui.SetButtonsFromList(list);
 	
 	if(this.items.length == 0)
-		Text.AddOutput("You are not carrying anything at the moment.");
-	
+		Text.Add("You are not carrying anything at the moment.");
+	Text.Flush();
 	SetExploreButtons();
+}
+
+Inventory.prototype.CombatInventory = function(encounter, entity, back) {
+	var inv = this;
+	Text.Clear();
+	
+	var backPrompt = function() {
+		inv.CombatInventory(encounter, entity, back);
+	}
+	
+	var list = [];
+	for(var i = 0; i < this.items.length; i++) {
+		var it = this.items[i].it;
+		if(!it.UseCombat) continue;
+		Text.Add(this.items[i].num + "x " + it.name + " - " + it.Short() + "<br/>");
+		list.push({
+			nameStr: it.name,
+			enabled: true,
+			//tooltip: it.Long(),
+			obj: it,
+			func: function(item) {
+				Text.Clear();
+				Text.Add(item.Long());
+				Text.NL();
+				Text.Add("Use [it] on whom?", {it: item.name});
+				Text.Flush();
+				
+				it.OnSelect(inv, encounter, entity, backPrompt);
+			}
+		});
+	}
+	Gui.SetButtonsFromList(list, true, back);
+	
+	if(list.length == 0)
+		Text.Add("You are not carrying any items usable in combat at the moment.");
+	Text.Flush();
 }
 
 Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {

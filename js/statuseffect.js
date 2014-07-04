@@ -5,11 +5,11 @@
 var Status = {};
 
 StatusEffect = {
-	Burn    : 0,
-	Freeze  : 1,
-	Numb    : 2,
+	Burn    : 0, //OK
+	Freeze  : 1, //OK
+	Numb    : 2, //OK
 	Petrify : 3,
-	Venom   : 4,
+	Venom   : 4, //OK
 	Blind   : 5,
 	Siphon  : 6,
 	Seal    : 7,
@@ -21,12 +21,13 @@ StatusEffect = {
 	Slow    : 13,
 	Regen   : 14,
 	Boon    : 15,
-	Horny   : 16,
+	Horny   : 16, //OK
 	Aroused : 17,
 	Limp    : 18,
 	Bimbo   : 19,
+	Decoy   : 20, //OK
 	
-	LAST    : 20
+	LAST    : 21
 };
 
 LoadStatusImages = function(ready) {
@@ -40,6 +41,8 @@ LoadStatusImages = function(ready) {
 	Images.status[StatusEffect.Freeze] = "data/status/freeze.png";
 	Images.status[StatusEffect.Numb]   = "data/status/numb.png";
 	Images.status[StatusEffect.Venom]  = "data/status/venom.png";
+	Images.status[StatusEffect.Horny]  = "data/status/horny.png";
+	Images.status[StatusEffect.Decoy]  = "data/status/decoy.png";
 	
 	for(var i = 0; i < StatusEffect.LAST; i++) {
 		if(Images.status[i] == "") continue;
@@ -103,6 +106,7 @@ StatusList.prototype.EndOfCombat = function() {
 	this.stats[StatusEffect.Aroused] = null;
 	this.stats[StatusEffect.Limp]    = null;
 	//this.stats[StatusEffect.Bimbo]   = null;
+	this.stats[StatusEffect.Decoy]   = null;
 }
 
 Status.Venom = function(target, opts) {
@@ -245,3 +249,54 @@ Status.Numb.Tick = function(target) {
 	}
 }
 
+
+Status.Horny = function(target, opts) {
+	if(!target) return;
+	opts = opts || {};
+	
+	// Check for horny resist
+	var odds = (opts.hit || 1) * (1 - target.HornyResist());
+	if(Math.random() > odds) {
+		return false;
+	}
+	// Number of turns effect lasts (static + random factor)
+	var turns = opts.turns || 0;
+	turns += Math.random() * (opts.turnsR || 0);
+	// Apply horny (lust poison)
+	target.combatStatus.stats[StatusEffect.Horny] = {
+		turns   : turns,
+		str     : opts.str || 1,
+		dmg     : opts.dmg || 0,
+		oocDmg  : opts.oocDmg,
+		Tick    : Status.Horny.Tick
+	};
+	
+	return true;
+}
+Status.Horny.Tick = function(target) {
+	var damageType = new DamageType({mLust : this.str});
+	var atkRand = 0.2 * (Math.random() - 0.5) + 1;
+	var dmg = this.dmg * atkRand * target.LP();
+	dmg = damageType.ApplyDmgType(target.elementDef, dmg);
+	dmg = Math.floor(dmg);
+	
+	target.AddLPAbs(dmg);
+	
+	this.turns--;
+	// Remove venom effect
+	if(this.turns <= 0) {
+		target.combatStatus.stats[StatusEffect.Horny] = null;
+	}
+}
+
+Status.Decoy = function(target, opts) {
+	if(!target) return;
+	opts = opts || {};
+	
+	// Apply decoy
+	target.combatStatus.stats[StatusEffect.Decoy] = {
+		copies  : opts.copies
+	};
+	
+	return true;
+}

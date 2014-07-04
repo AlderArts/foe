@@ -13,18 +13,18 @@ function Miranda(storage) {
 	
 	this.maxHp.base        = 100;
 	this.maxSp.base        = 10;
-	this.maxLust.base      = 50;
+	this.maxLust.base      = 50; this.maxLust.growth      = 6;
 	// Main stats
-	this.strength.base     = 23;
-	this.stamina.base      = 19;
-	this.dexterity.base    = 19;
-	this.intelligence.base = 12;
-	this.spirit.base       = 11;
-	this.libido.base       = 24;
-	this.charisma.base     = 14;
+	this.strength.base     = 23; this.strength.growth     = 1.7;
+	this.stamina.base      = 19; this.stamina.growth      = 1.4;
+	this.dexterity.base    = 19; this.dexterity.growth    = 1.1;
+	this.intelligence.base = 12; this.intelligence.growth = 1;
+	this.spirit.base       = 11; this.spirit.growth       = 1.2;
+	this.libido.base       = 24; this.libido.growth       = 1.5;
+	this.charisma.base     = 14; this.charisma.growth     = 1.1;
 	
-	this.level    = 1;
-	this.sexlevel = 1;
+	this.level    = 8;
+	this.sexlevel = 3;
 	
 	this.body.DefHerm(true);
 	this.FirstBreastRow().size.base = 12.5;
@@ -34,7 +34,14 @@ function Miranda(storage) {
 	this.FirstVag().virgin = false;
 	this.Butt().virgin = false;
 	this.body.SetRace(Race.dog);
+	this.SetSkinColor(Color.black);
+	this.SetHairColor(Color.blue);
+	this.SetEyeColor(Color.green);
 	
+	this.weaponSlot   = Items.Weapons.GreatSword;
+	this.topArmorSlot = Items.Armor.WatchChest;
+	
+	this.Equip();
 	this.SetLevelBonus();
 	this.RestFull();
 	
@@ -89,9 +96,7 @@ Miranda.prototype.Attitude = function() {
 }
 
 Miranda.prototype.FromStorage = function(storage) {
-	this.subDom.base         = parseFloat(storage.subDom)  || this.subDom.base;
-	this.slut.base           = parseFloat(storage.slut)    || this.slut.base;
-	this.relation.base       = parseFloat(storage.rel)     || this.relation.base;
+	this.LoadPersonalityStats(storage);
 	
 	// Load flags
 	for(var flag in storage.flags)
@@ -102,9 +107,9 @@ Miranda.prototype.FromStorage = function(storage) {
 
 Miranda.prototype.ToStorage = function() {
 	var storage = {};
-	if(this.subDom.base   != 0) storage.subDom = this.subDom.base;
-	if(this.slut.base     != 0) storage.slut   = this.slut.base;
-	if(this.relation.base != 0) storage.rel    = this.relation.base;
+	
+	this.SavePersonalityStats(storage);
+	
 	storage.flags = this.flags;
 	storage.sex   = this.SaveSexStats();
 	

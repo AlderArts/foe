@@ -51,7 +51,7 @@ Lagon.prototype.constructor = Lagon;
 
 
 Lagon.prototype.FromStorage = function(storage) {
-	this.relation.base       = parseFloat(storage.rel)     || this.relation.base;
+	this.LoadPersonalityStats(storage);
 	
 	// Load flags
 	for(var flag in storage.flags)
@@ -60,7 +60,9 @@ Lagon.prototype.FromStorage = function(storage) {
 
 Lagon.prototype.ToStorage = function() {
 	var storage = {};
-	if(this.relation.base != 0) storage.rel    = this.relation.base;
+	
+	this.SavePersonalityStats(storage);
+	
 	storage.flags = this.flags;
 	
 	return storage;

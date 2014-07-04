@@ -6,7 +6,6 @@ function Encounter(enemy)
 	
 	this.onEncounter = null;
 	this.onTick = null;
-	this.onRun  = null;
 	
 	// Party filled with entitys
 	this.enemy = enemy;
@@ -135,21 +134,17 @@ Encounter.prototype.GetPartyArray = function() {
 Encounter.prototype.SetButtons = function(activeChar, combatScreen) {
 	var entity = activeChar.entity;
 	var encounter = this;
-	/*
-	// TODO: Pinned logic, should have other abilities available
-	*/
 	
 	var BasePrompt = function() {
 		Gui.ClearButtons();
 		Input.buttons[0].SetFromAbility(encounter, entity, Abilities.Attack, BasePrompt);
-		// TODO: Move tease to seduce tab?
+
 		Input.buttons[1].SetFromAbility(encounter, entity, Abilities.Seduction.Tease, BasePrompt);
 		
 		if(entity.currentJob && entity.currentJob.abilities.Empty() == false)
 			Input.buttons[2].SetFromAbility(encounter, entity, entity.currentJob.abilities, BasePrompt);
 		if(entity.abilities["Special"].Empty() == false)
 			Input.buttons[3].SetFromAbility(encounter, entity, entity.abilities["Special"], BasePrompt);
-		
 		if(entity.abilities["Skills"].Empty() == false)
 			Input.buttons[4].SetFromAbility(encounter, entity, entity.abilities["Skills"], BasePrompt);
 		if(entity.abilities["Spells"].Empty() == false)
@@ -158,23 +153,12 @@ Encounter.prototype.SetButtons = function(activeChar, combatScreen) {
 			Input.buttons[6].SetFromAbility(encounter, entity, entity.abilities["Support"], BasePrompt);
 		if(entity.abilities["Seduce"].Empty() == false)
 			Input.buttons[7].SetFromAbility(encounter, entity, entity.abilities["Seduce"], BasePrompt);
-		
-		/*
-		var i = 2;
-		for(a in entity.abilities) {
-			Input.buttons[i].SetFromAbility(encounter, entity, entity.abilities[a], BasePrompt);
-			i++;
-		}
-		*/
-		
 		Input.buttons[8].Setup("Submit", function() {
 			encounter.onLoss();
 		}, true);
-		if(DEBUG) {
-			Input.buttons[9].Setup("Cheat", function() {
-				encounter.onVictory();
-			}, true);
-		}
+		Input.buttons[9].Setup("Item", function() {
+			party.inventory.CombatInventory(encounter, entity, BasePrompt);
+		}, true);
 		
 		Input.buttons[10].SetFromAbility(encounter, entity, Abilities.Wait, BasePrompt);
 		Input.buttons[11].SetFromAbility(encounter, entity, Abilities.Run, BasePrompt);
@@ -195,11 +179,34 @@ Encounter.prototype.LossCondition = function() {
 	return downed;
 }
 
+Encounter.prototype.onRun = function() {
+	for(var i = 0; i < this.enemy.members.length; i++) {
+		var e = this.enemy.members[i];
+		e.ClearCombatBonuses();
+		e.combatStatus.EndOfCombat();
+	}
+	for(var i = 0; i < party.members.length; i++) {
+		var e = party.members[i];
+		e.ClearCombatBonuses();
+		e.combatStatus.EndOfCombat();
+	}
+	
+	// TEMP TODO
+	world.TimeStep({hour: 1});
+	
+	PrintDefaultOptions();
+}
+
 Encounter.prototype.onLoss = function() {
 	Text.Clear();
 	Text.AddOutput("Defeat!");
 	// TODO: XP loss? 
 	
+	for(var i = 0; i < this.enemy.members.length; i++) {
+		var e = this.enemy.members[i];
+		e.ClearCombatBonuses();
+		e.combatStatus.EndOfCombat();
+	}
 	for(var i = 0; i < party.members.length; i++) {
 		var e = party.members[i];
 		e.ClearCombatBonuses();
@@ -231,6 +238,7 @@ Encounter.prototype.onVictory = function() {
 	for(var i = 0; i < this.enemy.members.length; i++) {
 		var e = this.enemy.members[i];
 		e.ClearCombatBonuses();
+		e.combatStatus.EndOfCombat();
 		exp  += e.combatExp;
 		coin += e.coinDrop;
 		

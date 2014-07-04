@@ -41,6 +41,24 @@ function Sylistraxia(storage) {
 Sylistraxia.prototype = new Entity();
 Sylistraxia.prototype.constructor = Sylistraxia;
 
+Sylistraxia.prototype.FromStorage = function(storage) {
+	this.LoadPersonalityStats(storage);
+	
+	// Load flags
+	for(var flag in storage.flags)
+		this.flags[flag] = parseInt(storage.flags[flag]);
+}
+
+Sylistraxia.prototype.ToStorage = function() {
+	var storage = {};
+	
+	this.SavePersonalityStats(storage);
+	
+	storage.flags = this.flags;
+	
+	return storage;
+}
+
 // Schedule
 Sylistraxia.prototype.IsAtLocation = function(location) {
 	return true;

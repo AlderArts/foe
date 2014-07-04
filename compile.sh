@@ -43,6 +43,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/items/alchemyspecial.js \
 	js/items/toys.js \
 	js/items/cards.js \
+	js/items/combatitems.js \
 	js/items/accessories.js \
 	js/items/armor.js \
 	js/items/strapon.js \

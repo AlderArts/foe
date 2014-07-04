@@ -47,10 +47,7 @@ Rosalin.PastDialog = {
 }
 
 Rosalin.prototype.FromStorage = function(storage) {
-	// Personality stats
-	this.subDom.base         = parseFloat(storage.subDom)  || this.subDom.base;
-	this.slut.base           = parseFloat(storage.slut)    || this.slut.base;
-	this.relation.base       = parseFloat(storage.rel)     || this.relation.base;
+	this.LoadPersonalityStats(storage);
 	
 	this.body.FromStorage(storage.body);
 	
@@ -61,9 +58,9 @@ Rosalin.prototype.FromStorage = function(storage) {
 
 Rosalin.prototype.ToStorage = function() {
 	var storage = {};
-	if(this.subDom.base   != 0) storage.subDom = this.subDom.base;
-	if(this.slut.base     != 0) storage.slut   = this.slut.base;
-	if(this.relation.base != 0) storage.rel    = this.relation.base;
+	
+	this.SavePersonalityStats(storage);
+	
 	storage.flags = this.flags;
 	storage.body = this.body.ToStorage();
 	return storage;

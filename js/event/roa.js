@@ -41,6 +41,24 @@ function Roa(storage) {
 Roa.prototype = new Entity();
 Roa.prototype.constructor = Roa;
 
+Roa.prototype.FromStorage = function(storage) {
+	this.LoadPersonalityStats(storage);
+	
+	// Load flags
+	for(var flag in storage.flags)
+		this.flags[flag] = parseInt(storage.flags[flag]);
+}
+
+Roa.prototype.ToStorage = function() {
+	var storage = {};
+	
+	this.SavePersonalityStats(storage);
+	
+	storage.flags = this.flags;
+	
+	return storage;
+}
+
 // Schedule
 Roa.prototype.IsAtLocation = function(location) {
 	return true;

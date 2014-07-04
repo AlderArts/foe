@@ -46,7 +46,7 @@ Magnus.Confront = {
 };
 
 Magnus.prototype.FromStorage = function(storage) {
-	this.relation.base       = parseFloat(storage.rel)     || this.relation.base;
+	this.LoadPersonalityStats(storage);
 	
 	// Load flags
 	for(var flag in storage.flags)
@@ -57,7 +57,9 @@ Magnus.prototype.FromStorage = function(storage) {
 
 Magnus.prototype.ToStorage = function() {
 	var storage = {};
-	if(this.relation.base != 0) storage.rel    = this.relation.base;
+	
+	this.SavePersonalityStats(storage);
+	
 	storage.flags = this.flags;
 	storage.sex   = this.SaveSexStats();
 	
