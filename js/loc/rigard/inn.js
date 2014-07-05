@@ -1459,12 +1459,12 @@ Scenes.Rigard.LB.GotoRoom = function() {
 		Text.NL();
 		Text.Add("You follow [ikname]’s directions and find your room on the [floor] floor", parse);
 		
-		if(party.NumTotal() == 1) {
+		if(party.Num() == 1) {
 			Text.Add(" and head inside.", parse);
 			Text.Flush();
 			Scenes.Rigard.LB.RegularRoom();
 		}
-		else if(party.NumTotal() == 2) {
+		else if(party.Num() == 2) {
 			var p1 = party.Get(1);
 			parse["comp"] = p1.name;
 			Text.Add(" and lead [comp] inside.", parse);
