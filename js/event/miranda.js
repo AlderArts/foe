@@ -2548,7 +2548,9 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 			}
 			else {
 				Text.Flush();
-				Gui.NextPrompt();
+				Gui.NextPrompt(function() {
+					MoveToLocation(world.loc.Rigard.Residental.street, {minute: 5});
+				});
 			}
 		});
 		
@@ -2597,7 +2599,7 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 			PrintDefaultOptions();
 		}
 	}
-}	
+}
 
 Scenes.Miranda.HomeDommySex = function() {
 	var parse = {
@@ -3707,6 +3709,101 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 }
 
 
+Scenes.Miranda.HomeSubbySexLeavingFuckedHer = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry) {
+		Text.Add("The two of you set out, returning to your search for the elusive thief.", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			MoveToLocation(world.loc.Rigard.Residental.street, {minute : 5});
+		});
+	}
+	else if(party.InParty(miranda)) {
+		Text.Add("The two of you set out, returning to your quest.", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt();
+	}
+	else {
+		var dom = miranda.SubDom() - player.SubDom();
+		if(dom > 0) // TODO: PLACEHOLDER
+			Text.Add("", parse);
+		else
+			Text.Add("", parse);
+		Text.NL();
+		
+		Gui.Callstack.push(function() {
+			Text.NL();
+			parse["night"] = world.time.DayTime();
+			Text.Add("You bid Miranda farewell and step out into the [night].", parse);
+			if(party.Num() > 1) {
+				Text.NL();
+				parse["comp"] = party.Num() > 2 ? "the rest of your party" : party.Get(1).name;
+				Text.Add("Somehow, you make it out the gates in order to rejoin [comp].", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 30});
+				});
+			}
+			else {
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					MoveToLocation(world.loc.Rigard.Residental.street, {minute: 5});
+				});
+			}
+		});
+		
+		if(world.time.hour > 20 || world.time.hour < 4) {
+			Text.Add("<i>”Ya know? It’s kinda late. Why don’t you stay over? I wouldn’t mind sharing my bed with you. Maybe we can squeeze in a quickie before I have to leave in the morning?”</i> she grins.", parse);
+			Text.Flush();
+			
+			//[Stay][Don’t]
+			var options = new Array();
+			options.push({ nameStr : "Stay",
+				func : function() {
+					Text.Clear();
+					Text.Add("Miranda scoots over and pats a relatively clean spot beside her. You strip down and join her, using her arm as a pillow. With a grin, she draws you close, resting your head against her breast as her breathing levels out. Soon enough you join her in a restful slumber.", parse);
+					Text.NL();
+					Text.Add("You sleep for 8 hours.");
+					Text.Flush();
+					
+					var func = function() {
+						world.TimeStep({hour: 8});
+						party.Sleep();
+						
+						PrintDefaultOptions();
+					};
+					
+					Gui.NextPrompt(function() {
+						Text.Clear();
+						
+						Scenes.Dreams.Entry(func);
+					});
+				}, enabled : true,
+				tooltip : "Why not? You’re feeling pretty tired after all."
+			});
+			options.push({ nameStr : "Don’t",
+				func : function() {
+					Text.Clear();
+					world.TimeStep({hour: 2});
+					Text.Add("<i>”Pity, I guess I’ll see you around then,”</i> she says, turning to take a nap.", parse);
+					PrintDefaultOptions();
+				}, enabled : true,
+				tooltip : "Unfortunately the day isn’t over for you. You’ll have to decline."
+			});
+			Gui.SetButtonsFromList(options);
+		}
+		else {
+			Text.Add("<i>”I’m going to rest for a while, you can see yourself out right?”</i> she asks, turning to settle herself in for a more comfortable nap.", parse);
+			PrintDefaultOptions();
+		}
+	}
+}
+
 
 Scenes.Miranda.HomeSubbySex = function() {
 	
@@ -3724,7 +3821,7 @@ Scenes.Miranda.HomeSubbySex = function() {
 	Text.Flush();
 	
 	Gui.NextPrompt(function() {
-		MoveToLocation(world.loc.Rigard.Slums.gate);
+		Scenes.Miranda.HomeSubbySexLeavingFuckedHer();
 	});
 }
 
