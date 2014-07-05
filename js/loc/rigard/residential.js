@@ -95,7 +95,7 @@ world.loc.Rigard.Residental.street.links.push(new Link(
 	}
 ));
 world.loc.Rigard.Residental.street.links.push(new Link(
-	"Miranda's", true, false,
+	"Miranda's", true, function() { return party.InParty(miranda); },
 	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Residental.miranda);
