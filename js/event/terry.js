@@ -872,7 +872,7 @@ Scenes.Terry.Release = function() {
 	Text.NL();
 	Text.Add("The guard returns, carrying with him a bag containing the thief’s stuff. <i>Here.</i> He hands it to you. <i>”Are you done yet? Can I open the cell?”</i>", parse);
 	Text.NL();
-	Text.Add("Yes, you reply. The guardsmen takes a key and twists it in the lock, opening the door. Without so much as a word, he takes the fox by the shoulder and shove him out of the cell and in your direction. <i>”He’s all yours, now get this mangy mutt out of my jail. Gonna have to kill all the fleas he left behind.”<i>", parse);
+	Text.Add("Yes, you reply. The guardsmen takes a key and twists it in the lock, opening the door. Without so much as a word, he takes the fox by the shoulder and shove him out of the cell and in your direction. <i>”He’s all yours, now get this mangy mutt out of my jail. Gonna have to kill all the fleas he left behind.”</i>", parse);
 	Text.NL();
 	Text.Add("<i>”Don’t worry, I’m pretty sure your stench will do the job just fine,”</i> he quips back pinching his nose.", parse);
 	Text.NL();
