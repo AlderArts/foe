@@ -2511,7 +2511,15 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 		playername : player.name
 	};
 	
-	if(party.InParty(miranda)) {
+	if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry) {
+		Text.Add("The two of you set out, returning to your search for the elusive thief.", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			MoveToLocation(world.loc.Rigard.Residental.street, {minute : 5});
+		});
+	}
+	else if(party.InParty(miranda)) {
 		Text.Add("The two of you set out, returning to your quest.", parse);
 		Text.Flush();
 		
@@ -4525,4 +4533,97 @@ Scenes.Miranda.TerryTavernSexSubbyVag = function(cocks) {
 	PrintDefaultOptions();
 }
 
+Scenes.Miranda.TerryChaseHome = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("The two of you pause on the street near Miranda’s house, both of you more than a little tired of searching for the elusive thief. Perhaps you could head inside to relieve some stress? Miranda certainly seems to have that idea in mind.", parse);
+	Text.NL();
+	if(miranda.Attitude() < Miranda.Attitude.Neutral) {
+		Text.Add("<i>”Stop for a quick fuck, [playername]?”</i> Miranda shoots, stretching languidly. <i>”All this searching has me aching for some action, if you catch my drift. If not, I’m sure you’ll get what I mean in a few minutes when you are biting the pillow.”</i> The herm closes in on you with a hungry look in her eyes, herding you towards her door.", parse);
+		Text.Flush();
+		
+		//[Let her][Not now]
+		var options = new Array();
+		options.push({ nameStr : "Let her",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”No complaints? Good bitch,”</i> she murmurs as she twirls you around, pushing you ahead. You make no attempt to stop her as she manhandles you through the door and slams it shut behind you.", parse);
+				Scenes.Miranda.HomeSubbySex();
+			}, enabled : true,
+			tooltip : "She’s going to have her way with you no matter what you say, why resist?"
+		});
+		options.push({ nameStr : "Not now",
+			func : function() {
+				Text.Clear();
+				parse["himher"] = terry.flags["Met"] < Terry.Met.Found ? "him" : "her";
+				Text.Add("<i>”C’mon, I need some relief here!”</i> Miranda complains, attempting to shove you inside. You barely manage to avoid her grab, dancing outside her reach. <i>”Fine,”</i> she growls, <i>”but I’m getting some action today <b>one</b> way or another.”</i> That doesn’t sound like it bodes well for the thief when you finally catch [himher].", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					MoveToLocation(world.loc.Rigard.Residental.street, {minute: 5});
+				});
+			}, enabled : true,
+			tooltip : "Point out that you should perhaps look for the thief instead."
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+	else { // nice
+		var dom = player.SubDom() - miranda.SubDom();
+		parse["mastermistress"] = dom > 50 ? player.mfTrue(" master", " mistress") : "";
+		if(dom > 25)
+			Text.Add("<i>”Having trouble focusing on the task at hand[mastermistress]?”</i> Miranda quips, licking her lips. <i>”Why don’t we head inside and see if we can relieve your stress?”</i>", parse);
+		else if(dom > -25)
+			Text.Add("<i>”Good plan, I need something to distract me from this thief for a while. How about we go inside for a quick fuck, [playername]?”</i>", parse);
+		else
+			Text.Add("<i>”The thief can wait, I need to bury my cock in someone before I go insane with boredom. How about it, [playername]? Want to step inside and take a ride on little Miranda?”</i>", parse);
+		Text.Flush();
+		
+		//[Take charge][Let her lead][Not now]
+		var options = new Array();
+		options.push({ nameStr : "Take charge",
+			func : function() {
+				Text.Clear();
+				Text.Add("You order her to stop chatting and open the door, taking the chance to give her butt a grope before pushing the surprised herm inside. You step inside and close the door after you. Time to take both of your minds off chasing thieves for a while.", parse);
+				
+				Scenes.Miranda.HomeDommySex();
+			}, enabled : true,
+			tooltip : "Take her inside and fuck her."
+		});
+		options.push({ nameStr : "Let her lead",
+			func : function() {
+				Text.Clear();
+				parse["boyGirl"] = player.mfTrue("boy", "girl");
+				Text.Add("You nod eagerly, looking at her imploringly. <i>”Good [boyGirl],”</i> Miranda grins, twirling you around and pushing you through the doorway into her home. The dobie closes the door after you, sealing off your escape.", parse);
+				Scenes.Miranda.HomeSubbySex();
+			}, enabled : true,
+			tooltip : "Let Miranda take you inside and relieve her stress."
+		});
+		options.push({ nameStr : "Not now",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”You are such a tease sometimes, you know that?”</i> Miranda complains. She grudgingly nods in agreement, leading the way as you try to figure out where to search next.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					MoveToLocation(world.loc.Rigard.Residental.street, {minute: 5});
+				});
+			}, enabled : true,
+			tooltip : "You should focus on catching the thief instead."
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+}
+
+world.loc.Rigard.Residental.miranda.description = function() {
+	
+}
+world.loc.Rigard.Residental.miranda.onEntry = function() {
+	if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry)
+		Scenes.Miranda.TerryChaseHome();
+	else
+		PrintDefaultOptions();
+}
 
