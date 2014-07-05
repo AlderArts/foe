@@ -534,7 +534,7 @@ Scenes.Rigard.LB.OrvinPrompt = function() {
 					});
 					Gui.SetButtonsFromList(options);
 				}
-			}, enabled : true,
+			}, enabled : rigard.LBroomTimer.Expired(),
 			tooltip : Text.Parse("Ask [ikname] about the pricing for rooms.", parse)
 		});
 		options.push({ nameStr : "Drink",
