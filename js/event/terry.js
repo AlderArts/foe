@@ -302,7 +302,7 @@ Scenes.Terry.ExploreMerchants = function() {
 			Text.NL();
 			Text.Add("<i>”Get your weapon ready,”</i> Miranda snarls, taking her sword in her hands and assuming a battle stance. You follow her lead as Miranda shouts, <i>”Show yourself!”</i>", parse);
 			Text.NL();
-			Text.Add("The two of you wait patiently, but when no reply comes Miranda takes a step forward. Immediately you note a small sphere flying towards her. She has no time to reach as the sphere bursts open into a cloud of dust, temporarily blinding the canine guard. <i>”Shit!”</i> she exclaims trying to shake off the dust.", parse);
+			Text.Add("The two of you wait patiently, but when no reply comes Miranda takes a step forward. Immediately you note a small sphere flying towards her. She has no time to react as the sphere bursts open into a cloud of dust, temporarily blinding the canine guard. <i>”Shit!”</i> she exclaims trying to shake off the dust.", parse);
 			Text.NL();
 			Text.Add("Thankfully you manage to protect your eyes, and by the time you uncover them you’re faced with a blur is headed your way, no doubt making a run for it! You quickly strike them with your [weapon], narrowly missing your mark as the blur takes a step back. Their mask comes loose, falling on the ground, as it does so you’re faced with a familiar face. It’s the vixen from the Lady’s Blessing!", parse);
 			Text.NL();
