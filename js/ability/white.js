@@ -332,7 +332,7 @@ Abilities.White.Tirade.CastInternal = function(encounter, caster, target) {
 	var def   = target.MDefense();
 	
 	//var dmg = atkDmg - def;
-	var dmg = this.Damage(drain, def, caster.level, target.level);
+	var dmg = Ability.Damage(drain, def, caster.level, target.level);
 	if(dmg < 0) dmg = 0;
 	dmg = Math.floor(dmg);
 
@@ -373,7 +373,7 @@ Abilities.White.Preach.CastInternal = function(encounter, caster, target) {
 	var def   = target.MDefense();
 	
 	//var dmg = atkDmg - def;
-	var dmg = this.Damage(drain, def, caster.level, target.level);
+	var dmg = Ability.Damage(drain, def, caster.level, target.level);
 	if(dmg < 0) dmg = 0;
 	dmg = Math.floor(dmg);
 
@@ -429,7 +429,7 @@ Abilities.White.Sermon.CastInternal = function(encounter, caster, target) {
 		var def   = e.MDefense();
 	
 		//var dmg = atkDmg - def;
-		var dmg = this.Damage(drain, def, caster.level, e.level);
+		var dmg = Ability.Damage(drain, def, caster.level, e.level);
 		if(dmg < 0) dmg = 0;
 		dmg = Math.floor(dmg);
 	
