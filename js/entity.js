@@ -295,13 +295,12 @@ Entity.prototype.SavePersonalityStats = function(storage) {
 }
 
 Entity.prototype.SaveFlags = function(storage) {
-	var flags = [];
+	var flags = {};
 	for(var flag in this.flags) {
 		if(this.flags[flag] != 0)
 			flags[flag] = this.flags[flag];
 	}
-	if(flags.length > 0)
-		storage.flags = flags;
+	storage.flags = flags;
 }
 
 Entity.prototype.SaveRecipes = function(storage) {
