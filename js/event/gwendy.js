@@ -415,7 +415,7 @@ Scenes.Gwendy.Work = function() {
 	
 	Text.AddOutput("You tell her you'd like to help her out on the farm for a bit. She seems happy to hear it, and accepts your aid. <i>\"Alright, let's put you to work then!\"</i>", parse);
 	if(party.Two())
-		Text.AddOutput(" You tell [p1name] to get help with work as well, as there's more that enough for you two to pitch a hand in.", parse);
+		Text.AddOutput(" You tell [p1name] to get help with work as well, as there's more than enough for you two to pitch a hand in.", parse);
 	else if(!party.Alone())
 		Text.AddOutput(" You tell the group to get to work as well, seeing as there's enough to do for everyone to pitch a hand in.", parse);
 	Text.Newline();
