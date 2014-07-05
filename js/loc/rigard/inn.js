@@ -1472,13 +1472,13 @@ Scenes.Rigard.LB.GotoRoom = function() {
 			Scenes.Rigard.LB.RegularRoom(p1);
 		}
 		else { //Party > 2
-			parse["s"] = party.NumTotal() > 4 ? "s" : "";
-			Text.Add(", with the extra room[s] for your companions right beside it. Your room only has enough space for two, so you have to decide who will be staying with you.", parse);
+			parse["s"] = party.Num() > 3 ? "s" : "";
+			Text.Add(", with the extra room for your companion[s] right beside it. Your room only has enough space for two, so you have to decide who will be staying with you.", parse);
 			Text.Flush();
 			
 			//[Party]
 			var options = new Array();
-			for(var i = 1; i < party.NumTotal(); i++) {
+			for(var i = 1; i < party.Num(); i++) {
 				var comp = party.Get(i);
 				parse["comp"]    = comp.name;
 				parse["chimher"] = comp.himher();
@@ -1499,7 +1499,7 @@ Scenes.Rigard.LB.GotoRoom = function() {
 					Text.Flush();
 					Scenes.Rigard.LB.RegularRoom();
 				}, enabled : true,
-				tooltip : "Have your companions share the other room[s]."
+				tooltip : "Have your companions share the other room."
 			});
 			Gui.SetButtonsFromList(options);
 		}
