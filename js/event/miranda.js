@@ -4503,18 +4503,18 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 						parse["sup"]   = miranda.SubDom() > 0 ? "Much to your surprise, " : "";
 						parse["oneof"] = player.NumCocks() > 1 ? " one of" : "";
 						parse["s"]     = player.NumCocks() > 1 ? "s" : "";
-						Text.Add("[sup]Miranda doesn’t protest. Her hands move to your hips, adjusting your position until her nose touches your [multiCockDesc]. You can feel her hot breath caress you as she laps up a dollop of pre, then moves to engulf[oneof] your shaft[s].", parse);
+						Text.Add("[sup]Miranda doesn’t protest. Her hands move to your hips, adjusting your position until her nose touches your [multiCockDesc]. You can feel her hot breath caress you as she laps up a dollop of pre, then moves to engulf[oneof] your shaft[s]. ", parse);
 						target = Target.Blowjob;
 					}, 1.0, function() { return true; });
 				}
 				if(player.FirstVag()) {
 					scenes.AddEnc(function() {
-						Text.Add("Miranda moves to caress your [buttDesc], slowly she traces your behind until she arrives at your [vagDesc]. With her thumbs she spreads you open, shoving her snout inside you and inhaling deeply. She licks her lips and begins lapping at your labia.", parse);
+						Text.Add("Miranda moves to caress your [buttDesc], slowly she traces your behind until she arrives at your [vagDesc]. With her thumbs she spreads you open, shoving her snout inside you and inhaling deeply. She licks her lips and begins lapping at your labia. ", parse);
 						target = Target.Cunn;
 					}, 1.0, function() { return true; });
 				}
 				scenes.AddEnc(function() {
-					Text.Add("Miranda grabs your buttcheeks, kneading them and spreading them open to reveal your [anusDesc]. It’s not long before you feel wetness lapping at your crack, tongue massaging your sphincter in hopes of being granted entrance.", parse);
+					Text.Add("Miranda grabs your buttcheeks, kneading them and spreading them open to reveal your [anusDesc]. It’s not long before you feel wetness lapping at your crack, tongue massaging your sphincter in hopes of being granted entrance. ", parse);
 					target = Target.Rim;
 				}, 1.0, function() { return true; });
 				
