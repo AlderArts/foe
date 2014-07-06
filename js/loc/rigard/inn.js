@@ -534,7 +534,7 @@ Scenes.Rigard.LB.OrvinPrompt = function() {
 					});
 					Gui.SetButtonsFromList(options);
 				}
-			}, enabled : true,
+			}, enabled : rigard.LBroomTimer.Expired(),
 			tooltip : Text.Parse("Ask [ikname] about the pricing for rooms.", parse)
 		});
 		options.push({ nameStr : "Drink",
@@ -1459,12 +1459,12 @@ Scenes.Rigard.LB.GotoRoom = function() {
 		Text.NL();
 		Text.Add("You follow [ikname]’s directions and find your room on the [floor] floor", parse);
 		
-		if(party.NumTotal() == 1) {
+		if(party.Num() == 1) {
 			Text.Add(" and head inside.", parse);
 			Text.Flush();
 			Scenes.Rigard.LB.RegularRoom();
 		}
-		else if(party.NumTotal() == 2) {
+		else if(party.Num() == 2) {
 			var p1 = party.Get(1);
 			parse["comp"] = p1.name;
 			Text.Add(" and lead [comp] inside.", parse);
@@ -1472,13 +1472,13 @@ Scenes.Rigard.LB.GotoRoom = function() {
 			Scenes.Rigard.LB.RegularRoom(p1);
 		}
 		else { //Party > 2
-			parse["s"] = party.NumTotal() > 4 ? "s" : "";
-			Text.Add(", with the extra room[s] for your companions right beside it. Your room only has enough space for two, so you have to decide who will be staying with you.", parse);
+			parse["s"] = party.Num() > 3 ? "s" : "";
+			Text.Add(", with the extra room for your companion[s] right beside it. Your room only has enough space for two, so you have to decide who will be staying with you.", parse);
 			Text.Flush();
 			
 			//[Party]
 			var options = new Array();
-			for(var i = 1; i < party.NumTotal(); i++) {
+			for(var i = 1; i < party.Num(); i++) {
 				var comp = party.Get(i);
 				parse["comp"]    = comp.name;
 				parse["chimher"] = comp.himher();
@@ -1499,7 +1499,7 @@ Scenes.Rigard.LB.GotoRoom = function() {
 					Text.Flush();
 					Scenes.Rigard.LB.RegularRoom();
 				}, enabled : true,
-				tooltip : "Have your companions share the other room[s]."
+				tooltip : "Have your companions share the other room."
 			});
 			Gui.SetButtonsFromList(options);
 		}

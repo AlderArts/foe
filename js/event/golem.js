@@ -69,13 +69,12 @@ GolemBoss.prototype.FromStorage = function(storage) {
 	// Personality stats
 	
 	// Load flags
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
+	this.LoadFlags(storage);
 }
 
 GolemBoss.prototype.ToStorage = function() {
 	var storage = {};
-	storage.flags = this.flags;
+	this.SaveFlags(storage);
 	
 	return storage;
 }

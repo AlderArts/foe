@@ -227,7 +227,7 @@ Entity.prototype.SetLevelBonus = function() {
 	this.charisma.level     = this.level * this.charisma.growth;
 }
 
-Entity.prototype.SaveSexStats = function() {
+Entity.prototype.SaveSexStats = function(storage) {
 	var sex = {};
 	if(this.sex.rBlow != 0) sex.rBlow = this.sex.rBlow;
 	if(this.sex.gBlow != 0) sex.gBlow = this.sex.gBlow;
@@ -239,46 +239,46 @@ Entity.prototype.SaveSexStats = function() {
 	if(this.sex.gVag  != 0) sex.gVag  = this.sex.gVag;
 	if(this.sex.sired != 0) sex.sired = this.sex.sired;
 	if(this.sex.birth != 0) sex.birth = this.sex.birth;
-	return sex;
+	storage.sex = sex;
 }
 
 Entity.prototype.SaveCombatStats = function(storage) {
 	storage = storage || {};
 	
 	storage.name     = this.name;
-	storage.exp      = this.experience;
-	storage.points   = this.pendingStatPoints;
-	storage.exp2lvl  = this.expToLevel;
-	storage.lvl      = this.level;
-	storage.sexp     = this.sexperience;
-	storage.sxp2lvl  = this.sexpToLevel;
-	storage.slvl     = this.sexlevel;
-	storage.alvl     = this.alchemyLevel;
-	storage.curHp    = this.curHp;
-	storage.maxHp    = this.maxHp.base;
-	storage.curSp    = this.curSp;
-	storage.maxSp    = this.maxSp.base;
-	storage.curLust  = this.curLust;
-	storage.maxLust  = this.maxLust.base;
+	storage.exp      = Math.floor(this.experience);
+	storage.points   = Math.floor(this.pendingStatPoints);
+	storage.exp2lvl  = Math.floor(this.expToLevel);
+	storage.lvl      = Math.floor(this.level);
+	storage.sexp     = Math.floor(this.sexperience);
+	storage.sxp2lvl  = Math.floor(this.sexpToLevel);
+	storage.slvl     = Math.floor(this.sexlevel);
+	storage.alvl     = Math.floor(this.alchemyLevel);
+	storage.curHp    = Math.floor(this.curHp);
+	storage.maxHp    = Math.floor(this.maxHp.base);
+	storage.curSp    = Math.floor(this.curSp);
+	storage.maxSp    = Math.floor(this.maxSp.base);
+	storage.curLust  = Math.floor(this.curLust);
+	storage.maxLust  = Math.floor(this.maxLust.base);
 	// Main stats
-	storage.str      = this.strength.base;
-	storage.sta      = this.stamina.base;
-	storage.dex      = this.dexterity.base;
-	storage.inte     = this.intelligence.base;
-	storage.spi      = this.spirit.base;
-	storage.lib      = this.libido.base;
-	storage.cha      = this.charisma.base;
+	storage.str      = Math.floor(this.strength.base);
+	storage.sta      = Math.floor(this.stamina.base);
+	storage.dex      = Math.floor(this.dexterity.base);
+	storage.inte     = Math.floor(this.intelligence.base);
+	storage.spi      = Math.floor(this.spirit.base);
+	storage.lib      = Math.floor(this.libido.base);
+	storage.cha      = Math.floor(this.charisma.base);
 	// Growth
-	storage.maxHpG   = this.maxHp.growth;
-	storage.maxSpG   = this.maxSp.growth;
-	storage.maxLustG = this.maxLust.growth;
-	storage.strG     = this.strength.growth;
-	storage.staG     = this.stamina.growth;
-	storage.dexG     = this.dexterity.growth;
-	storage.inteG    = this.intelligence.growth;
-	storage.spiG     = this.spirit.growth;
-	storage.libG     = this.libido.growth;
-	storage.chaG     = this.charisma.growth;
+	storage.maxHpG   = this.maxHp.growth.toFixed(1);
+	storage.maxSpG   = this.maxSp.growth.toFixed(1);
+	storage.maxLustG = this.maxLust.growth.toFixed(1);
+	storage.strG     = this.strength.growth.toFixed(1);
+	storage.staG     = this.stamina.growth.toFixed(1);
+	storage.dexG     = this.dexterity.growth.toFixed(1);
+	storage.inteG    = this.intelligence.growth.toFixed(1);
+	storage.spiG     = this.spirit.growth.toFixed(1);
+	storage.libG     = this.libido.growth.toFixed(1);
+	storage.chaG     = this.charisma.growth.toFixed(1);
 	
 	if(this.monsterName) storage.mName = this.monsterName;
 	if(this.MonsterName) storage.MName = this.MonsterName;
@@ -288,10 +288,19 @@ Entity.prototype.SavePersonalityStats = function(storage) {
 	storage = storage || {};
 	
 	// Personality stats
-	if(this.subDom.base   != 0) storage.subDom = this.subDom.base;
-	if(this.slut.base     != 0) storage.slut   = this.slut.base;
-	if(this.relation.base != 0) storage.rel    = this.relation.base;
-	if(this.drunkLevel    != 0) storage.drunk  = this.drunkLevel;
+	if(this.subDom.base   != 0) storage.subDom = Math.floor(this.subDom.base);
+	if(this.slut.base     != 0) storage.slut   = Math.floor(this.slut.base);
+	if(this.relation.base != 0) storage.rel    = Math.floor(this.relation.base);
+	if(this.drunkLevel    != 0) storage.drunk  = this.drunkLevel.toFixed(2);
+}
+
+Entity.prototype.SaveFlags = function(storage) {
+	var flags = {};
+	for(var flag in this.flags) {
+		if(this.flags[flag] != 0)
+			flags[flag] = this.flags[flag];
+	}
+	storage.flags = flags;
 }
 
 Entity.prototype.SaveRecipes = function(storage) {
@@ -353,9 +362,9 @@ Entity.prototype.ToStorage = function() {
 	this.SaveEffects(storage);
 	this.SaveJobs(storage);
 	this.SaveEquipment(storage);
-	
-	storage.flags = this.flags;
-	storage.sex   = this.SaveSexStats();
+
+	this.SaveFlags(storage);
+	this.SaveSexStats(storage);
 	
 	storage.body = this.body.ToStorage();
 	
@@ -412,10 +421,10 @@ Entity.prototype.LoadCombatStats = function(storage) {
 
 Entity.prototype.LoadPersonalityStats = function(storage) {
 	// Personality stats
-	this.subDom.base         = parseFloat(storage.subDom)  || this.subDom.base;
-	this.slut.base           = parseFloat(storage.slut)    || this.slut.base;
-	this.relation.base       = parseFloat(storage.rel)     || this.relation.base;
-	this.drunkLevel          = parseFloat(storage.drunk)   || this.drunkLevel;
+	this.subDom.base         = parseInt(storage.subDom)  || this.subDom.base;
+	this.slut.base           = parseInt(storage.slut)    || this.slut.base;
+	this.relation.base       = parseInt(storage.rel)     || this.relation.base;
+	this.drunkLevel          = parseFloat(storage.drunk) || this.drunkLevel;
 }
 
 Entity.prototype.LoadRecipes = function(storage) {
@@ -456,6 +465,16 @@ Entity.prototype.LoadEquipment = function(storage) {
 	if(storage.toy)    this.strapOn      = ItemIds[storage.toy];
 }
 
+Entity.prototype.LoadFlags = function(storage) {
+	for(var flag in storage.flags)
+		this.flags[flag] = parseInt(storage.flags[flag]);
+}
+
+Entity.prototype.LoadSexFlags = function(storage) {
+	for(var flag in storage.sex)
+		this.sex[flag] = parseInt(storage.sex[flag]);
+}
+
 Entity.prototype.FromStorage = function(storage) {
 	this.LoadCombatStats(storage);
 	this.LoadPersonalityStats(storage);
@@ -465,10 +484,8 @@ Entity.prototype.FromStorage = function(storage) {
 	this.LoadEquipment(storage);
 	
 	// Load flags
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
-	for(var flag in storage.sex)
-		this.sex[flag] = parseInt(storage.sex[flag]);
+	this.LoadFlags(storage);
+	this.LoadSexFlags(storage);
 	
 	if(storage.body) {
 		this.body = new Body();
@@ -506,6 +523,33 @@ Entity.prototype.RecallAbilities = function() {
 				}
 			}
 		}
+	}
+}
+
+Entity.prototype.InteractDefault = function(options, switchSpot, enableEquip, enableStats, enableJob, enableSwitch) {
+	var that = this;
+	options.push({ nameStr: "Equip",
+		func : function() {
+			that.EquipPrompt(that.Interact);
+		}, enabled : enableEquip
+	});
+	options.push({ nameStr: that.pendingStatPoints != 0 ? "Level up" : "Stats",
+		func : function() {
+			that.LevelUpPrompt(that.Interact);
+		}, enabled : enableStats
+	});
+	options.push({ nameStr: "Job",
+		func : function() {
+			that.JobPrompt(that.Interact);
+		}, enabled : enableJob
+	});
+	if(switchSpot) {
+		options.push({ nameStr: party.InParty(that) ? "Switch out" : "Switch in",
+			func : function() {
+				party.SwitchPrompt(that);
+			}, enabled : enableSwitch,
+			tooltip: party.InParty(that) ? "Send to reserve." : "Switch into active party."
+		});
 	}
 }
 
@@ -1505,7 +1549,7 @@ Entity.prototype.OrgasmCum = function(mult) {
 	balls.cum.DecreaseStat(0, cumQ);
 	if(DEBUG) {
 		Text.Newline();
-		Text.AddOutput("<b>[name] came ([cum]).</b>", {name: this.NameDesc(), cum: cumQ});
+		Text.AddOutput("<b>[name] came ([cum]).</b>", {name: this.NameDesc(), cum: cumQ.toFixed(2)});
 		Text.Newline();
 	}
 	return cumQ;
@@ -2111,9 +2155,9 @@ Entity.prototype.PrintDescription = function() {
 	
 	// TODO TEMP
 	var balls = this.Balls();
-	Text.Add("Cum: " + balls.cum.Get() + " / " + balls.cumCap.Get());
+	Text.Add("Cum: " + balls.cum.Get().toFixed(2) + " / " + balls.cumCap.Get().toFixed(2));
 	Text.NL();
-	Text.Add("Milk: " + this.body.milk.Get() + " / " + this.body.milkCap.Get());
+	Text.Add("Milk: " + this.body.milk.Get().toFixed(2) + " / " + this.body.milkCap.Get().toFixed(2));
 	Text.NL();
 	
 	// TODO: Ass

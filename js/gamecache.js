@@ -300,6 +300,10 @@ CacheToGame = function() {
 		if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.HeistDone) 
 			twins.flags["Met"] = Twins.Met.Access;
 	}
+	if(gameCache.version < 16) {
+		if(golem.flags["Met"] > Scenes.Golem.State.Lost) 
+			jeanne.flags["Met"] = 1;
+	}
 	
 }
 

@@ -75,8 +75,7 @@ Lei.prototype.FromStorage = function(storage) {
 	this.timeout.FromStorage(storage.timeout);
 	
 	// Load flags
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
+	this.LoadFlags(storage);
 }
 
 Lei.prototype.ToStorage = function() {
@@ -84,7 +83,7 @@ Lei.prototype.ToStorage = function() {
 	
 	this.SavePersonalityStats(storage);
 	
-	storage.flags = this.flags;
+	this.SaveFlags(storage);
 	
 	storage.timeout = this.timeout.ToStorage();
 	

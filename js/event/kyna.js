@@ -57,10 +57,8 @@ Kyna.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
 	
 	// Load flags
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
-	for(var flag in storage.sex)
-		this.sex[flag] = parseInt(storage.sex[flag]);
+	this.LoadFlags(storage);
+	this.LoadSexFlags(storage);
 }
 
 Kyna.prototype.ToStorage = function() {
@@ -71,8 +69,8 @@ Kyna.prototype.ToStorage = function() {
 	
 	this.SavePersonalityStats(storage);
 	
-	storage.flags = this.flags;
-	storage.sex   = this.SaveSexStats();
+	this.SaveFlags(storage);
+	this.SaveSexStats(storage);
 	
 	return storage;
 }
@@ -85,24 +83,17 @@ Kyna.prototype.IsAtLocation = function(location) {
 }
 
 // Party interaction
-Kyna.prototype.Interact = function() {
+Kyna.prototype.Interact = function(switchSpot) {
 	Text.Clear();
-	Text.AddOutput("Rawr Imma ferret.");
+	var that = kyna;
 	
+	that.PrintDescription();
 	
-	if(DEBUG) {
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: relation: " + kyna.relation.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: subDom: " + kyna.subDom.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: slut: " + kyna.slut.Get()));
-		Text.Newline();
-	}
+	var options = new Array();
+	//Equip, stats, job, switch
+	that.InteractDefault(options, switchSpot, true, true, true, true);
 	
-	Gui.NextPrompt(function() {
-		PartyInteraction();
-	});
+	Gui.SetButtonsFromList(options, true, PartyInteraction);
 }
 
 Scenes.Kyna.Intro = function() {

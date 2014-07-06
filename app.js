@@ -6,10 +6,10 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 3;
-VERSION_SUBSCRIPT = "i";
-VERSION_NAME = "Miranda dommy sexings";
+VERSION_SUBSCRIPT = "j2";
+VERSION_NAME = "Terry the thief: Saving fixed";
 
-SAVE_VERSION = 15;
+SAVE_VERSION = 16;
 // Save version 1: Initial
 // Save version 2: Added inventory
 // Save version 3: Fixed clitcock restoration + height, weigth
@@ -25,6 +25,7 @@ SAVE_VERSION = 15;
 // Save version 13: Krawitz
 // Save version 14: Miranda herm fix
 // Save version 15: Twins met flag
+// Save version 16: Jeanne met flag
 
 
 VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + VERSION_SUBSCRIPT + ": " + VERSION_NAME;

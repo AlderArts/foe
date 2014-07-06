@@ -52,8 +52,7 @@ Rosalin.prototype.FromStorage = function(storage) {
 	this.body.FromStorage(storage.body);
 	
 	// Load flags
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
+	this.LoadFlags(storage);
 }
 
 Rosalin.prototype.ToStorage = function() {
@@ -61,7 +60,7 @@ Rosalin.prototype.ToStorage = function() {
 	
 	this.SavePersonalityStats(storage);
 	
-	storage.flags = this.flags;
+	this.SaveFlags(storage);
 	storage.body = this.body.ToStorage();
 	return storage;
 }

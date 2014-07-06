@@ -238,7 +238,7 @@ Ability.prototype.CostStr = function() {
 	return str;
 }
 
-Ability.prototype.ToHit = function(hit, evade) {
+Ability.ToHit = function(hit, evade) {
 	return 2 / (1+Math.exp(-2.5*hit/evade)) - 1;
 }
 
@@ -248,7 +248,7 @@ Ability.prototype.Damage = function(atk, def) {
 }
 */
 
-Ability.prototype.Damage = function(atk, def, casterLvl, targetLvl) {
+Ability.Damage = function(atk, def, casterLvl, targetLvl) {
 	// Safeguard
 	casterLvl = casterLvl || 1;
 	targetLvl = targetLvl || 1;

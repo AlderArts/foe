@@ -220,30 +220,9 @@ Kiakai.prototype.Interact = function(switchSpot) {
 			tooltip : Text.Parse("Proposition to have sex with [name].", parse)
 		});
 	}
+	//Equip, stats, job, switch
+	that.InteractDefault(options, switchSpot, true, true, true, true);
 	
-	options.push({ nameStr: "Equip",
-		func : function() {
-			that.EquipPrompt(that.Interact);
-		}, enabled : true
-	});
-	options.push({ nameStr: that.pendingStatPoints != 0 ? "Level up" : "Stats",
-		func : function() {
-			that.LevelUpPrompt(that.Interact);
-		}, enabled : true
-	});
-	options.push({ nameStr: "Job",
-		func : function() {
-			that.JobPrompt(that.Interact);
-		}, enabled : true
-	});
-	if(switchSpot) {
-		options.push({ nameStr: party.InParty(that) ? "Switch out" : "Switch in",
-			func : function() {
-				party.SwitchPrompt(that);
-			}, enabled : true,
-			tooltip: party.InParty(that) ? "Send to reserve." : "Switch into active party."
-		});
-	}
 	Gui.SetButtonsFromList(options, true, PartyInteraction);
 }
 

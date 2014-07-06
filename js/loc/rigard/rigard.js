@@ -600,7 +600,7 @@ Scenes.Rigard.Lockdown = function() {
 		Text.NL();
 		
 		if(rigard.Krawitz["F"] != 0) {
-			Text.Add("A pang of unease stabs into your heart; you knew it was almost inevitable that your own actions would be discovered, but so soon? Still...sounds like whoever this mystery thief is, they decided it'd be easier to just blame them for the things you did as well. Although you are relieved at the fact your own cover hasn't been blown, a part of you does still feel a little guilty about someone else taking the blame. Still, it’s in your best interest to not take the fall for your crimes. Good thing you’re helping investigate rather than being investigated yourself.", parse);
+			Text.Add("A pang of unease stabs into your heart; you knew it was almost inevitable that your own actions would be discovered, but so soon? Still... sounds like whoever this mystery thief is, they decided it'd be easier to just blame them for the things you did as well. Although you are relieved at the fact your own cover hasn't been blown, a part of you does still feel a little guilty about someone else taking the blame. Still, it’s in your best interest to not take the fall for your crimes. Good thing you’re helping investigate rather than being investigated yourself.", parse);
 			Text.NL();
 		}
 		Text.Add("Clearing your throat, you declare that's quite an extensive list of crimes. But leaving a calling card? What kind of thief does that - surely they must have known it would have given the nobles more reason to send the guards after them?", parse);
@@ -635,7 +635,7 @@ Scenes.Rigard.Lockdown = function() {
 			Text.Flush();
 			
 			miranda.flags["Herm"] = 1;
-			
+			miranda.flags["Met"]  = Miranda.Met.TavernAftermath;
 			//[Hot]
 			var options = new Array();
 			options.push({ nameStr : "Neutral",

@@ -187,7 +187,7 @@ Player.prototype.Drink = function(drink, suppressText) {
 }
 
 // Party interaction
-Player.prototype.Interact = function() {
+Player.prototype.Interact = function(switchSpot) {
 	Text.Clear();
 	var that = player;
 	
@@ -234,21 +234,8 @@ Player.prototype.Interact = function() {
 		}, enabled : true,
 		tooltip : "Calm yourself."
 	});
-	options.push({ nameStr: "Equip",
-		func : function() {
-			that.EquipPrompt(that.Interact);
-		}, enabled : true
-	});
-	options.push({ nameStr: that.pendingStatPoints != 0 ? "Level up" : "Stats",
-		func : function() {
-			that.LevelUpPrompt(that.Interact);
-		}, enabled : true
-	});
-	options.push({ nameStr: "Job",
-		func : function() {
-			that.JobPrompt(that.Interact);
-		}, enabled : true
-	});
+	//Equip, stats, job, switch
+	that.InteractDefault(options, switchSpot, true, true, true, false);
 	
 	Gui.SetButtonsFromList(options, true, PartyInteraction);
 }

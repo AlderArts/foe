@@ -16,7 +16,6 @@ IDEAS:
 ------
 
 Orgasm/Load/Preg code
-Fix party.Alone etc code (can become problematic later)
 
 
 
@@ -67,6 +66,7 @@ Version 0.3
  - Healing scenes (final touches)
   * Punish scene
   * Anal toy scene (regular dommy anal)
+ - More sex scenes (mutual)
 
 * Rosalin scenes
  - Write after TF sex
@@ -74,6 +74,8 @@ Version 0.3
  - More TFs
 
 * Miranda stuff
+ - Subby home scenes
+ - Bar scenes
 
 * Burrows
 
@@ -90,32 +92,31 @@ Feedback:
 
 
 * Gui restructuring
- - Images in tooltip
- - Images when hovering location
+ - Images in tooltip?
+ - Images when hovering location?
 
 
 
 * Body builds
  - Functions for making default builds (weight, height, muscularity, femininity etc)
  - Use in intro sequence
-* Starting "classes" for initial abilities and gear
 
 * Location
- - Plains - flesh out
+ - Plains - flesh out with encounters
  - Burrows
  - Farm
  
  - Forest
   * Enterance
-  * Camp [Lindy, Wolfy]
-  * Deep forest
+  * Outlaws Camp
+  * Deep forest (locked)
   * Goblins
  - Lake
   * Docks
   * Island
   * Beach
 
- - Flesh out town (descriptions, conditions)
+ - Flesh out town (descriptions, conditions, stores)
 
 * Combat
  - Enemies [plains]: Generic morphs
@@ -144,13 +145,13 @@ Feedback:
 * Prison/cell area at guard house
 * Standing with the guard
 
+* Replace placeholder art (bg)
 
 ------------------------
         BUGFIXES
 ------------------------
-* Scale input on a common scale dependent on window size
 
-* Replace placeholder art (bg)
+
 
 ------------------------
        IDEAS
@@ -158,8 +159,7 @@ Feedback:
 
 * Timer callbacks
 * Temporary TFs
-* Item screens
- - Use item on X (set up callback function)
+* Item screen
  - Select number of items (sell x, convert x etc) -> slider?
 * Alchemy
  - Base ingredients
@@ -175,10 +175,6 @@ Feedback:
  - Leaders
   + Grant bonus effects when in combat
   + Demoralized when leader is downed
-* Sub-dom score
- - player score + entity score
- - player score changes slower
-  (reflects general attitude)
 
 * The generic scene
  - Stanzas
@@ -288,7 +284,7 @@ Feedback:
  - Skilled in many fields of magic
  - Dabbling alchemist
   + Weird and dangerous formulas
- - Knows of Alister
+ - Knows of Alliser
 
 
 

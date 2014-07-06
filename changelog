@@ -5,6 +5,21 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.3k
+------------
+* Fixed various typos and minor bugs caused by me changing stuff in the backend.
+* Added some sex exp/stat calls that were missing.
+* You can now visit Miranda's home for sexings during the hunting for Terry quest.
+* You can now repeat the Miranda sex scenes played during the planning stage of Terry's quest (ask her to go to the back room in the tavern).
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
+Version 0.3j2
+-------------
+* Fixed saving flags.
+
 Version 0.3j
 ------------
 * Tweaked the contents of the tailor store.
@@ -13,16 +28,12 @@ Version 0.3j
 * Made some very minor tweaks to Kyna's intro sex.
 * Removed the font outline for buttons. Let me know if this makes the text more or less readable, and what browser you use (should fix some rendering issues in chrome).
 * Fixed a variety of small bugs, parser errors and typos reported through the gdocs form and github. Keep em coming!
-* Terry's introduction scenes. I'd suggest you replay the mansion heist to get the most of this (old saves may be slightly weird).
+* Terry's introduction scenes. I'd suggest you replay the mansion heist to get the most of this (old saves may be slightly weird). Terry is written by LukaDoc and QuietBrowser.
 * Rigard brothel is now... there. Not quite open for business yet.
 * Fixed tons of bugs and inconsistencies courtesy of trixymoon on github. Thanks a lot!
 * Changed how the party switching system works. You can now only switch party members in specific areas. Currently, the party hang out around the campfire in the Nomads' camp when not on duty. Notice the green explore button! This change should also be reflected in scenes that involve other party members (they variations will only trigger if the follower is in your active party).
 * Three new dreams added.
-* A reworking of the item system. Not noticable so far, but it will allow use of certain items in combat later on.
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
+* A reworking of the item system. Not noticable so far, but it will allow use of certain items in combat later on. Terry has a few of them.
 
 Version 0.3i
 ------------

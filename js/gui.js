@@ -406,7 +406,7 @@ Gui.BgColorPicker = function(back) {
 			localStorage["bgcolor"] = Gui.BgColor;
 		    document.getElementById("mainTextArea").style.backgroundColor = Gui.BgColor;
 		}, enabled : true
-	});Input.exploreButtons
+	});
 	options.push({ nameStr : "Custom",
 		func : function() {
 			var col = prompt("Please enter desired background color. Format is rgba(R,G,B,A). Colors are in the range 0-255. Opacity is in the range 0-1.", Gui.BgColor || "rgba(255,255,255,1.0)")

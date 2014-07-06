@@ -13,7 +13,7 @@ Abilities.Attack.CastInternal = function(encounter, caster, target) {
 	var hit    = caster.PHit();
 	var evade  = target.PEvade();
 	
-	var toHit  = this.ToHit(hit, evade);
+	var toHit  = Ability.ToHit(hit, evade);
 
 	var parse = {
 		name  : caster.name,
@@ -22,7 +22,7 @@ Abilities.Attack.CastInternal = function(encounter, caster, target) {
 	
 	if(Math.random() < toHit) {
 		//var dmg = atkDmg - def;
-		var dmg = this.Damage(atkDmg, def, caster.level, target.level);
+		var dmg = Ability.Damage(atkDmg, def, caster.level, target.level);
 		if(dmg < 0) dmg = 0;
 		dmg = caster.elementAtk.ApplyDmgType(target.elementDef, dmg);
 		dmg = Math.floor(dmg);

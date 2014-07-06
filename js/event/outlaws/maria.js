@@ -59,8 +59,7 @@ Maria.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
 	
 	// Load flags
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
+	this.LoadFlags(storage);
 }
 
 Maria.prototype.ToStorage = function() {
@@ -71,7 +70,7 @@ Maria.prototype.ToStorage = function() {
 	
 	this.SavePersonalityStats(storage);
 	
-	storage.flags = this.flags;
+	this.SaveFlags(storage);
 	
 	return storage;
 }
@@ -223,6 +222,11 @@ Scenes.Maria.ForestConfront = function() {
 					Text.NL();
 					Text.Add("Getting a wicked idea, you bump her clit with your nose, pressing and rolling it between your nose and the inflamed, red petals of her sex. After another moment, you locate her g-spot and mercilessly drive your tongue against it. You feel Maria shaking above you, and her juices fill your mouth.", parse);
 					Text.NL();
+					
+					Sex.Cunnilingus(player, maria);
+					player.Fuck(null, 2);
+					maria.Fuck(null, 2);
+					
 					Text.Add("Standing back up, she shakily replaces her shorts. Giving you a lecherous smile, she hauls you from the floor and pushes you forward. Bound as you are, you have no choice but to follow.", parse);
 				}
 				else if(maria.LustLevel() > 0.25) {
@@ -310,6 +314,13 @@ Scenes.Maria.ForestConfrontWin = function() {
 					Text.Add("Pulling your fingers from the archer's wanton hole, you notice her lift her legs, begging for more of the delicious friction. Tutting softly, you circle a finger around her clit. It pokes from its hood, red and engorged. She begins bucking underneath you, but you pull away before she can cum. Pulling your [cockDesc] from her mouth, you turn around.", parse);
 					Text.NL();
 					Text.Add("As juiced up as she is, you have no problem pounding straight into her core. Thrashing away at her slick pussy, you lose yourself in a haze of lust and feel yourself getting closer to the edge you had been skirting after her oral earlier assault. Her walls ripple around you convulsively as she cums under the assault. Moments later you glaze her insides with your liquid lust.", parse);
+					
+					var cum = player.OrgasmCum();
+					
+					Sex.Vaginal(player, maria);
+					maria.FuckVag(maria.FirstVag(), player.FirstCock(), 3);
+					player.Fuck(player.FirstCock(), 3);
+					
 					if(player.FirstVag()) {
 						Text.Add(" Your [vagDesc] clenches in sympathy, and clear girlcum runs down your [legsDesc].", parse);
 					}
@@ -334,6 +345,10 @@ Scenes.Maria.ForestConfrontWin = function() {
 							Text.Add("while the other mauls one of Maria's perfect, chocolate orbs.", parse);
 						Text.Add(" Bumping your clit against Maria's again, you slide down and slip your [clitDesc] between her folds. Hot lust bubbles up in your body, and your cunny starts convulsing as you cum hard on the archer-woman's rosy folds.", parse);
 						Text.NL();
+						
+						var cum = player.OrgasmCum();
+						player.AddSexExp(3);
+						maria.AddSexExp(3);
 					}
 					Text.Add("Standing up you clean yourself up and put back on your [armorDesc].", parse);
 				}

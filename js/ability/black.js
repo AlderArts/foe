@@ -36,7 +36,7 @@ AttackSpell.prototype.CastInternal = function(encounter, caster, target) {
 		var def    = defMod * e.MDefense();
 		
 		//var dmg = atkDmg - def;
-		var dmg = this.Damage(atkDmg, def, caster.level, e.level);
+		var dmg = Ability.Damage(atkDmg, def, caster.level, e.level);
 		if(dmg < 0) dmg = 0;
 		
 		dmg = damageType.ApplyDmgType(e.elementDef, dmg);

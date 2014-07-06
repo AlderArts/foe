@@ -56,8 +56,7 @@ Fera.prototype.FromStorage = function(storage) {
 	this.fondleTimer.FromStorage(storage.fonTim);
 	this.timeout.FromStorage(storage.timeout);
 	// Load flags
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
+	this.LoadFlags(storage);
 }
 
 Fera.prototype.ToStorage = function() {

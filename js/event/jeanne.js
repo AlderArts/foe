@@ -49,8 +49,7 @@ Jeanne.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
 	
 	// Load flags
-	for(var flag in storage.flags)
-		this.flags[flag] = parseInt(storage.flags[flag]);
+	this.LoadFlags(storage);
 }
 
 Jeanne.prototype.ToStorage = function() {
@@ -58,7 +57,7 @@ Jeanne.prototype.ToStorage = function() {
 	
 	this.SavePersonalityStats(storage);
 	
-	storage.flags = this.flags;
+	this.SaveFlags(storage);
 	
 	return storage;
 }
@@ -373,6 +372,8 @@ Scenes.Jeanne.First = function() {
 		name       : function() { return kiakai.name; },
 		hisher     : function() { return kiakai.hisher(); }
 	};
+	
+	jeanne.flags["Met"] = 1;
 	
 	Text.Clear();
 	Text.Add("You make the trek up the final set of stairs into a large laboratory, every nook and cranny the home of some strange arcane device or alchemical concoction. Parchments and books are strewn about on tables and chairs, and a half-eaten meal is growing cold, forgotten on a bookshelf.", parse);
