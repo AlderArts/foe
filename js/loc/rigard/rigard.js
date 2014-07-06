@@ -635,7 +635,7 @@ Scenes.Rigard.Lockdown = function() {
 			Text.Flush();
 			
 			miranda.flags["Herm"] = 1;
-			
+			miranda.flags["Met"]  = Miranda.Met.TavernAftermath;
 			//[Hot]
 			var options = new Array();
 			options.push({ nameStr : "Neutral",
