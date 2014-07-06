@@ -78,10 +78,10 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/kyna.js \
 	js/event/miranda.js \
 	js/event/terry.js \
-	js/event/roa.js \
 	js/event/sylistraxia.js \
 	js/event/kiakai.js \
-	js/event/lagon.js \
+	js/event/brothel/roa.js \
+	js/event/burrows/lagon.js \
 	js/event/farm/gwendy.js \
 	js/event/farm/adrian.js \
 	js/event/farm/danie.js \
