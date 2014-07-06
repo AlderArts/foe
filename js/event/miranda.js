@@ -3984,7 +3984,8 @@ Scenes.Miranda.TavernSexBackroomPrompt = function() {
 Scenes.Miranda.TavernSexBackroomSubbyVag = function(cocks) {
 	var p1Cock = player.BiggestCock(cocks);
 	var parse = {
-		playername : player.name
+		playername : player.name,
+		cockDesc   : function() { return p1Cock.Short(); }
 	};
 	
 	var knotted = p1Cock.knot != 0;
