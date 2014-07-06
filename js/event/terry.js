@@ -49,7 +49,7 @@ function Terry(storage) {
 	
 	this.flags["Met"]   = 0;
 	this.flags["Saved"] = 0;
-	this.flags["PrefGender"] = Gender.female;
+	this.flags["PrefGender"] = Gender.male;
 	
 	this.sbombs = 3;
 	this.hidingSpot = world.loc.Rigard.ShopStreet.street;
@@ -378,6 +378,7 @@ Scenes.Terry.CombatVsMiranda = function() {
 	
 	terry.RestFull();
 	terry.turnCounter = 0;
+	terry.flags["PrefGender"] = Gender.female;
 	
 	enc.canRun = false;
 	
