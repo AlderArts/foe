@@ -386,7 +386,7 @@ Scenes.Lei.InnPrompt = function() {
 		/*
 		if(twins.flags["Met"] == 0) {
 			// TWINS STUFF INTRO
-			twins.flags["Met"] = 1;
+			twins.flags["Met"] = Twins.Met.Met;
 		}
 		else {
 			// KNOW ABOUT THE TWINS
@@ -608,9 +608,9 @@ Scenes.Lei.RequestMain = function() {
 				Text.Add("You briefly wonder if he actually likes you before going on your way.", parse);
 				Text.Flush();
 
-				twins.flags["Met"] = 1;
+				twins.flags["Met"] = Twins.Met.Met;
 				// Start KrawitzQ
-				rigard.Krawitz["Q"] = 1;
+				rigard.Krawitz["Q"] = Rigard.KrawitzQ.Started;
 				
 				Gui.NextPrompt();
 			}, enabled : true,

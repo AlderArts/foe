@@ -8,7 +8,7 @@ function Twins(storage) {
 	this.rani = new Rani();
 	
 	this.flags = {};
-	this.flags["Met"] = Twins.Met.Access;
+	this.flags["Met"] = Twins.Met.NotMet;
 	this.flags["SexOpen"] = 0;
 	
 	this.terryTimer = new Time();
