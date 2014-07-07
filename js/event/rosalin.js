@@ -137,7 +137,7 @@ Scenes.Rosalin.Interact = function() {
 	// First time meeting
 	if(rosalin.flags["Met"] == 0) {
 		rosalin.flags["Met"] = 1;
-		cale.flags["Met"]  = 1;
+		cale.flags["Met"]    = Cale.Met.First;
 		Scenes.Rosalin.FirstTime();
 		return;
 	}
@@ -590,6 +590,8 @@ Scenes.Rosalin.FirstFuck = function() {
 		func : function() {
 			Text.Clear();
 			
+			cale.flags["Met"] = Cale.Met.YouTookRosalin;
+			
 			rosalin.relation.IncreaseStat(100, 5);
 			
 			Text.AddOutput("Insisting that you can handle this on your own, you push the wolf back. He growls and complains a bit, but reluctantly backs off. The wolf already forgotten, you pull off your [armorDesc], revealing your [multiCockDesc]. Delighted, the horny catgirl all but throws herself at you, greedily lapping away at your [multiCockDesc].", parse);
@@ -632,6 +634,8 @@ Scenes.Rosalin.FirstFuck = function() {
 	});
 	options.push({ nameStr : "Wolf",
 		func : function() {
+			cale.flags["Met"] = Cale.Met.CaleTookRosalin;
+			
 			Text.Clear();
 			Text.AddOutput("You delicately disentangle yourself from the horny catgirl, pushing her into the arms of the wolf-morph. Not wishing to take care of the alchemist yourself, you tell him that he can have her. Wasting no time, the wolf rips off Rosalin's dress, leaving her as nude as the day she was born. The alchemist eagerly returns the favor, pulling down his pants to reveal a strapping nine-inch canine shaft with a flat tip. A thick knot is slowly swelling at its base, peeking out of a furry sheet just above the wolf's heavy sack.", parse);
 			Text.Newline();
@@ -651,6 +655,8 @@ Scenes.Rosalin.FirstFuck = function() {
 			
 			Text.AddOutput("You tell him you could use his company, suggesting the two of you could share the horny alchemist. Grinning, the wolf quickly gets rid of his clothes, presenting Rosalin with his flat-tipped, nine-inch canine shaft. She gleefully swallows several inches, gripping his knot with one hand, the other grasping at your [armorDesc].", parse);
 			Text.Newline();
+			
+			cale.flags["Met"] = Cale.Met.SharedOnlyRosie;
 			
 			parse.genDesc = function() { return player.FirstCock() ? player.MultiCockDesc() : player.FirstVag() ? player.FirstVag().Short() : "bare crotch"; }
 			
@@ -734,6 +740,8 @@ Scenes.Rosalin.FirstFuck = function() {
 					player.subDom.DecreaseStat(-100, 3);
 					cale.subDom.IncreaseStat(100, 10);
 					cale.flags["Sexed"]++;
+					
+					cale.flags["Met"] = Cale.Met.SharedGotFucked;
 					
 					Text.AddOutput("Deciding to have a taste yourself, you drop to your knees beside Rosalin, hungrily eyeing the wolf-morph's thick member. He almost has to force Rosalin off it to allow you to get access. Getting far more of a treat than he expected, the wolf leans back languidly, enjoying the dual blowjob.", parse);
 					Text.Newline();
@@ -857,6 +865,8 @@ Scenes.Rosalin.FirstFuck = function() {
 
 Scenes.Rosalin.FirstFuckPegWolf = function() {
 	Text.Clear();
+	
+	cale.flags["Met"] = Cale.Met.SharedFuckedHim;
 	
 	player.subDom.IncreaseStat(100, 5);
 	cale.subDom.DecreaseStat(-100, 10);

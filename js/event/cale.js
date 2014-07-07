@@ -16,7 +16,7 @@ function Cale(storage) {
 	this.FirstCock().length.base = 23;
 	this.FirstCock().thickness.base = 5;
 	
-	this.flags["Met"]     = 0;
+	this.flags["Met"]     = Cale.Met.NotMet;
 	this.flags["Sexed"]   = 0;
 	
 	this.SetLevelBonus();
@@ -26,6 +26,16 @@ function Cale(storage) {
 }
 Cale.prototype = new Entity();
 Cale.prototype.constructor = Cale;
+
+Cale.Met = {
+	NotMet : 0,
+	First  : 1,
+	YouTookRosalin  : 1,
+	CaleTookRosalin : 2,
+	SharedGotFucked : 3,
+	SharedFuckedHim : 4,
+	SharedOnlyRosie : 5
+};
 
 Cale.prototype.FromStorage = function(storage) {
 	this.Butt().virgin       = parseInt(storage.virgin) == 1;
