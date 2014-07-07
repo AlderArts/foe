@@ -22,9 +22,9 @@ function Button(rect, text, func, enabled, image, disabledImage, glow) {
 	this.set     = Gui.canvas.set();
 	this.image   = Gui.canvas.image(this.enabledImage, rect.x, rect.y, rect.w, rect.h);
 	this.text    = Gui.canvas.text((rect.x + rect.w/2)+2, (rect.y + rect.h/2)+2, text).attr(
-		{fill:"#000", /*stroke:"#000",*/ font: BUTTON_FONT});
+		{fill:"", /*stroke:"#000",*/ font: BUTTON_FONT});
 	this.text2   = Gui.canvas.text(rect.x + rect.w/2, rect.y + rect.h/2, text).attr(
-		{fill:"#FFF", /*stroke:"#000",*/ font: BUTTON_FONT});
+		{fill:"#000", /*stroke:"#000",*/ font: BUTTON_FONT});
 	//Disable text selection
 	$(this.text.node).css({
 		"-webkit-touch-callout": "none",
