@@ -311,7 +311,7 @@ Scenes.Lei.InnPrompt = function() {
 									Text.NL();
 									Text.Add("Grudgingly, you accept his price, and hand over the coins. He accepts them without counting, and nods at you slightly.", parse);
 									party.coin -= 400;
-									lei.relation.IncreseStat(100, 2);
+									lei.relation.IncreaseStat(100, 2);
 									Text.Flush();
 									Gui.NextPrompt(Scenes.Lei.ExplanationMain);
 								}, enabled : party.coin >= 400,
