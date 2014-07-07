@@ -98,7 +98,11 @@ Miranda.prototype.Attitude = function() {
 }
 
 Miranda.prototype.FromStorage = function(storage) {
-	this.LoadPersonalityStats(storage);
+	this.SaveCombatStats(storage);
+	this.SavePersonalityStats(storage);
+	this.SaveEffects(storage);
+	this.SaveJobs(storage);
+	this.SaveEquipment(storage);
 	
 	// Load flags
 	this.LoadFlags(storage);
@@ -108,8 +112,13 @@ Miranda.prototype.FromStorage = function(storage) {
 Miranda.prototype.ToStorage = function() {
 	var storage = {};
 	
+	this.LoadCombatStats(storage);
 	this.SavePersonalityStats(storage);
+	this.LoadEffects(storage);
+	this.SaveJobs(storage);
+	this.SaveEquipment(storage);
 	
+	// Save flags
 	this.SaveFlags(storage);
 	this.SaveSexStats(storage);
 	
