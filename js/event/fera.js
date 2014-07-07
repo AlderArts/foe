@@ -645,7 +645,7 @@ Scenes.Fera.SexPrompt = function() {
 		options.push({ nameStr : "Get oral",
 			func : function() {
 				Text.Clear();
-				if(p1Cock) {
+				if(player.FirstCock()) {
 					parse["balls"] = player.HasBalls() ? function() { return Text.Parse(" and [ballsDesc]", parse); } : "";
 					parse["oneof"] = player.NumCocks() > 1 ? " one of" : "";
 					
@@ -705,7 +705,7 @@ Scenes.Fera.SexPrompt = function() {
 					fera.flags["Blowjob"]++;
 				}
 				else { // Vag
-					Text.AddOutput("You sit down on the small bench and remove your [lowerArmorDesc], spreading your legs to reveal your [vagDesc]. Fera gets on her knees and begins to lick your it tenderly with her rough, catlike tongue. It feels incredible, and you cannot help but moan at the intense pleasure running up your spine.", parse);
+					Text.AddOutput("You sit down on the small bench and remove your [lowerArmorDesc], spreading your legs to reveal your [vagDesc]. Fera gets on her knees and begins to lick it tenderly with her rough, catlike tongue. It feels incredible, and you cannot help but moan at the intense pleasure running up your spine.", parse);
 					Text.Newline();
 					Text.AddOutput("The cute catgirl seems to be enjoying herself as well, and you can see her blue eyes looking up at you as she licks your [vagDesc] enthusiastically. Her fingers shift to play with your [clitDesc], pinching it while she continues licking. Fera's tongue reaches deeper inside your [vagDesc], its roughness pleasant against your walls.", parse);
 					Text.Newline();
