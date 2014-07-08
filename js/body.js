@@ -454,7 +454,6 @@ Body.prototype.ToStorage = function() {
 			virgin : a.virgin ? 1 : 0
 		};
 		v.womb = {
-			fer  : a.womb.fertility.base,
 			litS : a.womb.litterSize,
 			litR : a.womb.litterRace,
 			preg : a.womb.pregnant ? 1 : 0
@@ -467,7 +466,6 @@ Body.prototype.ToStorage = function() {
 		size   : this.ass.buttSize.base,
 		virgin : this.ass.virgin ? 1 : 0,
 		womb : {
-			fer  : this.ass.womb.fertility.base,
 			litS : this.ass.womb.litterSize,
 			litR : this.ass.womb.litterRace,
 			preg : this.ass.womb.pregnant ? 1 : 0
@@ -1607,24 +1605,18 @@ Body.prototype.Lactation = function() {
 // For pregnancies
 // TODO: Needs some timers/callbacks
 function Womb() {
-	this.fertility  = new Stat(0.3); // 0..1
 	// In progress offspring
 	this.litterSize = 0;
 	this.litterRace = Race.human;
 	this.pregnant = false;
 	// TODO: TIMER
+	
 }
 Womb.prototype.Short = function() {
 	return "womb";
 }
 Womb.prototype.Desc = function() {
 	
-}
-Womb.prototype.Impregnate = function(sperm, forceSuccess) {
-	var success = this.fertility * sperm.fertility;
-	if(success < Math.random() || forceSuccess) {
-		// TODO: Start pregnancy
-	}
 }
 
 /*

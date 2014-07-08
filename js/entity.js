@@ -790,6 +790,9 @@ Entity.prototype.LustLevel = function() {
 	return this.curLust / this.Lust();
 }
 
+Entity.prototype.Virility = function() {
+	return this.body.balls.fertility.Get();
+}
 
 // Clear combat effects, called at end of encounters
 Entity.prototype.ClearCombatBonuses = function() {
