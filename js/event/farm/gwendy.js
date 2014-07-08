@@ -123,6 +123,21 @@ Gwendy.prototype.Interact = function(switchSpot) {
 	that.PrintDescription();
 	
 	var options = new Array();
+	options.push({ nameStr: "Release",
+		func : function() {
+			Text.Clear();
+			Text.AddOutput("[Placeholder] Gwendy masturbates fiercely, cumming buckets.");
+			
+			world.TimeStep({minute : 10});
+			
+			that.AddLustFraction(-1);
+			
+			Gui.NextPrompt(function() {
+				that.Interact(switchSpot);
+			});
+		}, enabled : true,
+		tooltip : "Pleasure yourself."
+	});
 	//Equip, stats, job, switch
 	that.InteractDefault(options, switchSpot, true, true, true, true);
 	

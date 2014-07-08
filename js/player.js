@@ -214,9 +214,11 @@ Player.prototype.Interact = function(switchSpot) {
 			
 			world.TimeStep({minute : 10});
 			
-			that.curLust = 0;
+			that.AddLustFraction(-1);
 			
-			Gui.NextPrompt(that.Interact);
+			Gui.NextPrompt(function() {
+				that.Interact(switchSpot);
+			});
 		}, enabled : true,
 		tooltip : "Pleasure yourself."
 	});
@@ -227,10 +229,11 @@ Player.prototype.Interact = function(switchSpot) {
 			
 			world.TimeStep({minute : 30});
 			
-			that.curLust -= that.spirit.Get() * 3;
-			if(that.curLust < 0) that.curLust = 0;
+			that.AddLustFraction(-1);
 			
-			Gui.NextPrompt(that.Interact);
+			Gui.NextPrompt(function() {
+				that.Interact(switchSpot);
+			});
 		}, enabled : true,
 		tooltip : "Calm yourself."
 	});
