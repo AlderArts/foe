@@ -18,7 +18,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/entity.js \
 	js/body.js \
 	js/defbody.js \
-	js/player.js \
+	js/event/player.js \
 	js/party.js \
 	js/effect.js \
 	js/combat.js \
