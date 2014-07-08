@@ -48,12 +48,18 @@ Images.golemboss    = "data/golem.png";
 
 
 
-
+/*
 Images.imgButtonEnabled     = "data/gui/button_big_enabled.png";
 Images.imgButtonEnabled2    = "data/gui/button_big_enabled2.png";
 Images.imgButtonDisabled    = "data/gui/button_big_disabled.png";
 Images.imgNavButtonEnabled  = "data/gui/button_small_enabled.png";
 Images.imgNavButtonDisabled = "data/gui/button_small_disabled.png";
+*/
+Images.imgButtonEnabled     = "data/gui/big_blue.png";
+Images.imgButtonEnabled2    = "data/gui/big_green.png";
+Images.imgButtonDisabled    = "data/gui/big_gray.png";
+Images.imgNavButtonEnabled  = "data/gui/small_blue.png";
+Images.imgNavButtonDisabled = "data/gui/small_gray.png";
 
 Images.imgSearchEnabled     = "data/gui/search_enabled.png";
 Images.imgSearchDisabled    = "data/gui/search_disabled.png";
