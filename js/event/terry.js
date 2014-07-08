@@ -601,7 +601,7 @@ Scenes.Terry.CaughtTheThief = function() {
 						Text.NL();
 						Text.Add("You shake your head and insist that you mean what you say; you won't let her do this. It's not right.", parse);
 						Text.NL();
-						Text.Add("<i>”Don’t you dare tell me what’s right or wrong in <b>my</b< city, [playername]. If you care so much I have no problem letting you take his place, but Aria forbids me, I’m going to wreck someone’s ass over this!”</i>", parse);
+						Text.Add("<i>”Don’t you dare tell me what’s right or wrong in <b>my</b> city, [playername]. If you care so much I have no problem letting you take his place, but Aria forbids me, I’m going to wreck someone’s ass over this!”</i>", parse);
 						Text.NL();
 						Text.Add("The two of you argue vehemently, hurling statement and rebuttal back and forth like knives, the stubborn bitch refusing to back down a foot and doing everything she can to force you to let her past, something you refuse to do. You're dimly aware that the thief remains on his knees behind you throughout the argument, and you can sense relief from him at your unexpected salvation of his anus. Things are just starting to get particularly heated when the doors to the warehouse are violently thrown open.", parse);
 					}
