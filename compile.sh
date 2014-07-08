@@ -90,12 +90,12 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/lei.js \
 	js/event/twins.js \
 	js/event/room69.js \
-	js/event/chief.js \
-	js/event/patchwork.js \
-	js/event/rosalin.js \
-	js/event/estevan.js \
-	js/event/cale.js \
-	js/event/magnus.js \
+	js/event/nomads/chief.js \
+	js/event/nomads/patchwork.js \
+	js/event/nomads/rosalin.js \
+	js/event/nomads/estevan.js \
+	js/event/nomads/cale.js \
+	js/event/nomads/magnus.js \
 	js/event/outlaws/maria.js \
 	js/event/jeanne.js \
 	js/event/golem.js \
