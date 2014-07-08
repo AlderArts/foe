@@ -87,8 +87,10 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/farm/danie.js \
 	js/event/uru.js \
 	js/event/aria.js \
-	js/event/lei.js \
-	js/event/twins.js \
+	js/event/royals/lei.js \
+	js/event/royals/twins.js \
+	js/event/royals/jeanne.js \
+	js/event/royals/golem.js \
 	js/event/room69.js \
 	js/event/nomads/chief.js \
 	js/event/nomads/patchwork.js \
@@ -97,8 +99,6 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/nomads/cale.js \
 	js/event/nomads/magnus.js \
 	js/event/outlaws/maria.js \
-	js/event/jeanne.js \
-	js/event/golem.js \
 	js/event/raven.js \
 	js/enemy/bandit.js \
 	js/enemy/imp.js \
