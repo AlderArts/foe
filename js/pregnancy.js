@@ -162,3 +162,23 @@ PregnancyHandler.prototype.Update = function(step) {
 		}
 	}
 }
+
+PregnancyHandler.prototype.BellySize = function() {
+	var size = 0;
+	
+	var vags = this.entity.AllVags();
+	for(var i = 0; i < vags.length; ++i) {
+		var womb = vags[i].womb;
+		if(womb.pregnant) {
+			//TODO: adjust for gene size
+			size += womb.progress * Math.sqrt(womb.litterSize);
+		}
+	}
+	var womb = this.entity.Butt().womb;
+	if(womb.pregnant) {
+		//TODO: adjust for gene size
+		size += womb.progress * Math.sqrt(womb.litterSize);
+	}
+	
+	return size;
+}
