@@ -78,11 +78,11 @@ Terry.Saved = {
 Terry.prototype.FromStorage = function(storage) {
 	this.Butt().virgin       = parseInt(storage.virgin) == 1;
 	
-	this.SaveCombatStats(storage);
-	this.SavePersonalityStats(storage);
-	this.SaveEffects(storage);
-	this.SaveJobs(storage);
-	this.SaveEquipment(storage);
+	this.LoadCombatStats(storage);
+	this.LoadPersonalityStats(storage);
+	this.LoadEffects(storage);
+	this.LoadJobs(storage);
+	this.LoadEquipment(storage);
 	
 	// Load flags
 	this.LoadFlags(storage);
@@ -101,9 +101,9 @@ Terry.prototype.ToStorage = function() {
 		virgin : this.Butt().virgin ? 1 : 0
 	};
 	
-	this.LoadCombatStats(storage);
+	this.SaveCombatStats(storage);
 	this.SavePersonalityStats(storage);
-	this.LoadEffects(storage);
+	this.SaveEffects(storage);
 	this.SaveJobs(storage);
 	this.SaveEquipment(storage);
 	
