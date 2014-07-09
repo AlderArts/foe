@@ -1690,7 +1690,7 @@ Scenes.Miranda.JustOneMore = function() {
 				
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : "Not interested. Find an excuse to ditch her."
+			tooltip : "Not interested. Find an excuse to ditch her.<br/><br/>...On second thought, getting on the bad side of the law might have reprecussions."
 		});
 		Gui.SetButtonsFromList(options);
 	}
