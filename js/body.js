@@ -453,23 +453,13 @@ Body.prototype.ToStorage = function() {
 			clitL  : a.clitLength.base,
 			virgin : a.virgin ? 1 : 0
 		};
-		v.womb = {
-			litS : a.womb.litterSize,
-			litR : a.womb.litterRace,
-			preg : a.womb.pregnant ? 1 : 0
-		};
 		storage.vag.push(v);
 	}
 	storage.ass = {
 		cap    : this.ass.capacity.base,
 		str    : this.ass.stretch.base,
 		size   : this.ass.buttSize.base,
-		virgin : this.ass.virgin ? 1 : 0,
-		womb : {
-			litS : this.ass.womb.litterSize,
-			litR : this.ass.womb.litterRace,
-			preg : this.ass.womb.pregnant ? 1 : 0
-		}
+		virgin : this.ass.virgin ? 1 : 0
 	};
 	storage.breasts = new Array();
 	for(var i = 0; i < this.breasts.length; i++) {
@@ -601,11 +591,6 @@ Body.prototype.FromStorage = function(storage) {
 		v.clitLength.base    = parseFloat(a.clitL) || v.clitLength.base;
 		v.virgin             = parseInt(a.virgin) == 1;
 		
-		v.womb.fertility.base = parseFloat(a.fer) || v.womb.fertility.base;
-		v.womb.litterSize     = parseInt(a.litS)  || v.womb.litterSize;
-		v.womb.litterRace     = parseInt(a.litR)  || v.womb.litterRace;
-		v.womb.pregnant       = parseInt(a.preg) == 1;
-		
 		this.vagina.push(v);
 	}
 	
@@ -626,11 +611,6 @@ Body.prototype.FromStorage = function(storage) {
 	this.ass.stretch.base  = parseFloat(storage.ass.str)  || this.ass.stretch.base;
 	this.ass.buttSize.base = parseFloat(storage.ass.size) || this.ass.buttSize.base;
 	this.ass.virgin        = parseInt(storage.ass.virgin) == 1;
-	
-	this.ass.womb.fertility.base = parseFloat(storage.ass.womb.fer) || this.ass.womb.fertility.base;
-	this.ass.womb.litterSize     = parseInt(storage.ass.womb.litS)  || this.ass.womb.litterSize;
-	this.ass.womb.litterRace     = parseInt(storage.ass.womb.litR)  || this.ass.womb.litterRace;
-	this.ass.womb.pregnant       = parseInt(storage.ass.womb.preg) == 1;
 	
 	this.breasts = new Array();
 	for(var i = 0; i < storage.breasts.length; i++) {
@@ -1608,9 +1588,11 @@ function Womb() {
 	// In progress offspring
 	this.litterSize = 0;
 	this.litterRace = Race.human;
-	this.pregnant = false;
+	this.pregnant   = false;
 	// TODO: TIMER
-	
+	this.progress     = 0;
+	this.hoursToBirth = 0;
+	this.triggered    = false;
 }
 Womb.prototype.Short = function() {
 	return "womb";
