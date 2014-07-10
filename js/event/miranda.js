@@ -4594,7 +4594,7 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 				Text.Add("Miranda’s moans are muffled as she diligently works on your [gen]. From your advantageous spot, you can see, and feel, as every muscle in her body tenses. A thick spurt of pre heralds the oncoming eruption of doggie-cum that fills your mouth with nary but a single jet. You quickly move to swallow her thick load, just as she delivers another.", parse);
 				Text.NL();
 				
-				var cum = miranda.OrgasmCum();
+				var cum = miranda.OrgasmCum();  // the var 'cum' name is the same as the player (?)
 				
 				Text.Add("As the semen-fountain masquerading as doberherm beneath you keeps on erupting into your mouth, you diligently swallow each load, at least for a time. Having had enough, you relax your mouth and release her, allowing her cum to spray unabashedly over her thighs as you use your hand to continue milking her. Finally her spurts grow weaker and weaker, until she lets out a final groan and issues what you suspect is her final jet of this orgasm. Quickly you move, mouth diving in to capture her last load and hold it inside your lips, letting the thick stickiness of it roll across your tongue.", parse);
 				Text.NL();
@@ -4609,7 +4609,7 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 				else if(target == Target.Cunn) {
 					Text.Add("Throughout her own climax, Miranda's tongue keeps slurping and squelching through your petals, lapping greedily for your feminine nectar, her fuzzy chin rubbing against your [clitDesc] seemingly by accident. Your hips twitch and sway, but she simply won't relent in her assault, and inevitably your womanhood releases its juices right into the morph's hungry jaws.", parse);
 					
-					var cum = player.OrgasmCum(); // ?
+					var cum = player.OrgasmCum(); // ? why?
 				}
 				else {
 					Text.Add("Miranda lewdly slurps and laps at your back passage, making you shudder and wriggle even through her own climax. As her cock slides limply back into her sheath, she continues her assault, but evidently you've worn her out, as her licks grow slower and slower until she stops entirely. As she lays back and pants, you're left glowing pleasantly in arousal.", parse);
