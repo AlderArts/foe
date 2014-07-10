@@ -473,7 +473,11 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		party.inventory.AddItem(Items.Lacertium);
 		
 		party.inventory.AddItem(Items.GoatMilk);
+		
 		party.inventory.AddItem(Items.SheepMilk);
+		party.inventory.AddItem(Items.Ramshorn);
+		party.inventory.AddItem(Items.FreshGrass);
+		party.inventory.AddItem(Items.Ovis);
 		
 		party.inventory.AddItem(Items.CowMilk);
 		party.inventory.AddItem(Items.CowBell);

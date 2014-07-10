@@ -145,6 +145,7 @@ Items.Lacertium.PushEffect(TF.ItemEffects.DecStr, {odds: 0.2, ideal: 16, max: 1}
 
 
 
+// TODO: GOAT TF
 
 Items.GoatMilk = new Item("goat1", "G.Milk");
 Items.GoatMilk.price = 2;
@@ -159,7 +160,21 @@ Items.GoatMilk.Use = function(target) {
 	return {consume: true};
 }
 
-// TODO: GOAT TF
+
+Items.Ovis = new TFItem("ovis0", "Ovis");
+Items.Ovis.price = 8;
+Items.Ovis.Short = function() { return "A bottle of Ovis"; }
+Items.Ovis.Long = function() { return "A bottle labeled Ovis, with the picture of a sheep on it. The fluid within is milky white."; }
+Items.Ovis.Recipe = [{it: Items.SheepMilk}, {it: Items.Ramshorn}, {it: Items.FreshGrass}];
+// Effects
+Items.Ovis.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.sheep, str: "sheep ears"});
+Items.Ovis.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.sheep, color: Color.white, str: "a short ovine tail"});
+Items.Ovis.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.2, value: false, num: 1});
+Items.Ovis.PushEffect(TF.ItemEffects.SetHorn, {odds: 0.4, race: Race.sheep, color: Color.black, count: 2, str: "a pair of sheep horns" });
+Items.Ovis.PushEffect(TF.ItemEffects.IncSpi, {odds: 0.4, ideal: 30, max: 1});
+Items.Ovis.PushEffect(TF.ItemEffects.IncCha, {odds: 0.3, ideal: 30, max: 1});
+Items.Ovis.PushEffect(TF.ItemEffects.DecStr, {odds: 0.2, ideal: 15, max: 1});
+Items.Ovis.PushEffect(TF.ItemEffects.DecInt, {odds: 0.2, ideal: 15, max: 1});
 
 Items.SheepMilk = new Item("ovis1", "S.Milk");
 Items.SheepMilk.price = 2;
@@ -173,8 +188,11 @@ Items.SheepMilk.Use = function(target) {
 	
 	return {consume: true};
 }
+Items.Ramshorn = new Item("ovis2", "Ramshorn");
+Items.Ramshorn.price = 0;
+Items.Ramshorn.Short = function() { return "Ramshorn"; }
+Items.Ramshorn.Long = function() { return "A curled horn from a sheep."; }
 
-// TODO: SHEEP TF
 
 
 Items.CowMilk = new Item("bov1", "Milk");
