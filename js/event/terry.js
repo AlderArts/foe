@@ -30,7 +30,7 @@ function Terry(storage) {
 	
 	this.body.DefMale();
 	this.body.muscleTone.base = 0.1;
-	this.body.femininity.base = 0.8;
+	this.body.femininity.base = 0.9;
 	this.Butt().buttSize.base = 3;
 	this.FirstCock().length.base = 11;
 	this.FirstCock().thickness.base = 2;
