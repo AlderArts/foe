@@ -473,8 +473,8 @@ Scenes.Miranda.RigardGatesBribe = function() {
 				Text.Add("<i>”Take my load, bitch!”</i> the herm yells, pouring her thick cum down your throat and into your [stomachDesc]. You swallow dutifully, but you can feel her seed rising in your throat, the pressure being too high. Despite your efforts, some of it leaks out, trailing down your chin. Finally, the sadistic dog-herm pulls out, allowing you to breathe again.", parse);
 				Text.NL();
 				
+				var mCum = miranda.OrgasmCum();
 				player.AddLustFraction(0.3);
-				miranda.AddLustFraction(-1);
 				miranda.relation.IncreaseStat(100, 3);
 				miranda.subDom.IncreaseStat(100, 5);
 				player.subDom.DecreaseStat(-50, 1);
@@ -523,7 +523,7 @@ Scenes.Miranda.RigardGatesBribe = function() {
 				player.FuckOral(player.Mouth(), miranda.FirstCock(), 2);
 				
 				player.AddLustFraction(0.3);
-				miranda.AddLustFraction(-1);
+				var mCum = miranda.OrgasmCum();
 				miranda.subDom.IncreaseStat(50, 1);
 				player.subDom.DecreaseStat(-50, 1);
 				
@@ -753,7 +753,7 @@ Scenes.Miranda.RigardGatesBribe = function() {
 				Text.Flush();
 				
 				player.AddLustFraction(-1);
-				miranda.AddLustFraction(-1);
+				var mCum = miranda.OrgasmCum();
 				miranda.relation.IncreaseStat(50, 1);
 				miranda.subDom.IncreaseStat(100, 1);
 				player.subDom.DecreaseStat(-100, 1);
@@ -1217,6 +1217,7 @@ Scenes.Miranda.HeyThereCatPorn = function() {
 						miranda.flags["Attitude"] = Miranda.Attitude.Nice;
 						miranda.relation.IncreaseStat(100, 5);
 						miranda.subDom.IncreaseStat(100, 10);
+						var mCum = miranda.OrgasmCum();
 						
 						world.TimeStep({hour : 5});
 						
@@ -1264,6 +1265,9 @@ Scenes.Miranda.HeyThereCatPorn = function() {
 						Text.Add("Repressing your gag reflex, you grab her ample butt and push yourself forward until your nose rests in her furry crotch. Miranda cries out loudly in pleasure - probably alerting the few patrons not already aware of what was going on - and grabs the back of your head, holding you down. In short rapid strokes she fucks your ragged throat mercilessly, until she finally hits her peak.", parse);
 						Text.NL();
 						Text.Add("As her huge member begins to twitch violently in your mouth, you can feel the thick semen being deposited right into your stomach, load after hot load. Just before you black out from a lack of air, Miranda pulls out enough for you to breathe. You cough as a few more spurts hit your face, but you feel proud that most of her large load now resides in your slightly distended stomach.", parse);
+						
+						var mCum = miranda.OrgasmCum();
+						
 						Text.NL();
 						Text.Add("You eagerly lick your lips and gives the cock before you a few more slurps, cleaning it up. Miranda smiles down on you with a very satisfied look on her face as you greedily swallow every ounce of thick sperm you can get your lips on. As you climb up from your kneeling position, you realize that the room is silent and everyone's eyes are honed at the two of you. Quite a few of the patrons are openly stroking themselves.", parse);
 						Text.NL();
@@ -1803,6 +1807,7 @@ Scenes.Miranda.JustOneMore = function() {
 							Text.NL();
 
 							var cum = player.OrgasmCum();
+							var mCum = miranda.OrgasmCum();
 
 							Text.Add("<i>”That was great, hun...”</i> she whispers into your ear. <i>”You can do that to me again aaanytime you like.”</i> Miranda sways off into the night, leaving you alone.", parse);
 							Text.Flush();
@@ -1865,6 +1870,9 @@ Scenes.Miranda.JustOneMore = function() {
 						Text.Add("Pretty soon you convulse in yet another intense orgasm, making you gasp as she continues to fuck you. You become aware that some of the bar patrons are peeking in through the open door, watching the two of you. Miranda notices them too and grins at them over your shoulder, as she pushes you so far down on her cock that her thick knot pops inside you.", parse);
 						Text.NL();
 						Text.Add("Your body rests limply against hers as she starts pumping you full of her seed, putting up a show for the audience. As you lean against her, totally exhausted, she whispers in your ear, <i>”Not bad for the first time, I think I’ve found myself a keeper!”</i> Once her knot has shrunk enough and you finally are able to separate, the two of you head out into the night, too tired to keep up the drinking game. Miranda has a thoughtful look on her face.", parse);
+						
+						var mCum = miranda.OrgasmCum();
+						
 						Text.NL();
 						Text.Add("<i>”Did you enjoy performing in front of an audience?”</i> she asks playfully. <i>”Maybe I shouldn't have been so greedy, and let them join in?”</i> She laughs loudly at your blushing face and saunters off into the night.", parse);
 						Text.NL();
@@ -1929,6 +1937,9 @@ Scenes.Miranda.JustOneMore = function() {
 						Text.Add("You incredulously realize that she somehow made it, all of her swollen knot is trapped inside your distended bowels, throbbing as it announces her coming orgasm. You try to pull away, but find it impossible, her thick bulge is trapping you and preventing you from moving even a fraction of an inch. The intense pressure causes your rectal muscles to convulse as yet another anal orgasm wrecks your body, the tightness pushing Miranda well past her own limits.", parse);
 						Text.NL();
 						Text.Add("<i>”FUUUUUUCK!!!”</i> she loudly cries out, as you feel wave after wave of potent cum fill your belly. The knot is preventing any sperm from escaping, leaving her immense load only one way to go. After what feels like an eternity, she is finally spent. Your belly is stretched beyond what you thought possible, making you look heavily pregnant. Miranda collapses on top of you, the weight of her breasts pressing down on your back.", parse);
+						
+						var mCum = miranda.OrgasmCum();
+						
 						Text.NL();
 						Text.Add("This, of course, is the time that the bartender decides to check in on you. He surveys the scene clinically: you lie pressed on the floor with your butt sticking out, completely filled by the hermaphrodite dog’s knotted cock. Trickles of the guardswoman’s cum somehow flows past the knot and join the pool of your fluids on the floor. The tall equine sighs and mutters that this will be a mess to clean up, shaking his head as he walks out. The flushed and tired Miranda sits up and pulls you into her lap.", parse);
 						Text.NL();
@@ -2333,6 +2344,9 @@ Scenes.Miranda.DatingFirstCity = function() {
 					Text.Add("<i>”Feel how it throbs?”</i> the guardswoman moans softly, breathing heavily. <i>”I’ve got a big fat load stored up in these balls of mine, bet you want it, don’t you?”</i> She’s not lying. Her large sack is hot to the touch, her cream ready to shoot down your throat. Her shaft is rock hard, twitching as she approaches the height of pleasure. <i>”...Too bad for you!”</i>", parse);
 					Text.NL();
 					Text.Add("Before you have time to react, Miranda withdraws from your mouth, grabbing the back of your head with one hand and jerking herself off with the other. The first blast splashes onto your [tongueDesc], but the following stream is less discriminatory, drenching your face and splattering on your [breastDesc]. The herm rubs the last drops of cum off the tip of her cock on your cheek, before hastily pulling up her pants again.", parse);
+					
+					var mCum = miranda.OrgasmCum();
+					
 					Text.NL();
 					Text.Add("Huffing slightly, Miranda pulls you out of the alleyway, smiling disarmingly at the city official as she drags you over to the booth. The guardswoman talks as if nothing is amiss, explaining that you need a visa and that she’ll vouch for you. When the flustered administrator starts to protest, she shows her identification as a member of the city watch, which speeds up the process considerably. From the burning in your cheeks, you are probably wearing a blush at least as deep as the clerk - though you doubt he can see it through the thick layer of cum dripping down your face.", parse);
 					Text.NL();
@@ -3040,11 +3054,12 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 			Text.Add("<i>”Not too bad, I suppose,”</i> Miranda pants, trying to get her breath back. <i>”Not as good as I would do it, obviously.”</i> That sounds like a challenge.", parse);
 		Text.NL();
 		
+		var mCum = miranda.OrgasmCum();
+		
 		player.subDom.IncreaseStat(75, 1);
 		miranda.subDom.DecreaseStat(-75, 3);
 		miranda.relation.IncreaseStat(40, 2);
 		player.AddLustFraction(-1);
-		miranda.AddLustFraction(-1);
 		
 		Scenes.Miranda.HomeDommySexLeavingFuckedHer();
 	});
@@ -3328,6 +3343,8 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 		Text.Add("You happily give yourself over to the sensations, content to ride the dober-morph for all you are worth. You can feel your[second] orgasm fast approaching, and from the growls and whimpers echoing from below you, Miranda herself can't be far off. As you sink down yet again, you feel her hugely swollen knot grinding against your anal ring...", parse);
 		Text.Flush();
 		
+		var mCum = miranda.OrgasmCum();
+		
 		//[TakeKnot] [SkipKnot]
 		var options = new Array();
 		options.push({ nameStr : "TakeKnot",
@@ -3589,6 +3606,9 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 	
 	parse["artificial"] = pCock.isStrapon ? " artificial" : "";
 	var scenes = new EncounterTable();
+
+	var mCum = miranda.OrgasmCum();
+	
 	scenes.AddEnc(function() {
 		Text.Add("Just where you want her. Grinning widely, you slow down a bit, retaining the depth of your thrusts but keeping the dog-morph just a hairs-breadth away from the orgasm she so desperately craves. When Miranda realizes what you are up to, she growls, cursing you. Her complaints gradually turn to whines and pleas and finally into full on begging as you break down her will with your pistoning [cockDesc].", parse);
 		Text.NL();
@@ -4262,7 +4282,10 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 		Text.Add("et after jet of doggy-herm spunk splatters on the cushions below.", parse);
 		Text.NL();
 		Text.Add("Miranda's orgasm is something you barely notice, caught up in the throes of your own as you are. Sealed together by your knot as you are, your seed penetrates deeply inside her, flooding towards her very womb without mercy. ", parse);
+
+		var mCum = miranda.OrgasmCum();
 		var cum = player.OrgasmCum();
+
 		if(cum > 6) {
 			Text.Add("A veritable tidal wave of semen crashes upon Miranda's defenseless womb, her stomach inflating like a balloon as you just keep on pouring spunk inside of her. Down and down it grows until it brushes the floor, the herm so jammed full of your semen that even your knot can't keep it all inside, rivulets of seed leaking down her thighs wherever they manage to force their way out.", parse);
 		}
@@ -4303,6 +4326,8 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 		Text.NL();
 		Text.Add("The sound of her howling in pleasure and of her semen spattering across the cushions below, the scent of sex in your nostrils, the feel of her writhing beneath you... it's too much for you to hold back any more. Throwing your own head back, you cry out as your own climax washes through you.", parse);
 		
+		var mCum = miranda.OrgasmCum();
+
 		var cum = p1Cock.isStrapon ? -1 : player.OrgasmCum();
 		
 		if(!p1Cock.isStrapon) {
@@ -4584,7 +4609,7 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 				else if(target == Target.Cunn) {
 					Text.Add("Throughout her own climax, Miranda's tongue keeps slurping and squelching through your petals, lapping greedily for your feminine nectar, her fuzzy chin rubbing against your [clitDesc] seemingly by accident. Your hips twitch and sway, but she simply won't relent in her assault, and inevitably your womanhood releases its juices right into the morph's hungry jaws.", parse);
 					
-					var cum = player.OrgasmCum();
+					var cum = player.OrgasmCum(); // ?
 				}
 				else {
 					Text.Add("Miranda lewdly slurps and laps at your back passage, making you shudder and wriggle even through her own climax. As her cock slides limply back into her sheath, she continues her assault, but evidently you've worn her out, as her licks grow slower and slower until she stops entirely. As she lays back and pants, you're left glowing pleasantly in arousal.", parse);
