@@ -335,7 +335,7 @@ Scenes.Dreams.House = function(ravenTrigger) {
 		}
 	}
 	else {
-		var person = party.GetRandom();
+		var person = party.GetRandom(true);
 		parse["person"]  = person.name;
 		parse["pheshe"]  = person.heshe();
 		parse["phisher"] = person.hisher();
@@ -843,7 +843,7 @@ Scenes.Dreams.BlowjobRec = function(ravenTrigger) {
 		Text.Add("Uru’s long flexible tongue wraps itself around your cock, a small smile playing on the demon’s full lips. The succubus is, as always, a master fellatrix, sucking your shaft greedily, trying to coax out your seed. Somewhere in the back of your head, a small voice is trying to scream something at you, but it feels so good… You shake away the uneasy feeling.", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		var p1 = party.GetRandom();
+		var p1 = party.GetRandom(true);
 		parse["Name"]   = p1.name;
 		parse["HeShe"]  = p1.HeShe();
 		parse["heshe"]  = p1.heshe();
