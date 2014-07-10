@@ -4131,6 +4131,7 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 	var parse = {
 		playername     : player.name,
 		lordLady       : player.mfTrue("lord", "lady"),
+		masterMistress : player.mfTrue("master", "mistress"),
 		hairDesc       : function() { return player.Hair().Short(); },
 		earDesc        : function() { return player.EarDesc(); },
 		armorDesc      : function() { return player.ArmorDesc(); },
@@ -4271,7 +4272,7 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 		if(dom > 25) {
 			Text.Add("As you stroke and hump, you tell Miranda that she belongs to you; she might be top dog among the guards, but to you, she's just your bitch. Now she's going to be a good little doggie and cum for you, nice and messy.", parse);
 			Text.NL();
-			Text.Add("A growl of pleasure rumbles out of Miranda's throat, her back arching under you. <i>”Nnng... y-yes, yes master!”</i> she barks gleefully in response.", parse);
+			Text.Add("A growl of pleasure rumbles out of Miranda's throat, her back arching under you. <i>”Nnng... y-yes, yes [masterMistress]!”</i> she barks gleefully in response.", parse);
 		}
 		else if(dom > -25) {
 			Text.Add("And to think, she always goes on about being top dog. Well, it looks like there's a new top dog in town, you comment, even as you continue your ministrations.", parse);
