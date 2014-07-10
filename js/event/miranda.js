@@ -1801,6 +1801,9 @@ Scenes.Miranda.JustOneMore = function() {
 							Text.NL();
 							Text.Add("As the both of you ride out your climax, the spectators chuckle to each other and head to another room. They leave the door open for all to see, as you rest in each others arms in an expanding pool of mixed love juices. After resting up a bit, the two of you decide that it is probably best to leave for today. As you walk out into the night, Miranda gives you an peck on the cheek. She seems a bit more demure than her usual abrasive self.", parse);
 							Text.NL();
+
+							var cum = player.OrgasmCum();
+
 							Text.Add("<i>”That was great, hun...”</i> she whispers into your ear. <i>”You can do that to me again aaanytime you like.”</i> Miranda sways off into the night, leaving you alone.", parse);
 							Text.Flush();
 							
@@ -1849,8 +1852,11 @@ Scenes.Miranda.JustOneMore = function() {
 							Text.Add(" Your breasts heave as you bounce up and down, the pleasure making you moan like crazy.", parse);
 						if(player.FirstVag())
 							Text.Add(" Juices flow freely from your ravaged cunt, clinging to the sides of her dick as you ride her.", parse);
-						if(player.FirstCock())
+						if(player.FirstCock()){
 							Text.Add(" Your cock[s] convulse[notS] and start[notS] pumping semen all over your lover.", parse);
+							
+							var cum = player.OrgasmCum();
+						}
 						Text.Add(" She grins as you cum, rocking on top of her.", parse);
 						Text.NL();
 						parse["butt"] = player.FirstCock() ? ", grinding against your prostate" : "";
@@ -1908,8 +1914,11 @@ Scenes.Miranda.JustOneMore = function() {
 						Text.Add("After what feels like hours of intense fucking, you can't take it any more.", parse);
 						if(player.FirstVag())
 							Text.Add(" Your cunt sprays juices all over the floor as you collapse, only held up by the hermaphrodite’s strong hands.", parse);
-						if(player.FirstCock())
+						if(player.FirstCock()){
 							Text.Add(" Your cock[s] violently erupt[notS] on the hard wooden floor, making you cry out in ecstasy.", parse);
+
+							var cum = player.OrgasmCum();
+						}
 						Text.NL();
 						parse["butt"] = player.FirstCock() ? " by repeatedly hitting your prostate" : "";
 						Text.Add("Miranda is far from done however, and continues to ram away at your poor abused rectum, quickly building up another anal orgasm for you[butt]. The massive rod moves more easily now, slick with her precum. The constant stretching pain in your butt does not recede, however, and you realize that she is forcing more and more of her knot into you with every push.", parse);
