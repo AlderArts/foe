@@ -5867,7 +5867,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 					else {
 						parse["notS"] = player.NumCocks() > 1 ? "" : "s";
 						Text.Add("Your [multiCockDesc] erupt[notS] all over the moaning elf, painting [himher] in strands of sticky white cum.", parse);
-						if(player.CumOutput() > 3)
+						if(cum > 3)
 							Text.Add(" From the looks of it, it'll take more than a little effort to get [himher] cleaned up again.", parse);	
 					}
 				}
@@ -5876,7 +5876,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 				
 				var cum = kiakai.OrgasmCum();
 				
-				parse["considerable"] = kiakai.CumOutput() > 3 ? " considerable" : "";
+				parse["considerable"] = cum > 3 ? " considerable" : "";
 				if(kiakai.FirstCock()) {
 					Text.Add(" You can feel [hisher] [kCockDesc] throb inside you, depositing its[considerable] load in your bowels. Within seconds, your colon is sticky with hot spunk.", parse);
 					if(cum > 3) {
@@ -5992,7 +5992,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 					Text.Add("Taking one of the elf’s huge breasts in hand, you guide one of [hisher] perky [kNipsDesc] to your mouth, nibbling and sucking on it tenderly.", parse);
 					Text.NL();
 				}
-				Text.Add("<i>”I... I can feel it, it is close!”</i> [name] moans, jacking up [hisher] pace even more. With one final thrust, the elf cries out as [heshe] rams [hisher] [kCockDesc] {as deeply as possible/all the way} into your bowels. Jointly, you cry out as orgasm hits.", parse);
+				Text.Add("<i>”I... I can feel it, it is close!”</i> [name] moans, jacking up [hisher] pace even more. With one final thrust, the elf cries out as [heshe] rams [hisher] [kCockDesc] [len] into your bowels. Jointly, you cry out as orgasm hits.", parse);
 			}, 1.0, function() { return true; });
 			scenes.Get();
 			Text.NL();
