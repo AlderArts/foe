@@ -181,8 +181,32 @@ Body.prototype.SetRace = function(race) {
 	// Skip backSlots array
 	
 	// Genetalia
-	for(var i=0,j=this.cock.length; i<j; i++)
+	for(var i=0,j=this.cock.length; i<j; i++) {
+		switch(race) {
+			case Race.horse:
+			case Race.cow:
+			case Race.sheep:
+			case Race.goat:
+			case Race.cat:
+			case Race.dog:
+			case Race.fox:
+			case Race.wolf:
+			case Race.rabbit:
+			case Race.ferret:
+				this.cock[i].sheath = true;
+			default: break;
+		}
+		
+		switch(race) {
+			case Race.dog:
+			case Race.fox:
+			case Race.wolf:
+				this.cock[i].knot = true;
+			default: break;
+		}
+		
 		this.cock[i].race = race;
+	}
 	this.balls.race = race;
 	for(var i=0,j=this.vagina.length; i<j; i++)
 		this.vagina[i].race = race;
