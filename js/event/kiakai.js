@@ -6017,7 +6017,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 			var cum = player.OrgasmCum();
 			
 			if(player.FirstCock()) {
-				parse["mess"] = kiakai.NumCocks() > 2 ? "adding to the" : "creating a";
+				parse["mess"] = kiakai.NumCocks() > 1 ? "adding to the" : "creating a";
 				Text.Add(" [name]’s [kCockDesc] is rougly jammed against your prostate, pushing all the right buttons. You blow your load, [mess] sticky mess on both of your bodies.", parse);
 				if(cum > 3)
 					Text.Add(" One particularly strong ejaculation hits [name] right in the jaw, spraying into [hisher] hair. The elf blinks in sluggish surprise, wiping the cum dripping down [hisher] face from [hisher] eyes.", parse);
