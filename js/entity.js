@@ -1531,6 +1531,11 @@ Entity.prototype.HasSkin = function() {
 Entity.prototype.HasScales = function() {
 	return this.body.HasScales();
 }
+
+Entity.prototype.RestoreCum = function(quantity) {
+	quantity = quantity || 1;
+	return balls.cum.IncreaseStat(balls.cumCap.Get(), quantity);
+}
 // TODO
 Entity.prototype.CumOutput = function(mult) {
 	mult = mult || 1;

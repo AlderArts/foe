@@ -371,6 +371,23 @@ Items.CorruptSeed.price = 0;
 Items.CorruptSeed.Short = function() { return "Corrupted seed"; }
 Items.CorruptSeed.Long = function() { return "The semen of some corrupted creature, stored in a vial."; }
 
+Items.DemonSeed = new Item("demon4", "Demon seed");
+Items.DemonSeed.price = 0;
+Items.DemonSeed.Short = function() { return "Demonic seed"; }
+Items.DemonSeed.Long = function() { return "A vial filled with demon cum."; }
+Items.Hummus.Use = function(target) {
+	target.AddLustFraction(0.1);
+	target.RestoreCum(2);
+	var parse = {
+		name: target.NameDesc(),
+		s: target == player ? "" : "s",
+		hisher : target.hisher()
+	};
+	Text.AddOutput("[name] swallow[s] a vial of demonic seed. Lust courses through [hisher] veins.", parse);
+	Text.Newline();
+	return {consume: true};
+}
+
 Items.Infernum = new TFItem("demon0", "Infernum");
 Items.Infernum.price = 15;
 Items.Infernum.Short = function() { return "A bottle of Infernum"; }
