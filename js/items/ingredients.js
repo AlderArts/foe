@@ -375,7 +375,7 @@ Items.DemonSeed = new Item("demon4", "Demon seed");
 Items.DemonSeed.price = 0;
 Items.DemonSeed.Short = function() { return "Demonic seed"; }
 Items.DemonSeed.Long = function() { return "A vial filled with demon cum."; }
-Items.Hummus.Use = function(target) {
+Items.DemonSeed.Use = function(target) {
 	target.AddLustFraction(0.1);
 	target.RestoreCum(2);
 	var parse = {

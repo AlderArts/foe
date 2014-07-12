@@ -54,7 +54,7 @@ Scorpion.prototype.PoisonResist = function() {
 
 Scorpion.prototype.DropTable = function() {
 	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: Items.Stinger });
+	if(Math.random() < 0.05) drops.push({ it: Items.Scorpius });
 	if(Math.random() < 0.5)  drops.push({ it: Items.Stinger });
 	if(Math.random() < 0.5)  drops.push({ it: Items.SVenom });
 	if(Math.random() < 0.5)  drops.push({ it: Items.SClaw });
