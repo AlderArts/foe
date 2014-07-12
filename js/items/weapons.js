@@ -45,6 +45,17 @@ Items.Weapons.GreatSword.effect.atkMod = 1;
 Items.Weapons.GreatSword.effect.strength = 4;
 Items.Weapons.GreatSword.effect.apSlash = 1;
 
+Items.Weapons.Rapier = new Item("swrd3", "Rapier");
+Items.Weapons.Rapier.price = 60;
+Items.Weapons.Rapier.sDesc = function() { return "rapier"; }
+Items.Weapons.Rapier.lDesc = function() { return "a rapier"; }
+Items.Weapons.Rapier.Short = function() { return "Rapier"; }
+Items.Weapons.Rapier.Long = function() { return "A sharp rapier."; }
+Items.Weapons.Rapier.EquipType = ItemType.Weapon;
+Items.Weapons.Rapier.effect.atkMod    = 0.1;
+Items.Weapons.Rapier.effect.dexterity = 2;
+Items.Weapons.Rapier.effect.apPierce  = 1;
+
 Items.Weapons.WoodenStaff = new Item("staff0", "W.Staff");
 Items.Weapons.WoodenStaff.price = 30;
 Items.Weapons.WoodenStaff.sDesc = function() { return "wooden staff"; }
