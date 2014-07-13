@@ -17,7 +17,7 @@ Stat.prototype.GrowthRank = function() { return Math.floor((this.growth * 10) - 
 // Changes _ONE_ stat, closing in on the ideal
 // Cap the change to a maximum value
 // Returns the applied difference, unless the diff is zero
-Stat.prototype.IdealStat = function(ideal, maxChange) {
+Stat.prototype.IdealStat = function(ideal, maxChange, fraction) {
 	maxChange = maxChange || 1;
 	if(ideal) {
 		var diff = ideal - this.base;
@@ -34,14 +34,16 @@ Stat.prototype.IdealStat = function(ideal, maxChange) {
 				Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base, "red"));
 			Text.Newline();
 		}
-		
-		return Math.floor(this.base) - Math.floor(old);
+		if(fraction)
+			return this.base - old;
+		else
+			return Math.floor(this.base) - Math.floor(old);
 	}
 }
 // Changes _ONE_ stat, closing in on the ideal (ONLY INC)
 // Cap the change to a maximum value
 // Returns the applied difference (positive), unless the diff is zero
-Stat.prototype.IncreaseStat = function(ideal, maxChange) {
+Stat.prototype.IncreaseStat = function(ideal, maxChange, fraction) {
 	maxChange = maxChange || 1;
 	if(ideal) {
 		var diff = ideal - this.base;
@@ -55,14 +57,16 @@ Stat.prototype.IncreaseStat = function(ideal, maxChange) {
 			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base, "blue"));
 			Text.Newline();
 		}
-		
-		return Math.floor(this.base) - Math.floor(old);
+		if(fraction)
+			return this.base - old;
+		else
+			return Math.floor(this.base) - Math.floor(old);
 	}
 }
 // Changes _ONE_ stat, closing in on the ideal (ONLY DEC)
 // Cap the change to a maximum value
 // Returns the applied difference (positive), unless the diff is zero
-Stat.prototype.DecreaseStat = function(ideal, maxChange) {
+Stat.prototype.DecreaseStat = function(ideal, maxChange, fraction) {
 	maxChange = maxChange || 1;
 	if(ideal) {
 		var diff = this.base - ideal;
@@ -76,8 +80,10 @@ Stat.prototype.DecreaseStat = function(ideal, maxChange) {
 			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base, "red"));
 			Text.Newline();
 		}
-		
-		return Math.floor(this.base) - Math.floor(old);
+		if(fraction)
+			return this.base - old;
+		else
+			return Math.floor(this.base) - Math.floor(old);
 	}
 }
 

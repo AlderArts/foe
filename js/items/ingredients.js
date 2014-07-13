@@ -533,9 +533,102 @@ Items.Virilium.PushEffect(TF.ItemEffects.IncLib, {odds: 0.3, ideal: 40, max: 2})
 Items.Virilium.PushEffect(TF.ItemEffects.IncCha, {odds: 0.2, ideal: 40, max: 2});
 Items.Virilium.PushEffect(TF.ItemEffects.SetBalls, {odds: 0.1, ideal: 2, count: 2});
 Items.Virilium.PushEffect(function(target) {
+	var parse = {
+		name  : target.nameDesc(),
+		heshe : target.heshe(),
+		is    : target.is()
+	};
 	target.AddLustFraction(0.5);
 	target.RestoreCum(10);
+	
+	Text.Add("A shiver runs through [name] as [heshe] [is] hit by a wave of lust!", parse);
+	Text.NL();
+});
+Items.Virilium.PushEffect(function(target) {
+	var parse = {
+		Poss: target.Possessive(),
+		ballsDesc : function() { return target.BallsDesc(); }
+	};
+	if(target.HasBalls() && Math.random() < 0.4) {
+		var res = target.Balls().size.IncreaseStat(10, 1);
+		if(res > 0) {
+			Text.Add("[Poss] balls have grown in size to [ballsDesc]!", parse);
+			Text.NL();
+		}
+	}
+	if(Math.random() < 0.4) {
+		var res = target.Balls().cumCap.IncreaseStat(30, 1);
+		if(res > 0) {
+			Text.Add("[Poss] balls churn as they adjust to accomodate more cum.", parse);
+			Text.NL();
+		}
+	}
+	if(Math.random() < 0.3) {
+		var res = target.Balls().cumProduction.IncreaseStat(3, .5, true);
+		if(res > 0) {
+			Text.Add("[Poss] balls churn as they become able to produce more cum!", parse);
+			Text.NL();
+		}
+	}
+	// TODO: parse
+	if(Math.random() < 0.2) {
+		var res = target.Balls().fertility.IncreaseStat(.7, .1, true);
+	}
+	Text.Flush();
+});
+// TODO: parse
+Items.Virilium.PushEffect(function(target) {
+	var parse = {};
+	if(Math.random() < 0.1) {
+		var res = target.body.muscleTone.IncreaseStat(.7, .1, true);
+	}
+	if(Math.random() < 0.1) {
+		var res = target.body.femininity.DecreaseStat(-1, .1, true);
+	}
+	Text.Flush();
 });
 
 
 
+Items.Fertilium = new TFItem("sex1", "Fertilium");
+Items.Fertilium.price = 100;
+Items.Fertilium.Short = function() { return "A bottle of Fertilium"; }
+Items.Fertilium.Long = function() { return "A bottle of fertility-enhancing Fertilium."; }
+Items.Fertilium.Recipe = [{it: Items.Felinix}, {it: Items.Leporine}, {it: Items.Bovia}];
+// Effects
+Items.Fertilium.PushEffect(TF.ItemEffects.IncLib, {odds: 0.3, ideal: 40, max: 2});
+Items.Fertilium.PushEffect(TF.ItemEffects.IncCha, {odds: 0.2, ideal: 40, max: 2});
+Items.Fertilium.PushEffect(TF.ItemEffects.RemBalls, {odds: 0.1, ideal: 0, count: 2});
+Items.Fertilium.PushEffect(function(target) {
+	var parse = {
+		name  : target.nameDesc(),
+		heshe : target.heshe(),
+		is    : target.is()
+	};
+	target.AddLustFraction(0.7);
+	
+	Text.Add("A shiver runs through [name] as [heshe] [is] hit by a wave of lust!", parse);
+	Text.NL();
+});
+// TODO: parse
+Items.Fertilium.PushEffect(function(target) {
+	var parse = {};
+	if(Math.random() < 0.15) {
+		var res = target.pregHandler.gestationRate.IncreaseStat(2, .2, true);
+	}
+	if(Math.random() < 0.2) {
+		var res = target.pregHandler.fertility.IncreaseStat(.7, .1, true);
+	}
+	Text.Flush();
+});
+// TODO: parse
+Items.Fertilium.PushEffect(function(target) {
+	var parse = {};
+	if(Math.random() < 0.1) {
+		var res = target.body.muscleTone.DecreaseStat(.0, .1, true);
+	}
+	if(Math.random() < 0.1) {
+		var res = target.body.femininity.IncreaseStat(1, .1, true);
+	}
+	Text.Flush();
+});
