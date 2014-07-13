@@ -184,6 +184,14 @@ Scenes.Rosalin.Interact = function() {
 			}, enabled : true
 		});
 	}
+	/* TODO Quite bork atm
+	options.push({ nameStr : "Sex",
+		func : function() {
+			Scenes.Rosalin.SexPrompt(RosalinSexState.Regular);
+		}, enabled : true
+	});
+	*/
+	
 	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
 }
 
