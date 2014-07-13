@@ -183,6 +183,8 @@ function Entity() {
 	
 	this.drunkLevel   = 0.0;
 	
+	this.pregHandler  = new PregnancyHandler(this);
+	
 	// Set hp and sp to full, clear lust to min level
 	this.Equip();
 	this.SetLevelBonus();
@@ -1120,9 +1122,14 @@ Entity.prototype.AccumulateMilkOverTime = function(hours) {
 	
 	this.body.milk.IncreaseStat(this.body.milkCap.Get(), inc);
 }
-//TODO
+
 Entity.prototype.PregnancyOverTime = function(hours) {
-	
+	this.pregHandler.Update(hours);
+}
+
+Entity.prototype.PregnancyTrigger = function(womb, slot) {
+	//TODO: Implement for each entity. Default to do nothing.
+	//Optional slot: PregnancyHandler.Slot
 }
 
 DrunkLevel = {

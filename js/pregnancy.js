@@ -132,11 +132,13 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 		return false;
 }
 
-PregnancyHandler.prototype.Update = function(step) {
-	var hours = step.ToHours();
+PregnancyHandler.prototype.Update = function(hours) {
+	hours = hours || 0;
 	hours *= this.gestationRate;
 	
-	var vags = this.entity.AllVags();
+	var ent = this.entity;
+	
+	var vags = ent.AllVags();
 	for(var i = 0; i < vags.length; ++i) {
 		var womb = vags[i].womb;
 		if(womb.pregnant && !womb.triggered) {
@@ -146,7 +148,11 @@ PregnancyHandler.prototype.Update = function(step) {
 			if(womb.hoursToBirth <= 0) {
 				womb.triggered = true;
 				
-				//TODO: trigger
+				// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
+				Gui.Callstack.unshift(function() {
+					womb.pregnant = false;
+					ent.PregnancyTrigger(womb, PregnancyHandler.Slot.Vag);
+				});
 			}
 		}
 	}
@@ -158,7 +164,11 @@ PregnancyHandler.prototype.Update = function(step) {
 		if(womb.hoursToBirth <= 0) {
 			womb.triggered = true;
 			
-			//TODO: trigger
+			// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
+			Gui.Callstack.unshift(function() {
+				womb.pregnant = false;
+				ent.PregnancyTrigger(womb, PregnancyHandler.Slot.Butt);
+			});
 		}
 	}
 }
