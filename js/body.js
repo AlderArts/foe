@@ -2154,8 +2154,8 @@ Body.prototype.HipsDesc = function() {
 }
 
 
-// TODO: Preggo belly
-Body.prototype.StomachDesc = function() {
+// TODO: Preggo belly (use bellysize)
+Body.prototype.StomachDesc = function(bellysize) {
 	var nouns = [];
 	nouns.push("belly");
 	nouns.push("stomach");

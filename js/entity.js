@@ -1569,9 +1569,9 @@ Entity.prototype.OrgasmCum = function(mult) {
 	}
 	return cumQ;
 }
-// TODO preggo (wombs)
 Entity.prototype.StomachDesc = function() {
-	return this.body.StomachDesc();
+	var bellysize = this.pregHandler.BellySize();
+	return this.body.StomachDesc(bellysize);
 }
 Entity.prototype.HipsDesc = function() {
 	return this.body.HipsDesc();
@@ -1600,9 +1600,6 @@ Entity.prototype.FeetDesc = function() {
 }
 Entity.prototype.FootDesc = function() {
 	return this.body.FootDesc();
-}
-Entity.prototype.StomachDesc = function() {
-	return this.body.StomachDesc();
 }
 Entity.prototype.Appendages = function() {
 	return this.body.head.appendages;
