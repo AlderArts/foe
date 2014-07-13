@@ -1557,6 +1557,7 @@ Entity.prototype.HasScales = function() {
 
 Entity.prototype.RestoreCum = function(quantity) {
 	quantity = quantity || 1;
+	var balls = this.Balls();
 	return balls.cum.IncreaseStat(balls.cumCap.Get(), quantity);
 }
 // TODO

@@ -522,6 +522,9 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		party.inventory.AddItem(Items.SClaw);
 		party.inventory.AddItem(Items.Scorpius);
 		
+		party.inventory.AddItem(Items.Virilium);
+		party.inventory.AddItem(Items.Fertilium);
+		
 		party.inventory.AddItem(Items.Toys.SmallDildo);
 		party.inventory.AddItem(Items.Toys.MediumDildo);
 		party.inventory.AddItem(Items.Toys.LargeDildo);
