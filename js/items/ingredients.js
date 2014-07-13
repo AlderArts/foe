@@ -520,3 +520,22 @@ Items.Scorpius.PushEffect(TF.ItemEffects.RemWings, {odds: 0.6, count: 2});
 Items.Scorpius.PushEffect(TF.ItemEffects.IncDex, {odds: 0.4, ideal: 35, max: 1});
 Items.Scorpius.PushEffect(TF.ItemEffects.IncInt, {odds: 0.4, ideal: 30, max: 1});
 Items.Scorpius.PushEffect(TF.ItemEffects.DecStr, {odds: 0.2, ideal: 20, max: 1});
+
+
+
+Items.Virilium = new TFItem("sex0", "Virilium");
+Items.Virilium.price = 100;
+Items.Virilium.Short = function() { return "A bottle of Virilium"; }
+Items.Virilium.Long = function() { return "A bottle of potency-enhancing Virilium."; }
+Items.Virilium.Recipe = [{it: Items.Equinium}, {it: Items.Leporine}, {it: Items.Lobos}];
+// Effects
+Items.Virilium.PushEffect(TF.ItemEffects.IncLib, {odds: 0.3, ideal: 40, max: 2});
+Items.Virilium.PushEffect(TF.ItemEffects.IncCha, {odds: 0.2, ideal: 40, max: 2});
+Items.Virilium.PushEffect(TF.ItemEffects.SetBalls, {odds: 0.1, ideal: 2, count: 2});
+Items.Virilium.PushEffect(function(target) {
+	target.AddLustFraction(0.5);
+	target.RestoreCum(10);
+});
+
+
+

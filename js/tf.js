@@ -554,7 +554,7 @@ TF.ItemEffects.RemWings = function(target, opts) {
 TF.ItemEffects.SetBalls = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
 	var parse = { name: target.NameDesc(), s: target == player ? "" : "s", count: Text.NumToText(opts.count), ballsDesc: function() { return target.BallsDesc(); } };
-	var odds = opts.odds || 1;
+	var odds = opts.odds || 2;
 	if(Math.random() < odds) {
 		changed = TF.SetBalls(target.body.balls, opts.ideal, opts.count);
 		switch(changed) {
