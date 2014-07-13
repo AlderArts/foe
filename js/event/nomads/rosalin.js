@@ -580,8 +580,11 @@ Scenes.Rosalin.FirstFuck = function() {
 	};
 	
 	var cocks         = player.CocksThatFit(rosalin.FirstVag());
-	parse.cockDesc    = function() { return cocks[0].Short(); };
-	parse.cockTipDesc = function() { return cocks[0].TipShort(); }
+	var p1Cock        = player.BiggestCock(cocks);
+	parse.cockDesc    = function() { return p1Cock.Short(); };
+	parse.cockTipDesc = function() { return p1Cock.TipShort(); }
+	cocks             = player.CocksThatFit(cale.Butt());
+	var p2Cock        = player.BiggestCock(cocks);
 	
 	world.TimeStep({minute: 45});
 	
@@ -601,7 +604,7 @@ Scenes.Rosalin.FirstFuck = function() {
 				Text.Newline();
 			}
 			Text.AddOutput("After properly lathering you up, the alchemist twirls around, rubbing her private parts against your [cockDesc], mewling needily. Not wanting to keep the lady waiting, you line up with her [rVagDesc], prying apart her soaked labia. ", parse);
-			if(cocks[0].length.Get() < 25)
+			if(p1Cock.length.Get() < 25)
 				Text.AddOutput("<i>\"J-just take me already! I <b>need</b> you inside me!\"</i> she moans.", parse);
 			else
 				Text.AddOutput("<i>\"So <b>big</b>,\"</i> she moans. <i>\"B-be gentle with me, okay?\"</i> Even in her aroused state, she looks slightly worried about your size.", parse);
@@ -609,8 +612,9 @@ Scenes.Rosalin.FirstFuck = function() {
 			Text.AddOutput("Feels like you're not the first one to pound this kitty; her [rVagDesc] easily give way to your [cockDesc], her walls clamping down around your length hungrily. <i>\"Yes! <b>Yes!</b> Breed me!\"</i> Rosalin eagerly begins to grind against your crotch, her soaking hole swallowing more and more of you with each thrust.", parse);
 			Text.Newline();
 			
-			player.Fuck(cocks[0], 4);
-			rosalin.FuckVag(rosalin.FirstVag(), cocks[0]);
+			Sex.Vaginal(player, rosalin);
+			player.Fuck(p1Cock, 4);
+			rosalin.FuckVag(rosalin.FirstVag(), p1Cock);
 			
 			Text.AddOutput("Not to be outdone, you match her thrust for thrust, grinding the poor girl into the ground. Mewling like the cat in heat that she is, Rosalin curls her toes in pleasure, her long sinuous tail sweeping back and forth erratically, softly bashing you.", parse);
 			Text.Newline();
@@ -629,7 +633,7 @@ Scenes.Rosalin.FirstFuck = function() {
 				player.AddLustFraction(-1);
 				Scenes.Rosalin.FirstFuckFollowup(0);
 			});
-		}, enabled : cocks[0],
+		}, enabled : p1Cock,
 		tooltip : "Why not rise to the occasion and fuck her until she calms down. You got there first, the wolf can just buzz off."
 	});
 	options.push({ nameStr : "Wolf",
@@ -682,7 +686,12 @@ Scenes.Rosalin.FirstFuck = function() {
 					options.push({ nameStr : "Oral",
 						func : function() {
 							Text.Clear();
-							parse.cockDesc = function() { return player.FirstCock().Short(); }
+							var p1Cock = player.BiggestCock();
+							
+							Sex.Blowjob(rosalin, player);
+							rosalin.FuckOral(rosalin.Mouth(), p1Cock, 2);
+							player.Fuck(p1Cock, 2);
+							
 							Text.AddOutput("Shrugging, you shuffle around so that you are straddling the alchemist's face, your back to the wolf. Without hesitation, she leans in, ", parse);
 							if(player.FirstCock())
 								Text.AddOutput("sucking your [cockDesc] into her eager mouth.", parse);
@@ -692,7 +701,7 @@ Scenes.Rosalin.FirstFuck = function() {
 								Text.AddOutput("her tongue going wild on your bare crotch.", parse);
 							
 							Text.AddOutput("Thoroughly enjoying yourself, you ride her face, rocking your hips back and forth.", parse);
-							if(player.FirstCock() && player.FirstCock().length.Get() > 20)
+							if(p1Cock && p1Cock.length.Get() > 20)
 								Text.AddOutput(" With little effort, your [cockDesc] is firmly lodged in her throat.", parse);
 							Text.Newline();
 							Text.AddOutput("The wolf-morph leans against you, playfully nibbling at one of your [earsDesc] before continuing his pounding. Before long, it seems like he's reaching his limit, howling as he unloads inside the catgirl. He reaches his arms around you, pulling you into a rough embrace while caressing your [breastDesc]. <i>\"Quite the little minx, isn't she?\"</i> he grunts, resting against your back as his knot swells, locking him inside the catgirl.", parse);
@@ -725,7 +734,7 @@ Scenes.Rosalin.FirstFuck = function() {
 						}, enabled : true,
 						tooltip : "Rosalin's mouth is still free."
 					});
-					if(cocks[0]) {
+					if(p2Cock) {
 						options.push({ nameStr : "Fuck him",
 							func : Scenes.Rosalin.FirstFuckPegWolf, enabled : true,
 							tooltip : "If you wait for him to knot inside her, there is not much the wolf can do to stop you..."
@@ -776,10 +785,14 @@ Scenes.Rosalin.FirstFuck = function() {
 					Text.AddOutput("Not even waiting to come himself, he pulls out of the alchemist as soon as she orgasms, allowing her to fall into a shuddering heap next to you. He grabs your [hipsDesc] with both hands, removing his finger from your [targetDesc], only to quickly replace it with the tapered tip of his large member. With a little coaxing on his part and a lot of moaning on yours, he forces the first few inches of his thick cock inside you.", parse);
 					Text.Newline();
 					
-					if(targetType == BodyPartType.ass)
+					if(targetType == BodyPartType.ass) {
+						Sex.Anal(cale, player);
 						player.FuckAnal(target, cale.FirstCock(), 3);
-					else
+					}
+					else {
+						Sex.Vaginal(cale, player);
 						player.FuckVag(target, cale.FirstCock(), 3);
+					}
 					
 					Text.AddOutput("<i>\"Ah... not bad,\"</i> the wolf sighs, repeatedly pounding your [targetDesc], trying to build a rhythm. Being so close to the edge already pushes his instincts to the forefront, and soon you feel an even thicker mass press against your [targetDesc]. <i>\"Gonna breed you, little slut,\"</i> he hisses into your ear as his knot forces it's way inside your [targetDesc]", parse);
 					if(targetType == BodyPartType.ass)
@@ -801,7 +814,7 @@ Scenes.Rosalin.FirstFuck = function() {
 				}, enabled : true,
 				tooltip : "Help Rosalin get the wolf ready, then allow him to have his way with both of you."
 			});
-			if(cocks[0]) {
+			if(p1Cock) {
 				options.push({ nameStr : "Fuck her",
 					func : function() {
 						player.subDom.IncreaseStat(100, 3);
@@ -810,10 +823,19 @@ Scenes.Rosalin.FirstFuck = function() {
 						Text.Newline();
 						Text.AddOutput("Quickly lining yourself up with Rosalin's [rVagDesc], you push yourself inside her slick, hot furnace. Not virgin-tight, though. <i>\"I'm afraid I'll have to disappoint you if you thought you got there first,\"</i> the wolf grunts, grinning back at you. Apparently the catgirl has been around.", parse);
 						Text.Newline();
+						
+						Sex.Vaginal(player, rosalin);
+						rosalin.FuckVag(rosalin.FirstVag(), p1Cock, 4);
+						player.Fuck(p1Cock, 4);
+						
 						Text.AddOutput("Well, no matter. Setting a rhythm, you begin to pound away at the moaning alchemist, gripping her butt tightly lest her legs give out. Spit-roasted, Rosalin soon reaches her first climax, her [rVagDesc] contracting and convulsing around your [cockDesc]. The pulsing member quickly deposits its load inside her.", parse);
 						Text.Newline();
+
+						var cum = player.OrgasmCum();
+
 						Text.AddOutput("Pulling out, you allow the wolf to have a go at her. ", parse);
-						if(player.CumOutput() > 3)
+						
+						if(cum > 3)
 							Text.AddOutput("He almost looks a bit intimidated, seeing your plentiful spunk leak out of Rosalin's [rVagDesc]. <i>\"Huh, you don't pull any punches, do you?\"</i>", parse);
 						else
 							Text.AddOutput("<i>\"Got her nice and slick for me eh?\"</i>", parse);
@@ -833,7 +855,8 @@ Scenes.Rosalin.FirstFuck = function() {
 								Text.Newline();
 								Text.AddOutput("Howling, the wolf-morph hunches over the alchemist, blasting her already sticky insides with even more seed. The whole gathering quickly deteriorates into a mess of cum and feminine fluids, as both you and Rosalin make your own contributions.", parse);
 
-								player.Fuck(cocks[0], 1);
+								Sex.Blowjob(rosalin, player);
+								player.Fuck(p1Cock, 1);
 								
 								Text.Newline();
 								Text.AddOutput("Exhausted, the three of you rest for a while, regaining your energy.", parse);
@@ -845,7 +868,7 @@ Scenes.Rosalin.FirstFuck = function() {
 							}, enabled : true,
 							tooltip : "Let Rosalin play with you while the morph finishes."
 						});
-						if(cocks[0]) {
+						if(p2Cock) {
 							options.push({ nameStr : "Fuck him",
 								func : Scenes.Rosalin.FirstFuckPegWolf, enabled : true,
 								tooltip : "If you wait for him to knot inside her, there's not much the wolf can do to stop you..."
@@ -889,8 +912,9 @@ Scenes.Rosalin.FirstFuckPegWolf = function() {
 	};
 	
 	var cocks         = player.CocksThatFit(cale.Butt());
-	parse.cockDesc    = function() { return cocks[0].Short(); };
-	parse.cockTipDesc = function() { return cocks[0].TipShort(); }
+	var p1Cock        = player.BiggestCock(cocks);
+	parse.cockDesc    = function() { return p1Cock.Short(); };
+	parse.cockTipDesc = function() { return p1Cock.TipShort(); }
 	
 	Text.AddOutput("A naughty plan formulating in your head, you settle back and wait, stroking yourself as the morph mercilessly fucks Rosalin. You can hardly wait to have your fun...", parse);
 	Text.Newline();
@@ -902,8 +926,8 @@ Scenes.Rosalin.FirstFuckPegWolf = function() {
 	Text.Newline();
 	
 	Sex.Anal(player, cale);
-	player.Fuck(cocks[0], 5);
-	cale.FuckAnal(cale.Butt(), cocks[0]);
+	player.Fuck(p1Cock, 5);
+	cale.FuckAnal(cale.Butt(), p1Cock);
 	
 	Text.AddOutput("<i>\"I... I'll get back at you for this!\"</i> The wolf's moans make the claim far from convincing, as he is clearly enjoying the treatment you are giving his [wAnusDesc]. Rosalin groans as your thrusts transfer to her. Still locked within her, the wolf collapses on top of the catgirl.", parse);
 	Text.Newline();

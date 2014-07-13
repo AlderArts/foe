@@ -17,6 +17,7 @@ function Cale(storage) {
 	this.FirstCock().thickness.base = 5;
 	
 	this.flags["Met"]     = Cale.Met.NotMet;
+	this.flags["Name"]    = 0;
 	this.flags["Sexed"]   = 0;
 	
 	this.SetLevelBonus();
@@ -45,8 +46,8 @@ Cale.prototype.FromStorage = function(storage) {
 	// Load flags
 	this.LoadFlags(storage);
 	
-	if(this.flags["Met"] != 0)
-		this.name = "Cale";
+	if(this.flags["Name"] != 0)
+		this.name = "Cale"; // TODO: Remember to set this in the code on first meeting
 }
 
 Cale.prototype.ToStorage = function() {
