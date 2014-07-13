@@ -352,6 +352,10 @@ Entity.prototype.SaveEquipment = function(storage) {
 	if(this.strapOn)      storage.toy    = this.strapOn.id;
 }
 
+Entity.prototype.SavePregnancy = function(storage) {
+	storage.preg = this.pregHandler.ToStorage();
+}
+
 // Convert to a format easy to write to/from memory
 Entity.prototype.ToStorage = function() {
 	var storage = {
@@ -364,6 +368,7 @@ Entity.prototype.ToStorage = function() {
 	this.SaveEffects(storage);
 	this.SaveJobs(storage);
 	this.SaveEquipment(storage);
+	this.SavePregnancy(storage);
 
 	this.SaveFlags(storage);
 	this.SaveSexStats(storage);
@@ -477,6 +482,10 @@ Entity.prototype.LoadSexFlags = function(storage) {
 		this.sex[flag] = parseInt(storage.sex[flag]);
 }
 
+Entity.prototype.LoadPregnancy = function(storage) {
+	this.pregHandler.FromStorage(storage.preg);
+}
+
 Entity.prototype.FromStorage = function(storage) {
 	this.LoadCombatStats(storage);
 	this.LoadPersonalityStats(storage);
@@ -484,6 +493,7 @@ Entity.prototype.FromStorage = function(storage) {
 	this.LoadEffects(storage);
 	this.LoadJobs(storage);
 	this.LoadEquipment(storage);
+	this.LoadPregnancy(storage);
 	
 	// Load flags
 	this.LoadFlags(storage);

@@ -51,6 +51,8 @@ PregnancyHandler.prototype.ToStorage = function() {
 }
 
 PregnancyHandler.prototype.FromStorage = function(storage) {
+	storage = storage || {};
+	
 	if(storage.gr) this.gestationRate  = parseFloat(storage.gr);
 	if(storage.f)  this.fertility.base = parseFloat(storage.f);
 	
