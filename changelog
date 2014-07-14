@@ -15,6 +15,7 @@ Version 0.3k
 * Terry and Miranda's stats/equipment and jobs are now saved.
 * Fixed various flags for lei and twins that were causing bugs or inconsistencies.
 * Poked around with the button art in order to make it more readable. In the end, I repainted them in a flatter, simpler style.
+* Added a few new items to debug.
 
 --------------------------------------------
              PREVIOUS VERSIONS
