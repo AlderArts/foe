@@ -2152,7 +2152,7 @@ Entity.prototype.PrintDescription = function() {
 	if(this.HasBalls())
 	{
 		if(cocks.length > 0 || vags.length > 0) {
-			Text.Add("Beneath [hisher] other genetalia, [ballsDesc] hang.", parse);
+			Text.Add("Beneath [hisher] other genitalia, [ballsDesc] hang.", parse);
 		}
 		else {
 			// Weird, no genetalia, just balls
