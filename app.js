@@ -9,7 +9,7 @@ VERSION_MINOR = 3;
 VERSION_SUBSCRIPT = "j2";
 VERSION_NAME = "Terry the thief: Saving fixed";
 
-SAVE_VERSION = 16;
+SAVE_VERSION = 17;
 // Save version 1: Initial
 // Save version 2: Added inventory
 // Save version 3: Fixed clitcock restoration + height, weigth
@@ -26,6 +26,7 @@ SAVE_VERSION = 16;
 // Save version 14: Miranda herm fix
 // Save version 15: Twins met flag
 // Save version 16: Jeanne met flag
+// Save version 17: Terry gender fix
 
 
 VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + VERSION_SUBSCRIPT + ": " + VERSION_NAME;

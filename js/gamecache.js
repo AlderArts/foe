@@ -304,6 +304,9 @@ CacheToGame = function() {
 		if(golem.flags["Met"] > Scenes.Golem.State.Lost) 
 			jeanne.flags["Met"] = 1;
 	}
+	if(gameCache.version < 17) {
+		terry.flags["PrefGender"] = Gender.male;
+	}
 	
 }
 
