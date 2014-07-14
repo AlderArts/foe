@@ -24,7 +24,7 @@ PregnancyHandler.prototype.ToStorage = function() {
 	
 	var womb = [];
 	
-	var vags = entity.AllVags();
+	var vags = this.entity.AllVags();
 	for(var i = 0; i < vags.length; ++i) {
 		var w = vags[i].womb;
 		if(w && w.pregnant) {
@@ -35,7 +35,7 @@ PregnancyHandler.prototype.ToStorage = function() {
 			});
 		}
 	}
-	var w = entity.Butt().womb;
+	var w = this.entity.Butt().womb;
 	if(w && w.pregnant) {
 		womb.push({
 			slot : PregnancyHandler.Slot.Butt,
@@ -57,7 +57,7 @@ PregnancyHandler.prototype.FromStorage = function(storage) {
 	if(storage.f)  this.fertility.base = parseFloat(storage.f);
 	
 	if(storage.womb) {
-		var vags = entity.AllVags();
+		var vags = this.entity.AllVags();
 		
 		for(var i = 0; i < storage.womb.length; ++i) {
 			var w    = storage.womb[i];
@@ -69,7 +69,7 @@ PregnancyHandler.prototype.FromStorage = function(storage) {
 					wPtr = vags[idx];
 			}
 			else if(slot == PregnancyHandler.Slot.Butt)
-				wPtr = entity.Butt().womb;
+				wPtr = this.entity.Butt().womb;
 			
 			if(wPtr) {
 				wPtr.litterSize = parseInt(w.litS)  || wPtr.litterSize;
@@ -158,7 +158,7 @@ PregnancyHandler.prototype.Update = function(hours) {
 			}
 		}
 	}
-	var womb = this.entity.Butt().womb;
+	var womb = ent.Butt().womb;
 	if(womb.pregnant && !womb.triggered) {
 		womb.progress     += (1-womb.progress) * hours / womb.hoursToBirth;
 		womb.hoursToBirth -= hours;
