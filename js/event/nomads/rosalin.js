@@ -755,7 +755,7 @@ Scenes.Rosalin.FirstFuck = function() {
 			options.push({ nameStr : "Get fucked",
 				func : function() {
 					player.subDom.DecreaseStat(-100, 3);
-					cale.subDom.IncreaseStat(100, 10);
+					cale.slut.IncreaseStat(100, 10);
 					cale.flags["Sexed"]++;
 					
 					cale.flags["Met"] = Cale.Met.SharedGotFucked;
@@ -900,7 +900,6 @@ Scenes.Rosalin.FirstFuckPegWolf = function() {
 	cale.flags["Met"] = Cale.Met.SharedFuckedHim;
 	
 	player.subDom.IncreaseStat(100, 5);
-	cale.subDom.DecreaseStat(-100, 10);
 	cale.flags["Sexed"]++;
 	
 	var parse = {
@@ -1958,81 +1957,51 @@ Scenes.Rosalin.SexPrompt = function(state) {
 		options.push({ nameStr : cale.name,
 			func : function() {
 				Text.Clear();
-				Text.AddOutput("Fuck, looks like [heshe]'s lost it. You begin to edge back from the horny [raceDesc], not really wanting to deal with [himher] right now. Rosalin follows you, [hisher] eyes glued to you like a cat stalking a mouse. Before you know it [heshe] has you cornered between a wagon and a tent.", parse);
-				Text.Newline();
+				Text.Add("Fuck, looks like [heshe]'s lost it. You begin to edge back from the horny [raceDesc], not really wanting to deal with [himher] right now. Rosalin follows you, [hisher] eyes glued to you like a cat stalking a mouse. Before you know it [heshe] has you cornered between a wagon and a tent.", parse);
+				Text.NL();
 				
 				parse["genDesc"] = player.FirstCock() ? function() { return player.MultiCockDesc(); } : player.FirstVag() ? function() { return player.FirstVag().Short(); } : "featureless crotch";
 				
-				// TODO: Replace these with just slut
-				// Cale is DOM as fuck
-				if(cale.subDom.Get() >= 50) {
-					Text.AddOutput("<i>\"Well well, what do we have here?\"</i> a mocking voice murmur into your ear. Surprised, you cast a glance over your shoulder. [wName] is standing just behind you, blocking your escape. You plead with him to help you out, but he just shakes his head, grinning at you. Catching you in a rough hug, the wolf-morph traps your arms to your sides, holding you in place.", parse);
-					Text.Newline();
-					Text.AddOutput("<i>\"No running away now,\"</i> he hisses maliciously in your ear, <i>\"it's my job here to keep the alchemist calm, but I'd rather not deal with [himher] when [heshe] is like this.\"</i> You can feel his stirring [wCockDesc] prodding you in the back, poking out from his sheath. Before you can voice a complaint, he cuts you off abruptly.", parse);
-					Text.Newline();
-					Text.AddOutput("<i>\"Quit yapping. You are my bitch and you know it, and right now you're going to shut up and take it!\"</i> Gulping, you stop resisting, eyeing the alchemist prowling toward you.", parse);
-					Text.Newline();
-					Text.AddOutput("<i>\"Wrong, Cale. The bitch... is <b>mine</b>!\"</i> Rosalin roars, pouncing on you.", parse);
+				// Cale is not slutty
+				if(cale.Slut() <= 0) {
+					Text.Add("<i>\"Well well, what do we have here?\"</i> a mocking voice murmur into your ear. Surprised, you cast a glance over your shoulder. [wName] is standing just behind you, blocking your escape. You plead with him to help you out, but he just shakes his head, grinning at you. Catching you in a rough hug, the wolf-morph traps your arms to your sides, holding you in place.", parse);
+					Text.NL();
+					Text.Add("<i>\"No running away now,\"</i> he hisses maliciously in your ear, <i>\"it's my job here to keep the alchemist calm, but I'd rather not deal with [himher] when [heshe] is like this.\"</i> You can feel his stirring [wCockDesc] prodding you in the back, poking out from his sheath. Before you can voice a complaint, he cuts you off abruptly.", parse);
+					Text.NL();
+					Text.Add("<i>\"Quit yapping. You are my bitch and you know it, and right now you're going to shut up and take it!\"</i> Ignoring the posturing of the wolf, you gulp as the alchemist prowls toward you.", parse);
+					Text.NL();
+					Text.Add("<i>\"Wrong, Cale. The bitch... is <b>mine</b>!\"</i> Rosalin roars, pouncing on you.", parse);
 					if(player.Armor())
-						Text.AddOutput(" [HeShe] easily rips away your [lowerArmorDesc], exposing your [genDesc].", parse);
-					Text.Newline();	
+						Text.Add(" [HeShe] easily rips away your [lowerArmorDesc], exposing your [genDesc].", parse);
+					Text.NL();	
 					
 					// TODO: Finish dommy scenes
-					Text.AddOutput(Text.BoldColor("PLACEHOLDER: unfinished scene (dom)."), parse);
+					Text.Add(Text.BoldColor("PLACEHOLDER: unfinished scene (dom)."), parse);
+					Text.Flush();
 					Gui.NextPrompt();
-					
-					
-					
-					
-					Text.Newline();
-					Text.AddOutput("", parse);
-					Text.Newline();
-					Text.AddOutput("", parse);
-					Text.Newline();
-				}
-				// TODO: Replace these with just slut
-				// Cale is SUB as fuck
-				else if(cale.subDom.Get() <= -50) {
-					// TODO: FINISH SUBBY SCENES
-					Text.AddOutput("PLACEHOLDER: unfinished scene (sub).", parse);
-					Gui.NextPrompt();
-					
-					
-					
-					
-					Text.Newline();
-					Text.AddOutput("", parse);
-					Text.Newline();
-					Text.AddOutput("", parse);
-					Text.Newline();
-					Text.AddOutput("", parse);
-					Text.Newline();
-					Text.AddOutput("", parse);
-					Text.Newline();
-					Text.AddOutput("", parse);
-					Text.Newline();
 				}
 				// "Normal" scene, -50 to +50
-				else {
-					Text.AddOutput("Out of the corner of your eye, you see [wName] passing by behind you. Grasping at the opportunity, you make a wild dash, shouldering past the surprised wolf-morph. Turning after you [wName] growls something under his breath, before it is violently crushed from him.", parse);
-					Text.Newline();
-					Text.AddOutput("Rosalin, rushing after you in pursuit, boulders into the poor wolf-morph, and the two of them roll around on the ground. After a brief tussle, the [raceDesc] alchemist comes out on top, panting slightly. [HeShe] moves to go after you, but stops when [heshe] notices the wolf pinned face-down underneath [himher]. Rosalin's aggressive snarl slowly turn into a wide grin as [heshe] makes a few experimental thrusts with [hisher] hips, letting [hisher] [rMultiCockDesc] lightly brush against [wName]'s taint.", parse);
-					Text.Newline();
-					Text.AddOutput("<i>\"R-rosie, let me go!\"</i> the wolf-morph begs piteously, trying to reason with the alchemist. One look at Rosalin's flushed expression tells you that's not likely to work. <i>\"I don't think so! You always so nice, helping me out when I get horny.\"</i> The [raceDesc] leans in close, hotdogging [hisher] [rMultiCockDesc] between the increasingly desperate wolf's cheeks. <i>\"And right now, I'm very, very horny,\"</i> [heshe] purrs.", parse);
-					Text.Newline();
-					Text.AddOutput("Seems you are off the hook for now, as Rosalin has found a new toy to play with. You could use this opportunity to escape, or...", parse);
-					
+				else if(cale.Slut() < 30) {
+					Text.Add("Out of the corner of your eye, you see [wName] passing by behind you. Grasping at the opportunity, you make a wild dash, shouldering past the surprised wolf-morph. Turning after you [wName] growls something under his breath, before it is violently crushed from him.", parse);
+					Text.NL();
+					Text.Add("Rosalin, rushing after you in pursuit, boulders into the poor wolf-morph, and the two of them roll around on the ground. After a brief tussle, the [raceDesc] alchemist comes out on top, panting slightly. [HeShe] moves to go after you, but stops when [heshe] notices the wolf pinned face-down underneath [himher]. Rosalin's aggressive snarl slowly turn into a wide grin as [heshe] makes a few experimental thrusts with [hisher] hips, letting [hisher] [rMultiCockDesc] lightly brush against [wName]'s taint.", parse);
+					Text.NL();
+					Text.Add("<i>\"R-rosie, let me go!\"</i> the wolf-morph begs piteously, trying to reason with the alchemist. One look at Rosalin's flushed expression tells you that's not likely to work. <i>\"I don't think so! You always so nice, helping me out when I get horny.\"</i> The [raceDesc] leans in close, hotdogging [hisher] [rMultiCockDesc] between the increasingly desperate wolf's cheeks. <i>\"And right now, I'm very, very horny,\"</i> [heshe] purrs.", parse);
+					Text.NL();
+					Text.Add("Seems you are off the hook for now, as Rosalin has found a new toy to play with. You could use this opportunity to escape, or...", parse);
+					Text.Flush();
 					
 					//[Sure][Nah]
 					var options = new Array();
 					options.push({ nameStr : "Leave",
 						func : function() {
 							Text.Clear();
-							Text.AddOutput("You hurry off, leaving the pair on the ground. Looks like [wName] is in for a rough ride. He lets out a pained yelp as Rosalin gets down to business, spearing the poor wolf-morph on [hisher] [rCockDesc]. Better avoid this area for a while.", parse);
+							Text.Add("You hurry off, leaving the pair on the ground. Looks like [wName] is in for a rough ride. He lets out a pained yelp as Rosalin gets down to business, spearing the poor wolf-morph on [hisher] [rCockDesc]. Better avoid this area for a while.", parse);
 							
 							player.AddLustFraction(0.1);
 							world.TimeStep({hour: 1});
 							
+							Text.Flush();
 							Gui.NextPrompt();
 						}, enabled : true,
 						tooltip : "Get out of there while you still can."
@@ -2040,21 +2009,34 @@ Scenes.Rosalin.SexPrompt = function(state) {
 					options.push({ nameStr : "Watch",
 						func : function() {
 							Text.Clear();
-							Text.AddOutput("", parse);
-							Text.Newline();
+							Text.Add("", parse);
+							Text.NL();
+							
+							Text.Flush();
 						}, enabled : false, // TODO
 						tooltip : ""
 					});
 					options.push({ nameStr : "Join",
 						func : function() {
 							Text.Clear();
-							Text.AddOutput("", parse);
-							Text.Newline();
+							Text.Add("", parse);
+							Text.NL();
+							Text.Flush();
 						}, enabled : false, // TODO
 						tooltip : ""
 					});
 					Gui.SetButtonsFromList(options);
 	
+				}
+				// TODO: Replace these with just slut
+				// Cale is slutty as fuck
+				else {
+					// TODO: FINISH SLUTTY SCENES
+					Text.Add("PLACEHOLDER: unfinished scene (slutty).", parse);
+					Text.Flush();
+					Gui.NextPrompt();
+					
+					
 				}
 			}, enabled : true,
 			tooltip : Text.Parse("Call in [wName] to stand in for you.", parse)
@@ -2062,18 +2044,19 @@ Scenes.Rosalin.SexPrompt = function(state) {
 		Gui.SetButtonsFromList(options);
 	}
 	else if(state == RosalinSexState.Heat) {
-		Text.AddOutput("PLACEHOLDER: Heat sex", parse);
-		Text.AddOutput("", parse);
-		Text.Newline();
-		Text.AddOutput("", parse);
-		Text.Newline();
-		Text.AddOutput("", parse);
-		Text.Newline();
-		Text.AddOutput("", parse);
-		Text.Newline();
+		Text.Add("PLACEHOLDER: Heat sex", parse);
+		Text.Add("", parse);
+		Text.NL();
+		Text.Add("", parse);
+		Text.NL();
+		Text.Add("", parse);
+		Text.NL();
+		Text.Add("", parse);
+		Text.NL();
 		
 		player.AddLustFraction(-1);
 		
+		Text.Flush();
 		Gui.NextPrompt();
 	}
 	//if(state == RosalinSexState.Regular)

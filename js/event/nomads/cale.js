@@ -79,8 +79,6 @@ Scenes.Cale.Interact = function() {
 		Text.Newline();
 		Text.AddOutput(Text.BoldColor("DEBUG: relation: " + cale.relation.Get()));
 		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: subDom: " + cale.subDom.Get()));
-		Text.Newline();
 		Text.AddOutput(Text.BoldColor("DEBUG: slut: " + cale.slut.Get()));
 		Text.Newline();
 	}
