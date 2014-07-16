@@ -5665,7 +5665,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 			Text.Add("<i>\"I... I am sorry, [playername], I will strive to do better!\"</i> [name] stammers, hurt by your beratement. [HeShe] tries to speed up, but in [hisher] hurry, [heshe] lose [hisher] rhythm, annoying you further.", parse);
 			Text.NL();
 			if(kiakai.flags["SexCatchAnal"] == 0)
-				Text.Add("<i>\"I finally give you the <b>priviledge</b> of fucking me, and this is what you amount to?\"</i>", parse);
+				Text.Add("<i>\"I finally give you the <b>privilege</b> of fucking me, and this is what you amount to?\"</i>", parse);
 			else
 				Text.Add("<i>\"You should know better by now,\"</i> you taunt, <i>\"have you learned nothing?\"</i>", parse);
 			parse["oafClutz"] = kiakai.mfTrue("oaf", "clutz");

@@ -547,7 +547,10 @@ Items.Virilium.PushEffect(function(target) {
 Items.Virilium.PushEffect(function(target) {
 	var parse = {
 		Poss: target.Possessive(),
-		ballsDesc : function() { return target.BallsDesc(); }
+		ballsDesc : function() { return target.BallsDesc(); },
+		s      : target.HasBalls() ? "s" : "",
+		notS   : target.HasBalls() ? "" : "s",
+		itThey : target.HasBalls() ? "they" : "it"
 	};
 	if(target.HasBalls() && Math.random() < 0.4) {
 		var res = target.Balls().size.IncreaseStat(10, 1);
@@ -556,22 +559,22 @@ Items.Virilium.PushEffect(function(target) {
 			Text.NL();
 		}
 	}
-	if(Math.random() < 0.4) {
+	if((target.HasBalls() || target.FirstCock()) && Math.random() < 0.4) {
 		var res = target.Balls().cumCap.IncreaseStat(30, 1);
 		if(res > 0) {
-			Text.Add("[Poss] balls churn as they adjust to accomodate more cum.", parse);
+			Text.Add("[Poss] [ballsDesc] churn[notS] as [itThey] adjust[notS] to accomodate more cum.", parse);
 			Text.NL();
 		}
 	}
-	if(Math.random() < 0.3) {
+	if((target.HasBalls() || target.FirstCock()) && Math.random() < 0.3) {
 		var res = target.Balls().cumProduction.IncreaseStat(3, .5, true);
 		if(res > 0) {
-			Text.Add("[Poss] balls churn as they become able to produce more cum!", parse);
+			Text.Add("[Poss] [ballsDesc] churn[notS] as [itThey] become[s] able to produce more cum!", parse);
 			Text.NL();
 		}
 	}
 	// TODO: parse
-	if(Math.random() < 0.2) {
+	if((target.HasBalls() || target.FirstCock()) && Math.random() < 0.2) {
 		var res = target.Balls().fertility.IncreaseStat(.7, .1, true);
 	}
 	Text.Flush();

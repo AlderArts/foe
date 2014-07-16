@@ -5,7 +5,7 @@
 function PregnancyHandler(entity, storage) {
 	this.entity = entity;
 	
-	this.gestationRate = 1;
+	this.gestationRate = new Stat(1);
 	this.fertility     = new Stat(0.3);
 	
 	if(storage) this.FromStorage(storage);
@@ -18,7 +18,7 @@ PregnancyHandler.Slot = {
 
 PregnancyHandler.prototype.ToStorage = function() {
 	var storage = {
-		gr : this.gestationRate.toFixed(2),
+		gr : this.gestationRate.base.toFixed(2),
 		f  : this.fertility.base.toFixed(2)
 	};
 	
@@ -53,8 +53,8 @@ PregnancyHandler.prototype.ToStorage = function() {
 PregnancyHandler.prototype.FromStorage = function(storage) {
 	storage = storage || {};
 	
-	if(storage.gr) this.gestationRate  = parseFloat(storage.gr);
-	if(storage.f)  this.fertility.base = parseFloat(storage.f);
+	if(storage.gr) this.gestationRate.base = parseFloat(storage.gr);
+	if(storage.f)  this.fertility.base     = parseFloat(storage.f);
 	
 	if(storage.womb) {
 		var vags = this.entity.AllVags();
@@ -136,7 +136,7 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 
 PregnancyHandler.prototype.Update = function(hours) {
 	hours = hours || 0;
-	hours *= this.gestationRate;
+	hours *= this.gestationRate.Get();
 	
 	var ent = this.entity;
 	
