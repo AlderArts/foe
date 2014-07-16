@@ -65,8 +65,8 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 	function() {
 		if(!(world.time.hour >= 14 || world.time.hour < 2)) return;
 		
-		Text.AddOutput("Talk to the satyr hunter? ");
-		Text.Newline();
+		Text.Add("Talk to the satyr hunter? ");
+		Text.NL();
 	},
 	Scenes.Estevan.Interact
 ));

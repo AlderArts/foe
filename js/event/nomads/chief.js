@@ -285,13 +285,13 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 		if(!(world.time.hour >= 8 && world.time.hour < 22)) return;
 		
 		if(chief.flags["Met"] == 0)
-			Text.AddOutput("On a log by the fire pit sits an old man smoking a pipe. His sharp eyes quickly find you and he gives you an uninterested look before returning to the pipe.");
+			Text.Add("On a log by the fire pit sits an old man smoking a pipe. His sharp eyes quickly find you and he gives you an uninterested look before returning to the pipe.");
 		else if(chief.relation.Get() >= 50)
-			Text.AddOutput("On a log by the fire pit the nomad chief sits, smoking his pipe. His attention quickly turns to you and you are given a wide grin, the chief acknowledging your presence before returning to the pipe.");
+			Text.Add("On a log by the fire pit the nomad chief sits, smoking his pipe. His attention quickly turns to you and you are given a wide grin, the chief acknowledging your presence before returning to the pipe.");
 		else
-			Text.AddOutput("On a log by the fire pit the nomad chief sits, smoking his pipe. His sharp eyes quickly find you and he gives you a short nod before returning to the pipe.");
+			Text.Add("On a log by the fire pit the nomad chief sits, smoking his pipe. His sharp eyes quickly find you and he gives you a short nod before returning to the pipe.");
 			
-		Text.Newline();
+		Text.NL();
 	},
 	Scenes.Chief.Interact
 ));

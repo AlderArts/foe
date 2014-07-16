@@ -873,7 +873,6 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 			Text.Add("Magnus the apprentice mage is poring over some old book, probably trying to find some secret knowledge in the strange, squiggly symbols covering its pages. As usual, he is deeply focused on his studies, and you doubt even an attack on the camp would distract his reverie.", parse);
 		}
 		Text.NL();
-		Text.Flush();
 	},
 	Scenes.Magnus.Interact
 ));

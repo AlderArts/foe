@@ -83,8 +83,8 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 	function() {
 		if(!(world.time.hour >= 8 && world.time.hour < 24)) return;
 		
-		Text.AddOutput("A strange individual wearing a patchwork robe has set up shop close to the fireplace. ");
-		Text.Newline();
+		Text.Add("A strange individual wearing a patchwork robe has set up shop close to the fireplace. ");
+		Text.NL();
 	},
 	Scenes.Patchwork.Interact
 ));

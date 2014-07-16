@@ -209,12 +209,12 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 		};
 		
 		if(rosalin.flags["Met"] == 0) {
-			Text.AddOutput("Near the [extinguishedLit] fire pit, you see a strange young woman busying herself with a collection of strange flasks, mixing their contents into a larger beaker. She has prominent catlike features, brown-furred ears poking out of her teal hair, and a long sinuous tail swaying behind her generous bottom. Acrid fumes are rising from her concoction, making you wonder if approaching her is really a good idea.", parse);
-			Text.Newline();
+			Text.Add("Near the [extinguishedLit] fire pit, you see a strange young woman busying herself with a collection of strange flasks, mixing their contents into a larger beaker. She has prominent catlike features, brown-furred ears poking out of her teal hair, and a long sinuous tail swaying behind her generous bottom. Acrid fumes are rising from her concoction, making you wonder if approaching her is really a good idea.", parse);
+			Text.NL();
 		}
 		else {
-			Text.AddOutput("Nearby, Rosalin is tending to [hisher] vials as usual, undoubtedly brewing something potentially lethal to [himher]self and those around [himher].", parse);
-			Text.Newline();
+			Text.Add("Nearby, Rosalin is tending to [hisher] vials as usual, undoubtedly brewing something potentially lethal to [himher]self and those around [himher].", parse);
+			Text.NL();
 			// TODO: Plant description
 		}
 	},
