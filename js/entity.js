@@ -1465,6 +1465,8 @@ Sex.Preg = function(father, mother, num) {
 }
 
 Entity.prototype.Sexed = function() {
+	if(this.flags["Sexed"] && this.flags["Sexed"] != 0)
+		return true;
 	for(var flag in this.sex)
 		if(this.sex[flag] != 0)
 			return true;
@@ -1513,6 +1515,9 @@ Entity.prototype.Ears = function() {
 }
 Entity.prototype.EarDesc = function() {
 	return this.body.EarDesc();
+}
+Entity.prototype.HasFlexibleEars = function() {
+	return this.body.HasFlexibleEars();
 }
 Entity.prototype.Arms = function() {
 	return this.body.arms;
@@ -1590,8 +1595,11 @@ Entity.prototype.StomachDesc = function() {
 	var bellysize = this.pregHandler.BellySize();
 	return this.body.StomachDesc(bellysize);
 }
+Entity.prototype.HipDesc = function() {
+	return this.body.HipDesc();
+}
 Entity.prototype.HipsDesc = function() {
-	return this.body.HipsDesc();
+	return this.body.HipsDesc(true);
 }
 // TODO
 Entity.prototype.ArmDesc = function() {

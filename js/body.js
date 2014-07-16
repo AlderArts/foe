@@ -1765,6 +1765,25 @@ Body.prototype.EarDesc = function() {
 		default: return "ears";
 	}
 }
+
+Body.prototype.HasFlexibleEars = function() {
+	var ears = this.head.ears;
+	switch(ears.race) {
+		case Race.horse:
+		case Race.cat:
+		case Race.dog:
+		case Race.fox:
+		case Race.rabbit:
+		case Race.sheep:
+		case Race.goat:
+		case Race.cow:
+		case Race.wolf:
+		case Race.ferret:
+			return true;
+		default: return false;
+	}
+}
+
 /*
 Race = {
 	human  : 0,
@@ -2110,7 +2129,7 @@ Body.prototype.TongueDesc = function() {
 }
 
 // TODO
-Body.prototype.HipsDesc = function() {
+Body.prototype.HipsDesc = function(plural) {
 	var size = this.torso.hipSize.Get();
 	
 	var adjs = [];
@@ -2150,7 +2169,7 @@ Body.prototype.HipsDesc = function() {
 	}
 	var adj = adjs[Rand(adjs.length)];
 	
-	return adj + " hips";
+	return adj + (plural ? " hips" : "hip");
 }
 
 

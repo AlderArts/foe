@@ -235,6 +235,20 @@ Jobs["Bruiser"].levels.push(new JobLevel(320,  null, {"str" : 0.2, "sta" : 0.1})
 Jobs["Bruiser"].levels.push(new JobLevel(640,  null, {"sta" : 0.2, "dex" : 0.1}));
 Jobs["Bruiser"].levels.push(new JobLevel(1280, null, {"str" : 0.1, "sta" : 0.3, "dex" : 0.1}));
 
+Jobs["Rogue"] = new Job("Rogue");
+Jobs["Rogue"].Unlocked = function() {
+	return (cale.flags["Rogue"] == Cale.Rogue.Taught) ||
+	       false; // TODO Terry
+}
+Jobs["Rogue"].preqs.push({job : Jobs["Fighter"], lvl : 3});
+Jobs["Rogue"].levels.push(new JobLevel(20,   null, {"str" : 0.1, "sta" : 0.2}));
+Jobs["Rogue"].levels.push(new JobLevel(40,   null, {"sta" : 0.2, "dex" : 0.1}));
+Jobs["Rogue"].levels.push(new JobLevel(80,   null, {"str" : 0.2, "sta" : 0.1}));
+Jobs["Rogue"].levels.push(new JobLevel(160,  null, {"sta" : 0.3}));
+Jobs["Rogue"].levels.push(new JobLevel(320,  null, {"str" : 0.2, "sta" : 0.1}));
+Jobs["Rogue"].levels.push(new JobLevel(640,  null, {"sta" : 0.2, "dex" : 0.1}));
+Jobs["Rogue"].levels.push(new JobLevel(1280, null, {"str" : 0.1, "sta" : 0.3, "dex" : 0.1}));
+
 Jobs["Mage"] = new Job("Mage");
 Jobs["Mage"].Long = function(entity) { return Text.Parse("The mage has taken the first steps into exploring the raw power of the elements and the chaotic force of magic. While [heshe] has barely begun tapping [hisher] innate potential, the mage already possesses a formidable destructive power.", {hisher: entity.hisher(), heshe: entity.heshe()}); }
 Jobs["Mage"].preqs.push({job : Jobs["Scholar"], lvl : 3});
