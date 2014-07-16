@@ -1644,6 +1644,13 @@ Entity.prototype.HasTail = function() {
 			return this.body.backSlots[i];
 	return null;
 }
+Entity.prototype.HasPrehensileTail = function() {
+	var found = false;
+	for(var i = 0; i < this.body.backSlots.length; i++)
+		if(this.body.backSlots[i].type == AppendageType.tail)
+			found = found || this.body.backSlots[i].Prehensile();
+	return found;
+}
 Entity.prototype.HasWings = function() {
 	for(var i = 0; i < this.body.backSlots.length; i++)
 		if(this.body.backSlots[i].type == AppendageType.wing)

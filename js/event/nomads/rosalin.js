@@ -484,12 +484,104 @@ Scenes.Rosalin.TalkPrompt = function() {
 			tooltip : Text.Parse("[HeShe] mentioned the tree city...?", parse)
 		});
 	}
+	if(cale.flags["Met2"] == Cale.Met2.TalkedSlut) {
+		options.push({ nameStr : "Blah",
+			func : function() {
+				cale.flags["Met2"] = Cale.Met2.Goop;
+				Text.Clear();
+				Text.Add("<i>”Sure, what does wuffie want?”</i> the alchemist asks, a light shining up in [hisher] eyes at the opportunity to experiment on someone. You explain that he’s been taking a lot of cock lately, and he’s wondering if Rosalin could... help him with that.", parse);
+				Text.NL();
+				Text.Add("<i>”Ah… Ahhh! I know just what he needs!”</i> Rosalin exclaims. Somehow, you sincerely doubt that she does. Either way, you’ve set [himher] into motion, there is no stopping it now. The alchemist goes on to mix several strange ingredients into a bit jar, grinding them into a luminescent goop.", parse);
+				Text.NL();
+				Text.Add("As [heshe] works, you notice that Cale has wandered onto the scene, how convenient. You greet him with a nod, secretly hoping that this doesn’t mess him up too much.", parse);
+				Text.NL();
+				Text.Add("<i>”Hey there, [playername]. Sup Rosie? Whacha cooking?”</i> the unsuspecting wolf inquires, but the alchemist is too busy with her mix to even acknowledge his presence. ", parse);
+				Text.NL();
+				Text.Add("<i>”There! It’s done!”</i> Rosalin declares, adding a small sprinkling of green dust to the mix just for kicks. The resulting cream has a rancid fragrance, and looks like it could corrode metal. Suddenly noticing Cale, Rosalin shines up. <i>”There you are wuffie! Bend over for me, and this’ll be over in a moment!”</i>", parse);
+				Text.NL();
+				Text.Add("<i>”Umm, what? I have a feeling it’s time to split,”</i> he says, backing off, looking just like he’s about to bolt. You quickly intervene by blocking his path. Cale panics, trying to scramble away.", parse);
+				Text.NL();
+				Text.Add("<i>”Hold him for me, would you, [playername]?”</i> Rosalin asks sweetly. With your combined efforts, you bend the struggling and protesting wolf over one of the logs around the fire pit and pull down his pants. <i>”Calm down now, this is for your own good...”</i> the alchemist coos.", parse);
+				Text.NL();
+				Text.Add("<i>”The heck are you two doing!? W-What is that, Rosie?”</i> he sputters, <i>”that doesn’t look sa- Aaaah!”</i> The wolf yowls in shock as Rosalin swipes a scoop of the glowing goop and shoves it into his butt. Cale squirms and moans as the alchemist wriggle [hisher] hand around, coating the wolf’s insides in the strange concoction.", parse);
+				Text.NL();
+				Text.Add("<i>”I-It’s tingling, aaah!”</i> the wolf moans, his legs going weak as the cream begins to take effect. <i>”W-what did you put in there, Rosie?!”</i> The alchemist takes a step back to admire [hisher] work.", parse);
+				Text.NL();
+				Text.Add("<i>”With this, you should be able to take even the biggest cocks without trouble!”</i> Rosalin declares, <i>”and you should be way more sensitive too!”</i> In [hisher] own way, the alchemist did [hisher] best to help [hisher] friend, you suppose, even if this wasn’t quite what you asked for.", parse);
+				Text.NL();
+				// Set slut to 60
+				cale.slut.IncreaseStat(60, 100);
+				cale.Butt().capacity.base = 90;
+				
+				Text.Add("<i>”Haah… hot… so hot,”</i> Cale pants, barely able to form sentences anymore, so overwhelmed is he by the new sensations. <i>”Fuck! Need to fuck! Someone… fuck me!”</i> He begins pawing at his butt desperately, throwing pleading glances at you and Rosalin.", parse);
+				var cocksInAss = player.CocksThatFit(cale.Butt());
+				if(cocksInAss.length == 0) {
+					Text.NL();
+					Text.Add("<i>”I could lend you something, if you’d like?”</i> the alchemist suggests, a twinkle in [hisher] eye.", parse);
+				}
+				Text.Flush();
+				
+				world.TimeStep({minute: 45});
+				
+				parse["canusDesc"] = function() { return cale.Butt().AnalShort(); }
+				parse["multiCockDesc"] = function() { return player.MultiCockDesc(); }
+				//[Take him][Rosalin]
+				var options = new Array();
+				options.push({ nameStr : "TakeHim",
+					func : function() {
+						Text.Clear();
+						if(cocksInAss.length == 0) {
+							Text.Add("<i>”Gimme a sec… no, too small… this one? Ah! Perfect!”</i> Rosalin triumphantly pulls out a huge strapon, formed in the shape of a canine cock. Near the thick base, there is a quite realistic knot, complete with veins and all. The entire thing is slightly longer than Cale’s own member.", parse);
+							Text.NL();
+							Text.Add("<i>”Fitting, don’t you think?”</i> Rosalin grins, handing you the toy. <i>”You can keep it, I have a few other ones laying around.”</i> You gratefully accept the gift, securing the straps around your waist.", parse);
+							Text.NL();
+							Text.Add("<b>Acquired and equipped a canid strapon!</b>", parse);
+							Text.NL();
+							
+							var inv = party.inventory;
+							if(player.strapOn) inv.AddItem(player.strapOn);
+							player.strapOn = Items.StrapOn.CanidStrapon;
+							player.Equip();
+						}
+						Text.Add("Over by the campfire, Cale is growing anxious. The horny wolf, desperate to be filled, is pumping three of his fingers into his [canusDesc], trying his outmost to sate his desires. He lights up when you step up behind him, grinding your [multiCockDesc] between his cheeks. His tail is wagging back and forth in excitement, conveniently raised high to allow you full access.", parse);
+						Text.NL();
+						
+						Scenes.Cale.SexFuckHim(true);
+					}, enabled : true,
+					tooltip : "Looks like he’s gone into heat… best help him through this."
+				});
+				if(rosalin.FirstCock()) {
+					options.push({ nameStr : "Rosalin",
+						func : function() {
+							Text.Clear();
+							parse["rmultiCockDesc"] = function() { return rosalin.MultiCockDesc(); }
+							Text.Add("You ask if the alchemist wants to take care of him.", parse);
+							Text.NL();
+							Text.Add("<i>”Sure, I can do that!”</i> Rosalin grins as [heshe] pulls out [hisher] [rmultiCockDesc]. <i>”Wolfie! Down boy!”</i> Cale’s tongue is lolling and his tail is wagging happily as Rosalin takes position behind him, grinding against his now incredibly sensitive taint.", parse);
+							Text.NL();
+							parse["s"] = rosalin.NumCocks() > 1 ? "s": "";
+							Text.Add("<i>”T-take me Rosie, just take me!”</i> he howls, pushing his hips back against the alchemists stiff shaft[s]. There is a wild gleam in Rosalin’s eyes as [hisher] desires start to well up. You settle down for the show, eager to see how the new changes will affect Cale.", parse);
+							Text.NL();
+							Text.Flush();
+							
+							Scenes.Rosalin.FuckCaleWatchEntryPoint();
+						}, enabled : true,
+						tooltip : "How about letting the alchemist do the honors?"
+					});
+				}
+				Gui.SetButtonsFromList(options, false, null);
+			}, enabled : true,
+			tooltip : Text.Parse("You aren’t sure this is such a good idea… but ask [himher] if [heshe] can make something for Cale.", parse)
+		});
+	}
 	/* TODO: More dialogue
 	options.push({ nameStr : "Blah",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("", parse);
-			Text.Newline();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Add("", parse);
+			Text.Flush();
 		}, enabled : true,
 		tooltip : ""
 	});
@@ -2012,7 +2104,8 @@ Scenes.Rosalin.SexPrompt = function(state) {
 							Text.Add("", parse);
 							Text.NL();
 							
-							Text.Flush();
+							Scenes.Rosalin.FuckCaleWatchEntryPoint();
+							
 						}, enabled : false, // TODO
 						tooltip : ""
 					});
@@ -2545,3 +2638,14 @@ Scenes.Rosalin.VagAftermath = function() {
 	Gui.NextPrompt();
 }
 
+Scenes.Rosalin.FuckCaleWatchEntryPoint = function() {
+	var parse = {
+		
+	};
+	
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Gui.NextPrompt();
+}

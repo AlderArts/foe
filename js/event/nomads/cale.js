@@ -29,7 +29,7 @@ function Cale(storage) {
 	if(storage) this.FromStorage(storage);
 	
 	if(this.Slut() >= 60) {
-		this.Butt().capacity.base = 90; //TODO set in Rosalin scene
+		this.Butt().capacity.base = 90;
 	}
 	else {
 		this.Butt().capacity.base = 35;
@@ -848,12 +848,26 @@ Scenes.Cale.TalkPast = function() {
 //TODO
 Scenes.Cale.TentSex = function() {
 	var parse = {
-		
+		playername : player.name
 	};
 	
-	Text.Add("", parse);
+	Text.Add("The two of you duck inside the small cloth-enclosure, even smaller than your own tent among the nomads. It still holds enough space to house a set of warm bedrolls, which is all you are interested in either way.", parse);
 	Text.NL();
+	Text.Add("Cale shrugs out of his clothes, pulling you into a close embrace, his fur tickling you. <i>”Why don’t we get started, [playername]?”</i> he murmurs, nipping your neck playfully.", parse);
 	Text.Flush();
+	
+	//[Oral]
+	var options = new Array();
+	options.push({ nameStr : "Oral",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	Gui.SetButtonsFromList(options, false, null);
 	
 	cale.relation.IncreaseStat(100, 3);
 	world.TimeStep({hour : 1});
@@ -877,7 +891,7 @@ Scenes.Cale.OutsideSex = function() {
 }
 
 //TODO
-Scenes.Cale.SexFuckHimOutside = function() {
+Scenes.Cale.SexFuckHim = function(outside) {
 	var parse = {
 		
 	};
@@ -893,7 +907,7 @@ Scenes.Cale.SexFuckHimOutside = function() {
 }
 
 //TODO
-Scenes.Cale.SexCatchVagOutside = function() {
+Scenes.Cale.SexCatchVag = function(outside) {
 	var parse = {
 		
 	};
@@ -909,7 +923,7 @@ Scenes.Cale.SexCatchVagOutside = function() {
 }
 
 //TODO
-Scenes.Cale.SexCatchAnalOutside = function() {
+Scenes.Cale.SexCatchAnal = function(outside) {
 	var parse = {
 		
 	};
@@ -994,7 +1008,7 @@ Scenes.Cale.Rogue = function() {
 					
 					cale.slut.IncreaseStat(50, 10);
 					
-					Scenes.Cale.SexFuckHimOutside();
+					Scenes.Cale.SexFuckHim(true);
 				}, enabled : (cocksInAss.length > 0),
 				tooltip : "All that matters is winning, wasn’t it?"
 			});
@@ -1033,9 +1047,9 @@ Scenes.Cale.Rogue = function() {
 					Text.NL();
 					
 					if(player.FirstVag())
-						Scenes.Cale.SexCatchVagOutside();
+						Scenes.Cale.SexCatchVag(true);
 					else
-						Scenes.Cale.SexCatchAnalOutside();
+						Scenes.Cale.SexCatchAnal(true);
 				}, enabled : true,
 				tooltip : "It wouldn’t be a proper lesson if he stopped here, would it?"
 			});
