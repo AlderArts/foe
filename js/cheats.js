@@ -502,6 +502,8 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		party.inventory.AddItem(Items.CorruptSeed);
 		party.inventory.AddItem(Items.Infernum);
 		
+		party.inventory.AddItem(Items.InfernumPlus);
+		
 		party.inventory.AddItem(Items.Hummus);
 		party.inventory.AddItem(Items.BloodVial);
 		party.inventory.AddItem(Items.SpringWater);

@@ -270,8 +270,9 @@ TF.UseItem = function(target, suppressUse) {
 
 TF.UseItemDesc = function(target) {
 	var parse = { name: target.NameDesc(), s: target == player ? "" : "s", item: this.name };
-	Text.AddOutput("[name] chug[s] down a bottle of [item].", parse);
-	Text.Newline();
+	Text.Add("[name] chug[s] down a bottle of [item].", parse);
+	Text.NL();
+	Text.Flush();
 }
 
 TF.ItemEffects = {};
@@ -293,12 +294,13 @@ TF.ItemEffects.SetCock = function(target, opts) {
 		changed = TF.SetRaceOne(cocks, opts.race);
 		if(changed != TF.Effect.Unchanged) {
 			if(cocks.length > 1)
-				Text.AddOutput("One of [poss] cocks turns into [str]!", parse);
+				Text.Add("One of [poss] cocks turns into [str]!", parse);
 			else
-				Text.AddOutput("[Poss] cock turns into [str]!", parse);
-			Text.Newline();
+				Text.Add("[Poss] cock turns into [str]!", parse);
+			Text.NL();
 		}
 	}
+	Text.Flush();
 	return changed;
 }
 
@@ -311,10 +313,11 @@ TF.ItemEffects.SetEars = function(target, opts) {
 	if(Math.random() < odds) {
 		changed = TF.SetRaceOne(ears, opts.race);
 		if(changed != TF.Effect.Unchanged) {
-			Text.AddOutput("[Poss] ears turn into [str]!", parse);
-			Text.Newline();
+			Text.Add("[Poss] ears turn into [str]!", parse);
+			Text.NL();
 		}
 	}
+	Text.Flush();
 	return changed;
 }
 
@@ -330,22 +333,23 @@ TF.ItemEffects.SetKnot = function(target, opts) {
 			if(opts.value) {
 				if(cocks[i].knot == 0) {
 					cocks[i].knot = 1;
-					Text.AddOutput("[Poss] [cockDesc] grows a knot!", parse);
-					Text.Newline();
+					Text.Add("[Poss] [cockDesc] grows a knot!", parse);
+					Text.NL();
 					num--;
 				}
 			}
 			else {
 				if(cocks[i].knot == 1) {
 					cocks[i].knot = 0;
-					Text.AddOutput("The knot on [poss] [cockDesc] disappears!", parse);
-					Text.Newline();
+					Text.Add("The knot on [poss] [cockDesc] disappears!", parse);
+					Text.NL();
 					num--;
 				}
 			}
 			if(num <= 0) break;
 		}
 	}
+	Text.Flush();
 }
 
 // odds, value, num
@@ -360,22 +364,23 @@ TF.ItemEffects.SetSheath = function(target, opts) {
 			if(opts.value) {
 				if(cocks[i].sheath == 0) {
 					cocks[i].sheath = 1;
-					Text.AddOutput("[Poss] [cockDesc] grows a sheath!", parse);
-					Text.Newline();
+					Text.Add("[Poss] [cockDesc] grows a sheath!", parse);
+					Text.NL();
 					num--;
 				}
 			}
 			else {
 				if(cocks[i].sheath == 1) {
 					cocks[i].sheath = 0;
-					Text.AddOutput("The sheath protecting [poss] [cockDesc] disappears!", parse);
-					Text.Newline();
+					Text.Add("The sheath protecting [poss] [cockDesc] disappears!", parse);
+					Text.NL();
 					num--;
 				}
 			}
 			if(num <= 0) break;
 		}
 	}
+	Text.Flush();
 }
 
 // odds, race, str, color
@@ -388,15 +393,16 @@ TF.ItemEffects.SetTail = function(target, opts) {
 		changed = TF.SetAppendage(target.Back(), AppendageType.tail, opts.race, opts.color);
 		switch(changed) {
 			case TF.Effect.Changed:
-				Text.AddOutput("[Poss] tail changes, turning into [str]!", parse);
-				Text.Newline();
+				Text.Add("[Poss] tail changes, turning into [str]!", parse);
+				Text.NL();
 				break;
 			case TF.Effect.Added:
-				Text.AddOutput("[name] suddenly grow[s] [str]!", parse);
-				Text.Newline();
+				Text.Add("[name] suddenly grow[s] [str]!", parse);
+				Text.NL();
 				break;
 		}
 	}
+	Text.Flush();
 	return changed;
 }
 
@@ -409,15 +415,16 @@ TF.ItemEffects.RemTail = function(target, opts) {
 		changed = TF.RemoveAppendage(target.Back(), AppendageType.tail, opts.count);
 		switch(changed) {
 			case TF.Effect.Changed:
-				Text.AddOutput("[name] lose [count] of [hisher] tails!", parse);
-				Text.Newline();
+				Text.Add("[name] lose [count] of [hisher] tails!", parse);
+				Text.NL();
 				break;
 			case TF.Effect.Removed:
-				Text.AddOutput("[name] lose all trace of [hisher] tail!", parse);
-				Text.Newline();
+				Text.Add("[name] lose all trace of [hisher] tail!", parse);
+				Text.NL();
 				break;
 		}
 	}
+	Text.Flush();
 	return changed;
 }
 
@@ -431,15 +438,16 @@ TF.ItemEffects.SetHorn = function(target, opts) {
 		changed = TF.SetAppendage(target.Appendages(), AppendageType.horn, opts.race, opts.color, opts.count);
 		switch(changed) {
 			case TF.Effect.Changed:
-				Text.AddOutput("[Poss] horns change, turning into [str]!", parse);
-				Text.Newline();
+				Text.Add("[Poss] horns change, turning into [str]!", parse);
+				Text.NL();
 				break;
 			case TF.Effect.Added:
-				Text.AddOutput("[name] suddenly grow[s] [str]!", parse);
-				Text.Newline();
+				Text.Add("[name] suddenly grow[s] [str]!", parse);
+				Text.NL();
 				break;
 		}
 	}
+	Text.Flush();
 	return changed;
 }
 
@@ -452,15 +460,16 @@ TF.ItemEffects.RemHorn = function(target, opts) {
 		changed = TF.RemoveAppendage(target.Appendages(), AppendageType.horn, opts.count);
 		switch(changed) {
 			case TF.Effect.Changed:
-				Text.AddOutput("[name] lose [count] of [hisher] horns!", parse);
-				Text.Newline();
+				Text.Add("[name] lose [count] of [hisher] horns!", parse);
+				Text.NL();
 				break;
 			case TF.Effect.Removed:
-				Text.AddOutput("[name] lose all trace of [hisher] horns!", parse);
-				Text.Newline();
+				Text.Add("[name] lose all trace of [hisher] horns!", parse);
+				Text.NL();
 				break;
 		}
 	}
+	Text.Flush();
 	return changed;
 }
 
@@ -474,15 +483,16 @@ TF.ItemEffects.SetAntenna = function(target, opts) {
 		changed = TF.SetAppendage(target.Appendages(), AppendageType.antenna, opts.race, opts.color, opts.count);
 		switch(changed) {
 			case TF.Effect.Changed:
-				Text.AddOutput("[Poss] antenna change, turning into [str]!", parse);
-				Text.Newline();
+				Text.Add("[Poss] antenna change, turning into [str]!", parse);
+				Text.NL();
 				break;
 			case TF.Effect.Added:
-				Text.AddOutput("[name] suddenly grow[s] [str]!", parse);
-				Text.Newline();
+				Text.Add("[name] suddenly grow[s] [str]!", parse);
+				Text.NL();
 				break;
 		}
 	}
+	Text.Flush();
 	return changed;
 }
 
@@ -495,15 +505,16 @@ TF.ItemEffects.RemAntenna = function(target, opts) {
 		changed = TF.RemoveAppendage(target.Appendages(), AppendageType.antenna, opts.count);
 		switch(changed) {
 			case TF.Effect.Changed:
-				Text.AddOutput("[name] lose [count] of [hisher] antenna!", parse);
-				Text.Newline();
+				Text.Add("[name] lose [count] of [hisher] antenna!", parse);
+				Text.NL();
 				break;
 			case TF.Effect.Removed:
-				Text.AddOutput("[name] lose all trace of [hisher] antenna!", parse);
-				Text.Newline();
+				Text.Add("[name] lose all trace of [hisher] antenna!", parse);
+				Text.NL();
 				break;
 		}
 	}
+	Text.Flush();
 	return changed;
 }
 
@@ -517,15 +528,16 @@ TF.ItemEffects.SetWings = function(target, opts) {
 		changed = TF.SetAppendage(target.Back(), AppendageType.wing, opts.race, opts.color, opts.count);
 		switch(changed) {
 			case TF.Effect.Changed:
-				Text.AddOutput("[Poss] wings change, turning into [str]!", parse);
-				Text.Newline();
+				Text.Add("[Poss] wings change, turning into [str]!", parse);
+				Text.NL();
 				break;
 			case TF.Effect.Added:
-				Text.AddOutput("[name] suddenly grow[s] [str]!", parse);
-				Text.Newline();
+				Text.Add("[name] suddenly grow[s] [str]!", parse);
+				Text.NL();
 				break;
 		}
 	}
+	Text.Flush();
 	return changed;
 }
 
@@ -538,15 +550,16 @@ TF.ItemEffects.RemWings = function(target, opts) {
 		changed = TF.RemoveAppendage(target.Back(), AppendageType.wing, opts.count);
 		switch(changed) {
 			case TF.Effect.Changed:
-				Text.AddOutput("[name] lose [count] of [hisher] wings!", parse);
-				Text.Newline();
+				Text.Add("[name] lose [count] of [hisher] wings!", parse);
+				Text.NL();
 				break;
 			case TF.Effect.Removed:
-				Text.AddOutput("[name] lose all trace of [hisher] wings!", parse);
-				Text.Newline();
+				Text.Add("[name] lose all trace of [hisher] wings!", parse);
+				Text.NL();
 				break;
 		}
 	}
+	Text.Flush();
 	return changed;
 }
 
@@ -559,15 +572,16 @@ TF.ItemEffects.SetBalls = function(target, opts) {
 		changed = TF.SetBalls(target.body.balls, opts.ideal, opts.count);
 		switch(changed) {
 			case TF.Effect.Changed:
-				Text.AddOutput("[name] grow[s] an extra [count] testicles!", parse);
-				Text.Newline();
+				Text.Add("[name] grow[s] an extra [count] testicles!", parse);
+				Text.NL();
 				break;
 			case TF.Effect.Added:
-				Text.AddOutput("[name] suddenly grow[s] a [ballsDesc]!", parse);
-				Text.Newline();
+				Text.Add("[name] suddenly grow[s] a [ballsDesc]!", parse);
+				Text.NL();
 				break;
 		}
 	}
+	Text.Flush();
 	return changed;
 }
 
@@ -580,15 +594,16 @@ TF.ItemEffects.RemBalls = function(target, opts) {
 		changed = TF.RemoveAppendage(target.body.balls, opts.ideal, opts.count);
 		switch(changed) {
 			case TF.Effect.Changed:
-				Text.AddOutput("[name] lose [count] of [hisher] testicles!", parse);
-				Text.Newline();
+				Text.Add("[name] lose [count] of [hisher] testicles!", parse);
+				Text.NL();
 				break;
 			case TF.Effect.Removed:
-				Text.AddOutput("[name] lose all trace of [hisher] [ballsDesc]!", parse);
-				Text.Newline();
+				Text.Add("[name] lose all trace of [hisher] [ballsDesc]!", parse);
+				Text.NL();
 				break;
 		}
 	}
+	Text.Flush();
 	return changed;
 }
 
@@ -602,12 +617,13 @@ TF.ItemEffects.SetIdealCockLen = function(target, opts) {
 		if(Math.random() < odds) {
 			var diff = cocks[i].length.IdealStat(opts.ideal, opts.max);
 			if(diff) {
-				Text.AddOutput("[Poss] cock length changes " + diff + "cm.", parse);
-				Text.Newline();
+				Text.Add("[Poss] cock length changes " + diff + "cm.", parse);
+				Text.NL();
 				break;
 			}
 		}
 	}
+	Text.Flush();
 }
 
 // odds, ideal, max
@@ -620,12 +636,13 @@ TF.ItemEffects.SetIdealCockThk = function(target, opts) {
 		if(Math.random() < odds) {
 			var diff = cocks[i].thickness.IdealStat(opts.ideal, opts.max);
 			if(diff) {
-				Text.AddOutput("[Poss] cock thickness changes " + diff + "cm.", parse);
-				Text.Newline();
+				Text.Add("[Poss] cock thickness changes " + diff + "cm.", parse);
+				Text.NL();
 				break;
 			}
 		}
 	}
+	Text.Flush();
 }
 
 // INC STATS
@@ -636,9 +653,10 @@ TF.ItemEffects.IncStr = function(target, opts) {
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.strength.IncreaseStat(opts.ideal, opts.max)) {
-		Text.AddOutput("[name] [is] suddenly a bit stronger!", parse);
-		Text.Newline();
+		Text.Add("[name] [is] suddenly a bit stronger!", parse);
+		Text.NL();
 	}
+	Text.Flush();
 }
 
 // odds, ideal, max
@@ -647,9 +665,10 @@ TF.ItemEffects.IncSta = function(target, opts) {
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.stamina.IncreaseStat(opts.ideal, opts.max)) {
-		Text.AddOutput("[name] [is] suddenly a bit tougher!", parse);
-		Text.Newline();
+		Text.Add("[name] [is] suddenly a bit tougher!", parse);
+		Text.NL();
 	}
+	Text.Flush();
 }
 
 // odds, ideal, max
@@ -658,9 +677,10 @@ TF.ItemEffects.IncDex = function(target, opts) {
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.dexterity.IncreaseStat(opts.ideal, opts.max)) {
-		Text.AddOutput("[name] [is] suddenly a bit swifter!", parse);
-		Text.Newline();
+		Text.Add("[name] [is] suddenly a bit swifter!", parse);
+		Text.NL();
 	}
+	Text.Flush();
 }
 
 // odds, ideal, max
@@ -669,9 +689,10 @@ TF.ItemEffects.IncInt = function(target, opts) {
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.intelligence.IncreaseStat(opts.ideal, opts.max)) {
-		Text.AddOutput("[name] [is] suddenly a bit smarter!", parse);
-		Text.Newline();
+		Text.Add("[name] [is] suddenly a bit smarter!", parse);
+		Text.NL();
 	}
+	Text.Flush();
 }
 
 // odds, ideal, max
@@ -680,9 +701,10 @@ TF.ItemEffects.IncSpi = function(target, opts) {
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.spirit.IncreaseStat(opts.ideal, opts.max)) {
-		Text.AddOutput("[name] [is] suddenly a bit more stoic!", parse);
-		Text.Newline();
+		Text.Add("[name] [is] suddenly a bit more stoic!", parse);
+		Text.NL();
 	}
+	Text.Flush();
 }
 
 // odds, ideal, max
@@ -691,9 +713,10 @@ TF.ItemEffects.IncLib = function(target, opts) {
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.libido.IncreaseStat(opts.ideal, opts.max)) {
-		Text.AddOutput("[name] [is] suddenly a bit hornier!", parse);
-		Text.Newline();
+		Text.Add("[name] [is] suddenly a bit hornier!", parse);
+		Text.NL();
 	}
+	Text.Flush();
 }
 
 // odds, ideal, max
@@ -702,9 +725,10 @@ TF.ItemEffects.IncCha = function(target, opts) {
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.charisma.IncreaseStat(opts.ideal, opts.max)) {
-		Text.AddOutput("[name] [is] suddenly a bit more charming!", parse);
-		Text.Newline();
+		Text.Add("[name] [is] suddenly a bit more charming!", parse);
+		Text.NL();
 	}
+	Text.Flush();
 }
 
 // DEC STATS
@@ -715,9 +739,10 @@ TF.ItemEffects.DecStr = function(target, opts) {
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.strength.DecreaseStat(opts.ideal, opts.max)) {
-		Text.AddOutput("[name] [is] suddenly a bit weaker!", parse);
-		Text.Newline();
+		Text.Add("[name] [is] suddenly a bit weaker!", parse);
+		Text.NL();
 	}
+	Text.Flush();
 }
 
 // odds, ideal, max
@@ -726,9 +751,10 @@ TF.ItemEffects.DecSta = function(target, opts) {
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.stamina.DecreaseStat(opts.ideal, opts.max)) {
-		Text.AddOutput("[name] [is] suddenly a bit less tough!", parse);
-		Text.Newline();
+		Text.Add("[name] [is] suddenly a bit less tough!", parse);
+		Text.NL();
 	}
+	Text.Flush();
 }
 
 // odds, ideal, max
@@ -737,9 +763,10 @@ TF.ItemEffects.DecDex = function(target, opts) {
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.dexterity.DecreaseStat(opts.ideal, opts.max)) {
-		Text.AddOutput("[name] [is] suddenly a bit clumsier!", parse);
-		Text.Newline();
+		Text.Add("[name] [is] suddenly a bit clumsier!", parse);
+		Text.NL();
 	}
+	Text.Flush();
 }
 
 // odds, ideal, max
@@ -748,9 +775,10 @@ TF.ItemEffects.DecInt = function(target, opts) {
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.intelligence.DecreaseStat(opts.ideal, opts.max)) {
-		Text.AddOutput("[name] [is] suddenly a bit dumber!", parse);
-		Text.Newline();
+		Text.Add("[name] [is] suddenly a bit dumber!", parse);
+		Text.NL();
 	}
+	Text.Flush();
 }
 
 // odds, ideal, max
@@ -759,9 +787,10 @@ TF.ItemEffects.DecSpi = function(target, opts) {
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.spirit.DecreaseStat(opts.ideal, opts.max)) {
-		Text.AddOutput("[name] [is] suddenly a bit less stoic!", parse);
-		Text.Newline();
+		Text.Add("[name] [is] suddenly a bit less stoic!", parse);
+		Text.NL();
 	}
+	Text.Flush();
 }
 
 // odds, ideal, max
@@ -770,9 +799,10 @@ TF.ItemEffects.DecLib = function(target, opts) {
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.libido.DecreaseStat(opts.ideal, opts.max)) {
-		Text.AddOutput("[name] [is] suddenly a bit more composed!", parse);
-		Text.Newline();
+		Text.Add("[name] [is] suddenly a bit more composed!", parse);
+		Text.NL();
 	}
+	Text.Flush();
 }
 
 // odds, ideal, max
@@ -781,7 +811,8 @@ TF.ItemEffects.DecCha = function(target, opts) {
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.charisma.DecreaseStat(opts.ideal, opts.max)) {
-		Text.AddOutput("[name] [is] suddenly a bit less charming!", parse);
-		Text.Newline();
+		Text.Add("[name] [is] suddenly a bit less charming!", parse);
+		Text.NL();
 	}
+	Text.Flush();
 }
