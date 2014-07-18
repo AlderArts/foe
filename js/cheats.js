@@ -467,6 +467,8 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		party.inventory.AddItem(Items.CatClaw);
 		party.inventory.AddItem(Items.Felinix);
 		
+		party.inventory.AddItem(Items.Tigris);
+		
 		party.inventory.AddItem(Items.SnakeOil);
 		party.inventory.AddItem(Items.LizardScale);
 		party.inventory.AddItem(Items.LizardEgg);

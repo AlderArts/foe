@@ -32,6 +32,11 @@ Items.EquiniumPlus.PushEffect(function(target) {
 		else
 			Text.Add("[Possessive] cock turns into a horsecock!", parse);
 		Text.NL();
+		//Add sheaths
+		for(var i = 0; i < cocks.length; i++) {
+			var cock = cocks[i];
+			cock.sheath = 1;
+		}
 	}
 	var size = false;
 	for(var i = 0; i < cocks.length; i++) {
@@ -59,6 +64,46 @@ Items.EquiniumPlus.PushEffect(TF.ItemEffects.IncSta, {odds: 0.4, ideal: 50, max:
 Items.EquiniumPlus.PushEffect(TF.ItemEffects.DecInt, {odds: 0.2, ideal: 20, max: 1});
 Items.EquiniumPlus.PushEffect(TF.ItemEffects.DecDex, {odds: 0.2, ideal: 20, max: 1});
 
+
+
+//TODO
+Items.Tigris = new TFItem("felin+0", "Tigris");
+Items.Tigris.price = 100;
+Items.Tigris.Short = function() { return "A bottle of Tigris"; }
+Items.Tigris.Long = function() { return "A bottle labeled Tigris, with the picture of a large cat on it. The fluid within is a strange mixture of black and orange."; }
+//TODO ingredients
+Items.Tigris.Recipe = [{it: Items.Felinix}, {it: Items.HairBall}, {it: Items.CatClaw}];
+// Effects
+Items.Tigris.PushEffect(TF.ItemEffects.SetBody, {odds: 0.4, race: Race.cat, str: "a feline shape, complete with fur"});
+Items.Tigris.PushEffect(TF.ItemEffects.SetArms, {odds: 0.3, race: Race.cat, str: "furred cat arms, with soft paws"});
+Items.Tigris.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.3, race: Race.cat, str: "furred cat legs, with soft paws"});
+Items.Tigris.PushEffect(TF.ItemEffects.SetCock, {odds: 0.6, race: Race.cat, str: "a feline cock"});
+Items.Tigris.PushEffect(TF.ItemEffects.SetEars, {odds: 0.6, race: Race.cat, str: "fluffy cat ears"});
+Items.Tigris.PushEffect(TF.ItemEffects.SetTail, {odds: 0.6, race: Race.cat, color: Color.orange, str: "a striped, flexible feline tail"});
+Items.Tigris.PushEffect(TF.ItemEffects.IncDex, {odds: 0.3, ideal: 35, max: 2});
+Items.Tigris.PushEffect(TF.ItemEffects.IncStr, {odds: 0.5, ideal: 45, max: 2});
+Items.Tigris.PushEffect(TF.ItemEffects.IncCha, {odds: 0.3, ideal: 25, max: 2});
+Items.Tigris.PushEffect(TF.ItemEffects.IncSta, {odds: 0.2, ideal: 40, max: 2});
+Items.Tigris.PushEffect(TF.ItemEffects.DecInt, {odds: 0.1, ideal: 25, max: 1});
+Items.Tigris.PushEffect(function(target) {
+	var parse = {
+		name: target.NameDesc(),
+		s: target == player ? "" : "s",
+		possessive: target.possessive(),
+		Possessive: target.Possessive()
+	};
+	var cocks = target.AllCocks();
+	for(var i = 0; i < cocks.length; i++) {
+		var cock = cocks[i];
+		if(cock.sheath == 0 && Math.random() < 0.4) {
+			parse["cock"] = cock.Short();
+			Text.Add("[Poss] [cock] is encased in a soft, furry sheath!", parse);
+			Text.NL();
+			cock.sheath = 1;
+		}
+	}
+	Text.Flush();
+});
 
 
 

@@ -285,11 +285,63 @@ TF.ItemEffects = {};
  */
 
 // odds, race, str
+TF.ItemEffects.SetBody = function(target, opts) {
+	var changed = TF.Effect.Unchanged;
+	var parse   = { Poss: target.Possessive(), str: opts.str };
+	var odds    = opts.odds || 1;
+	var body    = target.body.torso;
+	if(Math.random() < odds) {
+		changed = TF.SetRaceOne(body, opts.race);
+		if(changed != TF.Effect.Unchanged) {
+			Text.Add("[Poss] body turns into [str]!", parse);
+			Text.NL();
+		}
+	}
+	Text.Flush();
+	return changed;
+}
+
+// odds, race, str
+TF.ItemEffects.SetArms = function(target, opts) {
+	var changed = TF.Effect.Unchanged;
+	var parse   = { Poss: target.Possessive(), str: opts.str };
+	var odds    = opts.odds || 1;
+	var body    = target.body.arms;
+	if(Math.random() < odds) {
+		changed = TF.SetRaceOne(body, opts.race);
+		if(changed != TF.Effect.Unchanged) {
+			Text.Add("[Poss] arms turns into [str]!", parse);
+			Text.NL();
+		}
+	}
+	Text.Flush();
+	return changed;
+}
+
+// odds, race, str, count
+TF.ItemEffects.SetLegs = function(target, opts) {
+	var changed = TF.Effect.Unchanged;
+	var parse   = { Poss: target.Possessive(), str: opts.str };
+	var odds    = opts.odds || 1;
+	var count   = opts.count || 2;
+	var legs    = target.body.legs;
+	if(legs.count >= 2 && Math.random() < odds) {
+		changed = TF.SetRaceOne(legs, opts.race);
+		if(changed != TF.Effect.Unchanged) {
+			Text.Add("[Poss] legs turns into [str]!", parse);
+			Text.NL();
+		}
+	}
+	Text.Flush();
+	return changed;
+}
+
+// odds, race, str
 TF.ItemEffects.SetCock = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
-	var parse = { poss: target.possessive(), Poss: target.Possessive(), str: opts.str };
-	var odds = opts.odds || 1;
-	var cocks = target.AllCocks();
+	var parse   = { poss: target.possessive(), Poss: target.Possessive(), str: opts.str };
+	var odds    = opts.odds || 1;
+	var cocks   = target.AllCocks();
 	if(Math.random() < odds) {
 		changed = TF.SetRaceOne(cocks, opts.race);
 		if(changed != TF.Effect.Unchanged) {
@@ -307,9 +359,9 @@ TF.ItemEffects.SetCock = function(target, opts) {
 // odds, race, str
 TF.ItemEffects.SetEars = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
-	var parse = { Poss: target.Possessive(), str: opts.str };
-	var odds = opts.odds || 1;
-	var ears = target.Ears();
+	var parse   = { Poss: target.Possessive(), str: opts.str };
+	var odds    = opts.odds || 1;
+	var ears    = target.Ears();
 	if(Math.random() < odds) {
 		changed = TF.SetRaceOne(ears, opts.race);
 		if(changed != TF.Effect.Unchanged) {
@@ -324,8 +376,8 @@ TF.ItemEffects.SetEars = function(target, opts) {
 // odds, value, num
 TF.ItemEffects.SetKnot = function(target, opts) {
 	var parse = { Poss: target.Possessive(), poss: target.possessive() };
-	var odds = opts.odds || 1;
-	var num = opts.num || 1;
+	var odds  = opts.odds || 1;
+	var num   = opts.num || 1;
 	var cocks = target.AllCocks();
 	for(var i = 0; i < cocks.length; i++) {
 		if(Math.random() < odds) {
@@ -355,8 +407,8 @@ TF.ItemEffects.SetKnot = function(target, opts) {
 // odds, value, num
 TF.ItemEffects.SetSheath = function(target, opts) {
 	var parse = { Poss: target.Possessive(), poss: target.possessive() };
-	var odds = opts.odds || 1;
-	var num = opts.num || 1;
+	var odds  = opts.odds || 1;
+	var num   = opts.num || 1;
 	var cocks = target.AllCocks();
 	for(var i = 0; i < cocks.length; i++) {
 		if(Math.random() < odds) {
@@ -386,9 +438,9 @@ TF.ItemEffects.SetSheath = function(target, opts) {
 // odds, race, str, color
 TF.ItemEffects.SetTail = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
-	var parse = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
+	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
 	
-	var odds = opts.odds || 1;
+	var odds    = opts.odds || 1;
 	if(Math.random() < odds) {
 		changed = TF.SetAppendage(target.Back(), AppendageType.tail, opts.race, opts.color);
 		switch(changed) {
@@ -409,8 +461,8 @@ TF.ItemEffects.SetTail = function(target, opts) {
 // odds, count
 TF.ItemEffects.RemTail = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
-	var parse = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
-	var odds = opts.odds || 1;
+	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
+	var odds    = opts.odds || 1;
 	if(Math.random() < odds) {
 		changed = TF.RemoveAppendage(target.Back(), AppendageType.tail, opts.count);
 		switch(changed) {
@@ -431,9 +483,9 @@ TF.ItemEffects.RemTail = function(target, opts) {
 // odds, race, str, color, count
 TF.ItemEffects.SetHorn = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
-	var parse = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
+	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
 	
-	var odds = opts.odds || 1;
+	var odds    = opts.odds || 1;
 	if(Math.random() < odds) {
 		changed = TF.SetAppendage(target.Appendages(), AppendageType.horn, opts.race, opts.color, opts.count);
 		switch(changed) {
@@ -454,8 +506,8 @@ TF.ItemEffects.SetHorn = function(target, opts) {
 // odds, count
 TF.ItemEffects.RemHorn = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
-	var parse = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
-	var odds = opts.odds || 1;
+	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
+	var odds    = opts.odds || 1;
 	if(Math.random() < odds) {
 		changed = TF.RemoveAppendage(target.Appendages(), AppendageType.horn, opts.count);
 		switch(changed) {
@@ -476,9 +528,9 @@ TF.ItemEffects.RemHorn = function(target, opts) {
 // odds, race, str, color, count
 TF.ItemEffects.SetAntenna = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
-	var parse = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
+	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
 	
-	var odds = opts.odds || 1;
+	var odds    = opts.odds || 1;
 	if(Math.random() < odds) {
 		changed = TF.SetAppendage(target.Appendages(), AppendageType.antenna, opts.race, opts.color, opts.count);
 		switch(changed) {
@@ -499,8 +551,8 @@ TF.ItemEffects.SetAntenna = function(target, opts) {
 // odds, count
 TF.ItemEffects.RemAntenna = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
-	var parse = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
-	var odds = opts.odds || 1;
+	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
+	var odds    = opts.odds || 1;
 	if(Math.random() < odds) {
 		changed = TF.RemoveAppendage(target.Appendages(), AppendageType.antenna, opts.count);
 		switch(changed) {
@@ -521,9 +573,9 @@ TF.ItemEffects.RemAntenna = function(target, opts) {
 // odds, race, str, color, count
 TF.ItemEffects.SetWings = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
-	var parse = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
+	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
 	
-	var odds = opts.odds || 1;
+	var odds    = opts.odds || 1;
 	if(Math.random() < odds) {
 		changed = TF.SetAppendage(target.Back(), AppendageType.wing, opts.race, opts.color, opts.count);
 		switch(changed) {
@@ -544,8 +596,8 @@ TF.ItemEffects.SetWings = function(target, opts) {
 // odds, count
 TF.ItemEffects.RemWings = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
-	var parse = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
-	var odds = opts.odds || 1;
+	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
+	var odds    = opts.odds || 1;
 	if(Math.random() < odds) {
 		changed = TF.RemoveAppendage(target.Back(), AppendageType.wing, opts.count);
 		switch(changed) {
@@ -566,8 +618,8 @@ TF.ItemEffects.RemWings = function(target, opts) {
 // odds, race, color, ideal, count
 TF.ItemEffects.SetBalls = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
-	var parse = { name: target.NameDesc(), s: target == player ? "" : "s", count: Text.NumToText(opts.count), ballsDesc: function() { return target.BallsDesc(); } };
-	var odds = opts.odds || 2;
+	var parse   = { name: target.NameDesc(), s: target == player ? "" : "s", count: Text.NumToText(opts.count), ballsDesc: function() { return target.BallsDesc(); } };
+	var odds    = opts.odds || 2;
 	if(Math.random() < odds) {
 		changed = TF.SetBalls(target.body.balls, opts.ideal, opts.count);
 		switch(changed) {
@@ -588,8 +640,8 @@ TF.ItemEffects.SetBalls = function(target, opts) {
 // odds, ideal, count
 TF.ItemEffects.RemBalls = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
-	var parse = { name: target.NameDesc(), count: Text.NumToText(opts.count), hisher: target.hisher(), ballsDesc: target.BallsDesc() };
-	var odds = opts.odds || 1;
+	var parse   = { name: target.NameDesc(), count: Text.NumToText(opts.count), hisher: target.hisher(), ballsDesc: target.BallsDesc() };
+	var odds    = opts.odds || 1;
 	if(Math.random() < odds) {
 		changed = TF.RemoveAppendage(target.body.balls, opts.ideal, opts.count);
 		switch(changed) {
@@ -611,7 +663,7 @@ TF.ItemEffects.RemBalls = function(target, opts) {
 TF.ItemEffects.SetIdealCockLen = function(target, opts) {
 	var parse = { Poss: target.Possessive() };
 	
-	var odds = opts.odds || 1;
+	var odds  = opts.odds || 1;
 	var cocks = target.AllCocks();
 	for(var i = 0; i < cocks.length; i++) {
 		if(Math.random() < odds) {
@@ -630,7 +682,7 @@ TF.ItemEffects.SetIdealCockLen = function(target, opts) {
 TF.ItemEffects.SetIdealCockThk = function(target, opts) {
 	var parse = { Poss: target.Possessive() };
 	
-	var odds = opts.odds || 1;
+	var odds  = opts.odds || 1;
 	var cocks = target.AllCocks();
 	for(var i = 0; i < cocks.length; i++) {
 		if(Math.random() < odds) {
@@ -649,7 +701,7 @@ TF.ItemEffects.SetIdealCockThk = function(target, opts) {
 
 // odds, ideal, max
 TF.ItemEffects.IncStr = function(target, opts) {
-	var odds = opts.odds || 1;
+	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.strength.IncreaseStat(opts.ideal, opts.max)) {
@@ -661,7 +713,7 @@ TF.ItemEffects.IncStr = function(target, opts) {
 
 // odds, ideal, max
 TF.ItemEffects.IncSta = function(target, opts) {
-	var odds = opts.odds || 1;
+	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.stamina.IncreaseStat(opts.ideal, opts.max)) {
@@ -673,7 +725,7 @@ TF.ItemEffects.IncSta = function(target, opts) {
 
 // odds, ideal, max
 TF.ItemEffects.IncDex = function(target, opts) {
-	var odds = opts.odds || 1;
+	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.dexterity.IncreaseStat(opts.ideal, opts.max)) {
@@ -685,7 +737,7 @@ TF.ItemEffects.IncDex = function(target, opts) {
 
 // odds, ideal, max
 TF.ItemEffects.IncInt = function(target, opts) {
-	var odds = opts.odds || 1;
+	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.intelligence.IncreaseStat(opts.ideal, opts.max)) {
@@ -697,7 +749,7 @@ TF.ItemEffects.IncInt = function(target, opts) {
 
 // odds, ideal, max
 TF.ItemEffects.IncSpi = function(target, opts) {
-	var odds = opts.odds || 1;
+	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.spirit.IncreaseStat(opts.ideal, opts.max)) {
@@ -709,7 +761,7 @@ TF.ItemEffects.IncSpi = function(target, opts) {
 
 // odds, ideal, max
 TF.ItemEffects.IncLib = function(target, opts) {
-	var odds = opts.odds || 1;
+	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.libido.IncreaseStat(opts.ideal, opts.max)) {
@@ -721,7 +773,7 @@ TF.ItemEffects.IncLib = function(target, opts) {
 
 // odds, ideal, max
 TF.ItemEffects.IncCha = function(target, opts) {
-	var odds = opts.odds || 1;
+	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.charisma.IncreaseStat(opts.ideal, opts.max)) {
@@ -735,7 +787,7 @@ TF.ItemEffects.IncCha = function(target, opts) {
 
 // odds, ideal, max
 TF.ItemEffects.DecStr = function(target, opts) {
-	var odds = opts.odds || 1;
+	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.strength.DecreaseStat(opts.ideal, opts.max)) {
@@ -747,7 +799,7 @@ TF.ItemEffects.DecStr = function(target, opts) {
 
 // odds, ideal, max
 TF.ItemEffects.DecSta = function(target, opts) {
-	var odds = opts.odds || 1;
+	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.stamina.DecreaseStat(opts.ideal, opts.max)) {
@@ -759,7 +811,7 @@ TF.ItemEffects.DecSta = function(target, opts) {
 
 // odds, ideal, max
 TF.ItemEffects.DecDex = function(target, opts) {
-	var odds = opts.odds || 1;
+	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.dexterity.DecreaseStat(opts.ideal, opts.max)) {
@@ -771,7 +823,7 @@ TF.ItemEffects.DecDex = function(target, opts) {
 
 // odds, ideal, max
 TF.ItemEffects.DecInt = function(target, opts) {
-	var odds = opts.odds || 1;
+	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.intelligence.DecreaseStat(opts.ideal, opts.max)) {
@@ -783,7 +835,7 @@ TF.ItemEffects.DecInt = function(target, opts) {
 
 // odds, ideal, max
 TF.ItemEffects.DecSpi = function(target, opts) {
-	var odds = opts.odds || 1;
+	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.spirit.DecreaseStat(opts.ideal, opts.max)) {
@@ -795,7 +847,7 @@ TF.ItemEffects.DecSpi = function(target, opts) {
 
 // odds, ideal, max
 TF.ItemEffects.DecLib = function(target, opts) {
-	var odds = opts.odds || 1;
+	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.libido.DecreaseStat(opts.ideal, opts.max)) {
@@ -807,7 +859,7 @@ TF.ItemEffects.DecLib = function(target, opts) {
 
 // odds, ideal, max
 TF.ItemEffects.DecCha = function(target, opts) {
-	var odds = opts.odds || 1;
+	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
 	target.charisma.DecreaseStat(opts.ideal, opts.max)) {
