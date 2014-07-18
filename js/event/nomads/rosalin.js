@@ -2498,7 +2498,7 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	Text.NL();
 	parse["boygirl"] = player.Gender() == Gender.male ? "boy" : "girl";
 	if(sexState == RosalinSexState.Rut)
-		Text.Add("<i>\"That's right... good [boygirl]. Now hurry up, before I decide to ram this down you throat myself!\"</i> The [raceDesc] alchemist huffs, panting with need, barely able to contain [himher]self.", parse);
+		Text.Add("<i>\"That's right... good [boygirl]. Now hurry up, before I decide to ram this down your throat myself!\"</i> The [raceDesc] alchemist huffs, panting with need, barely able to contain [himher]self.", parse);
 	else
 		Text.Add("Rosalin, still lost in self-pleasure, gradually becomes aware of you. <i>\"Uh, [playername]. W-what are you doing down there?\"</i> [HeShe] groans after a particularly powerful bolt of pleasure assails [himher]. <i>\"J-just hurry up and do something!\"</i> [heshe] stammers.", parse);
 	Text.NL();
@@ -2517,7 +2517,7 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 		Text.Add("You respond by palming [hisher] [rVagDesc], your thumb resting upon [hisher] [rClitDesc], slowly ticking back and forth like the arm of a perverse metronome. [HisHer] juices run freely into your hand, anointing you with the warm secretions of [hisher] pleasure.", parse);
 	Text.NL();
 	parse["anim"] = cock.race != Race.human ? " and animalistic" : "";
-	Text.Add("The alchemist's marvellous genetalia are so potent[anim] that you unwittingly find yourself pushing forward, trying to cram [himher] further into your throat. It's difficult to resist, but you endure in order to more properly worship [hisher] wonderful tool. There will be time to deepthroat it when [heshe]'s about to climax.", parse);
+	Text.Add("The alchemist's marvellous genitalia are so potent[anim] that you unwittingly find yourself pushing forward, trying to cram [himher] further into your throat. It's difficult to resist, but you endure in order to more properly worship [hisher] wonderful tool. There will be time to deepthroat it when [heshe]'s about to climax.", parse);
 	Text.NL();
 	if(cock.sheath == 1)
 		Text.Add("Slipping a hand into [hisher] sheath to tenderly hold [himher], you push yourself back, allowing [hisher] dong to slide out of your mouth, covered in your saliva. ", parse);

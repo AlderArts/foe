@@ -225,7 +225,7 @@ Scenes.Cale.FirstApproach = function() {
 				Text.NL();
 				Text.Add("Chuckling, you remark that he’s in quite a hurry to be used isn’t he? Well you’d like to at least know the name of your beta before going any further.", parse);
 				Text.NL();
-				Text.Add("He slaps his forehead with an open palm. Clearly he forgot his manners in his eagerness to get you inside his tent. <i>”S-Sorry,”</i> he apologizes in embarrassment. <i>”I’m Cale,”</i> he says, tail wagging as he bows slightly. <i>”Umm… [playerName].”</i>", parse);
+				Text.Add("He slaps his forehead with an open palm. Clearly he forgot his manners in his eagerness to get you inside his tent. <i>”S-Sorry,”</i> he apologizes in embarrassment. <i>”I’m Cale,”</i> he says, tail wagging as he bows slightly. <i>”Umm… [playername].”</i>", parse);
 				Text.NL();
 				Text.Add("Now, that’s better. You get up on your feet and walk up to him. Offering a hand you lift him to his feet and deftly button up his pants. Can’t have the whole world sizing up your beta now, can you? Then you turn him towards the tent he pointed at earlier, and send him on his way with an audible slap on his butt. He yelps in surprise, but quickly moves to comply as you follow in tow.", parse);
 				Text.Flush();
