@@ -243,11 +243,12 @@ Jobs["Rogue"].Unlocked = function() {
 Jobs["Rogue"].preqs.push({job : Jobs["Fighter"], lvl : 3});
 Jobs["Rogue"].abilities.AddAbility(Abilities.Physical.DirtyBlow);
 Jobs["Rogue"].abilities.AddAbility(Abilities.Physical.Kicksand);
+Jobs["Rogue"].abilities.AddAbility(Abilities.Physical.Swift);
 Jobs["Rogue"].levels.push(new JobLevel(20,   [{ab: Abilities.Physical.DirtyBlow, set: "Skills"}], {"dex" : 0.3}));
 Jobs["Rogue"].levels.push(new JobLevel(40,   null, {"dex" : 0.2, "int" : 0.1}));
 Jobs["Rogue"].levels.push(new JobLevel(80,   [{ab: Abilities.Physical.Kicksand, set: "Skills"}], {"cha" : 0.2, "lib" : 0.1}));
 Jobs["Rogue"].levels.push(new JobLevel(160,  null, {"dex" : 0.3}));
-Jobs["Rogue"].levels.push(new JobLevel(320,  null, {"dex" : 0.2, "str" : 0.1}));
+Jobs["Rogue"].levels.push(new JobLevel(320,  [{ab: Abilities.Physical.Swift, set: "Support"}], {"dex" : 0.2, "str" : 0.1}));
 Jobs["Rogue"].levels.push(new JobLevel(640,  null, {"dex" : 0.2, "int" : 0.1}));
 Jobs["Rogue"].levels.push(new JobLevel(1280, null, {"dex" : 0.3, "int" : 0.1, "cha" : 0.1}));
 

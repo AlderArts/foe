@@ -199,6 +199,29 @@ Abilities.Physical.Kicksand.OnMiss = function(encounter, caster, target) {
 }
 
 
+Abilities.Physical.Swift = new Ability();
+Abilities.Physical.Swift.name = "Swift";
+Abilities.Physical.Swift.Short = function() { return "Briefly boosts caster speed."; }
+Abilities.Physical.Swift.targetMode = TargetMode.Self;
+Abilities.Physical.Swift.cost = { hp: null, sp: 25, lp: null};
+Abilities.Physical.Swift.CastInternal = function(encounter, caster) {
+	var parse = {
+		name : caster.name,
+		es : caster.plural() ? "" : "es",
+		hisher : caster.hisher()
+	}
+
+	Status.Haste(caster, { turns : 3, turnsR : 3, factor : 2 });
+
+	Text.AddOutput("[name] focus[es], briefly boosting [hisher] speed!", parse);
+	Text.Newline();
+	
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
+
+
 Abilities.Physical.FocusStrike = new AttackPhysical();
 Abilities.Physical.FocusStrike.name = "FocusStrike";
 Abilities.Physical.FocusStrike.Short = function() { return "Bypass defenses."; }

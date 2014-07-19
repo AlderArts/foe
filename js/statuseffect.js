@@ -42,6 +42,7 @@ LoadStatusImages = function(ready) {
 	Images.status[StatusEffect.Numb]   = "data/status/numb.png";
 	Images.status[StatusEffect.Venom]  = "data/status/venom.png";
 	Images.status[StatusEffect.Blind]  = "data/status/blind.png";
+	Images.status[StatusEffect.Haste]  = "data/status/haste.png";
 	Images.status[StatusEffect.Horny]  = "data/status/horny.png";
 	Images.status[StatusEffect.Decoy]  = "data/status/decoy.png";
 	
@@ -225,7 +226,7 @@ Status.Numb = function(target, opts) {
 	if(!target) return;
 	opts = opts || {};
 	
-	// Check for freeze resist
+	// Check for numb resist
 	var odds = (opts.hit || 1) * (1 - target.NumbResist());
 	if(Math.random() > odds) {
 		return false;
@@ -255,7 +256,7 @@ Status.Blind = function(target, opts) {
 	if(!target) return;
 	opts = opts || {};
 	
-	// Check for freeze resist
+	// Check for blind resist
 	var odds = (opts.hit || 1) * (1 - target.BlindResist());
 	if(Math.random() > odds) {
 		return false;
@@ -276,6 +277,33 @@ Status.Blind.Tick = function(target) {
 	// Remove blind effect
 	if(this.turns <= 0) {
 		target.combatStatus.stats[StatusEffect.Blind] = null;
+	}
+}
+
+
+// TODO: Use as heal of slow?
+Status.Haste = function(target, opts) {
+	if(!target) return;
+	opts = opts || {};
+	
+	// Number of turns effect lasts (static + random factor)
+	var turns = opts.turns || 0;
+	turns += Math.random() * (opts.turnsR || 0);
+	var factor = opts.factor || 2;
+	// Apply effect
+	target.combatStatus.stats[StatusEffect.Haste] = {
+		turns   : turns,
+		factor  : factor,
+		Tick    : Status.Haste.Tick
+	};
+	
+	return true;
+}
+Status.Haste.Tick = function(target) {
+	this.turns--;
+	// Remove haste effect
+	if(this.turns <= 0) {
+		target.combatStatus.stats[StatusEffect.Haste] = null;
 	}
 }
 

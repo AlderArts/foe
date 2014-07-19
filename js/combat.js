@@ -322,8 +322,12 @@ Encounter.prototype.CombatTick = function() {
 			for(var i=0,j=this.combatOrder.length; i<j; i++) {
 				var c = this.combatOrder[i];
 				
-				if(!c.entity.Incapacitated())
-					c.initiative += c.entity.Initiative();
+				if(!c.entity.Incapacitated()) {
+					var ini = c.entity.Initiative();
+					var haste = currentActiveChar.combatStatus[StatusEffect.Haste];
+					if(haste) ini *= haste.factor;
+					c.initiative += ini;
+				}
 			}
 		}
 		

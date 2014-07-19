@@ -225,10 +225,11 @@ Abilities.White.Cheer.cost = { hp: null, sp: 30, lp: null};
 Abilities.White.Cheer.CastInternal = function(encounter, caster, target) {
 	// TODO: Make more flavor text
 	var parse = {
-		name : caster.name
+		name : caster.name,
+		s : caster.plural() ? "" : "s"
 	}
 
-	Text.AddOutput("[name] cheers the party on, raising morale!", parse);
+	Text.AddOutput("[name] cheer[s] the party on, raising morale!", parse);
 	Text.Newline();
 	
 	for(var i = 0; i < target.members.length; i++) {
@@ -254,11 +255,12 @@ Abilities.White.Pinpoint.CastInternal = function(encounter, caster, target) {
 	
 	var parse = {
 		name : caster.name,
-		tName : target.name
+		tName : target.name,
+		s : caster.plural() ? "" : "s"
 	}
 
 	// TODO: Make more flavor text
-	Text.AddOutput("[name] casts pinpoint on [tName], making them more limber!", parse);
+	Text.AddOutput("[name] cast[s] pinpoint on [tName], making them more limber!", parse);
 	Text.Newline();
 	
 	Gui.NextPrompt(function() {
@@ -280,11 +282,12 @@ Abilities.White.Toughen.CastInternal = function(encounter, caster, target) {
 	
 	var parse = {
 		name : caster.name,
-		tName : target.name
+		tName : target.name,
+		s : caster.plural() ? "" : "s"
 	}
 
 	// TODO: Make more flavor text
-	Text.AddOutput("[name] casts toughen on [tName], protecting them from harm!", parse);
+	Text.AddOutput("[name] cast[s] toughen on [tName], protecting them from harm!", parse);
 	Text.Newline();
 	
 	Gui.NextPrompt(function() {
@@ -306,11 +309,12 @@ Abilities.White.Empower.CastInternal = function(encounter, caster, target) {
 	
 	var parse = {
 		name : caster.name,
-		tName : target.name
+		tName : target.name,
+		s : caster.plural() ? "" : "s"
 	}
 
 	// TODO: Make more flavor text
-	Text.AddOutput("[name] casts empower on [tName], filling them with strength!", parse);
+	Text.AddOutput("[name] cast[s] empower on [tName], filling them with strength!", parse);
 	Text.Newline();
 	
 	Gui.NextPrompt(function() {
