@@ -41,6 +41,7 @@ LoadStatusImages = function(ready) {
 	Images.status[StatusEffect.Freeze] = "data/status/freeze.png";
 	Images.status[StatusEffect.Numb]   = "data/status/numb.png";
 	Images.status[StatusEffect.Venom]  = "data/status/venom.png";
+	Images.status[StatusEffect.Blind]  = "data/status/blind.png";
 	Images.status[StatusEffect.Horny]  = "data/status/horny.png";
 	Images.status[StatusEffect.Decoy]  = "data/status/decoy.png";
 	
