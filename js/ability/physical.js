@@ -175,6 +175,30 @@ Abilities.Physical.DirtyBlow.TargetEffect = function(encounter, caster, target) 
 }
 
 
+Abilities.Physical.Kicksand = new AttackPhysical();
+Abilities.Physical.Kicksand.name = "Kick sand";
+Abilities.Physical.Kicksand.Short = function() { return "Kick dirt in the enemy's eyes. Single target."; }
+Abilities.Physical.Kicksand.cost = { hp: null, sp: 15, lp: null};
+Abilities.Physical.Kicksand.atkMod = 0.05;
+Abilities.Physical.Kicksand.OnCast = function(encounter, caster, target) {
+	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
+	Text.AddOutput("[name] kick[s] some dirt toward [tName]! ", parse);
+}
+Abilities.Physical.Kicksand.OnHit = function(encounter, caster, target, dmg) {
+	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", himher : target.himher(), name : caster.nameDesc() };
+	if(Status.Numb(target, { hit : 0.4, turns : 3, turnsR : 3 })) {
+		Text.AddOutput("[tName] get[s] a face-full of dirt, blinding [himher]!", parse);
+	}
+	Text.Newline();
+}
+Abilities.Physical.Kicksand.OnAbsorb = Abilities.Physical.Kicksand.OnHit;
+Abilities.Physical.Kicksand.OnMiss = function(encounter, caster, target) {
+	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
+	Text.AddOutput("[tName] easily avoid[s] the attack.", parse);
+	Text.Newline();
+}
+
+
 Abilities.Physical.FocusStrike = new AttackPhysical();
 Abilities.Physical.FocusStrike.name = "FocusStrike";
 Abilities.Physical.FocusStrike.Short = function() { return "Bypass defenses."; }

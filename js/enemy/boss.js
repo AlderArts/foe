@@ -16,3 +16,15 @@ BossEntity.prototype.PoisonResist = function() {
 BossEntity.prototype.BurnResist = function() {
 	return 1;
 }
+BossEntity.prototype.FreezeResist = function() {
+	return 1;
+}
+BossEntity.prototype.NumbResist = function() {
+	return 1;
+}
+BossEntity.prototype.BlindResist = function() {
+	return 1;
+}
+BossEntity.prototype.HornyResist = function() {
+	return 1;
+}

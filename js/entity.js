@@ -1081,6 +1081,9 @@ Entity.prototype.FreezeResist = function() {
 Entity.prototype.NumbResist = function() {
 	return 0;
 }
+Entity.prototype.BlindResist = function() {
+	return 0;
+}
 Entity.prototype.HornyResist = function() {
 	return 0;
 }

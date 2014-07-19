@@ -250,6 +250,35 @@ Status.Numb.Tick = function(target) {
 }
 
 
+Status.Blind = function(target, opts) {
+	if(!target) return;
+	opts = opts || {};
+	
+	// Check for freeze resist
+	var odds = (opts.hit || 1) * (1 - target.BlindResist());
+	if(Math.random() > odds) {
+		return false;
+	}
+	// Number of turns effect lasts (static + random factor)
+	var turns = opts.turns || 0;
+	turns += Math.random() * (opts.turnsR || 0);
+	// Apply effect
+	target.combatStatus.stats[StatusEffect.Blind] = {
+		turns   : turns,
+		Tick    : Status.Blind.Tick
+	};
+	
+	return true;
+}
+Status.Blind.Tick = function(target) {
+	this.turns--;
+	// Remove blind effect
+	if(this.turns <= 0) {
+		target.combatStatus.stats[StatusEffect.Blind] = null;
+	}
+}
+
+
 Status.Horny = function(target, opts) {
 	if(!target) return;
 	opts = opts || {};
