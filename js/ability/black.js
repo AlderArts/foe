@@ -99,7 +99,8 @@ Abilities.Black.Fireball.OnAbsorb = function(encounter, caster, target, dmg) {
 Abilities.Black.Fireball.TargetEffect = function(encounter, caster, target) {
 	var parse = { target : target.NameDesc(), has : target.has(), s : target.plural() ? "" : "s" };
 	if(Status.Burn(target, { hit : 0.2, turns : 3, turnsR : 5, str : 1, dmg : 0.2 })) {
-		Text.AddOutput("[target] [has] been burned! ", parse);
+		Text.AddOutput("[target] [has] been burned!", parse);
+		Text.Newline();
 	}
 }
 
@@ -115,7 +116,8 @@ Abilities.Black.Freeze.OnCast = function(encounter, caster, target) {
 Abilities.Black.Freeze.TargetEffect = function(encounter, caster, target) {
 	var parse = { target : target.NameDesc(), has : target.has(), s : target.plural() ? "" : "s" };
 	if(Status.Freeze(target, { hit : 0.2, turns : 3, turnsR : 5, proc : 0.5, str : 1.2 })) {
-		Text.AddOutput("[target] [has] been afflicted with freeze! ", parse);
+		Text.AddOutput("[target] [has] been afflicted with freeze!", parse);
+		Text.Newline();
 	}
 }
 
@@ -136,7 +138,8 @@ Abilities.Black.Bolt.OnAbsorb = function(encounter, caster, target, dmg) {
 Abilities.Black.Bolt.TargetEffect = function(encounter, caster, target) {
 	var parse = { target : target.NameDesc(), has : target.has() };
 	if(Status.Numb(target, { hit : 0.2, turns : 3, turnsR : 5, proc : 0.25 })) {
-		Text.AddOutput("[target] [has] been afflicted with numb! ", parse);
+		Text.AddOutput("[target] [has] been afflicted with numb!", parse);
+		Text.Newline();
 	}
 }
 
