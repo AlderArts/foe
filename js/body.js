@@ -1834,7 +1834,7 @@ Body.prototype.HasLongSnout = function() {
 
 Body.prototype.SoftFeet = function() {
 	var legs = this.legs;
-	if(!legs) return false;
+	if(!legs || legs.count == 0) return false;
 	
 	switch(legs.race) {
 		case Race.cow:
@@ -1864,7 +1864,7 @@ Body.prototype.SoftFeet = function() {
 
 Body.prototype.FeetDesc = function() {
 	var legs = this.legs;
-	if(!legs) return "body";
+	if(!legs || legs.count == 0) return "body";
 	
 	switch(legs.race) {
 		case Race.cow:
@@ -1893,7 +1893,7 @@ Body.prototype.FeetDesc = function() {
 }
 Body.prototype.FootDesc = function() {
 	var legs = this.legs;
-	if(!legs) return "body";
+	if(!legs || legs.count == 0) return "body";
 	
 	switch(legs.race) {
 		case Race.cow:
@@ -1924,7 +1924,7 @@ Body.prototype.FootDesc = function() {
 // TODO
 Body.prototype.LegDesc = function() {
 	var legs = this.legs;
-	if(!legs) return "body";
+	if(!legs || legs.count == 0) return "body";
 	
 	switch(legs.race) {
 		case Race.cow:
@@ -1953,7 +1953,7 @@ Body.prototype.LegDesc = function() {
 // TODO
 Body.prototype.LegsDesc = function() {
 	var legs = this.legs;
-	if(!legs) return "body";
+	if(!legs || legs.count == 0) return "body";
 	
 	switch(legs.race) {
 		case Race.cow:
@@ -1983,7 +1983,7 @@ Body.prototype.LegsDesc = function() {
 // TODO
 Body.prototype.ThighDesc = function() {
 	var legs = this.legs;
-	if(!legs) return "body";
+	if(!legs || legs.count == 0) return "body";
 	
 	switch(legs.race) {
 		case Race.cow:
@@ -2012,7 +2012,7 @@ Body.prototype.ThighDesc = function() {
 // TODO
 Body.prototype.ThighsDesc = function() {
 	var legs = this.legs;
-	if(!legs) return "body";
+	if(!legs || legs.count == 0) return "body";
 	
 	switch(legs.race) {
 		case Race.cow:

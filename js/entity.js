@@ -1262,7 +1262,7 @@ Entity.prototype.FirstClitCockIdx = function() {
 	}
 	return -1;
 }
-Entity.prototype.BiggestCock = function(cocks) {
+Entity.prototype.BiggestCock = function(cocks, incStrapon) {
 	cocks = cocks || this.body.cock;
 	var c = cocks[0];
 	if(c) {
@@ -1275,7 +1275,10 @@ Entity.prototype.BiggestCock = function(cocks) {
 			}
 		};
 	}
-	return c;
+	if(c)
+		return c;
+	else if(incStrapon)
+		return this.strapOn.cock;
 }
 Entity.prototype.CocksThatFit = function(orifice, onlyRealCocks) {
 	var ret = new Array();
