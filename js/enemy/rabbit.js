@@ -116,8 +116,8 @@ function LagomorphAlpha(gender) {
 	this.libido.base       *= 2;
 	this.charisma.base     *= 1.3;
 	
-	this.level             *= 1.5;
-	this.sexlevel          *= 1.5;
+	this.level             = Math.floor(this.level * 1.5 + 0.5);
+	this.sexlevel          = Math.floor(this.sexlevel * 1.5 + 0.5);
 	
 	this.combatExp         *= 2;
 	this.coinDrop          *= 2;
