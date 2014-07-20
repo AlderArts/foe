@@ -1277,14 +1277,14 @@ Entity.prototype.BiggestCock = function(cocks) {
 	}
 	return c;
 }
-Entity.prototype.CocksThatFit = function(orifice) {
+Entity.prototype.CocksThatFit = function(orifice, onlyRealCocks) {
 	var ret = new Array();
 	for(var i=0,j=this.body.cock.length; i<j; i++) {
 		var c = this.body.cock[i];
 		if(orifice.Fits(c))
 			ret.push(c);
 	};
-	if(this.strapOn && orifice.Fits(this.strapOn.cock))
+	if(!onlyRealCocks && this.strapOn && orifice.Fits(this.strapOn.cock))
 		ret.push(this.strapOn.cock);
 	return ret;
 }
@@ -1398,7 +1398,7 @@ Entity.prototype.AllOrfices = function(capacity) {
 Entity.prototype.AllPenetrators = function(orifice) {
 	var ret = new Array();
 	
-	var cocks = this.CocksThatFitLen(orifice);
+	var cocks = this.CocksThatFit(orifice);
 	for(var i=0,j=cocks.length; i<j; i++)
 		ret.push({type: BodyPartType.cock, obj: cocks[i]});
 	// TODO: Tongue, Nipple-cock, Clitcock
