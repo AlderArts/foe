@@ -470,7 +470,7 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 			if(player.FirstVag().stretch.Get() < 6) {
 				Text.NL();
 				Text.Add("...and then she shoves in even <i>more</i>. You cry out in shock as you feel yourself stretch beyond your limits, going cross-eyed.", parse);
-				player.FirstVag().stretch.IncreaseStat(6, 2);
+				player.FirstVag().stretch.IncreaseStat(3, 2);
 				player.AddLustFraction(0.2);
 			}
 		}
@@ -483,7 +483,7 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 			if(player.Butt().stretch.Get() < 10) {
 				Text.NL();
 				Text.Add("You feel your [anusDesc] stretching agonizingly wide, and you know it will be a while before you feel tight again...", parse);
-				player.Butt().stretch.IncreaseStat(10, 2);
+				player.Butt().stretch.IncreaseStat(4, 1);
 				player.AddLustFraction(0.2);
 			}
 		}
@@ -918,7 +918,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 				if(player.Butt().stretch.Get() > 10) {
 					Text.NL();
 					Text.Add("You feel your body stretching slowly around him, his twin lengths almost painfully large inside of you.", parse);
-					player.Butt().stretch.IncreaseStat(10, 1);
+					player.Butt().stretch.IncreaseStat(3, 0.5);
 				}
 				
 				player.AddLustFraction(0.2);
