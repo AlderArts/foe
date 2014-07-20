@@ -186,7 +186,7 @@ Abilities.Physical.Kicksand.OnCast = function(encounter, caster, target) {
 }
 Abilities.Physical.Kicksand.OnHit = function(encounter, caster, target, dmg) {
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", himher : target.himher(), name : caster.nameDesc() };
-	if(Status.Numb(target, { hit : 0.4, turns : 3, turnsR : 3 })) {
+	if(Status.Blind(target, { hit : 0.8, turns : 3, turnsR : 3 })) {
 		Text.AddOutput("[tName] get[s] a face-full of dirt, blinding [himher]!", parse);
 	}
 	Text.Newline();
@@ -229,6 +229,7 @@ Abilities.Physical.Backstab.cost = { hp: null, sp: 30, lp: null};
 Abilities.Physical.Backstab.atkMod = 2;
 Abilities.Physical.Backstab.defMod = 0.75;
 Abilities.Physical.Backstab.hitMod = 2;
+Abilities.Physical.Backstab.damageType = null;
 Abilities.Physical.Backstab.OnCast = function(encounter, caster, target) {
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tname : target.nameDesc() };
 	Text.AddOutput("[name] dance[s] around [tname], dealing a crippling backstab! ", parse);
