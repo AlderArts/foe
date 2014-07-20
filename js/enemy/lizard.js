@@ -139,28 +139,44 @@ world.loc.Desert.Drylands.enc.AddEnc(function() {
 	*/
 	
 	enc.onEncounter = function() {
-		var parse = { numQ : Text.Quantify(enemy.Num()), num : Text.NumToText(enemy.Num()) };
+		var parse = {
+			numQ     : Text.Quantify(enemy.Num()),
+			num      : Text.NumToText(enemy.Num()),
+			feetDesc : function() { return player.FeetDesc(); }
+		};
 		
-		Text.AddOutput("Walking through the broad expanse of the desert, the sun beating down on you from above, you pass through a series of immense dunes. They tower above you, almost creating a valley of sand that shields you from the harsh heat of day.", parse);
+		if(world.time.hour >= 6 && world.time.hour < 19) {
+			Text.Add("Walking through the broad expanse of the desert, the sun beating down on you from above, you pass through a series of immense dunes. They tower above you, almost creating a valley of sand that shields you from the harsh heat of day.", parse);
+		}
+		else {
+			Text.Add("Even under the cover of night, the desert is a harsh, almost lifeless expanse of dry sand, stretching from horizon to horizon. You climb a series of immense sand dunes that tower above you, your [feetDesc] digging in deep, sapping your strength. At least you don’t have to worry about the sun beating down on your neck for the moment.", parse);
+		}
 		if(party.Two()) {
 			var member = party.members[1];
-			Text.AddOutput(" You glance back at [name] to make sure that [heshe] isn't hurt or dehydrated and, seeing that [heshe]'s relatively okay, press on.", { name: member.name, heshe : member.heshe() });
+			Text.Add(" You glance back at [name] to make sure that [heshe] isn't hurt or dehydrated and, seeing that [heshe]'s relatively okay, press on.", { name: member.name, heshe : member.heshe() });
 		}
 		else if(!party.Alone()) {
-			Text.AddOutput(" You glance back to your party to make sure that no one is hurt or dehydrated and, seeing that they're relatively okay, press on.", parse);
+			Text.Add(" You glance back to your party to make sure that no one is hurt or dehydrated and, seeing that they're relatively okay, press on.", parse);
 		}
-		Text.Newline();
-		Text.AddOutput("As you near the end of the monolithic dunes, you see a [numQ] of shadows fall over you. Looking up toward the sun, you see [num] shapes. You shield your eyes with one hand, and manage to make them out...", parse);
-		Text.Newline();
-		Text.AddOutput("The first is a bulky, heavily muscled creature of scales and claws. His body is covered in thick, armored, yellow-green scales, and a long and powerful tail stretches out behind him. Heavyset horns jut out from the back of his head, with the hint of small spikes protruding from either side of his angular muzzle. He holds a nasty-looking spear, and two large feet spread his weight evenly on the sand.", parse);
-		Text.Newline();
-		Text.AddOutput("Completely nude, you can't see any sign of gender between his legs, everything likely hidden within a reptilian slit. The only reason you can even tell his gender is his companion, looking like a more slender, fairer counterpart with two, large breasts held pert by a woven bra of some material you can't make out, the space between her legs similarly clad. Black hair cascades in silken tresses around her shoulders, and her eyes are painted in an exotic fashion. She holds a slightly smaller spear, which looks more designed for cutting.", parse);
-		Text.Newline();
+		Text.NL();
+		if(world.time.hour >= 6 && world.time.hour < 19) {
+			Text.Add("As you near the end of the monolithic dunes, you see a [numQ] of shadows fall over you. Looking up toward the sun, you see [num] shapes. You shield your eyes with one hand, and manage to make them out...", parse);
+		}
+		else {
+			Text.Add("As you near the ridge of one of the monolithic dunes, you see a [numQ] of black shadows hovering over you, standing out against the starry sky. In the dim light, you can just barely make them out...", parse);
+		}
+		Text.NL();
+		Text.Add("The first is a bulky, heavily muscled creature of scales and claws. His body is covered in thick, armored, yellow-green scales, and a long and powerful tail stretches out behind him. Heavyset horns jut out from the back of his head, with the hint of small spikes protruding from either side of his angular muzzle. He holds a nasty-looking spear, and two large feet spread his weight evenly on the sand.", parse);
+		Text.NL();
+		Text.Add("Completely nude, you can't see any sign of gender between his legs, everything likely hidden within a reptilian slit. The only reason you can even tell his gender is his companion, looking like a more slender, fairer counterpart with two, large breasts held pert by a woven bra of some material you can't make out, the space between her legs similarly clad. Black hair cascades in silken tresses around her shoulders, and her eyes are painted in an exotic fashion. She holds a slightly smaller spear, which looks more designed for cutting.", parse);
+		Text.NL();
 		
 		if(enc.third) {
-			Text.AddOutput("Beside the two of them, a second [gender] stands, watching you. ", { gender : Gender.Desc(enc.third.body.Gender()) });
+			Text.Add("Beside the two of them, a second [gender] stands, watching you. ", { gender : Gender.Desc(enc.third.body.Gender()) });
 		}
-		Text.AddOutput("When they realize you've spotted them, the male thrusts his spear forwards. The group surges down the slope of the sand dune toward you. It's a fight!", parse);
+		Text.Add("When they realize you've spotted them, the male thrusts his spear forwards. The group surges down the slope of the sand dune toward you. It's a fight!", parse);
+		
+		Text.Flush();
 		
 		Gui.NextPrompt(function() {
 			enc.PrepCombat();
