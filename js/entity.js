@@ -1021,6 +1021,11 @@ Entity.prototype.PDefense = function() {
 Entity.prototype.PHit = function() {
 	var hitStat = 3 * this.dexterity.Get() + this.intelligence.Get() + this.charisma.Get();
 	
+	var blind = this.combatStatus.stats[StatusEffect.Blind];
+	if(blind) {
+		hitStat *= (1 - blind.str);
+	}
+	
 	return hitStat;
 }
 

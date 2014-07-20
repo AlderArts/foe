@@ -186,7 +186,7 @@ Abilities.Physical.Kicksand.OnCast = function(encounter, caster, target) {
 }
 Abilities.Physical.Kicksand.OnHit = function(encounter, caster, target, dmg) {
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", himher : target.himher(), name : caster.nameDesc() };
-	if(Status.Blind(target, { hit : 0.8, turns : 3, turnsR : 3 })) {
+	if(Status.Blind(target, { hit : 0.8, str : 0.5, turns : 3, turnsR : 3 })) {
 		Text.AddOutput("[tName] get[s] a face-full of dirt, blinding [himher]!", parse);
 	}
 	Text.Newline();

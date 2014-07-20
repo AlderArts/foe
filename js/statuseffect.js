@@ -264,9 +264,11 @@ Status.Blind = function(target, opts) {
 	// Number of turns effect lasts (static + random factor)
 	var turns = opts.turns || 0;
 	turns += Math.random() * (opts.turnsR || 0);
+	var str = opts.str || 0;
 	// Apply effect
 	target.combatStatus.stats[StatusEffect.Blind] = {
 		turns   : turns,
+		str     : str,
 		Tick    : Status.Blind.Tick
 	};
 	
