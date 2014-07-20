@@ -324,7 +324,7 @@ Encounter.prototype.CombatTick = function() {
 				
 				if(!c.entity.Incapacitated()) {
 					var ini = c.entity.Initiative();
-					var haste = currentActiveChar.combatStatus[StatusEffect.Haste];
+					var haste = c.entity.combatStatus[StatusEffect.Haste];
 					if(haste) ini *= haste.factor;
 					c.initiative += ini;
 				}
