@@ -13,6 +13,12 @@ function Terry(storage) {
 	
 	this.avatar.combat = Images.terry;
 	
+	this.currentJob = Jobs.Rogue;
+	this.jobs["Fighter"]   = new JobDesc(Jobs.Fighter);
+	this.jobs["Fighter"].level = 3;
+	this.jobs["Fighter"].mult  = 2;
+	this.jobs["Rogue"]     = new JobDesc(Jobs.Rogue);
+	
 	this.maxHp.base        = 50;
 	this.maxSp.base        = 60; this.maxSp.growth        = 6;
 	this.maxLust.base      = 50;
@@ -50,6 +56,7 @@ function Terry(storage) {
 	this.flags["Met"]   = 0;
 	this.flags["Saved"] = 0;
 	this.flags["PrefGender"] = Gender.male;
+	this.flags["Rogue"] = 0;
 	
 	this.sbombs = 3;
 	this.hidingSpot = world.loc.Rigard.ShopStreet.street;
@@ -74,6 +81,11 @@ Terry.Saved = {
 	TalkedTwins2  : 3,
 	Saved         : 4
 };
+Terry.Rogue = {
+	Locked : 0,
+	First  : 1,
+	Taught : 2
+}
 
 Terry.prototype.FromStorage = function(storage) {
 	this.Butt().virgin       = parseInt(storage.virgin) == 1;

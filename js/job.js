@@ -236,21 +236,23 @@ Jobs["Bruiser"].levels.push(new JobLevel(640,  null, {"sta" : 0.2, "dex" : 0.1})
 Jobs["Bruiser"].levels.push(new JobLevel(1280, null, {"str" : 0.1, "sta" : 0.3, "dex" : 0.1}));
 
 Jobs["Rogue"] = new Job("Rogue");
-Jobs["Rogue"].Unlocked = function() {
-	return (cale.flags["Rogue"] == Cale.Rogue.Taught) ||
-	       false; // TODO Terry
+Jobs["Rogue"].Unlocked = function(entity) {
+	if(entity == terry) return true;
+	return (cale.flags["Rogue"]  == Cale.Rogue.Taught) ||
+	       (terry.flags["Rogue"] == Terry.Rogue.Taught);
 }
 Jobs["Rogue"].preqs.push({job : Jobs["Fighter"], lvl : 3});
 Jobs["Rogue"].abilities.AddAbility(Abilities.Physical.DirtyBlow);
 Jobs["Rogue"].abilities.AddAbility(Abilities.Physical.Kicksand);
 Jobs["Rogue"].abilities.AddAbility(Abilities.Physical.Swift);
+Jobs["Rogue"].abilities.AddAbility(Abilities.Physical.Backstab);
 Jobs["Rogue"].levels.push(new JobLevel(20,   [{ab: Abilities.Physical.DirtyBlow, set: "Skills"}], {"dex" : 0.3}));
 Jobs["Rogue"].levels.push(new JobLevel(40,   null, {"dex" : 0.2, "int" : 0.1}));
 Jobs["Rogue"].levels.push(new JobLevel(80,   [{ab: Abilities.Physical.Kicksand, set: "Skills"}], {"cha" : 0.2, "lib" : 0.1}));
 Jobs["Rogue"].levels.push(new JobLevel(160,  null, {"dex" : 0.3}));
 Jobs["Rogue"].levels.push(new JobLevel(320,  [{ab: Abilities.Physical.Swift, set: "Support"}], {"dex" : 0.2, "str" : 0.1}));
 Jobs["Rogue"].levels.push(new JobLevel(640,  null, {"dex" : 0.2, "int" : 0.1}));
-Jobs["Rogue"].levels.push(new JobLevel(1280, null, {"dex" : 0.3, "int" : 0.1, "cha" : 0.1}));
+Jobs["Rogue"].levels.push(new JobLevel(1280, [{ab: Abilities.Physical.Backstab, set: "Skills"}], {"dex" : 0.3, "int" : 0.1, "cha" : 0.1}));
 
 Jobs["Mage"] = new Job("Mage");
 Jobs["Mage"].Long = function(entity) { return Text.Parse("The mage has taken the first steps into exploring the raw power of the elements and the chaotic force of magic. While [heshe] has barely begun tapping [hisher] innate potential, the mage already possesses a formidable destructive power.", {hisher: entity.hisher(), heshe: entity.heshe()}); }

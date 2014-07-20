@@ -222,6 +222,22 @@ Abilities.Physical.Swift.CastInternal = function(encounter, caster) {
 }
 
 
+Abilities.Physical.Backstab = new AttackPhysical();
+Abilities.Physical.Backstab.name = "Backstab";
+Abilities.Physical.Backstab.Short = function() { return "Deal high damage against a disabled target."; }
+Abilities.Physical.Backstab.cost = { hp: null, sp: 30, lp: null};
+Abilities.Physical.Backstab.atkMod = 2;
+Abilities.Physical.Backstab.defMod = 0.75;
+Abilities.Physical.Backstab.hitMod = 2;
+Abilities.Physical.Backstab.OnCast = function(encounter, caster, target) {
+	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tname : target.nameDesc() };
+	Text.AddOutput("[name] dance[s] around [tname], dealing a crippling backstab! ", parse);
+}
+Abilities.Physical.Backstab.enabledTargetCondition = function(encounter, caster, target) {
+	return target.Inhibited();
+}
+
+
 Abilities.Physical.FocusStrike = new AttackPhysical();
 Abilities.Physical.FocusStrike.name = "FocusStrike";
 Abilities.Physical.FocusStrike.Short = function() { return "Bypass defenses."; }
@@ -230,7 +246,7 @@ Abilities.Physical.FocusStrike.defMod = 0.2;
 Abilities.Physical.FocusStrike.damageType.pPierce = 1.5;
 Abilities.Physical.FocusStrike.OnCast = function(encounter, caster, target) {
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tPossessive : target.possessive() };
-	Text.AddOutput("[name] aims [hisher] strike on a weak point in [tPossessive] guard! ", parse);
+	Text.AddOutput("[name] aim[s] [hisher] strike on a weak point in [tPossessive] guard! ", parse);
 }
 
 

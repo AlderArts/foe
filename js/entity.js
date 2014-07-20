@@ -716,6 +716,18 @@ Entity.prototype.Cha = function() {
 Entity.prototype.Incapacitated = function() {
 	return this.curHp <= 0; // || this.curLust >= this.Lust();
 }
+Entity.prototype.Inhibited = function() {
+	if(this.combatStatus.stats[StatusEffect.Freeze]  != null) return true;
+	if(this.combatStatus.stats[StatusEffect.Numb]    != null) return true;
+	if(this.combatStatus.stats[StatusEffect.Petrify] != null) return true;
+	if(this.combatStatus.stats[StatusEffect.Blind]   != null) return true;
+	if(this.combatStatus.stats[StatusEffect.Sleep]   != null) return true;
+	if(this.combatStatus.stats[StatusEffect.Enrage]  != null) return true;
+	if(this.combatStatus.stats[StatusEffect.Fatigue] != null) return true;
+	if(this.combatStatus.stats[StatusEffect.Limp]    != null) return true;
+	
+	return false;
+}
 
 Entity.prototype.AddHPFraction = function(fraction) {
 	fraction = fraction || 0;

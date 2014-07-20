@@ -128,7 +128,7 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt) {
 			  	func    : function(t) {
 			  		ability.Use(encounter, caster, t);
 			  	},
-			  	enabled : true,
+			  	enabled : ability.enabledTargetCondition(encounter, caster, t),
 			  	obj     : t
 			});
 		};
@@ -147,7 +147,7 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt) {
 			  	func    : function(t) {
 			  		ability.Use(encounter, caster, t);
 			  	},
-			  	enabled : true,
+			  	enabled : ability.enabledTargetCondition(encounter, caster, t),
 			  	obj     : t
 			});
 		};
@@ -166,7 +166,7 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt) {
 			  	func    : function(t) {
 			  		ability.Use(encounter, caster, t);
 			  	},
-			  	enabled : true,
+			  	enabled : ability.enabledTargetCondition(encounter, caster, t),
 			  	obj     : t
 			});
 		};
@@ -184,7 +184,7 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt) {
 			  	func    : function(t) {
 			  		ability.Use(encounter, caster, t);
 			  	},
-			  	enabled : true,
+			  	enabled : ability.enabledTargetCondition(encounter, caster, t),
 			  	obj     : t
 			});
 		};
@@ -222,6 +222,10 @@ Ability.prototype.enabledCondition = function(encounter, caster) {
 	if(this.cost.hp && this.cost.hp > caster.curHp) return false;
 	if(this.cost.sp && this.cost.sp > caster.curSp) return false;
 	if(this.cost.lp && this.cost.lp > caster.curLust) return false;
+	return true;
+}
+
+Ability.prototype.enabledTargetCondition = function(encounter, caster, target) {
 	return true;
 }
 

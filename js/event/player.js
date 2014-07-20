@@ -19,6 +19,7 @@ function Player(storage) {
 	this.jobs["Courtesan"] = new JobDesc(Jobs.Courtesan);
 	
 	this.jobs["Bruiser"]   = new JobDesc(Jobs.Bruiser);
+	this.jobs["Rogue"]     = new JobDesc(Jobs.Rogue);
 	
 	this.jobs["Mage"]      = new JobDesc(Jobs.Mage);
 	this.jobs["Mystic"]    = new JobDesc(Jobs.Mystic);
