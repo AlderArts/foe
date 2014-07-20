@@ -862,6 +862,7 @@ Scenes.Cale.TentSex = function() {
 	
 	//[Oral]
 	var options = new Array();
+	/*
 	options.push({ nameStr : "Oral",
 		func : function() {
 			Text.Clear();
@@ -871,16 +872,33 @@ Scenes.Cale.TentSex = function() {
 		}, enabled : true,
 		tooltip : ""
 	});
-	Gui.SetButtonsFromList(options, false, null);
-	
-	cale.relation.IncreaseStat(100, 3);
-	world.TimeStep({hour : 1});
-				
-	Gui.NextPrompt();
+	*/
+	if(player.FirstVag()) {
+		options.push({ nameStr : "Catch Vaginal",
+			func : function() {
+				Scenes.Cale.SexCatchVag();
+			}, enabled : true,
+			tooltip : "You want that hot wolf dick inside you, now!"
+		});
+	}
+	options.push({ nameStr : "Catch anal",
+		func : function() {
+			Scenes.Cale.SexCatchAnal();
+		}, enabled : true,
+		tooltip : "Because Rogues do it from behind."
+	});
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>”What, getting cold feet? Can’t handle the wolf goodness?”</i> Cale seems a bit miffed at you getting him all riled up, but shrugs and follows you outside again.", parse);
+		Text.Flush();
+		
+		Scenes.Cale.Prompt();
+	});
 }
 //TODO
 Scenes.Cale.OutsideSex = function() {
 	var parse = {
+		playername : player.name,
 		HeShe : rosalin.HeShe(),
 		heshe : rosalin.heshe()
 	};
@@ -905,7 +923,7 @@ Scenes.Cale.OutsideSex = function() {
 	}
 	Text.Flush();
 	
-	//[Sex]
+	//[Sex] TODO: More options
 	var options = new Array();
 	if(player.FirstVag()) {
 		options.push({ nameStr : "Catch Vaginal",
@@ -921,6 +939,7 @@ Scenes.Cale.OutsideSex = function() {
 		}, enabled : true,
 		tooltip : "Because Rogues do it from behind."
 	});
+	/*
 	options.push({ nameStr : "Sex",
 		func : function() {
 			Text.Clear();
@@ -930,12 +949,14 @@ Scenes.Cale.OutsideSex = function() {
 		}, enabled : true,
 		tooltip : ""
 	});
-	Gui.SetButtonsFromList(options, false, null);
-	
-	cale.relation.IncreaseStat(100, 3);
-	world.TimeStep({hour : 1});
-	
-	Gui.NextPrompt();
+	*/
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>”You are such a tease, [playername],”</i> Cale complains.", parse);
+		Text.Flush();
+		
+		Scenes.Cale.Prompt();
+	});
 }
 
 //TODO
@@ -1397,7 +1418,6 @@ Scenes.Cale.SexCaleShowerEntrypoint = function(outside) {
 	Gui.NextPrompt();
 }
 
-// TODO CALE CLEAN COCK
 Scenes.Cale.SexCaleCleanCockEntrypoint = function(cock, outside) {
 	var parse = {
 		breastsDesc : function() { return player.FirstBreastRow().Short(); },
