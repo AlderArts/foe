@@ -26,6 +26,7 @@ CreditsScreen = function() {
 	Text.AddOutput("Some of Miranda's sex scenes: LukaDoc and QuietBrowser<br/>");
 	Text.AddOutput("Kyna Moran: Reaper<br/>");
 	Text.AddOutput("Terry: LukaDoc and QuietBrowser<br/>");
+	Text.AddOutput("Cale: Alder, LukaDoc and QuietBrowser<br/>");
 	
 	Text.Newline();
 	

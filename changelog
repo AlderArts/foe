@@ -16,6 +16,8 @@ Version 0.3k
 * Fixed various flags for lei and twins that were causing bugs or inconsistencies.
 * Poked around with the button art in order to make it more readable. In the end, I repainted them in a flatter, simpler style.
 * Added a few new items to debug.
+* Rogue job added. Pending balance. Terry has it by default (and will be able to teach it later), but for now, you'll have to find a different way to learn it (and there is one available).
+* Cale the wolf added to Nomads' camp. Co-written by me and QB/LD.
 
 --------------------------------------------
              PREVIOUS VERSIONS
