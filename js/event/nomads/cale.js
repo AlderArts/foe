@@ -92,7 +92,7 @@ Scenes.Cale = {};
 
 // Schedule
 Cale.prototype.IsAtLocation = function(location) {
-	return true;
+	return cale.flags["Met"] != 0 && (world.time.hour >= 15 || world.time.hour < 3);
 }
 
 // interaction
@@ -164,9 +164,10 @@ Scenes.Cale.Desc = function() {
 
 
 world.loc.Plains.Nomads.Fireplace.events.push(new Link(
-	function() { return cale.name; }, function() { return cale.flags["Met"] != 0 }, true,
+	function() { return cale.name; }, 
+	function() { return cale.IsAtLocation(world.loc.Plains.Nomads.Fireplace); }, true,
 	function() {
-		if(cale.flags["Met"] != 0)
+		if(cale.IsAtLocation(world.loc.Plains.Nomads.Fireplace))
 			Scenes.Cale.Desc();
 	},
 	Scenes.Cale.Interact
@@ -1823,7 +1824,8 @@ Scenes.Cale.SexCatchAnalEntrypoint = function(outside, fromVag) {
 			Text.Add("You push yourself upright, whirling around to face the startled wolf before pulling him into a possessive kiss, authoritatively thrusting your [tongueDesc] in between his lips and molesting his mouth. His legs slacken at your surprise burst of aggressiveness, and so he offers no resistance as you gently spin him around so that your positions are reversed.", parse);
 			Text.NL();
 			parse["br"] = player.FirstBreastRow().Size() >= 5 ? ", smothering him in your cleavage" : "";
-			Text.Add("Your hands reach for his shoulders and you push down, firmly and insistently, sending him thumping softly to the ground below. You break the kiss at last, leaving him panting for breath, and close the distance between you by straddling him, arms pulling his face against your [breastsDesc][br][, hard [multiCockDesc] rubbing against his belly]. Downwards you slide until you can feel your [vagDesc] in proper alignment with his straining wolfhood, smirking as you look into his eyes. Cale licks his lips, eager to begin.", parse);
+			parse["c"] = player.FirstCock() ? Text.Parse(", your hard [multiCockDesc] rubbing against his belly", parse) : "";
+			Text.Add("Your hands reach for his shoulders and you push down, firmly and insistently, sending him thumping softly to the ground below. You break the kiss at last, leaving him panting for breath, and close the distance between you by straddling him, arms pulling his face against your [breastsDesc][br][c]. Downwards you slide until you can feel your [vagDesc] in proper alignment with his straining wolfhood, smirking as you look into his eyes. Cale licks his lips, eager to begin.", parse);
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
