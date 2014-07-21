@@ -1043,7 +1043,7 @@ Scenes.Cale.SexSuckHim = function(outside) {
 	Gui.NextPrompt();
 }
 
-Scenes.Cale.SexFuckHim = function(outside, cavalcade) {
+Scenes.Cale.SexFuckHim = function(outside, cavalcade, goopFirst) {
 	var cocksInAss = player.CocksThatFit(cale.Butt());
 	var p1cock = player.BiggestCock(cocksInAss);
 	var virgin = cale.Butt().virgin;
@@ -1151,7 +1151,7 @@ Scenes.Cale.SexFuckHim = function(outside, cavalcade) {
 	Text.NL();
 	
 	if(outside)
-		Scenes.Cale.SexFuckingHimOutsideComments(cavalcade);
+		Scenes.Cale.SexFuckingHimOutsideComments(p1cock, cavalcade, goopFirst);
 	else {
 		Text.Add("It’d be pretty amusing if someone walked in on you now. Fortunately for the wolf, it doesn’t seem like anyone in camp has taken note of you yet.", parse);
 		Text.NL();
@@ -2348,17 +2348,39 @@ Scenes.Cale.SexGettingFuckedOutsideComments = function() {
 }
 
 
-Scenes.Cale.SexFuckingHimOutsideComments = function(cavalcade) {
+Scenes.Cale.SexFuckingHimOutsideComments = function(cock, cavalcade, goopFirst) {
+	var racescore = new RaceScore(rosalin.body);
+	var compScore = rosalin.origRaceScore.Compare(racescore);
+	
 	var parse = {
 		playername : player.name,
-		HeShe  : rosalin.HeShe(),
-		heshe  : rosalin.heshe(),
-		himher : rosalin.himher(),
-		hisher : rosalin.hisher()
+		HeShe      : rosalin.HeShe(),
+		heshe      : rosalin.heshe(),
+		himher     : rosalin.himher(),
+		hisher     : rosalin.hisher(),
+		racedesc       : function() { return rosalin.raceDesc(compScore); },
+		rmultiCockDesc : function() { return rosalin.MultiCockDesc(); },
+		cockDesc   : cock.Short(),
+		cockTip    : cock.TipShort()
 	};
 	
 	var scenes = new EncounterTable();
-	if(cavalcade && cale.flags["cLoss"] == 0) {
+	if(goopFirst) {
+		scenes.AddEnc(function() {
+			Text.Add("<i>”Sometimes I amaze myself with my own genius. How’s your ass doing Cale?”</i> Rosalin asks curiously. The wolf doesn’t even react to [hisher] teasing, and even if he noticed he’s too busy moaning like a bitch in heat to reply anyway.", parse);
+			Text.NL();
+			Text.Add("<i>”That’s good,”</i> [heshe] says fetching a notepad nearby and jotting down some notes. <i>”[playername], go a bit deeper, I want to see his reaction.”</i>", parse);
+			Text.NL();
+			Text.Add("You nod at [hisher] request. Not like you weren’t planning on doing so anyway. Drawing back your [cockDesc] until only your [cockTip] remains planted inside the wolf’s quivering rosebud, you thrust inside with all your strength.", parse);
+			Text.NL();
+			Text.Add("Cale’s butt yields easily, practically sucking you in as your hips connect with his in a perverted slap. The wolf’s moans quickly devolve into a short howl as you feel his butt contracting all over your [cockDesc], milking you for your seed in what you could only classify as an ass-gasm.", parse);
+			Text.NL();
+			Text.Add("<i>”Yeaaaah… do that again!”</i> Cale exclaims, panting in delirious pleasure.", parse);
+			Text.NL();
+			Text.Add("<i>”Good, very good. I need to do some further research,”</i> the [racedesc] says, absentmindedly patting Cale on the head as [heshe] walks away.", parse);
+		}, 1.0, function() { return true; });
+	}
+	else if(cavalcade && cale.flags["cLoss"] == 0) {
 		scenes.AddEnc(function() {
 			Text.Add("Some time during your friendly ‘talk’ with Cale, Rosalin has wandered back to the campfire, sitting beside you and studying the wolf with interest. Cale sputters indignantly when he notices [himher], but he’s hardly in a position to do anything about it.", parse);
 			Text.NL();
@@ -2377,11 +2399,6 @@ Scenes.Cale.SexFuckingHimOutsideComments = function(cavalcade) {
 		*/
 		// ROSALIN
 		scenes.AddEnc(function() {
-			var racescore = new RaceScore(rosalin.body);
-			var compScore = rosalin.origRaceScore.Compare(racescore);
-			
-			parse["racedesc"] = function() { return rosalin.raceDesc(compScore); }
-			parse["rmultiCockDesc"] = function() { return rosalin.MultiCockDesc(); }
 			
 			Text.Add("<i>”Hiii Cale!”</i> Rosalin waves as [heshe] notices the two of you going at it. [HeShe] wanders over, seemingly oblivious to the wolf’s current situation. The [racedesc] carries a few bottles, and [heshe] looks very preoccupied. <i>”Listen, do you think you could get a few dozen canis roots for me? I need some for an experiment.”</i>", parse);
 			Text.NL();

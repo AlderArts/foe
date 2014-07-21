@@ -556,7 +556,7 @@ Scenes.Rosalin.TalkPrompt = function() {
 						Text.Add("Over by the campfire, Cale is growing anxious. The horny wolf, desperate to be filled, is pumping three of his fingers into his [canusDesc], trying his outmost to sate his desires. He lights up when you step up behind him, grinding your [multiCockDesc] between his cheeks. His tail is wagging back and forth in excitement, conveniently raised high to allow you full access.", parse);
 						Text.NL();
 						
-						Scenes.Cale.SexFuckHim(true);
+						Scenes.Cale.SexFuckHim(true, false, true);
 					}, enabled : true,
 					tooltip : "Looks like he’s gone into heat… best help him through this."
 				});
