@@ -92,7 +92,9 @@ Scenes.Cale = {};
 
 // Schedule
 Cale.prototype.IsAtLocation = function(location) {
-	return cale.flags["Met"] != 0 && (world.time.hour >= 15 || world.time.hour < 3);
+	if(location == world.loc.Plains.Nomads.Fireplace)
+		return cale.flags["Met"] != 0 && (world.time.hour >= 15 || world.time.hour < 3);
+	return false;
 }
 
 // interaction
