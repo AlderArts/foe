@@ -868,6 +868,8 @@ Scenes.Cale.TentSex = function() {
 	Text.Add("Cale shrugs out of his clothes, pulling you into a close embrace, his fur tickling you. <i>”Why don’t we get started, [playername]?”</i> he murmurs, nipping your neck playfully.", parse);
 	Text.Flush();
 	
+	var cocksInAss = player.CocksThatFit(cale.Butt());
+	
 	//[Oral]
 	var options = new Array();
 	/*
@@ -895,6 +897,42 @@ Scenes.Cale.TentSex = function() {
 		}, enabled : true,
 		tooltip : "Because Rogues do it from behind."
 	});
+	if(player.FirstCock() || player.Strapon()) {
+		options.push({ nameStr : "Fuck him",
+			func : function() {
+				Text.Clear();
+				if(cale.sex.rAnal == 1) {
+					Text.Add("<i>”You know, I’ve been thinking about before. You know. When you did the thing.”</i> You sweetly ask him whatever he could be talking about. The wolf looks slightly pained. <i>”I… uh, I never let anyone fuck me before. Not like that.”</i>", parse);
+					Text.NL();
+					Text.Add("Enjoying teasing him immensely, you remind him that he <i>did</i> say he wanted to try it again.", parse);
+					Text.NL();
+					Text.Add("<i>”I guess I did.”</i> Cale scratches his head uncertainly, his face flushed.", parse);
+					Text.NL();
+					Text.Add("How about right here, right now?", parse);
+					Text.NL();
+					Text.Add("<i>”O-okay,”</i> the wolf yips nervously. You twirl your finger, motioning for the wolf to turn around.", parse);
+				}
+				else if(cale.sex.rAnal < 5) {
+					Text.Add("You tell Cale that you want some more of that ass.", parse);
+					Text.NL();
+					Text.Add("<i>”Ah, just be gentle, okay [playername]?”</i> The wolf looks a bit nervous, but turns around on his own volition.", parse);
+				}
+				else if(cale.Slut() < 60) {
+					Text.Add("<i>”I’m always up for a romp, you know me,”</i> Cale quips, grinning uncertainly. Whatever lingering doubts he has about this form of sex, he is quick enough to swirl around, eager for you to make your move.", parse);
+				}
+				else {
+					Text.Add("<i>”Come on, just take me already!”</i> the needy wolf growls, grinding his butt against your crotch.", parse);
+				}
+				Text.Add(" Guided by your hand, Cale gets down on his knees, bending over one of the bedrolls in his tent. Not wasting any time, you pull down his pants, baring his round butt and [tight] rosebud.", parse);
+				Text.NL();
+				Text.Add("His tail is wagging back and forth in excitement, conveniently raised high to allow you full access.", parse);
+				Text.NL();
+				
+				Scenes.Cale.SexFuckHim();
+			}, enabled : cale.Butt.virgin == false && cocksInAss.length > 0,
+			tooltip : "Tell him that you are going to fuck him."
+		});
+	}
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
 		Text.Add("<i>”What, getting cold feet? Can’t handle the wolf goodness?”</i> Cale seems a bit miffed at you getting him all riled up, but shrugs and follows you outside again.", parse);
@@ -964,7 +1002,7 @@ Scenes.Cale.OutsideSex = function() {
 				Text.Add("His tail is wagging back and forth in excitement, conveniently raised high to allow you full access. ", parse);
 				
 				Scenes.Cale.SexFuckHim(true);
-			}, enabled : cocksInAss.length > 0 && cale.Slut() >= 30,
+			}, enabled : cale.Butt.virgin == false && cocksInAss.length > 0 && cale.Slut() >= 30,
 			tooltip : "Bend him over the log and take him right there."
 		});
 	}
