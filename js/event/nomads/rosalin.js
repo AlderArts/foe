@@ -863,7 +863,6 @@ Scenes.Rosalin.FirstFuck = function() {
 			options.push({ nameStr : "Get fucked",
 				func : function() {
 					player.subDom.DecreaseStat(-100, 3);
-					cale.slut.IncreaseStat(100, 10);
 					cale.flags["Sexed"]++;
 					
 					cale.flags["Met"] = Cale.Met.SharedGotFucked;

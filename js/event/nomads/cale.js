@@ -239,7 +239,7 @@ Scenes.Cale.FirstApproach = function() {
 				Text.Add("Now, that’s better. You get up on your feet and walk up to him. Offering a hand you lift him to his feet and deftly button up his pants. Can’t have the whole world sizing up your beta now, can you? Then you turn him towards the tent he pointed at earlier, and send him on his way with an audible slap on his butt. He yelps in surprise, but quickly moves to comply as you follow in tow.", parse);
 				Text.Flush();
 				
-				cale.slut.IncreaseStat(100, 5);
+				cale.slut.IncreaseStat(50, 5);
 				
 				Gui.NextPrompt(function() {
 					Text.Clear();
@@ -1419,7 +1419,7 @@ Scenes.Cale.SexFuckHim = function(outside, cavalcade, goopFirst) {
 				Text.Flush();
 				
 				var slut = outside ? 4 : 3;
-				var max  = (cale.flags["Goop"] != 0) ? 100 : 50;
+				var max  = (cale.flags["Met2"] >= Cale.Met2.Goop) ? 100 : 50;
 
 				cale.slut.IncreaseStat(max, slut);
 				
@@ -1962,6 +1962,9 @@ Scenes.Cale.SexCaleButtslutEntrypoint = function(cocks, outside) {
 		Text.Add(" You dimly feel your knot grinding against his tight ring and realise you need to decide what to do with it before you blow your load.", parse);
 	Text.Flush();
 	
+	var slut = outside ? 4 : 3;
+	var max = (cale.flags["Met2"] >= Cale.Met2.Goop) ? 100 : 50;
+	
 	//[Tie Him][Nah]
 	var options = new Array();
 	if(knotted) {
@@ -2019,6 +2022,9 @@ Scenes.Cale.SexCaleButtslutEntrypoint = function(cocks, outside) {
 					Text.Flush();
 					
 					cale.relation.IncreaseStat(100, 4);
+					
+					cale.slut.IncreaseStat(max, slut);
+					
 					world.TimeStep({hour : 2});
 					
 					Gui.NextPrompt();
@@ -2064,6 +2070,9 @@ Scenes.Cale.SexCaleButtslutEntrypoint = function(cocks, outside) {
 			Text.Flush();
 			
 			cale.relation.IncreaseStat(100, 3);
+			
+			cale.slut.IncreaseStat(max, slut);
+			
 			world.TimeStep({hour : 1});
 			
 			Gui.NextPrompt();
