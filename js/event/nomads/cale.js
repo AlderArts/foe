@@ -1119,7 +1119,7 @@ Scenes.Cale.SexFuckHim = function(outside, cavalcade, goopFirst) {
 	Text.NL();
 	parse["vagDesc"] = player.FirstVag() ? function() { return player.FirstVag().Short(); } : "crotch";
 	parse["real"] = p1cock.isStrapon ? Text.Parse("pressure of the toy grinds against your [vagDesc]", parse) : "snug pressure around your dick";
-	Text.Add("Starting out slow, you rock your [hipsDesc] back and forth, establishing a rhythm. Your [cockDesc] is glistening with moisture as you pull out, leaving only the [cockTip] inside Cale’s hole, making pushing it inside again all that much easier. With each slow, determined thrust, you bury yourself deeper and deeper inside the wolf, sighing in pleasure as the [real].", parse);
+	Text.Add("Starting out slow, you rock your [hipsDesc] back and forth, establishing a rhythm. Your [cockDesc] is glistening with moisture as you pull out, leaving only the [cockTip] inside Cale’s hole, making pushing it inside again all that much easier. With each slow, determined thrust, you bury yourself deeper and deeper inside the wolf, sighing in pleasure at the [real].", parse);
 	Text.NL();
 	if(cale.Slut() >= 60)
 		Text.Add("From his moans, you guess that the horny wolf has gone into heat again, but you know just the cure for that condition. A hot, deep dicking, applied roughly and repeatedly.", parse);
