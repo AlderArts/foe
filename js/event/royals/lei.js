@@ -159,9 +159,11 @@ Scenes.Lei.InnPrompt = function() {
 			Text.Add("The stranger seems to hesitate before finally deciding. <i>\"Very well, you may sit. Not for your sake, but [heshe] appears interesting,\"</i> he says, nodding toward [name].", parse);
 		}
 		else if(playerLevel <= LeiStrength.LEVEL_WEAK && strongestLevel <= LeiStrength.LEVEL_WEAK) {
-			Text.Add("<i>\"I have no interest in you,\"</i> the man replies, his voice husky, yet flowing. <i>\"Begone, I do not have time for the weak.\"</i>", parse);
+			Text.Add("<i>\"I have no interest in you,\"</i> the man replies, his voice husky, yet flowing. <i>\"Begone, I do not have time for the weak. Show me you have potential and grow stronger first, then we can talk. Now get out of my sight, you're blocking my view.\"</i>", parse);
 			Text.NL();
 			Text.Add("You glare at the man. You? Weak? You are momentarily tempted to challenge him there and then over the insult, but an odd shiver runs down your spine as you're about to move. Gritting your teeth, you stalk off in annoyance.", parse);
+			Text.NL();
+			Text.Add("<b>You'll need to be stronger in order for the stranger to recognize you. Earn some experience in combat before you return to him.</b>", parse);
 			Text.Flush();
 			Gui.NextPrompt();
 			return;
