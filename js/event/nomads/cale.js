@@ -1274,8 +1274,8 @@ Scenes.Cale.SexFuckHim = function(outside, cavalcade) {
 				Text.Add(" When you do, the trapped remains of your [meagerHugeMassive] load [dripsLeaksSplashes] out of his gaping anus, dripping to the ground below.", parse);
 			}
 			Text.NL();
-			parse["cum"] = player.FirstCock() ? "your and" : "";
-			Text.Add("Finally released, Cale drops into a panting heap, soaking his fur in[cum] his own cum.", parse);
+			parse["cum"] = player.FirstCock() ? " both your and" : "";
+			Text.Add("Finally released, Cale drops into a panting heap, soaking his fur in[cum] his own seed.", parse);
 			
 			world.TimeStep({minute : 30});
 		}
@@ -1419,11 +1419,9 @@ Scenes.Cale.SexFuckHim = function(outside, cavalcade) {
 				Text.Flush();
 				
 				var slut = outside ? 4 : 3;
-				
-				if(cale.Slut() >= 60)
-					cale.slut.IncreaseStat(100, slut);
-				else
-					cale.slut.IncreaseStat(50, slut);
+				var max  = (cale.flags["Goop"] != 0) ? 100 : 50;
+
+				cale.slut.IncreaseStat(max, slut);
 				
 				world.TimeStep({hour : 1});
 				
@@ -2484,7 +2482,7 @@ Scenes.Cale.Rogue = function() {
 					Text.Add("In the middle of the nomad camp, you might have a bit of an audience, but you don’t really care. What matters now is putting the wolf in his place.", parse);
 					Text.NL();
 					
-					cale.slut.IncreaseStat(50, 10);
+					cale.slut.IncreaseStat(50, 5);
 					
 					Scenes.Cale.SexFuckHim(true);
 				}, enabled : (cocksInAss.length > 0),
