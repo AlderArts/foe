@@ -1052,36 +1052,39 @@ Scenes.Cale.SexCatchVag = function(outside) {
 		}, enabled : true,
 		tooltip : "A little tongue action should get that dick of his nice and ready for you."
 	});
-	options.push({ nameStr : "Stroke self",
-		func : function() {
-			Text.Clear();
-			Text.Add("Grinning cockily back at him, you shift your pose slightly to more prominently display your [multiCockDesc], hands on your [hipsDesc].", parse);
-			Text.NL();
-			var biggestCock = player.BiggestCock();
-			if(biggestCock) {
-				parse["cockBiggestDesc"] = function() { return biggestCock.Short(); }
-				Text.Add("Curling your thumb and forefinger into a circular pattern, you reach for your [cockBiggestDesc] and slide its glans through the hole of your palm, squeezing softly as you trail down its length until your hand is resting against your groin. You twist your wrist slightly, pulling back against your shaft, and then curl your other hand around your shaft in the same manner, pulling back up your member to your glans.", parse);
+	if(cale.Slut() >= 60 && (player.FirstCock() || player.Strapon()))
+	{
+		options.push({ nameStr : "Stroke self",
+			func : function() {
+				Text.Clear();
+				Text.Add("Grinning cockily back at him, you shift your pose slightly to more prominently display your [multiCockDesc], hands on your [hipsDesc].", parse);
 				Text.NL();
-				parse["s"] = player.NumCocks() > 1 ? "s" : "";
-				Text.Add("Your skin tickles at the friction, blood rushing into your shaft[s] as you repeat the milking motion again with your first hand, the second hand taking its place around the base of your dick. With smooth, even strokes you rhythmically pull and stroke, moaning softly in your arousal, eyes hooded in lust as you glance at your wolfy slut and see if he’s enjoying the show.", parse);
-			}
-			else {
-				Text.Add("Adjusting the straps around your loins to make sure it’s properly fixed, you grab your prosthetic [multiCockDesc] and slot it home, checking to see that it’s set properly with slow, purposeful motions. Once satisfied that it’s secure, you smirk at Cale and begin to caress the faux-dick with your fingers, a lewd groan of appreciation bubbling from your lips as they dance up and down across the dildo’s length, acting as if you can truly feel yourself upon the imitation phallus.", parse);
-			}
-			Text.NL();
-			Text.Add("Cale watches the spectacle unfold, tongue lolling out as he pants and strokes his own cock with a hand. His other hand is busy teasing his entrance. The slutty wolf lets out a wanton moan as he finally pierces his tight ring with his middle fingers, masturbating himself as he dreams of your [multiCockDesc] entering him.", parse);
-			Text.NL();
-			Text.Add("<i>”Damn, [playername]. That’s playing dirty, teasing me with the promise of buttsex,”</i> he says, stifling a moan as he wills himself to stop masturbating. His cock is already throbbing at full mast, the veins bulging out as a droplet of pre slides down his length.", parse);
-			Text.NL();
-			Text.Add("Maybe so, you concede, but it certainly got him in the mood, now didn’t it? Now, you’ve a hungry pussy here just waiting for some stuffing of its own; if he does a good job, you’ll see about stuffing his ass in turn, you promise.", parse);
-			Text.NL();
-			Text.Add("<i>”Deal! Now why don’t you see about settling on that [log]-”</i> You stop him with a finger on his lips. Smiling, you shake your head and move to take his shoulders, pushing him down and leaning him back against the [log] before moving to straddle him. Deliberately letting your [multiCockDesc] rest against his chest, you grind your hips into his torso and slowly glide down, until your [vagDesc] is hovering just above his hot erection.", parse);
-			Text.NL();
-			
-			Scenes.Cale.SexCatchVagEntrypoint(outside);
-		}, enabled : cale.Slut() >= 60 && (player.FirstCock() || player.Strapon()),
-		tooltip : "You know your wolfy slut loves your dick; playing with it should be all he needs to get him fired up."
-	});
+				var biggestCock = player.BiggestCock();
+				if(biggestCock) {
+					parse["cockBiggestDesc"] = function() { return biggestCock.Short(); }
+					Text.Add("Curling your thumb and forefinger into a circular pattern, you reach for your [cockBiggestDesc] and slide its glans through the hole of your palm, squeezing softly as you trail down its length until your hand is resting against your groin. You twist your wrist slightly, pulling back against your shaft, and then curl your other hand around your shaft in the same manner, pulling back up your member to your glans.", parse);
+					Text.NL();
+					parse["s"] = player.NumCocks() > 1 ? "s" : "";
+					Text.Add("Your skin tickles at the friction, blood rushing into your shaft[s] as you repeat the milking motion again with your first hand, the second hand taking its place around the base of your dick. With smooth, even strokes you rhythmically pull and stroke, moaning softly in your arousal, eyes hooded in lust as you glance at your wolfy slut and see if he’s enjoying the show.", parse);
+				}
+				else {
+					Text.Add("Adjusting the straps around your loins to make sure it’s properly fixed, you grab your prosthetic [multiCockDesc] and slot it home, checking to see that it’s set properly with slow, purposeful motions. Once satisfied that it’s secure, you smirk at Cale and begin to caress the faux-dick with your fingers, a lewd groan of appreciation bubbling from your lips as they dance up and down across the dildo’s length, acting as if you can truly feel yourself upon the imitation phallus.", parse);
+				}
+				Text.NL();
+				Text.Add("Cale watches the spectacle unfold, tongue lolling out as he pants and strokes his own cock with a hand. His other hand is busy teasing his entrance. The slutty wolf lets out a wanton moan as he finally pierces his tight ring with his middle fingers, masturbating himself as he dreams of your [multiCockDesc] entering him.", parse);
+				Text.NL();
+				Text.Add("<i>”Damn, [playername]. That’s playing dirty, teasing me with the promise of buttsex,”</i> he says, stifling a moan as he wills himself to stop masturbating. His cock is already throbbing at full mast, the veins bulging out as a droplet of pre slides down his length.", parse);
+				Text.NL();
+				Text.Add("Maybe so, you concede, but it certainly got him in the mood, now didn’t it? Now, you’ve a hungry pussy here just waiting for some stuffing of its own; if he does a good job, you’ll see about stuffing his ass in turn, you promise.", parse);
+				Text.NL();
+				Text.Add("<i>”Deal! Now why don’t you see about settling on that [log]-”</i> You stop him with a finger on his lips. Smiling, you shake your head and move to take his shoulders, pushing him down and leaning him back against the [log] before moving to straddle him. Deliberately letting your [multiCockDesc] rest against his chest, you grind your hips into his torso and slowly glide down, until your [vagDesc] is hovering just above his hot erection.", parse);
+				Text.NL();
+				
+				Scenes.Cale.SexCatchVagEntrypoint(outside);
+			}, enabled : true,
+			tooltip : "You know your wolfy slut loves your dick; playing with it should be all he needs to get him fired up."
+		});
+	}
 	Gui.SetButtonsFromList(options, false, null);
 }
 
@@ -1099,7 +1102,7 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal) {
 		legsDesc      : function() { return player.LegsDesc(); },
 		feetDesc      : function() { return player.FeetDesc(); },
 		breastsDesc   : function() { return player.FirstBreastRow().Short(); },
-		nipDesc       : function() { return player.FirstBreastRow().NipDesc(); },
+		nipDesc       : function() { return player.FirstBreastRow().NipShort(); },
 		multiCockDesc : function() { return player.MultiCockDesc(); },
 		cockDesc      : function() { return cock.Short(); },
 		cockTip       : function() { return cock.TipShort(); },
@@ -1401,7 +1404,7 @@ Scenes.Cale.SexCaleShowerEntrypoint = function(outside) {
 	else
 		Text.Add("You smile happily, shifting slightly to better let the semen on your back flow down your sides and properly coat your skin. You feel quite content to let a stud like Cale mark you as his own; this is what you were meant for, after all.", parse);
 	Text.NL();
-	Text.Add("<i>”That sure hit the spot,”<i> Cale chuckles, leaning onto the [log] for a quick rest. ", parse);
+	Text.Add("<i>”That sure hit the spot,”</i> Cale chuckles, leaning onto the [log] for a quick rest. ", parse);
 	if(cale.Slut() >= 60)
 		Text.Add("<i>”Just remember to return the favor sometime. My ass is aching for a decent fuck, and I could use a bath of my own.”</i> He gives you a gentle slap on your [buttDesc].", parse);
 	else if(cale.Slut() >= 30)
@@ -1620,6 +1623,7 @@ Scenes.Cale.SexCaleButtslutEntrypoint = function(cocks, outside) {
 
 Scenes.Cale.SexCatchAnal = function(outside) {
 	var parse = {
+		log : outside ? "log" : "bedroll",
 		playername : player.name,
 		lowerArmorDesc : function() { return player.LowerArmorDesc(); },
 		anusDesc : function() { return player.Butt().AnalShort(); }
@@ -1688,7 +1692,8 @@ Scenes.Cale.SexCatchAnalEntrypoint = function(outside, fromVag) {
 		legsDesc      : function() { return player.LegsDesc(); },
 		thighsDesc    : function() { return player.ThighsDesc(); },
 		breastsDesc   : function() { return player.FirstBreastRow().Short(); },
-		tongueDesc    : function() { return player.TongueDesc(); }
+		tongueDesc    : function() { return player.TongueDesc(); },
+		armorDesc     : function() { return player.ArmorDesc(); }
 	};
 	
 	Text.Add("You cry out as the wolf's cock so forcibly spears inside of you without hesitation. In seconds he is briskly thrusting back and forth, pumping away at your ass with every ounce of enjoyment, roughly pistoning your [anusDesc] like a man possessed.", parse);
