@@ -99,6 +99,10 @@ Terry.prototype.FromStorage = function(storage) {
 	// Load flags
 	this.LoadFlags(storage);
 	this.LoadSexFlags(storage);
+	
+	this.RecallAbilities();
+	this.SetLevelBonus();
+	this.Equip();
 		
 	if(this.flags["Met"] >= Terry.Met.Caught) {
 		this.name = "Terry";

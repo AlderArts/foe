@@ -107,6 +107,10 @@ Miranda.prototype.FromStorage = function(storage) {
 	// Load flags
 	this.LoadFlags(storage);
 	this.LoadSexFlags(storage);
+	
+	this.RecallAbilities();
+	this.SetLevelBonus();
+	this.Equip();
 }
 
 Miranda.prototype.ToStorage = function() {
