@@ -1080,7 +1080,7 @@ Scenes.Cale.SexFuckHim = function(outside, cavalcade) {
 	if(cale.Slut() >= 60)
 		Text.Add("With Cale’s peculiar attributes, there is no need for additional lube. His hole is as ready for you as it’ll ever be. You remove your [lowerArmorDesc], itching to start pounding the wolf into oblivion.", parse);
 	else
-		Text.Add("As you fumble with your [lowerArmorDesc], you fish out a bottle of lube, pouring its contents on Cale’s tight[virgin] hole. He yips as the splash the cool liquid hits, shivering in anticipation for what is to come. You rub it in with your thumb, probing and teasing his anus.", parse);
+		Text.Add("As you fumble with your [lowerArmorDesc], you fish out a bottle of lube, pouring its contents on Cale’s tight[virgin] hole. He yips as the cool liquid splashes between his cheeks, shivering in anticipation for what's to come. You rub it in with your thumb, probing and teasing his anus.", parse);
 	Text.Add(" Once he’s ready, you pull out your[stiffening] [multiCockDesc], rubbing [itThem] in the sloppy lubricating mess between the wolf’s buttcheeks. Just to tease him even more, you grasp him by the hips, hotdogging your[artificial] shaft[s] and coating [itsTheir] length in the slippery liquid.", parse);
 	Text.NL();
 	if(virgin)
