@@ -3173,6 +3173,7 @@ Scenes.Kiakai.PleasureElf = function() {
 				Text.AddOutput("[name] cannot take your ministrations for long, [hisher] legs twitching slightly as [heshe] lets [himher]self be overcome by lust. The elf cries out, [hisher] [kVagDesc] clamping down tight around your [tongueDesc], as wave after wave of [hisher] orgasm rolls over you. Your taste buds are assaulted by [hisher] sweet overflowing juices, the excess dripping down your chin.", parse);
 				Text.Newline();
 				Text.AddOutput("Licking your lips, you withdraw from the trembling elf, a satisfied smirk on your face.", parse);
+				Text.Newline();
 				
 				var cum = kiakai.OrgasmCum();
 				
@@ -3714,7 +3715,6 @@ Scenes.Kiakai.HealingAssertive = function() {
 							Text.Newline();
 							Text.AddOutput("Relenting, you give [name] a hand up, helping [himher] with [hisher] gear. The two of you ready yourselves to continue your journey.", parse);
 							
-							kiakai.flags["Sexed"]++;
 							Gui.NextPrompt(kiakai.Interact);
 						}, enabled : true,
 						tooltip : Text.Parse("Give [himher] a break.", parse)
@@ -5434,6 +5434,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 		kButtDesc    : function() { return kiakai.Butt().Short(); },
 		kAnusDesc    : function() { return kiakai.Butt().AnalShort(); },
 		kHipsDesc    : function() { return kiakai.HipsDesc(); },
+		kHairDesc    : function() { return kiakai.Hair().Short(); },
 		kStomachDesc : function() { return kiakai.StomachDesc(); },
 		jobDesc      : function() { return kiakai.JobDesc(); },
 		boygirl      : kiakai.body.femininity.Get() > 0 ? "girl" : "boy",
@@ -6189,9 +6190,9 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 					options.push({ nameStr : "Pull out",
 						func : function() {
 							Text.Clear();
-							Text.Add("<i>\"W-wait!\"</i> you pant, suddenly telling the elf to pull out from your [anusDesc].", parse);
+							Text.Add("<i>\"W-wait!\"</i> you pant, suddenly telling the elf to pull out from your [anusDesc]. ", parse);
 							if(kiaiCock.knot != 0 && len <= cap) {
-								Text.Add(" [name] tries to comply, but finds [himher]self stuck inside you, trapped by [hisher] engorged knot.", parse);
+								Text.Add("[name] tries to comply, but finds [himher]self stuck inside you, trapped by [hisher] engorged knot.", parse);
 								Text.NL();
 								Text.Add("<i>\"S-sorry [playername]!\"</i> the elf moans as [heshe] unloads inside you, [hisher] seed flooding your [anusDesc]. You think you detect a trace of... glee? That doesn't seem very much like [himher] at all...", parse);
 								Text.NL();
