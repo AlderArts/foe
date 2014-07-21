@@ -495,7 +495,7 @@ Scenes.Rosalin.TalkPrompt = function() {
 		});
 	}
 	if(cale.flags["Met2"] == Cale.Met2.TalkedSlut) {
-		options.push({ nameStr : "Blah",
+		options.push({ nameStr : "Cale anal",
 			func : function() {
 				cale.flags["Met2"] = Cale.Met2.Goop;
 				Text.Clear();
@@ -537,7 +537,7 @@ Scenes.Rosalin.TalkPrompt = function() {
 				parse["multiCockDesc"] = function() { return player.MultiCockDesc(); }
 				//[Take him][Rosalin]
 				var options = new Array();
-				options.push({ nameStr : "TakeHim",
+				options.push({ nameStr : "Take him",
 					func : function() {
 						Text.Clear();
 						if(cocksInAss.length == 0) {

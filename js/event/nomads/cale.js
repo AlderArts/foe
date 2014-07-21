@@ -923,13 +923,14 @@ Scenes.Cale.TentSex = function() {
 				else {
 					Text.Add("<i>”Come on, just take me already!”</i> the needy wolf growls, grinding his butt against your crotch.", parse);
 				}
+				parse["tight"] = cale.Slut() >= 60 ? "pliant" : "tight";
 				Text.Add(" Guided by your hand, Cale gets down on his knees, bending over one of the bedrolls in his tent. Not wasting any time, you pull down his pants, baring his round butt and [tight] rosebud.", parse);
 				Text.NL();
 				Text.Add("His tail is wagging back and forth in excitement, conveniently raised high to allow you full access.", parse);
 				Text.NL();
 				
 				Scenes.Cale.SexFuckHim();
-			}, enabled : cale.Butt.virgin == false && cocksInAss.length > 0,
+			}, enabled : cale.Butt().virgin == false && cocksInAss.length > 0,
 			tooltip : "Tell him that you are going to fuck him."
 		});
 	}
@@ -1002,7 +1003,7 @@ Scenes.Cale.OutsideSex = function() {
 				Text.Add("His tail is wagging back and forth in excitement, conveniently raised high to allow you full access. ", parse);
 				
 				Scenes.Cale.SexFuckHim(true);
-			}, enabled : cale.Butt.virgin == false && cocksInAss.length > 0 && cale.Slut() >= 30,
+			}, enabled : cale.Butt().virgin == false && cocksInAss.length > 0 && cale.Slut() >= 30,
 			tooltip : "Bend him over the log and take him right there."
 		});
 	}
@@ -1075,6 +1076,7 @@ Scenes.Cale.SexFuckHim = function(outside, cavalcade) {
 		cAnusDesc      : function() { return cale.Butt().AnalShort(); }
 	};
 	
+	parse["virgin"] = virgin ? " virgin" : "";
 	if(cale.Slut() >= 60)
 		Text.Add("With Cale’s peculiar attributes, there is no need for additional lube. His hole is as ready for you as it’ll ever be. You remove your [lowerArmorDesc], itching to start pounding the wolf into oblivion.", parse);
 	else
@@ -1220,7 +1222,8 @@ Scenes.Cale.SexFuckHim = function(outside, cavalcade) {
 				Text.Add("Every time the wolf reaches the root of your [cockDesc], his stretched colon meets further resistance in the form of your knot. At first, he has trouble taking it, but as he continues riding you, he manages to push himself lower and lower. ", parse);
 			Text.Add("Cale is doing most of the work, with you gently guiding him - one hand raising his butt and the other on the small of his back, keeping him upright. There is no doubt at this point that he likes this new position even more, as his own canid member is standing at attention in all its nine inch glory. Drops of cum are still dangling from his pointed tip, remnants of his last orgasm.", parse);
 			Text.NL();
-			Text.Add("Time to end this. In a show of strength, you hoist Cale’s legs into the air, holding him by the back of his knees. Without any support for his lower body, the morph helplessly slides down your slick length, taking you to the root[, knot and all]. The wolf howls as he cums, spraying his seed all over himself as his balls keep up with the demands of his battered prostate.", parse);
+			parse["knot"] = knotted ? ", knot and all" : "";
+			Text.Add("Time to end this. In a show of strength, you hoist Cale’s legs into the air, holding him by the back of his knees. Without any support for his lower body, the morph helplessly slides down your slick length, taking you to the root[knot]. The wolf howls as he cums, spraying his seed all over himself as his balls keep up with the demands of his battered prostate.", parse);
 			Text.NL();
 			
 			cum = player.OrgasmCum();
@@ -1323,6 +1326,8 @@ Scenes.Cale.SexFuckHim = function(outside, cavalcade) {
 				cale.flags["cLoss"]++;
 			}
 			
+			cale.relation.IncreaseStat(100, 3);
+			
 			if(virgin) {
 				cale.slut.IncreaseStat(50, 5);
 				
@@ -1413,21 +1418,18 @@ Scenes.Cale.SexFuckHim = function(outside, cavalcade) {
 				Text.Add("Cale shakily thanks you for showing him such a good time. You smile knowingly, giving him a fond kiss. Leaving him to recover, you clean yourself up before heading out on your journey again.", parse);
 				Text.Flush();
 				
+				var slut = outside ? 4 : 3;
+				
 				if(cale.Slut() >= 60)
-					cale.slut.IncreaseStat(100, 3);
+					cale.slut.IncreaseStat(100, slut);
 				else
-					cale.slut.IncreaseStat(50, 3);
+					cale.slut.IncreaseStat(50, slut);
 				
 				world.TimeStep({hour : 1});
 				
 				Gui.NextPrompt();
 			}
 		});
-		
-		cale.relation.IncreaseStat(100, 3);
-		world.TimeStep({hour : 1});
-		
-		Gui.NextPrompt();
 	});
 }
 
@@ -2380,7 +2382,7 @@ Scenes.Cale.SexFuckingHimOutsideComments = function(cavalcade) {
 			var racescore = new RaceScore(rosalin.body);
 			var compScore = rosalin.origRaceScore.Compare(racescore);
 			
-			parse["raceDesc"] = function() { return rosalin.raceDesc(compScore); }
+			parse["racedesc"] = function() { return rosalin.raceDesc(compScore); }
 			parse["rmultiCockDesc"] = function() { return rosalin.MultiCockDesc(); }
 			
 			Text.Add("<i>”Hiii Cale!”</i> Rosalin waves as [heshe] notices the two of you going at it. [HeShe] wanders over, seemingly oblivious to the wolf’s current situation. The [racedesc] carries a few bottles, and [heshe] looks very preoccupied. <i>”Listen, do you think you could get a few dozen canis roots for me? I need some for an experiment.”</i>", parse);
