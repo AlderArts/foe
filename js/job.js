@@ -225,15 +225,22 @@ Jobs["Acolyte"].levels.push(new JobLevel(640, [{ab: Abilities.White.Empower, set
 
 // TODO: EXP 2 LEVEL
 Jobs["Bruiser"] = new Job("Bruiser");
-Jobs["Bruiser"].Unlocked = function() { return false; } // TODO Tier 2 condition
+Jobs["Bruiser"].Unlocked = function(entity) {
+	if(entity == miranda) return true;
+	return false;
+} // TODO Tier 2 condition
 Jobs["Bruiser"].preqs.push({job : Jobs["Fighter"], lvl : 3});
-Jobs["Bruiser"].levels.push(new JobLevel(20,   null, {"str" : 0.1, "sta" : 0.2}));
+Jobs["Bruiser"].abilities.AddAbility(Abilities.Physical.Provoke);
+Jobs["Bruiser"].abilities.AddAbility(Abilities.Physical.FocusStrike);
+Jobs["Bruiser"].abilities.AddAbility(Abilities.Physical.TAttack);
+Jobs["Bruiser"].abilities.AddAbility(Abilities.Physical.GrandSlam);
+Jobs["Bruiser"].levels.push(new JobLevel(20,   [{ab: Abilities.Physical.Provoke, set: "Skills"}], {"str" : 0.1, "sta" : 0.2}));
 Jobs["Bruiser"].levels.push(new JobLevel(40,   null, {"sta" : 0.2, "dex" : 0.1}));
-Jobs["Bruiser"].levels.push(new JobLevel(80,   null, {"str" : 0.2, "sta" : 0.1}));
+Jobs["Bruiser"].levels.push(new JobLevel(80,   [{ab: Abilities.Physical.FocusStrike, set: "Skills"}], {"str" : 0.2, "sta" : 0.1}));
 Jobs["Bruiser"].levels.push(new JobLevel(160,  null, {"sta" : 0.3}));
-Jobs["Bruiser"].levels.push(new JobLevel(320,  null, {"str" : 0.2, "sta" : 0.1}));
+Jobs["Bruiser"].levels.push(new JobLevel(320,  [{ab: Abilities.Physical.TAttack, set: "Skills"}], {"str" : 0.2, "sta" : 0.1}));
 Jobs["Bruiser"].levels.push(new JobLevel(640,  null, {"sta" : 0.2, "dex" : 0.1}));
-Jobs["Bruiser"].levels.push(new JobLevel(1280, null, {"str" : 0.1, "sta" : 0.3, "dex" : 0.1}));
+Jobs["Bruiser"].levels.push(new JobLevel(1280, [{ab: Abilities.Physical.GrandSlam, set: "Skills"}], {"str" : 0.1, "sta" : 0.3, "dex" : 0.1}));
 
 Jobs["Rogue"] = new Job("Rogue");
 Jobs["Rogue"].Unlocked = function(entity) {

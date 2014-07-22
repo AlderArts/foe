@@ -11,6 +11,11 @@ function Miranda(storage) {
 	
 	this.avatar.combat = Images.miranda;
 	
+	this.currentJob = Jobs.Bruiser;
+	this.jobs["Fighter"]   = new JobDesc(Jobs.Fighter);
+	this.jobs["Fighter"].level = 3;
+	this.jobs["Bruiser"]   = new JobDesc(Jobs.Bruiser);
+	
 	this.maxHp.base        = 100;
 	this.maxSp.base        = 10;
 	this.maxLust.base      = 50; this.maxLust.growth      = 6;

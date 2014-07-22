@@ -211,16 +211,16 @@ Terry.prototype.Act = function(encounter, activeChar) {
 	
 	if(this.turnCounter > 4 && this.sbombs > 0)
 		Items.Combat.SmokeBomb.UseCombatInternal(encounter, this);
-	else if(choice < 0.2)
+	else if(Abilities.Physical.Backstab.enabledCondition(encounter, this) && Abilities.Physical.Backstab.enabledTargetCondition(encounter, this, t))
+		Abilities.Physical.Backstab.CastInternal(encounter, this, t);
+	else if(choice < 0.2 && Abilities.Physical.Kicksand.enabledCondition(encounter, this))
+		Abilities.Physical.Kicksand.CastInternal(encounter, this, t);
+	else if(choice < 0.4 && Abilities.Physical.Swift.enabledCondition(encounter, this))
+		Abilities.Physical.Swift.CastInternal(encounter, this);
+	else if(choice < 0.6)
 		Items.Combat.PoisonDart.UseCombatInternal(encounter, this, t);
-	else if(choice < 0.4)
+	else if(choice < 0.8)
 		Items.Combat.LustDart.UseCombatInternal(encounter, this, t);
-	/*
-	if(choice < 0.2 && Abilities.Physical.Bash.enabledCondition(encounter, this))
-		Abilities.Physical.Bash.CastInternal(encounter, this, t);
-	else if(choice < 0.4 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
-		Abilities.Physical.CrushingStrike.CastInternal(encounter, this, t);
-	*/
 	else
 		Abilities.Attack.CastInternal(encounter, this, t);
 }

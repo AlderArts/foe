@@ -324,7 +324,7 @@ Encounter.prototype.CombatTick = function() {
 				
 				if(!c.entity.Incapacitated()) {
 					var ini = c.entity.Initiative();
-					var haste = c.entity.combatStatus[StatusEffect.Haste];
+					var haste = c.entity.combatStatus.stats[StatusEffect.Haste];
 					if(haste) ini *= haste.factor;
 					c.initiative += ini;
 				}
@@ -339,7 +339,7 @@ Encounter.prototype.CombatTick = function() {
 		var ini = 100;
 		
 		// Freeze, slow down character
-		var freeze = currentActiveChar.combatStatus[StatusEffect.Freeze];
+		var freeze = currentActiveChar.combatStatus.stats[StatusEffect.Freeze];
 		if(freeze) {
 			if(Math.random() < freeze.proc) {
 				ini *= freeze.str;
@@ -363,7 +363,7 @@ Encounter.prototype.CombatTick = function() {
 		}
 		
 		// Numb, stun character
-		var numb = currentActiveChar.combatStatus[StatusEffect.Numb];
+		var numb = currentActiveChar.combatStatus.stats[StatusEffect.Numb];
 		if(numb) {
 			if(Math.random() < numb.proc) {
 				Text.AddOutput("[name] [is] stunned and cannot move!",
@@ -382,8 +382,12 @@ Encounter.prototype.CombatTick = function() {
 			Text.AddOutput(Text.BoldColor("Initiative:<br/>"));
 			for(var i=0,j=enc.combatOrder.length; i<j; i++){
 				var c = enc.combatOrder[i];
-				if(!c.entity.Incapacitated())
-					Text.AddOutput(c.entity.name + ": " + Math.floor(c.initiative) + "/100 (+" + Math.floor(c.entity.Initiative()) + ")<br/>");
+				if(!c.entity.Incapacitated()) {
+					var ini = c.entity.Initiative();
+					var haste = c.entity.combatStatus.stats[StatusEffect.Haste];
+					if(haste) ini *= haste.factor;
+					Text.AddOutput(c.entity.name + ": " + Math.floor(c.initiative) + "/100 (+" + Math.floor(ini) + ")<br/>");
+				}
 			};
 			Text.Newline();
 			
