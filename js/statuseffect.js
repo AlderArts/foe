@@ -10,15 +10,15 @@ StatusEffect = {
 	Numb    : 2, //OK
 	Petrify : 3,
 	Venom   : 4, //OK
-	Blind   : 5,
+	Blind   : 5, //OK
 	Siphon  : 6,
 	Seal    : 7,
 	Sleep   : 8,
 	Enrage  : 9,
 	Fatigue : 10,
 	Bleed   : 11,
-	Haste   : 12,
-	Slow    : 13,
+	Haste   : 12, //OK
+	Slow    : 13, //OK
 	Regen   : 14,
 	Boon    : 15,
 	Horny   : 16, //OK
@@ -43,6 +43,7 @@ LoadStatusImages = function(ready) {
 	Images.status[StatusEffect.Venom]  = "data/status/venom.png";
 	Images.status[StatusEffect.Blind]  = "data/status/blind.png";
 	Images.status[StatusEffect.Haste]  = "data/status/haste.png";
+	Images.status[StatusEffect.Slow]   = "data/status/slow.png";
 	Images.status[StatusEffect.Horny]  = "data/status/horny.png";
 	Images.status[StatusEffect.Decoy]  = "data/status/decoy.png";
 	
@@ -306,6 +307,39 @@ Status.Haste.Tick = function(target) {
 	// Remove haste effect
 	if(this.turns <= 0) {
 		target.combatStatus.stats[StatusEffect.Haste] = null;
+	}
+}
+
+
+// TODO: Remove haste?
+Status.Slow = function(target, opts) {
+	if(!target) return;
+	opts = opts || {};
+	
+	// Check for slow resist
+	var odds = (opts.hit || 1) * (1 - target.SlowResist());
+	if(Math.random() > odds) {
+		return false;
+	}
+	
+	// Number of turns effect lasts (static + random factor)
+	var turns = opts.turns || 0;
+	turns += Math.random() * (opts.turnsR || 0);
+	var factor = opts.factor || 2;
+	// Apply effect
+	target.combatStatus.stats[StatusEffect.Slow] = {
+		turns   : turns,
+		factor  : factor,
+		Tick    : Status.Slow.Tick
+	};
+	
+	return true;
+}
+Status.Slow.Tick = function(target) {
+	this.turns--;
+	// Remove haste effect
+	if(this.turns <= 0) {
+		target.combatStatus.stats[StatusEffect.Slow] = null;
 	}
 }
 

@@ -988,6 +988,8 @@ Entity.prototype.Initiative = function() {
 	var ini = Math.sqrt(2 * this.dexterity.Get() + this.intelligence.Get());
 	var haste = this.combatStatus.stats[StatusEffect.Haste];
 	if(haste) ini *= haste.factor;
+	var slow  = this.combatStatus.stats[StatusEffect.Slow];
+	if(slow)  ini /= slow.factor;
 	return ini;
 }
 
@@ -1105,6 +1107,9 @@ Entity.prototype.BlindResist = function() {
 	return 0;
 }
 Entity.prototype.HornyResist = function() {
+	return 0;
+}
+Entity.prototype.SlowResist = function() {
 	return 0;
 }
 
