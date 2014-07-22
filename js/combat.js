@@ -322,12 +322,8 @@ Encounter.prototype.CombatTick = function() {
 			for(var i=0,j=this.combatOrder.length; i<j; i++) {
 				var c = this.combatOrder[i];
 				
-				if(!c.entity.Incapacitated()) {
-					var ini = c.entity.Initiative();
-					var haste = c.entity.combatStatus.stats[StatusEffect.Haste];
-					if(haste) ini *= haste.factor;
-					c.initiative += ini;
-				}
+				if(!c.entity.Incapacitated())
+					c.initiative += c.entity.Initiative();
 			}
 		}
 		
@@ -383,10 +379,7 @@ Encounter.prototype.CombatTick = function() {
 			for(var i=0,j=enc.combatOrder.length; i<j; i++){
 				var c = enc.combatOrder[i];
 				if(!c.entity.Incapacitated()) {
-					var ini = c.entity.Initiative();
-					var haste = c.entity.combatStatus.stats[StatusEffect.Haste];
-					if(haste) ini *= haste.factor;
-					Text.AddOutput(c.entity.name + ": " + Math.floor(c.initiative) + "/100 (+" + Math.floor(ini) + ")<br/>");
+					Text.AddOutput(c.entity.name + ": " + Math.floor(c.initiative) + "/100 (+" + Math.floor(c.entity.Initiative()) + ")<br/>");
 				}
 			};
 			Text.Newline();

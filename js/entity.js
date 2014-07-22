@@ -985,7 +985,10 @@ Entity.prototype.LustCombatTurnLossChance = function() {
 }
 
 Entity.prototype.Initiative = function() {
-	return Math.sqrt(2 * this.dexterity.Get() + this.intelligence.Get());
+	var ini = Math.sqrt(2 * this.dexterity.Get() + this.intelligence.Get());
+	var haste = this.combatStatus.stats[StatusEffect.Haste];
+	if(haste) ini *= haste.factor;
+	return ini;
 }
 
 // Combat functions (calculated)
