@@ -2322,7 +2322,7 @@ Scenes.Cale.SexCatchAnalEntrypoint = function(outside, fromVag) {
 			Text.Add("Reaching your arms around Cale’s waist, you pull him closer, allowing you to nuzzle your face into the crook of his neck. No, you certainly can’t say that you don’t like his butt... his tight, soft, wet, welcoming butt! You buck your hips rhythmically, punctuating each descriptive word with a powerful thrust of your own shaft into Cale’s ass, feeling the slut grip and squeeze you with each motion you make.", parse);
 			Text.NL();
 			
-			Scenes.Cale.SexCaleButtslutEntrypoint(outside, cocksInAss);
+			Scenes.Cale.SexCaleButtslutEntrypoint(cocksInAss, outside);
 		}, 1.0, function() { return cale.Slut() >= 60 && cocksInAss.length > 0; });
 	}
 	
