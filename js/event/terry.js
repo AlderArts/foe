@@ -221,6 +221,8 @@ Terry.prototype.Act = function(encounter, activeChar) {
 		Items.Combat.PoisonDart.UseCombatInternal(encounter, this, t);
 	else if(choice < 0.8)
 		Items.Combat.LustDart.UseCombatInternal(encounter, this, t);
+	else if(Abilities.Physical.DirtyBlow.enabledCondition(encounter, this))
+		Abilities.Physical.DirtyBlow.CastInternal(encounter, this, t);
 	else
 		Abilities.Attack.CastInternal(encounter, this, t);
 }
