@@ -28,3 +28,6 @@ BossEntity.prototype.BlindResist = function() {
 BossEntity.prototype.HornyResist = function() {
 	return 1;
 }
+BossEntity.prototype.SlowResist = function() {
+	return 1;
+}
