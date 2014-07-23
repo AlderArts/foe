@@ -1274,7 +1274,7 @@ Scenes.Cale.SexGetBJSneakyEntry = function(outside, sneaky) {
 			Text.Add("<i>”Now listen here-”</i> he says hurriedly, trying to argue his way out of the situation. Not his brightest move, as it leaves him wide open for you to thrust into his mouth[len]. The wolf’s eyes widen incredulously as you start feeding him inch after inch of throbbing flesh, rubbing your pre onto his diligent tongue.", parse);
 		}
 		else {
-			Text.Add("<i>”Why you naughty...”</i> the wolf quips, grinning at your trickery. <i>”You just had to ask, you know.”</i> You chuckle at how eager he is to please, but he’d best get too it before you grow bored and flip him over.", parse);
+			Text.Add("<i>”Why you naughty...”</i> the wolf quips, grinning at your trickery. <i>”You just had to ask, you know.”</i> You chuckle at how eager he is to please, but he’d best get to it before you grow bored and flip him over.", parse);
 			Text.NL();
 			if(cale.Slut() < 30)
 				Text.Add("<i>”Okay, okay, no need to get your panties in a bunch,”</i> he hurriedly agrees.", parse);
