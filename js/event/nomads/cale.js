@@ -1179,14 +1179,14 @@ Scenes.Cale.SexGetBJ = function(outside) {
 			Text.Add("<i>”No offense, but this wolf doesn’t swing that way, ya know?”</i> Cale waves off your suggestive remark. <i>”Now if <b>you</b> want to suck <b>my</b> cock, that’d be a different story.”</i> The cock-sure wolf grins, winking at you.", parse);
 			Text.Flush();
 			
-			Gui.NextPrompt();
+			Scenes.Cale.Prompt();
 		}
 	}
 	else if(cale.Slut() < 30 && outside) {
 		Text.Add("<i>”No way,”</i> he shakes his head firmly. <i>”I’m not about to get on my knees and blow you out here.”</i> The wolf looks around himself nervously to see if anyone heard him.", parse);
 		Text.Flush();
 		
-		Gui.NextPrompt();
+		Scenes.Cale.Prompt();
 	}
 	else {
 		parse["s"] = player.NumCocks() > 1 ? "s" : "";
@@ -1434,6 +1434,7 @@ Scenes.Cale.SexGetEatenEntrypoint = function(outside) {
 		isAre          : player.NumCocks() > 1 ? "are" : "is",
 		itThem         : player.NumCocks() > 1 ? "them" : "it",
 		itsTheir       : player.NumCocks() > 1 ? "their" : "its",
+		thatThose      : player.NumCocks() > 1 ? "those" : "that",
 		oneof          : player.NumCocks() > 1 ? " one of" : "",
 		biggest        : player.NumCocks() > 1 ? " biggest" : ""
 	};
