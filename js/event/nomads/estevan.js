@@ -43,20 +43,29 @@ Estevan.prototype.ToStorage = function() {
 Scenes.Estevan = {};
 
 Scenes.Estevan.Interact = function() {
+	var parse = {
+		
+	};
+	
 	Text.Clear();
-	Text.AddOutput("You approach the satyr, but he doesn't look implemented yet.");
+	Text.Add("You approach the satyr, but he doesn't look implemented yet.", parse);
 
 	
 	if(DEBUG) {
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: relation: " + estevan.relation.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: subDom: " + estevan.subDom.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: slut: " + estevan.slut.Get()));
-		Text.Newline();
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: relation: " + estevan.relation.Get()));
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: subDom: " + estevan.subDom.Get()));
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: slut: " + estevan.slut.Get()));
+		Text.NL();
 	}
-
+	/*
+	Text.NL();
+	Text.Add("", parse);
+	*/
+	Text.Flush();
+	
 	Gui.NextPrompt();
 }
 
