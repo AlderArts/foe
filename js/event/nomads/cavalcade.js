@@ -4,15 +4,20 @@
 
 Scenes.NomadsCavalcade = {};
 
+Scenes.NomadsCavalcade.Bet = function() {
+	return 5;
+}
+
 Scenes.NomadsCavalcade.Enabled = function() {
 	return cale.IsAtLocation() &&
+	       estevan.flags["Met"] != 0 &&
 	       estevan.IsAtLocation() &&
 	       rosalin.IsAtLocation();
 }
 
 // TODO TEMP CAVALCADE
 world.loc.Plains.Nomads.Fireplace.events.push(new Link(
-	"Cavalcade", function() { return Scenes.NomadsCavalcade.Enabled(); }, true,
+	"Cavalcade", function() { return Scenes.NomadsCavalcade.Enabled(); }, function() { return party.coin >= Scenes.NomadsCavalcade.Bet(); },
 	function() {
 		if(Scenes.NomadsCavalcade.Enabled()) {
 			Text.Add("Both Rosalin, Cale and Estevan seem to be around. Perhaps they are up for a game of Cavalcade?");
@@ -62,7 +67,8 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 
 Scenes.NomadsCavalcade.RegularGame = function() {
 	var parse = {
-		playername : player.name
+		playername : player.name,
+		hisher     : rosalin.hisher()
 	};
 	
 	if(estevan.flags["cav"] == 0) {
@@ -114,8 +120,6 @@ Scenes.NomadsCavalcade.RegularGame = function() {
 			tooltip : "Play for sex."
 		});
 		Gui.SetButtonsFromList(options, false, null);
-		
-		Scenes.NomadsCavalcade.PrepCoinGame();
 	}
 	else {
 		Text.Add("<i>”Here we go then!”</i> the satyr says as he starts dealing out cards.", parse);
@@ -123,10 +127,6 @@ Scenes.NomadsCavalcade.RegularGame = function() {
 		
 		Scenes.NomadsCavalcade.PrepCoinGame();
 	}
-	
-	var players = [player, estevan, rosalin, cale];
-	var g = new Cavalcade(players, {bet: 5});
-	g.PrepGame();
 }
 
 Scenes.NomadsCavalcade.PrepCoinGame = function() {
@@ -134,6 +134,8 @@ Scenes.NomadsCavalcade.PrepCoinGame = function() {
 		var parse = {
 			playername : player.name
 		};
+		
+		SetGameState(GameState.Event);
 		
 		world.TimeStep({minute: 5});
 		
@@ -145,7 +147,7 @@ Scenes.NomadsCavalcade.PrepCoinGame = function() {
 			//[Sure][Nah]
 			var options = new Array();
 			options.push({ nameStr : "Sure",
-				func : Scenes.NomadsCavalcade.PrepCoinGame, enabled : true,
+				func : Scenes.NomadsCavalcade.PrepCoinGame, enabled : party.coin >= Scenes.NomadsCavalcade.Bet(),
 				tooltip : "Deal another round!"
 			});
 			options.push({ nameStr : "Nah",
@@ -168,8 +170,15 @@ Scenes.NomadsCavalcade.PrepCoinGame = function() {
 		}
 	}
 	
+	Text.NL();
+		
+	player.purse  = party;
+	estevan.purse = { coin: 1000 };
+	cale.purse    = { coin: 1000 };
+	rosalin.purse = { coin: 1000 };
+	
 	var players = [player, estevan, rosalin, cale];
-	var g = new Cavalcade(players, {bet    : 5,
+	var g = new Cavalcade(players, {bet    : Scenes.NomadsCavalcade.Bet(),
 		                            onWin  : onEnd,
 		                            onLose : onEnd,
 		                            onDraw : onEnd});
@@ -177,19 +186,27 @@ Scenes.NomadsCavalcade.PrepCoinGame = function() {
 }
 
 Scenes.NomadsCavalcade.PrepSexyGame = function() {
+	var token = 50;
 	var parse = {
-		
+		coin : Text.NumToText(token)
 	};
 	
 	Text.Clear();
-	Text.Add("<i>”Okay. Well play a set of games using these tokens,”</i> Estevan says, handing out the fake coins. <i>”The starting bet goes up each time someone drops out. Last one standing is the winner, and they get to do whatever they want with any one of the losers.”</i>", parse);
+	Text.Add("<i>”Okay. Well play a set of games using these tokens,”</i> Estevan says, handing out the fake coins, [coin] each. <i>”The starting bet goes up each time someone drops out. Last one standing is the winner, and they get to do whatever they want with any one of the losers.”</i>", parse);
 	Text.Flush();
 	
 	// TODO
 	
 	Gui.NextPrompt(function() {
+		Text.NL();
+		
+		player.purse  = { coin: token }
+		estevan.purse = { coin: token };
+		cale.purse    = { coin: token };
+		rosalin.purse = { coin: token };
+		
 		var players = [player, estevan, rosalin, cale];
-		var g = new Cavalcade(players, {bet: 5});
+		var g = new Cavalcade(players, {bet: Scenes.NomadsCavalcade.Bet()});
 		g.PrepGame();
 	});
 }

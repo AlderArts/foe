@@ -266,7 +266,7 @@ Jobs["Rogue"].levels.push(new JobLevel(1280, [{ab: Abilities.Physical.Backstab, 
 Jobs["Ranger"] = new Job("Ranger");
 Jobs["Ranger"].Long = function(entity) { return Text.Parse("The ranger is a skilled hunter, well versed in ways to ensnare and distract [hisher] prey.", {hisher: entity.hisher(), HeShe: entity.HeShe()}); }
 Jobs["Ranger"].Unlocked = function(entity) {
-	return (estevan.flag["Ranger"] == Estevan.Ranger.Taught);
+	return (estevan.flags["Ranger"] == Estevan.Ranger.Taught);
 }
 Jobs["Ranger"].preqs.push({job : Jobs["Fighter"], lvl : 3});
 Jobs["Ranger"].abilities.AddAbility(Abilities.Physical.Ensnare);

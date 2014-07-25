@@ -262,8 +262,7 @@ Cavalcade.prototype.CoinGameRound = function() {
 	switch(that.round) {
 	case 0:
 		for(var i = 0; i < that.players.length; i++) {
-			if(party.InParty(that.players[i]))
-				party.coin -= that.bet;
+			that.players[i].purse.coin -= that.bet;
 			that.pot += that.bet;
 		}
 		Text.Add("You put [bet] coins in the pot. The dealer gives you two cards.", parse);
@@ -356,13 +355,12 @@ Cavalcade.prototype.CoinGameRound = function() {
 				Text.NL();
 				for(var i = 0; i < that.players.length; i++) {
 					if(!that.players[i].folded) {
-						if(party.InParty(that.players[i]))
-							party.coin -= that.bet;
+						that.players[i].purse.coin -= that.bet;
 						that.pot += that.bet;
 					}
 				}
 				that.NextRound();
-			}, party.coin >= that.bet);
+			}, that.players[0].purse.coin >= that.bet); // TODO
 			Input.buttons[8].Setup("Fold", function() {
 				Text.Clear();
 				Text.Add("You fold.");
@@ -401,7 +399,7 @@ Cavalcade.prototype.CoinGameRound = function() {
 				if(party.InParty(that.winners[0])) {
 					Text.NL();
 					Text.Add("The party gains [pot] coins!", {pot: that.pot});
-					party.coin += that.pot;
+					that.players[0].purse.coin += that.pot;
 				}
 			}
 		}
@@ -411,7 +409,7 @@ Cavalcade.prototype.CoinGameRound = function() {
 			if(party.InParty(that.winners[0])) {
 				Text.NL();
 				Text.Add("The party gains [pot] coins!", {pot: that.pot});
-				party.coin += that.pot;
+				that.players[0].purse.coin += that.pot;
 			}
 		}
 		
@@ -422,7 +420,7 @@ Cavalcade.prototype.CoinGameRound = function() {
 		else if(that.winners[0] == player)
 			Gui.NextPrompt(that.onWin);
 		else
-			Gui.NextPrompt(that.onLoss);
+			Gui.NextPrompt(that.onLose);
 		
 		break;
 	}
