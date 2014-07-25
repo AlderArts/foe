@@ -35,6 +35,7 @@ InitCache = function() {
 	chief   = new Chief(gameCache.chief);
 	rosalin = new Rosalin(gameCache.rosalin);
 	cale    = new Cale(gameCache.wolfie);
+	estevan = new Estevan(gameCache.estevan);
 	magnus  = new Magnus(gameCache.magnus);
 	
 	lagon   = new Lagon(gameCache.lagon);
@@ -58,7 +59,6 @@ InitCache = function() {
 	uru         = new Uru();
 	sylistraxia = new Sylistraxia();
 	patchwork   = new Patchwork();
-	estevan     = new Estevan();
 	roa         = new Roa();
 	
 	// Put entities in world storage
@@ -79,8 +79,8 @@ InitCache = function() {
 	world.EntityStorage.push(chief);
 	world.EntityStorage.push(patchwork);
 	world.EntityStorage.push(rosalin);
-	world.EntityStorage.push(estevan);
 	world.EntityStorage.push(cale);
+	world.EntityStorage.push(estevan);
 	world.EntityStorage.push(magnus);
 	
 	world.EntityStorage.push(roa);
@@ -337,6 +337,7 @@ GameToCache = function() {
 	gameCache.chief   = chief.ToStorage();
 	gameCache.rosalin = rosalin.ToStorage();
 	gameCache.wolfie  = cale.ToStorage();
+	gameCache.estevan = estevan.ToStorage();
 	gameCache.magnus  = magnus.ToStorage();
 	
 	gameCache.lagon   = lagon.ToStorage();
