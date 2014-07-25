@@ -130,15 +130,68 @@ Scenes.NomadsCavalcade.RegularGame = function() {
 }
 
 Scenes.NomadsCavalcade.PrepCoinGame = function() {
+	var onEnd = function() {
+		var parse = {
+			playername : player.name
+		};
+		
+		world.TimeStep({minute: 5});
+		
+		Text.Clear();
+		if(Scenes.NomadsCavalcade.Enabled()) {
+			Text.Add("<i>”Do you want to go for another game, [playername]?”</i> the satyr asks, shuffling the deck.", parse);
+			Text.Flush();
+			
+			//[Sure][Nah]
+			var options = new Array();
+			options.push({ nameStr : "Sure",
+				func : Scenes.NomadsCavalcade.PrepCoinGame, enabled : true,
+				tooltip : "Deal another round!"
+			});
+			options.push({ nameStr : "Nah",
+				func : function() {
+					Text.Clear();
+					Text.Add("<i>”Alright, see you around!”</i> Your group disperses, each person going about their own business.", parse);
+					Text.Flush();
+					
+					Gui.NextPrompt();
+				}, enabled : true,
+				tooltip : "Nah, this is enough Cavalcade for now."
+			});
+			Gui.SetButtonsFromList(options, false, null);
+		}
+		else {
+			Text.Add("<i>”It’s getting late, I need to get some sleep if I’m gonna be on time to check my traps tomorrow morning,”</i> Estevan yawns, gathering up the cards. <i>”If you want another game later, just holler.”</i>", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		}
+	}
+	
 	var players = [player, estevan, rosalin, cale];
-	var g = new Cavalcade(players, {bet: 5});
+	var g = new Cavalcade(players, {bet    : 5,
+		                            onWin  : onEnd,
+		                            onLose : onEnd,
+		                            onDraw : onEnd});
 	g.PrepGame();
 }
 
 Scenes.NomadsCavalcade.PrepSexyGame = function() {
-	var players = [player, estevan, rosalin, cale];
-	var g = new Cavalcade(players, {bet: 5});
-	g.PrepGame();
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("<i>”Okay. Well play a set of games using these tokens,”</i> Estevan says, handing out the fake coins. <i>”The starting bet goes up each time someone drops out. Last one standing is the winner, and they get to do whatever they want with any one of the losers.”</i>", parse);
+	Text.Flush();
+	
+	// TODO
+	
+	Gui.NextPrompt(function() {
+		var players = [player, estevan, rosalin, cale];
+		var g = new Cavalcade(players, {bet: 5});
+		g.PrepGame();
+	});
 }
 
 Scenes.NomadsCavalcade.CheatGame = function() {

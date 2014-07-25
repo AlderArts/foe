@@ -131,7 +131,7 @@ Scenes.Rosalin = {};
 Rosalin.prototype.IsAtLocation = function(location) {
 	location = location || party.location;
 	if(location == world.loc.Plains.Nomads.Fireplace)
-		return (world.time.hour >= 12 || world.time.hour < 2);
+		return (world.time.hour >= 12 || world.time.hour < 3);
 	return false;
 }
 
