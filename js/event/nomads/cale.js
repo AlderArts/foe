@@ -2758,7 +2758,8 @@ Scenes.Cale.SexCaleButtslutEntrypoint = function(cocks, outside) {
 		buttDesc   : function() { return player.Butt().Short(); },
 		cockDesc   : function() { return p1cock.Short(); },
 		skinDesc   : function() { return player.SkinDesc(); },
-		tongueDesc : function() { return player.TongueDesc(); }
+		tongueDesc : function() { return player.TongueDesc(); },
+		breastsDesc : function() { return player.FirstBreastRow().Short(); }
 	};
 	
 	Text.Add("<i>”Hehe, I knew you’d come around. Now why don’t you relax and let me milk your cock of all its tasty spunk? Not that you have to restrain yourself, I like it rough,”</i> he grins.", parse);
