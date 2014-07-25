@@ -129,7 +129,9 @@ Scenes.Rosalin = {};
 
 // Schedule
 Rosalin.prototype.IsAtLocation = function(location) {
-	if(location == world.loc.Plains.Nomads.Fireplace) return (world.time.hour >= 10 && world.time.hour < 24);
+	location = location || party.location;
+	if(location == world.loc.Plains.Nomads.Fireplace)
+		return (world.time.hour >= 12 || world.time.hour < 2);
 	return false;
 }
 

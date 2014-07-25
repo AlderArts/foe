@@ -18,8 +18,10 @@ function Estevan(storage) {
 	this.SetLevelBonus();
 	this.RestFull();
 	
-	this.flags["Met"] = 0;
+	this.flags["Met"]    = 0;
 	this.flags["Ranger"] = Estevan.Ranger.NotTalked;
+	this.flags["Cheat"]  = Estevan.Cheat.NotTalked;
+	this.flags["cav"]    = 0; //cavalcade explanation
 	
 	if(storage) this.FromStorage(storage);
 }
