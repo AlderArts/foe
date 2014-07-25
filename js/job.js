@@ -225,6 +225,7 @@ Jobs["Acolyte"].levels.push(new JobLevel(640, [{ab: Abilities.White.Empower, set
 
 // TODO: EXP 2 LEVEL
 Jobs["Bruiser"] = new Job("Bruiser");
+Jobs["Bruiser"].Long = function(entity) { return Text.Parse("The bruiser is all about brute strength, a can prove to be quite a fearsome warrior. [HeShe] can dish out a large amount of damage, but fares badly against quick, evasive foes.", {hisher: entity.hisher(), HeShe: entity.HeShe()}); }
 Jobs["Bruiser"].Unlocked = function(entity) {
 	if(entity == miranda) return true;
 	return false;
@@ -243,6 +244,7 @@ Jobs["Bruiser"].levels.push(new JobLevel(640,  null, {"sta" : 0.2, "dex" : 0.1})
 Jobs["Bruiser"].levels.push(new JobLevel(1280, [{ab: Abilities.Physical.GrandSlam, set: "Skills"}], {"str" : 0.1, "sta" : 0.3, "dex" : 0.1}));
 
 Jobs["Rogue"] = new Job("Rogue");
+Jobs["Rogue"].Long = function(entity) { return Text.Parse("The rogue fights dirty, using any trick or scheme to deal decisive damage to [hisher] enemies. [HeShe] can deal large amounts of damage against distracted opponents.", {hisher: entity.hisher(), HeShe: entity.HeShe()}); }
 Jobs["Rogue"].Unlocked = function(entity) {
 	if(entity == terry) return true;
 	return (cale.flags["Rogue"]  == Cale.Rogue.Taught) ||
@@ -260,6 +262,25 @@ Jobs["Rogue"].levels.push(new JobLevel(160,  null, {"dex" : 0.3}));
 Jobs["Rogue"].levels.push(new JobLevel(320,  [{ab: Abilities.Physical.Swift, set: "Support"}], {"dex" : 0.2, "str" : 0.1}));
 Jobs["Rogue"].levels.push(new JobLevel(640,  null, {"dex" : 0.2, "int" : 0.1}));
 Jobs["Rogue"].levels.push(new JobLevel(1280, [{ab: Abilities.Physical.Backstab, set: "Skills"}], {"dex" : 0.3, "int" : 0.1, "cha" : 0.1}));
+
+Jobs["Ranger"] = new Job("Ranger");
+Jobs["Ranger"].Long = function(entity) { return Text.Parse("The ranger is a skilled hunter, well versed in ways to ensnare and distract [hisher] prey.", {hisher: entity.hisher(), HeShe: entity.HeShe()}); }
+Jobs["Ranger"].Unlocked = function(entity) {
+	return (estevan.flag["Ranger"] == Estevan.Ranger.Taught);
+}
+Jobs["Ranger"].preqs.push({job : Jobs["Fighter"], lvl : 3});
+Jobs["Ranger"].abilities.AddAbility(Abilities.Physical.Ensnare);
+Jobs["Ranger"].abilities.AddAbility(Abilities.Physical.FocusStrike);
+Jobs["Ranger"].abilities.AddAbility(Abilities.Physical.TAttack);
+Jobs["Ranger"].abilities.AddAbility(Abilities.Physical.GrandSlam);
+Jobs["Ranger"].levels.push(new JobLevel(20,   [{ab: Abilities.Physical.Ensnare, set: "Skills"}], {"dex" : 0.2, "spi" : 0.1}));
+Jobs["Ranger"].levels.push(new JobLevel(40,   null, {"sta" : 0.1, "dex" : 0.2}));
+Jobs["Ranger"].levels.push(new JobLevel(80,   [{ab: Abilities.Physical.FocusStrike, set: "Skills"}], {"int" : 0.2, "dex" : 0.1}));
+Jobs["Ranger"].levels.push(new JobLevel(160,  null, {"dex" : 0.3}));
+Jobs["Ranger"].levels.push(new JobLevel(320,  [{ab: Abilities.Physical.TAttack, set: "Skills"}], {"int" : 0.1, "sta" : 0.2}));
+Jobs["Ranger"].levels.push(new JobLevel(640,  null, {"spi" : 0.2, "dex" : 0.1}));
+Jobs["Ranger"].levels.push(new JobLevel(1280, [{ab: Abilities.Physical.GrandSlam, set: "Skills"}], {"int" : 0.1, "sta" : 0.1, "dex" : 0.3}));
+
 
 Jobs["Mage"] = new Job("Mage");
 Jobs["Mage"].Long = function(entity) { return Text.Parse("The mage has taken the first steps into exploring the raw power of the elements and the chaotic force of magic. While [heshe] has barely begun tapping [hisher] innate potential, the mage already possesses a formidable destructive power.", {hisher: entity.hisher(), heshe: entity.heshe()}); }
@@ -321,11 +342,14 @@ Jobs["Healer"].Unlocked = function(entity) {
 ////////////
 
 Jobs["Elementalist"] = new Job("Elementalist");
+//TODO
 Jobs["Elementalist"].Long = function(entity) { return Text.Parse("", {hisher: entity.hisher(), HisHer: entity.HisHer()}); }
 Jobs["Elementalist"].preqs.push({job : Jobs["Mage"], lvl : 3});
+//TODO
 Jobs["Elementalist"].abilities.AddAbility(Abilities.White.Heal);
 Jobs["Elementalist"].levels.push(new JobLevel(20,   null, {"str" : 0.2}));
 Jobs["Elementalist"].levels.push(new JobLevel(40,   null, {"str" : 0.2}));
+//TODO
 Jobs["Elementalist"].levels.push(new JobLevel(80,   [{ab: Abilities.White.Heal, set: "Support"}], {"int" : 0.1, "dex" : 0.1}));
 Jobs["Elementalist"].levels.push(new JobLevel(160,  null, {"str" : 0.2}));
 Jobs["Elementalist"].levels.push(new JobLevel(320,  null, {"str" : 0.2}));

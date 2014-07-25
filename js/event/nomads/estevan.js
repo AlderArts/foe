@@ -10,18 +10,25 @@ function Estevan(storage) {
 	this.name         = "Estevan";
 	
 	this.body.DefMale();
-	this.body.SetRace(Race.satyr);
+	this.body.legs.race = Race.satyr;
 	this.SetSkinColor(Color.olive);
+	this.SetHairColor(Color.black);
 	TF.SetAppendage(this.Back(), AppendageType.horn, Race.satyr, Color.black, 2);
 	
 	this.SetLevelBonus();
 	this.RestFull();
 	
+	this.flags["Ranger"] = Estevan.Ranger.NotTalked;
 	
 	if(storage) this.FromStorage(storage);
 }
 Estevan.prototype = new Entity();
 Estevan.prototype.constructor = Estevan;
+
+Estevan.Ranger = {
+	NotTalked : 0,
+	Taught    : 1
+}
 
 Estevan.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);

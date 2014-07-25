@@ -239,6 +239,30 @@ Abilities.Physical.Backstab.enabledTargetCondition = function(encounter, caster,
 }
 
 
+Abilities.Physical.Ensnare = new AttackPhysical();
+Abilities.Physical.Ensnare.name = "Ensnare";
+Abilities.Physical.Ensnare.Short = function() { return "Slows down the target by throwing a net at them, slowing them down."; }
+Abilities.Physical.Ensnare.cost = { hp: null, sp: 20, lp: null};
+Abilities.Physical.Ensnare.atkMod = 0;
+Abilities.Physical.Ensnare.OnCast = function(encounter, caster, target) {
+	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
+	Text.AddOutput("[name] throw[s] a net toward [tName]! ", parse);
+}
+Abilities.Physical.Ensnare.OnHit = function(encounter, caster, target, dmg) {
+	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", himher : target.himher(), name : caster.nameDesc() };
+	if(Status.Slow(target, { hit : 0.6, factor : 2, turns : 3, turnsR : 3 })) {
+		Text.AddOutput("[tName] get[s] caught in the net, slowing [himher]!", parse);
+	}
+	Text.Newline();
+}
+Abilities.Physical.Ensnare.OnAbsorb = Abilities.Physical.Ensnare.OnHit;
+Abilities.Physical.Ensnare.OnMiss = function(encounter, caster, target) {
+	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
+	Text.AddOutput("[tName] easily avoid[s] the attack.", parse);
+	Text.Newline();
+}
+
+
 Abilities.Physical.FocusStrike = new AttackPhysical();
 Abilities.Physical.FocusStrike.name = "FocusStrike";
 Abilities.Physical.FocusStrike.Short = function() { return "Bypass defenses."; }
