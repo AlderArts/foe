@@ -407,7 +407,8 @@ Cavalcade.prototype.CoinGameRound = function() {
 				that.winners[i].purse.coin += that.pot;
 				if(party.InParty(that.winners[i])) {
 					Text.NL();
-					Text.Add("The party gains [pot] [token]s!", {pot: that.pot});
+					parse["pot"] = that.pot;
+					Text.Add("The party gains [pot] [token]s!", parse);
 				}
 			}
 		}
@@ -417,7 +418,8 @@ Cavalcade.prototype.CoinGameRound = function() {
 			that.winners[0].purse.coin += that.pot;
 			if(party.InParty(that.winners[0])) {
 				Text.NL();
-				Text.Add("The party gains [pot] [token]s!", {pot: that.pot});
+				parse["pot"] = that.pot;
+				Text.Add("The party gains [pot] [token]s!", parse);
 			}
 		}
 		
