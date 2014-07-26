@@ -187,9 +187,58 @@ Scenes.NomadsCavalcade.PrepCoinGame = function() {
 
 Scenes.NomadsCavalcade.PrepSexyGame = function() {
 	var token = 50;
+	
 	var parse = {
 		coin : Text.NumToText(token)
 	};
+	
+	player.purse  = { coin: token }
+	estevan.purse = { coin: token };
+	cale.purse    = { coin: token };
+	rosalin.purse = { coin: token };
+	
+	var players = [player, estevan, rosalin, cale];
+	
+	var onEnd = function() {
+		for(var i = 0; i < players.length; i++) {
+			var p = players[i];
+			
+			// Remove bankrupt players
+			if(p.purse.coin <= 0) {
+				players.remove(i);
+				i--;
+				
+				if(p == player) {
+					Text.Add("", parse);
+				}
+				else if(p == estevan) {
+					Text.Add("", parse);
+				}
+				else if(p == rosalin) {
+					Text.Add("", parse);
+				}
+				else if(p == cale) {
+					Text.Add("", parse);
+				}
+				else {
+					parse["name"] = p.name;
+					Text.Add("THIS IS A BUG. NAME IS: [name]", parse);
+				}
+				Text.NL();
+			}
+		}
+		
+		Text.Add("", parse);
+		Text.NL();
+		
+		var bet = Scenes.NomadsCavalcade.Bet() * (5 - players.length);
+		var g = new Cavalcade(players, {bet    : bet,
+			                            token  : "token",
+		                                onWin  : onEnd,
+		                                onLose : onEnd,
+		                                onDraw : onEnd});
+		g.PrepGame();
+	}
 	
 	Text.Clear();
 	Text.Add("<i>”Okay. Well play a set of games using these tokens,”</i> Estevan says, handing out the fake coins, [coin] each. <i>”The starting bet goes up each time someone drops out. Last one standing is the winner, and they get to do whatever they want with any one of the losers.”</i>", parse);
@@ -200,13 +249,11 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 	Gui.NextPrompt(function() {
 		Text.NL();
 		
-		player.purse  = { coin: token }
-		estevan.purse = { coin: token };
-		cale.purse    = { coin: token };
-		rosalin.purse = { coin: token };
-		
-		var players = [player, estevan, rosalin, cale];
-		var g = new Cavalcade(players, {bet: Scenes.NomadsCavalcade.Bet()});
+		var g = new Cavalcade(players, {bet    : Scenes.NomadsCavalcade.Bet(),
+			                            token  : "token",
+		                                onWin  : onEnd,
+		                                onLose : onEnd,
+		                                onDraw : onEnd});
 		g.PrepGame();
 	});
 }

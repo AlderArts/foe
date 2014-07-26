@@ -18,6 +18,8 @@ function Cavalcade(players, opts) {
 	this.onWin     = opts.onWin  || PrintDefaultOptions;
 	this.onLose    = opts.onLose || PrintDefaultOptions;
 	this.onDraw    = opts.onDraw || PrintDefaultOptions;
+	
+	this.token     = opts.token || "coin";
 
 	// 0=start, 1=1 card (first bet), 2=2 card, 3=3 card (final bet)
 	this.round = 0;
@@ -250,6 +252,7 @@ Cavalcade.prototype.ResultStr = function(res) {
 Cavalcade.prototype.CoinGameRound = function() {
 	var that = this;
 	var parse = {
+		token : that.token,
 		bet : that.bet,
 		pot : function() { return that.pot; }
 	};
@@ -265,9 +268,9 @@ Cavalcade.prototype.CoinGameRound = function() {
 			that.players[i].purse.coin -= that.bet;
 			that.pot += that.bet;
 		}
-		Text.Add("You put [bet] coins in the pot. The dealer gives you two cards.", parse);
+		Text.Add("You put [bet] [token]s in the pot. The dealer gives you two cards.", parse);
 		Text.NL();
-		Text.Add(Text.BoldColor("There are [pot] coins in the pot."), parse);
+		Text.Add(Text.BoldColor("There are [pot] [token]s in the pot."), parse);
 		
 		Text.Flush();
 		
@@ -332,7 +335,7 @@ Cavalcade.prototype.CoinGameRound = function() {
 		Text.Add(".");
 		
 		Text.NL();
-		Text.Add(Text.BoldColor("There are [pot] coins in the pot."), parse);
+		Text.Add(Text.BoldColor("There are [pot] [token]s in the pot."), parse);
 		
 		Text.Flush();
 		if(player.folded) {
@@ -355,7 +358,7 @@ Cavalcade.prototype.CoinGameRound = function() {
 				Text.NL();
 				for(var i = 0; i < that.players.length; i++) {
 					if(!that.players[i].folded) {
-						that.players[i].purse.coin -= that.bet;
+						that.players[i].purse.coin -= Math.min(that.bet, that.players[i].purse.coin);
 						that.pot += that.bet;
 					}
 				}
@@ -396,20 +399,20 @@ Cavalcade.prototype.CoinGameRound = function() {
 			Text.Add("There was a draw! The pot is split between the winners.");
 			that.pot = Math.floor(that.pot/that.winners.length);
 			for(var i = 0; i < that.winners.length; i++) {
-				if(party.InParty(that.winners[0])) {
+				that.winners[i].purse.coin += that.pot;
+				if(party.InParty(that.winners[i])) {
 					Text.NL();
-					Text.Add("The party gains [pot] coins!", {pot: that.pot});
-					that.players[0].purse.coin += that.pot;
+					Text.Add("The party gains [pot] [token]s!", {pot: that.pot});
 				}
 			}
 		}
 		else {
 			that.winner = that.winners[0];
 			Text.Add("[name] won the round!", {name: that.winners[0].NameDesc()});
+			that.winners[0].purse.coin += that.pot;
 			if(party.InParty(that.winners[0])) {
 				Text.NL();
-				Text.Add("The party gains [pot] coins!", {pot: that.pot});
-				that.players[0].purse.coin += that.pot;
+				Text.Add("The party gains [pot] [token]s!", {pot: that.pot});
 			}
 		}
 		
