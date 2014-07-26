@@ -105,18 +105,24 @@ Scenes.NomadsCavalcade.RegularGame = function() {
 	Text.NL();
 	
 	// TODO: Other triggers?
-	if(estevan.flags["Cheat"] >= Estevan.Cheat.Triggered) {
+	if(estevan.flags["Cheat"] >= Estevan.Cheat.Talked) {
 		Text.Add("<i>”So, what are the stakes?”</i> the satyr asks innocently.", parse);
 		Text.Flush();
 		
 		//[Coin game][Sexy game]
 		var options = new Array();
 		options.push({ nameStr : "Coin game",
-			func : Scenes.NomadsCavalcade.PrepCoinGame, enabled : true,
+			func : function() {
+				Text.Clear();
+				Scenes.NomadsCavalcade.PrepCoinGame();
+			}, enabled : true,
 			tooltip : "Play for coins."
 		});
 		options.push({ nameStr : "Sexy game",
-			func : Scenes.NomadsCavalcade.PrepSexyGame, enabled : true,
+			func : function() {
+				Text.Clear();
+				Scenes.NomadsCavalcade.PrepSexyGame();
+			}, enabled : true,
 			tooltip : "Play for sex."
 		});
 		Gui.SetButtonsFromList(options, false, null);
@@ -125,7 +131,10 @@ Scenes.NomadsCavalcade.RegularGame = function() {
 		Text.Add("<i>”Here we go then!”</i> the satyr says as he starts dealing out cards.", parse);
 		Text.Flush();
 		
-		Scenes.NomadsCavalcade.PrepCoinGame();
+		Gui.NextPrompt(function() {
+			Text.Clear();
+			Scenes.NomadsCavalcade.PrepCoinGame();
+		});
 	}
 }
 
@@ -147,7 +156,10 @@ Scenes.NomadsCavalcade.PrepCoinGame = function() {
 			//[Sure][Nah]
 			var options = new Array();
 			options.push({ nameStr : "Sure",
-				func : Scenes.NomadsCavalcade.PrepCoinGame, enabled : party.coin >= Scenes.NomadsCavalcade.Bet(),
+				func : function() {
+					Text.NL();
+					Scenes.NomadsCavalcade.PrepCoinGame();
+				}, enabled : party.coin >= Scenes.NomadsCavalcade.Bet(),
 				tooltip : "Deal another round!"
 			});
 			options.push({ nameStr : "Nah",
@@ -170,8 +182,6 @@ Scenes.NomadsCavalcade.PrepCoinGame = function() {
 		}
 	}
 	
-	Text.NL();
-	
 	player.purse  = party;
 	estevan.purse = { coin: 100 };
 	cale.purse    = { coin: 100 };
@@ -187,7 +197,7 @@ Scenes.NomadsCavalcade.PrepCoinGame = function() {
 Scenes.NomadsCavalcade.PlayersLeft = function(players) {
 	var num = 0;
 	for(var i = 0; i < players.length; i++)
-		if(players[i].purse.coin > 0)
+		if(!players[i].out)
 			num++;
 	return num;
 }
@@ -196,6 +206,7 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 	var token = 50;
 	
 	var parse = {
+		playername : player.name,
 		coin : Text.NumToText(token)
 	};
 	
@@ -207,6 +218,7 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 	var players = [player, estevan, rosalin, cale];
 	
 	var onEnd = function() {
+		Text.NL();
 		world.TimeStep({minute: 5});
 		
 		for(var i = 0; i < players.length; i++) {
@@ -215,7 +227,6 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 			
 			// Remove bankrupt players
 			if(p.purse.coin <= 0) {
-				Text.NL();
 				if(p == player) {
 					Text.Add("Looks like you lose this game, as you’re out of tokens.", parse);
 					Text.NL();
@@ -235,19 +246,18 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 					Text.Add("THIS IS A BUG. NAME IS: [name]", parse);
 				}
 				p.out = true;
+				Text.NL();
 			}
 		}
 		
 		if(Scenes.NomadsCavalcade.PlayersLeft(players) <= 1) {
-			var p = players[0];
 			var next = null;
-			if     (p == player)  next = Scenes.NomadsCavalcade.SexyPlayerWin;
-			else if(p == estevan) next = Scenes.NomadsCavalcade.SexyEstevanWin;
-			else if(p == rosalin) next = Scenes.NomadsCavalcade.SexyRosalinWin;
-			else if(p == cale)    next = Scenes.NomadsCavalcade.SexyCaleWin;
+			if     (!player.out)  next = Scenes.NomadsCavalcade.SexyPlayerWin;
+			else if(!estevan.out) next = Scenes.NomadsCavalcade.SexyEstevanWin;
+			else if(!rosalin.out) next = Scenes.NomadsCavalcade.SexyRosalinWin;
+			else if(!cale.out)    next = Scenes.NomadsCavalcade.SexyCaleWin;
 			else {
-				parse["name"] = p.name;
-				Text.Add("THIS IS A BUG. WINNER IS: [name]", parse);
+				Text.Add("THIS IS A BUG. WINNER IS BROKEN.", parse);
 			}
 			
 			Text.Flush();
@@ -256,26 +266,78 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 			});
 		}
 		else {
-			Text.Add("<i>”Another round then,”</i> Estevan says, dealing out the cards.", parse);
-			Text.NL();
-			
-			var bet = Scenes.NomadsCavalcade.Bet() * (5 - Scenes.NomadsCavalcade.PlayersLeft(players));
-			var g = new Cavalcade(players, {bet    : bet,
-				                            token  : "token",
-			                                onPost : onEnd});
-			g.PrepGame(true);
-			g.NextRound();
+			Text.Add("<i>”Another round then?”</i> Estevan asks.", parse);
+			Text.Flush();
+			Gui.ClearButtons();
+			Input.buttons[0].Setup("Next", function() {
+				Text.Clear();
+				var bet = Scenes.NomadsCavalcade.Bet() * (5 - Scenes.NomadsCavalcade.PlayersLeft(players));
+				var g = new Cavalcade(players, {bet    : bet,
+					                            token  : "token",
+				                                onPost : onEnd});
+				g.PrepGame(true);
+				g.NextRound();
+			}, true);
+			if(DEBUG) {
+				Input.buttons[4].Setup("CHEAT", function() {
+					Scenes.NomadsCavalcade.SexyPlayerWin(false);
+				}, true);
+			}
+			Input.buttons[8].Setup("Give up", function() {
+				player.out = true;
+				Text.Clear();
+				Text.Add("<i>”Had enough?”</i> Estevan quips. <i>”That counts as an automatic loss, by the way.”</i>", parse);
+				Text.NL();
+				
+				if(Scenes.NomadsCavalcade.PlayersLeft(players) <= 1)
+					Gui.NextPrompt(onEnd);
+				else {
+					Text.Add("The satyr starts dealing out cards to the remaining players.", parse);
+					Text.NL();
+					
+					var name;
+					var scenes = new EncounterTable();
+					scenes.AddEnc(function() {
+						name = estevan.name;
+						cale.out    = true;
+						rosalin.out = true;
+					}, estevan.purse.coin*1.2, function() { return !estevan.out; });
+					scenes.AddEnc(function() {
+						name = rosalin.name;
+						cale.out    = true;
+						estevan.out = true;
+					}, rosalin.purse.coin*1.1, function() { return !rosalin.out; });
+					scenes.AddEnc(function() {
+						name = cale.name;
+						estevan.out = true;
+						rosalin.out = true;
+					}, cale.purse.coin, function() { return !cale.out; });
+					scenes.Get();
+					
+					parse["name"] = name;
+					world.TimeStep({minute: 15});
+					Text.Add("The game goes on for a while longer, eventually ending up with [name] as the winner.", parse);
+					
+					onEnd();
+				}
+			}, true);
 		}
 	}
 	
-	Text.Clear();
+	if(estevan.flags["cav"] < 2) {
+		Text.Add("<i>”I sure am!”</i> Cale rubs his hands together, eagerly.", parse);
+		Text.NL();
+		Text.Add("Actually, how about you try something different? Cale raises his eyebrows as you explain the premise of the faux game. <i>”So the winner gets to ask a favor of one of the losers? Sounds interesting.”</i> That’s not all of it. You continue to explain the sexual nature of the favors you had in mind. A slow grin spreads across the wolf’s face.", parse);
+		Text.NL();
+		Text.Add("<i>”Damn [playername], you got a dirty mind. You up for this, Rosie?”</i> The alchemist nods happily, apparently unperturbed by the nature of the bet.", parse);
+		Text.NL();
+		estevan.flags["cav"] = 2;
+	}
 	Text.Add("<i>”Okay. Well play a set of games using these tokens,”</i> Estevan says, handing out the fake coins, [coin] each. <i>”The starting bet goes up each time someone drops out. Last one standing is the winner, and they get to do whatever they want with any one of the losers.”</i>", parse);
 	Text.Flush();
 	
-	// TODO
-	
 	Gui.NextPrompt(function() {
-		Text.NL();
+		Text.Clear();
 		
 		var g = new Cavalcade(players, {bet    : Scenes.NomadsCavalcade.Bet(),
 			                            token  : "token",
@@ -310,9 +372,18 @@ Scenes.NomadsCavalcade.CheatGame = function() {
 	Text.NL();
 	Text.Add("<i>”Scared of being robbed blind, goat-boy?”</i> the wolf mocks the satyr.", parse);
 	Text.NL();
-	Text.Add("Actually, that won’t be a problem in this game, you hop in. Cale raises his eyebrows as you explain the premise of the faux game. <i>”So the winner gets to ask a favor of one of the losers? Sounds interesting.”</i> That’s not all of it. You continue to explain the sexual nature of the favors you had in mind. A slow grin spreads across the wolf’s face.", parse);
-	Text.NL();
-	Text.Add("<i>”Damn [playername], you got a dirty mind. You up for this, Rosie?”</i> The alchemist nods happily, apparently unperturbed by the nature of the bet. <i>”Sure you don’t want to join in goat-boy? I’ll take you for a ride you won’t soon forget,”</i> the wolf quips.", parse);
+	Text.Add("Actually, that won’t be a problem in this game, you hop in. ", parse);
+	
+	if(estevan.flags["cav"] == 1) {
+		Text.Add("Cale raises his eyebrows as you explain the premise of the faux game. <i>”So the winner gets to ask a favor of one of the losers? Sounds interesting.”</i> That’s not all of it. You continue to explain the sexual nature of the favors you had in mind. A slow grin spreads across the wolf’s face.", parse);
+		Text.NL();
+		Text.Add("<i>”Damn [playername], you got a dirty mind. You up for this, Rosie?”</i> The alchemist nods happily, apparently unperturbed by the nature of the bet. ", parse);
+		estevan.flags["cav"] = 2;
+	}
+	else {
+		Text.Add("This will be a sexy game. Cale’s eyes light up. ", parse);
+	}
+	Text.Add("<i>”Sure you don’t want to join in goat-boy? I’ll take you for a ride you won’t soon forget,”</i> the wolf quips.", parse);
 	Text.NL();
 	Text.Add("<i>”I’m sure you’ll do just fine without me,”</i> the satyr glibly replies, carefully shuffling the deck. <i>”Let’s go then, shall we?”</i> He hands out a set of tokens to each player, followed by your starting hand.", parse);
 	Text.Flush();
@@ -326,104 +397,108 @@ Scenes.NomadsCavalcade.CheatGame = function() {
 		Text.Add("On the final round of the game, the wolf lights up again, finally graced with a good by the spirits. Or so he thinks. <i>”There, full Cavalcade!”</i> he snaps, throwing down his cards defiantly. The house hand is the Lady of Light, the Champion of Light and the Maiden of Light. Together with the Shadow Stag and his Steed of Light, he’s got a one of the best hands in the game.", parse);
 		Text.NL();
 		Text.Add("Smiling, you drop your cards, revealing the Priestess of Light and the Stud of Light, trumping him with a true full Cavalcade. <i>”God DAMNIT!”</i> Cale yells, throwing his hands in the air in frustration. <i>”Fine, you win, you win! And here I thought I would get some quality time with Rosie. Fine, she’s yours.”</i>", parse);
-		Text.NL();
-		Text.Add("Not so fast. You thoroughly enjoy the wolf’s expression slowly change as you explain exactly what you had in mind. You don’t want Rosalin, you want Cale. And you’ll be the one fucking him. In the butt.", parse);
-		Text.NL();
+		Text.Flush();
 		
-		if(virgin) {
-			Text.Add("<i>”Wait- WHAT?!”</i> Cale looks around him bewildered. <i>”B-but...”</i> No buts. Just his butt.", parse);
-			if(player.Gender() == Gender.female || cocksInAss.length == 0) {
-				if(player.Gender() == Gender.female)
-					Text.Add(" <i>”B-but you don’t even have a… you know...”</i> he falters.", parse);
-				else
-					Text.Add(" <i>”B-but that… thing is <b>way</b> too big! It won’t fit!”</i> he stammers.", parse);
-				Text.NL();
-				if(p1cock)
-					Text.Add("Oh, you have that covered. Without skipping a beat, you pull out your trusty [cockDesc].", parse);
-				else {
-					Text.Add("<i>”Oh, I know! You can have one of mine!”</i> Rosalin quips in to the frustration of the wolf. The [racedesc] scurries away, returning with an immense canine dildo, complete with a knot. <i>”I know you’ll like it, wuffie!”</i> the alchemist exclaims, handing you the toy.", parse);
-					var inv = party.inventory;
-					if(player.strapOn) inv.AddItem(player.strapOn);
-					player.strapOn = Items.StrapOn.CanidStrapon;
-					player.Equip();
-				}
-				Text.NL();
-				Text.Add("Grinning, you fasten the straps of the artificial cock, securing them for the rough fucking you are about to dish out.", parse);
-			}
+		Gui.NextPrompt(function() {
+			Text.Clear();
+			Text.Add("Not so fast. You thoroughly enjoy the wolf’s expression slowly change as you explain exactly what you had in mind. You don’t want Rosalin, you want Cale. And you’ll be the one fucking him. In the butt.", parse);
 			Text.NL();
-			Text.Add("<i>”N-now hold on just a minute,”</i> the wolf stammers, a wild look in his eyes.", parse);
-			Text.NL();
-			Text.Add("<i>”Surely you aren’t about to go back on your word, are you?”</i> Estevan purrs, wearing the biggest shit-eating grin you’ve ever seen.", parse);
-			Text.NL();
-			Text.Add("<i>”We <b>did</b> decide that the winner could do anything they wanted to the loser, so you don’t really have a say in it, do you?”</i> Rosalin adds.", parse);
-			Text.NL();
-			Text.Add("Cale swirls back and forth between each one of you, but you’re not going to have him wiggle his way out of this one. Especially since you have to keep his attention away from your last hand…", parse);
-			Text.NL();
-			Text.Add("Finally, a defeated wolfie lowers his head, muttering something about the world not being fair. Tough luck. Well, not exactly luck, but still.", parse);
-			Text.NL();
-			Text.Add("<i>”Fine, let’s get this over with,”</i> he sighs. Grinning, you tell him to turn around and bend over the log. <i>”What, here?”</i> he protests, but lowers his head as you sternly remind him about the rules again. <i>”Okay, okay, just be gentle- WILL YOU STOP LAUGHING?”</i> the wolf exclaims, his raw nerves chafing at Estevan’s roaring laughter. It takes a bit of further coaxing, but you finally have Cale propped up over the log, butt sticking up in the air.", parse);
-		}
-		else if(cale.Slut() < 30) {
-			Text.Add("<i>”What? Here?”</i> Cale looks around him furtively, wincing at Estevan. Come on, it’s not like he’s got anything to hide, is there? <i>”I… I suppose not,”</i> he mumbles, scratching his head.", parse);
-			if(player.Gender() == Gender.female || cocksInAss.length == 0) {
-				if(player.Gender() == Gender.female)
-					Text.Add(" <i>”Do you even have, you know...”</i> he falters, looking curious.", parse);
-				else
-					Text.Add(" <i>”N-no way that will fit,”</i> he says, eyeing your bulge nervously.", parse);
-				Text.NL();
-				if(p1cock)
-					Text.Add("Oh, you have that covered. Without skipping a beat, you pull out your trusty [cockDesc].", parse);
-				else {
-					Text.Add("<i>”Oh, I know! You can have one of mine!”</i> Rosalin quips in. The [racedesc] scurries away, returning with an immense canine dildo, complete with a knot. <i>”I know you’ll like it, wuffie!”</i> the alchemist exclaims, handing you the toy. Cale blanches a bit at the sight of it.", parse);
-					var inv = party.inventory;
-					if(player.strapOn) inv.AddItem(player.strapOn);
-					player.strapOn = Items.StrapOn.CanidStrapon;
-					player.Equip();
-				}
-				Text.NL();
-				Text.Add("Grinning, you fasten the straps of the artificial cock, securing them for the rough fucking you are about to dish out.", parse);
-			}
-			Text.NL();
-			Text.Add("<i>”I just want to say I’m still not very comfortable with this, but a bet is a bet,”</i> the wolf states. <i>”Alright, let’s get this over with,”</i> he sighs, meekly obeying your command to bend over the log.", parse);
-		}
-		else {
-			Text.Add("<i>”So that’s what this is about,”</i> Cale chuckles. <i>”Why didn’t you just say you wanted to tap my ass again?”</i>", parse);
-			Text.NL();
-			Text.Add("This way was more fun, plus it adds another exciting level to Cavalcade.", parse);
-			Text.NL();
-			Text.Add("<i>”Guess that’s true,”</i> the wolf agrees. <i>”How do you want me?”</i> You tell him to turn around and bend over. Cale eagerly jumps to obey you, his tail wagging excitedly.", parse);
-			if(player.Gender() == Gender.female || cocksInAss.length == 0) {
-				if(player.Gender() == Gender.female)
-					Text.Add(" <i>”Do you have a nice big cock for me?”</i> he wonders, sounding pretty eager.", parse);
-				else
-					Text.Add(" <i>”I… ah, sorry, but I don’t think my ass is quite <b>that</b> flexible yet,”</i> he says, regretfully eyeing your bulge.", parse);
-				Text.NL();
-				if(p1cock)
-					Text.Add("Oh, you have that covered. Without skipping a beat, you pull out your trusty [cockDesc].", parse);
-				else {
-					Text.Add("<i>”Oh, I know! You can have one of mine!”</i> Rosalin quips in. The [racedesc] scurries away, returning with an immense canine dildo, complete with a knot. <i>”I know you’ll like it, wuffie!”</i> the alchemist exclaims, handing you the toy.", parse);
+			
+			if(virgin) {
+				Text.Add("<i>”Wait- WHAT?!”</i> Cale looks around him bewildered. <i>”B-but...”</i> No buts. Just his butt.", parse);
+				if(player.Gender() == Gender.female || cocksInAss.length == 0) {
+					if(player.Gender() == Gender.female)
+						Text.Add(" <i>”B-but you don’t even have a… you know...”</i> he falters.", parse);
+					else
+						Text.Add(" <i>”B-but that… thing is <b>way</b> too big! It won’t fit!”</i> he stammers.", parse);
 					Text.NL();
-					Text.Add("<i>”Thanks, Rosie!”</i> the wolf yips cheerfully.", parse);
-					var inv = party.inventory;
-					if(player.strapOn) inv.AddItem(player.strapOn);
-					player.strapOn = Items.StrapOn.CanidStrapon;
-					player.Equip();
+					if(p1cock)
+						Text.Add("Oh, you have that covered. Without skipping a beat, you pull out your trusty [cockDesc].", parse);
+					else {
+						Text.Add("<i>”Oh, I know! You can have one of mine!”</i> Rosalin quips in to the frustration of the wolf. The [racedesc] scurries away, returning with an immense canine dildo, complete with a knot. <i>”I know you’ll like it, wuffie!”</i> the alchemist exclaims, handing you the toy.", parse);
+						var inv = party.inventory;
+						if(player.strapOn) inv.AddItem(player.strapOn);
+						player.strapOn = Items.StrapOn.CanidStrapon;
+						player.Equip();
+					}
+					Text.NL();
+					Text.Add("Grinning, you fasten the straps of the artificial cock, securing them for the rough fucking you are about to dish out.", parse);
 				}
 				Text.NL();
-				Text.Add("Grinning, you fasten the straps of the artificial cock, securing them for the rough fucking you are about to dish out.", parse);
+				Text.Add("<i>”N-now hold on just a minute,”</i> the wolf stammers, a wild look in his eyes.", parse);
+				Text.NL();
+				Text.Add("<i>”Surely you aren’t about to go back on your word, are you?”</i> Estevan purrs, wearing the biggest shit-eating grin you’ve ever seen.", parse);
+				Text.NL();
+				Text.Add("<i>”We <b>did</b> decide that the winner could do anything they wanted to the loser, so you don’t really have a say in it, do you?”</i> Rosalin adds.", parse);
+				Text.NL();
+				Text.Add("Cale swirls back and forth between each one of you, but you’re not going to have him wiggle his way out of this one. Especially since you have to keep his attention away from your last hand…", parse);
+				Text.NL();
+				Text.Add("Finally, a defeated wolfie lowers his head, muttering something about the world not being fair. Tough luck. Well, not exactly luck, but still.", parse);
+				Text.NL();
+				Text.Add("<i>”Fine, let’s get this over with,”</i> he sighs. Grinning, you tell him to turn around and bend over the log. <i>”What, here?”</i> he protests, but lowers his head as you sternly remind him about the rules again. <i>”Okay, okay, just be gentle- WILL YOU STOP LAUGHING?”</i> the wolf exclaims, his raw nerves chafing at Estevan’s roaring laughter. It takes a bit of further coaxing, but you finally have Cale propped up over the log, butt sticking up in the air.", parse);
 			}
+			else if(cale.Slut() < 30) {
+				Text.Add("<i>”What? Here?”</i> Cale looks around him furtively, wincing at Estevan. Come on, it’s not like he’s got anything to hide, is there? <i>”I… I suppose not,”</i> he mumbles, scratching his head.", parse);
+				if(player.Gender() == Gender.female || cocksInAss.length == 0) {
+					if(player.Gender() == Gender.female)
+						Text.Add(" <i>”Do you even have, you know...”</i> he falters, looking curious.", parse);
+					else
+						Text.Add(" <i>”N-no way that will fit,”</i> he says, eyeing your bulge nervously.", parse);
+					Text.NL();
+					if(p1cock)
+						Text.Add("Oh, you have that covered. Without skipping a beat, you pull out your trusty [cockDesc].", parse);
+					else {
+						Text.Add("<i>”Oh, I know! You can have one of mine!”</i> Rosalin quips in. The [racedesc] scurries away, returning with an immense canine dildo, complete with a knot. <i>”I know you’ll like it, wuffie!”</i> the alchemist exclaims, handing you the toy. Cale blanches a bit at the sight of it.", parse);
+						var inv = party.inventory;
+						if(player.strapOn) inv.AddItem(player.strapOn);
+						player.strapOn = Items.StrapOn.CanidStrapon;
+						player.Equip();
+					}
+					Text.NL();
+					Text.Add("Grinning, you fasten the straps of the artificial cock, securing them for the rough fucking you are about to dish out.", parse);
+				}
+				Text.NL();
+				Text.Add("<i>”I just want to say I’m still not very comfortable with this, but a bet is a bet,”</i> the wolf states. <i>”Alright, let’s get this over with,”</i> he sighs, meekly obeying your command to bend over the log.", parse);
+			}
+			else {
+				Text.Add("<i>”So that’s what this is about,”</i> Cale chuckles. <i>”Why didn’t you just say you wanted to tap my ass again?”</i>", parse);
+				Text.NL();
+				Text.Add("This way was more fun, plus it adds another exciting level to Cavalcade.", parse);
+				Text.NL();
+				Text.Add("<i>”Guess that’s true,”</i> the wolf agrees. <i>”How do you want me?”</i> You tell him to turn around and bend over. Cale eagerly jumps to obey you, his tail wagging excitedly.", parse);
+				if(player.Gender() == Gender.female || cocksInAss.length == 0) {
+					if(player.Gender() == Gender.female)
+						Text.Add(" <i>”Do you have a nice big cock for me?”</i> he wonders, sounding pretty eager.", parse);
+					else
+						Text.Add(" <i>”I… ah, sorry, but I don’t think my ass is quite <b>that</b> flexible yet,”</i> he says, regretfully eyeing your bulge.", parse);
+					Text.NL();
+					if(p1cock)
+						Text.Add("Oh, you have that covered. Without skipping a beat, you pull out your trusty [cockDesc].", parse);
+					else {
+						Text.Add("<i>”Oh, I know! You can have one of mine!”</i> Rosalin quips in. The [racedesc] scurries away, returning with an immense canine dildo, complete with a knot. <i>”I know you’ll like it, wuffie!”</i> the alchemist exclaims, handing you the toy.", parse);
+						Text.NL();
+						Text.Add("<i>”Thanks, Rosie!”</i> the wolf yips cheerfully.", parse);
+						var inv = party.inventory;
+						if(player.strapOn) inv.AddItem(player.strapOn);
+						player.strapOn = Items.StrapOn.CanidStrapon;
+						player.Equip();
+					}
+					Text.NL();
+					Text.Add("Grinning, you fasten the straps of the artificial cock, securing them for the rough fucking you are about to dish out.", parse);
+				}
+				Text.NL();
+				Text.Add("<i>”And here I was wanting to take wolfie down a peg or two, only to find he’s already a total slut,”</i> Estevan mutters, throwing his hands in the air.", parse);
+				Text.NL();
+				Text.Add("<i>”No one can resist the Cale, you know it goat-boy!”</i> Cale quips mockingly over his shoulder, shaking his ass at you enticingly.", parse);
+			}
+			
 			Text.NL();
-			Text.Add("<i>”And here I was wanting to take wolfie down a peg or two, only to find he’s already a total slut,”</i> Estevan mutters, throwing his hands in the air.", parse);
+			parse["uncertainly"] = cale.Slut() >= 60 ? "eagerly" : "uncertainly";
+			Text.Add("Not wasting any time, you pull down his pants, baring his round butt and tight rosebud. The wolf raises his tail [uncertainly], allowing you full access.", parse);
 			Text.NL();
-			Text.Add("<i>”No one can resist the Cale, you know it goat-boy!”</i> Cale quips mockingly over his shoulder, shaking his ass at you enticingly.", parse);
-		}
-		
-		Text.NL();
-		parse["uncertainly"] = cale.Slut() >= 60 ? "eagerly" : "uncertainly";
-		Text.Add("Not wasting any time, you pull down his pants, baring his round butt and tight rosebud. The wolf raises his tail [uncertainly], allowing you full access.", parse);
-		Text.NL();
-		
-		Scenes.Cale.SexFuckHim(true, {cavalcade: true, cheat: true});
+			
+			Scenes.Cale.SexFuckHim(true, {cavalcade: true, cheat: true});
+		});
 	});
 }
 

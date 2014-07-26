@@ -15,7 +15,7 @@ function Cavalcade(players, opts) {
 	this.players   = players;
 	this.stag      = opts.stag      || Items.Cards.Shadow[3];
 	this.NextRound = opts.NextRound || Cavalcade.prototype.CoinGameRound;
-	this.onPost    = opts.onPost    || PrintDefaultOptions;
+	this.onPost    = opts.onPost    || Gui.NextPrompt;
 	
 	this.token     = opts.token || "coin";
 
@@ -270,19 +270,16 @@ Cavalcade.prototype.CoinGameRound = function() {
 	switch(that.round) {
 	case 0:
 		for(var i = 0; i < that.players.length; i++) {
+			if(that.players[i].folded) continue;
 			that.players[i].purse.coin -= that.bet;
 			that.pot += that.bet;
 		}
-		Text.Add("You put [bet] [token]s in the pot. The dealer gives you two cards.", parse);
-		Text.NL();
+		if(!player.out) {
+			Text.Add("You put [bet] [token]s in the pot. The dealer gives you two cards.", parse);
+			Text.NL();
+		}
 		Text.Add(Text.BoldColor("There are [pot] [token]s in the pot."), parse);
-		
-		Input.buttons[0].Setup("Next", function() {
-			Text.Clear();
-			that.NextRound();
-		}, true);
-		//tooltip : "Start the next hand."
-		break;
+		Text.NL();
 	case 1:
 	case 2:
 	case 3:
@@ -362,10 +359,9 @@ Cavalcade.prototype.CoinGameRound = function() {
 				Text.Add("You raise the bet.");
 				Text.NL();
 				for(var i = 0; i < that.players.length; i++) {
-					if(!that.players[i].folded) {
-						that.players[i].purse.coin -= Math.min(that.bet, that.players[i].purse.coin);
-						that.pot += that.bet;
-					}
+					if(that.players[i].folded) continue;
+					that.players[i].purse.coin -= Math.min(that.bet, that.players[i].purse.coin);
+					that.pot += that.bet;
 				}
 				that.NextRound();
 			}, that.players[0].purse.coin >= that.bet); // TODO
@@ -423,7 +419,7 @@ Cavalcade.prototype.CoinGameRound = function() {
 			}
 		}
 		
-		Gui.NextPrompt(that.onPost);
+		that.onPost();
 		
 		break;
 	}

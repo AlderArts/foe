@@ -726,7 +726,7 @@ Gui.Render = function() {
 					if(p.folded) showCard = false;
 					showCard |= p == player; // always show own
 	
-					if(showCard)
+					if(showCard && k < p.hand.length)
 						cards[k].attr({src: p.hand[k].Img}).show();
 					else
 						cards[k].attr({src: Images.card_back}).show();
