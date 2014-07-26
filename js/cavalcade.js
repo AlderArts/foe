@@ -13,11 +13,9 @@ function Cavalcade(players, opts) {
 		this.Deck.push(Items.Cards.Shadow[i]);
 	
 	this.players   = players;
-	this.stag      = opts.stag || Items.Cards.Shadow[3];
+	this.stag      = opts.stag      || Items.Cards.Shadow[3];
 	this.NextRound = opts.NextRound || Cavalcade.prototype.CoinGameRound;
-	this.onWin     = opts.onWin  || PrintDefaultOptions;
-	this.onLose    = opts.onLose || PrintDefaultOptions;
-	this.onDraw    = opts.onDraw || PrintDefaultOptions;
+	this.onPost    = opts.onPost    || PrintDefaultOptions;
 	
 	this.token     = opts.token || "coin";
 
@@ -49,22 +47,29 @@ Cavalcade.prototype.PullCard = function() {
 	return card;
 }
 
-Cavalcade.prototype.PrepGame = function() {
+Cavalcade.prototype.PrepGame = function(keepOut) {
 	SetGameState(GameState.Cavalcade);
 	cavalcade = this;
 	
 	for(var i = 0; i < this.players.length; i++) {
+		if(!keepOut) {
+			this.players[i].out = false;
+		}
+		
 		this.players[i].hand = [];
-		this.players[i].hand.push(this.PullCard());
-		this.players[i].hand.push(this.PullCard());
-		this.players[i].folded = false;
-		this.players[i].res = null;
+		if(this.players[i].out)
+			this.players[i].folded = true;
+		else {
+			this.players[i].hand.push(this.PullCard());
+			this.players[i].hand.push(this.PullCard());
+			this.players[i].res = null;
+			this.players[i].folded = false;
+		}
 	}
 	this.house = [];
 	this.house.push(this.PullCard());
 	this.house.push(this.PullCard());
 	this.house.push(this.PullCard());
-	this.NextRound();
 }
 
 Cavalcade.prototype.Finish = function() {
@@ -272,8 +277,6 @@ Cavalcade.prototype.CoinGameRound = function() {
 		Text.NL();
 		Text.Add(Text.BoldColor("There are [pot] [token]s in the pot."), parse);
 		
-		Text.Flush();
-		
 		Input.buttons[0].Setup("Next", function() {
 			Text.Clear();
 			that.NextRound();
@@ -283,7 +286,10 @@ Cavalcade.prototype.CoinGameRound = function() {
 	case 1:
 	case 2:
 	case 3:
-		if(player.folded) {
+		if(player.out) {
+			Text.Add("You are no longer in the game.");
+		}
+		else if(player.folded) {
 			Text.Add("You have folded.");
 		}
 		else {
@@ -337,7 +343,6 @@ Cavalcade.prototype.CoinGameRound = function() {
 		Text.NL();
 		Text.Add(Text.BoldColor("There are [pot] [token]s in the pot."), parse);
 		
-		Text.Flush();
 		if(player.folded) {
 			Input.buttons[0].Setup("Next", function() {
 				Text.Clear();
@@ -416,17 +421,11 @@ Cavalcade.prototype.CoinGameRound = function() {
 			}
 		}
 		
-		Text.Flush();
-		
-		if(draw)
-			Gui.NextPrompt(that.onDraw);
-		else if(that.winners[0] == player)
-			Gui.NextPrompt(that.onWin);
-		else
-			Gui.NextPrompt(that.onLose);
+		Gui.NextPrompt(that.onPost);
 		
 		break;
 	}
+	Text.Flush();
 	that.round++;
 }
 

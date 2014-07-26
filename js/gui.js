@@ -257,6 +257,7 @@ Gui.SetupCavalcadeHand = function(xoffset, yoffset, set, obj) {
 		xoffset  : xoffset,
 		yoffset  : yoffset,
 		name     : {},
+		coin     : {},
 //		portrait : portrait,
 		cards    : cards
 	};
@@ -711,6 +712,10 @@ Gui.Render = function() {
 				}
 				*/
 				Gui.PrintGlow(set, obj.name, obj.xoffset-5, obj.yoffset, p.name, Gui.fonts.Kimberley, 30, "start", {opacity: 1});
+				
+				Gui.PrintGlow(set, obj.coin, obj.xoffset+215, obj.yoffset,
+					p.out ? "Out" : p.purse.coin,
+					Gui.fonts.Kimberley, 30, "end", {opacity: 1});
 				
 				var cards = obj.cards;
 				
