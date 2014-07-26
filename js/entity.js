@@ -1285,7 +1285,7 @@ Entity.prototype.BiggestCock = function(cocks, incStrapon) {
 	}
 	if(c)
 		return c;
-	else if(incStrapon)
+	else if(incStrapon && this.strapOn)
 		return this.strapOn.cock;
 }
 Entity.prototype.CocksThatFit = function(orifice, onlyRealCocks) {
