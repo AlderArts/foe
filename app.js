@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 3;
-VERSION_SUBSCRIPT = "j2";
-VERSION_NAME = "Terry the thief: Saving fixed";
+VERSION_SUBSCRIPT = "k";
+VERSION_NAME = "Cale the wolf";
 
 SAVE_VERSION = 17;
 // Save version 1: Initial
