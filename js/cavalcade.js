@@ -62,9 +62,9 @@ Cavalcade.prototype.PrepGame = function(keepOut) {
 		else {
 			this.players[i].hand.push(this.PullCard());
 			this.players[i].hand.push(this.PullCard());
-			this.players[i].res = null;
 			this.players[i].folded = false;
 		}
+		this.players[i].res = null;
 	}
 	this.house = [];
 	this.house.push(this.PullCard());

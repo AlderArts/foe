@@ -215,6 +215,7 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 			
 			// Remove bankrupt players
 			if(p.purse.coin <= 0) {
+				Text.NL();
 				if(p == player) {
 					Text.Add("Looks like you lose this game, as you’re out of tokens.", parse);
 					Text.NL();
@@ -233,9 +234,8 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 					parse["name"] = p.name;
 					Text.Add("THIS IS A BUG. NAME IS: [name]", parse);
 				}
-				Text.NL();
+				p.out = true;
 			}
-			p.out = true;
 		}
 		
 		if(Scenes.NomadsCavalcade.PlayersLeft(players) <= 1) {
@@ -432,6 +432,8 @@ Scenes.NomadsCavalcade.SexyPlayerWin = function(cheat) {
 	var parse = {
 		playername : player.name
 	};
+	
+	SetGameState(GameState.Event);
 	
 	Text.Clear();
 	Text.Add("<i>”Well played, [playername]!”</i> Estevan congratulates you.", parse);

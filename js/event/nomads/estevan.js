@@ -133,7 +133,7 @@ Scenes.Estevan.Interact = function() {
 
 Scenes.Estevan.Prompt = function() {
 	var parse = {
-		
+		playername : player.name
 	};
 	
 	//[Options]
@@ -183,8 +183,7 @@ Scenes.Estevan.Prompt = function() {
 		}, enabled : true,
 		tooltip : "Ask him about his job, and how you’d go about hunting."
 	});
-	if(false) { //TODO: Cavalcade flag
-//#if played at least one game of Cavalcade
+	if(estevan.flags["cav"] != 0) {
 		options.push({ nameStr : "Cheat",
 			func : function() {
 				Text.Clear();
