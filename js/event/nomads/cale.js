@@ -1086,7 +1086,8 @@ Scenes.Cale.SexSuckHim = function(outside) {
 	else
 		Text.Add("<i>”Can’t go without the taste of wolf for long, eh?”</i> Cale grins, hefting his bulge.", parse);
 	Text.NL();
-	Text.Add("His bravado aside, you urge him to get out of those pants before you rip them off yourself. <i>”As my [masterMistress] commands,”</i> he replies glibly, a mocking grin on his lips as he undoes his britches, pulling them off. You get down[ on your knees] between his legs, looking up expectantly.", parse);
+	parse["legs"] = player.LowerBodyType() != LowerBodyType.Single ? " on your knees" : "";
+	Text.Add("His bravado aside, you urge him to get out of those pants before you rip them off yourself. <i>”As my [masterMistress] commands,”</i> he replies glibly, a mocking grin on his lips as he undoes his britches, pulling them off. You get down[legs] between his legs, looking up expectantly.", parse);
 	Text.NL();
 	
 	Scenes.Cale.SexSuckHimEntryPoint(outside);
@@ -1680,6 +1681,7 @@ Scenes.Cale.SexGetBJSneakyEntry = function(outside, sneaky) {
 
 Scenes.Cale.SexGetEatenEntrypoint = function(outside) {
 	var virgin = cale.Butt().virgin;
+	var biggestCock = player.BiggestCock();
 	
 	var parse = {
 		playername     : player.name,
@@ -1695,6 +1697,8 @@ Scenes.Cale.SexGetEatenEntrypoint = function(outside) {
 		skinDesc       : function() { return player.SkinDesc(); },
 		nipsDesc       : function() { return player.FirstBreastRow().NipsShort(); },
 		hand           : function() { return player.HandDesc(); },
+		cockDesc       : function() { return biggestCock.Short(); },
+		cockTip        : function() { return biggestCock.TipShort(); },
 		s              : player.NumCocks() > 1 ? "s" : "",
 		notS           : player.NumCocks() > 1 ? "" : "s",
 		itThey         : player.NumCocks() > 1 ? "they" : "it",
@@ -1745,7 +1749,7 @@ Scenes.Cale.SexGetEatenEntrypoint = function(outside) {
 	if(player.FirstCock()) {
 		Text.Add("Cale’s ministrations haven’t gone unnoticed by your [multiCockDesc] - roused by the intense feelings of his tongue eating out your cunt, the shaft[s] stand[notS] erect, bobbing proudly.", parse);
 		if(cale.Slut() >= 30) {
-			Text.Add(" Not wanting to let [itThem] feel left out, the wolf wraps his paw around your[biggest] [cockDesc], stroking it sensously.", parse);
+			Text.Add(" Not wanting to let [itThem] feel left out, the wolf wraps his paw around your[biggest] [cockDesc], stroking it sensuously.", parse);
 		}
 	}
 	else {
@@ -2439,7 +2443,8 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal) {
 		else
 			Text.Add("Though you naturally can’t feel anything from the action itself, the sight of it and the knowledge that this cocky lady-killer is now eagerly sucking your favorite toy for all he’s worth simply goads your pleasure higher and higher.", parse);
 		Text.NL();
-		Text.Add("He takes your [cockDesc] into his mouth, sucking it like a teat[, draining it of your pre] as you work towards your inevitable high. The ever increasing tempo of your fucking drawing a howling moan from the wolf as he releases your [cockDesc] to let it slap noisily against his chest.", parse);
+		parse["pre"] = cock.isStrapon ? "" : ", draining it of your pre";
+		Text.Add("He takes your [cockDesc] into his mouth, sucking it like a teat[pre] as you work towards your inevitable high. The ever increasing tempo of your fucking drawing a howling moan from the wolf as he releases your [cockDesc] to let it slap noisily against his chest.", parse);
 		Text.NL();
 	}
 	

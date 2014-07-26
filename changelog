@@ -5,6 +5,14 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.3k2
+-------------
+* Fixing various bugs any missing tags in Cale.
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.3k
 ------------
 * Fixed various typos and minor bugs caused by me changing stuff in the backend.
@@ -22,10 +30,6 @@ Version 0.3k
 * Estevan the satyr added (he's still kind of placeholder, but he at least talks now)
 * Rosalin's schedule has been altered slightly, she can now be encountered between 10 and 3.
 * The game of Cavalcade has gotten a proper implementation (sorta). The one thing left is to improve on the non-existent AI.
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.3j2
 -------------
