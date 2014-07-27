@@ -279,6 +279,7 @@ Encounter.prototype.onVictory = function() {
 
 Encounter.prototype.CombatTick = function() {
 	currentActiveChar = null;
+	var enc = this;
 	
 	if(this.onTick)
 		this.onTick();
@@ -365,13 +366,12 @@ Encounter.prototype.CombatTick = function() {
 				Text.AddOutput("[name] [is] stunned and cannot move!",
 					{name: currentActiveChar.NameDesc(), is: currentActiveChar.is()});
 				Gui.NextPrompt(function() {
-					this.CombatTick();
+					enc.CombatTick();
 				});
 				return;
 			}
 		}
 
-		var enc = this;
 		var combatScreen = function() {
 			Text.Clear();
 			// TODO: DEBUG ?
@@ -402,7 +402,6 @@ Encounter.prototype.CombatTick = function() {
 
 		if(Math.random() < activeChar.entity.LustCombatTurnLossChance()) {
 			Text.AddOutput("[name] is too aroused to do anything worthwhile!", {name: activeChar.entity.name});
-			var enc = this;
 			Gui.NextPrompt(function() {
 				enc.CombatTick();
 			});
