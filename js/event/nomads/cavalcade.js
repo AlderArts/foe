@@ -148,7 +148,7 @@ Scenes.NomadsCavalcade.PrepCoinGame = function() {
 		
 		world.TimeStep({minute: 5});
 		
-		Text.Clear();
+		Text.NL();
 		if(Scenes.NomadsCavalcade.Enabled()) {
 			Text.Add("<i>”Do you want to go for another game, [playername]?”</i> the satyr asks, shuffling the deck.", parse);
 			Text.Flush();
@@ -221,6 +221,40 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 		Text.NL();
 		world.TimeStep({minute: 5});
 		
+		var onLoss = function() {
+			if(Scenes.NomadsCavalcade.PlayersLeft(players) <= 1)
+				onEnd();
+			else {
+				Text.Add("The satyr starts dealing out cards to the remaining players.", parse);
+				Text.NL();
+				
+				var name;
+				var scenes = new EncounterTable();
+				scenes.AddEnc(function() {
+					name = estevan.name;
+					cale.out    = true;
+					rosalin.out = true;
+				}, estevan.purse.coin*1.2, function() { return !estevan.out; });
+				scenes.AddEnc(function() {
+					name = rosalin.name;
+					cale.out    = true;
+					estevan.out = true;
+				}, rosalin.purse.coin*1.1, function() { return !rosalin.out; });
+				scenes.AddEnc(function() {
+					name = cale.name;
+					estevan.out = true;
+					rosalin.out = true;
+				}, cale.purse.coin, function() { return !cale.out; });
+				scenes.Get();
+				
+				parse["name"] = name;
+				world.TimeStep({minute: 15});
+				Text.Add("The game goes on for a while longer, eventually ending up with [name] as the winner.", parse);
+				
+				onEnd();
+			}
+		}
+		
 		for(var i = 0; i < players.length; i++) {
 			var p = players[i];
 			if(p.out) continue;
@@ -265,6 +299,9 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 				next(false); // TODO CHEAT
 			});
 		}
+		else if(player.out) {
+			onLoss();
+		}
 		else {
 			Text.Add("<i>”Another round then?”</i> Estevan asks.", parse);
 			Text.Flush();
@@ -289,37 +326,7 @@ Scenes.NomadsCavalcade.PrepSexyGame = function() {
 				Text.Add("<i>”Had enough?”</i> Estevan quips. <i>”That counts as an automatic loss, by the way.”</i>", parse);
 				Text.NL();
 				
-				if(Scenes.NomadsCavalcade.PlayersLeft(players) <= 1)
-					Gui.NextPrompt(onEnd);
-				else {
-					Text.Add("The satyr starts dealing out cards to the remaining players.", parse);
-					Text.NL();
-					
-					var name;
-					var scenes = new EncounterTable();
-					scenes.AddEnc(function() {
-						name = estevan.name;
-						cale.out    = true;
-						rosalin.out = true;
-					}, estevan.purse.coin*1.2, function() { return !estevan.out; });
-					scenes.AddEnc(function() {
-						name = rosalin.name;
-						cale.out    = true;
-						estevan.out = true;
-					}, rosalin.purse.coin*1.1, function() { return !rosalin.out; });
-					scenes.AddEnc(function() {
-						name = cale.name;
-						estevan.out = true;
-						rosalin.out = true;
-					}, cale.purse.coin, function() { return !cale.out; });
-					scenes.Get();
-					
-					parse["name"] = name;
-					world.TimeStep({minute: 15});
-					Text.Add("The game goes on for a while longer, eventually ending up with [name] as the winner.", parse);
-					
-					onEnd();
-				}
+				onLoss();
 			}, true);
 		}
 	}
