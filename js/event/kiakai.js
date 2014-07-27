@@ -5886,7 +5886,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 						Text.Add(" [name]'s [kBallsDesc] seems like [itThey] [hasHave] an unending amount of sperm, easily filling your back passage within seconds. More and more white goo pumps into your used rectum, slightly inflating your [stomachDesc].", parse);
 					}
 				}
-				if(suckFlag) {
+				if(jerkFlag) {
 					Text.Add(" As if to not let its sibling have all the fun, [name]'s second dick twitches, a large, sticky wad of cum forcing its way past the enclosing ring of your fingers, into [hisher] eager mouth. You bet [heshe]'s been waiting for that one. Well, [heshe]'s earned it. You let go of the [kCockDesc2], letting [hisher] semen flow freely down [hisher] throat.", parse);
 					if(kiakai.NumCocks() > 2)
 						Text.Add(" The rest of [name]'s dicks throb in unison, splattering their contents on both of you.", parse);
