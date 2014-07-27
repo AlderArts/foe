@@ -2018,6 +2018,18 @@ Scenes.Miranda.MaidensBaneTalk = function() {
 					func : Scenes.Miranda.DatingEntry, enabled : true,
 					tooltip : "Ask her out on a walk."
 				});
+				// TODO: Unlocked either after X dates or after reaching X level of relationship. Until the repeatable dates are written, this will have NO REQUIREMENT.
+				if(miranda.flags["Dates"] >= 1) {
+					options.push({ nameStr : "Take home",
+						func : Scenes.Miranda.TakeHome, enabled : true,
+						tooltip : "You both know where this is going to end, so why not skip straight to dessert?"
+					});
+				}
+				
+				options.push({ nameStr : "Backroom",
+					func : Scenes.Miranda.TavernSexBackroomPrompt, enabled : true,
+					tooltip : "Invite her to the backrooms for some fun."
+				});
 			}
 			
 			Gui.SetButtonsFromList(options, true);			
