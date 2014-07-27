@@ -1136,7 +1136,7 @@ Scenes.Felines.WinGetBlowjob = function(cat, group, enc) {
 	Gui.Callstack.push(function() {
 		Text.NL();
 		if(cat.FirstCock()) {
-			Text.Add("From the mess on the ground, you can tell that sometime during the process, [name] shot his own load, as evident by the sticky strands dripping from [hisher] softening barbed cock.", parse);
+			Text.Add("From the mess on the ground, you can tell that sometime during the process, [name] shot [hisher] own load, as evident by the sticky strands dripping from [hisher] softening barbed cock.", parse);
 			Text.NL();
 		}
 		Text.Add("You ask [himher] if [heshe] enjoyed [hisher] cream, not really expecting an answer.", parse);
