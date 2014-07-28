@@ -966,7 +966,7 @@ Entity.prototype.AddLustOverTime = function(hours) {
 	// TODO: Function
 	var lustRate = this.libido.Get() / this.spirit.Get();
 	lustRate /= 48;
-	var slutFactor = (this.slut.Get() + 1);
+	var slutFactor = ((this.slut.Get()/100) + 1);
 	
 	this.AddLustFraction(hours * lustRate * slutFactor);
 }
