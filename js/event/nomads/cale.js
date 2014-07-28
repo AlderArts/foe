@@ -2958,7 +2958,7 @@ Scenes.Cale.SexCatchAnal = function(outside) {
 		Text.Add("Yes? What is it?", parse);
 		Text.NL();
 		parse["gen"] = player.HasBalls() ? "own" :
-		               player.FirstVag() ? player.FirstVag.Short() :
+		               player.FirstVag() ? player.FirstVag().Short() :
 		               player.ThighsDesc();
 		Text.Add("<i>”Sneak Attack!”</i> he yells, shoving all his nine inches inside you in at once, stopping only when you feel his balls slap noisily against your [gen].", parse);
 	}
