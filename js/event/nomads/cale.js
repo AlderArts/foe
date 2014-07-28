@@ -1388,7 +1388,7 @@ Scenes.Cale.SexGetTrickBJ = function(outside) {
 			cale.relation.DecreaseStat(0, 5);
 		else
 			cale.relation.DecreaseStat(0, 1);
-		cale.subDom.IncreaseStat(40, 1);
+		player.subDom.IncreaseStat(40, 1);
 	}
 	
 	Scenes.Cale.SexGetBJSneakyEntry(outside, true);
@@ -1435,7 +1435,7 @@ Scenes.Cale.SexGetBJ = function(outside) {
 						cale.relation.DecreaseStat(0, 5);
 					else
 						cale.relation.DecreaseStat(0, 1);
-					cale.subDom.IncreaseStat(40, 1);
+					player.subDom.IncreaseStat(40, 1);
 					
 					Scenes.Cale.SexGetBJSneakyEntry(outside, true);
 				}, enabled : true,
