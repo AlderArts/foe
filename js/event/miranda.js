@@ -242,7 +242,7 @@ Scenes.Miranda.RigardGatesEnter = function() {
 		Text.Add("<i>”What now?”</i> Miranda asks shortly as you approach the gates.", parse);
 		if(miranda.Relation() < 25)
 			Text.Add(" She doesn’t look too happy to see you.");
-		if(rigard.GatesOpen())
+		if(!rigard.GatesOpen())
 			Text.Add(" <i>”You are not getting inside the city during night hours, pass or no pass,”</i> she growls. <i>”Not through this gate.”</i>", parse);
 		else if(rigard.Visa()) {
 			Text.Add("You show her your visa to enter the city, but she seems unwilling to let you in either way. <i>”Come over here, standard procedure,”</i> she growls. During the next hour or so, she hounds you with questions about your business in the city, though you can tell she is clearly just fucking with you and wasting time.", parse);

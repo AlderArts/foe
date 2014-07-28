@@ -9,6 +9,7 @@ Version 0.3l
 ------------
 * Fixed a few Cale related bugs.
 * Fixed an error in lust gain that was causing unintentional massive lust spikes.
+* Fixed an error where nasty Miranda wouldn't let you through the main gate, even if you had a pass.
 
 --------------------------------------------
              PREVIOUS VERSIONS
