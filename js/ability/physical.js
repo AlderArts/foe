@@ -175,6 +175,34 @@ Abilities.Physical.DirtyBlow.TargetEffect = function(encounter, caster, target) 
 }
 
 
+Abilities.Physical.Hamstring = new AttackPhysical();
+Abilities.Physical.Hamstring.name = "Hamstring";
+Abilities.Physical.Hamstring.Short = function() { return "Nicks the target, making a lingering wound."; }
+Abilities.Physical.Hamstring.cost = { hp: null, sp: 20, lp: null};
+Abilities.Physical.Hamstring.atkMod = 0.5;
+Abilities.Physical.Hamstring.damageType.pPierce = 1;
+Abilities.Physical.Hamstring.OnCast = function(encounter, caster, target) {
+	var parse = {
+		tname : target.nameDesc(),
+		Possessive : caster.Possessive(),
+		name : caster.NameDesc(),
+		y : caster.plural() ? "y" : "ies"
+	};
+	Text.AddOutput("[name] tr[y] [tname] with a light attack, aiming to wound! ", parse);
+}
+Abilities.Physical.Hamstring.OnHit = function(encounter, caster, target, dmg) {
+	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : target.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tname : target.nameDesc(), tName : target.NameDesc() };
+	
+	Text.AddOutput("[name] deal[s] " + Text.BoldColor(dmg, "#800000") + " damage to [tname]!", parse);
+	Text.Newline();
+	
+	if(Status.Bleed(target, { hit : 0.75, turns : 3, turnsR : 3, dmg : 0.15 })) {
+		Text.AddOutput("[tName] [has] been afflicted with bleed! ", parse);
+		Text.Newline();
+	}
+}
+
+
 Abilities.Physical.Kicksand = new AttackPhysical();
 Abilities.Physical.Kicksand.name = "Kick sand";
 Abilities.Physical.Kicksand.Short = function() { return "Kick dirt in the enemy's eyes. Single target."; }

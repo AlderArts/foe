@@ -271,15 +271,15 @@ Jobs["Ranger"].Unlocked = function(entity) {
 Jobs["Ranger"].preqs.push({job : Jobs["Fighter"], lvl : 3});
 Jobs["Ranger"].abilities.AddAbility(Abilities.Physical.Ensnare);
 Jobs["Ranger"].abilities.AddAbility(Abilities.Physical.FocusStrike);
-Jobs["Ranger"].abilities.AddAbility(Abilities.Physical.TAttack);
-Jobs["Ranger"].abilities.AddAbility(Abilities.Physical.GrandSlam);
+Jobs["Ranger"].abilities.AddAbility(Abilities.Physical.Hamstring);
+Jobs["Ranger"].abilities.AddAbility(Abilities.Physical.GrandSlam); //TODO
 Jobs["Ranger"].levels.push(new JobLevel(20,   [{ab: Abilities.Physical.Ensnare, set: "Skills"}], {"dex" : 0.2, "spi" : 0.1}));
 Jobs["Ranger"].levels.push(new JobLevel(40,   null, {"sta" : 0.1, "dex" : 0.2}));
 Jobs["Ranger"].levels.push(new JobLevel(80,   [{ab: Abilities.Physical.FocusStrike, set: "Skills"}], {"int" : 0.2, "dex" : 0.1}));
 Jobs["Ranger"].levels.push(new JobLevel(160,  null, {"dex" : 0.3}));
-Jobs["Ranger"].levels.push(new JobLevel(320,  [{ab: Abilities.Physical.TAttack, set: "Skills"}], {"int" : 0.1, "sta" : 0.2}));
+Jobs["Ranger"].levels.push(new JobLevel(320,  [{ab: Abilities.Physical.Hamstring, set: "Skills"}], {"int" : 0.1, "sta" : 0.2}));
 Jobs["Ranger"].levels.push(new JobLevel(640,  null, {"spi" : 0.2, "dex" : 0.1}));
-Jobs["Ranger"].levels.push(new JobLevel(1280, [{ab: Abilities.Physical.GrandSlam, set: "Skills"}], {"int" : 0.1, "sta" : 0.1, "dex" : 0.3}));
+Jobs["Ranger"].levels.push(new JobLevel(1280, [{ab: Abilities.Physical.GrandSlam, set: "Skills"}], {"int" : 0.1, "sta" : 0.1, "dex" : 0.3}));//TODO
 
 
 Jobs["Mage"] = new Job("Mage");
