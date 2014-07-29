@@ -25,6 +25,9 @@ BossEntity.prototype.NumbResist = function() {
 BossEntity.prototype.BlindResist = function() {
 	return 1;
 }
+BossEntity.prototype.BleedResist = function() {
+	return 1;
+}
 BossEntity.prototype.HornyResist = function() {
 	return 1;
 }

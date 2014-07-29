@@ -734,6 +734,9 @@ Entity.prototype.AddHPFraction = function(fraction) {
 	this.curHp += fraction * this.HP();
 	if(this.curHp > this.HP()) this.curHp = this.HP();
 	if(this.curHp < 0) this.curHp = 0;
+	
+	if(fraction > 0 && this.combatStatus.stats[StatusEffect.Bleed])
+		this.combatStatus.stats[StatusEffect.Bleed] = null;
 }
 Entity.prototype.AddSPFraction = function(fraction) {
 	fraction = fraction || 0;
@@ -777,6 +780,9 @@ Entity.prototype.AddHPAbs = function(val) {
 	this.curHp += val;
 	if(this.curHp > this.HP()) this.curHp = this.HP();
 	if(this.curHp < 0) this.curHp = 0;
+	
+	if(val > 0 && this.combatStatus.stats[StatusEffect.Bleed])
+		this.combatStatus.stats[StatusEffect.Bleed] = null;
 }
 Entity.prototype.AddSPAbs = function(val) {
 	val = val || 0;
@@ -1104,6 +1110,9 @@ Entity.prototype.NumbResist = function() {
 	return 0;
 }
 Entity.prototype.BlindResist = function() {
+	return 0;
+}
+Entity.prototype.BleedResist = function() {
 	return 0;
 }
 Entity.prototype.HornyResist = function() {

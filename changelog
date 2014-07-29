@@ -11,6 +11,7 @@ Version 0.3l
 * Fixed an error in lust gain that was causing unintentional massive lust spikes.
 * Fixed an error where nasty Miranda wouldn't let you through the main gate, even if you had a pass.
 * Fixed inn companion prompt.
+* Added a Bleed status effect. Any form of healing will remove it.
 
 --------------------------------------------
              PREVIOUS VERSIONS

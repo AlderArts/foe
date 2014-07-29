@@ -16,7 +16,7 @@ StatusEffect = {
 	Sleep   : 8,
 	Enrage  : 9,
 	Fatigue : 10,
-	Bleed   : 11,
+	Bleed   : 11, //OK
 	Haste   : 12, //OK
 	Slow    : 13, //OK
 	Regen   : 14,
@@ -42,6 +42,7 @@ LoadStatusImages = function(ready) {
 	Images.status[StatusEffect.Numb]   = "data/status/numb.png";
 	Images.status[StatusEffect.Venom]  = "data/status/venom.png";
 	Images.status[StatusEffect.Blind]  = "data/status/blind.png";
+	Images.status[StatusEffect.Bleed]  = "data/status/bleed.png";
 	Images.status[StatusEffect.Haste]  = "data/status/haste.png";
 	Images.status[StatusEffect.Slow]   = "data/status/slow.png";
 	Images.status[StatusEffect.Horny]  = "data/status/horny.png";
@@ -280,6 +281,44 @@ Status.Blind.Tick = function(target) {
 	// Remove blind effect
 	if(this.turns <= 0) {
 		target.combatStatus.stats[StatusEffect.Blind] = null;
+	}
+}
+
+
+
+Status.Bleed = function(target, opts) {
+	if(!target) return;
+	opts = opts || {};
+	
+	// Check for poison resist
+	var odds = (opts.hit || 1) * (1 - target.BleedResist());
+	if(Math.random() > odds) {
+		return false;
+	}
+	// Number of turns effect lasts (static + random factor)
+	var turns = opts.turns || 0;
+	turns += Math.random() * (opts.turnsR || 0);
+	// Apply poison
+	target.combatStatus.stats[StatusEffect.Bleed] = {
+		turns   : turns,
+		dmg     : opts.dmg || 0,
+		oocDmg  : opts.oocDmg,
+		Tick    : Status.Bleed.Tick
+	};
+	
+	return true;
+}
+Status.Bleed.Tick = function(target) {
+	var atkRand = 0.2 * (Math.random() - 0.5) + 1;
+	var dmg = this.dmg * atkRand * target.HP();
+	dmg = Math.floor(dmg);
+	
+	target.AddHPAbs(-dmg);
+	
+	this.turns--;
+	// Remove bleed effect
+	if(this.turns <= 0 || target.curHp <= 0) {
+		target.combatStatus.stats[StatusEffect.Bleed] = null;
 	}
 }
 
