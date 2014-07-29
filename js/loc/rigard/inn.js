@@ -1481,14 +1481,14 @@ Scenes.Rigard.LB.GotoRoom = function() {
 			for(var i = 1; i < party.Num(); i++) {
 				var comp = party.Get(i);
 				parse["comp"]    = comp.name;
-				parse["chimher"] = comp.himher();
 				options.push({ nameStr : comp.name,
-					func : function() {
+					func : function(obj) {
 						Text.NL();
-						Text.Add("You decide that [companion] can share your room, and lead [chimher] inside.", parse);
+						Text.Add("You decide that [comp] can share your room, and lead [chimher] inside.", { comp : obj.name, chimher : obj.himher() });
 						Text.Flush();
-						Scenes.Rigard.LB.RegularRoom(comp);
+						Scenes.Rigard.LB.RegularRoom(obj);
 					}, enabled : true,
+					obj : comp,
 					tooltip : Text.Parse("Have [comp] stay with you tonight.", parse)
 				});
 			}
