@@ -79,7 +79,7 @@ AttackPhysical.prototype.OnHit = function(encounter, caster, target, dmg) {
 }
 AttackPhysical.prototype.OnMiss = function(encounter, caster, target) {
 	var parse = { tName : target.nameDesc() };
-	Text.AddOutput("The attack norrowly misses [tName], dealing no damage!", parse);
+	Text.AddOutput("The attack narrowly misses [tName], dealing no damage!", parse);
 	Text.Newline();
 }
 AttackPhysical.prototype.OnAbsorb = function(encounter, caster, target, dmg) {
