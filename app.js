@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 3;
-VERSION_SUBSCRIPT = "k2";
-VERSION_NAME = "Cale the wolf: fixes";
+VERSION_SUBSCRIPT = "k3";
+VERSION_NAME = "Cale the wolf: fixes round 2";
 
 SAVE_VERSION = 17;
 // Save version 1: Initial

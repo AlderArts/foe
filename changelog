@@ -7,6 +7,13 @@ CHANGELOG for Fall of Eden
 
 Version 0.3l
 ------------
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
+Version 0.3k3
+-------------
 * Fixed a few Cale related bugs.
 * Fixed a Cale bug that would break the cheat Cavalcade fuck if you were pure female.
 * Fixed an error in lust gain that was causing unintentional massive lust spikes.
@@ -14,10 +21,6 @@ Version 0.3l
 * Fixed inn companion prompt.
 * Added a Bleed status effect. Any form of healing will remove it.
 * Fixed an error in job stat growth. Lib and Cha were swapped.
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.3k2
 -------------
