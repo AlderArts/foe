@@ -6166,7 +6166,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 					Text.Add("<i>\"[playername]! I am going to - ngh - c-come!\"</i>", parse);
 					Text.Flush();
 					
-					var cum = kiakai.OrgasmCum();
+					var cum = kiakai.CumOutput();
 					
 					//[Sure][Nah]
 					var options = new Array();
@@ -6174,6 +6174,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 						func : function() {
 							Text.Clear();
 							Text.Add("<i>\"I-inside!\"</i> you moan, begging to be filled with hot cream. It's unclear whether the elf obeys you, or if [heshe] is simply too far gone to care. [name] cries out, [hisher] pulsing [kCockDesc] pouring its contents directly into your receptive bowels.", parse);
+							var cum = kiakai.OrgasmCum();
 							if(cum > 3)
 								Text.Add(" Your [stomachDesc] starts to bulge from the excessive load, eagerly swallowing up everything the elf feeds into you. When [heshe] finally pulls out, gouts of spunk pour from your overfilled anus.", parse);
 							else
@@ -6196,6 +6197,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 								Text.NL();
 								Text.Add("<i>\"S-sorry [playername]!\"</i> the elf moans as [heshe] unloads inside you, [hisher] seed flooding your [anusDesc]. You think you detect a trace of... glee? That doesn't seem very much like [himher] at all...", parse);
 								Text.NL();
+								var cum = kiakai.OrgasmCum();
 								Text.Add("<i>\"I am sorry, I did not want to hurt you,\"</i> [name]'s voice is sweet and innocent, but you still can't shake feeling that there is a tinge of defiance in it. Probably nothing.", parse);
 								Text.NL();
 								Text.Add("<i>\"You are close... let me make you feel good.\"</i> Still stuck inside you, [name] begins to grind [hisher] hips slowly, urging you on. [HeShe] reaches down, using [hisher] hands to pleasure your [genDesc].", parse);
@@ -6203,6 +6205,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 							}
 							else {
 								Text.Add("[HeShe] complies, and in the nick of time too. [HisHer] cum splatters across your back in large gouts the very moment [heshe] withdraws.", parse);
+								var cum = kiakai.OrgasmCum();
 								if(cum > 3)
 									Text.Add(" Whether you wanted it or not, you're receiving a literal shower, as a seemingly endless stream of sticky semen washes over you.", parse);
 								Text.NL();
@@ -6222,6 +6225,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 								Text.NL();
 								Text.Add("<i>\"H-hold on,\"</i> you yelp, quickly rolling onto your back as [heshe] pulls out. <i>\"Give it to me, I want you to soak me in your hot cum!\"</i> You close your eyes as the first generous gouts of sticky liquid splatter across your body, a long strand painted straight across one of your [breastDesc]. The next shot goes even farther, clinging to your face. It's followed by a rapid succession of loads covering your entire body.", parse);
 								Text.NL();
+								var cum = kiakai.OrgasmCum();
 								Text.Add("When [name] is finally done hosing you down, you experimentally open your eye, peering down across your stained body. The elf has dropped down to [hisher] knees and crawled up to you, gleefully slurping up any globs of cream in [hisher] way as [heshe] dives onto your [genDesc]. Between [hisher] legs, you can see that [hisher] [kCockDesc] is pulsing weakly, still drooling cum.", parse);
 								kiakai.subDom.IncreaseStat(50, 1);
 								
