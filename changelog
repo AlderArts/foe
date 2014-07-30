@@ -13,6 +13,7 @@ Version 0.3l
 * Fixed an error where nasty Miranda wouldn't let you through the main gate, even if you had a pass.
 * Fixed inn companion prompt.
 * Added a Bleed status effect. Any form of healing will remove it.
+* Fixed an error in job stat growth. Lib and Cha were swapped.
 
 --------------------------------------------
              PREVIOUS VERSIONS

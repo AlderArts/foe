@@ -92,8 +92,8 @@ Job.prototype.AddExp = function(entity, exp) {
 			if(bonus["dex"]) { entity.dexterity.growth    += bonus["dex"]; Text.Add("Dex+" + (bonus["dex"] * 10) + "<br/>"); }
 			if(bonus["int"]) { entity.intelligence.growth += bonus["int"]; Text.Add("Int+" + (bonus["int"] * 10) + "<br/>"); }
 			if(bonus["spi"]) { entity.spirit.growth       += bonus["spi"]; Text.Add("Spi+" + (bonus["spi"] * 10) + "<br/>"); }
-			if(bonus["cha"]) { entity.libido.growth       += bonus["cha"]; Text.Add("Cha+" + (bonus["cha"] * 10) + "<br/>"); }
-			if(bonus["lib"]) { entity.charisma.growth     += bonus["lib"]; Text.Add("Lib+" + (bonus["lib"] * 10) + "<br/>"); }
+			if(bonus["lib"]) { entity.libido.growth     += bonus["lib"]; Text.Add("Lib+" + (bonus["lib"] * 10) + "<br/>"); }
+			if(bonus["cha"]) { entity.charisma.growth       += bonus["cha"]; Text.Add("Cha+" + (bonus["cha"] * 10) + "<br/>"); }
 			entity.SetLevelBonus();
 		}
 		// Apply special functions
