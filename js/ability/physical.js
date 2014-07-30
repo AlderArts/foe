@@ -191,7 +191,7 @@ Abilities.Physical.Hamstring.OnCast = function(encounter, caster, target) {
 	Text.AddOutput("[name] tr[y] [tname] with a light attack, aiming to wound! ", parse);
 }
 Abilities.Physical.Hamstring.OnHit = function(encounter, caster, target, dmg) {
-	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : target.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tname : target.nameDesc(), tName : target.NameDesc() };
+	var parse = { name : caster.NameDesc(), s : caster.plural() ? "" : "s", tname : target.nameDesc(), tName : target.NameDesc(), has : target.has() };
 	
 	Text.AddOutput("[name] deal[s] " + Text.BoldColor(dmg, "#800000") + " damage to [tname]!", parse);
 	Text.Newline();
@@ -234,7 +234,7 @@ Abilities.Physical.Swift.targetMode = TargetMode.Self;
 Abilities.Physical.Swift.cost = { hp: null, sp: 25, lp: null};
 Abilities.Physical.Swift.CastInternal = function(encounter, caster) {
 	var parse = {
-		name : caster.name,
+		name : caster.NameDesc(),
 		es : caster.plural() ? "" : "es",
 		hisher : caster.hisher()
 	}
@@ -242,6 +242,73 @@ Abilities.Physical.Swift.CastInternal = function(encounter, caster) {
 	Status.Haste(caster, { turns : 3, turnsR : 3, factor : 2 });
 
 	Text.AddOutput("[name] focus[es], briefly boosting [hisher] speed!", parse);
+	Text.Newline();
+	
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
+
+
+Abilities.Physical.SetTrap = new Ability();
+Abilities.Physical.SetTrap.name = "Set trap";
+Abilities.Physical.SetTrap.Short = function() { return "Sets a trap for an enemy."; }
+Abilities.Physical.SetTrap.targetMode = TargetMode.Self;
+Abilities.Physical.SetTrap.cost = { hp: null, sp: 50, lp: null};
+Abilities.Physical.SetTrap.CastInternal = function(encounter, caster) {
+	var parse = {
+		name : caster.NameDesc(),
+		poss : caster.possessive(),
+		s    : caster.plural() ? "" : "s",
+		hisher : caster.hisher()
+	}
+	// Takes a long time to cast
+	for(var i = 0; i < encounter.combatOrder.length; i++) {
+		if(encounter.combatOrder[i].entity == caster)
+			encounter.combatOrder[i].initiative -= 100;
+	}
+	// Reduce everyones aggro towards trapper
+	for(var i = 0; i < encounter.combatOrder.length; i++) {
+		var activeChar = encounter.combatOrder[i];
+		var aggroEntry = GetAggroEntry(activeChar, caster);
+		if(aggroEntry)
+			aggroEntry.aggro /= 2;
+	}
+
+	Status.Counter(caster, { turns : 999, hits : 1, OnHit :
+		function(enc, target, attacker, dmg) {
+			parse["atk"] = attacker.NameDesc();
+			parse["s2"]  = attacker.plural() ? "" : "s";
+			parse["HeShe"] = attacker.HeShe();
+			
+			Text.AddOutput("[atk] spring[s2] [poss] trap! ", parse);
+			
+			var atkDmg = target.PAttack();
+			var def    = attacker.PDefense();
+			var hit    = target.PHit();
+			var evade  = attacker.PEvade();
+			var toHit  = Ability.ToHit(hit, evade);
+			if(Math.random() < toHit) {
+				var dmg = Ability.Damage(atkDmg, def, target.level, attacker.level);
+				if(dmg < 0) dmg = 0;
+				
+				dmg = target.elementAtk.ApplyDmgType(attacker.elementDef, dmg);
+				dmg = Math.floor(dmg);
+				
+				if(attacker.PhysDmgHP(encounter, target, dmg)) {
+					attacker.AddHPAbs(-dmg);
+					Text.AddOutput("[HeShe] take[s2] " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
+				}
+			}
+			else {
+				Text.AddOutput("[HeShe] narrowly avoid[s2] taking damage!", parse);
+			}
+			Text.Newline();
+			return false;
+		}
+	});
+
+	Text.AddOutput("[name] set[s] a trap!", parse);
 	Text.Newline();
 	
 	Gui.NextPrompt(function() {

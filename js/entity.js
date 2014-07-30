@@ -764,10 +764,11 @@ Entity.prototype.PhysDmgHP = function(encounter, caster, val) {
 		if(this.combatStatus.stats[StatusEffect.Counter].hits <= 0)
 			this.combatStatus.stats[StatusEffect.Counter] = null;
 
+		var ret;
 		if(onhit)
-			onhit(encounter, this, caster, val);
+			ret = onhit(encounter, this, caster, val);
 
-		return false;
+		return ret;
 	}
 	// Check for decoy
 	if(this.combatStatus.stats[StatusEffect.Decoy] != null) {
@@ -2323,9 +2324,11 @@ TargetStrategy = {
 };
 
 GetAggroEntry = function(activeChar, entity) {
-	for(var j = 0; j < activeChar.aggro.length; j++) {
-		if(activeChar.aggro[j].entity == entity) {
-			return activeChar.aggro[j];
+	if(activeChar.aggro) {
+		for(var j = 0; j < activeChar.aggro.length; j++) {
+			if(activeChar.aggro[j].entity == entity) {
+				return activeChar.aggro[j];
+			}
 		}
 	}
 }
