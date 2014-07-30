@@ -222,7 +222,7 @@ Scenes.Miranda.RigardGatesInteract = function() {
 	}
 	
 	if(miranda.Attitude() > Miranda.Attitude.Neutral)
-		Text.Add("<i>”If you feel brave enough, I could treat you to another night on the town,”</i> the guardswoman suggests, winking at you. <i>”Meet me at the tavern in the slums after dark and we’ll party hard!”</i>", parse);
+		Text.Add("<i>”If you feel brave enough, I could treat you to another round,”</i> the guardswoman suggests, winking at you. <i>”Meet me at the tavern in the slums after dark and we’ll party hard!”</i>", parse);
 	else if(miranda.Attitude() < Miranda.Attitude.Neutral)
 		Text.Add("<i>”So you come crawling back here, eh?”</i> The guardswoman looks at you dismissively. <i>”I really don’t have the time for you right now. What do you want?”</i>", parse);
 	else
