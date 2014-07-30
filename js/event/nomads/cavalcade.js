@@ -364,8 +364,8 @@ Scenes.NomadsCavalcade.CheatGame = function() {
 	var parse = {
 		playername : player.name,
 		racedesc   : function() { return rosalin.raceDesc(compScore); },
-		cockDesc   : p1cock.Short(),
-		cockTip    : p1cock.TipShort()
+		cockDesc   : function() { return p1cock.Short(); },
+		cockTip    : function() { return p1cock.TipShort(); }
 	};
 	
 	estevan.flags["Cheat"] = Estevan.Cheat.Triggered;
