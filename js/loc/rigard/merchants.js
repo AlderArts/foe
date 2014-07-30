@@ -8,7 +8,7 @@ Scenes.Rigard.ShopStreet = {}
 world.loc.Rigard.ShopStreet =
 {
 	street       : new Event("Merchant street"),
-	OddShop      : new Event("Odd shop*"),
+	OddShop      : new Event("Odd shop"),
 	ClothShop    : new Event("Silken Delights"),
 	GeneralShop  : new Event("General shop*"),
 	WeaponShop   : new Event("The Red Hammer"),
@@ -177,28 +177,6 @@ world.loc.Rigard.ShopStreet.street.events.push(new Link(
 
 world.loc.Rigard.ShopStreet.street.endDescription = function() {
 	Text.Flush();
-}
-
-
-//
-// Shop of oddities
-//
-world.loc.Rigard.ShopStreet.OddShop.description = function() {
-	Text.AddOutput("You are in the odd shop.<br/>");
-}
-
-world.loc.Rigard.ShopStreet.OddShop.links.push(new Link(
-	"Outside", true, true,
-	function() {
-		Text.AddOutput("Leave?<br/>");
-	},
-	function() {
-		MoveToLocation(world.loc.Rigard.ShopStreet.street);
-	}
-));
-
-world.loc.Rigard.ShopStreet.OddShop.endDescription = function() {
-	Text.AddOutput("Where you go?<br/>");
 }
 
 Scenes.Rigard.ShopStreet.Speculate = function() {

@@ -63,6 +63,13 @@ function Rigard(storage) {
 	this.ClothShop.AddItem(Items.Armor.SimpleRobes, 5);
 	this.ClothShop.AddItem(Items.Armor.StylizedClothes, 5);
 	
+	this.SexShop = new Shop();
+	this.SexShop.AddItem(Items.StrapOn.PlainStrapon, 5);
+	this.SexShop.AddItem(Items.StrapOn.LargeStrapon, 5);
+	this.SexShop.AddItem(Items.StrapOn.CanidStrapon, 5);
+	this.SexShop.AddItem(Items.StrapOn.EquineStrapon, 5);
+	this.SexShop.AddItem(Items.StrapOn.ChimeraStrapon, 5);
+	
 	// Have accessed town (not necessarily free access)
 	this.flags["Visa"] = 0;
 	this.flags["CityHistory"] = 0;

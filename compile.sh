@@ -64,6 +64,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/loc/rigard/krawitz.js \
 	js/loc/rigard/castle.js \
 	js/loc/rigard/clothstore.js \
+	js/loc/rigard/sexstore.js \
 	js/loc/rigard/inn.js \
 	js/loc/rigard/magetower.js \
 	js/loc/treecity/treecity.js \
