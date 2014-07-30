@@ -27,7 +27,7 @@ Abilities.Attack.CastInternal = function(encounter, caster, target) {
 		dmg = caster.elementAtk.ApplyDmgType(target.elementDef, dmg);
 		dmg = Math.floor(dmg);
 		
-		if(target.PhysDmgHP(encounter, dmg)) {
+		if(target.PhysDmgHP(encounter, caster, dmg)) {
 			target.AddHPAbs(-dmg);
 	
 			// TODO: Make more flavor text	

@@ -751,11 +751,24 @@ Entity.prototype.AddLustFraction = function(fraction) { // 0..1
 	if(this.curLust < 0) this.curLust = 0;
 }
 
-Entity.prototype.PhysDmgHP = function(encounter, val) {
+Entity.prototype.PhysDmgHP = function(encounter, caster, val) {
 	var parse = {
 		possessive : this.possessive()
 	};
 	
+	// Check for counter
+	if(this.combatStatus.stats[StatusEffect.Counter] != null) {
+		var onhit = this.combatStatus.stats[StatusEffect.Counter].OnHit;
+		
+		this.combatStatus.stats[StatusEffect.Counter].hits--;
+		if(this.combatStatus.stats[StatusEffect.Counter].hits <= 0)
+			this.combatStatus.stats[StatusEffect.Counter] = null;
+
+		if(onhit)
+			onhit(encounter, this, caster, val);
+
+		return false;
+	}
 	// Check for decoy
 	if(this.combatStatus.stats[StatusEffect.Decoy] != null) {
 		var num = this.combatStatus.stats[StatusEffect.Decoy].copies;

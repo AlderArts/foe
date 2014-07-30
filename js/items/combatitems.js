@@ -68,7 +68,7 @@ AttackItem.prototype.UseCombatInternal = function(encounter, caster, target) {
 				dmg = damageType.ApplyDmgType(e.elementDef, dmg);
 				dmg = Math.floor(dmg);
 				
-				if(e.PhysDmgHP(encounter, dmg)) {
+				if(e.PhysDmgHP(encounter, caster, dmg)) {
 					e.AddHPAbs(-dmg);
 					
 					if(dmg >= 0) {

@@ -26,8 +26,9 @@ StatusEffect = {
 	Limp    : 18,
 	Bimbo   : 19,
 	Decoy   : 20, //OK
+	Counter : 21, //OK
 	
-	LAST    : 21
+	LAST    : 22
 };
 
 LoadStatusImages = function(ready) {
@@ -37,16 +38,17 @@ LoadStatusImages = function(ready) {
 	}
 	
 	// Status effects
-	Images.status[StatusEffect.Burn]   = "data/status/burn.png";
-	Images.status[StatusEffect.Freeze] = "data/status/freeze.png";
-	Images.status[StatusEffect.Numb]   = "data/status/numb.png";
-	Images.status[StatusEffect.Venom]  = "data/status/venom.png";
-	Images.status[StatusEffect.Blind]  = "data/status/blind.png";
-	Images.status[StatusEffect.Bleed]  = "data/status/bleed.png";
-	Images.status[StatusEffect.Haste]  = "data/status/haste.png";
-	Images.status[StatusEffect.Slow]   = "data/status/slow.png";
-	Images.status[StatusEffect.Horny]  = "data/status/horny.png";
-	Images.status[StatusEffect.Decoy]  = "data/status/decoy.png";
+	Images.status[StatusEffect.Burn]    = "data/status/burn.png";
+	Images.status[StatusEffect.Freeze]  = "data/status/freeze.png";
+	Images.status[StatusEffect.Numb]    = "data/status/numb.png";
+	Images.status[StatusEffect.Venom]   = "data/status/venom.png";
+	Images.status[StatusEffect.Blind]   = "data/status/blind.png";
+	Images.status[StatusEffect.Bleed]   = "data/status/bleed.png";
+	Images.status[StatusEffect.Haste]   = "data/status/haste.png";
+	Images.status[StatusEffect.Slow]    = "data/status/slow.png";
+	Images.status[StatusEffect.Horny]   = "data/status/horny.png";
+	Images.status[StatusEffect.Decoy]   = "data/status/decoy.png";
+	Images.status[StatusEffect.Counter] = "data/status/counter.png";
 	
 	for(var i = 0; i < StatusEffect.LAST; i++) {
 		if(Images.status[i] == "") continue;
@@ -111,6 +113,7 @@ StatusList.prototype.EndOfCombat = function() {
 	this.stats[StatusEffect.Limp]    = null;
 	//this.stats[StatusEffect.Bimbo]   = null;
 	this.stats[StatusEffect.Decoy]   = null;
+	this.stats[StatusEffect.Counter] = null;
 }
 
 Status.Venom = function(target, opts) {
@@ -376,7 +379,7 @@ Status.Slow = function(target, opts) {
 }
 Status.Slow.Tick = function(target) {
 	this.turns--;
-	// Remove haste effect
+	// Remove slow effect
 	if(this.turns <= 0) {
 		target.combatStatus.stats[StatusEffect.Slow] = null;
 	}
@@ -416,7 +419,7 @@ Status.Horny.Tick = function(target) {
 	target.AddLustAbs(dmg);
 	
 	this.turns--;
-	// Remove venom effect
+	// Remove horny effect
 	if(this.turns <= 0) {
 		target.combatStatus.stats[StatusEffect.Horny] = null;
 	}
@@ -432,4 +435,32 @@ Status.Decoy = function(target, opts) {
 	};
 	
 	return true;
+}
+
+/*
+ * OnHit = function(enc, target, attacker, dmg)
+ */
+Status.Counter = function(target, opts) {
+	if(!target) return;
+	opts = opts || {};
+	
+	var turns = opts.turns || 0;
+	turns += Math.random() * (opts.turnsR || 0);
+	var hits  = opts.hits || 0;
+	// Apply decoy
+	target.combatStatus.stats[StatusEffect.Counter] = {
+		turns : turns,
+		hits  : hits,
+		OnHit : opts.OnHit,
+		Tick  : Status.Counter.Tick
+	};
+	
+	return true;
+}
+Status.Counter.Tick = function(target) {
+	this.turns--;
+	// Remove horny effect
+	if(this.turns <= 0) {
+		target.combatStatus.stats[StatusEffect.Counter] = null;
+	}
 }
