@@ -80,6 +80,36 @@ Maria.prototype.IsAtLocation = function(location) {
 	return true;
 }
 
+
+Maria.prototype.Act = function(encounter, activeChar) {
+	// TODO: AI!
+	Text.AddOutput("The huntress hops around nimbly.");
+	Text.Newline();
+	
+	// Pick a random target
+	var t = this.GetSingleTarget(encounter, activeChar);
+	
+	var choice = Math.random();
+	
+	var trap = this.combatStatus.stats[StatusEffect.Counter];
+	
+	if(this.HPLevel() < 0.3 && this.pots > 0) {
+		this.pots--;
+		Items.Combat.HPotion.UseCombatInternal(encounter, this, this);
+	}
+	else if(choice < 0.2 && Abilities.Physical.SetTrap.enabledCondition(encounter, this) && trap == null)
+		Abilities.Physical.SetTrap.Use(encounter, this);
+	else if(choice < 0.4 && Abilities.Physical.Hamstring.enabledCondition(encounter, this))
+		Abilities.Physical.Hamstring.Use(encounter, this, t);
+	else if(choice < 0.6 && Abilities.Physical.FocusStrike.enabledCondition(encounter, this))
+		Abilities.Physical.FocusStrike.Use(encounter, this, t);
+	else if(choice < 0.8 && Abilities.Physical.Ensnare.enabledCondition(encounter, this))
+		Abilities.Physical.Ensnare.Use(encounter, this, t);
+	else
+		Abilities.Attack.Use(encounter, this, t);
+}
+
+
 // Party interaction
 Maria.prototype.Interact = function() {
 	Text.Clear();
@@ -206,6 +236,8 @@ Scenes.Maria.ForestConfront = function() {
 			
 			enc.oldParty = party.members;
 			party.members = [player];
+			
+			maria.pots = 2;
 			
 			enc.canRun = false;
 			enc.onLoss = function() {
