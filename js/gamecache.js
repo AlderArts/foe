@@ -307,6 +307,10 @@ CacheToGame = function() {
 	if(gameCache.version < 17) {
 		terry.flags["PrefGender"] = Gender.male;
 	}
+	if(gameCache.version < 18) {
+		terry.SetExpToLevel();
+		miranda.SetExpToLevel();
+	}
 	
 }
 

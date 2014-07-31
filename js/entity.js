@@ -669,6 +669,14 @@ Entity.prototype.AddSexExp = function(sexp) {
 	}
 }
 
+
+Entity.prototype.SetExpToLevel = function() {
+	for(var i = 1; i < this.level; i++)
+		this.expToLevel *= 1.2;
+	for(var i = 1; i < this.sexlevel; i++)
+		this.sexpToLevel *= 2;
+}
+
 Entity.prototype.IsAtLocation = function(location) {
 	return (this.location == location);
 }

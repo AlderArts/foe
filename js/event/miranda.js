@@ -30,6 +30,7 @@ function Miranda(storage) {
 	
 	this.level    = 8;
 	this.sexlevel = 3;
+	this.SetExpToLevel();
 	
 	this.body.DefHerm(true);
 	this.FirstBreastRow().size.base = 12.5;

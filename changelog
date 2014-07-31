@@ -13,6 +13,7 @@ Version 0.3l
 * Fixed some bullshit enemy AI. Ability use should actually draw SP now. Might have caused some bugs, report if the game crashes mid-fight.
 * Kiai anal fix.
 * Fixed a few bugs in feline scenes.
+* Fixed exp to level for Terry and Miranda.
 
 --------------------------------------------
              PREVIOUS VERSIONS

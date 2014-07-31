@@ -9,7 +9,7 @@ VERSION_MINOR = 3;
 VERSION_SUBSCRIPT = "k3";
 VERSION_NAME = "Cale the wolf: fixes round 2";
 
-SAVE_VERSION = 17;
+SAVE_VERSION = 18;
 // Save version 1: Initial
 // Save version 2: Added inventory
 // Save version 3: Fixed clitcock restoration + height, weigth
@@ -27,6 +27,7 @@ SAVE_VERSION = 17;
 // Save version 15: Twins met flag
 // Save version 16: Jeanne met flag
 // Save version 17: Terry gender fix
+// Save version 18: Terry & Miranda exp to level fix
 
 
 VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + VERSION_SUBSCRIPT + ": " + VERSION_NAME;
