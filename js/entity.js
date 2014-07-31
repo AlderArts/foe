@@ -1741,7 +1741,7 @@ Entity.prototype.Act = function(encounter, activeChar) {
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);
 
-	Abilities.Attack.CastInternal(encounter, this, t);
+	Abilities.Attack.Use(encounter, this, t);
 }
 
 Entity.prototype.LevelUpPrompt = function(backFunc) {

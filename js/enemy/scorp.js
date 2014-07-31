@@ -77,13 +77,13 @@ Scorpion.prototype.Act = function(encounter, activeChar) {
 
 	var choice = Math.random();
 	if(choice < 0.4)
-		Abilities.Attack.CastInternal(encounter, this, t);
+		Abilities.Attack.Use(encounter, this, t);
 	else if(choice < 0.7 && Abilities.EnemySkill.Sting.enabledCondition(encounter, this))
-		Abilities.EnemySkill.Sting.CastInternal(encounter, this, t);
+		Abilities.EnemySkill.Sting.Use(encounter, this, t);
 	else if(choice < 0.9 && Abilities.Seduction.Distract.enabledCondition(encounter, this))
-		Abilities.Seduction.Distract.CastInternal(encounter, this, t);
+		Abilities.Seduction.Distract.Use(encounter, this, t);
 	else
-		Abilities.Seduction.Tease.CastInternal(encounter, this, t);
+		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
 

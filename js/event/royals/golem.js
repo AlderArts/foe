@@ -90,11 +90,11 @@ GolemBoss.prototype.Act = function(encounter, activeChar) {
 	
 	var choice = Math.random();
 	if(choice < 0.2 && Abilities.Physical.Bash.enabledCondition(encounter, this))
-		Abilities.Physical.Bash.CastInternal(encounter, this, t);
+		Abilities.Physical.Bash.Use(encounter, this, t);
 	else if(choice < 0.4 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
-		Abilities.Physical.CrushingStrike.CastInternal(encounter, this, t);
+		Abilities.Physical.CrushingStrike.Use(encounter, this, t);
 	else
-		Abilities.Attack.CastInternal(encounter, this, t);
+		Abilities.Attack.Use(encounter, this, t);
 }
 
 

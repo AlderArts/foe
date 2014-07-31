@@ -212,19 +212,19 @@ Terry.prototype.Act = function(encounter, activeChar) {
 	if(this.turnCounter > 4 && this.sbombs > 0)
 		Items.Combat.SmokeBomb.UseCombatInternal(encounter, this);
 	else if(Abilities.Physical.Backstab.enabledCondition(encounter, this) && Abilities.Physical.Backstab.enabledTargetCondition(encounter, this, t))
-		Abilities.Physical.Backstab.CastInternal(encounter, this, t);
+		Abilities.Physical.Backstab.Use(encounter, this, t);
 	else if(choice < 0.2 && Abilities.Physical.Kicksand.enabledCondition(encounter, this))
-		Abilities.Physical.Kicksand.CastInternal(encounter, this, t);
+		Abilities.Physical.Kicksand.Use(encounter, this, t);
 	else if(choice < 0.4 && Abilities.Physical.Swift.enabledCondition(encounter, this))
-		Abilities.Physical.Swift.CastInternal(encounter, this);
+		Abilities.Physical.Swift.Use(encounter, this);
 	else if(choice < 0.6)
 		Items.Combat.PoisonDart.UseCombatInternal(encounter, this, t);
 	else if(choice < 0.8)
 		Items.Combat.LustDart.UseCombatInternal(encounter, this, t);
 	else if(Abilities.Physical.DirtyBlow.enabledCondition(encounter, this))
-		Abilities.Physical.DirtyBlow.CastInternal(encounter, this, t);
+		Abilities.Physical.DirtyBlow.Use(encounter, this, t);
 	else
-		Abilities.Attack.CastInternal(encounter, this, t);
+		Abilities.Attack.Use(encounter, this, t);
 }
 
 Scenes.Terry = {};

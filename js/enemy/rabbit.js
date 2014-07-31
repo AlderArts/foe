@@ -89,11 +89,11 @@ Lagomorph.prototype.Act = function(encounter, activeChar) {
 
 	var choice = Math.random();
 	if(choice < 0.6)
-		Abilities.Attack.CastInternal(encounter, this, t);
+		Abilities.Attack.Use(encounter, this, t);
 	else if(choice < 0.8 && Abilities.Physical.DAttack.enabledCondition(encounter, this))
-		Abilities.Physical.DAttack.CastInternal(encounter, this, t);
+		Abilities.Physical.DAttack.Use(encounter, this, t);
 	else
-		Abilities.Seduction.Tease.CastInternal(encounter, this, t);
+		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
 
@@ -183,15 +183,15 @@ LagomorphBrute.prototype.Act = function(encounter, activeChar) {
 
 	var choice = Math.random();
 	if(choice < 0.4)
-		Abilities.Attack.CastInternal(encounter, this, t);
+		Abilities.Attack.Use(encounter, this, t);
 	else if(choice < 0.6 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
-		Abilities.Physical.CrushingStrike.CastInternal(encounter, this, t);
+		Abilities.Physical.CrushingStrike.Use(encounter, this, t);
 	else if(choice < 0.8 && Abilities.Physical.Bash.enabledCondition(encounter, this))
-		Abilities.Physical.Bash.CastInternal(encounter, this, t);
+		Abilities.Physical.Bash.Use(encounter, this, t);
 	else if(choice < 0.9 && Abilities.Physical.Frenzy.enabledCondition(encounter, this))
-		Abilities.Physical.Frenzy.CastInternal(encounter, this, t);
+		Abilities.Physical.Frenzy.Use(encounter, this, t);
 	else
-		Abilities.Seduction.Tease.CastInternal(encounter, this, t);
+		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
 
@@ -244,17 +244,17 @@ LagomorphWizard.prototype.Act = function(encounter, activeChar) {
 
 	var choice = Math.random();
 	if(choice < 0.1)
-		Abilities.Attack.CastInternal(encounter, this, t);
+		Abilities.Attack.Use(encounter, this, t);
 	else if(choice < 0.3 && Abilities.Black.Fireball.enabledCondition(encounter, this))
-		Abilities.Black.Fireball.CastInternal(encounter, this, t);
+		Abilities.Black.Fireball.Use(encounter, this, t);
 	else if(choice < 0.5 && Abilities.Black.Freeze.enabledCondition(encounter, this))
-		Abilities.Black.Freeze.CastInternal(encounter, this, t);
+		Abilities.Black.Freeze.Use(encounter, this, t);
 	else if(choice < 0.7 && Abilities.Black.Bolt.enabledCondition(encounter, this))
-		Abilities.Black.Bolt.CastInternal(encounter, this, t);
+		Abilities.Black.Bolt.Use(encounter, this, t);
 	else if(choice < 0.9 && Abilities.Black.Venom.enabledCondition(encounter, this))
-		Abilities.Black.Venom.CastInternal(encounter, this, t);
+		Abilities.Black.Venom.Use(encounter, this, t);
 	else
-		Abilities.Seduction.Tease.CastInternal(encounter, this, t);
+		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
 

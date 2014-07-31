@@ -80,19 +80,19 @@ Drake.prototype.Act = function(encounter, activeChar) {
 	if(choice < 0.2)
 		Abilities.Attack.CastInternal(encounter, this, t);
 	else if(choice < 0.3 && Abilities.Black.ThunderStorm.enabledCondition(encounter, this))
-		Abilities.Black.ThunderStorm.CastInternal(encounter, this, party);
+		Abilities.Black.ThunderStorm.Use(encounter, this, party);
 	else if(choice < 0.4 && Abilities.Black.WindShear.enabledCondition(encounter, this))
-		Abilities.Black.WindShear.CastInternal(encounter, this, t);
+		Abilities.Black.WindShear.Use(encounter, this, t);
 	else if(choice < 0.6 && Abilities.Physical.QAttack.enabledCondition(encounter, this))
-		Abilities.Physical.QAttack.CastInternal(encounter, this, t);
+		Abilities.Physical.QAttack.Use(encounter, this, t);
 	else if(choice < 0.7 && Abilities.Physical.Frenzy.enabledCondition(encounter, this))
-		Abilities.Physical.Frenzy.CastInternal(encounter, this, t);
+		Abilities.Physical.Frenzy.Use(encounter, this, t);
 	else if(choice < 0.8 && Abilities.Black.Hellfire.enabledCondition(encounter, this))
-		Abilities.Black.Hellfire.CastInternal(encounter, this, party);
+		Abilities.Black.Hellfire.Use(encounter, this, party);
 	else if(choice < 0.9 && Abilities.Seduction.Rut.enabledCondition(encounter, this))
-		Abilities.Seduction.Rut.CastInternal(encounter, this, t);
+		Abilities.Seduction.Rut.Use(encounter, this, t);
 	else
-		Abilities.Attack.CastInternal(encounter, this, t);
+		Abilities.Attack.Use(encounter, this, t);
 }
 
 

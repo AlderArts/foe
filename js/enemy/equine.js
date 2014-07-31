@@ -98,11 +98,11 @@ Equine.prototype.Act = function(encounter, activeChar) {
 
 	var choice = Math.random();
 	if(choice < 0.6)
-		Abilities.Attack.CastInternal(encounter, this, t);
+		Abilities.Attack.Use(encounter, this, t);
 	else if(choice < 0.8 && Abilities.Physical.Bash.enabledCondition(encounter, this))
-		Abilities.Physical.Bash.CastInternal(encounter, this, t);
+		Abilities.Physical.Bash.Use(encounter, this, t);
 	else
-		Abilities.Seduction.Tease.CastInternal(encounter, this, t);
+		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
 // MALE + FEMALE ENCOUNTER
