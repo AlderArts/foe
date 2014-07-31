@@ -33,7 +33,7 @@ Scenes.Rigard.OddShop.Prompt = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("<<This is pretty placeholder>>", parse);
+	Text.Add("This is pretty placeholder", parse);
 	Text.NL();
 	Text.Flush();
 	var prompt = function() {

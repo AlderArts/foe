@@ -17,8 +17,8 @@ Items.Armor.WatchChest.lDesc = function() { return "a Rigard city watch uniform"
 Items.Armor.WatchChest.Short = function() { return "Watch uniform"; }
 Items.Armor.WatchChest.Long = function() { return "A Rigard city watch uniform."; }
 Items.Armor.WatchChest.EquipType = ItemType.FullArmor;
-Items.Armor.WatchChest.effect.defMod = 0.5;
-Items.Armor.WatchChest.effect.stamina = 3;
+Items.Armor.WatchChest.effect.defMod = 0.6;
+Items.Armor.WatchChest.effect.stamina = 4;
 
 Items.Armor.BronzeChest = new Item("chest2", "B.Chest");
 Items.Armor.BronzeChest.price = 150;
@@ -41,7 +41,7 @@ Items.Armor.LeatherPants.effect.defMod = 0.1;
 Items.Armor.LeatherPants.effect.stamina = 1;
 
 Items.Armor.BronzeLeggings = new Item("pants1", "B.Legs");
-Items.Armor.BronzeLeggings.price = 20;
+Items.Armor.BronzeLeggings.price = 75;
 Items.Armor.BronzeLeggings.sDesc = function() { return "bronze leggings"; }
 Items.Armor.BronzeLeggings.lDesc = function() { return "a pair of simple bronze leggings"; }
 Items.Armor.BronzeLeggings.Short = function() { return "Bronze leggings"; }

@@ -1,7 +1,7 @@
 Items.Weapons = {};
 
 Items.Weapons.Dagger = new Item("dag0", "Dagger");
-Items.Weapons.Dagger.price = 25;
+Items.Weapons.Dagger.price = 15;
 Items.Weapons.Dagger.sDesc = function() { return "dagger"; }
 Items.Weapons.Dagger.lDesc = function() { return "a simple dagger"; }
 Items.Weapons.Dagger.Short = function() { return "Dagger"; }
@@ -46,7 +46,7 @@ Items.Weapons.GreatSword.effect.strength = 4;
 Items.Weapons.GreatSword.effect.apSlash = 1;
 
 Items.Weapons.Rapier = new Item("swrd3", "Rapier");
-Items.Weapons.Rapier.price = 60;
+Items.Weapons.Rapier.price = 75;
 Items.Weapons.Rapier.sDesc = function() { return "rapier"; }
 Items.Weapons.Rapier.lDesc = function() { return "a rapier"; }
 Items.Weapons.Rapier.Short = function() { return "Rapier"; }
@@ -57,7 +57,7 @@ Items.Weapons.Rapier.effect.dexterity = 2;
 Items.Weapons.Rapier.effect.apPierce  = 1;
 
 Items.Weapons.WoodenStaff = new Item("staff0", "W.Staff");
-Items.Weapons.WoodenStaff.price = 30;
+Items.Weapons.WoodenStaff.price = 15;
 Items.Weapons.WoodenStaff.sDesc = function() { return "wooden staff"; }
 Items.Weapons.WoodenStaff.lDesc = function() { return "a simple wooden staff"; }
 Items.Weapons.WoodenStaff.Short = function() { return "Wooden staff"; }
@@ -68,7 +68,7 @@ Items.Weapons.WoodenStaff.effect.intelligence = 1;
 Items.Weapons.WoodenStaff.effect.apBlunt = 1;
 
 Items.Weapons.LWhip = new Item("whip0", "L.Whip");
-Items.Weapons.LWhip.price = 40;
+Items.Weapons.LWhip.price = 30;
 Items.Weapons.LWhip.sDesc = function() { return "leather whip"; }
 Items.Weapons.LWhip.lDesc = function() { return "a simple leather whip"; }
 Items.Weapons.LWhip.Short = function() { return "Leather whip"; }

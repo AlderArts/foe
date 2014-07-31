@@ -6,7 +6,7 @@
 Scenes.Rigard.WeaponShop = {}
 
 world.loc.Rigard.ShopStreet.WeaponShop.description = function() {
-	Text.AddOutput("You are in the odd shop.<br/>");
+	Text.AddOutput("You are in the weapon shop.<br/>");
 }
 
 world.loc.Rigard.ShopStreet.WeaponShop.events.push(new Link(
@@ -33,7 +33,7 @@ Scenes.Rigard.WeaponShop.Prompt = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("<<This is pretty placeholder>>", parse);
+	Text.Add("This is pretty placeholder", parse);
 	Text.NL();
 	Text.Flush();
 	var prompt = function() {
