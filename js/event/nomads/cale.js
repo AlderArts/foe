@@ -1108,7 +1108,8 @@ Scenes.Cale.SexSuckHimEntryPoint = function(outside) {
 		armorDesc  : function() { return player.ArmorDesc(); },
 		earDesc    : function() { return player.EarDesc(); },
 		cAnusDesc  : function() { return cale.Butt().AnalShort(); },
-		tight      : cale.Slut() >= 60 ? "pliant" : "tight"
+		tight      : cale.Slut() >= 60 ? "pliant" : "tight",
+		hand       : function() { return player.HandDesc(); }
 	};
 	
 	Text.Add("The wolf’s crimson member is already starting to poke out of its furry sheath, roused at the promise of a wet mouth to bury itself into. You fondly caress his heavy balls as you rile him up, whispering that you can’t wait to release all that pent up wolf seed. He responds accordingly, his canine shaft giving a visible twitch as it swells bigger and bigger, further urged on by the light touch of your fingers grasping it.", parse);
@@ -3397,7 +3398,9 @@ Scenes.Cale.Rogue = function() {
 	var parse = {
 		playername : player.name,
 		legsDesc   : function() { return player.LegsDesc(); },
-		buttDesc   : function() { return player.Butt().Short(); }
+		buttDesc   : function() { return player.Butt().Short(); },
+		anusDesc   : function() { return player.Butt().AnalShort(); },
+		lowerArmorDesc : function() { return player.LowerArmorDesc(); }
 	};
 	
 	Text.Clear();
@@ -3496,7 +3499,8 @@ Scenes.Cale.Rogue = function() {
 			options.push({ nameStr : "Take it",
 				func : function() {
 					Text.Clear();
-					Text.Add("Cale chuckles, <i>”Alright then, no mercy it is!”</i> He wrestles with your [lowerArmorDesc] and somehow manages to rip it off your, exposing your naked [anusDesc] [and [vagDesc]] to his appreciative eyes.", parse);
+					parse["vag"] = player.FirstVag() ? Text.Parse("and [vagDesc]", parse) : "";
+					Text.Add("Cale chuckles, <i>”Alright then, no mercy it is!”</i> He wrestles with your [lowerArmorDesc] and somehow manages to rip it off your, exposing your naked [anusDesc] [vag] to his appreciative eyes.", parse);
 					Text.NL();
 					Text.Add("<i>”One final lesson, [playername]. Us rogues do it from behind.”</i> With that, Cale thrusts forward, driving his point and his cock home.", parse);
 					Text.NL();
