@@ -1341,7 +1341,7 @@ Scenes.Kiakai.TalkDimensionalViolationCont = function() {
 					Text.AddOutput("[name] eventually disentangles [himher]self from your arms and smiles up at you. Perhaps [heshe] will be able to deal with the memories better now.", parse);
 				}
 				else { // NAUGHTY
-					Text.AddOutput("You put your arms around [name], and she relaxes, feeling comfortable in your grasp. You whisper to [himher] that [heshe] did all [heshe] could back then, and that now you will protect [himher].", parse);
+					Text.AddOutput("You put your arms around [name], and [heshe] relaxes, feeling comfortable in your grasp. You whisper to [himher] that [heshe] did all [heshe] could back then, and that now you will protect [himher].", parse);
 					Text.Newline();
 					Text.AddOutput("You eventually release [name] from your arms, and [heshe] smiles up at you. Perhaps [heshe] will be able to deal with the memories better now.", parse);
 				}
