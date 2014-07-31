@@ -78,6 +78,37 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	}
 ));
 
+
+world.loc.Rigard.ShopStreet.street.links.push(new Link(
+	"Armor", true, function() { return (world.time.hour >= 9 && world.time.hour < 18) && !rigard.UnderLockdown();; },
+	function() {
+		/*
+		Text.AddOutput("One particular shop catch your eye. A garish sign hanging outside announce it the \"Shoppe of oddities\", though from just the exterior it is a bit unclear what is actually on sale.");
+		if(!(world.time.hour >= 9 && world.time.hour < 18))
+			Text.AddOutput(" A small paper stapled to the front door states that the shop is \"Cloosd\" at the moment.");
+		Text.AddOutput("<br/>");
+		*/
+	},
+	function() {
+		MoveToLocation(world.loc.Rigard.ShopStreet.ArmorShop, {minute: 5});
+	}
+));
+
+world.loc.Rigard.ShopStreet.street.links.push(new Link(
+	"Weapons", true, function() { return (world.time.hour >= 9 && world.time.hour < 18) && !rigard.UnderLockdown();; },
+	function() {
+		/*
+		Text.AddOutput("One particular shop catch your eye. A garish sign hanging outside announce it the \"Shoppe of oddities\", though from just the exterior it is a bit unclear what is actually on sale.");
+		if(!(world.time.hour >= 9 && world.time.hour < 18))
+			Text.AddOutput(" A small paper stapled to the front door states that the shop is \"Cloosd\" at the moment.");
+		Text.AddOutput("<br/>");
+		*/
+	},
+	function() {
+		MoveToLocation(world.loc.Rigard.ShopStreet.WeaponShop, {minute: 5});
+	}
+));
+
 world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	"Tailor", true, function() { return (world.time.hour >= 9 && world.time.hour < 20) && !rigard.UnderLockdown(); },
 	function() {
