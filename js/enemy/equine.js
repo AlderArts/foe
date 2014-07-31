@@ -301,7 +301,7 @@ Scenes.Equine.FuckFemale = function(enc) {
 	Sex.Vaginal(player, enc.mare);
 	player.Fuck(player.FirstCock(), 3);
 	
-	Text.AddOutput("You savor the moment, but not for long. You withdraw from her hot, tight cavern, every inch feeling her every rip. The sweet, indescribable feeling of her wet flesh squeezing against yours is something simply to be experienced. Once you feel the cool air brush against the last, soaked inch of your [cockDesc], you thrust back inside of her [mobVagDesc]. She rocks forward, moans a little louder, and you soak up every detail of her expression. As your hips drive in and out of her, your eyes drink in every detail of her ecstatic eyes.", parse);
+	Text.AddOutput("You savor the moment, but not for long. You withdraw from her hot, tight cavern, every inch enveloped in her tight embrace. The sweet, indescribable feeling of her wet flesh squeezing against yours is something simply to be experienced. Once you feel the cool air brush against the last, soaked inch of your [cockDesc], you thrust back inside of her [mobVagDesc]. She rocks forward, moans a little louder, and you soak up every detail of her expression. As your hips drive in and out of her, your eyes drink in every detail of her ecstatic eyes.", parse);
 	Text.Newline();
 	Text.AddOutput("Pistoning mercilessly, you fuck her without a care in the world. Eventually your speed gets intense enough that she begins to call out and wraps her arms around your firm back. Her tits jiggle lewdly with every thrust and you can't resist the urge to grab her perky jugs. Your fingers grope her milk-makers, squeezing and flicking her nipples as your [cockDesc] ravages her [mobVagDesc]. Every moment drives you forward, the building release in your balls driving you deep into her channel.", parse);
 	Text.Newline();
@@ -383,6 +383,7 @@ Scenes.Equine.GetFucked = function(enc) {
 		buttDesc   : function() { return player.Butt().Short(); },
 		breastDesc : function() { return player.BiggestBreasts().Short(); },
 		nipsDesc   : function() { return player.BiggestBreasts().NipsShort(); },
+		faceDesc   : function() { return player.FaceDesc(); },
 		pants      : player.ArmorDesc(),
 		ifArmor    : player.Armor() ? "strips you down to full nudity" : "runs his hands down your naked body"
 	};
@@ -425,7 +426,7 @@ Scenes.Equine.GetFucked = function(enc) {
 		Text.Newline();
 		Text.AddOutput("Your own mouth works quite well, licking at his sides while jerking the boy off. Even feeling a little generous, you suckle on his sack, fitting one testicle into your mouth and shining it with your tongue. He presses the long, shaft-like muscle into your [vagDesc], his fingers rapidly rubbing your [clitDesc].", parse);
 		Text.Newline();
-		Text.AddOutput("Failing miserably at holding up to his methods, you cry out as your [vagDesc] clamps against his tongue, shooting girl-cum onto his muzzle. You swallow his tip and a few inches beyond that, furiously jerking the rest of his horse cock. Feeling the release come through the large rod, cum floods your mouth. At first, you try to gulp down his slightly sweet release, but it comes far too quick for that. You release his cock from your lips and the shaft shoots several ropes onto your expression, even on your chest. The immediate aftermath of your climax only makes you lustfully open your mouth for the falling seed.", parse);
+		Text.AddOutput("Failing miserably at holding up to his methods, you cry out as your [vagDesc] clamps against his tongue, shooting girl-cum onto his muzzle. You swallow his tip and a few inches beyond that, furiously jerking the rest of his horse cock. Feeling the release come through the large rod, cum floods your mouth. At first, you try to gulp down his slightly sweet release, but it comes far too quick for that. You release his cock from your lips and the shaft shoots several ropes onto your [faceDesc] and chest. The immediate aftermath of your climax only makes you lustfully open your mouth for the falling seed.", parse);
 		Text.Newline();
 		Text.AddOutput("After a minute or so, you and the equine lazily get to your feet, clean up, dress, and head your different paths. When you pay more attention, you notice that the mare seems to be gone.", parse);
 		if(!party.Alone())
