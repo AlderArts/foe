@@ -1268,7 +1268,8 @@ Scenes.Rigard.LB.DrinksPrompt = function(innPrompt) {
 				else
 					kiakai.relation.IncreaseStat(50, 1);
 			}
-			Text.Add("Finally, to your disappointment, the last of it is gone{ from your cup as well}, and you are forced to return the empty cup to one of the staff. Still, you feel the nectar’s essence already beating inside your body, and are ready to go out and resume your adventures.", parse);
+			parse["k"] = party.InParty(kiakai) ? " from your cup as well" : "";
+			Text.Add("Finally, to your disappointment, the last of it is gone[k], and you are forced to return the empty cup to one of the staff. Still, you feel the nectar’s essence already beating inside your body, and are ready to go out and resume your adventures.", parse);
 			
 			party.RestFull();
 			
