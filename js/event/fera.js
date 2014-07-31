@@ -868,7 +868,8 @@ Scenes.Fera.SexPrompt = function() {
 				Text.Newline();
 				
 				if(player.CumOutput() > 3) {
-					Text.AddOutput("After a while, you feel yourself approaching your limit. You push inside her as you cum, filling her [fvagDesc] with your load{ as your other member[s] spurt[notS] all over the wall and her legs}. You stay inside her for a moment and kiss her again, before pulling your [cockDesc] out of her [fvagDesc].", parse);
+					parse["mc"] = player.NumCocks() > 1 ? Text.Parse(" as your other member[s] spurt[notS] all over the wall and her legs", parse) : "";
+					Text.AddOutput("After a while, you feel yourself approaching your limit. You push inside her as you cum, filling her [fvagDesc] with your load[mc]. You stay inside her for a moment and kiss her again, before pulling your [cockDesc] out of her [fvagDesc].", parse);
 					Text.Newline();
 					Text.AddOutput("A small stream of your seed flows out of her, forming a large puddle on the floor. Taking one of the rags from under the bench, and handing Fera the other, you help her wipe up the mess. She kneels down and cleans your [multiCockDesc][balls] with her tongue as you grab your [lowerArmorDesc]. You help each other get dressed and leave the dressing room.", parse);
 				}
