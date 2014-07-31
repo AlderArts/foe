@@ -70,11 +70,11 @@ FeralWolf.prototype.Act = function(encounter, activeChar) {
 
 	var choice = Math.random();
 	if(choice < 0.5)
-		Abilities.Attack.CastInternal(encounter, this, t);
+		Abilities.Attack.Use(encounter, this, t);
 	else if(choice < 0.7 && Abilities.Physical.DAttack.enabledCondition(encounter, this))
-		Abilities.Physical.Pierce.CastInternal(encounter, this, t);
+		Abilities.Physical.Pierce.Use(encounter, this, t);
 	else if(choice < 0.95 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
-		Abilities.Physical.CrushingStrike.CastInternal(encounter, this, t);
+		Abilities.Physical.CrushingStrike.Use(encounter, this, t);
 	else
-		Abilities.Seduction.Tease.CastInternal(encounter, this, t);
+		Abilities.Seduction.Tease.Use(encounter, this, t);
 }

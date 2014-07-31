@@ -10,6 +10,7 @@ Version 0.3l
 * Counter attack status effect implemented (Set trap ability).
 * Implemented and activated Ranger job.
 * Added the odd shop to Rigard shopping street. You can buy some strapons there.
+* Fixed some bullshit enemy AI. Ability use should actually draw SP now. Might have caused some bugs, report if the game crashes mid-fight.
 
 --------------------------------------------
              PREVIOUS VERSIONS
