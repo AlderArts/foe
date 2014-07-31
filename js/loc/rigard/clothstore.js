@@ -62,7 +62,7 @@ world.loc.Rigard.ShopStreet.ClothShop.enc.AddEnc(function() { return Scenes.Riga
 */
 
 world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
-	"Tailor", true, true,
+	"Nexelle", true, true,
 	function() {
 		
 		var tailorRand = ["the tailor", "the owner", "Miss Nexelle"];
