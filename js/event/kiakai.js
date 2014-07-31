@@ -4914,7 +4914,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 			Text.Add("<i>\"Hah... hah...\"</i> overwhelmed by the feelings of pleasure and pain wrecking [hisher] [kAnusDesc], [name] can hardly keep [himher]self up, and only your firm grip on [hisher] [kHipsDesc] prevents [himher] from collapsing in a quivering puddle.", parse);
 			Text.NL();
 			Text.Add("The sloppy sounds of flesh grinding against flesh echo throughout the area as your [cockDesc] pistons its way in and out of [name]'s constricting passage, [hisher] amazing tightness only serving to increase the intense experience.", parse);
-			if(kiakai.flags["AnalExp"] < 30 && kiakai.subDom.Get() < 0) {
+			if(kiakai.flags["AnalExp"] < 30) {
 				Text.NL();
 				Text.Add("<i>\"S-slower,\"</i> [name] begs, <i>\"it... it feels too good!\"</i>", parse);
 			}
