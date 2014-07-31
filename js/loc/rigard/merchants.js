@@ -11,7 +11,7 @@ world.loc.Rigard.ShopStreet =
 	OddShop      : new Event("Odd shop"),
 	ClothShop    : new Event("Silken Delights"),
 	GeneralShop  : new Event("General shop*"),
-	WeaponShop   : new Event("The Red Hammer"),
+	WeaponShop   : new Event("Weapon shop*"),
 	ArmorShop    : new Event("Armor shop*"),
 	AlchemyShop  : new Event("Alchemical Wonders"),
 	MagicShop    : new Event("Magic shop*"),
