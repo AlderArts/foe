@@ -21,6 +21,7 @@ Version 0.3l
 * Fixed some Cale typos.
 * Fixed exp to level for Terry and Miranda.
 * Added a print of total items kept for alchemy recipes (good for checking how many you can make, or what you are missing).
+* Nasty Miranda won't ask the player to sleep over anymore.
 
 --------------------------------------------
              PREVIOUS VERSIONS

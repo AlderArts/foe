@@ -2628,7 +2628,7 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 			}
 		});
 		
-		if(world.time.hour > 20 || world.time.hour < 4) {
+		if(miranda.Attitude() >= Miranda.Attitude.Neutral && (world.time.hour > 20 || world.time.hour < 4)) {
 			Text.Add("<i>”Ya know? It’s kinda late. Why don’t you stay over? I wouldn’t mind sharing my bed with you. Maybe we can squeeze in a quickie before I have to leave in the morning?”</i> she grins.", parse);
 			Text.Flush();
 			
@@ -3837,7 +3837,7 @@ Scenes.Miranda.HomeSubbySexLeavingFuckedHer = function() {
 			}
 		});
 		
-		if(world.time.hour > 20 || world.time.hour < 4) {
+		if(miranda.Attitude() >= Miranda.Attitude.Neutral && (world.time.hour > 20 || world.time.hour < 4)) {
 			Text.Add("<i>”Ya know? It’s kinda late. Why don’t you stay over? I wouldn’t mind sharing my bed with you. Maybe we can squeeze in a quickie before I have to leave in the morning?”</i> she grins.", parse);
 			Text.Flush();
 			
