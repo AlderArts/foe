@@ -68,23 +68,21 @@ Stat.prototype.IncreaseStat = function(ideal, maxChange, fraction) {
 // Returns the applied difference (positive), unless the diff is zero
 Stat.prototype.DecreaseStat = function(ideal, maxChange, fraction) {
 	maxChange = maxChange || 1;
-	if(ideal) {
-		var diff = this.base - ideal;
-		if(diff <= 0) return null; 
-		diff = (diff <= maxChange) ? diff : maxChange;
-		
-		var old = this.base;
-		this.base -= diff;
-		if(DEBUG && this.debug) {
-			Text.Newline();
-			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base, "red"));
-			Text.Newline();
-		}
-		if(fraction)
-			return this.base - old;
-		else
-			return Math.floor(this.base) - Math.floor(old);
+	var diff = this.base - ideal;
+	if(diff <= 0) return null; 
+	diff = (diff <= maxChange) ? diff : maxChange;
+	
+	var old = this.base;
+	this.base -= diff;
+	if(DEBUG && this.debug) {
+		Text.Newline();
+		Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base, "red"));
+		Text.Newline();
 	}
+	if(fraction)
+		return this.base - old;
+	else
+		return Math.floor(this.base) - Math.floor(old);
 }
 
 var growthPerPoint = 0.1;
