@@ -34,7 +34,7 @@ JobDesc.prototype.FromStorage = function(storage) {
 	}
 }
 
-Job.prototype.AddExp = function(entity, exp) {
+Job.prototype.AddExp = function(entity, exp, reserve) {
 	// Check for null arguments and broken links
 	if(entity == null) return;
 	var jd = entity.jobs[this.name];

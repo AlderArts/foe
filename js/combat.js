@@ -265,7 +265,7 @@ Encounter.prototype.onVictory = function() {
 	// Reward xp to passive characters
 	for(var i = 0; i < party.reserve.length; i++) {
 		var e = party.reserve[i];
-		e.AddExp(exp * 0.75);
+		e.AddExp(exp * 0.75, true);
 	}
 	
 	// ADD COIN TO PURSE

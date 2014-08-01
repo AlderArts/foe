@@ -610,10 +610,10 @@ Entity.prototype.Strapon = function() {
 	return this.strapOn;
 }
 
-Entity.prototype.AddExp = function(exp) {
+Entity.prototype.AddExp = function(exp, reserve) {
 	if(DEBUG) {
 		Text.NL();
-		Text.Add(Text.BoldColor("[name] gains [x] xp."), {name: this.name, x: exp});
+		Text.Add(Text.BoldColor("[reserve][name] gains [x] xp."), {reserve: reserve ? "RESERVE: " : "", name: this.name, x: exp});
 		Text.NL();
 		Text.Flush();
 	}
@@ -634,7 +634,7 @@ Entity.prototype.AddExp = function(exp) {
 		
 		if(DEBUG) {
 			Text.NL();
-			Text.Add(Text.BoldColor("[name] gains a level! Now at [x]."), {name: this.name, x: this.level});
+			Text.Add(Text.BoldColor("[reserve][name] gains a level! Now at [x]."), {reserve: reserve ? "RESERVE: " : "", name: this.name, x: this.level});
 			Text.NL();
 			Text.Flush();
 		}
