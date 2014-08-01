@@ -18,55 +18,54 @@ Stat.prototype.GrowthRank = function() { return Math.floor((this.growth * 10) - 
 // Cap the change to a maximum value
 // Returns the applied difference, unless the diff is zero
 Stat.prototype.IdealStat = function(ideal, maxChange, fraction) {
+	ideal = ideal || 0;
 	maxChange = maxChange || 1;
-	if(ideal) {
-		var diff = ideal - this.base;
-		if(diff < 0) maxChange *= -1;
-		diff = (Math.abs(diff) <= Math.abs(maxChange)) ? diff : maxChange;
-		
-		var old = this.base;
-		this.base += diff;
-		if(DEBUG && this.debug && diff != 0) {
-			Text.Newline();
-			if(diff > 0)
-				Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base, "blue"));
-			else
-				Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base, "red"));
-			Text.Newline();
-		}
-		if(fraction)
-			return this.base - old;
+	var diff = ideal - this.base;
+	if(diff < 0) maxChange *= -1;
+	diff = (Math.abs(diff) <= Math.abs(maxChange)) ? diff : maxChange;
+	
+	var old = this.base;
+	this.base += diff;
+	if(DEBUG && this.debug && diff != 0) {
+		Text.Newline();
+		if(diff > 0)
+			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base, "blue"));
 		else
-			return Math.floor(this.base) - Math.floor(old);
+			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base, "red"));
+		Text.Newline();
 	}
+	if(fraction)
+		return this.base - old;
+	else
+		return Math.floor(this.base) - Math.floor(old);
 }
 // Changes _ONE_ stat, closing in on the ideal (ONLY INC)
 // Cap the change to a maximum value
 // Returns the applied difference (positive), unless the diff is zero
 Stat.prototype.IncreaseStat = function(ideal, maxChange, fraction) {
+	ideal = ideal || 0;
 	maxChange = maxChange || 1;
-	if(ideal) {
-		var diff = ideal - this.base;
-		if(diff <= 0) return null;
-		diff = (diff <= maxChange) ? diff : maxChange;
-		
-		var old = this.base;
-		this.base += diff;
-		if(DEBUG && this.debug) {
-			Text.Newline();
-			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base, "blue"));
-			Text.Newline();
-		}
-		if(fraction)
-			return this.base - old;
-		else
-			return Math.floor(this.base) - Math.floor(old);
+	var diff = ideal - this.base;
+	if(diff <= 0) return null;
+	diff = (diff <= maxChange) ? diff : maxChange;
+	
+	var old = this.base;
+	this.base += diff;
+	if(DEBUG && this.debug) {
+		Text.Newline();
+		Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base, "blue"));
+		Text.Newline();
 	}
+	if(fraction)
+		return this.base - old;
+	else
+		return Math.floor(this.base) - Math.floor(old);
 }
 // Changes _ONE_ stat, closing in on the ideal (ONLY DEC)
 // Cap the change to a maximum value
 // Returns the applied difference (positive), unless the diff is zero
 Stat.prototype.DecreaseStat = function(ideal, maxChange, fraction) {
+	ideal = ideal || 0;
 	maxChange = maxChange || 1;
 	var diff = this.base - ideal;
 	if(diff <= 0) return null; 
