@@ -7,6 +7,14 @@ CHANGELOG for Fall of Eden
 
 Version 0.3l
 ------------
+* 
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
+Version 0.3k4
+-------------
 * Counter attack status effect implemented (Set trap ability).
 * Implemented and activated Ranger job.
 * Added the odd shop to Rigard shopping street. You can buy some strapons there.
@@ -22,10 +30,6 @@ Version 0.3l
 * Fixed exp to level for Terry and Miranda.
 * Added a print of total items kept for alchemy recipes (good for checking how many you can make, or what you are missing).
 * Nasty Miranda won't ask the player to sleep over anymore.
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.3k3
 -------------
