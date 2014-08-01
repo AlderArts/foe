@@ -11,8 +11,8 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback) {
 	inventory  = inventory  || new Inventory();
 	
 	Text.Clear();
-	Text.AddOutput("[name] can transmute the following items:", {name: alchemist.NameDesc()});
-	Text.Newline();
+	Text.Add("[name] can transmute the following items:", {name: alchemist.NameDesc()});
+	Text.NL();
 	
 	list = [];
 	for(var i = 0; i < alchemist.recipes.length; i++) {
@@ -21,11 +21,13 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback) {
 		var str = Text.BoldColor(item.name) + ": ";
 		for(var j = 0; j < item.Recipe.length; j++) {
 			var component = item.Recipe[j];
-			str     += (component.num || 1) + "x " + component.it.name + " ";
-			enabled &= (inventory.QueryNum(component.it) >= (component.num || 1));
+			var comps = inventory.QueryNum(component.it);
+			if(j > 0) str += ", ";
+			str     += (component.num || 1) + "/" + comps + "x " + component.it.name;
+			enabled &= (comps >= (component.num || 1));
 		}
-		Text.AddOutput(str);
-		Text.Newline();
+		Text.Add(str);
+		Text.NL();
 		
 		list.push({
 			nameStr: item.name,
@@ -58,4 +60,5 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback) {
 		});
 	}
 	Gui.SetButtonsFromList(list, backPrompt, backPrompt);
+	Text.Flush();
 }
