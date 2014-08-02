@@ -127,13 +127,13 @@ function Entity() {
 	this.experience        = 0;
 	this.level             = 1;
 	this.pendingStatPoints = 0;
-	this.expToLevel        = 15;
+	this.expToLevel        = this.ExpToLevel;
 	// Sexperience is gained by having sex
 	// Sex leves reward sex perks and skills, and affect sexual based bonuses
 	this.sexperience  = 0;
 	this.sexlevel     = 1;
-	this.sexpToLevel  = 30;
-	
+	this.sexpToLevel  = this.SexpToLevel;
+
 	// Base stats
 	var that = this;
 	
@@ -218,6 +218,9 @@ function Entity() {
 	this.relation = new Stat(0);
 	this.relation.debug = function() { return that.name + ".relation"; }
 }
+
+Entity.prototype.ExpToLevel  = 15;
+Entity.prototype.SexpToLevel = 30;
 
 Entity.prototype.SetLevelBonus = function() {
 	this.maxHp.level        = this.level * this.maxHp.growth;
@@ -666,14 +669,13 @@ Entity.prototype.AddSexExp = function(sexp) {
 	}
 }
 
-
 Entity.prototype.SetExpToLevel = function() {
-	this.sexpToLevel  = 30;
-	this.expToLevel   = 15;
+	this.sexpToLevel  = Entity.prototype.SexpToLevel;
+	this.expToLevel   = Entity.prototype.ExpToLevel;
 	for(var i = 1; i < this.level; i++)
-		this.expToLevel *= 1.2;
+		this.expToLevel  = Math.floor(this.expToLevel * 1.2);
 	for(var i = 1; i < this.sexlevel; i++)
-		this.sexpToLevel *= 2;
+		this.sexpToLevel = Math.floor(this.sexpToLevel * 2);
 }
 
 Entity.prototype.IsAtLocation = function(location) {
