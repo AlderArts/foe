@@ -500,6 +500,8 @@ Scenes.Fera.SexPrompt = function() {
 	var options = new Array();
 	options.push({ nameStr : "Try on",
 		func : function() {
+			p1Cock = player.BiggestCock();
+			
 			Text.Clear();
 			Text.AddOutput("You hand Fera the [garment] and tell her you need help trying it on.", parse);
 			Text.Newline();
@@ -646,6 +648,8 @@ Scenes.Fera.SexPrompt = function() {
 			func : function() {
 				Text.Clear();
 				if(player.FirstCock()) {
+					p1Cock = player.BiggestCock();
+					
 					parse["balls"] = player.HasBalls() ? function() { return Text.Parse(" and [ballsDesc]", parse); } : "";
 					parse["oneof"] = player.NumCocks() > 1 ? " one of" : "";
 					
@@ -730,6 +734,8 @@ Scenes.Fera.SexPrompt = function() {
 	if(fera.relation.Get() > 15) {
 		options.push({ nameStr : "Titfuck",
 			func : function() {
+				p1Cock = player.BiggestCock();
+				
 				Text.Clear();
 				Text.AddOutput("You sit on the small bench and take off your [lowerArmorDesc], revealing your [multiCockDesc][balls]. Speaking quietly so as to not alert the tailor, you tell Fera that you want her to use her [fbreastDesc] to pleasure your [multiCockDesc].", parse);
 				Text.Newline();
