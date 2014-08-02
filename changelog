@@ -10,6 +10,7 @@ Version 0.3l
 * Made expToLevel more consistent with save/load.
 * Fera sex fix.
 * Possible fix for Ranger job.
+* Fixed a bug in CocksThatFit, that might have caused some problems with Rosalin's sex scene. Possibly other scenes too.
 
 --------------------------------------------
              PREVIOUS VERSIONS
