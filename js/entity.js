@@ -620,13 +620,13 @@ Entity.prototype.AddExp = function(exp, reserve) {
 	
 	this.experience += exp;
 	if(this.currentJob) {
-		this.currentJob.AddExp(this, exp);
+		this.currentJob.AddExp(this, exp, reserve);
 	}
 	
 	// Check for level up
 	while(this.experience >= this.expToLevel) {
 		this.experience        -= this.expToLevel;
-		this.expToLevel        *= 1.2;
+		this.expToLevel         = Math.floor(this.expToLevel * 1.2);
 		this.level++;
 		this.pendingStatPoints += growthPointsPerLevel;
 		
@@ -653,7 +653,7 @@ Entity.prototype.AddSexExp = function(sexp) {
 	// Check for level up
 	while(this.sexperience >= this.sexpToLevel) {
 		this.sexperience       -= this.sexpToLevel;
-		this.sexpToLevel       *= 2;
+		this.sexpToLevel        = Math.floor(this.sexpToLevel * 2);
 		this.sexlevel++;
 		//this.pendingStatPoints += 5;
 		
@@ -668,6 +668,8 @@ Entity.prototype.AddSexExp = function(sexp) {
 
 
 Entity.prototype.SetExpToLevel = function() {
+	this.sexpToLevel  = 30;
+	this.expToLevel   = 15;
 	for(var i = 1; i < this.level; i++)
 		this.expToLevel *= 1.2;
 	for(var i = 1; i < this.sexlevel; i++)
