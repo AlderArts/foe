@@ -166,8 +166,6 @@ Scenes.Estevan.Prompt = function() {
 					Text.Add("This seems familiar to you, though the satyr shows you a few things you hadn’t thought of yourself yet.", parse);
 				else
 					Text.Add("<b>Unlocked the Ranger job.</b>", parse);
-				
-				estevan.flags["Ranger"] = Estevan.Ranger.Taught;
 			}
 			else {
 				Text.NL();
@@ -176,6 +174,9 @@ Scenes.Estevan.Prompt = function() {
 			Text.NL();
 			Text.Add("<i>”Was there something else you were wondering about?”</i> Estevan asks, putting away his tools.", parse);
 			Text.Flush();
+			
+			if(estevan.flags["Ranger"] == Estevan.Ranger.NotTalked)
+				estevan.flags["Ranger"] = Estevan.Ranger.Taught;
 			
 			world.TimeStep({hour: 1});
 			
