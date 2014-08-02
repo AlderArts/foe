@@ -336,7 +336,7 @@ Abilities.Physical.Backstab.enabledTargetCondition = function(encounter, caster,
 
 Abilities.Physical.Ensnare = new AttackPhysical();
 Abilities.Physical.Ensnare.name = "Ensnare";
-Abilities.Physical.Ensnare.Short = function() { return "Slows down the target by throwing a net at them, slowing them down."; }
+Abilities.Physical.Ensnare.Short = function() { return "Slows down an enemy by throwing a net at them."; }
 Abilities.Physical.Ensnare.cost = { hp: null, sp: 20, lp: null};
 Abilities.Physical.Ensnare.atkMod = 0;
 Abilities.Physical.Ensnare.OnCast = function(encounter, caster, target) {
