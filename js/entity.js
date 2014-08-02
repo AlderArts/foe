@@ -670,8 +670,8 @@ Entity.prototype.AddSexExp = function(sexp) {
 }
 
 Entity.prototype.SetExpToLevel = function() {
-	this.sexpToLevel  = Entity.prototype.SexpToLevel;
-	this.expToLevel   = Entity.prototype.ExpToLevel;
+	this.sexpToLevel  = this.SexpToLevel;
+	this.expToLevel   = this.ExpToLevel;
 	for(var i = 1; i < this.level; i++)
 		this.expToLevel  = Math.floor(this.expToLevel * 1.2);
 	for(var i = 1; i < this.sexlevel; i++)
