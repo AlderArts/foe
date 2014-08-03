@@ -383,12 +383,12 @@ world.loc.DarkAspect.Barrens.links.push(new Link(
 		Text.Newline();
 		Text.AddOutput("From the abyss rises the demon from before, but it is different this time. Limbs ablaze with a red sooty flame, the thing must be at least a hundred feet high. It tilts its slightly triangular head as it notices you, a far-too-wide grin spreading across its face, baring hundreds of razor sharp teeth.");
 		Text.Newline();
-		Text.AddOutput("<b>FOUND YOU!</b> The voice echoes triumphantly across the blazing plains. The demon starts to climb out of the chasm, the ground catching fire where the creature plants its claws. You shake yourself and turn around to run, this is <b>NOT</b> a good place to be in.");
+		Text.AddOutput("<b>FOUND YOU!</b> The voice echoes triumphantly across the blazing plains. The demon starts to climb out of the chasm, the ground catching fire where the creature plants its claws. You shake yourself and turn around to run. This is <b>NOT</b> a good place to be in.");
 
 		Gui.NextPrompt(function() {
 			Text.Clear();
 			
-			Text.AddOutput("Terrified, you scramble along as fast as your legs can carry you, but it is clear from the shaking ground and the growing heat that the demon is slowly gaining on you. Looking up again, the mountains are no closer than before, hopelessly out of your reach.");
+			Text.AddOutput("Terrified, you scramble along as fast as your legs can carry you, but it is clear from the shaking ground and the growing heat that the demon is slowly gaining on you. Looking up again, the mountains appear to be no closer than before, and still hopelessly out of your reach.");
 			Text.Newline();
 			Text.AddOutput("You can feel the demons breath on your back, a sharp stink of sulfur. Desperately you close your eyes and sprint as fast as you can, waiting for the inevitable demonic claw to descend on you and crush your small body. Your heart almost bursts from your chest in terror as you trip on some hidden crevice and fall forward. Instinctively rolling up your body in a tight ball you manage to deflect most of the damage from the fall, but your breath is knocked from your body as you slam into... a rock wall?");
 			Text.Newline();
@@ -420,24 +420,24 @@ world.loc.DarkAspect.Mountains.links.push(new Link(
 	},
 	function() {
 		Text.Clear();
-		Text.AddOutput("With no time to lose, you start to climb the cliff, somehow finding purchase in the ragged rock face. With difficulty, you manage to climb up a crevice, reaching a small platform. The area is about ten by ten meters large, surrounded by jagged outcroppings as sharp as swords.");
+		Text.AddOutput("With no time to lose, you attempt to climb the cliff, somehow finding purchase for your fingers and toes in the ragged rock face. With difficulty, you manage to climb up a crevice, reaching a small platform. The area is about ten by ten meters large, surrounded by jagged outcroppings as sharp as swords.");
 		Text.Newline();
-		Text.AddOutput("The short climb has left you winded. This isn't going to work, you conclude. Looking back to where you came from, the demon seems to have reached the foothills below and have started climbing the crevice. It will reach this place in mere moments. Scrambling to find a hiding place, you duck in behind a rock, scratching yourself and drawing blood.");
+		Text.AddOutput("The short climb has left you winded. This isn't going to work, you conclude. Looking back to where you came from, the demon seems to have reached the foothills below and has started climbing the crevice. It will reach this place in mere moments. Scrambling to find a hiding place, you duck in behind a rock, scratching yourself and drawing blood.");
 		Text.Newline();
 		Text.AddOutput("Peeking out from your hiding place, your hope drains as you see one of the demon's massive clawed  hands crest the edge of the cliff. It has already caught up with you.");
 		Text.Newline();
 		Text.AddOutput("<b>DON'T RUN, PUNY HUMAN. THERE IS NO USE HIDING,</b> the booming voice announces, sounding slightly amused. <b>YOU ARE IN MY REALM NOW, THERE IS NO ESCAPE.</b> Drawing itself up so that it can rest its arms in the clearing, you get your first good look at the thing.");
 		Text.Newline();
-		Text.AddOutput("A multitude of spikes and horns rise from its hairless head in a chaotic mess. The demon's lipless mouth, filled with incredibly sharp teeth, is spread in a huge grin spanning the entirety of the creatures red skinned triangular head. Two sunken eyes burning like hot coals search the area, trying to find you.");
+		Text.AddOutput("A multitude of spikes and horns rise from its hairless head in a chaotic mess. The demon's lipless mouth, filled with incredibly sharp teeth, is spread in a huge grin spanning the entirety of the creature's red skinned triangular head. Two sunken eyes burning like hot coals search the area, trying to find you.");
 
 		player.curHp -= 2;
 		player.curSp -= 5;
 
 		Gui.NextPrompt(function() {
 			Text.Clear();
-			Text.AddOutput("A shrill laugh startles you. While you were focusing on the demon, some strange creature has sneaked up on you from behind! The tiny red monster seems to be some kind of imp, a nude, scrawny creature with bulging eyes and a head too large for its body.");
+			Text.AddOutput("A shrill laugh startles you. While you were focusing on the demon, some strange creature has sneaked up on you from behind! The tiny red monster seems to be some kind of imp; a nude, scrawny creature with bulging eyes and a head too large for its body.");
 			Text.Newline();
-			Text.AddOutput("Cursing, you prepare to fight as the imp, joined by another one just like it, force you out into the clearing. Above you, the burning gaze of the demon watches the spectacle below with a bemused grin. <b> HAH. THIS MIGHT BE AMUSING.</b>");
+			Text.AddOutput("Cursing, you prepare to fight the imp, which is quickly joined by another one just like it. Together, they force you out into the open. Above you, the burning gaze of the demon watches the spectacle below with a bemused grin. <b>HAH. THIS MIGHT BE AMUSING.</b>");
 			
 			Gui.NextPrompt(Intro.DemonFight);
 		});
@@ -609,7 +609,7 @@ world.loc.DarkAspect.Cliff.links.push(new Link(
 		
 		Text.AddOutput("Keeping a careful eye on the hulking demon, you move closer to the cliff face, trying to search for purchase. When you have climbed a few meters up and glance back, you see that the demon is watching you out of the corner of his eye. The bastard is pretending not to notice you!");
 		Text.Newline();
-		Text.AddOutput("Well, you did it once before, perhaps it will work again... closing your eyes, you wish yourself away from this place, to the peak of the mountain, <i>anywhere</i> but here. To your surprise, it actually seems to work! The burning heat that emanates from the demon is suddenly replaced by a chill wind. Opening your eyes wonderingly, you survey your surroundings.");
+		Text.AddOutput("Well, you did it once before, so perhaps it will work again... closing your eyes, you wish yourself away from this place, to the peak of the mountain, <i>anywhere</i> but here. To your surprise, it actually seems to work! The burning heat that emanates from the demon is suddenly replaced by a chill wind. Opening your eyes wonderingly, you survey your surroundings.");
 		Text.Newline();
 		Text.AddOutput("You are at the very peak of the mountain, on a flat circular plateau no more than twenty meters across. Around and above, the sky is a calm meld of red and pink, and you realize that you are far above the rioting storm clouds. In the middle of the plateau stands a throne of stone.");
 		Text.Newline();
@@ -701,7 +701,7 @@ world.loc.DarkAspect.Peak.links.push(new Link(
 		
 		Text.AddOutput("Now that things have calmed down, you take a moment to explore the area around you. There doesn't really seem to be anything interesting on the mountaintop, beside a few broken pillars and the large throne in the middle of everything.");
 		Text.Newline();
-		Text.AddOutput("The throne itself is made of black rock, polished to a sheen. Veins of light blue hues snake their way across the surface, like if the thing was made of marble - only jet black. The throne has no particular ornaments on it, but you notice that the seat is uneven, strange, unnerving protrusions poking at whoever sits on it.");
+		Text.AddOutput("The throne itself is made of black rock, polished to a sheen. Veins of light blue hues snake their way across the surface, like if the thing was made of marble - only jet black. The throne has no particular ornaments on it, but you notice that the seat is uneven and strange, with unnerving protrusions poking at whoever tries to sit on it.");
 		Text.Newline();
 		Text.AddOutput("It doesn't look like it would be very comfortable.");
 		Text.Newline();
@@ -1661,7 +1661,7 @@ Intro.UruSexAftermath = function() {
 	TF.SetAppendage(player.Back(), AppendageType.tail, Race.demon, Color.red);
 	
 	Text.Newline();
-	Text.AddOutput("Snapping back to reality, you try to scramble away from the omnibus looming over you, but her attention is not directed at you. The growth of your tail apparently dislodged the purple gem you were carrying from your shredded clothes. The stone now lies on the ground, emanating a dull glow.");
+	Text.AddOutput("Snapping back to reality, you flinch as the omnibus looms over you, but her attention is not directed at you. The growth of your tail apparently dislodged the purple gem you were carrying from your shredded clothes. The stone now lies on the ground, emanating a dull glow.");
 	Text.Newline();
 	Text.AddOutput("With a curious look on her face, Uru bends down and picks up the jewel. For a moment, a look of wonder cross her face, illuminated by the glowing stone, though quickly replaced by one of triumph. Forgotten, you drop to the ground as the forces suspending you dissipate. <i>\"R-really? It can be done <b>that</b> way, too?\"</i> the demon wonders out loud, her thoughts far away and her eyes lost in the swirling mist deep inside the gem.");
 	Text.Newline();
