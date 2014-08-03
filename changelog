@@ -7,16 +7,20 @@ CHANGELOG for Fall of Eden
 
 Version 0.3l
 ------------
+* 
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
+Version 0.3k5
+-------------
 * Made expToLevel more consistent with save/load.
 * Fera sex fix.
 * Possible fix for Ranger job.
 * Fixed a bug in CocksThatFit, that might have caused some problems with Rosalin's sex scene. Possibly other scenes too.
 * Fixed a stupid bug that would return the wrong cum quantity.
 * Lots of typo fixes to the intro.
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.3k4
 -------------
