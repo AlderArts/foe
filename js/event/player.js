@@ -216,7 +216,7 @@ Player.prototype.Interact = function(switchSpot) {
 			
 			world.TimeStep({minute : 10});
 			
-			that.AddLustFraction(-1);
+			that.OrgasmCum();
 			
 			Gui.NextPrompt(function() {
 				that.Interact(switchSpot);

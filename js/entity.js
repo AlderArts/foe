@@ -1648,7 +1648,7 @@ Entity.prototype.OrgasmCum = function(mult) {
 	
 	this.AddLustFraction(-1);
 	
-	cumQ = balls.cum.DecreaseStat(0, cumQ, true);
+	balls.cum.DecreaseStat(0, cumQ);
 	if(DEBUG) {
 		Text.Newline();
 		Text.AddOutput("<b>[name] came ([cum]).</b>", {name: this.NameDesc(), cum: cumQ.toFixed(2)});
