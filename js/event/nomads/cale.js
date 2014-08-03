@@ -2435,7 +2435,7 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal) {
 	
 	Text.Add("Your excitement building, you don’t even think before upping the pace, lifting and falling with greater enthusiasm until your hips are audibly slapping against his own. Lust and pleasure chase each other through your brain, clouding your vision - but you don’t need eyes to feel that Cale is similarly lost in his pleasure. You can feel his knot, fat and swollen with his arousal, beating against your netherlips with each descent you make, so swollen it’s almost too big to freely slip in and out anymore.", parse);
 	Text.NL();
-	if(cale.Slut() >= 60 && cock && cock.length.Get() >= 20) {
+	if((cale.Slut() >= 60) && cock && (cock.length.Get() >= 20)) {
 		Text.Add("The sight of your cock, bobbing in front of him is too much for the slutty wolf, without nary a second thought he leans into your bobbing mast of manflesh and begins lavishing your [cockTip] with licks from his broad tongue.", parse);
 		Text.NL();
 		Text.Add("You moan unthinkingly as Cale starts to suck your dick. ", parse);
