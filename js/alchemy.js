@@ -21,7 +21,7 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback) {
 		var str = Text.BoldColor(item.name) + ": ";
 		for(var j = 0; j < item.Recipe.length; j++) {
 			var component = item.Recipe[j];
-			var comps = inventory.QueryNum(component.it);
+			var comps = inventory.QueryNum(component.it) || 0;
 			if(j > 0) str += ", ";
 			str     += (component.num || 1) + "/" + comps + "x " + component.it.name;
 			enabled &= (comps >= (component.num || 1));
