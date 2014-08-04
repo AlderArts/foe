@@ -23,7 +23,7 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback) {
 			var component = item.Recipe[j];
 			var comps = inventory.QueryNum(component.it);
 			if(j > 0) str += ", ";
-			str     += (component.num || 1) + "/" + comps + "x " + component.it.name;
+			str     += (comps || 0) + "/" + (component.num || 1) + "x " + component.it.name;
 			enabled &= (comps >= (component.num || 1));
 		}
 		Text.Add(str);
