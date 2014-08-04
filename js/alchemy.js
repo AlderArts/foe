@@ -22,9 +22,12 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback) {
 		for(var j = 0; j < item.Recipe.length; j++) {
 			var component = item.Recipe[j];
 			var comps = inventory.QueryNum(component.it) || 0;
+			var en = (comps >= (component.num || 1));
 			if(j > 0) str += ", ";
+			if(!en) str += "<b>";
 			str     += (component.num || 1) + "/" + comps + "x " + component.it.name;
-			enabled &= (comps >= (component.num || 1));
+			if(!en) str += "</b>";
+			enabled &= en;
 		}
 		Text.Add(str);
 		Text.NL();
