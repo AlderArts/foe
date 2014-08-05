@@ -305,7 +305,7 @@ Scenes.Felines.IntroStalking = function() {
 	
 	Text.Clear();
 	Text.Add("You get a sudden paranoid feeling as you walk across the plains. A quick survey of the area doesn’t reveal any immediate threats, but the feeling refuses to leave you.", parse);
-	if(p1) {
+	if(party.Num() > 1) {
 		parse["name"] = p1.name;
 		Text.Add(" <i>”[playername], we are being watched,”</i> [name] mutters, eyes roaming around warily.", parse);
 	}
