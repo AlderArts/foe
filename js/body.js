@@ -853,7 +853,7 @@ Vagina.prototype.noun = function() {
 	else if(r == 2) noun = "crevice";
 	else if(r == 3) noun = "cunny";
 	else if(r == 4) noun = "cunt";
-	else if(r == 5) noun = "mound";
+	else if(r == 5) noun = "cooch";
 	else if(r == 6) noun = "slit";
 	else if(r == 7) noun = "snatch";
 	else if(r == 8) noun = "vagina";
