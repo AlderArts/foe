@@ -151,8 +151,15 @@ Gui.Init = function() {
     Input.exploreButtons[ExploreButtonIndex.Sleep].SetKey(KEY_Z);
     Input.exploreButtons[ExploreButtonIndex.Look].SetKey(KEY_X);
     
-    Input.menuButtons[0].SetKey(KEY_CONSOLE);
+    Input.exploreButtons[ExploreButtonIndex.Explore].SetKey(KEY_6);
+    Input.exploreButtons[ExploreButtonIndex.Party].SetKey(KEY_7);
+    Input.exploreButtons[ExploreButtonIndex.Items].SetKey(KEY_8);
+    Input.exploreButtons[ExploreButtonIndex.Ability].SetKey(KEY_9);
+    Input.exploreButtons[ExploreButtonIndex.Alchemy].SetKey(KEY_0);
     
+    
+    Input.menuButtons[0].SetKey(KEY_CONSOLE);
+        
     Gui.ClearButtons();
 }
 
