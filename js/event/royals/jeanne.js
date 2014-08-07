@@ -140,7 +140,7 @@ Scenes.Jeanne.Talk = function() {
 				Text.NL();
 				Text.Add("<i>”Please hurry in finding a source of power, we need to commune with one of the more powerful helpful spirits, and soon. Perhaps Lady Aria, if she can be reached. From what you have told me, she knows of the danger that looms over us.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>”Travel deep inside the forest, under the branches of the Great Tree, and find the dryad’s glade. There you will find an old and wise being known as the Mother Tree, a dear friend of mine. She will know of a way to help you, just tell her that I sent you.”</i>", parse);
+				Text.Add("<i>”Travel deep inside the forest, under the branches of the Great Tree, and find the dryads' glade. There you will find an old and wise being known as the Mother Tree, a dear friend of mine. She will know of a way to help you, just tell her that I sent you.”</i>", parse);
 			}
 			Text.Flush();
 			
