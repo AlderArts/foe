@@ -1279,6 +1279,8 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 	party.ClearActiveParty();
 	party.SwitchIn(player);
 	party.AddMember(gwendy);
+	
+	gwendy.RestFull();
 
 	party.location = world.loc.Plains.Crossroads;
 	world.TimeStep({hour:2});
