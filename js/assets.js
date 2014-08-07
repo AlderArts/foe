@@ -45,16 +45,8 @@ Images.bandit_male2 = "data/bandit_male2.png";
 Images.bandit_female1 = "data/bandit_female1.png";
 
 Images.golemboss    = "data/golem.png";
+Images.corr_orchid  = "data/orchid.png";
 
-
-
-/*
-Images.imgButtonEnabled     = "data/gui/button_big_enabled.png";
-Images.imgButtonEnabled2    = "data/gui/button_big_enabled2.png";
-Images.imgButtonDisabled    = "data/gui/button_big_disabled.png";
-Images.imgNavButtonEnabled  = "data/gui/button_small_enabled.png";
-Images.imgNavButtonDisabled = "data/gui/button_small_disabled.png";
-*/
 Images.imgButtonEnabled     = "data/gui/big_blue.png";
 Images.imgButtonEnabled2    = "data/gui/big_green.png";
 Images.imgButtonDisabled    = "data/gui/big_gray.png";

@@ -116,6 +116,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/enemy/feralwolf.js \
 	js/enemy/scorp.js \
 	js/enemy/drake.js \
+	js/enemy/orchid.js \
 	js/main.js \
 	js/credits.js \
 	js/cheats.js \
