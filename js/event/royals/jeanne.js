@@ -463,7 +463,7 @@ Scenes.Jeanne.FirstPrompt = function() {
 				Text.NL();
 				Text.Add("You ask her what you can do with the gem.", parse);
 				Text.NL();
-				Text.Add("<i>”Right now, not much I am afraid. The gem can store large amounts magical power, but for it to be useful, you will need a more permanent energy source.”</i> She quickly scrawls down some notes on a parchment. <i>”You seem to be a resourceful person. I need you to go to the dryads glade in the forest and talk to the Mother Tree. She should be able to help you if you explain your cause.”</i> Jeanne briefly explains how to find the hidden glade.", parse);
+				Text.Add("<i>”Right now, not much I am afraid. The gem can store large amounts magical power, but for it to be useful, you will need a more permanent energy source.”</i> She quickly scrawls down some notes on a parchment. <i>”You seem to be a resourceful person. I need you to go to the dryads' glade in the forest and talk to the Mother Tree. She should be able to help you if you explain your cause.”</i> Jeanne briefly explains how to find the hidden glade.", parse);
 				Text.NL();
 				Text.Add("<i>”It is very important that you keep the gem safe. While it is invaluable, trying to sell it would not be a good idea. I sense a strong bond between you and this stone… I do not think anyone other than you could bring out its full potential. Another thing that I am afraid of is that should the gem falls into the wrong hands, it may even bring harm to you.”</i>", parse);
 				Text.NL();
