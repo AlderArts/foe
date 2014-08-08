@@ -26,8 +26,8 @@ function GolemBoss(storage) {
 	
 	// TODO Stats
 	
-	this.maxHp.base        = 500;
-	this.maxSp.base        = 100;
+	this.maxHp.base        = 800;
+	this.maxSp.base        = 250;
 	this.maxLust.base      = 100;
 	// Main stats
 	this.strength.base     = 40;
@@ -41,8 +41,8 @@ function GolemBoss(storage) {
 	this.level             = 10;
 	this.sexlevel          = 2;
 	
-	this.combatExp         = 50;
-	this.coinDrop          = 50;
+	this.combatExp         = 100;
+	this.coinDrop          = 500;
 	
 	this.body              = new Body();
 	
@@ -51,8 +51,6 @@ function GolemBoss(storage) {
 	this.body.SetBodyColor(Color.black);
 	
 	this.body.SetEyeColor(Color.red);
-	
-	this.turnCounter = 0;
 	
 	this.flags["Met"] = Scenes.Golem.State.NotMet;
 
@@ -93,6 +91,8 @@ GolemBoss.prototype.Act = function(encounter, activeChar) {
 		Abilities.Physical.Bash.Use(encounter, this, t);
 	else if(choice < 0.4 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
 		Abilities.Physical.CrushingStrike.Use(encounter, this, t);
+	else if(choice < 0.6 && Abilities.Physical.GrandSlam.enabledCondition(encounter, this))
+		Abilities.Physical.GrandSlam.Use(encounter, this, party);
 	else
 		Abilities.Attack.Use(encounter, this, t);
 }
