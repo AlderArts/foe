@@ -118,9 +118,10 @@ Race = {
 	moth     : 17,
 	scorpion : 18,
 	ferret   : 19,
+	plant    : 20,
 	
 	// TODO: Keep updated!
-	numRaces : 20
+	numRaces : 21
 }
 Race.Desc = function(race) {
 	var r;
@@ -175,6 +176,7 @@ Race.Desc = function(race) {
 	case Race.moth: return "moth";
 	case Race.scorpion: return "scorpion";
 	case Race.ferret: return "ferret";
+	case Race.plant: return "plant";
 	default: return "undefined";
 	}
 }
@@ -232,6 +234,7 @@ Race.Quantifier = function(race) {
 	case Race.moth: return "a moth";
 	case Race.scorpion: return "a scorpion";
 	case Race.ferret: return "a ferret";
+	case Race.plant: return "a plant-like";
 	default: return "an undefined";
 	}
 }
@@ -1080,7 +1083,8 @@ Butt.prototype.AnalLong = function() {
 
 CockType = {
 	ordinary : 0,
-	clitcock : 1
+	clitcock : 1,
+	tentacle : 2
 }
 
 function Cock(race, color) {
@@ -1115,6 +1119,11 @@ Cock.prototype.noun = function() {
 		var r = Rand(2);
 		if     (r == 0) noun = "clit-cock";
 		else if(r == 1) noun = "girl-cock";
+	}
+	else if(this.type == CockType.tentacle) {
+		var r = Rand(2);
+		if     (r == 0) noun = "tentacle";
+		else if(r == 1) noun = "tentacle-cock";
 	}
 	else {
 		var r = Rand(11);
