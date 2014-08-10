@@ -424,12 +424,87 @@ Scenes.DryadGlade.FirstLoss = function() {
 	
 	Text.Add(" The voluptuous dryad has been reduced to a shadow of her former self, broken in body, mind and spirit by the countless tentacles continuously ravaging her. Given time, this is what you too will turn into, you realize with a sinking heart.", parse);
 	Text.NL();
-	Text.Add("", parse);
+	
+	parse = {
+		playername : player.name,
+		multiCockDesc : function() { return player.MultiCockDesc(); },
+		earDesc  : function() { return player.EarDesc(); },
+		hipsDesc : function() { return player.HipsDesc(); },
+		buttDesc : function() { return player.Butt().Short(); },
+		anusDesc : function() { return player.Butt().AnalShort(); }
+	};
+	if(player.FirstCock()) {
+		parse["thatThose"] = player.NumCocks() > 1 ? "those" : "that";
+		parse["s"]         = player.NumCocks() > 1 ? "s" : "";
+		Text.Add("<i>”Why not put [thatThose] to use?”</i> Orchid moans sutrily in your [earDesc], stroking your [multiCockDesc] from behind. <i>”Can’t you see mother needs you to fuck her?”</i> The corrupted dryad lines you up against her mother’s gaping cunt, lubing up your tip[s] in her sticky seed.", parse);
+		Text.NL();
+		Text.Add("<i>”I… I… fuck… breed,”</i> Mother Tree moans as her daughter pushes your shaft[s] in to the hilt, filling up her recently vacated vagina. You are quickly losing the battle of willpower as your [hipsDesc] begin to buck on their own, thrusting into the chocolate milf with abandon. Whatever your original intent was, your rapidly fading memories of an important quest, right now you exist only to pollinate this beautiful flower.", parse);
+	}
+	else if(player.FirstVag()) {
+		Text.Add("<i>”Now, don’t get greedy, mother, you are not the only one who needs to be fucked!”</i> Orchid admonishes the older dryad, teasing your pussylips apart and digging into your cunt. <i>”If you still want to help, why don’t we try something a bit different?”</i>", parse);
+		Text.NL();
+		Text.Add("Half a dozen thin tendrils snake out from around your back, baring tiny stingers dripping with corrupt venom of some kind. Mother Tree moans and thrashes helplessly as each on dashes in, stinging her sensitive clit again and again. The more venom that Orchid pours into her, the longer and thicker it grows, until she’s staring down through clouded eyes at her new twenty inch clitcock. Without any means of stopping her, you can only struggle weakly against your bonds as the dryad lowers you onto the monstrous shaft.", parse);
+		
+		Sex.Vaginal(orchid, player);
+		player.FuckVag(player.FirstVag(), orchid.FirstCock(), 3);
+		orchid.Fuck(orchid.FirstCock(), 3);
+	}
+	Text.NL();
+	Text.Add("<i>”I knew the two of you will be the best of friends!”</i> Orchid exclaims happily, caressing your shoulders, her lithe hands trailing down your back, feeling up your [hipsDesc] and [buttDesc]. You moan softly as you feel a number of thick tentacle cocks invading your [anusDesc], worming their way inside you rapidly.", parse);
+	Text.NL();
+	
+	Sex.Anal(orchid, player);
+	player.FuckAnal(player.Butt(), orchid.FirstCock(), 3);
+	orchid.Fuck(orchid.FirstCock(), 3);
+	
+	Text.Add("<i>”Aww yeah!”</i> she moans, railing you like a jackhammer. <i>”You’ll be my favorite fucktoy, right next to mother!”</i> Saying so, she thrusts you head in between Mother Tree’s heavy breasts, rubbing your face in her seed. <i>”Lick!”</i> Orchid commands, grinding into you.", parse);
+	Text.NL();
+	Text.Add("At this point, you’ve all but given in. You dutifully lap up the corrupted semen, feeling it burning as it goes down your throat. You find one of the older dryad’s nipples and suckle on it, hungrily drinking up her sweet sap. The three of you continue rocking against each other in intense coitus, though there is no question about who is in charge of the situation.", parse);
+	Text.NL();
+	
+	var cum = player.OrgasmCum();
+	parse["cum"] = cum > 6 ? "exploding" :
+	               cum > 3 ? "pouring" :
+	               "shooting";
+	Text.Add("Your stomach bulges as the corrupted dryad unloads inside you, pushing you to your own climax. ", parse);
+	if(player.FirstCock())
+		Text.Add("Mother Tree cries out as you fill her up, your seed [cum] into her pussy even as you yourself are filled. ", parse);
+	else if(player.FirstVag())
+		Text.Add("You cry out as you orgasm from the dryad double penetration. No, you can’t call it double, you aren’t even sure you could count how many tentacles are stuck up your ass at this point, each one going off like a volcano. ", parse);
+	Text.Add("Shuddering, you collapse between the mother-daughter pair, your senses fading out.", parse);
+	if(party.Num() > 1) {
+		if(party.Num() == 2)
+			parse["comp"] = party.Get(1).name;
+		else
+			parse["comp"] = "your companions";
+		Text.NL();
+		Text.Add("Dimly, you hear the cries of [comp], but you can no longer tell if they are cries of pain or pleasure.", parse);
+	}
 	Text.Flush();
 	
-	/*
-
-	 */
+	Gui.NextPrompt(function() {
+		world.TimeStep({ season : 2 });
+		
+		if(player.Num() <= 1)
+			parse["comp"] = "";
+		else if(player.Num() == 2)
+			parse["comp"] = " and " + party.Get(1).name;
+		else
+			parse["comp"] = " and your companions";
+		
+		Text.Clear();
+		Text.Add("You lose all sense of time as the tireless tentacle monster continues raping you[comp], her own mother and just about anything else that comes inside her reach. By now, you hardly even care, you couldn’t see yourself wanting to do anything other than this, being Orchid’s willing sex slave.", parse);
+		Text.NL();
+		Text.Add("You are dimly aware that the glade is changing around you, the pure spring growing murky as it is slowly defiled with corrupted cum. Where previously there was a field of beautiful, fragrant flowers, strange thorny plants are spreading, colored black, red and a sickly yellow. The inhabitants of the glade are changing too, as Orchid’s lust addled insanity creeps into them.", parse);
+		Text.NL();
+		Text.Add("The mind broken nymphs seduce travelers and other forest creatures, ever increasing the number of slaves partaking in the massive orgy now a constant part of your life. Those closest to Orchid; you, Mother Tree[comp] and the centauress are changed creatures, thoroughly corrupted and broken. You no longer even remember why you came here in the first place, and even if you could walk away at any time, the thought to do so never occurs to you.", parse);
+		Text.NL();
+		Text.Add("Somewhere on the bottom of the corrupted spring, the last fickle light in your discarded gemstone goes out, signalling the end of Eden’s hope. When Uru finally arrives, she will be welcomed to an already fallen world.", parse);
+		Text.Flush();
+		
+		Gui.ClearButtons();
+		Input.buttons[0].Setup("Game Over", GameOver, true, null, "This is where your journey comes to an end.");
+	});
 }
 
 Scenes.DryadGlade.FirstWin = function() {
