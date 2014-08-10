@@ -579,15 +579,17 @@ Scenes.Cale.Prompt = function() {
 	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
 }
 
-Scenes.Cale.Shop = function(bought) {
+Scenes.Cale.Shop = function() {
 	var parse = {
 		
 	};
 	
+	var bought = false;
+	
 	var backPrompt = function() {
 		Text.Clear();
 		if(bought)
-			Text.Add("<i>”Knew I'd have something you wanted; thanks for buying,”</i> he quips, giving you a toothy grin of appreciation.", parse);
+			Text.Add("<i>”Knew I'd have something you wanted, thanks for buying!”</i> he quips, giving you a toothy grin of appreciation.", parse);
 		else
 			Text.Add("<i>”Nothing there today? Alright, come back tomorrow, I should have some new things then,”</i> he assures you.", parse);
 		Text.Flush();

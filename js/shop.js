@@ -36,6 +36,7 @@ Shop.prototype.Buy = function(back, preventClear) {
 		var num      = this.inventory[i].num;
 		var enabled  = this.inventory[i].enabled ? this.inventory[i].enabled() : true;
 		var cost     = DEBUG ? 0 : Math.floor(this.inventory[i].price * it.price);
+		var func     = this.inventory[i].func;
 		
 		enabled = enabled && (party.coin >= cost);
 
@@ -63,7 +64,7 @@ Shop.prototype.Buy = function(back, preventClear) {
 				});
 			}, enabled : enabled,
 			tooltip : it.Long(),
-			obj : {it: this.inventory[i].it, cost: cost }
+			obj : {it: this.inventory[i].it, cost: cost, func: func }
 		});
 	}
 	Gui.SetButtonsFromList(options, true, back);
