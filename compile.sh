@@ -76,6 +76,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/loc/forest.js \
 	js/loc/desert.js \
 	js/loc/farm.js \
+	js/loc/glade.js \
 	js/loc/burrows.js \
 	js/event/dreams.js \
 	js/event/fera.js \

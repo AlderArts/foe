@@ -162,6 +162,15 @@ Terry.prototype.hishers = function() {
 	if(gender == Gender.male) return "his";
 	else return "hers";
 }
+Terry.prototype.mfPronoun = function(male, female) {
+	var gender = this.flags["PrefGender"];
+	if(gender == Gender.male) return male;
+	else return female;
+}
+
+Terry.prototype.HorseCock = function() {
+	return (this.FirstCock() && this.FirstCock().race == Race.horse);
+}
 
 // Party interaction
 Terry.prototype.Interact = function(switchSpot) {

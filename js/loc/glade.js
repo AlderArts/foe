@@ -1,0 +1,447 @@
+/*
+ * 
+ * Dryads' glade
+ * 
+ */
+
+function DryadGlade(storage) {
+	this.flags = {};
+	
+	this.flags["Visit"] = 0;
+	
+	if(storage) this.FromStorage(storage);
+}
+
+DryadGlade.prototype.ToStorage = function() {
+	var storage = {};
+	storage.flags = this.flags;
+	return storage;
+}
+
+DryadGlade.prototype.FromStorage = function(storage) {
+	for(var flag in storage.flags)
+		this.flags[flag] = parseInt(storage.flags[flag]);
+}
+
+DryadGlade.prototype.Update = function(step) {
+	
+}
+
+
+Scenes.DryadGlade = {};
+
+world.loc.Forest.Glade.description = function() {
+	var parse = {
+		
+	};
+	
+	Text.Add("As always, there is a serene stillness to the dryad’s glade. A few nymphs are playing around in the spring, their peals of laughter a pure song of joy. Yet more forest creatures lounge about the flower field, waving to you when they see you. A soft glow that seems to emanate from the spring itself spreads warmth throughout the area.", parse);
+	Text.NL();
+	Text.Add("At the center of the glade stands the old Mother Tree, the voluptuous dryad herself resting on some of the low roots.", parse);
+	Text.NL();
+	if(orchid.Relation() > 50)
+		Text.Add("Her daughter, Orchid, is playing around with some of her friends in what looks like an intense game of tag, using the full range of her tentacles. Both she and the other forest creatures are laughing merrily.", parse);
+	else
+		Text.Add("Her daughter, Orchid, is playing around with some of her friends, though she is cautious about where she waves her tentacles.", parse);
+	Text.Flush();
+}
+
+world.loc.Forest.Glade.links.push(new Link(
+	"Leave", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.Forest.Outskirts, {minute: 15});
+	}
+));
+
+world.loc.Forest.Glade.onEntry = function() {
+	if(glade.flags["Visit"] >= 2) {
+		PrintDefaultOptions();
+		return;
+	}
+	
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	if(glade.flags["Visit"] == 0) {
+		Text.Add("You’ve never been quite as deep into the forest as this before, and you can’t help but feel uneasy as the trees around you grow larger and larger. By now, you are beneath the canopy of the Great Tree itself, an oppressive shadow looming thousands of feet above you. In comparison, the trees around you seem small, but you have no doubt that they are very old. The deeper you delve, the harder it is to pass through the dense undergrowth, and thick tree trunks seem to be almost cutting off your path. If not for the court magician’s directions, you would have been hopelessly lost long ago.", parse);
+		Text.NL();
+		Text.Add("Just as you are beginning to wonder if Jeanne has sent you on a wild goose chase, you notice the trees thinning ahead.", parse);
+	}
+	else {
+		Text.Add("You begin to recognize the path to the dryad glade that Jeanne told you about. Once again, you approach the clearing deep within the forest.", parse);
+	}
+	Text.NL();
+	Text.Add("Though you know this might be the only way to power up the gemstone, you can’t help but feel that there is danger ahead.", parse);
+	Text.NL();
+	Text.Add("Do you continue towards the glade?", parse);
+	Text.Flush();
+	
+	//[Enter][Leave]
+	var options = new Array();
+	options.push({ nameStr : "Enter",
+		func : Scenes.DryadGlade.First, enabled : true,
+		tooltip : "There is no time to lose. Go forth, steeling yourself against whatever danger awaits."
+	});
+	options.push({ nameStr : "Leave",
+		func : function() {
+			Text.Clear();
+			Text.Add("You divert your course, staying clear of the glade for now. You should return when you are better prepared.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				MoveToLocation(world.loc.Forest.Outskirts, {minute: 15})
+			});
+		}, enabled : true,
+		tooltip : "Return once you are better prepared."
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.DryadGlade.First = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	if(player.Num() <= 1)
+		parse["comp"] = "";
+	else if(player.Num() == 2)
+		parse["comp"] = " and " + party.Get(1).name;
+	else
+		parse["comp"] = " and your companions";
+	
+	Text.Clear();
+	Text.Add("Quickening your step, you[comp] soldier on, making for the clearing. You enter a meadow filled with flowers of every shape and color, illuminated by an eerie glow. For a moment, your senses are almost overwhelmed as a thousand different smells enter your nostrils. ", parse);
+	if(world.time.season == Season.Winter)
+		Text.Add("It is somehow getting a lot warmer, and you can’t spy even a single flake of snow in the field of flowers. It’s as if supernatural forces watch over the glade, keeping it in a state of perpetual summer. ", parse);
+	Text.Add("At the center of the clearing - beyond a spring of clear water - there is a huge tree; easily the largest one you have ever seen - not counting the hulking giant above. The goal of your quest, the Mother Tree, awaits you.", parse);
+	Text.NL();
+	Text.Add("Deers and rabbits watch you without fear as you make your way into the beautiful glade. You can also spy more unnatural creatures peeking out behind the trees, watching you curiously. They stay just at the edge of your perception, giving you only vague glimpses of the fae creatures of the forest. A few look like humans or elves, but there is an eerie quality to them. Yet more have only vaguely human features. You think you spy what looks like a deer, but when she peeks out from behind a tree, her upper body is that of a beautiful, naked woman. As soon as you spot her, the centaur giggles and hops away, disappearing into the forest.", parse);
+	Text.NL();
+	Text.Add("You gulp uncertainly, but none of the creatures seem to be showing any hostile intent toward you. You stride forward, trusting the elven magician’s word that this is where you’ll find the power you need. The creatures of the forest veer clear of you, allowing you to approach the huge tree at the center of the glade.", parse);
+	Text.NL();
+	Text.Add("As you draw closer, skirting around the spring, you are startled to find someone waiting for you - a tall woman with skin brown as bark, her long hair a flowing mass of green entwined with flowers and leaves. She is ‘clothed’ in vines and leaves, though they do little to cover her voluptuous form and enormous breasts. She is perched partway up the trunk of the tree, resting on top of a thick root. The woman waves at you to come closer.", parse);
+	Text.NL();
+	Text.Add("<i>”Approach, Lifegiver,”</i> she calls to you, her voice throaty and assuring, like that of a loving mother. The smell around you is that of rich, fertile soil. <i>”I have been waiting for you.”</i> You shake yourself to break away from her deep almond gaze, finally noticing the branches weaving into her back. The woman is clearly a dryad, part of the Mother Tree itself.", parse);
+	Text.NL();
+	Text.Add("A little unnerved by the title she gave you, you introduce yourself and tell her that you were sent here by Jeanne.", parse);
+	Text.NL();
+	Text.Add("<i>”Yes, my little elven sister has spoken to me of this. I know why you are here, [playername].”</i> Her voice carries a heavy sense of sadness. You can only imagine how old this creature is if she refers to the ancient magician in those terms. <i>”I have many names - Oak, Amaryllis, Doe, Spring. Most call me the Mother Tree.”</i>", parse);
+	Text.NL();
+	Text.Add("...And? Can she help you? As you speak, you notice a young dryad, hardly more than a child, peeking out behind the thick trunk of the tree. She blushes and hides herself again when she notices that you’ve seen her.", parse);
+	Text.NL();
+	Text.Add("<i>”I’m afraid I cannot,”</i> the Mother Tree sighs sorrowfully. <i>”In my youth, perhaps, but that is ages upon ages past. Now, the Tree and I are one, my spirit bonded tightly with it. I am old, though young when compared to the Great One.”</i> The last is spoken reverently, as she gazes loving on the gargantuan trunk towering high above even her own tree.", parse);
+	Text.NL();
+	Text.Add("Her… spirit?", parse);
+	Text.NL();
+	Text.Add("<i>”Yes, the only thing that can return life to the stone you carry.”</i> For a moment, her eyes glow with a soft golden light and a wave of warmth sweeps over you. <i>”For centuries upon centuries, I have nurtured my tree, my glade and my daughters, but in doing so I have forever bound myself to this place. I am sorry that I cannot give you what you seek.”</i>", parse);
+	Text.NL();
+	Text.Add("You are about to respond when the forest suddenly stirs around you, and you hear the cries of surprised and terrified nymphs. They break from the treeline; dozens of strange and alluring creatures, dryads, nymphs and satyrs fleeing for their lives. You see the deertaur from before bounding and leaping toward you, glancing over her shoulder in terror Before she reaches you, a mass of long, snaking tentacles whip out from the forest, wrapping themselves around the screaming doe and pulling her back into the shadow of the forest.", parse);
+	Text.NL();
+	Text.Add("<i>”W-what is this?”</i> the Mother Tree cries out in distress, anxiously biting her lip. You hear the centaur’s screams turn to muffled moans as the betentacled assaulter presumably violates her. <i>”Who could-?”</i> The old dryad cuts off, gasping as the attacker enters the glade, striding toward you confidently.", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		Text.Clear();
+		Text.Add("The newcomer is another dryad; a creature of the forest, though she is very different from the one beside you. Her skin is green and her wild hair a yet darker green, though you can see pulsing purple veins spreading like a spider web over her lithe form. Her back is a mass of vile, squirming tentacles, spreading out behind her many times her length. Somewhere behind her you see the centaur being dragged into the clearing, spitroasted with at least three tentacles in every one of her holes.", parse);
+		Text.NL();
+		Text.Add("<i>”Is… is that you, Orchid?”</i> the Mother Tree whimpers, her voice breaking in a pained mixture of fear and sorrow. <i>”P-please stop this, my daughter! What has happened to you?!”</i>", parse);
+		Text.NL();
+		Text.Add("The betentacled dryad only gives her mother a feral grin, the deep black wells of her eyes sending shudders down your spine. There is no compassion there, only a dark, all-consuming lust.", parse);
+		Text.NL();
+		parse["selfSelves"] = party.Num() > 1 ? "selves" : "self";
+		Text.Add("You[comp] ready your[selfSelves] for battle. Just in time, as the monster charges you, baring her fangs. Tentacles sweep past you, trying to ensnare you[comp] and only barely missing. The old dryad is not so lucky, as countless of thick vines wrap around her, beginning to ravage her.", parse);
+		Text.NL();
+		Text.Add("<i>”F-fuck! Gonna fuck all of you!”</i> the corrupted dryad cries, turning toward you.", parse);
+		Text.NL();
+		Text.Add("It’s a fight!", parse);
+		Text.Flush();
+		
+		var enemy = new Party();
+		enemy.AddMember(orchid);
+		var enc = new Encounter(enemy);
+		
+		orchid.RestFull();
+		
+		enc.canRun = false;
+		
+		enc.onLoss = Scenes.DryadGlade.FirstLoss;
+		enc.onVictory = Scenes.DryadGlade.FirstWin;
+		
+		enc.Start();
+	});
+}
+
+Scenes.DryadGlade.FirstLoss = function() {
+	SetGameState(GameState.Event);
+	
+	var parse = {
+		armorDesc : function() { return player.ArmorDesc(); }
+	};
+	
+	if(player.Num() <= 1)
+		parse["comp"] = "";
+	else if(player.Num() == 2)
+		parse["comp"] = " and " + party.Get(1).name;
+	else
+		parse["comp"] = " and your companions";
+		
+	
+	Text.Clear();
+	Text.Add("You[comp] fall to the ground, thoroughly defeated by the corrupted Orchid.", parse);
+	Text.NL();
+	Text.Add("<i>”Why, my daughter, why?”</i> the Mother Tree wails, struggling weakly as she climaxes yet another time from the tentacles railing her. It’s the last intelligible thing you hear from her before she deteriorates into uncontrollable moaning, somewhat muffled by another throng of thick vines plugging her mouth. By now, you can hardly tell that the dryad is dark skinned, so thick is the coat of cum covering her shuddering body.", parse);
+	Text.NL();
+	Text.Add("At the edge of your vision, you see the young child you saw before. Her eyes are wide with horror at what is happening, and she quickly runs away before the creature can grab hold of her.", parse);
+	Text.NL();
+	Text.Add("The corrupted dryad ignores her mother - by now reduced to nothing but a lust-drunk slut - and steps over to you, her hips swaying back and forth. Her tentacles hover above menacingly, their dripping, bulbous tips looking very much like cockheads.", parse);
+	Text.NL();
+	Text.Add("<i>”Mmm… so much more fun when they wriggle,”</i> she gloats, looking down on you with malice. <i>”Makes me want to play with them...”</i> Tentacles whip out, grabbing hold of your struggling form and easily lift you into the air. She’s strong… so strong. With little to no effort, she all but rips away the remaining scraps of your [armorDesc], leaving you nude. You squirm desperately, trying to get away from the slimy tentacles wrapping around your limbs, but in the end you are powerless to stop her.", parse);
+	Text.NL();
+	
+	if(party.Num() > 1) {
+		var count = 1;
+		var total = party.Num();
+		
+		if(player.Num() == 2)
+			parse["comp"] = party.Get(1).name;
+		else
+			parse["comp"] = "your companions";
+		
+		Text.Add("<i>”I’ll get to you in a moment, okay?”</i> Orchid says, turning to [comp].", parse);
+		Text.NL();
+		if(party.InParty(kiakai)) {
+			var parse = {
+				name : kiakai.name,
+				possessive : kiakai.possessive(),
+				heshe  : kiakai.heshe(),
+				HeShe  : kiakai.HeShe(),
+				himher : kiakai.himher(),
+				hisher : kiakai.hisher(),
+				HisHer : kiakai.HisHer(),
+				boyGirl : kiakai.mfTrue("boy", "girl"),
+				legsDesc : function() { return kiakai.LegsDesc(); },
+				multiCockDesc : function() { return kiakai.MultiCockDesc(); }
+			}
+			
+			Text.Add("<i>”Elves… I just found a few elves in the forest on my way here,”</i> the dryad says coyly as she wraps [name] in tentacles, raising up the elf beside you. <i>”Let’s find out if you squeal as much as they did!”</i>", parse);
+			Text.NL();
+			Text.Add("<i>”S-stay back, monster!”</i> [name] whimpers, too weak to put up a fight anymore. [HeShe] shudders as tentacles begin snaking their way up [hisher] [legsDesc], leaving large swatches of corrupt, glistening seed wherever they touch. The elf puts up a final effort of resistance, but it’s quickly extinguished as tentacles force themselves on [himher], plunging deep within [hisher] body.", parse);
+			Text.NL();
+			if(kiakai.FirstVag()) {
+				Text.Add("[name] cries out as [hisher] virgin pussy is roughly laid bare, tentacles thicker than [hisher] arm worming their way inside in search for [hisher] womb. You did not think this would be the way the elf lost [hisher] virginity.", parse);
+				Text.NL();
+				
+				Sex.Vaginal(orchid, kiakai);
+				kiakai.FuckVag(kiakai.FirstVag(), orchid.FirstCock(), 3);
+				orchid.Fuck(orchid.FirstCock(), 3);
+			}
+			Text.Add("A mass of writhing vines spread the elf’s buttcheeks, penetrating [himher] one after another, each one pushing the poor [boyGirl] more and more beyond [hisher] limits.", parse);
+			if(kiakai.flags["AnalExp"] > 20)
+				Text.Add(" Hopefully, the extensive anal training you have given [himher] helps [himher] a little, but it’s a small consolation.", parse);
+			Text.NL();
+			
+			Sex.Anal(orchid, kiakai);
+			kiakai.FuckAnal(kiakai.Butt(), orchid.FirstCock(), 3);
+			orchid.Fuck(orchid.FirstCock(), 3);
+			
+			if(kiakai.FirstCock()) {
+				Text.Add("A set of thinner vines wrap themselves around [hisher] [multiCockDesc], trying to milk the elf from both directions.", parse);
+				Text.NL();
+			}
+			Text.Add("Another tentacle forcing itself down [possessive] throat, sealing [hisher] last remaining free orifice.", parse);
+			Text.NL();
+			
+			Sex.Blowjob(kiakai, orchid);
+			kiakai.FuckOral(kiakai.Mouth(), orchid.FirstCock(), 3);
+			orchid.Fuck(orchid.FirstCock(), 3);
+			
+			count++;
+			if(count < total) {
+				Text.Add("<i>”I’m going to enjoy breaking you down,”</i> Orchid shudders ecstatically before turning to the next member of your party.", parse);
+				Text.NL();
+			}
+		}
+		else if(party.InParty(terry)) {
+			var parse = {
+				playername : player.name,
+				heshe  : terry.heshe(),
+				HeShe  : terry.HeShe(),
+				himher : terry.himher(),
+				hisher : terry.hisher(),
+				HisHer : terry.HisHer(),
+				foxvixen : terry.mfPronoun("fox", "vixen")
+			};
+			
+			Text.Add("<i>”And what do we have here?”</i> the dryad quips, looking Terry up and down with interest. <i>”What a cute little vixen!”</i>", parse);
+			Text.NL();
+			if(terry.Relation() < 30) {
+				Text.Add("<i>”S-stay back!”</i> Terry groans, by some miracle managing to wriggle  free of the tentacles restraining [himher]. <i>”Sorry, [playername], I’m out of here,”</i> the [foxvixen] whimpers, promptly turning tail and running away. The betrayal stings a bit, but in your current situation, you can hardly blame [himher].", parse);
+				Text.NL();
+				Text.Add("Unfortunately for the fox, the magic collar has no consideration for [hisher] antics. As it recognizes Terry running away from you, the spell activates, sending the [foxvixen] sprawling to the ground moaning with lust.", parse);
+			}
+			else {
+				Text.Add("<i>”You stay away from [playername], you monster!”</i> Terry cries out, somehow managing to wriggle free of the tentacles restraining [himher]. Shouting a wordless battlecry, the rogue jumps at the dryad, only to be entangled in tentacles again.", parse);
+				Text.NL();
+				Text.Add("<i>”Mmm, such a fiesty one,”</i> the dryad moans appreciatively. <i>”Let’s see how you fight this!”</i> With that, Terry gets a faceful of aphrodisiac administered by tentacle, sending the poor fox into a lusty haze.", parse);
+			}
+			Text.NL();
+			Text.Add("<i>”Now… let’s see what you’re packing,”</i> Orchid says, licking her lips. In short order, the [foxvixen] is stripped down to [hisher] fur.", parse);
+			Text.NL();
+			
+			if(terry.FirstCock()) {
+				if(terry.HorseCock()) {
+					Text.Add("<i>”Woah! Where were you hiding this thing, pet?”</i> the dryad exclaims, marvelling at Terry’s impressive horsecock. The knotted monster is at full mast, throbbing with need. <i>”Why would such a pretty little thing have a vulgar cock like this?”</i> she muses, trailing the shaft with one of her tentacles.", parse);
+					Text.NL();
+					Text.Add("Terry gasps as [hisher] sensitive dick all but explodes at the dryad’s light touch, spraying its seed all over the ground. <i>”What a slut!”</i> Orchid gloats, laughing at the rogue’s hair trigger sensitivity. <i>”Don’t worry, I’m barely getting started with you!”</i>", parse);
+				}
+				else {
+					Text.Add("<i>”What is this now? I thought you were a girl!”</i> the dryad exclaims at the sight of Terry’s rock hard member, amused by her discovery.", parse);
+					if(terry.FirstVag())
+						Text.Add(" <i>”Well, I guess you have those parts too,”</i> she adds, splaying Terry’s legs wide in order to expose [hisher] pussy.", parse);
+					Text.Add(" <i>”I won’t go easy on you, rebellious little fox,”</i> Orchid purrs, her tentacles swaying into position.", parse);
+				}
+			}
+			else {
+				Text.Add("<i>”Such a soft and petite body you have, little pet!”</i> the dryad purrs as she feels up Terry’s body with her tentacles. <i>”Mmm… makes me want to ruin it...”</i>", parse);
+			}
+			Text.NL();
+			Text.Add("True to her word, Orchid presses her tentacles against Terry’s[ pussy and] butt, roughly impaling the lithe [foxvixen]. ", parse);
+			if(terry.HorseCock())
+				Text.Add("Within seconds after the dryad starts railing [hisher] prostate, the rogue’s fat horsedong is erect again, still drooling with cum. ", parse);
+			parse["again"] = terry.HorseCock() ? " again" : "";
+			parse["c"] = terry.FirstCock() ? Text.Parse(", blowing [hisher] load[again]", parse) : "";
+			Text.Add("Seconds later, Terry orgasms[c]. Orchid shows little concern for the fox, increasing her pace and the number of tentacles she’s shoving into [himher]. The rogue begins to spout a final defiant protest, but [hisher] mouth is quickly plugged with additional tentacles.", parse);
+			Text.NL();
+			
+			if(terry.FirstVag()) {
+				Sex.Vaginal(orchid, terry);
+				terry.FuckVag(terry.FirstVag(), orchid.FirstCock(), 3);
+				orchid.Fuck(orchid.FirstCock(), 3);
+			}
+			
+			Sex.Anal(orchid, terry);
+			terry.FuckAnal(terry.Butt(), orchid.FirstCock(), 3);
+			orchid.Fuck(orchid.FirstCock(), 3);
+			
+			Sex.Blowjob(terry, orchid);
+			terry.FuckOral(terry.Mouth(), orchid.FirstCock(), 3);
+			orchid.Fuck(orchid.FirstCock(), 3);
+			
+			Text.Add("Despite [hisher] lust addled state, you can tell that Terry is doing everything [heshe] can to resist the dryad, but eventually the rogue’s struggles cease as [heshe]’s overwhelmed by the corrupted creature’s rough penetration.", parse);
+			Text.NL();
+			count++;
+			if(count < total) {
+				Text.Add("<i>”I’ll definitely have to play with this one later,”</i> Orchid chuckles, turning to your next companion.", parse);
+				Text.NL();
+			}
+		}
+		else if(party.InParty(roa)) {
+			Text.Add("<i>”This one looks like he’s all stretched out already!”</i> the dryad exclaims, splaying out the struggling Roa and spreading his pliant cheeks. <i>”I could fit dozens of juicy tentacle cocks into this slut!”</i> As if to prove her point, Orchid pushes one veiny tentacle cock after another into the rabbit’s accommodating behind, stretching him more and more.", parse);
+			Text.NL();
+			
+			Sex.Anal(orchid, roa);
+			roa.FuckAnal(roa.Butt(), orchid.FirstCock(), 3);
+			orchid.Fuck(orchid.FirstCock(), 3);
+			
+			Text.Add("Thanks to his extensive experience and submissive nature, the trappy lagomorph hardly even protests, moaning whorishly as his belly fills with squirming tentacles. Roa’s cock twitches pitifully, responding eagerly to the viney violation.", parse);
+			Text.NL();
+			Text.Add("<i>”M-more!”</i> the slutty bunny moans, completely controlled by his lust. <i>”F-fuck me deeper!”</i>", parse);
+			Text.NL();
+			Text.Add("<i>”I think he likes this!”</i> the dryad squeals joyfully, thoroughly enjoying her new plaything. It doesn’t look like you can expect any help from him anytime soon. Just to shut him up, the dryad stuffs the moaning lagomorph’s mouth too.", parse);
+			Text.NL();
+			
+			Sex.Blowjob(roa, orchid);
+			roa.FuckOral(roa.Mouth(), orchid.FirstCock(), 3);
+			orchid.Fuck(orchid.FirstCock(), 3);
+			
+			count++;
+			if(count < total) {
+				Text.Add("<i>”This one is a keeper,”</i> Orchid purrs as she turns to the next one of your companions.", parse);
+				Text.NL();
+			}
+		}
+		else if(party.InParty(momo)) {
+			Text.Add("Momo’s eyes widen in horror as the vines close in. <i>”N-no! Stay away!”</i> she pleads, breathing out a puff of flames in a desperate effort to ward off the writhing tentacles advancing on her.", parse);
+			Text.NL();
+			Text.Add("But there are far too many; even as some of them recoil instinctively, others are creeping around on her from behind, launching at her whilst she’s distracted. The dragonette’s legs and tail are wrapped in perverse vines, their phallic tips vanishing into her clothing and roughly thrusting into her unexpecting holes.", parse);
+			Text.NL();
+			
+			Sex.Vaginal(orchid, momo);
+			momo.FuckVag(momo.FirstVag(), orchid.FirstCock(), 3);
+			orchid.Fuck(orchid.FirstCock(), 3);
+			
+			Sex.Anal(orchid, momo);
+			momo.FuckAnal(momo.Butt(), orchid.FirstCock(), 3);
+			orchid.Fuck(orchid.FirstCock(), 3);
+			
+			Text.Add("A squeal escapes the dragon-girl’s lips, her flame snuffed like a candle in her shock, and that’s what Orchid is waiting for; in the blink of an eye, more vines pounce upon Momo, ensnaring her arms and stuffing themselves down her throat, cutting off her flame with an abundance of writhing plant-cocks.", parse);
+			Text.NL();
+			
+			Sex.Blowjob(momo, orchid);
+			momo.FuckOral(momo.Mouth(), orchid.FirstCock(), 3);
+			orchid.Fuck(orchid.FirstCock(), 3);
+			
+			Text.Add("<i>”Such a naughty girl,”</i> Orchid croons, almost leisurely adding more and more tentacles to the assault, stuffing the writhing dragon-girl until her holes are so crammed with cocks her belly bulges from the wriggling lengths. <i>”Well, don’t worry, we’ll fix that nasty attitude of yours,”</i> the corrupt dryad promises, giggling with glee. Muffled moaning echoes from Momo’s throat in response, the helpless girl unable to do anything but put up a token struggle.", parse);
+			Text.NL();
+			count++;
+			if(count < total) {
+				Text.Add("<i>”I’m going to enjoy quenching that fire of yours, hope you like the taste of cum!”</i> Orchid gloats as she turns to your next party member.", parse);
+				Text.NL();
+			}
+		}
+		//TODO possible others
+		
+		// Fallback
+		if(count < total) {
+			var plural = total - count > 1;
+			var rest   = plural && count > 1;
+			var p1     = party.Get(count);
+			var parse = {
+				bodyBodies : plural ? "bodies" : "body",
+				hisher     : plural ? "their" : p1.hisher()
+			};
+			
+			if(rest)
+				parse["comp"] = "your other companions";
+			else if(plural)
+				parse["comp"] = "your companions";
+			else
+				parse["comp"] = party.Get(1).name;
+			
+			Text.Add("In record time, Orchid has strung up [comp], penetrating [hisher] helpless [bodyBodies] with her squirming mass of tentacles. With a sinking feeling, you realize that none of you are going to make it out of this; you can not longer resist the creature.", parse);
+			Text.NL();
+		}
+		Text.Add("You yell for the corrupted dryad to stop, which just gains you a slap on the face with one of her cock-tentacles.", parse);
+		Text.NL();
+		Text.Add("<i>”Now, no need to get greedy!”</i> she tuts. <i>”I know! I’ll let mommy handle you!”</i> Saying so, her tentacles whip you around face to face with Mother Tree, repressing any further concerns about [comp] for the time being.", parse);
+	}
+	else {
+		Text.Add("<i>”All alone… but you can be with mommy!”</i> Orchid quips happily, manhandling you in front of Mother Tree.", parse);
+	}
+	
+	Text.Add(" The voluptuous dryad has been reduced to a shadow of her former self, broken in body, mind and spirit by the countless tentacles continuously ravaging her. Given time, this is what you too will turn into, you realize with a sinking heart.", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.Flush();
+	
+	/*
+
+	 */
+}
+
+Scenes.DryadGlade.FirstWin = function() {
+	SetGameState(GameState.Event);
+	
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+}
+

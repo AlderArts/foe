@@ -6,7 +6,8 @@
 
 // Create namespace
 world.loc.Forest = {
-	Outskirts         : new Event("Forest outskirts")
+	Outskirts         : new Event("Forest outskirts"),
+	Glade             : new Event("Dryads' glade")
 }
 
 //
@@ -94,6 +95,13 @@ world.loc.Forest.Outskirts.links.push(new Link(
 	},
 	function() {
 		MoveToLocation(world.loc.Plains.Crossroads, {minute: 15});
+	}
+));
+world.loc.Forest.Outskirts.links.push(new Link(
+	"Glade", function() { return jeanne.flags["Met"] >= 1; }, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.Forest.Glade, {minute: 15});
 	}
 ));
 

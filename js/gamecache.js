@@ -21,6 +21,7 @@ InitCache = function() {
 	rigard   = new Rigard(gameCache.rigard);
 	farm     = new Farm(gameCache.farm);
 	burrows  = new Burrows(gameCache.burrows);
+	glade    = new DryadGlade(gameCache.glade);
 	treecity = new TreeCity(gameCache.treecity);
 	
 	// ENTITIES
@@ -51,6 +52,8 @@ InitCache = function() {
 	
 	jeanne  = new Jeanne(gameCache.jeanne);
 	golem   = new GolemBoss(gameCache.golem);
+	
+	orchid  = new OrchidBoss(gameCache.orchid);
 	
 	ravenmother = new RavenMother(gameCache.raven);
 	
@@ -105,6 +108,7 @@ InitCache = function() {
 	// Stuff that also has update methods
 	world.EntityStorage.push(rigard);
 	world.EntityStorage.push(farm);
+	world.EntityStorage.push(glade);
 	
 	// PARTY
 	party = new Party();
@@ -326,6 +330,7 @@ GameToCache = function() {
 	gameCache.rigard   = rigard.ToStorage();
 	gameCache.farm     = farm.ToStorage();
 	gameCache.burrows  = burrows.ToStorage();
+	gameCache.glade    = glade.ToStorage();
 	gameCache.treecity = treecity.ToStorage();
 	
 	// Party
@@ -357,6 +362,8 @@ GameToCache = function() {
 	
 	gameCache.jeanne  = jeanne.ToStorage();
 	gameCache.golem   = golem.ToStorage();
+	
+	gameCache.orchid  = orchid.ToStorage();
 	
 	gameCache.raven   = ravenmother.ToStorage();
 	
