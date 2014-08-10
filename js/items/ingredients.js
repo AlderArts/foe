@@ -189,7 +189,7 @@ Items.SheepMilk.Use = function(target) {
 	return {consume: true};
 }
 Items.Ramshorn = new Item("ovis2", "Ramshorn");
-Items.Ramshorn.price = 0;
+Items.Ramshorn.price = 1;
 Items.Ramshorn.Short = function() { return "Ramshorn"; }
 Items.Ramshorn.Long = function() { return "A curled horn from a sheep."; }
 
@@ -213,7 +213,7 @@ Items.CowBell.Short = function() { return "A cowbell"; }
 Items.CowBell.Long = function() { return "A small bell on a string, used to call cows."; }
 
 Items.FreshGrass = new Item("bov3", "Grass");
-Items.FreshGrass.price = 0;
+Items.FreshGrass.price = 1;
 Items.FreshGrass.Short = function() { return "Fresh green grass"; }
 Items.FreshGrass.Long = function() { return "A handful of green grass."; }
 
@@ -257,7 +257,7 @@ Items.Bovia.PushEffect(TF.ItemEffects.DecInt, {odds: 0.2, ideal: 10, max: 1});
 
 
 Items.CanisRoot = new Item("dog1", "Canis root");
-Items.CanisRoot.price = 0;
+Items.CanisRoot.price = 1;
 Items.CanisRoot.Short = function() { return "A root"; }
 Items.CanisRoot.Long = function() { return "A strange, knotty root."; }
 
@@ -333,7 +333,7 @@ Items.FoxBerries.Short = function() { return "A handful of fox berries"; }
 Items.FoxBerries.Long = function() { return "A handful of fox berries. Possibly toxic."; }
 
 Items.Foxglove = new Item("fox3", "Foxglove");
-Items.Foxglove.price = 0;
+Items.Foxglove.price = 1;
 Items.Foxglove.Short = function() { return "A foxglove flower"; }
 Items.Foxglove.Long = function() { return "A foxglove flower, commonly found on meadows."; }
 
@@ -452,7 +452,7 @@ Items.Trinket.Short = function() { return "A shiny trinket"; }
 Items.Trinket.Long = function() { return "A shiny trinket, pretty but with little to no value."; }
 
 Items.FruitSeed = new Item("avian3", "Fruit seed");
-Items.FruitSeed.price = 0;
+Items.FruitSeed.price = 1;
 Items.FruitSeed.Short = function() { return "Seed from a fruit"; }
 Items.FruitSeed.Long = function() { return "The seed of a fruit or berry of some kind."; }
 

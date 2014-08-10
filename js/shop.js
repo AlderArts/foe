@@ -23,11 +23,13 @@ Shop.prototype.AddItem = function(item, price, enabled, func, num) {
 	});
 }
 
-Shop.prototype.Buy = function(back) {
+Shop.prototype.Buy = function(back, preventClear) {
 	var shop = this;
 	back = back || PrintDefaultOptions;
 	
-	Text.Clear();
+	if(!preventClear)
+		Text.Clear();
+
 	var options = new Array();
 	for(var i = 0; i < this.inventory.length; i++) {
 		var it       = this.inventory[i].it;

@@ -198,6 +198,12 @@ Time.prototype.LightStr = function(light, dark) {
 	return this.hour >= 6  && this.hour < 21 ? light : dark;
 }
 
+Time.prototype.ToDays = function() {
+	var day = this.day + this.hour/24 + this.minute/24/60;
+	day += this.season * 30;
+	day += this.year * Season.LAST * 30;
+	return day;
+}
 Time.prototype.ToHours = function() {
 	var hour = this.hour + this.minute/60;
 	hour += this.day * 24;

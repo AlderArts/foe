@@ -9,6 +9,8 @@ function Cale(storage) {
 	// Character stats
 	this.name = "Wolfie";
 	
+	this.shop = new Shop();
+	
 	this.body.DefMale();
 	this.body.SetRace(Race.wolf);
 	this.SetSkinColor(Color.gray);
@@ -32,6 +34,47 @@ function Cale(storage) {
 	this.flags["rotPast"]  = 0;
 	this.flags["maxPast"]  = 0;
 	this.flags["rosPast"]  = 0;
+	
+	// Shop
+	this.flags["shop"]     = 0;
+	this.shopItems = [];
+	this.shopItems.push(Items.HorseHair);
+	this.shopItems.push(Items.HorseShoe);
+	this.shopItems.push(Items.HorseCum);
+	this.shopItems.push(Items.RabbitFoot);
+	this.shopItems.push(Items.CarrotJuice);
+	this.shopItems.push(Items.Lettuce);
+	this.shopItems.push(Items.Whiskers);
+	this.shopItems.push(Items.HairBall);
+	this.shopItems.push(Items.CatClaw);
+	this.shopItems.push(Items.SnakeOil);
+	this.shopItems.push(Items.LizardScale);
+	this.shopItems.push(Items.LizardEgg);
+	this.shopItems.push(Items.GoatMilk);
+	this.shopItems.push(Items.SheepMilk);
+	this.shopItems.push(Items.Ramshorn);
+	this.shopItems.push(Items.CowMilk);
+	this.shopItems.push(Items.CowBell);
+	this.shopItems.push(Items.FreshGrass);
+	this.shopItems.push(Items.CanisRoot);
+	this.shopItems.push(Items.DogBone);
+	this.shopItems.push(Items.DogBiscuit);
+	this.shopItems.push(Items.WolfFang);
+	this.shopItems.push(Items.WolfPelt);
+	this.shopItems.push(Items.FoxBerries);
+	this.shopItems.push(Items.Foxglove);
+	this.shopItems.push(Items.BlackGem);
+	this.shopItems.push(Items.Hummus);
+	this.shopItems.push(Items.SpringWater);
+	this.shopItems.push(Items.Feather);
+	this.shopItems.push(Items.Trinket);
+	this.shopItems.push(Items.FruitSeed);
+	this.shopItems.push(Items.MAntenna);
+	this.shopItems.push(Items.MWing);
+	this.shopItems.push(Items.Stinger);
+	this.shopItems.push(Items.SVenom);
+	this.shopItems.push(Items.SClaw);
+	//TODO: More item ingredientss
 	
 	this.SetLevelBonus();
 	this.RestFull();
@@ -516,23 +559,15 @@ Scenes.Cale.Prompt = function() {
 		}, enabled : true,
 		tooltip : "Ask the wolf if he's up for a fuck, right here, right now."
 	});
-	//TODO: SHOP
 	options.push({ nameStr : "Shop",
 		func : function() {
 			Text.Clear();
 			Text.Add("<i>”You're interested in buying what I got, huh? Well, sure, I can let you take a look,”</i> the wolf-morph notes. From his various pockets and pouches, he brings out his most recent gathering results, displaying them for you. <i>”What do you think of these?”</i>", parse);
+			Text.NL();
 			Text.Flush();
 			
-			//TODO: Display inventory (randomize each day?)
-			
-			//#if purchased item
-			Text.Add("<i>”Knew I'd have something you wanted; thanks for buying,”</i> he quips, giving you a toothy grin of appreciation.", parse);
-			//#else
-			Text.Add("<i>”Nothing there today? Alright, come back tomorrow, I should have some new things then,”</i> he assures you.", parse);
-			Text.Flush();
-			
-			Scenes.Cale.Prompt();
-		}, enabled : false, //TODO
+			Scenes.Cale.Shop(false);
+		}, enabled : true,
 		tooltip : "See what alchemical ingredients Cale can offer you today."
 	});
 	if(cale.flags["Rogue"] > 0) {
@@ -542,6 +577,52 @@ Scenes.Cale.Prompt = function() {
 		});
 	}
 	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
+}
+
+Scenes.Cale.Shop = function(bought) {
+	var parse = {
+		
+	};
+	
+	var backPrompt = function() {
+		Text.Clear();
+		if(bought)
+			Text.Add("<i>”Knew I'd have something you wanted; thanks for buying,”</i> he quips, giving you a toothy grin of appreciation.", parse);
+		else
+			Text.Add("<i>”Nothing there today? Alright, come back tomorrow, I should have some new things then,”</i> he assures you.", parse);
+		Text.Flush();
+		
+		Scenes.Cale.Prompt();
+	}
+	
+	var buyFunc = function() {
+		bought = true;
+		return false;
+	}
+	
+	var timestamp = Math.floor(world.time.ToDays());
+	if(cale.flags["shop"] < timestamp || cale.shop.inventory.length == 0) {
+		// Randomize inventory
+		cale.shop.inventory = [];
+		
+		var num = Math.round(4 + 8 * Math.random());
+		for(var i = 0; i < num; i++) {
+			var it = cale.shopItems[Math.floor(Math.random() * cale.shopItems.length)];
+			var found = false;
+			for(var j = 0; j < cale.shop.inventory.length; j++) {
+				if(it == cale.shop.inventory[j].it) {
+					found = true;
+					break;
+				}
+			}
+			if(found) continue;
+			cale.shop.AddItem(it, 5, null, buyFunc);
+		}
+		
+		cale.flags["shop"] = timestamp;
+	}
+	
+	cale.shop.Buy(backPrompt, true);
 }
 
 Scenes.Cale.TalkPrompt = function() {
@@ -866,7 +947,6 @@ Scenes.Cale.TalkPast = function() {
 	Scenes.Cale.TalkPrompt();
 }
 
-//TODO
 Scenes.Cale.TentSex = function() {
 	var parse = {
 		playername : player.name
@@ -971,7 +1051,7 @@ Scenes.Cale.TentSex = function() {
 		Scenes.Cale.Prompt();
 	});
 }
-//TODO
+
 Scenes.Cale.OutsideSex = function() {
 	var parse = {
 		playername : player.name,
@@ -1001,7 +1081,6 @@ Scenes.Cale.OutsideSex = function() {
 	
 	var cocksInAss = player.CocksThatFit(cale.Butt());
 	
-	//[Sex] TODO: More options
 	var options = new Array();
 	options.push({ nameStr : "Give BJ",
 		func : function() {
