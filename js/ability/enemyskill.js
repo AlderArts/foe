@@ -56,7 +56,7 @@ Abilities.EnemySkill.TSpray.cost = { hp: null, sp: 40, lp: null};
 Abilities.EnemySkill.TSpray.damageType.pLust = 0.1;
 Abilities.EnemySkill.TSpray.targetMode = TargetMode.Enemies;
 Abilities.EnemySkill.TSpray.OnCast = function(encounter, caster, target) {
-	var parse = { Caster : caster.NameDesc(), notEs : caster.plural() ? "" : "es", hisher : caster.hisher(), s : target.length > 1 };
+	var parse = { Caster : caster.NameDesc(), notEs : caster.plural() ? "" : "es", hisher : caster.hisher(), s : target.length > 1 ? "s" : "" };
 	Text.AddOutput("[Caster] brandish[notEs] [hisher] tentacles, pointing them toward [hisher] foe[s]. In a great fountain, sticky strands of cum splatter from the cock-like tentacles!", parse);
 	Text.Newline();
 }
@@ -123,7 +123,7 @@ Abilities.EnemySkill.TRavage.OnHit = function(encounter, caster, target, dmg) {
 	target.AddLustFraction(0.3);
 }
 Abilities.EnemySkill.TRavage.OnMiss = function(encounter, caster, target) {
-	var parse = { Target : target.NameDesc(), thimher : target.himher() };
+	var parse = { target : target.nameDesc(), thimher : target.himher() };
 	Text.AddOutput("The tentacles narrowly miss [target], merely grazing [thimher].", parse);
 	Text.Newline();
 }
@@ -197,8 +197,8 @@ Abilities.EnemySkill.TViolate.OnHit = function(encounter, caster, target, dmg) {
 	Text.Add("<i>”That was merely a taste of what is to come,”</i> the corrupted dryad purrs as she discards [target] on the ground.", parse);
 	Text.NL();
 	
-	var dmg = target.curLust;
-	target.AddHpAbs(-dmg);
+	var dmg = Math.floor(target.curLust);
+	target.AddHPAbs(-dmg);
 	
 	Text.Add("[Target] take[tnotS] " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
 	Text.NL();

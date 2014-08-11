@@ -69,6 +69,7 @@ world.loc.Forest.Glade.onEntry = function() {
 		Text.Add("You’ve never been quite as deep into the forest as this before, and you can’t help but feel uneasy as the trees around you grow larger and larger. By now, you are beneath the canopy of the Great Tree itself, an oppressive shadow looming thousands of feet above you. In comparison, the trees around you seem small, but you have no doubt that they are very old. The deeper you delve, the harder it is to pass through the dense undergrowth, and thick tree trunks seem to be almost cutting off your path. If not for the court magician’s directions, you would have been hopelessly lost long ago.", parse);
 		Text.NL();
 		Text.Add("Just as you are beginning to wonder if Jeanne has sent you on a wild goose chase, you notice the trees thinning ahead.", parse);
+		glade.flags["Visit"] = 1;
 	}
 	else {
 		Text.Add("You begin to recognize the path to the dryad glade that Jeanne told you about. Once again, you approach the clearing deep within the forest.", parse);
@@ -105,9 +106,9 @@ Scenes.DryadGlade.First = function() {
 		playername : player.name
 	};
 	
-	if(player.Num() <= 1)
+	if(party.Num() <= 1)
 		parse["comp"] = "";
-	else if(player.Num() == 2)
+	else if(party.Num() == 2)
 		parse["comp"] = " and " + party.Get(1).name;
 	else
 		parse["comp"] = " and your companions";
@@ -181,9 +182,9 @@ Scenes.DryadGlade.FirstLoss = function() {
 		armorDesc : function() { return player.ArmorDesc(); }
 	};
 	
-	if(player.Num() <= 1)
+	if(party.Num() <= 1)
 		parse["comp"] = "";
-	else if(player.Num() == 2)
+	else if(party.Num() == 2)
 		parse["comp"] = " and " + party.Get(1).name;
 	else
 		parse["comp"] = " and your companions";
@@ -205,7 +206,7 @@ Scenes.DryadGlade.FirstLoss = function() {
 		var count = 1;
 		var total = party.Num();
 		
-		if(player.Num() == 2)
+		if(party.Num() == 2)
 			parse["comp"] = party.Get(1).name;
 		else
 			parse["comp"] = "your companions";
@@ -264,7 +265,7 @@ Scenes.DryadGlade.FirstLoss = function() {
 				Text.NL();
 			}
 		}
-		else if(party.InParty(terry)) {
+		if(party.InParty(terry)) {
 			var parse = {
 				playername : player.name,
 				heshe  : terry.heshe(),
@@ -308,7 +309,8 @@ Scenes.DryadGlade.FirstLoss = function() {
 				Text.Add("<i>”Such a soft and petite body you have, little pet!”</i> the dryad purrs as she feels up Terry’s body with her tentacles. <i>”Mmm… makes me want to ruin it...”</i>", parse);
 			}
 			Text.NL();
-			Text.Add("True to her word, Orchid presses her tentacles against Terry’s[ pussy and] butt, roughly impaling the lithe [foxvixen]. ", parse);
+			parse["vag"] = terry.FirstVag() ? " pussy and" : "";
+			Text.Add("True to her word, Orchid presses her tentacles against Terry’s[vag] butt, roughly impaling the lithe [foxvixen]. ", parse);
 			if(terry.HorseCock())
 				Text.Add("Within seconds after the dryad starts railing [hisher] prostate, the rogue’s fat horsedong is erect again, still drooling with cum. ", parse);
 			parse["again"] = terry.HorseCock() ? " again" : "";
@@ -338,7 +340,7 @@ Scenes.DryadGlade.FirstLoss = function() {
 				Text.NL();
 			}
 		}
-		else if(party.InParty(roa)) {
+		if(party.InParty(roa)) {
 			Text.Add("<i>”This one looks like he’s all stretched out already!”</i> the dryad exclaims, splaying out the struggling Roa and spreading his pliant cheeks. <i>”I could fit dozens of juicy tentacle cocks into this slut!”</i> As if to prove her point, Orchid pushes one veiny tentacle cock after another into the rabbit’s accommodating behind, stretching him more and more.", parse);
 			Text.NL();
 			
@@ -363,7 +365,7 @@ Scenes.DryadGlade.FirstLoss = function() {
 				Text.NL();
 			}
 		}
-		else if(party.InParty(momo)) {
+		if(party.InParty(momo)) {
 			Text.Add("Momo’s eyes widen in horror as the vines close in. <i>”N-no! Stay away!”</i> she pleads, breathing out a puff of flames in a desperate effort to ward off the writhing tentacles advancing on her.", parse);
 			Text.NL();
 			Text.Add("But there are far too many; even as some of them recoil instinctively, others are creeping around on her from behind, launching at her whilst she’s distracted. The dragonette’s legs and tail are wrapped in perverse vines, their phallic tips vanishing into her clothing and roughly thrusting into her unexpecting holes.", parse);
@@ -414,6 +416,12 @@ Scenes.DryadGlade.FirstLoss = function() {
 			Text.Add("In record time, Orchid has strung up [comp], penetrating [hisher] helpless [bodyBodies] with her squirming mass of tentacles. With a sinking feeling, you realize that none of you are going to make it out of this; you can not longer resist the creature.", parse);
 			Text.NL();
 		}
+		
+		if(party.Num() == 2)
+			parse["comp"] = party.Get(1).name;
+		else
+			parse["comp"] = "your companions";
+				
 		Text.Add("You yell for the corrupted dryad to stop, which just gains you a slap on the face with one of her cock-tentacles.", parse);
 		Text.NL();
 		Text.Add("<i>”Now, no need to get greedy!”</i> she tuts. <i>”I know! I’ll let mommy handle you!”</i> Saying so, her tentacles whip you around face to face with Mother Tree, repressing any further concerns about [comp] for the time being.", parse);
@@ -485,9 +493,9 @@ Scenes.DryadGlade.FirstLoss = function() {
 	Gui.NextPrompt(function() {
 		world.TimeStep({ season : 2 });
 		
-		if(player.Num() <= 1)
+		if(party.Num() <= 1)
 			parse["comp"] = "";
-		else if(player.Num() == 2)
+		else if(party.Num() == 2)
 			parse["comp"] = " and " + party.Get(1).name;
 		else
 			parse["comp"] = " and your companions";

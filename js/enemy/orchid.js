@@ -175,6 +175,7 @@ OrchidBoss.prototype.Act = function(encounter, activeChar) {
 			if(c.Incapacitated()) continue;
 			c.AddLustFraction(0.2);
 		}
+		Text.Flush();
 	}
 	else
 		Abilities.EnemySkill.TWhip.Use(encounter, this, t);
