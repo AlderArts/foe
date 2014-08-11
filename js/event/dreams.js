@@ -249,7 +249,7 @@ Scenes.Dreams.Heartstone = function(ravenTrigger) {
 	
 	Text.Add("You are looking at yourself from outside your own sleeping body, curiously studying yourself.[raven] Do you really look that way to others? You are quickly distracted from your surface appearance, however, as you delve deeper, below the [skinDesc]. Seeing every tiny cell of your body in exquisite detail, your unnatural vision flits back and forth, focusing here and there on some odd part of your anatomy.", parse);
 	Text.NL();
-	Text.Add("As if being dragged there, you gravitate towards the core of you being, speeding through your veins lightning quick and arriving at where your heart should be.There, inside your chest, is the living purple gemstone, pulsing rhythmically, giving your body life.", parse);
+	Text.Add("As if being dragged there, you gravitate towards the core of you being, speeding through your veins lightning quick and arriving at where your heart should be. There, inside your chest, is the living purple gemstone, pulsing rhythmically, giving your body life.", parse);
 	Text.NL();
 	Text.Add("You awaken, a bit unsettled by the eerie vision.", parse);
 }
