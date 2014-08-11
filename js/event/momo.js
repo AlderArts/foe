@@ -6,12 +6,12 @@
 function Momo(storage) {
 	Entity.call(this);
 	
-	
 	// Character stats
 	this.name = "Momo";
 	
-	this.avatar.combat = Images.kyna; //TODO
+	this.avatar.combat = Images.momo;
 	
+	// TODO Stats
 	this.maxHp.base        = 30;
 	this.maxSp.base        = 40;
 	this.maxLust.base      = 20;
