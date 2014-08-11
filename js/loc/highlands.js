@@ -72,7 +72,7 @@ world.loc.Highlands.Hills.enc.AddEnc(function() {
 	enc.VictoryCondition = ...
 	*/
 	return enc;
-}, 1.0);
+}, 0.5);
 
 world.loc.Highlands.Hills.enc.AddEnc(function() {
  	var enemy = new Party();
@@ -108,7 +108,7 @@ world.loc.Highlands.Hills.enc.AddEnc(function() {
 	enc.VictoryCondition = ...
 	*/
 	return enc;
-}, 1.0);
+}, 0.5);
 
 world.loc.Highlands.Hills.endDescription = function() {
 	Text.AddOutput("What do you do?<br/>");

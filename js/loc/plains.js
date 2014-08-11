@@ -165,7 +165,7 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	enc.VictoryCondition = ...
 	*/
 	return enc;
-}, 1.0);
+}, 0.25);
 
 world.loc.Plains.Crossroads.enc.AddEnc(function() {
  	var enemy = new Party();
@@ -201,7 +201,7 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	enc.VictoryCondition = ...
 	*/
 	return enc;
-}, 1.0);
+}, 0.25);
 
 world.loc.Plains.Crossroads.enc.AddEnc(function() {
  	var enemy = new Party();
@@ -237,7 +237,7 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	enc.VictoryCondition = ...
 	*/
 	return enc;
-}, 1.0);
+}, 0.25);
 
 world.loc.Plains.Crossroads.enc.AddEnc(function() {
  	var enemy = new Party();
@@ -273,7 +273,7 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	enc.VictoryCondition = ...
 	*/
 	return enc;
-}, 1.0);
+}, 0.25);
 
 world.loc.Plains.Crossroads.links.push(new Link(
 	"Nomads", true, true,
