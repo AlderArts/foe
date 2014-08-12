@@ -1014,7 +1014,7 @@ Entity.prototype.LustCombatTurnLossChance = function() {
 }
 
 Entity.prototype.Initiative = function() {
-	var ini = Math.sqrt(2 * this.dexterity.Get() + this.intelligence.Get());
+	var ini = Math.sqrt(2 * this.Dex() + this.Int());
 	var haste = this.combatStatus.stats[StatusEffect.Haste];
 	if(haste) ini *= haste.factor;
 	var slow  = this.combatStatus.stats[StatusEffect.Slow];
@@ -1025,7 +1025,7 @@ Entity.prototype.Initiative = function() {
 // Combat functions (calculated)
 Entity.prototype.PAttack = function() {
 	// Stat based
-	var atkStat = (this.strength.Get() * 3 + this.stamina.Get() + this.dexterity.Get()) / 2;
+	var atkStat = (this.Str() * 3 + this.Sta() + this.Dex()) / 2;
 	// Weapon strength based
 	var atkWep = this.atkMod;
 	
@@ -1038,7 +1038,7 @@ Entity.prototype.PAttack = function() {
 // TODO: Add perk/elemental/special effects
 Entity.prototype.PDefense = function() {
 	// Stat based
-	var defStat = this.stamina.Get() * 3 + this.spirit.Get();
+	var defStat = this.Sta() * 3 + this.Spi();
 	if(defStat < 0) defStat = 0;
 	// Defense based on armour
 	var defArmour = this.defMod;
@@ -1053,7 +1053,7 @@ Entity.prototype.PDefense = function() {
 
 // TODO temp
 Entity.prototype.PHit = function() {
-	var hitStat = 3 * this.dexterity.Get() + this.intelligence.Get() + this.charisma.Get();
+	var hitStat = 3 * this.Dex() + this.Int() + this.Cha();
 	
 	var blind = this.combatStatus.stats[StatusEffect.Blind];
 	if(blind) {
@@ -1065,14 +1065,14 @@ Entity.prototype.PHit = function() {
 
 // TODO temp
 Entity.prototype.PEvade = function(attack) {
-	var evadeStat = 3 * this.dexterity.Get() + this.intelligence.Get() + this.charisma.Get();
+	var evadeStat = 3 * this.Dex() + this.Int() + this.Cha();
 	
 	return evadeStat;
 }
 
 // TODO temp
 Entity.prototype.MAttack = function() {
-	var magStat = (3 * this.intelligence.Get() + this.spirit.Get() + this.charisma.Get()) / 2;
+	var magStat = (3 * this.Int() + this.Spi() + this.Cha()) / 2;
 	
 	var magRand = 0.2 * (Math.random() - 0.5) + 1;
 	
@@ -1081,7 +1081,7 @@ Entity.prototype.MAttack = function() {
 
 // TODO temp
 Entity.prototype.MDefense = function() {
-	var magDef = this.stamina.Get() + 3 * this.spirit.Get();
+	var magDef = this.Sta() + 3 * this.Spi();
 	if(magDef < 0) magDef = 0;
 	
 	var magRand = 0.2 * (Math.random() - 0.5) + 1;
@@ -1091,7 +1091,7 @@ Entity.prototype.MDefense = function() {
 
 Entity.prototype.LAttack = function() {
 	// Stat based
-	var sedStat = (this.dexterity.Get() + 2 * this.libido.Get() + 2 * this.charisma.Get()) / 2;
+	var sedStat = (this.Dex() + 2 * this.Lib() + 2 * this.Cha()) / 2;
 	/*
 	var sedLust = this.LustLevel();
 	*/
@@ -1106,7 +1106,7 @@ Entity.prototype.LAttack = function() {
 
 Entity.prototype.LDefense = function() {
 	// Stat based
-	var comStat = 2 * this.stamina.Get() + 2 * this.spirit.Get();
+	var comStat = 2 * this.Sta() + this.Spi() + this.Cha();
 	if(comStat < 0) comStat = 0;
 
 	// Lust and libido based
@@ -1842,49 +1842,56 @@ Entity.prototype.LevelUpPrompt = function(backFunc) {
 			that.strength.growth += growthPerPoint;
 			that.pendingStatPoints--;
 			that.LevelUpPrompt(backFunc);
-		}, enabled : true
+		}, enabled : true,
+		tooltip : "A person with high <b>strength</b> can deal a massive amount of physical damage."
 	});
 	options.push({ nameStr: "Stamina",
 		func : function() {
 			that.stamina.growth += growthPerPoint;
 			that.pendingStatPoints--;
 			that.LevelUpPrompt(backFunc);
-		}, enabled : true
+		}, enabled : true,
+		tooltip : "A person with high <b>stamina</b> can take a large amount of punishment. It's most effective against physical attacks, but affects other types of defence as well."
 	});
 	options.push({ nameStr: "Dexterity",
 		func : function() {
 			that.dexterity.growth += growthPerPoint;
 			that.pendingStatPoints--;
 			that.LevelUpPrompt(backFunc);
-		}, enabled : true
+		}, enabled : true,
+		tooltip : "A person with high <b>dexterity</b> can deftly evade enemy attacks, and is better at landing their blows. The swifter a person is, the quicker they are to act."
 	});
 	options.push({ nameStr: "Intelligence",
 		func : function() {
 			that.intelligence.growth += growthPerPoint;
 			that.pendingStatPoints--;
 			that.LevelUpPrompt(backFunc);
-		}, enabled : true
+		}, enabled : true,
+		tooltip : "Someone with high <b>intelligence</b> is very sharp, and can deal a massive amount of damage with spells. They are also able to act more quickly, as they don't have to spend as much time thinking up their battle plan."
 	});
 	options.push({ nameStr: "Spirit",
 		func : function() {
 			that.spirit.growth += growthPerPoint;
 			that.pendingStatPoints--;
 			that.LevelUpPrompt(backFunc);
-		}, enabled : true
+		}, enabled : true,
+		tooltip : "A person with high <b>spirit</b> is very stoic - a pillar of willpower. They can take large amounts of magical damage before they fall."
 	});
 	options.push({ nameStr: "Libido",
 		func : function() {
 			that.libido.growth += growthPerPoint;
 			that.pendingStatPoints--;
 			that.LevelUpPrompt(backFunc);
-		}, enabled : true
+		}, enabled : true,
+		tooltip : "Someone with high <b>libido</b> is a highly experienced in the sexual arts, and can deal high damage with lust attacks. However, it also makes their lust rise faster."
 	});
 	options.push({ nameStr: "Charisma",
 		func : function() {
 			that.charisma.growth += growthPerPoint;
 			that.pendingStatPoints--;
 			that.LevelUpPrompt(backFunc);
-		}, enabled : true
+		}, enabled : true,
+		tooltip : "Someone with high <b>charisma</b> has a way with other people, affecting many parts of battle. The most apparent effect is that their lust attacks are more appealing, but it's also useful in other situations."
 	});
 	Gui.SetButtonsFromList(options, true, backFunc);
 }
