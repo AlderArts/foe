@@ -1692,7 +1692,7 @@ world.loc.Rigard.Inn.room.SleepFunc = function() {
 		Text.Add(" and let the softness envelop you. Feeling completely safe and comfortable in the wonderful bed, you quickly drift off to sleep.", parse);
 	}
 	else {
-		parse["light"] = world.time.LigthStr("close the shutters", "blow out the candles");
+		parse["light"] = world.time.LightStr("close the shutters", "blow out the candles");
 		Text.Add("You clumsily strip off your clothes before collapsing onto the bed. Somehow, you manage to remember to down the glass of water on the nightstand before you pass out into a deep sleep, without even bothering to [light].", parse);
 	}
 	Text.Flush();
