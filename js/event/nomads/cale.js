@@ -120,6 +120,7 @@ Cale.prototype.FromStorage = function(storage) {
 	
 	// Load flags
 	this.LoadFlags(storage);
+	this.LoadSexFlags(storage);
 	
 	if(this.flags["Met2"] != Cale.Met2.NotMet)
 		this.name = "Cale";
@@ -133,6 +134,7 @@ Cale.prototype.ToStorage = function() {
 	this.SavePersonalityStats(storage);
 	
 	this.SaveFlags(storage);
+	this.SaveSexStats(storage);
 	
 	return storage;
 }

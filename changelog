@@ -13,6 +13,7 @@ Version 0.3l
 * Cale's shop is implemented. Note that a lot of the stuff he sells is completely useless at this point in time.
 * Reduced spawn rate of felines to be roughly equal to the other mobs in the plains.
 * Added stat descriptions to levelup screen. Still kinda vague, but should give people a hunch of what they're getting.
+* Fixed a bug in Cale where he would repeat his virgin scenes.
 
 --------------------------------------------
              PREVIOUS VERSIONS
