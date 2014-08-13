@@ -568,7 +568,7 @@ Scenes.Cale.Prompt = function() {
 			Text.NL();
 			Text.Flush();
 			
-			Scenes.Cale.Shop(false);
+			Scenes.Cale.Shop();
 		}, enabled : true,
 		tooltip : "See what alchemical ingredients Cale can offer you today."
 	});
@@ -586,11 +586,11 @@ Scenes.Cale.Shop = function() {
 		
 	};
 	
-	var bought = false;
+	Scenes.Cale.Shopbought = false;
 	
 	var backPrompt = function() {
 		Text.Clear();
-		if(bought)
+		if(Scenes.Cale.Shopbought)
 			Text.Add("<i>”Knew I'd have something you wanted, thanks for buying!”</i> he quips, giving you a toothy grin of appreciation.", parse);
 		else
 			Text.Add("<i>”Nothing of interest right now? Alright, come back tomorrow, I should have some new things then,”</i> he assures you.", parse);
@@ -600,7 +600,7 @@ Scenes.Cale.Shop = function() {
 	}
 	
 	var buyFunc = function() {
-		bought = true;
+		Scenes.Cale.Shopbought = true;
 		return false;
 	}
 	
