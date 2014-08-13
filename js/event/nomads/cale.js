@@ -593,7 +593,7 @@ Scenes.Cale.Shop = function() {
 		if(bought)
 			Text.Add("<i>”Knew I'd have something you wanted, thanks for buying!”</i> he quips, giving you a toothy grin of appreciation.", parse);
 		else
-			Text.Add("<i>”Nothing there today? Alright, come back tomorrow, I should have some new things then,”</i> he assures you.", parse);
+			Text.Add("<i>”Nothing of interest right now? Alright, come back tomorrow, I should have some new things then,”</i> he assures you.", parse);
 		Text.Flush();
 		
 		Scenes.Cale.Prompt();
