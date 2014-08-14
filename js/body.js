@@ -307,7 +307,8 @@ function Body(ent) {
 	this.breasts = new Array();
 	this.breasts.push(new Breasts());
 	
-	// TODO: Defaults
+	this.lactating      = false;
+	this.lactationRate  = new Stat(0);
 	this.milkProduction = new Stat(0);
 	this.milkCap        = new Stat(0);
 	this.milk           = new Stat(0);
@@ -475,12 +476,13 @@ Body.prototype.ToStorage = function() {
 			nipThk  : a.nippleThickness.base,
 			nipLen  : a.nippleLength.base,
 			aerS    : a.aerolaSize.base,
-			nipType : a.nippleType,
-			lactR   : a.lactationRate.base
+			nipType : a.nippleType
 		};
 		storage.breasts.push(b);
 	}
 	
+	storage.lact  = this.lactation ? 1 : 0;
+	storage.lactR = this.lactationRate.base;
 	storage.milk  = this.milk.base;
 	storage.milkP = this.milkProduction.base;
 	storage.milkC = this.milkCap.base;
@@ -627,11 +629,12 @@ Body.prototype.FromStorage = function(storage) {
 		b.nippleLength.base    = parseFloat(a.nipLen) || b.nippleLength.base;
 		b.aerolaSize.base      = parseFloat(a.aerS)   || b.aerolaSize.base;
 		b.nippleType           = parseInt(a.nipType)  || b.nippleType;
-		b.lactationRate.base   = parseFloat(a.lactR)  || b.lactationRate.base;
 		
 		this.breasts.push(b);
 	}
 	
+	this.lactation           = parseInt(storage.lact) == 1;
+	this.lactationRate.base  = parseFloat(storage.lactR) || this.lactationRate.base;
 	this.milk.base           = parseFloat(storage.milk)  || this.milk.base;
 	this.milkProduction.base = parseFloat(storage.milkP) || this.milkProduction.base;
 	this.milkCap.base        = parseFloat(storage.milkC) || this.milkCap.base;
@@ -1401,8 +1404,6 @@ function Breasts(race, color) {
 	this.nippleThickness = new Stat(0.5);
 	this.nippleLength    = new Stat(0.5);
 	this.aerolaSize      = new Stat(2);
-	// Milk
-	this.lactationRate   = new Stat();
 }
 Breasts.prototype = new BodyPart();
 Breasts.prototype.constructor = Breasts;
@@ -1583,12 +1584,19 @@ Breasts.prototype.Long = function() {
 	return desc.a + " " + desc.adj + " " + this.nounPlural();
 }
 
-// TODO: Lactation
 Body.prototype.Lactation = function() {
 	if(this.breasts.length == 0)
 		return false;
 	else
-		return this.breasts[0].lactationRate.Get() > 0;
+		return this.lactation;
+}
+//TODO Balance
+Body.prototype.MilkCap = function() {
+	var cap = this.milkCap.Get();
+	for(var i = 0; i < this.breasts.length; i++) {
+		cap += this.breasts[i].Size();
+	}
+	return cap;
 }
 
 // For pregnancies

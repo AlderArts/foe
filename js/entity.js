@@ -1194,9 +1194,31 @@ Entity.prototype.AccumulateCumOverTime = function(hours) {
 }
 //TODO
 Entity.prototype.AccumulateMilkOverTime = function(hours) {
-	var inc = this.body.milkProduction.Get() * hours;
+	if(this.Lactation()) {
+		var dec = this.body.lactationRate.Get() * hours;
+		if(dec > 0)
+			this.body.milk.DecreaseStat(0, dec);
+		
+		if(this.Milk() <= 0)
+			this.MilkDrained();
+	}
 	
-	this.body.milk.IncreaseStat(this.body.milkCap.Get(), inc);
+	var inc = this.body.milkProduction.Get() * hours;
+	if(inc > 0)
+		this.body.milk.IncreaseStat(this.MilkCap(), inc);
+	if(this.Milk() >= this.MilkCap()) {
+		this.MilkFull();
+	}
+}
+
+Entity.prototype.MilkDrained = function() {
+	this.body.lactation = false;
+	// TODO Output
+}
+Entity.prototype.MilkFull = function() {
+	if(this.Lactation() == false)
+		this.body.lactation = true;
+	// TODO Output
 }
 
 Entity.prototype.PregnancyOverTime = function(hours) {
@@ -1453,6 +1475,12 @@ Entity.prototype.AllPenetrators = function(orifice) {
 
 Entity.prototype.Lactation = function() {
 	return this.body.Lactation();
+}
+Entity.prototype.Milk = function() {
+	return this.body.milk.Get();
+}
+Entity.prototype.MilkCap = function() {
+	return this.body.MilkCap();
 }
 
 Entity.prototype.Fuck = function(cock, expMult) {
@@ -2273,7 +2301,7 @@ Entity.prototype.PrintDescription = function() {
 	var balls = this.Balls();
 	Text.Add("Cum: " + balls.cum.Get().toFixed(2) + " / " + balls.cumCap.Get().toFixed(2));
 	Text.NL();
-	Text.Add("Milk: " + this.body.milk.Get().toFixed(2) + " / " + this.body.milkCap.Get().toFixed(2));
+	Text.Add("Milk: " + this.Milk().toFixed(2) + " / " + this.MilkCap().toFixed(2));
 	Text.NL();
 	
 	// TODO: Ass
