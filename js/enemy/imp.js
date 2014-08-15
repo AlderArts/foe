@@ -540,8 +540,6 @@ Intro.ImpsLossFucked = function() {
 	Text.Newline();
 	Text.AddOutput("The imp is done sooner than you would have liked, basting your insides with sticky seminal fluids, but he is quickly replaced by another, picking up where the first left off. One after the other, the imps have a go at your poor [anusDesc], reaming you into a whimpering mess.", parse);
 	Text.Newline();
-	Text.AddOutput("The imp is done sooner than you would have liked, basting your insides with sticky seminal fluids, but he is quickly replaced by another, picking up where the first left off. One after the other, the imps have a go at your poor [anusDesc], reaming you into a whimpering mess.", parse);
-	Text.Newline();
 	Text.AddOutput("<i>\"Hey, look what the boss gave me!\"</i> you dimly hear one of the imps exclaim. There is a bit of a shuffle behind you and your ass is momentarily free of imp cock, only to be stuffed with what feels like a battering ram. Damn demon! It seems like he at least doubled the length and girth of the imp's cock!", parse);
 	Text.Newline();
 	Text.AddOutput("Thankfully, the imp seems to last a bit shorter than the others, but he is quickly replaced by another, and then another, and then another. Somehow, each cock that pierces you feels like it is a bit bigger than the last, until you could swear that they are shoving beasts the size and girth of your arm up there.", parse);
