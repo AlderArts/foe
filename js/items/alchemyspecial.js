@@ -97,7 +97,7 @@ Items.Tigris.PushEffect(function(target) {
 		var cock = cocks[i];
 		if(cock.sheath == 0 && Math.random() < 0.4) {
 			parse["cock"] = cock.Short();
-			Text.Add("[Poss] [cock] is encased in a soft, furry sheath!", parse);
+			Text.Add("[Possessive] [cock] is encased in a soft, furry sheath!", parse);
 			Text.NL();
 			cock.sheath = 1;
 		}
