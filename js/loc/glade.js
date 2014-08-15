@@ -139,7 +139,7 @@ Scenes.DryadGlade.First = function() {
 	Text.NL();
 	Text.Add("<i>”Yes, the only thing that can return life to the stone you carry.”</i> For a moment, her eyes glow with a soft golden light and a wave of warmth sweeps over you. <i>”For centuries upon centuries, I have nurtured my tree, my glade and my daughters, but in doing so I have forever bound myself to this place. I am sorry that I cannot give you what you seek.”</i>", parse);
 	Text.NL();
-	Text.Add("You are about to respond when the forest suddenly stirs around you, and you hear the cries of surprised and terrified nymphs. They break from the treeline; dozens of strange and alluring creatures, dryads, nymphs and satyrs fleeing for their lives. You see the deertaur from before bounding and leaping toward you, glancing over her shoulder in terror Before she reaches you, a mass of long, snaking tentacles whip out from the forest, wrapping themselves around the screaming doe and pulling her back into the shadow of the forest.", parse);
+	Text.Add("You are about to respond when the forest suddenly stirs around you, and you hear the cries of surprised and terrified nymphs. They break from the treeline; dozens of strange and alluring creatures, dryads, nymphs and satyrs fleeing for their lives. You see the deertaur from before bounding and leaping toward you, glancing over her shoulder in terror. Before she reaches you, a mass of long, snaking tentacles whip out from the forest, wrapping themselves around the screaming doe and pulling her back into the shadow of the forest.", parse);
 	Text.NL();
 	Text.Add("<i>”W-what is this?”</i> the Mother Tree cries out in distress, anxiously biting her lip. You hear the centaur’s screams turn to muffled moans as the betentacled assaulter presumably violates her. <i>”Who could-?”</i> The old dryad cuts off, gasping as the attacker enters the glade, striding toward you confidently.", parse);
 	Text.Flush();
@@ -171,7 +171,9 @@ Scenes.DryadGlade.First = function() {
 		enc.onLoss = Scenes.DryadGlade.FirstLoss;
 		enc.onVictory = Scenes.DryadGlade.FirstWin;
 		
-		enc.Start();
+		Gui.NextPrompt(function() {
+			enc.Start();
+		});
 	});
 }
 
