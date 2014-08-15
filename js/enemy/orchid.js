@@ -156,7 +156,7 @@ OrchidBoss.prototype.Act = function(encounter, activeChar) {
 				Text.NL();
 				Text.Add("<i>”Oh, I know exactly what I’m doing!”</i> the dryad replies merrily.", parse);
 			}
-			else if(encounter.stage == 0)
+			else if(encounter.stage == 1)
 				Text.Add("<i>”O-Orchid… what has… happened to you?”</i> Mother Tree moans, trying to fight the tentacles still thrusting inside her.", parse);
 			else
 				Text.Add("<i>”Y-yes! Fuck me!”</i> Mother tree moans, completely lost in pleasure.", parse);
