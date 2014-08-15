@@ -35,7 +35,7 @@ function OrchidBoss(storage) {
 	this.combatExp         = 300;
 	this.coinDrop          = 1000;
 	
-	this.body              = new Body();
+	this.body              = new Body(this);
 	
 	this.body.DefHerm();
 	

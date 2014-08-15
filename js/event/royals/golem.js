@@ -44,7 +44,7 @@ function GolemBoss(storage) {
 	this.combatExp         = 100;
 	this.coinDrop          = 500;
 	
-	this.body              = new Body();
+	this.body              = new Body(this);
 	
 	this.body.SetRace(Race.demon);
 	

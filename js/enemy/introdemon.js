@@ -30,7 +30,7 @@ function IntroDemon() {
 	this.combatExp         = 0;
 	this.coinDrop          = 0;
 	
-	this.body              = new Body();
+	this.body              = new Body(this);
 	
 	this.body.DefMale();
 	

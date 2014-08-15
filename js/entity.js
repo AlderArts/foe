@@ -182,7 +182,7 @@ function Entity() {
 	this.combatStatus = new StatusList();
 	
 	// Body representation
-	this.body         = new Body(this.name);
+	this.body         = new Body(this);
 	
 	this.drunkLevel   = 0.0;
 	
@@ -506,7 +506,7 @@ Entity.prototype.FromStorage = function(storage) {
 	this.LoadSexFlags(storage);
 	
 	if(storage.body) {
-		this.body = new Body();
+		this.body = new Body(this);
 		this.body.FromStorage(storage.body);
 	}
 	

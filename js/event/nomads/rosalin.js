@@ -67,7 +67,7 @@ Rosalin.prototype.ToStorage = function() {
 
 // Reset Rosalin to her original state
 Rosalin.prototype.ResetBody = function() {
-	this.body = new Body();
+	this.body = new Body(this);
 	this.body.DefFemale();
 	this.FirstVag().virgin = false;
 	this.Butt().virgin = false;

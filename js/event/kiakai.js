@@ -42,7 +42,7 @@ function Kiakai(storage) {
 	this.sexlevel = 1;
 	
 	// Note, since kia has no fixed gender, create body later
-	this.body                  = new Body();
+	this.body                  = new Body(this);
 	this.body.head.hair.color  = Color.silver;
 	this.body.head.hair.length.base = 15;
 	this.body.head.eyes.color  = Color.purple;

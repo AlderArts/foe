@@ -256,20 +256,20 @@ BodyPartType = {
 
 // Describe a standard humanoid-ish body
 function Body(ent) {
-	var debugName = ent + ".body";
+	var debugName = function() { return ent.name + ".body"; };
 	// Body stats
 	this.muscleTone = new Stat(0);
-	this.muscleTone.debug = function() { return debugName + ".muscleTone"; }
+	this.muscleTone.debug = function() { return debugName() + ".muscleTone"; }
 	this.bodyMass   = new Stat(0);
-	this.bodyMass.debug = function() { return debugName + ".bodyMass"; }
+	this.bodyMass.debug = function() { return debugName() + ".bodyMass"; }
 	this.height     = new Stat(175); // cm
-	this.height.debug = function() { return debugName + ".height"; }
+	this.height.debug = function() { return debugName() + ".height"; }
 	// TODO: fix?
 	this.weigth     = new Stat(65); // kg
-	this.weigth.debug = function() { return debugName + ".weigth"; }
+	this.weigth.debug = function() { return debugName() + ".weigth"; }
 	
 	this.femininity = new Stat(0);
-	this.femininity.debug = function() { return debugName + ".femininity"; }
+	this.femininity.debug = function() { return debugName() + ".femininity"; }
 	
 	// BODYPARTS
 	// Head
@@ -289,7 +289,7 @@ function Body(ent) {
 	// Torso
 	this.torso         = new BodyPart();
 	this.torso.hipSize = new Stat(1); // TODO: Default
-	this.torso.hipSize.debug = function() { return debugName + ".hipSize"; }
+	this.torso.hipSize.debug = function() { return debugName() + ".hipSize"; }
 	// Add slots for wings, tails and such
 	this.backSlots     = new Array();
 	
@@ -309,8 +309,11 @@ function Body(ent) {
 	
 	this.lactating      = false;
 	this.lactationRate  = new Stat(0);
+	this.lactationRate.debug = function() { return debugName() + ".lactationRate"; }
 	this.milkProduction = new Stat(0);
+	this.milkProduction.debug = function() { return debugName() + ".milkProduction"; }
 	this.milkCap        = new Stat(0);
+	this.milkCap.debug = function() { return debugName() + ".milkCap"; }
 	this.milk           = new Stat(0);
 	
 	// Arms and legs
