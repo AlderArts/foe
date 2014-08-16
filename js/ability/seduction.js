@@ -88,7 +88,7 @@ Abilities.Seduction.Rut.CastInternal = function(encounter, caster, target) {
 	var atkDmg = caster.LAttack();
 	var def = target.LDefense();
 
-	var dmg = this.Damage(atkDmg, def, caster.level, target.level);
+	var dmg = Ability.Damage(atkDmg, def, caster.level, target.level);
 	if(dmg < 0) dmg = 0;
 	var atkType = new DamageType({pBlunt : 0.2, lust : 0.8});
 	dmg = atkType.ApplyDmgType(target.elementDef, dmg);
