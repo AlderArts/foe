@@ -238,13 +238,21 @@ Items.Bovia.PushEffect(function(target) {
 				Text.Newline();
 				break;
 			}
-			if(Math.random() < 0.5) {
-				var diff = breasts[i].lactationRate.IdealStat(10, 1);
-				if(diff) {
-					Text.AddOutput("[Poss] breasts starts to lactate more than before.", parse);
-					Text.Newline();
-					break;
-				}
+		}
+		
+		if(Math.random() < 0.5) {
+			var diff = target.body.lactationRate.IdealStat(10, 1);
+			if(diff) {
+				Text.AddOutput("[Poss] breasts starts to lactate more than before.", parse);
+				Text.Newline();
+			}
+		}
+		
+		if(Math.random() < 0.5) {
+			var diff = target.body.milkProduction.IncreaseStat(5, 1);
+			if(diff) {
+				Text.AddOutput("[Poss] breasts swell, as they become able to produce milk at a quicker rate.", parse);
+				Text.Newline();
 			}
 		}
 	}
