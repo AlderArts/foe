@@ -61,6 +61,7 @@ function Terry(storage) {
 	this.flags["Saved"] = 0;
 	this.flags["PrefGender"] = Gender.male;
 	this.flags["Skin"] = 0;
+	this.flags["BM"] = 0;
 	this.flags["Rogue"] = 0;
 	
 	this.sbombs = 3;
@@ -214,6 +215,20 @@ Scenes.Terry.Prompt = function() {
 	options.push({ nameStr : "Pet",
 		func : Scenes.Terry.SkinshipPrompt, enabled : true,
 		tooltip : Text.Parse("Play around with your pretty little [foxvixen]; [heshe] looks like [heshe] could use a good petting.", parse)
+	});
+	options.push({ nameStr : "Sex",
+		func : function() {
+			Text.Clear();
+			if(terry.Relation() >= 60)
+				Text.Add("The [foxvixen] walks up to you with a smile,[ getting on [hisher] tiptoes,] and gives you a peck on the lips. <i>”Of course this is a booty call,”</i> [heshe] grins, wagging [hisher] fluffy tail.", parse);
+			else if(terry.Relation() >= 30)
+				Text.Add("<i>”Sex, huh?”</i> [heshe] says with a grin, closing the distance. <i>”Alright, I don’t mind putting out for you.”</i> [HeShe] pokes your belly playfully before taking a step back.", parse);
+			else
+				Text.Add("<i>”Okay, if you want me, I guess I don’t have much choice,”</i> [heshe] says nonchalantly.", parse);
+			Text.NL();
+			Scenes.Terry.SexPrompt(terry.Interact);
+		}, enabled : true,
+		tooltip : Text.Parse("Terry is a sexy [foxvixen], why not have some fun with [himher]?", parse)
 	});
 	//TODO
 	options.push({ nameStr: "Release",
@@ -1634,12 +1649,148 @@ Scenes.Terry.SexPrompt = function(backPrompt) {
 		HisHer  : terry.HisHer(),
 		hisher  : terry.hisher(),
 		himher  : terry.himher(),
-		hishers : terry.hishers()
+		hishers : terry.hishers(),
+		tarmorDesc : function() { return terry.ArmorDesc(); },
+		master : player.mfTrue("master", "mistress"),
+		lowerArmorDesc : function() { return player.LowerArmorDesc(); }
 	};
 	
-	Text.Add("", parse);
+	Gui.Callstack.push(function() {
+		Text.Add("Done appreciating your vulpine pet’s naked form, you step around so that you are in front of [himher], rubbing your chin idly as you consider how you want to fuck the [foxvixen] this time...", parse);
+		Text.Flush();
+		Scenes.Terry.SexPromptChoice(backPrompt);
+	});
+	
+	if(terry.Slut() >= 60) {
+		Text.Add("With practiced motions, Terry begins stripping [hisher] [tarmorDesc]. Each motion a flourish that emphasises [hisher] assets. You watch the delicate [foxvixen]’s strip-tease enraptured, drinking in every detail on [hisher] lithe body, until [heshe] is completely naked.", parse);
+		player.AddLustFraction(0.2);
+	}
+	else if(terry.Slut() >= 30)
+		Text.Add("Terry eagerly begins removing [hisher] [tarmorDesc].", parse);
+	else {
+		Text.Add("Terry reluctantly begins stripping off [hisher] [tarmorDesc], taking off each piece of his garment painstakingly slow.", parse);
+		if(terry.Relation() >= 30)
+			Text.Add(" Whether to entice you, or out of shyness, you don’t know.", parse);
+	}
 	Text.NL();
-	Text.Flush();
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("<i>”How’s this?”</i> [heshe] asks, puffing [hisher] chest and proudly displaying [himher]self before you. <i>”Ready for the taking?”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>”I’m ready… [master],”</i> the [foxvixen] says, kneeling before you.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>”Alright, I guess I’m ready,”</i> the [foxvixen] says, standing before you.", parse);
+	}, 1.0, function() { return true; });
+	
+	scenes.Get();
+	
+	Text.NL();
+	parse["nervousnessarousal"] = terry.Relation() < 30 ? "nervousness" : "arousal";
+	Text.Add("You make a point of circling Terry, looking up and down and studying every inch of the [malefemaleherm]’s naked form. As [hisher] tail waves gently in [nervousnessarousal], it exposes a prominent “birthmark” on [hisher] buttcheek; though a large patch of pure white otherwise envelops [hisher] ass and the backs of [hisher] thighs, on the right cheek there is a large love-heart-shaped patch of the rich golden color that adorns the rest of [hisher] body.", parse);
+	Text.NL();
+	
+	if(terry.flags["BM"] == 0) {
+		terry.flags["BM"] = 1;
+		Text.Add("Motivated by curiosity, you reach out with your hand to touch it, gently trailing your fingers through the [foxvixen]’s soft fur and tracing the edge of the heart-design on [hisher] lusciously shapely asscheek. There’s no question that it’s real.", parse);
+		Text.NL();
+		Text.Add("The [foxvixen] thief gasps as you trace, ears flattening against [hisher] skull as [heshe] protests, <i>”D-Don’t touch my birthmark!”</i>", parse);
+		Text.NL();
+		Text.Add("That’s some reaction! But what’s wrong with touching it?", parse);
+		Text.NL();
+		Text.Add("<i>”It’s embarrassing...”</i>", parse);
+		Text.NL();
+		Text.Add("Isn’t that just so cute...", parse);
+		Text.Flush();
+		
+		//[Tease][Praise]
+		var options = new Array();
+		options.push({ nameStr : "Tease",
+			func : function() {
+				Text.Clear();
+				Text.Add("Smirking, you cup the [foxvixen]’s asscheek in one hand, kneading the soft flesh over the birthmark with slow, sensual caresses. Now, whyever should [heshe] be so embarrassed over it? After all, it’s not like it isn’t the most blatant beauty spot you’ve ever seen, just perfect for such a sweet, luscious ass... Why, it’s like a perfect target for anyone who wants to spank [himher], or fuck [hisher] ass...", parse);
+				Text.NL();
+				Text.Add("Terry shudders, [hisher] body temp spiking as [heshe] flushes with such deep embarrassment that you can see the crimson redness covering [hisher] cheeks. <i>”J-Just stop teasing me and get to the point, you jerk!”</i>", parse);
+				Text.NL();
+				
+				terry.relation.DecreaseStat(-100, 2);
+				
+				PrintDefaultOptions();
+			}, enabled : true,
+			tooltip : Text.Parse("Maybe you should tease [himher]? It’s clearly a sensitive spot and you could do with having some fun at the [foxvixen]’s expense.", parse)
+		});
+		options.push({ nameStr : "Praise",
+			func : function() {
+				Text.Clear();
+				Text.Add("Shaking your head, you gently chide Terry for getting embarrassed; [heshe] has such a beautiful body, [heshe] should be proud of it! And this mark, why, it’s simply so fitting for [himher]; surprisingly cute and delicate, but bold and flamboyant when seen. It emphasizes the lusciousness of [hisher] sweet ass wonderfully, drawing the eye in to appreciate it, inviting the onlooking to touch, to rub, to fondle...", parse);
+				Text.NL();
+				Text.Add("<i>”But it’s embarrassing!”</i> [heshe] protests. ", parse);
+				if(terry.Gender() == Gender.male)
+					Text.Add("<i>”I’m a boy dammit! But I have that girly tramp-stamp permanently tattooed on my butt!”</i>, he exclaims. ", parse);
+				Text.Add("<i>”Can you imagine what’s like growing on the streets? With that thing on my butt? I was bullied left and right because of it!”</i>", parse);
+				Text.NL();
+				Text.Add("Moving closer, you gently draw the [foxvixen] into your arms, folding them around [himher] in a soft, comforting embrace. Leaning closer to [hisher] vulpine ear, you tell [himher] that [heshe] has nothing to be ashamed of. [HeShe] is beautiful, and this - your hand moves to cover the vulpine morph’s birthmark, tenderly stroking the gold-on-white fur - this is just part of [hisher] beauty. They were idiots, teasing [himher] for what they didn’t understand. In fact, they were probably just jealous...", parse);
+				Text.NL();
+				Text.Add("<i>”You really think so?”</i>", parse);
+				Text.NL();
+				Text.Add("You assure [himher] that you know so.", parse);
+				Text.NL();
+				Text.Add("<i>”Thanks, [playername]. I guess… well, I guess you can touch it. Sometimes.”</i>", parse);
+				Text.NL();
+				
+				terry.relation.IncreaseStat(100, 3);
+				
+				PrintDefaultOptions();
+			}, enabled : true,
+			tooltip : Text.Parse("That mark is pretty attractive. Terry should learn to appreciate [hisher] charms better.", parse)
+		});
+		Gui.SetButtonsFromList(options, false, null);
+		return;
+	}
+	else {
+		var scenes = new EncounterTable();
+		
+		scenes.AddEnc(function() {
+			Text.Add("You thrust your tenting bulge against the golden heart, grinding your fabric-clad erection against your [foxvixen]’s beautymark and letting [himher] feel your appreciation of it through your [lowerArmorDesc].", parse);
+			Text.NL();
+			Text.Add("<i>”S-Stop it! You perv!”</i> [heshe] exclaims, though [heshe] makes no move to step away from you.", parse);
+		}, 1.0, function() { return player.FirstCock(); });
+		scenes.AddEnc(function() {
+			Text.Add("Feeling mischievous, you give Terry’s butt a sudden firm poke with your finger, right in the middle of [hisher] love-heart birthmark.", parse);
+			Text.NL();
+			Text.Add("<i>“Eep!”</i> Terry rubs his butt, right where you poked him. <i>”Jerk...”</i> [heshe] pouts.", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("Your fingers reach out and gently trace the love-heart’s edging, starting from the point down at its bottom before curving up, around and then down again.", parse);
+			Text.NL();
+			Text.Add("Terry shudders in embarrassment as you do so. <i>”Okay, you’ve done your teasing, so let’s move on.”</i>", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("Grinning to yourself, you deliver a sudden appreciative slap to Terry’s ass, right on [hisher] birthmark, watching as the [foxvixen]’s butt jiggles slightly in response to the impact.", parse);
+			Text.NL();
+			Text.Add("<i>”Ooh! H-Hey! Be gentle!”</i> [heshe] protests, rubbing where you slapped.", parse);
+		}, 1.0, function() { return true; });
+		
+		scenes.Get();
+	}
+	Text.NL();
+	PrintDefaultOptions();
+}
+
+// TODO
+Scenes.Terry.SexPromptChoice = function(backPrompt) {
+	var parse = {
+		foxvixen : terry.mfPronoun("fox", "vixen"),
+		HeShe   : terry.HeShe(),
+		heshe   : terry.heshe(),
+		HisHer  : terry.HisHer(),
+		hisher  : terry.hisher(),
+		himher  : terry.himher(),
+		hishers : terry.hishers(),
+		master : player.mfTrue("master", "mistress")
+	};
 	
 	//[name]
 	var options = new Array();
@@ -1650,7 +1801,28 @@ Scenes.Terry.SexPrompt = function(backPrompt) {
 			Text.NL();
 			Text.Flush();
 		}, enabled : true,
-		tooltip : ""
+		tooltip : Text.Parse("", parse)
 	});
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : Text.Parse("", parse)
+	});
+	/*
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : Text.Parse("", parse)
+	});
+	 */
 	Gui.SetButtonsFromList(options, backPrompt, backPrompt);
 }
+
