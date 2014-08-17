@@ -1688,6 +1688,7 @@ Scenes.Terry.SexPrompt = function(backPrompt) {
 	scenes.Get();
 	
 	Text.NL();
+	parse["malefemaleherm"] = Gender.Desc(terry.Gender());
 	parse["nervousnessarousal"] = terry.Relation() < 30 ? "nervousness" : "arousal";
 	Text.Add("You make a point of circling Terry, looking up and down and studying every inch of the [malefemaleherm]’s naked form. As [hisher] tail waves gently in [nervousnessarousal], it exposes a prominent “birthmark” on [hisher] buttcheek; though a large patch of pure white otherwise envelops [hisher] ass and the backs of [hisher] thighs, on the right cheek there is a large love-heart-shaped patch of the rich golden color that adorns the rest of [hisher] body.", parse);
 	Text.NL();
