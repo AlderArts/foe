@@ -2031,12 +2031,13 @@ Scenes.Gwendy.ChallengeSexAnalToys = function(toy, hangout, first) {
 			else
 				Text.Add("Flowing girlcum drips from the farmer’s pussy, trickling down her wobbly legs.", parse);
 			Text.NL();
-			
-			if(!hangout) {
+			if(hangout)
+				Text.Add("Well, that was fun.", parse);
+			else {
 				Text.Add("<i>”I... I’ll return the favor, if I win next time...”</i> she gasps weakly.", parse);
 				Text.NL();
+				Text.Add("Cheerfully, you wave goodbye to the exhausted girl. Well, that was fun. Chuckling to yourself, you head out on your travels again.", parse);
 			}
-			Text.Add("Cheerfully, you wave goodbye to the exhausted girl. Well, that was fun. Chuckling to yourself, you head out on your travels again.", parse);
 			
 			Text.Flush();
 			
