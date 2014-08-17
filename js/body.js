@@ -1505,7 +1505,7 @@ Breasts.prototype.Desc = function() {
 	var cup;
 	if     (size <= 1    ) cup = "manly";
 	else if(size <= 2    ) cup = "AA-cup";
-	else if(size <= 2.5  ) cup = "A-cup";
+	else if(size <= 3    ) cup = "A-cup";
 	else if(size <= 5    ) cup = "B-cup";
 	else if(size <= 7.5  ) cup = "C-cup";
 	else if(size <= 10   ) cup = "D-cup";

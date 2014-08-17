@@ -26,6 +26,9 @@ function Event(nameFunc) {
 	this.enc = null;
 }
 
+Event.prototype.safe = function() {
+	return false;
+}
 Event.prototype.switchSpot = function() {
 	return false;
 }
@@ -143,11 +146,7 @@ Event.prototype.PrintDesc = function() {
 	}
 	
 	// At safe locations you can sleep and save
-	var safeLocation = false;
-	if(party.location.safe)
-    	safeLocation = party.location.safe();
-    
-	if(safeLocation) {
+	if(party.location.safe()) {
 		Text.Newline();
 		Text.AddOutput("<b>This is a safe location, you can sleep and save here.</b>");
 		Text.Newline();

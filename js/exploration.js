@@ -52,9 +52,7 @@ SetExploreButtons = function() {
 	// TODO
 	var waitLocation = true;
 	// At safe locations you can sleep and save
-	var safeLocation = false;
-	if(party.location.safe)
-    	safeLocation = party.location.safe();
+	var safeLocation = party.location.safe();
 	
 	Input.exploreButtons[ExploreButtonIndex.Explore].Setup("Explore", Explore, true);
 
@@ -140,9 +138,7 @@ LimitedDataPrompt = function(backFunc) {
 DataPrompt = function() {
 	SetGameState(GameState.Event);
 	// At safe locations you can sleep and save
-	var safeLocation = false;
-	if(party.location.safe)
-    	safeLocation = party.location.safe();
+	var safeLocation = party.location.safe();
     	
 	Text.Clear();
 	Gui.ClearButtons();

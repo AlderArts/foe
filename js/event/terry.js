@@ -3,6 +3,9 @@
  * Define Terry
  * 
  */
+
+Scenes.Terry = {};
+
 function Terry(storage) {
 	Entity.call(this);
 	
@@ -57,6 +60,7 @@ function Terry(storage) {
 	this.flags["Met"]   = 0;
 	this.flags["Saved"] = 0;
 	this.flags["PrefGender"] = Gender.male;
+	this.flags["Skin"] = 0;
 	this.flags["Rogue"] = 0;
 	
 	this.sbombs = 3;
@@ -131,6 +135,9 @@ Terry.prototype.ToStorage = function() {
 	return storage;
 }
 
+Terry.prototype.PronounGender = function() {
+	return this.flags["PrefGender"];
+}
 
 Terry.prototype.heshe = function() {
 	var gender = this.flags["PrefGender"];
@@ -175,11 +182,40 @@ Terry.prototype.HorseCock = function() {
 // Party interaction
 Terry.prototype.Interact = function(switchSpot) {
 	Text.Clear();
-	var that = terry;
+	terry.PrintDescription();
+	Scenes.Terry.Prompt();
+}
+
+Scenes.Terry.Prompt = function() {
+	var parse = {
+		foxvixen : terry.mfPronoun("fox", "vixen"),
+		HeShe   : terry.HeShe(),
+		heshe   : terry.heshe(),
+		HisHer  : terry.HisHer(),
+		hisher  : terry.hisher(),
+		himher  : terry.himher(),
+		hishers : terry.hishers()
+	};
 	
-	that.PrintDescription();
+	var that = terry;
+	var switchSpot = party.location.switchSpot();
 	
 	var options = new Array();
+	options.push({ nameStr : "Talk",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>”You want to talk? What about?”</i>", parse);
+			Text.Flush();
+			
+			Scenes.Terry.TalkPrompt();
+		}, enabled : true,
+		tooltip : "Have a chat with Terry."
+	});
+	options.push({ nameStr : "Pet",
+		func : Scenes.Terry.SkinshipPrompt, enabled : true,
+		tooltip : Text.Parse("Play around with your pretty little [foxvixen]; [heshe] looks like [heshe] could use a good petting.", parse)
+	});
+	//TODO
 	options.push({ nameStr: "Release",
 		func : function() {
 			Text.Clear();
@@ -236,8 +272,6 @@ Terry.prototype.Act = function(encounter, activeChar) {
 	else
 		Abilities.Attack.Use(encounter, this, t);
 }
-
-Scenes.Terry = {};
 
 Scenes.Terry.ExploreGates = function() {
 	var parse = {
@@ -1060,4 +1094,563 @@ Scenes.Terry.Release = function() {
 			Gui.NextPrompt();
 		}
 	});
+}
+
+Scenes.Terry.TalkPrompt = function() {
+	var parse = {
+		foxvixen : terry.mfPronoun("fox", "vixen"),
+		HeShe   : terry.HeShe(),
+		heshe   : terry.heshe(),
+		HisHer  : terry.HisHer(),
+		hisher  : terry.hisher(),
+		himher  : terry.himher(),
+		hishers : terry.hishers()
+	};
+	
+	var options = new Array();
+	options.push({ nameStr : "Feelings",
+		func : Scenes.Terry.TalkFeelings, enabled : true,
+		tooltip : Text.Parse("Ask your pet [foxvixen] how [heshe]’s doing.", parse)
+	});
+	//TODO
+	options.push({ nameStr : "Pronoun",
+		func : Scenes.Terry.TalkPronoun, enabled : true,
+		tooltip : terry.PronounGender() == Gender.male ? "Terry looks too much like a girl, you should address 'her' as such from now on." : "In the end Terry is a guy, no matter how girly she looks. You should address 'him' as such."
+	});
+	options.push({ nameStr : "Compliment",
+		func : Scenes.Terry.TalkCompliment, enabled : true,
+		tooltip : Text.Parse("Let the [foxvixen] know how attractive [heshe] is.", parse)
+	});
+	
+	Gui.SetButtonsFromList(options, true, terry.Interact);
+}
+
+Scenes.Terry.TalkFeelings = function() {
+	var parse = {
+		foxvixen : terry.mfPronoun("fox", "vixen"),
+		HeShe   : terry.HeShe(),
+		heshe   : terry.heshe(),
+		HisHer  : terry.HisHer(),
+		hisher  : terry.hisher(),
+		himher  : terry.himher(),
+		hishers : terry.hishers(),
+		breasts : function() { return terry.FirstBreastRow().Short(); },
+		breastsDesc : function() { return player.FirstBreastRow().Short(); }
+	};
+	
+	Text.Clear();
+	if(terry.LustLevel() >= 0.5) {
+		if(terry.Relation() >= 60) {
+			Text.Add("<i>”I’m feeling pretty horny,”</i> [heshe] says, sizing you up. ", parse);
+			if(terry.Slut() >= 60) {
+				Text.Add("<i>”I just can’t get you out of my head, [playername].”</i> [HeShe] walks up to you, gently stroking your arm. <i>”Can we go have sex?”</i> [heshe] asks, ears to the sides and tail wagging slowly, as [heshe] sidles up with you. Hugging your arm[ against [hisher] [terrybreasts]]. <i>”I need you...”</i>", parse);
+			}
+			else if(terry.Slut() >= 30) {
+				Text.Add("<i>”How about a quickie? I mean, not that I absolutely <b>need</b> one,”</i> [heshe] immediately adds. <i>”I’d just feel a bit better if we did… just a bit...”</i> [HeShe] looks at you expectantly.", parse);
+			}
+			else {
+				Text.Add("[HeShe] looks a bit nervous. <i>”I was wondering...”</i> [heshe] trails off. You place a hand on [hisher] shoulder and smile, waiting for [himher] to finish. <i>”Maybe we could, if you’re willing, maybe do something about my arousal?”</i>", parse);
+				Text.NL();
+				Text.Add("Sex, [heshe] means.", parse);
+				Text.NL();
+				Text.Add("<i>”Er, yes,”</i> the fox smiles nervously.", parse);
+			}
+			Text.Flush();
+			
+			var options = new Array();
+			options.push({ nameStr : "Yes",
+				func : function() {
+					Text.Clear();
+					Text.Add("You sweep Terry into your arms, pulling the [foxvixen] into a passionate kiss. [HisHer] chest presses against yours, ", parse);
+					if(terry.FirstBreastRow().Size() > 3)
+						Text.Add("[hisher] [breasts] squishing pleasantly against your own [breastsDesc],", parse);
+					Text.Add("and [heshe] moans softly in surprise before eagerly returning your kiss. Terry’s eyes sink shut in rapture, arms moving to fold themselves possessively around your waist. The [foxvixen]’s tail wags in delight over [hisher] shapely buttocks, enticing you to reach down and give it a stroke. When you release the kiss, [heshe] pants for breath, and you suggest moving to a more private spot for this.", parse);
+					Text.NL();
+					if(terry.Slut() >= 60)
+						Text.Add("<i>”Why? Let ‘em look, for all I care,”</i> [heshe] giggles mischievously, snuggling up against your chest. <i>”But if that’s what you want...”</i>", parse);
+					else if(terry.Slut() >= 30)
+						Text.Add("<i>”Well...”</i> [heshe] drawls thoughtfully. <i>”I’d be lying if I said I was totally against the idea of doing it here... but I definitely rather have you all to myself. Lead on.”</i>", parse);
+					else
+						Text.Add("Terry shivers in a mixture of arousal and embarrassment. <i>”Oh, yes, certainly,”</i> [heshe] agrees, [hisher] voice a whisper of desire.", parse);
+					Text.NL();
+					Text.Add("You waste little time further in leading Terry somewhere more comfortable, and out of sight of prying eyes.", parse);
+					Text.NL();
+					
+					terry.relation.IncreaseStat(70, 1);
+
+					Text.Flush();
+					Scenes.Terry.SexPrompt(terry.Interact);
+				}, enabled : true,
+				tooltip : Text.Parse("Well, if [heshe] is in the mood, no sense wasting it, right?", parse)
+			});
+			options.push({ nameStr : "No",
+				func : function() {
+					Text.Clear();
+					Text.Add("<i>”Oh, okay,”</i> he says, looking a bit disappointed.", parse);
+					Text.Flush();
+					Scenes.Terry.TalkPrompt();
+				}, enabled : true,
+				tooltip : "You’re not in the mood for sex right now."
+			});
+			Gui.SetButtonsFromList(options, false, null);
+			return;
+		}
+		else if(terry.Relation() >= 30) {
+			Text.Add("<i>”I’m… feeling a bit giddy. Just a bit though!”</i> [heshe] blurts out.", parse);
+			if(terry.Slut() >= 60)
+				Text.Add(" <i>”Perhaps I’d feel a bit better if we could fool around a bit.”</i>", parse);
+			else if(terry.Slut() >= 30)
+				Text.Add(" <i>”I wouldn’t say no if you wanted to… do something.”</i>", parse);
+			Text.NL();
+			Text.Add("Looks like your pet is opening up to you more, if [heshe]’s willing to admit to wanting you. Maybe you should help [himher] get some release...", parse);
+			Text.Flush();
+			
+			var options = new Array();
+			options.push({ nameStr : "Yes",
+				func : function() {
+					Text.Clear();
+					Text.Add("You draw Terry closer and hug [himher] gently, one hand brushing in soft, even strokes down [hisher] back and along the fluffy tail swinging above [hisher] shapely ass. If that’s what [heshe] needs, you’re happy to help, but first, you should head somewhere a little more private.", parse);
+					Text.NL();
+					Text.Add("<i>”Okay, umm… lead the way,”</i> [heshe] smiles nervously.", parse);
+					Text.NL();
+					Text.Add("With a reassuring smile, you release [himher] from your grip and take [hisher] hand before gently leading [himher] away.", parse);
+					Text.NL();
+					Text.Add("", parse);
+					Text.NL();
+					
+					terry.relation.IncreaseStat(40, 1);
+
+					Text.Flush();
+					Scenes.Terry.SexPrompt(terry.Interact);
+				}, enabled : true,
+				tooltip : Text.Parse("Be a shame to waste it if your pet [foxvixen] is in the mood for some sex.", parse)
+			});
+			options.push({ nameStr : "No",
+				func : function() {
+					Text.Clear();
+					Text.Add("<i>”Of course, there are more important things to do anyway.”</i> You note the slight disappointment in [hisher] tone.", parse);
+					Text.Flush();
+					Scenes.Terry.TalkPrompt();
+				}, enabled : true,
+				tooltip : Text.Parse("You’re not really in the mood yourself, though, so [heshe]’ll just have to take care of it [himher]self.", parse)
+			});
+			Gui.SetButtonsFromList(options, false, null);
+			
+			return;
+		}
+		else {
+			Text.Add("<i>”I-I’m fine,”</i> [heshe] says, looking quite flustered.", parse);
+			Text.NL();
+			Text.Add("The [foxvixen] certainly doesn’t look fine. In fact, if you’re any judge, [heshe]’s really in need of a good fuck; [heshe] looks awfully pent up. Of course, [heshe] won’t admit that to you; you’ll need to make the first move about settling it.", parse);
+		}
+	}
+	else if(terry.HPLevel() <= 0.3)
+		Text.Add("<i>”I’m exhausted!”</i> [heshe] exclaims. <i>”We should find somewhere safe and take a moment to catch our breath.”</i>", parse);
+	else if(terry.HPLevel() <= 0.6)
+		Text.Add("<i>”I’m a bit tired, but still hanging in there,”</i> [heshe] smiles softly. <i>”I wouldn’t say no to getting some rest, though.”</i>", parse);
+	else
+		Text.Add("<i>”I’m fine, thanks for asking,”</i> [heshe] smiles, tail wagging slowly behind.", parse);
+	Text.Flush();
+	
+	terry.relation.IncreaseStat(20, 1);
+	
+	Scenes.Terry.TalkPrompt();
+}
+
+
+Scenes.Terry.TalkPronoun = function() {
+	var parse = {
+		breasts : function() {
+			var desc = terry.FirstBreastRow().Desc();
+			return desc.cup + "s";
+		},
+		cock : function() { return terry.MultiCockDesc(); },
+		HeShe   : function() { return terry.HeShe(); },
+		heshe   : function() { return terry.heshe(); },
+		HisHer  : function() { return terry.HisHer(); },
+		hisher  : function() { return terry.hisher(); },
+		himher  : function() { return terry.himher(); },
+		hishers : function() { return terry.hishers(); },
+		girlguy : function() { return terry.mfPronoun("guy", "girl"); }
+	};
+	
+	Text.Clear();
+	if(terry.PronounGender() == Gender.male) {
+		Text.Add("Shaking your head, you tell Terry that you just can’t really think of him as being a guy. ", parse);
+		if(terry.FirstBreastRow().Size() < 3)
+			Text.Add("It doesn’t matter that he’s flat up top. ", parse);
+		else
+			Text.Add("The fact he has [breasts] certainly doesn’t help the matter. ", parse);
+		if(terry.FirstCock() && terry.FirstVag())
+			Text.Add("The cock he has to go with his pussy doesn’t matter.", parse);
+		else if(terry.FirstCock())
+			Text.Add("And it doesn’t matter that he has a cock hanging between his legs.", parse);
+		else //vag
+			Text.Add("Especially when you consider that what lies between his legs is a pretty little pussy.", parse);
+		Text.Add(" He’s just far too pretty, and his build is just too curvy. No matter what angle you look at him from, there’s just no way this feminine figure could be a guy", parse);
+		if(terry.FirstVag() && terry.FirstBreastRow().Size() >= 3)
+			Text.Add(" - he even has all the proper parts", parse);
+		Text.Add(". So, from now on, you’re going to start addressing him as such. It’ll be less confusing if you didn’t have to keep calling ‘him’ a guy all the time.", parse);
+	}
+	else {
+		Text.Add("With a shake of your head, you confess to Terry that you just can’t really think of her as a girl. ", parse);
+		if(terry.FirstBreastRow().Size() >= 3)
+			Text.Add("It doesn’t matter how big her breasts are. ", parse);
+		else
+			Text.Add("That flat chest of hers just doesn’t present a very feminine image. ", parse);
+		if(terry.FirstCock() && terry.FirstVag())
+			Text.Add("And that cock she has right above her pussy clearly doesn’t look right on a girl.", parse);
+		else if(terry.FirstCock())
+			Text.Add("And the [cock] swinging between her legs certainly puts to rest any debate towards her apparent gender.", parse);
+		else //vag
+			Text.Add("Even if she doesn’t have a cock anymore, there’s just no hiding it.", parse);
+		Text.Add(" She was born a guy, you know she was born a guy, and you can’t lie to yourself anymore. Terry is a guy, and she has a right to be addressed as such. So that’s what you’ll be doing from now on.", parse);
+	}
+	Text.NL();
+	
+	if(terry.PronounGender() == Gender.male)
+		terry.flags["PrefGender"] = Gender.female;
+	else
+		terry.flags["PrefGender"] = Gender.male;
+	
+	if(terry.Relation() >= 60) {
+		Text.Add("<i>”I don’t know if I’m really comfortable with you addressing me as a [girlguy]...”</i> [heshe] says, tapping [hisher] chin.", parse);
+		Text.NL();
+		Text.Add("Grinning at the [foxvixen]’s quip, you close the distance and give [himher] a playful peck right on [hisher] upturned lips, lifting off after a few seconds to see [hisher] response.", parse);
+		Text.NL();
+		Text.Add("<i>”Okay… nice try, but you’re going to have to do better than that if you hope to con-”</i> you interrupt [himher] with another peck, and another, it’s not long before you’re deeply entangled in each other’s arms, kissing each other passionately. By the time you break away Terry’s panting.", parse);
+		Text.NL();
+		Text.Add("<i>”I’m convinced,”</i> [heshe] grins, tail wagging as [heshe] licks [hisher] lips.", parse);
+		
+		terry.AddLustFraction(0.2);
+		player.AddLustFraction(0.2);
+	}
+	else if(terry.Relation() >= 30) {
+		Text.Add("<i>”I was kinda getting used to the way you were addressing me. But if you really consider me a [girlguy], go ahead. I spent the longest time trying to assert myself as a guy, but lately I don’t think it really matters anymore,”</i> he smiles, tail wagging slowly behind.", parse);
+	}
+	else {
+		Text.Add("<i>”Hearing you say that kind-of makes me pissed, but… it’s not like I can stop you, so suit yourself.”</i>", parse);
+		Text.NL();
+		Text.Add("[HeShe] doesn’t look very angry to you...", parse);
+	}
+	Text.Flush();
+	
+	Scenes.Terry.TalkPrompt();
+}
+
+Scenes.Terry.TalkCompliment = function() {
+	var parse = {
+		foxvixen : terry.mfPronoun("fox", "vixen"),
+		HeShe   : terry.HeShe(),
+		heshe   : terry.heshe(),
+		HisHer  : terry.HisHer(),
+		hisher  : terry.hisher(),
+		himher  : terry.himher(),
+		hishers : terry.hishers(),
+		mastermistress : player.mfTrue("master", "mistress")
+	};
+	
+	Text.Clear();
+	Text.Add("A studious look on your face, you start to circle Terry, intensely observing [himher] from all angles, gaze moving up and down, back and forth, as you continue to trail around the puzzled vulpine.", parse);
+	Text.NL();
+	if(terry.Relation() >= 60) {
+		Text.Add("Terry looks a bit nervous. <i>”Um, everything is alright, right? I didn’t miss any spots combing my fur… maybe my hair is not good?”</i>", parse);
+		Text.NL();
+		Text.Add("You hasten to assure [himher] that [hisher] hair looks lovely, as always. Just like the rest of [himher], it’s beautiful.", parse);
+		Text.NL();
+		Text.Add("This gets you a smile as [hisher] tail begins wagging. <i>”If you want we can go more private spot and I can show you all of me. But if we do, I can’t promise we won’t take this beyond a show and tell.”</i>", parse);
+		Text.NL();
+		Text.Add("You can’t keep a smirk off your face at the mischievous grin spreading over the [foxvixen]’s vulpine features, [hisher] tail wagging in seductive twirls over the shapely ass that [hisher] posture tilts enticingly towards you. The thought comes to mind that you might not even make it to a private spot... still, the offer is tempting; maybe you should accept it?", parse);
+		Text.Flush();
+		
+		//[Yes][No]
+		var options = new Array();
+		options.push({ nameStr : "Yes",
+			func : function() {
+				Text.Clear();
+				Text.Add("With a grin, you invite Terry to follow you and lead [himher] towards a less public place to conduct your ‘show and tell’.", parse);
+				Text.NL();
+				Text.Add("No sooner are you out of sight, the petite [foxvixen] spins you, nearly pouncing [hisher] way into your arms as [heshe] wraps [hisher] lips around yours in a passionate kiss. [HisHer] hair and fur becoming a disheveled mess the first few seconds, not that either of you mind it. When you finally break the kiss, the smiling [foxvixen] takes a step back to look you over. <i>”I figured just looking can be a bit boring. I think we’d both prefer a more hands-on approach, don’t you think?”</i>", parse);
+				Text.NL();
+				if(terry.Slut() >= 60)
+					Text.Add("<i>”I know what parts <b>I</b> want, but what parts do <b>you</b> want, my lovely [mastermistress]?”</i> Terry asks, giving you a smouldering look.", parse);
+				else if(terry.Slut() >= 30)
+					Text.Add("<i>”Okay, before we continue, you should probably tell me how you’ll be wanting to have me,”</i> Terry says, smiling as [hisher] tail wags in excitement.", parse);
+				else
+					Text.Add("<i>”So, how do you want to do this?”</i> Terry asks.", parse);
+				Text.NL();
+				Text.Flush();
+				Scenes.Terry.SexPrompt(terry.Interact);
+			}, enabled : true,
+			tooltip : Text.Parse("You just know that this is just going to wind up in sex, but sex is not a bad outcome. Go do your [foxvixen].", parse)
+		});
+		options.push({ nameStr : "No",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”Suit yourself, but I hope you’re willing to humor me later?”</i>", parse);
+				Text.NL();
+				Text.Add("You assure [himher] that you most certainly are. After all, you couldn’t keep yourself away from your lovely pet [foxvixen] for long.", parse);
+				Text.NL();
+				Text.Add("<i>”It’s a promise then,”</i> [heshe] giggles.", parse);
+				Text.Flush();
+				
+				Scenes.Terry.TalkPrompt();
+			}, enabled : true,
+			tooltip : Text.Parse("You really just want to look, refuse [hisher] invitation.", parse)
+		});
+		Gui.SetButtonsFromList(options, false, null);
+		
+		return;
+	}
+	else if(terry.Relation() >= 30) {
+		Text.Add("The [foxvixen] is quick to pick up on your intentions, and [heshe] submits willingly to your scrutiny. <i>”I’m still the same old me, as you can see,”</i> [heshe] quips.", parse);
+		Text.NL();
+		Text.Add("[HeShe] most certainly is; lovely as always.", parse);
+		Text.NL();
+		Text.Add("Terry looks a bit flustered at your compliment, and you note that [heshe] seems to adjust [hisher] clothing to enhance [hisher] more feminine curves. <i>”Well, go ahead and look then,”</i> [heshe] says nonchalantly, even as [hisher] tail starts wagging. It’s quite obvious that despite [hisher] demeanor [heshe] enjoys the attention…", parse);
+		Text.NL();
+		Text.Add("You draw out your observations for as long as possible, smiling and nodding your approval of every luscious inch. When you are finished, you nod your head and step away, telling [himher] that it was your pleasure to look at such a beautiful [foxvixen].", parse);
+		Text.NL();
+		Text.Add("<i>”Thank you,”</i> [heshe] says with a smile.", parse);
+	}
+	else {
+		Text.Add("<i>”What’s wrong? Why are you looking at me like that?”</i>", parse);
+		Text.NL();
+		Text.Add("Just appreciating [hisher] good looks properly, you reply.", parse);
+		Text.NL();
+		Text.Add("<i>”Umm, right. So, appreciate away… I guess...”</i> [heshe] trails off, looking more than a bit flustered at your scrutiny.", parse);
+		Text.NL();
+		Text.Add("With a smile, you continue to look Terry over, the [foxvixen]’s embarrassment at your appraisal no impediment to your appreciating of [hisher] looks. FInally, though, you have enough and you thank [himher] for [hisher] patience; [heshe]’s a very pretty [foxvixen].", parse);
+		Text.NL();
+		Text.Add("<i>”Thanks.”</i>", parse);
+	}
+	Text.Flush();
+	
+	terry.relation.IncreaseStat(30, 1);
+	
+	Scenes.Terry.TalkPrompt();
+}
+
+Scenes.Terry.SkinshipRummagePack = function() {
+	var parse = {
+		foxvixen : terry.mfPronoun("fox", "vixen"),
+		boygirl : terry.mfTrue("boy", "girl"),
+		HeShe   : terry.HeShe(),
+		heshe   : terry.heshe(),
+		HisHer  : terry.HisHer(),
+		hisher  : terry.hisher(),
+		himher  : terry.himher(),
+		hishers : terry.hishers(),
+		master : player.mfTrue("master", "mistress")
+	};
+	
+	Text.Add("You find Terry’s pack and rummage through it. ", parse);
+	if(terry.Slut() >= 60) {
+		Text.Add("At first you just find a few spare clothes, panties, few tools of the trade, and a couple dry snacks. But once you get to the bottom you raise a brow at what you see. A dildo, lube, a cockring, another dildo, an inflatable buttplug, more lube, and some honey. Chuckling to yourself you ask whyever would [heshe] need all of that? Doesn’t it get heavy having to lug around all these toys?", parse);
+		Text.NL();
+		Text.Add("<i>”Gotta be prepared for when you’re not around, my dear [master]. Plus in case you’re feeling kinky in the middle of the forest, I’d rather not have to wait until we find a city to go after the big [boygirl] toys,”</i> he grins innocently.", parse);
+		Text.NL();
+		Text.Add("...You think you created a monster…", parse);
+		Text.NL();
+		if(terry.Relation() < 60)
+			Text.Add("<i>”Damn right you did, and now you gotta take care of me,”</i> [heshe] states.", parse);
+		else {
+			Text.Add("<i>”Maybe you did, but I loved every second of it. And so did you.”</i>", parse);
+			Text.NL();
+			Text.Add("True. In that case you’ll just have to enjoy the spoils of your hard labor.", parse);
+		}
+		Text.NL();
+		Text.Add("After digging through quite a few toys, you finally manage to secure Terry’s comb and brush. Carefully you put away everything back into [hisher] pack and move to the grinning [foxvixen].", parse);
+	}
+	else if(terry.Slut() >= 30) {
+		Text.Add("Terry keeps [hisher] pack fairly organized. Few spare clothes, some picks, assorted tools for crafting [hisher] gadgets… a bottle of lube? You set that aside and rummage a bit deeper, grinning to yourself once you find what looks like a fairly small buttplug. Has Terry being having fun behind your back?", parse);
+		Text.NL();
+		Text.Add("<i>”Umm... ah...”</i> [heshe] trails off. <i>”Well, I figured since we’ve been doing the dirty deed a lot, I should start getting used to it. And it does, kinda, feel good… sometimes… when I’m in the mood.”</i>", parse);
+		Text.NL();
+		Text.Add("Right… You consider the teasing the [foxvixen] a bit more, but there’ll be plenty of opportunities to do that later. For now you concentrate on finding [hisher] comb and brush. Locating it at the bottom of [hisher] pack is simple enough, and once you pick them up you put [hisher] things back in [hisher] pack.", parse);
+	}
+	else {
+		Text.Add("Terry is kinda neat when it comes to keeping [hisher] pack organized. It’s clear [heshe] takes great care when putting away [hisher] things. You easily locate [hisher] comb and brush at the bottom of the pack, underneath [hisher] extra clothes and tools of the trade. After picking them up, you replace the contents of [hisher] pack back into their proper order.", parse);
+	}
+}
+
+Scenes.Terry.SkinshipPrompt = function() {
+	var parse = {
+		foxvixen : terry.mfPronoun("fox", "vixen"),
+		HeShe   : terry.HeShe(),
+		heshe   : terry.heshe(),
+		HisHer  : terry.HisHer(),
+		hisher  : terry.hisher(),
+		himher  : terry.himher(),
+		hishers : terry.hishers(),
+		breasts : function() { return terry.FirstBreastRow().Short(); },
+		boygirl : terry.mfTrue("boy", "girl"),
+		playername : player.name,
+		hand    : function() { return player.HandDesc(); },
+		breastsDesc : function() { return player.FirstBreastRow().Short(); }
+	};
+	
+	Text.Clear();
+	if(terry.Relation() < 30) {
+		Text.Add("<i>”Huh?”</i> The [foxvixen] glares at you as if [heshe]’d just been mocked. <i>”What do I look like to you? Some kind of pet? I don’t need your grabby [hand]s on my body.”</i>", parse);
+		Text.NL();
+		if(terry.flags["Skin"] == 0) {
+			Text.Add("Maybe [heshe] doesn’t <i>need</i> them, you confess. But does [heshe] really think it’d be so bad to let you just touch [himher]? You don’t mean anything by doing so, if that’s [hisher] concern. Besides, you <i>could</i> just make this an order...", parse);
+			Text.NL();
+			Text.Add("The [foxvixen] scowls at you, but acquiesces. <i>”Fine, you got your point across… what are you thinking of doing then?”</i>", parse);
+		}
+		else {
+			Text.Add("With a smirk and a shake of your head, you teasingly ask if [heshe]’s really going to protest like this when you both know how much [heshe] enjoyed it last time.", parse);
+			Text.NL();
+			Text.Add("Terry sighs. <i>”Okay, I guess there’s no harm in letting you… do whatever to me, just watch where you touch.”</i>", parse);
+		}
+	}
+	else if(terry.Relation() < 60) {
+		Text.Add("<i>”Seriously, [playername]. Do I look like a dog to you?”</i>", parse);
+		Text.NL();
+		Text.Add("...Well-", parse);
+		Text.NL();
+		Text.Add("<i>”No, don’t answer that,”</i> the [foxvixen] says, raising [hisher] hands. <i>”I have half a mind I’m digging myself into a pit by asking that.”</i>", parse);
+		Text.NL();
+		Text.Add("You’re content to simply grin. You aren’t going to say anything if [heshe] isn’t. So, [heshe]’s got no problems?", parse);
+		Text.NL();
+		Text.Add("<i>”Nope, but if you’re going to get touchy-feely with me, at least make me feel good, okay?”</i> [heshe] says with a smile, tail wagging slowly behind.", parse);
+		Text.NL();
+		Text.Add("You assure [himher] that is precisely what you have in mind.", parse);
+	}
+	else {
+		Text.Add("<i>”Alright, I’m ready whenever you are.”</i>", parse);
+		Text.NL();
+		Text.Add("Just like that? No complaints? No protests? No token efforts at dissuading you?", parse);
+		Text.NL();
+		Text.Add("<i>”I’m about to get pampered and loved, [playername]. What idiot would refuse that?”</i> [heshe] asks, grinning innocently.", parse);
+		Text.NL();
+		Text.Add("A much bigger idiot than your clever [foxvixen] you immediately reply, chest swelling with pride at [hisher] response.", parse);
+		Text.NL();
+		Text.Add("<i>”You got it! Now what did you have in store for little, old me?”</i>", parse);
+	}
+	Text.Flush();
+	
+	terry.flags["Skin"]++;
+	
+	//[Hug]
+	var options = new Array();
+	options.push({ nameStr : "Hug",
+		func : function() {
+			var pbreasts = player.FirstBreastRow().Size() > 2;
+			var tbreasts = terry.FirstBreastRow().Size() > 2;
+			Text.Clear();
+			Text.Add("You close the distance between you and your pet [foxvixen], arms spreading wide before folding around [hisher] shoulders and drawing [himher] into your chest. ", parse);
+			if(pbreasts && tbreasts)
+				Text.Add("Your [breastsDesc] squish most pleasantly against Terry’s own [breasts], the cleavage flesh rippling and rolling together.", parse);
+			else if(pbreasts)
+				Text.Add("Your [breastsDesc] flatten themselves against Terry’s daintily flat chest, pressed between the two of you.", parse);
+			else if(tbreasts)
+				Text.Add("Terry’s [breasts] squish wonderfully against your own flat chest as you press [himher] to you.", parse);
+			else
+				Text.Add("You are pressed tightly against each other, pectoral to pectoral, loins to loins.", parse);
+			Text.NL();
+			if(terry.Relation() >= 60)
+				Text.Add("Terry hugs you back with as much intensity as [heshe] can muster. A whine of happiness escaping [himher] as [heshe] basks in your warmth", parse);
+			else if(terry.Relation() >= 30)
+				Text.Add("Terry hesitates at first, but quickly succumbs and wraps [hisher] arms around you. [HeShe] closes [hisher] eyes as [heshe] basks in your warmth.", parse);
+			else
+				Text.Add("At first, it seems Terry is pissed at you, but your concerns are dispelled when the [foxvixen] hesitantly lifts [hisher] arms to return the hug. [HeShe]’s not very enthusiastic, and [hisher] body is tensed up, but at least this is a start….", parse);
+			Text.NL();
+			Text.Add("Eventually, you break the hug, unfolding your arms from around the warm [foxvixen]-morph. As you step back, you can see that your surprise hug has really perked your pet up; [hisher] tail is wagging openly, and [hisher] eyes have closed in happiness, a pleased smile on [hisher] lips. ", parse);
+			if(terry.flags["Skin"] <= 1 && terry.Relation() < 30)
+				Text.Add(" Seems like you made an important step towards furthering your relationship with the pretty fox-[boygirl].", parse);
+			Text.Flush();
+			
+			terry.relation.IncreaseStat(40, 1);
+			
+			Scenes.Terry.Prompt();
+		}, enabled : true,
+		tooltip : Text.Parse("Terry’s fur looks so soft to the touch. It makes you want to cuddle the [foxvixen].", parse)
+	});
+	options.push({ nameStr : "Brush Hair",
+		func : function() {
+			Text.Clear();
+			if(terry.Relation() < 60)
+			{
+				Text.Add("<i>”Sure, I guess there’s no harm in touching up my hair, but I can do this by myself. You don’t really need to bother.”</i>", parse);
+				Text.NL();
+				Text.Add("Nonsense, it would be a pleasure.", parse);
+				Text.NL();
+				Text.Add("<i>”Well, if you don’t mind I guess it’s alright. I have a comb and a brush in my pack.”</i>", parse);
+			}
+			else {
+				Text.Add("<i>”Something wrong with my hair?”</i> Terry asks, a hint of mischief in [hisher] voice.", parse);
+				Text.NL();
+				Text.Add("You pretend to examine it with great scrutiny before admitting you just want some quality time together. Plus you gotta help your [foxvixen] maintain [himher]self.", parse);
+				Text.NL();
+				Text.Add("<i>”As good an excuse as any. You know where I keep my comb and my brush right?”</i>", parse);
+			}
+			Text.NL();
+			
+			Scenes.Terry.SkinshipRummagePack();
+			
+			Text.NL();
+			Text.Add("As the [foxvixen] sees you approaching, [heshe] ", parse);
+			if(party.location.safe())
+				Text.Add("finds a stool and sits down.", parse);
+			else
+				Text.Add("sits on the ground cross-legged.", parse);
+			Text.NL();
+			Text.Add("You circle [himher] until you’re behind [himher], then remove the small strap holding [hisher] pony tail. Terry doesn’t look half-bad with [hisher] bangs loose… Well, plenty of time to admire later, first of all you decide to begin with the comb. As neat as the [foxvixen] is, [hisher] hair is perfectly cared for and provides minimal resistance as you rake the comb through [hisher] locks. Then you set down the comb and grab the brush.", parse);
+			Text.NL();
+			Text.Add("<i>”Ah… this feels pretty nice.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, you’re glad [heshe]’s liking her treatment, you say whilst massaging [hisher] scalp, right behind [hisher] triangular ears.", parse);
+			Text.NL();
+			if(terry.Relation() < 60)
+				Text.Add("<i>”I could get used to this,”</i> [heshe] remarks.", parse);
+			else
+				Text.Add("<i>”Bit more to the left… yeah, right there.”</i> [HeShe] leans into your touch shamelessly.", parse);
+			Text.NL();
+			Text.Add("Once you’re done, you quickly locate [hisher] strap and tie [hisher] hair back into the traditional ponytail [heshe] likes to wear it in.", parse);
+			Text.NL();
+			Text.Add("<i>”Thanks a lot, [playername].”</i> ", parse);
+			Text.NL();
+			Text.Add("You pat [hisher] on the head and put [hisher] things back into [hisher] pack.", parse);
+			Text.Flush();
+			
+			terry.relation.IncreaseStat(50, 1);
+			
+			Scenes.Terry.Prompt();
+		}, enabled : terry.Relation() >= 30,
+		tooltip : Text.Parse("Terry’s hair oughta suffer from all your adventuring, maybe you should brush it to ensure your [foxvixen] is always looking good.", parse)
+	});
+	//TODO
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+// TODO
+Scenes.Terry.SexPrompt = function(backPrompt) {
+	var parse = {
+		foxvixen : terry.mfPronoun("fox", "vixen"),
+		HeShe   : terry.HeShe(),
+		heshe   : terry.heshe(),
+		HisHer  : terry.HisHer(),
+		hisher  : terry.hisher(),
+		himher  : terry.himher(),
+		hishers : terry.hishers()
+	};
+	
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	//[name]
+	var options = new Array();
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	Gui.SetButtonsFromList(options, backPrompt, backPrompt);
 }
