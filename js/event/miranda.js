@@ -1574,6 +1574,7 @@ Scenes.Miranda.TavernSexPublicPrompt = function() {
 		}, enabled : true,
 		tooltip : "Give Miranda a blowjob under the table."
 	});
+	//TODO: fix back
 	Gui.SetButtonsFromList(options, true, Scenes.Miranda.Chat);
 }
 
@@ -4613,6 +4614,8 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 	Text.NL();
 	parse["lover"] = (miranda.Attitude() < Miranda.Attitude.Neutral) ? "bitch" : "lover";
 	Text.Add("<i>”Not bad, [lover],”</i> she sighs, waving for another drink as you hurriedly clean yourself up.", parse);
+	
+	world.TimeStep({minute: 30});
 	
 	player.AddLustFraction(0.5);
 	miranda.subDom.IncreaseStat(40, 1);
