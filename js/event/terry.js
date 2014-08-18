@@ -62,6 +62,8 @@ function Terry(storage) {
 	this.flags["PrefGender"] = Gender.male;
 	this.flags["Skin"] = 0;
 	this.flags["BM"] = 0;
+	this.flags["pQ"] = 0;
+	this.flags["breasts"] = Terry.Breasts.Flat;
 	this.flags["Rogue"] = 0;
 	
 	this.sbombs = 3;
@@ -91,7 +93,19 @@ Terry.Rogue = {
 	Locked : 0,
 	First  : 1,
 	Taught : 2
-}
+};
+Terry.Breasts = {
+	Flat : 0,
+	Acup : 1,
+	Bcup : 2,
+	Ccup : 3,
+	Dcup : 4
+};
+Terry.PersonalQuest = {
+	NotStarted : 0,
+	Started    : 1,
+	Completed  : 2
+};
 
 Terry.prototype.FromStorage = function(storage) {
 	this.Butt().virgin       = parseInt(storage.virgin) == 1;
@@ -179,12 +193,193 @@ Terry.prototype.mfPronoun = function(male, female) {
 Terry.prototype.HorseCock = function() {
 	return (this.FirstCock() && this.FirstCock().race == Race.horse);
 }
+Terry.prototype.Cup = function() {
+	return this.flags["breasts"];
+}
 
 // Party interaction
 Terry.prototype.Interact = function(switchSpot) {
+	var parse = {
+		foxvixen : terry.mfPronoun("fox", "vixen"),
+		HeShe   : terry.HeShe(),
+		heshe   : terry.heshe(),
+		HisHer  : terry.HisHer(),
+		hisher  : terry.hisher(),
+		himher  : terry.himher(),
+		hishers : terry.hishers(),
+		truegender : Gender.Desc(terry.Gender()),
+		armordesc  : function() { return terry.ArmorDescLong(); },
+		weapondesc : function() { return terry.WeaponDescLong(); }
+	};
+	
 	Text.Clear();
-	terry.PrintDescription();
+	Text.Add("Terry is a [truegender] fox-morph follower you 'recruited' from Rigard’s Jail, [heshe]’s currently wearing [armordesc] and wielding [weapondesc].", parse);
+	Text.NL();
+	if(terry.Relation() < 30)
+		Text.Add("[HeShe] scratches [hisher] neck sometimes, around the enchanted collar you gave [himher] to ensure [heshe]’s kept under control. Sometimes [heshe] gives you an irritated glance, when [heshe] thinks you’re not looking.", parse);
+	else if(terry.Relation() < 60)
+		Text.Add("Around [hisher] neck is an enchanted collar that prevents [himher] from leaving you or otherwise disobeying you. It was the only way you could take the petite [foxvixen] away from the death row. It’s probably a good thing [heshe]’s wearing it too, considering [hisher] thieving past, there’s no guarantee [heshe] won’t get in trouble again. When [heshe] spots you looking, [heshe] quickly nods in acknowledgement at you.", parse);
+	else if(terry.flags["pQ"] >= Terry.PersonalQuest.Completed)
+		Text.Add("The [foxvixen] is always wearing that enchanted collar you gave [himher] when you bailed [himher] out of jail, even though [heshe] technically doesn’t have to wear it anymore. You didn’t think the crafty [foxvixen] would find a way out of it, but [heshe] did. Even so, [heshe] insists on wearing it. “As proof of ownership,” you quote. You didn’t think [heshe] would take to [hisher] station so well, nor that you’d grow this close as you travelled together. When your eyes meet, [heshe] smiles warmly at you.", parse);
+	else
+		Text.Add("[HeShe]’s grown quite close to you as you spent time together, and you gotta admit, the [foxvixen] is not so bad once you get to know [himher]. You’ve found [himher] to be quite amorous when [heshe] wants to, and even a bit clingy at times… but nevertheless you’re glad to have the company of pretty [foxvixen]. When your eyes meet, [heshe] smiles warmly at you.", parse);
+	Text.Flush();
 	Scenes.Terry.Prompt();
+}
+
+Scenes.Terry.Appearance = function() {
+	var parse = {
+		foxvixen : terry.mfPronoun("fox", "vixen"),
+		HeShe   : terry.HeShe(),
+		heshe   : terry.heshe(),
+		HisHer  : terry.HisHer(),
+		hisher  : terry.hisher(),
+		himher  : terry.himher(),
+		hishers : terry.hishers(),
+		trueGender : Gender.Desc(terry.Gender()),
+		tbreastsDesc : function() { return terry.FirstBreastRow().Short(); },
+		tcockDesc : function() { return terry.MultiCockDesc(); }
+	};
+	
+	Text.Clear();
+	Text.Add("You take a closer look at Terry.", parse);
+	Text.NL();
+	Text.Add("Terry is a [trueGender] fox-morph, a former thief that you 'rescued' from the jail in Rigard.", parse);
+	if(terry.Gender() == Gender.male && terry.PronounGender() != Gender.male)
+		Text.Add(" Though he’s really a male, you chose to refer to him as a 'she'.", parse);
+	else if(terry.Gender() == Gender.female && terry.PronounGender() != Gender.female)
+		Text.Add(" Though she’s really a female, you chose to refer to her as a 'he'.", parse);
+	Text.NL();
+	Text.Add("Terry’s vulpine features are unquestionably feminine; ", parse);
+	if(terry.Gender() == Gender.male)
+		Text.Add("despite [hisher] birth gender, [heshe] can easily pass as a very fetching young fox-woman with only a little effort on [hisher] part.", parse);
+	else
+		Text.Add("which is only fitting, seeing as how [heshe]’s a very lovely [foxvixen] [trueGender].", parse);
+	Text.Add(" Two small, delicate vulpine ears sit atop [hisher] head, practically swallowed by a lush mane of crimson fur. Well-groomed and clean, Terry doesn’t style [hisher] hair much beyond making a rough effort to tie it back into a ponytail. A prominent forelock drapes [hisher] face, falling almost down onto [hisher] dainty little black nose. Beautiful ocean-blue eyes stare out from amidst the hair, always surveying [hisher] surroundings.", parse);
+	Text.NL();
+	if(terry.Relation() < 30)
+		Text.Add("Once [heshe] realizes you’re checking [himher] out, Terry immediately looks away with an indignant huff. Seems like [heshe]’s not too comfortable with your inspection.", parse);
+	else if(terry.Relation() < 60)
+		Text.Add("Terry grins nervously, once [heshe] realizes you’re checking [himher] out. Aside from [hisher] apparent nervousness, [heshe] makes no move to block your view.", parse);
+	else
+		Text.Add("The [foxvixen]’s eyes dart towards you, and as your gaze meets [hisher]’s, [heshe] smiles. Terry adjusts [hisher] hair a bit and straightens [hisher] posture as [heshe] stretches languidly, giving you a perfectly unobstructed view of [himher]self.", parse);
+	Text.NL();
+	Text.Add("Despite the crimson mane atop the [foxvixen]’s head, the rest of [hisher] fur is a very different color; golden yellow offsetting white. Though most of [hisher] face is pure white, a large ring of gold around each eye blurs together over the bridge of the nose, giving [himher] a very domino mask-like effect. [HisHer] ears are, likewise, pure gold on the outside and pure white on the inside. White gives way to gold at [hisher] neck, and you know for a fact that most of Terry’s fur is gold; only on [hisher]forelimbs, legs from knees to ankle, stomach, buttocks, and the very tip of [hisher] tail does the white return.", parse);
+	Text.NL();
+	Text.Add("Following the fur leads your gaze down to Terry’s chest. ", parse);
+	if(terry.Cup() > Terry.Breasts.Flat) {
+		parse["c"] = terry.FirstCock() ? Text.Parse(", contrasting the [tcockDesc] between [hisher] legs", parse) : "";
+		Text.Add("A pair of [tbreastsDesc] bulge noticeably atop Terry’s chest[c]. ", parse);
+		if(terry.Cup() == Terry.Breasts.Dcup) {
+			Text.Add("Though only D-cups, Terry is so slenderly built elsewhere that they seem exaggeratedly large. The full quivering breasts jiggle softly whenever [heshe] moves, making even the act of breathing almost hypnotic as they rise, fall, expand and contract. It really is incredible that such a dainty [foxvixen] could have such huge breasts.", parse);
+			if(terry.Lactation()) {
+				Text.NL();
+				Text.Add("The huge [foxvixen] tits contain an equally huge supply of warm, creamy milk, just waiting to be tapped whenever you want. As if to prove your point, a small bead leaks from each perky pink nipple in turn, sliding down Terry’s areolae. With practised disinterest, [heshe] wipes the smears of milk away with a quick flick of [hisher] fingers over each breast in turn.", parse);
+			}
+		}
+		else if(terry.Cup() == Terry.Breasts.Ccup) {
+			Text.Add("Plush and proud, the C-cup sized breasts have just the right amount of sag to them, drawing a casual eye and enticing the viewer to touch and squeeze them. Terry’s delicate body-type only makes them seem more prominent.", parse);
+			if(terry.Lactation())
+				Text.Add(" Further weighing the [foxvixen] down is the ample supply of fresh milk brewing in each plush teat. As [heshe] moves, a small bead of white wells from one little pink nipple, forced out by the shift in pressure.", parse);
+		}
+		else if(terry.Cup() == Terry.Breasts.Bcup) {
+			Text.Add("The full, perky orbs are a good size that blends well with Terry’s dainty frame; the luscious pair of B-cups just big enough to squeeze and play with.", parse);
+			if(terry.Lactation())
+				Text.Add(" And that squeezability comes in handy; it makes milking [himher] of the sweet [foxvixen] milk brewing in each tit almost effortless.", parse);
+		}
+		else {
+			Text.Add("Dainty little things just barely big enough to squeeze as they are, you’d estimate Terry’s breasts to be A-cups. They mesh very well with [hisher] slender frame.", parse);
+			if(terry.Lactation())
+				Text.Add(" Despite their small size, you know they contain an easily tapped supply of warm, creamy [foxvixen] milk.", parse);
+		}
+	}
+	else {
+		Text.Add("Terry’s chest is flat... but that’s about the most masculine thing you can say about [hisher] build. Even though it lacks any visible breasts, there’s a slender suppleness to [hisher] physique that ", parse);
+		if(terry.Gender() == Gender.male)
+			Text.Add("doesn’t help [himher] present [himher]self as male.", parse);
+		else if(terry.Gender() == Gender.herm)
+			Text.Add("seems strangely appropriate for one who blurs the gender-line like your double-equipped [foxvixen].", parse);
+		else
+			Text.Add("manages to convey [hisher] fundamental femininity.", parse);
+	}
+	Text.NL();
+	if(terry.Slut() < 30) {
+		if(terry.Relation() < 30) {
+			Text.Add("The [foxvixen] immediately hugs [hisher] chest. <i>”Quit it!”</i> [heshe] protests.", parse);
+			Text.NL();
+			Text.Add("You sigh mentally and roll your eyes, but choose to listen. There’s nothing to be gained by making [himher] upset over something so trivial.", parse);
+		}
+		else if(terry.Cup() >= Terry.Breasts.Acup) {
+			Text.Add("<i>”Umm… it’s kinda embarrassing when you stare at them like that,”</i> the [foxvixen] says, cupping [hisher] breasts.", parse);
+			Text.NL();
+			Text.Add("You smile slightly and shake your head. Terry really needs to stop being so shy; [heshe] has a perfectly nice set of breasts, so naturally you’re going to look at them.", parse);
+		}
+		else {
+			Text.Add("<i>”I don’t see why you’re so fascinated with my chest. I got nothing but fur here,”</i> [heshe] states nonchalantly.", parse);
+			Text.NL();
+			Text.Add("You simply grin back; it’s just part of [hisher] charms, after all.", parse);
+		}
+	}
+	else if(terry.Slut() < 60) {
+		if(terry.Cup() >= Terry.Breasts.Acup) {
+			parse["heft"] = terry.Cup() >= Terry.Breasts.Ccup ? " and hefting" : "";
+			Text.Add("Terry cups [hisher] breasts, massaging[heft] them. <i>”You like them?”</i> [heshe] asks teasingly, <i>”Well, you’d better. Cuz it was you who gave them to me.”</i>", parse);
+			Text.NL();
+			Text.Add("You enthusiastically nod your head in agreement; you most certainly do like them.", parse);
+		}
+		else {
+			Text.Add("<i>”I got nothing to offer up here, and ogling me like that isn’t going to make boobs sprout out of my chest,”</i> the [foxvixen] teases with a grin.", parse);
+			Text.NL();
+			Text.Add("[HeShe] has to admit, though, that’s a pretty entertaining thought, you shoot back.", parse);
+		}
+	}
+	else {
+		if(terry.Cup() >= Terry.Breasts.Acup) {
+			Text.Add("<i>”If you keep staring at them like that, it feels like you’re going to wind up burning holes through my clothes,”</i> Terry teases. <i>”Not that I’d mind if you did, but replacing them might get expensive.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, maybe you should just have [himher] go around naked; you think [heshe]’d like that.", parse);
+			Text.NL();
+			Text.Add("<i>”Ha! I will if you really want me to. But you’ll have to go naked yourself. If I’m going to be giving you eye-candy all the time, I expect the same treatment,”</i> [heshe] quips back.", parse);
+			Text.NL();
+			Text.Add("You shoot back that you’ll consider it, but right now, you want to keep looking at Terry.", parse);
+		}
+		else {
+			Text.Add("<i>”You should know well that my best assets aren’t  up here,”</i> the [foxvixen] says, patting [hisher] chest. <i>”But feel free to keep looking.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, if [heshe] insists, why not? Still, there’s more of [himher] to look at...", parse);
+		}
+	}
+	Text.NL();
+	Text.Add("Your gaze sweeps down Terry’s form, towards [hisher] waist. ", parse);
+	//TODO Pregnancy
+	//Text.Add("", parse);
+	//else
+		Text.Add("Your [foxvixen] is nicely trim, lean, flat-bellied and perfectly suited for sneaking through windows or wriggling under couches. But there’s not really anything else to say about it, so your gaze keeps sweeping down towards [hisher] loins...", parse);
+	Text.NL();
+	if(terry.FirstCock()) {
+		if(terry.HorseCock()) {
+			Text.Add("A rather stark contrast to the rest of the [foxvixen]’s form, between Terry’s thighs rests a proud piece of stallion-cock, far larger than [hisher] old dick. Mottled brown in color, it’s flaccid state boasts an area of nine inches long and one and a half inches thick. At full mast, however, it grows even bigger, bringing home a massive thirteen inches in length and two and a half inches thick.", parse);
+			Text.NL();
+			Text.Add("It’s a lot more sensitive than [hisher] old fox-prick, and [heshe] can get going with just a little attention there. Despite the new form, it hasn’t entirely changed from before; [heshe] still has a knot at the base of [hisher] cock, though it’s much bigger than it used to be. [HisHer] balls have practically doubled in size, heavy with churning loads of cum. Sometimes you wonder if it’s even possible for the [foxvixen] to run dry...", parse);
+		}
+		else
+			Text.Add("Between [hisher] thighs lies [hisher] dainty little vulpine dick. When fully erect, it’s a girlish red piece of meat, four inches long and an inch thick. Below it lies a pair of pretty little trappy-balls that cling closely to [hisher] crotch. It’s no surprise that [heshe] can disguise [himher]self as a normal woman so easily. Even when it’s fully erect, it looks too cute to be on a guy.", parse);
+		Text.NL();
+	}
+	if(terry.FirstVag()) {
+		parse["c"] = terry.FirstCock() ? Text.Parse(", behind [hisher] [tcockdesc]", parse) : "";
+		Text.Add("[HeShe] has a dainty little feminine pussy between [hisher] legs[c]. It’s wet, shiny, and seemingly just waiting to be stuffed with an inquisitive cock, tongue or fingers. If you stimulate it enough, Terry can’t help but squirt a nice gush of vixen-juice, ", parse);
+		if(terry.Slut() < 45)
+			Text.Add("much to [hisher] embarrassment.", parse);
+		else
+			Text.Add("a quirk [heshe]’s come to appreciate.", parse);
+		Text.NL();
+	}
+	parse["ns"] = terry.Slut() >= 60 ? "seductively" : "nervously";
+	Text.Add("Done admiring what lies between your [foxvixen]’s legs, your gaze sweeps down over [hisher] legs. A girlishly curvy set of hips helps to support a definitely non boyish bubble-butt; Terry’s tail flicks [ns] over a perky ass, more than enough to fill your groping hands if you were to take a grab. Slender, shapely plantigrade legs stretch down, ending in partially paw-like feet. [HeShe] has pads on the balls of [hisher] feet, meaning that whenever [heshe] chooses to walk, [heshe] would leave behind paw prints like those of a real fox.", parse);
+	Text.NL();
+	Text.Add("Your investigation complete, you nod your head in satisfaction.", parse);
+	Text.Flush();
 }
 
 Scenes.Terry.Prompt = function() {
@@ -202,6 +397,10 @@ Scenes.Terry.Prompt = function() {
 	var switchSpot = party.location.switchSpot();
 	
 	var options = new Array();
+	options.push({ nameStr : "Appearance",
+		func : Scenes.Terry.Appearance, enabled : true,
+		tooltip : "Take a closer look."
+	});
 	options.push({ nameStr : "Talk",
 		func : function() {
 			Text.Clear();
@@ -1478,7 +1677,7 @@ Scenes.Terry.SkinshipRummagePack = function() {
 		Text.Add("After digging through quite a few toys, you finally manage to secure Terry’s comb and brush. Carefully you put away everything back into [hisher] pack and move to the grinning [foxvixen].", parse);
 	}
 	else if(terry.Slut() >= 30) {
-		Text.Add("Terry keeps [hisher] pack fairly organized. Few spare clothes, some picks, assorted tools for crafting [hisher] gadgets… a bottle of lube? You set that aside and rummage a bit deeper, grinning to yourself once you find what looks like a fairly small buttplug. Has Terry being having fun behind your back?", parse);
+		Text.Add("Terry keeps [hisher] pack fairly organized. A few spare clothes, some lockpicks, assorted tools for crafting [hisher] gadgets… a bottle of lube? You set that aside and rummage a bit deeper, grinning to yourself once you find what looks like a fairly small buttplug. Has Terry being having fun behind your back?", parse);
 		Text.NL();
 		Text.Add("<i>”Umm... ah...”</i> [heshe] trails off. <i>”Well, I figured since we’ve been doing the dirty deed a lot, I should start getting used to it. And it does, kinda, feel good… sometimes… when I’m in the mood.”</i>", parse);
 		Text.NL();
