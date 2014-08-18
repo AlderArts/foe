@@ -129,7 +129,7 @@ Scenes.Jeanne.Talk = function() {
 			Text.Add("<i>”Never give the gem to someone else, not even someone you trust, as it could potentially be used to harm you. The stronger the gem becomes, the stronger this connection will be.”</i>", parse);
 			Text.NL();
 			
-			if(gameCache.flags["Portals"]) {
+			if(gameCache.flags["Portals"] != 0) {
 				Text.Add("<i>”After what happened, I can understand if do not want anything to do with these portals any longer, but it is vital that we are able to find out what caused the portals to disappear in the first place. Lately, I have felt it growing stronger...”</i>", parse);
 			}
 			else if(player.summons.length > 0) {

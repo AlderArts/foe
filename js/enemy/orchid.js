@@ -180,3 +180,46 @@ OrchidBoss.prototype.Act = function(encounter, activeChar) {
 	else
 		Abilities.EnemySkill.TWhip.Use(encounter, this, t);
 }
+
+Scenes.Orchid.Interact = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("The purified Orchid looks a lot less intimidating than when you fought her, though she still has a mass of tentacles sticking out of her back. The cute dryad has a lithe form standing at about five foot six, her breasts and hips rather modest compared to her voluptuous mother. Both her skin and hair are green in color, entwined with twigs and leaves. Her formerly black sclera have cleared, her eyes now a soft almond in color.", parse);
+	Text.NL();
+	if(orchid.Slut() >= 50)
+		Text.Add("She looks playful enough, but neither she nor her friends can ignore the now more or less docile tentacles; a permanent testament to what she’s done. It looks like she tries to avoid touching anything with them, though they are a bit unwieldy to maneuver.", parse);
+	else
+		Text.Add("The dryad looks a lot happier now than before, probably due to you and her friends accepting her new body to such an extent. She now has little trouble handling her tentacles, using them to move around and to grapple playfully with her friends. If nothing else, her new transformation has made her the unquestioned tag-champion of the glade.", parse);
+	Text.NL();
+	Text.Add("Orchid turns to you as you approach, blushing.", parse);
+	Text.NL();
+	Text.Add("<i>”A-ah, hello [playername]!”</i>", parse);
+	Text.Flush();
+	
+	Scenes.Orchid.Prompt();
+}
+
+Scenes.Orchid.Prompt = function() {
+	var parse = {
+		
+	};
+	
+	//[name]
+	var options = new Array();
+	/* TODO
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	*/
+	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
+}
+

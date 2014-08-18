@@ -53,6 +53,20 @@ world.loc.Forest.Glade.links.push(new Link(
 		MoveToLocation(world.loc.Forest.Outskirts, {minute: 15});
 	}
 ));
+world.loc.Forest.Glade.events.push(new Link(
+	"Mother tree", true, true,
+	null,
+	function() {
+		Scenes.DryadGlade.MotherTree();
+	}
+));
+world.loc.Forest.Glade.events.push(new Link(
+	"Orchid", true, true,
+	null,
+	function() {
+		Scenes.Orchid.Interact();
+	}
+));
 
 world.loc.Forest.Glade.onEntry = function() {
 	if(glade.flags["Visit"] >= 2) {
@@ -606,6 +620,128 @@ Scenes.DryadGlade.FirstWin = function(enc) {
 	});
 }
 
+Scenes.DryadGlade.MotherTree = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("At the base of the thick tree trunk at the center of the glade, the Mother Tree awaits. Though the dryad is old, she is fair to look upon; her voluptuous body, chocolate skin and deep green hair giving her a very exotic appearance. Her massive breasts and fertile pussy are barely covered by leaves and branches twining together, leaving very little to your imagination.", parse);
+	Text.NL();
+	Text.Add("The dryad smiles at you, her almond eyes joyous at seeing her savior once more.", parse);
+	Text.NL();
+	Text.Add("<i>”Welcome, Lifegiver!”</i> she greets you. <i>”How may I aid you?”</i>", parse);
+	Text.Flush();
+	
+	Scenes.DryadGlade.MotherTreePrompt();
+}
 
+Scenes.DryadGlade.MotherTreePrompt = function() {
+	var parse = {
+		playername : player.name
+	};
+	if(party.Num() == 2)
+		parse["comp"] = " and " + party.Get(1).name;
+	else if(party.Num() > 2)
+		parse["comp"] = " and your companions";
+	else
+		parse["comp"] = "";
+	
+	//[Talk][Sex][Healing]
+	var options = new Array();
+	options.push({ nameStr : "Talk",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>”Ask, and I shall answer as well as I can.”</i>", parse);
+			Text.Flush();
+			
+			Scenes.DryadGlade.MotherTreeTalk();
+		}, enabled : true,
+		tooltip : "You wish to ask the dryad some questions."
+	});
+	/* TODO: Sex
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	*/
+	options.push({ nameStr : "Healing",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>”Gladly, [playername],”</i> the dryad nods, instructing you to take a seat on her lower roots. Warmth suffuses you as you feel all your worries and fatigue wash away, and when you step away, you feel purified.", parse);
+			Text.NL();
+			Text.Add("You thank the dryad, feeling fully capable of continuing your journey again.", parse);
+			Text.Flush();
+			
+			world.TimeStep({minute: 15});
+			party.RestFull();
+		}, enabled : true,
+		tooltip : Text.Parse("Ask her to use her powers to heal you[comp].", parse)
+	});
+	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
+}
 
+Scenes.DryadGlade.MotherTreeTalk = function() {
+	var parse = {
+		
+	};
+	
+	//[Herself][Orchid][Spirit][Lifebringer]
+	var options = new Array();
+	options.push({ nameStr : "Herself",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>”When you get to be as old as I am, you perceive time in a different manner,”</i> Mother Tree responds. <i>”There is much to tell, but I fear that much of it would bore you. Most of my life has been rather uneventful from your perspective; I give birth to daughters and sons, I nourish the glade, and I watch the lives of mortals pass by my eyes like candles flickering in and out.”</i> She looks at you sadly. <i>”A long life is sometimes more a burden than a boon.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>”Once in a while, I would meet someone like Alliser or Jeanne, people whose flames - though their lives are much shorter than mine - shine brighter than any star.”</i> She sighs. <i>”Things would be so much simpler if it was only this,”</i> she concludes, caressing her tree fondly.", parse);
+			Text.Flush();
+			Scenes.DryadGlade.MotherTreeTalk();
+		}, enabled : true,
+		tooltip : "Ask her for her story."
+	});
+	options.push({ nameStr : "Orchid",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>”Orchid was always so carefree and happy, but she has changed after you saved her from the corruption. She is very self concious, and I fear she blames herself for what happened, even though she is innocent.”</i> Mother Tree looks out into the peaceful glade, watching over her daughter. <i>”The others try to be kind to her, but many cannot get over her new appearance.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>”I think that you visiting her helps a lot. She looks up to you; nay, I dare say she’s infatuated with you. You might be the only one that can help her through this.”</i> You nod thoughtfully.", parse);
+			Text.Flush();
+			Scenes.DryadGlade.MotherTreeTalk();
+		}, enabled : true,
+		tooltip : "Ask her about her betentacled daughter."
+	});
+	options.push({ nameStr : "Spirit",
+		func : function() {
+			Text.Clear();
+			if(gameCache.flags["Portals"] != 0) {
+				Text.Add("<i>”It really surprised me when Spirit said she was going with you. Then again, she’s always been a headstrong child. Though she looks young, she does so because she wishes to; it’s well over two decades since her birth.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>”I truly believe she can aid you, though. She is at least as strong as I was before I took root.”</i>", parse);
+			}
+			else {
+				Text.Add("<i>”I’m glad that you and Spirit have grown close. Just be sure to treat my daughter well, [playername]. As I told you, she is strong.”</i> The last is said with a mother’s pride.", parse);
+			}
+			Text.NL();
+			Text.Add("<i>”Either way, I miss her dearly, but a mother cannot always cling tightly to her little ones,”</i> the dryad concludes sorrowfully.", parse);
+			Text.Flush();
+			Scenes.DryadGlade.MotherTreeTalk();
+		}, enabled : true,
+		tooltip : "Ask her about her younger daughter, Spirit, who resides in your Gem."
+	});
+	options.push({ nameStr : "Lifebringer",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>”It is who you are and who you will be,”</i> she replies. <i>”All will be revealed in time, if you persevere. Much rests on you, according to the sage.”</i>", parse);
+			Text.Flush();
+			Scenes.DryadGlade.MotherTreeTalk();
+		}, enabled : true,
+		tooltip : "Why does she insist on calling you by that name?"
+	});
+	Gui.SetButtonsFromList(options, true, Scenes.DryadGlade.MotherTreePrompt);
+}
 
