@@ -1530,7 +1530,10 @@ Scenes.Miranda.Chat = function() {
 				tooltip : "You both know where this is going to end, so why not skip straight to dessert?"
 			});
 		}
-		
+		options.push({ nameStr : "Sex",
+			func : Scenes.Miranda.TavernSexPublicPrompt, enabled : true,
+			tooltip : "Ask her if she's up for some sexy times, right here, right now."
+		});
 		options.push({ nameStr : "Backroom",
 			func : Scenes.Miranda.TavernSexBackroomPrompt, enabled : true,
 			tooltip : "Invite her to the backrooms for some fun."
@@ -1538,6 +1541,40 @@ Scenes.Miranda.Chat = function() {
 	}
 	
 	Gui.SetButtonsFromList(options);
+}
+
+Scenes.Miranda.TavernSexPublicPrompt = function() {
+	var parse = {
+		mastermistress : player.mfTrue("master", "mistress")
+	};
+	
+	var dom = miranda.SubDom() - player.SubDom();
+	var nasty = miranda.Attitude() < Miranda.Attitude.Neutral;
+	
+	Text.Clear();
+	if(nasty || dom > 25)
+		Text.Add("<i>”You truly have no shame, my little bitch,”</i> Miranda chuckles. <i>”But since I have an itch that needs scratching, I’ll indulge you.”</i>", parse);
+	else if(dom > -50)
+		Text.Add("<i>”Sure, I’m always up for a romp,”</i> Miranda grins. <i>”I don’t mind an audience either, I’ve got nothing to hide.”</i>", parse);
+	else
+		Text.Add("<i>”Of course, [mastermistress]!”</i> Miranda yips happily. <i>”What do you want to do?”</i>", parse);
+	Text.Flush();
+	
+	//[BJ] TODO
+	var options = new Array();
+	options.push({ nameStr : "Blow her",
+		func : function() {
+			Text.Clear();
+			
+			Scenes.Miranda.TavernSexPublicBJ();
+			
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		}, enabled : true,
+		tooltip : "Give Miranda a blowjob under the table."
+	});
+	Gui.SetButtonsFromList(options, true, Scenes.Miranda.Chat);
 }
 
 Scenes.Miranda.TakeHome = function() {
@@ -2027,6 +2064,10 @@ Scenes.Miranda.MaidensBaneTalk = function() {
 					});
 				}
 				
+				options.push({ nameStr : "Sex",
+					func : Scenes.Miranda.TavernSexPublicPrompt, enabled : true,
+					tooltip : "Ask her if she's up for some sexy times, right here, right now."
+				});
 				options.push({ nameStr : "Backroom",
 					func : Scenes.Miranda.TavernSexBackroomPrompt, enabled : true,
 					tooltip : "Invite her to the backrooms for some fun."
@@ -4373,6 +4414,211 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 		
 		return cum;
 	}
+}
+
+Scenes.Miranda.TavernSexPublicBJ = function() {
+	var parse = {
+		playername : player.name,
+		mastermistress : player.mfTrue("master", "mistress"),
+		boyGirl : player.mfTrue("boy", "girl"),
+		pheshe : player.mfTrue("he", "she"),
+		phimher : player.mfTrue("him", "her"),
+		tongueDesc : function() { return player.TongueDesc(); },
+		bellyDesc : function() { return player.StomachDesc(); },
+		earDesc : function() { return player.EarDesc(); }
+	};
+
+	var dom = player.SubDom() - miranda.SubDom();
+	
+	Text.Add("You duck in under the table, kneeling between the guardswoman’s legs.", parse);
+	Text.NL();
+	
+	var setPublic = false;
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("<i>”You know what to do, [playername],”</i> Miranda murmurs, sipping her mug while you unlace her britches, releasing the trapped beast. The meaty shaft smacks wetly against your forehead, depositing a splatter of pre on your upturned face. ", parse);
+		if(dom < -25 || player.Slut() > 50)
+			Text.Add("You lick your lips in anticipation. This is going to be quite a tasty treat.", parse);
+		else
+			Text.Add("The herm smiles innocently when you frown, tapping her finger against her thigh. Might as well get to it.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>”Mmm… you know just how to make a girl feel special,”</i> Miranda purrs. <i>”Who knows, perhaps I’ll return the favor later?”</i> The dobie is panting in anticipation as you undo her britches, pulling them down to reveal her aching cock.", parse);
+		Text.NL();
+		Text.Add("<i>”I… I don’t mind you being a bit rough,”</i> she murmurs.", parse);
+	}, 1.0, function() { return miranda.SubDom() < -25; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>”Nice try, bitch, but it’s not going to be that easy,”</i> Miranda chuckles mockingly. Before you know it, she’s kicked the table out of the way, leaving you in quite a compromising position. It doesn’t seem like anyone have noticed you yet, though.", parse);
+		Text.NL();
+		Text.Add("<i>”I believe you were in the middle of something,”</i> the dommy herm purrs, leaning back and spreading her legs invitingly. ", parse);
+		if(player.SubDom() < 25 || player.Slut() > 50)
+			Text.Add("You have trouble hiding your eagerness as you undo her britches, revealing her tasty meatstick. You can’t wait to go down on her, regardless of if you gather an audience.", parse);
+		else
+			Text.Add("There is a glint of defiance in your eyes as you undo her britches, but you might as well go through with this now that you’ve started it. Miranda is bound to make trouble for you if you don’t.", parse);
+		
+		player.slut.IncreaseStat(50, 1);
+		player.subDom.DecreaseStat(-50, 1);
+		setPublic = true;
+	}, 1.0, function() { return (miranda.Attitude() < Miranda.Attitude.Neutral) || miranda.SubDom() > 50; });
+	
+	scenes.Get();
+	
+	Text.NL();
+	Text.Add("You give Miranda’s shaft a few tentative licks, enjoying the feeling of her member throbbing on your [tongueDesc] before you wrap your lips around it. Almost immediately, your mouth is filled with her musky taste.", parse);
+	Text.NL();
+	
+	Sex.Blowjob(player, miranda);
+	player.FuckOral(player.Mouth(), miranda.FirstCock(), 2);
+	miranda.Fuck(miranda.FirstCock(), 2);
+	
+	Text.Add("<i>”Mmm… good [boyGirl],”</i> she sighs, putting her leg over your shoulder. Pulling you in with her foot on your lower back, the dommy dobie locks you in place, leaving you no way to go but down on her shaft. She shifts her position slightly, pushing her hips forward, spearheaded by several inches of canine cock.", parse);
+	Text.NL();
+	Text.Add("It doesn’t seem like you’re going anywhere until Miranda has had her fill - or until she’s given you your fill, as it were. Either way, you resign yourself to giving her what she wants, which right now is your lips on her crotch. You start bobbing your head slowly, sucking on her member.", parse);
+	Text.NL();
+	Text.Add("<i>”Come on, [playername], you are going to bore me if you don’t get going soon,”</i> Miranda complains, tightening her leghold. At her urging, you increase your pace, the guardswoman’s pointed cockhead poking at the entrance of your throat each stroke. The dobie yawns theatrically, though you can sense through the minute movements of her body that she’s definitely feeling this.", parse);
+	Text.NL();
+	if(Math.random() < 0.5 && miranda.SubDom() > 25) {
+		Text.Add("<i>”Hey barkeep! Another drink over here!”</i> Miranda calls out across the room. She places one of her hands on the back of your head, keeping you firmly in place as she waits. ", parse);
+		if(setPublic)
+			Text.Add("You quickly realise your compromised position, but you can’t really do anything about it right now, so you continue sucking, trying to get the she-bitch off as quickly as you can.", parse);
+		else
+			Text.Add("You should still be relatively safe under the cover of the table as long as you manage to keep quiet - something you are not sure Miranda will let you get away with.", parse);
+		parse["pub"] = setPublic ? "not that you think it will help much" : "though you wish that they had table cloths";
+		Text.Add(" You suddenly appreciate the dim light in the tavern, [pub].", parse);
+		Text.NL();
+		Text.Add("Your heart is pounding loudly as you hear steps approaching, and a mug is placed on the table. Much to your aggravation, the barkeep stays to chat with the herm for a while. ", parse);
+		if(setPublic)
+			Text.Add("Neither of them acknowledge you, though you can almost feel them staring at you, stuck as you are more than halfway down Miranda’s cock. ", parse);
+		else
+			Text.Add("Even with the relative cover of the table, you are probably making enough lewd noises for the newcomer to suspect what’s going on. ", parse);
+		if(player.Slut() > 50)
+			Text.Add("Unconcerned with your audience, you dig in, deciding to give them a show.", parse);
+		else
+			Text.Add("Cheeks afire, you close your eyes and wait for the bartender to leave, imagining that they are unaware of you.", parse);
+		Text.NL();
+		Text.Add("Eventually, you are left alone again with the bitch.", parse);
+		Text.NL();
+		Text.Add("<i>”Ah, that hits the spot!”</i> Miranda sighs languidly. It’s not really clear if she’s referring to the drink.", parse);
+		Text.NL();
+	}
+	else if(Math.random() < 0.5) {
+		if(Math.random() < 0.5) {
+			parse["HeShe"] = "He";
+			parse["heshe"] = "he";
+			parse["HisHer"] = "His";
+			parse["hisher"] = "his";
+			parse["himher"] = "him";
+			parse["malefemale"] = "male";
+		}
+		else {
+			parse["HeShe"] = "She";
+			parse["heshe"] = "she";
+			parse["HisHer"] = "Her";
+			parse["hisher"] = "her";
+			parse["himher"] = "her";
+			parse["malefemale"] = "female";
+		}
+		
+		Text.Add("You hear soft footsteps walking over to you, and a glance to the side tells you that one of the felines is approaching.", parse);
+		Text.NL();
+		Text.Add("<i>”Hey there kitty,”</i> Miranda huffs, greeting them. <i>”Sorry, but I can’t give you any cream right now, little Miranda is occupied.”</i> ", parse);
+		if(setPublic) {
+			Text.Add("As if that wasn’t obvious enough. <i>”Perhaps [pheshe] wants to share?”</i> the cat asks hopefully, [hisher] voice identifying [himher] as the [malefemale].", parse);
+			Text.NL();
+			Text.Add("<i>”Nah, something tells me [playername] wants this load all to [phimher]self,”</i> Miranda replies, patting you on the head.", parse);
+			Text.NL();
+			Text.Add("<i>”Aww...”</i> [HeShe] pouts a little bit at being left out.", parse);
+		}
+		else
+			Text.Add("A curious cat peeks down under the table, giving you a purr when [heshe] sees you.", parse);
+		Text.NL();
+		Text.Add("<i>”I’ll come back later, okay?”</i> The cat gives you a few glances over [hisher] shoulder as [heshe] returns to [hisher] own table.", parse);
+		Text.NL();
+	}
+	Text.Add("After a while, the dobie decides to take a more active part, grabbing hold of your head and not-so-gently guiding it. Deeper and deeper she pushes, until your lips are straining around her thick - if still deflated - knot. Somehow, you manage to keep pace with her, as she allows you the occasional chance to surface for air before forcing you back to the task at hand.", parse);
+	Text.NL();
+	if(party.Num() > 1) {
+		var femcomp = [];
+		if(party.InParty(kiakai)) femcomp.push(kiakai);
+		if(party.InParty(terry))  femcomp.push(terry);
+		if(party.InParty(roa))    femcomp.push(roa);
+		if(party.InParty(gwendy)) femcomp.push(gwendy);
+		if(party.InParty(momo))   femcomp.push(momo);
+		
+		parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
+		Text.Add("Though she sounds like she’s getting a bit terse, Miranda keeps up a jovial conversation with [comp], acting as if nothing strange is going on.", parse);
+		if(femcomp.length > 0) {
+			var comp = femcomp[Math.floor(Math.random() * femcomp.length)];
+			parse["them"] = comp.name;
+			parse["heshe"] = comp.heshe();
+			parse["hisher"] = comp.hisher();
+			parse["himher"] = comp.himher();
+			Text.Add("She sounds like she’s making not so subtle innuendos to [them], asking if [heshe]’d be interested in giving it a try.", parse);
+			Text.NL();
+			if(comp == kiakai) {
+				parse["name"] = kiakai.name;
+				Text.Add("<i>”I… ah, I am not sure if-”</i> [name] stammers, flustered. Miranda just laughs at the elf’s cute response.", parse);
+			}
+			else if(comp == terry) {
+				parse["foxvixen"] = terry.mfPronoun("fox", "vixen");
+				Text.Add("<i>”In your dreams, watch-dog. I’d rather blow everyone on this bar rather than blow you!”</i> the [foxvixen] shoots back, perhaps a bit louder than [heshe] should…", parse);
+				Text.NL();
+				Text.Add("<i>”Oh ho! That sounds like an offer if I’ve heard any. Anyone up for some!?”</i> Miranda yells at the crowd. There’s more than a few guys, and even some females, that show interest.", parse);
+				Text.NL();
+				if(terry.Slut() >= 60)
+					Text.Add("Smirking, Terry licks [hisher] lips. <i>”Sorry boys and girls. I meant what I said, but I’m not allowed to disobey my [mastermistress],”</i> [heshe] points at the collar around [hisher] neck. <i>”As much as I’d love to service you to prove my point to this dirty dog,”</i> [heshe] points at Miranda, who scowls in response. <i>”Can’t do anything unless my boss says so. Sorry to disappoint, but I’m claimed.”</i>", parse);
+				else
+					Text.Add("<i>”I-I don’t… I...”</i> Terry tries to stammer out a reply, but ultimately falls silent as the approaching crowd surrounds [himher]. You can hear Miranda laughing above, and while you’d love to see Terry get out of this one, right now you have your <i>own</i> problem to deal with.", parse);
+			}
+			else if(comp == gwendy) {
+				Text.Add("<i>”Not likely,”</i> Gwendy sniffs.", parse);
+				if(gwendy.FirstCock())
+					Text.Add(" <i>”Perhaps you’d like to try mine though?”</i> the horsecocked herm adds mockingly.", parse);
+			}
+			else if(comp == roa) {
+				Text.Add("<i>”Can I?”</i> the slutty rabbit asks hopefully. <i>”Later,”</i> Miranda promises, licking her lips.", parse);
+			}
+			else {
+				parse["Poss"] = comp.Possessive();
+				Text.Add("[Poss] reply is lost in the din of the tavern. Besides, you have other things to worry about.", parse);
+			}
+		}
+		Text.NL();
+	}
+	if(setPublic)
+		Text.Add("Your table is starting to gather attention as more and more of the shady tavern goers are made aware of your little show. There are some snide comments and chuckles, but no one is quite brave or drunk enough to approach you with the dommy herm around.", parse);
+	else
+		Text.Add("The table provides only partial cover at best, and by the whispered remarks you hear, more than a few of the tavern’s patrons seem to have noticed you.", parse);
+	Text.NL();
+	Text.Add("By now, you have Miranda’s full attention, as she completely abandons her cocky, indifferent facade. Panting like a bitch in heat, she pull your head up and down her shaft, roughly and repeatedly impaling you on the thick stick of meat. You can feeling her throb deep down your throat, stretching you to your limits. As she nears her peak, the guardswoman eggs you on with mocking and suggestive comments, making no particular effort to keep her voice lowered.", parse);
+	Text.NL();
+	if(player.FirstCock()) {
+		parse["mutliCockDesc"] = player.MultiCockDesc();
+		parse["isAre"] = player.NumCocks() > 1 ? "are" : "is";
+		Text.Add("Your [mutliCockDesc] [isAre] almost painfully hard, neglected and clamoring for attention.", parse);
+		Text.NL();
+	}
+	if(player.FirstVag()) {
+		parse["vagDesc"] = player.FirstVag().Short();
+ 		Text.Add("A trickle of femjuice drips from your [vagDesc], your puffy nether lips aroused by Miranda’s impressive member.", parse);
+		Text.NL();
+	}
+	
+	miranda.OrgasmCum();
+	
+	Text.Add("Miranda grunts loudly as she hilts herself in your throat, pouring her massive load down into your [bellyDesc]. Perhaps feeling merciful, the herm pulls out just as her knots starts to swell, saving you from being stuck on her cock. On the other hand, you gain a messy pearly necklace - more of a pearly ballgown, in truth - in exchange.", parse);
+	Text.NL();
+	Text.Add("Sated, the guardswoman pats you on the head, scratching you behind your [earDesc] while you clean her up.", parse);
+	Text.NL();
+	parse["lover"] = (miranda.Attitude() < Miranda.Attitude.Neutral) ? "bitch" : "lover";
+	Text.Add("<i>”Not bad, [lover],”</i> she sighs, waving for another drink as you hurriedly clean yourself up.", parse);
+	
+	player.AddLustFraction(0.5);
+	miranda.subDom.IncreaseStat(40, 1);
+	player.subDom.DecreaseStat(-30, 1);
+	miranda.relation.IncreaseStat(setPublic ? 70 : 40, 1);
+	player.slut.IncreaseStat(25, 1);
 }
 
 Scenes.Miranda.TavernSexDommyBJ = function() {

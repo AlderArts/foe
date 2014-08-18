@@ -3798,7 +3798,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 				Text.Add("Letting your [multiCockDesc] hover a hairsbreadth in front of the elf's open mouth, you enjoy the feeling of [hisher] rapid breathing on the stiffening length[s].", parse);
 				Text.NL();
 			}
-			Text.Add("[name], being a big [boygirl], you assume [heshe] can figure out what to do by themselves. In the meantime, you lick your lips, eyeing the elf's genitalia.", parse);
+			Text.Add("[name], being a big [boygirl], you assume [heshe] can figure out what to do by [hisher]self. In the meantime, you lick your lips, eyeing the elf's genitalia.", parse);
 			Text.Flush();
 			
 			// REUSED DIALOGUE
