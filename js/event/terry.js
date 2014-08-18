@@ -1652,7 +1652,8 @@ Scenes.Terry.SexPrompt = function(backPrompt) {
 		hishers : terry.hishers(),
 		tarmorDesc : function() { return terry.ArmorDesc(); },
 		master : player.mfTrue("master", "mistress"),
-		lowerArmorDesc : function() { return player.LowerArmorDesc(); }
+		lowerArmorDesc : function() { return player.LowerArmorDesc(); },
+		playername : player.name
 	};
 	
 	Gui.Callstack.push(function() {
