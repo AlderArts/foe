@@ -287,6 +287,7 @@ Fight = function(preventClear) {
 	}
 	else {
 		Text.AddOutput("You didn't find anything.");
+		SetGameState(GameState.Game);
 	}
 }
 
