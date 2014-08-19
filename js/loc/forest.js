@@ -88,6 +88,10 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 	return enc;
 }, 1.0);
 
+world.loc.Forest.Outskirts.enc.AddEnc(function() {
+	return Scenes.Momo.MomoEnc;
+}, 1.0, function() { return momo.Wandering(); });
+
 world.loc.Forest.Outskirts.links.push(new Link(
 	"Crossroads", true, true,
 	function() {

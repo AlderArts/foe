@@ -110,6 +110,10 @@ world.loc.Highlands.Hills.enc.AddEnc(function() {
 	return enc;
 }, 0.5);
 
+world.loc.Highlands.Hills.enc.AddEnc(function() {
+	return Scenes.Momo.MomoEnc;
+}, 1.0, function() { return momo.Wandering(); });
+
 world.loc.Highlands.Hills.endDescription = function() {
 	Text.AddOutput("What do you do?<br/>");
 }

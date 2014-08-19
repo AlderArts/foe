@@ -18,6 +18,10 @@ world.loc.Desert.Drylands.description = function() {
 
 world.loc.Desert.Drylands.enc = new EncounterTable();
 
+world.loc.Desert.Drylands.enc.AddEnc(function() {
+	return Scenes.Momo.MomoEnc;
+}, 1.0, function() { return momo.Wandering(); });
+
 world.loc.Desert.Drylands.links.push(new Link(
 	"Crossroads", true, true,
 	function() {
