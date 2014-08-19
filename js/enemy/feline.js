@@ -1020,7 +1020,9 @@ Scenes.Felines.WinGetBlowjob = function(cat, group, enc) {
 	Text.Clear();
 	Text.Add("[Name] looks like [heshe] is about to protest when you pull out your [multiCockDesc] and commands [himher] to suck, but a displeased look from you is all it takes to change [hisher] mind. From the outcome of the fight, [name] knows very well that [heshe] cannot win against you. Looking mopey, [heshe] crawls over to you, looking up at you a bit uncertainly.", parse);
 	Text.NL();
-	Text.Add("Impatient, you nod for [himher] to get to it, even stroking[oneof] your cock[s], placing your other [hand] on top of [hisher] head. Taking a firm grip of [hisher] hair, you put [hisher] lips right in front of your [cockTip], instructing [himher] to be a good [boyGirl] and say aah. [Name] grudgingly agrees, licking you hesitantly. You let [himher] continue for a while before you grow bored at [hisher] apprehensive behavior, taking a firm grip at the back of [hisher] head and pushing your way inside.", parse);
+	parse["Coneof"] = player.NumCocks() > 1 ? " one of" : "";
+	parse["Cs"]     = player.NumCocks() > 1 ? "s" : "";
+	Text.Add("Impatient, you nod for [himher] to get to it, even stroking[Coneof] your cock[Cs], placing your other [hand] on top of [hisher] head. Taking a firm grip of [hisher] hair, you put [hisher] lips right in front of your [cockTip], instructing [himher] to be a good [boyGirl] and say aah. [Name] grudgingly agrees, licking you hesitantly. You let [himher] continue for a while before you grow bored at [hisher] apprehensive behavior, taking a firm grip at the back of [hisher] head and pushing your way inside.", parse);
 	Text.NL();
 	
 	Sex.Blowjob(cat, player);
@@ -1372,7 +1374,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 	Text.Add("[HisHer] hands slide to your [buttDesc], gripping the cheeks and spreading them apart. You’re dimly aware of [hisher] claws gently prickling your [skin].", parse);
 	Text.NL();
 	parse["virgin"] = virgin ? " virgin" : "";
-	Text.Add("<i>”Here I come~”</i> [name] says in a singsong voice, thrusting himself into your[virgin] folds.", parse);
+	Text.Add("<i>”Here I come~”</i> [name] says in a singsong voice, thrusting [himher]self into your[virgin] folds.", parse);
 	Text.NL();
 	
 	Sex.Vaginal(cat, player);
