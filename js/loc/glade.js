@@ -688,7 +688,7 @@ Scenes.DryadGlade.MotherTreePrompt = function() {
 
 Scenes.DryadGlade.MotherTreeTalk = function() {
 	var parse = {
-		
+		playername : player.name
 	};
 	
 	//[Herself][Orchid][Spirit][Lifebringer]
