@@ -3138,6 +3138,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 		earDesc       : function() { return player.EarDesc(); },
 		boyGirl       : player.mfTrue("boy", "girl"),
 		armorDesc     : function() { return player.ArmorDesc(); },
+		vagDesc       : function() { return player.FirstVag().Short(); },
 		buttDesc      : function() { return player.Butt().Short(); },
 		anusDesc      : function() { return player.Butt().AnalShort(); },
 		multiCockDesc : function() { return player.MultiCockDesc(); },
