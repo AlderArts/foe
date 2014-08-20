@@ -169,6 +169,29 @@ Encounter.prototype.SetButtons = function(activeChar, combatScreen) {
 	BasePrompt();
 }
 
+
+Encounter.prototype.Cleanup = function() {
+	for(var i = 0; i < this.enemy.members.length; i++) {
+		var e = this.enemy.members[i];
+		e.ClearCombatBonuses();
+		e.combatStatus.EndOfCombat();
+	}
+	for(var i = 0; i < party.members.length; i++) {
+		var e = party.members[i];
+		e.ClearCombatBonuses();
+		e.combatStatus.EndOfCombat();
+	}
+}
+
+Encounter.prototype.onRun = function() {
+	this.Cleanup();
+	
+	// TEMP TODO
+	world.TimeStep({hour: 1});
+	
+	Gui.NextPrompt(PrintDefaultOptions);
+}
+
 // Default loss condition: party is downed
 Encounter.prototype.LossCondition = function() {
 	var downed = true;
@@ -179,39 +202,12 @@ Encounter.prototype.LossCondition = function() {
 	return downed;
 }
 
-Encounter.prototype.onRun = function() {
-	for(var i = 0; i < this.enemy.members.length; i++) {
-		var e = this.enemy.members[i];
-		e.ClearCombatBonuses();
-		e.combatStatus.EndOfCombat();
-	}
-	for(var i = 0; i < party.members.length; i++) {
-		var e = party.members[i];
-		e.ClearCombatBonuses();
-		e.combatStatus.EndOfCombat();
-	}
-	
-	// TEMP TODO
-	world.TimeStep({hour: 1});
-	
-	PrintDefaultOptions();
-}
-
 Encounter.prototype.onLoss = function() {
 	Text.Clear();
 	Text.AddOutput("Defeat!");
 	// TODO: XP loss? 
 	
-	for(var i = 0; i < this.enemy.members.length; i++) {
-		var e = this.enemy.members[i];
-		e.ClearCombatBonuses();
-		e.combatStatus.EndOfCombat();
-	}
-	for(var i = 0; i < party.members.length; i++) {
-		var e = party.members[i];
-		e.ClearCombatBonuses();
-		e.combatStatus.EndOfCombat();
-	}
+	this.Cleanup();
 	
 	// TEMP TODO
 	world.TimeStep({hour: 1});
@@ -237,8 +233,6 @@ Encounter.prototype.onVictory = function() {
 	var exp = 0, coin = 0;
 	for(var i = 0; i < this.enemy.members.length; i++) {
 		var e = this.enemy.members[i];
-		e.ClearCombatBonuses();
-		e.combatStatus.EndOfCombat();
 		exp  += e.combatExp;
 		coin += e.coinDrop;
 		
@@ -256,8 +250,6 @@ Encounter.prototype.onVictory = function() {
 	
 	for(var i = 0; i < party.members.length; i++) {
 		var e = party.members[i];
-		e.ClearCombatBonuses();
-		e.combatStatus.EndOfCombat();
 		// Don't give exp to fallen characters
 		if(e.Incapacitated()) continue;
 		e.AddExp(exp);
@@ -270,6 +262,8 @@ Encounter.prototype.onVictory = function() {
 	
 	// ADD COIN TO PURSE
 	party.coin += coin;
+	
+	this.Cleanup();
 	
 	// TEMP TODO
 	world.TimeStep({hour: 1});

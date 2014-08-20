@@ -17,7 +17,5 @@ Abilities.Run.CastInternal = function(encounter, caster) {
 	
 	// TODO: random chance on success
 	
-	Gui.NextPrompt(function() {
-		encounter.onRun();
-	});
+	encounter.onRun();
 }

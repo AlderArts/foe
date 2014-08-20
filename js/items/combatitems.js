@@ -147,9 +147,7 @@ Items.Combat.SmokeBomb.UseCombatInternal = function(encounter, caster) {
 	Text.NL();
 	Text.Flush();
 	
-	Gui.NextPrompt(function() {
-		encounter.onRun();
-	});
+	encounter.onRun();
 }
 
 Items.Combat.DecoyStick = new CombatItem("decoy0", "Decoy");
