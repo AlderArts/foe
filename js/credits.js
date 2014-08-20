@@ -27,6 +27,7 @@ CreditsScreen = function() {
 	Text.AddOutput("Kyna Moran: Reaper<br/>");
 	Text.AddOutput("Terry: LukaDoc and QuietBrowser<br/>");
 	Text.AddOutput("Cale: Alder, LukaDoc and QuietBrowser<br/>");
+	Text.AddOutput("Momo: QuietBrowser and LukaDoc<br/>");
 	
 	Text.Newline();
 	
