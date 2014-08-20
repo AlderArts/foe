@@ -189,7 +189,10 @@ Encounter.prototype.onRun = function() {
 	// TEMP TODO
 	world.TimeStep({hour: 1});
 	
-	Gui.NextPrompt(PrintDefaultOptions);
+	Gui.NextPrompt(function() {
+		SetGameState(GameState.Game);
+		PrintDefaultOptions();
+	});
 }
 
 // Default loss condition: party is downed
@@ -212,7 +215,10 @@ Encounter.prototype.onLoss = function() {
 	// TEMP TODO
 	world.TimeStep({hour: 1});
 	
-	Gui.NextPrompt(PrintDefaultOptions);
+	Gui.NextPrompt(function() {
+		SetGameState(GameState.Game);
+		PrintDefaultOptions();
+	});
 }
 
 // Default win condition: enemy party is downed
@@ -268,7 +274,10 @@ Encounter.prototype.onVictory = function() {
 	// TEMP TODO
 	world.TimeStep({hour: 1});
 	
-	Gui.NextPrompt(PrintDefaultOptions);
+	Gui.NextPrompt(function() {
+		SetGameState(GameState.Game);
+		PrintDefaultOptions();
+	});
 }
 
 Encounter.prototype.CombatTick = function() {

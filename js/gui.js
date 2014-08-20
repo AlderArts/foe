@@ -551,7 +551,7 @@ Gui.RenderParty = function(p, set, obj, max) {
 		var c = p.Get(i);
 		set[i].show();
 		Gui.RenderEntity(c, set[i], obj[i]);
-		if(c != currentActiveChar)
+		if(gameState != GameState.Combat || c != currentActiveChar)
 			obj[i].glow.hide();
 	}
 	for(; i < 4 && i < max; ++i)
