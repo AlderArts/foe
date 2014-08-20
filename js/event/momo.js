@@ -50,17 +50,18 @@ Momo.prototype.constructor = Momo;
 Momo.Met = {
 	NotMet    : 0,
 	Wandering : 1,
-	Camp      : 2
+	CampFirst : 2,
+	Camp      : 3
 };
 
 Momo.prototype.Wandering = function() {
-	return this.flags["Met"] < Momo.Met.Camp && this.wanderTimer.Expired();
+	return this.flags["Met"] < Momo.Met.CampFirst && this.wanderTimer.Expired();
 }
 Momo.prototype.AtCamp = function() {
-	return this.flags["Met"] == Momo.Met.Camp;
+	return this.flags["Met"] >= Momo.Met.CampFirst && this.flags["Met"] <= Momo.Met.Camp;
 }
 
-Twins.prototype.Update = function(step) {
+Momo.prototype.Update = function(step) {
 	this.wanderTimer.Dec(step);
 }
 
@@ -165,7 +166,7 @@ Scenes.Momo.FindingMomo = function() {
 			Text.Add("With the beaming dragon-girl hot on your trail, you set about confidently, retracing your steps.", parse);
 			Text.Flush();
 			
-			momo.flags["Met"] = Momo.Met.Camp;
+			momo.flags["Met"] = Momo.Met.CampFirst;
 			
 			Gui.NextPrompt(function() {
 				MoveToLocation(world.loc.Plains.Nomads.Fireplace, {hour : 1});
@@ -239,7 +240,7 @@ Scenes.Momo.WanderingMomo = function() {
 			Text.Add("With the beaming dragon-girl hot on your trail, you set about confidently, retracing your steps.", parse);
 			Text.Flush();
 			
-			momo.flags["Met"] = Momo.Met.Camp;
+			momo.flags["Met"] = Momo.Met.CampFirst;
 			
 			Gui.NextPrompt(function() {
 				MoveToLocation(world.loc.Plains.Nomads.Fireplace, {hour : 1});

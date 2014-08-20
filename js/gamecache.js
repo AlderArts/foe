@@ -65,51 +65,54 @@ InitCache = function() {
 	patchwork   = new Patchwork();
 	roa         = new Roa();
 	
-	// Put entities in world storage
 	world.EntityStorage = new Array();
-	world.EntityStorage.push(player);
-	world.EntityStorage.push(kiakai);
-	
-	world.EntityStorage.push(aria);
-	world.EntityStorage.push(uru);
-	world.EntityStorage.push(sylistraxia);
-	
-	world.EntityStorage.push(gwendy);
-	world.EntityStorage.push(danie);
-	world.EntityStorage.push(adrian);
-	
-	world.EntityStorage.push(lagon);
-	
-	world.EntityStorage.push(chief);
-	world.EntityStorage.push(patchwork);
-	world.EntityStorage.push(rosalin);
-	world.EntityStorage.push(cale);
-	world.EntityStorage.push(estevan);
-	world.EntityStorage.push(magnus);
-	
-	world.EntityStorage.push(roa);
-	world.EntityStorage.push(miranda);
-	world.EntityStorage.push(terry);
-	
-	world.EntityStorage.push(lei);
-	world.EntityStorage.push(twins);
-	world.EntityStorage.push(twins.rumi);
-	world.EntityStorage.push(twins.rani);
-	world.EntityStorage.push(room69);
-
-	world.EntityStorage.push(maria);
-	
-	world.EntityStorage.push(fera);
-	
-	world.EntityStorage.push(jeanne);
-	world.EntityStorage.push(golem);
-	
-	world.EntityStorage.push(ravenmother);
 	
 	// Stuff that also has update methods
 	world.EntityStorage.push(rigard);
 	world.EntityStorage.push(farm);
 	world.EntityStorage.push(glade);
+	
+	// Put entities in world storage
+	world.EntityStorage.push(player);
+	world.EntityStorage.push(kiakai);
+	world.EntityStorage.push(miranda);
+	world.EntityStorage.push(terry);
+	world.EntityStorage.push(momo);
+	world.EntityStorage.push(lei);
+	world.EntityStorage.push(twins);
+	world.EntityStorage.push(twins.rumi);
+	world.EntityStorage.push(twins.rani);
+	world.EntityStorage.push(room69);
+	
+	world.EntityStorage.push(chief);
+	world.EntityStorage.push(rosalin);
+	world.EntityStorage.push(cale);
+	world.EntityStorage.push(estevan);
+	world.EntityStorage.push(magnus);
+	
+	world.EntityStorage.push(lagon);
+	
+	world.EntityStorage.push(gwendy);
+	world.EntityStorage.push(danie);
+	world.EntityStorage.push(adrian);
+	
+	world.EntityStorage.push(maria);
+	
+	world.EntityStorage.push(fera);
+	world.EntityStorage.push(kyna);
+	
+	world.EntityStorage.push(jeanne);
+	world.EntityStorage.push(golem);
+	
+	world.EntityStorage.push(orchid);
+	
+	world.EntityStorage.push(ravenmother);
+	
+	world.EntityStorage.push(aria);
+	world.EntityStorage.push(uru);
+	world.EntityStorage.push(sylistraxia);
+	world.EntityStorage.push(patchwork);
+	world.EntityStorage.push(roa);
 	
 	// PARTY
 	party = new Party();
