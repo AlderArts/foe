@@ -429,7 +429,7 @@ Scenes.Momo.Prompt = function() {
 		tooltip : ""
 	});
 	*/
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
 }
 
 Scenes.Momo.TalkPrompt = function() {
