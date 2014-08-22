@@ -1950,6 +1950,9 @@ Scenes.Cale.SexFuckHim = function(outside, opts) {
 		artificial     : p1cock.isStrapon ? " artificial" : "",
 		cAnusDesc      : function() { return cale.Butt().AnalShort(); }
 	};
+	if(p1cock.isStrapon && player.NumCocks() == 0) {
+		parse["multiCockDesc"] = function() { return p1cock.Short(); };
+	}
 	
 	parse["virgin"] = virgin ? " virgin" : "";
 	if(cale.Slut() >= 60)
