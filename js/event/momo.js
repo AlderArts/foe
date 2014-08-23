@@ -471,31 +471,36 @@ Scenes.Momo.CookPrompt = function() {
 			Text.NL();
 			
 			var tempParty = [player];
+			var num = 2;
 			for(var i=1, j=party.Num(); i<j; ++i) {
 				var c = party.Get(i);
-				if(c != momo)
-					tempParty.push(c);
+				if(c == momo)
+					num = 3;
+				else
+					tempParty.push(c);					
 			}
-			tempParty.push(momo);
+			if(num == 3)
+				tempParty.push(momo);
 			
-			if(tempParty.length == 3)
+			if(tempParty.length == num)
 				parse["comp"] = " and " + tempParty[1].name;
-			else if(tempParty.length > 3)
+			else if(tempParty.length > num)
 				parse["comp"] = " and your companions";
 			else
 				parse["comp"] = "";
-			parse["all"] = tempParty.length > 3 ? " all" : "";
+			parse["all"] = tempParty.length > num ? " all" : "";
 			parse["partynumber"] = Text.NumToText(tempParty.length);
+			parse["s"] = tempParty.length > 1 ? "s" : "";
 			
 			Text.Add("You[comp] follow her lead, settling down as you watch the [dragonette] move about setting up a small fire to cook. She ensures that the flames won’t spread and promptly ignites it with a small puff of fire. She smiles as the fire gets going and begins cooking, the delicious scent of cooked food wafting around you within instants.", parse);
 			Text.NL();
 			if(world.time.hour >= 6 && world.time.hour < 11)
-				Text.Add("When she’s ready, Momo approaches you with a beaming smile, bearing [partynumber] bowls from which steam is gently wafting, placing them before you[comp] along with serving spoons. <i>”Oatmeal, just like we used to have it back on the farm; plenty of mixed dried fruit, a good dollop of honey, and a little milk to make it extra creamy,”</i> she brags. <i>”Just the sort of thing to give you the energy for a hard day.”</i>", parse);
+				Text.Add("When she’s ready, Momo approaches you with a beaming smile, bearing [partynumber] bowl[s] from which steam is gently wafting, placing them before you[comp] along with serving spoons. <i>”Oatmeal, just like we used to have it back on the farm; plenty of mixed dried fruit, a good dollop of honey, and a little milk to make it extra creamy,”</i> she brags. <i>”Just the sort of thing to give you the energy for a hard day.”</i>", parse);
 			else if(world.time.hour >= 11 && world.time.hour < 19)
 				Text.Add("Momo returns to your side bearing a massive platter piled with sandwiches of all kinds, which she places where you[comp] can easily reach it. <i>”A little variety makes even the simple things more fun,”</i> she notes happily. <i>”Bon appetit.”</i>", parse);
 			else {
-				if(tempParty.length >= 3)
-					parse["comp2"] = Text.Parse(" She wastes no time in doling up a serving for [comp] as well.", {comp: tempParty.length == 3 ? tempParty[1].name : "your companions"});
+				if(tempParty.length >= num)
+					parse["comp2"] = Text.Parse(" She wastes no time in doling up a serving for [comp] as well.", {comp: tempParty.length == num ? tempParty[1].name : "your companions"});
 				else
 					parse["comp2"] = "";
 				Text.Add("At last, Momo approaches you[all], carrying a huge iron pot with her. She places a serving bowl and a spoon and fork before you, then starts ladling out the contents; a hearty stew-like meal of fried beans, bacon, mushrooms, jerky strips, onions, carrots, potatoes and other assorted pieces, all bubbling in thick gravy.[comp2] <i>”Dad’s own special potluck recipe,”</i> she notes proudly, a wistful smile on her lips. <i>”Go on, dig in before it gets cold,”</i> she encourages you.", parse);
