@@ -430,6 +430,16 @@ Scenes.Momo.Prompt = function() {
 		}, enabled : true,
 		tooltip : "Why not talk with Momo for a while?"
 	});
+	options.push({ nameStr : "Cook",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“You want me to cook you something? Why, sure! Be happy to!“</i> she smiles proudly. <i>“Anything in particular you wanted to eat? Something nice and tasty, to give you a recharge? Or perhaps you want me to do a little gastronomic magic?“</i> she suggests with a mischievous grin.", parse);
+			Text.Flush();
+			
+			Scenes.Momo.CookPrompt();
+		}, enabled : true,
+		tooltip : "Ask Momo to cook you something."
+	});
 	/*
 	options.push({ nameStr : "name",
 		func : function() {
@@ -442,6 +452,89 @@ Scenes.Momo.Prompt = function() {
 	});
 	*/
 	Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
+}
+
+Scenes.Momo.CookPrompt = function() {
+	var parse = {
+		playername : player.name,
+		girlMorph  : momo.Ascended() ? "morph" : "girl",
+		dragonette : momo.Ascended() ? "dragon" : "dragonette",
+		guyGal : player.mfTrue("guy", "gal")
+	};
+	
+	//[Nice Meal][Gastroalchemy][Experiment]
+	var options = new Array();
+	options.push({ nameStr : "Nice Meal",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>”One hearty, wholesome, filling meal coming right up,”</i> the chef declares proudly, puffing out her ample chest for emphasis. <i>”Just take a seat over there and be patient, I’ll have something whipped up for you in a jiffy,”</i> she assures you, already starting to gather ingredients and utensils for her latest dish.", parse);
+			Text.NL();
+			
+			var tempParty = [player];
+			for(var i=1, j=party.Num(); i<j; ++i) {
+				var c = party.Get(i);
+				if(c != momo)
+					tempParty.push(c);
+			}
+			tempParty.push(momo);
+			
+			if(tempParty.length == 3)
+				parse["comp"] = " and " + tempParty[1].name;
+			else if(tempParty.length > 3)
+				parse["comp"] = " and your companions";
+			else
+				parse["comp"] = "";
+			parse["all"] = tempParty.length > 3 ? " all" : "";
+			parse["partynumber"] = Text.NumToText(tempParty.length);
+			
+			Text.Add("You[comp] follow her lead, settling down as you watch the [dragonette] move about setting up a small fire to cook. She ensures that the flames won’t spread and promptly ignites it with a small puff of fire. She smiles as the fire gets going and begins cooking, the delicious scent of cooked food wafting around you within instants.", parse);
+			Text.NL();
+			if(world.time.hour >= 6 && world.time.hour < 11)
+				Text.Add("When she’s ready, Momo approaches you with a beaming smile, bearing [partynumber] bowls from which steam is gently wafting, placing them before you[comp] along with serving spoons. <i>”Oatmeal, just like we used to have it back on the farm; plenty of mixed dried fruit, a good dollop of honey, and a little milk to make it extra creamy,”</i> she brags. <i>”Just the sort of thing to give you the energy for a hard day.”</i>", parse);
+			else if(world.time.hour >= 11 && world.time.hour < 19)
+				Text.Add("Momo returns to your side bearing a massive platter piled with sandwiches of all kinds, which she places where you[comp] can easily reach it. <i>”A little variety makes even the simple things more fun,”</i> she notes happily. <i>”Bon appetit.”</i>", parse);
+			else {
+				if(tempParty.length >= 3)
+					parse["comp2"] = Text.Parse(" She wastes no time in doling up a serving for [comp] as well.", {comp: tempParty.length == 3 ? tempParty[1].name : "your companions"});
+				else
+					parse["comp2"] = "";
+				Text.Add("At last, Momo approaches you[all], carrying a huge iron pot with her. She places a serving bowl and a spoon and fork before you, then starts ladling out the contents; a hearty stew-like meal of fried beans, bacon, mushrooms, jerky strips, onions, carrots, potatoes and other assorted pieces, all bubbling in thick gravy.[comp2] <i>”Dad’s own special potluck recipe,”</i> she notes proudly, a wistful smile on her lips. <i>”Go on, dig in before it gets cold,”</i> she encourages you.", parse);
+			}
+			Text.Add(" You quickly wolf down the offered meal, praising Momo’s culinary skills.", parse);
+			Text.NL();
+			Text.Add("The [dragonette] beams proudly, chest puffed out unconsciously and tail wagging in her delight at your appreciation of her efforts. <i>”Why, thank you kindly, [playername],”</i> she giggles with delight.", parse);
+			Text.NL();
+			Text.Add("By the time you’re done there’s not even a crumb left over. You pat your full belly and sigh. That sure hit the spot, you feel revitalized. With a smile, you thank Momo for the great meal.", parse);
+			Text.NL();
+			Text.Add("<i>”It was my pleasure, sugar; I love a [guyGal] who can appreciate good cooking,”</i> Momo replies, tail flicking to and fro in her pleasure, a satisfied grin on her face. <i>”Now, don’t worry about the mess, I’ll take care of that myself. But if you’re ever hungry, please, drop on by - my kitchen’s always open, especially for you,”</i> she assures you, already moving to collect her utensils.", parse);
+			Text.Flush();
+			
+			world.TimeStep({hour: 1});
+			
+			for(var i = 0; i < tempParty.length; ++i) {
+				var c = tempParty[i];
+				c.AddHPFraction(0.3);
+				c.AddSPFraction(0.3);
+				//TODO
+				//#apply Full debuff (cannot trigger any food eating scenes)  for 6 hours
+			}
+			
+			Scenes.Momo.Prompt();
+		}, enabled : true,
+		tooltip : "Momo will prepare a delicious meal to replenish your energies and restore your vitality."
+	});
+	/*
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	*/
+	Gui.SetButtonsFromList(options, true, Scenes.Momo.Prompt);
 }
 
 Scenes.Momo.TalkPrompt = function() {
@@ -688,6 +781,8 @@ Scenes.Momo.TalkPrompt = function() {
 				
 				momo.relation.IncreaseStat(20, 2);
 				
+				world.TimeStep({minute: 20});
+				
 				Scenes.Momo.TalkPrompt();
 			});
 			
@@ -815,6 +910,8 @@ Scenes.Momo.TalkPrompt = function() {
 				Text.Flush();
 				
 				momo.relation.IncreaseStat(20, 2);
+				
+				world.TimeStep({minute: 10});
 				
 				Scenes.Momo.TalkPrompt();
 			}, enabled : true,
