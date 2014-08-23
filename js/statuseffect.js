@@ -27,8 +27,9 @@ StatusEffect = {
 	Bimbo   : 19,
 	Decoy   : 20, //OK
 	Counter : 21, //OK
+	Full    : 22,
 	
-	LAST    : 22
+	LAST    : 23
 };
 
 LoadStatusImages = function(ready) {
@@ -49,6 +50,7 @@ LoadStatusImages = function(ready) {
 	Images.status[StatusEffect.Horny]   = "data/status/horny.png";
 	Images.status[StatusEffect.Decoy]   = "data/status/decoy.png";
 	Images.status[StatusEffect.Counter] = "data/status/counter.png";
+	Images.status[StatusEffect.Full]    = "data/status/full.png";
 	
 	for(var i = 0; i < StatusEffect.LAST; i++) {
 		if(Images.status[i] == "") continue;
@@ -114,6 +116,7 @@ StatusList.prototype.EndOfCombat = function() {
 	//this.stats[StatusEffect.Bimbo]   = null;
 	this.stats[StatusEffect.Decoy]   = null;
 	this.stats[StatusEffect.Counter] = null;
+	//this.stats[StatusEffect.Full]    = null;
 }
 
 Status.Venom = function(target, opts) {
@@ -462,5 +465,25 @@ Status.Counter.Tick = function(target) {
 	// Remove horny effect
 	if(this.turns <= 0) {
 		target.combatStatus.stats[StatusEffect.Counter] = null;
+	}
+}
+
+
+Status.Full = function(target, opts) {
+	if(!target) return;
+	opts = opts || {};
+	
+	// Apply decoy
+	target.combatStatus.stats[StatusEffect.Full] = {
+		hours  : opts.hours
+	};
+	
+	return true;
+}
+Status.Full.OverTime = function(target, hours) {
+	this.hours -= hours;
+	// Remove full effect
+	if(this.hours <= 0) {
+		target.combatStatus.stats[StatusEffect.Full] = null;
 	}
 }
