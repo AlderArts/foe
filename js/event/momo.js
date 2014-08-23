@@ -38,10 +38,11 @@ function Momo(storage) {
 	this.SetLevelBonus();
 	this.RestFull();
 	
-	this.flags["Met"]  = Momo.Met.NotMet;
-	this.flags["tSelf"] = 0;
+	this.flags["Met"]     = Momo.Met.NotMet;
+	this.flags["tSelf"]   = 0;
 	this.flags["tFamily"] = 0;
-	this.flags["Ascend"] = 0;
+	this.flags["tCook"]   = Momo.TalkCook.First;
+	this.flags["tSkills"] = 0;
 	
 	this.wanderTimer = new Time();
 
@@ -55,7 +56,15 @@ Momo.Met = {
 	Wandering : 1,
 	CampFirst : 2,
 	Camp      : 3,
-	Follower  : 4
+	Follower  : 4,
+	Ascended  : 5
+};
+
+Momo.TalkCook = {
+	First       : 0,
+	BigFamily   : 1,
+	SmallFamily : 2,
+	OnlyChild   : 3
 };
 
 Momo.prototype.Wandering = function() {
@@ -65,7 +74,10 @@ Momo.prototype.AtCamp = function() {
 	return this.flags["Met"] >= Momo.Met.CampFirst && this.flags["Met"] <= Momo.Met.Camp;
 }
 Momo.prototype.Ascended = function() {
-	return this.flags["Ascend"] != 0;
+	return this.flags["Met"] >= Momo.Met.Ascended;
+}
+Momo.prototype.IsFollower = function() {
+	return this.flags["Met"] >= Momo.Met.Follower;
 }
 
 Momo.prototype.Update = function(step) {
@@ -437,7 +449,8 @@ Scenes.Momo.TalkPrompt = function() {
 		playername : player.name,
 		legsDesc   : function() { return player.LegsDesc(); },
 		earDesc    : function() { return player.EarDesc(); },
-		girlMorph  : momo.Ascended() ? "morph" : "girl"
+		girlMorph  : momo.Ascended() ? "morph" : "girl",
+		dragonette : momo.Ascended() ? "dragon" : "dragonette"
 	};
 	
 	//[Chat] [Herself] [Family] [Cooking] [Skills]
@@ -583,7 +596,7 @@ Scenes.Momo.TalkPrompt = function() {
 						Text.Clear();
 						Text.Add("You slowly look Momo over, making it blatantly apparent that you’re checking her out. Then with a smirk, you suggest that you happen to know a thing or two about <i>feeling good down there</i>. Maybe she’d like you to show her?", parse);
 						Text.NL();
-						if(momo.flags["Met"] >= Momo.Met.Follower) {
+						if(momo.IsFollower()) {
 							Text.Add("Momo's eyes widen at your innuendo, before her lips curl into a grin, the dragon-[girlMorph] strutting towards you. A hint of the old shyness shows through in the redness dusting her cheeks, but the smile curving her face is pure predator, eyes hooded in her sultriest expression.", parse);
 							Text.NL();
 							Text.Add("<i>“That sounds like an invitation I just <b>have</b> to accept,“</i> she purrs, gently folding her arms around you, long tongue flicking out to slurp playfully over your cheek in a quick motion, tail curling around your [legsDesc]. Leaning her head in to bring it closer to your [earDesc], she stage whispers <i>“step into my parlor,“</i> and then releases you, swaying enticingly as she vanishes into her tent, tail flicking towards you in a “come hither“ gesture before it's gone.", parse);
@@ -638,7 +651,7 @@ Scenes.Momo.TalkPrompt = function() {
 						if(momo.flags["tFamily"] == 1)
 							momo.flags["tFamily"] = 2;
 						Text.Add("<i>“It was my pleasure, [playername],“</i> she assures you. <i>“I wouldn't normally tell this to just anyone, I had my fill of people poking and prying about it when I left the farm, but you... you're different. I felt I could talk to you and tell you the truth,“</i> she notes absently.", parse);
-						if(momo.flags["Met"] >= Momo.Met.Follower)
+						if(momo.IsFollower())
 							Text.Add(" <i>“And I was certainly right to think so,“</i> she notes, grinning rather smugly as she does.", parse);
 						Text.Flush();
 						
@@ -649,6 +662,163 @@ Scenes.Momo.TalkPrompt = function() {
 				Gui.SetButtonsFromList(options, false, null);
 			}, enabled : true,
 			tooltip : "Why not ask and see if Momo will tell you a little about her origins."
+		});
+	}
+	options.push({ nameStr : "Cooking",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“Ooh, I love telling this story,“</i> Momo notes happily, grinning a toothy grin of glee at you at the topic. <i>“Well, I come from a really big farming family, and that means two things. Firstly, we need a  <b>lot</b> of food when it's meal time. Secondly, cooking meals is a full-time job. So, the way my family sorts it out is that we have these team schedules - some of us are doing chores in the yards, some of us are cooking and cleaning, all that sort of thing. You know what I mean?“</i>", parse);
+			Text.NL();
+			Text.Add("That seems like an interesting way to run a family.", parse);
+			Text.NL();
+			Text.Add("<i>“Maybe it's not how everyone would handle it,“</i> Momo admits, <i>“But it worked for us well enough.”</i>", parse);
+			Text.NL();
+			
+			Gui.Callstack.push(function() {
+				Text.Add("Shaking her head, Momo returns her attention to her original story.", parse);
+				Text.NL();
+				Text.Add("<i>“Well, from the beginning, I always looked forward to when it was my turn on the cooking team,“</i> Momo smiles nostalgically as she says this. <i>“I just loved the way I could take a bunch of things and turn it into something delicious. Nothing more rewarding than a nice juicy roast or a lush cake or a succulent pie coming out of the oven and knowing it's all your own work that made it possible,“</i> she trails off, licking her lips at mental images of delicacies past and future.", parse);
+				Text.NL();
+				Text.Add("<i>“So, yeah, I always volunteered when I could, I offered to take over when any of my siblings didn't want to do it, and I kept trying to learn all the new recipes I could. And my parents noticed,“</i> she notes proudly. <i>“When I was about eighteen, nineteen, they sat me down and had a big talk with me. Told me how much they could see I loved to cook, and how proud they were of me for having such a talent in the kitchen. They said they wanted me to go out and chase my dreams, to be the best chef ever. They had all my brothers and sisters to help run the farm, after all. I was torn up about it, but they knew me better than I knew me; I wanted to be a real cook <b>so</b> badly,“</i> she sighs happily.", parse);
+				Text.NL();
+				Text.Add("<i>“So, with their blessing, I packed up my stuff and I went from the farm to the nearest big city. Mom and dad got me tutelage in a cooking school. I studied there a couple of years, graduated with honors, too. Ever since then, I've been exploring, hoping to really make my mark on the culinary world,“</i> she concludes proudly.", parse);
+				Text.NL();
+				Text.Add("<i>“So, did you have any other questions?“</i> she asks brightly, a chipper look on her face as she looks at you.", parse);
+				Text.Flush();
+				
+				momo.relation.IncreaseStat(20, 2);
+				
+				Scenes.Momo.TalkPrompt();
+			});
+			
+			
+			if(momo.flags["tCook"] == Momo.TalkCook.First) {
+				Text.Add("Head tilting to the side, she directs an inquisitive look at you. <i>”What about you, [playername]? What kind of family did you come from?“</i> she asks, her tone innocent and sincerely interested.", parse);
+				Text.Flush();
+				
+				//[Big family][Small family][Only Child]
+				var options = new Array();
+				options.push({ nameStr : "Big family",
+					func : function() {
+						Text.Clear();
+						Text.Add("It was a big family. Not as big as hers, of course. There were times when you thought you were going to go insane, and you bickered with your siblings a lot. But there were also times you were glad to have everyone backing you up. It was a noisy family, but once you got used to it you wouldn’t exchange that for anything. This talk actually made you feel a little homesick... you wonder how they’re doing now...", parse);
+						Text.NL();
+						Text.Add("The dragon-[girlMorph] moves to place her hand comfortingly across your shoulder and then smiles fondly. <i>“Yeah, I know; everyone bickers all the time, but really, you love each other and you wouldn't dream of having it any other way. That's how I grew up; I really miss my siblings too...“</i> ", parse);
+						Text.NL();
+						Text.Add("She sighs hugely and shakes her head. <i>“I've heard people talk about how noisy or confusing it would be to live like that, and I've never been able to understand it. Okay, maybe I can kind of see the point in not having a really huge family, but I definitely want my kids to have a good number of siblings to play with when they grow up. Six to eight maybe. Twelve or thirteen wouldn't be too bad... anything more than twenty is getting a bit out of hand, though,“</i> she notes, more to herself than to you.", parse);
+						Text.NL();
+						if(player.Gender() == Gender.female && momo.IsFollower()) {
+							Text.Add("<i>“Don't worry about me getting any funny ideas, lover mine, I was planning on adopting!“</i> she hastens to reassure you, then pokes her tongue out at you playfully.", parse);
+							Text.NL();
+						}
+						
+						momo.flags["tCook"] = Momo.TalkCook.BigFamily;
+						
+						PrintDefaultOptions();
+					}, enabled : true,
+					tooltip : "Your family was a lot like hers. Big and noisy."
+				});
+				options.push({ nameStr : "Small family",
+					func : function() {
+						Text.Clear();
+						Text.Add("Unlike hers, you have a small family. Everyone kinda stuck in their own corner for the most part, so it was easy to live with them. But there were times when you all gathered together for a reason or another, and you lived knowing you always had people you could count on nearby. Course there’s always the usual bickering in the family. But in the end of the day you’d all sit together and laugh it out over dinner. You can’t help but wonder how your siblings are doing…", parse);
+						Text.NL();
+						Text.Add("Reaching out and patting your shoulder in a friendly way, Momo smiles. <i>“You know, I'll be honest, I did sometimes wonder what it'd be like to have a few less siblings,“</i> she confesses. <i>“Don't get me wrong, I love all my brothers and sisters, but there are times that I definitely wouldn't have minded having a little more family space, or personal attention. Honestly? I think I'd rather have a nice medium-sized family, all in all; about five to seven kids, perhaps.“</i>", parse);
+						Text.NL();
+						if(player.Gender() == Gender.female && momo.IsFollower()) {
+							Text.Add("<i>“I'm sure the two of us will find a few orphans looking for a pair of moms to give them a good home,“</i> she giggles.", parse);
+							Text.NL();
+						}
+						
+						momo.flags["tCook"] = Momo.TalkCook.SmallFamily;
+
+						PrintDefaultOptions();
+					}, enabled : true,
+					tooltip : "You had some siblings, but not as many as she did."
+				});
+				options.push({ nameStr : "Only Child",
+					func : function() {
+						Text.Clear();
+						Text.Add("You didn’t have any siblings. For the longest time it was just you, not that you minded much. You kind-of get used to it. It was a bit lonely at times, you admit, but you aren’t sure how you’d handle having to deal with any sort of siblings.", parse);
+						Text.NL();
+						Text.Add("The dragon-[girlMorph] stares at you, then slowly shakes her head. <i>“I'm not sure I could imagine living like that,“</i> she confesses. <i>“Don't get me wrong, I fought with my siblings all the time, but still, I always knew I could trust them,“</i> she shivers. <i>“I definitely wouldn't want my son or daughter to be an only child...“</i>", parse);
+						Text.NL();
+						if(player.Gender() == Gender.female && momo.IsFollower()) {
+							Text.Add("<i>“Don't worry, I was thinking adoption, not gender-bending,“</i> she hastily assures you.", parse);
+							Text.NL();
+						}
+						
+						momo.flags["tCook"] = Momo.TalkCook.OnlyChild;
+						
+						PrintDefaultOptions();
+					}, enabled : true,
+					tooltip : "You never had any siblings."
+				});
+				Gui.SetButtonsFromList(options, false, null);
+				
+				
+			}
+			else if(momo.flags["tCook"] == Momo.TalkCook.BigFamily) {
+				Text.Add("Momo chuckles and shakes her head. <i>”I tell you, I never had any problems learning to cope with customers; my kitchen back on the farm was busy as any restaurant ever gets,”</i> she declares, sounding perversely proud of that fact. <i>”Breakfast, lunch, dinner, it was like a battle every time, and the washing up... you could have had a bath in the tub we used for all our plates and stuff...”</i>", parse);
+				Text.NL();
+				Text.Add("She trails off, looking baffled, clearly trying to recall something. Then, a dopey grin stretches her face into a beam of delight and she bursts out giggling. <i>”Actually, there was this one time, when Veran was four, when that’s exactly what I did! I just whisked her up off the floor and plunged her into the tub and started scrubbing her with the washcloths,”</i> Momo declares.", parse);
+				Text.NL();
+				Text.Add("You can just imagine what it’d have been like. If you pulled a stunt like that in your house, your parents would scold you hard.", parse);
+				Text.NL();
+				Text.Add("<i>”Scold me? My mom pulled me over my knee and spanked me!”</i> Momo corrects you, laughing at the memory. Then, she blinks and pouts, looking wounded. <i>”Honestly, I don’t know why... I mean, Veran loved it! She was happy playing in the bubbles, and she was going to get a bath anyway... besides, she kept pulling my tail,”</i> the [dragonette] huffs, folding her arms defensively over her chest.", parse);
+				Text.NL();
+				Text.Add("Mercurial as always, Momo’s indignation lasts marginally longer than a soap bubble before she sighs, shakes her head and smiles absently. <i>”You know, despite it all, I still really miss my family. Not just my folks, but my brothers and sisters, too. I’d love to go back and see them some day,”</i> she confesses to you.", parse);
+				if(momo.IsFollower())
+					Text.Add(" <i>”I can’t wait to see their faces when they see you walk in through the door with me,”</i> she titters. <i>”I just know they’d love to meet you.”</i>", parse);
+				if(momo.Ascended())
+					Text.Add(" She pauses suddenly, nibbling thoughtfully at a crooked finger. <i>”I wonder if they’d be more surprised at seeing you, or at seeing me,”</i> she mumbles, more to herself than to you.", parse);
+				Text.NL();
+				PrintDefaultOptions();
+			}
+			else if(momo.flags["tCook"] == Momo.TalkCook.SmallFamily) {
+				Text.Add("Momo looks thoughtful for a moment, staring wistfully off into space. <i>”You want to know the truth? There are times I kind of wished my family was a little smaller. I mean, don’t get me wrong, I loved having brothers and sisters! It’s just... well, sometimes I wouldn’t have minded a little more attention from mom and dad, or just a little less noise in general.”</i>", parse);
+				Text.NL();
+				Text.Add("A frown crosses her face now. <i>”Not to mention there’s always been some little brats I wouldn’t have minded not having around,”</i> she grumbles, but it’s the half-hearted grumble of an exasperated older sibling; no venom to it at all.", parse);
+				Text.NL();
+				PrintDefaultOptions();
+			}
+			else { // if(momo.flags["tCook"] == Momo.TalkCook.OnlyChild)
+				Text.Add("Momo purses her lips, tapping them in thought. <i>”Well, I guess there’s some good things to say about being an only child. You never have to worry about your parents not having time for you, you don’t have to share all your stuff, you don’t have bratty siblings stealing your things or making kites out of your panties or pulling your tail...”</i>", parse);
+				Text.NL();
+				Text.Add("<i>”Yeah, you were lucky, [playername]; brothers and sisters can be a real pain in the ass... but, then again, you never got any of the good stuff, either. You never had siblings help you out when you scraped your knee, or got your tail caught in a door. You never got to listen to your bigger siblings telling you stories, or have your little ones bring you presents they found out on the farm either. No playing together in the bath, no games together, no hiding from thunder under the covers...”</i>", parse);
+				Text.NL();
+				Text.Add("She’s smiling wistfully now. <i>”I guess, really, I’m not cut out to be a single child. They bug me sometimes, but I love my brothers and my sisters.”</i>", parse);
+				Text.NL();
+			}
+		}, enabled : true,
+		tooltip : "So, what made her so fascinated with cooking, anyway?"
+	});
+	if(momo.flags["tCook"] != Momo.TalkCook.First) {
+		options.push({ nameStr : "Skills",
+			func : function() {
+				Text.Clear();
+				if(momo.flags["tSkills"] == 0)
+					Text.Add("<i>“You want to know what sort of things I can cook? Why, certainly, I'd be happy to tell you that,“</i> Momo grins with delight, eager to show off.", parse);
+				else
+					Text.Add("<i>“Need a little reminder, do you? It's okay, [playername], we all can forget things sometimes. That's why I have recipe books,“</i> the dragon-[girlmorph] giggles.", parse);
+					
+				momo.flags["tSkills"] = 1;
+				
+				Text.NL();
+				Text.Add("Clearing her throat and drawing herself up straight, Momo puts a hand on her chest and launches into her explanation. <i>“Well, first and foremost, I know a lovely variety of tasty and nutritious dishes, all guaranteed to give you the energy you need,“</i> she brags. <i>“Whether it's soups or cakes, roasts or stir-fries, I guarantee it'll have you fighting fit in no time flat.“</i>", parse);
+				Text.NL();
+				Text.Add("<i>“While I was at the chef's guild, I dabbled a little in gastroalchemy. Now, I'm not a proper alchemist,“</i> she hastens to explain to you, <i>“But if you give me an alchemical potion or some other transformative, I can try and cook up a dish from it that should be more likely to cause the effect you want it to cause. I can't guarantee it'll work, this is a tricky business, but the odds will be much better than just taking it naturally,“</i> she assures you earnestly.", parse);
+				Text.NL();
+				Text.Add("<i>“Finally, there's my most favourite thing to do; experiment,“</i> she giggles, rubbing her hands together eagerly. <i>“This world is full of all sorts of weird and magical ingredients, and I'm determined to figure out how they can revolutionise cooking. If you've found anything in your travels that you want to let me try and cook with, I'd be more than happy to see what I can make from it. No guarantees what'll work, but then, that's why it's experimenting!“</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Well... I think that about sums it up,“</i> she notes, pausing thoughtfully. Nodding her head, she looks back at you. <i>“Anything else you wanted?“</i>", parse);
+				Text.Flush();
+				
+				momo.relation.IncreaseStat(20, 2);
+				
+				Scenes.Momo.TalkPrompt();
+			}, enabled : true,
+			tooltip : "Ask about Momo's talents and abilities when it comes to being a chef."
 		});
 	}
 	/*
