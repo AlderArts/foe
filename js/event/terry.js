@@ -2078,18 +2078,17 @@ Scenes.Terry.SexPitchAnal = function(cocksInAss) {
 				Text.NL();
 			}
 			
-			//TODO
 			Scenes.Terry.SexFuckButtEntrypoint(p1Cock, promise, function(rough) {
 				if(rough) {
 					Text.Add("<i>”Ugh, my ass...”</i> Terry groans. <i>”My hips feel sore, my butt feels sore, I’m feeling sore in places I didn’t even think it was possible to feel sore...”</i>", parse);
 					Text.NL();
-					parse["c"] = !p1Cock.isStrapon ? Text.Parse(" and [cockdesc]", parse) : "";
+					parse["c"] = !p1Cock.isStrapon ? Text.Parse(" and [cockDesc]", parse) : "";
 					Text.Add("You mumble an idle agreement, noting your own hips[c] are certainly going to get you back for this when they can.", parse);
 					Text.NL();
 					if(terry.Relation() < 30) {
 						Text.Add("<i>”Ugh, did you absolutely HAVE to be this rough?”</i>", parse);
 						Text.NL();
-						Text.Add("As if [heshe] didn’t enjoy it, you quip back, indicating the great smears of sexual fluid [heshe] has left down your [legsdesc] and [hishers] from [hisher] climax.", parse);
+						Text.Add("As if [heshe] didn’t enjoy it, you quip back, indicating the great smears of sexual fluid [heshe] has left down your [legsDesc] and [hishers] from [hisher] climax.", parse);
 						Text.NL();
 						Text.Add("The [foxvixen] just huffs indignantly and looks away.", parse);
 						Text.NL();
