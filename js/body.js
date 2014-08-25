@@ -1118,6 +1118,10 @@ Cock.prototype.Clone = function() {
 Cock.prototype.Size = function() {
 	return this.thickness.Get() * this.length.Get();
 }
+Cock.prototype.Volume = function() {
+	var r = this.thickness.Get() / 2;
+	return Math.PI * r * r * this.length.Get();
+}
 
 Cock.prototype.noun = function() {
 	var noun;
