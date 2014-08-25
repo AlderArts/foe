@@ -2743,6 +2743,9 @@ Scenes.Terry.SexFuckButtEntrypoint = function(p1Cock, promise, retFunc) {
 			else if(terry.FirstCock())
 				Text.Add(" Terry’s cock throbs in your grasp. You can feel [hisher] knot inflating as [heshe] spews jet after jet of fox-seed below, emptying [hisher] balls of their liquid load.", parse);
 			Text.NL();
+			
+			var cum = terry.OrgasmCum();
+			
 			Text.Add("You stop for a moment to admire the shuddering [foxvixen] below you, barely managing to remain on all fours as [hisher] trembling arms and knees threaten to give at any moment. You hug [himher] from behind, supporting [himher] as you turn to give [hisher] cheek a kiss.", parse);
 			Text.NL();
 			
@@ -2802,6 +2805,9 @@ Scenes.Terry.SexFuckButtEntrypoint = function(p1Cock, promise, retFunc) {
 			Text.NL();
 			Text.Add("You decide to silence [himher] by going at it even harder than before, violently bouncing Terry up and down in your lap to give [himher] the hardest fucking you can possibly manage. Obscene noises echo around you, a perverse chorus of fleshy slapping, squelching as your cock slurps through Terry’s precum-filled anus, and the whimpers, mewls and salacious moans of your pleasure-delirious fucktoy.", parse);
 			Text.NL();
+			
+			var cum = terry.OrgasmCum();
+			
 			Text.Add("There is no warning when the [foxvixen]’s butt suddenly clenches, grasping your [cockDesc] mid-thrust. ", parse);
 			if(terry.FirstVag()) {
 				parse["b"] = player.HasBalls() ? Text.Parse(" and down your your [ballsDesc]", parse) : "";
