@@ -419,8 +419,10 @@ Scenes.Terry.Prompt = function() {
 	options.push({ nameStr : "Sex",
 		func : function() {
 			Text.Clear();
-			if(terry.Relation() >= 60)
-				Text.Add("The [foxvixen] walks up to you with a smile,[ getting on [hisher] tiptoes,] and gives you a peck on the lips. <i>”Of course this is a booty call,”</i> [heshe] grins, wagging [hisher] fluffy tail.", parse);
+			if(terry.Relation() >= 60) {
+				parse["h"] = player.Height() > terry.Height() + 5 ? Text.Parse(" getting on [hisher] tiptoes,", parse) : "";
+				Text.Add("The [foxvixen] walks up to you with a smile,[h] and gives you a peck on the lips. <i>”Of course this is a booty call,”</i> [heshe] grins, wagging [hisher] fluffy tail.", parse);
+			}
 			else if(terry.Relation() >= 30)
 				Text.Add("<i>”Sex, huh?”</i> [heshe] says with a grin, closing the distance. <i>”Alright, I don’t mind putting out for you.”</i> [HeShe] pokes your belly playfully before taking a step back.", parse);
 			else
@@ -1358,7 +1360,8 @@ Scenes.Terry.TalkFeelings = function() {
 		if(terry.Relation() >= 60) {
 			Text.Add("<i>”I’m feeling pretty horny,”</i> [heshe] says, sizing you up. ", parse);
 			if(terry.Slut() >= 60) {
-				Text.Add("<i>”I just can’t get you out of my head, [playername].”</i> [HeShe] walks up to you, gently stroking your arm. <i>”Can we go have sex?”</i> [heshe] asks, ears to the sides and tail wagging slowly, as [heshe] sidles up with you. Hugging your arm[ against [hisher] [terrybreasts]]. <i>”I need you...”</i>", parse);
+				parse["b"] = terry.Cup() >= Terry.Breasts.Bcup ? Text.Parse(" against [hisher] [breasts]", parse) : "";
+				Text.Add("<i>”I just can’t get you out of my head, [playername].”</i> [HeShe] walks up to you, gently stroking your arm. <i>”Can we go have sex?”</i> [heshe] asks, ears to the sides and tail wagging slowly, as [heshe] sidles up with you. Hugging your arm[b]. <i>”I need you...”</i>", parse);
 			}
 			else if(terry.Slut() >= 30) {
 				Text.Add("<i>”How about a quickie? I mean, not that I absolutely <b>need</b> one,”</i> [heshe] immediately adds. <i>”I’d just feel a bit better if we did… just a bit...”</i> [HeShe] looks at you expectantly.", parse);
@@ -1479,6 +1482,7 @@ Scenes.Terry.TalkPronoun = function() {
 			var desc = terry.FirstBreastRow().Desc();
 			return desc.cup + "s";
 		},
+		foxvixen : terry.mfPronoun("fox", "vixen"),
 		cock : function() { return terry.MultiCockDesc(); },
 		HeShe   : function() { return terry.HeShe(); },
 		heshe   : function() { return terry.heshe(); },
@@ -2041,7 +2045,8 @@ Scenes.Terry.SexPitchAnal = function(cocksInAss) {
 		cockDesc : function() { return p1Cock.Short(); },
 		earsDesc : function() { return player.EarDesc(); },
 		legsDesc : function() { return player.LegsDesc(); },
-		hipsDesc : function() { return player.HipsDesc(); }
+		hipsDesc : function() { return player.HipsDesc(); },
+		ballsDesc : function() { return player.BallsDesc(); }
 	};
 	
 	var virgin = terry.Butt().virgin;
@@ -2799,7 +2804,7 @@ Scenes.Terry.SexFuckButtEntrypoint = function(p1Cock, promise, retFunc) {
 			Text.Add("Terry groans as your hips connect with [hisher] ass, instinctively clenching as you begin to pull out, then relaxing when you push back in. Without realising the two of you have fallen into a brisk, but steady pace. <i>”Hng! H-Harder,”</i> the [foxvixen] begs, lust-addled eyes glancing at you over [hisher] shoulder.", parse);
 			Text.NL();
 			parse["k"] = knotted ? Text.Parse(", your knot stretching [himher] with each penetration, even though it’s not yet swollen enough to tie you together", parse) : "";
-			Text.Add("That’s a request you’re hardly inclined to deny; you pick up the pace, your flesh meeting with meaty slaps that make it quite clear what you are doing to any possible listeners.Your [cockDesc] jackhammers the [foxvixen]’s ass, wetly pounding into [himher][k].", parse);
+			Text.Add("That’s a request you’re hardly inclined to deny; you pick up the pace, your flesh meeting with meaty slaps that make it quite clear what you are doing to any possible listeners. Your [cockDesc] jackhammers the [foxvixen]’s ass, wetly pounding into [himher][k].", parse);
 			Text.NL();
 			Text.Add("You rut Terry’s ass as if [heshe] were a bitch in heat, but you find yourself frustrated; it’s just not letting you get [himher] done right! Addled by lust, you suddenly pull backwards, sitting up and yanking Terry into your lap. The [foxvixen] yelps in surprise, gasping as your hands move from [hisher] hips to instead hold [hisher] legs by the knees. Letting gravity aid you in your task, you lift [himher] up and roughly slam [hisher] down on your shaft. Terry thrashes in your grasp, whether in protest or enjoyment you can’t tell. [HeShe] tries to speak to you, but all that comes out of [hisher] mouth is a garbled mess of groans, moans, and gasps.", parse);
 			Text.NL();
@@ -2816,7 +2821,7 @@ Scenes.Terry.SexFuckButtEntrypoint = function(p1Cock, promise, retFunc) {
 			if(terry.FirstCock()) {
 				Text.Add("Strands of white shower the two of you as [hisher] cock whips about, spraying [hisher] load as you continue to fuck [himher] despite [hisher] climax. ", parse);
 			}
-			Text.Add("You grin to yourself as you continue to fuck your [foxvixen] through [hisher] climax, even as [heshe] grows slack in your grip, no longer capable, nor willing, to fight you as you use him her.", parse);
+			Text.Add("You grin to yourself as you continue to fuck your [foxvixen] through [hisher] climax, even as [heshe] grows slack in your grip, no longer capable, nor willing, to fight you as you use [himher].", parse);
 			Text.NL();
 			if(p1Cock.isStrapon)
 				Text.Add("Even if you’re not actually feeling it yourself, the sight of your pet getting off so hard from your favorite toy is just too precious, spurring you to keep fucking [himher] as hard as you possibly can.", parse);
