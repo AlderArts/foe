@@ -1243,7 +1243,7 @@ Scenes.Rigard.LB.DrinksPrompt = function(innPrompt) {
 					Text.Add("You wonder why it is pulsing so oddly, but decide that many people must have drunk it already, so it’s probably safe enough. You raise the cup to your lips and drink ", parse);
 			}
 			else {
-				if(rigard.LB["Elven"] == 0) {
+				if(party.InParty(kiakai)) {
 					Text.Add("<i>\"Ooh, are we having nectar again?\"</i> [name] asks happily, buying a cup for [himher]self. <i>\"It is always such a treat.\"</i>", parse);
 					Text.NL();
 					Text.Add("You find yourself agreeing with [himher] and raise the cup to your lips, drinking ", parse);
