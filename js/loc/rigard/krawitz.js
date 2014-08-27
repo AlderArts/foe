@@ -2599,7 +2599,7 @@ Scenes.Krawitz.Duel = function() {
 				
 				rigard.Krawitz["Duel"] = 2;
 			}
-			else if(dex < 40) {
+			else if(dex > 40) {
 				Text.Add("You warily weave the tip of your foil back and forth, testing Krawitz’ reactions, trying to keep your distance.", parse);
 				Text.NL();
 				Text.Add("You lack experience and try to feel out how the bout is likely to go before committing yourself to any irreversible move. Krawitz seems to sense your uncertainty, and when you take an instant to glance up at him, you see a malicious grin spread across his face.", parse);

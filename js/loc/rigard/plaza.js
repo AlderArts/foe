@@ -169,8 +169,10 @@ world.loc.Rigard.Plaza.links.push(new Link(
 world.loc.Rigard.Plaza.links.push(new Link(
 	"Mansion", function() { return rigard.Krawitz["Q"] == 1; }, true,
 	function() {
-		Text.Add("Krawitz's estate is nearby.");
-		Text.NL();
+		if(rigard.Krawitz["Q"] == 1) {
+			Text.Add("Krawitz's estate is nearby.");
+			Text.NL();
+		}
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Krawitz.street, {minute: 10});
