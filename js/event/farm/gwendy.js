@@ -637,7 +637,7 @@ Scenes.Gwendy.WorkMilking = function() {
 		// Skill check
 		var skillcheck = (player.dexterity.Get() + player.intelligence.Get() + player.libido.Get()) / 3;
 		skillcheck += Math.random() * 10 - 5;
-		skillcheck -= Math.max(gwendy.flags["WorkMilked"], 10);
+		skillcheck -= Math.min(gwendy.flags["WorkMilked"], 10);
 		
 		if(skillcheck < 20) {
 			Text.AddOutput("Despite following Gwendy's instructions, you struggle to make anywhere near as much progress as you'd like. Still, you press on without complaint, though you see Gwendy moving at a slightly faster pace than you. You wonder if she's just trying to match you for now until you hear an annoyed groan, which immediately brings you back to work. Milking is hard!", parse);
