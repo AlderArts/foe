@@ -1820,7 +1820,7 @@ Scenes.Terry.SkinshipPrompt = function() {
 			Text.NL();
 			Text.Add("<i>”Ah… this feels pretty nice.”</i>", parse);
 			Text.NL();
-			Text.Add("Well, you’re glad [heshe]’s liking her treatment, you say whilst massaging [hisher] scalp, right behind [hisher] triangular ears.", parse);
+			Text.Add("Well, you’re glad [heshe]’s liking [hisher] treatment, you say whilst massaging [hisher] scalp, right behind [hisher] triangular ears.", parse);
 			Text.NL();
 			if(terry.Relation() < 60)
 				Text.Add("<i>”I could get used to this,”</i> [heshe] remarks.", parse);
@@ -1873,7 +1873,7 @@ Scenes.Terry.SexPrompt = function(backPrompt) {
 	else if(terry.Slut() >= 30)
 		Text.Add("Terry eagerly begins removing [hisher] [tarmorDesc].", parse);
 	else {
-		Text.Add("Terry reluctantly begins stripping off [hisher] [tarmorDesc], taking off each piece of his garment painstakingly slow.", parse);
+		Text.Add("Terry reluctantly begins stripping off [hisher] [tarmorDesc], taking off each piece of [hisher] garment painstakingly slow.", parse);
 		if(terry.Relation() >= 30)
 			Text.Add(" Whether to entice you, or out of shyness, you don’t know.", parse);
 	}
@@ -1966,7 +1966,7 @@ Scenes.Terry.SexPrompt = function(backPrompt) {
 		scenes.AddEnc(function() {
 			Text.Add("Feeling mischievous, you give Terry’s butt a sudden firm poke with your finger, right in the middle of [hisher] love-heart birthmark.", parse);
 			Text.NL();
-			Text.Add("<i>“Eep!”</i> Terry rubs his butt, right where you poked him. <i>”Jerk...”</i> [heshe] pouts.", parse);
+			Text.Add("<i>“Eep!”</i> Terry rubs [hisher] butt, right where you poked [himher]. <i>”Jerk...”</i> [heshe] pouts.", parse);
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
 			Text.Add("Your fingers reach out and gently trace the love-heart’s edging, starting from the point down at its bottom before curving up, around and then down again.", parse);
@@ -2415,7 +2415,7 @@ Scenes.Terry.SexPitchAnal = function(cocksInAss) {
 				else if(terry.Slut() < 60)
 					Text.Add("<i>”Ugh! It’s cold!”</i> the [foxvixen] complains.", parse);
 				else
-					Text.Add("The [foxvixen] shudders as you begin massaging the lube into his tight rosebud. <i>”Don’t worry, it’s cold but I’m fine. Just start fingering me, please.”</i>", parse);
+					Text.Add("The [foxvixen] shudders as you begin massaging the lube into [hisher] tight rosebud. <i>”Don’t worry, it’s cold but I’m fine. Just start fingering me, please.”</i>", parse);
 				Text.NL();
 				Text.Add("WIth your thumb, you continue spiralling around and around Terry’s tailhole, until you deem the surface sufficiently lubed. Now it’s time to start lubing [himher] up inside... Extending your finger, you begin to push gently but firmly at [hisher] newly creamed hole, patiently worming the very tip of your finger inside of the [foxvixen]’s ass, eliciting a moan from the vulpine. [HeShe] adjusts [himher]self, bucking back against your finger slightly.", parse);
 				if(terry.Slut() >= 60) {
@@ -2431,7 +2431,7 @@ Scenes.Terry.SexPitchAnal = function(cocksInAss) {
 					Text.Add("[p]ou reach for Terry’s [tcockDesc] with your free hand, sliding your fingers along its length in smooth, even strokes that match the tempo of your thrusting fingers. ", parse);
 					Text.NL();
 					if(terry.HorseCock()) {
-						Text.Add("You can feel it growing from it’s meager half-erect state to its more impressive fully-erect state. Each touch sends an electric ripple flowing through the [foxvixen], proof of how sensitive [heshe] really is down there. The sounds of dripping cum becoming more prominent on [heshe]’s made a decently sized puddle underneath. You grasp his deflated knot, earning yourself a yelp and a rope of pre.", parse);
+						Text.Add("You can feel it growing from it’s meager half-erect state to its more impressive fully-erect state. Each touch sends an electric ripple flowing through the [foxvixen], proof of how sensitive [heshe] really is down there. The sounds of dripping cum becoming more prominent on [heshe]’s made a decently sized puddle underneath. You grasp [hisher] deflated knot, earning yourself a yelp and a rope of pre.", parse);
 						Text.NL();
 						Text.Add("<i>”Dammit, [playername]. Watch it, I’m sen - Ah!”</i> Yes, yes, [heshe]’s pretty sensitive down here. That’s why it’s so much fun teasing [himher] like this.", parse);
 					}
