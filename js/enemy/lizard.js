@@ -1923,7 +1923,7 @@ Scenes.Lizards.LossMaleCockVariations = function() {
 					Text.AddOutput("The blunt end strikes your temple, and you black out.", parse);
 				});
 				scenes2.AddEnc(function() {
-					Text.AddOutput("He holds you there, each rope pumping down your throat. You look up at him, waiting for him to pull out... Yet even as his climax ends, he just holds you there. You begin to writhe, to squirm, trying to push him off. He easily overpowers you, holding you there. You gasp for air, but his [m1cockdesc] plugs your throat. You find yourself feeling faint. He smirks down at you. Dimly you hear him say, <i>\"Maybe next time you'll learn to suck better.\"</i>", parse);
+					Text.AddOutput("He holds you there, each rope pumping down your throat. You look up at him, waiting for him to pull out... Yet even as his climax ends, he just holds you there. You begin to writhe, to squirm, trying to push him off. He easily overpowers you, holding you there. You gasp for air, but his [m1cockDesc] plugs your throat. You find yourself feeling faint. He smirks down at you. Dimly you hear him say, <i>\"Maybe next time you'll learn to suck better.\"</i>", parse);
 					Text.Newline();
 					Text.AddOutput("You pass out...", parse);
 					
