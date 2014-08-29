@@ -2285,7 +2285,7 @@ Scenes.Krawitz.Aftermath = function() {
 				Text.NL();
 			}
 			if(!Scenes.Krawitz.stat.AlarmRaised)
-				Text.Add("You finish by explaining how you slipped out without alerting anyone of your presence, a ghost in the night. The pair complement you on your craftiness.", parse);
+				Text.Add("You finish by explaining how you slipped out without alerting anyone of your presence, a ghost in the night. The pair compliment you on your craftiness.", parse);
 			else
 				Text.Add("You finish by telling of your daring escape from the mansion, dodging pursuing guards through the streets of Rigard. This gains you a whooping round of applause.", parse);
 			Text.Flush();
