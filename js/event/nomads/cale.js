@@ -354,7 +354,7 @@ Scenes.Cale.FirstApproach = function() {
 		Text.Add("You swallow hard, mind replaying the memories of him as he fucked you earlier, a pang of equal parts lust and intimidation momentarily rocking through you.", parse);
 		Text.NL();
 		parse["thigh"] = player.LowerBodyType() == LowerBodyType.Single ? parse["hipDesc"] : parse["thighDesc"];
-		Text.Add("His ears perk up as he catches your greeting. Looking you over with a big grin. <i>”Hello, how you doing?</i> the wolf asks, wagging his tail. <i>”What brings you my humble spot by the bonfire?”</i> he flirts, placing a hand on your [thigh].", parse);
+		Text.Add("His ears perk up as he catches your greeting. Looking you over with a big grin. <i>”Hello, how you doing?”</i> the wolf asks, wagging his tail. <i>”What brings you my humble spot by the bonfire?”</i> he flirts, placing a hand on your [thigh].", parse);
 		Text.NL();
 		Text.Add("You wanted to talk to him, you reply, doing your best to ignore his hand as it rests upon your [skinDesc].", parse);
 		Text.NL();
@@ -409,7 +409,7 @@ Scenes.Cale.FirstApproach = function() {
 				Text.Clear();
 				
 				parse["ears"] = player.HasFlexibleEars() ? " your [earDesc]s flattened against your skull," : "";
-				Text.Add("Eyes sinking half closed in pleasure,[ears] you smile in pleasure and let out a soft coo of delight. You lean deliberately against his hand, stretching slightly to let him touch you however he wants.", parse);
+				Text.Add("Eyes sinking half closed,[ears] you smile in pleasure and let out a soft coo of delight. You lean deliberately against his hand, stretching slightly to let him touch you however he wants.", parse);
 				Text.NL();
 				
 				player.subDom.DecreaseStat(-50, 2);
@@ -1201,7 +1201,7 @@ Scenes.Cale.SexSuckHimEntryPoint = function(outside) {
 	Text.NL();
 	Text.Add("With his musky taste still lingering on your tongue, you are eager to dig in, to wrap your lips around his meaty wolf-hood. Starting low, you slowly lick your way up his shaft, lathering him from root to tip in your saliva.", parse);
 	Text.NL();
-	Text.Add("<i>”Come on, stop teasing,”</i> Cale pants, shifting his hips slightly, rubbing his cock against your upturned face. He gently caress your [hairDesc], not so gently urging you to get to sucking. Grasping him just above the knot, you give him a few more licks before rising to the level of his head. Your puckered lips hover a fraction of an inch from his trembling glans.", parse);
+	Text.Add("<i>”Come on, stop teasing,”</i> Cale pants, shifting his hips slightly, rubbing his cock against your upturned face. He gently caresses your [hairDesc], not so gently urging you to get to sucking. Grasping him just above the knot, you give him a few more licks before rising to the level of his head. Your puckered lips hover a fraction of an inch from his trembling glans.", parse);
 	Text.Flush();
 	
 	var finger = false;

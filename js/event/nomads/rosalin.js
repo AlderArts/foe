@@ -685,7 +685,7 @@ Scenes.Rosalin.FirstFuck = function() {
 		earsDesc      : function() { return player.EarDesc(); },
 		breastDesc    : function() { return player.FirstBreastRow().Short(); },
 		buttDesc      : function() { return player.Butt().Short(); },
-		hipsDesc      : function() { return player.body.HipsDesc(); },
+		hipsDesc      : function() { return player.HipsDesc(); },
 		tongueDesc    : function() { return player.TongueDesc(); },
 		faceDesc      : function() { return player.FaceDesc(); },
 		
@@ -1022,7 +1022,7 @@ Scenes.Rosalin.FirstFuckPegWolf = function() {
 		earsDesc      : function() { return player.EarDesc(); },
 		breastDesc    : function() { return player.FirstBreastRow().Short(); },
 		buttDesc      : function() { return player.Butt().Short(); },
-		hipsDesc      : function() { return player.body.HipsDesc(); },
+		hipsDesc      : function() { return player.HipsDesc(); },
 		tongueDesc    : function() { return player.TongueDesc(); },
 		faceDesc      : function() { return player.FaceDesc(); },
 		

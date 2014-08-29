@@ -1721,7 +1721,7 @@ Body.prototype.HasSkin = function() {
 // TODO
 Body.prototype.FaceDesc = function() {
 	switch(this.head.race) {
-		case Race.human:  return "human face";
+		case Race.human:  return "face";
 		case Race.horse:  return "horse-like face";
 		case Race.cat:    return "feline face";
 		case Race.ferret: return "pointed, ferret-like face";
@@ -2201,7 +2201,7 @@ Body.prototype.HipsDesc = function(plural) {
 	}
 	var adj = adjs[Rand(adjs.length)];
 	
-	return adj + (plural ? " hips" : "hip");
+	return adj + (plural ? " hips" : " hip");
 }
 
 

@@ -206,7 +206,7 @@ Scenes.Momo.FindingMomo = function() {
 			Text.NL();
 			Text.Add("With an indignant “hmph!” noise she sticks her nose up in the air, a poor imitation of a regal mannerism, and spins forcefully on her heel. You narrowly avoid her tail slapping you across the face as it 'coincidentally' whips through the air behind her, whereupon she storms off into the wilderness.", parse);
 			Text.NL();
-			Text.Add("Shaking your head, you turn around and head back to the nomad’s camp. You run into all kinds of lunatics out on the roads, it looks like.", parse);
+			Text.Add("Shaking your head, you turn around and head back to the nomads’ camp. You run into all kinds of lunatics out on the roads, it looks like.", parse);
 			Text.Flush();
 			
 			momo.flags["Met"] = Momo.Met.Wandering;

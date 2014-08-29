@@ -332,7 +332,8 @@ Scenes.Kiakai.TalkQuest = function() {
 		hisher : kiakai.hisher(),
 		HisHer : kiakai.HisHer()
 	};
-			
+	
+	Text.Clear();
 	// Initial stage
 	if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
 		Text.AddOutput("You ask what you are to do with the gem.", parse);
@@ -674,7 +675,7 @@ Scenes.Kiakai.TalkEden = function() {
 				
 				// TODO: OTHER CITIES
 				
-				Text.AddOutput("<i>\"Other than that, there are a few smaller civilized settlements on the plains, and on the far side of the great tree,\"</i> [name] concludes [hisher] explanation, <i>\"The village I once called my home is located there.\"</i>.", parse);
+				Text.AddOutput("<i>\"Other than that, there are a few smaller civilized settlements on the plains, and on the far side of the great tree,\"</i> [name] concludes [hisher] explanation, <i>\"The village I once called my home is located there.\"</i>", parse);
 				
 				Gui.NextPrompt(Scenes.Kiakai.TalkEden);
 			});

@@ -88,7 +88,7 @@ Scenes.Magnus.Interact = function() {
 		Text.NL();
 		Text.Add("<i>”[playername], eh?”</i> He examines you closely, blushing slightly when you raise your eyebrows at his scrutiny. <i>”Ahem!”</i> Magnus coughs uncomfortably, his eyes wandering back to his tome. <i>”Well… I’m a student, of sorts. I study magic.”</i> He waves noncommittally to the large book.", parse);
 		Text.NL();
-		Text.Add("<i>”As to why I am here… I was recently expelled from the academy.”</i> He looks a bit bewildered and slightly hurt about this. <i>”I never really figured out why, they kicked me out and refused to let me back in. I wandered for quite a while until these fine folk took me in.”</i> He gestures to the nomads’ around the two of you.", parse);
+		Text.Add("<i>”As to why I am here… I was recently expelled from the academy.”</i> He looks a bit bewildered and slightly hurt about this. <i>”I never really figured out why, they kicked me out and refused to let me back in. I wandered for quite a while until these fine folk took me in.”</i> He gestures to the nomads around the two of you.", parse);
 		Text.NL();
 		Text.Add("<i>”Ah, as much as I would like to chat with you more, I just think I understood something from my book, I need to check something quickly.”</i> With that, he once again sticks his nose into the dusty old tome, poring over the strange symbols therein. Looks like you are dismissed.", parse);
 		
@@ -867,7 +867,7 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 		};
 		
 		if(magnus.flags["Met"] == 0) {
-			Text.Add("Near the[litExtinguished] campfire, you see a thin and nervous-looking young man. He is carrying slightly tattered robes and a pair of thick glasses, and seems to be embroiled in studying a heavy tome. The man hardly seems to register anything going on around him, so absorbed is he in the book.", parse);
+			Text.Add("Near the [litExtinguished] campfire, you see a thin and nervous-looking young man. He is carrying slightly tattered robes and a pair of thick glasses, and seems to be embroiled in studying a heavy tome. The man hardly seems to register anything going on around him, so absorbed is he in the book.", parse);
 		}
 		else {
 			Text.Add("Magnus the apprentice mage is poring over some old book, probably trying to find some secret knowledge in the strange, squiggly symbols covering its pages. As usual, he is deeply focused on his studies, and you doubt even an attack on the camp would distract his reverie.", parse);
