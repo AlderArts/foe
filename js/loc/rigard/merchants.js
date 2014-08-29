@@ -229,8 +229,8 @@ Scenes.Rigard.ShopStreet.Speculate = function() {
 	parse["x"] = Text.NumToText(coins);
 	
 	var trueFalseDeal = Math.random() < 0.5 ? 1 : -1;
-	var buyingSkill = Math.max(0.01 * (0.625 * player.Int() + 2 * rigard.flags["BuyingExp"]), 0.5);
-	var buyingProb = 0.5 - buyingSkill * trueFalseDeal;
+	var buyingSkill = Math.min(0.01 * (0.625 * player.Int() + 2 * rigard.flags["BuyingExp"]), 0.5);
+	var buyingProb = 0.5 + buyingSkill * trueFalseDeal;
 	var buying = Math.random() < buyingProb;
 	
 	var scenes = new EncounterTable();
