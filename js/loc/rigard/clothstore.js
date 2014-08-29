@@ -4,6 +4,11 @@
 // Sliken Delights
 //
 
+Scenes.Rigard.ClothShop = {};
+Scenes.Rigard.ClothShop.IsOpen = function() {
+	return (world.time.hour >= 9 && world.time.hour < 20) && !rigard.UnderLockdown();
+}
+
 world.loc.Rigard.ShopStreet.ClothShop.onEntry = function() {
 	var parse = {};
 	
@@ -92,7 +97,7 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 	},
 	function() {
 		var nexellePrompt = function() {
-			if(world.time.hour >= 20 || world.time.hour < 9) {
+			if(!Scenes.Rigard.ClothShop.IsOpen()) {
 				Text.AddOutput("The shop is closing, and you are asked to leave.");
 				Gui.NextPrompt(function() {
 					MoveToLocation(world.loc.Rigard.ShopStreet.street);

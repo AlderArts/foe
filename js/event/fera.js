@@ -89,7 +89,7 @@ Fera.prototype.IsAtLocation = function(location) {
 Scenes.Fera.Interact = function() {
 	Text.Clear();
 	
-	if(world.time.hour >= 20 || world.time.hour < 9) {
+	if(!Scenes.Rigard.ClothShop.IsOpen()) {
 		Text.AddOutput("The shop is closing, and you are asked to leave.");
 		Gui.NextPrompt(function() {
 			MoveToLocation(world.loc.Rigard.ShopStreet.street);

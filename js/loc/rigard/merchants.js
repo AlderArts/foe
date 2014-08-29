@@ -80,11 +80,11 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 
 
 world.loc.Rigard.ShopStreet.street.links.push(new Link(
-	"Armor", true, function() { return (world.time.hour >= 9 && world.time.hour < 18) && !rigard.UnderLockdown();; },
+	"Armor", true, function() { return Scenes.Rigard.ArmorShop.IsOpen(); },
 	function() {
 		/*
 		Text.AddOutput("One particular shop catch your eye. A garish sign hanging outside announce it the \"Shoppe of oddities\", though from just the exterior it is a bit unclear what is actually on sale.");
-		if(!(world.time.hour >= 9 && world.time.hour < 18))
+		if(!Scenes.Rigard.ArmorShop.IsOpen())
 			Text.AddOutput(" A small paper stapled to the front door states that the shop is \"Cloosd\" at the moment.");
 		Text.AddOutput("<br/>");
 		*/
@@ -95,11 +95,11 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 ));
 
 world.loc.Rigard.ShopStreet.street.links.push(new Link(
-	"Weapons", true, function() { return (world.time.hour >= 9 && world.time.hour < 18) && !rigard.UnderLockdown();; },
+	"Weapons", true, function() { return Scenes.Rigard.WeaponShop.IsOpen(); },
 	function() {
 		/*
 		Text.AddOutput("One particular shop catch your eye. A garish sign hanging outside announce it the \"Shoppe of oddities\", though from just the exterior it is a bit unclear what is actually on sale.");
-		if(!(world.time.hour >= 9 && world.time.hour < 18))
+		if(!Scenes.Rigard.WeaponShop.IsOpen())
 			Text.AddOutput(" A small paper stapled to the front door states that the shop is \"Cloosd\" at the moment.");
 		Text.AddOutput("<br/>");
 		*/
@@ -110,10 +110,10 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 ));
 
 world.loc.Rigard.ShopStreet.street.links.push(new Link(
-	"Tailor", true, function() { return (world.time.hour >= 9 && world.time.hour < 20) && !rigard.UnderLockdown(); },
+	"Tailor", true, function() { return Scenes.Rigard.ClothShop.IsOpen() },
 	function() {
 		Text.AddOutput("There is a large two floor shop in the center of the street, with two guards watching the large, well crafted doors. The fancy sign above the door reads <i>Silken Delights</i>, and there are many beautiful and intricately crafted articles of clothing on display in the windows. The clothing store seems large, and there are pretty decorations bordering the display windows. A decorated sign next the the door informs you that the shops business hours are from 9 to 20.");
-		if(!(world.time.hour >= 9 && world.time.hour < 18))
+		if(!Scenes.Rigard.ClothShop.IsOpen())
 			Text.AddOutput(" The shop seems to be closed at the moment.");
 		Text.Newline();
 	},
@@ -123,10 +123,10 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 ));
 
 world.loc.Rigard.ShopStreet.street.links.push(new Link(
-	"Odd shop", true, function() { return (world.time.hour >= 9 && world.time.hour < 18) && !rigard.UnderLockdown();; },
+	"Odd shop", true, function() { return Scenes.Rigard.OddShop.IsOpen(); },
 	function() {
 		Text.AddOutput("One particular shop catch your eye. A garish sign hanging outside announce it the \"Shoppe of oddities\", though from just the exterior it is a bit unclear what is actually on sale.");
-		if(!(world.time.hour >= 9 && world.time.hour < 18))
+		if(!Scenes.Rigard.OddShop.IsOpen())
 			Text.AddOutput(" A small paper stapled to the front door states that the shop is \"Cloosd\" at the moment.");
 		Text.AddOutput("<br/>");
 	},

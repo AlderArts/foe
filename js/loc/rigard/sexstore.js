@@ -3,7 +3,10 @@
 // Shop of oddities
 //
 
-Scenes.Rigard.OddShop = {}
+Scenes.Rigard.OddShop = {};
+Scenes.Rigard.OddShop.IsOpen = function() {
+	return (world.time.hour >= 9 && world.time.hour < 18) && !rigard.UnderLockdown();
+}
 
 world.loc.Rigard.ShopStreet.OddShop.description = function() {
 	Text.AddOutput("You are in the odd shop.<br/>");

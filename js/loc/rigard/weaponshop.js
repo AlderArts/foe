@@ -3,7 +3,10 @@
 // Weapon Shop
 //
 
-Scenes.Rigard.WeaponShop = {}
+Scenes.Rigard.WeaponShop = {};
+Scenes.Rigard.WeaponShop.IsOpen = function() {
+	return (world.time.hour >= 9 && world.time.hour < 18) && !rigard.UnderLockdown();
+}
 
 world.loc.Rigard.ShopStreet.WeaponShop.description = function() {
 	Text.AddOutput("You are in the weapon shop.<br/>");
