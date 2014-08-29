@@ -359,9 +359,9 @@ Scenes.Rigard.ShopStreet.Speculate = function() {
 				Text.Add("Before [heshe] can pour your sample, you interrupt [himher], and point to a different jug instead. [HeShe] bites [hisher] lip, eyes narrowing in apparent consternation, but proceeds to ladle you a thin layer of oil into a flat cup for you from the vessel you asked for.", parse);
 				Text.NL();
 				if(Math.random() < 0.5)
-					Text.Add("you swirl your finger around in the oil, and it seems to stick to your skin correctly. You bring your fingertip to touch your tongue, however, and have to immediately pull away, desperately wishing there was some way to get the disgusting acrid taste out of your mouth.", parse);
+					Text.Add("You swirl your finger around in the oil, and it seems to stick to your skin correctly. You bring your fingertip to touch your tongue, however, and have to immediately pull away, desperately wishing there was some way to get the disgusting acrid taste out of your mouth.", parse);
 				else
-					Text.Add("you swirl your finger around in the oil, and it feels more like slime than anything you'd want to cook with. Looking more closely, you also see small black flecks swimming around in the stuff. You were thinking of tasting it, but at this point you're not sure you'd survive the experience.", parse);
+					Text.Add("You swirl your finger around in the oil, and it feels more like slime than anything you'd want to cook with. Looking more closely, you also see small black flecks swimming around in the stuff. You were thinking of tasting it, but at this point you're not sure you'd survive the experience.", parse);
 			}
 		};
 	}, 1.0, function() { return true; });
