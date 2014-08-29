@@ -85,7 +85,7 @@ world.loc.Rigard.Residental.street.links.push(new Link(
 	}
 ));
 world.loc.Rigard.Residental.street.links.push(new Link(
-	"Brothel", true, function() { return !rigard.UnderLockdown(); },
+	"Brothel", true, function() { return Scenes.Brothel.IsOpen(); },
 	function() {
 		Text.Add("A rather discreet sign on a large nearby building invites you to the brothel ‘The Shadow Lady’. The facade is richer than the regular houses of the district, and the establishment is bustling with activity.");
 		Text.NL();

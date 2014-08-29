@@ -1,5 +1,8 @@
 
 Scenes.Brothel = {};
+Scenes.Brothel.IsOpen = function() {
+	return !rigard.UnderLockdown(); // No closed hours
+}
 
 //
 // Brothel
