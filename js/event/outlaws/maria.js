@@ -234,6 +234,8 @@ Scenes.Maria.ForestConfront = function() {
 			enemy.AddMember(maria);
 			var enc = new Encounter(enemy);
 			
+			maria.RestFull();
+			
 			enc.oldParty = party.members;
 			party.members = [player];
 			
