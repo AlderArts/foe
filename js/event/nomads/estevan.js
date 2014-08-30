@@ -84,7 +84,7 @@ Scenes.Estevan.Interact = function() {
 		Text.NL();
 		Text.Add("You confirm his suspicion, pointing out your tent. <i>”Thought so. Even for the oddballs that hang around here, you kinda stand out. Don’t take that in a bad way,”</i> he adds, flashing you a quick grin. <i>”As you might have guessed, I’m a hunter. I go into the forest and bring back game, feeding the camp. I’m decent with a bow, though I usually hunt with traps.”</i> He gestures to the odd contraption he’s working on.", parse);
 		Text.NL();
-		Text.Add("<i>”When I’m not out working, I usually hang around camp. Socialize, have a drink or five, play some cards and so on. Have you talked to Rosie and wolfie yet? We could use a fourth player in our game.”</i>", parse);
+		Text.Add("<i>”When I’m not out working, I usually hang around camp. Socialize, have a drink or five, play some cards and so on. Have you talked to Rosie and Wolfie yet? We could use a fourth player in our game.”</i>", parse);
 		Text.NL();
 		if(cale.flags["Met2"] > Cale.Met2.NotMet) {
 			Text.Add("Sure, you’ve met them, assuming that he means Cale?", parse);

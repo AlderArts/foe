@@ -1027,7 +1027,7 @@ Scenes.FarmIntro.ReturnToGwendy = function() {
 		Text.AddOutput("You cast an indignant look at her, but she just chuckles. <i>\"Calm down, silly. I know you're not the type to do something like that. Still, you have no idea how much help you were today. I appreciate it, and I hope you'll come by more often, even just to visit.\"</i>", parse);
 	}
 	
-	Text.AddOutput("The girl steps back and gives you a peck on the cheek. <i>\"Take care, hun! I'll be expecting you every once in awhile, okay?\"</i>", parse);
+	Text.AddOutput(" The girl steps back and gives you a peck on the cheek. <i>\"Take care, hun! I'll be expecting you every once in a while, okay?\"</i>", parse);
 	Text.Newline();
 	Text.AddOutput("You nod in affirmation before turning and walking off the ranch.", parse);
 	Text.Newline();

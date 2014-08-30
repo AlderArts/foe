@@ -925,7 +925,7 @@ Scenes.Miranda.WelcomeToRigardQnA = function() {
 				Text.Clear();
 				Text.AddOutput("<i>\"You really aren't from around here, are you?\"</i> the dog-morph looks at you suspiciously. <i>\"I'd have a hard time believing there's someone who isn't familiar with the war and the current tension resulting from it.\"</i>", parse);
 				Text.Newline();
-				Text.AddOutput("<i>\"I say war, but it was really more of an insurgency, rich merchant families and their allies standing up against the authority of the king. It was an ugly, ugly mess, and though most of the ringleaders were rounded up, there are still some active today. More than that, others have joined their ranks. Deserters from the army, men with prices on their heads, common criminals and murderers, the list goes on. Most of these ‘freedom fighters' are little more than bandits.\"</i>", parse);
+				Text.AddOutput("<i>\"I say war, but it was really more of an insurgency, rich merchant families and their allies standing up against the authority of the king. It was an ugly, ugly mess, and though most of the ringleaders were rounded up, there are still some active today. More than that, others have joined their ranks. Deserters from the army, men with prices on their heads, common criminals and murderers, the list goes on. Most of these 'freedom fighters' are little more than bandits.\"</i>", parse);
 				Text.Newline();
 				Text.AddOutput("<i>\"From what I've heard, there is a large group of them holed up somewhere in the forest,\"</i> she tells you, motioning toward the dark trees off in the distance. <i>\"That said, by the amount of unrest in Rigard right now, you'd almost suspect their base was in the city!\"</i>", parse);
 				
@@ -1102,7 +1102,7 @@ Scenes.Miranda.HeyThereCont = function() {
 	var parse = {};
 	
 	Text.NL();
-	Text.Add("The booze starts to stack up as you continue to talk into the night. You tell her a bit about yourself and your adventures so far, while she quips in witty comments and suggestive remarks.", parse);
+	Text.Add("The booze starts to stack up as you continue to talk into the night. You tell her a bit about yourself and your adventures so far, and she contributes witty comments and suggestive remarks.", parse);
 	Text.NL();
 	
 	Scenes.Miranda.Chat();
@@ -1179,7 +1179,7 @@ Scenes.Miranda.HeyThereCatPorn = function() {
 				Text.NL();
 				Text.Add("Even in the dim candlelight of the tavern, it’s quite a sight to behold: Miranda has undone her pants, her dripping vagina free for you to see, but that is not what draws your eyes. Between the distraught dog-girl's thighs is a huge and very erect cock, at least ten inches long and as thick as her arm.", parse);
 				Text.NL();
-				Text.Add("About a third of it is covered by a furry sheet, but the rest is out in the air, in all its glory. Large veins pulse along the very large member, from the thick knotted base, where her apple-sized testicles hang, heavy with seed, to the pointed tip. Miranda is excitedly pumping on the dick with both hands, her ragged gasps growing exceedingly more urgent. Alarmed, you realize that you are right in the line of fire.", parse);
+				Text.Add("About a third of it is covered by a furry sheath, but the rest is out in the air, in all its glory. Large veins pulse along the very large member, from the thick knotted base, where her apple-sized testicles hang, heavy with seed, to the pointed tip. Miranda is excitedly pumping on the dick with both hands, her ragged gasps growing exceedingly more urgent. Alarmed, you realize that you are right in the line of fire.", parse);
 				Text.NL();
 				Text.Add("<b>You now know Miranda is a herm (duh).</b>", parse);
 				Text.Flush();
@@ -1456,7 +1456,7 @@ Scenes.Miranda.Chat = function() {
 				Text.Add("Miranda talks for a while about her biggest hobby, hunting game in the woods. While she usually uses a two-handed blade, she is apparently also really proficient with a bow and arrow. She talks a bit about some of her conquests. You get the feeling that she is searching for something in the forest.", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.Add("The two of you chat a bit about the castle town. <i>\"Well, it's a nice enough place,\"</i> Miranda concedes, <i>\"the bar is nice, I have a decent job that brings the dough in.\"</i> She grins widely, <i>\"and though the place might now be as interesting as the feline home town, I have you around now to keep me entertained!\"</i>", parse);
+				Text.Add("The two of you chat a bit about the castle town. <i>\"Well, it's a nice enough place,\"</i> Miranda concedes, <i>\"the bar is nice, I have a decent job that brings the dough in.\"</i> She grins widely, <i>\"and though the place might not be as interesting as the feline home town, I have you around now to keep me entertained!\"</i>", parse);
 				player.AddLustFraction(0.1);
 				miranda.AddLustFraction(0.1);
 			}, 1.0, function() { return true; });
@@ -2107,11 +2107,11 @@ Scenes.Miranda.DatingEntry = function() {
 		Text.NL();
 		Text.Add("<i>”I’m quite picky with who I date, you should know. Put on your best face, or whatever other bodypart you’d like to flaunt.”</i>", parse);
 		Text.NL();
-		Text.Add("You leave the sordid tavern behind, walking aimlessly through the pittoresque slums on the large city. For once, Miranda isn’t very talkative, seeming to be preoccupied with her own thoughts. Just when the silence is starting to get uncomfortable, she yips in surprised joy.", parse);
+		Text.Add("You leave the sordid tavern behind, walking aimlessly through the picturesque slums of the large city. For once, Miranda isn’t very talkative, seeming to be preoccupied with her own thoughts. Just when the silence is starting to get uncomfortable, she yips in surprised joy.", parse);
 		Text.NL();
 		Text.Add("<i>”Oh, this place! Haven’t been through here in a while.”</i> You follow the excited canine through an archway into what looks like a small secluded park of sorts, containing a few trees and bushes, a cracked stone table and a few simple wooden benches. The small space would easily fit inside the common room of the Maidens’ Bane.", parse);
 		Text.NL();
-		Text.Add("<i>”This is the place I lost my virginity,”</i> Miranda gestures around the place with sparkling eyes like if it was a grand ball room. <i>”Oh how young I was… Both me and my boyfriend were rather drunk. Still, I enjoyed myself greatly.”</i> She looks thoughtful for a moment. <i>”My boyfriend, not so much.”</i>", parse);
+		Text.Add("<i>”This is the place I lost my virginity,”</i> Miranda gestures around the place with sparkling eyes like if it were a grand ball room. <i>”Oh how young I was… Both me and my boyfriend were rather drunk. Still, I enjoyed myself greatly.”</i> She looks thoughtful for a moment. <i>”My boyfriend, not so much.”</i>", parse);
 		Text.NL();
 		if(miranda.Sexed()) {
 			Text.Add("<i>”As you may have noticed, I have a hard time holding back,”</i> the herm blushes faintly. You’ve sort of gotten that impression.", parse);
