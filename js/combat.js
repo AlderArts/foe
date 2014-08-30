@@ -284,14 +284,14 @@ Encounter.prototype.CombatTick = function() {
 	currentActiveChar = null;
 	var enc = this;
 	
-	if(this.onTick)
-		this.onTick();
+	if(enc.onTick)
+		enc.onTick();
 	
-	if(this.LossCondition()) {
-		this.onLoss();
+	if(enc.LossCondition()) {
+		enc.onLoss();
 	}
-	else if(this.VictoryCondition()) {
-		this.onVictory();
+	else if(enc.VictoryCondition()) {
+		enc.onVictory();
 	}
 	else {
 		/*
@@ -310,8 +310,8 @@ Encounter.prototype.CombatTick = function() {
 		
 		var found = false;
 		while(!found) {
-			for(var i=0,j=this.combatOrder.length; i<j; i++) {
-				var c = this.combatOrder[i];
+			for(var i=0,j=enc.combatOrder.length; i<j; i++) {
+				var c = enc.combatOrder[i];
 				
 				if(!c.entity.Incapacitated()) {
 					if(c.initiative >= 100) {
@@ -323,16 +323,16 @@ Encounter.prototype.CombatTick = function() {
 			
 			if(found) break;
 			
-			for(var i=0,j=this.combatOrder.length; i<j; i++) {
-				var c = this.combatOrder[i];
+			for(var i=0,j=enc.combatOrder.length; i<j; i++) {
+				var c = enc.combatOrder[i];
 				
 				if(!c.entity.Incapacitated())
 					c.initiative += c.entity.Initiative();
 			}
 		}
 		
-		this.combatOrder.sort(Encounter.InitiativeSorter);
-		var activeChar = this.combatOrder[0];
+		enc.combatOrder.sort(Encounter.InitiativeSorter);
+		var activeChar = enc.combatOrder[0];
 		
 		currentActiveChar = activeChar.entity;
 		
@@ -349,8 +349,8 @@ Encounter.prototype.CombatTick = function() {
 		activeChar.initiative -= ini;
 		
 		// Add lust
-		for(var i=0,j=this.combatOrder.length; i<j; i++){
-			var c = this.combatOrder[i];
+		for(var i=0,j=enc.combatOrder.length; i<j; i++){
+			var c = enc.combatOrder[i];
 			if(!c.entity.Incapacitated())
 				c.entity.AddLustOverTime(0.02);
 		};
@@ -358,7 +358,7 @@ Encounter.prototype.CombatTick = function() {
 		// Tick status effects
 		currentActiveChar.combatStatus.Tick(currentActiveChar);
 		if(currentActiveChar.Incapacitated()) {
-			this.CombatTick();
+			enc.CombatTick();
 			return;
 		}
 		
@@ -378,13 +378,36 @@ Encounter.prototype.CombatTick = function() {
 		var combatScreen = function() {
 			Text.Clear();
 			// TODO: DEBUG ?
-			Text.AddOutput(Text.BoldColor("Initiative:<br/>"));
+			Text.AddOutput(Text.BoldColor("Turn order:<br/>"));
+			Text.AddOutput(Text.BoldColor(currentActiveChar.name + "<br/>"));
+			var tempParty = [];
 			for(var i=0,j=enc.combatOrder.length; i<j; i++){
 				var c = enc.combatOrder[i];
 				if(!c.entity.Incapacitated()) {
-					Text.AddOutput(c.entity.name + ": " + Math.floor(c.initiative) + "/100 (+" + Math.floor(c.entity.Initiative()) + ")<br/>");
+					tempParty.push({name: c.entity.name, ini: c.initiative, inc: c.entity.Initiative()});
 				}
 			};
+			
+			for(var t = 0; t < 8; t++) {
+				var found = null;
+				while(!found) {
+					for(var i=0,j=tempParty.length; i<j; i++) {
+						var c = tempParty[i];
+						if(c.ini >= 100) {
+							found = c;
+							break;
+						}
+					}
+					if(found) break;
+					for(var i=0,j=tempParty.length; i<j; i++) {
+						var c = tempParty[i];
+						c.ini += c.inc;
+					}
+				}
+				
+				found.ini -= 100;
+				Text.AddOutput(found.name + "<br/>");
+			}
 			Text.Newline();
 			
 			// TEMP TODO:
@@ -411,12 +434,12 @@ Encounter.prototype.CombatTick = function() {
 		}
 		else {
 			if(activeChar.isEnemy) {
-				activeChar.entity.Act(this, activeChar);
+				activeChar.entity.Act(enc, activeChar);
 			}
 			else {
 				// TODO: if in control
 				
-				this.SetButtons(activeChar, combatScreen);
+				enc.SetButtons(activeChar, combatScreen);
 			}
 		}
 	}
