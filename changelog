@@ -7,6 +7,7 @@ CHANGELOG for Fall of Eden
 
 Version 0.3m
 ------------
+* The usual array of corrections to grammatical missteps and parser flailing.
 * Misc opening times in Rigard shops fixed.
 * Added a combat turn order listing, replacing the rather vague initiative listing.
 * Changed the color of the sleep/wait/explore buttons to make it more clear when they are available.

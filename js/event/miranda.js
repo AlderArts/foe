@@ -4103,7 +4103,7 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 	if(nasty)
 		Text.Add("<i>”Doesn’t it feel much better to give in to your true nature, my little slut?”</i> Miranda eggs you mockingly as she pushes forward. <i>”There is no one to hide it from here, you can yell at the top of your lungs how much you want to be fucked.”</i>", parse);
 	else if(dom > 25) {
-		Text.Add("<i>”How does it feel when your mistress dominates you, my little pet?”</i> Miranda quips, her breath coming in short bursts as she slowly pushes herself forward. <i>”Am I going to slow for you?”</i>", parse);
+		Text.Add("<i>”How does it feel when your mistress dominates you, my little pet?”</i> Miranda quips, her breath coming in short bursts as she slowly pushes herself forward. <i>”Am I going too slow for you?”</i>", parse);
 		Text.NL();
 		Text.Add("You manage to moan an incoherent reply, which the herm probably interprets as encouragement.", parse);
 	}
@@ -5184,7 +5184,7 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 	
 	miranda.OrgasmCum();
 	
-	Text.Add("Miranda grunts loudly as she hilts herself in your throat, pouring her massive load down into your [bellyDesc]. Perhaps feeling merciful, the herm pulls out just as her knots starts to swell, saving you from being stuck on her cock. On the other hand, you gain a messy pearly necklace - more of a pearly ballgown, in truth - in exchange.", parse);
+	Text.Add("Miranda grunts loudly as she hilts herself in your throat, pouring her massive load down into your [bellyDesc]. Perhaps feeling merciful, the herm pulls out just as her knots starts to swell, saving you from being stuck on her cock. On the other hand, you gain a messy pearly necklace - more of a pearly ball gown, in truth - in exchange.", parse);
 	Text.NL();
 	Text.Add("Sated, the guardswoman pats you on the head, scratching you behind your [earDesc] while you clean her up.", parse);
 	Text.NL();
