@@ -814,7 +814,7 @@ Scenes.Felines.WinFuckButt = function(cat, group, enc, cocks) {
 	Text.Add("[Possessive] flexible nature provides so many fun possibilities, but you are beginning to get riled up yourself. Time to find out if [hisher] butt is as stretchy [hisher] back! Letting [name] tend to [himher]self orally, you slowly withdraw your fingers from [hisher] stretched hole. The tight rosebud quickly clenching behind you, promising for a fun challenge ahead. No matter, you’ll soon have [himher] gaping wide.", parse);
 	Text.NL();
 	
-	parse["oneof"] = player.NumCocks() > 1 && !pCock.strapOn ? " one of" : "";
+	parse["oneof"] = player.NumCocks() > 1 && !pCock.isStrapon ? " one of" : "";
 	parse["cock"] = pCock.strapOn ? pCock.Short() : player.MultiCockDesc();
 	Text.Add("The kitty gulps nervously as you line up[oneof] your [cock] with [hisher] puckered ass, though by now, [hisher] fear has been all but squashed by [hisher] lust. As a further testament to this, [heshe] betrays [hisher] eagerness to be fucked by grasping [hisher] buttcheeks with [hisher] paws, spreading them wide and welcoming you to ravage [himher]. ", parse);
 	if(player.sex.gAnal >= 20)
