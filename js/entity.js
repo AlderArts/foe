@@ -1370,7 +1370,12 @@ Entity.prototype.AllCocks = function() {
 // TODO: Race too
 Entity.prototype.MultiCockDesc = function(cocks) {
 	cocks = cocks || this.body.cock;
-	if(cocks.length == 0) return "[NO COCKS]";
+	if(cocks.length == 0) {
+		if(this.strapOn)
+			return this.strapOn.cock.Short();
+		else
+			return "[NO COCKS]";
+	}
 	else if(cocks.length == 1)
 		return cocks[0].Short();
 	else
