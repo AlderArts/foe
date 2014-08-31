@@ -206,9 +206,7 @@ DataPrompt = function() {
 			});
 		Text.Clear();
 		Text.AddOutput(data);
-		Gui.NextPrompt(function() {
-			DataPrompt(backFunc);
-		});
+		Gui.NextPrompt(DataPrompt);
 	}, safeLocation);
 	
 	Input.buttons[7].Setup(Gui.ShortcutsVisible ? "Keys: On" : "Keys: Off", function() {
