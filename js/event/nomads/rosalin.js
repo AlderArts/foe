@@ -1173,7 +1173,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				Text.Clear();
 				var r = ["equine cum", "harpy eggs", "mandrake", "nightshade", "spider eggs"];
 				if(rosalin.FirstCock()) r.push("of my cum");
-				if(rosalin.FirstBreastRow().lactationRate.Get() > 1) r.push("of my milk");
+				if(rosalin.Lactation()) r.push("of my milk");
 				parse["seasoning"] = r[Rand(r.length)];
 				
 				Items.Felinix.Use(player);
@@ -1729,7 +1729,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				}, 1.0, function() { return rosalin.FirstBreastRow().size.Get() < 40; });
 				scenes.AddEnc(function() {
 					Text.Add("Rosalin's [rNipsDesc] starts dripping milk. [HeShe] experimentally gives the liquid a taste. <i>\"So yummy!\"</i> [heshe] exclaims excitedly, <i>\"I wonder if I can use this in cooking?\"</i>", parse);
-					rosalin.FirstBreastRow().lactationRate.IncreaseStat(10, 1);
+					rosalin.body.lactationRate.IncreaseStat(10, 1);
 					Text.NL();
 				}, 1.0, function() { return true; });
 				
