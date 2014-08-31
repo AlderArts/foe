@@ -1254,7 +1254,7 @@ Scenes.Gwendy.ChallengeSexBody = function(titjob, hangout) {
 				Text.Add("With some degree of dexterity, you grab[oneof] her meaty cock[s], stroking it gently while two of your fingers work her wet cunny.", parse);
 		}
 		else if(gwendy.FirstVag())
-			Text.Add("You are happy to please her, pushing your index finger into her tight ass, while your long- and middle fingers penetrate her juicy cunt.", parse);
+			Text.Add("Glad to please her, you push your index finger into her tight ass, while your long- and middle fingers penetrate her juicy cunt.", parse);
 		else if(gwendy.FirstCock())
 			Text.Add("You slowly push two fingers into her taut rear, pressing mercilessly against her prostate.", parse);
 		
