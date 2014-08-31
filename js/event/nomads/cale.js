@@ -2765,7 +2765,7 @@ Scenes.Cale.SexCaleShowerEntrypoint = function(outside) {
 	if(player.SubDom() > 0)
 		Text.Add("Hey! You’re not done yet! What the hell is he doing?", parse);
 	else
-		Text.Add("You whimper in protest, asking what’s going on; why did he take his sweet fat dick out of your needy ass?", parse);
+		Text.Add("You whimper in protest, asking what’s going on; why did he take his sweet fat dick out of your needy hole?", parse);
 	Text.NL();
 	Text.Add("<i>”Just feel like showering you with my appreciation, [playername]. Plus you’ve got a really nice butt,”</i> he slaps your butt. <i>”Can ya blame me for wanting to take it for a spin?”</i>", parse);
 	Text.NL();
