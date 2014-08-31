@@ -4469,6 +4469,9 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 							Text.NL();
 							Text.Add("Not wishing to waste any more time, you place[oneof] your [multiCockDesc] at the panting herm’s backdoor. You’re going to pay her back in plenty for the last few hours… and claim your own reward. Using some of her own cum from her slick member, you lube yourself up and thrust forward. ", parse);
 							if(player.NumCocks() > 1) {
+								parse["anotheroneof"] = player.NumCocks() > 2 ? " another one of" : "";
+								parse["other"] = player.NumCocks() > 2 ? "" : " other";
+								parse["s"] = player.NumCocks() > 2 ? "s" : "";
 								Text.Add("Fuck it, if you are going to defy her, might as well go all the way. Pausing briefly, you line up[anotheroneof] your[other] cock[s] with her pussy, double-penetrating the dommy dobie.", parse);
 								Sex.Vaginal(player, miranda);
 								miranda.FuckVag(miranda.FirstVag(), player.FirstCock(), 2);

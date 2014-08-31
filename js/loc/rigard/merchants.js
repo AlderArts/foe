@@ -251,7 +251,7 @@ Scenes.Rigard.ShopStreet.Speculate = function() {
 			Text.Add("You ask for a sample of the cheese, and, with a smile, the merchant leans over to cut you a small piece of one of them, ", parse);
 			if(buying) {
 				if(trueFalseDeal == 1 && Math.random() < 2 * buyingSkill)
-					Text.Add("but as he's about to use [hisher] knife, you stop [himher] at the last moment. You point to a different cheese, and ask for a slice of that instead. [HeShe] shrugs indifferently, and proceeds to cut you a piece from the cheese you asked for.", parse);
+					Text.Add("but as [heshe]'s about to use [hisher] knife, you stop [himher] at the last moment. You point to a different cheese, and ask for a slice of that instead. [HeShe] shrugs indifferently, and proceeds to cut you a piece from the cheese you asked for.", parse);
 				else
 					Text.Add("handing it to you on the tip of a tiny fork.", parse);
 				Text.NL();
@@ -349,7 +349,7 @@ Scenes.Rigard.ShopStreet.Speculate = function() {
 			
 			if(buying) {
 				if(trueFalseDeal == 1 && Math.random() < 2 * buyingSkill)
-					Text.Add("Before [heshe] can pour your sample, you interrupt [himher], and point to a different jug instead. HeShe] shrugs indifferently, and proceeds to to ladle you a small portion of oil into a flat cup for you from the vessel you asked for.", parse);
+					Text.Add("Before [heshe] can pour your sample, you interrupt [himher], and point to a different jug instead. [HeShe] shrugs indifferently, and proceeds to to ladle you a small portion of oil into a flat cup for you from the vessel you asked for.", parse);
 				else
 					Text.Add("[HeShe] ladles a little into a flat cup and passes it to you.", parse);
 				Text.NL();
