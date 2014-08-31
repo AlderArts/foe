@@ -338,7 +338,7 @@ Scenes.Momo.Interact = function() {
 		Text.NL();
 		Text.Add("Once she judges the vegetables cooked, Momo grabs some mince, sniffing it inquisitively, then scooping a small piece of raw meat into her mouth. Her face contorts in disgust and she spits. <i>”Yep, that’s still edible,”</i> she confirms to you. Then she unceremoniously carries it over and adds it to the frying pan, carefully stirring it into the seared vegetable-stuff to let it brown.", parse);
 		Text.NL();
-		Text.Add("Next goes the tomatoes, which she painstakingly skin - biting back a few profanities that you can just make out - before gleefully crushing them into the sauce with her bare hands, eyes wide with childish glee and giggling as they squish between her fingers.", parse);
+		Text.Add("Next go the tomatoes, which she painstakingly skins - biting back a few profanities that you can just make out - before gleefully crushing them into the sauce with her bare hands, eyes wide with childish glee and giggling as they squish between her fingers.", parse);
 		Text.NL();
 		Text.Add("<i>”Okey-dokey! Now we just simmer that and pop the pasta in to boil,”</i> she notes, already tipping the dried pasta into the bubbling pot of water. <i>”Thank you for waiting so patiently, [playername]; my siblings would be bugging me all the time about when dinner will be ready. Just a little longer and it’ll be all ready for you, I promise.”</i>", parse);
 		Text.NL();
@@ -391,7 +391,7 @@ Scenes.Momo.Interact = function() {
 		scenes.Get();
 		
 		Text.NL();
-		Text.Add("<i>“Well, hello there, [playername]! What can I do for you?““</i> she asks happily, a bright smile on her face.", parse);
+		Text.Add("<i>“Well, hello there, [playername]! What can I do for you?“</i> she asks happily, a bright smile on her face.", parse);
 		Text.Flush();
 		
 		Scenes.Momo.Prompt();
@@ -620,7 +620,7 @@ Scenes.Momo.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("Shaking her head, she gives you a winning smile. <i>“So, anyway, yeah! I'm completely all-natural, the one and only Momo - accept no substitutes!“</i> She giggles at her own cheesiness.", parse);
 			Text.NL();
-			Text.Add("<i>“Anyhoo, I left the farm when I was... ooh, about eighteen, nineteen years old? I went off to the big city and got into one of the chef’s guilds there. Got my official member’s license and everything!“</i> she brags gleefully. <i>“Ever since then, I've been on a journey, looking for new and unusual recipes and ingredients, travelling all over to hone my skills and be the best chef I can be!“</i>", parse);
+			Text.Add("<i>“Anywho, I left the farm when I was... ooh, about eighteen, nineteen years old? I went off to the big city and got into one of the chefs’ guilds there. Got my official member’s license and everything!“</i> she brags gleefully. <i>“Ever since then, I've been on a journey, looking for new and unusual recipes and ingredients, travelling all over to hone my skills and be the best chef I can be!“</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Well, that's all I can think of when it comes to talking about little old me,“</i> Momo giggles. <i>“Drop on by anytime, [playername].“</i>", parse);
 			Text.Flush();
@@ -657,7 +657,7 @@ Scenes.Momo.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“See? I told you so! Anyway, finally, super-great-grandma had enough of it and decides she's going to put a stop to it. No passing hero wants to tangle with a dragon over a single farm and a few sheep, so she figured she'd do it herself.“</i> Momo smiles with familial pride at the idea.", parse);
 				Text.NL();
-				Text.Add("<i>“Supposedly, super-great Grandma Lily Kindling was known for being really smart. Also for having a tongue sharp as a boning knife, and for being as stubborn as an ox and twice as strong, but mostly for being smart,“</i> the dragon-girl brags. <i>“She finds out where the dragon's cave is and she hauls up several barrels of really, really potent booze there. Bold as you please she shouts out to him and invites him to come out and be neighborly and share a drink, and out he comes.“</i>", parse);
+				Text.Add("<i>“Supposedly, super-great-grandma Lily Kindling was known for being really smart. Also for having a tongue sharp as a boning knife, and for being as stubborn as an ox and twice as strong, but mostly for being smart,“</i> the dragon-girl brags. <i>“She finds out where the dragon's cave is and she hauls up several barrels of really, really potent booze there. Bold as you please she shouts out to him and invites him to come out and be neighborly and share a drink, and out he comes.“</i>", parse);
 				Text.NL();
 				Text.Add("You can see where this is going… and that’s certainly an interesting plan. But considering Momo’s existence, you wonder what went so wrong, or so right, with her plan that her bloodline wound up mixing with dragons.", parse);
 				Text.NL();

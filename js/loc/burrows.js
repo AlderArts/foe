@@ -528,10 +528,10 @@ Scenes.Burrows.ArrivalLagonTalk = function() {
 			Text.NL();
 			Text.Add("<i>”Finally, I need <b>three samples of a special red algae</b> from the lake, close to the city. This last one should be relatively easy.”</i>", parse);
 			Text.NL();
-			if(world.time.hour <= 6 && world.time.hour < 19)
+			if(world.time.hour >= 6 && world.time.hour < 19)
 				Text.Add("As you listen to her instructions, you finally notice that the illumination of the tunnel has been growing gradually brighter. Finally, she stops just short of the exit, the light from the surface stinging your eyes.", parse);
 			else {
-				parse["time"] = (Scenes.Burrows.ArrivalTime <= 6 && world.time.hour < 19) ? "completely failed to notice" : "almost forgotten";
+				parse["time"] = (Scenes.Burrows.ArrivalTime >= 6 && world.time.hour < 19) ? "completely failed to notice" : "almost forgotten";
 				Text.Add("You walk along, listening to her instructions, and are somewhat surprised when she stops in front of a dark opening. Looking carefully, you realize that this must be the exit. It’s night outside - you had [time], with the faint but constant illumination in the Burrows.", parse);
 			}
 			Text.NL();
