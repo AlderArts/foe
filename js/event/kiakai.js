@@ -6104,7 +6104,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 				if(player.FirstBreastRow().size.Get() > 13) {
 					parse["numBr"] = player.NumBreastRows() > 1 ? "the other" : "another";
 					Text.Add(" You bring one, then [numBr] of your huge mammaries to your mouth, relishing in the added stimulation as you suck on your [nipsDesc].", parse);
-					if(player.FirstBreastRow().lactationRate.Get() > 1)
+					if(player.Lactation())
 						Text.Add(" The taste of milk fills your mouth, teasing at what is to come.", parse);
 				}
 				Text.NL();
@@ -6134,7 +6134,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 			}
 			else if(breastFlag) {
 				Text.Add("<i>\"...Do not be greedy, trying to have those delicious looking breasts all for yourself!\"</i> the elf exclaims, gently but rudely depriving you of your playthings. You needn't worry though, as [heshe] takes hold of your [nipsDesc], teasing and pinching them gently.", parse);
-				if(player.FirstBreastRow().lactationRate.Get() > 1) {
+				if(player.Lactation()) {
 					Text.NL();
 					Text.Add("<i>\"You can have my milk whenever you want,\"</i> you pant, whimpering slightly under [hisher] lithe hands. [name] looks like [heshe] is about to protest, but suddenly changes [hisher] mind with a look of desire on [hisher] face. Instead, [heshe] leans down, clamping [hisher] lips around one of your [nipsDesc], sucking on it while simultaniously thrusting [hisher] [kCockDesc] into your [anusDesc].", parse);
 				}

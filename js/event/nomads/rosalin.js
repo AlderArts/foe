@@ -1135,7 +1135,8 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		rVagDesc       : function() { return rosalin.FirstVag().Short(); },
 		rClitDesc      : function() { return rosalin.FirstVag().ClitShort(); },
 		rHairDesc      : function() { return rosalin.Hair().Short(); },
-		rTailDesc      : function() { return rosalin.HasTail().Short(); }
+		rTailDesc      : function() { return rosalin.HasTail().Short(); },
+		breastDesc     : function() { return player.FirstBreastRow().Short(); }
 	};
 	
 	if(item == Items.Felinix) {

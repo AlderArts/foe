@@ -1607,9 +1607,9 @@ Scenes.Farm.Market = function(haul, next) {
 	var produce = haul.quantity * haul.quality;
 	if(haul.enclost)
 		produce *= (1-(Math.random() * 0.5));
-	var total = produce * (1+score) * 5000;
-	var coin  = Math.min(total * 0.1, 300);
-	var gcoin = total - coin;
+	var total = Math.floor(produce * (1+score) * 5000);
+	var coin  = Math.floor(Math.min(total * 0.1, 300));
+	var gcoin = Math.floor(total - coin);
 	
 	parse["gcoin"] = gcoin;
 	parse["coin"]  = coin;
