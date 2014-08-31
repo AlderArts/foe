@@ -10,6 +10,8 @@ Version 0.3m
 * Misc opening times in Rigard shops fixed.
 * Added a combat turn order listing, replacing the rather vague initiative listing.
 * Changed the color of the sleep/wait/explore buttons to make it more clear when they are available.
+* Changed color of level up button to green.
+* Reduced Lei's level requirement to 3 for the moment (more is planned to make this more intuitive).
 
 --------------------------------------------
              PREVIOUS VERSIONS

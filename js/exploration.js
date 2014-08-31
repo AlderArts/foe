@@ -129,7 +129,10 @@ LimitedDataPrompt = function(backFunc) {
 			    return val;
 			});
 		Text.Clear();
-		Text.AddOutput(data);	
+		Text.AddOutput(data);
+		Gui.NextPrompt(function() {
+			LimitedDataPrompt(backFunc);
+		});
 	}, true);
 	
     Input.buttons[11].Setup("Back", backFunc, true);
@@ -202,7 +205,10 @@ DataPrompt = function() {
 			    return val;
 			});
 		Text.Clear();
-		Text.AddOutput(data);	
+		Text.AddOutput(data);
+		Gui.NextPrompt(function() {
+			DataPrompt(backFunc);
+		});
 	}, safeLocation);
 	
 	Input.buttons[7].Setup(Gui.ShortcutsVisible ? "Keys: On" : "Keys: Off", function() {

@@ -554,7 +554,8 @@ Entity.prototype.InteractDefault = function(options, switchSpot, enableEquip, en
 	options.push({ nameStr: that.pendingStatPoints != 0 ? "Level up" : "Stats",
 		func : function() {
 			that.LevelUpPrompt(that.Interact);
-		}, enabled : enableStats
+		}, enabled : enableStats,
+		image : that.pendingStatPoints != 0 ? Images.imgButtonEnabled2 : null
 	});
 	options.push({ nameStr: "Job",
 		func : function() {

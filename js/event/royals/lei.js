@@ -53,7 +53,7 @@ Lei.prototype = new Entity();
 Lei.prototype.constructor = Lei;
 
 LeiStrength = {
-	LEVEL_WEAK   : 5,
+	LEVEL_WEAK   : 3,
 	LEVEL_STRONG : 10
 };
 LeiFight = {
