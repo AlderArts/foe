@@ -1799,15 +1799,14 @@ Entity.prototype.LevelUpPrompt = function(backFunc) {
 	
 	this.SetLevelBonus();
 	
-	Text.Add("Level: "        + Math.floor(this.level) + "<br/>");
-	Text.Add("Exp: "          + Math.floor(this.experience) + "/" + Math.floor(this.expToLevel) + "<br/>");
-	Text.Add("Sex level: "    + Math.floor(this.sexlevel) + "<br/>");
-	Text.Add("S.Exp: "        + Math.floor(this.sexperience) + "/" + Math.floor(this.sexpToLevel));
+	Text.Add("<table style='width:50%'>");
+	Text.Add("<tr><td><b>Level:</b></td><td>"     + Math.floor(this.level) + "</td></tr>");
+	Text.Add("<tr><td><b>Exp:</b></td><td>"       + Math.floor(this.experience) + "/" + Math.floor(this.expToLevel) + "</td></tr>");
+	Text.Add("<tr><td><b>Sex level:</b></td><td>" + Math.floor(this.sexlevel) + "</td></tr>");
+	Text.Add("<tr><td><b>S.Exp:</b></td><td>"     + Math.floor(this.sexperience) + "/" + Math.floor(this.sexpToLevel) + "</td></tr>");
 	if(this.currentJob) {
 		var jd  = this.jobs[this.currentJob.name];
 		if(jd) {
-			Text.Add("<br/>");
-			
 			var parse = {
 				job        : jd.job.Short(this),
 				lvl        : jd.level,
@@ -1822,21 +1821,22 @@ Entity.prototype.LevelUpPrompt = function(backFunc) {
 				toLevel      = newLevel.expToLevel * jd.mult;
 			}
 			
+			Text.Add("<tr><td><b>Job:</b></td><td>");
 			if(master)
-				Text.Add("[job] <b>(MASTER)</b>", parse);
+				Text.Add("<b>(MASTER) [job]</b></td></tr>", parse);
 			else
-				Text.Add("[job]: level [lvl]/[maxlvl] (exp " + Math.floor(jd.experience) + "/" + Math.floor(toLevel) + ")", parse);
+				Text.Add("[job] level [lvl]/[maxlvl] (exp " + Math.floor(jd.experience) + "/" + Math.floor(toLevel) + ")</td></tr>", parse);
 		}
 	}
+	Text.Add("<tr><td><b>Strength:</b></td><td>"     + Math.floor(this.Str()) + " (Rank " + this.strength.GrowthRank() + ")</td></tr>");
+	Text.Add("<tr><td><b>Stamina:</b></td><td>"      + Math.floor(this.Sta()) + " (Rank " + this.stamina.GrowthRank() + ")</td></tr>");
+	Text.Add("<tr><td><b>Dexterity:</b></td><td>"    + Math.floor(this.Dex()) + " (Rank " + this.dexterity.GrowthRank() + ")</td></tr>");
+	Text.Add("<tr><td><b>Intelligence:</b></td><td>" + Math.floor(this.Int()) + " (Rank " + this.intelligence.GrowthRank() + ")</td></tr>");
+	Text.Add("<tr><td><b>Spirit:</b></td><td>"       + Math.floor(this.Spi()) + " (Rank " + this.spirit.GrowthRank() + ")</td></tr>");
+	Text.Add("<tr><td><b>Libido:</b></td><td>"       + Math.floor(this.Lib()) + " (Rank " + this.libido.GrowthRank() + ")</td></tr>");
+	Text.Add("<tr><td><b>Charisma:</b></td><td>"     + Math.floor(this.Cha()) + " (Rank " + this.charisma.GrowthRank() + ")</td></tr>");
 	
-	Text.NL();
-	Text.Add("Strength: "     + Math.floor(this.strength.Get()) + " (Rank " + this.strength.GrowthRank() + ")<br/>");
-	Text.Add("Stamina: "      + Math.floor(this.stamina.Get()) + " (Rank " + this.stamina.GrowthRank() + ")<br/>");
-	Text.Add("Dexterity: "    + Math.floor(this.dexterity.Get()) + " (Rank " + this.dexterity.GrowthRank() + ")<br/>");
-	Text.Add("Intelligence: " + Math.floor(this.intelligence.Get()) + " (Rank " + this.intelligence.GrowthRank() + ")<br/>");
-	Text.Add("Spirit: "       + Math.floor(this.spirit.Get()) + " (Rank " + this.spirit.GrowthRank() + ")<br/>");
-	Text.Add("Libido: "       + Math.floor(this.libido.Get()) + " (Rank " + this.libido.GrowthRank() + ")<br/>");
-	Text.Add("Charisma: "     + Math.floor(this.charisma.Get()) + " (Rank " + this.charisma.GrowthRank() + ")<br/>");
+	Text.Add("</table>");
 	Text.NL();
 	
 	if(this.currentJob) {

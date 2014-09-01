@@ -266,18 +266,54 @@ Party.prototype.Sleep = function() {
 }
 
 Party.prototype.Interact = function(preventClear, switchSpot, back) {
+	var parse = {
+		
+	};
+	
 	if(!preventClear)
 		Text.Clear();
 	
-	Text.AddOutput("PlaceHolder: Party");
 	SetGameState(GameState.Game);
 	var list = new Array();
 	
 	// Interacting with self opens options for masturbation etc
+	Text.Add("<table border='4' style='width:[w]%'>", {w: this.members.length > 1 ? "100" : "50"});
+	Text.Add("<tr>");
 	for(var i = 0; i < this.members.length; i++) {
 		var member = this.members[i];
+		Text.Add("<td>");
+		Text.Add("<p><center><b>" + member.name + "</b></center></p>");
+		Text.Add("<table style='width:100%'>");
+			Text.Add("<tr><td><b>HP:</b></td><td>" + Math.floor(member.curHp) + "/" + Math.floor(member.HP()) + "<td/></tr>", parse);
+			Text.Add("<tr><td><b>SP:</b></td><td>" + Math.floor(member.curSp) + "/" + Math.floor(member.SP()) + "<td/></tr>", parse);
+			Text.Add("<tr><td><b>Lust:</b></td><td>" + Math.floor(member.curLust) + "/" + Math.floor(member.Lust()) + "<td/></tr>", parse);
+			Text.Add("<tr><td><b>Level:</b></td><td>" + member.level + "</td></tr>", parse);
+			Text.Add("<tr><td><b>SexLevel:</b></td><td>" + member.sexlevel + "</td></tr>", parse);
+			if(member.currentJob) {
+				var jd  = member.jobs[member.currentJob.name];
+				if(jd) {
+					Text.Add("<tr><td><b>Job:</b></td><td>Level [lvl] [job]</td></tr>", {
+						job : jd.job.Short(member),
+						lvl : jd.level
+					});
+				}
+			}
+			Text.Add("<tr><td><b>Strength:</b></td><td>"     + Math.floor(member.Str()) + "</td></tr>");
+			Text.Add("<tr><td><b>Stamina:</b></td><td>"      + Math.floor(member.Sta()) + "</td></tr>");
+			Text.Add("<tr><td><b>Dexterity:</b></td><td>"    + Math.floor(member.Dex()) + "</td></tr>");
+			Text.Add("<tr><td><b>Intelligence:</b></td><td>" + Math.floor(member.Int()) + "</td></tr>");
+			Text.Add("<tr><td><b>Spirit:</b></td><td>"       + Math.floor(member.Spi()) + "</td></tr>");
+			Text.Add("<tr><td><b>Libido:</b></td><td>"       + Math.floor(member.Lib()) + "</td></tr>");
+			Text.Add("<tr><td><b>Charisma:</b></td><td>"     + Math.floor(member.Cha()) + "</td></tr>");
+		Text.Add("</table>");
+		Text.Add("</td>");
+		if(i == 1)
+			Text.Add("</tr><tr>");
+		
 		list.push({nameStr: member.name, func: member.Interact, obj: switchSpot, enabled: true, image: Input.imgButtonEnabled2});
 	}
+	Text.Add("</tr>");
+	Text.Add("</table>");
 	if(switchSpot) {
 		// Add reserve too
 		for(var i = 0; i < this.reserve.length; i++) {
@@ -289,6 +325,8 @@ Party.prototype.Interact = function(preventClear, switchSpot, back) {
 	//list.sort( function(a, b) { return a.nameStr > b.nameStr; } );
 	
 	Gui.SetButtonsFromList(list, back, false, GameState.Event);
+	
+	Text.Flush();
 }
 
 Party.prototype.ShowAbilities = function() {
