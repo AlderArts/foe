@@ -175,47 +175,51 @@ Scenes.Golem.OnWin = function() {
 		playername : player.name
 	};
 	
-	SetGameState(GameState.Event);
 	
-	Text.Clear();
-	Text.Add("With a final shudder, the golem staggers back, unable to withstand any more punishment. As the magic that holds it together dissipates, the automaton cracks apart, crumbling into a pile of rubble.", parse);
-	if(golem.flags["Met"] == Scenes.Golem.State.Lost)
-		Text.Add(" You are slightly disappointed that the golem didn’t assume its other form, robbing you of the opportunity to return the favor.", parse);
-	Text.Add(" Behind it, the dense darkness filling the interior of the tower lifts, revealing a number of strange devices and a narrow staircase leading to the upper floors.", parse);
-	Text.NL();
-	if(party.Num() > 2)
-		parse["comp"] = " and checking on your companions";
-	else if(party.Num() == 2)
-		parse["comp"] = Text.Parse(" and checking on [name]", {name: party.Get(1).name});
-	else
-		parse["comp"] = "";
-	Text.Add("After squaring your shoulders[comp], you step inside, peering around curiously at the odd furniture scattered throughout the room. There are many antiques, but they don’t look like they are of the usual style you’ve seen in Rigard. Each article looks like it was crafted from a single piece of wood, and it looks less carved and more… grown.", parse);
-	Text.NL();
-	if(party.InParty(kiakai)) {
-		Text.Add("<i>”[playername], this is elven craftsmanship,”</i> [name] says, [hisher] voice muted. <i>”It was a long time ago, but I remember wood like this from back home...”</i>", parse);
+	Gui.Callstack.push(function() {
+		SetGameState(GameState.Event);
+		
+		Text.Clear();
+		Text.Add("With a final shudder, the golem staggers back, unable to withstand any more punishment. As the magic that holds it together dissipates, the automaton cracks apart, crumbling into a pile of rubble.", parse);
+		if(golem.flags["Met"] == Scenes.Golem.State.Lost)
+			Text.Add(" You are slightly disappointed that the golem didn’t assume its other form, robbing you of the opportunity to return the favor.", parse);
+		Text.Add(" Behind it, the dense darkness filling the interior of the tower lifts, revealing a number of strange devices and a narrow staircase leading to the upper floors.", parse);
 		Text.NL();
-	}
-	Text.Add("After a brief survey, you continue to the next floor, which looks like it is a living room, containing several chairs and tables and a large divan with fine cloth covering it. On second thought, living room is perhaps the wrong word - it doesn’t look like anyone has been here for quite some time. There are some sort of candles providing light, but the fire doesn’t look or move naturally.", parse);
-	Text.NL();
-	Text.Add("The next floor contains a bedroom, and this place has clearly been in use, and not just for sleeping either. The sheets of the large bed - a beautiful piece of woodwork looking like a huge leaf - are ruffled and stained with sexual fluids. Large glass bottles containing a luminescent fluid are neatly lined up on a shelf in a nearby bookcase, stored for who knows what purpose.", parse);
-	Text.NL();
-	if(party.Num() > 2)
-		parse["comp"] = ", followed by your companions";
-	else if(party.Num() == 2)
-		parse["comp"] = Text.Parse(", followed by [name]", {name: party.Get(1).name});
-	else
-		parse["comp"] = "";
-	Text.Add("On a nightstand, there is a small pile of parchments with strange symbols scrawled on it, letters from no alphabet you recognize, elaborate arcane diagrams and charts. From the floor above, you hear a bustle of activity, and see the strange flickering light that you saw from the outside. Steeling yourself for whatever awaits you above, you continue up the final set of stairs[comp].", parse);
-	Text.Flush();
-	
-	world.TimeStep({minute: 30});
-	
-	if(golem.flags["Met"] == Scenes.Golem.State.Lost)
-		golem.flags["Met"] = Scenes.Golem.State.Won_prevLoss;
-	else
-		golem.flags["Met"] = Scenes.Golem.State.Won_noLoss;
-	
-	Gui.NextPrompt(Scenes.Jeanne.First);
+		if(party.Num() > 2)
+			parse["comp"] = " and checking on your companions";
+		else if(party.Num() == 2)
+			parse["comp"] = Text.Parse(" and checking on [name]", {name: party.Get(1).name});
+		else
+			parse["comp"] = "";
+		Text.Add("After squaring your shoulders[comp], you step inside, peering around curiously at the odd furniture scattered throughout the room. There are many antiques, but they don’t look like they are of the usual style you’ve seen in Rigard. Each article looks like it was crafted from a single piece of wood, and it looks less carved and more… grown.", parse);
+		Text.NL();
+		if(party.InParty(kiakai)) {
+			Text.Add("<i>”[playername], this is elven craftsmanship,”</i> [name] says, [hisher] voice muted. <i>”It was a long time ago, but I remember wood like this from back home...”</i>", parse);
+			Text.NL();
+		}
+		Text.Add("After a brief survey, you continue to the next floor, which looks like it is a living room, containing several chairs and tables and a large divan with fine cloth covering it. On second thought, living room is perhaps the wrong word - it doesn’t look like anyone has been here for quite some time. There are some sort of candles providing light, but the fire doesn’t look or move naturally.", parse);
+		Text.NL();
+		Text.Add("The next floor contains a bedroom, and this place has clearly been in use, and not just for sleeping either. The sheets of the large bed - a beautiful piece of woodwork looking like a huge leaf - are ruffled and stained with sexual fluids. Large glass bottles containing a luminescent fluid are neatly lined up on a shelf in a nearby bookcase, stored for who knows what purpose.", parse);
+		Text.NL();
+		if(party.Num() > 2)
+			parse["comp"] = ", followed by your companions";
+		else if(party.Num() == 2)
+			parse["comp"] = Text.Parse(", followed by [name]", {name: party.Get(1).name});
+		else
+			parse["comp"] = "";
+		Text.Add("On a nightstand, there is a small pile of parchments with strange symbols scrawled on it, letters from no alphabet you recognize, elaborate arcane diagrams and charts. From the floor above, you hear a bustle of activity, and see the strange flickering light that you saw from the outside. Steeling yourself for whatever awaits you above, you continue up the final set of stairs[comp].", parse);
+		Text.Flush();
+		
+		world.TimeStep({minute: 30});
+		
+		if(golem.flags["Met"] == Scenes.Golem.State.Lost)
+			golem.flags["Met"] = Scenes.Golem.State.Won_prevLoss;
+		else
+			golem.flags["Met"] = Scenes.Golem.State.Won_noLoss;
+		
+		Gui.NextPrompt(Scenes.Jeanne.First);
+	});
+	Encounter.prototype.onVictory.call(this);
 }
 
 Scenes.Golem.OnLoss = function() {
@@ -232,6 +236,7 @@ Scenes.Golem.OnLoss = function() {
 		vagDesc       : function() { return player.FirstVag().Short(); }
 	};
 	
+	this.Cleanup();
 	SetGameState(GameState.Event);
 	
 	if(party.Num() > 2)

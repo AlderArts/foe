@@ -3,12 +3,12 @@
 world.loc.Plains.Nomads.Tent.events.push(new Link(
 	"TESTBUTTON", function() { return DEBUG; }, true,
 	function() {
-		Text.Add(Text.BoldColor("DEBUG: " + "Terry"));
+		Text.Add(Text.BoldColor("DEBUG: " + "Golem"));
 		Text.NL();
 		Text.Flush();
 	},
 	function() {
-		Scenes.Krawitz.Aftermath();
+		Scenes.Golem.FightPrompt();
 	}
 ));
 */
