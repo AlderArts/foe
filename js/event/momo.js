@@ -900,7 +900,7 @@ Scenes.Momo.TalkPrompt = function() {
 				if(momo.flags["tSkills"] == 0)
 					Text.Add("<i>“You want to know what sort of things I can cook? Why, certainly, I'd be happy to tell you that,“</i> Momo grins with delight, eager to show off.", parse);
 				else
-					Text.Add("<i>“Need a little reminder, do you? It's okay, [playername], we all can forget things sometimes. That's why I have recipe books,“</i> the dragon-[girlmorph] giggles.", parse);
+					Text.Add("<i>“Need a little reminder, do you? It's okay, [playername], we all can forget things sometimes. That's why I have recipe books,“</i> the dragon-[girlMorph] giggles.", parse);
 					
 				momo.flags["tSkills"] = 1;
 				
