@@ -1799,7 +1799,7 @@ Entity.prototype.LevelUpPrompt = function(backFunc) {
 	
 	this.SetLevelBonus();
 	
-	Text.Add("<table style='width:50%'>");
+	Text.Add("<table class='party' style='width:50%'>");
 	Text.Add("<tr><td><b>Level:</b></td><td>"     + Math.floor(this.level) + "</td></tr>");
 	Text.Add("<tr><td><b>Exp:</b></td><td>"       + Math.floor(this.experience) + "/" + Math.floor(this.expToLevel) + "</td></tr>");
 	Text.Add("<tr><td><b>Sex level:</b></td><td>" + Math.floor(this.sexlevel) + "</td></tr>");

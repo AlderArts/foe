@@ -277,16 +277,16 @@ Party.prototype.Interact = function(preventClear, switchSpot, back) {
 	var list = new Array();
 	
 	// Interacting with self opens options for masturbation etc
-	Text.Add("<table border='4' style='width:[w]%'>", {w: this.members.length > 1 ? "100" : "50"});
+	Text.Add("<table class='party' style='width:[w]%'>", {w: this.members.length > 1 ? "100" : "50"});
 	Text.Add("<tr>");
 	for(var i = 0; i < this.members.length; i++) {
 		var member = this.members[i];
 		Text.Add("<td>");
-		Text.Add("<p><center><b>" + member.name + "</b></center></p>");
-		Text.Add("<table style='width:100%'>");
-			Text.Add("<tr><td><b>HP:</b></td><td>" + Math.floor(member.curHp) + "/" + Math.floor(member.HP()) + "<td/></tr>", parse);
-			Text.Add("<tr><td><b>SP:</b></td><td>" + Math.floor(member.curSp) + "/" + Math.floor(member.SP()) + "<td/></tr>", parse);
-			Text.Add("<tr><td><b>Lust:</b></td><td>" + Math.floor(member.curLust) + "/" + Math.floor(member.Lust()) + "<td/></tr>", parse);
+		Text.Add("<p><center style='font-size: x-large'><b>" + member.name + "</b></center></p>");
+		Text.Add("<table class='party' style='width:100%'>");
+			Text.Add("<tr><td><b>HP:</b></td><td>" + Math.floor(member.curHp) + "/" + Math.floor(member.HP()) + "</td></tr>", parse);
+			Text.Add("<tr><td><b>SP:</b></td><td>" + Math.floor(member.curSp) + "/" + Math.floor(member.SP()) + "</td></tr>", parse);
+			Text.Add("<tr><td><b>Lust:</b></td><td>" + Math.floor(member.curLust) + "/" + Math.floor(member.Lust()) + "</td></tr>", parse);
 			Text.Add("<tr><td><b>Level:</b></td><td>" + member.level + "</td></tr>", parse);
 			Text.Add("<tr><td><b>SexLevel:</b></td><td>" + member.sexlevel + "</td></tr>", parse);
 			if(member.currentJob) {
