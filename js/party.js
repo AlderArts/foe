@@ -288,14 +288,31 @@ Party.prototype.Interact = function(preventClear, switchSpot, back) {
 			Text.Add("<tr><td><b>SP:</b></td><td>" + Math.floor(member.curSp) + "/" + Math.floor(member.SP()) + "</td></tr>", parse);
 			Text.Add("<tr><td><b>Lust:</b></td><td>" + Math.floor(member.curLust) + "/" + Math.floor(member.Lust()) + "</td></tr>", parse);
 			Text.Add("<tr><td><b>Level:</b></td><td>" + member.level + "</td></tr>", parse);
+			Text.Add("<tr><td><b>Exp:</b></td><td>"       + Math.floor(member.experience) + "/" + Math.floor(member.expToLevel) + "</td></tr>");
 			Text.Add("<tr><td><b>SexLevel:</b></td><td>" + member.sexlevel + "</td></tr>", parse);
+			Text.Add("<tr><td><b>S.Exp:</b></td><td>"     + Math.floor(member.sexperience) + "/" + Math.floor(member.sexpToLevel) + "</td></tr>");
 			if(member.currentJob) {
 				var jd  = member.jobs[member.currentJob.name];
 				if(jd) {
-					Text.Add("<tr><td><b>Job:</b></td><td>Level [lvl] [job]</td></tr>", {
-						job : jd.job.Short(member),
-						lvl : jd.level
-					});
+					var parse = {
+						job        : jd.job.Short(this),
+						lvl        : jd.level,
+						maxlvl     : jd.job.levels.length + 1
+					};
+					
+					// Check for maxed out job
+					var master   = jd.job.Master(member);
+					var toLevel;
+					if(!master) {
+						var newLevel = jd.job.levels[jd.level-1];
+						toLevel      = newLevel.expToLevel * jd.mult;
+					}
+					
+					Text.Add("<tr><td><b>Job:</b></td><td>");
+					if(master)
+						Text.Add("<b>(MASTER) [job]</b></td></tr>", parse);
+					else
+						Text.Add("[job] level [lvl]/[maxlvl] (exp " + Math.floor(jd.experience) + "/" + Math.floor(toLevel) + ")</td></tr>", parse);
 				}
 			}
 			Text.Add("<tr><td><b>Strength:</b></td><td>"     + Math.floor(member.Str()) + "</td></tr>");

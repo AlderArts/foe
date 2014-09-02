@@ -71,21 +71,22 @@ svg { width: 100%; height: 100%; }
 }
 
 table.party {
-	border-width: medium;
-	border-spacing: 5px;
-	border-style: none;
+	border-width:    medium;
+	border-spacing:  5px;
+	border-style:    none;
 	border-collapse: collapse;
 }
 table.party tr {
 	border-width: 5px;
-	padding: 5px;
+	padding:      5px;
 	border-style: solid;
 	border-color: black;
 	-moz-border-radius: ;
 }
 table.party td {
+	text-align:   center;
 	border-width: 5px;
-	padding: 5px;
+	padding:      5px;
 	border-style: solid;
 	border-color: black;
 	-moz-border-radius: ;

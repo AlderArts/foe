@@ -1272,7 +1272,7 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 	Text.Add("You stand ready, just in case. Off in the distance you hear the sound of hooves, though they don’t see to be getting closer. Instead they stop after some time.", parse);
 	Text.NL();
 	parse["wepDesc"] = player.WeaponDesc();
-	Text.Add("<i>”You better be ready, [playername]. I think we’re walking straight into an ambush,”</i> she syas, slowing down as she prepares for the worst. You grip your [wepDesc] tightly as you feel the tension building up.", parse);
+	Text.Add("<i>”You better be ready, [playername]. I think we’re walking straight into an ambush,”</i> she says, slowing down as she prepares for the worst. You grip your [wepDesc] tightly as you feel the tension building up.", parse);
 
 
 	party.SaveActiveParty();
