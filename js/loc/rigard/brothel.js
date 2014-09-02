@@ -43,7 +43,7 @@ world.loc.Rigard.Brothel.brothel.events.push(new Link(
 		if(false) // TODO
 			Text.Add("Lucille wanders the hall, starting conversations here and there, inserting her charm to subtly urge the customers to spends more, and settling deals, employing her concubines.");
 		else
-			Text.Add("Lucille isn’t currently in the main hall, but there is a perky young woman who looks to be fulfilling her duties roaming the hall.");
+			Text.Add("Lucille isn’t currently in the main hall, but there is a perky young woman who looks to be fulfilling her duties roaming the room.");
 		Text.NL();
 	},
 	function() {
@@ -66,7 +66,8 @@ Scenes.Brothel.First = function() {
 	var parse = {
 		handsomePretty : player.mfFem("handsome", "pretty"),
 		vagDesc : function() { return player.FirstVag().Short(); },
-		playername : player.name
+		playername : player.name,
+		gender : Gender.Desc(player.Gender())
 	};
 	
 	rigard.Brothel["Visit"] = 1;
@@ -81,7 +82,7 @@ Scenes.Brothel.First = function() {
 	Text.NL();
 	Text.Add("<i>”Pardon me for that, [handsomePretty],”</i> the lady gushes, adjusting a stray lock of her hair. <i>”Now, what can I do to help you? The Shadow Lady provides many services for one such as you… and perhaps opportunities as well.”</i>", parse);
 	Text.NL();
-	Text.Add("You take a moment to study the beauty, taking in her tall stature, dark skin and midnight hair. Her voluptuous curves are barely contained in the silky dress she is wearing, leaving very little to your imagination. Her eyes are deep dark pools which a man could drown in, framed by thick lashes. If she wears makeup, it is very subtle, but you doubt a woman like this would need that deception to make men fall left and right for her.", parse);
+	Text.Add("You take a moment to study the beauty, taking in her tall stature, dark skin and midnight hair. Her voluptuous curves are barely contained in the silky dress she is wearing, leaving very little to your imagination. Her eyes are deep dark pools which a [gender] could drown in, framed by thick lashes. If she wears makeup, it is very subtle, but you doubt a woman like this would need any extra enhancement to make anyone fall for her.", parse);
 	Text.NL();
 	Text.Add("<i>”The name is Lucille, Madam Lucille to most, but you can call me Lucy. I am the owner of this establishment. Now tell me, what is your pleasure?”</i> The last is said in a sultry voice, a faint seductive smile on her full, red lips. You shake your head, trying to clear the fog in your mind. There is an almost hypnotic quality to her voice, loaded with unspoken intimate promises.", parse);
 	Text.Flush();
@@ -113,7 +114,7 @@ Scenes.Brothel.First = function() {
 		if(player.FirstCock())
 			Text.Add(" You are almost unbearably hard, to the point that you are sure everyone in the room can notice. Not that you care.", parse);
 		if(player.FirstVag())
-			Text.Add(" Your [vagDesc] is practically dripping with your juices, aching for release.", parse);
+			Text.Add(" Your [vagDesc] is practically dripping with juices, aching for release.", parse);
 		Text.Add(" How can this tempress be so unbelievably sexy?", parse);
 		Text.NL();
 		Text.Add("<i>”I promise you this, if you only perform a few small tasks for me, I shall be yours,”</i> she whispers, leaning in so close that you can smell her intoxicating breath. <i>”You would show me a good time, would you not?”</i> Her hand hovers a fraction of an inch from your crotch. It takes all of your self control to not cum then and there. Abruptly, the woman steps away from you.", parse);

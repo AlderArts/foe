@@ -816,7 +816,7 @@ Scenes.Kiakai.TalkEden = function() {
 	// TALK ABOUT FACTIONS
 	options.push({ nameStr: "Factions",
 		func : Scenes.Kiakai.TalkFactions, enabled : true,
-		tooltip : "Ask about the people and creatures that inhabit Eden."
+		tooltip : "Ask about some of the major groups on Eden."
 	});
 	// TALK ABOUT HUBWORLD
 	options.push({ nameStr: "Hubworld",

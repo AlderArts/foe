@@ -2193,7 +2193,7 @@ Entity.prototype.PrintDescription = function() {
 	// TODO Body appearance, skin color
 	Text.NL();
 	Text.Add("[HeShe] [has] [faceDesc]. [HisHer] [eyeCount] [eyeColor] [eyeDesc][eyeS] observe the surroundings. ", parse);
-	Text.Add("A pair of [earDesc] stick out from [possesive] [hairDesc]. ", parse);
+	Text.Add("A pair of [earDesc] sticks out from [possesive] [hairDesc]. ", parse);
 	
 	for(i = 0; i < this.body.head.appendages.length; i++) {
 		var a = this.body.head.appendages[i];

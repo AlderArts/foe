@@ -777,7 +777,7 @@ world.loc.Rigard.Krawitz.Mansion.storeroom.description = function() {
 			Text.NL();
 			Text.Add(" Recalling the conversation you overheard, you make your way to the back of the room, uncovering a small ornate chest hidden behind a drapery.");
 		}
-		else if(player.Int() > 40) {
+		else if(player.Int() > 30) {
 			Text.NL();
 			Text.Add(" Where could the good stuff be hidden? Scanning the room once more, your eyes hone in on a drapery hanging at the very back of the room. Pulling it aside, you uncover a small ornate chest. Too easy.");
 		}
@@ -2073,6 +2073,7 @@ Scenes.Krawitz.Aftermath = function() {
 	if(!Scenes.Krawitz.stat.AlarmRaised) points += 1;
 	
 	Gui.NextPrompt(function() {
+		world.TimeStep({hour: 2});
 		party.location = world.loc.Rigard.Inn.common;
 		
 		party.LoadActiveParty();
@@ -2230,7 +2231,7 @@ Scenes.Krawitz.Aftermath = function() {
 			parse["hotcold"] = world.time.season == Season.Winter ? "a cosy fire warming up the interior" : "though at the moment, it isn’t lit";
 			Text.Add("Even for the Lady’s Blessing, the interior of the room is lavish, well beyond the usual fare at the inn. There are several pieces of antique furniture that look to have been made in a florid old style, decorated with elaborate carved patterns. Richly embroidered carpets and hangings abundantly adorn the room, the crowning jewel being a large tapestry hanging on one wall. While it is very well made, the images depicted on it are decidedly vulgar, showing a series of couples involved in suggestive or outright sexual acts. The room has its own stone fireplace connected to the central chimney, [hotcold].", parse);
 			Text.NL();
-			Text.Add("Lei motions you inside, closing the door behind you and leaving you alone with the red-headed couple from before. You can spy the woman resting a the gigantic bed in the next room, while the man is lounging on a couch. He waves you over, eager to hear of your exploits. The woman puts on a robe and joins you on the couch, her hair in sleepy, scarlet tousles.", parse);
+			Text.Add("Lei motions you inside, closing the door behind you and leaving you alone with the red-headed couple from before. You can spy the woman resting on the gigantic bed in the next room, while the man is lounging on a couch. He waves you over, eager to hear of your exploits. The woman puts on a robe and joins you on the couch, her hair in sleepy, scarlet tousles.", parse);
 			Text.NL();
 			parse["duel"] = rigard.Krawitz["Duel"] > 0 ? " met Krawitz for a duel, and then" : "";
 			Text.Add("You recount the events of the night, describing how you[duel] got inside the Krawitz estate, and what you did there.", parse);
@@ -2269,7 +2270,7 @@ Scenes.Krawitz.Aftermath = function() {
 				party.inventory.AddItem(Items.Weapons.KrawitzSword);
 			}
 			if(Scenes.Krawitz.stat.TFdKrawitz) {
-				Text.Add("You tell them how you slipped something extra into the lord’s food. <i>”Oh, that is too rich!”</i> the man laughs out loud, slapping his knees in mirth. <i>”I look forward to seeing that bastard trying to show up in court with animal ears and a tail on him, that ought to lend less credence to his damn xenophobic politics!”</i>", parse);
+				Text.Add("You tell them how you slipped something extra into the lord’s food. <i>”Oh, that is too rich!”</i> the man laughs out loud, slapping his knees in mirth. <i>”I look forward to seeing that bastard trying to show up in court with animal ears and a tail on him. That ought to lend less credence to his damn xenophobic politics!”</i>", parse);
 				Text.NL();
 				Text.Add("...Court? Just who are these two?", parse);
 				Text.NL();
@@ -2385,7 +2386,7 @@ Scenes.Krawitz.TwinsTalk = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("<i>”Now that business is out of the way, I suppose introductions are in order.”</i> The man rises to his feet, stretching as he undoes his pony-tail, letting out his long hair. As he speaks, his voice changes, becoming lighter, more feminine.", parse);
+	Text.Add("<i>”Now that business is out of the way, let's drop the subterfuge.”</i> The man rises to his feet, stretching as he undoes his pony-tail, letting out his long hair. As he speaks, his voice changes, becoming lighter, more feminine.", parse);
 	Text.NL();
 	Text.Add("<i>”Lei already told us your name, [playername]. I am Rumi, daughter of King Rewyn, heir to the throne of Rigard. And this here, is my twin brother, Rani.”</i> She gestures to the blushing woman - man - sitting beside her. Rumi grins at your surprise. <i>”Had you fooled, did we? My brother and I were always so similar, and we quite enjoy masquerading as each other...”</i>", parse);
 	Text.NL();
@@ -2417,7 +2418,7 @@ Scenes.Krawitz.TwinsPrompt = function() {
 				Text.NL();
 				Text.Add("How come they can stay here though? Won’t they be missed?", parse);
 				Text.NL();
-				Text.Add("<i>”We make our occasional appearance at court, but we are usually sequestered with our teachers. Well, that is what father believes, anyways. It’s amazing how a small bribe can sweeten someones tongue to say whatever you want,”</i> Rumi smiles, pleased at their clever scheme. <i>”There is only so much you can learn by reading books, stuck in some dusty tower with a withered old man. Besides, none of the stuff they give us is challenging!”</i>", parse);
+				Text.Add("<i>”We make our occasional appearance at court, but we are usually sequestered with our teachers. Well, that is what father believes, anyways. It’s amazing how a small bribe can sweeten someone's tongue to say whatever you want,”</i> Rumi smiles, pleased at their clever scheme. <i>”There is only so much you can learn by reading books, stuck in some dusty tower with a withered old man. Besides, none of the stuff they give us is challenging!”</i>", parse);
 				Text.NL();
 				Text.Add("The princess walks over to a window, looking out into the streets of Rigard. <i>”This place can teach us so much more,”</i> she says, almost under her breath.", parse);
 				Text.Flush();

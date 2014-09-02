@@ -141,6 +141,7 @@ Rigard.prototype.ToStorage = function() {
 	
 	storage.flags   = this.flags;
     storage.Krawitz = this.Krawitz;
+    storage.Brothel = this.Brothel;
 	storage.LB      = this.LB;
 	storage.LBroom  = this.LBroomTimer.ToStorage();
 	if(this.KrawitzWorkDay)
@@ -160,6 +161,8 @@ Rigard.prototype.FromStorage = function(storage) {
 		this.flags[flag] = parseInt(storage.flags[flag]);
     for(var flag in storage.Krawitz)
         this.Krawitz[flag] = parseInt(storage.Krawitz[flag]);
+    for(var flag in storage.Brothel)
+        this.Brothel[flag] = parseInt(storage.Brothel[flag]);
 	for(var flag in storage.LB)
 		this.LB[flag] = parseInt(storage.LB[flag]);
 }
@@ -579,7 +582,7 @@ Scenes.Rigard.Lockdown = function() {
 	else {
 		Text.Add("Miranda takes you through the gates, heading into the slums of Rigard. Looks like she has a destination in mind. ", parse);
 	}
-	Text.Add("Adjusting yourself to your impromptu drafting, you ask the watch-morph if she has a plan as to where to begin.", parse);
+	Text.Add("Adjusting yourself to your impromptu drafting, you ask the dog-morph if she has a plan as to where to begin.", parse);
 	Text.NL();
 	Text.Add("<i>”We should discuss a few details before we get started. So, let’s go to the Maiden’s Bane and plan our moves,”</i> she says, leading you towards her favorite watering hole.", parse);
 	Text.Flush();

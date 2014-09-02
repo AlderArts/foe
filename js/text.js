@@ -175,6 +175,7 @@ Text.NumToText = function(num) {
 		}
 		if(ones != 0) {
 			if(hundreds != 0 && tens == 0) str += " ";
+			else if(tens != 0) str += "-";
 			str += Text.DigitToText(ones);
 		}
 		return str;

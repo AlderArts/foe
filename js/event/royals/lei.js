@@ -587,7 +587,7 @@ Scenes.Lei.RequestMain = function() {
 					Text.Clear();
 					Text.Add("You can't help but notice the ‘Lord' part of Krawitz's monicker, and ask if it's really okay for you to offend someone like that.", parse);
 					Text.NL();
-					Text.Add("<i>\"Don't worry about it,\"</i> the man tells you. <i>\"He might be a lord, but his only estates is a house in the plaza district. He has no real power to speak of, although I think he deludes himself into thinking he does. Most of the other nobles laugh at him behind his back. If anything, you'll probably end up winning friends in the upper classes.\"</i>", parse);
+					Text.Add("<i>\"Don't worry about it,\"</i> the man tells you. <i>\"He might be a lord, but his only major property is a house in the plaza district. He has no real power to speak of, although I think he deludes himself into thinking he does. Most of the other nobles laugh at him behind his back. If anything, you'll probably end up winning friends in the upper classes.\"</i>", parse);
 					Text.NL();
 					Text.Add("You wonder who the pair is that they are so well acquainted with the ways of the upper classes, but decide to focus on your task for now.", parse);
 					Text.Flush();
@@ -613,6 +613,7 @@ Scenes.Lei.RequestMain = function() {
 				twins.flags["Met"] = Twins.Met.Met;
 				// Start KrawitzQ
 				rigard.Krawitz["Q"] = Rigard.KrawitzQ.Started;
+				party.location = world.loc.Rigard.Plaza;
 				
 				Gui.NextPrompt();
 			}, enabled : true,
@@ -959,7 +960,7 @@ Scenes.Lei.BarFight = function() {
 		parse["talk"] = player.level < LeiStrength.LEVEL_STRONG ? "I did not think you had it in you, to be honest. I am impressed," : "You are as strong as I had hoped... maybe stronger,";
 		
 		Text.Clear();
-		Text.Add("<i>\"Mm... wonderful,\"</i> Lei almost purrs, smiling widely at you. <i>\"[talk]\"</i> he says, clearly pleased. <i>\"Some day, we must fight in earnest.\"</i>", parse);
+		Text.Add("<i>\"Mm... that's good enough for now. Wonderful,\"</i> Lei almost purrs, smiling widely at you. <i>\"[talk]\"</i> he says, clearly pleased. <i>\"Some day, we must fight in earnest.\"</i>", parse);
 		Text.NL();
 		Text.Add("He leads you back inside the Lady's Blessing, returning to his habitual table.", parse);
 		Text.Flush();

@@ -1247,7 +1247,7 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 	Text.NL();
 	Text.Add("You promptly tell her that you just need to know what she wants done.", parse);
 	Text.NL();
-	Text.Add("<i>”Alright; my usual load is a mix of things - wool, milk, cheese, butter, fruits and vegetables. Can you start fetching me some of the prepared goods from the barn where they're stored?”</i> Gwendy asks you, instructing you where the storage area is.", parse);
+	Text.Add("<i>”My usual load is a mix of things - wool, milk, cheese, butter, fruits and vegetables. Can you start fetching me some of the prepared goods from the barn where they're stored?”</i> Gwendy asks you, instructing you where the storage area is.", parse);
 	Text.NL();
 	Text.Add("You tell her that's fine, and promptly set off to start grabbing the things that she needs. Boxes of fruits and veggies, gallon jugs of milk, bales of cleaned wool, wax-sealed cheeses, knobs of butter... Eventually, Gwendy's wagon is starting to groan under the weight of its load of produce, and your own shoulders are aching as well. It's quite a workout getting all this stuff together. You can only imagine the work it took to grow and prepare it.", parse);
 	Text.NL();
@@ -1272,7 +1272,7 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 	Text.Add("You stand ready, just in case. Off in the distance you hear the sound of hooves, though they don’t see to be getting closer. Instead they stop after some time.", parse);
 	Text.NL();
 	parse["wepDesc"] = player.WeaponDesc();
-	Text.Add("<i>”You better be ready, [playername]. I think we’re walking straight into an ambush,”</i> she utters, slowing down as she prepares for the worst. You grip your [wepDesc] tightly as you feel the tension building up.", parse);
+	Text.Add("<i>”You better be ready, [playername]. I think we’re walking straight into an ambush,”</i> she syas, slowing down as she prepares for the worst. You grip your [wepDesc] tightly as you feel the tension building up.", parse);
 
 
 	party.SaveActiveParty();
@@ -1649,7 +1649,7 @@ Scenes.Farm.GoToMarketFirstFinale = function() {
 	}
 	Text.Add("The trip back is considerably less eventful than the morning was. The two of you are on your toes, especially when passing through the forested area, but there are no bandits in sight. You both let out a sigh of relief as you leave it behind you, continuing over the flat plains toward the farm.", parse);
 	Text.NL();
-	Text.Add("It is late in the evening when you finally roll into the yard in front of Gwendy’s derelict barn. You help her stash the cart and care for the horse, before both of you collapse on a stack of hay, exhausted after the long day.", parse);
+	Text.Add("A significant amount of time later, you finally roll into the yard in front of Gwendy’s derelict barn. You help her stash the cart and care for the horse, before both of you collapse on a stack of hay, exhausted after the long day.", parse);
 	Text.NL();
 	Text.Add("<i>”Thanks a lot for the help, [playername],”</i> Gwendy yawns, stretching. <i>”For a lot of things. Who knows what would have happened if you weren’t there...”</i> The farm girl suddenly looks very vulnerable, reminding you of her young age.", parse);
 	Text.NL();
