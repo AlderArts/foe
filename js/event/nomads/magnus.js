@@ -35,7 +35,8 @@ Magnus.prototype.constructor = Magnus;
 Magnus.Teaching = {
 	None : 0,
 	Wait : 1,
-	Done : 2
+	Done : 2,
+	Jeanne : 3
 };
 
 Magnus.Confront = {
