@@ -2320,7 +2320,7 @@ Scenes.Cale.SexFuckHim = function(outside, opts) {
 					Text.Add("<i>”Damnit, I’ll get you next time,”</i> Cale grunts as he rubs his aching behind.", parse);
 					Text.NL();
 					if(cale.Slut() >= 30)
-						Text.Add("You ask if he’s sure he didn’t lose on purpose? It sure looked like he bet his ass on some really weak hands… The wolf flashes you a quick grin. <i>”Well, it’s no big deal if I lose, and winning has a whole lot of perks too it.”</i>", parse);
+						Text.Add("You ask if he’s sure he didn’t lose on purpose? It sure looked like he bet his ass on some really weak hands… The wolf flashes you a quick grin. <i>”Well, it’s no big deal if I lose, and winning has a whole lot of perks to it.”</i>", parse);
 					else
 						Text.Add("Was it really that bad tho? <i>”I got what I deserved, I guess,”</i> he grimaces. <i>”Shouldn’t have bet on that one hand, but I thought I really had you there. Besides, folding wouldn’t have made things any better.”</i>", parse);
 					Text.NL();

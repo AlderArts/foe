@@ -5172,7 +5172,7 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 	else
 		Text.Add("The table provides only partial cover at best, and by the whispered remarks you hear, more than a few of the tavern’s patrons seem to have noticed you.", parse);
 	Text.NL();
-	Text.Add("By now, you have Miranda’s full attention, as she completely abandons her cocky, indifferent facade. Panting like a bitch in heat, she pull your head up and down her shaft, roughly and repeatedly impaling you on the thick stick of meat. You can feeling her throb deep down your throat, stretching you to your limits. As she nears her peak, the guardswoman eggs you on with mocking and suggestive comments, making no particular effort to keep her voice lowered.", parse);
+	Text.Add("By now, you have Miranda’s full attention, as she completely abandons her cocky, indifferent facade. Panting like a bitch in heat, she pull your head up and down her shaft, roughly and repeatedly impaling you on the thick stick of meat. You can feel her throb deep down your throat, stretching you to your limits. As she nears her peak, the guardswoman eggs you on with mocking and suggestive comments, making no particular effort to keep her voice lowered.", parse);
 	Text.NL();
 	if(player.FirstCock()) {
 		parse["mutliCockDesc"] = player.MultiCockDesc();

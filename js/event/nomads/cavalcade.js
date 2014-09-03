@@ -115,7 +115,7 @@ Scenes.NomadsCavalcade.RegularGame = function() {
 			func : function() {
 				Text.Clear();
 				Scenes.NomadsCavalcade.PrepCoinGame();
-			}, enabled : true,
+			}, enabled : party.coin >= Scenes.NomadsCavalcade.Bet(),
 			tooltip : "Play for coins."
 		});
 		options.push({ nameStr : "Sexy game",
