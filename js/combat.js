@@ -410,13 +410,6 @@ Encounter.prototype.CombatTick = function() {
 			}
 			Text.Newline();
 			
-			// TEMP TODO:
-			for(var i = 0; i < enc.enemy.members.length; i++) {
-				var e = enc.enemy.members[i];
-				Text.AddOutput(e.name + " has " + Math.floor(e.curHp) + "/" + e.HP() + " hp, " + Math.floor(e.curSp) + "/" + e.SP() + " sp, " + Math.floor(e.curLust) + "/" + e.Lust() + " lust.<br/>");
-			}
-			Text.AddOutput("<br/>");
-			
 			if(activeChar.entity == player)
 				Text.AddOutput("It's your turn.");
 			else

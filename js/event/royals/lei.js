@@ -153,12 +153,12 @@ Scenes.Lei.InnPrompt = function() {
 			}
 		}
 		
-		if(playerLevel <= LeiStrength.LEVEL_WEAK && strongestLevel > LeiStrength.LEVEL_STRONG) {
+		if(playerLevel < LeiStrength.LEVEL_WEAK && strongestLevel >= LeiStrength.LEVEL_STRONG) {
 			parse["heshe"] = strongestMember.heshe();
 			parse["name"] = strongestMember.name;
 			Text.Add("The stranger seems to hesitate before finally deciding. <i>\"Very well, you may sit. Not for your sake, but [heshe] appears interesting,\"</i> he says, nodding toward [name].", parse);
 		}
-		else if(playerLevel <= LeiStrength.LEVEL_WEAK && strongestLevel <= LeiStrength.LEVEL_WEAK) {
+		else if(playerLevel < LeiStrength.LEVEL_WEAK && strongestLevel < LeiStrength.LEVEL_WEAK) {
 			Text.Add("<i>\"I have no interest in you,\"</i> the man replies, his voice husky, yet flowing. <i>\"Begone, I do not have time for the weak. Show me you have potential and grow stronger first, then we can talk. Now get out of my sight, you're blocking my view.\"</i>", parse);
 			Text.NL();
 			Text.Add("You glare at the man. You? Weak? You are momentarily tempted to challenge him there and then over the insult, but an odd shiver runs down your spine as you're about to move. Gritting your teeth, you stalk off in annoyance.", parse);
@@ -168,7 +168,7 @@ Scenes.Lei.InnPrompt = function() {
 			Gui.NextPrompt();
 			return;
 		}
-		else if(playerLevel <= LeiStrength.LEVEL_STRONG)
+		else if(playerLevel < LeiStrength.LEVEL_STRONG)
 			Text.Add("<i>\"Very well, you appear to have some potential,\"</i> the man replies, his voice husky, yet flowing. <i>\"You may sit if you like.\"</i>", parse);
 		else
 			Text.Add("<i>\"You <b>are</b> an interesting one,\"</i> the man replies, almost purring. <i>\"Please, sit.\"</i>", parse);
@@ -180,7 +180,7 @@ Scenes.Lei.InnPrompt = function() {
 		Text.NL();
 		Text.Add("<i>\"Come, there is no need to sit so far from me,\"</i> he tells you, indicating a spot beside him at the small table. Your eyebrows shoot up in surprise. <i>\"You're blocking my view,\"</i> he clarifies.", parse);
 		Text.NL();
-		if(playerLevel > LeiStrength.LEVEL_STRONG) {
+		if(playerLevel >= LeiStrength.LEVEL_STRONG) {
 			Text.Add("You scoot over, the stranger's eyes fixated on you the whole time. <i>\"Well then, what can I do for you?\"</i> he asks.", parse);
 			Text.NL();
 			Text.Add("You decide introductions are in order first, and ", parse);
@@ -662,7 +662,7 @@ Scenes.Lei.InnFirstPrompt = function() {
 				Text.Clear();
 				Text.Add("He seems quite strong, and although you don't know much about him, it wouldn't hurt to test the waters. You ask him if he'll accompany you on your travels.", parse);
 				
-				if(player.level > LeiStrength.LEVEL_STRONG)
+				if(player.level >= LeiStrength.LEVEL_STRONG)
 					Text.Add("He looks at you with apparent interest. <i>\"Perhaps... There is a chance that I may be interested in travelling with you. Unfortunately, just now I am preoccupied with other duties,\"</i> he tells you, sounding genuinely regretful. <i>\"Come and ask me again some time, and we will discuss it if you like.\"</i>", parse);
 				else
 					Text.Add("<i>\"As I said,\"</i> he tells you, sounding bored, <i>\"I am interested in but two things. Fortune and strength. I am not sure which it is that you think you can offer me.\"</i> He pauses, looking you over again. <i>\"Well, I do see some spark of potential within you,\"</i> he continues, his tone softening. <i>\"Perhaps we can speak of this again some other time. For now, I am preoccupied with other duties.\"</i>", parse);
