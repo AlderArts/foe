@@ -110,7 +110,7 @@ Scenes.Magnus.Interact = function() {
 		if(gameCache.flags["LearnedMagic"] == 0)
 			Text.Add("<i>”Yes, [playername]? How can I help you?”</i>", parse);
 		else
-			Text.Add("<i>”[playername]! Great to see you again, how fares your studies?”</i>", parse);
+			Text.Add("<i>”[playername]! Great to see you again, how fare your studies?”</i>", parse);
 		Text.Flush();
 		
 		var TalkPrompt = function() {

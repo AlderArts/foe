@@ -265,7 +265,7 @@ Scenes.Terry.Appearance = function() {
 	else
 		Text.Add("The [foxvixen]’s eyes dart towards you, and as your gaze meets [hisher]’s, [heshe] smiles. Terry adjusts [hisher] hair a bit and straightens [hisher] posture as [heshe] stretches languidly, giving you a perfectly unobstructed view of [himher]self.", parse);
 	Text.NL();
-	Text.Add("Despite the crimson mane atop the [foxvixen]’s head, the rest of [hisher] fur is a very different color; golden yellow offsetting white. Though most of [hisher] face is pure white, a large ring of gold around each eye blurs together over the bridge of the nose, giving [himher] a very domino mask-like effect. [HisHer] ears are, likewise, pure gold on the outside and pure white on the inside. White gives way to gold at [hisher] neck, and you know for a fact that most of Terry’s fur is gold; only on [hisher]forelimbs, legs from knees to ankle, stomach, buttocks, and the very tip of [hisher] tail does the white return.", parse);
+	Text.Add("Despite the crimson mane atop the [foxvixen]’s head, the rest of [hisher] fur is a very different color; golden yellow offsetting white. Though most of [hisher] face is pure white, a large ring of gold around each eye blurs together over the bridge of the nose, creating a very domino mask-like effect. [HisHer] ears are, likewise, pure gold on the outside and pure white on the inside. White gives way to gold at [hisher] neck, and you know for a fact that most of Terry’s fur is gold; only on [hisher]forelimbs, legs from knees to ankle, stomach, buttocks, and the very tip of [hisher] tail does the white return.", parse);
 	Text.NL();
 	Text.Add("Following the fur leads your gaze down to Terry’s chest. ", parse);
 	if(terry.Cup() > Terry.Breasts.Flat) {
@@ -377,7 +377,7 @@ Scenes.Terry.Appearance = function() {
 		Text.NL();
 	}
 	parse["ns"] = terry.Slut() >= 60 ? "seductively" : "nervously";
-	Text.Add("Done admiring what lies between your [foxvixen]’s legs, your gaze sweeps down over [hisher] legs. A girlishly curvy set of hips helps to support a definitely non boyish bubble-butt; Terry’s tail flicks [ns] over a perky ass, more than enough to fill your groping hands if you were to take a grab. Slender, shapely plantigrade legs stretch down, ending in partially paw-like feet. [HeShe] has pads on the balls of [hisher] feet, meaning that whenever [heshe] chooses to walk, [heshe] would leave behind paw prints like those of a real fox.", parse);
+	Text.Add("Done admiring what lies between your [foxvixen]’s legs, your gaze sweeps down over [hisher] legs. A girlishly curvy set of hips helps to support a definitely non boyish bubble-butt; Terry’s tail flicks [ns] over a perky ass, more than enough to fill your groping hands if you were to take a grab. Slender, shapely plantigrade legs stretch down, ending in partially paw-like feet. [HeShe] has pads on the balls of [hisher] feet, so [hisher] footprints would resemble those of a real fox.", parse);
 	Text.NL();
 	Text.Add("Your investigation complete, you nod your head in satisfaction.", parse);
 	Text.Flush();
@@ -585,7 +585,7 @@ Scenes.Terry.ExploreMerchants = function() {
 		Text.NL();
 		Text.Add("Miranda shrugs. <i>”There’s always the warehouses. Not much movement around there even during normal days.”</i>", parse);
 		Text.NL();
-		Text.Add("You opinion to her that it would probably be best to try searching the warehouses first, in that case - after all, this thief isn't likely to be hiding themselves in one of the stores.", parse);
+		Text.Add("You reply that it would probably be best to try searching the warehouses first, in that case.", parse);
 		Text.NL();
 		Text.Add("<i>”Right, this way.”</i>", parse);
 		Text.Flush();
@@ -607,7 +607,7 @@ Scenes.Terry.ExploreMerchants = function() {
 			Text.NL();
 			Text.Add("The two of you wait patiently, but when no reply comes Miranda takes a step forward. Immediately you note a small sphere flying towards her. She has no time to react as the sphere bursts open into a cloud of dust, temporarily blinding the canine guard. <i>”Shit!”</i> she exclaims trying to shake off the dust.", parse);
 			Text.NL();
-			Text.Add("Thankfully you manage to protect your eyes, and by the time you uncover them you’re faced with a blur is headed your way, no doubt making a run for it! You quickly strike them with your [weapon], narrowly missing your mark as the blur takes a step back. Their mask comes loose, falling on the ground, as it does so you’re faced with a familiar face. It’s the vixen from the Lady’s Blessing!", parse);
+			Text.Add("Thankfully you manage to protect your eyes, and by the time you uncover them you’re faced with a blur heading your way, no doubt making a run for it! You quickly strike them with your [weapon], narrowly missing your mark as the blur takes a step back. Their mask comes loose, falling on the ground, as it does so you’re faced with a familiar face. It’s the vixen from the Lady’s Blessing!", parse);
 			Text.NL();
 			Text.Add("She's traded her uniform for a practical, tight-fitting suit of leather armor. A hood rises from the neck to cover her scalp and partially obscure her features, its long sleeves and pant-legs reaching to her wrists and ankles, but tight against the limbs so as to not get in the way. Bracers and pads add a little extra protection, and the front sports a number of pockets and a holster covered in pouches wrapped diagonally around her chest. All in all, perfect gear for a thief.", parse);
 			Text.NL();
@@ -788,7 +788,7 @@ Scenes.Terry.CaughtTheThief = function() {
 	Text.NL();
 	Text.Add("<i>“Oh, she has fire!”</i> Miranda comments grabbing her sword and stabbing the ground right beside the vixen thief.", parse);
 	Text.NL();
-	Text.Add("Taken aback by the unspoken threat, vixen yelps, making Miranda laugh. <i>”Okay you mangy mutt, you’re going to tell me where you’ve stashed your loot now or should I extract the information out of you?”</i>", parse);
+	Text.Add("Taken aback by the unspoken threat, vixen yelps, making Miranda laugh. <i>”Okay, you mangy mutt, you’re going to tell me where you’ve stashed your loot now or should I extract the information out of you?”</i>", parse);
 	Text.NL();
 	Text.Add("The vixen swallows audibly…", parse);
 	Text.NL();
@@ -1162,7 +1162,7 @@ Scenes.Terry.Release = function() {
 	Text.NL();
 	Text.Add("That’s better. That wasn’t so difficult now, was it?", parse);
 	Text.NL();
-	Text.Add("<i>”They’re calling away the death sentence… what’s the catch?”</i> he asks.", parse);
+	Text.Add("<i>”They’re revoking the death sentence? What’s the catch?”</i> he asks.", parse);
 	Text.NL();
 	Text.Add("As part of the terms for his release, he needs to wear this, you inform him as you show him the collar. It has an enchantment in it that will prevent him from disobeying any command you give him, as well as preventing him from escaping. He needs to wear this before you can take him out of the cell. Having explained it, you hold it out to him and instruct him to fasten it around his neck.", parse);
 	Text.NL();
@@ -1170,7 +1170,7 @@ Scenes.Terry.Release = function() {
 	Text.NL();
 	Text.Add("You promptly say the word ‘Featherfall’, as you were instructed before.", parse);
 	Text.NL();
-	Text.Add("The collar emanates a faint pink glow, tightening up until it’s snug against the fox’s neck. He tries to grip the collar, scared that it might tighten enough to strangle him, but he’s ultimately unable to stop the magic from running its course. He moves to undo the binding, but the metallic tips refuse to let go. Seems like the enchantment worked its magic, literally. <i>”There, it’s on,”</i> he says with disdain. <i>”I suppose you want me to call you [masterMistress] now?”</i>", parse);
+	Text.Add("The collar emanates a faint pink glow, tightening up until it’s snug against the fox’s neck. He tries to grip the collar, scared that it might tighten enough to strangle him, but he’s ultimately unable to stop the magic from running its course. He moves to undo the binding, but the metallic tips refuse to let go. Seems like the enchantment worked like magic. <i>”There, it’s on,”</i> he says with disdain. <i>”I suppose you want me to call you [masterMistress] now?”</i>", parse);
 	Text.NL();
 	Text.Add("You think the matter over, and then tell him that he doesn’t have to. You might change your mind later, but for now, [playername] is all you expect him to call you.", parse);
 	Text.NL();
@@ -1198,7 +1198,7 @@ Scenes.Terry.Release = function() {
 		Text.NL();
 		Text.Add("A little less certainly, you nod your head and turn around, pointedly looking away from the effeminate fox-morph.", parse);
 		Text.NL();
-		Text.Add("You hear the sound of ruffling cloth for a few moment, before he says, <i>”Done.”</i>", parse);
+		Text.Add("You hear the sounds of ruffling cloth for a few moment, before he says, <i>”Done.”</i>", parse);
 		Text.NL();
 		Text.Add("Turning around, you take a good long look at the newly re-garbed fox. He's traded his former barmaid's dress and leather armor for a simple but good quality tunic and pants, both a little on the tight side. A leather cuirass drapes over his torso, and it looks like the guard even gave him back his chest holster, whilst his paw-like feet have been squeezed into knee-high leather boots.", parse);
 		Text.NL();
@@ -1639,7 +1639,7 @@ Scenes.Terry.TalkCompliment = function() {
 		Text.NL();
 		Text.Add("<i>”Umm, right. So, appreciate away… I guess...”</i> [heshe] trails off, looking more than a bit flustered at your scrutiny.", parse);
 		Text.NL();
-		Text.Add("With a smile, you continue to look Terry over, the [foxvixen]’s embarrassment at your appraisal no impediment to your appreciating of [hisher] looks. FInally, though, you have enough and you thank [himher] for [hisher] patience; [heshe]’s a very pretty [foxvixen].", parse);
+		Text.Add("With a smile, you continue to look Terry over, the [foxvixen]’s embarrassment at your appraisal no impediment to your appreciating of [hisher] looks. Finally, though, you have enough and you thank [himher] for [hisher] patience; [heshe]’s a very pretty [foxvixen].", parse);
 		Text.NL();
 		Text.Add("<i>”Thanks.”</i>", parse);
 	}
@@ -1873,7 +1873,7 @@ Scenes.Terry.SexPrompt = function(backPrompt) {
 	else if(terry.Slut() >= 30)
 		Text.Add("Terry eagerly begins removing [hisher] [tarmorDesc].", parse);
 	else {
-		Text.Add("Terry reluctantly begins stripping off [hisher] [tarmorDesc], taking off each piece of [hisher] garment painstakingly slow.", parse);
+		Text.Add("Terry reluctantly begins stripping off [hisher] [tarmorDesc], taking off each piece of [hisher] garment painstakingly slowly.", parse);
 		if(terry.Relation() >= 30)
 			Text.Add(" Whether to entice you, or out of shyness, you don’t know.", parse);
 	}
@@ -1934,7 +1934,7 @@ Scenes.Terry.SexPrompt = function(backPrompt) {
 				Text.NL();
 				Text.Add("<i>”But it’s embarrassing!”</i> [heshe] protests. ", parse);
 				if(terry.Gender() == Gender.male)
-					Text.Add("<i>”I’m a boy dammit! But I have that girly tramp-stamp permanently tattooed on my butt!”</i>, he exclaims. ", parse);
+					Text.Add("<i>”I’m a boy dammit! But I have that girly tramp-stamp permanently tattooed on my butt!”</i> [heshe] exclaims. ", parse);
 				Text.Add("<i>”Can you imagine what’s like growing on the streets? With that thing on my butt? I was bullied left and right because of it!”</i>", parse);
 				Text.NL();
 				Text.Add("Moving closer, you gently draw the [foxvixen] into your arms, folding them around [himher] in a soft, comforting embrace. Leaning closer to [hisher] vulpine ear, you tell [himher] that [heshe] has nothing to be ashamed of. [HeShe] is beautiful, and this - your hand moves to cover the vulpine morph’s birthmark, tenderly stroking the gold-on-white fur - this is just part of [hisher] beauty. They were idiots, teasing [himher] for what they didn’t understand. In fact, they were probably just jealous...", parse);
@@ -2400,7 +2400,7 @@ Scenes.Terry.SexPitchAnal = function(cocksInAss) {
 		});
 		
 		Text.NL();
-		Text.Add("With Terry in position, it’s time to get yourself ready, and you quickly strip off your [armorDesc] before putting it aside. As the [foxvixen] eyes you, you tap your chin, considering how would be best to prepare [himher] for a proper butt-stuffing...", parse);
+		Text.Add("With Terry in position, it’s time to get yourself ready, and you quickly strip off your [armorDesc] before putting it aside. As the [foxvixen] eyes you, you tap your chin, considering what would be the best way to prepare [himher] for a proper butt-stuffing...", parse);
 		Text.Flush();
 		
 		//[Finger][Lick]
@@ -2709,7 +2709,7 @@ Scenes.Terry.SexFuckButtEntrypoint = function(p1Cock, promise, retFunc) {
 			parse["c"] = terry.FirstCock() ? Text.Parse(", sliding tantalisingly over the [foxvixen]’s prostate with each plunge", parse) : "";
 			Text.Add("With Terry ready, you hold onto [hisher] hips for support and start to lean back, drawing your shaft free of the [foxvixen]’s ass with the same smooth, patient movement you used to insert it. You withdraw until only your [cockTip] remains inside, hold that pose for a second, and then push back inside again. With the same gentle rhythm you pump back and forth, gliding in and out of Terry’s tailhole[c].", parse);
 			Text.NL();
-			Text.Add("Each time you pump yourself back in, you’re received with a groan as [heshe] does [hisher] best to relax; and each time you pull out Terry moans and clenches [hisher] butt, trying to keep you inside, which results in a nice vacuum that feels almost like [heshe]’s sucking on your cock with [hisher] ass. It’s admittedly a bit tough to not throw care to the wind and just do [himher] hard. <i>”More...”</i> [heshe] moans.", parse);
+			Text.Add("Each time you pump yourself back in, you’re received with a groan as [heshe] does [hisher] best to relax; and each time you pull out Terry moans and clenches [hisher] butt, trying to keep you inside, which results in a nice vacuum that feels almost like [heshe]’s sucking on your cock with [hisher] ass. It’s tough to not throw care to the wind and just do [himher] hard. <i>”More...”</i> [heshe] moans.", parse);
 			Text.NL();
 			parse["belly"] = player.pregHandler.BellySize() > 3 ? Text.Parse(" and [bellyDesc]", { bellyDesc : player.StomachDesc() }) : "";
 			parse["b"] = player.FirstBreastRow().Size() > 0.5 ? Text.Parse(" your [breastsDesc][belly] squishing softly against [hisher] girlish physique,", parse) : "";

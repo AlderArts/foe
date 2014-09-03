@@ -118,7 +118,7 @@ Scenes.Kyna.Intro = function() {
 	Text.NL();
 	Text.Add("…Is she a mercenary or a delivery girl? Curious, you ask her why she would take on such a menial job.", parse);
 	Text.NL();
-	Text.Add("<i>”Ah... umm... well...”</i> She stammers, while looking into her mug as if trying to find an answer. After a short, uncomfortable silence <i>”I was in bad need of the money, okay?”</i> she says quite bluntly. <i>”I’ve only had two jobs since I left home, and all the money i started with was spent on fixing things that got broken during ‘em! And when I got here ah felt like I might as well drink away the last of it... I’ll be okay sleepin’ outside again, before I go into town tomorrow.”</i>", parse);
+	Text.Add("<i>”Ah... umm... well...”</i> She stammers, while looking into her mug as if trying to find an answer. After a short, uncomfortable silence <i>”I was in bad need of the money, okay?”</i> she says quite bluntly. <i>”I’ve only had two jobs since I left home, and all the money I started with was spent on fixing things that got broken during ‘em! And when I got here ah felt like I might as well drink away the last of it... I’ll be okay sleepin’ outside again, before I go into town tomorrow.”</i>", parse);
 	Text.NL();
 	Text.Add("The sorry state of the unlucky merc does make you feel bad for her. But all you could really do to help her at the moment is lend her enough money for a room for the night. Then again, she is a mercenary; maybe with a little pushing she’d be willing to do some “wet” work.", parse);
 	Text.Flush();
@@ -248,7 +248,7 @@ Scenes.Kyna.IntroChatPrompt = function() {
 		options.push({ nameStr : "Her family",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”The clan? We’ve been mercenaries for as long as anyone in our family can remember, and we’ve been among the best for just about as long,”</i> she says proudly. <i>Me dad is the clan leader at the moment; he even personally taught me how tah use my sword. He said I had the best reflexes and awareness out of everyone he’s taught,”</i> she says with a smile. Kyna begins to raise her mug to her lips when a drunken patron knocks her arm, causing her to spill most of it down her chest.", parse);
+				Text.Add("<i>”The clan? We’ve been mercenaries for as long as anyone in our family can remember, and we’ve been among the best for just about as long,”</i> she says proudly. <i>”Me dad is the clan leader at the moment; he even personally taught me how tah use my sword. He said I had the best reflexes and awareness out of everyone he’s taught,”</i> she says with a smile. Kyna begins to raise her mug to her lips when a drunken patron knocks her arm, causing her to spill most of it down her chest.", parse);
 				Text.NL();
 				Text.Add("<i>”Oh bollocks!”</i> she exclaims in annoyance at her mishap, reaching down to clean herself up, giving you another glimpse of her breasts in the process. You’re not entirely sure the last part of her statement was true, or if it was her father telling a few white lies to save his daughter’s self-respect.", parse);
 				Text.Flush();

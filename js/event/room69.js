@@ -435,7 +435,7 @@ Scenes.Room69.Discovering69Sex = function() {
 	if(player.FirstBreastRow().Size() > 3) {
 		Text.Add("Before you are even finished removing your top, the sheet snakes around you from behind under your clothes, curving around one of your breasts. <i>\"Sorry, I couldn’t wait. So soft, so lovely...\"</i>", parse);
 		Text.NL();
-		Text.Add("You bite your lip as the cloth tentacle squeezes your breast gently, and massages it in a circular motion beneath your clothes. You shiver as the tip traces slowly, too slowly, across your breast towards the center, barely brushing your skin. Finally, it twirls softly around your [nipsDesc], squeezing it gently. You gasp quietly, and press forward into the cloth, seeking greater stimulation.", parse);
+		Text.Add("You bite your lip as the cloth tentacle squeezes your breast gently, and massages it in a circular motion beneath your clothes. You shiver as the tip traces slowly, too slowly, across your breast towards the center, barely brushing your skin. Finally, it twirls softly around your [nipsDesc], pinching it lightly. You gasp quietly, and press forward into the cloth, seeking greater stimulation.", parse);
 		Text.NL();
 		Text.Add("<i>\"Good [boygirl],\"</i> Sixtynine says, punctuating the praise by gently twisting your nipple, which elicits a louder moan. <i>\"You are so wonderfully sensitive. I’ll take you to heights you can’t imagine. All you have to do is behave.\"</i>", parse);
 		Text.NL();
@@ -572,7 +572,7 @@ Scenes.Room69.Discovering69Sex = function() {
 		Text.Add("You last longer this time, and recover a little more slowly, but before long, another cycle begins, and another.[cum] You lose track more and more, until you feel yourself drift out of consciousness, even as the drenched ropes of cloth continue to toy with you without pause...", parse);
 	}
 	else if(player.FirstVag()) {
-		Text.Add("After an almost painful minute of playing with you, in which your hands practically twitch with their need to act, Sixtynine finally makes its move. Despite your anticipation, the motion still takes you unaware, and you gasp in surprise and excitement as a tentacle brushes lightly against your [clitDesc], while another runs along your nether lips, tracing around the opening.", parse);
+		Text.Add("After an almost painful minute of playing with you, in which your hands practically twitch with their need to act, Sixtynine finally makes its move. Despite your anticipation, the motion still takes you unawares, and you gasp in surprise and excitement as a tentacle brushes lightly against your [clitDesc], while another runs along your nether lips, tracing around the opening.", parse);
 		Text.NL();
 		parse["wet"] = player.FirstVag().wetness.Get() >= 2 ? "almost fountaining fluids" : "abundantly flowing fluids";
 		Text.Add("Despite yourself, you buck your hips, pressing desperately into the cloth, willing it to do more. <i>\"Patience, little one,\"</i> the voice chides you. <i>\"Anticipation is the best part.\"</i> Still, showing mercy, the tentacles advance a little, one circling your clitoris, pressing it gently through the hood, while the other explores your opening, soaking up your [wet].", parse);

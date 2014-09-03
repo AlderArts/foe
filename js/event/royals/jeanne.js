@@ -124,7 +124,7 @@ Scenes.Jeanne.Talk = function() {
 	options.push({ nameStr : "Gem",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>”Alliser’s gem is a price fit for kings,”</i> Jeanne explains. <i>”Its true powers are only revealed through its magic, though, and now that you have bonded yourself to it, only you can access this.”</i>", parse);
+			Text.Add("<i>”Alliser’s gem is a prize fit for kings,”</i> Jeanne explains. <i>”Its true powers are only revealed through its magic, though, and now that you have bonded yourself to it, only you can access this.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>”Never give the gem to someone else, not even someone you trust, as it could potentially be used to harm you. The stronger the gem becomes, the stronger this connection will be.”</i>", parse);
 			Text.NL();
@@ -183,7 +183,7 @@ Scenes.Jeanne.Talk = function() {
 				
 				gameCache.flags["LearnedMagic"] = 2;
 			}
-			if(gameCache.flags["LearnedMagic"] == 1) {
+			else if(gameCache.flags["LearnedMagic"] == 1) {
 				Text.Add("<i>”Hmm, I sense that you have already had a teacher - of sorts,”</i> Jeanne muses, studying you. <i>”That will make moving beyond the first steps easier for you.”</i> The elven magician quickly reviews what Magnus has taught you, remarking on your affinity with the gemstone, and how it helped you realize how to tap your inner energy.", parse);
 				Text.NL();
 				Text.Add("<i>”Your teaching has been rough, but I can sense your potential.”</i> She ponders your original question, tapping her chin. <i>”Can you show me what you can do?”</i>", parse);
@@ -204,14 +204,14 @@ Scenes.Jeanne.Talk = function() {
 					Text.NL();
 					Text.Add("Jeanne spends the next hour or so pointing out how you can improve on your magic skills and make them more efficient. The sheer amount of information that Magnus glossed over or muddled up is staggering, but your extensive experience of channeling magic helps you significantly.", parse);
 					Text.NL();
-					Text.Add("<i>”The next step will take significantly longer, so came back once you are ready,”</i> Jeanne instructs you, commending you for your quick progress.", parse);
+					Text.Add("<i>”The next step will take significantly longer, so come back once you are ready,”</i> Jeanne instructs you, commending you for your quick progress.", parse);
 					
 					world.TimeStep({hour:1});
 				}
 				
 				gameCache.flags["LearnedMagic"] = 2;
 			}
-			if(gameCache.flags["LearnedMagic"] == 2) {
+			else if(gameCache.flags["LearnedMagic"] == 2) {
 				if(!Jeanne.ReadyForMagicTeaching()) {
 					Text.Add("<i>”Yes, I can teach you more about the arts of magic, but not until you have engrained the foundations into your mind and spirit,”</i> Jeanne explains. <i>”Only experience can take you further on this road.”</i>", parse);
 					Text.NL();
@@ -342,7 +342,7 @@ Scenes.Jeanne.Talk = function() {
 				Text.Clear();
 				Text.Add("<i>”Ah, her.”</i> Jeanne frowns, looking a bit sad. <i>”You may have noticed that I live alone here. I used to have disciples, since teaching is a passion of mine. Rosalin… changed that. She was always a problematic child, causing quite a bit of trouble for her poor parents. From what I hear, her brief venture into the culinary realm almost put her father on the brink of death.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>”I took pity on her and accepted her as my student, but she was more interested in making strange transformative potions than learning some common sense. At first, she confined her experiments to herself. Oh, I cannot even recall how often I had to mix a remedy to prevent something the little girl had swallowed to do permanent damage to her. I finally decided to let her keep her feline tail and ears, but it only served to encourage her.”</i>", parse);
+				Text.Add("<i>”I took pity on her and accepted her as my student, but she was more interested in making strange transformative potions than learning some common sense. At first, she confined her experiments to herself. Oh, I cannot even recall how often I had to mix a remedy to prevent something the little girl had swallowed from doing permanent damage to her. I finally decided to let her keep her feline tail and ears, but it only served to encourage her.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>”Some time later, she convinced another one of the students to try something she brewed. It was for some stupid reason, the poor youngster was feeling insecure about his body… The next day, he woke up with a cock that was bigger than he was.”</i> She shakes her head. <i>”I was able to somewhat reduce the effects, but he will not have any more worries about his member being too small, that is for sure.”</i>", parse);
 				Text.NL();

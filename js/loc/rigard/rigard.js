@@ -633,7 +633,7 @@ Scenes.Rigard.Lockdown = function() {
 		Text.NL();
 		Text.Add("You nod in understanding; that sort of logic certainly makes sense to you. This thief clearly has a problem with their ego if they went and stirred up the hornet's nest like this. You feel sorry for them, but they kind of brought this on themselves.", parse);
 		Text.NL();
-		Text.Add("<i>”Pretty sure we’ve questioned every relevant person. And we’ve had guards posted in front of all shops. So I don’t think we need to search inside. Wherever the culprit is hiding, they’re alone and haven’t received help from anyone in-town. So that’s a load off our backs. Still, we gotta search the plaza, the market district, the backstreets and even the area around the Gates. So if you know anyone that might have an idea to cut the chase short, I’m all ears.”</i>", parse);
+		Text.Add("<i>”Pretty sure we’ve questioned every relevant person. And we’ve had guards posted in front of all shops. So I don’t think we need to search inside. Wherever the culprit is hiding, they’re alone and haven’t received help from anyone in town. So that’s a load off our backs. Still, we gotta search the plaza, the market district, the backstreets and even the area around the Gates. So if you know anyone that might have an idea to cut the chase short, I’m all ears.”</i>", parse);
 		Text.NL();
 		Text.Add("Nothing that might help immediately springs to mind, and you admit as such to Miranda. Looks like you'll have to just get out there and start looking.", parse);
 		Text.NL();

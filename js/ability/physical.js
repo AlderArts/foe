@@ -205,7 +205,7 @@ Abilities.Physical.Hamstring.OnHit = function(encounter, caster, target, dmg) {
 
 Abilities.Physical.Kicksand = new AttackPhysical();
 Abilities.Physical.Kicksand.name = "Kick sand";
-Abilities.Physical.Kicksand.Short = function() { return "Kick dirt in the enemy's eyes. Single target."; }
+Abilities.Physical.Kicksand.Short = function() { return "Kick dirt in the enemy's eyes, blinding them. Single target."; }
 Abilities.Physical.Kicksand.cost = { hp: null, sp: 15, lp: null};
 Abilities.Physical.Kicksand.atkMod = 0.05;
 Abilities.Physical.Kicksand.OnCast = function(encounter, caster, target) {
@@ -229,7 +229,7 @@ Abilities.Physical.Kicksand.OnMiss = function(encounter, caster, target) {
 
 Abilities.Physical.Swift = new Ability();
 Abilities.Physical.Swift.name = "Swift";
-Abilities.Physical.Swift.Short = function() { return "Briefly boosts caster speed."; }
+Abilities.Physical.Swift.Short = function() { return "Briefly boosts the caster's speed."; }
 Abilities.Physical.Swift.targetMode = TargetMode.Self;
 Abilities.Physical.Swift.cost = { hp: null, sp: 25, lp: null};
 Abilities.Physical.Swift.CastInternal = function(encounter, caster) {

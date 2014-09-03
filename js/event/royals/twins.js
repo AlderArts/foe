@@ -187,9 +187,9 @@ Scenes.Twins.TalkPrompt = function() {
 					Text.NL();
 					Text.Add("<i>”And don’t forget to attach the collar,”</i> Rani adds, presenting you with the collar.", parse);
 					Text.NL();
-					Text.Add("Unceremoniously, you take the letter and the collar from the prince's hands  Tucking the letter away safely, you turn the collar around in your hands , looking it over. It certainly doesn't look as impressive as it sounds; it's nothing more than a simple leather band, with metallic tips for fixing it into place.", parse);
+					Text.Add("You take the letter and the collar from the prince's hands. Tucking the letter away safely, you turn the collar around in your hands, looking it over. It certainly doesn't look as impressive as it sounds; it's nothing more than a simple leather band, with metallic tips for fixing it into place.", parse);
 					Text.NL();
-					Text.Add("<i>”Put this around his neck and say the activation word, Featherfall,”</i> Rumi says.", parse);
+					Text.Add("<i>”Put this around his neck and say the activation word, 'Featherfall',”</i> Rumi says.", parse);
 					Text.NL();
 					Text.Add("Nodding your understanding, you carefully stow the collar away before thanking the royal twins for their efforts. That said, you make your excuses and depart.", parse);
 					Text.NL();

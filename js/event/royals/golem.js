@@ -110,7 +110,7 @@ Scenes.Golem.FirstApproach = function() {
 	Text.NL();
 	Text.Add("Then again, perhaps any workers were dissuaded by the ethereal atmosphere surrounding the tower. You are vaguely reminded of the mound near the crossroads where you first entered into Eden - another spot where the fabric of reality seemed tenuous at best. An eerie glow emanates from windows in the upper levels of the tower, flickering between strange colors - some of which you aren’t even sure you could name.", parse);
 	Text.NL();
-	Text.Add("The tower doesn’t seem to have any obvious entrance, no doors or windows close to the ground level. A quick survey of the area reveals no hidden caves or other such means of entry. ", parse);
+	Text.Add("The tower doesn’t seem to have any obvious entrance, no doors or windows close to the ground level. A quick survey of the area reveals no hidden tunnels or other such means of entry. ", parse);
 	if(party.Num() > 2)
 		Text.Add("None of your companions are able to find any means of entry either. ", parse);
 	else if(party.Num() == 2)

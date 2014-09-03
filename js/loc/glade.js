@@ -133,13 +133,13 @@ Scenes.DryadGlade.First = function() {
 		Text.Add("It is somehow getting a lot warmer, and you can’t spy even a single flake of snow in the field of flowers. It’s as if supernatural forces watch over the glade, keeping it in a state of perpetual summer. ", parse);
 	Text.Add("At the center of the clearing - beyond a spring of clear water - there is a huge tree; easily the largest one you have ever seen - not counting the hulking giant above. The goal of your quest, the Mother Tree, awaits you.", parse);
 	Text.NL();
-	Text.Add("Deers and rabbits watch you without fear as you make your way into the beautiful glade. You can also spy more unnatural creatures peeking out behind the trees, watching you curiously. They stay just at the edge of your perception, giving you only vague glimpses of the fae creatures of the forest. A few look like humans or elves, but there is an eerie quality to them. Yet more have only vaguely human features. You think you spy what looks like a deer, but when she peeks out from behind a tree, her upper body is that of a beautiful, naked woman. As soon as you spot her, the centaur giggles and hops away, disappearing into the forest.", parse);
+	Text.Add("Deer and rabbits watch you without fear as you make your way into the beautiful glade. You can also spy more unnatural creatures peeking out behind the trees, watching you curiously. They stay just at the edge of your perception, giving you only vague glimpses of the fae creatures of the forest. A few look like humans or elves, but there is an eerie quality to them. Yet more have only vaguely human features. You think you spy what looks like a deer, but when she peeks out from behind a tree, her upper body is that of a beautiful, naked woman. As soon as you spot her, the centaur giggles and hops away, disappearing into the forest.", parse);
 	Text.NL();
 	Text.Add("You gulp uncertainly, but none of the creatures seem to be showing any hostile intent toward you. You stride forward, trusting the elven magician’s word that this is where you’ll find the power you need. The creatures of the forest veer clear of you, allowing you to approach the huge tree at the center of the glade.", parse);
 	Text.NL();
 	Text.Add("As you draw closer, skirting around the spring, you are startled to find someone waiting for you - a tall woman with skin brown as bark, her long hair a flowing mass of green entwined with flowers and leaves. She is ‘clothed’ in vines and leaves, though they do little to cover her voluptuous form and enormous breasts. She is perched partway up the trunk of the tree, resting on top of a thick root. The woman waves at you to come closer.", parse);
 	Text.NL();
-	Text.Add("<i>”Approach, Lifegiver,”</i> she calls to you, her voice throaty and assuring, like that of a loving mother. The smell around you is that of rich, fertile soil. <i>”I have been waiting for you.”</i> You shake yourself to break away from her deep almond gaze, finally noticing the branches weaving into her back. The woman is clearly a dryad, part of the Mother Tree itself.", parse);
+	Text.Add("<i>”Approach, Lifegiver,”</i> she calls to you, her voice throaty and reassuring, like that of a loving mother. The smell around you is that of rich, fertile soil. <i>”I have been waiting for you.”</i> You shake yourself to break away from her deep almond gaze, finally noticing the branches weaving into her back. The woman is clearly a dryad, part of the Mother Tree itself.", parse);
 	Text.NL();
 	Text.Add("A little unnerved by the title she gave you, you introduce yourself and tell her that you were sent here by Jeanne.", parse);
 	Text.NL();
@@ -153,7 +153,7 @@ Scenes.DryadGlade.First = function() {
 	Text.NL();
 	Text.Add("<i>”Yes, the only thing that can return life to the stone you carry.”</i> For a moment, her eyes glow with a soft golden light and a wave of warmth sweeps over you. <i>”For centuries upon centuries, I have nurtured my tree, my glade and my daughters, but in doing so I have forever bound myself to this place. I am sorry that I cannot give you what you seek.”</i>", parse);
 	Text.NL();
-	Text.Add("You are about to respond when the forest suddenly stirs around you, and you hear the cries of surprised and terrified nymphs. They break from the treeline; dozens of strange and alluring creatures, dryads, nymphs and satyrs fleeing for their lives. You see the deertaur from before bounding and leaping toward you, glancing over her shoulder in terror. Before she reaches you, a mass of long, snaking tentacles whip out from the forest, wrapping themselves around the screaming doe and pulling her back into the shadow of the forest.", parse);
+	Text.Add("You are about to respond when the forest suddenly stirs around you, and you hear the cries of surprised and terrified nymphs. They break from the treeline; dozens of strange and alluring creatures, dryads, nymphs and satyrs fleeing for their lives. You see the deertaur from before bounding and leaping toward you, glancing over her shoulder in terror. Before she reaches you, a mass of long, snaking tentacles whips out from the forest, wrapping themselves around the screaming doe and pulling her back into the shadow of the forest.", parse);
 	Text.NL();
 	Text.Add("<i>”W-what is this?”</i> the Mother Tree cries out in distress, anxiously biting her lip. You hear the centaur’s screams turn to muffled moans as the betentacled assaulter presumably violates her. <i>”Who could-?”</i> The old dryad cuts off, gasping as the attacker enters the glade, striding toward you confidently.", parse);
 	Text.Flush();
@@ -583,7 +583,7 @@ Scenes.DryadGlade.FirstWin = function(enc) {
 		Text.NL();
 		Text.Add("<i>”It was heading for one of the clear springs, and the way it was moving, I thought it was hurt. When it got there though, it didn’t drink, it… it had a flask of some kind, and it poured it into the water, which turned all murky and icky.”</i> The child called Spirit pats her sister on the head consolingly, urging her to go on.", parse);
 		Text.NL();
-		Text.Add("<i>”That’s when they ambushed me, half a dozen… creatures. Pointy ears.”</i> The dryad whimpers, wiping her tears with a sodden tentacle. <i>”They were elves, but really really nasty ones! Their skin were all purple and veiny, and they had sharp pointy teeth!”</i>", parse);
+		Text.Add("<i>”That’s when they ambushed me, half a dozen… creatures. Pointy ears.”</i> The dryad whimpers, wiping her tears with a sodden tentacle. <i>”They were elves, but really really nasty ones! Their skins were all purple and veiny, and they had sharp pointy teeth!”</i>", parse);
 		Text.NL();
 		if(party.InParty(kiakai)) {
 			Text.Add("[name] looks very troubled by all this, stepping up beside you.", parse);
@@ -605,7 +605,7 @@ Scenes.DryadGlade.FirstWin = function(enc) {
 		Text.NL();
 		Text.Add("<i>”My daughter, do you know what this will mean?”</i> Mother Tree asks. The little girl nods, a determined look on her face. The dryad slowly turns back to you, sighing. <i>”Spirit has decided to aid you,”</i> she explains. <i>”To you she may look only a child, but she is powerful. Time will only make her more so. She says to tell you that it is her way of thanking you for saving her sister and the entire glade.”</i>", parse);
 		Text.NL();
-		Text.Add("You take a closer look at the little girl. She shares some of her looks with her older sister, though you’d say she looks to be about ten years old. She distinctly lacks tentacles. <i>”Hold out the gem, Lifegiver,”</i> Mother Dryad intones, oddly formal. You obey her, unsure about what is about to happen. Spirit gives you a happy little smile as she reaches out to touch it…", parse);
+		Text.Add("You take a closer look at the little girl. She shares some of her looks with her older sister, though you’d say she looks to be about ten years old. She distinctly lacks tentacles. <i>”Hold out the gem, Lifegiver,”</i> Mother Dryad intones, oddly formal. You obey her, unsure what's about to happen. Spirit gives you a happy little smile as she reaches out to touch it…", parse);
 		Text.NL();
 		Text.Add("There is a sudden flash of light, and then the little girl is gone. The stone in your hand is warm, pulsing with newfound power. <i>”Do not fear for her, she is alive and well, just in a different form,”</i> Mother Tree assures you. <i>”Still, I cannot help but feel saddened that she must leave me so soon… but a mother cannot hold on to her children forever.”</i>", parse);
 		Text.NL();

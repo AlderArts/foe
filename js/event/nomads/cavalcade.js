@@ -401,7 +401,7 @@ Scenes.NomadsCavalcade.CheatGame = function() {
 		Text.NL();
 		Text.Add("By the time that Rosalin has to drop out, the game takes a sharp turn in your favor. Even if he’s starting to notice your sometimes outrageous hands, Cale is still too excited with his former advantage to smell foul play until it’s too late. He growls as you get another full Cavalcade, scratching his head in bewilderment.", parse);
 		Text.NL();
-		Text.Add("On the final round of the game, the wolf lights up again, finally graced with a good by the spirits. Or so he thinks. <i>”There, full Cavalcade!”</i> he snaps, throwing down his cards defiantly. The house hand is the Lady of Light, the Champion of Light and the Maiden of Light. Together with the Shadow Stag and his Steed of Light, he’s got a one of the best hands in the game.", parse);
+		Text.Add("On the final round of the game, the wolf lights up again, finally graced with a good by the spirits. Or so he thinks. <i>”There, full Cavalcade!”</i> he snaps, throwing down his cards defiantly. The house hand is the Lady of Light, the Champion of Light and the Maiden of Light. Together with the Shadow Stag and his Steed of Light, he’s got one of the best hands in the game.", parse);
 		Text.NL();
 		Text.Add("Smiling, you drop your cards, revealing the Priestess of Light and the Stud of Light, trumping him with a true full Cavalcade. <i>”God DAMNIT!”</i> Cale yells, throwing his hands in the air in frustration. <i>”Fine, you win, you win! And here I thought I would get some quality time with Rosie. Fine, she’s yours.”</i>", parse);
 		Text.Flush();

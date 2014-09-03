@@ -1946,7 +1946,7 @@ Scenes.Cale.SexFuckHim = function(outside, opts) {
 		itsTheir       : player.NumCocks() > 1 ? "their" : "its",
 		cockDesc       : function() { return p1cock.Short(); },
 		cockTip        : function() { return p1cock.TipShort(); },
-		stiffening     : p1cock.isStrapon ? " stiffening" : "",
+		stiffening     : p1cock.isStrapon ? "" : " stiffening",
 		artificial     : p1cock.isStrapon ? " artificial" : "",
 		cAnusDesc      : function() { return cale.Butt().AnalShort(); }
 	};
@@ -1958,7 +1958,7 @@ Scenes.Cale.SexFuckHim = function(outside, opts) {
 	if(cale.Slut() >= 60)
 		Text.Add("With Cale’s peculiar attributes, there is no need for additional lube. His hole is as ready for you as it’ll ever be. You remove your [lowerArmorDesc], itching to start pounding the wolf into oblivion.", parse);
 	else
-		Text.Add("As you fumble with your [lowerArmorDesc], you fish out a bottle of lube, pouring its contents on Cale’s tight[virgin] hole. He yips as the cool liquid splashes between his cheeks, shivering in anticipation for what's to come. You rub it in with your thumb, probing and teasing his anus.", parse);
+		Text.Add("As you fumble with your [lowerArmorDesc], you fish out a bottle of lube, pouring its contents on Cale’s tight[virgin] hole. He yips as the cool liquid splashes between his cheeks, shivering in anticipation of what's to come. You rub it in with your thumb, probing and teasing his anus.", parse);
 	Text.Add(" Once he’s ready, you pull out your[stiffening] [multiCockDesc], rubbing [itThem] in the sloppy lubricating mess between the wolf’s buttcheeks. Just to tease him even more, you grasp him by the hips, hotdogging your[artificial] shaft[s] and coating [itsTheir] length in the slippery liquid.", parse);
 	Text.NL();
 	if(virgin)
@@ -1966,7 +1966,7 @@ Scenes.Cale.SexFuckHim = function(outside, opts) {
 	else
 		Text.Add("<i>”Just take me already!”</i> Cale whines, eager to get some dick. He tries pushing back against you, forcing your cock[s] to rub against his sensitive [cAnusDesc].", parse);
 	Text.NL();
-	Text.Add("Ignoring the wolf, you grasp[oneof] your [multiCockDesc] and press it against his back door. The [cockTip] of your [cockDesc] popping inside him serves wonders to shut him up. Unless you count the loud moaning.", parse);
+	Text.Add("Ignoring the wolf, you grasp[oneof] your [multiCockDesc] and press it against his back door. The [cockTip] of your [cockDesc] popping inside him does wonders for shutting him up. Unless you count the loud moaning.", parse);
 	Text.NL();
 	
 	Sex.Anal(player, cale);
@@ -1996,7 +1996,7 @@ Scenes.Cale.SexFuckHim = function(outside, opts) {
 	}
 	Text.NL();
 	parse["vagDesc"] = player.FirstVag() ? function() { return player.FirstVag().Short(); } : "crotch";
-	parse["real"] = p1cock.isStrapon ? Text.Parse("pressure of the toy grinds against your [vagDesc]", parse) : "snug pressure around your dick";
+	parse["real"] = p1cock.isStrapon ? Text.Parse("pressure of the toy grinding against your [vagDesc]", parse) : "snug pressure around your dick";
 	Text.Add("Starting out slow, you rock your [hipsDesc] back and forth, establishing a rhythm. Your [cockDesc] is glistening with moisture as you pull out, leaving only the [cockTip] inside Cale’s hole, making pushing it inside again all that much easier. With each slow, determined thrust, you bury yourself deeper and deeper inside the wolf, sighing in pleasure at the [real].", parse);
 	Text.NL();
 	if(cale.Slut() >= 60)
@@ -2009,7 +2009,7 @@ Scenes.Cale.SexFuckHim = function(outside, opts) {
 		Text.Add("Your remaining [multiCockDesc2] [isAre] rubbing snugly between the wolf’s spread cheeks, tickled by the soft fur of his raised tail. Speaking of cocks...", parse);
 		Text.NL();
 	}
-	Text.Add("The wolf skips for breath, letting out a lewd howl as a shudder goes through his entire body, his legs giving out. If he wasn’t already propped up by the convenient [log], he’d probably collapse. Reaching down to confirm your suspicion, you feel Cale’s rigid member twitching, the knot at the base twice his usual size.", parse);
+	Text.Add("The wolf pants for breath, letting out a lewd howl as a shudder goes through his entire body, his legs giving out. If he wasn’t already propped up by the convenient [log], he’d probably collapse. Reaching down to confirm your suspicion, you feel Cale’s rigid member twitching, the knot at the base twice his usual size.", parse);
 	Text.NL();
 	parse["hornyEmbarrassed"] = cale.Slut() >= 40 ? "horny" : "embarrassed";
 	Text.Add("<i>”Coming so soon? But I’ve barely gotten started,”</i> you say teasingly, never skipping a beat in your steady rhythm. Cupping your hand under his still fountaining cock, you gather a [hand]ful of his hot seed, presenting the sticky mess to the [hornyEmbarrassed] wolf.", parse);
@@ -3322,7 +3322,7 @@ Scenes.Cale.SexFuckingHimOutsideComments = function(cock, opts) {
 		Text.NL();
 		Text.Add("<i>”I was thinking, why was Estevan shuffling the deck so much during the card game?”</i> Rosalin muses, poking at the fire with a stick. <i>”Now that I think of it, I’m not even sure there <b>is</b> a card named ‘Stud of Light’.”</i>", parse);
 		Text.NL();
-		Text.Add("Cale looks over his shoulder accusingly, his heart sinking even further when you whistle innocently. Then again, how he got into his current position, hardly matters at this point.", parse);
+		Text.Add("Cale looks over his shoulder accusingly, his heart sinking even further when you whistle innocently. Then again, how he got into his current position hardly matters at this point.", parse);
 		Text.NL();
 	}
 	else if(cavalcade) {
