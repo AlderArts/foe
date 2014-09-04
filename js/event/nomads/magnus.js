@@ -158,7 +158,47 @@ Scenes.Magnus.Interact = function() {
 					func : function() {
 						Text.Clear();
 						
-						if(magnus.flags["Teach"] == Magnus.Teaching.None) {
+						if(gameCache.flags["LearnedMagic"] >= 2) {
+							if(magnus.flags["Teach"] < Magnus.Teaching.Jeanne) {
+								if(magnus.flags["Teach"] == Magnus.Teaching.Done) {
+									Text.Add("<i>”Now that you mention it...”</i> Magnus peers at you curiously. <i>”I sense a change in your magic, as if you are much stronger now. Did you come to some insight, [playername]?”</i>", parse);
+									Text.NL();
+									Text.Add("You confide that you asked Jeanne to help you out with your studies, and that it helped you understand things better.", parse);
+								}
+								else {
+									if(magnus.flags["Teach"] == Magnus.Teaching.None)
+										Text.Add("<i>”Ah, does the subject of magic interest you?”</i> Magnus seems to brighten up, no longer the only nerd in the gathering. You nod.", parse);
+									else if(magnus.flags["Teach"] == Magnus.Teaching.Wait)
+										Text.Add("<i>”Ah, have you decided to give it another try, [playername]?”</i> Magnus peers at you suspiciously. <i>”I would really appreciate it if you could stay awake this time.”</i>", parse);
+									Text.NL();
+									Text.Add("Excited, he starts to quickly line out abstract concepts and ideas pertaining to the nature of magic. He scribbles magical symbols on the ground, explaining their origins and meaning. It’s not long before you feel yourself drowsing off. Let’s see if this shuts him up.", parse);
+									Text.NL();
+									Text.Add("Magnus’ tirade about the third theorem of the Ether falters and tapers off as you nonchalantly summon a ball of magical energy, hovering above your palm.", parse);
+									Text.NL();
+									Text.Add("<i>”Y-you can use magic?!”</i> the scrawny student exclaims, peering at your apparition of power. <i>”Tell me, where did you learn this?”</i>", parse);
+									Text.NL();
+									Text.Add("Dismissing the glowing orb, you explain that Jeanne showed you a few pointers.", parse);
+								}
+								Text.NL();
+								Text.Add("<i>”<b>J-Jeanne?!?</b>”</i> he stutters as soon as you mention the elf. <i>”You studied under the court magician?!”</i>", parse);
+								Text.NL();
+								Text.Add("You go on to explain the circumstances of your lessons, and mention the gem that you carry.", parse);
+								Text.NL();
+								Text.Add("<i>”I… this is amazing, [playername]! Jeanne was the one who founded the academy where I studied, long ago. Meeting her would be a dream come true!”</i> He slumps a bit. <i>”Not that I think she’d have much interest in me...”</i>", parse);
+								Text.NL();
+								Text.Add("Perhaps. Maybe you could ask her.", parse);
+								Text.NL();
+								Text.Add("<i>”I… I’d very much like that,”</i> Magnus mumbles. <i>”Either way… I don’t think I can be of any use to you as a teacher anymore. Jeanne is a legend, I’m a mere apprentice...”</i> he trails off, his mind wandering.", parse);
+								Text.NL();
+								Text.Add("You leave the magician to his thoughts. Plenty of time to talk about this later.", parse);
+							}
+							else {
+								Text.Add("<i>”Ah, I’m afraid I can’t really teach you anything that you don’t already know,”</i> Magnus confides, hanging his head sheepishly. <i>”I could perhaps be of some help in aiding you with meditation, if you’d like. Tell me, did you talk more with Jeanne? There is so much I want to ask her...”</i>", parse);
+							}
+							magnus.flags["Teach"] = Magnus.Teaching.Jeanne;
+							Text.Flush();
+						}
+						else if(magnus.flags["Teach"] == Magnus.Teaching.None) {
 							Text.Add("<i>”Ah, does the subject of magic interest you?”</i> Magnus seems to brighten up, no longer the only nerd in the gathering. You nod uncertainly, not really sure what you are getting yourself into.", parse);
 							Text.NL();
 							Text.Add("Excited, he starts to quickly line out abstract concepts and ideas pertaining to the nature of magic. He scribbles strange symbols on the ground, explaining their origins and meaning.", parse);
