@@ -111,12 +111,41 @@ world.loc.Rigard.Plaza.links.push(new Link(
 				Text.NL();
 				Text.Add("From what you gather these men belong to the royal guard, whose only task is to protect the nobility and the royal family. It seems like you are causing a bit of a scene, and a few curious passersby stop to watch, whispering among themselves. Frustrated, you decide to back down for now.", parse);
 				Text.NL();
-				Text.Add("You return to the plaza, leaving the unfriendly watchmen behind you. Now, where would you be able to find an invitation? You probably need to find some nobleman and get on their good side, and you doubt waltzing into one of the fancier estates and asking for their aid would do you much good.", parse);
+				
+				Text.Add("As you turn to leave, you spot a postern gate open in the wall a few hundred paces to your left, and two people come out. Both of them wear gray cloaks, their hoods drawn, so you cannot make out much of their features. They are of a height, and walk companionably side by side, heading out towards the city. You point them out, and ask the guards who they are, curiously.", parse);
 				Text.NL();
-				if(rigard.LB["Visit"] != 0)
-					Text.Add("Perhaps someone at the Lady’s Blessing could point you in the right direction. Being an establishment in the richer parts of Rigard, the clientele ought to be well versed in the ways of the nobility.", parse);
+				if(humanity < 0.95) {
+					Text.Add("<i>“No one your kind need concern themselves with,” you get for a response. You stubbornly look at the guard, and he rolls his eyes in annoyance. <i>“Look,”</i> he speaks slowly and clearly, as if to a child, <i>“there are esteemed personages for whom special allowances are made, and who may pass in or out wherever they please.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Even I do not know who those two were. All I can say for sure is that they are so far above the likes of you, they would not even look at you.”</i>", parse);
+				}
+				else {
+					Text.Add("The guard sighs in exasperation. <i>“There are esteemed personages for whom special allowances are made, and who may pass in or out wherever they please. Even I don’t know who those two were.”</i> He sneers at you behind his visor. <i>“All I can say for sure is that they are so far above you, they would not even look at you.”</i>", parse);
+				}
+				Text.NL();
+				Text.Add("You turn to go, leaving the unfriendly watchmen behind you. The pair you saw exit the wall are still barely in sight, and on impulse you hurry towards them. Of course the guard said they wouldn’t speak to you, but it’s not like you have any better leads to follow.", parse);
+				Text.NL();
+				Text.Add("Past the couple, you spot another figure heading slowly towards them. He seems almost innocuous, but after a few moments you spot what drew your attention to him. He carefully maintains a set distance from the couple, clearly following them. You can’t quite make out his face at the distance, but you notice that his right hand hovers at his hip, fingering the hilt of a sword.", parse);
+				Text.NL();
+				Text.Add("You try to hurry, wondering if the two are being pursued, but unfortunately, before you are even half way, they follow the street past a corner and you lose sight of them, their tail disappearing soon after. By the time you reach the corner yourself, ", parse);
+				var hour = world.time.hour;
+				if(hour >= 10 && hour < 19)
+					Text.Add("you can’t spot them amidst the milling crowds.", parse);
+				else if(hour >= 6)
+					Text.Add("they don’t seem to be among the passersby in front of you.", parse);
 				else
-					Text.Add("The din of carousing distracts you from your musings, and you notice a nearby building you have yet to visit - an inn located at the plaza. A place like that could perhaps have customers who frequent the castle, and who might know a way inside.", parse);
+					Text.Add("the street in front of you is totally empty.", parse);
+				Text.NL();
+				Text.Add("Well, that was a little disappointing. Still, judging by their quick disappearance, they probably turned into one of the buildings around here. It could be one of the private residences, but ", parse);
+				if(rigard.LB["Visit"] != 0) {
+					Text.Add("there’s also the Lady’s Blessing inn. Even if they’re not there, someone might know something about them, or perhaps supply you with some other lead.", parse);
+				}
+				else {
+					parse["noisy"] = (hour >= 10 && hour < 20) ? "noisy" : "well-lit";
+					Text.Add("you also spot a [noisy] inn further down the street. That’s likely worth checking out - even if they’re not there, it seems like a well-off establishment. Someone there might know something about them, or perhaps supply you with some other lead.", parse);
+				}
+				Text.NL();
+				Text.Add("You idly wonder if perhaps helping them with their stalker could get you a favor in return.", parse);
 				
 				rigard.flags["RoyalAccessTalk"] = 1;
 			}
