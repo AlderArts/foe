@@ -305,7 +305,7 @@ Scenes.Lei.InnPrompt = function() {
 							Text.Clear();
 							Text.Add("You recall that one of the things Lei said he valued was money, so you swallow your pride and offer to pay him for an explanation.", parse);
 							Text.NL();
-							Text.Add("<i>\"How unexpected,\"</i> he remarks. <i>\"Very well, I will accept four hundred coins in exchange for an explanation that will resolve your fears one way or the other.\"</i>", parse);
+							Text.Add("<i>\"How unexpected,\"</i> he remarks. <i>\"Very well, I will accept four hundred coins in exchange for an explanation that will resolve your concerns regarding the couple one way or the other.\"</i>", parse);
 							Text.Flush();
 							
 							//[Pay][Nevermind][Observe]
@@ -337,7 +337,7 @@ Scenes.Lei.InnPrompt = function() {
 									Text.NL();
 									Scenes.Lei.ObserveMain();
 								}, enabled : true,
-								tooltip : "Decline to pay, and instead wait and see what Lei does for now."
+								tooltip : "Decline to pay. You’ll instead wait and see what Lei does for now."
 							});
 							Gui.SetButtonsFromList(options);
 						}, enabled : true,
@@ -346,11 +346,11 @@ Scenes.Lei.InnPrompt = function() {
 					options.push({ nameStr : "Observe",
 						func : function() {
 							Text.Clear();
-							Text.Add("You decide it's going to be too troublesome to get an answer out of him, but hopefully his actions will betray him.", parse);
+							Text.Add("You decide it’s going to be too troublesome to get an answer out of him directly, and stalk away, pretending frustration. Mostly pretending, anyway.", parse);
 							Text.NL();
 							Scenes.Lei.ObserveMain();
 						}, enabled : true,
-						tooltip : "Wait and see what Lei does for now."
+						tooltip : "Wait and see what Lei does for now. If he’s following the couple, maybe they’ll show up here too."
 					});
 					Gui.SetButtonsFromList(options);
 				}
@@ -361,20 +361,20 @@ Scenes.Lei.InnPrompt = function() {
 		options.push({ nameStr : "Observe",
 			func : function() {
 				Text.Clear();
+				//TODO
 				Scenes.Lei.ObserveMain();
 			}, enabled : true,
-			tooltip : "Wait and see what Lei does for now."
+			tooltip : "Just wait and see what Lei does for now. If he’s following the couple, maybe they’ll show up here too."
 		});
 		options.push({ nameStr : "Forget it",
 			func : function() {
 				Text.Clear();
 				Text.Add("On second thought, you decide, it's probably not worth bothering with him just now. The issue of him and the couple can wait until later.", parse);
-				Text.NL();
 				Text.Flush();
 				
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : "Leave him alone for now, and focus on the tavern."
+			tooltip : "You don’t feel quite ready to deal with his stalking yet. Perhaps you’ll come back to it another time."
 		});
 		Gui.SetButtonsFromList(options);
 	}
@@ -412,7 +412,7 @@ Scenes.Lei.ExplanationMain = function() {
 	
 	Text.Add("<i>\"Ask what you will,\"</i> Lei tells you.", parse);
 	Text.NL();
-	Text.Add("Deciding to get right to the point, you ask him why he was following the red-headed couple after the last time you spoke to him.", parse);
+	Text.Add("Deciding to get right to the point, you ask him why he was following the couple when they left the castle grounds.", parse);
 	Text.NL();
 	Text.Add("<i>\"I am their bodyguard,\"</i> he answers simply. <i>\"And, I suppose, their... chaperone.\"</i>", parse);
 	Text.NL();
@@ -431,17 +431,19 @@ Scenes.Lei.ExplanationMain = function() {
 	Text.NL();
 	Text.Add("<i>\"That much distance is not a problem for me,\"</i> he says", parse);
 	if(lei.flags["Fought"] != Lei.Fight.No)
-		Text.Add(", and having fought him, you have no trouble believing him.", parse);
+		Text.Add(", and having fought him, you have no trouble believing that.", parse);
 	else
 		Text.Add(".", parse);
-	Text.Add(" <i>\"They wished for discretion, and apparently they think I stand out.\"</i> He gestured over his sculpted, vaguely menacing figure, and the large sword he always has with him, as if he can't understand why they would think that.", parse);
+	Text.Add(" <i>\"They wished for discretion, and apparently they think I stand out.\"</i> He gestured over his sculpted, vaguely menacing figure, and the large sword he always has with him, as if he can’t understand why anyone would believe that.", parse);
 	Text.NL();
 	Text.Add("You ask him who they are, anyway.", parse);
 	Text.NL();
 	parse["paid"] = (lei.flags["Fought"] == Lei.Fight.No) ? "paid enough" : "fought a hard enough bout";
 	Text.Add("<i>\"You have not [paid] for that answer. If you wish to know, you might try asking them when they come down.\"</i> Saying that, Lei turns away from you, his explanation apparently concluded, and resumes his watch over the tavern.", parse);
 	Text.NL();
-	Text.Add("You decide you're not going to get any more out of him, and leave him to his duty, wondering at his vigilance in this high class area of the city. The couple you saw was apparently safe, but you <i>are</i> left wondering who they are to merit such a guardian.", parse);
+	Text.Add("You decide you’re not going to get any more out of him, and leave him to his duty, wondering at his vigilance in this high class area of the city. You’re both relieved and a little disappointed that the couple was safe all along. It seems like you won’t have the chance to do them an easy favor, but perhaps they could still assist you.", parse);
+	Text.NL();
+	Text.Add("You also can’t help but wonder who they are to merit such a guardian.", parse);
 	Text.Flush();
 	
 	//[Wait][Nah]
@@ -449,38 +451,44 @@ Scenes.Lei.ExplanationMain = function() {
 	options.push({ nameStr : "Wait",
 		func : function() {
 			Text.Clear();
-			Text.Add("Your curiosity gets the better of you, and you decide to settle in and wait for the couple to come. You sit beside Lei, careful not to block his view, and drink in almost companionable silence while you wait.", parse);
+			Text.Add("You decide you might as well get it over with, and settle in to wait for the couple to come. You sit beside Lei, careful not to block his view, and the two of you drink in almost companionable silence while you wait.", parse);
 			Text.NL();
-			Text.Add("Sitting at the table by the wall, your only warning is the sound of two people's steps before you see the red-headed couple emerge from the stairway. Or at least, you're quite sure it is them, since you have but rarely seen red hair in the city, and their height seems to match what you remember. However, this time they are clothed far more modestly, wearing grey woolens more suited to poorer commoners instead of the elegant dress they had worn when you had previously seen them.", parse);
+			Text.Add("Sitting at the table by the wall, your only warning is the sound of two people’s steps before a red-headed couple emerge from the stairway. The way they walk, backs held straight, close enough that they are almost touching, seems familiar. Lei’s instant shift in attention towards them is enough to confirm your guess that this is the pair you were looking for.", parse);
 			Text.NL();
-			Text.Add("The change does seem to somewhat confirm Lei's words about their desire for discretion, and as he rises, you follow suit and accompany him to the door.", parse);
+			Text.Add("To your surprise, you find that the young man and woman are wearing modest clothes - grey woolens better suited to poor commoners rather than the rich dress you expected to see. Perhaps they really are trying to be discrete, as Lei had said. If so, it’s not working very well, as the dull clothes provide a cute contrast to their blazing red hair, making them stand out all the more.", parse);
 			Text.NL();
-			Text.Add("Once you are outside, Lei lets out a shrill whistle, and you look at him in puzzlement. <i>\"If you want to meet them, let us get it over with, instead of having you trail after us like a stray puppy.\"</i>", parse);
+			Text.Add("As they pass the table, Lei rises, and you follow suit and accompany him to the door.", parse);
+			Text.NL();
+			Text.Add("Once you are outside, Lei whistles piercingly, and you look at him in puzzlement. <i>“If you want to meet them, let us get it over with, instead of having you trail after us like a stray puppy.”</i>", parse);
 			Text.NL();
 			parse["paid"] = (lei.flags["Fought"] == Lei.Fight.No) ? "bribed" : "fought";
-			Text.Add("Ahead of you, the couple turns down a narrow alleyway and you follow in after them along with Lei. They look at him in question and he explains that you wanted to meet them, and how you had [paid] him for an explanation. To your surprise, he even remembers the things you had told him the first time you had met.", parse);
+			Text.Add("Ahead of you, the couple turns down a narrow alleyway and you follow in after them along with Lei. They look at him in question and he explains that you wanted to meet them, and how you had [paid] him for an explanation. To your surprise, he even provides a short summary of what you told him about yourself, and why you wanted to see them.", parse);
 			Text.NL();
 			
 			// TODO: Twins relationship ++
 			
-			Text.Add("<i>\"Oh, I see, I see!\"</i> the man exclaims, his voice light and melodious. <i>\"So now you're really curious who would have someone like Lei for a guard.\"</i> He pauses for a few moments, thinking, tapping his finger against his lips cutely. <i>\"Well, I can't very well just tell you when Lei got <b>his</b> price from you.\"</i>", parse);
+			Text.Add("<i>\"Oh, I see, I see!\"</i> the man exclaims, his voice light and melodious. <i>\"So now you're really curious who would have someone like Lei for a guard.\"</i> He pauses for a few moments, thinking, tapping his finger against his lips cutely. Now probably wouldn’t be the best time to say that you actually just wanted to see if they could get you into the castle grounds. <i>\"Well, I can't very well just tell you when Lei got <b>his</b> price from you.\"</i>", parse);
 			Text.NL();
 			Text.Add("<i>\"Tell you what, prove that you're worthy of trust, and we'll tell you who we are. And maybe we'll have a few small jobs for you afterward, and, of course, we are always happy to recompense someone who helps us... whether with money, or-\"</i> he gives his companion's rump a playful squeeze, and she lets out a squeal, <i>\"-favors.\"</i>", parse);
 			Text.NL();
-			Text.Add("You have to admit that that sounds intriguing, and your curiosity is still unsatisfied, so you ask him what it is that he would have you do.", parse);
+			Text.Add("You have to admit that that sounds intriguing, and ask if one of the favors could include getting into the Castle Grounds past the royal guards.", parse);
+			Text.NL();
+			Text.Add("The young man grins. <i>“Of course, that is certainly a possibility. We can do many things for our friends.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, it’s not quite a promise, but it seems like a good lead. Besides, your curiosity is still unsatisfied, so you ask him what it is that he would have you do.", parse);
 			Text.Flush();
 			Gui.NextPrompt(Scenes.Lei.RequestMain);
 		}, enabled : true,
 		tooltip : "Wait for the well-dressed couple you saw earlier and try to meet them."
 	});
-	options.push({ nameStr : "Forget it",
+	options.push({ nameStr : "Leave",
 		func : function() {
 			Text.Clear();
-			Text.Add("You decide that with at least the small mystery of what Lei was doing resolved, you can return to your own affairs. Perhaps later you'll speak with Lei again and find out who the pair he is guarding is.", parse);
+			Text.Add("You decide that with at least the small mystery of what Lei was doing resolved, you can return to your other affairs for now. Trying to get into the castle can wait a bit.", parse);
 			Text.Flush();
 			
 			Gui.NextPrompt();
-		}, enabled : true,
+		}, enabled : false, //TODO TEMP
 		tooltip : "The couple is safe, and you have other things to do. Maybe you'll meet them another time."
 	});
 	Gui.SetButtonsFromList(options);
@@ -500,14 +508,14 @@ Scenes.Lei.ObserveMain = function() {
 	else
 		parse["comp"] = "";
 					
-	Text.Add("You sit down and settle in to wait for Lei to make a move, ordering [drink]. Some time passes, while you keep watch in his general direction to make sure he hasn't moved[comp]. You aren't quite sure if he's noticed you or not, as his eyes keep drifting generally over the crowd in an unchanged pattern.", parse);
+	Text.Add("You sit down and settle in to wait for Lei to make a move, ordering [drink]. Some time passes, while you keep watch of his general vicinity to make sure he hasn't moved[comp]. You aren't quite sure if he's noticed you observing him or not, as his eyes keep drifting generally over the crowd in an unchanged pattern.", parse);
 	Text.NL();
 
 	// TODO #-drinks cost
 
-	Text.Add("Eventually, as you're beginning to wonder if this is really worth your time, your eyes snap up to the staircase and you see what is unmistakably the same couple coming down. For some reason, this time they are clothed far more modestly, wearing grey woolens more suited to poorer commoners instead of the elegant dress they had worn when you had previously seen them. Their hair still blazes the same red, and their bearing, and obvious affection for each other make them impossible to mistake, however.", parse);
+	Text.Add("Eventually, as you're beginning to wonder if this is really worth your time, your eyes snap up to the staircase and you see a red-haired couple descending. The way they walk, backs held straight, close enough that they are almost touching, seems familiar, and Lei’s instant shift in attention towards them is enough to confirm your suspicion that this is the pair you were looking for.", parse);
 	Text.NL();
-	Text.Add("Your relief at seeing them safe is tinged with confusion, as you wonder if perhaps Lei had robbed them and given them poorer clothes, or something equally bizarre. As they pass by Lei, he again follows, and this time you rise quickly and walk after him, barely even caring if he notices you trailing in his steps.", parse);
+	Text.Add("To your surprise, you find that the young man and woman are wearing modest clothes - grey woolens better suited to poor commoners rather than the rich garments you expected to see. Despite that, their proud bearing and the unusual blazing red of their hair somehow makes you feel like they’re more than their dress suggests.", parse);
 	Text.NL();
 	
 	if(party.Two())
@@ -518,9 +526,13 @@ Scenes.Lei.ObserveMain = function() {
 		parse["comp"] = "";
 	//{and your companions }
 	
-	Text.Add("You follow Lei out the door, and, spotting him walking down the street towards the lower sections of the city, hurry after him. You keep going in an odd little procession. Out front, the red-haired couple leads, Lei follows about half a block behind them, and finally you [comp]trail another half a block behind him. Fortunately, there are still quite a few people out and about, so the fact that you're following shouldn't be too blatant.", parse);
+	Text.Add("As they pass by Lei, he again follows. By the time you remember you were supposed to talk to them and perhaps warn them about their stalker, they are most of the way to the door, and you hurry to catch up, pushing through the crowded common room.", parse);
 	Text.NL();
-	Text.Add("You begin to wonder just where the couple is going, as you pass through the market, walking past the closed stalls, and down into the back streets area. The houses here are noticeably shabbier, and smells whose origins you have no desire to know assail your nose. Ahead of you, you see the couple turning down a narrow street, barely more than an alley, and Lei follows them soon after. You rush after him, fearing to lose them in the warren of buildings.", parse);
+	Text.Add("You make it through the door a little after Lei, and, spotting him walking down the street towards the lower sections of the city, hurry after him. You consider rushing past him towards the pair, but feel a tinge of worry at the idea. He would probably try to stop you, and you’re not sure you want to cross him without a good reason. Better to watch for now.", parse);
+	Text.NL();
+	Text.Add("You keep going in this odd little procession. Out front, the red-haired couple leads, Lei follows thirty paces behind them, and finally you [comp]trail another thirty paces behind him. Fortunately, there are still quite a few people out and about, so the fact that you’re following shouldn’t be too blatant.", parse);
+	Text.NL();
+	Text.Add("You begin to wonder just where the couple is going, as you pass through the market, walking past the closed stalls, and down into the residential area. The houses here are noticeably shabbier, and smells whose origins you have no desire to know assail your nostrils. Ahead of you, you see the couple turning down a narrow street, barely more than an alley, and Lei follows them soon after. You rush after him, fearing to once again lose them in the warren of buildings.", parse);
 	Text.NL();
 	Text.Add("As you round the corner, you find yourself face to face with the red-haired pair, who examine you quizzically, Lei leaning against the building wall a few steps behind them.", parse);
 	Text.NL();
@@ -528,13 +540,17 @@ Scenes.Lei.ObserveMain = function() {
 	Text.NL();
 	Text.Add("You glance away awkwardly, and explain that you saw Lei following them and wanted to make sure they were safe. With Lei leaning calmly against the wall, the explanation sounds a little lame, even to your ears.", parse);
 	Text.NL();
-	Text.Add("<i>\"So noble of you! But, well, as you can see, Lei is actually quite tame.\"</i> He grins at you, though you have trouble imagining the menacing shadow of Lei in the background being ‘tame'.", parse);
+	Text.Add("<i>\"So noble of you! But, well, as you can see, Lei is actually quite tame.\"</i> He grins at you, though you have trouble imagining the menacing shadow of Lei behind him being ‘tame'.", parse);
 	Text.NL();
-	Text.Add("You mutter some excuse for bothering them, but he interrupts you. <i>\"Don't worry, that's quite alright, nobility, after all, is a virtue.\"</i> He pauses for a moment, biting his lower lip, which looks oddly attractive with his somewhat feminine features, before deciding.", parse);
+	Text.Add("You mutter some excuse for bothering them, wondering if you can really ask about getting into the castle grounds like this, but he interrupts you. <i>“Don’t worry, that’s quite alright, nobility, after all, is a virtue.”</i> He pauses for a moment, biting his lower lip, which looks oddly attractive with his somewhat feminine features, before deciding.", parse);
 	Text.NL();
 	Text.Add("<i>\"In fact, we could use someone trustworthy to help us out, my lover and I.\"</i> At the word ‘lover' he gives a firm squeeze to his companions buttocks, and she lets out a cute squeal. <i>\"Tell you what, do us a small favor to prove that you are reliable as well as noble, and we will have some real work for you. And, of course, whenever you help us out, we'll be happy to compensate with money, or if you like, favors.\"</i> His lewd smile on the word ‘favors' leaves you with little doubt just what kind he has in mind.", parse);
 	Text.NL();
-	Text.Add("Despite his poor clothes and lecherous behavior, the man still has the bearing of a king - an incongruous contrast. You hesitantly ask him what he wants you to do for this trial errand.", parse);
+	Text.Add("Despite his poor clothes and lecherous behavior, the man still has the bearing of a king - an incongruous contrast. You hesitantly ask him if one of the favors might include a pass into the castle grounds.", parse);
+	Text.NL();
+	Text.Add("The young man grins, looking unsurprised. Lei probably told him about your conversation earlier. <i>“Of course, that is certainly a possibility. We can do many things for our friends.”</i>", parse);
+	Text.NL();
+	Text.Add("Well, it’s not quite a promise, but it seems like a good lead. Besides, you can’t help but feel curious as to who these two are. You ask what he wants you to do for this trial errand.", parse);
 	Text.Flush();
 	
 	Gui.NextPrompt(Scenes.Lei.RequestMain);
