@@ -40,10 +40,10 @@ function Lei(storage) {
 	this.SetLevelBonus();
 	this.RestFull();
 	
-	this.flags["Met"] = 0;
+	this.flags["Met"] = Lei.Met.NotMet;
 	this.flags["ToldOrvin"] = 0;
 	this.flags["HeardOf"] = 0;
-	this.flags["Fought"] = LeiFight.No;
+	this.flags["Fought"] = Lei.Fight.No;
 	
 	this.timeout = new Time();
 	
@@ -52,11 +52,14 @@ function Lei(storage) {
 Lei.prototype = new Entity();
 Lei.prototype.constructor = Lei;
 
-LeiStrength = {
-	LEVEL_WEAK   : 3,
+Lei.PartyStrength = {
+	LEVEL_WEAK   : 5,
 	LEVEL_STRONG : 10
 };
-LeiFight = {
+Lei.Met = {
+	NotMet : 0
+}
+Lei.Fight = {
 	No         : 0,
 	Submission : 1,
 	Loss       : 2,
@@ -95,7 +98,8 @@ Scenes.Lei = {};
 // Schedule
 Lei.prototype.IsAtLocation = function(location) {
 	// Numbers/slacking/sleep
-	if     (location == world.loc.Rigard.Inn.common && lei.timeout.Expired()) return (world.time.hour >= 14 && world.time.hour < 23);
+	if(location == world.loc.Rigard.Inn.common && lei.timeout.Expired())
+		return (world.time.hour >= 14 && world.time.hour < 23);
 	return false;
 }
 
@@ -107,11 +111,11 @@ Lei.prototype.Interact = function() {
 	
 	if(DEBUG) {
 		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: relation: " + gwendy.relation.Get()));
+		Text.AddOutput(Text.BoldColor("DEBUG: relation: " + lei.relation.Get()));
 		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: subDom: " + gwendy.subDom.Get()));
+		Text.AddOutput(Text.BoldColor("DEBUG: subDom: " + lei.subDom.Get()));
 		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: slut: " + gwendy.slut.Get()));
+		Text.AddOutput(Text.BoldColor("DEBUG: slut: " + lei.slut.Get()));
 		Text.Newline();
 	}
 	
@@ -136,11 +140,11 @@ Scenes.Lei.InnPrompt = function() {
 	
 	if(lei.flags["Met"] < 3) {
 		world.TimeStep({minute: 5});
-		Text.Add("You approach the stranger. Up close, you notice that underneath a dusky cloak that covers his back and whose hood hides his face in shadow, the man is wearing some sort of black form-fitting armor, nicely emphasizing his well-muscled body. When you reach his table, he looks up at you, running his eyes over you carefully.", parse);
+		Text.Add("You approach the stranger. He definitely looks like the man you saw following the pair of hooded nobles earlier. His cloak is the same dusky shade, and he has the hood drawn up, casting his face into shadow, raising your suspicions. Up close, you notice that underneath he’s wearing some sort of black form-fitting armor, nicely emphasizing his well-muscled body. When you reach his table, he looks up at you, running his eyes over you methodically.", parse);
 		Text.NL();
 		Text.Add("Normally, if a man examined you so closely, eyes poring over every detail, you would think that he's checking you, but something in the stranger's eyes make this examination different... it feels like he's not examining you as a potential mate, so much as potential prey, assessing whether you're worth noticing.", parse);
 		Text.NL();
-		Text.Add("You cough, shifting uncomfortably under his gaze, and ask if you he minds if you join him.", parse);
+		Text.Add("You cough, shifting uncomfortably under his gaze, and ask if he minds if you join him. After a moment, you realize you were supposed to ask him about the couple he was following, but the thought slipped your mind when met with his stare.", parse);
 		Text.NL();
 		// TODO: more complex strength assessment
 		var playerLevel = player.level;
@@ -153,22 +157,17 @@ Scenes.Lei.InnPrompt = function() {
 			}
 		}
 		
-		if(playerLevel < LeiStrength.LEVEL_WEAK && strongestLevel >= LeiStrength.LEVEL_STRONG) {
+		if(playerLevel < Lei.PartyStrength.LEVEL_WEAK && strongestLevel >= Lei.PartyStrength.LEVEL_STRONG) {
 			parse["heshe"] = strongestMember.heshe();
 			parse["name"] = strongestMember.name;
 			Text.Add("The stranger seems to hesitate before finally deciding. <i>\"Very well, you may sit. Not for your sake, but [heshe] appears interesting,\"</i> he says, nodding toward [name].", parse);
 		}
-		else if(playerLevel < LeiStrength.LEVEL_WEAK && strongestLevel < LeiStrength.LEVEL_WEAK) {
-			Text.Add("<i>\"I have no interest in you,\"</i> the man replies, his voice husky, yet flowing. <i>\"Begone, I do not have time for the weak. Show me you have potential and grow stronger first, then we can talk. Now get out of my sight, you're blocking my view.\"</i>", parse);
+		else if(playerLevel < Lei.PartyStrength.LEVEL_WEAK && strongestLevel < Lei.PartyStrength.LEVEL_WEAK) {
+			Text.Add("<i>“I have no interest in you,”</i> the man replies, his voice husky, yet flowing. <i>“You should go, I have no patience for the weak.”</i>", parse);
 			Text.NL();
-			Text.Add("You glare at the man. You? Weak? You are momentarily tempted to challenge him there and then over the insult, but an odd shiver runs down your spine as you're about to move. Gritting your teeth, you stalk off in annoyance.", parse);
-			Text.NL();
-			Text.Add("<b>You'll need to be stronger in order for the stranger to recognize you. Earn some experience in combat before you return to him.</b>", parse);
-			Text.Flush();
-			Gui.NextPrompt();
-			return;
+			Text.Add("You glare at the man. You? Weak? You do get a weird sense of danger just from talking to him, but there’s a reason you’re here. You’re not going to be deterred that easily.", parse);
 		}
-		else if(playerLevel < LeiStrength.LEVEL_STRONG)
+		else if(playerLevel < Lei.PartyStrength.LEVEL_STRONG)
 			Text.Add("<i>\"Very well, you appear to have some potential,\"</i> the man replies, his voice husky, yet flowing. <i>\"You may sit if you like.\"</i>", parse);
 		else
 			Text.Add("<i>\"You <b>are</b> an interesting one,\"</i> the man replies, almost purring. <i>\"Please, sit.\"</i>", parse);
@@ -176,17 +175,20 @@ Scenes.Lei.InnPrompt = function() {
 		if(party.Alone())
 			Text.Add("You pull up a chair and sit down across from the stranger.", parse);
 		else
-			Text.Add("There's barely enough space at the man's table for you to pull up a single chair across from him, so you tell your party to sit down at a table a meter or two away while you talk with the stranger.", parse);
+			Text.Add("There's barely enough space at the man's table for you to pull up a single chair across from him, so you tell your party to sit down at a table a few paces away while you talk with the stranger.", parse);
 		Text.NL();
-		Text.Add("<i>\"Come, there is no need to sit so far from me,\"</i> he tells you, indicating a spot beside him at the small table. Your eyebrows shoot up in surprise. <i>\"You're blocking my view,\"</i> he clarifies.", parse);
+		Text.Add("<i>\"There is no need to sit so far from me,\"</i> he tells you, indicating a spot beside him at the small table. Your eyebrows shoot up in surprise. <i>\"You're blocking my view,\"</i> he clarifies.", parse);
 		Text.NL();
-		if(playerLevel >= LeiStrength.LEVEL_STRONG) {
-			Text.Add("You scoot over, the stranger's eyes fixated on you the whole time. <i>\"Well then, what can I do for you?\"</i> he asks.", parse);
+		if(playerLevel >= Lei.PartyStrength.LEVEL_STRONG) {
+			Text.Add("You scoot over, the stranger's eyes fixed on you the whole time. <i>\"Well then, what can I do for you?\"</i> he asks.", parse);
 			Text.NL();
-			Text.Add("You decide introductions are in order first, and ", parse);
+			Text.Add("Somehow you feel awkward just blurting out your accusation. You decide you should at least start off politely, and ", parse);
 		}
-		else
-			Text.Add("You scoot over to the side of the table, and he resumes watching the room, seemingly paying you no further mind. After half a minute of awkward silence, you decide you should make the first move even if you have to speak to the side of his head. You ", parse);
+		else {
+			Text.Add("You scoot over to the side of the table, and he resumes watching the room, seemingly paying you no further mind. After half a minute of awkward silence, you decide you should make the first move even if you have to speak to the side of his head. Perhaps simply blurting out your accusation wouldn’t be a great idea...", parse);
+			Text.NL();
+			Text.Add("You ");
+		}
 
 		parse["adv"] = party.Alone() ? "an adventurer" : "adventurers";
 		parse["s"]   = party.Alone() ? "" : "s";
@@ -199,7 +201,7 @@ Scenes.Lei.InnPrompt = function() {
 			Text.Add("<i>\"A simple seeker of strength and fortune. Nothing more. Nothing less.\"</i>", parse);
 		// TODO: ELSE (Rumors etc, party members?)
 		Text.NL();
-		Text.Add("Lei's eloquence is apparently exhausted, so maybe it's time to ask him whatever it was you wanted.", parse);
+		Text.Add("Lei’s eloquence is apparently exhausted, so maybe it’s a good time to ask him the things you wanted.", parse);
 		Text.Flush();
 		
 		// Init temporary flags
@@ -229,7 +231,7 @@ Scenes.Lei.InnPrompt = function() {
 				
 				Text.Add("You approach Lei, [comp]but even when you're a few tables away he seems to take no notice of you. When you stand directly before him, he finally looks up.", parse);
 				Text.NL();
-				if(playerLevel < LeiStrength.LEVEL_STRONG) {
+				if(playerLevel < Lei.PartyStrength.LEVEL_STRONG) {
 					Text.Add("<i>\"You're blocking my view again.\"</i>", parse);
 					Text.NL();
 					Text.Add("Your emotions rise a little at his dismissive tone, but you keep yourself under control. Refusing to move, you ", parse);
@@ -253,7 +255,7 @@ Scenes.Lei.InnPrompt = function() {
 							Text.Clear();
 							Text.Add("You tell him that you <i>will</i> use force if that's what it's going to take.", parse);
 							Text.NL();
-							if(player.level < LeiStrength.LEVEL_WEAK) {
+							if(player.level < Lei.PartyStrength.LEVEL_WEAK) {
 								Text.Add("<i>\"Very well, let's get this over with.\"</i> Lei looks bored, like your challenge has just made him sleepier. <i>\"I warn you, <b>you will lose</b>.\"</i> The last words ring oddly as he speaks them, making the air tremble as if they had the force of an avalanche, instead of being spoken softly as they had been to your ears.", parse);
 								Text.Flush();
 								
@@ -285,7 +287,7 @@ Scenes.Lei.InnPrompt = function() {
 								});
 								Gui.SetButtonsFromList(options);
 							}
-							else if(player.level < LeiStrength.LEVEL_STRONG) {
+							else if(player.level < Lei.PartyStrength.LEVEL_STRONG) {
 								Text.Add("<i>\"It is perhaps not a wise choice that you make, but I could use some light exercise while I wait.\"</i> You grit your teeth at his flippant words and resolve that you'll make him tell you everything that you want to know.", parse);
 								Text.NL();
 								Scenes.Lei.BarFight();
@@ -428,7 +430,7 @@ Scenes.Lei.ExplanationMain = function() {
 	Text.Add("You ask why he was following so far away from them then.", parse);
 	Text.NL();
 	Text.Add("<i>\"That much distance is not a problem for me,\"</i> he says", parse);
-	if(lei.flags["Fought"] != LeiFight.No)
+	if(lei.flags["Fought"] != Lei.Fight.No)
 		Text.Add(", and having fought him, you have no trouble believing him.", parse);
 	else
 		Text.Add(".", parse);
@@ -436,7 +438,7 @@ Scenes.Lei.ExplanationMain = function() {
 	Text.NL();
 	Text.Add("You ask him who they are, anyway.", parse);
 	Text.NL();
-	parse["paid"] = (lei.flags["Fought"] == LeiFight.No) ? "paid enough" : "fought a hard enough bout";
+	parse["paid"] = (lei.flags["Fought"] == Lei.Fight.No) ? "paid enough" : "fought a hard enough bout";
 	Text.Add("<i>\"You have not [paid] for that answer. If you wish to know, you might try asking them when they come down.\"</i> Saying that, Lei turns away from you, his explanation apparently concluded, and resumes his watch over the tavern.", parse);
 	Text.NL();
 	Text.Add("You decide you're not going to get any more out of him, and leave him to his duty, wondering at his vigilance in this high class area of the city. The couple you saw was apparently safe, but you <i>are</i> left wondering who they are to merit such a guardian.", parse);
@@ -455,7 +457,7 @@ Scenes.Lei.ExplanationMain = function() {
 			Text.NL();
 			Text.Add("Once you are outside, Lei lets out a shrill whistle, and you look at him in puzzlement. <i>\"If you want to meet them, let us get it over with, instead of having you trail after us like a stray puppy.\"</i>", parse);
 			Text.NL();
-			parse["paid"] = (lei.flags["Fought"] == LeiFight.No) ? "bribed" : "fought";
+			parse["paid"] = (lei.flags["Fought"] == Lei.Fight.No) ? "bribed" : "fought";
 			Text.Add("Ahead of you, the couple turns down a narrow alleyway and you follow in after them along with Lei. They look at him in question and he explains that you wanted to meet them, and how you had [paid] him for an explanation. To your surprise, he even remembers the things you had told him the first time you had met.", parse);
 			Text.NL();
 			
@@ -662,7 +664,7 @@ Scenes.Lei.InnFirstPrompt = function() {
 				Text.Clear();
 				Text.Add("He seems quite strong, and although you don't know much about him, it wouldn't hurt to test the waters. You ask him if he'll accompany you on your travels.", parse);
 				
-				if(player.level >= LeiStrength.LEVEL_STRONG)
+				if(player.level >= Lei.PartyStrength.LEVEL_STRONG)
 					Text.Add("He looks at you with apparent interest. <i>\"Perhaps... There is a chance that I may be interested in travelling with you. Unfortunately, just now I am preoccupied with other duties,\"</i> he tells you, sounding genuinely regretful. <i>\"Come and ask me again some time, and we will discuss it if you like.\"</i>", parse);
 				else
 					Text.Add("<i>\"As I said,\"</i> he tells you, sounding bored, <i>\"I am interested in but two things. Fortune and strength. I am not sure which it is that you think you can offer me.\"</i> He pauses, looking you over again. <i>\"Well, I do see some spark of potential within you,\"</i> he continues, his tone softening. <i>\"Perhaps we can speak of this again some other time. For now, I am preoccupied with other duties.\"</i>", parse);
@@ -841,12 +843,12 @@ Scenes.Lei.BarFight = function() {
 		if(downed) {
 			Text.Add("<i>\"You challenge me and then you give up? Pathetic.\"</i> Throwing the word at you like a verdict, Lei stalks off, returning to the tavern.", parse);
 			Text.Flush();
-			lei.flags["Fought"] = LeiFight.Submission;
+			lei.flags["Fought"] = Lei.Fight.Submission;
 			lei.relation.DecreaseStat(-100, 5);
 			Gui.NextPrompt();
 		}
 		else {
-			lei.flags["Fought"] = LeiFight.Loss;
+			lei.flags["Fought"] = Lei.Fight.Loss;
 			parse["anyof"] = party.Alone() ? "" : "any of ";
 			parse["s"]     = party.Alone() ? "" : "s";
 			parse["comp"]  = party.Two()    ? " and " + party.Get(1).name : 
@@ -954,10 +956,10 @@ Scenes.Lei.BarFight = function() {
 		party.RestFull();
 		SetGameState(GameState.Event);
 		
-		lei.flags["Fought"] = LeiFight.Win;
+		lei.flags["Fought"] = Lei.Fight.Win;
 		lei.relation.IncreaseStat(100, 2);
 		
-		parse["talk"] = player.level < LeiStrength.LEVEL_STRONG ? "I did not think you had it in you, to be honest. I am impressed," : "You are as strong as I had hoped... maybe stronger,";
+		parse["talk"] = player.level < Lei.PartyStrength.LEVEL_STRONG ? "I did not think you had it in you, to be honest. I am impressed," : "You are as strong as I had hoped... maybe stronger,";
 		
 		Text.Clear();
 		Text.Add("<i>\"Mm... that's good enough for now. Wonderful,\"</i> Lei almost purrs, smiling widely at you. <i>\"[talk]\"</i> he says, clearly pleased. <i>\"Some day, we must fight in earnest.\"</i>", parse);
