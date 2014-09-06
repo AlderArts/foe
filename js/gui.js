@@ -45,7 +45,7 @@ Gui.Init = function() {
 	
 	Gui.canvas.rect(Gui.textArea.x, Gui.textArea.y, Gui.textArea.w, Gui.textArea.h).attr({"stroke-width": Gui.textArea.inset});
 	Gui.debug = Gui.canvas.text(1230, 700, "Debug").attr({stroke: "#F00", fill:"#F00", font: SMALL_FONT}).hide();
-	Gui.onresize();
+	GuiResize();
 	
 	Gui.party = Gui.canvas.set();
 	Gui.partyObj = [];
@@ -276,7 +276,7 @@ Gui.SetupCavalcadeHand = function(xoffset, yoffset, set, obj) {
 	obj.push(local);
 }
 
-Gui.onresize = function() {
+GuiResize = function() {
 	var w = $(window).width();
 	var h = $(window).height();
 	var ratioW = w/Gui.w;
