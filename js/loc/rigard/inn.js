@@ -201,9 +201,6 @@ world.loc.Rigard.Inn.common.onEntry = function() {
 		Text.Add(".");
 	Text.NL();
 	Text.Flush();
-
-	if(lei.flags["Met"] == 1)
-		lei.flags["Met"] = 2;
 	
 	PrintDefaultOptions(true);
 }
@@ -723,7 +720,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 	
 	var leiPresent = lei.IsAtLocation(world.loc.Rigard.Inn.common);
 	
-	if(lei.flags["Met"] < 3) {
+	if(lei.flags["Met"] < Lei.Met.KnowName) {
 		options.push({ nameStr : "Stranger",
 			func : function() {
 				Text.Clear();

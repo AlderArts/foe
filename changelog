@@ -12,7 +12,7 @@ Version 0.3m
 * Added a combat turn order listing, replacing the rather vague initiative listing.
 * Changed the color of the sleep/wait/explore buttons to make it more clear when they are available.
 * Changed color of level up button to green.
-* Reduced Lei's level requirement to 3 for the moment (more is planned to make this more intuitive).
+* Changed the approach gates sequence to make finding Lei more intuitive (thanks Del!). Lei's sequence has also been modified. Might result in some weirdness since I poked around at the flags.
 * Added a new scene to Magnus, if you went and learned magic from Jeanne (a pretty short thing, but things make more sense now).
 
 --------------------------------------------

@@ -57,7 +57,10 @@ Lei.PartyStrength = {
 	LEVEL_STRONG : 10
 };
 Lei.Met = {
-	NotMet : 0
+	NotMet    : 0,
+	SeenInn   : 1,
+	SeenGates : 2,
+	KnowName  : 3
 }
 Lei.Fight = {
 	No         : 0,
@@ -137,8 +140,31 @@ Scenes.Lei.InnPrompt = function() {
 		parse["comp"] = "";
 	
 	Text.Clear();
+	var first = false;
 	
-	if(lei.flags["Met"] < 3) {
+	// TODO: LEI REPEAT STUFF
+	if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.Started) {
+		Text.Add("PLACEHOLDER", parse);
+		Text.NL();
+		Text.Add("", parse);
+		Text.NL();
+		Text.Add("", parse);
+		
+		// TODO
+		/*
+		if(twins.flags["Met"] == 0) {
+			// TWINS STUFF INTRO
+			twins.flags["Met"] = Twins.Met.Met;
+		}
+		else {
+			// KNOW ABOUT THE TWINS
+		}
+		*/
+
+		Text.Flush();
+		return;
+	}	
+	else if(lei.flags["Met"] < Lei.Met.KnowName) {
 		world.TimeStep({minute: 5});
 		Text.Add("You approach the stranger. He definitely looks like the man you saw following the pair of hooded nobles earlier. His cloak is the same dusky shade, and he has the hood drawn up, casting his face into shadow, raising your suspicions. Up close, you notice that underneath he’s wearing some sort of black form-fitting armor, nicely emphasizing his well-muscled body. When you reach his table, he looks up at you, running his eyes over you methodically.", parse);
 		Text.NL();
@@ -204,31 +230,35 @@ Scenes.Lei.InnPrompt = function() {
 		Text.Add("Lei’s eloquence is apparently exhausted, so maybe it’s a good time to ask him the things you wanted.", parse);
 		Text.Flush();
 		
-		// Init temporary flags
-		Scenes.Lei.InnFirstTalkedCastle = 0;
-		Scenes.Lei.InnFirstTalkedJoin = 0;
-		Scenes.Lei.InnFirstPrompt();
-		
-		lei.flags["Met"] = 3;
+		lei.flags["Met"] = Lei.Met.KnowName;
+		first = true;
 	}
-	else if(lei.flags["Met"] == 3) {
-		Text.Add("You see Lei back at the same corner table he had occupied before. You feel a mixture of relief and worry that nothing seems different. He still looks out at the room with the same hollow, yet vigilant, eyes, his face still concealed in the shadows of his cloak.", parse);
-		Text.NL();
-		Text.Add("You wonder whether you should simply walk up to him and demand an explanation of why he was following the red-headed couple. Or perhaps you should only watch him for now and see what he does.", parse);
+	else { // lei.flags["Met"] == Lei.Met.KnowName;
+		Text.Add("Lei’s back to his old seat. Now might be a good time to figure out why he was following the couple from the royal district, or see if you can get a lead to actually finding them.", parse);
  		Text.Flush();
- 		
-		var options = new Array();
-		options.push({ nameStr : "Confront",
-			func : function() {
-				Text.Clear();
-				
-				if(party.Two())
-					parse["comp"] = party.Get(1).name + " a reassuring presence behind you, ";
-				else if(!party.Alone())
-					parse["comp"] = "your companions a reassuring presence behind you, ";
-				else
-					parse["comp"] = "";
-				
+ 	}
+ 	
+	var options = new Array();
+	options.push({ nameStr : "Confront",
+		func : function() {
+			Text.Clear();
+			
+			if(party.Two())
+				parse["comp"] = party.Get(1).name + " a reassuring presence behind you, ";
+			else if(!party.Alone())
+				parse["comp"] = "your companions a reassuring presence behind you, ";
+			else
+				parse["comp"] = "";
+			if(first) {
+				Text.Add("You clear your throat, and are rewarded with a flicker of the eyes from Lei, before he resumes his vigil over the room. Steeling yourself, you tell him that you saw him stalking a couple wearing grey cloaks after they left the castle grounds, and that you want an explanation.", parse);
+				Text.NL();
+				Text.Add("<i>“No.”</i> You look at him incredulously.", parse);
+				Text.NL();
+				Text.Add("You demand if that’s all he’s going to say for himself.", parse);
+				Text.NL();
+				Text.Add("<i>“It is,”</i> he tells you. <i>“Now, unless you intend to force me, you should perhaps be on your way.”</i>", parse);
+			}
+			else {
 				Text.Add("You approach Lei, [comp]but even when you're a few tables away he seems to take no notice of you. When you stand directly before him, he finally looks up.", parse);
 				Text.NL();
 				if(playerLevel < Lei.PartyStrength.LEVEL_STRONG) {
@@ -243,162 +273,142 @@ Scenes.Lei.InnPrompt = function() {
 				}
 				Text.Add("tell him that you saw him stalking the man and woman as they exited the inn, and that you want an explanation.", parse);
 				Text.NL();
-				Text.Add("<i>\"No.\"</i> You look at him incredulously. You demand if that's all he's going to say for himself. <i>\"It is,\"</i> he tells you. <i>\"Now, unless you intend to force me, please move out of the way.\"</i> He raises one eyebrow quizzically.", parse);
-				lei.relation.DecreaseStat(-15, 1);
-				Text.Flush();
-				
-				//[Fight][Bribe][Observe]
-				var FightPrompt = function() {
-					var options = new Array();
-					options.push({ nameStr : "Fight",
-						func : function() {
-							Text.Clear();
-							Text.Add("You tell him that you <i>will</i> use force if that's what it's going to take.", parse);
-							Text.NL();
-							if(player.level < Lei.PartyStrength.LEVEL_WEAK) {
-								Text.Add("<i>\"Very well, let's get this over with.\"</i> Lei looks bored, like your challenge has just made him sleepier. <i>\"I warn you, <b>you will lose</b>.\"</i> The last words ring oddly as he speaks them, making the air tremble as if they had the force of an avalanche, instead of being spoken softly as they had been to your ears.", parse);
-								Text.Flush();
-								
-								//[Fight][Observe]
-								var options = new Array();
-								options.push({ nameStr : "Fight",
-									func : function() {
-										Text.NL();
-										Text.Add("You decide it doesn't matter how menacing he makes himself sound. You'll take him on and make him tell you what you want to know.", parse);
-										Text.NL();
-										
-										Scenes.Lei.BarFight();
-									}, enabled : true,
-									tooltip : "His confidence only serves to anger you further, and you resolve to fight."
-								});
-								options.push({ nameStr : "Observe",
-									func : function() {
-										Text.Clear();
-										Text.Add("You decide that perhaps discretion is the better part of valor after all. Your cheeks flushing with shame, you tell him that you will bow to his judgement in this, and decline to fight him after all.", parse);
-										Text.NL();
-										Text.Add("He pauses for a moment, before deciding. <i>\"That is wise. The weak live longest when they are cowardly.\"</i>", parse);
-										Text.NL();
-										Text.Add("You stalk off from him, trying to contain your embarrassment and your fury, and decide that you'll watch him for now and ferret out whatever his secret might be that way.", parse);
-										Text.NL();
-										
-										Scenes.Lei.ObserveMain();
-									}, enabled : true,
-									tooltip : "You decide that watching him might be better than trying to fight."
-								});
-								Gui.SetButtonsFromList(options);
-							}
-							else if(player.level < Lei.PartyStrength.LEVEL_STRONG) {
-								Text.Add("<i>\"It is perhaps not a wise choice that you make, but I could use some light exercise while I wait.\"</i> You grit your teeth at his flippant words and resolve that you'll make him tell you everything that you want to know.", parse);
-								Text.NL();
-								Scenes.Lei.BarFight();
-							}
-							else {
-								Text.Add("Lei's eyes seem to light up as you challenge him, and you see a smile spread over his shadowed face. <i>\"Yes, this should be interesting.\"</i> He seems downright excited. You're not sure he even cares what the fight is about.", parse);
-								Text.NL();
-								Scenes.Lei.BarFight();
-							}
-						}, enabled : true,
-						tooltip : "Challenge Lei to a fight to get an explanation."
-					});
-					options.push({ nameStr : "Bribe",
-						func : function() {
-							Text.Clear();
-							Text.Add("You recall that one of the things Lei said he valued was money, so you swallow your pride and offer to pay him for an explanation.", parse);
-							Text.NL();
-							Text.Add("<i>\"How unexpected,\"</i> he remarks. <i>\"Very well, I will accept four hundred coins in exchange for an explanation that will resolve your concerns regarding the couple one way or the other.\"</i>", parse);
+				Text.Add("<i>\"No.\"</i> You look at him incredulously. You demand if that's all he's going to say for himself. <i>\"It is,\"</i> he tells you. <i>“Now, unless you intend to force me, please stop blocking my view.”</i>", parse);
+			}
+			
+			Text.Add(" He raises one eyebrow quizzically.", parse);
+			lei.relation.DecreaseStat(-15, 1);
+			Text.Flush();
+			
+			//[Fight][Bribe][Observe]
+			var FightPrompt = function() {
+				var options = new Array();
+				options.push({ nameStr : "Fight",
+					func : function() {
+						Text.Clear();
+						Text.Add("You tell him that you <i>will</i> use force if that's what it's going to take.", parse);
+						Text.NL();
+						if(player.level < Lei.PartyStrength.LEVEL_WEAK) {
+							Text.Add("<i>\"Very well, let's get this over with.\"</i> Lei looks bored, like your challenge has just made him sleepier. <i>\"I warn you, <b>you will lose</b>.\"</i> The last words ring oddly as he speaks them, making the air tremble as if they had the force of an avalanche, instead of being spoken softly as they had been to your ears.", parse);
 							Text.Flush();
 							
-							//[Pay][Nevermind][Observe]
+							//[Fight][Observe]
 							var options = new Array();
-							options.push({ nameStr : "Pay",
+							options.push({ nameStr : "Fight",
 								func : function() {
 									Text.NL();
-									Text.Add("Grudgingly, you accept his price, and hand over the coins. He accepts them without counting, and nods at you slightly.", parse);
-									party.coin -= 400;
-									lei.relation.IncreaseStat(100, 2);
-									Text.Flush();
-									Gui.NextPrompt(Scenes.Lei.ExplanationMain);
-								}, enabled : party.coin >= 400,
-								tooltip : "Pay 400 coins for the explanation."
-							});
-							options.push({ nameStr : "Nevermind",
-								func : function() {
+									Text.Add("You decide it doesn't matter how menacing he makes himself sound. You'll take him on and make him tell you what you want to know.", parse);
 									Text.NL();
-									Text.Add("You decide that you aren't willing to pay quite that much for a simple explanation, and reconsider your options.", parse);
-									Text.Flush();
-									FightPrompt();
+									
+									Scenes.Lei.BarFight();
 								}, enabled : true,
-								tooltip : "That's more than you're willing to pay."
+								tooltip : "His confidence only serves to anger you further, and you resolve to fight."
 							});
-							options.push({ nameStr : "Nah",
+							options.push({ nameStr : "Observe",
 								func : function() {
 									Text.Clear();
-									Text.Add("He's asking an outrageous amount! You decide that you'll find out for yourself, and resolve to watch him for now.", parse);
+									Text.Add("You decide that perhaps discretion is the better part of valor after all. Your cheeks flushing with shame, you tell him that you will bow to his judgement in this, and decline to fight him after all.", parse);
 									Text.NL();
+									Text.Add("He pauses for a moment, before deciding. <i>\"That is wise. The weak live longest when they are cowardly.\"</i>", parse);
+									Text.NL();
+									Text.Add("You stalk off from him, trying to contain your embarrassment and your fury, and decide that you'll watch him for now and ferret out whatever his secret might be that way.", parse);
+									Text.NL();
+									
 									Scenes.Lei.ObserveMain();
 								}, enabled : true,
-								tooltip : "Decline to pay. You’ll instead wait and see what Lei does for now."
+								tooltip : "You decide that watching him might be better than trying to fight."
 							});
 							Gui.SetButtonsFromList(options);
-						}, enabled : true,
-						tooltip : "Offer to pay Lei for an explanation."
-					});
-					options.push({ nameStr : "Observe",
-						func : function() {
-							Text.Clear();
-							Text.Add("You decide it’s going to be too troublesome to get an answer out of him directly, and stalk away, pretending frustration. Mostly pretending, anyway.", parse);
+						}
+						else if(player.level < Lei.PartyStrength.LEVEL_STRONG) {
+							Text.Add("<i>\"It is perhaps not a wise choice that you make, but I could use some light exercise while I wait.\"</i> You grit your teeth at his flippant words and resolve that you'll make him tell you everything that you want to know.", parse);
 							Text.NL();
-							Scenes.Lei.ObserveMain();
-						}, enabled : true,
-						tooltip : "Wait and see what Lei does for now. If he’s following the couple, maybe they’ll show up here too."
-					});
-					Gui.SetButtonsFromList(options);
-				}
-				FightPrompt();
-			}, enabled : true,
-			tooltip : "Confront Lei about following the couple."
-		});
-		options.push({ nameStr : "Observe",
-			func : function() {
-				Text.Clear();
-				//TODO
-				Scenes.Lei.ObserveMain();
-			}, enabled : true,
-			tooltip : "Just wait and see what Lei does for now. If he’s following the couple, maybe they’ll show up here too."
-		});
-		options.push({ nameStr : "Forget it",
-			func : function() {
-				Text.Clear();
-				Text.Add("On second thought, you decide, it's probably not worth bothering with him just now. The issue of him and the couple can wait until later.", parse);
-				Text.Flush();
-				
-				Gui.NextPrompt();
-			}, enabled : true,
-			tooltip : "You don’t feel quite ready to deal with his stalking yet. Perhaps you’ll come back to it another time."
-		});
-		Gui.SetButtonsFromList(options);
-	}
-	// TODO: LEI REPEAT STUFF
-	else {
-		Text.Add("PLACEHOLDER", parse);
-		Text.NL();
-		Text.Add("", parse);
-		Text.NL();
-		Text.Add("", parse);
-		
-		// TODO
-		/*
-		if(twins.flags["Met"] == 0) {
-			// TWINS STUFF INTRO
-			twins.flags["Met"] = Twins.Met.Met;
-		}
-		else {
-			// KNOW ABOUT THE TWINS
-		}
-		*/
-
-		Text.Flush();
-	}	
+							Scenes.Lei.BarFight();
+						}
+						else {
+							Text.Add("Lei's eyes seem to light up as you challenge him, and you see a smile spread over his shadowed face. <i>\"Yes, this should be interesting.\"</i> He seems downright excited. You're not sure he even cares what the fight is about.", parse);
+							Text.NL();
+							Scenes.Lei.BarFight();
+						}
+					}, enabled : true,
+					tooltip : "Challenge Lei to a fight to get an explanation."
+				});
+				options.push({ nameStr : "Bribe",
+					func : function() {
+						Text.Clear();
+						Text.Add("You recall that one of the things Lei said he valued was money, so you swallow your pride and offer to pay him for an explanation.", parse);
+						Text.NL();
+						Text.Add("<i>\"How unexpected,\"</i> he remarks. <i>\"Very well, I will accept four hundred coins in exchange for an explanation that will resolve your concerns regarding the couple one way or the other.\"</i>", parse);
+						Text.Flush();
+						
+						//[Pay][Nevermind][Observe]
+						var options = new Array();
+						options.push({ nameStr : "Pay",
+							func : function() {
+								Text.NL();
+								Text.Add("Grudgingly, you accept his price, and hand over the coins. He accepts them without counting, and nods at you slightly.", parse);
+								party.coin -= 400;
+								lei.relation.IncreaseStat(100, 2);
+								Text.Flush();
+								Gui.NextPrompt(Scenes.Lei.ExplanationMain);
+							}, enabled : party.coin >= 400,
+							tooltip : "Pay 400 coins for the explanation."
+						});
+						options.push({ nameStr : "Nevermind",
+							func : function() {
+								Text.NL();
+								Text.Add("You decide that you aren't willing to pay quite that much for a simple explanation, and reconsider your options.", parse);
+								Text.Flush();
+								FightPrompt();
+							}, enabled : true,
+							tooltip : "That's more than you're willing to pay."
+						});
+						options.push({ nameStr : "Nah",
+							func : function() {
+								Text.Clear();
+								Text.Add("He's asking an outrageous amount! You decide that you'll find out for yourself, and resolve to watch him for now.", parse);
+								Text.NL();
+								Scenes.Lei.ObserveMain();
+							}, enabled : true,
+							tooltip : "Decline to pay. You’ll instead wait and see what Lei does for now."
+						});
+						Gui.SetButtonsFromList(options);
+					}, enabled : true,
+					tooltip : "Offer to pay Lei for an explanation."
+				});
+				options.push({ nameStr : "Observe",
+					func : function() {
+						Text.Clear();
+						Text.Add("You decide it’s going to be too troublesome to get an answer out of him directly, and stalk away, pretending frustration. Mostly pretending, anyway.", parse);
+						Text.NL();
+						Scenes.Lei.ObserveMain();
+					}, enabled : true,
+					tooltip : "Wait and see what Lei does for now. If he’s following the couple, maybe they’ll show up here too."
+				});
+				Gui.SetButtonsFromList(options);
+			}
+			FightPrompt();
+		}, enabled : true,
+		tooltip : "Confront Lei about following the couple."
+	});
+	options.push({ nameStr : "Observe",
+		func : function() {
+			Text.Clear();
+			Scenes.Lei.ObserveMain(first);
+		}, enabled : true,
+		tooltip : "Just wait and see what Lei does for now. If he’s following the couple, maybe they’ll show up here too."
+	});
+	options.push({ nameStr : "Leave",
+		func : function() {
+			Text.Clear();
+			Text.Add("On second thought, you decide, it's probably not worth bothering with him just now. The issue of him and the couple can wait until later.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		}, enabled : true,
+		tooltip : "You don’t feel quite ready to deal with his stalking yet. Perhaps you’ll come back to it another time."
+	});
+	Gui.SetButtonsFromList(options);
 }
 
 Scenes.Lei.ExplanationMain = function() {
@@ -406,13 +416,11 @@ Scenes.Lei.ExplanationMain = function() {
 		
 	};
 	
-	lei.flags["Met"] = 4;
-	
 	Text.Clear();
 	
 	Text.Add("<i>\"Ask what you will,\"</i> Lei tells you.", parse);
 	Text.NL();
-	Text.Add("Deciding to get right to the point, you ask him why he was following the couple when they left the castle grounds.", parse);
+	Text.Add("Deciding to get right to the point, you ask him why he was following the couple when they left the inner district.", parse);
 	Text.NL();
 	Text.Add("<i>\"I am their bodyguard,\"</i> he answers simply. <i>\"And, I suppose, their... chaperone.\"</i>", parse);
 	Text.NL();
@@ -481,6 +489,7 @@ Scenes.Lei.ExplanationMain = function() {
 		}, enabled : true,
 		tooltip : "Wait for the well-dressed couple you saw earlier and try to meet them."
 	});
+	/*
 	options.push({ nameStr : "Leave",
 		func : function() {
 			Text.Clear();
@@ -491,24 +500,40 @@ Scenes.Lei.ExplanationMain = function() {
 		}, enabled : false, //TODO TEMP
 		tooltip : "The couple is safe, and you have other things to do. Maybe you'll meet them another time."
 	});
+	*/
 	Gui.SetButtonsFromList(options);
 }
 
-Scenes.Lei.ObserveMain = function() {
+Scenes.Lei.ObserveMain = function(first) {
 	var parse = {
 		drink : party.Alone() ? "a drink" : "some drinks"
 	};
 	
-	lei.flags["Met"] = 4;
+	if(party.Two()) {
+		parse["comp"]  = " with " + party.Get(1).name;
+		parse["comp2"] = ", while chatting idly with " + party.Get(1).name;
+	}
+	else if(!party.Alone()) {
+		parse["comp"]  = " with your companions";
+		parse["comp2"] = ", while chatting idly with your companions";
+	}
+	else {
+		parse["comp"]  = "";
+		parse["comp2"] = "";
+	}
 	
-	if(party.Two())
-		parse["comp"] = ", while chatting idly with " + party.Get(1).name;
-	else if(!party.Alone())
-		parse["comp"] = ", while chatting idly with your companions";
-	else
-		parse["comp"] = "";
-					
-	Text.Add("You sit down and settle in to wait for Lei to make a move, ordering [drink]. Some time passes, while you keep watch of his general vicinity to make sure he hasn't moved[comp]. You aren't quite sure if he's noticed you observing him or not, as his eyes keep drifting generally over the crowd in an unchanged pattern.", parse);
+	if(first) {
+		Text.Add("Somehow, after talking to the man, you don’t feel like asking him after all. He probably wouldn’t answer anyway - it’ll be easier to find out for yourself.", parse);
+		Text.NL();
+		Text.Add("You murmur a goodbye and leave Lei’s table, making your way towards the middle of the common room. You pick out a seat at an empty table and settle in[comp]. It might be a little obvious you’re keeping track of him, but you figure there’s not much he can do about it.", parse);
+		Text.NL();
+		Text.Add("You", parse);
+	}
+	else {
+		Text.Add("Taking a seat, you settle in to wait for Lei to make a move, and", parse);
+	}
+	
+	Text.Add(" order [drink]. Some time passes, while you keep watch of his general vicinity to make sure he hasn't moved[comp2]. You aren't quite sure if he's noticed you observing him or not, as his eyes keep drifting generally over the crowd in an unchanged pattern.", parse);
 	Text.NL();
 
 	// TODO #-drinks cost
@@ -642,6 +667,7 @@ Scenes.Lei.RequestMain = function() {
 	TalkPrompt();
 }
 
+/* TODO Unused?
 Scenes.Lei.InnFirstPrompt = function() {
 	var parse = {
 		
@@ -715,98 +741,27 @@ Scenes.Lei.InnFirstPrompt = function() {
 		});
 	}
 }
-
-Scenes.Lei.InnFirstLeaving = function() {
-	var parse = {
-		playername : player.name,
-		name       : kiakai.name
-	};
-	
-	if(party.Two())
-		parse["comp"] = " with " + party.Get(1).name;
-	else if(!party.Alone())
-		parse["comp"] = " with your companions";
-	else
-		parse["comp"] = "";
-		
-	Text.Add("You tell him you are going, and he nods at your words, seemingly already having forgotten your presence.", parse);
-	Text.NL();
-	Text.Add("As you find an empty table to sit at[comp], you glance back at Lei, and, to your surprise, find him looking toward the staircase that leads to the rooms.", parse);
-	Text.NL();
-	Text.Add("As your own eyes are also drawn toward it, you see a couple descending, holding hands. The two look quite young and are of a height. The man is wearing the slightly baggy style of clothes popular among the merchants, with plenty of lace along the cuffs, his partner wearing an elegant dress, and blushing prettily. The hair of both is an unusual shade of red you've only rarely seen in the city.", parse);
-	Text.NL();
-	Text.Add("They pass Lei's table, apparently unaware of his presence, as he follows them with his gaze. After they're a few tables past him, you see him stand up and follow them, apparently being careful to keep his distance.", parse);
-	Text.NL();
-	Text.Add("Suspicions swirl in your mind. You didn't think he was here to do anything bad, but perhaps your impression was wrong. What does he intend? Was he only sitting there because he was waiting for those two to ambush them for some reason? You shift in indecision, wondering whether your should follow him.", parse);
-	Text.Flush();
-	
-	
-	if(party.Two())
-		parse["comp"] = ", motioning for " + party.Get(1).name + " to follow,";
-	else if(!party.Alone())
-		parse["comp"] = ", motioning for your companions to follow,";
-	else
-		parse["comp"] = "";
-	
-	//[Sure][Nah]
-	var options = new Array();
-	options.push({ nameStr : "Follow",
-		func : function() {
-			Text.Clear();
-			Text.Add("You decide that you really should make sure that the cute-looking couple is alright. Besides, your curiosity is a piqued by Lei's sneaky behavior. Even if there's nothing to it, you might learn something to your advantage.", parse);
-			Text.NL();
-			Text.Add("You stand up, and[comp] head out the door. Unfortunately, it took you a little while to decide, and it takes you a few extra moments to push through the crowded inn. By the time you pull open the door and step outside, there is no sign of either Lei or the pair you had seen him following. You curse silently to yourself, but decide it would be fruitless to run searching for them down the streets. You resolve to investigate further the next time you see either him or them, and return to the inn for now.", parse);
-			if(party.InParty(kiakai)) {
-				Text.NL();
-				Text.Add("<i>\"I do hope they are alright, [playername],\"</i> [name] speaks up beside you. <i>\"It was good of you to wish to check on them.\"</i>", parse);
-				kiakai.relation.IncreaseStat(100,2);
-			}
-			// TODO other reactions
-			Text.Flush();
-			Gui.NextPrompt();
-		}, enabled : true,
-		tooltip : "Follow Lei to see what he's up to."
-	});
-	options.push({ nameStr : "Stay",
-		func : function() {
-			Text.Clear();
-			Text.Add("You decide it's not worth the trouble following Lei. It's unlikely the couple will be in any danger in the middle of the city, and you suspect it could be dangerous to oppose Lei in any case.", parse);
-			if(party.InParty(gwendy)) {
-				Text.NL();
-				Text.Add("Gwendy reaches over and pats you on the shoulder. <i>\"It's not worth following that man,\"</i> she says. <i>\"He looks way too dangerous for us to go sticking our necks out for some strangers.\"</i>", parse);
-				gwendy.relation.IncreaseStat(100,2);
-			}
-			// TODO other reactions
-			Text.Flush();
-			Gui.NextPrompt();
-		}, enabled : true,
-		tooltip : "Let Lei go, it's not worth the trouble."
-	});
-	Gui.SetButtonsFromList(options);
-	
-	// lock encounter until next day
-	lei.timeout = new Time(0, 0, 0, 24 - world.time.hour);
-}
+*/
 
 world.loc.Rigard.Inn.common.events.push(new Link(
 	function() {
-		return lei.flags["Met"] >= 3 ? "Lei" : "Stranger";
-	}, function() { return lei.IsAtLocation(world.loc.Rigard.Inn.common) && rigard.flags["RoyalAccessTalk"] > 0; }, true,
+		return lei.flags["Met"] >= Lei.Met.KnowName ? "Lei" : "Stranger";
+	}, function() { return lei.IsAtLocation(world.loc.Rigard.Inn.common); }, rigard.flags["RoyalAccessTalk"] > 0,
 	function() {
 		if(lei.IsAtLocation(world.loc.Rigard.Inn.common)) {
-			if(lei.flags["Met"] < 2) {
-				Text.Add("You notice a man sitting in the corner of the room on his own, a hood covering his face. There are a few others alone, a few others concealing their faces, but what seems to draw your eye the most is his stillness. Whereas all others in the tavern are motion, he sits completely still, his only movements the occasional tilt of his head, as he seems to scan the room, and the movement of his hand as he nurses some drink in a dark glass. Everything about him works to pique your curiosity.");
-				lei.flags["Met"] = 1;
+			if(lei.flags["Met"] < Lei.Met.SeenGates) {
+				Text.Add("You notice a man sitting in the corner of the room on his own, a hood covering his face. There are a few others alone, a few others concealing their faces, but what draws your eye the most is his stillness. Whereas all others in the tavern are motion, he sits completely still, his only movements the occasional tilt of his head, as he seems to scan the room, and the movement of his hand as he nurses some drink in a dark glass. Everything about him works to pique your curiosity, but you can’t quite come up with a reason to approach him.");
+				lei.flags["Met"] = Lei.Met.SeenInn;
 			}
-			else if(lei.flags["Met"] == 2)
-				Text.Add("Again, you see the same stranger at his former table. You still do not see his face, but this time you spot a long sword resting against his chair, mostly hidden by the table and his body. You wonder if he's someone who could assist you.");
-			else if(lei.flags["Met"] == 3)
-				Text.Add("You see Lei back at his table in the corner of the room. He seems to be scanning the room much as he was last time. You quietly wonder to yourself what happened between him and that couple.");
+			else if(lei.flags["Met"] == Lei.Met.SeenGates)
+				Text.Add("You notice a man sitting in the corner of the room on his own, a hood hiding his face. His clothes are the same dark shade as that of the man you saw following the couple earlier, and something about his still watchfulness makes you suspicious. Perhaps you should approach him and investigate.");
+			else if(lei.flags["Met"] == Lei.Met.KnowName)
+				Text.Add("You see Lei back at his table in the corner of the room. He seems to be scanning the room much as he was last time. Perhaps it’s time to make a concerted effort to find out what his connection is with that couple.");
 			else
 				Text.Add("You see Lei sitting in the corner of the room, nursing his habitual drink. He seems vigilant, as always, scanning the room slowly between sips.");
 			Text.NL();
 		}
-		else if(lei.flags["Met"] >= 3) {
+		else if(lei.flags["Met"] >= Lei.Met.KnowName) {
 			Text.Add("Lei is not in his usual spot.");
 			Text.NL();
 		}
