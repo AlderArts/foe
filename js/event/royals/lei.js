@@ -746,7 +746,7 @@ Scenes.Lei.InnFirstPrompt = function() {
 world.loc.Rigard.Inn.common.events.push(new Link(
 	function() {
 		return lei.flags["Met"] >= Lei.Met.KnowName ? "Lei" : "Stranger";
-	}, function() { return lei.IsAtLocation(world.loc.Rigard.Inn.common); }, rigard.flags["RoyalAccessTalk"] > 0,
+	}, function() { return lei.IsAtLocation(world.loc.Rigard.Inn.common); }, function() { return rigard.flags["RoyalAccessTalk"] > 0; },
 	function() {
 		if(lei.IsAtLocation(world.loc.Rigard.Inn.common)) {
 			if(lei.flags["Met"] < Lei.Met.SeenGates) {
