@@ -2829,7 +2829,7 @@ Scenes.Terry.SexFuckButtEntrypoint = function(p1Cock, promise, retFunc) {
 			Text.NL();
 			Text.Add("Whether the [foxvixen] thief interprets that as an actual order or not, you don’t know. All that you know is the vice-like tightness of [hisher] ass, as [heshe] moans whorishly.", parse);
 			if(terry.FirstVag()) {
-				parse[b] = player.HasBalls() ? player.BallsDesc() : player.ThighsDesc();
+				parse["b"] = player.HasBalls() ? player.BallsDesc() : player.ThighsDesc();
 				Text.Add(" You can feel [hisher] pussy contracting to grip at a phantom member as your [b] are plastered with a squirt of warm feminine juices.", parse);
 			}
 			if(terry.HorseCock())
