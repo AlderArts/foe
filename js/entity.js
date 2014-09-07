@@ -1234,6 +1234,10 @@ Entity.prototype.MilkFull = function() {
 	// TODO Output
 }
 
+Entity.prototype.PregHandler = function() {
+	return this.pregHandler;
+}
+
 Entity.prototype.PregnancyOverTime = function(hours) {
 	this.pregHandler.Update(hours);
 }

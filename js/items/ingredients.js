@@ -659,3 +659,20 @@ Items.Fertilium.PushEffect(function(target) {
 	}
 	Text.Flush();
 });
+
+
+
+//TODO Effects
+Items.Testos = new TFItem("sex2", "Testos");
+Items.Testos.price = 100;
+Items.Testos.lDesc = function() { return "a bottle of Testos"; }
+Items.Testos.Short = function() { return "A bottle of Testos"; }
+Items.Testos.Long = function() { return "A bottle of pure masculinity labled Testos."; }
+Items.Testos.Recipe = [{it: Items.Equinium}, {it: Items.Homos}, {it: Items.Canis}];
+
+Items.Estros = new TFItem("sex3", "Estros");
+Items.Estros.price = 100;
+Items.Estros.lDesc = function() { return "a bottle of Estros"; }
+Items.Estros.Short = function() { return "A bottle of Estros"; }
+Items.Estros.Long = function() { return "A bottle of pure femininity labled Estros."; }
+Items.Estros.Recipe = [{it: Items.Vulpinix}, {it: Items.Homos}, {it: Items.Bovia}];

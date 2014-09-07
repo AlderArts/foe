@@ -93,13 +93,23 @@ Scenes.Jeanne.Interact = function() {
 	}
 	
 	Text.Flush();
-	
+	Scenes.Jeanne.InteractPrompt();
+}
+
+Scenes.Jeanne.InteractPrompt = function() {
+	var parse = {};
 	//[Talk][Golem][Sex]
 	var options = new Array();
 	options.push({ nameStr : "Talk",
 		func : Scenes.Jeanne.Talk, enabled : true,
 		tooltip : "Seek the magician's advice."
 	});
+	if(party.InParty(terry) && terry.flags["TF"] & Terry.TF.Jeanne) {
+		options.push({ nameStr : "Terry TF",
+			func : Scenes.Terry.JeanneTF, enabled : true,
+			tooltip : "Ask Jeanne to help you make some transformatives for Terry."
+		});
+	}
 	/*
 	options.push({ nameStr : "Nah",
 		func : function() {
@@ -119,7 +129,7 @@ Scenes.Jeanne.Talk = function() {
 		playername : player.name
 	};
 	
-	//[Gem][Magic][Alchemy][Elves][Jeanne][Golem][Rosalin]
+	//[Gem][Magic][Alchemy][Elves][Jeanne][Golem][Rosalin][Terry]
 	var options = new Array();
 	options.push({ nameStr : "Gem",
 		func : function() {
@@ -310,19 +320,19 @@ Scenes.Jeanne.Talk = function() {
 		}, enabled : true,
 		tooltip : "Ask Jeanne for her story."
 	});
+	parse["himher"] = terry.himher();
+	if(party.InParty(terry) && terry.flags["TF"] & Terry.TF.TriedItem && !(terry.flags["TF"] & Terry.TF.Jeanne)) {
+		options.push({ nameStr : "Terry",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>Sure, what would you like me to prepare?</i>", parse);
+				Text.Flush();
+				Scenes.Terry.JeanneTFPrompt();
+			}, enabled : true,
+			tooltip : Text.Parse("Ask Jeanne if she can help you with Terry’s collar, and figure out why it seems to make [himher] immune to transformative effects.", parse)
+		});
+	}
 	/*
-	options.push({ nameStr : "Terry",
-		func : function() {
-			Text.Clear();
-			Text.Add("", parse);
-			Text.NL();
-			Text.Flush();
-			
-			
-			Scenes.Jeanne.Talk();
-		}, enabled : true,
-		tooltip : ""
-	});
 	options.push({ nameStr : "Golem",
 		func : function() {
 			Text.Clear();
@@ -363,7 +373,7 @@ Scenes.Jeanne.Talk = function() {
 		});
 	}
 	
-	Gui.SetButtonsFromList(options, true, Scenes.Jeanne.Interact);
+	Gui.SetButtonsFromList(options, true, Scenes.Jeanne.InteractPrompt);
 }
 
 Scenes.Jeanne.First = function() {

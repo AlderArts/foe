@@ -67,6 +67,7 @@ function Terry(storage) {
 	this.flags["breasts"] = Terry.Breasts.Flat;
 	this.flags["Rogue"] = 0;
 	this.flags["TF"] = Terry.TF.NotTried;
+	this.flags["TFd"] = 0;
 	
 	this.sbombs = 3;
 	this.hidingSpot = world.loc.Rigard.ShopStreet.street;
@@ -78,10 +79,11 @@ Terry.prototype.constructor = Terry;
 
 //Note: bitmask
 Terry.TF = {
-	NotTried  : 0,
-	TriedItem : 1,
-	Rosalin   : 2,
-	Jeanne    : 4
+	NotTried   : 0,
+	TriedItem  : 1,
+	Rosalin    : 2,
+	Jeanne     : 4,
+	JeanneUsed : 8
 }
 Terry.Met = {
 	NotMet  : 0,
@@ -2980,4 +2982,525 @@ Scenes.Terry.RosalinTF = function() {
 	Gui.NextPrompt();
 }
 
+Scenes.Terry.JeanneTFFirst = function() {
+	var parse = {
+		foxvixen : terry.mfPronoun("fox", "vixen")
+	};
+	parse = terry.ParserPronouns(parse);
+	
+	Text.Clear();
+	Text.Add("You ask Jeanne if she recognizes this collar, you point at the collar around Terry’s neck.", parse);
+	Text.NL();
+	Text.Add("<i>”Hmm? Yes, I made them. Pretty nice, don’t you think?”</i> she smiles.", parse);
+	Text.NL();
+	Text.Add("Yes, she did a wonderful job on it, you assure her. Best to keep her in a good mood for this, after all. You then explain you had a question; you attempted to transform Terry here, but the collar basically stopped the transformation from happening. Is it supposed to do that?", parse);
+	Text.NL();
+	Text.Add("<i>”Yes, certain transformatives and alchemical substances can interfere with the collar’s magic, something that can have disastrous consequences for the wearer. So I’ve put an enchantment on it to deal with this kind of risk. If you try to take a transformative wearing the collar, the collar will nullify all of the item’s transformative properties,”</i> she explains. <i>”So, if you want to use a transformative you have to take it off first.”</i>", parse);
+	Text.NL();
+	Text.Add("Looking at Terry for a moment, you then ask if there is any possible way that you could apply a transformative to Terry without taking the collar off first. ", parse);
+	if(terry.Relation() >= 60)
+		Text.Add("You trust Terry's loyalty without question, you know [heshe] would never leave you, but the two of you really prefer that [heshe] keeps the collar on.", parse);
+	else if(terry.Relation() >= 30)
+		Text.Add("Terry's gotten a lot better since you first 'recruited' [himher], but still, you're not entirely certain you'd trust [himher] not to run away of you took the collar off.", parse);
+	else
+		Text.Add("You have little doubt that if you removed Terry's collar, the [foxvixen] would bolt for freedom, after all.", parse);
+	Text.NL();
+	Text.Add("<i>”Then I suppose you’re in a dilemma,”</i> she states nonchalantly.", parse);
+	Text.NL();
+	Text.Add("Please, does she have any ideas how to solve this? You're sure someone as smart as her must have some inklings on how to pull it off - you really would appreciate it.", parse);
+	Text.NL();
+	Text.Add("<i>”Well...”</i> she trails off, tapping her lips. <i>”I can probably come up with something, but it’ll cost you, plus I’ll need some materials.”</i>", parse);
+	Text.NL();
+	Text.Add("That's certainly alright with you, it's about what you expected. You thank her for doing this for you, and then ask if there's anything else she needs to tell you about these specialised transformatives.", parse);
+	Text.NL();
+	Text.Add("<i>”I can’t prepare just any kind of transformative like this, but having some options beats having none, I think. Of course, you could always cave and just remove the collar,”</i> she smiles.", parse);
+	Text.NL();
+	Text.Add("You tell her that you'll keep that in mind.", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 30});
+	terry.flags["TF"] |= Terry.TF.Jeanne;
+	
+	Scenes.Jeanne.Talk();
+}
 
+Terry.JeanneTFCost = function() {
+	return 50;
+}
+Scenes.Terry.JeanneTFPrompt = function() {
+	var parse = {
+		
+	};
+	parse = terry.ParserPronouns(parse);
+	
+	//[name]
+	var options = new Array();
+	
+	var AddItem = function(item, scene, name, tooltip, costmult, enabled) {
+		options.push({ nameStr : name || item.name,
+			func : function(obj) {
+				parse["item"] = obj.str;
+				var coin = obj.mult * Terry.JeanneTFCost();
+				parse["coin"] = Text.NumToText(coin);
+				
+				var horseTF = false; //TODO
+				
+				Text.Clear();
+				Text.Add("<i>”For [item], I’ll need these ingredients, plus [coin] coins,”</i> she says, showing you a scroll of what she’ll be needing.", parse);
+				if(terry.PregHandler().IsPregnant() && item == Items.Testos) {
+					Text.NL();
+					Text.Add("<i>”Sorry, [playername]. But trying to modify [hisher] pussy while [heshe]’s still pregnant could have disastrous consequences both for [himher] and the baby. So I’m going to have to refuse to do so until Terry’s had the baby.”</i>", parse);
+					Text.NL();
+					Text.Add("Jeanne has a point, looks like you’ll have to wait until Terry has [hisher] baby.", parse);
+					Text.Flush();
+					Scenes.Terry.JeanneTFPrompt();
+				}
+				else {
+					Text.Flush();
+					
+					//[name]
+					var options = new Array();
+					options.push({ nameStr : "Craft",
+						func : function() {
+							party.coin -= coin;
+							party.Inv().RemoveItem(item);
+							Scenes.Terry.JeanneTFCraft(obj.item, obj.scene, horseTF);
+						}, enabled : coin >= party.coin,
+						tooltip : Text.Parse("Craft the potion for [coin] coins.", parse)
+					});
+					Gui.SetButtonsFromList(options, true, Scenes.Terry.JeanneTFPrompt);
+				}
+			}, enabled : enabled && party.Inv().QueryNum(item) > 0,
+			obj : {
+				str   : item.sDesc(),
+				mult  : costmult || 1,
+				item  : item,
+				scene : scene
+			},
+			tooltip : tooltip
+		});
+	};
+	
+	//TODO items?
+	AddItem(Items.Bovia,     Scenes.Terry.JeanneTFGrowBoobs,     "Grow boobs", "", 1);
+	AddItem(Items.Lacertium, Scenes.Terry.JeanneTFShrinkBoobs,   "Shrink boobs", "", 1);
+	AddItem(Items.Bovia,     Scenes.Terry.JeanneTFStartLactate,  "Lactate+", "", 1);
+	AddItem(Items.Lacertium, Scenes.Terry.JeanneTFStopLactate,   "Lactate-", "", 1);
+	AddItem(Items.Estros,    Scenes.Terry.JeanneTFGrowVag,       "Add pussy", "", 2);
+	AddItem(Items.Testos,    Scenes.Terry.JeanneTFRemVag,        "Rem pussy", "", 1, terry.FirstVag());
+	AddItem(Items.Testos,    Scenes.Terry.JeanneTFGrowCock,      "Add cock", "", 2);
+	AddItem(Items.Estros,    Scenes.Terry.JeanneTFRemCock,       "Rem cock", "", 1, terry.FirstCock());
+	AddItem(Items.Equinium,  Scenes.Terry.JeanneTFGrowHorsecock, "Horsecock", "", 5);
+	
+	Gui.SetButtonsFromList(options, true, Scenes.Jeanne.InteractPrompt);
+}
+
+Scenes.Terry.JeanneTFCraft = function(item, scene, horseTF) {
+	var parse = {
+		playername : player.name,
+		lowerArmorDesc : function() { return player.LowerArmorDesc(); },
+		foxvixen   : terry.mfPronoun("fox", "vixen"),
+		boygirl    : terry.mfPronoun("boy", "girl"),
+		armorDesc  : function() { return terry.ArmorDesc(); },
+		terrycock  : function() { return terry.MultiCockDesc(); },
+		terrypussy : function() { return terry.FirstVag().Short(); }
+	};
+	parse = terry.ParserPronouns(parse);
+	
+	terry.flags["TFd"]++;
+	
+	Text.Clear();
+	Text.Add("Jeanne smiles as she takes the necessary ingredients from you, as well as the coins. <i>”Wait here, I’ll be right back.”</i>", parse);
+	Text.NL();
+	Text.Add("The elven mage moves about her room, collecting the materials she’ll need and setting them all up on a clear spot at a table nearby. Jeanne begins by taking the ingredients you’ve given and pouring them all into a bowl. She mixes it until she has worked the mix into an oddly-colored soup. Afterwards, she immediately pours the soup into a distill and starts the distilling process with a flick of her finger.", parse);
+	Text.NL();
+	Text.Add("While waiting for the process to finish, she opens a box nearby and takes out a strange-looking vial. It is about three inches long and one inch thick, ending in a rounded-out tip. She plugs the open vial to the end of the distill and sits back to watch the process conclude.", parse);
+	Text.Flush();
+	
+	//TODO
+	Gui.NextPrompt(function() {
+		Text.Clear();
+		if(horseTF) {
+			Text.Add("Once it’s over, she closes the vial and utters something under her breath, making the vial glow briefly. <i>”Sorry, but I can’t really shrink this one, so your [foxvixen] will have to settle for taking a big one this time,”</i> Jeanne explains, handing you the sealed vial.", parse);
+		}
+		else {
+			Text.Add("Once it’s over, she closes the vial and utters something under her breath, making the vial glow and shrink. She tests the seal to make sure it’s solid, then presents it to you. <i>”Here you go.”</i> You accept it, turning it over in your hand. After the magic has done its work, the vial is only a fraction of its former size.", parse);
+		}
+		
+		world.TimeStep({hour : 1});
+		
+		if(terry.flags["TF"] & Terry.TF.JeanneUsed) {
+			Text.Add(" You thank her and take the capsule. So… you just feed Terry the capsule? Is that all it takes?", parse);
+			Text.NL();
+			Text.Add("<i>”Well, if you feed it to [himher] normally the collar will just counteract the transformative again. I did what I could to hide the elements detected by the collar, but the truth is that if the collar detects it, it’ll still nullify the effects.”</i>", parse);
+			Text.NL();
+			Text.Add("How are you supposed to give it to [himher] then?", parse);
+			Text.NL();
+			Text.Add("<i>”Anally,”</i> she says nonchalantly. <i>”That is a suppository, so just shove it in and it’ll work its magic. Don’t worry about the vial itself, the spell on it will dissolve it harmlessly.”</i>", parse);
+			Text.NL();
+			if(terry.Slut() < 5)
+				Text.Add("<i>”What!? I’m not shoving that up my ass!”</i> Terry immediately protests.", parse);
+			else if(terry.Slut() < 30)
+				Text.Add("<i>”Tch, at least it won’t be as bad as a dick….”</i> Terry mumbles, not thrilled by the idea at all.", parse);
+			else {
+				Text.Add("<i>”Well, if that’s what it takes, I suppose I’m fine with it. Not like I haven’t taken bigger.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>”Oh? Would you like me to increase it’s size? I can make it as big as-”</i> Jeanne starts.", parse);
+				Text.NL();
+				Text.Add("<i>”Small is fine!”</i> Terry interrupts Jeanne. The elven mage just shrugs.", parse);
+			}
+			Text.NL();
+			Text.Add("You thank Jeanne once again, applying this should be interesting…", parse);
+		}
+		else
+			Text.Add(" You take the capsule and look at Terry.", parse);
+		Text.NL();
+		
+		terry.flags["TF"] |= Terry.TF.JeanneUsed;
+		
+		if(terry.Slut() < 5) {
+			Text.Add("<i>”Do I really have to?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“It’s an order,”</i> you reply. As soon as you say the words the collar tightens in warning, a faint glow emanating from the enchanted leather.", parse);
+			Text.NL();
+			Text.Add("Terry sighs in defeat. <i>”I hate this...”</i> [heshe] mumbles. Without further ado [heshe] begins stripping off [hisher] [armorDesc].", parse);
+		}
+		else if(terry.Slut() < 30) {
+			Text.Add("The [foxvixen] rolls [hisher] eyes, but complies with the unspoken command. [HeShe] strips off [hisher] [armorDesc]. <i>”Let’s just get this over with...”</i>", parse);
+		}
+		else {
+			Text.Add("<i>”Alright, no need to say anything,”</i> [heshe] raises a hand waving dismissively as [heshe] begins undoing [hisher] [armorDesc].", parse);
+		}
+		Text.NL();
+		Text.Add("You watch patiently as Terry removes the last of [hisher] clothes and folds them carefully, setting them aside. Turning to look at you expectantly, [heshe] says. <i>”I’m ready… now what?”</i>", parse);
+		Text.NL();
+		if(terry.Relation() + terry.Slut() >= 60) {
+			parse["milkdripping"] = terry.Lactation() ? " milk-dripping" : "";
+			Text.Add("There’s a definite air of excitement in the [foxvixen]’s body language,[milkdripping] nipples erect through [hisher] fur.", parse);
+			if(terry.FirstCock())
+				Text.Add(" [HisHer] [terrycock] is jutting out of its sheath, as if in anticipation.", parse);
+			if(terry.FirstVag())
+				Text.Add(" [HisHer] [terrypussy] is visibly wet, a small stream leaking down the inside of [hisher] thighs.", parse);
+			Text.NL();
+			Text.Add("Looks like your little [foxvixen] is looking forward to doing some bodywork, you quip, reaching out to affectionately tussle [hisher] ears,", parse);
+			Text.NL();
+			if(terry.Relation() >= 60) {
+				Text.Add("<i>”You can’t expect me to strip in front of my [boygirl]friend and <b>not</b> get at least a bit antsy,”</i> [heshe] says, flustered and pouting as [heshe] averts [hisher] gaze in embarrassment.", parse);
+				Text.NL();
+				Text.Add("Smiling at [hisher] confession, you gently lift [hisher] chin and steal a quick kiss, assuring [himher] that’s part of [hisher] considerable charms. [HeShe] smiles at that, tail wagging softly behind.", parse);
+			}
+			else {
+				Text.Add("<i>”So what if I am? It’s your fault I’m like this...”</i> [heshe] mumbles, averting [hisher] gaze with a slight frown.", parse);
+				Text.NL();
+				Text.Add("You just smirk and shake your head good-naturedly; [hisher] lips may say one thing, but [hisher] body tells the real story, no matter how much the [foxvixen] may want to deny it.", parse);
+				Text.NL();
+				Text.Add("<i>”That’s not...”</i> [heshe] starts, but quickly falls silent with a resigned sigh. <i>”Look, are you going to get on with it or are you just here to bully me?”</i> [heshe] asks indignantly.", parse);
+			}
+			Text.NL();
+		}
+		Text.NL();
+		Text.Add("With one hand on [hisher] hip and the other on [hisher] shoulder, it’s a matter of moments for you to gently spin Terry around and give [himher] a gentle push. Effortlessly, the vulpine morph falls forward into [hisher] knees. Another gentle push and a command is all you need to make [himher] go on fours, tail swept aside around [hisher] hip and buttocks raised slightly for better access to [hisher] tailhole. <i>”O-Okay, please be gentle.”</i>", parse);
+		Text.NL();
+		if(terry.flags["TFd"] > 5)
+			Text.Add("Playfully you chide [himher]; you’re always gentle with your special [foxvixen], [heshe] knows that.", parse);
+		else
+			Text.Add("You assure [himher] that you’ll be as gentle as you can.", parse);
+		Text.NL();
+		Text.Add("Kneeling down for a better view, you admire the shapely, feminine ass now lifted before you. Terry’s tail twitches, and unthinkingly you move to stroke the long appendage with its soft, fluffy fur. A few caresses of the plush tail, and then it’s back to business, and you resume studying Terry’s butt, your gaze drawn to the pronounced love-heart shape of pure gold set against the creamy white of the rest of [hisher] asscheeks.", parse);
+		Text.NL();
+		
+		if(terry.flags["BM"] == 0) {
+			terry.flags["BM"] = 1;
+			Text.Add("You can’t resist teasing Terry about [hisher] ‘birthmark’; who’d have thought [heshe] would have something so cute on [hisher] body, nevermind it being there of all places?", parse);
+			Text.NL();
+			Text.Add("<i>”S-Stop teasing me- Ah!”</i> [heshe] jumps when you touch the patch. <i>”Don’t touch it! It’s embarrassing!”</i> [heshe] protests weakly, cheeks burning so hot you can feel the heat from this distance.", parse);
+			Text.NL();
+			Text.Add("Seems like you found a weak spot, you think to yourself. ", parse);
+		}
+		else {
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("Unable to resist yourself, you poke [himher] playfully right in the center of the heart-shape, feeling [hisher] buttflesh giving under the pressure of your finger.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("You gently trail your finger around the heart’s shape, following the lines until you have traced the shape completely.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("Struck by an impulse, you bend in closer and plant a soft kiss on the golden-furred patch.", parse);
+			}, 1.0, function() { return true; });
+			Text.NL();
+			Text.Add("[HeShe] gasps softly at your touch. <i>”Don’t tease me like that!”</i> [heshe] protests.", parse);
+			Text.NL();
+			Text.Add("With a soft chuckle at how worked up [heshe] can get over something so small, you offer the [foxvixen] a half-hearted apology, asserting that you just couldn’t resist such a tempting target.", parse);
+			Text.NL();
+			Text.Add("<i>”Meanie...”</i>", parse);
+			
+			scenes.Get();
+		}
+		Text.NL();
+		Text.Add("<i>”This might help,”</i> Jeanne says, handing you a small tube with a clear gel inside. You thank her for the lube as she steps away. Now then… time to get started.", parse);
+		Text.NL();
+		Text.Add("Applying lube to your fingers, you begin to softly massage Terry’s tailhole, tracing your gel-caked digits around and around [hisher] ring before starting to working your fingertips inside. The [foxvixen]’s tail flutters as [heshe] represses the urge to wave it, whole body shivering from your touch even as [heshe] bites back any sounds of pleasure. As the lube begins to work and more and more of your finger slides inside, you start to pump away, getting [himher] ready for the insertion you’ll be making shortly.", parse);
+		if(terry.FirstCock())
+			Text.Add(" You have a front-row seat to watch Terry’s [terrycock] grow to full mast, hard and aching to be used.", parse);
+		if(terry.FirstVag())
+			Text.Add(" From where you are, you can see quite clearly as Terry’s [terrypussy] flushes with arousal, netherlips growing more prominent through [hisher] fur, aroused fluids starting to drip from its folds.", parse);
+		Text.NL();
+		Text.Add("Looks like [heshe]’s enjoying [himher]self, you say, smiling even as you continue to finger the [foxvixen].", parse);
+		Text.NL();
+		if(terry.Slut() < 30) {
+			Text.Add("<i>”J-Just shut it and get this done with!”</i> [heshe] quips back.", parse);
+			Text.NL();
+			Text.Add("Temper, temper, you chide [himher]. Still, you have other things to do, so you focus your attention on finishing the lubing. Plenty of time to tease Terry later.", parse);
+		}
+		else {
+			Text.Add("<i>”Yeah… it feels nice,”</i> [heshe] admits.", parse);
+			if(terry.Relation() >= 60) {
+				Text.Add(" <i>”We should continue this later, alone,”</i> [heshe] says, casting a glance at the smiling Jeanne.", parse);
+				Text.NL();
+				Text.Add("You smirk and inform [himher] that you’ll hold [himher] up to that, leisurely continuing to lube Terry’s asshole.", parse);
+			}
+		}
+		Text.NL();
+		Text.Add("Finally, you deem Terry’s tush to be as ready as it’ll ever be. Giving Jeanne back her lube, you reach for the transformative suppository she gave you earlier, align it with Terry’s anus, and start to gently push it against [hisher] pucker.", parse);
+		Text.NL();
+		
+		Gui.Callstack.push(function() {
+			Text.NL();
+			Text.Add("The [foxvixen] gets up on [hisher], awaiting whatever effect the suppository is supposed to have on [himher]self.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(scene);
+		});
+		
+		if(horseTF) {
+			Text.Add("<i>”I-It’s too big!”</i> Terry protests as you try to shove the suppository up [hisher] butt.", parse);
+			Text.NL();
+			Text.Add("You try your best to comfort the [foxvixen] and get [himher] to relax, but it’s no use. Terry is just too tense to take this one, even though you stretched [himher] out just moments ago. If [heshe] doesn’t relax you’re never getting this inside.", parse);
+			Text.NL();
+			Text.Add("Sighing, you stop for a moment, considering your options. Finally an idea pops in your head. This should stretch [himher] nicely. ", parse);
+			
+			var cocksInAss = player.CocksThatFit(terry.Butt());
+			var p1Cock     = player.BiggestCock(cocksInAss);
+			
+			parse["multiCockDesc"] = function() { return player.MultiCockDesc(); }
+			parse["cockDesc"]      = function() { return p1Cock.Short(); }
+				
+			if(p1Cock) {
+				Text.Add("You strip your [lowerArmorDesc], exposing your [multiCockDesc] to air.", parse);
+				Text.NL();
+				Text.Add("<i>”[playername], what are you…!?”</i> [heshe] suddenly gasps as you nestle your [cockDesc] against [hisher] rosebud. <i>”Here!? You’re going to take me here, of all places?”</i>", parse);
+				Text.NL();
+				Text.Add("Yes, you have to stretch [himher] out. Besides, it’s not like Jeanne would mind, would she?", parse);
+				Text.NL();
+				Text.Add("<i>”Don’t mind me,”</i> the elven mage replies, taking a seat on a nearby chair, studying the fox intently.", parse);
+				Text.NL();
+				Text.Add("It’s settled then.", parse);
+			}
+			else {
+				Text.Add("You ask if Jeanne has a strap-on you could use.", parse);
+				Text.NL();
+				Text.Add("<i>”What!?”</i> Terry protests.", parse);
+				Text.NL();
+				Text.Add("<i>”Sure,”</i> she replies walking to a chest nearby.", parse);
+				Text.NL();
+				Text.Add("<i>”You can’t be serious, [playername]! You’re going to take me? Here of all places?”</i>", parse);
+				Text.NL();
+				Text.Add("Yes, you have to stretch [himher] out. Besides, it’s not like Jeanne would mind, would she?", parse);
+				Text.NL();
+				Text.Add("<i>”Don’t mind me,”</i> the elven mage replies, taking a seat on a nearby chair, studying the fox intently.", parse);
+				Text.NL();
+				Text.Add("It’s settled then. You strip off your [lowerArmorDesc] and attach the strap-on, making sure it won’t come loose. Now, about Terry’s butt...", parse);
+				p1Cock = Items.StrapOn.PlainStrapon; //TODO?
+			}
+			Text.NL();
+			
+			//TODO rough
+			Scenes.Terry.SexFuckButtEntrypoint(p1Cock, false, function(rough) {
+				Text.Add("There, now [heshe]’s all stretched up, you proudly declare, working the tip of the big suppository into [hisher] butt. <i>”A novel enough technique,”</i> Jeanne muses, idly playing with herself as she watches you.", parse);
+				Text.NL();
+				Text.Add("<i>”[playername],”</i> [heshe] says with a groan. <i>”Ya big jerk!”</i> [heshe] exclaims. moaning as you manage to insert the first few inches.", parse);
+				if(terry.Relation() >= 60) {
+					Text.Add(" <i>”I love you,”</i> [heshe] adds.", parse);
+					Text.NL();
+					Text.Add("Yes, of course [heshe] does. You love [himher] too, you reply. Now if [heshe]’ll be a good [boygirl] and take all of [hisher] medicine?", parse);
+				}
+				else {
+					Text.NL();
+					Text.Add("[HeShe] says that now, but you didn’t hear [himher] complaining while you were taking [hisher] butt.", parse);
+					Text.NL();
+					Text.Add("<i>”Doesn’t - oh! - make you any less of a jerk,”</i> [heshe] quips.", parse);
+					Text.NL();
+					Text.Add("Maybe so, but right now you need [himher] to be a good [boygirl] and take all of [hisher] medicine.", parse);
+				}
+				Text.NL();
+				Text.Add("Your only reply is a lusty moan as you manage to cram in a few more inches.", parse);
+				Text.NL();
+				Text.Add("Once you manage to get the other end of the vial past [hisher] sphincter, Terry groans and suddenly clenches [hisher] butt, a couple inches of the suppository escaping from [hisher] used butthole. Seeing no other reasonable way to push this in effectively, you align the tip of your [cockDesc] with the vial and thrust.", parse);
+				Text.NL();
+				Text.Add("Terry howls in a mixture of pain and pleasure as [hisher] butt is stretched both by the large capsule and your [cockDesc], the magic within the vial finally activating and drilling itself inside Terry’s guts. Success!", parse);
+				Text.NL();
+				Text.Add("<i>”Owowow! What happened to being gentle!?”</i> the [foxvixen] protests.", parse);
+				Text.NL();
+				Text.Add("You wouldn’t have had to do this if [heshe] wasn’t being so stubborn about taking the suppository, besides it’s not like [heshe] didn’t enjoy it, you point out.", parse);
+				Text.NL();
+				Text.Add("Despite having climaxed only moments ago", parse);
+				if(terry.FirstVag())
+					Text.Add(" [hisher] [terrypussy] is already puffed up in full arousal, wet with [hisher] juices", parse);
+				if(terry.FirstVag() && terry.FirstCock())
+					Text.Add(", and", parse);
+				if(terry.FirstCock())
+					Text.Add(" [hisher] [terrycock] is fully erect, dripping pre", parse);
+				Text.Add(".", parse);
+				Text.NL();
+				Text.Add("Terry flushes in embarrassment, averting [hisher] eyes. <i>”You really are a big meanie,”</i> [heshe] pouts.", parse);
+				Text.NL();
+				parse["armorDesc"] = function() { return player.ArmorDesc(); }
+				Text.Add("Extricating your [cockDesc], you pat [himher] gently on the flank and inform [himher] that you’re all done. Having said that you move to clean up and put your [armorDesc] back on.", parse);
+				PrintDefaultOptions();
+			});
+		}
+		else {
+			Text.Add("With a groan of arousal, Terry arches [hisher] back in unthinking pleasure as it glides smoothly inside, your fingers following it as deeply as you can fit them. Finally, you are inside [himher] to the knuckle, but you can feel the capsule continue gliding inwards, making course for Terry’s stomach.", parse);
+			Text.NL();
+			Text.Add("Extricating your digits, you pat the [foxvixen] tenderly on the flank and inform [himher] that you’re all done.", parse);
+			PrintDefaultOptions();
+		}
+	});
+}
+
+//TODO
+Scenes.Terry.JeanneTFGrowBoobs = function() {
+	var parse = {
+		playername : player.name,
+		foxvixen   : terry.mfPronoun("fox", "vixen"),
+	};
+	parse = terry.ParserPronouns(parse);
+	
+	Text.Clear();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Scenes.Jeanne.InteractPrompt();
+}
+
+Scenes.Terry.JeanneTFShrinkBoobs = function() {
+	var parse = {
+		playername : player.name,
+		foxvixen   : terry.mfPronoun("fox", "vixen"),
+	};
+	parse = terry.ParserPronouns(parse);
+	
+	Text.Clear();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Scenes.Jeanne.InteractPrompt();
+}
+
+Scenes.Terry.JeanneTFStartLactate = function() {
+	var parse = {
+		playername : player.name,
+		foxvixen   : terry.mfPronoun("fox", "vixen"),
+	};
+	parse = terry.ParserPronouns(parse);
+	
+	Text.Clear();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Scenes.Jeanne.InteractPrompt();
+}
+
+Scenes.Terry.JeanneTFStopLactate = function() {
+	var parse = {
+		playername : player.name,
+		foxvixen   : terry.mfPronoun("fox", "vixen"),
+	};
+	parse = terry.ParserPronouns(parse);
+	
+	Text.Clear();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Scenes.Jeanne.InteractPrompt();
+}
+
+Scenes.Terry.JeanneTFGrowVag = function() {
+	var parse = {
+		playername : player.name,
+		foxvixen   : terry.mfPronoun("fox", "vixen"),
+	};
+	parse = terry.ParserPronouns(parse);
+	
+	Text.Clear();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Scenes.Jeanne.InteractPrompt();
+}
+
+Scenes.Terry.JeanneTFRemVag = function() {
+	var parse = {
+		playername : player.name,
+		foxvixen   : terry.mfPronoun("fox", "vixen"),
+	};
+	parse = terry.ParserPronouns(parse);
+	
+	Text.Clear();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Scenes.Jeanne.InteractPrompt();
+}
+
+Scenes.Terry.JeanneTFGrowCock = function() {
+	var parse = {
+		playername : player.name,
+		foxvixen   : terry.mfPronoun("fox", "vixen"),
+	};
+	parse = terry.ParserPronouns(parse);
+	
+	Text.Clear();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Scenes.Jeanne.InteractPrompt();
+}
+
+Scenes.Terry.JeanneTFRemCock = function() {
+	var parse = {
+		playername : player.name,
+		foxvixen   : terry.mfPronoun("fox", "vixen"),
+	};
+	parse = terry.ParserPronouns(parse);
+	
+	Text.Clear();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Scenes.Jeanne.InteractPrompt();
+}
+
+Scenes.Terry.JeanneTFGrowHorsecock = function() {
+	var parse = {
+		playername : player.name,
+		foxvixen   : terry.mfPronoun("fox", "vixen"),
+	};
+	parse = terry.ParserPronouns(parse);
+	
+	Text.Clear();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Scenes.Jeanne.InteractPrompt();
+}

@@ -93,6 +93,10 @@ Party.prototype.InParty = function(member, reserve) {
 	return false;
 }
 
+Party.prototype.Inv = function() {
+	return this.inventory;
+}
+
 Party.prototype.SaveActiveParty = function() {
 	this.saved = [];
 	for(var i = 0; i < this.members.length; ++i)

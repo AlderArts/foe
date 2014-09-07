@@ -585,7 +585,7 @@ Scenes.Rosalin.TalkPrompt = function() {
 			tooltip : Text.Parse("You aren’t sure this is such a good idea… but ask [himher] if [heshe] can make something for Cale.", parse)
 		});
 	}
-	if(terry.flags["TF"] & Terry.TF.TriedItem && !(terry.flags["TF"] & Terry.TF.Rosalin)) {
+	if(party.InParty(terry) && terry.flags["TF"] & Terry.TF.TriedItem && !(terry.flags["TF"] & Terry.TF.Rosalin)) {
 		options.push({ nameStr : "Terry",
 			func : Scenes.Terry.RosalinTF, enabled : true,
 			tooltip : "Perhaps Rosalin can help you with Terry’s strange resistance to transformatives?"
