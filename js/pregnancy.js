@@ -89,8 +89,8 @@ PregnancyHandler.prototype.IsPregnant = function(opts) {
 	opts = opts || {};
 	var slot = opts.slot || PregnancyHandler.Slot.Vag;
 	var womb = null;
-	if     (slot <  PregnancyHandler.Slot.Butt) womb = mother.AllVags()[slot].womb;
-	else if(slot == PregnancyHandler.Slot.Butt) womb = mother.Butt().womb;
+	if     (slot <  PregnancyHandler.Slot.Butt) womb = this.entity.AllVags()[slot].womb;
+	else if(slot == PregnancyHandler.Slot.Butt) womb = this.entity.Butt().womb;
 	
 	if(womb == null)  return false;
 

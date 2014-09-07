@@ -325,7 +325,7 @@ Scenes.Jeanne.Talk = function() {
 		options.push({ nameStr : "Terry",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>Sure, what would you like me to prepare?</i>", parse);
+				Text.Add("<i>”Sure, what would you like me to prepare?”</i>", parse);
 				Text.Flush();
 				Scenes.Terry.JeanneTFPrompt();
 			}, enabled : true,
