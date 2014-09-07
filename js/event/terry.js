@@ -3123,7 +3123,7 @@ Scenes.Terry.JeanneTFPrompt = function() {
 				parse["coin"] = Text.NumToText(coin);
 				
 				Text.Clear();
-				Text.Add("<i>”For [item], I’ll need these ingredients, plus [coin] coins,”</i> she says, showing you a scroll of what she’ll be needing.", parse);
+				Text.Add("<i>”For that, I’ll need [item], plus [coin] coins,”</i> she says, showing you a scroll of what she’ll be needing.", parse);
 				if(terry.PregHandler().IsPregnant() && item == Items.Testos) {
 					Text.NL();
 					Text.Add("<i>”Sorry, [playername]. But trying to modify [hisher] pussy while [heshe]’s still pregnant could have disastrous consequences both for [himher] and the baby. So I’m going to have to refuse to do so until Terry’s had the baby.”</i>", parse);
@@ -3135,7 +3135,6 @@ Scenes.Terry.JeanneTFPrompt = function() {
 				else {
 					Text.Flush();
 					
-					//[name]
 					var options = new Array();
 					options.push({ nameStr : "Craft",
 						func : function() {
@@ -3143,14 +3142,14 @@ Scenes.Terry.JeanneTFPrompt = function() {
 							party.coin -= coin;
 							party.Inv().RemoveItem(item);
 							Scenes.Terry.JeanneTFCraft(obj.item, obj.scene, horseTF);
-						}, enabled : party.coin >= coin,
+						}, enabled : party.coin >= coin && party.Inv().QueryNum(item) > 0,
 						tooltip : Text.Parse("Craft the potion for [coin] coins.", parse)
 					});
 					Gui.SetButtonsFromList(options, true, Scenes.Terry.JeanneTFPrompt);
 				}
-			}, enabled : party.Inv().QueryNum(item) > 0,
+			}, enabled : true,
 			obj : {
-				str   : item.sDesc(),
+				str   : item.lDesc(),
 				mult  : costmult || 1,
 				item  : item,
 				scene : scene
