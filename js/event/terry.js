@@ -139,6 +139,7 @@ Terry.prototype.FromStorage = function(storage) {
 	this.LoadEffects(storage);
 	this.LoadJobs(storage);
 	this.LoadEquipment(storage);
+	this.LoadPregnancy(storage);
 	
 	// Load flags
 	this.LoadFlags(storage);
@@ -166,6 +167,7 @@ Terry.prototype.ToStorage = function() {
 	this.SaveEffects(storage);
 	this.SaveJobs(storage);
 	this.SaveEquipment(storage);
+	this.SavePregnancy(storage);
 	
 	// Save flags
 	this.SaveFlags(storage);
