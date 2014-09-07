@@ -14,6 +14,8 @@ Version 0.3m
 * Changed color of level up button to green.
 * Changed the approach gates sequence to make finding Lei more intuitive (thanks Del!). Lei's sequence has also been modified. Might result in some weirdness since I poked around at the flags.
 * Added a new scene to Magnus, if you went and learned magic from Jeanne (a pretty short thing, but things make more sense now).
+* Added TFs to Terry. This doesn't quite work the same way as usual TFs, but look around and I'm sure you'll figure out how to do it.
+ - This includes some temporary and partially implemented items. Some of these can currently ONLY be gotten through cheating (debug in the tent).
 
 --------------------------------------------
              PREVIOUS VERSIONS
