@@ -196,14 +196,14 @@ Terry.prototype.SetBreasts = function() {
 }
 Terry.prototype.SetLactation = function() {
 	if(this.flags["lact"]) {
-		terry.body.milkProduction.base = 3;
-		terry.body.lactationRate.base = 1;
-		terry.body.lactating = true;
+		this.body.milkProduction.base = 3;
+		this.body.lactationRate.base = 1;
+		this.body.lactating = true;
 	}
 	else {
-		terry.body.milkProduction.base = 0;
-		terry.body.lactationRate.base = 0;
-		terry.body.lactating = false;
+		this.body.milkProduction.base = 0;
+		this.body.lactationRate.base = 0;
+		this.body.lactating = false;
 	}
 }
 Terry.prototype.SetPussy = function() {
@@ -3115,14 +3115,12 @@ Scenes.Terry.JeanneTFPrompt = function() {
 	//[name]
 	var options = new Array();
 	
-	var AddItem = function(item, scene, name, tooltip, costmult, enabled) {
+	var AddItem = function(item, scene, name, tooltip, costmult, horseTF) {
 		options.push({ nameStr : name || item.name,
 			func : function(obj) {
 				parse["item"] = obj.str;
 				var coin = obj.mult * Terry.JeanneTFCost();
 				parse["coin"] = Text.NumToText(coin);
-				
-				var horseTF = false; //TODO
 				
 				Text.Clear();
 				Text.Add("<i>”For [item], I’ll need these ingredients, plus [coin] coins,”</i> she says, showing you a scroll of what she’ll be needing.", parse);
@@ -3150,7 +3148,7 @@ Scenes.Terry.JeanneTFPrompt = function() {
 					});
 					Gui.SetButtonsFromList(options, true, Scenes.Terry.JeanneTFPrompt);
 				}
-			}, enabled : enabled && party.Inv().QueryNum(item) > 0,
+			}, enabled : party.Inv().QueryNum(item) > 0,
 			obj : {
 				str   : item.sDesc(),
 				mult  : costmult || 1,
@@ -3169,8 +3167,8 @@ Scenes.Terry.JeanneTFPrompt = function() {
 	AddItem(Items.Estros,    Scenes.Terry.JeanneTFGrowVag,       "Add pussy", "", 2);
 	AddItem(Items.Testos,    Scenes.Terry.JeanneTFRemVag,        "Rem pussy", "", 1);
 	AddItem(Items.Testos,    Scenes.Terry.JeanneTFGrowCock,      "Add cock", "", 2);
-	AddItem(Items.Estros,    Scenes.Terry.JeanneTFRemCock,       "Rem cock", "", 1, terry.FirstCock());
-	AddItem(Items.Equinium,  Scenes.Terry.JeanneTFGrowHorsecock, "Horsecock", "", 5);
+	AddItem(Items.Estros,    Scenes.Terry.JeanneTFRemCock,       "Rem cock", "", 1);
+	AddItem(Items.Equinium,  Scenes.Terry.JeanneTFGrowHorsecock, "Horsecock", "", 5, true);
 	
 	Gui.SetButtonsFromList(options, true, Scenes.Jeanne.InteractPrompt);
 }

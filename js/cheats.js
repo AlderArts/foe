@@ -446,6 +446,11 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		Text.Clear();
 		Text.AddOutput("You pick up some crap.");
 		Text.Newline();
+		Text.AddOutput("<b>Got a fuckton of money</b>");
+		
+		party.coin += 1000;
+		
+		Text.Newline();
 		Text.AddOutput("<b>Got a fuckton of items</b>");
 		
 		DEBUG = false;

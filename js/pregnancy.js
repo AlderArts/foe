@@ -86,6 +86,7 @@ PregnancyHandler.prototype.FromStorage = function(storage) {
  * 	slot   := PregnancyHandler.Slot
  */
 PregnancyHandler.prototype.IsPregnant = function(opts) {
+	opts = opts || {};
 	var slot = opts.slot || PregnancyHandler.Slot.Vag;
 	var womb = null;
 	if     (slot <  PregnancyHandler.Slot.Butt) womb = mother.AllVags()[slot].womb;
