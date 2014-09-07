@@ -3764,7 +3764,8 @@ Scenes.Terry.JeanneTFGrowVag = function() {
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
-		tcockDesc  : function() { return terry.MultiCockDesc(); }
+		tcockDesc  : function() { return terry.MultiCockDesc(); },
+		hand       : function() { return terry.HandDesc(); }
 	};
 	parse = terry.ParserPronouns(parse);
 	
