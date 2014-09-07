@@ -66,6 +66,7 @@ function Terry(storage) {
 	this.flags["xLick"] = 0; //lick butt in buttfuck
 	this.flags["breasts"] = Terry.Breasts.Flat;
 	this.flags["Rogue"] = 0;
+	this.flags["TF"] = Terry.TF.NotTried;
 	
 	this.sbombs = 3;
 	this.hidingSpot = world.loc.Rigard.ShopStreet.street;
@@ -75,6 +76,13 @@ function Terry(storage) {
 Terry.prototype = new Entity();
 Terry.prototype.constructor = Terry;
 
+//Note: bitmask
+Terry.TF = {
+	NotTried  : 0,
+	TriedItem : 1,
+	Rosalin   : 2,
+	Jeanne    : 4
+}
 Terry.Met = {
 	NotMet  : 0,
 	Found   : 1,
@@ -2897,6 +2905,79 @@ Scenes.Terry.SexFuckButtEntrypoint = function(p1Cock, promise, retFunc) {
 		tooltip : Text.Parse("Fuck that butt good and hard!", parse)
 	});
 	Gui.SetButtonsFromList(options, false, null);
+}
+
+
+// TODO ITEMS
+
+Terry.prototype.ItemUsable = function(item) {
+	return true;
+}
+
+Terry.prototype.ItemUse = function(item, backPrompt) {
+	if(item.isTF) {
+		var parse = {
+			item : item.sDesc(),
+			aItem : item.lDesc(),
+			foxvixen : terry.mfPronoun("fox", "vixen")
+		};
+		parse = terry.ParserPronouns(parse);
+		
+		if(terry.flags["TF"] & Terry.TF.TriedItem) {
+			Text.Add("Terry does as ordered and takes the [item]. [HisHer] collar glows for a moment, but nothing else happens.", parse);
+		}
+		else {
+			Text.Add("You hand Terry [aItem] and tell [himher] to try it. [HeShe] examines the [item] for a moment, before shrugging and moving to take it.", parse);
+			Text.NL();
+			Text.Add("[HeShe] swallows and you observe a faint, pinkish glow emanating from [hisher] collar, however it quickly fades. After a while, the [foxvixen] shrugs. <i>”So… that was it? I don’t feel any different.”</i>", parse);
+			Text.NL();
+			Text.Add("Considering what you’ve seen, you can only assume that this has something to do with that collar of [hishers]. It seems like it just isn't going to let you just transform [himher] like that. You'll need to see a specialist about this...", parse);
+			Text.NL();
+			if(jeanne.flags["Met"] != 0)
+				Text.Add("Probably is best if you talk to Jeanne; she most likely made the collar, she can probably explain what's going on.", parse);
+			else
+				Text.Add("Given you got this collar from the princes of Rigard, the creator of it is probably the Rigard court wizard; talking to him or her may help answer why this just happened.", parse);
+		}
+		
+		terry.flags["TF"] |= Terry.TF.TriedItem;
+		
+		Text.Flush();
+		Gui.NextPrompt(backPrompt);
+		
+		return {grab : true, consume : true};
+	}
+	else
+		return {grab : false, consume : true};
+}
+
+// Need if(terry.flags["TF"] & Terry.TF.TriedItem && !(terry.flags["TF"] & Terry.TF.Rosalin))
+Scenes.Terry.RosalinTF = function() {
+	var parse = {
+		playername : player.name,
+		rearsDesc  : function() { return rosalin.EarDesc(); }
+	};
+	parse = terry.ParserPronouns(parse);
+	parse = rosalin.ParserPronouns(parse, "r");
+	
+	Text.Clear();
+	Text.Add("<i>”Alchemy doesn’t work?”</i> Rosalin’s [rearsDesc] perk in curiosity as [rheshe] studies Terry. The alchemist turns around, quickly whipping together a potion from the ingredients [rheshe] has at hand. <i>”Try this, I want to see it for myself,”</i> [rheshe] urges the fox, handing [himher] the bottle. Terry looks a bit unsure of about this, but at your nod, [heshe] drinks contents of the offered flask. Just as before, the collar glows pink, and absolutely nothing happens.", parse);
+	Text.NL();
+	Text.Add("<i>”Hmm,”</i> Rosalin concludes, poking at the offending collar to little effect. <i>”Give me a few minutes, okay?”</i> Terry gulps as the determined alchemist starts pouring ingredients together into a bowl. This one takes significantly longer than the last, and the result is a vile smelling yellow goop.", parse);
+	Text.NL();
+	Text.Add("<i>”I… I’m supposed to drink that?”</i> Terry falters, shaking [hisher] head fearfully, backing away quickly.", parse);
+	Text.NL();
+	Text.Add("<i>”For science!”</i> Rosalin proclaims as [rheshe] advances on the poor fox, catching [himher] off guard and prying open [hisher] mouth, pouring the contents down [hisher] throat before you have a chance to intervene. Terry looks like [heshe] is going to be ill, swaying back and forth in place while smoke pours out of [hisher] mouth, nose and ears. The collar is working overtime, shining so brightly it almost hurt your eyes. Finally, the reaction seems to wear off. As the smoke settles, you can make out Terry again, unchanged.", parse);
+	Text.NL();
+	Text.Add("<i>”That is cheating!”</i> Rosalin complains, peeking out from [rhisher] position huddling behind [rhisher] workbench. <i>”That should’ve been enough hair balls to turn a bloody elephant into a housecat!”</i> [rHeShe] turns [rhisher] back on you, throwing ingredients together with newfound fervor, muttering something about magic.", parse);
+	Text.NL();
+	Text.Add("Terry tugs you away urgently, putting as much distance between you and the alchemist as [heshe] can. <i>”Don’t take me to that crazy person again, okay [playername]?”</i> the thief pleads anxiously, hiding behind you from the vindictive alchemist. <i>”I’m not drinking anything [rheshe] makes, and that’s that!”</i> [HeShe] looks vehement about it; [heshe]’d probably take [hisher] chances with the collar and try to run for it should you force the issue again.", parse);
+	Text.Flush();
+	
+	terry.relation.DecreaseStat(-100, 3);
+	world.TimeStep({hour: 1});
+	terry.flags["TF"] |= Terry.TF.Rosalin;
+	
+	Gui.NextPrompt();
 }
 
 

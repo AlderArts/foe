@@ -17,6 +17,7 @@ Items.HorseCum.Long = function() { return "Sticky equine fluids of uncertain ori
 
 Items.Equinium = new TFItem("equin0", "Equinium");
 Items.Equinium.price = 7;
+Items.Equinium.lDesc = function() { return "a bottle of Equinium"; }
 Items.Equinium.Short = function() { return "A bottle of Equinium"; }
 Items.Equinium.Long = function() { return "A bottle labeled Equinium, with the picture of a horse on it, containing a thick, heady liquid."; }
 Items.Equinium.Recipe = [{it: Items.HorseShoe}, {it: Items.HorseHair}, {it: Items.HorseCum}];
@@ -52,6 +53,7 @@ Items.Lettuce.Long = function() { return "A leaf of lettuce, sweet, healthy and 
 
 Items.Leporine = new TFItem("lago0", "Leporine");
 Items.Leporine.price = 7;
+Items.Leporine.lDesc = function() { return "a bottle of Leporine"; }
 Items.Leporine.Short = function() { return "A bottle of Leporine"; }
 Items.Leporine.Long = function() { return "A bottle labeled Leporine, with the picture of a rabbit on it. The fluid within is clear."; }
 Items.Leporine.Recipe = [{it: Items.RabbitFoot}, {it: Items.CarrotJuice}, {it: Items.Lettuce}];
@@ -83,6 +85,7 @@ Items.CatClaw.Long = function() { return "Sharp cat claws."; }
 
 Items.Felinix = new TFItem("felin0", "Felinix");
 Items.Felinix.price = 7;
+Items.Felinix.lDesc = function() { return "a bottle of Felinix"; }
 Items.Felinix.Short = function() { return "A bottle of Felinix"; }
 Items.Felinix.Long = function() { return "A bottle labeled Felinix, with the picture of a cat on it. The fluid within is cloudy."; }
 Items.Felinix.Recipe = [{it: Items.Whiskers}, {it: Items.HairBall}, {it: Items.CatClaw}];
@@ -122,6 +125,7 @@ Items.LizardEgg.Use = function(target) {
 
 Items.Lacertium = new TFItem("rept0", "Lacertium");
 Items.Lacertium.price = 8;
+Items.Lacertium.lDesc = function() { return "a bottle of Lacertium"; }
 Items.Lacertium.Short = function() { return "A bottle of Lacertium"; }
 Items.Lacertium.Long = function() { return "A bottle labeled Lacertium, with the picture of a lizard on it. The fluid within is thick and oily."; }
 Items.Lacertium.Recipe = [{it: Items.SnakeOil}, {it: Items.LizardScale}, {it: Items.LizardEgg}];
@@ -163,6 +167,7 @@ Items.GoatMilk.Use = function(target) {
 
 Items.Ovis = new TFItem("ovis0", "Ovis");
 Items.Ovis.price = 8;
+Items.Ovis.lDesc = function() { return "a bottle of Ovis"; }
 Items.Ovis.Short = function() { return "A bottle of Ovis"; }
 Items.Ovis.Long = function() { return "A bottle labeled Ovis, with the picture of a sheep on it. The fluid within is milky white."; }
 Items.Ovis.Recipe = [{it: Items.SheepMilk}, {it: Items.Ramshorn}, {it: Items.FreshGrass}];
@@ -219,6 +224,7 @@ Items.FreshGrass.Long = function() { return "A handful of green grass."; }
 
 Items.Bovia = new TFItem("bov0", "Bovia");
 Items.Bovia.price = 8;
+Items.Bovia.lDesc = function() { return "a bottle of Bovia"; }
 Items.Bovia.Short = function() { return "A bottle of Bovia"; }
 Items.Bovia.Long = function() { return "A bottle labeled Bovia, with the picture of a cow on it. The fluid within is milky white."; }
 Items.Bovia.Recipe = [{it: Items.CowMilk}, {it: Items.CowBell}, {it: Items.FreshGrass}];
@@ -289,6 +295,7 @@ Items.DogBiscuit.Use = function(target) {
 
 Items.Canis = new TFItem("dog0", "Canis");
 Items.Canis.price = 8;
+Items.Canis.lDesc = function() { return "a bottle of Canis"; }
 Items.Canis.Short = function() { return "A bottle of Canis"; }
 Items.Canis.Long = function() { return "A bottle labeled Canis, with the picture of a dog on it. The fluid within is opaque, and slightly reddish."; }
 Items.Canis.Recipe = [{it: Items.CanisRoot}, {it: Items.DogBone}, {it: Items.DogBiscuit}];
@@ -318,6 +325,7 @@ Items.WolfPelt.Long = function() { return "The rough pelt of a wolf."; }
 
 Items.Lobos = new TFItem("wolf0", "Lobos");
 Items.Lobos.price = 8;
+Items.Lobos.lDesc = function() { return "a bottle of Lobos"; }
 Items.Lobos.Short = function() { return "A bottle of Lobos"; }
 Items.Lobos.Long = function() { return "A bottle labeled Lobos with the picture of a wolf on it. The fluid within is opaque, and dullish gray."; }
 Items.Lobos.Recipe = [{it: Items.CanisRoot}, {it: Items.WolfFang}, {it: Items.WolfPelt}];
@@ -347,6 +355,7 @@ Items.Foxglove.Long = function() { return "A foxglove flower, commonly found on 
 
 Items.Vulpinix = new TFItem("fox0", "Vulpinix");
 Items.Vulpinix.price = 8;
+Items.Vulpinix.lDesc = function() { return "a bottle of Vulpinix"; }
 Items.Vulpinix.Short = function() { return "A bottle of Vulpinix"; }
 Items.Vulpinix.Long = function() { return "A bottle labeled Vulpinix, with the picture of a fox on it. The fluid within is opaque, and bright red."; }
 Items.Vulpinix.Recipe = [{it: Items.CanisRoot}, {it: Items.FoxBerries}, {it: Items.Foxglove}];
@@ -398,6 +407,7 @@ Items.DemonSeed.Use = function(target) {
 
 Items.Infernum = new TFItem("demon0", "Infernum");
 Items.Infernum.price = 15;
+Items.Infernum.lDesc = function() { return "a bottle of Infernum"; }
 Items.Infernum.Short = function() { return "A bottle of Infernum"; }
 Items.Infernum.Long = function() { return "A bottle labeled Infernum, with the picture of a demon on it. The fluid within is a thick red sludge, tainted with black bubbles."; }
 Items.Infernum.Recipe = [{it: Items.CorruptPlant}, {it: Items.BlackGem}, {it: Items.CorruptSeed}];
@@ -435,6 +445,7 @@ Items.BloodVial.Long = function() { return "A vial of red blood."; }
 
 Items.Homos = new TFItem("human0", "Homos");
 Items.Homos.price = 25;
+Items.Homos.lDesc = function() { return "a bottle of Homos"; }
 Items.Homos.Short = function() { return "A bottle of Homos"; }
 Items.Homos.Long = function() { return "A bottle labeled Homos, with the picture of a regular human on it. The fluid within is clear and colorless, like water."; }
 Items.Homos.Recipe = [{it: Items.Hummus}, {it: Items.SpringWater}, {it: Items.BloodVial}];
@@ -466,6 +477,7 @@ Items.FruitSeed.Long = function() { return "The seed of a fruit or berry of some
 
 Items.Avia = new TFItem("avian0", "Avia");
 Items.Avia.price = 25;
+Items.Avia.lDesc = function() { return "a bottle of Avia"; }
 Items.Avia.Short = function() { return "A bottle of Avia"; }
 Items.Avia.Long = function() { return "A bottle labeled Avia, with the picture of a bird on it. The fluid within is a clear, bright blue."; }
 Items.Avia.Recipe = [{it: Items.Feather}, {it: Items.Trinket}, {it: Items.FruitSeed}];
@@ -489,6 +501,7 @@ Items.MWing.Long = function() { return "A flimsy moth wing, looks very fragile."
 
 Items.Lepida = new TFItem("moth0", "Lepida");
 Items.Lepida.price = 25;
+Items.Lepida.lDesc = function() { return "a bottle of Lepida"; }
 Items.Lepida.Short = function() { return "A bottle of Lepida"; }
 Items.Lepida.Long = function() { return "A bottle labeled Lepida, with the picture of a moth on it. The fluid within is a deep purple."; }
 Items.Lepida.Recipe = [{it: Items.MAntenna}, {it: Items.MWing}, {it: Items.FruitSeed}];
@@ -517,6 +530,7 @@ Items.SClaw.Long = function() { return "A black, menacing-looking scorpion claw.
 
 Items.Scorpius = new TFItem("scorp0", "Scorpius");
 Items.Scorpius.price = 25;
+Items.Scorpius.lDesc = function() { return "a bottle of Scorpius"; }
 Items.Scorpius.Short = function() { return "A bottle of Scorpius"; }
 Items.Scorpius.Long = function() { return "A bottle labeled Scorpius, with the picture of a scorpion on it. The fluid within is a pitch black."; }
 Items.Scorpius.Recipe = [{it: Items.Stinger}, {it: Items.SVenom}, {it: Items.SClaw}];
@@ -533,6 +547,7 @@ Items.Scorpius.PushEffect(TF.ItemEffects.DecStr, {odds: 0.2, ideal: 20, max: 1})
 
 Items.Virilium = new TFItem("sex0", "Virilium");
 Items.Virilium.price = 100;
+Items.Virilium.lDesc = function() { return "a bottle of Virilium"; }
 Items.Virilium.Short = function() { return "A bottle of Virilium"; }
 Items.Virilium.Long = function() { return "A bottle of potency-enhancing Virilium."; }
 Items.Virilium.Recipe = [{it: Items.Equinium}, {it: Items.Leporine}, {it: Items.Lobos}];
@@ -603,6 +618,7 @@ Items.Virilium.PushEffect(function(target) {
 
 Items.Fertilium = new TFItem("sex1", "Fertilium");
 Items.Fertilium.price = 100;
+Items.Fertilium.lDesc = function() { return "a bottle of Fertilium"; }
 Items.Fertilium.Short = function() { return "A bottle of Fertilium"; }
 Items.Fertilium.Long = function() { return "A bottle of fertility-enhancing Fertilium."; }
 Items.Fertilium.Recipe = [{it: Items.Felinix}, {it: Items.Leporine}, {it: Items.Bovia}];

@@ -1,5 +1,6 @@
 Items.EquiniumPlus = new TFItem("equin+", "Equinium+");
 Items.EquiniumPlus.price = 100;
+Items.EquiniumPlus.lDesc = function() { return "a bottle of Equinium+"; }
 Items.EquiniumPlus.Short = function() { return "A bottle of Equinium+"; }
 Items.EquiniumPlus.Long = function() { return "A bottle of Equinium, potent enough to significantly change your body. The fluid inside is creamy, smelling of male musk."; }
 //TODO Recipe
@@ -69,6 +70,7 @@ Items.EquiniumPlus.PushEffect(TF.ItemEffects.DecDex, {odds: 0.2, ideal: 20, max:
 //TODO
 Items.Tigris = new TFItem("felin+0", "Tigris");
 Items.Tigris.price = 100;
+Items.Tigris.lDesc = function() { return "a bottle of Tigris"; }
 Items.Tigris.Short = function() { return "A bottle of Tigris"; }
 Items.Tigris.Long = function() { return "A bottle labeled Tigris, with the picture of a large cat on it. The fluid within is a strange mixture of black and orange."; }
 //TODO ingredients
@@ -109,6 +111,7 @@ Items.Tigris.PushEffect(function(target) {
 
 Items.InfernumPlus = new TFItem("demon+", "Infernum+");
 Items.InfernumPlus.price = 100;
+Items.InfernumPlus.lDesc = function() { return "a bottle of Infernum+"; }
 Items.InfernumPlus.Short = function() { return "A bottle of Infernum+"; }
 Items.InfernumPlus.Long = function() { return "A bottle of extra potent Infernum, with the picture of a large, decidedly male demon on it. The fluid within is a thick black sludge, reeking of corruption."; }
 Items.InfernumPlus.Recipe = [{it: Items.Infernum}, {it: Items.BlackGem}, {it: Items.DemonSeed, num: 3}];

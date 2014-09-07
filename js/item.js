@@ -103,13 +103,10 @@ Item.prototype.Equip = function(target) {
 	}));
 }
 
-Item.prototype.Short = function() {
-	return this.name;
-}
-
-Item.prototype.Long = function() {
-	return this.name;
-}
+Item.prototype.sDesc = function() { return this.name; }
+Item.prototype.lDesc = function() { return this.name; }
+Item.prototype.Short = function() { return this.name; }
+Item.prototype.Long = function()  { return this.name; }
 
 // Used as entrypoint for PC/Party (active selection)
 Item.prototype.OnSelect = function(inv, encounter, caster, backPrompt) {

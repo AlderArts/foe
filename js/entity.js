@@ -981,6 +981,18 @@ Entity.prototype.Race = function() {
 	return this.body.torso.race;
 }
 
+Entity.prototype.ParserPronouns = function(parse, prefix) {
+	parse = parse || {};
+	prefix = prefix || "";
+	parse[prefix + "HeShe"]   = this.HeShe();
+	parse[prefix + "heshe"]   = this.heshe();
+	parse[prefix + "HisHer"]  = this.HisHer();
+	parse[prefix + "hisher"]  = this.hisher();
+	parse[prefix + "himher"]  = this.himher();
+	parse[prefix + "hishers"] = this.hishers();
+	return parse;
+}
+
 Entity.prototype.toString = function() {
 	return this.name;
 }
