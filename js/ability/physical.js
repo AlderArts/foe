@@ -379,7 +379,8 @@ Abilities.Physical.DAttack.hitMod = 0.75;
 Abilities.Physical.DAttack.nrAttacks = 2;
 Abilities.Physical.DAttack.OnCast = function(encounter, caster, target) {
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("[name] perform[s] two attacks against [tName] in rapid succession! ", parse);
+	Text.AddOutput("[name] perform[s] two attacks against [tName] in rapid succession!", parse);
+	Text.Newline();
 }
 
 
@@ -393,6 +394,7 @@ Abilities.Physical.TAttack.nrAttacks = 3;
 Abilities.Physical.TAttack.OnCast = function(encounter, caster, target) {
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
 	Text.AddOutput("[name] perform[s] three attacks against [tName] in rapid succession! ", parse);
+	Text.Newline();
 }
 
 
@@ -405,7 +407,8 @@ Abilities.Physical.QAttack.hitMod = 0.75;
 Abilities.Physical.QAttack.nrAttacks = 4;
 Abilities.Physical.QAttack.OnCast = function(encounter, caster, target) {
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("[name] perform[s] four attacks against [tName] in rapid succession! ", parse);
+	Text.AddOutput("[name] perform[s] four attacks against [tName] in rapid succession!", parse);
+	Text.Newline();
 }
 
 
@@ -423,7 +426,8 @@ Abilities.Physical.Frenzy.OnCast = function(encounter, caster, target) {
 	}
 		
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("[name] perform[s] a frenzied assault, attacking [tName] with five rapid blows! ", parse);
+	Text.AddOutput("[name] perform[s] a frenzied assault, attacking [tName] with five rapid blows!", parse);
+	Text.Newline();
 }
 
 
