@@ -362,24 +362,24 @@ Scenes.Terry.Appearance = function() {
 		Text.Add("A pair of [tbreastsDesc] bulge noticeably atop Terry’s chest[c]. ", parse);
 		if(terry.Cup() == Terry.Breasts.Dcup) {
 			Text.Add("Though only D-cups, Terry is so slenderly built elsewhere that they seem exaggeratedly large. The full quivering breasts jiggle softly whenever [heshe] moves, making even the act of breathing almost hypnotic as they rise, fall, expand and contract. It really is incredible that such a dainty [foxvixen] could have such huge breasts.", parse);
-			if(terry.Lactation()) {
+			if(terry.flags["lact"] != 0) {
 				Text.NL();
 				Text.Add("The huge [foxvixen] tits contain an equally huge supply of warm, creamy milk, just waiting to be tapped whenever you want. As if to prove your point, a small bead leaks from each perky pink nipple in turn, sliding down Terry’s areolae. With practised disinterest, [heshe] wipes the smears of milk away with a quick flick of [hisher] fingers over each breast in turn.", parse);
 			}
 		}
 		else if(terry.Cup() == Terry.Breasts.Ccup) {
 			Text.Add("Plush and proud, the C-cup sized breasts have just the right amount of sag to them, drawing a casual eye and enticing the viewer to touch and squeeze them. Terry’s delicate body-type only makes them seem more prominent.", parse);
-			if(terry.Lactation())
+			if(terry.flags["lact"] != 0)
 				Text.Add(" Further weighing the [foxvixen] down is the ample supply of fresh milk brewing in each plush teat. As [heshe] moves, a small bead of white wells from one little pink nipple, forced out by the shift in pressure.", parse);
 		}
 		else if(terry.Cup() == Terry.Breasts.Bcup) {
 			Text.Add("The full, perky orbs are a good size that blends well with Terry’s dainty frame; the luscious pair of B-cups just big enough to squeeze and play with.", parse);
-			if(terry.Lactation())
+			if(terry.flags["lact"] != 0)
 				Text.Add(" And that squeezability comes in handy; it makes milking [himher] of the sweet [foxvixen] milk brewing in each tit almost effortless.", parse);
 		}
 		else {
 			Text.Add("Dainty little things just barely big enough to squeeze as they are, you’d estimate Terry’s breasts to be A-cups. They mesh very well with [hisher] slender frame.", parse);
-			if(terry.Lactation())
+			if(terry.flags["lact"] != 0)
 				Text.Add(" Despite their small size, you know they contain an easily tapped supply of warm, creamy [foxvixen] milk.", parse);
 		}
 	}
@@ -2812,7 +2812,7 @@ Scenes.Terry.SexFuckButtEntrypoint = function(p1Cock, promise, retFunc) {
 			if(terry.Cup() >= Terry.Breasts.Acup)
 				Text.Add("Your fingers cup [hisher] [tbreastDesc], feeling the perky orb squish pleasantly. You grope and fondle it for a few moments, then release it, fingers returning to their original target. ", parse);
 			Text.Add("Terry’s nipples are perky little nubs from the [foxvixen]’s excitement, practically diamond-hard with arousal. You pinch one between thumb and forefinger, tweaking and massaging it. <i>”Ah! Not so rough!”</i> You throw a quick apology and continue your ministrations, careful to be gentle as you listen to Terry’s mewl of pleasure at your assault.", parse);
-			if(terry.Lactation())
+			if(terry.flags["lact"] != 0)
 				Text.Add(" Milk seeps onto your digits at the pressure, dripping to the ground below.", parse);
 			Text.NL();
 			Text.Add("<i>”If you - ah! - keep doing this I don’t think I - hmm! - I’m going to last much longer.”</i>", parse);
@@ -3252,7 +3252,7 @@ Scenes.Terry.JeanneTFCraft = function(item, scene, horseTF) {
 		Text.Add("You watch patiently as Terry removes the last of [hisher] clothes and folds them carefully, setting them aside. Turning to look at you expectantly, [heshe] says. <i>”I’m ready… now what?”</i>", parse);
 		Text.NL();
 		if(terry.Relation() + terry.Slut() >= 60) {
-			parse["milkdripping"] = terry.Lactation() ? " milk-dripping" : "";
+			parse["milkdripping"] = terry.flags["lact"] != 0 ? " milk-dripping" : "";
 			Text.Add("There’s a definite air of excitement in the [foxvixen]’s body language,[milkdripping] nipples erect through [hisher] fur.", parse);
 			if(terry.FirstCock())
 				Text.Add(" [HisHer] [terrycock] is jutting out of its sheath, as if in anticipation.", parse);
@@ -3644,7 +3644,7 @@ Scenes.Terry.JeanneTFShrinkBoobs = function() {
 		Text.Add("With a single moan, Terry’s bustline rapidly shrinks away, within seconds leaving [himher] with [hisher] original daintily flat chest.", parse);
 		Text.NL();
 		Text.Add("<i>”Guess I won’t have to worry so much about protecting my chest now, at least not more than usual,”</i> the [foxvixen] states.", parse);
-		if(terry.Lactation())
+		if(terry.flags["lact"] != 0)
 			Text.Add(" <i>”And I won’t have to worry anymore about draining my breasts,”</i> [heshe] adds.", parse);
 		Text.NL();
 		Text.Add("That certainly seems to be the case, you agree.", parse);
@@ -3676,7 +3676,7 @@ Scenes.Terry.JeanneTFStartLactate = function() {
 	parse = terry.ParserPronouns(parse);
 	
 	Text.Clear();
-	if(terry.Lactation()) {
+	if(terry.flags["lact"] != 0) {
 		Text.Add("Terry cringes, the [foxvixen]’s lips instinctively curled back over [hisher] teeth in a nervous snarl as [hisher] nipples perk up through the fur, breasts visibly quivering. [HeShe] whimpers, hands reaching up to tenderly cradle [hisher] [terrybreasts], then [heshe] throws [hisher] head back in a primal scream as, out of nowhere, [hisher] nipples unleash a cascade of vulpine milk.", parse);
 		Text.NL();
 		Text.Add("As close as you are, you can do nothing to keep yourself from getting hosed down as Terry becomes a veritable milk-fountain. Fortunately, it’s only temporary, and the streams die away after a few moments, leaving only the white streaks painted over your body and Terry’s swollen-looking nipples as sign of what lurks inside [hisher] breasts.", parse);
@@ -3736,7 +3736,7 @@ Scenes.Terry.JeanneTFStopLactate = function() {
 	parse = terry.ParserPronouns(parse);
 	
 	Text.Clear();
-	if(terry.Lactation()) {
+	if(terry.flags["lact"] != 0) {
 		Text.Add("Terry’s breasts quiver to the extent [hisher] nipples vibrate, the formerly engorged nubs shrinking down and compacting into their original small, perky selves. Once they have dwindled away, the shuddering wracking the [foxvixen]’s titflesh vanishes, leaving [hisher] [terrybreasts] the way they were before.", parse);
 		Text.NL();
 		Text.Add("Terry experimentally pinches a nipple, but nothing comes out. <i>”I guess that’s the end of that then.”</i>", parse);
