@@ -89,7 +89,11 @@ PregnancyHandler.prototype.IsPregnant = function(opts) {
 	opts = opts || {};
 	var slot = opts.slot || PregnancyHandler.Slot.Vag;
 	var womb = null;
-	if     (slot <  PregnancyHandler.Slot.Butt) womb = this.entity.AllVags()[slot].womb;
+	if     (slot <  PregnancyHandler.Slot.Butt) {
+		var vag = this.entity.AllVags()[slot];
+		if(vag)
+			womb = vag.womb;
+	}
 	else if(slot == PregnancyHandler.Slot.Butt) womb = this.entity.Butt().womb;
 	
 	if(womb == null)  return false;
@@ -112,7 +116,11 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 	
 	var slot = opts.slot || PregnancyHandler.Slot.Vag;
 	var womb = null;
-	if     (slot <  PregnancyHandler.Slot.Butt) womb = mother.AllVags()[slot].womb;
+	if     (slot <  PregnancyHandler.Slot.Butt) {
+		var vag = mother.AllVags()[slot];
+		if(vag)
+			womb = vag.womb;
+	}
 	else if(slot == PregnancyHandler.Slot.Butt) womb = mother.Butt().womb;
 	
 	if(womb == null)  return false;

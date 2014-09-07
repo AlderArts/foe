@@ -195,7 +195,7 @@ Terry.prototype.SetBreasts = function() {
 	}
 }
 Terry.prototype.SetLactation = function() {
-	if(this.flags["lact"]) {
+	if(this.flags["lact"] != 0) {
 		this.body.milkProduction.base = 3;
 		this.body.lactationRate.base = 1;
 		this.body.lactating = true;
@@ -3143,7 +3143,7 @@ Scenes.Terry.JeanneTFPrompt = function() {
 							party.coin -= coin;
 							party.Inv().RemoveItem(item);
 							Scenes.Terry.JeanneTFCraft(obj.item, obj.scene, horseTF);
-						}, enabled : coin >= party.coin,
+						}, enabled : party.coin >= coin,
 						tooltip : Text.Parse("Craft the potion for [coin] coins.", parse)
 					});
 					Gui.SetButtonsFromList(options, true, Scenes.Terry.JeanneTFPrompt);
@@ -3207,7 +3207,9 @@ Scenes.Terry.JeanneTFCraft = function(item, scene, horseTF) {
 		
 		world.TimeStep({hour : 1});
 		
-		if(terry.flags["TF"] & Terry.TF.JeanneUsed) {
+		if(terry.flags["TF"] & Terry.TF.JeanneUsed)
+			Text.Add(" You take the capsule and look at Terry.", parse);
+		else {
 			Text.Add(" You thank her and take the capsule. So… you just feed Terry the capsule? Is that all it takes?", parse);
 			Text.NL();
 			Text.Add("<i>”Well, if you feed it to [himher] normally the collar will just counteract the transformative again. I did what I could to hide the elements detected by the collar, but the truth is that if the collar detects it, it’ll still nullify the effects.”</i>", parse);
@@ -3230,8 +3232,6 @@ Scenes.Terry.JeanneTFCraft = function(item, scene, horseTF) {
 			Text.NL();
 			Text.Add("You thank Jeanne once again, applying this should be interesting…", parse);
 		}
-		else
-			Text.Add(" You take the capsule and look at Terry.", parse);
 		Text.NL();
 		
 		terry.flags["TF"] |= Terry.TF.JeanneUsed;
@@ -3276,7 +3276,6 @@ Scenes.Terry.JeanneTFCraft = function(item, scene, horseTF) {
 			}
 			Text.NL();
 		}
-		Text.NL();
 		Text.Add("With one hand on [hisher] hip and the other on [hisher] shoulder, it’s a matter of moments for you to gently spin Terry around and give [himher] a gentle push. Effortlessly, the vulpine morph falls forward into [hisher] knees. Another gentle push and a command is all you need to make [himher] go on fours, tail swept aside around [hisher] hip and buttocks raised slightly for better access to [hisher] tailhole. <i>”O-Okay, please be gentle.”</i>", parse);
 		Text.NL();
 		if(terry.flags["TFd"] > 5)
@@ -3497,7 +3496,8 @@ Scenes.Terry.JeanneTFCraft = function(item, scene, horseTF) {
 Scenes.Terry.JeanneTFGrowBoobs = function() {
 	var parse = {
 		playername : player.name,
-		foxvixen   : terry.mfPronoun("fox", "vixen")
+		foxvixen   : terry.mfPronoun("fox", "vixen"),
+		terrycock  : function() { return terry.MultiCockDesc(); }
 	};
 	parse = terry.ParserPronouns(parse);
 	
@@ -3538,7 +3538,7 @@ Scenes.Terry.JeanneTFGrowBoobs = function() {
 	else if(terry.Cup() == Terry.Breasts.Bcup) {
 		Text.Add("Terry’s head falls back and [heshe] moans softly, bosom quivering as the transformative goes to work. Nipples hard as diamond, jutting blatantly through the fur, you watch as the perky orbs balloon outwards. Swelling into plush, proud C-cups, with just the right amount of sag, Terry truly looks like a woman at any casual glance, with an hourglass figure that many women would kill to have.", parse);
 		if(terry.FirstCock())
-			Text.Add(" Even knowing about the [terry.cock] hanging between [hisher] legs, if [heshe] were covered, you doubt anyone would notice it at a first glance in [hisher] usual clothes.", parse);
+			Text.Add(" Even knowing about the [terrycock] hanging between [hisher] legs, if [heshe] were covered, you doubt anyone would notice it at a first glance in [hisher] usual clothes.", parse);
 		Text.NL();
 		Text.Add("Terry pants, watching [hisher] own chest rise and fall. [HeShe] cups [hisher] pillowy breasts, testing their weight. Slowly, [heshe] rises to [hisher] feet, [hisher] expression is one of confusion. Your eyes meet and you can tell [heshe]’s not too sure about this development.", parse);
 		Text.NL();
@@ -3721,10 +3721,9 @@ Scenes.Terry.JeanneTFStartLactate = function() {
 		}
 	}
 	Text.Flush();
-	
 	terry.flags["lact"] = 1;
 	terry.SetLactation();
-	terry.body.milk = terry.MilkCap();
+	terry.body.milk.base = terry.MilkCap();
 	
 	Scenes.Jeanne.InteractPrompt();
 }

@@ -104,9 +104,14 @@ Scenes.Jeanne.InteractPrompt = function() {
 		func : Scenes.Jeanne.Talk, enabled : true,
 		tooltip : "Seek the magician's advice."
 	});
-	if(party.InParty(terry) && terry.flags["TF"] & Terry.TF.Jeanne) {
+	if(party.InParty(terry) && (terry.flags["TF"] & Terry.TF.Jeanne)) {
 		options.push({ nameStr : "Terry TF",
-			func : Scenes.Terry.JeanneTF, enabled : true,
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”Sure, what would you like me to prepare?”</i>", parse);
+				Text.Flush();
+				Scenes.Terry.JeanneTFPrompt();
+			}, enabled : true,
 			tooltip : "Ask Jeanne to help you make some transformatives for Terry."
 		});
 	}
@@ -323,12 +328,7 @@ Scenes.Jeanne.Talk = function() {
 	parse["himher"] = terry.himher();
 	if(party.InParty(terry) && terry.flags["TF"] & Terry.TF.TriedItem && !(terry.flags["TF"] & Terry.TF.Jeanne)) {
 		options.push({ nameStr : "Terry",
-			func : function() {
-				Text.Clear();
-				Text.Add("<i>”Sure, what would you like me to prepare?”</i>", parse);
-				Text.Flush();
-				Scenes.Terry.JeanneTFPrompt();
-			}, enabled : true,
+			func : Scenes.Terry.JeanneTFFirst, enabled : true,
 			tooltip : Text.Parse("Ask Jeanne if she can help you with Terry’s collar, and figure out why it seems to make [himher] immune to transformative effects.", parse)
 		});
 	}
