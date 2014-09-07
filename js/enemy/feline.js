@@ -554,7 +554,7 @@ Scenes.Felines.WinFuckVag = function(cat, group, enc, cocks, numFemales) {
 	Text.Add("The feline, used to rough but brief copulations, has little preparation for the fucking you are about to give her, moaning in surprised delight as you explore her depths with your [cockDesc].", parse);
 	if(player.NumCocks() > 1) {
 		parse["s2"] = player.NumCocks() > 2 ? "s" : "";
-		parse["notS2"] = player.NumCocks() > 2 ? "" : "S";
+		parse["notS2"] = player.NumCocks() > 2 ? "" : "s";
 		Text.Add(" Your other cock[s2] bob[notS2] up and down, rubbing against her sensitive [clitCock] each time you thrust into her.", parse);
 	}
 	parse["thick"] = pCock.thickness.Get() > 7 ? ", wondering how long that is going to last, if you run into her more frequently" : "";

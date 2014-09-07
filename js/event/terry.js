@@ -354,7 +354,7 @@ Scenes.Terry.Appearance = function() {
 	else
 		Text.Add("The [foxvixen]’s eyes dart towards you, and as your gaze meets [hisher]’s, [heshe] smiles. Terry adjusts [hisher] hair a bit and straightens [hisher] posture as [heshe] stretches languidly, giving you a perfectly unobstructed view of [himher]self.", parse);
 	Text.NL();
-	Text.Add("Despite the crimson mane atop the [foxvixen]’s head, the rest of [hisher] fur is a very different color; golden yellow offsetting white. Though most of [hisher] face is pure white, a large ring of gold around each eye blurs together over the bridge of the nose, creating a very domino mask-like effect. [HisHer] ears are, likewise, pure gold on the outside and pure white on the inside. White gives way to gold at [hisher] neck, and you know for a fact that most of Terry’s fur is gold; only on [hisher]forelimbs, legs from knees to ankle, stomach, buttocks, and the very tip of [hisher] tail does the white return.", parse);
+	Text.Add("Despite the crimson mane atop the [foxvixen]’s head, the rest of [hisher] fur is a very different color; golden yellow offsetting white. Though most of [hisher] face is pure white, a large ring of gold around each eye blurs together over the bridge of the nose, creating a very domino mask-like effect. [HisHer] ears are, likewise, pure gold on the outside and pure white on the inside. White gives way to gold at [hisher] neck, and you know for a fact that most of Terry’s fur is gold; only on [hisher] forelimbs, legs from knees to ankle, stomach, buttocks, and the very tip of [hisher] tail does the white return.", parse);
 	Text.NL();
 	Text.Add("Following the fur leads your gaze down to Terry’s chest. ", parse);
 	if(terry.Cup() > Terry.Breasts.Flat) {
@@ -1756,7 +1756,7 @@ Scenes.Terry.SkinshipRummagePack = function() {
 	if(terry.Slut() >= 60) {
 		Text.Add("At first you just find a few spare clothes, panties, few tools of the trade, and a couple dry snacks. But once you get to the bottom you raise a brow at what you see. A dildo, lube, a cockring, another dildo, an inflatable buttplug, more lube, and some honey. Chuckling to yourself you ask whyever would [heshe] need all of that? Doesn’t it get heavy having to lug around all these toys?", parse);
 		Text.NL();
-		Text.Add("<i>”Gotta be prepared for when you’re not around, my dear [master]. Plus in case you’re feeling kinky in the middle of the forest, I’d rather not have to wait until we find a city to go after the big [boygirl] toys,”</i> he grins innocently.", parse);
+		Text.Add("<i>”Gotta be prepared for when you’re not around, my dear [master]. Plus in case you’re feeling kinky in the middle of the forest, I’d rather not have to wait until we find a city to go after the big [boygirl] toys,”</i> [heshe] grins innocently.", parse);
 		Text.NL();
 		Text.Add("...You think you created a monster…", parse);
 		Text.NL();
@@ -3304,14 +3304,14 @@ Scenes.Terry.JeanneTFCraft = function(item, scene, horseTF) {
 			scenes.AddEnc(function() {
 				Text.Add("Struck by an impulse, you bend in closer and plant a soft kiss on the golden-furred patch.", parse);
 			}, 1.0, function() { return true; });
+			scenes.Get();
+			
 			Text.NL();
 			Text.Add("[HeShe] gasps softly at your touch. <i>”Don’t tease me like that!”</i> [heshe] protests.", parse);
 			Text.NL();
 			Text.Add("With a soft chuckle at how worked up [heshe] can get over something so small, you offer the [foxvixen] a half-hearted apology, asserting that you just couldn’t resist such a tempting target.", parse);
 			Text.NL();
 			Text.Add("<i>”Meanie...”</i>", parse);
-			
-			scenes.Get();
 		}
 		Text.NL();
 		Text.Add("<i>”This might help,”</i> Jeanne says, handing you a small tube with a clear gel inside. You thank her for the lube as she steps away. Now then… time to get started.", parse);
@@ -3708,7 +3708,7 @@ Scenes.Terry.JeanneTFStartLactate = function() {
 			Text.NL();
 			Text.Add("You watch [himher] with feigned indifference, asking how [heshe] expects to drain [himher]self without your help whenever [heshe] gets full. Terry grumbles, ears flattening against [hisher] skull and looks at the floor, but says nothing. [HeShe]’ll get over it.", parse);
 		}
-		else if(terry.Relation() < 30) {
+		else if(terry.Relation() < 60) {
 			Text.Add("<i>”You like it? Good. Because you’re helping me drain it whenever I’m full!”</i> [heshe] says imperiously.", parse);
 			Text.NL();
 			Text.Add("You can’t help but smirk at Terry’s attempt at a defiant bark, casually replying that you think you can do that for [himher].", parse);
