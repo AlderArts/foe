@@ -470,7 +470,7 @@ Scenes.Lei.ExplanationMain = function() {
 			Text.Add("Once you are outside, Lei whistles piercingly, and you look at him in puzzlement. <i>“If you want to meet them, let us get it over with, instead of having you trail after us like a stray puppy.”</i>", parse);
 			Text.NL();
 			parse["paid"] = (lei.flags["Fought"] == Lei.Fight.No) ? "bribed" : "fought";
-			Text.Add("Ahead of you, the couple turns down a narrow alleyway and you follow in after them along with Lei. They look at him in question and he explains that you wanted to meet them, and how you had [paid] him for an explanation. To your surprise, he even provides a short summary of what you told him about yourself, and why you wanted to see them.", parse);
+			Text.Add("Ahead of you, the couple turns down a narrow alleyway and you follow after them along with Lei. They look at him in question and he explains that you wanted to meet them, and how you had [paid] him for an explanation. To your surprise, he even provides a short summary of what you told him about yourself, and why you wanted to see them.", parse);
 			Text.NL();
 			
 			// TODO: Twins relationship ++

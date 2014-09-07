@@ -457,7 +457,7 @@ Scenes.Terry.Appearance = function() {
 		Text.NL();
 	}
 	if(terry.FirstVag()) {
-		parse["c"] = terry.FirstCock() ? Text.Parse(", behind [hisher] [tcockdesc]", parse) : "";
+		parse["c"] = terry.FirstCock() ? Text.Parse(", behind [hisher] [tcockDesc]", parse) : "";
 		Text.Add("[HeShe] has a dainty little feminine pussy between [hisher] legs[c]. It’s wet, shiny, and seemingly just waiting to be stuffed with an inquisitive cock, tongue or fingers. If you stimulate it enough, Terry can’t help but squirt a nice gush of vixen-juice, ", parse);
 		if(terry.Slut() < 45)
 			Text.Add("much to [hisher] embarrassment.", parse);
