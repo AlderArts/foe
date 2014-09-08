@@ -1641,23 +1641,7 @@ Scenes.Rigard.LB.RandomRoom = function(companion) {
 
 Scenes.Rigard.LB.RegularRoom = function(companion) {
 	var room = world.loc.Rigard.Inn.room;
-	room.companion = companion;
-	
-	room.events = [];
-	if(companion) {
-		room.events.push(new Link(
-			companion.name, true, true,
-			function() {
-				var parse = {
-					name   : companion.name,
-					hisher : companion.hisher()
-				};
-				Text.AddOutput("[name] is sitting on [hisher] bed, watching you. ", parse);
-			},
-			companion.InnPrompt
-		));
-	}
-	
+	rigard.LB["RoomComp"] = party.GetSlot(companion);
 	MoveToLocation(room, {minute : 5});
 }
 
@@ -1669,8 +1653,29 @@ world.loc.Rigard.Inn.room.description = function() {
 	Text.NL();
 	Text.Flush();
 }
+world.loc.Rigard.Inn.room.events.push(new Link(
+	function() {
+		var companion = party.Get(rigard.LB["RoomComp"]);
+		if(companion) return companion.name;
+	}, function() { return rigard.LB["RoomComp"] >= 1; }, true,
+	function() {
+		var companion = party.Get(rigard.LB["RoomComp"]);
+		if(companion) {
+			var parse = {
+				name   : companion.name,
+				hisher : companion.hisher()
+			};
+			Text.AddOutput("[name] is sitting on [hisher] bed, watching you. ", parse);
+		}
+	},
+	function() {
+		var companion = party.Get(rigard.LB["RoomComp"]);
+		if(companion)
+			companion.InnPrompt();
+	}
+));
 world.loc.Rigard.Inn.room.SleepFunc = function() {
-	var comp = world.loc.Rigard.Inn.room.companion;
+	var comp = party.Get(rigard.LB["RoomComp"]);
 	var parse = {
 		
 	};

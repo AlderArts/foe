@@ -122,6 +122,15 @@ Party.prototype.Get = function(num) {
 		else return null;
 	}
 }
+Party.prototype.GetSlot = function(member) {
+	for(var i=0; i < this.members.length; ++i) {
+		if(this.members[i] == member) return i;
+	}
+	for(var i=0; i < this.reserve.length; ++i) {
+		if(this.reserve[i] == member) return i + this.members.length;
+	}
+	return -1;
+}
 Party.prototype.GetRandom = function(incReserve, includePlayer) {
 	var len = this.members.length;
 	if(incReserve)

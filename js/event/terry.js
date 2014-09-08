@@ -69,7 +69,7 @@ function Terry(storage) {
 	//TF state
 	this.flags["breasts"] = Terry.Breasts.Flat;
 	this.flags["lact"] = 0;
-	this.flags["vag"]  = 0;
+	this.flags["vag"]  = Terry.Pussy.None;
 	this.flags["cock"] = Terry.Cock.Regular;
 	
 	this.sbombs = 3;
@@ -124,6 +124,11 @@ Terry.Cock = {
 	Regular : 0,
 	Horse   : 1,
 	None    : 2
+}
+Terry.Pussy = {
+	None   : 0,
+	Virgin : 1,
+	Used   : 2
 }
 Terry.PersonalQuest = {
 	NotStarted : 0,
@@ -210,8 +215,10 @@ Terry.prototype.SetLactation = function() {
 }
 Terry.prototype.SetPussy = function() {
 	this.body.vagina = [];
-	if(this.flags["vag"] != 0) {
+	if(this.flags["vag"] != Terry.Pussy.None) {
 		this.body.vagina.push(new Vagina());
+		if(this.flags["vag"] == Terry.Pussy.Used)
+			this.FirstVag().virgin = false;
 	}
 }
 Terry.prototype.SetCock = function() {
@@ -3793,10 +3800,10 @@ Scenes.Terry.JeanneTFGrowVag = function() {
 		Text.Add("You can’t resist touching it, squeezing it gently between forefinger and thumb and rolling it between your digits. This is evidently the last straw for Terry; the [foxvixen] lets out a barking cry of pleasure and veritably gushes femcum from [hisher] new pussy, a great wet squirt of juices splashes against the your [hand]s and the floor, followed by a couple more weak squirts as [heshe] collapses, exhausted for the moment.", parse);
 		Text.NL();
 		Text.Add("Looking at the great mess that Terry has made, you can’t help shaking your head and quipping that it looks like [hisher] new equipment is working just fine. Out of the corner of your eye, you can see Jeanne smirking before she twitches her fingers, making the fluids roll and seep off of Terry’s body and yours alike, creeping along the floor in a great puddle before rising up and pouring itself into an open bottle that comes floating through the air to meet it.", parse);
+		terry.flags["vag"] = Terry.Pussy.Virgin;
 	}
 	Text.Flush();
 	
-	terry.flags["vag"] = 1;
 	terry.SetPussy();
 	
 	var cum = terry.OrgasmCum();
@@ -3845,7 +3852,7 @@ Scenes.Terry.JeanneTFRemVag = function() {
 	}
 	Text.Flush();
 	
-	terry.flags["vag"] = 0;
+	terry.flags["vag"] = Terry.Pussy.None;
 	terry.SetPussy();
 	
 	Scenes.Jeanne.InteractPrompt();
@@ -3976,7 +3983,7 @@ Scenes.Terry.JeanneTFRemCock = function() {
 			Text.NL();
 			Text.Add("Terry has grown [himher]self a brand new pussy to replace [hisher] old cock!  ", parse);
 			
-			terry.flags["vag"] = 1;
+			terry.flags["vag"] = Terry.Pussy.Virgin;
 			terry.SetPussy();
 		}
 		

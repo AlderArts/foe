@@ -105,6 +105,7 @@ function Rigard(storage) {
 	this.LB["RotRumor"] = 0;
 	this.LB["Efri"]     = 0;
 	this.LB["RoomNr"]   = 0;
+	this.LB["RoomComp"] = 0;
 	this.LB["Tea"]      = 0;
 	this.LB["Lizan"]    = 0;
 	this.LB["Elven"]    = 0;
