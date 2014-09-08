@@ -37,7 +37,8 @@ Burrows.AccessFlags = {
 
 Burrows.TraitFlags = {
 		Inactive         : 0,
-		Active           : 1
+		Gathered         : 1,
+		Active           : 2
 };
 
 Burrows.prototype.ToStorage = function() {

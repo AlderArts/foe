@@ -92,6 +92,37 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 	return Scenes.Momo.MomoEnc;
 }, 1.0, function() { return momo.Wandering(); });
 
+
+world.loc.Forest.Outskirts.enc.AddEnc(function() {
+	return function() {
+		var parse = {
+			
+		};
+		
+		Text.Clear();
+		Text.Add("You find the remains of some large insect; an immense whitened husk, mostly deteriorated by the passage of time. From what you see, you wouldn’t want to meet a live one face to face. Though its lower body is a mess of chitin and a multitude of legs, the shriveled torso looks oddly human. You’d never mistake the face for that of a human, however.", parse);
+		Text.NL();
+		Text.Add("Shuddering, you pocket a small part of the chitin that still looks usable.", parse);
+		Text.NL();
+		Text.Add("<b>Received a Gol husk!</b>", parse);
+		Text.Flush();
+		
+		party.Inv().AddItem(Items.Quest.GolHusk);
+		
+		if(party.Inv().QueryNum(Items.Quest.GolHusk) >= 3) {
+			burrows.flags["HermTrait"] = Burrows.TraitFlags.Gathered;
+			Text.NL();
+			Text.Add("You think you've gathered enough of these for now, you should return them to Ophelia.", parse);
+		}
+		Text.Flush();
+		
+		world.TimeStep({minute: 15});
+		
+		Gui.NextPrompt();
+	};
+}, 4.0, function() { return burrows.flags["Access"] >= Burrows.AccessFlags.Visited && burrows.flags["HermTrait"] == Burrows.TraitFlags.Inactive; });
+
+
 world.loc.Forest.Outskirts.links.push(new Link(
 	"Crossroads", true, true,
 	function() {

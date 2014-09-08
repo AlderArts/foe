@@ -88,6 +88,15 @@ world.loc.Rigard.Slums.gate.links.push(new Link(
 		MoveToLocation(world.loc.Rigard.Tavern.common, {minute: 10});
 	}
 ));
+world.loc.Rigard.Slums.gate.links.push(new Link(
+	"Lake", true, true,
+	function() {
+		Text.AddOutput("Go to the lake? ");
+	},
+	function() {
+		MoveToLocation(world.loc.Lake.Shore, {minute: 15});
+	}
+));
 
 world.loc.Rigard.Slums.gate.events.push(new Link(
 	"Miranda", function() { return miranda.IsAtLocation(); }, true,
