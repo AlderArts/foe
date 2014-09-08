@@ -990,6 +990,7 @@ Scenes.Cale.TentSex = function() {
 	if(player.FirstVag()) {
 		options.push({ nameStr : "Get eaten",
 			func : function() {
+				Text.Clear();
 				Text.Add("<i>”It’d be my pleasure,”</i> Cale grins, licking his lips wolfishly.", parse);
 				Text.NL();
 				Scenes.Cale.SexGetEatenEntrypoint();
@@ -1111,6 +1112,7 @@ Scenes.Cale.OutsideSex = function() {
 	if(player.FirstVag()) {
 		options.push({ nameStr : "Get eaten",
 			func : function() {
+				Text.Clear();
 				Text.Add("<i>”Sure, I was getting a bit hungry anyways,”</i> Cale grins, licking his lips. <i>”Hope you don’t mind an audience!”</i>", parse);
 				Text.NL();
 				Scenes.Cale.SexGetEatenEntrypoint(true);
@@ -1164,6 +1166,7 @@ Scenes.Cale.SexSuckHim = function(outside) {
 		masterMistress : player.mfTrue("master", "mistress")
 	};
 	
+	Text.Clear();
 	if(outside)
 		Text.Add("<i>”My meat is always available for you, if you don’t mind the prying eyes,”</i> Cale grins, hefting his bulge.", parse);
 	else
