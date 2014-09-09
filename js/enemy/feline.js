@@ -984,6 +984,7 @@ Scenes.Felines.WinFuckButt = function(cat, group, enc, cocks) {
 		Gui.SetButtonsFromList(options);
 	}
 	else {
+		player.AddLustFraction(-1);
 		Text.Add("The base of the artificial cock grinds against your [vagDesc], triggering your own climax. For a long while, you remain there, your [cockDesc] buried deep inside [possessive] overstimulated colon. Both of you are panting, sweat dripping from your exhausted bodies. When you do pull out, you leave [hisher] hole gaping, twitching slightly as if grasping after the withdrawn toy.", parse);
 		
 		PrintDefaultOptions();

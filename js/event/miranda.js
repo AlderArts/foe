@@ -3580,7 +3580,7 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 		Text.Add("Freed from [itsTheir] confines, your [multiCockDesc] flop[notS] out, quickly becoming erect as you ravage the horny herm with your eyes. You can hardly wait to plunge inside her sopping wet pussy.", parse);
 	}
 	else {
-		Text.Add("You quickly equip your [cockDesc], securing the artificial member. It’s going to see a lot of action in the coming hours.", parse);
+		Text.Add("You quickly equip your [cockDesc], securing it carefully. It’s going to see a lot of action in the coming hours.", parse);
 	}
 	Text.Add(" Placing[oneof] your [multiCockDesc] at her entrance, you rub the tip in her juices. A shiver runs through the canid as you slowly push inside her, and she bites her lip, trying to suppress a moan.", parse);
 	Text.NL();
@@ -4974,6 +4974,7 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 		var mCum = miranda.OrgasmCum();
 
 		var cum = p1Cock.isStrapon ? -1 : player.OrgasmCum();
+		player.AddLustFraction(-1);
 		
 		if(!p1Cock.isStrapon) {
 			Text.NL();
