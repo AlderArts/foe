@@ -42,6 +42,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/tf.js \
 	js/items/quest.js \
 	js/items/ingredients.js \
+	js/items/alchemy.js \
 	js/items/alchemyspecial.js \
 	js/items/toys.js \
 	js/items/cards.js \
