@@ -143,7 +143,8 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(jeanne.flags["Met"] != 0) status |= Quests.Type.Completed;
+				if(jeanne.flags["Met"] != 0)
+					status |= Quests.Type.Completed;
 				return status;
 			}
 		}),
@@ -204,7 +205,8 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(rigard.Access()) status |= Quests.Type.Completed;
+				if(rigard.Access())
+					status |= Quests.Type.Completed;
 				return status;
 			}
 		}),
@@ -216,7 +218,8 @@ Quests.quests.push(new Quest({
 				var status = Quests.Type.NotStarted;
 				if(rigard.Access())
 					status |= Quests.Type.Visible;
-				if(rigard.RoyalAccess()) status |= Quests.Type.Completed;
+				if(rigard.RoyalAccess())
+					status |= Quests.Type.Completed;
 				return status;
 			}
 		})
@@ -239,9 +242,56 @@ Quests.quests.push(new Quest({
 		else if(rigard.flags["RoyalAccessTalk"] >= 1)
 			status |= Quests.Type.Visible;
 		return status;
-	}
-	/*
-	,
+	},
+	list: [
+		new QuestItem({
+			desc: function() {
+				return "Investigate what became of the noble couple and their stalker. Perhaps seek them at the inn?";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				if(twins.flags["Met"] >= Twins.Met.Met)
+					status |= Quests.Type.Completed;
+				status |= Quests.Type.Visible;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Heed the noble couple's request by humiliating Lord Krawitz.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				if(twins.flags["Met"] >= Twins.Met.Met)
+					status |= Quests.Type.Visible;
+				if(rigard.RoyalAccess())
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		})
+	]
+}));
+
+//TODO Krawitz, Terry, Burrows, Gwendy
+
+/*
+ * 
+
+Quests.quests.push(new Quest({
+	name: function() {
+		return "Seeking favor";
+	},
+	desc: function() {
+		return "Investigate the noble couple you saw sneaking out of the inner district. You probably ought to figure out why they were followed.";
+	},
+	active: function() {
+		var status = Quests.Type.NotStarted;
+		if(rigard.RoyalAccess())
+			status |= Quests.Type.Completed;
+		else if(rigard.flags["RoyalAccessTalk"] >= 1)
+			status |= Quests.Type.Visible;
+		return status;
+	},
 	list: [
 		new QuestItem({
 			desc: function() {
@@ -253,22 +303,12 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(rigard.Access()) status |= Quests.Type.Completed;
-				return status;
-			}
-		}),
-		new QuestItem({
-			desc: function() {
-				return "Find a way to get past the inner walls.";
-			},
-			active: function() {
-				var status = Quests.Type.NotStarted;
 				if(rigard.Access())
-					status |= Quests.Type.Visible;
-				if(rigard.RoyalAccess()) status |= Quests.Type.Completed;
+					status |= Quests.Type.Completed;
 				return status;
 			}
 		})
 	]
-	*/
 }));
+
+ */
