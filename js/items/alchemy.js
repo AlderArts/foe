@@ -395,6 +395,35 @@ Items.Testos.lDesc = function() { return "a bottle of Testos"; }
 Items.Testos.Short = function() { return "A bottle of Testos"; }
 Items.Testos.Long = function() { return "A bottle of pure masculinity labled Testos."; }
 Items.Testos.Recipe = [{it: Items.Equinium}, {it: Items.Homos}, {it: Items.Canis}];
+Items.Testos.PushEffect(TF.ItemEffects.SetBalls, {odds: 0.2, ideal: 2, count: 2});
+// TODO: parse
+Items.Testos.PushEffect(function(target) {
+	var parse = {};
+	if(Math.random() < 0.1) {
+		var res = target.body.muscleTone.IncreaseStat(.7, .1, true);
+	}
+	if(Math.random() < 0.8) {
+		var res = target.body.femininity.DecreaseStat(-1, .1, true);
+	}
+	Text.Flush();
+});
+Items.Testos.PushEffect(function(target) {
+	var parse = {
+		Poss: target.Possessive(),
+		ballsDesc : function() { return target.BallsDesc(); },
+		s      : target.HasBalls() ? "s" : "",
+		notS   : target.HasBalls() ? "" : "s",
+		itThey : target.HasBalls() ? "they" : "it"
+	};
+	if(target.HasBalls() && Math.random() < 0.6) {
+		var res = target.Balls().size.IncreaseStat(10, 1);
+		if(res > 0) {
+			Text.Add("[Poss] balls have grown in size to [ballsDesc]!", parse);
+			Text.NL();
+		}
+	}
+	Text.Flush();
+});
 
 
 Items.Estros = new TFItem("sex3", "Estros");
@@ -403,3 +432,15 @@ Items.Estros.lDesc = function() { return "a bottle of Estros"; }
 Items.Estros.Short = function() { return "A bottle of Estros"; }
 Items.Estros.Long = function() { return "A bottle of pure femininity labled Estros."; }
 Items.Estros.Recipe = [{it: Items.Vulpinix}, {it: Items.Homos}, {it: Items.Bovia}];
+Items.Estros.PushEffect(TF.ItemEffects.RemBalls, {odds: 0.2, ideal: 0, count: 2});
+// TODO: parse
+Items.Estros.PushEffect(function(target) {
+	var parse = {};
+	if(Math.random() < 0.1) {
+		var res = target.body.muscleTone.DecreaseStat(.0, .1, true);
+	}
+	if(Math.random() < 0.8) {
+		var res = target.body.femininity.IncreaseStat(1, .1, true);
+	}
+	Text.Flush();
+});
