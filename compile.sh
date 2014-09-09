@@ -53,6 +53,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/items/weapons.js \
 	js/shop.js \
 	js/alchemy.js \
+	js/quest.js \
 	js/cavalcade.js \
 	js/event/introduction.js \
 	js/loc/rigard/rigard.js \

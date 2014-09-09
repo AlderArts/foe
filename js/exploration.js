@@ -42,6 +42,7 @@ ExploreButtonIndex = {
 	Items   : 2,
 	Ability : 3,
 	Alchemy : 4,
+	Quests  : 5,
 	
 	Wait    : 8,
 	Sleep   : 9,
@@ -66,6 +67,7 @@ SetExploreButtons = function() {
 	    Input.exploreButtons[ExploreButtonIndex.Ability].Setup("Abilities", ShowAbilities, true);
 	    if(player.alchemyLevel > 0)
 	    	Input.exploreButtons[ExploreButtonIndex.Alchemy].Setup("Alchemy", ShowAlchemy, true);
+    	Input.exploreButtons[ExploreButtonIndex.Quests].Setup("Quests", ShowQuests, true);
 	    
 	    if(safeLocation) { // SLEEP
 	    	Input.exploreButtons[ExploreButtonIndex.Sleep].Setup("", party.location.SleepFunc, waitLocation, null,
@@ -329,6 +331,17 @@ ShowAlchemy = function(preventClear) {
 	
 	Alchemy.AlchemyPrompt(player, party.inventory);
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Alchemy];
+	
+	SetExploreButtons();
+}
+
+ShowQuests = function(preventClear) {
+	if(!preventClear)
+		Text.Clear();
+	Gui.ClearButtons();
+	
+	Quests.Print();
+	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Quests];
 	
 	SetExploreButtons();
 }
