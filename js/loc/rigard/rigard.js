@@ -180,6 +180,10 @@ Rigard.prototype.Visa = function() {
 Rigard.prototype.Access = function() {
 	return this.Visa();
 }
+// TODO: add other ways
+Rigard.prototype.RoyalAccess = function() {
+	return this.flags["RoyalAccess"] != 0;
+}
 
 Rigard.prototype.GatesOpen = function() {
 	return world.time.hour >= 8 && world.time.hour < 17;
