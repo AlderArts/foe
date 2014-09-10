@@ -32,6 +32,9 @@ Quest.prototype.Print = function() {
 		Text.Add("</ul>");
 	}
 }
+Quest.prototype.Active = function() {
+	return this.active(this) & Quests.curType;
+}
 
 QuestItem = function(opts) {
 	opts = opts || {};
@@ -39,7 +42,7 @@ QuestItem = function(opts) {
 	this.active = opts.active;
 };
 QuestItem.prototype.Print = function() {
-	var active = this.active ? this.active() : Quests.Type.Visible;
+	var active = this.Active();
 	if((active & Quests.Type.Visible) || DEBUG) {
 		Text.Add("<li>");
 		if(active & Quests.Type.Completed)
@@ -60,6 +63,9 @@ QuestItem.prototype.Print = function() {
 		Text.Add("</li>");
 	}
 }
+QuestItem.prototype.Active = function() {
+	return this.active ? this.active() : Quests.Type.Visible;
+}
 
 Quests.quests  = [];
 Quests.curType = Quests.Type.Visible;
@@ -68,7 +74,7 @@ Quests.Print = function() {
 	var numQs = 0;
 	for(var i=0, j=Quests.quests.length; i<j; ++i) {
 		var q = Quests.quests[i];
-		var active = q.active() & Quests.curType;
+		var active = q.Active();
 		if(active || DEBUG) {
 			numQs++;
 			Text.Add("<hr>");
@@ -177,6 +183,103 @@ Quests.quests.push(new Quest({
 }));
 
 
+Quests.quests.push(new Quest({
+	name: function() {
+		return "The nomads";
+	},
+	desc: function() {
+		return "Explore the nomads' camp and talk to it's inhabitants.";
+	},
+	active: function(quest) {
+		var complete = true;
+		for(var i=0, j=quest.list.length; i<j; ++i)
+			complete &= (quest.list[i].Active() & Quests.Type.Completed) != 0;
+		var status = Quests.Type.NotStarted;
+		if(complete)
+			status |= Quests.Type.Completed;
+		else
+			status |= Quests.Type.Visible;
+		return status;
+	},
+	list: [
+		new QuestItem({
+			desc: function() {
+				return "Talk to the leader of the nomads.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(chief.flags["Met"] != 0)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Approach the strange alchemist.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(rosalin.flags["Met"] != 0)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Perhaps you should check up on that wolf again...";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				if(rosalin.flags["Met"] != 0)
+					status |= Quests.Type.Visible;
+				if(cale.flags["Met2"] != Cale.Met2.NotMet)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Approach the hunter.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(estevan.flags["Met"] != 0)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Approach the magician.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(magnus.flags["Met"] != 0)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		})
+		/*, //TODO Patchwork
+		new QuestItem({
+			desc: function() {
+				return "Approach shopkeeper.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(patchwork.flags["Met"] != 0)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		})
+		*/
+	]
+}));
+
 
 Quests.quests.push(new Quest({
 	name: "Big city",
@@ -272,7 +375,74 @@ Quests.quests.push(new Quest({
 	]
 }));
 
-//TODO Krawitz, Terry, Burrows, Gwendy
+
+
+Quests.quests.push(new Quest({
+	name: function() {
+		return "Mixin' it up!";
+	},
+	desc: function() {
+		return "Learn about alchemy from Rosalin.";
+	},
+	active: function() {
+		var status = Quests.Type.NotStarted;
+		if(rosalin.flags["AlQuest"] >= 2)
+			status |= Quests.Type.Completed;
+		else if(rosalin.flags["Met"] != 0)
+			status |= Quests.Type.Visible;
+		return status;
+	},
+	list: [
+		new QuestItem({
+			desc: function() {
+				var parse = rosalin.ParserPronouns();
+				return Text.Parse("Ask Rosalin if [heshe] could teach you the secrets of [hisher] trade.", parse);
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(rosalin.flags["AlQuest"] >= 1)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Retrieve the items that Rosalin requested. You should be able to find them from the lagomorphs near the crossroads. The alchemist asked for <b>lettuce, carrot juice and a rabbit foot charm.</b>";
+			},
+			active: function() {
+				var item = Items.Leporine;
+				var enabled = true;
+				for(var j = 0; j < item.Recipe.length; j++) {
+					var component = item.Recipe[j];
+					enabled &= (party.inventory.QueryNum(component.it) >= (component.num || 1));
+				}
+				
+				var status = Quests.Type.NotStarted;
+				if(rosalin.flags["AlQuest"] >= 1)
+					status |= Quests.Type.Visible;
+				if(rosalin.flags["AlQuest"] >= 2 || enabled)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Return the items to Rosalin and learn how to do alchemy.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				if(rosalin.flags["AlQuest"] >= 1)
+					status |= Quests.Type.Visible;
+				if(rosalin.flags["AlQuest"] >= 2)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		})
+	]
+}));
+
+//TODO Krawitz(?), Terry, Burrows, Gwendy
 
 /*
  * 

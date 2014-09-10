@@ -260,21 +260,6 @@ Scenes.Chief.Interact = function() {
 			tooltip : "Ask the chief about various professions and how you can learn them (tutorial on job system)."
 		});
 		
-		/*
-		 * [] - 
-
-
-
-
-
-
-
-
-
-
-
-		 */
-		
 		Gui.SetButtonsFromList(options, true);
 	}
 }
