@@ -430,7 +430,7 @@ Quests.quests.push(new Quest({
 		return "A guilty conscience";
 	},
 	desc: function() {
-		return "You are feeling a bit guilty about the fox currently imprisoned due to your actions. Who knows, he could end up being executed over this.";
+		return "You are feeling a bit guilty about the fox currently imprisoned due to your actions. Who knows, he could end up being executed over this, given how the royal guard regards morphs in Rigard.";
 	},
 	active: function() {
 		var status = Quests.Type.NotStarted;
@@ -443,7 +443,7 @@ Quests.quests.push(new Quest({
 	list: [
 		new QuestItem({
 			desc: function() {
-				return "Ask around about what's happened to the thief.";
+				return "Ask around about what's happened to the thief. Who'd have the authority to release him from custody?";
 			},
 			active: function() {
 				var status = Quests.Type.NotStarted;
