@@ -126,6 +126,9 @@ Quests.Print = function() {
  * Actual list of quests *
  *************************/
 
+
+// MAIN QUESTS
+
 Quests.quests.push(new Quest({
 	name: "Dark agenda",
 	desc: function() {
@@ -376,6 +379,109 @@ Quests.quests.push(new Quest({
 }));
 
 
+Quests.quests.push(new Quest({
+	name: function() {
+		return "Shifting the blame";
+	},
+	desc: function() {
+		return "Crap, they are on to you. If you don't want to spend the rest of your short life in a cell, you'd better help Miranda catch the thief called the 'Masked Fox'. Before you do, you're not likely to get out of Rigard.";
+	},
+	active: function() {
+		var status = Quests.Type.NotStarted;
+		if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry)
+			status |= Quests.Type.Completed;
+		else if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry)
+			status |= Quests.Type.Visible;
+		return status;
+	},
+	list: [
+		new QuestItem({
+			desc: function() {
+				return "Find the thief.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(terry.flags["Met"] >= Terry.Met.Found)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Catch the thief.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(terry.flags["Met"] >= Terry.Met.Caught)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		})
+	]
+}));
+
+
+// SIDE QUESTS
+
+Quests.quests.push(new Quest({
+	name: function() {
+		return "A guilty conscience";
+	},
+	desc: function() {
+		return "You are feeling a bit guilty about the fox currently imprisoned due to your actions. Who knows, he could end up being executed over this.";
+	},
+	active: function() {
+		var status = Quests.Type.NotStarted;
+		if(terry.flags["Saved"] >= Terry.Saved.Saved)
+			status |= Quests.Type.Completed;
+		else if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry)
+			status |= Quests.Type.Visible;
+		return status;
+	},
+	list: [
+		new QuestItem({
+			desc: function() {
+				return "Ask around about what's happened to the thief.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(terry.flags["Saved"] >= Terry.Saved.TalkedTwins1)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Return to the twins after they have made their arrangements.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				if(terry.flags["Saved"] >= Terry.Saved.TalkedTwins1)
+					status |= Quests.Type.Visible;
+				if(terry.flags["Saved"] >= Terry.Saved.TalkedTwins2)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Take custody of the thief from the jail in the royal grounds. It'll be quite interesting to see what effects the collar has...";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				if(terry.flags["Saved"] >= Terry.Saved.TalkedTwins2)
+					status |= Quests.Type.Visible;
+				if(terry.flags["Saved"] >= Terry.Saved.Saved)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		})
+	]
+}));
+
 
 Quests.quests.push(new Quest({
 	name: function() {
@@ -442,7 +548,44 @@ Quests.quests.push(new Quest({
 	]
 }));
 
-//TODO Krawitz(?), Terry, Burrows, Gwendy
+
+/*
+Quests.quests.push(new Quest({
+	name: function() {
+		return "Breeding bunnies";
+	},
+	desc: function() {
+		return "Help Ophelia with her experiments.";
+	},
+	active: function() {
+		var status = Quests.Type.NotStarted;
+		if(rigard.RoyalAccess())
+			status |= Quests.Type.Completed;
+		else if(rigard.flags["RoyalAccessTalk"] >= 1)
+			status |= Quests.Type.Visible;
+		return status;
+	},
+	list: [
+		new QuestItem({
+			desc: function() {
+				if(rigard.Access())
+					return "";
+				else
+					return "";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(rigard.Access())
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		})
+	]
+}));
+*/
+
+//TODO Krawitz(?), Burrows, Gwendy
 
 /*
  * 
