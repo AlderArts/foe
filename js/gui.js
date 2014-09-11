@@ -156,6 +156,7 @@ Gui.Init = function() {
     Input.exploreButtons[ExploreButtonIndex.Items].SetKey(KEY_8);
     Input.exploreButtons[ExploreButtonIndex.Ability].SetKey(KEY_9);
     Input.exploreButtons[ExploreButtonIndex.Alchemy].SetKey(KEY_0);
+    Input.exploreButtons[ExploreButtonIndex.Quests].SetKey(KEY_U);
     
     
     Input.menuButtons[0].SetKey(KEY_CONSOLE);

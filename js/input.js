@@ -104,6 +104,7 @@ Input.RenderExploreButtonGlow = function() {
 	}
 }
 
+// TODO this is actually wrong
 KEY_CONSOLE = 0;
 
 KEY_1 = 49;
