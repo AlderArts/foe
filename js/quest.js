@@ -555,7 +555,7 @@ Quests.quests.push(new Quest({
 		return "Breeding bunnies";
 	},
 	desc: function() {
-		return "Help Ophelia with her experiments.";
+		return "Help Ophelia with her alchemical experiments in the Burrows. You are not sure this is really a good idea, but Lagon promised to pay you handsomely for your services.";
 	},
 	active: function() {
 		var status = Quests.Type.NotStarted;

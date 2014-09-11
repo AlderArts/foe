@@ -1280,12 +1280,19 @@ function Balls(race, color) {
 	this.count         = new Stat(0);
 	this.size          = new Stat(3);
 	this.cumProduction = new Stat(1);
-	this.cumCap        = new Stat(10); // Maximum cum
+	this.cumCap        = new Stat(5); // Maximum cum
 	this.cum           = new Stat(0); // Current accumulated cum
 	this.fertility     = new Stat(0.3); // 0..1
 }
 Balls.prototype = new BodyPart();
 Balls.prototype.constructor = Balls;
+
+Balls.prototype.CumCap = function() {
+	var num = this.count.Get();
+	var cap = this.cumCap.Get();
+	cap += num * this.size.Get();
+	return cap;
+}
 
 Balls.prototype.noun = function() {
 	var count = this.count.Get();
@@ -1349,13 +1356,13 @@ Balls.prototype.adj = function() {
 
 Balls.prototype.adj2 = function() {
 	var adjs = [];
-	if(this.cum.Get() / this.cumCap.Get() > 0.8) {
+	if(this.cum.Get() / this.CumCap() > 0.8) {
 		adjs.push("overflowing ");
 		adjs.push("swollen ");
 		adjs.push("engorged ");
 		adjs.push("cum-engorged ");
 	}
-	if(this.cum.Get() / this.cumCap.Get() > 0.5) {
+	if(this.cum.Get() / this.CumCap() > 0.5) {
 		adjs.push("eager ");
 		adjs.push("full ");
 		adjs.push("needy ");

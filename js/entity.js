@@ -1203,7 +1203,7 @@ Entity.prototype.AccumulateCumOverTime = function(hours) {
 	var inc = balls.cumProduction.Get() * hours;
 
 	// Max out
-	balls.cum.IncreaseStat(balls.cumCap.Get(), inc);
+	balls.cum.IncreaseStat(balls.CumCap(), inc);
 }
 //TODO
 Entity.prototype.AccumulateMilkOverTime = function(hours) {
@@ -1678,13 +1678,13 @@ Entity.prototype.HasScales = function() {
 Entity.prototype.RestoreCum = function(quantity) {
 	quantity = quantity || 1;
 	var balls = this.Balls();
-	return balls.cum.IncreaseStat(balls.cumCap.Get(), quantity);
+	return balls.cum.IncreaseStat(balls.CumCap(), quantity);
 }
 // TODO
 Entity.prototype.CumOutput = function(mult) {
 	mult = mult || 1;
 	var balls = this.Balls();
-	var cum = mult * balls.cumCap.Get() / 4;
+	var cum = mult * balls.CumCap() / 4;
 	cum *= this.LustLevel() + 0.5;
 	
 	cum = Math.min(cum, balls.cum.Get());
@@ -2321,7 +2321,7 @@ Entity.prototype.PrintDescription = function() {
 	
 	// TODO TEMP
 	var balls = this.Balls();
-	Text.Add("Cum: " + balls.cum.Get().toFixed(2) + " / " + balls.cumCap.Get().toFixed(2));
+	Text.Add("Cum: " + balls.cum.Get().toFixed(2) + " / " + balls.CumCap().toFixed(2));
 	Text.NL();
 	Text.Add("Milk: " + this.Milk().toFixed(2) + " / " + this.MilkCap().toFixed(2));
 	Text.NL();
