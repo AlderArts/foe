@@ -98,11 +98,6 @@ Feedback:
  - Images when hovering location?
 
 
-
-* Body builds
- - Functions for making default builds (weight, height, muscularity, femininity etc)
- - Use in intro sequence
-
 * Location
  - Plains - flesh out with encounters
  - Burrows
@@ -124,7 +119,7 @@ Feedback:
  - Enemies [plains]: Generic morphs
  - Enemies [plains]: Kobolds? Goblins? Centaurs?
 
-* Implement schedules
+* Implement schedules (kinda sorta done?)
 
 
 * Restructure Desc() to return an object:

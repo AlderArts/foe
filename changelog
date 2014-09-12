@@ -16,6 +16,7 @@ Version 0.3m
 * Added a new scene to Magnus, if you went and learned magic from Jeanne (a pretty short thing, but things make more sense now).
 * Added TFs to Terry. This doesn't quite work the same way as usual TFs, but look around and I'm sure you'll figure out how to do it.
  - This includes some temporary and partially implemented items. Some of these can currently ONLY be gotten through cheating (debug in the tent).
+* Added a "check cum amount" to Terry (in his pet section). You have to become a bit intimate with him before unlocking it.
 * Introduced a quest tracking mechanism, and coded a few of the main quest bits.
 
 --------------------------------------------

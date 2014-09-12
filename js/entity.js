@@ -1681,13 +1681,16 @@ Entity.prototype.RestoreCum = function(quantity) {
 	return balls.cum.IncreaseStat(balls.CumCap(), quantity);
 }
 // TODO
+Entity.prototype.Cum = function() {
+	return this.Balls().cum.Get();
+}
 Entity.prototype.CumOutput = function(mult) {
 	mult = mult || 1;
 	var balls = this.Balls();
 	var cum = mult * balls.CumCap() / 4;
 	cum *= this.LustLevel() + 0.5;
 	
-	cum = Math.min(cum, balls.cum.Get());
+	cum = Math.min(cum, this.Cum());
 	return cum;
 }
 // TODO test
