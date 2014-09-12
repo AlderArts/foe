@@ -1208,17 +1208,18 @@ Entity.prototype.AccumulateCumOverTime = function(hours) {
 //TODO
 Entity.prototype.AccumulateMilkOverTime = function(hours) {
 	var inc = this.body.milkProduction.Get() * hours;
-	if(inc > 0)
-		this.body.milk.IncreaseStat(this.MilkCap(), inc);
+	if(inc > 0) {
+		this.body.milk.IncreaseStat(this.MilkCap(), inc, true);
+	}
 	if(this.Milk() >= this.MilkCap()) {
 		this.MilkFull();
 	}
 	
 	if(this.Lactation()) {
 		var dec = this.body.lactationRate.Get() * hours;
-		if(dec > 0)
+		if(dec > 0) {
 			this.body.milk.DecreaseStat(0, dec);
-		
+		}
 		if(this.Milk() <= 0)
 			this.MilkDrained();
 	}
