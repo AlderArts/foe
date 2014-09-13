@@ -791,6 +791,7 @@ Scenes.Cale.TalkPrompt = function() {
 
 Scenes.Cale.TalkPast = function() {
 	var parse = {
+		playername : player.name,
 		cbuttDesc : function() { return cale.Butt().Short(); },
 		cAnusDesc : function() { return cale.Butt().AnalShort(); },
 		multiCockDesc : function() { return player.MultiCockDesc(); },
