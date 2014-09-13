@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 3;
-VERSION_SUBSCRIPT = "l";
-VERSION_NAME = "Terry, Miranda and a whole lot of tentacles.";
+VERSION_SUBSCRIPT = "m";
+VERSION_NAME = "The quest for fox TF.";
 
 SAVE_VERSION = 19;
 // Save version 1: Initial
