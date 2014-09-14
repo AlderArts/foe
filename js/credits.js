@@ -34,6 +34,12 @@ CreditsScreen = function() {
 	Text.AddOutput(Text.BoldColor("Art:"));
 	Text.Newline();
 	Text.AddOutput("Cavalcade cards: Jass Befrold (colors by Alder)<br/>");
+	Text.Newline();
+	Text.AddOutput(Text.BoldColor("Loyal patreons:"));
+	Text.Newline();
+	Text.AddOutput("StarcraftJunkie, Dane, Mark");
+	Text.Newline();
+	Text.AddOutput("...and all the rest of you!");
 	
 	Input.buttons[0].Setup("Back", SplashScreen, true);
 }
