@@ -127,6 +127,95 @@ Lei.prototype.Interact = function() {
 	});
 }
 
+Scenes.Lei.InnPromptRepeat = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("PLACEHOLDER", parse);
+	Text.NL();
+	Text.Flush();
+	
+	//[name]
+	var options = new Array();
+	/* TODO
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	*/
+	if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.Started && rigard.Krawitz["Q"] < Rigard.KrawitzQ.HeistDone) {
+		options.push({ nameStr : "Krawitz",
+			func : function() {
+				Text.Clear();
+				
+				//rigard.Krawitz["Duel"] = 0; // 0 = no, 1 = superwin, 2 = win, 3 = loss
+				var duel  = rigard.Krawitz["Duel"];
+				var hired = rigard.Krawitz["Work"] == 1;
+				
+				parse["progress"] = ((duel != 0) || hired) ? ", telling him about your progress so far" : "";
+				
+				Text.Add("You ask Lei if he has any ideas for dealing with Krawitz[progress].", parse);
+				Text.NL();
+				if(duel > 0) {
+					if(duel == 1) {
+						Text.Add("Lei stares at you, his normally impassive face transfigured with surprise. <i>“Wow. I have to say that even I am impressed. Very artfully done, my friend.”</i>", parse);
+						Text.NL();
+						Text.Add("<i>“I expect Krawitz will remember that humiliation for a good long time - as will the rest of the city. Still, if you have set your mind to really getting him, there is much else you can do.”</i>", parse);
+					}
+					else if(duel == 2) {
+						Text.Add("Lei raises his eyebrows. <i>“Well done! It takes a good bit of skill to beat a master at his own weapon, even if he is rather old. That will probably sting his pride for some time.”</i>", parse);
+						Text.NL();
+						Text.Add("<i>“Still, there is much else you can do.”</i>", parse);
+					}
+					else { // loss
+						Text.Add("Lei shrugs. <i>“So, you challenged him to a duel and lost. It happens,”</i> he says, then glances to the side, <i>“I am given to understand, anyway. He had the advantage of practice and extreme familiarity with the weapon. If you wanted to beat him, you needed to have incredible raw skill.”</i>", parse);
+						Text.NL();
+						Text.Add("<i>“But no matter, there are other avenues for you to explore.”</i>", parse);
+					}
+					Text.NL();
+				}
+				else if(duel == 0) { // not fought
+					Text.Add("<i>“Perhaps the first, and safest step you can take is to confront Krawitz in public. Find some pretext to challenge him to a duel, and beat him in front of everyone. Humiliate him if you can,”</i> Lei suggests, a predatory grin on his lips.", parse);
+					Text.NL();
+					Text.Add("<i>“Most nobles go out into the Plaza from time to time, so if you look around you should be able to find him. Be warned, however, that it is no easy task to beat a specialist with his own weapon. ", parse);
+					if(player.Dex() < 40)
+						Text.Add("In fact, though you may attempt the deed, I feel you would fall short.”</i>", parse);
+					else
+						Text.Add("Though I suspect you may be able to pull off the feat.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“There are more... personal avenues you can pursue as well once you are done with that as well.”</i>", parse);
+					Text.NL();
+				}
+				Text.Add("Lei pauses, thinking for a moment. ", parse);
+				if(hired)
+					Text.Add("<i>“You already have a route into estate, so now all you need to do is go. Have courage and be prepared to improvise once you’re inside.", parse);
+				else {
+					Text.Add("<i>“You will need to find a way into his estate. It is, of course, always possible to simply climb in during the night, but it is often simpler to find a legitimate pretext for being there if you can.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Once you are inside, my best advice is to have courage and be prepared to improvise.", parse);
+				}
+				Text.Add(" Often, it is most effective to use a man’s own tools and followers against him.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Obtain information you can from Krawitz’s servants and guards, determine how to exploit and emphasize his weaknesses, and execute your plan. Of course, make sure your plan is as good as you can make it, as you probably won’t get two chances at it.”</i>", parse);
+				Text.NL();
+				Text.Add("You listen attentively, and nod at his explanation. It sounds reasonable, and he’s speaking as if he’s done this sort of thing plenty of times. Which, realistically, he may very well have.", parse);
+				Text.NL();
+				Text.Add("<i>“And that is all. Once you have done everything you wish to do, leave the estate, and report back to my young protégés. The more you accomplish, the happier they will probably be.”</i>", parse);
+				Text.Flush();
+			}, enabled : true,
+			tooltip : "Ask for advice for dealing with Krawitz."
+		});
+	}
+	Gui.SetButtonsFromList(options, true);
+}
+
 Scenes.Lei.InnPrompt = function() {
 	var parse = {
 		
@@ -142,29 +231,7 @@ Scenes.Lei.InnPrompt = function() {
 	Text.Clear();
 	var first = false;
 	
-	// TODO: LEI REPEAT STUFF
-	if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.Started) {
-		Text.Add("PLACEHOLDER", parse);
-		Text.NL();
-		Text.Add("", parse);
-		Text.NL();
-		Text.Add("", parse);
-		
-		// TODO
-		/*
-		if(twins.flags["Met"] == 0) {
-			// TWINS STUFF INTRO
-			twins.flags["Met"] = Twins.Met.Met;
-		}
-		else {
-			// KNOW ABOUT THE TWINS
-		}
-		*/
-
-		Text.Flush();
-		return;
-	}	
-	else if(lei.flags["Met"] < Lei.Met.KnowName) {
+	if(lei.flags["Met"] < Lei.Met.KnowName) {
 		world.TimeStep({minute: 5});
 		Text.Add("You approach the stranger. He definitely looks like the man you saw following the pair of hooded nobles earlier. His cloak is the same dusky shade, and he has the hood drawn up, casting his face into shadow, raising your suspicions. Up close, you notice that underneath he’s wearing some sort of black form-fitting armor, nicely emphasizing his well-muscled body. When you reach his table, he looks up at you, running his eyes over you methodically.", parse);
 		Text.NL();
@@ -767,7 +834,14 @@ world.loc.Rigard.Inn.common.events.push(new Link(
 		}
 		Text.Flush();
 	},
-	Scenes.Lei.InnPrompt
+	function() {
+		if(rigard.Krawitz["Q"] < Rigard.KrawitzQ.Started) {
+			Scenes.Lei.InnPrompt();
+		}
+		else {
+			Scenes.Lei.InnPromptRepeat();
+		}
+	}
 ));
 
 Scenes.Lei.BarFight = function() {
