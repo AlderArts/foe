@@ -1643,7 +1643,7 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 	Text.Add("[Name] bends down to give your [nipsDesc] a lick, [lact].", parse);
 	Text.NL();
 	if(lactation) {
-	Text.Add("<i>“Milk!?”</i> she exclaims in surprise, giving your [breastDesc] a squeeze and watching in glee as a white droplet slides down your soft mound. <i>“You’ve got cream and milk? Oh my, you’re quite the find aren’t you?”</i> she purrs appreciatively, leaning down to take on of your [nipsDesc] into her mouth and drain you of your milk.", parse);
+		Text.Add("<i>“Milk!?”</i> she exclaims in surprise, giving your [breastDesc] a squeeze and watching in glee as a white droplet slides down your soft mound. <i>“You’ve got cream and milk? Oh my, you’re quite the find aren’t you?”</i> she purrs appreciatively, leaning down to take on of your [nipsDesc] into her mouth and drain you of your milk.", parse);
 	Text.NL();
 	if(dom)
 		Text.Add("That you are, you reply, before informing her that she better drink up; she's going to need her strength. For emphasis, one of your hands rises from her sweet ass and presses against the back of her head, pushing her harder against your tit. Not that she seems to need the encouragement; you moan in delight as she avidly suckles from you.", parse);

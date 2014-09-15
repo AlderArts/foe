@@ -484,7 +484,7 @@ Body.prototype.ToStorage = function() {
 		storage.breasts.push(b);
 	}
 	
-	storage.lact  = this.lactation ? 1 : 0;
+	storage.lact  = this.lactating ? 1 : 0;
 	storage.lactR = this.lactationRate.base;
 	storage.milk  = this.milk.base;
 	storage.milkP = this.milkProduction.base;
@@ -636,7 +636,7 @@ Body.prototype.FromStorage = function(storage) {
 		this.breasts.push(b);
 	}
 	
-	this.lactation           = parseInt(storage.lact) == 1;
+	this.lactating           = parseInt(storage.lact) == 1;
 	this.lactationRate.base  = parseFloat(storage.lactR) || this.lactationRate.base;
 	this.milk.base           = parseFloat(storage.milk)  || this.milk.base;
 	this.milkProduction.base = parseFloat(storage.milkP) || this.milkProduction.base;
@@ -1610,7 +1610,7 @@ Body.prototype.Lactation = function() {
 	if(this.breasts.length == 0)
 		return false;
 	else
-		return this.lactation;
+		return this.lactating;
 }
 //TODO Balance
 Body.prototype.MilkCap = function() {

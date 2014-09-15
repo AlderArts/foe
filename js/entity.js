@@ -1228,12 +1228,12 @@ Entity.prototype.AccumulateMilkOverTime = function(hours) {
 }
 
 Entity.prototype.MilkDrained = function() {
-	this.body.lactation = false;
+	this.body.lactating = false;
 	// TODO Output
 }
 Entity.prototype.MilkFull = function() {
 	if(this.Lactation() == false)
-		this.body.lactation = true;
+		this.body.lactating = true;
 	// TODO Output
 }
 
