@@ -43,3 +43,4 @@ CreditsScreen = function() {
 	
 	Input.buttons[0].Setup("Back", SplashScreen, true);
 }
+

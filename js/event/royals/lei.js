@@ -68,6 +68,12 @@ Lei.Fight = {
 	Loss       : 2,
 	Win        : 3
 };
+Lei.Rel = {
+	L1 : 20,
+	L2 : 40,
+	L3 : 60,
+	L4 : 80
+};
 
 Lei.prototype.Update = function(step) {
 	Entity.prototype.Update.call(this, step);
@@ -127,15 +133,35 @@ Lei.prototype.Interact = function() {
 	});
 }
 
-Scenes.Lei.InnPromptRepeat = function() {
+Scenes.Lei.InnPromptRepeatApproach = function() {
 	var parse = {
 		
 	};
 	
+	if(party.Two())
+		parse["comp"] = ", motioning for "+party.Get(1).name+" to take a seat nearby";
+	else if(!party.Alone())
+		parse["comp"] = ", motioning for your companions to take seats nearby";
+	else
+		parse["comp"] = "";
+		
 	Text.Clear();
-	Text.Add("PLACEHOLDER", parse);
-	Text.NL();
+	Text.Add("You walk over to Lei’s table, and pull up a chair[comp]. He ", parse);
+	if(lei.Relation() < Lei.Rel.L2)
+		Text.Add("glances at you for a moment, and inclines his head fractionally before resuming his survey of the room.", parse);
+	else if(lei.Relation() < Lei.Rel.L4)
+		Text.Add("looks over at you and nods, the hint of a smile on his lips.", parse);
+	else
+		Text.Add("greets you with a smile, evidently pleased to see you.", parse);
 	Text.Flush();
+	
+	Scenes.Lei.InnPromptRepeat();
+}
+
+Scenes.Lei.InnPromptRepeat = function() {
+	var parse = {
+		
+	};
 	
 	//[name]
 	var options = new Array();
@@ -839,7 +865,7 @@ world.loc.Rigard.Inn.common.events.push(new Link(
 			Scenes.Lei.InnPrompt();
 		}
 		else {
-			Scenes.Lei.InnPromptRepeat();
+			Scenes.Lei.InnPromptRepeatApproach();
 		}
 	}
 ));
