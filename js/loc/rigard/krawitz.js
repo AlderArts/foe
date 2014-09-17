@@ -2072,6 +2072,8 @@ Scenes.Krawitz.Aftermath = function() {
 	
 	if(!Scenes.Krawitz.stat.AlarmRaised) points += 1;
 	
+	lei.relation.IncreaseStat(100, points*3);
+	
 	Gui.NextPrompt(function() {
 		world.TimeStep({hour: 2});
 		party.location = world.loc.Rigard.Inn.common;
