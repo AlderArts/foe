@@ -145,7 +145,7 @@ Scenes.Jeanne.Talk = function() {
 			Text.NL();
 			
 			if(gameCache.flags["Portals"] != 0) {
-				Text.Add("<i>”After what happened, I can understand if do not want anything to do with these portals any longer, but it is vital that we are able to find out what caused the portals to disappear in the first place. Lately, I have felt it growing stronger...”</i>", parse);
+				Text.Add("<i>”After what happened, I can understand if you do not want anything to do with these portals any longer, but it is vital that we are able to find out what caused the portals to disappear in the first place. Lately, I have felt it growing stronger...”</i>", parse);
 			}
 			else if(player.summons.length > 0) {
 				Text.Add("<i>”With the help of the spirit of the forest, the stone should have enough power to allow us to open a portal. Meet me near the old mound at the crossroads, and we will test my theory.”</i>", parse);
