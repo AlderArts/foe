@@ -120,7 +120,7 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 		
 		Gui.NextPrompt();
 	};
-}, 4.0, function() { return burrows.flags["Access"] >= Burrows.AccessFlags.Visited && burrows.flags["HermTrait"] == Burrows.TraitFlags.Inactive; });
+}, 4.0, function() { return burrows.Access() && burrows.flags["HermTrait"] == Burrows.TraitFlags.Inactive; });
 
 
 world.loc.Forest.Outskirts.links.push(new Link(

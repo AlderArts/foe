@@ -54,7 +54,7 @@ world.loc.Lake.Shore.enc.AddEnc(function() {
 		
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return burrows.flags["Access"] >= Burrows.AccessFlags.Visited && burrows.flags["BrainyTrait"] == Burrows.TraitFlags.Inactive; });
+}, 1.0, function() { return burrows.Access() && burrows.flags["BrainyTrait"] == Burrows.TraitFlags.Inactive; });
 
 world.loc.Lake.Shore.endDescription = function() {
 	Text.AddOutput("What do you do?<br/>");

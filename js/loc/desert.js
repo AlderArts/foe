@@ -46,7 +46,7 @@ world.loc.Desert.Drylands.enc.AddEnc(function() {
 		
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return burrows.flags["Access"] >= Burrows.AccessFlags.Visited && burrows.flags["BruteTrait"] == Burrows.TraitFlags.Inactive; });
+}, 1.0, function() { return burrows.Access() && burrows.flags["BruteTrait"] == Burrows.TraitFlags.Inactive; });
 
 world.loc.Desert.Drylands.links.push(new Link(
 	"Crossroads", true, true,

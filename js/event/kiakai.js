@@ -778,7 +778,7 @@ Scenes.Kiakai.TalkEden = function() {
 					Text.Add("<i>”They are not uncommon creatures, as they breed very rapidly,”</i> the elf says. <i>”I never saw one up close when I lived at the shrine, as they tend to keep away from people, but some of the priests who traveled frequently told me about sighting them on the plains.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>”This colony... is something different, though. I have never heard of such a large gathering before.”</i>", parse);
-					if(burrows.flags["Access"] == Burrows.AccessFlags.Visited) {
+					if(burrows.Access()) {
 						Text.NL();
 						Text.Add("<i>”Not to mention this Lagon... he is dangerous.”</i>", parse);
 					}

@@ -259,25 +259,136 @@ LagomorphWizard.prototype.Act = function(encounter, activeChar) {
 
 
 world.loc.Plains.Crossroads.enc.AddEnc(function() {
- 	var enemy = new Party();
- 	var alpha = burrows.GenerateLagomorphAlpha();
- 	enemy.AddMember(alpha);
-	enemy.AddMember(burrows.GenerateLagomorph());
-	enemy.AddMember(burrows.GenerateLagomorph());
-	enemy.AddMember(burrows.GenerateLagomorph());
+	var enemy = new Party();
 	var enc = new Encounter(enemy);
-	enc.alpha = alpha;
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() { //TODO: Do something different for herms
+		var alpha = burrows.GenerateLagomorphAlpha();
+		enc.alpha = alpha;
+		enemy.AddMember(alpha);
+		enemy.AddMember(burrows.GenerateLagomorph());
+		enemy.AddMember(burrows.GenerateLagomorph());
+		enemy.AddMember(burrows.GenerateLagomorph());
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		var brute = new LagomorphBrute(Gender.male);
+		enc.brute = brute;
+		enemy.AddMember(brute);
+		enemy.AddMember(burrows.GenerateLagomorph());
+		enemy.AddMember(burrows.GenerateLagomorph());
+		enemy.AddMember(burrows.GenerateLagomorph());
+	}, 1.0, function() { return burrows.BruteActive(); });
+	scenes.AddEnc(function() {
+		var brainy = new LagomorphWizard(Gender.female);
+		enc.brainy = brainy;
+		enemy.AddMember(brainy);
+		enemy.AddMember(burrows.GenerateLagomorph());
+		enemy.AddMember(burrows.GenerateLagomorph());
+		enemy.AddMember(burrows.GenerateLagomorph());
+	}, 1.0, function() { return burrows.BrainyActive(); });
+	scenes.AddEnc(function() {
+		var herm = new Lagomorph(Gender.herm);
+		enc.herm = herm;
+		enemy.AddMember(herm);
+		enemy.AddMember(burrows.GenerateLagomorph());
+		enemy.AddMember(burrows.GenerateLagomorph());
+		enemy.AddMember(burrows.GenerateLagomorph());
+	}, 1.0, function() { return burrows.HermActive(); });
+	
+	scenes.Get();
+	
 	/*
 	enc.canRun = false;
-	enc.onEncounter = ...
 	enc.VictoryCondition = ...
 	*/
 	
-	enc.onLoss    = Scenes.Lagomorph.GroupLossOnPlains;
-	enc.onVictory = Scenes.Lagomorph.GroupWinOnPlainsPrompt;
+	enc.onEncounter = Scenes.Lagomorph.PlainsEncounter;
+	enc.onLoss      = Scenes.Lagomorph.GroupLossOnPlains;
+	enc.onVictory   = Scenes.Lagomorph.GroupWinOnPlainsPrompt;
 	
 	return enc;
 }, 1.0);
+
+Scenes.Lagomorph.PlainsEncounter = function() {
+	var enc = this;
+	
+	var parse = {
+		earsDesc : function() { return player.EarDesc(); },
+		himherthem : party.Num() > 1 ? "them" : player.mfFem("him", "her")
+	};
+	
+	Text.Clear();
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("As you wander about, your [earsDesc] twitch as familiar sounds reach them; soft, high-pitched moans and groans, lewd squelches and slurps, a perverse chorus that compels you to investigate. The sounds grow louder and louder as you follow them, and it doesn’t take more than a few minutes before you have uncovered the source.", parse);
+		Text.NL();
+		Text.Add("There before you sprawls a mass of furry bodies, writhing in the throes of indiscriminate carnal passion. A bounty of bunny-morphs are busily fucking one another, indiscriminately molesting any and every bunny in reach and being molested in turn.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("As you crest a hill, you are met by the sight of a large group of bunnies engaged in a large fuck-pile, reminiscent of the orgy in the Pit. Vena’s spawn are running rampant across the countryside, though their lack of focus make them less of a threat.", parse);
+		Text.NL();
+		Text.Add("That is, unless you happen to get inside their range and catch their attention.", parse);
+	}, 1.0, function() { return burrows.Access(); });
+	
+	scenes.Get();
+	
+	if(enc.brainy) {
+		Text.Add("<i>”Oh, will you all cut it out!”</i> screeches an indignant female voice, clearly quite unhappy with what is going on. From amongst the mass of bodies comes the figure of a female rabbit-morph, quite modestly dressed in comparison. She’s actually wearing clothes, however rudimentary in nature - little more than an improvised dress crudely sewn from scraps of salvaged cloth, and a pair of spectacles perched on her little pink nose.", parse);
+		Text.NL();
+		Text.Add("She steps pointedly over one rutting pair, nose twitching in disgust. <i>”Seriously, father sent us out on a scouting mission, not to gad about fucking each other! That’s what the pit is for!”</i> she complains, angrily glowering about at her companions. Her gaze shifts in your direction and she starts, a gasp of shock bubbling out between her lips.", parse);
+		Text.NL();
+		Text.Add("<i>”Now look what you’ve done! We’re under attack - come on, get up, get <b>up</b> you stupid sluts!”</i> she screams, violently kicking at a thrusting bunny-butt. <i>”Get [himherthem], you idiots!”</i>", parse);
+		Text.NL();
+		Text.Add("The kicked rabbits stir to their feet, chittering unhappily even as the female’s curses rouse others nearby to join you. Still, many more bunnies continue to happily fuck each other, the spectacle-wearing bunny cursing them even as she brandishes a stick in your direction.", parse);
+		Text.NL();
+		Text.Add("You have a fight on your hands!", parse);
+	}
+	else if(enc.brute) {
+		Text.Add("<i>”Good...”</i> rumbles an alarmingly deep voice, drawing your attention to the owner. It’s a rabbit... but definitely not like the other bunnies around him. This one is a monster, easily twice the size of his compatriots, muscles bulging visibly beneath his tangled pelt. He is holding a smaller bunny in his arms, brutally thrusts into it twice, then lets out a veritable roar of pleasure. The lagomorph caught in the brute’s arm squeals in ecstasy, the sound barely audible over the brute’s roar. Sperm gushes messily from the smaller rabbit’s rear, plastering the brute’s thighs even as the bulk of it distends the rabbit’s stomach with a faux-pregnancy.", parse);
+		Text.NL();
+		Text.Add("Grunting casually, the bunny-brute pulls the now-bloated rabbit from his loins, revealing a half-flaccid cock easily as long as his arm bobbing in the breeze, then casually dumps his former partner atop the pile of still-fucking bunnies. At once, the brute is swarmed by eager-looking morphs, all excitedly yammering, reaching their hands for his impressive piece of fuckmeat. A self-satisfied grin crosses the brute’s features as he looks idly around, clearly ready to pick his next playmate, but then he looks right at you.", parse);
+		Text.NL();
+		Text.Add("An expression of dull surprise washes over the hulking lagomorph’s features, quickly chased away by a horny grin, cock rising to its full length once again. <i>”Fresh meat!”</i> he thunders, and charges impatiently towards you, his jealous groupies swarming after him. You have to defend yourself!", parse);
+	}
+	else if(enc.herm) {
+		Text.Add("The mound of writhing bodies seems to ripple and heave, its ceaseless throes eventually throwing forth a stumbling figure, notably larger than its compatriots. The lagomorph sports a fine pair of heaving breasts upon her chest, but as she wades from the sea of bunnies, her mouth curled into an “O-shape” of pleasure, a distinctly masculine cock is revealed, an eager rabbit greedily suckling and lapping at it even as another humps away at her bouncy butt.", parse);
+		Text.NL();
+		Text.Add("Impatiently, the herm lagomorph wriggles, tossing back the bunny humping her ass, kicking away the one trying to suck her cock. She pouts impatiently, clearly dissatisfied with her current choice of playmates, and looks around as if hoping to see something better. She spots you and her eyes light up with glee.", parse);
+		Text.NL();
+		Text.Add("<i>”New sexy!”</i> she squeals happily, clapping her hands, the delighted activity drawing several curious lagomorphs to look up and see you. She hops up and down in her excitement, and then starts racing towards you, a few of the other horny bunnies abandoning their fellows to join her in your assault.", parse);
+		Text.NL();
+		Text.Add("You can’t run; you have to fight!", parse);
+	}
+	else {
+		parse = enc.enemy.Get(0).ParserPronouns(parse);
+		
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			Text.Add("<i>”New catch! Reward!”</i> exclaims one of the rabbits just returning from scouting. [HeShe] rushes towards you, followed by [hisher] siblings.", parse);
+			Text.NL();
+			Text.Add("Looks like it’s a fight!", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("One of the dazed hoppers, having just finished inside its latest conquest, happens to look at you. Life instantly returns to the critter’s half-lidded eyes as [heshe] gets up on [hisher] feet and charges towards you, leaving a trail of juices behind. [HeShe] only stops to tug at a few others and call out to them, <i>“Fresh meat! Father happy!”</i>", parse);
+			Text.NL();
+			Text.Add("Seems like there’s no point in arguing, you’ll have to fight.", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("Noticing your arrival, a small group of sex-crazed bunnies separate from the larger pile, clambering over each other as they swarm toward you. The little critters are quick, and they have you surrounded in the blink of an eye.", parse);
+			Text.NL();
+			Text.Add("You ready yourself for combat!", parse);
+		}, 1.0, function() { return true; });
+		
+		scenes.Get();
+	}
+	Text.Flush();
+	
+	// Start combat
+	Gui.NextPrompt(function() {
+		enc.PrepCombat();
+	});
+}
 
 Scenes.Lagomorph.GroupLossOnPlains = function() {
 	SetGameState(GameState.Event);
