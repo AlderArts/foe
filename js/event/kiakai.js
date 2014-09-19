@@ -104,6 +104,21 @@ Kiakai.Attitude = {
 	Lover   : 3
 }
 
+Kiakai.prototype.GiveAnalAllowed = function() {
+	return this.flags["SexPitchAnal"] > 0;
+}
+Kiakai.prototype.TakeAnalAllowed = function() {
+	return this.flags["SexCatchAnal"] > 0;
+}
+//TODO
+Kiakai.prototype.GiveVaginalAllowed = function() {
+	return false;
+}
+//TODO
+Kiakai.prototype.TakeVaginalAllowed = function() {
+	return this.FirstVag() && false;
+}
+
 Kiakai.prototype.ItemUsable = function(item) {
 	return true;
 }

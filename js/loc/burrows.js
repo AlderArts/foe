@@ -572,13 +572,10 @@ Burrows.prototype.GenerateLagomorph = function(gender) {
 		var scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			gender = Gender.male;
-		}, 3.0, function() { return true; });
+		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
 			gender = Gender.female;
 		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
-			gender = Gender.herm;
-		}, 2.0, function() { return burrows.flags["HermTrait"] != Burrows.TraitFlags.Inactive; });
 		scenes.Get();
 	}
 	
@@ -595,9 +592,6 @@ Burrows.prototype.GenerateLagomorphAlpha = function(gender) {
 		scenes.AddEnc(function() {
 			gender = Gender.female;
 		}, 2.0, function() { return true; });
-		scenes.AddEnc(function() {
-			gender = Gender.herm;
-		}, 2.0, function() { return burrows.flags["HermTrait"] != Burrows.TraitFlags.Inactive; });
 		scenes.Get();
 	}
 	
