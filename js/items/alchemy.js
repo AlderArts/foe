@@ -426,7 +426,63 @@ Items.Testos.PushEffect(function(target) {
 	}
 	Text.Flush();
 });
-
+Items.Testos.PushEffect(function(target) {
+	var parse = {
+		Name : target.NameDesc(),
+		Poss : target.Possessive(),
+		multiCockDesc : function() { return target.MultiCockDesc(); }
+	};
+	parse = target.ParserPronouns(parse);
+	
+	var vags  = target.AllVags();
+	var cocks = target.AllCocks();
+	if(vags.length > 0 && Math.random() < 0.2) {
+		var randVag = Math.floor(Math.random() * vags.length);
+		var vag = vags[randVag];
+		vags.remove(randVag);
+		//Clear clitcock
+		if(vag.clitCock)
+			vag.clitCock.vag = null;
+		if(vags.length > 0) {
+			Text.Add("[Name] loses one of [hisher] cunts!", parse);
+		}
+		else {
+			Text.Add("[Poss] pussy shrinks until it disappears completely.", parse);
+			if(cocks.length == 0) {
+				Text.Add(" It's replaced by a brand new cock!");
+				cocks.push(new Cock());
+			}
+		}
+		Text.Flush();
+	}
+	else if(Math.random() < 0.5) {
+		var len = false, thk = false;
+		for(var i = 0; i < cocks.length; i++) {
+			// Base size
+			var inc  = cocks[i].length.IncreaseStat(25, 100);
+			var inc2 = cocks[i].thickness.IncreaseStat(7, 100);
+			if(inc == null)
+				inc = cocks[i].length.IncreaseStat(50, 5);
+			if(inc2 == null)
+				inc2 = cocks[i].thickness.IncreaseStat(12, 1);
+			len |= inc;
+			thk |= inc2;
+		}
+		if(len || thk) {
+			parse["s"]    = target.NumCocks() > 1 ? "s" : "";
+			parse["notS"] = target.NumCocks() > 1 ? "" : "s";
+			Text.NL();
+			Text.Add("[Poss] [multiCockDesc] shudder[notS], the stiff dick[s] growing significantly ", parse);
+			if(len)
+				Text.Add("longer", parse);
+			if(len && thk)
+				Text.Add(" and ", parse);
+			if(thk)
+				Text.Add("thicker", parse);
+			Text.Add(".", parse);
+		}
+	}
+});
 
 Items.Estros = new TFItem("sex3", "Estros");
 Items.Estros.price = 100;
@@ -445,4 +501,39 @@ Items.Estros.PushEffect(function(target) {
 		var res = target.body.femininity.IncreaseStat(1, .1, true);
 	}
 	Text.Flush();
+});
+Items.Estros.PushEffect(function(target) {
+	var parse = {
+		Name : target.NameDesc(),
+		Poss : target.Possessive(),
+		multiCockDesc : function() { return target.MultiCockDesc(); }
+	};
+	parse = target.ParserPronouns(parse);
+	
+	var cocks = target.AllCocks();
+	var vags  = target.AllVags();
+	if(cocks.length > 0 && Math.random() < 0.2) {
+		var randCock = Math.floor(Math.random() * cocks.length);
+		var cock = cocks[randCock];
+		cocks.remove(randCock);
+		//Clear clitcock
+		if(cock.vag)
+			cock.vag.clitCock = null;
+		if(cocks.length > 0) {
+			Text.Add("[Name] loses one of [hisher] cocks!", parse);
+		}
+		else {
+			Text.Add("[Poss] cock shrinks until it disappears completely.", parse);
+			if(target.NumVags() == 0) {
+				Text.Add(" It's replaced by a brand new pussy!");
+				vags.push(new Vagina());
+			}
+		}
+		Text.Flush();
+	}
+	/*
+	else if(Math.random() < 0.5) {
+		// TODO: vag capacity
+	}
+	*/
 });

@@ -39,22 +39,30 @@ Items.EquiniumPlus.PushEffect(function(target) {
 			cock.sheath = 1;
 		}
 	}
-	var size = false;
+	var len = false, thk = false;
 	for(var i = 0; i < cocks.length; i++) {
 		// Base size
-		var inc = cocks[i].length.IncreaseStat(25, 100);
+		var inc  = cocks[i].length.IncreaseStat(25, 100);
 		var inc2 = cocks[i].thickness.IncreaseStat(7, 100);
 		if(inc == null)
 			inc = cocks[i].length.IncreaseStat(50, 5);
 		if(inc2 == null)
 			inc2 = cocks[i].thickness.IncreaseStat(12, 1);
-		if(inc || inc2) size = true;
+		len |= inc;
+		thk |= inc2;
 	}
-	if(size) {
+	if(len || thk) {
 		parse["s"]    = target.NumCocks() > 1 ? "s" : "";
 		parse["notS"] = target.NumCocks() > 1 ? "" : "s";
 		Text.NL();
-		Text.Add("[Possessive] [multiCockDesc] shudder[notS], the stiff dick[s] growing significantly longer and thicker.", parse);
+		Text.Add("[Possessive] [multiCockDesc] shudder[notS], the stiff dick[s] growing significantly ", parse);
+		if(len)
+			Text.Add("longer", parse);
+		if(len && thk)
+			Text.Add(" and ", parse);
+		if(thk)
+			Text.Add("thicker", parse);
+		Text.Add(".", parse);
 	}
 	Text.Flush();
 });
