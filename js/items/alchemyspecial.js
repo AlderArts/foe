@@ -77,6 +77,7 @@ Items.Tigris.Long = function() { return "A bottle labeled Tigris, with the pictu
 Items.Tigris.Recipe = [{it: Items.Felinix}, {it: Items.HairBall}, {it: Items.CatClaw}];
 // Effects
 Items.Tigris.PushEffect(TF.ItemEffects.SetBody, {odds: 0.4, race: Race.cat, str: "a feline shape, complete with fur"});
+Items.Tigris.PushEffect(TF.ItemEffects.SetFace, {odds: 0.3, race: Race.cat, str: "a cat-like face"});
 Items.Tigris.PushEffect(TF.ItemEffects.SetArms, {odds: 0.3, race: Race.cat, str: "furred cat arms, with soft paws"});
 Items.Tigris.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.3, race: Race.cat, str: "furred cat legs, with soft paws"});
 Items.Tigris.PushEffect(TF.ItemEffects.SetCock, {odds: 0.6, race: Race.cat, str: "a feline cock"});
@@ -162,7 +163,9 @@ Items.InfernumPlus.PushEffect(function(target) {
 	}
 	Text.Flush();
 });
-Items.InfernumPlus.PushEffect(TF.ItemEffects.SetTail, {odds: 0.6, race: Race.demon, color: Color.red, str: "a red, spaded demon tail!"});
+Items.InfernumPlus.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.5, race: Race.demon, color: Color.red, str: "plantigrade, demonic legs with clawed feet"});
+Items.InfernumPlus.PushEffect(TF.ItemEffects.SetArms, {odds: 0.5, race: Race.demon, color: Color.red, str: "demonic arms with clawed hands"});
+Items.InfernumPlus.PushEffect(TF.ItemEffects.SetTail, {odds: 0.6, race: Race.demon, color: Color.red, str: "a red, spaded demon tail"});
 Items.InfernumPlus.PushEffect(TF.ItemEffects.SetHorn, {odds: 0.6, race: Race.demon, color: Color.red, count: 4, str: "a pair of demon horns" });
 Items.InfernumPlus.PushEffect(TF.ItemEffects.IncSta, {odds: 0.4, ideal: 35, max: 2});
 Items.InfernumPlus.PushEffect(TF.ItemEffects.IncDex, {odds: 0.4, ideal: 35, max: 2});

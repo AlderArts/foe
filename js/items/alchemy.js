@@ -204,8 +204,10 @@ Items.Infernum.Short = function() { return "A bottle of Infernum"; }
 Items.Infernum.Long = function() { return "A bottle labeled Infernum, with the picture of a demon on it. The fluid within is a thick red sludge, tainted with black bubbles."; }
 Items.Infernum.Recipe = [{it: Items.CorruptPlant}, {it: Items.BlackGem}, {it: Items.CorruptSeed}];
 // Effects
+Items.Infernum.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.2, race: Race.demon, color: Color.red, str: "plantigrade, demonic legs with clawed feet"});
+Items.Infernum.PushEffect(TF.ItemEffects.SetArms, {odds: 0.2, race: Race.demon, color: Color.red, str: "demonic arms with clawed hands"});
 Items.Infernum.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.demon, str: "a demon cock"});
-Items.Infernum.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.demon, color: Color.red, str: "a red, spaded demon tail!"});
+Items.Infernum.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.demon, color: Color.red, str: "a red, spaded demon tail"});
 Items.Infernum.PushEffect(TF.ItemEffects.SetHorn, {odds: 0.4, race: Race.demon, color: Color.red, count: 2, str: "a pair of demon horns" });
 Items.Infernum.PushEffect(TF.ItemEffects.IncSta, {odds: 0.4, ideal: 25, max: 1});
 Items.Infernum.PushEffect(TF.ItemEffects.IncDex, {odds: 0.4, ideal: 25, max: 1});
@@ -264,7 +266,7 @@ Items.Scorpius.Short = function() { return "A bottle of Scorpius"; }
 Items.Scorpius.Long = function() { return "A bottle labeled Scorpius, with the picture of a scorpion on it. The fluid within is a pitch black."; }
 Items.Scorpius.Recipe = [{it: Items.Stinger}, {it: Items.SVenom}, {it: Items.SClaw}];
 // Effects
-Items.Scorpius.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.scorpion, color: Color.black, str: "a black, segmented scorpion tail!"});
+Items.Scorpius.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.scorpion, color: Color.black, str: "a black, segmented scorpion tail"});
 Items.Scorpius.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.1, value: false, num: 1});
 Items.Scorpius.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.1, value: false, num: 1});
 Items.Scorpius.PushEffect(TF.ItemEffects.RemWings, {odds: 0.6, count: 2});
