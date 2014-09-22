@@ -583,15 +583,45 @@ Scenes.Lagomorph.GroupWinOnPlainsPrompt = function() {
 	
 	// Brute TODO
 	if(enc.brute) {
-		
+		/* TODO
+		options.push({ nameStr : "name",
+			func : function() {
+				Text.Clear();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Flush();
+			}, enabled : true,
+			tooltip : ""
+		});
+		*/
 	}
 	// Brainy TODO
 	else if(enc.brainy) {
-		
+		/* TODO
+		options.push({ nameStr : "name",
+			func : function() {
+				Text.Clear();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Flush();
+			}, enabled : true,
+			tooltip : ""
+		});
+		*/
 	}
 	// Herm TODO
 	else if(enc.herm) {
-		
+		/* TODO
+		options.push({ nameStr : "name",
+			func : function() {
+				Text.Clear();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Flush();
+			}, enabled : true,
+			tooltip : ""
+		});
+		*/
 	}
 	
 	//[Get fucked (M)]
