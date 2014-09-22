@@ -27,7 +27,7 @@ world.loc.Rigard.Brothel.brothel.links.push(new Link(
 world.loc.Rigard.Brothel.brothel.events.push(new Link(
 	"Bouncer", true, false,
 	function() {
-		if(false) // TODO
+		if(ches.Met())
 			Text.Add("Ches the shark-morph keeps a watchful eye on customers and employees alike, lounging by the wall and radiating a sense of quiet competence.");
 		else
 			Text.Add("A large sharkman built like a brick is standing near the entrance, keeping a keen eye on the customers. With a bouncer like that, you’d be surprised if anyone ever attempts to start anything in here.");
@@ -40,7 +40,7 @@ world.loc.Rigard.Brothel.brothel.events.push(new Link(
 world.loc.Rigard.Brothel.brothel.events.push(new Link(
 	"Lucille", true, false,
 	function() {
-		if(false) // TODO
+		if(lucille.IsAtLocation())
 			Text.Add("Lucille wanders the hall, starting conversations here and there, inserting her charm to subtly urge the customers to spends more, and settling deals, employing her concubines.");
 		else
 			Text.Add("Lucille isn’t currently in the main hall, but there is a perky young woman who looks to be fulfilling her duties roaming the room.");

@@ -66,8 +66,9 @@ function StreetUrchin() {
 	this.body.SetEyeColor(Rand(Color.numColors));
 	
 	var r = Math.random();
-	if(r < 0.7)
-		;
+	if(r < 0.7) {
+		
+	}
 	else if(r < 0.8) { // dog-morph
 		this.body.head.ears.race = Race.dog;
 		this.body.head.ears.color = this.body.head.hair.color;

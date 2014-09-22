@@ -64,6 +64,8 @@ InitCache = function() {
 	sylistraxia = new Sylistraxia();
 	patchwork   = new Patchwork();
 	roa         = new Roa();
+	ches        = new Ches();
+	lucille     = new Lucille();
 	
 	world.EntityStorage = new Array();
 	
@@ -113,6 +115,8 @@ InitCache = function() {
 	world.EntityStorage.push(sylistraxia);
 	world.EntityStorage.push(patchwork);
 	world.EntityStorage.push(roa);
+	world.EntityStorage.push(ches);
+	world.EntityStorage.push(lucille);
 	
 	// PARTY
 	party = new Party();
@@ -126,6 +130,7 @@ InitCache = function() {
 	
 	// Intro flags
 	gameCache.flags["IntroLostToImps"]         = gameCache.flags["IntroLostToImps"] || 0;
+	//TODO move to uru
 	gameCache.flags["IntroToldUruAboutMirror"] = gameCache.flags["IntroToldUruAboutMirror"] || 0;
 	gameCache.flags["IntroFuckedUru"]          = gameCache.flags["IntroFuckedUru"] || 0;
 	gameCache.flags["IntroFuckedByUru"]        = gameCache.flags["IntroFuckedByUru"] || 0;
@@ -133,14 +138,6 @@ InitCache = function() {
 
 	// Controls access to town
 	gameCache.flags["TalkedToTownGuard"]       = gameCache.flags["TalkedToTownGuard"] || 0;
-	
-	// Miranda (REMOVE)
-	/*
-	gameCache.flags["MirandaMet"]              = gameCache.flags["MirandaMet"] || 0;
-	gameCache.flags["MirandaDumped"]           = gameCache.flags["MirandaDumped"] || 0;
-	gameCache.flags["MirandaGenderKnown"]      = gameCache.flags["MirandaGenderKnown"] || 0;
-	gameCache.flags["MirandaFledOnFirstDate"]  = gameCache.flags["MirandaFledOnFirstDate"] || 0;
-	*/
 	
 	// GWENDY'S FARM
 	gameCache.flags["FarmFound"]      = gameCache.flags["FarmFound"] || 0;
@@ -162,10 +159,7 @@ CacheToGame = function() {
 	                      parseInt(gameCache.time.day),
 	                      parseInt(gameCache.time.hour),
 	                      parseInt(gameCache.time.minute));
-	                      
-	if(gameCache.version < 1) {
-		//party.location = world.SaveSpots[gameCache.player["loc"]];
-	}
+	
 	if(gameCache.version < 4) {
 		kiakai.body.SetRace(Race.elf);
 	}
@@ -325,11 +319,11 @@ CacheToGame = function() {
 }
 
 GameToCache = function() {
-	gameCache.version = SAVE_VERSION;
+	gameCache.version  = SAVE_VERSION;
 	// For debugging
-	gameCache.build   = VERSION_STRING;
+	gameCache.build    = VERSION_STRING;
 	
-	gameCache.time    = world.time;
+	gameCache.time     = world.time;
 	
 	gameCache.rigard   = rigard.ToStorage();
 	gameCache.farm     = farm.ToStorage();
@@ -371,6 +365,16 @@ GameToCache = function() {
 	gameCache.orchid  = orchid.ToStorage();
 	
 	gameCache.raven   = ravenmother.ToStorage();
+	
+	/*
+	gameCache.aria        = aria.ToStorage();
+	gameCache.uru         = uru.ToStorage();
+	gameCache.sylistraxia = sylistraxia.ToStorage();
+	gameCache.patchwork   = patchwork.ToStorage();
+	gameCache.roa     = roa.ToStorage();
+	gameCache.ches    = ches.ToStorage();
+	gameCache.lucille = lucille.ToStorage();
+	*/
 	
 	// Current party
 	gameCache.party   = party.ToStorage();
