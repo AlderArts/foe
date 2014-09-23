@@ -5470,7 +5470,8 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 		hairDesc     : function() { return player.Hair().Short(); },
 		anusDesc     : function() { return player.Butt().AnalShort(); },
 		stomachDesc  : function() { return player.StomachDesc(); },
-		skinDesc     : function() { return player.SkinDesc(); }
+		skinDesc     : function() { return player.SkinDesc(); },
+		tailDesc     : function() { return player.HasTail().Short(); }
 	};
 	
 	parse.stuttername = player.name[0] + "-" + player.name;
@@ -5754,7 +5755,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 			
 			if(tailpegFlag) {
 				Text.Add("Not that you are making that easy for [himher], by any means. In addition to your [anusDesc] constricting around [hisher] [kCockDesc], your tail is shoved so far up [hisher] own [kAnusDesc] it's unlikely that the elf will be able to sit for quite some time. With each bounce, the appendage squirms inside [name]", parse);
-				if(!kiakai.HasBalls())
+				if(!kiakai.HasBalls() && kiakai.FirstCock())
 					Text.Add(", grinding against [hisher] prostate", parse);
 				Text.Add(".", parse);
 				Text.NL();
