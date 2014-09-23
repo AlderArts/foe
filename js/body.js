@@ -119,9 +119,10 @@ Race = {
 	scorpion : 18,
 	ferret   : 19,
 	plant    : 20,
+	snake    : 21,
 	
 	// TODO: Keep updated!
-	numRaces : 21
+	numRaces : 22
 }
 Race.Desc = function(race) {
 	var r;
@@ -177,6 +178,10 @@ Race.Desc = function(race) {
 	case Race.scorpion: return "scorpion";
 	case Race.ferret: return "ferret";
 	case Race.plant: return "plant";
+	case Race.snake: r = Rand(3);
+		if     (r == 0) return "snake";
+		else if(r == 1) return "snake-like";
+		else            return "serpentine";
 	default: return "undefined";
 	}
 }
@@ -235,6 +240,9 @@ Race.Quantifier = function(race) {
 	case Race.scorpion: return "a scorpion";
 	case Race.ferret: return "a ferret";
 	case Race.plant: return "a plant-like";
+	case Race.snake: r = Rand(2);
+		if(r == 0) return "a snake-like";
+		else       return "a serpentine";
 	default: return "an undefined";
 	}
 }
@@ -1903,7 +1911,7 @@ Body.prototype.SoftFeet = function() {
 
 Body.prototype.FeetDesc = function() {
 	var legs = this.legs;
-	if(!legs || legs.count == 0) return "body";
+	if(!legs || legs.count == 0) return "lower body";
 	
 	switch(legs.race) {
 		case Race.cow:
@@ -1932,7 +1940,7 @@ Body.prototype.FeetDesc = function() {
 }
 Body.prototype.FootDesc = function() {
 	var legs = this.legs;
-	if(!legs || legs.count == 0) return "body";
+	if(!legs || legs.count == 0) return "lower body";
 	
 	switch(legs.race) {
 		case Race.cow:
@@ -1963,7 +1971,7 @@ Body.prototype.FootDesc = function() {
 // TODO
 Body.prototype.LegDesc = function() {
 	var legs = this.legs;
-	if(!legs || legs.count == 0) return "body";
+	if(!legs || legs.count == 0) return "lower body";
 	
 	switch(legs.race) {
 		case Race.cow:
@@ -1992,7 +2000,7 @@ Body.prototype.LegDesc = function() {
 // TODO
 Body.prototype.LegsDesc = function() {
 	var legs = this.legs;
-	if(!legs || legs.count == 0) return "body";
+	if(!legs || legs.count == 0) return "lower body";
 	
 	switch(legs.race) {
 		case Race.cow:

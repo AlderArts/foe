@@ -179,3 +179,68 @@ Items.InfernumPlus.PushEffect(TF.ItemEffects.IncSta, {odds: 0.4, ideal: 35, max:
 Items.InfernumPlus.PushEffect(TF.ItemEffects.IncDex, {odds: 0.4, ideal: 35, max: 2});
 Items.InfernumPlus.PushEffect(TF.ItemEffects.IncInt, {odds: 0.4, ideal: 40, max: 2});
 Items.InfernumPlus.PushEffect(TF.ItemEffects.IncLib, {odds: 0.8, ideal: 55, max: 2});
+
+
+Items.Nagazm = new TFItem("naga0", "Nagazm");
+Items.Nagazm.price = 7;
+Items.Nagazm.lDesc = function() { return "a bottle of Nagazm"; }
+Items.Nagazm.Short = function() { return "A bottle of Nagazm"; }
+Items.Nagazm.Long  = function() { return "A bottle with a pink, bubbly liquid, labeled Nagasm. It has the picture of a snake on it."; }
+Items.Nagazm.Recipe = [{it: Items.SnakeOil}, {it: Items.SnakeFang}, {it: Items.SnakeSkin}];
+// Effects
+Items.Nagazm.PushEffect(function(target) {
+	var parse = {
+		Poss : target.Possessive(),
+		legsDesc : function() { return target.LegsDesc(); },
+		s : target.body.legs.count > 1 ? "" : "s"
+	};
+	
+	if(Math.random() < 1.0) { //TODO
+		if(target.body.legs.count != 0 && target.body.legs.race != Race.snake) {
+			Text.Add("[Poss] [legsDesc] turn[s] into a long serpentine tail!", parse);
+			
+			target.body.legs.count = 0;
+			target.body.legs.race  = Race.snake;
+		}
+	}
+	Text.Flush();
+});
+
+
+Items.Taurico = new TFItem("taur0", "Taurico");
+Items.Taurico.price = 7;
+Items.Taurico.lDesc = function() { return "a bottle of Taurico"; }
+Items.Taurico.Short = function() { return "A bottle of Taurico"; }
+Items.Taurico.Long  = function() { return "A bottle filled with a strange, jelly-like substance. It has a picture of a centaur on it."; }
+Items.Taurico.Recipe = [{it: Items.HorseShoe}, {it: Items.CanisRoot}, {it: Items.Ramshorn}];
+// Effects
+Items.Taurico.PushEffect(function(target) {
+	var parse = {
+		Poss : target.Possessive(),
+		legsDesc : function() { return target.LegsDesc(); },
+		race : function() { return Race.Desc(target.body.legs.race); },
+		s : target.body.legs.count > 1 ? "" : "s"
+	};
+	
+	if(Math.random() < 1.0) { //TODO
+		if(target.body.legs.count <= 4) {
+			target.body.legs.count = 4;
+			
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				target.body.legs.race = Race.horse;
+			}, 2.0, function() { return true; });
+			scenes.AddEnc(function() {
+				target.body.legs.race = Race.wolf;
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				target.body.legs.race = Race.sheep;
+			}, 1.0, function() { return true; });
+			scenes.Get();
+			
+			Text.Add("[Poss] lower body morphs until it has four, [race] legs!", parse);
+		}
+	}
+	Text.Flush();
+});
+

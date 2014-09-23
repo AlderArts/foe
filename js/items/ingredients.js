@@ -73,6 +73,16 @@ Items.LizardEgg.Use = function(target) {
 	return {consume: true};
 }
 
+Items.SnakeFang = new Item("rept4", "S.Fang");
+Items.SnakeFang.price = 1;
+Items.SnakeFang.Short = function() { return "Snake fang"; }
+Items.SnakeFang.Long = function() { return "A sharp, venomous fang from some sort of reptile."; }
+
+Items.SnakeSkin = new Item("rept5", "S.Skin");
+Items.SnakeSkin.price = 1;
+Items.SnakeSkin.Short = function() { return "Snake skin"; }
+Items.SnakeSkin.Long = function() { return "The shed skin from a large snake."; }
+
 
 
 // TODO: GOAT TF

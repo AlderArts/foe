@@ -2235,11 +2235,18 @@ Entity.prototype.PrintDescription = function() {
 	if(bs) Text.NL();
 	
 	// TODO: Arms/Legs
-	/*
-		armDesc  : this.body.ArmDesc(),
-		legDesc  : this.body.LegDesc()
-	*/
-	Text.Add("[name] [has] arms and legs.", parse);
+	if(this.body.legs.count == 2) {
+		Text.Add("[name] [has] arms and legs.", parse);
+	}
+	else if(this.body.legs.count > 2) {
+		parse["num"] = Text.NumToText(this.body.legs.count);
+		parse["race"] = Race.Desc(this.body.legs.race);
+		Text.Add("[name] [has] arms and [num], [race] legs.", parse);
+	}
+	else {
+		parse["race"] = Race.Quantifier(this.body.legs.race);
+		Text.Add("[name] [has] arms and [race] lower body.", parse);
+	}
 	Text.NL();
 	
 	// TODO: Hips/butt

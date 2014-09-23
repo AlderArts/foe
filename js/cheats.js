@@ -477,7 +477,12 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		party.inventory.AddItem(Items.SnakeOil);
 		party.inventory.AddItem(Items.LizardScale);
 		party.inventory.AddItem(Items.LizardEgg);
+		party.inventory.AddItem(Items.SnakeFang);
+		party.inventory.AddItem(Items.SnakeSkin);
 		party.inventory.AddItem(Items.Lacertium);
+		
+		party.inventory.AddItem(Items.Nagazm);
+		party.inventory.AddItem(Items.Taurico);
 		
 		party.inventory.AddItem(Items.GoatMilk);
 		
