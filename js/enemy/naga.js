@@ -1,6 +1,6 @@
 /*
  * 
- * Naga, lvl 1-2
+ * Naga, lvl 4-6
  * 
  */
 
@@ -17,21 +17,21 @@ function Naga() {
 	if(Math.random() < 0.1)
 	    this.Butt().virgin = false;
 	
-	this.maxHp.base        = 40;
-	this.maxSp.base        = 20;
-	this.maxLust.base      = 25;
+	this.maxHp.base        = 100;
+	this.maxSp.base        = 40;
+	this.maxLust.base      = 65;
 	// Main stats
-	this.strength.base     = 10;
-	this.stamina.base      = 13;
-	this.dexterity.base    = 13;
-	this.intelligence.base = 11;
-	this.spirit.base       = 11;
-	this.libido.base       = 14;
-	this.charisma.base     = 15;
+	this.strength.base     = 20;
+	this.stamina.base      = 18;
+	this.dexterity.base    = 23;
+	this.intelligence.base = 21;
+	this.spirit.base       = 22;
+	this.libido.base       = 24;
+	this.charisma.base     = 27;
 	
-	this.level             = 1;
-	if(Math.random() > 0.8) this.level = 2;
-	this.sexlevel          = 1;
+	this.level             = 4;
+	if(Math.random() > 0.8) this.level = 6;
+	this.sexlevel          = 2;
 	
 	this.combatExp         = this.level;
 	this.coinDrop          = this.level * 4;
