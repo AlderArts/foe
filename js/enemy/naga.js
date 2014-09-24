@@ -76,10 +76,14 @@ Naga.prototype.Act = function(encounter, activeChar) {
 	};
 
 	var choice = Math.random();
-	if(choice < 0.6)
+	if(choice < 0.4)
 		Abilities.Attack.Use(encounter, this, t);
+	else if(choice < 0.6 && Abilities.Physical.Ensnare.enabledCondition(encounter, this))
+		Abilities.Physical.Ensnare.Use(encounter, this, t);
 	else if(choice < 0.8 && Abilities.Physical.Pierce.enabledCondition(encounter, this))
 		Abilities.Physical.Pierce.Use(encounter, this, t);
+	else if(choice < 0.9 && Abilities.Seduction.Distract.enabledCondition(encounter, this))
+		Abilities.Seduction.Distract.Use(encounter, this, t);
 	else
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
