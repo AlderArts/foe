@@ -105,10 +105,10 @@ Kiakai.Attitude = {
 }
 
 Kiakai.prototype.GiveAnalAllowed = function() {
-	return this.flags["SexPitchAnal"] > 0;
+	return this.flags["SexCatchAnal"] > 0;
 }
 Kiakai.prototype.TakeAnalAllowed = function() {
-	return this.flags["SexCatchAnal"] > 0;
+	return this.flags["SexPitchAnal"] > 0;
 }
 //TODO
 Kiakai.prototype.GiveVaginalAllowed = function() {

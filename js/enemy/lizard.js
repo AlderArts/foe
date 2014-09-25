@@ -2170,13 +2170,25 @@ Scenes.Lizards.LossFemale = function() {
 			Text.Newline();
 			Text.AddOutput("<i>\"Not... oh... bad,\"</i> she pants. She collects her things - and some of your money, and then quickly heads off toward her companions.", parse);
 			
+			var cash = Math.min(Math.floor(5 + Math.random() * 20), party.coin);
+			party.coin -= cash;
+			Text.Newline();
+			if(cash > 0) {
+				parse["coin"] = Text.NumToText(cash);
+				parse["s"] = coin > 1 ? "s" : "";
+				Text.AddOutput("<b>She takes [coin] coin[s] from you!</b>", parse);
+			}
+			else {
+				Text.AddOutput("<b>You didn't have any coins for her to take!</b>", parse);
+			}
+			
 			player.AddLustFraction(0.3);
 			Gui.NextPrompt(enc.finalize);
 		});
 	}, 1.0);
 	// GENDER SPECIFIC SCENES (COCK)
 	scenes.AddEnc(function() {
-		Text.AddOutput("Finding yourself flat on your back, she steps over you, reaching down and dropping her scant clothing.", parse);
+		Text.AddOutput("Finding yourself flat on your back, she steps over you, reaching down and dropping her scant clothing. ", parse);
 		if(player.LustLevel() > 0.5)
 			Text.AddOutput("You blush, your [numCocks] already hard from her coy behavior, and she smirks sultrily down at you. Right where she wants you, you can do little but look down as she slides over your body, straddling your hips.", parse);
 		else
