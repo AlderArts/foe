@@ -105,7 +105,7 @@ Kiakai.Attitude = {
 }
 
 Kiakai.prototype.GiveAnalAllowed = function() {
-	return this.flags["SexCatchAnal"] > 0;
+	return this.flags["SexCatchAnal"] > 0; // TODO > 1?
 }
 Kiakai.prototype.TakeAnalAllowed = function() {
 	return this.flags["SexPitchAnal"] > 0;

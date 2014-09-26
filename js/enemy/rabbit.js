@@ -636,6 +636,17 @@ Scenes.Lagomorph.GroupWinOnPlainsPrompt = function() {
 		tooltip : Text.Parse(tooltip, parse)
 	});
 	
+	//[Fuck (M)]
+	var tooltip = "Sure are plenty of cocky bucks around… time to put them in their place for attacking you.";
+	if(party.Num() > 1)
+		tooltip += " Who knows, perhaps [comp] will join you as well.";
+	options.push({ nameStr : "Fuck (M)",
+		func : function() {
+			Scenes.Lagomorph.GroupWinOnPlainsFuckM(enc, group);
+		}, enabled : true,
+		tooltip : Text.Parse(tooltip, parse)
+	});
+	
 	/* TODO
 	options.push({ nameStr : "name",
 		func : function() {
@@ -655,6 +666,349 @@ Scenes.Lagomorph.GroupWinOnPlainsPrompt = function() {
 		tooltip : "Leave the rabbits."
 	});
 	Gui.SetButtonsFromList(options);
+}
+
+Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
+	var cocks   = player.CocksThatFit();
+	var p1cock  = player.BiggestCock(cocks);
+	var strapon = p1cock ? p1cock.isStrapon : null;
+	
+	var parse = {
+		playername : player.name,
+		faceDesc   : function() { return player.FaceDesc(); },
+		tongueDesc : function() { return player.TongueDesc(); },
+		breastDesc : function() { return player.FirstBreastRow().Short(); },
+		multiCockDesc : function() { return player.MultiCockDesc(); },
+		cockDesc   : function() { return p1cock.Short(); },
+		vagDesc    : function() { return player.FirstVag().Short(); },
+		anusDesc   : function() { return player.Butt().AnalShort(); },
+		armorDesc  : function() { return player.ArmorDesc(); },
+		hand       : function() { return player.HandDesc(); },
+		hipsDesc   : function() { return player.HipsDesc(); }
+	};
+	
+	var male = new Lagomorph(Gender.male);
+	
+	Text.Clear();
+	if(!group.malegroup) {
+		parse["c"] = p1cock ? Text.Parse(" and your [multiCockDesc]", parse) : "";
+		Text.Add("Uninterested in your current foes, you instruct them to bring you some of the male bunnies from the pile. You[c] have some business with them...", parse);
+		if(enc.brute)
+			Text.Add(" The hulking brute looks a bit relieved at being spared whatever you have planned, and shuffles away, returning to the pile to sate his needs. On his way, he dislodges a group of males and sends them your direction.", parse);
+		else if(enc.brainy) {
+			Text.NL();
+			Text.Add("<i>”I-I’m not good enough?”</i> the bespectacled rabbit tuts, fuming. She mutters to herself as she hops over to the pile, ordering a few males to head your way. Before you have a chance to thank the girl, someone grabs her and pull her into the pile. Well, she’s in good company.", parse);
+		}
+		else if(enc.herm) {
+			Text.NL();
+			Text.Add("<i>”You not into girls?”</i> the herm looks puzzled. Not that you are sure she qualifies, considering the meatstick poking out between her legs. <i>”’s okay, I fetch!”</i> Seeking to sate her own itch, the bunny returns to the pile, sending a group of eager - though perhaps misguided - males your way.", parse);
+		}
+		else { //females
+			parse["s"]    = group.females > 1 ? "s" : "";
+			parse["notS"] = group.females > 1 ? "" : "s";
+			parse["yIes"] = group.females > 1 ? "y" : "ies";
+			Text.Add(" The female[s] look[notS] a bit disappointed, but scurr[yIes] to do your bidding, bodily pulling out a few males from the larger fuck-pile.", parse);
+		}
+		Text.NL();
+	}
+	parse["strapon"] = strapon ? Text.Parse(", securing the straps of your [cockDesc]", parse) : "";
+	Text.Add("The group of males lined up in front of you look eager, though they may not be expecting what you have in mind for them. Shrugging out of your [armorDesc], you present them with the goods[strapon].", parse);
+	if(p1cock)
+		Text.Add(" Several of them gulp at the sight of your [multiCockDesc], though from what you have seen of the lagomorphs, even the males are far from unfamiliar with being on the receiving end.", parse);
+	Text.NL();
+	Text.Add("You tell them how this will go down; they do whatever you tell them to without any complaints, or you’ll start getting angry again. The jacks collectively lower their ears, nodding nervously. Might as well get started.", parse);
+	Text.NL();
+	parse["genDesc"] = player.FirstCock() ? "cock" :
+	                   strapon ? "strapon" :
+	                   player.FirstVag() ? "cunt" : "crotch";
+	Text.Add("Gesturing for one of them to step forward, you instruct him to get you ready, indicating your [genDesc] meaningfully. Eager to please, he hops forward, getting down on his knees as he offers his tongue.", parse);
+	Text.NL();
+	if(player.FirstCock()) {
+		parse["oneof"]     = player.NumCocks() > 1 ? " one of" : "";
+		parse["thisThese"] = player.NumCocks() > 1 ? "these" : "this";
+		Text.Add("The buck closes his lips around[oneof] your [multiCockDesc], dutifully lathering it in bunny saliva. ", parse);
+		if(player.NumCocks())
+			Text.Add("He shifts between your shafts, giving each of them equal time and keeping them hard with his paws when his mouth is otherwise busy. ", parse);
+		Text.Add("You can’t wait to stick [thisThese] into one of your submissive charges… maybe you’ll let this one be your first target.", parse);
+	}
+	else if(strapon) {
+		parse["pussy"] = player.FirstVag() ? "pussy" : "crotch";
+		Text.Add("The buck dutifully lathers your [cockDesc], coating it in bunny saliva. Though you only feel vibrations from the artificial member propagating to your [pussy], you are already excited at the prospect of using it on your defeated foes.", parse);
+	}
+	else if(player.FirstVag()) {
+		Text.Add("You bite your lip as the buck buries his head in your crotch, lapping away at your [vagDesc]. He might not be experienced with this kind of thing, but he makes up for it in enthusiasm.", parse);
+	}
+	Text.NL();
+	Text.Add("Patting his head, you tell him what a good boy he is. Looking around to the others, you suggest that they start getting themselves ready too… and you don’t mean their cocks. Shuffling a bit and looking at each other uncertainly, the remaining bunnies pair up, using tongues and paws to prepare themselves for your onslaught. Fingering and rimming each other, the bunnies moan as their respective partners loosen their butts for whatever you have in store for them.", parse);
+	Text.NL();
+	if(p1cock) {
+		Text.Add("You pull away the jack blowing your [cockDesc], gesturing for him to roll around on all fours. Telling the others that they’ll be next, you grasp the bunny by the hips and slowly insert your shaft into his colon. He whimpers and moans, but from how easily he stretches around your [cockDesc], this isn’t his first time on the receiving end. You find that your furry cocksleave is quite sturdy, and quickly pick up your pace, encouraged by his lewd moans.", parse);
+		Text.NL();
+		
+		Sex.Anal(player, male);
+		male.FuckAnal(male.Butt(), p1cock, 3);
+		player.Fuck(p1cock, 3);
+		
+		Text.Add("The others are slowly gathering around you, shivering with excitement as they watch their brother get fucked. One of the bolder ones hops forward and stuffs your rabbit’s mouth with his cock, spitroasting the poor thing. Smiling, you tell the brave lagomorph that he’s next in line. He bites his lip, pummeling his brother’s throat rapidly, determined to get the most of it. In no time at all, he grinds to a halt, dick hilted in the other lagomorph’s mouth. He arches his back as he unloads his seed down your willing sextoy’s gullet, giving his place to another one of the hovering males. Having gotten his blowjob, the bunny hobbles down onto all fours, presenting himself to you hopefully.", parse);
+		Text.NL();
+		Text.Add("Deciding to have a bit of fun, you tell him to lie down on his back instead. In short order, you have your current fucktoy straddle the other rabbit, their cocks and balls pressing against each other. ", parse);
+		if(player.NumCocks() > 1)
+			Text.Add("Thanks to your crowded crotch, doublestuffing the bunnies is an easy and intensely rewarding task.", parse);
+		else
+			Text.Add("Pressing down on them, you alternate between their holes, giving both bunnies an equal share of your [cockDesc].", parse);
+	}
+	else if(player.FirstVag()) {
+		Text.Add("You roughly shove the jack giving you oral pleasure over on his back, lowering yourself on his jutting cock. Hardly believing his luck, the rabbit bucks his hips, meeting your descent. You press down firmly, making certain that he understands that <i>you</i> set the pace here; he’s just your willing sex toy.", parse);
+		Text.NL();
+		
+		Sex.Vaginal(male, player);
+		player.FuckVag(player.FirstVag(), male.FirstCock(), 3);
+		male.Fuck(male.FirstCock(), 3);
+		
+		Text.Add("Smiling to yourself, you wave one of the others over, instructing him to get down on all fours in front of you, dick poised over his brother’s maw. You give the offered bunny-butt a familiar squeeze, caressing his soft fur as your [hand] creeps its way closer to his loosened rosebud.", parse);
+		Text.NL();
+		Text.Add("The male spread his buttcheeks, gasping as you plunge three fingers into his offered fuckhole. Bucking his hips as you probe deeper, he stuffs his siblings mouth with his throbbing shaft. Before long the jack is reduced to a quivering, cum-spewing mess as you pummel his prostate, the salty taste of his seed only making the cock inside you grow harder.", parse);
+	}
+	Text.NL();
+	Text.Add("The others, loath to wait around, have already started busying themselves, pairing up in groups of twos or threes - you can swear that more of the rabbits have separated from the larger pile in order to join you. The horny lagomorphs seem content with fucking whatever hole is presented to them, just as long as they get off.", parse);
+	Text.NL();
+	
+	var beingFucked = false;
+	// COMPANION SECTION BEGIN
+	//TODO Miranda
+	
+	
+	var blockKiai = false;
+	
+	if(party.InParty(kiakai) && Math.random() < 0.5) { //TODO cond
+		blockKiai = true;
+		
+		parse = kiakai.ParserPronouns(parse);
+		parse["name"] = kiakai.name;
+		parse["priest"] = kiakai.mfTrue("priest", "priestess");
+		parse["pHeShe"] = player.mfTrue("He", "She");
+		parse["phisher"] = player.mfTrue("his", "her");
+		parse["phimher"] = player.mfTrue("him", "her");
+		parse["kanusDesc"] = function() { return kiakai.Butt().AnalShort(); }
+		parse["kmultiCockDesc"] = function() { return kiakai.MultiCockDesc(); }
+		parse["kbuttDesc"] = function() { return kiakai.Butt().Short(); }
+		
+		Text.Add("<i>”Pretty elf come too?”</i> one of the bunnies hops over, pulling insistently on [name]’s arms, trying to get [himher] to join the orgy. The blushing elf protests, but lets [himher]self be dragged along, only mildly objecting as the bunnies remove [hisher] clothes and gear.", parse);
+		Text.NL();
+		Text.Add("<i>”He just would not let up,”</i> [name] apologizes to you, fidgeting nervously and avoiding your gaze. ", parse);
+		if(kiakai.FirstCock()) {
+			parse["s"]    = kiakai.NumCocks() > 1 ? "s" : "";
+			parse["notS"] = kiakai.NumCocks() > 1 ? "" : "s";
+			Text.Add("[HeShe] makes a token effort to hide [hisher] [kmultiCockDesc], but it is a rather futile endevor. The elf’s cock[s] stick[notS] out proudly beneath [hisher] hands, hard and dripping pre. ", parse);
+		}
+		else if(kiakai.FirstVag()) {
+			Text.Add("From the looks of [hisher] dripping pussy, the elf is a bit jealous of the bunnies who are getting their just reward. ", parse);
+		}
+		Text.Add("The elf shuffles around a bit, looking uncomfortable.", parse);
+		Text.Flush();
+		
+		// [Fuck them][Fuck you][Service them][Sit it out]
+		var options = new Array();
+		if(kiakai.FirstCock()) {
+			parse["oneof"] = kiakai.NumCocks() > 1 ? " one of" : "";
+			parse["s"]     = kiakai.NumCocks() > 1 ? "s" : "";
+			parse["notS"]  = kiakai.NumCocks() > 1 ? "" : "s";
+			
+			options.push({ nameStr : "Fuck them",
+				func : function() {
+					Text.Clear();
+					Text.Add("Well, what’s [heshe] waiting for? [HeShe] can have [hisher] pick of any of the lagomorphs… several of them if [heshe] wants, you add slyly.", parse);
+					Text.NL();
+					
+					if(kiakai.GiveAnalAllowed()) {
+						Text.Add("<i>”Ah, uhm, if you are okay with it, [playername],”</i> the elf gulps, eyeing one of the rabbits nervously. Seeing [hisher] interest, the hopper rolls onto his back, raising his legs and spreading his fluffy buttcheeks for the embarrassed elf. [name] gives you one last uncertain look before [heshe] digs in, sighing in pleasure as [heshe] sinks[oneof] [hisher] [kmultiCockDesc] into the eager bunny.", parse);
+						Text.NL();
+						
+						Sex.Anal(kiakai, male);
+						male.FuckAnal(male.Butt(), kiakai.FirstCock(), 3);
+						kiakai.Fuck(kiakai.FirstCock(), 3);
+						
+						Text.Add("Too lost in [hisher] own pleasure, the elf doesn’t notice another one of the bunnies sneaking up on [himher] from behind, pouncing on the enraptured acolyte.", parse);
+					}
+					else {
+						Text.Add("<i>”I… ah...”</i> [name] stutters, red as a beet. <i>”P-perhaps if they only use their mouths?”</i> [HeShe] finally mutters, dragging [hisher] foot on the ground. No sooner has [heshe] uttered the words before [heshe]’s smothered in rabbit, the horny hoppers eager to get the first go at [name]’s [kmultiCockDesc].", parse);
+						Text.NL();
+						Text.Add("The elf cries out as several of the males fight to grab hold of[oneof] [hisher] cock[s], the victor of their scuffle greedily chomping down on the tasty shaft.", parse);
+						
+						Sex.Blowjob(male, kiakai);
+						male.FuckOral(male.Mouth(), kiakai.FirstCock(), 2);
+						kiakai.Fuck(kiakai.FirstCock(), 2);
+					}
+					Text.NL();
+					Text.Add("Looks like [name] made some new friends.", parse);
+					Text.NL();
+					
+					var cum = kiakai.OrgasmCum();
+					kiakai.slut.IncreaseStat(75, 2);
+					
+					PrintDefaultOptions();
+				}, enabled : true,
+				tooltip : "Encourage the elf to have a go at the bunnies."
+			});
+			options.push({ nameStr : "Fuck you",
+				func : function() {
+					Text.Clear();
+					parse["stuttername"] = player.name[0] + "-" + player.name;
+					Text.Add("<i>”[stuttername]!”</i> [name] gasps, blushing as [heshe] tries to inefficiently bat away the rabbits pawing at [hisher] body. ", parse);
+					if(kiakai.GiveAnalAllowed()) {
+						Text.Add("<i>”I… uhm, here?”</i> [heshe] asks in a small voice. You nod, motioning for [himher] to come over.", parse);
+						Text.NL();
+						Text.Add("Gulping, the naked elf scurries to your side, trying to avert [hisher] gaze from ", parse);
+						if(p1cock)
+							Text.Add("the prone bunnies getting speared on your [cockDesc].", parse);
+						else
+							Text.Add("the prone bunny who’s cock you are riding.", parse);
+						Text.Add(" Rolling your eyes at [hisher] shyness, you put your hand around [name]’s waist and pull [himher] in for a kiss. The acolyte practically melts in your arms, any semblance of resistance evaporating into nothing.", parse);
+						Text.NL();
+						Text.Add("<i>”Well, I guess it would not be the first time,”</i> [name] murmurs under [hisher] breath. You smile, slowing down the rocking of your [hipsDesc] to allow your cute elven lover to get in position. [HeShe] gives you a hug from behind, [hisher] [kmultiCockDesc] sliding in between your buttcheeks.", parse);
+						Text.NL();
+						parse["forward"] = p1cock ? "forward" : "down";
+						parse["c"] = p1cock ? "thrusting into one of the subby bunnies" : "impaling yourself on the subby bunny";
+						Text.Add("<i>”Just tell me if it hurts, okay?”</i> [heshe] says anxiously, lining up[oneof] [hisher] cock[s] with your [anusDesc]. In response, you slowly push back, greedily swallowing the elf’s shaft. Before [heshe] has had time to react, you slam yourself [forward] again, [c], who lets out a stifled moan.", parse);
+						Text.NL();
+						
+						Sex.Anal(kiakai, player);
+						player.FuckAnal(player.Butt(), kiakai.FirstCock(), 3);
+						kiakai.Fuck(kiakai.FirstCock(), 3);
+						
+						parse["two"] = p1cock ? "three" : "two";
+						Text.Add("[name] is swept away, hanging onto you by the hips as you rock back and forth between your [two] lovers. ", parse);
+						if(p1cock)
+							Text.Add("Giving on one end and receiving on the other, you’re in heaven, both fucking and being fucked.", parse);
+						else
+							Text.Add("You shudder in bliss as you ride your lovers, stuffed in both holes.", parse);
+						Text.NL();
+						
+						kiakai.slut.IncreaseStat(75, 2);
+						kiakai.subDom.IncreaseStat(75, 2);
+						
+						Text.Add("<i>”[stuttername]!”</i> [name] cries out, back arching as [heshe] shoots [hisher] seed into your bowels[, another load being poured into your pussy at the same time].", parse);
+						
+						beingFucked = true;
+					}
+					else {
+						if(kiakai.flags["TalkedSex"] == 2)
+							Text.Add("<i>”I… I want to,”</i> [heshe] pipes, face red as a beet. <i>”J-just… not now, not like this.”</i> The elf hangs [hisher] head, embarrassed.", parse);
+						else
+							Text.Add("<i>”I… I could not!”</i> [heshe] exclaims, face red as a beet.", parse);
+						Text.NL();
+						Text.Add("Taking pity on [name], you call [himher] over to you anyway, promising you won’t make [himher] do something [heshe] doesn’t want. Right now, you just want… a hug. Can [heshe] do that?", parse);
+						Text.NL();
+						parse["s2"] = p1cock ? "s" : "";
+						Text.Add("<i>”Uhm, o-okay.”</i> Stepping warily around the bunnies, the elf makes [hisher] way over. You slow down the rocking of your hips as the elf steps up behind you and wraps [hisher] arms around you, letting your other lover[s2] rest at the same time. You tell the elf that [heshe]’s warm, leaning back into [hisher] arms.", parse);
+						Text.NL();
+						Text.Add("A small smile plays on your lips as [name]’s [kmultiCockDesc] pokes you in the back. Reaching behind you, you trail one [hand] down [hisher] side, feeling the shape of [hisher] [kbuttDesc] and finally tracing the length of[oneof] [hisher] shaft[s]. The elf shivers at your touch, but doesn’t complain. You give [himher] a slow handjob while you rock against your other lover[s2]. [HeShe] doesn’t last long, gasping as [heshe] sprays your back with [hisher] seed.", parse);
+					}
+					Text.NL();
+					Text.Add("Turning your head around, you give [name] a kiss before returning to the task at hand, thanking [himher] for being there.", parse);
+					Text.NL();
+					
+					var cum = kiakai.OrgasmCum();
+					kiakai.relation.IncreaseStat(50, 1);
+					
+					PrintDefaultOptions();
+				}, enabled : !beingFucked,
+				tooltip : Text.Parse("Why don’t put that juicy cock of [hishers] to good use? Ask [name] to take position behind you and have a go.", parse)
+			});
+		}
+		options.push({ nameStr : "Service them",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”W-what, do you mean you want me to- no, [playername]!”</i> [name] gasps, blushing fiercely.", parse);
+				Text.NL();
+				parse["boyGirl"] = kiakai.mfTrue("boy", "girl");
+				Text.Add("You nod, motioning for [himher] to join you. The elf uncertainly scurries to your side, looking a bit lost. Ruffling [hisher] hair, you tell [himher] that [heshe] is a good [boyGirl].", parse);
+				Text.NL();
+				if(p1cock) {
+					Text.Add("Leaning down, you put your [hand]s under the armpits of the top bunny, pulling him into an upright position. This leaves the elf plenty of room to reach the two bunny cocks which are being pressed together tightly, leaking pre onto the furred belly of the one on the bottom.", parse);
+					Text.NL();
+					Text.Add("Burrowing into the thick fluff around the lagomorph’s neck, you point suggestively toward his crotch. [name] blushes, but gingerly gets down, licking [hisher] lips. Giving the twin cocks an experimental rub, the elf softly trace the sensitive flesh, barely managing to grasp both of them in [hisher] graceful hand.", parse);
+					Text.NL();
+					parse["s"] = player.NumCocks() > 1 ? "s" : "";
+					Text.Add("After another urging from you, the elf bows down and goes to work on them with [hisher] mouth, somehow managing to wrap [hisher] lips around both bunny cockheads at the same time. Determined to give [himher] a tasty treat, you redouble your efforts, ramming your cock[s] into the moaning rabbits.", parse);
+					Text.NL();
+					Text.Add("There is a muffled yelp from below as your combined efforts simultaneously triggers both bunnies’ climaxes, pumping the contents of the furry critters down [name]’s gullet.", parse);
+				}
+				else {
+					Text.Add("Rolling over on your back and flipping the bunny up on top, you gesture for the elf to get down behind the bunny. [name] looks like [heshe] understands your instructions, and hurriedly complies.", parse);
+					Text.NL();
+					Text.Add("The rutting rabbit moans happily as [name] starts sucking at his balls, gently caressing his furred bum. Blushing even deeper, the elf moves on to lick at the lagomorph’s rosebud, rimming your lover.", parse);
+					Text.NL();
+					Text.Add("<i>”Such shameful things you make me do,”</i> [name] mutters as [heshe] fondles the bunny’s balls, pressing one of [hisher] fingers up his butt.", parse);
+					Text.NL();
+					Text.Add("Hey, this is all [himher], you just told [himher] to come over, remember?", parse);
+					Text.NL();
+					Text.Add("<i>”You are horrible,”</i> [heshe] complains, wincing as the enraptured bunny arches his back and blows his load inside you. Sneaking a peek over his shoulder, you notice that the elf is still working the lagomorph’s prostate, probing his butt with two digits.", parse);
+				}
+				Text.NL();
+				Text.Add("You commend the elf for doing a good job, and get back to your rutting.", parse);
+				Text.NL();
+				
+				kiakai.slut.IncreaseStat(40, 1);
+				kiakai.subDom.DecreaseStat(-75, 2);
+				
+				PrintDefaultOptions();
+			}, enabled : true,
+			tooltip : Text.Parse("Doesn’t [heshe] think it’s unfair that all those bunny cocks are just bobbing there, unsatisfied?", parse)
+		});
+		options.push({ nameStr : "Sit it out",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”R-right,”</i> the elf bobs [hisher] head in agreement, quickly scurrying away to [hisher] pile of discarded clothes. Maybe next time...", parse);
+				Text.NL();
+				PrintDefaultOptions();
+			}, enabled : true,
+			tooltip : Text.Parse("Perhaps [name] should just sit this one out. You’ll be along eventually.", parse)
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+	
+	Gui.Callstack.push(function() {
+		
+		// TODO Terry
+		// COMPANION SECTION END
+		
+		Text.Add("Things start melding together as the entire group deteriorates into an all out orgy. You make sure to split your attentions between the various lagomorphs, but one quickly becomes interchangeable with the next, a huge pile of horny creatures eager to be your next target.", parse);
+		Text.NL();
+		Text.Add("Time passes...", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			Text.Clear();
+			
+			var cum = player.OrgasmCum(2);
+			
+			if(party.Num() == 2) {
+				parse["comp"]  = " and " + party.Get(1).name;
+				parse["comp2"] = party.Get(1).name + " and ";
+			}
+			else if(party.Num() > 2) {
+				parse["comp"]  = " and your companions";
+				parse["comp2"] = "your companions and ";
+			}
+			else {
+				parse["comp"]  = "";
+				parse["comp2"] = "";
+			}
+			Text.Add("Some time later, you[comp] are finally finished with the rabbit mob. Feeling a bit drained, you gather up [comp2]your gear, wobbling a bit unsteadily as you re-equip yourself. In the end, you are not sure who got the most out of that engagement, you or the rabbits.", parse);
+			Text.Flush();
+			
+			world.TimeStep({hour: 1});
+			
+			Gui.NextPrompt(function() {
+				enc.finalize();
+			});
+		});
+	});
+	
+	if(!blockKiai) {
+		PrintDefaultOptions();
+	}
 }
 
 Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM = function(enc, group) {
@@ -686,8 +1040,8 @@ Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 			parse["yIes"] = group.females > 1 ? "y" : "ies";
 			Text.Add(" The female[s] look[notS] a bit disappointed, but scurr[yIes] to do your bidding, bodily pulling out a few males from the larger fuck-pile.", parse);
 		}
+		Text.NL();
 	}
-	Text.NL();
 	parse["be"] = player.Ears().race == Race.rabbit ? " much like your own" : "";
 	Text.Add("You briefly survey the strapping young bucks lined up in front of you. The bunnies are lithe in build and covered in white fur, their heads topped by long floppy ears[be]. Thanks to their short stature, their rigid dicks are quite large in proportion to their body-size. You plan to study those delicious-looking things in much closer detail in the coming hour.", parse);
 	Text.NL();
