@@ -37,7 +37,7 @@ CreditsScreen = function() {
 	Text.NL();
 	Text.Add(Text.BoldColor("Loyal patreons:"));
 	Text.NL();
-	Text.Add("StarcraftJunkie, Dane, Mark, Marco Zijlmans");
+	Text.Add("StarcraftJunkie, Dane, Mark, Marco Zijlmans, Xcuphra");
 	Text.NL();
 	Text.Add("...and all the rest of you!");
 	Text.Flush();
