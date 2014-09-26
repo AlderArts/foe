@@ -853,8 +853,13 @@ Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 		
 		Text.Add("A small group of rabbits approach the [foxvixen] thief and immediately set about removing [hisher] [armorDesc].", parse);
 		Text.NL();
-		if(terry.Slut() < 45)
-			Text.Add("<i>”Whoa, wait you bunch of pervs! I didn’t- mmf!”</i> Terry’s protests get immediately silenced as one of the males kiss [himher] straight on the lips. Maybe because Terry looks just so girly...", parse);
+		if(terry.Slut() < 45) {
+			Text.Add("<i>”Whoa, wait you bunch of pervs! I didn’t- mmf!”</i> Terry’s protests get immediately silenced as one of the males kiss [himher] straight on the lips. ", parse);
+			if(terry.PronounGender() == Gender.male)
+				Text.Add("Maybe because Terry looks just so girly...", parse);
+			else
+				Text.Add("It seems the lagomorphs are incapable of resisting Terry’s charms...", parse);
+		}
 		else
 			Text.Add("<i>”Hey! No need to push I’m strip- mmf!”</i> Terry has no time to finish before one of the taller bunnies decides to keep [hisher] muzzle shut with a kiss. After the initial surprise the slutty [foxvixen] is quick to kiss back. Maybe you should punish [himher] for being so forward...", parse);
 		Text.NL();
