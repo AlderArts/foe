@@ -315,15 +315,6 @@ function Body(ent) {
 	this.breasts = new Array();
 	this.breasts.push(new Breasts());
 	
-	this.lactating      = false;
-	this.lactationRate  = new Stat(0);
-	this.lactationRate.debug = function() { return debugName() + ".lactationRate"; }
-	this.milkProduction = new Stat(0);
-	this.milkProduction.debug = function() { return debugName() + ".milkProduction"; }
-	this.milkCap        = new Stat(0);
-	this.milkCap.debug = function() { return debugName() + ".milkCap"; }
-	this.milk           = new Stat(0);
-	
 	// Arms and legs
 	this.arms = new BodyPart();
 	this.arms.count = 2;
@@ -492,12 +483,6 @@ Body.prototype.ToStorage = function() {
 		storage.breasts.push(b);
 	}
 	
-	storage.lact  = this.lactating ? 1 : 0;
-	storage.lactR = this.lactationRate.base;
-	storage.milk  = this.milk.base;
-	storage.milkP = this.milkProduction.base;
-	storage.milkC = this.milkCap.base;
-	
 	// Arms and legs
 	storage.arms = {
 		race  : this.arms.race,
@@ -643,12 +628,6 @@ Body.prototype.FromStorage = function(storage) {
 		
 		this.breasts.push(b);
 	}
-	
-	this.lactating           = parseInt(storage.lact) == 1;
-	this.lactationRate.base  = parseFloat(storage.lactR) || this.lactationRate.base;
-	this.milk.base           = parseFloat(storage.milk)  || this.milk.base;
-	this.milkProduction.base = parseFloat(storage.milkP) || this.milkProduction.base;
-	this.milkCap.base        = parseFloat(storage.milkC) || this.milkCap.base;
 
 	this.arms = new BodyPart();
 	{
@@ -1612,40 +1591,6 @@ Breasts.prototype.ShortCup = function() {
 Breasts.prototype.Long = function() {
 	var desc = this.Desc();
 	return desc.a + " " + desc.adj + " " + this.nounPlural();
-}
-
-Body.prototype.Lactation = function() {
-	if(this.breasts.length == 0)
-		return false;
-	else
-		return this.lactating;
-}
-//TODO Balance
-Body.prototype.MilkCap = function() {
-	var cap = this.milkCap.Get();
-	for(var i = 0; i < this.breasts.length; i++) {
-		cap += this.breasts[i].Size();
-	}
-	return cap;
-}
-
-// For pregnancies
-// TODO: Needs some timers/callbacks
-function Womb() {
-	// In progress offspring
-	this.litterSize = 0;
-	this.litterRace = Race.human;
-	this.pregnant   = false;
-	// TODO: TIMER
-	this.progress     = 0;
-	this.hoursToBirth = 0;
-	this.triggered    = false;
-}
-Womb.prototype.Short = function() {
-	return "womb";
-}
-Womb.prototype.Desc = function() {
-	
 }
 
 /*

@@ -118,7 +118,7 @@ Items.Bovia.PushEffect(function(target) {
 		}
 		
 		if(Math.random() < 0.5) {
-			var diff = target.body.lactationRate.IdealStat(10, 1);
+			var diff = target.lactHandler.lactationRate.IdealStat(10, 1);
 			if(diff) {
 				Text.AddOutput("[Poss] breasts starts to lactate more than before.", parse);
 				Text.Newline();
@@ -126,7 +126,7 @@ Items.Bovia.PushEffect(function(target) {
 		}
 		
 		if(Math.random() < 0.5) {
-			var diff = target.body.milkProduction.IncreaseStat(5, 1);
+			var diff = target.lactHandler.milkProduction.IncreaseStat(5, 1);
 			if(diff) {
 				Text.AddOutput("[Poss] breasts swell, as they become able to produce milk at a quicker rate.", parse);
 				Text.Newline();

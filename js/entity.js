@@ -187,6 +187,7 @@ function Entity() {
 	this.drunkLevel   = 0.0;
 	
 	this.pregHandler  = new PregnancyHandler(this);
+	this.lactHandler  = new LactationHandler(this);
 	
 	// Set hp and sp to full, clear lust to min level
 	this.Equip();
@@ -362,6 +363,10 @@ Entity.prototype.SavePregnancy = function(storage) {
 	storage.preg = this.pregHandler.ToStorage();
 }
 
+Entity.prototype.SaveLactation = function(storage) {
+	storage.lact = this.lactHandler.ToStorage();
+}
+
 // Convert to a format easy to write to/from memory
 Entity.prototype.ToStorage = function() {
 	var storage = {
@@ -375,6 +380,7 @@ Entity.prototype.ToStorage = function() {
 	this.SaveJobs(storage);
 	this.SaveEquipment(storage);
 	this.SavePregnancy(storage);
+	this.SaveLactation(storage);
 
 	this.SaveFlags(storage);
 	this.SaveSexStats(storage);
@@ -492,6 +498,10 @@ Entity.prototype.LoadPregnancy = function(storage) {
 	this.pregHandler.FromStorage(storage.preg);
 }
 
+Entity.prototype.LoadLactation = function(storage) {
+	this.lactHandler.FromStorage(storage.lact);
+}
+
 Entity.prototype.FromStorage = function(storage) {
 	this.LoadCombatStats(storage);
 	this.LoadPersonalityStats(storage);
@@ -500,6 +510,7 @@ Entity.prototype.FromStorage = function(storage) {
 	this.LoadJobs(storage);
 	this.LoadEquipment(storage);
 	this.LoadPregnancy(storage);
+	this.LoadLactation(storage);
 	
 	// Load flags
 	this.LoadFlags(storage);
@@ -1172,7 +1183,7 @@ Entity.prototype.Update = function(step) {
 		
 		this.AddLustOverTime(hours);
 		this.AccumulateCumOverTime(hours);
-		this.AccumulateMilkOverTime(hours);
+		this.LactationOverTime(hours);
 		this.PregnancyOverTime(hours);
 		this.HandleDrunknessOverTime(hours);
 		
@@ -1205,36 +1216,22 @@ Entity.prototype.AccumulateCumOverTime = function(hours) {
 	// Max out
 	balls.cum.IncreaseStat(balls.CumCap(), inc);
 }
-//TODO
-Entity.prototype.AccumulateMilkOverTime = function(hours) {
-	var inc = this.body.milkProduction.Get() * hours;
-	if(this.Lactation())
-		inc -= this.body.lactationRate.Get() * hours;
-	
-	if(inc >= 0) {
-		this.body.milk.IncreaseStat(this.MilkCap(), inc, true);
-	}
-	else {
-		this.body.milk.DecreaseStat(0, -inc);
-	}
-	
-	if(this.Milk() >= this.MilkCap()) {
-		this.MilkFull();
-	}
-	if(this.Lactation()) {
-		if(this.Milk() <= 0)
-			this.MilkDrained();
-	}
-}
 
 Entity.prototype.MilkDrained = function() {
-	this.body.lactating = false;
+	this.lactHandler.MilkDrained();
 	// TODO Output
 }
 Entity.prototype.MilkFull = function() {
-	if(this.Lactation() == false)
-		this.body.lactating = true;
+	this.lactHandler.MilkFull();
 	// TODO Output
+}
+
+Entity.prototype.LactHandler = function() {
+	return this.lactHandler;
+}
+
+Entity.prototype.LactationOverTime = function(hours) {
+	this.lactHandler.Update(hours);
 }
 
 Entity.prototype.PregHandler = function() {
@@ -1497,13 +1494,13 @@ Entity.prototype.AllPenetrators = function(orifice) {
 }
 
 Entity.prototype.Lactation = function() {
-	return this.body.Lactation();
+	return this.lactHandler.Lactation();
 }
 Entity.prototype.Milk = function() {
-	return this.body.milk.Get();
+	return this.lactHandler.milk.Get();
 }
 Entity.prototype.MilkCap = function() {
-	return this.body.MilkCap();
+	return this.lactHandler.MilkCap();
 }
 
 Entity.prototype.Fuck = function(cock, expMult) {

@@ -19,6 +19,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/body.js \
 	js/defbody.js \
 	js/pregnancy.js \
+	js/lactation.js \
 	js/event/player.js \
 	js/party.js \
 	js/effect.js \

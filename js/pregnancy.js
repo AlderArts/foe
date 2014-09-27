@@ -2,6 +2,25 @@
  * Pregnancy handler
  */
 
+// TODO: Needs some timers/callbacks
+function Womb() {
+	// In progress offspring
+	this.litterSize = 0;
+	this.litterRace = Race.human;
+	this.pregnant   = false;
+	// TODO: TIMER
+	this.progress     = 0;
+	this.hoursToBirth = 0;
+	this.triggered    = false;
+}
+Womb.prototype.Short = function() {
+	return "womb";
+}
+Womb.prototype.Desc = function() {
+	
+}
+
+
 function PregnancyHandler(entity, storage) {
 	this.entity = entity;
 	

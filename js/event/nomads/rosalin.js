@@ -1735,7 +1735,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				}, 1.0, function() { return rosalin.FirstBreastRow().size.Get() < 40; });
 				scenes.AddEnc(function() {
 					Text.Add("Rosalin's [rNipsDesc] starts dripping milk. [HeShe] experimentally gives the liquid a taste. <i>\"So yummy!\"</i> [heshe] exclaims excitedly, <i>\"I wonder if I can use this in cooking?\"</i>", parse);
-					rosalin.body.lactationRate.IncreaseStat(10, 1);
+					rosalin.lactHandler.lactationRate.IncreaseStat(10, 1);
 					Text.NL();
 				}, 1.0, function() { return true; });
 				

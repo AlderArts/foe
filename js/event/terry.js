@@ -215,14 +215,14 @@ Terry.prototype.SetBreasts = function() {
 }
 Terry.prototype.SetLactation = function() {
 	if(this.flags["lact"] != 0) {
-		this.body.milkProduction.base = 3;
-		this.body.lactationRate.base = 1;
-		this.body.lactating = true;
+		this.lactHandler.milkProduction.base = 3;
+		this.lactHandler.lactationRate.base = 1;
+		this.lactHandler.lactating = true;
 	}
 	else {
-		this.body.milkProduction.base = 0;
-		this.body.lactationRate.base = 0;
-		this.body.lactating = false;
+		this.lactHandler.milkProduction.base = 0;
+		this.lactHandler.lactationRate.base = 0;
+		this.lactHandler.lactating = false;
 	}
 }
 Terry.prototype.Lactation = function() {
@@ -3976,7 +3976,7 @@ Scenes.Terry.JeanneTFStartLactate = function() {
 	Text.Flush();
 	terry.flags["lact"] = 1;
 	terry.SetLactation();
-	terry.body.milk.base = terry.MilkCap();
+	terry.lactHandler.milk.base = terry.MilkCap();
 	
 	Scenes.Jeanne.InteractPrompt();
 }
