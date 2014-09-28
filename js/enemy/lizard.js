@@ -2170,11 +2170,11 @@ Scenes.Lizards.LossFemale = function() {
 			Text.Newline();
 			Text.AddOutput("<i>\"Not... oh... bad,\"</i> she pants. She collects her things - and some of your money, and then quickly heads off toward her companions.", parse);
 			
-			var cash = Math.min(Math.floor(5 + Math.random() * 20), party.coin);
-			party.coin -= cash;
+			var coin = Math.min(Math.floor(5 + Math.random() * 20), party.coin);
+			party.coin -= coin;
 			Text.Newline();
-			if(cash > 0) {
-				parse["coin"] = Text.NumToText(cash);
+			if(coin > 0) {
+				parse["coin"] = Text.NumToText(coin);
 				parse["s"] = coin > 1 ? "s" : "";
 				Text.AddOutput("<b>She takes [coin] coin[s] from you!</b>", parse);
 			}
