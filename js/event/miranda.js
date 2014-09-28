@@ -3370,8 +3370,8 @@ Scenes.Miranda.HomeDommySex = function() {
 	Text.Add("<i>”How do you want me?”</i> she moans softly in your ear. <i>”Decide quickly, or I might decide myself.”</i> One of her hands trail downwards, pawing at her britches in order to free her stiffening monster cock from its confines.", parse);
 	Text.Flush();
 	
-	var cocksInVag = player.CocksThatFit(miranda.FirstVag());
-	var cocksInAss = player.CocksThatFit(miranda.Butt());
+	var cocksInVag = player.CocksThatFit(miranda.FirstVag(), false, 15);
+	var cocksInAss = player.CocksThatFit(miranda.Butt(), false, 15);
 	
 	//[Fuck vag][Fuck anal][Ride vag][Ride anal][Cellar/Dungeon]
 	var options = new Array();
@@ -4656,8 +4656,8 @@ Scenes.Miranda.HomeSubbySex = function() {
 		});
 	}
 	
-	var cocksInVag = player.CocksThatFit(miranda.FirstVag());
-	var p1Cock = player.BiggestCock(cocksInVag);
+	var cocksInVag = player.CocksThatFit(miranda.FirstVag(), false, 15);
+	var p1Cock     = player.BiggestCock(cocksInVag);
 	
 	if(p1Cock) {
 		options.push({ nameStr : "Dommy ride",
@@ -5081,7 +5081,7 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 				}
 				
 				if(player.FirstCock() || player.Strapon()) {
-					var cocksInAss = player.CocksThatFit(miranda.Butt());
+					var cocksInAss = player.CocksThatFit(miranda.Butt(), false, 15);
 					var p1Cock = player.BiggestCock(cocksInAss);
 					
 					parse["cockDesc"] = function() { return p1Cock.Short(); }
@@ -5268,7 +5268,7 @@ Scenes.Miranda.TavernSexBackroomPrompt = function() {
 		Text.Add(" <i>”Well, here we are, so what now[m]?”</i>", parse);
 		Text.Flush();
 		
-		var cocksInVag = player.CocksThatFit(miranda.FirstVag());
+		var cocksInVag = player.CocksThatFit(miranda.FirstVag(), false, 15);
 		
 		//[BlowHer][TakeHer]
 		var options = new Array();

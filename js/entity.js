@@ -1359,14 +1359,14 @@ Entity.prototype.BiggestCock = function(cocks, incStrapon) {
 	else if(incStrapon && this.strapOn)
 		return this.strapOn.cock;
 }
-Entity.prototype.CocksThatFit = function(orifice, onlyRealCocks) {
+Entity.prototype.CocksThatFit = function(orifice, onlyRealCocks, extension) {
 	var ret = new Array();
 	for(var i=0,j=this.body.cock.length; i<j; i++) {
 		var c = this.body.cock[i];
-		if(!orifice || orifice.Fits(c))
+		if(!orifice || orifice.Fits(c, extension))
 			ret.push(c);
 	};
-	if(!onlyRealCocks && this.strapOn && (!orifice || orifice.Fits(this.strapOn.cock)))
+	if(!onlyRealCocks && this.strapOn && (!orifice || orifice.Fits(this.strapOn.cock, extension)))
 		ret.push(this.strapOn.cock);
 	return ret;
 }
