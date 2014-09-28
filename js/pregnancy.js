@@ -117,7 +117,7 @@ PregnancyHandler.prototype.IsPregnant = function(opts) {
 	
 	if(womb == null)  return false;
 
-	return womb.pregnant;
+	return womb;
 }
 
 /*
