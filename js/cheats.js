@@ -3,12 +3,13 @@
 world.loc.Plains.Nomads.Tent.events.push(new Link(
 	"TESTBUTTON", function() { return DEBUG; }, true,
 	function() {
-		Text.Add(Text.BoldColor("DEBUG: " + "Golem"));
+		Text.Add(Text.BoldColor("DEBUG: " + "Time"));
 		Text.NL();
 		Text.Flush();
 	},
 	function() {
-		Scenes.Golem.FightPrompt();
+		//Scenes.Golem.FightPrompt();
+		world.StepToHour(13, 14);
 	}
 ));
 */

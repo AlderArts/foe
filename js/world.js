@@ -2,9 +2,9 @@
 
 world = {
 	// Prototype initialization
-	loc : new Object(),
+	loc           : {},
 	EntityStorage : new Array(),
-	SaveSpots : {}
+	SaveSpots     : {}
 }
 
 // Update function (for animations and transitions)
@@ -31,6 +31,25 @@ world.TimeStep = function(step) {
 		if(this.EntityStorage[i].Update) this.EntityStorage[i].Update(step);
 }
 
+// Update function (for internal game time)
+world.StepToHour = function(hour, minute) {
+	hour   = hour   || 0;
+	minute = minute || 0;
+	var step = {
+		hour   : hour   - this.time.hour,
+		minute : minute - this.time.minute
+	};
+	
+	if(step.minute < 0) {
+		step.minute += 60;
+		step.hour--;
+	}
+	if(step.hour   < 0)
+		step.hour   += 24;
+	
+	world.TimeStep(step);
+}
+
 world.HandleTimers = function() {
 	for(var i = 0; i < this.EntityStorage.length; i++) {
 		if(this.EntityStorage[i].HandleTimers && this.EntityStorage[i].HandleTimers())
@@ -44,6 +63,7 @@ world.Render = function() {
 	
 }
 
+//TODO
 world.TreeFarDesc = function() {
 	return "As always, you can see the immense tree at the center of the island towering in the distance, though you are so far away that the great canopy isn't obscuring the sky above.";
 }
