@@ -3318,11 +3318,11 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 					Text.Clear();
 					Text.Add("Miranda scoots over and pats a relatively clean spot beside her. You strip down and join her, using her arm as a pillow. With a grin, she draws you close, resting your head against her breast as her breathing levels out. Soon enough you join her in a restful slumber.", parse);
 					Text.NL();
-					Text.Add("You sleep for 8 hours.");
+					Text.Add("You sleep until morning.");
 					Text.Flush();
 					
 					var func = function() {
-						world.TimeStep({hour: 8});
+						world.StepToHour(8);
 						party.Sleep();
 						
 						PrintDefaultOptions();
@@ -3339,6 +3339,7 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 			options.push({ nameStr : "Don’t",
 				func : function() {
 					Text.Clear();
+					//TODO
 					world.TimeStep({hour: 2});
 					Text.Add("<i>”Pity, I guess I’ll see you around then,”</i> she says, turning to take a nap.", parse);
 					PrintDefaultOptions();
@@ -4536,7 +4537,7 @@ Scenes.Miranda.HomeSubbySexLeavingFuckedHer = function() {
 					Text.Flush();
 					
 					var func = function() {
-						world.TimeStep({hour: 8});
+						world.StepToHour(8);
 						party.Sleep();
 						
 						PrintDefaultOptions();
@@ -4553,6 +4554,7 @@ Scenes.Miranda.HomeSubbySexLeavingFuckedHer = function() {
 			options.push({ nameStr : "Don’t",
 				func : function() {
 					Text.Clear();
+					//TODO
 					world.TimeStep({hour: 2});
 					Text.Add("<i>”Pity, I guess I’ll see you around then,”</i> she says, turning to take a nap.", parse);
 					PrintDefaultOptions();

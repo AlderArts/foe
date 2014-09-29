@@ -508,7 +508,7 @@ Scenes.Kyna.IntroMorningAfter = function() {
 	};
 	
 	party.Sleep();
-	world.TimeStep({hour: 8});
+	world.StepToHour(8);
 	
 	Text.Clear();
 	Text.Add("Feeling a brush of fur against your [skinDesc], you slowly wake from your sleep to find a furred arm draped across you. Realizing that it’s now morning and you should be moving on, you try to free yourself from the sleeping ferret. With her arm around you, that’s difficult to do without waking her.", parse);
