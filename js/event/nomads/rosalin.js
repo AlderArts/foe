@@ -16,6 +16,7 @@ function Rosalin(storage) {
 	this.recipes.push(Items.Leporine);
 	this.recipes.push(Items.Felinix);
 	this.recipes.push(Items.Lacertium);
+	this.recipes.push(Items.Nagazm);
 	this.recipes.push(Items.Bovia);
 	
 	this.flags["PrefGender"] = Gender.female;
@@ -32,6 +33,7 @@ function Rosalin(storage) {
 	this.flags["Equinium+"] = 0;
 	this.flags["TakenEquinium+"] = 0;
 	this.flags["Lacertium"] = 0;
+	this.flags["Nagazm"] = 0;
 	this.flags["Bovia"] = 0;
 	
 	if(storage) this.FromStorage(storage);
@@ -1762,6 +1764,72 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		});
 		Gui.SetButtonsFromList(options);
 	}
+	else if(item == Items.Nagazm) {
+		if(rosalin.flags["Nagazm"] == 0) {
+			Text.Add("<i>”A bit oily...”</i> Rosalin frowns as [heshe] prods the slimy liquid you present [himher] with. Shrugging, the alchemist grinds the other ingredients and mix them together. As [heshe] does, the mixture slowly turns into a bubbly pink goop, exuding a putrid smell.", parse);
+			Text.NL();
+			Text.Add("<i>”Never could stomach snakes,”</i> [heshe] notes conversationally. <i>”I’ve heard some put them in strong alcohol. Perhaps it kills the taste.”</i> The alchemist looks excited. <i>”Aren’t you wondering what it’ll do?”</i>", parse);
+			rosalin.flags["Nagazm"] = 1;
+			player.recipes.push(Items.Nagazm);
+		}
+		else {
+			Text.Add("<i>”Another disgusting, snakey pink goop, coming up!”</i>", parse);
+		}
+		Text.NL();
+		Text.Add("Rosalin hands you the stoppered bottle, looking expectantly at you.", parse);
+		Text.Flush();
+		
+		//[You][Rosalin][Discard]
+		var options = new Array();
+		options.push({ nameStr : "You",
+			func : function() {
+				Text.Clear();
+				Text.Add("Steeling yourself, you take a large swig of the pink goop.", parse);
+				Text.NL();
+				var body = player.LowerBodyType();
+				Items.Nagazm.Use(player);
+				Text.NL();
+				if(body != player.LowerBodyType()) {
+					Text.Add("<i>”Wow!”</i> Rosalin exclaims. <i>”That’s so cool!”</i> [HeShe] gingerly touches your new tail, caressing the scales thoughtfully.", parse);
+					Text.NL();
+					Text.Add("<i>”You know...”</i> [heshe] ponders, <i>”this looks like it could be fun to play with...”</i>", parse);
+					Text.Flush();
+					Gui.NextPrompt(function() {
+						Scenes.Rosalin.SexPrompt(RosalinSexState.Regular);
+					});
+				}
+				else {
+					Text.Add("<i>”Disgusting, isn’t it?”</i> Rosalin shudders. You burp loudly, your throat burning.", parse);
+					Text.Flush();
+					Gui.NextPrompt(function() {
+						Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
+					});
+				}
+			}, enabled : true,
+			tooltip : "Drink the potion yourself."
+		});
+		options.push({ nameStr : "Rosalin",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”I… I’m actually going to pass on this one. Can’t handle the taste of snake.”</i> You look incredulously at the alchemist. Apparently even [heshe] has [hisher] limits.", parse);
+				Text.Flush();
+			}, enabled : true,
+			tooltip : "Offer the potion to Rosalin."
+		});
+		options.push({ nameStr : "Discard",
+			func : function() {
+				Text.Clear();
+				Text.Add("This… doesn’t look healthy. You decide to discard the concoction, pouring it out on the ground. The nearby vegetation wriggles unsettlingly.", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
+				});
+			}, enabled : true,
+			tooltip : "Pour out the potion."
+		});
+		Gui.SetButtonsFromList(options);
+	}
+	
 	/*
 	else if(item == Items.Lacertium) {
 		if(rosalin.flags["Lacertium"] == 0) {
