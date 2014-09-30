@@ -14,7 +14,8 @@ TF.Effect = {
 }
 
 // Change of bodyparts, return if something was changed
-TF.SetRaceOne = function(bodypart, race) {
+TF.SetRaceOne = function(bodypart, race, ret) {
+	ret = ret || {};
 	var changed = TF.Effect.Unchanged;
 	if(Array.isArray(bodypart)) {
 		var list = [];
@@ -24,12 +25,15 @@ TF.SetRaceOne = function(bodypart, race) {
 		}
 		if(list.length > 0) {
 			changed = TF.Effect.Changed;
-			list[Rand(list.length)].race = race;
+			var idx = Rand(list.length);
+			list[idx].race = race;
+			ret.bodypart   = list[idx];
 		}
 	}
 	else {
 		changed       = (bodypart.race != race) ? TF.Effect.Changed : TF.Effect.Unchanged;
 		bodypart.race = race;
+		ret.bodypart  = bodypart;
 	}
 	return changed;
 }

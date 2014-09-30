@@ -6,11 +6,12 @@
 Alchemy = {};
 
 // callback in the form of function(item)
-Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback) {
+Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, preventClear) {
 	alchemist  = alchemist  || new Entity();
 	inventory  = inventory  || new Inventory();
 	
-	Text.Clear();
+	if(!preventClear)
+		Text.Clear();
 	Text.Add("[name] can transmute the following items:", {name: alchemist.NameDesc()});
 	Text.NL();
 	
