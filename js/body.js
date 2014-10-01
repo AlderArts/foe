@@ -828,7 +828,8 @@ Vagina.prototype.Pregnant = function() {
 }
 // TODO
 Vagina.prototype.Fits = function(cock, extension) {
-	return cock.length.Get() <= this.capacity.Get() + extension;
+	extension = extension || 0;
+	return cock.length.Get() <= (this.capacity.Get() + extension);
 }
 
 // Create a clitcock from a vagina
@@ -976,7 +977,8 @@ Butt.prototype.Pregnant = function() {
 }
 // TODO
 Butt.prototype.Fits = function(cock, extension) {
-	return cock.length.Get() <= this.capacity.Get() + extension;
+	extension = extension || 0;
+	return cock.length.Get() <= (this.capacity.Get() + extension);
 }
 Butt.prototype.Tightness = function() {
 	return this.stretch.Get();
