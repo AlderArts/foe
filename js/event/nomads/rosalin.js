@@ -19,6 +19,8 @@ function Rosalin(storage) {
 	this.recipes.push(Items.Nagazm);
 	this.recipes.push(Items.Bovia);
 	this.recipes.push(Items.Canis);
+	this.recipes.push(Items.Lobos);
+	this.recipes.push(Items.Vulpinix);
 	
 	this.flags["PrefGender"] = Gender.female;
 	
@@ -38,6 +40,7 @@ function Rosalin(storage) {
 	this.flags["Bovia"] = 0;
 	this.flags["Canis"] = 0;
 	this.flags["Lobos"] = 0;
+	this.flags["Vulpinix"] = 0;
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -1894,8 +1897,14 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				});
 				scenes.AddEnc(function() {
 					Text.Add("<i>”Mm, this will be fun to play with!”</i> Rosalin moans softly as [heshe] hoists up [hisher] dress, marvelling at [hisher] thick knot.", parse);
-					TF.
 					Text.NL();
+					var cocks = rosalin.AllCocks();
+					for(var i = 0; i < cocks.length; i++) {
+						if(cocks[i].knot != 1) {
+							cocks[i].knot = 1;
+							break;
+						}
+					}
 				}, 1.0, function() {
 					var noknot = false;
 					var cocks = rosalin.AllCocks();
@@ -1994,8 +2003,14 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				});
 				scenes.AddEnc(function() {
 					Text.Add("<i>”Mm, this will be fun to play with!”</i> Rosalin moans softly as [heshe] hoists up [hisher] dress, marvelling at [hisher] thick knot.", parse);
-					TF.
 					Text.NL();
+					var cocks = rosalin.AllCocks();
+					for(var i = 0; i < cocks.length; i++) {
+						if(cocks[i].knot != 1) {
+							cocks[i].knot = 1;
+							break;
+						}
+					}
 				}, 1.0, function() {
 					var noknot = false;
 					var cocks = rosalin.AllCocks();
@@ -2018,6 +2033,112 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			func : function() {
 				Text.Clear();
 				Text.Add("The surrounding vegetation doesn’t seem to have any problem absorbing the solution. Some of the flowers take on a gray tint, but remain perky. Feral, in fact. You can swear that one dandelion is looking hungry.", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
+				});
+			}, enabled : true,
+			tooltip : "Pour out the potion."
+		});
+		Gui.SetButtonsFromList(options);
+	}
+	else if(item == Items.Vulpinix) {
+		if(rosalin.flags["Vulpinix"] == 0) {
+			Text.Add("<i>”Hmm, a bunch of berries and plants huh? Wonder what I can do with this...”</i> Rosalin muses, absently reaching for some additional herbs from [hisher] collection. <i>”Perhaps a vegetable stew?”</i>", parse);
+			Text.NL();
+			parse["rearsDesc"] = rosalin.EarDesc();
+			Text.Add("As the ingredients start to bubble in [hisher] pot the concoction takes on a reddish hue. The alchemist sniffs the brew suspiciously, adding a few more herbs at random. [HisHer] [rearsDesc] twitch erratically as [heshe] tastes [hisher] creation.", parse);
+			rosalin.flags["Vulpinix"] = 1;
+			player.recipes.push(Items.Vulpinix);
+		}
+		else {
+			Text.Add("<i>”Ah, these again! I think I’ll try a few other herbs this time, perhaps spice up the taste a bit.”</i> The alchemist hums to [himher]self as [heshe] starts chopping up vegetables, pouring them into a boiling pot.", parse);
+		}
+		Text.NL();
+		Text.Add("<i>”This looks promising!”</i> Rosalin exclaims, holding up the resulting bottle of opaque, red liquid.", parse);
+		Text.Flush();
+		
+		//[You][Rosalin][Discard]
+		var options = new Array();
+		options.push({ nameStr : "You",
+			func : function() {
+				Text.Clear();
+				Items.Vulpinix.Use(player);
+				Text.Add("<i>”Well, what do you think?”</i> Rosalin asks expectantly. <i>”Perhaps I should try being a chef again? Maybe open a restaurant.”</i>", parse);
+				Text.NL();
+				Text.Add("...That’d certainly be an interesting - possibly lethal - venture.", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
+				});
+			}, enabled : true,
+			tooltip : "Drink the potion yourself."
+		});
+		options.push({ nameStr : "Rosalin",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”Here goes!”</i> the alchemist fearlessly downs the red concoction, beads of sweat forming on [hisher] body due to the powerful alchemical solution.", parse);
+				Text.NL();
+				
+				var scenes = new EncounterTable();
+				// TAIL
+				scenes.AddEnc(function() {
+					Text.Add("<i>”Hehe, it’s so pretty, and fluffy too!”</i> Rosalin prances around, wagging [hisher] bushy fox-tail happily.", parse);
+					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.fox, Color.gray);
+					Text.NL();
+				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.fox); });
+				scenes.AddEnc(function() {
+					Text.Add("<i>”Woah, I can hear so clearly with these!”</i> Rosalin exclaims, touching [hisher] new foxy ears.", parse);
+					TF.SetRaceOne(rosalin.Ears(), Race.fox);
+					Text.NL();
+				}, 1.0, function() { return rosalin.Ears().race != Race.fox; });
+				scenes.AddEnc(function() {
+					parse["oneof"] = rosalin.NumCocks() > 1 ? "one of " : "";
+					Text.Add("<i>”Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rMultiCockDesc] has turned into a pointed canine cock, complete with a knot.", parse);
+					var ret = {};
+					TF.SetRaceOne(rosalin.AllCocks(), Race.dog, ret);
+					if(ret.bodypart) ret.bodypart.knot = 1;
+					Text.NL();
+				}, 1.0, function() {
+					var unchanged = false;
+					var cocks = rosalin.AllCocks();
+					for(var i = 0; i < cocks.length; i++)
+						if(cocks[i].race != Race.dog) unchanged = true;
+					return unchanged;
+				});
+				scenes.AddEnc(function() {
+					Text.Add("<i>”Mm, this will be fun to play with!”</i> Rosalin moans softly as [heshe] hoists up [hisher] dress, marvelling at [hisher] thick knot.", parse);
+					Text.NL();
+					var cocks = rosalin.AllCocks();
+					for(var i = 0; i < cocks.length; i++) {
+						if(cocks[i].knot != 1) {
+							cocks[i].knot = 1;
+							break;
+						}
+					}
+				}, 1.0, function() {
+					var noknot = false;
+					var cocks = rosalin.AllCocks();
+					for(var i = 0; i < cocks.length; i++)
+						if(cocks[i].knot != 1) noknot = true;
+					return noknot;
+				});
+				
+				scenes.Get();
+				
+				Text.Add("<i>”Mm… not bad,”</i> [heshe] sighs luxuriously. <i>”Not enough to make me a vegetarian, but… unf. Wow. Those spices sure packs a punch. Isn’t it hot out here?”</i> [HeShe] eyes you expectantly.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					Scenes.Rosalin.SexPrompt(RosalinSexState.Regular);
+				});
+			}, enabled : true,
+			tooltip : "Offer the potion to Rosalin."
+		});
+		options.push({ nameStr : "Discard",
+			func : function() {
+				Text.Clear();
+				Text.Add("On second thought, probably best to pass on this one. That much veggies can’t be healthy. The vegetation around the alchemist’s workbench perks up as you pour out the red liquid, some of them suddenly sprouting fat red berries.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
