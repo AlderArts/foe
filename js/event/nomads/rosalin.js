@@ -37,6 +37,7 @@ function Rosalin(storage) {
 	this.flags["Nagazm"] = 0;
 	this.flags["Bovia"] = 0;
 	this.flags["Canis"] = 0;
+	this.flags["Lobos"] = 0;
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -1926,7 +1927,108 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		});
 		Gui.SetButtonsFromList(options);
 	}
+	else if(item == Items.Lobos) {
+		if(rosalin.flags["Lobos"] == 0) {
+			Text.Add("<i>”Did you get this from wolfie?”</i> Rosalin asks guardedly as [heshe] eyes the wolf pelt you present [himher] with. <i>”If you did, I’ll have to make a potion to make it grow out again.”</i>", parse);
+			Text.NL();
+			parse["Cale"] = cale.flags["Met2"] >= Cale.Met2.Talked ? "Cale" : "the wolf";
+			Text.Add("You hurriedly assure [himher] that you wouldn’t hurt [Cale], you got this from somewhere else. The alchemist nods to [himher]self, the question already forgotten as [heshe] starts mixing ingredients together.", parse);
+			rosalin.flags["Lobos"] = 1;
+			player.recipes.push(Items.Lobos);
+		}
+		else {
+			Text.Add("<i>”Want another one of those huh?”</i> The alchemist hums a tune to [himher]self as [heshe] starts mixing the ingredients together.", parse);
+		}
+		Text.NL();
+		Text.Add("<i>”Looks a bit… dull, don’t you think?”</i> Rosalin muses as [heshe] pours the concoction into a bottle, studying the gray liquid. That stuff looks like liquid mercury, it’s probably not safe to drink.", parse);
+		Text.NL();
+		Text.Add("<i>”Well, what do you want to do with it?”</i>", parse);
+		Text.Flush();
+		
+		//[You][Rosalin][Discard]
+		var options = new Array();
+		options.push({ nameStr : "You",
+			func : function() {
+				Text.Clear();
+				Items.Lobos.Use(player);
+				Text.Add("<i>”Hmm,”</i> Rosalin mutters, jotting down a few observations in [hisher] notebook. <i>”Tell me, do you feel more inclined to… howl?”</i>", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
+				});
+			}, enabled : true,
+			tooltip : "Drink the potion yourself."
+		});
+		options.push({ nameStr : "Rosalin",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”Okay!”</i> the alchemist chippers, gulping down the gray liquid without hesitation.", parse);
+				Text.NL();
+				
+				
+				var scenes = new EncounterTable();
+				// TAIL
+				scenes.AddEnc(function() {
+					Text.Add("<i>”Hehe, it’s so fluffy!”</i> Rosalin prances around, wagging [hisher] new wolf-tail happily. <i>”Makes me look dangerous!”</i>", parse);
+					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.wolf, Color.gray);
+					Text.NL();
+				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.wolf); });
+				scenes.AddEnc(function() {
+					Text.Add("<i>”Woah, I can hear so clearly with these!”</i> Rosalin exclaims, touching [hisher] new canine ears.", parse);
+					TF.SetRaceOne(rosalin.Ears(), Race.wolf);
+					Text.NL();
+				}, 1.0, function() { return rosalin.Ears().race != Race.wolf; });
+				scenes.AddEnc(function() {
+					parse["oneof"] = rosalin.NumCocks() > 1 ? "one of " : "";
+					Text.Add("<i>”Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rMultiCockDesc] has turned into a pointed canine cock, complete with a knot.", parse);
+					var ret = {};
+					TF.SetRaceOne(rosalin.AllCocks(), Race.dog, ret);
+					if(ret.bodypart) ret.bodypart.knot = 1;
+					Text.NL();
+				}, 1.0, function() {
+					var unchanged = false;
+					var cocks = rosalin.AllCocks();
+					for(var i = 0; i < cocks.length; i++)
+						if(cocks[i].race != Race.dog) unchanged = true;
+					return unchanged;
+				});
+				scenes.AddEnc(function() {
+					Text.Add("<i>”Mm, this will be fun to play with!”</i> Rosalin moans softly as [heshe] hoists up [hisher] dress, marvelling at [hisher] thick knot.", parse);
+					TF.
+					Text.NL();
+				}, 1.0, function() {
+					var noknot = false;
+					var cocks = rosalin.AllCocks();
+					for(var i = 0; i < cocks.length; i++)
+						if(cocks[i].knot != 1) noknot = true;
+					return noknot;
+				});
+				
+				scenes.Get();
+				
+				Text.Add("<i>”Tastes like the moon!”</i> [heshe] exclaims happily. Whatever that means.", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					Scenes.Rosalin.SexPrompt(RosalinSexState.Regular);
+				});
+			}, enabled : true,
+			tooltip : "Offer the potion to Rosalin."
+		});
+		options.push({ nameStr : "Discard",
+			func : function() {
+				Text.Clear();
+				Text.Add("The surrounding vegetation doesn’t seem to have any problem absorbing the solution. Some of the flowers take on a gray tint, but remain perky. Feral, in fact. You can swear that one dandelion is looking hungry.", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
+				});
+			}, enabled : true,
+			tooltip : "Pour out the potion."
+		});
+		Gui.SetButtonsFromList(options);
+	}
 	
+	//TODO MORE TFS
 	/*
 	else if(item == Items.Lacertium) {
 		if(rosalin.flags["Lacertium"] == 0) {
