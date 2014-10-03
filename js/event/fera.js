@@ -811,21 +811,30 @@ Scenes.Fera.SexPrompt = function() {
 				parse["s"]        = player.NumCocks() > 2 ? "s" : "";
 				parse["notS"]     = player.NumCocks() > 2 ? "" : "s";
 				
-				if(player.CumOutput() > 3) {
-					Text.AddOutput("You feel yourself going over the edge, and give one last hard thrust, burying yourself as deep as you can. You cum hard, and your huge load fills up her [fvagDesc]", parse);
-					if(player.NumCocks() > 1)
-						Text.AddOutput(", as your other cock[s] spurt[notS] cum all over the floor and walls, making a big mess", parse);
-					Text.AddOutput(". However there is not enough room in her [fvagDesc] for your load and it starts to gush out and drip down your [multiCockDesc]. Pulling out your [cockDesc], you see the cute catgirl is panting heavily, looking up happily at you.", parse);
+				if(player.NumCocks() === 0){
+					Text.AddOutput("You can tell she's getting close and as you bury yourself as deep as you can she clamps down on your [cockDesc] and struggles to keep her voice down.", parse);
 					Text.Newline();
-					Text.AddOutput("You help Fera clean up and fix her clothes, and she helps you with your [lowerArmorDesc]. She comes close and embraces you. <i>\"We can do it again sometime... if you want...\"</i> she says while rubbing her head against your [breastDesc]. You open the dressing room door and let Fera return to work.", parse);
-				}
-				else {
-					Text.AddOutput("As you reach your limit, you push yourself in to the hilt. You shoot your load deep inside her [fvagDesc]", parse);
-					if(player.NumCocks() > 1)
-						Text.AddOutput(" as your other cock[s] spurt[notS] your cum all over the floor", parse);
-					Text.AddOutput(". As you pull out your [cockDesc], you look to see Fera breathing heavily and looking tired, but pleased.", parse);
+					Text.AddOutput("You pull out your [cockDesc], and look to see Fera breathing heavily and looking tired, but pleased.", parse);
 					Text.Newline();
 					Text.AddOutput("You help each other get dressed and you kiss her again before you leave. <i>\"If you want to do it again... let me know,\"</i> she says quietly. The two of you exit the dressing room together and return to the main area of the store.", parse);
+				}
+				else {
+					if(player.CumOutput() > 3) {
+						Text.AddOutput("You feel yourself going over the edge, and give one last hard thrust, burying yourself as deep as you can. You cum hard, and your huge load fills up her [fvagDesc]", parse);
+						if(player.NumCocks() > 1)
+							Text.AddOutput(", as your other cock[s] spurt[notS] cum all over the floor and walls, making a big mess", parse);
+						Text.AddOutput(". However there is not enough room in her [fvagDesc] for your load and it starts to gush out and drip down your [multiCockDesc]. Pulling out your [cockDesc], you see the cute catgirl is panting heavily, looking up happily at you.", parse);
+						Text.Newline();
+						Text.AddOutput("You help Fera clean up and fix her clothes, and she helps you with your [lowerArmorDesc]. She comes close and embraces you. <i>\"We can do it again sometime... if you want...\"</i> she says while rubbing her head against your [breastDesc]. You open the dressing room door and let Fera return to work.", parse);
+					}
+					else {
+						Text.AddOutput("As you reach your limit, you push yourself in to the hilt. You shoot your load deep inside her [fvagDesc]", parse);
+						if(player.NumCocks() > 1)
+							Text.AddOutput(" as your other cock[s] spurt[notS] your cum all over the floor", parse);
+						Text.AddOutput(". As you pull out your [cockDesc], you look to see Fera breathing heavily and looking tired, but pleased.", parse);
+						Text.Newline();
+						Text.AddOutput("You help each other get dressed and you kiss her again before you leave. <i>\"If you want to do it again... let me know,\"</i> she says quietly. The two of you exit the dressing room together and return to the main area of the store.", parse);
+					}
 				}
 			
 				world.TimeStep({minute: 30});
@@ -872,23 +881,31 @@ Scenes.Fera.SexPrompt = function() {
 					Text.AddOutput("Fera lets out quiet moans as you push into her [fvagDesc]. She stares into your [eyeDesc]s, with a pleased look on her face. After a while you decide to thrust faster, making the catgirl moan even louder. She quickly grabs her other [fbreastDesc] and begins to play with her [fnipsDesc]. Fera is clearly enjoying this, despite having little experience. She pinches her stiff [fnipsDesc] and begins to twist them gently as she plays with her [fbreastDesc].", parse);
 				}
 				Text.Newline();
-				
-				if(player.CumOutput() > 3) {
-					parse["mc"] = player.NumCocks() > 1 ? Text.Parse(" as your other member[s] spurt[notS] all over the wall and her legs", parse) : "";
-					Text.AddOutput("After a while, you feel yourself approaching your limit. You push inside her as you cum, filling her [fvagDesc] with your load[mc]. You stay inside her for a moment and kiss her again, before pulling your [cockDesc] out of her [fvagDesc].", parse);
-					Text.Newline();
-					Text.AddOutput("A small stream of your seed flows out of her, forming a large puddle on the floor. Taking one of the rags from under the bench, and handing Fera the other, you help her wipe up the mess. She kneels down and cleans your [multiCockDesc][balls] with her tongue as you grab your [lowerArmorDesc]. You help each other get dressed and leave the dressing room.", parse);
-				}
-				else {
-					Text.AddOutput("Despite your best efforts to hold back, you soon feel your [multiCockDesc] begin to twich uncontrollably thrust as far inside her [fvagDesc] as you can. Your [cockDesc] spurts deep into her [fvagDesc]", parse);
-					if(player.NumCocks() > 1)
-						Text.AddOutput(" while your other cock[s] spray[notS] spunk onto the walls", parse);
-					Text.AddOutput(".", parse);
+
+				if(player.NumCocks() === 0){
+					Text.AddOutput("Seeing her this turned on is a particularly satisfying treat. Her smile vanishes in surprise when you push your [cockDesc] as deep into her [fvagDesc] as it can go. She gasps in pleasure and cums soundlessly.",parse);
 					Text.Newline();
 					Text.AddOutput("You pull out of her, and she kneels down, licking the remaining juices from your [multiCockDesc], gulping them down greedily. <i>\"Thanks so much, [playername]...\"</i> she says after licking her lips.", parse);
-					if(player.NumCocks() > 1)
-						Text.AddOutput(" Before getting back up, she grabs a small rag and uses it to wipe off the walls.", parse);
 					Text.AddOutput(" You put your [lowerArmorDesc] back on, and help her fix her dress. You open the door and you both head back out to the store.", parse);
+				}
+				else {
+					if(player.CumOutput() > 3) {
+						parse["mc"] = player.NumCocks() > 1 ? Text.Parse(" as your other member[s] spurt[notS] all over the wall and her legs", parse) : "";
+						Text.AddOutput("After a while, you feel yourself approaching your limit. You push inside her as you cum, filling her [fvagDesc] with your load[mc]. You stay inside her for a moment and kiss her again, before pulling your [cockDesc] out of her [fvagDesc].", parse);
+						Text.Newline();
+						Text.AddOutput("A small stream of your seed flows out of her, forming a large puddle on the floor. Taking one of the rags from under the bench, and handing Fera the other, you help her wipe up the mess. She kneels down and cleans your [multiCockDesc][balls] with her tongue as you grab your [lowerArmorDesc]. You help each other get dressed and leave the dressing room.", parse);
+					}
+					else {
+						Text.AddOutput("Despite your best efforts to hold back, you soon feel your [multiCockDesc] begin to twich uncontrollably thrust as far inside her [fvagDesc] as you can. Your [cockDesc] spurts deep into her [fvagDesc]", parse);
+						if(player.NumCocks() > 1)
+							Text.AddOutput(" while your other cock[s] spray[notS] spunk onto the walls", parse);
+						Text.AddOutput(".", parse);
+						Text.Newline();
+						Text.AddOutput("You pull out of her, and she kneels down, licking the remaining juices from your [multiCockDesc], gulping them down greedily. <i>\"Thanks so much, [playername]...\"</i> she says after licking her lips.", parse);
+						if(player.NumCocks() > 1)
+							Text.AddOutput(" Before getting back up, she grabs a small rag and uses it to wipe off the walls.", parse);
+						Text.AddOutput(" You put your [lowerArmorDesc] back on, and help her fix her dress. You open the door and you both head back out to the store.", parse);
+					}
 				}
 				
 				fera.flags["Standing"]++;
@@ -928,7 +945,7 @@ Scenes.Fera.SexPrompt = function() {
 					
 					player.Fuck(p1Cock, 3);
 					
-					Text.AddOutput("Leaning over as you thrust into her, you reach around and grab her [fbreastDesc]. Fera moans quietly as you squeeze her [fbreastDesc], and ram your [cockDesc] deep inside her. The catgirl pants and moans as you fuck her, and you think you feel her thrusting back a little. Your hands move up her [fbreastDesc], and you playfully twist her [fnipsDesc]. Thrusting harder, you can feel the warmth and soft bumps of her [fvagDesc] with each push.", parse);
+					Text.AddOutput("Leaning over as you thrust into her, you reach around and grab her [fbreastDesc]. Fera moans quietly as you squeeze her [fbreastDesc], and ram your [cockDesc] deep inside her. The catgirl pants and moans as you fuck her, and you think you feel her thrusting back a little. Your hands move up her [fbreastDesc], and you playfully twist her [fnipsDesc]. Thrusting harder, you can feel the warmth radiating from her [fvagDesc], and a steady drip of her fluids hitting the floor.", parse);
 				}
 				Text.Newline();
 				
@@ -936,24 +953,34 @@ Scenes.Fera.SexPrompt = function() {
 				parse["notS"]     = player.NumCocks() > 2 ? "" : "s";
 				parse["balls"]    = player.HasBalls() ? function() { return Text.Parse(" and [ballsDesc]", parse); } : "";
 				
-				if(player.CumOutput() > 3) {
-					Text.AddOutput("With the intense stimulation of her tunnel, you can't help but near orgasm. With one final thrust, you push your [cockDesc] deep into the cute catgirl's warm depths. As you cum, your [cockDesc] fills her [fvagDesc] with your seed", parse);
-					if(player.NumCocks() > 1)
-						Text.AddOutput(" as your other member[s] spurt[notS] all over the floor and walls, making a huge, sticky mess", parse);
-					Text.AddOutput(". She purrs as your cum begins to leak out of her [fvagDesc] and down her legs and the length of your [cockDesc].", parse);
-					Text.Newline();
-					Text.AddOutput("You pull your [cockDesc] out of her with a loud slurping sound and a wad of your spunk gushes out of her, splattering on the floor. Spent, you sit on the bench for a moment, feeling her rough tongue on your [multiCockDesc][balls]. She purrs in pleasure as she diligently licks up your cum, careful not to waste a single drop.", parse);
-					Text.Newline();
-					Text.AddOutput("When she is finished, she reaches under the bench to grab a rag and tosses you your [lowerArmorDesc]. She wipes up the mess as you get dressed. You help her fix her dress, give her a kiss, and follow her out.", parse);
+				if(player.NumCocks() === 0) {
+						Text.AddOutput("She mewls softly with each thrust, eventually pushing back into you firmly.", parse);
+						Text.Newline();
+						Text.AddOutput("You wrap your hands around her slender frame and press your [cockDesc] deep into her [fvagDesc] as she cums around you.", parse);
+						Text.Newline();
+						Text.AddOutput("Your [cockDesc] slides out of her as she slumps against the wall breathing in short gasps. <i>\"[playername] that was incredible!\"</i>, she exhales, <i>\"I may get addicted at this rate...\"</i>", parse);
+						Text.AddOutput("When has regained her composure, she rises shakily to her feet, tosses you your [lowerArmorDesc], and begins to get dressed. You help her fix her dress, give her a kiss, and follow her out to the main area of the store.", parse);
 				}
 				else {
-					Text.AddOutput("It doesn't take long until you feel you are about to cum, and you thrust firmly into her [fvagDesc]. Your [multiCockDesc] erupt[notS], filling her hungry snatch with your spunk", parse);
-					if(player.NumCocks() > 1)
-						Text.AddOutput(" as your other prick[s] spurt[notS] onto the floor", parse);
-					Text.AddOutput(". She mewls softly as you pull out your [cockDesc], greedily wanting more.", parse);
-					Text.Newline();
-					Text.AddOutput("A little of your seed leaks out of her [fvagDesc] and she kneels to lovingly clean your [multiCockDesc][balls] with her tongue. After she is finished, you help her fix her dress and grab your [lowerArmorDesc]. You get dressed as she grabs a rag to clean up. Before you leave you give the cute catgirl a hug and you leave the dressing room together.", parse);
-					Text.Newline();
+					if(player.CumOutput() > 3) {
+						Text.AddOutput("With the intense stimulation of her tunnel, you can't help but near orgasm. With one final thrust, you push your [cockDesc] deep into the cute catgirl's warm depths. As you cum, your [cockDesc] fills her [fvagDesc] with your seed", parse);
+						if(player.NumCocks() > 1)
+							Text.AddOutput(" as your other member[s] spurt[notS] all over the floor and walls, making a huge, sticky mess", parse);
+						Text.AddOutput(". She purrs as your cum begins to leak out of her [fvagDesc] and down her legs and the length of your [cockDesc].", parse);
+						Text.Newline();
+						Text.AddOutput("You pull your [cockDesc] out of her with a loud slurping sound and a wad of your spunk gushes out of her, splattering on the floor. Spent, you sit on the bench for a moment, feeling her rough tongue on your [multiCockDesc][balls]. She purrs in pleasure as she diligently licks up your cum, careful not to waste a single drop.", parse);
+						Text.Newline();
+						Text.AddOutput("When she is finished, she reaches under the bench to grab a rag and tosses you your [lowerArmorDesc]. She wipes up the mess as you get dressed. You help her fix her dress, give her a kiss, and follow her out.", parse);
+					}
+					else {
+						Text.AddOutput("It doesn't take long until you feel you are about to cum, and you thrust firmly into her [fvagDesc]. Your [multiCockDesc] erupt[notS], filling her hungry snatch with your spunk", parse);
+						if(player.NumCocks() > 1)
+							Text.AddOutput(" as your other prick[s] spurt[notS] onto the floor", parse);
+						Text.AddOutput(". She mewls softly as you pull out your [cockDesc], greedily wanting more.", parse);
+						Text.Newline();
+						Text.AddOutput("A little of your seed leaks out of her [fvagDesc] and she kneels to lovingly clean your [multiCockDesc][balls] with her tongue. After she is finished, you help her fix her dress and grab your [lowerArmorDesc]. You get dressed as she grabs a rag to clean up. Before you leave you give the cute catgirl a hug and you leave the dressing room together.", parse);
+						Text.Newline();
+					}
 				}
 				
 				fera.flags["Behind"]++;
@@ -1021,21 +1048,28 @@ Scenes.Fera.SexPrompt = function() {
 					parse["s"]        = player.NumCocks() > 2 ? "s" : "";
 					parse["notS"]     = player.NumCocks() > 2 ? "" : "s";
 					
-					if(player.CumOutput() > 3) {
-						Text.AddOutput("After a while, you near your limit and push your [cockDesc] inside her with a forceful thrust. Your feel your [multiCockDesc][notS] twitch violently as you climax. She mewls loudly as you fill her ass with your seed", parse);
-						if(player.NumCocks() > 1)
-							Text.AddOutput(" while your other cock[s] splatter[notS] the wall with your cum", parse);
-						Text.AddOutput(". Soon, however, her [fanusDesc] starts to overflow, and your cum spills out of her [fanusDesc]. Some drips down your [cockDesc], but much ends up on the floor.", parse);
+					if(player.NumCocks() === 0){
+						Text.AddOutput("As she nears orgasm, you thrust deep inside her [fanusDesc], bottoming out. she climaxes, and her shaking body slides off your [cockDesc].", parse);
 						Text.Newline();
-						Text.AddOutput("You pull out of her ass, unplugging her, and a wave of your spunk flows out of her between her legs as she happily kneels in front of you and licks your [multiCockDesc][balls] clean. When you are clean, she gets a large rag from the pile underneath the bench and wipes up the mess. You help each other get dressed and quickly kiss before leaving.", parse);
+						Text.AddOutput("She turns and kisses you sweetly. She lingers for awhile as your tongues dance and her warm lips embrace yours. You both regain your composure as you get dressed and follow her into the main store area.",parse);
 					}
 					else {
-						Text.AddOutput("As you near your orgasm, thrust deep inside her [fanusDesc], bottoming out. You climax, and fill her ass with your seed", parse);
-						if(player.NumCocks() > 1)
-							Text.AddOutput(" as your other prick[s] splatter[notS] the wall with your seed", parse);
-						Text.AddOutput(". You pull out, and a large dollop of cum drips out of her ass, splattering on the floor.", parse);
-						Text.Newline();
-						Text.AddOutput("She licks any remaining cum off of your [multiCockDesc][balls], and grabs a rag to clean up. After helping each other get dressed you kiss before walking out into the store.", parse);
+						if(player.CumOutput() > 3) {
+							Text.AddOutput("After a while, you near your limit and push your [cockDesc] inside her with a forceful thrust. Your feel your [multiCockDesc][notS] twitch violently as you climax. She mewls loudly as you fill her ass with your seed", parse);
+							if(player.NumCocks() > 1)
+								Text.AddOutput(" while your other cock[s] splatter[notS] the wall with your cum", parse);
+							Text.AddOutput(". Soon, however, her [fanusDesc] starts to overflow, and your cum spills out of her [fanusDesc]. Some drips down your [cockDesc], but much ends up on the floor.", parse);
+							Text.Newline();
+							Text.AddOutput("You pull out of her ass, unplugging her, and a wave of your spunk flows out of her between her legs as she happily kneels in front of you and licks your [multiCockDesc][balls] clean. When you are clean, she gets a large rag from the pile underneath the bench and wipes up the mess. You help each other get dressed and quickly kiss before leaving.", parse);
+						}
+						else {
+							Text.AddOutput("As you near your orgasm, thrusting deep inside her [fanusDesc], bottoming out. You climax, and fill her ass with your seed", parse);
+							if(player.NumCocks() > 1)
+								Text.AddOutput(" as your other prick[s] splatter[notS] the wall with your seed", parse);
+							Text.AddOutput(". You pull out, and a large dollop of cum drips out of her ass, splattering on the floor.", parse);
+							Text.Newline();
+							Text.AddOutput("She licks any remaining cum off of your [multiCockDesc][balls], and grabs a rag to clean up. After helping each other get dressed you kiss before walking out into the store.", parse);
+						}
 					}
 
 					fera.flags["Anal"]++;
@@ -1078,33 +1112,43 @@ Scenes.Fera.SexPrompt = function() {
 					Text.AddOutput("You squeeze her [fbreastDesc] firmly and begin to fondle her, your fingers occasionally pausing to circle and twist her [fnipsDesc], as she kisses you again. You try to hold your voices back to avoid discovery, but the sensation is too much, and loud moans escape both of you, as Fera bounces desperately in your lap.", parse);
 					Text.Newline();
 					
-					if(player.CumOutput() > 3) {
-						Text.AddOutput("You moan as your [multiCockDesc] begin[notS] to spurt [itsTheir] load[s]. Feeling your release, Fera presses down hard to take as much of you inside her as she can,", parse);
-						if(player.NumCocks() > 1) {
-							parse["s"]        = player.NumCocks() > 2 ? "s" : "";
-							parse["notS"]     = player.NumCocks() > 2 ? "" : "s";
-							Text.AddOutput(" while your other cock[s] erupt[notS] all over the bench and floor", parse);
-						}
-						Text.AddOutput(". She purrs loudly as you fill her needy hole and squeezes you tight, digging her nails into your back.", parse);
-						Text.Newline();
-						Text.AddOutput("You hold her close and kiss her roughly as your excess seed begins to leak out of her and onto both your legs. <i>\"I love you so much [playername]...\"</i> she whispers softly. Squeezing her tight, you tell her that you love her too. You see tears in her eyes as she gets up.", parse);
-						Text.Newline();
-						Text.AddOutput("As she stands, your [cockDesc] slides out of her with a loud slurping sound. A combined steam of your spunk and her juices flow out of her [fvagDesc] and add to the mess already on the floor. She kneels down and leans in to lick your [multiCockDesc][balls] clean as always. Once you're clean, and she's licked up the stray strands of cum from her lips, you reach under the bench and throw her one of the larger rags, taking another one for yourself. You clean up the floor and bench, and she helps you get your [lowerArmorDesc][toparmor] back on.", parse);
-						Text.Newline();
-						Text.AddOutput("While you fix her dress for her, Fera kisses you one more time before leading you out. <i>\"Come back soon,\"</i> she tells you as you leave.", parse);
+					if(player.NumCocks() === 0){
+						Text.AddOutput("You squeeze her tightly as she cums, and she presses into your lap, grinding your [cockDesc] deep inside her [fvagDesc]. ", parse);
+							Text.AddOutput("As her orgasm subsides she purrs and draws you close to give you a big kiss. <i>\"I love you, [playername]... more than anyone else...\"</i> she whispers with tears in her big blue eyes.", parse);
+							Text.Newline();
+							Text.AddOutput("You squeeze her, kissing her, and tell her that you love her too. Smiling, she gets up, letting your [cockDesc] flop out of her [fvagDesc] and hit the bench with a wet slap. Wanting to taste her favorite treat, she grabs your [multiCockDesc] and gently licks up her cum, the sight of it alone almost makes you want to go for a second round.", parse);
+							Text.Newline();
+							Text.AddOutput("Once you're clean, you grab a rag and help her clean up, grabbing your [lowerArmorDesc][toparmor]. After helping each other get dressed, you hug the cute catgirl tightly. <i>\"Come visit again soon, [playername],\"</i> she tells you as you leave the dressing room with her.", parse);
 					}
 					else {
-						Text.AddOutput("You squeeze her tightly as you cum, and she presses into your lap, taking your seed deep into her womb. ", parse);
-						if(player.NumCocks() > 1) {
-							parse["s"]        = player.NumCocks() > 2 ? "s" : "";
-							parse["notS"]     = player.NumCocks() > 2 ? "" : "s";
-							Text.AddOutput("Your other member[s] squirt[notS] onto the bench and the floor in front of you. ", parse);
+						if(player.CumOutput() > 3) {
+							Text.AddOutput("You moan as your [multiCockDesc] begin[notS] to spurt [itsTheir] load[s]. Feeling your release, Fera presses down hard to take as much of you inside her as she can,", parse);
+							if(player.NumCocks() > 1) {
+								parse["s"]        = player.NumCocks() > 2 ? "s" : "";
+								parse["notS"]     = player.NumCocks() > 2 ? "" : "s";
+								Text.AddOutput(" while your other cock[s] erupt[notS] all over the bench and floor", parse);
+							}
+							Text.AddOutput(". She purrs loudly as you fill her needy hole and squeezes you tight, digging her nails into your back.", parse);
+							Text.Newline();
+							Text.AddOutput("You hold her close and kiss her roughly as your excess seed begins to leak out of her and onto both your legs. <i>\"I love you so much [playername]...\"</i> she whispers softly. Squeezing her tight, you tell her that you love her too. You see tears in her eyes as she gets up.", parse);
+							Text.Newline();
+							Text.AddOutput("As she stands, your [cockDesc] slides out of her with a loud slurping sound. A combined steam of your spunk and her juices flow out of her [fvagDesc] and add to the mess already on the floor. She kneels down and leans in to lick your [multiCockDesc][balls] clean as always. Once you're clean, and she's licked up the stray strands of cum from her lips, you reach under the bench and throw her one of the larger rags, taking another one for yourself. You clean up the floor and bench, and she helps you get your [lowerArmorDesc][toparmor] back on.", parse);
+							Text.Newline();
+							Text.AddOutput("While you fix her dress for her, Fera kisses you one more time before leading you out. <i>\"Come back soon,\"</i> she tells you as you leave.", parse);
 						}
-						Text.AddOutput("As you fill her with your spunk, she purrs and draws you close to give you a big kiss. <i>\"I love you, [playername]... more than anyone else...\"</i> she whispers with tears in her big blue eyes.", parse);
-						Text.Newline();
-						Text.AddOutput("You squeeze her, kissing her, and tell her that you love her too. Smiling, she gets up, letting your [cockDesc] flop out of her [fvagDesc] and hit the bench with a wet slap. Wanting to taste her favorite treat, she grabs your [multiCockDesc] and gently licks up the cum, almost making you want to go for a second round.", parse);
-						Text.Newline();
-						Text.AddOutput("Once you're clean, you grab a rag and help her clean up, grabbing your [lowerArmorDesc][toparmor]. After helping each other get dressed, you hug the cute catgirl tightly. <i>\"Come visit again soon, [playername],\"</i> she tells you as you leave the dressing room with her.", parse);
+						else {
+							Text.AddOutput("You squeeze her tightly as you cum, and she presses into your lap, taking your seed deep into her womb. ", parse);
+							if(player.NumCocks() > 1) {
+								parse["s"]        = player.NumCocks() > 2 ? "s" : "";
+								parse["notS"]     = player.NumCocks() > 2 ? "" : "s";
+								Text.AddOutput("Your other member[s] squirt[notS] onto the bench and the floor in front of you. ", parse);
+							}
+							Text.AddOutput("As you fill her with your spunk, she purrs and draws you close to give you a big kiss. <i>\"I love you, [playername]... more than anyone else...\"</i> she whispers with tears in her big blue eyes.", parse);
+							Text.Newline();
+							Text.AddOutput("You squeeze her, kissing her, and tell her that you love her too. Smiling, she gets up, letting your [cockDesc] flop out of her [fvagDesc] and hit the bench with a wet slap. Wanting to taste her favorite treat, she grabs your [multiCockDesc] and gently licks up the cum, almost making you want to go for a second round.", parse);
+							Text.Newline();
+							Text.AddOutput("Once you're clean, you grab a rag and help her clean up, grabbing your [lowerArmorDesc][toparmor]. After helping each other get dressed, you hug the cute catgirl tightly. <i>\"Come visit again soon, [playername],\"</i> she tells you as you leave the dressing room with her.", parse);
+						}
 					}
 					world.TimeStep({minute: 30});
 					player.AddLustFraction(-1);
