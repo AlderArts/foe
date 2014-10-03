@@ -811,7 +811,7 @@ Scenes.Fera.SexPrompt = function() {
 				parse["s"]        = player.NumCocks() > 2 ? "s" : "";
 				parse["notS"]     = player.NumCocks() > 2 ? "" : "s";
 				
-				if(player.NumCocks() === 0){
+				if(player.NumCocks() === 0) {
 					Text.AddOutput("You can tell she's getting close and as you bury yourself as deep as you can she clamps down on your [cockDesc] and struggles to keep her voice down.", parse);
 					Text.Newline();
 					Text.AddOutput("You pull out your [cockDesc], and look to see Fera breathing heavily and looking tired, but pleased.", parse);
@@ -882,7 +882,7 @@ Scenes.Fera.SexPrompt = function() {
 				}
 				Text.Newline();
 
-				if(player.NumCocks() === 0){
+				if(player.NumCocks() === 0) {
 					Text.AddOutput("Seeing her this turned on is a particularly satisfying treat. Her smile vanishes in surprise when you push your [cockDesc] as deep into her [fvagDesc] as it can go. She gasps in pleasure and cums soundlessly.",parse);
 					Text.Newline();
 					Text.AddOutput("You pull out of her, and she kneels down, licking the remaining juices from your [multiCockDesc], gulping them down greedily. <i>\"Thanks so much, [playername]...\"</i> she says after licking her lips.", parse);
@@ -1048,7 +1048,7 @@ Scenes.Fera.SexPrompt = function() {
 					parse["s"]        = player.NumCocks() > 2 ? "s" : "";
 					parse["notS"]     = player.NumCocks() > 2 ? "" : "s";
 					
-					if(player.NumCocks() === 0){
+					if(player.NumCocks() === 0) {
 						Text.AddOutput("As she nears orgasm, you thrust deep inside her [fanusDesc], bottoming out. she climaxes, and her shaking body slides off your [cockDesc].", parse);
 						Text.Newline();
 						Text.AddOutput("She turns and kisses you sweetly. She lingers for awhile as your tongues dance and her warm lips embrace yours. You both regain your composure as you get dressed and follow her into the main store area.",parse);
@@ -1112,7 +1112,7 @@ Scenes.Fera.SexPrompt = function() {
 					Text.AddOutput("You squeeze her [fbreastDesc] firmly and begin to fondle her, your fingers occasionally pausing to circle and twist her [fnipsDesc], as she kisses you again. You try to hold your voices back to avoid discovery, but the sensation is too much, and loud moans escape both of you, as Fera bounces desperately in your lap.", parse);
 					Text.Newline();
 					
-					if(player.NumCocks() === 0){
+					if(player.NumCocks() === 0) {
 						Text.AddOutput("You squeeze her tightly as she cums, and she presses into your lap, grinding your [cockDesc] deep inside her [fvagDesc]. ", parse);
 							Text.AddOutput("As her orgasm subsides she purrs and draws you close to give you a big kiss. <i>\"I love you, [playername]... more than anyone else...\"</i> she whispers with tears in her big blue eyes.", parse);
 							Text.Newline();
