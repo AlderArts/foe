@@ -21,26 +21,28 @@ function Rosalin(storage) {
 	this.recipes.push(Items.Canis);
 	this.recipes.push(Items.Lobos);
 	this.recipes.push(Items.Vulpinix);
+	this.recipes.push(Items.Scorpius);
 	
-	this.flags["PrefGender"] = Gender.female;
+	this.flags["PrefGender"]   = Gender.female;
 	
-	this.flags["Met"]     = 0;
-	this.flags["AlQuest"] = 0;
-	this.flags["PastDialog"] = Rosalin.PastDialog.Past;
+	this.flags["Met"]          = 0;
+	this.flags["AlQuest"]      = 0;
+	this.flags["PastDialog"]   = Rosalin.PastDialog.Past;
 	this.flags["TreeCityTalk"] = 0;
 	
 	// Firsttime TFs
-	this.flags["Felinix"]   = 0;
-	this.flags["Leporine"]  = 0;
-	this.flags["Equinium"]  = 0;
-	this.flags["Equinium+"] = 0;
+	this.flags["Felinix"]        = 0;
+	this.flags["Leporine"]       = 0;
+	this.flags["Equinium"]       = 0;
+	this.flags["Equinium+"]      = 0;
 	this.flags["TakenEquinium+"] = 0;
-	this.flags["Lacertium"] = 0;
-	this.flags["Nagazm"] = 0;
-	this.flags["Bovia"] = 0;
-	this.flags["Canis"] = 0;
-	this.flags["Lobos"] = 0;
-	this.flags["Vulpinix"] = 0;
+	this.flags["Lacertium"]      = 0;
+	this.flags["Nagazm"]         = 0;
+	this.flags["Bovia"]          = 0;
+	this.flags["Canis"]          = 0;
+	this.flags["Lobos"]          = 0;
+	this.flags["Vulpinix"]       = 0;
+	this.flags["Scorpius"]       = 0;
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -2139,6 +2141,76 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			func : function() {
 				Text.Clear();
 				Text.Add("On second thought, probably best to pass on this one. That much veggies can’t be healthy. The vegetation around the alchemist’s workbench perks up as you pour out the red liquid, some of them suddenly sprouting fat red berries.", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
+				});
+			}, enabled : true,
+			tooltip : "Pour out the potion."
+		});
+		Gui.SetButtonsFromList(options);
+	}
+	else if(item == Items.Scorpius) {
+		if(rosalin.flags["Scorpius"] == 0) {
+			Text.Add("<i>”Where do you find this stuff?”</i> the alchemist asks curiously, holding up the large scorpion stinger. <i>”Whoops!”</i> [heshe] exclaims, hopping back as the thing lets out a spray of poisonous fluid.", parse);
+			Text.NL();
+			Text.Add("<i>”Maybe if I mix it with something stronger...”</i> You step back to let [himher] do [hisher] magic, mixing and pouring stuff together seemingly at random.", parse);
+			rosalin.flags["Scorpius"] = 1;
+			player.recipes.push(Items.Scorpius);
+		}
+		else {
+			Text.Add("<i>”Okay, let’s give this another go!”</i> the alchemist says, rubbing [hisher] hands together. <i>”What’s the worst thing that could happen?”</i>", parse);
+		}
+		Text.NL();
+		Text.Add("<i>”I think I got rid of all the poison,”</i> Rosalin announces brightly as [heshe] presents you with the finished potion. Right.", parse);
+		Text.Flush();
+		
+		//[You][Rosalin][Discard]
+		var options = new Array();
+		options.push({ nameStr : "You",
+			func : function() {
+				Text.Clear();
+				Items.Scorpius.Use(player);
+				Text.Add("Rosalin studies you for a few moments after you down the potion, counting under [hisher] breath. After ten seconds or so, [heshe] relaxes.", parse);
+				Text.NL();
+				Text.Add("<i>”Alright, if there aren’t any bad symptoms by now, you’re probably fine.”</i>", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
+				});
+			}, enabled : true,
+			tooltip : "Drink the potion yourself."
+		});
+		options.push({ nameStr : "Rosalin",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”Down it goes!”</i> Rosalin cheerfully exclaims as [heshe] chugs the dubious liquid.", parse);
+				Text.NL();
+				
+				var scenes = new EncounterTable();
+				// TAIL
+				scenes.AddEnc(function() {
+					Text.Add("<i>”Neat!”</i> [heshe] exclaims, flexing [hisher] new insectoid tail. The stinger at the end looks like it contains some quite potent poison… probably best to avoid that.", parse);
+					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.scorpion, Color.black);
+					Text.NL();
+				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.scorpion); });
+				//TODO: more?
+				scenes.Get();
+				
+				Text.Add("[HeShe] sways back and forth for a while, letting out a small burp. <i>”I… I think I’ll sit this one out,”</i> [heshe] mutters, rubbing [hisher] head. <i>”Must be something I ate.”</i>", parse);
+				Text.NL();
+				Text.Add("...You probably shouldn’t feed [himher] any more of this stuff. Probably not healthy.", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					Scenes.Rosalin.SexPrompt(RosalinSexState.Regular);
+				});
+			}, enabled : true,
+			tooltip : "Offer the potion to Rosalin."
+		});
+		options.push({ nameStr : "Discard",
+			func : function() {
+				Text.Clear();
+				Text.Add("...No. Drinking this might actually kill you. You pour out the vile concoction - most likely a wise move, as some of the plants right up shrivel and die.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
