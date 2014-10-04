@@ -2580,7 +2580,8 @@ Scenes.Miranda.TalkBackstory = function() {
 								Text.Add("Pretty sure they can’t wait to get fucked either, for all that they are playing coy.”</i>", parse);
 						}
 						Text.NL();
-						Text.Add("You are almost starting to feel a bit intimidated by this mystery flirt that she’s apparently courting on the side. And just where is this[soon-to-be] lover of hers, you ask a bit grumpily?", parse);
+						parse["soon"] = sexedCount >= 25 ? " soon-to-be" : "";
+						Text.Add("You are almost starting to feel a bit intimidated by this mystery flirt that she’s apparently courting on the side. And just where is this[soon] lover of hers, you ask a bit grumpily?", parse);
 						Text.NL();
 						Text.Add("<i>”Standing on my front porch, wearing a stupid look on [hisher] face,”</i> Miranda grins. With a start, you realize that you’ve arrived at her home.", parse);
 						Text.NL();
