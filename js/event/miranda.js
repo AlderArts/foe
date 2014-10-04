@@ -2804,13 +2804,11 @@ Scenes.Miranda.DatingStage3 = function() {
 	var dom = miranda.SubDom() - player.SubDom();
 	
 	var parse = {
-		playername : player.name
+		playername : player.name,
+		stud : dom >= 50 ? player.mfTrue("master", "mistress") : player.mfTrue("stud", "beautiful")
 	};
 	
 	world.TimeStep({hour: 1});
-	
-	//increl etc
-	//Scenes.Miranda.DatingScore++;
 	
 	if(Scenes.Miranda.DatingScore > 1) {
 		Text.Add("<i>”Mm… I can’t wait to get my paws on you, sexy,”</i> Miranda purrs. <i>”Get inside, [stud]! This doggie’s got a bone for you to pick. Any way you want to roll, I’ll roll.”</i>", parse);
