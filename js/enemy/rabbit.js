@@ -887,7 +887,8 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 						kiakai.slut.IncreaseStat(75, 2);
 						kiakai.subDom.IncreaseStat(75, 2);
 						
-						Text.Add("<i>”[stuttername]!”</i> [name] cries out, back arching as [heshe] shoots [hisher] seed into your bowels[, another load being poured into your pussy at the same time].", parse);
+						parse["pus"] = player.FirstVag() ? ", another load being poured into your pussy at the same time" : "";
+						Text.Add("<i>”[stuttername]!”</i> [name] cries out, back arching as [heshe] shoots [hisher] seed into your bowels[pus].", parse);
 						
 						beingFucked = true;
 					}
