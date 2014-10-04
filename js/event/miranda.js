@@ -2221,7 +2221,8 @@ Scenes.Miranda.DatingEntry = function() {
 				
 				Gui.NextPrompt(function() {
 					Text.Clear();
-					Scenes.Miranda.DatingStage2();
+					Scenes.Miranda.DatingStage2();		
+					miranda.flags["Dates"]++;
 				});
 			}
 			else {
@@ -2237,6 +2238,7 @@ Scenes.Miranda.DatingEntry = function() {
 		}
 	}
 	else { // 3+
+		miranda.flags["Dates"]++;
 		Scenes.Miranda.DatingScore = miranda.Attitude();
 		
 		parse["masterMistress"] = miranda.SubDom() - player.SubDom() > -50 ?
@@ -2279,7 +2281,8 @@ Scenes.Miranda.DatingBlockPrompt = function() {
 				
 				miranda.relation.IncreaseStat(100, 5);
 				Scenes.Miranda.DatingScore++;
-				
+						
+				miranda.flags["Dates"]++;
 				Scenes.Miranda.DatingStage2();
 			});
 		}, enabled : true,
@@ -2294,8 +2297,9 @@ Scenes.Miranda.DatingBlockPrompt = function() {
 				Text.Add("You finish your drinks and head out into the slums.", parse);
 				Text.NL();
 				Scenes.Miranda.DatingScore--;
-				miranda.relation.DecreaseStat(0, 5);
+				miranda.relation.DecreaseStat(0, 5);		
 				
+				miranda.flags["Dates"]++;
 				Scenes.Miranda.DatingStage2();
 			}
 			else {
