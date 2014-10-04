@@ -2864,7 +2864,7 @@ Scenes.Miranda.DatingStage3 = function() {
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	}
-	if(Scenes.Miranda.DatingScore >= -1) {
+	else if(Scenes.Miranda.DatingScore >= -1) {
 		Text.Add("<i>”You gotta step up your game, [playername]. Tell you what, you still have a shot at saving this date. It involves you, wrapped around my cock,”</i> the dommy herm gives you a sly grin.", parse);
 		Text.Flush();
 		
