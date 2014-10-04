@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 3;
-VERSION_SUBSCRIPT = "m";
-VERSION_NAME = "The quest for fox TF.";
+VERSION_SUBSCRIPT = "n";
+VERSION_NAME = "Miranda dates, Rosalin TFs and bunnies.";
 
 SAVE_VERSION = 19;
 // Save version 1: Initial
