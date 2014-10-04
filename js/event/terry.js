@@ -1156,7 +1156,7 @@ Scenes.Terry.CaughtTheThief = function() {
 							Text.Add("You tell her it wasn't so bad, and you're glad you managed to help her.", parse);
 							Text.NL();
 							Text.Add("<i>”Maybe I should be nicer to you from now on. I guess you don’t deserve the crap I throw at you all the time. Sorry for being a dick,”</i> she apologizes.", parse);
-							if(miranda.flags["Cellar"] != 0)
+							if(miranda.flags["subCellar"] != 0)
 								Text.Add(" <i>”And - uh - for locking you in my cellar and having sex with you for three days.”</i>", parse);
 							Text.NL();
 							Text.Add("Apology accepted, you reply, not wanting to press your luck. Getting back in her good books is enough for you.", parse);

@@ -77,7 +77,8 @@ function Miranda(storage) {
 	this.flags["ssRot"]    = 0;
 	this.flags["ssRotMax"] = 0;
 	this.flags["dLock"]    = 0;
-	this.flags["Cellar"]   = 0;
+	this.flags["domCellar"] = 0; //player dom
+	this.flags["subCellar"] = 0; //player sub
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -2800,8 +2801,10 @@ Scenes.Miranda.TalkConquests = function() {
 // HOMECOMING
 //TODO
 Scenes.Miranda.DatingStage3 = function() {
+	var dom = miranda.SubDom() - player.SubDom();
+	
 	var parse = {
-		
+		playername : player.name
 	};
 	
 	world.TimeStep({hour: 1});
@@ -2809,13 +2812,158 @@ Scenes.Miranda.DatingStage3 = function() {
 	//increl etc
 	//Scenes.Miranda.DatingScore++;
 	
-	Text.Add("PLACEHOLDER", parse);
-	Text.NL();
-	Text.Add("", parse);
-	Text.NL();
-	Text.Flush();
-	
-	Gui.NextPrompt();
+	if(Scenes.Miranda.DatingScore > 1) {
+		Text.Add("<i>”Mm… I can’t wait to get my paws on you, sexy,”</i> Miranda purrs. <i>”Get inside, [stud]! This doggie’s got a bone for you to pick. Any way you want to roll, I’ll roll.”</i>", parse);
+		Text.Flush();
+		
+		//[Take charge][Passive][Decline]
+		var options = new Array();
+		options.push({ nameStr : "Take charge",
+			func : function() {
+				Text.Clear();
+				Text.Add("You catch the surprised Miranda in a deep kiss, fumbling with the door as you grope her. You twirl her around, giving her crotch a familiar grope before you push her into the house, closing the door behind you.", parse);
+				
+				miranda.relation.IncreaseStat(50, 2);
+				
+				Scenes.Miranda.HomeDommySex();
+			}, enabled : miranda.SubDom() - (miranda.Relation() + player.SubDom()) < 0,
+			tooltip : "You can’t wait to get a piece of her."
+		});
+		options.push({ nameStr : "Passive",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”In a subby mood today, pet?”</i> Miranda grins as you let yourself be led inside, pushing you through the open doorway. <i>”That’s how I like them.”</i> You can feel her stiff member poking you in the back, and suspect you might get into even closer contact with it shortly.", parse);
+				
+				miranda.relation.IncreaseStat(60, 2);
+				
+				Scenes.Miranda.HomeSubbySex();
+			}, enabled : true,
+			tooltip : "Let Miranda call the shots."
+		});
+		options.push({ nameStr : "Decline",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”That’s really a shame,”</i> Miranda pouts. <i>”Now how am I going to keep concentration on patrol tomorrow? Not even a quickie?”</i>", parse);
+				Text.NL();
+				Text.Add("You shake your head, saying your goodbyes. The herm heads back inside, probably making a beeline for her toy collection. ", parse);
+				if(party.Alone()) {
+					Text.Add("You are left standing in the street, wondering what to do next.", parse);
+					Text.Flush();
+					Gui.NextPrompt();
+				}
+				else {
+					parse["name"]   = party.Two() ? party.Get(1).name     : "your party";
+					parse["himher"] = party.Two() ? party.Get(1).himher() : "them";
+					Text.Add("First, you need to rendezvous with [name]. You make your way outside the inner walls and meet up with [himher] outside the dingy old tavern.", parse);
+					Text.Flush();
+					
+					Gui.NextPrompt(function() {
+						MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 20});
+					});
+				}
+			}, enabled : true,
+			tooltip : "Not tonight."
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+	if(Scenes.Miranda.DatingScore >= -1) {
+		Text.Add("<i>”You gotta step up your game, [playername]. Tell you what, you still have a shot at saving this date. It involves you, wrapped around my cock,”</i> the dommy herm gives you a sly grin.", parse);
+		Text.Flush();
+		
+		//[Passive][Decline]
+		var options = new Array();
+		options.push({ nameStr : "Passive",
+			func : function() {
+				Text.Clear();
+				Text.Add("You let yourself be led inside, pushed through the open door with Miranda close in tow. You can feel her stiff member poking you in the back, and suspect you might get into even closer contact with it shortly.", parse);
+				
+				miranda.relation.IncreaseStat(60, 1);
+				
+				Scenes.Miranda.HomeSubbySex();
+			}, enabled : true,
+			tooltip : "Follow her lead."
+		});
+		options.push({ nameStr : "Decline",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”If that’s the way you want it, fine. Come see me at the bar when you change your mind.”</i> With that, she turns and slams the door behind her, leaving you on the street outside.", parse);
+				miranda.relation.DecreaseStat(0, 1);
+				
+				if(party.Alone()) {
+					Text.Flush();
+					Gui.NextPrompt();
+				}
+				else {
+					parse["name"]   = party.Two() ? party.Get(1).name     : "your party";
+					parse["himher"] = party.Two() ? party.Get(1).himher() : "them";
+					Text.NL();
+					Text.Add("First, you need to rendezvous with [name]. You make your way outside the inner walls and meet up with [himher] outside the dingy old tavern.", parse);
+					Text.Flush();
+					
+					Gui.NextPrompt(function() {
+						MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 20});
+					});
+				}
+			}, enabled : true,
+			tooltip : "...No."
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+	else {
+		Text.Add("<i>”I have something <b>very</b> special in mind for you tonight, my little slut,”</i> Miranda growls through a grin that’s all teeth. <i>”I’m going to give you a ride your body isn’t likely to forget for weeks… are you coming?”</i>", parse);
+		Text.Flush();
+		
+		//[Follow][Decline]
+		var options = new Array();
+		options.push({ nameStr : "Follow",
+			func : function() {
+				Text.Clear();
+				Text.Add("You back away, shaking your head. ", parse);
+				if(miranda.flags["subCellar"] != 0) {
+					Text.Add("…It’s probably nothing, you tell yourself. And you are about to score, all right! Miranda leads you inside, smiling encouragingly. You have a few moments to look around the room before the floor rushes to meet you, and everything goes black.", parse);
+				}
+				else {
+					Text.Add("Gulping, you meet her eyes and nod. There is a flicker of surprise in Miranda’s expression, quickly replaced by a wide predatory grin as she invites you inside. You both know what’s going to happen next.", parse);
+					miranda.relation.IncreaseStat(60, 2);
+				}
+				Text.Flush();
+				
+				Scenes.Miranda.HomeSubbyDungeon();
+			}, enabled : true,
+			tooltip : miranda.flags["subCellar"] != 0 ? "You know very well what’s going to happen… and you look forward to it." : "Sure... what could go wrong?"
+		});
+		options.push({ nameStr : "Decline",
+			func : function() {
+				Text.Clear();
+				if(miranda.flags["subCellar"] != 0)
+					Text.Add("You’re not going back into her cellar again, no way!", parse);
+				else
+					Text.Add("You’re not really sure what she’s up to, but it’s bound to be bad news for you.", parse);
+				Text.NL();
+				Text.Add("<i>”Spoilsport,”</i> Miranda grunts, stepping inside and shutting the door behind her as you book it.", parse);
+				
+				miranda.relation.DecreaseStat(0, 2);
+				
+				if(party.Alone()) {
+					Text.Flush();
+					Gui.NextPrompt();
+				}
+				else {
+					parse["name"]   = party.Two() ? party.Get(1).name     : "your party";
+					parse["himher"] = party.Two() ? party.Get(1).himher() : "them";
+					Text.NL();
+					Text.Add("First, you need to rendezvous with [name]. You make your way outside the inner walls and meet up with [himher] outside the dingy old tavern.", parse);
+					Text.Flush();
+					
+					Gui.NextPrompt(function() {
+						MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 20});
+					});
+				}
+			}, enabled : true,
+			tooltip : "It’s a trap! Flee!"
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
 }
 
 Scenes.Miranda.DatingFirstDocks = function() {

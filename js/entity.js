@@ -29,9 +29,9 @@ Stat.prototype.IdealStat = function(ideal, maxChange, fraction) {
 	if(DEBUG && this.debug && diff != 0) {
 		Text.Newline();
 		if(diff > 0)
-			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base, "blue"));
+			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", "blue"));
 		else
-			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base, "red"));
+			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", "red"));
 		Text.Newline();
 	}
 	if(fraction)
@@ -53,7 +53,7 @@ Stat.prototype.IncreaseStat = function(ideal, maxChange, fraction) {
 	this.base += diff;
 	if(DEBUG && this.debug) {
 		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base, "blue"));
+		Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (max: " + ideal + ")", "blue"));
 		Text.Newline();
 	}
 	if(fraction)
@@ -75,7 +75,7 @@ Stat.prototype.DecreaseStat = function(ideal, maxChange, fraction) {
 	this.base -= diff;
 	if(DEBUG && this.debug) {
 		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base, "red"));
+		Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (min: " + ideal + ")", "red"));
 		Text.Newline();
 	}
 	if(fraction)
