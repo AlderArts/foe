@@ -3569,6 +3569,7 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 		boyGirl       : player.mfTrue("boy", "girl"),
 		buttDesc      : function() { return player.Butt().Short(); },
 		hipsDesc      : function() { return player.HipsDesc(); },
+		ballsDesc     : function() { return player.BallsDesc(); },
 		breastDesc    : function() { return player.FirstBreastRow().Short(); },
 		multiCockDesc : function() { return player.MultiCockDesc(); },
 		cockDesc      : function() { return pCock.Short(); },
