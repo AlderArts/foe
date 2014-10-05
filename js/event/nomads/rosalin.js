@@ -2284,7 +2284,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					var cocks = rosalin.AllCocks();
 					for(var i = 0; i < cocks.length; i++)
 						if(cocks[i].knot != 0) knot = true;
-					return noknot;
+					return knot;
 				});
 				
 				scenes.Get();
