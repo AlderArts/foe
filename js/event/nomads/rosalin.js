@@ -2220,6 +2220,94 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		});
 		Gui.SetButtonsFromList(options);
 	}
+	else if(item == Items.Lepida) {
+		if(rosalin.flags["Lepida"] == 0) {
+			Text.Add("<i>”It’s pretty!”</i> Rosalin exclaims as [heshe] carefully handles the colorful moth-wing you handed over. [HeShe] waves the thing, releasing a puff of glittering powder. <i>”It’s like fairy dust!”</i> The alchemist turns to [hisher] workbench, starting to pick out various vials and jars.", parse);
+			Text.NL();
+			Text.Add("<i>”A little of this, a little of that, aaand some fairy dust!”</i> [heshe] chimes, sprinkling some glittering seasoning on the concoction.", parse);
+			rosalin.flags["Lepida"] = 1;
+			player.recipes.push(Items.Lepida);
+		}
+		else {
+			Text.Add("<i>”Sure! I wanted to try out a different mix this time anyways.”</i> [HeShe] begins mixing the ingredients together into a beaker.", parse);
+		}
+		Text.NL();
+		Text.Add("<i>”Mm… can’t wait to try it!”</i> Rosalin licks [hisher] lips, holding up a bottle of glittering purple liquid.", parse);
+		Text.Flush();
+		
+		//[You][Rosalin][Discard]
+		var options = new Array();
+		options.push({ nameStr : "You",
+			func : function() {
+				Text.Clear();
+				Items.Lepida.Use(player);
+				Text.Add("Rosalin jots down some notes on a piece of paper as [heshe] observes the potion’s effect on you.", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
+				});
+			}, enabled : true,
+			tooltip : "Drink the potion yourself."
+		});
+		options.push({ nameStr : "Rosalin",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”Here we go!”</i> Rosalin cheerfully chugs the purple potion, a bright smile on [hisher] face as [heshe] pours the sweet liquid down [hisher] throat.", parse);
+				Text.NL();
+				
+				var scenes = new EncounterTable();
+				// TAIL
+				scenes.AddEnc(function() {
+					Text.Add("A pair of purple fairy-like wings sprout from the alchemist’s back, exuding glittering dust as [heshe] experimentally flaps them.", parse);
+					TF.SetAppendage(rosalin.Back(), AppendageType.wing, Race.moth, Color.purple, 2);
+					Text.NL();
+				}, 1.0, function() { var wings = rosalin.HasWings(); return !wings || (wings.race != Race.moth); });
+				scenes.AddEnc(function() {
+					Text.Add("<i>”Well, this is new,”</i> [heshe] notes, carefully touching [hisher] newly sprouted moth-like feelers. From her expression, the new appendages are very sensitive.", parse);
+					TF.SetAppendage(rosalin.Appendages(), AppendageType.antenna, Race.moth, Color.purple, 2);
+					Text.NL();
+				}, 1.0, function() { var antenna = rosalin.HasAntenna(); return !antenna || (antenna.race != Race.moth); });
+				scenes.AddEnc(function() {
+					Text.Add("<i>”Aww… I will miss that one,”</i> the alchemist pouts, lamenting the loss of [hisher] canid knot.", parse);
+					Text.NL();
+					var cocks = rosalin.AllCocks();
+					for(var i = 0; i < cocks.length; i++) {
+						if(cocks[i].knot != 0) {
+							cocks[i].knot = 0;
+							break;
+						}
+					}
+				}, 1.0, function() {
+					var knot = false;
+					var cocks = rosalin.AllCocks();
+					for(var i = 0; i < cocks.length; i++)
+						if(cocks[i].knot != 0) knot = true;
+					return noknot;
+				});
+				
+				scenes.Get();
+				
+				Text.Add("<i>”Mm… such a rush,”</i> Rosalin smiles dreamily, licking [hisher] lips. <i>”Makes me feel… hot.”</i>", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					Scenes.Rosalin.SexPrompt(RosalinSexState.Regular);
+				});
+			}, enabled : true,
+			tooltip : "Offer the potion to Rosalin."
+		});
+		options.push({ nameStr : "Discard",
+			func : function() {
+				Text.Clear();
+				Text.Add("You pour the glittering liquid on the plants around Rosalin’s workbench. Some of them seem to absorb the concoction, changing in color and letting out small puffs of glittering powder.", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
+				});
+			}, enabled : true,
+			tooltip : "Pour out the potion."
+		});
+		Gui.SetButtonsFromList(options);
+	}
 	
 	//TODO MORE TFS
 	/*
@@ -2236,7 +2324,6 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			Text.NL();
 			Text.Add("", parse);
 		}
-		Text.Add("", parse);
 		Text.NL();
 		Text.Add("", parse);
 		Text.Flush();

@@ -1751,6 +1751,12 @@ Entity.prototype.HasHorns = function() {
 			return this.body.head.appendages[i];
 	return null;
 }
+Entity.prototype.HasAntenna = function() {
+	for(var i = 0; i < this.body.head.appendages.length; i++)
+		if(this.body.head.appendages[i].type == AppendageType.antenna)
+			return this.body.head.appendages[i];
+	return null;
+}
 Entity.prototype.Back = function() {
 	return this.body.backSlots;
 }

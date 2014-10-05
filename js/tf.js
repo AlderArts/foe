@@ -550,9 +550,10 @@ TF.ItemEffects.SetAntenna = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
 	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
 	
-	var odds    = opts.odds || 1;
+	var odds    = opts.odds  || 1;
+	var count   = opts.count || 2;
 	if(Math.random() < odds) {
-		changed = TF.SetAppendage(target.Appendages(), AppendageType.antenna, opts.race, opts.color, opts.count);
+		changed = TF.SetAppendage(target.Appendages(), AppendageType.antenna, opts.race, opts.color, count);
 		switch(changed) {
 			case TF.Effect.Changed:
 				Text.Add("[Poss] antenna change, turning into [str]!", parse);
@@ -595,9 +596,10 @@ TF.ItemEffects.SetWings = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
 	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
 	
-	var odds    = opts.odds || 1;
+	var odds    = opts.odds  || 1;
+	var count   = opts.count || 2;
 	if(Math.random() < odds) {
-		changed = TF.SetAppendage(target.Back(), AppendageType.wing, opts.race, opts.color, opts.count);
+		changed = TF.SetAppendage(target.Back(), AppendageType.wing, opts.race, opts.color, count);
 		switch(changed) {
 			case TF.Effect.Changed:
 				Text.Add("[Poss] wings change, turning into [str]!", parse);
@@ -639,9 +641,10 @@ TF.ItemEffects.RemWings = function(target, opts) {
 TF.ItemEffects.SetBalls = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
 	var parse   = { name: target.NameDesc(), s: target == player ? "" : "s", count: Text.NumToText(opts.count), ballsDesc: function() { return target.BallsDesc(); } };
-	var odds    = opts.odds || 2;
+	var odds    = opts.odds  || 1;
+	var count   = opts.count || 2;
 	if(Math.random() < odds) {
-		changed = TF.SetBalls(target.body.balls, opts.ideal, opts.count);
+		changed = TF.SetBalls(target.body.balls, opts.ideal, count);
 		switch(changed) {
 			case TF.Effect.Changed:
 				Text.Add("[name] grow[s] an extra [count] testicles!", parse);
