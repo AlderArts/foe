@@ -22,6 +22,7 @@ function Rosalin(storage) {
 	this.recipes.push(Items.Lobos);
 	this.recipes.push(Items.Vulpinix);
 	this.recipes.push(Items.Scorpius);
+	this.recipes.push(Items.Lepida);
 	
 	this.flags["PrefGender"]   = Gender.female;
 	
@@ -43,6 +44,7 @@ function Rosalin(storage) {
 	this.flags["Lobos"]          = 0;
 	this.flags["Vulpinix"]       = 0;
 	this.flags["Scorpius"]       = 0;
+	this.flags["Lepida"]         = 0;
 	
 	if(storage) this.FromStorage(storage);
 }
