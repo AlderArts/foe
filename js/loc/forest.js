@@ -23,9 +23,10 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
 
-		Text.AddOutput("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.");
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("You pick up some fresh grass."));
+		Text.Add("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.");
+		Text.NL();
+		Text.Add(Text.BoldColor("You pick up some fresh grass."));
+		Text.Flush();
 		party.inventory.AddItem(Items.FreshGrass);
 		
 		world.TimeStep({minute: 15});
@@ -36,9 +37,10 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
 
-		Text.AddOutput("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.");
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("You pick up a Foxglove."));
+		Text.Add("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.");
+		Text.NL();
+		Text.Add(Text.BoldColor("You pick up a Foxglove."));
+		Text.Flush();
 		party.inventory.AddItem(Items.Foxglove);
 		
 		world.TimeStep({minute: 15});
@@ -49,9 +51,24 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
 
-		Text.AddOutput("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up an odd root. Who knows, could be useful for something.");
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("You pick up a Canis root."));
+		Text.Add("As you trek through the undergrowth of the deep forest, you come across a cluster of small bushes with red berries. Seeing as nothing is trying to kill you at the moment, you spend some time gathering them, figuring they could be of some use.");
+		Text.NL();
+		Text.Add(Text.BoldColor("<b>You pick some fox berries.</b>"));
+		Text.Flush();
+		party.inventory.AddItem(Items.FoxBerries);
+		
+		world.TimeStep({minute: 15});
+		Gui.NextPrompt();
+	};
+}, 1.0, function() { return world.time.season != Season.Winter; });
+world.loc.Forest.Outskirts.enc.AddEnc(function() {
+	return function() {
+		Text.Clear();
+
+		Text.Add("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up an odd root. Who knows, could be useful for something.");
+		Text.NL();
+		Text.Add(Text.BoldColor("You pick up a Canis root."));
+		Text.Flush();
 		party.inventory.AddItem(Items.CanisRoot);
 		
 		world.TimeStep({minute: 15});
