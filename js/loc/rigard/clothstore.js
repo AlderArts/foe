@@ -28,17 +28,17 @@ world.loc.Rigard.ShopStreet.ClothShop.onEntry = function() {
 		Text.Newline();
 		Text.AddOutput("The whole store is amazingly clean, with no sign of dirt or dust anywhere. There are numerous customers in the store, most that you can see are nobles. As you[comp] walk down the main aisle toward the counter you see a tall, full-figured woman in a long, flowing blue dress with long and curly blonde hair, measuring something on the counter with a large wooden ruler. As you[comp] approach, she turns her head to both sides as if looking for something.", parse);
 		Text.Newline();
-		Text.AddOutput("<i>\"<b>Fera!</b>\"</i> she yells. A few seconds later, you see a short figure with brown hair carrying a pile of clothes rushing down the fitting room hallway, heading around the corner toward the counter.", parse);
+		Text.AddOutput("<i>“<b>Fera!</b>”</i> she yells. A few seconds later, you see a short figure with brown hair carrying a pile of clothes rushing down the fitting room hallway, heading around the corner toward the counter.", parse);
 		Text.Newline();
 		Text.AddOutput("As she passes you[comp], you get a good look at her and are surprised by what you see. Fera appears to be a very cute catgirl. She has brown fur with white spots, large catlike ears on her head, and you can see her tail poking out through a slit in the back of her short pink dress as she rushes past you[comp]. She places the pile of clothes she was carrying on the counter next to the blonde woman.", parse);
 		Text.Newline();
-		Text.AddOutput("The woman stops measuring and whacks the catgirl over the head with her ruler. <i>\"What took so long?\"</i> she demands angrily.", parse);
+		Text.AddOutput("The woman stops measuring and whacks the catgirl over the head with her ruler. <i>“What took so long?”</i> she demands angrily.", parse);
 		Text.Newline();
-		Text.AddOutput("<i>\"I'm very sorry Miss Nexelle,\"</i> Fera quickly apologizes as she rubs her head.", parse);
+		Text.AddOutput("<i>“I'm very sorry Miss Nexelle,”</i> Fera quickly apologizes as she rubs her head.", parse);
 		Text.Newline();
-		Text.AddOutput("<i>\"Now go get the rest,\"</i> the woman, presumably the owner of the shop, orders.", parse);
+		Text.AddOutput("<i>“Now go get the rest,”</i> the woman, presumably the owner of the shop, orders.", parse);
 		Text.Newline();
-		Text.AddOutput("<i>\"Right away, Miss Nexelle,\"</i> the catgirl says as she turns around and runs back the way she came. The woman takes a garment from the new pile and begins measuring it. You[comp] walk past the hat racks and arrive at the counter, and the woman appears to not even notice you. When you try to get her attention, she does not even look up as she speaks. <i>\"If you are not going to make a purchase, then please do not interrupt my work. If you have basic questions or need assistance trying on something, Fera can assist you.\"</i>", parse);
+		Text.AddOutput("<i>“Right away, Miss Nexelle,”</i> the catgirl says as she turns around and runs back the way she came. The woman takes a garment from the new pile and begins measuring it. You[comp] walk past the hat racks and arrive at the counter, and the woman appears to not even notice you. When you try to get her attention, she does not even look up as she speaks. <i>“If you are not going to make a purchase, then please do not interrupt my work. If you have basic questions or need assistance trying on something, Fera can assist you.”</i>", parse);
 		
 		Gui.NextPrompt();
 	}
@@ -121,11 +121,11 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 			var humanScore = human.Compare(new RaceScore(player.body));
 			
 			if(humanScore > 0.9 || player.charisma.Get() >= 50)
-				Text.AddOutput("<i>\"Oh, hello, [sirmadam], I am Miss Elaine Nexelle, proprietor of Silken Delights, where we have the finest selection of apparel in Rigard. If you have any questions regarding any of our finer apparel, I would be happy to help you make a selection...\"</i> she says with a smile.", parse);
+				Text.AddOutput("<i>“Oh, hello, [sirmadam], I am Miss Elaine Nexelle, proprietor of Silken Delights, where we have the finest selection of apparel in Rigard. If you have any questions regarding any of our finer apparel, I would be happy to help you make a selection...”</i> she says with a smile.", parse);
 			else if(humanScore > 0.5)
-				Text.AddOutput("<i>\"Yes? Do you need something?\"</i> she asks without pausing in her work.", parse);
+				Text.AddOutput("<i>“Yes? Do you need something?”</i> she asks without pausing in her work.", parse);
 			else
-				Text.AddOutput("You can feel her cold stare as you walk over. <i>\"The bargain clothes are over by the door, thats probably what you want. If you need help you should go find Fera, and remember, if you damage anything, you buy it. If you can't afford it, I'll make you work it off,\"</i> she says coldly before resuming her work.", parse);
+				Text.AddOutput("You can feel her cold stare as you walk over. <i>“The bargain clothes are over by the door, thats probably what you want. If you need help you should go find Fera, and remember, if you damage anything, you buy it. If you can't afford it, I'll make you work it off,”</i> she says coldly before resuming her work.", parse);
 
 			//[Nexelle][Store][Guards][City][Fera][Fera's mom]
 			var options = new Array();
@@ -145,7 +145,7 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 					Text.Clear();
 					Text.AddOutput("You ask Miss Nexelle about herself.", parse);
 					Text.Newline();
-					Text.AddOutput("She stops working and looks up as she sighs deeply. <i>\"I really used to be someone in Rigard, back before the Merchant Guild was broken up. My family, being one of the three most influential merchant families, had a lot of power in the guild.  Fortunately, I had saved plenty of money and had built up some connections in high places so I can still afford to buy high quality materials for my shop, keep all of my equipment, and keep my guards.\"</i>", parse);
+					Text.AddOutput("She stops working and looks up as she sighs deeply. <i>“I really used to be someone in Rigard, back before the Merchant Guild was broken up. My family, being one of the three most influential merchant families, had a lot of power in the guild.  Fortunately, I had saved plenty of money and had built up some connections in high places so I can still afford to buy high quality materials for my shop, keep all of my equipment, and keep my guards.”</i>", parse);
 				}, enabled : true,
 				tooltip : "Ask the tailor about herself."
 			});
@@ -154,7 +154,7 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 					Text.Clear();
 					Text.AddOutput("You ask the tailor to tell you about her store.", parse);
 					Text.Newline();
-					Text.AddOutput("<i>\"We have the finest clothing in the city, from silk and satin to wool and leather. I buy the finest materials and make everything we sell myself and I personally guarantee the quality of our goods. My mother and grandmother ran this shop before me, and it has been in our family since even before that. If you have the money, this is the place to shop for fashionable clothing, as it has been for over a century.\"</i> She smiles, clearly proud of her establishment.", parse);
+					Text.AddOutput("<i>“We have the finest clothing in the city, from silk and satin to wool and leather. I buy the finest materials and make everything we sell myself and I personally guarantee the quality of our goods. My mother and grandmother ran this shop before me, and it has been in our family since even before that. If you have the money, this is the place to shop for fashionable clothing, as it has been for over a century.”</i> She smiles, clearly proud of her establishment.", parse);
 				}, enabled : true,
 				tooltip : "Ask her about the store."
 			});
@@ -163,7 +163,7 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 					Text.Clear();
 					Text.AddOutput("You ask Miss Nexelle about the guards she has outside her store.", parse);
 					Text.Newline();
-					Text.AddOutput("<i>\"John and Laura have worked here for years, they worked here back when my mother ran the shop, before she died five years ago. I believe good security is important to a successful business, so I kept them on.\"</i> The tailor flips her hair and scratches her head a bit. <i>\"I seem to recall mother saying they used to be part of some mercenary group before they started here.\"</i>", parse);
+					Text.AddOutput("<i>“John and Laura have worked here for years, they worked here back when my mother ran the shop, before she died five years ago. I believe good security is important to a successful business, so I kept them on.”</i> The tailor flips her hair and scratches her head a bit. <i>“I seem to recall mother saying they used to be part of some mercenary group before they started here.”</i>", parse);
 				}, enabled : true,
 				tooltip : "Ask her about the two guards outside the store."
 			});
@@ -172,7 +172,7 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 					Text.Clear();
 					Text.AddOutput("You ask the tailor to tell you about the city.", parse);
 					Text.Newline();
-					Text.AddOutput("<i>\"Rigard is a nice place, but I wish the Merchants' Guild was still around. Otherwise, the city is very good for my business. The residents of the city who shop here have very good taste and plenty of money. I'd avoid any of the less reputable areas of the city though. I've heard some terrible stories about people getting abducted around there.\"</i> She says.", parse);
+					Text.AddOutput("<i>“Rigard is a nice place, but I wish the Merchants' Guild was still around. Otherwise, the city is very good for my business. The residents of the city who shop here have very good taste and plenty of money. I'd avoid any of the less reputable areas of the city though. I've heard some terrible stories about people getting abducted around there.”</i> She says.", parse);
 				}, enabled : true,
 				tooltip : "Ask her what she thinks of Rigard."
 			});
@@ -181,9 +181,9 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 					Text.Clear();
 					Text.AddOutput("You ask her about the cute catgirl that works for her.", parse);
 					Text.Newline();
-					Text.AddOutput("She rolls her eyes. <i>\"Fera and her mother worked here for many years. Her mother was an excellent seamstress. Though not nearly as good as me, of course.\"</i> She smiles awkwardly and flips her hair away from her face. <i>\"When her mother disappeared years ago, I decided that I owed it to her to take care of Fera. She can only do basic sewing and is very clumsy, so I don't pay her much, but I let her live with me, feed her, and clothe her.\"</i>", parse);
+					Text.AddOutput("She rolls her eyes. <i>“Fera and her mother worked here for many years. Her mother was an excellent seamstress. Though not nearly as good as me, of course.”</i> She smiles awkwardly and flips her hair away from her face. <i>“When her mother disappeared years ago, I decided that I owed it to her to take care of Fera. She can only do basic sewing and is very clumsy, so I don't pay her much, but I let her live with me, feed her, and clothe her.”</i>", parse);
 					Text.Newline();
-					Text.AddOutput("She looks up as she says, <i>\"I only hit her to discourage her clumsiness. Her blundering damages merchandise and costs me money.\"</i>", parse);
+					Text.AddOutput("She looks up as she says, <i>“I only hit her to discourage her clumsiness. Her blundering damages merchandise and costs me money.”</i>", parse);
 					if(fera.flags["Mom"] == 0)
 						fera.flags["Mom"] = 1;
 				}, enabled : true,
@@ -195,7 +195,7 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 						Text.Clear();
 						
 						if(player.FirstVag())									
-							Text.AddOutput("You tell Miss Nexelle how sad and lonely Fera seems to be, and ask her about Fera's mother. She stops working and stays silent for a moment. When it finally comes, her response is uncharacteristically short. <i>\"I miss her too, you know...\"</i> she says quietly.", parse);
+							Text.AddOutput("You tell Miss Nexelle how sad and lonely Fera seems to be, and ask her about Fera's mother. She stops working and stays silent for a moment. When it finally comes, her response is uncharacteristically short. <i>“I miss her too, you know...”</i> she says quietly.", parse);
 						else
 							Text.AddOutput("You ask Miss Nexelle about Fera's mother, but she just ignores you and continues with her work.", parse);
 						

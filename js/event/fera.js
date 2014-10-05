@@ -117,11 +117,11 @@ Scenes.Fera.Interact = function() {
 		fera.flags["Met"] = 1;
 		
 		if(catScore > 0.2) {
-			Text.AddOutput("Fera looks at you as you walk over to her and her big blue eyes go wide. Apparently she rarely sees other cat-morphs. She gets up and hurries over to meet you. <i>\"Oh! Um... hello there. I'm Fera and I can help you if you need anything.\"</i> she says cheerfully.", parse);
+			Text.AddOutput("Fera looks at you as you walk over to her and her big blue eyes go wide. Apparently she rarely sees other cat-morphs. She gets up and hurries over to meet you. <i>“Oh! Um... hello there. I'm Fera and I can help you if you need anything.”</i> she says cheerfully.", parse);
 			fera.relation.IncreaseStat(100, 6);
 		}
 		else {
-			Text.AddOutput("She stops working and turns to you as you approach her. <i>\"Hello, [sirmiss], welcome to Silken Delights. My name is Fera; please let me know if I can help you with something.\"</i>", parse);
+			Text.AddOutput("She stops working and turns to you as you approach her. <i>“Hello, [sirmiss], welcome to Silken Delights. My name is Fera; please let me know if I can help you with something.”</i>", parse);
 		}
 		Text.Newline();
 		Text.AddOutput("You introduce yourself to her.", parse);
@@ -132,9 +132,9 @@ Scenes.Fera.Interact = function() {
 		else if(fera.relation.Get() > 15)
 			Text.AddOutput("As soon as she can see you, Fera smiles and runs over. She jumps into your arms and purrs softly as she rubs her head against your [breastDesc].", parse);
 		else if(fera.relation.Get() > 5)
-			Text.AddOutput("Fera looks happy to see you and quickly finishes what she was doing as you get closer. <i>\"Hi [playername], how are you? Can I do something for you?\"</i> she asks, looking at you intently.", parse);
+			Text.AddOutput("Fera looks happy to see you and quickly finishes what she was doing as you get closer. <i>“Hi [playername], how are you? Can I do something for you?”</i> she asks, looking at you intently.", parse);
 		else if(fera.relation.Get() >= 0)
-			Text.AddOutput("<i>\"Oh, hello again, [playername]. Do you need something?\"</i> she asks as you walk up to her.", parse);
+			Text.AddOutput("<i>“Oh, hello again, [playername]. Do you need something?”</i> she asks as you walk up to her.", parse);
 		else
 			Text.AddOutput("Fera quickly looks away, saying nothing, obviously angry at you.", parse);
 	}
@@ -148,7 +148,7 @@ Scenes.Fera.Interact = function() {
 			Text.Clear();
 			Text.AddOutput("You ask the cute catgirl about her employer.", parse);
 			Text.Newline();
-			Text.AddOutput("<i>\"Um... Miss Nexelle takes care of me and makes very nice clothes and she's usually very nice to people she likes. I just wish she wouldn't hit me so much. I do the best I can... it's not my fault I keep dropping and tearing things...\"</i>", parse);
+			Text.AddOutput("<i>“Um... Miss Nexelle takes care of me and makes very nice clothes and she's usually very nice to people she likes. I just wish she wouldn't hit me so much. I do the best I can... it's not my fault I keep dropping and tearing things...”</i>", parse);
 			Text.Newline();
 					
 			//[Encourage][Scold][Ignore]
@@ -186,9 +186,9 @@ Scenes.Fera.Interact = function() {
 			Text.AddOutput("You ask Fera about herself.", parse);
 			Text.Newline();
 			if(fera.relation.Get() > 10)	
-				Text.AddOutput("<i>\"I um... really enjoy helping people try on things. I could help you if you want...\"</i> she says innocently, letting her eyes roam over your body unabashedly. From her blush, it seems like she appreciates what she sees.", parse);
+				Text.AddOutput("<i>“I um... really enjoy helping people try on things. I could help you if you want...”</i> she says innocently, letting her eyes roam over your body unabashedly. From her blush, it seems like she appreciates what she sees.", parse);
 			else
-				Text.AddOutput("<i>\"Me? Um... I like milk, cream, and soft things. I've worked here for as long as I can remember. I carried things when I was small, and I sewed when I got bigger. I sometimes do errands for Miss Nexelle, thats the only time I really get to go out...\"</i> she says sadly.", parse);
+				Text.AddOutput("<i>“Me? Um... I like milk, cream, and soft things. I've worked here for as long as I can remember. I carried things when I was small, and I sewed when I got bigger. I sometimes do errands for Miss Nexelle, thats the only time I really get to go out...”</i> she says sadly.", parse);
 			Gui.NextPrompt(Scenes.Fera.Interact);
 		}, enabled : true,
 		tooltip : "Ask Fera about herself."
@@ -199,16 +199,16 @@ Scenes.Fera.Interact = function() {
 				Text.Clear();
 				Text.AddOutput("You ask Fera to tell you about her mother.", parse);
 				Text.Newline();
-				Text.AddOutput("Her eyes start to tear up at the question. <i>\"My mom used to work here with Miss Nexelle, back when her mother ran the store. She was just as good if not better at making clothes. Even Miss Nexelle was nice to me back when my mom was here...\"</i> she sniffles.", parse);
+				Text.AddOutput("Her eyes start to tear up at the question. <i>“My mom used to work here with Miss Nexelle, back when her mother ran the store. She was just as good if not better at making clothes. Even Miss Nexelle was nice to me back when my mom was here...”</i> she sniffles.", parse);
 				Text.Newline();
-				Text.AddOutput("<i>\"But...she left one day and never came back. So I didn't have any other choice but to stay with Miss Nexelle, even though she hits me sometimes. I guess I should be grateful, but I miss her so much...\"</i> You can see tears rolling down her cheeks.", parse);
+				Text.AddOutput("<i>“But...she left one day and never came back. So I didn't have any other choice but to stay with Miss Nexelle, even though she hits me sometimes. I guess I should be grateful, but I miss her so much...”</i> You can see tears rolling down her cheeks.", parse);
 				Text.Newline();
 				
 				//[Hold her] [Apologize] [Scoff] [Ignore]
 				var options = new Array();
 				options.push({ nameStr : "Hold her",
 					func : function() {
-						Text.AddOutput("You put an arm around Fera and stroke her head with your other hand. She winces slightly as you brush against a bruise on her scalp, but seems to relax as you pat her hair, soothing the pain. Her sobbing stops after a while and she looks up at you. <i>\"Thank you... I'm so sorry about this, I just get so lonely...\"</i>", parse);
+						Text.AddOutput("You put an arm around Fera and stroke her head with your other hand. She winces slightly as you brush against a bruise on her scalp, but seems to relax as you pat her hair, soothing the pain. Her sobbing stops after a while and she looks up at you. <i>“Thank you... I'm so sorry about this, I just get so lonely...”</i>", parse);
 						fera.relation.IncreaseStat(100,5);
 						fera.flags["Mom"] = 2;
 						Gui.NextPrompt(Scenes.Fera.Interact);
@@ -217,7 +217,7 @@ Scenes.Fera.Interact = function() {
 				});
 				options.push({ nameStr : "Apologize",
 					func : function() {
-						Text.AddOutput("You apologize to Fera for making her cry. <i>\"Its ok...\"</i> she sniffs. <i>\"I should get back before I get in trouble again...\"</i>", parse);
+						Text.AddOutput("You apologize to Fera for making her cry. <i>“Its ok...”</i> she sniffs. <i>“I should get back before I get in trouble again...”</i>", parse);
 						fera.relation.IncreaseStat(100,1);
 						fera.flags["Mom"] = 2;
 						Gui.NextPrompt(Scenes.Fera.Interact);
@@ -226,7 +226,7 @@ Scenes.Fera.Interact = function() {
 				});
 				options.push({ nameStr : "Scoff",
 					func : function() {
-						Text.AddOutput("Scoffing at her tears, you tell her that you find her whole situation and manner pathetic. You say that if she were stronger, none of these things would bother her. <i>\"<b>You are so mean!</b>\"</i> she yells as she starts to cry harder. Before you can say anything else, she runs off and heads behind the counter.", parse);
+						Text.AddOutput("Scoffing at her tears, you tell her that you find her whole situation and manner pathetic. You say that if she were stronger, none of these things would bother her. <i>“<b>You are so mean!</b>”</i> she yells as she starts to cry harder. Before you can say anything else, she runs off and heads behind the counter.", parse);
 						fera.relation.DecreaseStat(-100,5);
 						fera.flags["Mom"] = 3;
 						// Set timer
@@ -251,14 +251,14 @@ Scenes.Fera.Interact = function() {
 	options.push({ nameStr : "Shop",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("<i>\"We sell the nicest clothes!\"</i> she exclaims. <i>\"Everything here is so soft and nice...\"</i> she purrs as she rubs her head against a nearby robe. <i>\"Miss Nexelle makes such nice clothes... I wish I could make such nice things...\"</i>", parse);
+			Text.AddOutput("<i>“We sell the nicest clothes!”</i> she exclaims. <i>“Everything here is so soft and nice...”</i> she purrs as she rubs her head against a nearby robe. <i>“Miss Nexelle makes such nice clothes... I wish I could make such nice things...”</i>", parse);
 			Text.Newline();
 			
 			//[Encourage] [Realistic] [Ignore]
 			var options = new Array();
 			options.push({ nameStr : "Encourage",
 				func : function() {
-					Text.AddOutput("You smile and tell her that she could be that good if she works at it really hard. <i>\"Really? You really think so, [playername]?\"</i> She smiles and seems very happy that you believe in her.", parse);
+					Text.AddOutput("You smile and tell her that she could be that good if she works at it really hard. <i>“Really? You really think so, [playername]?”</i> She smiles and seems very happy that you believe in her.", parse);
 					fera.relation.IncreaseStat(100,1);
 					Gui.NextPrompt(Scenes.Fera.Interact);
 				}, enabled : true,
@@ -266,7 +266,7 @@ Scenes.Fera.Interact = function() {
 			});
 			options.push({ nameStr : "Realistic",
 				func : function() {
-					Text.AddOutput("You explain that Miss Nexelle has worked and practiced for years to be so good and that it is unlikely that she would get that good anytime soon. <i>\"I know... I just wish I wasn't so clumsy...\"</i> she says sadly.", parse);
+					Text.AddOutput("You explain that Miss Nexelle has worked and practiced for years to be so good and that it is unlikely that she would get that good anytime soon. <i>“I know... I just wish I wasn't so clumsy...”</i> she says sadly.", parse);
 					fera.relation.DecreaseStat(-100,1);
 					Gui.NextPrompt(Scenes.Fera.Interact);
 				}, enabled : true,
@@ -288,7 +288,7 @@ Scenes.Fera.Interact = function() {
 	options.push({ nameStr : "City",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("You ask Fera what she thinks of the city. <i>\"Umm... I think morphs should be treated better. Many people in town are so mean to us just because we look different. It's not fair...\"</i> she pouts.", parse);
+			Text.AddOutput("You ask Fera what she thinks of the city. <i>“Umm... I think morphs should be treated better. Many people in town are so mean to us just because we look different. It's not fair...”</i> she pouts.", parse);
 			Text.Newline();
 			
 			
@@ -296,7 +296,7 @@ Scenes.Fera.Interact = function() {
 			var options = new Array();
 			options.push({ nameStr : "Agree",
 				func : function() {
-					Text.AddOutput("You tell the cute catgirl that you agree with her that morphs should be treated better. <i>\"I'm so glad you agree, [playername],\"</i> she says with a smile.", parse);
+					Text.AddOutput("You tell the cute catgirl that you agree with her that morphs should be treated better. <i>“I'm so glad you agree, [playername],”</i> she says with a smile.", parse);
 					fera.relation.IncreaseStat(100,1);
 					Gui.NextPrompt(Scenes.Fera.Interact);
 				}, enabled : true,
@@ -400,7 +400,7 @@ Scenes.Fera.TouchPrompt = function() {
 				else if(player.FirstVag())
 					Text.AddOutput("You feel Fera's hand reaching around your [lowerArmorDesc] until she finds the folds of your [vagDesc]. You squeeze her [fbreastDesc] tighter as you feel her fingers rub up and down your [vagDesc]. She responds by trying to force her finger inside you through your [lowerArmorDesc]. The sudden sensation causes you to pinch her [fnipsDesc], which only makes her push harder. You both moan softly as you do your best to please each other.", parse);
 				Text.Newline();
-				Text.AddOutput("After this continues for a few minutes she whispers, <i>\"I should get back to work, Miss Nexelle might notice...\"</i> You reluctantly let go of her and Fera fixes her dress then turns around, gives you a quick kiss and hurries back to work.", parse);
+				Text.AddOutput("After this continues for a few minutes she whispers, <i>“I should get back to work, Miss Nexelle might notice...”</i> You reluctantly let go of her and Fera fixes her dress then turns around, gives you a quick kiss and hurries back to work.", parse);
 				if(noble)
 					Text.AddOutput(" You look over, but can no longer see the noblewoman. You hope she enjoyed the show.", parse);
 
@@ -488,7 +488,7 @@ Scenes.Fera.SexPrompt = function() {
 		Text.AddOutput("She nods and waits for you to select a garment. After taking a random [garment] off the rack you motion for Fera to follow you. You enter one of the dressing rooms and quietly close the door after she follows you in. She looks at you, waiting for instruction on what to do next.", parse);
 	}
 	else { // NEGATIVE
-		Text.AddOutput("Fera glances at you angrily and says, <i>\"I'm busy right now, do it yourself.\"</i>", parse);
+		Text.AddOutput("Fera glances at you angrily and says, <i>“I'm busy right now, do it yourself.”</i>", parse);
 		fera.relation.DecreaseStat(-100, 1);
 		Gui.NextPrompt();
 		return;
@@ -523,7 +523,7 @@ Scenes.Fera.SexPrompt = function() {
 					Text.AddOutput("She uses one hand to hold down your [multiCockDesc], while pulling the [garment] over [itThem] with the other. As she pulls the snugly fitting fabric over your member[s], you can feel her [fbreastDesc] pressing into your back. They are soft but firm, and you press back slightly as she pulls the [garment] over your [multiCockDesc].", parse);
 					Text.Newline();
 				}
-				Text.AddOutput("Once you have the tight-fitting [garment] on, you ask Fera how it looks. She shyly inspects you and says: <i>\"It looks very nice, [playername].\"</i>", parse);
+				Text.AddOutput("Once you have the tight-fitting [garment] on, you ask Fera how it looks. She shyly inspects you and says: <i>“It looks very nice, [playername].”</i>", parse);
 				Text.Newline();
 				if(player.FirstCock()) {
 					Text.AddOutput("You notice her eyes are focusing on your [multiCockDesc] as she looks at you. Clearly she knows what to look for, even if she won't directly compliment you on [itThem].", parse);
@@ -601,7 +601,7 @@ Scenes.Fera.SexPrompt = function() {
 					Text.Newline();
 					Text.AddOutput("She puts another finger into your [vagDesc] and she spreads your wet folds with her digits. You can feel her nails digging into your [vagDesc] slightly as she spreads you wide open, and you let out a small whine. She looks into your eyes, and you can see she is enjoying teasing you immensely.", parse);
 					Text.Newline();
-					Text.AddOutput("<i>\"You want me to keep going? I can stop if you want...\"</i> she says with a smirk. You nod desperately, and she smiles and resumes fingering your [vagDesc]. As you continue to please each other, you can see her tail swishing excitedly.", parse);
+					Text.AddOutput("<i>“You want me to keep going? I can stop if you want...”</i> she says with a smirk. You nod desperately, and she smiles and resumes fingering your [vagDesc]. As you continue to please each other, you can see her tail swishing excitedly.", parse);
 					Text.Newline();
 					Text.AddOutput("A few minutes later you can take no more, and your body tenses as you orgasm. Fera pulls her wet fingers out of your [vagDesc] and helps you remain standing as you legs weaken slightly. Your breathing slows as you cuddle with her for a moment.", parse);
 					Text.Newline();
@@ -629,11 +629,11 @@ Scenes.Fera.SexPrompt = function() {
 				Text.Newline();
 				Text.AddOutput("Barely getting started, you spread her [fvagDesc] with your fingers. A thin strand of her juices connecting the sides of her enticing opening. You push your [tongueDesc] inside, the firm walls pressing in around you. Fera begins panting lustfully, clearly enjoying your efforts.", parse);
 				Text.Newline();
-				Text.AddOutput("Wanting more, she puts a hand on your head, gently pushing you in closer, your nose pressing against her cute clit. Obliging, you respond by sticking your [tongueDesc] inside her as far as it will go, tasting her deepest parts. <i>\"Please...\"</i> she moans.", parse);
+				Text.AddOutput("Wanting more, she puts a hand on your head, gently pushing you in closer, your nose pressing against her cute clit. Obliging, you respond by sticking your [tongueDesc] inside her as far as it will go, tasting her deepest parts. <i>“Please...”</i> she moans.", parse);
 				Text.Newline();
 				Text.AddOutput("Understanding her desire, you continue your pleasurable assault. She begins to purr with each lick of your [tongueDesc], encouraging you to lick faster. After a few minutes she pushes you down hard, shoving your face into her nethers. You feel her body tense, a shudder running through her. Reaching her climax, the catgirl mewls softly as she rides out her orgasm.", parse);
 				Text.Newline();
-				Text.AddOutput("<i>\"Thanks, [playername]. That felt really good...\"</i> she says as she fixes her dress. You kiss and head back into the store.", parse);
+				Text.AddOutput("<i>“Thanks, [playername]. That felt really good...”</i> she says as she fixes her dress. You kiss and head back into the store.", parse);
 				
 				world.TimeStep({minute: 30});
 				player.AddSexExp(1);
@@ -657,7 +657,7 @@ Scenes.Fera.SexPrompt = function() {
 					Text.Newline();
 					
 					if(player.FirstCock().length.Get() > 25) {
-						Text.AddOutput("Upon seeing your [multiCockDesc], the cute catgirl's eyes widen in shock. <i>\"[itsTheyre] <b>huge</b>, [playername]! But I'll try my best...\"</i> Fera says with a nervous smile. You give her a gentle push, telling her to assume a kneeling position in front of you. Clearly, she's intimidated by your sheer size.", parse);
+						Text.AddOutput("Upon seeing your [multiCockDesc], the cute catgirl's eyes widen in shock. <i>“[itsTheyre] <b>huge</b>, [playername]! But I'll try my best...”</i> Fera says with a nervous smile. You give her a gentle push, telling her to assume a kneeling position in front of you. Clearly, she's intimidated by your sheer size.", parse);
 						Text.Newline();
 					}
 					
@@ -700,10 +700,10 @@ Scenes.Fera.SexPrompt = function() {
 						}
 						Text.AddOutput(" She licks up as much as she can off your [multiCockDesc][balls], completely entranced.", parse);
 						Text.Newline();
-						Text.AddOutput("She grabs a large rag from a pile under the bench and quickly wipes the floor more-or-less clean. <i>\"Was it good for you?\"</i> she anxiously asks, as she finishes cleaning up, a worried look in her large eyes. You nod empathetically, putting your [lowerArmorDesc] back on and follow her out of the dressing room.", parse);
+						Text.AddOutput("She grabs a large rag from a pile under the bench and quickly wipes the floor more-or-less clean. <i>“Was it good for you?”</i> she anxiously asks, as she finishes cleaning up, a worried look in her large eyes. You nod empathetically, putting your [lowerArmorDesc] back on and follow her out of the dressing room.", parse);
 					}
 					else {
-						Text.AddOutput("You soon reach your limit under her passionate service, cumming hard. She swallows your load greedily, gently licking your [multiCockDesc][balls] clean. <i>\"Your cum tastes so good, [playername]...\"</i> she murmurs, licking her lips. Gently patting her head, you promise to give her more later. She purrs happily, handing you your [lowerArmorDesc]. Putting it back on, you leave the dressing room together.", parse);
+						Text.AddOutput("You soon reach your limit under her passionate service, cumming hard. She swallows your load greedily, gently licking your [multiCockDesc][balls] clean. <i>“Your cum tastes so good, [playername]...”</i> she murmurs, licking her lips. Gently patting her head, you promise to give her more later. She purrs happily, handing you your [lowerArmorDesc]. Putting it back on, you leave the dressing room together.", parse);
 					}
 					
 					fera.flags["Blowjob"]++;
@@ -783,12 +783,12 @@ Scenes.Fera.SexPrompt = function() {
 				Text.Clear();
 				Text.AddOutput("You hold her tightly and ask Fera if she wants to have sex with you.", parse);
 				Text.Newline();
-				Text.AddOutput("<i>\"Um... I've never...\"</i> she stammers. Pulling her face up to meet yours, you ask again if she wants to. She looks deeply into your [eyeDesc]s. <i>\"You are the only person I have ever wanted to do this with, [playername]. I'll try my best...\"</i>", parse);
+				Text.AddOutput("<i>“Um... I've never...”</i> she stammers. Pulling her face up to meet yours, you ask again if she wants to. She looks deeply into your [eyeDesc]s. <i>“You are the only person I have ever wanted to do this with, [playername]. I'll try my best...”</i>", parse);
 				Text.Newline();
 				Text.AddOutput("With a smile you tell Fera to sit on the bench, lift up her dress and remove her panties. She does as you ask while you take off your [lowerArmorDesc]. Her eyes stare intently at your [multiCockDesc] as you pull down her dress to reveal her [fbreastDesc].", parse);
 				Text.Newline();
 				if(p1Cock.length.Get() >= 18) {
-					Text.AddOutput("<i>\"You're so big, [playername]... will it fit?\"</i> the cute catgirl asks nervously. Sensing her apprehension, you put a hand on her head and stroke her as you promise that everything will be fine.", parse);
+					Text.AddOutput("<i>“You're so big, [playername]... will it fit?”</i> the cute catgirl asks nervously. Sensing her apprehension, you put a hand on her head and stroke her as you promise that everything will be fine.", parse);
 					Text.Newline();
 				}
 				Text.AddOutput("You kiss her deeply and your [tongueDesc] intertwines with hers as you fondle her [fbreastDesc] roughly.", parse);
@@ -816,7 +816,7 @@ Scenes.Fera.SexPrompt = function() {
 					Text.Newline();
 					Text.AddOutput("You pull out your [cockDesc], and look to see Fera breathing heavily and looking tired, but pleased.", parse);
 					Text.Newline();
-					Text.AddOutput("You help each other get dressed and you kiss her again before you leave. <i>\"If you want to do it again... let me know,\"</i> she says quietly. The two of you exit the dressing room together and return to the main area of the store.", parse);
+					Text.AddOutput("You help each other get dressed and you kiss her again before you leave. <i>“If you want to do it again... let me know,”</i> she says quietly. The two of you exit the dressing room together and return to the main area of the store.", parse);
 				}
 				else {
 					if(player.CumOutput() > 3) {
@@ -825,7 +825,7 @@ Scenes.Fera.SexPrompt = function() {
 							Text.AddOutput(", as your other cock[s] spurt[notS] cum all over the floor and walls, making a big mess", parse);
 						Text.AddOutput(". However there is not enough room in her [fvagDesc] for your load and it starts to gush out and drip down your [multiCockDesc]. Pulling out your [cockDesc], you see the cute catgirl is panting heavily, looking up happily at you.", parse);
 						Text.Newline();
-						Text.AddOutput("You help Fera clean up and fix her clothes, and she helps you with your [lowerArmorDesc]. She comes close and embraces you. <i>\"We can do it again sometime... if you want...\"</i> she says while rubbing her head against your [breastDesc]. You open the dressing room door and let Fera return to work.", parse);
+						Text.AddOutput("You help Fera clean up and fix her clothes, and she helps you with your [lowerArmorDesc]. She comes close and embraces you. <i>“We can do it again sometime... if you want...”</i> she says while rubbing her head against your [breastDesc]. You open the dressing room door and let Fera return to work.", parse);
 					}
 					else {
 						Text.AddOutput("As you reach your limit, you push yourself in to the hilt. You shoot your load deep inside her [fvagDesc]", parse);
@@ -833,7 +833,7 @@ Scenes.Fera.SexPrompt = function() {
 							Text.AddOutput(" as your other cock[s] spurt[notS] your cum all over the floor", parse);
 						Text.AddOutput(". As you pull out your [cockDesc], you look to see Fera breathing heavily and looking tired, but pleased.", parse);
 						Text.Newline();
-						Text.AddOutput("You help each other get dressed and you kiss her again before you leave. <i>\"If you want to do it again... let me know,\"</i> she says quietly. The two of you exit the dressing room together and return to the main area of the store.", parse);
+						Text.AddOutput("You help each other get dressed and you kiss her again before you leave. <i>“If you want to do it again... let me know,”</i> she says quietly. The two of you exit the dressing room together and return to the main area of the store.", parse);
 					}
 				}
 			
@@ -859,7 +859,7 @@ Scenes.Fera.SexPrompt = function() {
 				Text.AddOutput(".", parse);
 				Text.Newline();
 				if(p1Cock.length.Get() >= 18) {
-					Text.AddOutput("<i>\"[itsTheyre] so big, [playername].\"</i> she purrs as she licks your [multiCockDesc].", parse);
+					Text.AddOutput("<i>“[itsTheyre] so big, [playername].”</i> she purrs as she licks your [multiCockDesc].", parse);
 					Text.Newline();
 				}
 				Text.AddOutput("Once your [cockDesc] is coated in her saliva, you tell her that's enough for now. She stands up, waiting for your instructions, and you gently push her against the side wall of the dressing room. You kiss her roughly as you pull down her dress to reveal her [fbreastDesc] and begin to play with them. She purrs softly and pulls you closer.", parse);
@@ -885,7 +885,7 @@ Scenes.Fera.SexPrompt = function() {
 				if(player.NumCocks() === 0) {
 					Text.AddOutput("Seeing her this turned on is a particularly satisfying treat. Her smile vanishes in surprise when you push your [cockDesc] as deep into her [fvagDesc] as it can go. She gasps in pleasure and cums soundlessly.",parse);
 					Text.Newline();
-					Text.AddOutput("You pull out of her, and she kneels down, licking the remaining juices from your [multiCockDesc], gulping them down greedily. <i>\"Thanks so much, [playername]...\"</i> she says after licking her lips.", parse);
+					Text.AddOutput("You pull out of her, and she kneels down, licking the remaining juices from your [multiCockDesc], gulping them down greedily. <i>“Thanks so much, [playername]...”</i> she says after licking her lips.", parse);
 					Text.AddOutput(" You put your [lowerArmorDesc] back on, and help her fix her dress. You open the door and you both head back out to the store.", parse);
 				}
 				else {
@@ -901,7 +901,7 @@ Scenes.Fera.SexPrompt = function() {
 							Text.AddOutput(" while your other cock[s] spray[notS] spunk onto the walls", parse);
 						Text.AddOutput(".", parse);
 						Text.Newline();
-						Text.AddOutput("You pull out of her, and she kneels down, licking the remaining juices from your [multiCockDesc], gulping them down greedily. <i>\"Thanks so much, [playername]...\"</i> she says after licking her lips.", parse);
+						Text.AddOutput("You pull out of her, and she kneels down, licking the remaining juices from your [multiCockDesc], gulping them down greedily. <i>“Thanks so much, [playername]...”</i> she says after licking her lips.", parse);
 						if(player.NumCocks() > 1)
 							Text.AddOutput(" Before getting back up, she grabs a small rag and uses it to wipe off the walls.", parse);
 						Text.AddOutput(" You put your [lowerArmorDesc] back on, and help her fix her dress. You open the door and you both head back out to the store.", parse);
@@ -925,13 +925,13 @@ Scenes.Fera.SexPrompt = function() {
 				Text.AddOutput("She purrs and pulls down her dress, presenting her [fbreastDesc] to you. Knowing what she wants, you grab her [fbreastDesc] and firmly squeeze them. The cute catgirl begins to squeeze her thighs together, increasing the stimulation on your [multiCockDesc]. Her juices coat your [multiCockDesc] as you thrust between her legs[balls].", parse);
 				Text.Newline();
 				if(p1Cock.length.Get() >= 18)
-					Text.AddOutput("<i>\"Your cock[s] [isAre] so big, [playername]...I can't wait anymore...\"</i> Fera moans needily. ", parse);
+					Text.AddOutput("<i>“Your cock[s] [isAre] so big, [playername]...I can't wait anymore...”</i> Fera moans needily. ", parse);
 				Text.AddOutput("You kiss Fera deeply and pull your [multiCockDesc] out from between her legs. Turning her around, you tell her to lean against the wall and spread her legs.", parse);
 				Text.Newline();
 				if(fera.flags["Behind"] >= 3) {
 					Text.AddOutput("Fera spreads her legs eagerly for you, leaning against the wall of the dressing room. She shakes her hips, inviting your [multiCockDesc] inside. From this angle, you can easily see her juices dripping from her [fvagDesc] and down her legs. You walk over to her and playfully ask what she wants, your hand patting her exposed [fbuttDesc].", parse);
 					Text.Newline();
-					Text.AddOutput("She flicks her tail, shaking her hips faster and lets out a whine. <i>\"I want... your [cockDesc], [playername].\"</i> Acting unconvinced, you press the tip of your [cockDesc] against the wet lips of her [fvagDesc] and rub it gently. <i>\"Please, [playername]... I want you inside me...\"</i> she begs. Deciding she's had enough teasing, you push into her [fvagDesc] forcefully, and are answered by a loud moan.", parse);
+					Text.AddOutput("She flicks her tail, shaking her hips faster and lets out a whine. <i>“I want... your [cockDesc], [playername].”</i> Acting unconvinced, you press the tip of your [cockDesc] against the wet lips of her [fvagDesc] and rub it gently. <i>“Please, [playername]... I want you inside me...”</i> she begs. Deciding she's had enough teasing, you push into her [fvagDesc] forcefully, and are answered by a loud moan.", parse);
 					Text.Newline();
 					
 					player.Fuck(p1Cock, 3);
@@ -940,7 +940,7 @@ Scenes.Fera.SexPrompt = function() {
 					Text.AddOutput("You reward her begging by thrusting hard, smacking her ass with each thrust. She purrs and moans as she begins to thrust back at you passionately. Fera takes one hand off the wall and begins to fondle one of her [fbreastDesc], as you increase the speed of your thrusts. Her juices are now flowing out and down your [cockDesc][balls].", parse);
 				}
 				else {
-					Text.AddOutput("<i>\"Okay...\"</i> she says as she presses her hands against the wall. As she spreads her legs, you can see her [fvagDesc] glistening with her juices. Not wanting to keep her waiting, you press your [cockDesc] against her opening and push inside. She purrs softly and her tail swishes from side to side in excitement.", parse);
+					Text.AddOutput("<i>“Okay...”</i> she says as she presses her hands against the wall. As she spreads her legs, you can see her [fvagDesc] glistening with her juices. Not wanting to keep her waiting, you press your [cockDesc] against her opening and push inside. She purrs softly and her tail swishes from side to side in excitement.", parse);
 					Text.Newline();
 					
 					player.Fuck(p1Cock, 3);
@@ -958,7 +958,7 @@ Scenes.Fera.SexPrompt = function() {
 						Text.Newline();
 						Text.AddOutput("You wrap your hands around her slender frame and press your [cockDesc] deep into her [fvagDesc] as she cums around you.", parse);
 						Text.Newline();
-						Text.AddOutput("Your [cockDesc] slides out of her as she slumps against the wall breathing in short gasps. <i>\"[playername] that was incredible!\"</i>, she exhales, <i>\"I may get addicted at this rate...\"</i>", parse);
+						Text.AddOutput("Your [cockDesc] slides out of her as she slumps against the wall breathing in short gasps. <i>“[playername] that was incredible!”</i>, she exhales, <i>“I may get addicted at this rate...”</i>", parse);
 						Text.AddOutput("When has regained her composure, she rises shakily to her feet, tosses you your [lowerArmorDesc], and begins to get dressed. You help her fix her dress, give her a kiss, and follow her out to the main area of the store.", parse);
 				}
 				else {
@@ -1002,7 +1002,7 @@ Scenes.Fera.SexPrompt = function() {
 					Text.AddOutput("Purring softly, she looks into your [eyeDesc]s, her gaze filled with lust. Kneeling down, she licks your [cockDesc] passionately, the long strokes of her tongue thoroughly coating it in her saliva.", parse);
 					Text.Newline();
 					if(fera.relation.Get() >= 18) {
-						Text.AddOutput("<i>\"I can't wait to have[oneof] your big cock[s] in my ass, [playername]...\"</i> she says with a lusty look after a particularly long lick.", parse);
+						Text.AddOutput("<i>“I can't wait to have[oneof] your big cock[s] in my ass, [playername]...”</i> she says with a lusty look after a particularly long lick.", parse);
 						Text.Newline();
 					}
 					
@@ -1020,7 +1020,7 @@ Scenes.Fera.SexPrompt = function() {
 					else if(fera.flags["Anal"] <= 3) {
 						Text.AddOutput("As she stands up, you motion for her to take her position and she turns around, spreading her legs while leaning against the wall. Whispering to her, you tell her to relax, and massage her [fbuttDesc] as you ready your [cockDesc]. You push the tip of your [cockDesc] into her [fanusDesc] and take it out again a few times to loosen her up a little.", parse);
 						Text.Newline();
-						Text.AddOutput("<i>\"Just put it in already... don't tease me like this...\"</i> she whines quietly. Eager to satisfy her request, you push inside her [fanusDesc] and are soon as deep as you can get.", parse);
+						Text.AddOutput("<i>“Just put it in already... don't tease me like this...”</i> she whines quietly. Eager to satisfy her request, you push inside her [fanusDesc] and are soon as deep as you can get.", parse);
 						Text.Newline();
 						
 						player.Fuck(p1Cock, 3);
@@ -1036,7 +1036,7 @@ Scenes.Fera.SexPrompt = function() {
 						
 						Text.AddOutput("Her [fanusDesc] is still tight and warm, but loose enough for you to move easily. Taking advantage of her obvious desire, you pound her hard and fast, and are rewarded by her desperate moans growing louder.", parse);
 						Text.Newline();
-						Text.AddOutput("<i>\"Yes...\"</i> she whispers, panting, <i>\"more...\"</i> As enjoyable as this is, you decide to make things more interesting. Grabbing hold of her tail, you give it a firm tug, causing her [fanusDesc] to clamp down hard on your [cockDesc], as a startled mew escapes from her mouth. Despite any pain from you tugging on her tail, the catgirl seems to enjoy it immensely, and pants heavily.", parse);
+						Text.AddOutput("<i>“Yes...”</i> she whispers, panting, <i>“more...”</i> As enjoyable as this is, you decide to make things more interesting. Grabbing hold of her tail, you give it a firm tug, causing her [fanusDesc] to clamp down hard on your [cockDesc], as a startled mew escapes from her mouth. Despite any pain from you tugging on her tail, the catgirl seems to enjoy it immensely, and pants heavily.", parse);
 						Text.Newline();
 						Text.AddOutput("You thrust harder and harder into her tight ass, doing your best to please you both.", parse);
 						if(player.HasBalls())
@@ -1104,7 +1104,7 @@ Scenes.Fera.SexPrompt = function() {
 					Text.AddOutput("The initial sensation is intense, and her snatch feels warmer and wetter than usual. She looks into your [eyeDesc]s, kissing you deeply as she begins to bounce in your lap.", parse);
 					Text.Newline();
 					if(p1Cock.length.Get() >= 18) {
-						Text.AddOutput("<i>\"Oh, [playername]... it's so big... it's wonderful...\"</i> Fera moans as she squeezes around your [cockDesc].", parse);
+						Text.AddOutput("<i>“Oh, [playername]... it's so big... it's wonderful...”</i> Fera moans as she squeezes around your [cockDesc].", parse);
 						Text.Newline();
 					}
 					Text.AddOutput("Taking turns bouncing and grinding, she does her best to stimulate your [cockDesc]. You shudder at the pleasure running through you, and grab her [fbreastDesc] to try and return the favor.", parse);
@@ -1114,11 +1114,11 @@ Scenes.Fera.SexPrompt = function() {
 					
 					if(player.NumCocks() === 0) {
 						Text.AddOutput("You squeeze her tightly as she cums, and she presses into your lap, grinding your [cockDesc] deep inside her [fvagDesc]. ", parse);
-							Text.AddOutput("As her orgasm subsides she purrs and draws you close to give you a big kiss. <i>\"I love you, [playername]... more than anyone else...\"</i> she whispers with tears in her big blue eyes.", parse);
+							Text.AddOutput("As her orgasm subsides she purrs and draws you close to give you a big kiss. <i>“I love you, [playername]... more than anyone else...”</i> she whispers with tears in her big blue eyes.", parse);
 							Text.Newline();
 							Text.AddOutput("You squeeze her, kissing her, and tell her that you love her too. Smiling, she gets up, letting your [cockDesc] flop out of her [fvagDesc] and hit the bench with a wet slap. Wanting to taste her favorite treat, she grabs your [multiCockDesc] and gently licks up her cum, the sight of it alone almost makes you want to go for a second round.", parse);
 							Text.Newline();
-							Text.AddOutput("Once you're clean, you grab a rag and help her clean up, grabbing your [lowerArmorDesc][toparmor]. After helping each other get dressed, you hug the cute catgirl tightly. <i>\"Come visit again soon, [playername],\"</i> she tells you as you leave the dressing room with her.", parse);
+							Text.AddOutput("Once you're clean, you grab a rag and help her clean up, grabbing your [lowerArmorDesc][toparmor]. After helping each other get dressed, you hug the cute catgirl tightly. <i>“Come visit again soon, [playername],”</i> she tells you as you leave the dressing room with her.", parse);
 					}
 					else {
 						if(player.CumOutput() > 3) {
@@ -1130,11 +1130,11 @@ Scenes.Fera.SexPrompt = function() {
 							}
 							Text.AddOutput(". She purrs loudly as you fill her needy hole and squeezes you tight, digging her nails into your back.", parse);
 							Text.Newline();
-							Text.AddOutput("You hold her close and kiss her roughly as your excess seed begins to leak out of her and onto both your legs. <i>\"I love you so much [playername]...\"</i> she whispers softly. Squeezing her tight, you tell her that you love her too. You see tears in her eyes as she gets up.", parse);
+							Text.AddOutput("You hold her close and kiss her roughly as your excess seed begins to leak out of her and onto both your legs. <i>“I love you so much [playername]...”</i> she whispers softly. Squeezing her tight, you tell her that you love her too. You see tears in her eyes as she gets up.", parse);
 							Text.Newline();
 							Text.AddOutput("As she stands, your [cockDesc] slides out of her with a loud slurping sound. A combined steam of your spunk and her juices flow out of her [fvagDesc] and add to the mess already on the floor. She kneels down and leans in to lick your [multiCockDesc][balls] clean as always. Once you're clean, and she's licked up the stray strands of cum from her lips, you reach under the bench and throw her one of the larger rags, taking another one for yourself. You clean up the floor and bench, and she helps you get your [lowerArmorDesc][toparmor] back on.", parse);
 							Text.Newline();
-							Text.AddOutput("While you fix her dress for her, Fera kisses you one more time before leading you out. <i>\"Come back soon,\"</i> she tells you as you leave.", parse);
+							Text.AddOutput("While you fix her dress for her, Fera kisses you one more time before leading you out. <i>“Come back soon,”</i> she tells you as you leave.", parse);
 						}
 						else {
 							Text.AddOutput("You squeeze her tightly as you cum, and she presses into your lap, taking your seed deep into her womb. ", parse);
@@ -1143,11 +1143,11 @@ Scenes.Fera.SexPrompt = function() {
 								parse["notS"]     = player.NumCocks() > 2 ? "" : "s";
 								Text.AddOutput("Your other member[s] squirt[notS] onto the bench and the floor in front of you. ", parse);
 							}
-							Text.AddOutput("As you fill her with your spunk, she purrs and draws you close to give you a big kiss. <i>\"I love you, [playername]... more than anyone else...\"</i> she whispers with tears in her big blue eyes.", parse);
+							Text.AddOutput("As you fill her with your spunk, she purrs and draws you close to give you a big kiss. <i>“I love you, [playername]... more than anyone else...”</i> she whispers with tears in her big blue eyes.", parse);
 							Text.Newline();
 							Text.AddOutput("You squeeze her, kissing her, and tell her that you love her too. Smiling, she gets up, letting your [cockDesc] flop out of her [fvagDesc] and hit the bench with a wet slap. Wanting to taste her favorite treat, she grabs your [multiCockDesc] and gently licks up the cum, almost making you want to go for a second round.", parse);
 							Text.Newline();
-							Text.AddOutput("Once you're clean, you grab a rag and help her clean up, grabbing your [lowerArmorDesc][toparmor]. After helping each other get dressed, you hug the cute catgirl tightly. <i>\"Come visit again soon, [playername],\"</i> she tells you as you leave the dressing room with her.", parse);
+							Text.AddOutput("Once you're clean, you grab a rag and help her clean up, grabbing your [lowerArmorDesc][toparmor]. After helping each other get dressed, you hug the cute catgirl tightly. <i>“Come visit again soon, [playername],”</i> she tells you as you leave the dressing room with her.", parse);
 						}
 					}
 					world.TimeStep({minute: 30});

@@ -83,9 +83,9 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	"Armor", true, function() { return Scenes.Rigard.ArmorShop.IsOpen(); },
 	function() {
 		/*
-		Text.AddOutput("One particular shop catch your eye. A garish sign hanging outside announce it the \"Shoppe of oddities\", though from just the exterior it is a bit unclear what is actually on sale.");
+		Text.AddOutput("One particular shop catch your eye. A garish sign hanging outside announce it the 'Shoppe of oddities', though from just the exterior it is a bit unclear what is actually on sale.");
 		if(!Scenes.Rigard.ArmorShop.IsOpen())
-			Text.AddOutput(" A small paper stapled to the front door states that the shop is \"Cloosd\" at the moment.");
+			Text.AddOutput(" A small paper stapled to the front door states that the shop is 'Cloosd' at the moment.");
 		Text.AddOutput("<br/>");
 		*/
 	},
@@ -98,9 +98,9 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	"Weapons", true, function() { return Scenes.Rigard.WeaponShop.IsOpen(); },
 	function() {
 		/*
-		Text.AddOutput("One particular shop catch your eye. A garish sign hanging outside announce it the \"Shoppe of oddities\", though from just the exterior it is a bit unclear what is actually on sale.");
+		Text.AddOutput("One particular shop catch your eye. A garish sign hanging outside announce it the 'Shoppe of oddities', though from just the exterior it is a bit unclear what is actually on sale.");
 		if(!Scenes.Rigard.WeaponShop.IsOpen())
-			Text.AddOutput(" A small paper stapled to the front door states that the shop is \"Cloosd\" at the moment.");
+			Text.AddOutput(" A small paper stapled to the front door states that the shop is 'Cloosd' at the moment.");
 		Text.AddOutput("<br/>");
 		*/
 	},
@@ -125,9 +125,9 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	"Odd shop", true, function() { return Scenes.Rigard.OddShop.IsOpen(); },
 	function() {
-		Text.AddOutput("One particular shop catch your eye. A garish sign hanging outside announce it the \"Shoppe of oddities\", though from just the exterior it is a bit unclear what is actually on sale.");
+		Text.AddOutput("One particular shop catch your eye. A garish sign hanging outside announce it the 'Shoppe of oddities', though from just the exterior it is a bit unclear what is actually on sale.");
 		if(!Scenes.Rigard.OddShop.IsOpen())
-			Text.AddOutput(" A small paper stapled to the front door states that the shop is \"Cloosd\" at the moment.");
+			Text.AddOutput(" A small paper stapled to the front door states that the shop is 'Cloosd' at the moment.");
 		Text.AddOutput("<br/>");
 	},
 	function() {
@@ -161,7 +161,7 @@ world.loc.Rigard.ShopStreet.street.events.push(new Link(
 			};
 			Text.Add("After a few minutes, Martello comes around to greet you. His handshake is like a vice[str]. You explain what you need to him, and he scratches his beard, thinking it over.", parse);
 			Text.NL();
-			Text.Add("<i>\"Shouldn’t be a problem. A bit tricky to work the gold leaf like that, but I’ll manage,\"</i> he tells you. <i>\"Hundred twenty coins, and I’ll have ‘em for you within a day or so.\"</i>");
+			Text.Add("<i>“Shouldn’t be a problem. A bit tricky to work the gold leaf like that, but I’ll manage,”</i> he tells you. <i>“Hundred twenty coins, and I’ll have ‘em for you within a day or so.”</i>");
 			Text.Flush();
 			
 			//[Pay][Leave]
@@ -399,13 +399,13 @@ Scenes.Rigard.ShopStreet.Speculate = function() {
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
-		Text.Add("<i>\"You've made the right choice coming to see my goods, [address]!\"</i> [heshe] tells you. <i>\"I have the finest [wares] in the city, at the lowest price[s]!\"</i>", parse);
+		Text.Add("<i>“You've made the right choice coming to see my goods, [address]!”</i> [heshe] tells you. <i>“I have the finest [wares] in the city, at the lowest price[s]!”</i>", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>\"I must congratulate you, [address]!\"</i> [heshe] says. <i>\"You have just found the best chance to buy some fine [wares] you'll see all day!\"</i>", parse);
+		Text.Add("<i>“I must congratulate you, [address]!”</i> [heshe] says. <i>“You have just found the best chance to buy some fine [wares] you'll see all day!”</i>", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>\"Welcome to my humble shop, [address]!\"</i> [heshe] exclaims. <i>\"You will find that I have the best [wares] at the lowest price[s] you'll see this week!\"</i>", parse);
+		Text.Add("<i>“Welcome to my humble shop, [address]!”</i> [heshe] exclaims. <i>“You will find that I have the best [wares] at the lowest price[s] you'll see this week!”</i>", parse);
 	}, 1.0, function() { return true; });
 	
 	scenes.Get();
@@ -416,13 +416,13 @@ Scenes.Rigard.ShopStreet.Speculate = function() {
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
-		Text.Add("<i>\"You see, I must sadly embark with a caravan soon. I simply do not have the time to sell [itThese] at the price [itThey] deserve[notS].\"</i> [HeShe] indicates the [wares] in front of [himher], sniffling theatrically. <i>\"It is a great pity that I must practically give [itThem] away.\"</i>", parse);
+		Text.Add("<i>“You see, I must sadly embark with a caravan soon. I simply do not have the time to sell [itThese] at the price [itThey] deserve[notS].”</i> [HeShe] indicates the [wares] in front of [himher], sniffling theatrically. <i>“It is a great pity that I must practically give [itThem] away.”</i>", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>\"It is my misfortune that I must repay my creditors in a little over an hour, and until I sell these, I won't have the money!\"</i> [HeShe] sounds genuinely distraught. <i>\"So, I must dump [thisThese] [wares] at well below [itsTheir] true worth.\"</i>", parse);
+		Text.Add("<i>“It is my misfortune that I must repay my creditors in a little over an hour, and until I sell these, I won't have the money!”</i> [HeShe] sounds genuinely distraught. <i>“So, I must dump [thisThese] [wares] at well below [itsTheir] true worth.”</i>", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>\"You see, [address],\"</i> [heshe] says, leaning in conspiratorially, <i>\"I really have to pack up and get out of here before the next tax audit, if you catch my meaning. So, though [thisThese] [wares] is worth a lot more, I just have to dump all my stock as quickly as possible and go.\"</i> [HeShe] grimaces, clearly finding the prospect distasteful.", parse);
+		Text.Add("<i>“You see, [address],”</i> [heshe] says, leaning in conspiratorially, <i>“I really have to pack up and get out of here before the next tax audit, if you catch my meaning. So, though [thisThese] [wares] is worth a lot more, I just have to dump all my stock as quickly as possible and go.”</i> [HeShe] grimaces, clearly finding the prospect distasteful.", parse);
 	}, 1.0, function() { return true; });
 	
 	scenes.Get();

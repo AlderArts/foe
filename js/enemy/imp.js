@@ -142,9 +142,9 @@ Intro.ImpsWinUseMale = function() {
 			Text.Clear();
 			Text.AddOutput("Showing mercy on the imp, you pull out of his mouth, allowing him to draw breath. Before he can get too comfortable though, you insistently prod his cheek with your [cockDesc], coaxing him.", parse);
 			Text.Newline();
-			Text.AddOutput("<i>\"Don't think you are getting away that easily, now get sucking!\"</i> you taunt the red-skinned creature. The defiance flees from the imp's eyes and he dejectedly starts licking and stroking your member. <i>\"Put in a bit more effort,\"</i> you murmur, eyes half closed, as the imp swallows your [cockDesc] whole, letting his rough tongue play along the stem.", parse);
+			Text.AddOutput("<i>“Don't think you are getting away that easily, now get sucking!”</i> you taunt the red-skinned creature. The defiance flees from the imp's eyes and he dejectedly starts licking and stroking your member. <i>“Put in a bit more effort,”</i> you murmur, eyes half closed, as the imp swallows your [cockDesc] whole, letting his rough tongue play along the stem.", parse);
 			Text.Newline();
-			Text.AddOutput("<i>\"Good... unf, you must get a lot of practice to be this good,\"</i> you croon as your demonic cum-sleeve really gets down to business. As you feel your release coming closer, the imp pulls out until only the head of your [cockDesc] remains inside his mouth, resting on his tongue. Intent to get you off quickly, the demonic slut starts to lap at your tip while simultaneously jacking you off with both hands.", parse);
+			Text.AddOutput("<i>“Good... unf, you must get a lot of practice to be this good,”</i> you croon as your demonic cum-sleeve really gets down to business. As you feel your release coming closer, the imp pulls out until only the head of your [cockDesc] remains inside his mouth, resting on his tongue. Intent to get you off quickly, the demonic slut starts to lap at your tip while simultaneously jacking you off with both hands.", parse);
 			Text.Newline();
 			Text.AddOutput("Overcome by pleasure, you lustfully cry out as you unload wad after wad into the mouth of the imp, letting your sticky spunk splatter over his tongue and pour down his throat. The creature dutifully swallows every drop, panting as you pull out, hard with lust himself.");
 			Text.Newline();
@@ -179,7 +179,7 @@ Intro.ImpsWinUseMale = function() {
 			Text.Clear();
 			Text.AddOutput("You pull out of the imp's mouth, absently rubbing your saliva and pre-covered [cockDesc] against his cheek. The creature takes the opportunity to take a few wheezing breaths, before trying to scramble away from you. Effortlessly grabbing his tail and sweeping his legs away from under him, you chide him.", parse);
 			Text.Newline();
-			Text.AddOutput("<i>\"Come on, now, can't have you running away before I get off, can we? If you are going to be such a baby and not allow me to use your mouth, I'm just going to have to find another hole to stuff.\"</i> Comprehension slowly dawns on the scrawny imp, and it begins to plead for you to use its mouth again, but your attention is focused on its plump rear. You give the demonic butt a few gentle caresses, keeping the struggling imp in place with a steady grip on its tail.");
+			Text.AddOutput("<i>“Come on, now, can't have you running away before I get off, can we? If you are going to be such a baby and not allow me to use your mouth, I'm just going to have to find another hole to stuff.”</i> Comprehension slowly dawns on the scrawny imp, and it begins to plead for you to use its mouth again, but your attention is focused on its plump rear. You give the demonic butt a few gentle caresses, keeping the struggling imp in place with a steady grip on its tail.");
 			Text.Newline();
 			Text.AddOutput("With your other hand, you guide your [cockDesc] up against the struggling runt's taint, sighing with content as the dark red rosebud gives way. The imp yelps in a mix of pain and pleasure as you set your pace, plunging your stiff [cockDesc] deeper and deeper inside him.", parse);
 			Text.Newline();
@@ -246,14 +246,14 @@ Intro.ImpsWinUseFemale = function() {
 			
 			if(!Intro.cuntBlocked) {
 				Intro.cuntBlocked = true;
-				Text.AddOutput("<i>\"Fuah, I... I need more!\"</i> putting a foot on the imp's shoulder, you push him to the ground, <i>\"Now, be a good boy and stay like that,\"</i> you breathe lustily, working him to full arousal with the sole of your foot. Straddling the imp's cock, you rub your wet labia against the tip, but when you try to sink down on the impressive tool, something blocks you. Moaning in frustration you try to press down again, but the imp's [cockDesc] just slides to the side, harmlessly.", parse);
+				Text.AddOutput("<i>“Fuah, I... I need more!”</i> putting a foot on the imp's shoulder, you push him to the ground, <i>“Now, be a good boy and stay like that,”</i> you breathe lustily, working him to full arousal with the sole of your foot. Straddling the imp's cock, you rub your wet labia against the tip, but when you try to sink down on the impressive tool, something blocks you. Moaning in frustration you try to press down again, but the imp's [cockDesc] just slides to the side, harmlessly.", parse);
 				Text.Newline();
 				Text.AddOutput("<b>YOUR VIRGINITY IS <i>MINE</i>,<b> the demon rumbles maliciously, <b>THESE TRASH CAN MAKE DO WITH YOUR OTHER HOLES.</b>", parse);
 				Text.Newline();
 				Text.AddOutput("Grumbling, you give it one more try, but the invisible barrier opposes you once more. Frustrated, you adjust your aim, placing your ass over the raised imp-cock.", parse);
 			}
 			else {
-				Text.AddOutput("<i>\"Mm,\"</i> licking your lips, you motion for the excited imp to lie down on his back. He complies, watching expectantly as you fondle yourself, teasing a finger inside your [anusDesc]. You get down on your knees, straddling the imp's erect member and guiding it to your ass.", parse);
+				Text.AddOutput("<i>“Mm,”</i> licking your lips, you motion for the excited imp to lie down on his back. He complies, watching expectantly as you fondle yourself, teasing a finger inside your [anusDesc]. You get down on your knees, straddling the imp's erect member and guiding it to your ass.", parse);
 			}
 			Text.Newline();
 			
@@ -264,11 +264,11 @@ Intro.ImpsWinUseFemale = function() {
 	options.push({ nameStr : "Get fucked",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("You step back from the eager imp's cunnilingus and twirl around. Getting down on your knees, you spread your legs, exposing your bare crotch. <i>\"Come on, big boy, spear me on that impaler!\"</i>", parse);
+			Text.AddOutput("You step back from the eager imp's cunnilingus and twirl around. Getting down on your knees, you spread your legs, exposing your bare crotch. <i>“Come on, big boy, spear me on that impaler!”</i>", parse);
 			Text.Newline();
 			Text.AddOutput("The imp scrambles to his feet, practically throwing himself over you. Clawed hands grab your raised hips, and you moan lustfully as the imp's [cockDesc] rubs against your [cuntDesc], only for him to plant it squarely against your [anusDesc].", parse);
 			Text.Newline();
-			Text.AddOutput("<i>\"Th-the fuck do you think you are do-aah!\"</i> your protest is rudely cut of by the head of the imp's cock forcing its way inside your rectum. <i>\"S-sorry,\"</i> the imp squeaks in an embarrassed apology, <i>\"The boss won't let me use the front,\"</i> he explains, shoving a few inches inside you.", parse);
+			Text.AddOutput("<i>“Th-the fuck do you think you are do-aah!”</i> your protest is rudely cut of by the head of the imp's cock forcing its way inside your rectum. <i>“S-sorry,”</i> the imp squeaks in an embarrassed apology, <i>“The boss won't let me use the front,”</i> he explains, shoving a few inches inside you.", parse);
 			Text.Newline();
 			
 			player.FuckAnal(player.Butt(), imp.FirstCock());
@@ -281,7 +281,7 @@ Intro.ImpsWinUseFemale = function() {
 			Text.Newline();
 			Text.AddOutput("... But stretching even further. You yowl in pain as you feel the imp's already considerable [cockName] swelling inexorably, at least doubling in length and gaining considerably in girth.", parse);
 			Text.Newline();
-			Text.AddOutput("<b>THE SLUT CAN'T WAIT TO GET FUCKED, ASK AND YE SHALL RECEIVE,</b> the amused voice of the demon rolls over you. <i>\"F-fuuuck!\"</i> you groan as the imp somehow bottoms out in your butt, filling you completely. Even while growing, the imp does not slow one bit, continuing to rail you like there is no tomorrow.", parse);
+			Text.AddOutput("<b>THE SLUT CAN'T WAIT TO GET FUCKED, ASK AND YE SHALL RECEIVE,</b> the amused voice of the demon rolls over you. <i>“F-fuuuck!”</i> you groan as the imp somehow bottoms out in your butt, filling you completely. Even while growing, the imp does not slow one bit, continuing to rail you like there is no tomorrow.", parse);
 			Text.Newline();
 			Text.AddOutput("Pain slowly gives way to pleasure as the imp repeatedly hilts his impaler in your guts, stretching you to your limit. With a high-pitched yelp, the imp unloads inside you, painting your back passage white with unnatural amounts of warm spunk. It seemed the cursed demon increased his capacity too!", parse);
 			Text.Newline();
@@ -310,13 +310,13 @@ Intro.ImpsWinRide = function() {
 	
 	Text.Clear();
 	
-	Text.AddOutput("You walk over to one of the prone imps and prod it into a wakeful state. <i>\"On your back,\"</i> you imperiously order it, <i>\"I have need of your cock.\"</i> The imp is quick to follow your command, its [impCockDesc] rising to attention as he looks up at you expectantly.", parse);
+	Text.AddOutput("You walk over to one of the prone imps and prod it into a wakeful state. <i>“On your back,”</i> you imperiously order it, <i>“I have need of your cock.”</i> The imp is quick to follow your command, its [impCockDesc] rising to attention as he looks up at you expectantly.", parse);
 	Text.Newline();
 	
 	if(player.body.Gender() == Gender.female) {
 		if(!Intro.cuntBlocked) {
 			Intro.cuntBlocked = true;
-			Text.AddOutput("<i>\"Fuah, I... I need more!\"</i> putting a foot on the imp's shoulder, you push him to the ground, <i>\"Now, be a good boy and stay like that,\"</i> you breathe lustily, working him to full arousal with the sole of your foot. Straddling the imp's cock, you rub your wet labia against the tip, but when you try to sink down on the impressive tool, something blocks you. Moaning in frustration you try to press down again, but the imp's [impCockDesc] just slides to the side, harmlessly.", parse);
+			Text.AddOutput("<i>“Fuah, I... I need more!”</i> putting a foot on the imp's shoulder, you push him to the ground, <i>“Now, be a good boy and stay like that,”</i> you breathe lustily, working him to full arousal with the sole of your foot. Straddling the imp's cock, you rub your wet labia against the tip, but when you try to sink down on the impressive tool, something blocks you. Moaning in frustration you try to press down again, but the imp's [impCockDesc] just slides to the side, harmlessly.", parse);
 			Text.Newline();
 			Text.AddOutput("<b>YOUR VIRGINITY IS <i>MINE</i>,<b> the demon rumbles maliciously, <b>THESE TRASH CAN MAKE DO WITH YOUR OTHER HOLES.</b>", parse);
 			Text.Newline();
@@ -351,7 +351,7 @@ Intro.ImpsWinRideEntrypoint = function() {
 	
 	player.FuckAnal(player.Butt(), imp.FirstCock());
 	
-	Text.AddOutput("<i>\"Why you little-\"</i> you pull yourself off the panting imp, but something makes you lose your footing, causing you to fall on your butt. This, in turn, fills said butt with several inches of imp cock. Once you have regained your composure, you find that you are now comfortable taking his cock this way. Might as well make the best of it.", parse);
+	Text.AddOutput("<i>“Why you little-”</i> you pull yourself off the panting imp, but something makes you lose your footing, causing you to fall on your butt. This, in turn, fills said butt with several inches of imp cock. Once you have regained your composure, you find that you are now comfortable taking his cock this way. Might as well make the best of it.", parse);
 	Text.Newline();
 	Text.AddOutput("Planting your hands on the ground behind you, you start to repeatedly drive the imp's cock into your butt, attempting to match your rhythm to your partners frenzied rutting.");
 	if(player.FirstCock())
@@ -386,16 +386,16 @@ Intro.ImpsWinGroup = function() {
 	};
 	
 	Text.Clear();
-	Text.AddOutput("<i>\"All right, boys! Time to wake up!\"</i> The groaning imps, still sore from your fight, quickly perk up when they realize your intentions. They all gather around you, cocks quickly stiffening.");
+	Text.AddOutput("<i>“All right, boys! Time to wake up!”</i> The groaning imps, still sore from your fight, quickly perk up when they realize your intentions. They all gather around you, cocks quickly stiffening.");
 	Text.Newline();
 	
 	// Male/female split
 	if(player.body.Gender() == Gender.male) {
-		Text.AddOutput("<i>\"You, on all fours,\"</i> you point to one of the imps, grinning widely. The chosen imp whimpers, but complies with your order, drawing amused snickers from the other imps. They quickly quiet down when you add, <i>\"And you two, get my cock ready.\"</i>", parse);
+		Text.AddOutput("<i>“You, on all fours,”</i> you point to one of the imps, grinning widely. The chosen imp whimpers, but complies with your order, drawing amused snickers from the other imps. They quickly quiet down when you add, <i>“And you two, get my cock ready.”</i>", parse);
 		Text.Newline();
 		Text.AddOutput("The two reluctant imps take turns sucking your [cockDesc], coating it with saliva, preparing it for penetration. Enjoying your power over the defeated imps, you lick a few of your fingers and grab hold of the prone imp in front of you, shoving three fingers up to the knuckles in his butt.", parse);
 		Text.Newline();
-		Text.AddOutput("<i>\"Enough,\"</i> you call off your two cocksuckers, waving them to the side. <i>\"Mm... prepare for penetration!\"</i> You firmly grab the butt cheeks of the imp beneath you, shoving your [cockDesc] deep inside the imp slut. The other imps stand to one side, uncertainly stroking themselves while you rail their buddy, not sure if you are going to use them next. Pausing your thrusts momentarily, you look at them, annoyed. <i>\"Well, what are you waiting for?\"</i> You slap your own rear meaningfully.", parse);
+		Text.AddOutput("<i>“Enough,”</i> you call off your two cocksuckers, waving them to the side. <i>“Mm... prepare for penetration!”</i> You firmly grab the butt cheeks of the imp beneath you, shoving your [cockDesc] deep inside the imp slut. The other imps stand to one side, uncertainly stroking themselves while you rail their buddy, not sure if you are going to use them next. Pausing your thrusts momentarily, you look at them, annoyed. <i>“Well, what are you waiting for?”</i> You slap your own rear meaningfully.", parse);
 		Text.Newline();
 		Text.AddOutput("The two have a brief scuffle about who gets to go first - apparently ending in a draw - as you soon feel one of them jump on top of your back, pushing you down on the ground, while the other positions himself behind you. Not one, but two fat imp cocks prod at your [anusDesc], insistently demanding entry.", parse);
 		Text.Newline();
@@ -406,7 +406,7 @@ Intro.ImpsWinGroup = function() {
 	}
 	else // female
 	{
-		Text.AddOutput("<i>\"I want you to fuck me, all of you!\"</i> Getting down on your knees, you motion to them seductively. The imps share excited glances and quickly crowd in around you, providing you with plenty of cocks to suck.", parse);
+		Text.AddOutput("<i>“I want you to fuck me, all of you!”</i> Getting down on your knees, you motion to them seductively. The imps share excited glances and quickly crowd in around you, providing you with plenty of cocks to suck.", parse);
 		Text.Newline();
 		Text.AddOutput("Once the imps have been suitably lathered up, you drag one of them down and straddle him in a sixty-nine position, continuing to work on his cock with your [breastDesc]. The remaining two imps have a brief scuffle about who gets to go first - apparently ending in a draw - as you soon feel one of them jump on top of your back, while the other positions himself behind you. Not one, but two fat imp cocks prod at your [anusDesc], insistently demanding entry.", parse);
 		Text.Newline();
@@ -443,7 +443,7 @@ Intro.ImpsWinGroup = function() {
 	options.push({ nameStr : "Imp",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("<i>\"You got me messed up like this,\"</i> you complain to the tired imps around you, <i>\"You get me cleaned up!\"</i> The dismayed protests of the imps are quickly cut off by threatening to beat them up again, and they dejectedly get down to business. You lean back and relax, turning around at the appropriate times to give them better access. Eventually, you are as clean as you are likely to become without taking a proper bath.");
+			Text.AddOutput("<i>“You got me messed up like this,”</i> you complain to the tired imps around you, <i>“You get me cleaned up!”</i> The dismayed protests of the imps are quickly cut off by threatening to beat them up again, and they dejectedly get down to business. You lean back and relax, turning around at the appropriate times to give them better access. Eventually, you are as clean as you are likely to become without taking a proper bath.");
 			Gui.NextPrompt(Intro.DemonGift);
 		}, enabled : true,
 		tooltip : "Why bother when you have imps to do it for you? They created this mess, after all."
@@ -454,7 +454,7 @@ Intro.ImpsWinGroup = function() {
 Intro.ImpsLossPrompt = function() {
 	Text.Clear();
 	
-	Text.AddOutput("You carefully approach the snickering imps, a bit daunted by their taunts. <i>\"Does little missy want another go?\"</i> One of the little devils holler, making rude gestures at you.");
+	Text.AddOutput("You carefully approach the snickering imps, a bit daunted by their taunts. <i>“Does little missy want another go?”</i> One of the little devils holler, making rude gestures at you.");
 	
 	//[No][Oral][Get fucked]
 	var options = new Array();
@@ -492,21 +492,21 @@ Intro.ImpsLossOral = function() {
 	
 	Text.Clear();
 	
-	Text.AddOutput("<i>\"M-maybe just a little?\"</i> you shuffle around uncomfortably, trying to not seem too eager but failing miserably.");
+	Text.AddOutput("<i>“M-maybe just a little?”</i> you shuffle around uncomfortably, trying to not seem too eager but failing miserably.");
 	if(player.FirstCock())
 		Text.AddOutput(" Your erect [cockDesc] give your intentions away, even if you awkwardly try to hide it.", parse);
 	if(player.FirstVag())
 		Text.AddOutput(" Your wet [cuntDesc] gives your intentions away, even if you awkwardly try to hide it.", parse);
 	Text.Newline();
-	Text.AddOutput("<i>\"Sure, why don't ya come over here and suck my dick?\"</i> one of the imps taunt you, quite surprised when you shuffle over to comply. <i>\"Hey, are you seeing this bitch?\"</i> he chortles as you get down on your knees, planting a kiss on his hard [impCockDesc]. You go at your task with vigor, any previous embarrassment wiped away by the salty taste of imp precum on your tongue.", parse);
+	Text.AddOutput("<i>“Sure, why don't ya come over here and suck my dick?”</i> one of the imps taunt you, quite surprised when you shuffle over to comply. <i>“Hey, are you seeing this bitch?”</i> he chortles as you get down on your knees, planting a kiss on his hard [impCockDesc]. You go at your task with vigor, any previous embarrassment wiped away by the salty taste of imp precum on your tongue.", parse);
 	Text.Newline();
 	Text.AddOutput("You are so focused on your task that you do not notice the other imps closing in on you, not until their cocks grind up against your face, at least, demanding attention. It is a little tricky to split your love among the three - no,  five? - cocks, but you find a rhythm of alternating between sucking and stroking them.", parse);
 	Text.Newline();
-	Text.AddOutput("<i>\"C'mon slut, you can take more!\"</i> To accentuate his proclamation, one of the imps shoves another dick into your mouth, stuffing your cheeks. Sucking enthusiastically, you coax the imps toward your reward, a stomach full of tasty cock-cream.", parse);
+	Text.AddOutput("<i>“C'mon slut, you can take more!”</i> To accentuate his proclamation, one of the imps shoves another dick into your mouth, stuffing your cheeks. Sucking enthusiastically, you coax the imps toward your reward, a stomach full of tasty cock-cream.", parse);
 	Text.Newline();
 	Text.AddOutput("It is not long before your efforts are successful, as twin jets of white spunk fills your mouth to the brim, forcing you to swallow. Despite giving it your best, droplets are soon streaming down your cheeks, tainting your chest with pearly strands. Grunts from the surrounding imps give you fair warning of their impending orgasms, and you close your eyes blissfully, happily receiving your cum-shower.", parse);
 	Text.Newline();
-	Text.AddOutput("<i>\"You are pretty good for a slut!\"</i> one of the imps praises you, <i>\"Come back later and we'll fuck ya good!\"</i> Wiping the sticky fluids from your skin and hair, you gather up your possessions.", parse);
+	Text.AddOutput("<i>“You are pretty good for a slut!”</i> one of the imps praises you, <i>“Come back later and we'll fuck ya good!”</i> Wiping the sticky fluids from your skin and hair, you gather up your possessions.", parse);
 	
 	player.FuckOral(player.Mouth(), imp.FirstCock());
 	
@@ -528,23 +528,23 @@ Intro.ImpsLossFucked = function() {
 	
 	Text.Clear();
 	
-	Text.AddOutput("<i>\"I... I want you to fuck me!\"</i> you can hardly believe that you uttered the words yourself, but the imps are more than happy to oblige. You are quickly pushed down on all fours, held down by two imps while a third on mounts you from behind. Your request is quickly filled as the imp roughly shoves his entire length inside your [anusDesc] and begins to rut wildly.", parse);
+	Text.AddOutput("<i>“I... I want you to fuck me!”</i> you can hardly believe that you uttered the words yourself, but the imps are more than happy to oblige. You are quickly pushed down on all fours, held down by two imps while a third on mounts you from behind. Your request is quickly filled as the imp roughly shoves his entire length inside your [anusDesc] and begins to rut wildly.", parse);
 	Text.Newline();
 	player.FuckAnal(player.Butt(), imp.FirstCock());
 	
 	if(player.FirstCock())
-		Text.AddOutput("<i>\"Why ya have that pitiful little thing?\"</i> the imp teases your [cockDesc] between his thrusts, <i>\"Not like you ever gonna use it, here!\"</i>", parse);
+		Text.AddOutput("<i>“Why ya have that pitiful little thing?”</i> the imp teases your [cockDesc] between his thrusts, <i>“Not like you ever gonna use it, here!”</i>", parse);
 	else
-		Text.AddOutput("<i>\"The boss won't let me use the other hole, so this one will have to do!\"</i> the imp grunts.", parse);
+		Text.AddOutput("<i>“The boss won't let me use the other hole, so this one will have to do!”</i> the imp grunts.", parse);
 		
 	Text.Newline();
 	Text.AddOutput("The imp is done sooner than you would have liked, basting your insides with sticky seminal fluids, but he is quickly replaced by another, picking up where the first left off. One after the other, the imps have a go at your poor [anusDesc], reaming you into a whimpering mess.", parse);
 	Text.Newline();
-	Text.AddOutput("<i>\"Hey, look what the boss gave me!\"</i> you dimly hear one of the imps exclaim. There is a bit of a shuffle behind you and your ass is momentarily free of imp cock, only to be stuffed with what feels like a battering ram. Damn demon! It seems like he at least doubled the length and girth of the imp's cock!", parse);
+	Text.AddOutput("<i>“Hey, look what the boss gave me!”</i> you dimly hear one of the imps exclaim. There is a bit of a shuffle behind you and your ass is momentarily free of imp cock, only to be stuffed with what feels like a battering ram. Damn demon! It seems like he at least doubled the length and girth of the imp's cock!", parse);
 	Text.Newline();
 	Text.AddOutput("Thankfully, the imp seems to last a bit shorter than the others, but he is quickly replaced by another, and then another, and then another. Somehow, each cock that pierces you feels like it is a bit bigger than the last, until you could swear that they are shoving beasts the size and girth of your arm up there.", parse);
 	Text.Newline();
-	Text.AddOutput("<i>\"Meet the Impaler!\"</i> one of the diminutive devils snickers, presenting you with a phallus so big it almost looks comical on his slight frame, if you did not know that it would soon be lodged deep in your colon. You give it a few licks, hoping the saliva will make the entry easier.", parse);
+	Text.AddOutput("<i>“Meet the Impaler!”</i> one of the diminutive devils snickers, presenting you with a phallus so big it almost looks comical on his slight frame, if you did not know that it would soon be lodged deep in your colon. You give it a few licks, hoping the saliva will make the entry easier.", parse);
 	Text.Newline();
 	
 	Text.AddOutput("The orgy continues, each imp now equipped with a fifteen-inch monster. ");

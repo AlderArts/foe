@@ -230,9 +230,9 @@ world.loc.Rigard.Plaza.events.push(new Link(
 		Text.NL();
 		Text.Add("You tentatively approach the counter and ask the owner if he can make you gold hinges. Gilded ones, that is.");
 		Text.NL();
-		Text.Add("<i>\"Gilded? We don’t stoop to that here. This establishment handles only the pure metal,\"</i> he tells you, frowning, <i>\"and its alloys of course. Now if you wanted solid gold... But you would need a light door, or the hinges would not hold it. Perhaps silver wrought over a thin frysan frame...?\"</i>");
+		Text.Add("<i>“Gilded? We don’t stoop to that here. This establishment handles only the pure metal,”</i> he tells you, frowning, <i>“and its alloys of course. Now if you wanted solid gold... But you would need a light door, or the hinges would not hold it. Perhaps silver wrought over a thin frysan frame...?”</i>");
 		Text.NL();
-		Text.Add("He glances over you, remembering himself. <i>\"But you would not be able to afford it. Go visit that oaf Martello in the merchant district. He should be more appropriate to your level.\"</i>");
+		Text.Add("He glances over you, remembering himself. <i>“But you would not be able to afford it. Go visit that oaf Martello in the merchant district. He should be more appropriate to your level.”</i>");
 		Text.NL();
 		Text.Add("Hearing the dismissal in his words, you thank him and leave. A bit pompous, but he did direct you at least.");
 		Text.Flush();
@@ -266,27 +266,27 @@ Scenes.Rigard.Plaza.StatueInfo = function() {
 	Text.Newline();
 	Text.AddOutput("Now, standing before it, you see that the statue is indeed wearing an enormous white dress with gold trim, not unlike the one you saw on Aria herself. The face of the goddess, however, doesn't look anything like you remember, and you note, blushing slightly, that the statue's breasts are actually quite a bit smaller.", parse);
 	Text.Newline();
-	Text.AddOutput("As you stand there, looking at the enormous sculpture, a well-dressed old man comes up to you. You wonder if he caught you staring at the statue's breasts. <i>\"You are new to the city, are you not?\"</i> To your relief, he doesn't mention where you were looking. <i>\"It's really a most grand statue we have, but those of us who have lived here our whole lives have grown used to it.\"</i>", parse);
+	Text.AddOutput("As you stand there, looking at the enormous sculpture, a well-dressed old man comes up to you. You wonder if he caught you staring at the statue's breasts. <i>“You are new to the city, are you not?”</i> To your relief, he doesn't mention where you were looking. <i>“It's really a most grand statue we have, but those of us who have lived here our whole lives have grown used to it.”</i>", parse);
 	Text.Newline();
 	Text.AddOutput("You ask if the city follows Aria devoutly.", parse);
 	Text.Newline();
-	Text.AddOutput("<i>\"Most of us certainly do. Although there are always certain elements...\"</i> He shakes his head disapprovingly. <i>\"And the youth these days seems more interested in entertainment and games than in learning the things that made this city strong!\"</i>", parse);
+	Text.AddOutput("<i>“Most of us certainly do. Although there are always certain elements...”</i> He shakes his head disapprovingly. <i>“And the youth these days seems more interested in entertainment and games than in learning the things that made this city strong!”</i>", parse);
 	Text.Newline();
 	Text.AddOutput("You quickly interrupt him before he has a chance to go on a rant about moral degeneration, and ask about the statue's clothing.", parse);
 	Text.Newline();
-	Text.AddOutput("<i>\"Ah, now that is a tale worth telling. You see, it is said that the clothing was actually obtained first, and the statue was made to accommodate it.\"</i>", parse);
+	Text.AddOutput("<i>“Ah, now that is a tale worth telling. You see, it is said that the clothing was actually obtained first, and the statue was made to accommodate it.”</i>", parse);
 	Text.Newline();
-	Text.AddOutput("<i>\"A long long time ago, when the kingdom was first founded and the castle was just being built, there was a great crisis on Eden. There are many tales of what occurred. Some say dragons came through a portal, attacking humans; others that a devastating disease swept the land; yet others that a massive storm buffeted the Great Tree, threatening to tip it over, sending gigantic branches tumbling across the land. Be that as it may, lady Aria visited the world to aid us, for she appeared more often back then.\"</i>", parse);
+	Text.AddOutput("<i>“A long long time ago, when the kingdom was first founded and the castle was just being built, there was a great crisis on Eden. There are many tales of what occurred. Some say dragons came through a portal, attacking humans; others that a devastating disease swept the land; yet others that a massive storm buffeted the Great Tree, threatening to tip it over, sending gigantic branches tumbling across the land. Be that as it may, lady Aria visited the world to aid us, for she appeared more often back then.”</i>", parse);
 	Text.Newline();
-	Text.AddOutput("<i>\"And aid us she did, and then, as she rested, Riorbane the trickster came across her. He told the goddess that he had seen a great evil resting in a cave in the roots of the Great Tree, begging for her aid, for, he said, the need was dire. Unfortunately, she had come to the world in giant stature, and her enormous form could not fit inside the small cave. So, she bid Riorbane face away and await her outside.\"</i>", parse);
+	Text.AddOutput("<i>“And aid us she did, and then, as she rested, Riorbane the trickster came across her. He told the goddess that he had seen a great evil resting in a cave in the roots of the Great Tree, begging for her aid, for, he said, the need was dire. Unfortunately, she had come to the world in giant stature, and her enormous form could not fit inside the small cave. So, she bid Riorbane face away and await her outside.”</i>", parse);
 	Text.Newline();
-	Text.AddOutput("<i>\"She shrank down to a size that could pass inside, but her dress did not shrink, but instead collapsed where it was. As Aria entered the cave, Riorbane snatched up the dress, and carried it off, hiding it securely. When Aria re-emerged, bemused by the lack of anything but a stream in the grotto, he confronted her in her nakedness, and said he would only return the dress if she spent the night with him.\"</i> The old man looks much happier telling the story, than a professed devout follower of Aria really should be.", parse);
+	Text.AddOutput("<i>“She shrank down to a size that could pass inside, but her dress did not shrink, but instead collapsed where it was. As Aria entered the cave, Riorbane snatched up the dress, and carried it off, hiding it securely. When Aria re-emerged, bemused by the lack of anything but a stream in the grotto, he confronted her in her nakedness, and said he would only return the dress if she spent the night with him.”</i> The old man looks much happier telling the story, than a professed devout follower of Aria really should be.", parse);
 	Text.Newline();
-	Text.AddOutput("<i>\"Though lady Aria simply cloaked herself in mist and refused, she was still wroth with him. She told him, ‘Though you may keep my dress if you so wish, all clothing of yours shall be stolen or lost again and again.'\"</i> The old man's imitation of Aria's voice makes you cringe a little. <i>\"Now, Riorbane was none too happy to be denied his lay, though stories tell that he wasn't too upset at the curse that was bestowed upon him. Either way, he found himself in possession the goddess's dress, not knowing what use to put it to.\"</i>", parse);
+	Text.AddOutput("<i>“Though lady Aria simply cloaked herself in mist and refused, she was still wroth with him. She told him, ‘Though you may keep my dress if you so wish, all clothing of yours shall be stolen or lost again and again.'”</i> The old man's imitation of Aria's voice makes you cringe a little. <i>“Now, Riorbane was none too happy to be denied his lay, though stories tell that he wasn't too upset at the curse that was bestowed upon him. Either way, he found himself in possession the goddess's dress, not knowing what use to put it to.”</i>", parse);
 	Text.Newline();
-	Text.AddOutput("<i>\"It was enormous and impervious to not only wear and water, but also shears and knife. In the end, he could do nothing with it, and traded it to his brother, Riordain, gaining a favor he had desired in exchange. With the dress in hand, before his castle, to show respect for the goddess and ask for her blessing in the establishment of the kingdom, Riordain erected a statue for the goddess in her exact likeness, and adorned it in her garment.\"</i> The old man speaks with pride in his voice, and you decide not to disillusion him about how alike the statue is.", parse);
+	Text.AddOutput("<i>“It was enormous and impervious to not only wear and water, but also shears and knife. In the end, he could do nothing with it, and traded it to his brother, Riordain, gaining a favor he had desired in exchange. With the dress in hand, before his castle, to show respect for the goddess and ask for her blessing in the establishment of the kingdom, Riordain erected a statue for the goddess in her exact likeness, and adorned it in her garment.”</i> The old man speaks with pride in his voice, and you decide not to disillusion him about how alike the statue is.", parse);
 	Text.Newline();
-	Text.AddOutput("<i>\"Though it is told that Riorbane had some hand in the statue's construction also, and underneath the garment, it bears far more detail than is needful, if you understand what I mean,\"</i> he adds, a lascivious grin splitting his wizened face.", parse);
+	Text.AddOutput("<i>“Though it is told that Riorbane had some hand in the statue's construction also, and underneath the garment, it bears far more detail than is needful, if you understand what I mean,”</i> he adds, a lascivious grin splitting his wizened face.", parse);
 	Text.Newline();
 	
 	player.AddExp(10);
@@ -301,11 +301,11 @@ Scenes.Rigard.Plaza.StatueInfo = function() {
 		
 		Text.AddOutput("and are about to set off on your way when [name] speaks up.", parse);
 		Text.Newline();
-		Text.AddOutput("<i>\"I hope you do not take that story seriously, [playername]!\"</i> [name] exclaims. <i>\"It is surely just something the humans made up. They probably enchanted the dress, forgot they did it, and then made up this story to explain the whole thing,\"</i> the elf declares, sounding contemptuous.", parse);
+		Text.AddOutput("<i>“I hope you do not take that story seriously, [playername]!”</i> [name] exclaims. <i>“It is surely just something the humans made up. They probably enchanted the dress, forgot they did it, and then made up this story to explain the whole thing,”</i> the elf declares, sounding contemptuous.", parse);
 		Text.Newline();
 		Text.AddOutput("You tell [himher] that the story <i>does</i> sound a little far-fetched. Besides, you ask, did Aria even really come to Eden?", parse);
 		Text.Newline();
-		Text.AddOutput("<i>\"W-well...\"</i> [name] looks slightly embarrassed. <i>\"That part is true enough. I was never told what happened, for it was not in the lore scrolls of my village, but I do know she manifested in this world around the time of the kingdom's founding. The rest is surely made up, however!\"</i> [heshe] hastily adds.", parse);
+		Text.AddOutput("<i>“W-well...”</i> [name] looks slightly embarrassed. <i>“That part is true enough. I was never told what happened, for it was not in the lore scrolls of my village, but I do know she manifested in this world around the time of the kingdom's founding. The rest is surely made up, however!”</i> [heshe] hastily adds.", parse);
 		
 		//[Accept][Tease][Investigate]
 		var options = new Array();
@@ -314,7 +314,7 @@ Scenes.Rigard.Plaza.StatueInfo = function() {
 				Text.Clear();
 				Text.AddOutput("You tell the elf that from what you saw of Aria, the story indeed does not fit very well.", parse);
 				Text.Newline();
-				Text.AddOutput("<i>\"That is so! She would not be tricked so easily by some mortal, and she could just shrink her dress, and...\"</i> The elf goes on for some time about why nothing in the story makes sense. You smile - [heshe] looks quite cute when flustered.", parse);
+				Text.AddOutput("<i>“That is so! She would not be tricked so easily by some mortal, and she could just shrink her dress, and...”</i> The elf goes on for some time about why nothing in the story makes sense. You smile - [heshe] looks quite cute when flustered.", parse);
 				Text.Newline();
 				Text.AddOutput("When [name] stops for breath, you gently interrupt [himher], pointing out that it's time you got going.", parse);
 				//#+nice, +rel
@@ -329,7 +329,7 @@ Scenes.Rigard.Plaza.StatueInfo = function() {
 				Text.Clear();
 				Text.AddOutput("You start telling the elf that the story does sound quite implausible, and as [heshe] starts nodding, you add how implausible it is that Aria would refuse to sleep with Riorbane. Despite your best efforts, you can't quite suppress your laughter, as [name]'s expression goes from open-mouthed astonishment, to red-faced embarrassment, to obvious consternation. [HisHer] mouth tries to start moving again and again, but no words come out for a good half minute.", parse);
 				Text.Newline();
-				Text.AddOutput("<i>\"T-the goddess is not as obsessed with sex as some people I know!\"</i> [heshe] finally manages, and stalks off, with you following, still grinning with mirth.", parse);
+				Text.AddOutput("<i>“T-the goddess is not as obsessed with sex as some people I know!”</i> [heshe] finally manages, and stalks off, with you following, still grinning with mirth.", parse);
 				//#+naughty
 				kiakai.subDom.DecreaseStat(-100, 2);
 				Gui.NextPrompt();
@@ -341,7 +341,7 @@ Scenes.Rigard.Plaza.StatueInfo = function() {
 				Text.Clear();
 				Text.AddOutput("You tell the elf that while many elements of the story sound implausible, clearly it does bear some resemblance to reality. Further study will be required to disentangle truth from myth.", parse);
 				Text.Newline();
-				Text.AddOutput("[name] looks thoughtful, mulling over your words. <i>\"You know, you have a point, [playername]. Though I am sure the embarrassing trickery aspect is untrue, there are enough hints in the story that it bears looking into.\"</i> [HeShe] smiles, [hisher] curiosity clearly piqued.", parse);
+				Text.AddOutput("[name] looks thoughtful, mulling over your words. <i>“You know, you have a point, [playername]. Though I am sure the embarrassing trickery aspect is untrue, there are enough hints in the story that it bears looking into.”</i> [HeShe] smiles, [hisher] curiosity clearly piqued.", parse);
 				Text.Newline();
 				Text.AddOutput("You agree that the two of you can look into it when you have the chance, and set off on your way.", parse);
 				//#+1 int, (+rel?)
@@ -431,11 +431,11 @@ Scenes.Rigard.Plaza.LetterDelivery = function() {
 	Text.Clear();
 	Text.AddOutput("You walk around the plaza district, looking around at the many grand residences competing for space around the wide streets. As you're about to walk past [residenceDesc], [nobleDesc] shouts at you from the entrance, waving a small envelope in [shisher] hand.", parse);
 	Text.Newline();
-	Text.AddOutput("<i>\"[BoyGirl]! Deliver this for me!\"</i>", parse);
+	Text.AddOutput("<i>“[BoyGirl]! Deliver this for me!”</i>", parse);
 	Text.Newline();
 	Text.AddOutput("You decide it'd be better not to agitate the haughty noble, and approach [shimher].", parse);
 	Text.Newline();
-	Text.AddOutput("<i>\"Good,\"</i> [sheshe] tells you, <i>\"here's some coin for you trouble.\"</i> [sHeShe] gives you [coin] coins, and tells you the message's destination. <i>\"Now, off you go!\"</i> [sHeShe] waves at you dismissively.", parse);
+	Text.AddOutput("<i>“Good,”</i> [sheshe] tells you, <i>“here's some coin for you trouble.”</i> [sHeShe] gives you [coin] coins, and tells you the message's destination. <i>“Now, off you go!”</i> [sHeShe] waves at you dismissively.", parse);
 	Text.Newline();
 	
 	party.coin += coin;
@@ -470,68 +470,68 @@ Scenes.Rigard.Plaza.LetterDelivery = function() {
 		 
 			var scenes = new EncounterTable();
 			scenes.AddEnc(function() {
-				Text.AddOutput("<i>\"Dear [SirMadam],", parse);
+				Text.AddOutput("<i>“Dear [SirMadam],", parse);
 				Text.Newline();
-				Text.AddOutput("I feel grievously insulted by your allegation of my behavior with that [animal]. Please withdraw these slanderous words at once, and I may yet invite you with me next time! -[letter].[letter].\"</i>", parse);
+				Text.AddOutput("I feel grievously insulted by your allegation of my behavior with that [animal]. Please withdraw these slanderous words at once, and I may yet invite you with me next time! -[letter].[letter].”</i>", parse);
 				sexy = true;
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.AddOutput("<i>\"I am being held prisoner here. They are forcing me to learn to get along with people. Please send help!</i>", parse);
+				Text.AddOutput("<i>“I am being held prisoner here. They are forcing me to learn to get along with people. Please send help!</i>", parse);
 				Text.Newline();
-				Text.AddOutput("<i>-[letter].[letter].\"</i>", parse);
+				Text.AddOutput("<i>-[letter].[letter].”</i>", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.AddOutput("<i>\"I fear they are on to me. Our rendezvous will have to be postponed. Let us try to meet tomorrow at the same place.</i>", parse);
+				Text.AddOutput("<i>“I fear they are on to me. Our rendezvous will have to be postponed. Let us try to meet tomorrow at the same place.</i>", parse);
 				Text.Newline();
-				Text.AddOutput("<i>-[letter].[letter].\"</i>", parse);
+				Text.AddOutput("<i>-[letter].[letter].”</i>", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
 				Text.AddOutput("The letter is written in a barely legible hand, but you manage to make it out:", parse);
 				Text.Newline();
-				Text.AddOutput("<i>\"I hope ur asociates wil consider me for publicaton. I'll snd my manucrpit alng directli. It is qute heavi.</i>", parse);
+				Text.AddOutput("<i>“I hope ur asociates wil consider me for publicaton. I'll snd my manucrpit alng directli. It is qute heavi.</i>", parse);
 				Text.Newline();
-				Text.AddOutput("<i>-[letter].[letter].\"</i>", parse);
+				Text.AddOutput("<i>-[letter].[letter].”</i>", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.AddOutput("<i>\"Why do you torment me so? You know I cannot visit you, so at least grace this tortured soul with a response.</i>", parse);
+				Text.AddOutput("<i>“Why do you torment me so? You know I cannot visit you, so at least grace this tortured soul with a response.</i>", parse);
 				Text.Newline();
-				Text.AddOutput("<i>-[letter].\"</i>", parse);
+				Text.AddOutput("<i>-[letter].”</i>", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.AddOutput("<i>\"Hello [SirMadam],</i>", parse);
+				Text.AddOutput("<i>“Hello [SirMadam],</i>", parse);
 				Text.Newline();
-				Text.AddOutput("<i>I am considering starting a business helping people write letters. If you would like to help come up with stock letters to send, please contact Alder at your earliest convenience.\"</i>", parse);
+				Text.AddOutput("<i>I am considering starting a business helping people write letters. If you would like to help come up with stock letters to send, please contact Alder at your earliest convenience.”</i>", parse);
 				Text.Newline();
 				Text.AddOutput("The letter is oddly unsigned.", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.AddOutput("<i>\"Hi, slut, [sDaddyMommy]'s expecting you, [shisher] [sCockPussy] drooling, waiting for your tongue. Come soon or I'll have to punish you.</i>", parse);
+				Text.AddOutput("<i>“Hi, slut, [sDaddyMommy]'s expecting you, [shisher] [sCockPussy] drooling, waiting for your tongue. Come soon or I'll have to punish you.</i>", parse);
 				Text.Newline();
-				Text.AddOutput("<i>XOXO, [letter].\"</i>", parse);
+				Text.AddOutput("<i>XOXO, [letter].”</i>", parse);
 				sexy = true;
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.AddOutput("<i>\"I have heard rumors that your son wishes to challenge that Lei man. I would advise you to stop him to avoid humiliation. -[letter].[letter].\"</i>", parse);
+				Text.AddOutput("<i>“I have heard rumors that your son wishes to challenge that Lei man. I would advise you to stop him to avoid humiliation. -[letter].[letter].”</i>", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.AddOutput("<i>\"Meet me at the Lady's Blessing tonight. Their musicians are excellent, and I've rented a room upstairs. -[letter].\"</i>", parse);
+				Text.AddOutput("<i>“Meet me at the Lady's Blessing tonight. Their musicians are excellent, and I've rented a room upstairs. -[letter].”</i>", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.AddOutput("<i>\"I have found companionship at the Shadow Lady. Come join me tonight, I am sure you will also grow to love how pleasurable it is. -[letter].[letter].\"</i>", parse);
+				Text.AddOutput("<i>“I have found companionship at the Shadow Lady. Come join me tonight, I am sure you will also grow to love how pleasurable it is. -[letter].[letter].”</i>", parse);
 				sexy = true;
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.AddOutput("<i>\"Cannot make it to the party this night. Cancel the order we previously discussed. -[letter].[letter].\"</i>", parse);
+				Text.AddOutput("<i>“Cannot make it to the party this night. Cancel the order we previously discussed. -[letter].[letter].”</i>", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
 				Text.AddOutput("The note seems to be some written in some sort of code. You are unable to decipher it. Crafty.", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.AddOutput("<i>\"Yesterday is still a blur... you are as skilled as ever. - love, [letter].\"</i>", parse);
+				Text.AddOutput("<i>“Yesterday is still a blur... you are as skilled as ever. - love, [letter].”</i>", parse);
 				sexy = true;
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.AddOutput("<i>\"Cannot stand to be apart from you for any longer, return quickly! -[letter].[letter].\"</i>", parse);
+				Text.AddOutput("<i>“Cannot stand to be apart from you for any longer, return quickly! -[letter].[letter].”</i>", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
 				// Recipient
@@ -543,11 +543,11 @@ Scenes.Rigard.Plaza.LetterDelivery = function() {
 					parse["lordLady"]    = "lady";
 					parse["Lhisher"]    = "her";
 				}
-				Text.AddOutput("<i>\"Did you hear about that [lordLady] who was found with [Lhisher] servants the other night? Such debauchery... -[letter].[letter].\"</i>", parse);
+				Text.AddOutput("<i>“Did you hear about that [lordLady] who was found with [Lhisher] servants the other night? Such debauchery... -[letter].[letter].”</i>", parse);
 				sexy = true;
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.AddOutput("<i>\"You. Me. A bottle of the finest wine. Tonight under the stars in our usual spot. -love, [letter].[letter].\"</i>", parse);
+				Text.AddOutput("<i>“You. Me. A bottle of the finest wine. Tonight under the stars in our usual spot. -love, [letter].[letter].”</i>", parse);
 				sexy = true;
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
@@ -560,21 +560,21 @@ Scenes.Rigard.Plaza.LetterDelivery = function() {
 					parse["Sboygirl"]    = "girl";
 					parse["Shimher"]    = "her";
 				}
-				Text.AddOutput("<i>\"The servant [Sboygirl] suspects. We may have to deal with [Shimher]. -[letter].[letter].\"</i>", parse);
+				Text.AddOutput("<i>“The servant [Sboygirl] suspects. We may have to deal with [Shimher]. -[letter].[letter].”</i>", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.AddOutput("<i>\"Would you believe those royal guards? Paid the usual amount this month, yet they start snooping around the warehouse! Move the stock to a safe location as quickly as possible, or I fear we may be found out. -X\"</i>", parse);
+				Text.AddOutput("<i>“Would you believe those royal guards? Paid the usual amount this month, yet they start snooping around the warehouse! Move the stock to a safe location as quickly as possible, or I fear we may be found out. -X”</i>", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.AddOutput("<i>\"The stars are aligning in a peculiar pattern. Had word from the mother superior the other day. She says that strange things are afoot. We might have to leave for another expedition. -[letter].[letter].\"</i>", parse);
+				Text.AddOutput("<i>“The stars are aligning in a peculiar pattern. Had word from the mother superior the other day. She says that strange things are afoot. We might have to leave for another expedition. -[letter].[letter].”</i>", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
 				parse["boygirl"] = Math.random() < 0.3 ? "boy" : "girl";
-				Text.AddOutput("<i>\"Did you see the new [boygirl] at the Shadow Lady? Was a while since we had a [race]-morph... What say you we split the price, for old times' sake? -[letter].\"</i>", parse);
+				Text.AddOutput("<i>“Did you see the new [boygirl] at the Shadow Lady? Was a while since we had a [race]-morph... What say you we split the price, for old times' sake? -[letter].”</i>", parse);
 				sexy = true;
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.AddOutput("<i>\"Candles. Leather straps. Whip (the big one!). Two fathoms of rope. Thirty gallons of syrup.\"</i>", parse);
+				Text.AddOutput("<i>“Candles. Leather straps. Whip (the big one!). Two fathoms of rope. Thirty gallons of syrup.”</i>", parse);
 				Text.Newline();
 				Text.AddOutput("If it is a shopping list, it is certainly a rather odd one...", parse);
 				sexy = true;
@@ -588,7 +588,7 @@ Scenes.Rigard.Plaza.LetterDelivery = function() {
 			
 			Text.Newline();
 			if(party.InParty(kiakai) && sexy) {
-				Text.AddOutput("[name] leans over and reads the note along with you, curiously. As [hisher] eyes scan the lines, you see a deep crimson spread through [hisher] cheeks. <i>\"O-oh!\"</i> [heshe] exclaims, and turns away, biting [hisher] lower lip.", parse);
+				Text.AddOutput("[name] leans over and reads the note along with you, curiously. As [hisher] eyes scan the lines, you see a deep crimson spread through [hisher] cheeks. <i>“O-oh!”</i> [heshe] exclaims, and turns away, biting [hisher] lower lip.", parse);
 				Text.Newline();
 			}
 			Text.AddOutput("You [playerReaction], and crumple the paper into a little ball before tossing it away. Oh well, it wasn't very important anyway.", parse);

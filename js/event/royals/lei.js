@@ -279,7 +279,7 @@ Scenes.Lei.InnPrompt = function() {
 		if(playerLevel < Lei.PartyStrength.LEVEL_WEAK && strongestLevel >= Lei.PartyStrength.LEVEL_STRONG) {
 			parse["heshe"] = strongestMember.heshe();
 			parse["name"] = strongestMember.name;
-			Text.Add("The stranger seems to hesitate before finally deciding. <i>\"Very well, you may sit. Not for your sake, but [heshe] appears interesting,\"</i> he says, nodding toward [name].", parse);
+			Text.Add("The stranger seems to hesitate before finally deciding. <i>“Very well, you may sit. Not for your sake, but [heshe] appears interesting,”</i> he says, nodding toward [name].", parse);
 		}
 		else if(playerLevel < Lei.PartyStrength.LEVEL_WEAK && strongestLevel < Lei.PartyStrength.LEVEL_WEAK) {
 			Text.Add("<i>“I have no interest in you,”</i> the man replies, his voice husky, yet flowing. <i>“You should go, I have no patience for the weak.”</i>", parse);
@@ -287,19 +287,19 @@ Scenes.Lei.InnPrompt = function() {
 			Text.Add("You glare at the man. You? Weak? You do get a weird sense of danger just from talking to him, but there’s a reason you’re here. You’re not going to be deterred that easily.", parse);
 		}
 		else if(playerLevel < Lei.PartyStrength.LEVEL_STRONG)
-			Text.Add("<i>\"Very well, you appear to have some potential,\"</i> the man replies, his voice husky, yet flowing. <i>\"You may sit if you like.\"</i>", parse);
+			Text.Add("<i>“Very well, you appear to have some potential,”</i> the man replies, his voice husky, yet flowing. <i>“You may sit if you like.”</i>", parse);
 		else
-			Text.Add("<i>\"You <b>are</b> an interesting one,\"</i> the man replies, almost purring. <i>\"Please, sit.\"</i>", parse);
+			Text.Add("<i>“You <b>are</b> an interesting one,”</i> the man replies, almost purring. <i>“Please, sit.”</i>", parse);
 		Text.NL();
 		if(party.Alone())
 			Text.Add("You pull up a chair and sit down across from the stranger.", parse);
 		else
 			Text.Add("There's barely enough space at the man's table for you to pull up a single chair across from him, so you tell your party to sit down at a table a few paces away while you talk with the stranger.", parse);
 		Text.NL();
-		Text.Add("<i>\"There is no need to sit so far from me,\"</i> he tells you, indicating a spot beside him at the small table. Your eyebrows shoot up in surprise. <i>\"You're blocking my view,\"</i> he clarifies.", parse);
+		Text.Add("<i>“There is no need to sit so far from me,”</i> he tells you, indicating a spot beside him at the small table. Your eyebrows shoot up in surprise. <i>“You're blocking my view,”</i> he clarifies.", parse);
 		Text.NL();
 		if(playerLevel >= Lei.PartyStrength.LEVEL_STRONG) {
-			Text.Add("You scoot over, the stranger's eyes fixed on you the whole time. <i>\"Well then, what can I do for you?\"</i> he asks.", parse);
+			Text.Add("You scoot over, the stranger's eyes fixed on you the whole time. <i>“Well then, what can I do for you?”</i> he asks.", parse);
 			Text.NL();
 			Text.Add("Somehow you feel awkward just blurting out your accusation. You decide you should at least start off politely, and ", parse);
 		}
@@ -313,11 +313,11 @@ Scenes.Lei.InnPrompt = function() {
 		parse["s"]   = party.Alone() ? "" : "s";
 		Text.Add("introduce yourself[comp], and tell him you are [adv] of a sort.", parse);
 		Text.NL();
-		Text.Add("<i>\"Adventurer[s]...\"</i> he muses, <i>\"a description given if one has a goal too complicated to say in a few words or too sensitive to divulge. A goal which probably involves violence.\"</i> A slight smile creases his lips.", parse);
+		Text.Add("<i>“Adventurer[s]...”</i> he muses, <i>“a description given if one has a goal too complicated to say in a few words or too sensitive to divulge. A goal which probably involves violence.”</i> A slight smile creases his lips.", parse);
 		Text.NL();
-		Text.Add("<i>\"No matter. I am Lei.\"</i> He pauses, apparently watching for whether the name is familiar to you. ", parse);
+		Text.Add("<i>“No matter. I am Lei.”</i> He pauses, apparently watching for whether the name is familiar to you. ", parse);
 		if(lei.flags["HeardOf"] == 0)
-			Text.Add("<i>\"A simple seeker of strength and fortune. Nothing more. Nothing less.\"</i>", parse);
+			Text.Add("<i>“A simple seeker of strength and fortune. Nothing more. Nothing less.”</i>", parse);
 		// TODO: ELSE (Rumors etc, party members?)
 		Text.NL();
 		Text.Add("Lei’s eloquence is apparently exhausted, so maybe it’s a good time to ask him the things you wanted.", parse);
@@ -355,18 +355,18 @@ Scenes.Lei.InnPrompt = function() {
 				Text.Add("You approach Lei, [comp]but even when you're a few tables away he seems to take no notice of you. When you stand directly before him, he finally looks up.", parse);
 				Text.NL();
 				if(playerLevel < Lei.PartyStrength.LEVEL_STRONG) {
-					Text.Add("<i>\"You're blocking my view again.\"</i>", parse);
+					Text.Add("<i>“You're blocking my view again.”</i>", parse);
 					Text.NL();
 					Text.Add("Your emotions rise a little at his dismissive tone, but you keep yourself under control. Refusing to move, you ", parse);
 				}
 				else {
-					Text.Add("<i>\"I appreciate you coming to see me again,\"</i> he says, smiling slightly, <i>\"but please stop blocking my view.\"</i>", parse);
+					Text.Add("<i>“I appreciate you coming to see me again,”</i> he says, smiling slightly, <i>“but please stop blocking my view.”</i>", parse);
 					Text.NL();
 					Text.Add("You're a little annoyed with him for mentioning trivialities when you have a serious concern, and refuse to move. You ", parse);
 				}
 				Text.Add("tell him that you saw him stalking the man and woman as they exited the inn, and that you want an explanation.", parse);
 				Text.NL();
-				Text.Add("<i>\"No.\"</i> You look at him incredulously. You demand if that's all he's going to say for himself. <i>\"It is,\"</i> he tells you. <i>“Now, unless you intend to force me, please stop blocking my view.”</i>", parse);
+				Text.Add("<i>“No.”</i> You look at him incredulously. You demand if that's all he's going to say for himself. <i>“It is,”</i> he tells you. <i>“Now, unless you intend to force me, please stop blocking my view.”</i>", parse);
 			}
 			
 			Text.Add(" He raises one eyebrow quizzically.", parse);
@@ -382,7 +382,7 @@ Scenes.Lei.InnPrompt = function() {
 						Text.Add("You tell him that you <i>will</i> use force if that's what it's going to take.", parse);
 						Text.NL();
 						if(player.level < Lei.PartyStrength.LEVEL_WEAK) {
-							Text.Add("<i>\"Very well, let's get this over with.\"</i> Lei looks bored, like your challenge has just made him sleepier. <i>\"I warn you, <b>you will lose</b>.\"</i> The last words ring oddly as he speaks them, making the air tremble as if they had the force of an avalanche, instead of being spoken softly as they had been to your ears.", parse);
+							Text.Add("<i>“Very well, let's get this over with.”</i> Lei looks bored, like your challenge has just made him sleepier. <i>“I warn you, <b>you will lose</b>.”</i> The last words ring oddly as he speaks them, making the air tremble as if they had the force of an avalanche, instead of being spoken softly as they had been to your ears.", parse);
 							Text.Flush();
 							
 							//[Fight][Observe]
@@ -402,7 +402,7 @@ Scenes.Lei.InnPrompt = function() {
 									Text.Clear();
 									Text.Add("You decide that perhaps discretion is the better part of valor after all. Your cheeks flushing with shame, you tell him that you will bow to his judgement in this, and decline to fight him after all.", parse);
 									Text.NL();
-									Text.Add("He pauses for a moment, before deciding. <i>\"That is wise. The weak live longest when they are cowardly.\"</i>", parse);
+									Text.Add("He pauses for a moment, before deciding. <i>“That is wise. The weak live longest when they are cowardly.”</i>", parse);
 									Text.NL();
 									Text.Add("You stalk off from him, trying to contain your embarrassment and your fury, and decide that you'll watch him for now and ferret out whatever his secret might be that way.", parse);
 									Text.NL();
@@ -414,12 +414,12 @@ Scenes.Lei.InnPrompt = function() {
 							Gui.SetButtonsFromList(options);
 						}
 						else if(player.level < Lei.PartyStrength.LEVEL_STRONG) {
-							Text.Add("<i>\"It is perhaps not a wise choice that you make, but I could use some light exercise while I wait.\"</i> You grit your teeth at his flippant words and resolve that you'll make him tell you everything that you want to know.", parse);
+							Text.Add("<i>“It is perhaps not a wise choice that you make, but I could use some light exercise while I wait.”</i> You grit your teeth at his flippant words and resolve that you'll make him tell you everything that you want to know.", parse);
 							Text.NL();
 							Scenes.Lei.BarFight();
 						}
 						else {
-							Text.Add("Lei's eyes seem to light up as you challenge him, and you see a smile spread over his shadowed face. <i>\"Yes, this should be interesting.\"</i> He seems downright excited. You're not sure he even cares what the fight is about.", parse);
+							Text.Add("Lei's eyes seem to light up as you challenge him, and you see a smile spread over his shadowed face. <i>“Yes, this should be interesting.”</i> He seems downright excited. You're not sure he even cares what the fight is about.", parse);
 							Text.NL();
 							Scenes.Lei.BarFight();
 						}
@@ -431,7 +431,7 @@ Scenes.Lei.InnPrompt = function() {
 						Text.Clear();
 						Text.Add("You recall that one of the things Lei said he valued was money, so you swallow your pride and offer to pay him for an explanation.", parse);
 						Text.NL();
-						Text.Add("<i>\"How unexpected,\"</i> he remarks. <i>\"Very well, I will accept four hundred coins in exchange for an explanation that will resolve your concerns regarding the couple one way or the other.\"</i>", parse);
+						Text.Add("<i>“How unexpected,”</i> he remarks. <i>“Very well, I will accept four hundred coins in exchange for an explanation that will resolve your concerns regarding the couple one way or the other.”</i>", parse);
 						Text.Flush();
 						
 						//[Pay][Nevermind][Observe]
@@ -511,11 +511,11 @@ Scenes.Lei.ExplanationMain = function() {
 	
 	Text.Clear();
 	
-	Text.Add("<i>\"Ask what you will,\"</i> Lei tells you.", parse);
+	Text.Add("<i>“Ask what you will,”</i> Lei tells you.", parse);
 	Text.NL();
 	Text.Add("Deciding to get right to the point, you ask him why he was following the couple when they left the inner district.", parse);
 	Text.NL();
-	Text.Add("<i>\"I am their bodyguard,\"</i> he answers simply. <i>\"And, I suppose, their... chaperone.\"</i>", parse);
+	Text.Add("<i>“I am their bodyguard,”</i> he answers simply. <i>“And, I suppose, their... chaperone.”</i>", parse);
 	Text.NL();
 	Text.Add("You nod at his explanation. It does sort of make sense, and ", parse);
 	if(lei.flags["HeardOf"] == 0) {
@@ -530,17 +530,17 @@ Scenes.Lei.ExplanationMain = function() {
 	Text.NL();
 	Text.Add("You ask why he was following so far away from them then.", parse);
 	Text.NL();
-	Text.Add("<i>\"That much distance is not a problem for me,\"</i> he says", parse);
+	Text.Add("<i>“That much distance is not a problem for me,”</i> he says", parse);
 	if(lei.flags["Fought"] != Lei.Fight.No)
 		Text.Add(", and having fought him, you have no trouble believing that.", parse);
 	else
 		Text.Add(".", parse);
-	Text.Add(" <i>\"They wished for discretion, and apparently they think I stand out.\"</i> He gestured over his sculpted, vaguely menacing figure, and the large sword he always has with him, as if he can’t understand why anyone would believe that.", parse);
+	Text.Add(" <i>“They wished for discretion, and apparently they think I stand out.”</i> He gestured over his sculpted, vaguely menacing figure, and the large sword he always has with him, as if he can’t understand why anyone would believe that.", parse);
 	Text.NL();
 	Text.Add("You ask him who they are, anyway.", parse);
 	Text.NL();
 	parse["paid"] = (lei.flags["Fought"] == Lei.Fight.No) ? "paid enough" : "fought a hard enough bout";
-	Text.Add("<i>\"You have not [paid] for that answer. If you wish to know, you might try asking them when they come down.\"</i> Saying that, Lei turns away from you, his explanation apparently concluded, and resumes his watch over the tavern.", parse);
+	Text.Add("<i>“You have not [paid] for that answer. If you wish to know, you might try asking them when they come down.”</i> Saying that, Lei turns away from you, his explanation apparently concluded, and resumes his watch over the tavern.", parse);
 	Text.NL();
 	Text.Add("You decide you’re not going to get any more out of him, and leave him to his duty, wondering at his vigilance in this high class area of the city. You’re both relieved and a little disappointed that the couple was safe all along. It seems like you won’t have the chance to do them an easy favor, but perhaps they could still assist you.", parse);
 	Text.NL();
@@ -568,9 +568,9 @@ Scenes.Lei.ExplanationMain = function() {
 			
 			// TODO: Twins relationship ++
 			
-			Text.Add("<i>\"Oh, I see, I see!\"</i> the man exclaims, his voice light and melodious. <i>\"So now you're really curious who would have someone like Lei for a guard.\"</i> He pauses for a few moments, thinking, tapping his finger against his lips cutely. Now probably wouldn’t be the best time to say that you actually just wanted to see if they could get you into the castle grounds. <i>\"Well, I can't very well just tell you when Lei got <b>his</b> price from you.\"</i>", parse);
+			Text.Add("<i>“Oh, I see, I see!”</i> the man exclaims, his voice light and melodious. <i>“So now you're really curious who would have someone like Lei for a guard.”</i> He pauses for a few moments, thinking, tapping his finger against his lips cutely. Now probably wouldn’t be the best time to say that you actually just wanted to see if they could get you into the castle grounds. <i>“Well, I can't very well just tell you when Lei got <b>his</b> price from you.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>\"Tell you what, prove that you're worthy of trust, and we'll tell you who we are. And maybe we'll have a few small jobs for you afterward, and, of course, we are always happy to recompense someone who helps us... whether with money, or-\"</i> he gives his companion's rump a playful squeeze, and she lets out a squeal, <i>\"-favors.\"</i>", parse);
+			Text.Add("<i>“Tell you what, prove that you're worthy of trust, and we'll tell you who we are. And maybe we'll have a few small jobs for you afterward, and, of course, we are always happy to recompense someone who helps us... whether with money, or-”</i> he gives his companion's rump a playful squeeze, and she lets out a squeal, <i>“-favors.”</i>", parse);
 			Text.NL();
 			Text.Add("You have to admit that that sounds intriguing, and ask if one of the favors could include getting into the Castle Grounds past the royal guards.", parse);
 			Text.NL();
@@ -654,15 +654,15 @@ Scenes.Lei.ObserveMain = function(first) {
 	Text.NL();
 	Text.Add("As you round the corner, you find yourself face to face with the red-haired pair, who examine you quizzically, Lei leaning against the building wall a few steps behind them.", parse);
 	Text.NL();
-	Text.Add("<i>\"You went to so much trouble to follow us,\"</i> the man addresses you, his voice light and melodious, almost stirring desire within you despite the innocuous words, <i>\"so what is it that you'd like?\"</i> You see his left hand rubbing slowly over his companion's rear, and he grins at you mischievously.", parse);
+	Text.Add("<i>“You went to so much trouble to follow us,”</i> the man addresses you, his voice light and melodious, almost stirring desire within you despite the innocuous words, <i>“so what is it that you'd like?”</i> You see his left hand rubbing slowly over his companion's rear, and he grins at you mischievously.", parse);
 	Text.NL();
 	Text.Add("You glance away awkwardly, and explain that you saw Lei following them and wanted to make sure they were safe. With Lei leaning calmly against the wall, the explanation sounds a little lame, even to your ears.", parse);
 	Text.NL();
-	Text.Add("<i>\"So noble of you! But, well, as you can see, Lei is actually quite tame.\"</i> He grins at you, though you have trouble imagining the menacing shadow of Lei behind him being ‘tame'.", parse);
+	Text.Add("<i>“So noble of you! But, well, as you can see, Lei is actually quite tame.”</i> He grins at you, though you have trouble imagining the menacing shadow of Lei behind him being ‘tame'.", parse);
 	Text.NL();
 	Text.Add("You mutter some excuse for bothering them, wondering if you can really ask about getting into the castle grounds like this, but he interrupts you. <i>“Don’t worry, that’s quite alright, nobility, after all, is a virtue.”</i> He pauses for a moment, biting his lower lip, which looks oddly attractive with his somewhat feminine features, before deciding.", parse);
 	Text.NL();
-	Text.Add("<i>\"In fact, we could use someone trustworthy to help us out, my lover and I.\"</i> At the word ‘lover' he gives a firm squeeze to his companions buttocks, and she lets out a cute squeal. <i>\"Tell you what, do us a small favor to prove that you are reliable as well as noble, and we will have some real work for you. And, of course, whenever you help us out, we'll be happy to compensate with money, or if you like, favors.\"</i> His lewd smile on the word ‘favors' leaves you with little doubt just what kind he has in mind.", parse);
+	Text.Add("<i>“In fact, we could use someone trustworthy to help us out, my lover and I.”</i> At the word ‘lover' he gives a firm squeeze to his companions buttocks, and she lets out a cute squeal. <i>“Tell you what, do us a small favor to prove that you are reliable as well as noble, and we will have some real work for you. And, of course, whenever you help us out, we'll be happy to compensate with money, or if you like, favors.”</i> His lewd smile on the word ‘favors' leaves you with little doubt just what kind he has in mind.", parse);
 	Text.NL();
 	Text.Add("Despite his poor clothes and lecherous behavior, the man still has the bearing of a king - an incongruous contrast. You hesitantly ask him if one of the favors might include a pass into the castle grounds.", parse);
 	Text.NL();
@@ -681,9 +681,9 @@ Scenes.Lei.RequestMain = function() {
 		
 	};
 	
-	Text.Add("<i>\"Well, we have this fencing tutor, you see. Lord Krawitz is his name, and he's always been a pompous old goat, but lately he's become simply intolerable. Just the other day my... ah, lover,\"</i> he says, correcting himself at the last moment, <i>\"asked him what the proper response to a Metrind parry was, and he launched into a half hour rant about how the proper response to everything was focus. That fencing is an art of the mind, not simple patterns of the body.\"</i> He waves his hands in disgust and dismissal.", parse);
+	Text.Add("<i>“Well, we have this fencing tutor, you see. Lord Krawitz is his name, and he's always been a pompous old goat, but lately he's become simply intolerable. Just the other day my... ah, lover,”</i> he says, correcting himself at the last moment, <i>“asked him what the proper response to a Metrind parry was, and he launched into a half hour rant about how the proper response to everything was focus. That fencing is an art of the mind, not simple patterns of the body.”</i> He waves his hands in disgust and dismissal.", parse);
 	Text.NL();
-	Text.Add("<i>\"Unfortunately, we can't tell the stuck-up jackass what we think of him to his face, so, I'd like you to get us a little payback for all the annoyance he's caused us over the years. Nothing drastic mind you, but I want him to suffer.\"</i> The man's grin looks a little scary as he says this. <i>\"To be humiliated publicly, shamed, have his reputation destroyed, that sort of thing.\"</i> At his side, his companion seems to smile shyly and give a slight nod at the idea.", parse);
+	Text.Add("<i>“Unfortunately, we can't tell the stuck-up jackass what we think of him to his face, so, I'd like you to get us a little payback for all the annoyance he's caused us over the years. Nothing drastic mind you, but I want him to suffer.”</i> The man's grin looks a little scary as he says this. <i>“To be humiliated publicly, shamed, have his reputation destroyed, that sort of thing.”</i> At his side, his companion seems to smile shyly and give a slight nod at the idea.", parse);
 	Text.NL();
 	Text.Add("You say that you'll think about it, although it might take you some time to figure out what to do.", parse);
 	Text.NL();
@@ -702,11 +702,11 @@ Scenes.Lei.RequestMain = function() {
 					Text.Clear();
 					Text.Add("You ask just what makes Krawitz so annoying.", parse);
 					Text.NL();
-					Text.Add("The red-haired man lets out a moan of disgust. <i>\"Just about everything. Let's see, he thinks he's important because...\"</i> he hesitates, <i>\"of various reasons. But he's really not, so he just comes off as supremely arrogant. He's long-winded, boring, and a hardcore human purist to boot.\"</i>", parse);
+					Text.Add("The red-haired man lets out a moan of disgust. <i>“Just about everything. Let's see, he thinks he's important because...”</i> he hesitates, <i>“of various reasons. But he's really not, so he just comes off as supremely arrogant. He's long-winded, boring, and a hardcore human purist to boot.”</i>", parse);
 					Text.NL();
 					Text.Add("You ask what he means by human purist.", parse);
 					Text.NL();
-					Text.Add("<i>\"He hates morphs. Thinks they shouldn't be allowed within five meters of standard humans, and sometimes goes on rants on how they should be thrown out of the city outright. Oh, don't think that stops him from having a full staff of morph servants, though. He's too much of a cheapskate to actually pay for pure humans, no matter what he claims his beliefs are.\"</i>", parse);
+					Text.Add("<i>“He hates morphs. Thinks they shouldn't be allowed within five meters of standard humans, and sometimes goes on rants on how they should be thrown out of the city outright. Oh, don't think that stops him from having a full staff of morph servants, though. He's too much of a cheapskate to actually pay for pure humans, no matter what he claims his beliefs are.”</i>", parse);
 					Text.NL();
 					Text.Add("You nod at the explanation and wonder if that could be used to your advantage somehow.", parse);
 					Text.Flush();
@@ -723,7 +723,7 @@ Scenes.Lei.RequestMain = function() {
 					Text.Clear();
 					Text.Add("You can't help but notice the ‘Lord' part of Krawitz's monicker, and ask if it's really okay for you to offend someone like that.", parse);
 					Text.NL();
-					Text.Add("<i>\"Don't worry about it,\"</i> the man tells you. <i>\"He might be a lord, but his only major property is a house in the plaza district. He has no real power to speak of, although I think he deludes himself into thinking he does. Most of the other nobles laugh at him behind his back. If anything, you'll probably end up winning friends in the upper classes.\"</i>", parse);
+					Text.Add("<i>“Don't worry about it,”</i> the man tells you. <i>“He might be a lord, but his only major property is a house in the plaza district. He has no real power to speak of, although I think he deludes himself into thinking he does. Most of the other nobles laugh at him behind his back. If anything, you'll probably end up winning friends in the upper classes.”</i>", parse);
 					Text.NL();
 					Text.Add("You wonder who the pair is that they are so well acquainted with the ways of the upper classes, but decide to focus on your task for now.", parse);
 					Text.Flush();
@@ -741,7 +741,7 @@ Scenes.Lei.RequestMain = function() {
 				Text.NL();
 				Text.Add("As you're about to head off, Lei approaches you, letting the couple gain a little distance from him.", parse);
 				Text.NL();
-				Text.Add("<i>\"If you would like some advice on this, visit me at the Lady's Blessing later,\"</i> he tells you, before turning around and following after his charges.", parse);
+				Text.Add("<i>“If you would like some advice on this, visit me at the Lady's Blessing later,”</i> he tells you, before turning around and following after his charges.", parse);
 				Text.NL();
 				Text.Add("You briefly wonder if he actually likes you before going on your way.", parse);
 				Text.Flush();
@@ -782,7 +782,7 @@ Scenes.Lei.InnFirstPrompt = function() {
 				Text.Clear();
 				Text.Add("You tell Lei that you have business in the castle, and wonder if he knows how one would get inside.", parse);
 				Text.NL();
-				Text.Add("<i>\"One must be invited to gain entrance.\"</i> He glances at you, clearly doubtful that you would receive such an invitation. <i>\"And not by me. You might try to come to the attention of some royal personage, or of a major noble. Or, I suppose, you could try to gain favor with the guards themselves, so that they permit you entry on trust and respect. There might be some other, more hidden, paths as well, but I am unfamiliar with them.\"</i>", parse);
+				Text.Add("<i>“One must be invited to gain entrance.”</i> He glances at you, clearly doubtful that you would receive such an invitation. <i>“And not by me. You might try to come to the attention of some royal personage, or of a major noble. Or, I suppose, you could try to gain favor with the guards themselves, so that they permit you entry on trust and respect. There might be some other, more hidden, paths as well, but I am unfamiliar with them.”</i>", parse);
 				Text.NL();
 				Text.Add("Although that wasn't very useful, you still thank him for the information.", parse);
 				Text.NL();
@@ -800,9 +800,9 @@ Scenes.Lei.InnFirstPrompt = function() {
 				Text.Add("He seems quite strong, and although you don't know much about him, it wouldn't hurt to test the waters. You ask him if he'll accompany you on your travels.", parse);
 				
 				if(player.level >= Lei.PartyStrength.LEVEL_STRONG)
-					Text.Add("He looks at you with apparent interest. <i>\"Perhaps... There is a chance that I may be interested in travelling with you. Unfortunately, just now I am preoccupied with other duties,\"</i> he tells you, sounding genuinely regretful. <i>\"Come and ask me again some time, and we will discuss it if you like.\"</i>", parse);
+					Text.Add("He looks at you with apparent interest. <i>“Perhaps... There is a chance that I may be interested in travelling with you. Unfortunately, just now I am preoccupied with other duties,”</i> he tells you, sounding genuinely regretful. <i>“Come and ask me again some time, and we will discuss it if you like.”</i>", parse);
 				else
-					Text.Add("<i>\"As I said,\"</i> he tells you, sounding bored, <i>\"I am interested in but two things. Fortune and strength. I am not sure which it is that you think you can offer me.\"</i> He pauses, looking you over again. <i>\"Well, I do see some spark of potential within you,\"</i> he continues, his tone softening. <i>\"Perhaps we can speak of this again some other time. For now, I am preoccupied with other duties.\"</i>", parse);
+					Text.Add("<i>“As I said,”</i> he tells you, sounding bored, <i>“I am interested in but two things. Fortune and strength. I am not sure which it is that you think you can offer me.”</i> He pauses, looking you over again. <i>“Well, I do see some spark of potential within you,”</i> he continues, his tone softening. <i>“Perhaps we can speak of this again some other time. For now, I am preoccupied with other duties.”</i>", parse);
 				Text.NL();
 				Text.Add("You have no choice but to accept his refusal for now, and resolve to ask him again when you next meet him.", parse);
 				Text.NL();
@@ -882,14 +882,14 @@ Scenes.Lei.BarFight = function() {
 
 	Text.Add("You follow him outside the tavern and step out into the [temperature] [time]. He walks on a little up the street away from the tavern's entrance and he turns around to face you.", parse);
 	Text.NL();
-	Text.Add("<i>\"Since it is a small thing you ask, it will be but a small fight. My sword will remain sheathed, and you need only prove your mettle to persuade me, not defeat me outright.\"</i>", parse);
+	Text.Add("<i>“Since it is a small thing you ask, it will be but a small fight. My sword will remain sheathed, and you need only prove your mettle to persuade me, not defeat me outright.”</i>", parse);
 	Text.NL();
 	Text.Add("You nod at his concession, though a part of you wishes you could fight the arrogant man fully, and prepare yourself.", parse);
 	Text.NL();
 	if(party.Alone())
-		Text.Add("<i>\"Now, come at me!\"</i>", parse);
+		Text.Add("<i>“Now, come at me!”</i>", parse);
 	else
-		Text.Add("<i>\"Now, all of you come at me together!\"</i>", parse);
+		Text.Add("<i>“Now, all of you come at me together!”</i>", parse);
 	Text.Flush();
 	
  	var enemy = new Party();
@@ -912,7 +912,7 @@ Scenes.Lei.BarFight = function() {
 		
 		Text.Clear();
 		if(downed) {
-			Text.Add("<i>\"You challenge me and then you give up? Pathetic.\"</i> Throwing the word at you like a verdict, Lei stalks off, returning to the tavern.", parse);
+			Text.Add("<i>“You challenge me and then you give up? Pathetic.”</i> Throwing the word at you like a verdict, Lei stalks off, returning to the tavern.", parse);
 			Text.Flush();
 			lei.flags["Fought"] = Lei.Fight.Submission;
 			lei.relation.DecreaseStat(-100, 5);
@@ -925,7 +925,7 @@ Scenes.Lei.BarFight = function() {
 			parse["comp"]  = party.Two()    ? " and " + party.Get(1).name : 
 			                 !party.Alone() ? " and your companions" :
 			                 "";
-			Text.Add("Lei steps back from you and raises his hand. <i>\"That is enough - I have no wish to kill [anyof]you. You have lost.\"</i>", parse);
+			Text.Add("Lei steps back from you and raises his hand. <i>“That is enough - I have no wish to kill [anyof]you. You have lost.”</i>", parse);
 			Text.NL();
 			Text.Add("As you[comp] are catching your breath[s], he turns to leave without saying anything further. You feel a bitter taste in your mouth, and it is not the blood from the blows he dealt you. Starting after him, you resolve that you <i>will</i> find out what the man is up to.", parse);
 			Text.Flush();
@@ -948,7 +948,7 @@ Scenes.Lei.BarFight = function() {
 					Text.Clear();
 					Text.Add("You charge after Lei, aiming to land a telling blow while his back is turned. Somehow, as you're a step behind him, and start your lunge, he simultaneously slips to the side, without turning, making it look like you were aiming at air. You stumble and get to your feet, glaring at him.", parse);
 					Text.NL();
-					Text.Add("<i>\"I say to you once,\"</i> Lei says, sounding oddly formal, <i>\"the fight is over. Desist.\"</i>", parse);
+					Text.Add("<i>“I say to you once,”</i> Lei says, sounding oddly formal, <i>“the fight is over. Desist.”</i>", parse);
 					Text.NL();
 					Text.Add("You glare at him, anger boiling up at the man.", parse);
 					Text.Flush();
@@ -964,7 +964,7 @@ Scenes.Lei.BarFight = function() {
 							Text.NL();
 							Text.Add("Rain begins to drizzle from the skies.", parse);
 							Text.NL();
-							Text.Add("<i>\"I say to you twice,\"</i> he intones, <i>\"the fight is over. <b>If your persist, you will die.</b>\"</i> His words ring oddly hollow in the air, sending cold running through your veins.", parse);
+							Text.Add("<i>“I say to you twice,”</i> he intones, <i>“the fight is over. <b>If your persist, you will die.</b>”</i> His words ring oddly hollow in the air, sending cold running through your veins.", parse);
 							Text.Flush();
 							
 							lei.relation.DecreaseStat(-100, 2);
@@ -976,7 +976,7 @@ Scenes.Lei.BarFight = function() {
 									Text.Clear();
 									Text.Add("With a roar of outrage, you charge at Lei once more, your [feetDesc] finding even better purchase than before on the slightly damp cobblestones. Beyond the ability to form any coherent plans, you simply launch yourself at the man from three steps away, intending to simply hurl him down to the ground, and pound his head into the stones.", parse);
 									Text.NL();
-									Text.Add("<i>\"So be it,\"</i> his soft words seem to drift to you mid-jump, making your eyes go wide, your blood turning to ice, and your stomach lurching inside you. For a split moment, clarity seems to return to your thinking, and you wonder what it is you're doing, but you already see Lei drifting aside. He looks slow, languid even, his movements the gradual flow of a gentle stream as both his hands drift towards the hilt of his sword, and your momentum carries you slowly forward through the air.", parse);
+									Text.Add("<i>“So be it,”</i> his soft words seem to drift to you mid-jump, making your eyes go wide, your blood turning to ice, and your stomach lurching inside you. For a split moment, clarity seems to return to your thinking, and you wonder what it is you're doing, but you already see Lei drifting aside. He looks slow, languid even, his movements the gradual flow of a gentle stream as both his hands drift towards the hilt of his sword, and your momentum carries you slowly forward through the air.", parse);
 									Text.NL();
 									Text.Add("Lei's left hand reaches the pommel of his large bastard sword, and reverses course, pulling it upwards, as if it weighs nothing. His right, grips the hilt, accelerating the motion, and already imparting to the blade a soft circular spin before it even leaves the scabbard.", parse);
 									Text.NL();
@@ -984,7 +984,7 @@ Scenes.Lei.BarFight = function() {
 									Text.NL();
 									Text.Add("Momentarily, your vision continues flowing in the same arc, before turning black. You see nothing, hear nothing, as the sensation of an object touching your neck finally reaches your fading mind. There is no time to think anything, and then, for you, there is no time.", parse);
 									Text.NL();
-									Text.Add("<i>\"I say to you thrice,\"</i> Lei speaks, sounding a little sad, <i>\"the fight is over.\"</i> He steps past your body, and walks back towards the tavern.", parse);
+									Text.Add("<i>“I say to you thrice,”</i> Lei speaks, sounding a little sad, <i>“the fight is over.”</i> He steps past your body, and walks back towards the tavern.", parse);
 									Text.NL();
 									
 									if(party.Two())
@@ -1033,7 +1033,7 @@ Scenes.Lei.BarFight = function() {
 		parse["talk"] = player.level < Lei.PartyStrength.LEVEL_STRONG ? "I did not think you had it in you, to be honest. I am impressed," : "You are as strong as I had hoped... maybe stronger,";
 		
 		Text.Clear();
-		Text.Add("<i>\"Mm... that's good enough for now. Wonderful,\"</i> Lei almost purrs, smiling widely at you. <i>\"[talk]\"</i> he says, clearly pleased. <i>\"Some day, we must fight in earnest.\"</i>", parse);
+		Text.Add("<i>“Mm... that's good enough for now. Wonderful,”</i> Lei almost purrs, smiling widely at you. <i>“[talk]”</i> he says, clearly pleased. <i>“Some day, we must fight in earnest.”</i>", parse);
 		Text.NL();
 		Text.Add("He leads you back inside the Lady's Blessing, returning to his habitual table.", parse);
 		Text.Flush();

@@ -201,7 +201,7 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		};
 		
 		Text.Clear();
-		Text.AddOutput("<i>\"Need your elf recalibrated?\"</i>");
+		Text.AddOutput("<i>“Need your elf recalibrated?”</i>");
 		Text.Newline();
 		Text.AddOutput(Text.BoldColor("DEBUG: This is a cheat-shop, where you can modify [name].", parse));
 		Text.Newline();

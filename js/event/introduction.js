@@ -545,7 +545,7 @@ Intro.DemonFight = function() {
 			Text.Newline();
 			Text.AddOutput("<b>WELL, ARE YOU NOT GOING TO CLAIM YOUR PRIZE? TAKE ADVANTAGE OF YOUR FALLEN FOE?</b> Incredulously, you realize that the demon is encouraging you to rape the fallen imps.");
 			Text.Newline();
-			Text.AddOutput("<i>\"D-don't think I am anything like you!\"</i> you snap angrily. With an annoyed flick of his hand, the demon knocks you to the ground, forcing all the air out of your lungs.");
+			Text.AddOutput("<i>“D-don't think I am anything like you!”</i> you snap angrily. With an annoyed flick of his hand, the demon knocks you to the ground, forcing all the air out of your lungs.");
 			
 			Gui.NextPrompt(Intro.DemonAftermath);
 		}
@@ -637,15 +637,15 @@ Intro.UruAppears = function() {
 	Text.AddOutput("A bored yawn from behind snaps you out of your dreary thoughts. A pair of high-heeled boots enters your vision - no, scratch that - a pair of feet with great spines sticking out of them. Feet, you notice, that support a pair of exceedingly well-shaped legs. Moving further up, your eyes feast on the most glorious butt you have ever seen. It is only in hindsight that you realize that the amazing creature in front of you has red-tinted skin and a tail ending in a heart-shaped tip, swaying tantalizingly in front of your nose.");
 	Text.Newline();
 	Text.Say("data/uru.png");
-	Text.AddOutput("<i>\"Who controls this realm, again?\"</i> the female demon purrs with a toss of her long black hair. The 100-foot tall monstrosity towering over the two of you hesitates for a moment, showing a sign of... fear? You have a short moment to register confusion before the succubus releases a jet black beam of energy from her outstretched hand, piercing a wide smoking hole in the surprised demon's chest. It tumbles backward and into the yawning abyss a dozen feet away. Slowly its screams fade, and after a time you hear a distant booming crash, announcing its final meeting with the ground far below.");
+	Text.AddOutput("<i>“Who controls this realm, again?”</i> the female demon purrs with a toss of her long black hair. The 100-foot tall monstrosity towering over the two of you hesitates for a moment, showing a sign of... fear? You have a short moment to register confusion before the succubus releases a jet black beam of energy from her outstretched hand, piercing a wide smoking hole in the surprised demon's chest. It tumbles backward and into the yawning abyss a dozen feet away. Slowly its screams fade, and after a time you hear a distant booming crash, announcing its final meeting with the ground far below.");
 	Text.Newline();
-	Text.AddOutput("<i>\"Now then,\"</i> the succubus declares, as if nothing had happened, <i>\"Who might you be?\"</i> She twirls around and you get a good look at her. Piercing orange eyes gaze down at you from her perfect face, crowned by a pair of long, curved demon horns. Her knockers could knock you flat any day, and her hourglass figure is nothing but exquisite. Your eyes move further down to rest on her...");
+	Text.AddOutput("<i>“Now then,”</i> the succubus declares, as if nothing had happened, <i>“Who might you be?”</i> She twirls around and you get a good look at her. Piercing orange eyes gaze down at you from her perfect face, crowned by a pair of long, curved demon horns. Her knockers could knock you flat any day, and her hourglass figure is nothing but exquisite. Your eyes move further down to rest on her...");
 	Text.Newline();
 	Text.AddOutput("<b>FUCK.</b>");
 	Text.Newline();
 	Text.AddOutput("...Sixteen inch demonic cock, resting just above her cunt. Just your luck.");
 	Text.Newline();
-	Text.AddOutput("<i>\"Well? It is impolite to keep a lady waiting like that you know. Also, it is rude to stare,\"</i> the omnibus quips with a wicked smile.");
+	Text.AddOutput("<i>“Well? It is impolite to keep a lady waiting like that you know. Also, it is rude to stare,”</i> the omnibus quips with a wicked smile.");
 	
 	Gui.NextPrompt(Intro.ChooseName);
 }
@@ -680,7 +680,7 @@ Intro.ChooseName = function() {
 
 Intro.UruSeduce = function() {
 	Text.Clear();
-	Text.AddOutput("<i>\"Ooh, such a pretty name,\"</i> the omnibus coos, <i>\"I am Uru, friendly neighborhood omnibus, at your service.\"</i> She gives you a theatrical little bow, her manhood bobbing up and down in front of you. It is almost hypnotizing.");
+	Text.AddOutput("<i>“Ooh, such a pretty name,”</i> the omnibus coos, <i>“I am Uru, friendly neighborhood omnibus, at your service.”</i> She gives you a theatrical little bow, her manhood bobbing up and down in front of you. It is almost hypnotizing.");
 	
 	Gui.NextPrompt(function() {
 		MoveToLocation(world.loc.DarkAspect.Peak, {minute: 5});
@@ -719,16 +719,16 @@ world.loc.DarkAspect.Peak.events.push(new Link(
 	function() {
 		Text.Clear();
 		
-		Text.AddOutput("<i>\"Uh, thanks,\"</i> you say uncertainly, not sure how to handle a woman who can, apparently, annihilate hundred-foot demons without breaking a sweat. That, and she obviously is a demon herself.");
+		Text.AddOutput("<i>“Uh, thanks,”</i> you say uncertainly, not sure how to handle a woman who can, apparently, annihilate hundred-foot demons without breaking a sweat. That, and she obviously is a demon herself.");
 		Text.Newline();		
 		Text.AddOutput("Uru circles around you, examining you thoroughly, pinching and poking at you, an unfamiliar element. Just when things start to get a bit awkward, she takes a step back to appraise you.");
 		Text.Newline();
-		Text.AddOutput("<i>\"You don't belong here!\"</i> she announces, proud of her discovery, <i>\"What are you and how did you get here?\"</i>");
+		Text.AddOutput("<i>“You don't belong here!”</i> she announces, proud of her discovery, <i>“What are you and how did you get here?”</i>");
 		Text.Newline();
 		
 		Gui.NextPrompt(function() {
 			Text.Clear();
-			Text.AddOutput("You explain about the demon that brought you to this realm. The demon that she just slaughtered. This doesn't seem to be the right thing to say, though, as her mood darkens noticeably. <i>\"You are lying! As if that pathetic worm could bridge the gate between dimensions! Not even I...\"</i> she trails of thoughtfully. <i>\"There must have been something else, what was it?\"</i>");
+			Text.AddOutput("You explain about the demon that brought you to this realm. The demon that she just slaughtered. This doesn't seem to be the right thing to say, though, as her mood darkens noticeably. <i>“You are lying! As if that pathetic worm could bridge the gate between dimensions! Not even I...”</i> she trails of thoughtfully. <i>“There must have been something else, what was it?”</i>");
 			Text.Newline();
 			Text.AddOutput("Do you tell her about the mirror or not? She did kind of save your life back there.");
 			Text.Newline();
@@ -737,7 +737,7 @@ world.loc.DarkAspect.Peak.events.push(new Link(
 			options.push({ nameStr: "Mirror",
 				func : function() {
 					Text.Clear();
-					Text.AddOutput("Thinking back, the thing that sticks to your mind is the mirror you found in the attic. When you mention it, Uru perks up again. <i>\"Yeah, that sounds kind of plausible, a magical artifact, no doubt. Maybe even that runt could have managed it, in that case.\"</i> She purses her lips. <i>\"Actually, it sounds kind of familiar... but enough about that for now, though, I want to know more about you!\"</i>");
+					Text.AddOutput("Thinking back, the thing that sticks to your mind is the mirror you found in the attic. When you mention it, Uru perks up again. <i>“Yeah, that sounds kind of plausible, a magical artifact, no doubt. Maybe even that runt could have managed it, in that case.”</i> She purses her lips. <i>“Actually, it sounds kind of familiar... but enough about that for now, though, I want to know more about you!”</i>");
 					Text.Newline();
 					
 					gameCache.flags.IntroToldUruAboutMirror = 1;
@@ -749,9 +749,9 @@ world.loc.DarkAspect.Peak.events.push(new Link(
 			options.push({ nameStr: "Lie",
 				func : function() {
 					Text.Clear();
-					Text.AddOutput("You are not sure why, but you don't think it would be a good idea to tell her about the mirror or the gem, even if she did save you. Not trusting everyone you come across is probably a healthy attitude when you have been transported to Hell. <i>\"Nothing I can think of,\"</i> you shrug. <i>\"That big demon just appeared out of nowhere and pulled me here.\"</i> She doesn't seem particularly happy about your evasive answer.");
+					Text.AddOutput("You are not sure why, but you don't think it would be a good idea to tell her about the mirror or the gem, even if she did save you. Not trusting everyone you come across is probably a healthy attitude when you have been transported to Hell. <i>“Nothing I can think of,”</i> you shrug. <i>“That big demon just appeared out of nowhere and pulled me here.”</i> She doesn't seem particularly happy about your evasive answer.");
 					Text.Newline();
-					Text.AddOutput("<i>\"You better not be lying, it's impolite to lie!\"</i> Angrily lashing her tail about her, she fumes a bit before announcing that she wants to know more about you, instead.");
+					Text.AddOutput("<i>“You better not be lying, it's impolite to lie!”</i> Angrily lashing her tail about her, she fumes a bit before announcing that she wants to know more about you, instead.");
 					Text.Newline();
 					
 					gameCache.flags.IntroToldUruAboutMirror = 0;
@@ -776,7 +776,7 @@ Intro.UruGift = function() {
 	Text.Newline();
 	Text.AddOutput("It might have something to do with the fact that she killed an enormous demon without any apparent effort.");
 	Text.Newline();
-	Text.AddOutput("You start talking about your hometown, but she stops you after only a few sentences. <i>\"No, no! I don't want to know what you were, I want to know what you will become!\"</i> Perplexed, you ponder the strange question. Does she mean your wishes for the future?");
+	Text.AddOutput("You start talking about your hometown, but she stops you after only a few sentences. <i>“No, no! I don't want to know what you were, I want to know what you will become!”</i> Perplexed, you ponder the strange question. Does she mean your wishes for the future?");
 	
 	//[Power][Love][Peace]
 	var options = new Array();
@@ -811,14 +811,14 @@ Intro.UruConfirmGift = function() {
 	Text.Clear();
 	player.SetLevelBonus();
 	
-	Text.AddOutput("Uru looks at you dubiously. <i>\"You really think you could become someone like that?\"</i> She ponders, <i>\"The way I see it, you were pretty pathetic back there.\"</i>");
+	Text.AddOutput("Uru looks at you dubiously. <i>“You really think you could become someone like that?”</i> She ponders, <i>“The way I see it, you were pretty pathetic back there.”</i>");
 	Text.Newline();
 	if(gameCache.flags.IntroLostToImps != 0) {
-		Text.AddOutput("She giggles, <i>\"Watching you get railed by imps was fun though, it looked like you enjoyed it!\"</i> You blush angrily at that, it's not like you lost on purpose!");
+		Text.AddOutput("She giggles, <i>“Watching you get railed by imps was fun though, it looked like you enjoyed it!”</i> You blush angrily at that, it's not like you lost on purpose!");
 		Text.Newline();
 	}
 	
-	Text.AddOutput("After taking another measure of you again, she slowly shakes her head. <i>\"No, that won't do.\"</i> She reaches forward with her palm. Instinctively, you recoil from her, but her hand whips out faster than you can withdraw. <i>\"Oh, don't be such a child,\"</i> she fusses over you. A wave of pure energy blasts from her hand straight into your skull, shaking your very being.");
+	Text.AddOutput("After taking another measure of you again, she slowly shakes her head. <i>“No, that won't do.”</i> She reaches forward with her palm. Instinctively, you recoil from her, but her hand whips out faster than you can withdraw. <i>“Oh, don't be such a child,”</i> she fusses over you. A wave of pure energy blasts from her hand straight into your skull, shaking your very being.");
 	Text.Newline();
 	Text.AddOutput("You cry out in a wordless scream as you are disintegrated, hot fire burning your body to a cinder... and then she withdraws her hand. Blinking dumbly, you inspect your body. You are perfectly fine, except...");
 	Text.Newline();
@@ -830,7 +830,7 @@ Intro.UruConfirmGift = function() {
 Intro.UruGen = function() {
 	Text.Clear();
 	
-	Text.AddOutput("<i>\"Enough about you, how about me?\"</i> The powerful omnibus arches her back and strikes a seductive pose. <i>\"Tell me, what part of me do you like the most?\"</i> Blushing, you inspect the voluptuous creature in front of you, your body filling with warmth. She looks gorgeous, all of her, from her perfect hourglass shape, to her lush, D-cup breasts, to her rounded buttocks. The sight of her aroused genitalia, both her dripping cunt and her stiffening manhood, makes you shiver in anticipation.");
+	Text.AddOutput("<i>“Enough about you, how about me?”</i> The powerful omnibus arches her back and strikes a seductive pose. <i>“Tell me, what part of me do you like the most?”</i> Blushing, you inspect the voluptuous creature in front of you, your body filling with warmth. She looks gorgeous, all of her, from her perfect hourglass shape, to her lush, D-cup breasts, to her rounded buttocks. The sight of her aroused genitalia, both her dripping cunt and her stiffening manhood, makes you shiver in anticipation.");
 	Text.Newline();
 	Text.AddOutput("Giving praise where praise is due surely can't hurt?");
 	Text.Newline();
@@ -842,9 +842,9 @@ Intro.UruGen = function() {
 	var options = new Array();
 	options.push({ nameStr : "Cock",
 		func : function() {
-			Text.AddOutput("Uru closes in on you, a wicked smile on her face. <i>\"Really now, is that so?\"</i> As you nod, the object of your admiration rises to full mast. It is certainly the biggest one you've ever seen");
+			Text.AddOutput("Uru closes in on you, a wicked smile on her face. <i>“Really now, is that so?”</i> As you nod, the object of your admiration rises to full mast. It is certainly the biggest one you've ever seen");
 			if(player.body.Gender() == Gender.male) Text.AddOutput(", much bigger than your own");
-			Text.AddOutput(". She licks her lips hungrily and gives her shaft a tentative stroke. <i>\"How about putting it to use then?\"</i>");
+			Text.AddOutput(". She licks her lips hungrily and gives her shaft a tentative stroke. <i>“How about putting it to use then?”</i>");
 			Text.Newline();
 			
 			Intro.UruSexChoice();
@@ -853,7 +853,7 @@ Intro.UruGen = function() {
 	});
 	options.push({ nameStr : "Vagina",
 		func : function() {
-			Text.AddOutput("Uru puts one leg on the seat of the throne, letting you get a closer look at her exposed female sex. Her glistening lower lips are a darker shade of red than her skin, but her inner walls are a delicious pink. <i>\"All look and no touch?\"</i> she teases with a naughty smile.");
+			Text.AddOutput("Uru puts one leg on the seat of the throne, letting you get a closer look at her exposed female sex. Her glistening lower lips are a darker shade of red than her skin, but her inner walls are a delicious pink. <i>“All look and no touch?”</i> she teases with a naughty smile.");
 			Text.Newline();
 			
 			Intro.UruSexChoice();
@@ -862,7 +862,7 @@ Intro.UruGen = function() {
 	});
 	options.push({ nameStr : "Ass",
 		func : function() {
-			Text.AddOutput("She chuckles and places a hand on her expansive butt. <i>\"I guess I make a good first impression!\"</i> She turns around with a little twirl and presents her booty to you. Between her legs you can clearly see her dripping sex, or rather, both of them. <i>\"You like what you see?\"</i> she challenges you with a husky voice, <i>\"Why don't you try claiming it?\"</i>");
+			Text.AddOutput("She chuckles and places a hand on her expansive butt. <i>“I guess I make a good first impression!”</i> She turns around with a little twirl and presents her booty to you. Between her legs you can clearly see her dripping sex, or rather, both of them. <i>“You like what you see?”</i> she challenges you with a husky voice, <i>“Why don't you try claiming it?”</i>");
 			Text.Newline();
 			
 			Intro.UruSexChoice();
@@ -871,7 +871,7 @@ Intro.UruGen = function() {
 	});
 	options.push({ nameStr : "Breasts",
 		func : function() {
-			Text.AddOutput("<i>\"Oh, these inconvenient things?\"</i> she asks with an exaggerated sigh that causes her D-cups to bounce in an almost hypnotic manner. Bending forward, she gives you a much closer look. <i>\"Go ahead, you can touch them,\"</i> she murmurs throatily, <i>\"But wouldn't you rather do something more fun?\"</i>");
+			Text.AddOutput("<i>“Oh, these inconvenient things?”</i> she asks with an exaggerated sigh that causes her D-cups to bounce in an almost hypnotic manner. Bending forward, she gives you a much closer look. <i>“Go ahead, you can touch them,”</i> she murmurs throatily, <i>“But wouldn't you rather do something more fun?”</i>");
 			Text.Newline();
 			
 			Intro.UruSexChoice();
@@ -931,7 +931,7 @@ Intro.UruSexChoice = function() {
 Intro.UruGiveClitcock = function() {
 	Text.Clear();
 	
-	Text.AddOutput("<i>\"Heh, don't you lack the equipment for that, honey? No matter, that can easily be fixed...\"</i> Before you have time to protest, the omnibus reaches down between your legs and gives your clit a gentle touch, elicting a gasp from you. A sudden wave of pleasure fills your body and causes you to cry out and almost making you black out. Dizzied, you gasp as your gaze fall between your legs on your new equipment.");
+	Text.AddOutput("<i>“Heh, don't you lack the equipment for that, honey? No matter, that can easily be fixed...”</i> Before you have time to protest, the omnibus reaches down between your legs and gives your clit a gentle touch, elicting a gasp from you. A sudden wave of pleasure fills your body and causes you to cry out and almost making you black out. Dizzied, you gasp as your gaze fall between your legs on your new equipment.");
 	Text.Newline();
 	Text.AddOutput("The previously rather innocent-looking button gracing your vagina has grown and swelled to a four-inch pillar as thick as an average penis. When you give your girl-cock a probing touch, the feeling makes your knees go weak, this is going to take time to get used to.");
 	Text.Newline();
@@ -955,7 +955,7 @@ Intro.UruGiveClitcock = function() {
 				Text.AddOutput("though, not that you'd know what cum usually tastes like");
 			Text.AddOutput(". The omnibus looks at you disapprovingly, like you just spilled perfectly good cream. Which you kind of did.");
 			Text.Newline();
-			Text.AddOutput("<i>\"How about giving it a test run?\"</i> the succubus teases you, striking a sultry pose.");
+			Text.AddOutput("<i>“How about giving it a test run?”</i> the succubus teases you, striking a sultry pose.");
 			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "Ew, gross! Spit it out!"
@@ -965,9 +965,9 @@ Intro.UruGiveClitcock = function() {
 			Text.Clear();
 			player.AddSexExp(5);
 			player.slut.IncreaseStat(100, 2);
-			Text.AddOutput("Surprised at yourself, you gulp down the sweet, thick substance, enjoying the flavor. It, subconsciously, makes you wonder if the omnibus tastes just as good... as you snap back to reality, the demon is grinning at you widely. <i>\"Do you like it?\"</i> she asks. You give her a short nod, blushing.");
+			Text.AddOutput("Surprised at yourself, you gulp down the sweet, thick substance, enjoying the flavor. It, subconsciously, makes you wonder if the omnibus tastes just as good... as you snap back to reality, the demon is grinning at you widely. <i>“Do you like it?”</i> she asks. You give her a short nod, blushing.");
 			Text.Newline();
-			Text.AddOutput("<i>\"How about giving it a test run?\"</i> the succubus teases you, striking a sultry pose.");
+			Text.AddOutput("<i>“How about giving it a test run?”</i> the succubus teases you, striking a sultry pose.");
 			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "Hmm, maybe this isn't so bad. You <i>are</i> feeling a bit hungry..."
@@ -999,7 +999,7 @@ Intro.UruSexFuckVagina = function() {
 	options.push({ nameStr : "Deeper",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("In for a penny, in for a pound. You increase your pace and make your thrusts deeper and harder, bottoming out each time you push into the demon. <i>\"Yeah! Fuck me deeper!\"</i> The omnibus moans loudly, <i>\"Ram that shaft into my cunt!\"</i> And you are only too happy to oblige.");
+			Text.AddOutput("In for a penny, in for a pound. You increase your pace and make your thrusts deeper and harder, bottoming out each time you push into the demon. <i>“Yeah! Fuck me deeper!”</i> The omnibus moans loudly, <i>“Ram that shaft into my cunt!”</i> And you are only too happy to oblige.");
 			Text.Newline();
 			Text.AddOutput("Her pussy is truly exquisite, slick and accommodating but at the same time incredibly tight. Seeking a better angle, you push Uru's legs up beside her head, allowing you to push even harder into her depths.");
 			Gui.NextPrompt();
@@ -1029,16 +1029,16 @@ Intro.UruSexFuckVagina = function() {
 			Text.Newline();
 			Text.AddOutput("Almost hypnotized, you bend in for a kiss when, suddenly, her tail whips out, encircling your throat. The pressure isn't suffocating, but you find your back inexorably twisting as she pulls your head down until you are presented with her throbbing monster, face to face.");
 			Text.Newline();
-			Text.AddOutput("<i>\"Mmm... that is a good little slut,\"</i> the omnibus' moans as you start licking and sucking at her tip, <i>\"Just couldn't hold yourself back, could you?\"</i> she teases. One of her hands grabs your " + player.Hair().Short() + " and gently, though firmly, force you to take inch after inch of her into your mouth.");
+			Text.AddOutput("<i>“Mmm... that is a good little slut,”</i> the omnibus' moans as you start licking and sucking at her tip, <i>“Just couldn't hold yourself back, could you?”</i> she teases. One of her hands grabs your " + player.Hair().Short() + " and gently, though firmly, force you to take inch after inch of her into your mouth.");
 			Text.Newline();
-			var text = "<i>\"Once you are done, maybe I'll give you a taste - you'd like that, wouldn't you? How many inches do you think your ";
+			var text = "<i>“Once you are done, maybe I'll give you a taste - you'd like that, wouldn't you? How many inches do you think your ";
 			if(player.body.Gender() == Gender.female) text += "cunt";
 			else text += "ass";
-			text += " can take? Why don't we find out?\"</i> she taunts as she forces you to slowly deep throat her. She releases you right before you begin to choke, and you gasp for air while reflexively swallowing the strands of precum she has left behind.";
+			text += " can take? Why don't we find out?”</i> she taunts as she forces you to slowly deep throat her. She releases you right before you begin to choke, and you gasp for air while reflexively swallowing the strands of precum she has left behind.";
 			Text.AddOutput(text);
 			
 			Text.Newline();
-			Text.AddOutput("You glare at her, but all she does is offer you a wicked smile. <i>\"Don't give me that look, don't you have something else to finish before I plug your other holes, hmm?\"</i> Giving your head a shake, you set your mind to the task at hand.");
+			Text.AddOutput("You glare at her, but all she does is offer you a wicked smile. <i>“Don't give me that look, don't you have something else to finish before I plug your other holes, hmm?”</i> Giving your head a shake, you set your mind to the task at hand.");
 			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "Why not give her cock some attention while you are railing her?"
@@ -1051,7 +1051,7 @@ Intro.UruSexFuckVagina = function() {
 		if(player.body.Gender() == Gender.male) Text.AddOutput(", emptying the contents of your balls.");
 		else Text.AddOutput(".");
 		Text.Newline();
-		Text.AddOutput("<i>\"Mmm... not bad, I must say,\"</i> she muses, caressing your " + player.FaceDesc() + " fondly, <i>\"I don't suppose you'd let me return the favor? A girl has needs, you know...\"</i>");
+		Text.AddOutput("<i>“Mmm... not bad, I must say,”</i> she muses, caressing your " + player.FaceDesc() + " fondly, <i>“I don't suppose you'd let me return the favor? A girl has needs, you know...”</i>");
 
 
 		
@@ -1059,7 +1059,7 @@ Intro.UruSexFuckVagina = function() {
 		options.push({ nameStr : "Nope",
 			func : function() {
 				Text.Clear();
-				Text.AddOutput("<i>\"Guess not,\"</i> she sighs, disappointed, as you shake your head firmly.");
+				Text.AddOutput("<i>“Guess not,”</i> she sighs, disappointed, as you shake your head firmly.");
 				Text.Newline();
 				Text.AddOutput("Totally spent, you relax your muscles and take a step backwards, only to find her legs clamped around your back, locking you together. Your " + cockDesc() + " is being held like a vice by the demon's vagina as she milks you for the last of your cum. The sucking pressure keeps up far longer than is comfortable for you. Alarmed, you feel as if you are losing strength. It feels like your very soul is being sucked out through your " + cockDesc() + ".");
 				Text.Newline();
@@ -1072,7 +1072,7 @@ Intro.UruSexFuckVagina = function() {
 			func : function() {
 				gameCache.flags["IntroFuckedByUru"] = 1;
 				Text.Clear();
-				Text.AddOutput("To your muddled mind, this doesn't seem like such a bad idea, and you eagerly nod. With the same wicked smile, the omnibus lets go of you, allowing you to withdraw your spent " + cockDesc() + " from her depths, only for her to suddenly manhandle you with surprising strength until you are on all fours. <i>\"No regrets, right?\"</i> she murmurs into your ear. On second thought, you are not so sure anymore.");
+				Text.AddOutput("To your muddled mind, this doesn't seem like such a bad idea, and you eagerly nod. With the same wicked smile, the omnibus lets go of you, allowing you to withdraw your spent " + cockDesc() + " from her depths, only for her to suddenly manhandle you with surprising strength until you are on all fours. <i>“No regrets, right?”</i> she murmurs into your ear. On second thought, you are not so sure anymore.");
 				Gui.NextPrompt(Intro.UruSexGetFuckedPassive2);
 			}, enabled : true,
 			tooltip : "Well, it would only be fair to let her have some fun too... what could go wrong?"
@@ -1089,9 +1089,9 @@ Intro.UruSexFuckAnal = function() {
 	if(player.NumCocks() > 0)
 		cockDesc = function() { return player.FirstCock().Short(); }
 		
-	Text.AddOutput("You motion for the demon to bend over the throne, to which she happily complies, resting her arms on the black stone as she wriggles her expansive booty at you. <i>\"Do you see something you like?\"</i> she huskily asks, as she gazes up at you with an innocent look on her face. You gulp, transfixed by her slowly gyrating behind, putting all of her assets on display.");
+	Text.AddOutput("You motion for the demon to bend over the throne, to which she happily complies, resting her arms on the black stone as she wriggles her expansive booty at you. <i>“Do you see something you like?”</i> she huskily asks, as she gazes up at you with an innocent look on her face. You gulp, transfixed by her slowly gyrating behind, putting all of her assets on display.");
 	Text.Newline();
-	Text.AddOutput("<i>\"Take me, brave hero!\"</i> she moans, spreading her legs even more and offering you full access to both her holes. Above her thick " + uru.FirstCock().Short() + " rests her slit, dripping wet. And, even further up, lies your target, her impossibly tight-looking " + uru.Butt().AnalShort() + ", resting between her round butt cheeks. Her tail is swaying back and forth invitingly. Your " + cockDesc() + " is stiff with desire, a tiny drop of precum forming at the tip, but even so, going in dry would probably not be a good idea.");
+	Text.AddOutput("<i>“Take me, brave hero!”</i> she moans, spreading her legs even more and offering you full access to both her holes. Above her thick " + uru.FirstCock().Short() + " rests her slit, dripping wet. And, even further up, lies your target, her impossibly tight-looking " + uru.Butt().AnalShort() + ", resting between her round butt cheeks. Her tail is swaying back and forth invitingly. Your " + cockDesc() + " is stiff with desire, a tiny drop of precum forming at the tip, but even so, going in dry would probably not be a good idea.");
 	Text.Newline();
 	Text.AddOutput("Licking your lips, you consider your options. You could use your own spit as makeshift lube, or maybe borrow some from her dripping " + uru.FirstVag().Short() + ". Or, you could be really kinky and suck some lube from her throbbing member.");
 	
@@ -1103,7 +1103,7 @@ Intro.UruSexFuckAnal = function() {
 			Text.Clear();
 			Text.AddOutput("Eager to get right into the action, you apply a generous glob of saliva to her " + uru.Butt().AnalShort() + " and rub it in with the tip of your " + cockDesc() + ". Grabbing the demon's full buttocks, you give the supple red skin a firm squeeze before planting your " + cockDesc() + " between them. With long, slow strokes, you spread the makeshift lube evenly along your stiff length, hotdogging the horny demon.");
 			Text.Newline();
-			Text.AddOutput("After a bit of this treatment, Uru starts fidgeting. <i>\"No need to be gentle, you know,\"</i> she reprimands you, sounding slightly annoyed, <i>\"I want it rough and hard!\"</i> To emphasize her desire, her long tail curls tightly around your " + cockDesc() + " and pulls it into position.");
+			Text.AddOutput("After a bit of this treatment, Uru starts fidgeting. <i>“No need to be gentle, you know,”</i> she reprimands you, sounding slightly annoyed, <i>“I want it rough and hard!”</i> To emphasize her desire, her long tail curls tightly around your " + cockDesc() + " and pulls it into position.");
 			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "Saliva is the poor mans lube."
@@ -1116,9 +1116,9 @@ Intro.UruSexFuckAnal = function() {
 			if(player.body.Gender() == Gender.male) Text.AddOutput(", your balls slapping against her stiff cock.");
 			else Text.AddOutput(".");
 			Text.Newline();
-			Text.AddOutput("Gods, she feels amazing! You almost forget yourself and start pumping her " + uru.FirstVag().Short() + " then and there, but manage to regain control. <i>\"H-hey!\"</i> she complains, as you withdraw from her hot tunnel, <i>\"Don't stop now!\"</i>");
+			Text.AddOutput("Gods, she feels amazing! You almost forget yourself and start pumping her " + uru.FirstVag().Short() + " then and there, but manage to regain control. <i>“H-hey!”</i> she complains, as you withdraw from her hot tunnel, <i>“Don't stop now!”</i>");
 			Text.Newline();
-			Text.AddOutput("Grinning, you give her wet labia a last rub, eliciting a needy moan from your demon slut. <i>\"O-oh!\"</i> Uru exclaims, delighted as you adjust your aim, your " + cockDesc() + " prodding her, soon to be defiled, anus.");
+			Text.AddOutput("Grinning, you give her wet labia a last rub, eliciting a needy moan from your demon slut. <i>“O-oh!”</i> Uru exclaims, delighted as you adjust your aim, your " + cockDesc() + " prodding her, soon to be defiled, anus.");
 			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "Why not use that nice cunt to lube yourself up?"
@@ -1136,7 +1136,7 @@ Intro.UruSexFuckAnal = function() {
 			
 			Text.AddOutput("A very wicked thought passes through your head and, with a grin, you decide to put it into action. You drop down on your knees and gently spread the demonette's legs further apart. Uru complies, peeking over her shoulder, curious about what you have in mind. You start kneading her full buttocks, pulling them apart, exposing and stretching her tail hole. A kiss and a lick to her tight pucker draws a shiver from the omnibus - but that is not your target, not yet.");
 			Text.Newline();
-			Text.AddOutput("Passing downward you give Uru's female parts some attention, before focusing on your main course. Firmly grabbing her " + uruCockDesc() + " with both hands, you gently pull it back until you can easily lick at the head. Unable to hold yourself back any longer, you eagerly dig into your meal. Starting with long licks from base to tip, you reverently caress the " + uruCockDesc() + " with your tongue. The omnibus is at first surprised by your attentions. <i>\"Hungry little slut, aren't you,\"</i> she sighs bemused, rolling her eyes, <i>\"And here I thought I would be getting some action.\"</i>");
+			Text.AddOutput("Passing downward you give Uru's female parts some attention, before focusing on your main course. Firmly grabbing her " + uruCockDesc() + " with both hands, you gently pull it back until you can easily lick at the head. Unable to hold yourself back any longer, you eagerly dig into your meal. Starting with long licks from base to tip, you reverently caress the " + uruCockDesc() + " with your tongue. The omnibus is at first surprised by your attentions. <i>“Hungry little slut, aren't you,”</i> she sighs bemused, rolling her eyes, <i>“And here I thought I would be getting some action.”</i>");
 			Text.Newline();
 			Text.AddOutput("You ignore her complaints and move your focus to the tip of her " + uruCockDesc() + ", lapping at the urethra. Already you can taste her spunk on your tongue, a delightful mix of sweet and salty. Your senses are reeling, assaulted by, not only sight and touch, but also taste and smell. You take a deep breath and eagerly swallow as much of her cock as you can manage.");
 			Text.Newline();
@@ -1147,9 +1147,9 @@ Intro.UruSexFuckAnal = function() {
 				Text.AddOutput("Having never done this before, you are a bit uncertain on how to proceed. A combination of sucking on the head and lapping at it with your tongue seems to do the trick, though.");			
 			Text.Newline();
 			
-			Text.AddOutput("<i>\"Mmm... ooh... suck it deeper,\"</i> the quivering omnibus moans, coaxing you to swallow more of her " + uruCockDesc() + ". Try as you might, your gag reflex soon gets the better of you, and you are forced to back off. Changing your tactic, you keep the head inside your mouth and alternate between sucking and blowing, all the while jerking the omnibus off using both of your hands.");
+			Text.AddOutput("<i>“Mmm... ooh... suck it deeper,”</i> the quivering omnibus moans, coaxing you to swallow more of her " + uruCockDesc() + ". Try as you might, your gag reflex soon gets the better of you, and you are forced to back off. Changing your tactic, you keep the head inside your mouth and alternate between sucking and blowing, all the while jerking the omnibus off using both of your hands.");
 			Text.Newline();
-			Text.AddOutput("Eager to get to the real action, you intensify your efforts. Uru, possibly guessing your goal, nudges you on with soft moans, praising your skill. She begins to rock her hips, but the awkward position makes her unable to properly face-fuck you. Still, with your combined efforts, the omnibus is soon panting with need, <i>\"G-gonna blow, deep down your throat!\"</i> she moans huskily. From the throbbing of her dick and the increasingly erratic movement of her hips, you can tell she isn't joking.");
+			Text.AddOutput("Eager to get to the real action, you intensify your efforts. Uru, possibly guessing your goal, nudges you on with soft moans, praising your skill. She begins to rock her hips, but the awkward position makes her unable to properly face-fuck you. Still, with your combined efforts, the omnibus is soon panting with need, <i>“G-gonna blow, deep down your throat!”</i> she moans huskily. From the throbbing of her dick and the increasingly erratic movement of her hips, you can tell she isn't joking.");
 			Text.Newline();
 			Text.AddOutput("Planting her feet wide, she shoves as much of her dick down your throat as she can, ignoring your protests. As she reaches her climax, wave after wave of hot spunk is pumped down your gullet, making your throat sticky with demon jizz. Overwhelmed by the first few blasts, you almost forget your true purpose, opting instead to swallow as much of the delicious fluid as you can.");
 			Text.Newline();
@@ -1165,7 +1165,7 @@ Intro.UruSexFuckAnal = function() {
 	Gui.Callstack.push(function() {
 		Text.Clear();
 		
-		Text.AddOutput("<i>\"Ah, so this was what you had in mind,\"</i> the horny demon moans appreciatively while you grind your lubed " + cockDesc() + " against her back door. Taking the hint, you slowly push against her tight opening. The sexual fluids coating your " + cockDesc() + " certainly help, but her butt is still incredibly tight. With a grunt from you, and a delighted scream from Uru, you manage to push an inch of your member inside her.");
+		Text.AddOutput("<i>“Ah, so this was what you had in mind,”</i> the horny demon moans appreciatively while you grind your lubed " + cockDesc() + " against her back door. Taking the hint, you slowly push against her tight opening. The sexual fluids coating your " + cockDesc() + " certainly help, but her butt is still incredibly tight. With a grunt from you, and a delighted scream from Uru, you manage to push an inch of your member inside her.");
 		Text.Newline();
 		
 		player.Fuck(player.FirstCock(), 5);
@@ -1188,7 +1188,7 @@ Intro.UruSexFuckAnal = function() {
 				buttfucked = true;
 				Text.AddOutput("Pausing momentarily, you plant your feet wider and reach back, parting your buttocks to ease entry. Moaning like a slut, you egg the omnibus to push it in. Chuckling at your eagerness, Uru penetrates your waiting " + player.Butt().AnalShort() + " and starts to roughly fuck you with her tail, reaching several inches deep.");
 				Text.Newline();
-				Text.AddOutput("<i>Don't forget about doing your part now, slut,\"</i> she moans in a sultry voice, encouraging you to start moving again. <i>\"Perhaps after you are done, we can switch places, huh?\"</i> she grins over her shoulder.");
+				Text.AddOutput("<i>Don't forget about doing your part now, slut,”</i> she moans in a sultry voice, encouraging you to start moving again. <i>“Perhaps after you are done, we can switch places, huh?”</i> she grins over her shoulder.");
 				Gui.NextPrompt();
 			}, enabled : true,
 			tooltip : "Mm... that feels good..."
@@ -1215,9 +1215,9 @@ Intro.UruSexFuckAnal = function() {
 		
 		Gui.Callstack.push(function() {
 			Text.Newline();
-			Text.AddOutput("Inexperienced as you are, it is not long before your erratic thrusting brings you to your climax, basting the omnibus's anal tunnel with your white, hot spunk. Panting, you attempt to withdraw from her, only to find that you can't. <i>\"Oh, you can't be done already, can you?\"</i> the omnibus complains petulantly, <i>\"I was just getting into it!\"</i>");
+			Text.AddOutput("Inexperienced as you are, it is not long before your erratic thrusting brings you to your climax, basting the omnibus's anal tunnel with your white, hot spunk. Panting, you attempt to withdraw from her, only to find that you can't. <i>“Oh, you can't be done already, can you?”</i> the omnibus complains petulantly, <i>“I was just getting into it!”</i>");
 			Text.Newline();
-			Text.AddOutput("She sighs hopefully, <i>\"I guess you wouldn't be interested in switching places?\"</i>");
+			Text.AddOutput("She sighs hopefully, <i>“I guess you wouldn't be interested in switching places?”</i>");
 			if(buttfucked)
 				Text.AddOutput(" To accentuate her statement, her tail thrusts deeper inside you, mashing up against your prostate.");
 
@@ -1227,7 +1227,7 @@ Intro.UruSexFuckAnal = function() {
 				func : function() {
 					gameCache.flags["IntroFuckedByUru"] = 1;
 					Text.Clear();
-					Text.AddOutput("To your muddled mind, this doesn't seem like such a bad idea, and you eagerly nod. With a wicked smile, the omnibus lets go of you, allowing you to withdraw your spent member. With surprising strength, she manhandles you until you are on all fours. <i>\"No regrets, right?\"</i> she murmurs into your ear. On second thought, you are not so sure anymore.");
+					Text.AddOutput("To your muddled mind, this doesn't seem like such a bad idea, and you eagerly nod. With a wicked smile, the omnibus lets go of you, allowing you to withdraw your spent member. With surprising strength, she manhandles you until you are on all fours. <i>“No regrets, right?”</i> she murmurs into your ear. On second thought, you are not so sure anymore.");
 					Gui.NextPrompt(Intro.UruSexGetFuckedPassive2);
 				}, enabled : true,
 				tooltip : "Well, it would only be fair to let her have some fun too... what could go wrong?"
@@ -1235,10 +1235,10 @@ Intro.UruSexFuckAnal = function() {
 			options.push({ nameStr : "Nope",
 				func : function() {
 					Text.Clear();
-					Text.AddOutput("<i>\"I thought so,\"</i> she sighs mournfully");
+					Text.AddOutput("<i>“I thought so,”</i> she sighs mournfully");
 					if(suckeddick)
-						Text.AddOutput(", <i>\"Still, thanks for sucking me of, before,\"</i> she says, smiling back over her shoulder");
-					Text.AddOutput(". Arching her back, she is still, somehow, keeping your " + cockDesc() + " trapped inside her. <i>\"Well,\"</i> she states, a determinant tone in her voice, <i>\"We are just going to have to keep going then, aren't we?\"</i>");
+						Text.AddOutput(", <i>“Still, thanks for sucking me of, before,”</i> she says, smiling back over her shoulder");
+					Text.AddOutput(". Arching her back, she is still, somehow, keeping your " + cockDesc() + " trapped inside her. <i>“Well,”</i> she states, a determinant tone in her voice, <i>“We are just going to have to keep going then, aren't we?”</i>");
 					Text.Newline();
 					Text.AddOutput("With that, she starts to push her hips back against you. Surprised, you fall on the ground, with the demon following, the impact almost making you cum again. Moaning, the horny slut starts to gyrate her hips, rising and falling on your " + cockDesc() + ", still hard despite your recent climax.");
 					Gui.NextPrompt(Intro.UruSexFuckAnal2);
@@ -1282,11 +1282,11 @@ Intro.UruSexGetFucked = function() {
 	
 	if(player.body.Gender() == Gender.male) {
 		Intro.fuckedTarget = BodyPartType.ass;
-		Text.AddOutput("<i>\"Really now. Well, if that is what you are into, I'll make the experience one to remember,\"</i> she promises with a chuckle, <i>\"You might not be able to sit for a while, though.\"</i>");
+		Text.AddOutput("<i>“Really now. Well, if that is what you are into, I'll make the experience one to remember,”</i> she promises with a chuckle, <i>“You might not be able to sit for a while, though.”</i>");
 		Gui.NextPrompt(Intro.UruSexGetFuckedPrep);
 	}
 	else {
-		Text.AddOutput("<i>\"Mmm,\"</i> the omnibus murmurs as she licks her lips in anticipation, <i>\"Tell me, where do you want it?\"</i>");
+		Text.AddOutput("<i>“Mmm,”</i> the omnibus murmurs as she licks her lips in anticipation, <i>“Tell me, where do you want it?”</i>");
 		Text.Newline();
 		
 		//[Anal][Vaginal]
@@ -1295,11 +1295,11 @@ Intro.UruSexGetFucked = function() {
 			func : function() {
 				Intro.fuckedTarget = BodyPartType.ass;
 				if(player.Butt().virgin == false)
-					Text.AddOutput("<i>\"Heh, getting addicted to butt-fucking, are we?\"</i>");
+					Text.AddOutput("<i>“Heh, getting addicted to butt-fucking, are we?”</i>");
 				else
-					Text.AddOutput("<i>\"Really now. Well, if that is what you are into, I'll make the experience one to remember,\"</i> she promises with a chuckle, <i>\"You might not be able to sit for a while, though.\"</i>");
+					Text.AddOutput("<i>“Really now. Well, if that is what you are into, I'll make the experience one to remember,”</i> she promises with a chuckle, <i>“You might not be able to sit for a while, though.”</i>");
 				Text.Newline();
-				Text.AddOutput("You mutter something about saving yourself, but she just laughs at you. <i>\"You go ahead and rationalize it however you want, my little buttslut,\"</i> she states, smiling fondly at you.");
+				Text.AddOutput("You mutter something about saving yourself, but she just laughs at you. <i>“You go ahead and rationalize it however you want, my little buttslut,”</i> she states, smiling fondly at you.");
 				Gui.NextPrompt(Intro.UruSexGetFuckedPrep);
 			}, enabled : true,
 			tooltip : (player.Butt().virgin) ? "No way you are giving up your virginity! Taking it in the butt can't be that bad, can it?" : "Well, seeing how it is already broken in..."
@@ -1308,7 +1308,7 @@ Intro.UruSexGetFucked = function() {
 			func : function() {
 				Intro.fuckedTarget = BodyPartType.vagina;
 				Intro.lubedFlag = false; // In case the imps raped you before
-				Text.AddOutput("<i>\"Ah, I'll be getting a virginal treat?\"</i> She slides closer until the two of you are pressed against each other, her male genitalia rubbing against your stomach.");								
+				Text.AddOutput("<i>“Ah, I'll be getting a virginal treat?”</i> She slides closer until the two of you are pressed against each other, her male genitalia rubbing against your stomach.");								
 				Gui.NextPrompt(Intro.UruSexGetFuckedPrep);
 			}, enabled : true,
 			tooltip : "You can't wait any longer... your vagina needs to be filled with cock!"
@@ -1321,7 +1321,7 @@ Intro.UruSexGetFucked = function() {
 // Intro.lubedFlag
 Intro.UruSexGetFuckedPrep = function() {
 	Text.Newline();
-	Text.AddOutput("<i>\"Feel like saying hello?\"</i> the omnibus asks with a smile, nodding downward meaningfully.");
+	Text.AddOutput("<i>“Feel like saying hello?”</i> the omnibus asks with a smile, nodding downward meaningfully.");
 	Text.Newline();
 	Text.AddOutput("Dropping your eyes to Uru's rigid appendage, you get a sinking feeling that, maybe, you didn't think this through. Staring you right in the face is sixteen inches of stiff demon cock. Very close to your face, in fact, as you have unconsciously dropped to your knees in front of the omnibus. Licking your lips, you consider how to prepare yourself for this.");
 	Text.Newline();
@@ -1359,25 +1359,25 @@ Intro.UruSexGetFuckedSuck = function() {
 	var uruCockDesc = function() { return uru.FirstCock().Short(); }
 	
 	if(Intro.timesSuckedUru == 0)
-		Text.AddOutput("<i>\"Oh, probably a wise move to get me lubed up,\"</i> she praises you, <i>\"Then again, you were probably just hungry for cock, weren't you? Just don't forget about the main course.\"</i>");
+		Text.AddOutput("<i>“Oh, probably a wise move to get me lubed up,”</i> she praises you, <i>“Then again, you were probably just hungry for cock, weren't you? Just don't forget about the main course.”</i>");
 	else if(Intro.timesSuckedUru == 1)
-		Text.AddOutput("<i>\"Mnn...\"</i> the omnibus sighs contentedly, <i>\"Just can't get enough, can you?\"</i> Dutifully, you lap up the remains of her last ejaculation before getting down to business.");
+		Text.AddOutput("<i>“Mnn...”</i> the omnibus sighs contentedly, <i>“Just can't get enough, can you?”</i> Dutifully, you lap up the remains of her last ejaculation before getting down to business.");
 	else {
-		Text.AddOutput("<i>\"You know what is coming,\"</i> the omnibus purrs, <i>\"Perhaps your plan is to lube yourself up from the other direction, hm?</i>");
+		Text.AddOutput("<i>“You know what is coming,”</i> the omnibus purrs, <i>“Perhaps your plan is to lube yourself up from the other direction, hm?");
 		if(Intro.fuckedTarget == BodyPartType.vagina)
-			Text.AddOutput("<i> You <b>do</b> know those holes aren't connected, right?</i>");
-		Text.AddOutput("\" Dutifully, you lap up the remains of her last ejaculation before getting down to business.");
+			Text.AddOutput(" You <b>do</b> know those holes aren't connected, right?");
+		Text.AddOutput("”</i> Dutifully, you lap up the remains of her last ejaculation before getting down to business.");
 	}
 	Text.Newline();
 	player.FuckOral(player.Mouth(), uru.FirstCock(), 2);
 	
 	Text.AddOutput("Taking your time, you lather Uru's " + uruCockDesc() + " from root to crown in your saliva. Deciding that you want a taste before getting penetrated, you open your jaw as far as it'll go and put the head in your mouth. A single drop of precum splatters onto your tongue, hot and sticky. After sucking and licking on it for a few minutes, coaxing even more pre out of the demonette's hot fuckstick, and spreading it out evenly, you give the tip one final lick before moving back.");
 	Text.Newline();
-	Text.AddOutput("Uru seems to have something else in mind, however, as a gentle, though firm, grip keeps your head in place. Confused, you look up at your demonic lover's face. <i>\"No-no,\"</i> she chides you, <i>\"Can't leave it unfinished.\"</i> Your muffled protests fall on deaf ears as she slowly, but insistently, starts to push inside you, inch by inch, until she is bumping against the entrance to your throat.");
+	Text.AddOutput("Uru seems to have something else in mind, however, as a gentle, though firm, grip keeps your head in place. Confused, you look up at your demonic lover's face. <i>“No-no,”</i> she chides you, <i>“Can't leave it unfinished.”</i> Your muffled protests fall on deaf ears as she slowly, but insistently, starts to push inside you, inch by inch, until she is bumping against the entrance to your throat.");
 	Text.Newline();
-	Text.AddOutput("Your eyes almost pop out of your face as the omnibus forcefully shoves her hips forward, stuffing her entire length down your throat in one smooth thrust. She pauses there, with your lips firmly pressed against her crotch. <i>\"Don't worry,\"</i> she moans as she starts to move in short, rapid thrusts, <i>\"A-almost there!\"</i>");
+	Text.AddOutput("Your eyes almost pop out of your face as the omnibus forcefully shoves her hips forward, stuffing her entire length down your throat in one smooth thrust. She pauses there, with your lips firmly pressed against her crotch. <i>“Don't worry,”</i> she moans as she starts to move in short, rapid thrusts, <i>“A-almost there!”</i>");
 	Text.Newline();
-	Text.AddOutput("True to her word, load after hot load soon gushes down your sore throat. Then, not a moment too soon, she pulls out, leaving you on your knees, gasping for air. <i>\"Now, don't go cleaning it all up immediately,\"</i> the omnibus tells you with a chuckle as you reflect on her coated rod, still rock hard, <i>\"We would have to do it all over again. Although, maybe you'd like that?\"</i>");
+	Text.AddOutput("True to her word, load after hot load soon gushes down your sore throat. Then, not a moment too soon, she pulls out, leaving you on your knees, gasping for air. <i>“Now, don't go cleaning it all up immediately,”</i> the omnibus tells you with a chuckle as you reflect on her coated rod, still rock hard, <i>“We would have to do it all over again. Although, maybe you'd like that?”</i>");
 	Text.Newline();
 	
 	// Set flags
@@ -1427,7 +1427,7 @@ Intro.UruSexGetFuckedLead = function() {
 		targetDesc = function() { return player.Butt().AnalShort(); }
 	var buttDesc = function() { return player.Butt().Short(); }
 	
-	Text.AddOutput("You shake your head slightly. The demon has been taking charge far too much, it is time to turn this around! Determined, you get back on your feet and push the surprised omnibus back. She lands, ass first, on the throne, cock bouncing up and down excitedly. <i>\"Why, <i>" + player.name + "<i>!\"</i> she exclaims delighted, <i>\"Getting really forward aren't w-\"</i>");
+	Text.AddOutput("You shake your head slightly. The demon has been taking charge far too much, it is time to turn this around! Determined, you get back on your feet and push the surprised omnibus back. She lands, ass first, on the throne, cock bouncing up and down excitedly. <i>“Why, <i>" + player.name + "<i>!”</i> she exclaims delighted, <i>“Getting really forward aren't w-”</i>");
 	Text.Newline();
 	Text.AddOutput("You cut her off with a deep kiss as you straddle her hips, her perky " + uruCockDesc() + " rubbing against your soft undercarriage. Positioning yourself so that her cock is pointing straight at your " + targetDesc() + ". You sigh with euphoria as you ease yourself down, relishing in the feeling of the omnibus entering you.");
 	
@@ -1472,7 +1472,7 @@ Intro.UruSexGetFuckedLead = function() {
 		Text.AddOutput("Slamming down to the hilt, your legs give away as you are left quivering, riding out the wave of your orgasm.");
 		
 	Text.Newline();
-	Text.AddOutput("The omnibus gently caresses your sensitive skin while you regain your strength. <i>\"Not bad, lover,\"</i> she purrs contentedly, <i>\"Ready for round two?\"</i> Before you can mouth an exhausted protest, she lifts your " + buttDesc() + " a few inches, before letting gravity impale you yet again. She starts a fast-paced rhythm, roughly pumping your abused " + targetDesc() + ", pulling your tired body closer to your next climax.");
+	Text.AddOutput("The omnibus gently caresses your sensitive skin while you regain your strength. <i>“Not bad, lover,”</i> she purrs contentedly, <i>“Ready for round two?”</i> Before you can mouth an exhausted protest, she lifts your " + buttDesc() + " a few inches, before letting gravity impale you yet again. She starts a fast-paced rhythm, roughly pumping your abused " + targetDesc() + ", pulling your tired body closer to your next climax.");
 	Text.Newline();
 	Text.AddOutput("Before long, the omnibus cries out in pleasure, hosing a veritable river of hot sperm into you. ");
 	if(Intro.timesSuckedUru >= 3)
@@ -1506,7 +1506,7 @@ Intro.UruSexGetFuckedLead2 = function() {
 Intro.UruSexGetFuckedPassive = function() {
 	Text.Newline();
 
-	Text.AddOutput("Faced with the towering manhood, you grow unsure, was this really what you wanted? The omnibus notices your distress and reaches down to fondly caress your " + player.Hair().Short() + ". <i>\"Don't worry, pet. Just leave everything to me,\"</i> she murmurs reassuringly. She imperiously instructs you to turn around on all fours and rest your torso on the seat of the obsidian throne. You meekly comply, very nervous for what is to come, but also incredibly turned on.");
+	Text.AddOutput("Faced with the towering manhood, you grow unsure, was this really what you wanted? The omnibus notices your distress and reaches down to fondly caress your " + player.Hair().Short() + ". <i>“Don't worry, pet. Just leave everything to me,”</i> she murmurs reassuringly. She imperiously instructs you to turn around on all fours and rest your torso on the seat of the obsidian throne. You meekly comply, very nervous for what is to come, but also incredibly turned on.");
 	
 	Gui.NextPrompt(Intro.UruSexGetFuckedPassive2);
 }
@@ -1543,12 +1543,12 @@ Intro.UruSexGetFuckedPassive2 = function() {
 	Text.AddOutput("Uru trails a single finger across your back, circling closer to your crotch and waiting " + targetDesc() + ".");
 	
 	if(target.virgin)
-		Text.AddOutput(" <i>\"Looks nice and tight, at least for now,\"</i> she purrs, <i>\"nothing like a virgin hole to get my blood racing!\"</i>");
+		Text.AddOutput(" <i>“Looks nice and tight, at least for now,”</i> she purrs, <i>“nothing like a virgin hole to get my blood racing!”</i>");
 		
 	Text.Newline();
 	
 	if(!Intro.lubedFlag) {
-		Text.AddOutput("<i>\"Not to crush your expectations, but I'd better lube you up first,\"</i> the omnibus mentions with a chuckle, <i>\"I plan to go aaall the way with you!\"</i> Giving you no chance to protest, she leans down and plants a kiss on your " + buttDesc() + ". ");
+		Text.AddOutput("<i>“Not to crush your expectations, but I'd better lube you up first,”</i> the omnibus mentions with a chuckle, <i>“I plan to go aaall the way with you!”</i> Giving you no chance to protest, she leans down and plants a kiss on your " + buttDesc() + ". ");
 		if(cockDesc)
 			Text.AddOutput("Leaning down further, she gives your " + cockDesc() + " a long lick from tip to root, before moving to your " + targetDesc() + ".");
 		else
@@ -1567,11 +1567,11 @@ Intro.UruSexGetFuckedPassive2 = function() {
 		Text.AddOutput("Somehow, you don't feel ready.");
 	}
 	else {
-		Text.AddOutput("The omnibus gives your " + buttDesc() + " a playful swat and spreads your cheeks, exposing your eager " + targetDesc() + ". <i>\"Since you are all prepared, why don't we skip to the good part right away?\"</i> she purrs.");
+		Text.AddOutput("The omnibus gives your " + buttDesc() + " a playful swat and spreads your cheeks, exposing your eager " + targetDesc() + ". <i>“Since you are all prepared, why don't we skip to the good part right away?”</i> she purrs.");
 	}
 	
 	Text.Newline();
-	Text.AddOutput("You moan like a slut as she rubs her glans against your sloppy opening, begging for her to fuck you. Humming softly, the hermaphrodite continues to tease you for a bit, almost driving you crazy with need. <i>\"Don't worry, I'll take gooood care of you,\"</i> she tells you as she lines her " + uruCockDesc() + " up against your helpless " + targetDesc() + ", planting her feet wider for balance.");
+	Text.AddOutput("You moan like a slut as she rubs her glans against your sloppy opening, begging for her to fuck you. Humming softly, the hermaphrodite continues to tease you for a bit, almost driving you crazy with need. <i>“Don't worry, I'll take gooood care of you,”</i> she tells you as she lines her " + uruCockDesc() + " up against your helpless " + targetDesc() + ", planting her feet wider for balance.");
 	Text.Newline();
 	Text.AddOutput("She rocks her hips forward, painfully stretching your tight passage as the broad head makes its entry. In a moment of panic at her sheer girth you scramble forward, but there is nowhere to go; you are squeezed between the hard stone of the obsidian throne, and the hard throbbing member now buried deep in your " + targetDesc() + ". ");
 	Text.Newline();
@@ -1585,19 +1585,19 @@ Intro.UruSexGetFuckedPassive2 = function() {
 	Text.Newline();
 	
 	if(Intro.fuckedTarget == BodyPartType.vagina)
-		Text.AddOutput("<i>\"Mmm... should I fuck you pregnant? Keep you around as a breeding sow for my tainted seed?\"</i> the omnibus moans. You are too far gone to realize that she probably isn't joking about her intentions.");
+		Text.AddOutput("<i>“Mmm... should I fuck you pregnant? Keep you around as a breeding sow for my tainted seed?”</i> the omnibus moans. You are too far gone to realize that she probably isn't joking about her intentions.");
 	else
-		Text.AddOutput("<i>\"Oooh, such a tight hole, a perfect fit for me,\"</i> the omnibus compliments on your butt as she rails you, <i>\"Granted, not for long, now.\"</i> She drives her point - and her cock - home with a particularly deep thrust of her hips.");
+		Text.AddOutput("<i>“Oooh, such a tight hole, a perfect fit for me,”</i> the omnibus compliments on your butt as she rails you, <i>“Granted, not for long, now.”</i> She drives her point - and her cock - home with a particularly deep thrust of her hips.");
 	Text.Newline();
 	Text.AddOutput("As the demonette explores deeper and deeper within you, waves of pleasure well up, rising and falling like a tide with the tip of her cock directing their flow. You completely lose track of time, your world shrinking to the sensory input of her pumping rod. At some point, you probably cum, but you can't tell exactly when.");
 	Text.Newline();
-	Text.AddOutput("After an excruciatingly long time, Uru finally rests her hips against your " + buttDesc() + ". By this point, you are reduced to a panting and moaning mess, riding the edge of your last orgasm. The demon rests a while, enjoying her dominance over you. <i>\"You'll be a good slut for me from now on, won't you?\"</i> she purrs, accentuating her questing by slowly rocking her hips, grinding against your deepest reaches");
+	Text.AddOutput("After an excruciatingly long time, Uru finally rests her hips against your " + buttDesc() + ". By this point, you are reduced to a panting and moaning mess, riding the edge of your last orgasm. The demon rests a while, enjoying her dominance over you. <i>“You'll be a good slut for me from now on, won't you?”</i> she purrs, accentuating her questing by slowly rocking her hips, grinding against your deepest reaches");
 	if(Intro.fuckedTarget == BodyPartType.vagina)
 		Text.AddOutput(", the tip of her cock rubbing and teasing the entrance to your womb.");
 	else
 		Text.AddOutput(".");
 	Text.Newline();
-	Text.AddOutput("Hardly able to form coherent sentences, you moan something close to <i>\"Yes, please, fuck me, now! Fuck me HARD!\"</i> The hermaphrodite seems to get the gist of it, as she pulls until only the tip of her cock is inside you, leaving you with a heavy feeling of emptiness. The feeling quickly disappears, however, as she drives her " + uruCockDesc() + " home in one thrust, forcing you into another orgasm.");
+	Text.AddOutput("Hardly able to form coherent sentences, you moan something close to <i>“Yes, please, fuck me, now! Fuck me HARD!”</i> The hermaphrodite seems to get the gist of it, as she pulls until only the tip of her cock is inside you, leaving you with a heavy feeling of emptiness. The feeling quickly disappears, however, as she drives her " + uruCockDesc() + " home in one thrust, forcing you into another orgasm.");
 	Text.Newline();
 	Text.AddOutput("Your mind goes blank from the rhythmic thrusting, her cock rubbing against every spot and crevice inside your passage, including a few you didn't even know were there. Before long, the pole buried inside you starts to throb erratically, globs of hot precum announcing Uru's pending climax. Hardly missing a beat, the omnibus increases the pace of her humping, crying out in pleasure as she releases a veritable river of spunk inside your depths.");
 	Text.Newline();
@@ -1633,7 +1633,7 @@ Intro.UruSexDenied = function() {
 	
 	Text.AddOutput("You give your head a forceful shake; this is not the time, nor the place, for sex. You need to keep your wits about you, and you don't quite trust the omnibus. A wise move, it turns out.");
 	Text.Newline();
-	Text.AddOutput("<i>\"No?\"</i> she asks, looking crestfallen, her lips pursing in a sullen pout, <i>\"Why not? I just wanna have some fun, it'll feel good, I promise!\"</i> The horny hermaphrodite advances on you, lustfully rubbing her exposed breasts against you. You move to back off, but find yourself somehow trapped with your back against the rough stone of the obsidian throne. <i>\"Just one kiss,\"</i> she breathes in your ear huskily, quickly moving in to claim her prize.");
+	Text.AddOutput("<i>“No?”</i> she asks, looking crestfallen, her lips pursing in a sullen pout, <i>“Why not? I just wanna have some fun, it'll feel good, I promise!”</i> The horny hermaphrodite advances on you, lustfully rubbing her exposed breasts against you. You move to back off, but find yourself somehow trapped with your back against the rough stone of the obsidian throne. <i>“Just one kiss,”</i> she breathes in your ear huskily, quickly moving in to claim her prize.");
 	Text.Newline();
 	Text.AddOutput("The two of you lock lips for an eternal moment and you almost lose yourself in her warm embrace. You quickly find that the demoness is a great kisser, making full use of her velvety tongue and eagerly exploring every part of your mouth. You stumble a bit, you suddenly feeling weak at the knees. Alarmed, you realize that energy is rapidly being drained from your body. Somehow wrenching free, you fall to the ground, panting from the brief encounter.");
 	
@@ -1646,17 +1646,17 @@ Intro.UruSexAftermath = function() {
 	// Soul-sucking is tiring
 	player.curSp.base = 0;
 	
-	Text.AddOutput("<i>\"Aww... and things were just starting to get fun,\"</i> Uru complains as she stands above your fallen form. She trails one of her sharp nails - colored black, you idly note - down your stomach and toward your exposed crotch. <i>\"There is sooo much you will tell me,\"</i> she purrs, <i>\"Why not start with how you got here, again? </i>");
+	Text.AddOutput("<i>“Aww... and things were just starting to get fun,”</i> Uru complains as she stands above your fallen form. She trails one of her sharp nails - colored black, you idly note - down your stomach and toward your exposed crotch. <i>“There is sooo much you will tell me,”</i> she purrs, <i>“Why not start with how you got here, again? </i>");
 	if(gameCache.flags.IntroToldUruAboutMirror != 0)
-		Text.AddOutput("<i>That mirror you talked about... where did you find it, exactly?\"</i>");
+		Text.AddOutput("<i>That mirror you talked about... where did you find it, exactly?”</i>");
 	else
-		Text.AddOutput("<i>See, I'm not quite buying your original story, and I told you it was impolite to lie to me!\"</i>");
+		Text.AddOutput("<i>See, I'm not quite buying your original story, and I told you it was impolite to lie to me!”</i>");
 	Text.Newline();
-	Text.AddOutput("Cursing your lack of caution, you realize that the omnibus is far sharper than you thought at first. She has been toying with you the whole time! Chuckling, she cups your chin in one hand and fondles your cheek absentmindedly. <i>\"Playing around with you for a bit was fun, but I have to investigate something. But, before I go...\"</i> You try to scurry away from her, but she merely smiles and crooks a clawed finger. Like being picked up by an invisible hand, you are hoisted into the air, floating about a foot above the ground, helpless.");
+	Text.AddOutput("Cursing your lack of caution, you realize that the omnibus is far sharper than you thought at first. She has been toying with you the whole time! Chuckling, she cups your chin in one hand and fondles your cheek absentmindedly. <i>“Playing around with you for a bit was fun, but I have to investigate something. But, before I go...”</i> You try to scurry away from her, but she merely smiles and crooks a clawed finger. Like being picked up by an invisible hand, you are hoisted into the air, floating about a foot above the ground, helpless.");
 	Text.Newline();
-	Text.AddOutput("<i>\"H-how are you doing this?\"</i> you gasp.");
+	Text.AddOutput("<i>“H-how are you doing this?”</i> you gasp.");
 	Text.Newline();
-	Text.AddOutput("She studies you for a while, then simply wiggles her fingers at you. <i>\"Magic\"</i> she tells you with a grin. Uru crosses her arms over her expansive bust and paces in a circle around your struggling form. Apparently coming to a decision, she gives your " + player.Butt().Short() + " a sharp slap, leaving a stinging hand print. The feeling quickly fades, replaced with... something else.");
+	Text.AddOutput("She studies you for a while, then simply wiggles her fingers at you. <i>“Magic”</i> she tells you with a grin. Uru crosses her arms over her expansive bust and paces in a circle around your struggling form. Apparently coming to a decision, she gives your " + player.Butt().Short() + " a sharp slap, leaving a stinging hand print. The feeling quickly fades, replaced with... something else.");
 	Text.Newline();
 	Text.AddOutput("You moan as a long thin tail sprouts from your quivering behind, snaking around wildly before you gain control of your new appendage. Forgetting yourself, you take a moment to study it, noting the dark reddish color and the spaded tip. Even suspended in the air as you are, the thing almost reaches the ground. Touching it sends shivers up your, now extended, spine.");
 	
@@ -1665,19 +1665,19 @@ Intro.UruSexAftermath = function() {
 	Text.Newline();
 	Text.AddOutput("Snapping back to reality, you flinch as the omnibus looms over you, but her attention is not directed at you. The growth of your tail apparently dislodged the purple gem you were carrying from your shredded clothes. The stone now lies on the ground, emanating a dull glow.");
 	Text.Newline();
-	Text.AddOutput("With a curious look on her face, Uru bends down and picks up the jewel. For a moment, a look of wonder crosses her face, illuminated by the glowing stone, though quickly replaced by one of triumph. Forgotten, you drop to the ground as the forces suspending you dissipate. <i>\"R-really? It can be done <b>that</b> way, too?\"</i> the demon wonders out loud, her thoughts far away and her eyes lost in the swirling mist deep inside the gem.");
+	Text.AddOutput("With a curious look on her face, Uru bends down and picks up the jewel. For a moment, a look of wonder crosses her face, illuminated by the glowing stone, though quickly replaced by one of triumph. Forgotten, you drop to the ground as the forces suspending you dissipate. <i>“R-really? It can be done <b>that</b> way, too?”</i> the demon wonders out loud, her thoughts far away and her eyes lost in the swirling mist deep inside the gem.");
 	Text.Newline();
-	Text.AddOutput("Before you have a chance to escape - not that there is anywhere to escape <i>to</i> - the omnibus rounds on you with a happy grin on her face. <i>\"Do you know what this is?\"</i> she asks, hopping around in a little excited dance, <i>\"This is my key out of here!\"</i>");
+	Text.AddOutput("Before you have a chance to escape - not that there is anywhere to escape <i>to</i> - the omnibus rounds on you with a happy grin on her face. <i>“Do you know what this is?”</i> she asks, hopping around in a little excited dance, <i>“This is my key out of here!”</i>");
 	Text.Newline();
-	Text.AddOutput("She goes on to excitedly explain, at length, how manipulating the ethereal winds <i>just so</i>, combined with the right place and time, would enable gates to other realms to be opened. <i>\"And it was all hidden in this key right here!\"</i> she exults, <i>\"Whoever made this was a genius!\"</i> Bewildered, you are once again forced to reevaluate the fickle demon. She acts like an airhead, unable to keep her thoughts on any one thing for an extended period of time, but you could hardly follow anything of what she just said");
+	Text.AddOutput("She goes on to excitedly explain, at length, how manipulating the ethereal winds <i>just so</i>, combined with the right place and time, would enable gates to other realms to be opened. <i>“And it was all hidden in this key right here!”</i> she exults, <i>“Whoever made this was a genius!”</i> Bewildered, you are once again forced to reevaluate the fickle demon. She acts like an airhead, unable to keep her thoughts on any one thing for an extended period of time, but you could hardly follow anything of what she just said");
 	if(player.intelligence.growth > 1) Text.AddOutput(", your newfound smarts notwithstanding.");
 	else Text.AddOutput(".");
 	Text.Newline();
-	Text.AddOutput("<i>\"You know... maybe I should reward you for this,\"</i> she muses to herself. You instinctively jerk back, not sure if you want any more 'gifts' from the demon. <i>\"Oh tut, don't be like that,\"</i> she chides, <i>\"With some work, you could be someone with power. You've got good foundation, you've survived here this long, after all.\"</i> Bewildered as to what she is talking about, you consider her offer.");
+	Text.AddOutput("<i>“You know... maybe I should reward you for this,”</i> she muses to herself. You instinctively jerk back, not sure if you want any more 'gifts' from the demon. <i>“Oh tut, don't be like that,”</i> she chides, <i>“With some work, you could be someone with power. You've got good foundation, you've survived here this long, after all.”</i> Bewildered as to what she is talking about, you consider her offer.");
 	Text.Newline();
-	Text.AddOutput("<i>\"And what if I refuse?\"</i> you guardedly answer.");
+	Text.AddOutput("<i>“And what if I refuse?”</i> you guardedly answer.");
 	Text.Newline();
-	Text.AddOutput("In the span of a second Uru's expression shifts from incredulous to angry, before settling on a smug grin. <i>\"Refusing will do you no good, of course, but if you want some incentive...\"</i> she pouts and sucks on one of her fingers seductively. <i>\"How about... I <b>don't</b> use this key to return where you came from and burn it to the ground?\"</i>");
+	Text.AddOutput("In the span of a second Uru's expression shifts from incredulous to angry, before settling on a smug grin. <i>“Refusing will do you no good, of course, but if you want some incentive...”</i> she pouts and sucks on one of her fingers seductively. <i>“How about... I <b>don't</b> use this key to return where you came from and burn it to the ground?”</i>");
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
@@ -1685,7 +1685,7 @@ Intro.UruSexAftermath = function() {
 		Text.Newline();
 		Text.AddOutput("<i>Quickly! Grab the key!</i> a feminine voice rings inside your head, and suddenly your limbs fill with strength.");
 		Text.Newline();
-		Text.AddOutput("Unthinking, you throw yourself forward, snatching up the blazing jewel and coming up in a crouch. Whatever hurt the demon seemingly has no effect on you. The enraged omnibus moves as if to pounce on you, but she hesitates. Apparently, she is unable or unwilling to enter the radiant pillar of light surrounding you. <i>\"That bitch! So that is how it's going to be...\"</i> she states, her voice sounding muted, as if she is speaking from a great distance, <i>\"No matter, it's only a question of time before I can freely leave this place, thanks to you.\"</i> Her features are a combination of malice and triumph, <i>\"My offer to join me still stands... and so does my threat, should you fail to take it.\"</i>");
+		Text.AddOutput("Unthinking, you throw yourself forward, snatching up the blazing jewel and coming up in a crouch. Whatever hurt the demon seemingly has no effect on you. The enraged omnibus moves as if to pounce on you, but she hesitates. Apparently, she is unable or unwilling to enter the radiant pillar of light surrounding you. <i>“That bitch! So that is how it's going to be...”</i> she states, her voice sounding muted, as if she is speaking from a great distance, <i>“No matter, it's only a question of time before I can freely leave this place, thanks to you.”</i> Her features are a combination of malice and triumph, <i>“My offer to join me still stands... and so does my threat, should you fail to take it.”</i>");
 		Text.Newline();
 		Text.AddOutput("Sight and sound abandon you as you are enveloped in a blinding light. You get one last glimpse of the landscape wreathed in fire and smoke, and the smoldering orange eyes of the smiling demon, before everything fades away.");
 		Text.Newline();
@@ -1763,9 +1763,9 @@ world.loc.LightAspect.Garden.events.push(new Link(
 		
 		Text.AddOutput("You examine the strange bird wading in a nearby shallow pond. Looking closer at it you realize that it is of a species you have never seen before, a ball of fluffy blue feathers on long graceful legs, the head on its long thin neck topped by a bright orange plume. In height, it's just about reaches your knees.");
 		Text.Newline();
-		Text.AddOutput("You skeptically eye the creature, attracting its attention. For a while the two of you silently observe each other. Feeling slightly awkward, you quip, <i>\"I don't suppose it was you who spoke just now?\"</i>");
+		Text.AddOutput("You skeptically eye the creature, attracting its attention. For a while the two of you silently observe each other. Feeling slightly awkward, you quip, <i>“I don't suppose it was you who spoke just now?”</i>");
 		Text.Newline();
-		Text.AddOutput("The bird throws a glance toward the marble building, then turns back to you. Tilting its head slightly to the side, it gravely proclaims in a musical voice, <i>\"No.\"</i> You are left with a bewildered expression as the bird takes to the air and flies off.");
+		Text.AddOutput("The bird throws a glance toward the marble building, then turns back to you. Tilting its head slightly to the side, it gravely proclaims in a musical voice, <i>“No.”</i> You are left with a bewildered expression as the bird takes to the air and flies off.");
 		Text.Newline();
 		Text.AddOutput("What the heck is going on with this place?");
 
@@ -1884,11 +1884,11 @@ Intro.AriaQnA = function() {
 			func : function() {
 				Text.Clear();
 				
-				Text.AddOutput("<i>\"You... I guess you saved me back there. How? Why? And who are you, exactly... are you a goddess?\"</i> you ask, feeling self-conscious.");
+				Text.AddOutput("<i>“You... I guess you saved me back there. How? Why? And who are you, exactly... are you a goddess?”</i> you ask, feeling self-conscious.");
 				Text.Newline();
 				Text.AddOutput("<i>I am Aria. I am who I am.</i> The radiant woman gazes off into the distance. <i>Before, it was simpler... fewer worlds to care for, fewer people to protect. But, seeing the widespread destruction, and calamity after calamity sweeping across the planes... I had to act.</i> Aria sighs. <i>I am the one who protects against the taint, and tries to abate the tides of darkness through the ages. But it grows hard, so hard. Sometimes, I feel old and powerless, as I watch another world fall...</i>");
 				Text.Newline();
-				Text.AddOutput("She falls silent. <i>\"Old?\"</i> you protest, surely she could not be older than twenty-five! She gives you a weak smile, suddenly looking vulnerable, tired, even.");
+				Text.AddOutput("She falls silent. <i>“Old?”</i> you protest, surely she could not be older than twenty-five! She gives you a weak smile, suddenly looking vulnerable, tired, even.");
 				Text.Newline();
 				Text.AddOutput("<i>Yes, it was I who saved you and brought you to this place, though, not entirely of my own power. As to why... I will get to that, but there is more to talk about. Suffice to say, I wish to ask a favor of you.</i>");
 				Intro.AriaTalkedAboutAria = true;
@@ -1903,7 +1903,7 @@ Intro.AriaQnA = function() {
 			func : function() {
 				Text.Clear();
 	
-				Text.AddOutput("<i>\"That demon... who was she?\"</i> As you ask, you realize that you want to know more about the tempting, but fickle, hermaphrodite, but you cannot quite pinpoint the reason. Are you just interested because of the threat she represents, or do you have some other, darker motive?");
+				Text.AddOutput("<i>“That demon... who was she?”</i> As you ask, you realize that you want to know more about the tempting, but fickle, hermaphrodite, but you cannot quite pinpoint the reason. Are you just interested because of the threat she represents, or do you have some other, darker motive?");
 				Text.Newline();
 				Text.AddOutput("<i>Uru,</i> the goddess frowns, looking disconcerted, <i>Beware of that one, she is very, very dangerous. Unpredictable, chaotic and - as I am sure you noticed - very powerful. The plane she inhabits... that place was once a vibrant world, full of life. All reduced to ashes, by her hand and by those who serve her.</i>");
 				Text.Newline();
@@ -1923,17 +1923,17 @@ Intro.AriaQnA = function() {
 			func : function() {
 				Text.Clear();
 	
-				Text.AddOutput("<i>\"How did I get to that place? Last thing I remember is the old attic...\"</i>");
+				Text.AddOutput("<i>“How did I get to that place? Last thing I remember is the old attic...”</i>");
 				Text.Newline();
 				Text.AddOutput("<i>Travel between the realms of existence, while not unheard of, is usually restricted to those very powerful. You, while having a surprising innate ability for it, had a bit of help, though.</i> She gestures to the jewel in your hand.");
 				Text.Newline();
-				Text.AddOutput("<i>\"What is it exactly?\"</i> you ask.");
+				Text.AddOutput("<i>“What is it exactly?”</i> you ask.");
 				Text.Newline();
 				Text.AddOutput("<i>What you are holding is a kind of key, specifically constructed to make opening portals to other realms easier.</i> Aria studies the gem carefully. <i>Seeing this is a bit nostalgic,</i> she admits, <i>I have not met its maker in a very long time. For a human, he was a strange one, old Alliser.</i>");
 				Text.Newline();
 				Text.AddOutput("The name sounds vaguely familiar to you, though you are far more interested in the stone itself. Now that she mentions it, the stone seems to have lost its glow, the mist inside barely moving.");
 				Text.Newline();
-				Text.AddOutput("<i>\"Could it take me home?\"</i> you ask hopefully, but Aria shakes her head sadly, <i>It seems to be almost out of power, it could probably only open a portal to a realm very close to this one.</i>");
+				Text.AddOutput("<i>“Could it take me home?”</i> you ask hopefully, but Aria shakes her head sadly, <i>It seems to be almost out of power, it could probably only open a portal to a realm very close to this one.</i>");
 
 				Intro.AriaTalkedAboutPortals = true;
 				
@@ -1946,7 +1946,7 @@ Intro.AriaQnA = function() {
 		options.push({ nameStr : "Bird",
 			func : function() {
 				Text.Clear();
-				Text.AddOutput("<i>\"I met a talking bird outside,\"</i> you comment.");
+				Text.AddOutput("<i>“I met a talking bird outside,”</i> you comment.");
 				Text.Newline();
 				Text.AddOutput("Looking at you a bit amused, Aria replies coyly. <i>After all you have been through, you find talking birds strange?</i> Guess you can't argue with that.");
 
@@ -2040,9 +2040,9 @@ Intro.MeetingKia = function() {
 		Text.AddOutput("he is indeed a he, his flat chest, slim figure and the slight bulge between his legs being telltale signs. ");
 	Text.AddOutput(HeShe + " is clad in a pale blue robe, ending a few inches above " + hisher + " bared knees.");
 	Text.Newline();
-	Text.AddOutput("<i>\"Ah, you are awake!\"</i> the elf announces happily. Confronted with the question as to exactly what " + kiakai.heshe() + " was doing in your beddings, and where your beddings <i>are</i> for that matter, the elf blushes slightly. <i>\"L-lets not get hasty, here. I know it might look bad, but really, I am just trying to help.\"</i> " + HeShe + " looks a bit distraught.");
+	Text.AddOutput("<i>“Ah, you are awake!”</i> the elf announces happily. Confronted with the question as to exactly what " + kiakai.heshe() + " was doing in your beddings, and where your beddings <i>are</i> for that matter, the elf blushes slightly. <i>“L-lets not get hasty, here. I know it might look bad, but really, I am just trying to help.”</i> " + HeShe + " looks a bit distraught.");
 	Text.Newline();
-	Text.AddOutput("<i>\"My name is " + kiakai.name + ", and I serve lady Aria,\"</i> the slender elf tells you, <i>\"I have been nursing you here since your arrival to Eden, about a day ago.\"</i> You quietly consider the elf before you. " + name + " seems to be very somber and serious, far beyond what you would expect from someone looking as young as " + himher + ". You give your own name, a large number of questions already crowding in your mind.");
+	Text.AddOutput("<i>“My name is " + kiakai.name + ", and I serve lady Aria,”</i> the slender elf tells you, <i>“I have been nursing you here since your arrival to Eden, about a day ago.”</i> You quietly consider the elf before you. " + name + " seems to be very somber and serious, far beyond what you would expect from someone looking as young as " + himher + ". You give your own name, a large number of questions already crowding in your mind.");
 	
 	Intro.KiaTalkedAboutAria = false;
 	Intro.KiaTalkedAboutEden = false;
@@ -2068,11 +2068,11 @@ Intro.KiaQnA = function() {
 			func : function() {
 				Text.Clear();
 				
-				Text.AddOutput("<i>\"The lady informed me of your arrival, and told me to assist you,\"</i> " + name + " tells you, <i>\"She is the light that wards against the dark, and a great darkness is approaching. You have been granted a great task by her, the outcome of which may decide the fate of this entire realm.\"</i>");
+				Text.AddOutput("<i>“The lady informed me of your arrival, and told me to assist you,”</i> " + name + " tells you, <i>“She is the light that wards against the dark, and a great darkness is approaching. You have been granted a great task by her, the outcome of which may decide the fate of this entire realm.”</i>");
 				Text.Newline();
-				Text.AddOutput("What is this " + boygirl + " talking about? <i>\"As I understand it, you have already met the dark one,\"</i> " + name + " states with a shudder, <i>\"It is a blessing you survived that encounter.\"</i> " + HisHer + " expression is grim as " + heshe + " looks at you.");
+				Text.AddOutput("What is this " + boygirl + " talking about? <i>“As I understand it, you have already met the dark one,”</i> " + name + " states with a shudder, <i>“It is a blessing you survived that encounter.”</i> " + HisHer + " expression is grim as " + heshe + " looks at you.");
 				Text.Newline();
-				Text.AddOutput("<i>\"Uru seeks total conquest of all the planes, and if she manages to reach Eden, that goal will be within her reach. You have seen the destruction the demon brings, she must be stopped before it is too late. We have no time to waste.\"</i>");
+				Text.AddOutput("<i>“Uru seeks total conquest of all the planes, and if she manages to reach Eden, that goal will be within her reach. You have seen the destruction the demon brings, she must be stopped before it is too late. We have no time to waste.”</i>");
 				Intro.KiaTalkedAboutAria = true;
 				
 				Intro.KiaQnA();
@@ -2087,15 +2087,15 @@ Intro.KiaQnA = function() {
 	
 				Text.AddOutput("You ask how it is exactly that you came to this place, and where it is. " + HeShe + " mentioned Eden? " + name + " looks surprised.");
 				Text.Newline();
-				Text.AddOutput("<i>\"The lady must not have had much time to tell you about this place,\"</i> " + heshe + " muses, settling down on the bedding next to you, <i>\"Very well, I will tell you.\"</i>");
+				Text.AddOutput("<i>“The lady must not have had much time to tell you about this place,”</i> " + heshe + " muses, settling down on the bedding next to you, <i>“Very well, I will tell you.”</i>");
 				Text.Newline();
-				Text.AddOutput("<i>\"Though I do not know where you came from originally, you have passed through at least two different planes of existence on your way here. The first was the burning wasteland that is Uru's domain. Thankfully, my lady saved you from that place before you could succumb to the demons.\"</i> The elf seems very uncomfortable talking about what " + heshe + " clearly thinks is place of great evil.");
+				Text.AddOutput("<i>“Though I do not know where you came from originally, you have passed through at least two different planes of existence on your way here. The first was the burning wasteland that is Uru's domain. Thankfully, my lady saved you from that place before you could succumb to the demons.”</i> The elf seems very uncomfortable talking about what " + heshe + " clearly thinks is place of great evil.");
 				Text.Newline();
-				Text.AddOutput("<i>\"My lady Aria then brought you into her own realm. Ah, it was long since I saw the sacred gardens last, too long...\"</i> " + name + " seems to space out for a bit, focusing when you urge " + himher + " to continue. <i>\"You might have noticed that you were losing strength the longer you spent in either of those realms. They are too... spiritual, I guess the word is. Ordinary humans seem to have a hard time surviving there for so long.\"</i> " + HeShe + " thoughtfully considers you, <i>\"That you were able to do so for such a long time indicates an unusually strong affinity for traversing the planes. I believe this was why the lady chose you.\"</i>");
+				Text.AddOutput("<i>“My lady Aria then brought you into her own realm. Ah, it was long since I saw the sacred gardens last, too long...”</i> " + name + " seems to space out for a bit, focusing when you urge " + himher + " to continue. <i>“You might have noticed that you were losing strength the longer you spent in either of those realms. They are too... spiritual, I guess the word is. Ordinary humans seem to have a hard time surviving there for so long.”</i> " + HeShe + " thoughtfully considers you, <i>“That you were able to do so for such a long time indicates an unusually strong affinity for traversing the planes. I believe this was why the lady chose you.”</i>");
 				Text.Newline();
-				Text.AddOutput("<i>\"To answer your question, you are on the island of Eden, suspended in an endless sea of clouds. The barriers between the planes of existence are quite thin here, so you could see it as something of a hub, where it is possible for portals to other realms to be opened. Usually, the ability to open such a portal is reserved to beings of great power, unless...\"</i> " + HeShe + " pauses and tentatively takes your hand, guiding it to rest on the gemstone in your pocket.");
+				Text.AddOutput("<i>“To answer your question, you are on the island of Eden, suspended in an endless sea of clouds. The barriers between the planes of existence are quite thin here, so you could see it as something of a hub, where it is possible for portals to other realms to be opened. Usually, the ability to open such a portal is reserved to beings of great power, unless...”</i> " + HeShe + " pauses and tentatively takes your hand, guiding it to rest on the gemstone in your pocket.");
 				Text.Newline();
-				Text.AddOutput("<i>\"Unless they have access to a key.\"</i>");
+				Text.AddOutput("<i>“Unless they have access to a key.”</i>");
 
 				Intro.KiaTalkedAboutEden = true;
 				
@@ -2109,13 +2109,13 @@ Intro.KiaQnA = function() {
 			func : function() {
 				Text.Clear();
 				var title = (kiakai.body.Gender() == Gender.male) ? "priest" : "priestess";
-				Text.AddOutput("<i>\"I have been in the service of lady Aria for some thirty years, now. I am honored to be a member of her priesthood.\"</i>");
+				Text.AddOutput("<i>“I have been in the service of lady Aria for some thirty years, now. I am honored to be a member of her priesthood.”</i>");
 				Text.Newline();
 				Text.AddOutput("Hold on. Thirty years? The slender elf hardly looks more than eighteen.");
 				Text.Newline();
-				Text.AddOutput("<i>\"As you can see, I am of elfin descent,\"</i> " + name + " concedes, touching one of " + hisher + " pointed ears, <i>\"We tend to age slower than is usual. Even though I look hardly more than a child to you, I am almost fifty years old, as they count it in these lands.\"</i>");
+				Text.AddOutput("<i>“As you can see, I am of elfin descent,”</i> " + name + " concedes, touching one of " + hisher + " pointed ears, <i>“We tend to age slower than is usual. Even though I look hardly more than a child to you, I am almost fifty years old, as they count it in these lands.”</i>");
 				Text.Newline();
-				Text.AddOutput("<i>\"My lady instructed me to help you out in your quest in any way I could,\"</i> " + name + " assures you. <i>\"Let us get along as fellow servants of our lady!\"</i> You look at the sincere " + title + " dubiously. It seems like " + heshe + " has already decided on how this relationship is going to work out.");
+				Text.AddOutput("<i>“My lady instructed me to help you out in your quest in any way I could,”</i> " + name + " assures you. <i>“Let us get along as fellow servants of our lady!”</i> You look at the sincere " + title + " dubiously. It seems like " + heshe + " has already decided on how this relationship is going to work out.");
 
 				Intro.KiaTalkedAboutSelf = true;
 				
@@ -2125,13 +2125,13 @@ Intro.KiaQnA = function() {
 		});
 	}
 	if(!Intro.KiaTalkedAboutHealing) {
-		options.push({ nameStr : "\"Healing\"",
+		options.push({ nameStr : "'Healing'",
 			func : function() {
 				Text.Clear();
 				
 				Text.AddOutput("You ask how what " + heshe + " was doing was in any way a form of healing. The elf looks indignant, but at least has the shame to blush a bit.");
 				Text.Newline();
-				Text.AddOutput("<i>\"I-I'll have you know that it is a sacred form of healing only taught to a select few within the temple,\"</i> " + heshe + " blurts out, fidgeting uncomfortably as you raise an eyebrow skeptically, <i>\"The lady may have healed your spirit and cleansed you of corruption before sending you here, but your body was at the brink of death when I found you. I have had to use everything I know about healing in order to bring you back, even stooping to acts you may consider lewd.\"</i>");
+				Text.AddOutput("<i>“I-I'll have you know that it is a sacred form of healing only taught to a select few within the temple,”</i> " + heshe + " blurts out, fidgeting uncomfortably as you raise an eyebrow skeptically, <i>“The lady may have healed your spirit and cleansed you of corruption before sending you here, but your body was at the brink of death when I found you. I have had to use everything I know about healing in order to bring you back, even stooping to acts you may consider lewd.”</i>");
 				Text.Newline();
 				Text.AddOutput("Looks like " + name + " is really embarrassed about the whole thing, but you grudgingly concede that " + heshe + " probably saved your life, whatever " + hisher + " methods.");
 
@@ -2155,15 +2155,15 @@ Intro.KiaSurroundings = function() {
 	Text.Newline();
 	Text.AddOutput("In the distance, across the plains and past a few small farmsteads, you can see a large dense forest. At its center, an impossibly tall tree raises its branches, covering a good part of the sky above and dwarfing everything around it.");
 	Text.Newline();
-	Text.AddOutput("<i>\"This campground belongs to the nomads. It tends to move around a bit, but it is neutral ground. Their chief has agreed to let us borrow this tent,\"</i> " + name + " tells you, indicating the old man. <i>\"You can return here if you ever need to rest.\"</i>");
+	Text.AddOutput("<i>“This campground belongs to the nomads. It tends to move around a bit, but it is neutral ground. Their chief has agreed to let us borrow this tent,”</i> " + name + " tells you, indicating the old man. <i>“You can return here if you ever need to rest.”</i>");
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
-		Text.AddOutput("<i>\"Now then, we must discuss how to proceed from here,\"</i> the elf announces, suddenly more serious. <i>\"If we are to stop Uru, we need to know how she plans to get to Eden. I think we should get that gem you carry identified by a skilled magician.\"</i>");
+		Text.AddOutput("<i>“Now then, we must discuss how to proceed from here,”</i> the elf announces, suddenly more serious. <i>“If we are to stop Uru, we need to know how she plans to get to Eden. I think we should get that gem you carry identified by a skilled magician.”</i>");
 		Text.Newline();
-		Text.AddOutput(name + " paces about thoughtfully. <i>\"My specialty is healing, so this is unfortunately beyond me. I know the court magician at the castle could probably help us... but that raises problems of its own. You'll understand once we get there.\"</i>");
+		Text.AddOutput(name + " paces about thoughtfully. <i>“My specialty is healing, so this is unfortunately beyond me. I know the court magician at the castle could probably help us... but that raises problems of its own. You'll understand once we get there.”</i>");
 		Text.Newline();
-		Text.AddOutput("<i>\"Once we know how the portals work, perhaps we can find a way to block her entry. Additionally, we may find a way for you to return home!\"</i> The elf looks at you expectantly.");
+		Text.AddOutput("<i>“Once we know how the portals work, perhaps we can find a way to block her entry. Additionally, we may find a way for you to return home!”</i> The elf looks at you expectantly.");
 		
 		Gui.NextPrompt(Intro.KiaDecideOutset);
 	});
@@ -2201,7 +2201,7 @@ Intro.KiaDecideOutset = function() {
 			
 			Text.AddOutput("You agree, the demon must be stopped, and following the advice of " + name + " seems like a good start, at least. You also have to find out more about this land you have found yourself stuck in.");
 			Text.Newline();
-			Text.AddOutput("<i>\"Good, let us get to it then!\"</i> the elf chimes in, happy that you decided to do the right thing.");
+			Text.AddOutput("<i>“Good, let us get to it then!”</i> the elf chimes in, happy that you decided to do the right thing.");
 			Text.Newline();
 			Text.AddOutput("<b>" + name + " joins your party!</b>");
 			
@@ -2215,9 +2215,9 @@ Intro.KiaDecideOutset = function() {
 		func : function() {
 			gameCache.flags["IntroOutset"] = Intro.Outset.GoHome;
 			
-			Text.AddOutput("<i>\"Look, I know you mean well, but I just want to go home,\"</i> you explain to the disappointed elf, <i>\"Saving the world is not my job.\"</i>");
+			Text.AddOutput("<i>“Look, I know you mean well, but I just want to go home,”</i> you explain to the disappointed elf, <i>“Saving the world is not my job.”</i>");
 			Text.Newline();
-			Text.AddOutput("<i>\"I can understand how you feel, believe me,\"</i> " + name + " says, <i>\"However, that does not change my instructions from lady Aria. I will follow you and try to help you, in any way I can.\"</i>");
+			Text.AddOutput("<i>“I can understand how you feel, believe me,”</i> " + name + " says, <i>“However, that does not change my instructions from lady Aria. I will follow you and try to help you, in any way I can.”</i>");
 			Text.Newline();
 			Text.AddOutput("Do you want to bring " + himher + " along? And, if so, what attitude do you take?");
 			Text.Newline();
@@ -2245,7 +2245,7 @@ Intro.KiaDecideOutset = function() {
 					kiakai.flags["Attitude"] = Kiakai.Attitude.Naughty;
 					kiakai.relation.DecreaseStat(-100, 5);
 					
-					Text.AddOutput("<i>\"You may come along if you wish, but don't think that you, or your lady, is in charge here,\"</i> you declare. " + name + " looks shocked for a moment, but humbly nods, content that " + heshe + " can follow you and help you.");
+					Text.AddOutput("<i>“You may come along if you wish, but don't think that you, or your lady, is in charge here,”</i> you declare. " + name + " looks shocked for a moment, but humbly nods, content that " + heshe + " can follow you and help you.");
 					Text.Newline();
 					Text.AddOutput("<b>" + name + " joins your party!</b>");
 					
@@ -2258,7 +2258,7 @@ Intro.KiaDecideOutset = function() {
 				tooltip : Text.Parse("You'll probably be better off on your own, could you really trust [name]?", {name : kiakai.name}),
 				func : function() {
 					kiakai.flags["Attitude"] = Kiakai.Attitude.Neutral;
-					Text.AddOutput("<i>\"I understand,\"</i> the elf nods sadly, <i>\"I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.\"</i> The elf bows to you and quietly moves towards the entrance of the tent, leaving you to your own devices.");
+					Text.AddOutput("<i>“I understand,”</i> the elf nods sadly, <i>“I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.”</i> The elf bows to you and quietly moves towards the entrance of the tent, leaving you to your own devices.");
 					Gui.NextPrompt(Intro.Finalizing);
 				}, enabled : true
 			});
@@ -2273,13 +2273,13 @@ Intro.KiaDecideOutset = function() {
 			kiakai.subDom.DecreaseStat(-100, 5);
 			kiakai.relation.DecreaseStat(-100, 10);
 				
-			Text.AddOutput("<i>\"That's cute and all, but this isn't how we're going to do things,\"</i> you dismiss the holier-than-thou elf.");
+			Text.AddOutput("<i>“That's cute and all, but this isn't how we're going to do things,”</i> you dismiss the holier-than-thou elf.");
 			Text.Newline();
-			Text.AddOutput("<i>\"W-what?\"</i> " + heshe + " stutters, confused by your words.");
+			Text.AddOutput("<i>“W-what?”</i> " + heshe + " stutters, confused by your words.");
 			Text.Newline();
-			Text.AddOutput("<i>\"Getting the know-how to use the portals is a good first step, but why not use it to our advantage, eh? If we can amass enough power, a demon or two shouldn't be a problem.\"</i>");
+			Text.AddOutput("<i>“Getting the know-how to use the portals is a good first step, but why not use it to our advantage, eh? If we can amass enough power, a demon or two shouldn't be a problem.”</i>");
 			Text.Newline();
-			Text.AddOutput("The elf gives you a long look, reevaluating " + hisher + " opinion of you. <i>\"You are underestimating what Uru is capable of,\"</i> " + heshe + " says darkly, <i>\"And what of me? My orders from lady Aria remain unchanged, will you still let me help you?\"</i>");
+			Text.AddOutput("The elf gives you a long look, reevaluating " + hisher + " opinion of you. <i>“You are underestimating what Uru is capable of,”</i> " + heshe + " says darkly, <i>“And what of me? My orders from lady Aria remain unchanged, will you still let me help you?”</i>");
 			Text.Newline();
 			
 			// [I'm the boss][Decline]
@@ -2288,7 +2288,7 @@ Intro.KiaDecideOutset = function() {
 				tooltip : Text.Parse("The elf could be useful to you, but [heshe] needs to be put in [hisher] place.", {heshe : kiakai.heshe(), hisher : kiakai.hisher()}),
 				func : function() {
 					kiakai.flags["Attitude"] = Kiakai.Attitude.Naughty;
-					Text.AddOutput("<i>\"You may come along if you wish, but don't think that you, or your lady, is in charge here,\"</i> you declare. " + name + " looks shocked for a moment, but humbly nods, content that " + heshe + " can follow you and help you.");
+					Text.AddOutput("<i>“You may come along if you wish, but don't think that you, or your lady, is in charge here,”</i> you declare. " + name + " looks shocked for a moment, but humbly nods, content that " + heshe + " can follow you and help you.");
 					Text.Newline();
 					Text.AddOutput("<b>" + name + " joins your party!</b>");
 					
@@ -2301,7 +2301,7 @@ Intro.KiaDecideOutset = function() {
 				tooltip : "What use could the elf possibly be?",
 				func : function() {
 					kiakai.flags["Attitude"] = Kiakai.Attitude.Neutral;
-					Text.AddOutput("<i>\"I understand,\"</i> the elf nods sadly, <i>\"I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.\"</i> The elf bows to you and quietly moves towards the entrance of the tent, leaving you to your own devices.");
+					Text.AddOutput("<i>“I understand,”</i> the elf nods sadly, <i>“I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.”</i> The elf bows to you and quietly moves towards the entrance of the tent, leaving you to your own devices.");
 					Gui.NextPrompt(Intro.Finalizing);
 				}, enabled : true
 			});
@@ -2338,9 +2338,9 @@ Intro.KiaNiceSex = function() {
 		func : function() {
 			kiakai.flags["Sexed"]++;
 			
-			Text.AddOutput("<i>\"Actually, before we head out, could you help me with something?\"</i>");
+			Text.AddOutput("<i>“Actually, before we head out, could you help me with something?”</i>");
 			Text.Newline();
-			Text.AddOutput("<i>\"I would love to aid you, what is on your mind?\"</i> the elf looks at you inquiringly. You indicate that you could use some more of that healing to get your body in shape. Blushing slightly, " + name + " motions for you to lie on the bedding. With a naughty grin, you recline as the elven " + boygirl + " straddles you and begins to massage your " + player.FirstBreastRow().Short() + " and nibble your nipples. You take a moment to enjoy " + hisher + " attentions, before gently pushing " + hisher + " head lower.");
+			Text.AddOutput("<i>“I would love to aid you, what is on your mind?”</i> the elf looks at you inquiringly. You indicate that you could use some more of that healing to get your body in shape. Blushing slightly, " + name + " motions for you to lie on the bedding. With a naughty grin, you recline as the elven " + boygirl + " straddles you and begins to massage your " + player.FirstBreastRow().Short() + " and nibble your nipples. You take a moment to enjoy " + hisher + " attentions, before gently pushing " + hisher + " head lower.");
 			Text.Newline();
 			Text.AddOutput("The elf gives you a long gaze through " + hisher + " thick lashes, then shifts " + himher + "self to be propped against your side");
 			if(kiakai.body.Gender() == Gender.male)
@@ -2355,12 +2355,12 @@ Intro.KiaNiceSex = function() {
 				Text.AddOutput("Your stiff " + cockDesc() + " springs to attention as it is bared, almost slapping the elf in the face. Using careful touches and light kisses, " + name + " gently nurses it to full stiffness.");
 			}
 			else {
-				Text.AddOutput("Your " + cockDesc() + " springs to attention as it is bared, almost slapping the elf in the face. <i>\"W-woah, I wasn't expecting it to be so... big,\"</i> " + name + " reverently whispers. Apparently the elf got " + himher + "self a good look at your unusual genitalia when clothing you, though it did not seem to prepare " + himher + " for your full erection. " + HeShe + " teases your female parts with one hand while planting hot kisses and licks on your " + cockDesc() + ".");
+				Text.AddOutput("Your " + cockDesc() + " springs to attention as it is bared, almost slapping the elf in the face. <i>“W-woah, I wasn't expecting it to be so... big,”</i> " + name + " reverently whispers. Apparently the elf got " + himher + "self a good look at your unusual genitalia when clothing you, though it did not seem to prepare " + himher + " for your full erection. " + HeShe + " teases your female parts with one hand while planting hot kisses and licks on your " + cockDesc() + ".");
 			}
 			Text.Newline();
 			
 			
-			Text.AddOutput("<i>\"This spot seems to be very sensitive,\"</i> " + name + " murmurs in a husky voice, responding to your soft gasps, <i>\"it will require more attention.\"</i> The elf hoists one of " + hisher + " legs over you, straddling your chest and presenting you with a few interesting bits of your own to play with. Excitedly getting down to business, " + name + " buries " + hisher + " face in your crotch, ");
+			Text.AddOutput("<i>“This spot seems to be very sensitive,”</i> " + name + " murmurs in a husky voice, responding to your soft gasps, <i>“it will require more attention.”</i> The elf hoists one of " + hisher + " legs over you, straddling your chest and presenting you with a few interesting bits of your own to play with. Excitedly getting down to business, " + name + " buries " + hisher + " face in your crotch, ");
 			if(player.body.Gender() == Gender.female)
 				Text.AddOutput("lapping at your sopping cunt, seemingly infatuated with the taste of your sticky nectar.");
 			else
@@ -2411,7 +2411,7 @@ Intro.KiaNiceSex69 = function() {
 				Text.Clear();
 				player.AddSexExp(1);
 				kiakai.AddSexExp(1);
-				Text.AddOutput("Deciding to return the favor, you carefully lift the hem of the elf's robe, exposing " + hisher + " white panties. Pulling them aside, you expose a tight pink slit, absolutely moist with female juices. Humming to yourself, you lean in to administer some \"healing\" of your own. Judging from the muffled gasps down between your legs, the effort is much appreciated.");
+				Text.AddOutput("Deciding to return the favor, you carefully lift the hem of the elf's robe, exposing " + hisher + " white panties. Pulling them aside, you expose a tight pink slit, absolutely moist with female juices. Humming to yourself, you lean in to administer some 'healing' of your own. Judging from the muffled gasps down between your legs, the effort is much appreciated.");
 				Gui.Callstack.pop()();
 			}, enabled : true
 		});
@@ -2423,7 +2423,7 @@ Intro.KiaNiceSex69 = function() {
 				Text.Clear();
 				player.AddSexExp(1);
 				kiakai.AddSexExp(1);
-				Text.AddOutput("Deciding to return the favor, you carefully lift the hem of the elf's robe, exposing " + hisher + " white panties. Pulling them aside, you free the elf's " + kiakai.FirstCock().Short() + ", hard from the excitement. Humming to yourself, you lean in to administer some \"healing\" of your own. Judging from the muffled gasps down between your legs, the effort is much appreciated.");
+				Text.AddOutput("Deciding to return the favor, you carefully lift the hem of the elf's robe, exposing " + hisher + " white panties. Pulling them aside, you free the elf's " + kiakai.FirstCock().Short() + ", hard from the excitement. Humming to yourself, you lean in to administer some 'healing' of your own. Judging from the muffled gasps down between your legs, the effort is much appreciated.");
 				Gui.Callstack.pop()();
 			}, enabled : true
 		});
@@ -2536,15 +2536,15 @@ Intro.KiaNaughtySex = function() {
 				player.AddSexExp(4);
 				kiakai.AddSexExp(4);
 				
-				Text.AddOutput("<i>\"Before we go, you should finish what you started,\"</i> you insist, smirking at the confused elf.");
+				Text.AddOutput("<i>“Before we go, you should finish what you started,”</i> you insist, smirking at the confused elf.");
 				Text.Newline();
-				Text.AddOutput("<i>\"W-what?\"</i> " + name + " looks bewildered. Slowly, you touch one of your fingers to " + hisher + " soft lips, trailing a drop of saliva as you point down to your crotch, patting the bulge in your pants meaningfully. <i>\"" + stutterName + "! Really, that is not appropriate!\"</i> the flustered elf blurts out, blushing and fidgeting with the hem of " + hisher + " robe, trying to hide " + hisher + " own arousal, <i>\"We need to-\"</i>");
+				Text.AddOutput("<i>“W-what?”</i> " + name + " looks bewildered. Slowly, you touch one of your fingers to " + hisher + " soft lips, trailing a drop of saliva as you point down to your crotch, patting the bulge in your pants meaningfully. <i>“" + stutterName + "! Really, that is not appropriate!”</i> the flustered elf blurts out, blushing and fidgeting with the hem of " + hisher + " robe, trying to hide " + hisher + " own arousal, <i>“We need to-”</i>");
 				Text.Newline();
-				Text.AddOutput("<i>\"" + name + ",\"</i> you cut " + himher + " off, <i>\"If we're going to work together, we'll have to get to know each other, and know each other intimately.\"</i> You gently caress the elf's feminine cheek, looking deep into " + hisher + " eyes, <i>\"Why not take this opportunity to... get to know me better?\"</i>");
+				Text.AddOutput("<i>“" + name + ",”</i> you cut " + himher + " off, <i>“If we're going to work together, we'll have to get to know each other, and know each other intimately.”</i> You gently caress the elf's feminine cheek, looking deep into " + hisher + " eyes, <i>“Why not take this opportunity to... get to know me better?”</i>");
 				Text.Newline();
 				Text.AddOutput("Conflicting emotions race through the elf's eyes, but " + heshe + " dutifully gets down on " + hisher + " knees in front of you. You undo your pants and pull out your stiff " + cockDesc() + ". Free from its confines, the rigid rod springs out to slap " + name + " against " + hisher + " cheek, causing " + himher + " to wince slightly.");
 				Text.Newline();
-				Text.AddOutput("<i>\"Yes, just like that,\"</i> you purr as the elf almost immediately begins to suck on your " + cockDesc() + ", succumbing to " + hisher + " lust. Softly trailing your fingers through " + name + "'s short silky hair, you moan in approval as " + heshe + " lathers your length with slick saliva. " + HisHer + " mouth feels so good... but you are just getting started. Taking a firm grip on the back of the elf's head, you insistently push " + hisher + " head forward until your entire length is lodged in " + hisher + " throat.");
+				Text.AddOutput("<i>“Yes, just like that,”</i> you purr as the elf almost immediately begins to suck on your " + cockDesc() + ", succumbing to " + hisher + " lust. Softly trailing your fingers through " + name + "'s short silky hair, you moan in approval as " + heshe + " lathers your length with slick saliva. " + HisHer + " mouth feels so good... but you are just getting started. Taking a firm grip on the back of the elf's head, you insistently push " + hisher + " head forward until your entire length is lodged in " + hisher + " throat.");
 				Text.Newline();
 				Text.AddOutput("You close your eyes and almost forget yourself for a while, relishing in the tight velvety cocksleeve, only returning to reality when the elf's gurgling protests grow desperate, and " + hisher + " hands weakly push against your thighs. Relenting a little, you allow " + name + " enough leeway to draw a ragged breath before burying yourself in " + hisher + " throat again. You repeat the slow process several times over the next twenty minutes, the elf  moving in and out of consciousness.");
 				Text.Newline();
@@ -2571,11 +2571,11 @@ Intro.KiaNaughtySex = function() {
 				player.AddSexExp(4);
 				kiakai.AddSexExp(4);
 				
-				Text.AddOutput("<i>\"Before we go, you should finish what you started,\"</i> you insist, smirking at the confused elf.");
+				Text.AddOutput("<i>“Before we go, you should finish what you started,”</i> you insist, smirking at the confused elf.");
 				Text.Newline();
-				Text.AddOutput("<i>\"W-what?\"</i> " + name + " looks bewildered. Slowly, you touch one of your fingers to " + hisher + " soft lips, trailing a drop of saliva as you point down to your crotch, pointing at the damp patch in your pants meaningfully. <i>\"" + stutterName + "! Really, that is not appropriate!\"</i> the flustered elf blurts out, blushing and fidgeting with the hem of " + hisher + " robe, trying to hide " + hisher + " own arousal, <i>\"We need to-\"</i>");
+				Text.AddOutput("<i>“W-what?”</i> " + name + " looks bewildered. Slowly, you touch one of your fingers to " + hisher + " soft lips, trailing a drop of saliva as you point down to your crotch, pointing at the damp patch in your pants meaningfully. <i>“" + stutterName + "! Really, that is not appropriate!”</i> the flustered elf blurts out, blushing and fidgeting with the hem of " + hisher + " robe, trying to hide " + hisher + " own arousal, <i>“We need to-”</i>");
 				Text.Newline();
-				Text.AddOutput("<i>\"" + name + ",\"</i> you cut " + himher + " off, <i>\"If we're going to work together, we'll have to get to know each other, and know each other intimately.\"</i> You gently caress the elf's feminine cheek, looking deep into " + hisher + " eyes, <i>\"Why not take this opportunity to... get to know me better?\"</i>");
+				Text.AddOutput("<i>“" + name + ",”</i> you cut " + himher + " off, <i>“If we're going to work together, we'll have to get to know each other, and know each other intimately.”</i> You gently caress the elf's feminine cheek, looking deep into " + hisher + " eyes, <i>“Why not take this opportunity to... get to know me better?”</i>");
 				Text.Newline();
 				Text.AddOutput("Conflicting emotions race through the elf's eyes, but " + heshe + " dutifully gets down on " + hisher + " knees in front of you. You undo your pants, exposing your moist nether lips");
 				if(cockDesc) Text.AddOutput(", and freeing your stiff " + cockDesc() + " in the process");

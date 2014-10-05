@@ -163,11 +163,11 @@ Scenes.Rosalin.Interact = function() {
 		heshe      : rosalin.heshe()
 	}
 	
-	Text.Add("<i>\"Hi, [playername],\"</i> Rosalin hails you with a bright smile. <i>\"What's on your mind?\"</i>", parse);
+	Text.Add("<i>“Hi, [playername],”</i> Rosalin hails you with a bright smile. <i>“What's on your mind?”</i>", parse);
 	Text.NL();
 	
 	if(rosalin.flags["AlQuest"] == 1) { // On quest
-		Text.Add("<i>\"Let's see... I need some lettuce, carrot juice and a rabbit foot,\"</i> she says. <i>\"You should be able to get all of it from the bunnies running around the plains.\"</i>", parse);
+		Text.Add("<i>“Let's see... I need some lettuce, carrot juice and a rabbit foot,”</i> she says. <i>“You should be able to get all of it from the bunnies running around the plains.”</i>", parse);
 		Text.NL();
 		Text.Add("<b>You should be able to find some bunnies if you go to the crossroads and look around (X).</b>", parse);
 		Text.NL();
@@ -175,7 +175,7 @@ Scenes.Rosalin.Interact = function() {
 	else if(rosalin.flags["AlQuest"] == 2) { // Quest just finished
 		rosalin.flags["AlQuest"] = 3; // Finished
 		
-		Text.Add("<i>\"Seems like my ears are fine now,\"</i> she says, carefully touching the fluffy appendages. <i>\"They haven't done... <b>that</b> since the first time.\"</i>", parse);
+		Text.Add("<i>“Seems like my ears are fine now,”</i> she says, carefully touching the fluffy appendages. <i>“They haven't done... <b>that</b> since the first time.”</i>", parse);
 		Text.NL();
 	}
 	Text.Flush();
@@ -262,17 +262,17 @@ Scenes.Rosalin.TalkPrompt = function() {
 				Text.Clear();
 				Text.Add("A morbid curiosity drives you to ask the alchemist about her craft.", parse);
 				Text.NL();
-				Text.Add("<i>\"Sure, [playername]!\"</i> Rosalin nods happily, excited that you are showing interest in her work. <i>\"Alchemy is pretty awesome! You can brew potions, drafts, and even use it to create super special tools!\"</i> Dropping the stuff she is working on at the moment - to the detriment of the local vegetation, which is doused in a generous splash of a glowing green liquid - the catgirl picks up a few bowls, showing them to you.", parse);
+				Text.Add("<i>“Sure, [playername]!”</i> Rosalin nods happily, excited that you are showing interest in her work. <i>“Alchemy is pretty awesome! You can brew potions, drafts, and even use it to create super special tools!”</i> Dropping the stuff she is working on at the moment - to the detriment of the local vegetation, which is doused in a generous splash of a glowing green liquid - the catgirl picks up a few bowls, showing them to you.", parse);
 				Text.NL();
-				Text.Add("<i>\"There are several types of ingredients that can be used for alchemy,\"</i> she explains. <i>\"Most basic alchemical compounds are created from passive ingredients like these.\"</i> She points out a random assortment of small jars and bottles. Most seems to be samples taken from animals and plants, others are common cooking ingredients. <i>\"This stuff doesn't have much use on its own, though some make for a good snack,\"</i> she comments. <i>\"It gets interesting when you mix them together, though.\"</i>", parse);
+				Text.Add("<i>“There are several types of ingredients that can be used for alchemy,”</i> she explains. <i>“Most basic alchemical compounds are created from passive ingredients like these.”</i> She points out a random assortment of small jars and bottles. Most seems to be samples taken from animals and plants, others are common cooking ingredients. <i>“This stuff doesn't have much use on its own, though some make for a good snack,”</i> she comments. <i>“It gets interesting when you mix them together, though.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>\"With the correct preparation, you can get something like <b>this</b>.\"</i> She grins at you, pulling out a stoppered bottle. The liquid inside it is a clear blue, and looks hazardous. <i>\"Active ingredients can be used in even more complex recipes,\"</i> Rosalin continues, <i>\"but they also have uses of their own. This one for example, will make your balls grow three times their size! That, or make you grow bald. I haven't tested it yet.\"</i>", parse);
+				Text.Add("<i>“With the correct preparation, you can get something like <b>this</b>.”</i> She grins at you, pulling out a stoppered bottle. The liquid inside it is a clear blue, and looks hazardous. <i>“Active ingredients can be used in even more complex recipes,”</i> Rosalin continues, <i>“but they also have uses of their own. This one for example, will make your balls grow three times their size! That, or make you grow bald. I haven't tested it yet.”</i>", parse);
 				Text.NL();
 				Text.Add("Perhaps she could teach you how to do it?", parse);
 				Text.NL();
-				Text.Add("<i>\"Oh, I'd love to, [playername]! First, you need some basic ingredients. Patchwork might sell some to you, but usually you'd need to find them somewhere else. Let's see, for our first potion, we should make...\"</i> Getting a naughty look on her face, Rosalin innocently asks, <i>\"Say, how do you think I'd look with bunny ears?\"</i> Not sure how to respond, you shrug.", parse);
+				Text.Add("<i>“Oh, I'd love to, [playername]! First, you need some basic ingredients. Patchwork might sell some to you, but usually you'd need to find them somewhere else. Let's see, for our first potion, we should make...”</i> Getting a naughty look on her face, Rosalin innocently asks, <i>“Say, how do you think I'd look with bunny ears?”</i> Not sure how to respond, you shrug.", parse);
 				Text.NL();
-				Text.Add("<i>\"How about we find out?\"</i> she asks. <i>\"Bring me some lettuce, some carrot juice and a rabbit foot charm,\"</i> the catgirl instructs. <i>\"Some of it you could probably get from Patches, but she'll charge you an exorbitant amount for it. Easier to get it from the source. Go look around the plains, finding some bunnies shouldn't be a problem. It's like there's an infestation of them there...\"</i> You take note of the items to get, then head out.", parse);
+				Text.Add("<i>“How about we find out?”</i> she asks. <i>“Bring me some lettuce, some carrot juice and a rabbit foot charm,”</i> the catgirl instructs. <i>“Some of it you could probably get from Patches, but she'll charge you an exorbitant amount for it. Easier to get it from the source. Go look around the plains, finding some bunnies shouldn't be a problem. It's like there's an infestation of them there...”</i> You take note of the items to get, then head out.", parse);
 				Text.NL();
 				Text.Add("Before you leave, you notice that the plant growing next to Rosalin's desk seems to have grown at least twice in size since you last looked. The leaves look slightly fuzzy, like they have a thin layer of fur on them, but overall it seems to be flourishing. Curious.", parse);
 
@@ -296,29 +296,29 @@ Scenes.Rosalin.TalkPrompt = function() {
 					party.inventory.RemoveItem(ingredient.it, ingredient.num);
 				}
 				
-				Text.Add("<i>\"Great, you got the things I asked for!\"</i> You are quickly relieved of the requested items, and Rosalin busies herself preparing her alchemical tools. As she works, she points out the various devices she uses, providing a small explanation for each.", parse);
+				Text.Add("<i>“Great, you got the things I asked for!”</i> You are quickly relieved of the requested items, and Rosalin busies herself preparing her alchemical tools. As she works, she points out the various devices she uses, providing a small explanation for each.", parse);
 				Text.NL();
-				Text.Add("<i>\"Really, it's all in the ingredients you pick, how you prepare them before mixing, and a bit of luck!\"</i> she finishes, throwing the items you brought into a small pot. Rosalin carefully adds a few smoldering flakes from a sealed container labeled 'salamander scales'. <i>\"For the taste,\"</i> she explains. <i>\"Not really a vegetarian. Besides, I've always wondered what would happen if I mixed in some of this.\"</i>", parse);
+				Text.Add("<i>“Really, it's all in the ingredients you pick, how you prepare them before mixing, and a bit of luck!”</i> she finishes, throwing the items you brought into a small pot. Rosalin carefully adds a few smoldering flakes from a sealed container labeled 'salamander scales'. <i>“For the taste,”</i> she explains. <i>“Not really a vegetarian. Besides, I've always wondered what would happen if I mixed in some of this.”</i>", parse);
 				Text.NL();
 				Text.Add("You look on dubiously as the scales change the color of the draft from orange to a sooty red. Small bubbles breach the surface of the concoction, smelling slightly of sulphur as they pop. Slightly concerned, you ask her if that is really a part of the recipe. The ditzy alchemist doesn't exactly have a good track-record in your book.", parse);
 				Text.NL();
-				Text.Add("<i>\"Hey, I'm the genius here, I know what I'm doing,\"</i> she snaps at you, annoyed. <i>\"Besides, experimenting with new stuff is half the fun!\"</i>", parse);
+				Text.Add("<i>“Hey, I'm the genius here, I know what I'm doing,”</i> she snaps at you, annoyed. <i>“Besides, experimenting with new stuff is half the fun!”</i>", parse);
 				Text.NL();
 				Text.Add("What about the risks?", parse);
 				Text.NL();
-				Text.Add("The catgirl looks at you, not comprehending. <i>\"What risks?\"</i> Well, disregarding that the mixture is probably hazardous, didn't the last one change her eyes? <i>\"Well... isn't that the point?\"</i> she asks, confused. <i>\"What did you think I became an alchemist for, turning lead into gold?\"</i>", parse);
+				Text.Add("The catgirl looks at you, not comprehending. <i>“What risks?”</i> Well, disregarding that the mixture is probably hazardous, didn't the last one change her eyes? <i>“Well... isn't that the point?”</i> she asks, confused. <i>“What did you think I became an alchemist for, turning lead into gold?”</i>", parse);
 				Text.NL();
 				Text.Add("You are not quite sure how to answer that.", parse);
 				Text.NL();
 				Text.Add("Licking her lips eagerly, Rosalin swallows the mixture in one go, gulping down the thick liquid until the container is empty. At first, nothing seems to happen, other than the catgirl expelling a confused burp along with a puff of smoke. When it comes, the change is rapid. Rosalin's feline ears twitch slightly, then shrink into her mass of teal hair, leaving no trace of their existence. Before you have time to comment on this, a pair of floppy bunny ears pop out in their place.", parse);
 				Text.NL();
-				Text.Add("<i>\"Wow, that really hit the spot!\"</i> the catgirl sighs happily, fondling her new extremities. The ears are long, covered in fluffy, sooty black fur. <i>\"Another successful experiment!\"</i> she exclaims, <i>\"Girl, you are a geni-<b>hick</b>!\"</i> Cut off by a sudden hiccup, she coughs out another puff of smoke. Her expression turns from confused to fearful as tendrils of smoke rise from inside her ears.", parse);
+				Text.Add("<i>“Wow, that really hit the spot!”</i> the catgirl sighs happily, fondling her new extremities. The ears are long, covered in fluffy, sooty black fur. <i>“Another successful experiment!”</i> she exclaims, <i>“Girl, you are a geni-<b>hick</b>!”</i> Cut off by a sudden hiccup, she coughs out another puff of smoke. Her expression turns from confused to fearful as tendrils of smoke rise from inside her ears.", parse);
 				Text.NL();
-				Text.Add("<i>\"Uhm, what is goi-\"</i> You are buffeted by a small heatwave as Rosalin's ears suddenly burst into flame. <i>\"Omigodomigodomigod I'm on fiiire!\"</i> Before you can lend her a hand, the screaming catgirl is off, running around the camp in panic. She manages to take two full rounds around the campfire, shrieking gibberish, before stuffing her head into a water barrel, dousing herself.", parse);
+				Text.Add("<i>“Uhm, what is goi-”</i> You are buffeted by a small heatwave as Rosalin's ears suddenly burst into flame. <i>“Omigodomigodomigod I'm on fiiire!”</i> Before you can lend her a hand, the screaming catgirl is off, running around the camp in panic. She manages to take two full rounds around the campfire, shrieking gibberish, before stuffing her head into a water barrel, dousing herself.", parse);
 				Text.NL();
 				Text.Add("You hurry over to her side to see if she is ok. Smelling of wet, burnt fur and wearing a deadpan expression, the alchemist pulls out her notepad. Her hand shakes slightly as she crosses out the entry titled 'salamander scales'. Pausing for a moment, she crosses it over again, for good measure.", parse);
 				Text.NL();
-				Text.Add("<i>\"I... I'm sure the next one will be better,\"</i> she wheezes weakly, before going into another coughing fit. You make sure that she is alright before leaving, handing her over to some of the nomads for care.", parse);
+				Text.Add("<i>“I... I'm sure the next one will be better,”</i> she wheezes weakly, before going into another coughing fit. You make sure that she is alright before leaving, handing her over to some of the nomads for care.", parse);
 				Text.NL();
 				Text.Add("You <i>did</i> actually pick up on some things while watching her work, though after the result of her experiments, you vow to not deviate from the recipe.", parse);
 				Text.NL();
@@ -350,11 +350,11 @@ Scenes.Rosalin.TalkPrompt = function() {
 		options.push({ nameStr : "Alchemy",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>\"There are several types of ingredients that can be used for alchemy,\"</i> Rosalin explains. <i>\"Most basic alchemical compounds are created from passive ingredients like these.\"</i> [HeShe] points out a random assortment of small jars and bottles. Most seem to be samples taken from animals or plants, others are common cooking ingredients. <i>\"This stuff doesn't have much use on its own, but it gets interesting when you mix them together.\"</i>", parse);
+				Text.Add("<i>“There are several types of ingredients that can be used for alchemy,”</i> Rosalin explains. <i>“Most basic alchemical compounds are created from passive ingredients like these.”</i> [HeShe] points out a random assortment of small jars and bottles. Most seem to be samples taken from animals or plants, others are common cooking ingredients. <i>“This stuff doesn't have much use on its own, but it gets interesting when you mix them together.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>\"With the correct preparation, you can get something like <b>this</b>.\"</i> [HeShe] pulls out a stoppered bottle containing a clear blue liquid. <i>\"Active ingredients can be used in even more complex recipes,\"</i> Rosalin continues, <i>\"but they also have uses of their own.\"</i>", parse);
+				Text.Add("<i>“With the correct preparation, you can get something like <b>this</b>.”</i> [HeShe] pulls out a stoppered bottle containing a clear blue liquid. <i>“Active ingredients can be used in even more complex recipes,”</i> Rosalin continues, <i>“but they also have uses of their own.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>\"Finally, alchemy can be used to create special tools, or enhance equipment.\"</i> You pose a few followup questions, and Rosalin shows you how some common ingredients are prepared. The two of you talk for a while, and you feel that you get the hang of it. <i>\"Sorry, the best way is really to try it out for yourself. Unless you want to be my apprentice?\"</i> Not wishing to die early, you politely decline the offer.", parse);
+				Text.Add("<i>“Finally, alchemy can be used to create special tools, or enhance equipment.”</i> You pose a few followup questions, and Rosalin shows you how some common ingredients are prepared. The two of you talk for a while, and you feel that you get the hang of it. <i>“Sorry, the best way is really to try it out for yourself. Unless you want to be my apprentice?”</i> Not wishing to die early, you politely decline the offer.", parse);
 				Text.NL();
 				Text.Add("<b>You can try alchemy on your own by selecting it from the menu.</b>", parse);
 				Text.Flush();
@@ -369,15 +369,15 @@ Scenes.Rosalin.TalkPrompt = function() {
 			func : function() {
 				Text.Clear();
 				
-				Text.Add("<i>\"You wanna know about me?\"</i> the alchemist looks slightly surprised. <i>\"Well, let's see... I grew up in Rigard, third child of a relatively well-to-do noble family. Always had a calling to mixing things, and I thought I wanted to be a chef when I was young.\"</i> [HisHer] eyes look off into the distance. <i>\"I was really proud of my first dish, and I gave it to my daddy for testing. He seemed to really like it.... but I think it was shortly after that when I found a different calling.\"</i>", parse);
+				Text.Add("<i>“You wanna know about me?”</i> the alchemist looks slightly surprised. <i>“Well, let's see... I grew up in Rigard, third child of a relatively well-to-do noble family. Always had a calling to mixing things, and I thought I wanted to be a chef when I was young.”</i> [HisHer] eyes look off into the distance. <i>“I was really proud of my first dish, and I gave it to my daddy for testing. He seemed to really like it.... but I think it was shortly after that when I found a different calling.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>\"Daddy suddenly fell ill, you see, and was stuck in bed for several months. So I gave up my dream of becoming a master chef and became a doctor instead. Just think of what may have happened if I hadn't been there with my remedies! He might have died!\"</i>", parse);
+				Text.Add("<i>“Daddy suddenly fell ill, you see, and was stuck in bed for several months. So I gave up my dream of becoming a master chef and became a doctor instead. Just think of what may have happened if I hadn't been there with my remedies! He might have died!”</i>", parse);
 				Text.NL();
-				Text.Add("<i>\"My parents were really supportive,\"</i> Rosalin continues, <i>\"once daddy got better, he went to several healers in town, looking to set me up with an apprenticeship. I had several teachers, but after a week or so with each of them, they all agreed I was destined for greater things, so daddy found me a different one. It was a busy time, I was hardly ever home at all!\"</i>", parse);
+				Text.Add("<i>“My parents were really supportive,”</i> Rosalin continues, <i>“once daddy got better, he went to several healers in town, looking to set me up with an apprenticeship. I had several teachers, but after a week or so with each of them, they all agreed I was destined for greater things, so daddy found me a different one. It was a busy time, I was hardly ever home at all!”</i>", parse);
 				Text.NL();
-				Text.Add("<i>\"Eventually, I was admitted as a disciple of Jeanne, the court magician. I took quite a liking to magic, but could never quite get the hang of it. Alchemy, however... this was what I was born to do!\"</i> [HeShe] trails off, lost down memory lane.", parse);
+				Text.Add("<i>“Eventually, I was admitted as a disciple of Jeanne, the court magician. I took quite a liking to magic, but could never quite get the hang of it. Alchemy, however... this was what I was born to do!”</i> [HeShe] trails off, lost down memory lane.", parse);
 				Text.NL();
-				Text.Add("<i>\"I had a really fun time there,\"</i> the [raceDesc] reminisces fondly, <i>\"alas, my time there was cut short.\"</i> [HeShe] sniffs. <i>\"That stuffy elf just couldn't appreciate my true genious.\"</i>", parse);
+				Text.Add("<i>“I had a really fun time there,”</i> the [raceDesc] reminisces fondly, <i>“alas, my time there was cut short.”</i> [HeShe] sniffs. <i>“That stuffy elf just couldn't appreciate my true genious.”</i>", parse);
 				Text.NL();
 				Text.Add("You wait to hear a continuation of the story, but Rosalin seems to be finished for now. [HeShe] stares off into the distance for a while, then goes back to her work, ignoring you.", parse);
 				
@@ -396,21 +396,21 @@ Scenes.Rosalin.TalkPrompt = function() {
 			func : function() {
 				Text.Clear();
 				
-				Text.Add("<i>\"Why'd you want to know about her?\"</i> Rosalin shoots back, a bit annoyed, <i>\"by now, I've far surpassed her in alchemy. I'm doing stuff she wouldn't even <b>dream</b> of trying.\"</i> Somehow, you don't doubt that last part. Still, you try to get some more information from the [raceDesc] alchemist.", parse);
+				Text.Add("<i>“Why'd you want to know about her?”</i> Rosalin shoots back, a bit annoyed, <i>“by now, I've far surpassed her in alchemy. I'm doing stuff she wouldn't even <b>dream</b> of trying.”</i> Somehow, you don't doubt that last part. Still, you try to get some more information from the [raceDesc] alchemist.", parse);
 				Text.NL();
-				Text.Add("<i>\"Fiiine!\"</i> [heshe] relents, pouting a bit.", parse);
+				Text.Add("<i>“Fiiine!”</i> [heshe] relents, pouting a bit.", parse);
 				Text.NL();
 				Text.Add("From what you piece together, Jeanne the magician is an elf, and has been serving as the court mage and head alchemist for the royal family for generations. She has a tower inside the walls of the royal estate, where she studies the arts of magic.", parse);
 				Text.NL();
-				Text.Add("Rosalin recounts how [heshe] studied under Jeanne, and subsequently got thrown out. <i>\"I was one of many disciples, but my work was on another level from theirs,\"</i> the [raceDesc] boasts. <i>\"They lacked vision, every one of them. Afraid to try new things...\"</i> Rosalin's expression turns sour. <i>\"Of course, <b>she</b> didn't agree with that. Sniffed at my cute tail when I first grew it, she did!\"</i>", parse);
+				Text.Add("Rosalin recounts how [heshe] studied under Jeanne, and subsequently got thrown out. <i>“I was one of many disciples, but my work was on another level from theirs,”</i> the [raceDesc] boasts. <i>“They lacked vision, every one of them. Afraid to try new things...”</i> Rosalin's expression turns sour. <i>“Of course, <b>she</b> didn't agree with that. Sniffed at my cute tail when I first grew it, she did!”</i>", parse);
 				Text.NL();
-				Text.Add("<i>\"...And thus it was that my teacher found me feeding a special concoction I had brewed up to one of the other students.\"</i> You raise your eyebrows in question. <i>\"Look, he agreed to it. Kinda. He might have been a bit drunk at the time. He always wanted a bigger cock anyways,\"</i> [heshe] finishes defensively.", parse);
+				Text.Add("<i>“...And thus it was that my teacher found me feeding a special concoction I had brewed up to one of the other students.”</i> You raise your eyebrows in question. <i>“Look, he agreed to it. Kinda. He might have been a bit drunk at the time. He always wanted a bigger cock anyways,”</i> [heshe] finishes defensively.", parse);
 				Text.NL();
 				Text.Add("What happened?", parse);
 				Text.NL();
-				Text.Add("<i>\"It worked!\"</i> [heshe] exclaims excitedly, <i>\"though... perhaps a bit <b>too</b> well. They had to tow him away in a wheelbarrow.\"</i> Rosalin shrugs dismissively. <i>\"First prototype.\"</i>", parse);
+				Text.Add("<i>“It worked!”</i> [heshe] exclaims excitedly, <i>“though... perhaps a bit <b>too</b> well. They had to tow him away in a wheelbarrow.”</i> Rosalin shrugs dismissively. <i>“First prototype.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>\"Anyway, the elven hag threw me out of there after that. Good riddance, I say. Her lectures were always so boring, only stupid healing remedies. She was only keeping me back.\"</i> There is a slightly mad look in Rosalin's eyes, and you detect traces of hurt pride in [hisher] voice.", parse);
+				Text.Add("<i>“Anyway, the elven hag threw me out of there after that. Good riddance, I say. Her lectures were always so boring, only stupid healing remedies. She was only keeping me back.”</i> There is a slightly mad look in Rosalin's eyes, and you detect traces of hurt pride in [hisher] voice.", parse);
 				if(rigard.Access()) {
 					Text.NL();
 					Text.Add("It sounds like the court mage could be a good person to ask about the gemstone, but to reach her you have to enter the City of Rigard first, and then somehow get to her tower.", parse);
@@ -436,17 +436,17 @@ Scenes.Rosalin.TalkPrompt = function() {
 			func : function() {
 				Text.Clear();
 				
-				Text.Add("<i>\"I wandered around a bit after my apprenticeship ended, not really knowing where to go,\"</i> Rosalin tells you. <i>\"Rigard wasn't really a place for me - there was no place where I could perform my experiments in peace.\"</i>", parse);
+				Text.Add("<i>“I wandered around a bit after my apprenticeship ended, not really knowing where to go,”</i> Rosalin tells you. <i>“Rigard wasn't really a place for me - there was no place where I could perform my experiments in peace.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>\"I... tried to find the tree city, figuring it would be perfect, but I never managed to find it.\"</i> The alchemist sighs regretfully. <i>\"Estevan was the one who found me, wandering around the forest. Running low on water and food... ah, what don't I do for science! He told me of this great place here, and I've been here since.\"</i> The [raceDesc] waves around [himher] at the camp.", parse);
+				Text.Add("<i>“I... tried to find the tree city, figuring it would be perfect, but I never managed to find it.”</i> The alchemist sighs regretfully. <i>“Estevan was the one who found me, wandering around the forest. Running low on water and food... ah, what don't I do for science! He told me of this great place here, and I've been here since.”</i> The [raceDesc] waves around [himher] at the camp.", parse);
 				Text.NL();
 				
 				parse["Cale"] = cale.name == "Cale" ? "Cale" : "the friendly wolf-morph";
-				Text.Add("<i>\"Free reign to run my experiments, and even some willing participants at times! They don't even get angry if I mix a little in the food once in a while!\"</i>", parse);
+				Text.Add("<i>“Free reign to run my experiments, and even some willing participants at times! They don't even get angry if I mix a little in the food once in a while!”</i>", parse);
 				Text.NL();
 				Text.Add("And helpful assistance in her times of need, you add slyly, mentioning [Cale].", parse);
 				Text.NL();
-				Text.Add("<i>\"That too!\"</i> Rosalin agrees, unperturbed.", parse);
+				Text.Add("<i>“That too!”</i> Rosalin agrees, unperturbed.", parse);
 				
 				if(rosalin.flags["PastDialog"] == Rosalin.PastDialog.Nomads) {
 					rosalin.relation.IncreaseStat(100, 3);
@@ -463,21 +463,21 @@ Scenes.Rosalin.TalkPrompt = function() {
 			func : function() {
 				Text.Clear();
 				
-				Text.Add("<i>\"There is said to be a large city in the branches of the Great Tree,\"</i> Rosalin excitedly tells you, pointing toward the hulking behemoth in the distance. As if you could miss it. <i>\"All sorts of folks are said to live there; morphs, talking animals, strange creatures from lands you couldn't even imagine! Just think of all the knowledge they must have...\"</i> [HeShe] trails off, looking a bit dejected.", parse);
+				Text.Add("<i>“There is said to be a large city in the branches of the Great Tree,”</i> Rosalin excitedly tells you, pointing toward the hulking behemoth in the distance. As if you could miss it. <i>“All sorts of folks are said to live there; morphs, talking animals, strange creatures from lands you couldn't even imagine! Just think of all the knowledge they must have...”</i> [HeShe] trails off, looking a bit dejected.", parse);
 				Text.NL();
-				Text.Add("<i>\"I never managed to get there, though. Even if I braved the forest and managed to reach the trunk, I'm not sure how I would climb it. It looks so far!\"</i>", parse);
+				Text.Add("<i>“I never managed to get there, though. Even if I braved the forest and managed to reach the trunk, I'm not sure how I would climb it. It looks so far!”</i>", parse);
 				Text.NL();
 				
 				if(treecity.flags["Access"] != 0 && rosalin.flags["TreeCityTalk"] == 0) {
 					Text.Add("You tell [himher] that you have actually been there.", parse);
 					Text.NL();
-					Text.Add("<i>\"Y-you what?\"</i> the alchemist exclaims, <i>\"you'd better not be pulling my tail!\"</i>", parse);
+					Text.Add("<i>“Y-you what?”</i> the alchemist exclaims, <i>“you'd better not be pulling my tail!”</i>", parse);
 					if(!rosalin.HasTail())
-						Text.Add(" Rosalin checks over [hisher] shoulder. <i>\"Oh, right. Figuratively speaking, of course. Could have sworn I had one of those recently.\"</i>", parse);
+						Text.Add(" Rosalin checks over [hisher] shoulder. <i>“Oh, right. Figuratively speaking, of course. Could have sworn I had one of those recently.”</i>", parse);
 					Text.NL();
 					Text.Add("You recount the tale of your arrival in the city. [HisHer] eyes grows wider and wider, until [heshe] cannot contain [hisher] excitement anymore. You're suddenly flooded with questions, barely managing to keep up with the alchemist.", parse);
 					Text.NL();
-					Text.Add("<i>\"T-that's amazing!\"</i> Rosalin is practically jumping up and down on the spot. [HeShe] whirls around, grabs a sack and starts to throw pieces of [hisher] equipment into it. <i>\"There is so much I want to see there, I can hardly wait!\"</i> the alchemist chatters, <i>\"I wonder what sort of potions they brew! Should I bring these?\"</i> [HeShe] curtly dismisses a set of tools. <i>\"Too rural, they must have way better tools there. Do they accept regular coins?\"</i>", parse);
+					Text.Add("<i>“T-that's amazing!”</i> Rosalin is practically jumping up and down on the spot. [HeShe] whirls around, grabs a sack and starts to throw pieces of [hisher] equipment into it. <i>“There is so much I want to see there, I can hardly wait!”</i> the alchemist chatters, <i>“I wonder what sort of potions they brew! Should I bring these?”</i> [HeShe] curtly dismisses a set of tools. <i>“Too rural, they must have way better tools there. Do they accept regular coins?”</i>", parse);
 					Text.NL();
 					Text.Add("Hold up a bit! Did [heshe] miss the part about how dangerous it was to go there? Rosalin looks crestfallen, mumbling something and avoiding your gaze. Dejected, [heshe] slowly unpacks.", parse);
 					Text.NL();
@@ -491,7 +491,7 @@ Scenes.Rosalin.TalkPrompt = function() {
 				else {
 					Text.Add("You ask [himher] if anyone [heshe] knows has ever been there.", parse);
 					Text.NL();
-					Text.Add("<i>\"It isn't just a rumor!\"</i> Rosalin frowns at you, berating you for doubting her. <i>\"I found an old book about it, and the chief said it may well be true!\"</i>", parse);
+					Text.Add("<i>“It isn't just a rumor!”</i> Rosalin frowns at you, berating you for doubting her. <i>“I found an old book about it, and the chief said it may well be true!”</i>", parse);
 				}
 				Text.NL();
 				Text.Add("After chatting for a bit, you decide to leave the alchemist to [hisher] dreams.", parse);
@@ -633,53 +633,53 @@ Scenes.Rosalin.FirstTime = function() {
 	Text.NL();
 	Text.Add("Taking advantage of her focused attention, you take stock of the girl. Shorter than average, her curvy, tanned body is a perfect fit for her scanty green dress, tied up to her hip on one side. Her bodice does a poor job of containing her C-cup breasts, which are in constant danger of popping out. With the exception of her tail and the feline ears poking out of her long curly teal hair, the woman seems to be human.", parse);
 	Text.NL();
-	Text.Add("She finally notices you, turning around with a bright smile. <i>\"Why hello there, you are a new face!\"</i> Abandoning her glass bottles completely, she saunters over to you, grabbing and shaking your hand enthusiastically. Once you regain possession of it, you wipe off a thick gel she unwittingly transferred to it, trying to make it appear inconspicuous. <i>\"I'm Rosalin, alchemist prodigy!\"</i>", parse);
+	Text.Add("She finally notices you, turning around with a bright smile. <i>“Why hello there, you are a new face!”</i> Abandoning her glass bottles completely, she saunters over to you, grabbing and shaking your hand enthusiastically. Once you regain possession of it, you wipe off a thick gel she unwittingly transferred to it, trying to make it appear inconspicuous. <i>“I'm Rosalin, alchemist prodigy!”</i>", parse);
 	Text.NL();
 	Text.Add("Hopefully, you extract the dull gem from your pocket and present it to her. Taking the gem in her clawed hands, she turns it around, studying it from different angles. Her conventional avenues of investigation apparently exhausted, she tries to bite it.", parse);
 	Text.NL();
 	
 	if(party.InParty(kiakai))
-		Text.Add("<i>\"W-what in Aria's name do you think you are doing, woman!\"</i> your elvish companion exclaims, hurriedly retrieving the gemstone from the annoyed catgirl.", parse);
+		Text.Add("<i>“W-what in Aria's name do you think you are doing, woman!”</i> your elvish companion exclaims, hurriedly retrieving the gemstone from the annoyed catgirl.", parse);
 	else
 		Text.Add("Concerned for the safety of the stone, you ask for it back and hurriedly retrieve the gemstone before she has chance to deal any damage to it.", parse);
 	Text.NL();
 	
-	Text.Add("<i>\"I dunno, might be magic.\"</i> She shrugs. <i>\"The glow is real pretty, though. I wonder what properties it would have if ground into a powder?\"</i> Pulling out a battered notebook, the woman scrawls down some observations. <i>\"You wouldn't mind me borrowing it for a while?\"</i> Decisively shaking your head, you pocket the stone again.", parse);
+	Text.Add("<i>“I dunno, might be magic.”</i> She shrugs. <i>“The glow is real pretty, though. I wonder what properties it would have if ground into a powder?”</i> Pulling out a battered notebook, the woman scrawls down some observations. <i>“You wouldn't mind me borrowing it for a while?”</i> Decisively shaking your head, you pocket the stone again.", parse);
 	Text.NL();
 	Text.Add("Prodigy? Really? She doesn't look the type... in fact, face to face with her, the catgirl seems flighty, her attention constantly wandering. You ask her what she is working on right now.", parse);
 	Text.NL();
-	Text.Add("<i>\"Oh, this? I got an idea to improve the potency of the Felinix draft by adding some other ingredients to it!\"</i> She certainly seems excited about it, even if you have no idea what she is talking about. The smoke rising from her abandoned mixture has become a bright yellow in color, and seems to be bubbling violently.", parse);
+	Text.Add("<i>“Oh, this? I got an idea to improve the potency of the Felinix draft by adding some other ingredients to it!”</i> She certainly seems excited about it, even if you have no idea what she is talking about. The smoke rising from her abandoned mixture has become a bright yellow in color, and seems to be bubbling violently.", parse);
 	Text.NL();
-	Text.Add("<i>\"The key point is the hairballs, but I hate the taste of those things,\"</i> she complains, unconcerned by the rising pillar of smoke behind her, <i>\"so I thought I'd try to improve the flavor a bit with some equine cum.\"</i>", parse);
+	Text.Add("<i>“The key point is the hairballs, but I hate the taste of those things,”</i> she complains, unconcerned by the rising pillar of smoke behind her, <i>“so I thought I'd try to improve the flavor a bit with some equine cum.”</i>", parse);
 	Text.NL();
-	Text.Add("...What? Glancing around uncertainly, you notice that the other inhabitants of the camp seem to have distanced themselves from you. <i>\"That stuff is like good thick cream, mellows the taste of anything!\"</i> Snapping her fingers, she exclaims, <i>\"Why didn't I think of that? Might even amplify the effect-\"</i>", parse);
+	Text.Add("...What? Glancing around uncertainly, you notice that the other inhabitants of the camp seem to have distanced themselves from you. <i>“That stuff is like good thick cream, mellows the taste of anything!”</i> Snapping her fingers, she exclaims, <i>“Why didn't I think of that? Might even amplify the effect-”</i>", parse);
 	Text.Flush();
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
-		Text.Add("Rosalin is cut off mid-sentence as her alchemical mixture picks this exact moment to violently explode, throwing you flat on your back, with a buxom catgirl pressed against your [faceDesc]. Almost as quickly as you've fallen, the catgirl jumps off you with a happy yowl. <i>\"Ah! It is finished!\"</i> Groaning, you get to your feet, carefully following the crazy feline.", parse);
+		Text.Add("Rosalin is cut off mid-sentence as her alchemical mixture picks this exact moment to violently explode, throwing you flat on your back, with a buxom catgirl pressed against your [faceDesc]. Almost as quickly as you've fallen, the catgirl jumps off you with a happy yowl. <i>“Ah! It is finished!”</i> Groaning, you get to your feet, carefully following the crazy feline.", parse);
 		Text.NL();
 		Text.Add("With disbelief, you ask if she really expected the mixture the explode like that.", parse);
 		Text.NL();
-		Text.Add("<i>\"Oh, don't worry about that, it does that occasionally,\"</i> she waves off your concern. Though her entire workbench is pretty much ruined, its contents thrown to the ground by the initial blast, the beaker itself is somehow fine. It must be made from a really sturdy material, not glass like it first seemed. Shoving the debris aside, Rosalin studies the liquid within the container. It still has a pungent odor, but it no longer looks unstable. The alchemist pours the mixture into a glass that also survived the explosion, a drop of the liquid splattering on the table. You watch as it slowly erodes the woodwork, a tiny column of smoke rising from the puddle. Jotting down a few more notes, she pockets her notepad and grabs the glass. In one long swig, she downs the entire concoction, to your dismayed cry. Does she want to kill herself?!", parse);
+		Text.Add("<i>“Oh, don't worry about that, it does that occasionally,”</i> she waves off your concern. Though her entire workbench is pretty much ruined, its contents thrown to the ground by the initial blast, the beaker itself is somehow fine. It must be made from a really sturdy material, not glass like it first seemed. Shoving the debris aside, Rosalin studies the liquid within the container. It still has a pungent odor, but it no longer looks unstable. The alchemist pours the mixture into a glass that also survived the explosion, a drop of the liquid splattering on the table. You watch as it slowly erodes the woodwork, a tiny column of smoke rising from the puddle. Jotting down a few more notes, she pockets her notepad and grabs the glass. In one long swig, she downs the entire concoction, to your dismayed cry. Does she want to kill herself?!", parse);
 		Text.NL();
 		Text.Add("Rosalin finishes the glass with a satisfied burp, even licking stray droplets from her full lips. At first, nothing seems to happen. Just as you start to ask her if she is alright, the alchemist doubles over with a surprised yelp, clutching her stomach. Concerned, you hurry over to her, but are caught off guard when she grabs one of your [armDesc]s. Her grip is surprisingly strong, and she roughly shoves your hand against one of her breasts, moaning appreciatively.", parse);
 		Text.NL();
-		Text.Add("Her face is beet red, shiny with sweat, and her breathing comes in short bursts. <i>\"Hah-ah... I didn't expect it to have quite... such a punch,\"</i> she pants. She has worked your hand inside her dress, her nipple stiff against your palm. When you look at her, you see that her emerald eyes are almost feral, burning with need. <i>\"D-definitely writing this one down for later!\"</i> she gasps, her free hand ripping off the top of her dress, leaving her bare-chested.", parse);
+		Text.Add("Her face is beet red, shiny with sweat, and her breathing comes in short bursts. <i>“Hah-ah... I didn't expect it to have quite... such a punch,”</i> she pants. She has worked your hand inside her dress, her nipple stiff against your palm. When you look at her, you see that her emerald eyes are almost feral, burning with need. <i>“D-definitely writing this one down for later!”</i> she gasps, her free hand ripping off the top of her dress, leaving her bare-chested.", parse);
 		Text.NL();
-		Text.Add("<i>\"Hah, this one's new,\"</i> a voice behind you chuckles. Turning around, you face a grinning wolf-morph, his short gray fur covering wiry muscle. His trousers are bulging with what you can only assume is a large erection.", parse);
+		Text.Add("<i>“Hah, this one's new,”</i> a voice behind you chuckles. Turning around, you face a grinning wolf-morph, his short gray fur covering wiry muscle. His trousers are bulging with what you can only assume is a large erection.", parse);
 		Text.NL();
-		Text.Add("<i>\"Little Miss Rosie here usually needs something to take her mind off work when she has been testing her own experiments,\"</i> the wolf says fondly, caressing the catgirl's hair. Rosalin has gone on to humping your [legDesc], moaning and ineffectually trying to get out of her dress. <i>\"This is the first time I've seen her go into heat though,\"</i> the wolf notes, reaching for the fastenings of his pants.", parse);
+		Text.Add("<i>“Little Miss Rosie here usually needs something to take her mind off work when she has been testing her own experiments,”</i> the wolf says fondly, caressing the catgirl's hair. Rosalin has gone on to humping your [legDesc], moaning and ineffectually trying to get out of her dress. <i>“This is the first time I've seen her go into heat though,”</i> the wolf notes, reaching for the fastenings of his pants.", parse);
 		Text.NL();
 		
 		if(player.FirstCock())
-			Text.Add("<i>\"So, you taking front or back?\"</i> The wolf casually asks.", parse);
+			Text.Add("<i>“So, you taking front or back?”</i> The wolf casually asks.", parse);
 		else
-			Text.Add("<i>\"I need to tend to missy here, so why don't you scoot over. Unless you'd like some too, of course,\"</i> the wolf offers with a grin.", parse);
+			Text.Add("<i>“I need to tend to missy here, so why don't you scoot over. Unless you'd like some too, of course,”</i> the wolf offers with a grin.", parse);
 		Text.NL();
 		
 		if(party.InParty(kiakai)) {
-			Text.Add("<i>\"[playername], is this really the time?\"</i> [kiakai] asks you uncertainly. You point out that the alchemist seems to be in need, and it's not like you can just leave her like that.", parse);
+			Text.Add("<i>“[playername], is this really the time?”</i> [kiakai] asks you uncertainly. You point out that the alchemist seems to be in need, and it's not like you can just leave her like that.", parse);
 			if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
 				Text.Add("After suggesting that the perhaps the elf wants to do it [himher]self, [heshe] hurriedly backs off, blushing furiously.", parse);
 			Text.NL();
@@ -734,11 +734,11 @@ Scenes.Rosalin.FirstFuck = function() {
 			}
 			Text.Add("After properly lathering you up, the alchemist twirls around, rubbing her private parts against your [cockDesc], mewling needily. Not wanting to keep the lady waiting, you line up with her [rVagDesc], prying apart her soaked labia. ", parse);
 			if(p1Cock.length.Get() < 25)
-				Text.Add("<i>\"J-just take me already! I <b>need</b> you inside me!\"</i> she moans.", parse);
+				Text.Add("<i>“J-just take me already! I <b>need</b> you inside me!”</i> she moans.", parse);
 			else
-				Text.Add("<i>\"So <b>big</b>,\"</i> she moans. <i>\"B-be gentle with me, okay?\"</i> Even in her aroused state, she looks slightly worried about your size.", parse);
+				Text.Add("<i>“So <b>big</b>,”</i> she moans. <i>“B-be gentle with me, okay?”</i> Even in her aroused state, she looks slightly worried about your size.", parse);
 			Text.NL();
-			Text.Add("Feels like you're not the first one to pound this kitty; her [rVagDesc] easily give way to your [cockDesc], her walls clamping down around your length hungrily. <i>\"Yes! <b>Yes!</b> Breed me!\"</i> Rosalin eagerly begins to grind against your crotch, her soaking hole swallowing more and more of you with each thrust.", parse);
+			Text.Add("Feels like you're not the first one to pound this kitty; her [rVagDesc] easily give way to your [cockDesc], her walls clamping down around your length hungrily. <i>“Yes! <b>Yes!</b> Breed me!”</i> Rosalin eagerly begins to grind against your crotch, her soaking hole swallowing more and more of you with each thrust.", parse);
 			Text.NL();
 			
 			Sex.Vaginal(player, rosalin);
@@ -751,9 +751,9 @@ Scenes.Rosalin.FirstFuck = function() {
 			Text.NL();
 			Text.Add("The catgirl's breaths come in short grunts, in time with your rhythmic pumping. With a final loud yowl, she contracts around your [cockDesc], milking you for all she is worth. You let out a cry of your own, as you paint her well-used cavern white. ", parse);
 			if(player.CumOutput() > 3)
-				Text.Add("<i>\"Y-yes, get me pregnant!\"</i> she screams, loud enough for the whole camp to hear, as load upon potent load fills her up, some starting to leak back out.", parse);
+				Text.Add("<i>“Y-yes, get me pregnant!”</i> she screams, loud enough for the whole camp to hear, as load upon potent load fills her up, some starting to leak back out.", parse);
 			else
-				Text.Add("<i>\"F-fuck yes!\"</i> she pants as your load settles inside her.", parse);
+				Text.Add("<i>“F-fuck yes!”</i> she pants as your load settles inside her.", parse);
 			Text.Add(" Pulling out, you clean yourself off, waiting for the battered woman to regain her senses.", parse);
 			Text.NL();
 			Text.Add("The stuff she drank must have been potent, as she shows no signs of slowing, fervently fingering herself as your semen leaks out of her. Squaring your shoulders, you get ready for round two. There is no rest for the wicked...", parse);
@@ -809,7 +809,7 @@ Scenes.Rosalin.FirstFuck = function() {
 						Text.Add("gently probing your [anusDesc] with one finger.", parse);
 					
 					Text.NL();
-					Text.Add("<i>\"I'm taking her first,\"</i> the wolf-morph growls, asserting himself. Roughly pushing the mewling girl on her back, he lines up his cock with her [rVagDesc], spearing her in one smooth motion. Grunting, the wolf pushes himself all the way inside, pushing his knot into the catgirl.", parse);
+					Text.Add("<i>“I'm taking her first,”</i> the wolf-morph growls, asserting himself. Roughly pushing the mewling girl on her back, he lines up his cock with her [rVagDesc], spearing her in one smooth motion. Grunting, the wolf pushes himself all the way inside, pushing his knot into the catgirl.", parse);
 					Text.NL();
 					Text.Add("Slightly miffed at being left out, you play with yourself while waiting for the wolf to finish.", parse);
 					Text.Flush();
@@ -837,7 +837,7 @@ Scenes.Rosalin.FirstFuck = function() {
 							if(p1Cock && p1Cock.length.Get() > 20)
 								Text.Add(" With little effort, your [cockDesc] is firmly lodged in her throat.", parse);
 							Text.NL();
-							Text.Add("The wolf-morph leans against you, playfully nibbling at one of your [earsDesc] before continuing his pounding. Before long, it seems like he's reaching his limit, howling as he unloads inside the catgirl. He reaches his arms around you, pulling you into a rough embrace while caressing your [breastDesc]. <i>\"Quite the little minx, isn't she?\"</i> he grunts, resting against your back as his knot swells, locking him inside the catgirl.", parse);
+							Text.Add("The wolf-morph leans against you, playfully nibbling at one of your [earsDesc] before continuing his pounding. Before long, it seems like he's reaching his limit, howling as he unloads inside the catgirl. He reaches his arms around you, pulling you into a rough embrace while caressing your [breastDesc]. <i>“Quite the little minx, isn't she?”</i> he grunts, resting against your back as his knot swells, locking him inside the catgirl.", parse);
 							Text.NL();
 							Text.Add("Said minx quickly brings you to your own orgasm, ", parse);
 							if(player.FirstCock()) {
@@ -893,7 +893,7 @@ Scenes.Rosalin.FirstFuck = function() {
 					else
 						Text.Add("Unable to match her in size, you content yourself with sucking at the canid's cock tip.", parse);
 					Text.NL();
-					Text.Add("Growling, the morph pulls both of you off him, unwilling to be pushed over the edge before he has had his fill. <i>\"On all fours, my little sluts,\"</i> he grins, <i>\"I'm gonna go doggystyle on you...\"</i> Obediently, both of you line up next to each other, touching at the hip.", parse);
+					Text.Add("Growling, the morph pulls both of you off him, unwilling to be pushed over the edge before he has had his fill. <i>“On all fours, my little sluts,”</i> he grins, <i>“I'm gonna go doggystyle on you...”</i> Obediently, both of you line up next to each other, touching at the hip.", parse);
 					Text.NL();
 					
 					var target;
@@ -909,11 +909,11 @@ Scenes.Rosalin.FirstFuck = function() {
 						parse.targetDesc = function() { return player.Butt().AnalShort(); }
 					}
 					
-					Text.Add("<i>\"Sorry, I'll get to you in a moment,\"</i> the wolf grunts at you. With a rough shove, he has pushed himself to the hilt inside Rosalin, fucking her rapidly. With one hand, he reaches toward your [buttDesc], ", parse);
+					Text.Add("<i>“Sorry, I'll get to you in a moment,”</i> the wolf grunts at you. With a rough shove, he has pushed himself to the hilt inside Rosalin, fucking her rapidly. With one hand, he reaches toward your [buttDesc], ", parse);
 					var tail = player.HasTail();
 					if(tail)
 						Text.Add("guiding your [tailDesc] out of the way, ", {tailDesc : tail.Short()});
-					Text.Add("and penetrates your [targetDesc] with one finger, preparing you. <i>\"Don't worry, you'll get yours, but first I must service the kitty in heat.\"</i> He seems pretty eager to have a go at you, roughly fingering you while he plows the moaning catgirl.", parse);
+					Text.Add("and penetrates your [targetDesc] with one finger, preparing you. <i>“Don't worry, you'll get yours, but first I must service the kitty in heat.”</i> He seems pretty eager to have a go at you, roughly fingering you while he plows the moaning catgirl.", parse);
 					Text.NL();
 					Text.Add("Not even waiting to come himself, he pulls out of the alchemist as soon as she orgasms, allowing her to fall into a shuddering heap next to you. He grabs your [hipsDesc] with both hands, removing his finger from your [targetDesc], only to quickly replace it with the tapered tip of his large member. With a little coaxing on his part and a lot of moaning on yours, he forces the first few inches of his thick cock inside you.", parse);
 					Text.NL();
@@ -927,7 +927,7 @@ Scenes.Rosalin.FirstFuck = function() {
 						player.FuckVag(target, cale.FirstCock(), 3);
 					}
 					
-					Text.Add("<i>\"Ah... not bad,\"</i> the wolf sighs, repeatedly pounding your [targetDesc], trying to build a rhythm. Being so close to the edge already pushes his instincts to the forefront, and soon you feel an even thicker mass press against your [targetDesc]. <i>\"Gonna breed you, little slut,\"</i> he hisses into your ear as his knot forces it's way inside your [targetDesc]", parse);
+					Text.Add("<i>“Ah... not bad,”</i> the wolf sighs, repeatedly pounding your [targetDesc], trying to build a rhythm. Being so close to the edge already pushes his instincts to the forefront, and soon you feel an even thicker mass press against your [targetDesc]. <i>“Gonna breed you, little slut,”</i> he hisses into your ear as his knot forces it's way inside your [targetDesc]", parse);
 					if(targetType == BodyPartType.ass)
 						Text.Add(", completely ignoring the physical impossibility of the statement.", parse);
 					else
@@ -935,7 +935,7 @@ Scenes.Rosalin.FirstFuck = function() {
 					Text.NL();
 					Text.Add("Not wanting to be left out, Rosalin crawls around in front of you, spreading her legs and presenting you with her loose cunt. Eagerly burying your [tongueDesc] in her folds, your tastebuds are assaulted with a variety of flavors; the catgirl's sweet juices, blended with the salty taste of precum. Howling, the wolf-morph fills your [targetDesc] with his seed, his expanding knot effectively trapping the sticky substance inside.", parse);
 					Text.NL();
-					Text.Add("<i>\"Mm, I'll definitely have to get more of this later,\"</i> the canid sighs as he collapses on top of you, his weight pushing you to the ground. Rosalin whimpers as another orgasm hits her, drenching your [faceDesc]. When she is spent, she snuggles up against you, the worst of her heat apparently worn off.", parse);
+					Text.Add("<i>“Mm, I'll definitely have to get more of this later,”</i> the canid sighs as he collapses on top of you, his weight pushing you to the ground. Rosalin whimpers as another orgasm hits her, drenching your [faceDesc]. When she is spent, she snuggles up against you, the worst of her heat apparently worn off.", parse);
 					
 					Text.NL();
 					Text.Add("Exhausted, the three of you rest for a while, regaining your energy.", parse);
@@ -955,7 +955,7 @@ Scenes.Rosalin.FirstFuck = function() {
 						
 						Text.Add("Rather than waiting for him to get ready, you pull out your [multiCockDesc], circling the prone catgirl and pulling at her tail insistently. Mouth clamped tight around several inches of canid cock, she nonetheless raises her butt, arching her back to ease your access as you grin at the glowering wolf. First come, first served. Still, with his dick buried inside the catgirl's throat, he can hardly complain.", parse);
 						Text.NL();
-						Text.Add("Quickly lining yourself up with Rosalin's [rVagDesc], you push yourself inside her slick, hot furnace. Not virgin-tight, though. <i>\"I'm afraid I'll have to disappoint you if you thought you got there first,\"</i> the wolf grunts, grinning back at you. Apparently the catgirl has been around.", parse);
+						Text.Add("Quickly lining yourself up with Rosalin's [rVagDesc], you push yourself inside her slick, hot furnace. Not virgin-tight, though. <i>“I'm afraid I'll have to disappoint you if you thought you got there first,”</i> the wolf grunts, grinning back at you. Apparently the catgirl has been around.", parse);
 						Text.NL();
 						
 						Sex.Vaginal(player, rosalin);
@@ -970,9 +970,9 @@ Scenes.Rosalin.FirstFuck = function() {
 						Text.Add("Pulling out, you allow the wolf to have a go at her. ", parse);
 						
 						if(cum > 3)
-							Text.Add("He almost looks a bit intimidated, seeing your plentiful spunk leak out of Rosalin's [rVagDesc]. <i>\"Huh, you don't pull any punches, do you?\"</i>", parse);
+							Text.Add("He almost looks a bit intimidated, seeing your plentiful spunk leak out of Rosalin's [rVagDesc]. <i>“Huh, you don't pull any punches, do you?”</i>", parse);
 						else
-							Text.Add("<i>\"Got her nice and slick for me eh?\"</i>", parse);
+							Text.Add("<i>“Got her nice and slick for me eh?”</i>", parse);
 						Text.Add(" Without further ado, he hilts his throbbing cock inside the catgirl. Looking pretty close to his limit after his deepthroat treatment, he erratically ruts at her, trying to force his thick knot inside her.", parse);
 						Text.NL();
 						Text.Add("The whole display is getting you raunchy again, your [cockDesc] rising to attention...", parse);
@@ -1057,20 +1057,20 @@ Scenes.Rosalin.FirstFuckPegWolf = function() {
 	Text.NL();
 	Text.Add("The wolf's thrusts slow down, his movements impeded by the trapping knot. Frustrated, he tries to rut against Rosalin, dragging the moaning catgirl across the ground with each trust. If there ever was a perfect time to strike, now would be it, with the wolf completely at your mercy. You stroke his fur fondly, groping the immobilized wolf shamelessly.", parse);
 	Text.NL();
-	Text.Add("His annoyed growl changes to a slightly fearful whimper as you grab one of his buttcheeks, stroking yourself with your other hand. <i>\"J-just what do you think yo-\"</i> he begins uncertainly, his complaints deteriorating into an incoherent drawn-out moan as you bury your [cockDesc] in his ass.", parse);
+	Text.Add("His annoyed growl changes to a slightly fearful whimper as you grab one of his buttcheeks, stroking yourself with your other hand. <i>“J-just what do you think yo-”</i> he begins uncertainly, his complaints deteriorating into an incoherent drawn-out moan as you bury your [cockDesc] in his ass.", parse);
 	Text.NL();
 	
 	Sex.Anal(player, cale);
 	player.Fuck(p1Cock, 5);
 	cale.FuckAnal(cale.Butt(), p1Cock);
 	
-	Text.Add("<i>\"I... I'll get back at you for this!\"</i> The wolf's moans make the claim far from convincing, as he is clearly enjoying the treatment you are giving his [wAnusDesc]. Rosalin groans as your thrusts transfer to her. Still locked within her, the wolf collapses on top of the catgirl.", parse);
+	Text.Add("<i>“I... I'll get back at you for this!”</i> The wolf's moans make the claim far from convincing, as he is clearly enjoying the treatment you are giving his [wAnusDesc]. Rosalin groans as your thrusts transfer to her. Still locked within her, the wolf collapses on top of the catgirl.", parse);
 	Text.NL();
 	Text.Add("Being far from done with him, you rail him for all you are worth, indirectly fucking the catgirl alchemist. Pounding away at his deliciously tight rear, you soon have him a panting and moaning mess, almost as bad as the catgirl.", parse);
 	Text.NL();
 	Text.Add("Too add insult to injury, you tauntingly question who's the bitch now.", parse);
 	Text.NL();
-	Text.Add("<i>\"I am your bitch, your beta, your slut! Fuck me!\"</i> he groans. Or something close, you assume, if he could actually manage to form coherent sentences.", parse);
+	Text.Add("<i>“I am your bitch, your beta, your slut! Fuck me!”</i> he groans. Or something close, you assume, if he could actually manage to form coherent sentences.", parse);
 	Text.NL();
 	Text.Add("Unfortunately, every party must end, and this one does so with you unleashing your cum inside the tight confines of the male wolf. Pulling out before you are done, your last strands land on his back, matting his fur.", parse);
 	Text.NL();
@@ -1099,31 +1099,31 @@ Scenes.Rosalin.FirstFuckFollowup = function(outcome) {
 	Text.Add("<b>Later...</b>", parse);
 	Text.NL();
 	if(outcome == 0)
-		Text.Add("Finally satisfied, you let her dress as you bask in the afterglow, enjoying the sight of her sweat-stained form. <i>\"Thanks, I really needed that,\"</i> she blushes at you.", parse);
+		Text.Add("Finally satisfied, you let her dress as you bask in the afterglow, enjoying the sight of her sweat-stained form. <i>“Thanks, I really needed that,”</i> she blushes at you.", parse);
 	else if(outcome == 1)
-		Text.Add("Some time later, the two of them seem to be finished. Rosalin shakily puts on her dress, cum leaking down her inner thighs. <i>\"Thanks buddy,\"</i> the wolf pats you on the shoulder as he passes by, thoroughly satisfied.", parse);
+		Text.Add("Some time later, the two of them seem to be finished. Rosalin shakily puts on her dress, cum leaking down her inner thighs. <i>“Thanks buddy,”</i> the wolf pats you on the shoulder as he passes by, thoroughly satisfied.", parse);
 	else {
 		if(outcome == 2)
-			Text.Add("<i>\"Not bad.\"</i> The wolf grins at you as he leaves, <i>\"I could go for that again, if you are up for it.\"</i>", parse);
+			Text.Add("<i>“Not bad.”</i> The wolf grins at you as he leaves, <i>“I could go for that again, if you are up for it.”</i>", parse);
 		else if(outcome == 3)
-			Text.Add("<i>\"You did very well back there,\"</i> the wolf tells you, grinning lasciviously. <i>\"Next time you want someone to fuck you, don't be afraid to come to me. You don't have to wait for Rosalin.\"</i> The comment has your cheeks heating up.", parse);
+			Text.Add("<i>“You did very well back there,”</i> the wolf tells you, grinning lasciviously. <i>“Next time you want someone to fuck you, don't be afraid to come to me. You don't have to wait for Rosalin.”</i> The comment has your cheeks heating up.", parse);
 		else
-			Text.Add("<i>\"I... uh...\"</i> The wolf looks at you uncertainly, <i>\"... would you maybe mind doing that again with me, sometime?\"</i> Seems a new buttslut has been born.", parse);
+			Text.Add("<i>“I... uh...”</i> The wolf looks at you uncertainly, <i>“... would you maybe mind doing that again with me, sometime?”</i> Seems a new buttslut has been born.", parse);
 		Text.NL();
-		Text.Add("Meanwhile, Rosalin puts on her dress, hardly bothering to clean the stains from her body. <i>\"That was... amazing,\"</i> she purrs, content.", parse);
+		Text.Add("Meanwhile, Rosalin puts on her dress, hardly bothering to clean the stains from her body. <i>“That was... amazing,”</i> she purrs, content.", parse);
 	} 
 	Text.NL();
-	Text.Add("Somewhat presentable, the catgirl gathers herself up before facing you again. <i>\"S-sorry about that,\"</i> she apologizes, <i>\"I don't know what came over me there.\"</i> Straightening out her tangled hair, she finds a string of cum on her cheek, and thoughtfully gathers up the mess, licking it up from her fingers.", parse);
+	Text.Add("Somewhat presentable, the catgirl gathers herself up before facing you again. <i>“S-sorry about that,”</i> she apologizes, <i>“I don't know what came over me there.”</i> Straightening out her tangled hair, she finds a string of cum on her cheek, and thoughtfully gathers up the mess, licking it up from her fingers.", parse);
 	Text.NL();
-	Text.Add("Noting a change in her eyes, you comment on the green orbs, the iris now a thin slit like that of a cat. <i>\"Oh!\"</i> Rosalin exclaims, excited, <i>\"so it <b>did</b> have some effect!\"</i> Doing a little happy dance, she pulls a small mirror from her bodice, inspecting the changes. <i>\"Yes, I definitely like this! Cute, don't you think?\"</i>", parse);
+	Text.Add("Noting a change in her eyes, you comment on the green orbs, the iris now a thin slit like that of a cat. <i>“Oh!”</i> Rosalin exclaims, excited, <i>“so it <b>did</b> have some effect!”</i> Doing a little happy dance, she pulls a small mirror from her bodice, inspecting the changes. <i>“Yes, I definitely like this! Cute, don't you think?”</i>", parse);
 	Text.NL();
-	Text.Add("You ask how she could even survive after drinking that mixture. <i>\"Come now, what is a little risk against the progress of, like, science?\"</i> Rosalin pouts a bit at you, <i>\"It was perfectly safe... probably. Didn't I tell you? I'm a genius alchemist, stuff like this is par for the course.\"</i>", parse);
+	Text.Add("You ask how she could even survive after drinking that mixture. <i>“Come now, what is a little risk against the progress of, like, science?”</i> Rosalin pouts a bit at you, <i>“It was perfectly safe... probably. Didn't I tell you? I'm a genius alchemist, stuff like this is par for the course.”</i>", parse);
 	Text.NL();
 	Text.Add("Uh-huh. Curious, you ask her where exactly she learned this skill.", parse);
 	Text.NL();
-	Text.Add("<i>\"My own research of course!\"</i> she puffs, <i>\"well, I guess I had a teacher before, but screw her. Bitch.\"</i> You manage to coax out of her that she studied under Jeanne, the court mage. Apparently she's a bit touchy about the subject, so you decide to drop it for now. Still, that might be a viable place to look next, if you are going to figure out how the gemstone works. Rosalin very likely won't be able to help you with that.", parse);
+	Text.Add("<i>“My own research of course!”</i> she puffs, <i>“well, I guess I had a teacher before, but screw her. Bitch.”</i> You manage to coax out of her that she studied under Jeanne, the court mage. Apparently she's a bit touchy about the subject, so you decide to drop it for now. Still, that might be a viable place to look next, if you are going to figure out how the gemstone works. Rosalin very likely won't be able to help you with that.", parse);
 	Text.NL();
-	Text.Add("<i>\"Look, like, forget about her,\"</i> the catgirl demands hotly, <i>\"if you want to learn, I can be so much of a better teacher! I'll show you how to mix potions and stuff!\"</i> Telling her that you are fine for now, you bid her farewell. Something to consider for later, perhaps.", parse);
+	Text.Add("<i>“Look, like, forget about her,”</i> the catgirl demands hotly, <i>“if you want to learn, I can be so much of a better teacher! I'll show you how to mix potions and stuff!”</i> Telling her that you are fine for now, you bid her farewell. Something to consider for later, perhaps.", parse);
 	Text.Flush();
 
 	Gui.NextPrompt();
@@ -1157,20 +1157,20 @@ Scenes.Rosalin.CombineCallback = function(item) {
 	
 	if(item == Items.Felinix) {
 		if(rosalin.flags["Felinix"] == 0) {
-			Text.Add("<i>\"Ah yes, these bring back fond memories,\"</i> Rosalin says as [heshe] caresses the items you present. <i>\"With these, I can recreate the very first potion I made, the one which turned me into a cat!\"</i> [HeShe] quickly prepares the ingredients, making sure you understand how to do it yourself.", parse);
+			Text.Add("<i>“Ah yes, these bring back fond memories,”</i> Rosalin says as [heshe] caresses the items you present. <i>“With these, I can recreate the very first potion I made, the one which turned me into a cat!”</i> [HeShe] quickly prepares the ingredients, making sure you understand how to do it yourself.", parse);
 			Text.NL();
-			Text.Add("<i>\"This potion,\"</i> Rosalin explains, <i>\"is called Felinix. Those hairballs give it a pretty nasty texture, but you can hide it with some minor seasoning.\"</i> Finished, the alchemist presents you with the draft.", parse);
+			Text.Add("<i>“This potion,”</i> Rosalin explains, <i>“is called Felinix. Those hairballs give it a pretty nasty texture, but you can hide it with some minor seasoning.”</i> Finished, the alchemist presents you with the draft.", parse);
 			Text.NL();
-			Text.Add("<i>\"I've noticed something odd when taking these. It seems my body really adapted to it the first time I drank it, so it reverts to my catlike form, whatever I may have been from the start. I quite like that shape, but a nice change of pace is never wrong.\"</i>", parse);
+			Text.Add("<i>“I've noticed something odd when taking these. It seems my body really adapted to it the first time I drank it, so it reverts to my catlike form, whatever I may have been from the start. I quite like that shape, but a nice change of pace is never wrong.”</i>", parse);
 			rosalin.flags["Felinix"] = 1;
 			player.recipes.push(Items.Felinix);
 		}
 		else {
-			Text.Add("<i>\"You'd like me to make another one of those?\"</i> Rosalin asks you, <i>\"I showed you to make them, so you should be able to do it yourself.</i> ", parse);
+			Text.Add("<i>“You'd like me to make another one of those?”</i> Rosalin asks you, <i>“I showed you to make them, so you should be able to do it yourself. ", parse);
 			if(compScore > 0.95)
-				Text.Add("<i>Or maybe you just want to see what this potion... does to me?\" she asks, smiling lustfully.", parse);
+				Text.Add("Or maybe you just want to see what this potion... does to me?”</i> she asks, smiling lustfully.", parse);
 			else
-				Text.Add("<i>Or maybe you'd like to transform me back to my original form?\"</i> ", parse);
+				Text.Add("Or maybe you'd like to transform me back to my original form?”</i> ", parse);
 			Text.Add("While talking to you, the [raceDesc] alchemist prepares and mixes the ingredients, quickly completing the potion.", parse);
 		}
 		Text.NL();
@@ -1194,7 +1194,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				
 				Items.Felinix.Use(player);
 				
-				Text.Add("<i>\"Rather nice taste huh?\"</i> Rosalin smiles at you, <i>\"This time, I added some [seasoning], what do you think?\"</i> Not quite trusting yourself to answer that, you prepare to leave.", parse);
+				Text.Add("<i>“Rather nice taste huh?”</i> Rosalin smiles at you, <i>“This time, I added some [seasoning], what do you think?”</i> Not quite trusting yourself to answer that, you prepare to leave.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
@@ -1205,10 +1205,10 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		options.push({ nameStr : "Rosalin",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>\"Down the hatch!\"</i> Rosalin gleefully exclaims, drinking the potion in one go.", parse);
+				Text.Add("<i>“Down the hatch!”</i> Rosalin gleefully exclaims, drinking the potion in one go.", parse);
 				Text.NL();
 				if(rosalin.FirstCock()) {
-					Text.Add("<i>\"It was fun while it lasted, I guess,\"</i> [heshe] reminisce, watching [hisher] [rCockDesc] shrink back into [hisher] body.", parse);
+					Text.Add("<i>“It was fun while it lasted, I guess,”</i> [heshe] reminisce, watching [hisher] [rCockDesc] shrink back into [hisher] body.", parse);
 					Text.NL();
 				}
 				parse["randomlongershorter"] = Math.random() > 0.5 ? "longer" : "shorter";
@@ -1217,7 +1217,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				
 				rosalin.ResetBody();
 				
-				Text.Add("<i>\"Mm...\"</i> The alchemist stretches sinuously, sweeping her tail back and forth. She fixes her feral feline eyes on you, breathing heavily. <i>\"T-that hit the spot!\"</i> she pants, reaching down between her legs, shamelessly fingering her sex. <i>\"This one always gets me going, I need it bad!\"</i> Rosalin mewls, looking at you pleadingly.", parse);
+				Text.Add("<i>“Mm...”</i> The alchemist stretches sinuously, sweeping her tail back and forth. She fixes her feral feline eyes on you, breathing heavily. <i>“T-that hit the spot!”</i> she pants, reaching down between her legs, shamelessly fingering her sex. <i>“This one always gets me going, I need it bad!”</i> Rosalin mewls, looking at you pleadingly.", parse);
 				Text.Flush();
 
 				Gui.NextPrompt(function() {
@@ -1241,11 +1241,11 @@ Scenes.Rosalin.CombineCallback = function(item) {
 	}
 	else if(item == Items.Leporine) {
 		if(rosalin.flags["Leporine"] == 0) {
-			Text.Add("<i>\"Ah, you should know this one already,\"</i> Rosalin nods, looking over the ingredients. <i>\"With this, I can make Leporine. Brings out the bunny in you!\"</i> [HeShe] hesitates slightly before beginning to mix the items. <i>\"This time... I'll skip the salamander scales, I think.\"</i>", parse);
+			Text.Add("<i>“Ah, you should know this one already,”</i> Rosalin nods, looking over the ingredients. <i>“With this, I can make Leporine. Brings out the bunny in you!”</i> [HeShe] hesitates slightly before beginning to mix the items. <i>“This time... I'll skip the salamander scales, I think.”</i>", parse);
 			rosalin.flags["Leporine"] = 1;
 		}
 		else {
-			Text.Add("<i>\"Up for some more bunny transformation?\"</i>", parse);
+			Text.Add("<i>“Up for some more bunny transformation?”</i>", parse);
 		}
 		Text.NL();
 		Text.Add("Rapidly mixing the ingredients together with practiced ease, Rosalin quickly presents you with a bottle of Leporine.", parse);
@@ -1258,7 +1258,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				
 				Items.Leporine.Use(player);
 				
-				Text.Add("<i>\"Never was one for vegetable dishes,\"</i> Rosalin notes, <i>\"but the carrot juice does make it rather refreshing!\"</i>", parse);
+				Text.Add("<i>“Never was one for vegetable dishes,”</i> Rosalin notes, <i>“but the carrot juice does make it rather refreshing!”</i>", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
@@ -1269,7 +1269,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		options.push({ nameStr : "Rosalin",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>\"Trying to get me to eat healthy food? Not gonna happen,\"</i> swallowing the refreshing drink quickly, the alchemist burps happily.", parse);
+				Text.Add("<i>“Trying to get me to eat healthy food? Not gonna happen,”</i> swallowing the refreshing drink quickly, the alchemist burps happily.", parse);
 				Text.NL();
 				
 				var scenes = new EncounterTable();
@@ -1301,7 +1301,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				
 				var state = RosalinSexState.Regular;
 				if(Math.random() < 0.4) {
-					Text.Add("<i>\"N-need to fuck!\"</i> Rosalin gasps suddenly, clutching at [hisher] stomach.", parse);
+					Text.Add("<i>“N-need to fuck!”</i> Rosalin gasps suddenly, clutching at [hisher] stomach.", parse);
 					if(rosalin.FirstCock() && rosalin.FirstVag())
 						state = Math.random() < 0.5 ? RosalinSexState.Heat : RosalinSexState.Rut;
 					else if(rosalin.FirstCock())
@@ -1310,7 +1310,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 						state = RosalinSexState.Heat;
 				}
 				else {
-					Text.Add("<i>\"Not too bad I guess!\"</i>", parse);
+					Text.Add("<i>“Not too bad I guess!”</i>", parse);
 				}
 				Text.Flush();
 				Gui.NextPrompt(function() {
@@ -1335,18 +1335,18 @@ Scenes.Rosalin.CombineCallback = function(item) {
 	// E+
 	else if(item == Items.Equinium && rosalin.flags["Equinium"] == 1 && Math.random() < 0.2) {
 		if(rosalin.flags["Equinium+"] == 0) {
-			Text.Add("Rather than mixing the ingredients in the usual way, Rosalin grumbles a bit, sucking on [hisher] thumb, absently pouring some equine cum on top of the metal filings. <i>\"You know what this needs?\"</i> [heshe] asks thoughtfully, <i>\"a bit more punch!\"</i>", parse);
+			Text.Add("Rather than mixing the ingredients in the usual way, Rosalin grumbles a bit, sucking on [hisher] thumb, absently pouring some equine cum on top of the metal filings. <i>“You know what this needs?”</i> [heshe] asks thoughtfully, <i>“a bit more punch!”</i>", parse);
 			Text.NL();
 			Text.Add("Before you have opportunity to protest, [heshe] begins to pull bottle after bottle from [hisher] stash, adding some to the mixture and discarding others. The process is too rapid for you to follow, not that you are sure there actually <i>is</i> a recipe to this.", parse);
 			rosalin.flags["Equinium+"] = 1;
 		}
 		else {
-			Text.Add("<i>\"Hrm, what about if I try to add this...?\"</i> Off into one of [hisher] experimental moods, Rosalin pours the contents of about a dozen unmarked bottles into a pot, absentmindedly adding the ingredients you gave [himher]. You take a step back, allowing the mad alchemist room to work [hisher] misguided craft.", parse);
+			Text.Add("<i>“Hrm, what about if I try to add this...?”</i> Off into one of [hisher] experimental moods, Rosalin pours the contents of about a dozen unmarked bottles into a pot, absentmindedly adding the ingredients you gave [himher]. You take a step back, allowing the mad alchemist room to work [hisher] misguided craft.", parse);
 		}
 		Text.NL();
 		Text.Add("[HeShe] finishes the mixture by pouring a generous serving of equine cum on top, and stirring it until the liquid has a uniform color.", parse);
 		Text.NL();
-		Text.Add("<i>\"And there we have it!\"</i> Rosalin proudly presents you with a thick white fluid, almost like cream, smelling heavily of male musk. You aren't so sure about this one...", parse);
+		Text.Add("<i>“And there we have it!”</i> Rosalin proudly presents you with a thick white fluid, almost like cream, smelling heavily of male musk. You aren't so sure about this one...", parse);
 		Text.Flush();
 		
 		//[You][Rosalin][Discard]
@@ -1370,9 +1370,9 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				var c2 = checkCocks();
 				
 				if(c2 && !c1)
-					Text.Add("<i>\"W-wow! It's so big! And in one go like that!\"</i> Rosalin studies your new appendage with piqued interest, absently rubbing [hisher] hands over [hisher] body. <i>\"I... I need to test this! For science!\"</i>", parse);
+					Text.Add("<i>“W-wow! It's so big! And in one go like that!”</i> Rosalin studies your new appendage with piqued interest, absently rubbing [hisher] hands over [hisher] body. <i>“I... I need to test this! For science!”</i>", parse);
 				else
-					Text.Add("<i>\"T-that smell!\"</i> Rosalin moans. <i>\"It's so... raw!\"</i> The [raceDesc] shuffles closer to you, a hungry look in [hisher] eyes.", parse);
+					Text.Add("<i>“T-that smell!”</i> Rosalin moans. <i>“It's so... raw!”</i> The [raceDesc] shuffles closer to you, a hungry look in [hisher] eyes.", parse);
 
 				Text.Flush();
 				Gui.NextPrompt(function() {
@@ -1386,9 +1386,9 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				Text.Clear();
 				
 				if(rosalin.flags["TakenEquinium+"] == 0) {
-					Text.Add("<i>\"Oh, can I, can I?\"</i> Rosalin excitedly grabs the bottle from you, sighing as [heshe] inhales the heady aroma rising from the concoction. <i>\"This smells like it'll put hair on my chest,\"</i> the alchemist comments. Shrugging, [heshe] swigs the bottle, quickly swallowing its contents. A satisfied grin spreads across [hisher] face.", parse);
+					Text.Add("<i>“Oh, can I, can I?”</i> Rosalin excitedly grabs the bottle from you, sighing as [heshe] inhales the heady aroma rising from the concoction. <i>“This smells like it'll put hair on my chest,”</i> the alchemist comments. Shrugging, [heshe] swigs the bottle, quickly swallowing its contents. A satisfied grin spreads across [hisher] face.", parse);
 					Text.NL();
-					Text.Add("<i>\"Thick and creamy... mmm, I could get addicted to this taste.\"</i> Rosalin gets a slightly concerned look, as something stirs in [hisher] groin. <i>\"That's od- AAAH!\"</i> Almost shredding the flimsy cloth obstructing its path, a ten-inch horse cock, complete with a broad, flared tip and a set of large, heavy balls sprouts from the surprised alchemist's crotch.", parse);
+					Text.Add("<i>“Thick and creamy... mmm, I could get addicted to this taste.”</i> Rosalin gets a slightly concerned look, as something stirs in [hisher] groin. <i>“That's od- AAAH!”</i> Almost shredding the flimsy cloth obstructing its path, a ten-inch horse cock, complete with a broad, flared tip and a set of large, heavy balls sprouts from the surprised alchemist's crotch.", parse);
 					Text.NL();
 					Text.Add("Both of you look at the huge throbbing erection in awe. Rosalin looks at [hisher] cock. Then at you. Then at the cock. Then at you.", parse);
 					
@@ -1400,7 +1400,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					rosalin.flags["TakenEquinium+"] = 1;
 				}
 				else if(rosalin.FirstCock()) {
-					Text.Add("<i>\"Another one of those can't hurt... I mean, what's it going to do, give me another cock?\"</i> You are not sure if [heshe] is joking or not, but [heshe] heartily chugs down the thick mixture.", parse);
+					Text.Add("<i>“Another one of those can't hurt... I mean, what's it going to do, give me another cock?”</i> You are not sure if [heshe] is joking or not, but [heshe] heartily chugs down the thick mixture.", parse);
 					
 					parse["s"]      = rosalin.NumCocks() > 1 ? "s" : "";
 					parse["notS"]   = rosalin.NumCocks() > 1 ? "" : "s";
@@ -1434,20 +1434,20 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					if(rosalin.FirstVag() && Math.random() < 0.2) {
 						parse["tail"] = rosalin.HasTail() ? Text.Parse(" and lifting [hisher][rTailDesc]", parse) : "";
 						Text.NL();
-						Text.Add("<i>\"H-ah,\"</i> the alchemist pants, [hisher] knees quivering. <i>\"Would you look at that!\"</i> Spinning around[tail], the former herm presents you with [hisher] crotch. Underneath [hisher] heavy balls, the skin where [heshe] previously had a vagina is smooth and unbroken.", parse);
+						Text.Add("<i>“H-ah,”</i> the alchemist pants, [hisher] knees quivering. <i>“Would you look at that!”</i> Spinning around[tail], the former herm presents you with [hisher] crotch. Underneath [hisher] heavy balls, the skin where [heshe] previously had a vagina is smooth and unbroken.", parse);
 						Text.NL();
 						if(rosalin.flags["PrefGender"] == Gender.female) {
 							Text.Add("Awkwardly, you as the alchemist if she... is a he now?", parse);
 							Text.NL();
-							Text.Add("<i>\"Just think of me as a girl with special endowments,\"</i> Rosalin replies absentmindedly, <i>\"I doubt this is permanent - things would get complicated if we try to keep track.\"</i>", parse);
+							Text.Add("<i>“Just think of me as a girl with special endowments,”</i> Rosalin replies absentmindedly, <i>“I doubt this is permanent - things would get complicated if we try to keep track.”</i>", parse);
 							rosalin.body.vagina = [];
 						}
 					}
 					Text.NL();
-					Text.Add("<i>\"Now then, I'm feeling up for a test run,\"</i> Rosalin grins, brandishing [hisher] [rMultiCockDesc].", parse);
+					Text.Add("<i>“Now then, I'm feeling up for a test run,”</i> Rosalin grins, brandishing [hisher] [rMultiCockDesc].", parse);
 				}
 				else {
-					Text.Add("<i>\"Hmm, so you'd like me to drink this? Even knowing what it will do to me?\"</i> Rosalin grins at you smugly. <i>\"Couldn't stand to be without my dick for long, huh?\"</i> Not waiting to hear your response, [heshe] quickly chugs down the potion.", parse);
+					Text.Add("<i>“Hmm, so you'd like me to drink this? Even knowing what it will do to me?”</i> Rosalin grins at you smugly. <i>“Couldn't stand to be without my dick for long, huh?”</i> Not waiting to hear your response, [heshe] quickly chugs down the potion.", parse);
 					Text.NL();
 					Text.Add("Moaning as the effects start to set in, the alchemist gasps as a ten-inch horsecock sprouts from [hisher] groin, complete with a set of heavy, loaded balls. The large member is stiff and throbbing, ready for action.", parse);
 					
@@ -1465,7 +1465,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				
 				Text.NL();
 				parse["s"] = rosalin.NumCocks() > 1 ? "s" : "";
-				Text.Add("<i>\"I need to fuck something, <b>right now</b>,\"</i> the alchemist pants, [hisher] thick equine member[s] swaying as [heshe] eyes you hungrily.", parse);
+				Text.Add("<i>“I need to fuck something, <b>right now</b>,”</i> the alchemist pants, [hisher] thick equine member[s] swaying as [heshe] eyes you hungrily.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					Scenes.Rosalin.SexPrompt(RosalinSexState.Rut);
@@ -1489,17 +1489,17 @@ Scenes.Rosalin.CombineCallback = function(item) {
 	// EQUINIUM
 	else if(item == Items.Equinium) {
 		if(rosalin.flags["Equinium"] == 0) {
-			Text.Add("<i>\"Some horse hair, a horse shoe... and some delicious equine... fluids.\"</i> Rosalin licks [hisher] lips hungrily. <i>\"With these, I can make Equinium.\"</i> [HeShe] starts mixing the ingredients, showing you how each has to be prepared. Now and again, [heshe] sticks [hisher] hand in the jar containing the equine fluids, apparently taking them as a snack.", parse);
+			Text.Add("<i>“Some horse hair, a horse shoe... and some delicious equine... fluids.”</i> Rosalin licks [hisher] lips hungrily. <i>“With these, I can make Equinium.”</i> [HeShe] starts mixing the ingredients, showing you how each has to be prepared. Now and again, [heshe] sticks [hisher] hand in the jar containing the equine fluids, apparently taking them as a snack.", parse);
 			Text.NL();
-			Text.Add("<i>\"Don't worry,\"</i> [heshe] assures you when almost half of what you gave [himher] is consumed, <i>\"I always keep a few extra of these around. Lovely stuff.\"</i>", parse);
+			Text.Add("<i>“Don't worry,”</i> [heshe] assures you when almost half of what you gave [himher] is consumed, <i>“I always keep a few extra of these around. Lovely stuff.”</i>", parse);
 			rosalin.flags["Equinium"] = 1;
 			player.recipes.push(Items.Equinium);
 		}
 		else {
-			Text.Add("<i>\"Oh, these again?\"</i> the [raceDesc] alchemist rubs [hisher] hands together excitedly. <i>\"Equinium is always a classic. The filings from the horseshoes give it a slight metallic taste, but it is quite easy to drown with the other ingredients.\"</i> Humming to [himher]self, Rosalin starts brewing the potion.", parse);
+			Text.Add("<i>“Oh, these again?”</i> the [raceDesc] alchemist rubs [hisher] hands together excitedly. <i>“Equinium is always a classic. The filings from the horseshoes give it a slight metallic taste, but it is quite easy to drown with the other ingredients.”</i> Humming to [himher]self, Rosalin starts brewing the potion.", parse);
 		}
 		Text.NL();
-		Text.Add("Finishing up, Rosalin presents you with a thick, heady potion. <i>\"One Equinium, ready to go!\"</i>", parse);
+		Text.Add("Finishing up, Rosalin presents you with a thick, heady potion. <i>“One Equinium, ready to go!”</i>", parse);
 		Text.Flush();
 		//[You][Rosalin][Discard]
 		var options = new Array();
@@ -1509,7 +1509,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				
 				Items.Equinium.Use(player);
 				
-				Text.Add("<i>\"Good one, isn't it?\"</i> Rosalin smiles, <i>\"I added some extra toppings, just for you!\"</i>", parse);
+				Text.Add("<i>“Good one, isn't it?”</i> Rosalin smiles, <i>“I added some extra toppings, just for you!”</i>", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
@@ -1520,7 +1520,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		options.push({ nameStr : "Rosalin",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>\"For me? How nice of you!\"</i> Greedily clutching the bottle, Rosalin drinks the thick liquid.", parse);
+				Text.Add("<i>“For me? How nice of you!”</i> Greedily clutching the bottle, Rosalin drinks the thick liquid.", parse);
 				Text.NL();
 				
 				var scenes = new EncounterTable();
@@ -1549,7 +1549,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					return unchanged;
 				});
 				scenes.AddEnc(function() {
-					Text.Add("<i>\"Ooh, that's cute!\"</i> Rosalin admires [hisher] new hooves. [HeShe] experiments a bit, making clopping noises with them against the hard earth.", parse);
+					Text.Add("<i>“Ooh, that's cute!”</i> Rosalin admires [hisher] new hooves. [HeShe] experiments a bit, making clopping noises with them against the hard earth.", parse);
 					TF.SetRaceOne(rosalin.Legs(), Race.horse);
 					if(rosalin.LowerBodyType() == LowerBodyType.Single) rosalin.Legs().count = 2;
 					Text.NL();
@@ -1559,11 +1559,11 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				var state = RosalinSexState.Regular;
 				if(rosalin.FirstCock()) {
 					parse["these"] = rosalin.NumCocks() > 1 ? "These aren't" : "This isn't";
-					Text.Add("<i>\"Ah, just the right stuff!\"</i> The arousing effects are immediate, Rosalin's [rMultiCockDesc] peeking out from beneath [hisher] clothes. <i>\"[these] going to go down before I get a good fuck. You up for it?\"</i> The [raceDesc] begins stroking [himher]self, awaiting your response.", parse);
+					Text.Add("<i>“Ah, just the right stuff!”</i> The arousing effects are immediate, Rosalin's [rMultiCockDesc] peeking out from beneath [hisher] clothes. <i>“[these] going to go down before I get a good fuck. You up for it?”</i> The [raceDesc] begins stroking [himher]self, awaiting your response.", parse);
 					state = RosalinSexState.Rut;
 				}
 				else {
-					Text.Add("<i>\"Not bad! Can't get enough of that taste,\"</i> [heshe] sighs happily.", parse);
+					Text.Add("<i>“Not bad! Can't get enough of that taste,”</i> [heshe] sighs happily.", parse);
 				}
 				Text.Flush();
 				Gui.NextPrompt(function() {
@@ -1587,17 +1587,17 @@ Scenes.Rosalin.CombineCallback = function(item) {
 	}
 	else if(item == Items.Lacertium) {
 		if(rosalin.flags["Lacertium"] == 0) {
-			Text.Add("<i>\"Hoh, let's see what we have here,\"</i> Rosalin sniffs the oil and eggs, wrinkling [hisher] nose. <i>\"This one is going to smell a little, I'm afraid. Scalies are weird!\"</i> Even so, [heshe] dutifully brews the ingredients, making sure to show you how each must be prepared and handled. <i>\"Make sure the eggs haven't gone bad, it ruins the whole thing,\"</i> [heshe] adds.", parse);
+			Text.Add("<i>“Hoh, let's see what we have here,”</i> Rosalin sniffs the oil and eggs, wrinkling [hisher] nose. <i>“This one is going to smell a little, I'm afraid. Scalies are weird!”</i> Even so, [heshe] dutifully brews the ingredients, making sure to show you how each must be prepared and handled. <i>“Make sure the eggs haven't gone bad, it ruins the whole thing,”</i> [heshe] adds.", parse);
 			Text.NL();
-			Text.Add("<i>\"There we go, Lacertium!\"</i> When you look uncertainly at [himher], [heshe] adds, <i>\"Lacertidae means ‘lizard', just so you know.\"</i>", parse);
+			Text.Add("<i>“There we go, Lacertium!”</i> When you look uncertainly at [himher], [heshe] adds, <i>“Lacertidae means ‘lizard', just so you know.”</i>", parse);
 			rosalin.flags["Lacertium"] = 1;
 			player.recipes.push(Items.Lacertium);
 		}
 		else {
-			Text.Add("<i>\"One scaly-n-oily, coming up!\"</i>", parse);
+			Text.Add("<i>“One scaly-n-oily, coming up!”</i>", parse);
 		}
 		Text.NL();
-		Text.Add("Before long, the alchemist presents you with a bottle containing a strange liquid, thick, oily and constantly shifting in color. <i>\"Wonder what effect this one'll have,\"</i> [heshe] muses, handing the Lacertium to you.", parse);
+		Text.Add("Before long, the alchemist presents you with a bottle containing a strange liquid, thick, oily and constantly shifting in color. <i>“Wonder what effect this one'll have,”</i> [heshe] muses, handing the Lacertium to you.", parse);
 		Text.Flush();
 		
 		//[You][Rosalin][Discard]
@@ -1608,14 +1608,14 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				var c1 = player.NumCocks();
 				Items.Lacertium.Use(player);
 				if(c1 == 1 && player.NumCocks() == 2) {
-					Text.Add("<i>\"Mmm, that looks juicy!\"</i> Rosalin eagerly licks [hisher] lips at your new twin members. <i>\"I can hardly wait to give those a test run!\"</i>", parse);
+					Text.Add("<i>“Mmm, that looks juicy!”</i> Rosalin eagerly licks [hisher] lips at your new twin members. <i>“I can hardly wait to give those a test run!”</i>", parse);
 					Text.Flush();
 					Gui.NextPrompt(function() {
 						Scenes.Rosalin.SexPrompt(RosalinSexState.Regular);
 					});
 				}
 				else {
-					Text.Add("<i>\"It might leave a bit of an aftertaste,\"</i> Rosalin looks thoughtful. <i>\"Nothing I've tried so far works to hide it I'm afraid.\"</i>", parse);
+					Text.Add("<i>“It might leave a bit of an aftertaste,”</i> Rosalin looks thoughtful. <i>“Nothing I've tried so far works to hide it I'm afraid.”</i>", parse);
 					Text.Flush();
 					Gui.NextPrompt(function() {
 						Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
@@ -1627,18 +1627,18 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		options.push({ nameStr : "Rosalin",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>\"Hmm... well, what could go wrong?\"</i> The alchemist shrugs, downing the oily draft.", parse);
+				Text.Add("<i>“Hmm... well, what could go wrong?”</i> The alchemist shrugs, downing the oily draft.", parse);
 				Text.NL();
 				
 				var scenes = new EncounterTable();
 				// TAIL
 				scenes.AddEnc(function() {
-					Text.Add("<i>\"Long, thick, scaly, aaand...\"</i> Curling [hisher] new reptile tail experimentally, Rosalin confirms [hisher] guess, <i>\"... prehensile. Hehe, I'm going to have a lot of fun with this.\"</i>", parse);
+					Text.Add("<i>“Long, thick, scaly, aaand...”</i> Curling [hisher] new reptile tail experimentally, Rosalin confirms [hisher] guess, <i>“... prehensile. Hehe, I'm going to have a lot of fun with this.”</i>", parse);
 					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.lizard, Color.green);
 					Text.NL();
 				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.lizard); });
 				scenes.AddEnc(function() {
-					Text.Add("<i>\"Hmm, I rather like it,\"</i> Rosalin comments on [hisher] new reptilian cock, ridged on the underside and ending in a tapered tip.", parse);
+					Text.Add("<i>“Hmm, I rather like it,”</i> Rosalin comments on [hisher] new reptilian cock, ridged on the underside and ending in a tapered tip.", parse);
 					TF.SetRaceOne(rosalin.AllCocks(), Race.lizard);
 					Text.NL();
 				}, 1.0, function() {
@@ -1649,13 +1649,13 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					return unchanged;
 				});
 				scenes.AddEnc(function() {
-					Text.Add("<i>\"I... I have heard about this,\"</i> Rosalin gasps as [hisher] [rCockDesc] suddenly splits, two identical members forming. <i>\"D-double the fun for you!\"</i>", parse);
+					Text.Add("<i>“I... I have heard about this,”</i> Rosalin gasps as [hisher] [rCockDesc] suddenly splits, two identical members forming. <i>“D-double the fun for you!”</i>", parse);
 					rosalin.AllCocks().push(rosalin.FirstCock().Clone());
 					Text.NL();
 				}, 1.0, function() { return rosalin.NumCocks() == 1; });
 				scenes.Get();
 				
-				Text.Add("<i>\"Not bad, I guess, I just wish I could figure out a way to fix that oily texture...\"</i> Grumbling, the alchemist broods, deep in thought.", parse);
+				Text.Add("<i>“Not bad, I guess, I just wish I could figure out a way to fix that oily texture...”</i> Grumbling, the alchemist broods, deep in thought.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					Scenes.Rosalin.SexPrompt(RosalinSexState.Regular);
@@ -1678,18 +1678,18 @@ Scenes.Rosalin.CombineCallback = function(item) {
 	}
 	else if(item == Items.Bovia) {
 		if(rosalin.flags["Bovia"] == 0) {
-			Text.Add("<i>\"Ah, this looks promising!\"</i> Rosalin bustles around, sorting through [hisher] tools. <i>\"If I can just find... here!\"</i> [HeShe] proudly brandishes a whisk, procured from somewhere under the mountain of garbage on [hisher] workbench. The alchemist whistles as [heshe] prepares the milk, working up a foamy layer on top of the liquid.", parse);
+			Text.Add("<i>“Ah, this looks promising!”</i> Rosalin bustles around, sorting through [hisher] tools. <i>“If I can just find... here!”</i> [HeShe] proudly brandishes a whisk, procured from somewhere under the mountain of garbage on [hisher] workbench. The alchemist whistles as [heshe] prepares the milk, working up a foamy layer on top of the liquid.", parse);
 			Text.NL();
-			Text.Add("Pouring all the ingredients into a beaker, [heshe] puts a stopper on top of it. <i>\"Gotta let it sit for a while. Gestation and all,\"</i> Rosalin explains.", parse);
+			Text.Add("Pouring all the ingredients into a beaker, [heshe] puts a stopper on top of it. <i>“Gotta let it sit for a while. Gestation and all,”</i> Rosalin explains.", parse);
 			rosalin.flags["Bovia"] = 1;
 			player.recipes.push(Items.Bovia);
 		}
 		else {
 			parse["former"] = compScore < 0.95 ? "former " : "";
-			Text.Add("<i>\"It's so much better than regular milk, and that's coming from a [former]catgirl!\"</i>", parse);
+			Text.Add("<i>“It's so much better than regular milk, and that's coming from a [former]catgirl!”</i>", parse);
 		}
 		Text.NL();
-		Text.Add("Rosalin sniffs at the liquid suspiciously. <i>\"Don't want to go for it if it's turned bad. Like cream, you know?\"</i> Apparently satisfied with the inspection, [heshe] presents the bottled liquid to you. The alchemist even scrawled a cute picture of a cow on the sticker, while [heshe] was at it.", parse);
+		Text.Add("Rosalin sniffs at the liquid suspiciously. <i>“Don't want to go for it if it's turned bad. Like cream, you know?”</i> Apparently satisfied with the inspection, [heshe] presents the bottled liquid to you. The alchemist even scrawled a cute picture of a cow on the sticker, while [heshe] was at it.", parse);
 		Text.Flush();
 		
 		//[You][Rosalin][Discard]
@@ -1699,14 +1699,14 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				Text.Clear();
 				Items.Bovia.Use(player);
 				if(player.Lactation()) {
-					Text.Add("<i>\"Would be a shame to let all that milk go to waste, wouldn't it?\"</i> Rosalin eyes your dripping [breastDesc] hungrily.", parse);
+					Text.Add("<i>“Would be a shame to let all that milk go to waste, wouldn't it?”</i> Rosalin eyes your dripping [breastDesc] hungrily.", parse);
 					Text.Flush();
 					Gui.NextPrompt(function() {
 						Scenes.Rosalin.SexPrompt(RosalinSexState.Regular);
 					});
 				}
 				else {
-					Text.Add("<i>\"Quite refreshing, isn't it? I wonder if you could make it even more potent somehow...\"</i> Rosalin muses.", parse);
+					Text.Add("<i>“Quite refreshing, isn't it? I wonder if you could make it even more potent somehow...”</i> Rosalin muses.", parse);
 					Text.Flush();
 					Gui.NextPrompt(function() {
 						Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
@@ -1718,40 +1718,40 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		options.push({ nameStr : "Rosalin",
 			func : function() {
 				Text.Clear();
-				Text.Add("[HeShe] chugs the thick liquid down. <i>\"Refreshing!\"</i> [heshe] licks [hisher] lips clean.", parse);
+				Text.Add("[HeShe] chugs the thick liquid down. <i>“Refreshing!”</i> [heshe] licks [hisher] lips clean.", parse);
 				Text.NL();
 				
 				var scenes = new EncounterTable();
 				// TAIL
 				scenes.AddEnc(function() {
-					Text.Add("<i>\"Moo?\"</i> Rosalin says, experimentally swishing [hisher] new bovine tail behind [himher].", parse);
+					Text.Add("<i>“Moo?”</i> Rosalin says, experimentally swishing [hisher] new bovine tail behind [himher].", parse);
 					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.cow, Color.black);
 					Text.NL();
 				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.cow); });
 				scenes.AddEnc(function() {
-					Text.Add("<i>\"Careful I don't accidentally gore you with these!\"</i> Rosalin gingerly pokes at [hisher] new budding horns, feeling their sharpness.", parse);
+					Text.Add("<i>“Careful I don't accidentally gore you with these!”</i> Rosalin gingerly pokes at [hisher] new budding horns, feeling their sharpness.", parse);
 					TF.SetAppendage(rosalin.Appendages(), AppendageType.horn, Race.cow, Color.black, 2);
 					Text.NL();
 				}, 1.0, function() { var horns = rosalin.HasHorns(); return !horns || (horns.race != Race.cow); });
 				scenes.AddEnc(function() {
-					Text.Add("A pair of bovine ears pop out of Rosalin's [rHairDesc]! <i>\"Moo.\"</i>", parse);
+					Text.Add("A pair of bovine ears pop out of Rosalin's [rHairDesc]! <i>“Moo.”</i>", parse);
 					TF.SetRaceOne(rosalin.Ears(), Race.cow);
 					Text.NL();
 				}, 1.0, function() { return rosalin.Ears().race != Race.cow; });
 				scenes.AddEnc(function() {
-					Text.Add("<i>\"Won't these get in the way?\"</i> Rosalin ponders, feeling [hisher] expanding [rBreastDesc].", parse);
+					Text.Add("<i>“Won't these get in the way?”</i> Rosalin ponders, feeling [hisher] expanding [rBreastDesc].", parse);
 					rosalin.FirstBreastRow().size.IncreaseStat(40, 10);
 					Text.NL();
 				}, 1.0, function() { return rosalin.FirstBreastRow().size.Get() < 40; });
 				scenes.AddEnc(function() {
-					Text.Add("Rosalin's [rNipsDesc] starts dripping milk. [HeShe] experimentally gives the liquid a taste. <i>\"So yummy!\"</i> [heshe] exclaims excitedly, <i>\"I wonder if I can use this in cooking?\"</i>", parse);
+					Text.Add("Rosalin's [rNipsDesc] starts dripping milk. [HeShe] experimentally gives the liquid a taste. <i>“So yummy!”</i> [heshe] exclaims excitedly, <i>“I wonder if I can use this in cooking?”</i>", parse);
 					rosalin.lactHandler.lactationRate.IncreaseStat(10, 1);
 					Text.NL();
 				}, 1.0, function() { return true; });
 				
 				scenes.Get();
 
-				Text.Add("<i>\"Not sure if this one is really healthy. I feel kinda... dumb.\"</i> The alchemist shakes [hisher] head a bit. <i>\"Ah! False alarm. Same as usual.\"</i>", parse);
+				Text.Add("<i>“Not sure if this one is really healthy. I feel kinda... dumb.”</i> The alchemist shakes [hisher] head a bit. <i>“Ah! False alarm. Same as usual.”</i>", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					Scenes.Rosalin.SexPrompt(RosalinSexState.Regular);
@@ -2473,10 +2473,10 @@ Scenes.Rosalin.SexPrompt = function(state) {
 				Text.Clear();
 				p1Cock     = player.BiggestCock();
 				
-				Text.Add("<i>\"Get ready for some rough lovin' [playername],\"</i> Rosalin grins as [heshe] pushes you down on your back. Brandishing [hisher] stiff [rCockDesc] like a battering ram, [heshe] lines [himher]self up with your crotch.", parse);
+				Text.Add("<i>“Get ready for some rough lovin' [playername],”</i> Rosalin grins as [heshe] pushes you down on your back. Brandishing [hisher] stiff [rCockDesc] like a battering ram, [heshe] lines [himher]self up with your crotch.", parse);
 				if(player.FirstCock()) {
 					parse["thisThese"] = player.NumCocks() > 1 ? "these" : "this";
-					Text.Add(" <i>\"Tempting, but I have no use for [thisThese] right now,\"</i> the [raceDesc] alchemist callously dismisses your [multiCockDesc].", parse);
+					Text.Add(" <i>“Tempting, but I have no use for [thisThese] right now,”</i> the [raceDesc] alchemist callously dismisses your [multiCockDesc].", parse);
 				}
 				Text.NL();
 				
@@ -2484,11 +2484,11 @@ Scenes.Rosalin.SexPrompt = function(state) {
 				if(player.FirstVag()) {
 					Text.Add("Rubbing [hisher] maleness against your [vagDesc], soaking it in your lubricating juices, Rosalin muses over [hisher] options. ", parse);
 					if(Math.random() < 0.75) {
-						Text.Add("<i>\"Bound to be a tight fit, but I'll loosen you up.\"</i>", parse);
+						Text.Add("<i>“Bound to be a tight fit, but I'll loosen you up.”</i>", parse);
 						target = BodyPartType.vagina;
 					}
 					else
-						Text.Add("<i>\"Today... I feel like using your backdoor.\"</i>", parse);
+						Text.Add("<i>“Today... I feel like using your backdoor.”</i>", parse);
 					Text.NL();
 				}
 				var targetObj = (target == BodyPartType.vagina) ?
@@ -2498,9 +2498,9 @@ Scenes.Rosalin.SexPrompt = function(state) {
 					function() { return player.FirstVag().Short(); } :
 					function() { return player.Butt().AnalShort(); };
 				
-				Text.Add("[HeShe] positions [hisher] [rCockTip] at your [targetDesc], quickly soaking it in the contents of a tiny bottle procured from [hisher] bodice. <i>\"Lubricant,\"</i> [heshe] explains apologetically, <i>\"can't go breaking my favorite toy!\"</i> The alchemist pauses for a moment. <i>\"Um, I think that is what it was anyways.\"</i> The liquid has a slightly luminescent sheen, and feels icy cold as it drips on your [skinDesc].", parse);
+				Text.Add("[HeShe] positions [hisher] [rCockTip] at your [targetDesc], quickly soaking it in the contents of a tiny bottle procured from [hisher] bodice. <i>“Lubricant,”</i> [heshe] explains apologetically, <i>“can't go breaking my favorite toy!”</i> The alchemist pauses for a moment. <i>“Um, I think that is what it was anyways.”</i> The liquid has a slightly luminescent sheen, and feels icy cold as it drips on your [skinDesc].", parse);
 				Text.NL();
-				Text.Add("Eager to get started, the horny [raceDesc] prods against your opening. <i>\"Now, be a good [boygirl] and. Open. Up!\"</i> The last word is punctuated with a rough shove, as [hisher] [rCockDesc] pushes its way inside your [targetDesc]. Your surprised gasp turns into an elongated moan as Rosalin begins to rapidly fuck you, not wasting any time on foreplay.", parse);
+				Text.Add("Eager to get started, the horny [raceDesc] prods against your opening. <i>“Now, be a good [boygirl] and. Open. Up!”</i> The last word is punctuated with a rough shove, as [hisher] [rCockDesc] pushes its way inside your [targetDesc]. Your surprised gasp turns into an elongated moan as Rosalin begins to rapidly fuck you, not wasting any time on foreplay.", parse);
 				Text.NL();
 				
 				if(target == BodyPartType.vagina) {
@@ -2518,17 +2518,17 @@ Scenes.Rosalin.SexPrompt = function(state) {
 				}
 				var looseness = targetObj.stretch.Get() / rosalin.FirstCock().thickness.Get();
 				if(looseness < 0.5)
-					Text.Add("<i>\"Fuck, so tight,\"</i> [heshe] grunts, thrusting as much of [hisher] [rCockDesc] inside you as [heshe] can fit. <i>\"Gotta work you over more often, I think!\"</i>", parse);
+					Text.Add("<i>“Fuck, so tight,”</i> [heshe] grunts, thrusting as much of [hisher] [rCockDesc] inside you as [heshe] can fit. <i>“Gotta work you over more often, I think!”</i>", parse);
 				else {
-					Text.Add("<i>\"Woah, seems you have been around!\"</i> [heshe] exclaims, <i>\"guess I'm not the first one to this hole!\"</i>", parse);
+					Text.Add("<i>“Woah, seems you have been around!”</i> [heshe] exclaims, <i>“guess I'm not the first one to this hole!”</i>", parse);
 					if(rosalin.FirstCock().Size() > 250)
-						Text.Add(" Rosalin chuckles, thrusting [hisher] hips into you. <i>\"‘Course, not sure that level of sluttiness will help, seeing what I'm packing.\"</i>", parse);
+						Text.Add(" Rosalin chuckles, thrusting [hisher] hips into you. <i>“‘Course, not sure that level of sluttiness will help, seeing what I'm packing.”</i>", parse);
 				}
 				Text.NL();
 				Text.Add("Done with words, the [raceDesc] alchemist lets [hisher] [rCockDesc] do the talking. Pistoning in and out of your [targetDesc], the throbbing member is starting to have a definite effect on you. Rosalin kneads the [skinDesc] of your [breastDesc] with [hisher] hands, pinching and pulling at your [nipsDesc].", parse);
 				Text.NL();
 				if(rHumanity < 0.8) {
-					Text.Add("You can hardly believe how roughly [heshe] is handling you; blinded by lust, [hisher] insistent pounding is animalistic, almost feral. The alchemist has a wild look in [hisher] [rEyesDesc] as [heshe] hugs you possessively, growling <i>\"Mine!\"</i> into your ear.", parse);
+					Text.Add("You can hardly believe how roughly [heshe] is handling you; blinded by lust, [hisher] insistent pounding is animalistic, almost feral. The alchemist has a wild look in [hisher] [rEyesDesc] as [heshe] hugs you possessively, growling <i>“Mine!”</i> into your ear.", parse);
 					Text.NL();
 					Text.Add("With [rCockLen] of hot meat pummeling your [targetDesc], you can hardly voice a complaint. Or do anything but moan ecstatically, really.", parse);
 				}
@@ -2553,13 +2553,13 @@ Scenes.Rosalin.SexPrompt = function(state) {
 				
 				var scenes = new EncounterTable();
 				scenes.AddEnc(function() {
-					Text.Add("<i>\"Almost there, [playername]!\"</i> the [raceDesc] howls, announcing [hisher] coming orgasm.", parse);
+					Text.Add("<i>“Almost there, [playername]!”</i> the [raceDesc] howls, announcing [hisher] coming orgasm.", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
-					Text.Add("<i>\"F-fuuuck! C-coming!\"</i> the [raceDesc] moans.", parse);
+					Text.Add("<i>“F-fuuuck! C-coming!”</i> the [raceDesc] moans.", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
-					Text.Add("<i>\"W-with all the stuff I drink - hngh - do you think my cum will change you?\"</i> the alchemist pants, grinning at the thought. <i>\"Only one way to find out!\"</i>", parse);
+					Text.Add("<i>“W-with all the stuff I drink - hngh - do you think my cum will change you?”</i> the alchemist pants, grinning at the thought. <i>“Only one way to find out!”</i>", parse);
 				}, 1.0, function() { return true; });
 				
 				scenes.Get();
@@ -2584,7 +2584,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 				
 				var scenes = new EncounterTable();
 				scenes.AddEnc(function() {
-					Text.Add("<i>\"Didn't get to cum, pet?\"</i> Rosalin bemoans your fate, grinning mischievously, still panting from [hisher] own climax. [HisHer] [rCockDesc], somehow still hard, begins to move inside you, slower than before, but somehow more pleasurable. <i>\"Let's fix that, shall we?\"</i> the [raceDesc] purrs smugly, slowly sawing [hisher] way in and out of your [targetDesc].", parse);
+					Text.Add("<i>“Didn't get to cum, pet?”</i> Rosalin bemoans your fate, grinning mischievously, still panting from [hisher] own climax. [HisHer] [rCockDesc], somehow still hard, begins to move inside you, slower than before, but somehow more pleasurable. <i>“Let's fix that, shall we?”</i> the [raceDesc] purrs smugly, slowly sawing [hisher] way in and out of your [targetDesc].", parse);
 					Text.NL();
 					parse["cocks"] = player.FirstCock() ? Text.Parse(", your [multiCockDesc] twitching uncontrollably", parse) : "";
 					Text.Add("You cannot withstand the alchemists intimate massage for long, and soon your moans turn into a drawn out cry[cocks].", parse);
@@ -2594,20 +2594,20 @@ Scenes.Rosalin.SexPrompt = function(state) {
 				scenes.AddEnc(function() {
 					parse["s"] = rosalin.NumCocks() > 1 ? "s" : "";
 					parse["oneof"] = rosalin.NumCocks() > 1 ? " one of" : "";
-					Text.Add("<i>\"After that fuck, I don't mind giving a little back,\"</i> Rosalin smiles at you. Pulling out of your [targetDesc] and leaving a large pool of cum behind [himher], the [raceDesc] straddles your face, [hisher] [rMultiCockDesc] rubbing against you.", parse);
+					Text.Add("<i>“After that fuck, I don't mind giving a little back,”</i> Rosalin smiles at you. Pulling out of your [targetDesc] and leaving a large pool of cum behind [himher], the [raceDesc] straddles your face, [hisher] [rMultiCockDesc] rubbing against you.", parse);
 					Text.NL();
-					Text.Add("<i>\"Lick me, and I'll do the same for you,\"</i> [heshe] orders imperiously, waiting for your [tongueDesc] to start lapping at [hisher] [rMultiCockDesc] before going down on you. Under [hisher] expert ministrations, you tension is soon released in the stickiest manner possible.", parse);
+					Text.Add("<i>“Lick me, and I'll do the same for you,”</i> [heshe] orders imperiously, waiting for your [tongueDesc] to start lapping at [hisher] [rMultiCockDesc] before going down on you. Under [hisher] expert ministrations, you tension is soon released in the stickiest manner possible.", parse);
 					Text.NL();
-					Text.Add("Rosalin licks [hisher] lips, patting you on the stomach. <i>\"Good [boygirl]! One present for me...\"</i> [heshe] raises [hisher] hips, lining up [hisher] cannon[s], <i>\"... and one. For. You!\"</i> The last words are grunted out, Rosalin's hands tight around[oneof] [hisher] cock[s]. This time, [heshe] hits you point-blank, cum splattering all over your face and [hairDesc].", parse);
+					Text.Add("Rosalin licks [hisher] lips, patting you on the stomach. <i>“Good [boygirl]! One present for me...”</i> [heshe] raises [hisher] hips, lining up [hisher] cannon[s], <i>“... and one. For. You!”</i> The last words are grunted out, Rosalin's hands tight around[oneof] [hisher] cock[s]. This time, [heshe] hits you point-blank, cum splattering all over your face and [hairDesc].", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
-					Text.Add("<i>\"Hah... haah... oh?\"</i> Rosalin pants, noticing you've yet to climax. <i>\"Ah well,\"</i> [heshe] shrugs as [heshe] pulls out of you, [hisher] cum leaking out from your [targetDesc]. <i>\"Don't worry, gimme a few minutes and I'll have you screaming.\"</i>", parse);
+					Text.Add("<i>“Hah... haah... oh?”</i> Rosalin pants, noticing you've yet to climax. <i>“Ah well,”</i> [heshe] shrugs as [heshe] pulls out of you, [hisher] cum leaking out from your [targetDesc]. <i>“Don't worry, gimme a few minutes and I'll have you screaming.”</i>", parse);
 					Text.NL();
-					Text.Add("You look at [himher] incredulously. Surely not... One look down at the alchemist's stiffening [rMultiCockDesc] confirms your fears. <i>\"Thought I was done? We have barely gotten started yet!\"</i> Rolling you over on your stomach, Rosalin pries your [legsDesc] apart, exposing your crotch.", parse);
+					Text.Add("You look at [himher] incredulously. Surely not... One look down at the alchemist's stiffening [rMultiCockDesc] confirms your fears. <i>“Thought I was done? We have barely gotten started yet!”</i> Rolling you over on your stomach, Rosalin pries your [legsDesc] apart, exposing your crotch.", parse);
 					Text.NL();
 					
 					parse["holes"] = player.FirstVag() ? "both of your holes." : "your bloated stomach.";
-					Text.Add("<i>\"Better brace yourself!\"</i> Without further ado, the [raceDesc] once again spears you on [hisher] [rCockDesc]. True to [hisher] word, over the coming hours Rosalin makes you climax more time than you can count. What feels like gallons of [hisher] spunk fill [holes] You'll be sore for days after this, but decide that you don't mind...", parse);
+					Text.Add("<i>“Better brace yourself!”</i> Without further ado, the [raceDesc] once again spears you on [hisher] [rCockDesc]. True to [hisher] word, over the coming hours Rosalin makes you climax more time than you can count. What feels like gallons of [hisher] spunk fill [holes] You'll be sore for days after this, but decide that you don't mind...", parse);
 					
 					player.FuckAnal(player.Butt(), rosalin.FirstCock(), 2);
 					if(player.FirstVag())
@@ -2624,7 +2624,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 				Gui.NextPrompt(function() {
 					Text.Clear();
 					
-					Text.Add("<i>\"Mmm... can't wait for the next round, lover,\"</i> she whisper in your ear before passing out. You take a small nap of your own before getting ready to leave. The [raceDesc] alchemist is still sleeping when you leave [himher], curled up in a ball and purring contentedly.", parse);
+					Text.Add("<i>“Mmm... can't wait for the next round, lover,”</i> she whisper in your ear before passing out. You take a small nap of your own before getting ready to leave. The [raceDesc] alchemist is still sleeping when you leave [himher], curled up in a ball and purring contentedly.", parse);
 					Text.Flush();
 					
 					world.TimeStep({hour: 1});
@@ -2660,13 +2660,13 @@ Scenes.Rosalin.SexPrompt = function(state) {
 				
 				// Cale is not slutty
 				if(cale.Slut() <= 0) {
-					Text.Add("<i>\"Well well, what do we have here?\"</i> a mocking voice murmur into your ear. Surprised, you cast a glance over your shoulder. [wName] is standing just behind you, blocking your escape. You plead with him to help you out, but he just shakes his head, grinning at you. Catching you in a rough hug, the wolf-morph traps your arms to your sides, holding you in place.", parse);
+					Text.Add("<i>“Well well, what do we have here?”</i> a mocking voice murmur into your ear. Surprised, you cast a glance over your shoulder. [wName] is standing just behind you, blocking your escape. You plead with him to help you out, but he just shakes his head, grinning at you. Catching you in a rough hug, the wolf-morph traps your arms to your sides, holding you in place.", parse);
 					Text.NL();
-					Text.Add("<i>\"No running away now,\"</i> he hisses maliciously in your ear, <i>\"it's my job here to keep the alchemist calm, but I'd rather not deal with [himher] when [heshe] is like this.\"</i> You can feel his stirring [wCockDesc] prodding you in the back, poking out from his sheath. Before you can voice a complaint, he cuts you off abruptly.", parse);
+					Text.Add("<i>“No running away now,”</i> he hisses maliciously in your ear, <i>“it's my job here to keep the alchemist calm, but I'd rather not deal with [himher] when [heshe] is like this.”</i> You can feel his stirring [wCockDesc] prodding you in the back, poking out from his sheath. Before you can voice a complaint, he cuts you off abruptly.", parse);
 					Text.NL();
-					Text.Add("<i>\"Quit yapping. You are my bitch and you know it, and right now you're going to shut up and take it!\"</i> Ignoring the posturing of the wolf, you gulp as the alchemist prowls toward you.", parse);
+					Text.Add("<i>“Quit yapping. You are my bitch and you know it, and right now you're going to shut up and take it!”</i> Ignoring the posturing of the wolf, you gulp as the alchemist prowls toward you.", parse);
 					Text.NL();
-					Text.Add("<i>\"Wrong, Cale. The bitch... is <b>mine</b>!\"</i> Rosalin roars, pouncing on you.", parse);
+					Text.Add("<i>“Wrong, Cale. The bitch... is <b>mine</b>!”</i> Rosalin roars, pouncing on you.", parse);
 					if(player.Armor())
 						Text.Add(" [HeShe] easily rips away your [lowerArmorDesc], exposing your [genDesc].", parse);
 					Text.NL();	
@@ -2682,7 +2682,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 					Text.NL();
 					Text.Add("Rosalin, rushing after you in pursuit, boulders into the poor wolf-morph, and the two of them roll around on the ground. After a brief tussle, the [raceDesc] alchemist comes out on top, panting slightly. [HeShe] moves to go after you, but stops when [heshe] notices the wolf pinned face-down underneath [himher]. Rosalin's aggressive snarl slowly turn into a wide grin as [heshe] makes a few experimental thrusts with [hisher] hips, letting [hisher] [rMultiCockDesc] lightly brush against [wName]'s taint.", parse);
 					Text.NL();
-					Text.Add("<i>\"R-rosie, let me go!\"</i> the wolf-morph begs piteously, trying to reason with the alchemist. One look at Rosalin's flushed expression tells you that's not likely to work. <i>\"I don't think so! You always so nice, helping me out when I get horny.\"</i> The [raceDesc] leans in close, hotdogging [hisher] [rMultiCockDesc] between the increasingly desperate wolf's cheeks. <i>\"And right now, I'm very, very horny,\"</i> [heshe] purrs.", parse);
+					Text.Add("<i>“R-rosie, let me go!”</i> the wolf-morph begs piteously, trying to reason with the alchemist. One look at Rosalin's flushed expression tells you that's not likely to work. <i>“I don't think so! You always so nice, helping me out when I get horny.”</i> The [raceDesc] leans in close, hotdogging [hisher] [rMultiCockDesc] between the increasingly desperate wolf's cheeks. <i>“And right now, I'm very, very horny,”</i> [heshe] purrs.", parse);
 					Text.NL();
 					Text.Add("Seems you are off the hook for now, as Rosalin has found a new toy to play with. You could use this opportunity to escape, or...", parse);
 					Text.Flush();
@@ -2765,7 +2765,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 		options.push({ nameStr : "Recv. Oral",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>\"Mm... you got me, like, all hot and bothered now,\"</i> Rosalin murmurs, eyeing you hungrily. <i>\"How are you going to take responsibility?\"</i> Crooking your finger calling [himher] over, you start undoing your [armorDesc]. Giving you a delighted yelp, the [raceDesc] alchemist gets down on [hisher] knees, licking [hisher] lips while waiting for you to get [undressedReady].", parse);
+				Text.Add("<i>“Mm... you got me, like, all hot and bothered now,”</i> Rosalin murmurs, eyeing you hungrily. <i>“How are you going to take responsibility?”</i> Crooking your finger calling [himher] over, you start undoing your [armorDesc]. Giving you a delighted yelp, the [raceDesc] alchemist gets down on [hisher] knees, licking [hisher] lips while waiting for you to get [undressedReady].", parse);
 				Text.NL();
 				Text.Add("", parse);
 				Text.NL();
@@ -2789,7 +2789,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 			options.push({ nameStr : "Fuck Vag",
 				func : function() {
 					Text.Clear();
-					Text.Add("<i>\"Hey, feeling up for a bit of fun?\"</i> Rosalin coyly lifts [hisher] dress, exposing the wet slit between [hisher] [rLegsDesc].", parse);
+					Text.Add("<i>“Hey, feeling up for a bit of fun?”</i> Rosalin coyly lifts [hisher] dress, exposing the wet slit between [hisher] [rLegsDesc].", parse);
 					if(rosalin.FirstCock())
 						Text.Add(" The [raceDesc] pulls [hisher] [rMultiCockDesc] aside, inviting you to use [hisher] feminine parts.", parse);
 					Text.NL();
@@ -2800,11 +2800,11 @@ Scenes.Rosalin.SexPrompt = function(state) {
 						Text.NL();
 						var r = Math.random();
 						if(r < 0.33)
-							Text.Add("<i>\"Mm, just shove that bad boy in there!\"</i> Rosalin exclaims excitedly.", parse);
+							Text.Add("<i>“Mm, just shove that bad boy in there!”</i> Rosalin exclaims excitedly.", parse);
 						else if(r < 0.66)
-							Text.Add("<i>\"I <b>need</b> you inside me!\"</i> the alchemist begs you.", parse);
+							Text.Add("<i>“I <b>need</b> you inside me!”</i> the alchemist begs you.", parse);
 						else
-							Text.Add("<i>\"Fuck me [playername], fill me with your seed!\"</i> the needy [raceDesc] begs you.", parse);
+							Text.Add("<i>“Fuck me [playername], fill me with your seed!”</i> the needy [raceDesc] begs you.", parse);
 						Text.NL();
 						Text.Add("You grunt as you comply with [hisher] wishes, pushing a good portion of your [cockDesc] inside [hisher] honeypot in one thrust. Building up a rhythm, you start railing [himher] in earnest, your [cockDesc] pushing deep inside [himher], coated by [hisher] dripping juices.", parse);
 						Text.NL();
@@ -2813,7 +2813,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 						rosalin.FuckVag(rosalin.FirstVag(), p1Cock, 3);
 						player.Fuck(p1Cock, 3);
 						
-						Text.Add("<i>\"Yes! Yes! Yes!\"</i> Rosalin screams, each of your thrusts causing waves of pleasure to surge through [hisher] body. [HisHer] [rVagDesc] is clamping down tight around your [cockDesc], [hisher] vaginal walls clenching sensually around your thrusting member.", parse);
+						Text.Add("<i>“Yes! Yes! Yes!”</i> Rosalin screams, each of your thrusts causing waves of pleasure to surge through [hisher] body. [HisHer] [rVagDesc] is clamping down tight around your [cockDesc], [hisher] vaginal walls clenching sensually around your thrusting member.", parse);
 						if(player.NumCocks() == 2)
 							Text.Add(" You reach down, your hand jerking your other [cockDesc2] eagerly. The [raceDesc] is going to receive a sticky gift if you have any say in the matter.", parse);
 						else if(player.NumCocks() > 2)
@@ -2825,7 +2825,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 							Text.Add(" Rosalin starts playing with [hisher] [rBreastDesc], rubbing and tweaking [hisher] [rNipplesDesc].", parse);
 						Text.NL();
 						
-						Text.Add("<i>\"Y-you are gonna make me cuuuum-\"</i> Rosalin shrieks, clenching down on your [cockDesc]. The slut is true to [hisher] words, as you feel [hisher] juices seeping out of [hisher] ravaged hole.", parse);
+						Text.Add("<i>“Y-you are gonna make me cuuuum-”</i> Rosalin shrieks, clenching down on your [cockDesc]. The slut is true to [hisher] words, as you feel [hisher] juices seeping out of [hisher] ravaged hole.", parse);
 						if(rosalin.FirstCock())
 							Text.Add(" Rosalin's male parts also make their contribution, as [heshe] spills [hisher] seed on [hisher] stomach, staining [hisher] [rSkinDesc].", parse);
 						Text.Add(" You slow your thrusts a bit, allowing her to recuperate before resuming your full-on vaginal assault.", parse);
@@ -2857,9 +2857,9 @@ Scenes.Rosalin.SexPrompt = function(state) {
 						Text.Add("Spinning [himher] around and pushing [himher] down on top of a nearby barrel, you rub your [multiCockDesc] against [hisher] wet labia.", parse);
 						Text.NL();
 						if(player.FirstCock().race != Race.human)
-							Text.Add("<i>\"Ooh, a bad boy,\"</i> Rosalin breathlessly compliments your [cockDesc]. <i>\"Fuck me good! Fuck me like an animal!\"</i>", parse);
+							Text.Add("<i>“Ooh, a bad boy,”</i> Rosalin breathlessly compliments your [cockDesc]. <i>“Fuck me good! Fuck me like an animal!”</i>", parse);
 						else
-							Text.Add("<i>\"Come on, what are you waiting for?\"</i> [heshe] moans, shivering from your teasing.", parse);
+							Text.Add("<i>“Come on, what are you waiting for?”</i> [heshe] moans, shivering from your teasing.", parse);
 						Text.NL();
 						Text.Add("Seeing as [heshe] is practically begging for it, you amiably comply, shoving your throbbing [cockDesc] into [hisher] waiting tunnel. The [raceDesc] gives a cute yelp as you start to repeatedly spear [himher] on your manhood, [hisher] [rLegsDesc] trembling weakly. If it wasn't for the barrel, [heshe]'d probably be lying on the ground by now.", parse);
 						Text.NL();
@@ -2938,9 +2938,9 @@ Scenes.Rosalin.SexPrompt = function(state) {
 								Text.Add(" Your other cock[s] [isAre] pleasantly lodged between Rosalin's smooth buttocks, each thrust hotdogging your shaft[s].", parse);
 							Text.NL();
 							if(p1Cock.length.Get() > 30)
-								Text.Add("<i>\"N-nyaa! So big!\"</i> the alchemist yowls as [heshe] is speared by your brutally large member, penetrating deep into [hisher] folds.", parse);
+								Text.Add("<i>“N-nyaa! So big!”</i> the alchemist yowls as [heshe] is speared by your brutally large member, penetrating deep into [hisher] folds.", parse);
 							else
-								Text.Add("<i>\"Faster! Deeper!\"</i> [heshe] yelps, urging you to fuck [himher] even more roughly.", parse);
+								Text.Add("<i>“Faster! Deeper!”</i> [heshe] yelps, urging you to fuck [himher] even more roughly.", parse);
 							Text.Add(" The angle is perfect for reaching deep inside [himher], and your [cockDesc] is soon lodged in [hisher] [rVagDesc], buried to the hilt.", parse);
 							if(player.HasBalls())
 								Text.Add(" The sound of your [ballsDesc] slapping against [hisher] [rButtDesc] forms a nice accompaniment to the rhythmic thuds caused by your repeated railing of the alchemist.", parse);
@@ -3034,9 +3034,9 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	parse["notS"] = player.NumCocks() > 1 ? "" : "s";
 	
 	if(sexState == RosalinSexState.Rut)
-		Text.Add("<i>\"Like what you see?\"</i> Rosalin purrs, jutting [hisher] hips your way. Your [eyeDesc]s hone in on [hisher] magnificent [rCockDesc]. <i>\"Don't you want to touch it? Lick it?\"</i> ", parse);
+		Text.Add("<i>“Like what you see?”</i> Rosalin purrs, jutting [hisher] hips your way. Your [eyeDesc]s hone in on [hisher] magnificent [rCockDesc]. <i>“Don't you want to touch it? Lick it?”</i> ", parse);
 	else
-		Text.Add("<i>\"Mmm... that felt nice,\"</i> Rosalin almost audibly purrs. It's an incongruous sound given the [rCockDesc] [heshe]'s sporting down south. ", parse);
+		Text.Add("<i>“Mmm... that felt nice,”</i> Rosalin almost audibly purrs. It's an incongruous sound given the [rCockDesc] [heshe]'s sporting down south. ", parse);
 	if(rosalin.HasBalls())
 		Text.Add("[HisHer] [rBallsDesc] sway heavily below, almost oiled with the fine sheen of sweat the [raceDesc] has broken out in.", parse);
 	else
@@ -3055,9 +3055,9 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	Text.NL();
 	parse["boygirl"] = player.Gender() == Gender.male ? "boy" : "girl";
 	if(sexState == RosalinSexState.Rut)
-		Text.Add("<i>\"That's right... good [boygirl]. Now hurry up, before I decide to ram this down your throat myself!\"</i> The [raceDesc] alchemist huffs, panting with need, barely able to contain [himher]self.", parse);
+		Text.Add("<i>“That's right... good [boygirl]. Now hurry up, before I decide to ram this down your throat myself!”</i> The [raceDesc] alchemist huffs, panting with need, barely able to contain [himher]self.", parse);
 	else
-		Text.Add("Rosalin, still lost in self-pleasure, gradually becomes aware of you. <i>\"Uh, [playername]. W-what are you doing down there?\"</i> [HeShe] groans after a particularly powerful bolt of pleasure assails [himher]. <i>\"J-just hurry up and do something!\"</i> [heshe] stammers.", parse);
+		Text.Add("Rosalin, still lost in self-pleasure, gradually becomes aware of you. <i>“Uh, [playername]. W-what are you doing down there?”</i> [HeShe] groans after a particularly powerful bolt of pleasure assails [himher]. <i>“J-just hurry up and do something!”</i> [heshe] stammers.", parse);
 	Text.NL();
 	Text.Add("As if you needed any encouragement. You open your maw, leaning forward to snare Rosalin's [rCockTip] with your tongue. [HisHer] urethra opens and leaks a droplet of sticky pre-cum onto your tongue. You swoon, stretching your jaw to accommodate the alchemist's girth, sinking the first four inches of [hisher] length inside you, its veins pulsating powerfully against your tongue. The [raceDesc] can barely contain [himher]self, and [hisher] [rHipsDesc] lurch forward of their own accord, pushing at least two more inches into your throat. You gurgle around the impeding mass of engorged arousal, your lips clinging tightly to the slick tool, massaging it with your mouth in order to bring the wonderfully endowed alchemist as much pleasure as possible.", parse);
 	Text.NL();
@@ -3066,7 +3066,7 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	Sex.Blowjob(player, rosalin);
 						
 	parse["guygirl"] = rosalin.flags["PrefGender"] == Gender.male ? "guy" : "girl";
-	Text.Add("<i>\"Ohhh, ooooh!\"</i> Rosalin cries, <i>\"You know how to make a [guygirl] feel special!\"</i>", parse);
+	Text.Add("<i>“Ohhh, ooooh!”</i> Rosalin cries, <i>“You know how to make a [guygirl] feel special!”</i>", parse);
 	Text.NL();
 	if(rosalin.HasBalls())
 		Text.Add("You respond by gripping [hisher] [rBallsDesc] in your hand, rubbing your fingers across the cum factories to heft their mass and encourage them to produce more, rolling them in your palm.", parse);
@@ -3086,9 +3086,9 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	Text.Add("You giggle, tipping your head back, sliding your tongue along the underside with slow wet strokes, culminating in a movement that puts [hisher] flare flat against your tongue. The delicious flavor of [hisher] [rCockDesc] assaults your tastebuds, while [hisher] odd musk inundates your nostrils, encouraging you to further depravity. You work one hand along [hisher] slippery length while sucking the pre from [hisher] cumslit, encouraging [himher] to produce more.", parse);
 	Text.NL();
 	if(sexState == RosalinSexState.Rut)
-		Text.Add("<i>\"Mmm, yes! Keep going... and maybe I'll fuck you later!\"</i> Rosalin moans. ", parse);
+		Text.Add("<i>“Mmm, yes! Keep going... and maybe I'll fuck you later!”</i> Rosalin moans. ", parse);
 	else
-		Text.Add("Rosalin whimpers softly, <i>\"Don't stop... don't even stop. Oh! It feels sooo good!\"</i> ", parse);
+		Text.Add("Rosalin whimpers softly, <i>“Don't stop... don't even stop. Oh! It feels sooo good!”</i> ", parse);
 	Text.Add("Saliva oozes from your mouth mixed with the accumulated sexual juices, hanging out of you in a few thin webs that cling to your front.", parse);
 	Text.NL();
 	if(player.FirstVag())
@@ -3098,7 +3098,7 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 		Text.Add("Your [multiCockDesc] tent[notS] powerfully, constrained and aching for touches. Right now, [itThey]n't the focus of your passion, instead acting as a pleasant, tactile reminder of how much you're enjoying the act of bringing Rosalin to culmination.", parse);
 	}
 	Text.NL();
-	Text.Add("Rosalin grunts from your latest affections, a slightly more confident expression appearing on [hisher] face in between exhalations of bliss. <i>\"If you like me this much like this.... I need more Equinium, don't I?\"</i> You're too busy lavishing [hisher] [rCockDesc] with adulation to respond. <i>\"Would you like me to dose myself with it a few more times, maybe add some extra equine spunk to see if we can make it so potent that you get addicted to my pheromones? Or maybe just the taste of my cream? I can put it in any potions I make for you.\"</i>", parse);
+	Text.Add("Rosalin grunts from your latest affections, a slightly more confident expression appearing on [hisher] face in between exhalations of bliss. <i>“If you like me this much like this.... I need more Equinium, don't I?”</i> You're too busy lavishing [hisher] [rCockDesc] with adulation to respond. <i>“Would you like me to dose myself with it a few more times, maybe add some extra equine spunk to see if we can make it so potent that you get addicted to my pheromones? Or maybe just the taste of my cream? I can put it in any potions I make for you.”</i>", parse);
 	Text.NL();
 	Text.Add("That sounds lovely. Though being addicted might be a bit much, you're too turned on to think clearly. You show your agreement in the only way a horny, cock-addled mouth-slut can: by opening wide and sucking [himher] inside.", parse);
 	if(cock.race == Race.horse)
@@ -3109,9 +3109,9 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 		Text.Add(" You carry on, not satisfied until [hisher] sheath is bunching up underneath your nose, sandwiched between your lips and [hisher] wonderful crotch.", parse);
 	Text.NL();
 	if(sexState == RosalinSexState.Rut)
-		Text.Add("<i>\"Ungh, yeah! Gonna fill you up with my cream, gonna pour it all down your slutty throat!\"</i> Rosalin gasps, grabbing hold of your head, holding you in place as [heshe] ruts against you. <i>\"Take it, take it all!\"</i> ", parse);
+		Text.Add("<i>“Ungh, yeah! Gonna fill you up with my cream, gonna pour it all down your slutty throat!”</i> Rosalin gasps, grabbing hold of your head, holding you in place as [heshe] ruts against you. <i>“Take it, take it all!”</i> ", parse);
 	else
-		Text.Add("<i>\"Ohhhhhhhhhh,\"</i> Rosalin croons as [heshe] grabs hold of your head, holding you in place. <i>\"GonnacumgonnacumgonnacumOHGODI'MCUMMIIIINNNG!\"</i> ", parse);
+		Text.Add("<i>“Ohhhhhhhhhh,”</i> Rosalin croons as [heshe] grabs hold of your head, holding you in place. <i>“GonnacumgonnacumgonnacumOHGODI'MCUMMIIIINNNG!”</i> ", parse);
 	Text.Add("[HisHer] hips shiver and thrust, sliding your body back into the wall, pinning you there as [heshe] mates with your throat", parse);
 	if(cock.race == Race.horse)
 		Text.Add(", [hisher] tip expanding to form a tight seal.", parse);
@@ -3215,19 +3215,19 @@ Scenes.Rosalin.VagAftermath = function() {
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
-		Text.Add("<i>\"S-so full,\"</i> the [raceDesc] whimpers, rubbing [hisher] bloated stomach.", parse);
+		Text.Add("<i>“S-so full,”</i> the [raceDesc] whimpers, rubbing [hisher] bloated stomach.", parse);
 	}, 4.0, function() { return player.CumOutput() > 3; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>\"So good, love,\"</i> Rosalin purrs, rubbing up against you.", parse);
+		Text.Add("<i>“So good, love,”</i> Rosalin purrs, rubbing up against you.", parse);
 	});
 	scenes.AddEnc(function() {
-		Text.Add("<i>\"You feel so nice inside me.\"</i> The alchemist snuggle against you, satisfied.", parse);
+		Text.Add("<i>“You feel so nice inside me.”</i> The alchemist snuggle against you, satisfied.", parse);
 	});
 	scenes.AddEnc(function() {
-		Text.Add("<i>\"Always up for a good fuck,\"</i> Rosalin sighs, rubbing against you sleepily.", parse);
+		Text.Add("<i>“Always up for a good fuck,”</i> Rosalin sighs, rubbing against you sleepily.", parse);
 	});
 	scenes.AddEnc(function() {
-		Text.Add("<i>\"Mm, thank you for the present,\"</i> Rosalin purrs. Seemingly still entranced from the fucking she just received, the slut leans over to your [multiCockDesc] and meticulously licks [itThem] clean.", parse);
+		Text.Add("<i>“Mm, thank you for the present,”</i> Rosalin purrs. Seemingly still entranced from the fucking she just received, the slut leans over to your [multiCockDesc] and meticulously licks [itThem] clean.", parse);
 	});
 	
 	scenes.Get();

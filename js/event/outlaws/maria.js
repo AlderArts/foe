@@ -159,7 +159,7 @@ Scenes.Maria.ForestMeeting = function() {
 		Text.Add("A cough raises your attention to the mysterious archer's face. Full, dark lips curve into a smile underneath her straight, sharp nose. Two ice-blue eyes stare back at you. Their light color almost startling you at first. A lock of black hair falls into her eyes, and she tosses her head to move it out of the way.", parse);
 		Text.NL();
 		if(player.Weapon()) {
-			Text.Add("<i>\"Throw your weapons to the side.\"</i> With an arrow less than an inch from your eye, it seems safer to comply than resist. Tossing your [weaponDesc] to the side, you stand and hold your hands up in a gesture of surrender.", parse);
+			Text.Add("<i>“Throw your weapons to the side.”</i> With an arrow less than an inch from your eye, it seems safer to comply than resist. Tossing your [weaponDesc] to the side, you stand and hold your hands up in a gesture of surrender.", parse);
 			Text.NL();
 		}
 		
@@ -176,9 +176,9 @@ Scenes.Maria.ForestMeeting = function() {
 		if(player.Weapon())
 			Text.Add(" Grabbing your weapon, she hefts it over one shoulder.", parse);
 		Text.NL();
-		Text.Add("Glaring at you suspiciously, she challenges you: <i>\"What are you doing here?\"</i> Her voice reminds you of honey and cream; soft and luxurious.", parse);
+		Text.Add("Glaring at you suspiciously, she challenges you: <i>“What are you doing here?”</i> Her voice reminds you of honey and cream; soft and luxurious.", parse);
 		Text.NL();
-		Text.Add("After you explain that you are simply exploring the forest, she glances at you sideways. For a while, she simply watches you, clearly debating what course of action to take. She turns the options over in her head for a few minutes before she seems to reach a decision. <i>\"My name is Maria. Follow me, and I'll let Zenith decide what to do with you.\"</i>", parse);
+		Text.Add("After you explain that you are simply exploring the forest, she glances at you sideways. For a while, she simply watches you, clearly debating what course of action to take. She turns the options over in her head for a few minutes before she seems to reach a decision. <i>“My name is Maria. Follow me, and I'll let Zenith decide what to do with you.”</i>", parse);
 	}
 	else {
 		Text.Add("As you walk through the forest, the soothing sounds of birdcalls dull your senses. A few clouds drift over a lazy, warm sun. After a while, a vague sense of deja vu overtakes you, and something sets off little alarms in your mind. Continuing through the thickly forested area, a sense of foreboding follows you.", parse);
@@ -190,7 +190,7 @@ Scenes.Maria.ForestMeeting = function() {
 		Text.NL();
 		Text.Add("Turning on your heel, you see the archer-woman, Maria, her chocolate skin stark against her white clothing. Her bow is only half-raised, but the arrow nocked in it draws your attention. She might have tried to shoot you if you hadn't turned around.", parse);
 		Text.NL();
-		Text.Add("<i>\"You again?\"</i> she asks. <i>\"Do you make a habit of getting lost this deep in the forest, or did you just want to see me again?\"</i> Chuckling at her own joke, Maria raises her bow. <i>\"Once may be an accident, but more than once can't be. You're coming with me.\"</i>", parse);
+		Text.Add("<i>“You again?”</i> she asks. <i>“Do you make a habit of getting lost this deep in the forest, or did you just want to see me again?”</i> Chuckling at her own joke, Maria raises her bow. <i>“Once may be an accident, but more than once can't be. You're coming with me.”</i>", parse);
 	}
 	Text.Flush();
 	Scenes.Maria.ForestConfront();
@@ -250,7 +250,7 @@ Scenes.Maria.ForestConfront = function() {
 				Text.Add("You fall to the ground, utterly defeated. The bow woman kicks away your [weaponDesc] and levels an arrow at you. Glaring at you, she orders you to stand. As you wobble to your feet, she comes up behind you, binding your hands fast with some rope. Cold shivers run up your spine as you feel the sharp point of a knife dig into the soft flesh between your shoulder blades.", parse);
 				Text.NL();
 				if(maria.LustLevel() > 0.5) {
-					Text.Add("Throwing you to the ground, Maria roughly pins you to the leaf-strewn forest floor. Holding you there with a foot, she strips off her laughably tiny shorts and kneels down over you. Pressing her steaming cunt into your mouth, she orders you, <i>\"Lick.\"</i>", parse);
+					Text.Add("Throwing you to the ground, Maria roughly pins you to the leaf-strewn forest floor. Holding you there with a foot, she strips off her laughably tiny shorts and kneels down over you. Pressing her steaming cunt into your mouth, she orders you, <i>“Lick.”</i>", parse);
 					Text.NL();
 					Text.Add("Without giving you a chance to answer, she presses her juicy snatch harder against your lips. As you begin lapping at her mound, she mewls quietly, clamping her thighs down around your ears and blocking out any more sound. Penetrating her warm walls with your tongue, you drill around, thrashing against the sides of her love-tunnel.", parse);
 					Text.NL();
@@ -267,7 +267,7 @@ Scenes.Maria.ForestConfront = function() {
 					Text.Add("As she twists the ropes one more time, tugging them to make sure they're secure and won't come loose, you notice her hands straying to other parts of your form. Turning to face her, you notice her face is flushed. Whatever you did must have had quite the effect on her. Not enough of one to save you, though.", parse);
 				}
 				else {
-					Text.Add("<i>\"Move it!\"</i>", parse);
+					Text.Add("<i>“Move it!”</i>", parse);
 				}
 				
 				Text.Flush();
@@ -459,7 +459,7 @@ Scenes.Maria.ForestFollow = function() {
 			Text.Clear();
 			Text.Add("At first, you stay silent, wary of the archer's wrath, but, eventually, you decide that, since you can do little else, you might as well ask her some questions. When you first speak, she jumps a little, as if she didn't expect you to speak along the way. Most of your questions she either outright ignores, or answers vaguely at best. Until, that is, you ask her about precisely where she comes from.", parse);
 			Text.NL();
-			Text.Add("<i>\"I'm part of the outlaws out here. We're forced to live in this forest because those xenophobic assholes up at the City don't want us around. Well, that and more than one of us have broken their laws. Either we choose to live by <b>their</b> rules, or we make do with our own codes out in the forest. Some of our band were actually evicted from the city for crimes, others simply for not being pure human.\"</i>", parse);
+			Text.Add("<i>“I'm part of the outlaws out here. We're forced to live in this forest because those xenophobic assholes up at the City don't want us around. Well, that and more than one of us have broken their laws. Either we choose to live by <b>their</b> rules, or we make do with our own codes out in the forest. Some of our band were actually evicted from the city for crimes, others simply for not being pure human.”</i>", parse);
 			Text.NL();
 			Text.Add("She does not say any more, and the rest of your questions are answered with silence. Though she hasn't killed you, it seems she doesn't trust you enough to tell you anything.", parse);
 			
@@ -529,7 +529,7 @@ Scenes.Maria.ForestCamp = function() {
 		Text.NL();
 		Text.Add("He crosses his arms, and you take notice of his unusual clothing. He wears what appears to be a mix and match of armor types the likes of which haven't seen before. His right arm is completely bare, and a long scar runs down most of it. Both the ring and pinky finger of that hand are missing, leaving the hand looking lopsided.", parse);
 		Text.NL();
-		Text.Add("A deep, sonorous bass rumbles from his chest, bringing to mind storm clouds. <i>\"Maria. I see you brought a stranger to our camp.\"</i> His gaze pinions your feet to the floor and you unconsciously start thinking of excuses for why you entered his territory. Before you can speak, the archer begins explaining her actions.", parse);
+		Text.Add("A deep, sonorous bass rumbles from his chest, bringing to mind storm clouds. <i>“Maria. I see you brought a stranger to our camp.”</i> His gaze pinions your feet to the floor and you unconsciously start thinking of excuses for why you entered his territory. Before you can speak, the archer begins explaining her actions.", parse);
 		Text.Flush();
 		
 		//[Listen][Interrupt]
@@ -537,28 +537,28 @@ Scenes.Maria.ForestCamp = function() {
 		options.push({ nameStr : "Listen",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>\"[playername] is that one we heard about from Tez'rah. The one that came from a different plane. [HeShe] didn't look so tough, so I decided to try and take [himher] down.\"</i>", parse);
+				Text.Add("<i>“[playername] is that one we heard about from Tez'rah. The one that came from a different plane. [HeShe] didn't look so tough, so I decided to try and take [himher] down.”</i>", parse);
 				Text.NL();
 				
 	
 				// 0 = no, 1 = won, 2 = won, sexed, 3 = lost
 				// IF SEXED
 				if(Scenes.Maria.fight == 2) {
-					Text.Add("<i>\"Turns out I was wrong. [HeShe] hits pretty damn hard. After that ass-kicking, I couldn't just let [himher] go.\"</i> Maria turns and glares pointedly at you. After a moment, a slight, dark flush works its way into her cheeks and she averts her eyes. <i>\"What happens now is your business, Zenith.\"</i>", parse);
+					Text.Add("<i>“Turns out I was wrong. [HeShe] hits pretty damn hard. After that ass-kicking, I couldn't just let [himher] go.”</i> Maria turns and glares pointedly at you. After a moment, a slight, dark flush works its way into her cheeks and she averts her eyes. <i>“What happens now is your business, Zenith.”</i>", parse);
 				}
 				// WON
 				else if(Scenes.Maria.fight == 1) {
-					Text.Add("<i>\"[HeShe] actually fought better than I expected.\"</i> Maria gives Zenith a pointed stare and he nods back. <i>\"I'm going to need to see Aquilius after a bout like that.\"</i> She seems to genuinely admire your fighting prowess, and a part of you feels proud that you managed to gain a complete stranger's respect through combat. She even ambushed you, and you still managed to fight her off.", parse);
+					Text.Add("<i>“[HeShe] actually fought better than I expected.”</i> Maria gives Zenith a pointed stare and he nods back. <i>“I'm going to need to see Aquilius after a bout like that.”</i> She seems to genuinely admire your fighting prowess, and a part of you feels proud that you managed to gain a complete stranger's respect through combat. She even ambushed you, and you still managed to fight her off.", parse);
 				}
 				// LOST
 				else if(Scenes.Maria.fight == 3) {
-					Text.Add("<i>\"And I was right. [HeShe] went down like a sack of potatoes. I admire [hisher] spirit, though. That's part of why I brought [himher] back to camp.\"</i>", parse);
+					Text.Add("<i>“And I was right. [HeShe] went down like a sack of potatoes. I admire [hisher] spirit, though. That's part of why I brought [himher] back to camp.”</i>", parse);
 				}
 				else {
-					Text.Add("<i>\"[HeShe] was already close enough to camp that one of the patrols would have found [himher] soon enough if I hadn't caught [himher] first.\"</i>", parse);
+					Text.Add("<i>“[HeShe] was already close enough to camp that one of the patrols would have found [himher] soon enough if I hadn't caught [himher] first.”</i>", parse);
 				}
 				Text.NL();
-				Text.Add("Zenith, for his part, says nothing for a while. A hand kneads the pommel of his sword in thought. When he finally speaks, the words surprise you a bit. <i>\"You can return when you like. For now, you should leave. Too much adventure in one day can be bad for you.\"</i> To punctuate the point, he holds up his ravaged hand.  The edge of his mouth briefly twitches into a smile before he shoos you out the door.", parse);
+				Text.Add("Zenith, for his part, says nothing for a while. A hand kneads the pommel of his sword in thought. When he finally speaks, the words surprise you a bit. <i>“You can return when you like. For now, you should leave. Too much adventure in one day can be bad for you.”</i> To punctuate the point, he holds up his ravaged hand.  The edge of his mouth briefly twitches into a smile before he shoos you out the door.", parse);
 				Text.Flush();
 				
 				Gui.NextPrompt(Scenes.Maria.ForestEnd);
@@ -570,15 +570,15 @@ Scenes.Maria.ForestCamp = function() {
 				Text.Clear();
 				Text.Add("You interrupt the busty archer with a question. Facing down Zenith, you demand he explain why he has agents capturing people in the forest. For a moment, he looks at you in surprise. It quickly passes, however, replaced by a far more intimidating look of annoyance.", parse);
 				Text.NL();
-				Text.Add("He turns to Maria, fixing her with his intense gaze. <i>\"I don't. This is an unusual case.\"</i> Shrinking back, the bow woman looks at the floor. The monochrome man turns back to you. <i>\"As for you in particular? Well... I will let you leave this time.\"</i>", parse);
+				Text.Add("He turns to Maria, fixing her with his intense gaze. <i>“I don't. This is an unusual case.”</i> Shrinking back, the bow woman looks at the floor. The monochrome man turns back to you. <i>“As for you in particular? Well... I will let you leave this time.”</i>", parse);
 				Text.NL();
 				
 				if(Scenes.Maria.fight == 1 || Scenes.Maria.fight == 2)
-					Text.Add("<i>\"You beat one of my best scouts. Not something every person can say, hm? You're not part of any law enforcement, are you?\"</i> Shaking your head, you let Zenith continue. <i>\"Come back later then. I'll have some things to discuss with you. For now, you should head back to wherever you call home.\"</i>", parse);
+					Text.Add("<i>“You beat one of my best scouts. Not something every person can say, hm? You're not part of any law enforcement, are you?”</i> Shaking your head, you let Zenith continue. <i>“Come back later then. I'll have some things to discuss with you. For now, you should head back to wherever you call home.”</i>", parse);
 				else if(Scenes.Maria.fight == 3)
-					Text.Add("<i>\"Seems there was a bit of a misunderstanding. We bear you no ill will, unless you decide to go against us.\"</i> Shaking your head, you let Zenith continue. <i>\"Come back later then. I'll have some things to discuss with you. For now, you should head back to wherever you call home.\"</i>", parse);
+					Text.Add("<i>“Seems there was a bit of a misunderstanding. We bear you no ill will, unless you decide to go against us.”</i> Shaking your head, you let Zenith continue. <i>“Come back later then. I'll have some things to discuss with you. For now, you should head back to wherever you call home.”</i>", parse);
 				else
-					Text.Add("<i>\"Since you showed no violence toward myself or my people, you are free to return if you wish. If you need supplies, feel free to speak with Tryss near the entrance to the camp the next time you come around.\"</i> As if that settles the entire matter, he shoos you from the room and shuts the door behind you and Maria.", parse);
+					Text.Add("<i>“Since you showed no violence toward myself or my people, you are free to return if you wish. If you need supplies, feel free to speak with Tryss near the entrance to the camp the next time you come around.”</i> As if that settles the entire matter, he shoos you from the room and shuts the door behind you and Maria.", parse);
 				
 				maria.relation.DecreaseStat(-100, 5);
 				Text.Flush();

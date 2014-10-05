@@ -179,11 +179,11 @@ Scenes.Equine.LossPrompt = function() {
 	scenes.AddEnc(function() {
 		Text.AddOutput("You[party] collapse, unable to dispute the equine couple's victory. The two approach you, the stallion eying your crumpled figure with desire.", parse);
 		Text.Newline();
-		Text.AddOutput("<i>\"You in the mood?\"</i> The male questions, turned to the mare, his groin twitching in the process.", parse);
+		Text.AddOutput("<i>“You in the mood?”</i> The male questions, turned to the mare, his groin twitching in the process.", parse);
 		Text.Newline();
-		Text.AddOutput("<i>\"You're <b>always</b> in the mood, aren't you? Maybe if you aren't satisfied with me, you should  just leave.\"</i> The busty female turns her back to the stallion, fuming.", parse);
+		Text.AddOutput("<i>“You're <b>always</b> in the mood, aren't you? Maybe if you aren't satisfied with me, you should  just leave.”</i> The busty female turns her back to the stallion, fuming.", parse);
 		Text.Newline();
-		Text.AddOutput("<i>\"Yeah, okay, sure. When <b>you're</b> in the mood, you'd fuck a demon to death, but when <b>I</b> want to have some fun-\"</i>", parse);
+		Text.AddOutput("<i>“Yeah, okay, sure. When <b>you're</b> in the mood, you'd fuck a demon to death, but when <b>I</b> want to have some fun-”</i>", parse);
 		Text.Newline();
 		Text.AddOutput("The two continue to argue for quite some time, allowing you[party] to slink away unnoticed. Still, you find the loss to two bickering equines quite embarrassing.", parse);
 		
@@ -192,18 +192,18 @@ Scenes.Equine.LossPrompt = function() {
 	scenes.AddEnc(function() {
 		Text.AddOutput("The final blow breaks your will and you grudgingly drop to your knees, unable to fight back. Your eyes look around and you hear the telltale click of animalistic tongues.", parse);
 		Text.Newline();
-		Text.AddOutput("<i>\"I thought they'd last a little longer than that...\"</i> The mare comments, looking to [hisher2] comrade as [heshe2] finishes. ", parse);
+		Text.AddOutput("<i>“I thought they'd last a little longer than that...”</i> The mare comments, looking to [hisher2] comrade as [heshe2] finishes. ", parse);
 		Text.Newline();
-		Text.AddOutput("The stallion matches [hisher2] glare. <i>\"I know that look.\"</i> [HeShe1] takes this moment to rake [hisher1] eyes over your figure.", parse);
+		Text.AddOutput("The stallion matches [hisher2] glare. <i>“I know that look.”</i> [HeShe1] takes this moment to rake [hisher1] eyes over your figure.", parse);
 		Text.Newline();
 		
 		if(player.NumCocks() > 0) {
-			Text.AddOutput("[HeShe1] chuckles briefly. <i>\"Don't let your prey see your mouth water.\"</i> The mare gives you a telling ogle.", parse);
+			Text.AddOutput("[HeShe1] chuckles briefly. <i>“Don't let your prey see your mouth water.”</i> The mare gives you a telling ogle.", parse);
 			Text.Newline();
-			Text.AddOutput("[HeShe2] replied sharply. <i>\"Mind your damn business...\"</i> [HisHer2] eyes stayed pinned to your figure as [heshe2] spoke. It's not that you mind the attention, but you do feel a little uneasy under those stares. ", parse);
+			Text.AddOutput("[HeShe2] replied sharply. <i>“Mind your damn business...”</i> [HisHer2] eyes stayed pinned to your figure as [heshe2] spoke. It's not that you mind the attention, but you do feel a little uneasy under those stares. ", parse);
 		}
 		else if(player.NumVags() > 0) {
-			Text.AddOutput("The mare gave a shrug. <i>\"Well, it's your call. She can't seem to stop staring at you.\"</i>", parse);
+			Text.AddOutput("The mare gave a shrug. <i>“Well, it's your call. She can't seem to stop staring at you.”</i>", parse);
 			Text.Newline();
 			Text.AddOutput("You look away from the stallion after the female mentions it and feel heat rise into your cheeks. It's not your fault: his... equipment is simply not an everyday sight.", parse);
 		}
@@ -212,10 +212,10 @@ Scenes.Equine.LossPrompt = function() {
 		Text.Newline();
 		
 		if(player.NumCocks() > 0) {
-			Text.AddOutput("<i>\"You wanna play with me?\"</i> The mare smiles, approaching you while pressing her chest out. The small amount of leather covering her [breastDesc2] pulls tightly around her [nipDesc2], the outline quite visible.", parse);
+			Text.AddOutput("<i>“You wanna play with me?”</i> The mare smiles, approaching you while pressing her chest out. The small amount of leather covering her [breastDesc2] pulls tightly around her [nipDesc2], the outline quite visible.", parse);
 		}
 		else if(player.NumVags() > 0) {
-			Text.AddOutput("<i>\"So, you wanna have some fun?\"</i> The stallion questions while moving forward, closing the distance. His musk fills your nostrils, and despite how disgusting the idea might be, you can feel your insides squirm. ", parse);
+			Text.AddOutput("<i>“So, you wanna have some fun?”</i> The stallion questions while moving forward, closing the distance. His musk fills your nostrils, and despite how disgusting the idea might be, you can feel your insides squirm. ", parse);
 		}
 		
 		if(player.LustLevel() >= 0.8) {
@@ -260,9 +260,9 @@ Scenes.Equine.LossPrompt = function() {
 				Text.AddOutput("They sigh and shrug, both looking disappointed.", parse);
 				Text.Newline();
 				if(player.NumCocks() > 0)		
-					Text.AddOutput("The mare turns to you and asks. <i>\"You sure?\"</i> You nod your head with certainty and turn the two away. You quickly get a hold of yourself[party] before heading out, thankful that you managed to leave with some dignity. ", parse);
+					Text.AddOutput("The mare turns to you and asks. <i>“You sure?”</i> You nod your head with certainty and turn the two away. You quickly get a hold of yourself[party] before heading out, thankful that you managed to leave with some dignity. ", parse);
 				else
-					Text.AddOutput("The stallion turns away from you and scoffs. <i>\"You're missing the ride of your life.\"</i> You furrow your eyebrows with anger and turn away from the two. You quickly get a hold of yourself[party] before heading out, thankful that you managed to leave with some dignity.", parse);
+					Text.AddOutput("The stallion turns away from you and scoffs. <i>“You're missing the ride of your life.”</i> You furrow your eyebrows with anger and turn away from the two. You quickly get a hold of yourself[party] before heading out, thankful that you managed to leave with some dignity.", parse);
 				Gui.NextPrompt(enc.finalize);
 			}, enabled : player.LustLevel() < 0.8,
 			tooltip : "Refuse their offer."
@@ -283,11 +283,11 @@ Scenes.Equine.FuckFemale = function(enc) {
 	Text.Clear();
 	Text.AddOutput("You greedily drink in the female's assets, eyes traveling down to her poorly-covered groin. You swear you can see drops of moisture travel down her long, slender, peach legs.", parse);
 	Text.Newline();
-	Text.AddOutput("<i> \"I... yeah.\"</i> It's the only confirmation you can release without sounding too eager.", parse);
+	Text.AddOutput("<i>“I... yeah.”</i> It's the only confirmation you can release without sounding too eager.", parse);
 	Text.Newline();
 	Text.AddOutput("The scantily-clad mare slowly approaches you on her hooves, eyes glued to yours. Once within touching distance, without missing a beat, she puts her hand on your shoulder and eases you onto your back. Her glowing emerald gems melt your expression. ", parse);
 	Text.Newline();
-	Text.AddOutput("A telling feeling rises from your nethers, your [cockDesc] poking against her milky peach skin. Your eyes feel pinned to hers, smooth locks of brown hair drifting in front of one of her eyes. Her tits press into your chest, and she gropes your groin. <i>\"What are you waiting for?\"</i>", parse);
+	Text.AddOutput("A telling feeling rises from your nethers, your [cockDesc] poking against her milky peach skin. Your eyes feel pinned to hers, smooth locks of brown hair drifting in front of one of her eyes. Her tits press into your chest, and she gropes your groin. <i>“What are you waiting for?”</i>", parse);
 	Text.Newline();
 	Text.AddOutput("That is a fair question. You snap out of your haze and wrap your hands around her waist, using some of your gathered strength to turn her over. In a moment's notice, you're sitting comfortably on top of a barely dressed mare, who watches you fiddle with your [pants] and get your [cockDesc] free of the uncomfortable prison. Once the tip's free, you feel a breeze tickle you. Briefly, you are aware that you're about to take an equine in the middle of the road. You glance behind you but the stallion is gone.", parse);
 	if(!party.Alone())
@@ -313,7 +313,7 @@ Scenes.Equine.FuckFemale = function(enc) {
 	Text.Newline();
 	Text.AddOutput("The feeling of pushing your hips forward and her insides furiously stimulating every piece and section of your [cockDesc] leaves nothing to be desired. You've been enjoying it so much; your body tells you it's time to move on. You'd feel as though your impending orgasm might be a punishment, if it wasn't going to feel so satisfying. The mare has both of her green pupils staring right into yours; you were distracted for the last few moments. Your open mouth releases breaths like your hips are dealing out thrusts. She speaks in between moans.", parse);
 	Text.Newline();
-	Text.AddOutput("<i>\"Finish-Aaah... where you w-aaant-Oh!\"</i> She struggles to speak clearly as you spear her [mobVagDesc].", parse);
+	Text.AddOutput("<i>“Finish-Aaah... where you w-aaant-Oh!”</i> She struggles to speak clearly as you spear her [mobVagDesc].", parse);
 	Text.Newline();
 	Text.AddOutput("Well, it looks like you have a choice. You're going to blow any second. Where are you going to do it?", parse);
 
@@ -360,11 +360,11 @@ Scenes.Equine.FuckFemale = function(enc) {
 	Gui.Callstack.push(function() {
 		Text.Clear();
 		
-		Text.AddOutput("<i>\"Oh, that was... better than expected. You are <b>good</b>!\"</i>", parse);
+		Text.AddOutput("<i>“Oh, that was... better than expected. You are <b>good</b>!”</i>", parse);
 		Text.Newline();
-		Text.AddOutput("You turn to the female, and she gives you a smirk. <i>\"What was your name again, honey?\"</i>", parse);
+		Text.AddOutput("You turn to the female, and she gives you a smirk. <i>“What was your name again, honey?”</i>", parse);
 		Text.Newline();
-		Text.AddOutput("You should have expected as much. After a few moments of deliberation, the mare hops to her feet. <i>\"Well, I've got to clean up. But I bet I'll see you around.\"</i> ", parse);
+		Text.AddOutput("You should have expected as much. After a few moments of deliberation, the mare hops to her feet. <i>“Well, I've got to clean up. But I bet I'll see you around.”</i> ", parse);
 		Text.Newline();
 		Text.AddOutput("After a few moments you collect your bearings.");
 		if(!party.Alone())
@@ -454,7 +454,7 @@ Scenes.Equine.Threesome1 = function(enc) {
 	
 	Text.AddOutput("After a few moments of consideration, you shyly suggest that both of them participate. The stallion raises his eyebrow suggestively.", parse);
 	Text.Newline();
-	Text.AddOutput("<i>\"As long as your offering...\"</i> You two share a glance, and for a moment you consider if this might have been a bad idea. However, you look at his bulging crotch and feel butterflies in your stomach.", parse);
+	Text.AddOutput("<i>“As long as your offering...”</i> You two share a glance, and for a moment you consider if this might have been a bad idea. However, you look at his bulging crotch and feel butterflies in your stomach.", parse);
 	Text.Newline();
 	Text.AddOutput("The mare doesn't seem to mind either, and the two close in on you. You're already on your knees, from where you sat, waiting for them to decide what to do with you. Glad that they included you on the decision making, you watch each of them peel away the pieces of clothing they had. The mare's tits are just as juicy to you as the slowly throbbing horse cock just inches from your face. Seeing as it's the closest, you wrap your hands around the hips of the stallion.", parse);
 	Text.Newline();
