@@ -100,12 +100,12 @@ world.loc.Rigard.Plaza.links.push(new Link(
 				var humanity = racescore.Compare(humanScore);
 				
 				if(humanity < 0.95) {
-					Text.Add("<i>”Stand back, filthy creature!”</i> one of the guards snarl, spitting at your feet.", parse);
+					Text.Add("<i>“Stand back, filthy creature!”</i> one of the guards snarl, spitting at your feet.", parse);
 					Text.NL();
-					Text.Add("<i>”Your kind is not welcome here, run back to your master,”</i> the other one adds, his voice reeking with hostility.", parse);
+					Text.Add("<i>“Your kind is not welcome here, run back to your master,”</i> the other one adds, his voice reeking with hostility.", parse);
 				}
 				else {
-					Text.Add("<i>”Halt citizen! No one enters here without an invitation from the nobility.”</i> The guard eyes you up and down, and snidely adds, <i>”Which, by the looks of you, you don’t have.”</i>", parse);
+					Text.Add("<i>“Halt citizen! No one enters here without an invitation from the nobility.”</i> The guard eyes you up and down, and snidely adds, <i>“Which, by the looks of you, you don’t have.”</i>", parse);
 				}
 				Text.Add(" No matter how you try, the pair seems unwilling to budge. Seems like you need some form of identification or invitation to get through the checkpoint.", parse);
 				Text.NL();
@@ -174,7 +174,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 				
 				parse["plebFilth"] = humanity > 0.95 ? "pleb" : "filth";
 				
-				Text.Add("<i>”I thought we told you not to come here, [plebFilth]!”</i> the officer in charge growls as you saunter up. You grin at him smugly as you present him with the sealed letter you received from the royal twins. The man looks suspiciously at the envelope, his eyebrows rising as he sees the seal. Wordlessly, he breaks the seal and opens it, mulling over the contents, his face paling as he goes down the page.", parse);
+				Text.Add("<i>“I thought we told you not to come here, [plebFilth]!”</i> the officer in charge growls as you saunter up. You grin at him smugly as you present him with the sealed letter you received from the royal twins. The man looks suspiciously at the envelope, his eyebrows rising as he sees the seal. Wordlessly, he breaks the seal and opens it, mulling over the contents, his face paling as he goes down the page.", parse);
 				Text.NL();
 				Text.Add("He looks very confused as he hands back the piece of paper, muttering that you are free to enter, to the surprise of his companion. Whatever instructions the note contained, it seemed to have been enough to convince him. You pass through a smaller door just next to the closed main gates, and find yourself within the royal grounds.", parse);
 				Text.NL();

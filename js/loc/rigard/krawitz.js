@@ -2239,52 +2239,52 @@ Scenes.Krawitz.Aftermath = function() {
 			Text.Add("You recount the events of the night, describing how you[duel] got inside the Krawitz estate, and what you did there.", parse);
 			Text.NL();
 			if(rigard.Krawitz["Duel"] == 1) {
-				Text.Add("<i>”No need to tell me, word has already spread across town,”</i> the young man replies as you tell him about your duel against Krawitz. <i>”I can hardly believe it - you wiped the floor with him! Even I have some trouble besting him!”</i> The two look at you admiringly.", parse);
+				Text.Add("<i>“No need to tell me, word has already spread across town,”</i> the young man replies as you tell him about your duel against Krawitz. <i>“I can hardly believe it - you wiped the floor with him! Even I have some trouble besting him!”</i> The two look at you admiringly.", parse);
 				Text.NL();
 			}
 			else if(rigard.Krawitz["Duel"] == 2) {
-				Text.Add("<i>”Hah, I can’t believe that you managed to best the old fool at his own game!”</i> The man laughs as you tell him about your duel against Krawitz. <i>”I didn’t know you were such a fighter!”</i>", parse);
+				Text.Add("<i>“Hah, I can’t believe that you managed to best the old fool at his own game!”</i> The man laughs as you tell him about your duel against Krawitz. <i>“I didn’t know you were such a fighter!”</i>", parse);
 				Text.NL();
 			}
 			else if(rigard.Krawitz["Duel"] == 3) {
-				Text.Add("The red-haired man shakes his head as you tell him of your fight against Krawitz. <i>”Taking him head-on might be a few years too soon for you,”</i> he grudgingly admits. <i>”Just be glad that you escaped relatively unscathed.”</i>", parse);
+				Text.Add("The red-haired man shakes his head as you tell him of your fight against Krawitz. <i>“Taking him head-on might be a few years too soon for you,”</i> he grudgingly admits. <i>“Just be glad that you escaped relatively unscathed.”</i>", parse);
 				Text.NL();
 			}
 			if(rigard.Krawitz["Work"] == 2)
-				Text.Add("<i>”You entered into his service as a servant?”</i> the man chortles. <i>”So let me get this straight, on top of it all, he paid you from his own coffers? Brilliant!”</i>", parse);
+				Text.Add("<i>“You entered into his service as a servant?”</i> the man chortles. <i>“So let me get this straight, on top of it all, he paid you from his own coffers? Brilliant!”</i>", parse);
 			else
-				Text.Add("<i>”Sneaking in like a thief in the night, how exciting!”</i> the woman exclaims. <i>”Wait for the rest of it, pet,”</i> the man tells her, though there is a spark in his eyes.", parse);
+				Text.Add("<i>“Sneaking in like a thief in the night, how exciting!”</i> the woman exclaims. <i>“Wait for the rest of it, pet,”</i> the man tells her, though there is a spark in his eyes.", parse);
 			Text.NL();
 			if(Scenes.Krawitz.stat.HasBinder) {
 				Text.Add("You hand over the binder you found in Krawitz’ study. The man leafs through it idly as you speak, his eyes growing wider and wider. He whistles as he finds something particularly interesting.", parse);
 				Text.NL();
-				Text.Add("<i>”Do you know what this is? We always suspected the old fart was low on money, but this tells quite an interesting tale… according to his own book, the Krawitz estate is just about bankrupt.”</i> The red-haired man leans over to his companion showing a section to her. <i>”What is even more interesting is where he gets the money to fund his lifestyle. What kind of moron would put this stuff in ink… half of this stuff is borderline illegal.”</i>", parse);
+				Text.Add("<i>“Do you know what this is? We always suspected the old fart was low on money, but this tells quite an interesting tale… according to his own book, the Krawitz estate is just about bankrupt.”</i> The red-haired man leans over to his companion showing a section to her. <i>“What is even more interesting is where he gets the money to fund his lifestyle. What kind of moron would put this stuff in ink… half of this stuff is borderline illegal.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>”And a quarter quite a bit more than borderline!”</i> the woman adds.", parse);
+				Text.Add("<i>“And a quarter quite a bit more than borderline!”</i> the woman adds.", parse);
 				Text.NL();
-				Text.Add("He closes the binder, putting it on the table. <i>”Spreading the information in this book to the right people could make life for Lord Krawitz very… uncomfortable. His name will still protect him to a certain extent, mind you, but this is still going to strike a hard blow against him.”</i>", parse);
+				Text.Add("He closes the binder, putting it on the table. <i>“Spreading the information in this book to the right people could make life for Lord Krawitz very… uncomfortable. His name will still protect him to a certain extent, mind you, but this is still going to strike a hard blow against him.”</i>", parse);
 				Text.NL();
 			}
 			if(Scenes.Krawitz.stat.HasSword) {
-				Text.Add("Grinning, you pull out Lord Krawitz’ blade and present it to the pair. <i>”How in… oh this is going to sting him something fierce!”</i> the man chuckles, admiring the sword. <i>”One almost feels a bit bad for him… this sword is just about the most valuable thing in his possession, an heirloom that has been in his family for generations. Until now, that is.”</i> He hands it back to you. <i>”You’ve earned it. Make good use of it - it is a fine blade.”</i>", parse);
+				Text.Add("Grinning, you pull out Lord Krawitz’ blade and present it to the pair. <i>“How in… oh this is going to sting him something fierce!”</i> the man chuckles, admiring the sword. <i>“One almost feels a bit bad for him… this sword is just about the most valuable thing in his possession, an heirloom that has been in his family for generations. Until now, that is.”</i> He hands it back to you. <i>“You’ve earned it. Make good use of it - it is a fine blade.”</i>", parse);
 				Text.NL();
 				Text.Flush();
 				party.inventory.AddItem(Items.Weapons.KrawitzSword);
 			}
 			if(Scenes.Krawitz.stat.TFdKrawitz) {
-				Text.Add("You tell them how you slipped something extra into the lord’s food. <i>”Oh, that is too rich!”</i> the man laughs out loud, slapping his knees in mirth. <i>”I look forward to seeing that bastard trying to show up in court with animal ears and a tail on him. That ought to lend less credence to his damn xenophobic politics!”</i>", parse);
+				Text.Add("You tell them how you slipped something extra into the lord’s food. <i>“Oh, that is too rich!”</i> the man laughs out loud, slapping his knees in mirth. <i>“I look forward to seeing that bastard trying to show up in court with animal ears and a tail on him. That ought to lend less credence to his damn xenophobic politics!”</i>", parse);
 				Text.NL();
 				Text.Add("...Court? Just who are these two?", parse);
 				Text.NL();
 			}
 			if(Scenes.Krawitz.stat.BathhouseSpiked) {
-				Text.Add("<i>”You didn’t!”</i> the woman exclaims when you tell them of your escapades with the Krawitz ladies. <i>”I mean, they are kinda known for being sluts, but really?”</i> Her eyes widen when you tell her about the aphrodisiac, and where you found it.", parse);
+				Text.Add("<i>“You didn’t!”</i> the woman exclaims when you tell them of your escapades with the Krawitz ladies. <i>“I mean, they are kinda known for being sluts, but really?”</i> Her eyes widen when you tell her about the aphrodisiac, and where you found it.", parse);
 				Text.NL();
-				Text.Add("<i>”Now, why would he have something like that?”</i> the man muses thoughtfully.", parse);
+				Text.Add("<i>“Now, why would he have something like that?”</i> the man muses thoughtfully.", parse);
 				Text.NL();
 			}
 			if(Scenes.Krawitz.stat.Orgy) {
-				Text.Add("You’re not done yet though, and you continue to explain what happened after the drugged servants arrived at the scene. The pair are blushing fiercely by the end of it, looking slightly apprehensive. <i>”I, uh, I hope they are alright,”</i> the woman looks a bit worried.", parse);
+				Text.Add("You’re not done yet though, and you continue to explain what happened after the drugged servants arrived at the scene. The pair are blushing fiercely by the end of it, looking slightly apprehensive. <i>“I, uh, I hope they are alright,”</i> the woman looks a bit worried.", parse);
 				Text.NL();
 			}
 			if(!Scenes.Krawitz.stat.AlarmRaised)
@@ -2297,19 +2297,19 @@ Scenes.Krawitz.Aftermath = function() {
 			Gui.NextPrompt(function() {
 				Text.Clear();
 				if(points <= 1)
-					Text.Add("<i>”Though I expected more, you’ve still shown your dedication,”</i> the man grudgingly admits. <i>”If nothing else, you <b>did</b> risk yourself by sneaking into the mansion. I guess that we can see that as proof of your loyalty, at least.”</i>", parse);
+					Text.Add("<i>“Though I expected more, you’ve still shown your dedication,”</i> the man grudgingly admits. <i>“If nothing else, you <b>did</b> risk yourself by sneaking into the mansion. I guess that we can see that as proof of your loyalty, at least.”</i>", parse);
 				else if(points <= 5)
-					Text.Add("<i>”This isn’t a night the old man Krawitz is likely to forget soon,”</i> the man chuckles. <i>”You’ve done us a great service, [playername], and earned our trust.”</i> The woman nods her agreement.", parse);
+					Text.Add("<i>“This isn’t a night the old man Krawitz is likely to forget soon,”</i> the man chuckles. <i>“You’ve done us a great service, [playername], and earned our trust.”</i> The woman nods her agreement.", parse);
 				else if(points <= 9)
-					Text.Add("<i>”This will be one for the bards, [playername],”</i> the man chortles, <i>”I’d be surprised if the old fart dares show his face after your actions tonight. He’ll be the laughingstock of Rigard!”</i> He shakes your hand heartily, very pleased with your efforts.", parse);
+					Text.Add("<i>“This will be one for the bards, [playername],”</i> the man chortles, <i>“I’d be surprised if the old fart dares show his face after your actions tonight. He’ll be the laughingstock of Rigard!”</i> He shakes your hand heartily, very pleased with your efforts.", parse);
 				else {
 					Text.Add("After you have finished, the pair sits in stunned silence, gawking at your story. At last, the man clears his throat.", parse);
 					Text.NL();
-					Text.Add("<i>”Remind me to never get on your bad side, [playername],”</i> the man breathes, amazed, <i>”to have accomplished all this in a single night… you’ve all but ruined Krawitz reputation. Truly, you went above and beyond. You have earned our trust.”</i> The woman nods in agreement, looking at you slightly apprehensively.", parse);
+					Text.Add("<i>“Remind me to never get on your bad side, [playername],”</i> the man breathes, amazed, <i>“to have accomplished all this in a single night… you’ve all but ruined Krawitz reputation. Truly, you went above and beyond. You have earned our trust.”</i> The woman nods in agreement, looking at you slightly apprehensively.", parse);
 				}
 				Text.NL();
 				if(points > 0) {
-					Text.Add("<i>”As a bonus for your service,”</i> the man motions to a purse on the table in front of him.", parse);
+					Text.Add("<i>“As a bonus for your service,”</i> the man motions to a purse on the table in front of him.", parse);
 					Text.NL();
 					twins.rumi.relation.IncreaseStat(100, points * 2);
 					twins.rani.relation.IncreaseStat(100, points * 3);
@@ -2318,14 +2318,14 @@ Scenes.Krawitz.Aftermath = function() {
 					Text.Add("<b>You earned [coin] coins!</b>", {coin: coin});
 					if(points >= 6) {
 						Text.NL();
-						Text.Add("<i>”I think an additional reward is in order,”</i> the woman declares, pulling out an elaborate silver necklace, with a rose at its center.", parse);
+						Text.Add("<i>“I think an additional reward is in order,”</i> the woman declares, pulling out an elaborate silver necklace, with a rose at its center.", parse);
 						Text.NL();
 						Text.Add("<b>Received woman’s favor!</b>", parse);
 						Text.NL();
 						party.inventory.AddItem(Items.Accessories.RaniFavor);
 					}
 					if(points >= 10) {
-						Text.Add("<i>”Why, I’d say you’ve made quite the impression on my companion,”</i> the man grins. <i>”If you are looking for more ‘favors’, I’m sure she wouldn’t mind providing them.”</i> The woman blushes deeply at this, but nods nervously.", parse);
+						Text.Add("<i>“Why, I’d say you’ve made quite the impression on my companion,”</i> the man grins. <i>“If you are looking for more ‘favors’, I’m sure she wouldn’t mind providing them.”</i> The woman blushes deeply at this, but nods nervously.", parse);
 						
 						twins.flags["SexOpen"] = 1;
 						
@@ -2338,7 +2338,7 @@ Scenes.Krawitz.Aftermath = function() {
 							options.push({ nameStr : "Blowjob",
 								func : function() {
 									Text.Clear();
-									Text.Add("<i>”While that would be really amusing, I think we should get the introductions out of the way first,”</i> the man interjects, grinning as he ruffles his blushing companion’s hair.", parse);
+									Text.Add("<i>“While that would be really amusing, I think we should get the introductions out of the way first,”</i> the man interjects, grinning as he ruffles his blushing companion’s hair.", parse);
 									Text.Flush();
 									Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
 								}, enabled : true,
@@ -2349,7 +2349,7 @@ Scenes.Krawitz.Aftermath = function() {
 							options.push({ nameStr : "Cunnilingus",
 								func : function() {
 									Text.Clear();
-									Text.Add("<i>”You don’t bandy words, do you,”</i> the man laughs merrily, his voice light and melodical. <i>”How about we get the introductions out of the way first?”</i>", parse);
+									Text.Add("<i>“You don’t bandy words, do you,”</i> the man laughs merrily, his voice light and melodical. <i>“How about we get the introductions out of the way first?”</i>", parse);
 									Text.Flush();
 									Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
 								}, enabled : true,
@@ -2359,7 +2359,7 @@ Scenes.Krawitz.Aftermath = function() {
 						options.push({ nameStr : "Not now",
 							func : function() {
 								Text.Clear();
-								Text.Add("<i>”Well, the offer is standing.”</i> Both of them look slightly disappointed when you turn them down.", parse);
+								Text.Add("<i>“Well, the offer is standing.”</i> Both of them look slightly disappointed when you turn them down.", parse);
 								Text.Flush();
 								Gui.NextPrompt(Scenes.Krawitz.TwinsTalk);
 							}, enabled : true,
@@ -2388,9 +2388,9 @@ Scenes.Krawitz.TwinsTalk = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("<i>”Now that business is out of the way, let's drop the subterfuge.”</i> The man rises to his feet, stretching as he undoes his pony-tail, letting out his long hair. As he speaks, his voice changes, becoming lighter, more feminine.", parse);
+	Text.Add("<i>“Now that business is out of the way, let's drop the subterfuge.”</i> The man rises to his feet, stretching as he undoes his pony-tail, letting out his long hair. As he speaks, his voice changes, becoming lighter, more feminine.", parse);
 	Text.NL();
-	Text.Add("<i>”Lei already told us your name, [playername]. I am Rumi, daughter of King Rewyn, heir to the throne of Rigard. And this here, is my twin brother, Rani.”</i> She gestures to the blushing woman - man - sitting beside her. Rumi grins at your surprise. <i>”Had you fooled, did we? My brother and I were always so similar, and we quite enjoy masquerading as each other...”</i>", parse);
+	Text.Add("<i>“Lei already told us your name, [playername]. I am Rumi, daughter of King Rewyn, heir to the throne of Rigard. And this here, is my twin brother, Rani.”</i> She gestures to the blushing woman - man - sitting beside her. Rumi grins at your surprise. <i>“Had you fooled, did we? My brother and I were always so similar, and we quite enjoy masquerading as each other...”</i>", parse);
 	Text.NL();
 	Text.Add("This pair is the prince and princess of Rigard? They do match the descriptions you’ve heard while walking the streets of the city, but why would they be here?", parse);
 	Text.Flush();
@@ -2414,15 +2414,15 @@ Scenes.Krawitz.TwinsPrompt = function() {
 		options.push({ nameStr : "Royals",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”You say our city, but it really isn’t, not yet anyways.”</i> Rumi pouts a bit. <i>”Father can be very overprotective at times. We just want to see our kingdom with our own eyes, experience new things, that sort of thing.”</i> She seems a bit vague on what those things might be, exactly.", parse);
+				Text.Add("<i>“You say our city, but it really isn’t, not yet anyways.”</i> Rumi pouts a bit. <i>“Father can be very overprotective at times. We just want to see our kingdom with our own eyes, experience new things, that sort of thing.”</i> She seems a bit vague on what those things might be, exactly.", parse);
 				Text.NL();
-				Text.Add("<i>”Neither of us agree with the policies our father has set in place discriminating against morphs and closing the city to outsiders,”</i> Rani continues. <i>”Father would never let us out into the city, however, so that is why it is as you see.”</i>", parse);
+				Text.Add("<i>“Neither of us agree with the policies our father has set in place discriminating against morphs and closing the city to outsiders,”</i> Rani continues. <i>“Father would never let us out into the city, however, so that is why it is as you see.”</i>", parse);
 				Text.NL();
 				Text.Add("How come they can stay here though? Won’t they be missed?", parse);
 				Text.NL();
-				Text.Add("<i>”We make our occasional appearance at court, but we are usually sequestered with our teachers. Well, that is what father believes, anyways. It’s amazing how a small bribe can sweeten someone's tongue to say whatever you want,”</i> Rumi smiles, pleased at their clever scheme. <i>”There is only so much you can learn by reading books, stuck in some dusty tower with a withered old man. Besides, none of the stuff they give us is challenging!”</i>", parse);
+				Text.Add("<i>“We make our occasional appearance at court, but we are usually sequestered with our teachers. Well, that is what father believes, anyways. It’s amazing how a small bribe can sweeten someone's tongue to say whatever you want,”</i> Rumi smiles, pleased at their clever scheme. <i>“There is only so much you can learn by reading books, stuck in some dusty tower with a withered old man. Besides, none of the stuff they give us is challenging!”</i>", parse);
 				Text.NL();
-				Text.Add("The princess walks over to a window, looking out into the streets of Rigard. <i>”This place can teach us so much more,”</i> she says, almost under her breath.", parse);
+				Text.Add("The princess walks over to a window, looking out into the streets of Rigard. <i>“This place can teach us so much more,”</i> she says, almost under her breath.", parse);
 				Text.Flush();
 				Scenes.Krawitz.TwinsTalkRoyals = true;
 				Scenes.Krawitz.TwinsPrompt();
@@ -2434,9 +2434,9 @@ Scenes.Krawitz.TwinsPrompt = function() {
 		options.push({ nameStr : "Krawitz",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”Oh, don’t get us wrong, we don’t <b>hate</b> him per se,”</i> the princess assures you, <i>”he is our fencing instructor at court, though we can both best him at this point. He is a xenophobic old fart who is way too full of himself. We wanted to teach him a lesson, sort of.”</i>", parse);
+				Text.Add("<i>“Oh, don’t get us wrong, we don’t <b>hate</b> him per se,”</i> the princess assures you, <i>“he is our fencing instructor at court, though we can both best him at this point. He is a xenophobic old fart who is way too full of himself. We wanted to teach him a lesson, sort of.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>”Your services are much appreciated,”</i> Rani chimes in, showing a fierce edge behind his usually meek demeanor.", parse);
+				Text.Add("<i>“Your services are much appreciated,”</i> Rani chimes in, showing a fierce edge behind his usually meek demeanor.", parse);
 				Text.Flush();
 				Scenes.Krawitz.TwinsTalkKrawitz = true;
 				Scenes.Krawitz.TwinsPrompt();
@@ -2448,11 +2448,11 @@ Scenes.Krawitz.TwinsPrompt = function() {
 		options.push({ nameStr : "Disguise",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”It should seem rather obvious we’d want to keep our presence here in the city low-key,”</i> the princess looks a bit confused until she understands what it is that you are asking. <i>”Ah, you mean why do I dress and act as a man, while Rani poses as a woman?”</i>", parse);
+				Text.Add("<i>“It should seem rather obvious we’d want to keep our presence here in the city low-key,”</i> the princess looks a bit confused until she understands what it is that you are asking. <i>“Ah, you mean why do I dress and act as a man, while Rani poses as a woman?”</i>", parse);
 				Text.NL();
-				Text.Add("Rumi leans over and caresses her brother’s cheek. <i>”Don’t you think he is prettier this way?”</i> The young prince shies away from her touch, throwing uncertain looks in your direction. The red-haired woman laughs, a pleasant sound, though there is more than a hint of mischief there.", parse);
+				Text.Add("Rumi leans over and caresses her brother’s cheek. <i>“Don’t you think he is prettier this way?”</i> The young prince shies away from her touch, throwing uncertain looks in your direction. The red-haired woman laughs, a pleasant sound, though there is more than a hint of mischief there.", parse);
 				Text.NL();
-				Text.Add("<i>”It’s not something we always do, but switching things around now and then can be fun.”</i> The princess throws a naughty smirk at her brother, who blushes slightly, lowering his eyes. You’ll probably have to get to know the pair better before they‘ll tell you more.", parse);
+				Text.Add("<i>“It’s not something we always do, but switching things around now and then can be fun.”</i> The princess throws a naughty smirk at her brother, who blushes slightly, lowering his eyes. You’ll probably have to get to know the pair better before they‘ll tell you more.", parse);
 				Text.Flush();
 				Scenes.Krawitz.TwinsTalkDisguise = true;
 				Scenes.Krawitz.TwinsPrompt();
@@ -2464,7 +2464,7 @@ Scenes.Krawitz.TwinsPrompt = function() {
 		options.push({ nameStr : "Lei",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”Lei is the best at his job, though unfortunately a bit too dedicated to it for our tastes.”</i> Rumi replies to your question. <i>”Mother figured out that we were sneaking into the city, and hired a bodyguard for us rather than telling father.”</i> She smiles wickedly. <i>”Mother’s plan might have backfired a bit though. Though Lei is known for completing his missions to the letter, a bit of persuasion and some cash convinced him to take on some additional duties, when he isn’t busy protecting us.”</i>", parse);
+				Text.Add("<i>“Lei is the best at his job, though unfortunately a bit too dedicated to it for our tastes.”</i> Rumi replies to your question. <i>“Mother figured out that we were sneaking into the city, and hired a bodyguard for us rather than telling father.”</i> She smiles wickedly. <i>“Mother’s plan might have backfired a bit though. Though Lei is known for completing his missions to the letter, a bit of persuasion and some cash convinced him to take on some additional duties, when he isn’t busy protecting us.”</i>", parse);
 				Text.NL();
 				Text.Add("She doesn’t seem to want to tell you more about what those duties are, exactly. Perhaps you could ask Lei about it later.", parse);
 				Text.Flush();
@@ -2487,30 +2487,30 @@ Scenes.Krawitz.TwinsMoreTalk = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("<i>”If you don’t have any more questions, how about getting down to business? We have an offer for you.”</i> Rumi gestures towards the closed door. <i>”Lei is certainly an able bodyguard, protecting us always, whether we want it or not.”</i> There is a slightly guilty silence from the door.", parse);
+	Text.Add("<i>“If you don’t have any more questions, how about getting down to business? We have an offer for you.”</i> Rumi gestures towards the closed door. <i>“Lei is certainly an able bodyguard, protecting us always, whether we want it or not.”</i> There is a slightly guilty silence from the door.", parse);
 	Text.NL();
-	Text.Add("<i>”There are certain services that he cannot provide for us, however. One of the terms in his contract with our mother strictly forbids us to leave the city. For this, we want to hire you. Be our agent outside the city, and we will reward you richly.”</i>", parse);
+	Text.Add("<i>“There are certain services that he cannot provide for us, however. One of the terms in his contract with our mother strictly forbids us to leave the city. For this, we want to hire you. Be our agent outside the city, and we will reward you richly.”</i>", parse);
 	Text.NL();
 	Text.Add("You ask them what kind of work you’d be doing, and why they want to put this trust in you.", parse);
 	Text.NL();
-	Text.Add("<i>”Lei likes you, and he has an eye for the strong,”</i> Rani pipes in. Likes you? The silent swordsman has a peculiar way of showing it, if so. <i>”You’ve shown your mettle by taking on Krawitz for us, this is enough to start. We are sure you won’t disappoint us in the future.”</i>", parse);
+	Text.Add("<i>“Lei likes you, and he has an eye for the strong,”</i> Rani pipes in. Likes you? The silent swordsman has a peculiar way of showing it, if so. <i>“You’ve shown your mettle by taking on Krawitz for us, this is enough to start. We are sure you won’t disappoint us in the future.”</i>", parse);
 	Text.NL();
-	Text.Add("<i>”As to what you would be asked to do… nothing bad, certainly. You’d pass messages along, bring us certain objects or people… stuff like that. We can talk about the details later.”</i> The princess waves off any further inquiries.", parse);
+	Text.Add("<i>“As to what you would be asked to do… nothing bad, certainly. You’d pass messages along, bring us certain objects or people… stuff like that. We can talk about the details later.”</i> The princess waves off any further inquiries.", parse);
 	Text.NL();
-	Text.Add("<i>”As a show of our appreciation, we will grant you a favor. Word on the street is that you tried to get past the royal guard and inside the inner walls. We can get you in there.”</i> Rumi hands you a sealed envelope. <i>”This should get you past the guards, though it won’t let you enter the castle unless you have a direct invitation.”</i>", parse);
+	Text.Add("<i>“As a show of our appreciation, we will grant you a favor. Word on the street is that you tried to get past the royal guard and inside the inner walls. We can get you in there.”</i> Rumi hands you a sealed envelope. <i>“This should get you past the guards, though it won’t let you enter the castle unless you have a direct invitation.”</i>", parse);
 	Text.NL();
 	Text.Add("<b>Received royal pass.</b>", parse);
 	
 	rigard.flags["RoyalAccess"] = 1;
 	
 	Text.NL();
-	Text.Add("<i>”Now, if you don’t mind, we have a celebration to attend to, don’t we brother?”</i> The princess nudges her twin playfully, though there is a naughty look in her eyes. <i>”Leave us for now, [playername], talk to Lei if our offer is of interest to you.”</i>", parse);
+	Text.Add("<i>“Now, if you don’t mind, we have a celebration to attend to, don’t we brother?”</i> The princess nudges her twin playfully, though there is a naughty look in her eyes. <i>“Leave us for now, [playername], talk to Lei if our offer is of interest to you.”</i>", parse);
 	Text.NL();
 	if(twins.flags["SexOpen"] == 1) {
-		Text.Add("<i>”Ah, and you would consider our… other offer too, yes?”</i> Rani blushes, and his sister giggles at him.", parse);
+		Text.Add("<i>“Ah, and you would consider our… other offer too, yes?”</i> Rani blushes, and his sister giggles at him.", parse);
 		Text.NL();
 	}
-	Text.Add("You excuse yourself, meeting Lei at the door. <i>”You may have earned their trust, but know that I am watching you,”</i> he says gruffly, before leading you back down the stairs.", parse);
+	Text.Add("You excuse yourself, meeting Lei at the door. <i>“You may have earned their trust, but know that I am watching you,”</i> he says gruffly, before leading you back down the stairs.", parse);
 	Text.Flush();
 
 	Gui.NextPrompt(function() {

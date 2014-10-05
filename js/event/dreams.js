@@ -277,7 +277,7 @@ Scenes.Dreams.EndlessClassroom = function(ravenTrigger) {
 	
 	Text.Add("Your pupils sit in orderly rows, as you read from a dry tome in your hands. A hand is raised in the back, and, after finising the sentence, you shut the book, and wave for the student to speak. He stands, and you can barely make him out in the distance.", parse);
 	Text.NL();
-	Text.Add("<i>”[gen],”</i> the piping voice somehow carries to you through the distance. <i>”What is agoraphobia?”</i> As you look, the student seems to recede further, and behind him, the rows go on and on, spreading outwards and stretching endlessly, until there is nothing in your view but an endless sea of desks, an endless sea of intent faces.[raven]", parse);
+	Text.Add("<i>“[gen],”</i> the piping voice somehow carries to you through the distance. <i>“What is agoraphobia?”</i> As you look, the student seems to recede further, and behind him, the rows go on and on, spreading outwards and stretching endlessly, until there is nothing in your view but an endless sea of desks, an endless sea of intent faces.[raven]", parse);
 	Text.NL();
 	Text.Add("Breathing a little fast, you glance down hurriedly, and reopen the book. There. Only you and the words.", parse);
 	Text.NL();
@@ -495,7 +495,7 @@ Scenes.Dreams.UruRun = function(ravenTrigger) {
 	
 	Text.Add("You are running, haunted by flickering shadows and an all-encroaching fire. Loud cackles mock you as your feet patter across the dry, cracked desolation.[raven] You don’t dare to turn your head around even for a second, assured that your pursuers would catch you immediately if you do. The feeling of flames licking your back playfully further reinforces this idea.", parse);
 	Text.NL();
-	Text.Add("<i>”Scuttering like an ant, back and forth, round and round you go!”</i> Glancing up, you see Uru, the hermaphrodite demoness, hovering lazily above you, a wicked smile on her dark lips. <i>”Hurry now, or they’ll catch you,”</i> she zips in front of you, urging you forward into her arms. Those perfectly formed arms. The demon is truly breathtaking, her flawless red skin shiny beneath the glaring sun. Her toned muscles emphasize her hourglass figure, her large breasts jiggle enticingly as she touches them seductively. Between the demon’s legs, her girthy girlcock juts out towards you, stiff and dripping pre.", parse);
+	Text.Add("<i>“Scuttering like an ant, back and forth, round and round you go!”</i> Glancing up, you see Uru, the hermaphrodite demoness, hovering lazily above you, a wicked smile on her dark lips. <i>“Hurry now, or they’ll catch you,”</i> she zips in front of you, urging you forward into her arms. Those perfectly formed arms. The demon is truly breathtaking, her flawless red skin shiny beneath the glaring sun. Her toned muscles emphasize her hourglass figure, her large breasts jiggle enticingly as she touches them seductively. Between the demon’s legs, her girthy girlcock juts out towards you, stiff and dripping pre.", parse);
 	Text.NL();
 	Text.Add("Her alluring face is framed by her long black hair, and crowned by her long demonic horns. Below her dark eyes and cute nose, her gaping maw is filled with sharp teeth. Suddenly, you realize that you have been running in the wrong direction the entire time.", parse);
 	Text.NL();
@@ -669,7 +669,7 @@ Scenes.Dreams.Kiakai63 = function(ravenTrigger) {
 	Text.NL();
 	Text.Add("You gently dislodge yourself from the horny elf, pushing yourself into a sitting position. Your chest is bare, but someone has put a pair of comfortable pants on you. A better look at your bedmate confirms that [str]. [HeShe] is clad in a pale blue robe, ending a few inches above [hisher] bared knees.", parse);
 	Text.NL();
-	Text.Add("<i>”Ah, you are awake!”</i> the elf says happily. Confronted with the question as to exactly [heshe] was doing in your bed, and where your bed <i>is</i> for that matter, the elf blushes slightly. <i>”L-lets not get hasty here, I know it might look bad, but really, I'm just trying to help.”</i> [HeShe] looks a bit distraught.", parse);
+	Text.Add("<i>“Ah, you are awake!”</i> the elf says happily. Confronted with the question as to exactly [heshe] was doing in your bed, and where your bed <i>is</i> for that matter, the elf blushes slightly. <i>“L-lets not get hasty here, I know it might look bad, but really, I'm just trying to help.”</i> [HeShe] looks a bit distraught.", parse);
 	Text.NL();
 	Text.Add("You continue talking with the elf for a while, but can’t shake the sense of deja vu. When you wake up for real, you feel a bit confused.", parse);
 }
@@ -682,9 +682,9 @@ Scenes.Dreams.RosalinNursing = function(ravenTrigger) {
 	
 	Text.Add("You wake up in a bed, feeling very ill. Confused, you glance around at the white, featureless room, but find that you are unable to move, or even turn your head. There is a thin sheet of white cloth covering you lower body.", parse);
 	Text.NL();
-	Text.Add("<i>”You are awake! Good, good!”</i> In the corner of your eye, you see a manically grinning catgirl with teal hair, holding a tray filled with bottles of strange colors and shapes. <i>”I was afraid you wouldn’t make it for a while, that stubbed toe looked so bad,”</i> Rosalin tuts, placing the tray near you. <i>”I’m sure you’ll just love your new body though!”</i> She throws back the sheets, revealing that your entire lower body has been replaced with a large, squirming snake. Unlike a regular naga tail though, this one has a head, and it doesn’t look very happy with the situation. It hisses uncertainly at you.", parse);
+	Text.Add("<i>“You are awake! Good, good!”</i> In the corner of your eye, you see a manically grinning catgirl with teal hair, holding a tray filled with bottles of strange colors and shapes. <i>“I was afraid you wouldn’t make it for a while, that stubbed toe looked so bad,”</i> Rosalin tuts, placing the tray near you. <i>“I’m sure you’ll just love your new body though!”</i> She throws back the sheets, revealing that your entire lower body has been replaced with a large, squirming snake. Unlike a regular naga tail though, this one has a head, and it doesn’t look very happy with the situation. It hisses uncertainly at you.", parse);
 	Text.NL();
-	Text.Add("<i>”Now now, don’t be that way, you still have a long way to recovery!”</i> The insane alchemist hums as she pours all of her bottles into a large pot. The concoction begins to boil, spluttering green, acidic drops that begin to rapidly eat through the floor.[raven] Picking up two cups, [raven2] fills them with the deadly solution and stalks closer, to the growing horror of both you and the snake.", parse);
+	Text.Add("<i>“Now now, don’t be that way, you still have a long way to recovery!”</i> The insane alchemist hums as she pours all of her bottles into a large pot. The concoction begins to boil, spluttering green, acidic drops that begin to rapidly eat through the floor.[raven] Picking up two cups, [raven2] fills them with the deadly solution and stalks closer, to the growing horror of both you and the snake.", parse);
 	Text.NL();
 	Text.Add("You wake up in a cold sweat, solemnly promising to never get sick while in the same country as Rosalin.", parse);
 }
@@ -729,13 +729,13 @@ Scenes.Dreams.GwendyStallion = function(ravenTrigger) {
 		cuntAss : player.FirstVag() ? "cunt" : "ass"
 	};
 	
-	Text.Add("<i>”Don’t worry, it’ll be over soon,”</i> Gwendy assures you, patting your head fondly as she secures the restraints on your wrists. For a moment, you are left to your own devices in the cramped stall, awkwardly propped up over a waist high wooden frame, all your four limbs restricted with large leather bands. Even here inside the barn, you can feel a faint waft of a chill wind, making a shiver run over your naked [skinDesc].[raven]", parse);
+	Text.Add("<i>“Don’t worry, it’ll be over soon,”</i> Gwendy assures you, patting your head fondly as she secures the restraints on your wrists. For a moment, you are left to your own devices in the cramped stall, awkwardly propped up over a waist high wooden frame, all your four limbs restricted with large leather bands. Even here inside the barn, you can feel a faint waft of a chill wind, making a shiver run over your naked [skinDesc].[raven]", parse);
 	Text.NL();
-	Text.Add("When Gwendy returns, she is leading a large stallion, one of the biggest in her stall. As she parades the stud in front of you, caressing his immense horsecock into its full size, you start to get an inkling to just what you have agreed to. Your fears are confirmed as she wraps a breeding bag over the horse’s flared cock, pouring a generous amount of lubricant over the enormous package. <i>”I’m so glad that you are helping me with this, [playername],”</i> the farmer tells you as she leads the aroused stud around the other end of the stall, out of your eyesight.", parse);
+	Text.Add("When Gwendy returns, she is leading a large stallion, one of the biggest in her stall. As she parades the stud in front of you, caressing his immense horsecock into its full size, you start to get an inkling to just what you have agreed to. Your fears are confirmed as she wraps a breeding bag over the horse’s flared cock, pouring a generous amount of lubricant over the enormous package. <i>“I’m so glad that you are helping me with this, [playername],”</i> the farmer tells you as she leads the aroused stud around the other end of the stall, out of your eyesight.", parse);
 	Text.NL();
-	Text.Add("<i>”Now, just relax,”</i> she says as you feel the stallion positioning himself over you, his forelegs resting on the frame in front of you. A heavy weight falls across your back as he mounts you, and the air is driven from your lungs as the massive animal rams its cock inside your protesting [cuntAss].", parse);
+	Text.Add("<i>“Now, just relax,”</i> she says as you feel the stallion positioning himself over you, his forelegs resting on the frame in front of you. A heavy weight falls across your back as he mounts you, and the air is driven from your lungs as the massive animal rams its cock inside your protesting [cuntAss].", parse);
 	Text.NL();
-	Text.Add("<i>”I’ll leave the two of you to it,”</i> Gwendy tells you over her shoulder, her voice barely audible to you as the stud begins to move, fucking you with long, deep thrusts. <i>”I’ll go and get the next one...”</i>", parse);
+	Text.Add("<i>“I’ll leave the two of you to it,”</i> Gwendy tells you over her shoulder, her voice barely audible to you as the stud begins to move, fucking you with long, deep thrusts. <i>“I’ll go and get the next one...”</i>", parse);
 	Text.NL();
 	Text.Add("You aren’t quite sure what to think as you wake up.", parse);
 	
@@ -751,9 +751,9 @@ Scenes.Dreams.FeraKittens = function(ravenTrigger) {
 	
 	Text.Add("You hear a loud knocking on your door. Trying to shrug off the last dregs of sleep, you hobble over to it, peering out blearily into the light. There is a short catgirl in a pink dress standing outside, a large box in her arms. It’s Fera, the assistant at the tailor’s shop, you realize. When you attempt to merrily greet her, she growls grouchily, thrusting the box toward you.", parse);
 	Text.NL();
-	Text.Add("<i>”Take responsibility!”</i> she demands loudly, glowering at you. Careful to not tick her off further, you open the box, looking down on a dozen innocent faces. Inside the box, there are kittens with spotted coats of brown, white and black. Your kittens, if Fera is to be believed.[raven] Somehow, [raven2] bulldozes you into accepting [raven3], leaving you looking rather foolish when she turns on her heels and leave. You call after her, asking where she is going.", parse);
+	Text.Add("<i>“Take responsibility!”</i> she demands loudly, glowering at you. Careful to not tick her off further, you open the box, looking down on a dozen innocent faces. Inside the box, there are kittens with spotted coats of brown, white and black. Your kittens, if Fera is to be believed.[raven] Somehow, [raven2] bulldozes you into accepting [raven3], leaving you looking rather foolish when she turns on her heels and leave. You call after her, asking where she is going.", parse);
 	Text.NL();
-	Text.Add("<i>”To get the other five boxes, of course!”</i> she responds.", parse);
+	Text.Add("<i>“To get the other five boxes, of course!”</i> she responds.", parse);
 	Text.NL();
 	Text.Add("You suddenly wake up, heart beating rapidly. Perhaps you should consider using preventatives.", parse);
 }
@@ -768,9 +768,9 @@ Scenes.Dreams.MirandaJailed = function(ravenTrigger) {
 	Text.NL();
 	Text.Add("Rounding a corner, you run into the hunter, Miranda herself. The[herm] guardswoman gives you a predatory grin before she tackles you to the ground, driving all the air from your lungs. You can’t move even a fraction of an inch in her iron grip. The canine cop growls in your ear:", parse);
 	Text.NL();
-	Text.Add("<i>”Busted!”</i>", parse);
+	Text.Add("<i>“Busted!”</i>", parse);
 	Text.NL();
-	Text.Add("Without further ado, you are hauled away to a grand court hall, with dozens of red-skinned imps acting as the jury. The grand judge is the dark succubus queen herself, Uru. <i>”Guilty! Guilty!”</i> the jury hollers. <i>”Guilty!”</i> the judge agrees smugly.[raven] Thus, you are dragged off to jail, given only the advice to never drop the soap. Miranda will be watching.", parse);
+	Text.Add("Without further ado, you are hauled away to a grand court hall, with dozens of red-skinned imps acting as the jury. The grand judge is the dark succubus queen herself, Uru. <i>“Guilty! Guilty!”</i> the jury hollers. <i>“Guilty!”</i> the judge agrees smugly.[raven] Thus, you are dragged off to jail, given only the advice to never drop the soap. Miranda will be watching.", parse);
 	Text.NL();
 	Text.Add("You wake up, still uncertain what your crime was.", parse);
 }
@@ -785,11 +785,11 @@ Scenes.Dreams.MirandaMerc = function(ravenTrigger) {
 	Text.NL();
 	Text.Add("Your party reaches the guild hall, a rickety building home to your comrades, a gang of friendly luck seekers willing to do just about anything for money and pussy.[raven] Barging inside, you are greeted by thirty identical dobie muzzles sweeping your way.", parse);
 	Text.NL();
-	Text.Add("<i>”[playername]!”</i> Miranda greets you, raising her tankard with a wide grin on her face. <i>”You left me waiting too long, we have so many things to… catch up on.”</i>", parse);
+	Text.Add("<i>“[playername]!”</i> Miranda greets you, raising her tankard with a wide grin on her face. <i>“You left me waiting too long, we have so many things to… catch up on.”</i>", parse);
 	Text.NL();
-	Text.Add("<i>”All of us are pretty pent up,”</i> Miranda agrees, patting her bulging crotch, <i>”you better take responsibility for this!”</i>", parse);
+	Text.Add("<i>“All of us are pretty pent up,”</i> Miranda agrees, patting her bulging crotch, <i>“you better take responsibility for this!”</i>", parse);
 	Text.NL();
-	Text.Add("<i>”You’ll have to get in line,”</i> Miranda growls, roughly pushing you down on all fours, her thick cock pressing against your rear entrance. With gleaming eyes and glistening cocks, the rest of the herms close in on you…", parse);
+	Text.Add("<i>“You’ll have to get in line,”</i> Miranda growls, roughly pushing you down on all fours, her thick cock pressing against your rear entrance. With gleaming eyes and glistening cocks, the rest of the herms close in on you…", parse);
 	Text.NL();
 	Text.Add("You wake up with your heart beating rapidly in your chest. Somehow, you are glad there is only one Miranda that you have to deal with.", parse);
 	

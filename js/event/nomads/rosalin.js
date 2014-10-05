@@ -511,35 +511,35 @@ Scenes.Rosalin.TalkPrompt = function() {
 			func : function() {
 				cale.flags["Met2"] = Cale.Met2.Goop;
 				Text.Clear();
-				Text.Add("<i>”Sure, what does wuffie want?”</i> the alchemist asks, a light shining up in [hisher] eyes at the opportunity to experiment on someone. You explain that he’s been taking a lot of cock lately, and he’s wondering if Rosalin could... help him with that.", parse);
+				Text.Add("<i>“Sure, what does wuffie want?”</i> the alchemist asks, a light shining up in [hisher] eyes at the opportunity to experiment on someone. You explain that he’s been taking a lot of cock lately, and he’s wondering if Rosalin could... help him with that.", parse);
 				Text.NL();
-				Text.Add("<i>”Ah… Ahhh! I know just what he needs!”</i> Rosalin exclaims. Somehow, you sincerely doubt that she does. Either way, you’ve set [himher] into motion, there is no stopping it now. The alchemist goes on to mix several strange ingredients into a bit jar, grinding them into a luminescent goop.", parse);
+				Text.Add("<i>“Ah… Ahhh! I know just what he needs!”</i> Rosalin exclaims. Somehow, you sincerely doubt that she does. Either way, you’ve set [himher] into motion, there is no stopping it now. The alchemist goes on to mix several strange ingredients into a bit jar, grinding them into a luminescent goop.", parse);
 				Text.NL();
 				Text.Add("As [heshe] works, you notice that Cale has wandered onto the scene, how convenient. You greet him with a nod, secretly hoping that this doesn’t mess him up too much.", parse);
 				Text.NL();
-				Text.Add("<i>”Hey there, [playername]. Sup Rosie? Whacha cooking?”</i> the unsuspecting wolf inquires, but the alchemist is too busy with her mix to even acknowledge his presence. ", parse);
+				Text.Add("<i>“Hey there, [playername]. Sup Rosie? Whacha cooking?”</i> the unsuspecting wolf inquires, but the alchemist is too busy with her mix to even acknowledge his presence. ", parse);
 				Text.NL();
-				Text.Add("<i>”There! It’s done!”</i> Rosalin declares, adding a small sprinkling of green dust to the mix just for kicks. The resulting cream has a rancid fragrance, and looks like it could corrode metal. Suddenly noticing Cale, Rosalin shines up. <i>”There you are wuffie! Bend over for me, and this’ll be over in a moment!”</i>", parse);
+				Text.Add("<i>“There! It’s done!”</i> Rosalin declares, adding a small sprinkling of green dust to the mix just for kicks. The resulting cream has a rancid fragrance, and looks like it could corrode metal. Suddenly noticing Cale, Rosalin shines up. <i>“There you are wuffie! Bend over for me, and this’ll be over in a moment!”</i>", parse);
 				Text.NL();
-				Text.Add("<i>”Umm, what? I have a feeling it’s time to split,”</i> he says, backing off, looking just like he’s about to bolt. You quickly intervene by blocking his path. Cale panics, trying to scramble away.", parse);
+				Text.Add("<i>“Umm, what? I have a feeling it’s time to split,”</i> he says, backing off, looking just like he’s about to bolt. You quickly intervene by blocking his path. Cale panics, trying to scramble away.", parse);
 				Text.NL();
-				Text.Add("<i>”Hold him for me, would you, [playername]?”</i> Rosalin asks sweetly. With your combined efforts, you bend the struggling and protesting wolf over one of the logs around the fire pit and pull down his pants. <i>”Calm down now, this is for your own good...”</i> the alchemist coos.", parse);
+				Text.Add("<i>“Hold him for me, would you, [playername]?”</i> Rosalin asks sweetly. With your combined efforts, you bend the struggling and protesting wolf over one of the logs around the fire pit and pull down his pants. <i>“Calm down now, this is for your own good...”</i> the alchemist coos.", parse);
 				Text.NL();
-				Text.Add("<i>”The heck are you two doing!? W-What is that, Rosie?”</i> he sputters, <i>”that doesn’t look sa- Aaaah!”</i> The wolf yowls in shock as Rosalin swipes a scoop of the glowing goop and shoves it into his butt. Cale squirms and moans as the alchemist wriggle [hisher] hand around, coating the wolf’s insides in the strange concoction.", parse);
+				Text.Add("<i>“The heck are you two doing!? W-What is that, Rosie?”</i> he sputters, <i>“that doesn’t look sa- Aaaah!”</i> The wolf yowls in shock as Rosalin swipes a scoop of the glowing goop and shoves it into his butt. Cale squirms and moans as the alchemist wriggle [hisher] hand around, coating the wolf’s insides in the strange concoction.", parse);
 				Text.NL();
-				Text.Add("<i>”I-It’s tingling, aaah!”</i> the wolf moans, his legs going weak as the cream begins to take effect. <i>”W-what did you put in there, Rosie?!”</i> The alchemist takes a step back to admire [hisher] work.", parse);
+				Text.Add("<i>“I-It’s tingling, aaah!”</i> the wolf moans, his legs going weak as the cream begins to take effect. <i>“W-what did you put in there, Rosie?!”</i> The alchemist takes a step back to admire [hisher] work.", parse);
 				Text.NL();
-				Text.Add("<i>”With this, you should be able to take even the biggest cocks without trouble!”</i> Rosalin declares, <i>”and you should be way more sensitive too!”</i> In [hisher] own way, the alchemist did [hisher] best to help [hisher] friend, you suppose, even if this wasn’t quite what you asked for.", parse);
+				Text.Add("<i>“With this, you should be able to take even the biggest cocks without trouble!”</i> Rosalin declares, <i>“and you should be way more sensitive too!”</i> In [hisher] own way, the alchemist did [hisher] best to help [hisher] friend, you suppose, even if this wasn’t quite what you asked for.", parse);
 				Text.NL();
 				// Set slut to 60
 				cale.slut.IncreaseStat(60, 100);
 				cale.Butt().capacity.base = 90;
 				
-				Text.Add("<i>”Haah… hot… so hot,”</i> Cale pants, barely able to form sentences anymore, so overwhelmed is he by the new sensations. <i>”Fuck! Need to fuck! Someone… fuck me!”</i> He begins pawing at his butt desperately, throwing pleading glances at you and Rosalin.", parse);
+				Text.Add("<i>“Haah… hot… so hot,”</i> Cale pants, barely able to form sentences anymore, so overwhelmed is he by the new sensations. <i>“Fuck! Need to fuck! Someone… fuck me!”</i> He begins pawing at his butt desperately, throwing pleading glances at you and Rosalin.", parse);
 				var cocksInAss = player.CocksThatFit(cale.Butt());
 				if(cocksInAss.length == 0) {
 					Text.NL();
-					Text.Add("<i>”I could lend you something, if you’d like?”</i> the alchemist suggests, a twinkle in [hisher] eye.", parse);
+					Text.Add("<i>“I could lend you something, if you’d like?”</i> the alchemist suggests, a twinkle in [hisher] eye.", parse);
 				}
 				Text.Flush();
 				
@@ -553,9 +553,9 @@ Scenes.Rosalin.TalkPrompt = function() {
 					func : function() {
 						Text.Clear();
 						if(cocksInAss.length == 0) {
-							Text.Add("<i>”Gimme a sec… no, too small… this one? Ah! Perfect!”</i> Rosalin triumphantly pulls out a huge strapon, formed in the shape of a canine cock. Near the thick base, there is a quite realistic knot, complete with veins and all. The entire thing is slightly longer than Cale’s own member.", parse);
+							Text.Add("<i>“Gimme a sec… no, too small… this one? Ah! Perfect!”</i> Rosalin triumphantly pulls out a huge strapon, formed in the shape of a canine cock. Near the thick base, there is a quite realistic knot, complete with veins and all. The entire thing is slightly longer than Cale’s own member.", parse);
 							Text.NL();
-							Text.Add("<i>”Fitting, don’t you think?”</i> Rosalin grins, handing you the toy. <i>”You can keep it, I have a few other ones laying around.”</i> You gratefully accept the gift, securing the straps around your waist.", parse);
+							Text.Add("<i>“Fitting, don’t you think?”</i> Rosalin grins, handing you the toy. <i>“You can keep it, I have a few other ones laying around.”</i> You gratefully accept the gift, securing the straps around your waist.", parse);
 							Text.NL();
 							Text.Add("<b>Acquired and equipped a canid strapon!</b>", parse);
 							Text.NL();
@@ -579,10 +579,10 @@ Scenes.Rosalin.TalkPrompt = function() {
 							parse["rmultiCockDesc"] = function() { return rosalin.MultiCockDesc(); }
 							Text.Add("You ask if the alchemist wants to take care of him.", parse);
 							Text.NL();
-							Text.Add("<i>”Sure, I can do that!”</i> Rosalin grins as [heshe] pulls out [hisher] [rmultiCockDesc]. <i>”Wolfie! Down boy!”</i> Cale’s tongue is lolling and his tail is wagging happily as Rosalin takes position behind him, grinding against his now incredibly sensitive taint.", parse);
+							Text.Add("<i>“Sure, I can do that!”</i> Rosalin grins as [heshe] pulls out [hisher] [rmultiCockDesc]. <i>“Wolfie! Down boy!”</i> Cale’s tongue is lolling and his tail is wagging happily as Rosalin takes position behind him, grinding against his now incredibly sensitive taint.", parse);
 							Text.NL();
 							parse["s"] = rosalin.NumCocks() > 1 ? "s": "";
-							Text.Add("<i>”T-take me Rosie, just take me!”</i> he howls, pushing his hips back against the alchemists stiff shaft[s]. There is a wild gleam in Rosalin’s eyes as [hisher] desires start to well up. You settle down for the show, eager to see how the new changes will affect Cale.", parse);
+							Text.Add("<i>“T-take me Rosie, just take me!”</i> he howls, pushing his hips back against the alchemists stiff shaft[s]. There is a wild gleam in Rosalin’s eyes as [hisher] desires start to well up. You settle down for the show, eager to see how the new changes will affect Cale.", parse);
 							Text.NL();
 							
 							Scenes.Rosalin.FuckCaleWatchEntryPoint();
@@ -1774,14 +1774,14 @@ Scenes.Rosalin.CombineCallback = function(item) {
 	}
 	else if(item == Items.Nagazm) {
 		if(rosalin.flags["Nagazm"] == 0) {
-			Text.Add("<i>”A bit oily...”</i> Rosalin frowns as [heshe] prods the slimy liquid you present [himher] with. Shrugging, the alchemist grinds the other ingredients and mix them together. As [heshe] does, the mixture slowly turns into a bubbly pink goop, exuding a putrid smell.", parse);
+			Text.Add("<i>“A bit oily...”</i> Rosalin frowns as [heshe] prods the slimy liquid you present [himher] with. Shrugging, the alchemist grinds the other ingredients and mix them together. As [heshe] does, the mixture slowly turns into a bubbly pink goop, exuding a putrid smell.", parse);
 			Text.NL();
-			Text.Add("<i>”Never could stomach snakes,”</i> [heshe] notes conversationally. <i>”I’ve heard some put them in strong alcohol. Perhaps it kills the taste.”</i> The alchemist looks excited. <i>”Aren’t you wondering what it’ll do?”</i>", parse);
+			Text.Add("<i>“Never could stomach snakes,”</i> [heshe] notes conversationally. <i>“I’ve heard some put them in strong alcohol. Perhaps it kills the taste.”</i> The alchemist looks excited. <i>“Aren’t you wondering what it’ll do?”</i>", parse);
 			rosalin.flags["Nagazm"] = 1;
 			player.recipes.push(Items.Nagazm);
 		}
 		else {
-			Text.Add("<i>”Another disgusting, snakey pink goop, coming up!”</i>", parse);
+			Text.Add("<i>“Another disgusting, snakey pink goop, coming up!”</i>", parse);
 		}
 		Text.NL();
 		Text.Add("Rosalin hands you the stoppered bottle, looking expectantly at you.", parse);
@@ -1798,16 +1798,16 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				Items.Nagazm.Use(player);
 				Text.NL();
 				if(body != player.LowerBodyType()) {
-					Text.Add("<i>”Wow!”</i> Rosalin exclaims. <i>”That’s so cool!”</i> [HeShe] gingerly touches your new tail, caressing the scales thoughtfully.", parse);
+					Text.Add("<i>“Wow!”</i> Rosalin exclaims. <i>“That’s so cool!”</i> [HeShe] gingerly touches your new tail, caressing the scales thoughtfully.", parse);
 					Text.NL();
-					Text.Add("<i>”You know...”</i> [heshe] ponders, <i>”this looks like it could be fun to play with...”</i>", parse);
+					Text.Add("<i>“You know...”</i> [heshe] ponders, <i>“this looks like it could be fun to play with...”</i>", parse);
 					Text.Flush();
 					Gui.NextPrompt(function() {
 						Scenes.Rosalin.SexPrompt(RosalinSexState.Regular);
 					});
 				}
 				else {
-					Text.Add("<i>”Disgusting, isn’t it?”</i> Rosalin shudders. You burp loudly, your throat burning.", parse);
+					Text.Add("<i>“Disgusting, isn’t it?”</i> Rosalin shudders. You burp loudly, your throat burning.", parse);
 					Text.Flush();
 					Gui.NextPrompt(function() {
 						Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
@@ -1819,7 +1819,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		options.push({ nameStr : "Rosalin",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”I… I’m actually going to pass on this one. Can’t handle the taste of snake.”</i> You look incredulously at the alchemist. Apparently even [heshe] has [hisher] limits.", parse);
+				Text.Add("<i>“I… I’m actually going to pass on this one. Can’t handle the taste of snake.”</i> You look incredulously at the alchemist. Apparently even [heshe] has [hisher] limits.", parse);
 				Text.Flush();
 			}, enabled : true,
 			tooltip : "Offer the potion to Rosalin."
@@ -1839,15 +1839,15 @@ Scenes.Rosalin.CombineCallback = function(item) {
 	}
 	else if(item == Items.Canis) {
 		if(rosalin.flags["Canis"] == 0) {
-			Text.Add("<i>”This root could probably be used to make several different kind of potions,”</i> Rosalin muses as [heshe] studies the knotted veggie. Shrugging, [heshe] chops it up into a fine mince, mixing it with powdered bone and… biscuit. Humming to [himher]self, the alchemist adds several other ingredients at random. There is a puff of smoke as [heshe] pours some kind of liquid over the mixture.", parse);
+			Text.Add("<i>“This root could probably be used to make several different kind of potions,”</i> Rosalin muses as [heshe] studies the knotted veggie. Shrugging, [heshe] chops it up into a fine mince, mixing it with powdered bone and… biscuit. Humming to [himher]self, the alchemist adds several other ingredients at random. There is a puff of smoke as [heshe] pours some kind of liquid over the mixture.", parse);
 			rosalin.flags["Canis"] = 1;
 			player.recipes.push(Items.Canis);
 		}
 		else {
-			Text.Add("<i>”One doggy treat, coming up!”</i> Rosalin chirps, mixing ingredients happily.", parse);
+			Text.Add("<i>“One doggy treat, coming up!”</i> Rosalin chirps, mixing ingredients happily.", parse);
 		}
 		Text.NL();
-		Text.Add("<i>”All done!”</i> The alchemist presents you with an opaque, reddish liquid, smelling of wet dog.", parse);
+		Text.Add("<i>“All done!”</i> The alchemist presents you with an opaque, reddish liquid, smelling of wet dog.", parse);
 		Text.Flush();
 		
 		//[You][Rosalin][Discard]
@@ -1858,7 +1858,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				Text.NL();
 				Items.Canis.Use(player);
 				parse["boyGirl"] = player.mfTrue("boy", "girl");
-				Text.Add("<i>”Who’s a good [boyGirl], yeees!”</i> Rosalin cheers, patting you.", parse);
+				Text.Add("<i>“Who’s a good [boyGirl], yeees!”</i> Rosalin cheers, patting you.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
@@ -1876,18 +1876,18 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				var scenes = new EncounterTable();
 				// TAIL
 				scenes.AddEnc(function() {
-					Text.Add("<i>”Hehe, it’s so fluffy!”</i> Rosalin prances around, wagging [hisher] new dog-tail happily.", parse);
+					Text.Add("<i>“Hehe, it’s so fluffy!”</i> Rosalin prances around, wagging [hisher] new dog-tail happily.", parse);
 					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.dog, Color.gray);
 					Text.NL();
 				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.dog); });
 				scenes.AddEnc(function() {
-					Text.Add("<i>”Woah, I can hear so clearly with these!”</i> Rosalin exclaims, touching [hisher] new canine ears.", parse);
+					Text.Add("<i>“Woah, I can hear so clearly with these!”</i> Rosalin exclaims, touching [hisher] new canine ears.", parse);
 					TF.SetRaceOne(rosalin.Ears(), Race.dog);
 					Text.NL();
 				}, 1.0, function() { return rosalin.Ears().race != Race.dog; });
 				scenes.AddEnc(function() {
 					parse["oneof"] = rosalin.NumCocks() > 1 ? "one of " : "";
-					Text.Add("<i>”Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rMultiCockDesc] has turned into a pointed canine cock, complete with a knot.", parse);
+					Text.Add("<i>“Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rMultiCockDesc] has turned into a pointed canine cock, complete with a knot.", parse);
 					var ret = {};
 					TF.SetRaceOne(rosalin.AllCocks(), Race.dog, ret);
 					if(ret.bodypart) ret.bodypart.knot = 1;
@@ -1900,7 +1900,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					return unchanged;
 				});
 				scenes.AddEnc(function() {
-					Text.Add("<i>”Mm, this will be fun to play with!”</i> Rosalin moans softly as [heshe] hoists up [hisher] dress, marvelling at [hisher] thick knot.", parse);
+					Text.Add("<i>“Mm, this will be fun to play with!”</i> Rosalin moans softly as [heshe] hoists up [hisher] dress, marvelling at [hisher] thick knot.", parse);
 					Text.NL();
 					var cocks = rosalin.AllCocks();
 					for(var i = 0; i < cocks.length; i++) {
@@ -1942,7 +1942,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 	}
 	else if(item == Items.Lobos) {
 		if(rosalin.flags["Lobos"] == 0) {
-			Text.Add("<i>”Did you get this from wolfie?”</i> Rosalin asks guardedly as [heshe] eyes the wolf pelt you present [himher] with. <i>”If you did, I’ll have to make a potion to make it grow out again.”</i>", parse);
+			Text.Add("<i>“Did you get this from wolfie?”</i> Rosalin asks guardedly as [heshe] eyes the wolf pelt you present [himher] with. <i>“If you did, I’ll have to make a potion to make it grow out again.”</i>", parse);
 			Text.NL();
 			parse["Cale"] = cale.flags["Met2"] >= Cale.Met2.Talked ? "Cale" : "the wolf";
 			Text.Add("You hurriedly assure [himher] that you wouldn’t hurt [Cale], you got this from somewhere else. The alchemist nods to [himher]self, the question already forgotten as [heshe] starts mixing ingredients together.", parse);
@@ -1950,12 +1950,12 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			player.recipes.push(Items.Lobos);
 		}
 		else {
-			Text.Add("<i>”Want another one of those huh?”</i> The alchemist hums a tune to [himher]self as [heshe] starts mixing the ingredients together.", parse);
+			Text.Add("<i>“Want another one of those huh?”</i> The alchemist hums a tune to [himher]self as [heshe] starts mixing the ingredients together.", parse);
 		}
 		Text.NL();
-		Text.Add("<i>”Looks a bit… dull, don’t you think?”</i> Rosalin muses as [heshe] pours the concoction into a bottle, studying the gray liquid. That stuff looks like liquid mercury, it’s probably not safe to drink.", parse);
+		Text.Add("<i>“Looks a bit… dull, don’t you think?”</i> Rosalin muses as [heshe] pours the concoction into a bottle, studying the gray liquid. That stuff looks like liquid mercury, it’s probably not safe to drink.", parse);
 		Text.NL();
-		Text.Add("<i>”Well, what do you want to do with it?”</i>", parse);
+		Text.Add("<i>“Well, what do you want to do with it?”</i>", parse);
 		Text.Flush();
 		
 		//[You][Rosalin][Discard]
@@ -1964,7 +1964,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			func : function() {
 				Text.Clear();
 				Items.Lobos.Use(player);
-				Text.Add("<i>”Hmm,”</i> Rosalin mutters, jotting down a few observations in [hisher] notebook. <i>”Tell me, do you feel more inclined to… howl?”</i>", parse);
+				Text.Add("<i>“Hmm,”</i> Rosalin mutters, jotting down a few observations in [hisher] notebook. <i>“Tell me, do you feel more inclined to… howl?”</i>", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
@@ -1975,25 +1975,25 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		options.push({ nameStr : "Rosalin",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”Okay!”</i> the alchemist chippers, gulping down the gray liquid without hesitation.", parse);
+				Text.Add("<i>“Okay!”</i> the alchemist chippers, gulping down the gray liquid without hesitation.", parse);
 				Text.NL();
 				
 				
 				var scenes = new EncounterTable();
 				// TAIL
 				scenes.AddEnc(function() {
-					Text.Add("<i>”Hehe, it’s so fluffy!”</i> Rosalin prances around, wagging [hisher] new wolf-tail happily. <i>”Makes me look dangerous!”</i>", parse);
+					Text.Add("<i>“Hehe, it’s so fluffy!”</i> Rosalin prances around, wagging [hisher] new wolf-tail happily. <i>“Makes me look dangerous!”</i>", parse);
 					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.wolf, Color.gray);
 					Text.NL();
 				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.wolf); });
 				scenes.AddEnc(function() {
-					Text.Add("<i>”Woah, I can hear so clearly with these!”</i> Rosalin exclaims, touching [hisher] new canine ears.", parse);
+					Text.Add("<i>“Woah, I can hear so clearly with these!”</i> Rosalin exclaims, touching [hisher] new canine ears.", parse);
 					TF.SetRaceOne(rosalin.Ears(), Race.wolf);
 					Text.NL();
 				}, 1.0, function() { return rosalin.Ears().race != Race.wolf; });
 				scenes.AddEnc(function() {
 					parse["oneof"] = rosalin.NumCocks() > 1 ? "one of " : "";
-					Text.Add("<i>”Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rMultiCockDesc] has turned into a pointed canine cock, complete with a knot.", parse);
+					Text.Add("<i>“Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rMultiCockDesc] has turned into a pointed canine cock, complete with a knot.", parse);
 					var ret = {};
 					TF.SetRaceOne(rosalin.AllCocks(), Race.dog, ret);
 					if(ret.bodypart) ret.bodypart.knot = 1;
@@ -2006,7 +2006,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					return unchanged;
 				});
 				scenes.AddEnc(function() {
-					Text.Add("<i>”Mm, this will be fun to play with!”</i> Rosalin moans softly as [heshe] hoists up [hisher] dress, marvelling at [hisher] thick knot.", parse);
+					Text.Add("<i>“Mm, this will be fun to play with!”</i> Rosalin moans softly as [heshe] hoists up [hisher] dress, marvelling at [hisher] thick knot.", parse);
 					Text.NL();
 					var cocks = rosalin.AllCocks();
 					for(var i = 0; i < cocks.length; i++) {
@@ -2025,7 +2025,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				
 				scenes.Get();
 				
-				Text.Add("<i>”Tastes like the moon!”</i> [heshe] exclaims happily. Whatever that means.", parse);
+				Text.Add("<i>“Tastes like the moon!”</i> [heshe] exclaims happily. Whatever that means.", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					Scenes.Rosalin.SexPrompt(RosalinSexState.Regular);
@@ -2048,7 +2048,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 	}
 	else if(item == Items.Vulpinix) {
 		if(rosalin.flags["Vulpinix"] == 0) {
-			Text.Add("<i>”Hmm, a bunch of berries and plants huh? Wonder what I can do with this...”</i> Rosalin muses, absently reaching for some additional herbs from [hisher] collection. <i>”Perhaps a vegetable stew?”</i>", parse);
+			Text.Add("<i>“Hmm, a bunch of berries and plants huh? Wonder what I can do with this...”</i> Rosalin muses, absently reaching for some additional herbs from [hisher] collection. <i>“Perhaps a vegetable stew?”</i>", parse);
 			Text.NL();
 			parse["rearsDesc"] = rosalin.EarDesc();
 			Text.Add("As the ingredients start to bubble in [hisher] pot the concoction takes on a reddish hue. The alchemist sniffs the brew suspiciously, adding a few more herbs at random. [HisHer] [rearsDesc] twitch erratically as [heshe] tastes [hisher] creation.", parse);
@@ -2056,10 +2056,10 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			player.recipes.push(Items.Vulpinix);
 		}
 		else {
-			Text.Add("<i>”Ah, these again! I think I’ll try a few other herbs this time, perhaps spice up the taste a bit.”</i> The alchemist hums to [himher]self as [heshe] starts chopping up vegetables, pouring them into a boiling pot.", parse);
+			Text.Add("<i>“Ah, these again! I think I’ll try a few other herbs this time, perhaps spice up the taste a bit.”</i> The alchemist hums to [himher]self as [heshe] starts chopping up vegetables, pouring them into a boiling pot.", parse);
 		}
 		Text.NL();
-		Text.Add("<i>”This looks promising!”</i> Rosalin exclaims, holding up the resulting bottle of opaque, red liquid.", parse);
+		Text.Add("<i>“This looks promising!”</i> Rosalin exclaims, holding up the resulting bottle of opaque, red liquid.", parse);
 		Text.Flush();
 		
 		//[You][Rosalin][Discard]
@@ -2068,7 +2068,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			func : function() {
 				Text.Clear();
 				Items.Vulpinix.Use(player);
-				Text.Add("<i>”Well, what do you think?”</i> Rosalin asks expectantly. <i>”Perhaps I should try being a chef again? Maybe open a restaurant.”</i>", parse);
+				Text.Add("<i>“Well, what do you think?”</i> Rosalin asks expectantly. <i>“Perhaps I should try being a chef again? Maybe open a restaurant.”</i>", parse);
 				Text.NL();
 				Text.Add("...That’d certainly be an interesting - possibly lethal - venture.", parse);
 				Text.Flush();
@@ -2081,24 +2081,24 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		options.push({ nameStr : "Rosalin",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”Here goes!”</i> the alchemist fearlessly downs the red concoction, beads of sweat forming on [hisher] body due to the powerful alchemical solution.", parse);
+				Text.Add("<i>“Here goes!”</i> the alchemist fearlessly downs the red concoction, beads of sweat forming on [hisher] body due to the powerful alchemical solution.", parse);
 				Text.NL();
 				
 				var scenes = new EncounterTable();
 				// TAIL
 				scenes.AddEnc(function() {
-					Text.Add("<i>”Hehe, it’s so pretty, and fluffy too!”</i> Rosalin prances around, wagging [hisher] bushy fox-tail happily.", parse);
+					Text.Add("<i>“Hehe, it’s so pretty, and fluffy too!”</i> Rosalin prances around, wagging [hisher] bushy fox-tail happily.", parse);
 					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.fox, Color.gray);
 					Text.NL();
 				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.fox); });
 				scenes.AddEnc(function() {
-					Text.Add("<i>”Woah, I can hear so clearly with these!”</i> Rosalin exclaims, touching [hisher] new foxy ears.", parse);
+					Text.Add("<i>“Woah, I can hear so clearly with these!”</i> Rosalin exclaims, touching [hisher] new foxy ears.", parse);
 					TF.SetRaceOne(rosalin.Ears(), Race.fox);
 					Text.NL();
 				}, 1.0, function() { return rosalin.Ears().race != Race.fox; });
 				scenes.AddEnc(function() {
 					parse["oneof"] = rosalin.NumCocks() > 1 ? "one of " : "";
-					Text.Add("<i>”Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rMultiCockDesc] has turned into a pointed canine cock, complete with a knot.", parse);
+					Text.Add("<i>“Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rMultiCockDesc] has turned into a pointed canine cock, complete with a knot.", parse);
 					var ret = {};
 					TF.SetRaceOne(rosalin.AllCocks(), Race.dog, ret);
 					if(ret.bodypart) ret.bodypart.knot = 1;
@@ -2111,7 +2111,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					return unchanged;
 				});
 				scenes.AddEnc(function() {
-					Text.Add("<i>”Mm, this will be fun to play with!”</i> Rosalin moans softly as [heshe] hoists up [hisher] dress, marvelling at [hisher] thick knot.", parse);
+					Text.Add("<i>“Mm, this will be fun to play with!”</i> Rosalin moans softly as [heshe] hoists up [hisher] dress, marvelling at [hisher] thick knot.", parse);
 					Text.NL();
 					var cocks = rosalin.AllCocks();
 					for(var i = 0; i < cocks.length; i++) {
@@ -2130,7 +2130,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				
 				scenes.Get();
 				
-				Text.Add("<i>”Mm… not bad,”</i> [heshe] sighs luxuriously. <i>”Not enough to make me a vegetarian, but… unf. Wow. Those spices sure packs a punch. Isn’t it hot out here?”</i> [HeShe] eyes you expectantly.", parse);
+				Text.Add("<i>“Mm… not bad,”</i> [heshe] sighs luxuriously. <i>“Not enough to make me a vegetarian, but… unf. Wow. Those spices sure packs a punch. Isn’t it hot out here?”</i> [HeShe] eyes you expectantly.", parse);
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
@@ -2154,17 +2154,17 @@ Scenes.Rosalin.CombineCallback = function(item) {
 	}
 	else if(item == Items.Scorpius) {
 		if(rosalin.flags["Scorpius"] == 0) {
-			Text.Add("<i>”Where do you find this stuff?”</i> the alchemist asks curiously, holding up the large scorpion stinger. <i>”Whoops!”</i> [heshe] exclaims, hopping back as the thing lets out a spray of poisonous fluid.", parse);
+			Text.Add("<i>“Where do you find this stuff?”</i> the alchemist asks curiously, holding up the large scorpion stinger. <i>“Whoops!”</i> [heshe] exclaims, hopping back as the thing lets out a spray of poisonous fluid.", parse);
 			Text.NL();
-			Text.Add("<i>”Maybe if I mix it with something stronger...”</i> You step back to let [himher] do [hisher] magic, mixing and pouring stuff together seemingly at random.", parse);
+			Text.Add("<i>“Maybe if I mix it with something stronger...”</i> You step back to let [himher] do [hisher] magic, mixing and pouring stuff together seemingly at random.", parse);
 			rosalin.flags["Scorpius"] = 1;
 			player.recipes.push(Items.Scorpius);
 		}
 		else {
-			Text.Add("<i>”Okay, let’s give this another go!”</i> the alchemist says, rubbing [hisher] hands together. <i>”What’s the worst thing that could happen?”</i>", parse);
+			Text.Add("<i>“Okay, let’s give this another go!”</i> the alchemist says, rubbing [hisher] hands together. <i>“What’s the worst thing that could happen?”</i>", parse);
 		}
 		Text.NL();
-		Text.Add("<i>”I think I got rid of all the poison,”</i> Rosalin announces brightly as [heshe] presents you with the finished potion. Right.", parse);
+		Text.Add("<i>“I think I got rid of all the poison,”</i> Rosalin announces brightly as [heshe] presents you with the finished potion. Right.", parse);
 		Text.Flush();
 		
 		//[You][Rosalin][Discard]
@@ -2175,7 +2175,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				Items.Scorpius.Use(player);
 				Text.Add("Rosalin studies you for a few moments after you down the potion, counting under [hisher] breath. After ten seconds or so, [heshe] relaxes.", parse);
 				Text.NL();
-				Text.Add("<i>”Alright, if there aren’t any bad symptoms by now, you’re probably fine.”</i>", parse);
+				Text.Add("<i>“Alright, if there aren’t any bad symptoms by now, you’re probably fine.”</i>", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
@@ -2186,20 +2186,20 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		options.push({ nameStr : "Rosalin",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”Down it goes!”</i> Rosalin cheerfully exclaims as [heshe] chugs the dubious liquid.", parse);
+				Text.Add("<i>“Down it goes!”</i> Rosalin cheerfully exclaims as [heshe] chugs the dubious liquid.", parse);
 				Text.NL();
 				
 				var scenes = new EncounterTable();
 				// TAIL
 				scenes.AddEnc(function() {
-					Text.Add("<i>”Neat!”</i> [heshe] exclaims, flexing [hisher] new insectoid tail. The stinger at the end looks like it contains some quite potent poison… probably best to avoid that.", parse);
+					Text.Add("<i>“Neat!”</i> [heshe] exclaims, flexing [hisher] new insectoid tail. The stinger at the end looks like it contains some quite potent poison… probably best to avoid that.", parse);
 					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.scorpion, Color.black);
 					Text.NL();
 				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.scorpion); });
 				//TODO: more?
 				scenes.Get();
 				
-				Text.Add("[HeShe] sways back and forth for a while, letting out a small burp. <i>”I… I think I’ll sit this one out,”</i> [heshe] mutters, rubbing [hisher] head. <i>”Must be something I ate.”</i>", parse);
+				Text.Add("[HeShe] sways back and forth for a while, letting out a small burp. <i>“I… I think I’ll sit this one out,”</i> [heshe] mutters, rubbing [hisher] head. <i>“Must be something I ate.”</i>", parse);
 				Text.NL();
 				Text.Add("...You probably shouldn’t feed [himher] any more of this stuff. Probably not healthy.", parse);
 				Text.Flush();
@@ -2224,17 +2224,17 @@ Scenes.Rosalin.CombineCallback = function(item) {
 	}
 	else if(item == Items.Lepida) {
 		if(rosalin.flags["Lepida"] == 0) {
-			Text.Add("<i>”It’s pretty!”</i> Rosalin exclaims as [heshe] carefully handles the colorful moth-wing you handed over. [HeShe] waves the thing, releasing a puff of glittering powder. <i>”It’s like fairy dust!”</i> The alchemist turns to [hisher] workbench, starting to pick out various vials and jars.", parse);
+			Text.Add("<i>“It’s pretty!”</i> Rosalin exclaims as [heshe] carefully handles the colorful moth-wing you handed over. [HeShe] waves the thing, releasing a puff of glittering powder. <i>“It’s like fairy dust!”</i> The alchemist turns to [hisher] workbench, starting to pick out various vials and jars.", parse);
 			Text.NL();
-			Text.Add("<i>”A little of this, a little of that, aaand some fairy dust!”</i> [heshe] chimes, sprinkling some glittering seasoning on the concoction.", parse);
+			Text.Add("<i>“A little of this, a little of that, aaand some fairy dust!”</i> [heshe] chimes, sprinkling some glittering seasoning on the concoction.", parse);
 			rosalin.flags["Lepida"] = 1;
 			player.recipes.push(Items.Lepida);
 		}
 		else {
-			Text.Add("<i>”Sure! I wanted to try out a different mix this time anyways.”</i> [HeShe] begins mixing the ingredients together into a beaker.", parse);
+			Text.Add("<i>“Sure! I wanted to try out a different mix this time anyways.”</i> [HeShe] begins mixing the ingredients together into a beaker.", parse);
 		}
 		Text.NL();
-		Text.Add("<i>”Mm… can’t wait to try it!”</i> Rosalin licks [hisher] lips, holding up a bottle of glittering purple liquid.", parse);
+		Text.Add("<i>“Mm… can’t wait to try it!”</i> Rosalin licks [hisher] lips, holding up a bottle of glittering purple liquid.", parse);
 		Text.Flush();
 		
 		//[You][Rosalin][Discard]
@@ -2254,7 +2254,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		options.push({ nameStr : "Rosalin",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”Here we go!”</i> Rosalin cheerfully chugs the purple potion, a bright smile on [hisher] face as [heshe] pours the sweet liquid down [hisher] throat.", parse);
+				Text.Add("<i>“Here we go!”</i> Rosalin cheerfully chugs the purple potion, a bright smile on [hisher] face as [heshe] pours the sweet liquid down [hisher] throat.", parse);
 				Text.NL();
 				
 				var scenes = new EncounterTable();
@@ -2265,12 +2265,12 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					Text.NL();
 				}, 1.0, function() { var wings = rosalin.HasWings(); return !wings || (wings.race != Race.moth); });
 				scenes.AddEnc(function() {
-					Text.Add("<i>”Well, this is new,”</i> [heshe] notes, carefully touching [hisher] newly sprouted moth-like feelers. From her expression, the new appendages are very sensitive.", parse);
+					Text.Add("<i>“Well, this is new,”</i> [heshe] notes, carefully touching [hisher] newly sprouted moth-like feelers. From her expression, the new appendages are very sensitive.", parse);
 					TF.SetAppendage(rosalin.Appendages(), AppendageType.antenna, Race.moth, Color.purple, 2);
 					Text.NL();
 				}, 1.0, function() { var antenna = rosalin.HasAntenna(); return !antenna || (antenna.race != Race.moth); });
 				scenes.AddEnc(function() {
-					Text.Add("<i>”Aww… I will miss that one,”</i> the alchemist pouts, lamenting the loss of [hisher] canid knot.", parse);
+					Text.Add("<i>“Aww… I will miss that one,”</i> the alchemist pouts, lamenting the loss of [hisher] canid knot.", parse);
 					Text.NL();
 					var cocks = rosalin.AllCocks();
 					for(var i = 0; i < cocks.length; i++) {
@@ -2289,7 +2289,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				
 				scenes.Get();
 				
-				Text.Add("<i>”Mm… such a rush,”</i> Rosalin smiles dreamily, licking [hisher] lips. <i>”Makes me feel… hot.”</i>", parse);
+				Text.Add("<i>“Mm… such a rush,”</i> Rosalin smiles dreamily, licking [hisher] lips. <i>“Makes me feel… hot.”</i>", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					Scenes.Rosalin.SexPrompt(RosalinSexState.Regular);

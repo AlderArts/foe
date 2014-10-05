@@ -245,13 +245,13 @@ Scenes.Chief.Interact = function() {
 		options.push({ nameStr : "Jobs",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”Learning a new trade takes dedication and experience,”</i> the old man explains. <i>”If you focus and apply yourself, you can eventually master new skills, given that you have the proper knowledge.”</i>", parse);
+				Text.Add("<i>“Learning a new trade takes dedication and experience,”</i> the old man explains. <i>“If you focus and apply yourself, you can eventually master new skills, given that you have the proper knowledge.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>”You may change what your current job - or that of your companions - is at any time. Try talking to the person in question to see what jobs he or she can learn. Unlocking new jobs may require experience, a good foundation to build on. For example, if you aspire to one day become a knight, you need first train as a squire for some time. In addition to that, you must have proper guidance - either with the help of a master or a skill manual.”</i>", parse);
+				Text.Add("<i>“You may change what your current job - or that of your companions - is at any time. Try talking to the person in question to see what jobs he or she can learn. Unlocking new jobs may require experience, a good foundation to build on. For example, if you aspire to one day become a knight, you need first train as a squire for some time. In addition to that, you must have proper guidance - either with the help of a master or a skill manual.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>”As you gain experience in your current job, your mastery may increase, allowing you to use your skills even if you pursue some other trade. Additionally, applying yourself diligently will strengthen your body and mind. Book learning only takes you so far, you will need combat experience to truly improve.”</i>", parse);
+				Text.Add("<i>“As you gain experience in your current job, your mastery may increase, allowing you to use your skills even if you pursue some other trade. Additionally, applying yourself diligently will strengthen your body and mind. Book learning only takes you so far, you will need combat experience to truly improve.”</i>", parse);
 				Text.NL();
-				Text.Add("The old man puffs on his pipe thoughtfully. <i>”Beware becoming a jack of all trades, a master of none. There are only so many years you have available to you, youngster.”</i>", parse);
+				Text.Add("The old man puffs on his pipe thoughtfully. <i>“Beware becoming a jack of all trades, a master of none. There are only so many years you have available to you, youngster.”</i>", parse);
 				Text.NL();
 				Text.Add("With that, you leave the chief to his musings.", parse);
 				Text.Flush();

@@ -161,7 +161,7 @@ world.loc.Rigard.Inn.common.onEntry = function() {
 		Text.NL();
 		Text.Add("A petite vixen wearing a maid’s uniform approaches you. She stands at about five foot five, her fur an orange-tinted gold with predominant white marking. Though her uniform does a nice job of preserving her modesty and hiding her curves, you can see she’s rounded in all the right places. She has a pair of soft-looking cushions adorning her bosom, and she walks with just a slight sway in her gait. Her cute triangular ears turn this way and that before focusing on you.", parse);
 		Text.NL();
-		Text.Add("<i>”Welcome to the Lady’s Blessing, [sir],”</i> she greets you with a bow and a collected smile. ", parse);
+		Text.Add("<i>“Welcome to the Lady’s Blessing, [sir],”</i> she greets you with a bow and a collected smile. ", parse);
 		if(party.NumTotal() == 1)
 			parse["comp"] = "";
 		else if(party.NumTotal() == 1)
@@ -174,18 +174,18 @@ world.loc.Rigard.Inn.common.onEntry = function() {
 			Text.Add("You thank her for the hospitality and follow her as she leads you through a maze of tables and busy waiters, finally finding an empty table to sit you down. As you do so, she picks up a cloth, wiping the table clean of any lingering dirt from the previous patrons.", parse);
 		}
 		else if(busy == Rigard.LB.BusyState.midbusy) {
-			Text.Add("<i>”We have plenty tables to accommodate you[comp]. Please, follow me,”</i> she bows.", parse);
+			Text.Add("<i>“We have plenty tables to accommodate you[comp]. Please, follow me,”</i> she bows.", parse);
 			Text.NL();
 			Text.Add("You thank her for the hospitality and follow her as she leads you past a few tables and the occasional busy waiter. Once you’re seated, she picks up a cloth and wipes the table clean of any lingering dirt left by the previous patrons.", parse);
 		}
 		else {
-			Text.Add("<i>”Please follow me and I’ll have you[comp] seated momentarily,”</i> she bows.", parse);
+			Text.Add("<i>“Please follow me and I’ll have you[comp] seated momentarily,”</i> she bows.", parse);
 			Text.NL();
 			Text.Add("You thank her for the hospitality, following her to an empty table nearby. Once you’ve been seated, she takes a cloth and wipes the table clean of any lingering dirt left by the previous patrons.", parse);
 		}
 		Text.NL();
 		parse["selfSelves"] = party.NumTotal() > 1 ? "selves" : "self";
-		Text.Add("<i>”Make your[selfSelves] at home. If you would like to order food, just wave one of the waiters over, and if you’re looking for drinks or a room, you can talk to my boss over at the bar. Enjoy your stay,”</i> she bows with a smile before leaving you to clean up after a couple guests.", parse);
+		Text.Add("<i>“Make your[selfSelves] at home. If you would like to order food, just wave one of the waiters over, and if you’re looking for drinks or a room, you can talk to my boss over at the bar. Enjoy your stay,”</i> she bows with a smile before leaving you to clean up after a couple guests.", parse);
 	}
 	
 	Text.NL();
@@ -893,11 +893,11 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 		func : function() {
 			Text.Clear();
 			if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry)
-				Text.Add("<i>”Yep, I heard all about it. Who’d think that she was actually a he? And a thief to boot? Shows that you can never fully trust anyone,”</i> he sighs.", parse);
+				Text.Add("<i>“Yep, I heard all about it. Who’d think that she was actually a he? And a thief to boot? Shows that you can never fully trust anyone,”</i> he sighs.", parse);
 			else if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.HeistDone)
-				Text.Add("<i>”She left not too long ago. Said she was done with her business in this city, so she’d be going back home. She’s a good girl, so I wouldn’t mind offering her a place to stay if she ever comes back,”</i> he notes.", parse);
+				Text.Add("<i>“She left not too long ago. Said she was done with her business in this city, so she’d be going back home. She’s a good girl, so I wouldn’t mind offering her a place to stay if she ever comes back,”</i> he notes.", parse);
 			else
-				Text.Add("<i>”Her? She’s rather pretty, isn’t she? Her kind isn’t exactly my cup of tea, but I’ll give credit where credit is due. This place has been a bit more lively since she showed up,”</i> he explains. <i>“Apparently she’s here to take care of some family business. Poor girl had nowhere to stay and didn’t have any money when she got here, so I offered to let her stay as a waitress.”</i>", parse);
+				Text.Add("<i>“Her? She’s rather pretty, isn’t she? Her kind isn’t exactly my cup of tea, but I’ll give credit where credit is due. This place has been a bit more lively since she showed up,”</i> he explains. <i>“Apparently she’s here to take care of some family business. Poor girl had nowhere to stay and didn’t have any money when she got here, so I offered to let her stay as a waitress.”</i>", parse);
 			Text.Flush();
 			Scenes.Rigard.LB.OrvinTalkPrompt(innPrompt);
 		}, enabled : true,

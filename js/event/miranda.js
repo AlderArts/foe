@@ -207,7 +207,7 @@ Miranda.prototype.OnPatrol = function() {
 Scenes.Miranda = {};
 
 Scenes.Miranda.RigardGatesDesc = function() {
-	Text.Add("<i>”Ho!”</i> Miranda greets you as you approach the gate. The dog-morph is lounging beside the gatehouse, ");
+	Text.Add("<i>“Ho!”</i> Miranda greets you as you approach the gate. The dog-morph is lounging beside the gatehouse, ");
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
@@ -233,16 +233,16 @@ Scenes.Miranda.RigardGatesInteract = function() {
 	
 	Text.Clear();
 	if(!rigard.Visa()) {
-		Text.Add("<i>”Still no luck getting a pass? Sorry, but you know I can’t let you in without one,”</i> Miranda tells you bluntly.", parse);
+		Text.Add("<i>“Still no luck getting a pass? Sorry, but you know I can’t let you in without one,”</i> Miranda tells you bluntly.", parse);
 		Text.NL();
 	}
 	
 	if(miranda.Attitude() > Miranda.Attitude.Neutral)
-		Text.Add("<i>”If you feel brave enough, I could treat you to another round,”</i> the guardswoman suggests, winking at you. <i>”Meet me at the tavern in the slums after dark and we’ll party hard!”</i>", parse);
+		Text.Add("<i>“If you feel brave enough, I could treat you to another round,”</i> the guardswoman suggests, winking at you. <i>“Meet me at the tavern in the slums after dark and we’ll party hard!”</i>", parse);
 	else if(miranda.Attitude() < Miranda.Attitude.Neutral)
-		Text.Add("<i>”So you come crawling back here, eh?”</i> The guardswoman looks at you dismissively. <i>”I really don’t have the time for you right now. What do you want?”</i>", parse);
+		Text.Add("<i>“So you come crawling back here, eh?”</i> The guardswoman looks at you dismissively. <i>“I really don’t have the time for you right now. What do you want?”</i>", parse);
 	else
-		Text.Add("<i>”Head over to the Maidens’ Bane tavern in the slums once in a while, we can have a drink and chat a bit.”</i>", parse);
+		Text.Add("<i>“Head over to the Maidens’ Bane tavern in the slums once in a while, we can have a drink and chat a bit.”</i>", parse);
 	Text.Flush();
 	
 	// TODO: Add interactions (sex)
@@ -255,17 +255,17 @@ Scenes.Miranda.RigardGatesEnter = function() {
 	};
 	
 	if(miranda.Attitude() < Miranda.Attitude.Neutral) { // bad
-		Text.Add("<i>”What now?”</i> Miranda asks shortly as you approach the gates.", parse);
+		Text.Add("<i>“What now?”</i> Miranda asks shortly as you approach the gates.", parse);
 		if(miranda.Relation() < 25)
 			Text.Add(" She doesn’t look too happy to see you.");
 		if(!rigard.GatesOpen())
-			Text.Add(" <i>”You are not getting inside the city during night hours, pass or no pass,”</i> she growls. <i>”Not through this gate.”</i>", parse);
+			Text.Add(" <i>“You are not getting inside the city during night hours, pass or no pass,”</i> she growls. <i>“Not through this gate.”</i>", parse);
 		else if(rigard.Visa()) {
-			Text.Add("You show her your visa to enter the city, but she seems unwilling to let you in either way. <i>”Come over here, standard procedure,”</i> she growls. During the next hour or so, she hounds you with questions about your business in the city, though you can tell she is clearly just fucking with you and wasting time.", parse);
+			Text.Add("You show her your visa to enter the city, but she seems unwilling to let you in either way. <i>“Come over here, standard procedure,”</i> she growls. During the next hour or so, she hounds you with questions about your business in the city, though you can tell she is clearly just fucking with you and wasting time.", parse);
 			Text.NL();
 			Text.Add("Something tells you that you are lucky though, as you suspect that if not for the other guard posted there, you’d be up for a cavity search. Eventually, the vindictive guardswoman lets you through the gates into Rigard.", parse);
 			Text.NL();
-			Text.Add("<i>”Why not come by the peasants’ gate more?”</i> Miranda calls after you. <i>”It’s a much more… comfortable environment.”</i>", parse);
+			Text.Add("<i>“Why not come by the peasants’ gate more?”</i> Miranda calls after you. <i>“It’s a much more… comfortable environment.”</i>", parse);
 			if(miranda.flags["gBJ"] > 0)
 				Text.Add(" Your cheeks burn, but at least she let you inside, and with less humiliation than usual.", parse);
 			Text.Flush();
@@ -276,18 +276,18 @@ Scenes.Miranda.RigardGatesEnter = function() {
 			return;
 		}
 		else {
-			Text.Add("<i>”You know damn well you aren’t getting through here without a pass,”</i> she growls. There is a dangerous glint in her eyes as she adds: <i>”Come by the slum-side gate when I’m on duty sometime, I might show mercy on you.”</i>", parse);
+			Text.Add("<i>“You know damn well you aren’t getting through here without a pass,”</i> she growls. There is a dangerous glint in her eyes as she adds: <i>“Come by the slum-side gate when I’m on duty sometime, I might show mercy on you.”</i>", parse);
 		}
 	}
 	else if(miranda.Attitude() > Miranda.Attitude.Neutral) { // good
-		Text.Add("<i>”Heading in?”</i> Miranda asks you as you approach the gates. <i>”Don’t be a stranger now!”</i>", parse);
+		Text.Add("<i>“Heading in?”</i> Miranda asks you as you approach the gates. <i>“Don’t be a stranger now!”</i>", parse);
 		Text.NL();
 		if(rigard.Visa()) {
 			if(rigard.GatesOpen()) {
-				Text.Add("The guardswoman waves you through, feeling you up familiarly as you pass her. <i>”Come join me for a drink or two later, okay?”</i>", parse);
+				Text.Add("The guardswoman waves you through, feeling you up familiarly as you pass her. <i>“Come join me for a drink or two later, okay?”</i>", parse);
 			}
 			else { // !open
-				Text.Add("The guardswoman looks around her quickly, studying her half asleep companion. She quickly gestures for you to come with her, leading you to a side gate. <i>”Don’t tell anyone I let you in, okay? The gates are supposed to be shut at this hour.”</i>", parse);
+				Text.Add("The guardswoman looks around her quickly, studying her half asleep companion. She quickly gestures for you to come with her, leading you to a side gate. <i>“Don’t tell anyone I let you in, okay? The gates are supposed to be shut at this hour.”</i>", parse);
 			}
 			Text.Flush();
 			
@@ -297,13 +297,13 @@ Scenes.Miranda.RigardGatesEnter = function() {
 			return;
 		}
 		else
-			Text.Add("<i>”Sorry, I can’t let you through without a pass, [playername]. Come by the pub when I’m off duty, perhaps I can help you get one.”</i>", parse);
+			Text.Add("<i>“Sorry, I can’t let you through without a pass, [playername]. Come by the pub when I’m off duty, perhaps I can help you get one.”</i>", parse);
 	}
 	else { // neutral
 		if(rigard.GatesOpen()) {
-			Text.Add("<i>”Pass please,”</i> the guardswoman drones as you inquire about entry to the city.", parse);
+			Text.Add("<i>“Pass please,”</i> the guardswoman drones as you inquire about entry to the city.", parse);
 			if(rigard.Visa()) {
-				Text.Add("<i>”All seem to be in order, welcome to Rigard.”</i> She ushers you through the gates, already busy with the next person in line.", parse);
+				Text.Add("<i>“All seem to be in order, welcome to Rigard.”</i> She ushers you through the gates, already busy with the next person in line.", parse);
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
@@ -312,10 +312,10 @@ Scenes.Miranda.RigardGatesEnter = function() {
 				return;
 			}
 			else
-				Text.Add("<i>”No pass, no entry. Sorry, those are the rules.”</i> She adds that she’s still up for a drink after work at the pub.", parse);
+				Text.Add("<i>“No pass, no entry. Sorry, those are the rules.”</i> She adds that she’s still up for a drink after work at the pub.", parse);
 		}
 		else
-			Text.Add("<i>”Gates are closed, ‘m afraid. Come back during daytime. Check in between eight in the morning and five in the evening.”</i>", parse);
+			Text.Add("<i>“Gates are closed, ‘m afraid. Come back during daytime. Check in between eight in the morning and five in the evening.”</i>", parse);
 	}
 	Text.NL();
 	Text.Flush();
@@ -330,7 +330,7 @@ Scenes.Miranda.RigardSlumGatesDesc = function() {
 	
 	Text.Clear();
 	
-	Text.Add("<i>”[playername],”</i> Miranda nods in your direction as you approach. The dog-morph is seated at a wooden table beside the peasants’ gate, ", parse);
+	Text.Add("<i>“[playername],”</i> Miranda nods in your direction as you approach. The dog-morph is seated at a wooden table beside the peasants’ gate, ", parse);
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
@@ -348,10 +348,10 @@ Scenes.Miranda.RigardSlumGatesDesc = function() {
 	
 	scenes.Get();
 	
-	Text.Add("<i>”Quite the rural neighbourhood, isn’t it?”</i> Miranda grunts, waving at the muddy streets near the gate. <i>”Still, I grew up in these parts, so I’ll always have a soft spot for it, no matter how much of a cesspit it is.”</i>", parse);
+	Text.Add("<i>“Quite the rural neighbourhood, isn’t it?”</i> Miranda grunts, waving at the muddy streets near the gate. <i>“Still, I grew up in these parts, so I’ll always have a soft spot for it, no matter how much of a cesspit it is.”</i>", parse);
 	if(miranda.Attitude() == Miranda.Attitude.Neutral) {
 		Text.NL();
-		Text.Add("<i>”If you haven’t already, you should check out the local tavern, the Maidens’ Bane,”</i> Miranda suggests, <i>”I hang around there after work. Cozy little place.”</i>", parse);
+		Text.Add("<i>“If you haven’t already, you should check out the local tavern, the Maidens’ Bane,”</i> Miranda suggests, <i>“I hang around there after work. Cozy little place.”</i>", parse);
 	}
 	Text.NL();
 }
@@ -367,29 +367,29 @@ Scenes.Miranda.RigardSlumGatesEnter = function() {
 	
 	if(!rigard.Visa()) {
 		if(miranda.Attitude() > Miranda.Attitude.Neutral) // nice
-			Text.Add("Miranda looks around, trying to see if any of her comrades overheard you. <i>”Keep it down will you?!”</i> she hisses, <i>”I’m not supposed to let you in without a pass, you know. Meet me at the tavern after work and we’ll talk.”</i>", parse);
+			Text.Add("Miranda looks around, trying to see if any of her comrades overheard you. <i>“Keep it down will you?!”</i> she hisses, <i>“I’m not supposed to let you in without a pass, you know. Meet me at the tavern after work and we’ll talk.”</i>", parse);
 		else if(miranda.Attitude() < Miranda.Attitude.Neutral) { // nasty
-			Text.Add("The dog-morph eyes you flatly. <i>”Why should I take that risk for you? There’d better be something in it for me if you want inside.”</i>");
+			Text.Add("The dog-morph eyes you flatly. <i>“Why should I take that risk for you? There’d better be something in it for me if you want inside.”</i>");
 			Text.Flush();
 			
 			Scenes.Miranda.RigardGatesBribe();
 			return;
 		}
 		else
-			Text.Add("<i>”Why should I let you in?”</i> the dog-morph replies flatly. <i>”I’m sure you’re a nice [guygal], but I’m not risking my job for someone I barely know. Come back with a pass.”</i>", parse);
+			Text.Add("<i>“Why should I let you in?”</i> the dog-morph replies flatly. <i>“I’m sure you’re a nice [guygal], but I’m not risking my job for someone I barely know. Come back with a pass.”</i>", parse);
 		Text.NL();
 		Text.Flush();
 		PrintDefaultOptions(true);
 	}
 	else { //Visa
 		if(miranda.Attitude() < Miranda.Attitude.Neutral) { // nasty
-			Text.Add("<i>”Aww… you want to get in? What’s in it for me?”</i> Miranda asks, toying with you.", parse);
+			Text.Add("<i>“Aww… you want to get in? What’s in it for me?”</i> Miranda asks, toying with you.", parse);
 			Text.Flush();
 			
 			Scenes.Miranda.RigardGatesBribe();
 		}
 		else if(miranda.Attitude() > Miranda.Attitude.Neutral) { // nice
-			Text.Add("<i>”Sure, come right through, honey,”</i> Miranda grins as you pass her, giving your [buttDesc] a familiar slap. <i>”Come see me at the tavern later, okay?”</i>", parse);
+			Text.Add("<i>“Sure, come right through, honey,”</i> Miranda grins as you pass her, giving your [buttDesc] a familiar slap. <i>“Come see me at the tavern later, okay?”</i>", parse);
 			if(!rigard.GatesOpen()) {
 				Text.NL();
 				Text.Add("The other guards doesn’t seem to care particularly much about Miranda letting people in during after hours. Things are a bit more laid back here, you guess.", parse);
@@ -402,7 +402,7 @@ Scenes.Miranda.RigardSlumGatesEnter = function() {
 		}
 		else { // neutral
 			if(rigard.GatesOpen()) {
-				Text.Add("<i>”It looks to be in order,”</i> Miranda concludes after looking over your papers. She waves you through the gates, adding that you should come visit her at the tavern after work some time.", parse);
+				Text.Add("<i>“It looks to be in order,”</i> Miranda concludes after looking over your papers. She waves you through the gates, adding that you should come visit her at the tavern after work some time.", parse);
 				Text.NL();
 				
 				Gui.NextPrompt(function() {
@@ -410,7 +410,7 @@ Scenes.Miranda.RigardSlumGatesEnter = function() {
 				});
 			}
 			else {
-				Text.Add("<i>”Sorry, I can’t let you in while the gate is shut. Come back during the open hours, eight in the morning to five in the evening.”</i>", parse);
+				Text.Add("<i>“Sorry, I can’t let you in while the gate is shut. Come back during the open hours, eight in the morning to five in the evening.”</i>", parse);
 				Text.NL();
 				Text.Flush();
 				PrintDefaultOptions(true);
@@ -442,7 +442,7 @@ Scenes.Miranda.RigardGatesBribe = function() {
 		options.push({ nameStr : "Your job",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”Cute, [playername],”</i> the guardswoman scoffs. <i>”Things work a bit differently here in the slums, though. This is my turf, my rules. Pass or no pass.”</i>", parse);
+				Text.Add("<i>“Cute, [playername],”</i> the guardswoman scoffs. <i>“Things work a bit differently here in the slums, though. This is my turf, my rules. Pass or no pass.”</i>", parse);
 				Text.Flush();
 				
 				miranda.flags["gBribe"] = 1;
@@ -457,7 +457,7 @@ Scenes.Miranda.RigardGatesBribe = function() {
 		options.push({ nameStr : "Money",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”Fuck off,”</i> she curtly dismisses you, not interested in your money.", parse);
+				Text.Add("<i>“Fuck off,”</i> she curtly dismisses you, not interested in your money.", parse);
 				Text.NL();
 				Text.Flush();
 				
@@ -475,27 +475,27 @@ Scenes.Miranda.RigardGatesBribe = function() {
 			if(miranda.flags["gBJ"] == 0) { // First
 				Text.Add("You suggest that you could perhaps... relieve her? Miranda’s sour expression slowly shifts to a wide grin.", parse);
 				Text.NL();
-				Text.Add("<i>”Now you’re talking!”</i> The dog-morph gets up from her post, motioning for you to follow her. The curious looks from the other guards bore into your back as you trot along behind the herm.", parse);
+				Text.Add("<i>“Now you’re talking!”</i> The dog-morph gets up from her post, motioning for you to follow her. The curious looks from the other guards bore into your back as you trot along behind the herm.", parse);
 				Text.NL();
-				Text.Add("You reach the entrance of a dark alley, and Miranda firmly grabs you, pulling you inside. Pushing you down easily - the bitch is frightfully strong - she grinds her bulge against your face. <i>”Feel that?”</i> she grunts. You definitely can, as her cock strains against her leather pants, striving to be free.", parse);
+				Text.Add("You reach the entrance of a dark alley, and Miranda firmly grabs you, pulling you inside. Pushing you down easily - the bitch is frightfully strong - she grinds her bulge against your face. <i>“Feel that?”</i> she grunts. You definitely can, as her cock strains against her leather pants, striving to be free.", parse);
 				Text.NL();
 				Text.Add("Holding your head in place with one hand, the other expertly undoes her britches, releasing her thick slab of meat, which promptly slaps you.", parse);
 				Text.NL();
-				Text.Add("<i>”Little Miranda is antsy, why don’t you try to soothe her,”</i> the grinning dog-herm says mockingly. To make her point clear, she nudges your lips with her stiffening [mcockDesc]. Uncertainly, you open your mouth, completely caught off guard when she roughly shoves her way inside.", parse);
+				Text.Add("<i>“Little Miranda is antsy, why don’t you try to soothe her,”</i> the grinning dog-herm says mockingly. To make her point clear, she nudges your lips with her stiffening [mcockDesc]. Uncertainly, you open your mouth, completely caught off guard when she roughly shoves her way inside.", parse);
 				Text.NL();
 				
 				Sex.Blowjob(player, miranda);
 				player.FuckOral(player.Mouth(), miranda.FirstCock(), 2);
 				
-				Text.Add("<i>”Yeeeees, good little slut, so eager,”</i> Miranda encourages you, her hips slowly pushing forward as she forces more of her monster cock past your lips. Your senses are overwhelmed by her smell, her taste, your [tongueDesc] lathered in her pre as she rubs the [mcockTip] of her dick on it repeatedly. <i>”You are going to have to do better if you want your reward, though,”</i> she grins. <i>”Only dedicated cocksuckers get inside on my watch!”</i>", parse);
+				Text.Add("<i>“Yeeeees, good little slut, so eager,”</i> Miranda encourages you, her hips slowly pushing forward as she forces more of her monster cock past your lips. Your senses are overwhelmed by her smell, her taste, your [tongueDesc] lathered in her pre as she rubs the [mcockTip] of her dick on it repeatedly. <i>“You are going to have to do better if you want your reward, though,”</i> she grins. <i>“Only dedicated cocksuckers get inside on my watch!”</i>", parse);
 				Text.NL();
 				Text.Add("Dedicated or not, it is clear that the dickgirl intends to make as much of this opportunity as possible, grabbing hold of your head with both hands to get a firm grip. With her prey secured, Miranda starts to fuck you in earnest, thrusting her cock into your poor throat to the hilt. Once in a while, she pauses for a while, holding you in place with her shaft firmly lodged in your throat, making sure you realize that she is in full control.", parse);
 				Text.NL();
-				Text.Add("<i>”Now suck!”</i> she barks, loud enough for her voice to carry into the street. Dejectedly, you obey her, seeing no other way out of the situation. <i>”Ngh, that’s the way, bitch,”</i> Miranda grunts, moaning as you service her member. <i>”Keep it up now, and you’ll get your just reward!”</i>", parse);
+				Text.Add("<i>“Now suck!”</i> she barks, loud enough for her voice to carry into the street. Dejectedly, you obey her, seeing no other way out of the situation. <i>“Ngh, that’s the way, bitch,”</i> Miranda grunts, moaning as you service her member. <i>“Keep it up now, and you’ll get your just reward!”</i>", parse);
 				Text.NL();
 				Text.Add("True to her word, it’s not long before the dog-herm’s breath grows short, her rutting hip-movements becoming more erratic. With both her hands keeping your head firmly in place, you have little choice but to accept whatever is coming, through you grow worried as you feel her knot swelling in your mouth. Thankfully, the guardswoman pulls it out just in time, narrowly saving you from death through suffocation.", parse);
 				Text.NL();
-				Text.Add("<i>”Take my load, bitch!”</i> the herm yells, pouring her thick cum down your throat and into your [stomachDesc]. You swallow dutifully, but you can feel her seed rising in your throat, the pressure being too high. Despite your efforts, some of it leaks out, trailing down your chin. Finally, the sadistic dog-herm pulls out, allowing you to breathe again.", parse);
+				Text.Add("<i>“Take my load, bitch!”</i> the herm yells, pouring her thick cum down your throat and into your [stomachDesc]. You swallow dutifully, but you can feel her seed rising in your throat, the pressure being too high. Despite your efforts, some of it leaks out, trailing down your chin. Finally, the sadistic dog-herm pulls out, allowing you to breathe again.", parse);
 				Text.NL();
 				
 				var mCum = miranda.OrgasmCum();
@@ -506,13 +506,13 @@ Scenes.Miranda.RigardGatesBribe = function() {
 				player.slut.IncreaseStat(100, 2);
 				
 				if(!rigard.Visa()) {
-					Text.Add("<i>”Now then,”</i> Miranda says while you are still reeling and coughing from your rough face fuck, <i>”why don’t we go ahead and get you that pass?”</i> Almost feeling as if you’ve been drugged, you tag along after the guardswoman, who enters a side gate and lets you into the city.", parse);
+					Text.Add("<i>“Now then,”</i> Miranda says while you are still reeling and coughing from your rough face fuck, <i>“why don’t we go ahead and get you that pass?”</i> Almost feeling as if you’ve been drugged, you tag along after the guardswoman, who enters a side gate and lets you into the city.", parse);
 					Text.NL();
-					Text.Add("<i>”That wasn’t so hard now was it?”</i> Miranda smirks at your blush. <i>”You should come by and suck my cock more often, make it a regular thing. At least if you want to enter the city again.”</i> Before you can contemplate what she means by that, you’ve arrived at a small booth, manned by a bored-looking city official.", parse);
+					Text.Add("<i>“That wasn’t so hard now was it?”</i> Miranda smirks at your blush. <i>“You should come by and suck my cock more often, make it a regular thing. At least if you want to enter the city again.”</i> Before you can contemplate what she means by that, you’ve arrived at a small booth, manned by a bored-looking city official.", parse);
 					Text.NL();
 					Text.Add("The guardswoman explains that you are here to write out a pass for you, and that she’ll vouch for you. The administrator eyes you curtly, disapproval clear in his furrowed brow. With a start, you realize that Miranda’s cum is still trailing down from your lips, and you promptly wipe it off, blushing.", parse);
 					Text.NL();
-					Text.Add("The procedure is rather arduous, but at last you stand there with your visa in hand, and stomach full of semen. <i>”Later!”</i> Miranda waves dismissively as she walks back to her post, chuckling to herself.", parse);
+					Text.Add("The procedure is rather arduous, but at last you stand there with your visa in hand, and stomach full of semen. <i>“Later!”</i> Miranda waves dismissively as she walks back to her post, chuckling to herself.", parse);
 					Text.NL();
 					Text.Add("Well, at least you got a pass now, you tell yourself.", parse);
 					Text.NL();
@@ -521,7 +521,7 @@ Scenes.Miranda.RigardGatesBribe = function() {
 					rigard.flags["Visa"] = 1;
 				}
 				else {
-					Text.Add("<i>”Enjoy your visit to Rigard, citizen,”</i> Miranda snickers, opening the gates for you. Staggering through, you enter the streets of the city. With a sinking heart, you realize this will probably be a regular theme for your visits.", parse);
+					Text.Add("<i>“Enjoy your visit to Rigard, citizen,”</i> Miranda snickers, opening the gates for you. Staggering through, you enter the streets of the city. With a sinking heart, you realize this will probably be a regular theme for your visits.", parse);
 				}
 				
 				Gui.NextPrompt(function() {
@@ -530,18 +530,18 @@ Scenes.Miranda.RigardGatesBribe = function() {
 			}
 			else { // Repeat blowjob
 				if(miranda.flags["gBJ"] < 5)
-					Text.Add("<i>”You know the drill, come with me.”</i> Miranda leads you into a back alley, pushing  your head down to her crotch and pulling out her [mcockDesc]. <i>”I’m sure you remember what to do.”</i> Meekly, you grasp her member, licking the [mcockTip] demurely. In your [hand]s, the hermaphrodite grows stiff, her rock-hard cock point right at you.", parse);
+					Text.Add("<i>“You know the drill, come with me.”</i> Miranda leads you into a back alley, pushing  your head down to her crotch and pulling out her [mcockDesc]. <i>“I’m sure you remember what to do.”</i> Meekly, you grasp her member, licking the [mcockTip] demurely. In your [hand]s, the hermaphrodite grows stiff, her rock-hard cock point right at you.", parse);
 				else {
 					parse["Bewildered"] = miranda.flags["public"] == Miranda.Public.Nothing ? "Bewildered, y" : "Y";
-					Text.Add("You wait for Miranda to get up, but she just leans back languidly. <i>”Well, what are you waiting for?”</i> she asks, annoyed, <i>”start sucking, slut.”</i> She parts her legs, exposing her bulge to you. [Bewildered]ou glance around at the other guards, but Miranda redirects your attention to her crotch.", parse);
+					Text.Add("You wait for Miranda to get up, but she just leans back languidly. <i>“Well, what are you waiting for?”</i> she asks, annoyed, <i>“start sucking, slut.”</i> She parts her legs, exposing her bulge to you. [Bewildered]ou glance around at the other guards, but Miranda redirects your attention to her crotch.", parse);
 					Text.NL();
-					Text.Add("<i>”Don’t mind them, this is the reason you came here anyways, isn’t it?”</i> By now, you might as well conceed her point… there are other ways for you to get into Rigard at this point, and yet here you are, back to get another mouthful of her [mcockDesc]. The others have most likely gotten a good idea of what is going on already anyways.", parse);
+					Text.Add("<i>“Don’t mind them, this is the reason you came here anyways, isn’t it?”</i> By now, you might as well conceed her point… there are other ways for you to get into Rigard at this point, and yet here you are, back to get another mouthful of her [mcockDesc]. The others have most likely gotten a good idea of what is going on already anyways.", parse);
 					if(miranda.flags["public"] < Miranda.Public.Oral)
 						miranda.flags["public"] = Miranda.Public.Oral;
 				}
 				Text.NL();
 				parse["head"] = player.HasHorns() ? player.HasHorns().Short() : player.Hair().Short();
-				Text.Add("<i>”Suck,”</i> she commands, taking a firm hold of your [head]. Swallowing your pride - and her pre - you start bobbing your head up and down on her shaft, spreading your saliva along the thick pillar of cockmeat. The guardswoman lets you set your own pace for a while, before she takes charge, setting her own rhythm. Like always, the dominant herm is rough with you, showing little care for your well-being as she ravages your throat.", parse);
+				Text.Add("<i>“Suck,”</i> she commands, taking a firm hold of your [head]. Swallowing your pride - and her pre - you start bobbing your head up and down on her shaft, spreading your saliva along the thick pillar of cockmeat. The guardswoman lets you set your own pace for a while, before she takes charge, setting her own rhythm. Like always, the dominant herm is rough with you, showing little care for your well-being as she ravages your throat.", parse);
 				Text.NL();
 				
 				Sex.Blowjob(player, miranda);
@@ -557,10 +557,10 @@ Scenes.Miranda.RigardGatesBribe = function() {
 				Text.Add("Once more, you’re rewarded with a stomach-full of Miranda’s thick spunk, the excess slowly trickling down your chin, marking you for the slut you are.", parse);
 				Text.NL();
 				if(miranda.flags["gBJ"] < 5) {
-					Text.Add("<i>”You’re starting to get the hang of this, [playername],”</i> she congratulates you. <i>”How about making it a career of being my bitch?”</i>", parse);
+					Text.Add("<i>“You’re starting to get the hang of this, [playername],”</i> she congratulates you. <i>“How about making it a career of being my bitch?”</i>", parse);
 					Text.NL();
 					if(rigard.GatesOpen()) {
-						Text.Add("<i>”Well, what are you waiting for?”</i> Miranda tugs you to a side gate, out of sight from the main one. <i>”Now, remember that pass or no pass, you are here on <b>my</b> whim. Don’t let me catch you messing around in my town, or I might get some ideas.”</i> Coming from her, you have no doubt that it’s a serious threat.", parse);
+						Text.Add("<i>“Well, what are you waiting for?”</i> Miranda tugs you to a side gate, out of sight from the main one. <i>“Now, remember that pass or no pass, you are here on <b>my</b> whim. Don’t let me catch you messing around in my town, or I might get some ideas.”</i> Coming from her, you have no doubt that it’s a serious threat.", parse);
 						Text.NL();
 						Text.Add("Wiping the remaining droplets of the dog-herm’s cum from your lips, you enter the city of Rigard.", parse);
 						
@@ -569,14 +569,14 @@ Scenes.Miranda.RigardGatesBribe = function() {
 						});
 					}
 					else {
-						Text.Add("<i>”Oh… that’s right, look at the time,”</i> Miranda grins lecherously. <i>”Sorry, the gates are closed at this hour, please come back later.”</i> With that, she summarily dismisses you. You are left standing there, feeling rather foolish.", parse);
+						Text.Add("<i>“Oh… that’s right, look at the time,”</i> Miranda grins lecherously. <i>“Sorry, the gates are closed at this hour, please come back later.”</i> With that, she summarily dismisses you. You are left standing there, feeling rather foolish.", parse);
 						Gui.NextPrompt();
 					}
 				}
 				else {
-					Text.Add("<i>”Putting on such a good show for the masses, [playername],”</i> she praises you, gesturing to her grinning colleagues. Quite a few of them have their own cocks out, stroking themselves. <i>”Thanks for the blowjob, bitch,”</i> Miranda grins. <i>”Now shove off, I got work to do.”</i> When you protest that you had a deal, she only laughs at you.", parse);
+					Text.Add("<i>“Putting on such a good show for the masses, [playername],”</i> she praises you, gesturing to her grinning colleagues. Quite a few of them have their own cocks out, stroking themselves. <i>“Thanks for the blowjob, bitch,”</i> Miranda grins. <i>“Now shove off, I got work to do.”</i> When you protest that you had a deal, she only laughs at you.", parse);
 					Text.NL();
-					Text.Add("<i>”You agreed to that way too quickly. I’ve been going too easy on you it seems. If you want to negotiate for entry, you better bring something different to the table...”</i> The hermaphrodite gives your [buttDesc] a sound slap as she passes you, making her meaning clear.", parse);
+					Text.Add("<i>“You agreed to that way too quickly. I’ve been going too easy on you it seems. If you want to negotiate for entry, you better bring something different to the table...”</i> The hermaphrodite gives your [buttDesc] a sound slap as she passes you, making her meaning clear.", parse);
 					if(miranda.flags["gAnal"] == 0) {
 						Text.NL();
 						Text.Add("W-what? No way!", parse);
@@ -603,18 +603,18 @@ Scenes.Miranda.RigardGatesBribe = function() {
 				var audience = miranda.flags["gAnal"] >= 5;
 				
 				if(first) { // first
-					Text.Add("<i>”Mmm… depends on how good you are,”</i> she purrs at your offer. <i>”But I’m not one to say no to such an offer. Come along here, my little slut.”</i> She leads you to a narrow back alley close to the barracks. For the slums, the smell isn’t so bad. <i>”C’mon, show me the goods,”</i> Miranda murmurs, licking her lips hungrily.", parse);
+					Text.Add("<i>“Mmm… depends on how good you are,”</i> she purrs at your offer. <i>“But I’m not one to say no to such an offer. Come along here, my little slut.”</i> She leads you to a narrow back alley close to the barracks. For the slums, the smell isn’t so bad. <i>“C’mon, show me the goods,”</i> Miranda murmurs, licking her lips hungrily.", parse);
 					Text.NL();
 					Text.Add("Turning around, you blush as you lean against the wall of one of the nearby shacks, shivering as her rough hands quickly relieve you of your [bottomArmorDesc], groping the [skinDesc] of you [buttDesc]. You jolt and whimper in surprise when the herm places the tip of her [mcockDesc] against your [anusDesc]. R-really? Not even any preparation?", parse);
 					Text.NL();
-					Text.Add("<i>”What? You did offer it yourself, did you not?”</i> You feel a wet splatter against your back door as she applies some spit. <i>”There, feel better now? You might want to bite down for this though...”</i>", parse);
+					Text.Add("<i>“What? You did offer it yourself, did you not?”</i> You feel a wet splatter against your back door as she applies some spit. <i>“There, feel better now? You might want to bite down for this though...”</i>", parse);
 					Text.NL();
 					if(virgin) {
 						Text.Add("Caught in a bout of panic, you blabber on about how this is your first time, and please, please be gentle. The sincerity catches the dominant herm off-guard, though her hold on your butt remains firm.", parse);
 						Text.NL();
-						Text.Add("<i>”You’d give your first to me…?”</i> Miranda’s voice sounds uncharacteristically small and hesitant. <i>”I’ll take it, but lets drop the pretense that you are doing this just to get into the city, will you? You have a slutty streak running as deep as the roots of the Great Tree!”</i>", parse);
+						Text.Add("<i>“You’d give your first to me…?”</i> Miranda’s voice sounds uncharacteristically small and hesitant. <i>“I’ll take it, but lets drop the pretense that you are doing this just to get into the city, will you? You have a slutty streak running as deep as the roots of the Great Tree!”</i>", parse);
 						Text.NL();
-						Text.Add("Her brief vulnerable moment over, she continues more confidently: <i>”As for me being gentle… you are asking the wrong girl. How about this? I’ll start with just the tip… followed by the knot. Repeatedly.”</i>", parse);
+						Text.Add("Her brief vulnerable moment over, she continues more confidently: <i>“As for me being gentle… you are asking the wrong girl. How about this? I’ll start with just the tip… followed by the knot. Repeatedly.”</i>", parse);
 						
 						miranda.relation.IncreaseStat(100, 10);
 					}
@@ -626,12 +626,12 @@ Scenes.Miranda.RigardGatesBribe = function() {
 					player.FuckAnal(player.Butt(), miranda.FirstCock(), 4);
 					miranda.Fuck(miranda.FirstCock(), 3);
 					
-					Text.Add("<i>”See, not too bad, is it?”</i> The guardswoman grunts, shoving another few inches inside you.", parse);
+					Text.Add("<i>“See, not too bad, is it?”</i> The guardswoman grunts, shoving another few inches inside you.", parse);
 				}
 				else if(miranda.flags["gAnal"] < 5) { // repeat < 5
-					Text.Add("<i>”Back for another rough buttfucking? You really are a slut, you know that right?”</i> You bow your head a bit shamefully, unable to deny her accusation. <i>”Be my guest,”</i> she shrugs, gesturing for you to enter the alleyway. <i>”I’ll be right back, guys, just need to ram a long, thick cock up this little bitch’ ass,”</i> Miranda tells her grinning companions. You can feel their gazes burning into your back as you follow the herm.", parse);
+					Text.Add("<i>“Back for another rough buttfucking? You really are a slut, you know that right?”</i> You bow your head a bit shamefully, unable to deny her accusation. <i>“Be my guest,”</i> she shrugs, gesturing for you to enter the alleyway. <i>“I’ll be right back, guys, just need to ram a long, thick cock up this little bitch’ ass,”</i> Miranda tells her grinning companions. You can feel their gazes burning into your back as you follow the herm.", parse);
 					Text.NL();
-					Text.Add("<i>”Bend over for me,”</i> she growls, her breath quickening as she fumbles with her britches, freeing her monster cock. You obey, gasping as she all but tears through your gear, exposing your [buttDesc] and your soon-to-be-fucked hole. <i>”If last time didn’t break you, I’ll just have to try harder this time, won’t I?”</i> Hardly words to settle your uneasy mind, especially with her [mcockTip] pressing against your [anusDesc]. You feel something cold and slippery pouring down your taint, lubing you up for the coming anal assault.", parse);
+					Text.Add("<i>“Bend over for me,”</i> she growls, her breath quickening as she fumbles with her britches, freeing her monster cock. You obey, gasping as she all but tears through your gear, exposing your [buttDesc] and your soon-to-be-fucked hole. <i>“If last time didn’t break you, I’ll just have to try harder this time, won’t I?”</i> Hardly words to settle your uneasy mind, especially with her [mcockTip] pressing against your [anusDesc]. You feel something cold and slippery pouring down your taint, lubing you up for the coming anal assault.", parse);
 					Text.NL();
 					Text.Add("Even if she gives you that courtesy, it is the only one you’ll get. In one smooth motion, the hermaphrodite canine rams her cock home with all her strength, roughly impaling you on her stiff pole.", parse);
 					Text.NL();
@@ -640,16 +640,16 @@ Scenes.Miranda.RigardGatesBribe = function() {
 					player.FuckAnal(player.Butt(), miranda.FirstCock(), 4);
 					miranda.Fuck(miranda.FirstCock(), 3);
 					
-					Text.Add("<i>”Not sure you’ll be able to walk after this one,”</i> the guardswoman grunts as she slams her hips against yours. <i>”Would be a shame, wouldn’t it, going through all of this only to be unable to enter the city afterwards!”</i>", parse);
+					Text.Add("<i>“Not sure you’ll be able to walk after this one,”</i> the guardswoman grunts as she slams her hips against yours. <i>“Would be a shame, wouldn’t it, going through all of this only to be unable to enter the city afterwards!”</i>", parse);
 				}
 				else { // repeat >= 5
 					parse["hisher"] = player.mfTrue("his", "her");
-					Text.Add("<i>”Everyone, meet [playername], town slut,”</i> Miranda dramatically introduces you to the other guards, <i>”about to get [hisher] ass fucked by me. I might even allow sloppy seconds.”</i>", parse);
+					Text.Add("<i>“Everyone, meet [playername], town slut,”</i> Miranda dramatically introduces you to the other guards, <i>“about to get [hisher] ass fucked by me. I might even allow sloppy seconds.”</i>", parse);
 					Text.NL();
 					if(miranda.flags["public"] < Miranda.Public.Sex) {
 						Text.Add("You start protesting - surely this is too much, even for her - but she cuts you off with a sharp bark.", parse);
 						Text.NL();
-						Text.Add("<i>”Wouldn’t want to be caught obstructing the long, thick, veiny cock of the law now, would you [playername]?”</i> Miranda growl menacingly. <i>”The guys know all about our little deal, so don’t go looking to them for help. You might play hard to get, but deep down you know you are a total slut for my cock, and you want nothing more than for me to fuck your brains out.”</i>", parse);
+						Text.Add("<i>“Wouldn’t want to be caught obstructing the long, thick, veiny cock of the law now, would you [playername]?”</i> Miranda growl menacingly. <i>“The guys know all about our little deal, so don’t go looking to them for help. You might play hard to get, but deep down you know you are a total slut for my cock, and you want nothing more than for me to fuck your brains out.”</i>", parse);
 						Text.NL();
 						Text.Add("Dejectedly, you give in. She’s going to have things go her way, whatever you say or do.", parse);
 						Text.NL();
@@ -660,10 +660,10 @@ Scenes.Miranda.RigardGatesBribe = function() {
 						miranda.flags["public"] = Miranda.Public.Sex;
 					}
 					parse["himher"] = player.mfTrue("him", "her");
-					Text.Add("Cheeks burning slightly under the scrutiny of the other guardsmen - most of them male, and quite obviously throwing you lecherous glances - you disrobe, bending over the table obediently. <i>”See how well I’ve trained [himher],”</i> Miranda brags.", parse);
+					Text.Add("Cheeks burning slightly under the scrutiny of the other guardsmen - most of them male, and quite obviously throwing you lecherous glances - you disrobe, bending over the table obediently. <i>“See how well I’ve trained [himher],”</i> Miranda brags.", parse);
 					Text.NL();
 					if(miranda.SubDom() - player.SubDom() > 50 && Math.random() < 0.5) {
-						Text.Add("<i>”Now beg for my cock. Show them how much you need it.”</i>", parse);
+						Text.Add("<i>“Now beg for my cock. Show them how much you need it.”</i>", parse);
 						Text.NL();
 						Text.Add("Eager to please your mistress, you spread your cheeks, begging for her to fuck you, deep and hard. You are nothing but a pitiful little slut, hungry for [hisher] mistress’ cum. The hermaphrodite pats you fondly, proud of her pet.", parse);
 						Text.NL();
@@ -681,19 +681,19 @@ Scenes.Miranda.RigardGatesBribe = function() {
 				var scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					parse["cock"] = player.NumCocks() > 1 ? "do those pitiful excuses for cocks" : "does that pitiful excuse for a cock";
-					Text.Add("<i>”Tell me, [playername],”</i> she grunts in your ear, her breasts pressing against your back, <i>”[cock] ever see any action? Or are you too busy getting nailed by everyone you meet?”</i>", parse);
+					Text.Add("<i>“Tell me, [playername],”</i> she grunts in your ear, her breasts pressing against your back, <i>“[cock] ever see any action? Or are you too busy getting nailed by everyone you meet?”</i>", parse);
 					Text.NL();
 				}, 1.0, function() { return player.FirstCock() && !virgin; });
 				scenes.AddEnc(function() {
-					Text.Add("<i>”Perhaps next time, I’ll try out that cunt of yours, hmm?”</i> she grunts, one hand trailing down to probe your wet nether lips.", parse);
+					Text.Add("<i>“Perhaps next time, I’ll try out that cunt of yours, hmm?”</i> she grunts, one hand trailing down to probe your wet nether lips.", parse);
 					Text.NL();
 				}, 1.0, function() { return player.FirstVag(); });
 				scenes.AddEnc(function() {
-					Text.Add("<i>”Nice tits,”</i> she compliments you, <i>”bet they are good cushions, with all the time you spend on your stomach getting railed!”</i>", parse);
+					Text.Add("<i>“Nice tits,”</i> she compliments you, <i>“bet they are good cushions, with all the time you spend on your stomach getting railed!”</i>", parse);
 					Text.NL();
 				}, 1.0, function() { return player.FirstBreastRow().Size() > 3; });
 				scenes.AddEnc(function() {
-					Text.Add("<i>”Found your true calling, boy?”</i> she mocks you. <i>”If it makes you feel any better, you are not the first guy to get a full dose of Miranda, not by a long shot.”</i>", parse);
+					Text.Add("<i>“Found your true calling, boy?”</i> she mocks you. <i>“If it makes you feel any better, you are not the first guy to get a full dose of Miranda, not by a long shot.”</i>", parse);
 					Text.NL();
 				}, 1.0, function() { return player.Gender() == Gender.male; });
 				
@@ -719,7 +719,7 @@ Scenes.Miranda.RigardGatesBribe = function() {
 				Text.NL();
 				Text.Add("But before long, the pain is swallowed by a far greater sensation, intense pleasure. Each time Miranda rams her immense rod home, it sends another jolt of blissful ecstasy up your spine. You find yourself moaning loudly, any shreds of defiance long reduced to dust by the inexorable thrusting of her hips.", parse);
 				Text.NL();
-				Text.Add("<i>”Better hope you are ready for this,”</i> Miranda grunts.", parse);
+				Text.Add("<i>“Better hope you are ready for this,”</i> Miranda grunts.", parse);
 				Text.NL();
 				if(first)
 					Text.Add("It quickly becomes very apparent what she is referring to, as the next push brings a new experience. You didn’t think that your ass could be stretch any more than it already is, but the guardswoman is eager to prove you wrong.", parse);
@@ -730,17 +730,17 @@ Scenes.Miranda.RigardGatesBribe = function() {
 				
 				var scenes = new EncounterTable();
 				scenes.AddEnc(function() {
-					Text.Add("<i>”Another cherry popped, score one Miranda!”</i> the herm boasts, pumping her fist.", parse);
+					Text.Add("<i>“Another cherry popped, score one Miranda!”</i> the herm boasts, pumping her fist.", parse);
 				}, 1.0, function() { return virgin; });
 				scenes.AddEnc(function() {
-					Text.Add("<i>”Does that hurt? Knot my problem, slut,”</i> she says, mockingly.", parse);
+					Text.Add("<i>“Does that hurt? Knot my problem, slut,”</i> she says, mockingly.", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
-					Text.Add("<i>”Feel comfortable? Cause I’m not going anywhere any time soon.”</i> No doubt she’s right - once that knot starts to swell, there is no way you are getting it out.", parse);
+					Text.Add("<i>“Feel comfortable? Cause I’m not going anywhere any time soon.”</i> No doubt she’s right - once that knot starts to swell, there is no way you are getting it out.", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
 					parse["heshe"] = player.mfTrue("he", "she");
-					Text.Add("<i>”Told you [heshe] could take it,”</i> Miranda boasts to her colleagues.", parse);
+					Text.Add("<i>“Told you [heshe] could take it,”</i> Miranda boasts to her colleagues.", parse);
 				}, 1.0, function() { return audience; });
 				
 				scenes.Get();
@@ -763,18 +763,18 @@ Scenes.Miranda.RigardGatesBribe = function() {
 				Text.Add("Wrecked by waves of pleasure, you doubt you’d be able to stand upright if not for Miranda’s hands on your hips. You discover it to be impossible to move, firmly stuck and at her mercy until her knot shrinks down to manageable size again.", parse);
 				Text.NL();
 				if(first)
-					Text.Add("<i>”Better settle in, we’ll be here for a while,”</i> Miranda pants, lying down on your back. <i>”For some reason, I never have anyone run out on me. Must be my charisma.”</i> That and the knot currently sealing your asshole shut. Damn thing feels like its the size of a melon.", parse);
+					Text.Add("<i>“Better settle in, we’ll be here for a while,”</i> Miranda pants, lying down on your back. <i>“For some reason, I never have anyone run out on me. Must be my charisma.”</i> That and the knot currently sealing your asshole shut. Damn thing feels like its the size of a melon.", parse);
 				else if(audience) {
 					Text.Add("You yelp loudly as Miranda sits back down on her bench, dragging you with her by your ravaged sphincter. She lets you lie back and rest, chatting with the other guards as you wait for her knot to deflate. You are too exhausted to glean much from the conversation, though you can tell that they are talking about you. Perhaps deciding who gets to go next.", parse);
 					if(Math.random() < 0.5) {
 						Text.NL();
-						Text.Add("<i>”Sure, but you owe me one,”</i> you hear Miranda saying. Flicking your eyes open, you see the fuzzy outline of one of the guards standing in front of you. Before you really have any time to contemplate what he is doing, you feel the hot splatter of spunk landing on your [breastDesc].", parse);
+						Text.Add("<i>“Sure, but you owe me one,”</i> you hear Miranda saying. Flicking your eyes open, you see the fuzzy outline of one of the guards standing in front of you. Before you really have any time to contemplate what he is doing, you feel the hot splatter of spunk landing on your [breastDesc].", parse);
 						Text.NL();
 						Text.Add("By the time the entire patrol has deposited their loads, you are covered in cum, both inside and out. Humiliated beyond belief, yet unable to will your tired limbs into action, you have no choice but to lie there and take it.", parse);
 					}
 				}
 				else
-					Text.Add("<i>”I wonder how many times I have to come before it comes out the other end,”</i> Miranda ponders, rubbing your [stomachDesc]. From the tone in her voice, you can tell it isn’t just her making a jab at you, she really wants to know. You just hope she doesn’t decide to test it.", parse);
+					Text.Add("<i>“I wonder how many times I have to come before it comes out the other end,”</i> Miranda ponders, rubbing your [stomachDesc]. From the tone in her voice, you can tell it isn’t just her making a jab at you, she really wants to know. You just hope she doesn’t decide to test it.", parse);
 				Text.Flush();
 				
 				player.AddLustFraction(-1);
@@ -791,10 +791,10 @@ Scenes.Miranda.RigardGatesBribe = function() {
 					
 					Text.Add("Eventually, Miranda’s knot shrinks down again to merely unmanageable size. With a grunt and a rough shove, the herm dislodges herself from your abused anus, laughing as you fall to the ground. What feels like several gallons of her semen pours out of your gaping butt. You still feel weak and extremely sore after the rough fuck, but you should be able to move again shortly.", parse);
 					Text.NL();
-					Text.Add("<i>”This time is for free. Ain’t I a generous soul?”</i> The dommy doggie wipes herself off on you before pulling on her pants again, trying to restore her disheveled uniform.", parse);
+					Text.Add("<i>“This time is for free. Ain’t I a generous soul?”</i> The dommy doggie wipes herself off on you before pulling on her pants again, trying to restore her disheveled uniform.", parse);
 					Text.NL();
 					if(rigard.GatesOpen()) {
-						Text.Add("<i>”Well, go ahead, enter. Unless you want to stay for another round,”</i> Miranda waves you toward the gates, not even bothering to get up and open them for you. Hobbling slightly, you make your way inside the city.", parse);
+						Text.Add("<i>“Well, go ahead, enter. Unless you want to stay for another round,”</i> Miranda waves you toward the gates, not even bothering to get up and open them for you. Hobbling slightly, you make your way inside the city.", parse);
 						Text.Flush();
 						
 						Gui.NextPrompt(function() {
@@ -802,7 +802,7 @@ Scenes.Miranda.RigardGatesBribe = function() {
 						});
 					}
 					else {
-						Text.Add("<i>”Oh right, look at the time,”</i> Miranda grins widely as she adjusts her clothes. <i>”Gates are closed, bitch, better luck next time.”</i> She pats her package fondly. <i>”If you don’t have anything else on your agenda, little Miranda will soon be up for another round...”</i>", parse);
+						Text.Add("<i>“Oh right, look at the time,”</i> Miranda grins widely as she adjusts her clothes. <i>“Gates are closed, bitch, better luck next time.”</i> She pats her package fondly. <i>“If you don’t have anything else on your agenda, little Miranda will soon be up for another round...”</i>", parse);
 						Text.Flush();
 						
 						Gui.NextPrompt();
@@ -1030,9 +1030,9 @@ Scenes.Miranda.CatchThatThief = function() {
 	Text.NL();
 	Text.Add("Just as the man is passing by a shady passageway, Miranda the dog-morph guardswoman intercepts him, easily wrestling the thief to the ground despite his greater weight. He struggles a bit, but quiets down when the dobie tightens her hold, threatening to dislocate his shoulder.", parse);
 	Text.NL();
-	Text.Add("<i>”You’ve been a bad boy,”</i> Miranda murmurs, a gleeful smile playing on her lips, <i>”didn’t your mommy tell you not to steal?”</i> The poor thief grunts an unflattering remark, summarily ignored by the guardswoman. Laughing, she hoists the criminal over her shoulder like a sack of grains. As the procession of guards heads towards the barracks, the victor cups a feel on her captive’s butt, shamelessly groping the poor man.", parse);
+	Text.Add("<i>“You’ve been a bad boy,”</i> Miranda murmurs, a gleeful smile playing on her lips, <i>“didn’t your mommy tell you not to steal?”</i> The poor thief grunts an unflattering remark, summarily ignored by the guardswoman. Laughing, she hoists the criminal over her shoulder like a sack of grains. As the procession of guards heads towards the barracks, the victor cups a feel on her captive’s butt, shamelessly groping the poor man.", parse);
 	Text.NL();
-	Text.Add("<i>”Caught red-handed with his fingers in the cookie jar eh?”</i> the guard chuckles. <i>”You are lucky that you weren’t caught by the royal guard, they’d likely have chopped your hands off for this transgression. Now, you’ll just have to endure a few nights in our comfy cells awaiting your trial.”</i> The dobie pats the thief’s bum possessively, ignoring his whimpering protests. <i>”Look forward to a few visits from me. I know <b>just</b> the punishment for bad boys.”</i> You almost feel bad for the guy.", parse);
+	Text.Add("<i>“Caught red-handed with his fingers in the cookie jar eh?”</i> the guard chuckles. <i>“You are lucky that you weren’t caught by the royal guard, they’d likely have chopped your hands off for this transgression. Now, you’ll just have to endure a few nights in our comfy cells awaiting your trial.”</i> The dobie pats the thief’s bum possessively, ignoring his whimpering protests. <i>“Look forward to a few visits from me. I know <b>just</b> the punishment for bad boys.”</i> You almost feel bad for the guy.", parse);
 	Text.NL();
 	Text.Add("The group disappear around a corner, their continued conversation muffled by the sounds of the bustling city.", parse);
 	Text.Flush();
@@ -1303,9 +1303,9 @@ Scenes.Miranda.HeyThereCatPorn = function() {
 						Text.Add("<i>\"For the show,\"</i> he explains grinning, <i>\"we could use some more of that around here, it draws a crowd. You think you two can come more often?\"</i> The two of you blush deeply as he returns to the bar, laughing. The conversations starts to pick up again around you.", parse);
 						Text.NL();
 						if(player.FirstVag())
-							Text.Add("<i>”As much as I like an audience, do you think you can hold out until next time?</i> she murmurs, lightly caressing your wet crotch.", parse);
+							Text.Add("<i>“As much as I like an audience, do you think you can hold out until next time?</i> she murmurs, lightly caressing your wet crotch.", parse);
 						else
-							Text.Add("<i>”Too bad we are the center of attention, I’d love to… continue this,”</i> she grins, caressing your [buttDesc] fondly.", parse);
+							Text.Add("<i>“Too bad we are the center of attention, I’d love to… continue this,”</i> she grins, caressing your [buttDesc] fondly.", parse);
 						Text.NL();
 						Text.Add("You snuggle with Miranda for a while longer, enjoying the mead, until the two of you decide to leave for the night. Before the two of you part on the street outside, Miranda pulls you close into a deep kiss, her hands groping your ass roughly. <i>\"I think I'll be seeing more of you, and better sooner than later,\"</i> she announce as she saunters of into the night, <i>\"you know where to find me.\"</i>", parse);
 						Text.Flush();
@@ -1348,7 +1348,7 @@ Scenes.Miranda.Chat = function() {
 			var scenes = [];
 			
 			scenes.push(function() {
-				Text.Add("<i>”Walking the beat keeps the coin coming, though it isn’t as exciting as mercenary work. Believe it or not, usually things are pretty quiet here.”</i> She shrugs irritably. <i>”I hate doing paper work, give me a thug to beat up any day of the week.”</i>", parse);
+				Text.Add("<i>“Walking the beat keeps the coin coming, though it isn’t as exciting as mercenary work. Believe it or not, usually things are pretty quiet here.”</i> She shrugs irritably. <i>“I hate doing paper work, give me a thug to beat up any day of the week.”</i>", parse);
 				if(miranda.Relation() >= 25) {
 					Text.NL();
 					Text.Add("She brightens up a bit. <i>\"You could show up at the barracks sometime and keep me company!\"</i> she suggests. <i>\"You know... take my mind of things for a while,\"</i> she grins wickedly.", parse);
@@ -1478,15 +1478,15 @@ Scenes.Miranda.Chat = function() {
 			scenes.AddEnc(function() {
 				Text.Add("You ask Miranda about the royal family living in the castle. Her mood darkens immediately, and she spits on the floor besides the table.", parse);
 				Text.NL();
-				Text.Add("<i>”Rigard may be my home, but don’t think for a second I’ve got anything but scorn for that bunch. Fucking aristocrats...”</i>", parse);
+				Text.Add("<i>“Rigard may be my home, but don’t think for a second I’ve got anything but scorn for that bunch. Fucking aristocrats...”</i>", parse);
 				Text.NL();
-				Text.Add("When you ask her why she thinks that way, she gives you a deadpan stare. <i>”Try living in Rigard for a week as a morph, might give you an idea why I left to be a merc.”</i>", parse);
+				Text.Add("When you ask her why she thinks that way, she gives you a deadpan stare. <i>“Try living in Rigard for a week as a morph, might give you an idea why I left to be a merc.”</i>", parse);
 				Text.NL();
 				Text.Add("Well, what about the rest of the royals?", parse);
 				Text.NL();
-				Text.Add("<i>”Heh, they are a right depraved bunch,”</i> Miranda laughs, a wicked grin playing across her features. <i>”There is plenty a rumour about our dear queen, and don’t get me started on the kids. It’s common knowledge they hit the sack together, and you’d have to look hard to find a girlier prince than Rani.”</i>", parse);
+				Text.Add("<i>“Heh, they are a right depraved bunch,”</i> Miranda laughs, a wicked grin playing across her features. <i>“There is plenty a rumour about our dear queen, and don’t get me started on the kids. It’s common knowledge they hit the sack together, and you’d have to look hard to find a girlier prince than Rani.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>”...Still, I’d tap that,”</i> she adds after a thoughtful pause.", parse);
+				Text.Add("<i>“...Still, I’d tap that,”</i> she adds after a thoughtful pause.", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
 				Text.Add("<i>\"You should have a look around the farmlands,\"</i> Miranda tells you, <i>\"there is some work to be had at the farms, if you are into that, and you can also find the rabbit burrows around that area. You could see it like a hub area, from there you can reach every location on the island pretty quickly.\"</i>", parse);
@@ -1508,17 +1508,17 @@ Scenes.Miranda.Chat = function() {
 		options.push({ nameStr : "Thief",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”The thief? Why do you care?”</i>", parse);
+				Text.Add("<i>“The thief? Why do you care?”</i>", parse);
 				Text.NL();
-				Text.Add("<i>”Just curious,”</i> you reply.", parse);
+				Text.Add("<i>“Just curious,”</i> you reply.", parse);
 				Text.NL();
-				Text.Add("<i>”Little bastard’s been sentenced to death. He had a long list of infractions, plus he pissed off the higher-ups. And let’s not forget the fact that he’s a morph to boot, ”</i> Miranda explains.", parse);
+				Text.Add("<i>“Little bastard’s been sentenced to death. He had a long list of infractions, plus he pissed off the higher-ups. And let’s not forget the fact that he’s a morph to boot, ”</i> Miranda explains.", parse);
 				Text.NL();
 				if(rigard.Krawitz["F"] != 0)
 					Text.Add("...Okay, now you really feel guilty for shifting blame onto the fox, even if he <b>is</b> a thief himself. ", parse);
 				Text.Add("You ask Miranda when he’s going to be executed.", parse);
 				Text.NL();
-				Text.Add("<i>”Not for a while, I s’pose they want to beat him up a bit before ending it all,”</i> she takes another swig and slams her mug down on the table. <i>”Bah, let’s talk about something else. I don’t wanna think about how those assholes from the royal guard stole my credit for catching the little bastard.”</i>", parse);
+				Text.Add("<i>“Not for a while, I s’pose they want to beat him up a bit before ending it all,”</i> she takes another swig and slams her mug down on the table. <i>“Bah, let’s talk about something else. I don’t wanna think about how those assholes from the royal guard stole my credit for catching the little bastard.”</i>", parse);
 				Text.NL();
 				Text.Add("Maybe you should do something about that fox’s execution. Perhaps the royal twins might be willing to help?", parse);
 				Text.Flush();
@@ -1568,11 +1568,11 @@ Scenes.Miranda.TavernSexPublicPrompt = function() {
 	
 	Text.Clear();
 	if(nasty || dom > 25)
-		Text.Add("<i>”You truly have no shame, my little bitch,”</i> Miranda chuckles. <i>”But since I have an itch that needs scratching, I’ll indulge you.”</i>", parse);
+		Text.Add("<i>“You truly have no shame, my little bitch,”</i> Miranda chuckles. <i>“But since I have an itch that needs scratching, I’ll indulge you.”</i>", parse);
 	else if(dom > -50)
-		Text.Add("<i>”Sure, I’m always up for a romp,”</i> Miranda grins. <i>”I don’t mind an audience either, I’ve got nothing to hide.”</i>", parse);
+		Text.Add("<i>“Sure, I’m always up for a romp,”</i> Miranda grins. <i>“I don’t mind an audience either, I’ve got nothing to hide.”</i>", parse);
 	else
-		Text.Add("<i>”Of course, [mastermistress]!”</i> Miranda yips happily. <i>”What do you want to do?”</i>", parse);
+		Text.Add("<i>“Of course, [mastermistress]!”</i> Miranda yips happily. <i>“What do you want to do?”</i>", parse);
 	Text.Flush();
 	
 	//[BJ] TODO
@@ -1608,7 +1608,7 @@ Scenes.Miranda.TakeHome = function() {
 		else
 			Text.Add("Shame and excitement chase each other through your mind as your alpha bitch drags you back to her den. Lost in the throes of lust, you eagerly keep up with her, anxious to let her decide what to do with you.", parse);
 		Text.NL();
-		Text.Add("Once you’re at her doorstep, Miranda opens the door and hauls you inside, slamming the door shut and locking it behind her. <i>”Alright then, let’s begin,”</i> she grins, licking her lips.", parse);
+		Text.Add("Once you’re at her doorstep, Miranda opens the door and hauls you inside, slamming the door shut and locking it behind her. <i>“Alright then, let’s begin,”</i> she grins, licking her lips.", parse);
 		
 		world.TimeStep({hour: 1});
 		
@@ -1623,7 +1623,7 @@ Scenes.Miranda.TakeHome = function() {
 			Text.NL();
 			Text.Add("With a playful smile, you coyly scold your naughty bitch for getting so hot and bothered in a place like this. But, since you're such a nice [guyGirl], you'll take her home and let her have some fun. To emphasize your last word, you squeeze her, firmly but gently, through her pants.", parse);
 			Text.NL();
-			Text.Add("<i>”T-Thank you, [masterMistress],”</i> she whispers, holding back a moan at your ministrations.", parse);
+			Text.Add("<i>“T-Thank you, [masterMistress],”</i> she whispers, holding back a moan at your ministrations.", parse);
 			Text.NL();
 			Text.Add("Grinning, you tell her to come on then, giving her one last squeeze to the ass before you remove your hands from her body and imperiously begin heading towards the door. Out of the corner of your eye, you watch the aroused morph eagerly following you, her blatantly tented pants attracting a chorus of whispers and smirks as she follows.", parse);
 			Text.NL();
@@ -1634,7 +1634,7 @@ Scenes.Miranda.TakeHome = function() {
 			Text.NL();
 			Text.Add("You casually quip to her that if she does skip straight to dessert, that leaves the both of you with a lot more time to have nookie.", parse);
 			Text.NL();
-			Text.Add("<i>”Sold!”</i> she exclaims, draining the last of her drink and slamming the mug down. She gets up and walks towards the door at a brisk pace. <i>”Come on, slowpoke,”</i> she signals for you to follow.", parse);
+			Text.Add("<i>“Sold!”</i> she exclaims, draining the last of her drink and slamming the mug down. She gets up and walks towards the door at a brisk pace. <i>“Come on, slowpoke,”</i> she signals for you to follow.", parse);
 			Text.NL();
 			Text.Add("With a smile and a shake of your head at Miranda's antics, you hasten to follow the eager morph.", parse);
 		}
@@ -1693,9 +1693,9 @@ Scenes.Miranda.JustOneMore = function() {
 	miranda.flags["Met"] = Miranda.Met.TavernAftermath;
 	
 	if(miranda.flags["Attitude"] == Miranda.Attitude.Nice) {
-		Text.Add("<i>”Well, I honestly didn't think I would see you again after last time,”</i> she laughs softly as you squirm a bit, then pats the bench beside her. Miranda seems very happy that you decided to return, which she makes more clear as she reaches over and whispers in your ear:", parse);
+		Text.Add("<i>“Well, I honestly didn't think I would see you again after last time,”</i> she laughs softly as you squirm a bit, then pats the bench beside her. Miranda seems very happy that you decided to return, which she makes more clear as she reaches over and whispers in your ear:", parse);
 		Text.NL();
-		Text.Add("<i>”If you decided to come back, I guess that means you liked my extra equipment. Perhaps you are yearning for round two?”</i> She gently reaches down into your pants, ", parse);
+		Text.Add("<i>“If you decided to come back, I guess that means you liked my extra equipment. Perhaps you are yearning for round two?”</i> She gently reaches down into your pants, ", parse);
 		if(player.FirstCock())
 			Text.Add("fondling your now aroused [multiCockDesc].", parse);
 		else if(player.FirstVag())
@@ -1704,7 +1704,7 @@ Scenes.Miranda.JustOneMore = function() {
 			Text.Add("fondling you.", parse);
 		Text.Add(" Her probing fingers traces lower, drawing soft moans from you as she slowly circles your [anusDesc]. She slowly starts to push her middle finger up your rectum, feeling around for a while before withdrawing. She winks at you and pats the hidden monster between her legs.", parse);
 		Text.NL();
-		Text.Add("<i>”Just know that I'd be more than happy to help you with that, if you ever feel you need to let off some steam.”</i> She chuckles at your discomfort and orders some drinks for you.", parse);
+		Text.Add("<i>“Just know that I'd be more than happy to help you with that, if you ever feel you need to let off some steam.”</i> She chuckles at your discomfort and orders some drinks for you.", parse);
 		Text.NL();
 		
 		miranda.relation.IncreaseStat(100, 5);
@@ -1717,9 +1717,9 @@ Scenes.Miranda.JustOneMore = function() {
 		// TODO: Push sexy
 	}
 	else if(miranda.flags["Attitude"] == Miranda.Attitude.Dismiss) {
-		Text.Add("<i>”I.. uh.. I'm sorry about last time,”</i> she says, a bit defensively. <i>”Of course you weren't expecting... that, to, uh, show up.”</i> She rolls her shoulders. <i>”Well, that's my little secret, I'm a hermaphrodite, got both parts and all,”</i> she smiles, back to her old assertive self.", parse);
+		Text.Add("<i>“I.. uh.. I'm sorry about last time,”</i> she says, a bit defensively. <i>“Of course you weren't expecting... that, to, uh, show up.”</i> She rolls her shoulders. <i>“Well, that's my little secret, I'm a hermaphrodite, got both parts and all,”</i> she smiles, back to her old assertive self.", parse);
 		Text.NL();
-		Text.Add("<i>”Twice the fun though, if you care to try it out.”</i> The dog-morph is obviously waiting for you to say something.", parse);
+		Text.Add("<i>“Twice the fun though, if you care to try it out.”</i> The dog-morph is obviously waiting for you to say something.", parse);
 		
 		Text.Flush();
 		
@@ -1730,9 +1730,9 @@ Scenes.Miranda.JustOneMore = function() {
 				Text.Clear();
 				Text.Add("You apologize to her for running out, giving her a weak smile. Miranda’s expression softens up a bit.", parse);
 				Text.NL();
-				Text.Add("<i>”You are not such a bad sort, you know,”</i> she says, <i>”I guess I should have hinted at it a bit more, I...”</i> she looks at you admiringly and shyly adds, <i>”I just couldn't help myself, you are quite the catch, you know.”</i> She places a hand your hip and moves in a bit closer.", parse);
+				Text.Add("<i>“You are not such a bad sort, you know,”</i> she says, <i>“I guess I should have hinted at it a bit more, I...”</i> she looks at you admiringly and shyly adds, <i>“I just couldn't help myself, you are quite the catch, you know.”</i> She places a hand your hip and moves in a bit closer.", parse);
 				Text.NL();
-				Text.Add("<i>”So... now what, pet?”</i> she asks, looking into your eyes. You suggest that the two of you grab a few drinks and have a chat. <i>”Well… a good start, I guess,”</i> she smirks.", parse);
+				Text.Add("<i>“So... now what, pet?”</i> she asks, looking into your eyes. You suggest that the two of you grab a few drinks and have a chat. <i>“Well… a good start, I guess,”</i> she smirks.", parse);
 				Text.NL();
 				
 				miranda.flags["Attitude"] = Miranda.Attitude.Nice;
@@ -1748,7 +1748,7 @@ Scenes.Miranda.JustOneMore = function() {
 				Text.Clear();
 				Text.Add("Murmuring some excuse, you start to shuffle away. There is a slightly hurt look in her eyes.", parse);
 				Text.NL();
-				Text.Add("<i>”Fine then,”</i> she snaps after you. <i>”Be that way. You’ll regret that if I ever catch you in the streets!”</i> As you glance over your shoulder, she is furiously chugging down a large bottle of booze. She probably won't appreciate seeing you around any more.", parse);
+				Text.Add("<i>“Fine then,”</i> she snaps after you. <i>“Be that way. You’ll regret that if I ever catch you in the streets!”</i> As you glance over your shoulder, she is furiously chugging down a large bottle of booze. She probably won't appreciate seeing you around any more.", parse);
 				Text.Flush();
 				
 				miranda.flags["Attitude"] = Miranda.Attitude.Hate;
@@ -1764,15 +1764,15 @@ Scenes.Miranda.JustOneMore = function() {
 	else {
 		Text.Add("Miranda is lost in thought as you grab a seat next to her. She takes a deep breath and turns to you.", parse);
 		Text.NL();
-		Text.Add("<i>”Look, I haven't been entirely honest with you. I get a feeling that you like me, and there is something that you need to know before we take this any further.”</i> She heads off to an empty back room, motioning for you to follow. Curious, you go with her. She grabs a bottle of booze from the bar on the way, muttering she needs something to brace herself. You notice that she is already pretty drunk.", parse);
+		Text.Add("<i>“Look, I haven't been entirely honest with you. I get a feeling that you like me, and there is something that you need to know before we take this any further.”</i> She heads off to an empty back room, motioning for you to follow. Curious, you go with her. She grabs a bottle of booze from the bar on the way, muttering she needs something to brace herself. You notice that she is already pretty drunk.", parse);
 		Text.NL();
-		Text.Add("<i>”Please close the door, hun,”</i> she tells you over her shoulder, placing the booze on the table. Turning around, she gives you a measuring look. <i>”I think the best way to do this is to show you,”</i> she murmurs with a sultry look on her face. With her eyes still fixed on you, Miranda reaches for her belt and starts undoing it. When she is done, she turns around, slowly pulling down her tight pants over her curvy hips, exposing more and more dark fur.", parse);
+		Text.Add("<i>“Please close the door, hun,”</i> she tells you over her shoulder, placing the booze on the table. Turning around, she gives you a measuring look. <i>“I think the best way to do this is to show you,”</i> she murmurs with a sultry look on her face. With her eyes still fixed on you, Miranda reaches for her belt and starts undoing it. When she is done, she turns around, slowly pulling down her tight pants over her curvy hips, exposing more and more dark fur.", parse);
 		Text.NL();
 		Text.Add("You are thoroughly enjoying the show, but is a bit unsure where this is going. With her back to you, she pulls her pants down to her knees, giving you a glimpse of her tight anus and moist pussy lips. Then... she turns around to face you. Between her long fur-clad legs, just above her juicy slit, you see something you definitely didn't expect. Half hidden in a soft sheath is a very large canid cock, complete with a pointed tip, a set of apple-size balls and a thick knot at the base.", parse);
 		Text.NL();
 		Text.Add("Even soft, it’s still almost nine inches long and as thick as her arm. You unconsciously lick your lips nervously, contemplating this new development. Miranda takes a challenging pose, legs wide and member jutting out aggressively.", parse);
 		Text.NL();
-		Text.Add("<i>”Well?”</i> she looks at you, cocking her eyebrow.", parse);
+		Text.Add("<i>“Well?”</i> she looks at you, cocking her eyebrow.", parse);
 		Text.NL();
 		Text.Add("<b>You now know Miranda is a herm (duh).</b>", parse);
 		Text.Flush();
@@ -1786,7 +1786,7 @@ Scenes.Miranda.JustOneMore = function() {
 				Text.Clear();
 				Text.Add("You declare that it doesn’t matter what she has between her legs, you’ll still be her friend, even if her revelation startled you a little bit. Miranda makes a happy yip and gives you a quick hug, her soft member hitting your thigh with a wet slap. A bit embarrassed, she shoves her cock back into her pants, then leads you back to the benches. As you walk she leans on your shoulder and fondles your butt playfully.", parse);
 				Text.NL();
-				Text.Add("<i>”Friendship accepted,”</i> the guardswoman murmurs. <i>”And who knows, perhaps something more down the line?”</i> she adds playfully.", parse);
+				Text.Add("<i>“Friendship accepted,”</i> the guardswoman murmurs. <i>“And who knows, perhaps something more down the line?”</i> she adds playfully.", parse);
 				Text.NL();
 				
 				miranda.flags["Attitude"] = Miranda.Attitude.Nice;
@@ -1802,7 +1802,7 @@ Scenes.Miranda.JustOneMore = function() {
 				Text.Clear();
 				Text.Add("Murmuring some excuse, you start to shuffle away. There is a slightly hurt look in her eyes.", parse);
 				Text.NL();
-				Text.Add("<i>”Fine then,”</i> she snaps after you. <i>”Be that way. You’ll regret that if I ever catch you in the streets!”</i> As you glance over your shoulder, she is furiously chugging down a large bottle of booze. She probably won't appreciate seeing you around any more.", parse);
+				Text.Add("<i>“Fine then,”</i> she snaps after you. <i>“Be that way. You’ll regret that if I ever catch you in the streets!”</i> As you glance over your shoulder, she is furiously chugging down a large bottle of booze. She probably won't appreciate seeing you around any more.", parse);
 				Text.Flush();
 				
 				miranda.flags["Attitude"] = Miranda.Attitude.Hate;
@@ -1824,9 +1824,9 @@ Scenes.Miranda.JustOneMore = function() {
 				Text.NL();
 				Text.Add("Finally you lean back and admire your handiwork. Fully erect, Miranda's huge rod push out eleven inches from her crotch, even without the support of your hands. As you look up at the hermaphrodite, you see that she is very aroused, and is gazing at you with a wicked smile playing on her lips. Satisfied with your survey, you start to rise up to your feet.", parse);
 				Text.NL();
-				Text.Add("<i>”Oh no. You can't just leave it like that!”</i> she exclaims drunkenly. The guardswoman makes a flailing grab for you, but loses her footing and falls down on top of you. Surprised, you catch her and set her down in your lap.", parse);
+				Text.Add("<i>“Oh no. You can't just leave it like that!”</i> she exclaims drunkenly. The guardswoman makes a flailing grab for you, but loses her footing and falls down on top of you. Surprised, you catch her and set her down in your lap.", parse);
 				Text.NL();
-				Text.Add("<i>”Please!”</i> she pants urgently, her hands paws at you inefficiently. <i>”I need to fuck. <b>Now!</b>”</i>", parse);
+				Text.Add("<i>“Please!”</i> she pants urgently, her hands paws at you inefficiently. <i>“I need to fuck. <b>Now!</b>”</i>", parse);
 				Text.NL();
 				Text.Add("What do you do?", parse);
 				Text.Flush();
@@ -1864,7 +1864,7 @@ Scenes.Miranda.JustOneMore = function() {
 							Text.Add(", drooling precum all over you. You speed up your insistent rutting of the poor doggy, who is really starting to lose it. Her engorged penis is slapping wildly against your [stomachDesc], and the knot at her base is beginning to swell.", parse);
 							Text.NL();
 							parse["butt"] = player.NumCocks() > 1 ? ", simultaneously pouring your spunk inside her twitching colon" : "";
-							Text.Add("<i>”I-I'm gonna come!”</i> she gasps. You quickly reach down and grasp her shaft and start jerking her off. As she explodes in a fountain of dog-girl cum, thoroughly drenching the both of you, you glance up and notice that you have a small audience. Seems like two shocked customers just walked in on you, but you are not really in a position to do anything about it. Miranda rams herself down hard, fully impaling herself on your cock[s] as you unload into the depths of her pussy[butt].", parse);
+							Text.Add("<i>“I-I'm gonna come!”</i> she gasps. You quickly reach down and grasp her shaft and start jerking her off. As she explodes in a fountain of dog-girl cum, thoroughly drenching the both of you, you glance up and notice that you have a small audience. Seems like two shocked customers just walked in on you, but you are not really in a position to do anything about it. Miranda rams herself down hard, fully impaling herself on your cock[s] as you unload into the depths of her pussy[butt].", parse);
 							Text.NL();
 							Text.Add("As the both of you ride out your climax, the spectators chuckle to each other and head to another room. They leave the door open for all to see, as you rest in each others arms in an expanding pool of mixed love juices. After resting up a bit, the two of you decide that it is probably best to leave for today. As you walk out into the night, Miranda gives you an peck on the cheek. She seems a bit more demure than her usual abrasive self.", parse);
 							Text.NL();
@@ -1872,7 +1872,7 @@ Scenes.Miranda.JustOneMore = function() {
 							var cum = player.OrgasmCum();
 							var mCum = miranda.OrgasmCum();
 
-							Text.Add("<i>”That was great, hun...”</i> she whispers into your ear. <i>”You can do that to me again aaanytime you like.”</i> Miranda sways off into the night, leaving you alone.", parse);
+							Text.Add("<i>“That was great, hun...”</i> she whispers into your ear. <i>“You can do that to me again aaanytime you like.”</i> Miranda sways off into the night, leaving you alone.", parse);
 							Text.Flush();
 							
 							miranda.relation.IncreaseStat(100, 10);
@@ -1913,7 +1913,7 @@ Scenes.Miranda.JustOneMore = function() {
 							player.FuckAnal(player.Butt(), miranda.FirstCock(), 5);
 						}
 						
-						Text.Add("<i>”See? That wasn't so bad, was it honey?”</i> She slaps your butt drunkenly. <i>”Now, are you going to start moving or will I have to do all the work?”</i> Blushing slightly, you slide up and down her length, your tunnel clenching tightly around the hermaphrodite’s bright red pillar.", parse);
+						Text.Add("<i>“See? That wasn't so bad, was it honey?”</i> She slaps your butt drunkenly. <i>“Now, are you going to start moving or will I have to do all the work?”</i> Blushing slightly, you slide up and down her length, your tunnel clenching tightly around the hermaphrodite’s bright red pillar.", parse);
 						Text.NL();
 						Text.Add("Fuck, she is in so deep! The dog-girl roughly grabs hold of your hips, shoving you down on her member. Before long, you are driven to the edge by the wild romp.", parse);
 						if(player.FirstBreastRow())
@@ -1928,18 +1928,18 @@ Scenes.Miranda.JustOneMore = function() {
 						Text.Add(" She grins as you cum, rocking on top of her.", parse);
 						Text.NL();
 						parse["butt"] = player.FirstCock() ? ", grinding against your prostate" : "";
-						Text.Add("<i>”Oh, I'm not done quite yet, my cute little pet,”</i> she coos. Sitting up and holding you in her lap, she starts to guide you up and down her shaft with her strong hands. Picking up speed, she bounces you wildly[butt].", parse);
+						Text.Add("<i>“Oh, I'm not done quite yet, my cute little pet,”</i> she coos. Sitting up and holding you in her lap, she starts to guide you up and down her shaft with her strong hands. Picking up speed, she bounces you wildly[butt].", parse);
 						Text.NL();
 						Text.Add("Pretty soon you convulse in yet another intense orgasm, making you gasp as she continues to fuck you. You become aware that some of the bar patrons are peeking in through the open door, watching the two of you. Miranda notices them too and grins at them over your shoulder, as she pushes you so far down on her cock that her thick knot pops inside you.", parse);
 						Text.NL();
-						Text.Add("Your body rests limply against hers as she starts pumping you full of her seed, putting up a show for the audience. As you lean against her, totally exhausted, she whispers in your ear, <i>”Not bad for the first time, I think I’ve found myself a keeper!”</i> Once her knot has shrunk enough and you finally are able to separate, the two of you head out into the night, too tired to keep up the drinking game. Miranda has a thoughtful look on her face.", parse);
+						Text.Add("Your body rests limply against hers as she starts pumping you full of her seed, putting up a show for the audience. As you lean against her, totally exhausted, she whispers in your ear, <i>“Not bad for the first time, I think I’ve found myself a keeper!”</i> Once her knot has shrunk enough and you finally are able to separate, the two of you head out into the night, too tired to keep up the drinking game. Miranda has a thoughtful look on her face.", parse);
 						
 						var mCum = miranda.OrgasmCum();
 						
 						Text.NL();
-						Text.Add("<i>”Did you enjoy performing in front of an audience?”</i> she asks playfully. <i>”Maybe I shouldn't have been so greedy, and let them join in?”</i> She laughs loudly at your blushing face and saunters off into the night.", parse);
+						Text.Add("<i>“Did you enjoy performing in front of an audience?”</i> she asks playfully. <i>“Maybe I shouldn't have been so greedy, and let them join in?”</i> She laughs loudly at your blushing face and saunters off into the night.", parse);
 						Text.NL();
-						Text.Add("<i>”See you around, pet!”</i>", parse);
+						Text.Add("<i>“See you around, pet!”</i>", parse);
 						Text.Flush();
 						
 						miranda.relation.IncreaseStat(100, 10);
@@ -1958,9 +1958,9 @@ Scenes.Miranda.JustOneMore = function() {
 						Text.Clear();
 						Text.Add("You blush a bit, eyeing her throbbing member nervously. Unsure if you are doing the right thing, you ask if she’ll be gentle with you.", parse);
 						Text.NL();
-						Text.Add("<i>”Gentle?”</i> the dog-morph growls, <i>”I don’t know the meaning of the word!”</i> Before you have time to react, she wrestles you to the ground. Totally surprised by her lunge, you stumble back on your ass as she falls on top of you. Squirming around you somehow end up on your stomach, butt in the air. Faintly alarmed, you try to crawl away, but she has you pinned to the ground, rutting her huge cock against your back. She hungrily pulls off your [lowerArmor], revealing your naked [buttDesc]. She reaches down, whispering in your ear as she starts probing at your back door.", parse);
+						Text.Add("<i>“Gentle?”</i> the dog-morph growls, <i>“I don’t know the meaning of the word!”</i> Before you have time to react, she wrestles you to the ground. Totally surprised by her lunge, you stumble back on your ass as she falls on top of you. Squirming around you somehow end up on your stomach, butt in the air. Faintly alarmed, you try to crawl away, but she has you pinned to the ground, rutting her huge cock against your back. She hungrily pulls off your [lowerArmor], revealing your naked [buttDesc]. She reaches down, whispering in your ear as she starts probing at your back door.", parse);
 						Text.NL();
-						Text.Add("<i>”I'm sorry, but I <b>need</b> this,”</i> she almost seems a bit embarrassed about her essentially planning to rape you, but she is too aroused to back down now. <i>”You brought this upon yourself you know, my cute little slut,”</i> she moans, trying to justify her actions. <i>”You were practically <b>asking</b> for it!”</i>", parse);
+						Text.Add("<i>“I'm sorry, but I <b>need</b> this,”</i> she almost seems a bit embarrassed about her essentially planning to rape you, but she is too aroused to back down now. <i>“You brought this upon yourself you know, my cute little slut,”</i> she moans, trying to justify her actions. <i>“You were practically <b>asking</b> for it!”</i>", parse);
 						Text.NL();
 						Text.Add("You start to gasp that it wasn't like that, but you are suddenly cut off by a rowdy intruder in your [anusDesc]. Your world is suddenly reduced to your butt, and the huge log stretching it wider and wider. You can feel each bulging vein as the pointy red giant slowly presses deeper and deeper into your bowels, completely disregarding your own opinions on the matter.", parse);
 						Text.NL();
@@ -1972,13 +1972,13 @@ Scenes.Miranda.JustOneMore = function() {
 						parse["butt"] = player.FirstCock() ? " brushing up against your prostate and" : "";
 						Text.Add("Finally, the head is firmly lodged inside your [anusDesc]. Your lover sighs in deep contentment as you rasp a few ragged breaths, trying to accommodate for her girth. Miranda is not going to let you have any rest though, as she mercilessly pushes deeper and deeper into your colon,[butt] making you gasp in mixed pleasure and pain.", parse);
 						Text.NL();
-						Text.Add("<i>”You like that, huh?”</i> the horny dog grunts through her teeth. She gets up on her knees and firmly grab your buttocks, preparing to go down on you in earnest. <i>”Then I think you will just love this,”</i> she murmurs, she slowly pulls out of you, until the widest part of the head stretch your distended anus.", parse);
+						Text.Add("<i>“You like that, huh?”</i> the horny dog grunts through her teeth. She gets up on her knees and firmly grab your buttocks, preparing to go down on you in earnest. <i>“Then I think you will just love this,”</i> she murmurs, she slowly pulls out of you, until the widest part of the head stretch your distended anus.", parse);
 						if(player.FirstVag())
 							Text.Add(" Your cunt is flooding over, but Miranda is too focused on her current target to notice.", parse);
 						if(player.FirstCock())
 							Text.Add(" Your own [multiCockDesc] [isAre] twitching in anticipation, a small pool of pre forming on the floor beneath you.", parse);
 						Text.NL();
-						Text.Add("<i>”Here I come, brace yourself, slut!”</i> she roars, thrusting forward hard with her hips. The intense sensation of being completely filled up almost makes you come then and there. You can feel the incessant prodding of her even thicker knot at your back door, demanding entry. She grunts a bit as she realizes that it won't fit the way it is now, but decides that she'll give it her best try anyway. She proceeds to roughly slam your colon, first pulling out almost all the way before ramming it back as deep as it will go.", parse);
+						Text.Add("<i>“Here I come, brace yourself, slut!”</i> she roars, thrusting forward hard with her hips. The intense sensation of being completely filled up almost makes you come then and there. You can feel the incessant prodding of her even thicker knot at your back door, demanding entry. She grunts a bit as she realizes that it won't fit the way it is now, but decides that she'll give it her best try anyway. She proceeds to roughly slam your colon, first pulling out almost all the way before ramming it back as deep as it will go.", parse);
 						if(player.FirstCock())
 							Text.Add(" Your prostate definitely is mashed every time she trusts her hips, making you yelp in unwilling pleasure.", parse);
 						Text.NL();
@@ -1995,18 +1995,18 @@ Scenes.Miranda.JustOneMore = function() {
 						Text.Add("Miranda is far from done however, and continues to ram away at your poor abused rectum, quickly building up another anal orgasm for you[butt]. The massive rod moves more easily now, slick with her precum. The constant stretching pain in your butt does not recede, however, and you realize that she is forcing more and more of her knot into you with every push.", parse);
 						Text.NL();
 						parse["butt"] = player.FirstCock() ? " as a great force is exerted on your prostate" : "";
-						Text.Add("<i>”Almost there, pet, almost, almoooost...”</i> she coos, her breath drawing short. Finally she pulls out, only the pointed tip of her cock poking against your stretched taint. She pulls back her hips as you brace yourself again. When she rams into you, she pushes deeper than ever before, making your eyes bulge in pain. Your body is rocked by another heavy orgasm[butt], increasing the size of the pool of love juices between your knees.", parse);
+						Text.Add("<i>“Almost there, pet, almost, almoooost...”</i> she coos, her breath drawing short. Finally she pulls out, only the pointed tip of her cock poking against your stretched taint. She pulls back her hips as you brace yourself again. When she rams into you, she pushes deeper than ever before, making your eyes bulge in pain. Your body is rocked by another heavy orgasm[butt], increasing the size of the pool of love juices between your knees.", parse);
 						Text.NL();
 						Text.Add("You incredulously realize that she somehow made it, all of her swollen knot is trapped inside your distended bowels, throbbing as it announces her coming orgasm. You try to pull away, but find it impossible, her thick bulge is trapping you and preventing you from moving even a fraction of an inch. The intense pressure causes your rectal muscles to convulse as yet another anal orgasm wrecks your body, the tightness pushing Miranda well past her own limits.", parse);
 						Text.NL();
-						Text.Add("<i>”FUUUUUUCK!!!”</i> she loudly cries out, as you feel wave after wave of potent cum fill your belly. The knot is preventing any sperm from escaping, leaving her immense load only one way to go. After what feels like an eternity, she is finally spent. Your belly is stretched beyond what you thought possible, making you look heavily pregnant. Miranda collapses on top of you, the weight of her breasts pressing down on your back.", parse);
+						Text.Add("<i>“FUUUUUUCK!!!”</i> she loudly cries out, as you feel wave after wave of potent cum fill your belly. The knot is preventing any sperm from escaping, leaving her immense load only one way to go. After what feels like an eternity, she is finally spent. Your belly is stretched beyond what you thought possible, making you look heavily pregnant. Miranda collapses on top of you, the weight of her breasts pressing down on your back.", parse);
 						
 						var mCum = miranda.OrgasmCum();
 						
 						Text.NL();
 						Text.Add("This, of course, is the time that the bartender decides to check in on you. He surveys the scene clinically: you lie pressed on the floor with your butt sticking out, completely filled by the hermaphrodite dog’s knotted cock. Trickles of the guardswoman’s cum somehow flows past the knot and join the pool of your fluids on the floor. The tall equine sighs and mutters that this will be a mess to clean up, shaking his head as he walks out. The flushed and tired Miranda sits up and pulls you into her lap.", parse);
 						Text.NL();
-						Text.Add("<i>”Well, I don’t think you have much choice but to stay like this for a while,”</i> she purrs. You have to admit it’s true, the knot is holding you firmly in place. Resigned to your fate, you snuggle up against your canid lover, making the best of the situation. You stay that way for about a quarter of an hour, Miranda whispering dirty pillow talk in your ears. Her words leave you no doubt that she’ll want to do this again, and often. Finally she is able to pull out her softened member from your bowels, releasing a torrent of her cum down your [legs].", parse);
+						Text.Add("<i>“Well, I don’t think you have much choice but to stay like this for a while,”</i> she purrs. You have to admit it’s true, the knot is holding you firmly in place. Resigned to your fate, you snuggle up against your canid lover, making the best of the situation. You stay that way for about a quarter of an hour, Miranda whispering dirty pillow talk in your ears. Her words leave you no doubt that she’ll want to do this again, and often. Finally she is able to pull out her softened member from your bowels, releasing a torrent of her cum down your [legs].", parse);
 						Text.NL();
 						Text.Add("You have a little trouble walking, and don't think you'll be able to sit properly for a few days. The both of you drunkenly stagger out into the night together. Before you part, Miranda pulls you down to your knees, and makes you give her a blowjob right in the middle of the street.", parse);
 						Text.NL();
@@ -2015,9 +2015,9 @@ Scenes.Miranda.JustOneMore = function() {
 						miranda.Fuck(miranda.FirstCock(), 2);
 						player.FuckOral(player.Mouth(), miranda.FirstCock(), 2);
 						
-						Text.Add("<i>”Remember that your ass belongs to me now, little slut!”</i> she drunkenly proclaims as she fills your bowels with another batch of dog cum, this time pouring from the other direction. It seems you have brought out a really dominant streak in Miranda.", parse);
+						Text.Add("<i>“Remember that your ass belongs to me now, little slut!”</i> she drunkenly proclaims as she fills your bowels with another batch of dog cum, this time pouring from the other direction. It seems you have brought out a really dominant streak in Miranda.", parse);
 						Text.NL();
-						Text.Add("<i>”Can't wait for our next fuck, love,”</i> she purrs as she swaggers off into the night.", parse);
+						Text.Add("<i>“Can't wait for our next fuck, love,”</i> she purrs as she swaggers off into the night.", parse);
 						Text.Flush();
 						
 						miranda.relation.IncreaseStat(100, 15);
@@ -2111,28 +2111,28 @@ Scenes.Miranda.DatingEntry = function() {
 	Text.Clear();
 	if(miranda.flags["Dates"] == 0) { // first
 		if(miranda.Attitude() >= Miranda.Attitude.Neutral)
-			Text.Add("<i>”You coming on to me, [playername]?”</i> Miranda looks amused, but nods. <i>”Sure, I’m game. Let’s ditch this place.”</i> Saying so, she drains her beer in one go, slamming the empty cup to the table.", parse);
+			Text.Add("<i>“You coming on to me, [playername]?”</i> Miranda looks amused, but nods. <i>“Sure, I’m game. Let’s ditch this place.”</i> Saying so, she drains her beer in one go, slamming the empty cup to the table.", parse);
 		else {
-			Text.Add("<i>”You are certainly singing a different tune now than when we first met.”</i> Miranda growls suspiciously. <i>”What’s your game?”</i> Grudgingly, she agrees to go with you, draining her beer and slamming the empty cup to the table.", parse);
+			Text.Add("<i>“You are certainly singing a different tune now than when we first met.”</i> Miranda growls suspiciously. <i>“What’s your game?”</i> Grudgingly, she agrees to go with you, draining her beer and slamming the empty cup to the table.", parse);
 			if(miranda.flags["gBJ"] > 0) {
 				Text.NL();
-				Text.Add("<i>”If nothing else, at least I’ll get to fuck you at the end of it,”</i> she mutters to herself.", parse);
+				Text.Add("<i>“If nothing else, at least I’ll get to fuck you at the end of it,”</i> she mutters to herself.", parse);
 			}
 		}
 		Text.NL();
-		Text.Add("<i>”I’m quite picky with who I date, you should know. Put on your best face, or whatever other bodypart you’d like to flaunt.”</i>", parse);
+		Text.Add("<i>“I’m quite picky with who I date, you should know. Put on your best face, or whatever other bodypart you’d like to flaunt.”</i>", parse);
 		Text.NL();
 		Text.Add("You leave the sordid tavern behind, walking aimlessly through the picturesque slums of the large city. For once, Miranda isn’t very talkative, seeming to be preoccupied with her own thoughts. Just when the silence is starting to get uncomfortable, she yips in surprised joy.", parse);
 		Text.NL();
-		Text.Add("<i>”Oh, this place! Haven’t been through here in a while.”</i> You follow the excited canine through an archway into what looks like a small secluded park of sorts, containing a few trees and bushes, a cracked stone table and a few simple wooden benches. The small space would easily fit inside the common room of the Maidens’ Bane.", parse);
+		Text.Add("<i>“Oh, this place! Haven’t been through here in a while.”</i> You follow the excited canine through an archway into what looks like a small secluded park of sorts, containing a few trees and bushes, a cracked stone table and a few simple wooden benches. The small space would easily fit inside the common room of the Maidens’ Bane.", parse);
 		Text.NL();
-		Text.Add("<i>”This is the place I lost my virginity,”</i> Miranda gestures around the place with sparkling eyes like if it were a grand ball room. <i>”Oh how young I was… Both me and my boyfriend were rather drunk. Still, I enjoyed myself greatly.”</i> She looks thoughtful for a moment. <i>”My boyfriend, not so much.”</i>", parse);
+		Text.Add("<i>“This is the place I lost my virginity,”</i> Miranda gestures around the place with sparkling eyes like if it were a grand ball room. <i>“Oh how young I was… Both me and my boyfriend were rather drunk. Still, I enjoyed myself greatly.”</i> She looks thoughtful for a moment. <i>“My boyfriend, not so much.”</i>", parse);
 		Text.NL();
 		if(miranda.Sexed()) {
-			Text.Add("<i>”As you may have noticed, I have a hard time holding back,”</i> the herm blushes faintly. You’ve sort of gotten that impression.", parse);
+			Text.Add("<i>“As you may have noticed, I have a hard time holding back,”</i> the herm blushes faintly. You’ve sort of gotten that impression.", parse);
 			Text.NL();
 		}
-		Text.Add("<i>”So, what do you think, [playername]?”</i>", parse);
+		Text.Add("<i>“So, what do you think, [playername]?”</i>", parse);
 		
 		party.location = world.loc.Rigard.Slums.gate;
 		world.TimeStep({minute: 20});
@@ -2148,7 +2148,7 @@ Scenes.Miranda.DatingEntry = function() {
 				Text.Clear();
 				Text.Add("You rather guardedly tell her it’s a nice place, not really sure what she’s expecting you to say.", parse);
 				Text.NL();
-				Text.Add("<i>”Aww, you are no fun.”</i> Miranda looks disappointed.", parse);
+				Text.Add("<i>“Aww, you are no fun.”</i> Miranda looks disappointed.", parse);
 				Text.NL();
 				Scenes.Miranda.DatingFirstDocks();
 			}, enabled : true,
@@ -2157,7 +2157,7 @@ Scenes.Miranda.DatingEntry = function() {
 		options.push({ nameStr : "Rude",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”Nostalgia is what it is. I have some good memories here, and I’m not ashamed of that.”</i> Miranda looks grumpy at your reaction.", parse);
+				Text.Add("<i>“Nostalgia is what it is. I have some good memories here, and I’m not ashamed of that.”</i> Miranda looks grumpy at your reaction.", parse);
 				Text.NL();
 				
 				miranda.relation.DecreaseStat(-100, 2);
@@ -2172,12 +2172,12 @@ Scenes.Miranda.DatingEntry = function() {
 				Text.Clear();
 				Text.Add("Rather than being taken aback, Miranda takes your counter in a stride.", parse);
 				Text.NL();
-				Text.Add("<i>”Several times. My first relationship didn’t last very long, but me and my boyfriend stole back here quite often while it did.”</i>", parse);
+				Text.Add("<i>“Several times. My first relationship didn’t last very long, but me and my boyfriend stole back here quite often while it did.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>”Was a while since last time, though. You offering?”</i> Before you can respond, she shakes her head, grinning at you. <i>”My tastes have refined over time. I’d prefer to ram you in my own bed instead. Consider it an offer.”</i>", parse);
+				Text.Add("<i>“Was a while since last time, though. You offering?”</i> Before you can respond, she shakes her head, grinning at you. <i>“My tastes have refined over time. I’d prefer to ram you in my own bed instead. Consider it an offer.”</i>", parse);
 				Text.NL();
 				if(miranda.flags["gAnal"] != 0) {
-					Text.Add("<i>”Who knows, perhaps you’ll prefer it over a dirty alleyway,”</i> she adds, jabbing you in the ribs with her elbow.", parse);
+					Text.Add("<i>“Who knows, perhaps you’ll prefer it over a dirty alleyway,”</i> she adds, jabbing you in the ribs with her elbow.", parse);
 					Text.NL();
 				}
 				
@@ -2194,27 +2194,27 @@ Scenes.Miranda.DatingEntry = function() {
 		Scenes.Miranda.DatingScore = miranda.Attitude();
 		
 		if(miranda.flags["dLock"] == 1) {
-			Text.Add("<i>”What, changed your mind? Ready to become my bitch?”</i> Miranda nods towards her crotch pointedly. <i>”Blow me. Right here, right now.”</i>", parse);
+			Text.Add("<i>“What, changed your mind? Ready to become my bitch?”</i> Miranda nods towards her crotch pointedly. <i>“Blow me. Right here, right now.”</i>", parse);
 			Text.Flush();
 			
 			Scenes.Miranda.DatingBlockPrompt();
 		}
 		else {
 			if(miranda.Attitude() >= Miranda.Attitude.Neutral)
-				Text.Add("<i>”I’d love to, [playername],”</i> Miranda replies heartily. <i>”I had a good time before… but we need to talk first.”</i>", parse);
+				Text.Add("<i>“I’d love to, [playername],”</i> Miranda replies heartily. <i>“I had a good time before… but we need to talk first.”</i>", parse);
 			else
-				Text.Add("<i>”Just what is your game, [playername]?”</i> Miranda looks genuinely puzzled. <i>”You just don’t seem to take a hint… or maybe you get off on abuse. Is that it? Are you a masochist? Not that I’d mind...”</i>", parse);
+				Text.Add("<i>“Just what is your game, [playername]?”</i> Miranda looks genuinely puzzled. <i>“You just don’t seem to take a hint… or maybe you get off on abuse. Is that it? Are you a masochist? Not that I’d mind...”</i>", parse);
 			Text.NL();
 			Text.Add("The doberherm takes another swipe of her mead, sighing contentedly.", parse);
 			Text.NL();
-			Text.Add("<i>”Look. If you want to hang with me, we need to set out some ground rules. Don’t think that this is going to be your lovey-dovey romance kind of thing. I don’t <b>do</b> relationships, I do fuckbuddies. I do a lot of them. If I want to fuck someone, I’m going to do it, regardless of what you think about it.”</i>", parse);
+			Text.Add("<i>“Look. If you want to hang with me, we need to set out some ground rules. Don’t think that this is going to be your lovey-dovey romance kind of thing. I don’t <b>do</b> relationships, I do fuckbuddies. I do a lot of them. If I want to fuck someone, I’m going to do it, regardless of what you think about it.”</i>", parse);
 			Text.NL();
 			Text.Add("Guess that is just something you have to accept about Miranda. She doesn’t look like she’s going to budge on it.", parse);
 			Text.NL();
-			Text.Add("<i>”Second thing. Expect to be on the receiving end of my cock. A lot.”</i> Your eyes unwittingly drift down to the bulge between her legs. When you glance back up, Miranda is grinning widely at you. <i>”I like being on top. Which means you like being my bottom.”</i>", parse);
+			Text.Add("<i>“Second thing. Expect to be on the receiving end of my cock. A lot.”</i> Your eyes unwittingly drift down to the bulge between her legs. When you glance back up, Miranda is grinning widely at you. <i>“I like being on top. Which means you like being my bottom.”</i>", parse);
 			Text.NL();
 			if(miranda.flags["public"] >= Miranda.Public.Oral) {
-				Text.Add("<i>”Not that you seem to have a problem with that. Well then, shall we?”</i>", parse);
+				Text.Add("<i>“Not that you seem to have a problem with that. Well then, shall we?”</i>", parse);
 				Text.NL();
 				Text.Add("You finish your drinks and head out into the slums.", parse);
 				Text.Flush();
@@ -2228,7 +2228,7 @@ Scenes.Miranda.DatingEntry = function() {
 			else {
 				Text.Add("You squirm a bit under her gaze.", parse);
 				Text.NL();
-				Text.Add("<i>”I’d like you to show your… dedication, [playername].”</i> Miranda points between her legs imperiously. <i>”Suck.”</i>", parse);
+				Text.Add("<i>“I’d like you to show your… dedication, [playername].”</i> Miranda points between her legs imperiously. <i>“Suck.”</i>", parse);
 				Text.NL();
 				Text.Add("What, here?", parse);
 				Text.Flush();
@@ -2244,9 +2244,9 @@ Scenes.Miranda.DatingEntry = function() {
 		parse["masterMistress"] = miranda.SubDom() - player.SubDom() > -50 ?
 			player.name : player.mfTrue("master", "mistress");
 		if(miranda.Attitude() >= Miranda.Attitude.Neutral)
-			Text.Add("<i>”Sure, I’d love to, [masterMistress]!”</i> Miranda replies, eagerly swiping her tankard.", parse);
+			Text.Add("<i>“Sure, I’d love to, [masterMistress]!”</i> Miranda replies, eagerly swiping her tankard.", parse);
 		else
-			Text.Add("<i>”Just can’t get enough of my cock, can you?”</i> Miranda grins mockingly, draining her tankard. <i>”Sure, I’m game.”</i>", parse);
+			Text.Add("<i>“Just can’t get enough of my cock, can you?”</i> Miranda grins mockingly, draining her tankard. <i>“Sure, I’m game.”</i>", parse);
 		Text.NL();
 		Scenes.Miranda.DatingStage1();
 	}
@@ -2263,7 +2263,7 @@ Scenes.Miranda.DatingBlockPrompt = function() {
 	options.push({ nameStr : "Do it",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>”Good, showing your true colors,”</i> Miranda purrs.", parse);
+			Text.Add("<i>“Good, showing your true colors,”</i> Miranda purrs.", parse);
 			Text.NL();
 			
 			Scenes.Miranda.TavernSexPublicBJ();
@@ -2274,7 +2274,7 @@ Scenes.Miranda.DatingBlockPrompt = function() {
 			
 			Gui.NextPrompt(function() {
 				Text.Clear();
-				Text.Add("<i>”Thanks for that, [name],”</i> Miranda stretches languidly. <i>”Shall we go?”</i>", parse);
+				Text.Add("<i>“Thanks for that, [name],”</i> Miranda stretches languidly. <i>“Shall we go?”</i>", parse);
 				Text.NL();
 				Text.Add("You finish your drinks and head out into the slums.", parse);
 				Text.NL();
@@ -2292,7 +2292,7 @@ Scenes.Miranda.DatingBlockPrompt = function() {
 		func : function() {
 			Text.Clear();
 			if(miranda.Attitude() >= Miranda.Attitude.Neutral) {
-				Text.Add("<i>”Well, fuck. I’m sure you’ll come around sooner or later.”</i> Miranda sounds determined, if a bit disappointed. <i>”I’m not giving up on this, but you are off the hook until later tonight. Shall we go?”</i>", parse);
+				Text.Add("<i>“Well, fuck. I’m sure you’ll come around sooner or later.”</i> Miranda sounds determined, if a bit disappointed. <i>“I’m not giving up on this, but you are off the hook until later tonight. Shall we go?”</i>", parse);
 				Text.NL();
 				Text.Add("You finish your drinks and head out into the slums.", parse);
 				Text.NL();
@@ -2303,7 +2303,7 @@ Scenes.Miranda.DatingBlockPrompt = function() {
 				Scenes.Miranda.DatingStage2();
 			}
 			else {
-				Text.Add("<i>”In that case, you can forget going out with me,”</i> she declares dismissively, going back to her drink. <i>”I don’t date sluts who aren’t honest with themselves.”</i>", parse);
+				Text.Add("<i>“In that case, you can forget going out with me,”</i> she declares dismissively, going back to her drink. <i>“I don’t date sluts who aren’t honest with themselves.”</i>", parse);
 				Text.Flush();
 				
 				miranda.flags["dLock"] = 1;
@@ -2324,7 +2324,7 @@ Scenes.Miranda.DatingStage1 = function() {
 	};
 	
 	var contfunc = function() {
-		Text.Add("<i>”How about we duck outside for a while?”</i> the guardswoman asks suggestively. Following her, the two of you head out into the slums of Rigard.", parse);
+		Text.Add("<i>“How about we duck outside for a while?”</i> the guardswoman asks suggestively. Following her, the two of you head out into the slums of Rigard.", parse);
 		Text.NL();
 		
 		Scenes.Miranda.DatingStage2();
@@ -2332,7 +2332,7 @@ Scenes.Miranda.DatingStage1 = function() {
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
-		Text.Add("<i>”Wanna stick around for a few drinks first?”</i> before you have opportunity to respond, she calls for another round, asking for the ‘special’. The barkeep comes over with two mugs filled with a clear, colorless substance. <i>”Have a taste of this, it packs quite a punch!”</i> the guardswoman urges you on.", parse);
+		Text.Add("<i>“Wanna stick around for a few drinks first?”</i> before you have opportunity to respond, she calls for another round, asking for the ‘special’. The barkeep comes over with two mugs filled with a clear, colorless substance. <i>“Have a taste of this, it packs quite a punch!”</i> the guardswoman urges you on.", parse);
 		Text.Flush();
 		
 		//[Drink][Don’t]
@@ -2358,20 +2358,20 @@ Scenes.Miranda.DatingStage1 = function() {
 						Text.Clear();
 						Text.Add("When you finally come to, you are prone on the ground, your head pounding something fierce. You throw a quick accusatory glance at Miranda, who is still sitting at the table.", parse);
 						Text.NL();
-						Text.Add("<i>”I didn’t do anything to you!”</i> she scoffs, amused. <i>”Not my fault you can’t hold your drink.”</i>", parse);
+						Text.Add("<i>“I didn’t do anything to you!”</i> she scoffs, amused. <i>“Not my fault you can’t hold your drink.”</i>", parse);
 						Text.NL();
 						if(miranda.Nasty())
-							Text.Add("<i>”Besides, if I <b>did</b> want to take advantage of you, it’d be much more fun if you were awake for it.”</i> You guess that you can, in a weird way, trust her on that at least.", parse);
+							Text.Add("<i>“Besides, if I <b>did</b> want to take advantage of you, it’d be much more fun if you were awake for it.”</i> You guess that you can, in a weird way, trust her on that at least.", parse);
 						else
-							Text.Add("<i>”Well… sorry anyways,</i> she apologizes a bit guiltily.", parse);
+							Text.Add("<i>“Well… sorry anyways,</i> she apologizes a bit guiltily.", parse);
 						Text.NL();
-						Text.Add("<i>”I’ll see you around I guess. I think we can forget about the date until you can walk properly again.”</i>", parse);
+						Text.Add("<i>“I’ll see you around I guess. I think we can forget about the date until you can walk properly again.”</i>", parse);
 						Text.Flush();
 						Gui.NextPrompt();
 					});
 				}
 				else {
-					Text.Add("<i>”That’s the spirit!”</i> Miranda cheers you on. You somehow manage to keep up with the dobie, but <i>damn</i> she parties hard! The two of you have a few more drinks, but nothing as strong as the first one.", parse);
+					Text.Add("<i>“That’s the spirit!”</i> Miranda cheers you on. You somehow manage to keep up with the dobie, but <i>damn</i> she parties hard! The two of you have a few more drinks, but nothing as strong as the first one.", parse);
 					Text.NL();
 					Scenes.Miranda.DatingScore++;
 					contfunc();
@@ -2382,7 +2382,7 @@ Scenes.Miranda.DatingStage1 = function() {
 		options.push({ nameStr : "Don’t",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”Come on, don’t be such a pussy,”</i> Miranda growls, downing her own mug in one go. You can almost taste the alcohol in her exhaled breath. <i>”Ahh, that hit the spot.”</i>", parse);
+				Text.Add("<i>“Come on, don’t be such a pussy,”</i> Miranda growls, downing her own mug in one go. You can almost taste the alcohol in her exhaled breath. <i>“Ahh, that hit the spot.”</i>", parse);
 				Text.NL();
 				Text.Add("You stay in the tavern for a while, Miranda taking a few more drinks while you politely refuse taking any. Finally, she seems to grow bored.", parse);
 				Text.NL();
@@ -2440,9 +2440,9 @@ Scenes.Miranda.DatingStage2 = function() {
 			func : function() {
 				Text.Clear();
 				if(miranda.Nasty())
-					Text.Add("<i>”Can hardly wait to get the dick, can you?”</i> Miranda laughs mockingly. <i>”Fine, let’s head to my place so I can bang your brains out, slut.”</i>", parse);
+					Text.Add("<i>“Can hardly wait to get the dick, can you?”</i> Miranda laughs mockingly. <i>“Fine, let’s head to my place so I can bang your brains out, slut.”</i>", parse);
 				else
-					Text.Add("<i>”My, eager aren’t we?”</i> Miranda laughs, changing direction. <i>”Come along then, lover!”</i>", parse);
+					Text.Add("<i>“My, eager aren’t we?”</i> Miranda laughs, changing direction. <i>“Come along then, lover!”</i>", parse);
 				Text.NL();
 				Scenes.Miranda.DatingScore++;
 				
@@ -2482,24 +2482,24 @@ Scenes.Miranda.TalkBackstory = function() {
 	Text.Clear();
 	Text.Add("As you walk, you ask if she could tell you a bit about her past and her life in the city.", parse);
 	Text.NL();
-	Text.Add("<i>”Talk about myself? I guess… now where to start.”</i>", parse);
+	Text.Add("<i>“Talk about myself? I guess… now where to start.”</i>", parse);
 	Text.NL();
 	
 	var scenes = [];
 	
 	// ((Story of growing up in Rigard))
 	scenes.push(function() {
-		Text.Add("<i>”Me and my family grew up here in Rigard,”</i> Miranda begins thoughtfully. <i>”We had a pretty nice house in the residential district - nothing posh, but bigger than the one I have now. Nice enough place, though I remember very little of it.”</i>", parse);
+		Text.Add("<i>“Me and my family grew up here in Rigard,”</i> Miranda begins thoughtfully. <i>“We had a pretty nice house in the residential district - nothing posh, but bigger than the one I have now. Nice enough place, though I remember very little of it.”</i>", parse);
 		Text.NL();
 		if(miranda.flags["bgRotMax"] == 0) {
 			Text.Add("You ask her why that is? Did they move?", parse);
 			Text.NL();
-			Text.Add("<i>”The rebellion is what happened,”</i> she answers shortly. <i>”I have about the same sob story as every other person in the damn city.”</i> You decide not to pry further until she tells you herself.", parse);
+			Text.Add("<i>“The rebellion is what happened,”</i> she answers shortly. <i>“I have about the same sob story as every other person in the damn city.”</i> You decide not to pry further until she tells you herself.", parse);
 			Text.NL();
 		}
-		Text.Add("<i>”Back then, it was me, my sister Belinda, mom and dad. It was a cute and cozy little family, though I must have been a handful. Bel was always the prim and proper one. The irony of that.”</i> She chuckles bitterly.", parse);
+		Text.Add("<i>“Back then, it was me, my sister Belinda, mom and dad. It was a cute and cozy little family, though I must have been a handful. Bel was always the prim and proper one. The irony of that.”</i> She chuckles bitterly.", parse);
 		Text.NL();
-		Text.Add("<i>”I guess I was kind of a brat back then, running around town and beating up other kids my age. Now that I think about it, that last part hasn’t changed much. I probably fit in much better in the slums, but my sister loved the city.”</i>", parse);
+		Text.Add("<i>“I guess I was kind of a brat back then, running around town and beating up other kids my age. Now that I think about it, that last part hasn’t changed much. I probably fit in much better in the slums, but my sister loved the city.”</i>", parse);
 		Text.NL();
 		Text.Add("She trails off a bit, unwilling or unable to go on.", parse);
 		Text.NL();
@@ -2509,34 +2509,34 @@ Scenes.Miranda.TalkBackstory = function() {
 	if(miranda.Relation() >= 25) {
 		// ((Death of her parents))
 		scenes.push(function() {
-			Text.Add("<i>”Remember what I said about the rebellion? There was all sorts of bad stuff brewing in the city after that. Neither of my parents took part, but the city was rife with anti-morph sentiments. Just about everyone was scared and nobody knew what the recently crowned king was going to do next. Many who probably should have fled the city stayed, perhaps because they simply didn’t know anything else.”</i>", parse);
+			Text.Add("<i>“Remember what I said about the rebellion? There was all sorts of bad stuff brewing in the city after that. Neither of my parents took part, but the city was rife with anti-morph sentiments. Just about everyone was scared and nobody knew what the recently crowned king was going to do next. Many who probably should have fled the city stayed, perhaps because they simply didn’t know anything else.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>”I just remember hazy details of it, but me and my family were forced out into the slums, thrown out of our house and put in a small shed, like a kennel for common dogs.”</i>", parse);
+			Text.Add("<i>“I just remember hazy details of it, but me and my family were forced out into the slums, thrown out of our house and put in a small shed, like a kennel for common dogs.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>”There was a big riot, a large mob of bigoted scum coming down hard on the slums. Bloody miracle the entire city didn’t burn to the ground. Perhaps it would have been better if it did.”</i>", parse);
+			Text.Add("<i>“There was a big riot, a large mob of bigoted scum coming down hard on the slums. Bloody miracle the entire city didn’t burn to the ground. Perhaps it would have been better if it did.”</i>", parse);
 			Text.NL();
 			if(miranda.flags["bgRotMax"] == 1) {
 				Text.Add("She is clearly coming up to a particularly painful part of her story, so you refrain from asking any questions for now.", parse);
 				Text.NL();
 			}
-			Text.Add("<i>”Mom and dad were both killed - while blood flowed on the streets as the military clashed with the mob, some thugs broke into our house to take what little we had. My parents… protected me and my sister, but paid a horrible price for it.”</i>", parse);
+			Text.Add("<i>“Mom and dad were both killed - while blood flowed on the streets as the military clashed with the mob, some thugs broke into our house to take what little we had. My parents… protected me and my sister, but paid a horrible price for it.”</i>", parse);
 			Text.NL();
-			Text.Add("Miranda hangs her head. <i>”What am I thinking, this is hardly a good story for a date. Sorry, [playername], but my tale is what it is.”</i> You ask her if she’s fine. <i>”Don’t worry about me,”</i> she snaps back. <i>”I’ve gotten over it. No need to dig up old wounds.”</i>", parse);
+			Text.Add("Miranda hangs her head. <i>“What am I thinking, this is hardly a good story for a date. Sorry, [playername], but my tale is what it is.”</i> You ask her if she’s fine. <i>“Don’t worry about me,”</i> she snaps back. <i>“I’ve gotten over it. No need to dig up old wounds.”</i>", parse);
 			Text.NL();
 			
 			PrintDefaultOptions();
 		});
 		// ((The slums))
 		scenes.push(function() {
-			Text.Add("<i>”Life in the slums was tough for two orphaned kids. I don’t think I was older than ten when we had to start fending for ourselves, and my sister only eight. Bel took it particularly hard, so it was up to me to try and protect the little puppy. Fat thanks I got for that,”</i> she grumbles.", parse);
+			Text.Add("<i>“Life in the slums was tough for two orphaned kids. I don’t think I was older than ten when we had to start fending for ourselves, and my sister only eight. Bel took it particularly hard, so it was up to me to try and protect the little puppy. Fat thanks I got for that,”</i> she grumbles.", parse);
 			Text.NL();
-			Text.Add("<i>”I think I mentioned it before, but when we first moved to the slums, I spent a lot of time in the docks. I returned there to look for work after we buried our parents, as Bel was fat little use, just running around crying all the time. We were hardly the only ones in the same situation, so there was not going to be any charitable benefactor to help us survive. Not one that didn’t come with unbearable consequences.”</i>", parse);
+			Text.Add("<i>“I think I mentioned it before, but when we first moved to the slums, I spent a lot of time in the docks. I returned there to look for work after we buried our parents, as Bel was fat little use, just running around crying all the time. We were hardly the only ones in the same situation, so there was not going to be any charitable benefactor to help us survive. Not one that didn’t come with unbearable consequences.”</i>", parse);
 			Text.NL();
-			Text.Add("You look at her curiously. <i>”Trust me, you are better off not knowing about some of the offers me and my sister were given.”</i>", parse);
+			Text.Add("You look at her curiously. <i>“Trust me, you are better off not knowing about some of the offers me and my sister were given.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>”We were able to get by thanks to my work anyways. I was strong for my size even back then, and hauling crates all day sure didn’t change that. I got to hang with the sailors who talked about distant lands on the other side of Eden, the free cities, and even the secret city hidden in the upper branches of the Great Tree. Not that anyone had actually visited the latter, but they all bragged about knowing someone who had.”</i>", parse);
+			Text.Add("<i>“We were able to get by thanks to my work anyways. I was strong for my size even back then, and hauling crates all day sure didn’t change that. I got to hang with the sailors who talked about distant lands on the other side of Eden, the free cities, and even the secret city hidden in the upper branches of the Great Tree. Not that anyone had actually visited the latter, but they all bragged about knowing someone who had.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>”I used to dream I could go with them, but I couldn’t bring myself to leave my sister all alone.”</i>", parse);
+			Text.Add("<i>“I used to dream I could go with them, but I couldn’t bring myself to leave my sister all alone.”</i>", parse);
 			Text.NL();
 			
 			PrintDefaultOptions();
@@ -2544,11 +2544,11 @@ Scenes.Miranda.TalkBackstory = function() {
 		if(miranda.Relation() >= 50) {
 			// ((Joining the mercs))
 			scenes.push(function() {
-				Text.Add("<i>”Years went by in the slums. Both me and Bel grew up into proper ladies - well, Bel did at least. It never quite caught on me,”</i> she grins. <i>”Plus, I had this little addition,”</i> she adds, patting her bulge fondly. <i>”While that sure as hell didn’t help me while growing up, I got a reputation for shutting people up who thought it a fair reason to try and bully me.”</i>", parse);
+				Text.Add("<i>“Years went by in the slums. Both me and Bel grew up into proper ladies - well, Bel did at least. It never quite caught on me,”</i> she grins. <i>“Plus, I had this little addition,”</i> she adds, patting her bulge fondly. <i>“While that sure as hell didn’t help me while growing up, I got a reputation for shutting people up who thought it a fair reason to try and bully me.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>”Even later, I found… different ways to get back at my tormentors, something that hurt their pride even more than a sound beating would.”</i> She grins lewdly. <i>”The best part is that they were all willing - almost all, after a bit of persuasion. Nothing better than breaking in some cocky ass who thinks the world revolves around him.”</i>", parse);
+				Text.Add("<i>“Even later, I found… different ways to get back at my tormentors, something that hurt their pride even more than a sound beating would.”</i> She grins lewdly. <i>“The best part is that they were all willing - almost all, after a bit of persuasion. Nothing better than breaking in some cocky ass who thinks the world revolves around him.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>”Anyways, that was a side note… unless you want to talk more about that, perhaps?”</i> she adds sweetly.", parse);
+				Text.Add("<i>“Anyways, that was a side note… unless you want to talk more about that, perhaps?”</i> she adds sweetly.", parse);
 				Text.Flush();
 				
 				//[Sure!][No]
@@ -2562,7 +2562,7 @@ Scenes.Miranda.TalkBackstory = function() {
 						parse["hisher"]  = player.mfTrue("his", "her");
 						parse["himher"]  = player.mfTrue("him", "her");
 						
-						Text.Add("<i>”Oh really now, then let’s find somewhere to discuss it further, why don’t we?”</i> The two of you walk together, Miranda chatting freely about her past conquests. <i>”You see, there was this [guyGirl], <b>really</b> pretty thing. Met [himher] pretty recently actually, while standing guard at the gates. Knew I had to tap that as soon as I saw [himher], so I invited them over to the Maidens’ Bane.”</i>", parse);
+						Text.Add("<i>“Oh really now, then let’s find somewhere to discuss it further, why don’t we?”</i> The two of you walk together, Miranda chatting freely about her past conquests. <i>“You see, there was this [guyGirl], <b>really</b> pretty thing. Met [himher] pretty recently actually, while standing guard at the gates. Knew I had to tap that as soon as I saw [himher], so I invited them over to the Maidens’ Bane.”</i>", parse);
 						Text.NL();
 						
 						var sexedCount = 0;
@@ -2573,7 +2573,7 @@ Scenes.Miranda.TalkBackstory = function() {
 							Text.Add("The guardswoman goes on to describe all the lewd things she and her mystery lover have been up to. Just how would one find the hours in the day for all that?", parse);
 						}
 						else {
-							Text.Add("<i>”Haven’t gotten [himher] in bed as much as I’d like yet, but I’m pretty certain I’m going to, <b>real</b> soon. ", parse);
+							Text.Add("<i>“Haven’t gotten [himher] in bed as much as I’d like yet, but I’m pretty certain I’m going to, <b>real</b> soon. ", parse);
 							if(miranda.Nice())
 								Text.Add("You wouldn’t believe the kind of stuff [heshe]’s into. Well, perhaps you would, at that.”</i>", parse);
 							else
@@ -2583,7 +2583,7 @@ Scenes.Miranda.TalkBackstory = function() {
 						parse["soon"] = sexedCount >= 25 ? " soon-to-be" : "";
 						Text.Add("You are almost starting to feel a bit intimidated by this mystery flirt that she’s apparently courting on the side. And just where is this[soon] lover of hers, you ask a bit grumpily?", parse);
 						Text.NL();
-						Text.Add("<i>”Standing on my front porch, wearing a stupid look on [hisher] face,”</i> Miranda grins. With a start, you realize that you’ve arrived at her home.", parse);
+						Text.Add("<i>“Standing on my front porch, wearing a stupid look on [hisher] face,”</i> Miranda grins. With a start, you realize that you’ve arrived at her home.", parse);
 						Text.NL();
 						
 						Scenes.Miranda.DatingScore++;
@@ -2602,13 +2602,13 @@ Scenes.Miranda.TalkBackstory = function() {
 						Text.Clear();
 						Text.Add("Seeing the trap coming from a mile away, you politely decline, asking her to continue the story.", parse);
 						Text.NL();
-						Text.Add("<i>”Bah, you are no fun!”</i> Miranda complains. <i>”...Where were I?”</i> Collecting her thoughts, she starts over again.", parse);
+						Text.Add("<i>“Bah, you are no fun!”</i> Miranda complains. <i>“...Where were I?”</i> Collecting her thoughts, she starts over again.", parse);
 						Text.NL();
-						Text.Add("<i>”As I said, me and Bel, grew up and filled out. It opened up new job opportunities for both of us. My body was built like a bar of iron, forged by working the docks. Hanging out with the sailors toned my tongue pretty damn rough too. Not to mention I could carry myself in a fight pretty well.”</i>", parse);
+						Text.Add("<i>“As I said, me and Bel, grew up and filled out. It opened up new job opportunities for both of us. My body was built like a bar of iron, forged by working the docks. Hanging out with the sailors toned my tongue pretty damn rough too. Not to mention I could carry myself in a fight pretty well.”</i>", parse);
 						Text.NL();
-						Text.Add("<i>”I had grown pretty sick of the city, wanted to try new horizons, you know? Bel seemed to be able to handle herself, and there was a local mercenary guild that was hiring. Got a few complainers about a wee little girl joining their tough guy club, but a few broken teeth sorted that out well enough.”</i>", parse);
+						Text.Add("<i>“I had grown pretty sick of the city, wanted to try new horizons, you know? Bel seemed to be able to handle herself, and there was a local mercenary guild that was hiring. Got a few complainers about a wee little girl joining their tough guy club, but a few broken teeth sorted that out well enough.”</i>", parse);
 						Text.NL();
-						Text.Add("<i>”The guild was the Black Hounds - I believe I showed you the guild hall earlier. Fucking scum the entire lot of them, but I sure as hell got what I wanted out of it.”</i>", parse);
+						Text.Add("<i>“The guild was the Black Hounds - I believe I showed you the guild hall earlier. Fucking scum the entire lot of them, but I sure as hell got what I wanted out of it.”</i>", parse);
 						Text.NL();
 						
 						PrintDefaultOptions();
@@ -2619,34 +2619,34 @@ Scenes.Miranda.TalkBackstory = function() {
 			});
 			// ((Time with the mercs))
 			scenes.push(function() {
-				Text.Add("<i>”The Black Hounds were a rowdy bunch, both on and off duty. How they still get contracts after some of the shit we did is beyond me. We usually got the job done either way, and it wasn’t like we had much competition in our price class.”</i>", parse);
+				Text.Add("<i>“The Black Hounds were a rowdy bunch, both on and off duty. How they still get contracts after some of the shit we did is beyond me. We usually got the job done either way, and it wasn’t like we had much competition in our price class.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>”I got to spend a lot of time outside Rigard at the very least, travelling all over Eden. I’ve seen the free cities, visited the desert oasis, spent time among the highland tribes. Wherever there was trouble, the Black Hounds were there. Sometimes even before the fact.”</i>", parse);
+				Text.Add("<i>“I got to spend a lot of time outside Rigard at the very least, travelling all over Eden. I’ve seen the free cities, visited the desert oasis, spent time among the highland tribes. Wherever there was trouble, the Black Hounds were there. Sometimes even before the fact.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>”There are a lot of stories I could tell you about that time… We’d occasionally return to Rigard for some RnR, and I’d check in on my sister, drop of some money and so on. The rest of the gang burnt all their money on booze and whores as quickly as they could.”</i>", parse);
+				Text.Add("<i>“There are a lot of stories I could tell you about that time… We’d occasionally return to Rigard for some RnR, and I’d check in on my sister, drop of some money and so on. The rest of the gang burnt all their money on booze and whores as quickly as they could.”</i>", parse);
 				Text.NL();
 				Text.Add("Not her though?", parse);
 				Text.NL();
-				Text.Add("<i>”Sure, I may have taken a drink or two from time to time-”</i> Now that sounds like an understatement if ever you heard one. <i>”I’ve never had to pay for sex though. I just have this way with the ladies. With men too, actually. I saw plenty of that kind of action on our missions abroad.”</i>", parse);
+				Text.Add("<i>“Sure, I may have taken a drink or two from time to time-”</i> Now that sounds like an understatement if ever you heard one. <i>“I’ve never had to pay for sex though. I just have this way with the ladies. With men too, actually. I saw plenty of that kind of action on our missions abroad.”</i>", parse);
 				Text.NL();
 				
 				PrintDefaultOptions();
 			});
 			// ((Joining the guard))
 			scenes.push(function() {
-				Text.Add("<i>”Finally, I grew sick of the Hounds. One can only stand so much shit before seeking another line of work… but beating the crap out of people was kinda my thing. Still is. I looked around for something more… respectable, is perhaps the word.”</i> She doesn’t sound like she uses it very much. <i>”I found the guard. Marginally better, perhaps, but they pay well and I don’t have to feel guilty about the people I beat up.”</i>", parse);
+				Text.Add("<i>“Finally, I grew sick of the Hounds. One can only stand so much shit before seeking another line of work… but beating the crap out of people was kinda my thing. Still is. I looked around for something more… respectable, is perhaps the word.”</i> She doesn’t sound like she uses it very much. <i>“I found the guard. Marginally better, perhaps, but they pay well and I don’t have to feel guilty about the people I beat up.”</i>", parse);
 				Text.NL();
 				if(miranda.flags["bgRotMax"] == 5) {
 					Text.Add("You hadn’t exactly suspected Miranda to have a conscience about the things she did, but the more you know.", parse);
 					Text.NL();
 				}
-				Text.Add("<i>”With a nice little premium I got for joining, I was finally able to move out of the slums and back into the city proper. I kinda like my new place, it’s clean if nothing else. By that time, Belinda had already moved into the city, so there wasn’t really anything keeping me in that hovel anyways.”</i>", parse);
+				Text.Add("<i>“With a nice little premium I got for joining, I was finally able to move out of the slums and back into the city proper. I kinda like my new place, it’s clean if nothing else. By that time, Belinda had already moved into the city, so there wasn’t really anything keeping me in that hovel anyways.”</i>", parse);
 				Text.NL();
 				if(miranda.flags["bgRotMax"] == 5) {
 					Text.Add("You take note that she doesn’t mention where her sister got the money to do so, but you assume she would tell you if it was important.", parse);
 					Text.NL();
 				}
-				Text.Add("<i>”Sure, it’s not very glamorous, but it’s about as good a job as a morph can get in this fucking town. Plus, it lets me do what I’m good at without me getting in trouble for it.”</i>", parse);
+				Text.Add("<i>“Sure, it’s not very glamorous, but it’s about as good a job as a morph can get in this fucking town. Plus, it lets me do what I’m good at without me getting in trouble for it.”</i>", parse);
 				Text.NL();
 				Text.Add("Somehow you doubt that her career has been entirely without trouble. Call it a hunch.", parse);
 				Text.NL();
@@ -2655,13 +2655,13 @@ Scenes.Miranda.TalkBackstory = function() {
 			});
 			// ((Life in the guard))
 			scenes.push(function() {
-				Text.Add("<i>”I’ve been walking the streets of Rigard in uniform for years, cracking down hard on crime in this town,”</i> Miranda tells you, stretching languidly. <i>”Given my background, I’m privy to certain information most are not, namely an insight in how the lower layers of society <b>work</b> in this city. Makes me able to predict certain people’s behavior, and prevent any of their shenanigans. Or at the very least catch them in the act, so to speak.”</i> She grins. <i>”Always easier to slam them into a cell when they got a bag of loot slung over their shoulder. Makes people less likely to ask about why they’re walking funny too.”</i>", parse);
+				Text.Add("<i>“I’ve been walking the streets of Rigard in uniform for years, cracking down hard on crime in this town,”</i> Miranda tells you, stretching languidly. <i>“Given my background, I’m privy to certain information most are not, namely an insight in how the lower layers of society <b>work</b> in this city. Makes me able to predict certain people’s behavior, and prevent any of their shenanigans. Or at the very least catch them in the act, so to speak.”</i> She grins. <i>“Always easier to slam them into a cell when they got a bag of loot slung over their shoulder. Makes people less likely to ask about why they’re walking funny too.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>”Rising to the upper ranks is pretty much impossible for someone like me; not that I’d want to be stuck pushing papers, mind you. If not for the fact that I’m a morph, I don’t bend over backwards to follow stupid orders from above. Still, it keeps me just where I want to be, prowling the streets. They might think I’m difficult to handle, but I’m just too damn good at what I do to get rid of.”</i>", parse);
+				Text.Add("<i>“Rising to the upper ranks is pretty much impossible for someone like me; not that I’d want to be stuck pushing papers, mind you. If not for the fact that I’m a morph, I don’t bend over backwards to follow stupid orders from above. Still, it keeps me just where I want to be, prowling the streets. They might think I’m difficult to handle, but I’m just too damn good at what I do to get rid of.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>”The higher ups don’t like me, but I’ve got respect where it matters. Not to mention that my current comrades are a hell of a better sort than my previous ones. Some of them are even nice people. I don’t really mind having a bit of city-backed authority either.”</i>", parse);
+				Text.Add("<i>“The higher ups don’t like me, but I’ve got respect where it matters. Not to mention that my current comrades are a hell of a better sort than my previous ones. Some of them are even nice people. I don’t really mind having a bit of city-backed authority either.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>”I dunno what to say more, I think I’ll stick around with this for a while longer, don’t really have a reason to quit.”</i>", parse);
+				Text.Add("<i>“I dunno what to say more, I think I’ll stick around with this for a while longer, don’t really have a reason to quit.”</i>", parse);
 				Text.NL();
 				
 				PrintDefaultOptions();
@@ -2672,14 +2672,14 @@ Scenes.Miranda.TalkBackstory = function() {
 					if(miranda.flags["bgRotMax"] == 7) {
 						Text.Add("The guardswoman looks unusually thoughtful as she ponders where to pick up the story.", parse);
 						Text.NL();
-						Text.Add("<i>”Look, [playername], I haven’t been entirely honest with you. I think it’s time I tell you the whole story, without leaving out the bits about my sister. I rarely dwell on the past, and it’s a bit embarrassing, so I didn’t think it important. Thinking over things, I can’t really tell my story without it, though.”</i>", parse);
+						Text.Add("<i>“Look, [playername], I haven’t been entirely honest with you. I think it’s time I tell you the whole story, without leaving out the bits about my sister. I rarely dwell on the past, and it’s a bit embarrassing, so I didn’t think it important. Thinking over things, I can’t really tell my story without it, though.”</i>", parse);
 						Text.NL();
 					}
-					Text.Add("<i>”Like I said, both me and Bel found new work once we grew up. I joined the mercs and left my sister with enough cash to scrape by. Whenever I visited her, she seemed to be doing just fine, but I heard some strange rumors going around about her hanging out with strange sorts, and disappearing for long periods of time.”</i>", parse);
+					Text.Add("<i>“Like I said, both me and Bel found new work once we grew up. I joined the mercs and left my sister with enough cash to scrape by. Whenever I visited her, she seemed to be doing just fine, but I heard some strange rumors going around about her hanging out with strange sorts, and disappearing for long periods of time.”</i>", parse);
 					Text.NL();
-					Text.Add("<i>”Little Belinda had grown up into a beautiful flower, and while I had been away, someone had plucked her. Quite a few someones, actually. My little sister had gone into prostitution.”</i> Her voice is a mixture of many emotions; anger, bitterness and more than a little guilt. <i>”We had a big fight when I confronted her about it, and next time I returned to the city, she had moved inside the walls. It was around this time I finally gave up on the Hounds and decided to join the guard.”</i>", parse);
+					Text.Add("<i>“Little Belinda had grown up into a beautiful flower, and while I had been away, someone had plucked her. Quite a few someones, actually. My little sister had gone into prostitution.”</i> Her voice is a mixture of many emotions; anger, bitterness and more than a little guilt. <i>“We had a big fight when I confronted her about it, and next time I returned to the city, she had moved inside the walls. It was around this time I finally gave up on the Hounds and decided to join the guard.”</i>", parse);
 					Text.NL();
-					Text.Add("<i>”I… don’t really talk to my sister anymore. She’s working at some fancy brothel in the inner city and at least seems relatively well off.”</i> Miranda sighs. <i>”I guess I don’t really get her, talking to her just gets frustrating… least I can do is keep the streets clean.”</i>", parse);
+					Text.Add("<i>“I… don’t really talk to my sister anymore. She’s working at some fancy brothel in the inner city and at least seems relatively well off.”</i> Miranda sighs. <i>“I guess I don’t really get her, talking to her just gets frustrating… least I can do is keep the streets clean.”</i>", parse);
 					Text.NL();
 					Text.Add("The dobie seems to have turned rather melancholy, and trails off.", parse);
 					Text.NL();
@@ -2688,11 +2688,11 @@ Scenes.Miranda.TalkBackstory = function() {
 				});
 				// ((Her feelings))
 				scenes.push(function() {
-					Text.Add("<i>”To be honest, I’m not sure what else to tell you,”</i> the dog-morph confesses. <i>”Spilling the beans about Belinda isn’t something I usually do with people, just so you know. Not that it’s a secret, exactly, but I never bring it up. And if they bring it up? Most likely it’ll earn them a punch in the face.”</i>", parse);
+					Text.Add("<i>“To be honest, I’m not sure what else to tell you,”</i> the dog-morph confesses. <i>“Spilling the beans about Belinda isn’t something I usually do with people, just so you know. Not that it’s a secret, exactly, but I never bring it up. And if they bring it up? Most likely it’ll earn them a punch in the face.”</i>", parse);
 					Text.NL();
-					Text.Add("<i>”It’s… frustrating, sure, but in the end she’s her own woman and can make her own decisions. She’s sure as hell better off than I am, in either case. I’m not entirely sure what I was thinking when I joined the guard; perhaps I wanted to clean up the streets to keep my little sister safe, but that isn’t really an issue anymore.”</i>", parse);
+					Text.Add("<i>“It’s… frustrating, sure, but in the end she’s her own woman and can make her own decisions. She’s sure as hell better off than I am, in either case. I’m not entirely sure what I was thinking when I joined the guard; perhaps I wanted to clean up the streets to keep my little sister safe, but that isn’t really an issue anymore.”</i>", parse);
 					Text.NL();
-					Text.Add("<i>”I guess that as long as I can do what I like doing - drinking, fighting and having sex - it doesn’t really matter what job I have.”</i> She scratches her head. <i>”Well, this got all reflective and shit. Not really what I intended. Up for some of that sex perhaps?”</i>", parse);
+					Text.Add("<i>“I guess that as long as I can do what I like doing - drinking, fighting and having sex - it doesn’t really matter what job I have.”</i> She scratches her head. <i>“Well, this got all reflective and shit. Not really what I intended. Up for some of that sex perhaps?”</i>", parse);
 					Text.NL();
 					
 					PrintDefaultOptions();
@@ -2718,30 +2718,30 @@ Scenes.Miranda.TalkConquests = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("<i>”You’d like to hear about some of my lovers? I don’t really mind but… wouldn’t you feel jealous?”</i> she asks, grinning suggestively. You assure her that you wouldn’t. <i>”Who to talk about then… so many to choose from.”</i>", parse);
+	Text.Add("<i>“You’d like to hear about some of my lovers? I don’t really mind but… wouldn’t you feel jealous?”</i> she asks, grinning suggestively. You assure her that you wouldn’t. <i>“Who to talk about then… so many to choose from.”</i>", parse);
 	Text.NL();
 	
 	var scenes = [];
 	
 	// Long
 	scenes.push(function() {
-		Text.Add("<i>”Remember when I told you about my first time? This would be back in the slums, before I joined the mercs. I was working down the docks, hauling crates onto ships and so on. He was a cabin boy about my age on one of the ships that pulled in - pretty little thing too - so he wasn’t aware of my ‘extras’.”</i> She grins wolfishly.", parse);
+		Text.Add("<i>“Remember when I told you about my first time? This would be back in the slums, before I joined the mercs. I was working down the docks, hauling crates onto ships and so on. He was a cabin boy about my age on one of the ships that pulled in - pretty little thing too - so he wasn’t aware of my ‘extras’.”</i> She grins wolfishly.", parse);
 		Text.NL();
-		Text.Add("<i>”It was really nice to have someone hit on me for a change. The ship came in from the free cities, so he didn’t really have anything against morphs. Not against cocks either, as it turned out. Well, I had to persuade him a bit, but he eventually came around to seeing things my way. We tried many things together, but I found myself liking pitching way more than I did receiving.”</i>", parse);
+		Text.Add("<i>“It was really nice to have someone hit on me for a change. The ship came in from the free cities, so he didn’t really have anything against morphs. Not against cocks either, as it turned out. Well, I had to persuade him a bit, but he eventually came around to seeing things my way. We tried many things together, but I found myself liking pitching way more than I did receiving.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>”Our thing didn’t last very long, as his ship returned home after a few weeks - I think they made a few short voyages out to the lake fishing or something. Doesn’t really matter. I wasn’t interested in why they were there anyways.”</i>", parse);
+		Text.Add("<i>“Our thing didn’t last very long, as his ship returned home after a few weeks - I think they made a few short voyages out to the lake fishing or something. Doesn’t really matter. I wasn’t interested in why they were there anyways.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>”Pretty sure I had a large impact on him… if nothing else, I have fond memories of him. Couldn’t remember his name for the life of me though.”</i>", parse);
+		Text.Add("<i>“Pretty sure I had a large impact on him… if nothing else, I have fond memories of him. Couldn’t remember his name for the life of me though.”</i>", parse);
 		Text.NL();
 		
 		PrintDefaultOptions();
 	});
 	scenes.push(function() {
-		Text.Add("<i>”After my first time, I kept a steady stream of girlfriends and boyfriends. I was hooked on sex, but I could never keep myself in a relationship very long. Perhaps I’m not cut out for them. Even when I stuck together with someone for a longer period of time, I had flings on the side.”</i>", parse);
+		Text.Add("<i>“After my first time, I kept a steady stream of girlfriends and boyfriends. I was hooked on sex, but I could never keep myself in a relationship very long. Perhaps I’m not cut out for them. Even when I stuck together with someone for a longer period of time, I had flings on the side.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>”Wasn’t very long until I had my first threesome. Actually, there was a girl I had been fucking for a while - a cute catgirl, but a real beast in bed. I caught her cheating on me with some boy, and much to their surprise, rather than being angry with them, I joined in.”</i>", parse);
+		Text.Add("<i>“Wasn’t very long until I had my first threesome. Actually, there was a girl I had been fucking for a while - a cute catgirl, but a real beast in bed. I caught her cheating on me with some boy, and much to their surprise, rather than being angry with them, I joined in.”</i>", parse);
 		Text.NL();
-		Text.Add("The herm sighs, reminiscing of better times. <i>”Kept them up most of the night too; and when we had fucked the kitty silly for hours, using just about every hole she had, I switched over to her boyfriend.”</i> She gives you an evil grin. <i>”Neither of them were walking right the next day, let me tell you.”</i>", parse);
+		Text.Add("The herm sighs, reminiscing of better times. <i>“Kept them up most of the night too; and when we had fucked the kitty silly for hours, using just about every hole she had, I switched over to her boyfriend.”</i> She gives you an evil grin. <i>“Neither of them were walking right the next day, let me tell you.”</i>", parse);
 		Text.NL();
 		Text.Add("And tell you she does, at some length and with flowery detail.", parse);
 		Text.NL();
@@ -2749,28 +2749,28 @@ Scenes.Miranda.TalkConquests = function() {
 		PrintDefaultOptions();
 	});
 	scenes.push(function() {
-		Text.Add("<i>”I’m usually quite forward about my sexuality, domineering even. It took quite a while until I really let someone else lead… not until I had joined the mercs.”</i> She sees your look and waves it off. <i>”No, not one of the Hounds. We were out on a mission to one of the free cities; don’t remember which one. I think it had a port.”</i>", parse);
+		Text.Add("<i>“I’m usually quite forward about my sexuality, domineering even. It took quite a while until I really let someone else lead… not until I had joined the mercs.”</i> She sees your look and waves it off. <i>“No, not one of the Hounds. We were out on a mission to one of the free cities; don’t remember which one. I think it had a port.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>”We had just pushed back a party of raiders, and had captured their leader. He was a minotaur of some kind - damn he was a big fellow, and in more ways than one! The elders wanted to throw him in prison, but I thought that it would be a waste… I had talked to him on the way back to the city, ”</i> Miranda explained. <i>”He wasn’t such a bad sort, really. He and his tribe had been driven out of the mountains, and were just trying to survive. He was quite impressed by the beating I had given him, and told me as much.”</i>", parse);
+		Text.Add("<i>“We had just pushed back a party of raiders, and had captured their leader. He was a minotaur of some kind - damn he was a big fellow, and in more ways than one! The elders wanted to throw him in prison, but I thought that it would be a waste… I had talked to him on the way back to the city, ”</i> Miranda explained. <i>“He wasn’t such a bad sort, really. He and his tribe had been driven out of the mountains, and were just trying to survive. He was quite impressed by the beating I had given him, and told me as much.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>”Since he was my catch, the others didn’t complain when I told the town elders to fuck off and kept him for myself instead. Having suffered public defeat, he had no reason to go back to his tribe, so he decided to follow the one who had beaten him instead. Man, what a beast tho!”</i> she whistles in appreciation. <i>”Our nights were like battles unto themselves, even I had trouble keeping him in check. I was quite surprised when he managed to overpower me and bend me over on all fours, shoving that immense cock of his into my poor pussy. My ass too, actually, he liked to experiment.”</i>", parse);
+		Text.Add("<i>“Since he was my catch, the others didn’t complain when I told the town elders to fuck off and kept him for myself instead. Having suffered public defeat, he had no reason to go back to his tribe, so he decided to follow the one who had beaten him instead. Man, what a beast tho!”</i> she whistles in appreciation. <i>“Our nights were like battles unto themselves, even I had trouble keeping him in check. I was quite surprised when he managed to overpower me and bend me over on all fours, shoving that immense cock of his into my poor pussy. My ass too, actually, he liked to experiment.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>”I found myself going easy on him on purpose, just to see what it felt like to be the one being dominated, for once. Can’t say that I didn’t enjoy being filled by a stud like him… not that it prevented me from returning the favor on occasion.”</i>", parse);
+		Text.Add("<i>“I found myself going easy on him on purpose, just to see what it felt like to be the one being dominated, for once. Can’t say that I didn’t enjoy being filled by a stud like him… not that it prevented me from returning the favor on occasion.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>”We parted ways when our party eventually returned to Rigard. I assume he returned to the mountains to try and create a new tribe.”</i>", parse);
+		Text.Add("<i>“We parted ways when our party eventually returned to Rigard. I assume he returned to the mountains to try and create a new tribe.”</i>", parse);
 		Text.NL();
 		
 		PrintDefaultOptions();
 	});
 	scenes.push(function() {
-		Text.Add("<i>”My promiscuity hasn’t exactly decreased since I joined the watch.”</i> Somehow, that seems an understatement. Had she been even hornier when she was younger, you doubt she would’ve been able to function. <i>”Being the law in town has its perks… I’ve let more than one criminal off easy in exchange for a few favors.”</i>", parse);
+		Text.Add("<i>“My promiscuity hasn’t exactly decreased since I joined the watch.”</i> Somehow, that seems an understatement. Had she been even hornier when she was younger, you doubt she would’ve been able to function. <i>“Being the law in town has its perks… I’ve let more than one criminal off easy in exchange for a few favors.”</i>", parse);
 		Text.NL();
-		Text.Add("She studies your reaction to this. <i>”Understand, I’m not going around letting murderers loose for blowjobs. I wouldn’t release anyone dangerous… but I’ve found that a thorough reaming provides <b>much</b> more incentive for a thief to stay on the right side of the law than a small fine. That, and they know that <b>I</b> know how to find them again.”</i>", parse);
+		Text.Add("She studies your reaction to this. <i>“Understand, I’m not going around letting murderers loose for blowjobs. I wouldn’t release anyone dangerous… but I’ve found that a thorough reaming provides <b>much</b> more incentive for a thief to stay on the right side of the law than a small fine. That, and they know that <b>I</b> know how to find them again.”</i>", parse);
 		Text.NL();
 		if(terry.flags["Met"] >= Terry.Met.Caught) {
 			var req = terry.flags["Saved"] >= Terry.Saved.Saved;
 			parse["t"] = req ? " - Terry, was it" : "";
-			Text.Add("<i>”Case and point, remember that thief that we caught[t]?”</i> You nod. <i>”No one really gives a shit about Krawitz; he’s a small time noble without any real influence. He’s doesn’t exactly have a clear conscience himself, considering the things that were found when searching his mansion. I only intended to show him some… corrective action, perhaps throw him in a cell for a few days as payback for that note. That’d make sure he didn’t stir up trouble in my city again. The little fox would’ve been far better off in my care than in that of the royal guard, believe me.”</i>", parse);
+			Text.Add("<i>“Case and point, remember that thief that we caught[t]?”</i> You nod. <i>“No one really gives a shit about Krawitz; he’s a small time noble without any real influence. He’s doesn’t exactly have a clear conscience himself, considering the things that were found when searching his mansion. I only intended to show him some… corrective action, perhaps throw him in a cell for a few days as payback for that note. That’d make sure he didn’t stir up trouble in my city again. The little fox would’ve been far better off in my care than in that of the royal guard, believe me.”</i>", parse);
 			Text.NL();
 			if(req)
 				Text.Add("You’re not sure Terry would agree with that, but you let it slide. To be sure, he wasn’t in a very happy place when you let him out of prison, but you aren’t sure if he’d be much happier being fucked by Miranda for days on end.", parse);
@@ -2778,7 +2778,7 @@ Scenes.Miranda.TalkConquests = function() {
 				Text.Add("You aren’t really sure if the fox would agree to that. Then again, if what she’s saying is true, he wouldn’t be locked in jail right now - potentially on death row.", parse);
 			Text.NL();
 		}
-		Text.Add("<i>”It’s a peculiar kind of justice, for sure, but it works.”</i> Somehow, you suspect that Miranda is overstating her exploits at bit; if nothing else, you are really doubtful that anyone would let her keep her job for this long if she went around and raped the entire underworld of Rigard on a regular basis.", parse);
+		Text.Add("<i>“It’s a peculiar kind of justice, for sure, but it works.”</i> Somehow, you suspect that Miranda is overstating her exploits at bit; if nothing else, you are really doubtful that anyone would let her keep her job for this long if she went around and raped the entire underworld of Rigard on a regular basis.", parse);
 		Text.NL();
 		
 		PrintDefaultOptions();
@@ -2816,7 +2816,7 @@ Scenes.Miranda.DatingStage3 = function() {
 	world.TimeStep({hour: 1});
 	
 	if(Scenes.Miranda.DatingScore > 1) {
-		Text.Add("<i>”Mm… I can’t wait to get my paws on you, sexy,”</i> Miranda purrs. <i>”Get inside, [stud]! This doggie’s got a bone for you to pick. Any way you want to roll, I’ll roll.”</i>", parse);
+		Text.Add("<i>“Mm… I can’t wait to get my paws on you, sexy,”</i> Miranda purrs. <i>“Get inside, [stud]! This doggie’s got a bone for you to pick. Any way you want to roll, I’ll roll.”</i>", parse);
 		Text.Flush();
 		
 		//[Take charge][Passive][Decline]
@@ -2835,7 +2835,7 @@ Scenes.Miranda.DatingStage3 = function() {
 		options.push({ nameStr : "Passive",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”In a subby mood today, pet?”</i> Miranda grins as you let yourself be led inside, pushing you through the open doorway. <i>”That’s how I like them.”</i> You can feel her stiff member poking you in the back, and suspect you might get into even closer contact with it shortly.", parse);
+				Text.Add("<i>“In a subby mood today, pet?”</i> Miranda grins as you let yourself be led inside, pushing you through the open doorway. <i>“That’s how I like them.”</i> You can feel her stiff member poking you in the back, and suspect you might get into even closer contact with it shortly.", parse);
 				
 				miranda.relation.IncreaseStat(60, 2);
 				
@@ -2846,7 +2846,7 @@ Scenes.Miranda.DatingStage3 = function() {
 		options.push({ nameStr : "Decline",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”That’s really a shame,”</i> Miranda pouts. <i>”Now how am I going to keep concentration on patrol tomorrow? Not even a quickie?”</i>", parse);
+				Text.Add("<i>“That’s really a shame,”</i> Miranda pouts. <i>“Now how am I going to keep concentration on patrol tomorrow? Not even a quickie?”</i>", parse);
 				Text.NL();
 				Text.Add("You shake your head, saying your goodbyes. The herm heads back inside, probably making a beeline for her toy collection. ", parse);
 				if(party.Alone()) {
@@ -2870,7 +2870,7 @@ Scenes.Miranda.DatingStage3 = function() {
 		Gui.SetButtonsFromList(options, false, null);
 	}
 	else if(Scenes.Miranda.DatingScore >= -1) {
-		Text.Add("<i>”You gotta step up your game, [playername]. Tell you what, you still have a shot at saving this date. It involves you, wrapped around my cock,”</i> the dommy herm gives you a sly grin.", parse);
+		Text.Add("<i>“You gotta step up your game, [playername]. Tell you what, you still have a shot at saving this date. It involves you, wrapped around my cock,”</i> the dommy herm gives you a sly grin.", parse);
 		Text.Flush();
 		
 		//[Passive][Decline]
@@ -2889,7 +2889,7 @@ Scenes.Miranda.DatingStage3 = function() {
 		options.push({ nameStr : "Decline",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”If that’s the way you want it, fine. Come see me at the bar when you change your mind.”</i> With that, she turns and slams the door behind her, leaving you on the street outside.", parse);
+				Text.Add("<i>“If that’s the way you want it, fine. Come see me at the bar when you change your mind.”</i> With that, she turns and slams the door behind her, leaving you on the street outside.", parse);
 				miranda.relation.DecreaseStat(0, 1);
 				
 				if(party.Alone()) {
@@ -2913,7 +2913,7 @@ Scenes.Miranda.DatingStage3 = function() {
 		Gui.SetButtonsFromList(options, false, null);
 	}
 	else {
-		Text.Add("<i>”I have something <b>very</b> special in mind for you tonight, my little slut,”</i> Miranda growls through a grin that’s all teeth. <i>”I’m going to give you a ride your body isn’t likely to forget for weeks… are you coming?”</i>", parse);
+		Text.Add("<i>“I have something <b>very</b> special in mind for you tonight, my little slut,”</i> Miranda growls through a grin that’s all teeth. <i>“I’m going to give you a ride your body isn’t likely to forget for weeks… are you coming?”</i>", parse);
 		Text.Flush();
 		
 		//[Follow][Decline]
@@ -2943,7 +2943,7 @@ Scenes.Miranda.DatingStage3 = function() {
 				else
 					Text.Add("You’re not really sure what she’s up to, but it’s bound to be bad news for you.", parse);
 				Text.NL();
-				Text.Add("<i>”Spoilsport,”</i> Miranda grunts, stepping inside and shutting the door behind her as you book it.", parse);
+				Text.Add("<i>“Spoilsport,”</i> Miranda grunts, stepping inside and shutting the door behind her as you book it.", parse);
 				
 				miranda.relation.DecreaseStat(0, 2);
 				
@@ -2980,9 +2980,9 @@ Scenes.Miranda.DatingFirstDocks = function() {
 	
 	Text.Add("Leaving the small garden behind, the two of you head down a well-trodden road, not quite deserted, even at this hour. After a while, you begin to notice the smell of brine and fish, as your steps takes you closer to the dock area. There are large crates lining the sides of large warehouses, mostly empty but sure to be filled with a new catch the next morning. Along the riverside, a minor fleet of small fishing boats lie tied.", parse);
 	Text.NL();
-	Text.Add("<i>”Fish is a major food supply for Rigard,”</i> Miranda explains. <i>”Not only that, but the river provides other treasures.”</i> She points toward a larger barge moored near a giant warehouse, bustling with activity. <i>”It is one of the safer ways to reach the other nations on Eden, and the ocean cities. Traders make regular journeys there, though with the recent surge in attacks from outlaws, they need to hire escorts.”</i>", parse);
+	Text.Add("<i>“Fish is a major food supply for Rigard,”</i> Miranda explains. <i>“Not only that, but the river provides other treasures.”</i> She points toward a larger barge moored near a giant warehouse, bustling with activity. <i>“It is one of the safer ways to reach the other nations on Eden, and the ocean cities. Traders make regular journeys there, though with the recent surge in attacks from outlaws, they need to hire escorts.”</i>", parse);
 	Text.NL();
-	Text.Add("The guardswoman looks to be in her element. <i>”I used to run around here all the time when I was a kid, talking with the sailors and exploring abandoned warehouses. Such good adventures!”</i>", parse);
+	Text.Add("The guardswoman looks to be in her element. <i>“I used to run around here all the time when I was a kid, talking with the sailors and exploring abandoned warehouses. Such good adventures!”</i>", parse);
 	Text.Flush();
 	
 	//[Polite][Rude][Sultry]
@@ -2990,7 +2990,7 @@ Scenes.Miranda.DatingFirstDocks = function() {
 	options.push({ nameStr : "Polite",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>”Hey, you making fun of me?”</i> Miranda growls playfully, nudging you. <i>”I know it doesn’t look like much, but for a kid, there was so much to see and learn. The sailors may seem a bit rough around the edges, but they had much to teach.”</i>", parse);
+			Text.Add("<i>“Hey, you making fun of me?”</i> Miranda growls playfully, nudging you. <i>“I know it doesn’t look like much, but for a kid, there was so much to see and learn. The sailors may seem a bit rough around the edges, but they had much to teach.”</i>", parse);
 			Text.NL();
 			Text.Add("She certainly seems to have picked up their language.", parse);
 			Text.NL();
@@ -3005,7 +3005,7 @@ Scenes.Miranda.DatingFirstDocks = function() {
 	options.push({ nameStr : "Rude",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>”Well… true,”</i> Miranda grudgingly admits. <i>”Still, it’s not that bad. For a little eight-year old, this place was cool as fuck.”</i>", parse);
+			Text.Add("<i>“Well… true,”</i> Miranda grudgingly admits. <i>“Still, it’s not that bad. For a little eight-year old, this place was cool as fuck.”</i>", parse);
 			Text.NL();
 			Scenes.Miranda.DatingFirstMercs();
 		}, enabled : true,
@@ -3014,7 +3014,7 @@ Scenes.Miranda.DatingFirstDocks = function() {
 	options.push({ nameStr : "Sultry",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>”Hey… I think of things other than sex, you know.”</i> Miranda frowns at you. <i>”’Sides, I was just a kid at the time.”</i> Seems like you upset her a bit.", parse);
+			Text.Add("<i>“Hey… I think of things other than sex, you know.”</i> Miranda frowns at you. <i>“’Sides, I was just a kid at the time.”</i> Seems like you upset her a bit.", parse);
 			Text.NL();
 
 			miranda.relation.DecreaseStat(-100, 2);
@@ -3034,9 +3034,9 @@ Scenes.Miranda.DatingFirstMercs = function() {
 	
 	world.TimeStep({minute: 20});
 	
-	Text.Add("<i>”I mentioned escorts, didn’t I?”</i> Miranda murmurs thoughtfully. <i>”Which brings us to this place.”</i> You are standing before a large two-story building at the edge of the docks district, far enough away from it to alleviate the smell slightly, but close enough to have the local water holes within close distance. It looks to be in relatively good shape for the slums, though the thick wooden door is marred with what looks like sword slashes.", parse);
+	Text.Add("<i>“I mentioned escorts, didn’t I?”</i> Miranda murmurs thoughtfully. <i>“Which brings us to this place.”</i> You are standing before a large two-story building at the edge of the docks district, far enough away from it to alleviate the smell slightly, but close enough to have the local water holes within close distance. It looks to be in relatively good shape for the slums, though the thick wooden door is marred with what looks like sword slashes.", parse);
 	Text.NL();
-	Text.Add("<i>”This is home to one of the larger mercenary guilds in Rigard, the Black Hounds. I used to work for them, before I became all nice and proper.”</i> Proper? What was she like before? <i>”As you can see, it’s a rough business. Pay is decent and you get to travel a lot though. All in all, this building probably holds some of the worst scum Rigard has to offer.”</i> You can tell that she means it, but there is a small touch of fondness and pride in her voice.", parse);
+	Text.Add("<i>“This is home to one of the larger mercenary guilds in Rigard, the Black Hounds. I used to work for them, before I became all nice and proper.”</i> Proper? What was she like before? <i>“As you can see, it’s a rough business. Pay is decent and you get to travel a lot though. All in all, this building probably holds some of the worst scum Rigard has to offer.”</i> You can tell that she means it, but there is a small touch of fondness and pride in her voice.", parse);
 	Text.Flush();
 	
 	//[Polite][Rude][Sultry]
@@ -3044,9 +3044,9 @@ Scenes.Miranda.DatingFirstMercs = function() {
 	options.push({ nameStr : "Polite",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>”Nice?”</i> Miranda scoffs. <i>”Did you listen to a word I just said? This place is a cesspool for the lowest criminal scum in the city, anyone who can handle a weapon is welcome to join. Only reason they didn’t try to rape the pretty young doggie’s brains out when she entered was that I had already gotten a bit of a reputation at that point. Anyone brave enough to assault me would end up with a broken arm or two, and be unable to sit properly for a few weeks. I was strong, even back then.”</i>", parse);
+			Text.Add("<i>“Nice?”</i> Miranda scoffs. <i>“Did you listen to a word I just said? This place is a cesspool for the lowest criminal scum in the city, anyone who can handle a weapon is welcome to join. Only reason they didn’t try to rape the pretty young doggie’s brains out when she entered was that I had already gotten a bit of a reputation at that point. Anyone brave enough to assault me would end up with a broken arm or two, and be unable to sit properly for a few weeks. I was strong, even back then.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>”I was glad to leave this shithole behind when better opportunities opened up.”</i>", parse);
+			Text.Add("<i>“I was glad to leave this shithole behind when better opportunities opened up.”</i>", parse);
 			Text.NL();
 			
 			miranda.relation.DecreaseStat(-100, 1);
@@ -3059,9 +3059,9 @@ Scenes.Miranda.DatingFirstMercs = function() {
 	options.push({ nameStr : "Rude",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>”My thoughts exactly. It was nice work. Shame about the crowd I had to hang with though.”</i> There is a wicked smile playing on Miranda’s lips. <i>”I still bump into some of them these days, but usually in work-related matters. Being the law has its perks at times.”</i>", parse);
+			Text.Add("<i>“My thoughts exactly. It was nice work. Shame about the crowd I had to hang with though.”</i> There is a wicked smile playing on Miranda’s lips. <i>“I still bump into some of them these days, but usually in work-related matters. Being the law has its perks at times.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>”Let’s ditch this place anyways, I got better things to do than chat about the old days.”</i>", parse);
+			Text.Add("<i>“Let’s ditch this place anyways, I got better things to do than chat about the old days.”</i>", parse);
 			Text.NL();
 			
 			miranda.relation.IncreaseStat(100, 3);
@@ -3074,9 +3074,9 @@ Scenes.Miranda.DatingFirstMercs = function() {
 	options.push({ nameStr : "Sultry",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>”Very funny, asshole,”</i> she chuckles. <i>”True, though. Not much else to do between missions. Of course, I gave as much as I took, if not more.”</i> The guardswoman looks thoughtful.", parse);
+			Text.Add("<i>“Very funny, asshole,”</i> she chuckles. <i>“True, though. Not much else to do between missions. Of course, I gave as much as I took, if not more.”</i> The guardswoman looks thoughtful.", parse);
 			Text.NL();
-			Text.Add("<i>”Then there was the matter of the reward for finished jobs. Coming from the slums, I didn’t really have a good hand with money anyways, so I tended to accept substitutes at times.”</i> She grins widely at your raised eyebrow. <i>”Got problems with bandits? I’ll fuck them up. Then I’ll come back and fuck you… probably a lot more and a lot rougher than you were hoping for.”</i>", parse);
+			Text.Add("<i>“Then there was the matter of the reward for finished jobs. Coming from the slums, I didn’t really have a good hand with money anyways, so I tended to accept substitutes at times.”</i> She grins widely at your raised eyebrow. <i>“Got problems with bandits? I’ll fuck them up. Then I’ll come back and fuck you… probably a lot more and a lot rougher than you were hoping for.”</i>", parse);
 			Text.NL();
 			
 			miranda.relation.IncreaseStat(100, 1);
@@ -3098,24 +3098,24 @@ Scenes.Miranda.DatingFirstCity = function() {
 	party.location = world.loc.Rigard.Residental.street;
 	world.TimeStep({minute: 20});
 	
-	Text.Add("<i>”Seen enough of the slums to last you for tonight?”</i> The two of you are nearing the outer walls of Rigard, close to the peasants’ gate. ", parse);
+	Text.Add("<i>“Seen enough of the slums to last you for tonight?”</i> The two of you are nearing the outer walls of Rigard, close to the peasants’ gate. ", parse);
 	if(rigard.Visa()) {
 		if(miranda.Attitude() < Miranda.Attitude.Neutral)
-			Text.Add("<i>”That piece of paper they give you won’t help at this hour, but I know a way.”</i> Miranda grins. <i>”’Course, if we run into a patrol, you are on your own buddy.”</i>", parse);
+			Text.Add("<i>“That piece of paper they give you won’t help at this hour, but I know a way.”</i> Miranda grins. <i>“’Course, if we run into a patrol, you are on your own buddy.”</i>", parse);
 		else
-			Text.Add("<i>”You have a pass, right? Not that it matters at this hour. Don’t worry, we’ll use a back gate, bypass the security.”</i>", parse);
+			Text.Add("<i>“You have a pass, right? Not that it matters at this hour. Don’t worry, we’ll use a back gate, bypass the security.”</i>", parse);
 	}
 	else {
 		if(miranda.Attitude() < Miranda.Attitude.Neutral)
-			Text.Add("<i>”You’ll be an interloper, prowling around town illegally,”</i> Miranda almost purrs, a dangerous glint in her eyes. <i>”One could say you are at my mercy...”</i>", parse);
+			Text.Add("<i>“You’ll be an interloper, prowling around town illegally,”</i> Miranda almost purrs, a dangerous glint in her eyes. <i>“One could say you are at my mercy...”</i>", parse);
 		else
-			Text.Add("<i>”I’ll sneak you in. Don’t worry about the guards, I know a gate that isn’t guarded at this time.”</i>", parse);
+			Text.Add("<i>“I’ll sneak you in. Don’t worry about the guards, I know a gate that isn’t guarded at this time.”</i>", parse);
 	}
 	Text.Add(" The guardswoman seems excited as she covertly leads you through a small inconspicuous door - one which you would have never found on your own. A short twisting tunnel later, you make your way into the inner city.", parse);
 	Text.NL();
-	Text.Add("<i>”One of the perks of working for the city watch is that I can afford a house inside the walls. Saves me from most of the regular thugs and thieves that prowl the slums. Then again, the inner city houses a different class of thugs and thieves. Worst of em all up there.”</i> The herm points to the castle looming atop the hill at the center of the city.", parse);
+	Text.Add("<i>“One of the perks of working for the city watch is that I can afford a house inside the walls. Saves me from most of the regular thugs and thieves that prowl the slums. Then again, the inner city houses a different class of thugs and thieves. Worst of em all up there.”</i> The herm points to the castle looming atop the hill at the center of the city.", parse);
 	Text.NL();
-	Text.Add("<i>”It ain’t easy to get a posh job in a town like this as a morph, but I happen to be very good at what I do. And what I do is take out the trash.”</i> She flashes an evil grin full of sharp, pointy teeth. <i>”’Course, someone like me could never get work as an officer. Not that I’d want to sit at a desk pushing papers all day anyways.”</i>", parse);
+	Text.Add("<i>“It ain’t easy to get a posh job in a town like this as a morph, but I happen to be very good at what I do. And what I do is take out the trash.”</i> She flashes an evil grin full of sharp, pointy teeth. <i>“’Course, someone like me could never get work as an officer. Not that I’d want to sit at a desk pushing papers all day anyways.”</i>", parse);
 	Text.NL();
 	if(DEBUG) {
 		Text.Add("<b>TOTAL SCORE: [x]</b>", {x: Scenes.Miranda.DatingScore});
@@ -3131,20 +3131,20 @@ Scenes.Miranda.DatingFirstCity = function() {
 	else {
 		if(miranda.Attitude() < Miranda.Attitude.Neutral) {
 			if(Scenes.Miranda.DatingScore > 0) {
-				Text.Add("<i>”Listen, I might have been a bit harsh on you before,”</i> Miranda grudgingly admits. <i>”I don’t take negative feedback very well… You think I could make it up to you by getting you a city visa? The procedure is rather quick. We can save the fun stuff for later.”</i> She smiles, winking at you.", parse);
+				Text.Add("<i>“Listen, I might have been a bit harsh on you before,”</i> Miranda grudgingly admits. <i>“I don’t take negative feedback very well… You think I could make it up to you by getting you a city visa? The procedure is rather quick. We can save the fun stuff for later.”</i> She smiles, winking at you.", parse);
 				
 				miranda.flags["Attitude"] = Miranda.Attitude.Nice;
 			}
 			else {
-				Text.Add("<i>”Now I’ve got you here, deep within the city and without a visa,”</i> Miranda grins evilly at you. <i>”Wouldn’t it just be shame if one of the guards caught word of this? A good thing you have such a <b>nice</b> friend as me helping you out, isn’t it?”</i>", parse);
+				Text.Add("<i>“Now I’ve got you here, deep within the city and without a visa,”</i> Miranda grins evilly at you. <i>“Wouldn’t it just be shame if one of the guards caught word of this? A good thing you have such a <b>nice</b> friend as me helping you out, isn’t it?”</i>", parse);
 			}
 		}
 		else { // Nice
 			if(Scenes.Miranda.DatingScore < 0) {
-				Text.Add("<i>”I had planned on getting you a city visa while we were here, but I’ve been thinking,”</i> Miranda tells you bluntly. <i>”I’m not really impressed by your performance so far. Frankly, I think you’re a bit of an ass. You can still salvage this if you want to, though.”</i>", parse);
+				Text.Add("<i>“I had planned on getting you a city visa while we were here, but I’ve been thinking,”</i> Miranda tells you bluntly. <i>“I’m not really impressed by your performance so far. Frankly, I think you’re a bit of an ass. You can still salvage this if you want to, though.”</i>", parse);
 			}
 			else {
-				Text.Add("<i>”While we are passing through, I’ll help you get a city visa. It’ll allow you to pass the guards into the city any time you want. The procedure is rather quick. We can save the fun stuff for later.”</i> She smiles, winking at you.", parse);
+				Text.Add("<i>“While we are passing through, I’ll help you get a city visa. It’ll allow you to pass the guards into the city any time you want. The procedure is rather quick. We can save the fun stuff for later.”</i> She smiles, winking at you.", parse);
 			}
 		}
 		Text.NL();
@@ -3156,7 +3156,7 @@ Scenes.Miranda.DatingFirstCity = function() {
 			Text.Add("<b>Acquired citizen’s visa!</b>");
 			rigard.flags["Visa"] = 1;
 			Text.NL();
-			Text.Add("<i>”Now, be sure to come visit often,”</i> your friendly guide urges you. <i>”Lets head somewhere more… comfortable, shall we?”</i>", parse);
+			Text.Add("<i>“Now, be sure to come visit often,”</i> your friendly guide urges you. <i>“Lets head somewhere more… comfortable, shall we?”</i>", parse);
 			Text.Flush();
 			
 			Gui.NextPrompt(Scenes.Miranda.DatingFirstHome);
@@ -3164,13 +3164,13 @@ Scenes.Miranda.DatingFirstCity = function() {
 		else { // nasty or bad score
 			Text.Add("Rather than leading you to the booth, Miranda pulls you into a nearby alleyway. She steps in close, trapping you with her full breasts, a dangerous glint in her eyes.", parse);
 			Text.NL();
-			Text.Add("<i>”Now, listen close. If you’d like me to do you this favor, you’d better do <b>me</b> a favor.”</i> the herm grabs hold of your hand and moves it to her crotch. You can feel her thick cock straining against the leather of her pants.", parse);
+			Text.Add("<i>“Now, listen close. If you’d like me to do you this favor, you’d better do <b>me</b> a favor.”</i> the herm grabs hold of your hand and moves it to her crotch. You can feel her thick cock straining against the leather of her pants.", parse);
 			Text.NL();
 			if(miranda.Attitude() >= Miranda.Attitude.Neutral && Scenes.Miranda.DatingScore < 0) {
-				Text.Add("<i>”Last chance to get on my good side, [boyGirl],”</i> she whispers through clenched teeth, grinding against you. <i>”Get down on your knees and suck like a good little slut, and all is forgiven.”</i>", parse);
+				Text.Add("<i>“Last chance to get on my good side, [boyGirl],”</i> she whispers through clenched teeth, grinding against you. <i>“Get down on your knees and suck like a good little slut, and all is forgiven.”</i>", parse);
 			}
 			else {
-				Text.Add("<i>”You know what I want, my little slut,”</i> she whispers through clenched teeth, grinding against you. <i>”If you ever hope to get that visa, why don’t you try to convince me of your good intentions? Don’t bother with words, your mouth can be put to far better use.”</i>", parse);
+				Text.Add("<i>“You know what I want, my little slut,”</i> she whispers through clenched teeth, grinding against you. <i>“If you ever hope to get that visa, why don’t you try to convince me of your good intentions? Don’t bother with words, your mouth can be put to far better use.”</i>", parse);
 			}
 			Text.Flush();
 			
@@ -3179,18 +3179,18 @@ Scenes.Miranda.DatingFirstCity = function() {
 			options.push({ nameStr : "Blow her",
 				func : function() {
 					Text.Clear();
-					Text.Add("<i>”That’s the spirit,”</i> Miranda purrs as you lower yourself into position. <i>”Swallow your pride. Swallow a lot more.”</i> As she’s talking, she undoes her britches, releasing her stiff red cock. You gulp, getting second thoughts. It looks a lot bigger up close…", parse);
+					Text.Add("<i>“That’s the spirit,”</i> Miranda purrs as you lower yourself into position. <i>“Swallow your pride. Swallow a lot more.”</i> As she’s talking, she undoes her britches, releasing her stiff red cock. You gulp, getting second thoughts. It looks a lot bigger up close…", parse);
 					Text.NL();
-					Text.Add("The dommy herm doesn’t give you a lot of time to contemplate your hastily made choice, quickly prying the pointed tip of her shaft past your lips. <i>”Now, suck!”</i> Not that you have much to say in the matter. She inches her cock further in, leaving a trail of salty pre along your [tongueDesc]. Though you can sense that she’s eager to go all out and fuck your throat, she eases up, letting you do the work.", parse);
+					Text.Add("The dommy herm doesn’t give you a lot of time to contemplate your hastily made choice, quickly prying the pointed tip of her shaft past your lips. <i>“Now, suck!”</i> Not that you have much to say in the matter. She inches her cock further in, leaving a trail of salty pre along your [tongueDesc]. Though you can sense that she’s eager to go all out and fuck your throat, she eases up, letting you do the work.", parse);
 					Text.NL();
 					
 					Sex.Blowjob(player, miranda);
 					miranda.Fuck(miranda.FirstCock(), 2);
 					player.FuckOral(player.Mouth(), miranda.FirstCock(), 2);
 					
-					Text.Add("You dutifully bob your head up and down Miranda’s dick, struggling slightly with her girth. <i>”Yeees, keep it up my little slut. You do want your reward, don’t you? Suck that cock like you mean it!”</i> She keeps up a steady stream of mocking commentary, a bit louder than necessary. You suddenly realize that considering how close you are, the administrator can probably hear everything that she’s saying.", parse);
+					Text.Add("You dutifully bob your head up and down Miranda’s dick, struggling slightly with her girth. <i>“Yeees, keep it up my little slut. You do want your reward, don’t you? Suck that cock like you mean it!”</i> She keeps up a steady stream of mocking commentary, a bit louder than necessary. You suddenly realize that considering how close you are, the administrator can probably hear everything that she’s saying.", parse);
 					Text.NL();
-					Text.Add("<i>”Feel how it throbs?”</i> the guardswoman moans softly, breathing heavily. <i>”I’ve got a big fat load stored up in these balls of mine, bet you want it, don’t you?”</i> She’s not lying. Her large sack is hot to the touch, her cream ready to shoot down your throat. Her shaft is rock hard, twitching as she approaches the height of pleasure. <i>”...Too bad for you!”</i>", parse);
+					Text.Add("<i>“Feel how it throbs?”</i> the guardswoman moans softly, breathing heavily. <i>“I’ve got a big fat load stored up in these balls of mine, bet you want it, don’t you?”</i> She’s not lying. Her large sack is hot to the touch, her cream ready to shoot down your throat. Her shaft is rock hard, twitching as she approaches the height of pleasure. <i>“...Too bad for you!”</i>", parse);
 					Text.NL();
 					Text.Add("Before you have time to react, Miranda withdraws from your mouth, grabbing the back of your head with one hand and jerking herself off with the other. The first blast splashes onto your [tongueDesc], but the following stream is less discriminatory, drenching your face and splattering on your [breastDesc]. The herm rubs the last drops of cum off the tip of her cock on your cheek, before hastily pulling up her pants again.", parse);
 					
@@ -3202,7 +3202,7 @@ Scenes.Miranda.DatingFirstCity = function() {
 					Text.Add("<b>Acquired citizen’s visa!</b>");
 					rigard.flags["Visa"] = 1;
 					Text.NL();
-					Text.Add("<i>”Here you go, a city visa with Miranda’s compliments.”</i> The guardswoman hands over your prize, grinning mockingly. <i>”There is more where that came from too.”</i> Showing mercy on the poor official, she drags you off, heading toward the residential district. Swallowing your shame, you wipe off your face - though after this, you’ll need a long shower before you feel clean again.", parse);
+					Text.Add("<i>“Here you go, a city visa with Miranda’s compliments.”</i> The guardswoman hands over your prize, grinning mockingly. <i>“There is more where that came from too.”</i> Showing mercy on the poor official, she drags you off, heading toward the residential district. Swallowing your shame, you wipe off your face - though after this, you’ll need a long shower before you feel clean again.", parse);
 					Text.Flush();
 					
 					Scenes.Miranda.DatingScore++;
@@ -3214,7 +3214,7 @@ Scenes.Miranda.DatingFirstCity = function() {
 			options.push({ nameStr : "Fuck no",
 				func : function() {
 					Text.Clear();
-					Text.Add("<i>”Your choice.”</i> She shrugs, stepping back. <i>”Just for your information, it was the wrong one.”</i> Looking disappointed, the guardswoman heads off, motioning for you to follow her. Still affronted, you follow her into the residential district.", parse);
+					Text.Add("<i>“Your choice.”</i> She shrugs, stepping back. <i>“Just for your information, it was the wrong one.”</i> Looking disappointed, the guardswoman heads off, motioning for you to follow her. Still affronted, you follow her into the residential district.", parse);
 					Text.Flush();
 					
 					Scenes.Miranda.DatingScore--;
@@ -3247,14 +3247,14 @@ Scenes.Miranda.DatingFirstHome = function() {
 	var options = new Array();
 	
 	if(Scenes.Miranda.DatingScore > 2) {
-		Text.Add("<i>”All good nights come to an end, but this one doesn’t have to end here.”</i> Miranda looks at you suggestively. <i>”You are my kind of [guyGirl], [playername]. Would you like to come inside for a bit of fun?”</i>", parse);
+		Text.Add("<i>“All good nights come to an end, but this one doesn’t have to end here.”</i> Miranda looks at you suggestively. <i>“You are my kind of [guyGirl], [playername]. Would you like to come inside for a bit of fun?”</i>", parse);
 		Text.Flush();
 		
 		//[Take charge][Passive][Decline]
 		options.push({ nameStr : "Take charge",
 			func : function() {
 				Text.Clear();
-				Text.Add("In response, you go in for a kiss, pushing the surprised woman inside. <i>”I wouldn’t do this for just anyone, you know,”</i> Miranda huffs, a faint blush visible on her cheeks. You close the door with your shoulder, glancing around the room.", parse);
+				Text.Add("In response, you go in for a kiss, pushing the surprised woman inside. <i>“I wouldn’t do this for just anyone, you know,”</i> Miranda huffs, a faint blush visible on her cheeks. You close the door with your shoulder, glancing around the room.", parse);
 				Scenes.Miranda.HomeDommySex();
 			}, enabled : miranda.SubDom() - (miranda.Relation() + player.SubDom()) < 0,
 			tooltip : "Heck yeah! Take her for a ride she won’t forget."
@@ -3262,7 +3262,7 @@ Scenes.Miranda.DatingFirstHome = function() {
 		options.push({ nameStr : "Passive",
 			func : function() {
 				Text.Clear();
-				Text.Add("You nod, smiling demurely and waiting for her to make a move. <i>”Just what I want to hear,”</i> Miranda grins as she pulls you inside, slamming the door behind you.", parse);
+				Text.Add("You nod, smiling demurely and waiting for her to make a move. <i>“Just what I want to hear,”</i> Miranda grins as she pulls you inside, slamming the door behind you.", parse);
 				Scenes.Miranda.HomeSubbySex();
 			}, enabled : true,
 			tooltip : "Let her call the shots."
@@ -3270,7 +3270,7 @@ Scenes.Miranda.DatingFirstHome = function() {
 		options.push({ nameStr : "Decline",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”You don’t know what you’re missing.”</i> Miranda gives you a kiss before seeing you off, adding: <i>”You know where to find me, should you change your mind. I had a good time tonight, [playername], I want to show you my appreciation...”</i>", parse);
+				Text.Add("<i>“You don’t know what you’re missing.”</i> Miranda gives you a kiss before seeing you off, adding: <i>“You know where to find me, should you change your mind. I had a good time tonight, [playername], I want to show you my appreciation...”</i>", parse);
 				Text.NL();
 				if(party.Alone())
 					parse["comp"] = "";
@@ -3291,7 +3291,7 @@ Scenes.Miranda.DatingFirstHome = function() {
 		Gui.SetButtonsFromList(options);
 	}
 	else if(Scenes.Miranda.DatingScore >= -2) {
-		Text.Add("<i>”I don’t know about you, but I’m up for a romp. How do you feel about biting the pillow for a few hours?”</i> For all of her nasty talk, you guess she still likes you enough to fuck you. Or perhaps she wants another chance to humiliate you, who knows.", parse);
+		Text.Add("<i>“I don’t know about you, but I’m up for a romp. How do you feel about biting the pillow for a few hours?”</i> For all of her nasty talk, you guess she still likes you enough to fuck you. Or perhaps she wants another chance to humiliate you, who knows.", parse);
 		Text.Flush();
 		
 		//[Get fucked][Decline]
@@ -3299,7 +3299,7 @@ Scenes.Miranda.DatingFirstHome = function() {
 		options.push({ nameStr : "Get fucked",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”Of course you are.”</i> She grins as she pulls you inside, slamming the door behind her. <i>”Had you pinned for a bitch from the moment I saw you.”</i>", parse);
+				Text.Add("<i>“Of course you are.”</i> She grins as she pulls you inside, slamming the door behind her. <i>“Had you pinned for a bitch from the moment I saw you.”</i>", parse);
 				Scenes.Miranda.HomeSubbySex();
 			}, enabled : true,
 			tooltip : "If she’s offering, you’re willing."
@@ -3307,7 +3307,7 @@ Scenes.Miranda.DatingFirstHome = function() {
 		options.push({ nameStr : "Decline",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”You are no fun,”</i> she huffs, <i>”as if I wanted to hang out with you just for your company. Well, fuck off then.”</i> With that, she slams the door in your face. From what you can tell, she’s not used to being turned down.", parse);
+				Text.Add("<i>“You are no fun,”</i> she huffs, <i>“as if I wanted to hang out with you just for your company. Well, fuck off then.”</i> With that, she slams the door in your face. From what you can tell, she’s not used to being turned down.", parse);
 				Text.NL();
 				if(party.Alone()) {
 					Text.Add("You are left standing in the street, wondering what to do next.", parse);
@@ -3330,9 +3330,9 @@ Scenes.Miranda.DatingFirstHome = function() {
 		Gui.SetButtonsFromList(options);
 	}
 	else {
-		Text.Add("<i>”You know, I think I’ve actually changed my mind about you,”</i> Miranda declares, smiling sweetly. <i>”I’ve had <b>such</b> a <b>good</b> time tonight, I’d just <b>love</b> to have you stay over.”</i>", parse);
+		Text.Add("<i>“You know, I think I’ve actually changed my mind about you,”</i> Miranda declares, smiling sweetly. <i>“I’ve had <b>such</b> a <b>good</b> time tonight, I’d just <b>love</b> to have you stay over.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>”I’m so horny right now,”</i> she breathes, pulling you close, <i>”get inside and make love to me, make me scream!”</i> Her cock is straining against her insufficient clothes, rubbing against your thigh.", parse);
+		Text.Add("<i>“I’m so horny right now,”</i> she breathes, pulling you close, <i>“get inside and make love to me, make me scream!”</i> Her cock is straining against her insufficient clothes, rubbing against your thigh.", parse);
 		Text.NL();
 		Text.Add("You’d have to be dead drunk, or perhaps straight up dead, to miss the malevolence in the herm’s eyes. This could end really badly…", parse);
 		Text.Flush();
@@ -3350,9 +3350,9 @@ Scenes.Miranda.DatingFirstHome = function() {
 		options.push({ nameStr : "Decline",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”Well this was a lousy day,”</i> Miranda grumbles. <i>”Ditched on my own doorstep. Well, fuck you too.”</i> She slams the door in your face, leaving you alone on the street. That could have gone better, you suppose. You’re just about to walk off, a bit unfamiliar with the neighbourhood, when you hear a bell ringing loudly. Glancing up, you see that Miranda is watching you from her window, grinning widely as she clangs a small brass bell.", parse);
+				Text.Add("<i>“Well this was a lousy day,”</i> Miranda grumbles. <i>“Ditched on my own doorstep. Well, fuck you too.”</i> She slams the door in your face, leaving you alone on the street. That could have gone better, you suppose. You’re just about to walk off, a bit unfamiliar with the neighbourhood, when you hear a bell ringing loudly. Glancing up, you see that Miranda is watching you from her window, grinning widely as she clangs a small brass bell.", parse);
 				Text.NL();
-				Text.Add("<i>”Bit of a send-off gift,”</i> she purrs. <i>”I’d say the guard will be here in a minute or two. You still got a bit of a head start, if you don’t want to spend the night in a cell.”</i> ", parse);
+				Text.Add("<i>“Bit of a send-off gift,”</i> she purrs. <i>“I’d say the guard will be here in a minute or two. You still got a bit of a head start, if you don’t want to spend the night in a cell.”</i> ", parse);
 				if(rigard.Visa())
 					Text.Add("Even if you’ve done no wrong, better not take the chance of having to put your word against hers. You suspect the guards would be rather biased on the point.", parse);
 				else
@@ -3403,7 +3403,7 @@ Scenes.Miranda.HomeDescFloor2 = function() {
 	Text.NL();
 	Text.Add("You take a moment to survey Miranda’s bedroom. The room looks like it takes up most of the second floor of the building, barring a tiny study. It feels like you’re walking into a warzone. The floor is littered with discarded clothes - some of some of which don’t seem to belong to Miranda - and a generous selection of sex toys.", parse);
 	Text.NL();
-	Text.Add("<i>”See anything that catches your fancy? A girl gotta keep herself entertained, you know.”</i> The guardswoman picks up a particularly girthy dildo, over two inches thick and covered in tiny nubs. <i>”The Shop of Oddities has quite a selection.”</i>", parse);
+	Text.Add("<i>“See anything that catches your fancy? A girl gotta keep herself entertained, you know.”</i> The guardswoman picks up a particularly girthy dildo, over two inches thick and covered in tiny nubs. <i>“The Shop of Oddities has quite a selection.”</i>", parse);
 	Text.NL();
 	Text.Add("Pushed against the wall, there is a huge bed, able to easily hold four or five people. No doubt, it has seen much use during its lifetime. Investigating the room further, you see a small balcony facing the main street, and a window overlooking the alleyway.", parse);
 	
@@ -3432,9 +3432,9 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 	else {
 		var dom = miranda.SubDom() - player.SubDom();
 		if(dom > 0)
-			Text.Add("<i>”Leaving already? I haven’t returned the favor yet,”</i> Miranda moans voluptuously. Perhaps another time. <i>”Stop by again some time… little Miranda is always up to fucking a tight hole.”</i>", parse);
+			Text.Add("<i>“Leaving already? I haven’t returned the favor yet,”</i> Miranda moans voluptuously. Perhaps another time. <i>“Stop by again some time… little Miranda is always up to fucking a tight hole.”</i>", parse);
 		else
-			Text.Add("<i>”Mmm… I like it when you’re rough, [playername],”</i> Miranda moans, fingering herself. <i>”You can come back for more of that <b>any</b> time!”</i>", parse);
+			Text.Add("<i>“Mmm… I like it when you’re rough, [playername],”</i> Miranda moans, fingering herself. <i>“You can come back for more of that <b>any</b> time!”</i>", parse);
 		Text.NL();
 		
 		Gui.Callstack.push(function() {
@@ -3459,7 +3459,7 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 		});
 		
 		if(miranda.Attitude() >= Miranda.Attitude.Neutral && (world.time.hour > 20 || world.time.hour < 4)) {
-			Text.Add("<i>”Ya know? It’s kinda late. Why don’t you stay over? I wouldn’t mind sharing my bed with you. Maybe we can squeeze in a quickie before I have to leave in the morning?”</i> she grins.", parse);
+			Text.Add("<i>“Ya know? It’s kinda late. Why don’t you stay over? I wouldn’t mind sharing my bed with you. Maybe we can squeeze in a quickie before I have to leave in the morning?”</i> she grins.", parse);
 			Text.Flush();
 			
 			//[Stay][Don’t]
@@ -3492,7 +3492,7 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 					Text.Clear();
 					//TODO
 					world.TimeStep({hour: 2});
-					Text.Add("<i>”Pity, I guess I’ll see you around then,”</i> she says, turning to take a nap.", parse);
+					Text.Add("<i>“Pity, I guess I’ll see you around then,”</i> she says, turning to take a nap.", parse);
 					PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Unfortunately the day isn’t over for you. You’ll have to decline."
@@ -3500,7 +3500,7 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 			Gui.SetButtonsFromList(options);
 		}
 		else {
-			Text.Add("<i>”I’m going to rest for a while, you can see yourself out right?”</i> she asks, turning to settle herself in for a more comfortable nap.", parse);
+			Text.Add("<i>“I’m going to rest for a while, you can see yourself out right?”</i> she asks, turning to settle herself in for a more comfortable nap.", parse);
 			PrintDefaultOptions();
 		}
 	}
@@ -3519,7 +3519,7 @@ Scenes.Miranda.HomeDommySex = function() {
 		Scenes.Miranda.HomeDescFloor1();
 	}
 	Text.NL();
-	Text.Add("<i>”How do you want me?”</i> she moans softly in your ear. <i>”Decide quickly, or I might decide myself.”</i> One of her hands trail downwards, pawing at her britches in order to free her stiffening monster cock from its confines.", parse);
+	Text.Add("<i>“How do you want me?”</i> she moans softly in your ear. <i>“Decide quickly, or I might decide myself.”</i> One of her hands trail downwards, pawing at her britches in order to free her stiffening monster cock from its confines.", parse);
 	Text.Flush();
 	
 	var cocksInVag = player.CocksThatFit(miranda.FirstVag(), false, 15);
@@ -3592,7 +3592,7 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 	if(dom < -10)
 		Text.Add("You twirl her around and grope her fuckable ass, whispering into her ear that you have a very special plan for her. Giving her a slap on the butt, you send her off in the direction of the stairs. Walking right behind her, you get a perfect view of your target as you make your way up to the bedroom.", parse);
 	else
-		Text.Add("Smiling coyly, you tease that you have something special in mind for the dommy herm. <i>”And what would that be?”</i> Miranda grins, making a grab for you. You deftly take a step back, luring her after you. Pulling her behind you and barely avoiding her caress, you make your way up the stairs and into her bedroom.", parse);
+		Text.Add("Smiling coyly, you tease that you have something special in mind for the dommy herm. <i>“And what would that be?”</i> Miranda grins, making a grab for you. You deftly take a step back, luring her after you. Pulling her behind you and barely avoiding her caress, you make your way up the stairs and into her bedroom.", parse);
 	if(miranda.flags["Floor"] < 2) {
 		Text.NL();
 		Scenes.Miranda.HomeDescFloor2();
@@ -3601,24 +3601,24 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 		Text.Add(" The room is in as big of a mess as usual, with scattered toys and articles of clothing spread on and around the unmade bed.", parse);
 	}
 	Text.NL();
-	Text.Add("<i>”A bit messy, I know,”</i> Miranda says apologetically, gesturing at the disarray. <i>”Just the way I like it!”</i> She pulls you in for a kiss, fondling your [buttDesc] possessively.", parse);
+	Text.Add("<i>“A bit messy, I know,”</i> Miranda says apologetically, gesturing at the disarray. <i>“Just the way I like it!”</i> She pulls you in for a kiss, fondling your [buttDesc] possessively.", parse);
 	if(dom > 0) {
-		Text.Add(" <i>”So what’s your special plan, hotness? Your lips wrapped around my cock?”</i>", parse);
+		Text.Add(" <i>“So what’s your special plan, hotness? Your lips wrapped around my cock?”</i>", parse);
 		Text.NL();
 		Text.Add("Not exactly.", parse);
 	}
 	else {
-		Text.Add(" <i>”As long as your special plan involves me getting railed, I’m happy.”</i>", parse);
+		Text.Add(" <i>“As long as your special plan involves me getting railed, I’m happy.”</i>", parse);
 		Text.NL();
 		Text.Add("She’s right on the money on this one.", parse);
 	}
 	Text.Add(" Pushing Miranda down onto the bed, you flip her over on all fours. In the blink of an eye, you’ve ripped off the dobie’s britches and panties, baring her well-shaped and gropable butt. Between her rounded cheeks rests your target, her tight little rosebud. May as well introduce yourself.", parse);
 	Text.NL();
-	Text.Add("<i>”O-oh!”</i> the guardswoman yelps as you press your thumb against her anus, announcing your intentions. ", parse);
+	Text.Add("<i>“O-oh!”</i> the guardswoman yelps as you press your thumb against her anus, announcing your intentions. ", parse);
 	if(miranda.sex.rAnal < 5)
-		Text.Add("<i>”Hng… I like anal, but I’m not usually on the receiving end,”</i> she pants.", parse);
+		Text.Add("<i>“Hng… I like anal, but I’m not usually on the receiving end,”</i> she pants.", parse);
 	else
-		Text.Add("<i>”You know how I like it, [playername],”</i> she pants, wiggling her butt enticingly, as she helps you work your finger in.", parse);
+		Text.Add("<i>“You know how I like it, [playername],”</i> she pants, wiggling her butt enticingly, as she helps you work your finger in.", parse);
 	Text.NL();
 	if(!pCock.isStrapon)
 		Text.Add("Whipping out your [multiCockDesc],", parse);
@@ -3627,14 +3627,14 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 	parse["yourbiggest"] = player.NumCocks() > 1 ? " your biggest" : "";
 	Text.Add(" you grind[yourbiggest] shaft between Miranda’s buttcheeks, a promise of what is to come. The herm squirms and whimpers as you hotdog her, your hands gripping her ass tightly.", parse);
 	Text.NL();
-	Text.Add("<i>”L-lube,”</i> she pants, fumbling with a bottle. ", parse);
+	Text.Add("<i>“L-lube,”</i> she pants, fumbling with a bottle. ", parse);
 	if(dom < 0 && Math.random() < 0.5)
 		Text.Add("You swat it away, ignoring her growling complaints as you apply a generous amount of saliva to your [cockDesc], preparing Miranda for penetration with your own natural lubricant. She eye show a hint of hesitance, but she grits her teeth and accepts it.", parse);
 	else
 		Text.Add("You quickly swipe the bottle, pouring nearly all of its contents on your [cockDesc] and down Miranda’s crack. A bit more grinding has her ass ready for action, puckered and eager.", parse);
 	Text.NL();
 	parse["stud"] = dom < -25 ? player.mfTrue("master", "mistress") : "stud";
-	Text.Add("<i>”Well, what are you waiting for, [stud]?”</i> she pants, peeking over her shoulder at you. Whether she’s ready or not, you don’t hesitate as you ram the [cockTip] of your [cockDesc] into her tight anus, quickly breaching her sphincter and thrusting inside. The dommy doberman lets out a squeal as you rub against her prostate on your way into her depths, her own cock twitching between her legs.", parse);
+	Text.Add("<i>“Well, what are you waiting for, [stud]?”</i> she pants, peeking over her shoulder at you. Whether she’s ready or not, you don’t hesitate as you ram the [cockTip] of your [cockDesc] into her tight anus, quickly breaching her sphincter and thrusting inside. The dommy doberman lets out a squeal as you rub against her prostate on your way into her depths, her own cock twitching between her legs.", parse);
 	Text.NL();
 	
 	Sex.Anal(player, miranda);
@@ -3643,9 +3643,9 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 	
 	parse["boyGirl"] = player.mfTrue("boy", "girl");
 	if(dom < 0)
-		Text.Add("<i>”Mmm… claim me, you bad [boyGirl],”</i> the guardswoman moans. <i>”Fuck that ass like it belongs to you!”</i> Her wish is your command.", parse);
+		Text.Add("<i>“Mmm… claim me, you bad [boyGirl],”</i> the guardswoman moans. <i>“Fuck that ass like it belongs to you!”</i> Her wish is your command.", parse);
 	else
-		Text.Add("<i>”Don’t… get too cocky, [playername],”</i> the guardswoman moans. <i>”Next time, it’s your turn to be the - hngh! - bottom.”</i> We’ll see about that.", parse);
+		Text.Add("<i>“Don’t… get too cocky, [playername],”</i> the guardswoman moans. <i>“Next time, it’s your turn to be the - hngh! - bottom.”</i> We’ll see about that.", parse);
 	Text.Add(" You ignore her muffled yips and groans as you plunge your [cockDesc] deeper into her, gritting your teeth as her colon clamps down on your shaft. ", parse);
 	parse["balls"] = player.HasBalls() ? Text.Parse(" as your [ballsDesc] slap against hers", parse) : "";
 	if(pCock.length.Get() < miranda.Butt().capacity.Get() - 10)
@@ -3711,16 +3711,16 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 	Gui.Callstack.push(function() {
 		Text.NL();
 		if(dom < -25) {
-			Text.Add("The doberherm looks to be in absolute bliss, her tongue is lolling out while she pants, eyes rolling to the back of her head. <i>”Having fun?”</i> you ask her.", parse);
+			Text.Add("The doberherm looks to be in absolute bliss, her tongue is lolling out while she pants, eyes rolling to the back of her head. <i>“Having fun?”</i> you ask her.", parse);
 			Text.NL();
-			Text.Add("<i>”You have no idea, [playername]. Oh! I love getting buggered by you.”</i>", parse);
+			Text.Add("<i>“You have no idea, [playername]. Oh! I love getting buggered by you.”</i>", parse);
 			Text.NL();
 			Text.Add("Spoken like a true bitch. Not that you expected any different at this point.", parse);
 			Text.NL();
-			Text.Add("<i>”Hey now, do me good. If I can still walk after this, it’s not a good fuck,”</i> she teases you with a grin. <i>“You made me your bitch, so I hope you’re ready to deal with the responsibility. Give it to me ha-ah!”</i> You silence her with a powerful thrust. That’s enough talking, you got the message already. She wants to get a limp? You’ll give it to her!", parse);
+			Text.Add("<i>“Hey now, do me good. If I can still walk after this, it’s not a good fuck,”</i> she teases you with a grin. <i>“You made me your bitch, so I hope you’re ready to deal with the responsibility. Give it to me ha-ah!”</i> You silence her with a powerful thrust. That’s enough talking, you got the message already. She wants to get a limp? You’ll give it to her!", parse);
 		}
 		else if(dom < 25) {
-			Text.Add("<i>”That all you’ve got? I expected more,”</i> she teases.", parse);
+			Text.Add("<i>“That all you’ve got? I expected more,”</i> she teases.", parse);
 			Text.NL();
 			Text.Add("Since when is she such a huge buttslut? You thought she liked giving more than taking.", parse);
 			Text.NL();
@@ -3731,7 +3731,7 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 		else {
 			Text.Add("Miranda tries to hide her pleasure, but her displeased mask cracks slightly each time you drive into her, plowing her prostate.", parse);
 			Text.NL();
-			Text.Add("<i>”T-think you are so good? I’ve - hngh! - had better,”</i> she pants, squirming and clenching around your [cockDesc]. <i>”If you don’t want to walk out of here bowlegged, you’d better do a thorough job of fucking me!”</i>", parse);
+			Text.Add("<i>“T-think you are so good? I’ve - hngh! - had better,”</i> she pants, squirming and clenching around your [cockDesc]. <i>“If you don’t want to walk out of here bowlegged, you’d better do a thorough job of fucking me!”</i>", parse);
 			Text.NL();
 			Text.Add("Defiant to the end. No matter, you know how to turn her to putty in your hands. To the tune of her mocking, sometimes cursing commentary, you increase your pace.", parse);
 		}
@@ -3865,14 +3865,14 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 		if(knotted) {
 			if(dom < -25) {
 				parse["masterMistress"] = player.mfTrue("master", "mistress");
-				Text.Add("<i>”Knotted like a bitch. Ah, this feels great. ", parse);
+				Text.Add("<i>“Knotted like a bitch. Ah, this feels great. ", parse);
 				if(pCock.isStrapon)
 					Text.Add("Even though pulling it out is going to be a bitch.”</i>", parse);
 				else
 					Text.Add("Gonna have to stay like this till you deflate tough. Not that I mind being stuck with you up my ass, [masterMistress].“</i>", parse);
 			}
 			else if(dom < 25) {
-				Text.Add("<i>”Phew, you went all out on me didn’t you? Normally I’d be mad at you for making me ", parse);
+				Text.Add("<i>“Phew, you went all out on me didn’t you? Normally I’d be mad at you for making me ", parse);
 				if(pCock.isStrapon)
 					Text.Add("go through the pain of having this dildo extracted from my ass", parse);
 				else
@@ -3880,13 +3880,13 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 				Text.Add(", but since the sex was pretty good, I’m gonna let it slide,“</i> she remarks.", parse);
 			}
 			else {
-				Text.Add("<i>”Dammit, [playername]. You just had to go and tie me up didn’t you?”</i> she protests. <i>”That is my thing!”</i>", parse);
+				Text.Add("<i>“Dammit, [playername]. You just had to go and tie me up didn’t you?”</i> she protests. <i>“That is my thing!”</i>", parse);
 				Text.NL();
 				Text.Add("You didn’t hear her complaining while pushing said knot inside. ", parse);
 				if(pCock.isStrapon)
-					Text.Add("<i>”Alright, just give me a chance to rest before you jank this thing out of me.“</i>", parse);
+					Text.Add("<i>“Alright, just give me a chance to rest before you jank this thing out of me.“</i>", parse);
 				else
-					Text.Add("<i>”Heh, fair enough. I guess you won’t take long to deflate, but don’t get used to it.“</i>", parse);
+					Text.Add("<i>“Heh, fair enough. I guess you won’t take long to deflate, but don’t get used to it.“</i>", parse);
 			}
 			Text.NL();
 			parse["real"] = pCock.isStrapon ? "" : ", until your knot finally shrinks back to its usual size";
@@ -3902,11 +3902,11 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 		}
 		Text.NL();
 		if(dom < -25)
-			Text.Add("<i>”Oh I love it when you use me, [playername],”</i> Miranda purrs. <i>”You’ve really put this bitch in her place.”</i>", parse);
+			Text.Add("<i>“Oh I love it when you use me, [playername],”</i> Miranda purrs. <i>“You’ve really put this bitch in her place.”</i>", parse);
 		else if(dom < 25)
-			Text.Add("<i>”Mmm… just give me a call any time you have more ‘special’ plans for me, [playername],”</i> Miranda purrs. <i>”I could grow to like this.”</i>", parse);
+			Text.Add("<i>“Mmm… just give me a call any time you have more ‘special’ plans for me, [playername],”</i> Miranda purrs. <i>“I could grow to like this.”</i>", parse);
 		else
-			Text.Add("<i>”Not too bad, I suppose,”</i> Miranda pants, trying to get her breath back. <i>”Not as good as I would do it, obviously.”</i> That sounds like a challenge.", parse);
+			Text.Add("<i>“Not too bad, I suppose,”</i> Miranda pants, trying to get her breath back. <i>“Not as good as I would do it, obviously.”</i> That sounds like a challenge.", parse);
 		Text.NL();
 		
 		var mCum = miranda.OrgasmCum();
@@ -3961,7 +3961,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 	if(player.SubDom() < 0) {
 		Text.Add("Approaching the bed, you turn back to Miranda and, with a seductive smirk, indicate the bed with one hand, asking her to go ahead and make herself comfortable.", parse);
 		Text.NL();
-		Text.Add("<i>”I like where this is going… don’t keep me waiting now,”</i> she grins sitting down on the bed, legs spread to put her cock on full display.", parse);
+		Text.Add("<i>“I like where this is going… don’t keep me waiting now,”</i> she grins sitting down on the bed, legs spread to put her cock on full display.", parse);
 		Text.NL();
 		Text.Add("Smiling back at her, you lean in and kiss her gently, your fingers moving to tenderly stroke the jutting canine erection between her thighs. Then you place your hands on her shoulders and carefully push her down against the bed, the smile never leaving the morph's face as she immediately wriggles herself into a more comfortable position. You quickly move to undress, carefully placing your [armorDesc] at the base of the bed for easy retrieval, and then climb atop the bed in turn, moving to straddle Miranda.", parse);
 	}
@@ -3969,9 +3969,9 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 		Text.Add("You don't hesitate in leading Miranda towards her bed; her cock really makes a good handle for controlling the dog-morph. Once her hip bumps against the side of the mattress, you release her penis and take her by the shoulders, giving her a gentle but firm push that sends her toppling over onto her back atop the bed. Reaching down, you maneuver her a little to ensure she's more properly on the bed, and then set about removing your own [armorDesc], tossing them casually aside to join the other piles of discarded gear already scattered about the room. Now naked, you waste no time in climbing atop of Miranda, straddling her.", parse);
 	Text.NL();
 	if(dom < -25)
-		Text.Add("Miranda’s hands dart to your hips, gripping you tightly. <i>”You gonna get started or do I have to show you how to take cock?”</i>", parse);
+		Text.Add("Miranda’s hands dart to your hips, gripping you tightly. <i>“You gonna get started or do I have to show you how to take cock?”</i>", parse);
 	else if(dom < 25)
-		Text.Add("<i>”Hey, [playername]? Don’t you think it’s about time you stopped with the teasing and got to good part? My cock is aching for your sweet bum,”</i> she grins.", parse);
+		Text.Add("<i>“Hey, [playername]? Don’t you think it’s about time you stopped with the teasing and got to good part? My cock is aching for your sweet bum,”</i> she grins.", parse);
 	else
 		Text.Add("<i>“Come on now, that’s enough teasing,”</i> she pants. <i>“Have mercy on me, [masterMistress]!”</i>", parse);
 	Text.NL();
@@ -3981,7 +3981,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 	if(dom < -25)
 		Text.Add("The doberman’s hands immediately release you, gripping the sheets instead. <i>“That’s a low blow [playername]. Hope you know what you’re doing, because payback can be a bitch.”</i>", parse);
 	else if(dom < 25)
-		Text.Add("<i>”Taking charge, are you? Alright then. I have a feeling I’m going to enjoy this even if you do,”</i> she grins.", parse);
+		Text.Add("<i>“Taking charge, are you? Alright then. I have a feeling I’m going to enjoy this even if you do,”</i> she grins.", parse);
 	else
 		Text.Add("<i>“Well, you know what I like. So enjoy yourself,”</i> she winks.", parse);
 	Text.NL();
@@ -3993,13 +3993,13 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 	options.push({ nameStr : "Get Lube",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>”Hang on,”</i> she says, reaching for a nearby drawer. She fumbles around with the contents before producing a jar. <i>”Catch!</i> she exclaims as she tosses the jar.", parse);
+			Text.Add("<i>“Hang on,”</i> she says, reaching for a nearby drawer. She fumbles around with the contents before producing a jar. <i>“Catch!</i> she exclaims as she tosses the jar.", parse);
 			Text.NL();
 			Text.Add("You snag it deftly and give it a cursory glance. The brand-name on the bottle reads ‘Easy-in - for when you don't have time to take it easy’. Somehow, that motto is just so Miranda... With a little work, you manage to unscrew the jar-top with just one hand - it's very clear that Miranda uses it regularly. Placing it atop Miranda's stomach, you dig into the well-used interior of the jar, scooping out a generous dollop of pale green ointment, which you then reach around and start to work it into your anus.", parse);
 			Text.NL();
 			Text.Add("Closing your eyes to concentrate, you moan softly as you stroke and caress your anal ring, massaging the lube ointment into its surface, pushing your way inside to ensure a nice internal coating as well. Once satisfied with your own lubing, you remove your fingers from your ass and return them to the jar. This time, you start smearing the fresh dose of lube on Miranda's cock, rubbing up and down to ensure it's well-coated in the slick, smooth ointment.", parse);
 			Text.NL();
-			Text.Add("<i>”Come on! Ditch the lube and get on with it!”</i> the doberman protests impatiently. <i>”Keep teasing me like that and I’ll lose control and just rail you as hard as I can!”</i>", parse);
+			Text.Add("<i>“Come on! Ditch the lube and get on with it!”</i> the doberman protests impatiently. <i>“Keep teasing me like that and I’ll lose control and just rail you as hard as I can!”</i>", parse);
 			Text.NL();
 			Text.Add("You firmly squeeze her balls again to remind her just who is in charge, but you agree with her that it's time for the fun to begin. Placing the cap back atop the lube, you drop it onto a nearby pile of clothes and reposition yourself, slowly sinking down until you can feel Miranda's cock starting to push its way inside your newly lubed ass.", parse);
 			PrintDefaultOptions();
@@ -4013,7 +4013,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 			Text.NL();
 			Text.Add("Several times you repeat the process, stroking Miranda to get nice and slick with her precum, then massaging it into your anal ring, until you deem yourself sufficiently lubed. Playfully you apologise for keeping her waiting, but assure her that it will be well worth it.", parse);
 			Text.NL();
-			Text.Add("<i>”Finally, I was wondering how long you were going to keep me waiting,”</i> she licks her lips.", parse);
+			Text.Add("<i>“Finally, I was wondering how long you were going to keep me waiting,”</i> she licks her lips.", parse);
 			Text.NL();
 			Text.Add("Ready as you'll ever be, you reposition yourself slightly and start to descend, feeling the tip of Miranda's cock first touching, and then piercing your asshole as you drop further and further down.", parse);
 			PrintDefaultOptions();
@@ -4026,9 +4026,9 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 			Text.Add("Still retaining your grip on the herm's balls, you swivel your hips around until you are reverse-straddling her, your face pointing towards Miranda's feet... and, more importantly, her cock. You allow yourself to be seated on her stomach and then lay down, pushing your rear up towards the dog-morph's face and bringing your own face down to be level with Miranda's jutting girl-cock. Sticking out your tongue, you start to gently lap at the ruddy flesh before you, running your tongue up and down its length with smooth motions, painstakingly coating it with your saliva.", parse);
 			Text.NL();
 			if(miranda.SubDom() < -25)
-				Text.Add("<i>”Ah, yes! That feels great [playername]!”</i> she exclaims, tongue lolling out. She looks at your exposed [buttDesc]. An idea comes to her and she puts both hands on your buttcheeks. You consider giving her balls a little squeeze to dissuade her from whatever she’s thinking, but when you feel a wet tongue lapping your buttcrack as she spreads you, you relent. Seems she’s decide to help you lube yourself some too.", parse);
+				Text.Add("<i>“Ah, yes! That feels great [playername]!”</i> she exclaims, tongue lolling out. She looks at your exposed [buttDesc]. An idea comes to her and she puts both hands on your buttcheeks. You consider giving her balls a little squeeze to dissuade her from whatever she’s thinking, but when you feel a wet tongue lapping your buttcrack as she spreads you, you relent. Seems she’s decide to help you lube yourself some too.", parse);
 			else {
-				Text.Add("<i>”Yes! Suck my cock like a proper slut!”</i> she exclaims.", parse);
+				Text.Add("<i>“Yes! Suck my cock like a proper slut!”</i> she exclaims.", parse);
 				Text.NL();
 				Text.Add("You promptly squeeze her balls firmly, reminding her to watch her language.", parse);
 			}
@@ -4053,11 +4053,11 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 				Text.Clear();
 				Text.Add("Shifting your hips slightly, you align Miranda's cock not with your ass, but with your [vagDesc], lowering your body until the heat of it is wafting across her sensitive prickflesh.", parse);
 				Text.NL();
-				Text.Add("<i>”Whoa, I thought we were doing anal… not that I mind getting myself inside that hot pussy of yours.”</i>", parse);
+				Text.Add("<i>“Whoa, I thought we were doing anal… not that I mind getting myself inside that hot pussy of yours.”</i>", parse);
 				Text.NL();
 				Text.Add("Ignoring her, you start to grind your folds against the hot, hard shaft below them, purposefully rubbing and stroking yourself against her, letting her slide through your womanhood but never penetrate you. Each motion smears your own feminine arousal over her dick, and you moan softly at the friction. The sensation gets you more and more excited, ensuring a steady flow of juices across the dog-dick.", parse);
 				Text.NL();
-				Text.Add("<i>”Shit! I need to fuck <b>now</b>! So quit with the teasing,”</i> Miranda pants. You have a feeling she won’t be able to take this much longer without snapping.", parse);
+				Text.Add("<i>“Shit! I need to fuck <b>now</b>! So quit with the teasing,”</i> Miranda pants. You have a feeling she won’t be able to take this much longer without snapping.", parse);
 				Text.NL();
 				Text.Add("Fortunately for her, you feel about ready to proceed yourself. On your next rise up, you move to position yourself so that when your hips lower again, it brings your asshole down to sink over her newly slickened dick.", parse);
 				PrintDefaultOptions();
@@ -4070,22 +4070,22 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 	Gui.Callstack.push(function() {
 		Text.NL();
 		if(player.Butt().virgin) {
-			Text.Add("<i>”So tight! What the… are you a virgin back there by any chance?”</i>, Miranda asks.", parse);
+			Text.Add("<i>“So tight! What the… are you a virgin back there by any chance?”</i>, Miranda asks.", parse);
 			Text.NL();
 			Text.Add("Gritting your teeth as you feel your virginal anus straining around the meaty intruder, you nod your head and confess that you are… or in this case were.", parse);
 			Text.NL();
-			Text.Add("<i>”A-And you picked me to pop your cherry?</i> she asks in disbelief.", parse);
+			Text.Add("<i>“A-And you picked me to pop your cherry?</i> she asks in disbelief.", parse);
 			Text.NL();
 			Text.Add("Forcing another inch of dickflesh inside of you, you moan softly and tell her that's true.", parse);
 			Text.NL();
-			Text.Add("<i>”Aw, now you’re making me embarrassed…”</i> she trails off. <i>“Hmm, alright then, I promise to show you a great time for your first, bring it on,”</i> she licks her lips.", parse);
+			Text.Add("<i>“Aw, now you’re making me embarrassed…”</i> she trails off. <i>“Hmm, alright then, I promise to show you a great time for your first, bring it on,”</i> she licks her lips.", parse);
 			miranda.relation.IncreaseStat(100, 10);
 		}
 		else if(miranda.sex.gAnal < 5) {
-			Text.Add("<i>”Aah! That’s quite the ass you got there [playername]. Damn! You’re gripping me so tightly it’s a wonder I can even move.”</i>", parse);
+			Text.Add("<i>“Aah! That’s quite the ass you got there [playername]. Damn! You’re gripping me so tightly it’s a wonder I can even move.”</i>", parse);
 		}
 		else {
-			Text.Add("<i>”I’ve been inside your butt so many times, and it feels better every time. Careful or I could easily get addicted to your butt,”</i> she chortles jokingly.", parse);
+			Text.Add("<i>“I’ve been inside your butt so many times, and it feels better every time. Careful or I could easily get addicted to your butt,”</i> she chortles jokingly.", parse);
 		}
 		Text.NL();
 		
@@ -4150,40 +4150,40 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 		else {
 			Text.Add("On impulse, you suddenly pull yourself completely free of her dick, hovering your ass just above her jutting glans.", parse);
 			Text.NL();
-			Text.Add("<i>”Hey, get back here! It was just starting to feel good!”</i> Miranda protests, thrusting up in an attempt to penetrate you once more.", parse);
+			Text.Add("<i>“Hey, get back here! It was just starting to feel good!”</i> Miranda protests, thrusting up in an attempt to penetrate you once more.", parse);
 			Text.NL();
 			Text.Add("You delicately lift your [buttDesc] up further, beyond her reach, and chastise her for the thrusts by squeezing her balls until she moans softly in pleasure-pain. Smiling sweetly at her, you instruct her to beg for it, caressing her bloated nuts as you do so.", parse);
 			Text.NL();
 			if(dom < -25) {
-				Text.Add("<i>”Please…”</i>", parse);
+				Text.Add("<i>“Please…”</i>", parse);
 				Text.NL();
 				Text.Add("Please, what, you reply back to her, cupping a hand around one of your [earDesc] for emphasis.", parse);
 				Text.NL();
-				Text.Add("<i>”Please, [masterMistress]! Let me go back inside your tight, hot ass! I need it so bad!”</i> she whines.", parse);
+				Text.Add("<i>“Please, [masterMistress]! Let me go back inside your tight, hot ass! I need it so bad!”</i> she whines.", parse);
 				Text.NL();
 				Text.Add("You purse your lips as if thinking it over, continuing to knead and stroke her balls. After a few long, tense moments, you smile and inform her that, since she asked so nicely, you'll grant her her wish.", parse);
 			}
 			else if(dom < 25) {
-				Text.Add("<i>”Can’t believe you’re going to make me beg,”</i> she replies with a pout, but ultimately resigns. With a sigh she says, <i>“Please, let me fuck your ass.”</i>", parse);
+				Text.Add("<i>“Can’t believe you’re going to make me beg,”</i> she replies with a pout, but ultimately resigns. With a sigh she says, <i>“Please, let me fuck your ass.”</i>", parse);
 				Text.NL();
 				Text.Add("You ask if that's supposed to be her idea of begging.", parse);
 				Text.NL();
-				Text.Add("<i>”I can’t quite get on my knees here! How do you- ack!”</i> You silence her with a soft squeeze, not enough to hurt her just yet, but enough to silence her. Either she can beg like a good puppy, or she can get a serious case of blue balls.", parse);
+				Text.Add("<i>“I can’t quite get on my knees here! How do you- ack!”</i> You silence her with a soft squeeze, not enough to hurt her just yet, but enough to silence her. Either she can beg like a good puppy, or she can get a serious case of blue balls.", parse);
 				Text.NL();
-				Text.Add("She looks at you with disdain for a few seconds, before inhaling and starting, <i>”Please, oh please! Great [playername]! Allow me to fuck your ass! If I don’t I think I’m going to die! So please have mercy!”</i>", parse);
+				Text.Add("She looks at you with disdain for a few seconds, before inhaling and starting, <i>“Please, oh please! Great [playername]! Allow me to fuck your ass! If I don’t I think I’m going to die! So please have mercy!”</i>", parse);
 				Text.NL();
 				Text.Add("You can't help but roll your eyes at her melodrama, fingers tightening in warning against her nuts. But, you suppose it will have to do...", parse);
 			}
 			else {
-				Text.Add("<i>”You gotta be kidding me! It’s enough that I’m letting you run this show, now you want me to beg? Not a chance!”</i> she protests.", parse);
+				Text.Add("<i>“You gotta be kidding me! It’s enough that I’m letting you run this show, now you want me to beg? Not a chance!”</i> she protests.", parse);
 				Text.NL();
 				Text.Add("Then you simply won't finish her off, you reply.", parse);
 				Text.NL();
-				Text.Add("<i>”Oh, Fiiine! But I’m only doing this because you have a really fine ass.”</i>", parse);
+				Text.Add("<i>“Oh, Fiiine! But I’m only doing this because you have a really fine ass.”</i>", parse);
 				Text.NL();
 				Text.Add("Your fingers tap a tattoo against her balls and you remind her that you're waiting to hear some begging.", parse);
 				Text.NL();
-				Text.Add("She clears her throat. <i>”Please, [playername]. Allow me to plow the depths of your [buttDesc]. I can’t stand not being able to deposit my huge load of doggie-cum up your backdoor.”</i>", parse);
+				Text.Add("She clears her throat. <i>“Please, [playername]. Allow me to plow the depths of your [buttDesc]. I can’t stand not being able to deposit my huge load of doggie-cum up your backdoor.”</i>", parse);
 				Text.NL();
 				Text.Add("...Is that really supposed to be begging? You look at her, trying to gauge whether she truly was trying or was simply making a poor joke. You squeeze gently at her nuts, making her bite her lip, but decide to be magnanimous. Besides, your own form is quivering with desire, eager to achieve climax in turn.", parse);
 			}
@@ -4224,11 +4224,11 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 				Text.Add("The two of you lay there in silence, panting for breath, until Miranda speaks up.", parse);
 				Text.NL();
 				if(dom < -25)
-					Text.Add("<i>”Ahh. You’re the best [playername]. I’d never thought getting used like a cheap dildo could feel this good. I’m so glad I get to be your plaything, come use me anytime, anyhow, and anywhere.”</i>", parse);
+					Text.Add("<i>“Ahh. You’re the best [playername]. I’d never thought getting used like a cheap dildo could feel this good. I’m so glad I get to be your plaything, come use me anytime, anyhow, and anywhere.”</i>", parse);
 				else if(dom < 25)
-					Text.Add("<i>”Phew, what a wild ride! You really know how to make a girl feel like a cheap sex toy, huh? Not that I mind. Hard to get mad over all this amazing sex.”</i>", parse);
+					Text.Add("<i>“Phew, what a wild ride! You really know how to make a girl feel like a cheap sex toy, huh? Not that I mind. Hard to get mad over all this amazing sex.”</i>", parse);
 				else
-					Text.Add("<i>”Crap, I didn’t know getting used like that could feel this good. If this is your idea of domming you can dom me anytime, [playername].”</i>", parse);
+					Text.Add("<i>“Crap, I didn’t know getting used like that could feel this good. If this is your idea of domming you can dom me anytime, [playername].”</i>", parse);
 				Text.Flush();
 				
 				world.TimeStep({minute: 30});
@@ -4312,13 +4312,13 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
-		Text.Add("<i>”Like what you see?”</i> Miranda smirks over her shoulder, giving her hips a shake.", parse);
+		Text.Add("<i>“Like what you see?”</i> Miranda smirks over her shoulder, giving her hips a shake.", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>”Huff… look at me, getting all hot and bothered,”</i> Miranda pants shamefully, squirming a bit under your close scrutiny.", parse);
+		Text.Add("<i>“Huff… look at me, getting all hot and bothered,”</i> Miranda pants shamefully, squirming a bit under your close scrutiny.", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>”Hehe… looks like I’m ready for you, love,”</i> Miranda shake her hips, spreading her cheeks with her cunt fully exposed.", parse);
+		Text.Add("<i>“Hehe… looks like I’m ready for you, love,”</i> Miranda shake her hips, spreading her cheeks with her cunt fully exposed.", parse);
 	}, 1.0, function() { return miranda.SubDom() < 0; });
 	scenes.Get();
 	
@@ -4331,7 +4331,7 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 		Text.Add("Her room is in the same disarray as usual; clothes and toys of several varieties strewn all about.", parse);
 	}
 	Text.NL();
-	Text.Add("The herm hops onto the bed, turning to face you with a sultry expression. <i>”Now what, bad [boyGirl]?”</i> she asks, parting her legs slightly. At this angle, all you can see of her crotch is her thick puppy-pecker - grown erect during her ascent - and her balls. This won’t do.", parse);
+	Text.Add("The herm hops onto the bed, turning to face you with a sultry expression. <i>“Now what, bad [boyGirl]?”</i> she asks, parting her legs slightly. At this angle, all you can see of her crotch is her thick puppy-pecker - grown erect during her ascent - and her balls. This won’t do.", parse);
 	Text.NL();
 	
 	var mode;
@@ -4349,7 +4349,7 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 	scenes.AddEnc(function() {
 		Text.Add("She’s a doggie, so there is only one way to go. On all fours, naughty doggie!", parse);
 		Text.NL();
-		Text.Add("<i>”Doggy-style, huh? How clever.”</i> Her words are mocking, but she doesn’t waste time in rolling over, wiggling her butt at you. Miranda plants her knees wide on the bed, giving you full access to her nethers. Her wet slit looks as ready as it’ll ever be.", parse);
+		Text.Add("<i>“Doggy-style, huh? How clever.”</i> Her words are mocking, but she doesn’t waste time in rolling over, wiggling her butt at you. Miranda plants her knees wide on the bed, giving you full access to her nethers. Her wet slit looks as ready as it’ll ever be.", parse);
 		
 		mode = Mode.doggy;
 	}, 1.0, function() { return true; });
@@ -4360,11 +4360,11 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 	Text.Add("You take your time stripping off your gear, taking every chance to tease the guardswoman. Here you are, the high and mighty Miranda begging for you to fuck her. Quite different from her usual dominating facade, isn’t it?", parse);
 	Text.NL();
 	if(dom > 25)
-		Text.Add("<i>”Hey, who’s begging?”</i> she growls, annoyed. <i>”Don’t leave me waiting, I’m getting bored here.”</i>", parse);
+		Text.Add("<i>“Hey, who’s begging?”</i> she growls, annoyed. <i>“Don’t leave me waiting, I’m getting bored here.”</i>", parse);
 	else if(dom > -25)
-		Text.Add("<i>”What I do in my bedroom is my own business,”</i> she retorts. <i>”We’ll, in this case, your business too, I guess.”</i>", parse);
+		Text.Add("<i>“What I do in my bedroom is my own business,”</i> she retorts. <i>“We’ll, in this case, your business too, I guess.”</i>", parse);
 	else
-		Text.Add("<i>”J-just fuck me already,”</i> she growls, blushing fiercely.", parse);
+		Text.Add("<i>“J-just fuck me already,”</i> she growls, blushing fiercely.", parse);
 	Text.NL();
 	if(!pCock.isStrapon) {
 		Text.Add("Freed from [itsTheir] confines, your [multiCockDesc] flop[notS] out, quickly becoming erect as you ravage the horny herm with your eyes. You can hardly wait to plunge inside her sopping wet pussy.", parse);
@@ -4388,11 +4388,11 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 	miranda.FuckVag(miranda.FirstVag(), pCock, 3);
 	
 	if(dom > 25)
-		Text.Add("<i>”Hngh, you call that fucking?”</i> she moans between gritted teeth. <i>”By now, I’d have you - aah! - screaming for more!”</i>", parse);
+		Text.Add("<i>“Hngh, you call that fucking?”</i> she moans between gritted teeth. <i>“By now, I’d have you - aah! - screaming for more!”</i>", parse);
 	else if(dom > -25)
-		Text.Add("<i>”I could - aah! - grow to like this,”</i> she moans. <i>”N-not too bad.”</i>", parse);
+		Text.Add("<i>“I could - aah! - grow to like this,”</i> she moans. <i>“N-not too bad.”</i>", parse);
 	else {
-		Text.Add("<i>”Y-yes! You are way too good, [playername]!”</i> the slutty herm moans. <i>”Make me your bitch, fuck me senseless!”</i>", parse);
+		Text.Add("<i>“Y-yes! You are way too good, [playername]!”</i> the slutty herm moans. <i>“Make me your bitch, fuck me senseless!”</i>", parse);
 		miranda.subDom.DecreaseStat(-50, 1);
 	}
 	Text.NL();
@@ -4419,21 +4419,21 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 	if(mode == Mode.doggy && player.SubDom() > 30) {
 		Text.Add("Just above her ravaged pussy, Miranda’s tight rosebud winks at you. The opportunity is just too good to not take advantage of. Licking your fingers thoroughly, you coat them in a thick layer of saliva to ease your entry.", parse);
 		Text.NL();
-		Text.Add("<i>”Hey, what are you up to back th- Ahh!”</i> Miranda’s question is quickly answered by you thumb digging into her tunnel, prying her anus open. ", parse);
+		Text.Add("<i>“Hey, what are you up to back th- Ahh!”</i> Miranda’s question is quickly answered by you thumb digging into her tunnel, prying her anus open. ", parse);
 		
 		var scenes = new EncounterTable();
 		scenes.AddEnc(function() {
-			Text.Add("<i>”Hngh, think you’re so tough, I can take that easily!”</i> she grunts.", parse);
+			Text.Add("<i>“Hngh, think you’re so tough, I can take that easily!”</i> she grunts.", parse);
 		}, 1.0, function() { return miranda.sex.rAnal > 10; });
 		scenes.AddEnc(function() {
-			Text.Add("<i>”Hey, that’s my schtick,”</i> she complains. <i>”If you keep doing that, you’ll get it back tenfold!”</i>", parse);
+			Text.Add("<i>“Hey, that’s my schtick,”</i> she complains. <i>“If you keep doing that, you’ll get it back tenfold!”</i>", parse);
 			player.subDom.IncreaseStat(0, 1);
 		}, 1.0, function() { return miranda.sex.gAnal > 10; });
 		scenes.AddEnc(function() {
-			Text.Add("<i>”T-thank you for using my butt too,”</i> she pants. <i>”Will you fuck me there if I’m a good girl?”</i>", parse);
+			Text.Add("<i>“T-thank you for using my butt too,”</i> she pants. <i>“Will you fuck me there if I’m a good girl?”</i>", parse);
 		}, 1.0, function() { return miranda.SubDom() < -25; });
 		scenes.AddEnc(function() {
-			Text.Add("<i>”S-such a naughty [boyGirl],”</i> she pants. <i>”I’ll get back at you for that.”</i>", parse);
+			Text.Add("<i>“S-such a naughty [boyGirl],”</i> she pants. <i>“I’ll get back at you for that.”</i>", parse);
 		}, 1.0, function() { return true; });
 		
 		scenes.Get();
@@ -4445,13 +4445,13 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 	}
 	Text.NL();
 	if(dom < -25) {
-		Text.Add("<i>”F-fuck, you are good, [playername]!”</i> Miranda moans. <i>”I need to come so bad, fuck me, hard and deep!”</i>", parse);
+		Text.Add("<i>“F-fuck, you are good, [playername]!”</i> Miranda moans. <i>“I need to come so bad, fuck me, hard and deep!”</i>", parse);
 	}
 	else if(dom < 25) {
-		Text.Add("<i>”Just - haah - keep going like that, [playername],”</i> Miranda begs.", parse);
+		Text.Add("<i>“Just - haah - keep going like that, [playername],”</i> Miranda begs.", parse);
 	}
 	else {
-		Text.Add("<i>”That all you got?”</i> she moans defiantly. <i>”At this rate, I’ll have to - haah! - do it myself!”</i> ", parse);
+		Text.Add("<i>“That all you got?”</i> she moans defiantly. <i>“At this rate, I’ll have to - haah! - do it myself!”</i> ", parse);
 		if(mode == Mode.back)
 			Text.Add("Keeping one hand busy on her cock, Miranda moves her other one to squeeze her boobs, sighing as she pinches her nipples.", parse);
 		else if(mode == Mode.doggy)
@@ -4493,9 +4493,9 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 			Text.Add("You stay like that for a while, recovering in each others arms.", parse);
 			if(loadIn == LoadIn.out || player.NumCocks() > 1) {
 				if(dom > 0)
-					Text.Add(" Miranda has you clean her up by licking your own cum from her matted fur. <i>”Good [boyGirl],”</i> she murmurs, stroking your [hairDesc] gently.", parse);
+					Text.Add(" Miranda has you clean her up by licking your own cum from her matted fur. <i>“Good [boyGirl],”</i> she murmurs, stroking your [hairDesc] gently.", parse);
 				else
-					Text.Add(" Miranda sets to cleaning herself up, meticulously licking the cum from her matted fur. <i>”Would be a shame to have it go to waste,”</i> she murmurs, swallowing greedily.", parse);
+					Text.Add(" Miranda sets to cleaning herself up, meticulously licking the cum from her matted fur. <i>“Would be a shame to have it go to waste,”</i> she murmurs, swallowing greedily.", parse);
 			}
 			Text.Add(" Eventually, you disentangle yourself and set to re-adorning your gear.", parse);
 			Text.NL();
@@ -4560,7 +4560,7 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 				}
 			}
 			Text.NL();
-			Text.Add("<i>”Mmm… nice and thick,”</i> Miranda purrs contentedly.", parse);
+			Text.Add("<i>“Mmm… nice and thick,”</i> Miranda purrs contentedly.", parse);
 			cont();
 		};
 		
@@ -4588,7 +4588,7 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 					if(dom > 25) {
 						Text.Add("You try to pull out your [cockDesc], but quickly meet resistance.", parse);
 						Text.NL();
-						Text.Add("<i>”Oh no you don’t,”</i> she growls, locking her legs around your hips and pulling you back in. <i>”Finish what you started,”</i> she commands, gazing deep into your eyes as you cry out, unleashing your load inside her.", parse);
+						Text.Add("<i>“Oh no you don’t,”</i> she growls, locking her legs around your hips and pulling you back in. <i>“Finish what you started,”</i> she commands, gazing deep into your eyes as you cry out, unleashing your load inside her.", parse);
 					}
 					else
 						Text.Add("You pull out your [cockDesc], just in time to unleash your cum all over the waiting herm. Your load mingles with her own, further coating her in thick, white stripes.", parse);
@@ -4618,7 +4618,7 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 		Gui.SetButtonsFromList(options);
 	}
 	else {
-		Text.Add("<i>”You know how to handle that thing pretty well,”</i> Miranda pants after she’s cooled down a bit. <i>”Perhaps I should add it to my collection.”</i>", parse);
+		Text.Add("<i>“You know how to handle that thing pretty well,”</i> Miranda pants after she’s cooled down a bit. <i>“Perhaps I should add it to my collection.”</i>", parse);
 		cont();
 	}
 }
@@ -4631,11 +4631,11 @@ Scenes.Miranda.HomeSubbySexLeavingFuckedHer = function() {
 	};
 	
 	if(player.sexlevel < 3)
-		Text.Add("<i>”Hope I didn’t wear you out, [lover],”</i> she purrs, giving your butt a slap. <i>”I’m far from done with you.”</i>", parse);
+		Text.Add("<i>“Hope I didn’t wear you out, [lover],”</i> she purrs, giving your butt a slap. <i>“I’m far from done with you.”</i>", parse);
 	else if(player.sexlevel < 6)
-		Text.Add("<i>”Pretty impressive the way you kept up with me back there, [lover],”</i> she says as she stretches. <i>”Been a while since I’ve had such an… energetic fuck buddy.”</i>", parse);
+		Text.Add("<i>“Pretty impressive the way you kept up with me back there, [lover],”</i> she says as she stretches. <i>“Been a while since I’ve had such an… energetic fuck buddy.”</i>", parse);
 	else
-		Text.Add("<i>”Wow, that was intense!”</i> she exclaims, praising your performance. <i>”We’ll be seeing more of each other, and soon.”</i>", parse);
+		Text.Add("<i>“Wow, that was intense!”</i> she exclaims, praising your performance. <i>“We’ll be seeing more of each other, and soon.”</i>", parse);
 	Text.NL();
 	
 	if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry) {
@@ -4675,7 +4675,7 @@ Scenes.Miranda.HomeSubbySexLeavingFuckedHer = function() {
 		});
 		
 		if(miranda.Attitude() >= Miranda.Attitude.Neutral && (world.time.hour > 20 || world.time.hour < 4)) {
-			Text.Add("<i>”Ya know? It’s kinda late. Why don’t you take that off and come back to bed? Maybe we can squeeze in a quickie before I have to leave in the morning?”</i> she grins.", parse);
+			Text.Add("<i>“Ya know? It’s kinda late. Why don’t you take that off and come back to bed? Maybe we can squeeze in a quickie before I have to leave in the morning?”</i> she grins.", parse);
 			Text.Flush();
 			
 			//[Stay][Don’t]
@@ -4708,7 +4708,7 @@ Scenes.Miranda.HomeSubbySexLeavingFuckedHer = function() {
 					Text.Clear();
 					//TODO
 					world.TimeStep({hour: 2});
-					Text.Add("<i>”Pity, I guess I’ll see you around then,”</i> she says, turning to take a nap.", parse);
+					Text.Add("<i>“Pity, I guess I’ll see you around then,”</i> she says, turning to take a nap.", parse);
 					PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Unfortunately the day isn’t over for you. You’ll have to decline."
@@ -4716,7 +4716,7 @@ Scenes.Miranda.HomeSubbySexLeavingFuckedHer = function() {
 			Gui.SetButtonsFromList(options);
 		}
 		else {
-			Text.Add("<i>”I’m going to rest for a while, you can see yourself out right?”</i> she asks, turning to settle herself in for a more comfortable nap.", parse);
+			Text.Add("<i>“I’m going to rest for a while, you can see yourself out right?”</i> she asks, turning to settle herself in for a more comfortable nap.", parse);
 			PrintDefaultOptions();
 		}
 	}
@@ -4740,9 +4740,9 @@ Scenes.Miranda.HomeSubbySex = function() {
 		Text.NL();
 	}
 	if(nasty)
-		Text.Add("<i>”Don’t make me wait, slut,”</i> the horny herm growls. <i>”Naked, <b>now.</b>”</i> In her eagerness she practically rips your [armorDesc] apart, leaving you as nude as the day you were born. <i>”Naked suits you so much better. Only thing I think I’ll add is a pearly necklace.”</i>", parse);
+		Text.Add("<i>“Don’t make me wait, slut,”</i> the horny herm growls. <i>“Naked, <b>now.</b>”</i> In her eagerness she practically rips your [armorDesc] apart, leaving you as nude as the day you were born. <i>“Naked suits you so much better. Only thing I think I’ll add is a pearly necklace.”</i>", parse);
 	else
-		Text.Add("<i>”Enough gawking, lets fuck!”</i> the horny herm exclaims, almost ripping apart your [armorDesc] in her eagerness. In short order, she has relieved you of your gear, leaving you standing nude in her foyer. ", parse);
+		Text.Add("<i>“Enough gawking, lets fuck!”</i> the horny herm exclaims, almost ripping apart your [armorDesc] in her eagerness. In short order, she has relieved you of your gear, leaving you standing nude in her foyer. ", parse);
 	
 	var Loc = {
 		Upstairs   : 0,
@@ -4755,17 +4755,17 @@ Scenes.Miranda.HomeSubbySex = function() {
 		Text.Add("She heads into the main living room, hips swaying seductively.", parse);
 		Text.NL();
 		if(world.time.season >= Season.Autumn)
-			Text.Add("<i>”Let me start a fire, get the chill out of our bones,”</i> Miranda says as she pulls you along, throwing you on the fluffy pelt while she fumbles with flint and iron. In short order, the competent guardswoman has a merry fire going, quickly raising the temperature in the room.", parse);
+			Text.Add("<i>“Let me start a fire, get the chill out of our bones,”</i> Miranda says as she pulls you along, throwing you on the fluffy pelt while she fumbles with flint and iron. In short order, the competent guardswoman has a merry fire going, quickly raising the temperature in the room.", parse);
 		else
-			Text.Add("<i>”Screw foreplay,”</i> Miranda growls, pulling you along and throwing you on top of the fluffy pelt in next to the hearth. <i>”I’m just going to take you here and now!”</i>", parse);
+			Text.Add("<i>“Screw foreplay,”</i> Miranda growls, pulling you along and throwing you on top of the fluffy pelt in next to the hearth. <i>“I’m just going to take you here and now!”</i>", parse);
 		Text.NL();
-		Text.Add("<i>”Listen close,”</i> she says, stalking up to you while tearing her own clothes off, <i>”if you stain the rug, you are gonna lick it up. And trust me, you are going to stain the rug.”</i> She discards her top, letting her large breasts bounce freely. Downstairs, her cock is quickly rising to attention.", parse);
+		Text.Add("<i>“Listen close,”</i> she says, stalking up to you while tearing her own clothes off, <i>“if you stain the rug, you are gonna lick it up. And trust me, you are going to stain the rug.”</i> She discards her top, letting her large breasts bounce freely. Downstairs, her cock is quickly rising to attention.", parse);
 		Text.NL();
 		Text.Add("The dobie has you in her sights, and she’s not going to take no for an answer.", parse);
 		location = Loc.Downstairs;
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>”This way!”</i> she motions imperiously, pulling you along up the stairs to her bedroom. The steep stairway gives you quite the view of Miranda’s supple behind, though it’s still obscured by her tight-fitting clothes. The dobie curses as she fumbles a bit with the door, her tail wagging with excitement. When the guardswoman finally manages to get it open, she practically throws you through the door and into her bedroom.", parse);
+		Text.Add("<i>“This way!”</i> she motions imperiously, pulling you along up the stairs to her bedroom. The steep stairway gives you quite the view of Miranda’s supple behind, though it’s still obscured by her tight-fitting clothes. The dobie curses as she fumbles a bit with the door, her tail wagging with excitement. When the guardswoman finally manages to get it open, she practically throws you through the door and into her bedroom.", parse);
 		
 		if(miranda.flags["Floor"] < 2) {
 			Text.NL();
@@ -4775,11 +4775,11 @@ Scenes.Miranda.HomeSubbySex = function() {
 			Text.Add(" The room is a total mess; not that you expected any different by now.", parse);
 		}
 		Text.NL();
-		Text.Add("<i>”Try to find a dry pillow to bite down on, you’ll need it,”</i> comes Miranda’s mocking voice from behind you, accompanied by a rustling as she sheds her clothes. Turning to face her, you gulp as you are hit by her stunning beauty. The doberman’s toned body has curves in all the right places; from top to toe she’s built like an athlete. Not that you’d expect any less from a guardswoman.", parse);
+		Text.Add("<i>“Try to find a dry pillow to bite down on, you’ll need it,”</i> comes Miranda’s mocking voice from behind you, accompanied by a rustling as she sheds her clothes. Turning to face her, you gulp as you are hit by her stunning beauty. The doberman’s toned body has curves in all the right places; from top to toe she’s built like an athlete. Not that you’d expect any less from a guardswoman.", parse);
 		Text.NL();
 		Text.Add("Taut muscle hiding just below her short, shiny fur. Flat stomach and broad hips that flare out enticingly, giving her an attractive hourglass figure. Her ass is deliciously rounded, just begging to be groped. Up above, her pillowy breasts heave with her breathing, the shiny black nipples capping each mound stiff with arousal. If you had to guess, you’d say she’s about a D-cup. Of course, it’s not like you can hardly ignore the massive knotted shaft sticking out proudly between her legs either.", parse);
 		Text.NL();
-		Text.Add("<i>”Check out the goods all you like,”</i> Miranda quips sultrily, tossing her long hair over her shoulder. <i>”Don’t daydream for too long, though. As you can see, I’m getting kinda antsy.”</i>", parse);
+		Text.Add("<i>“Check out the goods all you like,”</i> Miranda quips sultrily, tossing her long hair over her shoulder. <i>“Don’t daydream for too long, though. As you can see, I’m getting kinda antsy.”</i>", parse);
 		Text.NL();
 		Text.Add("It seems like she has you within her sights, so you better speak up quickly unless you are going to just let her take you. If her wide grin and stiff cock are any judge, she’s itching to have a go at you.", parse);
 		location = Loc.Upstairs;
@@ -4853,25 +4853,25 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 	
 	Text.Clear();
 	if(player.Slut() >= 50) {
-		Text.Add("You give her a seductive smile before turning around, bending over [loc1] and shaking your [buttDesc] enticingly. <i>”My, aren’t we eager,”</i> Miranda purrs, suddenly very close. You can feel her hot breath on your exposed behind as she kneels down, rubbing your cheeks possessively. <i>”And where do you want it?”</i> she asks sultrily.", parse);
+		Text.Add("You give her a seductive smile before turning around, bending over [loc1] and shaking your [buttDesc] enticingly. <i>“My, aren’t we eager,”</i> Miranda purrs, suddenly very close. You can feel her hot breath on your exposed behind as she kneels down, rubbing your cheeks possessively. <i>“And where do you want it?”</i> she asks sultrily.", parse);
 		Text.NL();
-		Text.Add("Moaning in need, you lick one of your fingers, reaching behind your back and thrusting it into your [anusDesc]. <i>”Can’t wait to have your hole reamed, can you, [lover]?”</i> she eggs you on. <i>”I just love slutty [boyGirl]s like you begging me to fuck them!”</i>", parse);
+		Text.Add("Moaning in need, you lick one of your fingers, reaching behind your back and thrusting it into your [anusDesc]. <i>“Can’t wait to have your hole reamed, can you, [lover]?”</i> she eggs you on. <i>“I just love slutty [boyGirl]s like you begging me to fuck them!”</i>", parse);
 		Text.NL();
 		Text.Add("You nod eagerly, holding your cheeks wide for the dobie to do with as she wishes.", parse);
 	}
 	else if(dom > 25) {
-		Text.Add("You bow your head, turning around meekly and bending over [loc1]. Soft steps fall behind you as your mistress stalks closer, a hunter closing in on her prey. <i>”You know just what I want, don’t you?”</i> Miranda purrs, her voice hot on the back of your neck, full of sultry promises. As if it wasn’t clear, she gropes your [buttDesc], her throbbing cock depositing splatters of pre on your back as she grinds it between your cheeks.", parse);
+		Text.Add("You bow your head, turning around meekly and bending over [loc1]. Soft steps fall behind you as your mistress stalks closer, a hunter closing in on her prey. <i>“You know just what I want, don’t you?”</i> Miranda purrs, her voice hot on the back of your neck, full of sultry promises. As if it wasn’t clear, she gropes your [buttDesc], her throbbing cock depositing splatters of pre on your back as she grinds it between your cheeks.", parse);
 		Text.NL();
 		Text.Add("Nodding quickly, you reach back behind you, your [hand]s trembling slightly as you touch her, trailing down her toned stomach and gently caressing her stiff member. The crimson battering ram twitches in your grasp as the dommy dobie bucks her hips impatiently.", parse);
 		Text.NL();
-		Text.Add("<i>”What I want is what you want, so bend over and offer it, [lover],”</i> she growls between gritted teeth. Hurrying to please her, you bury your face in [loc2], spreading your buttcheeks wide for the herm.", parse);
+		Text.Add("<i>“What I want is what you want, so bend over and offer it, [lover],”</i> she growls between gritted teeth. Hurrying to please her, you bury your face in [loc2], spreading your buttcheeks wide for the herm.", parse);
 	}
 	else {
-		Text.Add("She’s going to take what she wants either way, so why not humor her? Smiling seductively, you wave for her to come over, giving your [buttDesc] an inviting slap. <i>”A [manWoman] of my own tastes,”</i> Miranda chuckles, hips swaying as she closes in on you.", parse);
+		Text.Add("She’s going to take what she wants either way, so why not humor her? Smiling seductively, you wave for her to come over, giving your [buttDesc] an inviting slap. <i>“A [manWoman] of my own tastes,”</i> Miranda chuckles, hips swaying as she closes in on you.", parse);
 		Text.NL();
-		Text.Add("<i>”Did you imagine this was what was going to happen when you followed me here?”</i> Miranda murmurs as she cups your cheeks, something wet and stiff poking you in the back. She rubs her breasts against your back, inexorably pushing your forward until you are bent over [loc1].", parse);
+		Text.Add("<i>“Did you imagine this was what was going to happen when you followed me here?”</i> Miranda murmurs as she cups your cheeks, something wet and stiff poking you in the back. She rubs her breasts against your back, inexorably pushing your forward until you are bent over [loc1].", parse);
 		Text.NL();
-		Text.Add("Reaching back to spread your buttcheeks, you admit that you considered it a looming possibility. <i>”You won’t be disappointed, [lover].”</i>", parse);
+		Text.Add("Reaching back to spread your buttcheeks, you admit that you considered it a looming possibility. <i>“You won’t be disappointed, [lover].”</i>", parse);
 	}
 	Text.NL();
 	Text.Add("Presented with such a tempting target, Miranda grasps one of your cheeks roughly while she guides herself to your puckered rosebud. ", parse);
@@ -4880,9 +4880,9 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 	Text.Add("The tip of her mastiff molester pokes at your [anusDesc], rubbing in her sticky pre.", parse);
 	Text.NL();
 	if(nasty)
-		Text.Add("<i>”Mm… seems you’re in luck, I happen to have a small dab of lube left. Who knows, had you come tomorrow I may have had to take you for a dry run, eh?”</i> she jokes - or so you hope - as she splashes a cool liquid along her shaft and leaking between your cheeks. <i>”That ought to be enough, no sense wasting this on someone like you.”</i>", parse);
+		Text.Add("<i>“Mm… seems you’re in luck, I happen to have a small dab of lube left. Who knows, had you come tomorrow I may have had to take you for a dry run, eh?”</i> she jokes - or so you hope - as she splashes a cool liquid along her shaft and leaking between your cheeks. <i>“That ought to be enough, no sense wasting this on someone like you.”</i>", parse);
 	else
-		Text.Add("<i>”Just give me a second… there!”</i> The dobie conjures a bottle of lube from somewhere, spreading a generous amount of its contents on her cock and between your cheeks. <i>”Wouldn’t do to ruin you right away, right? You need to be ready for round two later,”</i> she adds cheerfully.", parse);
+		Text.Add("<i>“Just give me a second… there!”</i> The dobie conjures a bottle of lube from somewhere, spreading a generous amount of its contents on her cock and between your cheeks. <i>“Wouldn’t do to ruin you right away, right? You need to be ready for round two later,”</i> she adds cheerfully.", parse);
 	Text.NL();
 	Text.Add("Deeming you as ready as you’re likely to be, the guardswoman lines herself up, slowly pushing her way inside your [anusDesc]. Thanks to the lube she applied and the pointed tip of her canine cock, the initial entry is somewhat eased. However, you know full well that it’s going to be followed by the better part of a foot of thick dog meat, and that Miranda isn’t one to hold back for the comfort of others.", parse);
 	Text.NL();
@@ -4894,29 +4894,29 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 	Text.Add("Once her head has firmly established its breach in your protesting ass, the herm grabs you by the hips and sinks her knotted dick deeper into you, conquering your colon one inch at a time. You bite down, enduring her rough treatment. As she goes deeper, her cock stirs something within you, a inebriating pleasure roaring out all other thoughts. Overcome by the sensation, you let out a whimpering moan.", parse);
 	Text.NL();
 	if(nasty)
-		Text.Add("<i>”Doesn’t it feel much better to give in to your true nature, my little slut?”</i> Miranda eggs you mockingly as she pushes forward. <i>”There is no one to hide it from here, you can yell at the top of your lungs how much you want to be fucked.”</i>", parse);
+		Text.Add("<i>“Doesn’t it feel much better to give in to your true nature, my little slut?”</i> Miranda eggs you mockingly as she pushes forward. <i>“There is no one to hide it from here, you can yell at the top of your lungs how much you want to be fucked.”</i>", parse);
 	else if(dom > 25) {
-		Text.Add("<i>”How does it feel when your mistress dominates you, my little pet?”</i> Miranda quips, her breath coming in short bursts as she slowly pushes herself forward. <i>”Am I going too slow for you?”</i>", parse);
+		Text.Add("<i>“How does it feel when your mistress dominates you, my little pet?”</i> Miranda quips, her breath coming in short bursts as she slowly pushes herself forward. <i>“Am I going too slow for you?”</i>", parse);
 		Text.NL();
 		Text.Add("You manage to moan an incoherent reply, which the herm probably interprets as encouragement.", parse);
 	}
 	else
-		Text.Add("<i>”Mm, I just love sticking my cock in [guyGirl]s like you!”</i> Miranda moans. <i>”Ngh… just a little bit further… <b>that’s</b> the spot!”</i>", parse);
+		Text.Add("<i>“Mm, I just love sticking my cock in [guyGirl]s like you!”</i> Miranda moans. <i>“Ngh… just a little bit further… <b>that’s</b> the spot!”</i>", parse);
 	Text.NL();
-	Text.Add("<i>”Like that?”</i> she grunts, her even thicker knot finally knocking on your rear entrance. <i>”Tell me, [lover], how do you want it?”</i>", parse);
+	Text.Add("<i>“Like that?”</i> she grunts, her even thicker knot finally knocking on your rear entrance. <i>“Tell me, [lover], how do you want it?”</i>", parse);
 	Text.NL();
 	Text.Add("You squirm a bit, knowing she’ll only accept one response.", parse);
 	Text.Flush();
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
-		Text.Add("<i>”That’s my [boyGirl]!”</i> Miranda commends you, patting you on the butt. <i>”No regrets now, I’m not going to stop until I’m satisfied!”</i> With those words, your fate is sealed. Pulling back her hips, the doberman shifts her position, planting her legs to either side of you, her hands snaking their way in under your [breastDesc]. ", parse);
+		Text.Add("<i>“That’s my [boyGirl]!”</i> Miranda commends you, patting you on the butt. <i>“No regrets now, I’m not going to stop until I’m satisfied!”</i> With those words, your fate is sealed. Pulling back her hips, the doberman shifts her position, planting her legs to either side of you, her hands snaking their way in under your [breastDesc]. ", parse);
 		Text.NL();
 		if(player.FirstBreastRow().Size() > 3)
 			Text.Add("She squishes your boobs together and rests her own on your back, pressing you down into [loc2]. ", parse);
 		Text.Add("For a second, she hovers above you with only her tip lodged inside your stretched asshole, poised to strike.", parse);
 		Text.NL();
-		Text.Add("<i>”Here it comes,”</i> she whispers in your ear sweetly, slamming down her hips hard. You gasp helplessly as all the air is driven from your lungs, the immensely satisfying sense of being full spreading through your nethers.", parse);
+		Text.Add("<i>“Here it comes,”</i> she whispers in your ear sweetly, slamming down her hips hard. You gasp helplessly as all the air is driven from your lungs, the immensely satisfying sense of being full spreading through your nethers.", parse);
 		if(player.FirstCock()) {
 			parse["notS"] = player.NumCocks() > 1 ? "" : "s";
 			Text.Add(" Your [multiCockDesc] flop[notS] around wildly, roused to full mast through the herm’s repeated assault on your prostate.", parse);
@@ -4926,14 +4926,14 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 		Text.NL();
 		Text.Add("Once Miranda has gotten started, there is no respite for your poor sphincter. Here in her own home, she doesn’t have to worry about being interrupted, which likely means she’ll continue fucking you until she collapses. Unfortunately for you, given her stamina, that is going to be a while. From the way she’s reaming you, it seems like she’s trying to fuck you through [loc1].", parse);
 		Text.NL();
-		Text.Add("<i>”Mm, good [boyGirl]! Clench down on my cock!”</i> the dobie growls. ", parse);
+		Text.Add("<i>“Mm, good [boyGirl]! Clench down on my cock!”</i> the dobie growls. ", parse);
 		var bt = player.Butt().Tightness();
 		if(bt < Butt.Tightness.loose)
-			Text.Add("<i>”Fuck you are tight! I love breaking in a new ass!”</i>", parse);
+			Text.Add("<i>“Fuck you are tight! I love breaking in a new ass!”</i>", parse);
 		else if(bt < Butt.Tightness.gaping)
-			Text.Add("<i>”Heh, this isn’t the first time you’ve received a good fucking, is it?”</i>", parse);
+			Text.Add("<i>“Heh, this isn’t the first time you’ve received a good fucking, is it?”</i>", parse);
 		else
-			Text.Add("<i>”Fuck, just what have you stuffed in here? You probably spend all your time as the town mount if you’re gaping as wide as this!”</i>", parse);
+			Text.Add("<i>“Fuck, just what have you stuffed in here? You probably spend all your time as the town mount if you’re gaping as wide as this!”</i>", parse);
 		parse["prostateColon"] = player.FirstCock() ? "prostate" : "colon";
 		Text.Add(" Each word is underlined by another deep thrust, slamming into your [prostateColon] like a piledriver.", parse);
 		Text.NL();
@@ -4952,18 +4952,18 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 		if(player.FirstCock()) {
 			Text.Add("Your [multiCockDesc] [isAre] bobbing freely, fully rigid from your near constant prostate pounding. ", parse);
 			if(nasty)
-				Text.Add("<i>”Just look at [thatThose] pathetic cock[s] of yours, flopping uselessly,”</i> she sneers. <i>”Pity you won’t ever get to use them on me.”</i>", parse);
+				Text.Add("<i>“Just look at [thatThose] pathetic cock[s] of yours, flopping uselessly,”</i> she sneers. <i>“Pity you won’t ever get to use them on me.”</i>", parse);
 			else
-				Text.Add("<i>”Looks like <b>someone</b> likes this,”</i> she huffs, grinning as she strokes your erection[s]. <i>”Would be a shame to let this go to waste, but it’ll have to wait until I’m satisfied.”</i>", parse);
+				Text.Add("<i>“Looks like <b>someone</b> likes this,”</i> she huffs, grinning as she strokes your erection[s]. <i>“Would be a shame to let this go to waste, but it’ll have to wait until I’m satisfied.”</i>", parse);
 			Text.NL();
 		}
 		
 		if(player.FirstVag()) {
-			Text.Add("<i>”Woah, you’re dripping down here!”</i> Miranda exclaims, remarking on your wet cunt. ", parse);
+			Text.Add("<i>“Woah, you’re dripping down here!”</i> Miranda exclaims, remarking on your wet cunt. ", parse);
 			if(nasty)
-				Text.Add("<i>”How convenient, gives me another hole to fuck once I’ve ruined this one,”</i> she adds, her grin seething with playful malice.", parse);
+				Text.Add("<i>“How convenient, gives me another hole to fuck once I’ve ruined this one,”</i> she adds, her grin seething with playful malice.", parse);
 			else
-				Text.Add("<i>”We’ll have to see to this later; can’t have you hobbling around my city smelling like a bitch in heat.”</i>", parse);
+				Text.Add("<i>“We’ll have to see to this later; can’t have you hobbling around my city smelling like a bitch in heat.”</i>", parse);
 			Text.NL();
 		}
 		Text.NL();
@@ -4978,7 +4978,7 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 			if(cum > 6) {
 				Text.Add("Even for you, the discharge is impressive; by the time you’re spent, both of you are covered in thick ropes of sticky cum, and a small pool is spreading around you on [loc2].", parse);
 				Text.NL();
-				Text.Add("<i>”Fuck, that was intense!”</i> Miranda pants, wiping a large glob of your semen from her chin.", parse);
+				Text.Add("<i>“Fuck, that was intense!”</i> Miranda pants, wiping a large glob of your semen from her chin.", parse);
 			}
 			else if(cum > 3) {
 				Text.Add("Your cock[s] make no distinction in [itsTheir] wanton hosing, spreading your semen on both yourself, Miranda and [loc2].", parse);
@@ -4988,7 +4988,7 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 			}
 			if(location == Loc.Downstairs) {
 				Text.NL();
-				Text.Add("<i>”What did I tell you about staining the rug?”</i> the herm growls, a bit miffed at the mess you caused. <i>”Guess I’m not entirely blameless, but let’s continue this upstairs.”</i>", parse);
+				Text.Add("<i>“What did I tell you about staining the rug?”</i> the herm growls, a bit miffed at the mess you caused. <i>“Guess I’m not entirely blameless, but let’s continue this upstairs.”</i>", parse);
 			}
 		}
 		else if(player.FirstVag()) {
@@ -4999,19 +4999,19 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 			parse["legs"] = player.LowerBodyType() != LowerBodyType.Single ? ", your legs wrapped around her" : "";
 			Text.Add("Not even waiting for her knot to deflate, Miranda hoists you up[legs], patting you on the back as she strides towards the stairs. You gulp as you feel the cum inside you roiling about, but the canid buttplug holds, and just a little of it seeps out.", parse);
 			Text.NL();
-			Text.Add("<i>”I’m far from done with you,”</i> she murmurs in your ear, nipping you playfully. Once in her bedroom, she closes the door behind her, still carrying you around.", parse);
+			Text.Add("<i>“I’m far from done with you,”</i> she murmurs in your ear, nipping you playfully. Once in her bedroom, she closes the door behind her, still carrying you around.", parse);
 			
 			if(miranda.flags["Floor"] < 2) {
 				Text.NL();
 				Scenes.Miranda.HomeDescFloor2();
 			}
 			else {
-				Text.Add(" <i>”We’ll probably be at this for a while, let’s clear a space.”</i>", parse);
+				Text.Add(" <i>“We’ll probably be at this for a while, let’s clear a space.”</i>", parse);
 			}
 			Text.NL();
 			Text.Add("Sweeping her scattered toys to the side, the doberwoman throws you on top of the bed, still locked with you hip to hip.", parse);
 			Text.NL();
-			Text.Add("<i>”Now, where were we?”</i> She purrs as she looms over you, her eyes still filled with unsated lust.", parse);
+			Text.Add("<i>“Now, where were we?”</i> She purrs as she looms over you, her eyes still filled with unsated lust.", parse);
 			
 			location = Loc.Upstairs;
 		}
@@ -5039,7 +5039,7 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 			});
 			
 			Text.Clear();
-			Text.Add("It takes a few more minutes until Miranda’s knot finally deflates, though she’s still hard inside you. <i>”Mm… not bad for round one,”</i> she sighs, stretching luxuriously. As she shifts her hips, her knot plops out, the pointed tip of her dick rummaging around your sticky innards. <i>”How about we continue, [lover]?”</i>", parse);
+			Text.Add("It takes a few more minutes until Miranda’s knot finally deflates, though she’s still hard inside you. <i>“Mm… not bad for round one,”</i> she sighs, stretching luxuriously. As she shifts her hips, her knot plops out, the pointed tip of her dick rummaging around your sticky innards. <i>“How about we continue, [lover]?”</i>", parse);
 			Text.NL();
 			if(player.sexlevel < 3) {
 				Text.Add("You’ve still barely recovered from the last bout, but the guardswoman isn’t about to let up for your comfort. She takes you through just about every sex position you can name, and quite a few that you can’t, though you are always on the receiving end.", parse);
@@ -5085,16 +5085,16 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 				miranda.OrgasmCum();
 				player.OrgasmCum(3);
 				
-				Text.Add("<i>”Mm… you’ve got quite the stamina, [lover],”</i> the guardswoman purrs, hugging you tightly as she humps you. <i>”I think I’ll keep you.”</i> It’s several more hours before your coitus finally teter off, and both of you collapse from exhaustion in a sticky heap.", parse);
+				Text.Add("<i>“Mm… you’ve got quite the stamina, [lover],”</i> the guardswoman purrs, hugging you tightly as she humps you. <i>“I think I’ll keep you.”</i> It’s several more hours before your coitus finally teter off, and both of you collapse from exhaustion in a sticky heap.", parse);
 				
 				PrintDefaultOptions();
 			}
 			else { // high sexp
 				Text.Add("In response, you wrap your arms around her, pulling her into a tight embrace. If she looks a little surprised at your reaction, it’s nothing compared to when you flex your trained muscles, clamping down on her cock. ", parse);
 				if(nasty)
-					Text.Add("<i>”Woah, you sure got a slutty ass, [playername]! Can’t wait to get fucked, can you?”</i>", parse);
+					Text.Add("<i>“Woah, you sure got a slutty ass, [playername]! Can’t wait to get fucked, can you?”</i>", parse);
 				else
-					Text.Add("<i>”Oh!”</i> she exclaims. <i>”So eager! Can’t wait to have me pour another load in you?”</i>", parse);
+					Text.Add("<i>“Oh!”</i> she exclaims. <i>“So eager! Can’t wait to have me pour another load in you?”</i>", parse);
 				Text.Add(" Rather than waste more time on idle conversation, you urge her to get started, undulating your hips urgently.", parse);
 				Text.NL();
 				Text.Add("Now that she’s really gotten you going, you are an inexhaustible sex machine, moaning loudly as she slams her hips against yours. You grind your ass back against her, forcibly impaling yourself on her crimson rod. Miranda bites her lip, suddenly looking very focused. When she shows signs of slowing down, you wheel around hopping up on top of her and letting gravity do the work. The dobie cries out as you sink down, her knot slamming home in your overstuffed rectum. You are rewarded with another stomachful of dog seed, further bloating your already swollen belly.", parse);
@@ -5102,7 +5102,7 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 				
 				miranda.OrgasmCum();
 				
-				Text.Add("<i>”Ah, I haven’t cum like that in <b>days</b>,”</i> she pants, trembling as she collapses on her back. Still not satisfied, you start to roll your [hipsDesc], using her massive knot to stimulate you ass. <i>”H-hold on,”</i> she gasps, feeling the situation spiralling out of her control. <i>”I haven’t- Ah!”</i>", parse);
+				Text.Add("<i>“Ah, I haven’t cum like that in <b>days</b>,”</i> she pants, trembling as she collapses on her back. Still not satisfied, you start to roll your [hipsDesc], using her massive knot to stimulate you ass. <i>“H-hold on,”</i> she gasps, feeling the situation spiralling out of her control. <i>“I haven’t- Ah!”</i>", parse);
 				Text.NL();
 				Text.Add("Gyrating your hips wildly, you somehow manage to pull her knot loose again; only to slam yourself back down on it immediately. The guardswoman’s lubricating cum overflowing from your used hole makes the task way easier, but it’s still quite a feat. Using the prone dogmorph like a sex toy, you push yourself toward your second climax, clenching down on her cock like a vice.", parse);
 				if(player.FirstCock())
@@ -5117,7 +5117,7 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 				
 				player.OrgasmCum(3);
 				
-				Text.Add("<i>”Wow, fuck!”</i> Miranda exclaims, tracing a shaking finger down your side. <i>”G-gimme a minute, okay?”</i> You pout a bit, but settle down, waiting for her to recover. Once the dobie gets going again, you do your best to milk her of as much cum as you can, using every technique you know to expertly drain her balls dry. In the end, the experienced herm is unable to keep up with you, reduced to a whimpering heap.", parse);
+				Text.Add("<i>“Wow, fuck!”</i> Miranda exclaims, tracing a shaking finger down your side. <i>“G-gimme a minute, okay?”</i> You pout a bit, but settle down, waiting for her to recover. Once the dobie gets going again, you do your best to milk her of as much cum as you can, using every technique you know to expertly drain her balls dry. In the end, the experienced herm is unable to keep up with you, reduced to a whimpering heap.", parse);
 				Text.NL();
 				Text.Add("You aren’t entirely sure how much time has passed, but you’ve probably been at it for at least a few hours… but you need more, and as you feel her overworked member soften inside your ass, you come to the frustrating realization that perhaps she’ll be unable to give you what you crave. She looks like she’s on the verge of passing out.", parse);
 				Text.NL();
@@ -5140,10 +5140,10 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 							Text.Add(" Why stop at one when there is so many to choose from, though? Your [vagDesc] can no longer endure being left alone, and you shake as you grab onto another thick dildo, jamming it into your remaining orifice.", parse);
 						Text.NL();
 						parse["s"] = player.FirstVag() ? "s" : "";
-						Text.Add("<i>”Wow… you are still going at it? You’re such a slut!”</i> Miranda exclaims, though from her tone, she meant it as a compliment rather than an insult. Flopping over on your side, you give her a show, thrusting the toy[s] into your hole[s] as rapidly as you can. Already, you feel your last, greatest climax building. You look up in a daze as the guardswoman crawls over to you, grabbing the base of the dildo firmly.", parse);
+						Text.Add("<i>“Wow… you are still going at it? You’re such a slut!”</i> Miranda exclaims, though from her tone, she meant it as a compliment rather than an insult. Flopping over on your side, you give her a show, thrusting the toy[s] into your hole[s] as rapidly as you can. Already, you feel your last, greatest climax building. You look up in a daze as the guardswoman crawls over to you, grabbing the base of the dildo firmly.", parse);
 						Text.NL();
 						parse["nasty"] = nasty ? ", suddenly acting uncharacteristically nice" : "";
-						Text.Add("<i>”Here, let me… it’s the least I can do for you,”</i> she murmurs[nasty]. Even drained as she is, the herm can muster quite a bit of strength in her arms, and drills you even harder than you could yourself.", parse);
+						Text.Add("<i>“Here, let me… it’s the least I can do for you,”</i> she murmurs[nasty]. Even drained as she is, the herm can muster quite a bit of strength in her arms, and drills you even harder than you could yourself.", parse);
 						if(player.FirstVag())
 							Text.Add(" Biting your lip, you set to ramming your remaining toy into your [vagDesc], pushing it as deep as it will go.", parse);
 						Text.NL();
@@ -5181,12 +5181,12 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 							Text.Add("Wincing slightly as you dislodge Miranda’s knot from your rectum, you shift your body above her, a massive amount of cum gushing out from your gaping anus and splashing onto her furred stomach. Huffing, you present the herm with your [multiCockDesc].", parse);
 							Text.NL();
 							if(nasty) {
-								Text.Add("<i>”You sly little bitch...”</i> Miranda grunts, averting her gaze when you grind your shaft[s] between her breasts. <i>”Fine,”</i> she mutters, grasping hold of [itThem]. <i>”I’ll get you off if it’ll get you out of my face, okay?”</i>", parse);
+								Text.Add("<i>“You sly little bitch...”</i> Miranda grunts, averting her gaze when you grind your shaft[s] between her breasts. <i>“Fine,”</i> she mutters, grasping hold of [itThem]. <i>“I’ll get you off if it’ll get you out of my face, okay?”</i>", parse);
 								Text.NL();
 								Text.Add("...Huh. She sure agreed to that quickly enough.", parse);
 							}
 							else {
-								Text.Add("<i>”Fuck… you are still hard,”</i> Miranda pouts. You detect a faint hint of… jealousy? Either way, it looks like she grasps the situation… and your cock[s].", parse);
+								Text.Add("<i>“Fuck… you are still hard,”</i> Miranda pouts. You detect a faint hint of… jealousy? Either way, it looks like she grasps the situation… and your cock[s].", parse);
 							}
 							Text.NL();
 							Text.Add("A shiver runs down your body as Miranda’s tongue licks at the [cockTip] of[oneof] your dick[s], lapping up the cream from one of your myriad of previous orgasms. The guardswoman seems to have a little give in her, not just all take. Perhaps your performance convinced her to return the favor.", parse);
@@ -5256,9 +5256,9 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 							Text.NL();
 							Text.Add("You coyly complain that it’s hardly fair for you to have all the fun… shouldn’t she get to have a good time too? ", parse);
 							if(nasty)
-								Text.Add("<i>”W-what? Why you little- ngh!”</i> she stutters, breaking off into a weak moan as you squeeze one of her tits. It doesn’t take much coaxing to convince her. Her eyes are drilling holes in the back of your head, but she’s not complaining anymore; in fact, she actually spreads her legs slightly. Let her keep up her theatrics, but you both know that she wants this as much as you do.", parse);
+								Text.Add("<i>“W-what? Why you little- ngh!”</i> she stutters, breaking off into a weak moan as you squeeze one of her tits. It doesn’t take much coaxing to convince her. Her eyes are drilling holes in the back of your head, but she’s not complaining anymore; in fact, she actually spreads her legs slightly. Let her keep up her theatrics, but you both know that she wants this as much as you do.", parse);
 							else
-								Text.Add("<i>”Fuck… taking advantage of me while I’m down huh,”</i> Miranda huffs grumpily. <i>”Fiiine, if it’ll get you off my ass.”</i> Yes, you’ll get her ass off, you assure her. <i>”Uh...”</i>", parse);
+								Text.Add("<i>“Fuck… taking advantage of me while I’m down huh,”</i> Miranda huffs grumpily. <i>“Fiiine, if it’ll get you off my ass.”</i> Yes, you’ll get her ass off, you assure her. <i>“Uh...”</i>", parse);
 							Text.NL();
 							Text.Add("Not wishing to waste any more time, you place[oneof] your [multiCockDesc] at the panting herm’s backdoor. You’re going to pay her back in plenty for the last few hours… and claim your own reward. Using some of her own cum from her slick member, you lube yourself up and thrust forward. ", parse);
 							if(player.NumCocks() > 1) {
@@ -5281,11 +5281,11 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 							
 							Text.NL();
 							if(dom > 25)
-								Text.Add("<i>”You… cocky, fucking, bastard!”</i> she grunts in time with your thrusts. <i>”I’ll, get, you, back for this… if you don’t make me cum soon!”</i>", parse);
+								Text.Add("<i>“You… cocky, fucking, bastard!”</i> she grunts in time with your thrusts. <i>“I’ll, get, you, back for this… if you don’t make me cum soon!”</i>", parse);
 							else if(dom > -25)
-								Text.Add("<i>”Mm… good, there’s still some fire left in you!”</i> she huffs, grinning at you. <i>”Just a bit more… ngh!”</i>", parse);
+								Text.Add("<i>“Mm… good, there’s still some fire left in you!”</i> she huffs, grinning at you. <i>“Just a bit more… ngh!”</i>", parse);
 							else
-								Text.Add("<i>”Yeah, give it to me, [masterMistress]!”</i> she moans unabashedly, gyrating her hips in order to meet your thrusts. <i>”Punish your little disobedient bitch!”</i>", parse);
+								Text.Add("<i>“Yeah, give it to me, [masterMistress]!”</i> she moans unabashedly, gyrating her hips in order to meet your thrusts. <i>“Punish your little disobedient bitch!”</i>", parse);
 							Text.NL();
 							Text.Add("After a while, you filter out her voice and only listen to her body. In the language of rough sex, it’s screaming ‘fuck me!’ out loud, her hips grinding against yours and her legs wrapping tightly around your waist. You are only too happy to comply. With one final burst of energy, you push toward a mutual climax, rutting wildly into the guardswoman.", parse);
 							Text.NL();
@@ -5410,16 +5410,16 @@ Scenes.Miranda.TavernSexBackroomPrompt = function() {
 	Text.Clear();
 	if(miranda.Attitude() > Miranda.Attitude.Neutral) {
 		if(dom > 25)
-			Text.Add("<i>”Feel like using your favorite chewing toy, huh? Let’s go then,”</i> Miranda says, getting up and shaking her butt teasingly at you as she walks towards the backrooms.", parse);
+			Text.Add("<i>“Feel like using your favorite chewing toy, huh? Let’s go then,”</i> Miranda says, getting up and shaking her butt teasingly at you as she walks towards the backrooms.", parse);
 		else
-			Text.Add("<i>”Sounds like a nice idea, come on,”</i> she says, patting your back and pushing you towards the backrooms. Grinding against your back so you can feel her hardening shaft.", parse);
+			Text.Add("<i>“Sounds like a nice idea, come on,”</i> she says, patting your back and pushing you towards the backrooms. Grinding against your back so you can feel her hardening shaft.", parse);
 	}
 	else
-		Text.Add("<i>”Can’t get enough of little Miranda, can you? Not a problem, I can accommodate.”</i> Miranda promptly hauls you off your seat and takes you to the back rooms.", parse);
+		Text.Add("<i>“Can’t get enough of little Miranda, can you? Not a problem, I can accommodate.”</i> Miranda promptly hauls you off your seat and takes you to the back rooms.", parse);
 	Text.Add(" Selecting an empty room, Miranda leads you inside and steps away, allowing you to close the door. Since there's no lock, you make do and grab a nearby chair, barricading the door as an impromptu privacy measure.", parse);
 	if(miranda.Attitude() >= Miranda.Attitude.Neutral) {
 		parse["m"] = dom > 50 ? player.mfTrue(", master", ", mistress") : "";
-		Text.Add(" <i>”Well, here we are, so what now[m]?”</i>", parse);
+		Text.Add(" <i>“Well, here we are, so what now[m]?”</i>", parse);
 		Text.Flush();
 		
 		var cocksInVag = player.CocksThatFit(miranda.FirstVag(), false, 15);
@@ -5456,7 +5456,7 @@ Scenes.Miranda.TavernSexBackroomPrompt = function() {
 	}
 	// TODO: Variations for dommy sex (other scenes)
 	else { // nasty
-		Text.Add("<i>”Alright, slut. Strip up and get on your knees. Little Miranda wants a kiss.”</i>", parse);
+		Text.Add("<i>“Alright, slut. Strip up and get on your knees. Little Miranda wants a kiss.”</i>", parse);
 		Text.NL();
 		if(player.SubDom() > 0)
 			Text.Add("...Does she really need to keep calling you a slut? How much dick do you need to suck before she'll forgive you? Still, you'd be lying if you said the thought was unattractive...", parse);
@@ -5496,80 +5496,80 @@ Scenes.Miranda.TavernSexBackroomSubbyVag = function(cocks) {
 		Text.Add(". The two of you pant in unison, until Miranda finally breaks the silence.", parse);
 		Text.NL();
 		if(dom > 50) {
-			Text.Add("<i>”Used and tied like a bitch,”</i> she groans. <i>“We should do that more often,”</i> she chuckles.", parse);
+			Text.Add("<i>“Used and tied like a bitch,”</i> she groans. <i>“We should do that more often,”</i> she chuckles.", parse);
 			if(cum > 3)
-				Text.Add(" <i>”But damn, you really packed me full,”</i> she rubs her belly.", parse);
-			Text.Add(" <i>”I guess no one is going to question my ownership after this one.”</i>", parse);
+				Text.Add(" <i>“But damn, you really packed me full,”</i> she rubs her belly.", parse);
+			Text.Add(" <i>“I guess no one is going to question my ownership after this one.”</i>", parse);
 			Text.NL();
 			parse["swollen"] = cum > 3 ? " swollen" : "";
 			Text.Add("They most certainly aren't, you declare, and pat her[swollen] stomach possessively for emphasis.", parse);
 			Text.NL();
-			Text.Add("Miranda clenches around you, drawing a groan and a bit more of cum from you. <i>”Hey, I felt that. You’re not holding out on me are you, [masterMistress]?”</i>", parse);
+			Text.Add("Miranda clenches around you, drawing a groan and a bit more of cum from you. <i>“Hey, I felt that. You’re not holding out on me are you, [masterMistress]?”</i>", parse);
 			Text.NL();
 			Text.Add("Certainly not, you assure her, you gave her everything you could give her. That's just a little something that slipped your notice.", parse);
 			Text.NL();
-			Text.Add("The doberherm chuckles at your statement. <i>”That better be so, cuz knot or no knot, you’re not going anywhere till your balls are drained dry,”</i> she clenches again for emphasis.", parse);
+			Text.Add("The doberherm chuckles at your statement. <i>“That better be so, cuz knot or no knot, you’re not going anywhere till your balls are drained dry,”</i> she clenches again for emphasis.", parse);
 			Text.NL();
 			Text.Add("Your whole body shudders in response. That's nothing less than what you'd expect of Miranda, you tell her.", parse);
 		}
 		else if(dom < -25) {
-			Text.Add("<i>”Hmm, if anyone told me getting tied with a fat knot was good before, I’d have laughed them off, but I do say this feels great. You’re really stretching me up here, [playername].”</i>", parse);
+			Text.Add("<i>“Hmm, if anyone told me getting tied with a fat knot was good before, I’d have laughed them off, but I do say this feels great. You’re really stretching me up here, [playername].”</i>", parse);
 			Text.NL();
 			if(player.SubDom() > 0)
 				Text.Add("Grinning to yourself at her statement, you give her thigh an affectionate pat and tell her that you always knew she'd like it if she gave it a chance.", parse);
 			else
 				Text.Add("Affectionately, you kiss the back of her neck and scratch the base of her ears, telling her how happy you are to make her feel good like this. It sure feels good to catch on occasion, now doesn't it?", parse);
 			Text.NL();
-			Text.Add("<i>”Hey, don’t get cocky now. I could always introduce <b>you</b> to <b>my</b> knot.”</i>", parse);
+			Text.Add("<i>“Hey, don’t get cocky now. I could always introduce <b>you</b> to <b>my</b> knot.”</i>", parse);
 			Text.NL();
 			Text.Add("She most certainly could do that... but not for a while, you note, shifting your hips to wriggle your swollen knot for emphasis, making her moan as the fleshy bulb tugs at her interior, but refuses to give even an inch.", parse);
 			Text.NL();
-			Text.Add("<i>”Lucky you,”</i> she comments with a grin.", parse);
+			Text.Add("<i>“Lucky you,”</i> she comments with a grin.", parse);
 		}
 		else {
-			Text.Add("Miranda sighs, <i>”I must say that I’m not used to being the one getting knotted.”</i>", parse);
+			Text.Add("Miranda sighs, <i>“I must say that I’m not used to being the one getting knotted.”</i>", parse);
 			Text.NL();
 			if(player.SubDom() > 0) {
 				Text.Add("Well, a change is good for her, you quip. Besides, she's not really going to say she's not liking this, is she? Because you can feel the way she's clamping down, grinding your knot between her walls, and you know her body's just loving having this thick piece of meat stretching it out.", parse);
 				Text.NL();
 				parse["muffAss"] = player.FirstVag() ? "muff" : "ass";
-				Text.Add("<i>”Fancy choice of words, [playername]. Don’t get used to this. Next time it might as well as be my knot up your [muffAss].”</i>", parse);
+				Text.Add("<i>“Fancy choice of words, [playername]. Don’t get used to this. Next time it might as well as be my knot up your [muffAss].”</i>", parse);
 			}
 			else {
 				Text.Add("You ask her if it's really all that bad to have you tied to her like this, to having you pinned inside of her and at her mercy until your own flesh lets you go.", parse);
 				Text.NL();
-				Text.Add("<i>”Bad? No, I don’t think it’s bad. But I’d prefer to be the one doing the tying.”</i>", parse);
+				Text.Add("<i>“Bad? No, I don’t think it’s bad. But I’d prefer to be the one doing the tying.”</i>", parse);
 			}
 			Text.Add(" You tell her that you'll keep that in mind, then nestle yourself against her, making yourself comfortable for the duration.", parse);
 		}
 		Text.NL();
 		Text.Add("It takes the better part of an hour before you’ve finally shrunken enough to pull out of Miranda’s used cunt. A small stream of seed following after your cock as you withdraw with a wet squelch.", parse);
 		Text.NL();
-		Text.Add("<i>”Shit, now I feel empty.”</i>", parse);
+		Text.Add("<i>“Shit, now I feel empty.”</i>", parse);
 		Text.NL();
 		Text.Add("Well, if ever she decides she'd like to feel full again, you're certainly available to fill her up, you reply.", parse);
 		
 		world.TimeStep({minute: 40});
 	}
 	else {
-		Text.Add("Miranda sighs in pleasure as she lays down on the cushions below. <i>”You really know how to treat a lady, [playername],”</i> she grins.", parse);
+		Text.Add("Miranda sighs in pleasure as she lays down on the cushions below. <i>“You really know how to treat a lady, [playername],”</i> she grins.", parse);
 		Text.NL();
 		if(dom > 50) {
-			Text.Add("<i>”Like a cheap sex toy,”</i> she adds.", parse);
+			Text.Add("<i>“Like a cheap sex toy,”</i> she adds.", parse);
 			Text.NL();
 			Text.Add("Just how she loves being treated, you quip back, playfully tussling her ears for emphasis.", parse);
 			Text.NL();
-			Text.Add("<i>”Only by you, [masterMistress],”</i> she quips back. <i>”You should come use me more often. It’s kinda hard to go back to using dildos after tasting your [cockDesc].”</i>", parse);
+			Text.Add("<i>“Only by you, [masterMistress],”</i> she quips back. <i>“You should come use me more often. It’s kinda hard to go back to using dildos after tasting your [cockDesc].”</i>", parse);
 			Text.NL();
 			Text.Add("Your Miranda has gotten quite spoiled, hasn't she? Still, you tell her that you'll think about it...", parse);
 		}
 		else if(dom > -25) {
-			Text.Add("<i>”My pussy’s gotten quite the workout, we should do this more.”</i>", parse);
+			Text.Add("<i>“My pussy’s gotten quite the workout, we should do this more.”</i>", parse);
 			Text.NL();
 			Text.Add("Well, you're certainly willing whenever she is, you reply.", parse);
 		}
 		else {
-			Text.Add("<i>”Can’t say I’m used to not being in control, but it did feel nice. I wouldn’t be against a second round.”</i>", parse);
+			Text.Add("<i>“Can’t say I’m used to not being in control, but it did feel nice. I wouldn’t be against a second round.”</i>", parse);
 			Text.NL();
 			Text.Add("Neither would you, you promptly respond.", parse);
 		}
@@ -5626,7 +5626,7 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 		miranda.subDom.DecreaseStat(-75, 2);
 		player.subDom.IncreaseStat(75, 1);
 		
-		Text.Add("<i>”Pretty rump, huh? If that’s your wish I’ll gladly show you my ‘pretty rump’.”</i> Slowly she removes her leather pants. First she lets you catch a glimpse of her [mcockDesc], already rock hard from your earlier foreplay, but you don’t get to see much of it. Miranda rolls around, deliberately getting on all fours and raising her butt so you can see it being uncovered in all its glory. Her stubby tail wags as her leather pants fall to her knees, a pair of hands moving back to play with her buttcheeks. Her doggy snatch is already sopping wet, making her enjoyment crystal clear as she says, <i>”My pretty rump, as requested, my [lordLady],”</i> she says with a chuckle, clearly enjoying herself.", parse);
+		Text.Add("<i>“Pretty rump, huh? If that’s your wish I’ll gladly show you my ‘pretty rump’.”</i> Slowly she removes her leather pants. First she lets you catch a glimpse of her [mcockDesc], already rock hard from your earlier foreplay, but you don’t get to see much of it. Miranda rolls around, deliberately getting on all fours and raising her butt so you can see it being uncovered in all its glory. Her stubby tail wags as her leather pants fall to her knees, a pair of hands moving back to play with her buttcheeks. Her doggy snatch is already sopping wet, making her enjoyment crystal clear as she says, <i>“My pretty rump, as requested, my [lordLady],”</i> she says with a chuckle, clearly enjoying herself.", parse);
 		Text.NL();
 		Text.Add("Now that's an invitation you wouldn't dream of not accepting. In a few brisk motions you have covered the distance separating the pair of you, your hands reaching out to fondle her ass. Lecherously you stroke the firmly toned, delightfully rounded cheeks, your own arousal growing with each motion. Playfully, you swipe at her buttocks with the palms of your hands, mock-spanking her in order to feel the firmness under your hands, as well as eliciting a few moans from the dog-morph.", parse);
 		Text.NL();
@@ -5634,12 +5634,12 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 		Text.NL();
 		Text.Add("Roughly you pull her ass up against your crotch, letting her feel your [cockDesc] as it rubs and grinds through the canyon of her buttock cleavage, your own hands already moving to her studded leather top. Impatiently you pull at it, anxious to rid her off the unnecessary garment, and finally you manage to pull it free and hurl it aside to join her leather pants. Still hotdogging her ass, you hoist her back against your [breastDesc], letting her feel  your body pressed against hers even as your hands reach around her front and clutch at her tits. The large, rounded orbs squish most enticingly under your fingers, further spurring you to grope and squeeze. From the rumbling groan that vibrates against your chest, and the way Miranda's nipples pebble under your palms, she's enjoying your ministrations almost as much as you are.", parse);
 		Text.NL();
-		Text.Add("<i>”Ohm, that’s great but I’m hungry for something else, something meatier.”</i> She grinds back against you. <i>”You’re not thinking of making poor Miranda beg, are you?”</i> she playfully teases.", parse);
+		Text.Add("<i>“Ohm, that’s great but I’m hungry for something else, something meatier.”</i> She grinds back against you. <i>“You’re not thinking of making poor Miranda beg, are you?”</i> she playfully teases.", parse);
 		Text.NL();
 		parse["juicy"] = p1Cock.isStrapon ? " juicy" : "";
 		Text.Add("Well, now that she mentions it... Your fingers reach for her pleasure-stiffened nipples, pinching them between forefinger and thumb and twisting them with purposeful motions, drawing a throaty moan from the dog-morph. With a smile on your lips, you lean closer to her doberman-like ears and croon into them, asking her who's a good little slut-puppy. Miranda wriggles against you, biting her lip and refusing to answer, but you don't let that stop you. Instead, you assure her in delight that she's a good slut-puppy, before asking if the horny bitch wants herself a nice[juicy] [cockDesc] treat.", parse);
 		Text.NL();
-		Text.Add("Whatever reservations she’s had about admitting her enjoyment of your teases disappears at the promise of a treat. She grinds back, panting as she declares, <i>”Oh yes! Miranda wants her treat! Please, please give me my treat, pleeeeease?”</i> she intones with a whine.", parse);
+		Text.Add("Whatever reservations she’s had about admitting her enjoyment of your teases disappears at the promise of a treat. She grinds back, panting as she declares, <i>“Oh yes! Miranda wants her treat! Please, please give me my treat, pleeeeease?”</i> she intones with a whine.", parse);
 		Text.NL();
 		Text.Add("Well, if she insists... Holding onto her breasts for support, you slide your hips back to line up your [cockTip] with her womanhood and then push forward. ", parse);
 		if(miranda.sex.rVag == 0)
@@ -5658,7 +5658,7 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 		Text.NL();
 		Text.Add("Before she can think to push back against you, you straddle her, nestling your [cockDesc] right on her butt-cleavage and draping yourself across her back, hands reaching around her front to grope and maul at her tits. You hold yourself there, playing with the dober-herm's D-cups, grinding your [cockDesc] through her ass-cheeks with each thrust of your hips.", parse);
 		Text.NL();
-		Text.Add("<i>”Hey now, we never agreed on buttsex! Especially with me on the receiving end!”</i> she protests playfully.", parse);
+		Text.Add("<i>“Hey now, we never agreed on buttsex! Especially with me on the receiving end!”</i> she protests playfully.", parse);
 		Text.NL();
 		Text.Add("Well, isn't she lucky that you had something else in mind, then? Moving your hips back, you draw your [cockTip] down her asscrack, over her puckered ring and into alignment with her womanhood, then start pushing yourself into the hot, tight folds.", parse);
 	}
@@ -5667,7 +5667,7 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 		miranda.subDom.DecreaseStat(-30, 1);
 		player.subDom.IncreaseStat(25, 1);
 		
-		Text.Add("<i>”You want it, come and get it,”</i> she says crossing her arms.", parse);
+		Text.Add("<i>“You want it, come and get it,”</i> she says crossing her arms.", parse);
 		Text.NL();
 		Text.Add("Now that's certainly not going to discourage you. Crossing the distance between you, you reach out and remove her armor. Fortunately, though she doesn't outright help you in doing so, Miranda certainly doesn't fight you either. In fact, as your fingers dart quickly over her bosom, stealing lustful caresses of her nipples, then glide down over her stomach to goose her ass, you can see her smirking in amusement at your antics.", parse);
 		Text.NL();
@@ -5675,7 +5675,7 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 		Text.NL();
 		Text.Add("Miranda's evidently caught onto your plans because she shifts slightly for better support, tail wagging lazily as she does so even as she cranes her neck to look at you over her shoulder.", parse);
 		Text.NL();
-		Text.Add("<i>”You’re lucky I like you. I wouldn’t let anyone else push me around like that. So you’d better satisfy me or I’m going to have to pay you back,”</i> she says, wiggling her butt.", parse);
+		Text.Add("<i>“You’re lucky I like you. I wouldn’t let anyone else push me around like that. So you’d better satisfy me or I’m going to have to pay you back,”</i> she says, wiggling her butt.", parse);
 		Text.NL();
 		Text.Add("That, you reply, certainly isn't going to be a problem. You know just how to give her what she's craving.", parse);
 		if(player.SubDom() > 25)
@@ -5688,7 +5688,7 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 	miranda.FuckVag(miranda.FirstVag(), player.FirstCock(), 3);
 	player.Fuck(player.FirstCock(), 3);
 	
-	Text.Add("<i>”Yes! Oh yeah!”</i> she moans, tongue lolling out as you fill her with your [cockDesc].", parse);
+	Text.Add("<i>“Yes! Oh yeah!”</i> she moans, tongue lolling out as you fill her with your [cockDesc].", parse);
 	if(player.NumCocks() > 1)
 		Text.Add(" Your other [multiCockDesc2] poking and sliding against her full balls.", parse);
 	else if(player.HasBalls())
@@ -5696,7 +5696,7 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 	Text.NL();
 	Text.Add("You give her a moment to adjust to the feeling of your girth stretching her out, and then get down to the matter at hand. Resting your own weight atop her for support, you draw your hips back as far as you can, making your [cockDesc] almost pop free of her cunt, and then slam it back home as far and as hard as you can, rocking her whole body with the impact.", parse);
 	Text.NL();
-	Text.Add("Your hands close around her tits, cupping and squeezing, pinching at her nipples even as your hips saw back and forth, plunging and thrusting as you fuck her as hard and as fast as you can. All Miranda can do is moan and bark in delight as you fuck her silly. Her tongue’s lolling out, drooling on the cushions below as you ram her unlike she’s ever been reamed. <i>”Yeah. Just like tha- Oh!”</i> she cries out as you hit her g-spot. <i>”Fuck! Right there! Don’t you dare stop [playername]!”</i>", parse);
+	Text.Add("Your hands close around her tits, cupping and squeezing, pinching at her nipples even as your hips saw back and forth, plunging and thrusting as you fuck her as hard and as fast as you can. All Miranda can do is moan and bark in delight as you fuck her silly. Her tongue’s lolling out, drooling on the cushions below as you ram her unlike she’s ever been reamed. <i>“Yeah. Just like tha- Oh!”</i> she cries out as you hit her g-spot. <i>“Fuck! Right there! Don’t you dare stop [playername]!”</i>", parse);
 	Text.NL();
 	Text.Add("You have no intention of stopping, and do your best to pick up the pace as you ream her cunt for all you're worth. Struck by a mischievous impulse, your hands abandon her tits, sliding down her belly towards her jutting foot-long cock. Sure enough, it's drooling worse than her tongue is, and you soon find your cupped hands filled with thick, musky Miranda-precum. As quickly as you can, you transfer your dripping hands back to her tits, massaging her own sex-juices into the fur as a makeshift lotion, your hands sliding nicely over the slickened bosom.", parse);
 	Text.NL();
@@ -5740,19 +5740,19 @@ Scenes.Miranda.TavernSexSubbyVag = function(cocks) {
 		if(dom > 25) {
 			Text.Add("As you stroke and hump, you tell Miranda that she belongs to you; she might be top dog among the guards, but to you, she's just your bitch. Now she's going to be a good little doggie and cum for you, nice and messy.", parse);
 			Text.NL();
-			Text.Add("A growl of pleasure rumbles out of Miranda's throat, her back arching under you. <i>”Nnng... y-yes, yes [masterMistress]!”</i> she barks gleefully in response.", parse);
+			Text.Add("A growl of pleasure rumbles out of Miranda's throat, her back arching under you. <i>“Nnng... y-yes, yes [masterMistress]!”</i> she barks gleefully in response.", parse);
 		}
 		else if(dom > -25) {
 			Text.Add("And to think, she always goes on about being top dog. Well, it looks like there's a new top dog in town, you comment, even as you continue your ministrations.", parse);
 			Text.NL();
-			Text.Add("<i>”Don’t get cocky just because I’m letting you- Oooh! -do me.”</i>", parse);
+			Text.Add("<i>“Don’t get cocky just because I’m letting you- Oooh! -do me.”</i>", parse);
 			Text.NL();
 			Text.Add("Just shut up and cum for me already, you retort, pinching the tip of her dripping dick between forefinger and thumb for emphasis, kneading the sensitive flesh with your digits.", parse);
 		}
 		else {
 			Text.Add("As your fingers dance over her dick, you playfully plead with her to just let go already; you want her to cum, here and now, just for you. Won't she please cum for you?", parse);
 			Text.NL();
-			Text.Add("<i>”Nng… If you really want me to cum that bad, you’d best work those hips and your hands.”</i>", parse);
+			Text.Add("<i>“Nng… If you really want me to cum that bad, you’d best work those hips and your hands.”</i>", parse);
 			Text.NL();
 			Text.Add("You need no further encouragement, doing your best to pump for all you're worth with hands and hips, fingers seeking out every sensitive spot on her cock that you can find.", parse);
 		}
@@ -5811,21 +5811,21 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
-		Text.Add("<i>”You know what to do, [playername],”</i> Miranda murmurs, sipping her mug while you unlace her britches, releasing the trapped beast. The meaty shaft smacks wetly against your forehead, depositing a splatter of pre on your upturned face. ", parse);
+		Text.Add("<i>“You know what to do, [playername],”</i> Miranda murmurs, sipping her mug while you unlace her britches, releasing the trapped beast. The meaty shaft smacks wetly against your forehead, depositing a splatter of pre on your upturned face. ", parse);
 		if(dom < -25 || player.Slut() > 50)
 			Text.Add("You lick your lips in anticipation. This is going to be quite a tasty treat.", parse);
 		else
 			Text.Add("The herm smiles innocently when you frown, tapping her finger against her thigh. Might as well get to it.", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>”Mmm… you know just how to make a girl feel special,”</i> Miranda purrs. <i>”Who knows, perhaps I’ll return the favor later?”</i> The dobie is panting in anticipation as you undo her britches, pulling them down to reveal her aching cock.", parse);
+		Text.Add("<i>“Mmm… you know just how to make a girl feel special,”</i> Miranda purrs. <i>“Who knows, perhaps I’ll return the favor later?”</i> The dobie is panting in anticipation as you undo her britches, pulling them down to reveal her aching cock.", parse);
 		Text.NL();
-		Text.Add("<i>”I… I don’t mind you being a bit rough,”</i> she murmurs.", parse);
+		Text.Add("<i>“I… I don’t mind you being a bit rough,”</i> she murmurs.", parse);
 	}, 1.0, function() { return miranda.SubDom() < -25; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>”Nice try, bitch, but it’s not going to be that easy,”</i> Miranda chuckles mockingly. Before you know it, she’s kicked the table out of the way, leaving you in quite a compromising position. It doesn’t seem like anyone have noticed you yet, though.", parse);
+		Text.Add("<i>“Nice try, bitch, but it’s not going to be that easy,”</i> Miranda chuckles mockingly. Before you know it, she’s kicked the table out of the way, leaving you in quite a compromising position. It doesn’t seem like anyone have noticed you yet, though.", parse);
 		Text.NL();
-		Text.Add("<i>”I believe you were in the middle of something,”</i> the dommy herm purrs, leaning back and spreading her legs invitingly. ", parse);
+		Text.Add("<i>“I believe you were in the middle of something,”</i> the dommy herm purrs, leaning back and spreading her legs invitingly. ", parse);
 		if(player.SubDom() < 25 || player.Slut() > 50)
 			Text.Add("You have trouble hiding your eagerness as you undo her britches, revealing her tasty meatstick. You can’t wait to go down on her, regardless of if you gather an audience.", parse);
 		else
@@ -5846,14 +5846,14 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 	player.FuckOral(player.Mouth(), miranda.FirstCock(), 2);
 	miranda.Fuck(miranda.FirstCock(), 2);
 	
-	Text.Add("<i>”Mmm… good [boyGirl],”</i> she sighs, putting her leg over your shoulder. Pulling you in with her foot on your lower back, the dommy dobie locks you in place, leaving you no way to go but down on her shaft. She shifts her position slightly, pushing her hips forward, spearheaded by several inches of canine cock.", parse);
+	Text.Add("<i>“Mmm… good [boyGirl],”</i> she sighs, putting her leg over your shoulder. Pulling you in with her foot on your lower back, the dommy dobie locks you in place, leaving you no way to go but down on her shaft. She shifts her position slightly, pushing her hips forward, spearheaded by several inches of canine cock.", parse);
 	Text.NL();
 	Text.Add("It doesn’t seem like you’re going anywhere until Miranda has had her fill - or until she’s given you your fill, as it were. Either way, you resign yourself to giving her what she wants, which right now is your lips on her crotch. You start bobbing your head slowly, sucking on her member.", parse);
 	Text.NL();
-	Text.Add("<i>”Come on, [playername], you are going to bore me if you don’t get going soon,”</i> Miranda complains, tightening her leghold. At her urging, you increase your pace, the guardswoman’s pointed cockhead poking at the entrance of your throat each stroke. The dobie yawns theatrically, though you can sense through the minute movements of her body that she’s definitely feeling this.", parse);
+	Text.Add("<i>“Come on, [playername], you are going to bore me if you don’t get going soon,”</i> Miranda complains, tightening her leghold. At her urging, you increase your pace, the guardswoman’s pointed cockhead poking at the entrance of your throat each stroke. The dobie yawns theatrically, though you can sense through the minute movements of her body that she’s definitely feeling this.", parse);
 	Text.NL();
 	if(Math.random() < 0.5 && miranda.SubDom() > 25) {
-		Text.Add("<i>”Hey barkeep! Another drink over here!”</i> Miranda calls out across the room. She places one of her hands on the back of your head, keeping you firmly in place as she waits. ", parse);
+		Text.Add("<i>“Hey barkeep! Another drink over here!”</i> Miranda calls out across the room. She places one of her hands on the back of your head, keeping you firmly in place as she waits. ", parse);
 		if(setPublic)
 			Text.Add("You quickly realise your compromised position, but you can’t really do anything about it right now, so you continue sucking, trying to get the she-bitch off as quickly as you can.", parse);
 		else
@@ -5873,7 +5873,7 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 		Text.NL();
 		Text.Add("Eventually, you are left alone again with the bitch.", parse);
 		Text.NL();
-		Text.Add("<i>”Ah, that hits the spot!”</i> Miranda sighs languidly. It’s not really clear if she’s referring to the drink.", parse);
+		Text.Add("<i>“Ah, that hits the spot!”</i> Miranda sighs languidly. It’s not really clear if she’s referring to the drink.", parse);
 		Text.NL();
 	}
 	else if(Math.random() < 0.5) {
@@ -5896,18 +5896,18 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 		
 		Text.Add("You hear soft footsteps walking over to you, and a glance to the side tells you that one of the felines is approaching.", parse);
 		Text.NL();
-		Text.Add("<i>”Hey there kitty,”</i> Miranda huffs, greeting them. <i>”Sorry, but I can’t give you any cream right now, little Miranda is occupied.”</i> ", parse);
+		Text.Add("<i>“Hey there kitty,”</i> Miranda huffs, greeting them. <i>“Sorry, but I can’t give you any cream right now, little Miranda is occupied.”</i> ", parse);
 		if(setPublic) {
-			Text.Add("As if that wasn’t obvious enough. <i>”Perhaps [pheshe] wants to share?”</i> the cat asks hopefully, [hisher] voice identifying [himher] as the [malefemale].", parse);
+			Text.Add("As if that wasn’t obvious enough. <i>“Perhaps [pheshe] wants to share?”</i> the cat asks hopefully, [hisher] voice identifying [himher] as the [malefemale].", parse);
 			Text.NL();
-			Text.Add("<i>”Nah, something tells me [playername] wants this load all to [phimher]self,”</i> Miranda replies, patting you on the head.", parse);
+			Text.Add("<i>“Nah, something tells me [playername] wants this load all to [phimher]self,”</i> Miranda replies, patting you on the head.", parse);
 			Text.NL();
-			Text.Add("<i>”Aww...”</i> [HeShe] pouts a little bit at being left out.", parse);
+			Text.Add("<i>“Aww...”</i> [HeShe] pouts a little bit at being left out.", parse);
 		}
 		else
 			Text.Add("A curious cat peeks down under the table, giving you a purr when [heshe] sees you.", parse);
 		Text.NL();
-		Text.Add("<i>”I’ll come back later, okay?”</i> The cat gives you a few glances over [hisher] shoulder as [heshe] returns to [hisher] own table.", parse);
+		Text.Add("<i>“I’ll come back later, okay?”</i> The cat gives you a few glances over [hisher] shoulder as [heshe] returns to [hisher] own table.", parse);
 		Text.NL();
 	}
 	Text.Add("After a while, the dobie decides to take a more active part, grabbing hold of your head and not-so-gently guiding it. Deeper and deeper she pushes, until your lips are straining around her thick - if still deflated - knot. Somehow, you manage to keep pace with her, as she allows you the occasional chance to surface for air before forcing you back to the task at hand.", parse);
@@ -5932,26 +5932,26 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 			Text.NL();
 			if(comp == kiakai) {
 				parse["name"] = kiakai.name;
-				Text.Add("<i>”I… ah, I am not sure if-”</i> [name] stammers, flustered. Miranda just laughs at the elf’s cute response.", parse);
+				Text.Add("<i>“I… ah, I am not sure if-”</i> [name] stammers, flustered. Miranda just laughs at the elf’s cute response.", parse);
 			}
 			else if(comp == terry) {
 				parse["foxvixen"] = terry.mfPronoun("fox", "vixen");
-				Text.Add("<i>”In your dreams, watch-dog. I’d rather blow everyone on this bar rather than blow you!”</i> the [foxvixen] shoots back, perhaps a bit louder than [heshe] should…", parse);
+				Text.Add("<i>“In your dreams, watch-dog. I’d rather blow everyone on this bar rather than blow you!”</i> the [foxvixen] shoots back, perhaps a bit louder than [heshe] should…", parse);
 				Text.NL();
-				Text.Add("<i>”Oh ho! That sounds like an offer if I’ve heard any. Anyone up for some!?”</i> Miranda yells at the crowd. There’s more than a few guys, and even some females, that show interest.", parse);
+				Text.Add("<i>“Oh ho! That sounds like an offer if I’ve heard any. Anyone up for some!?”</i> Miranda yells at the crowd. There’s more than a few guys, and even some females, that show interest.", parse);
 				Text.NL();
 				if(terry.Slut() >= 60)
-					Text.Add("Smirking, Terry licks [hisher] lips. <i>”Sorry boys and girls. I meant what I said, but I’m not allowed to disobey my [mastermistress],”</i> [heshe] points at the collar around [hisher] neck. <i>”As much as I’d love to service you to prove my point to this dirty dog,”</i> [heshe] points at Miranda, who scowls in response. <i>”Can’t do anything unless my boss says so. Sorry to disappoint, but I’m claimed.”</i>", parse);
+					Text.Add("Smirking, Terry licks [hisher] lips. <i>“Sorry boys and girls. I meant what I said, but I’m not allowed to disobey my [mastermistress],”</i> [heshe] points at the collar around [hisher] neck. <i>“As much as I’d love to service you to prove my point to this dirty dog,”</i> [heshe] points at Miranda, who scowls in response. <i>“Can’t do anything unless my boss says so. Sorry to disappoint, but I’m claimed.”</i>", parse);
 				else
-					Text.Add("<i>”I-I don’t… I...”</i> Terry tries to stammer out a reply, but ultimately falls silent as the approaching crowd surrounds [himher]. You can hear Miranda laughing above, and while you’d love to see Terry get out of this one, right now you have your <i>own</i> problem to deal with.", parse);
+					Text.Add("<i>“I-I don’t… I...”</i> Terry tries to stammer out a reply, but ultimately falls silent as the approaching crowd surrounds [himher]. You can hear Miranda laughing above, and while you’d love to see Terry get out of this one, right now you have your <i>own</i> problem to deal with.", parse);
 			}
 			else if(comp == gwendy) {
-				Text.Add("<i>”Not likely,”</i> Gwendy sniffs.", parse);
+				Text.Add("<i>“Not likely,”</i> Gwendy sniffs.", parse);
 				if(gwendy.FirstCock())
-					Text.Add(" <i>”Perhaps you’d like to try mine though?”</i> the horsecocked herm adds mockingly.", parse);
+					Text.Add(" <i>“Perhaps you’d like to try mine though?”</i> the horsecocked herm adds mockingly.", parse);
 			}
 			else if(comp == roa) {
-				Text.Add("<i>”Can I?”</i> the slutty rabbit asks hopefully. <i>”Later,”</i> Miranda promises, licking her lips.", parse);
+				Text.Add("<i>“Can I?”</i> the slutty rabbit asks hopefully. <i>“Later,”</i> Miranda promises, licking her lips.", parse);
 			}
 			else {
 				parse["Poss"] = comp.Possessive();
@@ -5986,7 +5986,7 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 	Text.Add("Sated, the guardswoman pats you on the head, scratching you behind your [earDesc] while you clean her up.", parse);
 	Text.NL();
 	parse["lover"] = (miranda.Attitude() < Miranda.Attitude.Neutral) ? "bitch" : "lover";
-	Text.Add("<i>”Not bad, [lover],”</i> she sighs, waving for another drink as you hurriedly clean yourself up.", parse);
+	Text.Add("<i>“Not bad, [lover],”</i> she sighs, waving for another drink as you hurriedly clean yourself up.", parse);
 	
 	world.TimeStep({minute: 30});
 	
@@ -6017,7 +6017,7 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 	if(miranda.Attitude() >= Miranda.Attitude.Neutral)
 		Text.Add("<i>“Alright, [playername]. You know what to do, so open up,”</i> she says, brandishing her hardening prick and nestling it against your lips.", parse);
 	else
-		Text.Add("<i>”Okay, slut. Your best friend is ready for some action, so be a good bitch and roll that carpet out, cuz I’m going in,”</i> Miranda says, slapping your face with her cock before forcefully shoving her pointed tip against your lips.", parse);
+		Text.Add("<i>“Okay, slut. Your best friend is ready for some action, so be a good bitch and roll that carpet out, cuz I’m going in,”</i> Miranda says, slapping your face with her cock before forcefully shoving her pointed tip against your lips.", parse);
 	Text.NL();
 	Text.Add("You open your mouth to grant the dobie-dick access, extending your [tongueDesc] and gently lapping at the underside of Miranda's cock as you envelop it in your mouth. Closing your lips around the intruder, the taste of salty-sweet precum and flesh washing over your senses, you start to suckle, caressing her with your lips and tongue, bobbing your head slightly as you swallow further inches of girlcock into your mouth.", parse);
 	Text.NL();
@@ -6038,13 +6038,13 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 	Text.Add("Suddenly, you feel a pair of paws grabbing the sides of your head. Darting your eyes up you see Miranda bearing an evil grin. ", parse);
 	parse["handsomeBeautiful"] = player.mfFem("handsome", "beautiful");
 	if(miranda.Attitude() >= Miranda.Attitude.Neutral)
-		Text.Add("<i>”Come on, [handsomeBeautiful]. I know you can do better.”</i>", parse);
+		Text.Add("<i>“Come on, [handsomeBeautiful]. I know you can do better.”</i>", parse);
 	else
-		Text.Add("<i>”We both know you’re a cock hungry slut, so why not act the part and give me a proper blowjob.”</i>", parse);
+		Text.Add("<i>“We both know you’re a cock hungry slut, so why not act the part and give me a proper blowjob.”</i>", parse);
 	Text.NL();
 	Text.Add("Before you can protest, the doberherm shoves all 11 inches of her knotted, canine pecker down your throat. You can feel your eyes tearing up as your lips come into contact with her sheath. You can feel the heat emanating from her balls as they slap your chin, the scent of Miranda’s musk threatens to overwhelm your senses as your gag reflex makes you choke on her dick. For a moment you feel like you might start suffocating, but Miranda soon withdraws. You inhale deeply, thankful for this momentary reprieve, but you don’t have long as Miranda’s hips lurch forward, impaling your throat back into her doggie-dong.", parse);
 	Text.NL();
-	Text.Add("<i>”Yeah, that’s how you do it,”</i> she comments, tongue lolling out as she becomes immersed in pleasure.", parse);
+	Text.Add("<i>“Yeah, that’s how you do it,”</i> she comments, tongue lolling out as she becomes immersed in pleasure.", parse);
 	Text.NL();
 	var choices = 3;
 	if(miranda.Attitude() < Miranda.Attitude.Neutral) {
@@ -6082,9 +6082,9 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 			player.subDom.DecreaseStat(-60, 1);
 			
 			if(miranda.Attitude() >= Miranda.Attitude.Neutral)
-				Text.Add("<i>”Damn, your mouth feels so good around my dick, [playername]. Better brace yourself, because I’m going all the way with you,”</i> the doberman says, tightening her grip on your head and thrusting with renewed vigor. Little by little she finds purchase, slipping her knotted doggie-dong inside your throat.", parse);
+				Text.Add("<i>“Damn, your mouth feels so good around my dick, [playername]. Better brace yourself, because I’m going all the way with you,”</i> the doberman says, tightening her grip on your head and thrusting with renewed vigor. Little by little she finds purchase, slipping her knotted doggie-dong inside your throat.", parse);
 			else
-				Text.Add("<i>”So, how do you like getting used like a fucktoy, slut? What is it? Not enough dick for you? Fine, I’ll make sure to shove all of my eleven inches down your tight cocksleeve,”</i> she teases, carelessly gripping your head and redoubling her efforts. Her cock rubs against the back of your throat, roughly bashing you until she finally slips inside your throat.", parse);
+				Text.Add("<i>“So, how do you like getting used like a fucktoy, slut? What is it? Not enough dick for you? Fine, I’ll make sure to shove all of my eleven inches down your tight cocksleeve,”</i> she teases, carelessly gripping your head and redoubling her efforts. Her cock rubs against the back of your throat, roughly bashing you until she finally slips inside your throat.", parse);
 			Text.NL();
 			Text.Add("Helpless before the morph's onslaught, all you can do is try and relax your throat as she digs her dick deeper and deeper inside of you. Inch after inch of drooling prickflesh vanishes down your gullet, roughly grinding against your throat's inner walls, until her knot is bumping insistently against your lips.", parse);
 			Text.NL();
@@ -6105,7 +6105,7 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 				Text.Add("Whatever the case, you're certainly practiced enough to know just how to relax your jaws, though you know you'll be feeling a little numb-mouthed by the time she's done.", parse);
 			}
 			Text.NL();
-			Text.Add("By the time she releases your head her knot is way too big to pull out, and you can do nothing but sit there as she drags your head with each powerful thrust of her hips. Her shaft throbs ominously inside your throat, you can tell she won’t last long like this. <i>”Hang in there, you’ll be getting your treat anytime,”</i> she says, stifling a grunt as she pats your head.", parse);
+			Text.Add("By the time she releases your head her knot is way too big to pull out, and you can do nothing but sit there as she drags your head with each powerful thrust of her hips. Her shaft throbs ominously inside your throat, you can tell she won’t last long like this. <i>“Hang in there, you’ll be getting your treat anytime,”</i> she says, stifling a grunt as she pats your head.", parse);
 			Text.NL();
 			Text.Add("A few moments later, she finally grabs you, shoving herself as deep inside your throat as she can. A loud groan of pleasure emanates from the doberherm as she floods your insides with her spunk. A ceaseless tsunami of white that batters your stomach until it’s full and beyond.", parse);
 			Text.NL();
@@ -6129,7 +6129,7 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 			Text.Add("It takes the better part of a hour for Mirana to shrink down enough to pull out of your used throat, and when she does you immediately cough and sputter, gobs of doggie-spunk flying from your mouth. You gasp, inhaling as much oxygen as you can, glad to finally be free from her and able to breathe easy again.", parse);
 			Text.NL();
 			if(miranda.Attitude() >= Miranda.Attitude.Neutral) {
-				Text.Add("Miranda pats your back, helping you as you finally have a chance to catch your breath. <i>”There, there. Easy now, [playername]. You’re a real trooper y’know? If I tied anybody else I’d probably wind up cracking their jaws,”</i> she laughs. <i>”Just hang in there, I’ll go grab you a cup of water,”</i> she says.", parse);
+				Text.Add("Miranda pats your back, helping you as you finally have a chance to catch your breath. <i>“There, there. Easy now, [playername]. You’re a real trooper y’know? If I tied anybody else I’d probably wind up cracking their jaws,”</i> she laughs. <i>“Just hang in there, I’ll go grab you a cup of water,”</i> she says.", parse);
 				Text.NL();
 				Text.Add("That... that would be great, you absently reply to her. Gingerly you settle yourself down, careful of your tender, cum-stretched stomach. Overwhelmed by what you've gone through, you allow your eyes to sink closed and lose yourself in torpor.", parse);
 				Text.Flush();
@@ -6138,7 +6138,7 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 					Text.Clear();
 					Text.Add("The sensations of something warm and soft on your lips stirs you from your slumber, the feel of something wet and firm pressing gently between your lips fully rousing you as it tickles your own tongue. Your eyes open and you find yourself staring into the half-hooded eyes of Miranda as the dober-morph kisses you sweetly. Pleasantly surprised, you lay back and bask in the sensation of her unusually tender actions, allowing her to break it a few moments later, licking your lips unconsciously to chase the last lingering taste of her as she straightens up.", parse);
 					Text.NL();
-					Text.Add("<i>”A kiss to wake up the sleeping beauty, just like in the fairy tales,”</i> she laughs. <i>”Here,”</i> she passes you a mug filled with a sweet-scented tea. <i>”Drink this, it’ll make you feel better.”</i>", parse);
+					Text.Add("<i>“A kiss to wake up the sleeping beauty, just like in the fairy tales,”</i> she laughs. <i>“Here,”</i> she passes you a mug filled with a sweet-scented tea. <i>“Drink this, it’ll make you feel better.”</i>", parse);
 					Text.NL();
 					Text.Add("Thanking her for her thoughtfulness, you gingerly lift the rim of the cup to your lips and carefully sip it. It's as sweet as it smells, but not strong enough to be overpowering; a very calm and neutral sensation that brings with it a soothing feeling. As you slowly drink it, you feel your stomach settling slightly, and your rather raw throat feeling less painful. You resist the urge to gulp it down and instead drain it smoothly; by the time you finish, your throat feels much better, and you thank her for her kindness, voice still a little raspy.", parse);
 					
@@ -6146,7 +6146,7 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 				});
 			}
 			else {
-				Text.Add("Miranda rolls her eyes as you try your best to catch your breath. <i>”Are you done yet? A slut like you should already be used to taking cock like that. So catch your breath and let’s get going.”</i>", parse);
+				Text.Add("Miranda rolls her eyes as you try your best to catch your breath. <i>“Are you done yet? A slut like you should already be used to taking cock like that. So catch your breath and let’s get going.”</i>", parse);
 				Text.NL();
 				Text.Add("Queasy as you are, you simply nod your head absently. You really don't feel too good, overwhelmed by the recent fucking you received. Slowly you sink onto your side, head pressed against the nearest pillow, and find yourself fading into darkness.", parse);
 				Text.Flush();
@@ -6155,7 +6155,7 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 					Text.Clear();
 					Text.Add("Something cold and wet drenches across your face, bringing you back to consciousness with gasping splutters, shaking your head to clear off the worst of the water. You quickly realise the source of your rude awakening as a smirking Miranda stares down at you, one hand holding an upturned mug.", parse);
 					Text.NL();
-					Text.Add("<i>”Woken up yet? Good. Drink this,”</i> she passes you a mug filled with a sweet-scented tea. <i>”This will help with your throat.”</i>", parse);
+					Text.Add("<i>“Woken up yet? Good. Drink this,”</i> she passes you a mug filled with a sweet-scented tea. <i>“This will help with your throat.”</i>", parse);
 					Text.NL();
 					Text.Add("Hesitant, but trusting that she wouldn't lie about something like this, you reluctantly accept the proffered mug and carefully take a sip. Sure enough, the fluid soothes your aching throat as it glides down into your belly, and even quenches some of the upset from your impromptu repast. Emboldened, you steadily drain the cup and carefully place it aside, meekly issuing a non-committed thanks to the morph.", parse);
 					
@@ -6262,27 +6262,27 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 				Text.NL();
 				if(dom > 25) {
 					parse["masterMistress"] = player.mfTrue("master", "mistress");
-					Text.Add("<i>”Ah...”</i> Miranda sighs in relief. <i>”Thank you, [masterMistress]. I really needed that.”</i> She licks her lips, still panting in exertion as she releases you and lays splayed on the floor.", parse);
+					Text.Add("<i>“Ah...”</i> Miranda sighs in relief. <i>“Thank you, [masterMistress]. I really needed that.”</i> She licks her lips, still panting in exertion as she releases you and lays splayed on the floor.", parse);
 					Text.NL();
 					Text.Add("Leisurely, you shuffle yourself around atop her until you are face to face with the panting dobermorph. Smirking as best you can with your mouth full, you gently cup her chin and cheeks with your hands, subtly pinning her mouth open before opening your lips. A cascade of thick herm-seed leisurely flows from your mouth into Miranda's, the herm's eyes widening as it does so. You feed her every last drop that you saved earlier, and then swoop down to kiss her insistently on the lips.", parse);
 					Text.NL();
 					Text.Add("The subby doberherm has no choice but to swallow, not that she’d deny it in the first place. But forcing her own cum down her gullet while you kiss her feels pretty nice. You break the kiss just in time to hear her moan, a look of satisfaction plastered on her face. Miranda is a good girl, you remark patting her head as she pants.", parse);
 				}
 				else if(dom > -25) {
-					Text.Add("<i>”Not bad, [playername],”</i> Miranda remarks, still panting after your little session. <i>”Doing and getting done feels kinda nice. I wouldn’t mind going for another round sometime,”</i> she grins. <i>”But first I think I need to clean up after myself.”</i>", parse);
+					Text.Add("<i>“Not bad, [playername],”</i> Miranda remarks, still panting after your little session. <i>“Doing and getting done feels kinda nice. I wouldn’t mind going for another round sometime,”</i> she grins. <i>“But first I think I need to clean up after myself.”</i>", parse);
 					Text.NL();
 					Text.Add("You have only a moment to consider what she’s said before she grabs you and spins you around to give you a forceful kiss, forcing some of her cum down your throat. She does, however, manage to steal some straight from your mouth. The two of you continue to kiss passionately for a few moments, before she withdraws with a grin, licking her lips.", parse);
 					Text.NL();
 					Text.Add("Smiling, you quip that it looks like you weren't the only one who enjoys her special milk.", parse);
 					Text.NL();
-					Text.Add("<i>”Can’t overfeed you now, can I? Gotta keep you coming back for more.”</i>", parse);
+					Text.Add("<i>“Can’t overfeed you now, can I? Gotta keep you coming back for more.”</i>", parse);
 					Text.NL();
 					Text.Add("You grin and shake your head playfully. Somehow, you don't think that keeping you coming back is going to be too hard... though you have doubts as to whether she can resist overfeeding you.", parse);
 				}
 				else {
 					parse["gen"] = target == Target.Blowjob ? "own" :
 					               target == Target.Cunn ? "pussy" : "ass";
-					Text.Add("<i>”Ain’t I the nicest gal a guy like you could hope for? I gave you cock and even took care of your [gen],”</i> she says, licking her lips.", parse);
+					Text.Add("<i>“Ain’t I the nicest gal a guy like you could hope for? I gave you cock and even took care of your [gen],”</i> she says, licking her lips.", parse);
 					Text.NL();
 					Text.Add("Twisting around so that you are sitting atop her, you look her in the eye.", parse);
 					if(player.SubDom() > 50)
@@ -6292,7 +6292,7 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 					Text.Add(" She certainly is a nice girl, you quip back. Nice and tasty, too.", parse);
 					Text.NL();
 					parse["hair"] = player.HasHair() ? "ruffling your hair" : "rubbing your head";
-					Text.Add("<i>”Why, you little flirt!”</i> she quips back, grabbing you into an arm lock and [hair].", parse);
+					Text.Add("<i>“Why, you little flirt!”</i> she quips back, grabbing you into an arm lock and [hair].", parse);
 				}
 				Text.Flush();
 				
@@ -6317,16 +6317,16 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 				Text.Add("In one fell swoop, you knock Miranda's hands away and release her cock, then lunge forward in a powerful shove to the startled doberherm's hips. Already reeling from your initial surprise release, she loses her balance and promptly falls flat on her rear with a startled grunt. As quickly as you can, you clamber to your feet and stride forward, pushing Miranda over completely onto the floor, then move to step onto her cock; not hard enough to hurt her, but definitely firmly enough that she can feel your weight as you press it against her belly,", parse);
 				Text.NL();
 				if(dom > 50)
-					Text.Add("Miranda moans in lust, moving to grind herself against your [footDesc]. She doesn’t even bother protesting about your sudden switch in positions. She’s your bitch and she knows it, better yet, she loves it. <i>”Mmm, [masterMistress],”</i> she pants.", parse);
+					Text.Add("Miranda moans in lust, moving to grind herself against your [footDesc]. She doesn’t even bother protesting about your sudden switch in positions. She’s your bitch and she knows it, better yet, she loves it. <i>“Mmm, [masterMistress],”</i> she pants.", parse);
 				else
-					Text.Add("<i>”Hey! What the- urk!”</i> you silence her by massaging her doggie-dong with your [footDesc]. Can’t have your bitch talking back to you like that, can you? She glares at you at first, but a quick increase in pressure has her frown turned upside down as her cock throbs under your feet. Despite whatever reservations she might have, the doberherm is incapable of hiding her enjoyment.", parse);
+					Text.Add("<i>“Hey! What the- urk!”</i> you silence her by massaging her doggie-dong with your [footDesc]. Can’t have your bitch talking back to you like that, can you? She glares at you at first, but a quick increase in pressure has her frown turned upside down as her cock throbs under your feet. Despite whatever reservations she might have, the doberherm is incapable of hiding her enjoyment.", parse);
 				Text.NL();
 				Text.Add("Imperiously staring down at your prey, you chide Miranda for getting carried away.  But then you shake your head and smirk, noting it's not as if she can really help it, is it? She's just such a horndog, isn't she;  always chasing after you, looking to get her belly rubbed - you leisurely stroke her throbbing shaft with your [footDesc] - or to bury a bone. She just loves it when you choose to share yourself with her; you're her favorite fuckbuddy, the only one who really gets her off, aren't you?", parse);
 				Text.NL();
 				if(dom > 50)
-					Text.Add("<i>”Damn right I am. You made me your bitch, made me like being your bitch. And now this bitch needs her [masterMistress] to give it to her good. So do it, just the way I like it,”</i> Miranda readily admits.", parse);
+					Text.Add("<i>“Damn right I am. You made me your bitch, made me like being your bitch. And now this bitch needs her [masterMistress] to give it to her good. So do it, just the way I like it,”</i> Miranda readily admits.", parse);
 				else
-					Text.Add("<i>”Don’t get cocky, [playername],”</i> she warns, propping herself up on her elbows. <i>”Our positions could easily be reversed.”</i>", parse);
+					Text.Add("<i>“Don’t get cocky, [playername],”</i> she warns, propping herself up on her elbows. <i>“Our positions could easily be reversed.”</i>", parse);
 				Text.NL();
 				Text.Add("You press down a little harder with your foot, making her groan at the sensation, then tell her not to say such stupid things - she's not getting out of this, and you both know it. Then, smiling, you lift your foot from her cock and place it higher up her midriff, pushing down so that she flattens herself onto the floor again. Just relax, you instruct her, even as you return your [footDesc] to its former place on her erection. You know what she likes, and you're going to give it to her...", parse);
 				Text.NL();
@@ -6342,13 +6342,13 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 				var cum = miranda.OrgasmCum();
 				
 				if(dom > 50) {
-					Text.Add("<i>”Ah this feels great,”</i> she remarks hands moving to rub her breasts, plastered with her own jism. ", parse);
+					Text.Add("<i>“Ah this feels great,”</i> she remarks hands moving to rub her breasts, plastered with her own jism. ", parse);
 					if(miranda.flags["Footjob"] == 0) {
-						Text.Add("<i>”Didn’t know feet could feel this good. You’re pretty creative when showing your dominance, aren’t you [masterMistress]?”</i>", parse);
+						Text.Add("<i>“Didn’t know feet could feel this good. You’re pretty creative when showing your dominance, aren’t you [masterMistress]?”</i>", parse);
 						Text.NL();
 						Text.Add("You nod and agree, then playfully inform her that you aren't done yet. There's still one last thing she needs to do…", parse);
 						Text.NL();
-						Text.Add("<i>”Really? What is it?”</i> she asks, raising a brow.", parse);
+						Text.Add("<i>“Really? What is it?”</i> she asks, raising a brow.", parse);
 						Text.NL();
 						Text.Add("Rather than say anything, you gently reach out with your semen-dripping [footDesc] and stroke it against her cheek, smearing a line of seed over onto her lips. Why, she needs to clean you off, of course, you tell her.", parse);
 						Text.NL();
@@ -6356,10 +6356,10 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 						Text.NL();
 						Text.Add("Yes, she heard you the first time. So she’d best open wide and start licking, you want your foot completely clean of her spunk.", parse);
 						Text.NL();
-						Text.Add("She shudders in renewed lust, licking her lips as a wide grin parts her muzzle. <i>”Alright, [masterMistress]. I’ll try.”</i>", parse);
+						Text.Add("She shudders in renewed lust, licking her lips as a wide grin parts her muzzle. <i>“Alright, [masterMistress]. I’ll try.”</i>", parse);
 					}
 					else {
-						Text.Add("<i>”But we aren’t done yet are we, [masterMistress]?”</i>", parse);
+						Text.Add("<i>“But we aren’t done yet are we, [masterMistress]?”</i>", parse);
 						Text.NL();
 						Text.Add("With grin and a shake of your head, you reply that you most certainly aren't.", parse);
 						Text.NL();
@@ -6369,26 +6369,26 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 					}
 				}
 				else {
-					Text.Add("<i>”Heh, not my kink, but this didn’t feel half-bad.”</i> Miranda slumps on the floor, relaxing in afterglow. ", parse);
+					Text.Add("<i>“Heh, not my kink, but this didn’t feel half-bad.”</i> Miranda slumps on the floor, relaxing in afterglow. ", parse);
 					if(miranda.flags["Footjob"] == 0) {
-						Text.Add("<i>”Just give me some time to recover and we can get going,”</i> she adds.", parse);
+						Text.Add("<i>“Just give me some time to recover and we can get going,”</i> she adds.", parse);
 						Text.NL();
 						Text.Add("You chide her not to be so impatient; there's still something she needs to do first. You move your semen-dripping foot and place it just before her nose with an imperious gesture, declaring that neither of you are leaving until she cleans up the mess she made of your foot.", parse);
 						Text.NL();
-						Text.Add("<i>”What? You want me to lick it clean?”</i>", parse);
+						Text.Add("<i>“What? You want me to lick it clean?”</i>", parse);
 						Text.NL();
 						Text.Add("You tell her that's correct, and so she had better get started.", parse);
 					}
 					else {
-						Text.Add("<i>”Phew, I’m beat,”</i> she adds.", parse);
+						Text.Add("<i>“Phew, I’m beat,”</i> she adds.", parse);
 						Text.NL();
 						Text.Add("Not so beat she's going to get out of cleaning up her mess, you inform her, raising your foot to her mouth for emphasis.", parse);
 						Text.NL();
-						Text.Add("Miranda sighs. <i>”You’re not going to let me get away with it are you?”</i>", parse);
+						Text.Add("Miranda sighs. <i>“You’re not going to let me get away with it are you?”</i>", parse);
 						Text.NL();
 						Text.Add("You simply shake your head in response. You won't, and she knows it.", parse);
 						Text.NL();
-						Text.Add("<i>”Fiiiine, let’s get it over with,”</i> she rolls her eyes.", parse);
+						Text.Add("<i>“Fiiiine, let’s get it over with,”</i> she rolls her eyes.", parse);
 					}
 				}
 				Text.NL();
@@ -6453,32 +6453,32 @@ Scenes.Miranda.TerryTavernSexSubbyVag = function(cocks) {
 		Text.Add(". The two of you pant in unison, until Miranda finally breaks the silence.", parse);
 		Text.NL();
 		if(dom > 25) {
-			Text.Add("<i>”Used and tied like a bitch,”</i> she groans. <i>“We should do that more often,”</i> she chuckles. ", parse);
+			Text.Add("<i>“Used and tied like a bitch,”</i> she groans. <i>“We should do that more often,”</i> she chuckles. ", parse);
 			if(cum > 3)
-				Text.Add("<i>”But damn, you really packed me full,”</i> she rubs her belly. ", parse);
-			Text.Add("<i>”I guess no one is going to question my ownership after this one.”</i>", parse);
+				Text.Add("<i>“But damn, you really packed me full,”</i> she rubs her belly. ", parse);
+			Text.Add("<i>“I guess no one is going to question my ownership after this one.”</i>", parse);
 			Text.NL();
 			parse["swollen"] = cum > 6 ? " swollen" : "";
 			Text.Add("They most certainly aren't, you declare, and pat her[swollen] stomach possessively for emphasis.", parse);
 		}
 		else if(dom > -25) {
-			Text.Add("<i>”Ugh, I’m fine with you using me, but did you have to tie me?”</i> she asks in protest.", parse);
+			Text.Add("<i>“Ugh, I’m fine with you using me, but did you have to tie me?”</i> she asks in protest.", parse);
 			Text.NL();
 			if(player.SubDom() > 0) {
 				Text.Add("Like she wouldn't have done the same thing if your positions were swapped, you retort casually.", parse);
 				Text.NL();
-				Text.Add("<i>”I might, if we didn’t have a job to do. But what’s done is done, and it feels pretty good for me.”</i> She constricts you slightly with her pussy muscles. <i>”Don’t think I’ve been so deliciously spread in a while.”</i>", parse);
+				Text.Add("<i>“I might, if we didn’t have a job to do. But what’s done is done, and it feels pretty good for me.”</i> She constricts you slightly with her pussy muscles. <i>“Don’t think I’ve been so deliciously spread in a while.”</i>", parse);
 			}
 			else {
 				Text.Add("You apologise to her; she just felt so good, you couldn't help yourself, you had to tie with her.", parse);
 				Text.NL();
-				Text.Add("<i>”Couldn’t get enough of my pussy, huh? I know the feeling,”<i> she chuckles. <i>”We have a job to do, but it’s fine. Guess we can spare a few moments, especially since you did such a good job spreading my tight pussy over your huge knot.”</i>", parse);
+				Text.Add("<i>“Couldn’t get enough of my pussy, huh? I know the feeling,”<i> she chuckles. <i>“We have a job to do, but it’s fine. Guess we can spare a few moments, especially since you did such a good job spreading my tight pussy over your huge knot.”</i>", parse);
 			}
 			Text.NL();
 			Text.Add("Well, if she likes it so much, all she has to do is ask; you'd be happy to split her again anytime, you reply.", parse);
 		}
 		else {
-			Text.Add("<i>”[playername]! You dumbass. We’re supposed to be looking for a thief, how are we going to do that with you glued to my ass?”</i> she angrily protests.", parse);
+			Text.Add("<i>“[playername]! You dumbass. We’re supposed to be looking for a thief, how are we going to do that with you glued to my ass?”</i> she angrily protests.", parse);
 			Text.NL();
 			if(player.SubDom() > 0)
 				Text.Add("You snap right back that you doubt she would have thought to do otherwise if she had been the one giving the dick instead.", parse);
@@ -6489,32 +6489,32 @@ Scenes.Miranda.TerryTavernSexSubbyVag = function(cocks) {
 				if     (cum > 9) parse["cum"] = "pregnant woman";
 				else if(cum > 6) parse["cum"] = "blob";
 				else             parse["cum"] = "fatty";
-				Text.Add("<i>”As if that wasn’t enough, you packed me so full that I look like a [cum],”</i> she adds. ", parse);
+				Text.Add("<i>“As if that wasn’t enough, you packed me so full that I look like a [cum],”</i> she adds. ", parse);
 			}
-			Text.Add("<i>”Personally, if we didn’t have a job to do, I’d totally tie you. But as it stands, we’re stuck here and there’s no helping that,”</i> she huffs. <i>”It did feel pretty good though. So I’ll forgive you for thinking with your dick rather than your head this time, silly goose,”</i> she finishes with a smile.", parse);
+			Text.Add("<i>“Personally, if we didn’t have a job to do, I’d totally tie you. But as it stands, we’re stuck here and there’s no helping that,”</i> she huffs. <i>“It did feel pretty good though. So I’ll forgive you for thinking with your dick rather than your head this time, silly goose,”</i> she finishes with a smile.", parse);
 			Text.NL();
 			Text.Add("You can't help but smile back, and thank her for understanding. Besides, it's certainly not a bad thing, being tied to someone like her.", parse);
 		}
 		Text.NL();
 		Text.Add("It takes a while before you’re finally able to pull out of Miranda’s well-used honeypot, and you’re somewhat loathe to do so, but you gotta get going. Cleaning up takes long, but you expected as much. The bigger the party the bigger the aftermath you gotta clean up afterwards.", parse);
 		Text.NL();
-		Text.Add("After scouting for a missing pants, you’re both fully dressed, if a bit sore. <i>”Let’s get going [playername],”</i> Miranda announces with a pat on your back.", parse);
+		Text.Add("After scouting for a missing pants, you’re both fully dressed, if a bit sore. <i>“Let’s get going [playername],”</i> Miranda announces with a pat on your back.", parse);
 		Text.NL();
 		Text.Add("You nod your head and agree, moving to dislodge the chair that served as your impromptu doorlock. Once it's safely out of the way, the pair of you head out from the bar... though it looks like your deeds weren't that private after all; you get more than a few chuckles and accusing fingers from the customers that you pass, and when you head past some guards, they throw both of you knowing grins.", parse);
 	}
 	else {
-		Text.Add("Spent for the moment you collapse atop the doberman-morph, sending both of you crashing down onto the cushions below. You can feel Miranda’s stubby tail tickling your belly as she pants. <i>”Phew, that was pretty good [playername],”</i> she says.", parse);
+		Text.Add("Spent for the moment you collapse atop the doberman-morph, sending both of you crashing down onto the cushions below. You can feel Miranda’s stubby tail tickling your belly as she pants. <i>“Phew, that was pretty good [playername],”</i> she says.", parse);
 		Text.NL();
 		if(dom > 25)
-			Text.Add("<i>”I love it when you rail me like I’m your bitch, I never thought being dommed could feel this good,”</i> she adds with a smile.", parse);
+			Text.Add("<i>“I love it when you rail me like I’m your bitch, I never thought being dommed could feel this good,”</i> she adds with a smile.", parse);
 		else if(dom > -25)
-			Text.Add("<i>”You know? I think I’m starting to like being fucked like that more and more. You do a pretty good job of getting me off when you’re doing me,”</i> she comments.", parse);
+			Text.Add("<i>“You know? I think I’m starting to like being fucked like that more and more. You do a pretty good job of getting me off when you’re doing me,”</i> she comments.", parse);
 		else
-			Text.Add("<i>”Keep getting me off like this and I won’t mind letting you into my pussy,”</i> she adds.", parse);
+			Text.Add("<i>“Keep getting me off like this and I won’t mind letting you into my pussy,”</i> she adds.", parse);
 		Text.NL();
 		Text.Add("You tell her that you're glad she enjoyed herself. The two of you lay there for a few moments more, catching your respective breaths, and then set about cleaning up the mess you made as best you can before getting back into your clothes.", parse);
 		Text.NL();
-		Text.Add("<i>”Alright then, let’s bust ourselves a thief,”</i> Miranda says, cracking her knuckles. <i>”You lead the way.”</i>", parse);
+		Text.Add("<i>“Alright then, let’s bust ourselves a thief,”</i> Miranda says, cracking her knuckles. <i>“You lead the way.”</i>", parse);
 		Text.NL();
 		Text.Add("Seeing no reason not to, you promptly pull aside the chair that the pair of you set up as an impromptu doorlock and slip outside. From the chorus of chuckles that echo in your respective wake, it's pretty clear that the clamor in the tavern wasn't enough to keep the two of you from going unnoticed.", parse);
 	}
@@ -6532,7 +6532,7 @@ Scenes.Miranda.TerryChaseHome = function() {
 	Text.Add("The two of you pause on the street near Miranda’s house, both of you more than a little tired of searching for the elusive thief. Perhaps you could head inside to relieve some stress? Miranda certainly seems to have that idea in mind.", parse);
 	Text.NL();
 	if(miranda.Attitude() < Miranda.Attitude.Neutral) {
-		Text.Add("<i>”Stop for a quick fuck, [playername]?”</i> Miranda shoots, stretching languidly. <i>”All this searching has me aching for some action, if you catch my drift. If not, I’m sure you’ll get what I mean in a few minutes when you are biting the pillow.”</i> The herm closes in on you with a hungry look in her eyes, herding you towards her door.", parse);
+		Text.Add("<i>“Stop for a quick fuck, [playername]?”</i> Miranda shoots, stretching languidly. <i>“All this searching has me aching for some action, if you catch my drift. If not, I’m sure you’ll get what I mean in a few minutes when you are biting the pillow.”</i> The herm closes in on you with a hungry look in her eyes, herding you towards her door.", parse);
 		Text.Flush();
 		
 		//[Let her][Not now]
@@ -6540,7 +6540,7 @@ Scenes.Miranda.TerryChaseHome = function() {
 		options.push({ nameStr : "Let her",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”No complaints? Good bitch,”</i> she murmurs as she twirls you around, pushing you ahead. You make no attempt to stop her as she manhandles you through the door and slams it shut behind you.", parse);
+				Text.Add("<i>“No complaints? Good bitch,”</i> she murmurs as she twirls you around, pushing you ahead. You make no attempt to stop her as she manhandles you through the door and slams it shut behind you.", parse);
 				Scenes.Miranda.HomeSubbySex();
 			}, enabled : true,
 			tooltip : "She’s going to have her way with you no matter what you say, why resist?"
@@ -6549,7 +6549,7 @@ Scenes.Miranda.TerryChaseHome = function() {
 			func : function() {
 				Text.Clear();
 				parse["himher"] = terry.flags["Met"] < Terry.Met.Found ? "him" : "her";
-				Text.Add("<i>”C’mon, I need some relief here!”</i> Miranda complains, attempting to shove you inside. You barely manage to avoid her grab, dancing outside her reach. <i>”Fine,”</i> she growls, <i>”but I’m getting some action today <b>one</b> way or another.”</i> That doesn’t sound like it bodes well for the thief when you finally catch [himher].", parse);
+				Text.Add("<i>“C’mon, I need some relief here!”</i> Miranda complains, attempting to shove you inside. You barely manage to avoid her grab, dancing outside her reach. <i>“Fine,”</i> she growls, <i>“but I’m getting some action today <b>one</b> way or another.”</i> That doesn’t sound like it bodes well for the thief when you finally catch [himher].", parse);
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
@@ -6564,11 +6564,11 @@ Scenes.Miranda.TerryChaseHome = function() {
 		var dom = player.SubDom() - miranda.SubDom();
 		parse["mastermistress"] = dom > 50 ? player.mfTrue(" master", " mistress") : "";
 		if(dom > 25)
-			Text.Add("<i>”Having trouble focusing on the task at hand[mastermistress]?”</i> Miranda quips, licking her lips. <i>”Why don’t we head inside and see if we can relieve your stress?”</i>", parse);
+			Text.Add("<i>“Having trouble focusing on the task at hand[mastermistress]?”</i> Miranda quips, licking her lips. <i>“Why don’t we head inside and see if we can relieve your stress?”</i>", parse);
 		else if(dom > -25)
-			Text.Add("<i>”Good plan, I need something to distract me from this thief for a while. How about we go inside for a quick fuck, [playername]?”</i>", parse);
+			Text.Add("<i>“Good plan, I need something to distract me from this thief for a while. How about we go inside for a quick fuck, [playername]?”</i>", parse);
 		else
-			Text.Add("<i>”The thief can wait, I need to bury my cock in someone before I go insane with boredom. How about it, [playername]? Want to step inside and take a ride on little Miranda?”</i>", parse);
+			Text.Add("<i>“The thief can wait, I need to bury my cock in someone before I go insane with boredom. How about it, [playername]? Want to step inside and take a ride on little Miranda?”</i>", parse);
 		Text.Flush();
 		
 		//[Take charge][Let her lead][Not now]
@@ -6586,7 +6586,7 @@ Scenes.Miranda.TerryChaseHome = function() {
 			func : function() {
 				Text.Clear();
 				parse["boyGirl"] = player.mfTrue("boy", "girl");
-				Text.Add("You nod eagerly, looking at her imploringly. <i>”Good [boyGirl],”</i> Miranda grins, twirling you around and pushing you through the doorway into her home. The dobie closes the door after you, sealing off your escape.", parse);
+				Text.Add("You nod eagerly, looking at her imploringly. <i>“Good [boyGirl],”</i> Miranda grins, twirling you around and pushing you through the doorway into her home. The dobie closes the door after you, sealing off your escape.", parse);
 				Scenes.Miranda.HomeSubbySex();
 			}, enabled : true,
 			tooltip : "Let Miranda take you inside and relieve her stress."
@@ -6594,7 +6594,7 @@ Scenes.Miranda.TerryChaseHome = function() {
 		options.push({ nameStr : "Not now",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”You are such a tease sometimes, you know that?”</i> Miranda complains. She grudgingly nods in agreement, leading the way as you try to figure out where to search next.", parse);
+				Text.Add("<i>“You are such a tease sometimes, you know that?”</i> Miranda complains. She grudgingly nods in agreement, leading the way as you try to figure out where to search next.", parse);
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {

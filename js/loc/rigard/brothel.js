@@ -78,13 +78,13 @@ Scenes.Brothel.First = function() {
 	Text.Add("Your view is obstructed by a wall of muscle and teeth, as a large, blocky shark-morph steps in front of you, eyeing you suspiciously. ", parse);
 	Text.Add(player.mfFem("He doesn’t look particularly happy to see you. Perhaps he doesn’t like your clothes.", "He quickly changes his expression as he gets a proper look at you, a wide, toothy grin slowly spreading across his face."));
 	Text.NL();
-	Text.Add("<i>”Now now, I’ll not have you take that attitude towards potential customers!”</i> The owner of the throaty voice, a stunning woman with dusky skin and curly jet black hair, makes her way over to you, her hips swaying alluringly. The blocky bouncer turns to face her, nodding slowly. He steps aside, returning his attention to the room at large.", parse);
+	Text.Add("<i>“Now now, I’ll not have you take that attitude towards potential customers!”</i> The owner of the throaty voice, a stunning woman with dusky skin and curly jet black hair, makes her way over to you, her hips swaying alluringly. The blocky bouncer turns to face her, nodding slowly. He steps aside, returning his attention to the room at large.", parse);
 	Text.NL();
-	Text.Add("<i>”Pardon me for that, [handsomePretty],”</i> the lady gushes, adjusting a stray lock of her hair. <i>”Now, what can I do to help you? The Shadow Lady provides many services for one such as you… and perhaps opportunities as well.”</i>", parse);
+	Text.Add("<i>“Pardon me for that, [handsomePretty],”</i> the lady gushes, adjusting a stray lock of her hair. <i>“Now, what can I do to help you? The Shadow Lady provides many services for one such as you… and perhaps opportunities as well.”</i>", parse);
 	Text.NL();
 	Text.Add("You take a moment to study the beauty, taking in her tall stature, dark skin and midnight hair. Her voluptuous curves are barely contained in the silky dress she is wearing, leaving very little to your imagination. Her eyes are deep dark pools which a [gender] could drown in, framed by thick lashes. If she wears makeup, it is very subtle, but you doubt a woman like this would need any extra enhancement to make anyone fall for her.", parse);
 	Text.NL();
-	Text.Add("<i>”The name is Lucille, Madam Lucille to most, but you can call me Lucy. I am the owner of this establishment. Now tell me, what is your pleasure?”</i> The last is said in a sultry voice, a faint seductive smile on her full, red lips. You shake your head, trying to clear the fog in your mind. There is an almost hypnotic quality to her voice, loaded with unspoken intimate promises.", parse);
+	Text.Add("<i>“The name is Lucille, Madam Lucille to most, but you can call me Lucy. I am the owner of this establishment. Now tell me, what is your pleasure?”</i> The last is said in a sultry voice, a faint seductive smile on her full, red lips. You shake your head, trying to clear the fog in your mind. There is an almost hypnotic quality to her voice, loaded with unspoken intimate promises.", parse);
 	Text.Flush();
 	
 	player.AddLustFraction(1);
@@ -117,9 +117,9 @@ Scenes.Brothel.First = function() {
 			Text.Add(" Your [vagDesc] is practically dripping with juices, aching for release.", parse);
 		Text.Add(" How can this tempress be so unbelievably sexy?", parse);
 		Text.NL();
-		Text.Add("<i>”I promise you this, if you only perform a few small tasks for me, I shall be yours,”</i> she whispers, leaning in so close that you can smell her intoxicating breath. <i>”You would show me a good time, would you not?”</i> Her hand hovers a fraction of an inch from your crotch. It takes all of your self control to not cum then and there. Abruptly, the woman steps away from you.", parse);
+		Text.Add("<i>“I promise you this, if you only perform a few small tasks for me, I shall be yours,”</i> she whispers, leaning in so close that you can smell her intoxicating breath. <i>“You would show me a good time, would you not?”</i> Her hand hovers a fraction of an inch from your crotch. It takes all of your self control to not cum then and there. Abruptly, the woman steps away from you.", parse);
 		Text.NL();
-		Text.Add("<i>”The Shadow Lady has much to offer for someone like you, [playername],”</i> Lucille murmurs as she sweeps away, her long silky dress falling like a waterfall from her wide hips, dragging behind her. <i>”For you, in particular. Come see me later, we have much to speak of.”</i>", parse);
+		Text.Add("<i>“The Shadow Lady has much to offer for someone like you, [playername],”</i> Lucille murmurs as she sweeps away, her long silky dress falling like a waterfall from her wide hips, dragging behind her. <i>“For you, in particular. Come see me later, we have much to speak of.”</i>", parse);
 		Text.NL();
 		Text.Add("You wipe some drool off your chin. As her spell on you lifts, you realize that you never told her your name.", parse);
 		Text.Flush();

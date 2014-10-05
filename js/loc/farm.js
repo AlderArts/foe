@@ -1243,15 +1243,15 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 	gwendy.flags["Market"] = Gwendy.Market.GoneToMarket;
 	
 	Text.Clear();
-	Text.Add("Gwendy sighs, clearly she hoped to change your mind about visiting the city. <i>”Oh, all right. I suppose I need to make my run anyway, and having someone I trust tag along might even make this trip bearable,”</i> she smiles resigned. <i>”Alrighty then, we’re going today. I’ll need you to help me load my cart though. I hope you don’t mind some heavy lifting,”</i> she tells you.", parse);
+	Text.Add("Gwendy sighs, clearly she hoped to change your mind about visiting the city. <i>“Oh, all right. I suppose I need to make my run anyway, and having someone I trust tag along might even make this trip bearable,”</i> she smiles resigned. <i>“Alrighty then, we’re going today. I’ll need you to help me load my cart though. I hope you don’t mind some heavy lifting,”</i> she tells you.", parse);
 	Text.NL();
 	Text.Add("You promptly tell her that you just need to know what she wants done.", parse);
 	Text.NL();
-	Text.Add("<i>”My usual load is a mix of things - wool, milk, cheese, butter, fruits and vegetables. Can you start fetching me some of the prepared goods from the barn where they're stored?”</i> Gwendy asks you, instructing you where the storage area is.", parse);
+	Text.Add("<i>“My usual load is a mix of things - wool, milk, cheese, butter, fruits and vegetables. Can you start fetching me some of the prepared goods from the barn where they're stored?”</i> Gwendy asks you, instructing you where the storage area is.", parse);
 	Text.NL();
 	Text.Add("You tell her that's fine, and promptly set off to start grabbing the things that she needs. Boxes of fruits and veggies, gallon jugs of milk, bales of cleaned wool, wax-sealed cheeses, knobs of butter... Eventually, Gwendy's wagon is starting to groan under the weight of its load of produce, and your own shoulders are aching as well. It's quite a workout getting all this stuff together. You can only imagine the work it took to grow and prepare it.", parse);
 	Text.NL();
-	Text.Add("<i>”Looks like that’ll be all,”</i> the buxom farmer affirms, after a final check. <i>”Ready to go?”</i> she asks you with a smile.", parse);
+	Text.Add("<i>“Looks like that’ll be all,”</i> the buxom farmer affirms, after a final check. <i>“Ready to go?”</i> she asks you with a smile.", parse);
 	Text.NL();
 	if(party.Num() > 1) {
 		var p1 = party.Get(1);
@@ -1272,7 +1272,7 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 	Text.Add("You stand ready, just in case. Off in the distance you hear the sound of hooves, though they don’t see to be getting closer. Instead they stop after some time.", parse);
 	Text.NL();
 	parse["wepDesc"] = player.WeaponDesc();
-	Text.Add("<i>”You better be ready, [playername]. I think we’re walking straight into an ambush,”</i> she says, slowing down as she prepares for the worst. You grip your [wepDesc] tightly as you feel the tension building up.", parse);
+	Text.Add("<i>“You better be ready, [playername]. I think we’re walking straight into an ambush,”</i> she says, slowing down as she prepares for the worst. You grip your [wepDesc] tightly as you feel the tension building up.", parse);
 
 
 	party.SaveActiveParty();
@@ -1290,19 +1290,19 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 		Text.Clear();
 		Text.Add("When the attack comes, it’s swift and sudden. Four horses come crashing through the undergrowth, quickly surrounding your cart. The riders - three male and one female - are all wearing masks, and are armed with swords and cludgels.", parse);
 		Text.NL();
-		Text.Add("<i>”Woah, hang on there girlie!”</i> their leader calls out, blocking the path with his steed. <i>”Don’t ya know there is a toll on this road?”</i>", parse);
+		Text.Add("<i>“Woah, hang on there girlie!”</i> their leader calls out, blocking the path with his steed. <i>“Don’t ya know there is a toll on this road?”</i>", parse);
 		Text.NL();
-		Text.Add("Gwendy is livid, and quickly reaches for a blade she has hidden under her seat. <i>”Knew this would be trouble,”</i> she mutters, trying to keep her eyes on all four assailants at once. <i>”Keep back, scum!”</i> she growls, brandishing the old sword.", parse);
+		Text.Add("Gwendy is livid, and quickly reaches for a blade she has hidden under her seat. <i>“Knew this would be trouble,”</i> she mutters, trying to keep her eyes on all four assailants at once. <i>“Keep back, scum!”</i> she growls, brandishing the old sword.", parse);
 		Text.NL();
-		Text.Add("<i>”Drop the tough act, and the toothpick. Ya ain’t your father, girlie,”</i> the bandit laughs at Gwendy’s shocked expression. <i>”No soldiers to protect you now!”</i>", parse);
+		Text.Add("<i>“Drop the tough act, and the toothpick. Ya ain’t your father, girlie,”</i> the bandit laughs at Gwendy’s shocked expression. <i>“No soldiers to protect you now!”</i>", parse);
 		Text.NL();
-		Text.Add("<i>”What’s the toll?”</i> she asks, gritting her teeth.", parse);
+		Text.Add("<i>“What’s the toll?”</i> she asks, gritting her teeth.", parse);
 		Text.NL();
-		Text.Add("<i>”Your money, your maidenhood or your life,”</i> the bandit leader replies. <i>”Though I suspect you have little of the first, and lost the second to some farm animal ages ago.”</i>", parse);
+		Text.Add("<i>“Your money, your maidenhood or your life,”</i> the bandit leader replies. <i>“Though I suspect you have little of the first, and lost the second to some farm animal ages ago.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>”Fuck you!”</i> Gwendy shouts as she springs from her seat, confronting the bandits. You stand beside her, ready for combat. Your assailants doesn’t seem to be experienced riders, as they choose to dismount to face you. The four highwaymen close in on you, blocking off any escape.", parse);
+		Text.Add("<i>“Fuck you!”</i> Gwendy shouts as she springs from her seat, confronting the bandits. You stand beside her, ready for combat. Your assailants doesn’t seem to be experienced riders, as they choose to dismount to face you. The four highwaymen close in on you, blocking off any escape.", parse);
 		Text.NL();
-		Text.Add("<i>”You guys take care of that one, Gwendy is mine,”</i> the leader growls a short order, pulling his blade.", parse);
+		Text.Add("<i>“You guys take care of that one, Gwendy is mine,”</i> the leader growls a short order, pulling his blade.", parse);
 		Text.Flush();
 		
 		var enemy = new Party();
@@ -1317,23 +1317,23 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 			Text.Clear();
 			Text.Add("You round up the defeated bandits, tying them up with some rope from the cart. They look surly, but not overly dismayed by their situation. Gwendy steps forward, taking charge of questioning them.", parse);
 			Text.NL();
-			Text.Add("<i>”How the fuck do you know my name, bastard?”</i> she demands, holding the leader of the bandits at swordpoint. <i>”Who are you people?”</i>", parse);
+			Text.Add("<i>“How the fuck do you know my name, bastard?”</i> she demands, holding the leader of the bandits at swordpoint. <i>“Who are you people?”</i>", parse);
 			Text.NL();
-			Text.Add("<i>”Just the friendly neighbourhood watch cleaning out the trash,”</i> he replies mockingly.", parse);
+			Text.Add("<i>“Just the friendly neighbourhood watch cleaning out the trash,”</i> he replies mockingly.", parse);
 			Text.NL();
-			Text.Add("<i>”Answer me, why did you attack us?”</i>", parse);
+			Text.Add("<i>“Answer me, why did you attack us?”</i>", parse);
 			Text.NL();
-			Text.Add("<i>”What you gonna do, cut me down like some murderer? You don’t have it in you, girlie. I told you before, you are not your father.”</i> The bandit grunts, spitting on the ground.", parse);
+			Text.Add("<i>“What you gonna do, cut me down like some murderer? You don’t have it in you, girlie. I told you before, you are not your father.”</i> The bandit grunts, spitting on the ground.", parse);
 			Text.NL();
-			Text.Add("<i>”We’re just doing what we were paid to do,”</i> one of the others offer, eyeing you nervously.", parse);
+			Text.Add("<i>“We’re just doing what we were paid to do,”</i> one of the others offer, eyeing you nervously.", parse);
 			Text.NL();
-			Text.Add("<i>”Who hired you, and why?”</i> Gwendy continues, unperturbed. Her blade pricks the bandit’s skin, drawing a tiny drop of blood.", parse);
+			Text.Add("<i>“Who hired you, and why?”</i> Gwendy continues, unperturbed. Her blade pricks the bandit’s skin, drawing a tiny drop of blood.", parse);
 			Text.NL();
-			Text.Add("<i>”Haven’t figured that out yet?”</i> the leader sneers. <i>”’Sides, wouldn’t make any difference if I told ya. These aren’t people you can touch, little gutter rat.”</i> For that, he earns a swift kick in the side, dumping him to the ground wheezing.", parse);
+			Text.Add("<i>“Haven’t figured that out yet?”</i> the leader sneers. <i>“’Sides, wouldn’t make any difference if I told ya. These aren’t people you can touch, little gutter rat.”</i> For that, he earns a swift kick in the side, dumping him to the ground wheezing.", parse);
 			Text.NL();
-			Text.Add("<i>”Get out of here, and stay away from me, my friends and my farm!”</i> Gwendy growls, a dangerous glint in her eyes. The bandits exchange glances, then run for it.", parse);
+			Text.Add("<i>“Get out of here, and stay away from me, my friends and my farm!”</i> Gwendy growls, a dangerous glint in her eyes. The bandits exchange glances, then run for it.", parse);
 			Text.NL();
-			Text.Add("<i>”Don’t think I could have suffered their company all the way to Rigard,”</i> the girl explains shortly, wiping off her sword.", parse);
+			Text.Add("<i>“Don’t think I could have suffered their company all the way to Rigard,”</i> the girl explains shortly, wiping off her sword.", parse);
 			Text.Flush();
 			
 			gwendy.relation.IncreaseStat(100, 5);
@@ -1351,32 +1351,32 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 			Text.Clear();
 			Text.Add("The bandits have defeated you, despite of the fight you put up. The sole female pins you down, putting a dagger to your throat. The leader has sauntered over to Gwendy, who is kneeling on all fours, gritting her teeth in rage.", parse);
 			Text.NL();
-			Text.Add("<i>”Told you it’s no use resisting, girlie,”</i> the bandit guaffs, pushing down the farm girl’s head into the dirt with his boot. <i>”The fuck do you think you are doing out here anyway, Gwendy? Got bored with getting railed by horsecock all day?”</i>", parse);
+			Text.Add("<i>“Told you it’s no use resisting, girlie,”</i> the bandit guaffs, pushing down the farm girl’s head into the dirt with his boot. <i>“The fuck do you think you are doing out here anyway, Gwendy? Got bored with getting railed by horsecock all day?”</i>", parse);
 			Text.NL();
-			Text.Add("<i>”How the fuck do you know my name, bastard?”</i> Gwendy groans. <i>”Were you waiting for me?”</i>", parse);
+			Text.Add("<i>“How the fuck do you know my name, bastard?”</i> Gwendy groans. <i>“Were you waiting for me?”</i>", parse);
 			Text.NL();
-			Text.Add("<i>”Mind your filthy mouth, slut.”</i> The bandit callously delivers a kick to her stomach, making the girl cry out in pain.", parse);
+			Text.Add("<i>“Mind your filthy mouth, slut.”</i> The bandit callously delivers a kick to her stomach, making the girl cry out in pain.", parse);
 			Text.NL();
-			Text.Add("<i>”Boss, lets not lose sight of why we are here,”</i> the woman holding you down calls. The bandit leader nods, waving to his companions. <i>”The cart.”</i>", parse);
+			Text.Add("<i>“Boss, lets not lose sight of why we are here,”</i> the woman holding you down calls. The bandit leader nods, waving to his companions. <i>“The cart.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>”Stay away from that you damn cocksuckers!”</i> Gwendy screams as the two remaining assailants stalk around to the back of the wagon, pulling out the contents and scattering them carelessly on the ground.", parse);
+			Text.Add("<i>“Stay away from that you damn cocksuckers!”</i> Gwendy screams as the two remaining assailants stalk around to the back of the wagon, pulling out the contents and scattering them carelessly on the ground.", parse);
 			Text.NL();
-			Text.Add("<i>”Thanks for reminding me,”</i> the bandit leader grabs the farmer by her braid, dragging her to her feet. <i>”Let’s see who the real cocksucker is here.”</i> Saying that, he pulls out his stiffening dick, rubbing it on Gwendy’s freckled cheek.", parse);
+			Text.Add("<i>“Thanks for reminding me,”</i> the bandit leader grabs the farmer by her braid, dragging her to her feet. <i>“Let’s see who the real cocksucker is here.”</i> Saying that, he pulls out his stiffening dick, rubbing it on Gwendy’s freckled cheek.", parse);
 			Text.NL();
-			Text.Add("<i>”Like hell I wi-”</i> Gwendy’s angry response is cut of by a sharp slap.", parse);
+			Text.Add("<i>“Like hell I wi-”</i> Gwendy’s angry response is cut of by a sharp slap.", parse);
 			Text.NL();
 			parse["hisher"] = player.mfFem("his", "her");
-			Text.Add("<i>”Listen closely now,”</i> The bandit hisses. <i>”You are going to suck my cock until I cum. You are going to drink it all down. If I feel even a nibble of teeth, your friend gets [hisher] throat slit. Got it?”</i>", parse);
+			Text.Add("<i>“Listen closely now,”</i> The bandit hisses. <i>“You are going to suck my cock until I cum. You are going to drink it all down. If I feel even a nibble of teeth, your friend gets [hisher] throat slit. Got it?”</i>", parse);
 			Text.NL();
-			Text.Add("The woman holding you down rolls her eyes. <i>”Can you stop thinking with your cock for one fucking second?”</i> She gestures to the other two, who are returning from the back of the cart. <i>”Our job here is done, lets get out of here.”</i>", parse);
+			Text.Add("The woman holding you down rolls her eyes. <i>“Can you stop thinking with your cock for one fucking second?”</i> She gestures to the other two, who are returning from the back of the cart. <i>“Our job here is done, lets get out of here.”</i>", parse);
 			Text.NL();
 			Text.Add("The leader throws her a curse, but reluctantly pulls his pants back up, joining his companions as they jump up on their horses.", parse);
 			Text.NL();
-			Text.Add("<i>”We’re coming for your farm next, girlie!”</i> He shouts over his shoulder as they ride off, leaving the two of you behind to recover. You stumble over to Gwendy, helping her to her feet. She is shaking, but with rage, not fear.", parse);
+			Text.Add("<i>“We’re coming for your farm next, girlie!”</i> He shouts over his shoulder as they ride off, leaving the two of you behind to recover. You stumble over to Gwendy, helping her to her feet. She is shaking, but with rage, not fear.", parse);
 			Text.NL();
-			Text.Add("<i>”You give that a fucking try, you assholes!”</i> she shouts after them.", parse);
+			Text.Add("<i>“You give that a fucking try, you assholes!”</i> she shouts after them.", parse);
 			Text.NL();
-			Text.Add("<i>”Shit!”</i> she groans, surveying the mess that is her cargo. The marauders did a rough job of it, but the sight of smashed and soiled vegetables and spilled milk is disheartening. You help her save what can be saved, working in silence beside the fuming farmer.", parse);
+			Text.Add("<i>“Shit!”</i> she groans, surveying the mess that is her cargo. The marauders did a rough job of it, but the sight of smashed and soiled vegetables and spilled milk is disheartening. You help her save what can be saved, working in silence beside the fuming farmer.", parse);
 			Text.Flush();
 			
 			Gui.Callstack.push(function() {
@@ -1403,13 +1403,13 @@ Scenes.Farm.GoToMarketFirstAfterBandits = function(won) {
 	Text.Clear();
 	Text.Add("You ask her if you should head back to the farm, in light of what happened.", parse);
 	Text.NL();
-	Text.Add("<i>”No, I’m not going to give them that,”</i> she says tersely. <i>”I’m taking this damn haul to market, and I’m gonna sell it.”</i> You ask her if she know who they were, they seemed to know her.", parse);
+	Text.Add("<i>“No, I’m not going to give them that,”</i> she says tersely. <i>“I’m taking this damn haul to market, and I’m gonna sell it.”</i> You ask her if she know who they were, they seemed to know her.", parse);
 	Text.NL();
-	Text.Add("<i>”I don’t know them specifically,”</i> she explains, <i>”but I suspect who they are working for. If it is who I think it is, this is just another strike for the record. This guy has a huge grudge against my father for some reason, and since dad is dead, he wants to take it out on me and my farm instead.”</i>", parse);
+	Text.Add("<i>“I don’t know them specifically,”</i> she explains, <i>“but I suspect who they are working for. If it is who I think it is, this is just another strike for the record. This guy has a huge grudge against my father for some reason, and since dad is dead, he wants to take it out on me and my farm instead.”</i>", parse);
 	Text.NL();
 	Text.Add("You’ve gotten the cart in order again, and set out for Rigard. As you ride, you try to cheer her up and take her mind off the assault. After a while, she starts to loosen up, even cracking a smile now and then at your jokes.", parse);
 	Text.NL();
-	Text.Add("<i>”Thanks for your company, [playername],”</i> she simply says.", parse);
+	Text.Add("<i>“Thanks for your company, [playername],”</i> she simply says.", parse);
 	Text.NL();
 	Text.Add("Finally coming to the capital’s main gates, the two of you are halted by a pair of bored-looking guards leaning on their halberds as they wait for visitors. They speak with a flat and dull voice, greeting you in an unenthusiastic manner, as they ask for your papers.", parse);
 	Text.NL();
@@ -1426,22 +1426,22 @@ Scenes.Farm.GoToMarketFirstAfterBandits = function(won) {
 	
 	if(!party.InParty(miranda)) {
 		Text.NL();
-		Text.Add("<i>”Hold a minute,”</i> a familiar voice calls out behind you. Gwendy freezes up as Miranda the guardswoman approaches, her look turning from rebellious to incredulous when the dog-morph ignores her and walks up to you. <i>”Thought I recognized you, luv,”</i> she grins up at you.", parse);
+		Text.Add("<i>“Hold a minute,”</i> a familiar voice calls out behind you. Gwendy freezes up as Miranda the guardswoman approaches, her look turning from rebellious to incredulous when the dog-morph ignores her and walks up to you. <i>“Thought I recognized you, luv,”</i> she grins up at you.", parse);
 		Text.NL();
 		if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
-			Text.Add("<i>”Why [playername], back for more already?”</i> the guardswoman jests. <i>”You know where to find me, I’ve got a special gift waiting, just for you.”</i> The last proposal is delivered with a sultry wink, the faint bulge beneath her tight leather armor giving you an idea about just what kind of gift she is alluding to. She briefly inspects Gwendy, summarily dismissing her. <i>”Don’t bother bringing the hussy tho. Not my type.”</i>", parse);
+			Text.Add("<i>“Why [playername], back for more already?”</i> the guardswoman jests. <i>“You know where to find me, I’ve got a special gift waiting, just for you.”</i> The last proposal is delivered with a sultry wink, the faint bulge beneath her tight leather armor giving you an idea about just what kind of gift she is alluding to. She briefly inspects Gwendy, summarily dismissing her. <i>“Don’t bother bringing the hussy tho. Not my type.”</i>", parse);
 		}
 		else {
-			Text.Add("<i>”I see you took my advice and scoured the farms for someone to help you in, [playername],”</i> Miranda nods, giving Gwendy a brief glance. <i>”Didn’t know you had a thing for blonde bimbos.”</i>", parse);
+			Text.Add("<i>“I see you took my advice and scoured the farms for someone to help you in, [playername],”</i> Miranda nods, giving Gwendy a brief glance. <i>“Didn’t know you had a thing for blonde bimbos.”</i>", parse);
 		}
 		Text.NL();
-		Text.Add("<i>”P-pardon me?!”</i> Gwendy splutters, more surprised than angry at first. <i>”Just who the hell do you think you are, bitch?”</i> Miranda’s eyes narrow, slightly taken aback by the vehement response.", parse);
+		Text.Add("<i>“P-pardon me?!”</i> Gwendy splutters, more surprised than angry at first. <i>“Just who the hell do you think you are, bitch?”</i> Miranda’s eyes narrow, slightly taken aback by the vehement response.", parse);
 		Text.NL();
-		Text.Add("<i>”I’m the law, that’s who I am,”</i> she growls, showing her teeth to the farmer. <i>”And you’ll behave while you are in my city, or you’ll regret it.”</i> The guardswoman looks back to you one last time before returning to her post. <i>”Come by The Maidens’ Bane when you are tired of blondie, I’ll show you a good time.”</i> With that, Miranda saunters off, leaving you with the fuming farm girl.", parse);
+		Text.Add("<i>“I’m the law, that’s who I am,”</i> she growls, showing her teeth to the farmer. <i>“And you’ll behave while you are in my city, or you’ll regret it.”</i> The guardswoman looks back to you one last time before returning to her post. <i>“Come by The Maidens’ Bane when you are tired of blondie, I’ll show you a good time.”</i> With that, Miranda saunters off, leaving you with the fuming farm girl.", parse);
 		Text.NL();
-		Text.Add("<i>”[playername], how come you know that bitch?”</i> Gwendy inquiries intently, her fists balled up tightly as she steers the cart into town. You try to keep your response rather vague so as not to upset her further, but she doesn’t look like she is very mollified by your evasive answers. The farmer manages to coax a name from you at the very least.", parse);
+		Text.Add("<i>“[playername], how come you know that bitch?”</i> Gwendy inquiries intently, her fists balled up tightly as she steers the cart into town. You try to keep your response rather vague so as not to upset her further, but she doesn’t look like she is very mollified by your evasive answers. The farmer manages to coax a name from you at the very least.", parse);
 		Text.NL();
-		Text.Add("<i>”Miranda, huh,”</i> she glowers. <i>”Yet another reason to dislike this stupid city.”</i>", parse);
+		Text.Add("<i>“Miranda, huh,”</i> she glowers. <i>“Yet another reason to dislike this stupid city.”</i>", parse);
 		Text.NL();
 		Text.Add("...Looks like hate at first sight. Better not stand between these two if they ever clash again.", parse);
 	}
@@ -1456,9 +1456,9 @@ Scenes.Farm.GoToMarketFirstAfterBandits = function(won) {
 		Text.Add("Your cart pulls into a large square, packed with merchant stalls and bustling with activity. Gwendy skillfully navigates the masses and pulls into an empty lot, hopping down and gesturing you to join her at the back.", parse);
 		Text.NL();
 		if(won)
-			Text.Add("<i>”Those bandits cost us some precious time,”</i> the farm girl tells you, instructing you to unload the wares and place them in front of the cart. <i>”We’ll just have to make up for it in presentation. I intend to leave here with my pockets filled and my baskets empty.”</i>", parse);
+			Text.Add("<i>“Those bandits cost us some precious time,”</i> the farm girl tells you, instructing you to unload the wares and place them in front of the cart. <i>“We’ll just have to make up for it in presentation. I intend to leave here with my pockets filled and my baskets empty.”</i>", parse);
 		else
-			Text.Add("<i>”Well, this sucks,”</i> Gwendy sighs, surveying the wares still left. <i>”This is going to take a whole lot of convincing to get rid of, and even if we manage to sell it all, we’ll still leave with light pockets. Let’s just make the best we can of the situation.”</i>", parse);
+			Text.Add("<i>“Well, this sucks,”</i> Gwendy sighs, surveying the wares still left. <i>“This is going to take a whole lot of convincing to get rid of, and even if we manage to sell it all, we’ll still leave with light pockets. Let’s just make the best we can of the situation.”</i>", parse);
 		Text.NL();
 		
 		var haul = {
@@ -1562,30 +1562,30 @@ Scenes.Farm.Market = function(haul, next) {
 	}
 	Text.NL();
 	if(score < 1) {
-		Text.Add("It's obvious from a casual glance that there's not a lot of money here. Gwendy looks at the paltry sum you’ve made and sighs. <i>”Well, I suppose it could’ve been worse. At least we got enough to pay for replacements.”</i> She pockets the coins, handing you a few. <i>”Here’s your cut, thanks for the help,”</i> she says patting you on the shoulder.", parse);
+		Text.Add("It's obvious from a casual glance that there's not a lot of money here. Gwendy looks at the paltry sum you’ve made and sighs. <i>“Well, I suppose it could’ve been worse. At least we got enough to pay for replacements.”</i> She pockets the coins, handing you a few. <i>“Here’s your cut, thanks for the help,”</i> she says patting you on the shoulder.", parse);
 		Text.NL();
 		Text.Add("You can’t shake the feeling that you’ve let her down though...", parse);
 	}
 	else if(score < 3) {
-		Text.Add("The sum of cash the two of you eventually count out is quite a decent one. Gwendy looks pleased with the outcome. <i>”Not bad!”</i> she declares happily. <i>”We can buy replacements and even made some profit. Thanks a lot of the help, [playername],”</i> she says, counting a few coins and handing them over. <i>”Here’s your cut,”</i> she says, smiling.", parse);
+		Text.Add("The sum of cash the two of you eventually count out is quite a decent one. Gwendy looks pleased with the outcome. <i>“Not bad!”</i> she declares happily. <i>“We can buy replacements and even made some profit. Thanks a lot of the help, [playername],”</i> she says, counting a few coins and handing them over. <i>“Here’s your cut,”</i> she says, smiling.", parse);
 		Text.NL();
 		Text.Add("You accept the offered coins while she pockets the rest.", parse);
 	}
 	else if(score < 5) {
-		Text.Add("It doesn't take you long to realise you've more than achieved a basic profit from today's dealings. Gwendy smiles happily. <i>“Now this is what I call a successful run, [playername],”</i> she declares, procuring a bag to stash all the gold. <i>”And it was all thanks to you!”</i> she adds.", parse);
+		Text.Add("It doesn't take you long to realise you've more than achieved a basic profit from today's dealings. Gwendy smiles happily. <i>“Now this is what I call a successful run, [playername],”</i> she declares, procuring a bag to stash all the gold. <i>“And it was all thanks to you!”</i> she adds.", parse);
 		Text.NL();
 		Text.Add("You thank her for her kind words, accepting the praise with your usual modesty.", parse);
 		Text.NL();
-		Text.Add("She stacks the gold neatly in a few piles, separating a couple and pushing it towards you. <i>”Your cut, partner!”</i> she grins, bagging the rest.", parse);
+		Text.Add("She stacks the gold neatly in a few piles, separating a couple and pushing it towards you. <i>“Your cut, partner!”</i> she grins, bagging the rest.", parse);
 		Text.NL();
 		Text.Add("You accept the coins from her graciously, adding them to your purse. A very nice sum indeed.", parse);
 	}
 	else {
 		Text.Add("The day's profits are staggering; the two of you made more money than Gwendy could in three regular runs by herself.", parse);
 		Text.NL();
-		Text.Add("<i>”Wow… Someone’s got quite the silver tongue. Pulling all those customers to our stall,”</i> Gwendy remarks sidling up to gently bump your hips with the side of hers. Your body rocks slightly at the impact, and you twist around to look her in the eyes, smiling in pride as you do so.", parse);
+		Text.Add("<i>“Wow… Someone’s got quite the silver tongue. Pulling all those customers to our stall,”</i> Gwendy remarks sidling up to gently bump your hips with the side of hers. Your body rocks slightly at the impact, and you twist around to look her in the eyes, smiling in pride as you do so.", parse);
 		Text.NL();
-		Text.Add("<i>”I think this calls for a celebration,”</i> she says, tracing a finger around your collar bone. Before you can formulate a reply she pulls you into a deep kiss, tongue pushing and twisting against your own.", parse);
+		Text.Add("<i>“I think this calls for a celebration,”</i> she says, tracing a finger around your collar bone. Before you can formulate a reply she pulls you into a deep kiss, tongue pushing and twisting against your own.", parse);
 		Text.NL();
 		if(player.SubDom() - gwendy.SubDom() > 0)
 			Text.Add("You waste no time in hungrily pulling her to you, rapaciously consuming her lips in return even as your tongue wrestles hers into submission.", parse);
@@ -1593,7 +1593,7 @@ Scenes.Farm.Market = function(haul, next) {
 			Text.Add("Eagerly you surrender yourself to her, allowing her to molest your mouth with her tongue, moaning softly in pleasure at her ministrations.", parse);
 		Text.Add(" Breaking the kiss, she giggles.", parse);
 		Text.NL();
-		Text.Add("<i>”Good to see that silvery tongue of yours isn’t just good for talking,”</i> she bats her eyes flirtatiously. <i>”But let’s save the celebration for later, right now help me bag all this gold. You can keep that mound as your cut.”</i> She points to a nearby pile of gold. <i>”I’m really glad you came along, [playername].”</i>", parse);
+		Text.Add("<i>“Good to see that silvery tongue of yours isn’t just good for talking,”</i> she bats her eyes flirtatiously. <i>“But let’s save the celebration for later, right now help me bag all this gold. You can keep that mound as your cut.”</i> She points to a nearby pile of gold. <i>“I’m really glad you came along, [playername].”</i>", parse);
 		Text.NL();
 		Text.Add("The pleasure is all yours, you reply, already taking your indicated share.", parse);
 	}
@@ -1634,13 +1634,13 @@ Scenes.Farm.GoToMarketFirstFinale = function() {
 	
 	Text.Clear();
 	if(!rigard.Visa()) {
-		Text.Add("<i>”Oh, right, I promised I would get you a pass!”</i> Gwendy says, hopping off the cart and waving for you to follow her. <i>”This town has a thing for bureaucracy, and if you want to enter - not that I know why you would - you have to have the proper papers.”</i>", parse);
+		Text.Add("<i>“Oh, right, I promised I would get you a pass!”</i> Gwendy says, hopping off the cart and waving for you to follow her. <i>“This town has a thing for bureaucracy, and if you want to enter - not that I know why you would - you have to have the proper papers.”</i>", parse);
 		Text.NL();
 		Text.Add("She leads you to a booth on the outskirts of the merchant’s district, manned by a fussy administrator. Gwendy helps you fill out the necessary paperwork, signing the application and showing her own visa in order to vouch for you. The official takes his time looking through the documents, eventually accepting them and writing out your visa.", parse);
 		Text.NL();
 		Text.Add("<b>Acquired citizen’s visa!</b>", parse);
 		Text.NL();
-		Text.Add("<i>”With this, you can enter and exit the city on your own any time you want,”</i> Gwendy explains. <i>”Given the gates are open, that is.”</i> The two of you make your way back to the empty cart, and prepare to leave.", parse);
+		Text.Add("<i>“With this, you can enter and exit the city on your own any time you want,”</i> Gwendy explains. <i>“Given the gates are open, that is.”</i> The two of you make your way back to the empty cart, and prepare to leave.", parse);
 		Text.NL();
 		
 		rigard.flags["Visa"] = 1;
@@ -1651,9 +1651,9 @@ Scenes.Farm.GoToMarketFirstFinale = function() {
 	Text.NL();
 	Text.Add("A significant amount of time later, you finally roll into the yard in front of Gwendy’s derelict barn. You help her stash the cart and care for the horse, before both of you collapse on a stack of hay, exhausted after the long day.", parse);
 	Text.NL();
-	Text.Add("<i>”Thanks a lot for the help, [playername],”</i> Gwendy yawns, stretching. <i>”For a lot of things. Who knows what would have happened if you weren’t there...”</i> The farm girl suddenly looks very vulnerable, reminding you of her young age.", parse);
+	Text.Add("<i>“Thanks a lot for the help, [playername],”</i> Gwendy yawns, stretching. <i>“For a lot of things. Who knows what would have happened if you weren’t there...”</i> The farm girl suddenly looks very vulnerable, reminding you of her young age.", parse);
 	Text.NL();
-	Text.Add("<i>”I… I need to think a bit,”</i> Gwendy muses as she looks up at the sky. <i>”This place could use some better security, perhaps a guard dog or something. I just feel that sleeping alone is going to be difficult for a while, with those sorts hanging around...”</i> she trails off, the invitation clear.", parse);
+	Text.Add("<i>“I… I need to think a bit,”</i> Gwendy muses as she looks up at the sky. <i>“This place could use some better security, perhaps a guard dog or something. I just feel that sleeping alone is going to be difficult for a while, with those sorts hanging around...”</i> she trails off, the invitation clear.", parse);
 	Text.Flush();
 	
 	party.RemoveMember(gwendy);
@@ -1668,9 +1668,9 @@ Scenes.Farm.GoToMarketFirstFinale = function() {
 	options.push({ nameStr : "Sleep",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>”Thanks,”</i> she whispers, giving you a peck on the cheek. You follow closely behind the beautiful farmer, climbing up the ladder to the loft. You have quite the nice view as you make your way up, Gwendy’s well-shaped ass wiggling invitingly just above you. There is an awkward silence as you reach the ledge. The farm girl eyes the bed suggestively.", parse);
+			Text.Add("<i>“Thanks,”</i> she whispers, giving you a peck on the cheek. You follow closely behind the beautiful farmer, climbing up the ladder to the loft. You have quite the nice view as you make your way up, Gwendy’s well-shaped ass wiggling invitingly just above you. There is an awkward silence as you reach the ledge. The farm girl eyes the bed suggestively.", parse);
 			Text.NL();
-			Text.Add("<i>”Well, we could just get some sleep. Or...”</i>", parse);
+			Text.Add("<i>“Well, we could just get some sleep. Or...”</i>", parse);
 			Text.Flush();
 			
 			party.location = world.loc.Farm.Loft;
@@ -1682,7 +1682,7 @@ Scenes.Farm.GoToMarketFirstFinale = function() {
 	options.push({ nameStr : "Decline",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>”It’s alright, I understand,”</i> Gwendy says, though she looks a bit lonely. <i>”See you around, I suppose?”</i> You nod, promising you’ll return later.", parse);
+			Text.Add("<i>“It’s alright, I understand,”</i> Gwendy says, though she looks a bit lonely. <i>“See you around, I suppose?”</i> You nod, promising you’ll return later.", parse);
 			if(party.Num() > 1) {
 				Text.NL();
 				var p1 = party.Get(1);

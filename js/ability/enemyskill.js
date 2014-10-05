@@ -194,7 +194,7 @@ Abilities.EnemySkill.TViolate.OnHit = function(encounter, caster, target, dmg) {
 		Text.Add("[Target] climaxes loudly, struggling helplessly against the invasive tentacles. Orchid laughs as she pumps [target] full of her seed, making a mess of your companion.", parse);
 	}
 	Text.NL();
-	Text.Add("<i>”That was merely a taste of what is to come,”</i> the corrupted dryad purrs as she discards [target] on the ground.", parse);
+	Text.Add("<i>“That was merely a taste of what is to come,”</i> the corrupted dryad purrs as she discards [target] on the ground.", parse);
 	Text.NL();
 	
 	var dmg = Math.floor(target.curLust);

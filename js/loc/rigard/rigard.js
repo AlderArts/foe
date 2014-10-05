@@ -522,23 +522,23 @@ Scenes.Rigard.Lockdown = function() {
 	Text.Clear();
 	Text.Add("As you approach the gates you’re surprised to see them closed. There appears to be some commotion over a few [merchantsCitizens] wanting to leave. One of the guards nearby spots you and moves to talk to you, but a familiar dog-morph butts in and greets you first.", parse);
 	Text.NL();
-	Text.Add("<i>”Hello there [playername]. Don’t suppose you know anything about a break-in into the mansion of a Lord Krawitz, do you?”</i> Miranda questions you, tapping her chin.", parse);
+	Text.Add("<i>“Hello there [playername]. Don’t suppose you know anything about a break-in into the mansion of a Lord Krawitz, do you?”</i> Miranda questions you, tapping her chin.", parse);
 	Text.NL();
 	Text.Add("In times like these it’s best to feign ignorance. You tell her you don’t know anything about any break in. What exactly happened?", parse);
 	Text.NL();
-	Text.Add("She frowns at your question. <i>”Some stupid thief broke in, stole a bunch of his possessions and left this,”</i> she presents a card. <i>”Personally, Krawitz had it coming. Pretty sure no one really cares if he’s been robbed blind. Not like the old fool didn’t do anything worse in his time, but the stupid thief just <b>had</b> to leave a calling card. Now the high-ups are all foaming and want the perp caught,”</i> she finishes with a sigh. <i>”And you wanna hear the cherry on top?”</i>", parse);
+	Text.Add("She frowns at your question. <i>“Some stupid thief broke in, stole a bunch of his possessions and left this,”</i> she presents a card. <i>“Personally, Krawitz had it coming. Pretty sure no one really cares if he’s been robbed blind. Not like the old fool didn’t do anything worse in his time, but the stupid thief just <b>had</b> to leave a calling card. Now the high-ups are all foaming and want the perp caught,”</i> she finishes with a sigh. <i>“And you wanna hear the cherry on top?”</i>", parse);
 	Text.NL();
 	Text.Add("You examine the card. Both sides have the logo of a fox throwing a raspberry, the edge reads ‘Masked Fox’.", parse);
 	Text.NL();
 	parse["nice"] = miranda.Attitude() >= Miranda.Attitude.Neutral ? " some comforting," : "";
-	Text.Add("<i>”That pompous bastard of a captain put <b>me</b> on the job. Said to use my nose. That damn bastard takes me for what? A common dog!?”</i> she exclaims, infuriated. After a few moments,[nice] and a deep breath Miranda seems to visibly calm down. She examines you and grins. ", parse);
+	Text.Add("<i>“That pompous bastard of a captain put <b>me</b> on the job. Said to use my nose. That damn bastard takes me for what? A common dog!?”</i> she exclaims, infuriated. After a few moments,[nice] and a deep breath Miranda seems to visibly calm down. She examines you and grins. ", parse);
 	if(miranda.Attitude() >= Miranda.Attitude.Neutral) {
-		Text.Add("<i>”Say, how about you help me catch this perp? I'm sure nobody will mind it if we duck out to a few places to do some 'investigating', if you catch my drift.”</i>", parse);
+		Text.Add("<i>“Say, how about you help me catch this perp? I'm sure nobody will mind it if we duck out to a few places to do some 'investigating', if you catch my drift.”</i>", parse);
 		Text.NL();
 		Text.Add("If this isn't a golden opportunity to throw off any suspicion on you, you don't know what it is. No better way to help cover your own tracks than to agree to help her chase down some other thief who robbed the same place. Actually, who in the world could have done that? Dismissing the matter as unimportant, you quickly convey to Miranda that you're willing to help her find the culprit.", parse);
 	}
 	else {
-		Text.Add("<i>”You're going to help me catch this perp. Otherwise I'm taking you in for questioning. Now, I don't expect you had anything to do with this, but the guard can be very thorough during questioning. And I could do with having some fun.”</i>", parse);
+		Text.Add("<i>“You're going to help me catch this perp. Otherwise I'm taking you in for questioning. Now, I don't expect you had anything to do with this, but the guard can be very thorough during questioning. And I could do with having some fun.”</i>", parse);
 		Text.NL();
 		Text.Add("Any surprise or curiosity you might have felt at her request for your help - after all, you're <b>not</b> her favorite person in the world and you know it - is swept aside by the knowledge that she means what she says.", parse);
 		Text.NL();
@@ -550,7 +550,7 @@ Scenes.Rigard.Lockdown = function() {
 		}
 	}
 	Text.NL();
-	Text.Add("<i>”Knew I could count on you!</i> Miranda exclaims with a grin. <i>”Now let’s get out of here and get started on our investigation.</i>”", parse);
+	Text.Add("<i>“Knew I could count on you!</i> Miranda exclaims with a grin. <i>“Now let’s get out of here and get started on our investigation.</i>”", parse);
 	Text.NL();
 	if(party.Num() > 1) {
 		parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
@@ -573,14 +573,14 @@ Scenes.Rigard.Lockdown = function() {
 				Text.Add("Your visibly shudder in anticipation, eyes closing as you just picture the horny dober-herm pinning you up against a wall and penetrating your [assCunt] with her long, throbbing mastiff-meat. Your reaction doesn't go unnoticed, Miranda grinning and reaching down to squeeze your [buttDesc] possessively before letting you go.", parse);
 		}
 		else {
-			Text.Add("As you make your way from the gates, the dog-morph leans over to whisper into your [earDesc], <i>”Hey, you’re not thinking of taking advantage of me if we have to duck down a dark corner, are you?”</i>", parse);
+			Text.Add("As you make your way from the gates, the dog-morph leans over to whisper into your [earDesc], <i>“Hey, you’re not thinking of taking advantage of me if we have to duck down a dark corner, are you?”</i>", parse);
 			Text.NL();
 			if(player.SubDom() > 0)
 				Text.Add("Like she doesn't want you to do that, you smirk back, fingers trailing teasingly over the toned curves of her buttocks before giving her a short squeeze of admiration.", parse);
 			else
 				Text.Add("You hasten to assure her that you would never do such a thing... unless she wanted you to, of course.", parse);
 			Text.NL();
-			Text.Add("<i>”Just letting you know that I’m cool with that if you do,”</i> she says, giving you a peck on the cheek before moving away.", parse);
+			Text.Add("<i>“Just letting you know that I’m cool with that if you do,”</i> she says, giving you a peck on the cheek before moving away.", parse);
 		}
 		Text.NL();
 	}
@@ -589,7 +589,7 @@ Scenes.Rigard.Lockdown = function() {
 	}
 	Text.Add("Adjusting yourself to your impromptu drafting, you ask the dog-morph if she has a plan as to where to begin.", parse);
 	Text.NL();
-	Text.Add("<i>”We should discuss a few details before we get started. So, let’s go to the Maiden’s Bane and plan our moves,”</i> she says, leading you towards her favorite watering hole.", parse);
+	Text.Add("<i>“We should discuss a few details before we get started. So, let’s go to the Maiden’s Bane and plan our moves,”</i> she says, leading you towards her favorite watering hole.", parse);
 	Text.Flush();
 	
 	party.location = world.loc.Rigard.Tavern.common;
@@ -598,17 +598,17 @@ Scenes.Rigard.Lockdown = function() {
 	Gui.NextPrompt(function() {
 		Text.Clear();
 		parse["lady"] = player.Femininity() < -0.5 ? "stepping in" : "motioning for you to get inside";
-		Text.Add("Miranda easily whisks you past the gate and makes a beeline for the Maiden’s Bane. The bar is crowded with all sorts of people complaining about the lockdown, but neither of you pay any attention to them. The guardswoman doesn’t bother looking for a table in this mess, instead she stops by the bar to grab a couple bottles and heads straight into the one of the available rooms in the back. <i>”Ladies first,”</i> she says, [lady].", parse);
+		Text.Add("Miranda easily whisks you past the gate and makes a beeline for the Maiden’s Bane. The bar is crowded with all sorts of people complaining about the lockdown, but neither of you pay any attention to them. The guardswoman doesn’t bother looking for a table in this mess, instead she stops by the bar to grab a couple bottles and heads straight into the one of the available rooms in the back. <i>“Ladies first,”</i> she says, [lady].", parse);
 		Text.NL();
 		parse["rebutt"] = (player.Gender() == Gender.male && player.SubDom() > 25) ? "Letting that crack about ladies first' slip by, for now, y" : "Y";
 		parse["lady"] = player.Femininity() < -0.5 ? "follow her" : "head";
 		Text.Add("You should be surprised about the fact she took you to the backroom to plan... but you know Miranda better than that. [rebutt]ou [lady] inside and quickly make yourself comfortable on one of the seats within. Patiently you wait for her to begin, wondering what the very literal watch-dog has in mind for finding this mysterious thief.", parse);
 		Text.NL();
-		Text.Add("The sounds of the crowd outside doesn’t disappear entirely when Miranda slams the door, but it’s sufficiently muffled that you can at least talk to each other without shouting. The doggie takes a nearby chair and sets it under the door handle. <i>”For good measure,”</i> she says. <i>”Alright then, let’s get started. Do you actually know anything about the break in or should I lay it down from the very beginning?”</i> she asks, taking a seat across from you and popping the cork on her bottle.", parse);
+		Text.Add("The sounds of the crowd outside doesn’t disappear entirely when Miranda slams the door, but it’s sufficiently muffled that you can at least talk to each other without shouting. The doggie takes a nearby chair and sets it under the door handle. <i>“For good measure,”</i> she says. <i>“Alright then, let’s get started. Do you actually know anything about the break in or should I lay it down from the very beginning?”</i> she asks, taking a seat across from you and popping the cork on her bottle.", parse);
 		Text.NL();
 		Text.Add("You quickly inform her that starting from the beginning would be best; the first you had heard of the break-in was when she spoke to you just before.", parse);
 		Text.NL();
-		Text.Add("<i>”It’s really not that complicated. Someone decided that they’ve had enough of old Krawitz and broke in to pay their respects. Let me list the charges for you,”</i> she clears her throat. <i>“They stole a few art pieces, a statue, several coins, defaced a few paintings, messed up the old man’s room, stole some wine, ", parse);
+		Text.Add("<i>“It’s really not that complicated. Someone decided that they’ve had enough of old Krawitz and broke in to pay their respects. Let me list the charges for you,”</i> she clears her throat. <i>“They stole a few art pieces, a statue, several coins, defaced a few paintings, messed up the old man’s room, stole some wine, ", parse);
 		if(rigard.Krawitz["F"] & Scenes.Krawitz.Flags.Clothes != 0)
 			Text.Add("impersonated a member of the staff, ", parse);
 		if(rigard.Krawitz["F"] & Scenes.Krawitz.Flags.Binder != 0)
@@ -634,11 +634,11 @@ Scenes.Rigard.Lockdown = function() {
 		}
 		Text.Add("Clearing your throat, you declare that's quite an extensive list of crimes. But leaving a calling card? What kind of thief does that - surely they must have known it would have given the nobles more reason to send the guards after them?", parse);
 		Text.NL();
-		Text.Add("Miranda takes a long swig of her drink. <i>”Beats me. Probably some sadistic asshole. Like I said, people don’t care much for Krawitz, even the nobles dislike the guy. But if a thief leaves a card mocking the royal guard and the city watch, we just have to go after the prick and make an example out of them,”</i> she downs the rest of her bottle.", parse);
+		Text.Add("Miranda takes a long swig of her drink. <i>“Beats me. Probably some sadistic asshole. Like I said, people don’t care much for Krawitz, even the nobles dislike the guy. But if a thief leaves a card mocking the royal guard and the city watch, we just have to go after the prick and make an example out of them,”</i> she downs the rest of her bottle.", parse);
 		Text.NL();
 		Text.Add("You nod in understanding; that sort of logic certainly makes sense to you. This thief clearly has a problem with their ego if they went and stirred up the hornet's nest like this. You feel sorry for them, but they kind of brought this on themselves.", parse);
 		Text.NL();
-		Text.Add("<i>”Pretty sure we’ve questioned every relevant person. And we’ve had guards posted in front of all shops. So I don’t think we need to search inside. Wherever the culprit is hiding, they’re alone and haven’t received help from anyone in town. So that’s a load off our backs. Still, we gotta search the plaza, the market district, the backstreets and even the area around the Gates. So if you know anyone that might have an idea to cut the chase short, I’m all ears.”</i>", parse);
+		Text.Add("<i>“Pretty sure we’ve questioned every relevant person. And we’ve had guards posted in front of all shops. So I don’t think we need to search inside. Wherever the culprit is hiding, they’re alone and haven’t received help from anyone in town. So that’s a load off our backs. Still, we gotta search the plaza, the market district, the backstreets and even the area around the Gates. So if you know anyone that might have an idea to cut the chase short, I’m all ears.”</i>", parse);
 		Text.NL();
 		Text.Add("Nothing that might help immediately springs to mind, and you admit as such to Miranda. Looks like you'll have to just get out there and start looking.", parse);
 		Text.NL();
@@ -646,11 +646,11 @@ Scenes.Rigard.Lockdown = function() {
 		var cocksInVag = player.CocksThatFit(miranda.FirstVag());
 		
 		if(miranda.flags["Herm"] == 0) {
-			Text.Add("<i>”Before we get going, how about you help me with an itch I’m having?”</i> the guardswoman asks with a mischievous grin. It looks like the drinks are starting to take effect, as the dobie’s eyes are slightly unfocused and her breathing is getting heavy.", parse);
+			Text.Add("<i>“Before we get going, how about you help me with an itch I’m having?”</i> the guardswoman asks with a mischievous grin. It looks like the drinks are starting to take effect, as the dobie’s eyes are slightly unfocused and her breathing is getting heavy.", parse);
 			Text.NL();
 			Text.Add("Oh? An itch, huh? What kind of itch, you ask her with a knowing grin. Looks like your new partner is in heat.", parse);
 			Text.NL();
-			Text.Add("<i>”This kind,”</i> Miranda smiles as she pulls down her pants, revealing a rock hard, eleven inch cock. The canid member is red in color, has a pointed tip drooling a ridiculous amount of pre. At its base, there is a thick knot, resting just above her - no, his? - heavy sack.", parse);
+			Text.Add("<i>“This kind,”</i> Miranda smiles as she pulls down her pants, revealing a rock hard, eleven inch cock. The canid member is red in color, has a pointed tip drooling a ridiculous amount of pre. At its base, there is a thick knot, resting just above her - no, his? - heavy sack.", parse);
 			Text.NL();
 			Text.Add("W-what!? She’s a guy?", parse);
 			Text.NL();
@@ -658,7 +658,7 @@ Scenes.Rigard.Lockdown = function() {
 			Text.NL();
 			Text.Add("So, she’s actually a herm? You… you’re not sure how you feel about that, actually.", parse);
 			Text.NL();
-			Text.Add("<i>”Well? Now that my secret is out, would you mind getting ‘down to business’?”</i> Miranda grins. <i>”I’m not gonna be able to do any proper work before this is taken care of.”</i>", parse);
+			Text.Add("<i>“Well? Now that my secret is out, would you mind getting ‘down to business’?”</i> Miranda grins. <i>“I’m not gonna be able to do any proper work before this is taken care of.”</i>", parse);
 			Text.NL();
 			Text.Add("<b>You now know Miranda is a herm (duh).</b>", parse);
 			Text.Flush();
@@ -672,9 +672,9 @@ Scenes.Rigard.Lockdown = function() {
 					Text.Clear();
 					Text.Add("Sorry, but you aren’t in to that. The herm shrugs her shoulders, apparently not unfamiliar with the reaction.", parse);
 					Text.NL();
-					Text.Add("<i>”I can get where you are coming from, I guess,”</i> she says as she reluctantly pulls her pants back up. <i>”Offer still stands, if you are feeling frisky later.”</i>", parse);
+					Text.Add("<i>“I can get where you are coming from, I guess,”</i> she says as she reluctantly pulls her pants back up. <i>“Offer still stands, if you are feeling frisky later.”</i>", parse);
 					Text.NL();
-					Text.Add("You insist that you should probably get going. That thief isn’t going to catch himself. She chuckles, amused at your reaction. <i>”Well, lets get to it then!”</i> The two of you leave the tavern and return inside the city proper. From what you gather, you aren’t going to get out of here before the thief is caught.", parse);
+					Text.Add("You insist that you should probably get going. That thief isn’t going to catch himself. She chuckles, amused at your reaction. <i>“Well, lets get to it then!”</i> The two of you leave the tavern and return inside the city proper. From what you gather, you aren’t going to get out of here before the thief is caught.", parse);
 					Text.Flush();
 					
 					miranda.flags["Attitude"] = Miranda.Attitude.Neutral;
@@ -685,7 +685,7 @@ Scenes.Rigard.Lockdown = function() {
 			options.push({ nameStr : "Hot",
 				func : function() {
 					Text.Clear();
-					Text.Add("Stepping around the table, you grab onto her shaft, giving it a quick stroke and drawing a moan from Miranda. <i>”I take it this means that you - ooh! - like what you see?”</i> she breathes, looking down on you with half-closed eyes.", parse);
+					Text.Add("Stepping around the table, you grab onto her shaft, giving it a quick stroke and drawing a moan from Miranda. <i>“I take it this means that you - ooh! - like what you see?”</i> she breathes, looking down on you with half-closed eyes.", parse);
 					Text.NL();
 					Text.Add("Yes, you have to admit. This is very <i>interesting</i> indeed. Now that you have a proper ‘grasp’ of the situation, what should you do about her?", parse);
 					Text.Flush();
@@ -725,7 +725,7 @@ Scenes.Rigard.Lockdown = function() {
 							Text.NL();
 							Text.Add("Rolling your eyes, you smirk and tell her you two can get back to this… later.", parse);
 							Text.NL();
-							Text.Add("<i>”Good, I’m holding you to that promise,”</i> she replies, following after you as you exit the Maiden’s Bane and move back inside the gates.", parse);
+							Text.Add("<i>“Good, I’m holding you to that promise,”</i> she replies, following after you as you exit the Maiden’s Bane and move back inside the gates.", parse);
 							Text.Flush();
 							PrintDefaultOptions();
 						}, enabled : true,
@@ -739,9 +739,9 @@ Scenes.Rigard.Lockdown = function() {
 			options.push({ nameStr : "Disgusting",
 				func : function() {
 					Text.Clear();
-					Text.Add("<i>”What? Come on! You’re not gonna pussy out on me just because I have a dick now, are you?”</i> she frowns, clearly not happy with you.", parse);
+					Text.Add("<i>“What? Come on! You’re not gonna pussy out on me just because I have a dick now, are you?”</i> she frowns, clearly not happy with you.", parse);
 					Text.NL();
-					Text.Add("When you fail to reply she just rolls her eyes and pulls her pants back up. <i>”Typical… should’ve expected that.”</i> She walks past you, heading towards the door. <i>”You coming or you’re just going to stand there like an idiot?”</i>", parse);
+					Text.Add("When you fail to reply she just rolls her eyes and pulls her pants back up. <i>“Typical… should’ve expected that.”</i> She walks past you, heading towards the door. <i>“You coming or you’re just going to stand there like an idiot?”</i>", parse);
 					Text.NL();
 					Text.Add("Jolted into action, you follow after her, as she leads you out of the Maiden’s Bane and back inside Rigard’s gates.", parse);
 					Text.Flush();
@@ -755,7 +755,7 @@ Scenes.Rigard.Lockdown = function() {
 		}
 		else {
 			if(miranda.Attitude() >= Miranda.Attitude.Neutral) {
-				Text.Add("<i>”Before we get going, how about you help me with an itch I’m having?”</i> the herm dog asks with a mischievous grin.", parse);
+				Text.Add("<i>“Before we get going, how about you help me with an itch I’m having?”</i> the herm dog asks with a mischievous grin.", parse);
 				Text.NL();
 				Text.Add("Oh, Miranda, she's just never going to change, is she? You fight back a smile as you consider the offer.", parse);
 				Text.Flush();
@@ -793,7 +793,7 @@ Scenes.Rigard.Lockdown = function() {
 						Text.NL();
 						Text.Add("Rolling your eyes, you smirk and tell her you two can get back to this… later.", parse);
 						Text.NL();
-						Text.Add("<i>”Good, I’m holding you to that promise,”</i> she replies, following after you as you exit the Maiden’s Bane and move back inside the gates.", parse);
+						Text.Add("<i>“Good, I’m holding you to that promise,”</i> she replies, following after you as you exit the Maiden’s Bane and move back inside the gates.", parse);
 						Text.Flush();
 						
 						PrintDefaultOptions();
@@ -803,11 +803,11 @@ Scenes.Rigard.Lockdown = function() {
 				Gui.SetButtonsFromList(options, false, null);
 			}
 			else { // Nasty
-				Text.Add("<i>”Alright then, let’s get to work. You can start off by stripping down,”</i> she orders you.", parse);
+				Text.Add("<i>“Alright then, let’s get to work. You can start off by stripping down,”</i> she orders you.", parse);
 				Text.NL();
 				Text.Add("Your head whips around to look at her, your shock written on your face.", parse);
 				Text.NL();
-				Text.Add("<i>”Make no mistake, this is what I called you here for. If I’m going to be working overtime to catch this thief, then I’m damn well getting a kicker out of it. Now strip before you go from partner to suspect.”</i>", parse);
+				Text.Add("<i>“Make no mistake, this is what I called you here for. If I’m going to be working overtime to catch this thief, then I’m damn well getting a kicker out of it. Now strip before you go from partner to suspect.”</i>", parse);
 				Text.Flush();
 				
 				var Choice = {
@@ -848,7 +848,7 @@ Scenes.Rigard.Lockdown = function() {
 				options.push({ nameStr : "Refuse",
 					func : function() {
 						Text.Clear();
-						Text.Add("<i>”Perhaps I wasn’t clear,”</i> Miranda’s eyes narrow dangerously. <i>”Either you are getting down on your knees right here, right now, and suck my dick, or I’m hauling your ass straight to prison and performing a cavity search on you. Your choice.”</i>", parse);
+						Text.Add("<i>“Perhaps I wasn’t clear,”</i> Miranda’s eyes narrow dangerously. <i>“Either you are getting down on your knees right here, right now, and suck my dick, or I’m hauling your ass straight to prison and performing a cavity search on you. Your choice.”</i>", parse);
 						Text.NL();
 						miranda.relation.DecreaseStat(-100, 10);
 						

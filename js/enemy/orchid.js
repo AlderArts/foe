@@ -76,16 +76,16 @@ OrchidBoss.prototype.Act = function(encounter, activeChar) {
 	Text.NL();
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
-		Text.Add("<i>”Wouldn’t it be easier to just give in?”</i>");
+		Text.Add("<i>“Wouldn’t it be easier to just give in?”</i>");
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>”You know you’ll lose in the end… why even fight it?”</i>");
+		Text.Add("<i>“You know you’ll lose in the end… why even fight it?”</i>");
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>”I can’t wait to use these tentacles on you...”</i>");
+		Text.Add("<i>“I can’t wait to use these tentacles on you...”</i>");
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>”I’ve got so much cum packed up, just for you!”</i>");
+		Text.Add("<i>“I’ve got so much cum packed up, just for you!”</i>");
 	}, 1.0, function() { return true; });
 	
 	scenes.Get();
@@ -143,27 +143,27 @@ OrchidBoss.prototype.Act = function(encounter, activeChar) {
 			scenes.Get();
 			
 			Text.NL();
-			Text.Add("<i>”You are next!”</i> Orchid taunts, carelessly discarding the spent doe in a sticky heap.", parse);
+			Text.Add("<i>“You are next!”</i> Orchid taunts, carelessly discarding the spent doe in a sticky heap.", parse);
 			Text.NL();
 			
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
-			Text.Add("Orchid smiles wickedly at you as she makes a large bound, jumping up beside her mother in the roots of the huge tree. <i>”See how they struggle, mommy. Can’t you help me convince them how good it will feel when I fuck them?”</i> she asks sweetly, rubbing the older dryad’s skin with her tentacles.", parse);
+			Text.Add("Orchid smiles wickedly at you as she makes a large bound, jumping up beside her mother in the roots of the huge tree. <i>“See how they struggle, mommy. Can’t you help me convince them how good it will feel when I fuck them?”</i> she asks sweetly, rubbing the older dryad’s skin with her tentacles.", parse);
 			Text.NL();
 			encounter.stage = encounter.stage || 0;
 			if(encounter.stage == 0) {
-				Text.Add("<i>”D-daughter, you know not what you do!”</i> Mother Tree gasps feebly.", parse);
+				Text.Add("<i>“D-daughter, you know not what you do!”</i> Mother Tree gasps feebly.", parse);
 				Text.NL();
-				Text.Add("<i>”Oh, I know exactly what I’m doing!”</i> the dryad replies merrily.", parse);
+				Text.Add("<i>“Oh, I know exactly what I’m doing!”</i> the dryad replies merrily.", parse);
 			}
 			else if(encounter.stage == 1)
-				Text.Add("<i>”O-Orchid… what has… happened to you?”</i> Mother Tree moans, trying to fight the tentacles still thrusting inside her.", parse);
+				Text.Add("<i>“O-Orchid… what has… happened to you?”</i> Mother Tree moans, trying to fight the tentacles still thrusting inside her.", parse);
 			else
-				Text.Add("<i>”Y-yes! Fuck me!”</i> Mother tree moans, completely lost in pleasure.", parse);
+				Text.Add("<i>“Y-yes! Fuck me!”</i> Mother tree moans, completely lost in pleasure.", parse);
 			Text.NL();
 			Text.Add("Orchid laughs maniacally as she lets her plant-cocks violate the brown-skinned milf, stretching her well beyond her limits. The voluptuous dryad cries out as she orgasms, sap spraying everywhere from her overstuffed cunny and almond nipples.", parse);
 			Text.NL();
-			Text.Add("<i>”Give in, and your pleasure shall be this a hundredfold!”</i> the dryad moans sultrily.", parse);
+			Text.Add("<i>“Give in, and your pleasure shall be this a hundredfold!”</i> the dryad moans sultrily.", parse);
 			Text.NL();
 			encounter.stage++;
 		}, 1.0, function() { return true; });
@@ -196,7 +196,7 @@ Scenes.Orchid.Interact = function() {
 	Text.NL();
 	Text.Add("Orchid turns to you as you approach, blushing.", parse);
 	Text.NL();
-	Text.Add("<i>”A-ah, hello [playername]!”</i>", parse);
+	Text.Add("<i>“A-ah, hello [playername]!”</i>", parse);
 	Text.Flush();
 	
 	Scenes.Orchid.Prompt();

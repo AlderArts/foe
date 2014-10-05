@@ -194,7 +194,7 @@ Scenes.Golem.OnWin = function() {
 		Text.Add("After squaring your shoulders[comp], you step inside, peering around curiously at the odd furniture scattered throughout the room. There are many antiques, but they don’t look like they are of the usual style you’ve seen in Rigard. Each article looks like it was crafted from a single piece of wood, and it looks less carved and more… grown.", parse);
 		Text.NL();
 		if(party.InParty(kiakai)) {
-			Text.Add("<i>”[playername], this is elven craftsmanship,”</i> [name] says, [hisher] voice muted. <i>”It was a long time ago, but I remember wood like this from back home...”</i>", parse);
+			Text.Add("<i>“[playername], this is elven craftsmanship,”</i> [name] says, [hisher] voice muted. <i>“It was a long time ago, but I remember wood like this from back home...”</i>", parse);
 			Text.NL();
 		}
 		Text.Add("After a brief survey, you continue to the next floor, which looks like it is a living room, containing several chairs and tables and a large divan with fine cloth covering it. On second thought, living room is perhaps the wrong word - it doesn’t look like anyone has been here for quite some time. There are some sort of candles providing light, but the fire doesn’t look or move naturally.", parse);

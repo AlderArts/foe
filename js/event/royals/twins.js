@@ -156,11 +156,11 @@ Scenes.Twins.TalkPrompt = function() {
 				if(terry.flags["Saved"] <= Terry.Saved.TalkedMiranda) {
 					Text.Add("You explain to them that you have been feeling guilty about the sentence of death decreed for the vulpine thief who inadvertently took the blame for your own raid on the Krawitz estate, as well as his own crimes there. You ask if they couldn't intervene somehow - at least to lighten his sentence, if they can't arrange a pardon?", parse);
 					Text.NL();
-					Text.Add("<i>”Well, I appreciate the fact that he robbed Krawitz, but it’s not so simple, [playername]. I don’t think-”</i>", parse);
+					Text.Add("<i>“Well, I appreciate the fact that he robbed Krawitz, but it’s not so simple, [playername]. I don’t think-”</i>", parse);
 					Text.NL();
-					Text.Add("<i>”Sis?”</i> Rani interrupts his sister, looking at her. There is an unspoken conversation between the two before Rumi turns to you.", parse);
+					Text.Add("<i>“Sis?”</i> Rani interrupts his sister, looking at her. There is an unspoken conversation between the two before Rumi turns to you.", parse);
 					Text.NL();
-					Text.Add("<i>”We’ll see what we can do, but no promises,”</i> Rumi says. <i>”Meet us here tomorrow.”</i>", parse);
+					Text.Add("<i>“We’ll see what we can do, but no promises,”</i> Rumi says. <i>“Meet us here tomorrow.”</i>", parse);
 					Text.NL();
 					Text.Add("You thank them for their efforts and excuse yourself, heading back to the main room of the inn.", parse);
 					
@@ -171,25 +171,25 @@ Scenes.Twins.TalkPrompt = function() {
 				else if(terry.flags["Saved"] == Terry.Saved.TalkedTwins1) {
 					Text.Add("You asked them how it went with helping that thief.", parse);
 					Text.NL();
-					Text.Add("<i>”We managed to work something out, but pardoning the thief is completely out of question, and there are a few terms to this deal,”</i> Rumi says.", parse);
+					Text.Add("<i>“We managed to work something out, but pardoning the thief is completely out of question, and there are a few terms to this deal,”</i> Rumi says.", parse);
 					Text.NL();
 					Text.Add("You had expected a full-pardon to be out of even their reach, and say as much. Still, at least he has his life; what are the terms they mentioned?", parse);
 					Text.NL();
-					Text.Add("Rumi clears her throat. <i>”We’ve arranged for him to be released under your care for you to instruct him and ensure he offers reparations for his misdeeds, so whatever he does once out will be your responsibility.”</i>", parse);
+					Text.Add("Rumi clears her throat. <i>“We’ve arranged for him to be released under your care for you to instruct him and ensure he offers reparations for his misdeeds, so whatever he does once out will be your responsibility.”</i>", parse);
 					Text.NL();
-					Text.Add("<i>”Of course we can’t expect him to just not run away once he’s free, so we had the court wizard prepare a special collar to aid you. A collar like this one,”</i> Rani adds, pointing at his neck.", parse);
+					Text.Add("<i>“Of course we can’t expect him to just not run away once he’s free, so we had the court wizard prepare a special collar to aid you. A collar like this one,”</i> Rani adds, pointing at his neck.", parse);
 					Text.NL();
-					Text.Add("Rumi grins mischievously. <i>”The collar’s enchanted and will prevent him from running away or disobeying your orders, as long as you don’t order to him to do something that would purposefully harm himself.”</i>", parse);
+					Text.Add("Rumi grins mischievously. <i>“The collar’s enchanted and will prevent him from running away or disobeying your orders, as long as you don’t order to him to do something that would purposefully harm himself.”</i>", parse);
 					Text.NL();
-					Text.Add("<i>”And he can’t harm you either. If he breaks one of these rules, the collar will unleash its magic and... disable him,”</i> Rani adds.", parse);
+					Text.Add("<i>“And he can’t harm you either. If he breaks one of these rules, the collar will unleash its magic and... disable him,”</i> Rani adds.", parse);
 					Text.NL();
-					Text.Add("<i>”We’ll let you figure out exactly how it does that,”</i> Rumi says, as the twins grin mischievously. <i>”Go to the jail in the castle grounds and present a guardsmen with this letter,”</i> Rumi says, handing you a sealed letter.", parse);
+					Text.Add("<i>“We’ll let you figure out exactly how it does that,”</i> Rumi says, as the twins grin mischievously. <i>“Go to the jail in the castle grounds and present a guardsmen with this letter,”</i> Rumi says, handing you a sealed letter.", parse);
 					Text.NL();
-					Text.Add("<i>”And don’t forget to attach the collar,”</i> Rani adds, presenting you with the collar.", parse);
+					Text.Add("<i>“And don’t forget to attach the collar,”</i> Rani adds, presenting you with the collar.", parse);
 					Text.NL();
 					Text.Add("You take the letter and the collar from the prince's hands. Tucking the letter away safely, you turn the collar around in your hands, looking it over. It certainly doesn't look as impressive as it sounds; it's nothing more than a simple leather band, with metallic tips for fixing it into place.", parse);
 					Text.NL();
-					Text.Add("<i>”Put this around his neck and say the activation word, 'Featherfall',”</i> Rumi says.", parse);
+					Text.Add("<i>“Put this around his neck and say the activation word, 'Featherfall',”</i> Rumi says.", parse);
 					Text.NL();
 					Text.Add("Nodding your understanding, you carefully stow the collar away before thanking the royal twins for their efforts. That said, you make your excuses and depart.", parse);
 					Text.NL();
