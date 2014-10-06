@@ -21,7 +21,7 @@ TODO:
 * Look through Lactation code, there is something wrong with it (TEST)
 
 
-* Sample coms (Naga on the way)
+* Sample coms (Naga, Estevan, Equines on the way)
 
 
 
@@ -30,7 +30,7 @@ REWRITE OF GUI:
 * Animations
 * Gem
 * Job screen
-* Combat screen?
+* Combat screen? (partly done)
 
 
 
@@ -40,9 +40,6 @@ REWRITE OF GUI:
 Version 0.3
 -----------
 * Pregnancy
-* Status effects
- - abilities
- - jobs
 
 * Mothgirl (adjust savin's writin/code)
 * Wolf - write
@@ -56,12 +53,8 @@ Version 0.3
 
 
 
-* Input structuring (layers) - needed?
 * Map - show where?
 * Name generation
-* Items
-* Abilities
-
 
 
 
@@ -122,8 +115,6 @@ Feedback:
 * Combat
  - Enemies [plains]: Generic morphs
  - Enemies [plains]: Kobolds? Goblins? Centaurs?
-
-* Implement schedules (kinda sorta done?)
 
 
 * Restructure Desc() to return an object:
@@ -317,7 +308,7 @@ PART I:
  - Danie
  - Farm expansion
 * Burrows
- - Rabbits
+ - Rabbits (underway)
  - Pre-ending
  - Post-ending
  - Ophelia follower content
@@ -328,7 +319,7 @@ PART I:
  - Belinda
 * Rigard
  - Stores
- - Random encounters
+ - Random encounters (Del)
 * Twins & Lei
 * Jeanne & Golem
  - Magnus interactions
@@ -336,9 +327,10 @@ PART I:
  - Wolf
  - Mothgirl
  - Scorpion
- - Feline
- - Equines
+ - Feline (50%)
+ - Equines (50%)
  - Bandits
+ - Naga
 * Lake
 * Glade
  - Cleansed dryad
@@ -352,7 +344,8 @@ PART II:
 * Highlands
 * Mountains
 * Elven village
-* Academy of high arts
+* Free cities
+ - Academy of high arts
 * The temple of Aria
  - Yrissa
 
@@ -429,8 +422,6 @@ Version 0.7
 
 Version 0.8
 -----------
-* Followers
-* Tutorial
 * More combat encounters
 
 Version 0.9
