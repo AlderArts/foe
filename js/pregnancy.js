@@ -104,7 +104,7 @@ PregnancyHandler.prototype.FromStorage = function(storage) {
  * opts:
  * 	slot   := PregnancyHandler.Slot
  */
-PregnancyHandler.prototype.IsPregnant = function(opts) {
+PregnancyHandler.prototype.Womb = function(opts) {
 	opts = opts || {};
 	var slot = opts.slot || PregnancyHandler.Slot.Vag;
 	var womb = null;
@@ -118,6 +118,18 @@ PregnancyHandler.prototype.IsPregnant = function(opts) {
 	if(womb == null)  return false;
 
 	return womb;
+}
+
+/*
+ * opts:
+ * 	slot   := PregnancyHandler.Slot
+ */
+PregnancyHandler.prototype.IsPregnant = function(opts) {
+	opts = opts || {};
+	var slot = opts.slot || PregnancyHandler.Slot.Vag;
+	var womb = this.Womb();
+
+	return womb.pregnant;
 }
 
 /*
