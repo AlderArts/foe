@@ -2848,6 +2848,7 @@ Scenes.Cale.SexCaleButtslutEntrypoint = function(cocks, outside) {
 	var parse = {
 		log        : outside ? "log" : "bedroll",
 		playername : player.name,
+		s          : player.NumCocks() > 1 ? "s" : "",
 		tailDesc   : function() { return player.HasTail().Short(); },
 		wingsDesc  : function() { return player.HasWings().Short(); },
 		hairDesc   : function() { return player.Hair().Short(); },
@@ -2858,7 +2859,7 @@ Scenes.Cale.SexCaleButtslutEntrypoint = function(cocks, outside) {
 		breastsDesc : function() { return player.FirstBreastRow().Short(); }
 	};
 	
-	Text.Add("<i>“Hehe, I knew you’d come around. Now why don’t you relax and let me milk your cock of all its tasty spunk? Not that you have to restrain yourself, I like it rough,”</i> he grins.", parse);
+	Text.Add("<i>“Hehe, I knew you’d come around. Now why don’t you relax and let me milk your cock[s] of all its tasty spunk? Not that you have to restrain yourself, I like it rough,”</i> he grins.", parse);
 	Text.NL();
 	Text.Add("Sounds good to you, and your hands slide down Cale’s back so you can squeeze his asscheeks appreciatively, one hand moving to stroke the base of his tail.", parse);
 	Text.NL();
@@ -3076,6 +3077,8 @@ Scenes.Cale.SexCatchAnalEntrypoint = function(outside, fromVag) {
 		playername    : player.name,
 		multiCockDesc : function() { return player.MultiCockDesc(); },
 		notS          : player.NumCocks() > 1 ? "" : "s",
+		s             : player.NumCocks() > 1 ? "s" : "",
+		thisThese     : player.NumCocks() > 1 ? "these" : "this",
 		oneof         : player.NumCocks() > 1 ? " one of" : "",
 		vagDesc       : function() { return player.FirstVag().Short(); },
 		anusDesc      : function() { return player.Butt().AnalShort(); },
@@ -3206,7 +3209,7 @@ Scenes.Cale.SexCatchAnalEntrypoint = function(outside, fromVag) {
 			Text.Add("Twisting around to look back over your shoulder at him, you raise an eyebrow and ask what he has in mind.", parse);
 			Text.NL();
 			if(cale.Slut() >= 60 && player.FirstCock())
-				Text.Add("<i>“Normally I’d home in on this juicy cock of yours,”</i> he says, giving your [multiCockDesc] an appreciative stroke. <i>“But, this time I think I’ll try this bit.”</i> He runs a finger along the moist slit of your [vagDesc].", parse);
+				Text.Add("<i>“Normally I’d home in on [thisThese] juicy cock[s] of yours,”</i> he says, giving your [multiCockDesc] an appreciative stroke. <i>“But, this time I think I’ll try this bit.”</i> He runs a finger along the moist slit of your [vagDesc].", parse);
 			else
 				Text.Add("<i>“Well, you got such a pretty pussy down here,”</i> he runs a finger along your moist slit, <i>“that I can’t help but want to give it a shot. So I’mma do just that.”</i> He grins.", parse);
 			Text.NL();
@@ -3245,7 +3248,7 @@ Scenes.Cale.SexCatchAnalEntrypoint = function(outside, fromVag) {
 			Text.NL();
 			Text.Add("Groaning softly as Cale’s not inconsiderable weight smacks into your belly, you can’t resist commenting that this certainly wasn’t what you expected when you offered to let him fuck your ass instead.", parse);
 			Text.NL();
-			Text.Add("<i>“Hey, for one, it’s your fault for making me like this. Second, did you really think I wouldn’t notice this juicy cock of yours bouncing down below as I took you? Finally, don’t act like you don’t like Cale’s butt,”</i> he teases.", parse);
+			Text.Add("<i>“Hey, for one, it’s your fault for making me like this. Second, did you really think I wouldn’t notice [thisThese] juicy cock[s] of yours bouncing down below as I took you? Finally, don’t act like you don’t like Cale’s butt,”</i> he teases.", parse);
 			Text.NL();
 			Text.Add("Reaching your arms around Cale’s waist, you pull him closer, allowing you to nuzzle your face into the crook of his neck. No, you certainly can’t say that you don’t like his butt... his tight, soft, wet, welcoming butt! You buck your hips rhythmically, punctuating each descriptive word with a powerful thrust of your own shaft into Cale’s ass, feeling the slut grip and squeeze you with each motion you make.", parse);
 			Text.NL();
