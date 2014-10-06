@@ -3102,7 +3102,7 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	Text.NL();
 	Text.Add("That sounds lovely. Though being addicted might be a bit much, you're too turned on to think clearly. You show your agreement in the only way a horny, cock-addled mouth-slut can: by opening wide and sucking [himher] inside.", parse);
 	if(cock.race == Race.horse)
-		Text.Add(" [HisHer] flare is getting is getting so large that it nearly catches on your teeth, but you wrangle it in, gulping noisily as it slides into the back of your throat to keep yourself from gagging.", parse);
+		Text.Add(" [HisHer] flare is getting so large that it nearly catches on your teeth, but you wrangle it in, gulping noisily as it slides into the back of your throat to keep yourself from gagging.", parse);
 	Text.NL();
 	Text.Add("[HisHer] rigid [rCockDesc] is just soft and spongy enough to bend and slide into your throat, stretching you uncomfortably.", parse);
 	if(cock.sheath == 1)

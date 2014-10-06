@@ -5015,7 +5015,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 							Text.Add("With one last groan, you unload your sticky gift into [name]'s [kAnusDesc], painting [hisher] insides with your cum.", parse);
 							var cum = player.OrgasmCum();
 							if(cum > 3)
-								Text.Add("The elf's stomach gains a visible bulge, straining to contain all of your semen.", parse);
+								Text.Add(" The elf's stomach gains a visible bulge, straining to contain all of your semen.", parse);
 							Text.NL();
 							if(playerCock.knot) {
 								Text.Add("With no other choice but to wait it out, you collapse on top of your lover. You can feel your sperm sloshing around inside the elf, trapped by your knot.", parse);
