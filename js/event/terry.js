@@ -4277,7 +4277,7 @@ Scenes.Terry.JeanneTFGrowHorsecock = function() {
 	if(terry.FirstCock()) {
 		Text.Add("Terry groans, falling to [hisher] knees as a dizzy spell threatens to knock [himher] off balance. <i>“T-Tight!”</i>", parse);
 		Text.NL();
-		Text.Add("You watch as the [foxvixen] sits down and spread [hisher] legs to let you watch as [hisher] balls churn. The tip of [hisher] cock poking out from its sheath as a small rope of cum spews forth, even before [hisher] cock has a chance to grow into a proper erection.", parse);
+		Text.Add("You watch as the [foxvixen] sits down and spread [hisher] legs to let you watch as [hisher] balls churn. The tip of [hisher] cock pokes out from its sheath as a small rope of cum spews forth, even before [hisher] cock has a chance to grow into a proper erection.", parse);
 		Text.NL();
 		Text.Add("With the pressure of the seed churning within [hisher] balls, Terry’s cock sprouts like lightning into a full-fledged erection, knot bulging out with the need to anchor. The shaft throbs visibly, its base bulging as a great spurt of semen forces its way up and out [hisher] glans, far larger than the last. Looking a little further down, you can see [hisher] balls throbbing in sympathy, almost visibly churning up more and more cum, bloating to twice their original size from the sheer volume of seed crammed into them.", parse);
 	}
@@ -4289,16 +4289,16 @@ Scenes.Terry.JeanneTFGrowHorsecock = function() {
 		Text.NL();
 		Text.Add("A gob of pre forms on the pointy tip, falling to the ground as Terry groans, <i>“Ugh… I guess it isn’t over...”</i>", parse);
 		Text.NL();
-		Text.Add("Sitting on [hisher] haunches, the [foxvixen] spreads [hisher] legs, giving you a perfect view of [hisher] foxhood as it throbs. A few drops of pre slide along the erect shaft, down [hisher] knot and dripping on the floor.", parse);
+		Text.Add("Sitting on [hisher] haunches, the [foxvixen] spreads [hisher] legs, giving you a perfect view of [hisher] foxhood as it throbs. A few drops of pre slide along the erect shaft, down [hisher] knot and onto the floor.", parse);
 		Text.NL();
 		Text.Add("Before your eyes, the fur at the base of the [foxvixen]’s new cock starts to bulge, swelling out and taking the shape of what is unquestionably a new scrotum. They hit the size of Terry’s old balls, but keep on growing, expanding until they are easily twice the size of the [foxvixen]’s original dainty testes. Terry shudders, moaning softly as they almost visibly churn, bulging with frothing new [foxvixen]-seed. The semen inside builds in pressure until it is forcing its way up Terry’s shaft, a bulge visibly traveling its underside before a great ropy strand of seed spews from its tip.", parse);
 	}
 	Text.NL();
-	Text.Add("Terry cries out, [hisher] cock bulging out, veins in display, pumping into [hisher] shaft as [heshe] suddenly grows harder than you thought possible.", parse);
+	Text.Add("Terry cries out, [hisher] cock bulging out, veins on display, pumping into [hisher] shaft as [heshe] suddenly grows harder than you thought possible.", parse);
 	Text.NL();
 	Text.Add("Before your eyes, Terry’s cock begins to bulge, swelling in girth wider and wider, [hisher] knot being absorbed by the growing flesh until it disappears altogether. Only after it has grown so wide does the outward swelling stop, the cock pulsing with pent-up need. Terry mewls and shudders, bucking [hisher] hips in unconscious need, and with each thrust, [hisher] tip grows flatter and flatter. Soon, it’s no longer pointy at all, but blunt and roughly circular; the more you look at it, the more it looks like a horse’s cock, flare and all.", parse);
 	Text.NL();
-	Text.Add("A cry of ecstasy wrings its way from the [foxvixen]’s throat as a small spurt of seed shoots from [hisher] now flat, flared tip. It splashes almost meekly onto the floor, and then a second spurt erupts, and then a third, meagre ropes of seed trailing across the floor.", parse);
+	Text.Add("A cry of ecstasy wrings its way from the [foxvixen]’s throat as a small spurt of seed shoots from [hisher] now flat, flared tip. It splashes almost meekly onto the floor, and then a second spurt erupts, and then a third, meager ropes of seed trailing across the floor.", parse);
 	Text.NL();
 	Text.Add("The transformative is clearly still at work, however; each spurt of seed makes Terry’s cock grow just a little bit bigger, a little bit fatter. Inch by inch it slowly swells outwards, bloating longer and longer. When the volley of semen ropes finally dwindles away into a seeping trickle, the panting [foxvixen]’s sheath is visibly distended around [hisher] new phallic girth. There’s no question what [heshe]’s now sporting is an equine cock, at least three times its original length and almost three times as thick as it once was. Colored the same bright crimson as Terry’s old cock, the bobbing shaft is incredibly eye-catching, drawing attention with color and size and girth.", parse);
 	Text.NL();
