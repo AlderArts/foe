@@ -313,6 +313,11 @@ Terry.prototype.Cup = function() {
 	return this.flags["breasts"];
 }
 
+Terry.prototype.FuckVag = function(vag, cock, expMult) {
+	this.flags["vag"] = Terry.Pussy.Used;
+	Entity.prototype.FuckVag.call(this, vag, cock, expMult);
+}
+
 // Party interaction
 Terry.prototype.Interact = function(switchSpot) {
 	var parse = {
