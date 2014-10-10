@@ -294,7 +294,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		else
 			parse.areaname = "slums";
 		
-		npcsA.push({noun: "filthy labourer", a: "a", gender: Gender.male});
+		npcsA.push({noun: "filthy laborer", a: "a", gender: Gender.male});
 		npcsA.push({noun: "poor workman", a: "a", gender: Gender.male});
 		npcsA.push({noun: "breastfeeding mother", a: "a", gender: Gender.female});
 		npcsA.push({noun: "gaunt woman", a: "a", gender: Gender.female});
@@ -385,6 +385,9 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 	}, 1.0, !enteringArea);
 	introText.AddEnc(function() {
 		Text.Add("Walking along the street, you overhear a conversation between [aAn1] [NPC1] and [aAn2] [NPC2].", parse);
+	}, 1.0);
+	introText.AddEnc(function() {
+		Text.Add("As you walk along, you overhear [aAn1] [NPC1] and [aAn2] [NPC2] talking.", parse);
 	}, 1.0);
 	introText.Get();
 	
@@ -493,6 +496,12 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 	}, 1.0, function() { return world.time.hour >= 8 && world.time.hour < 19; });
 	outroText.AddEnc(function() {
 		Text.Add("You turn a corner, and the conversation grows inaudible behind you.", parse);
+	});
+	outroText.AddEnc(function() {
+		Text.Add("Your paths diverge, and they soon pass out of hearing range.", parse);
+	});
+	outroText.AddEnc(function() {
+		Text.Add("They turn and enter a building, their conversation muffled behind a closed door.", parse);
 	});
 	outroText.Get();
 	
