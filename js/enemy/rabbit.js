@@ -435,7 +435,7 @@ Scenes.Lagomorph.GroupLossOnPlainsToBurrows = function(enc) {
 	Text.Add("You try to scuttle back as the horde moves in, surrounding you on all sides. More have joined the ranks of those that defeated you, and they crowd in on you, incoherent lust filling their eyes. They pin you down, their eager paws groping you and feeling you up. It’s quite disconcerting, being mobbed by an army of humanoid bunnies with large, floppy ears, but right now you are too weak to mount any resistance.", parse);
 	Text.NL();
 	if(party.Two()) {
-		Text.Add("A muffled shout indicate that [p1name] has also been captured by your fluffy adversaries.", parse);
+		Text.Add("A muffled shout indicates that [p1name] has also been captured by your fluffy adversaries.", parse);
 		Text.NL();
 	}
 	else if(!party.Alone()) {
@@ -1421,7 +1421,7 @@ Scenes.Lagomorph.GroupWinInterrorigate = function(enc) {
 			Text.NL();
 			Text.Add("You sidle up to the defeated alpha, seductively caressing [m1hisher] [m1breastDesc], suggesting that you can be very... accomodating, should [m1heshe] cooperate. To illustrate your point, ", parse);
 			if(alpha.FirstCock())
-				Text.Add("you idly slide your fingers across [m1hisher] flaccid member, coaxing it to it’s full length. ", parse);
+				Text.Add("you idly slide your fingers across [m1hisher] flaccid member, coaxing it to its full length. ", parse);
 			else
 				Text.Add("one of your hands slides between her legs, teasing open her folds. ", parse);
 			Text.Add("It’s not very hard to get the rabbit desperately aroused - it’s part of [m1hisher] nature, after all.", parse);
@@ -1430,7 +1430,7 @@ Scenes.Lagomorph.GroupWinInterrorigate = function(enc) {
 			Text.NL();
 			Text.Add("Much to [m1hisher] frustration, you withdraw your hands. You tell [m1himher] that you’ll show [m1himher] a <i>really</i> good time, if [m1heshe] just takes you there. The rabbit looks conflicted for a moment, juggling with the promise of sex and potentially revealing a secret. Only for a moment, though.", parse);
 			Text.NL();
-			Text.Add("You are dragged along by the eager alpha, who heads off across the plains, hopping about excitedly. Before long, you spot a low cluster of hills, apparently the rabbits destination.", parse);
+			Text.Add("You are dragged along by the eager alpha, who heads off across the plains, hopping about excitedly. Before long, you spot a low cluster of hills, apparently the rabbit’s destination.", parse);
 			Text.NL();
 			Text.Add("As you draw closer, you spot a large crowd of lagomorphs milling around outside, far too many for you to deal with.", parse);
 			Text.NL();

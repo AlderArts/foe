@@ -237,7 +237,7 @@ Scenes.Burrows.Arrival = function(alpha) {
 	Text.NL();
 	Text.Add("<i>“Good catch! Reward!”</i> The agitated alpha who brought you hops up and down excitedly. The woman sighs, exasperated, burying her face in her palms. She goes on to berate your captor for acting like thugs and assaulting random travelers. Her elaborate rhetoric seems to go way over the alpha’s head, though [m1heshe] is just bright enough to know [m1heshe] is being chastised, [m1hisher] ears drooping in remorse.", parse);
 	Text.NL();
-	Text.Add("The strange orator shoos your entourage away, and offer you a hand up. The entire situation is quite bizarre, as she doesn’t seem to mind the rampant orgy that is going on only a few feet away, but you are more than happy to grasp onto even a semblance of normality. Besides, she seems to be the only person here capable of forming sentences longer than two words, and that has to count for something, right?", parse);
+	Text.Add("The strange orator shoos your entourage away, and offers you a hand up. The entire situation is quite bizarre, as she doesn’t seem to mind the rampant orgy that is going on only a few feet away, but you are more than happy to grasp onto even a semblance of normality. Besides, she seems to be the only person here capable of forming sentences longer than two words, and that has to count for something, right?", parse);
 	Text.Flush();
 	
 	Gui.NextPrompt(function() {
@@ -460,7 +460,7 @@ Scenes.Burrows.ArrivalLagon = function() {
 	Text.NL();
 	Text.Add("Perhaps a dozen or so young lagomorph women are attending him, serving him food and scurrying about tending to lazily given commands. Two are kneeling between his legs, worshipping his stiff, almost knee-length cock.", parse);
 	Text.NL();
-	Text.Add("<i>“Now, what do we have here?”</i> He drawls. The self-proclaimed king of the rabbits - Lagon, if you recall correctly - has a deep, rumbling voice. His sharp, cruel eyes glow red in the flickering light of the roaring flames, locked on you as if on a tasty morsel. You squirm a bit uncomfortably. Rabbits <i>are</i> herbivores, right?", parse);
+	Text.Add("<i>“Now, what do we have here?”</i> he drawls. The self-proclaimed king of the rabbits - Lagon, if you recall correctly - has a deep, rumbling voice. His sharp, cruel eyes glow red in the flickering light of the roaring flames, locked on you as if on a tasty morsel. You squirm a bit uncomfortably. Rabbits <i>are</i> herbivores, right?", parse);
 	Text.NL();
 	Text.Add("<i>“Father,”</i> Ophelia greets him and curtsies. <i>“This is [playername], a traveler from outside.”</i>", parse);
 	Text.NL();
@@ -472,7 +472,7 @@ Scenes.Burrows.ArrivalLagon = function() {
 	Text.NL();
 	Text.Add("<i>“Father...”</i> Ophelia starts, as if to interject.", parse);
 	Text.NL();
-	Text.Add("<i>“And you,”</i> the patriarch snaps, <i>“you let your tongue wag way too freely.”</i> Almost casually, he sweeps the two girls massaging his cock away to the side. <i>“Your sisters bore me. Attend your father, Ophelia, put that mouth of yours to proper use,”</i> he drawls. She looks reluctant, but obeys, crawling to his side.", parse);
+	Text.Add("<i>“And you,”</i> the patriarch snaps, <i>“you let your tongue wag way too freely.”</i> Almost casually, he sweeps the two girls massaging his cock away to the side. <i>“Your sisters bore me. Attend your father, Ophelia; put that mouth of yours to proper use,”</i> he drawls. She looks reluctant, but obeys, crawling to his side.", parse);
 	Text.NL();
 	Text.Add("<i>“Now then,”</i> Lagon muses, leaning back as Ophelia wraps her lips around his member, <i>“what am I to do with you? Are you a dog of the kingdom?”</i> With another gesture, your restraints are lifted, allowing you to get up again.", parse);
 	Text.NL();
