@@ -186,7 +186,7 @@ Abilities.EnemySkill.TViolate.OnHit = function(encounter, caster, target, dmg) {
 		orchid.Fuck(orchid.FirstCock(), 2);
 		
 		Text.NL();
-		Text.Add("You groan as your body protests against the massive strain of a dozen tentacles violently rape your every hole. The intense pressure quickly pushes you over the edge, and you feel your energy drain even as Orchid pumps her seed into you.", parse);
+		Text.Add("You groan as your body protests against the massive strain of a dozen tentacles violently raping your every hole. The intense pressure quickly pushes you over the edge, and you feel your energy drain even as Orchid pumps her seed into you.", parse);
 	}
 	else {
 		Text.Add("You scamper to [tpossessive] aid, feebly trying to pull the tentacles away from [thimher], but the dryad is strong. [Target] gargles as [thisher] throat is violated, yet more tentacles seeking [thisher] crotch.", parse);
