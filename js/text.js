@@ -231,6 +231,30 @@ Text.Ordinal = function(num) {
 	}
 }
 
+
+Text.ParserPlural = function(parse, condition, prefix) {
+	parse  = parse || {};
+	prefix = prefix || "";
+	parse[prefix + "s"]      = condition ? "s" : "";
+	parse[prefix + "notS"]   = condition ? "" : "s";
+	parse[prefix + "es"]     = condition ? "es" : "";
+	parse[prefix + "notEs"]  = condition ? "" : "es";
+	
+	parse[prefix + "isAre"]   = condition ? "are" : "is";
+	parse[prefix + "hasHave"] = condition ? "have" : "has";
+	
+	parse[prefix + "oneof"]  = condition ? " one of" : "";
+	parse[prefix + "eachof"] = condition ? " each of" : "";
+	parse[prefix + "allof"]  = condition ? " all of" : "";
+	
+	parse[prefix + "itThey"]    = condition ? "they" : "it";
+	parse[prefix + "itsTheir"]  = condition ? "their" : "its";
+	parse[prefix + "itsTheyre"] = condition ? "they're" : "it's";
+	parse[prefix + "thisThese"] = condition ? "these" : "this";
+	
+	return parse;
+}
+
 /*
 	// REGULAR TEXT (NEW METHOD)
 	var parse = {
