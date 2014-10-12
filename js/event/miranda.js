@@ -877,7 +877,7 @@ Scenes.Miranda.WelcomeToRigard = function() {
 		Text.Newline();
 		
 		if(party.InParty(kiakai)) {
-			Text.AddOutput("<i>“Ah, madam, excuse me?”</i> [name] piques in. The guardswoman turn her icy stare on the elf. [HeShe] shrinks back a little, swallowing. <i>“Um, you see, I am from the order-”</i>", parse);
+			Text.AddOutput("<i>“Ah, madam, excuse me?”</i> [name] piques in. The guardswoman turns her icy stare on the elf. [HeShe] shrinks back a little, swallowing. <i>“Um, you see, I am from the order-”</i>", parse);
 			Text.Newline();
 			Text.AddOutput("<i>“Do you have a pass?”</i> the dog-morph cuts [himher] off. The elf looks crestfallen, shaking [hisher] head miserably. <i>“Then I'm afraid I can't let you in.”</i>", parse);
 		}
