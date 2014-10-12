@@ -19,7 +19,7 @@ Orgasm/Load/Preg code
 
 TODO:
 * Look through Lactation code, there is something wrong with it (TEST)
-* Restructure body.js and split up into smaller parts
+* Restructure body save/load and modularize
 
 * Sample coms (Naga, Estevan, Equines on the way)
 

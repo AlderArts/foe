@@ -16,7 +16,13 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/statuseffect.js \
 	js/ability.js \
 	js/entity.js \
-	js/body.js \
+	js/body/body.js \
+	js/body/appendage.js \
+	js/body/balls.js \
+	js/body/breasts.js \
+	js/body/butt.js \
+	js/body/cock.js \
+	js/body/vagina.js \
 	js/defbody.js \
 	js/pregnancy.js \
 	js/lactation.js \
