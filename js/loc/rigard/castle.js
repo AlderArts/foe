@@ -17,6 +17,15 @@ world.loc.Rigard.Castle.Grounds.description = function() {
 	Text.NL();
 }
 
+world.loc.Rigard.Castle.Grounds.enc = new EncounterTable();
+world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
+world.loc.Rigard.Castle.Grounds.onEntry = function() {
+	if(Math.random() < 0.2)
+		Scenes.Rigard.Chatter2(true);
+	else
+		PrintDefaultOptions();
+}
+
 world.loc.Rigard.Castle.Grounds.links.push(new Link(
 	"Plaza", true, true,
 	function() {

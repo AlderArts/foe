@@ -43,12 +43,15 @@ world.loc.Rigard.ShopStreet.street.description = function() {
 
 world.loc.Rigard.ShopStreet.street.enc = new EncounterTable();
 world.loc.Rigard.ShopStreet.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
+world.loc.Rigard.ShopStreet.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
 world.loc.Rigard.ShopStreet.street.enc.AddEnc(function() { return Scenes.Rigard.ShopStreet.Speculate;}, 1.0, function() { return (world.time.hour >= 6 && world.time.hour < 18); });
 world.loc.Rigard.ShopStreet.street.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
 world.loc.Rigard.ShopStreet.street.enc.AddEnc(function() { return Scenes.Terry.ExploreMerchants; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
 world.loc.Rigard.ShopStreet.street.onEntry = function() {
-	if(Math.random() < 0.2)
+	if(Math.random() < 0.15)
 		Scenes.Rigard.Chatter(true);
+	else if(Math.random() < 0.3)
+		Scenes.Rigard.Chatter2(true);
 	else
 		PrintDefaultOptions();
 }

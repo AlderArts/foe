@@ -107,6 +107,11 @@ Miranda.Public = {
 	Orgy    : 4
 }
 
+//TODO
+Miranda.prototype.IsFollower = function() {
+	return false; //Met? Questline?
+}
+
 Miranda.prototype.Attitude = function() {
 	return this.flags["Attitude"];
 }

@@ -199,7 +199,7 @@ function EncounterTable() {
 
 // Setup phase
 EncounterTable.prototype.AddEnc = function(Func, Odds, Cond, Obj) {
-	this.encounters.push({func: Func, odds: Odds || 1.0, cond: Cond || true, obj: Obj});
+	this.encounters.push({func: Func, odds: Odds, cond: Cond, obj: Obj});
 }
 
 EncounterTable.prototype.Num = function() {
@@ -215,10 +215,12 @@ EncounterTable.prototype.Get = function() {
 	for(var i = 0; i < this.encounters.length; i++) {
 		var e = this.encounters[i];
 		var canFind = e.cond;
+		if(canFind === undefined) canFind = true;
 		if(canFind) {
 			if(isFunction(canFind)) canFind = canFind();
 			if(canFind) {
 				var odds = e.odds;
+				if(odds === undefined) odds = 1.0;
 				if(isFunction(odds)) odds = odds(); 
 				scenes.push({func: e.func, odds: odds, obj: e.obj});
 				sum += odds;

@@ -32,10 +32,13 @@ world.loc.Rigard.Slums.gate.description = function() {
 
 world.loc.Rigard.Slums.gate.enc = new EncounterTable();
 world.loc.Rigard.Slums.gate.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
+world.loc.Rigard.Slums.gate.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
 world.loc.Rigard.Slums.gate.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
 world.loc.Rigard.Slums.gate.onEntry = function() {
-	if(Math.random() < 0.2)
+	if(Math.random() < 0.15)
 		Scenes.Rigard.Chatter(true);
+	else if(Math.random() < 0.3)
+		Scenes.Rigard.Chatter2(true);
 	else
 		PrintDefaultOptions();
 }
