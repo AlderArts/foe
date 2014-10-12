@@ -187,7 +187,7 @@ Scenes.Naga.DesertLoss = function() {
 	
 	//TODO Redo into a proper scene structure
 	
-	if(player.FirstVag()) {
+	if(player.FirstVag() && player.LowerBodyType() != LowerBodyType.Single) {
 		Scenes.Naga.DesertLossGetDPd(enc);
 	}
 	else {
