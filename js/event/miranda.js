@@ -515,9 +515,7 @@ Scenes.Miranda.RigardGatesBribe = function() {
 					Text.NL();
 					Text.Add("<i>“That wasn’t so hard now, was it?”</i> Miranda smirks at your blush. <i>“You should come by and suck my cock more often, make it a regular thing. At least if you want to enter the city again.”</i> Before you can contemplate what she means by that, you’ve arrived at a small booth, manned by a bored-looking city official.", parse);
 					Text.NL();
-					Text.Add("The guardswoman explains that you are here to write out a pass for you, and that she’ll vouch for you.", parse);
-					Text.NL();
-					Text.Add("The administrator eyes you curtly, disapproval clear in his furrowed brow. With a start, you realize that Miranda’s cum is still trailing down from your lips, and you promptly wipe it off, blushing.", parse);
+					Text.Add("The guardswoman explains that you are here to write out a pass for you, and that she’ll vouch for you. The administrator eyes you curtly, disapproval clear in his furrowed brow. With a start, you realize that Miranda’s cum is still trailing down from your lips, and you promptly wipe it off, blushing.", parse);
 					Text.NL();
 					Text.Add("The procedure is rather arduous, but at last you stand there with your visa in hand, and a stomach full of semen. <i>“Later!”</i> Miranda waves dismissively as she walks back to her post, chuckling to herself.", parse);
 					Text.NL();
@@ -729,7 +727,7 @@ Scenes.Miranda.RigardGatesBribe = function() {
 				Text.Add("<i>“Better hope you are ready for this,”</i> Miranda grunts.", parse);
 				Text.NL();
 				if(first)
-					Text.Add("It quickly becomes very apparent what she is referring to, as the next push brings a new experience. You didn’t think that your ass could be stretch any more than it already is, but the guardswoman is eager to prove you wrong.", parse);
+					Text.Add("It quickly becomes very apparent what she is referring to, as the next push brings a new experience. You didn’t think that your ass could be stretched any more than it already is, but the guardswoman is eager to prove you wrong.", parse);
 				else
 					Text.Add("Once again, you feel an old friend probing your back door, spreading your colon further.", parse);
 				Text.Add(" Even before it has begun to swell, her knot is formidable - quite a bit thicker than her already girthy shaft. It takes some effort to ram the ball home, but Miranda isn’t one who is going to let that hinder her. With a final slam of her hips, she pushes it inside, buried to the root in your tortured anus.", parse);
@@ -759,7 +757,7 @@ Scenes.Miranda.RigardGatesBribe = function() {
 				if(player.FirstCock())
 					Text.Add(" Even now, before it has swelled to its full size, her knot presses against your prostate with each violation.", parse);
 				Text.NL();
-				Text.Add("Just when you feel you can’t take any more without being torn apart, Miranda moans loudly, finally reaching her limit. Her hot seed flooding your insides, and her rapidly growing knot tying the the of you together, quickly triggers your own inevitable climax.", parse);
+				Text.Add("Just when you feel you can’t take any more without being torn apart, Miranda moans loudly, finally reaching her limit. Her hot seed flooding your insides, and her rapidly growing knot tying the two of you together, quickly triggers your own inevitable climax.", parse);
 				if(player.FirstCock()) {
 					Text.Add(" Your seed splatters harmlessly on the ground, pumped from your twitching [multiCockDesc].", parse);
 					player.OrgasmCum();
@@ -770,7 +768,7 @@ Scenes.Miranda.RigardGatesBribe = function() {
 				Text.Add("Wrecked by waves of pleasure, you doubt you’d be able to stand upright if not for Miranda’s hands on your hips. You discover it to be impossible to move, firmly stuck and at her mercy until her knot shrinks down to manageable size again.", parse);
 				Text.NL();
 				if(first)
-					Text.Add("<i>“Better settle in, we’ll be here for a while,”</i> Miranda pants, lying down on your back. <i>“For some reason, I never have anyone run out on me. Must be my charisma.”</i> That and the knot currently sealing your asshole shut. Damn thing feels like its the size of a melon.", parse);
+					Text.Add("<i>“Better settle in, we’ll be here for a while,”</i> Miranda pants, lying down on your back. <i>“For some reason, I’ve never had anyone run out on me. Must be my charisma.”</i> That and the knot currently sealing your asshole shut. Damn thing feels like its the size of a melon.", parse);
 				else if(audience) {
 					Text.Add("You yelp loudly as Miranda sits back down on her bench, dragging you with her by your ravaged sphincter. She lets you lie back and rest, chatting with the other guards as you wait for her knot to deflate. You are too exhausted to glean much from the conversation, though you can tell that they are talking about you. Perhaps deciding who gets to go next.", parse);
 					if(Math.random() < 0.5) {
@@ -1039,9 +1037,9 @@ Scenes.Miranda.CatchThatThief = function() {
 	Text.NL();
 	Text.Add("<i>“You’ve been a bad boy,”</i> Miranda murmurs, a gleeful smile playing on her lips, <i>“didn’t your mommy tell you not to steal?”</i> The poor thief grunts an unflattering remark, summarily ignored by the guardswoman. Laughing, she hoists the criminal over her shoulder like a sack of grains. As the procession of guards heads towards the barracks, the victor cups a feel on her captive’s butt, shamelessly groping the poor man.", parse);
 	Text.NL();
-	Text.Add("<i>“Caught red-handed with his fingers in the cookie jar eh?”</i> the guard chuckles. <i>“You are lucky that you weren’t caught by the royal guard, they’d likely have chopped your hands off for this transgression. Now, you’ll just have to endure a few nights in our comfy cells awaiting your trial.”</i> The dobie pats the thief’s bum possessively, ignoring his whimpering protests. <i>“Look forward to a few visits from me. I know <b>just</b> the punishment for bad boys.”</i> You almost feel bad for the guy.", parse);
+	Text.Add("<i>“Caught red-handed with his fingers in the cookie jar eh?”</i> the guard chuckles. <i>“You are lucky that you weren’t caught by the royal guard, they’d likely have chopped your hands off for this transgression. Now, you’ll just have to endure a few nights in our comfy cells awaiting your trial.”</i> The dobie pats the thief’s bum possessively, ignoring his whimpering protests. <i>“Look forward to a few visits from me. I know <b>just</b> the punishment for bad boys like you.”</i> You almost feel bad for the guy.", parse);
 	Text.NL();
-	Text.Add("The group disappear around a corner, their continued conversation muffled by the sounds of the bustling city.", parse);
+	Text.Add("The group disappears around a corner, their continued conversation muffled by the sounds of the bustling city.", parse);
 	Text.Flush();
 	
 	world.TimeStep({minute : 30});
@@ -2212,7 +2210,7 @@ Scenes.Miranda.DatingEntry = function() {
 			else
 				Text.Add("<i>“Just what is your game, [playername]?”</i> Miranda looks genuinely puzzled. <i>“You just don’t seem to take a hint… or maybe you get off on abuse. Is that it? Are you a masochist? Not that I’d mind...”</i>", parse);
 			Text.NL();
-			Text.Add("The doberherm takes another swipe of her mead, sighing contentedly.", parse);
+			Text.Add("The doberherm takes another swig of her mead, sighing contentedly.", parse);
 			Text.NL();
 			Text.Add("<i>“Look. If you want to hang with me, we need to set out some ground rules. Don’t think that this is going to be your lovey-dovey romance kind of thing. I don’t <b>do</b> relationships, I do fuckbuddies. I do a lot of them. If I want to fuck someone, I’m going to do it, regardless of what you think about it.”</i>", parse);
 			Text.NL();
@@ -2251,7 +2249,7 @@ Scenes.Miranda.DatingEntry = function() {
 		parse["masterMistress"] = miranda.SubDom() - player.SubDom() > -50 ?
 			player.name : player.mfTrue("master", "mistress");
 		if(miranda.Attitude() >= Miranda.Attitude.Neutral)
-			Text.Add("<i>“Sure, I’d love to, [masterMistress]!”</i> Miranda replies, eagerly swiping her tankard.", parse);
+			Text.Add("<i>“Sure, I’d love to, [masterMistress]!”</i> Miranda replies, eagerly draining her tankard.", parse);
 		else
 			Text.Add("<i>“Just can’t get enough of my cock, can you?”</i> Miranda grins mockingly, draining her tankard. <i>“Sure, I’m game.”</i>", parse);
 		Text.NL();
@@ -2339,7 +2337,7 @@ Scenes.Miranda.DatingStage1 = function() {
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
-		Text.Add("<i>“Wanna stick around for a few drinks first?”</i> before you have opportunity to respond, she calls for another round, asking for the ‘special’. The barkeep comes over with two mugs filled with a clear, colorless substance. <i>“Have a taste of this, it packs quite a punch!”</i> the guardswoman urges you on.", parse);
+		Text.Add("<i>“Wanna stick around for a few drinks first?”</i> before you have the opportunity to respond, she calls for another round, asking for the ‘special’. The barkeep comes over with two mugs filled with a clear, colorless substance. <i>“Have a taste of this, it packs quite a punch!”</i> the guardswoman urges you on.", parse);
 		Text.Flush();
 		
 		//[Drink][Don’t]
@@ -2464,7 +2462,7 @@ Scenes.Miranda.DatingStage2 = function() {
 	var scenes = new EncounterTable();
 	//((Wandering around slums))
 	scenes.AddEnc(function() {
-		Text.Add("You wander the sprawling slums of the city, Miranda pointing out various of her old haunts as a kid, or places you should be wary of. These parts are to the vast majority filled with unfortunate souls, and desperation makes people do unsavoury things.", parse);
+		Text.Add("You wander the sprawling slums of the city, Miranda pointing out her various old haunts as a kid, or places you should be wary of. These parts are to the vast majority filled with unfortunate souls, and desperation makes people do unsavoury things.", parse);
 		Text.NL();
 		Text.Add("The guardswoman walks the streets like if she owns them, confident in her stride. Now would be a good time to talk to her, when her head isn’t deep down a cup of booze.", parse);
 		Text.Flush();
@@ -2518,7 +2516,7 @@ Scenes.Miranda.TalkBackstory = function() {
 		scenes.push(function() {
 			Text.Add("<i>“Remember what I said about the rebellion? There was all sorts of bad stuff brewing in the city after that. Neither of my parents took part, but the city was rife with anti-morph sentiments. Just about everyone was scared and nobody knew what the recently crowned king was going to do next. Many who probably should have fled the city stayed, perhaps because they simply didn’t know anything else.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>“I just remember hazy details of it, but me and my family were forced out into the slums, thrown out of our house and put in a small shed, like a kennel for common dogs.”</i>", parse);
+			Text.Add("<i>“I only remember hazy details of it, but me and my family were forced out into the slums, thrown out of our house and put in a small shed, like a kennel for common dogs.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“There was a big riot, a large mob of bigoted scum coming down hard on the slums. Bloody miracle the entire city didn’t burn to the ground. Perhaps it would have been better if it did.”</i>", parse);
 			Text.NL();
@@ -2537,7 +2535,7 @@ Scenes.Miranda.TalkBackstory = function() {
 		scenes.push(function() {
 			Text.Add("<i>“Life in the slums was tough for two orphaned kids. I don’t think I was older than ten when we had to start fending for ourselves, and my sister only eight. Bel took it particularly hard, so it was up to me to try and protect the little puppy. Fat thanks I got for that,”</i> she grumbles.", parse);
 			Text.NL();
-			Text.Add("<i>“I think I mentioned it before, but when we first moved to the slums, I spent a lot of time in the docks. I returned there to look for work after we buried our parents, as Bel was fat little use, just running around crying all the time. We were hardly the only ones in the same situation, so there was not going to be any charitable benefactor to help us survive. Not one that didn’t come with unbearable consequences.”</i>", parse);
+			Text.Add("<i>“I think I mentioned it before, but when we first moved to the slums, I spent a lot of time in the docks. I returned there to look for work after we buried our parents, as Bel was fat little use, just running around crying all the time. We were hardly the only ones in the same situation, so there wasn't going to be any charitable benefactor to help us survive. At least, not one that didn’t come with unbearable consequences.”</i>", parse);
 			Text.NL();
 			Text.Add("You look at her curiously. <i>“Trust me, you are better off not knowing about some of the offers me and my sister were given.”</i>", parse);
 			Text.NL();
@@ -2609,7 +2607,7 @@ Scenes.Miranda.TalkBackstory = function() {
 						Text.Clear();
 						Text.Add("Seeing the trap coming from a mile away, you politely decline, asking her to continue the story.", parse);
 						Text.NL();
-						Text.Add("<i>“Bah, you are no fun!”</i> Miranda complains. <i>“...Where were I?”</i> Collecting her thoughts, she starts over again.", parse);
+						Text.Add("<i>“Bah, you are no fun!”</i> Miranda complains. <i>“...Where was I?”</i> Collecting her thoughts, she starts over again.", parse);
 						Text.NL();
 						Text.Add("<i>“As I said, me and Bel, grew up and filled out. It opened up new job opportunities for both of us. My body was built like a bar of iron, forged by working the docks. Hanging out with the sailors toned my tongue pretty damn rough too. Not to mention I could carry myself in a fight pretty well.”</i>", parse);
 						Text.NL();
@@ -2630,7 +2628,7 @@ Scenes.Miranda.TalkBackstory = function() {
 				Text.NL();
 				Text.Add("<i>“I got to spend a lot of time outside Rigard at the very least, travelling all over Eden. I’ve seen the free cities, visited the desert oasis, spent time among the highland tribes. Wherever there was trouble, the Black Hounds were there. Sometimes even before the fact.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“There are a lot of stories I could tell you about that time… We’d occasionally return to Rigard for some RnR, and I’d check in on my sister, drop of some money and so on. The rest of the gang burnt all their money on booze and whores as quickly as they could.”</i>", parse);
+				Text.Add("<i>“There are a lot of stories I could tell you about that time… We’d occasionally return to Rigard for some RnR, and I’d check in on my sister, drop off some money and so on. The rest of the gang burnt all their money on booze and whores as quickly as they could.”</i>", parse);
 				Text.NL();
 				Text.Add("Not her though?", parse);
 				Text.NL();
@@ -2664,7 +2662,7 @@ Scenes.Miranda.TalkBackstory = function() {
 			scenes.push(function() {
 				Text.Add("<i>“I’ve been walking the streets of Rigard in uniform for years, cracking down hard on crime in this town,”</i> Miranda tells you, stretching languidly. <i>“Given my background, I’m privy to certain information most are not, namely an insight in how the lower layers of society <b>work</b> in this city. Makes me able to predict certain people’s behavior, and prevent any of their shenanigans. Or at the very least catch them in the act, so to speak.”</i> She grins. <i>“Always easier to slam them into a cell when they got a bag of loot slung over their shoulder. Makes people less likely to ask about why they’re walking funny too.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“Rising to the upper ranks is pretty much impossible for someone like me; not that I’d want to be stuck pushing papers, mind you. If not for the fact that I’m a morph, I don’t bend over backwards to follow stupid orders from above. Still, it keeps me just where I want to be, prowling the streets. They might think I’m difficult to handle, but I’m just too damn good at what I do to get rid of.”</i>", parse);
+				Text.Add("<i>“Rising to the upper ranks is pretty much impossible for someone like me; not that I’d want to be stuck pushing papers, mind you. If not for the fact that I’m a morph, I’m not a pushover who bends over backwards for every stupid order from above. Still, it keeps me just where I want to be, prowling the streets. They might think I’m difficult to handle, but I’m just too damn good at what I do to get rid of.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“The higher ups don’t like me, but I’ve got respect where it matters. Not to mention that my current comrades are a hell of a better sort than my previous ones. Some of them are even nice people. I don’t really mind having a bit of city-backed authority either.”</i>", parse);
 				Text.NL();
@@ -2732,7 +2730,7 @@ Scenes.Miranda.TalkConquests = function() {
 	
 	// Long
 	scenes.push(function() {
-		Text.Add("<i>“Remember when I told you about my first time? This would be back in the slums, before I joined the mercs. I was working down the docks, hauling crates onto ships and so on. He was a cabin boy about my age on one of the ships that pulled in - pretty little thing too - so he wasn’t aware of my ‘extras’.”</i> She grins wolfishly.", parse);
+		Text.Add("<i>“Remember when I told you about my first time? This would be back in the slums, before I joined the mercs. I was working down by the docks, hauling crates onto ships and so on. He was a cabin boy about my age on one of the ships that pulled in - pretty little thing too - so he wasn’t aware of my ‘extras’.”</i> She grins wolfishly.", parse);
 		Text.NL();
 		Text.Add("<i>“It was really nice to have someone hit on me for a change. The ship came in from the free cities, so he didn’t really have anything against morphs. Not against cocks either, as it turned out. Well, I had to persuade him a bit, but he eventually came around to seeing things my way. We tried many things together, but I found myself liking pitching way more than I did receiving.”</i>", parse);
 		Text.NL();
@@ -2777,7 +2775,7 @@ Scenes.Miranda.TalkConquests = function() {
 		if(terry.flags["Met"] >= Terry.Met.Caught) {
 			var req = terry.flags["Saved"] >= Terry.Saved.Saved;
 			parse["t"] = req ? " - Terry, was it" : "";
-			Text.Add("<i>“Case and point, remember that thief that we caught[t]?”</i> You nod. <i>“No one really gives a shit about Krawitz; he’s a small time noble without any real influence. He’s doesn’t exactly have a clear conscience himself, considering the things that were found when searching his mansion. I only intended to show him some… corrective action, perhaps throw him in a cell for a few days as payback for that note. That’d make sure he didn’t stir up trouble in my city again. The little fox would’ve been far better off in my care than in that of the royal guard, believe me.”</i>", parse);
+			Text.Add("<i>“Case and point, remember that thief that we caught[t]?”</i> You nod. <i>“No one really gives a shit about Krawitz; he’s a small time noble without any real influence. He doesn’t exactly have a clear conscience himself, considering the things that were found when searching his mansion. I only intended to show him some… corrective action, perhaps throw him in a cell for a few days as payback for that note. That’d make sure he didn’t stir up trouble in my city again. The little fox would’ve been far better off in my care than in that of the royal guard, believe me.”</i>", parse);
 			Text.NL();
 			if(req)
 				Text.Add("You’re not sure Terry would agree with that, but you let it slide. To be sure, he wasn’t in a very happy place when you let him out of prison, but you aren’t sure if he’d be much happier being fucked by Miranda for days on end.", parse);
@@ -3130,7 +3128,7 @@ Scenes.Miranda.DatingFirstCity = function() {
 	}
 	
 	if(rigard.Visa()) {
-		Text.Add("The two of you wander through the town, heading towards the residential district. Miranda points out a few of local water holes, and some places that serve decent food.", parse);
+		Text.Add("The two of you wander through the town, heading towards the residential district. Miranda points out a few local watering holes, and some places that serve decent food.", parse);
 		Text.Flush();
 		
 		Gui.NextPrompt(Scenes.Miranda.DatingFirstHome);
@@ -3143,7 +3141,7 @@ Scenes.Miranda.DatingFirstCity = function() {
 				miranda.flags["Attitude"] = Miranda.Attitude.Nice;
 			}
 			else {
-				Text.Add("<i>“Now I’ve got you here, deep within the city and without a visa,”</i> Miranda grins evilly at you. <i>“Wouldn’t it just be shame if one of the guards caught word of this? A good thing you have such a <b>nice</b> friend as me helping you out, isn’t it?”</i>", parse);
+				Text.Add("<i>“Now I’ve got you here, deep within the city and without a visa,”</i> Miranda grins evilly at you. <i>“Wouldn’t it just be a shame if one of the guards caught word of this? A good thing you have such a <b>nice</b> friend as me helping you out, isn’t it?”</i>", parse);
 			}
 		}
 		else { // Nice
@@ -3158,7 +3156,7 @@ Scenes.Miranda.DatingFirstCity = function() {
 		Text.Add("The two of you arrive at a small booth, manned by a bored-looking city official. A sign beside it announces it as a city identification office. You find it rather curious that it would be open at this hour, but shrug it off as an oddity of the city administration.", parse);
 		Text.NL();
 		if(miranda.Attitude() >= Miranda.Attitude.Neutral && Scenes.Miranda.DatingScore >= 0) {
-			Text.Add("The guardswoman explains that you are here to write out a pass for you, and that she’ll vouch for you. The administrator eyes you curtly, disapproval clear in his furrowed brow. In the end you get your pass, though it takes some time for all the necessary papers to be filled out.", parse);
+			Text.Add("The guardswoman explains that she’s brought you here to get you a pass, and that she’ll vouch for you. The administrator eyes you curtly, disapproval clear in his furrowed brow. In the end you get your pass, though it takes some time for all the necessary papers to be filled out.", parse);
 			Text.NL();
 			Text.Add("<b>Acquired citizen’s visa!</b>");
 			rigard.flags["Visa"] = 1;
@@ -3188,7 +3186,7 @@ Scenes.Miranda.DatingFirstCity = function() {
 					Text.Clear();
 					Text.Add("<i>“That’s the spirit,”</i> Miranda purrs as you lower yourself into position. <i>“Swallow your pride. Swallow a lot more.”</i> As she’s talking, she undoes her britches, releasing her stiff red cock. You gulp, getting second thoughts. It looks a lot bigger up close…", parse);
 					Text.NL();
-					Text.Add("The dommy herm doesn’t give you a lot of time to contemplate your hastily made choice, quickly prying the pointed tip of her shaft past your lips. <i>“Now, suck!”</i> Not that you have much to say in the matter. She inches her cock further in, leaving a trail of salty pre along your [tongueDesc]. Though you can sense that she’s eager to go all out and fuck your throat, she eases up, letting you do the work.", parse);
+					Text.Add("The dommy herm doesn’t give you a lot of time to contemplate your hastily made choice, quickly prying the pointed tip of her shaft past your lips. <i>“Now, suck!”</i> Not that you have much say in the matter. She inches her cock further in, leaving a trail of salty pre along your [tongueDesc]. Though you can sense that she’s eager to go all out and fuck your throat, she eases up, letting you do the work.", parse);
 					Text.NL();
 					
 					Sex.Blowjob(player, miranda);
@@ -3357,7 +3355,7 @@ Scenes.Miranda.DatingFirstHome = function() {
 		options.push({ nameStr : "Decline",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>“Well this was a lousy day,”</i> Miranda grumbles. <i>“Ditched on my own doorstep. Well, fuck you too.”</i> She slams the door in your face, leaving you alone on the street. That could have gone better, you suppose. You’re just about to walk off, a bit unfamiliar with the neighbourhood, when you hear a bell ringing loudly. Glancing up, you see that Miranda is watching you from her window, grinning widely as she clangs a small brass bell.", parse);
+				Text.Add("<i>“Well this was a lousy day,”</i> Miranda grumbles. <i>“Ditched on my own doorstep. Well, fuck you too.”</i> She slams the door in your face, leaving you alone on the street. That could have gone better, you suppose. You’re just about to walk off, a bit unfamiliar with the neighborhood, when you hear a bell ringing loudly. Glancing up, you see that Miranda is watching you from her window, grinning widely as she clangs a small brass bell.", parse);
 				Text.NL();
 				Text.Add("<i>“Bit of a send-off gift,”</i> she purrs. <i>“I’d say the guard will be here in a minute or two. You still got a bit of a head start, if you don’t want to spend the night in a cell.”</i> ", parse);
 				if(rigard.Visa())
