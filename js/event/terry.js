@@ -3657,11 +3657,10 @@ Scenes.Terry.JeanneTFCraft = function(item, scene, horseTF) {
 				Text.Add("<i>“Don’t mind me,”</i> the elven mage replies, taking a seat on a nearby chair, studying the fox intently.", parse);
 				Text.NL();
 				Text.Add("It’s settled then. You strip off your [lowerArmorDesc] and attach the strap-on, making sure it won’t come loose. Now, about Terry’s butt...", parse);
-				p1Cock = Items.StrapOn.PlainStrapon; //TODO?
+				p1Cock = Items.StrapOn.PlainStrapon.cock;
 			}
 			Text.NL();
 			
-			//TODO rough
 			Scenes.Terry.SexFuckButtEntrypoint(p1Cock, false, function(rough) {
 				Text.Add("There, now [heshe]’s all stretched up, you proudly declare, working the tip of the big suppository into [hisher] butt. ", parse);
 				if(rough) {
