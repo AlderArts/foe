@@ -3369,7 +3369,7 @@ Scenes.Miranda.DatingFirstHome = function() {
 				if(!party.Alone()) {
 					parse["name"]   = party.Two() ? party.Get(1).name     : "your companions";
 					parse["himher"] = party.Two() ? party.Get(1).himher() : "them";
-					Text.Add(" You are able to reunite with [comp] shortly after, though you don’t feel particularly inclined to tell [himher] about tonight’s escapades.", parse);
+					Text.Add(" You are able to reunite with [name] shortly after, though you don’t feel particularly inclined to tell [himher] about tonight’s escapades.", parse);
 				}
 				Text.Flush();
 				
