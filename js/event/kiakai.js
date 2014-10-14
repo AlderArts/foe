@@ -4139,8 +4139,8 @@ Scenes.Kiakai.HealingAssertive = function() {
 							var cap = kiakai.Butt().capacity.Get() * (0.75 + kiakai.LustLevel() + kiakai.flags["AnalExp"] / 100);
 							options.push({ nameStr : toy.name,
 								func : function() {
-									parse["toyDesc"] = toy.name;
-									parse["penDesc"] = "the " + toy.name;
+									parse["toyDesc"] = toy.sDesc();
+									parse["penDesc"] = "the " + toy.sDesc();
 									Text.Clear();
 									Text.Add("Leaving [name]'s hole unattended for a moment, you rummage through your inventory, triumphantly pulling out your [toyDesc].", parse);
 									Text.NL();
