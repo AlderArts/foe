@@ -5,7 +5,7 @@ CreditsScreen = function() {
 	Text.Clear();
 	Gui.ClearButtons();
 	
-	Text.Add("Thanks to MrKrampus, Del, Johnathan Roberts and Snarbolax for editing for me!");
+	Text.Add("Thanks to MrKrampus, Del, Johnathan Roberts, Spiegelmeister and Snarbolax for editing for me!");
 	Text.NL();
 	
 	Text.Add(Text.BoldColor("Writing:"));
