@@ -275,7 +275,7 @@ Scenes.Dreams.EndlessClassroom = function(ravenTrigger) {
 		raven : Scenes.Dreams.RavenText(ravenTrigger, " The more you look, the more bird-like they all appear, staring at you with intent beady eyes.", " As you look, the students look more and more like ravens, staring at you with beady eyes. Now, you can even make out their black wings. So many watchers this time. You force yourself to lock gazes with the multitude for a moment longer - you have to remember them.")
 	};
 	
-	Text.Add("Your pupils sit in orderly rows, as you read from a dry tome in your hands. A hand is raised in the back, and, after finising the sentence, you shut the book, and wave for the student to speak. He stands, and you can barely make him out in the distance.", parse);
+	Text.Add("Your pupils sit in orderly rows, as you read from a dry tome in your hands. A hand is raised in the back, and, after finishing the sentence, you shut the book, waving for the student to speak. He stands, and you can barely make him out in the distance.", parse);
 	Text.NL();
 	Text.Add("<i>“[gen],”</i> the piping voice somehow carries to you through the distance. <i>“What is agoraphobia?”</i> As you look, the student seems to recede further, and behind him, the rows go on and on, spreading outwards and stretching endlessly, until there is nothing in your view but an endless sea of desks, an endless sea of intent faces.[raven]", parse);
 	Text.NL();

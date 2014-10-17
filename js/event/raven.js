@@ -143,7 +143,7 @@ Scenes.RavenMother.TheHunt = function(func) {
 					Text.Clear();
 					Text.Add("You ask [person] if [pheshe] knows where the raven went or how to follow it.", parse);
 					Text.NL();
-					Text.Add("<i>“A raven? Now you are just being ridiculous,”</i> [pheshe] answers. <i>“How could a raven possibly be in here? Now come and eat the pancakes with me before they get cold.”</i>", parse);
+					Text.Add("<i>“A raven? Now you are just being ridiculous,”</i> [pheshe] answers. <i>“How could a raven possibly be in here? Now come and eat these pancakes with me before they get cold.”</i>", parse);
 					Text.NL();
 					Text.Add("Well, you’re not sure why you thought that might work.", parse);
 					Text.Flush();
@@ -191,7 +191,7 @@ Scenes.RavenMother.TheHuntWolf = function() {
 		Text.Clear();
 		Text.Add("...You are running, stalked by flickering shadows and an all-encroaching fire. Mindless panic swirls through your mind, urging you forward. You blink your eyes, focusing, remembering why you’re here, and you calm.", parse);
 		Text.NL();
-		Text.Add("Fire licks at your back, but you come to a stop and ignore it. It cannot harm you in a dream. <i>“Has the little ant found a small courage?”</i> Uru demands, floating above you. <i>“But you should run, little ant. Your feet will serve you much better here.”</i>", parse);
+		Text.Add("Fire licks at your back, but you come to a stop and ignore it. It cannot harm you in a dream. <i>“Has the little ant found some small bit of courage?”</i> Uru demands, floating above you. <i>“But you should run, little ant. Your feet will serve you much better here.”</i>", parse);
 		Text.NL();
 		Text.Add("Paying the demon no mind, you scan the sky, and finally spot the raven behind her. This time, you realize there is no reason for you to jump or fly. It’s your dream, and you can be anywhere you want in it.", parse);
 		Text.NL();
@@ -410,7 +410,7 @@ Scenes.RavenMother.TheHuntTalk = function() {
 				Text.NL();
 				Text.Add("That was a bit vague, but you’ll probably be able to figure it out. You wave at the Raven Mother in farewell, and stand in place feeling foolish. How do you leave, exactly? You try to open your eyes, but they’re already open and simply go wider. You just end up looking startled for the ravens.", parse);
 				Text.NL();
-				Text.Add("Trying the feathered girl’s advice, you concentrate on the gemstone, and find that you can readily find its essence around you. You think at it that you want to return to your physical body, and to your surprise it listens. With an odd compressing sensation, you’re back. You feel you muscles stiff from disuse, blood pumping through your veins.", parse);
+				Text.Add("Trying the feathered girl’s advice, you concentrate on the gemstone, and find that you can readily find its essence around you. You think at it that you want to return to your physical body, and to your surprise it listens. With an odd compressing sensation, you’re back. You feel your muscles stiff from disuse, blood pumping through your veins.", parse);
 				Text.NL();
 				Text.Add("You open your eyes, and the real world lies before you, somehow a little duller after your excursion in dreams. Well, at least you came back safe, and mostly figured out what’s going on. And you got out before you completely embarrassed yourself in front of the birds.", parse);
 				Text.Flush();
