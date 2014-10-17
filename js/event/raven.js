@@ -233,7 +233,7 @@ Scenes.RavenMother.TheHuntGlade = function() {
 	Text.NL();
 	Text.Add("<i>“Release her,”</i> a crackling voice speaks from behind you. You turn and see a girl facing you, sitting on an enormous stump in the middle of the glade. You somehow managed to overlook her when your eyes had met those of the watching birds.", parse);
 	Text.NL();
-	Text.Add("She sits on the stump naked, leaning back on her arms, her posture relaxed, face turned towards the sky. Her small B-cup breasts are carelessly thrust toward you. Instead of hair, soft black feathers cascade from her head down to her shoulderblades, outlining her face. A tracery of feathers also runs from her shoulders, down her arms, and along her sides down to her hips. Her fingers and toes end in sharp-looking talons.", parse);
+	Text.Add("She sits on the stump naked, leaning back on her arms, her posture relaxed, face turned towards the sky. Her small B-cup breasts are carelessly thrust toward you. Instead of hair, soft black feathers cascade from her head down to her shoulderblades, outlining her face. A tracery of feathers also runs from her shoulders, down her arms, and along her sides to her hips. Her fingers and toes end in sharp-looking talons.", parse);
 	Text.NL();
 	Text.Add("<i>“Now.”</i> Her throaty voice cracks, apparently unused to speech, but her intonation leaves no doubt that she expects to be obeyed.", parse);
 	Text.Flush();
