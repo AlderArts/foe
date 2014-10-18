@@ -132,7 +132,7 @@ Scenes.RavenMother.TheHunt = function(func) {
 		Text.NL();
 		Text.Add("Well, if it won’t come out, you’ll have to resort to more drastic measures. You lift up the plate up, and throw it to the ground. As it falls, a pitch black raven springs out with a desperate flap of its wings, a moment before the now unadorned plate shatters on the floor.", parse);
 		Text.NL();
-		Text.Add("You’re unsure what to do next, but the bird is not so uncertain. With an outraged croak, it flies straight at the corner of the room, but instead of crashing into the wall, it somehow shifts through it, and with a small blur in the air it is gone.", parse);
+		Text.Add("You’re unsure what to do next, but the bird is not so uncertain. With an outraged croak, it flies straight at the corner of the room, but instead of crashing into the wall, it somehow shifts through it, and with a blur in the air it is gone.", parse);
 		Text.Flush();
 		
 		var prompt = function(asked) {
@@ -155,7 +155,7 @@ Scenes.RavenMother.TheHunt = function(func) {
 			options.push({ nameStr : "Investigate",
 				func : function() {
 					Text.Clear();
-					Text.Add("Ignoring [person]’s bemused entreaties, you carefully examine the corner where the raven disappeared. There’s something a little different about it. Reality - for lack of a better term - feels a little thinner there, a little easier to penetrate. Is it simply because it’s such an unimportant part of the dream?", parse);
+					Text.Add("Ignoring [person]’s bemused entreaties, you carefully examine the corner where the raven disappeared. There’s something different about it. Reality - for lack of a better term - feels thinner there, easier to penetrate. Is it simply because it’s such an unimportant part of the dream?", parse);
 					Text.NL();
 					Text.Add("There’s something more as well. You look carefully, your vision refocusing with the aid of the crystal and see something shimmer with worry. Tracing your hand over the sensation, you feel it push through the soft spot of the dream, and enter a tunnel to somewhere else.", parse);
 					Text.NL();
@@ -184,7 +184,7 @@ Scenes.RavenMother.TheHuntWolf = function() {
 	Text.NL();
 	Text.Add("You spring up, jumping easily from tree to tree, until you perch at the canopy. You aim your jump for a moment and spring for the raven, flying swift as an arrow through the air. At the last moment, the raven spots you, and flaps its wings with a desperate cry.", parse);
 	Text.NL();
-	Text.Add("You just miss it, snatching a few of its tail feathers, as it vanishes from the dream. Deciding you’re not going to fall here, you push off the air gently, and delve into the raven’s tunnel, the scent trail of its anxiety clear to your nose...", parse);
+	Text.Add("You just miss it, snatching a few of its tail feathers, as it vanishes from the dream. Deciding you’re not going to fall here, you push off the air gently, and delve into the raven’s tunnel, the scent trail of its anxiety clear to your canid nose...", parse);
 	Text.Flush();
 	
 	Gui.NextPrompt(function() {

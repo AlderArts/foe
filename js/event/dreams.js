@@ -247,7 +247,7 @@ Scenes.Dreams.Heartstone = function(ravenTrigger) {
 		raven : Scenes.Dreams.RavenText(ravenTrigger, " A black feather falls on you from somewhere up above, but you pay it no mind.", " A black feather falls from somewhere above. Again, the ravens are watching. You feel you should take note, but you yourself are simply too fascinating.")
 	};
 	
-	Text.Add("You are looking at yourself from outside your own sleeping body, curiously studying yourself.[raven] Do you really look that way to others? You are quickly distracted from your surface appearance, however, as you delve deeper, below the [skinDesc]. Seeing every tiny cell of your body in exquisite detail, your unnatural vision flits back and forth, focusing here and there on some odd part of your anatomy.", parse);
+	Text.Add("You are looking at yourself from outside your own sleeping body, curiously studying yourself.[raven] Do you really look that way to others? You are quickly distracted from your surface appearance, however, as you delve deeper, below your [skinDesc]. Seeing every tiny cell of your body in exquisite detail, your unnatural vision flits back and forth, focusing here and there on some odd part of your anatomy.", parse);
 	Text.NL();
 	Text.Add("As if being dragged there, you gravitate towards the core of you being, speeding through your veins lightning quick and arriving at where your heart should be. There, inside your chest, is the living purple gemstone, pulsing rhythmically, giving your body life.", parse);
 	Text.NL();
@@ -275,9 +275,9 @@ Scenes.Dreams.EndlessClassroom = function(ravenTrigger) {
 		raven : Scenes.Dreams.RavenText(ravenTrigger, " The more you look, the more bird-like they all appear, staring at you with intent beady eyes.", " As you look, the students look more and more like ravens, staring at you with beady eyes. Now, you can even make out their black wings. So many watchers this time. You force yourself to lock gazes with the multitude for a moment longer - you have to remember them.")
 	};
 	
-	Text.Add("Your pupils sit in orderly rows, as you read from a dry tome in your hands. A hand is raised in the back, and, after finishing the sentence, you shut the book, waving for the student to speak. He stands, and you can barely make him out in the distance.", parse);
+	Text.Add("Your pupils sit in orderly rows, as you read from a dry tome in your hands. A hand is raised in the back, and after finishing the sentence, you shut the book, waving for the student to speak. He stands, and you can barely make him out in the distance.", parse);
 	Text.NL();
-	Text.Add("<i>“[gen],”</i> the piping voice somehow carries to you through the distance. <i>“What is agoraphobia?”</i> As you look, the student seems to recede further, and behind him, the rows go on and on, spreading outwards and stretching endlessly, until there is nothing in your view but an endless sea of desks, an endless sea of intent faces.[raven]", parse);
+	Text.Add("<i>“[gen],”</i> the piping voice somehow carries to you through the distance. <i>“What is agoraphobia?”</i> As you look, the student seems to recede further. Behind him, the rows go on and on, spreading outwards and stretching endlessly, until there is nothing in your view but an endless sea of desks, an endless sea of intent faces.[raven]", parse);
 	Text.NL();
 	Text.Add("Breathing a little fast, you glance down hurriedly, and reopen the book. There. Only you and the words.", parse);
 	Text.NL();
