@@ -379,7 +379,9 @@ Scenes.Dreams.Alchemy = function(ravenTrigger) {
 	if(ravenTrigger) {
 		Text.Add("A sharp beak pokes its way out of the murky liquid, and a black bird follows. It hops to the edge of the pot, and shakes itself, droplets flying in all directions, before quickly preening its feathers and taking off.");
 		Text.NL();
-		Text.Add(Scenes.Dreams.RavenText(true, "In a few moments, it’s almost gone from sight, circling far overhead. No, no, that definitely wasn’t supposed to happen! This potion is for... well, it’s for something that’s not a raven. This has to be perfect.", "How did the thing get in there? Was it holding its breath in the pot all along, or was it somehow trapped in the ingredients? Either way, it’s clear it’s here to spy on you again. You have to remember that when you wake up. Right now, however, you have to get this potion right. It has to be perfect."));
+		var raven1 = "In a few moments, it’s almost gone from sight, circling far overhead. No, no, that definitely wasn’t supposed to happen! This potion is for... well, it’s for something that’s not a raven. This has to be perfect.";
+		var raven2 = "How did the thing get in there? Was it holding its breath in the pot all along, or was it somehow trapped in the ingredients? Either way, it’s clear it’s here to spy on you again. You have to remember that when you wake up. Right now, however, you have to get this potion right. It has to be perfect.";
+		Text.Add(Scenes.Dreams.RavenText(true, raven1, raven2));
 	}
 	else {
 		Text.Add("No, no, that wasn’t supposed to happen! That smell, that texture it’s all wrong. That’s right, you made a mistake with the wood shavings! You empty the pot, and start over. This has to be perfect.");
