@@ -292,7 +292,7 @@ Scenes.Dreams.PredatorPack = function(ravenTrigger) {
 	
 	Text.Add("Paws pound the snow behind you and to your sides, as you lope through the trees. Your brothers and sisters are fast, but you are faster. You all smell the deer ahead, the distance narrowing as she tires.[raven]", parse);
 	Text.NL();
-	Text.Add("You hear [raven2] turning and darting out through the treeline. She’s desperate, but clever. Humans live out there. It’s dangerous to chase too far. You bare your teeth, and push harder, your claws pounding through the thin layer of snow and finding purchase in the dirt underneath. There are snarls from your pack, as they try to match your pace, but you’ll have to do this alone.", parse);
+	Text.Add("You hear [raven2] turn and dart out through the treeline. She’s desperate, but clever. Humans live out there. It’s dangerous to chase too far. You bare your teeth, and push harder, your claws pounding through the thin layer of snow and finding purchase in the dirt underneath. There are snarls from your pack, as they try to match your pace, but you’ll have to do this alone.", parse);
 	Text.NL();
 	Text.Add("Out in the open, the deer is almost within reach, and you push past what even you thought possible, your paws lightly brushing the ground, sending you almost flying forward. You press a little deeper, and launch yourself, your teeth closing on your prey’s neck, her lifeblood flowing over your tongue.", parse);
 	Text.NL();
@@ -308,7 +308,7 @@ Scenes.Dreams.FirePet = function(ravenTrigger) {
 	
 	Text.Add("You rush back to your house. Your darling must be so hungry by now! You’ve been away for too long. You toss your overfull bag down at the doorstep and hurriedly close the door.", parse);
 	Text.NL();
-	Text.Add("Ah, good, there it is. Burning brightly in the center of the room, stifling the room with its heat. It’s still fine. You open your bag, and pull a weighty tome of philosophy out, and it’s eaten in a whisper. Only the best for your dear. You reach in for the next book.[raven]", parse);
+	Text.Add("Ah, good, there it is. Burning brightly in the center of the room, stifling the room with its heat. It’s still fine. You open your bag and pull a weighty tome of philosophy out, and it’s eaten in a whisper. Only the best for your dear. You reach in for the next book.[raven]", parse);
 	Text.NL();
 	Text.Add("The bag is empty, and the blaze burns larger, a tinge of blue mixed in with its orange. But it still hungers. You can feel it. You take off your hat, and put it into the flame, where it’s consumed with a satisfied burp.", parse);
 	Text.NL();
@@ -411,7 +411,7 @@ Scenes.Dreams.UruChoice = function(ravenTrigger) {
 	options.push({ nameStr : "Resist",
 		func : function() {
 			Text.Clear();
-			Text.Add("You shout defiance at the demon, and jump back, preparing to fight. And, in an instant, before you can really get ready, she’s stripped you of your weapons and armor, leaving all your belongings in a messy heap behind her.", parse);
+			Text.Add("You shout defiance at the demon, and jump back, preparing to fight. And, in an instant, she’s stripped you of your weapons and armor, leaving your belongings in a messy heap behind her.", parse);
 			Text.NL();
 			Text.Add("<i>“Now, now, there’s no need for that,”</i> Uru chides, as you stand naked before her. <i>“I’m just going to give you one final reward, and then you’ll never see me again. ", parse);
 			if(gameCache.flags["IntroFuckedUru"] != 0 || gameCache.flags["IntroFuckedByUru"] != 0)
@@ -445,7 +445,7 @@ Scenes.Dreams.UruChoice = function(ravenTrigger) {
 		if(player.FirstCock()) {
 			Text.Add("presses her palm against your chest. With the touch of her scalding skin against yours, you feel your [multiCockDesc] coming to raging erection, while Uru simply smiles in satisfaction. She sits down on top of you, ", parse);
 			if(player.NumCocks() > 1)
-				Text.Add("your [cockDesc] driving into her pussy, while the [cockDesc2] presses into her ass.", parse);
+				Text.Add("your [cockDesc] driving into her pussy, while your [cockDesc2] presses into her ass.", parse);
 			else
 				Text.Add("your [cockDesc] plunging smoothly into her front hole.", parse);
 			Text.NL();
@@ -457,17 +457,17 @@ Scenes.Dreams.UruChoice = function(ravenTrigger) {
 			Text.Add("A cruel smile graces Uru’s full lips above you. <i>“Now, now, that won’t do, little slut.”</i> You feel a wave of magic pressing into you, and your flagging erection returns to full mast, as a thicker fog of lust clouds your mind.", parse);
 		}
 		else {
-			parse["vag"] = player.FirstVag() ? Text.Parse(", and your [vagDesc] grow soaking wet in return", parse) : "";
+			parse["vag"] = player.FirstVag() ? Text.Parse(", and your [vagDesc] grows soaking wet in return", parse) : "";
 			Text.Add("forces you to service her enormous member. With every touch, every contact of lips or tongue with her pulsing penis, you feel lust fill your mind[vag].", parse);
 			Text.NL();
-			Text.Add("Apparently satisfied, the demon goddess pulls momentarily away, before plunging deep inside you in a single thrust. No amount of lust prepared you for that, as you feel your [vagDesc] streched far beyond its normal limits, and scream out much more in pain than pleasure.", parse);
+			Text.Add("Apparently satisfied, the demon goddess pulls away momentarily, before plunging deep inside you in a single thrust. No amount of lust prepared you for that, and you scream out much more in pain than pleasure as you feel your [vagDesc] streched far beyond its normal limits.", parse);
 			Text.NL();
-			Text.Add("Even this pain is eventually subsumed beneath the need you feel from simple contact with Uru, however. Soon, you find yourself moaning in pleasure, almost against your will, and your nethers shudder around the massive intruder, as your body rocks with a massive orgasm.", parse);
+			Text.Add("However, even this pain is eventually subsumed beneath the need you feel from simple contact with Uru. Soon, you find yourself moaning in pleasure, almost against your will, and your nethers shudder around the massive intruder, as your body rocks with a massive orgasm.", parse);
 			Text.NL();
 			Text.Add("A cruel smile graces Uru’s full lips above you. <i>“Oh, you like it that much, do you, little slut?”</i> You feel a wave of magic pressing into you, driving you into an ever greater frenzy of need and desire. <i>“Then I suppose it’s time to take things to the next level.”</i>", parse);
 		}
 		Text.NL();
-		Text.Add("Things get much less clear after that. You have a vague sense of mating with Uru in every possible configuration for hours. And once those are exhausted in configurations made possible by Uru’s magic transforming your body into stranger and stranger shapes.", parse);
+		Text.Add("Things get much less clear after that. You have a vague sense of mating with Uru in every possible configuration for hours on end - and once those are exhausted in ways only made possible by Uru’s magic transforming your body into stranger and stranger shapes.", parse);
 		Text.NL();
 		Text.Add("By the end, you hardly even feel pleasure or pain anymore, there is only the single imperative to mate with your Goddess. And then at last, after an eternity, it ends, and the demon queen steps away from you.", parse);
 		Text.NL();
@@ -478,10 +478,10 @@ Scenes.Dreams.UruChoice = function(ravenTrigger) {
 		Text.Add("The omnibus reaches down, and grabs hold of you, her nails digging into your flesh, and, with a flick of her wrist tosses you through the portal behind her. You do not see the ground beyond, as it is covered in an endless mass of demons. You are almost saved by them being packed in too tight to move, but at last your deformed body is grabbed by a dozen hands, pulled in different directions.", parse);
 		Text.NL();
 		if(ravenTrigger) {
-			Text.Add(Scenes.Dreams.RavenText(true, "High above, a raven circles, apparently waiting to see if anything remains of you for it feast on.", "High above, a raven circles. You note with the dimmest shard of awareness that even in the demon world beyond the portal they are watching you. You make an effort to recall the significance of this, but it does not last long."));
+			Text.Add(Scenes.Dreams.RavenText(true, "High above, a raven circles, apparently waiting to see if anything remains of you for it to feast on.", "High above, a raven circles. You note with the dimmest shard of awareness that even in the demon world beyond the portal they are watching you. You make an effort to recall the significance of this, but it does not last long."));
 			Text.NL();
 		}
-		Text.Add("Sharp teeth dig into your flesh, and the sensation is almost welcome after the abuse Uru inflicted. As you feel your throat tear, gasping for breath, and feeling a sense of nauseous relief, you sit up and open your eyes, awake at last.", parse);
+		Text.Add("Sharp teeth dig into your flesh, and the sensation is almost welcome after the abuse Uru inflicted. As you feel your throat tear, you sit up and open your eyes, gasping for breath. A feeling of nauseous relief washes over you as you realize you are awake at last.", parse);
 		Text.Flush();
 		
 		Gui.NextPrompt();
