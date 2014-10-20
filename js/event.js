@@ -20,7 +20,7 @@ function Event(nameFunc) {
 	this.links = new Array();
 	// When at the location, these persons/events are available
 	this.events = new Array();
-	//
+	// Function footprint: function(unused, oldLocation)
 	this.onEntry = PrintDefaultOptions;
 	// Encounter table
 	this.enc = null;
@@ -34,13 +34,14 @@ Event.prototype.switchSpot = function() {
 }
 
 MoveToLocation = function(location, timestep) {
+	var oldLocation = party.location;
 	party.location = location;
 
 	// Step time
 	timestep = timestep || new Time();
 	world.TimeStep(timestep);
 	
-	location.onEntry();
+	location.onEntry(false, oldLocation);
 }
 
 Event.prototype.SleepFunc = function() {
