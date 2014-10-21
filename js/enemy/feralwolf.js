@@ -4,6 +4,8 @@
  * 
  */
 
+Scenes.FeralWolf = {};
+
 function FeralWolf() {
 	Entity.call(this);
 	
@@ -77,4 +79,18 @@ FeralWolf.prototype.Act = function(encounter, activeChar) {
 		Abilities.Physical.CrushingStrike.Use(encounter, this, t);
 	else
 		Abilities.Seduction.Tease.Use(encounter, this, t);
+}
+
+Scenes.FeralWolf.LoneEnc = function() {
+ 	var enemy = new Party();
+	enemy.AddMember(new FeralWolf(Gender.male));
+	var enc = new Encounter(enemy);
+	/*
+	enc.canRun = false;
+	enc.onEncounter = ...
+	enc.onLoss = ...
+	enc.onVictory = ...
+	enc.VictoryCondition = ...
+	*/
+	return enc;
 }

@@ -3,6 +3,7 @@
  * Drake lvl 60-70
  * 
  */
+Scenes.Drake = {};
 
 function Drake() {
 	Entity.call(this);
@@ -95,9 +96,7 @@ Drake.prototype.Act = function(encounter, activeChar) {
 		Abilities.Attack.Use(encounter, this, t);
 }
 
-
-// FUCK YOU ENCOUNTER
-world.loc.DragonDen.Entry.enc.AddEnc(function() {
+Scenes.Drake.DrakeEnc = function() {
  	var enemy    = new Party();
 	enemy.AddMember(new Drake());
 	var enc      = new Encounter(enemy);
@@ -110,4 +109,4 @@ world.loc.DragonDen.Entry.enc.AddEnc(function() {
 	enc.VictoryCondition = ...
 	*/
 	return enc;
-}, 1.0);
+}

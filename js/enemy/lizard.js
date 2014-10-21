@@ -112,9 +112,7 @@ Lizard.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
-
-// MALE + FEMALE ENCOUNTER
-world.loc.Desert.Drylands.enc.AddEnc(function() {
+Scenes.Lizards.GroupEnc = function() {
  	var enemy    = new Party();
  	var male     = new Lizard(Gender.male);
  	var female   = new Lizard(Gender.female);
@@ -187,7 +185,7 @@ world.loc.Desert.Drylands.enc.AddEnc(function() {
 	enc.onVictory = Scenes.Lizards.WinPrompt;
 	
 	return enc;
-}, 1.0);
+}
 
 Scenes.Lizards.WinPrompt = function() {
 	SetGameState(GameState.Event);

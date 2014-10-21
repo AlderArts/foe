@@ -31,3 +31,12 @@ world.loc.DragonDen.Entry.endDescription = function() {
 }
 
 world.loc.DragonDen.Entry.enc = new EncounterTable();
+
+// FUCK YOU ENCOUNTER
+world.loc.DragonDen.Entry.AddEncounter({
+	nameStr : "Drake",
+	func    : function() {
+		return Scenes.Drake.DrakeEnc();
+	}, odds : 1.0, enc : true,
+	visible : true, enabled : true, hunt : true
+});

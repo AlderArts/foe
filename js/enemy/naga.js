@@ -89,7 +89,7 @@ Naga.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
-world.loc.Desert.Drylands.enc.AddEnc(function() {
+Scenes.Naga.LoneEnc = function() {
 	var enemy = new Party();
 	var enc = new Encounter(enemy);
 	
@@ -103,7 +103,7 @@ world.loc.Desert.Drylands.enc.AddEnc(function() {
 	//enc.onVictory   = Scenes.Naga.DesertWinPrompt;
 	
 	return enc;
-}, 1.0);
+}
 
 Scenes.Naga.DesertEncounter = function() {
 	var enc  = this;

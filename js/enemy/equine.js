@@ -105,8 +105,7 @@ Equine.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
-// MALE + FEMALE ENCOUNTER
-world.loc.Plains.Crossroads.enc.AddEnc(function() {
+Scenes.Equine.PairEnc = function() {
  	var enemy    = new Party();
  	var stallion = new Equine(Gender.male);
  	var mare     = new Equine(Gender.female);
@@ -149,7 +148,7 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	enc.onLoss = Scenes.Equine.LossPrompt;
 	
 	return enc;
-}, 1.0);
+}
 
 Scenes.Equine.LossPrompt = function() {
 	SetGameState(GameState.Event);

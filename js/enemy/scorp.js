@@ -4,6 +4,8 @@
  * 
  */
 
+Scenes.Scorpion = {};
+
 function Scorpion() {
 	Entity.call(this);
 	
@@ -86,9 +88,8 @@ Scorpion.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
-
 // FEMALE ENCOUNTER
-world.loc.Desert.Drylands.enc.AddEnc(function() {
+Scenes.Scorpion.LoneEnc = function() {
  	var enemy    = new Party();
 	enemy.AddMember(new Scorpion());
 	var enc      = new Encounter(enemy);
@@ -101,4 +102,4 @@ world.loc.Desert.Drylands.enc.AddEnc(function() {
 	enc.VictoryCondition = ...
 	*/
 	return enc;
-}, 1.0);
+}

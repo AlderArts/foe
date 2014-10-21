@@ -257,8 +257,7 @@ LagomorphWizard.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
-
-world.loc.Plains.Crossroads.enc.AddEnc(function() {
+Scenes.Lagomorph.GroupEnc = function() {
 	var enemy = new Party();
 	var enc = new Encounter(enemy);
 	
@@ -308,7 +307,7 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	enc.onVictory   = Scenes.Lagomorph.GroupWinOnPlainsPrompt;
 	
 	return enc;
-}, 1.0);
+}
 
 Scenes.Lagomorph.PlainsEncounter = function() {
 	var enc = this;

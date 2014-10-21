@@ -103,6 +103,42 @@ Wildcat.prototype.constructor = Wildcat;
 Wildcat.prototype.DropTable = Feline.DropTable;
 Wildcat.prototype.Act = Feline.Act;
 
+Scenes.Felines.WildcatEnc = function() {
+ 	var enemy = new Party();
+ 	var r = Math.random();
+ 	if(r < 0.2) {
+		enemy.AddMember(new Wildcat(Gender.herm));
+		enemy.AddMember(new Wildcat(Gender.male));
+		enemy.AddMember(new Wildcat(Gender.female));
+	}
+	else if(r < 0.4) {
+		enemy.AddMember(new Wildcat(Gender.male));
+		enemy.AddMember(new Wildcat(Gender.female));
+		enemy.AddMember(new Wildcat(Gender.female));
+		enemy.AddMember(new Wildcat(Gender.female));
+	}
+	else {
+		enemy.AddMember(new Wildcat(Gender.Rand([3,4,1])));
+		for(var i = 0; i < 3; i++) {
+			if(Math.random() < 0.2)
+				enemy.AddMember(new Wildcat(Gender.Rand([3,4,1])));
+		}
+	}
+	var enc = new Encounter(enemy);
+	
+	enc.onEncounter = Scenes.Felines.Intro;
+	enc.onVictory   = Scenes.Felines.WinPrompt;
+	enc.onLoss      = Scenes.Felines.LossRegular;
+	/*
+	enc.canRun = false;
+	enc.onEncounter = ...
+	enc.onLoss = ...
+	enc.onVictory = ...
+	enc.VictoryCondition = ...
+	*/
+	return enc;
+}
+
 function Puma(gender) {
 	Wildcat.call(this, gender);
 	
@@ -127,6 +163,42 @@ function Puma(gender) {
 }
 Puma.prototype = new Wildcat();
 Puma.prototype.constructor = Puma;
+
+Scenes.Felines.PumaEnc = function() {
+ 	var enemy = new Party();
+ 	var r = Math.random();
+ 	if(r < 0.2) {
+		enemy.AddMember(new Puma(Gender.herm));
+		enemy.AddMember(new Puma(Gender.male));
+		enemy.AddMember(new Puma(Gender.female));
+	}
+	else if(r < 0.4) {
+		enemy.AddMember(new Puma(Gender.male));
+		enemy.AddMember(new Puma(Gender.female));
+		enemy.AddMember(new Puma(Gender.female));
+		enemy.AddMember(new Puma(Gender.female));
+	}
+	else {
+		enemy.AddMember(new Puma(Gender.Rand([3,4,1])));
+		for(var i = 0; i < 3; i++) {
+			if(Math.random() < 0.2)
+				enemy.AddMember(new Puma(Gender.Rand([3,4,1])));
+		}
+	}
+	var enc = new Encounter(enemy);
+	
+	enc.onEncounter = Scenes.Felines.Intro;
+	enc.onVictory   = Scenes.Felines.WinPrompt;
+	enc.onLoss      = Scenes.Felines.LossRegular;
+	/*
+	enc.canRun = false;
+	enc.onEncounter = ...
+	enc.onLoss = ...
+	enc.onVictory = ...
+	enc.VictoryCondition = ...
+	*/
+	return enc;
+}
 
 function Jaguar(gender) {
 	Wildcat.call(this, gender);
@@ -153,6 +225,42 @@ function Jaguar(gender) {
 Jaguar.prototype = new Wildcat();
 Jaguar.prototype.constructor = Jaguar;
 
+Scenes.Felines.JaguarEnc = function() {
+ 	var enemy = new Party();
+ 	var r = Math.random();
+ 	if(r < 0.2) {
+		enemy.AddMember(new Jaguar(Gender.herm));
+		enemy.AddMember(new Jaguar(Gender.male));
+		enemy.AddMember(new Jaguar(Gender.female));
+	}
+	else if(r < 0.4) {
+		enemy.AddMember(new Jaguar(Gender.male));
+		enemy.AddMember(new Jaguar(Gender.female));
+		enemy.AddMember(new Jaguar(Gender.female));
+		enemy.AddMember(new Jaguar(Gender.female));
+	}
+	else {
+		enemy.AddMember(new Jaguar(Gender.Rand([3,4,1])));
+		for(var i = 0; i < 3; i++) {
+			if(Math.random() < 0.2)
+				enemy.AddMember(new Jaguar(Gender.Rand([3,4,1])));
+		}
+	}
+	var enc = new Encounter(enemy);
+	
+	enc.onEncounter = Scenes.Felines.Intro;
+	enc.onVictory   = Scenes.Felines.WinPrompt;
+	enc.onLoss      = Scenes.Felines.LossRegular;
+	/*
+	enc.canRun = false;
+	enc.onEncounter = ...
+	enc.onLoss = ...
+	enc.onVictory = ...
+	enc.VictoryCondition = ...
+	*/
+	return enc;
+}
+
 function Lynx(gender) {
 	Wildcat.call(this, gender);
 	
@@ -177,6 +285,42 @@ function Lynx(gender) {
 }
 Lynx.prototype = new Wildcat();
 Lynx.prototype.constructor = Lynx;
+
+Scenes.Felines.LynxEnc = function() {
+	var enemy = new Party();
+ 	var r = Math.random();
+ 	if(r < 0.2) {
+		enemy.AddMember(new Lynx(Gender.herm));
+		enemy.AddMember(new Lynx(Gender.male));
+		enemy.AddMember(new Lynx(Gender.female));
+	}
+	else if(r < 0.4) {
+		enemy.AddMember(new Lynx(Gender.male));
+		enemy.AddMember(new Lynx(Gender.female));
+		enemy.AddMember(new Lynx(Gender.female));
+		enemy.AddMember(new Lynx(Gender.female));
+	}
+	else {
+		enemy.AddMember(new Lynx(Gender.Rand([3,4,1])));
+		for(var i = 0; i < 3; i++) {
+			if(Math.random() < 0.2)
+				enemy.AddMember(new Lynx(Gender.Rand([3,4,1])));
+		}
+	}
+	var enc = new Encounter(enemy);
+	
+	enc.onEncounter = Scenes.Felines.Intro;
+	enc.onVictory   = Scenes.Felines.WinPrompt;
+	enc.onLoss      = Scenes.Felines.LossRegular;
+	/*
+	enc.canRun = false;
+	enc.onEncounter = ...
+	enc.onLoss = ...
+	enc.onVictory = ...
+	enc.VictoryCondition = ...
+	*/
+	return enc;
+}
 
 // TODO
 function Lion(gender) {

@@ -77,33 +77,21 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 }, 1.0, function() { return world.time.season != Season.Winter; });
 
 // Temp mothgirl enemy
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
- 	var enemy = new Party();
-	enemy.AddMember(new Mothgirl());
-	var enc = new Encounter(enemy);
-	/*
-	enc.canRun = false;
-	enc.onEncounter = ...
-	enc.onLoss = ...
-	enc.onVictory = ...
-	enc.VictoryCondition = ...
-	*/
-	return enc;
-}, 1.0);
+world.loc.Forest.Outskirts.AddEncounter({
+	nameStr : "Mothgirl",
+	func    : function() {
+		return Scenes.Mothgirl.LoneEnc();
+	}, odds : 1.0, enc : true,
+	visible : true, enabled : true, hunt : true
+});
 
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
- 	var enemy = new Party();
-	enemy.AddMember(new FeralWolf(Gender.male));
-	var enc = new Encounter(enemy);
-	/*
-	enc.canRun = false;
-	enc.onEncounter = ...
-	enc.onLoss = ...
-	enc.onVictory = ...
-	enc.VictoryCondition = ...
-	*/
-	return enc;
-}, 1.0);
+world.loc.Forest.Outskirts.AddEncounter({
+	nameStr : "Wolf",
+	func    : function() {
+		return Scenes.FeralWolf.LoneEnc();
+	}, odds : 1.0, enc : true,
+	visible : true, enabled : true, hunt : true
+});
 
 world.loc.Forest.Outskirts.enc.AddEnc(function() {
 	return Scenes.Momo.MomoEnc;

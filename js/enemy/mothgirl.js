@@ -4,6 +4,8 @@
  * 
  */
 
+Scenes.Mothgirl = {};
+
 function Mothgirl() {
 	Entity.call(this);
 	
@@ -81,4 +83,18 @@ Mothgirl.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Distract.Use(encounter, this, t);
 	else
 		Abilities.Seduction.Tease.Use(encounter, this, t);
+}
+
+Scenes.Mothgirl.LoneEnc = function() {
+ 	var enemy = new Party();
+	enemy.AddMember(new Mothgirl());
+	var enc = new Encounter(enemy);
+	/*
+	enc.canRun = false;
+	enc.onEncounter = ...
+	enc.onLoss = ...
+	enc.onVictory = ...
+	enc.VictoryCondition = ...
+	*/
+	return enc;
 }

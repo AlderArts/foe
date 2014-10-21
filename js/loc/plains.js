@@ -132,152 +132,52 @@ world.loc.Plains.Crossroads.description = function() {
 world.loc.Plains.Crossroads.enc = new EncounterTable();
 
 world.loc.Plains.Crossroads.AddEncounter({
-	nameStr : "Wildcats",
+	nameStr : "Wildcat",
 	func    : function() {
-	 	var enemy = new Party();
-	 	var r = Math.random();
-	 	if(r < 0.2) {
-			enemy.AddMember(new Wildcat(Gender.herm));
-			enemy.AddMember(new Wildcat(Gender.male));
-			enemy.AddMember(new Wildcat(Gender.female));
-		}
-		else if(r < 0.4) {
-			enemy.AddMember(new Wildcat(Gender.male));
-			enemy.AddMember(new Wildcat(Gender.female));
-			enemy.AddMember(new Wildcat(Gender.female));
-			enemy.AddMember(new Wildcat(Gender.female));
-		}
-		else {
-			enemy.AddMember(new Wildcat(Gender.Rand([3,4,1])));
-			for(var i = 0; i < 3; i++) {
-				if(Math.random() < 0.2)
-					enemy.AddMember(new Wildcat(Gender.Rand([3,4,1])));
-			}
-		}
-		var enc = new Encounter(enemy);
-		
-		enc.onEncounter = Scenes.Felines.Intro;
-		enc.onVictory   = Scenes.Felines.WinPrompt;
-		enc.onLoss      = Scenes.Felines.LossRegular;
-		/*
-		enc.canRun = false;
-		enc.onEncounter = ...
-		enc.onLoss = ...
-		enc.onVictory = ...
-		enc.VictoryCondition = ...
-		*/
-		return enc;
+		return Scenes.Felines.WildcatEnc();
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true
 });
 
-world.loc.Plains.Crossroads.enc.AddEnc(function() {
- 	var enemy = new Party();
- 	var r = Math.random();
- 	if(r < 0.2) {
-		enemy.AddMember(new Puma(Gender.herm));
-		enemy.AddMember(new Puma(Gender.male));
-		enemy.AddMember(new Puma(Gender.female));
-	}
-	else if(r < 0.4) {
-		enemy.AddMember(new Puma(Gender.male));
-		enemy.AddMember(new Puma(Gender.female));
-		enemy.AddMember(new Puma(Gender.female));
-		enemy.AddMember(new Puma(Gender.female));
-	}
-	else {
-		enemy.AddMember(new Puma(Gender.Rand([3,4,1])));
-		for(var i = 0; i < 3; i++) {
-			if(Math.random() < 0.2)
-				enemy.AddMember(new Puma(Gender.Rand([3,4,1])));
-		}
-	}
-	var enc = new Encounter(enemy);
-	
-	enc.onEncounter = Scenes.Felines.Intro;
-	enc.onVictory   = Scenes.Felines.WinPrompt;
-	enc.onLoss      = Scenes.Felines.LossRegular;
-	/*
-	enc.canRun = false;
-	enc.onEncounter = ...
-	enc.onLoss = ...
-	enc.onVictory = ...
-	enc.VictoryCondition = ...
-	*/
-	return enc;
-}, 0.25);
+world.loc.Plains.Crossroads.AddEncounter({
+	nameStr : "Puma",
+	func    : function() {
+		return Scenes.Felines.PumaEnc();
+	}, odds : 0.25, enc : true,
+	visible : true, enabled : true, hunt : true
+});
 
-world.loc.Plains.Crossroads.enc.AddEnc(function() {
- 	var enemy = new Party();
- 	var r = Math.random();
- 	if(r < 0.2) {
-		enemy.AddMember(new Jaguar(Gender.herm));
-		enemy.AddMember(new Jaguar(Gender.male));
-		enemy.AddMember(new Jaguar(Gender.female));
-	}
-	else if(r < 0.4) {
-		enemy.AddMember(new Jaguar(Gender.male));
-		enemy.AddMember(new Jaguar(Gender.female));
-		enemy.AddMember(new Jaguar(Gender.female));
-		enemy.AddMember(new Jaguar(Gender.female));
-	}
-	else {
-		enemy.AddMember(new Jaguar(Gender.Rand([3,4,1])));
-		for(var i = 0; i < 3; i++) {
-			if(Math.random() < 0.2)
-				enemy.AddMember(new Jaguar(Gender.Rand([3,4,1])));
-		}
-	}
-	var enc = new Encounter(enemy);
-	
-	enc.onEncounter = Scenes.Felines.Intro;
-	enc.onVictory   = Scenes.Felines.WinPrompt;
-	enc.onLoss      = Scenes.Felines.LossRegular;
-	/*
-	enc.canRun = false;
-	enc.onEncounter = ...
-	enc.onLoss = ...
-	enc.onVictory = ...
-	enc.VictoryCondition = ...
-	*/
-	return enc;
-}, 0.25);
+world.loc.Plains.Crossroads.AddEncounter({
+	nameStr : "Jaguar",
+	func    : function() {
+		return Scenes.Felines.JaguarEnc();
+	}, odds : 0.25, enc : true,
+	visible : true, enabled : true, hunt : true
+});
 
-world.loc.Plains.Crossroads.enc.AddEnc(function() {
- 	var enemy = new Party();
- 	var r = Math.random();
- 	if(r < 0.2) {
-		enemy.AddMember(new Lynx(Gender.herm));
-		enemy.AddMember(new Lynx(Gender.male));
-		enemy.AddMember(new Lynx(Gender.female));
-	}
-	else if(r < 0.4) {
-		enemy.AddMember(new Lynx(Gender.male));
-		enemy.AddMember(new Lynx(Gender.female));
-		enemy.AddMember(new Lynx(Gender.female));
-		enemy.AddMember(new Lynx(Gender.female));
-	}
-	else {
-		enemy.AddMember(new Lynx(Gender.Rand([3,4,1])));
-		for(var i = 0; i < 3; i++) {
-			if(Math.random() < 0.2)
-				enemy.AddMember(new Lynx(Gender.Rand([3,4,1])));
-		}
-	}
-	var enc = new Encounter(enemy);
-	
-	enc.onEncounter = Scenes.Felines.Intro;
-	enc.onVictory   = Scenes.Felines.WinPrompt;
-	enc.onLoss      = Scenes.Felines.LossRegular;
-	/*
-	enc.canRun = false;
-	enc.onEncounter = ...
-	enc.onLoss = ...
-	enc.onVictory = ...
-	enc.VictoryCondition = ...
-	*/
-	return enc;
-}, 0.25);
+world.loc.Plains.Crossroads.AddEncounter({
+	nameStr : "Lynx",
+	func    : function() {
+		return Scenes.Felines.LynxEnc();
+	}, odds : 0.25, enc : true,
+	visible : true, enabled : true, hunt : true
+});
+
+world.loc.Plains.Crossroads.AddEncounter({
+	nameStr : "Equines",
+	func    : function() {
+		return Scenes.Equine.PairEnc();
+	}, odds : 1.0, enc : true,
+	visible : true, enabled : true, hunt : true
+});
+
+world.loc.Plains.Crossroads.AddEncounter({
+	nameStr : "Bunnies",
+	func    : function() {
+		return Scenes.Lagomorph.GroupEnc();
+	}, odds : 1.0, enc : true,
+	visible : true, enabled : true, hunt : true
+});
 
 world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	return Scenes.Momo.MomoEnc;

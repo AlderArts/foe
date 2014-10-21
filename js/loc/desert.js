@@ -61,3 +61,28 @@ world.loc.Desert.Drylands.links.push(new Link(
 world.loc.Desert.Drylands.endDescription = function() {
 	Text.AddOutput("Going into the desert unprepared is probably a bad idea.<br/>");
 }
+
+
+world.loc.Desert.Drylands.AddEncounter({
+	nameStr : "Lizard",
+	func    : function() {
+		return Scenes.Lizards.GroupEnc();
+	}, odds : 1.0, enc : true,
+	visible : true, enabled : true, hunt : true
+});
+
+world.loc.Desert.Drylands.AddEncounter({
+	nameStr : "Naga",
+	func    : function() {
+		return Scenes.Naga.LoneEnc();
+	}, odds : 1.0, enc : true,
+	visible : true, enabled : true, hunt : true
+});
+
+world.loc.Desert.Drylands.AddEncounter({
+	nameStr : "Scorpion",
+	func    : function() {
+		return Scenes.Scorpion.LoneEnc();
+	}, odds : 1.0, enc : true,
+	visible : true, enabled : true, hunt : true
+});
