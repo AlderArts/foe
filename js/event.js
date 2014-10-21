@@ -20,10 +20,42 @@ function Event(nameFunc) {
 	this.links = new Array();
 	// When at the location, these persons/events are available
 	this.events = new Array();
+	// When at the location, you can try hunting for these enemies
+	this.hunt = new Array();
 	// Function footprint: function(unused, oldLocation)
 	this.onEntry = PrintDefaultOptions;
 	// Encounter table
 	this.enc = null;
+}
+
+Event.prototype.AddEncounter = function(opts) {
+	opts = opts || {};
+	var nameStr = opts.nameStr || "";
+	var desc    = opts.desc;
+	var func    = opts.func;
+	var cond    = opts.cond;
+	var visible = opts.visible;
+	var enabled = opts.enabled;
+	var odds    = opts.odds;
+	var obj     = opts.obj;
+	
+	if(opts.enc)
+		this.enc.AddEnc(func, odds, cond, obj);
+	if(opts.hunt) {
+		this.hunt.push(new Link(
+			nameStr, visible, enabled,
+			desc,
+			function() {
+				var enc = func();
+				if(enc) {
+					if(enc.Start)
+						enc.Start();
+					else
+						enc();
+				}
+			}
+		));
+	}
 }
 
 Event.prototype.safe = function() {
@@ -91,7 +123,7 @@ Event.prototype.DrunkHandler = function() {
 	Gui.NextPrompt();
 }
 
-Event.prototype.SetButtons = function(links) {
+Event.SetButtons = function(links) {
 	var list = new Array();
 	
 	for(var i = 0; i < links.length; i++) {

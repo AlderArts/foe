@@ -131,41 +131,45 @@ world.loc.Plains.Crossroads.description = function() {
 
 world.loc.Plains.Crossroads.enc = new EncounterTable();
 
-world.loc.Plains.Crossroads.enc.AddEnc(function() {
- 	var enemy = new Party();
- 	var r = Math.random();
- 	if(r < 0.2) {
-		enemy.AddMember(new Wildcat(Gender.herm));
-		enemy.AddMember(new Wildcat(Gender.male));
-		enemy.AddMember(new Wildcat(Gender.female));
-	}
-	else if(r < 0.4) {
-		enemy.AddMember(new Wildcat(Gender.male));
-		enemy.AddMember(new Wildcat(Gender.female));
-		enemy.AddMember(new Wildcat(Gender.female));
-		enemy.AddMember(new Wildcat(Gender.female));
-	}
-	else {
-		enemy.AddMember(new Wildcat(Gender.Rand([3,4,1])));
-		for(var i = 0; i < 3; i++) {
-			if(Math.random() < 0.2)
-				enemy.AddMember(new Wildcat(Gender.Rand([3,4,1])));
+world.loc.Plains.Crossroads.AddEncounter({
+	nameStr : "Wildcats",
+	func    : function() {
+	 	var enemy = new Party();
+	 	var r = Math.random();
+	 	if(r < 0.2) {
+			enemy.AddMember(new Wildcat(Gender.herm));
+			enemy.AddMember(new Wildcat(Gender.male));
+			enemy.AddMember(new Wildcat(Gender.female));
 		}
-	}
-	var enc = new Encounter(enemy);
-	
-	enc.onEncounter = Scenes.Felines.Intro;
-	enc.onVictory   = Scenes.Felines.WinPrompt;
-	enc.onLoss      = Scenes.Felines.LossRegular;
-	/*
-	enc.canRun = false;
-	enc.onEncounter = ...
-	enc.onLoss = ...
-	enc.onVictory = ...
-	enc.VictoryCondition = ...
-	*/
-	return enc;
-}, 0.25);
+		else if(r < 0.4) {
+			enemy.AddMember(new Wildcat(Gender.male));
+			enemy.AddMember(new Wildcat(Gender.female));
+			enemy.AddMember(new Wildcat(Gender.female));
+			enemy.AddMember(new Wildcat(Gender.female));
+		}
+		else {
+			enemy.AddMember(new Wildcat(Gender.Rand([3,4,1])));
+			for(var i = 0; i < 3; i++) {
+				if(Math.random() < 0.2)
+					enemy.AddMember(new Wildcat(Gender.Rand([3,4,1])));
+			}
+		}
+		var enc = new Encounter(enemy);
+		
+		enc.onEncounter = Scenes.Felines.Intro;
+		enc.onVictory   = Scenes.Felines.WinPrompt;
+		enc.onLoss      = Scenes.Felines.LossRegular;
+		/*
+		enc.canRun = false;
+		enc.onEncounter = ...
+		enc.onLoss = ...
+		enc.onVictory = ...
+		enc.VictoryCondition = ...
+		*/
+		return enc;
+	}, odds : 0.25, enc : true,
+	visible : true, enabled : true, hunt : true
+});
 
 world.loc.Plains.Crossroads.enc.AddEnc(function() {
  	var enemy = new Party();

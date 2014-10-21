@@ -43,6 +43,7 @@ ExploreButtonIndex = {
 	Ability : 3,
 	Alchemy : 4,
 	Quests  : 5,
+	Hunt    : 6,
 	
 	Wait    : 8,
 	Sleep   : 9,
@@ -68,6 +69,8 @@ SetExploreButtons = function() {
 	    if(player.alchemyLevel > 0)
 	    	Input.exploreButtons[ExploreButtonIndex.Alchemy].Setup("Alchemy", ShowAlchemy, true);
     	Input.exploreButtons[ExploreButtonIndex.Quests].Setup("Quests", ShowQuests, true);
+    	if(DEBUG) // TODO
+	    	Input.exploreButtons[ExploreButtonIndex.Hunt].Setup("Hunt", ShowHunting, true);
 	    
 	    if(safeLocation) { // SLEEP
 	    	Input.exploreButtons[ExploreButtonIndex.Sleep].Setup("", party.location.SleepFunc, waitLocation, null,
@@ -260,7 +263,7 @@ Explore = function(preventClear) {
 		arr.push(party.location.events[i]);
 	}
 	
-	party.location.SetButtons(arr);
+	Event.SetButtons(arr);
 	party.location.PrintDesc();
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Explore];
 	
@@ -342,6 +345,19 @@ ShowQuests = function(preventClear) {
 	
 	Quests.Print();
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Quests];
+	
+	SetExploreButtons();
+}
+
+ShowHunting = function(preventClear) {
+	if(!preventClear)
+		Text.Clear();
+	Gui.ClearButtons();
+	
+	Event.SetButtons(party.location.hunt);
+	party.location.PrintDesc();
+	
+	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Hunt];
 	
 	SetExploreButtons();
 }
