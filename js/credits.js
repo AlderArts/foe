@@ -10,7 +10,8 @@ CreditsScreen = function() {
 	
 	Text.Add(Text.BoldColor("Writing:"));
 	Text.NL();
-	Text.Add("Horse encounter: gber1<br/>");
+	Text.Add("Horse encounter (loss): gber1<br/>");
+	Text.Add("Horse encounter (win): Jo Rhade<br/>");
 	Text.Add("Gwendy's farm, sex: Kiro<br/>");
 	Text.Add("Gwendy's farm, market: QB, LD and Alder<br/>");
 	Text.Add("Lizard encounter: Salrith<br/>");

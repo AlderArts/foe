@@ -232,25 +232,26 @@ Text.Ordinal = function(num) {
 }
 
 
-Text.ParserPlural = function(parse, condition, prefix) {
-	parse  = parse || {};
-	prefix = prefix || "";
-	parse[prefix + "s"]      = condition ? "s" : "";
-	parse[prefix + "notS"]   = condition ? "" : "s";
-	parse[prefix + "es"]     = condition ? "es" : "";
-	parse[prefix + "notEs"]  = condition ? "" : "es";
+Text.ParserPlural = function(parse, condition, prefix, postfix) {
+	parse   = parse   || {};
+	prefix  = prefix  || "";
+	postfix = postfix || "";
+	parse[prefix + "s" + postfix]      = condition ? "s" : "";
+	parse[prefix + "notS" + postfix]   = condition ? "" : "s";
+	parse[prefix + "es" + postfix]     = condition ? "es" : "";
+	parse[prefix + "notEs" + postfix]  = condition ? "" : "es";
 	
-	parse[prefix + "isAre"]   = condition ? "are" : "is";
-	parse[prefix + "hasHave"] = condition ? "have" : "has";
+	parse[prefix + "isAre" + postfix]   = condition ? "are" : "is";
+	parse[prefix + "hasHave" + postfix] = condition ? "have" : "has";
 	
-	parse[prefix + "oneof"]  = condition ? " one of" : "";
-	parse[prefix + "eachof"] = condition ? " each of" : "";
-	parse[prefix + "allof"]  = condition ? " all of" : "";
+	parse[prefix + "oneof" + postfix]  = condition ? " one of" : "";
+	parse[prefix + "eachof" + postfix] = condition ? " each of" : "";
+	parse[prefix + "allof" + postfix]  = condition ? " all of" : "";
 	
-	parse[prefix + "itThey"]    = condition ? "they" : "it";
-	parse[prefix + "itsTheir"]  = condition ? "their" : "its";
-	parse[prefix + "itsTheyre"] = condition ? "they're" : "it's";
-	parse[prefix + "thisThese"] = condition ? "these" : "this";
+	parse[prefix + "itThey" + postfix]    = condition ? "they" : "it";
+	parse[prefix + "itsTheir" + postfix]  = condition ? "their" : "its";
+	parse[prefix + "itsTheyre" + postfix] = condition ? "they're" : "it's";
+	parse[prefix + "thisThese" + postfix] = condition ? "these" : "this";
 	
 	return parse;
 }
