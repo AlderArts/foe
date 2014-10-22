@@ -5,6 +5,14 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.3p
+------------
+* 
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.3o
 ------------
 * Various bugfixes in new content.
@@ -23,10 +31,6 @@ Version 0.3o
 * Fixed a bug in Terry when you attempt the horsecock TF scene as a pure female player.
 * Fixed a bug in Kiai's toy scenes. The text should be more readable now when it talks about the various toys.
 * Included an experimental hunting system (in debug). It allows you to search for specific enemies and events. Will most likely be gated behind some mechanic later so as to not be abused.
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.3n
 ------------
