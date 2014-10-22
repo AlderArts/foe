@@ -22,6 +22,7 @@ Version 0.3o
  - Equines win, fuck mare (requires real cock)
 * Fixed a bug in Terry when you attempt the horsecock TF scene as a pure female player.
 * Fixed a bug in Kiai's toy scenes. The text should be more readable now when it talks about the various toys.
+* Included an experimental hunting system (in debug). It allows you to search for specific enemies and events. Will most likely be gated behind some mechanic later so as to not be abused.
 
 --------------------------------------------
              PREVIOUS VERSIONS
