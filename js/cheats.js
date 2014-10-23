@@ -176,6 +176,27 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 					CockSmith();
 				}, enabled : true
 			});
+			options.push({ nameStr : "Dom+10",
+				func : function() {
+					player.subDom.IncreaseStat(100, 10);
+				}, enabled : true
+			});
+			options.push({ nameStr : "Dom-10",
+				func : function() {
+					player.subDom.DecreaseStat(-100, 10);
+				}, enabled : true
+			});
+			options.push({ nameStr : "Slut+10",
+				func : function() {
+					player.slut.IncreaseStat(100, 10);
+				}, enabled : true
+			});
+			options.push({ nameStr : "Slut-10",
+				func : function() {
+					player.slut.DecreaseStat(-100, 10);
+				}, enabled : true
+			});
+			
 			Gui.SetButtonsFromList(options, true, PrintDefaultOptions);
 		}
 		
