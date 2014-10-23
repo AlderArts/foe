@@ -4389,7 +4389,8 @@ Scenes.Terry.SexWorship = function() {
 		buttDesc : function() { return player.Butt().Short(); },
 		anusDesc : function() { return player.Butt().AnalShort(); },
 		skinDesc : function() { return player.SkinDesc(); },
-		bellyDesc : function() { return player.StomachDesc(); }
+		bellyDesc : function() { return player.StomachDesc(); },
+		vagDesc : function() { return player.FirstVag().Short(); }
 	};
 	parse = terry.ParserPronouns(parse);
 	
