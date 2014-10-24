@@ -26,10 +26,12 @@ Stat.prototype.IdealStat = function(ideal, maxChange, fraction) {
 	
 	var old = this.base;
 	this.base += diff;
-	if(DEBUG && this.debug && diff != 0) {
+	if(DEBUG && this.debug) {
 		Text.Newline();
 		if(diff > 0)
 			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", "blue"));
+		else if(diff == 0)
+			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", "black"));
 		else
 			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", "red"));
 		Text.Newline();
@@ -46,14 +48,17 @@ Stat.prototype.IncreaseStat = function(ideal, maxChange, fraction) {
 	ideal = ideal || 0;
 	maxChange = maxChange || 1;
 	var diff = ideal - this.base;
-	if(diff <= 0) return null;
+	if(diff < 0) return null;
 	diff = (diff <= maxChange) ? diff : maxChange;
 	
 	var old = this.base;
 	this.base += diff;
 	if(DEBUG && this.debug) {
 		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (max: " + ideal + ")", "blue"));
+		if(diff == 0)
+			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", "black"));
+		else
+			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (max: " + ideal + ")", "blue"));
 		Text.Newline();
 	}
 	if(fraction)
@@ -68,14 +73,17 @@ Stat.prototype.DecreaseStat = function(ideal, maxChange, fraction) {
 	ideal = ideal || 0;
 	maxChange = maxChange || 1;
 	var diff = this.base - ideal;
-	if(diff <= 0) return null; 
+	if(diff < 0) return null; 
 	diff = (diff <= maxChange) ? diff : maxChange;
 	
 	var old = this.base;
 	this.base -= diff;
 	if(DEBUG && this.debug) {
 		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (min: " + ideal + ")", "red"));
+		if(diff == 0)
+			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", "black"));
+		else
+			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (min: " + ideal + ")", "red"));
 		Text.Newline();
 	}
 	if(fraction)
