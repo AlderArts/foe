@@ -4141,6 +4141,8 @@ Scenes.Kiakai.HealingAssertive = function() {
 								func : function() {
 									parse["toyDesc"] = toy.sDesc();
 									parse["penDesc"] = "the " + toy.sDesc();
+									parse["itThem"]  = toy.plural ? "them" : "it";
+									parse["all"] = toy.plural ? "all of them" : "the entire thing";
 									Text.Clear();
 									Text.Add("Leaving [name]'s hole unattended for a moment, you rummage through your inventory, triumphantly pulling out your [toyDesc].", parse);
 									Text.NL();
@@ -4150,7 +4152,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 									if(toySize > cap) {
 										Text.Add("[name] looks panicky, but in [hisher] current position, there isn't much that [heshe] can do to stop you. [HeShe] fervently tries to shake [hisher] head, but [heshe] can barely move thanks to your legs trapping [himher] on either side.", parse);
 										Text.NL();
-										Text.Add("<i>“Ha... wanna bet?”</i> You smile as you lube up the [toyDesc], preparing it for entry. You aren't completely heartless, after all. Initial penetration is a bit difficult, but your previous probing pays off, allowing [name] to somehow accomodate the [toyDesc]. Without missing a beat, you begin the slow and inexorable process of stuffing the entire thing inside the submissive elf. A third... half... each time you thrust it inside, a little more of the huge toy probes [hisher] depths.", parse);
+										Text.Add("<i>“Ha... wanna bet?”</i> You smile as you lube up the [toyDesc], preparing [itThem] for entry. You aren't completely heartless, after all. Initial penetration is a bit difficult, but your previous probing pays off, allowing [name] to somehow accomodate the [toyDesc]. Without missing a beat, you begin the slow and inexorable process of stuffing [all] inside the submissive elf. A third... half... each time you thrust [itThem] inside, a little more of the huge toy probes [hisher] depths.", parse);
 									}
 									else if(toySize > cap/2) {
 										parse["cuntAss"] = player.FirstVag() ? "cunt" : "ass";
@@ -4160,10 +4162,10 @@ Scenes.Kiakai.HealingAssertive = function() {
 										else if(player.FirstVag())
 											Text.Add(" That [hisher] [kTongueDesc] is buried in your [cuntAss] might also have something to do with it.", parse);
 										Text.NL();
-										Text.Add("With the help of some lube, you are able to stuff the [toyDesc] into the elf with relative ease, only meeting serious resistance once most of the toy rests deep within [himher].", parse);
+										Text.Add("With the help of some lube, you are able to stuff the [toyDesc] into the elf with relative ease, only meeting serious resistance once most of [itThem] rests deep within [himher].", parse);
 									}
 									else {
-										Text.Add("[name] looks a bit dubious, but nods slightly, giving [hisher] consent. With the help of a little lube, the penetration is almost effortless, the elf's [kAnusDesc] easily spreading around the [toyDesc]. You begin to thrust the toy into [himher] rapidly, relying on speed rather than size to get the elf off.", parse);
+										Text.Add("[name] looks a bit dubious, but nods slightly, giving [hisher] consent. With the help of a little lube, the penetration is almost effortless, the elf's [kAnusDesc] easily spreading around the [toyDesc]. You begin to thrust [itThem] into [himher] rapidly, relying on speed rather than size to get the elf off.", parse);
 									}
 									kiakai.flags["AnalExp"]++;
 									PrintDefaultOptions();

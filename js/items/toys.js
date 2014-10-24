@@ -62,6 +62,7 @@ Items.Toys.LargeButtPlug.cock.length.base    = 15;
 
 Items.Toys.AnalBeads = new Item("dildo6", "Anal beads");
 Items.Toys.AnalBeads.price = 18;
+Items.Toys.AnalBeads.plural = true;
 Items.Toys.AnalBeads.sDesc = function() { return "anal beads"; }
 Items.Toys.AnalBeads.lDesc = function() { return "a string of anal beads"; }
 Items.Toys.AnalBeads.Short = function() { return "A string of small beads"; }
@@ -72,6 +73,7 @@ Items.Toys.AnalBeads.cock.length.base    = 15;
 
 Items.Toys.LargeAnalBeads = new Item("dildo7", "L.Anal beads");
 Items.Toys.LargeAnalBeads.price = 23;
+Items.Toys.LargeAnalBeads.plural = true;
 Items.Toys.LargeAnalBeads.sDesc = function() { return "large anal beads"; }
 Items.Toys.LargeAnalBeads.lDesc = function() { return "a string of large anal beads"; }
 Items.Toys.LargeAnalBeads.Short = function() { return "A string of large beads"; }
