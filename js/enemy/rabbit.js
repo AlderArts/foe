@@ -1452,6 +1452,7 @@ Scenes.Lagomorph.GroupWinInterrorigate = function(enc) {
 					Text.Flush();
 					
 					Gui.Callstack.push(function() {
+						Text.Clear();
 						Scenes.Burrows.Arrival(alpha);
 					});
 					

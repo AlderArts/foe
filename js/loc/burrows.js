@@ -9,9 +9,10 @@
 // Create namespace
 world.loc.Burrows = {
 	Enterance : new Event("The Burrows"),
-	Pit       : new Event("The Pit"),
-	Lab       : new Event("Lab"),
-	Throne    : new Event("Throne room")
+	Tunnels   : new Event("Burrows: Tunnels"),
+	Pit       : new Event("Burrows: The Pit"),
+	Lab       : new Event("Burrows: Lab"),
+	Throne    : new Event("Burrows: Throne room")
 }
 
 
@@ -91,6 +92,13 @@ world.loc.Burrows.Enterance.links.push(new Link(
 		MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
 	}
 ));
+world.loc.Burrows.Enterance.links.push(new Link(
+	"Inside", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.Burrows.Tunnels, {minute: 10});
+	}
+));
 
 world.loc.Burrows.Enterance.endDescription = function() {
 	Text.AddOutput("");
@@ -98,78 +106,7 @@ world.loc.Burrows.Enterance.endDescription = function() {
 
 world.loc.Burrows.Enterance.onEntry = function() {
 	if(burrows.flags["Access"] == Burrows.AccessFlags.KnownNotVisited) {
-		var parse = {};
-		
-		if(party.Two())
-			parse["comp"] = " and " + party.Get(1).name;
-		else if(!party.Alone())
-			parse["comp"] = " and your companions";
-		else
-			parse["comp"] = "";
-		
-		Text.Clear();
-		
-		Text.Add("You hide a fair distance from the large mob of rabbits surrounding the burrows. There doesn’t seem to be any way for you to approach without getting overwhelmed and captured in the process, and who knows what they have in mind for you...", parse);
-		Text.NL();
-		Text.Add("Still, you’ll never know what is going on in this place unless you enter... perhaps you could try to negotiate with them?", parse);
-		Text.Flush();
-		
-		//[Leave][Approach]
-		var options = new Array();
-		options.push({ nameStr : "Leave",
-			func : function() {
-				Text.NL();
-				Text.Add("You still have some second thoughts about approaching the unpredictable mob. You decide to head back towards the crossroads.", parse);
-				Text.Flush();
-				
-				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
-				})
-			}, enabled : true,
-			tooltip : "Go back where you came from."
-		});
-		options.push({ nameStr : "Approach",
-			func : function() {
-				Text.Clear();
-				Text.Add("Well, time to get to the bottom of this. Hopefully this won’t turn out to be a really bad idea...", parse);
-				Text.NL();
-				Text.Add("You[comp] cautiously approach the edge of the mob, wary of getting surrounded. A few rabbits notice you, pointing excitedly, but they don’t seem to be aggressive. Feeling slightly more confident, you stride forward to meet them. Your initial attempts at conversation leave the lagomorphs looking rather confused, though one of them hops away, presumably to fetch someone important. The others form a small circle around you, watching you curiously, occasionally hopping closer to prod at you.", parse);
-				Text.NL();
-				
-				// Create a new alpha
-				var alpha = new LagomorphAlpha();
-				parse["m1HeShe"]  = function() { return alpha.HeShe(); };
-				parse["m1heshe"]  = function() { return alpha.heshe(); };
-				parse["m1HisHer"] = function() { return alpha.HisHer(); };
-				parse["m1hisher"] = function() { return alpha.hisher(); };
-				parse["m1himher"] = function() { return alpha.himher(); };
-				
-				Text.Add("After enduring their odd behavior for a few minutes, the messenger returns with one of the lagomorph alphas, a ", parse);
-				if(alpha.Gender() == Gender.male)
-					Text.Add("lean, strapping male, his rather impressive manhood on full display.", parse);
-				else if(alpha.Gender() == Gender.herm)
-					Text.Add("pretty hermaphrodite, her decently sized cock contrasting nicely with her feminine curves and full breasts.", parse);
-				else //female
-					Text.Add("pretty female with a lean, slightly toned body. She makes no attempt to hide her full breasts and the damp patch between her legs from you.", parse); 
-				Text.Add(" [m1HeShe] approaches, hopping around you[comp], trying to evaluate if you are a threat, or perhaps something fun. The rabbit puffs up [m1hisher] chest, asking you imperiously:", parse);
-				Text.NL();
-				Text.Add("<i>“Friend? Foe?”</i> The intended intimidation is somewhat dulled by [m1hisher] kindergarten communication skills. You reply that you mean no harm, you just want to be taken to whoever is in charge.", parse);
-				Text.NL();
-				Text.Add("<i>“Friend, yes? Join colony, yes?”</i> The alpha looks excited, and the mood seems to be spreading. Dimly, you notice that quite a large number of rabbits have gathered around you, whispering to each other and pointing at you. You nod, a bit uncertain, which seems to delight [m1himher].", parse);
-				Text.NL();
-				Text.Add("<i>“Big party! Come, come!”</i> Before you even have a chance to respond, you[comp] are whisked up by the mob, hoisted on the paws of dozens of lagomorphs. Ignoring your protests, the alpha leads the way towards the hills, with you in tow.", parse);
-				Text.NL();
-				Text.Add("Perhaps this wasn’t the most well thought out plan.", parse);
-				Text.Flush();
-				
-				Gui.NextPrompt(function() {
-					Text.Clear();
-					Scenes.Burrows.Arrival(alpha);
-				});
-			}, enabled : true,
-			tooltip : "Try to approach peacefully."
-		});
-		Gui.SetButtonsFromList(options);
+		Scenes.Burrows.FirstApproach();
 	}
 	else
 		PrintDefaultOptions();
@@ -186,6 +123,191 @@ world.loc.Plains.Crossroads.links.push(new Link(
 	}
 ));
 
+
+//
+// Tunnels
+//
+world.loc.Burrows.Tunnels.description = function() {
+	Text.AddOutput("You are in the bowels of the Burrows, the twisting tunnels of the lagomorph stronghold. There is only a faint light to guide your way. Echoes of the giant orgy in the Pit can be heard even here.");
+	Text.Newline();
+}
+
+world.loc.Burrows.Tunnels.links.push(new Link(
+	"Outside", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.Burrows.Enterance, {minute: 10});
+	}
+));
+
+world.loc.Burrows.Tunnels.links.push(new Link(
+	"Throne", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.Burrows.Throne, {minute: 10});
+	}
+));
+
+world.loc.Burrows.Tunnels.links.push(new Link(
+	"The Pit", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.Burrows.Pit, {minute: 10});
+	}
+));
+
+world.loc.Burrows.Tunnels.links.push(new Link(
+	"Lab", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.Burrows.Lab, {minute: 10});
+	}
+));
+
+world.loc.Burrows.Tunnels.endDescription = function() {
+	Text.AddOutput("What do you do?");
+}
+
+world.loc.Burrows.Tunnels.enc = new EncounterTable();
+//TODO add encounters
+
+//
+// Burrows throne room
+//
+//TODO
+world.loc.Burrows.Throne.description = function() {
+	Text.AddOutput("You are standing in Lagon's throne room.");
+}
+
+world.loc.Burrows.Throne.links.push(new Link(
+	"Tunnels", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.Burrows.Tunnels, {minute: 10});
+	}
+));
+
+world.loc.Burrows.Throne.endDescription = function() {
+	Text.AddOutput("");
+}
+
+
+//
+// Burrows Pit
+//
+//TODO
+world.loc.Burrows.Pit.description = function() {
+	Text.AddOutput("You are in the Pit.");
+}
+
+world.loc.Burrows.Pit.links.push(new Link(
+	"Tunnels", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.Burrows.Tunnels, {minute: 10});
+	}
+));
+
+world.loc.Burrows.Pit.endDescription = function() {
+	Text.AddOutput("");
+}
+
+
+//
+// Burrows Lab
+//
+//TODO
+world.loc.Burrows.Lab.description = function() {
+	Text.AddOutput("You are standing in Ophelia's lab.");
+}
+
+world.loc.Burrows.Lab.links.push(new Link(
+	"Tunnels", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.Burrows.Tunnels, {minute: 10});
+	}
+));
+
+world.loc.Burrows.Lab.endDescription = function() {
+	Text.AddOutput("");
+}
+
+
+Scenes.Burrows.FirstApproach = function() {
+	var parse = {};
+		
+	if(party.Two())
+		parse["comp"] = " and " + party.Get(1).name;
+	else if(!party.Alone())
+		parse["comp"] = " and your companions";
+	else
+		parse["comp"] = "";
+	
+	Text.Clear();
+	
+	Text.Add("You hide a fair distance from the large mob of rabbits surrounding the burrows. There doesn’t seem to be any way for you to approach without getting overwhelmed and captured in the process, and who knows what they have in mind for you...", parse);
+	Text.NL();
+	Text.Add("Still, you’ll never know what is going on in this place unless you enter... perhaps you could try to negotiate with them?", parse);
+	Text.Flush();
+	
+	//[Leave][Approach]
+	var options = new Array();
+	options.push({ nameStr : "Leave",
+		func : function() {
+			Text.NL();
+			Text.Add("You still have some second thoughts about approaching the unpredictable mob. You decide to head back towards the crossroads.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
+			})
+		}, enabled : true,
+		tooltip : "Go back where you came from."
+	});
+	options.push({ nameStr : "Approach",
+		func : function() {
+			Text.Clear();
+			Text.Add("Well, time to get to the bottom of this. Hopefully this won’t turn out to be a really bad idea...", parse);
+			Text.NL();
+			Text.Add("You[comp] cautiously approach the edge of the mob, wary of getting surrounded. A few rabbits notice you, pointing excitedly, but they don’t seem to be aggressive. Feeling slightly more confident, you stride forward to meet them. Your initial attempts at conversation leave the lagomorphs looking rather confused, though one of them hops away, presumably to fetch someone important. The others form a small circle around you, watching you curiously, occasionally hopping closer to prod at you.", parse);
+			Text.NL();
+			
+			// Create a new alpha
+			var alpha = new LagomorphAlpha();
+			parse["m1HeShe"]  = function() { return alpha.HeShe(); };
+			parse["m1heshe"]  = function() { return alpha.heshe(); };
+			parse["m1HisHer"] = function() { return alpha.HisHer(); };
+			parse["m1hisher"] = function() { return alpha.hisher(); };
+			parse["m1himher"] = function() { return alpha.himher(); };
+			
+			Text.Add("After enduring their odd behavior for a few minutes, the messenger returns with one of the lagomorph alphas, a ", parse);
+			if(alpha.Gender() == Gender.male)
+				Text.Add("lean, strapping male, his rather impressive manhood on full display.", parse);
+			else if(alpha.Gender() == Gender.herm)
+				Text.Add("pretty hermaphrodite, her decently sized cock contrasting nicely with her feminine curves and full breasts.", parse);
+			else //female
+				Text.Add("pretty female with a lean, slightly toned body. She makes no attempt to hide her full breasts and the damp patch between her legs from you.", parse); 
+			Text.Add(" [m1HeShe] approaches, hopping around you[comp], trying to evaluate if you are a threat, or perhaps something fun. The rabbit puffs up [m1hisher] chest, asking you imperiously:", parse);
+			Text.NL();
+			Text.Add("<i>“Friend? Foe?”</i> The intended intimidation is somewhat dulled by [m1hisher] kindergarten communication skills. You reply that you mean no harm, you just want to be taken to whoever is in charge.", parse);
+			Text.NL();
+			Text.Add("<i>“Friend, yes? Join colony, yes?”</i> The alpha looks excited, and the mood seems to be spreading. Dimly, you notice that quite a large number of rabbits have gathered around you, whispering to each other and pointing at you. You nod, a bit uncertain, which seems to delight [m1himher].", parse);
+			Text.NL();
+			Text.Add("<i>“Big party! Come, come!”</i> Before you even have a chance to respond, you[comp] are whisked up by the mob, hoisted on the paws of dozens of lagomorphs. Ignoring your protests, the alpha leads the way towards the hills, with you in tow.", parse);
+			Text.NL();
+			Text.Add("Perhaps this wasn’t the most well thought out plan.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				Text.Clear();
+				Scenes.Burrows.Arrival(alpha);
+			});
+		}, enabled : true,
+		tooltip : "Try to approach peacefully."
+	});
+	Gui.SetButtonsFromList(options);
+}
 
 Scenes.Burrows.Arrival = function(alpha) {
 	var parse = {
