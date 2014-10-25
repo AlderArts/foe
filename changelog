@@ -8,6 +8,7 @@ CHANGELOG for Fall of Eden
 Version 0.3p
 ------------
 * Added subDom and slut debug options to cocksmith (for player)
+* Added the ability to sell items in multiples of 1x, 5x or all you carry. Made it overall easier to sell a lot of stuff.
 
 --------------------------------------------
              PREVIOUS VERSIONS

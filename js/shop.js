@@ -80,6 +80,76 @@ Shop.prototype.Sell = function(back) {
 		Text.AddOutput("You have nothing to sell.");
 	}
 	
+	var sellFunc = function(obj) {
+		if(obj.func) {
+			var res = obj.func();
+			if(res) return;
+		}
+		
+		var num = obj.num;
+		var cost = Math.floor(shop.sellPrice * obj.it.price);
+
+		Text.Clear();
+		Text.AddOutput("Sell " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
+		
+		var options = new Array();
+		options.push({ nameStr : "Sellx1",
+			func : function() {
+				// Add cash
+				party.coin += cost;
+				// Remove item from inv
+				party.inventory.RemoveItem(obj.it);
+				
+				num -= 1;
+				if(num <= 0) {
+					// Recreate the menu
+					// TODO: Keep page!
+					shop.Sell(back);
+				}
+				else
+					sellFunc(obj);
+			}, enabled : true,
+			tooltip : ""
+		});
+		options.push({ nameStr : "Sellx5",
+			func : function() {
+				var sold = Math.min(num, 5);
+				// Add cash
+				party.coin += cost * sold;
+				// Remove item from inv
+				party.inventory.RemoveItem(obj.it, sold);
+				
+				num -= sold;
+				if(num <= 0) {
+					// Recreate the menu
+					// TODO: Keep page!
+					shop.Sell(back);
+				}
+				else
+					sellFunc(obj);
+			}, enabled : true,
+			tooltip : ""
+		});
+		options.push({ nameStr : "Sell all",
+			func : function() {
+				// Add cash
+				party.coin += cost * num;
+				// Remove item from inv
+				party.inventory.RemoveItem(obj.it, num);
+				
+				// Recreate the menu
+				// TODO: Keep page!
+				shop.Sell(back);
+			}, enabled : true,
+			tooltip : ""
+		});
+		Gui.SetButtonsFromList(options, true, function() {
+			// Recreate the menu
+			// TODO: Keep page!
+			shop.Sell(back);
+		});
+	};
+	
 	var options = new Array();
 	for(var i = 0; i < party.inventory.items.length; i++) {
 		var it       = party.inventory.items[i].it;
@@ -91,26 +161,7 @@ Shop.prototype.Sell = function(back) {
 		Text.AddOutput("<b>" + price + "g -</b> " + it.name + " x" + num + " - " + it.Short() + "<br/>");
 
 		options.push({ nameStr : it.name,
-			func : function(obj) {
-				if(obj.func) {
-					var res = obj.func();
-					if(res) return;
-				}
-				
-				// Add cash
-				party.coin += Math.floor(shop.sellPrice * obj.it.price);
-				// Remove item from inv
-				party.inventory.RemoveItem(obj.it);
-
-				Text.Clear();
-				Text.AddOutput("You sell one " + obj.it.name + ".");
-				
-				Gui.NextPrompt(function() {
-					// Recreate the menu
-					// TODO: Keep page!
-					shop.Sell(back);
-				});
-			}, enabled : true,
+			func : sellFunc, enabled : true,
 			tooltip : it.Long(),
 			obj : party.inventory.items[i]
 		});
