@@ -1171,6 +1171,8 @@ Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 			
 			kiakai.slut.IncreaseStat(60, 3);
 			
+			var cum = kiakai.OrgasmCum();
+						
 			Text.Add("Soon, [name]’s moans join with yours as they echo across the plains. Looks like your elf has grown to like getting fucked, you should make sure [heshe] gets [hisher] fill more often...", parse);
 		}
 		else { //Prude
