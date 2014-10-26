@@ -5449,3 +5449,91 @@ Scenes.Terry.TerryCleansPC = function(func, opts) {
 }
 // Terry cleans PC Exit Point
 
+
+Scenes.Terry.FuckedByBunnyMob = function(male, parse) {
+	if(terry.Slut() < 45) {
+		Text.Add("<i>“Whoa, wait you bunch of pervs! I didn’t- mmf!”</i> Terry’s protests get immediately silenced as one of the males kiss [himher] straight on the lips. ", parse);
+		if(terry.PronounGender() == Gender.male)
+			Text.Add("Maybe because Terry looks just so girly...", parse);
+		else
+			Text.Add("It seems the lagomorphs are incapable of resisting Terry’s charms...", parse);
+	}
+	else
+		Text.Add("<i>“Hey! No need to push I’m strip- mmf!”</i> Terry has no time to finish before one of the taller bunnies decides to keep [hisher] muzzle shut with a kiss. After the initial surprise the slutty [foxvixen] is quick to kiss back. Maybe you should punish [himher] for being so forward...", parse);
+	Text.NL();
+	Text.Add("Your [foxvixen] is undressed in record time. [HisHer] clothing discarded carelessly as the lagomorphs push [himher] down towards the ground. ", parse);
+	if(terry.Cup() < Terry.Breasts.Ccup) {
+		Text.Add("One of the rabbits immediately jumps on [hisher] chest, rubbing his erect cock on the [foxvixen]’s nipples.", parse);
+		if(terry.Lactation()) {
+			Text.NL();
+			Text.Add("A small droplet of milk beads on [hisher] nipple, and the male immediately replaces his cock with his mouth, drinking from Terry as another bunny takes the other breast. You can’t see very well from your position, but you’re pretty you can see them fapping as they suck. Looks like Terry is in for a creamy finish.", parse);
+			//TODO Drink milk
+		}
+	}
+	else {
+		Text.Add("One of the rabbits immediately straddles Terry’s bosom, holding [hisher] boobs tightly together as the bunny male inserts his dick in-between the [foxvixen]’s pillowy orbs.", parse);
+		if(terry.Lactation()) {
+			Text.NL();
+			Text.Add("A few droplets of milk moistens the lagomorph’s handpaws, and he withdraws them with a surprised squeak. A pair of his siblings quickly replace his hands with eager mouths, though. They squeeze your pet [foxvixen]’s bosom, intent on draining each orb of their liquid load.", parse);
+			//TODO Drink milk
+		}
+	}
+	Text.NL();
+	if(terry.HorseCock()) {
+		Text.Add("A pair of lagomorphs looks at the [foxvixen]’s enormous spire of horse-meat. Already at full mast and positively towering. The bunny-sluts are already drooling at the sight, and you’re pretty sure of their intentions when they decide to pounch on Terry’s cock. They lick and kiss the length like a long-lost lover, caressing [hisher] balls and bathing themselves on the [foxvixen]’s pre.", parse);
+		Text.NL();
+		
+		Sex.Blowjob(male, terry);
+		male.FuckOral(male.Mouth(), terry.FirstCock(), 2);
+		terry.Fuck(terry.FirstCock(), 2);
+	}
+	else if(terry.FirstCock()) {
+		Text.Add("One of the lagomorphs decides to have a taste of Terry’s cute fox-pecker. And like a practiced slut, the bunny takes the entire shaft in one long gulp. Knot and all. He suckles on Terry’s shaft with abandon, eager for some fox cream. And from the looks of it, Terry is eager to give him some too.", parse);
+		Text.NL();
+		
+		Sex.Blowjob(male, terry);
+		male.FuckOral(male.Mouth(), terry.FirstCock(), 2);
+		terry.Fuck(terry.FirstCock(), 2);
+	}
+	var pussy = false;
+	if(terry.FirstVag()) {
+		var virgin = terry.FirstVag().virgin;
+		parse["virgin"] = virgin ? " virgin" : "";
+		Text.Add("Lifting one of the [foxvixen]’s legs, one of the bunnies easily finds Terry’s[virgin] pussy. He thrusts mercilessly, plunging his small pecker into Terry’s depths. ", parse);
+		if(virgin)
+			Text.Add("Robbed of [hisher] virginity, Terry screams in both pain and pleasure, muffled by the lagomorph kissing [himher].", parse);
+		else
+			Text.Add("Terry cries out in pleasure as the lagomorph’s sibling continues to kiss [hisher], effectively muffly [himher].", parse);
+		Text.NL();
+		
+		Sex.Vaginal(male, terry);
+		terry.FuckVag(terry.FirstVag(), male.FirstCock(), 3);
+		male.Fuck(male.FirstCock(), 3);
+		pussy = true;
+	}
+	Text.Add("The rabbit kissing Terry decides he’s had enough, and replaces his mouth with a cock, already erect and dripping pre for the [foxvixen] to suckle. Overcome by lust, Terry wastes no time in opening [hisher] muzzle invitingly and letting the rabbit plunge his petite shaft into the [foxvixen]’s muzzle.", parse);
+	Text.NL();
+	if(!pussy) {
+		var avirgin = terry.Butt().virgin;
+		Text.Add("Terry moans as another bunny decides to play with [hisher] butt, lubing it up with tiny laps of his tongue. ", parse);
+		if(avirgin) {
+			Text.Add("As the lagomorph aligns his shaft, Terry immediately pushes the rabbit on top of [himher] away.", parse);
+			Text.NL();
+			Text.Add("<i>“No! Not my ass!”</i> [heshe] exclaims authoritatively. The bunnies crowding [himher] are stunned at [hisher] strong reaction, but quickly resume their activities. The one that was preparing to take [hisher] butt instead decides to simply stick to rimming [himher]. While the first rabbit pushes his cock against Terry’s lips once more.", parse);
+			Text.NL();
+		}
+		else {
+			Text.Add("Terry spread [hisher] legs wider, glaring lustily at the rabbit rimming [himher]. Quick to catch on, the lagomorph immediately replaces his mouth with his dick, and in a few pokes he’s plunging into the [foxvixen]’s anal passage, drawing a whorish moan from the [foxvixen]-slut.", parse);
+			Text.NL();
+			
+			Sex.Anal(male, terry);
+			terry.FuckAnal(terry.Butt(), male.FirstCock(), 3);
+			male.Fuck(male.FirstCock(), 3);
+		}
+	}
+	Text.Add("You watch as the bunnies have their fun with your pet [foxvixen] before you decide to leave them to their own devices.", parse);
+	Text.NL();
+	
+	var cum = terry.OrgasmCum();
+}
+
