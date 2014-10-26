@@ -275,7 +275,7 @@ Scenes.Dreams.EndlessClassroom = function(ravenTrigger) {
 		raven : Scenes.Dreams.RavenText(ravenTrigger, " The more you look, the more bird-like they all appear, staring at you with intent beady eyes.", " As you look, the students look more and more like ravens, staring at you with beady eyes. Now, you can even make out their black wings. So many watchers this time. You force yourself to lock gazes with the multitude for a moment longer - you have to remember them.")
 	};
 	
-	Text.Add("Your pupils sit in orderly rows, as you read from a dry tome in your hands. A hand is raised in the back, and after finishing the sentence, you shut the book, waving for the student to speak. He stands, and you can barely make him out in the distance.", parse);
+	Text.Add("Your pupils sit in orderly rows as you read from a dry tome in your hands. A hand is raised in the back, and after finishing the sentence, you shut the book, waving for the student to speak. He stands, and you can barely make him out in the distance.", parse);
 	Text.NL();
 	Text.Add("<i>“[gen],”</i> the piping voice somehow carries to you through the distance. <i>“What is agoraphobia?”</i> As you look, the student seems to recede further. Behind him, the rows go on and on, spreading outwards and stretching endlessly, until there is nothing in your view but an endless sea of desks, an endless sea of intent faces.[raven]", parse);
 	Text.NL();
@@ -308,7 +308,7 @@ Scenes.Dreams.FirePet = function(ravenTrigger) {
 	
 	Text.Add("You rush back to your house. Your darling must be so hungry by now! You’ve been away for too long. You toss your overfull bag down at the doorstep and hurriedly close the door.", parse);
 	Text.NL();
-	Text.Add("Ah, good, there it is. Burning brightly in the center of the room, stifling the room with its heat. It’s still fine. You open your bag and pull a weighty tome of philosophy out, and it’s eaten in a whisper. Only the best for your dear. You reach in for the next book.[raven]", parse);
+	Text.Add("Ah, good, there it is. Burning brightly in the center of the room, stifling the room with its heat. It’s still fine. You open your bag and pull a weighty tome of philosophy out. It's eaten in a whisper by the flames - only the best for your dear. You reach in for the next book.[raven]", parse);
 	Text.NL();
 	Text.Add("The bag is empty, and the blaze burns larger, a tinge of blue mixed in with its orange. But it still hungers. You can feel it. You take off your hat, and put it into the flame, where it’s consumed with a satisfied burp.", parse);
 	Text.NL();
@@ -411,7 +411,7 @@ Scenes.Dreams.UruChoice = function(ravenTrigger) {
 	options.push({ nameStr : "Resist",
 		func : function() {
 			Text.Clear();
-			Text.Add("You shout defiance at the demon, and jump back, preparing to fight. And, in an instant, she’s stripped you of your weapons and armor, leaving your belongings in a messy heap behind her.", parse);
+			Text.Add("You shout defiance at the demon, and jump back, preparing to fight. In an instant, she’s stripped you of your weapons and armor, leaving your belongings in a messy heap behind her.", parse);
 			Text.NL();
 			Text.Add("<i>“Now, now, there’s no need for that,”</i> Uru chides, as you stand naked before her. <i>“I’m just going to give you one final reward, and then you’ll never see me again. ", parse);
 			if(gameCache.flags["IntroFuckedUru"] != 0 || gameCache.flags["IntroFuckedByUru"] != 0)
@@ -443,7 +443,7 @@ Scenes.Dreams.UruChoice = function(ravenTrigger) {
 		Text.NL();
 		Text.Add("It seems Uru is done with words, as she pushes you down and ", parse);
 		if(player.FirstCock()) {
-			Text.Add("presses her palm against your chest. With the touch of her scalding skin against yours, you feel your [multiCockDesc] coming to raging erection, while Uru simply smiles in satisfaction. She sits down on top of you, ", parse);
+			Text.Add("presses her palm against your chest. With the touch of her scalding skin against yours, you feel your [multiCockDesc] rising to full mast, while Uru simply smiles in satisfaction. She sits down on top of you, ", parse);
 			if(player.NumCocks() > 1)
 				Text.Add("your [cockDesc] driving into her pussy, while your [cockDesc2] presses into her ass.", parse);
 			else
@@ -467,7 +467,7 @@ Scenes.Dreams.UruChoice = function(ravenTrigger) {
 			Text.Add("A cruel smile graces Uru’s full lips above you. <i>“Oh, you like it that much, do you, little slut?”</i> You feel a wave of magic pressing into you, driving you into an ever greater frenzy of need and desire. <i>“Then I suppose it’s time to take things to the next level.”</i>", parse);
 		}
 		Text.NL();
-		Text.Add("Things get much less clear after that. You have a vague sense of mating with Uru in every possible configuration for hours on end - and once those are exhausted in ways only made possible by Uru’s magic transforming your body into stranger and stranger shapes.", parse);
+		Text.Add("Things get much less clear after that. You have a vague sense of mating with Uru in every possible configuration for hours on end - and once those are exhausted, in ways only made possible by Uru’s magic transforming your body into stranger and stranger shapes.", parse);
 		Text.NL();
 		Text.Add("By the end, you hardly even feel pleasure or pain anymore, there is only the single imperative to mate with your Goddess. And then at last, after an eternity, it ends, and the demon queen steps away from you.", parse);
 		Text.NL();
@@ -495,7 +495,7 @@ Scenes.Dreams.UruRun = function(ravenTrigger) {
 		raven : Scenes.Dreams.RavenText(ravenTrigger, " The croak of a raven comes from somewhere, suggesting what might happen to your remains.", " The croak of a raven comes from somewhere, oddly almost encouraging you in your flight. Still, you know it’s just here to watch. You’ll have to remember that when you’re awake.")
 	};
 	
-	Text.Add("You are running, haunted by flickering shadows and an all-encroaching fire. Loud cackles mock you as your feet patter across the dry, cracked desolation.[raven] You don’t dare to turn your head around even for a second, assured that your pursuers would catch you immediately if you do. The feeling of flames licking your back playfully further reinforces this idea.", parse);
+	Text.Add("You are running, haunted by flickering shadows and an all-encroaching fire. Loud cackles mock you as your feet patter across the dry, cracked desolation.[raven] You don’t dare to turn your head around even for a second, assured that your pursuers would catch you immediately if you do. The feeling of flames playfully licking your back further reinforces this idea.", parse);
 	Text.NL();
 	Text.Add("<i>“Scuttering like an ant, back and forth, round and round you go!”</i> Glancing up, you see Uru, the hermaphrodite demoness, hovering lazily above you, a wicked smile on her dark lips. <i>“Hurry now, or they’ll catch you,”</i> she zips in front of you, urging you forward into her arms. Those perfectly formed arms. The demon is truly breathtaking, her flawless red skin shiny beneath the glaring sun. Her toned muscles emphasize her hourglass figure, her large breasts jiggle enticingly as she touches them seductively. Between the demon’s legs, her girthy girlcock juts out towards you, stiff and dripping pre.", parse);
 	Text.NL();
@@ -514,10 +514,12 @@ Scenes.Dreams.AriaTemple = function(ravenTrigger) {
 		multiCockDesc : function() { return player.MultiCockDesc(); }
 	};
 	
-	Text.Add("You awaken slowly in the familiar marble temple of the goddess of light, Lady Aria. You are resting on a soft bed of flowers, tiny petals of white, light blue and pink.The air is thick with their pleasant fragrance, and for once in your travels, you feel completely safe, as if nothing could harm you.", parse);
+	Text.Add("You awaken slowly in the familiar marble temple of the goddess of light, Lady Aria. You are resting on a soft bed of white, light blue and pink flower petals. The air is thick with their pleasant fragrance, and for once in your travels you feel completely safe - as if nothing could harm you.", parse);
 	Text.NL();
 	if(ravenTrigger) {
-		Text.Add(Scenes.Dreams.RavenText(true, "Oddly, a little ways off, a pitch black raven sits at the edge of a pool. It preens its feathers with a graceful nonchalance that says it belongs here, however, so you pay it no mind.", "A little ways off, a raven sits at the edge of a pool, nonchalantly preening its feathers. You stare at it for a moment, surprised. Have they come to watch you even here? You should try to recall this when you wake up."));
+		var raven1 = "Oddly, a little ways off, a pitch black raven sits at the edge of a pool. It preens its feathers with a graceful nonchalance that says it belongs here however, so you pay it no mind.";
+		var raven2 = "A little ways off, a raven sits at the edge of a pool, nonchalantly preening its feathers. You stare at it for a moment, surprised. Have they come to watch you even here? You should try to recall this when you wake up.";
+		Text.Add(Scenes.Dreams.RavenText(true, raven1, raven2));
 		Text.NL();
 	}
 	Text.Add("The lady herself hovers above you, a look of concern on her perfect features. Golden tresses fall down her back, swaying softly to an ethereal wind you cannot perceive. She reaches over and touches your brow, soothing you.", parse);
@@ -543,7 +545,7 @@ Scenes.Dreams.AriaTemple = function(ravenTrigger) {
 			
 			scenes.Get();
 			Text.NL();
-			Text.Add("Gradually, the goddess’ beautiful visage fades, leaving only the dreary world of reality. You wake up feeling enlightened, but the happiness quickly fades, as you realize how useless her advice was.", parse);
+			Text.Add("Gradually, the goddess’ beautiful visage fades, leaving only the dreary world of reality. You wake up feeling enlightened, but the happiness quickly fades as you realize how useless her advice was.", parse);
 			Text.Flush();
 			
 			Gui.NextPrompt();
@@ -583,7 +585,7 @@ Scenes.Dreams.AriaTemple = function(ravenTrigger) {
 				parse["s"] = player.NumCocks() > 1 ? "s" : "";
 				Text.Add("The goddess’ lips finally find your [multiCockDesc], eagerly wrapping themselves around[oneof] your shaft[s]. The world around you is wavering, growing diffuse and fuzzy. With your pre dripping from her tongue, Lady Aria arches her back as she straddles you, positioning your cock[s] at her entrance[s]. In a single, smooth motion, she slams her hips down, burying your [multiCockDesc] to the hilt inside her tight, divine hole[s].", parse);
 				Text.NL();
-				Text.Add("You can do naught but moan in delirious pleasure as she rides you, your already uncertain perception of time all but shattering from sensory overload. It is like nothing you’ve ever felt before, pure bliss surging through your body. You could give up everything you have just to experience another moment of this paradise in human form.", parse);
+				Text.Add("You can do naught but moan in delirious pleasure as she rides you, your already uncertain perception of time all but shattering from sensory overload. It’s like nothing you’ve ever felt before, pure bliss surging through your body. You could give up everything you have just to experience another moment of this paradise in human form.", parse);
 				Text.NL();
 				Text.Add("When you finally awaken, you feel jolted at being bereft of this ultimate ecstasy. Not to mention aroused beyond measure.", parse);
 				
