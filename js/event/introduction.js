@@ -2040,7 +2040,7 @@ Intro.MeetingKia = function() {
 		Text.AddOutput("he is indeed a he, his flat chest, slim figure and the slight bulge between his legs being telltale signs. ");
 	Text.AddOutput(HeShe + " is clad in a pale blue robe, ending a few inches above " + hisher + " bared knees.");
 	Text.Newline();
-	Text.AddOutput("<i>“Ah, you are awake!”</i> the elf announces happily. Confronted with the question as to exactly what " + kiakai.heshe() + " was doing in your beddings, and where your beddings <i>are</i> for that matter, the elf blushes slightly. <i>“L-lets not get hasty, here. I know it might look bad, but really, I am just trying to help.”</i> " + HeShe + " looks a bit distraught.");
+	Text.AddOutput("<i>“Ah, you are awake!”</i> the elf announces happily. Confronted with the question as to what exactly " + kiakai.heshe() + " was doing in your beddings, and where your beddings <i>are</i> for that matter, the elf blushes slightly. <i>“L-lets not get hasty, here. I know it might look bad, but really, I am just trying to help.”</i> " + HeShe + " looks a bit distraught.");
 	Text.Newline();
 	Text.AddOutput("<i>“My name is " + kiakai.name + ", and I serve lady Aria,”</i> the slender elf tells you, <i>“I have been nursing you here since your arrival to Eden, about a day ago.”</i> You quietly consider the elf before you. " + name + " seems to be very somber and serious, far beyond what you would expect from someone looking as young as " + himher + ". You give your own name, a large number of questions already crowding in your mind.");
 	

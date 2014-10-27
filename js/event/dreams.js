@@ -467,7 +467,7 @@ Scenes.Dreams.UruChoice = function(ravenTrigger) {
 			Text.Add("A cruel smile graces Uru’s full lips above you. <i>“Oh, you like it that much, do you, little slut?”</i> You feel a wave of magic pressing into you, driving you into an ever greater frenzy of need and desire. <i>“Then I suppose it’s time to take things to the next level.”</i>", parse);
 		}
 		Text.NL();
-		Text.Add("Things get much less clear after that. You have a vague sense of mating with Uru in every possible configuration for hours on end - and once those are exhausted, in ways only made possible by Uru’s magic transforming your body into stranger and stranger shapes.", parse);
+		Text.Add("Things get much less clear after that. You have a vague sense of mating with Uru in every possible way for hours on end - and once those are exhausted, in ways only made possible by Uru’s magic transforming your body into stranger and stranger shapes.", parse);
 		Text.NL();
 		Text.Add("By the end, you hardly even feel pleasure or pain anymore, there is only the single imperative to mate with your Goddess. And then at last, after an eternity, it ends, and the demon queen steps away from you.", parse);
 		Text.NL();
@@ -576,7 +576,7 @@ Scenes.Dreams.AriaTemple = function(ravenTrigger) {
 				Text.NL();
 				Text.Add("<i>Receive my blessing, oh great hero.</i> Her voice is mocking as she positions her cock against your [anusDesc].", parse);
 				Text.NL();
-				Text.Add("There is a piercing pain… and then you are awake, heart pounding in your chest and sweating profusely.", parse);
+				Text.Add("There is a piercing pain… and then you are awake, heart pounding in your chest, and sweating profusely.", parse);
 				
 				player.AddLustFraction(0.3);
 			}, 1.0, function() { return (gameCache.flags["IntroFuckedUru"] != 0 || gameCache.flags["IntroFuckedByUru"] != 0); });
@@ -585,18 +585,18 @@ Scenes.Dreams.AriaTemple = function(ravenTrigger) {
 				parse["s"] = player.NumCocks() > 1 ? "s" : "";
 				Text.Add("The goddess’ lips finally find your [multiCockDesc], eagerly wrapping themselves around[oneof] your shaft[s]. The world around you is wavering, growing diffuse and fuzzy. With your pre dripping from her tongue, Lady Aria arches her back as she straddles you, positioning your cock[s] at her entrance[s]. In a single, smooth motion, she slams her hips down, burying your [multiCockDesc] to the hilt inside her tight, divine hole[s].", parse);
 				Text.NL();
-				Text.Add("You can do naught but moan in delirious pleasure as she rides you, your already uncertain perception of time all but shattering from sensory overload. It’s like nothing you’ve ever felt before, pure bliss surging through your body. You could give up everything you have just to experience another moment of this paradise in human form.", parse);
+				Text.Add("You can do naught but moan in delirious pleasure as she rides you; your already uncertain perception of time all but shattering from sensory overload. It’s like nothing you’ve ever felt before, like pure bliss surging through your body. You could give up everything you have just to experience another moment of this paradise in human form.", parse);
 				Text.NL();
-				Text.Add("When you finally awaken, you feel jolted at being bereft of this ultimate ecstasy. Not to mention aroused beyond measure.", parse);
+				Text.Add("When you finally awaken, you are jolted at being bereft of this ultimate ecstasy. Not to mention aroused beyond measure.", parse);
 				
 				player.AddLustFraction(0.7);
 			}, 1.0, function() { return player.FirstCock(); });
 			scenes.AddEnc(function() {
 				Text.Add("Suddenly, the goddess withdraws her touch, looking a bit grumpy. You look up at her in wordless complaint, aching for her to pleasure you.", parse);
 				Text.NL();
-				Text.Add("<i>Not before you have cleaned up here, you always make a mess!</i>", parse);
+				Text.Add("<i>Not before you have cleaned up here. You always make a mess!</i>", parse);
 				Text.NL();
-				Text.Add("Scurrying, eager to obey her, you grab a broom and start sweeping the temple. In a flurry of activity, you clean out every mote of dust, leaving the pristine marble spotless. Hopefully you return to the Lady, but she still looks resentful.", parse);
+				Text.Add("Scurrying, eager to obey her, you grab a broom and start sweeping the temple. In a flurry of activity, you clean out every mote of dust, leaving the pristine marble spotless. You return to the Lady with hope in your eyes, but she still looks resentful.", parse);
 				Text.NL();
 				Text.Add("<i>Not before the flowerbed has been properly tended, and the fountain scrubbed.</i>", parse);
 				Text.NL();
@@ -635,11 +635,11 @@ Scenes.Dreams.KiakaiMonster = function(ravenTrigger) {
 	Text.NL();
 	Text.Add("<i>“[playername], there’s a monster under my bed,”</i> the elf says, as soon as [heshe] sees you.", parse);
 	Text.NL();
-	Text.Add("You knew [name] could be a little childish, but to this extent? You roll your eyes in exasperation, but still, if that’s what it’s going to take, you might as well do it. You get on your knees on the hardwood floor, then lean down on your hands, and look under the bed.", parse);
+	Text.Add("You knew [name] could be a little childish, but to this extent? You roll your eyes in exasperation, but still, if that’s what it’s going to take, you might as well do it. You get down on your knees on the hardwood floor, then lean down on your hands, and look under the bed.", parse);
 	Text.NL();
 	Text.Add("There, you see a terrified wide-eyed [name] huddled in the darkness. <i>“[playername],”</i> [heshe] says, <i>“there is a monster on my bed.”</i>", parse);
 	Text.NL();
-	Text.Add("You start to rise up, bump your head against the bed, and your eyes shoot open with a jolt. Warily, you glance over at the bed across from you, but nothing seems amiss.", parse);
+	Text.Add("You start to rise up, but bump your head against the bed, and your eyes shoot open with a jolt. Warily, you glance over at the bed across from you, but nothing seems amiss.", parse);
 }
 
 Scenes.Dreams.Kiakai63 = function(ravenTrigger) {
@@ -673,7 +673,7 @@ Scenes.Dreams.Kiakai63 = function(ravenTrigger) {
 	Text.NL();
 	Text.Add("You gently dislodge yourself from the horny elf, pushing yourself into a sitting position. Your chest is bare, but someone has put a pair of comfortable pants on you. A better look at your bedmate confirms that [str]. [HeShe] is clad in a pale blue robe, ending a few inches above [hisher] bared knees.", parse);
 	Text.NL();
-	Text.Add("<i>“Ah, you are awake!”</i> the elf says happily. Confronted with the question as to exactly [heshe] was doing in your bed, and where your bed <i>is</i> for that matter, the elf blushes slightly. <i>“L-lets not get hasty here, I know it might look bad, but really, I'm just trying to help.”</i> [HeShe] looks a bit distraught.", parse);
+	Text.Add("<i>“Ah, you are awake!”</i> the elf says happily. Confronted with the question as to what exactly [heshe] was doing in your bed, and where your bed <i>is</i> for that matter, the elf blushes slightly. <i>“L-lets not get hasty here. I know it might look bad, but really, I'm just trying to help.”</i> [HeShe] looks a bit distraught.", parse);
 	Text.NL();
 	Text.Add("You continue talking with the elf for a while, but can’t shake the sense of deja vu. When you wake up for real, you feel a bit confused.", parse);
 }
