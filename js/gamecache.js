@@ -41,6 +41,8 @@ InitCache = function() {
 	magnus  = new Magnus(gameCache.magnus);
 	
 	lagon   = new Lagon(gameCache.lagon);
+	ophelia = new Ophelia(gameCache.ophelia);
+	roa     = new Roa(gameCache.roa);
 	
 	gwendy  = new Gwendy(gameCache.gwendy);
 	danie   = new Danie(gameCache.danie);
@@ -63,7 +65,6 @@ InitCache = function() {
 	uru         = new Uru();
 	sylistraxia = new Sylistraxia();
 	patchwork   = new Patchwork();
-	roa         = new Roa();
 	ches        = new Ches();
 	lucille     = new Lucille();
 	
@@ -93,6 +94,8 @@ InitCache = function() {
 	world.EntityStorage.push(magnus);
 	
 	world.EntityStorage.push(lagon);
+	world.EntityStorage.push(ophelia);
+	world.EntityStorage.push(roa);
 	
 	world.EntityStorage.push(gwendy);
 	world.EntityStorage.push(danie);
@@ -114,7 +117,6 @@ InitCache = function() {
 	world.EntityStorage.push(uru);
 	world.EntityStorage.push(sylistraxia);
 	world.EntityStorage.push(patchwork);
-	world.EntityStorage.push(roa);
 	world.EntityStorage.push(ches);
 	world.EntityStorage.push(lucille);
 	
@@ -351,6 +353,8 @@ GameToCache = function() {
 	gameCache.magnus  = magnus.ToStorage();
 	
 	gameCache.lagon   = lagon.ToStorage();
+	gameCache.ophelia = ophelia.ToStorage();
+	gameCache.roa     = roa.ToStorage();
 	
 	gameCache.gwendy  = gwendy.ToStorage();
 	gameCache.adrian  = adrian.ToStorage();
@@ -371,7 +375,6 @@ GameToCache = function() {
 	gameCache.uru         = uru.ToStorage();
 	gameCache.sylistraxia = sylistraxia.ToStorage();
 	gameCache.patchwork   = patchwork.ToStorage();
-	gameCache.roa     = roa.ToStorage();
 	gameCache.ches    = ches.ToStorage();
 	gameCache.lucille = lucille.ToStorage();
 	*/
