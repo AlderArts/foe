@@ -654,7 +654,7 @@ Scenes.Equine.WinFuckHer = function(enc) {
 		Text.Add("to all fours and stalk ", parse);
 	else if(player.LowerBodyType() == LowerBodyType.Single)
 		Text.Add("onto your belly and slither ", parse);
-	Text.Add("between her legs, not stopping until your [faceDesc] is suspended over hers and you are staring down into her wide, somewhat apprehensive eyes. Your [multiCockDesc] twitch[es] over her mons, and you enjoy the radiant heat that pulses between your respective genitals as you watch her expression grow more lustful and needy with each passing moment. Her eyes repeatedly dart down toward your crotch and then back up to meet your gaze, not understanding the lack of penetration or your reason behind it.", parse);
+	Text.Add("between her legs, not stopping until your [faceDesc] is suspended over hers and you are staring down into her wide, somewhat apprehensive eyes. Your [multiCockDesc] twitch[notEs] over her mons, and you enjoy the radiant heat that pulses between your respective genitals as you watch her expression grow more lustful and needy with each passing moment. Her eyes repeatedly dart down toward your crotch and then back up to meet your gaze, not understanding the lack of penetration or your reason behind it.", parse);
 	Text.NL();
 	Text.Add("It's clear that she is used to rough fucking, but rarely gets to experience foreplay of any sort. Lucky for her, you're feeling generous. In a sudden flash of movement, you press your lips to hers, teasing the surprised equine's tongue with your own. It only takes moments for the mare to relax, her eyes closing as she reciprocates your affection with a hint of relief. You smile inwardly - she has no idea what's coming next.", parse);
 	Text.NL();
