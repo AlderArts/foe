@@ -1145,24 +1145,24 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 					}, enabled : true,
 					tooltip : Text.Parse("Let’s see what [heshe] can do with that cock of [hishers] and some willing bunny-butts!", parse)
 				});
-				options.push({ nameStr : "Get fucked",
-					func : function() {
-						Text.Clear();
-						Text.Add("No sooner have you finished speaking, a pair of bunnies immediately pounce on Terry, intent on removing his [tarmorDesc].", parse);
-						Text.NL();
-						Scenes.Terry.FuckedByBunnyMob(male, parse);
-						PrintDefaultOptions();
-					}, enabled : true,
-					tooltip : Text.Parse("Well, if [heshe] wants it so bad, you can spare some bunny-cocks for [hisher] needy holes...", parse)
-				});
-				options.push({ nameStr : "Don’t fuck",
-					func : function() {
-						Text.Clear();
-						PrintDefaultOptions();
-					}, enabled : true,
-					tooltip : Text.Parse("[HeShe] can just stay there and watch, you don’t want any bunny-boys touching your pet.", parse)
-				});
 			}
+			options.push({ nameStr : "Get fucked",
+				func : function() {
+					Text.Clear();
+					Text.Add("No sooner have you finished speaking, a pair of bunnies immediately pounce on Terry, intent on removing his [tarmorDesc].", parse);
+					Text.NL();
+					Scenes.Terry.FuckedByBunnyMob(male, parse);
+					PrintDefaultOptions();
+				}, enabled : true,
+				tooltip : Text.Parse("Well, if [heshe] wants it so bad, you can spare some bunny-cocks for [hisher] needy holes...", parse)
+			});
+			options.push({ nameStr : "Don’t fuck",
+				func : function() {
+					Text.Clear();
+					PrintDefaultOptions();
+				}, enabled : true,
+				tooltip : Text.Parse("[HeShe] can just stay there and watch, you don’t want any bunny-boys touching your pet.", parse)
+			});
 			Gui.SetButtonsFromList(options, false, null);
 		}
 		
