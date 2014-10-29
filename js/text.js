@@ -243,6 +243,7 @@ Text.ParserPlural = function(parse, condition, prefix, postfix) {
 	
 	parse[prefix + "isAre" + postfix]   = condition ? "are" : "is";
 	parse[prefix + "hasHave" + postfix] = condition ? "have" : "has";
+	parse[prefix + "wasWere" + postfix] = condition ? "were" : "was";
 	
 	parse[prefix + "oneof" + postfix]  = condition ? " one of" : "";
 	parse[prefix + "eachof" + postfix] = condition ? " each of" : "";
@@ -251,7 +252,8 @@ Text.ParserPlural = function(parse, condition, prefix, postfix) {
 	parse[prefix + "itThey" + postfix]    = condition ? "they" : "it";
 	parse[prefix + "itThem" + postfix]    = condition ? "them" : "it";
 	parse[prefix + "itsTheir" + postfix]  = condition ? "their" : "its";
-	parse[prefix + "itsTheyre" + postfix] = condition ? "they're" : "it's";
+	parse[prefix + "itsTheyre" + postfix] = condition ? "they’re" : "it’s";
+	parse[prefix + "itsTheyve" + postfix] = condition ? "they’ve" : "it’s";
 	parse[prefix + "thisThese" + postfix] = condition ? "these" : "this";
 	
 	return parse;

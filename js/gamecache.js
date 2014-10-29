@@ -147,6 +147,8 @@ InitCache = function() {
 	
 	// OUTLAWS
 	gameCache.flags["OutlawsRep"]     = gameCache.flags["OutlawsRep"] || 0;
+	
+	gameCache.flags["NagaVenom"]      = gameCache.flags["NagaVenom"] || 0;
 }
 
 CacheToGame = function() {
