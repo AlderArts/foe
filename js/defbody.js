@@ -249,7 +249,6 @@ Body.prototype.SetBodyColor = function(color) {
 Body.prototype.SetHairColor = function(color) {
 	color = color || Color.white;
 	this.head.hair.color = color;
-	this.pubes.color = color;
 }
 
 Body.prototype.SetEyeColor = function(color) {

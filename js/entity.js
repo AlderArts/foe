@@ -1796,7 +1796,6 @@ Entity.prototype.SetEyeColor = function(color) {
 }
 Entity.prototype.SetHairColor = function(color) {
 	this.body.head.hair.color = color;
-	this.body.pubes.color = color;
 }
 Entity.prototype.SetSkinColor = function(color) {
 	this.body.torso.color = color;

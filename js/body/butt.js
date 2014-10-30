@@ -9,6 +9,24 @@ function Butt() {
 	
 	this.virgin   = true;
 }
+
+Butt.prototype.ToStorage = function() {
+	var storage = {
+		cap    : this.capacity.base,
+		str    : this.stretch.base,
+		size   : this.buttSize.base,
+		virgin : this.virgin ? 1 : 0
+	};
+	return storage;
+}
+
+Butt.prototype.FromStorage = function(storage) {
+	this.capacity.base = parseFloat(storage.cap)  || this.capacity.base;
+	this.stretch.base  = parseFloat(storage.str)  || this.stretch.base;
+	this.buttSize.base = parseFloat(storage.size) || this.buttSize.base;
+	this.virgin        = parseInt(storage.virgin) == 1;
+}
+
 Butt.prototype.Pregnant = function() {
 	return this.womb.pregnant;
 }

@@ -18,6 +18,29 @@ function Cock(race, color) {
 Cock.prototype = new BodyPart();
 Cock.prototype.constructor = Cock;
 
+Cock.prototype.ToStorage = function() {
+	var storage = {
+		race   : this.race,
+		col    : this.color,
+		type   : this.type,
+		len    : this.length.base,
+		thk    : this.thickness.base,
+		knot   : this.knot,
+		sheath : this.sheath
+	};
+	return storage;
+}
+
+Cock.prototype.FromStorage = function(storage) {
+	this.race           = parseInt(storage.race)   || this.race;
+	this.color          = parseInt(storage.col)    || this.color;
+	this.type           = parseInt(storage.type)   || this.type;
+	this.length.base    = parseFloat(storage.len)  || this.length.base;
+	this.thickness.base = parseFloat(storage.thk)  || this.thickness.base;
+	this.knot           = parseInt(storage.knot)   || this.knot;
+	this.sheath         = parseInt(storage.sheath) || this.sheath;
+}
+
 Cock.prototype.Clone = function() {
 	var cock            = new Cock(this.race, this.color);
 	cock.thickness.base = this.thickness.base;

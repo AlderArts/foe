@@ -11,6 +11,31 @@ function Balls(race, color) {
 Balls.prototype = new BodyPart();
 Balls.prototype.constructor = Balls;
 
+Balls.prototype.ToStorage = function() {
+	var storage = {
+		race  : this.race,
+		col   : this.color,
+		count : this.count.base,
+		size  : this.size.base,
+		cum   : this.cum.base,
+		cumP  : this.cumProduction.base,
+		cumC  : this.cumCap.base,
+		fer   : this.fertility.base
+	};
+	return storage;
+}
+
+Balls.prototype.FromStorage = function(storage) {
+	this.race               = parseInt(storage.race)   || this.race;
+	this.color              = parseInt(storage.col)    || this.color;
+	this.count.base         = parseInt(storage.count)  || this.count.base;
+	this.size.base          = parseFloat(storage.size) || this.size.base;
+	this.cum.base           = parseFloat(storage.cum)  || this.cum.base;
+	this.cumProduction.base = parseFloat(storage.cumP) || this.cumProduction.base;
+	this.cumCap.base        = parseFloat(storage.cumC) || this.cumCap.base;
+	this.fertility.base     = parseFloat(storage.fer)  || this.fertility.base;
+}
+
 Balls.prototype.CumCap = function() {
 	var num = this.count.Get();
 	var cap = this.cumCap.Get();

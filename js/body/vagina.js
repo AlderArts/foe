@@ -13,6 +13,30 @@ function Vagina() {
 	
 	this.virgin        = true;
 }
+
+Vagina.prototype.ToStorage = function() {
+	var storage = {
+		col    : this.color,
+		cap    : this.capacity.base,
+		str    : this.stretch.base,
+		wet    : this.wetness.base,
+		clitT  : this.clitThickness.base,
+		clitL  : this.clitLength.base,
+		virgin : this.virgin ? 1 : 0
+	};
+	return storage;
+}
+
+Vagina.prototype.FromStorage = function(storage) {
+	this.color              = parseInt(storage.col)     || this.color;
+	this.capacity.base      = parseFloat(storage.cap)   || this.capacity.base;
+	this.stretch.base       = parseFloat(storage.str)   || this.stretch.base;
+	this.wetness.base       = parseFloat(storage.wet)   || this.wetness.base;
+	this.clitThickness.base = parseFloat(storage.clitT) || this.clitThickness.base;
+	this.clitLength.base    = parseFloat(storage.clitL) || this.clitLength.base;
+	this.virgin             = parseInt(storage.virgin) == 1;
+}
+
 Vagina.prototype.Pregnant = function() {
 	return this.womb.pregnant;
 }

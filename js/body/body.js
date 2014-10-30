@@ -305,10 +305,6 @@ function Body(ent) {
 	this.cock = new Array();
 	this.balls = new Balls();
 	
-	this.pubes = {
-		color  : Color.white,
-		amount : new Stat(0)
-	}
 	this.vagina = new Array();
 	this.ass = new Butt();
 	
@@ -420,67 +416,23 @@ Body.prototype.ToStorage = function() {
 	storage.cock = new Array();
 	for(var i = 0; i < this.cock.length; i++) {
 		var a = this.cock[i];
-		var c = {
-			race  : a.race,
-			col   : a.color,
-			type  : a.type,
-			len   : a.length.base,
-			thk   : a.thickness.base,
-			knot  : a.knot,
-			sheath: a.sheath
-		};
+		var c = a.ToStorage();
 		if(a.vag)
 			c.ccIdx = this.vagina.indexOf(a.vag);
 		storage.cock.push(c);
 	}
-	storage.balls = {
-		race  : this.balls.race,
-		col   : this.balls.color,
-		count : this.balls.count.base,
-		size  : this.balls.size.base,
-		cum   : this.balls.cum.base,
-		cumP  : this.balls.cumProduction.base,
-		cumC  : this.balls.cumCap.base,
-		fer   : this.balls.fertility.base
-	};
-	storage.pubes = {
-		col : this.pubes.color,
-		am  : this.pubes.amount.base
-	};
+	storage.balls = this.balls.ToStorage();
+	
 	storage.vag = new Array();
 	for(var i = 0; i < this.vagina.length; i++) {
-		var a = this.vagina[i];
-		var v = {
-			col    : a.color,
-			cap    : a.capacity.base,
-			str    : a.stretch.base,
-			wet    : a.wetness.base,
-			clitT  : a.clitThickness.base,
-			clitL  : a.clitLength.base,
-			virgin : a.virgin ? 1 : 0
-		};
-		storage.vag.push(v);
+		storage.vag.push(this.vagina[i].ToStorage());
 	}
-	storage.ass = {
-		cap    : this.ass.capacity.base,
-		str    : this.ass.stretch.base,
-		size   : this.ass.buttSize.base,
-		virgin : this.ass.virgin ? 1 : 0
-	};
+	
+	storage.ass = this.ass.ToStorage();
+	
 	storage.breasts = new Array();
 	for(var i = 0; i < this.breasts.length; i++) {
-		var a = this.breasts[i];
-		var b = {
-			col     : a.color,
-			race    : a.race,
-			nipC    : a.nippleCount,
-			size    : a.size.base,
-			nipThk  : a.nippleThickness.base,
-			nipLen  : a.nippleLength.base,
-			aerS    : a.aerolaSize.base,
-			nipType : a.nippleType
-		};
-		storage.breasts.push(b);
+		storage.breasts.push(this.breasts[i].ToStorage());
 	}
 	
 	// Arms and legs
@@ -556,42 +508,17 @@ Body.prototype.FromStorage = function(storage) {
 	
 	this.cock = new Array();
 	for(var i = 0; i < storage.cock.length; i++) {
-		var a = storage.cock[i];
 		var c = new Cock();
-		c.race           = parseInt(a.race)   || c.race;
-		c.color          = parseInt(a.col)    || c.color;
-		c.type           = parseInt(a.type)   || c.type;
-		c.length.base    = parseFloat(a.len)  || c.length.base;
-		c.thickness.base = parseFloat(a.thk)  || c.thickness.base;
-		c.knot           = parseInt(a.knot)   || c.knot;
-		c.sheath         = parseInt(a.sheath) || c.sheath;
+		c.FromStorage(storage.cock[i]);
 		this.cock.push(c);
 	}
 	
-	this.balls.race               = parseInt(storage.balls.race)   || this.balls.race;
-	this.balls.color              = parseInt(storage.balls.col)    || this.balls.color;
-	this.balls.count.base         = parseInt(storage.balls.count)  || this.balls.count.base;
-	this.balls.size.base          = parseFloat(storage.balls.size) || this.balls.size.base;
-	this.balls.cum.base           = parseFloat(storage.balls.cum)  || this.balls.cum.base;
-	this.balls.cumProduction.base = parseFloat(storage.balls.cumP) || this.balls.cumProduction.base;
-	this.balls.cumCap.base        = parseFloat(storage.balls.cumC) || this.balls.cumCap.base;
-	this.balls.fertility.base     = parseFloat(storage.balls.fer)  || this.balls.fertility.base;
-	
-	this.pubes.color              = parseInt(storage.pubes.col)    || this.pubes.color;
-	this.pubes.amount.base        = parseFloat(storage.pubes.am)   || this.pubes.amount.base;
+	this.balls.FromStorage(storage.balls);
 	
 	this.vagina = new Array();
 	for(var i = 0; i < storage.vag.length; i++) {
-		var a = storage.vag[i];
 		var v = new Vagina();
-		v.color              = parseInt(a.col)     || v.color;
-		v.capacity.base      = parseFloat(a.cap)   || v.capacity.base;
-		v.stretch.base       = parseFloat(a.str)   || v.stretch.base;
-		v.wetness.base       = parseFloat(a.wet)   || v.wetness.base;
-		v.clitThickness.base = parseFloat(a.clitT) || v.clitThickness.base;
-		v.clitLength.base    = parseFloat(a.clitL) || v.clitLength.base;
-		v.virgin             = parseInt(a.virgin) == 1;
-		
+		v.FromStorage(storage.vag[i]);
 		this.vagina.push(v);
 	}
 	
@@ -608,24 +535,12 @@ Body.prototype.FromStorage = function(storage) {
 	}
 
 	this.ass = new Butt();
-	this.ass.capacity.base = parseFloat(storage.ass.cap)  || this.ass.capacity.base;
-	this.ass.stretch.base  = parseFloat(storage.ass.str)  || this.ass.stretch.base;
-	this.ass.buttSize.base = parseFloat(storage.ass.size) || this.ass.buttSize.base;
-	this.ass.virgin        = parseInt(storage.ass.virgin) == 1;
+	this.ass.FromStorage(storage.ass);
 	
 	this.breasts = new Array();
 	for(var i = 0; i < storage.breasts.length; i++) {
-		var a = storage.breasts[i];
 		var b = new Breasts();
-		b.color                = parseInt(a.col)      || b.color;
-		b.race                 = parseInt(a.race)     || b.race;
-		b.nippleCount          = parseInt(a.nipC)     || b.nippleCount;
-		b.size.base            = parseFloat(a.size)   || b.size.base;
-		b.nippleThickness.base = parseFloat(a.nipThk) || b.nippleThickness.base;
-		b.nippleLength.base    = parseFloat(a.nipLen) || b.nippleLength.base;
-		b.aerolaSize.base      = parseFloat(a.aerS)   || b.aerolaSize.base;
-		b.nippleType           = parseInt(a.nipType)  || b.nippleType;
-		
+		b.FromStorage(storage.breasts[i]);
 		this.breasts.push(b);
 	}
 

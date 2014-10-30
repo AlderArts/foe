@@ -19,6 +19,32 @@ function Breasts(race, color) {
 }
 Breasts.prototype = new BodyPart();
 Breasts.prototype.constructor = Breasts;
+
+Breasts.prototype.ToStorage = function() {
+	var storage = {
+		col     : this.color,
+		race    : this.race,
+		nipC    : this.nippleCount,
+		size    : this.size.base,
+		nipThk  : this.nippleThickness.base,
+		nipLen  : this.nippleLength.base,
+		aerS    : this.aerolaSize.base,
+		nipType : this.nippleType
+	};
+	return storage;
+}
+
+Breasts.prototype.FromStorage = function(storage) {
+	this.color                = parseInt(storage.col)      || this.color;
+	this.race                 = parseInt(storage.race)     || this.race;
+	this.nippleCount          = parseInt(storage.nipC)     || this.nippleCount;
+	this.size.base            = parseFloat(storage.size)   || this.size.base;
+	this.nippleThickness.base = parseFloat(storage.nipThk) || this.nippleThickness.base;
+	this.nippleLength.base    = parseFloat(storage.nipLen) || this.nippleLength.base;
+	this.aerolaSize.base      = parseFloat(storage.aerS)   || this.aerolaSize.base;
+	this.nippleType           = parseInt(storage.nipType)  || this.nippleType;
+}
+
 Breasts.prototype.Size = function() {
 	return this.size.Get();
 }
