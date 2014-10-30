@@ -37,8 +37,6 @@ TODO:
  - More subby sex
  - Bruiser training (barracks)
 
-* Sample coms (Estevan, Equines)
-
 
 
 REWRITE OF GUI:
@@ -167,8 +165,6 @@ Feedback:
 
 * Timer callbacks
 * Temporary TFs
-* Item screen
- - Select number of items (sell x, convert x etc) -> slider?
 * Alchemy
  - Base ingredients
  - Distill -> increase potency
