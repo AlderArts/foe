@@ -4,10 +4,9 @@ $(function() {
     $('canvas').mousedown(function(event) { event.preventDefault() });
 });
 
-localStorage = {bgcolor: "temp"};
-
 // Set the main entrypoint of the application
 function EntryPoint() {
+	online = localStorage ? true : false;
 	// Setup the application
 	Setup();
 }
@@ -84,7 +83,8 @@ SplashScreen = function() {
 	
 	Input.buttons[7].Setup(Gui.ShortcutsVisible ? "Keys: On" : "Keys: Off", function() {
     	Gui.ShortcutsVisible = !Gui.ShortcutsVisible;
-    	localStorage["ShortcutsVisible"] = Gui.ShortcutsVisible ? 1 : 0;
+    	if(online)
+	    	localStorage["ShortcutsVisible"] = Gui.ShortcutsVisible ? 1 : 0;
     	SplashScreen();
 	}, true);
 	
@@ -104,10 +104,10 @@ SplashScreen = function() {
     Input.buttons[11].Setup("Clear saves", function() {
     	Saver.Clear();
     	SplashScreen();
-    }, true, null, "Warning! This will clear up old saves by removing the save0-11 and savedata0-11 localstorage slots.");
+    }, online, null, "Warning! This will clear up old saves by removing the save0-11 and savedata0-11 localstorage slots.");
     
     Text.Newline();
-    if(Saver.HasSaves())
+    if(online && Saver.HasSaves())
     	Text.AddOutput("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
 }
 

@@ -54,6 +54,7 @@ Saver.SaveGame = function(nr) {
 
 // Returns true if there are any saves
 Saver.HasSaves = function() {
+	if(!online) return false;
 	for(var i=0; i<Saver.slots; i++)
 		if(Saver.SaveHeader(i)) return true;
 	return false;

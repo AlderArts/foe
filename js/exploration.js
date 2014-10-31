@@ -101,7 +101,7 @@ LimitedDataPrompt = function(backFunc) {
 	
 	Input.buttons[0].Setup("Save game", function() {
 		Saver.SavePrompt(LimitedDataPrompt);
-    }, true);
+    }, online);
     
     Input.buttons[2].Setup("Save file", function() {
     	var filename = prompt("SAVE TO FILE WILL NOT WORK IN OFFLINE MODE!\n\n Enter name of save file.");
@@ -159,11 +159,11 @@ DataPrompt = function() {
 	
 	Input.buttons[0].Setup("Save game", function() {
 		Saver.SavePrompt(DataPrompt);
-    }, safeLocation);
+    }, online && safeLocation);
     
     Input.buttons[1].Setup("Load game", function() {
     	Saver.LoadPrompt(DataPrompt);
-    }, true);
+    }, Saver.HasSaves());
     
     Input.buttons[2].Setup("Save file", function() {
     	var filename = prompt("SAVE TO FILE WILL NOT WORK IN OFFLINE MODE!\n\n Enter name of save file.");
@@ -216,7 +216,8 @@ DataPrompt = function() {
 	
 	Input.buttons[7].Setup(Gui.ShortcutsVisible ? "Keys: On" : "Keys: Off", function() {
     	Gui.ShortcutsVisible = !Gui.ShortcutsVisible;
-    	localStorage["ShortcutsVisible"] = Gui.ShortcutsVisible ? 1 : 0;
+    	if(online)
+	    	localStorage["ShortcutsVisible"] = Gui.ShortcutsVisible ? 1 : 0;
     	DataPrompt();
 	}, true);
 	
