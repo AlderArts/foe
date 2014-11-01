@@ -2,17 +2,40 @@
  * Pregnancy handler
  */
 
+PregType = {
+	Undefined : 0,
+};
+
 // TODO: Needs some timers/callbacks
 function Womb() {
 	// In progress offspring
 	this.litterSize = 0;
-	this.litterRace = Race.human;
+	this.pregType   = PregType.Undefined;
 	this.pregnant   = false;
 	// TODO: TIMER
 	this.progress     = 0;
 	this.hoursToBirth = 0;
 	this.triggered    = false;
 }
+
+Womb.prototype.ToStorage = function() {
+	var storage = {
+		litS : this.litterSize,
+		type : this.pregType,
+		hour : this.hoursToBirth.toFixed(2),
+		prog : this.progress.toFixed(4)
+	};
+	return storage;
+}
+
+Womb.prototype.FromStorage = function(storage) {
+	this.litterSize   = parseInt(storage.litS)   || this.litterSize;
+	this.pregType     = parseInt(storage.type)   || this.pregType;
+	this.pregnant     = true;
+	this.hoursToBirth = parseFloat(storage.hour) || this.hoursToBirth;
+	this.progress     = parseFloat(storage.prog) || this.progress;
+}
+
 Womb.prototype.Short = function() {
 	return "womb";
 }
@@ -47,20 +70,16 @@ PregnancyHandler.prototype.ToStorage = function() {
 	for(var i = 0; i < vags.length; ++i) {
 		var w = vags[i].womb;
 		if(w && w.pregnant) {
-			womb.push({
-				slot : PregnancyHandler.Slot.Vag + i,
-				litS : w.litterSize,
-				litR : w.litterRace
-			});
+			var s = w.ToStorage();
+			s.slot = PregnancyHandler.Slot.Vag + i;
+			womb.push(s);
 		}
 	}
 	var w = this.entity.Butt().womb;
 	if(w && w.pregnant) {
-		womb.push({
-			slot : PregnancyHandler.Slot.Butt,
-			litS : w.litterSize,
-			litR : w.litterRace
-		});
+		var s = w.ToStorage();
+		s.slot = PregnancyHandler.Slot.Butt;
+		womb.push(s);
 	}
 	
 	if(womb.length > 0)
@@ -90,12 +109,8 @@ PregnancyHandler.prototype.FromStorage = function(storage) {
 			else if(slot == PregnancyHandler.Slot.Butt)
 				wPtr = this.entity.Butt().womb;
 			
-			if(wPtr) {
-				wPtr.litterSize = parseInt(w.litS)  || wPtr.litterSize;
-				wPtr.litterRace = parseInt(w.litR)  || wPtr.litterRace;
-				wPtr.pregnant   = true;
-				wPtr.progress   = parseFloat(w.prog);
-			}
+			if(wPtr)
+				wPtr.FromStorage(w);
 		}
 	}
 }
@@ -137,6 +152,7 @@ PregnancyHandler.prototype.IsPregnant = function(opts) {
  * 	slot   := PregnancyHandler.Slot
  * 	mother := Entity
  * 	father := Entity
+ *  type   := PregType
  * 	num    := 1,2,3...
  * 	time   := time to birth in hours
  */
@@ -168,7 +184,7 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 		litterSize = Math.floor(litterSize);
 		litterSize = Math.max(litterSize, 1);
 
-		var litterRace = Race.human; // TODO TEMP
+		var pregType = opts.type || PregType.Undefined;
 
 		var gestationPeriod = opts.time || 24; //TODO TEMP
 		
@@ -181,7 +197,7 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 		womb.progress     = 0;
 		womb.hoursToBirth = gestationPeriod;
 		womb.litterSize   = litterSize;
-		womb.litterRace   = litterRace;
+		womb.pregType     = pregType;
 		
 		return true;
 	}
