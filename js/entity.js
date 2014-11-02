@@ -381,6 +381,8 @@ Entity.prototype.ToStorage = function() {
 		
 	};
 	
+	storage.body = this.body.ToStorage();
+	
 	this.SaveCombatStats(storage);
 	this.SavePersonalityStats(storage);
 	this.SaveRecipes(storage);
@@ -392,8 +394,6 @@ Entity.prototype.ToStorage = function() {
 
 	this.SaveFlags(storage);
 	this.SaveSexStats(storage);
-	
-	storage.body = this.body.ToStorage();
 	
 	// TODO
 	/*
@@ -511,6 +511,11 @@ Entity.prototype.LoadLactation = function(storage) {
 }
 
 Entity.prototype.FromStorage = function(storage) {
+	if(storage.body) {
+		this.body = new Body(this);
+		this.body.FromStorage(storage.body);
+	}
+	
 	this.LoadCombatStats(storage);
 	this.LoadPersonalityStats(storage);
 	this.LoadRecipes(storage);
@@ -523,11 +528,6 @@ Entity.prototype.FromStorage = function(storage) {
 	// Load flags
 	this.LoadFlags(storage);
 	this.LoadSexFlags(storage);
-	
-	if(storage.body) {
-		this.body = new Body(this);
-		this.body.FromStorage(storage.body);
-	}
 	
 	this.RecallAbilities(); // TODO: Implement for special abilitiy sources (flag dependent)
 	this.SetLevelBonus();
@@ -1251,8 +1251,10 @@ Entity.prototype.PregnancyOverTime = function(hours) {
 }
 
 Entity.prototype.PregnancyTrigger = function(womb, slot) {
-	//TODO: Implement for each entity. Default to do nothing.
-	//Optional slot: PregnancyHandler.Slot
+	// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
+	Gui.Callstack.unshift(function() {
+		womb.pregnant = false;
+	});
 }
 
 DrunkLevel = {

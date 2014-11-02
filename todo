@@ -20,7 +20,10 @@ Orgasm/Load/Preg code
 TODO:
 * Look through Lactation code, there is something wrong with it (TEST)
 * Restructure body save/load and modularize (still a little bit left)
-* Preg stuff, slots
+* Preg stuff:
+ - Slots
+ - Appearance/Debug (progress)
+ - StomachDesc
 
 * Burrows writing
  - Burrows TF sequence..

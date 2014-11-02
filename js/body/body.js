@@ -264,6 +264,7 @@ BodyPartType = {
 
 // Describe a standard humanoid-ish body
 function Body(ent) {
+	this.entity = ent;
 	var debugName = function() { return ent.name + ".body"; };
 	// Body stats
 	this.muscleTone = new Stat(0);
@@ -1241,6 +1242,14 @@ Body.prototype.HipsDesc = function(plural) {
 // TODO: Preggo belly (use bellysize)
 Body.prototype.StomachDesc = function(bellysize) {
 	var nouns = [];
+	
+	var size = 0;
+	if(this.entity) {
+		size = this.entity.PregHandler().BellySize();
+	}
+	
+	//TODO use belly size
+	
 	nouns.push("belly");
 	nouns.push("stomach");
 	nouns.push("tummy");

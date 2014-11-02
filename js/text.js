@@ -240,6 +240,7 @@ Text.ParserPlural = function(parse, condition, prefix, postfix) {
 	parse[prefix + "notS" + postfix]   = condition ? "" : "s";
 	parse[prefix + "es" + postfix]     = condition ? "es" : "";
 	parse[prefix + "notEs" + postfix]  = condition ? "" : "es";
+	parse[prefix + "yIes" + postfix]   = condition ? "ies" : "y";
 	
 	parse[prefix + "isAre" + postfix]   = condition ? "are" : "is";
 	parse[prefix + "hasHave" + postfix] = condition ? "have" : "has";

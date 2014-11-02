@@ -14,6 +14,8 @@ Version 0.3p
 * Added new patreon sponsored content:
  - Naga loss scene for cocked players by LonelyRonin.
 * Made some tweaks to the code that should allow the game to run on offline Internet Explorer. Save/Load isn't possible, except by text.
+* Implemented an EXTREMELY barebones pregnancy system.
+ - Save/load works
 
 --------------------------------------------
              PREVIOUS VERSIONS

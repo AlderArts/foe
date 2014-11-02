@@ -4,6 +4,10 @@
 
 PregType = {
 	Undefined : 0,
+	Feline    : 1,
+	Equine    : 2,
+	Lagomorph : 3,
+	Lizard    : 4
 };
 
 // TODO: Needs some timers/callbacks
@@ -90,7 +94,6 @@ PregnancyHandler.prototype.ToStorage = function() {
 
 PregnancyHandler.prototype.FromStorage = function(storage) {
 	storage = storage || {};
-	
 	if(storage.gr) this.gestationRate.base = parseFloat(storage.gr);
 	if(storage.f)  this.fertility.base     = parseFloat(storage.f);
 	
@@ -103,14 +106,16 @@ PregnancyHandler.prototype.FromStorage = function(storage) {
 			var wPtr = null;
 			if(slot >= PregnancyHandler.Slot.Vag && slot < PregnancyHandler.Slot.Butt) {
 				var idx = slot - PregnancyHandler.Slot.Vag;
-				if(idx >= 0 && idx < vags.length)
-					wPtr = vags[idx];
+				if((idx >= 0) && (idx < vags.length)) {
+					wPtr = vags[idx].womb;
+				}
 			}
 			else if(slot == PregnancyHandler.Slot.Butt)
 				wPtr = this.entity.Butt().womb;
 			
-			if(wPtr)
+			if(wPtr) {
 				wPtr.FromStorage(w);
+			}
 		}
 	}
 }
@@ -141,8 +146,7 @@ PregnancyHandler.prototype.Womb = function(opts) {
  */
 PregnancyHandler.prototype.IsPregnant = function(opts) {
 	opts = opts || {};
-	var slot = opts.slot || PregnancyHandler.Slot.Vag;
-	var womb = this.Womb();
+	var womb = this.Womb(slot);
 
 	return womb.pregnant;
 }
@@ -155,6 +159,8 @@ PregnancyHandler.prototype.IsPregnant = function(opts) {
  *  type   := PregType
  * 	num    := 1,2,3...
  * 	time   := time to birth in hours
+ *  force  := [optional], bypass fertility
+ *  load   := [optional], multiply chances of preg
  */
 PregnancyHandler.prototype.Impregnate = function(opts) {
 	opts = opts || {};
@@ -175,9 +181,17 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 	
 	// TODO: Check for sterility, herbs etc
 	
-	var fertility = (this.fertility * father.Virility() * Math.sqrt(opts.load));
+	var fertility = (this.fertility.Get() * father.Virility() * Math.sqrt(opts.load || 1));
+	var chance = Math.random();
 	
-	if(opts.force || Math.random() < fertility) {
+	var parse = {
+		mother : mother.name,
+		father : father.name,
+		odds   : fertility,
+		chance : chance
+	};
+	
+	if(opts.force || (chance < fertility)) {
 		
 		// TODO: Adjust litterSize
 		var litterSize = opts.num || 1;
@@ -199,10 +213,26 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 		womb.litterSize   = litterSize;
 		womb.pregType     = pregType;
 		
+		parse["size"] = litterSize;
+		parse["type"] = pregType;
+		parse["time"] = gestationPeriod;
+		
+		if(DEBUG) {
+			Text.NL();
+			Text.Add("<b>[father] impregnated [mother], (odds: [chance] < [odds]). Litter size: [size]. Type: [type]. Time: [time] hours.</b>", parse);
+			Text.NL();
+		}
+		
 		return true;
 	}
-	else
+	else {
+		if(DEBUG) {
+			Text.NL();
+			Text.Add("<b>[father] did not impregnate [mother], (odds: [chance] >= [odds]).</b>", parse);
+			Text.NL();
+		}
 		return false;
+	}
 }
 
 PregnancyHandler.prototype.Update = function(hours) {
@@ -220,12 +250,7 @@ PregnancyHandler.prototype.Update = function(hours) {
 			// Check for completion
 			if(womb.hoursToBirth <= 0) {
 				womb.triggered = true;
-				
-				// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
-				Gui.Callstack.unshift(function() {
-					womb.pregnant = false;
-					ent.PregnancyTrigger(womb, PregnancyHandler.Slot.Vag);
-				});
+				ent.PregnancyTrigger(womb, PregnancyHandler.Slot.Vag);
 			}
 		}
 	}
@@ -236,12 +261,7 @@ PregnancyHandler.prototype.Update = function(hours) {
 		// Check for completion
 		if(womb.hoursToBirth <= 0) {
 			womb.triggered = true;
-			
-			// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
-			Gui.Callstack.unshift(function() {
-				womb.pregnant = false;
-				ent.PregnancyTrigger(womb, PregnancyHandler.Slot.Butt);
-			});
+			ent.PregnancyTrigger(womb, PregnancyHandler.Slot.Butt);
 		}
 	}
 }

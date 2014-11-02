@@ -9,7 +9,7 @@ LastSubmenu = null;
 
 PrintDefaultOptions = function(preventClear) {
 	var e = Gui.Callstack.pop();
-	if(e) {	
+	if(e) {
 		e();
 		return;
 	}

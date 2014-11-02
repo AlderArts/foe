@@ -450,6 +450,16 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 		Text.NL();
 		player.FuckVag(player.FirstVag(), null, 3);
 		Sex.Vaginal(enemy, player);
+		
+		// TODO
+		player.PregHandler().Impregnate({
+			slot   : PregnancyHandler.Slot.Vag,
+			mother : player,
+			father : enemy,
+			type   : PregType.Lizard,
+			num    : 1,
+			time   : 16
+		});
 	}
 	else {
 		Text.Add("your [anusDesc] slowly stretching around it. You lift one hand, licking the palm of it, then bring it back down to lubricate her tail slightly. As you rub your saliva along the length of her scaled tail, it starts to slide in much more easily.", parse);
@@ -874,10 +884,21 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 								parse["comp"] = party.Two() ? "companion" : "party";
 								Text.Add("Your [comp] joins you, looking at you a little strangely.", parse);
 							}
-							Text.Flush();
 							
 							player.FuckVag(player.FirstVag(), enemy.FirstCock(), 4);
 							Sex.Vaginal(enemy, player);
+							
+							// TODO
+							player.PregHandler().Impregnate({
+								slot   : PregnancyHandler.Slot.Vag,
+								mother : player,
+								father : enemy,
+								type   : PregType.Lizard,
+								num    : 1,
+								time   : 16
+							});
+							
+							Text.Flush();
 							
 							player.AddLustFraction(-1);
 							Gui.NextPrompt(enc.finalize);
@@ -1394,11 +1415,22 @@ Scenes.Lizards.WinPowerbottomDeny = function(enc) {
 		Text.NL();
 		Text.Add("Your party follows you.", parse);
 	}
-	Text.Flush();
 	
 	player.FuckVag(player.FirstVag(), enemy.FirstCock(), 3);
 	Sex.Vaginal(enemy, player);
 	
+	// TODO
+	player.PregHandler().Impregnate({
+		slot   : PregnancyHandler.Slot.Vag,
+		mother : player,
+		father : enemy,
+		type   : PregType.Lizard,
+		num    : 1,
+		time   : 16
+	});
+	
+	Text.Flush();
+							
 	player.AddLustFraction(-1);
 	Gui.NextPrompt(enc.finalize);
 }

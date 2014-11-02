@@ -188,6 +188,47 @@ Player.prototype.Drink = function(drink, suppressText) {
 	return (this.drunkLevel > DrunkLevel.Drunk);
 }
 
+// Pregnancy TODO
+Player.prototype.PregnancyTrigger = function(womb, slot) {
+	if(!womb) return;
+	// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
+	Gui.Callstack.unshift(function() {
+		womb.pregnant = false;
+		var parse = {
+			
+		};
+		var num  = womb.litterSize;
+		var type = womb.pregType;
+		
+		parse = Text.ParserPlural(parse, num > 1);
+		
+		parse["num"] = Text.NumToText(num);
+		parse["type"] = type;
+		
+		Text.Clear();
+		
+		if(DEBUG) {
+			Text.Add("<b>Preg-debug:<br/>", parse);
+			Text.Add("Num: [num]<br/>", parse);
+			Text.Add("Type: [type]</b>", parse);
+			Text.NL();
+		}
+		
+		if(type == PregType.Feline)
+			Text.Add("You birth [num] kitten[s].", parse);
+		else if(type == PregType.Equine)
+			Text.Add("You birth [num] equine bab[yIes].", parse);
+		else if(type == PregType.Lagomorph)
+			Text.Add("You birth [num] bunn[yIes].", parse);
+		else if(type == PregType.Lizard)
+			Text.Add("You birth [num] lizard bab[yIes].", parse);
+		else
+			Text.Add("You birth undefined offspring! BUG!", parse);
+		Text.Flush();
+		Gui.NextPrompt();
+	});
+}
+
 // Party interaction
 Player.prototype.Interact = function(switchSpot) {
 	Text.Clear();

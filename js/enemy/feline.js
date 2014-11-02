@@ -1614,6 +1614,17 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 			parse["s"] = enc.enemy.Num() > 2 ? "s" : "";
 			parse["comp"] = group ? Text.Parse(" calling [hisher] friend[s] over and", parse) : "";
 			Text.Add("<i>“I really need to be going, but I hope to run into you again,”</i> [heshe] says,[comp] walking away.", parse);
+			
+			// TODO
+			player.PregHandler().Impregnate({
+				slot   : PregnancyHandler.Slot.Vag,
+				mother : player,
+				father : cat,
+				type   : PregType.Feline,
+				num    : 3,
+				time   : 24
+			});
+			
 			Text.Flush();
 			
 			player.AddLustFraction(-1);
