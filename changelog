@@ -15,7 +15,10 @@ Version 0.3p
  - Naga loss scene for cocked players by LonelyRonin.
 * Made some tweaks to the code that should allow the game to run on offline Internet Explorer. Save/Load isn't possible, except by text.
 * Implemented an EXTREMELY barebones pregnancy system.
- - Save/load works
+ - Save/load works.
+ - Placeholder appearance screen (only for player atm).
+ - Placeholder progress messages (right now, implemented pregnancies are about 24 hours for testing purposes)
+ - Currently, the PLAYER can get pregnant from bunnies, equines, lizards and cats.
 
 --------------------------------------------
              PREVIOUS VERSIONS

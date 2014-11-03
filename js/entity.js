@@ -1250,6 +1250,9 @@ Entity.prototype.PregnancyOverTime = function(hours) {
 	this.pregHandler.Update(hours);
 }
 
+Entity.prototype.PregnancyProgess = function(womb, slot, oldProgress, progress) {
+}
+
 Entity.prototype.PregnancyTrigger = function(womb, slot) {
 	// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
 	Gui.Callstack.unshift(function() {
@@ -2348,6 +2351,23 @@ Entity.prototype.PrintDescription = function() {
 	Text.NL();
 	Text.Add("Milk: " + this.Milk().toFixed(2) + " / " + this.MilkCap().toFixed(2));
 	Text.NL();
+	
+	// TODO: Pregnancy
+	var womb = this.pregHandler.Womb({slot: PregnancyHandler.Slot.Vag});
+	if(womb && womb.pregnant) {
+		parse["proc"] = (womb.progress * 100).toFixed(1);
+		parse["hour"] = womb.hoursToBirth.toFixed(1);
+		Text.Add("[name] [is] pregnant. Current progress, [proc]%. [hour] hours to term.", parse);
+		Text.NL();
+	}
+	
+	womb = this.pregHandler.Womb({slot: PregnancyHandler.Slot.Butt});
+	if(womb && womb.pregnant) {
+		parse["proc"] = (womb.progress * 100).toFixed(1);
+		parse["hour"] = womb.hoursToBirth.toFixed(1);
+		Text.Add("[name] [is] butt-pregnant. Current progress, [proc]%. [hour] hours to term.", parse);
+		Text.NL();
+	}
 	
 	// TODO: Ass
 	Text.Add("[name] [has] [anusDesc].", parse);

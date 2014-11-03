@@ -22,8 +22,8 @@ TODO:
 * Restructure body save/load and modularize (still a little bit left)
 * Preg stuff:
  - Slots
- - Appearance/Debug (progress)
  - StomachDesc
+ - Counter
 
 * Burrows writing
  - Burrows TF sequence..

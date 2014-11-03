@@ -188,6 +188,60 @@ Player.prototype.Drink = function(drink, suppressText) {
 	return (this.drunkLevel > DrunkLevel.Drunk);
 }
 
+//TODO Preg description
+Player.prototype.PregnancyProgess = function(womb, slot, oldProgress, progress) {
+	if(!womb) return;
+	var parse = {
+		
+	};
+	
+	if(progress > PregnancyLevel.Level1 && oldProgress <= PregnancyLevel.Level1) {
+		Gui.Callstack.unshift(function() {
+			Text.Clear();
+			Text.Add("PLACEHOLDER: You are noticably pregnant.", parse);
+			Text.NL();
+			Text.Flush();
+			Gui.NextPrompt();
+		});
+	}
+	if(progress > PregnancyLevel.Level2 && oldProgress <= PregnancyLevel.Level2) {
+		Gui.Callstack.unshift(function() {
+			Text.Clear();
+			Text.Add("PLACEHOLDER: Your belly is swelling with your offspring.", parse);
+			Text.NL();
+			Text.Flush();
+			Gui.NextPrompt();
+		});
+	}
+	if(progress > PregnancyLevel.Level3 && oldProgress <= PregnancyLevel.Level3) {
+		Gui.Callstack.unshift(function() {
+			Text.Clear();
+			Text.Add("PLACEHOLDER: Your belly is swollen with your offspring.", parse);
+			Text.NL();
+			Text.Flush();
+			Gui.NextPrompt();
+		});
+	}
+	if(progress > PregnancyLevel.Level4 && oldProgress <= PregnancyLevel.Level4) {
+		Gui.Callstack.unshift(function() {
+			Text.Clear();
+			Text.Add("PLACEHOLDER: It's becoming difficult to move due to your pregnancy.", parse);
+			Text.NL();
+			Text.Flush();
+			Gui.NextPrompt();
+		});
+	}
+	if(progress > PregnancyLevel.Level5 && oldProgress <= PregnancyLevel.Level5) {
+		Gui.Callstack.unshift(function() {
+			Text.Clear();
+			Text.Add("PLACEHOLDER: Your pregnancy is almost to term.", parse);
+			Text.NL();
+			Text.Flush();
+			Gui.NextPrompt();
+		});
+	}
+}
+
 // Pregnancy TODO
 Player.prototype.PregnancyTrigger = function(womb, slot) {
 	if(!womb) return;

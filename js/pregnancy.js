@@ -10,6 +10,15 @@ PregType = {
 	Lizard    : 4
 };
 
+// Progress
+PregnancyLevel = {
+	Level1 : 0.1,
+	Level2 : 0.3,
+	Level3 : 0.5,
+	Level4 : 0.7,
+	Level5 : 0.9,
+};
+
 // TODO: Needs some timers/callbacks
 function Womb() {
 	// In progress offspring
@@ -244,6 +253,7 @@ PregnancyHandler.prototype.Update = function(hours) {
 	var vags = ent.AllVags();
 	for(var i = 0; i < vags.length; ++i) {
 		var womb = vags[i].womb;
+		var oldProgress = womb.progress;
 		if(womb.pregnant && !womb.triggered) {
 			womb.progress     += (1-womb.progress) * hours / womb.hoursToBirth;
 			womb.hoursToBirth -= hours;
@@ -251,6 +261,9 @@ PregnancyHandler.prototype.Update = function(hours) {
 			if(womb.hoursToBirth <= 0) {
 				womb.triggered = true;
 				ent.PregnancyTrigger(womb, PregnancyHandler.Slot.Vag);
+			}
+			else {
+				ent.PregnancyProgess(womb, PregnancyHandler.Slot.Vag, oldProgress, womb.progress);
 			}
 		}
 	}
@@ -262,6 +275,9 @@ PregnancyHandler.prototype.Update = function(hours) {
 		if(womb.hoursToBirth <= 0) {
 			womb.triggered = true;
 			ent.PregnancyTrigger(womb, PregnancyHandler.Slot.Butt);
+		}
+		else {
+			ent.PregnancyProgess(womb, PregnancyHandler.Slot.Vag, oldProgress, womb.progress);
 		}
 	}
 }
