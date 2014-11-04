@@ -277,7 +277,7 @@ PregnancyHandler.prototype.Update = function(hours) {
 			ent.PregnancyTrigger(womb, PregnancyHandler.Slot.Butt);
 		}
 		else {
-			ent.PregnancyProgess(womb, PregnancyHandler.Slot.Vag, oldProgress, womb.progress);
+			ent.PregnancyProgess(womb, PregnancyHandler.Slot.Butt, oldProgress, womb.progress);
 		}
 	}
 }
