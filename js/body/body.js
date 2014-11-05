@@ -418,26 +418,32 @@ Body.prototype.ToStorage = function() {
 		}
 	}
 	// Genetalia
-	storage.cock = new Array();
-	for(var i = 0; i < this.cock.length; i++) {
-		var a = this.cock[i];
-		var c = a.ToStorage();
-		if(a.vag)
-			c.ccIdx = this.vagina.indexOf(a.vag);
-		storage.cock.push(c);
+	if(this.cock.length > 0) {
+		storage.cock = new Array();
+		for(var i = 0; i < this.cock.length; i++) {
+			var a = this.cock[i];
+			var c = a.ToStorage();
+			if(a.vag)
+				c.ccIdx = this.vagina.indexOf(a.vag);
+			storage.cock.push(c);
+		}
 	}
 	storage.balls = this.balls.ToStorage();
 	
-	storage.vag = new Array();
-	for(var i = 0; i < this.vagina.length; i++) {
-		storage.vag.push(this.vagina[i].ToStorage());
+	if(this.vagina.length > 0) {
+		storage.vag = new Array();
+		for(var i = 0; i < this.vagina.length; i++) {
+			storage.vag.push(this.vagina[i].ToStorage());
+		}
 	}
 	
 	storage.ass = this.ass.ToStorage();
 	
-	storage.breasts = new Array();
-	for(var i = 0; i < this.breasts.length; i++) {
-		storage.breasts.push(this.breasts[i].ToStorage());
+	if(this.breasts.length > 0) {
+		storage.breasts = new Array();
+		for(var i = 0; i < this.breasts.length; i++) {
+			storage.breasts.push(this.breasts[i].ToStorage());
+		}
 	}
 	
 	// Arms and legs
@@ -515,20 +521,24 @@ Body.prototype.FromStorage = function(storage) {
 		}
 	}
 	
-	this.cock = new Array();
-	for(var i = 0; i < storage.cock.length; i++) {
-		var c = new Cock();
-		c.FromStorage(storage.cock[i]);
-		this.cock.push(c);
+	if(storage.cock) {
+		this.cock = new Array();
+		for(var i = 0; i < storage.cock.length; i++) {
+			var c = new Cock();
+			c.FromStorage(storage.cock[i]);
+			this.cock.push(c);
+		}
 	}
 	
 	this.balls.FromStorage(storage.balls);
 	
-	this.vagina = new Array();
-	for(var i = 0; i < storage.vag.length; i++) {
-		var v = new Vagina();
-		v.FromStorage(storage.vag[i]);
-		this.vagina.push(v);
+	if(storage.vag) {
+		this.vagina = new Array();
+		for(var i = 0; i < storage.vag.length; i++) {
+			var v = new Vagina();
+			v.FromStorage(storage.vag[i]);
+			this.vagina.push(v);
+		}
 	}
 	
 	// Restore clitcocks
@@ -546,11 +556,13 @@ Body.prototype.FromStorage = function(storage) {
 	this.ass = new Butt();
 	this.ass.FromStorage(storage.ass);
 	
-	this.breasts = new Array();
-	for(var i = 0; i < storage.breasts.length; i++) {
-		var b = new Breasts();
-		b.FromStorage(storage.breasts[i]);
-		this.breasts.push(b);
+	if(storage.breasts) {
+		this.breasts = new Array();
+		for(var i = 0; i < storage.breasts.length; i++) {
+			var b = new Breasts();
+			b.FromStorage(storage.breasts[i]);
+			this.breasts.push(b);
+		}
 	}
 
 	this.arms = new BodyPart();
