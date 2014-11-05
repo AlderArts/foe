@@ -388,30 +388,34 @@ Body.prototype.ToStorage = function() {
 		race : this.head.ears.race,
 		col  : this.head.ears.color
 	};
-	storage.head.app = new Array();
-	for(var i = 0; i < this.head.appendages.length; i++) {
-		var a = this.head.appendages[i];
-		storage.head.app.push({
-			race  : a.race,
-			col   : a.color,
-			type  : a.type,
-			count : a.count
-		});
+	if(this.head.appendages.length > 0) {
+		storage.head.app = new Array();
+		for(var i = 0; i < this.head.appendages.length; i++) {
+			var a = this.head.appendages[i];
+			storage.head.app.push({
+				race  : a.race,
+				col   : a.color,
+				type  : a.type,
+				count : a.count
+			});
+		}
 	}
 	storage.torso = {
 		race : this.torso.race,
 		col  : this.torso.color,
 		hip  : this.torso.hipSize.base
 	};
-	storage.back = new Array();
-	for(var i = 0; i < this.backSlots.length; i++) {
-		var a = this.backSlots[i];
-		storage.back.push({
-			race  : a.race,
-			col   : a.color,
-			type  : a.type,
-			count : a.count
-		});
+	if(this.backSlots.length > 0) {
+		storage.back = new Array();
+		for(var i = 0; i < this.backSlots.length; i++) {
+			var a = this.backSlots[i];
+			storage.back.push({
+				race  : a.race,
+				col   : a.color,
+				type  : a.type,
+				count : a.count
+			});
+		}
 	}
 	// Genetalia
 	storage.cock = new Array();
@@ -480,15 +484,17 @@ Body.prototype.FromStorage = function(storage) {
 	this.head.ears.color       = parseInt(storage.head.ears.col)   || this.head.ears.color;
 	
 	this.head.appendages = new Array();
-	for(var i = 0; i < storage.head.app.length; i++) {
-		var a = storage.head.app[i];
-		var newApp = new Appendage(
-			parseInt(a.type),
-			parseInt(a.race),
-			parseInt(a.col),
-			parseInt(a.count));
-		
-		this.head.appendages.push(newApp);
+	if(storage.head.app) {
+		for(var i = 0; i < storage.head.app.length; i++) {
+			var a = storage.head.app[i];
+			var newApp = new Appendage(
+				parseInt(a.type),
+				parseInt(a.race),
+				parseInt(a.col),
+				parseInt(a.count));
+			
+			this.head.appendages.push(newApp);
+		}
 	}
 	
 	this.torso.race         = parseInt(storage.torso.race) || this.torso.race;
@@ -496,15 +502,17 @@ Body.prototype.FromStorage = function(storage) {
 	this.torso.hipSize.base = parseFloat(storage.torso.hip)  || this.torso.hipSize.base;
 	
 	this.backSlots = new Array();
-	for(var i = 0; i < storage.back.length; i++) {
-		var a = storage.back[i];
-		var newApp = new Appendage(
-			parseInt(a.type),
-			parseInt(a.race),
-			parseInt(a.col),
-			parseInt(a.count));
-		
-		this.backSlots.push(newApp);
+	if(storage.back) {
+		for(var i = 0; i < storage.back.length; i++) {
+			var a = storage.back[i];
+			var newApp = new Appendage(
+				parseInt(a.type),
+				parseInt(a.race),
+				parseInt(a.col),
+				parseInt(a.count));
+			
+			this.backSlots.push(newApp);
+		}
 	}
 	
 	this.cock = new Array();
