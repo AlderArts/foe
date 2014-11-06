@@ -548,8 +548,6 @@ Quests.quests.push(new Quest({
 	]
 }));
 
-
-/*
 Quests.quests.push(new Quest({
 	name: function() {
 		return "Breeding bunnies";
@@ -559,31 +557,51 @@ Quests.quests.push(new Quest({
 	},
 	active: function() {
 		var status = Quests.Type.NotStarted;
-		if(rigard.RoyalAccess())
+		if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3)
 			status |= Quests.Type.Completed;
-		else if(rigard.flags["RoyalAccessTalk"] >= 1)
+		else if(burrows.flags["Access"] >= Burrows.AccessFlags.Visited)
 			status |= Quests.Type.Visible;
 		return status;
 	},
 	list: [
 		new QuestItem({
 			desc: function() {
-				if(rigard.Access())
-					return "";
-				else
-					return "";
+				return "Bring Ophelia 3 cactoids from the desert.";
 			},
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(rigard.Access())
+				if(burrows.BruteActive())
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Bring Ophelia 3 Gol husks from the forest.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(burrows.HermActive())
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Bring Ophelia 3 red algae from the lake.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(burrows.BrainyActive())
 					status |= Quests.Type.Completed;
 				return status;
 			}
 		})
 	]
 }));
-*/
 
 //TODO Krawitz(?), Burrows, Gwendy
 
