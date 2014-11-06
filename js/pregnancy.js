@@ -155,6 +155,7 @@ PregnancyHandler.prototype.Womb = function(opts) {
  */
 PregnancyHandler.prototype.IsPregnant = function(opts) {
 	opts = opts || {};
+	var slot = opts.slot || PregnancyHandler.Slot.Vag;
 	var womb = this.Womb(slot);
 
 	return womb.pregnant;
