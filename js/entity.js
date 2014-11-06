@@ -216,6 +216,7 @@ function Entity() {
 		birth : 0
 	};
 	
+	this.perks   = [];
 	this.effects = [];
 	this.aggro   = [];
 	
@@ -320,6 +321,10 @@ Entity.prototype.SaveFlags = function(storage) {
 	storage.flags = flags;
 }
 
+Entity.prototype.SavePerks = function(storage) {
+	storage.perks = this.perks;
+}
+
 Entity.prototype.SaveRecipes = function(storage) {
 	storage = storage || {};
 	
@@ -394,6 +399,7 @@ Entity.prototype.ToStorage = function() {
 
 	this.SaveFlags(storage);
 	this.SaveSexStats(storage);
+	this.SavePerks(storage);
 	
 	// TODO
 	/*
@@ -502,6 +508,10 @@ Entity.prototype.LoadSexFlags = function(storage) {
 		this.sex[flag] = parseInt(storage.sex[flag]);
 }
 
+Entity.prototype.LoadPerks = function(storage) {
+	this.perks = storage.perks;
+}
+
 Entity.prototype.LoadPregnancy = function(storage) {
 	this.pregHandler.FromStorage(storage.preg);
 }
@@ -528,6 +538,7 @@ Entity.prototype.FromStorage = function(storage) {
 	// Load flags
 	this.LoadFlags(storage);
 	this.LoadSexFlags(storage);
+	this.LoadPerks(storage);
 	
 	this.RecallAbilities(); // TODO: Implement for special abilitiy sources (flag dependent)
 	this.SetLevelBonus();
@@ -541,6 +552,22 @@ Entity.prototype.FromStorage = function(storage) {
 	// callback is the function to call (use closures)
 	this.timers = new Array();
 	*/
+}
+
+Entity.prototype.HasPerk = function(perk) {
+	for(var i = 0; i < this.perks.length; ++i) {
+		if(this.perks[i] == perk)
+			return true;
+	}
+	return false;
+}
+
+Entity.prototype.AddPerk = function(perk) {
+	for(var i = 0; i < this.perks.length; ++i) {
+		if(this.perks[i] == perk)
+			return;
+	}
+	this.perks.push(perk);
 }
 
 Entity.prototype.RecallAbilities = function() {

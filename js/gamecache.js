@@ -42,6 +42,7 @@ InitCache = function() {
 	
 	lagon   = new Lagon(gameCache.lagon);
 	ophelia = new Ophelia(gameCache.ophelia);
+	vena    = new Vena(gameCache.vena);
 	roa     = new Roa(gameCache.roa);
 	
 	gwendy  = new Gwendy(gameCache.gwendy);
@@ -95,6 +96,7 @@ InitCache = function() {
 	
 	world.EntityStorage.push(lagon);
 	world.EntityStorage.push(ophelia);
+	world.EntityStorage.push(vena);
 	world.EntityStorage.push(roa);
 	
 	world.EntityStorage.push(gwendy);
@@ -356,6 +358,7 @@ GameToCache = function() {
 	
 	gameCache.lagon   = lagon.ToStorage();
 	gameCache.ophelia = ophelia.ToStorage();
+	gameCache.vena    = vena.ToStorage();
 	gameCache.roa     = roa.ToStorage();
 	
 	gameCache.gwendy  = gwendy.ToStorage();
