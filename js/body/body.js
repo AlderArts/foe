@@ -542,14 +542,16 @@ Body.prototype.FromStorage = function(storage) {
 	}
 	
 	// Restore clitcocks
-	for(var i = 0; i < storage.cock.length; i++) {
-		var a     = storage.cock[i];
-		var ccIdx = parseInt(a.ccIdx);
-		
-		if(ccIdx >= 0 && ccIdx < this.vagina.length) {
-			var v      = this.vagina[ccIdx];
-			v.clitCock = this.cock[i];
-			this.cock[i].vag = v;
+	if(storage.cock) {
+		for(var i = 0; i < storage.cock.length; i++) {
+			var a     = storage.cock[i];
+			var ccIdx = parseInt(a.ccIdx);
+			
+			if(ccIdx >= 0 && ccIdx < this.vagina.length) {
+				var v      = this.vagina[ccIdx];
+				v.clitCock = this.cock[i];
+				this.cock[i].vag = v;
+			}
 		}
 	}
 
