@@ -4,6 +4,8 @@
  * 
  */
 
+Scenes.Lagon = {};
+
 function Lagon(storage) {
 	Entity.call(this);
 	

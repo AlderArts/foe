@@ -23,9 +23,13 @@ function Burrows(storage) {
 	this.flags = {};
 	
 	this.flags["Access"]      = Burrows.AccessFlags.Unknown;
+	this.flags["BruteTrait"]  = Burrows.TraitFlags.Inactive;
 	this.flags["HermTrait"]   = Burrows.TraitFlags.Inactive;
 	this.flags["BrainyTrait"] = Burrows.TraitFlags.Inactive;
-	this.flags["BruteTrait"]  = Burrows.TraitFlags.Inactive;
+	
+	this.flags["Felinix"]   = 0;
+	this.flags["Lacertium"] = 0;
+	this.flags["Equinium"]  = 0;
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -42,6 +46,11 @@ Burrows.AccessFlags = {
 	QuestlineComplete : 8  //confronted Lagon and sided with him or Ophelia
 };
 
+Burrows.Traits = {
+	Brute  : 0,
+	Herm   : 1,
+	Brainy : 2
+};
 Burrows.TraitFlags = {
 	Inactive         : 0,
 	Gathered         : 1,
@@ -51,14 +60,15 @@ Burrows.TraitFlags = {
 Burrows.prototype.Access = function() {
 	return this.flags["Access"] >= Burrows.AccessFlags.Visited;
 }
+
+Burrows.prototype.BruteActive = function() {
+	return this.flags["BruteTrait"] >= Burrows.TraitFlags.Active;
+}
 Burrows.prototype.HermActive = function() {
 	return this.flags["HermTrait"] >= Burrows.TraitFlags.Active;
 }
 Burrows.prototype.BrainyActive = function() {
 	return this.flags["BrainyTrait"] >= Burrows.TraitFlags.Active;
-}
-Burrows.prototype.BruteActive = function() {
-	return this.flags["BruteTrait"] >= Burrows.TraitFlags.Active;
 }
 
 Burrows.prototype.ToStorage = function() {
@@ -218,7 +228,7 @@ world.loc.Burrows.Pit.endDescription = function() {
 //
 //TODO
 world.loc.Burrows.Lab.description = function() {
-	Text.AddOutput("You are standing in Ophelia's lab.");
+	Scenes.Ophelia.LabDesc();
 }
 
 world.loc.Burrows.Lab.links.push(new Link(
@@ -229,8 +239,18 @@ world.loc.Burrows.Lab.links.push(new Link(
 	}
 ));
 
+world.loc.Burrows.Lab.events.push(new Link(
+	"Ophelia", function() {
+		return ophelia.IsAtLocation();
+	}, true,
+	null,
+	function() {
+		Scenes.Ophelia.LabApproach();
+	}
+));
+
 world.loc.Burrows.Lab.endDescription = function() {
-	Text.AddOutput("");
+	Text.Flush();
 }
 
 

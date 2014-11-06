@@ -16,7 +16,7 @@ PregnancyLevel = {
 	Level2 : 0.3,
 	Level3 : 0.5,
 	Level4 : 0.7,
-	Level5 : 0.9,
+	Level5 : 0.9
 };
 
 // TODO: Needs some timers/callbacks
