@@ -535,9 +535,8 @@ Scenes.Ophelia.DeliverFollowup = function(trait) {
 		Text.Add("<i>“I’ll fuck you senseless just like you want, but first… this!”</i> The wiry rabbit smoothly hops up, straddling the aroused matriarch’s chest, planting his cock in the valley between her enormous breasts. When she instinctively opens her maw, seeking to envelop the thick treat presented to her, Lagon instead forces the neck of the glass flask between her lips.", parse);
 		Text.NL();
 		Text.Add("<i>“Just drink up, girl,”</i> he murmurs, pouring the volatile substance down her throat. Vena has little choice but to swallow the potion, chugging down a dose at least three times the amount that Ophelia subjected her guinea pig to.", parse);
-		Text.NL();
 		
-		Scenes.Ophelia.DeliverFollowup(trait);
+		Scenes.Ophelia.DeliverVena(trait);
 	}
 	else if(burrows.flags["Access"] < Burrows.AccessFlags.Stage2) {
 		burrows.flags["Access"] = Burrows.AccessFlags.Stage2;
@@ -623,9 +622,8 @@ Scenes.Ophelia.DeliverFollowup = function(trait) {
 			Text.Add("Before long, you’ve reached the large breeding cavern. The heat here is palpable, and a thick musk permeates the air despite the gathered rabbits gradually quieting down in the presence of their master. Lagon ignores the pleading and groveling sex-crazed peons, heading straight for Vena.", parse);
 			Text.NL();
 			Text.Add("<i>“I have another treat for you, my dear,”</i> he grins maliciously, presenting the matriarch with the large flask. Lithely, he springs up on her chest, pouring the volatile fluids down Vena’s gaping maw.", parse);
-			Text.Flush();
 			
-			Scenes.Ophelia.DeliverFollowup(trait);
+			Scenes.Ophelia.DeliverVena(trait);
 		});
 	}
 	else if(burrows.flags["Access"] < Burrows.AccessFlags.Stage3) {
@@ -645,7 +643,7 @@ Scenes.Ophelia.DeliverFollowup = function(trait) {
 		Text.NL();
 		Text.Add("<i>“I thought I’d give you the honors,”</i> Lagon grasps her shoulder, handing her the bottle. He has one of his feet planted squarely on Vena’s chest, looming over the pair. Ophelia gulps, tears in her eyes as she feeds the final draft to her mother with trembling hands. <i>“Good girl, now wait over there.”</i> The alchemist hurriedly joins your side, watching anxiously as the effects begin to take hold.", parse);
 		
-		Scenes.Ophelia.DeliverFollowup(trait);
+		Scenes.Ophelia.DeliverVena(trait);
 	}
 	else {
 		Text.Add("THIS IS A BUG. Burrows flag: [flag].", {flag: burrows.flags["Access"]});
@@ -654,12 +652,10 @@ Scenes.Ophelia.DeliverFollowup = function(trait) {
 	}
 }
 
-Scenes.Ophelia.DeliverFollowup = function(trait) {
+Scenes.Ophelia.DeliverVena = function(trait) {
 	var parse = {
 		playername : player.name
 	};
-	
-	burrows.flags["Access"]++;
 	
 	Text.NL();
 	if(trait == Burrows.Traits.Brute) {
@@ -802,11 +798,14 @@ Scenes.Ophelia.Reward = function() {
 		Text.Flush();
 		
 		Scenes.Ophelia.fuckedByVena = false;
+		Scenes.Ophelia.stoppedVena  = false;
 		
 		//[Stop Vena][Watch][Offer]
 		var options = new Array();
 		options.push({ nameStr : "Stop Vena",
 			func : function() {
+				Scenes.Ophelia.stoppedVena = true;
+				
 				Text.Clear();
 				Text.Add("With a determined look on your face, you spring towards the giant lagomorph, aiming to put yourself in her path. Before you have taken more than three steps, however, there is a blur of white fur, and a stunning pain as Lagon’s foot connects with your temple. You are hurled face-down to the ground, and swiftly immobilized by the rabbit king.", parse);
 				Text.NL();
@@ -1017,7 +1016,8 @@ Scenes.Ophelia.WatchVenaEntry = function() {
 	Text.NL();
 	Text.Add("The alchemist moans weakly, smothered between the larger lagomorph’s breasts. Vena has placed her astride the convenient erect pole, sighing happily as Ophelia grinds her hips against the slippery appendage. Her entire body weight is balancing on her mother’s cock, her legs dangling down feebly - too short to reach the ground. The two share another kiss before Vena slowly lowers Ophelia to the ground, laying the bespectacled bunny down on her back.", parse);
 	Text.NL();
-	Text.Add("<i>“Looks like the fun is about to start,”</i> Lagon observes, eyes gleaming. It’s hard to keep your mind focused in the carnal environment of the Pit[, especially with your face in the pool of cum], but you do your best to keep your eyes on the rabbit king. By this point, it’s clear that he doesn’t give two fucks about either you or Opehlia - daughter or no. He just want’s to douse the flame of rebellion from her heart, and uses the most cruel measure possible to do so, her own mother. That it was through her own efforts - with some aid from you - that Vena is in her current state only serves to twist the knife further.", parse);
+	parse["stop"] = Scenes.Ophelia.stoppedVena ? ", especially with your face in the pool of cum" : "";
+	Text.Add("<i>“Looks like the fun is about to start,”</i> Lagon observes, eyes gleaming. It’s hard to keep your mind focused in the carnal environment of the Pit[stop], but you do your best to keep your eyes on the rabbit king. By this point, it’s clear that he doesn’t give two fucks about either you or Opehlia - daughter or no. He just want’s to douse the flame of rebellion from her heart, and uses the most cruel measure possible to do so, her own mother. That it was through her own efforts - with some aid from you - that Vena is in her current state only serves to twist the knife further.", parse);
 	Text.NL();
 	Text.Add("Ophelia cries out in rapture as the matriarch slowly presses her thick, lubed-up shaft into the smaller bunny’s protesting folds. Her frame may be built for breeding, but she’s not accustomed to taking cocks of Vena’s size. The older lagomorph does her best to be gentle, but the sheer girth of her two-foot member is more than a bit intimidating for the gasping scientist.", parse);
 	Text.NL();
@@ -1119,7 +1119,7 @@ Scenes.Ophelia.RewardChoices = function() {
 				
 				player.AddLustFraction(1);
 				
-				Gui.NextPrompt();
+				PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Increase your cum production, capacity and potency."
 		});
@@ -1142,7 +1142,7 @@ Scenes.Ophelia.RewardChoices = function() {
 				
 				player.AddLustFraction(1);
 				
-				Gui.NextPrompt();
+				PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Increase your chances of getting pregnant. Additionally it increases your milk capacity and production."
 		});
@@ -1164,7 +1164,7 @@ Scenes.Ophelia.RewardChoices = function() {
 				
 				player.AddLustFraction(1);
 				
-				Gui.NextPrompt();
+				PrintDefaultOptions();
 			}, enabled : true,
 			tooltip : "Shortens gestation period and increases the chances of having multiple children."
 		});
@@ -1180,7 +1180,7 @@ Scenes.Ophelia.RewardChoices = function() {
 			
 			party.coin += 1500;
 			
-			Gui.NextPrompt();
+			PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "Ask for treasures. Lagon is offering you 1500 coins for your services."
 	});
