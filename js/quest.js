@@ -566,7 +566,10 @@ Quests.quests.push(new Quest({
 	list: [
 		new QuestItem({
 			desc: function() {
-				return "Bring Ophelia 3 cactoids from the desert.";
+				if(burrows.BruteActive())
+					return "Bring Ophelia cactoids from the desert: 3/3.";
+				else
+					return Text.Parse("Bring Ophelia cactoids from the desert: [num]/3.", { num: party.Inv().QueryNum(Items.Quest.Cactoid) });
 			},
 			active: function() {
 				var status = Quests.Type.NotStarted;
@@ -578,7 +581,10 @@ Quests.quests.push(new Quest({
 		}),
 		new QuestItem({
 			desc: function() {
-				return "Bring Ophelia 3 Gol husks from the forest.";
+				if(burrows.HermActive())
+					return "Bring Ophelia Gol husks from the forest: 3/3.";
+				else
+					return Text.Parse("Bring Ophelia Gol husks from the forest: [num]/3.", { num: party.Inv().QueryNum(Items.Quest.GolHusk) });
 			},
 			active: function() {
 				var status = Quests.Type.NotStarted;
@@ -590,7 +596,10 @@ Quests.quests.push(new Quest({
 		}),
 		new QuestItem({
 			desc: function() {
-				return "Bring Ophelia 3 red algae from the lake.";
+				if(burrows.BrainyActive())
+					return "Bring Ophelia red algae from the lake: 3/3.";
+				else
+					return Text.Parse("Bring Ophelia red algae from the lake: [num]/3.", { num: party.Inv().QueryNum(Items.Quest.RedAlgae) });
 			},
 			active: function() {
 				var status = Quests.Type.NotStarted;
