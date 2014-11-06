@@ -509,7 +509,8 @@ Entity.prototype.LoadSexFlags = function(storage) {
 }
 
 Entity.prototype.LoadPerks = function(storage) {
-	this.perks = storage.perks;
+	if(storage.perks)
+		this.perks = storage.perks;
 }
 
 Entity.prototype.LoadPregnancy = function(storage) {
