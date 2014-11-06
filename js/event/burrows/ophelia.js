@@ -491,23 +491,235 @@ Scenes.Ophelia.DeliverAlgae = function() {
 	});
 }
 
-//TODO
 Scenes.Ophelia.DeliverFollowup = function(trait) {
 	var parse = {
-		playername : player.name
+		playername : player.name,
+		himher : player.mfFem("him", "her")
 	};
 	
 	Text.Clear();
 	Text.Add("<i>”Thank you for gathering the ingredients for me,”</i> Ophelia nods, satisfied with the results of her new concoction. She fills a large bottle with the substance, adjusting her glasses and smoothing out her labcoat before turning back to you.", parse);
 	Text.NL();
 	
+	if(burrows.flags["Access"] < Burrows.AccessFlags.Stage1) {
+		burrows.flags["Access"] = Burrows.AccessFlags.Stage1;
+		
+		Text.Add("<i>”We should take this to father right away, I know he’ll love this!”</i> You have your reservations, but you are interested in the payment offered, so you follow behind the excited bunny. Once in the tunnels, the guards silently close in around you, escorting you towards Lagon’s throneroom.", parse);
+		Text.NL();
+		Text.Add("The ruler of the burrows seems a tad busy, grunting as he drives himself balls deep into a pretty little lagomorph, impaling her on his massive meatstick. She is moaning incoherently, driven to her limits as her body is wracked by a shattering orgasm - and by the envious looks of Lagon’s harem, it’s far from her first. They keep their voices lowered respectfully, though many can’t resist touching themselves, whimpering quietly as they imagine themselves prone under their mighty leader. Lagon grits his teeth, tensing as he pours his hot seed inside of his latest fucktoy, no doubt impregnating the girl. Her stomach bloats slightly as her womb is filled to the brim, the excess dripping down between her thighs. She passes out, the intense experience finally too much for her.", parse);
+		Text.NL();
+		Text.Add("At last, Lagon notices your arrival. Nonchalantly, he pulls the senseless rabbit off his still erect member, studying you curiously as he deposits her on the floor. A few gallant youths hop forth quickly, taking care of the poor girl - though their lustful gazes and bobbing cocks make you doubt their chivalrous intentions.", parse);
+		Text.NL();
+		Text.Add("<i>”And to what do I owe the pleasure of my daughter’s presence?”</i> the patriarch drawls, eyeing you in passing. <i>”If you want a fuck, you’ll have to get in line.”</i> He mockingly gestures at the needy females surrounding his throne on their knees, each begging to be his next bitch.", parse);
+		Text.NL();
+		Text.Add("<i>”N-not now, father,”</i> Ophelia blushes, her eyes flitting over to you for a second. <i>”I-I finished it, with the help of [playername] here! I finished the potion!”</i> Excited, she goes on to describe the effects of the new solution, proudly presenting her test subject to him. Lagon’s eyes are unreadable as he studies the flask.", parse);
+		Text.NL();
+		Text.Add("<i>”And how much of this do you think you can make?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>”I can probably produce two or three flasks of that size in a day… provided I can get more raw materials. I used up most of it making this. Maybe a little more, once I get the process down.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>”What, do you expect our resourceful friend to slaughter monsters for you all day long? You must be offering [himher] quite the favors for such diligence.”</i> Lagon laughs at his colorful joke, enjoying his daughter’s discomfort.", parse);
+		Text.NL();
+		Text.Add("<i>”Never mind that, I have a far more… efficient solution.”</i> With that he hops out of his throne, leading the way out of the chamber, flask in hand. Ophelia shrugs at you, setting out after her father, her guards in tow. Before long, the rhythmic drone makes it apparent that you are heading towards the Pit, the large breeding cavern at the center of the colony. On all sides, the participants of the perpetual orgy quiet down as their leader walks among them. A worshipful silence fills the huge space, as the entire room focuses intently on your small group, paused mid-coitus.", parse);
+		Text.NL();
+		Text.Add("<i>”...Father? What is going on?”</i> Ophelia asks in a small voice, perhaps already suspecting where this is headed. <i>”I… I have plenty of test subjects in the pens of my lab, there is no need-”</i>", parse);
+		Text.NL();
+		Text.Add("<i>”Shut it,”</i> Lagon growls, <i>”you said it yourself, didn’t you? You only have enough to mutate a few measly runts with this. My method only needs one large dose.”</i> He comes to a halt in front of the great matriarch of the lagomorphs, Vena. The matron looks confused, her fractured and clouded mind not grasping why no one is fucking her.", parse);
+		Text.NL();
+		Text.Add("<i>”Vena,”</i> Lagon says, almost fondly, <i>”do you recognize the face of your master?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>”La-gon.”</i> Her voice is stuttering at first, before becoming more sure. <i>”Lagon. Husband.”</i> She looks down at him curiously, actually blushing a bit. <i>”We… breed?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>”I’ll fuck you senseless just like you want, but first… this!”</i> The wiry rabbit smoothly hops up, straddling the aroused matriarch’s chest, planting his cock in the valley between her enormous breasts. When she instinctively opens her maw, seeking to envelop the thick treat presented to her, Lagon instead forces the neck of the glass flask between her lips.", parse);
+		Text.NL();
+		Text.Add("<i>”Just drink up, girl,”</i> he murmurs, pouring the volatile substance down her throat. Vena has little choice but to swallow the potion, chugging down a dose at least three times the amount that Ophelia subjected her guinea pig to.", parse);
+		Text.NL();
+		
+		Scenes.Ophelia.DeliverFollowup(trait);
+	}
+	else if(burrows.flags["Access"] < Burrows.AccessFlags.Stage2) {
+		burrows.flags["Access"] = Burrows.AccessFlags.Stage2;
+		
+		Text.Add("Ophelia thoughtfully pours the rest of the brew into a larger flask. She squares her shoulders, looking determined. <i>”Shall we? I have a thing or two I wish to talk with father about.”</i> With that, you set out towards the throne room, guards in tow. For once Lagon isn’t fucking someone, instead merely reclining on his throne, munching on some snacks.", parse);
+		Text.NL();
+		Text.Add("<i>”Father, I’ve finished another potion.”</i> The lagomorph scientist trots out her morphed test subject, dejectedly showcasing the mutations that her latest concoction causes. Lagon nods, studying his daughter closely.", parse);
+		Text.NL();
+		Text.Add("<i>”Something on your mind, girl?”</i> he asks when she’s finished, noting her reluctance. <i>”Speak up.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>”I-It’s just…”</i> she stutters, <i>”I did some experiments earlier, I’ve really improved, I think this one could be produced at a larger scale, perhaps if I had more assistants-”</i> With each word, Lagon’s countenance sours, until his face is a mask of barely contained anger.", parse);
+		Text.NL();
+		Text.Add("<i>”Enough!”</i> he snaps, silencing Ophelia. <i>”You have a problem with my way of doing things? I have no interest in your opinions, and I could find <b>far</b> better use for that mouth of yours. We will do it the same way as last time.”</i>", parse);
+		Text.NL();
+		Text.Add("For a moment, it looks like Ophelia will back down, but she gathers her courage and pushes on, a slightly wild look in her eyes. <i>”B-but what about mother? What if there are side effects of so many different chemicals, do you not care for-”</i>", parse);
+		Text.NL();
+		Text.Add("<i>”Silence.”</i> He was angry before, but now he looks closer to a cold, calculated rage. <i>”Why would I care about that slut? She is only one among many. I’ve said it before,”</i> he growls, getting up and stalking closer to the two of you, <i>”anyone here is mine to take as I please. <b>Anyone.</b>”</i> His face is inches from the frightened alchemist, looming above her threateningly.", parse);
+		Text.NL();
+		Text.Add("<i>”You don’t want to cross me, daughter.”</i>", parse);
+		Text.Flush();
+		
+		//[Stop him][Divert][Watch]
+		var options = new Array();
+		options.push({ nameStr : "Stop him",
+			func : function() {
+				Text.Clear();
+				Text.Add("This has gone far enough. You pull Ophelia back from her enraged father, wrapping a protective arm around her as you face down with Lagon. At first, he looks incredulous, but his face quickly turns unreadable.", parse);
+				Text.NL();
+				Text.Add("<i>”I will be lenient this once, as you are not familiar with our ways.”</i> Each word is spoken through gritted teeth, his seething rage barely held in check. <i>”Never cross me again, or, outsider or no, you’ll feel my wrath.”</i> With that, he turns away, leading the way towards the Pit again. Guards close in behind you, prodding you and Ophelia to follow with the butts of their spears.", parse);
+				Text.NL();
+				Text.Add("<i>”T-thank you,”</i> the frightened rabbit whispers to you.", parse);
+				
+				lagon.relation.DecreaseStat(-100, 25);
+				ophelia.relation.IncreaseStat(100, 25);
+				
+				PrintDefaultOptions();
+			}, enabled : true,
+			tooltip : "Stand up for her."
+		});
+		options.push({ nameStr : "Divert",
+			func : function() {
+				Text.Clear();
+				Text.Add("The situation is quickly heading down the drains, and you hurriedly suggest that you should all head for the Pit, to see the effects of the new potion. Lagon studies your face, barely keeping his rage in check. He nods slowly.", parse);
+				Text.NL();
+				Text.Add("<i>”Yes, I think we will do just that.”</i> He grabs Ophelia by the scruff of her neck, dragging her along. You follow behind them closely, glad to have at least mostly prevented the alchemist from getting harmed.", parse);
+				
+				lagon.relation.DecreaseStat(-100, 5);
+				ophelia.relation.IncreaseStat(100, 10);
+				
+				PrintDefaultOptions();
+			}, enabled : true,
+			tooltip : "Step in before something ugly happens."
+		});
+		options.push({ nameStr : "Watch",
+			func : function() {
+				Text.Clear();
+				Text.Add("You watch in silence as father and daughter lock gazes. She holds out for a short while, but, after a few moments, she sullenly looks down, admitting defeat.", parse);
+				Text.NL();
+				Text.Add("<i>”Don’t think you’ll get off the hook that easily,”</i> Lagon growls, grabbing hold of her jaw, forcing it open. <i>”A bad girl like you needs to be punished...”</i> He studies her pained expression as she struggles weakly against his iron grip.", parse);
+				Text.NL();
+				Text.Add("<i>”Perhaps you are right, perhaps I shouldn’t use Vena anymore. Perhaps you’d like to take her place? A mindless breeding slut, being fucked and impregnated day in and day out, is that the kind of life you yearn for?”</i> The lagomorph patriarch pries the alchemical draught from Ophelia’s hands, forcing it to her unwilling lips. <i>”Would you like to start right now?”</i>", parse);
+				Text.NL();
+				Text.Add("She shakes her head vehemently, and he relents, handing the bottle to you. <i>”In that case, your punishment has to be something... different.”</i> Under Lagon’s directions, Ophelia lies down on her back, opening her stained labcoat and spreading her legs wide. The larger male wastes no time on foreplay, soaking his stiff shaft in his daughter’s wet cunt before adjusting his aim, placing the head of his giant cock against Ophelia’s tight rosebud.", parse);
+				Text.NL();
+				Text.Add("There is no love in his ruthless fucking, just a cruel, animalistic lust and the assertion of dominance. Gradually, the girl’s cries of pain turns to pleading, begging for him to finish. His point made, he increases his pace, roaring as he deposits his load in her.", parse);
+				Text.NL();
+				Text.Add("<i>”Now, we have work to do.”</i> Without further ado, cock still dripping spunk, Lagon heads off, forcing you to keep up. Ophelia pulls up beside you, tugging her coat tightly around herself, avoiding looking in your direction. You trudge along in silence, feeling uncomfortable with yourself.", parse);
+				
+				lagon.relation.IncreaseStat(100, 5);
+				ophelia.relation.DecreaseStat(-100, 25);
+				
+				PrintDefaultOptions();
+			}, enabled : true,
+			tooltip : "It’s not worth sticking your neck out for. What is she to you, after all?"
+		});
+		Gui.SetButtonsFromList(options, false, null);
+		
+		Gui.Callstack.push(function() {
+			Text.NL();
+			Text.Add("Before long, you’ve reached the large breeding cavern. The heat here is palpable, and a thick musk permeates the air despite the gathered rabbits gradually quieting down in the presence of their master. Lagon ignores the pleading and groveling sex-crazed peons, heading straight for Vena.", parse);
+			Text.NL();
+			Text.Add("<i>”I have another treat for you, my dear,”</i> he grins maliciously, presenting the matriarch with the large flask. Lithely, he springs up on her chest, pouring the volatile fluids down Vena’s gaping maw.", parse);
+			Text.Flush();
+			
+			Scenes.Ophelia.DeliverFollowup(trait);
+		});
+	}
+	else if(burrows.flags["Access"] < Burrows.AccessFlags.Stage3) {
+		burrows.flags["Access"] = Burrows.AccessFlags.Stage3;
+		
+		Text.Add("<i>”Well… lets go see father.”</i> Ophelia looks a little scared, no doubt reluctant since her last encounter with Lagon, but not daring to disobey him. The two of you head towards the throne room, successful test subject and guard troop in tow. The alchemist looks morose, constantly fidgeting and adjusting her glasses nervously.", parse);
+		Text.NL();
+		Text.Add("After trodding along in silence, you reach the large royal chamber where Lagon holds court. The ruler of the burrows seems to be busy, balls deep inside a pretty little thing, a girl who looks like she could be Ophelia’s younger sister. Upon further consideration, she probably is.", parse);
+		Text.NL();
+		Text.Add("<i>”What do you have for me this time, my nerdy little slut?”</i> Lagon greets his daughter, grunting slightly as he rewards his lover with a fat sticky wad of cum. He gives her a slap on her butt as she awkwardly stumbles away with her hands between her legs, trying to prevent the semen from leaking out of her gaping cunt.", parse);
+		Text.NL();
+		Text.Add("<i>”I have a new potion for you, father,”</i> Ophelia explains demurely, waving for the test subject to be brought forth. He nods appreciatively, satisfied with the results of her research. <i>”No arguments today?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>”...No.”</i> Ophelia bites her lip, sullenly hopping up beside you as all of you head towards the Pit. Lagon seems to be in a good mood for once, smirking to himself as he walks along briskly. You feel distinctly uncomfortable, walking down the vast cavern with the eyes of hundreds of horny rabbits focused on you, though the leader of the colony pays them no mind. Lagon has his subjects clear a space for your party at the center of the Pit, just next to where Vena is.", parse);
+		Text.NL();
+		Text.Add("<i>”Come, girl.”</i> He waves Ophelia to his side. <i>”Why don’t we go visit your mother?”</i> She follows him uncertainly, suspicious about his sudden joviality. She goes to the prone matriarch, pulling the woman’s lush hair from her clouded eyes.", parse);
+		Text.NL();
+		Text.Add("<i>”I thought I’d give you the honors,”</i> Lagon grasps her shoulder, handing her the bottle. He has one of his feet planted squarely on Vena’s chest, looming over the pair. Ophelia gulps, tears in her eyes as she feeds the final draft to her mother with trembling hands. <i>”Good girl, now wait over there.”</i> The alchemist hurriedly joins your side, watching anxiously as the effects begin to take hold.", parse);
+		
+		Scenes.Ophelia.DeliverFollowup(trait);
+	}
+	else {
+		Text.Add("THIS IS A BUG. Burrows flag: [flag].", {flag: burrows.flags["Access"]});
+		Text.Flush();
+		Gui.NextPrompt();
+	}
+}
+
+Scenes.Ophelia.DeliverFollowup = function(trait) {
+	var parse = {
+		playername : player.name
+	};
 	
+	burrows.flags["Access"]++;
 	
-	Text.Add("", parse);
 	Text.NL();
-	Text.Add("", parse);
-	Text.NL();
+	if(trait == Burrows.Traits.Brute) {
+		Text.Add("Just like with the test subject, the effects on Vena are immediate, if not quite as violent. All her limbs grow thicker, longer, filling out with muscle. It looks like she is gaining a good few feet on her already large frame. She looks much more athletic, her features toned but not overly bulging.", parse);
+		Text.NL();
+		if(burrows.HermActive()) {
+			Text.Add("...Except, that is, for the third leg between her thighs. With this additional mutation, Vena’s cock has grown to an almost ridiculous size, at least two feet long and thick as an arm.", parse);
+			Text.NL();
+		}
+		Text.Add("The matriarch flexes experimentally, trying out the reach of her enlarged limbs, hesitantly touching the significantly more defined muscles on her arm.", parse);
+		Text.NL();
+		Text.Add("<i>”Birth me many strong sons and daughters,”</i> Lagon murmurs.", parse);
+		if(burrows.HermActive())
+			Text.Add(" He is eyeing her immense member almost nervously, perhaps a bit intimidated by her size.", parse);
+		if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3)
+			Text.Add(" <i>”This is going to be interesting,”</i> Lagon chuckles, grinning maliciously.", parse);
+	}
+	else if(trait == Burrows.Traits.Herm) {
+		Text.Add("<i>”Going to be interesting to see the effects of this one, it should make things… more efficient.”</i> Lagon chuckles as Vena squirms, crossing her legs feebly as unfamiliar feelings race through her body, focusing to a pinpoint on her clit. The matriarch cries out in surprise as the sensitive organ begins to grow rapidly, gaining inch upon inch and thickening significantly. The bulging new shaft is about nine inches when a cumslit forms on the head, squirting thick white fluids into the air.", parse);
+		Text.NL();
+		Text.Add("In the place of her clit stands a girthy rod that would put most men to shame, swollen in the middle and throbbing slightly. Thick rivulets of girl cum ooze down its length, making the mouths of every female in close vicinity water. It is clear that the matriarch is going to have even more rabbits vying for her attentions from now on.", parse);
+		Text.NL();
+		if(burrows.BruteActive()) {
+			Text.Add("Her transformation has barely begun, however, as Vena’s other mutations kick in, her increased body mass reflecting itself on her new organ. Before the massive shaft has finally stopped growing, it is over two feet long and as thick as an arm.", parse);
+			Text.NL();
+		}
+		Text.Add("Vena looks almost exhausted, but her erection shows no signs of diminishing.", parse);
+		if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3)
+			Text.Add(" <i>”Haha, this will be fun!”</i> Lagon gloats, grinning maliciously.", parse);
+	}
+	else if(trait == Burrows.Traits.Brainy) {
+		Text.Add("Vena’s eyes flutter shut, her hands clutching her head as sparks of intelligence try to break the surface of her shattered mind. For a brief moment, she almost looks lucid, before her eyes are once again clouded by lust.", parse);
+		Text.NL();
+		Text.Add("<i>”Are you really too far gone, mother?”</i> Ophelia murmurs sadly, crestfallen to see how little effect even such a powerful dose had. Lagon just shrugs, more concerned with what effect the drug will have on her children than on the woman herself.", parse);
+		
+		if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3) {
+			Text.NL();
+			Text.Add("Vena shudders as a wave of arousal courses through her body, triggered by her new mutations. In no time, her immense cock is at full mast, eager to bury itself in some needy cunt.", parse);
+			Text.NL();
+			Text.Add("<i>”Ah, perfect timing,”</i> Lagon gloats, smiling maliciously.", parse);
+		}
+	}
 	Text.Flush();
 	
-	Gui.NextPrompt();
+	Gui.NextPrompt(Scenes.Ophelia.Reward);
 }
+
+//TODO
+Scenes.Ophelia.Reward = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.Flush();
+}
+
