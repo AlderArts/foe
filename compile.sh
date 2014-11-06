@@ -102,6 +102,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/brothel/lucille.js \
 	js/event/burrows/lagon.js \
 	js/event/burrows/ophelia.js \
+	js/event/burrows/vena.js \
 	js/event/farm/gwendy.js \
 	js/event/farm/adrian.js \
 	js/event/farm/danie.js \
