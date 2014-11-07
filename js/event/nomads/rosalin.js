@@ -60,6 +60,8 @@ Rosalin.PastDialog = {
 
 Rosalin.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
+	this.LoadPregnancy(storage);
+	this.LoadLactation(storage);
 	
 	this.body.FromStorage(storage.body);
 	
@@ -71,6 +73,8 @@ Rosalin.prototype.ToStorage = function() {
 	var storage = {};
 	
 	this.SavePersonalityStats(storage);
+	this.SavePregnancy(storage);
+	this.SaveLactation(storage);
 	
 	this.SaveFlags(storage);
 	storage.body = this.body.ToStorage();
