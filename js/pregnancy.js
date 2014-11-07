@@ -192,6 +192,10 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 	// TODO: Check for sterility, herbs etc
 	
 	var fertility = (this.fertility.Get() * father.Virility() * Math.sqrt(opts.load || 1));
+	if(mother.HasPerk(Perks.Fertility))
+		fertility *= 1.5;
+	if(father.HasPerk(Perks.Virility))
+		fertility *= 1.5;
 	var chance = Math.random();
 	
 	var parse = {
@@ -205,6 +209,12 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 		
 		// TODO: Adjust litterSize
 		var litterSize = opts.num || 1;
+		
+		if(mother.HasPerk(Perks.Breeder) && Math.random() < 0.3)
+			litterSize *= 2;
+		if(father.HasPerk(Perks.Breeder) && Math.random() < 0.3)
+			litterSize *= 2;
+		
 		litterSize = Math.floor(litterSize);
 		litterSize = Math.max(litterSize, 1);
 

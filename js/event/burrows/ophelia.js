@@ -1112,7 +1112,7 @@ Scenes.Ophelia.RewardChoices = function() {
 				else
 					Text.Add("<i>“I doubt it would do much for you though, but if you want it, why not,”</i> he adds, noting your lack of male genitalia. Like he says, the potion doesn’t seem to have very much effect, though you get a warm feeling in your crotch.", parse);
 				Text.NL();
-				Text.Add("<b>You gain the Virility+ perk.</b>", parse);
+				Text.Add("<b>You gain the Virility perk.</b>", parse);
 				Text.Flush();
 				
 				player.AddPerk(Perks.Virility);
@@ -1135,7 +1135,7 @@ Scenes.Ophelia.RewardChoices = function() {
 				else
 					Text.Add("<i>“I honestly have no idea what it would do to a male, but I hope you enjoy it all the same.”</i> A warm feeling spreads through your chest and groin, but you are not sure it did much of anything.", parse);
 				Text.NL();
-				Text.Add("<b>You gain the Fertility+ perk.</b>", parse);
+				Text.Add("<b>You gain the Fertility perk.</b>", parse);
 				Text.Flush();
 				
 				player.AddPerk(Perks.Fertility);
