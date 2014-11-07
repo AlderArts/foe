@@ -1562,7 +1562,7 @@ Intro.UruSexGetFuckedPassive2 = function() {
 			Text.AddOutput("rimming");
 		else
 			Text.AddOutput("cunnilingus");
-		Text.AddOutput(" is almost enough to make you orgasm right then and there, but, to your displeasure, she suddenly withdraws. Stifling you protests with a sharp slap on your " + buttDesc() + ", the amused omnibus announces that you are ready for the main course.");
+		Text.AddOutput(" is almost enough to make you orgasm right then and there, but, to your displeasure, she suddenly withdraws. Stifling your protests with a sharp slap on your " + buttDesc() + ", the amused omnibus announces that you are ready for the main course.");
 		Text.Newline();
 		Text.AddOutput("Somehow, you don't feel ready.");
 	}
