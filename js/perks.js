@@ -1,7 +1,18 @@
 
-Perks = {
-	Virility  : 0,
-	Fertility : 1,
-	Breeder   : 2
-};
+Perks = {};
 
+PerkIds = {};
+
+function Perk(id, name) {
+	this.id   = id;
+	this.name = name;
+	
+	PerkIds[id] = this;
+}
+
+
+
+
+Perks.Virility  = new Perk("vir0", "Virility");
+Perks.Fertility = new Perk("fer0", "Fertility");
+Perks.Breeder   = new Perk("bre0", "Breeder");

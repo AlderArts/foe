@@ -322,7 +322,11 @@ Entity.prototype.SaveFlags = function(storage) {
 }
 
 Entity.prototype.SavePerks = function(storage) {
-	storage.perks = this.perks;
+	var perks = {};
+	for(var i = 0; i < this.perks.length; ++i) {
+		perks.push(this.perks[i].id);
+	}
+	storage.perks = perks;
 }
 
 Entity.prototype.SaveRecipes = function(storage) {
@@ -509,8 +513,12 @@ Entity.prototype.LoadSexFlags = function(storage) {
 }
 
 Entity.prototype.LoadPerks = function(storage) {
-	if(storage.perks)
-		this.perks = storage.perks;
+	if(storage.perks) {
+		this.perks = [];
+		for(var i = 0; i < storage.perks.length; i++) {
+			this.perks.push(PerkIds[storage.perks[i]]);
+		}
+	}
 }
 
 Entity.prototype.LoadPregnancy = function(storage) {
