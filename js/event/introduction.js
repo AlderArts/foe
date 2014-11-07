@@ -16,20 +16,20 @@ Intro.Start = function() {
 	
 	Text.Clear();
 	
-	Text.AddOutput("You are not quite sure what draws you there, but once again you find yourself climbing the rickety ladder leading to the attic of the old house. With a heave and a cloud of dust, you open the trapdoor and peek into the room. An alarmed caw and a flutter of wings inform you of the presence of a bird's nest somewhere in the darkness above. Guess someone still uses this place after all.");
-	Text.Newline();
-	Text.AddOutput("Taking a good look around, you survey the odd collection of artifacts, furniture and broken pottery that clutter the dusty attic. Some of the objects are draped in ragged pieces of cloth, and a thick coat of dust covers everything. A single ray of light sneaks its way down from a crack in the old roof, the evening sun illuminating a small part of the dusty floor boards.");
-	Text.Newline();
-	Text.AddOutput("You take a deep breath, taking in the musty smell of the room, and immediately regret it. As your fit of coughing subsides, you notice something that is different from the last time you were here. There, right in the circle of light, is a footprint.");
-	Text.Newline();
-	Text.AddOutput("An involuntary shiver runs down your spine. The house has been abandoned for at least a decade, when the owner last left on one of his travels. Faint memories of an eccentric old man come back to you; weathered, leathery skin, a short reddish beard slashed with gray streaks, and a rugged leather hat on his head. It was so long ago that the old recluse left, people even forgot his name.");
-	Text.Newline();
-	Text.AddOutput("As far as you know, no one but you has visited the decaying house on the hilltop since he last left it. As far as you <i>knew</i>, you correct yourself, the evidence right in front of you. Someone was here, and recently.");
-	Text.Newline();
-	Text.AddOutput("Peering around nervously, you climb up into the attic, taking care not to step on any of the scattered objects on the floor. You catch glimpses of old pots and plates in silver, bronze and cracked pottery, and briefly reflect on why no one has looted this place. A faint glow from the back of the room, in the direction the footprints are leading, distracts you from your musings.");
-	Text.Newline();
-	Text.AddOutput("Heart thumping, you carefully make your way to the back of the room where an object you have never seen before stands. A flat, oval shape, taller than you, stands propped up against the wall. The faint red glow seems to come from the object itself, but is muffled by the cloth covering. The footprints lead straight to the object, then stop just in front of it. You see no further signs of their owner.");
-	Text.Newline();
+	Text.Add("You are not quite sure what draws you there, but once again you find yourself climbing the rickety ladder leading to the attic of the old house. With a heave and a cloud of dust, you open the trapdoor and peek into the room. An alarmed caw and a flutter of wings inform you of the presence of a bird's nest somewhere in the darkness above. Guess someone still uses this place after all.");
+	Text.NL();
+	Text.Add("Taking a good look around, you survey the odd collection of artifacts, furniture and broken pottery that clutter the dusty attic. Some of the objects are draped in ragged pieces of cloth, and a thick coat of dust covers everything. A single ray of light sneaks its way down from a crack in the old roof, the evening sun illuminating a small part of the dusty floor boards.");
+	Text.NL();
+	Text.Add("You take a deep breath, taking in the musty smell of the room, and immediately regret it. As your fit of coughing subsides, you notice something that is different from the last time you were here. There, right in the circle of light, is a footprint.");
+	Text.NL();
+	Text.Add("An involuntary shiver runs down your spine. The house has been abandoned for at least a decade, when the owner last left on one of his travels. Faint memories of an eccentric old man come back to you; weathered, leathery skin, a short reddish beard slashed with gray streaks, and a rugged leather hat on his head. It was so long ago that the old recluse left, people even forgot his name.");
+	Text.NL();
+	Text.Add("As far as you know, no one but you has visited the decaying house on the hilltop since he last left it. As far as you <i>knew</i>, you correct yourself, the evidence right in front of you. Someone was here, and recently.");
+	Text.NL();
+	Text.Add("Peering around nervously, you climb up into the attic, taking care not to step on any of the scattered objects on the floor. You catch glimpses of old pots and plates in silver, bronze and cracked pottery, and briefly reflect on why no one has looted this place. A faint glow from the back of the room, in the direction the footprints are leading, distracts you from your musings.");
+	Text.NL();
+	Text.Add("Heart thumping, you carefully make your way to the back of the room where an object you have never seen before stands. A flat, oval shape, taller than you, stands propped up against the wall. The faint red glow seems to come from the object itself, but is muffled by the cloth covering. The footprints lead straight to the object, then stop just in front of it. You see no further signs of their owner.");
+	Text.Flush();
 	
 	Gui.NextPrompt(Intro.Mirror);
 }
@@ -40,14 +40,14 @@ Intro.Start = function() {
 Intro.Mirror = function() {
 	Text.Clear();
 	
-	Text.AddOutput("Almost as if in a trance, you reach out and grab the dry cloth, steel yourself and yank it aside. You gasp reverently and take a step back at the sight, involuntarily setting off another coughing fit. As you recover, you marvel at the object in front of you.");
-	Text.Newline();
-	Text.AddOutput("It is a mirror, but what a mirror! The red glow, previously muted by the covering, seems to emanate from the surface itself, giving the reflection a strange, distorted tint. A slight hint of movement in the reflected world causes you to whip your head around... nothing. Trying to calm yourself, you study the mirror more closely.");
-	Text.Newline();
-	Text.AddOutput("Surprised, you realize that the ornamental border of the mirror is pure gold, with expensive-looking gems set at regular intervals. The thing must be worth a fortune! Despite this, however, your attention is drawn to the surface of the mirror. The reddish tint gives the reflection of the room an almost sinister look, and imperfections in the glass bend the light in weird ways, twisting the image. As you watch in wonder, the distortions are actually subtly <i>moving</i>, slowly flowing across the surface. You must be more careful, this thing clearly has magical properties, but nothing like you have ever seen before.");
-	Text.Newline();
-	Text.AddOutput("The dust you stirred up on your entry is gently moving in the reflection, the distorted light giving it the look of a red mist covering the room. In the center of the reflection, you see yourself.");
-	Text.Newline();
+	Text.Add("Almost as if in a trance, you reach out and grab the dry cloth, steel yourself and yank it aside. You gasp reverently and take a step back at the sight, involuntarily setting off another coughing fit. As you recover, you marvel at the object in front of you.");
+	Text.NL();
+	Text.Add("It is a mirror, but what a mirror! The red glow, previously muted by the covering, seems to emanate from the surface itself, giving the reflection a strange, distorted tint. A slight hint of movement in the reflected world causes you to whip your head around... nothing. Trying to calm yourself, you study the mirror more closely.");
+	Text.NL();
+	Text.Add("Surprised, you realize that the ornamental border of the mirror is pure gold, with expensive-looking gems set at regular intervals. The thing must be worth a fortune! Despite this, however, your attention is drawn to the surface of the mirror. The reddish tint gives the reflection of the room an almost sinister look, and imperfections in the glass bend the light in weird ways, twisting the image. As you watch in wonder, the distortions are actually subtly <i>moving</i>, slowly flowing across the surface. You must be more careful, this thing clearly has magical properties, but nothing like you have ever seen before.");
+	Text.NL();
+	Text.Add("The dust you stirred up on your entry is gently moving in the reflection, the distorted light giving it the look of a red mist covering the room. In the center of the reflection, you see yourself.");
+	Text.Flush();
 
 	Gui.NextPrompt(Intro.Gender);
 }
@@ -290,8 +290,8 @@ Intro.JobSelect = function() {
 Intro.Mirror2 = function() {
 	Text.Clear();
 
-	Text.AddOutput("You catch yourself posing in front of the mirror. Feeling slightly embarrassed, you ponder what to do. Looking closer, you notice something strange - well, stranger; crowning the mirror is a large purple gemstone, roughly the size of your fist. The thing isn't like any stone you have ever seen, glowing with a dull sheen, and the interior a roiling cloud of dense mist, swirling lazily.");
-	Text.Newline();
+	Text.Add("You catch yourself posing in front of the mirror. Feeling slightly embarrassed, you ponder what to do. Looking closer, you notice something strange - well, stranger; crowning the mirror is a large purple gemstone, roughly the size of your fist. The thing isn't like any stone you have ever seen, glowing with a dull sheen, and the interior a roiling cloud of dense mist, swirling lazily.");
+	Text.Flush();
 	
 	Gui.NextPrompt(Intro.Mirror3, "Take gem");
 }
@@ -299,13 +299,14 @@ Intro.Mirror2 = function() {
 Intro.Mirror3 = function() {
 	Text.Clear();
 	
-	Text.AddOutput("Unable to resist, you reach out to grab the beautiful stone. As your fingers connect with the gemstone, something peculiar happens. The mist within the stone suddenly stops moving for a fraction of a second, before returning to its previous slow motion. You get the sense that the gem is glowing slightly brighter.");
-	Text.Newline();
-	Text.AddOutput("Mustering your courage, you grab the purple stone and pull it from its socket in the mirror. A jolt of energy shoots through you, leaving behind a tingling feeling. Examining the stone in wonder, you notice that it now pulses with a faint light, perfectly in sync with your heartbeat. Resolving to study it further at a later time, you pocket the gem.");
-	Text.Newline();
-	Text.AddOutput("<b>Acquired purple gemstone!</b>");
-	Text.Newline();
-	Text.AddOutput("Your eyes are drawn upwards by a reddish glow. Gasping in genuine shock, you stumble back a few steps. The surface of the mirror has completely transformed. While you can still see your own reflection, the room behind you has vanished. In its place is a hellish landscape of fire and smoke. Panicking, you whip your head around, relieved to find that you are, indeed, still in the old dusty attic. Perhaps the mirror is a portal to another world? If so, it doesn't look like it leads to a place you want to visit.");
+	Text.Add("Unable to resist, you reach out to grab the beautiful stone. As your fingers connect with the gemstone, something peculiar happens. The mist within the stone suddenly stops moving for a fraction of a second, before returning to its previous slow motion. You get the sense that the gem is glowing slightly brighter.");
+	Text.NL();
+	Text.Add("Mustering your courage, you grab the purple stone and pull it from its socket in the mirror. A jolt of energy shoots through you, leaving behind a tingling feeling. Examining the stone in wonder, you notice that it now pulses with a faint light, perfectly in sync with your heartbeat. Resolving to study it further at a later time, you pocket the gem.");
+	Text.NL();
+	Text.Add("<b>Acquired purple gemstone!</b>");
+	Text.NL();
+	Text.Add("Your eyes are drawn upwards by a reddish glow. Gasping in genuine shock, you stumble back a few steps. The surface of the mirror has completely transformed. While you can still see your own reflection, the room behind you has vanished. In its place is a hellish landscape of fire and smoke. Panicking, you whip your head around, relieved to find that you are, indeed, still in the old dusty attic. Perhaps the mirror is a portal to another world? If so, it doesn't look like it leads to a place you want to visit.");
+	Text.Flush();
 	
 	Gui.NextPrompt(Intro.Mirror4);
 }
@@ -313,16 +314,16 @@ Intro.Mirror3 = function() {
 Intro.Mirror4 = function() {
 	Text.Clear();
 
-	Text.AddOutput("Can you really keep this a secret? Perhaps you should leave, for now... You are stopped short as your eyes snap back to the mirror. Behind your reflection, a nightmarish creature is rising on its haunches. You get a glimpse of callused red skin streaked with black and a bizarre collection of sharp claws, horns and spikes before the hulking creature presses a clawed hand down on your shoulder.");
-	Text.Newline();
-	Text.AddOutput("<b>CAUGHT YOU.</b> A voice thunders inside your skull, seeming to come from everywhere around you. Panicking, you try to break away, but are held fast. You must look rather comic, struggling with an invisible assailant, but the grip on your shoulder is very real.");
-	Text.Newline();
-	Text.AddOutput("<b>LITTLE PET,</b> the demon chuckles in amusement, <b>OH, WHAT FUN WE SHALL HAVE.</b> In the mirror, the creature bends down ponderously - it must be at least twice your height - until you can feel its breath on your neck. A long barbed tongue snakes its way out of its mouth and down into your clothes, the rough appendage painfully scraping your soft skin and almost drawing blood.");
-	Text.Newline();
-	Text.AddOutput("Slowly, you are being pushed closer and closer to the reflection, an uncomfortable pressure against your back urging you forward. You instinctively pull away from it as you realize that it can only be the demon's unholy cock, stiffening as it brushes you.");
-	Text.Newline();
-	Text.AddOutput("As your face is roughly pressed against the surface of the mirror, you are surprised to find it soft, yielding to the pressure. Slowly, your body is pushed into the mirror, swallowing you into oblivion. Your senses go into overdrive as you are surrounded by cold swirling flames, burning the clothes from your body in a flash. The smell of smoke and sulfur assault your nose, and you feel the tang of hot blood on your tongue as you scream in pain. Exhaustion overcomes you, and you pass out in the whirling chaos.");
-	Text.Newline();
+	Text.Add("Can you really keep this a secret? Perhaps you should leave, for now... You are stopped short as your eyes snap back to the mirror. Behind your reflection, a nightmarish creature is rising on its haunches. You get a glimpse of callused red skin streaked with black and a bizarre collection of sharp claws, horns and spikes before the hulking creature presses a clawed hand down on your shoulder.");
+	Text.NL();
+	Text.Add("<b>CAUGHT YOU.</b> A voice thunders inside your skull, seeming to come from everywhere around you. Panicking, you try to break away, but are held fast. You must look rather comic, struggling with an invisible assailant, but the grip on your shoulder is very real.");
+	Text.NL();
+	Text.Add("<b>LITTLE PET,</b> the demon chuckles in amusement, <b>OH, WHAT FUN WE SHALL HAVE.</b> In the mirror, the creature bends down ponderously - it must be at least twice your height - until you can feel its breath on your neck. A long barbed tongue snakes its way out of its mouth and down into your clothes, the rough appendage painfully scraping your soft skin and almost drawing blood.");
+	Text.NL();
+	Text.Add("Slowly, you are being pushed closer and closer to the reflection, an uncomfortable pressure against your back urging you forward. You instinctively pull away from it as you realize that it can only be the demon's unholy cock, stiffening as it brushes you.");
+	Text.NL();
+	Text.Add("As your face is roughly pressed against the surface of the mirror, you are surprised to find it soft, yielding to the pressure. Slowly, your body is pushed into the mirror, swallowing you into oblivion. Your senses go into overdrive as you are surrounded by cold swirling flames, burning the clothes from your body in a flash. The smell of smoke and sulfur assault your nose, and you feel the tang of hot blood on your tongue as you scream in pain. Exhaustion overcomes you, and you pass out in the whirling chaos.");
+	Text.Flush();
 	
 	Gui.NextPrompt(Intro.DarkAspect);
 }
@@ -333,12 +334,12 @@ Intro.Mirror4 = function() {
 Intro.DarkAspect = function() {
 	Text.Clear();
 	
-	Text.AddOutput("Slowly, you come to as your senses return to you. You jump up in a crouch, afraid that the creature from before followed, but you seem to be completely alone. The sudden motion makes you dizzy, and you are forced to sit down again, groaning until your head stops spinning. Your naked skin rubs uncomfortably on the cracked ground.");
-	Text.Newline();
-	Text.AddOutput("Checking the ragged remains of your clothes, you confirm that the gemstone is somehow still in your pocket.");
-	Text.Newline();
-	Text.AddOutput("The stale air is surprisingly cold. Shivering and wondering what the hell you have gotten yourself into now, you rise to your feet and have a look around you.");
-	Text.Newline();
+	Text.Add("Slowly, you come to as your senses return to you. You jump up in a crouch, afraid that the creature from before followed, but you seem to be completely alone. The sudden motion makes you dizzy, and you are forced to sit down again, groaning until your head stops spinning. Your naked skin rubs uncomfortably on the cracked ground.");
+	Text.NL();
+	Text.Add("Checking the ragged remains of your clothes, you confirm that the gemstone is somehow still in your pocket.");
+	Text.NL();
+	Text.Add("The stale air is surprisingly cold. Shivering and wondering what the hell you have gotten yourself into now, you rise to your feet and have a look around you.");
+	Text.Flush();
 
 	Gui.NextPrompt(function() {
 		party.location = world.loc.DarkAspect.Barrens;
@@ -373,26 +374,28 @@ world.loc.DarkAspect.Barrens.links.push(new Link(
 	function() {
 		Text.Clear();
 		
-		Text.AddOutput("Seeing nothing else of interest and getting a bit cold, you start out for the mountains.");
-		Text.Newline();
-		Text.AddOutput("Measuring the distance, you guess that it will take you several hours to reach the foothills. Hopefully you can find some shelter from the elements there, but you fear that your bare feet will be bloodied stumps by the time you arrive. Still, you don't really have anywhere else to go.");
-		Text.Newline();
-		Text.AddOutput("As you walk, you start to contemplate your situation. You are clearly not in your own world, but what is this place? Some strange hell? How exactly did the mirror transport you here? Where - you shudder - did that demon disappear to? Exposed as you are, you'd hate to run into that creature here.");
-		Text.Newline();
-		Text.AddOutput("As if summoned, a deafening crash behind you shatters your train of thought. Twirling around, you gape in disbelief as the earth shakes violently, huge cracks appearing. With a final roar, the ground shudders and collapses in on itself, opening a huge fiery chasm.");
-		Text.Newline();
-		Text.AddOutput("From the abyss rises the demon from before, but it is different this time. Limbs ablaze with a red sooty flame, the thing must be at least a hundred feet tall. It tilts its slightly triangular head as it notices you, a far-too-wide grin spreading across its face, baring hundreds of razor sharp teeth.");
-		Text.Newline();
-		Text.AddOutput("<b>FOUND YOU!</b> The voice echoes triumphantly across the blazing plains. The demon starts to climb out of the chasm, the ground catching fire where the creature plants its claws. You shake yourself and turn around to run. This is <b>NOT</b> a good place to be in.");
+		Text.Add("Seeing nothing else of interest and getting a bit cold, you start out for the mountains.");
+		Text.NL();
+		Text.Add("Measuring the distance, you guess that it will take you several hours to reach the foothills. Hopefully you can find some shelter from the elements there, but you fear that your bare feet will be bloodied stumps by the time you arrive. Still, you don't really have anywhere else to go.");
+		Text.NL();
+		Text.Add("As you walk, you start to contemplate your situation. You are clearly not in your own world, but what is this place? Some strange hell? How exactly did the mirror transport you here? Where - you shudder - did that demon disappear to? Exposed as you are, you'd hate to run into that creature here.");
+		Text.NL();
+		Text.Add("As if summoned, a deafening crash behind you shatters your train of thought. Twirling around, you gape in disbelief as the earth shakes violently, huge cracks appearing. With a final roar, the ground shudders and collapses in on itself, opening a huge fiery chasm.");
+		Text.NL();
+		Text.Add("From the abyss rises the demon from before, but it is different this time. Limbs ablaze with a red sooty flame, the thing must be at least a hundred feet tall. It tilts its slightly triangular head as it notices you, a far-too-wide grin spreading across its face, baring hundreds of razor sharp teeth.");
+		Text.NL();
+		Text.Add("<b>FOUND YOU!</b> The voice echoes triumphantly across the blazing plains. The demon starts to climb out of the chasm, the ground catching fire where the creature plants its claws. You shake yourself and turn around to run. This is <b>NOT</b> a good place to be in.");
+		Text.Flush();
 
 		Gui.NextPrompt(function() {
 			Text.Clear();
 			
-			Text.AddOutput("Terrified, you scramble along as fast as your legs can carry you, but it is clear from the shaking ground and the growing heat that the demon is gaining on you. Looking up again, the mountains appear to be no closer than before, and still hopelessly out of your reach.");
-			Text.Newline();
-			Text.AddOutput("You can feel the demons breath on your back, a sharp stink of sulfur. Desperately you close your eyes and sprint as fast as you can, waiting for the inevitable demonic claw to descend on you and crush your small body. Your heart almost bursts from your chest in terror as you trip on some hidden crevice and fall forward. Instinctively rolling up your body in a tight ball you manage to deflect most of the damage from the fall, but your breath is knocked from your body as you slam into... a rock wall?");
-			Text.Newline();
-			Text.AddOutput("Dizzied, you open your eyes. Far across the plains, miles away, you see the huge demon striding toward you. Looking up, you realize that you have somehow reached the foothills of the mountain. Distance doesn't seem to work the same way here... Still, you are far from out of danger.");
+			Text.Add("Terrified, you scramble along as fast as your legs can carry you, but it is clear from the shaking ground and the growing heat that the demon is gaining on you. Looking up again, the mountains appear to be no closer than before, and still hopelessly out of your reach.");
+			Text.NL();
+			Text.Add("You can feel the demons breath on your back, a sharp stink of sulfur. Desperately you close your eyes and sprint as fast as you can, waiting for the inevitable demonic claw to descend on you and crush your small body. Your heart almost bursts from your chest in terror as you trip on some hidden crevice and fall forward. Instinctively rolling up your body in a tight ball you manage to deflect most of the damage from the fall, but your breath is knocked from your body as you slam into... a rock wall?");
+			Text.NL();
+			Text.Add("Dizzied, you open your eyes. Far across the plains, miles away, you see the huge demon striding toward you. Looking up, you realize that you have somehow reached the foothills of the mountain. Distance doesn't seem to work the same way here... Still, you are far from out of danger.");
+			Text.Flush();
 
 			player.curSp -= 10;
 			player.curHp -= 5;
@@ -420,24 +423,26 @@ world.loc.DarkAspect.Mountains.links.push(new Link(
 	},
 	function() {
 		Text.Clear();
-		Text.AddOutput("With no time to lose, you attempt to climb the cliff, somehow finding purchase for your fingers and toes in the ragged rock face. With difficulty, you manage to climb up a crevice, reaching a small platform. The area is about ten by ten meters large, surrounded by jagged outcroppings as sharp as swords.");
-		Text.Newline();
-		Text.AddOutput("The short climb has left you winded. This isn't going to work, you conclude. Looking back to where you came from, the demon seems to have reached the foothills below and has started climbing the crevice. It will reach this place in mere moments. Scrambling to find a hiding place, you duck in behind a rock, scratching yourself and drawing blood.");
-		Text.Newline();
-		Text.AddOutput("Peeking out from your hiding place, your hope drains as you see one of the demon's massive clawed  hands crest the edge of the cliff. It has already caught up with you.");
-		Text.Newline();
-		Text.AddOutput("<b>DON'T RUN, PUNY HUMAN. THERE IS NO USE HIDING,</b> the booming voice announces, sounding slightly amused. <b>YOU ARE IN MY REALM NOW, THERE IS NO ESCAPE.</b> It draws itself up to rest its arms in the clearing, and you get your first good look at the thing.");
-		Text.Newline();
-		Text.AddOutput("A multitude of spikes and horns rise from its hairless head in a chaotic mess. The demon's lipless mouth, filled with incredibly sharp teeth, is spread in a huge grin spanning the entirety of the creature's red skinned triangular head. Two sunken eyes burning like hot coals search the area, trying to find you.");
+		Text.Add("With no time to lose, you attempt to climb the cliff, somehow finding purchase for your fingers and toes in the ragged rock face. With difficulty, you manage to climb up a crevice, reaching a small platform. The area is about ten by ten meters large, surrounded by jagged outcroppings as sharp as swords.");
+		Text.NL();
+		Text.Add("The short climb has left you winded. This isn't going to work, you conclude. Looking back to where you came from, the demon seems to have reached the foothills below and has started climbing the crevice. It will reach this place in mere moments. Scrambling to find a hiding place, you duck in behind a rock, scratching yourself and drawing blood.");
+		Text.NL();
+		Text.Add("Peeking out from your hiding place, your hope drains as you see one of the demon's massive clawed  hands crest the edge of the cliff. It has already caught up with you.");
+		Text.NL();
+		Text.Add("<b>DON'T RUN, PUNY HUMAN. THERE IS NO USE HIDING,</b> the booming voice announces, sounding slightly amused. <b>YOU ARE IN MY REALM NOW, THERE IS NO ESCAPE.</b> It draws itself up to rest its arms in the clearing, and you get your first good look at the thing.");
+		Text.NL();
+		Text.Add("A multitude of spikes and horns rise from its hairless head in a chaotic mess. The demon's lipless mouth, filled with incredibly sharp teeth, is spread in a huge grin spanning the entirety of the creature's red skinned triangular head. Two sunken eyes burning like hot coals search the area, trying to find you.");
+		Text.Flush();
 
 		player.curHp -= 2;
 		player.curSp -= 5;
 
 		Gui.NextPrompt(function() {
 			Text.Clear();
-			Text.AddOutput("A shrill laugh startles you. While you were focusing on the demon, some strange creature has sneaked up on you from behind! The tiny red monster seems to be some kind of imp; a nude, scrawny creature with bulging eyes and a head too large for its body.");
-			Text.Newline();
-			Text.AddOutput("Cursing, you prepare to fight the imp, which is quickly joined by another one just like it. Together, they force you out into the open. Above you, the demon watches the spectacle with a bemused grin. <b>HAH. THIS MIGHT BE AMUSING.</b>");
+			Text.Add("A shrill laugh startles you. While you were focusing on the demon, some strange creature has sneaked up on you from behind! The tiny red monster seems to be some kind of imp; a nude, scrawny creature with bulging eyes and a head too large for its body.");
+			Text.NL();
+			Text.Add("Cursing, you prepare to fight the imp, which is quickly joined by another one just like it. Together, they force you out into the open. Above you, the demon watches the spectacle with a bemused grin. <b>HAH. THIS MIGHT BE AMUSING.</b>");
+			Text.Flush();
 			
 			Gui.NextPrompt(Intro.DemonFight);
 		});
@@ -461,8 +466,8 @@ Intro.DemonFight = function() {
 			gameCache.flags.IntroLostToImps = 1;
 			
 			Text.Clear();
-			Text.AddOutput("Exhausted from the fight, you fall to your knees, your body hurting too much to keep up. The great demon looks down on you incredulously and laughs, a grotesque hissing and thundering sound. <b>HAHAHA! YOU THOUGHT THAT YOU COULD STAND UP TO ME? YET YOU CAN'T EVEN BEAT A BUNCH OF IMPS!</b> The demon seems greatly amused by your plight, but only observes you as you squirm around, trying to get away.");
-			Text.Newline();
+			Text.Add("Exhausted from the fight, you fall to your knees, your body hurting too much to keep up. The great demon looks down on you incredulously and laughs, a grotesque hissing and thundering sound. <b>HAHAHA! YOU THOUGHT THAT YOU COULD STAND UP TO ME? YET YOU CAN'T EVEN BEAT A BUNCH OF IMPS!</b> The demon seems greatly amused by your plight, but only observes you as you squirm around, trying to get away.");
+			Text.NL();
 			// Count imps
 			var imps = this.GetEnemyArray();
 			var numImps = imps.length - 1;
@@ -471,37 +476,37 @@ Intro.DemonFight = function() {
 			// Raise downed imps
 			var numDowned = enc.GetDownedEnemyArray().length;
 			if(numDowned > 0) {
-				Text.AddOutput("With a flick of his hand, the demon revitalizes the fallen " + impPlural + ".");
-				Text.Newline();
+				Text.Add("With a flick of his hand, the demon revitalizes the fallen " + impPlural + ".");
+				Text.NL();
 			}
 			
-			Text.AddOutput("The "); if(numImps > 1) Text.AddOutput(Text.NumToText(numImps) + " ");
-			Text.AddOutput(impPlural + " snicker at you, uncertainly looking up at the demon. <b>BY ALL MEANS,</b> it waves amiably with a great clawed hand.");
+			Text.Add("The "); if(numImps > 1) Text.Add(Text.NumToText(numImps) + " ");
+			Text.Add(impPlural + " snicker at you, uncertainly looking up at the demon. <b>BY ALL MEANS,</b> it waves amiably with a great clawed hand.");
 			
 			if(player.body.Gender() == Gender.female) {
-				Text.AddOutput(" <b>KEEP HER VIRGINITY, THOUGH,</b> the demon adds as an afterthought.");
+				Text.Add(" <b>KEEP HER VIRGINITY, THOUGH,</b> the demon adds as an afterthought.");
 			}
-			Text.Newline();
+			Text.NL();
 			
-			Text.AddOutput("Released, the " + impPlural + " gleefully jump " + (numImps > 1 ? "" : "s") + " you, pushing you to the ground on all fours.");
-			Text.Newline();
+			Text.Add("Released, the " + impPlural + " gleefully jump " + (numImps > 1 ? "" : "s") + " you, pushing you to the ground on all fours.");
+			Text.NL();
 			
 			impPlural = (numImps > 1) ? "One of the imps" : "The imp";
-			Text.AddOutput(impPlural + " proudly present you with its "
+			Text.Add(impPlural + " proudly present you with its "
 			+ imps[1].FirstCock().Short()
 			+ ", rubbing the hard shaft in your face before forcing it into your protesting mouth. The imp proceeds to roughly face-fuck you, ignoring your garbled protests. He pulls at your "
 			+ player.Hair().Short()
 			+ " until he has pushed his shaft as far down your throat as it'll go, then pulls out and repeats the process.");
-			Text.Newline();
+			Text.NL();
 			
 			if(numImps >= 2) {
 				impPlural = (numImps == 2) ? "the other imp" : "another of the imps";
-				Text.AddOutput("Meanwhile, " + impPlural
+				Text.Add("Meanwhile, " + impPlural
 				 + " has moved behind you and grabs hold of your " 
 				 + player.Butt().Short() + " and pushes his " 
 				 + imps[2].FirstCock().Short() 
 				 + " against your tight backdoor. The going is pretty rough, but, soon, he is pistoning all his length inside you, setting your poor colon on fire.");
-				Text.Newline();
+				Text.NL();
 				
 				player.FuckAnal(player.Butt(), imps[2].FirstCock(), 2);
 				
@@ -510,30 +515,31 @@ Intro.DemonFight = function() {
 			
 			if(numImps >= 3) {
 				impPlural = (numImps == 3) ? "The last of the imps" : "Another of the imps";
-				Text.AddOutput(impPlural + " considers the positioning of the other imps, then grabs the shoulder of the one pounding away at your ass. After a short garbled conversation your lust-ridden mind cannot make sense of, they seem to come to an agreement. The imp crawls in under you, taking a moment to squeeze your ");
+				Text.Add(impPlural + " considers the positioning of the other imps, then grabs the shoulder of the one pounding away at your ass. After a short garbled conversation your lust-ridden mind cannot make sense of, they seem to come to an agreement. The imp crawls in under you, taking a moment to squeeze your ");
 				if(player.body.Gender() == Gender.female)
-					Text.AddOutput(player.FirstBreastRow().Short());
+					Text.Add(player.FirstBreastRow().Short());
 				else
-					Text.AddOutput(player.FirstCock().Short());
-				Text.AddOutput(" while he is at it. For a short, blissful moment, the cock violating your butt is removed, only to be replaced by that belonging to the imp underneath you.");
-				Text.Newline();
-				Text.AddOutput("As the pressure on your poor anus increase, you realize that they intend to push both of them in there. You'll be feeling this one for a week... if you live that long that is.");
-				Text.Newline();
+					Text.Add(player.FirstCock().Short());
+				Text.Add(" while he is at it. For a short, blissful moment, the cock violating your butt is removed, only to be replaced by that belonging to the imp underneath you.");
+				Text.NL();
+				Text.Add("As the pressure on your poor anus increase, you realize that they intend to push both of them in there. You'll be feeling this one for a week... if you live that long that is.");
+				Text.NL();
 				
 				player.FuckAnal(player.Butt(), imps[3].FirstCock(), 2);
 			}
 			
 			if(numImps >= 4) {
-				Text.AddOutput("The final imp seems to be content just jerking off and rubbing his cock on your body, squeezing one of your nipples with his free hand so hard that it hurts.");
-				Text.Newline();
+				Text.Add("The final imp seems to be content just jerking off and rubbing his cock on your body, squeezing one of your nipples with his free hand so hard that it hurts.");
+				Text.NL();
 			}
 			
 			impPlural = (numImps > 1) ? "imps" : "imp";
 			var growsPlural = (numImps > 1) ? "grow" : "grows";
 			var impPossesive = (numImps > 1) ? "imps" : "imp's";
 			var impThey = (numImps > 1) ? "they are" : "he is";
-			Text.AddOutput("The " + impPossesive + " rutting " + growsPlural + " more insistent, and you can tell "
+			Text.Add("The " + impPossesive + " rutting " + growsPlural + " more insistent, and you can tell "
 			+ impThey + " ready to blow. Any other thoughts are wiped clear as your senses - and body - are filled to the brim with imp ejaculate. The " + impPlural + " withdraw, leaving you leaking cum on the ground.");
+			Text.Flush();
 			
 			Gui.NextPrompt(Intro.DemonAftermath);
 		}
@@ -541,12 +547,12 @@ Intro.DemonFight = function() {
 		enc.onVictory = function() {
 			Text.Clear();
 			
-			Text.AddOutput("<b>OH?</b> the demon's voice sounds interested, <b>SO, YOU MANAGED TO SURVIVE THIS LONG? MAYBE I UNDERESTIMATED YOU SOMEWHAT...</b> You spin around, facing your overwhelming adversary. For now, it seems to be just observing you.");
-			Text.Newline();
-			Text.AddOutput("<b>WELL, ARE YOU NOT GOING TO CLAIM YOUR PRIZE? TAKE ADVANTAGE OF YOUR FALLEN FOE?</b> Incredulously, you realize that the demon is encouraging you to rape the fallen imps.");
-			Text.Newline();
-			Text.AddOutput("<i>“D-don't think I am anything like you!”</i> you snap angrily. With an annoyed flick of his hand, the demon knocks you to the ground, forcing all the air out of your lungs.");
-			
+			Text.Add("<b>OH?</b> the demon's voice sounds interested, <b>SO, YOU MANAGED TO SURVIVE THIS LONG? MAYBE I UNDERESTIMATED YOU SOMEWHAT...</b> You spin around, facing your overwhelming adversary. For now, it seems to be just observing you.");
+			Text.NL();
+			Text.Add("<b>WELL, ARE YOU NOT GOING TO CLAIM YOUR PRIZE? TAKE ADVANTAGE OF YOUR FALLEN FOE?</b> Incredulously, you realize that the demon is encouraging you to rape the fallen imps.");
+			Text.NL();
+			Text.Add("<i>“D-don't think I am anything like you!”</i> you snap angrily. With an annoyed flick of his hand, the demon knocks you to the ground, forcing all the air out of your lungs.");
+			Text.Flush();
 			Gui.NextPrompt(Intro.DemonAftermath);
 		}
 		// Set a custom victory condition
@@ -571,11 +577,12 @@ world.loc.DarkAspect.Mountains.endDescription = function() {
 Intro.DemonAftermath = function() {
 	Text.Clear();
 	
-	Text.AddOutput("Gasping for air, you try to crawl away as the demon looms closer to you. <b>THIS IS ONLY THE BEGINNING, PUNY ONE,</b> the demon chortles, <b>LET'S SEE WHAT ELSE I CAN DO TO YOU...</b> The demon stabs down with one claw. A blinding pain hits your forehead and your vision turns red.");
-	Text.Newline();
-	Text.AddOutput("As the pain slowly subsides, you realize that the demon <i>didn't</i> skewer your head on its claw. Confused, you probe your forehead with shaking fingers. They find two unfamiliar hardened protrusions, sharp and ragged. Groaning, you poke at your new demon horn stubs, noting that they are quite sensitive.");
-	Text.Newline();
-	Text.AddOutput("<b>JUST A TASTE,</b> the grinning demon proclaims, <b>NOW, SHOULD I TURN YOU INTO A SLAVERING INCUBUS? PERHAPS A WILLING SLUT OF A SUCCUBUS? AH, DECISIONS.</b> The creature turns its attention from you as it ponders these important topics.");
+	Text.Add("Gasping for air, you try to crawl away as the demon looms closer to you. <b>THIS IS ONLY THE BEGINNING, PUNY ONE,</b> the demon chortles, <b>LET'S SEE WHAT ELSE I CAN DO TO YOU...</b> The demon stabs down with one claw. A blinding pain hits your forehead and your vision turns red.");
+	Text.NL();
+	Text.Add("As the pain slowly subsides, you realize that the demon <i>didn't</i> skewer your head on its claw. Confused, you probe your forehead with shaking fingers. They find two unfamiliar hardened protrusions, sharp and ragged. Groaning, you poke at your new demon horn stubs, noting that they are quite sensitive.");
+	Text.NL();
+	Text.Add("<b>JUST A TASTE,</b> the grinning demon proclaims, <b>NOW, SHOULD I TURN YOU INTO A SLAVERING INCUBUS? PERHAPS A WILLING SLUT OF A SUCCUBUS? AH, DECISIONS.</b> The creature turns its attention from you as it ponders these important topics.");
+	Text.Flush();
 
 	Intro.timesTakenDemonGift = 0;
 	Intro.cuntBlocked = false;
@@ -607,20 +614,21 @@ world.loc.DarkAspect.Cliff.links.push(new Link(
 	function() {
 		Text.Clear();
 		
-		Text.AddOutput("Keeping a careful eye on the hulking demon, you move closer to the cliff face, trying to search for purchase. When you have climbed a few meters up and glance back, you see that the demon is watching you out of the corner of his eye. The bastard is pretending not to notice you!");
-		Text.Newline();
-		Text.AddOutput("Well, you did it once before, so perhaps it will work again... closing your eyes, you wish yourself away from this place, to the peak of the mountain, <i>anywhere</i> but here. To your surprise, it actually seems to work! The burning heat that emanates from the demon is suddenly replaced by a chill wind. Opening your eyes in wonder, you survey your surroundings.");
-		Text.Newline();
-		Text.AddOutput("You are at the very peak of the mountain, on a flat circular plateau no more than twenty meters across. Around and above, the sky is a calm meld of red and pink, and you realize that you are far above the rioting storm clouds. In the middle of the plateau stands a throne of stone.");
-		Text.Newline();
-		Text.AddOutput("An angry roar from below reminds you that this is no time to enjoy the scenery, as it probably won't take too long for the demon to climb its way up here...");
+		Text.Add("Keeping a careful eye on the hulking demon, you move closer to the cliff face, trying to search for purchase. When you have climbed a few meters up and glance back, you see that the demon is watching you out of the corner of his eye. The bastard is pretending not to notice you!");
+		Text.NL();
+		Text.Add("Well, you did it once before, so perhaps it will work again... closing your eyes, you wish yourself away from this place, to the peak of the mountain, <i>anywhere</i> but here. To your surprise, it actually seems to work! The burning heat that emanates from the demon is suddenly replaced by a chill wind. Opening your eyes in wonder, you survey your surroundings.");
+		Text.NL();
+		Text.Add("You are at the very peak of the mountain, on a flat circular plateau no more than twenty meters across. Around and above, the sky is a calm meld of red and pink, and you realize that you are far above the rioting storm clouds. In the middle of the plateau stands a throne of stone.");
+		Text.NL();
+		Text.Add("An angry roar from below reminds you that this is no time to enjoy the scenery, as it probably won't take too long for the demon to climb its way up here...");
+		Text.Flush();
 		
 		Gui.NextPrompt(function() {
 			Text.Clear();
-			Text.AddOutput("No sooner has the thought passed through your mind before the sky darkens, and the mighty demon soars past you on great black wings. You fearfully back away as the creature lands on the plateau, folding its wings behind it.");
-			Text.Newline();
-			Text.AddOutput("<b>YOU THOUGHT THAT YOU COULD ESCAPE ME?</b> the demon roars, <b>NO MATTER WHERE, I CONTROL THIS REALM!</b> You stumble as you attempt to escape from the demon, your back ending up against the throne. The fiery creature looms closer. It seems this is it for you.");
-			Text.Newline();
+			Text.Add("No sooner has the thought passed through your mind before the sky darkens, and the mighty demon soars past you on great black wings. You fearfully back away as the creature lands on the plateau, folding its wings behind it.");
+			Text.NL();
+			Text.Add("<b>YOU THOUGHT THAT YOU COULD ESCAPE ME?</b> the demon roars, <b>NO MATTER WHERE, I CONTROL THIS REALM!</b> You stumble as you attempt to escape from the demon, your back ending up against the throne. The fiery creature looms closer. It seems this is it for you.");
+			Text.Flush();
 			
 			Gui.NextPrompt(Intro.UruAppears);
 		});
@@ -634,18 +642,19 @@ world.loc.DarkAspect.Cliff.endDescription = function() {
 Intro.UruAppears = function() {
 	Text.Clear();
 	
-	Text.AddOutput("A bored yawn from behind snaps you out of your dreary thoughts. A pair of high-heeled boots enters your vision - no, scratch that - a pair of feet with great spines sticking out of them. Feet, you notice, that support a pair of exceedingly well-shaped legs. Moving further up, your eyes feast on the most glorious butt you have ever seen. It is only in hindsight that you realize that the amazing creature in front of you has red-tinted skin and a tail ending in a heart-shaped tip, swaying tantalizingly in front of your nose.");
-	Text.Newline();
+	Text.Add("A bored yawn from behind snaps you out of your dreary thoughts. A pair of high-heeled boots enters your vision - no, scratch that - a pair of feet with great spines sticking out of them. Feet, you notice, that support a pair of exceedingly well-shaped legs. Moving further up, your eyes feast on the most glorious butt you have ever seen. It is only in hindsight that you realize that the amazing creature in front of you has red-tinted skin and a tail ending in a heart-shaped tip, swaying tantalizingly in front of your nose.");
+	Text.NL();
 	Text.Say("data/uru.png");
-	Text.AddOutput("<i>“Who controls this realm, again?”</i> the female demon purrs with a toss of her long black hair. The 100-foot tall monstrosity towering over the two of you hesitates for a moment, showing a sign of... fear? You have a short moment to register confusion before the succubus releases a jet black beam of energy from her outstretched hand, piercing a wide smoking hole in the surprised demon's chest. It tumbles backward and into the yawning abyss a dozen feet away. Slowly its screams fade, and after a time you hear a distant booming crash, announcing its final meeting with the ground far below.");
-	Text.Newline();
-	Text.AddOutput("<i>“Now then,”</i> the succubus declares, as if nothing had happened, <i>“Who might you be?”</i> She twirls around and you get a good look at her. Piercing orange eyes gaze down at you from her perfect face, crowned by a pair of long, curved demon horns. Her knockers could knock you flat any day, and her hourglass figure is nothing but exquisite. Your eyes move further down to rest on her...");
-	Text.Newline();
-	Text.AddOutput("<b>FUCK.</b>");
-	Text.Newline();
-	Text.AddOutput("...Sixteen inch demonic cock, resting just above her cunt. Just your luck.");
-	Text.Newline();
-	Text.AddOutput("<i>“Well? It is impolite to keep a lady waiting like that you know. Also, it is rude to stare,”</i> the omnibus quips with a wicked smile.");
+	Text.Add("<i>“Who controls this realm, again?”</i> the female demon purrs with a toss of her long black hair. The 100-foot tall monstrosity towering over the two of you hesitates for a moment, showing a sign of... fear? You have a short moment to register confusion before the succubus releases a jet black beam of energy from her outstretched hand, piercing a wide smoking hole in the surprised demon's chest. It tumbles backward and into the yawning abyss a dozen feet away. Slowly its screams fade, and after a time you hear a distant booming crash, announcing its final meeting with the ground far below.");
+	Text.NL();
+	Text.Add("<i>“Now then,”</i> the succubus declares, as if nothing had happened, <i>“Who might you be?”</i> She twirls around and you get a good look at her. Piercing orange eyes gaze down at you from her perfect face, crowned by a pair of long, curved demon horns. Her knockers could knock you flat any day, and her hourglass figure is nothing but exquisite. Your eyes move further down to rest on her...");
+	Text.NL();
+	Text.Add("<b>FUCK.</b>");
+	Text.NL();
+	Text.Add("...Sixteen inch demonic cock, resting just above her cunt. Just your luck.");
+	Text.NL();
+	Text.Add("<i>“Well? It is impolite to keep a lady waiting like that you know. Also, it is rude to stare,”</i> the omnibus quips with a wicked smile.");
+	Text.Flush();
 	
 	Gui.NextPrompt(Intro.ChooseName);
 }
@@ -680,8 +689,8 @@ Intro.ChooseName = function() {
 
 Intro.UruSeduce = function() {
 	Text.Clear();
-	Text.AddOutput("<i>“Ooh, such a pretty name,”</i> the omnibus coos, <i>“I am Uru, friendly neighborhood omnibus, at your service.”</i> She gives you a theatrical little bow, her manhood bobbing up and down in front of you. It is almost hypnotizing.");
-	
+	Text.Add("<i>“Ooh, such a pretty name,”</i> the omnibus coos, <i>“I am Uru, friendly neighborhood omnibus, at your service.”</i> She gives you a theatrical little bow, her manhood bobbing up and down in front of you. It is almost hypnotizing.");
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		MoveToLocation(world.loc.DarkAspect.Peak, {minute: 5});
 	});
@@ -699,14 +708,14 @@ world.loc.DarkAspect.Peak.links.push(new Link(
 	function() {
 		Text.Clear();
 		
-		Text.AddOutput("Now that things have calmed down, you take a moment to explore the area around you. There doesn't really seem to be anything interesting on the mountaintop, beside a few broken pillars and the large throne in the middle of everything.");
-		Text.Newline();
-		Text.AddOutput("The throne itself is made of black rock, polished to a sheen. Veins of light blue snake their way across the surface, as if the thing was made of jet black marble. The throne has no particular ornaments on it, but you notice that the seat is uneven and strange, with unnerving protrusions poking at whoever tries to sit on it.");
-		Text.Newline();
-		Text.AddOutput("It doesn't look like it would be very comfortable.");
-		Text.Newline();
-		Text.AddOutput("Engraved in the stone are runes in a strange language, glowing faintly. You don't understand their meaning.");
-		
+		Text.Add("Now that things have calmed down, you take a moment to explore the area around you. There doesn't really seem to be anything interesting on the mountaintop, beside a few broken pillars and the large throne in the middle of everything.");
+		Text.NL();
+		Text.Add("The throne itself is made of black rock, polished to a sheen. Veins of light blue snake their way across the surface, as if the thing was made of jet black marble. The throne has no particular ornaments on it, but you notice that the seat is uneven and strange, with unnerving protrusions poking at whoever tries to sit on it.");
+		Text.NL();
+		Text.Add("It doesn't look like it would be very comfortable.");
+		Text.NL();
+		Text.Add("Engraved in the stone are runes in a strange language, glowing faintly. You don't understand their meaning.");
+		Text.Flush();
 		Gui.NextPrompt(PrintDefaultOptions);
 	}
 ));
@@ -719,26 +728,26 @@ world.loc.DarkAspect.Peak.events.push(new Link(
 	function() {
 		Text.Clear();
 		
-		Text.AddOutput("<i>“Uh, thanks,”</i> you say uncertainly, not sure how to handle a woman who can, apparently, annihilate hundred-foot demons without breaking a sweat. That, and she obviously is a demon herself.");
-		Text.Newline();		
-		Text.AddOutput("Uru circles around you, examining you thoroughly, pinching and poking at you, an unfamiliar element. Just when things start to get a bit awkward, she takes a step back to appraise you.");
-		Text.Newline();
-		Text.AddOutput("<i>“You don't belong here!”</i> she announces, proud of her discovery, <i>“What are you and how did you get here?”</i>");
-		Text.Newline();
+		Text.Add("<i>“Uh, thanks,”</i> you say uncertainly, not sure how to handle a woman who can, apparently, annihilate hundred-foot demons without breaking a sweat. That, and she obviously is a demon herself.");
+		Text.NL();		
+		Text.Add("Uru circles around you, examining you thoroughly, pinching and poking at you, an unfamiliar element. Just when things start to get a bit awkward, she takes a step back to appraise you.");
+		Text.NL();
+		Text.Add("<i>“You don't belong here!”</i> she announces, proud of her discovery, <i>“What are you and how did you get here?”</i>");
+		Text.Flush();
 		
 		Gui.NextPrompt(function() {
 			Text.Clear();
-			Text.AddOutput("You explain about the demon that brought you to this realm. The demon that she just slaughtered. This doesn't seem to be the right thing to say, though, as her mood darkens noticeably. <i>“You are lying! As if that pathetic worm could bridge the gate between dimensions! Not even I...”</i> she trails of thoughtfully. <i>“There must have been something else, what was it?”</i>");
-			Text.Newline();
-			Text.AddOutput("Do you tell her about the mirror or not? She did kind of save your life back there.");
-			Text.Newline();
+			Text.Add("You explain about the demon that brought you to this realm. The demon that she just slaughtered. This doesn't seem to be the right thing to say, though, as her mood darkens noticeably. <i>“You are lying! As if that pathetic worm could bridge the gate between dimensions! Not even I...”</i> she trails of thoughtfully. <i>“There must have been something else, what was it?”</i>");
+			Text.NL();
+			Text.Add("Do you tell her about the mirror or not? She did kind of save your life back there.");
+			Text.Flush();
 			
 			var options = new Array();
 			options.push({ nameStr: "Mirror",
 				func : function() {
 					Text.Clear();
-					Text.AddOutput("Thinking back, the thing that sticks to your mind is the mirror you found in the attic. When you mention it, Uru perks up again. <i>“Yeah, that sounds kind of plausible, a magical artifact, no doubt. Maybe even that runt could have managed it, in that case.”</i> She purses her lips. <i>“Actually, it sounds kind of familiar... but enough about that for now, though, I want to know more about you!”</i>");
-					Text.Newline();
+					Text.Add("Thinking back, the thing that sticks to your mind is the mirror you found in the attic. When you mention it, Uru perks up again. <i>“Yeah, that sounds kind of plausible, a magical artifact, no doubt. Maybe even that runt could have managed it, in that case.”</i> She purses her lips. <i>“Actually, it sounds kind of familiar... but enough about that for now, though, I want to know more about you!”</i>");
+					Text.Flush();
 					
 					gameCache.flags.IntroToldUruAboutMirror = 1;
 					
@@ -749,10 +758,10 @@ world.loc.DarkAspect.Peak.events.push(new Link(
 			options.push({ nameStr: "Lie",
 				func : function() {
 					Text.Clear();
-					Text.AddOutput("You are not sure why, but you don't think it would be a good idea to tell her about the mirror or the gem, even if she did save you. Not trusting everyone you come across is probably a healthy attitude when you have been transported to Hell. <i>“Nothing I can think of,”</i> you shrug. <i>“That big demon just appeared out of nowhere and pulled me here.”</i> She doesn't seem particularly happy about your evasive answer.");
-					Text.Newline();
-					Text.AddOutput("<i>“You better not be lying, it's impolite to lie!”</i> Angrily lashing her tail about her, she fumes a bit before announcing that she wants to know more about you, instead.");
-					Text.Newline();
+					Text.Add("You are not sure why, but you don't think it would be a good idea to tell her about the mirror or the gem, even if she did save you. Not trusting everyone you come across is probably a healthy attitude when you have been transported to Hell. <i>“Nothing I can think of,”</i> you shrug. <i>“That big demon just appeared out of nowhere and pulled me here.”</i> She doesn't seem particularly happy about your evasive answer.");
+					Text.NL();
+					Text.Add("<i>“You better not be lying, it's impolite to lie!”</i> Angrily lashing her tail about her, she fumes a bit before announcing that she wants to know more about you, instead.");
+					Text.Flush();
 					
 					gameCache.flags.IntroToldUruAboutMirror = 0;
 					
@@ -772,34 +781,39 @@ world.loc.DarkAspect.Peak.endDescription = function() {
 Intro.UruGift = function() {
 	Text.Clear();
 
-	Text.AddOutput("The whole conversation feels very bizarre. The woman in front of you could easily capture the heart of any man back home - at least, were it not for her extra equipment. Though she seems a bit vapid and has an incredibly short attention span, you can't shake the feeling that you should be very careful about what you say.");
-	Text.Newline();
-	Text.AddOutput("It might have something to do with the fact that she killed an enormous demon without any apparent effort.");
-	Text.Newline();
-	Text.AddOutput("You start talking about your hometown, but she stops you after only a few sentences. <i>“No, no! I don't want to know what you were, I want to know what you will become!”</i> Perplexed, you ponder the strange question. Does she mean your wishes for the future?");
+	Text.Add("The whole conversation feels very bizarre. The woman in front of you could easily capture the heart of any man back home - at least, were it not for her extra equipment. Though she seems a bit vapid and has an incredibly short attention span, you can't shake the feeling that you should be very careful about what you say.");
+	Text.NL();
+	Text.Add("It might have something to do with the fact that she killed an enormous demon without any apparent effort.");
+	Text.NL();
+	Text.Add("You start talking about your hometown, but she stops you after only a few sentences. <i>“No, no! I don't want to know what you were, I want to know what you will become!”</i> Perplexed, you ponder the strange question. Does she mean your wishes for the future?");
+	Text.Flush();
 	
+	//TODO no impact?
 	//[Power][Love][Peace]
 	var options = new Array();
 	options.push({ nameStr : "Power",
 		func : function() {
-			Text.Newline();
-			Text.AddOutput("You tell her that you desire power, to be a ruler of men.");
+			Text.NL();
+			Text.Add("You tell her that you desire power, to be a ruler of men.");
+			Text.Flush();
 			Gui.NextPrompt(Intro.UruConfirmGift);
 		}, enabled : true,
 		tooltip : "You desire power."
 	});
 	options.push({ nameStr : "Love",
 		func : function() {
-			Text.Newline();
-			Text.AddOutput("Most of all, you desire to be loved.");
+			Text.NL();
+			Text.Add("Most of all, you desire to be loved.");
+			Text.Flush();
 			Gui.NextPrompt(Intro.UruConfirmGift);
 		}, enabled : true,
 		tooltip : "You desire to be loved."
 	});
 	options.push({ nameStr : "Peace",
 		func : function() {
-			Text.Newline();
-			Text.AddOutput("You desire to live peacefully, with the power to protect your friends and loved ones from harm.");
+			Text.NL();
+			Text.Add("You desire to live peacefully, with the power to protect your friends and loved ones from harm.");
+			Text.Flush();
 			Gui.NextPrompt(Intro.UruConfirmGift);
 		}, enabled : true,
 		tooltip : "You desire a peaceful existence."
@@ -811,18 +825,19 @@ Intro.UruConfirmGift = function() {
 	Text.Clear();
 	player.SetLevelBonus();
 	
-	Text.AddOutput("Uru looks at you dubiously. <i>“You really think you could become someone like that?”</i> She ponders, <i>“The way I see it, you were pretty pathetic back there.”</i>");
-	Text.Newline();
+	Text.Add("Uru looks at you dubiously. <i>“You really think you could become someone like that?”</i> She ponders, <i>“The way I see it, you were pretty pathetic back there.”</i>");
+	Text.NL();
 	if(gameCache.flags.IntroLostToImps != 0) {
-		Text.AddOutput("She giggles, <i>“Watching you get railed by imps was fun though, it looked like you enjoyed it!”</i> You blush angrily at that, it's not like you lost on purpose!");
-		Text.Newline();
+		Text.Add("She giggles, <i>“Watching you get railed by imps was fun though, it looked like you enjoyed it!”</i> You blush angrily at that, it's not like you lost on purpose!");
+		Text.NL();
 	}
 	
-	Text.AddOutput("After taking another measure of you again, she slowly shakes her head. <i>“No, that won't do.”</i> She reaches forward with her palm. Instinctively, you recoil from her, but her hand whips out faster than you can withdraw. <i>“Oh, don't be such a child,”</i> she fusses over you. A wave of pure energy blasts from her hand straight into your skull, shaking your very being.");
-	Text.Newline();
-	Text.AddOutput("You cry out in a wordless scream as you are disintegrated, hot fire burning your body to a cinder... and then she withdraws her hand. Blinking dumbly, you inspect your body. You are perfectly fine, except...");
-	Text.Newline();
-	Text.AddOutput("For some reason, you feel... different. You have little time to contemplate this however.");
+	Text.Add("After taking another measure of you again, she slowly shakes her head. <i>“No, that won't do.”</i> She reaches forward with her palm. Instinctively, you recoil from her, but her hand whips out faster than you can withdraw. <i>“Oh, don't be such a child,”</i> she fusses over you. A wave of pure energy blasts from her hand straight into your skull, shaking your very being.");
+	Text.NL();
+	Text.Add("You cry out in a wordless scream as you are disintegrated, hot fire burning your body to a cinder... and then she withdraws her hand. Blinking dumbly, you inspect your body. You are perfectly fine, except...");
+	Text.NL();
+	Text.Add("For some reason, you feel... different. You have little time to contemplate this however.");
+	Text.Flush();
 	
 	Gui.NextPrompt(Intro.UruGen);
 }
@@ -931,13 +946,14 @@ Intro.UruSexChoice = function() {
 Intro.UruGiveClitcock = function() {
 	Text.Clear();
 	
-	Text.AddOutput("<i>“Heh, don't you lack the equipment for that, honey? No matter, that can easily be fixed...”</i> Before you have time to protest, the omnibus reaches down between your legs and gives your clit a gentle touch, elicting a gasp from you. A sudden wave of pleasure fills your body and causes you to cry out and almost making you black out. Dizzied, you gasp as your gaze fall between your legs on your new equipment.");
-	Text.Newline();
-	Text.AddOutput("The previously rather innocent-looking button gracing your vagina has grown and swelled to a four-inch pillar as thick as an average penis. When you give your girl-cock a probing touch, the feeling makes your knees go weak, this is going to take time to get used to.");
-	Text.Newline();
-	Text.AddOutput("Time that the horny demon is obviously unwilling to grant you, as she unceremoniously swallows your entire length. Your mind goes blank as an unfamiliar sensation flows through your nether regions, and your new appendage erupts like a fountain into the mouth of the eager omnibus.");
-	Text.Newline();
-	Text.AddOutput("Panting, you realize that you have just had an orgasm. Smirking, Uru sucks out the last of your ejaculate. Idly, you wonder if the stuff is potent, though your musings are cut short as the omnibus hugs you, jamming her tongue into your mouth in a rough french kiss, forcing your own cum into your mouth. Her own rock hard dick rubs between your bodies, as she pulls back, licking her lips and leaning back, looking at you expectantly.");
+	Text.Add("<i>“Heh, don't you lack the equipment for that, honey? No matter, that can easily be fixed...”</i> Before you have time to protest, the omnibus reaches down between your legs and gives your clit a gentle touch, elicting a gasp from you. A sudden wave of pleasure fills your body and causes you to cry out and almost making you black out. Dizzied, you gasp as your gaze fall between your legs on your new equipment.");
+	Text.NL();
+	Text.Add("The previously rather innocent-looking button gracing your vagina has grown and swelled to a four-inch pillar as thick as an average penis. When you give your girl-cock a probing touch, the feeling makes your knees go weak, this is going to take time to get used to.");
+	Text.NL();
+	Text.Add("Time that the horny demon is obviously unwilling to grant you, as she unceremoniously swallows your entire length. Your mind goes blank as an unfamiliar sensation flows through your nether regions, and your new appendage erupts like a fountain into the mouth of the eager omnibus.");
+	Text.NL();
+	Text.Add("Panting, you realize that you have just had an orgasm. Smirking, Uru sucks out the last of your ejaculate. Idly, you wonder if the stuff is potent, though your musings are cut short as the omnibus hugs you, jamming her tongue into your mouth in a rough french kiss, forcing your own cum into your mouth. Her own rock hard dick rubs between your bodies, as she pulls back, licking her lips and leaning back, looking at you expectantly.");
+	Text.Flush();
 
 	// Gain clit cock
 	var cc = player.FirstVag().CreateClitcock();
@@ -948,14 +964,15 @@ Intro.UruGiveClitcock = function() {
 	options.push({ nameStr : "Spit",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("Coughing, you spit the thick fluid on the ground. The taste is strangely sweet, ");
+			Text.Add("Coughing, you spit the thick fluid on the ground. The taste is strangely sweet, ");
 			if(gameCache.flags.IntroLostToImps != 0)
-				Text.AddOutput("very different from the bitter sperm that the imps pumped you full of");
+				Text.Add("very different from the bitter sperm that the imps pumped you full of");
 			else
-				Text.AddOutput("though, not that you'd know what cum usually tastes like");
-			Text.AddOutput(". The omnibus looks at you disapprovingly, like you just spilled perfectly good cream. Which you kind of did.");
-			Text.Newline();
-			Text.AddOutput("<i>“How about giving it a test run?”</i> the succubus teases you, striking a sultry pose.");
+				Text.Add("though, not that you'd know what cum usually tastes like");
+			Text.Add(". The omnibus looks at you disapprovingly, like you just spilled perfectly good cream. Which you kind of did.");
+			Text.NL();
+			Text.Add("<i>“How about giving it a test run?”</i> the succubus teases you, striking a sultry pose.");
+			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "Ew, gross! Spit it out!"
@@ -965,9 +982,10 @@ Intro.UruGiveClitcock = function() {
 			Text.Clear();
 			player.AddSexExp(5);
 			player.slut.IncreaseStat(100, 2);
-			Text.AddOutput("Surprised at yourself, you gulp down the sweet, thick substance, enjoying the flavor. It, subconsciously, makes you wonder if the omnibus tastes just as good... as you snap back to reality, the demon is grinning at you widely. <i>“Do you like it?”</i> she asks. You give her a short nod, blushing.");
-			Text.Newline();
-			Text.AddOutput("<i>“How about giving it a test run?”</i> the succubus teases you, striking a sultry pose.");
+			Text.Add("Surprised at yourself, you gulp down the sweet, thick substance, enjoying the flavor. It, subconsciously, makes you wonder if the omnibus tastes just as good... as you snap back to reality, the demon is grinning at you widely. <i>“Do you like it?”</i> she asks. You give her a short nod, blushing.");
+			Text.NL();
+			Text.Add("<i>“How about giving it a test run?”</i> the succubus teases you, striking a sultry pose.");
+			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "Hmm, maybe this isn't so bad. You <i>are</i> feeling a bit hungry..."
@@ -990,8 +1008,9 @@ Intro.UruSexFuckVagina = function() {
 	Text.AddOutput("Suddenly a bit nervous, you align your " + cockDesc() + " with her wet opening, accidentally rubbing against her own, significantly larger, member. Overcome by your lust, you thrust forward into her folds, eliciting a soft moan from the omnibus. You slowly push your " + cockDesc() + " to the hilt, greatly enjoying the feeling.");
 	Text.Newline();
 	
+	Sex.Vaginal(player, uru);
+	uru.FuckVag(uru.FirstVag(), player.FirstCock(), 5);
 	player.Fuck(player.FirstCock(), 5);
-	uru.FuckVag(uru.FirstVag(), player.FirstCock());
 	
 	Text.AddOutput("Gathering yourself, you get down to business and start pounding the slutty hermaphrodite as hard as your hips will let you. Her tight passage is a marvel, her insides feeling as if they are moving on their own, stroking and squeezing your length. The way things are going, you are not going to last long.");
 
@@ -1023,7 +1042,9 @@ Intro.UruSexFuckVagina = function() {
 			Intro.timesSuckedUru++;
 			player.slut.IncreaseStat(100, 5);
 			
+			Sex.Blowjob(player, uru);
 			player.FuckOral(player.Mouth(), uru.FirstCock(), 2);
+			uru.Fuck(uru.FirstCock(), 2);
 			
 			Text.AddOutput("Deciding that the omnibus own cock deserves some attention, you slow your thrusting and reach down, grabbing the formidable tool with both hands. The demon's eyes snap open as you start to stroke her, sliding your hands from her thick base to the sensitive glans of her head. You look deep into her eyes, and she seductively crooks her finger, enticing you to come closer.");
 			Text.Newline();
@@ -1132,7 +1153,9 @@ Intro.UruSexFuckAnal = function() {
 			Intro.timesSuckedUru++;
 			var uruCockDesc = function() { return uru.FirstCock().Short(); }
 			
+			Sex.Blowjob(player, uru);
 			player.FuckOral(player.Mouth(), uru.FirstCock(), 2);
+			uru.Fuck(uru.FirstCock(), 2);
 			
 			Text.AddOutput("A very wicked thought passes through your head and, with a grin, you decide to put it into action. You drop down on your knees and gently spread the demonette's legs further apart. Uru complies, peeking over her shoulder, curious about what you have in mind. You start kneading her full buttocks, pulling them apart, exposing and stretching her tail hole. A kiss and a lick to her tight pucker draws a shiver from the omnibus - but that is not your target, not yet.");
 			Text.Newline();
@@ -1168,8 +1191,9 @@ Intro.UruSexFuckAnal = function() {
 		Text.AddOutput("<i>“Ah, so this was what you had in mind,”</i> the horny demon moans appreciatively while you grind your lubed " + cockDesc() + " against her back door. Taking the hint, you slowly push against her tight opening. The sexual fluids coating your " + cockDesc() + " certainly help, but her butt is still incredibly tight. With a grunt from you, and a delighted scream from Uru, you manage to push an inch of your member inside her.");
 		Text.Newline();
 		
+		Sex.Anal(player, uru);
+		uru.FuckAnal(uru.Butt(), player.FirstCock(), 5);
 		player.Fuck(player.FirstCock(), 5);
-		uru.FuckAnal(uru.Butt(), player.FirstCock());
 		
 		Text.AddOutput("You have to pause to not shoot your load immediately from the immense pressure, but the omnibus will have none of it, and immediately pushes her needy hips back forcefully, swallowing the rest of your " + cockDesc() + " to the hilt.");
 		if(player.body.Gender() == Gender.male)
@@ -1369,7 +1393,10 @@ Intro.UruSexGetFuckedSuck = function() {
 		Text.AddOutput("”</i> Dutifully, you lap up the remains of her last ejaculation before getting down to business.");
 	}
 	Text.Newline();
+	
+	Sex.Blowjob(player, uru);
 	player.FuckOral(player.Mouth(), uru.FirstCock(), 2);
+	uru.Fuck(uru.FirstCock(), 2);
 	
 	Text.AddOutput("Taking your time, you lather Uru's " + uruCockDesc() + " from root to crown in your saliva. Deciding that you want a taste before getting penetrated, you open your jaw as far as it'll go and put the head in your mouth. A single drop of precum splatters onto your tongue, hot and sticky. After sucking and licking on it for a few minutes, coaxing even more pre out of the demonette's hot fuckstick, and spreading it out evenly, you give the tip one final lick before moving back.");
 	Text.Newline();
@@ -1431,10 +1458,16 @@ Intro.UruSexGetFuckedLead = function() {
 	Text.Newline();
 	Text.AddOutput("You cut her off with a deep kiss as you straddle her hips, her perky " + uruCockDesc() + " rubbing against your soft undercarriage. Positioning yourself so that her cock is pointing straight at your " + targetDesc() + ". You sigh with euphoria as you ease yourself down, relishing in the feeling of the omnibus entering you.");
 	
-	if(Intro.fuckedTarget == BodyPartType.ass)
+	if(Intro.fuckedTarget == BodyPartType.ass) {
+		Sex.Anal(uru, player);
 		player.FuckAnal(player.Butt(), uru.FirstCock(), 5);
-	else
+		uru.Fuck(uru.FirstCock(), 5);
+	}
+	else {
+		Sex.Vaginal(uru, player);
 		player.FuckVag(player.FirstVag(), uru.FirstCock(), 5);
+		uru.Fuck(uru.FirstCock(), 5);
+	}
 	
 	if(!Intro.lubedFlag) {
 		Text.Newline();
@@ -1576,10 +1609,16 @@ Intro.UruSexGetFuckedPassive2 = function() {
 	Text.AddOutput("She rocks her hips forward, painfully stretching your tight passage as the broad head makes its entry. In a moment of panic at her sheer girth you scramble forward, but there is nowhere to go; you are squeezed between the hard stone of the obsidian throne, and the hard throbbing member now buried deep in your " + targetDesc() + ". ");
 	Text.Newline();
 	
-	if(Intro.fuckedTarget == BodyPartType.vagina)
+	if(Intro.fuckedTarget == BodyPartType.vagina) {
+		Sex.Vaginal(uru, player);
 		player.FuckVag(player.FirstVag(), uru.FirstCock(), 5);
-	else
+		uru.Fuck(uru.FirstCock(), 5);
+	}
+	else {
+		Sex.Anal(uru, player);
 		player.FuckAnal(player.Butt(), uru.FirstCock(), 5);
+		uru.Fuck(uru.FirstCock(), 5);
+	}
 	
 	Text.AddOutput("Hardly giving you any chance to adjust, Uru begins thrusting rapidly, eliciting sweet moans from you as each thrust explores deeper and deeper, rubbing against previously untouched areas of your nether. Inch by inch, the omnibus impales you on her rock hard fuckstick. Even as filled up as you feel, you dimly realize that she isn't even halfway inside, yet. You grit your teeth, riding waves of pain while seeking that elusive sense of pleasure, just outside your reach.");
 	Text.Newline();
@@ -2350,12 +2389,27 @@ Intro.KiaNiceSex = function() {
 			
 			if(player.body.Gender() == Gender.female) {
 				Text.AddOutput("You shiver as the elf dips one of " + hisher + " fingers into your sopping wet " + player.FirstVag().Short() + ", lightly teasing your labia with " + hisher + " other digits.");
+				
+				Sex.Cunnilingus(kiakai, player);
+				kiakai.Fuck(null, 2);
+				player.Fuck(null, 2);
 			}
 			else if(player.body.Gender() == Gender.male) {
 				Text.AddOutput("Your stiff " + cockDesc() + " springs to attention as it is bared, almost slapping the elf in the face. Using careful touches and light kisses, " + name + " gently nurses it to full stiffness.");
+				Sex.Blowjob(kiakai, player);
+				kiakai.FuckOral(kiakai.Mouth(), player.FirstCock(), 2);
+				player.Fuck(player.FirstCock(), 2);
 			}
 			else {
 				Text.AddOutput("Your " + cockDesc() + " springs to attention as it is bared, almost slapping the elf in the face. <i>“W-woah, I wasn't expecting it to be so... big,”</i> " + name + " reverently whispers. Apparently the elf got " + himher + "self a good look at your unusual genitalia when clothing you, though it did not seem to prepare " + himher + " for your full erection. " + HeShe + " teases your female parts with one hand while planting hot kisses and licks on your " + cockDesc() + ".");
+				
+				Sex.Cunnilingus(kiakai, player);
+				kiakai.Fuck(null, 2);
+				player.Fuck(null, 2);
+				
+				Sex.Blowjob(kiakai, player);
+				kiakai.FuckOral(kiakai.Mouth(), player.FirstCock(), 2);
+				player.Fuck(player.FirstCock(), 2);
 			}
 			Text.Newline();
 			
@@ -2369,9 +2423,6 @@ Intro.KiaNiceSex = function() {
 			
 			var str = { name: kiakai.name, hisher: kiakai.hisher()};
 			Text.AddOutput("Are you going to take advantage of your current position and get inside the sexy elf's robes? Maybe you could give [name] some oral attention, or toy with [hisher] cute butt.", {name: kiakai.name, hisher: kiakai.hisher()});
-			
-			player.AddSexExp(3);
-			kiakai.AddSexExp(3);
 			
 			Intro.KiaNiceSex69();
 		}, enabled : true
@@ -2409,8 +2460,9 @@ Intro.KiaNiceSex69 = function() {
 			tooltip : Text.Parse("[name] deserves some attention too, how about eating [himher] out?", {name:kiakai.name, himher:kiakai.himher()}),
 			func : function() {
 				Text.Clear();
-				player.AddSexExp(1);
-				kiakai.AddSexExp(1);
+				Sex.Cunnilingus(player, kiakai);
+				player.Fuck(null, 1);
+				kiakai.Fuck(null, 1);
 				Text.AddOutput("Deciding to return the favor, you carefully lift the hem of the elf's robe, exposing " + hisher + " white panties. Pulling them aside, you expose a tight pink slit, absolutely moist with female juices. Humming to yourself, you lean in to administer some 'healing' of your own. Judging from the muffled gasps down between your legs, the effort is much appreciated.");
 				Gui.Callstack.pop()();
 			}, enabled : true
@@ -2421,8 +2473,9 @@ Intro.KiaNiceSex69 = function() {
 		tooltip : Text.Parse("[name] deserves some attention too, and that cock looks rather juicy...", {name:kiakai.name}),
 			func : function() {
 				Text.Clear();
-				player.AddSexExp(1);
-				kiakai.AddSexExp(1);
+				Sex.Blowjob(player, kiakai);
+				player.FuckOral(player.Mouth(), kiakai.FirstCock(), 1);
+				kiakai.Fuck(kiakai.FirstCock(), 1);
 				Text.AddOutput("Deciding to return the favor, you carefully lift the hem of the elf's robe, exposing " + hisher + " white panties. Pulling them aside, you free the elf's " + kiakai.FirstCock().Short() + ", hard from the excitement. Humming to yourself, you lean in to administer some 'healing' of your own. Judging from the muffled gasps down between your legs, the effort is much appreciated.");
 				Gui.Callstack.pop()();
 			}, enabled : true
@@ -2533,8 +2586,10 @@ Intro.KiaNaughtySex = function() {
 			tooltip : Text.Parse("Your cock needs release, and [name] looks like [heshe] has the perfect mouth to provide it.", {name:kiakai.name, heshe:kiakai.heshe()}),
 			func : function() {
 				kiakai.flags["Sexed"]++;
-				player.AddSexExp(4);
-				kiakai.AddSexExp(4);
+				
+				Sex.Blowjob(kiakai, player);
+				kiakai.FuckOral(kiakai.Mouth(), player.FirstCock(), 4);
+				player.Fuck(player.FirstCock(), 4);
 				
 				Text.AddOutput("<i>“Before we go, you should finish what you started,”</i> you insist, smirking at the confused elf.");
 				Text.Newline();
@@ -2568,8 +2623,10 @@ Intro.KiaNaughtySex = function() {
 			tooltip : Text.Parse("Your cunt is itching for release. Staddling [name]'s face and letting [himher] eat you out should do it.", {name:kiakai.name, himher:kiakai.himher()}),
 			func : function() {
 				kiakai.flags["Sexed"]++;
-				player.AddSexExp(4);
-				kiakai.AddSexExp(4);
+				
+				Sex.Cunnilingus(kiakai, player);
+				kiakai.Fuck(null, 4);
+				player.Fuck(null, 4);
 				
 				Text.AddOutput("<i>“Before we go, you should finish what you started,”</i> you insist, smirking at the confused elf.");
 				Text.Newline();
