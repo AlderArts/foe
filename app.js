@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 3;
-VERSION_SUBSCRIPT = "o";
-VERSION_NAME = "Equines, Nagas and Rigard.";
+VERSION_SUBSCRIPT = "p";
+VERSION_NAME = "The Burrows pt.1";
 
 SAVE_VERSION = 19;
 // Save version 1: Initial
