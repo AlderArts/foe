@@ -404,10 +404,17 @@ Scenes.Lagomorph.GroupLossOnPlains = function() {
 	scenes.AddEnc(function() {
 		Scenes.Lagomorph.GroupLossOnPlainsToBurrows(enc);
 	}, 1.0, function() { return burrows.flags["Access"] == Burrows.AccessFlags.Unknown; });
-	scenes.AddEnc(function() {
-		enc.finalize();
-		Gui.NextPrompt();
-	}, 1.0, function() { return true; });
+	
+	if(enc.brainy) {
+		scenes.AddEnc(function() {
+			Scenes.Lagomorph.GroupLossOnPlainsBrainy(enc);
+		}, 1.0, function() { return true; });
+	}
+	else {
+		scenes.AddEnc(function() {
+			enc.finalize();
+		}, 1.0, function() { return true; });
+	}
 	/*
 	scenes.AddEnc(function() {
 		Text.Add("", parse);
@@ -415,6 +422,152 @@ Scenes.Lagomorph.GroupLossOnPlains = function() {
 	}, 1.0, function() { return true; });
 	*/
 	scenes.Get();
+}
+
+
+Scenes.Lagomorph.GroupLossOnPlainsBrainy = function(enc) {
+	var p1cock = player.BiggestCock();
+
+	var brainy = enc.brainy;
+	var parse = {
+		skinDesc   : function() { return player.SkinDesc(); },
+		legsDesc   : function() { return player.LegsDesc(); },
+		tongueDesc : function() { return player.TongueDesc(); },
+		cockDesc   : function() { return p1cock.Short(); },
+		cockTip    : function() { return p1cock.TipShort(); },
+		multiCockDesc : function() { return player.MultiCockDesc(); }
+	};
+	
+	parse["comp"] = party.Num() == 2 ? party.Get(1).name :
+	                party.Num() >  2 ? "your companions" : "";
+	parse["comp2"] = " and " + parse["comp"];
+	parse["himher"] = player.mfTrue("him", "her");
+	
+	Text.Clear();
+	if(player.LowerBodyType() != LowerBodyType.Single)
+		Text.Add("You fall to your knees, no longer capable of standing up after being beaten by the rabbits.", parse);
+	else
+		Text.Add("You sink to the ground, holding yourself propper on an arm as you look towards the rabbits.", parse);
+	Text.Add(" The spectacle-wearing rabbit smirks as she watches you[comp2] collapse.", parse);
+	Text.NL();
+	Text.Add("<i>”Bet you thought that you couldn’t lose to a bunch of weak little bunnies, hmm?”</i> She steps toward you, looking you over speculatively. A hand rises up and rubs her chin in contemplation, before she nods. <i>”You! Pin [himher] down!”</i> she barks, pointing at about half a dozen of the lagomorphs that defeated you for emphasis.", parse);
+	parse = Text.ParserPlural(parse, party.Num() > 2);
+	if(party.Num() > 1)
+		Text.Add(" <i>”The rest of you, make yourselves useful and keep an eye on [thatThose] one[s]!”</i> she adds, gesturing to [comp].", parse);
+	Text.NL();
+	Text.Add("With a chorus of soft squeaks they quickly scurry to do her bidding, rolling you over onto your back and pinning you down by the arms and [legsDesc], wrapping their fluffy little forms around your limbs as best they can.", parse);
+	if(party.Num() > 1) {
+		parse["heshethey"] = party.Num() > 2 ? "they" : party.Get(1).heshe();
+		Text.Add(" Other bunnies hasten to cordon off [comp], ensuring [heshethey] can’t get to you.", parse);
+	}
+	Text.NL();
+	Text.Add("You struggle instinctively, but as tired as you are, you simply can’t free yourself from the furry little pests. Looks like you have no choice but to comply with their orders for now. As you reluctantly settle back down, the upside-down visage of the bunny leader comes into view, a smirk on her lips.", parse);
+	Text.NL();
+	Text.Add("<i>”You could be just what I need...”</i> she muses, more to herself than to you. Ignoring any reply you might make, she starts to sweep her gaze back and forth along your body.", parse);
+	Text.NL();
+	if(player.FirstCock()) {
+		Text.Add("Her gaze falls upon your [multiCockDesc] and she visibly pauses, tongue nervously dabbing at her lips. With a hard swallow, she forces herself to nervously shake her head and move on.", parse);
+		Text.NL();
+	}
+	Text.Add("<i>”Yes... alright.”</i> Her fingers fidget as they grip the edge of the crude handmade dress she’s wearing, and she sucks in a nervous breath. Then, in a sudden burst of motion, eager to get it over with, she grabs hold of the hemline and pulls up, roughly yanking her clothes up and over her head, leaving her naked before you.", parse);
+	Text.NL();
+	Text.Add("Without her clothes, you’re free to look at the bunny’s feminine form. She’s pretty curvy, if a bit on the short side. And from the looks of it, her brain is not the only thing that’s bigger in comparison to her siblings. She’s sporting a pair of huge breasts, about DD-cups if your estimations are correct. Down below, between her soft thighs, you see a pink slit. It’s already puffy and seems to be winking at you. Her arousal is clear; small streams run along her inner thighs, glistening in the light as she bends over to lay down her clothes.", parse);
+	Text.NL();
+	Text.Add("She looks down at you, expression uncertain, one elongated foot rubbing nervously against her calf. She opens her mouth, as if to say something, but then closes it, swallowing the words stillborn. A long ear flicks and she draws herself up straighter. Almost demurely, she pads forward, a foot to either side of your head, cunt practically dripping into your face, and then squats down. Her sex hovers mere inches above your nose, filling your nostrils with the scent of her arousal, a rich and heavy musk that your body can’t help but respond to.", parse);
+	Text.NL();
+	Text.Add("<i>”Let’s see what you can do. Lick me.”</i>", parse);
+	Text.NL();
+	if(player.Slut() < 30)
+		Text.Add("...It seems you have little choice. You reluctantly open your mouth as the hopper’s mons steadily approach your maw.", parse);
+	else if(player.Slut() < 60)
+		Text.Add("Well, maybe this won’t be so bad. You open your mouth and roll out your [tongueDesc] to receive the approaching lapine pussy, already wondering what it will taste like.", parse);
+	else
+		Text.Add("It’s difficult to hide your excitement as she lowers herself over you. You can barely contain yourself as you lick your lips and open wide, rolling your [tongueDesc] out like a red carpet as you wait for her hips to lower enough for you to taste her.", parse);
+	Text.NL();
+	Text.Add("She sucks in a quiet breath between her lips, shivering once, and then allows herself to fall the last few inches. Her thighs press against your head for support, blocking out most of the light and leaving you in a warm, musk-heavy darkness. A trickle of juices drips slowly and steadily onto your lips, the taste seeping over your tongue already.", parse);
+	Text.NL();
+	Text.Add("Needing no further instruction to get started on your task, you begin. Slowly you lick around her labia, lapping up her juices as you circle her slit. Your hands move to grasp her butt, holding her in place as well as adjusting her so you can reach the entirety of her treasure. Ever so slowly, you begin to creep inside her. Only half an inch at first, but slowly progressing with each pass of your tongue.", parse);
+	Text.NL();
+	Text.Add("<i>”Oooh! Oh, that - ah! - that feels good...”</i> she moans happily, wriggling atop your face to better facilitate the probing of your tongue into her depths. A steady trickle of liquid arousal meets your tongue, drooling across your face and puddling in the back of your mouth. Her thighs clamp together unconsciously, pinning your face firmly in place as she unthinkingly grinds down against you.", parse);
+	Text.NL();
+	Text.Add("Taking that as an incentive to probe deeper, you do just that.", parse);
+	Text.NL();
+	parse["boygirl"] = player.mfTrue("boy", "girl");
+	Text.Add("<i>”Mmm, good [boygirl]... I think a special - yeep! - treat is in order,”</i> she coos, squeaking in delight as your tongue hits a particularly sensitive spot inside her. As best she can, she leans forward, hands stretching down your body towards your nethers.", parse);
+	Text.NL();
+	
+	var scenes = new EncounterTable();
+	
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
+	var usecock = false;
+	scenes.AddEnc(function() {
+		Text.Add("Like iron filings to a magnet, her fingers are drawn to[oneof] your [multiCockDesc], wrapping themselves around the half-turgid flesh as best they can. With surprising expertise she grips you, not so hard as to hurt but with plenty of pressure that you can feel her, and she begins to stroke. Up and down she alternates, squeezing and releasing with each passage, kneading the flesh with dextrous ripples of her fingers, coaxing you to erection.", parse);
+		Text.NL();
+		Text.Add("You gasp in surprise when her deft fingers begin stroking your [cockDesc]. ", parse);
+		usecock = true;
+	}, 1.0, function() { return player.FirstCock(); });
+	scenes.AddEnc(function() {
+		parse["c"] = player.FirstCock() ? Text.Parse("Passing over your [multiCockDesc] in the process, h", parse) : "H";
+		Text.Add("[c]er fingers reach for your womanhood. Nimbly, her fingertips start to stroke your nether lips, teasingly caressing around your opening. With surprising adeptness for someone so apparently prudish, she teases open your folds and begins to work her fingers inside, gentle but insistent strokes and thrusts that slowly feed her into your cunt.", parse);
+		Text.NL();
+		Text.Add("You gasp in surprise when her deft fingers begin fingering your [vagDesc]. ", parse);
+	}, 1.0, function() { return player.FirstVag(); });
+	
+	scenes.Get();
+	
+	if(player.LowerBodyType() != LowerBodyType.Single)
+		Text.Add("Slowly, you spread your [legsDesc], allowing the lapine full access to your goods. ", parse);
+	else
+		Text.Add("Slowly, you adjust yourself, making it easier for the lapine to access your goods. ", parse);
+	Text.Add("Up top, you grip her butt, massaging it as you redouble your efforts at eating her out. Every few licks you give her clitty a flicker with the tip of your tongue, drawing a fresh moan out of your lover. Her juices flow copiously, almost faster than you can lap them. If this keeps up it won’t be long before you’re rewarded with a flood of bunny-juice… and if she keeps up her treatment, it won’t be long until she’s equally rewarded.", parse);
+	Text.NL();
+	Text.Add("<i>”H-hey! What are - oooh! - what are you idiots doing?”</i> your assailant suddenly cries out. <i>”Y-you’re supposed to be h-holding [himher] down, not ma..ma...not playing with yourselves!”</i>", parse);
+	Text.NL();
+	Text.Add("Through the pounding of your own heartbeat in your ears, you are dimly aware of the high-pitched sounds of heavy bunny breathing, lustful pants and groans making their way through the thighs muffling your ears. With what the lagomorph mounted atop you had to say, you have a good idea why...", parse);
+	Text.NL();
+	Text.Add("Small hands suddenly latch onto your own hands, insistently tugging at you and pulling you away from cupping the alpha-rabbit’s butt. Unable to fight them off, you allow them to draw your palms away, something hot, round, soft-firm and dripping slime pressing itself against each hand in turn. It looks like two of the horny bunnies want themselves a handjob...", parse);
+	Text.NL();
+	if(player.Slut() >= 60)
+		Text.Add("You see no reason not to grant them their wish, especially since this means you can cover the lapine atop you with her sibling’s cream. Of course, you’d get soaked too… but that wouldn’t be so bad now, would it?", parse);
+	else if(player.Slut() >= 30)
+		Text.Add("Normally you’d have a thing or two to say about this, but right now you’re too busy to care. So you decide to grant them a small reprieve and begin moving your hands. The effort is only half-hearted though, as you have better, and more delicious, things to do...", parse);
+	else
+		Text.Add("As if getting your face buried into a horny hopper’s muff wasn’t enough… well, you’re too busy to bother. They can have your hands, but you’re not going to stroke them.", parse);
+	Text.NL();
+	Text.Add("<i>”What the hell do you think you’re doing?! You can’t just go grabbing <b>my</b> fuckbuddy like that - certainly not while I’m still fucking [himher]! Do you want to make me fall off?”</i> The lagomorph atop you complains loudly, wobbling slightly as if in emphasis, though her hand remains fixed to your genitals as if glued there.", parse);
+	Text.NL();
+	Text.Add("If the bunnies she’s yelling at apologise, you certainly can’t make sense of it. Finally, an exasperated huff billows from the rabbit atop you. <i>”Stupid useless... oh, very well. Not like you can do anything else,”</i> she grumbles. You have a feeling she’s rolling her eyes at their antics.", parse);
+	Text.NL();
+	parse["cockpussy"] = usecock ? p1cock.Short() : "pussy";
+	Text.Add("The two bucks with their cocks in your hands grunt and hiss, thrusting their hips aimlessly into your palms. Above you, the alpha molests your [cockpussy] with greater abandon, wriggling her hips to grind her muff into your face. Fluid is flowing thick and strong into your mouth, drenching your tongue in her taste and forcing you to swallow to keep up. <i>”C-come on then... I’m getting close, you know you have to be too...”</i> she stutters, hissing in a way that implies she’s biting her lip to keep herself from blowing right there and then.", parse);
+	Text.NL();
+	Text.Add("She’s right, you won’t be able to keep this up for much longer. Your climax is approaching, and your lungs are already straining with the lack of air. Whenever you do manage to catch a breath, the air is so heavy with pheromones that you can’t keep yourself from gasping in arousal.", parse);
+	Text.NL();
+	if(usecock)
+		Text.Add("The bunny’s fingers play your cock like an instrument, squeezing and clenching, dextrously caressing every inch of your fuckmeat, trembling with her desire to pleasure you, stroking faster and rougher in her impatience.", parse);
+	else
+		Text.Add("The lagomorph’s fingers piston in and out of your cunt, what feels like three or four fingers stretching you out even as she all but pounds away inside of you. She grunts and wriggles, moaning impatiently, too caught up in the feelings of your own tongue lapping away to concentrate on anything other than her desire to make you cum.", parse);
+	Text.NL();
+	Text.Add("A wordless protest bubbles out of the rabbit’s throat and she arches her back, squealing in ecstasy as climax makes her whole body shake violently atop you. Her cunt gushes into your mouth, assaulting you with the liquid tide of her orgasm, forcing you to swallow several mouthfuls of hot, musky fluids.", parse);
+	Text.NL();
+	if(usecock)
+		Text.Add("Unable to hold back any longer, you reflexively thrust into her grip, letting out a muffled cry as you send jet after jet of white, hot seed arcing through the air. Most of it splattering over the lapine nerd above you.", parse);
+	else
+		Text.Add("Crying out into her muff, you finally let yourself go and paint her fingers with your juices. Your femcum soaks into the rabbit’s furry paws before dripping to the ground and forming a veritable puddle underneath.", parse);
+	Text.NL();
+	Text.Add("The sights and scents are too much for the other lapines clustering around you. An off-key chorus of high-pitched moans and squeals makes its way dimly to your ears, and you feel hot juices splashing over your [skinDesc] as the others do their best to paint you with their perverse fluids.", parse);
+	Text.NL();
+	Text.Add("Panting in satiation, your captor slumps atop you, still idly squatting over your face. You feel warm weight pressing against your body, suggesting the other bunnies are joining her in using you like a couch. You have no idea how long it is, trapped there in the musk-muggy hot darkness, before a feminine sigh echoes from above you.", parse);
+	Text.NL();
+	Text.Add("<i>”That... well, I suppose that wasn’t so bad,”</i> come the alpha-bunny’s voice, even as she slowly pushes off of you, wobbling a little as a few last drips of femcum splatter on your cheek. <i>”I... okay, yeah, I think I’m done. C-come on, you lot, let’s get out of here... I said get up!”</i> she hisses, ears bristling as she glowers at some of the bunnies that, yes, are indeed cuddling up to you like a giant pillow.", parse);
+	Text.NL();
+	Text.Add("They squeak and mutter in protest, but shuffle off of you and wander away, leaving you to catch your breath. By the time you have recovered, the whole orgy has up and vanished, leaving just you[comp2] behind. You clean yourself off as best you can, get dressed again, and set off once more.", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		enc.finalize();
+	});
 }
 
 Scenes.Lagomorph.GroupLossOnPlainsToBurrows = function(enc) {
@@ -850,7 +1003,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckBrute = function(enc) {
 		Text.NL();
 		Text.Add("You pat his head and tell him he’s a good boy. Hmm, yes. Drink everything…", parse);
 		Text.NL();
-		Text.Add("He certainly doesn’t need the encouragement, slurping and mumbling as he licks and flicks at your cunt, burying his pointy bunny-nose as far into your womanhood as he fit it so as to slide ever deeper inside you.", parse);
+		Text.Add("He certainly doesn’t need the encouragement, slurping and mumbling as he licks and flicks at your cunt, burying his flat bunny-nose as far into your womanhood as he fit it so as to slide ever deeper inside you.", parse);
 		Text.NL();
 		Text.Add("Moaning at each lap of the lapin’s broad tongue, you feel your climax quickly approaching. It’s no surprise, you were pretty turned on from fucking his butt, as well as the show he’s put on for you when he came. Come to think of it, he seemed to enjoy it a lot getting creamed all over. So you figure you might as well as contribute to the mess.", parse);
 		Text.NL();
