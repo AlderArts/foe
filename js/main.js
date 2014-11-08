@@ -33,6 +33,7 @@ SetGameState = function(state) {
 
 // TODO: Stats, newgame+ etc
 GameOver = function() {
+	Gui.Callstack = [];
 	SplashScreen();
 }
 

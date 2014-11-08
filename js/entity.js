@@ -322,7 +322,7 @@ Entity.prototype.SaveFlags = function(storage) {
 }
 
 Entity.prototype.SavePerks = function(storage) {
-	var perks = {};
+	var perks = [];
 	for(var i = 0; i < this.perks.length; ++i) {
 		perks.push(this.perks[i].id);
 	}
