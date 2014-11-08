@@ -740,7 +740,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckBrute = function(enc) {
 	Text.NL();
 	parse["footDesc"] = player.LowerBodyType() != LowerBodyType.Single ? player.FootDesc() : player.HandDesc();
 	parse["c"] = strapon ? "" : ", he even managed to coax some pre from you";
-	Text.Add("The big slut did a good job[c]. But it’s time to get to get started with the main event. You circle the beaten bunny, stopping once you’re at his back. Without so much as a word, you set your [footDesc] on his back, eliciting a grunt of annoyance from the rabbit brute. You order him to get down of fours and push him down.", parse);
+	Text.Add("The big slut did a good job[c]. But it’s time to get started with the main event. You circle the beaten bunny, stopping once you’re at his back. Without so much as a word, you set your [footDesc] on his back, eliciting a grunt of annoyance from the rabbit brute. You order him to get down of fours and push him down.", parse);
 	Text.NL();
 	Text.Add("He looks back over his shoulder at you, ears flicking in a fashion that definitely looks annoyed, but he complies silently, settling down on all fours. He even shifts his legs slightly to better thrust his butt out, tail twitching as if to draw attention to his hindquarters.", parse);
 	Text.NL();
