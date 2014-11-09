@@ -48,10 +48,7 @@ SplashScreen = function() {
 	Text.AddOutput(Text.InsertImage("data/avatar_gwendy.png")); // TEMP
 	Text.AddOutput("<i>Game developed by <a href=\"http://www.furaffinity.net/user/aldergames/\">Alder</a></i>");
 	Text.Newline();
-	Text.AddOutput("Editors: MrKrampus, Del, Snarbolax. Thanks a bunch for your hard work!")
-	Text.Newline();
-	Text.AddOutput("WARNING: Due to structural changes in the save format, versions prior to 0.2j are incompatible (or wonky). I've introduced a save version to the save code, that will be able to upgrade saves, but it will only work for 0.2j and forward.");
-	Text.Newline();
+	Text.AddOutput("Editors: MrKrampus, Del, Johnathan Roberts, Ryous. Thanks a bunch for your hard work!")
 	Text.Newline();
 	Text.AddOutput("Thanks to <a href=\"http://www.fenoxo.com/\">Fenoxo</a> for hosting this and for the inspiration. This game would never have been created if not for CoC!");
 	Text.Newline();
