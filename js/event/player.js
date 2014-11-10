@@ -49,7 +49,7 @@ function Player(storage) {
 	
 	if(storage) {
 		this.FromStorage(storage);
-		this.InitCharacter(player.Gender());
+		this.InitCharacter(this.Gender());
 		
 		if(this.flags["startJob"] == JobEnum.Scholar)
 			this.jobs["Scholar"].mult = 0.5;
