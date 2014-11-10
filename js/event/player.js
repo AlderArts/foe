@@ -7,10 +7,6 @@ function Player(storage) {
 	Entity.call(this);
 	this.name = "???";
 	
-	// TEMP STUFF
-	//this.avatar.def = "data/avatar_akbal.png";
-	//this.avatar.girl = "data/avatar_elf.png";
-	
 	this.abilities["Special"].name = "Summon";
 	
 	this.currentJob = Jobs.Fighter;
@@ -53,10 +49,7 @@ function Player(storage) {
 	
 	if(storage) {
 		this.FromStorage(storage);
-		if(this.body.Gender() == Gender.male)
-			this.avatar.combat = Images.pc_male;
-		else
-			this.avatar.combat = Images.pc_fem;
+		this.InitCharacter(player.Gender());
 		
 		if(this.flags["startJob"] == JobEnum.Scholar)
 			this.jobs["Scholar"].mult = 0.5;
@@ -79,7 +72,6 @@ Player.prototype.InitCharacter = function(gender) {
 	else
 		this.avatar.combat = Images.pc_fem;
 }
-
 
 // Grammar
 Player.prototype.nameDesc = function() {
