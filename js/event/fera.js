@@ -795,7 +795,7 @@ Scenes.Fera.SexPrompt = function() {
 				Text.Newline();
 				Text.AddOutput("She reaches down and grabs[oneof] your [multiCockDesc], stroking it slowly. After a minute, you interrupt her, and pull back, telling her to lick your [cockDesc] instead. She gently licks the entire length of your [cockDesc], coating it in her saliva. You ready yourself to fuck her as she stares at you nervously.", parse);
 				Text.Newline();
-				Text.AddOutput("Stroking her cheek, you ask her if she's ready. The cute catgirl nods slightly, and you move down between her legs, rubbing the head of your [cockDesc] against her [fvagDesc] gently. You push inside slowly, trying to be gentle with her, but she still winces as your tip forces itself inside her opening. You see a trickle of blood from from her tearing hymen, as she mewls slightly in pain.", parse);
+				Text.AddOutput("Stroking her cheek, you ask her if she's ready. The cute catgirl nods slightly, and you move down between her legs, rubbing the head of your [cockDesc] against her [fvagDesc] gently. You push inside slowly, trying to be gentle with her, but she still winces as your tip forces itself inside her opening. You see a trickle of blood from her tearing hymen, as she mewls slightly in pain.", parse);
 				Text.Newline();
 				
 				fera.FuckVag(fera.FirstVag(), p1Cock);

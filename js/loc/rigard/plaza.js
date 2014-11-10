@@ -118,7 +118,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 				Text.Add("As you turn to leave, you spot a postern gate open in the wall a few hundred paces to your left, and two people come out. Both of them wear gray cloaks, their hoods drawn, so you cannot make out much of their features. They are of a height, and walk companionably side by side, heading out towards the city. You point them out, and ask the guards who they are, curiously.", parse);
 				Text.NL();
 				if(humanity < 0.95) {
-					Text.Add("<i>“No one your kind need concern themselves with,” you get for a response. You stubbornly look at the guard, and he rolls his eyes in annoyance. <i>“Look,”</i> he speaks slowly and clearly, as if to a child, <i>“there are esteemed personages for whom special allowances are made, and who may pass in or out wherever they please.”</i>", parse);
+					Text.Add("<i>“No one your kind need concern themselves with,”</i> you get for a response. You stubbornly look at the guard, and he rolls his eyes in annoyance. <i>“Look,”</i> he speaks slowly and clearly, as if to a child, <i>“there are esteemed personages for whom special allowances are made, and who may pass in or out wherever they please.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“Even I do not know who those two were. All I can say for sure is that they are so far above the likes of you, they would not even look at you.”</i>", parse);
 				}
