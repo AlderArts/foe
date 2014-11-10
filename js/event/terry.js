@@ -68,6 +68,7 @@ function Terry(storage) {
 	this.flags["xLact"] = 0;
 	this.flags["maxPast"] = 0;
 	this.flags["rotPast"] = 0;
+	this.flags["vFirst"] = 0;
 	//TF state
 	this.flags["breasts"] = Terry.Breasts.Flat;
 	this.flags["lact"] = 0;
@@ -322,6 +323,10 @@ Terry.prototype.FuckVag = function(vag, cock, expMult) {
 	Entity.prototype.FuckVag.call(this, vag, cock, expMult);
 }
 
+Terry.prototype.PussyVirgin = function() {
+	return this.flags["vFirst"] = 0;
+}
+
 // Party interaction
 Terry.prototype.Interact = function(switchSpot) {
 	var parse = {
@@ -363,7 +368,7 @@ Scenes.Terry.Appearance = function() {
 		hishers : terry.hishers(),
 		trueGender : Gender.Desc(terry.Gender()),
 		tbreastsDesc : function() { return terry.FirstBreastRow().Short(); },
-		tcockDesc : function() { return terry.MultiCockDesc(); }
+		tcockDesc : function() { return terry.multiCockDesc(); }
 	};
 	
 	Text.Clear();
@@ -1620,7 +1625,7 @@ Scenes.Terry.TalkPronoun = function() {
 			return desc.cup + "s";
 		},
 		foxvixen : terry.mfPronoun("fox", "vixen"),
-		cock : function() { return terry.MultiCockDesc(); },
+		cock : function() { return terry.multiCockDesc(); },
 		HeShe   : function() { return terry.HeShe(); },
 		heshe   : function() { return terry.heshe(); },
 		HisHer  : function() { return terry.HisHer(); },
@@ -2373,7 +2378,7 @@ Scenes.Terry.BrushTail = function() {
 		tarmorDesc     : function() { return terry.ArmorDesc(); },
 		tlowerArmor    : function() { return terry.LowerArmorDesc(); },
 		tbreastsDesc   : function() { return terry.FirstBreastRow().Short(); },
-		tcockDesc      : function() { return terry.MultiCockDesc(); },
+		tcockDesc      : function() { return terry.multiCockDesc(); },
 		bellydesc      : function() { return terry.StomachDesc(); },
 		skinDesc       : function() { return player.SkinDesc(); },
 		playername : player.name
@@ -2755,7 +2760,7 @@ Scenes.Terry.CheckFluids = function() {
 		topArmorDesc   : function() { return terry.ArmorDesc(); },
 		lowerArmorDesc : function() { return terry.LowerArmorDesc(); },
 		tbreastsDesc   : function() { return terry.FirstBreastRow().Short(); },
-		tcockDesc      : function() { return terry.MultiCockDesc(); },
+		tcockDesc      : function() { return terry.multiCockDesc(); },
 		bellydesc      : function() { return terry.StomachDesc(); },
 		playername : player.name
 	};
@@ -3143,7 +3148,7 @@ Scenes.Terry.SexPitchAnal = function(cocksInAss) {
 		playername : player.name,
 		armorDesc : function() { return player.ArmorDesc(); },
 		tongueDesc : function() { return player.TongueDesc(); },
-		multiCockDesc : function() { return p1Cock.isStrapon ? p1Cock.Short() : player.MultiCockDesc(); },
+		multiCockDesc : function() { return p1Cock.isStrapon ? p1Cock.Short() : player.multiCockDesc(); },
 		cockDesc : function() { return p1Cock.Short(); },
 		earsDesc : function() { return player.EarDesc(); },
 		legsDesc : function() { return player.LegsDesc(); },
@@ -3742,7 +3747,7 @@ Scenes.Terry.SexFuckButtEntrypoint = function(p1Cock, promise, retFunc) {
 		playername : player.name,
 		armorDesc : function() { return player.ArmorDesc(); },
 		tongueDesc : function() { return player.TongueDesc(); },
-		multiCockDesc : function() { return p1Cock.isStrapon ? p1Cock.Short() : player.MultiCockDesc(); },
+		multiCockDesc : function() { return p1Cock.isStrapon ? p1Cock.Short() : player.multiCockDesc(); },
 		cockDesc : function() { return p1Cock.Short(); },
 		cockTip  : function() { return p1Cock.TipShort(); },
 		ballsDesc : function() { return player.BallsDesc(); },
@@ -4193,7 +4198,7 @@ Scenes.Terry.JeanneTFCraft = function(item, scene, horseTF) {
 		boygirl    : terry.mfPronoun("boy", "girl"),
 		boygirl2   : player.mfTrue("boy", "girl"),
 		armorDesc  : function() { return terry.ArmorDesc(); },
-		terrycock  : function() { return terry.MultiCockDesc(); },
+		terrycock  : function() { return terry.multiCockDesc(); },
 		terrypussy : function() { return terry.FirstVag().Short(); }
 	};
 	parse = terry.ParserPronouns(parse);
@@ -4373,7 +4378,7 @@ Scenes.Terry.JeanneTFCraft = function(item, scene, horseTF) {
 			var cocksInAss = player.CocksThatFit(terry.Butt());
 			var p1Cock     = player.BiggestCock(cocksInAss);
 			
-			parse["multiCockDesc"] = function() { return player.MultiCockDesc(); }
+			parse["multiCockDesc"] = function() { return player.multiCockDesc(); }
 			parse["cockDesc"]      = function() { return p1Cock.Short(); }
 				
 			if(p1Cock) {
@@ -4509,7 +4514,7 @@ Scenes.Terry.JeanneTFGrowBoobs = function() {
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
-		terrycock  : function() { return terry.MultiCockDesc(); }
+		terrycock  : function() { return terry.multiCockDesc(); }
 	};
 	parse = terry.ParserPronouns(parse);
 	
@@ -4777,7 +4782,7 @@ Scenes.Terry.JeanneTFGrowVag = function() {
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
-		tcockDesc  : function() { return terry.MultiCockDesc(); },
+		tcockDesc  : function() { return terry.multiCockDesc(); },
 		hand       : function() { return terry.HandDesc(); }
 	};
 	parse = terry.ParserPronouns(parse);
@@ -4819,7 +4824,7 @@ Scenes.Terry.JeanneTFRemVag = function() {
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
-		tcockDesc  : function() { return terry.MultiCockDesc(); },
+		tcockDesc  : function() { return terry.multiCockDesc(); },
 		horse      : terry.HorseCock() ? "horse" : ""
 	};
 	parse = terry.ParserPronouns(parse);
@@ -4878,7 +4883,7 @@ Scenes.Terry.JeanneTFHorsegasmEntrypoint = function() {
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
-		tcockDesc  : function() { return terry.MultiCockDesc(); },
+		tcockDesc  : function() { return terry.multiCockDesc(); },
 		tbreastsDesc : function() { return terry.FirstBreastRow().Short(); }
 		
 	};
@@ -4900,7 +4905,7 @@ Scenes.Terry.JeanneTFGrowCock = function() {
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
-		tcockDesc  : function() { return terry.MultiCockDesc(); }
+		tcockDesc  : function() { return terry.multiCockDesc(); }
 	};
 	parse = terry.ParserPronouns(parse);
 	
@@ -5129,7 +5134,7 @@ Scenes.Terry.SexWorship = function() {
 		tongueDesc : function() { return player.TongueDesc(); },
 		breastsDesc : function() { return player.FirstBreastRow().Short(); },
 		tbreastsDesc : function() { return terry.FirstBreastRow().Short(); },
-		multiCockDesc : function() { return player.MultiCockDesc(); },
+		multiCockDesc : function() { return player.multiCockDesc(); },
 		buttDesc : function() { return player.Butt().Short(); },
 		anusDesc : function() { return player.Butt().AnalShort(); },
 		skinDesc : function() { return player.SkinDesc(); },
@@ -5680,7 +5685,7 @@ Scenes.Terry.PCCleansTerry = function(func, opts) {
 		breastsDesc : function() { return player.FirstBreastRow().Short(); },
 		nipplesDesc : function() { return player.FirstBreastRow().NipsShort(); },
 		nippleDesc : function() { return player.FirstBreastRow().NipShort(); },
-		multiCockDesc : function() { return player.MultiCockDesc(); },
+		multiCockDesc : function() { return player.multiCockDesc(); },
 		cockDesc : function() { return player.BiggestCock().Short(); },
 		vagDesc : function() { return player.FirstVag().Short(); },
 		clitDesc : function() { return player.FirstVag().ClitShort(); },
@@ -5850,7 +5855,7 @@ Scenes.Terry.TerryCleansPC = function(func, opts) {
 		breastsDesc : function() { return player.FirstBreastRow().Short(); },
 		nipplesDesc : function() { return player.FirstBreastRow().NipsShort(); },
 		nippleDesc : function() { return player.FirstBreastRow().NipShort(); },
-		multiCockDesc : function() { return player.MultiCockDesc(); },
+		multiCockDesc : function() { return player.multiCockDesc(); },
 		cockDesc : function() { return player.BiggestCock().Short(); },
 		vagDesc : function() { return player.FirstVag().Short(); },
 		clitDesc : function() { return player.FirstVag().ClitShort(); },
@@ -6279,5 +6284,276 @@ Scenes.Terry.FuckedByBunnyMob = function(male, parse) {
 	Text.NL();
 	
 	var cum = terry.OrgasmCum();
+}
+
+/* TODO
+ *  * Pitch Vaginal
+Flavor Text: You went to the trouble of growing Terry a vagina, so let’s go ahead and use it.
+
+ */
+Scenes.Terry.SexPitchVaginal = function(cocks) {
+	var p1cock  = player.BiggestCock(cocks);
+	var strapon = p1cock.isStrapon;
+	
+	var parse = {
+		foxvixen  : terry.mfPronoun("fox", "vixen"),
+		armorDesc : function() { return player.ArmorDesc(); },
+		multiCockDesc : function() { return player.MultiCockDesc(); },
+		cockDesc : function() { return p1cock.Short(); },
+		cockTip  : function() { return p1cock.TipShort(); },
+		nipsDesc : function() { return player.FirstBreastRow().NipsShort(); },
+		tcockDesc : function() { return terry.FirstCock().Short(); },
+		tvagDesc  : function() { return terry.FirstVag().Short(); },
+		boygirl : player.mfTrue("boy", "girl")
+	};
+	
+	parse = terry.ParserPronouns(parse);
+	
+	Text.Clear();
+	if(terry.Relation() < 30) {
+		Text.Add("<i>”Umm, I’m not so sure about this...”</i> Seems like Terry is not so receptive to the idea of being penetrated.", parse);
+		if(!terry.PussyVirgin())
+			Text.Add(" Even tho it’s not [hisher] first time.", parse);
+		Text.NL();
+		Text.Add("Smiling gently, you reach out and take [hisher] hands, swearing to [himher] that it’s okay, you’ll be gentle with [himher].", parse);
+		Text.NL();
+		Text.Add("<i>”O-Okay. It’s not like I have a choice anyway...”</i>", parse);
+	}
+	else if(terry.Relation() < 60) {
+		Text.Add("<i>”Okay, just remember to be gentle.”</i>", parse);
+		Text.NL();
+		Text.Add("You promise [himher] that you will try to be as gentle as you can.", parse);
+	}
+	else {
+		Text.Add("<i>”Good, I was craving some meat between my legs,”</i> [heshe] giggles.", parse);
+		Text.NL();
+		parse["lady"] = terry.mfPronoun("'lady'", "lady");
+		Text.Add("Well, you’re certainly happy to oblige; anything your [lady] desires...", parse);
+		Text.NL();
+		Text.Add("<i>”If you got time to be cheeky, you also have time for foreplay. So why haven’t you started yet? And why are you still dressed?”</i>", parse);
+	}
+	Text.NL();
+	Text.Add("One eye focused on the naked [foxvixen] before you, you make short work of your own [armorDesc], stripping away your clothes until you’re standing before [himher] equally naked. ", parse);
+	if(strapon)
+		Text.Add("You quickly check your [cockDesc], making sure that it’s properly secured to its place. Don’t want it to fall out while you’re fucking Terry, after all.", parse);
+	else
+		Text.Add("Your own erect [multiCockDesc] stands proudly before you, signalling your readiness to begin whenever Terry gives the okay.", parse);
+	Text.NL();
+	
+	var virgin = terry.FirstVag().virgin;
+	
+	if(virgin) {
+		if(terry.PussyVirgin()) {
+			Text.Add("<i>”Listen, I… well… common knowledge is that it always hurts the first time. So can you go slowly? Give me time to adjust?”</i>", parse);
+			Text.NL();
+			Text.Add("Nodding your head, you give [himher] your word. Everyone knows virgins need a delicate touch, and virgins who were once boys especially so.", parse);
+			Text.NL();
+			Text.Add("<i>”Alright, I’m trusting you.”</i>", parse);
+			
+			terry.slut.IncreaseStat(100, 2);
+			terry.relation.IncreaseStat(100, 1);
+		}
+		else {
+			Text.Add("<i>”Hope you’ll take your time before you start humping. After all, you’ll be popping my cherry all over again, and that hurts!”</i>", parse);
+			Text.NL();
+			Text.Add("With a nod and a reassuring smile, you assure the [foxvixen] that you haven’t forgotten what [heshe] needs.", parse);
+			Text.NL();
+			Text.Add("<i>”Okay, we’re set then. Let’s go, I guess.”</i>", parse);
+			
+			terry.slut.IncreaseStat(100, 2);
+		}
+	}
+	else {
+		Text.Add("<i>”Alright then, some foreplay before we get down to business?”</i>", parse);
+		Text.NL();
+		Text.Add("Why not? After all, you know how much [heshe] likes it better when you play around first.", parse);
+	}
+	Text.Flush();
+	
+	//[Kiss][Hands][Lick][Dildo]
+	var options = new Array();
+	options.push({ nameStr : "Kiss",
+		func : function() {
+			Text.Clear();
+			Text.Add("With a smile, you cross the distance between yourself and the [foxvixen], hands reaching out to gently but authoritatively take hold of [hisher] cheeks. [HisHer] blue eyes flick about instinctively before your lips dip in and cover [hisher] own. Softly, at first, a tender press of flesh on flesh. But as your ardor builds, you kiss the [foxvixen] harder, more insistently, sliding closer and closer to [himher] so you can try and dominate [hisher] mouth.", parse);
+			Text.NL();
+			Text.Add("Terry is a bit taken by surprise initially, but [heshe] quickly reciprocates, tail wagging slowly behind as [hisher] eyes close. [HisHer] tongue wrestles with yours, and [heshe] moans a little as you twist your heads slightly to deepen the kiss.", parse);
+			Text.NL();
+			parse["slender"] = terry.PregHandler().BellySize() > 0.2 ? "pregnancy-swollen" : "slender";
+			Text.Add("As your tongues tangle together in the [foxvixen]’s mouth, your hand rises as if on autopilot, skimming the fur of Terry’s [slender] form to reach for [hisher] chest. ", parse);
+			if(terry.Cup() >= Terry.Breasts.Acup)
+				Text.Add("Your fingers splay around the vulpine breast, cupping it as best you can. You caress and squeeze it, fingers kneading the soft and sensitive flesh, thumb rubbing itself ardently against the perky nipple, coaxing it to pebble under your touch.", parse);
+			else
+				Text.Add("With no breasts to speak of, your fingers zero in on Terry’s nipple. You pinch it between forefinger and thumb, slowly rubbing and teasing it, nipping it just hard enough to add an extra spark. Your efforts bear fruit, coaxing it into a little pink pebble of arousal-stiffened flesh.", parse);
+			Text.NL();
+			Text.Add("The [foxvixen] moans into the kiss, but otherwise doesn’t protest your ministrations. In fact, [heshe] leans closer, [hisher] own hands setting themselves on your [hipsDesc]. You’ve been kissing for a while now, but neither of you feel the need to break just yet.", parse);
+			Text.NL();
+			Text.Add("Your other hand glides over the [foxvixen]’s womanly hip to reach for the heart-shaped perkiness of [hisher] butt. Fingers cup one bountiful cheek and squeeze possessively, amorously kneading at the tight, firm flesh, delighting in the way it squishes between your fingers.", parse);
+			Text.NL();
+			Text.Add("Terry breaks the kiss momentarily to gasp. <i>”Perv...”</i> [heshe] utters, almost inaudibly.", parse);
+			Text.NL();
+			parse["leg"] = player.LowerBodyType() != LowerBodyType.Single ? "leg" : "tail"; //TODO slime
+			parse["c"] = terry.FirstCock() ? Text.Parse(", not that [hisher] erect [tcockDesc] poking against you wasn’t enough of an indication already", parse) : "";
+			Text.Add("Like [heshe] doesn’t love it, you retort, before covering [hisher] mouth again with possessive firmness. Close as you are, you can easily use your [leg] to start grinding at [hisher] arousal-clenched thighs, slowly spreading them and allowing you to work your own [multiCockDesc] in-between them to rub against [hisher] rapidly moistening pussy. It’s pretty clear that the [foxvixen] arousal is already peaking[c].", parse);
+			if(terry.HorseCock())
+				Text.Add(" You’re surprised you didn’t notice it earlier, given how huge [heshe] is.", parse);
+			Text.NL();
+			Text.Add("Terry grinds back against you, moaning softly as [heshe] feels[oneof] your [multiCockDesc] rubbing against [hisher] pussy. [HeShe] stands on shaky legs, maybe you should sit down before the [foxvixen] loses [hisher] balance.", parse);
+			Text.NL();
+			Text.Add("The scent of Terry’s drooling cunt fills your nostrils as you finally deign to break the kiss, the panting, glaze-eyed [foxvixen] staring at you longingly. Wrapping [himher] gently in your arms, you sit down, tenderly guiding the [foxvixen] to straddle you. You let[oneof] your [multiCockDesc] nestle against Terry’s wet pussy, and ask [himher] if [heshe]’s ready to start.", parse);
+			Text.NL();
+			Text.Add("Your only reply is a soft nod.", parse);
+			
+			terry.AddLustFraction(0.5);
+			
+			PrintDefaultOptions();
+		}, enabled : true,
+		tooltip : Text.Parse("A nice makeout session should be just the thing to put your [foxvixen] in the mood.", parse)
+	});
+	options.push({ nameStr : "Hands",
+		func : function() {
+			Text.Clear();
+			Text.Add("Closing the distance between you, your arms reach out and gently embrace the [foxvixen], pulling [himher] into a tender hug, feeling [himher] rest [hisher] head against your collarbone. You hold [himher] like that for a few moments, gently stroking [hisher] hair, then let the [foxvixen] go in order to seat yourself upon the ground, guiding Terry down into your lap and instructing [himher] to straddle you.", parse);
+			Text.NL();
+			Text.Add("Terry does exactly as you instructed, moaning softly as[oneof] your [multiCockDesc] rubs against [hisher] [tvagDesc]. You push your [multiCockDesc] below the [foxvixen], letting them emerge from behind [himher]. ", parse);
+			if(terry.Relation() < 30)
+				Text.Add("Terry looks a bit uneasy in this position, but [heshe] also looks at you with undeniable lust in [hisher] eyes. It’s difficult to tell which one is the strongest emotion.", parse);
+			else if(terry.Relation() < 60)
+				Text.Add("Terry doesn’t look all that comfortable at first, but after some wiggling [heshe] finds the best position to straddle you in. [HeShe] looks at you and smiles softly.", parse);
+			else {
+				Text.Add("Terry smiles as [heshe] adjusts [himher]self in your lap, embracing you with outstretched arm.", parse);
+				if(terry.FirstCock())
+					Text.Add(" You feel [hisher] [tcockDesc] throb gently against your belly.", parse);
+			}
+			Text.NL();
+			Text.Add("Seeing Terry is ready to go, you decide to start with the obvious, and so your hands reach towards the [foxvixen]’s chest. ", parse);
+			if(terry.Cup() < Terry.Breasts.Acup) {
+				Text.Add("Of course, Terry has no bosom, even if [heshe] does have a perfectly feminine flower between [hisher] legs. But that still leaves a pair of pearl-pink nipples to play with, and your fingers gravitate towards them inevitably.", parse);
+				Text.NL();
+				Text.Add("With expert precision your digits trace circles, starting at the fur just past the areola before spiralling in, flicking the nipples back and forth with tiny twitches of fingertip. You caress and rub, going so far as to take the pebbling nipples between thumb and forefinger in a not-unpleasant pinch that lets you gently grind on the sensitive flesh. ", parse);
+			}
+			else if(terry.Cup() < Terry.Breasts.Ccup) {
+				Text.Add("Terry’s small, perky breasts match [hisher] slender build just perfectly, easily fitting into your hands.", parse);
+				Text.NL();
+				Text.Add("Though too small and firm to really squish, you can still knead them like dough and that is what you proceed to do. Your thumbs rub each nipple in circles, stroking them back and forth as you cup and squeeze at [hisher] breasts.", parse);
+			}
+			else if(terry.Cup() < Terry.Breasts.Dcup) {
+				Text.Add("Stretching the limits of what would fit a [foxvixen] as petitely built as Terry, the bountiful C-cups are almost too large to hold with a single hand, leaving you cupping generously at the toned, perky breasts.", parse);
+				Text.NL();
+				Text.Add("As best you can, you massage them with thumbs and fingers, kneading the flesh that squishes so delightfully between your digits and stroking at the nipples. You gently heft them up from Terry’s chest, marveling at their weight, caressing them with tender possessiveness.", parse);
+			}
+			else {
+				Text.Add("[HisHer] bountiful breasts, so large as to be out of place on [hisher] small, slender frame, draw your hands like iron filings to a magnet. So large that a single hand alone strains to even try and cup a singular one, you find yourself needing to devote both hands to each one in turn.", parse);
+				Text.NL();
+				Text.Add("The weight of them in your hands is a palpable thing, and there is more than enough flesh to caress and stroke. Fingers sink into luxuriant fur-wrapped boobflesh, groping shamelessly, more than enough for you to focus on caressing with one hand as the other plays with the nipple, pinching and squeezing, tugging lightly.", parse);
+				Text.NL();
+				Text.Add("You play with one breast to your heart’s content, then switch over to the other, lavishing the same attention on it before switching back to the first.", parse);
+			}
+			Text.NL();
+			parse["breasts"] = terry.Cup() < Terry.Breasts.Acup ? "breasts" : "nipples";
+			parse["boobs"] = terry.Cup() < Terry.Breasts.Acup ? "boobs" : "nipples";
+			Text.Add("<i>”Ah!”</i> the [foxvixen] cries out as you play with [hisher] [breasts]. <i>”H-Hey, I thought you were going to do me. Not play around with my [boobs],”</i> [heshe] teases you, stifling another moan.", parse);
+			Text.NL();
+			// TODO: WEIRD
+			Text.Add("All in due time, you quip back. First, you need to prime [hisher] engine, and the [breasts] sure seem to be the quickest starter keys [heshe] has.", parse);
+			Text.NL();
+			if(terry.Relation() < 30) {
+				Text.Add("The [foxvixen] doesn’t say anything, instead [heshe] continues to try and stifle [hisher] moans as you work [himher] into a soft pant.", parse);
+			}
+			else if(terry.Relation() < 60) {
+				Text.Add("<i>”Rev my engines, huh? I guess this is one way to do it, but I kinda expected - Ah! - more from you, ”</i> [heshe] says, panting softly.", parse);
+				Text.NL();
+				Text.Add("You chuckle and gently chide [himher]; does [heshe] think you’re only going to play with [hisher] nipples?", parse);
+			}
+			else {
+				Text.Add("<i>”Prime my engines? What about your engines, big [boygirl],”</i> Terry huskily replies, reaching over to twist one of your [nipsDesc].", parse);
+				Text.NL();
+				Text.Add("You moan in pleased surprise, body tensing at the sensation that spikes under your skin. In shock, you whisper Terry’s name, shaking your head and managing a weak laugh at how far [heshe]’s come from the sexual innocent [heshe] was.", parse);
+				Text.NL();
+				Text.Add("<i>”So, you going to pick-up the pace or do I have to take charge?”</i> [heshe] grins mischievously.", parse);
+				Text.NL();
+				Text.Add("Oh, you’ll pick up the pace alright...", parse);
+			}
+			Text.NL();
+			// TODO: END WEIRD
+			Text.Add("Abandoning Terry’s chest, your hands roam down [hisher] body, heading for [hisher] lower half.", parse);
+			Text.NL();
+			if(terry.FirstCock()) {
+				if(terry.HorseCock()) {
+					Text.Add("Naturally, your hands first stop at the magnificent pillar of equine meat jutting so erroneously between Terry’s dainty thighs. You know you need to be careful here, lest your teasing of the over-sensitive flesh makes Terry cum before you want [himher] to.", parse);
+					Text.NL();
+					Text.Add("Your fingers curl possessively around Terry’s ample cockflesh, sliding back and forth in smooth even strokes, tracing the bluntness of [hisher] glans and teasing back along its upper side. You reach for the swollen fullness of [hisher] balls, setting them swaying playfully with gentle nudges of your fingers, fondling them as if to gauge their ripeness.", parse);
+				}
+				else
+					Text.Add("The almost dainty foxhood laying between Terry’s thighs is a natural step for you. You caress the base, just above the sheathe, feeling the promise there of [hisher] knot before gliding your fingers back and forth along its upper side. You pinch the pointed tip gently between your fingers, then caress the shaft with your palm. You cup [hisher] dainty little balls in your palm and knead them softly, feeling the promise of seed within.", parse);
+			}
+			else
+				Text.Add("Though it is too soon to play with Terry’s cunt properly, you can still tease [himher] a little. Your fingers stroke just above [hisher] pussy, rubbing gently at the hood above [hisher] clitoris, trailing the outer lips with one questing finger.", parse);
+			Text.NL();
+			Text.Add("<i>”Ah! If you keep playing with me like that you’re going to make me cum!”</i> Terry cries out in warning as [heshe] tries to grind [himher]self against you, enjoying your loving caress to the fullest.", parse);
+			Text.NL();
+			Text.Add("You shake your head in gentle reproach; you can’t have that, now can you? Even as you ask this, your fingers removes themselves from Terry’s loins, your hands resting idly upon [hisher] thighs instead as you wait for [himher] to get back under control.", parse);
+			Text.NL();
+			Text.Add("Terry leans onto you, resting [hisher] head on your shoulder. <i>”Kinda disappointed you stopped,”</i> [heshe] remarks, still panting.", parse);
+			Text.NL();
+			Text.Add("It’s only until [heshe] isn’t so close to [hisher] climax, you assure the [foxvixen].", parse);
+			Text.NL();
+			Text.Add("<i>”Just give me some time.”</i>", parse);
+			Text.NL();
+			Text.Add("You nod your head in understanding, letting the [foxvixen] rest against you in companionable silence for a few long moments.", parse);
+			Text.NL();
+			parse["t"] = terry.FirstCock() ? Text.Parse(", despite the fact that [hisher] [tcockDesc] is still rock-hard and throbbing against you", parse) : "";
+			Text.Add("<i>”Okay, I guess I’m good now,”</i> Terry declares[t].", parse);
+			Text.NL();
+			Text.Add("Well if [heshe] says so, then you should be getting ready for the main event. You smile at the [foxvixen] and tease [himher] by telling [himher] not to cum on the first thrust.", parse);
+			Text.NL();
+			if(terry.Slut() < 30) {
+				Text.Add("<i>”Hey, I’m not that bad at sex,”</i> [heshe] protests with a pout. But [hisher] muzzle quickly spreads into a smile. <i>”Alright then, let’s get started.”</i>", parse);
+			}
+			else {
+				Text.Add("<i>”Not my first rodeo, cow[boygirl]. You know I’m not shabby. If anything, <b>you</b> should look out for yourself and not blow the first thrust, ”</i> the [foxvixen] teases back.", parse);
+				Text.NL();
+				Text.Add("Now who’s getting ahead of themselves, hmm? You wink to show you’re just teasing, but it’s clear you’re both ready to begin.", parse);
+			}
+			
+			terry.AddLustFraction(0.7);
+			
+			PrintDefaultOptions();
+		}, enabled : true,
+		tooltip : Text.Parse("Show Terry just how good you are with your hands by getting [himher] all revved up.", parse)
+	});
+	
+	//TODO
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : Text.Parse("", parse)
+	});
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : Text.Parse("", parse)
+	});
+	Gui.SetButtonsFromList(options, false, null);
+	
+	Gui.Callstack.push(function() {
+		Text.NL();
+		Text.Add("", parse);
+		Text.NL();
+		Text.Add("", parse);
+		Text.NL();
+		Text.Add("", parse);
+		Text.NL();
+		Text.Add("", parse);
+		Text.Flush();
+	});
 }
 
