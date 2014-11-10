@@ -830,7 +830,7 @@ Scenes.Lagomorph.GroupWinOnPlainsPrompt = function() {
 }
 
 Scenes.Lagomorph.GroupWinOnPlainsFuckBrute = function(enc) {
-	var p1cock  = player.BiggestCock();
+	var p1cock  = player.BiggestCock(null, true);
 	var strapon = p1cock ? p1cock.isStrapon : null;
 	
 	var parse = {
