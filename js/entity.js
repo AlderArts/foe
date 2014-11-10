@@ -1023,6 +1023,7 @@ Entity.prototype.is = function() {
 Entity.prototype.plural = function() {
 	return (this.body.Gender() == Gender.none);
 }
+// TODO femininity from other things (breasts etc)
 Entity.prototype.mfFem = function(male, female) {
 	return this.body.femininity.Get() > 0 ? female : male;
 }

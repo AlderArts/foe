@@ -621,6 +621,14 @@ Scenes.Equine.WinPrompt = function() {
 			tooltip : "This rowdy mare gave you a hard time - it’s only proper you return the favor..."
 		});
 	}
+	if(player.FirstVag()) {
+		options.push({ nameStr : "Ride him",
+			func : function() {
+				Scenes.Equine.WinRideHimVag(enc);
+			}, enabled : true,
+			tooltip : "Time for a little rodeo. Mount up!"
+		});
+	}
 	/* TODO
 	options.push({ nameStr : "Leave",
 		func : function() {
@@ -629,6 +637,7 @@ Scenes.Equine.WinPrompt = function() {
 		tooltip : ""
 	});
 	*/
+	
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.NL();
 		Text.Add("However, you aren't interesting in taking that kind of tribute right now. You content yourself with rifling through their meager belongings, getting in a quick grope on one or the other just to hear them moan. You stow your loot and turn on your heel, leaving your foes to stare after you in confusion and relief... and perhaps a bit of disappointment.", parse);
@@ -642,7 +651,6 @@ Scenes.Equine.WinPrompt = function() {
 Scenes.Equine.WinFuckHer = function(enc) {
 	var mare     = enc.mare;
 	var stallion = enc.stallion;
-	SetGameState(GameState.Event);
 	
 	var parse = {
 		multiCockDesc : function() { return player.MultiCockDesc(); },
@@ -775,4 +783,151 @@ Scenes.Equine.WinFuckHer = function(enc) {
 	Gui.NextPrompt(enc.finalize);
 }
 
-
+Scenes.Equine.WinRideHimVag = function(enc) {
+	var mare     = enc.mare;
+	var stallion = enc.stallion;
+	
+	var parse = {
+		multiCockDesc : function() { return player.MultiCockDesc(); },
+		ballsDesc     : function() { return player.BallsDesc(); },
+		vagDesc       : function() { return player.FirstVag().Short(); },
+		clitDesc      : function() { return player.FirstVag().ClitShort(); },
+		breastDesc    : function() { return player.FirstBreastRow().Short(); },
+		nipsDesc      : function() { return player.FirstBreastRow().NipsShort(); },
+		eyeDesc       : function() { return player.EyeDesc(); },
+		faceDesc      : function() { return player.FaceDesc(); },
+		armor         : function() { return player.ArmorDesc(); }
+	};
+	
+	Text.Clear();
+	Text.Add("No matter how hard you try, you simply cannot tear your eyes away from the stallion's sizable prick as it dangles from the revealing shreds of his destroyed loincloth. You feel your nethers grow hotter at the sight, your ", parse);
+	if(player.FirstCock())
+		Text.Add("[multiCockDesc] and ", parse);
+	Text.Add("[nipsDesc] hardening beneath your [armor] as you imagine all the different ways you could put that slab of meat to good use. The equine notices your appraisal, and his shaft begins to engorge with excitement - though whether or not the reaction is voluntary remains unclear. A mischievous gleam flashes in your eye, and you decide to give your fallen foe a ride to remember.", parse);
+	Text.NL();
+	Text.Add("Pointedly ignoring the mare, you strip off your [armor] slowly, putting yourself on display for the stallion in an effort to tease him erect. Your efforts hit their mark; the horse's gaze locks onto your [breastDesc] and [vagDesc], ", parse);
+	if(player.FirstCock())
+		Text.Add("though his eyes grow wider at the sight of your [multiCockDesc] jutting toward him at half-mast. The extra equipment doesn't seem to deter him much, as is evidenced by ", parse);
+	Text.Add("his thick organ quickly rising to attention and twitching with barely-concealed want. You slide your hands over your own body, toying with one breast while sliding a few digits ", parse);
+	if(player.HasBalls())
+		Text.Add("under your swollen [ballsDesc] and ", parse);
+	Text.Add("into your ever-moistening folds as you prepare yourself for the challenge. When you pull your lower hand away, strands of your arousal splay between your fingers like a clear, viscous web. You're as ready as you'll ever be, so now it's time to find out how much of this stud you can take. You carefully straddle the column of flesh, reaching down to rub the blunted head against your dripping sex.", parse);
+	Text.NL();
+	Text.Add("The stallion's cock throbs in your grip, and he is already panting from the sensation. You smirk down at him; despite his brash demeanor, it would seem that the equine is fairly inexperienced in the finer points of lovemaking. No doubt his sexual repertoire consists almost entirely of brief, feverish fucking, and little else. Well, who better than you to show him what he has been missing?", parse);
+	Text.NL();
+	Text.Add("You prod your [vagDesc] with his broad tip a few more times, edging him ever-so-slightly. You won't be lacking for lubrication - the combination of your soaked snatch and his exuberant emission of precum has coated his swollen shaft from crest to crack with glistening moisture - so you see no point in dallying any longer.", parse);
+	Text.NL();
+	if(player.LowerBodyType() != LowerBodyType.Single)
+		Text.Add("Your legs bend, ", parse);
+	else
+		Text.Add("Your powerful pelvic muscles manage to keep your torso aloft as your [vagDesc] descends upon him, ", parse);
+	Text.Add("lowering you just enough to push his flare through your nether lips and into your welcoming warmth. Both of you groan aloud, and you allow gravity to pull you farther and farther down the turgid pole. The sensation of being filled to such a degree is incredible, and it only increases with each additional inch that slides into your inviting tunnel. You can feel every contour and vein rubbing your sensitive walls as your [vagDesc] squeezes the stallion's shaft reflexively, urging him deeper inside you to the point of no return. Your fingers seek out your [nipsDesc] and begin toying with them as your eyes slide shut in pleasure.", parse);
+	Text.NL();
+	
+	Sex.Vaginal(stallion, player);
+	player.FuckVag(player.FirstVag(), stallion.FirstCock(), 3);
+	stallion.Fuck(stallion.FirstCock(), 3);
+	
+	parse["thighsDesc"] = (player.LowerBodyType() != LowerBodyType.Single) ? player.ThighsDesc() : "abdomen";
+	parse["s"] = (player.LowerBodyType() != LowerBodyType.Single) ? "" : "s";
+	Text.Add("After a blissful eternity, your [thighsDesc] finally come[s] to rest against the stallion's hips, and you pause long enough to adjust to the sizable intrusion and take a few bolstering breaths. The equine's head is lolling from side to side, his eyes rolled halfway back into his skull. His fingers dig into the grass as though he was holding on for dear life. You attempt to raise yourself up, but find that ", parse);
+	if(player.LowerBodyType() != LowerBodyType.Single)
+		Text.Add("your legs are rather shaky from the deep-seated pleasure of the equine insertion.", parse);
+	else
+		Text.Add("your abdominal muscles have become a quivering mess from the pleasure of the equine insertion.", parse);
+	Text.Add(" So instead you decide to shift forward, dragging your [nipsDesc] along the horse's chest and allowing most of his length to slip out until only the flared head remains inside you. As your [breastDesc] dangle above the stallion's muzzle, a sudden urge strikes you. You grab the unsuspecting equine's chin with one hand and shove one of your nipples into his mouth.", parse);
+	Text.NL();
+	Text.Add("Though startled at first, the stud quickly takes to his task with gusto, sucking and lapping at your hardened nub as though it contained the essence of life itself. His hands reach up to fondle you, but you slap them away; you're in the saddle this time, and he is going to play <i>your</i> way. You croon your approval of his ministrations, but remind him that you have more than one breast. He shifts his attention to your other breast without hesitating, keeping his hands obediently at his sides despite the obvious desire to touch you making his digits squirm.", parse);
+	Text.NL();
+	Text.Add("You let him tend your [breastDesc] for a bit longer, then pull back. You tell him that he did a fine job, so you will now reward him for his efforts. With that, you ease yourself back onto his still-raging erection, biting your lip as you enjoy the filling sensation once again. The stallion openly moans, his breath coming in shallow gasps. By the time your [vagDesc] has accepted him to the hilt, his entire frame is trembling with need. You can feel his balls churning beneath you, and it becomes apparent that he is on the verge of climax just from the teasing you've done so far.", parse);
+	Text.NL();
+	Text.Add("That simply won't do. You haven't even begun to indulge yourself - you can't have him finishing the race while you're still fresh out of the gate. You reach out to give one of his nipples a hard tweak, which brings him back from the edge just enough to focus on you with bleary eyes. With a stern expression, you inform him that he is <i>not</i> allowed to cum until you say so, and failing to comply will have... consequences. The stallion's eyes grow wide with apprehension at both the order and the implied threat, but he nods acquiescence. You purr your approval and begin rocking on his rigid member", parse);
+	if(player.FirstCock())
+		Text.Add(", your own rock-hard [multiCockDesc] bouncing proudly over his stomach as you move", parse);
+	Text.Add(". You sigh with happiness as his equine dong massages your deepest crevasses, stirring your insides in ways few could ever hope to match.", parse);
+	Text.NL();
+	Text.Add("You build up a steady rhythm, doing your best to keep the stallion on the edge while pleasuring yourself in the process. A rapid squelching sound catches your ear, and a quick glance at the forgotten mare reveals that she is enjoying the show. She is mauling one of her sizable tits with one hand, while the other hand feverishly frigs her sopping pussy. Before you can give the sight much thought, you feel the stallion shiver beneath you, and you slow your movements to hold him back from the release he craves.", parse);
+	Text.NL();
+	Text.Add("His willpower isn't nearly as strong as you'd hoped. Looks like you'll need to make the best of it. You ramp up the speed, angling your thrusts to maximize the friction against your sensitive folds while grinding your [clitDesc] against his crotch whenever you have him hilted. You attack both of your [breastDesc] with a vengeance, squeezing and caressing the tender flesh and [nipsDesc] as you ride your bronco with wild abandon.", parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	if(player.FirstCock())
+		Text.Add(" Your own [multiCockDesc] beg[notS] for attention, and you free one hand from your chest to wrap it around[oneof] your straining shaft[s], jerking [itThem] fast and hard. With the added stimulation, you aren't sure how much longer you can hold back.", parse);
+	Text.NL();
+	Text.Add("Before you can reach your peak, the equine cries out. His frame goes tense, his heavy balls contract, and he thrusts his hips upward as ecstasy overpowers his endurance like a tidal wave. A gasp escapes your lips as you suddenly feel a surge of liquid heat flowing into your lower half. Your gut becomes paunched as the thick seed floods your uterus beyond capacity, streams of off-white jizz spurting past the imperfect seal of your stretched labia and drooling down the underside of his scrotum.", parse);
+	Text.NL();
+	
+	// TODO
+	player.PregHandler().Impregnate({
+		slot   : PregnancyHandler.Slot.Vag,
+		mother : player,
+		father : enc.stallion,
+		type   : PregType.Equine,
+		num    : 1,
+		time   : 24
+	});
+	
+	Text.Add("After a few more squirts, the stallion is spent. He is sprawled limply on the ground beneath you, his tongue lolling out and his eyes almost crossed from the intense pleasure. You can feel his cock shrinking inside you, and it soon flops out to allow a cascade of spunk to pour from your [vagDesc] and coat his lower body white. You click your tongue in disappointment; you were quite close to your own release, and being deprived like that has left you a little edgy. There must be some way to...", parse);
+	Text.NL();
+	Text.Add("Your eyes fall upon the mare, who apparently managed to satisfy herself at the same time as her partner. She is panting hard, and her fingers are coated with a mix of saliva and femcum. The sight of her quivering lips and the tatters of leather dangling beneath her heaving bosom gives you a brilliant idea, and you are quick to put it into action. You raise yourself off of the stallion, then clear your throat to get the mare's attention. At her uncertain expression, you gesture at her partner's flaccid member wallowing in the puddle of spooge plastered across his navel.", parse);
+	Text.NL();
+	Text.Add("<i>“I wasn't finished,”</i> you tell her, your voice stern and authoritative. <i>“Get him ready for me again.”</i>", parse);
+	Text.NL();
+	Text.Add("The mare looks dubious but obeys the command anyway, seemingly unwilling to risk another trouncing at your hands. She gets to work, squeezing and sucking the stallion's prick and balls with the ease of familiarity. The way she slurps down his residual seed without hesitation indicates that she must be accustomed to the taste, even when flavored with the juices of another. The stallion groans at her ministrations, shifting his hips as she expertly hits all of his favorite spots with her broad tongue. He is still too dazed to offer much response, but that will only make your plan that much easier to execute.", parse);
+	Text.NL();
+	Text.Add("While the mare is occupied, you amuse yourself with the dripping girl parts that she so conveniently presented in your direction. You squeeze and spread her plush asscheeks, revealing her drooling cunny and surprisingly tight pucker. Thinking that you mean to have your way with her as well, the mare arches her back slightly and presses her ass toward you, waggling her hips as she continues to fluff the stallion’s prick. Humoring her, you slide two fingers into her humid snatch, meeting zero resistance thanks as much to the copious femlube as to the sheer size of her equine gash.", parse);
+	Text.NL();
+	Text.Add("The mare, still sensitive from her climax, moans appreciatively against her partner’s organ, which elicits a moan from him in turn. You diddle her inner walls for a moment or two, then slide your digits out and upward, rubbing her fluids around the ring of her anus. The equine woman gasps while her whole body tenses in surprise, and you realize that her backdoor must not see a lot of action. That’s <i>very</i> interesting. You offer her reassurances and encourage her to relax, stroking her clenched hole gently with your fingertips.", parse);
+	Text.NL();
+	Text.Add("She eventually relents, giving you free reign over her hindquarters as she begins vigorously deepthroating the stallion’s hardening member. You feel her anal ring loosen as you stroke her, and once she is focused on her task again, you press both fingers in to the second knuckle. She tenses again, her ass clamping down on your fingers and her eyes bulging wide as she tries to scream, but her throat is currently stuffed with horsemeat, so all that comes out is a choked gurgle. Just to add fuel to the fire, you reach out with your free hand and give her puffy clit a sharp tweak. A violent shiver courses through her frame, her eyes roll back in her head, and you suddenly find your face and chest splattered with her juices. You hear the stallion gasping and groaning through clenched teeth - apparently her minigasm is providing some interesting stimulation to the fuckstick still lodged in her maw.", parse);
+	Text.NL();
+	Text.Add("After a few more twitches and spasms, the mare slumps to the side in a daze, and the stallion’s cock exits her gullet with loud slurp. Fortunately, he has not quite reached his peak, so his pillar of equine cockmeat stands tall and throbbing, glistening with the mare's saliva and a bit of early precum. If your [vagDesc] ", parse);
+	if(player.FirstCock())
+		Text.Add("and [multiCockDesc] ", parse);
+	Text.Add("are any indication, the little diversion was arousing enough to make up for any momentum you lost to the equine male’s precipitous finale. Ignoring the barely-cognizant equine woman, you reach down to the remnants of the stallion's loincloth, yanking the primitive garment from his waist. You carefully slide a strip of the ragged leather behind his balls, looping it around the base of his scrotum and the pulsing shaft above it. Then, ever so gently, you cinch the loop tight and tie off the knot, effectively creating a makeshift cock-ring that should keep him hard for a more respectable duration—not to mention pinching his cumvein shut.", parse);
+	Text.NL();
+	Text.Add("The stallion's faint groan becomes a wail as his overproductive testes begin building pressure almost right away. You smirk and remind him that he must be punished for cumming before you.", parse);
+	Text.NL();
+	Text.Add("<i>“Time to pony up, stud,”</i> you tease him. <i>“Show me that you know more than one trick.”</i>", parse);
+	Text.NL();
+	Text.Add("The muscly equine can only whimper and twitch as you drag one fingertip up his hypersensitive rod. You take your time repositioning your [vagDesc] over his flat tip, enjoying the reciprocal heat that causes his cock to throb and your well-lubed slit to drip moisture down his shaft. Finally, you tire of foreplay. Without so much as a warning, you grab the equine dong and shove the first few inches inside yourself, giving yourself only a moment to adjust before sliding downward at a much quicker pace than before, until you once again have him hilted fully inside your slick honeypot.", parse);
+	Text.NL();
+	Text.Add("Bracing your hands against the stallion's broad chest, you put all your effort into thrusting your nethers against him, grinding his thick rod into every inch of your love canal until your nerves are vibrating with pleasure. Every push rams your diamond-hard clit into his tensed abs, sending a twinge of pain to mingle with your ecstasy and heighten the sensory overload.", parse);
+	Text.NL();
+	if(player.FirstCock())
+		Text.Add("Your [multiCockDesc] flail[notS] violently between your bodies, shooting spurts of pre laced with the whiteness of impending orgasm. ", parse);
+	if(player.HasBalls())
+		Text.Add("Likewise, your swollen sack jostles about uncomfortably as you ride the equine, though the other sensations are more than enough to drown out the small discomfort and allow you to truly enjoy yourself. ", parse);
+	Text.Add("You can hear him moaning with the desire to release another flood inside you. You can feel his cum factories straining against their bondage, and the blistering heat of his captive member as you use it as your personal sex toy. None of that matters. You are inching closer and closer to that marvelous crescendo; already, the tell-tale tingle is spreading throughout your lower body", parse);
+	if(player.LowerBodyType() != LowerBodyType.Single)
+		Text.Add(", making your legs feel weak and nerveless", parse);
+	Text.Add(". You refuse to let that stop you now. Gritting your teeth, you bounce on his dick like one possessed, gyrating against him as fast as you are physically capable.", parse);
+	Text.NL();
+	Text.Add("Out of reflex, the stallion bucks his hips upwards just as you happen to be descending. The slight change in angle is enough to rub the top of his shaft against a very special spot, while the extra force pushes the flared head fractionally deeper inside your aching chasm. Lightning shoots up your spine and back down to your groin, followed by an explosion of white-hot pleasure that causes every muscle in your body to contract. Your [vagDesc] clamps down on the stallion's prick with a death grip – tight enough to be painful, if his low whine is any indication – and you scream your climax to the heavens, clutching at your [breastDesc] as tremors wrack your frame from top to bottom.", parse);
+	Text.NL();
+	
+	var cum = player.OrgasmCum();
+	
+	if(player.FirstCock()) {
+		if(cum > 6) {
+			Text.Add("Your [multiCockDesc] appear[notS] to vibrate with strain as the first urethra-stretching load boils upward and outward, exploding from your tip[s] and blasting the stallion full in the face. Having broken the seal, each successive gob fires off faster than the last, coating the equine’s upper body in a thick sheen of white goo.", parse);
+			Text.NL();
+			Text.Add("The stallion tries to cry out from the stimulation assaulting his shaft, but only ends up with a mouthful of jizz for his trouble, which he is forced to swallow in order to breathe. Your emissions eventually taper off, reduced to a slow trickle that mixes with the spunk pooled on his navel. Your [vagDesc] stubbornly refuses to cease its enjoyable spasming, spurred on by the sporadic twitching of the equine’s bound cock that remains lodged firmly inside you.", parse);
+		}
+		else if(cum > 3) {
+			Text.Add("Your [multiCockDesc] fire[notS] off globs of your salty spunk all over the stallion's torso and face, some even landing in his slightly gaping mouth. You let a shaky and fumble downward to give yourself a quick tug job, drawing out a few more spurts and triggering a minigasm aftershock.", parse);
+		}
+		else {
+			Text.Add("Your [multiCockDesc] pulse[notS] with the onset of orgasm, but your contracting scrotum is simply too dried out to produce much cum. You manage a couple of pathetic squirts that barely reach the equine’s heaving pecs, followed by a thin strand that fails to gain enough momentum to detach from the head of[oneof] your tip[s], instead dripping down to briefly connect your cock to his pelvis. As if in apology for the weak display, your [vagDesc] continues pleasurably spasming around his shaft for another solid minute, spurred on by the sporadic twitching of the equine’s bound cock that remains lodged firmly inside you. ", parse);
+		}
+		Text.NL();
+	}
+	
+	Text.Add("After a few long, otherworldly moments, your body can take no more and finally relaxes. You let out a huge sigh of happiness and relief, rolling off of your mount to bask in the afterglow of your hard-earned orgasm. Your reverie is interrupted by the stallion's continued whimpering, and you turn your head to regard him with annoyance. Instead, you have to smother a giggle behind your hand. It appears your cock bondage worked a little <i>too</i> well; the equine's shaft is still rigid and twitching in the air, and his scrotum looks to be turning blue beneath the fur.", parse);
+	Text.NL();
+	Text.Add("Despite his obvious discomfiture, the stallion has managed to refrain from touching himself or loosening the tormenting tether so as not to rouse your ire. Chuckling under your breath, you pick yourself up from the ground and situate your [armor]. As a parting shot, you nudge the languid mare awake, giving her permission to release the stallion's bindings as she tries to focus on you with bleary eyes. You make your way back to the Crossroads, but cast a glance over your shoulder when you hear the mare exclaim in surprise. A smile creases your lips as you watch the equine stud’s pent-up pressure being explosively released - all over his partner’s face.", parse);
+	Text.NL();
+	Text.Add("Parting shot, indeed.", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt(enc.finalize);
+}
