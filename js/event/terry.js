@@ -6454,18 +6454,18 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 			parse["boobs"] = terry.Cup() < Terry.Breasts.Acup ? "boobs" : "nipples";
 			Text.Add("<i>”Ah!”</i> the [foxvixen] cries out as you play with [hisher] [breasts]. <i>”H-Hey, I thought you were going to do me. Not play around with my [boobs],”</i> [heshe] teases you, stifling another moan.", parse);
 			Text.NL();
-			Text.Add("All in due time, you quip back. First, you need to prime [hisher] engine, and the [breasts] sure seem to be the quickest way to get [himher] going.", parse);
+			Text.Add("All in due time, you quip back. First of all, you think some foreplay is in order. Just to get [himher] started. And [hisher] [breasts] sure seem to be the quickest way to get [himher] going.", parse);
 			Text.NL();
 			if(terry.Relation() < 30) {
 				Text.Add("The [foxvixen] doesn’t say anything, instead [heshe] continues to try and stifle [hisher] moans as you work [himher] into a soft pant.", parse);
 			}
 			else if(terry.Relation() < 60) {
-				Text.Add("<i>”Rev my engines? What’s an engine?”</i> [heshe] asks, panting softly.", parse);
+				Text.Add("<i>”Oh! Get me going, huh?”</i> [heshe] replies, panting softly.", parse);
 				Text.NL();
-				Text.Add("You chuckle and tell [himher] not to mind that; [heshe]’ll see what you meant soon enough...", parse);
+				Text.Add("You chuckle and tell [himher] that you can’t just start on [himher] without enjoying [himher] a little...", parse);
 			}
 			else {
-				Text.Add("<i>”Prime my engines? What kind of teasing remark is that? How about <b>I</b> prime <b>your</b> ‘engines’, big [boygirl],”</i> Terry huskily replies, reaching over to twist one of your [nipsDesc].", parse);
+				Text.Add("<i>”Get me going? What kind of teasing remark is that? How about <b>I</b> get <b>you</b> ‘going’, big [boygirl],”</i> Terry huskily replies, reaching over to twist one of your [nipsDesc].", parse);
 				Text.NL();
 				Text.Add("You moan in pleased surprise, body tensing at the sensation that spikes under your skin. In shock, you whisper Terry’s name, shaking your head and managing a weak laugh at how far [heshe]’s come from the sexual innocent [heshe] was.", parse);
 				Text.NL();
