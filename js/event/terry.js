@@ -6454,19 +6454,18 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 			parse["boobs"] = terry.Cup() < Terry.Breasts.Acup ? "boobs" : "nipples";
 			Text.Add("<i>”Ah!”</i> the [foxvixen] cries out as you play with [hisher] [breasts]. <i>”H-Hey, I thought you were going to do me. Not play around with my [boobs],”</i> [heshe] teases you, stifling another moan.", parse);
 			Text.NL();
-			// TODO: WEIRD
-			Text.Add("All in due time, you quip back. First, you need to prime [hisher] engine, and the [breasts] sure seem to be the quickest starter keys [heshe] has.", parse);
+			Text.Add("All in due time, you quip back. First, you need to prime [hisher] engine, and the [breasts] sure seem to be the quickest way to get [himher] going.", parse);
 			Text.NL();
 			if(terry.Relation() < 30) {
 				Text.Add("The [foxvixen] doesn’t say anything, instead [heshe] continues to try and stifle [hisher] moans as you work [himher] into a soft pant.", parse);
 			}
 			else if(terry.Relation() < 60) {
-				Text.Add("<i>”Rev my engines, huh? I guess this is one way to do it, but I kinda expected - Ah! - more from you, ”</i> [heshe] says, panting softly.", parse);
+				Text.Add("<i>”Rev my engines? What’s an engine?”</i> [heshe] asks, panting softly.", parse);
 				Text.NL();
-				Text.Add("You chuckle and gently chide [himher]; does [heshe] think you’re only going to play with [hisher] nipples?", parse);
+				Text.Add("You chuckle and tell [himher] not to mind that; [heshe]’ll see what you meant soon enough...", parse);
 			}
 			else {
-				Text.Add("<i>”Prime my engines? What about your engines, big [boygirl],”</i> Terry huskily replies, reaching over to twist one of your [nipsDesc].", parse);
+				Text.Add("<i>”Prime my engines? What kind of teasing remark is that? How about <b>I</b> prime <b>your</b> ‘engines’, big [boygirl],”</i> Terry huskily replies, reaching over to twist one of your [nipsDesc].", parse);
 				Text.NL();
 				Text.Add("You moan in pleased surprise, body tensing at the sensation that spikes under your skin. In shock, you whisper Terry’s name, shaking your head and managing a weak laugh at how far [heshe]’s come from the sexual innocent [heshe] was.", parse);
 				Text.NL();
@@ -6475,7 +6474,6 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 				Text.Add("Oh, you’ll pick up the pace alright...", parse);
 			}
 			Text.NL();
-			// TODO: END WEIRD
 			Text.Add("Abandoning Terry’s chest, your hands roam down [hisher] body, heading for [hisher] lower half.", parse);
 			Text.NL();
 			if(terry.FirstCock()) {
@@ -6520,7 +6518,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 			
 			PrintDefaultOptions();
 		}, enabled : true,
-		tooltip : Text.Parse("Show Terry just how good you are with your hands by getting [himher] all revved up.", parse)
+		tooltip : Text.Parse("Show Terry just how good you are with your hands by getting [himher] all hot and ready.", parse)
 	});
 	
 	//TODO
