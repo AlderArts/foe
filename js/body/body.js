@@ -710,10 +710,12 @@ Race = {
 	avian  : 16
 }
 */
-Body.prototype.SkinDesc = function() {
+Body.prototype.SkinDesc = function(part) {
 	var col = Color.Desc(this.torso.color);
-	switch(this.torso.race) {
+	part = part || this.torso.race;
+	switch(part) {
 		case Race.lizard:
+		case Race.snake:
 		case Race.dragon: return "a body covered with " + col + " scales";
 		
 		case Race.avian: return col + " feathers";
@@ -757,6 +759,7 @@ Body.prototype.HasScales = function() {
 	switch(this.torso.race) {
 		case Race.lizard:
 		case Race.dragon:
+		case Race.snake:
 			return true;
 		default:
 			return false;
@@ -810,6 +813,7 @@ Body.prototype.EyeDesc = function() {
 	var eyes = this.head.eyes;
 	switch(eyes.race) {
 		case Race.lizard:
+		case Race.snake:
 		case Race.dragon: return "reptilian eye";
 		
 		case Race.demon: return "demonic eye";
@@ -833,6 +837,7 @@ Body.prototype.EarDesc = function() {
 	var ears = this.head.ears;
 	switch(ears.race) {
 		case Race.lizard:
+		case Race.snake:
 		case Race.dragon: return "pointed, scaled ears";
 		
 		case Race.elf:
@@ -901,6 +906,7 @@ Body.prototype.HasLongSnout = function() {
 		case Race.lizard:
 		return true;
 		
+		case Race.snake:
 		case Race.goat:
 		case Race.sheep:
 		case Race.satyr:
@@ -1195,6 +1201,7 @@ Body.prototype.TongueDesc = function() {
 		case Race.horse: return "broad tongue";
 		
 		case Race.dragon:
+		case Race.snake:
 		case Race.lizard:
 		case Race.demon: return "forked tongue";
 		

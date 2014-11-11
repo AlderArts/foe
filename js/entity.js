@@ -1701,6 +1701,10 @@ Entity.prototype.LowerBodyType = function() {
 	else if(this.body.legs.count == 2) return LowerBodyType.Humanoid;
 	else                               return LowerBodyType.Taur;
 }
+Entity.prototype.IsNaga = function() {
+	return (this.body.legs.count < 2) &&
+		(this.body.legs.race == Race.snake); //TODO
+}
 Entity.prototype.Butt = function() {
 	return this.body.ass;
 }

@@ -7,7 +7,9 @@ PregType = {
 	Feline    : 1,
 	Equine    : 2,
 	Lagomorph : 3,
-	Lizard    : 4
+	Lizard    : 4,
+	
+	Terry     : 100
 };
 
 // Progress
