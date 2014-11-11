@@ -114,6 +114,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/royals/jeanne.js \
 	js/event/royals/golem.js \
 	js/event/room69.js \
+	js/event/poet.js \
 	js/event/nomads/chief.js \
 	js/event/nomads/patchwork.js \
 	js/event/nomads/rosalin.js \

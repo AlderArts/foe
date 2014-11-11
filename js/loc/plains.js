@@ -183,6 +183,10 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	return Scenes.Momo.MomoEnc;
 }, 1.0, function() { return momo.Wandering(); });
 
+world.loc.Plains.Crossroads.enc.AddEnc(function() {
+	return Scenes.Poet.Entry;
+}, 1.0, function() { return true; });
+
 world.loc.Plains.Crossroads.links.push(new Link(
 	"Nomads", true, true,
 	function() {
