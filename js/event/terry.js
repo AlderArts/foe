@@ -3099,9 +3099,17 @@ Scenes.Terry.SexPromptChoice = function(backPrompt) {
 	
 	var cocksInAss = player.CocksThatFit(terry.Butt());
 	
-	//[name]
 	var options = new Array();
-	options.push({ nameStr : "Pitch Anal",
+	if(terry.FirstVag()) {
+		var cocksInVag = player.CocksThatFit(terry.FirstVag());
+		options.push({ nameStr : "Pitch vaginal",
+			func : function() {
+				Scenes.Terry.SexPitchVaginal(cocksInVag);
+			}, enabled : cocksInVag.length > 0,
+			tooltip : Text.Parse("You went to the trouble of growing Terry a vagina, so let’s go ahead and use it.", parse)
+		});
+	}
+	options.push({ nameStr : "Pitch anal",
 		func : function() {
 			Scenes.Terry.SexPitchAnal(cocksInAss);
 		}, enabled : cocksInAss.length > 0,
@@ -6286,11 +6294,6 @@ Scenes.Terry.FuckedByBunnyMob = function(male, parse) {
 	var cum = terry.OrgasmCum();
 }
 
-/* TODO
- *  * Pitch Vaginal
-Flavor Text: You went to the trouble of growing Terry a vagina, so let’s go ahead and use it.
-
- */
 Scenes.Terry.SexPitchVaginal = function(cocks) {
 	var p1cock  = player.BiggestCock(cocks);
 	var strapon = p1cock.isStrapon;
