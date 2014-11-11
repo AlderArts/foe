@@ -4206,7 +4206,7 @@ Scenes.Terry.JeanneTFCraft = function(item, scene, horseTF) {
 		boygirl    : terry.mfPronoun("boy", "girl"),
 		boygirl2   : player.mfTrue("boy", "girl"),
 		armorDesc  : function() { return terry.ArmorDesc(); },
-		terrycock  : function() { return terry.multiCockDesc(); },
+		terrycock  : function() { return terry.MultiCockDesc(); },
 		terrypussy : function() { return terry.FirstVag().Short(); }
 	};
 	parse = terry.ParserPronouns(parse);
