@@ -1639,6 +1639,7 @@ Scenes.Lizards.LossMaleVagVariations = function() {
 		Text.Newline();
 		
 		player.FuckAnal(player.Butt(), enc.male.FirstCock(), 2);
+		Sex.Anal(enc.male, player);
 		
 		player.AddLustFraction(-0.05);
 		
@@ -1664,6 +1665,7 @@ Scenes.Lizards.LossMaleVagVariations = function() {
 			Text.Newline();
 			
 			player.FuckVag(player.FirstVag(), enc.male.FirstCock(), 2);
+			Sex.Vaginal(enc.male, player);
 			
 			if(player.body.Gender() == Gender.herm) {
 				Text.AddOutput("The way that his twin dicks both slide sloppily into your body, each throb making them squeeze together inside of you quickly sends your own [numCocks] pulsing to life. [m1Name] just smirks, letting out a grunt as he steadily begins to hump.", parse);
@@ -1701,7 +1703,7 @@ Scenes.Lizards.LossMaleVagVariations = function() {
 		
 		var virgin = player.FirstVag().virgin;
 		player.FuckVag(player.FirstVag(), enc.male.FirstCock(), 3);
-		
+		Sex.Vaginal(enc.male, player);
 		
 		if(player.FirstVag().capacity.Get() > 30) {
 			Text.AddOutput("It feels just right, the pair sliding easily into your [vagDesc]. The lizard gives out a groan and grinds more steadily into you, forcing just an extra inch of each into your body. It leaves your loose, sloppy cunt clenching tightly and leaves your body aching even more.", parse);
@@ -1880,6 +1882,7 @@ Scenes.Lizards.LossMaleCockVariations = function() {
 				Text.Newline();
 				
 				player.FuckOral(player.Mouth(), enc.male.FirstCock(), 2);
+				Sex.Blowjob(enc.male, player);
 				
 				Text.AddOutput("The side of your face feels wet with his slick fluids. You swallow reflexively, and it elicits a soft moan from him. The noise sends a thrill through your body, abashed as it is. He steps forwards, straddling your face and beginning to slowly, steadily hump your mouth. You kneel there, letting the reptile abuse your mouth freely, his scaled groin taking up your entire vision.", parse);
 				Text.Newline();
@@ -1927,6 +1930,7 @@ Scenes.Lizards.LossMaleCockVariations = function() {
 				Text.Newline();
 				
 				player.FuckOral(player.Mouth(), enc.male.FirstCock(), 1);
+				Sex.Blowjob(enc.male, player);
 				
 				var scenes2 = new EncounterTable();
 				scenes2.AddEnc(function() {
@@ -1998,6 +2002,7 @@ Scenes.Lizards.LossMaleCockVariations = function() {
 			var virgin = enc.male.Butt().virgin;
 			player.Fuck(player.FirstCock(), virgin ? 5 : 3);
 			enc.male.FuckAnal(enc.male.Butt(), player.FirstCock());
+			Sex.Anal(player, enc.male);
 			
 			if(virgin)
 				Text.AddOutput("<i>“Ahhh...”</i> he hisses, slightly pained. <i>“That it would feel so good, I had no idea...”</i>", parse);
@@ -2037,6 +2042,7 @@ Scenes.Lizards.LossMaleCockVariations = function() {
 			Text.Newline();
 			
 			player.FuckAnal(player.Butt(), enc.male.FirstCock(), 3);
+			Sex.Anal(enc.male, player);
 			
 			Text.AddOutput("Spots burst in front of your eyes, and you find yourself clutching weakly at the air as your [anusDesc] adjusts to his aching size. A deep, satisfied rumble sounds from his throat, and his hands squeeze your rump cheeks, kneading them like dough. He draws his hips back, the pulsing flesh of his cock surprisingly hotter than the rest of his body. You feel it slide slickly out of your sphincter, before he bucks his hips forward again. Once more you feel a warm, heavy pressure fill your [anusDesc], and he grunts. <i>“Oh yeah... You feel so good... I'm gonna do this <b>every</b> time...”</i>", parse);
 			Text.Newline();
@@ -2129,6 +2135,7 @@ Scenes.Lizards.LossFemale = function() {
 		Text.Newline();
 		Text.AddOutput("You feel yourself licking softly at her slit, your [tongueDesc] sliding up against her, tasting her outer folds. Sinking deeper, you press your tongue harder against her body, and feel it slip between her moistening folds. As your wet, slick tongue slithers into her [m1vagDesc], [m1name] gives a soft moan and grinds her pussy into your mouth. Encouraged by her response, you let your tongue sink deeper into her, feeling her walls contract and squeeze down around you.", parse);
 		
+		Sex.Cunnilingus(player, enc.female);
 		player.FuckOral(player.Mouth(), enc.female.FirstVag(), 2);
 		
 		Gui.NextPrompt(function() {
@@ -2246,6 +2253,7 @@ Scenes.Lizards.LossFemale = function() {
 		}
 		Text.Newline();
 		var virgin = enc.female.FirstVag().virgin;
+		Sex.Vaginal(player, enc.female);
 		player.Fuck(player.FirstCock(), virgin ? 5 : 3);
 		enc.female.FuckVag(enc.female.FirstVag(), player.FirstCock());
 		
