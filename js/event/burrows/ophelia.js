@@ -994,6 +994,8 @@ Scenes.Ophelia.Reward = function() {
 					Text.Add("You agree to look for the estranged rabbit and the scepter he may or may not carry. Ophelia looks desperately hopeful, as this is possibly her last strand of hope.", parse);
 					Text.Flush();
 					
+					party.location = world.loc.Burrows.Lab;
+					
 					Gui.NextPrompt();
 				});
 			});
