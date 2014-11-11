@@ -6298,20 +6298,6 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 	var p1cock  = player.BiggestCock(cocks);
 	var strapon = p1cock.isStrapon;
 	
-	var p2cock;
-	if(player.NumCocks() > 1) {
-		var allCocks = player.AllCocksCopy();
-		for(var i = 0; i < allCocks.length; i++) {
-			if(allCocks[i] == p1cock) {
-				allCocks.remove(i);
-				break;
-			}
-		}
-		p2cock = player.BiggestCock(allCocks);
-		
-		parse["multiCockDesc2"] = player.MultiCockDesc(allCocks);
-	}
-	
 	var parse = {
 		playername : player.name,
 		master : player.mfTrue("master", "mistress"),
@@ -6335,6 +6321,21 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 		tanusDesc : function() { return terry.Butt().AnalShort(); },
 		boygirl : player.mfTrue("boy", "girl")
 	};
+	
+	var p2cock;
+	if(player.NumCocks() > 1) {
+		var allCocks = player.AllCocksCopy();
+		for(var i = 0; i < allCocks.length; i++) {
+			if(allCocks[i] == p1cock) {
+				allCocks.remove(i);
+				break;
+			}
+		}
+		p2cock = player.BiggestCock(allCocks);
+		
+		parse["multiCockDesc2"] = player.MultiCockDesc(allCocks);
+	}
+	
 	
 	parse = terry.ParserPronouns(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
