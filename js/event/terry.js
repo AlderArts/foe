@@ -368,7 +368,7 @@ Scenes.Terry.Appearance = function() {
 		hishers : terry.hishers(),
 		trueGender : Gender.Desc(terry.Gender()),
 		tbreastsDesc : function() { return terry.FirstBreastRow().Short(); },
-		tcockDesc : function() { return terry.multiCockDesc(); }
+		tcockDesc : function() { return terry.MultiCockDesc(); }
 	};
 	
 	Text.Clear();
@@ -1625,7 +1625,7 @@ Scenes.Terry.TalkPronoun = function() {
 			return desc.cup + "s";
 		},
 		foxvixen : terry.mfPronoun("fox", "vixen"),
-		cock : function() { return terry.multiCockDesc(); },
+		cock    : function() { return terry.MultiCockDesc(); },
 		HeShe   : function() { return terry.HeShe(); },
 		heshe   : function() { return terry.heshe(); },
 		HisHer  : function() { return terry.HisHer(); },
@@ -2378,7 +2378,7 @@ Scenes.Terry.BrushTail = function() {
 		tarmorDesc     : function() { return terry.ArmorDesc(); },
 		tlowerArmor    : function() { return terry.LowerArmorDesc(); },
 		tbreastsDesc   : function() { return terry.FirstBreastRow().Short(); },
-		tcockDesc      : function() { return terry.multiCockDesc(); },
+		tcockDesc      : function() { return terry.MultiCockDesc(); },
 		bellydesc      : function() { return terry.StomachDesc(); },
 		skinDesc       : function() { return player.SkinDesc(); },
 		playername : player.name
@@ -2760,7 +2760,7 @@ Scenes.Terry.CheckFluids = function() {
 		topArmorDesc   : function() { return terry.ArmorDesc(); },
 		lowerArmorDesc : function() { return terry.LowerArmorDesc(); },
 		tbreastsDesc   : function() { return terry.FirstBreastRow().Short(); },
-		tcockDesc      : function() { return terry.multiCockDesc(); },
+		tcockDesc      : function() { return terry.MultiCockDesc(); },
 		bellydesc      : function() { return terry.StomachDesc(); },
 		playername : player.name
 	};
@@ -3156,7 +3156,7 @@ Scenes.Terry.SexPitchAnal = function(cocksInAss) {
 		playername : player.name,
 		armorDesc : function() { return player.ArmorDesc(); },
 		tongueDesc : function() { return player.TongueDesc(); },
-		multiCockDesc : function() { return p1Cock.isStrapon ? p1Cock.Short() : player.multiCockDesc(); },
+		multiCockDesc : function() { return p1Cock.isStrapon ? p1Cock.Short() : player.MultiCockDesc(); },
 		cockDesc : function() { return p1Cock.Short(); },
 		earsDesc : function() { return player.EarDesc(); },
 		legsDesc : function() { return player.LegsDesc(); },
@@ -3755,7 +3755,7 @@ Scenes.Terry.SexFuckButtEntrypoint = function(p1Cock, promise, retFunc) {
 		playername : player.name,
 		armorDesc : function() { return player.ArmorDesc(); },
 		tongueDesc : function() { return player.TongueDesc(); },
-		multiCockDesc : function() { return p1Cock.isStrapon ? p1Cock.Short() : player.multiCockDesc(); },
+		multiCockDesc : function() { return p1Cock.isStrapon ? p1Cock.Short() : player.MultiCockDesc(); },
 		cockDesc : function() { return p1Cock.Short(); },
 		cockTip  : function() { return p1Cock.TipShort(); },
 		ballsDesc : function() { return player.BallsDesc(); },
@@ -4386,7 +4386,7 @@ Scenes.Terry.JeanneTFCraft = function(item, scene, horseTF) {
 			var cocksInAss = player.CocksThatFit(terry.Butt());
 			var p1Cock     = player.BiggestCock(cocksInAss);
 			
-			parse["multiCockDesc"] = function() { return player.multiCockDesc(); }
+			parse["multiCockDesc"] = function() { return player.MultiCockDesc(); }
 			parse["cockDesc"]      = function() { return p1Cock.Short(); }
 				
 			if(p1Cock) {
@@ -4522,7 +4522,7 @@ Scenes.Terry.JeanneTFGrowBoobs = function() {
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
-		terrycock  : function() { return terry.multiCockDesc(); }
+		terrycock  : function() { return terry.MultiCockDesc(); }
 	};
 	parse = terry.ParserPronouns(parse);
 	
@@ -4790,7 +4790,7 @@ Scenes.Terry.JeanneTFGrowVag = function() {
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
-		tcockDesc  : function() { return terry.multiCockDesc(); },
+		tcockDesc  : function() { return terry.MultiCockDesc(); },
 		hand       : function() { return terry.HandDesc(); }
 	};
 	parse = terry.ParserPronouns(parse);
@@ -4832,7 +4832,7 @@ Scenes.Terry.JeanneTFRemVag = function() {
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
-		tcockDesc  : function() { return terry.multiCockDesc(); },
+		tcockDesc  : function() { return terry.MultiCockDesc(); },
 		horse      : terry.HorseCock() ? "horse" : ""
 	};
 	parse = terry.ParserPronouns(parse);
@@ -4891,7 +4891,7 @@ Scenes.Terry.JeanneTFHorsegasmEntrypoint = function() {
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
-		tcockDesc  : function() { return terry.multiCockDesc(); },
+		tcockDesc  : function() { return terry.MultiCockDesc(); },
 		tbreastsDesc : function() { return terry.FirstBreastRow().Short(); }
 		
 	};
@@ -4913,7 +4913,7 @@ Scenes.Terry.JeanneTFGrowCock = function() {
 	var parse = {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
-		tcockDesc  : function() { return terry.multiCockDesc(); }
+		tcockDesc  : function() { return terry.MultiCockDesc(); }
 	};
 	parse = terry.ParserPronouns(parse);
 	
@@ -5142,7 +5142,7 @@ Scenes.Terry.SexWorship = function() {
 		tongueDesc : function() { return player.TongueDesc(); },
 		breastsDesc : function() { return player.FirstBreastRow().Short(); },
 		tbreastsDesc : function() { return terry.FirstBreastRow().Short(); },
-		multiCockDesc : function() { return player.multiCockDesc(); },
+		multiCockDesc : function() { return player.MultiCockDesc(); },
 		buttDesc : function() { return player.Butt().Short(); },
 		anusDesc : function() { return player.Butt().AnalShort(); },
 		skinDesc : function() { return player.SkinDesc(); },
@@ -5693,7 +5693,7 @@ Scenes.Terry.PCCleansTerry = function(func, opts) {
 		breastsDesc : function() { return player.FirstBreastRow().Short(); },
 		nipplesDesc : function() { return player.FirstBreastRow().NipsShort(); },
 		nippleDesc : function() { return player.FirstBreastRow().NipShort(); },
-		multiCockDesc : function() { return player.multiCockDesc(); },
+		multiCockDesc : function() { return player.MultiCockDesc(); },
 		cockDesc : function() { return player.BiggestCock().Short(); },
 		vagDesc : function() { return player.FirstVag().Short(); },
 		clitDesc : function() { return player.FirstVag().ClitShort(); },
@@ -5863,7 +5863,7 @@ Scenes.Terry.TerryCleansPC = function(func, opts) {
 		breastsDesc : function() { return player.FirstBreastRow().Short(); },
 		nipplesDesc : function() { return player.FirstBreastRow().NipsShort(); },
 		nippleDesc : function() { return player.FirstBreastRow().NipShort(); },
-		multiCockDesc : function() { return player.multiCockDesc(); },
+		multiCockDesc : function() { return player.MultiCockDesc(); },
 		cockDesc : function() { return player.BiggestCock().Short(); },
 		vagDesc : function() { return player.FirstVag().Short(); },
 		clitDesc : function() { return player.FirstVag().ClitShort(); },
