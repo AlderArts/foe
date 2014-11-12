@@ -150,6 +150,9 @@ Intro.ImpsWinUseMale = function() {
 			Text.Newline();
 			Text.AddOutput("You give the aroused imp a slight snicker, leaving him to his own devices.");
 			
+			Sex.Blowjob(imp, player);
+			
+			
 			Gui.NextPrompt(Intro.DemonGift);
 		}, enabled : true,
 		tooltip : "Let him show off his cock sucking skills."
@@ -170,6 +173,8 @@ Intro.ImpsWinUseMale = function() {
 			Text.Newline();
 			Text.AddOutput("Spent, you pull out of your cum-dump, only to find that the imp has passed out. Shrugging, you leave it where it is, wheezing and leaking cum.");
 			
+			Sex.Blowjob(imp, player);
+			
 			Gui.NextPrompt(Intro.DemonGift);
 		}, enabled : true,
 		tooltip : "Fuck being gentle, you are almost there!"
@@ -185,6 +190,7 @@ Intro.ImpsWinUseMale = function() {
 			Text.Newline();
 			
 			//imp.FuckAnal(imp.Butt(), player.FirstCock());
+			Sex.Anal(player, imp);
 			
 			Text.AddOutput("Before long, you bottom out");
 			if(player.FirstCock().length.Get() >= 15)
@@ -236,6 +242,8 @@ Intro.ImpsWinUseFemale = function() {
 			Text.AddOutput("Both of you come simultaneously, salty semen lathering your tongue as you ride out your own trembling orgasm. When your legs have finished shaking, you get up, wiping the remains of the imp's ejaculate from your lips.", parse);
 			
 			player.Fuck(player.FirstCock());
+			Sex.Blowjob(player, imp);
+			
 			Gui.NextPrompt(Intro.DemonGift);
 		}, enabled : true,
 		tooltip : "Your legs are getting a bit wobbly, and you realize it would be much comfier to straddle the imp's face, and maybe give him a blowjob while you are at it."
@@ -272,6 +280,7 @@ Intro.ImpsWinUseFemale = function() {
 			Text.Newline();
 			
 			player.FuckAnal(player.Butt(), imp.FirstCock());
+			Sex.Anal(imp, player);
 			
 			Text.AddOutput("Being fucked by the imp is like having an erratic rabbit humping you, no finesse or care, just pure bestial rutting. He probably will not last long at this pace, and you wonder if you are even going to get off at this rate. Without any lubricant, your stretched ass is a flare of pain, ", parse);
 			if(player.Butt().capacity.Get() > 30)
@@ -350,6 +359,7 @@ Intro.ImpsWinRideEntrypoint = function() {
 	Text.Newline();
 	
 	player.FuckAnal(player.Butt(), imp.FirstCock());
+	Sex.Anal(imp, player);
 	
 	Text.AddOutput("<i>“Why you little-”</i> you pull yourself off the panting imp, but something makes you lose your footing, causing you to fall on your butt. This, in turn, fills said butt with several inches of imp cock. Once you have regained your composure, you find that you are now comfortable taking his cock this way. Might as well make the best of it.", parse);
 	Text.Newline();
@@ -403,6 +413,7 @@ Intro.ImpsWinGroup = function() {
 		Text.Newline();
 		
 		//imp.FuckAnal(imp.Butt(), player.FirstCock());
+		Sex.Anal(player, imp);
 	}
 	else // female
 	{
@@ -414,6 +425,7 @@ Intro.ImpsWinGroup = function() {
 		Text.Newline();
 	}
 	player.FuckAnal(player.Butt(), imp.FirstCock(), 3);
+	Sex.Anal(imp, player);
 	
 	Text.AddOutput("The writhing mass of flesh soon gets more additions, as you find additional imps closing in around you - surely they were not this many? - one taking position in front of you, presenting you with [another] cock to suck. Two more gather on your sides, and you grab their cocks, stroking them furiously.", parse);
 	Text.Newline();
@@ -509,6 +521,7 @@ Intro.ImpsLossOral = function() {
 	Text.AddOutput("<i>“You are pretty good for a slut!”</i> one of the imps praises you, <i>“Come back later and we'll fuck ya good!”</i> Wiping the sticky fluids from your skin and hair, you gather up your possessions.", parse);
 	
 	player.FuckOral(player.Mouth(), imp.FirstCock());
+	Sex.Blowjob(player, imp);
 	
 	Gui.NextPrompt(Intro.DemonGift);
 }
@@ -531,6 +544,7 @@ Intro.ImpsLossFucked = function() {
 	Text.AddOutput("<i>“I... I want you to fuck me!”</i> you can hardly believe that you uttered the words yourself, but the imps are more than happy to oblige. You are quickly pushed down on all fours, held down by two imps while a third on mounts you from behind. Your request is quickly filled as the imp roughly shoves his entire length inside your [anusDesc] and begins to rut wildly.", parse);
 	Text.Newline();
 	player.FuckAnal(player.Butt(), imp.FirstCock());
+	Sex.Anal(imp, player);
 	
 	if(player.FirstCock())
 		Text.AddOutput("<i>“Why ya have that pitiful little thing?”</i> the imp teases your [cockDesc] between his thrusts, <i>“Not like you ever gonna use it, here!”</i>", parse);
@@ -559,6 +573,7 @@ Intro.ImpsLossFucked = function() {
 	imp.FirstCock().length.base = 40;
 	imp.FirstCock().thickness.base = 8;
 	player.FuckAnal(player.Butt(), imp.FirstCock());
+	Sex.Anal(imp, player);
 	
 	Text.AddOutput("Finally, you can take no more and black out, still being fucked by the frenzied imps.", parse);
 	Text.Newline();
