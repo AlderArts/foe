@@ -502,7 +502,7 @@ Scenes.Terry.Appearance = function() {
 			Text.Add("It’s a lot more sensitive than [hisher] old fox-prick, and [heshe] can get going with just a little attention there. Despite the new form, it hasn’t entirely changed from before; [heshe] still has a knot at the base of [hisher] cock, though it’s much bigger than it used to be. [HisHer] balls have practically doubled in size, heavy with churning loads of cum. Sometimes you wonder if it’s even possible for the [foxvixen] to run dry...", parse);
 		}
 		else
-			Text.Add("Between [hisher] thighs lies [hisher] dainty little vulpine dick. When fully erect, it’s a girlish red piece of meat, four inches long and an inch thick. Below it lies a pair of pretty little trappy-balls that cling closely to [hisher] crotch. It’s no surprise that [heshe] can disguise [himher]self as a normal woman so easily. Even when it’s fully erect, it looks too cute to be on a guy.", parse);
+			Text.Add("Between [hisher] thighs lies [hisher] dainty little vulpine dick. When fully erect, it’s a below-average red piece of meat, four inches long and an inch thick. Below it lies a pair of pretty little trappy-balls that cling closely to [hisher] crotch. It’s no surprise that [heshe] can disguise [himher]self as a normal woman so easily. Even when it’s fully erect, it looks too cute to be on a guy.", parse);
 		Text.NL();
 	}
 	if(terry.FirstVag()) {
@@ -7080,7 +7080,8 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 						father : player,
 						type   : PregType.Terry,
 						num    : 1,
-						time   : 24
+						time   : 24,
+						load   : cum
 					});
 					
 					if(p1cock.knot != 0) {
@@ -7479,7 +7480,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 						type   : PregType.Terry,
 						num    : 1,
 						time   : 24,
-						load   : 9
+						load   : cum * 3
 					});
 					
 					
