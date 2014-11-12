@@ -6306,6 +6306,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 		armorDesc : function() { return player.ArmorDesc(); },
 		skinDesc : function() { return player.SkinDesc(); },
 		legsDesc : function() { return player.LegsDesc(); },
+		hipsDesc : function() { return player.HipsDesc(); },
 		thighsDesc : function() { return player.ThighsDesc(); },
 		tongueDesc : function() { return player.TongueDesc(); },
 		breastsDesc : function() { return player.FirstBreastRow().Short(); },
@@ -6315,10 +6316,12 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 		vagDesc : function() { return player.FirstVag().Short(); },
 		clitDesc : function() { return player.FirstVag().ClitShort(); },
 		nipsDesc : function() { return player.FirstBreastRow().NipsShort(); },
+		buttDesc : function() { return player.Butt().Short(); },
 		tcockDesc : function() { return terry.FirstCock().Short(); },
 		tcockHeadDesc : function() { return terry.FirstCock().TipShort(); },
 		tvagDesc  : function() { return terry.FirstVag().Short(); },
 		tanusDesc : function() { return terry.Butt().AnalShort(); },
+		tbreastsDesc : function() { return terry.FirstBreastRow().Short(); },
 		boygirl : player.mfTrue("boy", "girl")
 	};
 	
@@ -6731,7 +6734,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 								Text.NL();
 								Text.Add("Well, that was the whole point... You show [himher] no mercy, swallowing Terry’s [fox]hood as deeply as you possibly can without taking [hisher] knot. As you do so, your fingers thrust themselves decisively into each of [hisher] holes.", parse);
 								Text.NL();
-								Text.Add("The [foxvixen] lets out a yipping cry of equal parts shock and pleasure, [hisher] pussy and ass clamping roughly down on your intruding fingers and a shudder visibly rippling through [hisher body as [heshe] comes.", parse);
+								Text.Add("The [foxvixen] lets out a yipping cry of equal parts shock and pleasure, [hisher] pussy and ass clamping roughly down on your intruding fingers and a shudder visibly rippling through [hisher] body as [heshe] comes.", parse);
 								Text.NL();
 								if(terry.HorseCock())
 									Text.Add("Thick gouts of hot seed relentlessly pummels your throat with jet after jet of copious fox-cum. [HisHer] knotty horse-cock does a good job of plugging your mouth as it throbs. Even so, you’re no novice at this, and you manage to swallow just as fast as [heshe]’s can pump out jism.", parse);
@@ -6819,7 +6822,8 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 		Text.NL();
 		Text.Add("<i>”Mmnf,”</i> is your muffled reply.", parse);
 		Text.NL();
-		Text.Add("Judging the toy suitably wet, you gently but insistently pry it from Terry’s mouth. [Struggling a little to get it out as Terry playfully insists on keeping [hisher] lips closed.] Brandishing it with a flourish of your wrist, you place it against the nape of [hisher] neck and slowly trail it down [hisher] body.", parse);
+		parse["slut"] = terry.Slut() >= 60 ? Text.Parse(" Struggling a little to get it out as Terry playfully insists on keeping [hisher] lips closed.", parse) : "";
+		Text.Add("Judging the toy suitably wet, you gently but insistently pry it from Terry’s mouth.[slut] Brandishing it with a flourish of your wrist, you place it against the nape of [hisher] neck and slowly trail it down [hisher] body.", parse);
 		Text.NL();
 		Text.Add("The [foxvixen] shudders as the tip of the [toyDesc] tickles [hisher] fur.", parse);
 		Text.NL();
@@ -6877,7 +6881,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 		Text.NL();
 		Text.Add("Taking a step or two back, you sit down, curling your [legsDesc] to expose your [multiCockDesc] and make a seat out of your lap. Smiling, you invite Terry to sit down, so you can give [himher] what [heshe]’s craving.", parse);
 		Text.NL();
-		Text.Add("Terry quickly moves to straddle you, letting[one of] your [multiCockDesc] rub against [hisher] wet [tvagDesc] as [heshe] slides into place. <i>”Ahn!”</i> [heshe] cries out cutely as [heshe] finally settles into your lap.", parse);
+		Text.Add("Terry quickly moves to straddle you, letting[oneof] your [multiCockDesc] rub against [hisher] wet [tvagDesc] as [heshe] slides into place. <i>”Ahn!”</i> [heshe] cries out cutely as [heshe] finally settles into your lap.", parse);
 		Text.NL();
 		Text.Add("You chuckle; if [heshe]’s that hot now, you can’t wait to see how [heshe] reacts when you start going for real...", parse);
 		Text.Flush();
