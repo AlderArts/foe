@@ -7790,7 +7790,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 					Text.Add("<i>”Love, you look absolutely gorgeous covered in my seed. Plus I love the fact that I marked you as mine,”</i> [heshe] chuckles at [hisher] own teasing. <i>”But I know dry cum can be a bitch to clean up, so do you want me to help you clean you up?”</i>", parse);
 				Text.Flush();
 				
-				Scenes.Terry.PCCleansTerry();
+				Scenes.Terry.TerryCleansPC();
 			}
 			else {
 				Text.Add("Though I’d appreciate it if you didn’t try to drown me next time,” [heshe] adds jokingly.", parse);
