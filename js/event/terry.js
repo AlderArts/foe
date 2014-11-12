@@ -7741,7 +7741,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 			else
 				Text.Add("You gasp out to Terry that you’re also close, fingers tightening without thinking around [hisher] cock. You wriggle in anticipation, then mash your pussy back down against [hisher] lips, exhorting [himher] to keep licking even as you resume jerking and plumbing [himher].", parse);
 			Text.NL();
-			Text.Add("<i>“Cumming!”</i> Terry cries out, bucking one last time as [hisher] [tvagDesc] clamps down on the [toyDesc], holding it in place as a squirt of feminine fluids escape the seal of the [toyDesc], nearly knocking it out of [hisher] pussy.", parse);
+			Text.Add("<i>“Cumming!”</i> Terry cries out, bucking one last time as [hisher] [tvagDesc] clamps down on the [cockDesc], holding it in place as a squirt of feminine fluids escape the seal of the [cockDesc], nearly knocking it out of [hisher] pussy.", parse);
 			Text.NL();
 			if(terry.HorseCock()) {
 				if(blowjob >= TerryBlowjob.Yes) {
@@ -7787,7 +7787,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 				else if(terry.Relation() < 60)
 					Text.Add("<i>“Hey, before I go. Want some help cleaning up?”</i>", parse);
 				else
-					Text.Add("<i>“Love, you look absolutely gorgeous covered in my seed. Plus I love the fact that I marked you as mine,”</i> [heshe] chuckles at [hisher] own teasing. <i>“But I know dry cum can be a bitch to clean up, so do you want me to help you clean you up?”</i>", parse);
+					Text.Add("<i>“Love, you look absolutely gorgeous covered in my seed. Plus I love the fact that I marked you as mine,”</i> [heshe] chuckles at [hisher] own teasing. <i>“But I know dry cum can be a bitch to clean up, so do you want me to help you?”</i>", parse);
 				Text.Flush();
 				
 				Scenes.Terry.TerryCleansPC();
@@ -7799,10 +7799,10 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 				Text.NL();
 				Text.Add("The [foxvixen] chuckles at your comeback, but otherwise doesn’t say anything. Eventually Terry gets back on [hisher] feet and offers you a helping hand.", parse);
 				Text.NL();
-				Text.Add("You eagerly reach out for it and allow the [foxvixen] to help you back upright again. Stretching a few kinks out of your joints; you smirk and playfully ask if Terry wouldn’t mind giving you back your [toyDesc].", parse);
+				Text.Add("You eagerly reach out for it and allow the [foxvixen] to help you back upright again. Stretching a few kinks out of your joints; you smirk and playfully ask if Terry wouldn’t mind giving you back your [cockDesc].", parse);
 				Text.NL();
 				if(terry.Relation() < 45) {
-					Text.Add("<i>“Huh? Oh right, sorry,”</i> the flustered [foxvixen] says, reaching between [hisher] legs to pull your [toyDesc] with a groan. <i>“Here you go… perv.”</i>", parse);
+					Text.Add("<i>“Huh? Oh right, sorry,”</i> the flustered [foxvixen] says, reaching between [hisher] legs to pull your [cockDesc] with a groan. <i>“Here you go… perv.”</i>", parse);
 					Text.NL();
 					Text.Add("[HeShe] was almost about to walk off with it, and <b>you’re</b> the perv? Even as you say this, you grin and collect the toy off of [himher].", parse);
 					Text.NL();
@@ -7815,7 +7815,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 					Text.NL();
 					Text.Add("<i>“You put it there, you take it out,”</i> [heshe] replies with a wink, spreading [hisher] legs to give you access.", parse);
 					Text.NL();
-					Text.Add("You chuckle, but step forward, hand reaching out to grab your [toyDesc] by its base and slowly pull it free. You hold it up, pointedly watching it drip a bead of Terry’s female cum, and smirk knowingly at your vulpine lover before lowering it again.", parse);
+					Text.Add("You chuckle, but step forward, hand reaching out to grab your [cockDesc] by its base and slowly pull it free. You hold it up, pointedly watching it drip a bead of Terry’s female cum, and smirk knowingly at your vulpine lover before lowering it again.", parse);
 					Text.NL();
 					Text.Add("Terry playfully shows you [hisher] tongue, moving to fetch [hisher] gear.", parse);
 				}
