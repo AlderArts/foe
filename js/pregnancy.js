@@ -8,6 +8,7 @@ PregType = {
 	Equine    : 2,
 	Lagomorph : 3,
 	Lizard    : 4,
+	Naga      : 5,
 	
 	Terry     : 100
 };

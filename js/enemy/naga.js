@@ -90,6 +90,18 @@ Naga.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
+Scenes.Naga.Impregnate = function(mother, father) {
+	mother.PregHandler().Impregnate({
+		slot   : PregnancyHandler.Slot.Vag,
+		mother : mother,
+		father : father,
+		type   : PregType.Naga,
+		num    : 1,
+		time   : 24,
+		load   : 3
+	});
+}
+
 Scenes.Naga.LoneEnc = function() {
 	var enemy = new Party();
 	var enc = new Encounter(enemy);
@@ -337,6 +349,9 @@ Scenes.Naga.DesertLossGetDPd = function(enc) {
 	Text.NL();
 	Text.Add("As you begin to feel the warmth of her cum pumping into you, your already feverish orgasm doubles in intensity, and you let out another scream, muffled by the tail that’s been throat-fucking you. Unable to move or speak as you’re pumped full of cum from both your [vagDesc] and [anusDesc], you lose yourself to the satisfaction. You can barely breathe around the snake’s tail, but somehow the sensation of your belly slightly inflating is comforting.", parse);
 	Text.NL();
+	
+	Scenes.Naga.Impregnate(player, naga);
+	
 	if(player.FirstCock()) {
 		parse["cum"] = cum > 6 ? "torrents" :
 		               cum > 3 ? "bursts" : "streams";
