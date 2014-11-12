@@ -112,6 +112,17 @@ Lizard.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
+Scenes.Lizards.Impregnate = function(mother, father) {
+	mother.PregHandler().Impregnate({
+		slot   : PregnancyHandler.Slot.Vag,
+		mother : mother,
+		father : father,
+		type   : PregType.Lizard,
+		num    : 1,
+		time   : 16
+	});
+}
+
 Scenes.Lizards.GroupEnc = function() {
  	var enemy    = new Party();
  	var male     = new Lizard(Gender.male);
@@ -878,15 +889,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 							player.FuckVag(player.FirstVag(), enemy.FirstCock(), 4);
 							Sex.Vaginal(enemy, player);
 							
-							// TODO
-							player.PregHandler().Impregnate({
-								slot   : PregnancyHandler.Slot.Vag,
-								mother : player,
-								father : enemy,
-								type   : PregType.Lizard,
-								num    : 1,
-								time   : 16
-							});
+							Scenes.Lizards.Impregnate(player, enemy);
 							
 							Text.Flush();
 							
@@ -1409,15 +1412,7 @@ Scenes.Lizards.WinPowerbottomDeny = function(enc) {
 	player.FuckVag(player.FirstVag(), enemy.FirstCock(), 3);
 	Sex.Vaginal(enemy, player);
 	
-	// TODO
-	player.PregHandler().Impregnate({
-		slot   : PregnancyHandler.Slot.Vag,
-		mother : player,
-		father : enemy,
-		type   : PregType.Lizard,
-		num    : 1,
-		time   : 16
-	});
+	Scenes.Lizards.Impregnate(player, enemy);
 	
 	Text.Flush();
 							

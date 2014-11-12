@@ -257,6 +257,17 @@ LagomorphWizard.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
+Scenes.Lagomorph.Impregnate = function(mother, father) {
+	mother.PregHandler().Impregnate({
+		slot   : PregnancyHandler.Slot.Vag,
+		mother : mother,
+		father : father,
+		type   : PregType.Lagomorph,
+		num    : 4,
+		time   : 20
+	});
+}
+
 Scenes.Lagomorph.GroupEnc = function() {
 	var enemy = new Party();
 	var enc = new Encounter(enemy);
@@ -1178,15 +1189,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 		player.FuckVag(player.FirstVag(), male.FirstCock(), 3);
 		male.Fuck(male.FirstCock(), 3);
 		
-		// TODO
-		player.PregHandler().Impregnate({
-			slot   : PregnancyHandler.Slot.Vag,
-			mother : player,
-			father : male,
-			type   : PregType.Lagomorph,
-			num    : 4,
-			time   : 20
-		});
+		Scenes.Lagomorph.Impregnate(player, male);
 		
 		Text.Add("Smiling to yourself, you wave one of the others over, instructing him to get down on all fours in front of you, dick poised over his brother’s maw. You give the offered bunny-butt a familiar squeeze, caressing his soft fur as your [hand] creeps its way closer to his loosened rosebud.", parse);
 		Text.NL();
@@ -1721,15 +1724,7 @@ Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 		player.FuckVag(player.FirstVag(), male.FirstCock(), 3);
 		male.Fuck(male.FirstCock(), 3);
 		
-		// TODO
-		player.PregHandler().Impregnate({
-			slot   : PregnancyHandler.Slot.Vag,
-			mother : player,
-			father : male,
-			type   : PregType.Lagomorph,
-			num    : 4,
-			time   : 20
-		});
+		Scenes.Lagomorph.Impregnate(player, male);
 		
 		Text.Add("The bunny bucks, pistoning his meat into your wet cleft at a blinding pace. His hips must look like a blur, judging by the speed that he’s fucking you. The lagomorph doesn’t only go for speed either, each thrust is deep enough to drive the breath from your lungs - if your airways weren’t already plugged with cock, that is. Overrun by his urge to breed, it feels like he’s trying to drill all the way into your womb.", parse);
 	}
@@ -1758,15 +1753,7 @@ Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 		player.FuckVag(player.FirstVag(), male.FirstCock(), 2);
 		male.Fuck(male.FirstCock(), 2);
 		
-		// TODO
-		player.PregHandler().Impregnate({
-			slot   : PregnancyHandler.Slot.Vag,
-			mother : player,
-			father : male,
-			type   : PregType.Lagomorph,
-			num    : 4,
-			time   : 20
-		});
+		Scenes.Lagomorph.Impregnate(player, male);
 	}
 	Sex.Anal(male, player);
 	player.FuckAnal(player.Butt(), male.FirstCock(), 2);

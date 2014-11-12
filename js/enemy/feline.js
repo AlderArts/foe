@@ -351,7 +351,16 @@ Lion.prototype.constructor = Lion;
 
 
 
-
+Scenes.Felines.Impregnate = function(mother, father) {
+	mother.PregHandler().Impregnate({
+		slot   : PregnancyHandler.Slot.Vag,
+		mother : mother,
+		father : father,
+		type   : PregType.Feline,
+		num    : 3,
+		time   : 24
+	});
+}
 
 Scenes.Felines.Intro = function() {
 	var enc     = this;
@@ -1615,15 +1624,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 			parse["comp"] = group ? Text.Parse(" calling [hisher] friend[s] over and", parse) : "";
 			Text.Add("<i>“I really need to be going, but I hope to run into you again,”</i> [heshe] says,[comp] walking away.", parse);
 			
-			// TODO
-			player.PregHandler().Impregnate({
-				slot   : PregnancyHandler.Slot.Vag,
-				mother : player,
-				father : cat,
-				type   : PregType.Feline,
-				num    : 3,
-				time   : 24
-			});
+			Scenes.Felines.Impregnate(player, cat);
 			
 			Text.Flush();
 			

@@ -106,6 +106,18 @@ Equine.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
+Scenes.Equine.StallionImpregnate = function(mother) {
+	mother.PregHandler().Impregnate({
+		slot   : PregnancyHandler.Slot.Vag,
+		mother : mother,
+		father : enc.stallion,
+		type   : PregType.Equine,
+		num    : 1,
+		time   : 24,
+		load   : 3
+	});
+}
+
 Scenes.Equine.PairEnc = function() {
  	var enemy    = new Party();
  	var stallion = new Equine(Gender.male);
@@ -410,15 +422,7 @@ Scenes.Equine.GetFucked = function(enc) {
 	player.FuckVag(player.FirstVag(), enc.stallion.FirstCock(), 3);
 	enc.stallion.Fuck(enc.stallion.FirstCock(), 3);
 	
-	// TODO
-	player.PregHandler().Impregnate({
-		slot   : PregnancyHandler.Slot.Vag,
-		mother : player,
-		father : enc.stallion,
-		type   : PregType.Equine,
-		num    : 1,
-		time   : 24
-	});
+	Scenes.Equine.StallionImpregnate(player);
 	
 	Text.Add("The experience becomes amplified as your hips begin sliding up, riding the stallion for everything he's worth. He grunts every time you squeeze your insides around him, and you could probably make him cry out with just the manipulation of your hips if you weren't so distracted by your own pleasure. You continue to slide just a few inches off, then wetly slam back down to his balls.", parse);
 	Text.NL();
@@ -551,15 +555,7 @@ Scenes.Equine.Threesome2 = function(enc) {
 	player.FuckVag(player.FirstVag(), enc.stallion.FirstCock(), 3);
 	enc.stallion.Fuck(enc.stallion.FirstCock(), 3);
 	
-	// TODO
-	player.PregHandler().Impregnate({
-		slot   : PregnancyHandler.Slot.Vag,
-		mother : player,
-		father : enc.stallion,
-		type   : PregType.Equine,
-		num    : 1,
-		time   : 24
-	});
+	Scenes.Equine.StallionImpregnate(player);
 	
 	Text.Add("The mare greedily presses her slit against his cock, rubbing her wet lips into his shaft. He presses his hands on your hips, latching onto them. The horse hilts himself inside of your [vagDesc], your lips breaking contact with the mare as you moan into her face.", parse);
 	Text.NL();
@@ -856,15 +852,7 @@ Scenes.Equine.WinRideHimVag = function(enc) {
 	Text.Add("Before you can reach your peak, the equine cries out. His frame goes tense, his heavy balls contract, and he thrusts his hips upward as ecstasy overpowers his endurance like a tidal wave. A gasp escapes your lips as you suddenly feel a surge of liquid heat flowing into your lower half. Your gut becomes paunched as the thick seed floods your uterus beyond capacity, streams of off-white jizz spurting past the imperfect seal of your stretched labia and drooling down the underside of his scrotum.", parse);
 	Text.NL();
 	
-	// TODO
-	player.PregHandler().Impregnate({
-		slot   : PregnancyHandler.Slot.Vag,
-		mother : player,
-		father : enc.stallion,
-		type   : PregType.Equine,
-		num    : 1,
-		time   : 24
-	});
+	Scenes.Equine.StallionImpregnate(player);
 	
 	Text.Add("After a few more squirts, the stallion is spent. He is sprawled limply on the ground beneath you, his tongue lolling out and his eyes almost crossed from the intense pleasure. You can feel his cock shrinking inside you, and it soon flops out to allow a cascade of spunk to pour from your [vagDesc] and coat his lower body white. You click your tongue in disappointment; you were quite close to your own release, and being deprived like that has left you a little edgy. There must be some way to...", parse);
 	Text.NL();
