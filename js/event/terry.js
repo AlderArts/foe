@@ -324,7 +324,7 @@ Terry.prototype.FuckVag = function(vag, cock, expMult) {
 }
 
 Terry.prototype.PussyVirgin = function() {
-	return this.flags["vFirst"] = 0;
+	return this.flags["vFirst"] == 0;
 }
 
 // Party interaction
@@ -6336,6 +6336,8 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 		parse["multiCockDesc2"] = player.MultiCockDesc(allCocks);
 	}
 	
+	var virgin = terry.FirstVag().virgin;
+	var virginFirst = terry.PussyVirgin();
 	
 	parse = terry.ParserPronouns(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
@@ -6345,7 +6347,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 	Text.Clear();
 	if(terry.Relation() < 30) {
 		Text.Add("<i>”Umm, I’m not so sure about this...”</i> Seems like Terry is not so receptive to the idea of being penetrated.", parse);
-		if(!terry.PussyVirgin())
+		if(!virginFirst)
 			Text.Add(" Even tho it’s not [hisher] first time.", parse);
 		Text.NL();
 		Text.Add("Smiling gently, you reach out and take [hisher] hands, swearing to [himher] that it’s okay, you’ll be gentle with [himher].", parse);
@@ -6373,15 +6375,15 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 		Text.Add("Your own erect [multiCockDesc] stands proudly before you, signalling your readiness to begin whenever Terry gives the okay.", parse);
 	Text.NL();
 	
-	var virgin = terry.FirstVag().virgin;
-	
 	if(virgin) {
-		if(terry.PussyVirgin()) {
+		if(virginFirst) {
 			Text.Add("<i>”Listen, I… well… common knowledge is that it always hurts the first time. So can you go slowly? Give me time to adjust?”</i>", parse);
 			Text.NL();
 			Text.Add("Nodding your head, you give [himher] your word. Everyone knows virgins need a delicate touch, and virgins who were once boys especially so.", parse);
 			Text.NL();
 			Text.Add("<i>”Alright, I’m trusting you.”</i>", parse);
+			
+			terry.flags["vFirst"] = 1;
 			
 			terry.slut.IncreaseStat(100, 2);
 			terry.relation.IncreaseStat(100, 1);
@@ -6436,10 +6438,11 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 			Text.Add("The scent of Terry’s drooling cunt fills your nostrils as you finally deign to break the kiss, the panting, glaze-eyed [foxvixen] staring at you longingly. Wrapping [himher] gently in your arms, you sit down, tenderly guiding the [foxvixen] to straddle you. You let[oneof] your [multiCockDesc] nestle against Terry’s wet pussy, and ask [himher] if [heshe]’s ready to start.", parse);
 			Text.NL();
 			Text.Add("Your only reply is a soft nod.", parse);
+			Text.Flush();
 			
 			terry.AddLustFraction(0.5);
 			
-			PrintDefaultOptions();
+			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : Text.Parse("A nice makeout session should be just the thing to put your [foxvixen] in the mood.", parse)
 	});
@@ -6546,10 +6549,11 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 				Text.NL();
 				Text.Add("Now who’s getting ahead of themselves, hmm? You wink to show you’re just teasing, but it’s clear you’re both ready to begin.", parse);
 			}
+			Text.Flush();
 			
 			terry.AddLustFraction(0.7);
 			
-			PrintDefaultOptions();
+			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : Text.Parse("Show Terry just how good you are with your hands by getting [himher] all hot and ready.", parse)
 	});
@@ -6614,6 +6618,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 				Text.Add("[HeShe] only had to ask, you purr, even as you sit up and cross your [legsDesc], creating an impromptu seat from your lap, leaning back to better expose your [multiCockDesc].", parse);
 				Text.NL();
 				Text.Add("Terry wastes no time straddling you.", parse);
+				Text.Flush();
 				
 				Gui.NextPrompt();
 			});
@@ -6749,6 +6754,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 							Text.Add("You take a set on the ground, keeping yourself upright and curling your [legsDesc] to form a proper seat for Terry’s shapely rump and provide proper access to your [multiCockDesc]. With a smirk, you gesture towards your lap signalling the [foxvixen] that [hisher] throne is ready.", parse);
 							Text.NL();
 							Text.Add("<i>”All that? For me? Aww, you’re so considerate, [playername],”</i> the [foxvixen] grins teasingly straddling you and making [himher]self comfortable.", parse);
+							Text.Flush();
 							
 							player.slut.IncreaseStat(50, 1);
 							terry.relation.IncreaseStat(60, 1);
@@ -6766,8 +6772,9 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 							Text.Add("However tempting the offer may be, you focus and push the [fox]cock away from your lips, chiding Terry playfully that [heshe] needs to be thinking with [hisher] cunt, not [hisher] cock.", parse);
 							Text.NL();
 							Text.Add("<i>”Aww, you’re no fun [playername],”</i> the [foxvixen] teases, shaking [hisher] hips. <i>”Alright then, if you want my tight cunt, you can have it. Just come and get it~”</i> [heshe] giggles.", parse);
+							Text.Flush();
 							
-							PrintDefaultOptions();
+							Gui.NextPrompt();
 						}, enabled : true,
 						tooltip : "You’d rather not. You want pussy, and that’s what you’ll be getting."
 					});
@@ -6916,7 +6923,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 		}
 		Text.Add("Curling your fingers under Terry’s girlish thighs, you strain and heave [himher] up out of your lap. Guiding the [foxvixen] into proper alignment, you carefully lower [himher] down onto your jutting erection.", parse);
 		Text.NL();
-		if(terry.PussyVirgin()) {
+		if(virginFirst) {
 			Text.Add("<i>”Be careful,”</i> [heshe] says as your [cockDesc] nestles against [hisher] folds, threatening to penetrate [himher].", parse);
 			Text.NL();
 			Text.Add("You assure [himher] that you will, and try to take it as slowly and as gently as possible, carefully lowering the [foxvixen] down and feeling [hisher] hymen stretch and finally break as you push inside.", parse);
