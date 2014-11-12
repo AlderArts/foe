@@ -4,6 +4,7 @@ var gameCache = {}
 InitCache = function() {
 	// Reset exploration
 	LastSubmenu = null;
+	Intro.active = false;
 	
 	// SAVE VERSION
 	gameCache.version = parseInt(gameCache.version) || SAVE_VERSION;
