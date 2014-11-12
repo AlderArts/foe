@@ -7479,7 +7479,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 						type   : PregType.Terry,
 						num    : 1,
 						time   : 24,
-						load   : 3
+						load   : 9
 					});
 					
 					
