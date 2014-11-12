@@ -7050,8 +7050,12 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 		
 		cumbath = false;
 		
-		var knotted = p1cock.knot != 0 || p2cock.knot != 0;
-		parse = Text.ParserPlural(parse, p1cock.knot != 0 && p2cock.knot != 0, null, "4");
+		var knotted = p1cock.knot != 0;
+		var doubleKnot = knotted;
+		if(p2cock) knotted = knotted || p2cock.knot != 0;
+		if(p2cock) doubleKnot = doubleKnot && p2cock.knot != 0;
+		
+		parse = Text.ParserPlural(parse, doubleKnot, null, "4");
 		
 		if(!strapon) {
 			Text.Flush();
