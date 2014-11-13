@@ -1962,7 +1962,7 @@ Scenes.Terry.TalkPast = function(force) {
 		Text.NL();
 		Text.Add("Ah yes, you had a hard time getting past the gates yourself...", parse);
 		Text.NL();
-		Text.Add("<i>“I was lucky enough to make it inside the city, but I couldn’t just rob anyone. Despite that conflict that took my mother from me years ago, people were still on edge. So finding a mark was tough. In the end I decided if I wanted to score some decent loot, I’d have to rob one of the local nobles.”</i>", parse);
+		Text.Add("<i>“I was lucky enough to make it inside the city, but I couldn’t just rob anyone. Even long after the that conflict that took my mother from me years ago, people were still on edge. So finding a mark was tough. In the end I decided if I wanted to score some decent loot, I’d have to rob one of the local nobles.”</i>", parse);
 		Text.NL();
 		Text.Add("Oh? And who was the lucky one?", parse);
 		Text.NL();
