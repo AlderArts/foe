@@ -10,6 +10,11 @@ function Jeanne(storage) {
 	
 	// Character stats
 	this.name = "Jeanne";
+	this.alchemyLevel = 10;
+	
+	this.recipes.push(Items.Homos);
+	this.recipes.push(Items.Estros);
+	this.recipes.push(Items.Testos);
 	
 	//this.avatar.combat = new Image();
 	
@@ -104,6 +109,20 @@ Scenes.Jeanne.InteractPrompt = function() {
 		func : Scenes.Jeanne.Talk, enabled : true,
 		tooltip : "Seek the magician's advice."
 	});
+	options.push({ nameStr : "Alchemy",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“Certainly,”</i> Jeanne replies. <i>“Understand that I cannot sell you much, but if you bring me the right ingredients, I can perhaps help you.”</i> She frowns slightly. <i>“Just know there are certain recipes I will not make for you.”</i>", parse);
+			if(player.alchemyLevel > 0) {
+				Text.NL();
+				Text.Add("You’ll be sure to take notes so you can replicate the procedure later.", parse);
+			}
+			Text.NL();
+			
+			Alchemy.AlchemyPrompt(jeanne, party.inventory, Scenes.Jeanne.AlchemyBack, Scenes.Jeanne.AlchemyCallback, true);
+		}, enabled : true,
+		tooltip : "Ask to make use of Jeanne’s services as an alchemist."
+	});
 	if(party.InParty(terry) && (terry.flags["TF"] & Terry.TF.Jeanne)) {
 		options.push({ nameStr : "Terry TF",
 			func : function() {
@@ -127,6 +146,28 @@ Scenes.Jeanne.InteractPrompt = function() {
 	});
 	*/
 	Gui.SetButtonsFromList(options, true);
+}
+
+Scenes.Jeanne.AlchemyCallback = function(item) {
+	var parse = {};
+	
+	Text.Clear();
+	Text.Add("<i>“Here you go,”</i> Jeanne tells you as she hands over the finished potion. <i>“Just be wary of the effects it may have on you. Anything else?”</i>", parse);
+	Text.NL();
+	
+	party.Inv().AddItem(item);
+	
+	Alchemy.AlchemyPrompt(jeanne, party.inventory, Scenes.Jeanne.AlchemyBack, Scenes.Jeanne.AlchemyCallback, true);
+}
+
+Scenes.Jeanne.AlchemyBack = function() {
+	var parse = {};
+	
+	Text.Clear();
+	Text.Add("<i>“Do come back if there is anything else I can help you with.”</i>", parse);
+	Text.Flush();
+	
+	Scenes.Jeanne.InteractPrompt();
 }
 
 Scenes.Jeanne.Talk = function() {
