@@ -75,6 +75,20 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return world.time.season != Season.Winter; });
+world.loc.Forest.Outskirts.enc.AddEnc(function() {
+	return function() {
+		Text.Clear();
+
+		Text.Add("While wandering the forest, you come across a small spring filled with clear water. Figuring you might as well get some in case you grow thirsty, you pick out a vial from your pack.");
+		Text.NL();
+		Text.Add(Text.BoldColor("You fill a vial with pure spring water."));
+		Text.Flush();
+		party.inventory.AddItem(Items.SpringWater);
+		
+		world.TimeStep({minute: 15});
+		Gui.NextPrompt();
+	};
+}, 1.0, function() { return true; });
 
 // Temp mothgirl enemy
 world.loc.Forest.Outskirts.AddEncounter({
