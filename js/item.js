@@ -217,9 +217,11 @@ Inventory.prototype.ToStorage = function() {
 Inventory.prototype.FromStorage = function(storage) {
 	this.items = [];
 	for(var i = 0; i < storage.length; i++) {
-		this.items.push(
-			{	it: ItemIds[storage[i].it],
-				num: parseInt(storage[i].num)});
+		var item = {
+			it: ItemIds[storage[i].it],
+			num: parseInt(storage[i].num)};
+		if(item.it)
+			this.items.push(item);
 	}
 }
 
