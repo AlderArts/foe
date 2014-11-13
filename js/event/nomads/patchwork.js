@@ -28,6 +28,14 @@ function Patchwork(storage) {
 	
 	this.Shop.AddItem(Items.CowBell, 5);
 	
+	this.Shop.AddItem(Items.DogBiscuit, 5);
+	
+	this.Shop.AddItem(Items.Trinket, 5);
+	this.Shop.AddItem(Items.Feather, 5);
+	this.Shop.AddItem(Items.FruitSeed, 5);
+	
+	this.Shop.AddItem(Items.Hummus, 5);
+	
 	//this.Shop.AddItem(Items.Toys.SmallDildo, 5);
 	
 	
