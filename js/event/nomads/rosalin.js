@@ -333,7 +333,7 @@ Scenes.Rosalin.TalkPrompt = function() {
 				rosalin.Ears().color = Color.black;
 
 				player.alchemyLevel = 1;
-				player.recipes.push(Items.Leporine);
+				player.AddAlchemy(Items.Leporine);
 				rosalin.flags["AlQuest"] = 2;
 				rosalin.relation.IncreaseStat(100, 10);
 				
@@ -1159,6 +1159,8 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		breastDesc     : function() { return player.FirstBreastRow().Short(); }
 	};
 	
+	player.AddAlchemy(item);
+	
 	if(item == Items.Felinix) {
 		if(rosalin.flags["Felinix"] == 0) {
 			Text.Add("<i>“Ah yes, these bring back fond memories,”</i> Rosalin says as [heshe] caresses the items you present. <i>“With these, I can recreate the very first potion I made, the one which turned me into a cat!”</i> [HeShe] quickly prepares the ingredients, making sure you understand how to do it yourself.", parse);
@@ -1167,7 +1169,6 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			Text.NL();
 			Text.Add("<i>“I've noticed something odd when taking these. It seems my body really adapted to it the first time I drank it, so it reverts to my catlike form, whatever I may have been from the start. I quite like that shape, but a nice change of pace is never wrong.”</i>", parse);
 			rosalin.flags["Felinix"] = 1;
-			player.recipes.push(Items.Felinix);
 		}
 		else {
 			Text.Add("<i>“You'd like me to make another one of those?”</i> Rosalin asks you, <i>“I showed you to make them, so you should be able to do it yourself. ", parse);
@@ -1497,7 +1498,6 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			Text.NL();
 			Text.Add("<i>“Don't worry,”</i> [heshe] assures you when almost half of what you gave [himher] is consumed, <i>“I always keep a few extra of these around. Lovely stuff.”</i>", parse);
 			rosalin.flags["Equinium"] = 1;
-			player.recipes.push(Items.Equinium);
 		}
 		else {
 			Text.Add("<i>“Oh, these again?”</i> the [raceDesc] alchemist rubs [hisher] hands together excitedly. <i>“Equinium is always a classic. The filings from the horseshoes give it a slight metallic taste, but it is quite easy to drown with the other ingredients.”</i> Humming to [himher]self, Rosalin starts brewing the potion.", parse);
@@ -1595,7 +1595,6 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			Text.NL();
 			Text.Add("<i>“There we go, Lacertium!”</i> When you look uncertainly at [himher], [heshe] adds, <i>“Lacertidae means ‘lizard', just so you know.”</i>", parse);
 			rosalin.flags["Lacertium"] = 1;
-			player.recipes.push(Items.Lacertium);
 		}
 		else {
 			Text.Add("<i>“One scaly-n-oily, coming up!”</i>", parse);
@@ -1686,7 +1685,6 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			Text.NL();
 			Text.Add("Pouring all the ingredients into a beaker, [heshe] puts a stopper on top of it. <i>“Gotta let it sit for a while. Gestation and all,”</i> Rosalin explains.", parse);
 			rosalin.flags["Bovia"] = 1;
-			player.recipes.push(Items.Bovia);
 		}
 		else {
 			parse["former"] = compScore < 0.95 ? "former " : "";
@@ -1782,7 +1780,6 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			Text.NL();
 			Text.Add("<i>“Never could stomach snakes,”</i> [heshe] notes conversationally. <i>“I’ve heard some put them in strong alcohol. Perhaps it kills the taste.”</i> The alchemist looks excited. <i>“Aren’t you wondering what it’ll do?”</i>", parse);
 			rosalin.flags["Nagazm"] = 1;
-			player.recipes.push(Items.Nagazm);
 		}
 		else {
 			Text.Add("<i>“Another disgusting, snakey pink goop, coming up!”</i>", parse);
@@ -1845,7 +1842,6 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		if(rosalin.flags["Canis"] == 0) {
 			Text.Add("<i>“This root could probably be used to make several different kind of potions,”</i> Rosalin muses as [heshe] studies the knotted veggie. Shrugging, [heshe] chops it up into a fine mince, mixing it with powdered bone and… biscuit. Humming to [himher]self, the alchemist adds several other ingredients at random. There is a puff of smoke as [heshe] pours some kind of liquid over the mixture.", parse);
 			rosalin.flags["Canis"] = 1;
-			player.recipes.push(Items.Canis);
 		}
 		else {
 			Text.Add("<i>“One doggy treat, coming up!”</i> Rosalin chirps, mixing ingredients happily.", parse);
@@ -1951,7 +1947,6 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			parse["Cale"] = cale.flags["Met2"] >= Cale.Met2.Talked ? "Cale" : "the wolf";
 			Text.Add("You hurriedly assure [himher] that you wouldn’t hurt [Cale]; you got this from somewhere else. The alchemist nods to [himher]self, the question already forgotten as [heshe] starts mixing ingredients together.", parse);
 			rosalin.flags["Lobos"] = 1;
-			player.recipes.push(Items.Lobos);
 		}
 		else {
 			Text.Add("<i>“Want another one of those huh?”</i> The alchemist hums a tune to [himher]self as [heshe] starts mixing the ingredients together.", parse);
@@ -2057,7 +2052,6 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			parse["rearsDesc"] = rosalin.EarDesc();
 			Text.Add("As the ingredients start to bubble in [hisher] pot the concoction takes on a reddish hue. The alchemist sniffs the brew suspiciously, adding a few more herbs at random. [HisHer] [rearsDesc] twitch erratically as [heshe] tastes [hisher] creation.", parse);
 			rosalin.flags["Vulpinix"] = 1;
-			player.recipes.push(Items.Vulpinix);
 		}
 		else {
 			Text.Add("<i>“Ah, these again! I think I’ll try a few other herbs this time, perhaps spice up the taste a bit.”</i> The alchemist hums to [himher]self as [heshe] starts chopping up vegetables, pouring them into a boiling pot.", parse);
@@ -2162,7 +2156,6 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			Text.NL();
 			Text.Add("<i>“Maybe if I mix it with something stronger...”</i> You step back to let [himher] do [hisher] magic, mixing and pouring stuff together seemingly at random.", parse);
 			rosalin.flags["Scorpius"] = 1;
-			player.recipes.push(Items.Scorpius);
 		}
 		else {
 			Text.Add("<i>“Okay, let’s give this another go!”</i> the alchemist says, rubbing [hisher] hands together. <i>“What’s the worst thing that could happen?”</i>", parse);
@@ -2232,7 +2225,6 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			Text.NL();
 			Text.Add("<i>“A little of this, a little of that, aaand some fairy dust!”</i> [heshe] chimes, sprinkling some glittering seasoning on the concoction.", parse);
 			rosalin.flags["Lepida"] = 1;
-			player.recipes.push(Items.Lepida);
 		}
 		else {
 			Text.Add("<i>“Sure! I wanted to try out a different mix this time anyways.”</i> [HeShe] begins mixing the ingredients together into a beaker.", parse);
@@ -2323,7 +2315,6 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			Text.NL();
 			Text.Add("", parse);
 			rosalin.flags["Lacertium"] = 1;
-			player.recipes.push(Items.Lacertium);
 		}
 		else {
 			Text.Add("", parse);

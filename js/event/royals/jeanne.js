@@ -155,6 +155,8 @@ Scenes.Jeanne.AlchemyCallback = function(item) {
 	Text.Add("<i>“Here you go,”</i> Jeanne tells you as she hands over the finished potion. <i>“Just be wary of the effects it may have on you. Anything else?”</i>", parse);
 	Text.NL();
 	
+	player.AddAlchemy(item);
+	
 	party.Inv().AddItem(item);
 	
 	Alchemy.AlchemyPrompt(jeanne, party.inventory, Scenes.Jeanne.AlchemyBack, Scenes.Jeanne.AlchemyCallback, true);

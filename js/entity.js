@@ -2527,4 +2527,9 @@ Entity.prototype.GetSingleTarget = function(encounter, activeChar, strategy) {
 	}
 }
 
+Entity.prototype.AddAlchemy = function(item) {
+	var idx = this.recipes.indexOf(item); // Find the index
+	if(idx==-1)
+		this.recipes.push(item);
+}
 
