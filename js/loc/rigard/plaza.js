@@ -594,7 +594,12 @@ Scenes.Rigard.Plaza.LetterDelivery = function() {
 				Text.AddOutput("[name] leans over and reads the note along with you, curiously. As [hisher] eyes scan the lines, you see a deep crimson spread through [hisher] cheeks. <i>“O-oh!”</i> [heshe] exclaims, and turns away, biting [hisher] lower lip.", parse);
 				Text.Newline();
 			}
-			Text.AddOutput("You [playerReaction], and crumple the paper into a little ball before tossing it away. Oh well, it wasn't very important anyway.", parse);
+			Text.AddOutput("You [playerReaction], and pocket the letter.", parse);
+			Text.Newline();
+			Text.AddOutput("<b>You received a letter.</b>");
+			
+			party.Inv().AddItem(Items.Letter);
+			
 			world.TimeStep({minute: 15});
 			Gui.NextPrompt();
 		}, enabled : true,

@@ -245,10 +245,10 @@ Items.SpringWater.price = 1;
 Items.SpringWater.Short = function() { return "A vial of clear water"; }
 Items.SpringWater.Long = function() { return "A vial of pure spring water."; }
 
-Items.BloodVial = new Item("human3", "Blood");
-Items.BloodVial.price = 0;
-Items.BloodVial.Short = function() { return "A vial of blood"; }
-Items.BloodVial.Long = function() { return "A vial of red blood."; }
+Items.Letter = new Item("human3", "Letter");
+Items.Letter.price = 1;
+Items.Letter.Short = function() { return "A letter"; }
+Items.Letter.Long = function() { return "A miserable pile of secrets."; }
 
 
 
