@@ -17,6 +17,7 @@ CreditsScreen = function() {
 	Text.Add("Lizard encounter: Salrith<br/>");
 	Text.Add("Much of Kiakai's dialogue: Del<br/>");
 	Text.Add("Rigard random scenes: Del<br/>");
+	Text.Add("Random exploration scenes: Del<br/>");
 	Text.Add("Lei: Del<br/>");
 	Text.Add("Lady's Blessing and Room 69: Del<br/>");
 	Text.Add("Silken Delights & Fera: Resar<br/>");
