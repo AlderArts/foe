@@ -187,6 +187,61 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	return Scenes.Poet.Entry;
 }, 1.0, function() { return true; });
 
+world.loc.Plains.Crossroads.enc.AddEnc(function() {
+	return function() {
+		var parse = {
+			playername : player.name,
+			name : kiakai.name
+		};
+		
+		Text.Clear();
+		Text.Add("A man carrying a sizable knapsack is plodding along the road ahead of you, and as you catch up with him, you feel curious enough to strike up a conversation. You ask where he’s going and why he looks so dejected.", parse);
+		Text.NL();
+		Text.Add("<i>“The same answer’ll serve for both,”</i> he replies, <i>“there ain’t no work to be had here. I heard they’re doing better ‘round Rirvale, so I’m hopin’ they can make use of me.”</i> He does look quite skinny, though there is yet wiry muscle on his bones.", parse);
+		Text.NL();
+		Text.Add("<i>“I been many things, y’know. Carpenter, mason, farmer, cobbler… you name it, I’ve done it,”</i> he says, a hint of pride enlivening his voice. <i>“Even been a tramp before, though things didn’t look this bad back then.”</i>", parse);
+		Text.Flush();
+		
+		//[Coins][Luck]
+		var options = new Array();
+		options.push({ nameStr : "Coins",
+			func : function() {
+				Text.Clear();
+				Text.Add("You dig into your purse and pass the man five coins, telling him that you hope these will help keep him fed until he reaches his destination.", parse);
+				Text.NL();
+				Text.Add("He looks at you for a moment before taking the money from your hand. <i>“Any other day, I’d tell you I’m a tramp, not a beggar, but you got me this time. I’d swallowed my pride a good week ago, and ‘tis been all but digested. With this to get somethin’ more in my stomach, I might even make it.”</i> He nods at you, only slightly inclining his head, digested pride or no. <i>“Thank ye kindly, stranger.”</i>", parse);
+				Text.NL();
+				Text.Add("You exchange a few more words, wishing him fortune in his search, before proceeding on the road ahead of him.", parse);
+				if(party.InParty(kiakai)) {
+					Text.NL();
+					Text.Add("<i>“That was well done, [playername],”</i> [name] says. <i>“It is good that we were able to help this poor soul. I am sure that Lady Aria will show him mercy and he will yet find his way to prosperity.”</i>", parse);
+					kiakai.relation.IncreaseStat(100, 1);
+				}
+				Text.Flush();
+				party.coin -= 5;
+				Gui.NextPrompt();
+			}, enabled : party.coin >= 5,
+			tooltip : "Give the man five coins to help him on his way."
+		});
+		options.push({ nameStr : "Luck",
+			func : function() {
+				Text.Clear();
+				Text.Add("You sympathize with the man, but you don’t have any resources you can spare just now.", parse);
+				Text.NL();
+				Text.Add("After exchanging a few more words, you say your goodbyes, and continue on your way.", parse);
+				if(party.InParty(kiakai)) {
+					Text.NL();
+					Text.Add("<i>“I understand we have higher priorities right now, [playername],”</i> [name] says, <i>“but I do wish we could have helped that poor man.”</i>", parse);
+				}
+				Text.Flush();
+				Gui.NextPrompt();
+			}, enabled : true,
+			tooltip : "Wish the man luck and leave it at that."
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+}, 0.5, function() { return world.time.hour >= 5 && world.time.hour < 21; });
+
 world.loc.Plains.Crossroads.links.push(new Link(
 	"Nomads", true, true,
 	function() {
