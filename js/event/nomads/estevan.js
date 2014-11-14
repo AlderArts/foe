@@ -236,7 +236,7 @@ Scenes.Estevan.Prompt = function() {
 					Text.NL();
 					Text.Add("Such as…?", parse);
 					Text.NL();
-					Text.Add("<i>“Cale is always bragging how he’s a ladies man. I’d be really amusing to see him on the receiving end for once, might crack his manly facade a bit. If nothing else, it’ll give me something to tease him with. You’d have to be the one to administer the punishment though, but I’m sure you wouldn’t have anything against that, right? I’m sure a rough buttfucking will get him off my case for a while.”</i>", parse);
+					Text.Add("<i>“Cale is always bragging how he’s a ladies’ man. It’d be really amusing to see him on the receiving end for once, might crack his manly facade a bit. If nothing else, it’ll give me something to tease him with. You’d have to be the one to administer the punishment though, but I’m sure you wouldn’t have anything against that, right? I’m sure a rough buttfucking will get him off my case for a while.”</i>", parse);
 					Text.Flush();
 					
 					setupFunc();
