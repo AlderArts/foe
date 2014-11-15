@@ -1026,18 +1026,7 @@ Scenes.Terry.CaughtTheThief = function() {
 				else {
 					Text.Add("<i>“What the- you’ve got some nerve pushing me around [playername],”</i> she growls.", parse);
 					Text.NL();
-					if(miranda.Attitude() >= Miranda.Attitude.Neutral) {
-						Text.Add("You simply glare back and tell her to knock it off. She's made the collar, she's got what she needs, so she can stick her dick back in her pants where it belongs.", parse);
-						Text.NL();
-						Text.Add("She walks up to you with a growl, pointing a finger straight at you. <i>“You, step out of my way, now!”</i>", parse);
-						Text.NL();
-						Text.Add("Folding your arms over your chest, you shake your head.", parse);
-						Text.NL();
-						Text.Add("<i>“So the slut’s found some balls to stand up to me, huh? Well it’s either his ass or <b>your</b> ass. And trust me, if you thought I was being rough with you before you haven’t seen anything! Now step aside!”</i>", parse);
-						Text.NL();
-						Text.Add("That was the worst thing she could have said to try and make you back down; on general principle, you ball your fists and start calling her out, the enraged morph screaming back at you. It's almost a good thing when someone suddenly storms into the warehouse, distracting the pair of you; one more word either way, and you both know that the pair of you would have started swinging.", parse);
-					}
-					else {
+					if(miranda.Sexed()) {
 						Text.Add("Despite your natural nervousness, you manage to square your shoulders and shake your head, insisting you won't let her do this. Remembering the things she's done to you adds a little stiffness to your spine; you refuse to let her do those same things to someone else! ...Though, privately, you yourself can't tell if it's nobility or jealousy that makes you unable to stand the thought.", parse);
 						Text.NL();
 						Text.Add("<i>“So the slut’s jealous someone might be stealing their thunder… Well don’t worry, I’ve got enough in me for both of you, now step aside.”</i>", parse);
@@ -1047,6 +1036,17 @@ Scenes.Terry.CaughtTheThief = function() {
 						Text.Add("<i>“You’re making me mad, slut. And trust me, you won’t like me when I’m mad, now step aside before I decide to rip you apart as well!”</i> she threatens with a growl.", parse);
 						Text.NL();
 						Text.Add("As hard as it is for you, you manage to hold your ground, trying to convince Miranda to leave the thief alone, standing firm even in the face of her increasingly volatile and lewd threats, innuendoes and outright profanity. It comes as something of a relief when the warehouse doors suddenly slam open; you were so very close to losing your nerve and caving before her will.", parse);
+					}
+					else {
+						Text.Add("You simply glare back and tell her to knock it off. She's made the collar, she's got what she needs, so she can stick her dick back in her pants where it belongs.", parse);
+						Text.NL();
+						Text.Add("She walks up to you with a growl, pointing a finger straight at you. <i>“You, step out of my way, now!”</i>", parse);
+						Text.NL();
+						Text.Add("Folding your arms over your chest, you shake your head.", parse);
+						Text.NL();
+						Text.Add("<i>“So the slut’s found some balls to stand up to me, huh? Well it’s either his ass or <b>your</b> ass. And trust me, if you thought I was being rough with you before you haven’t seen anything! Now step aside!”</i>", parse);
+						Text.NL();
+						Text.Add("That was the worst thing she could have said to try and make you back down; on general principle, you ball your fists and start calling her out, the enraged morph screaming back at you. It's almost a good thing when someone suddenly storms into the warehouse, distracting the pair of you; one more word either way, and you both know that the pair of you would have started swinging.", parse);
 					}
 				}
 				Text.Flush();
