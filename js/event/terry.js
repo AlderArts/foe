@@ -1254,7 +1254,7 @@ Scenes.Terry.Release = function() {
 	
 	Text.Add("He procures a keychain from his belt, and unlocks the door leading to the cells. <i>“Follow me.”</i>", parse);
 	Text.NL();
-	Text.Add("The two of you walk towards the back of the jail, passing through two more doors before arriving at an empty area where the guards leads you to a cell. Inside you see the fox thief, resting on his cot and looking at the roof. <i>“Hey mutt! Today’s your lucky day. Your ticket out of here has arrived.”</i>", parse);
+	Text.Add("The two of you walk towards the back of the jail, passing through two more doors before arriving at an empty area where the guards lead you to a cell. Inside you see the fox thief, resting on his cot and looking at the roof. <i>“Hey mutt! Today’s your lucky day. Your ticket out of here has arrived.”</i>", parse);
 	Text.NL();
 	Text.Add("The fox chuckles at that. <i>“Yeah right, ain’t I lucky...”</i>", parse);
 	Text.NL();
@@ -1274,7 +1274,7 @@ Scenes.Terry.Release = function() {
 		Text.Add("Miranda isn't even here, you inform him. This is a bail-out, pure and simple.", parse);
 	}
 	else if(terry.flags["Met"] == Terry.Met.StopHer) {
-		Text.Add("<i>“Why are releasing me? Weren’t you working with that dog to have me arrested?”</i>", parse);
+		Text.Add("<i>“Why are you releasing me? Weren’t you working with that dog to have me arrested?”</i>", parse);
 		Text.NL();
 		Text.Add("You admit that's true, but circumstances have changed.", parse);
 		Text.NL();
@@ -1962,7 +1962,7 @@ Scenes.Terry.TalkPast = function(force) {
 		Text.NL();
 		Text.Add("Ah yes, you had a hard time getting past the gates yourself...", parse);
 		Text.NL();
-		Text.Add("<i>“I was lucky enough to make it inside the city, but I couldn’t just rob anyone. Even long after the that conflict that took my mother from me years ago, people were still on edge. So finding a mark was tough. In the end I decided if I wanted to score some decent loot, I’d have to rob one of the local nobles.”</i>", parse);
+		Text.Add("<i>“I was lucky enough to make it inside the city, but I couldn’t just rob anyone. Even long after the that conflict that took my mother from me, people were still on edge. So finding a mark was tough. In the end I decided if I wanted to score some decent loot, I’d have to rob one of the local nobles.”</i>", parse);
 		Text.NL();
 		Text.Add("Oh? And who was the lucky one?", parse);
 		Text.NL();
@@ -2432,7 +2432,7 @@ Scenes.Terry.BrushTail = function() {
 	Text.NL();
 	Text.Add("With your free hand, you carefully take hold of Terry’s tail and maneuver it to be more accessible. Holding it still, your other hand starts at the base of [hisher] tail and starts to smoothly and levelly glide down its length, towards the tip of [hisher] brush.", parse);
 	Text.NL();
-	Text.Add("You’re rather impressed; despite [hisher] rough lifestyle, Terry’s tail is quite luxuriously cared for, with no major snarls, nor tangles for you to comb out. At least, you haven’t found any yet. As you continue stroking Terry, you compliment [himher] on how much care [heshe] obviously takes in looking after [hisher] tail.", parse);
+	Text.Add("You’re rather impressed; despite [hisher] rough lifestyle, Terry’s tail is quite luxuriously cared for, with no major snarls or tangles for you to comb out. At least, you haven’t found any yet. As you continue stroking Terry, you compliment [himher] on how much care [heshe] obviously takes in looking after [hisher] tail.", parse);
 	Text.NL();
 	Text.Add("<i>“Yeah, If I let it get too messy then it becomes pretty hard to move it around. And it also hurts.", parse);
 	if(terry.Relation() >= 60) {
