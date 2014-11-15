@@ -712,12 +712,12 @@ Scenes.Rosalin.FirstFuck = function() {
 		rVagDesc      : function() { return rosalin.FirstVag().Short(); }
 	};
 	
-	var cocks         = player.CocksThatFit(rosalin.FirstVag());
-	var p1Cock        = player.BiggestCock(cocks);
-	parse.cockDesc    = function() { return p1Cock.Short(); };
-	parse.cockTipDesc = function() { return p1Cock.TipShort(); }
-	cocks             = player.CocksThatFit(cale.Butt());
-	var p2Cock        = player.BiggestCock(cocks);
+	var cocks            = player.CocksThatFit(rosalin.FirstVag());
+	var p1Cock           = player.BiggestCock(cocks);
+	parse["cockDesc"]    = function() { return p1Cock.Short(); };
+	parse["cockTipDesc"] = function() { return p1Cock.TipShort(); }
+	cocks                = player.CocksThatFit(cale.Butt());
+	var p2Cock           = player.BiggestCock(cocks);
 	
 	world.TimeStep({minute: 45});
 	
@@ -823,11 +823,18 @@ Scenes.Rosalin.FirstFuck = function() {
 					options.push({ nameStr : "Oral",
 						func : function() {
 							Text.Clear();
-							var p1Cock = player.BiggestCock();
+							p1Cock = player.BiggestCock();
 							
-							Sex.Blowjob(rosalin, player);
-							rosalin.FuckOral(rosalin.Mouth(), p1Cock, 2);
-							player.Fuck(p1Cock, 2);
+							if(player.FirstCock()) {
+								Sex.Blowjob(rosalin, player);
+								rosalin.FuckOral(rosalin.Mouth(), p1Cock, 2);
+								player.Fuck(p1Cock, 2);
+							}
+							else {
+								Sex.Cunnilingus(rosalin, player);
+								rosalin.Fuck(null, 2);
+								player.Fuck(null, 2);
+							}
 							
 							Text.Add("Shrugging, you shuffle around so that you are straddling the alchemist's face, your back to the wolf. Without hesitation, she leans in, ", parse);
 							if(player.FirstCock())
@@ -856,9 +863,6 @@ Scenes.Rosalin.FirstFuck = function() {
 							else
 								Text.Add("convulsing and grinding against her face.", parse);
 							Text.NL();
-							
-							player.AddSexExp(1);
-							
 							Text.Add("The three of you rest like that for a while, cuddling against one another. The wolf-morph, knot finally deflating, pulls out and crawls over to Rosalin, presenting her with his sticky member. The catgirl blissfully cleans him off, her hips shaking as she climaxes another time.", parse);
 
 							Text.NL();
