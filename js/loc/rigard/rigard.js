@@ -100,6 +100,7 @@ function Rigard(storage) {
 	this.LB = {};
 	this.LB["Visit"]    = 0;
 	this.LB["Orvin"]    = 0;
+	this.LB["OTerry"]   = 0;
 	this.LB["Orvin69"]  = 0;
 	this.LB["CityTalk"] = 0;
 	this.LB["RotRumor"] = 0;
