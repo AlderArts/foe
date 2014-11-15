@@ -10,6 +10,7 @@ Items.Equinium.Recipe = [{it: Items.HorseShoe}, {it: Items.HorseHair}, {it: Item
 Items.Equinium.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.horse, str: "a horsecock"});
 Items.Equinium.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.horse, str: "equine ears"});
 Items.Equinium.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.horse, color: Color.brown, str: "a brown, bushy horse tail"});
+Items.Equinium.PushEffect(TF.ItemEffects.RemAntenna, {odds: 0.2, count: 2});
 Items.Equinium.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.4, value: true, num: 1});
 Items.Equinium.PushEffect(TF.ItemEffects.SetIdealCockLen, {odds: 0.5, ideal: 30, max: 1});
 Items.Equinium.PushEffect(TF.ItemEffects.SetIdealCockThk, {odds: 0.5, ideal: 6, max: 1});
@@ -67,6 +68,7 @@ Items.Lacertium.PushEffect(function(target) {
 		Text.Newline();
 	}
 });
+Items.Lacertium.PushEffect(TF.ItemEffects.RemAntenna, {odds: 0.2, count: 2});
 Items.Lacertium.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.lizard, str: "lizard nubs"});
 Items.Lacertium.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.lizard, color: Color.green, str: "a green, flexible reptilian tail"});
 Items.Lacertium.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.2, value: false, num: 1});
@@ -151,6 +153,7 @@ Items.Canis.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.dog, str: 
 Items.Canis.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.4, value: true, num: 1});
 Items.Canis.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.4, value: true, num: 1});
 Items.Canis.PushEffect(TF.ItemEffects.RemHorn, {odds: 0.2, count: 2});
+Items.Canis.PushEffect(TF.ItemEffects.RemAntenna, {odds: 0.2, count: 2});
 Items.Canis.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.dog, str: "canid ears"});
 Items.Canis.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.dog, color: Color.brown, str: "a brown, fluffy dog tail!"});
 Items.Canis.PushEffect(TF.ItemEffects.IncDex, {odds: 0.4, ideal: 30, max: 1});
@@ -170,6 +173,7 @@ Items.Lobos.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.wolf, str:
 Items.Lobos.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.4, value: true, num: 1});
 Items.Lobos.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.4, value: true, num: 1});
 Items.Lobos.PushEffect(TF.ItemEffects.RemHorn, {odds: 0.2, count: 2});
+Items.Lobos.PushEffect(TF.ItemEffects.RemAntenna, {odds: 0.2, count: 2});
 Items.Lobos.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.wolf, str: "wolf ears"});
 Items.Lobos.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.wolf, color: Color.gray, str: "a gray, fluffy wolf tail!"});
 Items.Lobos.PushEffect(TF.ItemEffects.IncStr, {odds: 0.4, ideal: 30, max: 1});
@@ -189,6 +193,7 @@ Items.Vulpinix.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.fox, st
 Items.Vulpinix.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.4, value: true, num: 1});
 Items.Vulpinix.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.4, value: true, num: 1});
 Items.Vulpinix.PushEffect(TF.ItemEffects.RemHorn, {odds: 0.2, count: 2});
+Items.Vulpinix.PushEffect(TF.ItemEffects.RemAntenna, {odds: 0.2, count: 2});
 Items.Vulpinix.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.fox, str: "vulpine ears"});
 Items.Vulpinix.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.fox, color: Color.red, str: "a red, fluffy fox tail!"});
 Items.Vulpinix.PushEffect(TF.ItemEffects.IncSta, {odds: 0.4, ideal: 25, max: 1});
@@ -229,6 +234,7 @@ Items.Homos.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.4, value: false, num: 
 Items.Homos.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.4, value: false, num: 1});
 Items.Homos.PushEffect(TF.ItemEffects.RemTail, {odds: 0.6, count: 1});
 Items.Homos.PushEffect(TF.ItemEffects.RemWings, {odds: 0.6, count: 2});
+Items.Homos.PushEffect(TF.ItemEffects.RemAntenna, {odds: 0.6, count: 2});
 
 
 Items.Avia = new TFItem("avian0", "Avia");
