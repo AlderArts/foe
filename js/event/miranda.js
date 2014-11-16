@@ -208,6 +208,10 @@ Miranda.prototype.OnPatrol = function() {
 		return (world.time.hour >= 7 && world.time.hour < 17);
 }
 
+Miranda.prototype.FuckedTerry = function() {
+	return false; //TODO
+}
+
 // Events
 Scenes.Miranda = {};
 
@@ -1334,16 +1338,9 @@ Scenes.Miranda.HeyThereCatPorn = function() {
 	});
 }
 
-Scenes.Miranda.Chat = function() {
+Scenes.Miranda.BarChatOptions = function(options) {
 	var parse = {};
-	Text.NL();
-	Text.Add("What do you want to chat with Miranda about?", parse);
-	Text.Flush();
 	
-	world.TimeStep({hour: 1});
-	
-	//[Sure][Nah]
-	var options = new Array();
 	options.push({ nameStr : "Guard",
 		func : function() {
 			Text.Clear();
@@ -1532,29 +1529,73 @@ Scenes.Miranda.Chat = function() {
 			tooltip : "Ask Miranda about the thief the two of you caught."
 		});
 	}
+}
+
+Scenes.Miranda.BarSexOptions = function(options) {
+	var parse = {};
 	
+	options.push({ nameStr : "Date",
+		func : Scenes.Miranda.DatingEntry, enabled : true,
+		tooltip : miranda.flags["Dates"] >= 1 ? "Ask her out on another date." : "Ask her out on a walk."
+	});
+	// TODO: Unlocked either after X dates or after reaching X level of relationship. Until the repeatable dates are written, this will have NO REQUIREMENT.
+	if(miranda.flags["Dates"] >= 1) {
+		options.push({ nameStr : "Take home",
+			func : Scenes.Miranda.TakeHome, enabled : true,
+			tooltip : "You both know where this is going to end, so why not skip straight to dessert?"
+		});
+	}
+	options.push({ nameStr : "Sex",
+		func : Scenes.Miranda.TavernSexPublicPrompt, enabled : true,
+		tooltip : "Ask her if she's up for some sexy times, right here, right now."
+	});
+	options.push({ nameStr : "Backroom",
+		func : Scenes.Miranda.TavernSexBackroomPrompt, enabled : true,
+		tooltip : "Invite her to the backrooms for some fun."
+	});
+}
+
+Scenes.Miranda.BarTalkOptions = function(options, next) {
+	var parse = {};
+	
+	options.push({ nameStr : "Her past",
+		func : function() {
+			Gui.Callstack.push(function() {
+				Text.Flush();
+				next();
+			});
+			Scenes.Miranda.TalkBackstory(true);
+		}, enabled : true,
+		tooltip : "Ask Miranda about her past."
+	});
+	options.push({ nameStr : "Her conquests",
+		func : function() {
+			Gui.Callstack.push(function() {
+				Text.Flush();
+				next();
+			});
+			Scenes.Miranda.TalkConquests(true);
+		}, enabled : true,
+		tooltip : "Ask Miranda about her past conquests."
+	});
+}
+
+Scenes.Miranda.Chat = function() {
+	var parse = {};
+	Text.NL();
+	Text.Add("What do you want to chat with Miranda about?", parse);
+	Text.Flush();
+	
+	world.TimeStep({hour: 1});
+	
+	var options = new Array();
+	
+	Scenes.Miranda.BarChatOptions(options);
 	// TODO: Restructure this...
 	
 	if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
-		options.push({ nameStr : "Date",
-			func : Scenes.Miranda.DatingEntry, enabled : true,
-			tooltip : miranda.flags["Dates"] >= 1 ? "Ask her out on another date." : "Ask her out on a walk."
-		});
-		// TODO: Unlocked either after X dates or after reaching X level of relationship. Until the repeatable dates are written, this will have NO REQUIREMENT.
-		if(miranda.flags["Dates"] >= 1) {
-			options.push({ nameStr : "Take home",
-				func : Scenes.Miranda.TakeHome, enabled : true,
-				tooltip : "You both know where this is going to end, so why not skip straight to dessert?"
-			});
-		}
-		options.push({ nameStr : "Sex",
-			func : Scenes.Miranda.TavernSexPublicPrompt, enabled : true,
-			tooltip : "Ask her if she's up for some sexy times, right here, right now."
-		});
-		options.push({ nameStr : "Backroom",
-			func : Scenes.Miranda.TavernSexBackroomPrompt, enabled : true,
-			tooltip : "Invite her to the backrooms for some fun."
-		});
+		Scenes.Miranda.BarTalkOptions(options, Scenes.Miranda.Chat);
+		Scenes.Miranda.BarSexOptions(options);
 	}
 	
 	Gui.SetButtonsFromList(options);
@@ -2048,53 +2089,52 @@ Scenes.Miranda.MaidensBaneTalk = function() {
 	if(miranda.flags["Met"] == Miranda.Met.Met) {
 		Scenes.Miranda.HeyThere();
 	}
-	else
-	{
-		// TODO: Attitude
+	else if(miranda.flags["Met"] == Miranda.Met.Tavern) {
 		if(miranda.flags["Attitude"] >= Miranda.Attitude.Neutral)
 			Text.Add("You walk over to Miranda, who is lounging on one of the benches in the shady tavern. She’s already gotten started on her first few drinks, and waves you over when she notices you.");
 		else
 			Text.Add("You walk over to Miranda, who is lounging on one of the benches in the shady tavern. When she notices you, her eyes narrow dangerously. Looks like she isn't particularly happy about seeing you.");
 		Text.NL();
 		
-		if(miranda.flags["Met"] == Miranda.Met.Tavern) {
-			Scenes.Miranda.JustOneMore();
-		}
-		else if(miranda.flags["Attitude"] >= Miranda.Attitude.Neutral) {
-			Scenes.Miranda.Chat();
-		}
-		else {
-			Text.Add("[PLACEHOLDER] Bad interactions.");
-			Text.Flush();
-			
-			
-			var options = new Array();
-			if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
-				options.push({ nameStr : "Date",
-					func : Scenes.Miranda.DatingEntry, enabled : true,
-					tooltip : miranda.flags["Dates"] >= 1 ? "Ask her out on another date." : "Ask her out on a walk."
-				});
-				// TODO: Unlocked either after X dates or after reaching X level of relationship. Until the repeatable dates are written, this will have NO REQUIREMENT.
-				if(miranda.flags["Dates"] >= 1) {
-					options.push({ nameStr : "Take home",
-						func : Scenes.Miranda.TakeHome, enabled : true,
-						tooltip : "You both know where this is going to end, so why not skip straight to dessert?"
-					});
-				}
-				
-				options.push({ nameStr : "Sex",
-					func : Scenes.Miranda.TavernSexPublicPrompt, enabled : true,
-					tooltip : "Ask her if she's up for some sexy times, right here, right now."
-				});
-				options.push({ nameStr : "Backroom",
-					func : Scenes.Miranda.TavernSexBackroomPrompt, enabled : true,
-					tooltip : "Invite her to the backrooms for some fun."
-				});
-			}
-			
-			Gui.SetButtonsFromList(options, true);			
-		}
+		Scenes.Miranda.JustOneMore();
 	}
+	else if(miranda.flags["Attitude"] >= Miranda.Attitude.Neutral) {
+		Scenes.Miranda.MaidensBaneNice();
+	}
+	else {
+		Scenes.Miranda.MaidensBaneNasty();
+	}
+}
+
+Scenes.Miranda.MaidensBaneNice = function() {
+	var parse = {};
+	//TODO
+	Text.Add("", parse);
+	Text.Add("You walk over to Miranda, who is lounging on one of the benches in the shady tavern. She’s already gotten started on her first few drinks, and waves you over when she notices you.");
+	Text.NL();
+	Text.Flush();
+	Scenes.Miranda.Chat();
+}
+Scenes.Miranda.MaidensBaneNasty = function() {
+	var parse = {};
+	//TODO
+	Text.Add("", parse);
+	Text.Add("[PLACEHOLDER] Bad interactions.");
+	Text.NL();
+	Text.Flush();
+	
+	Scenes.Miranda.MaidensBaneNastyPrompt();		
+}
+Scenes.Miranda.MaidensBaneNastyPrompt = function() {
+	var parse = {};
+	
+	var options = new Array();
+	if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
+		Scenes.Miranda.BarTalkOptions(options, MaidensBaneNastyPrompt);
+		Scenes.Miranda.BarSexOptions(options);
+	}
+	
+	Gui.SetButtonsFromList(options, true);			
 }
 
 world.loc.Rigard.Tavern.common.events.push(new Link("Miranda", function() { return miranda.IsAtLocation(); }, true,
@@ -2476,7 +2516,7 @@ Scenes.Miranda.DatingStage2 = function() {
 	scenes.Get();
 }
 
-Scenes.Miranda.TalkBackstory = function() {
+Scenes.Miranda.TalkBackstory = function(atBar) {
 	var parse = {
 		playername : player.name
 	};
@@ -2714,7 +2754,7 @@ Scenes.Miranda.TalkBackstory = function() {
 	if(miranda.flags["bgRotMax"] < sceneId)
 		miranda.flags["bgRotMax"] = sceneId;
 }
-Scenes.Miranda.TalkConquests = function() {
+Scenes.Miranda.TalkConquests = function(atBar) {
 	var parse = {
 		
 	};
@@ -2765,14 +2805,89 @@ Scenes.Miranda.TalkConquests = function() {
 		PrintDefaultOptions();
 	});
 	scenes.push(function() {
+		
+		parse["foxvixen"] = terry.mfPronoun("fox", "vixen");
+		parse = terry.ParserPronouns(parse);
+		
 		Text.Add("<i>“My promiscuity hasn’t exactly decreased since I joined the watch.”</i> Somehow, that seems an understatement. Had she been even hornier when she was younger, you doubt she would’ve been able to function. <i>“Being the law in town has its perks… I’ve let more than one criminal off easy in exchange for a few favors.”</i>", parse);
 		Text.NL();
 		Text.Add("She studies your reaction to this. <i>“Understand, I’m not going around letting murderers loose for blowjobs. I wouldn’t release anyone dangerous… but I’ve found that a thorough reaming provides <b>much</b> more incentive for a thief to stay on the right side of the law than a small fine. That, and they know that <b>I</b> know how to find them again.”</i>", parse);
 		Text.NL();
-		if(terry.flags["Met"] >= Terry.Met.Caught) {
+		
+		if(miranda.FuckedTerry()) {
+			if(atBar && party.InParty(terry)) {
+				Text.Add("<i>“Speaking of… you’ve been keeping in line lately, haven’t you, pet?”</i> Miranda throws Terry a wide grin. <i>“No minor transgression you’d like to confess to?”</i>", parse);
+				Text.NL();
+				if(terry.Slut() >= 60) {
+					Text.Add("Much to your surprise, the [foxvixen] just shrugs with a smirk. <i>“A lousy lay like yourself couldn’t hope to satisfy me. Takes someone better to keep me in check.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“That a challenge, slut?”</i> Miranda shoots back, an evil glint in her eye.", parse);
+					Text.NL();
+					Text.Add("Terry glares right back at her. <i>“Maybe. Maybe I should give you some ‘corrective measures’.", parse);
+					if(terry.HorseCock())
+						Text.Add(" Bet you could use a real dick up your ass to replace the stick that’s firmly lodged inside. And I have more than enough meat for a lapdog like yourself.”</i>", parse);
+					else if(terry.FirstCock())
+						Text.Add(" Bet you don’t get any action on your girl-parts, that’s why you’re so grumpy. But fear not, I can loosen that tight cunt of yours for you.”</i>", parse);
+					else
+						Text.Add("”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“You seem to be having some miscomprehension about who’s going to nail whom, fucktoy,”</i> Miranda retorts, giving her package a pat. <i>“Remember how it went down the last time you tried to fight me?”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Ha! That was two on one. This time it’d be just you and me. I can dance circles around and have you knocked on your pretty ass before you could think to strike!”</i> the [foxvixen] boasts proudly.", parse);
+				}
+				else {
+					Text.Add("The [foxvixen] ears flatten as [heshe] growls at the doberman. <i>“What I do or don’t do is none of your business, dirty lapdog!”</i> [heshe] barks at her. It’s clear that [heshe]’s still not over the fact Miranda had [hisher] way with [himher].", parse);
+					Text.NL();
+					Text.Add("<i>“If you do it in <b>my</b> city, it is <b>my</b> business,”</i> the guardswoman retorts, <i>“and you can expect to be on the receiving end of <b>my</b> cock. Not that I’m sure you’d take it as punishment.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Figures that the only thing you’re good for is as a walking prick. You couldn’t even catch me on your own last time, what makes you think you’d have a chance against me? Plus last time I checked, you’re just a lowly watch-dog. The ones really running this town are the royal guards,”</i> Terry shoots back with a defiant glare.", parse);
+				}
+				Text.NL();
+				Text.Add("<i>“Yip yip says the little pet,”</i> Miranda shrugs. <i>“Run that mouth for long enough and I’ll give it something better to do.”</i>", parse);
+				Text.NL();
+				Text.Add("Seriously, just get a room you horny canines...", parse);
+				Text.NL();
+				Text.Add("You stop Terry before [heshe] has a chance to talk back. It’s best if [heshe] doesn’t try, because you know Miranda will keep her end of the bargain, and Terry has no chance while [heshe]’s still wearing that collar.", parse);
+			}
+			else {
+				Text.Add("<i>“Case in point, Terry,”</i> Miranda stretches luxuriously. <i>“[HeShe]’s been nice and pliant since I had a go at [himher], no?”</i>", parse);
+				Text.NL();
+				Text.Add("You think that she’s probably not the only reason for that, but keep the observation to yourself.", parse);
+				Text.NL();
+				Text.Add("<i>“Just tell me if the little [foxvixen] starts acting tough, I’ll set [himher] straight again.”</i>", parse);
+			}
+			Text.NL();
+		}
+		else if(atBar && party.InParty(terry)) {
+			parse["thimher"] = terry.mfTrue("him", "her");
+			Text.Add("<i>“I’m sure your little foxy friend could attest to the effectiveness of my methods, if you’d let me educate [thimher],”</i> Miranda adds, grinning wolfishly at Terry.", parse);
+			Text.NL();
+			Text.Add("<i>“In your dreams, lapdog!”</i> Terry replies. <i>“You might’ve had me back then, but that was two on one. If it’s just you, I can run circles around you.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Run all you want, pet, I got more stamina than you do. Besides, I’ll have that tight butt bobbing in front of me to keep me motivated,”</i> Miranda shoots back, unconcerned.", parse);
+			Text.NL();
+			Text.Add("Terry growls at Miranda, surprisingly brave despite [hisher] predicament and the doberman’s obvious superiority in both height and strength. Seem like [heshe]’s forgetting that with that collar around [hisher] neck, any attempt at running would just wind up [himher] getting caught.", parse);
+			Text.NL();
+			Text.Add("The guardswoman just laughs, taking another swig at her drink. <i>“You call me a lapdog, yet I only see one of us wearing a collar.”</i>", parse);
+			Text.NL();
+			Text.Add("You intervene before the [foxvixen] has a chance to talk back, telling [himher] to stand down before [heshe] gets in trouble. ", parse);
+			
+			var dom = miranda.SubDom() - player.SubDom();
+			
+			if(dom < -25)
+				Text.Add("Same goes for Miranda, if she keeps provoking Terry, you’ll have to punish her.", parse);
+			else if(dom < 25)
+				Text.Add("Terry is under your protection now, so you’d really appreciate if Miranda didn’t push [hisher] buttons.", parse);
+			else
+				Text.Add("You give the dommy dobie a pleading look, hoping she’ll let Terry off the hook.", parse);
+			Text.NL();
+			Text.Add("<i>“Right, right, don’t get your panties tied up in a bunch,”</i> Miranda replies, shrugging.", parse);
+			Text.NL();
+		}
+		else if(terry.flags["Met"] >= Terry.Met.Caught) {
 			var req = terry.flags["Saved"] >= Terry.Saved.Saved;
 			parse["t"] = req ? " - Terry, was it" : "";
-			Text.Add("<i>“Case and point, remember that thief that we caught[t]?”</i> You nod. <i>“No one really gives a shit about Krawitz; he’s a small time noble without any real influence. He doesn’t exactly have a clear conscience himself, considering the things that were found when searching his mansion. I only intended to show him some… corrective action, perhaps throw him in a cell for a few days as payback for that note. That’d make sure he didn’t stir up trouble in my city again. The little fox would’ve been far better off in my care than in that of the royal guard, believe me.”</i>", parse);
+			Text.Add("<i>“Case in point, remember that thief that we caught[t]?”</i> You nod. <i>“No one really gives a shit about Krawitz; he’s a small time noble without any real influence. He doesn’t exactly have a clear conscience himself, considering the things that were found when searching his mansion. I only intended to show him some… corrective action, perhaps throw him in a cell for a few days as payback for that note. That’d make sure he didn’t stir up trouble in my city again. The little fox would’ve been far better off in my care than in that of the royal guard, believe me.”</i>", parse);
 			Text.NL();
 			if(req)
 				Text.Add("You’re not sure Terry would agree with that, but you let it slide. To be sure, he wasn’t in a very happy place when you let him out of prison, but you aren’t sure if he’d be much happier being fucked by Miranda for days on end.", parse);
