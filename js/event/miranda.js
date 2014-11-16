@@ -1582,7 +1582,6 @@ Scenes.Miranda.BarTalkOptions = function(options, next) {
 
 Scenes.Miranda.Chat = function() {
 	var parse = {};
-	Text.NL();
 	Text.Add("What do you want to chat with Miranda about?", parse);
 	Text.Flush();
 	
@@ -1591,12 +1590,6 @@ Scenes.Miranda.Chat = function() {
 	var options = new Array();
 	
 	Scenes.Miranda.BarChatOptions(options);
-	// TODO: Restructure this...
-	
-	if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
-		Scenes.Miranda.BarTalkOptions(options, Scenes.Miranda.Chat);
-		Scenes.Miranda.BarSexOptions(options);
-	}
 	
 	Gui.SetButtonsFromList(options);
 }
@@ -1633,7 +1626,7 @@ Scenes.Miranda.TavernSexPublicPrompt = function() {
 		tooltip : "Give Miranda a blowjob under the table."
 	});
 	//TODO: fix back
-	Gui.SetButtonsFromList(options, true, Scenes.Miranda.Chat);
+	Gui.SetButtonsFromList(options, true, Scenes.Miranda.MaidensBanePrompt);
 }
 
 Scenes.Miranda.TakeHome = function() {
@@ -1748,14 +1741,14 @@ Scenes.Miranda.JustOneMore = function() {
 		Text.Add(" Her probing fingers traces lower, drawing soft moans from you as she slowly circles your [anusDesc]. She slowly starts to push her middle finger up your rectum, feeling around for a while before withdrawing. She winks at you and pats the hidden monster between her legs.", parse);
 		Text.NL();
 		Text.Add("<i>“Just know that I'd be more than happy to help you with that, if you ever feel you need to let off some steam.”</i> She chuckles at your discomfort and orders some drinks for you.", parse);
-		Text.NL();
+		Text.Flush();
 		
 		miranda.relation.IncreaseStat(100, 5);
 		miranda.subDom.IncreaseStat(100, 5);
 		player.AddLustFraction(0.5);
 		miranda.AddLustFraction(0.5);
 		
-		Scenes.Miranda.Chat();
+		Scenes.Miranda.MaidensBanePrompt();
 		
 		// TODO: Push sexy
 	}
@@ -1776,13 +1769,13 @@ Scenes.Miranda.JustOneMore = function() {
 				Text.Add("<i>“You're not such a bad sort, y'know,”</i> she says, <i>“I guess I should have hinted at it a bit more, I...”</i> she looks at you admiringly and shyly adds, <i>“I just couldn't help myself, you are quite the catch, you know.”</i> She places a hand on your hip and moves in a bit closer.", parse);
 				Text.NL();
 				Text.Add("<i>“So... now what, pet?”</i> she asks, looking into your eyes. You suggest that the two of you grab a few drinks and have a chat. <i>“Well… a good start, I guess,”</i> she smirks.", parse);
-				Text.NL();
+				Text.Flush();
 				
 				miranda.flags["Attitude"] = Miranda.Attitude.Nice;
 				
 				miranda.relation.IncreaseStat(100, 5);
 				
-				Scenes.Miranda.Chat();
+				Scenes.Miranda.MaidensBanePrompt();
 			}, enabled : true,
 			tooltip : "Apologize for running out on her."
 		});
@@ -1830,13 +1823,13 @@ Scenes.Miranda.JustOneMore = function() {
 				Text.Add("You declare that it doesn’t matter what she has between her legs, you’ll still be her friend, even if her revelation startled you a little bit. Miranda makes a happy yip and gives you a quick hug, her soft member hitting your thigh with a wet slap. A bit embarrassed, she shoves her cock back into her pants, then leads you back to the benches. As you walk she leans on your shoulder and fondles your butt playfully.", parse);
 				Text.NL();
 				Text.Add("<i>“Friendship accepted,”</i> the guardswoman murmurs. <i>“And who knows, perhaps something more down the line?”</i> she adds playfully.", parse);
-				Text.NL();
+				Text.Flush();
 				
 				miranda.flags["Attitude"] = Miranda.Attitude.Nice;
 				
 				miranda.relation.IncreaseStat(100, 5);
 				
-				Scenes.Miranda.Chat();
+				Scenes.Miranda.MaidensBanePrompt();
 			}, enabled : true,
 			tooltip : "Got no problem with that, you still want to hang out with her."
 		});
@@ -2106,15 +2099,30 @@ Scenes.Miranda.MaidensBaneTalk = function() {
 	}
 }
 
+Scenes.Miranda.MaidensBanePrompt = function() {
+	var parse = {};
+	
+	var options = new Array();
+	if(miranda.flags["Attitude"] >= Miranda.Attitude.Neutral)
+		Scenes.Miranda.BarChatOptions(options);
+	// TODO: Restructure this...
+	
+	if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
+		Scenes.Miranda.BarTalkOptions(options, Scenes.Miranda.MaidensBanePrompt);
+		Scenes.Miranda.BarSexOptions(options);
+	}
+	Gui.SetButtonsFromList(options, true);
+}
+
 Scenes.Miranda.MaidensBaneNice = function() {
 	var parse = {};
 	//TODO
 	Text.Add("", parse);
 	Text.Add("You walk over to Miranda, who is lounging on one of the benches in the shady tavern. She’s already gotten started on her first few drinks, and waves you over when she notices you.");
-	Text.NL();
 	Text.Flush();
-	Scenes.Miranda.Chat();
+	Scenes.Miranda.MaidensBanePrompt();
 }
+
 Scenes.Miranda.MaidensBaneNasty = function() {
 	var parse = {};
 	//TODO
@@ -2123,18 +2131,7 @@ Scenes.Miranda.MaidensBaneNasty = function() {
 	Text.NL();
 	Text.Flush();
 	
-	Scenes.Miranda.MaidensBaneNastyPrompt();		
-}
-Scenes.Miranda.MaidensBaneNastyPrompt = function() {
-	var parse = {};
-	
-	var options = new Array();
-	if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
-		Scenes.Miranda.BarTalkOptions(options, MaidensBaneNastyPrompt);
-		Scenes.Miranda.BarSexOptions(options);
-	}
-	
-	Gui.SetButtonsFromList(options, true);			
+	Scenes.Miranda.MaidensBanePrompt();		
 }
 
 world.loc.Rigard.Tavern.common.events.push(new Link("Miranda", function() { return miranda.IsAtLocation(); }, true,
