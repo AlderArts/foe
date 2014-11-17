@@ -20,6 +20,7 @@ Version 0.3q
  - Letter can be found in a Rigard event.
 * There is a new short scene between Terry and Orvin, if you have him in your party. Thanks LD and Del for the help!
 * Revised Miranda's tavern prompt, which was a mess.
+ - Added the 'background' and 'conquests' bits to the regular talk options, previously only available through dates. (Poke me if you see something that doesn't make sense playing out in the tavern)
  - The 'conquests' option now has a new interaction with Terry, if he's in your party. Thanks for the help LD!
 
 --------------------------------------------
