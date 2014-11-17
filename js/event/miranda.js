@@ -1338,9 +1338,51 @@ Scenes.Miranda.HeyThereCatPorn = function() {
 	});
 }
 
-Scenes.Miranda.BarChatOptions = function(options) {
+Scenes.Miranda.BarChatOptions = function(options, back) {
 	var parse = {};
 	
+	back = back || Gui.NextPrompt;
+	
+	options.push({ nameStr : "Chat",
+		func : function() {
+			Text.Clear();
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("Miranda mentions that she likes fish a lot, going on to dreamily explain great fish dishes that she has cooked over time. Funny, you didn't quite look at her like a gourmet cook.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("Miranda talks for a while about her biggest hobby, hunting game in the woods. While she usually uses a two-handed blade, she is apparently also really proficient with a bow and arrow. She talks a bit about some of her conquests. You get the feeling that she is searching for something in the forest.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("The two of you chat a bit about Rigard. <i>“Well, it's a nice enough place,”</i> Miranda concedes, <i>“the bar is nice, I have a decent job that brings the dough in.”</i> She grins widely, <i>“and though the place might not be as interesting as the feline home town, I have you around now to keep me entertained!”</i>", parse);
+				player.AddLustFraction(0.1);
+				miranda.AddLustFraction(0.1);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("You ask Miranda about the royal family living in the castle. Her mood darkens immediately, and she spits on the floor besides the table.", parse);
+				Text.NL();
+				Text.Add("<i>“Rigard may be my home, but don’t think for a second I’ve got anything but scorn for that bunch. Fucking aristocrats...”</i>", parse);
+				Text.NL();
+				Text.Add("When you ask her why she thinks that way, she gives you a deadpan stare. <i>“Try living in Rigard for a week as a morph, might give you an idea why I left to be a merc.”</i>", parse);
+				Text.NL();
+				Text.Add("Well, what about the rest of the royals?", parse);
+				Text.NL();
+				Text.Add("<i>“Heh, they are a right depraved bunch,”</i> Miranda laughs, a wicked grin playing across her features. <i>“There is plenty a rumor about our dear queen, and don’t get me started on the kids. It’s common knowledge they hit the sack together, and you’d have to look hard to find a girlier prince than Rani.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“...Still, I’d tap that,”</i> she adds after a thoughtful pause.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“Watch your back if you head to the mountains,”</i> Miranda warns you, <i>“I've heard that there are bandits hiding out somewhere there, and it is very close to the boneyard, and that place you should <b>really</b> avoid.”</i>", parse);
+				Text.NL();
+			}, 1.0, function() { return true; });
+			
+			scenes.Get();
+			Text.Flush();
+			
+			back();
+		}, enabled : true,
+		tooltip : "Just chat for a while."
+	});
 	options.push({ nameStr : "Guard",
 		func : function() {
 			Text.Clear();
@@ -1388,8 +1430,7 @@ Scenes.Miranda.BarChatOptions = function(options) {
 			
 			Text.Flush();
 			
-			// Force callstack
-			Gui.NextPrompt();
+			back();
 		}, enabled : true,
 		tooltip : "Ask her about her job as a city guard."
 	});
@@ -1412,8 +1453,7 @@ Scenes.Miranda.BarChatOptions = function(options) {
 						Text.Add("<i>“There are creatures in that forest who stalk unwitting prey and capture travellers for fun and for their own release.”</i> She begins to describe more and more extravagant beasts and how they violate passers by, <i>just like you</i>. You gasp at some of the more lurid ones, making her laugh out loud.", parse);
 						Text.Flush();
 						
-						// Force callstack
-						Gui.NextPrompt();
+						back();
 					}, enabled : true,
 					tooltip : "Ask her to explain what she means."
 				});
@@ -1428,8 +1468,7 @@ Scenes.Miranda.BarChatOptions = function(options) {
 						player.AddLustFraction(0.2);
 						miranda.AddLustFraction(0.2);
 				
-						// Force callstack
-						Gui.NextPrompt();
+						back();
 					}, enabled : true,
 					tooltip : "How about her, didn’t she say she hunts?"
 				});
@@ -1454,54 +1493,12 @@ Scenes.Miranda.BarChatOptions = function(options) {
 				}, 1.0, function() { return true; });
 				
 				scenes.Get();
-				
 				Text.Flush();
-				// Force callstack
-				Gui.NextPrompt();
+				
+				back();
 			}
 		}, enabled : true,
 		tooltip : "Ask her about the forest surrounding Rigard."
-	});
-	options.push({ nameStr : "Chat",
-		func : function() {
-			Text.Clear();
-			var scenes = new EncounterTable();
-			scenes.AddEnc(function() {
-				Text.Add("Miranda mentions that she likes fish a lot, going on to dreamily explain great fish dishes that she has cooked over time. Funny, you didn't quite look at her like a gourmet cook.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
-				Text.Add("Miranda talks for a while about her biggest hobby, hunting game in the woods. While she usually uses a two-handed blade, she is apparently also really proficient with a bow and arrow. She talks a bit about some of her conquests. You get the feeling that she is searching for something in the forest.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
-				Text.Add("The two of you chat a bit about Rigard. <i>“Well, it's a nice enough place,”</i> Miranda concedes, <i>“the bar is nice, I have a decent job that brings the dough in.”</i> She grins widely, <i>“and though the place might not be as interesting as the feline home town, I have you around now to keep me entertained!”</i>", parse);
-				player.AddLustFraction(0.1);
-				miranda.AddLustFraction(0.1);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
-				Text.Add("You ask Miranda about the royal family living in the castle. Her mood darkens immediately, and she spits on the floor besides the table.", parse);
-				Text.NL();
-				Text.Add("<i>“Rigard may be my home, but don’t think for a second I’ve got anything but scorn for that bunch. Fucking aristocrats...”</i>", parse);
-				Text.NL();
-				Text.Add("When you ask her why she thinks that way, she gives you a deadpan stare. <i>“Try living in Rigard for a week as a morph, might give you an idea why I left to be a merc.”</i>", parse);
-				Text.NL();
-				Text.Add("Well, what about the rest of the royals?", parse);
-				Text.NL();
-				Text.Add("<i>“Heh, they are a right depraved bunch,”</i> Miranda laughs, a wicked grin playing across her features. <i>“There is plenty a rumor about our dear queen, and don’t get me started on the kids. It’s common knowledge they hit the sack together, and you’d have to look hard to find a girlier prince than Rani.”</i>", parse);
-				Text.NL();
-				Text.Add("<i>“...Still, I’d tap that,”</i> she adds after a thoughtful pause.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
-				Text.Add("<i>“Watch your back if you head to the mountains,”</i> Miranda warns you, <i>“I've heard that there are bandits hiding out somewhere there, and it is very close to the boneyard, and that place you should <b>really</b> avoid.”</i>", parse);
-				Text.NL();
-			}, 1.0, function() { return true; });
-			
-			scenes.Get();
-			Text.Flush();
-			
-			// Force callstack
-			Gui.NextPrompt();
-		}, enabled : true,
-		tooltip : "Just chat for a while."
 	});
 	if((rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry) && (terry.flags["Saved"] == Terry.Saved.NotStarted)) {
 		options.push({ nameStr : "Thief",
@@ -1524,7 +1521,7 @@ Scenes.Miranda.BarChatOptions = function(options) {
 				
 				terry.flags["Saved"] = Terry.Saved.TalkedMiranda;
 				
-				Gui.NextPrompt();
+				back();
 			}, enabled : true,
 			tooltip : "Ask Miranda about the thief the two of you caught."
 		});
@@ -2104,7 +2101,7 @@ Scenes.Miranda.MaidensBanePrompt = function() {
 	
 	var options = new Array();
 	if(miranda.flags["Attitude"] >= Miranda.Attitude.Neutral)
-		Scenes.Miranda.BarChatOptions(options);
+		Scenes.Miranda.BarChatOptions(options, Scenes.Miranda.MaidensBanePrompt);
 	// TODO: Restructure this...
 	
 	if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
