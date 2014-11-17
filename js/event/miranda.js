@@ -1127,12 +1127,13 @@ Scenes.Miranda.HeyThereCont = function() {
 	
 	Text.NL();
 	Text.Add("The booze starts to stack up as you continue to talk into the night. You tell her a bit about yourself and your adventures so far, and she contributes witty comments and suggestive remarks.", parse);
-	Text.NL();
 	
-	Scenes.Miranda.Chat();
-	Gui.Callstack.push(Scenes.Miranda.HeyThereCatPorn);
-	Gui.Callstack.push(Scenes.Miranda.Chat);
-	Gui.Callstack.push(Scenes.Miranda.Chat);
+	Gui.Callstack.push(function() {
+		Gui.NextPrompt(Scenes.Miranda.HeyThereCatPorn);
+	});
+	Gui.Callstack.push(Scenes.Miranda.HeyThereChat);
+	Gui.Callstack.push(Scenes.Miranda.HeyThereChat);
+	Scenes.Miranda.HeyThereChat();
 }
 
 Scenes.Miranda.HeyThereCatPorn = function() {
@@ -1341,7 +1342,7 @@ Scenes.Miranda.HeyThereCatPorn = function() {
 Scenes.Miranda.BarChatOptions = function(options, back) {
 	var parse = {};
 	
-	back = back || Gui.NextPrompt;
+	back = back || PrintDefaultOptions;
 	
 	options.push({ nameStr : "Chat",
 		func : function() {
@@ -1577,8 +1578,9 @@ Scenes.Miranda.BarTalkOptions = function(options, next) {
 	});
 }
 
-Scenes.Miranda.Chat = function() {
+Scenes.Miranda.HeyThereChat = function() {
 	var parse = {};
+	Text.NL();
 	Text.Add("What do you want to chat with Miranda about?", parse);
 	Text.Flush();
 	
@@ -2100,15 +2102,37 @@ Scenes.Miranda.MaidensBanePrompt = function() {
 	var parse = {};
 	
 	var options = new Array();
-	if(miranda.flags["Attitude"] >= Miranda.Attitude.Neutral)
-		Scenes.Miranda.BarChatOptions(options, Scenes.Miranda.MaidensBanePrompt);
-	// TODO: Restructure this...
+	
+	options.push({ nameStr : "Talk",
+		func : function() {
+			Text.Clear();
+			Text.Add("What did you want to talk about?", parse);
+			Text.Flush();
+			Scenes.Miranda.MaidensBaneTalkPrompt();
+		}, enabled : true,
+		tooltip : "Chat with Miranda"
+	});
 	
 	if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
-		Scenes.Miranda.BarTalkOptions(options, Scenes.Miranda.MaidensBanePrompt);
 		Scenes.Miranda.BarSexOptions(options);
 	}
 	Gui.SetButtonsFromList(options, true);
+}
+
+Scenes.Miranda.MaidensBaneTalkPrompt = function() {
+	var parse = {};
+	
+	
+	var options = new Array();
+	if(miranda.flags["Attitude"] >= Miranda.Attitude.Neutral)
+		Scenes.Miranda.BarChatOptions(options, Scenes.Miranda.MaidensBaneTalkPrompt);
+	// TODO: Restructure this...
+	
+	if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
+		Scenes.Miranda.BarTalkOptions(options, Scenes.Miranda.MaidensBaneTalkPrompt);
+	}
+	
+	Gui.SetButtonsFromList(options, true, Scenes.Miranda.MaidensBanePrompt);
 }
 
 Scenes.Miranda.MaidensBaneNice = function() {
