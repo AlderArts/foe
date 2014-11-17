@@ -2050,7 +2050,7 @@ Scenes.Kiakai.Healing = function() {
 				player.AddHPFraction(1.0);
 				var scenes = new EncounterTable();
 				scenes.AddEnc(function() {
-					Text.AddOutput("<i>“Very well, then,”</i> the elf nods, gesturing you to turn around and bare your back. [HisHer] light caresses trail over your back, sending light shocks of electricity racing up your spine.", parse);
+					Text.AddOutput("<i>“Very well, then,”</i> the elf nods, gesturing for you to turn around and bare your back. [HisHer] light caresses trail over your back, sending light shocks of electricity racing up your spine.", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
 					Text.AddOutput("<i>“If that is your wish,”</i> the elf consents, running [hisher] hands across your body. Small probing tendrils of healing magic sneak out from [hisher] fingers, finding their way into your various minor injuries.", parse);
@@ -2098,7 +2098,7 @@ Scenes.Kiakai.Healing = function() {
 		options.push({ nameStr : "Insist",
 			func : function() {
 				player.AddHPFraction(1.0);
-				Text.AddOutput("Insisting that you are indeed hurt, you slip out of your clothing without any urging from the elf. Shrugging, the elf motions for you to turn around, searching your body for signs of injury. Instead of heeding to [hisher] instruction, you take [hisher] hand in yours. <i>“Here, I'll show you where...”</i>", parse);
+				Text.AddOutput("Insisting that you are indeed hurt, you slip out of your clothing without any urging from the elf. Shrugging, the elf motions for you to turn around, searching your body for signs of injury. Instead of heeding [hisher] instruction, you take [hisher] hand in yours. <i>“Here, I'll show you where...”</i>", parse);
 				Text.Newline();
 				Text.AddOutput("The elf's face turns a bright pink, then beet red, as you guide [hisher] fingers across your body. Their first stop is your [breastDesc], stopping to circle your [nipsDesc] before trailing down toward your exposed crotch.", parse);
 				Text.Newline();
@@ -2264,7 +2264,7 @@ Scenes.Kiakai.HealingNice = function() {
 				Text.Clear();
 				player.AddSexExp(1);
 				kiakai.AddSexExp(1);
-				Text.AddOutput("Pulling the elf close, you hug [himher] fiercely, locking the two of you in a deep kiss. [name] becomes like puddy in your arms, melting against your body and letting out moaning whimpers. One of your hands find [hishers], fingers joining, as you guide the elf toward your package.", parse);
+				Text.AddOutput("Pulling the elf close, you hug [himher] fiercely, locking the two of you in a deep kiss. [name] becomes like putty in your arms, melting against your body and letting out moaning whimpers. One of your hands finds [hishers], fingers joining, as you guide the elf toward your package.", parse);
 				Text.Newline();
 				Text.AddOutput("Your intertwined hands close around your [cockDesc], the elf's lithe, slightly cold fingers making you shudder in pleasure. At first, you have to lead [himher] through the motion, but soon you withdraw your hand, giving the horny elf free rein on your [cockDesc].", parse);
 				Text.Newline();
@@ -2291,7 +2291,7 @@ Scenes.Kiakai.HealingNice = function() {
 					kiakai.AddLustFraction(0.1);
 					Text.Newline();
 				}
-				Text.AddOutput("Opening [hisher] eyes for the first time since you first kissed [himher], you gaze into [name]'s [eyeColor] eyes lovingly. <i>“I-is it good for you?”</i> [heshe] whispers uncertainly. You assure the elf that [heshe] is doing a <i>very</i> good job indeed.", parse);
+				Text.AddOutput("As [heshe] opens [hisher] eyes for the first time since you first kissed [himher], you gaze into [name]'s [eyeColor] eyes lovingly. <i>“I-is it good for you?”</i> [heshe] whispers uncertainly. You assure the elf that [heshe] is doing a <i>very</i> good job indeed.", parse);
 				if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
 					Text.AddOutput(" It is almost like [heshe] was born to do this kind of thing, you add.", parse);
 				Text.Newline();
@@ -2335,7 +2335,7 @@ Scenes.Kiakai.HealingNice = function() {
 						if(player.CumOutput() > 3)
 							Text.AddOutput("your [cockDesc] exploding with cum in the poor elf's hands.", parse);
 						else
-							Text.AddOutput("trickling down the elf's hands.", parse);
+							Text.AddOutput("your seed pulsing from your [cockDesc] and trailing down on the elf's hands.", parse);
 						Text.Newline();
 					}, 1.0);
 					scenes.AddEnc(function() {
@@ -2474,14 +2474,14 @@ Scenes.Kiakai.HealingNice = function() {
 								var cum = player.OrgasmCum();
 								
 								if(cum > 3)
-									Text.AddOutput("flooding the elf's throat with your huge load. Gulping and swallowing for all the [heshe] is worth, [name] tries to keep up with you, but a rivulet of semen escape [hisher] mouth, pooling in [hisher] cupped hand.", parse);
+									Text.AddOutput("flooding the elf's throat with your huge load. Gulping and swallowing for all the [heshe] is worth, [name] tries to keep up with you, but a rivulet of semen escapes [hisher] mouth, pooling in [hisher] cupped hand.", parse);
 								else
 									Text.AddOutput("and you feed burst after burst of your seed to the greedy elf. [HeShe] does [hisher] best to swallow all of it, and manages admirably.", parse);
 								Gui.NextPrompt();
 							}
 							// Anal variation
 							else {
-								Text.AddOutput("[name] gazes up at you through a veil of lust, clouding [hisher] eyes. As if trying to find other ways to bring you pleasure, [heshe] briefly takes your [cockDesc] out of [hisher] mouth, allowing [himher] to lather [hisher] fingers in the sticky blend of saliva and precum coating your member. Quickly getting back to the task at hand, [name] lets [hisher] wet fingers trail across your skin, ", parse);
+								Text.AddOutput("[name] gazes up at you through a veil of lust clouding [hisher] eyes. As if trying to find other ways to bring you pleasure, [heshe] briefly takes your [cockDesc] out of [hisher] mouth, allowing [himher] to lather [hisher] fingers in the sticky blend of saliva and precum coating your member. Quickly getting back to the task at hand, [name] lets [hisher] wet fingers trail across your skin, ", parse);
 								if(player.HasBalls())
 									Text.AddOutput("cupping and fondling your [ballsDesc], ", parse);
 								Text.AddOutput("before finding their target.", parse);
@@ -2566,7 +2566,7 @@ Scenes.Kiakai.HealingNice = function() {
 								var cum = player.OrgasmCum();
 								
 								if(cum > 3)
-									Text.AddOutput("But no amount of preparation could prepare [himher] for the size of your load, though, and when the elf has had [hisher] fill, [heshe] lets your [cockDesc] flop free, hosing [himher]self in your semen.", parse);
+									Text.AddOutput("But no amount of preparation could prepare [himher] for the size of your load, and when the elf has had [hisher] fill, [heshe] lets your [cockDesc] flop free, hosing [himher]self in your semen.", parse);
 								else
 									Text.AddOutput("When you are done, the elf cleans your [cockDesc], not wanting to let even a drop go to waste.", parse);
 							}
@@ -2727,7 +2727,7 @@ Scenes.Kiakai.HealingNice = function() {
 					Text.Newline();
 					
 					if(kiakai.flags["Sexed"] > 20 /* && TODO anal allowed */) {
-						Text.AddOutput("Feeling particularly adventurous, the fingers on [name]'s other hand travel slightly downwards, forgoing your [vagDesc] and insistently prodding at your [anusDesc]. Suddenly realising what [heshe] is doing, the elf stops in place, gazing up at you for approval through [hisher] thick lashes.", parse);
+						Text.AddOutput("Feeling particularly adventurous, the fingers on [name]'s other hand travel slightly downwards, forgoing your [vagDesc] and insistently prodding at your [anusDesc]. Suddenly realizing what [heshe] is doing, the elf stops in place, gazing up at you for approval through [hisher] thick lashes.", parse);
 	
 						//[Allow][Deny][Punish]
 						var options = new Array();
@@ -2739,7 +2739,7 @@ Scenes.Kiakai.HealingNice = function() {
 								Text.Newline();
 								Text.AddOutput("Chuckling, you point out to the elf how this is something [heshe] would never have thought of doing when you first met, let alone taken the initiative at it. [name] doesn't let up on [hisher] dual assault of your holes, but [hisher] brightly burning cheeks indicate that your comment hit home.", parse);
 								Text.Newline();
-								Text.AddOutput("Reclining comfortably, you allow the elf free reign", parse);
+								Text.AddOutput("Reclining comfortably, you allow the elf free rein", parse);
 								if(player.FirstCock())
 									Text.AddOutput(", idly stroking your [multiCockDesc]", parse);
 								parse["c"] = player.FirstCock() ? " and prodding at your sensitive prostate" : "";
