@@ -362,7 +362,7 @@ Scenes.Kiakai.TalkQuest = function() {
 	else {
 		Text.AddOutput("<i>“Our first objective should be to find out more about that gemstone that you are carrying,”</i> [name] suggests. <i>“According to lady Aria, it holds great power. If you are able to wield it, maybe it can be used to stop Uru before it is too late.”</i>", parse);
 		Text.Newline();
-		Text.AddOutput("When you ask [himher] how to best achieve that, the elf frowns thoughtfully. <i>“I know nothing of the magic that powers this artifact, we will need to find either a powerful magician or a skilled alchemist who can study it closer.”</i> [name] lets out a sigh of frustration, <i>“The lady would no doubt be able to assist, but I have been unable to contact her since you arrived on Eden, I am afraid we are on our own.”</i>", parse);
+		Text.AddOutput("When you ask [himher] how to best achieve that, the elf frowns thoughtfully. <i>“I know nothing of the magic that powers this artifact, we will need to find either a powerful magician or a skilled alchemist who can study it closer.”</i> [name] lets out a sigh of frustration, <i>“The lady would no doubt be able to assist, but I have been unable to contact her since you arrived on Eden. I am afraid we are on our own.”</i>", parse);
 	}
 	Text.Newline();
 	
@@ -766,7 +766,7 @@ Scenes.Kiakai.TalkEden = function() {
 			});
 			// MAGICAL BEINGS
 			scenes.push(function() {
-				Text.AddOutput("<i>“Well, there are many on Eden you could classify as magical,”</i> the elf ruefully motion to [himher]self, <i>“Some consider my own race as such. You could say that this is a good place to live for beings that depend on magic, as it is very easy to coax tendrils of power from the very land itself.”</i>", parse);
+				Text.AddOutput("<i>“Well, there are many on Eden you could classify as magical,”</i> the elf ruefully motions to [himher]self, <i>“Some consider my own race as such. You could say that this is a good place to live for beings that depend on magic, as it is very easy to coax tendrils of power from the very land itself.”</i>", parse);
 				Text.Newline();
 				Text.AddOutput("You ask how [heshe] would know the difference, if [heshe] has been living on Eden for [hisher] whole life.", parse);
 				Text.Newline();
@@ -952,7 +952,7 @@ Scenes.Kiakai.TalkElves = function() {
 	if(kiakai.flags["TalkedElves"] == 0) {
 		Text.AddOutput("You ask [name] to tell you a little about the elves.", parse);
 		Text.Newline();
-		Text.AddOutput("<i>“The elves are a proud race, [playername]. Although our appearance resembles humans, in many ways we are actually closer to dryads or fairies.”</i>", parse);
+		Text.AddOutput("<i>“The elves are a proud race, [playername]. Although in our appearance we resemble humans, in many ways we are actually closer to dryads or fairies.”</i>", parse);
 		Text.Newline();
 		Text.AddOutput("<i>“My people live in small groups, building villages to be as close to nature as possible. Many of them live in the forest, some building villages in the branches of the trees to stay safe from the dangerous animals that occasionally roam below. My own village was on the shore - my people love the life of the sea, as well as strength of the trees. I had spent but ten years of my life there, when a priestess of Aria stopped by, and I decided I needed to go with her and join the priesthood.”</i>", parse);
 		Text.Newline();
@@ -1801,7 +1801,7 @@ Scenes.Kiakai.TalkPriestYrissa = function() {
 		if(kiakai.relation.Get() > 25 || kiakai.flags["Attitude"] > Kiakai.Attitude.Neutral)
 			Text.AddOutput("She is very precious to me,”</i> [name] confesses. <i>“She was the one who made sure I was accepted even though the leadership back then was still skeptical of admitting an elf, and she has been like an older sister, and sometimes almost a... mother, to me.”</i>", parse);
 		else
-			Text.AddOutput("She has kept watch over me since then, making sure that I am doing well, and learning to best serve lady Aria. She has been a great help in guiding me on my path, [playername]. Perhaps she will be able to assist you, as well,”</i> [name] tells you, looking you straight in the eyes.", parse);
+			Text.AddOutput("She has kept watch over me since then, making sure that I am doing well and learning to best serve lady Aria. She has been a great help in guiding me on my path, [playername]. Perhaps she will be able to assist you, as well,”</i> [name] tells you, looking you straight in the eyes.", parse);
 		Text.Newline();
 		Text.AddOutput("<i>“She is generous and kind, but also strict and meticulous in ensuring that Aria's will is done. She, more than anyone, acts for the preservation of the worlds, and to ensure the dominion of our lady's goodness.”</i>", parse);
 		Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
