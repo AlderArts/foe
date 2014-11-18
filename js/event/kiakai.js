@@ -176,17 +176,19 @@ Kiakai.prototype.Interact = function(switchSpot) {
 	};
 	
 	if(kiakai.flags["Attitude"] == Kiakai.Attitude.Nice) {
-		Text.AddOutput("The elf perks up as you approach, giving you a friendly smile. <i>“What is on your mind, [playername]?”</i>", parse);
+		Text.Add("The elf perks up as you approach, giving you a friendly smile. <i>“What is on your mind, [playername]?”</i>", parse);
 	}
 	else if(kiakai.flags["Attitude"] == Kiakai.Attitude.Naughty) {
-		Text.AddOutput("The elf regards your approach with a wary gaze, not sure what you are after. <i>“Yes?”</i>", parse);
+		Text.Add("The elf regards your approach with a wary gaze, not sure what you are after. <i>“Yes?”</i>", parse);
 	}
 	else {
-		Text.AddOutput("[Error in Kiakai attitude: " + kiakai.flags["Attitude"] + "]");
+		Text.Add("[Error in Kiakai attitude: " + kiakai.flags["Attitude"] + "]");
 	}
-	Text.Newline();
+	Text.NL();
 	
 	that.PrintDescription();
+	
+	Text.Flush();
 	
 	var options = [];
 	
@@ -198,12 +200,13 @@ Kiakai.prototype.Interact = function(switchSpot) {
 	options.push({ nameStr: "Release",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("[Placeholder] Kiai masturbates fiercely, cumming buckets.");
+			Text.Add("[Placeholder] Kiai masturbates fiercely, cumming buckets.");
 			
 			world.TimeStep({minute : 10});
 			
 			that.OrgasmCum();
 			
+			Text.Flush();
 			Gui.NextPrompt(function() {
 				that.Interact(switchSpot);
 			});
@@ -213,8 +216,8 @@ Kiakai.prototype.Interact = function(switchSpot) {
 	options.push({ nameStr: "Meditate",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("Placeholder: [name] sits down and attempts to calm [hisher] thoughts.", parse);
-			
+			Text.Add("Placeholder: [name] sits down and attempts to calm [hisher] thoughts.", parse);
+			Text.Flush();
 			world.TimeStep({minute : 30});
 			
 			that.AddLustFraction(-1);
@@ -240,19 +243,15 @@ Kiakai.prototype.Interact = function(switchSpot) {
 }
 
 Kiakai.prototype.TalkPrompt = function() {
-	Text.Clear();
-	
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer()
+		name   : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
-	Text.AddOutput("What do you want to talk with [name] about?", parse);
+	Text.Clear();
+	Text.Add("What do you want to talk with [name] about?", parse);
+	Text.Flush();
 	
 	var options = [];
 	// TALK ABOUT MAIN QUEST
@@ -351,45 +350,46 @@ Scenes.Kiakai.TalkQuest = function() {
 	Text.Clear();
 	// Initial stage
 	if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
-		Text.AddOutput("You ask what you are to do with the gem.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Lady Aria has told me that the gem holds great power. If you are able to wield it, maybe it can be used to stop Uru before it is too late.”</i> [name] looks at you suspiciously, clearly wondering if that's what you'd really do with it. <i>“Unfortunately, I know nothing of the magic that powers the artifact.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("Couldn't you just ask Aria?", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“The lady would no doubt be able to assist, but I have been unable to contact her since you arrived on Eden. We will need to seek out someone knowledgeable about such things - perhaps a powerful magician or a skilled alchemist.”</i>", parse);
+		Text.Add("You ask what you are to do with the gem.", parse);
+		Text.NL();
+		Text.Add("<i>“Lady Aria has told me that the gem holds great power. If you are able to wield it, maybe it can be used to stop Uru before it is too late.”</i> [name] looks at you suspiciously, clearly wondering if that's what you'd really do with it. <i>“Unfortunately, I know nothing of the magic that powers the artifact.”</i>", parse);
+		Text.NL();
+		Text.Add("Couldn't you just ask Aria?", parse);
+		Text.NL();
+		Text.Add("<i>“The lady would no doubt be able to assist, but I have been unable to contact her since you arrived on Eden. We will need to seek out someone knowledgeable about such things - perhaps a powerful magician or a skilled alchemist.”</i>", parse);
 	}
 	else {
-		Text.AddOutput("<i>“Our first objective should be to find out more about that gemstone that you are carrying,”</i> [name] suggests. <i>“According to lady Aria, it holds great power. If you are able to wield it, maybe it can be used to stop Uru before it is too late.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("When you ask [himher] how to best achieve that, the elf frowns thoughtfully. <i>“I know nothing of the magic that powers this artifact, we will need to find either a powerful magician or a skilled alchemist who can study it closer.”</i> [name] lets out a sigh of frustration, <i>“The lady would no doubt be able to assist, but I have been unable to contact her since you arrived on Eden. I am afraid we are on our own.”</i>", parse);
+		Text.Add("<i>“Our first objective should be to find out more about that gemstone that you are carrying,”</i> [name] suggests. <i>“According to lady Aria, it holds great power. If you are able to wield it, maybe it can be used to stop Uru before it is too late.”</i>", parse);
+		Text.NL();
+		Text.Add("When you ask [himher] how to best achieve that, the elf frowns thoughtfully. <i>“I know nothing of the magic that powers this artifact, we will need to find either a powerful magician or a skilled alchemist who can study it closer.”</i> [name] lets out a sigh of frustration, <i>“The lady would no doubt be able to assist, but I have been unable to contact her since you arrived on Eden. I am afraid we are on our own.”</i>", parse);
 	}
-	Text.Newline();
+	Text.NL();
 	
 	if(rosalin.flags["Met"] == 0) {
-		Text.AddOutput("<i>“I know that there is an alchemist at the nomad campsite, but I am not aware how skilled she is. Perhaps she could point us in the right direction, though?”</i>", parse);
+		Text.Add("<i>“I know that there is an alchemist at the nomad campsite, but I am not aware how skilled she is. Perhaps she could point us in the right direction, though?”</i>", parse);
 	}
 	else {
-		Text.AddOutput("<i>“About that cat girl... we should probably try to find someone more, so to speak, sane,”</i> the elf shakes [hisher] head. <i>“We could probably find someone in the city - many folk pass through there.”</i>", parse);
+		Text.Add("<i>“About that cat girl... we should probably try to find someone more, so to speak, sane,”</i> the elf shakes [hisher] head. <i>“We could probably find someone in the city - many folk pass through there.”</i>", parse);
 		
-		Text.Newline();
+		Text.NL();
 		if(rigard.Access()) {
-			Text.AddOutput("<i>“Question is, how do we get in?”</i>", parse);
+			Text.Add("<i>“Question is, how do we get in?”</i>", parse);
 			
-			Text.Newline();
-			Text.AddOutput("<i>“Perhaps we could try to have one of the farmers sneak us in. They must pass inside regularly to sell their produce. We will have to make sure they're friendly enough to let us tag along, however.”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“I am sure we will be able to find other ways of gaining entrance eventually as well.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Perhaps we could try to have one of the farmers sneak us in. They must pass inside regularly to sell their produce. We will have to make sure they're friendly enough to let us tag along, however.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“I am sure we will be able to find other ways of gaining entrance eventually as well.”</i>", parse);
 		}
 		else if(rigard.flags["RoyalAccess"] == 0) {
-			Text.AddOutput("<i>“I hear that the court mage is a skilled alchemist, perhaps we could seek an audience with her?”</i>", parse);
+			Text.Add("<i>“I hear that the court mage is a skilled alchemist, perhaps we could seek an audience with her?”</i>", parse);
 		}
 		else {
-			Text.AddOutput("<i>“We should find the court mage and ask her about the gem.”</i>", parse);
+			Text.Add("<i>“We should find the court mage and ask her about the gem.”</i>", parse);
 		}
 		// TODO: Further down main quest
 	}
 	
+	Text.Flush();
 	Gui.NextPrompt(kiakai.TalkPrompt);
 }
 
@@ -410,54 +410,55 @@ Scenes.Kiakai.TalkAria = function() {
 	if(kiakai.flags["TalkedAria"] == 0) {
 		
 		if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
-			Text.AddOutput("<i>“You may be ignorant of much, [playername], but you have had the honor of standing in her presence yourself.”</i> [name] looks a little angry, perhaps almost jealous. <i>“She is the lady of light, the embodiment of good in the worlds. Surely you must have seen at least that much?”</i>", parse);
+			Text.Add("<i>“You may be ignorant of much, [playername], but you have had the honor of standing in her presence yourself.”</i> [name] looks a little angry, perhaps almost jealous. <i>“She is the lady of light, the embodiment of good in the worlds. Surely you must have seen at least that much?”</i>", parse);
 		}
 		else {
-			Text.AddOutput("<i>“I guess things have been dropped on you rather suddenly, [playername],”</i> [name] concedes, looking rather embarrassed. <i>“It was not my intention to keep you in the dark about anything. Please, ask me anything you would like to know.”</i>", parse);
+			Text.Add("<i>“I guess things have been dropped on you rather suddenly, [playername],”</i> [name] concedes, looking rather embarrassed. <i>“It was not my intention to keep you in the dark about anything. Please, ask me anything you would like to know.”</i>", parse);
 		}
-		Text.Newline();
-		Text.AddOutput("You explain that you would like to know more about Aria and her followers.", parse);
-		Text.Newline();
+		Text.NL();
+		Text.Add("You explain that you would like to know more about Aria and her followers.", parse);
+		Text.NL();
 		
 		if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
-			Text.AddOutput("<i>“It is good that you take interest in her.”</i> The elf seems a little relieved that you're interested in [hisher] goddess. ", parse);
+			Text.Add("<i>“It is good that you take interest in her.”</i> The elf seems a little relieved that you're interested in [hisher] goddess. ", parse);
 		}
 		else {
-			Text.AddOutput("<i>“Certainly!”</i> The elf looks happy that you brought up this particular topic, it seems that [heshe] definitely is a devout follower. ", parse);
+			Text.Add("<i>“Certainly!”</i> The elf looks happy that you brought up this particular topic, it seems that [heshe] definitely is a devout follower. ", parse);
 		}
-		Text.AddOutput("<i>“Lady Aria is revered by many here on Eden, and for good reason. While it is not common, there have been incidents with portals to other worlds opening up prior to your arrival here,”</i> [name] starts out, <i>“Sometimes through design, sometimes due to happenstance, sometimes due to malice. The times that something... untoward emerged from the other side, the lady exerted her powers to bind it before it could cause significant harm.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("You ask how long this has been going on. <i>“The records are not clear on this, and the records of my people go back a long time,”</i> [name] answers you. <i>“These kinds of portals have been opening on Eden for thousands of years, as far as I know.”</i>", parse);
-		Text.Newline();
+		Text.Add("<i>“Lady Aria is revered by many here on Eden, and for good reason. While it is not common, there have been incidents with portals to other worlds opening up prior to your arrival here,”</i> [name] starts out, <i>“Sometimes through design, sometimes due to happenstance, sometimes due to malice. The times that something... untoward emerged from the other side, the lady exerted her powers to bind it before it could cause significant harm.”</i>", parse);
+		Text.NL();
+		Text.Add("You ask how long this has been going on. <i>“The records are not clear on this, and the records of my people go back a long time,”</i> [name] answers you. <i>“These kinds of portals have been opening on Eden for thousands of years, as far as I know.”</i>", parse);
+		Text.NL();
 		
 		if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
-			Text.AddOutput("<i>“Is there anything else that you would like to know about lady Aria, [playername]?”</i>", parse);
+			Text.Add("<i>“Is there anything else that you would like to know about lady Aria, [playername]?”</i>", parse);
 		else
-			Text.AddOutput("<i>“Tell me, is there anything else that you would like to know about lady Aria, [playername]?”</i>", parse);
+			Text.Add("<i>“Tell me, is there anything else that you would like to know about lady Aria, [playername]?”</i>", parse);
 		
 		kiakai.relation.IncreaseStat(50, 2);
 		
 		kiakai.flags["TalkedAria"] = 1;
 	}
 	else {
-		Text.AddOutput("<i>“What else would you like to know about lady Aria, [playername]?”</i>", parse);
+		Text.Add("<i>“What else would you like to know about lady Aria, [playername]?”</i>", parse);
 	}
-	Text.Newline();
+	Text.Flush();
 	
 	var options = [];
 	// TALK ABOUT ARIA'S GOALS
 	options.push({ nameStr: "Goals",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("What are Aria's goals exactly? For what reason is she putting so much effort into keeping Eden safe?", parse);
-			Text.Newline();
+			Text.Add("What are Aria's goals exactly? For what reason is she putting so much effort into keeping Eden safe?", parse);
+			Text.NL();
 			
 			if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
-				Text.AddOutput("[name], looking affronted, replies curtly, <i>“She is the caretaker of the worlds, [playername]! It is her very nature to protect those who follow and worship her!”</i> You explain that while she did seem benevolent when you met her, you still need to find out everything you can about your situation. Still a bit huffy, [heshe] goes on, <i>“It is not for us to know exactly what the lady's plans are, we need only trust in her and we will no doubt prevail. I do know that you are instrumental for them, however.”</i>", parse);
+				Text.Add("[name], looking affronted, replies curtly, <i>“She is the caretaker of the worlds, [playername]! It is her very nature to protect those who follow and worship her!”</i> You explain that while she did seem benevolent when you met her, you still need to find out everything you can about your situation. Still a bit huffy, [heshe] goes on, <i>“It is not for us to know exactly what the lady's plans are, we need only trust in her and we will no doubt prevail. I do know that you are instrumental for them, however.”</i>", parse);
 			else
-				Text.AddOutput("[name], looking affronted, replies curtly, <i>“For the safety of those who follow and worship her, of course!”</i> You calm the elf down, explaining that you meant no offense. Still a bit huffy, [heshe] continues, <i>“It is not for me to know exactly what the lady's plans are, but I do know that you are instrumental for them.”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("When you ask exactly what [heshe] means by that, [name] only responds that something about you, or perhaps the gem you carry, could greatly change the future of Eden. [HeShe] seems unwilling or unable to explain more details at this point.", parse);
+				Text.Add("[name], looking affronted, replies curtly, <i>“For the safety of those who follow and worship her, of course!”</i> You calm the elf down, explaining that you meant no offense. Still a bit huffy, [heshe] continues, <i>“It is not for me to know exactly what the lady's plans are, but I do know that you are instrumental for them.”</i>", parse);
+			Text.NL();
+			Text.Add("When you ask exactly what [heshe] means by that, [name] only responds that something about you, or perhaps the gem you carry, could greatly change the future of Eden. [HeShe] seems unwilling or unable to explain more details at this point.", parse);
+			Text.Flush();
 			
 			Gui.NextPrompt(Scenes.Kiakai.TalkAria);
 		}, enabled : true,
@@ -482,29 +483,30 @@ Scenes.Kiakai.TalkUru = function() {
 	Text.Clear();
 	
 	if(kiakai.flags["TalkedUru"] == 0) {
-		Text.AddOutput("<i>“I would rather not dwell on the dark one longer than I have to, [playername],”</i> [name] tells you in a pained voice, <i>“But one must know their enemy to stand against it in battle.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("The elf clears [hisher] throat, preparing for a longer dissertation. <i>“Uru is a foul and evil creature, utterly selfish and chaotically destructive,”</i> [heshe] begins, <i>“I know very little of the details, but she and lady Aria have battled with each other before, though I do not know where.”</i>", parse);
-		Text.Newline();
+		Text.Add("<i>“I would rather not dwell on the dark one longer than I have to, [playername],”</i> [name] tells you in a pained voice, <i>“But one must know their enemy to stand against it in battle.”</i>", parse);
+		Text.NL();
+		Text.Add("The elf clears [hisher] throat, preparing for a longer dissertation. <i>“Uru is a foul and evil creature, utterly selfish and chaotically destructive,”</i> [heshe] begins, <i>“I know very little of the details, but she and lady Aria have battled with each other before, though I do not know where.”</i>", parse);
+		Text.NL();
 		
 		if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
-			Text.AddOutput("<i>“I thankfully have not experienced it as you have. I have seen visions of the hellish realm she has been trapped in,”</i> [name] shudders uncomfortably. <i>“The truly terrible thing is that that realm was once lush and filled with life, now it is nothing more than a defiled wasteland, plagued by demons.”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“Do not trust her under any circumstances, [playername]! She is treacherous, the very embodiment of evil!”</i> The elf adds, clearly worried.", parse);
+			Text.Add("<i>“I thankfully have not experienced it as you have. I have seen visions of the hellish realm she has been trapped in,”</i> [name] shudders uncomfortably. <i>“The truly terrible thing is that that realm was once lush and filled with life, now it is nothing more than a defiled wasteland, plagued by demons.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Do not trust her under any circumstances, [playername]! She is treacherous, the very embodiment of evil!”</i> The elf adds, clearly worried.", parse);
 		}
 		else
-			Text.AddOutput("<i>“And though I thankfully have not experienced it as you have, I have seen visions of the hellish realm she has been trapped in,”</i> [name] shudders uncomfortably, <i>“That realm was once lush and filled with life, now it is nothing more than a defiled wasteland, plagued by demons.”</i>", parse);
+			Text.Add("<i>“And though I thankfully have not experienced it as you have, I have seen visions of the hellish realm she has been trapped in,”</i> [name] shudders uncomfortably, <i>“That realm was once lush and filled with life, now it is nothing more than a defiled wasteland, plagued by demons.”</i>", parse);
 		
-		Text.Newline();
-		Text.AddOutput("<i>“Where she came from, what she is, what her goals are, the lady has yet to see fit to inform me. A kindness, I imagine,”</i> the elf concedes, <i>“I am afraid that you have to ask the lady yourself to find out more. I will try to answer any questions you have to the best of my abilities, though.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Where she came from, what she is, what her goals are, the lady has yet to see fit to inform me. A kindness, I imagine,”</i> the elf concedes, <i>“I am afraid that you have to ask the lady yourself to find out more. I will try to answer any questions you have to the best of my abilities, though.”</i>", parse);
 		kiakai.relation.IncreaseStat(50, 2);
 		
 		kiakai.flags["TalkedUru"] = 1;
 	}
 	else {
-		Text.AddOutput("<i>“What else would you know of the evil one, [playername]?”</i> [name] asks, [hisher] discomfort clear in [hisher] expression.", parse);
+		Text.Add("<i>“What else would you know of the evil one, [playername]?”</i> [name] asks, [hisher] discomfort clear in [hisher] expression.", parse);
 	}
 	
+	Text.Flush();
 	
 	var options = [];
 	// TALK ABOUT CONFLICT WITH ARIA
@@ -512,15 +514,16 @@ Scenes.Kiakai.TalkUru = function() {
 		func : function() {
 			Text.Clear();
 			
-			Text.AddOutput("[name] frowns, trying to collect [hisher] thoughts, <i>“All I know is that lady Aria has done battle with the one known as Uru before, and that their last conflict ended in Uru being trapped in the realm you saw but a brief glimpse of.”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("What of Aria herself, you ask, did she suffer any consequence from the battle?", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“The lady bested her adversary, of course she did, and even showed mercy on the foul creature,”</i> the elf sorrowfully bows [hisher] head, <i>“While she did not suffer any wounds, the encounter drained her, and she has yet to manifest on Eden since.”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("In power, would [name] say they are evenly matched?", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“No! Of course not!”</i> the elf exclaims, <i>“No mere demon could ever match the lady.”</i>", parse);
+			Text.Add("[name] frowns, trying to collect [hisher] thoughts, <i>“All I know is that lady Aria has done battle with the one known as Uru before, and that their last conflict ended in Uru being trapped in the realm you saw but a brief glimpse of.”</i>", parse);
+			Text.NL();
+			Text.Add("What of Aria herself, you ask, did she suffer any consequence from the battle?", parse);
+			Text.NL();
+			Text.Add("<i>“The lady bested her adversary, of course she did, and even showed mercy on the foul creature,”</i> the elf sorrowfully bows [hisher] head, <i>“While she did not suffer any wounds, the encounter drained her, and she has yet to manifest on Eden since.”</i>", parse);
+			Text.NL();
+			Text.Add("In power, would [name] say they are evenly matched?", parse);
+			Text.NL();
+			Text.Add("<i>“No! Of course not!”</i> the elf exclaims, <i>“No mere demon could ever match the lady.”</i>", parse);
+			Text.Flush();
 			
 			Gui.NextPrompt(Scenes.Kiakai.TalkUru);
 		}, enabled : true,
@@ -531,53 +534,55 @@ Scenes.Kiakai.TalkUru = function() {
 		func : function() {
 			Text.Clear();
 			
-			Text.AddOutput("<i>“Understand that a being so powerful cannot easily pass between the realms,”</i> [name] explains, <i>“A regular portal could not withstand her passing, and her inability to create a more stable one has kept the other planes of existence safe till now.”</i> The elf bows [hisher] head sorrowfully, <i>“But this safety is dearly bought, as an entire realm is now under her influence.”</i>", parse);
-			Text.Newline();
+			Text.Add("<i>“Understand that a being so powerful cannot easily pass between the realms,”</i> [name] explains, <i>“A regular portal could not withstand her passing, and her inability to create a more stable one has kept the other planes of existence safe till now.”</i> The elf bows [hisher] head sorrowfully, <i>“But this safety is dearly bought, as an entire realm is now under her influence.”</i>", parse);
+			Text.NL();
 			
 			if(kiakai.flags["TalkedUruDA"] == 0) {
 				
 				if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
-					Text.AddOutput("[name] looks at you pleadingly, fear visible in [hisher] eyes, <i>“Y-you saw what it was like there, didn't you, [playername]? She <b>cannot</b> be allowed to enter Eden!”</i>", parse);
+					Text.Add("[name] looks at you pleadingly, fear visible in [hisher] eyes, <i>“Y-you saw what it was like there, didn't you, [playername]? She <b>cannot</b> be allowed to enter Eden!”</i>", parse);
 				else
-					Text.AddOutput("[name] grabs your hand, fear visible in [hisher] eyes, <i>“Y-you saw what it was like there, didn't you, [playername]? She <b>cannot</b> be allowed to enter Eden!”</i>", parse);
-				Text.Newline();
+					Text.Add("[name] grabs your hand, fear visible in [hisher] eyes, <i>“Y-you saw what it was like there, didn't you, [playername]? She <b>cannot</b> be allowed to enter Eden!”</i>", parse);
+				Text.Flush();
 				
 				// [Comfort][Boast][Who cares]
 				var options = [];
 				options.push({ nameStr: "Comfort",
 					func : function() {
 						if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
-							Text.AddOutput("You take pity on the poor elf and embrace [himher]. You feel [hisher] body momentarily go rigid, surprised by your actions, before [heshe] relaxes in your arms. You do your best to soothe and calm [himher] as you assure [himher] that it will not come to that. The elf's shaking slowly subsides as [heshe] presses desperately against you.", parse);
-							Text.Newline();
-							Text.AddOutput("<i>“Th-thank you for that,”</i> [name] mumbles, disentangling [himher]self from you and blushing. <i>“Perhaps I have misjudged you.”</i>", parse);
-							Text.Newline();
-							Text.AddOutput("You insist that [heshe] can lean on your shoulder if [heshe] needs help. [name] smiles at you, before changing the subject.", parse);
+							Text.Add("You take pity on the poor elf and embrace [himher]. You feel [hisher] body momentarily go rigid, surprised by your actions, before [heshe] relaxes in your arms. You do your best to soothe and calm [himher] as you assure [himher] that it will not come to that. The elf's shaking slowly subsides as [heshe] presses desperately against you.", parse);
+							Text.NL();
+							Text.Add("<i>“Th-thank you for that,”</i> [name] mumbles, disentangling [himher]self from you and blushing. <i>“Perhaps I have misjudged you.”</i>", parse);
+							Text.NL();
+							Text.Add("You insist that [heshe] can lean on your shoulder if [heshe] needs help. [name] smiles at you, before changing the subject.", parse);
 						}
 						else {
-							Text.AddOutput("You take pity on the poor elf and embrace [himher], soothing and calming as you assure [himher] that it will not come to that. The elf's shaking slowly subsides as [heshe] melts in your arms, resting [hisher] head on your chest.", parse);
-							Text.Newline();
-							Text.AddOutput("<i>“Th-thank you,”</i> [name] mumbles, disentangling [himher]self from you and blushing, <i>“I am sorry, I gave in to my fears... it will not happen again.”</i>", parse);
-							Text.Newline();
-							Text.AddOutput("You insist that [heshe] can lean on your shoulder anytime. [name] blushes brightly before trying to change the subject.", parse);
+							Text.Add("You take pity on the poor elf and embrace [himher], soothing and calming as you assure [himher] that it will not come to that. The elf's shaking slowly subsides as [heshe] melts in your arms, resting [hisher] head on your chest.", parse);
+							Text.NL();
+							Text.Add("<i>“Th-thank you,”</i> [name] mumbles, disentangling [himher]self from you and blushing, <i>“I am sorry, I gave in to my fears... it will not happen again.”</i>", parse);
+							Text.NL();
+							Text.Add("You insist that [heshe] can lean on your shoulder anytime. [name] blushes brightly before trying to change the subject.", parse);
 						}
 						
 						kiakai.relation.IncreaseStat(100, 5);
 						
+						Text.Flush();
 						Gui.NextPrompt(Scenes.Kiakai.TalkUru);
 					}, enabled : true,
 					tooltip : Text.Parse("Try to comfort [himher].", parse)
 				});
 				options.push({ nameStr: "Boast",
 					func : function() {	
-						Text.AddOutput("<i>“Hah, that demon isn't so tough,”</i> you brag confidently, ", parse);
+						Text.Add("<i>“Hah, that demon isn't so tough,”</i> you brag confidently, ", parse);
 						if(gameCache.flags["IntroFuckedUru"]   != 0 ||
 						   gameCache.flags["IntroFuckedByUru"] != 0)
-							Text.AddOutput("<i>“I could handle her just fine, I left her begging for more!”</i>", parse);
+							Text.Add("<i>“I could handle her just fine, I left her begging for more!”</i>", parse);
 						else
-							Text.AddOutput("<i>“I could easily withstand her wiles, you have nothing to fear as long as I'm around!”</i>", parse);
-						Text.Newline();
+							Text.Add("<i>“I could easily withstand her wiles, you have nothing to fear as long as I'm around!”</i>", parse);
+						Text.NL();
 						
-						Text.AddOutput("[name] looks at you doubtfully, but with a desperate spark of hope in [hisher] purple eyes, <i>“R-really?”</i> You nod affirmatively, though deep down you still have some nagging doubts about your own words.", parse);
+						Text.Add("[name] looks at you doubtfully, but with a desperate spark of hope in [hisher] purple eyes, <i>“R-really?”</i> You nod affirmatively, though deep down you still have some nagging doubts about your own words.", parse);
+						Text.Flush();
 						Gui.NextPrompt(Scenes.Kiakai.TalkUru);
 					}, enabled : true,
 					tooltip : "Boast about your own power."
@@ -585,19 +590,20 @@ Scenes.Kiakai.TalkUru = function() {
 				options.push({ nameStr: "Who cares",
 					func : function() {
 						kiakai.relation.DecreaseStat(-100, 5);
-						Text.AddOutput("You explain to [name] that Eden isn't your world, and you have higher priorities than dealing with Uru.",parse);
-						Text.Newline();
+						Text.Add("You explain to [name] that Eden isn't your world, and you have higher priorities than dealing with Uru.",parse);
+						Text.NL();
 						
 						if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
-							Text.AddOutput("The elf looks at you, clearly disappointed. <i>“I know you must walk your own path, and I will support you, but please think of the people of this world. They have friends, families, children, the same as you or I.”</i>", parse);
+							Text.Add("The elf looks at you, clearly disappointed. <i>“I know you must walk your own path, and I will support you, but please think of the people of this world. They have friends, families, children, the same as you or I.”</i>", parse);
 						else
-							Text.AddOutput("<i>“Think of all the people in this world. You may well be the only one who can help them,”</i> the elf tells you, clearly agitated. <i>“Would you doom all of us to be Uru's prey? Look around you! Would you see it reduced to the wasteland you saw in Uru's realm?”</i>", parse);
+							Text.Add("<i>“Think of all the people in this world. You may well be the only one who can help them,”</i> the elf tells you, clearly agitated. <i>“Would you doom all of us to be Uru's prey? Look around you! Would you see it reduced to the wasteland you saw in Uru's realm?”</i>", parse);
 						
-						Text.Newline();
-						Text.AddOutput("<i>“Please,”</i> [heshe] entreats you, <i>“do not abandon us.”</i>",parse);
-						Text.Newline();
-						Text.AddOutput("You tell her that you'll think about it, but your own world is still the one most important to you.",parse);
+						Text.NL();
+						Text.Add("<i>“Please,”</i> [heshe] entreats you, <i>“do not abandon us.”</i>",parse);
+						Text.NL();
+						Text.Add("You tell her that you'll think about it, but your own world is still the one most important to you.",parse);
 						
+						Text.Flush();
 						Gui.NextPrompt(Scenes.Kiakai.TalkUru);
 					}, enabled : true,
 					tooltip : "Eden isn't your problem, and you're not sure Uru is either..."
@@ -608,13 +614,13 @@ Scenes.Kiakai.TalkUru = function() {
 				kiakai.flags["TalkedUruDA"] = 1;
 			}
 			else {
-				Text.AddOutput("<i>“Though no fault of yours, it seems that safety could now be at an end, but only time will tell,”</i> the elf shudders with unease, <i>“Uru is very, very powerful. Should she ever unleash the full force of her wrath on Eden, we would be as ants before her. It must not come to a direct confrontation.”</i>", parse);
+				Text.Add("<i>“Though no fault of yours, it seems that safety could now be at an end, but only time will tell,”</i> the elf shudders with unease, <i>“Uru is very, very powerful. Should she ever unleash the full force of her wrath on Eden, we would be as ants before her. It must not come to a direct confrontation.”</i>", parse);
 				if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
-					Text.Newline();
-					Text.AddOutput("<i>“Please, help us to prevent her coming.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Please, help us to prevent her coming.”</i>", parse);
 				}
+				Text.Flush();
 				Gui.NextPrompt(Scenes.Kiakai.TalkUru);
-				
 			}
 		}, enabled : true,
 		tooltip : "Ask about why and how Uru was sealed in the realm where you met her."
@@ -624,13 +630,13 @@ Scenes.Kiakai.TalkUru = function() {
 		func : function() {
 			Text.Clear();
 			
-			Text.AddOutput("<i>“Before Uru was sealed in the dark realm, many worlds fell under her influence,”</i> [name] intones sorrowfully, <i>“Twisted, corrupted, defiled; they all succumbed, until lady Aria intervened.”</i>", parse);
-			Text.Newline();
+			Text.Add("<i>“Before Uru was sealed in the dark realm, many worlds fell under her influence,”</i> [name] intones sorrowfully, <i>“Twisted, corrupted, defiled; they all succumbed, until lady Aria intervened.”</i>", parse);
+			Text.NL();
 			if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
-				Text.AddOutput("<i>“Uru's very presence is enough to corrupt those around her. I hope your stay was brief enough that you were not significantly affected,”</i> the elf concludes, sounding a little suspicious.", parse);
+				Text.Add("<i>“Uru's very presence is enough to corrupt those around her. I hope your stay was brief enough that you were not significantly affected,”</i> the elf concludes, sounding a little suspicious.", parse);
 			else
-				Text.AddOutput("<i>“Uru's very presence is enough to corrupt those around her, given time,”</i> the elf concludes.", parse);
-			
+				Text.Add("<i>“Uru's very presence is enough to corrupt those around her, given time,”</i> the elf concludes.", parse);
+			Text.Flush();
 			Gui.NextPrompt(Scenes.Kiakai.TalkUru);
 		}, enabled : true,
 		tooltip : "Ask about Uru's previous conquests."
@@ -653,8 +659,8 @@ Scenes.Kiakai.TalkEden = function() {
 	};
 	
 	Text.Clear();
-	Text.AddOutput("<i>“What would you like to know about Eden, [playername]?”</i>", parse);
-	Text.Newline();
+	Text.Add("<i>“What would you like to know about Eden, [playername]?”</i>", parse);
+	Text.Flush();
 	
 	var options = [];
 	// TALK ABOUT GEOGRAPHY
@@ -665,62 +671,54 @@ Scenes.Kiakai.TalkEden = function() {
 			var scenes = [];
 			// TREE
 			scenes.push(function() {
-				Text.AddOutput("You ask about the most prominent aspect of the entire island, the giant tree rising thousands of feet into the air, covering large parts of Eden in the shadow its foliage.", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“The tree stands at the center, its roots delve deep,”</i> [name] intones in a reverent voice, <i>“As far as I know, it has always been here. Only the dragons - the oldest beings that live on Eden - have any idea from whence it came and how it came to grow so big. The tree is a symbol of life and the power of nature, and many on Eden worship it, calling it 'The Mother of All'.”</i>", parse);
-				Text.Newline();
+				Text.Add("You ask about the most prominent aspect of the entire island, the giant tree rising thousands of feet into the air, covering large parts of Eden in the shadow its foliage.", parse);
+				Text.NL();
+				Text.Add("<i>“The tree stands at the center, its roots delve deep,”</i> [name] intones in a reverent voice, <i>“As far as I know, it has always been here. Only the dragons - the oldest beings that live on Eden - have any idea from whence it came and how it came to grow so big. The tree is a symbol of life and the power of nature, and many on Eden worship it, calling it 'The Mother of All'.”</i>", parse);
+				Text.NL();
 				
 				// TODO: VISITED TREE CITY
 				if(true) {
-					Text.AddOutput("<i>“It is even rumored that there is an entire city clinging to the upper branches.”</i>", parse);
+					Text.Add("<i>“It is even rumored that there is an entire city clinging to the upper branches.”</i>", parse);
 				}
 				else {
-					Text.AddOutput("<i>“Even so, it still surprises me that an entire city could thrive there, so far above the ground.”</i>", parse);
+					Text.Add("<i>“Even so, it still surprises me that an entire city could thrive there, so far above the ground.”</i>", parse);
 				}
-				
-				Gui.NextPrompt(Scenes.Kiakai.TalkEden);
 			});
 			// CITIES
 			scenes.push(function() {
-				Text.AddOutput("You ask [himher] about what cities and villages are located on Eden.", parse);
-				Text.Newline();
+				Text.Add("You ask [himher] about what cities and villages are located on Eden.", parse);
+				Text.NL();
 				
-				Text.AddOutput("<i>“The largest settlement is of course the capital of the kingdom, located edgeways of the plains, between the lake and the great forest, not far from the nomad camp where you woke up. Though it is mostly populated by pure humans, there is a fair scattering of various morphs and other races living there.”</i>", parse);
-				Text.Newline();
+				Text.Add("<i>“The largest settlement is of course the capital of the kingdom, located edgeways of the plains, between the lake and the great forest, not far from the nomad camp where you woke up. Though it is mostly populated by pure humans, there is a fair scattering of various morphs and other races living there.”</i>", parse);
+				Text.NL();
 				
 				// TODO: OTHER CITIES
 				
-				Text.AddOutput("<i>“Other than that, there are a few smaller civilized settlements on the plains, and on the far side of the great tree,”</i> [name] concludes [hisher] explanation, <i>“The village I once called my home is located there.”</i>", parse);
-				
-				Gui.NextPrompt(Scenes.Kiakai.TalkEden);
+				Text.Add("<i>“Other than that, there are a few smaller civilized settlements on the plains, and on the far side of the great tree,”</i> [name] concludes [hisher] explanation, <i>“The village I once called my home is located there.”</i>", parse);
 			});
 			// DANGER
 			scenes.push(function() {
-				Text.AddOutput("You ask about what places one should best avoid.", parse);
-				Text.Newline();
+				Text.Add("You ask about what places one should best avoid.", parse);
+				Text.NL();
 				
-				Text.AddOutput("<i>“The desert, the high mountains, and the deeper reaches of the forest can be very dangerous to unprepared travelers,”</i> the elf confides, <i>“But the place you must be most careful of is the Boneyard, near the highlands. Stay <b>far</b> away from that place, or you will be sorry.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("The Boneyard? Why is it called that?", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“The place is named after the bones of the great dragons that went there to die,”</i> the elf shudders in discomfort, <i>“It is crawling with the bastard offspring of the dragons of old, and though no one has seen it in a long time, it is rumored one of the ancient beasts still resides there. If something like that catches you, you would be as good as dead.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("[name] frowns a bit, <i>“There have been rumors about people disappearing without a trace while traversing the desert. If you plan to head there, be very careful.”</i>", parse);
-				
-				Gui.NextPrompt(Scenes.Kiakai.TalkEden);
+				Text.Add("<i>“The desert, the high mountains, and the deeper reaches of the forest can be very dangerous to unprepared travelers,”</i> the elf confides, <i>“But the place you must be most careful of is the Boneyard, near the highlands. Stay <b>far</b> away from that place, or you will be sorry.”</i>", parse);
+				Text.NL();
+				Text.Add("The Boneyard? Why is it called that?", parse);
+				Text.NL();
+				Text.Add("<i>“The place is named after the bones of the great dragons that went there to die,”</i> the elf shudders in discomfort, <i>“It is crawling with the bastard offspring of the dragons of old, and though no one has seen it in a long time, it is rumored one of the ancient beasts still resides there. If something like that catches you, you would be as good as dead.”</i>", parse);
+				Text.NL();
+				Text.Add("[name] frowns a bit, <i>“There have been rumors about people disappearing without a trace while traversing the desert. If you plan to head there, be very careful.”</i>", parse);
 			});
 			// FLOATING ISLAND
 			scenes.push(function() {
-				Text.AddOutput("You ask about why Eden seems to be floating in the sky.", parse);
-				Text.Newline();
+				Text.Add("You ask about why Eden seems to be floating in the sky.", parse);
+				Text.NL();
 				
-				Text.AddOutput("[name] looks at you with a confused look on [hisher] face. <i>“What do you mean?”</i> Understanding slowly dawns on [himher], <i>“Oh, I think I understand. It is not so much that Eden is floating, the surrounding land... just is not there anymore. I have trouble imagining it otherwise, but the legends tell of a time when the lands stretched wider than now.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("What could have caused such an event, you ask, disbelief clear in your voice.", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“I know not,”</i> [name] admits.", parse);
-				
-				Gui.NextPrompt(Scenes.Kiakai.TalkEden);
+				Text.Add("[name] looks at you with a confused look on [hisher] face. <i>“What do you mean?”</i> Understanding slowly dawns on [himher], <i>“Oh, I think I understand. It is not so much that Eden is floating, the surrounding land... just is not there anymore. I have trouble imagining it otherwise, but the legends tell of a time when the lands stretched wider than now.”</i>", parse);
+				Text.NL();
+				Text.Add("What could have caused such an event, you ask, disbelief clear in your voice.", parse);
+				Text.NL();
+				Text.Add("<i>“I know not,”</i> [name] admits.", parse);
 			});
 			
 			var sceneId = kiakai.flags["RotGeo"];
@@ -734,6 +732,8 @@ Scenes.Kiakai.TalkEden = function() {
 			// Play scene
 			scenes[sceneId]();
 
+			Text.Flush();
+			Gui.NextPrompt(Scenes.Kiakai.TalkEden);
 		}, enabled : true,
 		tooltip : "Ask about the geography of Eden."
 	});
@@ -745,38 +745,34 @@ Scenes.Kiakai.TalkEden = function() {
 			var scenes = [];
 			// HUMANS
 			scenes.push(function() {
-				Text.AddOutput("<i>“Pure humans used to be the most numerous race on Eden, but interbreeding with the various other races arriving through portals has dwindled their numbers,”</i> [name] explains, <i>“They still account for the majority of the population in the capital, and with a few exceptions, only humans are allowed into the royal palace.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("Why is that so?", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“The royals wish to keep the bloodline pure at any cost, something which has resulted in a few... unsavory practices and customs. If you are not a pure human, you had best stay far away from the royal palace.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("Were humans the first race to live on Eden?", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“No, that much is known, at least. Long before man or elf ever set foot on Eden, there were the dragons.”</i>", parse);
-				Gui.NextPrompt(Scenes.Kiakai.TalkEden);
+				Text.Add("<i>“Pure humans used to be the most numerous race on Eden, but interbreeding with the various other races arriving through portals has dwindled their numbers,”</i> [name] explains, <i>“They still account for the majority of the population in the capital, and with a few exceptions, only humans are allowed into the royal palace.”</i>", parse);
+				Text.NL();
+				Text.Add("Why is that so?", parse);
+				Text.NL();
+				Text.Add("<i>“The royals wish to keep the bloodline pure at any cost, something which has resulted in a few... unsavory practices and customs. If you are not a pure human, you had best stay far away from the royal palace.”</i>", parse);
+				Text.NL();
+				Text.Add("Were humans the first race to live on Eden?", parse);
+				Text.NL();
+				Text.Add("<i>“No, that much is known, at least. Long before man or elf ever set foot on Eden, there were the dragons.”</i>", parse);
 			});
 			// MORPHS
 			scenes.push(function() {
-				Text.AddOutput("<i>“Creatures with characteristics resembling animals have been arriving to Eden from their various home realms for ages,”</i> the elf explains, <i>“Now they are a natural part of the population, just as common as pure humans.”</i>", parse);
+				Text.Add("<i>“Creatures with characteristics resembling animals have been arriving to Eden from their various home realms for ages,”</i> the elf explains, <i>“Now they are a natural part of the population, just as common as pure humans.”</i>", parse);
 				
 				// TODO: EXPAND?
 				
-				Gui.NextPrompt(Scenes.Kiakai.TalkEden);
 			});
 			// MAGICAL BEINGS
 			scenes.push(function() {
-				Text.AddOutput("<i>“Well, there are many on Eden you could classify as magical,”</i> the elf ruefully motions to [himher]self, <i>“Some consider my own race as such. You could say that this is a good place to live for beings that depend on magic, as it is very easy to coax tendrils of power from the very land itself.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("You ask how [heshe] would know the difference, if [heshe] has been living on Eden for [hisher] whole life.", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“Portals to other realms were more commonplace in my youth, and I have made short surveys into a few of them at the behest of the lady. None of them felt quite... right, as if one of my senses had been cut off. It was quite unpleasant.”</i> [name] shudders slightly.", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“Getting back to your question, there are many forms of spirits living in the less populated areas, some benign and some hostile. The greatest of the magical beings are the ancient dragons, but no one has seen one of them in a very long time.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“It is best to remain wary if things seem out of the ordinary. Trust your senses, you seem to have an affinity for the magical.”</i>", parse);
-				
-				Gui.NextPrompt(Scenes.Kiakai.TalkEden);
+				Text.Add("<i>“Well, there are many on Eden you could classify as magical,”</i> the elf ruefully motions to [himher]self, <i>“Some consider my own race as such. You could say that this is a good place to live for beings that depend on magic, as it is very easy to coax tendrils of power from the very land itself.”</i>", parse);
+				Text.NL();
+				Text.Add("You ask how [heshe] would know the difference, if [heshe] has been living on Eden for [hisher] whole life.", parse);
+				Text.NL();
+				Text.Add("<i>“Portals to other realms were more commonplace in my youth, and I have made short surveys into a few of them at the behest of the lady. None of them felt quite... right, as if one of my senses had been cut off. It was quite unpleasant.”</i> [name] shudders slightly.", parse);
+				Text.NL();
+				Text.Add("<i>“Getting back to your question, there are many forms of spirits living in the less populated areas, some benign and some hostile. The greatest of the magical beings are the ancient dragons, but no one has seen one of them in a very long time.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“It is best to remain wary if things seem out of the ordinary. Trust your senses, you seem to have an affinity for the magical.”</i>", parse);
 			});
 			// RABBITS
 			scenes.push(function() {
@@ -798,18 +794,16 @@ Scenes.Kiakai.TalkEden = function() {
 						Text.Add("<i>“Not to mention this Lagon... he is dangerous.”</i>", parse);
 					}
 				}
-				Text.Flush();
-				Gui.NextPrompt(Scenes.Kiakai.TalkEden);
 			});
 			// TODO: DEMONS
 			/*
 			scenes.push(function() {
-				Text.AddOutput("", parse);
-				Text.Newline();
-				Text.AddOutput("", parse);
-				Text.Newline();
-				Text.AddOutput("", parse);
-				Text.Newline();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Add("", parse);
+				Text.NL();
 				Gui.NextPrompt(Scenes.Kiakai.TalkEden);
 			});
 			*/
@@ -825,6 +819,8 @@ Scenes.Kiakai.TalkEden = function() {
 			// Play scene
 			scenes[sceneId]();
 
+			Text.Flush();
+			Gui.NextPrompt(Scenes.Kiakai.TalkEden);
 		}, enabled : true,
 		tooltip : "Ask about the people and creatures that inhabit Eden."
 	});
@@ -838,12 +834,13 @@ Scenes.Kiakai.TalkEden = function() {
 		func : function() {
 			Text.Clear();
 
-			Text.AddOutput("<i>“There is... something about this particular realm that makes it easier for portals to open, sometimes without any apparent reason,”</i> [name] explains, <i>“The lady once explained it to me as reality being thinner here, though I did not quite understand her at the time.”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“Though there are significantly fewer incidents nowadays, once it was commonplace for rifts to several realms to be open at once, with people passing freely through them. It is the reason for there being so many different races living on Eden today.”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“Something happened long ago that changed that, though, yet I know not what. The last portal I know of before your arrival here was several years ago, and that one was only open for a short time.”</i>", parse);
+			Text.Add("<i>“There is... something about this particular realm that makes it easier for portals to open, sometimes without any apparent reason,”</i> [name] explains, <i>“The lady once explained it to me as reality being thinner here, though I did not quite understand her at the time.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Though there are significantly fewer incidents nowadays, once it was commonplace for rifts to several realms to be open at once, with people passing freely through them. It is the reason for there being so many different races living on Eden today.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Something happened long ago that changed that, though, yet I know not what. The last portal I know of before your arrival here was several years ago, and that one was only open for a short time.”</i>", parse);
 
+			Text.Flush();
 			Gui.NextPrompt(Scenes.Kiakai.TalkEden);
 		}, enabled : true,
 		tooltip : "Ask about Eden's function as a hubworld, and portals to other realms."
@@ -857,68 +854,56 @@ Scenes.Kiakai.TalkFactions = function() {
 	
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer()
+		name   : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	Text.Clear();
 	
 	var scenes = [];
 	// KINGDOM
 	scenes.push(function() {
-		Text.AddOutput("<i>“The royal family rules over the largest city on Eden, and a good portion of the plains is under their control. They are purebred humans, and they have a strong distaste for other races. Non-humans and mixed races do best in staying far away from the castle and the royal guard, though the city itself is fine.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("Who is the current king, and why does he hate other races so?", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Rewyn the Second is king, and Rhylla is his queen,”</i> [name] tells you, <i>“As for his hatred for non-humans... it is more a deeply ingrained fear, fueled over the generations. The pure line has been dwindling for years.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Rewyn has two children; the twins, Rumi and Rani.”</i>", parse);
-		Gui.NextPrompt(Scenes.Kiakai.TalkEden);
+		Text.Add("<i>“The royal family rules over the largest city on Eden, and a good portion of the plains is under their control. They are purebred humans, and they have a strong distaste for other races. Non-humans and mixed races do best in staying far away from the castle and the royal guard, though the city itself is fine.”</i>", parse);
+		Text.NL();
+		Text.Add("Who is the current king, and why does he hate other races so?", parse);
+		Text.NL();
+		Text.Add("<i>“Rewyn the Second is king, and Rhylla is his queen,”</i> [name] tells you, <i>“As for his hatred for non-humans... it is more a deeply ingrained fear, fueled over the generations. The pure line has been dwindling for years.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Rewyn has two children; the twins, Rumi and Rani.”</i>", parse);
 	});
 	// NOMADS
 	scenes.push(function() {
-		Text.AddOutput("<i>“The nomads are an odd fellowship, as I am sure you have already gathered. They are not under the rule of the king, yet not enough of a thorn in his side to be branded outlaws.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Many of them are actually from realms other than this one, though the recent lack of portals has stranded them here. They usually move around quite a lot, but recently their camp has been set up on the plains.”</i>", parse);
-		Gui.NextPrompt(Scenes.Kiakai.TalkEden);
+		Text.Add("<i>“The nomads are an odd fellowship, as I am sure you have already gathered. They are not under the rule of the king, yet not enough of a thorn in his side to be branded outlaws.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Many of them are actually from realms other than this one, though the recent lack of portals has stranded them here. They usually move around quite a lot, but recently their camp has been set up on the plains.”</i>", parse);
 	});
 	// OUTLAWS
 	scenes.push(function() {
-		Text.AddOutput("<i>“All those who oppose the king are branded outlaws,”</i> [name] explains, <i>“There are actually many factions of them, but the largest group hides out in the forest. Thieves and murderers many of them, a rather unsavory group.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("What are the laws of the kingdom regarding those outlaws?", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Anyone belonging to an outlaw faction, or being found guilty of helping one, risk imprisonment or, at worst, death at the hand of the royal guard.”</i>", parse);
-		
-		Gui.NextPrompt(Scenes.Kiakai.TalkEden);
+		Text.Add("<i>“All those who oppose the king are branded outlaws,”</i> [name] explains, <i>“There are actually many factions of them, but the largest group hides out in the forest. Thieves and murderers many of them, a rather unsavory group.”</i>", parse);
+		Text.NL();
+		Text.Add("What are the laws of the kingdom regarding those outlaws?", parse);
+		Text.NL();
+		Text.Add("<i>“Anyone belonging to an outlaw faction, or being found guilty of helping one, risk imprisonment or, at worst, death at the hand of the royal guard.”</i>", parse);
 	});
 	// SHRINE
 	scenes.push(function() {
-		Text.AddOutput("<i>“The shrine of lady Aria has been my home for many years,”</i> [name] tells you, recalling fond memories, <i>“The priests and priestesses are very kind, and well versed in the arts of healing.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Many on Eden request the services of the shrine, or go on pilgrimages to visit the holy place. High priestess Yrissa welcomes all pure souls within the sacred walls of the lady.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("Where exactly is the shrine located?", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“It is unfortunately quite remote, hidden deep within the great forest.”</i> [name] explains that the priests sometime have to cast shrouds of deception around the shrine, in order to protect it from those with malicious intentions.", parse);
-		
-		Gui.NextPrompt(Scenes.Kiakai.TalkEden);
+		Text.Add("<i>“The shrine of lady Aria has been my home for many years,”</i> [name] tells you, recalling fond memories, <i>“The priests and priestesses are very kind, and well versed in the arts of healing.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Many on Eden request the services of the shrine, or go on pilgrimages to visit the holy place. High priestess Yrissa welcomes all pure souls within the sacred walls of the lady.”</i>", parse);
+		Text.NL();
+		Text.Add("Where exactly is the shrine located?", parse);
+		Text.NL();
+		Text.Add("<i>“It is unfortunately quite remote, hidden deep within the great forest.”</i> [name] explains that the priests sometime have to cast shrouds of deception around the shrine, in order to protect it from those with malicious intentions.", parse);
 	});
 	// DESERT OASIS
 	scenes.push(function() {
-		Text.AddOutput("<i>“The desert is a rough place to live, but there is said to be a safe haven hidden among the dunes, a great oasis where water and food is plentiful. I have never visited the place myself though,”</i> [name] reveals, <i>“The kingdom troops do not go there, so it is pretty much under its own laws.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("How would one go about visiting there?", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Just heading out into the desert is begging for trouble to happen, you would be lost very quickly. The safest way to reach the oasis is to go with one of the trading caravans that pass through there. They sometime make a stop at the crossroads and at the capital.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("[name] frowns a bit, <i>“There have been rumors about people disappearing without a trace while traversing the desert, not even leaving bones behind. If you plan to head there, be very careful.”</i>", parse);
-
-		Gui.NextPrompt(Scenes.Kiakai.TalkEden);
+		Text.Add("<i>“The desert is a rough place to live, but there is said to be a safe haven hidden among the dunes, a great oasis where water and food is plentiful. I have never visited the place myself though,”</i> [name] reveals, <i>“The kingdom troops do not go there, so it is pretty much under its own laws.”</i>", parse);
+		Text.NL();
+		Text.Add("How would one go about visiting there?", parse);
+		Text.NL();
+		Text.Add("<i>“Just heading out into the desert is begging for trouble to happen, you would be lost very quickly. The safest way to reach the oasis is to go with one of the trading caravans that pass through there. They sometime make a stop at the crossroads and at the capital.”</i>", parse);
+		Text.NL();
+		Text.Add("[name] frowns a bit, <i>“There have been rumors about people disappearing without a trace while traversing the desert, not even leaving bones behind. If you plan to head there, be very careful.”</i>", parse);
 	});
 	
 	var sceneId = kiakai.flags["RotFactions"];
@@ -931,6 +916,9 @@ Scenes.Kiakai.TalkFactions = function() {
 	
 	// Play scene
 	scenes[sceneId]();
+	
+	Text.Flush();
+	Gui.NextPrompt(Scenes.Kiakai.TalkEden);
 }
 
 
@@ -939,32 +927,29 @@ Scenes.Kiakai.TalkElves = function() {
 
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer()
+		name   : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	Text.Clear();
 	
 	if(kiakai.flags["TalkedElves"] == 0) {
-		Text.AddOutput("You ask [name] to tell you a little about the elves.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“The elves are a proud race, [playername]. Although in our appearance we resemble humans, in many ways we are actually closer to dryads or fairies.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“My people live in small groups, building villages to be as close to nature as possible. Many of them live in the forest, some building villages in the branches of the trees to stay safe from the dangerous animals that occasionally roam below. My own village was on the shore - my people love the life of the sea, as well as strength of the trees. I had spent but ten years of my life there, when a priestess of Aria stopped by, and I decided I needed to go with her and join the priesthood.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Most Elves worship the Great Tree and try to live fully in tune with nature. When they gather plants, they make sure to spread their seeds, so the plant will continue to grow. They hunt animals only when sure the species is flourishing and no harm will be done by the culling.”</i>", parse);
+		Text.Add("You ask [name] to tell you a little about the elves.", parse);
+		Text.NL();
+		Text.Add("<i>“The elves are a proud race, [playername]. Although in our appearance we resemble humans, in many ways we are actually closer to dryads or fairies.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“My people live in small groups, building villages to be as close to nature as possible. Many of them live in the forest, some building villages in the branches of the trees to stay safe from the dangerous animals that occasionally roam below. My own village was on the shore - my people love the life of the sea, as well as strength of the trees. I had spent but ten years of my life there, when a priestess of Aria stopped by, and I decided I needed to go with her and join the priesthood.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Most Elves worship the Great Tree and try to live fully in tune with nature. When they gather plants, they make sure to spread their seeds, so the plant will continue to grow. They hunt animals only when sure the species is flourishing and no harm will be done by the culling.”</i>", parse);
 		
 		kiakai.relation.IncreaseStat(50, 2);
 		
 		kiakai.flags["TalkedElves"] = 1;
 	}
 	else {
-		Text.AddOutput("<i>“What else would you like to know, [playername]?”</i>", parse);
+		Text.Add("<i>“What else would you like to know, [playername]?”</i>", parse);
 	}
+	Text.Flush();
 	
 	//[Culture][Parents][Childhood][Why Leave]
 	var options = new Array();
@@ -975,42 +960,36 @@ Scenes.Kiakai.TalkElves = function() {
 			var scenes = [];
 			// Long life
 			scenes.push(function() {
-				Text.AddOutput("<i>“One of the biggest differences between elves and humans is how long we live,”</i> [name] tells you. <i>“Where humans live only a few score years, elves' lifetimes are measured in hundreds. The elders of my village were all past their fourth century when I left.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“This difference runs much deeper than the number of years, [playername]. Elves know that they have time to grow, to learn, to act. Though they make quick decisions when they must, they prefer to think and discuss very carefully anything they find important.”</i> [name] smiles fondly. <i>“I have heard a tale that once there was an elf who fell in love with a human. He told his people, and asked for their advice, wondering if they would accept his choice. The tale says they discussed it long and hard, and in the end decided that if that was the way of his heart, there was no ill in it. But when he went to the girl to bring her the joyful news, he found her an old woman, and married besides.”</i> [name] laughs at [hisher] story, and you find it difficult to not join [himher].", parse);
-				Text.Newline();
+				Text.Add("<i>“One of the biggest differences between elves and humans is how long we live,”</i> [name] tells you. <i>“Where humans live only a few score years, elves' lifetimes are measured in hundreds. The elders of my village were all past their fourth century when I left.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“This difference runs much deeper than the number of years, [playername]. Elves know that they have time to grow, to learn, to act. Though they make quick decisions when they must, they prefer to think and discuss very carefully anything they find important.”</i> [name] smiles fondly. <i>“I have heard a tale that once there was an elf who fell in love with a human. He told his people, and asked for their advice, wondering if they would accept his choice. The tale says they discussed it long and hard, and in the end decided that if that was the way of his heart, there was no ill in it. But when he went to the girl to bring her the joyful news, he found her an old woman, and married besides.”</i> [name] laughs at [hisher] story, and you find it difficult to not join [himher].", parse);
+				Text.NL();
 				if(kiakai.relation.Get() > 25)
-					Text.AddOutput("<i>“Death is also much more terrible for the elves,”</i> [name] tells you, [hisher] eyes looking haunted. <i>“My kind have few children, and there are not many of us, so the loss of even a single life before it reaches its fullness is a great horror to us all.”</i>", parse);
-	
-				Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+					Text.Add("<i>“Death is also much more terrible for the elves,”</i> [name] tells you, [hisher] eyes looking haunted. <i>“My kind have few children, and there are not many of us, so the loss of even a single life before it reaches its fullness is a great horror to us all.”</i>", parse);
 			});
 			// Nature worship
 			scenes.push(function() {
-				Text.AddOutput("<i>“Elves love life and strive to live in harmony with nature above all else. Many humans say that they worship nature, but that is not quite it. Elves believe there is a spirit that moves all living things, a spirit that permeates the entire world. They think it is our duty to nurture this spirit, keep it healthy, make sure it prospers as much as possible.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("And what about Aria?", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“The elves acknowledge that Aria exists and believe her to be a strong spirit from outside this world. However, they think she may help with some things in the universe, but this world is ours to care for, and it is the well-being of this world that should be our focus.”</i> [name] sighs. <i>“They do not see that there is far greater danger that stalks all worlds. That focusing on this one alone is no longer enough to keep it safe.”</i>", parse);
-	
-				Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+				Text.Add("<i>“Elves love life and strive to live in harmony with nature above all else. Many humans say that they worship nature, but that is not quite it. Elves believe there is a spirit that moves all living things, a spirit that permeates the entire world. They think it is our duty to nurture this spirit, keep it healthy, make sure it prospers as much as possible.”</i>", parse);
+				Text.NL();
+				Text.Add("And what about Aria?", parse);
+				Text.NL();
+				Text.Add("<i>“The elves acknowledge that Aria exists and believe her to be a strong spirit from outside this world. However, they think she may help with some things in the universe, but this world is ours to care for, and it is the well-being of this world that should be our focus.”</i> [name] sighs. <i>“They do not see that there is far greater danger that stalks all worlds. That focusing on this one alone is no longer enough to keep it safe.”</i>", parse);
 			});
 			// Food
 			scenes.push(function() {
-				Text.AddOutput("You ask [name] what the elves eat, since they do not want to disrupt nature.", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“Eating is not disruption, [playername]. Predators, and even parasites, are part of nature. Even herbivores prey on plants, and plants often kill one another as they compete for sunlight and nutrients,”</i> [heshe] explains.", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“What the elves oppose is depletion. They want the world to be a lush forest, full of life, not an arid desert. To work toward that, they take only the lives they know will be replenished, and do their best to maintain an equilibrium in nature. When elves harvest plants, they also replant them. When they kill animals, it is only when the species is doing well, and often they do so to prevent overpopulation.”</i>", parse);
-				Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+				Text.Add("You ask [name] what the elves eat, since they do not want to disrupt nature.", parse);
+				Text.NL();
+				Text.Add("<i>“Eating is not disruption, [playername]. Predators, and even parasites, are part of nature. Even herbivores prey on plants, and plants often kill one another as they compete for sunlight and nutrients,”</i> [heshe] explains.", parse);
+				Text.NL();
+				Text.Add("<i>“What the elves oppose is depletion. They want the world to be a lush forest, full of life, not an arid desert. To work toward that, they take only the lives they know will be replenished, and do their best to maintain an equilibrium in nature. When elves harvest plants, they also replant them. When they kill animals, it is only when the species is doing well, and often they do so to prevent overpopulation.”</i>", parse);
 			});
 			// Lore
 			scenes.push(function() {
-				Text.AddOutput("<i>“Elvish memories are long, [playername],”</i> [name] tells you, <i>“and some of our most ancient knowledge has echoed in song through millennia, but our loremasters also understand the importance of keeping written records.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“We only had a few lore scrolls at our village, but I was fascinated when I was allowed to read a little from them as a child. There were tales from before the founding of the kingdom, stories of times when a few worlds were connected almost permanently to our own through portals.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“If one read all the scrolls, I believe that would tell you more of the history of the world than you could learn from all the libraries in the human lands.”</i> The elf smiles with pride and obvious curiosity.", parse);
-				Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+				Text.Add("<i>“Elvish memories are long, [playername],”</i> [name] tells you, <i>“and some of our most ancient knowledge has echoed in song through millennia, but our loremasters also understand the importance of keeping written records.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“We only had a few lore scrolls at our village, but I was fascinated when I was allowed to read a little from them as a child. There were tales from before the founding of the kingdom, stories of times when a few worlds were connected almost permanently to our own through portals.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“If one read all the scrolls, I believe that would tell you more of the history of the world than you could learn from all the libraries in the human lands.”</i> The elf smiles with pride and obvious curiosity.", parse);
 			});
 			
 			var sceneId = kiakai.flags["RotElfCulture"];
@@ -1024,6 +1003,8 @@ Scenes.Kiakai.TalkElves = function() {
 			// Play scene
 			scenes[sceneId]();
 
+			Text.Flush();
+			Gui.NextPrompt(Scenes.Kiakai.TalkElves);
 		}, enabled : true,
 		tooltip : Text.Parse("Ask [name] more about elvish culture.", parse)
 	});
@@ -1034,26 +1015,23 @@ Scenes.Kiakai.TalkElves = function() {
 			var scenes = [];
 			// Raised by community
 			scenes.push(function() {
-				Text.AddOutput("<i>“You have to understand that elves have very few children. An elvish woman usually has a child less than once every fifty years, even in her prime. As such, when a child is born, [heshe] is extremely important to all elves.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“I have seen that humans are typically raised by their parents; that is not how it is with my people. A child is so important and so rare that the entire community takes part in [hisher] upbringing. Every adult does their best to help and teach every child, and it is ultimately the elders of the village who have authority over children.”</i>", parse);
-				Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+				Text.Add("<i>“You have to understand that elves have very few children. An elvish woman usually has a child less than once every fifty years, even in her prime. As such, when a child is born, [heshe] is extremely important to all elves.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“I have seen that humans are typically raised by their parents; that is not how it is with my people. A child is so important and so rare that the entire community takes part in [hisher] upbringing. Every adult does their best to help and teach every child, and it is ultimately the elders of the village who have authority over children.”</i>", parse);
 			});
 			// Children
 			scenes.push(function() {
-				Text.AddOutput("Why are elvish children so rare?", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“Elvish women are only rarely fertile,”</i> [name] explains, blushing slightly at discussing this topic. <i>“There is a grand cycle of abundance in nature that affects the elves. It runs about twelve years, although it varies a little from one to the next, and it is only when the cycle is at its peak that an elf can be fertile. And even if that condition is satisfied, i-intercourse will only rarely take and result in a child.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“So you see why children are so precious to my people.”</i>", parse);
-				Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+				Text.Add("Why are elvish children so rare?", parse);
+				Text.NL();
+				Text.Add("<i>“Elvish women are only rarely fertile,”</i> [name] explains, blushing slightly at discussing this topic. <i>“There is a grand cycle of abundance in nature that affects the elves. It runs about twelve years, although it varies a little from one to the next, and it is only when the cycle is at its peak that an elf can be fertile. And even if that condition is satisfied, i-intercourse will only rarely take and result in a child.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“So you see why children are so precious to my people.”</i>", parse);
 			});
 			// Long life
 			scenes.push(function() {
-				Text.AddOutput("Didn't you get lonely without having parents who focus on you?", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“Oh, no, not at all,”</i> [name] tells you. <i>“Elves do not feel lonely just because of that. After all we have the entire community to support us. This is how elves have lived as far back as our lore reaches, so it must be a way of living that is comfortable for us...”</i> [name] trails off, sounding a little sad.", parse);
-				Gui.NextPrompt(Scenes.Kiakai.TalkElves);
+				Text.Add("Didn't you get lonely without having parents who focus on you?", parse);
+				Text.NL();
+				Text.Add("<i>“Oh, no, not at all,”</i> [name] tells you. <i>“Elves do not feel lonely just because of that. After all we have the entire community to support us. This is how elves have lived as far back as our lore reaches, so it must be a way of living that is comfortable for us...”</i> [name] trails off, sounding a little sad.", parse);
 			});
 			
 			var sceneId = kiakai.flags["RotElfParents"];
@@ -1067,6 +1045,8 @@ Scenes.Kiakai.TalkElves = function() {
 			// Play scene
 			scenes[sceneId]();
 
+			Text.Flush();
+			Gui.NextPrompt(Scenes.Kiakai.TalkElves);
 		}, enabled : true,
 		tooltip : Text.Parse("Ask [name] more about [hisher] parents.", parse)
 	});
@@ -1078,25 +1058,27 @@ Scenes.Kiakai.TalkElves = function() {
 			
 			// Freedom
 			scenes.push(function() {
-				Text.AddOutput("<i>“There is much time for a child to grow up among my people. Until the child's fifteenth year, the elves place no constraints, no demands, upon the children, provide no education unless the child asks for it. The child is left to learn about the world and explore at [hisher] leisure.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("Is it really alright to let children run wild like that?", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“Of course,”</i> [name] tells you. <i>“It gives them a chance to learn the beauty of nature first hand, and my people know children have time to learn the necessities of life as they grow older.”</i>", parse);
+				Text.Add("<i>“There is much time for a child to grow up among my people. Until the child's fifteenth year, the elves place no constraints, no demands, upon the children, provide no education unless the child asks for it. The child is left to learn about the world and explore at [hisher] leisure.”</i>", parse);
+				Text.NL();
+				Text.Add("Is it really alright to let children run wild like that?", parse);
+				Text.NL();
+				Text.Add("<i>“Of course,”</i> [name] tells you. <i>“It gives them a chance to learn the beauty of nature first hand, and my people know children have time to learn the necessities of life as they grow older.”</i>", parse);
+				Text.Flush();
 				Gui.NextPrompt(Scenes.Kiakai.TalkElves);
 			});
 			// Freedom2 TODO
 			if(kiakai.relation.Get() > 40) {
 				scenes.push(function() {
-					Text.AddOutput("<i>“In truth, [playername], I often found myself alone as a child. It is only possible for elves to give birth on every twelfth year or so, and no other child was born at the same time as I in our village. The adults in the village were kind to me, taught me anything I wished, but I only felt close to few of them.”</i> [name]'s voice grows quiet and hollow in memory, as [heshe] speaks.", parse);
-					Text.Newline();
-					Text.AddOutput("<i>“There were some older children, but by the time I could play with them, they had duties of their own, ones I was not invited to partake in. Though they smiled at me and were gentle, I was ever an outsider in their small circles.”</i>", parse);
-					Text.Newline();
+					Text.Add("<i>“In truth, [playername], I often found myself alone as a child. It is only possible for elves to give birth on every twelfth year or so, and no other child was born at the same time as I in our village. The adults in the village were kind to me, taught me anything I wished, but I only felt close to few of them.”</i> [name]'s voice grows quiet and hollow in memory, as [heshe] speaks.", parse);
+					Text.NL();
+					Text.Add("<i>“There were some older children, but by the time I could play with them, they had duties of their own, ones I was not invited to partake in. Though they smiled at me and were gentle, I was ever an outsider in their small circles.”</i>", parse);
+					Text.NL();
 					
 					if(kiakai.flags["TalkedAlone"] == 0) {
 						kiakai.flags["TalkedAlone"] = 1;
-						Text.AddOutput("<i>“As a result, I spent much time by myself, exploring the sea and the forest near our village, meeting animals and fish, corals and trees.”</i> The elf pauses, and looks into your eyes doubtfully. <i>“You will think me strange for this, but in some ways, they were my closest friends.”</i>", parse);
-						Text.Newline();
+						Text.Add("<i>“As a result, I spent much time by myself, exploring the sea and the forest near our village, meeting animals and fish, corals and trees.”</i> The elf pauses, and looks into your eyes doubtfully. <i>“You will think me strange for this, but in some ways, they were my closest friends.”</i>", parse);
+						Text.NL();
+						Text.Flush();
 
 						//[Comfort][Explain][You're Weird!]
 						var options = new Array();
@@ -1104,25 +1086,26 @@ Scenes.Kiakai.TalkElves = function() {
 							func : function() {
 								kiakai.relation.IncreaseStat(100, 5);
 								if(kiakai.flags["Attitude"] > Kiakai.Attitude.Neutral) {
-									Text.AddOutput("You embrace the elf, telling [himher] that you will be with [himher] now. [name] relaxes in your grasp and hugs you back tightly, pressing [hisher] head into your chest.", parse);
-									Text.Newline();
-									Text.AddOutput("<i>“Thank you, [playername],”</i> [heshe] whispers, almost too quiet for you to hear.", parse);
+									Text.Add("You embrace the elf, telling [himher] that you will be with [himher] now. [name] relaxes in your grasp and hugs you back tightly, pressing [hisher] head into your chest.", parse);
+									Text.NL();
+									Text.Add("<i>“Thank you, [playername],”</i> [heshe] whispers, almost too quiet for you to hear.", parse);
 								}
 								else {
-									Text.AddOutput("You pat the elf on the head, and tell [himher] that you've got [himher] now, and you'll take care of [himher] as long as [heshe] remains loyal.", parse);
-									Text.Newline();
-									Text.AddOutput("[name] smiles up at you warmly, pressing [hisher] head slightly into your hand. <i>“Thank you, [playername].”</i>", parse);
+									Text.Add("You pat the elf on the head, and tell [himher] that you've got [himher] now, and you'll take care of [himher] as long as [heshe] remains loyal.", parse);
+									Text.NL();
+									Text.Add("[name] smiles up at you warmly, pressing [hisher] head slightly into your hand. <i>“Thank you, [playername].”</i>", parse);
 								}
-								
+								Text.Flush();
 								Gui.NextPrompt(Scenes.Kiakai.TalkElves);
 							}, enabled : true,
 							tooltip : Text.Parse("Tell the elf that [heshe] is not alone anymore.", parse)
 						});
 						options.push({ nameStr : "Explain",
 							func : function() {
-								Text.AddOutput("You tell the elf not to worry. You have felt lonely yourself sometimes, and you know it is tempting to look for friends wherever you can find them.", parse);
-								Text.Newline();
-								Text.AddOutput("<i>“Thanks, [playername],”</i> [name] tells you with a wry smile. <i>“It is good to know I am not the only one going crazy!”</i>", parse);
+								Text.Add("You tell the elf not to worry. You have felt lonely yourself sometimes, and you know it is tempting to look for friends wherever you can find them.", parse);
+								Text.NL();
+								Text.Add("<i>“Thanks, [playername],”</i> [name] tells you with a wry smile. <i>“It is good to know I am not the only one going crazy!”</i>", parse);
+								Text.Flush();
 								Gui.NextPrompt(Scenes.Kiakai.TalkElves);
 							}, enabled : true,
 							tooltip : "Explain to the elf that's what loneliness does."
@@ -1131,9 +1114,10 @@ Scenes.Kiakai.TalkElves = function() {
 							func : function() {
 								kiakai.relation.DecreaseStat(-100, 5);
 								
-								Text.AddOutput("You tell the elf that, yes, that's really strange. Why would you make friends with the trees and the birds? They can't tell you anything, or even understand you, for that matter!", parse);
-								Text.Newline();
-								Text.AddOutput("<i>“I suppose you are right.”</i> [name] turns away from you, and wanders off a little, staring at the ground, clearly dejected.", parse);
+								Text.Add("You tell the elf that, yes, that's really strange. Why would you make friends with the trees and the birds? They can't tell you anything, or even understand you, for that matter!", parse);
+								Text.NL();
+								Text.Add("<i>“I suppose you are right.”</i> [name] turns away from you, and wanders off a little, staring at the ground, clearly dejected.", parse);
+								Text.Flush();
 								Gui.NextPrompt(kiakai.Interact);
 							}, enabled : true,
 							tooltip : "Yep, the elf really is strange."
@@ -1142,16 +1126,18 @@ Scenes.Kiakai.TalkElves = function() {
 					}
 					else {
 						
-						Text.AddOutput("<i>“As a result, I spent much time by myself, exploring the sea and the forest near our village, meeting animals and fish, corals and trees. In some ways, they were my closest friends.”</i>", parse);
+						Text.Add("<i>“As a result, I spent much time by myself, exploring the sea and the forest near our village, meeting animals and fish, corals and trees. In some ways, they were my closest friends.”</i>", parse);
+						Text.Flush();
 						Gui.NextPrompt(Scenes.Kiakai.TalkElves);
 					}
 				});
 			}
 			// Friends and teachers
 			scenes.push(function() {
-				Text.AddOutput("<i>“My village was devoted to caring for me, and I did not shun their devotion. The loremaster taught me to read when I was still very young, and before I learned, he read to me from the scrolls when he had time. Sometimes, one of the other adults would also take me to gather fruits and berries with them, or to go fishing, and taught me how to pick out the ripe plants, the abundant fish.”</i> [HeShe] smiles fondly.", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“The older children also tried to include me in their games, although often I felt like a burden to them. Still, I made a friend or two among them, and they seemed to actually enjoy my endless questions.”</i>", parse);
+				Text.Add("<i>“My village was devoted to caring for me, and I did not shun their devotion. The loremaster taught me to read when I was still very young, and before I learned, he read to me from the scrolls when he had time. Sometimes, one of the other adults would also take me to gather fruits and berries with them, or to go fishing, and taught me how to pick out the ripe plants, the abundant fish.”</i> [HeShe] smiles fondly.", parse);
+				Text.NL();
+				Text.Add("<i>“The older children also tried to include me in their games, although often I felt like a burden to them. Still, I made a friend or two among them, and they seemed to actually enjoy my endless questions.”</i>", parse);
+				Text.Flush();
 				Gui.NextPrompt(Scenes.Kiakai.TalkElves);
 			});
 			
@@ -1177,17 +1163,18 @@ Scenes.Kiakai.TalkElves = function() {
 			if(kiakai.relation.Get() < 35 || kiakai.flags["TalkedWhyLeave"] == 0) {
 				kiakai.flags["TalkedWhyLeave"] = 1;
 				
-				Text.AddOutput("<i>“One day, a priestess came to my village,”</i> [name] tells you, and pauses briefly, clearly deciding what to say next. <i>“Though we did not worship Aria, she was still generous to us, and aided us with healing. I was impressed as much by her as her abilities, and I saw also the goodness of Aria within her. I decided I too wanted to be able to help people as she did, and went with her to join the priesthood.”</i>", parse);
-				Text.Newline();
+				Text.Add("<i>“One day, a priestess came to my village,”</i> [name] tells you, and pauses briefly, clearly deciding what to say next. <i>“Though we did not worship Aria, she was still generous to us, and aided us with healing. I was impressed as much by her as her abilities, and I saw also the goodness of Aria within her. I decided I too wanted to be able to help people as she did, and went with her to join the priesthood.”</i>", parse);
+				Text.NL();
 				if(kiakai.flags["Attitude"] > Kiakai.Attitude.Neutral) {
-					Text.AddOutput("You see pain in the elf's eyes and sense that there's much [heshe]'s not telling you, however you decide not to press the issue. [HeShe] will tell you when [heshe] is ready.", parse);
+					Text.Add("You see pain in the elf's eyes and sense that there's much [heshe]'s not telling you, however you decide not to press the issue. [HeShe] will tell you when [heshe] is ready.", parse);
+					Text.Flush();
 					Gui.NextPrompt(Scenes.Kiakai.TalkElves);
 				}
 				else {
 					
 					if(kiakai.flags["TalkedWhyLeaveForce"] == 0) {
-						Text.AddOutput("You see pain in the elf's eyes and sense that there's much [heshe]'s not telling you.", parse);
-						
+						Text.Add("You see pain in the elf's eyes and sense that there's much [heshe]'s not telling you.", parse);
+						Text.Flush();
 						//[Demand answer][Let it go]
 						var options = new Array();
 						options.push({ nameStr : "Demand answer",
@@ -1196,11 +1183,12 @@ Scenes.Kiakai.TalkElves = function() {
 								
 								kiakai.relation.DecreaseStat(-100, 5);
 								Text.Clear();
-								Text.AddOutput("You tell the elf that you demand to know the whole truth. You're in charge here, and [heshe] <i>will</i> tell you.", parse);
-								Text.Newline();
-								Text.AddOutput("<i>“I will not!”</i> [name] shouts at you, clearly furious. <i>“I might be helping you because lady Aria asked it of me, but that gives you no right to my past!”</i>", parse);
-								Text.Newline();
-								Text.AddOutput("[HeShe] turns away from you, and stalks a little ways off.", parse);
+								Text.Add("You tell the elf that you demand to know the whole truth. You're in charge here, and [heshe] <i>will</i> tell you.", parse);
+								Text.NL();
+								Text.Add("<i>“I will not!”</i> [name] shouts at you, clearly furious. <i>“I might be helping you because lady Aria asked it of me, but that gives you no right to my past!”</i>", parse);
+								Text.NL();
+								Text.Add("[HeShe] turns away from you, and stalks a little ways off.", parse);
+								Text.Flush();
 								Gui.NextPrompt(kiakai.Interact);
 							}, enabled : true,
 							tooltip : "Demand that the elf tell you what happened."
@@ -1208,7 +1196,8 @@ Scenes.Kiakai.TalkElves = function() {
 						options.push({ nameStr : "Let it go",
 							func : function() {
 								Text.Clear();
-								Text.AddOutput("You decide that whatever [name] is concealing, it's probably not important anyway. Maybe [heshe]'ll tell you later if [heshe] wants.", parse);
+								Text.Add("You decide that whatever [name] is concealing, it's probably not important anyway. Maybe [heshe]'ll tell you later if [heshe] wants.", parse);
+								Text.Flush();
 								Gui.NextPrompt(Scenes.Kiakai.TalkElves);
 							}, enabled : true,
 							tooltip : "It's probably not important anyway..."
@@ -1216,7 +1205,8 @@ Scenes.Kiakai.TalkElves = function() {
 						Gui.SetButtonsFromList(options);
 					}
 					else {
-						Text.AddOutput("You see pain in the elf's eyes and sense that there's much [heshe]'s not telling you. Perhaps [heshe] will tell you when [heshe]'s ready.", parse);
+						Text.Add("You see pain in the elf's eyes and sense that there's much [heshe]'s not telling you. Perhaps [heshe] will tell you when [heshe]'s ready.", parse);
+						Text.Flush();
 						Gui.NextPrompt(Scenes.Kiakai.TalkElves);
 					}
 				}
@@ -1246,49 +1236,50 @@ Scenes.Kiakai.TalkDimensionalViolation = function() {
 	Text.Clear();
 	
 	if(kiakai.flags["TalkedWhyLeaveLong"] == 0) {
-		Text.AddOutput("[name] sighs when you ask for the story again. <i>“Very well, you have been patient with me. I will tell you all that occurred.”</i>", parse);
+		Text.Add("[name] sighs when you ask for the story again. <i>“Very well, you have been patient with me. I will tell you all that occurred.”</i>", parse);
 	}
 	else {
 		if(kiakai.flags["TalkedWhyLeaveLongReact"] == 1) { // HUG/THANK
-			Text.AddOutput("<i>“Very well, I will tell you the story again, if you wish to hear it, [playername],”</i> [name] says, seeming a little more comfortable with the prospect than [heshe] used to be.", parse);
+			Text.Add("<i>“Very well, I will tell you the story again, if you wish to hear it, [playername],”</i> [name] says, seeming a little more comfortable with the prospect than [heshe] used to be.", parse);
 		}
 		else if(kiakai.flags["TalkedWhyLeaveLongReact"] == 2) { // DISMISS
-			Text.AddOutput("<i>“Didn't you say it was boring?”</i> [name] asks, looking annoyed. <i>“Very well, I will tell you again, but try to pay attention this time.”</i>", parse);
+			Text.Add("<i>“Didn't you say it was boring?”</i> [name] asks, looking annoyed. <i>“Very well, I will tell you again, but try to pay attention this time.”</i>", parse);
 		}
 		else {
-			Text.AddOutput("<i>“Thank you for being patient with me, I... I think I will be able to tell the whole story this time.”</i> You nod encouragingly to [name].", parse);
+			Text.Add("<i>“Thank you for being patient with me, I... I think I will be able to tell the whole story this time.”</i> You nod encouragingly to [name].", parse);
 		}
 	}
 	
-	Text.Newline();
-	Text.AddOutput("<i>“I was a few months past my tenth birthday when I stumbled upon a portal while wandering through the woods by our village. At first, I was curious and approached it, wondering where it led, however, as I drew near, I felt a sense of wrong emanating from it. A glance inside showed me woods that must have once resembled our own, but which were now blackened, with many trees seemingly rotting upright where they stood. I drew back in revulsion from the thing and ran as fast as I could to tell the adults.”</i> ", parse);
+	Text.NL();
+	Text.Add("<i>“I was a few months past my tenth birthday when I stumbled upon a portal while wandering through the woods by our village. At first, I was curious and approached it, wondering where it led, however, as I drew near, I felt a sense of wrong emanating from it. A glance inside showed me woods that must have once resembled our own, but which were now blackened, with many trees seemingly rotting upright where they stood. I drew back in revulsion from the thing and ran as fast as I could to tell the adults.”</i> ", parse);
 	
 	if(kiakai.flags["TalkedWhyLeaveLongReact"] == 1) { // HUG/THANK
-		Text.AddOutput("[name] still looks a little disgusted by the memory, but the horror [heshe] had shown before is gone now.", parse);
-		Text.Newline();
+		Text.Add("[name] still looks a little disgusted by the memory, but the horror [heshe] had shown before is gone now.", parse);
+		Text.NL();
 	}
 	else { // DISMISS, OR FIRST TIME
-		Text.AddOutput("[name] shivers recounting the memory, [hisher] horror of the thing undiminished by time.", parse);
-		Text.Newline();
+		Text.Add("[name] shivers recounting the memory, [hisher] horror of the thing undiminished by time.", parse);
+		Text.NL();
 	}
 	
-	Text.AddOutput("<i>“By the time they arrived, the portal had closed, but outside it they found collapsed a peculiar creature. It resembled the dryads of our world, but its skin was blackened and cracked, and a sickly yellow pus oozed from its body. They brought the creature back to the village, thinking it ill, and wishing to heal it, for we have long been friends of the dryads.”</i>", parse);
-	Text.Newline();
-	Text.AddOutput("<i>“And it was indeed much weakened, for it lay motionless within the village for three days. When it awoke, however, its skin had not changed, and the pus now flowed from its half-open mouth, and... other parts.”</i> The elf shudders. <i>“I am told that when Treal, one of our elders, came upon it, it assaulted him, and he was barely able to hold it off while shouting for help. It was seen then that the creature was unnatural and it was put down, its body and very bones burned to a fine ash upon a bonfire of deadwood.”</i>", parse);
-	Text.Newline();
+	Text.Add("<i>“By the time they arrived, the portal had closed, but outside it they found collapsed a peculiar creature. It resembled the dryads of our world, but its skin was blackened and cracked, and a sickly yellow pus oozed from its body. They brought the creature back to the village, thinking it ill, and wishing to heal it, for we have long been friends of the dryads.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“And it was indeed much weakened, for it lay motionless within the village for three days. When it awoke, however, its skin had not changed, and the pus now flowed from its half-open mouth, and... other parts.”</i> The elf shudders. <i>“I am told that when Treal, one of our elders, came upon it, it assaulted him, and he was barely able to hold it off while shouting for help. It was seen then that the creature was unnatural and it was put down, its body and very bones burned to a fine ash upon a bonfire of deadwood.”</i>", parse);
+	Text.NL();
 	
 	if(kiakai.flags["TalkedWhyLeaveLong"] == 0) {
 		kiakai.flags["TalkedWhyLeaveLong"] = 1;
 		
-		Text.AddOutput("<i>“But that was only the beginning, [playername].”</i> [name]'s wide eyes meet yours, with an expression of supplication.", parse);
+		Text.Add("<i>“But that was only the beginning, [playername].”</i> [name]'s wide eyes meet yours, with an expression of supplication.", parse);
+		Text.Flush();
 		
 		//[Go on...][Later]
 		var options = new Array();
 		options.push({ nameStr : "Go on...",
 			func : function() {
 				Text.Clear();
-				Text.AddOutput("You hold the elf's hand, telling [himher] that you'd like to hear the rest of it. [HeShe] nods hesitantly, seeming to take strength from your grip.", parse);
-				Text.Newline();
+				Text.Add("You hold the elf's hand, telling [himher] that you'd like to hear the rest of it. [HeShe] nods hesitantly, seeming to take strength from your grip.", parse);
+				Text.NL();
 				Gui.NextPrompt(Scenes.Kiakai.TalkDimensionalViolationCont);
 			}, enabled : true,
 			tooltip : "Ask the elf to continue."
@@ -1296,7 +1287,8 @@ Scenes.Kiakai.TalkDimensionalViolation = function() {
 		options.push({ nameStr : "Later",
 			func : function() {
 				Text.Clear();
-				Text.AddOutput("Seeing [name] so distressed, you tell [himher] that [heshe] can finish the story later.", parse);
+				Text.Add("Seeing [name] so distressed, you tell [himher] that [heshe] can finish the story later.", parse);
+				Text.Flush();
 				Gui.NextPrompt(Scenes.Kiakai.TalkElves);
 			}, enabled : true,
 			tooltip : Text.Parse("Tell the elf it's alright - [heshe] can finish the story later.", parse)
@@ -1322,25 +1314,26 @@ Scenes.Kiakai.TalkDimensionalViolationCont = function() {
 		HisHer : kiakai.HisHer()
 	};
 	
-	Text.AddOutput("<i>“Though the corrupt creature was dead, its body but ashes on the wind, we soon found that it had already caused grave ill. On the morning after the pyre, I saw a bird I had often seen singing to its mate lying dazed upon the ground under the tree of its nest. When I lifted it, it made little response, its breathing shallow, its tiny heart pounding desperately in its chest. I left it alone, thinking that perhaps it had grown old and its time was coming, for I had been taught that all beings must pass. That evening, however, I recall being dizzy, Treal laying me down on a bed, concern clear in his face.”</i>", parse);
-	Text.Newline();
-	Text.AddOutput("<i>“After that, I recall little of what occurred,”</i> [name] tells you, looking grim. <i>“I am told that all in the village sickened one by one, until none could care for another. Only a human fisherman, who had come to us the day of the pyre to trade, seemed unaffected. When he saw all around him grow ill, he took great fright and hurried as fast as he could to the shrine of Aria, where he hoped he could be healed.”</i>", parse);
-	Text.Newline();
-	Text.AddOutput("<i>“At the shrine, they found that he bore no trace of disease, but they sent a young priestess to check up on us. I wish they had chosen to send more than one, but it was our salvation that they responded at all. It was Yrissa who came to us, arriving after the village had been in the throes of plague for two full days. She has told me that she healed all the elves in turn, by herself, leaving me for last, for my illness was the most grievous of all, and she knew that even if she managed to overcome it, she would have no strength to move from the spot.”</i>", parse);
-	Text.Newline();
-	Text.AddOutput("<i>“As I say, I know nothing of what occurred myself, for my mind was clouded with dreams. I dreamt of endless forests, rotting where they stood. Of grasslands peeling away like the land's skin, leaving only a bare waste behind.”</i> [name] shudders, but goes on, as if mesmerized by [hisher] own tale. <i>“I dreamt of demons stalking the land, indulging in their vile pleasures. And then, after an eternity of darkness, I remember clearly I felt a tug at my mind. A tug that transformed into a steady pull, and then a swift flight, pulling me from this desolate realm, pulling me through the worlds into the gardens of lady Aria.”</i>", parse);
-	Text.Newline();
-	Text.AddOutput("<i>“But even in that blessed realm, I...”</i> The elf hesitates before continuing. <i>“Even there my spirit was not freed from taint. I remember looking around me and being disgusted by the life I saw. I remember seeing the lady herself and thinking it would be delightful to tear down her sanctity, to ravish her and make her beg for more.”</i> The elf starts at [hisher] own words, looking frightened by what [heshe] has said. [HeShe] swallows audibly before continuing. <i>“But then, the lady pressed her hand against my forehead, and I felt the fog lift from my thoughts. I felt a vast joy at being within this place of beauty, though it was too tame by elvish standards, at being in the presence of one so vastly good.”</i>", parse);
-	Text.Newline();
-	Text.AddOutput("The elf smiles, happy at the bright memory. <i>“There is not much to tell after that. I woke up, fully healed, and saw Yrissa collapsed before me, the elders observing us both. Though I did not know her then, I knew she was the one who healed me and felt connected to her.”</i>", parse);
-	Text.Newline();
-	Text.AddOutput("<i>“After that experience, I knew I wanted to be like her. I wanted to be able to heal and truly help people. I asked the elders for permission to join the priesthood, and, to be honest with you, I was a little surprised by how easily they granted it. Yrissa, likewise, agreed to have me, when she finally woke up after two days and three nights of rest.”</i>", parse);
-	Text.Newline();
-	Text.AddOutput("<i>“I was sad to leave my people, but I am certain that I chose the right path. The only thing that marred my departure was that, despite her best efforts, Yrissa had arrived too late to aid two of the elves of my village, and I was told that they had passed on before I woke up.”</i>", parse);
-	Text.Newline();
+	Text.Add("<i>“Though the corrupt creature was dead, its body but ashes on the wind, we soon found that it had already caused grave ill. On the morning after the pyre, I saw a bird I had often seen singing to its mate lying dazed upon the ground under the tree of its nest. When I lifted it, it made little response, its breathing shallow, its tiny heart pounding desperately in its chest. I left it alone, thinking that perhaps it had grown old and its time was coming, for I had been taught that all beings must pass. That evening, however, I recall being dizzy, Treal laying me down on a bed, concern clear in his face.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“After that, I recall little of what occurred,”</i> [name] tells you, looking grim. <i>“I am told that all in the village sickened one by one, until none could care for another. Only a human fisherman, who had come to us the day of the pyre to trade, seemed unaffected. When he saw all around him grow ill, he took great fright and hurried as fast as he could to the shrine of Aria, where he hoped he could be healed.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“At the shrine, they found that he bore no trace of disease, but they sent a young priestess to check up on us. I wish they had chosen to send more than one, but it was our salvation that they responded at all. It was Yrissa who came to us, arriving after the village had been in the throes of plague for two full days. She has told me that she healed all the elves in turn, by herself, leaving me for last, for my illness was the most grievous of all, and she knew that even if she managed to overcome it, she would have no strength to move from the spot.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“As I say, I know nothing of what occurred myself, for my mind was clouded with dreams. I dreamt of endless forests, rotting where they stood. Of grasslands peeling away like the land's skin, leaving only a bare waste behind.”</i> [name] shudders, but goes on, as if mesmerized by [hisher] own tale. <i>“I dreamt of demons stalking the land, indulging in their vile pleasures. And then, after an eternity of darkness, I remember clearly I felt a tug at my mind. A tug that transformed into a steady pull, and then a swift flight, pulling me from this desolate realm, pulling me through the worlds into the gardens of lady Aria.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“But even in that blessed realm, I...”</i> The elf hesitates before continuing. <i>“Even there my spirit was not freed from taint. I remember looking around me and being disgusted by the life I saw. I remember seeing the lady herself and thinking it would be delightful to tear down her sanctity, to ravish her and make her beg for more.”</i> The elf starts at [hisher] own words, looking frightened by what [heshe] has said. [HeShe] swallows audibly before continuing. <i>“But then, the lady pressed her hand against my forehead, and I felt the fog lift from my thoughts. I felt a vast joy at being within this place of beauty, though it was too tame by elvish standards, at being in the presence of one so vastly good.”</i>", parse);
+	Text.NL();
+	Text.Add("The elf smiles, happy at the bright memory. <i>“There is not much to tell after that. I woke up, fully healed, and saw Yrissa collapsed before me, the elders observing us both. Though I did not know her then, I knew she was the one who healed me and felt connected to her.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“After that experience, I knew I wanted to be like her. I wanted to be able to heal and truly help people. I asked the elders for permission to join the priesthood, and, to be honest with you, I was a little surprised by how easily they granted it. Yrissa, likewise, agreed to have me, when she finally woke up after two days and three nights of rest.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“I was sad to leave my people, but I am certain that I chose the right path. The only thing that marred my departure was that, despite her best efforts, Yrissa had arrived too late to aid two of the elves of my village, and I was told that they had passed on before I woke up.”</i>", parse);
+	Text.NL();
 	
 	// IF FIRST TIME
 	if(kiakai.flags["TalkedWhyLeaveLongReact"] == 0) {
+		Text.Flush();
 		//[Hug][Thank][Dismiss]
 		var options = new Array();
 		options.push({ nameStr : "Hug",
@@ -1352,18 +1345,18 @@ Scenes.Kiakai.TalkDimensionalViolationCont = function() {
 				kiakai.spirit.IncreaseStat(100, 1);
 				
 				if(kiakai.flags["Attitude"] > Kiakai.Attitude.Neutral) {
-					Text.AddOutput("You put your arms around [name], drawing [himher] closer to you, and [heshe] returns your embrace. You whisper that it is all in the past now, and [heshe] is well. You reassure [himher] that [heshe] did what was right, and that [heshe] is now a splendid healer.", parse);
-					Text.Newline();
-					Text.AddOutput("[name] eventually disentangles [himher]self from your arms and smiles up at you. Perhaps [heshe] will be able to deal with the memories better now.", parse);
+					Text.Add("You put your arms around [name], drawing [himher] closer to you, and [heshe] returns your embrace. You whisper that it is all in the past now, and [heshe] is well. You reassure [himher] that [heshe] did what was right, and that [heshe] is now a splendid healer.", parse);
+					Text.NL();
+					Text.Add("[name] eventually disentangles [himher]self from your arms and smiles up at you. Perhaps [heshe] will be able to deal with the memories better now.", parse);
 				}
 				else { // NAUGHTY
-					Text.AddOutput("You put your arms around [name], and [heshe] relaxes, feeling comfortable in your grasp. You whisper to [himher] that [heshe] did all [heshe] could back then, and that now you will protect [himher].", parse);
-					Text.Newline();
-					Text.AddOutput("You eventually release [name] from your arms, and [heshe] smiles up at you. Perhaps [heshe] will be able to deal with the memories better now.", parse);
+					Text.Add("You put your arms around [name], and [heshe] relaxes, feeling comfortable in your grasp. You whisper to [himher] that [heshe] did all [heshe] could back then, and that now you will protect [himher].", parse);
+					Text.NL();
+					Text.Add("You eventually release [name] from your arms, and [heshe] smiles up at you. Perhaps [heshe] will be able to deal with the memories better now.", parse);
 				}
 				
+				Text.Flush();
 				Gui.NextPrompt(Scenes.Kiakai.TalkElves);
-				
 			}, enabled : true,
 			tooltip : Text.Parse("Hug the elf, thanking [himher] for telling you the story.", parse)
 		});
@@ -1375,10 +1368,11 @@ Scenes.Kiakai.TalkDimensionalViolationCont = function() {
 				kiakai.relation.IncreaseStat(100, 5);
 				kiakai.spirit.IncreaseStat(100, 1);
 				
-				Text.AddOutput("You tell [name] that you are grateful [heshe] told you all that, and that you think knowing what happened might eventually help you with your quest.", parse);
-				Text.Newline();
-				Text.AddOutput("[name] smiles up at you, apparently happy that [heshe] has gotten the memories off [hisher] chest.", parse);
-
+				Text.Add("You tell [name] that you are grateful [heshe] told you all that, and that you think knowing what happened might eventually help you with your quest.", parse);
+				Text.NL();
+				Text.Add("[name] smiles up at you, apparently happy that [heshe] has gotten the memories off [hisher] chest.", parse);
+				
+				Text.Flush();
 				Gui.NextPrompt(Scenes.Kiakai.TalkElves);
 			}, enabled : true,
 			tooltip : "Thank the elf for telling you what happened."
@@ -1390,11 +1384,11 @@ Scenes.Kiakai.TalkDimensionalViolationCont = function() {
 				kiakai.flags["TalkedWhyLeaveLongReact"] = 2; // DISMISS
 				kiakai.relation.DecreaseStat(-100, 5);
 				
-				Text.AddOutput("You tell the elf you were sleepy because the story was so boring and might have missed something in the middle. Like, most of it.", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“Then why in the worlds did you ask me to tell it?”</i> [name] demands, visibly distraught. You see moisture pooling beneath [hisher] eyes.", parse);
+				Text.Add("You tell the elf you were sleepy because the story was so boring and might have missed something in the middle. Like, most of it.", parse);
+				Text.NL();
+				Text.Add("<i>“Then why in the worlds did you ask me to tell it?”</i> [name] demands, visibly distraught. You see moisture pooling beneath [hisher] eyes.", parse);
 				
-				
+				Text.Flush();
 				Gui.NextPrompt(Scenes.Kiakai.TalkElves);
 			}, enabled : true,
 			tooltip : "Tell the elf that was really boring."
@@ -1402,7 +1396,8 @@ Scenes.Kiakai.TalkDimensionalViolationCont = function() {
 		Gui.SetButtonsFromList(options);
 	}
 	else {
-		Text.AddOutput("You thank [name] for telling you the story again.", parse);
+		Text.Add("You thank [name] for telling you the story again.", parse);
+		Text.Flush();
 		Gui.NextPrompt(Scenes.Kiakai.TalkElves);
 	}
 }
@@ -1412,42 +1407,38 @@ Scenes.Kiakai.TalkPriest = function() {
 	
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer()
+		name   : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	Text.Clear();
 	
 	if(kiakai.flags["TalkedPriest"] == 0) {
 		if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
-			Text.AddOutput("<i>“The priesthood is the instrument of the lady on Eden,”</i> the elf tells you, looking proud. <i>“The order mostly stays at the shrine of Aria, though we sometimes venture out at the request of nearby villages, and some serve as advisers to men of power. Among other things, the priests of Aria are exceptionally skilled healers.”</i>", parse);
-			Text.Newline();
+			Text.Add("<i>“The priesthood is the instrument of the lady on Eden,”</i> the elf tells you, looking proud. <i>“The order mostly stays at the shrine of Aria, though we sometimes venture out at the request of nearby villages, and some serve as advisers to men of power. Among other things, the priests of Aria are exceptionally skilled healers.”</i>", parse);
+			Text.NL();
 			if(kiakai.relation.Get() > 25)
-				Text.AddOutput("<i>“The priesthood is currently headed by high priestess Yrissa. She practically raised me from when I was but a young child,”</i> [name] confides with a fond tone in [hisher] voice.", parse);
+				Text.Add("<i>“The priesthood is currently headed by high priestess Yrissa. She practically raised me from when I was but a young child,”</i> [name] confides with a fond tone in [hisher] voice.", parse);
 			else
-				Text.AddOutput("<i>“The priesthood is currently headed by high priestess Yrissa. She is a strict woman, but kind and generous as well. You would do well to respect her.”</i> You sense that there is something [name] is not telling you, but decide it's probably not important.", parse);
+				Text.Add("<i>“The priesthood is currently headed by high priestess Yrissa. She is a strict woman, but kind and generous as well. You would do well to respect her.”</i> You sense that there is something [name] is not telling you, but decide it's probably not important.", parse);
 		}
 		else {
-			Text.AddOutput("<i>“The lady makes her presence on Eden be known through her priesthood,”</i> the elf explains to you. <i>“The order mostly stays at the shrine of Aria, though we sometimes venture out at the request of nearby villages, and some serve as advisers to men of power. Among other things, the priests of Aria are very skilled healers.”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“The priesthood is currently headed by high priestess Yrissa,”</i> [name] confides with a fond tone in [hisher] voice, <i>“She practically raised me from when I was but a young child.”</i>", parse);
+			Text.Add("<i>“The lady makes her presence on Eden be known through her priesthood,”</i> the elf explains to you. <i>“The order mostly stays at the shrine of Aria, though we sometimes venture out at the request of nearby villages, and some serve as advisers to men of power. Among other things, the priests of Aria are very skilled healers.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“The priesthood is currently headed by high priestess Yrissa,”</i> [name] confides with a fond tone in [hisher] voice, <i>“She practically raised me from when I was but a young child.”</i>", parse);
 		}
 
-		Text.Newline();
-		Text.AddOutput("<i>“I currently hold the rank of acolyte in the order.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“I currently hold the rank of acolyte in the order.”</i>", parse);
 		
 		kiakai.relation.IncreaseStat(50, 2);
 		kiakai.flags["TalkedPriest"] = 1;
 	}
 	else {
-		Text.AddOutput("<i>“What else would you like to know about the priesthood, [playername]?”</i>", parse);
+		Text.Add("<i>“What else would you like to know about the priesthood, [playername]?”</i>", parse);
 	}
 	
-	
+	Text.Flush();
 	//[Hierarchy][Disciplines][Activities][Yrissa][Aria][Meeting]
 	var options = new Array();
 	options.push({ nameStr : "Hierarchy",
@@ -1482,45 +1473,37 @@ Scenes.Kiakai.TalkPriestHierarchy = function() {
 	
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer()
+		name   : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	Text.Clear();
-	
 	
 	var scenes = [];
 	
 	// Overview
 	scenes.push(function() {
-		Text.AddOutput("<i>“I know best the lower ranks of the priesthood, [playername],”</i> [name] says, looking somewhere between embarrassed and annoyed. <i>“There is a long training period for all of its members. First, any entrants start off as novices. In this position, they study the verses of Aria, as well as writing, numeracy, and healing. Once they have a grasp of the basics, which normally takes about four years, they move on to being apprentices.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Apprentices delve deeper into study, having to do fewer menial chores than novices, and sometimes getting to help in the priesthood's main work. This stage of training usually takes about six years for most. Although if it is longer, that is not exactly a problem either,”</i> the elf hastens to add.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Beyond apprenticeship is the acolyte stage. Acolytes have most of the knowledge of full priests, but they lack the practical experience to go about duties on their own. They help the priests with everything from healing to the copying of books. This stage normally takes about ten years, although the next advancement only occurs if the order heads deem the acolyte worthy, so it can be much faster or take much, much longer...”</i> [name] trails off at this, [hisher] eyes distant, clearly thinking about something.", parse);
-		Text.Newline();
-		Text.AddOutput("And then?", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Ah, after that, there are the diviners and the clerics. Both are the key servants of lady Aria, with diviners focusing more on finding out the deep truths and protecting the integrity of the worlds and clerics instead focusing on healing and doing good in the here and now. After that, there are the six order heads, who are in charge of various groups in the priesthood, and above all stands the high priestess, who directs the priesthood as a whole.”</i>", parse);
-		Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+		Text.Add("<i>“I know best the lower ranks of the priesthood, [playername],”</i> [name] says, looking somewhere between embarrassed and annoyed. <i>“There is a long training period for all of its members. First, any entrants start off as novices. In this position, they study the verses of Aria, as well as writing, numeracy, and healing. Once they have a grasp of the basics, which normally takes about four years, they move on to being apprentices.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Apprentices delve deeper into study, having to do fewer menial chores than novices, and sometimes getting to help in the priesthood's main work. This stage of training usually takes about six years for most. Although if it is longer, that is not exactly a problem either,”</i> the elf hastens to add.", parse);
+		Text.NL();
+		Text.Add("<i>“Beyond apprenticeship is the acolyte stage. Acolytes have most of the knowledge of full priests, but they lack the practical experience to go about duties on their own. They help the priests with everything from healing to the copying of books. This stage normally takes about ten years, although the next advancement only occurs if the order heads deem the acolyte worthy, so it can be much faster or take much, much longer...”</i> [name] trails off at this, [hisher] eyes distant, clearly thinking about something.", parse);
+		Text.NL();
+		Text.Add("And then?", parse);
+		Text.NL();
+		Text.Add("<i>“Ah, after that, there are the diviners and the clerics. Both are the key servants of lady Aria, with diviners focusing more on finding out the deep truths and protecting the integrity of the worlds and clerics instead focusing on healing and doing good in the here and now. After that, there are the six order heads, who are in charge of various groups in the priesthood, and above all stands the high priestess, who directs the priesthood as a whole.”</i>", parse);
 	});
 	// Order heads
 	scenes.push(function() {
-		Text.AddOutput("<i>“There are six order heads in total. Four of them are in charge of various ranks - one for novices and apprentices, one for acolytes, one for diviners, and one for clerics. The other two, usually seen as standing a little higher, instead govern the priesthood's chief activities - one of them directs the scholarship of the priesthood, and the other the healing.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Each of them has a great deal of authority,”</i> [name] tells you, <i>“and many of them are powerful clerics or diviners in their own right. They also play a key role in choosing the high priestess.”</i>", parse);
-		Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+		Text.Add("<i>“There are six order heads in total. Four of them are in charge of various ranks - one for novices and apprentices, one for acolytes, one for diviners, and one for clerics. The other two, usually seen as standing a little higher, instead govern the priesthood's chief activities - one of them directs the scholarship of the priesthood, and the other the healing.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Each of them has a great deal of authority,”</i> [name] tells you, <i>“and many of them are powerful clerics or diviners in their own right. They also play a key role in choosing the high priestess.”</i>", parse);
 	});
 	// Long
 	scenes.push(function() {
-		Text.AddOutput("<i>“The high priestess is the head of the priesthood, as you might expect, but more than that, she is its heart. She is chosen every seven years, and has the power to change the direction of the order in whatever way she feels will best serve Aria,”</i> [name] tells you.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“The current high priestess is Yrissa, and everyone acknowledges her beauty and wisdom,”</i> the elf blushes slightly. <i>“She is thoughtful and kind, and has moved the priesthood to focus on helping the people of the land.”</i>", parse);
-		Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+		Text.Add("<i>“The high priestess is the head of the priesthood, as you might expect, but more than that, she is its heart. She is chosen every seven years, and has the power to change the direction of the order in whatever way she feels will best serve Aria,”</i> [name] tells you.", parse);
+		Text.NL();
+		Text.Add("<i>“The current high priestess is Yrissa, and everyone acknowledges her beauty and wisdom,”</i> the elf blushes slightly. <i>“She is thoughtful and kind, and has moved the priesthood to focus on helping the people of the land.”</i>", parse);
 	});
 	
 	var sceneId = kiakai.flags["RotPrHier"];
@@ -1533,6 +1516,9 @@ Scenes.Kiakai.TalkPriestHierarchy = function() {
 	
 	// Play scene
 	scenes[sceneId]();
+	
+	Text.Flush();
+	Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
 }
 
 
@@ -1556,29 +1542,30 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 	// Celibacy1
 	if(kiakai.flags["TalkedSex"] < 2) {
 		scenes.push(function() {
-			Text.AddOutput("<i>“One of the primary restrictions on the priesthood is that all must remain celibate,”</i> [name] tells you, looking stern. <i>“Sex is a distraction from service to the lady Aria, and romantic attachment is a distraction from serving the other people of this world.”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“Many find it difficult at times, but the high priestess has reaffirmed that this is the proper path in serving Aria.”</i>", parse);
-			Text.Newline();
+			Text.Add("<i>“One of the primary restrictions on the priesthood is that all must remain celibate,”</i> [name] tells you, looking stern. <i>“Sex is a distraction from service to the lady Aria, and romantic attachment is a distraction from serving the other people of this world.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Many find it difficult at times, but the high priestess has reaffirmed that this is the proper path in serving Aria.”</i>", parse);
+			Text.Flush();
 			
 			if(kiakai.flags["Sexed"] != 0) {
 				//[But...][Okay]
 				var options = new Array();
 				options.push({ nameStr : "But...",
 					func : function() {
-						Text.AddOutput("You mention that the two of you have engaged in certain activities.", parse);
-						Text.Newline();
-						Text.AddOutput("<i>“Oh, no!”</i> [name] answers, blushing furiously. <i>“Those certainly do not count. After all, m-my [virg],”</i> [heshe] explains, looking at the ground, [hisher] entire face turning beet red. <i>“A-and besides, Aria wouldn't forbid something th-that feels so good.”</i>", parse);
-						Text.Newline();
-						Text.AddOutput("You feel that if you keep asking about it, [name] will pass out from embarrassment.", parse);
+						Text.Add("You mention that the two of you have engaged in certain activities.", parse);
+						Text.NL();
+						Text.Add("<i>“Oh, no!”</i> [name] answers, blushing furiously. <i>“Those certainly do not count. After all, m-my [virg],”</i> [heshe] explains, looking at the ground, [hisher] entire face turning beet red. <i>“A-and besides, Aria wouldn't forbid something th-that feels so good.”</i>", parse);
+						Text.NL();
+						Text.Add("You feel that if you keep asking about it, [name] will pass out from embarrassment.", parse);
+						Text.Flush();
 						Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
 					}, enabled : true,
 					tooltip : "But, you know, you and I..."
 				});
 				options.push({ nameStr : "Okay",
 					func : function() {
-						Text.AddOutput("You decide it's best not to mention to the elf that what the two of you have done constitutes as sex.", parse);
-						Text.Newline();
+						Text.Add("You decide it's best not to mention to the elf that what the two of you have done constitutes as sex.", parse);
+						Text.Flush();
 						Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
 					}, enabled : true,
 					tooltip : "Don't mention it."
@@ -1649,24 +1636,26 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 	if(kiakai.relation.Get() > 50) {
 		// Celibacy2
 		scenes.push(function() {
-			Text.AddOutput("<i>“Although priests are supposed to be celibate, [playername], I suspect that some do not follow the decree,”</i> [name] tells you, looking concerned.", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“I have seen some in the priesthood in possession of illicit materials.”</i> [HeShe] blushes slightly. <i>“And I have witnessed some pairs holding hands as they walk! I have even seen one pair enter an empty room, where I knew they could not possibly have any duties.”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“W-worst of all, sometimes I... I hear noises...”</i> [name] trails off, clearly too embarrassed to continue on the topic.", parse);
-			Text.Newline();
+			Text.Add("<i>“Although priests are supposed to be celibate, [playername], I suspect that some do not follow the decree,”</i> [name] tells you, looking concerned.", parse);
+			Text.NL();
+			Text.Add("<i>“I have seen some in the priesthood in possession of illicit materials.”</i> [HeShe] blushes slightly. <i>“And I have witnessed some pairs holding hands as they walk! I have even seen one pair enter an empty room, where I knew they could not possibly have any duties.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“W-worst of all, sometimes I... I hear noises...”</i> [name] trails off, clearly too embarrassed to continue on the topic.", parse);
+			Text.NL();
 			if(kiakai.flags["Sexed"] != 0)
-				Text.AddOutput("You're not sure how to respond, considering the noises you've heard [name] make.", parse);
+				Text.Add("You're not sure how to respond, considering the noises you've heard [name] make.", parse);
+			Text.Flush();
 			Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
 		});
 	}
 	// Other
 	scenes.push(function() {
-		Text.AddOutput("<i>“The priesthood is meant to uphold the highest moral virtues,”</i> [name] tells you proudly. <i>“Though it is acknowledged that it is impossible for mortals to achieve perfection, we must always strive for it.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“We must always show compassion and generosity to those in need, whether it be through healing, or physical aid, or advice, and we must protect those in danger. We also strive to attain spiritual purity to best understand the wishes of our lady Aria, and to serve as a suitable conduit for her power to better the world.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“And, above all, we must oppose evil wherever we see it, and help to protect the integrity of all worlds as much as we are able.”</i> The elf seems almost to puff up at this recitation of [hisher] calling, clearly determined to do [hisher] utmost to fulfil these goals.", parse);
+		Text.Add("<i>“The priesthood is meant to uphold the highest moral virtues,”</i> [name] tells you proudly. <i>“Though it is acknowledged that it is impossible for mortals to achieve perfection, we must always strive for it.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“We must always show compassion and generosity to those in need, whether it be through healing, or physical aid, or advice, and we must protect those in danger. We also strive to attain spiritual purity to best understand the wishes of our lady Aria, and to serve as a suitable conduit for her power to better the world.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“And, above all, we must oppose evil wherever we see it, and help to protect the integrity of all worlds as much as we are able.”</i> The elf seems almost to puff up at this recitation of [hisher] calling, clearly determined to do [hisher] utmost to fulfil these goals.", parse);
+		Text.Flush();
 		Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
 	});
 	
@@ -1703,62 +1692,56 @@ Scenes.Kiakai.TalkPriestActivities = function() {
 	
 	// Chores
 	scenes.push(function() {
-		Text.AddOutput("<i>“There are many chores that need to get done just to keep the shrine running,”</i> [name] tells you. <i>“There is cooking to be done in the kitchens, tending the shrine fields and gardens, cleaning the floors and maintaining the buildings... Although the priesthood employs some full-time staff to assist with these, much of the work falls to novices and apprentices.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Learning and studying priestly arts naturally come first, but for beginners, a large part of the day is also dedicated to this type of labor. It is said that hard work helps develop character and, by exhausting the body, brings the mind closer to the lady.”</i>", parse);
-		Text.Newline();
+		Text.Add("<i>“There are many chores that need to get done just to keep the shrine running,”</i> [name] tells you. <i>“There is cooking to be done in the kitchens, tending the shrine fields and gardens, cleaning the floors and maintaining the buildings... Although the priesthood employs some full-time staff to assist with these, much of the work falls to novices and apprentices.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Learning and studying priestly arts naturally come first, but for beginners, a large part of the day is also dedicated to this type of labor. It is said that hard work helps develop character and, by exhausting the body, brings the mind closer to the lady.”</i>", parse);
+		Text.NL();
 		if(kiakai.relation.Get() > 25)
-			Text.AddOutput("<i>“Though, to be honest with you, I have found my mind ever closer to oblivion than to Aria after a grueling day of work.”</i>", parse);
-		Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+			Text.Add("<i>“Though, to be honest with you, I have found my mind ever closer to oblivion than to Aria after a grueling day of work.”</i>", parse);
 	});
 	// Study
 	scenes.push(function() {
-		Text.AddOutput("<i>“Apprentices and acolytes spend much of their day trying to grasp the mysteries of Aria,”</i> [name] informs you. <i>“We do not have one holy book, but there are many tomes telling tales of other worlds, and of the goodness of Aria in aiding all. There are also spoken verses that all in the priesthood are required to memorize, as their knowledge and recitation help focus the mind on our lady.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“In addition to this, many, especially among the acolytes and diviners, choose to study books of knowledge of the world, of nature, and even of the arts of men, so that they may better understand how to serve Aria in Eden and elsewhere. Others eschew arcane study in favor of studying healing, learning of the workings of the bodies of animals and men and others. This study is favored by the clerics and acolytes who wish to join their ranks.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("And what about [himher]?", parse);
-		Text.Newline();
-		Text.AddOutput("[name] blushes slightly. <i>“I have studied both lores quite extensively. I... I wish to serve lady Aria in whatever way she may desire, and thus I wish to be prepared for all eventualities.”</i> ", parse);
-		Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+		Text.Add("<i>“Apprentices and acolytes spend much of their day trying to grasp the mysteries of Aria,”</i> [name] informs you. <i>“We do not have one holy book, but there are many tomes telling tales of other worlds, and of the goodness of Aria in aiding all. There are also spoken verses that all in the priesthood are required to memorize, as their knowledge and recitation help focus the mind on our lady.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“In addition to this, many, especially among the acolytes and diviners, choose to study books of knowledge of the world, of nature, and even of the arts of men, so that they may better understand how to serve Aria in Eden and elsewhere. Others eschew arcane study in favor of studying healing, learning of the workings of the bodies of animals and men and others. This study is favored by the clerics and acolytes who wish to join their ranks.”</i>", parse);
+		Text.NL();
+		Text.Add("And what about [himher]?", parse);
+		Text.NL();
+		Text.Add("[name] blushes slightly. <i>“I have studied both lores quite extensively. I... I wish to serve lady Aria in whatever way she may desire, and thus I wish to be prepared for all eventualities.”</i> ", parse);
 	});
 	// Copying
 	scenes.push(function() {
-		Text.AddOutput("<i>“Instead of the menial chores of novices, many acolytes, as well as some of the more talented apprentices, take on the work of copying manuscripts.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“The shrine contains an even bigger library than the human capital,”</i> [name] tells you proudly, <i>“and visiting scholars often request that we make copies of particular items in it. In addition, some books are so ancient that they must be copied, lest they fall to decay.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“The priesthood also sometimes has us copy some of the more popular volumes and sells them in the kingdom,”</i> the elf tells you, sounding doubtful of this practice. <i>“I suppose it is for the best, for it gives us funds to do more good, and spreads knowledge to the world.”</i>", parse);
-		Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+		Text.Add("<i>“Instead of the menial chores of novices, many acolytes, as well as some of the more talented apprentices, take on the work of copying manuscripts.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“The shrine contains an even bigger library than the human capital,”</i> [name] tells you proudly, <i>“and visiting scholars often request that we make copies of particular items in it. In addition, some books are so ancient that they must be copied, lest they fall to decay.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“The priesthood also sometimes has us copy some of the more popular volumes and sells them in the kingdom,”</i> the elf tells you, sounding doubtful of this practice. <i>“I suppose it is for the best, for it gives us funds to do more good, and spreads knowledge to the world.”</i>", parse);
 	});
 	// Good works
 	scenes.push(function() {
-		Text.AddOutput("<i>“Clerics often go out into the world in response to the needs of the people, and sometimes take acolytes with them,”</i> [name] tells you, looking wistful. <i>“They provide succor to the sick, healing everything from terrible wasting diseases to broken bones.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“At the same time, they gather the people to them, and tell them of lady Aria, and teach the people to revere her and aid her in her deeds.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("You ask if [name] has gone out with the clerics.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Sadly, I have had but one chance to venture outside the shrine in this fashion. It seems that most clerics do not wish to have me along with them.”</i> [HeShe] looks momentarily downcast. <i>“Of course, then came the second chance when I was called by lady Aria to come meet you,”</i> [heshe] adds, cheering up.", parse);
-		Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+		Text.Add("<i>“Clerics often go out into the world in response to the needs of the people, and sometimes take acolytes with them,”</i> [name] tells you, looking wistful. <i>“They provide succor to the sick, healing everything from terrible wasting diseases to broken bones.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“At the same time, they gather the people to them, and tell them of lady Aria, and teach the people to revere her and aid her in her deeds.”</i>", parse);
+		Text.NL();
+		Text.Add("You ask if [name] has gone out with the clerics.", parse);
+		Text.NL();
+		Text.Add("<i>“Sadly, I have had but one chance to venture outside the shrine in this fashion. It seems that most clerics do not wish to have me along with them.”</i> [HeShe] looks momentarily downcast. <i>“Of course, then came the second chance when I was called by lady Aria to come meet you,”</i> [heshe] adds, cheering up.", parse);
 	});
 	// Advising
 	scenes.push(function() {
-		Text.AddOutput("<i>“Some among the diviners have largely left the shrine, and taken up residence in the human capital, where they have become advisers. All diviners know much about the world and about human affairs, and as such, many in positions of power see their advice as invaluable.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“In return, providing such advice gives them a perfect opportunity to turn the deeds of the mighty to serve the will of Aria, and to help the world. All of them still report to the order heads and the high priestess, and they occasionally come back to the shrine to inform the others of what is going on in the world, or to seek guidance from their peers when they feel they need it.”</i>", parse);
+		Text.Add("<i>“Some among the diviners have largely left the shrine, and taken up residence in the human capital, where they have become advisers. All diviners know much about the world and about human affairs, and as such, many in positions of power see their advice as invaluable.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“In return, providing such advice gives them a perfect opportunity to turn the deeds of the mighty to serve the will of Aria, and to help the world. All of them still report to the order heads and the high priestess, and they occasionally come back to the shrine to inform the others of what is going on in the world, or to seek guidance from their peers when they feel they need it.”</i>", parse);
 		if(kiakai.relation.Get() > 25) {
-			Text.Newline();
-			Text.AddOutput("<i>“Between you and me,”</i> [name] adds, <i>“I question the piety of such diviners whom I have met. I fear some of them may have become seduced by worldly power and riches, and report to the high priestess, and even serve lady Aria, in name only.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Between you and me,”</i> [name] adds, <i>“I question the piety of such diviners whom I have met. I fear some of them may have become seduced by worldly power and riches, and report to the high priestess, and even serve lady Aria, in name only.”</i>", parse);
 		}
-		Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
 	});
 	// Rituals
 	scenes.push(function() {
-		Text.AddOutput("<i>“Once a week, all at the shrine, whether priests or visitors, gather to pray together, [playername],”</i> [name] tells you. <i>“It is an occasion of communal bonding, letting us feel each others' devotion and be strengthened by it. We ask Aria to support us in our deeds and to guide us in fulfilling her will. I have quite missed these in the time I have been traveling,”</i> [heshe] confesses. <i>“They bring a sense of certainty and confidence to all in the priesthood.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“In addition, once every season there is a bigger celebration. It is a wondrous occasion, to which many come from the outlying villages, with patrols going out from the shrine and from the kingdom to help guide those who wish it past the beasts in the woods. Many in the priesthood play beautiful music, candles illuminate the grand hall deep into the night like a myriad of stars, and the kitchens labor day and night to provide food for any who wish it at the gathering.”</i> [name] speaks wistfully, a relaxed smile on [hisher] face, and you tell [himher] you'd like to see this celebration sometime.", parse);
-		Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+		Text.Add("<i>“Once a week, all at the shrine, whether priests or visitors, gather to pray together, [playername],”</i> [name] tells you. <i>“It is an occasion of communal bonding, letting us feel each others' devotion and be strengthened by it. We ask Aria to support us in our deeds and to guide us in fulfilling her will. I have quite missed these in the time I have been traveling,”</i> [heshe] confesses. <i>“They bring a sense of certainty and confidence to all in the priesthood.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“In addition, once every season there is a bigger celebration. It is a wondrous occasion, to which many come from the outlying villages, with patrols going out from the shrine and from the kingdom to help guide those who wish it past the beasts in the woods. Many in the priesthood play beautiful music, candles illuminate the grand hall deep into the night like a myriad of stars, and the kitchens labor day and night to provide food for any who wish it at the gathering.”</i> [name] speaks wistfully, a relaxed smile on [hisher] face, and you tell [himher] you'd like to see this celebration sometime.", parse);
 	});
 	
 	var sceneId = kiakai.flags["RotPrAct"];
@@ -1771,6 +1754,9 @@ Scenes.Kiakai.TalkPriestActivities = function() {
 	
 	// Play scene
 	scenes[sceneId]();
+	
+	Text.Flush();
+	Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
 }
 
 
@@ -1793,38 +1779,35 @@ Scenes.Kiakai.TalkPriestYrissa = function() {
 	
 	// General
 	scenes.push(function() {
-		Text.AddOutput("<i>“The current high priestess of the order is Yrissa. She has held the position for two seven-year cycles in a row now, having assumed it at a young age.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“She was actually the one who brought me from the village to the order.", parse);
-		Text.Newline();
+		Text.Add("<i>“The current high priestess of the order is Yrissa. She has held the position for two seven-year cycles in a row now, having assumed it at a young age.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“She was actually the one who brought me from the village to the order.", parse);
+		Text.NL();
 		
 		if(kiakai.relation.Get() > 25 || kiakai.flags["Attitude"] > Kiakai.Attitude.Neutral)
-			Text.AddOutput("She is very precious to me,”</i> [name] confesses. <i>“She was the one who made sure I was accepted even though the leadership back then was still skeptical of admitting an elf, and she has been like an older sister, and sometimes almost a... mother, to me.”</i>", parse);
+			Text.Add("She is very precious to me,”</i> [name] confesses. <i>“She was the one who made sure I was accepted even though the leadership back then was still skeptical of admitting an elf, and she has been like an older sister, and sometimes almost a... mother, to me.”</i>", parse);
 		else
-			Text.AddOutput("She has kept watch over me since then, making sure that I am doing well and learning to best serve lady Aria. She has been a great help in guiding me on my path, [playername]. Perhaps she will be able to assist you, as well,”</i> [name] tells you, looking you straight in the eyes.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“She is generous and kind, but also strict and meticulous in ensuring that Aria's will is done. She, more than anyone, acts for the preservation of the worlds, and to ensure the dominion of our lady's goodness.”</i>", parse);
-		Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+			Text.Add("She has kept watch over me since then, making sure that I am doing well and learning to best serve lady Aria. She has been a great help in guiding me on my path, [playername]. Perhaps she will be able to assist you, as well,”</i> [name] tells you, looking you straight in the eyes.", parse);
+		Text.NL();
+		Text.Add("<i>“She is generous and kind, but also strict and meticulous in ensuring that Aria's will is done. She, more than anyone, acts for the preservation of the worlds, and to ensure the dominion of our lady's goodness.”</i>", parse);
 	});
 	// Ambition
 	scenes.push(function() {
-		Text.AddOutput("<i>“When Yrissa came for me in my village, she was in her teens, but already the order had recognized her abilities and potential. From there, she rose rapidly through the ranks, and her abilities were seen by all when she rose to the rank of high priestess at the almost unheard-of age of thirty-two,”</i> [name] tells you, pride evident in her voice.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“She has been skillful in directing the order since then, and ensuring that all our abilities are bent to the service of Aria.”</i>", parse);
-		Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+		Text.Add("<i>“When Yrissa came for me in my village, she was in her teens, but already the order had recognized her abilities and potential. From there, she rose rapidly through the ranks, and her abilities were seen by all when she rose to the rank of high priestess at the almost unheard-of age of thirty-two,”</i> [name] tells you, pride evident in her voice.", parse);
+		Text.NL();
+		Text.Add("<i>“She has been skillful in directing the order since then, and ensuring that all our abilities are bent to the service of Aria.”</i>", parse);
 	});
 	if(kiakai.relation.Get() > 50)
 	{
 		// Promotion
 		scenes.push(function() {
-			Text.AddOutput("<i>“To be honest with you, I often wish that Yrissa would simply have me promoted already. I think there are many among the order heads who oppose the promotion of an elf to the full prestige of a diviner or cleric, but she could override them if she wished to. I suspect that she had to override them just to get me to the rank of acolyte.”</i> [name] looks petulant, saying this.", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“The last time we spoke of this, she had told me that it is best that I wait, so that the others can reconcile themselves to my skills, and my place in the order. But how much longer must I wait?”</i> The elf exclaims, frustrated. <i>“I am already the equal of most clerics in healing ability, and of most diviners in knowledge! What else do they wish of me before they acknowledge me?”</i> [HeShe] pauses, making a visible effort to calm [himher]self.", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“Ah, forgive me, [playername], I let my pride get the better of me.”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("You tell [himher] that there is nothing to forgive, and you quite understand [hisher] frustration.", parse);
-			Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+			Text.Add("<i>“To be honest with you, I often wish that Yrissa would simply have me promoted already. I think there are many among the order heads who oppose the promotion of an elf to the full prestige of a diviner or cleric, but she could override them if she wished to. I suspect that she had to override them just to get me to the rank of acolyte.”</i> [name] looks petulant, saying this.", parse);
+			Text.NL();
+			Text.Add("<i>“The last time we spoke of this, she had told me that it is best that I wait, so that the others can reconcile themselves to my skills, and my place in the order. But how much longer must I wait?”</i> The elf exclaims, frustrated. <i>“I am already the equal of most clerics in healing ability, and of most diviners in knowledge! What else do they wish of me before they acknowledge me?”</i> [HeShe] pauses, making a visible effort to calm [himher]self.", parse);
+			Text.NL();
+			Text.Add("<i>“Ah, forgive me, [playername], I let my pride get the better of me.”</i>", parse);
+			Text.NL();
+			Text.Add("You tell [himher] that there is nothing to forgive, and you quite understand [hisher] frustration.", parse);
 		});
 	}
 	
@@ -1838,6 +1821,9 @@ Scenes.Kiakai.TalkPriestYrissa = function() {
 	
 	// Play scene
 	scenes[sceneId]();
+	
+	Text.Flush();
+	Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
 }
 
 
@@ -1860,15 +1846,14 @@ Scenes.Kiakai.TalkPriestAria = function() {
 	
 	// Long
 	scenes.push(function() {
-		Text.AddOutput("<i>“Most in the priesthood speak of conversing with lady Aria almost every day. They pray to her at night, and hear what she wishes of them in response. Sometimes, they even find that small miracles occur, as she lights their way to doing her will.”</i> [name] sounds a little despondent as [heshe] tells you this.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“For some reason, she does not speak to me as often. Perhaps even she prefers to communicate with humans rather than with elves. I know for certain that I have heard from her but twice in my life. The first time she spoke to me, I knew that I must leave the village of my birth, and come to aid her at the shrine, and the second, she told me come and find you.”</i> [name] smiles gently. <i>“I suppose I ought not to complain about the lack of communications, when their import is so great.”</i>", parse);
+		Text.Add("<i>“Most in the priesthood speak of conversing with lady Aria almost every day. They pray to her at night, and hear what she wishes of them in response. Sometimes, they even find that small miracles occur, as she lights their way to doing her will.”</i> [name] sounds a little despondent as [heshe] tells you this.", parse);
+		Text.NL();
+		Text.Add("<i>“For some reason, she does not speak to me as often. Perhaps even she prefers to communicate with humans rather than with elves. I know for certain that I have heard from her but twice in my life. The first time she spoke to me, I knew that I must leave the village of my birth, and come to aid her at the shrine, and the second, she told me come and find you.”</i> [name] smiles gently. <i>“I suppose I ought not to complain about the lack of communications, when their import is so great.”</i>", parse);
 		
 		if(kiakai.relation.Get() > 40) {
-			Text.Newline();
-			Text.AddOutput("The elf pauses, thinking a little, before adding, <i>“To be entirely honest with you, [playername], sometimes I wonder if the other priests hear from lady Aria at all. The two times she spoke to me, I knew I could have no mistake nor illusion about either her message or intent. I beheld her corporeal form, and the beautiful sight of her garden as well. When the other priests speak of conversing with her, however, it is never something so clear or vivid, and often they receive ambiguous or even conflicting messages.”</i> [name] shakes her head. <i>“And yet, I know they are good men and women, and would not invent revelation where there is none. I simply do not know what to make of it.”</i>", parse);
+			Text.NL();
+			Text.Add("The elf pauses, thinking a little, before adding, <i>“To be entirely honest with you, [playername], sometimes I wonder if the other priests hear from lady Aria at all. The two times she spoke to me, I knew I could have no mistake nor illusion about either her message or intent. I beheld her corporeal form, and the beautiful sight of her garden as well. When the other priests speak of conversing with her, however, it is never something so clear or vivid, and often they receive ambiguous or even conflicting messages.”</i> [name] shakes her head. <i>“And yet, I know they are good men and women, and would not invent revelation where there is none. I simply do not know what to make of it.”</i>", parse);
 		}
-		Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
 	});
 	
 	var sceneId = kiakai.flags["RotPrAria"];
@@ -1881,6 +1866,9 @@ Scenes.Kiakai.TalkPriestAria = function() {
 	
 	// Play scene
 	scenes[sceneId]();
+	
+	Text.Flush();
+	Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
 }
 
 Scenes.Kiakai.TalkPriestMeeting = function() {
@@ -1902,32 +1890,30 @@ Scenes.Kiakai.TalkPriestMeeting = function() {
 	
 	// Short version
 	scenes.push(function() {
-		Text.AddOutput("<i>“It was a simple thing, [playername]. As I meditated in the gardens, lady Aria entered my mind, and sent me a vision of her wishes. She told me of your arrival, and showed you to me, instructing me in what I need to do for you.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“I set out as soon as I could and after several days of travel, I arrived at the nomad camp,”</i> [name] recalls, smiling. <i>“They were not too welcoming at first, but I was able to aid them with my healing, and we reached an understanding. There, I waited for half a day, and found you after your descent.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("You ask [himher] how it could be possible for [himher] to travel for so long and still get there before you, when your own trip through the worlds felt like it was less than a day.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“That, I do not know,”</i> the elf replies. <i>“It could be that time flows differently in the other worlds, or that your passage through the boundaries was longer than you perceived. Or it could be that lady Aria foresaw your arrival, and knew to send me to wait for you before you had even left your world.”</i>", parse);
-		Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+		Text.Add("<i>“It was a simple thing, [playername]. As I meditated in the gardens, lady Aria entered my mind, and sent me a vision of her wishes. She told me of your arrival, and showed you to me, instructing me in what I need to do for you.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“I set out as soon as I could and after several days of travel, I arrived at the nomad camp,”</i> [name] recalls, smiling. <i>“They were not too welcoming at first, but I was able to aid them with my healing, and we reached an understanding. There, I waited for half a day, and found you after your descent.”</i>", parse);
+		Text.NL();
+		Text.Add("You ask [himher] how it could be possible for [himher] to travel for so long and still get there before you, when your own trip through the worlds felt like it was less than a day.", parse);
+		Text.NL();
+		Text.Add("<i>“That, I do not know,”</i> the elf replies. <i>“It could be that time flows differently in the other worlds, or that your passage through the boundaries was longer than you perceived. Or it could be that lady Aria foresaw your arrival, and knew to send me to wait for you before you had even left your world.”</i>", parse);
 	});
 	if(kiakai.relation.Get() > 50) {
 		// Detailed version
 		scenes.push(function() {
-			Text.AddOutput("<i>“I... I have a confession to make, [playername],”</i> [name] says, looking embarrassed. <i>“Although I did not say anything untrue to you about the way I came to fetch you, I may have omitted some details.”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("You ask what [heshe] means.", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“Well, you see, when I received lady Aria's instructions while meditating, I indeed hurried off to my room to pack immediately. However, what I did not tell you is that, in my haste, I spared no time to inform any person in the priesthood of my intent.”</i> The elf looks conflicted saying this. <i>“Not even Yrissa. Now, I do not know how they will welcome me back. <b>Whether</b> they will welcome me back.”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“There was nought else I could do, [playername]! How was I to prove that my revelation was genuine, when the only sign of it was in my mind. And if they hesitated or debated, or, worst of all, did not believe me, my purpose would have been ruined. Not telling the priesthood of lady Aria's wishes was the only way I could carry them out!”</i>", parse);
-			Text.Newline();
+			Text.Add("<i>“I... I have a confession to make, [playername],”</i> [name] says, looking embarrassed. <i>“Although I did not say anything untrue to you about the way I came to fetch you, I may have omitted some details.”</i>", parse);
+			Text.NL();
+			Text.Add("You ask what [heshe] means.", parse);
+			Text.NL();
+			Text.Add("<i>“Well, you see, when I received lady Aria's instructions while meditating, I indeed hurried off to my room to pack immediately. However, what I did not tell you is that, in my haste, I spared no time to inform any person in the priesthood of my intent.”</i> The elf looks conflicted saying this. <i>“Not even Yrissa. Now, I do not know how they will welcome me back. <b>Whether</b> they will welcome me back.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“There was nought else I could do, [playername]! How was I to prove that my revelation was genuine, when the only sign of it was in my mind. And if they hesitated or debated, or, worst of all, did not believe me, my purpose would have been ruined. Not telling the priesthood of lady Aria's wishes was the only way I could carry them out!”</i>", parse);
+			Text.NL();
 			
 			if(kiakai.flags["Attitude"] > Kiakai.Attitude.Neutral)
-				Text.AddOutput("You hug the agitated elf, telling [himher] that [heshe] chose well. If [heshe] had delayed, you would've been lost, a near-dead stranger in a strange land, and Aria's plan would have been for nought.", parse);
+				Text.Add("You hug the agitated elf, telling [himher] that [heshe] chose well. If [heshe] had delayed, you would've been lost, a near-dead stranger in a strange land, and Aria's plan would have been for nought.", parse);
 			else
-				Text.AddOutput("You pat the agitated elf on the head, telling [himher] that [heshe] did well. You tell [himher] that [heshe] doesn't need to worry about the attitude of the priesthood while [heshe]'s following you. After all, in serving you, [heshe] furthers the will of Aria.", parse);
-			Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
+				Text.Add("You pat the agitated elf on the head, telling [himher] that [heshe] did well. You tell [himher] that [heshe] doesn't need to worry about the attitude of the priesthood while [heshe]'s following you. After all, in serving you, [heshe] furthers the will of Aria.", parse);
 		});
 	}
 	
@@ -1941,6 +1927,9 @@ Scenes.Kiakai.TalkPriestMeeting = function() {
 	
 	// Play scene
 	scenes[sceneId]();
+	
+	Text.Flush();
+	Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
 }
 
 
@@ -1979,20 +1968,20 @@ Scenes.Kiakai.Healing = function() {
 	
 	if(player.HPLevel() < 0.25) { // REALLY LOW HEALTH 0-25%
 		player.AddHPFraction(1.0);
-		Text.AddOutput("<i>“[playername]!”</i> The elf exclaims, aghast. <i>“How are you even still standing? The amount of damage you took in that last fight... And yet, you still kept going like it was nothing.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("[name] gently guides you to lie down on a soft patch of earth, wincing on your behalf every time [heshe] is forced to touch one of your serious injuries. [HeShe] runs [hisher] hands slowly over your torn up body, focusing on every wound and bruise. Gradually, spot by spot, you feel the pain drain away, the waves of healing energy from the elf soothing and mending even your deepest hurts.", parse);
-		Text.Newline();
+		Text.Add("<i>“[playername]!”</i> The elf exclaims, aghast. <i>“How are you even still standing? The amount of damage you took in that last fight... And yet, you still kept going like it was nothing.”</i>", parse);
+		Text.NL();
+		Text.Add("[name] gently guides you to lie down on a soft patch of earth, wincing on your behalf every time [heshe] is forced to touch one of your serious injuries. [HeShe] runs [hisher] hands slowly over your torn up body, focusing on every wound and bruise. Gradually, spot by spot, you feel the pain drain away, the waves of healing energy from the elf soothing and mending even your deepest hurts.", parse);
+		Text.NL();
 		
 		if(kiakai.flags["Attitude"] >= Kiakai.Attitude.Neutral) {
-			Text.AddOutput("You sincerely thank the elf, telling [himher] you had been worried that this time it might have been an injury you couldn't just sleep off. [HeShe] smiles at you, happy with a job well done.", parse);
-			Text.Newline();
-			Text.AddOutput("The gentle touch of the elf roused something within you, however, making you hesitate when [heshe] gets up and urges you to get dressed again.", parse);
+			Text.Add("You sincerely thank the elf, telling [himher] you had been worried that this time it might have been an injury you couldn't just sleep off. [HeShe] smiles at you, happy with a job well done.", parse);
+			Text.NL();
+			Text.Add("The gentle touch of the elf roused something within you, however, making you hesitate when [heshe] gets up and urges you to get dressed again.", parse);
 		}
 		else {
-			Text.AddOutput("You smirk at the elf, telling [himher] [heshe] did a good job, but there's one spot [heshe] missed. [name] looks at you with clear concern, which changes to deep embarrassment as [heshe] understands your meaning.", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“Even when you're this injured, [playername]...”</i> [HeShe] trails off, unsure what to make of you. Trying to shrug it off, [heshe] backs off, gesturing toward your clothes.", parse);
+			Text.Add("You smirk at the elf, telling [himher] [heshe] did a good job, but there's one spot [heshe] missed. [name] looks at you with clear concern, which changes to deep embarrassment as [heshe] understands your meaning.", parse);
+			Text.NL();
+			Text.Add("<i>“Even when you're this injured, [playername]...”</i> [HeShe] trails off, unsure what to make of you. Trying to shrug it off, [heshe] backs off, gesturing toward your clothes.", parse);
 		}
 		
 		Scenes.Kiakai.HealingSeducePrompt();
@@ -2001,48 +1990,48 @@ Scenes.Kiakai.Healing = function() {
 		player.AddHPFraction(1.0);
 		var scenes = new EncounterTable();
 		scenes.AddEnc(function() {
-			Text.AddOutput("<i>“[playername]!”</i> The elf exclaims with a worried expression. <i>“Please, lie down and take off your clothes, I will tend to your wounds.”</i> You comply, giving the occasional wince as the elf runs [hisher] hands over your nude body, warm flows of healing energy seeping into your battered form. Soon, your pain is numbing, and the various bruises on your body fade.", parse);
+			Text.Add("<i>“[playername]!”</i> The elf exclaims with a worried expression. <i>“Please, lie down and take off your clothes, I will tend to your wounds.”</i> You comply, giving the occasional wince as the elf runs [hisher] hands over your nude body, warm flows of healing energy seeping into your battered form. Soon, your pain is numbing, and the various bruises on your body fade.", parse);
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
-			Text.AddOutput("Seeing your wounds, [name] hurriedly instructs you to remove your clothes so [heshe] can tend to you. A gentle flow of healing energy seeps from your elvish companion's fingers, closing up cuts and soothing bruises, numbing your pain. <i>“Are you feeling better, [playername]?”</i> the elf asks. You assure [himher] that you are feeling much better.", parse);
+			Text.Add("Seeing your wounds, [name] hurriedly instructs you to remove your clothes so [heshe] can tend to you. A gentle flow of healing energy seeps from your elvish companion's fingers, closing up cuts and soothing bruises, numbing your pain. <i>“Are you feeling better, [playername]?”</i> the elf asks. You assure [himher] that you are feeling much better.", parse);
 			if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
-				Text.Newline();
-				Text.AddOutput("Much, much better, you add, grinning mischievously at [himher]. The elf nods at you uncertainly.", parse);
+				Text.NL();
+				Text.Add("Much, much better, you add, grinning mischievously at [himher]. The elf nods at you uncertainly.", parse);
 			}
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
-			Text.AddOutput("Wordlessly, [name] helps you disrobe, worriedly running [hisher] hands down your wounded body. Your cuts and bruises smart slightly as the elf's deft fingers run over them, assessing the damage. <i>“You must be more careful, [playername],”</i> [name] scolds you, <i>“share some of your burdens with your companions.”</i>", parse);
-			Text.Newline();
+			Text.Add("Wordlessly, [name] helps you disrobe, worriedly running [hisher] hands down your wounded body. Your cuts and bruises smart slightly as the elf's deft fingers run over them, assessing the damage. <i>“You must be more careful, [playername],”</i> [name] scolds you, <i>“share some of your burdens with your companions.”</i>", parse);
+			Text.NL();
 			
 			if(kiakai.flags["Attitude"] >= Kiakai.Attitude.Neutral) {
-				Text.AddOutput("Grudgingly, you agree to try to be more careful in the future. The elf nods, somewhat consoled.", parse);
+				Text.Add("Grudgingly, you agree to try to be more careful in the future. The elf nods, somewhat consoled.", parse);
 			}
 			else { // NAUGHTY
-				Text.AddOutput("Wincing as a particularly painful wound is being probed, you mutter under your breath that, perhaps if a certain elf would keep in line and do as [heshe] is told, you wouldn't be so distracted.", parse);
+				Text.Add("Wincing as a particularly painful wound is being probed, you mutter under your breath that, perhaps if a certain elf would keep in line and do as [heshe] is told, you wouldn't be so distracted.", parse);
 			}
 			
-			Text.Newline();
-			Text.AddOutput("The discomfort eases as you feel tendrils of healing magic enter your body, working their way into your most dire wounds and numbing the pain.", parse);
+			Text.NL();
+			Text.Add("The discomfort eases as you feel tendrils of healing magic enter your body, working their way into your most dire wounds and numbing the pain.", parse);
 		}, 1.0, function() { return true; });
 		
 		scenes.Get();
 		
-		Text.Newline();
-		Text.AddOutput("<i>“There, that should do it,”</i> [name] announces, withdrawing the flow of healing magic from your body. [HeShe] rests [hisher] hands on your stomach for a few moments longer than what should be strictly necessary, with a thoughtful expression on [hisher] face. Shaking [hisher] head a bit, [heshe] gets up on [hisher] feet, motioning for you to get dressed.", parse);
-		Text.Newline();
-		Text.AddOutput("A [heatStirring] in your groin makes itself known, tauntingly reminding you of the elf's gentle touch.", parse);
+		Text.NL();
+		Text.Add("<i>“There, that should do it,”</i> [name] announces, withdrawing the flow of healing magic from your body. [HeShe] rests [hisher] hands on your stomach for a few moments longer than what should be strictly necessary, with a thoughtful expression on [hisher] face. Shaking [hisher] head a bit, [heshe] gets up on [hisher] feet, motioning for you to get dressed.", parse);
+		Text.NL();
+		Text.Add("A [heatStirring] in your groin makes itself known, tauntingly reminding you of the elf's gentle touch.", parse);
 		
 		if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
-			Text.Newline();
-			Text.AddOutput("Perhaps you should have [himher] service the rest of you as well?", parse);
+			Text.NL();
+			Text.Add("Perhaps you should have [himher] service the rest of you as well?", parse);
 		}
 		
 		Scenes.Kiakai.HealingSeducePrompt();
 	}
 	else { // Health 75%-100%
-		Text.AddOutput("<i>“Really, [playername]? You look to be fine to me,”</i> [name] looks at you, unsure.", parse);
-		Text.Newline();
-		
+		Text.Add("<i>“Really, [playername]? You look to be fine to me,”</i> [name] looks at you, unsure.", parse);
+		Text.NL();
+		Text.Flush();
 		//[Heal][Seduce][Insist]
 		var options = new Array();
 		options.push({ nameStr : "Heal",
@@ -2050,21 +2039,21 @@ Scenes.Kiakai.Healing = function() {
 				player.AddHPFraction(1.0);
 				var scenes = new EncounterTable();
 				scenes.AddEnc(function() {
-					Text.AddOutput("<i>“Very well, then,”</i> the elf nods, gesturing for you to turn around and bare your back. [HisHer] light caresses trail over your back, sending light shocks of electricity racing up your spine.", parse);
+					Text.Add("<i>“Very well, then,”</i> the elf nods, gesturing for you to turn around and bare your back. [HisHer] light caresses trail over your back, sending light shocks of electricity racing up your spine.", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
-					Text.AddOutput("<i>“If that is your wish,”</i> the elf consents, running [hisher] hands across your body. Small probing tendrils of healing magic sneak out from [hisher] fingers, finding their way into your various minor injuries.", parse);
+					Text.Add("<i>“If that is your wish,”</i> the elf consents, running [hisher] hands across your body. Small probing tendrils of healing magic sneak out from [hisher] fingers, finding their way into your various minor injuries.", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
-					Text.AddOutput("It's [hisher] job to keep you healthy at all times, is it not? <i>“As you say,”</i> [name] grudgingly agrees, instructing you to disrobe. After [heshe] has administered some minor healing on your body, the elf withdraws [hisher] hands.", parse);
+					Text.Add("It's [hisher] job to keep you healthy at all times, is it not? <i>“As you say,”</i> [name] grudgingly agrees, instructing you to disrobe. After [heshe] has administered some minor healing on your body, the elf withdraws [hisher] hands.", parse);
 				}, 1.0, // Scene only available for naughty
 				function() { return kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral; });
 				
 				scenes.Get();
 				
-				Text.Newline();
-				Text.AddOutput("Feeling far more refreshed, you gather up your gear and continue on your journey.", parse);
-				
+				Text.NL();
+				Text.Add("Feeling far more refreshed, you gather up your gear and continue on your journey.", parse);
+				Text.Flush();
 				Gui.NextPrompt(kiakai.Interact);
 			}, enabled : true,
 			tooltip : "A small spark of healing energy should be enough to perk you up."
@@ -2072,25 +2061,25 @@ Scenes.Kiakai.Healing = function() {
 		options.push({ nameStr : "Seduce",
 			func : function() {
 				player.AddHPFraction(1.0);
-				Text.AddOutput("You give [name] a light caress on [hisher] cheek and gaze deep into [hisher] eyes. <i>“What sort of healer doesn't help those in need?”</i> you mockingly tease [himher]. Flustered, the elf asks you where you are hurt. Suggesting that it would be easier to find if you were nude, you undress in front of the blushing elf. In fact, you suggest, perhaps it'd be easier if both of you were nude...", parse);
-				Text.Newline();
+				Text.Add("You give [name] a light caress on [hisher] cheek and gaze deep into [hisher] eyes. <i>“What sort of healer doesn't help those in need?”</i> you mockingly tease [himher]. Flustered, the elf asks you where you are hurt. Suggesting that it would be easier to find if you were nude, you undress in front of the blushing elf. In fact, you suggest, perhaps it'd be easier if both of you were nude...", parse);
+				Text.NL();
 				if(kiakai.flags["Sexed"] > 15) {
 					// TODO: use musculature instead
 					parse["shape"] = player.body.femininity.Get() ? "your smooth curves" : "the lines of your muscles";
-					Text.AddOutput("<i>“I... I think you are right, [playername]!”</i> [name] quickly wriggles out of [hisher] [armor], breathing a bit faster. [HeShe] only hesitates for a moment before greedily probing your naked body, gently letting [hisher] fingers trace [shape].", parse);
+					Text.Add("<i>“I... I think you are right, [playername]!”</i> [name] quickly wriggles out of [hisher] [armor], breathing a bit faster. [HeShe] only hesitates for a moment before greedily probing your naked body, gently letting [hisher] fingers trace [shape].", parse);
 				}
 				else {
-					Text.AddOutput("[name] starts to mouth some protest, but you silence [himher] with a finger against [hisher] lips. As the elf warily probes your body, you slowly undress [himher], smiling at [name]'s attempts to cover [himher]self.", parse);
+					Text.Add("[name] starts to mouth some protest, but you silence [himher] with a finger against [hisher] lips. As the elf warily probes your body, you slowly undress [himher], smiling at [name]'s attempts to cover [himher]self.", parse);
 				}
-				Text.Newline();
-				Text.AddOutput("You gasp as small tendrils of healing energy flow into your body, soothing any lingering wounds and bruises. Once [heshe] is done, you gather [name] into a gentle hug, pulling [himher] down to the ground. ", parse);
+				Text.NL();
+				Text.Add("You gasp as small tendrils of healing energy flow into your body, soothing any lingering wounds and bruises. Once [heshe] is done, you gather [name] into a gentle hug, pulling [himher] down to the ground. ", parse);
 
 				if(kiakai.flags["Attitude"] > Kiakai.Attitude.Neutral)
-					Text.AddOutput("[HeShe] doesn't seem to mind at all, sighing happily and snuggling up against your [breastDesc].", parse);
+					Text.Add("[HeShe] doesn't seem to mind at all, sighing happily and snuggling up against your [breastDesc].", parse);
 				else if(kiakai.flags["Sexed"] > 15)
-					Text.AddOutput("[HeShe] looks conflicted, suspecting what is to come. From [hisher] rapidly beating heart, it seems like [heshe] is looking forward to it.", parse);
+					Text.Add("[HeShe] looks conflicted, suspecting what is to come. From [hisher] rapidly beating heart, it seems like [heshe] is looking forward to it.", parse);
 				else
-					Text.AddOutput("[HeShe] seems a bit uncomfortable with you still, but nervously complies, offering no resistance.", parse);			
+					Text.Add("[HeShe] seems a bit uncomfortable with you still, but nervously complies, offering no resistance.", parse);
 				Scenes.Kiakai.HealingNice();
 			}, enabled : true,
 			tooltip : "Coax the elf into having some fun with you."
@@ -2098,33 +2087,33 @@ Scenes.Kiakai.Healing = function() {
 		options.push({ nameStr : "Insist",
 			func : function() {
 				player.AddHPFraction(1.0);
-				Text.AddOutput("Insisting that you are indeed hurt, you slip out of your clothing without any urging from the elf. Shrugging, the elf motions for you to turn around, searching your body for signs of injury. Instead of heeding [hisher] instruction, you take [hisher] hand in yours. <i>“Here, I'll show you where...”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("The elf's face turns a bright pink, then beet red, as you guide [hisher] fingers across your body. Their first stop is your [breastDesc], stopping to circle your [nipsDesc] before trailing down toward your exposed crotch.", parse);
-				Text.Newline();
-				Text.AddOutput("You hold [name]'s gaze captive, the poor elf almost hypnotized as [hisher] hand inexorably draws closer to your [genDesc]. You stop just short of it, forcing [himher] to close the final distance on [hisher] own.", parse);
-				Text.Newline();
+				Text.Add("Insisting that you are indeed hurt, you slip out of your clothing without any urging from the elf. Shrugging, the elf motions for you to turn around, searching your body for signs of injury. Instead of heeding [hisher] instruction, you take [hisher] hand in yours. <i>“Here, I'll show you where...”</i>", parse);
+				Text.NL();
+				Text.Add("The elf's face turns a bright pink, then beet red, as you guide [hisher] fingers across your body. Their first stop is your [breastDesc], stopping to circle your [nipsDesc] before trailing down toward your exposed crotch.", parse);
+				Text.NL();
+				Text.Add("You hold [name]'s gaze captive, the poor elf almost hypnotized as [hisher] hand inexorably draws closer to your [genDesc]. You stop just short of it, forcing [himher] to close the final distance on [hisher] own.", parse);
+				Text.NL();
 				
 				if(kiakai.flags["Sexed"] > 10) {
-					Text.AddOutput("Without hesitation, the elf's fingers ", parse);
+					Text.Add("Without hesitation, the elf's fingers ", parse);
 					if(player.FirstCock())
-						Text.AddOutput("close around your erect [cockDesc], caressing the length reverently.",parse);
+						Text.Add("close around your erect [cockDesc], caressing the length reverently.",parse);
 					else if(player.FirstVag())
-						Text.AddOutput("brush against your [vagDesc], gently teasing your folds apart.",parse);
+						Text.Add("brush against your [vagDesc], gently teasing your folds apart.",parse);
 					else
-						Text.AddOutput("caress your featureless crotch.");
+						Text.Add("caress your featureless crotch.");
 					
-					Text.AddOutput(" <i>“You are always making me do weird things,”</i> [name] murmurs under [hisher] breath, but shrugs out of [hisher] [armor] without any further coaxing from you. Leaning back onto the ground, you enjoy the show.", parse);
+					Text.Add(" <i>“You are always making me do weird things,”</i> [name] murmurs under [hisher] breath, but shrugs out of [hisher] [armor] without any further coaxing from you. Leaning back onto the ground, you enjoy the show.", parse);
 				}
 				else {
-					Text.AddOutput("[name]'s eyes are like those of a cornered doe, unsure of whether to flee or dive in. A few moments pass before you insistently urge [himher] on, forcing [hisher] hands to graze against your [genDesc]. Snapping out of it, the elf hurriedly withdraws [hisher] hand, unthinkingly bringing it to [hisher] mouth, depositing a single drop of [fluids] on [hisher] lips.", parse);
-					Text.Newline();
-					Text.AddOutput("You console the flustered and protesting elf, telling [himher] that [heshe] is doing well; together, you have found the place that hurts, now [name] only needs to take care of it. Helping the brightly blushing elf out of [hisher] [armor], you recline and motion for [himher] to join you.", parse);
+					Text.Add("[name]'s eyes are like those of a cornered doe, unsure of whether to flee or dive in. A few moments pass before you insistently urge [himher] on, forcing [hisher] hands to graze against your [genDesc]. Snapping out of it, the elf hurriedly withdraws [hisher] hand, unthinkingly bringing it to [hisher] mouth, depositing a single drop of [fluids] on [hisher] lips.", parse);
+					Text.NL();
+					Text.Add("You console the flustered and protesting elf, telling [himher] that [heshe] is doing well; together, you have found the place that hurts, now [name] only needs to take care of it. Helping the brightly blushing elf out of [hisher] [armor], you recline and motion for [himher] to join you.", parse);
 				}
 				parse.att1 = kiakai.flags["Sexed"] > 20 ? "eagerly eyeing" : kiakai.flags["Sexed"] > 10 ? "pleasantly aware of" : "uncomfortably aware of";
-				Text.Newline();
-				Text.AddOutput("Once nude, the elf kneels down before you, [att1] your exposed [genDesc]. [HeShe] seems to be waiting for your instructions.", parse);
-
+				Text.NL();
+				Text.Add("Once nude, the elf kneels down before you, [att1] your exposed [genDesc]. [HeShe] seems to be waiting for your instructions.", parse);
+				
 				Scenes.Kiakai.HealingAssertive();
 			}, enabled : true,
 			tooltip : "You're less interested in the healing than the part that may come after."
@@ -2156,21 +2145,23 @@ Scenes.Kiakai.HealingSeducePrompt = function() {
 	parse.genDesc = player.FirstCock() ? function() { return player.MultiCockDesc(); } :
 					player.FirstVag() ? function() { return player.FirstVag().Short(); } :
 					"featureless crotch";
-					
+	
+	Text.Flush();
 	//[Finish][Seduce][Nah]
 	var options = new Array();
 	options.push({ nameStr : "Finish",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("You gather up your gear, resolving to deal with your arousal in some other manner. While you are not quite sure, you could almost swear that you catch [himher] taking a peek as you get dressed.", parse);
-			Text.Newline();
+			Text.Add("You gather up your gear, resolving to deal with your arousal in some other manner. While you are not quite sure, you could almost swear that you catch [himher] taking a peek as you get dressed.", parse);
+			Text.NL();
 			
 			if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
-				Text.AddOutput("Hiding your smile, you purposely flaunt parts of your body to [himher], trying to make it look like an accident. Blushing at getting caught, the elf quickly pirouettes away from you, hurriedly gathering up [hisher] gear.", parse);
+				Text.Add("Hiding your smile, you purposely flaunt parts of your body to [himher], trying to make it look like an accident. Blushing at getting caught, the elf quickly pirouettes away from you, hurriedly gathering up [hisher] gear.", parse);
 			
 			player.AddLustFraction(0.05);
 			kiakai.AddLustFraction(0.05);
 			
+			Text.Flush();
 			Gui.NextPrompt(kiakai.Interact);
 		}, enabled : true,
 		tooltip : "It is time to carry on with your quest."
@@ -2178,16 +2169,16 @@ Scenes.Kiakai.HealingSeducePrompt = function() {
 	options.push({ nameStr : "Seduce",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("Rather than complying with [hisher] wishes, you stretch sinuously, making certain to flaunt your body for the captive audience as much as you can. Patting the ground beside you, you motion for your elvish companion to join you.", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“Should we not be going, [playername]?”</i>, [name] mumbles, blushing slightly. You chuckle, insisting that you are in no rush. Lazily, you part your legs, giving the embarrassed elf a clear view of your [genDesc]. The elf gets down beside you, trying to avoid your gaze and cover [hisher] burning cheeks.", parse);
-			Text.Newline();
-			Text.AddOutput("A jolt runs up the elf's spine as you languidly caress [hisher] [hairDesc], whispering in [hisher] ear that [heshe] should get out of those pesky clothes.", parse);
-			Text.Newline();
+			Text.Add("Rather than complying with [hisher] wishes, you stretch sinuously, making certain to flaunt your body for the captive audience as much as you can. Patting the ground beside you, you motion for your elvish companion to join you.", parse);
+			Text.NL();
+			Text.Add("<i>“Should we not be going, [playername]?”</i>, [name] mumbles, blushing slightly. You chuckle, insisting that you are in no rush. Lazily, you part your legs, giving the embarrassed elf a clear view of your [genDesc]. The elf gets down beside you, trying to avoid your gaze and cover [hisher] burning cheeks.", parse);
+			Text.NL();
+			Text.Add("A jolt runs up the elf's spine as you languidly caress [hisher] [hairDesc], whispering in [hisher] ear that [heshe] should get out of those pesky clothes.", parse);
+			Text.NL();
 			if(kiakai.flags["Sexed"] > 10)
-				Text.AddOutput("<i>“Every time we do this, I-”</i>, [name] cuts [himher]self off, blushing like a bride on her wedding day. Nonetheless, the elf snuggles down beside you, voluntarily removing [hisher] [armor].", parse);
+				Text.Add("<i>“Every time we do this, I-”</i>, [name] cuts [himher]self off, blushing like a bride on her wedding day. Nonetheless, the elf snuggles down beside you, voluntarily removing [hisher] [armor].", parse);
 			else
-				Text.AddOutput("<i>“I... I will be cold,”</i> [name] complains uncertainly, [hisher] eyes constantly straying across your exposed body. <i>“Then you'll just have to come closer, won't you?”</i> you whisper, pulling the hapless elf into a gentle kiss. [name]'s eyes glaze over as [heshe] struggles out of [hisher] [armor], any lingering doubts quickly abandoned.", parse);
+				Text.Add("<i>“I... I will be cold,”</i> [name] complains uncertainly, [hisher] eyes constantly straying across your exposed body. <i>“Then you'll just have to come closer, won't you?”</i> you whisper, pulling the hapless elf into a gentle kiss. [name]'s eyes glaze over as [heshe] struggles out of [hisher] [armor], any lingering doubts quickly abandoned.", parse);
 			
 			Scenes.Kiakai.HealingNice();
 		}, enabled : true,
@@ -2196,14 +2187,14 @@ Scenes.Kiakai.HealingSeducePrompt = function() {
 	options.push({ nameStr : "Assert",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("<i>“And just where do you think you're going?”</i> you complain, amused at the elf's surprised expression. <i>“[stuttername]...?”</i>", parse);
-			Text.Newline();
+			Text.Add("<i>“And just where do you think you're going?”</i> you complain, amused at the elf's surprised expression. <i>“[stuttername]...?”</i>", parse);
+			Text.NL();
 			if(kiakai.flags["Sexed"] > 10)
-				Text.AddOutput("<i>“Don't be coy, now,”</i> you say teasingly, spreading your legs and presenting the brightly blushing elf with your [genDesc]. <i>“By now, you should know <b>exactly</b> what I want.”</i> Nervously, [name] shrugs out of [hisher] [armor], [hisher] own arousal getting the best of [himher]. As [heshe] gets down on [hisher] knees between your legs, [name] looks up at you, itching to get started but awaiting your word.", parse);
+				Text.Add("<i>“Don't be coy, now,”</i> you say teasingly, spreading your legs and presenting the brightly blushing elf with your [genDesc]. <i>“By now, you should know <b>exactly</b> what I want.”</i> Nervously, [name] shrugs out of [hisher] [armor], [hisher] own arousal getting the best of [himher]. As [heshe] gets down on [hisher] knees between your legs, [name] looks up at you, itching to get started but awaiting your word.", parse);
 			else {
-				Text.AddOutput("<i>“Getting me all excited like that,”</i> you chide the elf reproachingly, <i>“Why don't you give me some proper care?”</i> [name]'s indignant response is cut short as [heshe] glances down at your body, realizing what you are talking about. <i>“Now, how about taking responsibility for this?”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("A bit surprisingly, the elf is quick to catch on, hurriedly getting out of [hisher] [armor] before kneeling down, an almost expectant look in [hisher] eyes.", parse);
+				Text.Add("<i>“Getting me all excited like that,”</i> you chide the elf reproachingly, <i>“Why don't you give me some proper care?”</i> [name]'s indignant response is cut short as [heshe] glances down at your body, realizing what you are talking about. <i>“Now, how about taking responsibility for this?”</i>", parse);
+				Text.NL();
+				Text.Add("A bit surprisingly, the elf is quick to catch on, hurriedly getting out of [hisher] [armor] before kneeling down, an almost expectant look in [hisher] eyes.", parse);
 			}
 			
 			Scenes.Kiakai.HealingAssertive();
@@ -2255,7 +2246,8 @@ Scenes.Kiakai.HealingNice = function() {
 	parse.genDesc = player.FirstCock() ? function() { return player.MultiCockDesc(); } :
 					player.FirstVag() ? function() { return player.FirstVag().Short(); } :
 					"featureless crotch";
-					
+	
+	Text.Flush();
 	//[Handjob][Blowjob][Eat you][Kia/Kai][Cuddle]
 	var options = new Array();
 	if(player.FirstCock()) {
@@ -2265,108 +2257,108 @@ Scenes.Kiakai.HealingNice = function() {
 				Text.Clear();
 				player.AddSexExp(1);
 				kiakai.AddSexExp(1);
-				Text.AddOutput("Pulling the elf close, you hug [himher] fiercely, locking the two of you in a deep kiss. [name] becomes like putty in your arms, melting against your body and letting out moaning whimpers. One of your hands finds [hishers], fingers joining, as you guide the elf toward your package.", parse);
-				Text.Newline();
-				Text.AddOutput("Your intertwined hands close around your [cockDesc], the elf's lithe, slightly cold fingers making you shudder in pleasure. At first, you have to lead [himher] through the motion, but soon you withdraw your hand, giving the horny elf free rein on your [cockDesc].", parse);
-				Text.Newline();
+				Text.Add("Pulling the elf close, you hug [himher] fiercely, locking the two of you in a deep kiss. [name] becomes like putty in your arms, melting against your body and letting out moaning whimpers. One of your hands finds [hishers], fingers joining, as you guide the elf toward your package.", parse);
+				Text.NL();
+				Text.Add("Your intertwined hands close around your [cockDesc], the elf's lithe, slightly cold fingers making you shudder in pleasure. At first, you have to lead [himher] through the motion, but soon you withdraw your hand, giving the horny elf free rein on your [cockDesc].", parse);
+				Text.NL();
 				
 				if(player.FirstCock().thickness.Get() > 10) {
-					Text.AddOutput("With how thick your member is, [name] is having a hard time wrapping [hisher] fingers around it. Abandoning the effort entirely, the elf shifts [hisher] attentions to your [cockTip], gently rubbing the sensitive organ.", parse);
-					Text.Newline();
+					Text.Add("With how thick your member is, [name] is having a hard time wrapping [hisher] fingers around it. Abandoning the effort entirely, the elf shifts [hisher] attentions to your [cockTip], gently rubbing the sensitive organ.", parse);
+					Text.NL();
 				}
 				
 				if(kiakai.FirstCock()) {
 					parse = Text.ParserPlural(parse, kiakai.NumCocks() > 1);
 					if(Math.random() < 0.5) {
-						Text.AddOutput("[name]'s own [kMultiCockDesc] stand[notS] at attention, tightly trapped between you. Amused, you reach down and fondle [itThem] before letting the elf get back to business. ", parse);
+						Text.Add("[name]'s own [kMultiCockDesc] stand[notS] at attention, tightly trapped between you. Amused, you reach down and fondle [itThem] before letting the elf get back to business. ", parse);
 						kiakai.AddLustFraction(0.3);
 					}
 					else {
-						Text.AddOutput("[name] suddenly moans as [hisher] own [kMultiCockDesc], which [hasHave] been rubbing against you for some time, erupt[notS] as the elf prematurely climaxes. You hold on to [himher] as [heshe] rides out the wave, whispering encouragements. ", parse);
+						Text.Add("[name] suddenly moans as [hisher] own [kMultiCockDesc], which [hasHave] been rubbing against you for some time, erupt[notS] as the elf prematurely climaxes. You hold on to [himher] as [heshe] rides out the wave, whispering encouragements. ", parse);
 						kiakai.AddLustFraction(-1);
 					}
-					Text.Newline();
+					Text.NL();
 				}
 				
 				if(kiakai.FirstBreastRow().size.Get() >= 3) {
-					Text.AddOutput("[HisHer] [kBreastDesc] mash against you, the perky nipples stiff with [hisher] lust.", parse);
+					Text.Add("[HisHer] [kBreastDesc] mash against you, the perky nipples stiff with [hisher] lust.", parse);
 					kiakai.AddLustFraction(0.1);
-					Text.Newline();
+					Text.NL();
 				}
-				Text.AddOutput("As [heshe] opens [hisher] eyes for the first time since you first kissed [himher], you gaze into [name]'s [eyeColor] eyes lovingly. <i>“I-is it good for you?”</i> [heshe] whispers uncertainly. You assure the elf that [heshe] is doing a <i>very</i> good job indeed.", parse);
+				Text.Add("As [heshe] opens [hisher] eyes for the first time since you first kissed [himher], you gaze into [name]'s [eyeColor] eyes lovingly. <i>“I-is it good for you?”</i> [heshe] whispers uncertainly. You assure the elf that [heshe] is doing a <i>very</i> good job indeed.", parse);
 				if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
-					Text.AddOutput(" It is almost like [heshe] was born to do this kind of thing, you add.", parse);
-				Text.Newline();
+					Text.Add(" It is almost like [heshe] was born to do this kind of thing, you add.", parse);
+				Text.NL();
 				
 				var cum = player.OrgasmCum();
 				
 				var scenes = new EncounterTable();
 				scenes.AddEnc(function() {
-					Text.AddOutput("A sudden jolt in your nethers snaps you into full attention, and suddenly you are fighting to hold back your release. Glancing down, you see that [name] is not even touching you anymore. Rather, a small spark of healing magic bridges the gap to your [cockDesc].", parse);
-					Text.Newline();
-					Text.AddOutput("<i>“I will make your pain go away,”</i> [heshe] whispers lustily in your ear. Not able to hold back anymore, you cry out as you deposit [load] into [name]'s waiting hand.", parse);
-					Text.Newline();
+					Text.Add("A sudden jolt in your nethers snaps you into full attention, and suddenly you are fighting to hold back your release. Glancing down, you see that [name] is not even touching you anymore. Rather, a small spark of healing magic bridges the gap to your [cockDesc].", parse);
+					Text.NL();
+					Text.Add("<i>“I will make your pain go away,”</i> [heshe] whispers lustily in your ear. Not able to hold back anymore, you cry out as you deposit [load] into [name]'s waiting hand.", parse);
+					Text.NL();
 					
 					// LARGE LOAD VARIATIONS
 					var scenes = new EncounterTable();
 					scenes.AddEnc(function() {
-						Text.AddOutput("Your healthy load quickly becomes too much for the elf to handle, and [heshe] gives a surprised cry as much of your seed drips from [hisher] hands down on the ground.", parse);
+						Text.Add("Your healthy load quickly becomes too much for the elf to handle, and [heshe] gives a surprised cry as much of your seed drips from [hisher] hands down on the ground.", parse);
 					}, 1.0, function() { return true; });
 					scenes.AddEnc(function() {
-						Text.AddOutput("Stray bursts of cum erupt from your trembling member, some hitting the surprised elf right in the face, others dripping down [hisher] lithe body.", parse);
+						Text.Add("Stray bursts of cum erupt from your trembling member, some hitting the surprised elf right in the face, others dripping down [hisher] lithe body.", parse);
 					}, 1.0, function() { return true; });
 					scenes.AddEnc(function() {
-						Text.AddOutput("Grinning, you guide [name]'s head down to your still erupting [cockDesc]. ", parse);
+						Text.Add("Grinning, you guide [name]'s head down to your still erupting [cockDesc]. ", parse);
 						if(kiakai.flags["Sexed"] > 15)
-							Text.AddOutput("[HeShe] moves eagerly, almost without your encouragement, wrapping [hisher] lips around you in time to meet an eruption of a large wad of cum, splattering on [hisher] tongue. Your sigh of pleasure is met by a moan of delight from the elf, as [heshe] keeps [hisher] mouth wrapped around you, waiting for your orgasm to end.", parse);
+							Text.Add("[HeShe] moves eagerly, almost without your encouragement, wrapping [hisher] lips around you in time to meet an eruption of a large wad of cum, splattering on [hisher] tongue. Your sigh of pleasure is met by a moan of delight from the elf, as [heshe] keeps [hisher] mouth wrapped around you, waiting for your orgasm to end.", parse);
 						else
-							Text.AddOutput("[HeShe] starts to protest, but is quickly interrupted by a large wad of cum, splattering on [hisher] tongue. Sighing in pleasure, you hold the struggling elf there as you hose [himher] down, waiting for your orgasm to end.", parse);
+							Text.Add("[HeShe] starts to protest, but is quickly interrupted by a large wad of cum, splattering on [hisher] tongue. Sighing in pleasure, you hold the struggling elf there as you hose [himher] down, waiting for your orgasm to end.", parse);
 					}, 1.0, function() { return kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral; });
 					
 					scenes.Get();
 				}, 1.0);
 				scenes.AddEnc(function() {
-					Text.AddOutput("Edged on by your encouragement, [name] shifts around so that [heshe] is kneeling beside your prone form, leaving [himher] with full access to your [cockDesc]. [HeShe] grasps the erect member with both hands, trying [hisher] best to pleasure you.", parse);
-					Text.Newline();
-					Text.AddOutput("<i>“Just... like... that!”</i> You moan, urging [himher] to keep up the pace. Understanding dawns on [name]'s face, blushing at your praise, [heshe] keeps jerking your [cockDesc], determined to make you come. [HeShe] isn't forced to wait long.", parse);
-					Text.Newline();
+					Text.Add("Edged on by your encouragement, [name] shifts around so that [heshe] is kneeling beside your prone form, leaving [himher] with full access to your [cockDesc]. [HeShe] grasps the erect member with both hands, trying [hisher] best to pleasure you.", parse);
+					Text.NL();
+					Text.Add("<i>“Just... like... that!”</i> You moan, urging [himher] to keep up the pace. Understanding dawns on [name]'s face, blushing at your praise, [heshe] keeps jerking your [cockDesc], determined to make you come. [HeShe] isn't forced to wait long.", parse);
+					Text.NL();
 					
 					var scenes = new EncounterTable();
 					scenes.AddEnc(function() {
-						Text.AddOutput("With a sharp cry, you let loose your flood, ", parse);
+						Text.Add("With a sharp cry, you let loose your flood, ", parse);
 						if(player.CumOutput() > 3)
-							Text.AddOutput("your [cockDesc] exploding with cum in the poor elf's hands.", parse);
+							Text.Add("your [cockDesc] exploding with cum in the poor elf's hands.", parse);
 						else
-							Text.AddOutput("your seed pulsing from your [cockDesc] and trailing down the elf's hands.", parse);
-						Text.Newline();
+							Text.Add("your seed pulsing from your [cockDesc] and trailing down the elf's hands.", parse);
+						Text.NL();
 					}, 1.0);
 					scenes.AddEnc(function() {
-						Text.AddOutput("In a rather uncharacteristic move, [name] leans down to plant a kiss on your trembling [cockDesc]. This plan backfires though, as you pick that exact moment to hit your peak.", parse);
-						Text.Newline();
+						Text.Add("In a rather uncharacteristic move, [name] leans down to plant a kiss on your trembling [cockDesc]. This plan backfires though, as you pick that exact moment to hit your peak.", parse);
+						Text.NL();
 						
 						if(player.CumOutput() > 3) {
-							Text.AddOutput("Completely caught off guard, [name]'s cheeks balloon out as [hisher] tiny mouth is quickly flooded with your huge load. A gentle hand on the nape of [hisher] neck keeps [himher] from pulling back, leaving your semen only one way to go.", parse);
-							Text.Newline();
-							Text.AddOutput("The elf noisily swallows wad after wad of sperm, hopelessly trying to keep up with your output. Finished, you relinquish your hold and allow [himher] to take [hisher] lips off your [cockDesc].", parse);
+							Text.Add("Completely caught off guard, [name]'s cheeks balloon out as [hisher] tiny mouth is quickly flooded with your huge load. A gentle hand on the nape of [hisher] neck keeps [himher] from pulling back, leaving your semen only one way to go.", parse);
+							Text.NL();
+							Text.Add("The elf noisily swallows wad after wad of sperm, hopelessly trying to keep up with your output. Finished, you relinquish your hold and allow [himher] to take [hisher] lips off your [cockDesc].", parse);
 						}
 						else if(kiakai.flags["Sexed"] > 15) {
-							Text.AddOutput("[name]'s eyes widen slightly as your loads forces its way in between [hisher] lips, but [hisher] expression quickly turns dreamy. Rather than pull back, [name] takes your entire [cockTip] into [hisher] mouth, thoroughly enjoying every serving of your thick cream that [heshe] can get.", parse);
-							Text.Newline();
-							Text.AddOutput("The surprised elf chokes slightly on your cum, but quickly recovers, and does [hisher] best to swallow the load in [hisher] mouth. [HisHer] tongue darts out of [hisher] mouth, licking up the strands that had spilled out around [hisher] lips.", parse);
+							Text.Add("[name]'s eyes widen slightly as your loads forces its way in between [hisher] lips, but [hisher] expression quickly turns dreamy. Rather than pull back, [name] takes your entire [cockTip] into [hisher] mouth, thoroughly enjoying every serving of your thick cream that [heshe] can get.", parse);
+							Text.NL();
+							Text.Add("The surprised elf chokes slightly on your cum, but quickly recovers, and does [hisher] best to swallow the load in [hisher] mouth. [HisHer] tongue darts out of [hisher] mouth, licking up the strands that had spilled out around [hisher] lips.", parse);
 						}
 						else {
-							Text.AddOutput("Your cum insistently presses past [name]'s puckered lips, landing in bursts on [hisher] tongue. Caught off guard, the elf pulls back in a panic, tongue sticking out and dripping of salty cum.", parse);
-							Text.Newline();
-							Text.AddOutput("Coughing, the surprised elf spits out part of your load on the ground, [hisher] cheeks burning. [HisHer] hands get sticky as [heshe] tries to wipe [hisher] mouth clean.", parse);
+							Text.Add("Your cum insistently presses past [name]'s puckered lips, landing in bursts on [hisher] tongue. Caught off guard, the elf pulls back in a panic, tongue sticking out and dripping of salty cum.", parse);
+							Text.NL();
+							Text.Add("Coughing, the surprised elf spits out part of your load on the ground, [hisher] cheeks burning. [HisHer] hands get sticky as [heshe] tries to wipe [hisher] mouth clean.", parse);
 						}
-						Text.Newline();
+						Text.NL();
 						
 						if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
-							Text.Newline();
+							Text.NL();
 							if(kiakai.flags["Sexed"] > 15)
-								Text.AddOutput("<i>“Why, [name], I didn't realise you enjoyed my taste so much,”</i> you tell the elf, grinning wickedly. <i>“Maybe next time I'll just feed you from the beginning. Would you like that?”</i> [name] blushes furiously at your comments before giving you an almost imperceptible nod.", parse);
+								Text.Add("<i>“Why, [name], I didn't realise you enjoyed my taste so much,”</i> you tell the elf, grinning wickedly. <i>“Maybe next time I'll just feed you from the beginning. Would you like that?”</i> [name] blushes furiously at your comments before giving you an almost imperceptible nod.", parse);
 							else
-								Text.AddOutput("<i>“Why, [name], you shouldn't have,”</i> you tell the elf, grinning at [himher] wickedly, <i>“here I ask for a handjob, and you give me head. The elves truly go above and beyond!”</i>", parse);
+								Text.Add("<i>“Why, [name], you shouldn't have,”</i> you tell the elf, grinning at [himher] wickedly, <i>“here I ask for a handjob, and you give me head. The elves truly go above and beyond!”</i>", parse);
 						}
 					}, 1.0);
 					
@@ -2375,14 +2367,15 @@ Scenes.Kiakai.HealingNice = function() {
 				
 				scenes.Get();
 				
-				Text.Newline();
+				Text.NL();
 				if(kiakai.flags["Sexed"] > 10)
-					Text.AddOutput("The elf, as if in a trance, slowly brings [hisher] sticky fingers to [hisher] mouth, cleaning off each digit while enjoying your flavor.", parse);
+					Text.Add("The elf, as if in a trance, slowly brings [hisher] sticky fingers to [hisher] mouth, cleaning off each digit while enjoying your flavor.", parse);
 				else
-					Text.AddOutput("Looking a bit surprised at [hisher] sticky fingers, as if wondering how [heshe] could possibly be responsible for that, [name] hurriedly wipe [hisher] hands on some cloth.", parse);
-				Text.Newline();
-				Text.AddOutput("There is a slightly embarrassed tension between the two of you as you re-equip your gear and get ready to set out.", parse);
+					Text.Add("Looking a bit surprised at [hisher] sticky fingers, as if wondering how [heshe] could possibly be responsible for that, [name] hurriedly wipe [hisher] hands on some cloth.", parse);
+				Text.NL();
+				Text.Add("There is a slightly embarrassed tension between the two of you as you re-equip your gear and get ready to set out.", parse);
 				
+				Text.Flush();
 				Gui.NextPrompt(kiakai.Interact);
 				
 				player.AddLustFraction(-1);
@@ -2401,63 +2394,63 @@ Scenes.Kiakai.HealingNice = function() {
 				kiakai.FuckOral(kiakai.Mouth(), player.FirstCock(), 2);
 				player.Fuck(player.FirstCock(), 2);
 				
-				Text.AddOutput("Your lips lock with [name]'s, tongue dancing past [hisher] lips and starting an impromptu wrestling match that the elf has no hope of winning. Deciding to give [himher] a bit of a chance, you let up your assault and whisper into [hisher] ear.", parse);
-				Text.Newline();
-				Text.AddOutput("The panting elf gazes up at you through [hisher] thick eyelashes, comprehension dawning slowly. Shuffling around slightly, [name] plants kisses down your [breastDesc], making a clear trail toward your [cockDesc]. A momentary doubt hits [himher] as [heshe] is able to appreciate the size of your member at close range, but you assure [himher] that it will be all right, giving the elf an encouraging pat on [hisher] head.", parse);
-				Text.Newline();
-				Text.AddOutput("[name] begins by placing a track of glistering pecks on your [cockDesc], covering the entire length with kisses.", parse);
-				Text.Newline();
+				Text.Add("Your lips lock with [name]'s, tongue dancing past [hisher] lips and starting an impromptu wrestling match that the elf has no hope of winning. Deciding to give [himher] a bit of a chance, you let up your assault and whisper into [hisher] ear.", parse);
+				Text.NL();
+				Text.Add("The panting elf gazes up at you through [hisher] thick eyelashes, comprehension dawning slowly. Shuffling around slightly, [name] plants kisses down your [breastDesc], making a clear trail toward your [cockDesc]. A momentary doubt hits [himher] as [heshe] is able to appreciate the size of your member at close range, but you assure [himher] that it will be all right, giving the elf an encouraging pat on [hisher] head.", parse);
+				Text.NL();
+				Text.Add("[name] begins by placing a track of glistering pecks on your [cockDesc], covering the entire length with kisses.", parse);
+				Text.NL();
 				
 				if(player.NumCocks() > 1) {
-					Text.AddOutput("Deciding that it would be unfair to focus all [hisher] attention on only <i>one</i> of your members, [name] repeats the same process for each of your [multiCockDesc].", parse);
-					Text.Newline();
+					Text.Add("Deciding that it would be unfair to focus all [hisher] attention on only <i>one</i> of your members, [name] repeats the same process for each of your [multiCockDesc].", parse);
+					Text.NL();
 				}
 				
 				if(player.HasBalls()) {
-					Text.AddOutput("When reaching your scrotum, [heshe] gives each of your [ballsDesc] a long lick, sucking a bit on them before returning [hisher] attention to the main course.", parse);
-					Text.Newline();
+					Text.Add("When reaching your scrotum, [heshe] gives each of your [ballsDesc] a long lick, sucking a bit on them before returning [hisher] attention to the main course.", parse);
+					Text.NL();
 				}
 				else if(player.FirstVag()) {
-					Text.AddOutput("As [heshe] reaches the base of your [cockDesc], the elf is greeted by your other genitalia, your moist [vagDesc]. [HeShe] gives it a few licks before returning to [hisher] original target.", parse);
-					Text.Newline();
+					Text.Add("As [heshe] reaches the base of your [cockDesc], the elf is greeted by your other genitalia, your moist [vagDesc]. [HeShe] gives it a few licks before returning to [hisher] original target.", parse);
+					Text.NL();
 				}
-				Text.AddOutput("Taking a deep breath, [name] finally takes the tip of your [cockDesc] into [hisher] mouth, letting it rest just inside as [hisher] tongue laps at it. Groaning a bit, you reposition yourself so that you can get a good thrust angle, intending to spice things up a bit. Blissfully unaware of your plans, [name] begins to suck on your [cockDesc], and you let [himher] coat a good part of your length before coming to a decision.", parse);
+				Text.Add("Taking a deep breath, [name] finally takes the tip of your [cockDesc] into [hisher] mouth, letting it rest just inside as [hisher] tongue laps at it. Groaning a bit, you reposition yourself so that you can get a good thrust angle, intending to spice things up a bit. Blissfully unaware of your plans, [name] begins to suck on your [cockDesc], and you let [himher] coat a good part of your length before coming to a decision.", parse);
 				
-				
+				Text.Flush();
 				//[Passive][Active]
 				var options = new Array();
 				options.push({ nameStr : "Passive",
 					func : function() {
 						Text.Clear();
-						Text.AddOutput("Sighing in pleasure, you lean back and allow [name] to show [hisher] skills. ", parse);
-						Text.Newline();
+						Text.Add("Sighing in pleasure, you lean back and allow [name] to show [hisher] skills. ", parse);
+						Text.NL();
 						
 						if(kiakai.flags["Sexed"] > 15) {
-							Text.AddOutput("More than willing to step up to the challenge, the previously prim and proper [priest] gives [hisher] best to provide you with a good time. Sucking and slurping on your [cockDesc] like a starving [manwoman] who just found food, [name] is soon ", parse);
+							Text.Add("More than willing to step up to the challenge, the previously prim and proper [priest] gives [hisher] best to provide you with a good time. Sucking and slurping on your [cockDesc] like a starving [manwoman] who just found food, [name] is soon ", parse);
 							if(player.FirstCock().Size() > 75)
-								Text.AddOutput("swallowing as much of you as [heshe] is capable of, tending to your remaining length with [hisher] lithe hands.", parse);
+								Text.Add("swallowing as much of you as [heshe] is capable of, tending to your remaining length with [hisher] lithe hands.", parse);
 							else
-								Text.AddOutput("swallowing your entire length, pressing [hisher] lips against your crotch.", parse);
+								Text.Add("swallowing your entire length, pressing [hisher] lips against your crotch.", parse);
 						}
 						else if(kiakai.flags["Sexed"] > 5) {
-							Text.AddOutput("Even if [heshe] is still slightly inexperienced, [name] gives [hisher] best effort to get you off. Really getting down to business, the elf starts to suck on your [cockDesc], trying to fit as much of your length as possible into [hisher] mouth. ", parse);
+							Text.Add("Even if [heshe] is still slightly inexperienced, [name] gives [hisher] best effort to get you off. Really getting down to business, the elf starts to suck on your [cockDesc], trying to fit as much of your length as possible into [hisher] mouth. ", parse);
 							if(player.FirstCock().Size() > 60)
-								Text.AddOutput("Unable to take all of you, [name] lets your [cockDesc] momentarily press against the back of [hisher] throat, before hurriedly backing off.", parse);
+								Text.Add("Unable to take all of you, [name] lets your [cockDesc] momentarily press against the back of [hisher] throat, before hurriedly backing off.", parse);
 							else
-								Text.AddOutput("Somehow, [heshe] manages to down all of your [cockDesc] without choking, though [heshe] seems to be having some trouble.", parse);
+								Text.Add("Somehow, [heshe] manages to down all of your [cockDesc] without choking, though [heshe] seems to be having some trouble.", parse);
 						}
 						else {
-							Text.AddOutput("[name] is not quite able to get a good rhythm started, but does [hisher] best to pleasure you. [HeShe] seems a bit afraid of taking you very far, and mostly focuses on your [cockTip], not that that is a bad thing at all. The elf's deft tongue playfully laps away at you, hungrily licking up every drop of salty pre.", parse);
+							Text.Add("[name] is not quite able to get a good rhythm started, but does [hisher] best to pleasure you. [HeShe] seems a bit afraid of taking you very far, and mostly focuses on your [cockTip], not that that is a bad thing at all. The elf's deft tongue playfully laps away at you, hungrily licking up every drop of salty pre.", parse);
 						}
 						
-						Text.Newline();
+						Text.NL();
 						
 						// TODO: More variations
 						var scenes = new EncounterTable();
 						/*
 						scenes.AddEnc(function() {
-							Text.AddOutput("", parse);
-							Text.Newline();
+							Text.Add("", parse);
+							Text.NL();
 							Gui.NextPrompt();
 						}, 1.0, function() { return true; });
 						*/
@@ -2465,31 +2458,32 @@ Scenes.Kiakai.HealingNice = function() {
 						// Fingering variation
 						scenes.AddEnc(function() {
 							if(player.FirstVag() && Math.random() < 0.5) {
-								Text.AddOutput("You are suddenly distracted from the exquisite blowjob by two lithe fingers, probing at your moist [vagDesc]. Gasping in surprise, you moan appreciatively as the elf slowly begins to finger your female parts.", parse);
-								Text.Newline();
+								Text.Add("You are suddenly distracted from the exquisite blowjob by two lithe fingers, probing at your moist [vagDesc]. Gasping in surprise, you moan appreciatively as the elf slowly begins to finger your female parts.", parse);
+								Text.NL();
 								if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
-									Text.AddOutput("<i>“Good, showing some initiative!”</i> You grin, accentuating your words with a sudden thrust of your hips, forcing more of your [cockDesc] into [name]'s mouth.", parse);
-									Text.Newline();
+									Text.Add("<i>“Good, showing some initiative!”</i> You grin, accentuating your words with a sudden thrust of your hips, forcing more of your [cockDesc] into [name]'s mouth.", parse);
+									Text.NL();
 								}
-								Text.AddOutput("With the added pleasure of having both of your genitalia tended to at the same time, it is not long before you hit your peak, ", parse);
+								Text.Add("With the added pleasure of having both of your genitalia tended to at the same time, it is not long before you hit your peak, ", parse);
 								
 								var cum = player.OrgasmCum();
 								
 								if(cum > 3)
-									Text.AddOutput("flooding the elf's throat with your huge load. Gulping and swallowing for all the [heshe] is worth, [name] tries to keep up with you, but a rivulet of semen escapes [hisher] mouth, pooling in [hisher] cupped hand.", parse);
+									Text.Add("flooding the elf's throat with your huge load. Gulping and swallowing for all the [heshe] is worth, [name] tries to keep up with you, but a rivulet of semen escapes [hisher] mouth, pooling in [hisher] cupped hand.", parse);
 								else
-									Text.AddOutput("and you feed burst after burst of your seed to the greedy elf. [HeShe] does [hisher] best to swallow all of it, and manages admirably.", parse);
+									Text.Add("and you feed burst after burst of your seed to the greedy elf. [HeShe] does [hisher] best to swallow all of it, and manages admirably.", parse);
+								Text.Flush();
 								Gui.NextPrompt();
 							}
 							// Anal variation
 							else {
-								Text.AddOutput("[name] gazes up at you through a veil of lust clouding [hisher] eyes. As if trying to find other ways to bring you pleasure, [heshe] briefly takes your [cockDesc] out of [hisher] mouth, allowing [himher] to lather [hisher] fingers in the sticky blend of saliva and precum coating your member. Quickly getting back to the task at hand, [name] lets [hisher] wet fingers trail across your skin, ", parse);
+								Text.Add("[name] gazes up at you through a veil of lust clouding [hisher] eyes. As if trying to find other ways to bring you pleasure, [heshe] briefly takes your [cockDesc] out of [hisher] mouth, allowing [himher] to lather [hisher] fingers in the sticky blend of saliva and precum coating your member. Quickly getting back to the task at hand, [name] lets [hisher] wet fingers trail across your skin, ", parse);
 								if(player.HasBalls())
-									Text.AddOutput("cupping and fondling your [ballsDesc], ", parse);
-								Text.AddOutput("before finding their target.", parse);
-								Text.Newline();
-								Text.AddOutput("You draw a surprised gasp as you feel two of the elf's lubed fingers prod at your [anusDesc]. [name] looks up uncertainly, as if asking permission to continue.", parse);
-								
+									Text.Add("cupping and fondling your [ballsDesc], ", parse);
+								Text.Add("before finding their target.", parse);
+								Text.NL();
+								Text.Add("You draw a surprised gasp as you feel two of the elf's lubed fingers prod at your [anusDesc]. [name] looks up uncertainly, as if asking permission to continue.", parse);
+								Text.Flush();
 								//[Allow][Deny][Punish]
 								var options = new Array();
 								options.push({ nameStr : "Allow",
@@ -2497,28 +2491,29 @@ Scenes.Kiakai.HealingNice = function() {
 										Text.Clear();
 										// TODO: Increase odds of scene
 										
-										Text.AddOutput("[HisHer] restraint lifted by your eager nod, [name] slowly pushes [hisher] way past your sphincter, probing at your softer inner passage. Somehow knowing just what to do, the elf begins to finger-fuck you, eventually adding a third finger to the mix.", parse);
-										Text.Newline();
+										Text.Add("[HisHer] restraint lifted by your eager nod, [name] slowly pushes [hisher] way past your sphincter, probing at your softer inner passage. Somehow knowing just what to do, the elf begins to finger-fuck you, eventually adding a third finger to the mix.", parse);
+										Text.NL();
 										parse.s = player.NumCocks() > 1 ? "s" : "";
 										parse.itsTheir = player.NumCocks() > 1 ? "their" : "it's";
-										Text.AddOutput("Meanwhile, [heshe] isn't letting up on your [multiCockDesc]. With [hisher] free hand, [name] strokes your member[s], while sucking on [itsTheir] [cockTip][s]. You moan as you feel the elf lap at your urethra, the dual-pronged assault intensifying your pleasure.", parse);
-										Text.Newline();
-										Text.AddOutput("[HeShe] isn't bad at all with [hisher] fingers, rapidly pumping them in and out of your [anusDesc]. Each thrust deals a glancing blow to your prostate, rewarding [name] with a shuddering moan for [hisher] efforts.", parse);
-										Text.Newline();
-										Text.AddOutput("Chuckling, you point out how this is something [name] would never have thought of doing when you first met, let alone taken the initiative at it. The elf doesn't let up on [hisher] dual assault, but [hisher] brightly burning cheeks indicate that your comment hit home.", parse);
-										Text.Newline();
-										Text.AddOutput("Unable to withstand [name]'s anal probing for long, you are soon shaking, trying to hold back the coming flood. Noticing your plight, the elf eagerly milks you, [hisher] frenzied thrusts pushing you over the edge. Unloading wads of white into [name]'s waiting maw, you lean back, riding out the wave of your orgasm.", parse);
+										Text.Add("Meanwhile, [heshe] isn't letting up on your [multiCockDesc]. With [hisher] free hand, [name] strokes your member[s], while sucking on [itsTheir] [cockTip][s]. You moan as you feel the elf lap at your urethra, the dual-pronged assault intensifying your pleasure.", parse);
+										Text.NL();
+										Text.Add("[HeShe] isn't bad at all with [hisher] fingers, rapidly pumping them in and out of your [anusDesc]. Each thrust deals a glancing blow to your prostate, rewarding [name] with a shuddering moan for [hisher] efforts.", parse);
+										Text.NL();
+										Text.Add("Chuckling, you point out how this is something [name] would never have thought of doing when you first met, let alone taken the initiative at it. The elf doesn't let up on [hisher] dual assault, but [hisher] brightly burning cheeks indicate that your comment hit home.", parse);
+										Text.NL();
+										Text.Add("Unable to withstand [name]'s anal probing for long, you are soon shaking, trying to hold back the coming flood. Noticing your plight, the elf eagerly milks you, [hisher] frenzied thrusts pushing you over the edge. Unloading wads of white into [name]'s waiting maw, you lean back, riding out the wave of your orgasm.", parse);
 										
 										var cum = player.OrgasmCum();
 										
 										if(player.NumCocks() > 1) {
-											Text.Newline();
+											Text.NL();
 											parse.s = player.NumCocks() > 2 ? "s" : "";
 											parse.notEs = player.NumCocks() > 2 ? "" : "es";
 											parse.itsTheir = player.NumCocks() > 2 ? "their" : "it's";
 											
-											Text.AddOutput("Your other cock[s] thrash[notEs], spending [itsTheir] seed uselessly on the elf's face and hair.", parse);
+											Text.Add("Your other cock[s] thrash[notEs], spending [itsTheir] seed uselessly on the elf's face and hair.", parse);
 										}
+										Text.Flush();
 										Gui.NextPrompt();
 									}, enabled : true,
 									tooltip : Text.Parse("Somewhat surprisingly, [name] has revealed a kinkier side... why not encourage it?", parse)
@@ -2529,13 +2524,13 @@ Scenes.Kiakai.HealingNice = function() {
 										Gui.Callstack.pop();
 										Text.Clear();
 										// TODO: Decrease odds of scene
-										Text.AddOutput("Shaking your head in annoyance, you rebuff [name]'s advances. You have the elf get you off with only [hisher] mouth instead. You have a hard time getting into it however, and irritably motion the elf to finish it quicker. Despite it all, you manage to get your pleasure, your cum dribbling down [name]'s throat and splattering on [hisher] [kBreastDesc].", parse);
-										Text.Newline();
+										Text.Add("Shaking your head in annoyance, you rebuff [name]'s advances. You have the elf get you off with only [hisher] mouth instead. You have a hard time getting into it however, and irritably motion the elf to finish it quicker. Despite it all, you manage to get your pleasure, your cum dribbling down [name]'s throat and splattering on [hisher] [kBreastDesc].", parse);
+										Text.NL();
 										
 										var cum = player.OrgasmCum();
 										
-										Text.AddOutput("Troubled, you gather up your gear and prepare to continue your journey.", parse);
-										
+										Text.Add("Troubled, you gather up your gear and prepare to continue your journey.", parse);
+										Text.Flush();
 										Gui.NextPrompt(PartyInteraction);
 										
 										player.AddLustFraction(-1);
@@ -2548,8 +2543,9 @@ Scenes.Kiakai.HealingNice = function() {
 									func : function() {
 										Text.Clear();
 										Gui.Callstack.pop();
-										Text.AddOutput("", parse);
-										Text.Newline();
+										Text.Add("", parse);
+										Text.NL();
+										Text.Flush();
 										Gui.NextPrompt();
 									}, enabled : true,
 									tooltip : Text.Parse("The nerve... you'd better teach [himher] a lesson [heshe]'s not likely to forget soon! You'll make sure [heshe] never tries this again... ", parse)
@@ -2564,20 +2560,21 @@ Scenes.Kiakai.HealingNice = function() {
 
 						scenes.AddEnc(function() {
 							if(kiakai.flags["Sexed"] > 10) {
-								Text.AddOutput("The sudden tightening of your [cockDesc] gives the elf all the warning needed, and [heshe] begins to deep-throat you repeatedly, massaging you with the muscles at the back of [hisher] throat. Moaning loudly, you give [name] what [heshe] wants; a generous serving of hot spunk, delivered directly from the tap. ", parse);
+								Text.Add("The sudden tightening of your [cockDesc] gives the elf all the warning needed, and [heshe] begins to deep-throat you repeatedly, massaging you with the muscles at the back of [hisher] throat. Moaning loudly, you give [name] what [heshe] wants; a generous serving of hot spunk, delivered directly from the tap. ", parse);
 								var cum = player.OrgasmCum();
 								
 								if(cum > 3)
-									Text.AddOutput("But no amount of preparation could prepare [himher] for the size of your load, and when the elf has had [hisher] fill, [heshe] lets your [cockDesc] flop free, hosing [himher]self in your semen.", parse);
+									Text.Add("But no amount of preparation could prepare [himher] for the size of your load, and when the elf has had [hisher] fill, [heshe] lets your [cockDesc] flop free, hosing [himher]self in your semen.", parse);
 								else
-									Text.AddOutput("When you are done, the elf cleans your [cockDesc], not wanting to let even a drop go to waste.", parse);
+									Text.Add("When you are done, the elf cleans your [cockDesc], not wanting to let even a drop go to waste.", parse);
 							}
 							else {
-								Text.AddOutput("Your rising climax seems to catch the poor elf oblivious, [hisher] eyes widening in shock as you feed load after load of your seed down [hisher] inexperienced throat. Trying to swallow your sticky present sends [name] into a coughing fit, depositing the rest of your semen in a sticky mess across [hisher] face and hair.", parse);
+								Text.Add("Your rising climax seems to catch the poor elf oblivious, [hisher] eyes widening in shock as you feed load after load of your seed down [hisher] inexperienced throat. Trying to swallow your sticky present sends [name] into a coughing fit, depositing the rest of your semen in a sticky mess across [hisher] face and hair.", parse);
 								var cum = player.OrgasmCum();
 								if(cum > 3)
-									Text.AddOutput(" By the time you are finished, the elf is practically drenched in cum.", parse);
+									Text.Add(" By the time you are finished, the elf is practically drenched in cum.", parse);
 							}
+							Text.Flush();
 							Gui.NextPrompt();
 						}, 1.0, function() { return true; });
 						
@@ -2587,10 +2584,11 @@ Scenes.Kiakai.HealingNice = function() {
 						Gui.Callstack.push(function() {
 							Text.Clear();
 							if(kiakai.flags["Sexed"] > 10)
-								Text.AddOutput("You could swear that [name] is enjoying these healing sessions more than [hisher] prim demeanor lets on. The two of you gather yourselves, preparing to set out again.", parse);
+								Text.Add("You could swear that [name] is enjoying these healing sessions more than [hisher] prim demeanor lets on. The two of you gather yourselves, preparing to set out again.", parse);
 							else
-								Text.AddOutput("You console [name], congratulating [himher] on a job well done, and the two of you get your gear back on, preparing to continue your journey.", parse);
+								Text.Add("You console [name], congratulating [himher] on a job well done, and the two of you get your gear back on, preparing to continue your journey.", parse);
 							
+							Text.Flush();
 							Gui.NextPrompt(kiakai.Interact);
 							
 							player.AddLustFraction(-1);
@@ -2604,52 +2602,53 @@ Scenes.Kiakai.HealingNice = function() {
 						Text.Clear();
 						player.AddSexExp(1);
 						kiakai.AddSexExp(1);
-						Text.AddOutput("[name]'s [eyeColor] eyes snap open in surprise as you suddenly thrust much more of your [cockDesc] into [hisher] mouth than [heshe] was ready for.", parse);
-						Text.Newline();
+						Text.Add("[name]'s [eyeColor] eyes snap open in surprise as you suddenly thrust much more of your [cockDesc] into [hisher] mouth than [heshe] was ready for.", parse);
+						Text.NL();
 						
 						if(kiakai.flags["Sexed"] > 10) {
-							Text.AddOutput("Without missing a beat, [name] meets you thrust for thrust, [hisher] well-trained mouth wrapping around your [cockDesc]. ", parse);
+							Text.Add("Without missing a beat, [name] meets you thrust for thrust, [hisher] well-trained mouth wrapping around your [cockDesc]. ", parse);
 							if(player.FirstCock().Size() > 75) {
-								Text.AddOutput("No matter how used to sucking cock that [heshe] is though, you are far too big to fit all of your length down [hisher] throat. Not that the elf lets this discourage [himher] in any way.", parse);
+								Text.Add("No matter how used to sucking cock that [heshe] is though, you are far too big to fit all of your length down [hisher] throat. Not that the elf lets this discourage [himher] in any way.", parse);
 							}
 							else if(player.FirstCock().Size() > 50) {
-								Text.AddOutput("Too big to fit in just [hisher] mouth, an audible popping noise accompanies your [cockDesc] entering [hisher] throat. You praise your companion on [hisher] skills as [hisher] lips connect with your crotch, the entirety of your [cockDesc] lodged deep inside [himher].", parse);
+								Text.Add("Too big to fit in just [hisher] mouth, an audible popping noise accompanies your [cockDesc] entering [hisher] throat. You praise your companion on [hisher] skills as [hisher] lips connect with your crotch, the entirety of your [cockDesc] lodged deep inside [himher].", parse);
 							}
 							else {
-								Text.AddOutput("The elf gives [hisher] utmost to match your pace, placing a succession of rapid kisses on your crotch as [heshe] repeatedly takes you, tip to root.", parse);
+								Text.Add("The elf gives [hisher] utmost to match your pace, placing a succession of rapid kisses on your crotch as [heshe] repeatedly takes you, tip to root.", parse);
 							}
 						}
 						else {
-							Text.AddOutput("[HeShe] instinctively tries to back away, stopped by your hand holding [hisher] head in place. You make sure to give [himher] plenty of time to breathe, drinking in the conflicting emotions passing across [hisher] face as [heshe] gazes up at you, mouth stuffed to the brim with cock. Still holding [hisher] head in place with one hand, you gently begin to rock your hips, feeding the elf inch after inch of your [cockDesc]. ", parse);
+							Text.Add("[HeShe] instinctively tries to back away, stopped by your hand holding [hisher] head in place. You make sure to give [himher] plenty of time to breathe, drinking in the conflicting emotions passing across [hisher] face as [heshe] gazes up at you, mouth stuffed to the brim with cock. Still holding [hisher] head in place with one hand, you gently begin to rock your hips, feeding the elf inch after inch of your [cockDesc]. ", parse);
 							
 							if(player.FirstCock().Size() > 50) {
-								Text.AddOutput("Sadly, you are far too big to fit all of your length in [hisher] mouth without hurting [himher].", parse);
+								Text.Add("Sadly, you are far too big to fit all of your length in [hisher] mouth without hurting [himher].", parse);
 							}
 							else {
-								Text.AddOutput("Soon, you feel the touch of [hisher] lips against your crotch, every bit of your length stuffed into [hisher] mouth.", parse);
+								Text.Add("Soon, you feel the touch of [hisher] lips against your crotch, every bit of your length stuffed into [hisher] mouth.", parse);
 							}
 						}
 						
 						parse.len1 = player.FirstCock().length.Get() > 20 ? " and throat" : "";
 						
-						Text.Newline();
-						Text.AddOutput("Sighing with pleasure, you increase the rate of your thrusts. Caressed and squeezed by the moaning elf's tongue[len1], you soon feel a surge rising from [loadOrg], announcing the arrival of your climax.", parse);
-						Text.Newline();
+						Text.NL();
+						Text.Add("Sighing with pleasure, you increase the rate of your thrusts. Caressed and squeezed by the moaning elf's tongue[len1], you soon feel a surge rising from [loadOrg], announcing the arrival of your climax.", parse);
+						Text.NL();
 						
-						Text.AddOutput("Load after load erupts from your cock, flowing deep into the elf's wide-open throat. ", parse);
+						Text.Add("Load after load erupts from your cock, flowing deep into the elf's wide-open throat. ", parse);
 						
 						var cum = player.OrgasmCum();
 						
 						if(cum > 3)
-							Text.AddOutput("[name]'s cheeks balloon as more and more of your white stuffing fills [hisher] mouth. Unable to keep up with your output, [heshe] pulls back, coughing while you spill the rest of your bountiful load all over [hisher] face.", parse);
+							Text.Add("[name]'s cheeks balloon as more and more of your white stuffing fills [hisher] mouth. Unable to keep up with your output, [heshe] pulls back, coughing while you spill the rest of your bountiful load all over [hisher] face.", parse);
 						else
-							Text.AddOutput("[name] gleefully swallows every drop.", parse);
-						Text.Newline();
+							Text.Add("[name] gleefully swallows every drop.", parse);
+						Text.NL();
 						if(kiakai.flags["Sexed"] > 15)
-							Text.AddOutput("<i>“That was really good, [playername],”</i> [name] murmurs as [heshe] swallows the last of your thick cream, wearing a dreamy expression. <i>“I... I think I have developed a taste for your...”</i> [heshe] trail off, blushing fiercely. Chuckling, you clean up and put on your gear.", parse);
+							Text.Add("<i>“That was really good, [playername],”</i> [name] murmurs as [heshe] swallows the last of your thick cream, wearing a dreamy expression. <i>“I... I think I have developed a taste for your...”</i> [heshe] trail off, blushing fiercely. Chuckling, you clean up and put on your gear.", parse);
 						else
-							Text.AddOutput("[name] refuses to meet your eyes as the two of you clean yourselves up and put on your gear.", parse);
-						
+							Text.Add("[name] refuses to meet your eyes as the two of you clean yourselves up and put on your gear.", parse);
+							
+						Text.Flush();
 						Gui.NextPrompt(kiakai.Interact);
 						
 						player.AddLustFraction(-1);
@@ -2673,87 +2672,89 @@ Scenes.Kiakai.HealingNice = function() {
 				kiakai.Fuck(null, 2);
 				player.Fuck(null, 2);
 				
-				Text.AddOutput("After playing around with [name] for a while, crossing tongues and butting lips, you suggest that perhaps [heshe] would like to kiss your <i>other</i> lips instead.", parse);
-				Text.Newline();
+				Text.Add("After playing around with [name] for a while, crossing tongues and butting lips, you suggest that perhaps [heshe] would like to kiss your <i>other</i> lips instead.", parse);
+				Text.NL();
 				if(kiakai.flags["Sexed"] > 10) {
-					Text.AddOutput("Blushing prettily when [heshe] realizes what you are telling [himher] to do, [name] obediently sinks down between your legs, eager to fulfil your wishes. Licking [hisher] lips in anticipation, the elf leans in.", parse);
+					Text.Add("Blushing prettily when [heshe] realizes what you are telling [himher] to do, [name] obediently sinks down between your legs, eager to fulfil your wishes. Licking [hisher] lips in anticipation, the elf leans in.", parse);
 				}
 				else {
-					Text.AddOutput("The elf looks a bit confused until you gesture down toward your crotch pointedly.", parse);
-					Text.Newline();
-					Text.AddOutput("<i>“R-really, [playername], would you like it if I...”</i> not quite able to finish the sentence, the blushing elf meets your eyes uncertainly, lips slightly parted. Assuring [himher] that you would far more than like it, you gently guide [hisher] head between your legs.", parse);
+					Text.Add("The elf looks a bit confused until you gesture down toward your crotch pointedly.", parse);
+					Text.NL();
+					Text.Add("<i>“R-really, [playername], would you like it if I...”</i> not quite able to finish the sentence, the blushing elf meets your eyes uncertainly, lips slightly parted. Assuring [himher] that you would far more than like it, you gently guide [hisher] head between your legs.", parse);
 				}
-				Text.Newline();
-				Text.AddOutput("You close your eyes in bliss as you feel [name] dig in, [hisher] tongue tasting the wet folds of your [vagDesc]. Urged on by your soft sighs, the elf continues to lap away at your moistness. Trying [hisher] best to please, [name]'s deft [kTongueDesc] finds your [clitDesc].", parse);
-				Text.Newline();
+				Text.NL();
+				Text.Add("You close your eyes in bliss as you feel [name] dig in, [hisher] tongue tasting the wet folds of your [vagDesc]. Urged on by your soft sighs, the elf continues to lap away at your moistness. Trying [hisher] best to please, [name]'s deft [kTongueDesc] finds your [clitDesc].", parse);
+				Text.NL();
 				
 				if(player.FirstVag().clitCock) {
-					Text.AddOutput("After allowing [himher] to lather the length of your girl-cock, you redirect [hisher] attention to your more feminine parts, indicating that [heshe] can have a go at your cock anytime [heshe] likes, if [heshe] just asks.", parse);
+					Text.Add("After allowing [himher] to lather the length of your girl-cock, you redirect [hisher] attention to your more feminine parts, indicating that [heshe] can have a go at your cock anytime [heshe] likes, if [heshe] just asks.", parse);
 				}
 				else if(player.FirstCock()) {
 					parse["eachIt"] = player.NumCocks() > 1 ? "each" : "it";
 					parse["itThem"] = player.NumCocks() > 1 ? "them" : "it";
-					Text.AddOutput("As [name] gently licks at your [clitDesc], [hisher] nose keeps bumping against your [multiCockDesc], making [itThem] impossible to ignore. [name] gives [eachIt] a thorough lathering before returning to the task at hand.", parse);
+					Text.Add("As [name] gently licks at your [clitDesc], [hisher] nose keeps bumping against your [multiCockDesc], making [itThem] impossible to ignore. [name] gives [eachIt] a thorough lathering before returning to the task at hand.", parse);
 					if(player.HasBalls())
-						Text.AddOutput(" As [hisher] [kTongueDesc] returns to work on your feminine parts, [name] caresses your [ballsDesc], sending shivers up your spine.", parse);
+						Text.Add(" As [hisher] [kTongueDesc] returns to work on your feminine parts, [name] caresses your [ballsDesc], sending shivers up your spine.", parse);
 				}
 				else if(kiakai.flags["Sexed"] > 15) {
-					Text.AddOutput("[name] knows just what to do. Expertly, [heshe] licks and sucks at your [clitDesc], sending electrical tingles through your body. [HeShe] is getting quite good at this sort of thing!", parse);
+					Text.Add("[name] knows just what to do. Expertly, [heshe] licks and sucks at your [clitDesc], sending electrical tingles through your body. [HeShe] is getting quite good at this sort of thing!", parse);
 				}
 				else {
-					Text.AddOutput("What [heshe] lacks in skill, [heshe] makes up for in dedication. After licking your [clitDesc] for a bit, [name] returns [hisher] attention to your wet [vagDesc], [hisher] nose occasionally butting against your button.", parse);
+					Text.Add("What [heshe] lacks in skill, [heshe] makes up for in dedication. After licking your [clitDesc] for a bit, [name] returns [hisher] attention to your wet [vagDesc], [hisher] nose occasionally butting against your button.", parse);
 				}
 				
-				Text.Newline();
+				Text.NL();
 				
 				var scenes = new EncounterTable();
 				var defScene = function() {
-					Text.AddOutput("In an effort to get better access, [name] spreads your nether lips with [hisher] nimble fingers, exposing your inner walls. [HisHer] [kTongueDesc] thoroughly explores each part, before penetrating deeper into your folds, delving into your tunnel. [HisHer] flexible organ works you into a frenzy, not going as deep as a cock fucking you, but constantly flexing and probing you in different ways.", parse);
-					Text.Newline();
-					Text.AddOutput("Before long, you are not the only one moaning, as the smell and taste of your sex slowly drives the elf over the edge. [HeShe] withdraws one of [hisher] hands from your labia, reaching down between [hisher] legs to see to [hisher] own urges.", parse);
-					Text.Newline();
-					Text.AddOutput("The two of you reach your peaks at the same time, and you generously provide the horny elf with more of the juices that [heshe] evidently likes so much.", parse);
-					Text.Newline();
+					Text.Add("In an effort to get better access, [name] spreads your nether lips with [hisher] nimble fingers, exposing your inner walls. [HisHer] [kTongueDesc] thoroughly explores each part, before penetrating deeper into your folds, delving into your tunnel. [HisHer] flexible organ works you into a frenzy, not going as deep as a cock fucking you, but constantly flexing and probing you in different ways.", parse);
+					Text.NL();
+					Text.Add("Before long, you are not the only one moaning, as the smell and taste of your sex slowly drives the elf over the edge. [HeShe] withdraws one of [hisher] hands from your labia, reaching down between [hisher] legs to see to [hisher] own urges.", parse);
+					Text.NL();
+					Text.Add("The two of you reach your peaks at the same time, and you generously provide the horny elf with more of the juices that [heshe] evidently likes so much.", parse);
+					Text.NL();
 					if(player.FirstCock()) {
-						Text.AddOutput("While you are at it, you take the opportunity to thoroughly drench the elf in your sperm, your [multiCockDesc] shooting strand after strand of sticky white fluids that land on [name]'s face and hair.", parse);
-						Text.Newline();
+						Text.Add("While you are at it, you take the opportunity to thoroughly drench the elf in your sperm, your [multiCockDesc] shooting strand after strand of sticky white fluids that land on [name]'s face and hair.", parse);
+						Text.NL();
 					}
-					Text.AddOutput("Still slightly dazed from [hisher] own orgasm, [name] dutifully cleans you up.", parse);
+					Text.Add("Still slightly dazed from [hisher] own orgasm, [name] dutifully cleans you up.", parse);
 					
 					kiakai.AddLustFraction(-1);
+					Text.Flush();
 					Gui.NextPrompt();
 				};
 				scenes.AddEnc(defScene, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
-					Text.AddOutput("Switching tactics, the elf withdraws [hisher] [kTongueDesc], leaving your folds open for assault from [hisher] deft fingers. Being very careful and gentle, [name] inserts two fingers into your slippery [vagDesc], probing your depths. While [hisher] fingers are busy, [name] focuses [hisher] oral attention on your [clitDesc], proving to be an excellent multitasker.", parse);
-					Text.Newline();
+					Text.Add("Switching tactics, the elf withdraws [hisher] [kTongueDesc], leaving your folds open for assault from [hisher] deft fingers. Being very careful and gentle, [name] inserts two fingers into your slippery [vagDesc], probing your depths. While [hisher] fingers are busy, [name] focuses [hisher] oral attention on your [clitDesc], proving to be an excellent multitasker.", parse);
+					Text.NL();
 					
 					if(kiakai.flags["Sexed"] > 20 /* && TODO anal allowed */) {
-						Text.AddOutput("Feeling particularly adventurous, the fingers on [name]'s other hand travel slightly downwards, forgoing your [vagDesc] and insistently prodding at your [anusDesc]. Suddenly realizing what [heshe] is doing, the elf stops in place, gazing up at you for approval through [hisher] thick lashes.", parse);
-	
+						Text.Add("Feeling particularly adventurous, the fingers on [name]'s other hand travel slightly downwards, forgoing your [vagDesc] and insistently prodding at your [anusDesc]. Suddenly realizing what [heshe] is doing, the elf stops in place, gazing up at you for approval through [hisher] thick lashes.", parse);
+						Text.Flush();
 						//[Allow][Deny][Punish]
 						var options = new Array();
 						options.push({ nameStr : "Allow",
 							func : function() {
 								Text.Clear();
 								// TODO: Increase odds of scene
-								Text.AddOutput("Smiling broadly, you nod slowly, encouraging the elf to continue. [HisHer] restrictions lifted, [name] insistently presses two fingers into your [anusDesc], probing your backdoor while [heshe] returns to lapping at your [vagDesc].", parse);
-								Text.Newline();
-								Text.AddOutput("Chuckling, you point out to the elf how this is something [heshe] would never have thought of doing when you first met, let alone taken the initiative at it. [name] doesn't let up on [hisher] dual assault of your holes, but [hisher] brightly burning cheeks indicate that your comment hit home.", parse);
-								Text.Newline();
-								Text.AddOutput("Reclining comfortably, you allow the elf free rein", parse);
+								Text.Add("Smiling broadly, you nod slowly, encouraging the elf to continue. [HisHer] restrictions lifted, [name] insistently presses two fingers into your [anusDesc], probing your backdoor while [heshe] returns to lapping at your [vagDesc].", parse);
+								Text.NL();
+								Text.Add("Chuckling, you point out to the elf how this is something [heshe] would never have thought of doing when you first met, let alone taken the initiative at it. [name] doesn't let up on [hisher] dual assault of your holes, but [hisher] brightly burning cheeks indicate that your comment hit home.", parse);
+								Text.NL();
+								Text.Add("Reclining comfortably, you allow the elf free rein", parse);
 								if(player.FirstCock())
-									Text.AddOutput(", idly stroking your [multiCockDesc]", parse);
+									Text.Add(", idly stroking your [multiCockDesc]", parse);
 								parse["c"] = player.FirstCock() ? " and prodding at your sensitive prostate" : "";
-								Text.AddOutput(". [name]'s slender fingers reach deep inside you, stretching your sphincter[c]. Edged on by your increasingly erratic moans, [heshe] adds another finger to [hisher] pounding, spreading you even further.", parse);
-								Text.Newline();
-								Text.AddOutput("Before long, you groan in ecstasy as the elf's multi-pronged attentions bear fruit, drenching [hisher] pretty face in your girly juices.", parse);
+								Text.Add(". [name]'s slender fingers reach deep inside you, stretching your sphincter[c]. Edged on by your increasingly erratic moans, [heshe] adds another finger to [hisher] pounding, spreading you even further.", parse);
+								Text.NL();
+								Text.Add("Before long, you groan in ecstasy as the elf's multi-pronged attentions bear fruit, drenching [hisher] pretty face in your girly juices.", parse);
 								if(player.FirstCock()) {
 									parse["notS"] = player.NumCocks() == 1 ? "s" : "";
-									Text.AddOutput("Your [multiCockDesc] erupt[notS] in your hand, some of the sticky white substance splattering over the elf servicing you, and some landing on your stomach.", parse);
+									Text.Add("Your [multiCockDesc] erupt[notS] in your hand, some of the sticky white substance splattering over the elf servicing you, and some landing on your stomach.", parse);
 								}
-								Text.Newline();
-								Text.AddOutput("When you have finished convulsing, [name] pulls out [hisher] fingers. [HeShe] shyly asks if you liked it. In response, you pull [himher] in for a deep kiss.", parse);
+								Text.NL();
+								Text.Add("When you have finished convulsing, [name] pulls out [hisher] fingers. [HeShe] shyly asks if you liked it. In response, you pull [himher] in for a deep kiss.", parse);
+								Text.Flush();
 								Gui.NextPrompt();
 							}, enabled : true,
 							tooltip : Text.Parse("Somewhat surprisingly, [name] has revealed a kinkier side... why not encourage it?", parse)
@@ -2762,8 +2763,8 @@ Scenes.Kiakai.HealingNice = function() {
 							func : function() {
 								Text.Clear();
 								// TODO: Decrease odds of scene
-								Text.AddOutput("Slightly annoyed, you shake your head. [name] hastily withdraws [hisher] fingers, determined to service you in some other way.", parse);
-								Text.Newline();
+								Text.Add("Slightly annoyed, you shake your head. [name] hastily withdraws [hisher] fingers, determined to service you in some other way.", parse);
+								Text.NL();
 								defScene();
 							}, enabled : true,
 							tooltip : "You are not feeling up for something like that just now."
@@ -2772,8 +2773,9 @@ Scenes.Kiakai.HealingNice = function() {
 						options.push({ nameStr : "Punish",
 							func : function() {
 								Text.Clear();
-								Text.AddOutput("", parse);
-								Text.Newline();
+								Text.Add("", parse);
+								Text.NL();
+								Text.Flush();
 								Gui.NextPrompt();
 							}, enabled : true,
 							tooltip : Text.Parse("The nerve... you'd better teach [himher] a lesson [heshe]'s not likely to forget soon! You'll make sure [heshe] never tries this again...", parse)
@@ -2783,92 +2785,94 @@ Scenes.Kiakai.HealingNice = function() {
 					}
 					// Regular fingering
 					else {
-						Text.AddOutput("Growing bolder by the minute, the horny elf adds another finger to [hisher] excavation team, pressing each of them knuckle-deep inside your tunnel. Your trembling [vagDesc] is gushing with girly juices, and lewd wet sounds come out from you at each thrust of [hisher] fingers.", parse);
-						Text.Newline();
-						Text.AddOutput("Finally, with a shuddering moan, you come. Your [legsDesc] squirm as you shake uncontrollably, gushing sweet nectar all around your lover's fingers.", parse);
+						Text.Add("Growing bolder by the minute, the horny elf adds another finger to [hisher] excavation team, pressing each of them knuckle-deep inside your tunnel. Your trembling [vagDesc] is gushing with girly juices, and lewd wet sounds come out from you at each thrust of [hisher] fingers.", parse);
+						Text.NL();
+						Text.Add("Finally, with a shuddering moan, you come. Your [legsDesc] squirm as you shake uncontrollably, gushing sweet nectar all around your lover's fingers.", parse);
 						if(player.FirstCock()) {
 							parse["s"] = player.NumCocks() > 1 ? "" : "s";
-							Text.AddOutput(" The fluids dripping from your [vagDesc] are not the only things released by your orgasm though, as your [multiCockDesc] cover[s] the elf with thick white strands.", parse);
+							Text.Add(" The fluids dripping from your [vagDesc] are not the only things released by your orgasm though, as your [multiCockDesc] cover[s] the elf with thick white strands.", parse);
 						}
-						Text.Newline();
-						Text.AddOutput("[name] withdraws [hisher] drenched fingers, licking each clean of your sticky juices. Once finished, the elf leans in to perform the same service for your wet sex, lapping up every drop.", parse);
+						Text.NL();
+						Text.Add("[name] withdraws [hisher] drenched fingers, licking each clean of your sticky juices. Once finished, the elf leans in to perform the same service for your wet sex, lapping up every drop.", parse);
+						Text.Flush();
 						Gui.NextPrompt();
 					}
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
 					parse["s"] = player.NumCocks() > 1 ? "s" : "";
 					parse["oneof"] = player.NumCocks() > 1 ? " one of" : "";
-					Text.AddOutput("Without letting up [hisher] assault on your nether lips, [name] gently tugs on your [multiCockDesc], determined to pleasure your male endowment[s] as well. [HisHer] deft fingers caress your length[s], playfully tracing the veins on the pulsing member[s].", parse);
-					Text.Newline();
-					Text.AddOutput("More than pleased with the dual attention you are given, you decide to join in, and grab at[oneof] your [multiCockDesc], heartily jerking yourself off while the elf administers [hisher] healing skills on your [vagDesc]. Before long, your trembling [legsDesc] announce your approaching orgasm.", parse);
-					Text.Newline();
+					Text.Add("Without letting up [hisher] assault on your nether lips, [name] gently tugs on your [multiCockDesc], determined to pleasure your male endowment[s] as well. [HisHer] deft fingers caress your length[s], playfully tracing the veins on the pulsing member[s].", parse);
+					Text.NL();
+					Text.Add("More than pleased with the dual attention you are given, you decide to help out, grabbing[oneof] your [multiCockDesc] and heartily jerking yourself off while the elf administers [hisher] healing skills on your [vagDesc]. Before long, your trembling [legsDesc] announce your approaching orgasm.", parse);
+					Text.NL();
 					if(kiakai.flags["Sexed"] > 15 && Math.random() > 0.5) {
-						Text.AddOutput("Breathing heavily, [name] abandons your [vagDesc] and eagerly shoves the tip of [one of ]your [multiCockDesc] into [hisher] mouth. While sucking you off, the elf begins pumping two of [hisher] fingers into your clenching [vagDesc], trying to milk you as quickly as possible.", parse);
-						Text.Newline();
-						Text.AddOutput("You hardly want to deprive the horny elf of [hisher] meal - not that you can hold back for very long under [hisher] fervent fingering in any case. Groaning, you unleash your load down [name]'s waiting hatch, the elf swallowing as quickly as [heshe] can, trying to keep up with you.", parse);
-						Text.Newline();
+						Text.Add("Breathing heavily, [name] abandons your [vagDesc] and eagerly shoves the tip of [one of ]your [multiCockDesc] into [hisher] mouth. While sucking you off, the elf begins pumping two of [hisher] fingers into your clenching [vagDesc], trying to milk you as quickly as possible.", parse);
+						Text.NL();
+						Text.Add("You hardly want to deprive the horny elf of [hisher] meal - not that you can hold back for very long under [hisher] fervent fingering in any case. Groaning, you unleash your load down [name]'s waiting hatch, the elf swallowing as quickly as [heshe] can, trying to keep up with you.", parse);
+						Text.NL();
 						
 						var cum = player.OrgasmCum();
 						
 						if(cum > 3) {
-							Text.AddOutput("Abandoning all efforts to try to swallow all of it for fear of drowning, [name] instead frees your [cockTip] from [hisher] mouth, letting the rest of your load cover [hisher] face, hair, and clothes", parse);
+							Text.Add("Abandoning all efforts to try to swallow all of it for fear of drowning, [name] instead frees your [cockTip] from [hisher] mouth, letting the rest of your load cover [hisher] face, hair, and clothes", parse);
 							parse["count"] = player.NumCocks() == 2 ? "your other" : "the rest of your";
 							if(player.NumCocks() > 1)
-								Text.AddOutput(", where it joins the eruptions from [count] untended cock[s].", parse);
+								Text.Add(", where it joins the eruptions from [count] untended cock[s].", parse);
 							else
-								Text.AddOutput(".", parse);
-							Text.Newline();
+								Text.Add(".", parse);
+							Text.NL();
 						}
 						else if(player.NumCocks() > 1) {
 							parse["count"] = player.NumCocks() == 2 ? "the other one is" : "the rest are";
-							Text.AddOutput("Although [heshe] manages to gulp down the entire load from one of your [multiCockDesc], [count] left unattended, splattering the elf's face, hair, and clothes in your warm cum.", parse);
-							Text.Newline();
+							Text.Add("Although [heshe] manages to gulp down the entire load from one of your [multiCockDesc], [count] left unattended, splattering the elf's face, hair, and clothes in your warm cum.", parse);
+							Text.NL();
 						}
-						Text.AddOutput("Between your legs, your [vagDesc] has clamped down on [name]'s fingers, coating them in slick juices. When the torrent of your orgasm has quieted down, the elf methodically licks the liquid from [hisher] fingers, before providing your [vagDesc] with the same service.", parse);
+						Text.Add("Between your legs, your [vagDesc] has clamped down on [name]'s fingers, coating them in slick juices. When the torrent of your orgasm has quieted down, the elf methodically licks the liquid from [hisher] fingers, before providing your [vagDesc] with the same service.", parse);
 					}
 					else if(kiakai.flags["Sexed"] > 15) {
-						Text.AddOutput("Burying [hisher] tongue in your [vagDesc], [hisher] nose bumping up against your [clitDesc], [name] insistently laps at your inner tunnel, coaxing an orgasm from your burning body.", parse);
-						Text.Newline();
+						Text.Add("Burying [hisher] tongue in your [vagDesc], [hisher] nose bumping up against your [clitDesc], [name] insistently laps at your inner tunnel, coaxing an orgasm from your burning body.", parse);
+						Text.NL();
 						
 						var cum = player.OrgasmCum();
 						
-						Text.AddOutput("Moaning loudly, you unleash a gushing torrent of girly juices into the elf's waiting mouth, simultaneously letting your male endowment[s] shower [himher] with sticky spunk.", parse);
-						Text.Newline();
-						Text.AddOutput("Sighing pleasurably, [name] finishes [hisher] meal, unconcerned with the strings of sperm dripping into [hisher] hair.", parse);
+						Text.Add("Moaning loudly, you unleash a gushing torrent of girly juices into the elf's waiting mouth, simultaneously letting your male endowment[s] shower [himher] with sticky spunk.", parse);
+						Text.NL();
+						Text.Add("Sighing pleasurably, [name] finishes [hisher] meal, unconcerned with the strings of sperm dripping into [hisher] hair.", parse);
 					}
 					else {
 						parse["isAre"] = player.NumCocks() > 1 ? "are" : "is";
-						Text.AddOutput("Suddenly overwhelmed by all the options in front of [himher], [name] panics slightly. Noticing that your [multiCockDesc] [isAre] about to erupt, [heshe] ineffectually tries to hold back the flow with both hands. This only succeeds in pushing you over the edge, staining [hisher] hands in your semen.", parse);
-						Text.Newline();
+						Text.Add("Suddenly overwhelmed by all the options in front of [himher], [name] panics slightly. Noticing that your [multiCockDesc] [isAre] about to erupt, [heshe] ineffectually tries to hold back the flow with both hands. This only succeeds in pushing you over the edge, staining [hisher] hands in your semen.", parse);
+						Text.NL();
 						
 						var cum = player.OrgasmCum();
 						
-						Text.AddOutput("Slightly flustered, [name] tries to focus on cleaning your [vagDesc], trying to ignore the white strands dripping down your cock[s], landing on [hisher] nose.", parse);
+						Text.Add("Slightly flustered, [name] tries to focus on cleaning your [vagDesc], trying to ignore the white strands dripping down your cock[s], landing on [hisher] nose.", parse);
 					}
-					
+					Text.Flush();
 					Gui.NextPrompt();
 				}, 1.0, function() { return player.FirstCock(); });
 				scenes.AddEnc(function() {
-					Text.AddOutput("By this time, [name] knows just what to do to get you off. Electric shocks run through your tingling labia as [heshe] administers a spark of healing energy with the tip of [hisher] [kTongueDesc]. The sparks quickly home in on the most prominent feature of your feminine anatomy, your [clitDesc].", parse);
-					Text.Newline();
-					Text.AddOutput("The elf isn't even touching you anymore, [heshe] is just letting [hisher] healing power do the work. [HeShe] lets [hisher] [kTongueDesc] hover a hairsbreadth away from your [vagDesc], a tiny beam of refreshing energy bridging the gap between the two of you.", parse);
-					Text.Newline();
-					Text.AddOutput("It would be a shame to let [himher] get you off without doing any work, but you have to act quickly before [heshe] overwhelms you. Gently but firmly, you grab hold of the back of [hisher] head, pressing [hisher] face into your crotch.", parse);
-					Text.Newline();
-					Text.AddOutput("For a moment, the sheer surprise makes [name] lose control of [hisher] powers, sending a jolt racing through your vaginal canal and up along your spine. Your sensory systems overloading, you let out a desperate moan before letting your orgasm take you and wash over your elvish lover.", parse);
-					Text.Newline();
+					Text.Add("By this time, [name] knows just what to do to get you off. Electric shocks run through your tingling labia as [heshe] administers a spark of healing energy with the tip of [hisher] [kTongueDesc]. The sparks quickly home in on the most prominent feature of your feminine anatomy, your [clitDesc].", parse);
+					Text.NL();
+					Text.Add("The elf isn't even touching you anymore, [heshe] is just letting [hisher] healing power do the work. [HeShe] lets [hisher] [kTongueDesc] hover a hairsbreadth away from your [vagDesc], a tiny beam of refreshing energy bridging the gap between the two of you.", parse);
+					Text.NL();
+					Text.Add("It would be a shame to let [himher] get you off without doing any work, but you have to act quickly before [heshe] overwhelms you. Gently but firmly, you grab hold of the back of [hisher] head, pressing [hisher] face into your crotch.", parse);
+					Text.NL();
+					Text.Add("For a moment, the sheer surprise makes [name] lose control of [hisher] powers, sending a jolt racing through your vaginal canal and up along your spine. Your sensory systems overloading, you let out a desperate moan before letting your orgasm take you and wash over your elvish lover.", parse);
+					Text.NL();
 					
 					if(player.FirstCock()) {
 						parse["s"] = player.NumCocks() == 1 ? "s" : "";
-						Text.AddOutput("Your [multiCockDesc] erupt[s], mattering [name]'s hair and back with sticky fluids.", parse);
+						Text.Add("Your [multiCockDesc] erupt[s], mattering [name]'s hair and back with sticky fluids.", parse);
 						var cum = player.OrgasmCum();
 						
 						if(cum > 3)
-							Text.AddOutput(" When you finish, it looks like the elf's hair is a natural white rather than silver. A very sticky and drippy natural white.", parse);
-						Text.Newline();
+							Text.Add(" When you finish, it looks like the elf's hair is a natural white rather than silver. A very sticky and drippy natural white.", parse);
+						Text.NL();
 					}
 					
-					Text.AddOutput("Resting in the afterglow, you caress your elvish lover's cheek fondly.", parse);
+					Text.Add("Resting in the afterglow, you caress your elvish lover's cheek fondly.", parse);
+					Text.Flush();
 					Gui.NextPrompt();
 				}, 1.0, function() { return (kiakai.flags["Sexed"] > 15); });
 				
@@ -2877,19 +2881,20 @@ Scenes.Kiakai.HealingNice = function() {
 				Gui.Callstack.push(function() {
 					Text.Clear();
 					if(kiakai.flags["Sexed"] > 10) {
-						Text.AddOutput("<i>“You always taste so good, [playername],”</i> [name] tells you dreamily, running [hisher] tongue over [hisher] lips. The two of you start cleaning up and re-equipping your gear. <i>“Lately, I've found myself wanting to drink from you more and more,”</i> [heshe] admits, blushing cutely.", parse);
+						Text.Add("<i>“You always taste so good, [playername],”</i> [name] tells you dreamily, running [hisher] tongue over [hisher] lips. The two of you start cleaning up and re-equipping your gear. <i>“Lately, I've found myself wanting to drink from you more and more,”</i> [heshe] admits, blushing cutely.", parse);
 					}
 					else if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
-						Text.AddOutput("<i>“Y-you really seem to like making me do things like that,”</i> [name] accuses you, pouting prettily, as the two of you clean up and re-equip your gear. <i>“I wish you wouldn't just make these decisions on your own! S-still, t-that was... not unpleasant,”</i> [heshe] admits, blushing furiously.", parse);
+						Text.Add("<i>“Y-you really seem to like making me do things like that,”</i> [name] accuses you, pouting prettily, as the two of you clean up and re-equip your gear. <i>“I wish you wouldn't just make these decisions on your own! S-still, t-that was... not unpleasant,”</i> [heshe] admits, blushing furiously.", parse);
 					}
 					else {
 						parse["aAnother"] = kiakai.FirstVag() ? "another" : "a";
-						Text.AddOutput("<i>“T-that was... not unpleasant,”</i> [name] confesses as the two of you clean up and re-equip your gear. <i>“Before meeting with you, I never knew what [aAnother] woman tasted like...”</i> [HeShe] shakes [hisher] head, blushing furiously.", parse);
+						Text.Add("<i>“T-that was... not unpleasant,”</i> [name] confesses as the two of you clean up and re-equip your gear. <i>“Before meeting with you, I never knew what [aAnother] woman tasted like...”</i> [HeShe] shakes [hisher] head, blushing furiously.", parse);
 					}
 					
 					player.AddLustFraction(-1);
 					kiakai.AddLustFraction(0.1);
 					kiakai.flags["Sexed"]++;
+					Text.Flush();
 					Gui.NextPrompt(kiakai.Interact);
 				});
 			}, enabled : true,
@@ -2906,30 +2911,31 @@ Scenes.Kiakai.HealingNice = function() {
 		func : function() {
 			Text.Clear();
 			
-			Text.AddOutput("Rather than take advantage of the nervous elf, you wrap your arms around [himher]", parse);
+			Text.Add("Rather than take advantage of the nervous elf, you wrap your arms around [himher]", parse);
 			if(player.FirstBreastRow().size.Get() > 3)
-				Text.AddOutput(", your [breastDesc] pressing against [hisher] back", parse);
-			Text.AddOutput(". Your hands, trailing down [name]'s body, brush lightly over [hisher] [kNipsDesc], eliciting a surprised exhalation from the elf, before settling on [hisher] stomach. You find the nearness of the elf comforting. The warmth of your bodies intermingle as you lie there, ", parse);
+				Text.Add(", your [breastDesc] pressing against [hisher] back", parse);
+			Text.Add(". Your hands, trailing down [name]'s body, brush lightly over [hisher] [kNipsDesc], eliciting a surprised exhalation from the elf, before settling on [hisher] stomach. You find the nearness of the elf comforting. The warmth of your bodies intermingle as you lie there, ", parse);
 			if(Math.abs(player.LustLevel() - kiakai.LustLevel()) < 0.15)
-				Text.AddOutput("your breaths coming as one.", parse);
+				Text.Add("your breaths coming as one.", parse);
 			else if(player.LustLevel() > kiakai.LustLevel())
-				Text.AddOutput("your rapid breathing a counterpoint to [hisher] slower breaths.", parse);
+				Text.Add("your rapid breathing a counterpoint to [hisher] slower breaths.", parse);
 			else
-				Text.AddOutput("[hisher] rapid breathing a counterpoint to your slower breaths.", parse);
-			Text.Newline();
-			Text.AddOutput("After enjoying each others' closeness for a while, you regretfully decide that it's time to get going, and tell as much to the elf, reluctantly disentangling yourself from [himher]. As the two of you stand up and get dressed, you notice [name] glancing at you from time to time, a bright blush on [hisher] cheeks.", parse);
+				Text.Add("[hisher] rapid breathing a counterpoint to your slower breaths.", parse);
+			Text.NL();
+			Text.Add("After enjoying each others' closeness for a while, you regretfully decide that it's time to get going, and tell as much to the elf, reluctantly disentangling yourself from [himher]. As the two of you stand up and get dressed, you notice [name] glancing at you from time to time, a bright blush on [hisher] cheeks.", parse);
 			
 			/* Old scene
-			Text.AddOutput("Rather than taking advantage of the nervous elf, you cuddle up against [hisher] back", parse);
+			Text.Add("Rather than taking advantage of the nervous elf, you cuddle up against [hisher] back", parse);
 			if(player.FirstBreastRow().size.Get() > 3)
-				Text.AddOutput(", your [breastDesc] pressed between you", parse);
-			Text.AddOutput(". After enjoying the warmth of each others' bodies for a while, you nudge [name], suggesting that you get going.", parse);
-			Text.Newline();
-			Text.AddOutput("As you get dressed, the elf almost looks a bit regretful.", parse);
+				Text.Add(", your [breastDesc] pressed between you", parse);
+			Text.Add(". After enjoying the warmth of each others' bodies for a while, you nudge [name], suggesting that you get going.", parse);
+			Text.NL();
+			Text.Add("As you get dressed, the elf almost looks a bit regretful.", parse);
 			*/
 			
 			player.AddLustFraction(0.1);
 			kiakai.AddLustFraction(0.1);
+			Text.Flush();
 			Gui.NextPrompt(kiakai.Interact);
 		}, enabled : true,
 		tooltip : Text.Parse("[name] seems rather nervous, perhaps it'd be best to just cuddle for now. Plenty time for other entertainment later.", parse)
@@ -2985,26 +2991,28 @@ Scenes.Kiakai.PleasureElf = function() {
 	parse["stutterName"] = player.name[0] + "-" + player.name;
 	
 	Text.Clear();
-	Text.AddOutput("Snuggling up close, you whisper in the elf's ear that [heshe] is doing a <i>really</i> good job, and deserves a reward. To accentuate just what you mean, you trace one hand down [hisher] body. Intentionally avoiding [hisher] crotch, you caress the inside of [hisher] thigh. [name] whimpers softly, [hisher] breath coming faster.", parse);
-	Text.Newline();
+	Text.Add("Snuggling up close, you whisper in the elf's ear that [heshe] is doing a <i>really</i> good job, and deserves a reward. To accentuate just what you mean, you trace one hand down [hisher] body. Intentionally avoiding [hisher] crotch, you caress the inside of [hisher] thigh. [name] whimpers softly, [hisher] breath coming faster.", parse);
+	Text.NL();
 	
 	if(kiakai.flags["Sexed"] < 10)
-		Text.AddOutput("<i>“W-what do you mean, [playername], were you not hurt?”</i> [heshe] huffs, trembling slightly under your touch.", parse);
+		Text.Add("<i>“W-what do you mean, [playername], were you not hurt?”</i> [heshe] huffs, trembling slightly under your touch.", parse);
 	else
-		Text.AddOutput("<i>“Y-you are not hurt at all, you just want to grope me!”</i> [name] huffs accusingly. [HisHer] actions clash with [hisher] words though, as the elf slightly parts [hisher] legs, allowing you easier access.", parse);
-	Text.Newline();
+		Text.Add("<i>“Y-you are not hurt at all, you just want to grope me!”</i> [name] huffs accusingly. [HisHer] actions clash with [hisher] words though, as the elf slightly parts [hisher] legs, allowing you easier access.", parse);
+	Text.NL();
+	
+	parse = Text.ParserPlural(parse, kiakai.NumCocks() > 1);
 	
 	var options = new Array();
 	
 	if(kiakai.FirstCock()) {
-		parse = Text.ParserPlural(parse, kiakai.NumCocks() > 1);
-		Text.AddOutput("Without you even touching [itThem], [name]'s [kMultiCockDesc] spring[notS] to attention, stiff in anticipation. You take your time teasing the elf, letting your hand trail up and down [hisher] thigh, circle around [hisher] crotch and proceed down the other leg.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“P-please? [playername]?”</i> [name] begs you in a small voice. Please what? [HisHer] hand slowly strays toward the throbbing member[s], but you swipe it aside, preventing [himher] from getting [himher]self off.", parse);
+		Text.Add("Without you even touching [itThem], [name]'s [kMultiCockDesc] spring[notS] to attention, stiff in anticipation. You take your time teasing the elf, letting your hand trail up and down [hisher] thigh, circle around [hisher] crotch and proceed down the other leg.", parse);
+		Text.NL();
+		Text.Add("<i>“P-please? [playername]?”</i> [name] begs you in a small voice. Please what? [HisHer] hand slowly strays toward the throbbing member[s], but you swipe it aside, preventing [himher] from getting [himher]self off.", parse);
 		if(kiakai.HasBalls())
-			Text.AddOutput(" You let your hand come around, lightly cupping the elf's [kBallsDesc].", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“I cannot take it anymore! Please, w-would you... touch [itThem]?”</i>", parse);
+			Text.Add(" You let your hand come around, lightly cupping the elf's [kBallsDesc].", parse);
+		Text.NL();
+		Text.Add("<i>“I cannot take it anymore! Please, w-would you... touch [itThem]?”</i>", parse);
+		Text.Flush();
 		
 		//[Handjob][Blowjob]
 		options.push({ nameStr : "Handjob",
@@ -3013,24 +3021,24 @@ Scenes.Kiakai.PleasureElf = function() {
 				
 				parse["s"] = kiakai.FirstCock().length.Get() >= 20 ? "s" : "";
 				
-				Text.AddOutput("You delicately grasp[oneof] [name]'s [kMultiCockDesc].", parse);
+				Text.Add("You delicately grasp[oneof] [name]'s [kMultiCockDesc].", parse);
 				if(kiakai.FirstCock().length.Get() >= 20)
-					Text.AddOutput(" By now, it has grown so large that you can use two hands to stroke [hisher] length.", parse);
+					Text.Add(" By now, it has grown so large that you can use two hands to stroke [hisher] length.", parse);
 				else if(kiakai.HasBalls())
-					Text.AddOutput(" Your free hand continues to play with [hisher] [kBallsDesc], massaging each teste between your fingers.", parse);
+					Text.Add(" Your free hand continues to play with [hisher] [kBallsDesc], massaging each teste between your fingers.", parse);
 				else
-					Text.AddOutput(" Your free hand keeps on exploring [name]'s body, never staying in one place for long.", parse);
-				Text.Newline();
-				Text.AddOutput("The elf gasps as you slowly begin to jerk [hisher] [kCockDesc], massaging it from tip to stem.", parse);
-				Text.Newline();
-				Text.AddOutput("You continue pumping [himher] this way for several minutes, the elf's twitching growing increasingly erratic. Sensing that [hisher] orgasm is close at hand, you stop, withdrawing you hand[s].", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“A-are you going to make me beg for it?”</i> [name] pants, blushing furiously when you nod, smiling. <i>“F-fine! Please?”</i> Please what? <i>“Please, continue doing that!”</i> Doing what? [name] moans in frustration. <i>“Please touch my p-penis, it feels good.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("Taking pity on the elf, you grab hold of [hisher] [kCockDesc] again, and this time you don't hold back. [name]'s eyes are closed, and [hisher] hips make small thrusting motions as you rapidly pump [hisher] member.", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“C-coming!”</i> the elf squeaks. True to [hisher] word, [name]'s [kMultiCockDesc] twitch[notEs] in your hand[s], spurting elven cockbatter onto [hisher] own stomach. You give [himher] a kiss on the lips before cleaning up. Looks like the elf will need a few minutes to recover before you can set out again.", parse);
-				Text.Newline();
+					Text.Add(" Your free hand keeps on exploring [name]'s body, never staying in one place for long.", parse);
+				Text.NL();
+				Text.Add("The elf gasps as you slowly begin to jerk [hisher] [kCockDesc], massaging it from tip to stem.", parse);
+				Text.NL();
+				Text.Add("You continue pumping [himher] this way for several minutes, the elf's twitching growing increasingly erratic. Sensing that [hisher] orgasm is close at hand, you stop, withdrawing you hand[s].", parse);
+				Text.NL();
+				Text.Add("<i>“A-are you going to make me beg for it?”</i> [name] pants, blushing furiously when you nod, smiling. <i>“F-fine! Please?”</i> Please what? <i>“Please, continue doing that!”</i> Doing what? [name] moans in frustration. <i>“Please touch my p-penis, it feels good.”</i>", parse);
+				Text.NL();
+				Text.Add("Taking pity on the elf, you grab hold of [hisher] [kCockDesc] again, and this time you don't hold back. [name]'s eyes are closed, and [hisher] hips make small thrusting motions as you rapidly pump [hisher] member.", parse);
+				Text.NL();
+				Text.Add("<i>“C-coming!”</i> the elf squeaks. True to [hisher] word, [name]'s [kMultiCockDesc] twitch[notEs] in your hand[s], spurting elven cockbatter onto [hisher] own stomach. You give [himher] a kiss on the lips before cleaning up. Looks like the elf will need a few minutes to recover before you can set out again.", parse);
+				Text.NL();
 				
 				player.AddSexExp(1);
 				kiakai.AddSexExp(1);
@@ -3045,85 +3053,85 @@ Scenes.Kiakai.PleasureElf = function() {
 		options.push({ nameStr : "Blowjob",
 			func : function() {
 				Text.Clear();
-				Text.AddOutput("You intend to do far more than touch. To get [himher] started, you grab hold of[oneof] [name]'s [kMultiCockDesc] and give it a few strokes. ", parse);
+				Text.Add("You intend to do far more than touch. To get [himher] started, you grab hold of[oneof] [name]'s [kMultiCockDesc] and give it a few strokes. ", parse);
 				if(kiakai.flags["Sexed"] < 10)
-					Text.AddOutput("The elf whimpers as you squeeze [hisher] rock-hard member tightly, not used to such rough treatment.", parse);
+					Text.Add("The elf whimpers as you squeeze [hisher] rock-hard member tightly, not used to such rough treatment.", parse);
 				else
-					Text.AddOutput("The elf is panting in anticipation as you squeeze [hisher] rock-hard member, a bead of precum forming on the [kCockTip].", parse);
-				Text.Newline();
-				Text.AddOutput("Shifting around, you lean down to inspect [name]'s cock up close. Aroused even further by your hot breath brushing against it, it twitches urgently. It's so easy to get the elf horny it's almost comical.", parse);
-				Text.Newline();
-				Text.AddOutput("Well, if [heshe] likes your touch so much, [heshe]'s bound to like this...", parse);
-				Text.Newline();
-				Text.AddOutput("[name] cries out as your lips close around the [kCockTip] of [hisher] cock, your [tongueDesc] lapping away at it avidly. Your taste buds are assaulted by salty drops of pre landing on your [tongueDesc], dispensed from the elf's stiff member.", parse);
-				Text.Newline();
-				Text.AddOutput("That seemed to have a nice effect. How about stepping it up a notch?", parse);
-				Text.Newline();
-				Text.AddOutput("Slowly, you inch [name]'s [kCockDesc] into your mouth, coating the moaning elf's length in your slick saliva. Letting your [tongueDesc] stroke the stem playfully, you start bobbing your head up and down, eagerly swallowing your companion's trembling dick.", parse);
-				Text.Newline();
+					Text.Add("The elf is panting in anticipation as you squeeze [hisher] rock-hard member, a bead of precum forming on the [kCockTip].", parse);
+				Text.NL();
+				Text.Add("Shifting around, you lean down to inspect [name]'s cock up close. Aroused even further by your hot breath brushing against it, it twitches urgently. It's so easy to get the elf horny it's almost comical.", parse);
+				Text.NL();
+				Text.Add("Well, if [heshe] likes your touch so much, [heshe]'s bound to like this...", parse);
+				Text.NL();
+				Text.Add("[name] cries out as your lips close around the [kCockTip] of [hisher] cock, your [tongueDesc] lapping away at it avidly. Your taste buds are assaulted by salty drops of pre landing on your [tongueDesc], dispensed from the elf's stiff member.", parse);
+				Text.NL();
+				Text.Add("That seemed to have a nice effect. How about stepping it up a notch?", parse);
+				Text.NL();
+				Text.Add("Slowly, you inch [name]'s [kCockDesc] into your mouth, coating the moaning elf's length in your slick saliva. Letting your [tongueDesc] stroke the stem playfully, you start bobbing your head up and down, eagerly swallowing your companion's trembling dick.", parse);
+				Text.NL();
 				if(kiakai.flags["Sexed"] < 10)
-					Text.AddOutput("<i>“[stutterName]! It... ahh! Ngh... feels... good!”</i> [name] moans, lost in bliss.", parse);
+					Text.Add("<i>“[stutterName]! It... ahh! Ngh... feels... good!”</i> [name] moans, lost in bliss.", parse);
 				if(kiakai.flags["Sexed"] < 20)
-					Text.AddOutput("<i>“Mmm... so good...”</i> [name] moans, closing [hisher] eyes in pleasure.", parse);
+					Text.Add("<i>“Mmm... so good...”</i> [name] moans, closing [hisher] eyes in pleasure.", parse);
 				else // >20
-					Text.AddOutput("<i>“Y-yes!”</i> [name] sighs. A bit to your surprise, the elf starts to make small thrusts with [hisher] hips, moving to meet you.", parse);
-				Text.Newline();
-				Text.AddOutput("Time to get the horny elf off. ", parse);
+					Text.Add("<i>“Y-yes!”</i> [name] sighs. A bit to your surprise, the elf starts to make small thrusts with [hisher] hips, moving to meet you.", parse);
+				Text.NL();
+				Text.Add("Time to get the horny elf off. ", parse);
 				if(kiakai.FirstCock().length.Get() > 35) {
-					Text.AddOutput("It's almost unbelievable how large [name]'s member has grown{, though it's still small in comparison to your own}{, rivalling your own in size}{, easily dwarfing your own}. Much too big for you to fully please, sadly enough. Still, you take as much of the [kCockDesc] in as you can, eyes watering slightly as you force it down your burning throat.", parse);
-					Text.Newline();
-					Text.AddOutput("You let your hands work on the exposed parts of [name]'s shaft, wishing you could fully take [himher] into your mouth. The elf seems to be happy either way, panting desperately under your ministrations.", parse);
+					Text.Add("It's almost unbelievable how large [name]'s member has grown{, though it's still small in comparison to your own}{, rivalling your own in size}{, easily dwarfing your own}. Much too big for you to fully please, sadly enough. Still, you take as much of the [kCockDesc] in as you can, eyes watering slightly as you force it down your burning throat.", parse);
+					Text.NL();
+					Text.Add("You let your hands work on the exposed parts of [name]'s shaft, wishing you could fully take [himher] into your mouth. The elf seems to be happy either way, panting desperately under your ministrations.", parse);
 				}
 				else if(kiakai.FirstCock().length.Get() > 20) {
-					Text.AddOutput("With some difficulty, you manage to push all of [name]'s [kCockDesc] down your throat, managing to press a trembling kiss on the elf's crotch before you are forced to surface for air.", parse);
-					Text.Newline();
-					Text.AddOutput("Time and again you let your lips rest against [name], your throat beginning to burn slightly after the repeated penetration.", parse);
+					Text.Add("With some difficulty, you manage to push all of [name]'s [kCockDesc] down your throat, managing to press a trembling kiss on the elf's crotch before you are forced to surface for air.", parse);
+					Text.NL();
+					Text.Add("Time and again you let your lips rest against [name], your throat beginning to burn slightly after the repeated penetration.", parse);
 				}
 				else {
-					Text.AddOutput("A cock of this size is no problem for you to devour whole. You lean forward, planting kiss after kiss on [name]'s crotch, letting your [tongueDesc] work on every part of [hisher] [kCockDesc]. Alternating your focus between licking on the [kCockTip] and taking [himher] to the root, you make sure to give [name] as good a time as you are able.", parse);
+					Text.Add("A cock of this size is no problem for you to devour whole. You lean forward, planting kiss after kiss on [name]'s crotch, letting your [tongueDesc] work on every part of [hisher] [kCockDesc]. Alternating your focus between licking on the [kCockTip] and taking [himher] to the root, you make sure to give [name] as good a time as you are able.", parse);
 				}
-				Text.Newline();
-				Text.AddOutput("<i>“B-by Aria, [playername], that feels amazing!”</i> the elf moans. You surface for a moment, a strand of saliva still connecting your [tongueDesc] with [hisher] [kCockDesc]. Flushed and panting, you manage to express that your diligent healer deserves no less, before returning to the task at hand.", parse);
-				Text.Newline();
+				Text.NL();
+				Text.Add("<i>“B-by Aria, [playername], that feels amazing!”</i> the elf moans. You surface for a moment, a strand of saliva still connecting your [tongueDesc] with [hisher] [kCockDesc]. Flushed and panting, you manage to express that your diligent healer deserves no less, before returning to the task at hand.", parse);
+				Text.NL();
 				parse["mouthThroat"] = (kiakai.FirstCock().length.Get() > 15) ? "throat" : "mouth";
-				Text.AddOutput("[name] is in heaven, resting on [hisher] back, [hisher] [kCockDesc] buried deep in your [mouthThroat]. You catch fragments of what sounds like a jumbled prayer, delivered by the elf in a breathless whisper.", parse);
-				Text.Newline();
+				Text.Add("[name] is in heaven, resting on [hisher] back, [hisher] [kCockDesc] buried deep in your [mouthThroat]. You catch fragments of what sounds like a jumbled prayer, delivered by the elf in a breathless whisper.", parse);
+				Text.NL();
 				if(kiakai.FirstVag()) {
-					Text.AddOutput("Not wanting to let [hisher] other genitalia go unrewarded, you push two fingers into [name]'s [kVagDesc], immediately soaking the digits in the elf's juices.", parse);
-					Text.Newline();
+					Text.Add("Not wanting to let [hisher] other genitalia go unrewarded, you push two fingers into [name]'s [kVagDesc], immediately soaking the digits in the elf's juices.", parse);
+					Text.NL();
 				}
 				else if(kiakai.HasBalls()) {
-					Text.AddOutput("You cup [name]'s [kBallsDesc] in your hand, fondling and squeezing each testicle gently, trying to coax their load from them.", parse);
-					Text.Newline();
+					Text.Add("You cup [name]'s [kBallsDesc] in your hand, fondling and squeezing each testicle gently, trying to coax their load from them.", parse);
+					Text.NL();
 				}
 				parse["multi"] = kiakai.NumCocks() > 1 ? " and all over your face" : "";
-				Text.AddOutput("[name]'s orgasm arrives accompanied by a wordless cry from the delirious elf. Clutching [hisher] legs together convulsively, [heshe] unintentionally traps your head in place while [heshe] unloads down your throat[multi].", parse);
+				Text.Add("[name]'s orgasm arrives accompanied by a wordless cry from the delirious elf. Clutching [hisher] legs together convulsively, [heshe] unintentionally traps your head in place while [heshe] unloads down your throat[multi].", parse);
 				
 				var cum = kiakai.OrgasmCum();
 				
-				Text.Newline();
+				Text.NL();
 				if(kiakai.strength.Get() > player.strength.Get()) {
-					Text.AddOutput("Try as you might, you can't pry [hisher] legs apart, and are forced to meekly receive all of the elf's load.", parse);
+					Text.Add("Try as you might, you can't pry [hisher] legs apart, and are forced to meekly receive all of the elf's load.", parse);
 					if(cum > 3)
-						Text.AddOutput(" You begin to get slightly worried as you can feel your stomach bulging slightly under the sheer amount of semen being pumped down your throat. Just how much cum can [name] produce?!", parse);
-					Text.Newline();
-					Text.AddOutput("Shuddering, [name] finally lets go of [hisher] vice-like grip on you. [HeShe] looks concerned as you cough and splutter, inquiring if you are alright. You manage to nod that you are fine.", parse);
+						Text.Add(" You begin to get slightly worried as you can feel your stomach bulging slightly under the sheer amount of semen being pumped down your throat. Just how much cum can [name] produce?!", parse);
+					Text.NL();
+					Text.Add("Shuddering, [name] finally lets go of [hisher] vice-like grip on you. [HeShe] looks concerned as you cough and splutter, inquiring if you are alright. You manage to nod that you are fine.", parse);
 				}
 				else {
-					Text.AddOutput("Prying [hisher] legs apart by force, you surface in time to receive the last spurts of the elf's seed on your face.", parse);
+					Text.Add("Prying [hisher] legs apart by force, you surface in time to receive the last spurts of the elf's seed on your face.", parse);
 					if(cum > 3)
-						Text.AddOutput(" Even that much is enough to drench you thoroughly with the virile elf's spunk, as you reflexively cough up the excess of [hisher] climax.", parse);
+						Text.Add(" Even that much is enough to drench you thoroughly with the virile elf's spunk, as you reflexively cough up the excess of [hisher] climax.", parse);
 				}
-				Text.Newline();
+				Text.NL();
 				if(kiakai.flags["Sexed"] < 10)
-					Text.AddOutput("<i>“I... never knew it would feel like this,”</i> [name] moans happily.", parse);
+					Text.Add("<i>“I... never knew it would feel like this,”</i> [name] moans happily.", parse);
 				else if(kiakai.flags["Sexed"] < 20)
-					Text.AddOutput("<i>“M-my cock... t-thank you, [playername],”</i> [name] sighs contentedly.", parse);
+					Text.Add("<i>“M-my cock... t-thank you, [playername],”</i> [name] sighs contentedly.", parse);
 				else if(player.FirstCock())
-					Text.AddOutput("<i>“That was great, [playername],”</i> [name] murmurs, <i>“I wish I could do the same for you...”</i>", parse);
+					Text.Add("<i>“That was great, [playername],”</i> [name] murmurs, <i>“I wish I could do the same for you...”</i>", parse);
 				else
-					Text.AddOutput("<i>“You are amazing, [playername],”</i> [name] sighs contentedly.", parse);
-				Text.Newline();
+					Text.Add("<i>“You are amazing, [playername],”</i> [name] sighs contentedly.", parse);
+				Text.NL();
 				
 				Sex.Blowjob(player, kiakai);
 				player.FuckOral(player.Mouth(), kiakai.FirstCock(), 2);
@@ -3137,23 +3145,24 @@ Scenes.Kiakai.PleasureElf = function() {
 	}
 	if(kiakai.FirstVag()) {
 		
-		Text.AddOutput("[name] is getting worked up, [hisher] [kVagDesc] already moist with juices. Teasing the elf, you caress the sensitive skin between [hisher] legs, trailing closer but never touching. [HeShe] moans in frustration.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“C-can you touch it?”</i> [heshe] pleads with you. <i>“This tension, it is driving me crazy!”</i> You smile as [name] finally acknowledges [hisher] desire. [HeShe] surely deserves a treat...", parse);
+		Text.Add("[name] is getting worked up, [hisher] [kVagDesc] already moist with juices. Teasing the elf, you caress the sensitive skin between [hisher] legs, trailing closer but never touching. [HeShe] moans in frustration.", parse);
+		Text.NL();
+		Text.Add("<i>“C-can you touch it?”</i> [heshe] pleads with you. <i>“This tension, it is driving me crazy!”</i> You smile as [name] finally acknowledges [hisher] desire. [HeShe] surely deserves a treat...", parse);
+		Text.Flush();
 		
 		//[Frig][Eat out]
 		options.push({ nameStr : "Frig",
 			func : function() {
 				Text.Clear();
-				Text.AddOutput("Humoring the horny elf, you drag your fingers across [hisher] lower lips, giving [hisher] [kClitDesc] a light flick before spreading [hisher] labia with both hands. Agonizingly slowly, you push two fingers inside [name]'s wet [kVagDesc], probing deeply into [hisher] slick tunnel.", parse);
-				Text.Newline();
+				Text.Add("Humoring the horny elf, you drag your fingers across [hisher] lower lips, giving [hisher] [kClitDesc] a light flick before spreading [hisher] labia with both hands. Agonizingly slowly, you push two fingers inside [name]'s wet [kVagDesc], probing deeply into [hisher] slick tunnel.", parse);
+				Text.NL();
 				parse["tinyOversized"] = kiakai.FirstVag().clitLength.Get() > 2 ? "oversized" : "tiny";
-				Text.AddOutput("<i>“Mmm... ah!”</i> The elf's simpering moan turns into a shrill yelp, incited by your other hand pinching [hisher] [kClitDesc]. Your treatment of the [tinyOversized] nub sends electric shocks up [name]'s spine, and coats your already slick fingers in even more girly juices. Stepping up your fingering, you start pumping [name]'s [kVagDesc], adding another digit after a while. With two fingers, you spread [hisher] passage wide, using the third one to rub against the roof of the tunnel.", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“B-by Aria, that feels good, [playername]!”</i> [name] moans softly, urging you on. [HeShe] even starts to grind [hisher] hips against your hand, meeting your thrusts, allowing you to sink your fingers even deeper into [hisher] [kVagDesc]. Teasingly, you ask [himher] just what Aria would think of this, and having her name invoked in such a fashion. You are rewarded with a bright blush from the elf, your remark clearly hitting home. Whether or not [heshe] really regrets [hisher] statement is unclear as [heshe] keeps moving [hisher] hips, biting [hisher] lips so as to not utter more blasphemies.", parse);
-				Text.Newline();
-				Text.AddOutput("It isn't long before your hands bring the elf to a shuddering orgasm, [hisher] tight walls clamping down on you, soaking your digits in [hisher] juices. Smiling, you pull out of [himher], giving your fingers a lick before presenting your hand to the elf, allowing [himher] to clean you. [name] blushes as [heshe] tastes [hisher] own girl-cum, but nonetheless cleans your hand meticulously.", parse);
-				Text.Newline();
+				Text.Add("<i>“Mmm... ah!”</i> The elf's simpering moan turns into a shrill yelp, incited by your other hand pinching [hisher] [kClitDesc]. Your treatment of the [tinyOversized] nub sends electric shocks up [name]'s spine, and coats your already slick fingers in even more girly juices. Stepping up your fingering, you start pumping [name]'s [kVagDesc], adding another digit after a while. With two fingers, you spread [hisher] passage wide, using the third one to rub against the roof of the tunnel.", parse);
+				Text.NL();
+				Text.Add("<i>“B-by Aria, that feels good, [playername]!”</i> [name] moans softly, urging you on. [HeShe] even starts to grind [hisher] hips against your hand, meeting your thrusts, allowing you to sink your fingers even deeper into [hisher] [kVagDesc]. Teasingly, you ask [himher] just what Aria would think of this, and having her name invoked in such a fashion. You are rewarded with a bright blush from the elf, your remark clearly hitting home. Whether or not [heshe] really regrets [hisher] statement is unclear as [heshe] keeps moving [hisher] hips, biting [hisher] lips so as to not utter more blasphemies.", parse);
+				Text.NL();
+				Text.Add("It isn't long before your hands bring the elf to a shuddering orgasm, [hisher] tight walls clamping down on you, soaking your digits in [hisher] juices. Smiling, you pull out of [himher], giving your fingers a lick before presenting your hand to the elf, allowing [himher] to clean you. [name] blushes as [heshe] tastes [hisher] own girl-cum, but nonetheless cleans your hand meticulously.", parse);
+				Text.NL();
 				
 				var cum = kiakai.OrgasmCum();
 				
@@ -3168,32 +3177,32 @@ Scenes.Kiakai.PleasureElf = function() {
 		options.push({ nameStr : "Eat out",
 			func : function() {
 				Text.Clear();
-				Text.AddOutput("Well, since [heshe] is asking so nicely...", parse);
-				Text.Newline();
-				Text.AddOutput("You shuffle around, letting your mouth hover a mere finger's width from [name]'s wet slit as you make yourself comfortable. Your hot breath near [hisher] most private parts gives the elf a glimmer of what is to come, and [heshe] shivers in anticipation. A drop of saliva connects your [tongueDesc], extending curiously from your open mouth, with [hisher] [kVagDesc].", parse);
-				Text.Newline();
-				Text.AddOutput("[name] whimpers quietly as you place a kiss on [hisher] exposed nether lips; the first of many to come. [name]'s sweet taste teases your tastebuds, as if imploring you to dig in, to allow your [tongueDesc] to ravage and penetrate the innocent elf to [hisher] very core. The elf in question doesn't seem to mind, [hisher] whimper turning to a moan as your second kiss lingers on [hisher] [kVagDesc], your [tongueDesc] teasing the entrance.", parse);
-				Text.Newline();
-				Text.AddOutput("Leaning back, you admire [name]'s exposed pink flower, gently spread by your fingers. The opening of [hisher] passage is glistening wetly, eagerly awaiting your probing tongue. You give [himher] another long lick, your nose bumping up against the elf's sensitive [kClitDesc].", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“Mm... [playername]...”</i> [name] sighs contentedly, one hand idly caressing [hisher] [kBreastDesc].", parse);
-				Text.Newline();
-				Text.AddOutput("Done with foreplay, you let your [tongueDesc] plunge into [name], eliciting a loud yelp from the unprepared elf. As you thrust deeply into [hisher] [kVagDesc], [name] offers cute, encouraging moans, wordlessly egging you on.", parse);
-				Text.Newline();
+				Text.Add("Well, since [heshe] is asking so nicely...", parse);
+				Text.NL();
+				Text.Add("You shuffle around, letting your mouth hover a mere finger's width from [name]'s wet slit as you make yourself comfortable. Your hot breath near [hisher] most private parts gives the elf a glimmer of what is to come, and [heshe] shivers in anticipation. A drop of saliva connects your [tongueDesc], extending curiously from your open mouth, with [hisher] [kVagDesc].", parse);
+				Text.NL();
+				Text.Add("[name] whimpers quietly as you place a kiss on [hisher] exposed nether lips; the first of many to come. [name]'s sweet taste teases your tastebuds, as if imploring you to dig in, to allow your [tongueDesc] to ravage and penetrate the innocent elf to [hisher] very core. The elf in question doesn't seem to mind, [hisher] whimper turning to a moan as your second kiss lingers on [hisher] [kVagDesc], your [tongueDesc] teasing the entrance.", parse);
+				Text.NL();
+				Text.Add("Leaning back, you admire [name]'s exposed pink flower, gently spread by your fingers. The opening of [hisher] passage is glistening wetly, eagerly awaiting your probing tongue. You give [himher] another long lick, your nose bumping up against the elf's sensitive [kClitDesc].", parse);
+				Text.NL();
+				Text.Add("<i>“Mm... [playername]...”</i> [name] sighs contentedly, one hand idly caressing [hisher] [kBreastDesc].", parse);
+				Text.NL();
+				Text.Add("Done with foreplay, you let your [tongueDesc] plunge into [name], eliciting a loud yelp from the unprepared elf. As you thrust deeply into [hisher] [kVagDesc], [name] offers cute, encouraging moans, wordlessly egging you on.", parse);
+				Text.NL();
 				if(player.Mouth().tongueLength.Get() > 15) {
-					Text.AddOutput("Your [tongueDesc] was made for this sort of thing. The sheer length of your prehensile appendage allows you to penetrate as deep as any cock, violating [hisher] most private and sacred shrine.", parse);
-					Text.Newline();
-					Text.AddOutput("[name] is constantly gasping for air, getting way more than [heshe] bargained for. [HisHer] eyelids flutter rapidly, gaze clouded with pleasure.", parse);
+					Text.Add("Your [tongueDesc] was made for this sort of thing. The sheer length of your prehensile appendage allows you to penetrate as deep as any cock, violating [hisher] most private and sacred shrine.", parse);
+					Text.NL();
+					Text.Add("[name] is constantly gasping for air, getting way more than [heshe] bargained for. [HisHer] eyelids flutter rapidly, gaze clouded with pleasure.", parse);
 				}
 				else
 				{
-					Text.AddOutput("Lapping away at the buffet laid out before you, you allow your [tongueDesc] to play across the lips of [hisher] labia, and taste the deeper reaches of [hisher] folds.", parse);
+					Text.Add("Lapping away at the buffet laid out before you, you allow your [tongueDesc] to play across the lips of [hisher] labia, and taste the deeper reaches of [hisher] folds.", parse);
 				}
-				Text.Newline();
-				Text.AddOutput("[name] cannot take your ministrations for long, [hisher] legs twitching slightly as [heshe] lets [himher]self be overcome by lust. The elf cries out, [hisher] [kVagDesc] clamping down tight around your [tongueDesc], as wave after wave of [hisher] orgasm rolls over you. Your taste buds are assaulted by [hisher] sweet overflowing juices, the excess dripping down your chin.", parse);
-				Text.Newline();
-				Text.AddOutput("Licking your lips, you withdraw from the trembling elf, a satisfied smirk on your face.", parse);
-				Text.Newline();
+				Text.NL();
+				Text.Add("[name] cannot take your ministrations for long, [hisher] legs twitching slightly as [heshe] lets [himher]self be overcome by lust. The elf cries out, [hisher] [kVagDesc] clamping down tight around your [tongueDesc], as wave after wave of [hisher] orgasm rolls over you. Your taste buds are assaulted by [hisher] sweet overflowing juices, the excess dripping down your chin.", parse);
+				Text.NL();
+				Text.Add("Licking your lips, you withdraw from the trembling elf, a satisfied smirk on your face.", parse);
+				Text.NL();
 				
 				var cum = kiakai.OrgasmCum();
 				
@@ -3208,119 +3217,120 @@ Scenes.Kiakai.PleasureElf = function() {
 			tooltip : Text.Parse("Pleasure [himher] orally.", parse)
 		});
 	}
+	Text.Flush();
 	
 	//[Ass][Denial]
 	options.push({ nameStr : "Ass",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("Touch? You have some much more interesting ideas in mind. You push [name] down on [hisher] back, grabbing the elf by [hisher] knees, and pushing [hisher] legs up toward [hisher] head. Sweetly, you ask [himher] to hold them for you, and not move from that position. The elf complies, blushing brightly at [hisher] compromising position.", parse);
-			Text.Newline();
-			Text.AddOutput("Back arched awkwardly, [name]'s legs tremble slightly from the strain, [hisher] butt thrust into the air, cheeks spread wide. Taking pity on [himher], you move in close, allowing [himher] to rest [hisher] lower back against your abdomen.", parse);
-			Text.Newline();
-			Text.AddOutput("Sighing in relief, [name] puts [hisher] weight on you", parse);
+			Text.Add("Touch? You have some much more interesting ideas in mind. You push [name] down on [hisher] back, grabbing the elf by [hisher] knees, and pushing [hisher] legs up toward [hisher] head. Sweetly, you ask [himher] to hold them for you, and not move from that position. The elf complies, blushing brightly at [hisher] compromising position.", parse);
+			Text.NL();
+			Text.Add("Back arched awkwardly, [name]'s legs tremble slightly from the strain, [hisher] butt thrust into the air, cheeks spread wide. Taking pity on [himher], you move in close, allowing [himher] to rest [hisher] lower back against your abdomen.", parse);
+			Text.NL();
+			Text.Add("Sighing in relief, [name] puts [hisher] weight on you", parse);
 			if(player.FirstCock())
-				Text.AddOutput(", blushing slightly as [heshe] feels your [multiCockDesc] push against [hisher] back", parse);
-			Text.AddOutput(". [HisHer] expression turns confused, then slightly worried, as you begin to suck sensually on each of your fingers, making sure that [heshe] sees it.", parse);
-			Text.Newline();
+				Text.Add(", blushing slightly as [heshe] feels your [multiCockDesc] push against [hisher] back", parse);
+			Text.Add(". [HisHer] expression turns confused, then slightly worried, as you begin to suck sensually on each of your fingers, making sure that [heshe] sees it.", parse);
+			Text.NL();
 			
 			if(kiakai.flags["AnalExp"] < 5) {
-				Text.AddOutput("<i>“W-what are you doing, [playername]?”</i> [name] looks at you, bewildered. You smile mischievously, letting your lubricated fingers prod at [hisher] [kAnusDesc]. What does [heshe] <i>think</i> you are doing?", parse);
-				Text.Newline();
-				Text.AddOutput("Understanding and fear dawn slowly on the elf. <i>“B-but... you cannot!”</i> You certainly can.", parse);
+				Text.Add("<i>“W-what are you doing, [playername]?”</i> [name] looks at you, bewildered. You smile mischievously, letting your lubricated fingers prod at [hisher] [kAnusDesc]. What does [heshe] <i>think</i> you are doing?", parse);
+				Text.NL();
+				Text.Add("Understanding and fear dawn slowly on the elf. <i>“B-but... you cannot!”</i> You certainly can.", parse);
 			}
 			else if(kiakai.flags["AnalExp"] < 10) {
-				Text.AddOutput("<i>“P-please, [playername],”</i> [name] pleads, begging you to reconsider as you eye [hisher] [kAnusDesc], flexing your fingers experimentally. No matter what the elf says, you notice that [heshe] doesn't resist you in the slightest, even going as far as to take a firmer grip of [hisher] calves, spreading [hisher] cheeks slightly wider.", parse);
+				Text.Add("<i>“P-please, [playername],”</i> [name] pleads, begging you to reconsider as you eye [hisher] [kAnusDesc], flexing your fingers experimentally. No matter what the elf says, you notice that [heshe] doesn't resist you in the slightest, even going as far as to take a firmer grip of [hisher] calves, spreading [hisher] cheeks slightly wider.", parse);
 			}
 			else if(kiakai.flags["AnalExp"] < 20) {
-				Text.AddOutput("<i>“O-okay,”</i> [name] mumbles nervously, watching your preparations with conflicting emotions playing out on [hisher] face. When you experimentally prod at [hisher] [kAnusDesc], the elf blushes, but parts [hisher] legs slightly more, allowing you easier access.", parse);
+				Text.Add("<i>“O-okay,”</i> [name] mumbles nervously, watching your preparations with conflicting emotions playing out on [hisher] face. When you experimentally prod at [hisher] [kAnusDesc], the elf blushes, but parts [hisher] legs slightly more, allowing you easier access.", parse);
 			}
 			else { // > 20
-				Text.AddOutput("<i>“M-make me feel good,”</i> [name] begs you, willingly spreading [hisher] legs farther apart to present you with [hisher] [kAnusDesc]. Not to disappoint, you rub your fingers against [hisher] eager pucker, teasing and spreading it. The excited elf's breath grows faster in anticipation, and [heshe] all but begs you to penetrate [himher].", parse);
+				Text.Add("<i>“M-make me feel good,”</i> [name] begs you, willingly spreading [hisher] legs farther apart to present you with [hisher] [kAnusDesc]. Not to disappoint, you rub your fingers against [hisher] eager pucker, teasing and spreading it. The excited elf's breath grows faster in anticipation, and [heshe] all but begs you to penetrate [himher].", parse);
 			}
-			Text.Newline();
-			Text.AddOutput("[name] cries out as you push first one, then two fingers into [hisher] exposed [kAnusDesc]. You begin to pump your soaked digits in and out of [himher], adding a third finger once you have [himher] loosened enough.", parse);
-			Text.Newline();
+			Text.NL();
+			Text.Add("[name] cries out as you push first one, then two fingers into [hisher] exposed [kAnusDesc]. You begin to pump your soaked digits in and out of [himher], adding a third finger once you have [himher] loosened enough.", parse);
+			Text.NL();
 			
 			if(kiakai.FirstCock()) {
 				parse = Text.ParserPlural(parse, kiakai.NumCocks() > 1);
 				
-				Text.AddOutput("While you let your fingers work away at the elf's once-tight backdoor, your other hand prods and teases [name]'s [kMultiCockDesc]. The member[s] bob[notS] and twitch[notEs] at your rapid thrusts, bouncing against your hovering hand occasionally, hot to the touch.", parse);
-				Text.Newline();
-				Text.AddOutput("[name], by this point, is moaning deliriously, whether for you to stop or to ream [himher] harder, it's a bit difficult to tell. Somehow, you discern from [hisher] ramblings that [heshe] wants you to pay some attention to [hisher] [kMultiCockDesc] too.", parse);
-				Text.Newline();
-				Text.AddOutput("Hmm... why not. [HeShe] is in such a good position for it too... With your knees and abdomen, you nudge [name]'s legs even farther back, conveniently positioning the elf's cock[s] right over [hisher] panting mouth.", parse);
-				Text.Newline();
+				Text.Add("While you let your fingers work away at the elf's once-tight backdoor, your other hand prods and teases [name]'s [kMultiCockDesc]. The member[s] bob[notS] and twitch[notEs] at your rapid thrusts, bouncing against your hovering hand occasionally, hot to the touch.", parse);
+				Text.NL();
+				Text.Add("[name], by this point, is moaning deliriously, whether for you to stop or to ream [himher] harder, it's a bit difficult to tell. Somehow, you discern from [hisher] ramblings that [heshe] wants you to pay some attention to [hisher] [kMultiCockDesc] too.", parse);
+				Text.NL();
+				Text.Add("Hmm... why not. [HeShe] is in such a good position for it too... With your knees and abdomen, you nudge [name]'s legs even farther back, conveniently positioning the elf's cock[s] right over [hisher] panting mouth.", parse);
+				Text.NL();
 				if(kiakai.FirstCock().length.Get() > 25) {
-					Text.AddOutput("Amused, you watch the conflicting emotions flitting across [name]'s flushed face. Coyly, you suggest that perhaps [heshe] should put that mouth of [hishers] to use instead of complaining about it.", parse);
-					Text.Newline();
+					Text.Add("Amused, you watch the conflicting emotions flitting across [name]'s flushed face. Coyly, you suggest that perhaps [heshe] should put that mouth of [hishers] to use instead of complaining about it.", parse);
+					Text.NL();
 					if(kiakai.flags["Sexed"] < 20)
-						Text.AddOutput("Too flustered to even speak, [name] avidly shakes [hisher] head, denying that [heshe] would even consider something like that. Chuckling, you return your attention to thrusting your fingers into [hisher] ass, [name]'s [kMultiCockDesc] occassionally rubbing against the bewildered elf's lips or nose, leaving sticky trails of precum wherever [itThey] make contact.", parse);
+						Text.Add("Too flustered to even speak, [name] avidly shakes [hisher] head, denying that [heshe] would even consider something like that. Chuckling, you return your attention to thrusting your fingers into [hisher] ass, [name]'s [kMultiCockDesc] occassionally rubbing against the bewildered elf's lips or nose, leaving sticky trails of precum wherever [itThey] make contact.", parse);
 					else {
-						Text.AddOutput("As if [heshe] was only waiting for your permission, [name] starts to eagerly lick and suck at [hisher] own cock, rocking [hisher] hips slightly to give [himher]self a blowjob. Returning your attention to the elf's [kAnusDesc], you occasionally give the underside of [hisher] [kMultiCockDesc] a loving caress, urging [himher] on with soft words.", parse);
-						Text.Newline();
-						Text.AddOutput("Not that the horny elf seems to need much encouragement. [HeShe] has a good length of [hisher] member in [hisher] mouth, awkwardly bobbing [hisher] head despite [hisher] strange position. Occasionally, [heshe] comes up for air, gasping before returning to [hisher] [kCockDesc] with renewed fervor.", parse);
+						Text.Add("As if [heshe] was only waiting for your permission, [name] starts to eagerly lick and suck at [hisher] own cock, rocking [hisher] hips slightly to give [himher]self a blowjob. Returning your attention to the elf's [kAnusDesc], you occasionally give the underside of [hisher] [kMultiCockDesc] a loving caress, urging [himher] on with soft words.", parse);
+						Text.NL();
+						Text.Add("Not that the horny elf seems to need much encouragement. [HeShe] has a good length of [hisher] member in [hisher] mouth, awkwardly bobbing [hisher] head despite [hisher] strange position. Occasionally, [heshe] comes up for air, gasping before returning to [hisher] [kCockDesc] with renewed fervor.", parse);
 					}
 				}
 				else {
-					Text.AddOutput("With your free hand, you start stroking [name]'s [kMultiCockDesc] rapidly. The elf mumbles a moaning thanks, before tumbling back into oblivion, [hisher] loins aflame with your combined assault.", parse);
+					Text.Add("With your free hand, you start stroking [name]'s [kMultiCockDesc] rapidly. The elf mumbles a moaning thanks, before tumbling back into oblivion, [hisher] loins aflame with your combined assault.", parse);
 				}
-				Text.Newline();
-				Text.AddOutput("Before long, you notice an erratic twitching in [name]'s [kMultiCockDesc]. Acting quickly, you slam your fingers into [hisher] [kAnusDesc], pushing them up to the knuckle. Each thrust jabs directly at the poor elf's prostate, eliciting cry after cry of intense pleasure.", parse);
-				Text.Newline();
-				Text.AddOutput("Your incessant finger-fucking quickly becomes too much for [name] to handle, and [heshe] bucks [hisher] hips, cock[s] firing at full capacity right into [hisher] open mouth.", parse);
-				Text.Newline();
+				Text.NL();
+				Text.Add("Before long, you notice an erratic twitching in [name]'s [kMultiCockDesc]. Acting quickly, you slam your fingers into [hisher] [kAnusDesc], pushing them up to the knuckle. Each thrust jabs directly at the poor elf's prostate, eliciting cry after cry of intense pleasure.", parse);
+				Text.NL();
+				Text.Add("Your incessant finger-fucking quickly becomes too much for [name] to handle, and [heshe] bucks [hisher] hips, cock[s] firing at full capacity right into [hisher] open mouth.", parse);
+				Text.NL();
 				
 				var cum = kiakai.OrgasmCum();
 				
 				if(cum > 3)
-					Text.AddOutput("The elf has way more cum stored up than [hisher] lithe frame has a right to, and before long not only [hisher] mouth, but also [hisher] face, [kHairDesc] and [kBreastDesc] are completely drenched in the stuff. [HeShe] gulps down as much of it as [heshe] can, if nothing else to clear [hisher] clogged windpipe.", parse);
+					Text.Add("The elf has way more cum stored up than [hisher] lithe frame has a right to, and before long not only [hisher] mouth, but also [hisher] face, [kHairDesc] and [kBreastDesc] are completely drenched in the stuff. [HeShe] gulps down as much of it as [heshe] can, if nothing else to clear [hisher] clogged windpipe.", parse);
 				else
-					Text.AddOutput("Streaks of white from the elf's twitching member[s] land on [hisher] cheeks, in [hisher] [kHairDesc] and on [hisher] lolling [kTongueDesc]. Dazed, [name] laps up [hisher] ejaculate, cleaning [himher]self up.", parse);
+					Text.Add("Streaks of white from the elf's twitching member[s] land on [hisher] cheeks, in [hisher] [kHairDesc] and on [hisher] lolling [kTongueDesc]. Dazed, [name] laps up [hisher] ejaculate, cleaning [himher]self up.", parse);
 			}
 			else if(kiakai.FirstVag()) {
-				Text.AddOutput("As your pumping fingers deal with [name]'s once-tight backdoor, you let your other hand play with [hisher] wet [kVagDesc]. The elf's pliant folds part easily, [hisher] passage already dripping with juices from your anal teasing.", parse);
-				Text.Newline();
-				Text.AddOutput("[name], by this point, is moaning deliriously, whether for you to stop or to ream [himher] harder, it's a bit difficult to tell. Somehow, you discern from [hisher] ramblings that [heshe] wants you to pay some attention to [hisher] clit too.", parse);
-				Text.Newline();
+				Text.Add("As your pumping fingers deal with [name]'s once-tight backdoor, you let your other hand play with [hisher] wet [kVagDesc]. The elf's pliant folds part easily, [hisher] passage already dripping with juices from your anal teasing.", parse);
+				Text.NL();
+				Text.Add("[name], by this point, is moaning deliriously, whether for you to stop or to ream [himher] harder, it's a bit difficult to tell. Somehow, you discern from [hisher] ramblings that [heshe] wants you to pay some attention to [hisher] clit too.", parse);
+				Text.NL();
 				if(kiakai.FirstVag().clitLength.Get() > 10) {
-					Text.AddOutput("Rather than a regular clit, the elf has a large, almost cock-like spear crowning [hisher] parted labia. Stiff and trembling with need, the shaft twitches under your light touch, every bit as sensitive as ever.", parse);
-					Text.Newline();
-					Text.AddOutput("Its sheer size allows you to gently jerk the giant clit, as if it were a dick. The stimulation is too much for [name], who cries out in [hisher] first climax not a minute after you begin your combined assault, [hisher] cock-like clit twitching helplessly in your hand.", parse);
-					Text.Newline();
+					Text.Add("Rather than a regular clit, the elf has a large, almost cock-like spear crowning [hisher] parted labia. Stiff and trembling with need, the shaft twitches under your light touch, every bit as sensitive as ever.", parse);
+					Text.NL();
+					Text.Add("Its sheer size allows you to gently jerk the giant clit, as if it were a dick. The stimulation is too much for [name], who cries out in [hisher] first climax not a minute after you begin your combined assault, [hisher] cock-like clit twitching helplessly in your hand.", parse);
+					Text.NL();
 					
 					var cum = kiakai.OrgasmCum();
 					
-					Text.AddOutput("Relenting, you allow the elf time to recover, releasing [hisher] clit until [hisher] trembling subsides. Your other hand, however, doesn't let up its rhythmic reaming of [name]'s [kAnusDesc].", parse);
-					Text.Newline();
-					Text.AddOutput("When you judge that [heshe] has had enough time to recover, you once more grasp [hisher] absurdly large clit, preparing to unleash another barrage of pleasure. [HeShe] <i>did</i> ask for it, after all. The appendage seems to be incredibly sensitive, your every touch sending shocks up the elf's spine. In the span of fifteen minutes, you make the elf cum no less than three more times.", parse);
+					Text.Add("Relenting, you allow the elf time to recover, releasing [hisher] clit until [hisher] trembling subsides. Your other hand, however, doesn't let up its rhythmic reaming of [name]'s [kAnusDesc].", parse);
+					Text.NL();
+					Text.Add("When you judge that [heshe] has had enough time to recover, you once more grasp [hisher] absurdly large clit, preparing to unleash another barrage of pleasure. [HeShe] <i>did</i> ask for it, after all. The appendage seems to be incredibly sensitive, your every touch sending shocks up the elf's spine. In the span of fifteen minutes, you make the elf cum no less than three more times.", parse);
 				}
 				else {
 					parse["tinyOversized"] = kiakai.FirstVag().clitLength.Get() > 2 ? "oversized" : "tiny";
-					Text.AddOutput("Grinning, you give the [tinyOversized] button a gentle flick with your finger, enticing a shocked gasp from the elf. Seeing the obvious effect on [himher], you repeat the action, ignoring [name]'s muffled protests.", parse);
-					Text.Newline();
-					Text.AddOutput("[HisHer] defenses quickly erode under your merciless dual-pronged assault, and [heshe] crosses [hisher] legs in a futile attempt to keep you at bay. The plan backfires, as the motion grinds your fingers deeper into [hisher] female parts. [name] cries out and helplessly bucks [hisher] hips, riding out [hisher] climax.", parse);
-					Text.Newline();
+					Text.Add("Grinning, you give the [tinyOversized] button a gentle flick with your finger, enticing a shocked gasp from the elf. Seeing the obvious effect on [himher], you repeat the action, ignoring [name]'s muffled protests.", parse);
+					Text.NL();
+					Text.Add("[HisHer] defenses quickly erode under your merciless dual-pronged assault, and [heshe] crosses [hisher] legs in a futile attempt to keep you at bay. The plan backfires, as the motion grinds your fingers deeper into [hisher] female parts. [name] cries out and helplessly bucks [hisher] hips, riding out [hisher] climax.", parse);
+					Text.NL();
 					
 					var cum = kiakai.OrgasmCum();
 					
-					Text.AddOutput("You continue to rhythmically pump the elf's [kAnusDesc] all through [hisher] orgasm, but relent and allow [hisher] [kClitDesc] some time to recover. Once [hisher] squirming has lessened, you pry [hisher] legs apart again, sternly instructing the elf to let you lead. Blushing, [name] spreads [hisher] legs, allowing you full access.", parse);
-					Text.Newline();
-					Text.AddOutput("[HeShe] bites [hisher] lower lip in anticipation as you once again close in on [hisher] [kClitDesc], this time pinching it between your fingers.", parse);
+					Text.Add("You continue to rhythmically pump the elf's [kAnusDesc] all through [hisher] orgasm, but relent and allow [hisher] [kClitDesc] some time to recover. Once [hisher] squirming has lessened, you pry [hisher] legs apart again, sternly instructing the elf to let you lead. Blushing, [name] spreads [hisher] legs, allowing you full access.", parse);
+					Text.NL();
+					Text.Add("[HeShe] bites [hisher] lower lip in anticipation as you once again close in on [hisher] [kClitDesc], this time pinching it between your fingers.", parse);
 				}
-				Text.Newline();
+				Text.NL();
 				if(kiakai.flags["Sexed"] < 20)
-					Text.AddOutput("<i>“T-the pleasure, it is too much!”</i> [name] moans, [hisher] body obviously not used to such intense sensations.", parse);
+					Text.Add("<i>“T-the pleasure, it is too much!”</i> [name] moans, [hisher] body obviously not used to such intense sensations.", parse);
 				else
-					Text.AddOutput("<i>“M-more! Give me more, [playername]!”</i> the horny elf pants, begging you to continue, [hisher] desire not yet sated.", parse);
-				Text.Newline();
-				Text.AddOutput("Done with [hisher] clit, you move your attention to [name]'s [kVagDesc]. No further preparation is needed, as your fingers easily slip inside [hisher] folds, lubricated by the elf's own fluids. Eagerly you explore [hisher] sopping passage, coaxed on by [hisher] encouraging moans.", parse);
-				Text.Newline();
-				Text.AddOutput("After a while, you decide that you have sated the elf's feminine parts sufficiently, and return your focus to [hisher] [kAnusDesc]. Redoubling your efforts, it is only a matter of minutes before [name]'s confused sphincter convulses around your penetrating digits. The elf almost passes out as [hisher] anal orgasm shocks [himher] to [hisher] very core.", parse);
+					Text.Add("<i>“M-more! Give me more, [playername]!”</i> the horny elf pants, begging you to continue, [hisher] desire not yet sated.", parse);
+				Text.NL();
+				Text.Add("Done with [hisher] clit, you move your attention to [name]'s [kVagDesc]. No further preparation is needed, as your fingers easily slip inside [hisher] folds, lubricated by the elf's own fluids. Eagerly you explore [hisher] sopping passage, coaxed on by [hisher] encouraging moans.", parse);
+				Text.NL();
+				Text.Add("After a while, you decide that you have sated the elf's feminine parts sufficiently, and return your focus to [hisher] [kAnusDesc]. Redoubling your efforts, it is only a matter of minutes before [name]'s confused sphincter convulses around your penetrating digits. The elf almost passes out as [hisher] anal orgasm shocks [himher] to [hisher] very core.", parse);
 			}
 			
-			Text.Newline();
-			Text.AddOutput("You pull your fingers out of [name], slyly asking if [heshe] liked it. [name], not quite trusting [hisher] voice, blushes brightly, still flushed from [hisher] recent climax.", parse);
-			Text.Newline();
+			Text.NL();
+			Text.Add("You pull your fingers out of [name], slyly asking if [heshe] liked it. [name], not quite trusting [hisher] voice, blushes brightly, still flushed from [hisher] recent climax.", parse);
+			Text.NL();
 			
 			kiakai.flags["AnalExp"]++;
 			player.AddSexExp(2);
@@ -3335,36 +3345,36 @@ Scenes.Kiakai.PleasureElf = function() {
 		func : function() {
 			parse["kTargetDesc"] = kiakai.FirstCock() ? parse["kCockDesc"] : parse["kVagDesc"];
 			Text.Clear();
-			Text.AddOutput("You instruct the elf to lie down on [hisher] back and spread [hisher] legs for you. [name] eagerly complies, believing that you'll help with [hisher] itch. ", parse);
+			Text.Add("You instruct the elf to lie down on [hisher] back and spread [hisher] legs for you. [name] eagerly complies, believing that you'll help with [hisher] itch. ", parse);
 			if(kiakai.FirstCock())
-				Text.AddOutput("You trail one finger down the length of the elf's [kCockDesc], even placing a kiss on the [kCockTip]", parse);
+				Text.Add("You trail one finger down the length of the elf's [kMultiCockDesc], even placing a kiss on[oneof] [hisher] [kCockTip]", parse);
 			else if(kiakai.FirstVag())
-				Text.AddOutput("You trail one finger down the elf's tight slit, even placing a kiss on [hisher] [kClitDesc]", parse);
-			Text.AddOutput(", before shifting your attention to the rest of [hisher] body, intentionally avoiding the spot [name] wants you to touch the most.", parse);
-			Text.Newline();
-			Text.AddOutput("When the elf makes another attempt to deal with the problem by [himher]self, you grab hold of both of [hisher] hands, trapping them against [hisher] sides. Unimpeded, you continue your slow torture, licking and lapping at [name]'s crotch, close enough to feel the heat of [hisher] [kTargetDesc], but never quite touching it.", parse);
-			Text.Newline();
+				Text.Add("You trail one finger down the elf's tight slit, even placing a kiss on [hisher] [kClitDesc]", parse);
+			Text.Add(", before shifting your attention to the rest of [hisher] body, intentionally avoiding the spot [name] wants you to touch the most.", parse);
+			Text.NL();
+			Text.Add("When the elf makes another attempt to deal with the problem by [himher]self, you grab hold of both of [hisher] hands, trapping them against [hisher] sides. Unimpeded, you continue your slow torture, licking and lapping at [name]'s crotch, close enough to feel the heat of [hisher] [kTargetDesc], but never quite touching it.", parse);
+			Text.NL();
 			if(kiakai.FirstCock())
-				Text.AddOutput("The elf moans piteously, a drop of precum forming on the tip of [hisher] twitching member.", parse);
+				Text.Add("The elf moans piteously, a drop of precum forming on the tip of [hisher] twitching member.", parse);
 			else if(kiakai.FirstVag())
-				Text.AddOutput("The elf bites [hisher] lips, struggling to keep [himher]self from thrusting [hisher] moist crotch against your tantalizing [tongueDesc].", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“I-I cannot take it any longer!”</i> [name] cries out. Taking pity on [himher], you relinquish your grip on [hisher] arms, allowing the elf to take [himher]self the rest of the way. You lean back, thoroughly enjoying the sight of your horny companion fondling [himher]self.", parse);
-			Text.Newline();
+				Text.Add("The elf bites [hisher] lips, struggling to keep [himher]self from thrusting [hisher] moist crotch against your tantalizing [tongueDesc].", parse);
+			Text.NL();
+			Text.Add("<i>“I-I cannot take it any longer!”</i> [name] cries out. Taking pity on [himher], you relinquish your grip on [hisher] arms, allowing the elf to take [himher]self the rest of the way. You lean back, thoroughly enjoying the sight of your horny companion fondling [himher]self.", parse);
+			Text.NL();
 			if(kiakai.FirstCock()) {
-				Text.AddOutput("Grasping [hisher] [kCockDesc] in one hand, [name] begins to stroke [himher]self rapidly. [HisHer] other hand snakes down between [hisher] legs, ", parse);
+				Text.Add("Grasping [hisher] [kCockDesc] in one hand, [name] begins to stroke [himher]self rapidly. [HisHer] other hand snakes down between [hisher] legs, ", parse);
 				if(kiakai.FirstVag())
-					Text.AddOutput("finding [hisher] moist [kVagDesc].", parse);
+					Text.Add("finding [hisher] moist [kVagDesc].", parse);
 				else
-					Text.AddOutput("massaging [hisher] taint and probing [hisher] backdoor.", parse);
-				Text.AddOutput(" It's not long before the elf cries out in pleasure, [hisher] [kCockDesc] spraying [hisher] seed on the ground.", parse);
+					Text.Add("massaging [hisher] taint and probing [hisher] backdoor.", parse);
+				Text.Add(" It's not long before the elf cries out in pleasure, [hisher] [kCockDesc] spraying [hisher] seed on the ground.", parse);
 			}
 			else if(kiakai.FirstVag()) {
-				Text.AddOutput("Spreading [hisher] lower lips with one hand, [name] begins to finger [himher]self with the other, pushing [hisher] digits in up to the knuckles. Trembling slightly, [heshe] prods at [hisher] [kClitDesc] with [hisher] thumb, breathing heavily.", parse);
-				Text.Newline();
-				Text.AddOutput("It's not long before the elf cries out in pleasure, [hisher] [kVagDesc] twitching and squirting [hisher] juices on the ground.", parse);
+				Text.Add("Spreading [hisher] lower lips with one hand, [name] begins to finger [himher]self with the other, pushing [hisher] digits in up to the knuckles. Trembling slightly, [heshe] prods at [hisher] [kClitDesc] with [hisher] thumb, breathing heavily.", parse);
+				Text.NL();
+				Text.Add("It's not long before the elf cries out in pleasure, [hisher] [kVagDesc] twitching and squirting [hisher] juices on the ground.", parse);
 			}
-			Text.Newline();
+			Text.NL();
 			
 			player.AddSexExp(2);
 			kiakai.AddSexExp(2);
@@ -3389,7 +3399,8 @@ Scenes.Kiakai.PleasureElfEnd = function() {
 		HisHer       : kiakai.HisHer()
 	};
 	
-	Text.AddOutput("Completely sated, [name] collapses on [hisher] back, panting from the exertion. You allow [himher] a few minutes of rest before gathering up your gear.", parse);
+	Text.Add("Completely sated, [name] collapses on [hisher] back, panting from the exertion. You allow [himher] a few minutes of rest before gathering up your gear.", parse);
+	Text.Flush();
 	
 	player.AddLustFraction(0.2);
 	kiakai.AddLustFraction(-1);
@@ -3449,6 +3460,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 					
 	// TODO: Write more scenes
 	
+	Text.Flush();
 	//[Oral][69][Anal]
 	var options = new Array();
 	
@@ -3456,39 +3468,39 @@ Scenes.Kiakai.HealingAssertive = function() {
 		options.push({ nameStr : "Blowjob",
 			func : function() {
 				Text.Clear();
-				Text.AddOutput("In no uncertain terms, you tell the elf to give you a blowjob.", parse);
-				Text.Newline();
+				Text.Add("In no uncertain terms, you tell the elf to give you a blowjob.", parse);
+				Text.NL();
 				
 				parse["oneof"] = player.NumCocks() > 1 ? " one of" : "";
 				parse["s"] = player.NumCocks() > 1 ? "s" : "";
 				
 				if(kiakai.flags["Sexed"] < 3) {
-					Text.AddOutput("<i>“A-a blowjob?”</i> [name] looks at you, flustered and embarrassed.", parse);
-					Text.Newline();
-					Text.AddOutput("<i>“I want you-”</i> You point a finger at the elf, pressing your fingertip against [hisher] nose, <i>“-to suck my cock.”</i> You helpfully point out the appendage, as if [heshe] could miss it. <i>“Now get to it before I grow bored.”</i> You motion for the elf to begin.", parse);
-					Text.Newline();
-					Text.AddOutput("Uncertainly eyeing[oneof] your [multiCockDesc], [name] leans forward and gives it a tentative lick, placing a kiss on the crown. Sighing impatiently, you grasp the back of [hisher] head firmly, forcing the first few inches of your [cockDesc] into the protesting elf's hot mouth.", parse);
+					Text.Add("<i>“A-a blowjob?”</i> [name] looks at you, flustered and embarrassed.", parse);
+					Text.NL();
+					Text.Add("<i>“I want you-”</i> You point a finger at the elf, pressing your fingertip against [hisher] nose, <i>“-to suck my cock.”</i> You helpfully point out the appendage, as if [heshe] could miss it. <i>“Now get to it before I grow bored.”</i> You motion for the elf to begin.", parse);
+					Text.NL();
+					Text.Add("Uncertainly eyeing[oneof] your [multiCockDesc], [name] leans forward and gives it a tentative lick, placing a kiss on the crown. Sighing impatiently, you grasp the back of [hisher] head firmly, forcing the first few inches of your [cockDesc] into the protesting elf's hot mouth.", parse);
 				}
 				else if(kiakai.flags["Sexed"] < 10) {
-					Text.AddOutput("Nodding in comprehension, [name] swallows uncertainly. Grasping[oneof] your [multiCockDesc], the elf takes part of it into [hisher] mouth, lathering your length in saliva.", parse);
-					Text.Newline();
-					Text.AddOutput("Your praise [himher] for doing such a good job, caressing [hisher] hair before taking a firm grasp of the back of [hisher] head, preventing the elf from escaping. Looking slightly fearful, [heshe] accepts your touch, diligently sucking on the [cockTip] of your cock.", parse);
+					Text.Add("Nodding in comprehension, [name] swallows uncertainly. Grasping[oneof] your [multiCockDesc], the elf takes part of it into [hisher] mouth, lathering your length in saliva.", parse);
+					Text.NL();
+					Text.Add("Your praise [himher] for doing such a good job, caressing [hisher] hair before taking a firm grasp of the back of [hisher] head, preventing the elf from escaping. Looking slightly fearful, [heshe] accepts your touch, diligently sucking on the [cockTip] of your cock.", parse);
 				}
 				else {
-					Text.AddOutput("Without hesitation, [name] obeys you. Eagerly wrapping [hisher] lips around[oneof] your [cockTip][s], the elf wastes no time in starting to move up and down your length, lathering it in [hisher] slick saliva.", parse);
-					Text.Newline();
-					Text.AddOutput("[HeShe] has become such a good cocksucker now that [heshe] has lost [hisher] inhibitions, something you are sure to remind [himher] of. Rather than blushing in shame, you detect a small hint of pride in [name]'s eyes as [heshe] gazes up at you through [hisher] thick lashes.", parse);
-					Text.Newline();
-					Text.AddOutput("Time you took a more active part though. Grasping the back of [hisher] head with both hands, you push more of your [cockDesc] into [himher], glorying in [hisher] magnificent tightness.", parse);
+					Text.Add("Without hesitation, [name] obeys you. Eagerly wrapping [hisher] lips around[oneof] your [cockTip][s], the elf wastes no time in starting to move up and down your length, lathering it in [hisher] slick saliva.", parse);
+					Text.NL();
+					Text.Add("[HeShe] has become such a good cocksucker now that [heshe] has lost [hisher] inhibitions, something you are sure to remind [himher] of. Rather than blushing in shame, you detect a small hint of pride in [name]'s eyes as [heshe] gazes up at you through [hisher] thick lashes.", parse);
+					Text.NL();
+					Text.Add("Time you took a more active part though. Grasping the back of [hisher] head with both hands, you push more of your [cockDesc] into [himher], glorying in [hisher] magnificent tightness.", parse);
 				}
-				Text.Newline();
-				Text.AddOutput("Holding [hisher] head, you guide the elf up and down your member, slowly at first, but gradually increasing in speed. [name]'s [kTongueDesc] caresses the veins of your [cockDesc], trying to keep up with your rapid pace.", parse);
+				Text.NL();
+				Text.Add("Holding [hisher] head, you guide the elf up and down your member, slowly at first, but gradually increasing in speed. [name]'s [kTongueDesc] caresses the veins of your [cockDesc], trying to keep up with your rapid pace.", parse);
 				if(player.NumCocks() > 1) {
 					parse["s"] = player.NumCocks() > 2 ? "s" : "";
 					parse["notS"] = player.NumCocks() > 2 ? "" : "s";
-					Text.AddOutput(" Your other [cockDesc][s] grind[notS] against [name]'s face, rubbing against [hisher] forehead and staining [hisher] hair with sticky precum.", parse);
+					Text.Add(" Your other [cockDesc][s] grind[notS] against [name]'s face, rubbing against [hisher] forehead and staining [hisher] hair with sticky precum.", parse);
 				}
-				Text.Newline();
+				Text.NL();
 				
 				var biggestCock = player.BiggestCock();
 				var biggestCockLen = biggestCock.length.Get();
@@ -3498,112 +3510,112 @@ Scenes.Kiakai.HealingAssertive = function() {
 				scenes.AddEnc(function() {
 					parse["cockDesc"] = function() { return biggestCock.Short(); };
 					
-					Text.AddOutput("[name] has some trouble getting [hisher] breath, your [cockDesc] stuffing [hisher] mouth to the brim, the [cockTip] prodding at the back of [hisher] throat. The elf tries to push [himher]self off your cock, but you grip [himher] firmly, restricting [hisher] movements.", parse);
-					Text.Newline();
-					Text.AddOutput("At first furtively, but rapidly growing more desperate, [name] tries to escape your iron grasp. Relenting slightly, you pull your [cockDesc] out far enough to allow [himher] to breathe through [hisher] nose. [name] gazes up at you with gratitude, but [hisher] relief is short lived, as you once again feed your length down [hisher] tight esophagus.", parse);
-					Text.Newline();
-					Text.AddOutput("[HeShe] looks up at you pleadingly, but rather than easing up, you push a few more inches in, blocking off [hisher] breathing once more. With short, deep thrusts, you enjoy the feeling of the elf's throat constricting around your [cockDesc], withdrawing slightly now and then to allow [himher] some breathing room.", parse);
-					Text.Newline();
+					Text.Add("[name] has some trouble getting [hisher] breath, your [cockDesc] stuffing [hisher] mouth to the brim, the [cockTip] prodding at the back of [hisher] throat. The elf tries to push [himher]self off your cock, but you grip [himher] firmly, restricting [hisher] movements.", parse);
+					Text.NL();
+					Text.Add("At first furtively, but rapidly growing more desperate, [name] tries to escape your iron grasp. Relenting slightly, you pull your [cockDesc] out far enough to allow [himher] to breathe through [hisher] nose. [name] gazes up at you with gratitude, but [hisher] relief is short lived, as you once again feed your length down [hisher] tight esophagus.", parse);
+					Text.NL();
+					Text.Add("[HeShe] looks up at you pleadingly, but rather than easing up, you push a few more inches in, blocking off [hisher] breathing once more. With short, deep thrusts, you enjoy the feeling of the elf's throat constricting around your [cockDesc], withdrawing slightly now and then to allow [himher] some breathing room.", parse);
+					Text.NL();
 					if(kiakai.flags["Sexed"] > 20)
-						Text.AddOutput("Drawing from previous experiences, [name] soon has a rhythm going, [hisher] practiced throat quickly growing accustomed to your deep fucking. [HeShe] even seems to be getting some enjoyment out of it, a dreamy look on [hisher] face as the elf hums lightly, the vibrations of [hisher] tight cocksleeve increasing your pleasure.", parse);
+						Text.Add("Drawing from previous experiences, [name] soon has a rhythm going, [hisher] practiced throat quickly growing accustomed to your deep fucking. [HeShe] even seems to be getting some enjoyment out of it, a dreamy look on [hisher] face as the elf hums lightly, the vibrations of [hisher] tight cocksleeve increasing your pleasure.", parse);
 					else
-						Text.AddOutput("Not used to such rough treatment - yet - the elf's eyes tear up from pain and lack of oxygen. Still, [hisher] convulsing throat is working wonders on your [cockDesc], stroking it rapidly while fruitlessly trying to expel the invading member.", parse);
-					Text.Newline();
-					Text.AddOutput("Feeling your orgasm approaching quickly, you pull out until only your [cockTip] is in [name]'s mouth. Coughing and wheezing, the elf tries to get [hisher] breath back before you roughly shove yourself back in, ", parse);
+						Text.Add("Not used to such rough treatment - yet - the elf's eyes tear up from pain and lack of oxygen. Still, [hisher] convulsing throat is working wonders on your [cockDesc], stroking it rapidly while fruitlessly trying to expel the invading member.", parse);
+					Text.NL();
+					Text.Add("Feeling your orgasm approaching quickly, you pull out until only your [cockTip] is in [name]'s mouth. Coughing and wheezing, the elf tries to get [hisher] breath back before you roughly shove yourself back in, ", parse);
 					if(biggestCockLen - kiakai.flags["Sexed"] < 20)
-						Text.AddOutput("pushing your [cockDesc] in to the root. The hot kiss on your groin only serves to egg you on.", parse);
+						Text.Add("pushing your [cockDesc] in to the root. The hot kiss on your groin only serves to egg you on.", parse);
 					else
-						Text.AddOutput("pushing as much of your [cockDesc] into [himher] as possible. It will take a lot of training until [heshe] is able to take all of your length, though.", parse);
-					Text.Newline();
+						Text.Add("pushing as much of your [cockDesc] into [himher] as possible. It will take a lot of training until [heshe] is able to take all of your length, though.", parse);
+					Text.NL();
 					
 					parse["cumOrg"] = player.HasBalls() ? "your " + player.BallsDesc() : "your cum-producing organs";
 					
-					Text.AddOutput("Rutting happily, you hug [name]'s face to your crotch, groaning in pleasure as [cumOrg] deposit their load down the elf's throat. Helpless to do anything, [heshe] tries to ride it out, gulping and swallowing your sticky cum as quickly as [heshe] is able.", parse);
+					Text.Add("Rutting happily, you hug [name]'s face to your crotch, groaning in pleasure as [cumOrg] deposit their load down the elf's throat. Helpless to do anything, [heshe] tries to ride it out, gulping and swallowing your sticky cum as quickly as [heshe] is able.", parse);
 					if(player.CumOutput() > 3)
-						Text.AddOutput(" Your flood, once released, doesn't let up. When you finally finish, [name]'s stomach is visibly distended.", parse);
+						Text.Add(" Your flood, once released, doesn't let up. When you finally finish, [name]'s stomach is visibly distended.", parse);
 					if(player.NumCocks() > 1) {
 						parse["s"]        = player.NumCocks() > 2 ? "s" : "";
 						parse["notS"]     = player.NumCocks() > 2 ? "" : "s";
 						parse["itsTheir"] = player.NumCocks() > 2 ? "their" : "its";
-						Text.AddOutput(" Joining [itsTheir] sibling, your other [cockDesc][s] erupt[notS], covering [name] in long white strands.", parse);
+						Text.Add(" Joining [itsTheir] sibling, your other [cockDesc][s] erupt[notS], covering [name] in long white strands.", parse);
 					}
-					Text.Newline();
-					Text.AddOutput("With a drawn-out sloppy sound, your pull your softening [cockDesc] from the elf's throat. Once [heshe] has finished coughing, a dribble of cum running down [hisher] chin, you present [himher] with your sloppy [cockDesc].", parse);
-					Text.Newline();
-					Text.AddOutput("<i>“Clean it up, like a good slut,”</i> you order [himher] imperiously, smiling as the elf obediently complies.", parse);
+					Text.NL();
+					Text.Add("With a drawn-out sloppy sound, your pull your softening [cockDesc] from the elf's throat. Once [heshe] has finished coughing, a dribble of cum running down [hisher] chin, you present [himher] with your sloppy [cockDesc].", parse);
+					Text.NL();
+					Text.Add("<i>“Clean it up, like a good slut,”</i> you order [himher] imperiously, smiling as the elf obediently complies.", parse);
 				}, 1.0, function() { return biggestCockLen > 20; });
 				// FACEFUCK
 				scenes.AddEnc(function() {
-					Text.AddOutput("Seeking to get a better angle of penetration, you adjust your lower body, twining your fingers into [name]'s hair, trapping [himher] in place. Intending to get your pleasure out of the elf, and to get it rough, you start thrusting in and out of [hisher] mouth, ignoring [hisher] whimpering complaints.", parse);
-					Text.Newline();
-					Text.AddOutput("You set a rapid pace, abusing the poor elf's hole. ", parse);
+					Text.Add("Seeking to get a better angle of penetration, you adjust your lower body, twining your fingers into [name]'s hair, trapping [himher] in place. Intending to get your pleasure out of the elf, and to get it rough, you start thrusting in and out of [hisher] mouth, ignoring [hisher] whimpering complaints.", parse);
+					Text.NL();
+					Text.Add("You set a rapid pace, abusing the poor elf's hole. ", parse);
 					if(biggestCockLen > 30)
-						Text.AddOutput("Due to the sheer size of your [cockDesc], you are unable to use its full length. Alternating between roughly deepthroating the elf and repeatedly forcing your way in and out of [hisher] throat, you make the most of it anyway.", parse);
+						Text.Add("Due to the sheer size of your [cockDesc], you are unable to use its full length. Alternating between roughly deepthroating the elf and repeatedly forcing your way in and out of [hisher] throat, you make the most of it anyway.", parse);
 					else if(biggestCockLen > 13)
-						Text.AddOutput("Your cock is just long enough to force its way into the elf's throat with each forceful thrust, leaving the elf gasping for air as you pummel [hisher] mouth.", parse);
+						Text.Add("Your cock is just long enough to force its way into the elf's throat with each forceful thrust, leaving the elf gasping for air as you pummel [hisher] mouth.", parse);
 					else
-						Text.AddOutput("Roughly smashing your crotch against [hisher] lips, you pummel the elf, making sure to familiarize [himher] with every inch of your [cockDesc].", parse);
-					Text.Newline();
-					Text.AddOutput("Hardly given time to breathe, [name]'s muffled moans grow more ragged. Not showing any signs of letting up, you continue your face-fucking for several minutes. In a small act of mercy, you pull out in order to let the elf recover.", parse);
-					Text.Newline();
+						Text.Add("Roughly smashing your crotch against [hisher] lips, you pummel the elf, making sure to familiarize [himher] with every inch of your [cockDesc].", parse);
+					Text.NL();
+					Text.Add("Hardly given time to breathe, [name]'s muffled moans grow more ragged. Not showing any signs of letting up, you continue your face-fucking for several minutes. In a small act of mercy, you pull out in order to let the elf recover.", parse);
+					Text.NL();
 					if(kiakai.flags["Sexed"] > 30)
-						Text.AddOutput("<i>“W-why did you stop?”</i> [name] coughs, almost sounding a bit disappointed. You tell [himher] not to worry, there is more where that came from. The elf is wearing an almost hungry expression as you once more guide your [cockDesc] in between [hisher] waiting lips.", parse);
+						Text.Add("<i>“W-why did you stop?”</i> [name] coughs, almost sounding a bit disappointed. You tell [himher] not to worry, there is more where that came from. The elf is wearing an almost hungry expression as you once more guide your [cockDesc] in between [hisher] waiting lips.", parse);
 					else
-						Text.AddOutput("<i>“Y-you are way too rough, [playername],”</i> [name] splutters, coughing up precum. You chide [himher] for being such a baby - a good healer should be able to take this much at least, right? Cutting off any further complaints, you shove your [cockDesc] back inside the elf.", parse);
-					Text.Newline();
-					Text.AddOutput("Getting back to business, you resume your rough fucking. After about ten minutes, you can feel your orgasm closing in.", parse);
-					Text.Newline();
+						Text.Add("<i>“Y-you are way too rough, [playername],”</i> [name] splutters, coughing up precum. You chide [himher] for being such a baby - a good healer should be able to take this much at least, right? Cutting off any further complaints, you shove your [cockDesc] back inside the elf.", parse);
+					Text.NL();
+					Text.Add("Getting back to business, you resume your rough fucking. After about ten minutes, you can feel your orgasm closing in.", parse);
+					Text.NL();
 					
 					var cum = player.OrgasmCum();
 					
 					var scenes = new EncounterTable();
 					scenes.AddEnc(function() {
-						Text.AddOutput("Deciding to push on and leave the elf with a surprise present, you continue thrusting your throbbing [cockDesc] into [hisher] mouth, hardly slowing down even as you begin to spill your seed inside [himher]. Part of your load seeps out of the corner of [name]'s mouth, dribbling down [hisher] chin.", parse);
+						Text.Add("Deciding to push on and leave the elf with a surprise present, you continue thrusting your throbbing [cockDesc] into [hisher] mouth, hardly slowing down even as you begin to spill your seed inside [himher]. Part of your load seeps out of the corner of [name]'s mouth, dribbling down [hisher] chin.", parse);
 						if(cum > 3)
-							Text.AddOutput(" Another thread of sticky semen forces its way out [hisher] nose, the elf overwhelmed by the amount of cum you produce.", parse);
+							Text.Add(" Another thread of sticky semen forces its way out [hisher] nose, the elf overwhelmed by the amount of cum you produce.", parse);
 					}, 1.0, function() { return true; });
 					scenes.AddEnc(function() {
-						Text.AddOutput("You pull your throbbing [cockDesc] away from the elf, excitedly jerking your length in front of [name]'s open, panting mouth. Still slightly disoriented from the rough fuck, [heshe] doesn't seem to notice, until the first wad lands on [hisher] [kTongueDesc].", parse);
-						Text.Newline();
-						Text.AddOutput("Moaning, you deposit your sticky load on the elf, some of the shots hitting [hisher] mouth by sheer luck. Most miss their mark, landing on [name]'s cheeks or in [hisher] hair.", parse);
+						Text.Add("You pull your throbbing [cockDesc] away from the elf, excitedly jerking your length in front of [name]'s open, panting mouth. Still slightly disoriented from the rough fuck, [heshe] doesn't seem to notice, until the first wad lands on [hisher] [kTongueDesc].", parse);
+						Text.NL();
+						Text.Add("Moaning, you deposit your sticky load on the elf, some of the shots hitting [hisher] mouth by sheer luck. Most miss their mark, landing on [name]'s cheeks or in [hisher] hair.", parse);
 						if(cum > 3)
-							Text.AddOutput(" Once you are done, the elf's face - and most of [hisher] front - is covered in a sticky mess.", parse);
+							Text.Add(" Once you are done, the elf's face - and most of [hisher] front - is covered in a sticky mess.", parse);
 					}, 1.0, function() { return true; });
 					scenes.Get();
 				}, 1.0, function() { return true; });
 				/* TODO: more scenes
 				scenes.AddEnc(function() {
-					Text.AddOutput("", parse);
-					Text.Newline();
-					Text.AddOutput("", parse);
-					Text.Newline();
-					Text.AddOutput("", parse);
-					Text.Newline();
+					Text.Add("", parse);
+					Text.NL();
+					Text.Add("", parse);
+					Text.NL();
+					Text.Add("", parse);
+					Text.NL();
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
-					Text.AddOutput("", parse);
-					Text.Newline();
-					Text.AddOutput("", parse);
-					Text.Newline();
-					Text.AddOutput("", parse);
-					Text.Newline();
+					Text.Add("", parse);
+					Text.NL();
+					Text.Add("", parse);
+					Text.NL();
+					Text.Add("", parse);
+					Text.NL();
 				}, 1.0, function() { return true; });
 				*/
 				scenes.Get();
 				
 				
-				Text.Newline();
+				Text.NL();
 				if(kiakai.flags["Sexed"] > 30) {
-					Text.AddOutput("<i>“Mm... y-you taste so good, [playername],”</i> [name] stammers, licking up a stray drop of your cum from your [cockDesc]. Chuckling, you tell the slutty elf to get dressed. Maybe next time, you'll let [himher] get off, too.", parse);
+					Text.Add("<i>“Mm... y-you taste so good, [playername],”</i> [name] stammers, licking up a stray drop of your cum from your [cockDesc]. Chuckling, you tell the slutty elf to get dressed. Maybe next time, you'll let [himher] get off, too.", parse);
 				}
 				else if(kiakai.flags["Sexed"] > 10) {
-					Text.AddOutput("<i>“T-that was different,”</i> [name] mumbles, <i>“b-but not bad, I guess.”</i> You congratulate [himher] on a job well done, saying that you are sure [heshe]'ll enjoy it more next time. The elf looks at you doubtfully.", parse);
+					Text.Add("<i>“T-that was different,”</i> [name] mumbles, <i>“b-but not bad, I guess.”</i> You congratulate [himher] on a job well done, saying that you are sure [heshe]'ll enjoy it more next time. The elf looks at you doubtfully.", parse);
 				}
 				else {
-					Text.AddOutput("<i>“P-please don't make me do that again, [playername],”</i> [name] pleads with you, <i>“I don't think I can take it.”</i> You smile at [himher] reassuringly, telling the elf that next time won't be so bad. [HeShe] visibly shudders when you mention a next time.", parse);
+					Text.Add("<i>“P-please don't make me do that again, [playername],”</i> [name] pleads with you, <i>“I don't think I can take it.”</i> You smile at [himher] reassuringly, telling the elf that next time won't be so bad. [HeShe] visibly shudders when you mention a next time.", parse);
 				}
-				Text.Newline();
-				Text.AddOutput("The two of you re-equip your gear and get ready to set out again.", parse);
+				Text.NL();
+				Text.Add("The two of you re-equip your gear and get ready to set out again.", parse);
 				
 				
 				kiakai.flags["Sexed"]++;
@@ -3615,6 +3627,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 				kiakai.subDom.DecreaseStat(-30, 1);
 				player.AddLustFraction(-1);
 				
+				Text.Flush();
 				Gui.NextPrompt(kiakai.Interact);
 			}, enabled : true,
 			tooltip : "Tell the elf to suck your cock."
@@ -3625,93 +3638,93 @@ Scenes.Kiakai.HealingAssertive = function() {
 		options.push({ nameStr : "Cunnilingus",
 			func : function() {
 				Text.Clear();
-				Text.AddOutput("You flaunt your [vagDesc] for [name]'s benefit, slyly asking if [heshe] wants to eat you out.", parse);
-				Text.Newline();
+				Text.Add("You flaunt your [vagDesc] for [name]'s benefit, slyly asking if [heshe] wants to eat you out.", parse);
+				Text.NL();
 				if(kiakai.flags["Sexed"] < 10)
-					Text.AddOutput("<i>“You want me to... there?”</i> The elf blushes, casting furtive glances at your exposed crotch.", parse);
+					Text.Add("<i>“You want me to... there?”</i> The elf blushes, casting furtive glances at your exposed crotch.", parse);
 				else if(kiakai.flags["Sexed"] < 20)
-					Text.AddOutput("<i>“I-If you want me to,”</i> the elf mumbles, [hisher] expression a beautiful mix of lust and embarrassment. [HeShe] refuses to meet your eyes, [hisher] hands fidgeting.", parse);
+					Text.Add("<i>“I-If you want me to,”</i> the elf mumbles, [hisher] expression a beautiful mix of lust and embarrassment. [HeShe] refuses to meet your eyes, [hisher] hands fidgeting.", parse);
 				else
-					Text.AddOutput("<i>“C-can I?”</i> The elf looks a bit flustered, but [heshe] is clearly eager to serve you.", parse);
-				Text.Newline();
+					Text.Add("<i>“C-can I?”</i> The elf looks a bit flustered, but [heshe] is clearly eager to serve you.", parse);
+				Text.NL();
 				parse["lowerbody"] = player.LowerBodyType() == LowerBodyType.Single ? Text.Parse("to your [vagDesc]", parse) : "between your legs";
-				Text.AddOutput("Nodding impatiently, you guide [hisher] head down [lowerbody], positioning yourself within reach of the elf's [kTongueDesc]. Any lingering inhibitions shattered by your insistence, [name] leans in to pleasure you as best as [heshe] can.", parse);
-				Text.Newline();
+				Text.Add("Nodding impatiently, you guide [hisher] head down [lowerbody], positioning yourself within reach of the elf's [kTongueDesc]. Any lingering inhibitions shattered by your insistence, [name] leans in to pleasure you as best as [heshe] can.", parse);
+				Text.NL();
 				parse["bothtwo"] = player.Arms().count > 2 ? "two" : "both";
-				Text.AddOutput("You stifle a moan as you feel [hisher] lips on your [vagDesc], the tip of the elf's [kTongueDesc] hesitantly probing at your labia. Not patient enough to let [himher] go at [hisher] own pace, you grasp [name]'s head with [bothtwo] hands and push [himher] down roughly, your [vagDesc] grinding against [hisher] face.", parse);
-				Text.Newline();
-				Text.AddOutput("For a while, you just enjoy the sensation as [name] slowly accepts [hisher] position, starting to actively lap at your crotch, burying [hisher] [kTongueDesc] inside your folds. Your grip keeps the elf firmly in place, barely giving [himher] room to breathe.", parse);
-				Text.Newline();
+				Text.Add("You stifle a moan as you feel [hisher] lips on your [vagDesc], the tip of the elf's [kTongueDesc] hesitantly probing at your labia. Not patient enough to let [himher] go at [hisher] own pace, you grasp [name]'s head with [bothtwo] hands and push [himher] down roughly, your [vagDesc] grinding against [hisher] face.", parse);
+				Text.NL();
+				Text.Add("For a while, you just enjoy the sensation as [name] slowly accepts [hisher] position, starting to actively lap at your crotch, burying [hisher] [kTongueDesc] inside your folds. Your grip keeps the elf firmly in place, barely giving [himher] room to breathe.", parse);
+				Text.NL();
 				if(player.FirstCock()) {
 					parse["isAre"] = player.NumCocks() > 1 ? "are" : "is";
 					parse["itThem"] = player.NumCocks() > 1 ? "them" : "it";
-					Text.AddOutput("Your unattended [multiCockDesc] [isAre] starting to stiffen, and you idly slap [name] with [itThem] a few times. After smearing some of your precum on [hisher] forehead, you let [himher] get back to business.", parse);
-					Text.Newline();
+					Text.Add("Your unattended [multiCockDesc] [isAre] starting to stiffen, and you idly slap [name] with [itThem] a few times. After smearing some of your precum on [hisher] forehead, you let [himher] get back to business.", parse);
+					Text.NL();
 				}
 				if(kiakai.flags["Sexed"] < 20)
-					Text.AddOutput("[name] is doing a relatively good job, but [heshe] is going a bit too slow, [hisher] inexperience obvious in the hesitant motions. It seems you have to train [himher] a bit more for [himher] to lose [hisher] inhibitions.", parse);
+					Text.Add("[name] is doing a relatively good job, but [heshe] is going a bit too slow, [hisher] inexperience obvious in the hesitant motions. It seems you have to train [himher] a bit more for [himher] to lose [hisher] inhibitions.", parse);
 				else
-					Text.AddOutput("[name] is putting [hisher] skills to good use, probing your depths eagerly. Your diligent training of the elf is paying off, [heshe] is still a bit flustered, but hardly seems inhibited anymore.", parse);
-				Text.Newline();
-				Text.AddOutput("No... you need more than this.", parse);
-				Text.Newline();
+					Text.Add("[name] is putting [hisher] skills to good use, probing your depths eagerly. Your diligent training of the elf is paying off, [heshe] is still a bit flustered, but hardly seems inhibited anymore.", parse);
+				Text.NL();
+				Text.Add("No... you need more than this.", parse);
+				Text.NL();
 			 
 				var scenes = new EncounterTable();
 				scenes.AddEnc(function() {
-					Text.AddOutput("Shaking your head in disappointment, you push [name] back. The elf looks confused, wondering what [heshe] did wrong. <i>“[playername]?”</i> [heshe] asks uncertainly. You push [himher] down on [hisher] back, silencing the elf with a deep kiss. As you withdraw, a string of saliva mixed with your own juices briefly bridges the gap between [name]'s mouth and yours. Not allowing [name] to get back on [hisher] feet, you quickly straddle [hisher] face, your [buttDesc] resting lightly on [hisher] [kBreastDesc].", parse);
-					Text.Newline();
+					Text.Add("Shaking your head in disappointment, you push [name] back. The elf looks confused, wondering what [heshe] did wrong. <i>“[playername]?”</i> [heshe] asks uncertainly. You push [himher] down on [hisher] back, silencing the elf with a deep kiss. As you withdraw, a string of saliva mixed with your own juices briefly bridges the gap between [name]'s mouth and yours. Not allowing [name] to get back on [hisher] feet, you quickly straddle [hisher] face, your [buttDesc] resting lightly on [hisher] [kBreastDesc].", parse);
+					Text.NL();
 					
 					var scenes = new EncounterTable();
 					scenes.AddEnc(function() {
-						Text.AddOutput("<i>“Mm... not bad, but perhaps you still need some guidance...”</i>", parse);
+						Text.Add("<i>“Mm... not bad, but perhaps you still need some guidance...”</i>", parse);
 					}, 1.0, function() { return true; });
 					scenes.AddEnc(function() {
-						Text.AddOutput("<i>“You do it like this!”</i>", parse);
+						Text.Add("<i>“You do it like this!”</i>", parse);
 					}, 1.0, function() { return true; });
 					scenes.AddEnc(function() {
-						Text.AddOutput("<i>“[name],”</i> you smile wickedly, shaking your head, <i>“I see you still have much to learn...”</i>", parse);
+						Text.Add("<i>“[name],”</i> you smile wickedly, shaking your head, <i>“I see you still have much to learn...”</i>", parse);
 					}, 1.0, function() { return true; });
 					
 					scenes.Get();
 					
-					Text.AddOutput(" To accentuate your words, you grind up against [hisher] mouth, pressing down on [himher] with your [vagDesc]. Spreading your legs wider, you let yourself relax, putting more and more of your weight on your prone companion. [name]'s muffled moans send violent vibrations through your nether regions, [hisher] [kTongueDesc] firmly lodged in your slick tunnel.", parse);
+					Text.Add(" To accentuate your words, you grind up against [hisher] mouth, pressing down on [himher] with your [vagDesc]. Spreading your legs wider, you let yourself relax, putting more and more of your weight on your prone companion. [name]'s muffled moans send violent vibrations through your nether regions, [hisher] [kTongueDesc] firmly lodged in your slick tunnel.", parse);
 					
 					if(player.FirstCock()) {
 						parse["itThem"] = player.NumCocks() > 1 ? "them" : "it";
-						Text.AddOutput(" You grab hold of your [multiCockDesc], stroking [itThem] slowly while riding the submissive elf.", parse);
+						Text.Add(" You grab hold of your [multiCockDesc], stroking [itThem] slowly while riding the submissive elf.", parse);
 					}
 					var tail = player.HasTail();
 					if(tail && tail.Prehensile()) {
 						parse["notEs"] = tail.count > 1 ? "" : "es";
-						Text.AddOutput(" Your flexible [tailDesc] swish[notEs] back and forth, brushing over [name]'s stomach before finding its target and rubbing up against the elf's [kGenDesc], returning blow for blow.", parse);
+						Text.Add(" Your flexible [tailDesc] swish[notEs] back and forth, brushing over [name]'s stomach before finding its target and rubbing up against the elf's [kGenDesc], returning blow for blow.", parse);
 					}
 					else if(tail) {
 						parse["notEs"] = tail.count > 1 ? "" : "es";
 						parse["itsTheir"] = tail.count > 1 ? "their" : "its";
-						Text.AddOutput(" [name] shudders as your [tailDesc] brush[notEs] against [hisher] stomach, [itsTheir] sweeping motions tickling [hisher] sensitive [kSkinDesc].", parse);
+						Text.Add(" [name] shudders as your [tailDesc] brush[notEs] against [hisher] stomach, [itsTheir] sweeping motions tickling [hisher] sensitive [kSkinDesc].", parse);
 					}
-					Text.Newline();
-					Text.AddOutput("With wild abandon, you gyrate your hips in intense, bucking motions, taking your pleasure with little care for your elvish mount. Said mount seems to be enjoying [himher]self regardless, [hisher] hands plastered to your [buttDesc], not trying to force you off, but rather encouraging you. Experimentally, you flex your legs, rising up slightly to give [himher] some breathing room. [name] licks [hisher] lips, eyes flickering between your dripping cunt and your flushed face.", parse);
-					Text.Newline();
-					Text.AddOutput("You coyly ask [himher] what [heshe] is waiting for, swaying your hips seductively. Lust overpowering [hisher] shame, the elf leans in, returning to [hisher] task. Once you've confirmed [hisher] willingness, you sink back down, twat crushing against your excited companion's upturned face.", parse);
-					Text.Newline();
-					Text.AddOutput("For the better part of half an hour, you continue riding [name], repeatedly impaling yourself on [hisher] [kTongueDesc]. You smirk as you glance over your shoulder, seeing one of [name]'s hands busy between [hisher] own legs. From the mess, you gather that [heshe] has climaxed at least once during your wild ride.", parse);
-					Text.Newline();
+					Text.NL();
+					Text.Add("With wild abandon, you gyrate your hips in intense, bucking motions, taking your pleasure with little care for your elvish mount. Said mount seems to be enjoying [himher]self regardless, [hisher] hands plastered to your [buttDesc], not trying to force you off, but rather encouraging you. Experimentally, you flex your legs, rising up slightly to give [himher] some breathing room. [name] licks [hisher] lips, eyes flickering between your dripping cunt and your flushed face.", parse);
+					Text.NL();
+					Text.Add("You coyly ask [himher] what [heshe] is waiting for, swaying your hips seductively. Lust overpowering [hisher] shame, the elf leans in, returning to [hisher] task. Once you've confirmed [hisher] willingness, you sink back down, twat crushing against your excited companion's upturned face.", parse);
+					Text.NL();
+					Text.Add("For the better part of half an hour, you continue riding [name], repeatedly impaling yourself on [hisher] [kTongueDesc]. You smirk as you glance over your shoulder, seeing one of [name]'s hands busy between [hisher] own legs. From the mess, you gather that [heshe] has climaxed at least once during your wild ride.", parse);
+					Text.NL();
 					parse["juice"] = player.FirstCock() ? "the combined fluids of your male and female parts" : "your juices";
-					Text.AddOutput("Feeling your own orgasm surging through your body, you switch gears, grasping your lover's head in your hands and pressing down on [himher] with your crotch. You cry out as waves of pleasure run through you, drenching the elf in [juice].", parse);
+					Text.Add("Feeling your own orgasm surging through your body, you switch gears, grasping your lover's head in your hands and pressing down on [himher] with your crotch. You cry out as waves of pleasure run through you, drenching the elf in [juice].", parse);
 				}, 1.0, function() { return player.LowerBodyType() != LowerBodyType.Single; });
 				/* TODO: Scene not requiring legs
 				scenes.AddEnc(function() {
-					Text.AddOutput("", parse);
-					Text.Newline();
-					Text.AddOutput("", parse);
+					Text.Add("", parse);
+					Text.NL();
+					Text.Add("", parse);
 				}, 1.0, function() { return true; });
 				*/
 				scenes.Get();
 	
-				Text.Newline();
-				Text.AddOutput("Stretching luxuriously, you tell [name] to get you cleaned up.", parse);
-				Text.Newline();
+				Text.NL();
+				Text.Add("Stretching luxuriously, you tell [name] to get you cleaned up.", parse);
+				Text.NL();
 
 				kiakai.flags["Sexed"]++;
 				player.AddLustFraction(-1);
@@ -3724,29 +3737,30 @@ Scenes.Kiakai.HealingAssertive = function() {
 				kiakai.subDom.DecreaseStat(-30, 1);
 							
 				if(kiakai.subDom.Get() > -20) {
-					Text.AddOutput("The elf doesn't respond, averting [hisher] gaze in shame.", parse);
+					Text.Add("The elf doesn't respond, averting [hisher] gaze in shame.", parse);
 					
-					
+					Text.Flush();
 					//[Mercy][Punish]
 					var options = new Array();
 					options.push({ nameStr : "Mercy",
 						func : function() {
-							Text.Newline();
-							Text.AddOutput("Relenting, you give [name] a hand up, helping [himher] with [hisher] gear. The two of you ready yourselves to continue your journey.", parse);
-							
+							Text.NL();
+							Text.Add("Relenting, you give [name] a hand up, helping [himher] with [hisher] gear. The two of you ready yourselves to continue your journey.", parse);
+							Text.Flush();
 							Gui.NextPrompt(kiakai.Interact);
 						}, enabled : true,
 						tooltip : Text.Parse("Give [himher] a break.", parse)
 					});
 					options.push({ nameStr : "Punish",
 						func : function() {
-							Text.Newline();
-							Text.AddOutput("You simply sit back down, grinding your crotch against [himher], using [hisher] face like a towel. Before gathering your gear and continuing your journey, you give [name] an encouraging kiss on the cheek.", parse);
+							Text.NL();
+							Text.Add("You simply sit back down, grinding your crotch against [himher], using [hisher] face like a towel. Before gathering your gear and continuing your journey, you give [name] an encouraging kiss on the cheek.", parse);
 							
 							kiakai.subDom.DecreaseStat(-30, 2);
 							kiakai.relation.DecreaseStat(-100, 2);
 							
 							kiakai.AddLustFraction(0.2);
+							Text.Flush();
 							Gui.NextPrompt(kiakai.Interact);
 						}, enabled : true,
 						tooltip : Text.Parse("Can't have [himher] disobeying, can you?", parse)
@@ -3754,9 +3768,10 @@ Scenes.Kiakai.HealingAssertive = function() {
 					Gui.SetButtonsFromList(options);
 				}
 				else {
-					Text.AddOutput("The elf obeys without complaint, dutifully licking the lingering drops from your female sex. Gathering your gear, you get ready to continue on your travels, followed by the slightly disoriented elf.", parse);
+					Text.Add("The elf obeys without complaint, dutifully licking the lingering drops from your female sex. Gathering your gear, you get ready to continue on your travels, followed by the slightly disoriented elf.", parse);
 					
 					kiakai.AddLustFraction(0.2);
+					Text.Flush();
 					Gui.NextPrompt(kiakai.Interact);
 				}
 			}, enabled : true,
@@ -3852,6 +3867,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 				}
 			};
 			
+			Text.Flush();
 			//[Cock][Vagina][Anal]
 			var options = new Array();
 			if(kiakai.FirstCock()) {
@@ -4110,6 +4126,8 @@ Scenes.Kiakai.HealingAssertive = function() {
 					
 					parse["penDesc"] = function() { return Text.Parse("the [toyDesc]", parse); };
 					
+					Text.Flush();
+					
 					var options = new Array();
 					options.push({ nameStr : "Fingers",
 						func : function() {
@@ -4257,37 +4275,37 @@ Scenes.Kiakai.HealingAssertive = function() {
 			
 			// First time
 			if(kiakai.flags["AnalExp"] < 2) {
-				Text.AddOutput("<i>“Like what you see?”</i> you tease the prone elf, shuffling your hips slightly, bringing your [genDesc] closer to [hisher] face. [name]'s face is bright red at this point, unable to tear [hisher] eyes off you.", parse);
-				Text.Newline();
-				Text.AddOutput("Suddenly getting a very naughty idea, you reach down and touch the elf's forehead, mock concern in your voice. <i>“[name]! Your skin is burning, are you ok?”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("Mumbling, [name] assures you that [heshe] is fine, avoiding your gaze, but you'll have none of it. <i>“Can't have the healer getting a fever, can we?”</i> You instruct your companion to lay down across your lap, face down. A bit doubtful, the elf complies to your wishes. [HeShe] shudders slightly as [hisher] [kGenDesc] accidentally brush against your leg. Apologetically, [heshe] shifts around, raising [hisher] butt to break the contact. This, coincidentally, suits your intentions perfectly.", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“I'm going to take your temperature,”</i> you announce, licking two of your fingers in preparation. <i>“It might sting a bit at first, but don't worry, you tended to me and now I will tend to you.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“[playername], this really is not neces- AAAHHH!”</i> [name]'s complaint is suddenly cut off, as you press two fingers into [hisher] tight rosebud. The quivering elf moans in confused appreciation as you probe deeper, exploring [hisher] back passage.", parse);
-				Text.Newline();
+				Text.Add("<i>“Like what you see?”</i> you tease the prone elf, shuffling your hips slightly, bringing your [genDesc] closer to [hisher] face. [name]'s face is bright red at this point, unable to tear [hisher] eyes off you.", parse);
+				Text.NL();
+				Text.Add("Suddenly getting a very naughty idea, you reach down and touch the elf's forehead, mock concern in your voice. <i>“[name]! Your skin is burning, are you ok?”</i>", parse);
+				Text.NL();
+				Text.Add("Mumbling, [name] assures you that [heshe] is fine, avoiding your gaze, but you'll have none of it. <i>“Can't have the healer getting a fever, can we?”</i> You instruct your companion to lay down across your lap, face down. A bit doubtful, the elf complies to your wishes. [HeShe] shudders slightly as [hisher] [kGenDesc] accidentally brush against your leg. Apologetically, [heshe] shifts around, raising [hisher] butt to break the contact. This, coincidentally, suits your intentions perfectly.", parse);
+				Text.NL();
+				Text.Add("<i>“I'm going to take your temperature,”</i> you announce, licking two of your fingers in preparation. <i>“It might sting a bit at first, but don't worry, you tended to me and now I will tend to you.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“[playername], this really is not neces- AAAHHH!”</i> [name]'s complaint is suddenly cut off, as you press two fingers into [hisher] tight rosebud. The quivering elf moans in confused appreciation as you probe deeper, exploring [hisher] back passage.", parse);
+				Text.NL();
 				
 				if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
-					Text.AddOutput("<i>“W-what are you doing?!”</i> [name] sounds confused and slightly frightened. You assure [himher] that there is nothing to worry about, and that [heshe] shouldn't be such a baby.", parse);
+					Text.Add("<i>“W-what are you doing?!”</i> [name] sounds confused and slightly frightened. You assure [himher] that there is nothing to worry about, and that [heshe] shouldn't be such a baby.", parse);
 				else
-					Text.AddOutput("<i>“A-Are you really sure that is- haah! -the right way to do it?”</i> [name] groans, uncertain but seemingly putting [hisher] trust in you.", parse);
-				Text.Newline();
+					Text.Add("<i>“A-Are you really sure that is- haah! -the right way to do it?”</i> [name] groans, uncertain but seemingly putting [hisher] trust in you.", parse);
+				Text.NL();
 				
-				Text.AddOutput("Knuckle-deep, you make some show of probing around", parse);
+				Text.Add("Knuckle-deep, you make some show of probing around", parse);
 				if(kiakai.FirstCock())
-					Text.AddOutput(", inadvertently pushing against [hisher] prostate", parse);
-				Text.AddOutput(". The elf, despite [hisher] protests, seems to be really getting into it, if the fluids dripping on your thighs are any indication.", parse);
-				Text.Newline();
+					Text.Add(", inadvertently pushing against [hisher] prostate", parse);
+				Text.Add(". The elf, despite [hisher] protests, seems to be really getting into it, if the fluids dripping on your thighs are any indication.", parse);
+				Text.NL();
 				
 				if(kiakai.flags["AnalExp"] == 1) {
-					Text.AddOutput("<i>“You really seem to like this kind of stuff, you know,”</i> you muse, reminding [himher] of your first meeting, and the way it ended.", parse);
-					Text.Newline();
+					Text.Add("<i>“You really seem to like this kind of stuff, you know,”</i> you muse, reminding [himher] of your first meeting, and the way it ended.", parse);
+					Text.NL();
 				}
 				
-				Text.AddOutput("Deftly pumping your fingers in and out of the quivering elf, you commend [himher] for being such a good [boygirl]. [name]'s only response is a whorish moan as you rail [hisher] [kAnusDesc].", parse);
-				Text.Newline();
-				Text.AddOutput("Deciding that you are done for now, you withdraw your fingers, allowing the elf some breathing room. <i>“You seem to be fine,”</i> you assure your panting companion, <i>“but I might have to check again later.”</i> With that, you give [name] a playful swat on [hisher] butt, telling [himher] to get dressed.", parse);
+				Text.Add("Deftly pumping your fingers in and out of the quivering elf, you commend [himher] for being such a good [boygirl]. [name]'s only response is a whorish moan as you rail [hisher] [kAnusDesc].", parse);
+				Text.NL();
+				Text.Add("Deciding that you are done for now, you withdraw your fingers, allowing the elf some breathing room. <i>“You seem to be fine,”</i> you assure your panting companion, <i>“but I might have to check again later.”</i> With that, you give [name] a playful swat on [hisher] butt, telling [himher] to get dressed.", parse);
 
 				player.AddSexExp(5);
 				kiakai.AddSexExp(5);
@@ -4298,19 +4316,19 @@ Scenes.Kiakai.HealingAssertive = function() {
 			// REPEAT SCENE
 			// TODO: ADD TOYS SCENE
 			else {
-				Text.AddOutput("<i>“It was a while since I checked your temperature last,”</i> you muse suggestively, absently patting your thigh. [name] [analAtt] sits on your lap, waiting to see what you will do next. Languidly, you caress [hisher] cheek, before lazily wriggling your fingers in front of [hisher] face. Hypnotized, the elf's eyes follow your movements attentively.", parse);
-				Text.Newline();
+				Text.Add("<i>“It was a while since I checked your temperature last,”</i> you muse suggestively, absently patting your thigh. [name] [analAtt] sits on your lap, waiting to see what you will do next. Languidly, you caress [hisher] cheek, before lazily wriggling your fingers in front of [hisher] face. Hypnotized, the elf's eyes follow your movements attentively.", parse);
+				Text.NL();
 				
 				var numFingers = 0;
 				
 				var scenes = new EncounterTable();
 				scenes.AddEnc(function() {
-					Text.AddOutput("<i>“You know well what's coming,”</i> you tease [himher], sucking on first one, then another, and finally a third finger. [name]'s eyes widen slightly with each digit you prepare, gulping.", parse);
+					Text.Add("<i>“You know well what's coming,”</i> you tease [himher], sucking on first one, then another, and finally a third finger. [name]'s eyes widen slightly with each digit you prepare, gulping.", parse);
 					numFingers = 3;
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
-					Text.AddOutput("<i>“Tell you what, this time, why don't you decide?”</i> you suggest, presenting [name] with your hand, urging [himher] to prepare as many as [heshe] thinks [heshe] can take.", parse);
-					Text.Newline();
+					Text.Add("<i>“Tell you what, this time, why don't you decide?”</i> you suggest, presenting [name] with your hand, urging [himher] to prepare as many as [heshe] thinks [heshe] can take.", parse);
+					Text.NL();
 					
 					numFingers = (kiakai.LustLevel() + 2) * Math.log(kiakai.flags["AnalExp"]);
 					if(numFingers < 1) numFingers = 1;
@@ -4319,11 +4337,11 @@ Scenes.Kiakai.HealingAssertive = function() {
 					
 					switch(numFingers) {
 						default:
-						case 1: Text.AddOutput("Uncertain, the elf puts one of your offered digits into [hisher] mouth, avoiding your slightly disappointed gaze.", parse); break;
-						case 2: Text.AddOutput("[name] licks and sucks at two of your offered digits, getting them ready.", parse); break;
-						case 3: Text.AddOutput("Slightly fearful, [name] choses to lather three of your offered fingers. You smile at [himher] encouragingly, knowing [heshe] can probably take them.", parse); break;
-						case 4: Text.AddOutput("Lustfully inspecting your fingers, [name] prepares one after another, lathering up four of them with [hisher] tongue.", parse); break;
-						case 5: Text.AddOutput("Unmistakable lust in [hisher] eyes, [name] eagerly lathers each of your fingers slowly, coating all of them in saliva. When [heshe] is done with your fingers, the elf proceeds to lick the back of your hand.", parse); break;
+						case 1: Text.Add("Uncertain, the elf puts one of your offered digits into [hisher] mouth, avoiding your slightly disappointed gaze.", parse); break;
+						case 2: Text.Add("[name] licks and sucks at two of your offered digits, getting them ready.", parse); break;
+						case 3: Text.Add("Slightly fearful, [name] choses to lather three of your offered fingers. You smile at [himher] encouragingly, knowing [heshe] can probably take them.", parse); break;
+						case 4: Text.Add("Lustfully inspecting your fingers, [name] prepares one after another, lathering up four of them with [hisher] tongue.", parse); break;
+						case 5: Text.Add("Unmistakable lust in [hisher] eyes, [name] eagerly lathers each of your fingers slowly, coating all of them in saliva. When [heshe] is done with your fingers, the elf proceeds to lick the back of your hand.", parse); break;
 					}
 				}, 1.0, function() { return true; });
 				scenes.Get();
@@ -4331,64 +4349,64 @@ Scenes.Kiakai.HealingAssertive = function() {
 				player.AddSexExp(2);
 				kiakai.AddSexExp(numFingers);
 				
-				Text.Newline();
+				Text.NL();
 				
 				parse.numFingers = Text.NumToText(numFingers);
 				parse.s = numFingers > 1 ? "s" : "";
 				
-				Text.AddOutput("<i>“Now then...”</i> in a sultry voice, you coax [name] to shuffle around in your lap, presenting you with [hisher] butt. Knowing what to expect, the elf shudders in pleasure as you insert your first finger into [hisher] [kAnusDesc].", parse);
+				Text.Add("<i>“Now then...”</i> in a sultry voice, you coax [name] to shuffle around in your lap, presenting you with [hisher] butt. Knowing what to expect, the elf shudders in pleasure as you insert your first finger into [hisher] [kAnusDesc].", parse);
 				if(numFingers > 1) {
-					Text.Newline();
-					Text.AddOutput("Gradually spreading [name]'s back passage for easier access, you put another finger in.", parse);
+					Text.NL();
+					Text.Add("Gradually spreading [name]'s back passage for easier access, you put another finger in.", parse);
 					if(numFingers > 2) {
-						Text.AddOutput(" You keep it up until all your [numFingers] fingers are prodding at [hisher] insides.", parse);
+						Text.Add(" You keep it up until all your [numFingers] fingers are prodding at [hisher] insides.", parse);
 						if(numFingers >= 5) {
-							Text.AddOutput(" Even as flexible as [name] has become, you are a bit doubtful about pushing your whole hand in there, can [heshe] really take it?", parse);
+							Text.Add(" Even as flexible as [name] has become, you are a bit doubtful about pushing your whole hand in there, can [heshe] really take it?", parse);
 						}
 					}
 				}
 				
-				Text.Newline();
-				Text.AddOutput("Easing into a slow but insistent rhythm, you piston your finger[s] up to the knuckle[s], your other hand busy stroking the elf's hair, whispering to [himher] to endure, that this is for [hisher] own good. [name] is biting [hisher] lip cutely, trying and failing to stifle [hisher] undignified moans.", parse);
-				Text.Newline();
+				Text.NL();
+				Text.Add("Easing into a slow but insistent rhythm, you piston your finger[s] up to the knuckle[s], your other hand busy stroking the elf's hair, whispering to [himher] to endure, that this is for [hisher] own good. [name] is biting [hisher] lip cutely, trying and failing to stifle [hisher] undignified moans.", parse);
+				Text.NL();
 				
 				if(numFingers < 5) {
-					Text.AddOutput("<i>“I think you are growing to like this,”</i> you comment on [name]'s whimpering moans. <i>“I-it is just to see that I am healthy, right?”</i> the elf gasps between [hisher] cries of pleasure.", parse);
-					Text.Newline();
-					Text.AddOutput("<i>“Oh, you seem to be <b>very</b> healthy indeed,”</i> you congratulate your companion, one hand busy caressing [hisher] silky hair, the other deep inside [hisher] [kAnusDesc].", parse);
-					Text.Newline();
-					Text.AddOutput("Increasing your pace, you bring the horny elf to a shuddering climax", parse);
+					Text.Add("<i>“I think you are growing to like this,”</i> you comment on [name]'s whimpering moans. <i>“I-it is just to see that I am healthy, right?”</i> the elf gasps between [hisher] cries of pleasure.", parse);
+					Text.NL();
+					Text.Add("<i>“Oh, you seem to be <b>very</b> healthy indeed,”</i> you congratulate your companion, one hand busy caressing [hisher] silky hair, the other deep inside [hisher] [kAnusDesc].", parse);
+					Text.NL();
+					Text.Add("Increasing your pace, you bring the horny elf to a shuddering climax", parse);
 					if(kiakai.FirstCock())
-						Text.AddOutput(", [hisher] [kCockDesc] depositing its load on your legs", parse);
+						Text.Add(", [hisher] [kCockDesc] depositing its load on your legs", parse);
 					if(kiakai.FirstVag())
-						Text.AddOutput(", a trickle of feminine juices trailing down [hisher] leg from [hisher] [kVagDesc]", parse);
-					Text.AddOutput(".", parse);
+						Text.Add(", a trickle of feminine juices trailing down [hisher] leg from [hisher] [kVagDesc]", parse);
+					Text.Add(".", parse);
 				}
 				else {
-					Text.AddOutput("<i>“You asked for it, horny little elf,”</i> you mutter under your breath, slowly pushing more and more of your hand into [hisher] [kAnusDesc]. [name] cries out loudly, if in pleasure or pain you cannot tell, as the widest part of your hand suddenly pops past [hisher] formerly tight ring.", parse);
-					Text.Newline();
-					Text.AddOutput("Almost surprised yourself, you chuckle as you allow the elf some time to relax before exploring the extent of your newfound reach. You can push a fair bit of your arm up [hisher] [kAnusDesc] before encountering resistance.", parse);
-					Text.Newline();
-					Text.AddOutput("<i>“Mm, seems I have trained you well, [name],”</i> you tease the elf as your fist wreak havoc on [hisher] insides.", parse);
-					Text.Newline();
+					Text.Add("<i>“You asked for it, horny little elf,”</i> you mutter under your breath, slowly pushing more and more of your hand into [hisher] [kAnusDesc]. [name] cries out loudly, if in pleasure or pain you cannot tell, as the widest part of your hand suddenly pops past [hisher] formerly tight ring.", parse);
+					Text.NL();
+					Text.Add("Almost surprised yourself, you chuckle as you allow the elf some time to relax before exploring the extent of your newfound reach. You can push a fair bit of your arm up [hisher] [kAnusDesc] before encountering resistance.", parse);
+					Text.NL();
+					Text.Add("<i>“Mm, seems I have trained you well, [name],”</i> you tease the elf as your fist wreak havoc on [hisher] insides.", parse);
+					Text.NL();
 					
 					if(kiakai.FirstCock()) {
-						Text.AddOutput("Settling to a halt far inside, you cup your hand, massaging [hisher] prostate. This almost immediately causes the delirious elf to launch into orgasm, [hisher] [kCockDesc] painting sticky trails across your thighs.", parse);
+						Text.Add("Settling to a halt far inside, you cup your hand, massaging [hisher] prostate. This almost immediately causes the delirious elf to launch into orgasm, [hisher] [kCockDesc] painting sticky trails across your thighs.", parse);
 					}
 					else {
-						Text.AddOutput("Taking care not to harm [himher], you slowly pump your arm in and out of [name]. The elf seems to be very happy with your treatment, begging for you to go faster, go deeper. Shuddering, [hisher] [kVagDesc] finally gives in, leaking girly fluids across your thighs.", parse);
+						Text.Add("Taking care not to harm [himher], you slowly pump your arm in and out of [name]. The elf seems to be very happy with your treatment, begging for you to go faster, go deeper. Shuddering, [hisher] [kVagDesc] finally gives in, leaking girly fluids across your thighs.", parse);
 					}
 				}
 				
-				Text.Newline();
+				Text.NL();
 				if(Math.random() < 0.8)
-					Text.AddOutput("<i>“I-I do not have a fever, do I?”</i> [name] asks you, <i>“I feel a bit weird...”</i> You assure [himher] that [heshe] is fine.", parse);
+					Text.Add("<i>“I-I do not have a fever, do I?”</i> [name] asks you, <i>“I feel a bit weird...”</i> You assure [himher] that [heshe] is fine.", parse);
 				else
-					Text.AddOutput("<i>“Y-you are so rough with your healing,”</i> [name] mutters, <i>“yet it feels good...”</i> You can only smile as the elf reveals [hisher] true colors.", parse);
-				Text.Newline();
-				Text.AddOutput("You pull out of the tight canal and leave the elf in a trembling pile, looking around for somewhere to get cleaned up.", parse);
+					Text.Add("<i>“Y-you are so rough with your healing,”</i> [name] mutters, <i>“yet it feels good...”</i> You can only smile as the elf reveals [hisher] true colors.", parse);
+				Text.NL();
+				Text.Add("You pull out of the tight canal and leave the elf in a trembling pile, looking around for somewhere to get cleaned up.", parse);
 			}
-			
+			Text.Flush();
 			player.AddLustFraction(0.1);
 			
 			var cum = kiakai.OrgasmCum();
@@ -4750,6 +4768,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 					kiakai.FirstVag() ? function() { return kiakai.FirstVag().Short(); } :
 					"featureless crotch";
 	
+	Text.Flush();
 	//Sex options
 	var options = new Array();
 	options.push({ nameStr : "Anal pitch",
@@ -5487,6 +5506,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 					kiakai.FirstVag() ? function() { return kiakai.FirstVag().Short(); } :
 					"featureless crotch";
 	
+	Text.Flush();
 	//[Rim][Suck [himher]][Selfsuck][Frot][Oil]
 	var options = new Array();
 	options.push({ nameStr : "Rim",
