@@ -86,9 +86,9 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	"Armor", true, function() { return Scenes.Rigard.ArmorShop.IsOpen(); },
 	function() {
 		/*
-		Text.AddOutput("One particular shop catch your eye. A garish sign hanging outside announce it the 'Shoppe of oddities', though from just the exterior it is a bit unclear what is actually on sale.");
+		Text.AddOutput("");
 		if(!Scenes.Rigard.ArmorShop.IsOpen())
-			Text.AddOutput(" A small paper stapled to the front door states that the shop is 'Cloosd' at the moment.");
+			Text.AddOutput("");
 		Text.AddOutput("<br/>");
 		*/
 	},
@@ -101,9 +101,9 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	"Weapons", true, function() { return Scenes.Rigard.WeaponShop.IsOpen(); },
 	function() {
 		/*
-		Text.AddOutput("One particular shop catch your eye. A garish sign hanging outside announce it the 'Shoppe of oddities', though from just the exterior it is a bit unclear what is actually on sale.");
+		Text.AddOutput("");
 		if(!Scenes.Rigard.WeaponShop.IsOpen())
-			Text.AddOutput(" A small paper stapled to the front door states that the shop is 'Cloosd' at the moment.");
+			Text.AddOutput("");
 		Text.AddOutput("<br/>");
 		*/
 	},
