@@ -1225,7 +1225,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 		if(kiakai.FirstCock()) {
 			parse["s"]    = kiakai.NumCocks() > 1 ? "s" : "";
 			parse["notS"] = kiakai.NumCocks() > 1 ? "" : "s";
-			Text.Add("[HeShe] makes a token effort to hide [hisher] [kmultiCockDesc], but it is a rather futile endevor. The elf’s cock[s] stick[notS] out proudly beneath [hisher] hands, hard and dripping pre. ", parse);
+			Text.Add("[HeShe] makes a token effort to hide [hisher] [kmultiCockDesc], but it is a rather futile endeavor. The elf’s cock[s] stick[notS] out proudly beneath [hisher] hands, hard and dripping pre. ", parse);
 		}
 		else if(kiakai.FirstVag()) {
 			Text.Add("From the looks of [hisher] dripping pussy, the elf is a bit jealous of the bunnies who are getting their just reward. ", parse);
