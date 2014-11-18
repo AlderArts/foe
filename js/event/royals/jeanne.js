@@ -346,7 +346,7 @@ Scenes.Jeanne.Talk = function() {
 				jeanne.flags["bg"] = 1;
 			}
 			else {
-				Text.Add("<i>“My past is not that important, there are greater troubles afoot,”</i> Jeanne repriminds you. <i>“But if you ask, I shall tell you the tale again.”</i>", parse);
+				Text.Add("<i>“My past is not that important, there are greater troubles afoot,”</i> Jeanne reprimands you. <i>“But if you ask, I shall tell you the tale again.”</i>", parse);
 			}
 			Text.NL();
 			Text.Add("<i>“I was born among the elves here on Eden, but did not stay with them long. Learning the secrets of the arcane - magic, alchemy, the nature of spirits - I traveled to many places and visited many different realms.”</i>", parse);
