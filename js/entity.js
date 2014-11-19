@@ -1705,6 +1705,9 @@ Entity.prototype.IsNaga = function() {
 	return (this.body.legs.count < 2) &&
 		(this.body.legs.race == Race.snake); //TODO
 }
+Entity.prototype.IsGoo = function() {
+	return (this.body.legs.race == Race.goo); //TODO
+}
 Entity.prototype.Butt = function() {
 	return this.body.ass;
 }

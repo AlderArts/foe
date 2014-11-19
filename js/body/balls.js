@@ -11,6 +11,13 @@ function Balls(race, color) {
 Balls.prototype = new BodyPart();
 Balls.prototype.constructor = Balls;
 
+Balls.prototype.BallSize = function() {
+	return this.size.Get();
+}
+Balls.prototype.SackSize = function() {
+	return this.size.Get() * this.count.Get();
+}
+
 Balls.prototype.ToStorage = function() {
 	var storage = {
 		race  : this.race,

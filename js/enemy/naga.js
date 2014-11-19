@@ -52,6 +52,11 @@ function Naga() {
 Naga.prototype = new Entity();
 Naga.prototype.constructor = Naga;
 
+//TODO other conditions?
+Naga.HypnoUnlocked = function() {
+	return gameCache.flags["NagaVenom"] != 0;
+}
+
 Scenes.Naga = {};
 
 Naga.prototype.DropTable = function() {
@@ -112,8 +117,7 @@ Scenes.Naga.LoneEnc = function() {
 	
 	enc.onEncounter = Scenes.Naga.DesertEncounter;
 	enc.onLoss      = Scenes.Naga.DesertLoss;
-	// TODO activate win scene
-	//enc.onVictory   = Scenes.Naga.DesertWinPrompt;
+	enc.onVictory   = Scenes.Naga.DesertWinPrompt;
 	
 	return enc;
 }
@@ -418,7 +422,7 @@ Scenes.Naga.DesertLossUseCock = function(enc) {
 	Text.NL();
 	Text.Add("Piercing inside her, your tongue explores, probing her every nook and cranny. The naga’s cunt contracts suddenly as you tongue a bump near the top of her slit, and you know you must have found her clit, or at least its serpentine equivalent. A fresh squirt of her juices enters your mouth, and you gulp it down eagerly, continuing to please the conquering snake as well as you can.", parse);
 	Text.NL();
-	Text.Add("Meanwhile, the naga begins preparing your [multiCockDesc] to use as she pleases. <i>”We are going to have so much fun, pet… I promise, you’ll enjoy it almost as much as I will.”</i> She takes[oneof] your [multiCockDesc] in her smooth hands and begins to stroke it gently, with slow and steady motions. Her tongue slips from her mouth, soaked in her saliva, and begins to coil around your shaft. Its surface tickles the sensitive flesh of your head, your hips spasming in response, your body attempting to thrust your manhood toward the source of your pleasure, but its attempt fails, your [legsDesc] still pinned by the naga’s lower half.", parse);
+	Text.Add("Meanwhile, the naga begins preparing your [multiCockDesc] to use as she pleases. <i>“We are going to have so much fun, pet… I promise, you’ll enjoy it almost as much as I will.”</i> She takes[oneof] your [multiCockDesc] in her smooth hands and begins to stroke it gently, with slow and steady motions. Her tongue slips from her mouth, soaked in her saliva, and begins to coil around your shaft. Its surface tickles the sensitive flesh of your head, your hips spasming in response, your body attempting to thrust your manhood toward the source of your pleasure, but its attempt fails, your [legsDesc] still pinned by the naga’s lower half.", parse);
 	Text.NL();
 	Text.Add("The silken hands pleasuring your [cockDesc] slide down to its base, their grip tightening somewhat. You soon realize that she simply moved her hands out of the way for her tongue to snake its way around most of your length, gently squeezing your member with each additional coil added to your [cockDesc]’s fleshy wrapping. The serpent giggles as you squirm in pleasure, moaning into her cunt as you continue to pleasure it.", parse);
 	Text.NL();
@@ -455,7 +459,7 @@ Scenes.Naga.DesertLossUseCock = function(enc) {
 	if(player.HasBalls())
 		Text.Add(" By the end of your orgasm, your [ballsDesc] feel almost painfully empty, drained completely of your spunk.", parse);
 	Text.NL();
-	Text.Add("The naga withdraws completely from your [cockDesc] as she retracts her absurdly long tongue and lifts her soaked slit away from your now-drenched face. She turns to face you as you lift your torso, a slightly disappointed look in her eyes. <i>”So little stamina, pet!”</i> she pouts melodramatically. <i>”That’s alright, I’m well equipped for situations like this. Don’t worry, this will only hurt for a second...”</i> You catch a mischievous glint in her eyes, the snake’s gaze meeting yours as she brings her mouth down to the base[s] of your shaft[s].", parse);
+	Text.Add("The naga withdraws completely from your [cockDesc] as she retracts her absurdly long tongue and lifts her soaked slit away from your now-drenched face. She turns to face you as you lift your torso, a slightly disappointed look in her eyes. <i>“So little stamina, pet!”</i> she pouts melodramatically. <i>“That’s alright, I’m well equipped for situations like this. Don’t worry, this will only hurt for a second...”</i> You catch a mischievous glint in her eyes, the snake’s gaze meeting yours as she brings her mouth down to the base[s] of your shaft[s].", parse);
 	Text.NL();
 	Text.Add("Your eyes widen as the naga pulls her lips back in a wicked grin, exposing a pair of fangs protruding from her upper jaw. With no further warning, she sinks her fangs into your crotch. You feel searing pain for a split-second, but it subsides immediately, replaced by a warm, tingling sensation as the naga pumps venom into your body. You gasp, losing your breath as your [multiCockDesc] surge[notS] with renewed vigor, swelling beyond [itsTheir] normal limit[s] while bobbing wildly and squirting pre-cum. You realize [itsTheyve] actually grown longer and thicker than [itThey] [wasWere] moments ago! A haze of lust fills your mind as your libido goes into overdrive, as if you hadn’t felt release in months.", parse);
 	Text.NL();
@@ -471,7 +475,7 @@ Scenes.Naga.DesertLossUseCock = function(enc) {
 		Text.Add("Your [vagDesc] spasms, a deluge of lubricating juices flowing from your mostly-neglected cunny. An intense need to be fucked by her pair of enormous erections washes over you, your vaginal walls squeezing uncontrollably at the emptiness inside. You squirm with anticipation, although from her efforts so far, you know the snake has other plans for you.", parse);
 		Text.NL();
 	}
-	Text.Add("<i>”There, isn’t that better?”</i> the naga asks with a wide smile on her lips and a trickle of venom rolling down her cheek. Quivering uncontrollably with artificial aphrodisia and very nearly senseless with pleasure already, you can muster only a shaky nod as a response. <i>”Very good, pet! Now that we’ve taken care of that little problem, it’s time to get down to business...”</i>", parse);
+	Text.Add("<i>“There, isn’t that better?”</i> the naga asks with a wide smile on her lips and a trickle of venom rolling down her cheek. Quivering uncontrollably with artificial aphrodisia and very nearly senseless with pleasure already, you can muster only a shaky nod as a response. <i>“Very good, pet! Now that we’ve taken care of that little problem, it’s time to get down to business...”</i>", parse);
 	Text.NL();
 	Text.Add("The naga reaches up to your shoulders and grasps them gently, shifting her weight as she slowly pushes your upper body down until your back rests on the sand once again. Her shapely breasts press against your [breastDesc], her cocks smearing pre on your abdomen as they slide unused between your bodies.", parse);
 	if(player.FirstBreastRow().Size() > 3) {
@@ -496,14 +500,14 @@ Scenes.Naga.DesertLossUseCock = function(enc) {
 		Text.Add(" Your [ballsDesc] clench painfully, over-filled with semen but helpless to fulfill your body’s need to ejaculate.", parse);
 	Text.NL();
 	if(first) {
-		Text.Add("You feel the naga laughing as she pulls her lips away from yours, taking her time to peel her tongue from yours. Her cheeks flush hotly, her face adopting an expression of wanton, lustful hunger. <i>”Oh, I suppose I should have mentioned,”</i> she explains flatly with an almost malicious, carnal expression on her face. <i>”My venom gives me <b>complete</b> control of your climax, pet. You don’t get to cum until I do.”</i> she continues, licking her lips for good measure. <i>”Don’t worry, though, it only works for a while each time I cum, and it doesn’t neutralize the... <b>other</b> effects of the venom. You’ll be hard for a good, long, time...”</i>", parse);
+		Text.Add("You feel the naga laughing as she pulls her lips away from yours, taking her time to peel her tongue from yours. Her cheeks flush hotly, her face adopting an expression of wanton, lustful hunger. <i>“Oh, I suppose I should have mentioned,”</i> she explains flatly with an almost malicious, carnal expression on her face. <i>“My venom gives me <b>complete</b> control of your climax, pet. You don’t get to cum until I do.”</i> she continues, licking her lips for good measure. <i>“Don’t worry, though, it only works for a while each time I cum, and it doesn’t neutralize the... <b>other</b> effects of the venom. You’ll be hard for a good, long, time...”</i>", parse);
 		Text.NL();
 		Text.Add("The naga’s worrying explanation trails off as she leans down to resume the lip-lock, redoubling her vaginal milking and now adding short, powerful thrusts to the sensory onslaught her animalistic cunt is delivering to your [cockDesc].", parse);
 	}
 	else {
-		Text.Add("You feel the naga laughing as she pulls her lips away from yours, her tongue playing over your lips as she retracts it enough to speak. <i>”Yes… you remember this part, don’t you, pet?”</i> You vaguely remember your scaly mistress’s explanation from your last encounter, and you steel yourself for the agonizing buildup to come. You’ll only get to cum whenever she does, and you try to brace yourself for being on edge until then.", parse);
+		Text.Add("You feel the naga laughing as she pulls her lips away from yours, her tongue playing over your lips as she retracts it enough to speak. <i>“Yes… you remember this part, don’t you, pet?”</i> You vaguely remember your scaly mistress’s explanation from your last encounter, and you steel yourself for the agonizing buildup to come. You’ll only get to cum whenever she does, and you try to brace yourself for being on edge until then.", parse);
 		Text.NL();
-		Text.Add("Seeing your understanding, she smiles at you, leaning in close. <i>”Good… I like it when my toys are eager to please me. We’re going to have such a good time making me cum...”</i> she coos, resuming her forceful kiss. Her inner walls ripple, their surfaces gripping your [cockDesc] tightly as she begins to rock her serpentine pelvis up and down.", parse);
+		Text.Add("Seeing your understanding, she smiles at you, leaning in close. <i>“Good… I like it when my toys are eager to please me. We’re going to have such a good time making me cum...”</i> she coos, resuming her forceful kiss. Her inner walls ripple, their surfaces gripping your [cockDesc] tightly as she begins to rock her serpentine pelvis up and down.", parse);
 		Text.NL();
 		Text.Add("You moan lustily as the naga subjects your expanded erection to the ecstatic sensations of her beastly pussy’s milking and her penetrating thrusts simultaneously. You know the pleasure will continue to rise, coming closer and closer to breaking your mind until the snake herself climaxes.", parse);
 	}
@@ -522,9 +526,9 @@ Scenes.Naga.DesertLossUseCock = function(enc) {
 	Text.NL();
 	Text.Add("The tail twists and turns as the snake-lady continues to use your venom-laced [cockDesc] to stuff herself, her lips and tongue unrelenting in their conquest of your mouth. Suddenly, the tail’s thickness brushes against your prostate, and you experience another agonizing non-climax, your orgasm denied again by her aphrodisiac-toxin. Your [cockDesc] bulges further, throbbing and pulsating within the naga’s obscenely talented cock-milker of a cunt.", parse);
 	Text.NL();
-	Text.Add("For her part, your serpent-mistress notices your plight, and lifts her face inches away. <i>”Ahh… There we are, pet. I absolutely <b>love</b> to watch you squirm like that, it makes me <b>so</b> hot. I think you’ll get your first reward soon...”</i> she coos, her face a mask of lewd dominance as she licks her lips. She makes eye contact, or at least as much as can be made while your eyes are rolled back in their sockets from your second lack of release.", parse);
+	Text.Add("For her part, your serpent-mistress notices your plight, and lifts her face inches away. <i>“Ahh… There we are, pet. I absolutely <b>love</b> to watch you squirm like that, it makes me <b>so</b> hot. I think you’ll get your first reward soon...”</i> she coos, her face a mask of lewd dominance as she licks her lips. She makes eye contact, or at least as much as can be made while your eyes are rolled back in their sockets from your second lack of release.", parse);
 	Text.NL();
-	Text.Add("<i>”<b>Yes!</b> Just like that! That face is <b>perfect!</b>”</i> she shouts, pulling back into a vertical position and clutching one of her monstrous members in each hand. She picks up her pace, madly hammering your [cockDesc] into her almost torturously tight pussy, and starts to furiously jack off her towering twin cocks. Moments later, you feel your engorged shaft squeezed viciously, and the naga’s slit and shafts all erupt with fluid.", parse);
+	Text.Add("<i>“<b>Yes!</b> Just like that! That face is <b>perfect!</b>”</i> she shouts, pulling back into a vertical position and clutching one of her monstrous members in each hand. She picks up her pace, madly hammering your [cockDesc] into her almost torturously tight pussy, and starts to furiously jack off her towering twin cocks. Moments later, you feel your engorged shaft squeezed viciously, and the naga’s slit and shafts all erupt with fluid.", parse);
 	Text.NL();
 	Text.Add("Geysers of alabaster jizz stream from her massive pricks, most of it soaring over you onto the desert sands with the force of her climax, but some lands on your [breastDesc], covering them in a thick coat of hot, sticky cum. A flood of femcum bursts from the naga’s slit, and as you feel it seep into the skin of your [cockDesc] and crotch. Your body convulses, your denied orgasms coming back to you with a vengeance and bringing you to a furious double-climax.", parse);
 	Text.NL();
@@ -555,7 +559,7 @@ Scenes.Naga.DesertLossUseCock = function(enc) {
 	}
 	Text.Add("When you’ve finally ridden out the mind-wracking pleasure of the double orgasm you’ve just been treated to, you notice that the naga hasn’t moved. She’s slowly stroking her still-stiff bitch-breakers and waiting with a licentious grin for realization to dawn on you. Your [cockDesc] is still rock-hard, swollen, and enveloped in the titillating tightness of the snake’s cunt. When she sees the look in your eyes, the naga bursts out in wicked laughter.", parse);
 	Text.NL();
-	Text.Add("<i>”Oh, you thought we were done?”</i> The naga asks rhetorically, leaning in to whisper in your ear. <i>”We. Are. Just. Getting. Started. <b>Pet.</b>”</i>", parse);
+	Text.Add("<i>“Oh, you thought we were done?”</i> The naga asks rhetorically, leaning in to whisper in your ear. <i>“We. Are. Just. Getting. Started. <b>Pet.</b>”</i>", parse);
 	Text.Flush();
 	
 	world.TimeStep({hour: 2});
@@ -604,18 +608,270 @@ Scenes.Naga.DesertWinPrompt = function() {
 	SetGameState(GameState.Event);
 	
 	var parse = {
-		
+		weapon : function() { return player.WeaponDesc(); },
+		master : player.mfFem("master", "mistress")
 	};
 	
 	enc.finalize = function() {
 		Encounter.prototype.onVictory.call(enc);
 	};
 	
+	parse["comp"] = party.Num() == 2 ? party.Get(1).name :
+	                party.Num() > 2 ? "your companions" : "";
+	
 	Text.Clear();
-	Text.Add("", parse);
+	Text.Add("The naga slumps down, defeated. Her upper body falls to the sand with a thump, where she rests, breathing heavily. ", parse);
+	if(naga.LustLevel() > 0.75)
+		Text.Add("Her cheeks flush deeply with arousal from your battle, her tongue lolling out of her wide-open mouth, giving her a positively whorish countenance. ", parse);
+	parse["c"] = party.Num() > 1 ? Text.Parse(", [comp] wandering off to rest and recuperate", parse) : "";
+	Text.Add("You take a moment to catch your breath and stow your [weapon][c].", parse);
 	Text.NL();
+	Text.Add("When you turn your attention back to the naga, she has regained some of her composure, though she’s lost her air of aggressive dominance. Her upper body lies prostrated before you in a gesture of complete submission.", parse);
+	Text.NL();
+	Text.Add("<i>“Please forgive me, [master]. I had no idea you were this… powerful.”</i> Her surrender is delivered in a breathy, clearly aroused voice, and she licks her lips enticingly when she pauses. It’s blatantly obvious that the naga will let you do whatever you want to her.", parse);
 	Text.Flush();
 	
-	//TODO
+	Scenes.Naga.DesertWinPrompt2(enc, false);
+}
+
+Scenes.Naga.DesertWinPrompt2 = function(enc, hypno) {
+	var naga = enc.naga;
+	
+	var parse = {};
+	
+	//[Fuck][Hypnotize][Leave]
+	var options = new Array();
+	if(player.FirstCock()) {
+		options.push({ nameStr : "Fuck & Jerk",
+			func : function() {
+				Scenes.Naga.DesertWinFuckJerk(enc, hypno);
+			}, enabled : true,
+			tooltip : "Pound the naga’s slit while giving her a double handjob."
+		});
+	}
+	/* TODO
+	options.push({ nameStr : "name",
+		func : function() {
+			
+		}, enabled : true,
+		tooltip : ""
+	});
+	 */
+	if(Naga.HypnoUnlocked()) {
+		options.push({ nameStr : "Hypnotize",
+			func : function() {
+				Scenes.Naga.DesertWinHypnotize(enc);
+			}, enabled : !hypno,
+			tooltip : "Having been on the receiving end of the naga’s hypnotic eyes before, you have a plan on how to turn her powers back on herself..."
+		});
+	}
+	options.push({ nameStr : "Leave",
+		func : function() {
+			Text.Clear();
+			if(player.LustLevel() > 0.4)
+				Text.Add("You decide you’d rather satisfy your own needs elsewhere than with this aggressive snake.", parse);
+			else
+				Text.Add("You decide it best to leave the serpent to her own depravity.", parse);
+			if(hypno)
+				Text.Add(" You turn and walk away from the entranced naga.", parse);
+			Text.NL();
+			
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("Whimpering, she starts to follow you, clearly still hoping for release at your hands. You notice her pursuit and tell her in no uncertain terms that you’re done with her. Just before you turn away again you notice her slither off, no doubt to look for something else to satisfy her heated loins.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				parse["Master"] = player.mfFem("Master", "Mistress");
+				parse["Chuckling"] = player.mfFem("Chuckling", "Giggling");
+				Text.Add("<i>“[Master]!”</i> she calls out as you distance yourself. “Wh-what about me?” she asks, confused at being left without release. You tell her that you’re leaving, and she’s free to do as she wishes. Before you can blink, she wraps her hands around her swollen, throbbing cocks and starts masturbating. [Chuckling], you turn away from the perverse spectacle, hearing wet pumping noises as you depart.", parse);
+			}, 1.0, function() { return true; });
+			
+			scenes.Get();
+			
+			Text.NL();
+			
+			parse["comp"] = party.Num() == 2 ? party.Get(1).name :
+			                party.Num() > 2 ? "your companions" : "";
+			parse["c"] = party.Num() > 1 ? Text.Parse(" rejoin [comp] and", parse) : "";
+			Text.Add("You[c] leave the defeated naga behind.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(enc.finalize);
+		}, enabled : true,
+		tooltip : "You want nothing more to do with the naga, set her free."
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Naga.DesertWinHypnotize = function(enc) {
+	var naga = enc.naga;
+	
+	var parse = {};
+	
+	Text.Clear();
+	Text.Add("Grinning devilishly, you scan the scaly submissive’s jewelry for a large reflective surface. You find what you’re looking for; the centerpiece of her necklace is a wide, mostly-flat golden plate, and you quickly find your face in the reflection. You tell the naga to give it to you, and she agrees and quickly removes it, presenting it to you with her head bowed.", parse);
+	Text.NL();
+	Text.Add("You use a bit of clothing to give the metal a bit of extra polish, then, satisfied with your work, you kneel down to bring your face level with the naga’s. You align the golden plate with the her eyes, and ask if she can see her eyes clearly in the reflection. She says nothing, but nods eagerly. Grinning again, you slide your free hand up to the back of the naga’s head, grasp her hair firmly at the base, and order her to use her hypnotic magic on herself.", parse);
+	Text.NL();
+	Text.Add("You shield your eyes with the other side of the reflective plate, waiting a few moments until the faint glow emanating from her eyes disappears. When you make eye contact again, the naga’s magenta eyes are completely lust-crazed, all reason and disobedience gone. Her hands tremble, her body obviously aching for pleasure. The only thing keeping her from furiously masturbating is her hope that you will fulfill her desperate need to be used as a fucktoy.", parse);
+	Text.Flush();
+	
+	player.subDom.IncreaseStat(75, 1);
+	
+	world.TimeStep({minute : 5});
+	
+	Scenes.Naga.DesertWinPrompt2(enc, true);
+}
+
+
+Scenes.Naga.DesertWinFuckJerk = function(enc, hypno) {
+	var naga = enc.naga;
+	
+	var p1cock = player.BiggestCock();
+	var allCocks = player.AllCocksCopy();
+	for(var i = 0; i < allCocks.length; i++) {
+		if(allCocks[i] == p1cock) {
+			allCocks.remove(i);
+			break;
+		}
+	}
+	
+	var parse = {
+		master        : player.mfFem("master", "mistress"),
+		earDesc       : function() { return player.EarDesc(); },
+		biggest       : player.NumCocks() > 1 ? " biggest" : "",
+		multiCockDesc : function() { return player.MultiCockDesc(); },
+		multiCockDesc2 : function() { return player.MultiCockDesc(allCocks); },
+		cockDesc      : function() { return p1cock.Short(); },
+		cockTip       : function() { return p1cock.TipShort(); },
+		ballsDesc     : function() { return player.BallsDesc(); },
+		vagDesc       : function() { return player.FirstVag().Short(); },
+		clitDesc      : function() { return player.FirstVag().ClitShort(); },
+		buttDesc      : function() { return player.Butt().Short(); },
+		anusDesc      : function() { return player.Butt().AnalShort(); },
+		breastDesc    : function() { return player.FirstBreastRow().Short(); },
+		nipsDesc      : function() { return player.FirstBreastRow().NipsShort(); },
+		nipDesc       : function() { return player.FirstBreastRow().NipShort(); },
+		hairDesc      : function() { return player.Hair().Short(); },
+		legsDesc      : function() { return player.LegsDesc(); },
+		hipsDesc      : function() { return player.HipsDesc(); },
+		thighsDesc    : function() { return player.ThighsDesc(); }
+	};
+	
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
+	
+	
+	Text.Clear();
+	Text.Add("Feeling a distinct tightness in your nether regions, you excitedly remove your equipment, disrobing until you’re completely nude. As soon as [itsTheyre] free, your [multiCockDesc] begin[notS] to harden, throbbing at the sight of the scaly slit before you.", parse);
+	if(player.NumCocks() > 1)
+		Text.Add(" You sigh at the misfortune of only having one hole to use, leaving[someof2] your other cock[s2] in the proverbial lurch, but the promise of that one, tight pussy is enough to keep blood rushing to your crotch.", parse);
+	Text.NL();
+	if(hypno) {
+		Text.Add("You inform the naga that you’re going to ravage her tight cunt, to use her like she used you the last time you fell prey to her hypnotic magic. Cheekily, you assure her that she’ll probably get off in the process.", parse);
+		Text.NL();
+	}
+	parse["hypno1"] = hypno ? ", or you’ll find something else to fuck" : "";
+	parse["hypno2"] = hypno ? " Please, don’t go! Let me taste your cock, I <b>need</b> it inside me!" : "";
+	parse["hypno3"] = hypno ? "subserviently" : "excitedly";
+	Text.Add("You present the naga with your[biggest] cock, holding it in front of her gaping mouth. You tell her to finish getting you hard, and quickly[hypno1]. <i>“Yes, [master]![hypno2]”</i> she replies [hypno3], hungrily diving on her appetizer.", parse);
+	Text.NL();
+	parse["hypno"] = hypno ? ", clouded" : "";
+	Text.Add("The naga eagerly wraps your cock’s head first in her tongue, then with her mouth, her lips closing around the the bottom of your [cockTip]. She begins to suck vigorously, her lusty[hypno] eyes locked to your gaze as she coaxes your shaft to become more and more rigid. Her tongue plays over the surface of your member as she slides her lips lower, wrapping more of your length in her mouth’s delightful warmth and moisture.", parse);
+	Text.NL();
+	if(p1cock.Len() <= 13)
+		Text.Add("Before you know it, the scaly slut takes the entirety of your [cockDesc] into her organic vacuum of a mouth, its insides hot and soft around your member. The suction on your  prick intensifies, and she begins to bob her head up and down, blowing you slowly but fiercely. The air is filled with wet slurps and gulps as pre starts to leak from your [cockTip], only to be swallowed almost immediately.", parse);
+	else {
+		Text.Add("Your [cockTip] bumps against the back of your scaly slut’s throat, and her lips curl slightly; an attempt to smile at you around the thickness of your tool. Her eyes flutter closed as she swallows, drawing the next inch of your [cockDesc] into the succulent tightness of her throat. She opens her eyes as she pushes her head further down, engulfing the rest of your throbbing maleness and forming a tight seal around your base with her lips.", parse);
+		Text.NL();
+		Text.Add("She hums lasciviously as she draws her head up, the sensation causing your cock to pulsate with your heartbeat and swell to its full size in no time. She begins to vigorously fellate you, dutifully plunging down your entire shaft with a fierce vigor. She obviously wants to get you hard as quickly as she can, probably to get your manhood inside her slit as soon as possible.", parse);
+	}
+	Text.NL();
+	parse["hypno"] = hypno ? "overflowing with lust" : "glittering with eagerness";
+	Text.Add("After scant moments of the naga’s oral ministrations, you’re stiff as iron and ready to plunge into her pussy. You tell the naga to stop, and she complies happily, her eyes [hypno]. She makes sure to leave your [cockDesc] glistening with her saliva as she finally peels her tongue away.", parse);
+	Text.NL();
+	Text.Add("<i>“How would you like me, [master]?”</i> she asks excitedly, one hand caressing one of her round, full breasts. The shapely fingers of her other hand push her slit open and play with her now-exposed, engorged clit.", parse);
+	Text.NL();
+	Text.Add("You order your pet snake to make sure you’re comfortable while you fuck her. She lies back, her upper body mostly flat against the sands below. Raising her crotch into the air, she presents her pussy and displays her stiff cocks as they drool precum down both sides of her scaly hips. Her tail provides a perfect resting place for your [hipsDesc] while you go to town. You smile and tell her that it will do nicely, while stroking your turgid, moistened shaft. You get into position, lining up the [cockTip] of your [cockDesc] with the naga’s sopping wet snatch, and resting your butt gingerly on the smooth scales of her tail.", parse);
+	Text.NL();
+	Text.Add("Glancing upward, you notice the naga is now vigorously kneading her breasts, pausing only briefly to twist and tweak her nipples, biting her lower lip each time she does. Her tongue slips out of her mouth to assist her hands in pleasuring her chest. The snake-slut’s wanton display only serves to further fuel your sex drive, and you take the opportunity to shove the first three inches of your rock-hard shaft into her tight, rippling cunt. The naga screams in pleasure as your maleness penetrates her, the walls of her pussy practically vibrating against your [cockDesc].", parse);
+	Text.NL();
+	
+	var exp = hypno ? 4 : 3;
+	
+	Sex.Vaginal(player, naga);
+	naga.FuckVag(naga.FirstVag(), p1cock, exp);
+	player.Fuck(p1cock, exp);
+	
+	Text.Add("You smile at the lust-addled naga as you push in more of your throbbing member. Her lusty wail fades into a moan, her cocks bouncing and squirting precum into the air. You let out a pleasured sigh of your own as you thrust again, pushing the rest of your meaty shaft into the incredible tightness of the serpent’s soaking pussy. As you embed your whole [cockDesc] inside her twat, her vaginal walls ripple, their surfaces rubbing against the skin on your pecker in a wildly twisting and undulating manner.", parse);
+	Text.NL();
+	if(player.NumCocks() > 1) {
+		parse["c"] = player.NumCocks() > 2 ? "the rest of your" : "your other";
+		Text.Add("Your unused cock[s2] throb[notS2], slapping against the naga’s scales. You decide it only fair to give <b>some</b> pleasure to [c] prick[s2], and collect some of the snake’s copious pre to use as lube. Smearing your slut’s juice on your shaft[s2], you begin to stroke [itThem2], moaning gently as the sensations combine with the delightful intensity of the tight box your preoccupied pecker is buried in.", parse);
+		Text.NL();
+	}
+	parse["hypno1"] = hypno ? "your temporary slave" : "the serpent";
+	parse["hypno2"] = hypno ? "hypno-slut" : "lover";
+	Text.Add("Both your voices crescendo as your mutual pleasure intensifies. You slowly pull your member out of her twat, preparing to start fucking [hypno1] in earnest. Your steely phallus drips with a mixture of your [hypno2]’s saliva and pussy juices, and slides out of her passage with rapturous ease. ", parse);
+	if(hypno)
+		Text.Add("Despite the ample lubrication, it feels like the scaly slut is trying desperately not to let your [cockDesc] leave her cunt. Her vaginal muscles clutch, squeezing fervently on your erection as if to trap it deep inside, but her efforts prove futile. ", parse);
+	Text.Add("You let out a long, low moan while you savor the sensation, a mere prologue to the pleasure you’re about to feel.", parse);
+	Text.NL();
+	Text.Add("Taking the briefest of moments to catch your breath, you make eye contact with the naga. She licks her lips, returning your gaze with half-closed, lust-drunk eyes. <i>“", parse);
+	if(hypno)
+		Text.Add("I want you <b>soooo</b> bad, [master]! Please, fuck me hard, pound my tight little snake pussy <b>RAW!</b>", parse);
+	else
+		Text.Add("Please… p-please just fuck me already!", parse);
+	parse["hypno"] = hypno ? "yells in a display of carnal servitude" : "moans pleadingly";
+	Text.Add("”</i> she [hypno].", parse);
+	Text.NL();
+	parse["hypno"] = hypno ? "licentious" : "desperate";
+	parse["slap"] = player.IsGoo() ? "wet squelch" : "loud slap";
+	Text.Add("Hearing a [hypno] plea like that, your [cockDesc] surges with newfound ardor, and you promptly buck your hips, burying your tool inside the snake until your [thighsDesc] hit her tail with a [slap]. Burning with your own lust, you vigorously fuck her, fully impaling the naga on your cock with each thrust. Her hands clench at her breasts, soft titflesh bulging between her fingers as she moans in sexual bliss.", parse);
+	Text.NL();
+	Text.Add("The naga’s pair of monstrous shafts throb, and you can’t resist the opportunity to play with such eager cocks. She shrieks in ecstasy as you grip their bases, and her cunt constricts, becoming even tighter just as you hilt yourself inside her once again. You slide your hands up her precum-slicked peckers, barely able to wrap your fingers around their girths.", parse);
+	Text.NL();
+	parse["chuckle"] = player.mfFem("chuckle", "giggle");
+	Text.Add("You [chuckle] as you begin to jack off the serpentine slut, at first keeping time with your thrusts but soon increasing and varying the pace, giving the naga distinctly different stimuli to deal with. Her whole body quakes, her mind struggling to focus on anything but the triplicate sensations she’s experiencing. Her pussy clenches forcefully, stopping your thrust in place while the rhythmic contractions of her vaginal muscles assail your maleness with waves of obscene pleasure.", parse);
+	Text.NL();
+	Text.Add("The tight, milking sensations on your [cockDesc] build to a fever pitch, and you feel pleasure flooding your loins. ", parse);
+	if(player.HasBalls()) {
+		var sacksize = player.Balls().SackSize();
+		parse["sack"] = sacksize < 4 ? "tight pouch" :
+		                sacksize < 8 ? "plump sack" : "heaving nutsack";
+		Text.Add("Your [sack] clenches around your [ballsDesc] as you practically feel your spunk surging to your buried prick. ", parse);
+	}
+	parse["hypno"] = hypno ? "ensorcelled, " : "";
+	Text.Add("The naga’s [hypno]wanton eyes roll back in their sockets, and you feel her thick cocks begin rapidly pulsating as the walls of her vice-tight pussy relent. You seize the opportunity to hilt yourself inside her as you reach your own climax.", parse);
+	if(player.FirstVag())
+		Text.Add(" Your [clitDesc] presses against her scaly tail, and you grind your hips, sending jolts of ecstasy to your unused [vagDesc], inviting it to the pleasure party your cock[s] [isAre] about to throw.", parse);
+	Text.NL();
+	
+	var cum = player.OrgasmCum();
+	
+	Text.Add("The snake screams, her twin shafts bulging obscenely as they erupt, thick globs of her off-white jizz soaring through the desert air to either side of her. You feel your [cockDesc] following suit, injecting your own steaming seed deep inside the naga’s love tunnel. ", parse);
+	if(player.NumCocks() > 1) {
+		parse["hypno"] = hypno ? "slave" : "pet";
+		Text.Add("Your loose cannon[s2] fire [itsTheir2] payload[s2], shooting arcing ropes of your creamy jism into the air. You and your scaly [hypno] resemble a cum-spewing fountain, showering the desert in the fruits of your spontaneous tryst. ", parse);
+	}
+	Text.Add("Gushing with its own orgasm, the serpent’s tight cunt soaks your cock ", parse);
+	if(player.HasBalls())
+		Text.Add("and [ballsDesc] ", parse);
+	Text.Add("in slick, warm, liquid orgasm.", parse);
+	if(cum > 3)
+		Text.Add(" Some of your own cum spills out alongside it, the naga’s love tunnel too tight to contain your ample discharge.", parse);
+	Text.NL();
+	if(player.FirstVag()) {
+		parse["cum"] = cum > 6 ? "like a waterfall" :
+		               cum > 3 ? "like a river" : "in a trickle";
+		Text.Add("As if your serpent lover’s orgasm presented a challenge, your unfilled [vagDesc] releases a torrent of femcum, spilling down the naga’s tail [cum]. Your body quakes and you scream, throwing your head back in a rush of dual orgasmic euphoria.", parse);
+		Text.NL();
+	}
+	parse["hypno"] = hypno ? " entranced" : "";
+	Text.Add("Utterly spent, the[hypno] naga loses consciousness, collapsing to the sand. You free your softening cock from the still-tight confines of the sleeping naga’s pussy. Exhausted yourself, you gather your discarded clothing and get dressed, shaking the sand out as you go.", parse);
+	Text.Flush();
+	
+	world.TimeStep({hour: 1});
+	
 	Gui.NextPrompt(enc.finalize);
 }

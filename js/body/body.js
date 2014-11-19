@@ -120,9 +120,10 @@ Race = {
 	ferret   : 19,
 	plant    : 20,
 	snake    : 21,
+	goo      : 22,
 	
 	// TODO: Keep updated!
-	numRaces : 22
+	numRaces : 23
 }
 Race.Desc = function(race) {
 	var r;
@@ -182,6 +183,7 @@ Race.Desc = function(race) {
 		if     (r == 0) return "snake";
 		else if(r == 1) return "snake-like";
 		else            return "serpentine";
+	case Race.goo: return "goo";
 	default: return "undefined";
 	}
 }
@@ -243,6 +245,7 @@ Race.Quantifier = function(race) {
 	case Race.snake: r = Rand(2);
 		if(r == 0) return "a snake-like";
 		else       return "a serpentine";
+	case Race.goo: return "a gelatinous";
 	default: return "an undefined";
 	}
 }
@@ -731,6 +734,8 @@ Body.prototype.SkinDesc = function(part) {
 		case Race.dog:
 		case Race.fox:
 		case Race.rabbit: return col + " fur";
+		
+		case Race.goo: return col + " slime";
 		
 		case Race.human:
 		case Race.elf:

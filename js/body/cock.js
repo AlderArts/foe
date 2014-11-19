@@ -50,6 +50,9 @@ Cock.prototype.Clone = function() {
 	return cock;
 }
 
+Cock.prototype.Len = function() {
+	return this.length.Get();
+}
 Cock.prototype.Size = function() {
 	return this.thickness.Get() * this.length.Get();
 }
