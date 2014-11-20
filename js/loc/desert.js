@@ -62,6 +62,9 @@ world.loc.Desert.Drylands.endDescription = function() {
 	Text.AddOutput("Going into the desert unprepared is probably a bad idea.<br/>");
 }
 
+world.loc.Desert.Drylands.enc.AddEnc(function() {
+	return Scenes.Roaming.FindSomeCoins;
+}, 0.5, function() { return true; });
 
 world.loc.Desert.Drylands.AddEncounter({
 	nameStr : "Lizard",

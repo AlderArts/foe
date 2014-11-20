@@ -188,6 +188,10 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 }, 1.0, function() { return true; });
 
 world.loc.Plains.Crossroads.enc.AddEnc(function() {
+	return Scenes.Roaming.FindSomeCoins;
+}, 0.5, function() { return true; });
+
+world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	return function() {
 		var parse = {
 			playername : player.name,

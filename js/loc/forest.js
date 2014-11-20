@@ -111,6 +111,9 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 	return Scenes.Momo.MomoEnc;
 }, 1.0, function() { return momo.Wandering(); });
 
+world.loc.Forest.Outskirts.enc.AddEnc(function() {
+	return Scenes.Roaming.FindSomeCoins;
+}, 0.5, function() { return true; });
 
 world.loc.Forest.Outskirts.enc.AddEnc(function() {
 	return function() {

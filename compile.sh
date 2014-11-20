@@ -124,6 +124,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/nomads/cavalcade.js \
 	js/event/outlaws/maria.js \
 	js/event/raven.js \
+	js/event/roaming.js \
 	js/enemy/bandit.js \
 	js/enemy/imp.js \
 	js/enemy/introdemon.js \

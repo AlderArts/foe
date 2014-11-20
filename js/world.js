@@ -7,6 +7,31 @@ world = {
 	SaveSpots     : {}
 }
 
+world.Locations = {
+	Plains    : 0,
+	Forest    : 1,
+	Desert    : 2,
+	Highlands : 3,
+	Lake      : 4
+};
+
+world.CurrentLocation = function(loc) {
+	loc = loc || party.location;
+	
+	if     (loc == world.loc.Plains.Crossroads)
+		return world.Locations.Plains;
+	else if(loc == world.loc.Forest.Outskirts)
+		return world.Locations.Forest;
+	else if(loc == world.loc.Desert.Drylands)
+		return world.Locations.Desert;
+	else if(loc == world.loc.Highlands.Hills)
+		return world.Locations.Highlands;
+	else if(loc == world.loc.Lake.Shore)
+		return world.Locations.Lake;
+	
+	return -1;
+}
+
 // Update function (for animations and transitions)
 world.Update = function(frametime) {
 	/*
