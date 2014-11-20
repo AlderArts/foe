@@ -106,11 +106,11 @@ Equine.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
-Scenes.Equine.StallionImpregnate = function(mother) {
+Scenes.Equine.StallionImpregnate = function(mother, father) {
 	mother.PregHandler().Impregnate({
 		slot   : PregnancyHandler.Slot.Vag,
 		mother : mother,
-		father : enc.stallion,
+		father : father,
 		type   : PregType.Equine,
 		num    : 1,
 		time   : 24,
@@ -240,26 +240,34 @@ Scenes.Equine.LossPrompt = function() {
 		var options = new Array();
 		if(player.NumCocks() > 0) {
 			options.push({ nameStr : "Fuck her",
-				func : Scenes.Equine.FuckFemale, obj : enc, enabled : true,
+				func : function() {
+					Scenes.Equine.FuckFemale(enc);
+				}, enabled : true,
 				tooltip : "The female equine has caught your interest, and judging from her demeanor, she likely wouldn't object."
 			});
 		}
 		if(player.NumVags() > 0) {
 			options.push({ nameStr : "Get fucked",
-				func : Scenes.Equine.GetFucked, obj : enc, enabled : true,
+				func : function() {
+					Scenes.Equine.GetFucked(enc);
+				}, enabled : true,
 				tooltip : "Taking on that thick horse cock looks like a challenge, but you can't let that stop you!"
 			});
 		}
 		
 		if(player.NumCocks() > 0) {
 			options.push({ nameStr : "Threesome",
-				func : Scenes.Equine.Threesome1, obj : enc, enabled : true,
+				func : function() {
+					Scenes.Equine.Threesome1(enc);
+				}, enabled : true,
 				tooltip : "Why not have both of them join in? The stallion looks like he is willing to share his partner... that, and they both have parts you could play with."
 			});
 		}
 		else if(player.NumVags() > 0) {
 			options.push({ nameStr : "Threesome",
-				func : Scenes.Equine.Threesome2, obj : enc, enabled : true,
+				func : function() {
+					Scenes.Equine.Threesome2(enc);
+				}, enabled : true,
 				tooltip : "Why not have both of them join in? That cock looks like it could serve both you and the mare."
 			});
 		}
@@ -422,7 +430,7 @@ Scenes.Equine.GetFucked = function(enc) {
 	player.FuckVag(player.FirstVag(), enc.stallion.FirstCock(), 3);
 	enc.stallion.Fuck(enc.stallion.FirstCock(), 3);
 	
-	Scenes.Equine.StallionImpregnate(player);
+	Scenes.Equine.StallionImpregnate(player, enc.stallion);
 	
 	Text.Add("The experience becomes amplified as your hips begin sliding up, riding the stallion for everything he's worth. He grunts every time you squeeze your insides around him, and you could probably make him cry out with just the manipulation of your hips if you weren't so distracted by your own pleasure. You continue to slide just a few inches off, then wetly slam back down to his balls.", parse);
 	Text.NL();
@@ -555,7 +563,7 @@ Scenes.Equine.Threesome2 = function(enc) {
 	player.FuckVag(player.FirstVag(), enc.stallion.FirstCock(), 3);
 	enc.stallion.Fuck(enc.stallion.FirstCock(), 3);
 	
-	Scenes.Equine.StallionImpregnate(player);
+	Scenes.Equine.StallionImpregnate(player, enc.stallion);
 	
 	Text.Add("The mare greedily presses her slit against his cock, rubbing her wet lips into his shaft. He presses his hands on your hips, latching onto them. The horse hilts himself inside of your [vagDesc], your lips breaking contact with the mare as you moan into her face.", parse);
 	Text.NL();
@@ -852,7 +860,7 @@ Scenes.Equine.WinRideHimVag = function(enc) {
 	Text.Add("Before you can reach your peak, the equine cries out. His frame goes tense, his heavy balls contract, and he thrusts his hips upward as ecstasy overpowers his endurance like a tidal wave. A gasp escapes your lips as you suddenly feel a surge of liquid heat flowing into your lower half. Your gut becomes paunched as the thick seed floods your uterus beyond capacity, streams of off-white jizz spurting past the imperfect seal of your stretched labia and drooling down the underside of his scrotum.", parse);
 	Text.NL();
 	
-	Scenes.Equine.StallionImpregnate(player);
+	Scenes.Equine.StallionImpregnate(player, enc.stallion);
 	
 	Text.Add("After a few more squirts, the stallion is spent. He is sprawled limply on the ground beneath you, his tongue lolling out and his eyes almost crossed from the intense pleasure. You can feel his cock shrinking inside you, and it soon flops out to allow a cascade of spunk to pour from your [vagDesc] and coat his lower body white. You click your tongue in disappointment; you were quite close to your own release, and being deprived like that has left you a little edgy. There must be some way to...", parse);
 	Text.NL();

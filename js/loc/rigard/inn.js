@@ -894,7 +894,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 			Text.Clear();
 			
 			parse["foxvixen"] = terry.mfPronoun("fox", "vixen");
-			parse = terry.ParserPronouns(terry);
+			parse = terry.ParserPronouns(parse);
 			
 			if(rigard.LB["OTerry"] != 0) {
 				if(party.InParty(terry)) {
