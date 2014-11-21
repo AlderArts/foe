@@ -151,6 +151,10 @@ Terry.PersonalQuest = {
 	Completed  : 2
 };
 
+Terry.prototype.Recruited = function() {
+	return this.flags["Saved"] >= Terry.Saved.Saved;
+}
+
 Terry.prototype.FromStorage = function(storage) {
 	this.Butt().virgin       = parseInt(storage.virgin) == 1;
 	

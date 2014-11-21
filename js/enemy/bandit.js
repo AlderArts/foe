@@ -94,7 +94,7 @@ function Bandit(gender) {
 	Entity.call(this);
 	this.monsterName       = "the bandit";
 	this.MonsterName       = "The bandit";
-		
+	
 	if(gender == Gender.male) {
 		if(Math.random() < 0.5)
 			this.avatar.combat     = Images.bandit_male1;
