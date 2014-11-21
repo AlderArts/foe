@@ -14,6 +14,13 @@ Items.Accessories.IronBangle.Long = function() { return "A crude lump of iron, f
 Items.Accessories.IronBangle.EquipType = ItemType.Accessory;
 Items.Accessories.IronBangle.effect.maxHp = 20;
 
+Items.Accessories.GoldEarring = new Item("ear0", "G.Earring");
+Items.Accessories.GoldEarring.price = 30;
+Items.Accessories.GoldEarring.Short = function() { return "Gold earring"; }
+Items.Accessories.GoldEarring.Long = function() { return "A golden earring. Pretty, but not terribly useful in combat."; }
+Items.Accessories.GoldEarring.EquipType = ItemType.Accessory;
+Items.Accessories.GoldEarring.effect.charisma = 2;
+
 Items.Accessories.RaniFavor = new Item("neck0", "Rani's favor");
 Items.Accessories.RaniFavor.price = 1000;
 Items.Accessories.RaniFavor.Short = function() { return "Silver necklace"; }

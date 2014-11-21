@@ -244,12 +244,10 @@ Scenes.Roaming.BanditsGen = function(capt) {
 	var desc = scenes.Get();
 	
 	var enc = new Encounter(enemy);
-	enc.canRun = false;
+	enc.canRun      = false;
 	enc.onEncounter = Scenes.Roaming.BanditsOnEncounter;
-	/* TODO
-	enc.onLoss = ...
-	enc.onVictory = ...
-	*/
+	enc.onLoss      = Scenes.Roaming.BanditsLoss;
+	enc.onVictory   = Scenes.Roaming.BanditsWin;
 	
 	enc.leader = enemy.Get(0);
 	enc.desc = Text.Parse("a small group, certainly not more than half a dozen. Apparently they all wear [rclothing] and " + desc, {rclothing : rclothing});
@@ -282,10 +280,10 @@ Scenes.Roaming.Bandits = function() {
 	parse["c"] = party.Num() > 1 ? Text.Parse(", [comp] in tow", parse) : "";
 	Text.Add(" Someone’s burning a fire inside. Curious, you approach to investigate[c]. As you get closer, you hear a sheep braying somewhere on the other side of the house. Deciding to take no chances with the sort of desperate men who would live in such a desperate place, you crouch down by the window, and after listening for a moment, peek inside.", parse);
 	Text.NL();
-	parse["num"] = bandits.enemy.Num() > 3 ? "four" : "three";
+	parse["num"] = bandits.enemy.NumTotal() > 3 ? "four" : "three";
 	var males   = 0;
 	var females = 0;
-	var num = Math.min(bandits.enemy.Num(), 4);
+	var num = Math.min(bandits.enemy.NumTotal(), 4);
 	for(var i = 0; i < num; ++i) {
 		var bandit = bandits.enemy.Get(i);
 		if(bandit.Gender() == Gender.male)
@@ -374,23 +372,295 @@ Scenes.Roaming.Bandits = function() {
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
-				
+				bandits.Start();
 			});
 		}, enabled : true,
 		tooltip : "There’s no need to get help - you’ll take them all out here and now."
 	});
-	options.push({ nameStr : "name",
+	options.push({ nameStr : "Extort",
 		func : function() {
 			Text.Clear();
-			Text.Add("", parse);
+			parse["c"] = party.Num() == 2 ? Text.Parse(", while [name] steps up into the doorway behind you", {name: party.Get(1).name}) :
+			             party.Num() > 2 ? ", while your companions frame you in the doorway" : "";
+			
+			Text.Add("Squaring your shoulders and doing your best to look menacing, you rap once on the farm door, before pushing it open with a loud screech of grating hinges. Taking a step inside, you are greeted by [num] scowling faces[c].", parse);
 			Text.NL();
-			Text.Flush();
+			
+			var success = player.Cha() + Math.random() * 20 >= 40;
+			
+			if(success) {
+				Text.Add("In the foreword of your speech, you explain that you do understand that everyone must make a living in this world, and that you fully understand their decisions. From there, you proceed to remark that, however, their chosen path entails some additional costs of doing business, to wit, payment for the maintenance of secrecy.", parse);
+				Text.NL();
+				Text.Add("You don’t know whether it’s because of your seemingly fearless appearance or the crime boss mannerisms you’ve done your best to imitate, but the bandits quickly surrender before your verbiage, clearly outgunned. They hand over a decent payment and see you out the door, bowing and scraping the whole way. Not only does crime apparently pay, but you can’t help but think that it’s quite fun too.", parse);
+				Text.NL();
+				Text.Add("<b>You successfully convinced the bandits to hand over 20 coin in hush money, and the experience taught you a little about the art of persuasion.</b>", parse);
+				Text.Flush();
+				
+				player.charisma.IncreaseStat(40, 1);
+				
+				party.coin += 20;
+				
+				Gui.NextPrompt();
+			}
+			else {
+				Text.Add("You do your best to sound intimidating, but your speech comes out sounding like you’re a child trying to threaten the bully with telling the teacher on him. As you might have expected, the bandits look more angry than anything, and when you try to back out and change course, one of them steps between you and the door.", parse);
+				Text.NL();
+				Text.Add("Looks like you’ll have to fight your way out!", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					bandits.Start();
+				});
+			}
 		}, enabled : true,
-		tooltip : ""
+		tooltip : "You’re quite willing to leave them alone, if only they’ll pay you a little bit of compensation. Now to convince them..."
+	});
+	options.push({ nameStr : "Leave",
+		func : PrintDefaultOptions, enabled : true,
+		tooltip : "This isn’t worth the bother - just leave them alone."
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
 Scenes.Roaming.BanditsOnEncounter = function() {
+	var parse = {};
 	
+	Text.Clear();
+	var num = this.enemy.NumTotal();
+	if(num > 4) {
+		var bandit = this.enemy.Get(4);
+		parse["s"]      = num > 5 ? "s" : "";
+		parse["crowd"]  = num > 5 ? "crowd around" : "try to push through";
+		parse["heshe"]  = num > 5 ? "they" : bandit.heshe();
+		parse["hisher"] = num > 5 ? "their" : bandit.hisher();
+		Text.Add("The bandit[s] in the back room [crowd] the door, but can’t quite find the space to join battle in this crowded chamber. You suspect [heshe]’ll replace [hisher] comrades when you defeat them.", parse);
+		Text.Flush();
+		
+		// Start combat
+		Gui.NextPrompt(function() {
+			enc.PrepCombat();
+		});
+	}
+	else {
+		enc.PrepCombat();
+	}
+}
+
+Scenes.Roaming.BanditsLoss = function() {
+	SetGameState(GameState.Event);
+	
+	var enc = this;
+	enc.finalize = function() {
+		Encounter.prototype.onLoss.call(enc);
+	};
+	var bandits = enc.enemy;
+	var num = bandits.NumTotal();
+	
+	var fallen = 0;
+	var first = null;
+	for(var i = 0; i < num; ++i) {
+		var bandit = bandits.Get(i);
+		if(bandit.Incapacitated()) fallen++;
+		else first = first || bandit;
+	}
+	var remaining = num - fallen;
+	
+	var parse = {
+		comp : party.Num() > 1 ? "your party" : "you"
+	};
+	
+	parse = first.ParserPronouns(parse);
+	
+	Text.Clear();
+	Text.Add("With [comp] finally down, the", parse);
+	if(remaining > 1) {
+		parse["remaining"] = fallen > 0 ? " remaining" : "";
+		Text.Add("[remaining] bandits stand panting around the room, weapons sagging in slack hands.", parse);
+	}
+	else
+		Text.Add("remaining bandit leans on the table for support, letting [hisher] weapon slip out of [hisher] slack grip.", parse);
+	if(fallen >= 2)
+		Text.Add(" Barely conscious, you manage a slight smile. At least you gave them a hell of a fight.", parse);
+	parse["num"] = remaining > 1 ? "One of the bandits" : "The bandit";
+	Text.Add(" [num] approaches after finally catching [hisher] breath and gives you a solid kick in the ribs, making air rush out of you in a pained gasp.", parse);
+	Text.NL();
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("<i>“Y’thought you could just waltz in here, beat us up, and take our stuff, did ye?”</i> [HeShe] punctuates [hisher] demand with another kick. <i>“Well, that ain’t how it works. We’re the big dogs ‘round here. We ain’t taking shit from the kingdom, we ain’t taking shit from you, we ain’t taking shit from no one!”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>“Who sent you? Huh?”</i> Before you can attempt to wheeze out an answer, another kick drives the air out from your lungs. <i>“Was it Rewyn? Or,”</i> [heshe] slows thoughtfully, <i>“did those slimy bastards not understand that ‘no’ means no. We ain’t bowing to any man. <b>They</b> are gonna bow to <b>us</b>.”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.Get();
+	
+	Text.NL();
+	Text.Add("The rest of the speech runs together in your mind, with kicks blessedly interrupted by long stretches of useless ranting. ", parse);
+	Text.NL();
+	Text.Add("After a while, you must lose consciousness because the next time you can think clearly, your eyes are opening on a field of overgrown grass. Your ribs ache and you are bruised all over, but fortunately your insides feel intact. After a minute or two, you even gather the willpower to get up, your body screaming in protest.", parse);
+	Text.NL();
+	parse["comp"] = party.Num() == 2 ? party.Get(1).name + " is" : "Your companions are";
+	parse["c"] = party.Num() > 1 ? Text.Parse(" [comp] lying in the grass close by, apparently also stirring slowly to wakefulness.", parse) : "";
+	Text.Add("The farm is in sight, its door ajar, the building now looking well and truly abandoned.[c] It seems the bandits decided to spare you, and look for a new hideout.", parse);
+	Text.NL();
+	Text.Add("Things could have definitely turned out worse. They could have also turned out a whole lot better.", parse);
+	if(party.coin >= 0) {
+		Text.NL();
+		var coin = Math.max(party.coin, 25);
+		parse["coin"] = coin;
+		parse["s"] = coin > 1 ? "s" : "";
+		
+		party.coin -= coin;
+		
+		Text.Add("<b>You lose [coin] coin[s]! Good thing you had the foresight to hide most of your spare possessions nearby before attacking, though you aren’t quite sure why you didn’t just hide all of them.</b>", parse);
+	}
+	Text.Flush();
+	
+	Gui.NextPrompt(enc.finalize);
+}
+
+/*
+ * TODO COMBAT
+#when extra entering:
+Another bandit pushes through the interior door, replacing [hisher] fallen comrade.
+ */
+
+Scenes.Roaming.BanditsWin = function() {
+	SetGameState(GameState.Event);
+	
+	var enc = this;
+	
+	enc.finalize = function() {
+		Encounter.prototype.onVictory.call(enc);
+	};
+	
+	var bandits = enc.enemy;
+	var num = bandits.NumTotal();
+	
+	var parse = {
+		
+	};
+	
+	parse = bandits.GetRandom().ParserPronouns(parse);
+	
+	parse["comp"]  = party.Num() == 2 ? party.Get(1).name : "your companions";
+	parse["comp2"] = party.Num() == 2 ? "The two of you" : "You all";
+	
+	Text.Clear();
+	Text.Add("The last bandit falls, as you stand winded but triumphant over your defeated adversaries. ", parse);
+	if(party.Num() > 1) {
+		Text.Add("You exchange euphoric grins with [comp]. [comp2] did well.", parse);
+	}
+	else
+		Text.Add("A euphoric grin twists your lips.", parse);
+	Text.Flush();
+	
+	var fucked = false;
+	var looted = false;
+	
+	var prompt = function() {
+		//[Fuck][Loot][Leave]
+		var options = new Array();
+		// TODO
+		options.push({ nameStr : "Fuck",
+			func : function() {
+				Text.Clear();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Flush();
+				fucked = true;
+				prompt();
+			}, enabled : false && fucked == false,
+			tooltip : ""
+		});
+		options.push({ nameStr : "Loot",
+			func : function() {
+				Text.Clear();
+				Text.Add("And to the victor go the spoils. You meticulously search the bandits, patting them down and making a neat pile of coins and chipped weapons on the table. ", parse);
+				
+				var scenes = new EncounterTable();
+				scenes.AddEnc(function() {
+					Text.Add("One of them even has a pretty gold earring that you carefully unhook from [hisher] ear.", parse);
+					party.Inv().AddItem(Items.Accessories.GoldEarring);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("You pull eight throwing knives off one of them - you counted. Some say you can never have too many knives, but surely this many must’ve weighed [himher] down.", parse);
+					party.Inv().AddItem(Items.Weapons.Dagger);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("Though you wouldn’t touch most of the weapons for fear of gangrene, one of the swords actually looks passable. Maybe you can put it to use.", parse);
+					party.Inv().AddItem(Items.Weapons.ShortSword);
+				}, 1.0, function() { return true; });
+				
+				scenes.Get();
+				
+				Text.NL();
+				Text.Add("Done with the body search, you tie your semi-conscious adversaries up. You still need to check for a stash, and it wouldn’t do to have them getting in the way.", parse);
+				Text.NL();
+				
+				var scenes = new EncounterTable();
+				scenes.AddEnc(function() {
+					Text.Add("You shake your captives, demanding information, but they groggily insist they haven’t hidden anything. As if you’d believe that!", parse);
+					Text.NL();
+					Text.Add("You carefully explore the house, but there’s nothing. You tap your knuckles along the walls, listening for hollows. Nothing. You walk around the farm outside, looking for freshly dug earth. Still nothing! Well, actually, a few sheep and hens, but is that really all they managed to steal? What a disappointment.", parse);
+					Text.NL();
+					if(world.time.hour < 6 || world.time.hour >= 20)
+						Text.Add("You wonder if you’ve missed something in the dark, but no, the light should have been enough for your investigation. ", parse);
+					Text.Add("Frustrated, you curse out the bandits for incompetence and content yourself with gathering up your little pile of loot from the table. That much will have to do.", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("You shake your captives, demanding information, but they insist they haven’t hidden anything. A quaver of uncertainty in the responses, and eyes impulsively darting toward a window tip you off to the deceit, however.", parse);
+					Text.NL();
+					if(world.time.hour < 6 || world.time.hour >= 20)
+						Text.Add("Grabbing the bandits’ oil lantern and checking", parse);
+					else
+						Text.Add("Checking", parse);
+					Text.Add(" outside, you find a barely noticeable patch of low grass that looks to have been uprooted and then replanted. You grab a shovel and do not have to dig long before you strike something hard and wooden with a thud.", parse);
+					Text.NL();
+					Text.Add("Five minutes later, you’ve dug around the object, and pull a small box out of the shallow hole. It’s heavy for its size, and you hear the pleasant jingle of coins inside. You head back inside and pour the contents of the box out on the table alongside your other loot, nicely increasing the pile.", parse);
+					Text.NL();
+					Text.Add("You politely thank the bandits, and pack away your earnings, as they glare at you in frustration. Not a bad haul, if you do say so yourself.", parse);
+					
+					var coin = 30 + Math.floor(Math.random() * 50);
+					
+					Text.NL();
+					Text.Add("<b>You pick up an additional [coin] coins!</b>", {coin: coin});
+					
+					party.coin += coin;
+				}, 1.0, function() { return true; });
+				
+				scenes.Get();
+				
+				looted = true;
+				Text.Flush();
+				prompt();
+			}, enabled : looted == false,
+			tooltip : "Loot everything!"
+		});
+		options.push({ nameStr : "Leave",
+			func : function() {
+				Text.Clear();
+				if(fucked || looted) {
+					Text.Add("Your main tasks complete, you check on the stolen livestock around the farm, making sure all the animals ", parse);
+					if(world.time.hour >= 8 && world.time.hour < 20)
+						Text.Add("are free to roam and graze.", parse);
+					else
+						Text.Add("will be free to roam and graze in the morning.", parse);
+					Text.NL();
+					Text.Add("As you head out, you decide you’ll tell a kingdom patrol where to find the animals and the bandits when you see one. In the meanwhile, the animals should be fine for a day or two. The bandits should as well - after all, you double checked their bonds.", parse);
+				}
+				else {
+					Text.Add("You meticulously tie up the bandits, securing them to the furniture, and making sure the ropes don’t allow them any freedom of movement. They can sit there until the proper authorities come to pick them up.", parse);
+					Text.NL();
+					Text.Add("As you head out, you decide you’ll tell a kingdom patrol where to find them when you see one. It shouldn’t be too long until you see one, and in the worst case scenario, well, they can stew there for a day or two.", parse);
+				}
+				Text.Flush();
+				
+				Gui.NextPrompt(enc.finalize);
+			}, enabled : true,
+			tooltip : "You’re mostly done here - it’s time to head out."
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	};
+	prompt();
 }
