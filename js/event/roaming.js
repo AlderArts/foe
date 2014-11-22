@@ -254,12 +254,52 @@ Scenes.Roaming.BanditsGen = function(capt) {
 	enc.rclothing = rclothing;
 	enc.capt = capt;
 	
+	enc.OnIncapacitate = function(entity) {
+		var enc = this;
+		var enemy = enc.enemy;
+		
+		var found = false;
+		for(var i = 0; i < enemy.Num(); ++i) {
+			if(enemy.Get(i) == entity) {
+				found = true;
+				break;
+			}
+		}
+		
+		if(found) {
+			for(var i = 0; i < enemy.reserve.length; i++) {
+				var bandit = enemy.reserve[i];
+				if(!bandit.Incapacitated()) {
+					var parse = {};
+					Text.NL();
+					parse["hisher"] = entity.hisher();
+					Text.Add("Another bandit pushes through the interior door, replacing [hisher] fallen comrade.", parse);
+					Text.NL();
+					Text.Flush();
+					
+					enemy.SwitchOut(entity);
+					enemy.SwitchIn(bandit);
+					
+					var ent = {
+						entity     : bandit,
+						isEnemy    : true,
+						initiative : 0,
+						aggro      : []};
+					
+					enc.combatOrder.push(ent);
+					ent.entity.GetSingleTarget(enc, ent);
+					
+					break;
+				}
+			}
+		}
+	}
+	
 	return enc;
 }
 
 Scenes.Roaming.Bandits = function() {
-	var enc = this;
-	var bandits = enc.bandits;
+	var bandits = rigard.bandits;
 	var parse = {
 		rclothing : bandits.rclothing
 	};
@@ -423,6 +463,7 @@ Scenes.Roaming.Bandits = function() {
 }
 
 Scenes.Roaming.BanditsOnEncounter = function() {
+	var enc = this;
 	var parse = {};
 	
 	Text.Clear();
@@ -518,12 +559,6 @@ Scenes.Roaming.BanditsLoss = function() {
 	
 	Gui.NextPrompt(enc.finalize);
 }
-
-/*
- * TODO COMBAT
-#when extra entering:
-Another bandit pushes through the interior door, replacing [hisher] fallen comrade.
- */
 
 Scenes.Roaming.BanditsWin = function() {
 	SetGameState(GameState.Event);

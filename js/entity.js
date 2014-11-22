@@ -798,7 +798,11 @@ Entity.prototype.AddHPFraction = function(fraction) {
 	fraction = fraction || 0;
 	this.curHp += fraction * this.HP();
 	if(this.curHp > this.HP()) this.curHp = this.HP();
-	if(this.curHp < 0) this.curHp = 0;
+	if(this.curHp < 0) {
+		this.curHp = 0;
+		if(curEncounter)
+			curEncounter.OnIncapacitate(this);
+	}
 	
 	if(fraction > 0 && this.combatStatus.stats[StatusEffect.Bleed])
 		this.combatStatus.stats[StatusEffect.Bleed] = null;
@@ -858,7 +862,11 @@ Entity.prototype.AddHPAbs = function(val) {
 	val = val || 0;
 	this.curHp += val;
 	if(this.curHp > this.HP()) this.curHp = this.HP();
-	if(this.curHp < 0) this.curHp = 0;
+	if(this.curHp < 0) {
+		this.curHp = 0;
+		if(curEncounter)
+			curEncounter.OnIncapacitate(this);
+	}
 	
 	if(val > 0 && this.combatStatus.stats[StatusEffect.Bleed])
 		this.combatStatus.stats[StatusEffect.Bleed] = null;

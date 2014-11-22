@@ -22,12 +22,15 @@ Encounter.prototype.Start = function() {
 		this.PrepCombat();
 }
 
-var enemyParty = null;
+var curEncounter      = null;
+var enemyParty        = null;
 var currentActiveChar = null;
 
 // Set up the fight
 Encounter.prototype.PrepCombat = function() {
 	SetGameState(GameState.Combat);
+	
+	curEncounter = this;
 	
 	if(party.members.length == 0)
 		throw "Errol: no members in party";
@@ -181,6 +184,7 @@ Encounter.prototype.Cleanup = function() {
 		e.ClearCombatBonuses();
 		e.combatStatus.EndOfCombat();
 	}
+	curEncounter = null;
 }
 
 Encounter.prototype.onRun = function() {
@@ -278,6 +282,10 @@ Encounter.prototype.onVictory = function() {
 		SetGameState(GameState.Game);
 		PrintDefaultOptions();
 	});
+}
+
+Encounter.prototype.OnIncapacitate = function(entity) {
+	
 }
 
 Encounter.prototype.CombatTick = function() {
