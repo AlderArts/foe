@@ -11,6 +11,8 @@ function Encounter(enemy)
 	this.enemy = enemy;
 	// Array filled with {entity: Entity, isEnemy: bool, initiative: number }
 	this.combatOrder = new Array();
+	// Used for fancy trickery
+	this.Callstack = [];
 }
 
 Encounter.prototype.Start = function() {
@@ -289,8 +291,15 @@ Encounter.prototype.OnIncapacitate = function(entity) {
 }
 
 Encounter.prototype.CombatTick = function() {
-	currentActiveChar = null;
 	var enc = this;
+	
+	var e = enc.Callstack.pop();
+	if(e) {
+		e(enc);
+		return;
+	}
+	
+	currentActiveChar = null;
 	
 	if(enc.onTick)
 		enc.onTick();

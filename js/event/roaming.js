@@ -270,25 +270,30 @@ Scenes.Roaming.BanditsGen = function(capt) {
 			for(var i = 0; i < enemy.reserve.length; i++) {
 				var bandit = enemy.reserve[i];
 				if(!bandit.Incapacitated()) {
-					var parse = {};
-					Text.NL();
-					parse["hisher"] = entity.hisher();
-					Text.Add("Another bandit pushes through the interior door, replacing [hisher] fallen comrade.", parse);
-					Text.NL();
-					Text.Flush();
-					
-					enemy.SwitchOut(entity);
-					enemy.SwitchIn(bandit);
-					
-					var ent = {
-						entity     : bandit,
-						isEnemy    : true,
-						initiative : 0,
-						aggro      : []};
-					
-					enc.combatOrder.push(ent);
-					ent.entity.GetSingleTarget(enc, ent);
-					
+					enc.Callstack.push(function() {
+						var parse = {};
+						Text.Clear();
+						parse["hisher"] = entity.hisher();
+						Text.Add("Another bandit pushes through the interior door, replacing [hisher] fallen comrade.", parse);
+						Text.NL();
+						Text.Flush();
+						
+						enemy.SwitchOut(entity);
+						enemy.SwitchIn(bandit);
+						
+						var ent = {
+							entity     : bandit,
+							isEnemy    : true,
+							initiative : 0,
+							aggro      : []};
+						
+						enc.combatOrder.push(ent);
+						ent.entity.GetSingleTarget(enc, ent);
+						
+						Gui.NextPrompt(function() {
+							enc.CombatTick();
+						});
+					});
 					break;
 				}
 			}
@@ -331,11 +336,11 @@ Scenes.Roaming.Bandits = function() {
 		else
 			females++;
 	}
+	num = bandits.enemy.NumTotal();
 	parse["genders"] = males == 0 ? "women" :
 	                   females == 0 ? "men" :
 	                   "men and women";
 	Text.Add("You see a dusty room with furniture that’s on the edge of falling apart. Around a table at one end are [num] [genders], conversing conspiratorially. They seem to be discussing something about ", parse);
-	Text.NL();
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
@@ -397,6 +402,7 @@ Scenes.Roaming.Bandits = function() {
 		}, enabled : true,
 		tooltip : "Your job here is done. You can report their location to the kingdom patrol and they’ll take care of the matter."
 	});
+	parse["num"] = Text.NumToText(num);
 	options.push({ nameStr : "Attack",
 		func : function() {
 			Text.Clear();
@@ -408,14 +414,10 @@ Scenes.Roaming.Bandits = function() {
 				Text.Add("You", parse);
 			Text.Add(" give the door a hard kick, sending it screeching open on rusted hinges. As [num] startled faces look up at you from around the table, you step inside, readying yourself for combat.", parse);
 			Text.NL();
-			Text.Add("It takes the startled bandits a moment to react, and by then you’re upon them!", parse);
-			Text.Flush();
-			
-			Gui.NextPrompt(function() {
-				bandits.Start();
-			});
+			Text.Add("It takes the bandits a moment to react, and by then you’re upon them!", parse);
+			bandits.Start();
 		}, enabled : true,
-		tooltip : "There’s no need to get help - you’ll take them all out here and now."
+		tooltip : Text.Parse("There’s no need to get help - you’ll take out the [num] bandits here and now.", parse)
 	});
 	options.push({ nameStr : "Extort",
 		func : function() {
@@ -446,11 +448,7 @@ Scenes.Roaming.Bandits = function() {
 				Text.Add("You do your best to sound intimidating, but your speech comes out sounding like you’re a child trying to threaten the bully with telling the teacher on him. As you might have expected, the bandits look more angry than anything, and when you try to back out and change course, one of them steps between you and the door.", parse);
 				Text.NL();
 				Text.Add("Looks like you’ll have to fight your way out!", parse);
-				Text.Flush();
-				
-				Gui.NextPrompt(function() {
-					bandits.Start();
-				});
+				bandits.Start();
 			}
 		}, enabled : true,
 		tooltip : "You’re quite willing to leave them alone, if only they’ll pay you a little bit of compensation. Now to convince them..."
@@ -466,12 +464,12 @@ Scenes.Roaming.BanditsOnEncounter = function() {
 	var enc = this;
 	var parse = {};
 	
-	Text.Clear();
 	var num = this.enemy.NumTotal();
 	if(num > 4) {
+		Text.NL();
 		var bandit = this.enemy.Get(4);
 		parse["s"]      = num > 5 ? "s" : "";
-		parse["crowd"]  = num > 5 ? "crowd around" : "try to push through";
+		parse["crowd"]  = num > 5 ? "crowd around" : "tries to push through";
 		parse["heshe"]  = num > 5 ? "they" : bandit.heshe();
 		parse["hisher"] = num > 5 ? "their" : bandit.hisher();
 		Text.Add("The bandit[s] in the back room [crowd] the door, but can’t quite find the space to join battle in this crowded chamber. You suspect [heshe]’ll replace [hisher] comrades when you defeat them.", parse);
@@ -483,7 +481,10 @@ Scenes.Roaming.BanditsOnEncounter = function() {
 		});
 	}
 	else {
-		enc.PrepCombat();
+		Text.Flush();
+		Gui.NextPrompt(function() {
+			enc.PrepCombat();
+		});
 	}
 }
 
@@ -547,7 +548,7 @@ Scenes.Roaming.BanditsLoss = function() {
 	Text.Add("Things could have definitely turned out worse. They could have also turned out a whole lot better.", parse);
 	if(party.coin >= 0) {
 		Text.NL();
-		var coin = Math.max(party.coin, 25);
+		var coin = Math.min(party.coin, 25);
 		parse["coin"] = coin;
 		parse["s"] = coin > 1 ? "s" : "";
 		
