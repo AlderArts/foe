@@ -193,6 +193,10 @@ Time.prototype.DayTime = function() {
 	       "night";
 }
 
+Time.prototype.IsDay = function() {
+	return this.hour >= 8 && this.hour < 20;
+}
+
 // TODO: possible variations for location
 Time.prototype.LightStr = function(light, dark) {
 	return this.hour >= 6  && this.hour < 21 ? light : dark;

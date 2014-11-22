@@ -24,6 +24,7 @@ InitCache = function() {
 	burrows  = new Burrows(gameCache.burrows);
 	glade    = new DryadGlade(gameCache.glade);
 	treecity = new TreeCity(gameCache.treecity);
+	oasis    = new Oasis(gameCache.oasis);
 	
 	// ENTITIES
 	player  = new Player(gameCache.player);
@@ -76,6 +77,7 @@ InitCache = function() {
 	world.EntityStorage.push(rigard);
 	world.EntityStorage.push(farm);
 	world.EntityStorage.push(glade);
+	world.EntityStorage.push(oasis);
 	
 	// Put entities in world storage
 	world.EntityStorage.push(player);
@@ -337,6 +339,7 @@ GameToCache = function() {
 	gameCache.burrows  = burrows.ToStorage();
 	gameCache.glade    = glade.ToStorage();
 	gameCache.treecity = treecity.ToStorage();
+	gameCache.oasis    = oasis.ToStorage();
 	
 	// Party
 	gameCache.player  = player.ToStorage();

@@ -23,6 +23,10 @@ world.loc.Desert.Drylands.enc.AddEnc(function() {
 }, 1.0, function() { return momo.Wandering(); });
 
 world.loc.Desert.Drylands.enc.AddEnc(function() {
+	return Scenes.Oasis.DesertCaravanEncounter;
+}, 1.0, function() { return true; });
+
+world.loc.Desert.Drylands.enc.AddEnc(function() {
 	return function() {
 		var parse = {
 			
