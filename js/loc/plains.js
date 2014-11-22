@@ -270,7 +270,31 @@ world.loc.Plains.Crossroads.links.push(new Link(
 		Text.AddOutput("There is a large city in the distance. ");
 	},
 	function() {
-		MoveToLocation(world.loc.Plains.Gate, {minute: 25});
+		if(miranda.flags["Met"] != 0 && Math.random() < 0.1) {
+			Text.Clear();
+			var parse = {};
+			Text.Add("As you make your way, a farmers’ wagon catches up to you from behind. ", parse);
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("The friendly couple offers you a ride in the back, and you get to watch the man groping his companion the whole way, while she returns occasional strokes of his trouser leg. Once in a while you notice them alternatively smirking and blushing in your direction.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("The two elderly men greet you, and offer you a lift to town, which you graciously accept. Along the way you get to hear all about the state of their crops, the prospects for a cold winter, and the lives of their adopted children.", parse);
+			}, 1.0, function() { return true; });
+			
+			scenes.Get();
+			Text.NL();
+			Text.Add("You reach Rigard quite quickly and they drop you off on the road leading up to the gate.", parse);
+			if(rigard.Access())
+				Text.Add(" Where were they when you were trying to get you into the city? They could’ve probably saved you a lot of bother then.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				MoveToLocation(world.loc.Plains.Gate, {minute: 30});
+			});
+		}
+		else
+			MoveToLocation(world.loc.Plains.Gate, {hour: 2});
 	}
 ));
 world.loc.Plains.Crossroads.links.push(new Link(
@@ -279,7 +303,7 @@ world.loc.Plains.Crossroads.links.push(new Link(
 		Text.AddOutput("A set of low hills rise in the distance. ");
 	},
 	function() {
-		MoveToLocation(world.loc.Highlands.Hills, {minute: 15});
+		MoveToLocation(world.loc.Highlands.Hills, {hour: 2});
 	}
 ));
 world.loc.Plains.Crossroads.links.push(new Link(
@@ -288,7 +312,7 @@ world.loc.Plains.Crossroads.links.push(new Link(
 		Text.AddOutput("The large forest is off in the distance. ");
 	},
 	function() {
-		MoveToLocation(world.loc.Forest.Outskirts, {minute: 15});
+		MoveToLocation(world.loc.Forest.Outskirts, {hour: 2});
 	}
 ));
 world.loc.Plains.Crossroads.links.push(new Link(
@@ -297,7 +321,7 @@ world.loc.Plains.Crossroads.links.push(new Link(
 		Text.AddOutput("There is a desert. ");
 	},
 	function() {
-		MoveToLocation(world.loc.Desert.Drylands, {minute: 15});
+		MoveToLocation(world.loc.Desert.Drylands, {hour: 2});
 	}
 ));
 world.loc.Plains.Crossroads.endDescription = function() {
@@ -339,7 +363,7 @@ world.loc.Plains.Gate.links.push(new Link(
 		Text.AddOutput("Go back to the crossroads? ");
 	},
 	function() {
-		MoveToLocation(world.loc.Plains.Crossroads, {minute: 15});
+		MoveToLocation(world.loc.Plains.Crossroads, {hour: 2});
 	}
 ));
 world.loc.Plains.Gate.links.push(new Link(

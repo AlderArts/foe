@@ -23,7 +23,7 @@ world.loc.Lake.Shore.links.push(new Link(
 		Text.AddOutput("Behind you is the way back to Rigard.<br/>");
 	},
 	function() {
-		MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 15});
+		MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 45});
 	}
 ));
 

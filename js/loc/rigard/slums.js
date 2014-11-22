@@ -79,7 +79,7 @@ world.loc.Rigard.Slums.gate.links.push(new Link(
 		Text.AddOutput("Go to the main gate? ");
 	},
 	function() {
-		MoveToLocation(world.loc.Plains.Gate, {minute: 10});
+		MoveToLocation(world.loc.Plains.Gate, {minute: 15});
 	}
 ));
 world.loc.Rigard.Slums.gate.links.push(new Link(
@@ -97,7 +97,7 @@ world.loc.Rigard.Slums.gate.links.push(new Link(
 		Text.AddOutput("Go to the lake? ");
 	},
 	function() {
-		MoveToLocation(world.loc.Lake.Shore, {minute: 15});
+		MoveToLocation(world.loc.Lake.Shore, {minute: 45});
 	}
 ));
 

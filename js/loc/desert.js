@@ -54,7 +54,7 @@ world.loc.Desert.Drylands.links.push(new Link(
 		Text.AddOutput("Behind you is the way back to the crossroads.<br/>");
 	},
 	function() {
-		MoveToLocation(world.loc.Plains.Crossroads, {minute: 15});
+		MoveToLocation(world.loc.Plains.Crossroads, {hour: 2});
 	}
 ));
 
