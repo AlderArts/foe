@@ -168,6 +168,14 @@ function Bandit(gender) {
 Bandit.prototype = new Entity();
 Bandit.prototype.constructor = Bandit;
 
+Bandit.prototype.DropTable = function() {
+	var drops = [];
+	if(Math.random() < 0.05) drops.push({ it: Items.Homos });
+	if(Math.random() < 0.5)  drops.push({ it: Items.Hummus });
+	if(Math.random() < 0.5)  drops.push({ it: Items.SpringWater });
+	if(Math.random() < 0.5)  drops.push({ it: Items.Letter });
+	return drops;
+}
 
 Bandit.Act = function(encounter, activeChar) {
 	// TODO: Very TEMP
