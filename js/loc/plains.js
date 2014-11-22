@@ -194,10 +194,10 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 
 world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	return Scenes.Roaming.KingdomPatrol;
-}, 100.0, function() { return true; });
+}, 1.0, function() { return true; });
 world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	return Scenes.Roaming.Bandits;
-}, 50000.0, function() { return rigard.bandits; });
+}, 5.0, function() { return rigard.bandits; });
 
 world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	return function() {
