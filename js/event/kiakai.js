@@ -1552,6 +1552,7 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 				var options = new Array();
 				options.push({ nameStr : "But...",
 					func : function() {
+						Text.NL();
 						Text.Add("You mention that the two of you have engaged in certain activities.", parse);
 						Text.NL();
 						Text.Add("<i>“Oh, no!”</i> [name] answers, blushing furiously. <i>“Those certainly do not count. After all, m-my [virg],”</i> [heshe] explains, looking at the ground, [hisher] entire face turning beet red. <i>“A-and besides, Aria wouldn't forbid something th-that feels so good.”</i>", parse);
@@ -1564,6 +1565,7 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 				});
 				options.push({ nameStr : "Okay",
 					func : function() {
+						Text.NL();
 						Text.Add("You decide it's best not to mention to the elf that what the two of you have done constitutes as sex.", parse);
 						Text.Flush();
 						Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
@@ -5507,6 +5509,8 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 	parse.kGenDesc = kiakai.FirstCock() ? function() { return kiakai.MultiCockDesc(); } :
 					kiakai.FirstVag() ? function() { return kiakai.FirstVag().Short(); } :
 					"featureless crotch";
+	
+	parse = Text.ParserPlural(parse, kiakai.NumCocks() > 1);
 	
 	Text.Flush();
 	//[Rim][Suck [himher]][Selfsuck][Frot][Oil]
