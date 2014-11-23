@@ -246,6 +246,7 @@ Items.Avia.Recipe = [{it: Items.Feather}, {it: Items.Trinket}, {it: Items.FruitS
 // Effects
 Items.Avia.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.avian, str: "an avian cock"});
 Items.Avia.PushEffect(TF.ItemEffects.RemHorn, {odds: 0.2, count: 2});
+Items.Avia.PushEffect(TF.ItemEffects.RemTail, {odds: 0.2, count: 1});
 Items.Avia.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.2, value: false, num: 1});
 Items.Avia.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.2, value: false, num: 1});
 Items.Avia.PushEffect(TF.ItemEffects.SetWings, {odds: 0.4, race: Race.avian, color: Color.brown, count: 2, str: "a pair of avain wings" });

@@ -23,6 +23,7 @@ function Rosalin(storage) {
 	this.recipes.push(Items.Vulpinix);
 	this.recipes.push(Items.Scorpius);
 	this.recipes.push(Items.Lepida);
+	this.recipes.push(Items.Avia);
 	
 	this.flags["PrefGender"]   = Gender.female;
 	
@@ -45,6 +46,7 @@ function Rosalin(storage) {
 	this.flags["Vulpinix"]       = 0;
 	this.flags["Scorpius"]       = 0;
 	this.flags["Lepida"]         = 0;
+	this.flags["Avia"]           = 0;
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -2310,7 +2312,88 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		});
 		Gui.SetButtonsFromList(options);
 	}
-	
+	else if(item == Items.Avia) {
+		if(rosalin.flags["Avia"] == 0) {
+			Text.Add("<i>”Shiny,”</i> Rosalin comments, holding up the gaudy trinket you brought to the light. <i>”I suppose I could melt it down… but I don’t have a strong enough fire. I wish I knew magic,”</i> [heshe] sighs.", parse);
+			Text.NL();
+			Text.Add("You shudder to think of the imagery of Rosalin throwing fireballs left and right. Not to mention the distinct risk of being made to drink molten metal. It’s probably for the best that things stay the way they are.", parse);
+			Text.NL();
+			Text.Add("<i>”Ah well, I guess I’ll just leave it at the bottom of the pot for flavor,”</i> the alchemist shrugs.", parse);
+			rosalin.flags["Avia"] = 1;
+		}
+		else {
+			Text.Add("<i>”Let’s see if I can make a stronger one this time, I was a bit disappointed with the last one,”</i> Rosalin mutters as [heshe] gets [hisher] gear ready.", parse);
+		}
+		Text.NL();
+		Text.Add("After some preparation, the ingredients go into a big pot and are left to stew for a while. Rosalin ponders the mixture, adding small portions of various herbs seemingly at random. Acting on some que perhaps only detectable by the alchemist, [heshe] fishes out the trinket from the potion and quickly pour the concoction into a bottle.", parse);
+		Text.NL();
+		Text.Add("<i>”There we go!”</i> [heshe] exclaims, looking happy with the result.", parse);
+		Text.Flush();
+		
+		//[You][Rosalin][Discard]
+		var options = new Array();
+		options.push({ nameStr : "You",
+			func : function() {
+				Text.Clear();
+				Items.Avia.Use(player);
+				Text.Add("Rosalin notes the effects of the potion on your body, humming to [himher]self happily.", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
+				});
+			}, enabled : true,
+			tooltip : "Drink the potion yourself."
+		});
+		options.push({ nameStr : "Rosalin",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”Sure, I’ll try it!”</i> Rosalin readily agrees, quickly downing the potion. As always, the alchemist is eager to see the fruit of [hisher] efforts.", parse);
+				Text.NL();
+				
+				var scenes = new EncounterTable();
+				scenes.AddEnc(function() {
+					Text.Add("A pair of feathery wings sprout from [hisher] back, majestic in their own right but probably not large enough to fly with.", parse);
+					TF.SetAppendage(rosalin.Back(), AppendageType.wing, Race.avian, Color.bronze, 2);
+					Text.NL();
+				}, 1.0, function() { var wings = rosalin.HasWings(); return !wings || (wings.race != Race.avian); });
+				// TAIL
+				scenes.AddEnc(function() {
+					Text.Add("Rosalin’s tail quickly retracts, leaving no trace behind.", parse);
+					Text.NL();
+					Text.Add("<i>”Aww… but I liked that tail,”</i> [heshe] pouts.", parse);
+					TF.RemoveAppendage(rosalin.Back(), AppendageType.tail, 1);
+					Text.NL();
+				}, 1.0, function() { return rosalin.HasTail(); });
+				scenes.AddEnc(function() {
+					Text.Add("Rosalin’s horns quickly pull back into [hisher] head, leaving no trace behind.", parse);
+					TF.RemoveAppendage(rosalin.Appendages(), AppendageType.horn, 4);
+					Text.NL();
+				}, 1.0, function() { return rosalin.player.HasHorns(); });
+				
+				scenes.Get();
+				
+				Text.Add("<i>”Tastes very sweet,”</i> the alchemist comments, pursing [hisher] lips. <i>”Would go well with something salty… if you catch my drift.”</i>", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					Scenes.Rosalin.SexPrompt(RosalinSexState.Regular);
+				});
+			}, enabled : true,
+			tooltip : "Offer the potion to Rosalin."
+		});
+		options.push({ nameStr : "Discard",
+			func : function() {
+				Text.Clear();
+				Text.Add("Better skip this one. You pour out the contents next to Rosalin’s workbench, warily eyeing the now much fluffier plants around it. They tweet innocently, but seem to be largely harmless.", parse);
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
+				});
+			}, enabled : true,
+			tooltip : "Pour out the potion."
+		});
+		Gui.SetButtonsFromList(options);
+	}
+
 	//TODO MORE TFS
 	/*
 	else if(item == Items.Lacertium) {
