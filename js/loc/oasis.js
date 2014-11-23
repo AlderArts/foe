@@ -231,14 +231,29 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 	Text.Add("You chat a bit about what brought you here, and [rheshe] tells you a little about [rhisher] work planning the expedition and selecting goods to carry. <i>“We’re always happy to trade with a fellow traveller,”</i> [rheshe] says. <i>“We obviously can’t just unpack everything, but I’ve got a few select things set aside for occasions like these. Or if there’s anything else you need, I’d be happy to help out,”</i> [rheshe] adds with a wink, [rhisher] tail swaying back and forth in interest.", parse);
 	Text.Flush();
 	
+	var busy   = false;
 	var rumors = true;
-	var fun = true;
+	var fun    = true;
+	
+	var busyFunc = function() {
+		Text.Add("It takes some time for the caravan master to calm the angry Rakh, but eventually the beast is settled, and returns to its spot, looking a little guilty. Your would-be lover heads over to you, looking physically and emotionally drained.", parse);
+		Text.NL();
+		Text.Add("<i>“The damned creatures are practically wild,”</i> [rheshe] tells you. <i>“They’d be too much trouble to deal with if there were any other options.”</i>", parse);
+		Text.NL();
+		Text.Add("You commiserate with [rhimher], and congratulate [rhimher] on dealing with the problem so neatly. Still, could [rheshe] help you out with one more thing?", parse);
+		Text.NL();
+		busy = false;
+		
+		world.TimeStep({minute: 15});
+	};
+	
 	var prompt = function() {
 		//[Trade][Rumors][Fun][Leave]
 		var options = new Array();
 		options.push({ nameStr : "Trade",
 			func : function() {
 				Text.Clear();
+				if(busy) busyFunc();
 				Text.Add("<i>“Here, I'll show you what I have. My main cargo is already bought and paid for, but I have some oddments lying around.”</i>", parse);
 				Text.NL();
 				Text.Flush();
@@ -249,6 +264,7 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 		options.push({ nameStr : "Rumours",
 			func : function() {
 				Text.Clear();
+				if(busy) busyFunc();
 				Text.Add("You ask the caravan master if [rheshe]’s heard anything interesting lately.", parse);
 				Text.NL();
 				var scenes = new EncounterTable();
@@ -392,21 +408,12 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 				}
 				Text.Add("The Rakh snaps at any of the attendants who dare come too close, hissing angrily. When the caravan master finally arrives, [rheshe] takes a stand in front of it, and speaks in a soothing voice. After watching for a minute, you notice that the creature does seem to be calming somewhat, but you suspect this could be take a while, and all hints of an amorous mood are gone regardless.", parse);
 				Text.Flush();
+				fun = false;
+				busy = true;
 				
 				world.TimeStep({minute: 40});
 				
-				Gui.NextPrompt(function() {
-					Text.Clear();
-					Text.Add("It takes some time for the caravan master to calm the angry Rakh, but eventually the beast is settled, and returns to its spot, looking a little guilty. Your would-be lover heads over to you, looking physically and emotionally drained.", parse);
-					Text.NL();
-					Text.Add("<i>“They damned creatures are practically wild,”</i> [rheshe] tells you. <i>“They’d be too much trouble to deal with if there were any other options.”</i>", parse);
-					Text.NL();
-					Text.Add("You commiserate with [rhimher], and congratulate [rhimher] on dealing with the problem so neatly. Still, could [rheshe] help you out with one more thing?", parse);
-					Text.Flush();
-					
-					fun = false;
-					prompt();
-				});
+				prompt();
 			}, enabled : fun,
 			tooltip : Text.Parse(tooltip, parse)
 		});

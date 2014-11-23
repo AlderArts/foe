@@ -216,7 +216,7 @@ Scenes.Lei.InnPromptRepeat = function() {
 					else
 						Text.Add("Though I suspect you may be able to pull off the feat.”</i>", parse);
 					Text.NL();
-					Text.Add("<i>“There are more... personal avenues you can pursue as well once you are done with that as well.”</i>", parse);
+					Text.Add("<i>“There are more... personal avenues you can pursue as well once you are done with that.”</i>", parse);
 					Text.NL();
 				}
 				Text.Add("Lei pauses, thinking for a moment. ", parse);
@@ -229,7 +229,7 @@ Scenes.Lei.InnPromptRepeat = function() {
 				}
 				Text.Add(" Often, it is most effective to use a man’s own tools and followers against him.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“Obtain information you can from Krawitz’s servants and guards, determine how to exploit and emphasize his weaknesses, and execute your plan. Of course, make sure your plan is as good as you can make it, as you probably won’t get two chances at it.”</i>", parse);
+				Text.Add("<i>“Obtain what information you can from Krawitz’s servants and guards, determine how to exploit and emphasize his weaknesses, and execute your plan. Of course, make sure your plan is as good as you can make it, as you probably won’t get another chance.”</i>", parse);
 				Text.NL();
 				Text.Add("You listen attentively, and nod at his explanation. It sounds reasonable, and he’s speaking as if he’s done this sort of thing plenty of times. Which, realistically, he may very well have.", parse);
 				Text.NL();
