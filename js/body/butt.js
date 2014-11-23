@@ -39,8 +39,8 @@ Butt.prototype.Tightness = function() {
 	return this.stretch.Get();
 }
 Butt.Tightness = {
-	tight : 2,
-	loose : 5,
+	tight  : 2,
+	loose  : 5,
 	gaping : 10
 }
 Butt.prototype.noun = function() {

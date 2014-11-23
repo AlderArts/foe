@@ -33,6 +33,7 @@ CreditsScreen = function() {
 	Text.Add("Cale: Alder, LukaDoc and QuietBrowser<br/>");
 	Text.Add("Momo: QuietBrowser and LukaDoc<br/>");
 	Text.Add("Naga: LonelyRonin<br/>");
+	Text.Add("Estevan gay sex: Ben<br/>");
 	
 	Text.NL();
 	
