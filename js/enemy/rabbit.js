@@ -342,6 +342,7 @@ Scenes.Lagomorph.PlainsEncounter = function() {
 	}, 1.0, function() { return burrows.Access(); });
 	
 	scenes.Get();
+	Text.NL();
 	
 	if(enc.brainy) {
 		Text.Add("<i>“Oh, will you all cut it out!”</i> screeches an indignant female voice, clearly quite unhappy with what is going on. From amongst the mass of bodies comes the figure of a female rabbit-morph, quite modestly dressed in comparison. She’s actually wearing clothes, however rudimentary in nature - little more than an improvised dress crudely sewn from scraps of salvaged cloth, and a pair of spectacles perched on her little pink nose.", parse);

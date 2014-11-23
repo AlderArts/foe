@@ -371,9 +371,9 @@ Scenes.Burrows.Arrival = function(alpha) {
 	Text.NL();
 	Text.Add("The chant of your entourage has turned into “mother, mother, mother”, their voices reverent. You are unceremoniously dumped into the lake of spooge, coughing desperately as you involuntarily ingest a mouthful of the salty liquid. You try to stand up, but find that you are held in place by your captors, head barely above the surface of the pool.", parse);
 	if(party.Two())
-		Text.Add("Dimly, you notice [p1name], gasping for air in the sludge beside you.", parse);
+		Text.Add(" Dimly, you notice [p1name], gasping for air in the sludge beside you.", parse);
 	else if(!party.Alone())
-		Text.Add("Dimly, you notice your companions, gasping for air in the sludge beside you.", parse);
+		Text.Add(" Dimly, you notice your companions, gasping for air in the sludge beside you.", parse);
 	Text.NL();
 	Text.Add("<i>“Just what is the meaning of this?”</i> Surprised, you look up, finding yet another lagomorph standing in front of you. Unlike her brothers and sisters, she is actually clothed, her curvy figure and generous bosom covered by a long white coat. A pair of glasses rest on the bridge of her tiny pink nose, lending her an almost scholarly appearance.", parse);
 	Text.NL();
