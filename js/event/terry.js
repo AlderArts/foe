@@ -371,7 +371,7 @@ Scenes.Terry.Appearance = function() {
 		himher  : terry.himher(),
 		hishers : terry.hishers(),
 		trueGender : Gender.Desc(terry.Gender()),
-		tbreastsDesc : function() { return terry.FirstBreastRow().Short(); },
+		tbreastDesc : function() { return terry.FirstBreastRow().Short(); },
 		tcockDesc : function() { return terry.MultiCockDesc(); }
 	};
 	
@@ -403,7 +403,7 @@ Scenes.Terry.Appearance = function() {
 	Text.Add("Following the fur leads your gaze down to Terry’s chest. ", parse);
 	if(terry.Cup() > Terry.Breasts.Flat) {
 		parse["c"] = terry.FirstCock() ? Text.Parse(", contrasting the [tcockDesc] between [hisher] legs", parse) : "";
-		Text.Add("A pair of [tbreastsDesc] bulge noticeably atop Terry’s chest[c]. ", parse);
+		Text.Add("A pair of [tbreastDesc] bulge noticeably atop Terry’s chest[c]. ", parse);
 		if(terry.Cup() == Terry.Breasts.Dcup) {
 			Text.Add("Though only D-cups, Terry is so slenderly built elsewhere that they seem exaggeratedly large. The full quivering breasts jiggle softly whenever [heshe] moves, making even the act of breathing almost hypnotic as they rise, fall, expand and contract. It really is incredible that such a dainty [foxvixen] could have such huge breasts.", parse);
 			if(terry.Lactation()) {
@@ -2381,7 +2381,7 @@ Scenes.Terry.BrushTail = function() {
 		boygirl        : terry.mfPronoun("boy", "girl"),
 		tarmorDesc     : function() { return terry.ArmorDesc(); },
 		tlowerArmor    : function() { return terry.LowerArmorDesc(); },
-		tbreastsDesc   : function() { return terry.FirstBreastRow().Short(); },
+		tbreastDesc   : function() { return terry.FirstBreastRow().Short(); },
 		tcockDesc      : function() { return terry.MultiCockDesc(); },
 		bellydesc      : function() { return terry.StomachDesc(); },
 		skinDesc       : function() { return player.SkinDesc(); },
@@ -2763,7 +2763,7 @@ Scenes.Terry.CheckFluids = function() {
 		armorDesc      : function() { return terry.ArmorDesc(); },
 		topArmorDesc   : function() { return terry.ArmorDesc(); },
 		lowerArmorDesc : function() { return terry.LowerArmorDesc(); },
-		tbreastsDesc   : function() { return terry.FirstBreastRow().Short(); },
+		tbreastDesc   : function() { return terry.FirstBreastRow().Short(); },
 		tcockDesc      : function() { return terry.MultiCockDesc(); },
 		bellydesc      : function() { return terry.StomachDesc(); },
 		playername : player.name
@@ -2811,7 +2811,7 @@ Scenes.Terry.CheckFluids = function() {
 	Text.NL();
 	//BREASTS
 	if(terry.Lactation()) {
-		Text.Add("Your eyes are drawn to the [foxvixen]’s [tbreastsDesc], filled with their liquid cargo... but just how full are they? Well, there’s only one way to get a proper estimate.", parse);
+		Text.Add("Your eyes are drawn to the [foxvixen]’s [tbreastDesc], filled with their liquid cargo... but just how full are they? Well, there’s only one way to get a proper estimate.", parse);
 		Text.NL();
 		Text.Add("Closing the distance between you, your hands reach out for Terry’s tits. ", parse);
 		if(terry.Cup() >= Terry.Breasts.Dcup)
@@ -4896,7 +4896,7 @@ Scenes.Terry.JeanneTFHorsegasmEntrypoint = function() {
 		playername : player.name,
 		foxvixen   : terry.mfPronoun("fox", "vixen"),
 		tcockDesc  : function() { return terry.MultiCockDesc(); },
-		tbreastsDesc : function() { return terry.FirstBreastRow().Short(); }
+		tbreastDesc : function() { return terry.FirstBreastRow().Short(); }
 		
 	};
 	parse = terry.ParserPronouns(parse);
@@ -4905,7 +4905,7 @@ Scenes.Terry.JeanneTFHorsegasmEntrypoint = function() {
 	if(terry.FirstVag())
 		Text.Add(" Somewhere in [hisher] continuous climax, Terry’s pussy’s decided to make its own contribution to the mess, by squirting some femcum down below, between the [foxvixen]’s legs.", parse);
 	Text.NL();
-	Text.Add("You watch as the semen-hose masquerading as a [foxvixen] slowly comes to a halt, [hisher] perversely equine cock slapping wetly against [hisher] [tbreastsDesc] and lying slack on [hisher] visibly bulging belly. You slowly scrape a stray bead of semen off of your cheek and ", parse);
+	Text.Add("You watch as the semen-hose masquerading as a [foxvixen] slowly comes to a halt, [hisher] perversely equine cock slapping wetly against [hisher] [tbreastDesc] and lying slack on [hisher] visibly bulging belly. You slowly scrape a stray bead of semen off of your cheek and ", parse);
 	if(player.Slut() >= 60)
 		Text.Add("suck it off your finger, savoring the taste of it in your mouth.", parse);
 	else
@@ -5145,7 +5145,7 @@ Scenes.Terry.SexWorship = function() {
 		guygirl    : terry.mfPronoun("guy", "girl"),
 		tongueDesc : function() { return player.TongueDesc(); },
 		breastsDesc : function() { return player.FirstBreastRow().Short(); },
-		tbreastsDesc : function() { return terry.FirstBreastRow().Short(); },
+		tbreastDesc : function() { return terry.FirstBreastRow().Short(); },
 		multiCockDesc : function() { return player.MultiCockDesc(); },
 		buttDesc : function() { return player.Butt().Short(); },
 		anusDesc : function() { return player.Butt().AnalShort(); },
@@ -5365,7 +5365,7 @@ Scenes.Terry.SexWorship = function() {
 			Text.Add("Gently wiping at your eyelids to clear off the worst of the cum sprayed there, you open your eyes and look Terry in the face, grinning happily as you do so.", parse);
 			Text.NL();
 			parse["guygirl"] = terry.mfPronoun("guy", "girl");
-			Text.Add("The fox simply groans, still delirious after [hisher] fierce orgasm. For a moment you worry you might’ve broken the poor [guygirl], but after a few prods on [hisher] [tbreastsDesc], [heshe] finally reacts. <i>“Ugh, my balls hurt…”</i>", parse);
+			Text.Add("The fox simply groans, still delirious after [hisher] fierce orgasm. For a moment you worry you might’ve broken the poor [guygirl], but after a few prods on [hisher] [tbreastDesc], [heshe] finally reacts. <i>“Ugh, my balls hurt…”</i>", parse);
 			Text.NL();
 			Text.Add("Well, considering how much [heshe] came, that’s really not a surprise, you quip. You can’t resist pausing for a moment to admire the deep plastering of off-white now drenching your form, feeling quite satisfied with the results yourself.", parse);
 			Text.NL();
@@ -5551,7 +5551,7 @@ Scenes.Terry.SexWorship = function() {
 					Text.NL();
 					Text.Add("Your [cockDesc] is sandwiched between your bulging bellies, the cream-crammed flesh wrapping itself with delicious softness around the heated flesh of your shaft. But you just keep on cumming, and cumming; Terry can’t keep up!", parse);
 					Text.NL();
-					Text.Add("Eventually, the pouring tide of semen bloats Terry to the point [hisher] own belly shoves your dick out of [hisher] mouth, and you’re still cumming! All the [foxvixen] can do is close [hisher] eyes, open [hisher] mouth, and let the thick jets of warm seed paint [hisher] face cum-white. Great ropes of semen bead through [hisher] luscious red mane, washing over [hisher] cheeks, pouring down onto [hisher] [tbreastsDesc], even flicking a few ropes between [hisher] ears.", parse);
+					Text.Add("Eventually, the pouring tide of semen bloats Terry to the point [hisher] own belly shoves your dick out of [hisher] mouth, and you’re still cumming! All the [foxvixen] can do is close [hisher] eyes, open [hisher] mouth, and let the thick jets of warm seed paint [hisher] face cum-white. Great ropes of semen bead through [hisher] luscious red mane, washing over [hisher] cheeks, pouring down onto [hisher] [tbreastDesc], even flicking a few ropes between [hisher] ears.", parse);
 					Text.NL();
 					Text.Add("Finally, though, you groan your way to the end of your climax, a single last dribble of cum spattering wetly across the [foxvixen]’s nose before you fall limp. Bellies sloshing with their mutual loads, you slump forward against the newly-bloated [foxvixen], panting for breath.", parse);
 					Text.NL();
@@ -6325,7 +6325,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 		tcockHeadDesc : function() { return terry.FirstCock().TipShort(); },
 		tvagDesc  : function() { return terry.FirstVag().Short(); },
 		tanusDesc : function() { return terry.Butt().AnalShort(); },
-		tbreastsDesc : function() { return terry.FirstBreastRow().Short(); },
+		tbreastDesc : function() { return terry.FirstBreastRow().Short(); },
 		boygirl : player.mfTrue("boy", "girl")
 	};
 	
@@ -7270,7 +7270,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 								Text.NL();
 								Text.Add("<i>“Ah, I’d forgotten about that...”</i> Terry sighs. <i>“So… what do we do until then?”</i>", parse);
 								Text.NL();
-								Text.Add("You simply smile, peck Terry gently on the lips, then lay your head back down upon [hisher] [tbreastsDesc] and snuggle in softly, sighing in pleasure as you get comfortable.", parse);
+								Text.Add("You simply smile, peck Terry gently on the lips, then lay your head back down upon [hisher] [tbreastDesc] and snuggle in softly, sighing in pleasure as you get comfortable.", parse);
 								Text.NL();
 								Text.Add("<i>“A-Alright, I supposed that’s one way...”</i> the [foxvixen] says, a bit uncomfortable with your closeness. But [heshe] settles down all the same.", parse);
 								
@@ -7391,7 +7391,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 					parse["c"] = terry.FirstCock() ? " and maleness" : "";
 					Text.Add("Pulling back with all your will, you manage to pop your cock[s] free of the writhing [foxvixen] below you. Aiming your [cockDesc] at [hisher] clitty[c], you thrust forward again, rubbing and grinding upon the sensitive flesh.", parse);
 					Text.NL();
-					Text.Add("As one, you shudder and cry out, orgasm surging through the pair of you. Grabbing your throbbing [multiCockDesc], you aim [itThem] at Terry’s [tbreastsDesc] and face, showering [himher] with glistening streamers of off-white seed. Your mind fades away in the tide of white-hot pleasure, only dimly cognizant as you paint your lover’s face and chest with pearlescent ropes of cum.", parse);
+					Text.Add("As one, you shudder and cry out, orgasm surging through the pair of you. Grabbing your throbbing [multiCockDesc], you aim [itThem] at Terry’s [tbreastDesc] and face, showering [himher] with glistening streamers of off-white seed. Your mind fades away in the tide of white-hot pleasure, only dimly cognizant as you paint your lover’s face and chest with pearlescent ropes of cum.", parse);
 					Text.NL();
 					if(terry.FirstCock()) {
 						Text.Add("You feel Terry’s [tcockDesc] throb against your own, and look as the [foxvixen]’s prick unleashes it’s own cascade of white upon [hisher] hapless body - a huge load, ", parse);
@@ -7578,7 +7578,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 							Text.Add("<i>“Heh, alright then you big tease. If you want them so badly, why don’t you get over here and show me your appreciation,”</i> Terry replies, hugging [hisher] bust.", parse);
 						}
 						Text.NL();
-						Text.Add("With purposeful movements, you slide your way carefully up Terry’s body, bringing[oneof] your [multiCockDesc] in line with the [foxvixen]’s [tbreastsDesc]. Your hands reach out to cup the bountiful orbs, pressing them together to make a makeshift pussy, and you thrust your [cockDesc] into the squished breastflesh. A shudder of pleasure ripples through your body as the soft flesh, covered in warm, velvet-smooth fur, brushes so deliciously over your sensitive dickflesh, and you grind your way forward until you’ve managed to bury yourself in Terry’s tits to the very hilt.", parse);
+						Text.Add("With purposeful movements, you slide your way carefully up Terry’s body, bringing[oneof] your [multiCockDesc] in line with the [foxvixen]’s [tbreastDesc]. Your hands reach out to cup the bountiful orbs, pressing them together to make a makeshift pussy, and you thrust your [cockDesc] into the squished breastflesh. A shudder of pleasure ripples through your body as the soft flesh, covered in warm, velvet-smooth fur, brushes so deliciously over your sensitive dickflesh, and you grind your way forward until you’ve managed to bury yourself in Terry’s tits to the very hilt.", parse);
 						Text.NL();
 						if(terry.Relation() < 30) {
 							Text.Add("<i>“So this is what you had in mind...”</i>", parse);
