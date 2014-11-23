@@ -2368,7 +2368,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					Text.Add("Rosalin’s horns quickly pull back into [hisher] head, leaving no trace behind.", parse);
 					TF.RemoveAppendage(rosalin.Appendages(), AppendageType.horn, 4);
 					Text.NL();
-				}, 1.0, function() { return rosalin.player.HasHorns(); });
+				}, 1.0, function() { return rosalin.HasHorns(); });
 				
 				scenes.Get();
 				
