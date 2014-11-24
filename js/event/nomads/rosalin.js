@@ -24,6 +24,7 @@ function Rosalin(storage) {
 	this.recipes.push(Items.Scorpius);
 	this.recipes.push(Items.Lepida);
 	this.recipes.push(Items.Avia);
+	this.recipes.push(Items.Ovis);
 	
 	this.flags["PrefGender"]   = Gender.female;
 	
@@ -47,6 +48,7 @@ function Rosalin(storage) {
 	this.flags["Scorpius"]       = 0;
 	this.flags["Lepida"]         = 0;
 	this.flags["Avia"]           = 0;
+	this.flags["Ovis"]           = 0;
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -2392,6 +2394,63 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			tooltip : "Pour out the potion."
 		});
 		Gui.SetButtonsFromList(options);
+	}
+	else if(item == Items.Ovis) {
+		if(rosalin.flags["Ovis"] == 0) {
+			Text.Add("<i>”Hmm… doesn’t smell like cow milk. Is this… sheep?”</i> Rosalin frowns as [heshe] suspiciously sniffs the bottle you give [himher]. <i>”I wonder...”</i>", parse);
+			Text.NL();
+			Text.Add("The alchemist busies [himher]self with the ingredients you gave [himher], mixing them together in a pot. The horn is filed down to a fine powder on a bed of grass, and worked together with the milk using a pestle. Once the concoction has simmered over the flame for a while - and several herbs of various kinds have been added - the alchemist seems happy with it.", parse);
+			rosalin.flags["Ovis"] = 1;
+		}
+		else {
+			Text.Add("<i>”One sheep-tonic, coming up!”</i> The alchemist quickly goes to work on the ingredients you brought [himher], preparing them in a way you swear subtly differs from when [heshe] last made it.", parse);
+		}
+		Text.NL();
+		Text.Add("<i>”Well, here it is,”</i> Rosalin declares, giving you a bottle containing a thick white fluid.", parse);
+		Text.Flush();
+		
+		var rosalinUnlocked = true;
+		var prompt = function() {
+			//[You][Rosalin][Discard]
+			var options = new Array();
+			options.push({ nameStr : "You",
+				func : function() {
+					Text.Clear();
+					Items.Ovis.Use(player);
+					Text.Add("<i>”Do you feel any… different?”</i> the alchemist asks you, notepad at the ready. <i>”Any urge to give up your quest and follow the masses?”</i>", parse);
+					Text.Flush();
+					Gui.NextPrompt(function() {
+						Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
+					});
+				}, enabled : true,
+				tooltip : "Drink the potion yourself."
+			});
+			options.push({ nameStr : "Rosalin",
+				func : function() {
+					Text.Clear();
+					Text.Add("<i>”Nu-uh,”</i> Rosalin shakes [hisher] head. <i>”I wouldn’t want to become a sheep! This stuff can make you really air-headed, I hear! I’ve some limits, you know. I couldn’t make potions if I were stupid!”</i>", parse);
+					Text.NL();
+					Text.Add("…[HeShe] says, wistfully eyeing the potion and licking [hisher] lips. Turning down drinking one of [hisher] own mixtures is a feat of willpower for [himher].", parse);
+					Text.Flush();
+					rosalinUnlocked = false;
+					prompt();
+				}, enabled : rosalinUnlocked,
+				tooltip : "Offer the potion to Rosalin."
+			});
+			options.push({ nameStr : "Discard",
+				func : function() {
+					Text.Clear();
+					Text.Add("You pour out the potion into the vegetation around Rosalin’s workbench. The mindless baa-h of the wooly plants are kind of soothing, believe it or not.", parse);
+					Text.Flush();
+					Gui.NextPrompt(function() {
+						Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
+					});
+				}, enabled : true,
+				tooltip : "Pour out the potion."
+			});
+			Gui.SetButtonsFromList(options);
+		}
+		prompt();
 	}
 
 	//TODO MORE TFS

@@ -92,7 +92,7 @@ Items.Ovis.PushEffect(TF.ItemEffects.SetHorn, {odds: 0.4, race: Race.sheep, colo
 Items.Ovis.PushEffect(TF.ItemEffects.IncSpi, {odds: 0.4, ideal: 30, max: 1});
 Items.Ovis.PushEffect(TF.ItemEffects.IncCha, {odds: 0.3, ideal: 30, max: 1});
 Items.Ovis.PushEffect(TF.ItemEffects.DecStr, {odds: 0.2, ideal: 15, max: 1});
-Items.Ovis.PushEffect(TF.ItemEffects.DecInt, {odds: 0.2, ideal: 15, max: 1});
+Items.Ovis.PushEffect(TF.ItemEffects.DecInt, {odds: 0.2, ideal:  5, max: 1});
 
 
 Items.Bovia = new TFItem("bov0", "Bovia");
