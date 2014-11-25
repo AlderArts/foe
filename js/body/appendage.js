@@ -14,6 +14,23 @@ function Appendage(type, race, color, count) {
 Appendage.prototype = new BodyPart();
 Appendage.prototype.constructor = Appendage;
 
+Appendage.prototype.ToStorage = function() {
+	var storage = {
+		race  : this.race.toFixed(),
+		col   : this.color.toFixed(),
+		type  : this.type.toFixed(),
+		count : this.count.toFixed()
+	};
+	return storage;
+}
+
+Appendage.prototype.FromStorage = function(storage) {
+	this.race   = parseInt(storage.race)   || this.race;
+	this.color  = parseInt(storage.col)    || this.color;
+	this.type   = parseInt(storage.type)   || this.type;
+	this.count  = parseInt(storage.count)  || this.count;
+}
+
 Appendage.prototype.Short = function() {
 	var noun;
 	if(this.count > 1) {

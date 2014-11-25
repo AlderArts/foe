@@ -20,13 +20,13 @@ Cock.prototype.constructor = Cock;
 
 Cock.prototype.ToStorage = function() {
 	var storage = {
-		race   : this.race,
-		col    : this.color,
-		type   : this.type,
-		len    : this.length.base,
-		thk    : this.thickness.base,
-		knot   : this.knot,
-		sheath : this.sheath
+		race   : this.race.toFixed(),
+		col    : this.color.toFixed(),
+		type   : this.type.toFixed(),
+		len    : this.length.base.toFixed(2),
+		thk    : this.thickness.base.toFixed(2),
+		knot   : this.knot.toFixed(),
+		sheath : this.sheath.toFixed()
 	};
 	return storage;
 }

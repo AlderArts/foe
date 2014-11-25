@@ -12,9 +12,9 @@ function Butt() {
 
 Butt.prototype.ToStorage = function() {
 	var storage = {
-		cap    : this.capacity.base,
-		str    : this.stretch.base,
-		size   : this.buttSize.base,
+		cap    : this.capacity.base.toFixed(2),
+		str    : this.stretch.base.toFixed(2),
+		size   : this.buttSize.base.toFixed(2),
 		virgin : this.virgin ? 1 : 0
 	};
 	return storage;

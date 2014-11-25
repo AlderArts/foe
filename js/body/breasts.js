@@ -22,14 +22,14 @@ Breasts.prototype.constructor = Breasts;
 
 Breasts.prototype.ToStorage = function() {
 	var storage = {
-		col     : this.color,
-		race    : this.race,
-		nipC    : this.nippleCount,
-		size    : this.size.base,
-		nipThk  : this.nippleThickness.base,
-		nipLen  : this.nippleLength.base,
-		aerS    : this.aerolaSize.base,
-		nipType : this.nippleType
+		col     : this.color.toFixed(),
+		race    : this.race.toFixed(),
+		nipC    : this.nippleCount.toFixed(),
+		size    : this.size.base.toFixed(2),
+		nipThk  : this.nippleThickness.base.toFixed(2),
+		nipLen  : this.nippleLength.base.toFixed(2),
+		aerS    : this.aerolaSize.base.toFixed(2),
+		nipType : this.nippleType.toFixed()
 	};
 	return storage;
 }

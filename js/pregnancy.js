@@ -36,8 +36,8 @@ function Womb() {
 
 Womb.prototype.ToStorage = function() {
 	var storage = {
-		litS : this.litterSize,
-		type : this.pregType,
+		litS : this.litterSize.toFixed(),
+		type : this.pregType.toFixed(),
 		hour : this.hoursToBirth.toFixed(2),
 		prog : this.progress.toFixed(4)
 	};

@@ -20,14 +20,14 @@ Balls.prototype.SackSize = function() {
 
 Balls.prototype.ToStorage = function() {
 	var storage = {
-		race  : this.race,
-		col   : this.color,
-		count : this.count.base,
-		size  : this.size.base,
-		cum   : this.cum.base,
-		cumP  : this.cumProduction.base,
-		cumC  : this.cumCap.base,
-		fer   : this.fertility.base
+		race  : this.race.toFixed(),
+		col   : this.color.toFixed(),
+		count : this.count.base.toFixed(),
+		size  : this.size.base.toFixed(2),
+		cum   : this.cum.base.toFixed(2),
+		cumP  : this.cumProduction.base.toFixed(2),
+		cumC  : this.cumCap.base.toFixed(2),
+		fer   : this.fertility.base.toFixed(2)
 	};
 	return storage;
 }

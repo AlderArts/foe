@@ -16,12 +16,12 @@ function Vagina() {
 
 Vagina.prototype.ToStorage = function() {
 	var storage = {
-		col    : this.color,
-		cap    : this.capacity.base,
-		str    : this.stretch.base,
-		wet    : this.wetness.base,
-		clitT  : this.clitThickness.base,
-		clitL  : this.clitLength.base,
+		col    : this.color.toFixed(),
+		cap    : this.capacity.base.toFixed(2),
+		str    : this.stretch.base.toFixed(2),
+		wet    : this.wetness.base.toFixed(2),
+		clitT  : this.clitThickness.base.toFixed(2),
+		clitL  : this.clitLength.base.toFixed(2),
 		virgin : this.virgin ? 1 : 0
 	};
 	return storage;

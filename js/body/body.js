@@ -360,64 +360,52 @@ Body.prototype.NumAttributes = function(race) {
 
 Body.prototype.ToStorage = function() {
 	var storage = {
-		tone   : this.muscleTone.base,
-		mass   : this.bodyMass.base,
-		height : this.height.base,
-		weigth : this.weigth.base,
-		fem    : this.femininity.base
+		tone   : this.muscleTone.base.toFixed(2),
+		mass   : this.bodyMass.base.toFixed(2),
+		height : this.height.base.toFixed(2),
+		weigth : this.weigth.base.toFixed(2),
+		fem    : this.femininity.base.toFixed(2)
 	};
 	
 	storage.head = {
-		race : this.head.race,
-		col  : this.head.color
+		race : this.head.race.toFixed(),
+		col  : this.head.color.toFixed()
 	};
 	storage.head.mouth = {
-		cap  : this.head.mouth.capacity.base,
-		ton  : {race : this.head.mouth.tongue.race, col : this.head.mouth.tongue.color},
-		tonL : this.head.mouth.tongueLength.base
+		cap  : this.head.mouth.capacity.base.toFixed(2),
+		ton  : {race : this.head.mouth.tongue.race.toFixed(), col : this.head.mouth.tongue.color.toFixed()},
+		tonL : this.head.mouth.tongueLength.base.toFixed(2)
 	};
 	storage.head.hair = {
-		race  : this.head.hair.race,
-		col   : this.head.hair.color,
-		len   : this.head.hair.length.base,
-		style : this.head.hair.style
+		race  : this.head.hair.race.toFixed(),
+		col   : this.head.hair.color.toFixed(),
+		len   : this.head.hair.length.base.toFixed(2),
+		style : this.head.hair.style.toFixed()
 	};
 	storage.head.eyes = {
-		race  : this.head.eyes.race,
-		col   : this.head.eyes.color,
-		count : this.head.eyes.count.base
+		race  : this.head.eyes.race.toFixed(),
+		col   : this.head.eyes.color.toFixed(),
+		count : this.head.eyes.count.base.toFixed()
 	};
 	storage.head.ears = {
-		race : this.head.ears.race,
-		col  : this.head.ears.color
+		race : this.head.ears.race.toFixed(),
+		col  : this.head.ears.color.toFixed()
 	};
 	if(this.head.appendages.length > 0) {
 		storage.head.app = new Array();
 		for(var i = 0; i < this.head.appendages.length; i++) {
-			var a = this.head.appendages[i];
-			storage.head.app.push({
-				race  : a.race,
-				col   : a.color,
-				type  : a.type,
-				count : a.count
-			});
+			storage.head.app.push(this.head.appendages[i].ToStorage());
 		}
 	}
 	storage.torso = {
-		race : this.torso.race,
-		col  : this.torso.color,
-		hip  : this.torso.hipSize.base
+		race : this.torso.race.toFixed(),
+		col  : this.torso.color.toFixed(),
+		hip  : this.torso.hipSize.base.toFixed(2)
 	};
 	if(this.backSlots.length > 0) {
 		storage.back = new Array();
 		for(var i = 0; i < this.backSlots.length; i++) {
-			var a = this.backSlots[i];
-			storage.back.push({
-				race  : a.race,
-				col   : a.color,
-				type  : a.type,
-				count : a.count
-			});
+			storage.back.push(this.backSlots[i].ToStorage());
 		}
 	}
 	// Genetalia
@@ -451,15 +439,15 @@ Body.prototype.ToStorage = function() {
 	
 	// Arms and legs
 	storage.arms = {
-		race  : this.arms.race,
-		col   : this.arms.color,
-		count : this.arms.count
+		race  : this.arms.race.toFixed(),
+		col   : this.arms.color.toFixed(),
+		count : this.arms.count.toFixed()
 	};
 	
 	storage.legs = {
-		race  : this.legs.race,
-		col   : this.legs.color,
-		count : this.legs.count
+		race  : this.legs.race.toFixed(),
+		col   : this.legs.color.toFixed(),
+		count : this.legs.count.toFixed()
 	};
 
 	return storage;
@@ -495,13 +483,8 @@ Body.prototype.FromStorage = function(storage) {
 	this.head.appendages = new Array();
 	if(storage.head.app) {
 		for(var i = 0; i < storage.head.app.length; i++) {
-			var a = storage.head.app[i];
-			var newApp = new Appendage(
-				parseInt(a.type),
-				parseInt(a.race),
-				parseInt(a.col),
-				parseInt(a.count));
-			
+			var newApp = new Appendage();
+			newApp.FromStorage(storage.head.app[i]);
 			this.head.appendages.push(newApp);
 		}
 	}
@@ -513,13 +496,8 @@ Body.prototype.FromStorage = function(storage) {
 	this.backSlots = new Array();
 	if(storage.back) {
 		for(var i = 0; i < storage.back.length; i++) {
-			var a = storage.back[i];
-			var newApp = new Appendage(
-				parseInt(a.type),
-				parseInt(a.race),
-				parseInt(a.col),
-				parseInt(a.count));
-			
+			var newApp = new Appendage();
+			newApp.FromStorage(storage.back[i]);
 			this.backSlots.push(newApp);
 		}
 	}
