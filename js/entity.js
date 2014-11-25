@@ -264,14 +264,14 @@ Entity.prototype.SaveCombatStats = function(storage) {
 	storage = storage || {};
 	
 	storage.name     = this.name;
-	storage.exp      = Math.floor(this.experience);
-	storage.points   = Math.floor(this.pendingStatPoints);
-	storage.exp2lvl  = Math.floor(this.expToLevel);
-	storage.lvl      = Math.floor(this.level);
-	storage.sexp     = Math.floor(this.sexperience);
-	storage.sxp2lvl  = Math.floor(this.sexpToLevel);
-	storage.slvl     = Math.floor(this.sexlevel);
-	storage.alvl     = Math.floor(this.alchemyLevel);
+	storage.exp      = this.experience.toFixed();
+	storage.points   = this.pendingStatPoints.toFixed();
+	storage.exp2lvl  = this.expToLevel.toFixed();
+	storage.lvl      = this.level.toFixed();
+	storage.sexp     = this.sexperience.toFixed();
+	storage.sxp2lvl  = this.sexpToLevel.toFixed();
+	storage.slvl     = this.sexlevel.toFixed();
+	storage.alvl     = this.alchemyLevel.toFixed();
 	storage.curHp    = this.curHp.toFixed(1);
 	storage.maxHp    = this.maxHp.base.toFixed(1);
 	storage.curSp    = this.curSp.toFixed(1);
@@ -306,9 +306,9 @@ Entity.prototype.SavePersonalityStats = function(storage) {
 	storage = storage || {};
 	
 	// Personality stats
-	if(this.subDom.base   != 0) storage.subDom = Math.floor(this.subDom.base);
-	if(this.slut.base     != 0) storage.slut   = Math.floor(this.slut.base);
-	if(this.relation.base != 0) storage.rel    = Math.floor(this.relation.base);
+	if(this.subDom.base   != 0) storage.subDom = this.subDom.base.toFixed();
+	if(this.slut.base     != 0) storage.slut   = this.slut.base.toFixed();
+	if(this.relation.base != 0) storage.rel    = this.relation.base.toFixed();
 	if(this.drunkLevel    != 0) storage.drunk  = this.drunkLevel.toFixed(2);
 }
 
