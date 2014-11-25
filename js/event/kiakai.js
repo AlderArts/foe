@@ -5185,12 +5185,13 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 						Text.Add("<i>“O-okay,”</i> [name] whimpers. You allow [himher] some time to adjust [hisher] position. The elf lowers [hisher] chest to the ground, demurely resting [hisher] cheek in the accumulated grime. [HisHer] hands now freed, [name] places them against [hisher] stomach. You feel a slight tingling around your [cockDesc] as waves of healing energy suffuse [hisher] body.", parse);
 						Text.NL();
 						Text.Add("Experimentally, you give [himher] a rough, deep thrust, stretching [himher] to [hisher] limit. The elf moans quietly as [hisher] face is pushed against the ground, but it seems that most of [hisher] pain is numbed. [HeShe] seems a bit distant, caught up in euphoric bliss.", parse);
+						Text.NL();
 						if(kiakai.FirstCock()) {
 							parse["isAre"] = kiakai.NumCocks() > 1 ? "are" : "is";
 							parse["s"]     = kiakai.NumCocks() > 1 ? "s" : "";
 							Text.Add("Below [hisher] stretched anus, [name]'s [kMultiCockDesc] [isAre] coming to life, throbbing with need. While [hisher] healing is dampening the sensations in [hisher] ass, a teasing prod confirms that the elf is still acutely aware of [hisher] erect cock[s].", parse);
+							Text.NL();
 						}
-						Text.NL();
 						Text.Add("Your restrictions lifted, you let yourself loose, pounding [name] with wild abandon. Each thrust strains against [hisher] physical limits, forcing your [cockDesc] into territory previously unexplored. As you withdraw from each violent penetration, the soothing tendrils of the elf's healing power jump in, healing any damage.", parse);
 						Text.NL();
 						Text.Add("Slowly but surely, your fervent reaming is rewarded, as you feel that each thrust forces [name] to give more ground, penetrating deeper than [heshe] has ever experienced before. Whether due to the thorough fucking [heshe] is receiving - or the numbing properties of [hisher] healing - [name] is beyond words, reduced to moaning weakly in time with your thrusts.", parse);
