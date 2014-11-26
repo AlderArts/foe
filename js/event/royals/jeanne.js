@@ -15,6 +15,8 @@ function Jeanne(storage) {
 	this.recipes.push(Items.Homos);
 	this.recipes.push(Items.Estros);
 	this.recipes.push(Items.Testos);
+	this.recipes.push(Items.Fertilium);
+	this.recipes.push(Items.Virilium);
 	
 	//this.avatar.combat = new Image();
 	
