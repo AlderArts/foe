@@ -58,6 +58,24 @@ Womb.prototype.Short = function() {
 Womb.prototype.Desc = function() {
 	
 }
+Womb.prototype.Size = function() {
+	var geneSize = 1;
+	switch(this.pregType) {
+		case PregType.Feline:    geneSize = 0.8; break;
+		case PregType.Equine:    geneSize = 1.3; break;
+		case PregType.Lagomorph: geneSize = 0.6; break;
+		case PregType.Lizard:    geneSize = 1.0; break;
+		case PregType.Naga:      geneSize = 1.8; break;
+		
+		case PregType.Undefined:
+		default:
+			geneSize = 1;
+			break;
+	}
+	
+	//TODO: adjust for gene size
+	return this.progress * geneSize * Math.sqrt(this.litterSize);
+}
 
 
 function PregnancyHandler(entity, storage) {
@@ -303,14 +321,12 @@ PregnancyHandler.prototype.BellySize = function() {
 	for(var i = 0; i < vags.length; ++i) {
 		var womb = vags[i].womb;
 		if(womb.pregnant) {
-			//TODO: adjust for gene size
-			size += womb.progress * Math.sqrt(womb.litterSize);
+			size += womb.Size();
 		}
 	}
 	var womb = this.entity.Butt().womb;
 	if(womb.pregnant) {
-		//TODO: adjust for gene size
-		size += womb.progress * Math.sqrt(womb.litterSize);
+		size += womb.Size();
 	}
 	
 	return size;
