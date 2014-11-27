@@ -57,6 +57,9 @@ world.loc.Rigard.Inn.common.links.push(new Link(
 
 
 // Twins' room
+world.SaveSpots["LB2"] = world.loc.Rigard.Inn.penthouse;
+world.loc.Rigard.Inn.penthouse.SaveSpot = "LB2";
+world.loc.Rigard.Inn.penthouse.safe = function() { return true; };
 world.loc.Rigard.Inn.penthouse.description = function() {
 	Text.Add("You are in the Lady's Blessing's penthouse.");
 	Text.NL();
