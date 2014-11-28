@@ -127,6 +127,10 @@ function Rigard(storage) {
 	this.Brothel = {};
 	this.Brothel["Visit"] = 0;
 	
+	this.CW = {};
+	this.CW["Visit"] = 0;
+	this.cwrel = new Stat(0);
+	
 	if(storage) this.FromStorage(storage);
 }
 
@@ -144,6 +148,9 @@ Rigard.prototype.ToStorage = function() {
 	storage.flags   = this.flags;
     storage.Krawitz = this.Krawitz;
     storage.Brothel = this.Brothel;
+    storage.CW      = this.CW;
+    if(this.cwrel.base != 0)
+    	storage.cwrel = this.cwrel.base.toFixed();
 	storage.LB      = this.LB;
 	storage.LBroom  = this.LBroomTimer.ToStorage();
 	if(this.KrawitzWorkDay)
@@ -165,6 +172,10 @@ Rigard.prototype.FromStorage = function(storage) {
         this.Krawitz[flag] = parseInt(storage.Krawitz[flag]);
     for(var flag in storage.Brothel)
         this.Brothel[flag] = parseInt(storage.Brothel[flag]);
+    for(var flag in storage.CW)
+        this.CW[flag] = parseInt(storage.CW[flag]);
+    if(storage.cwrel)
+    	this.cwrel.base = parseInt(storage.cwrel) || this.cwrel.base;
 	for(var flag in storage.LB)
 		this.LB[flag] = parseInt(storage.LB[flag]);
 }
