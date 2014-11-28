@@ -128,18 +128,9 @@ Scenes.Twins.Interact = function() {
 		func : Scenes.Twins.TalkPrompt, enabled : true,
 		tooltip : "Talkie talkie."
 	});
-	options.push({ nameStr : "Leave",
-		func : function() {
-			Text.Clear();
-			Text.Add("", parse);
-			Text.NL();
-			Text.Flush();
-			
-			Gui.NextPrompt();
-		}, enabled : true,
-		tooltip : "Leave."
+	Gui.SetButtonsFromList(options, true, function() {
+		PrintDefaultOptions(); //TODO, leave
 	});
-	Gui.SetButtonsFromList(options, false, null);
 }
 
 Scenes.Twins.TalkPrompt = function() {
