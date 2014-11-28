@@ -331,7 +331,7 @@ Scenes.Estevan.SexGay = function() {
 		Text.NL();
 		Text.Add("It takes a few bottles split between the two of you before you start openly eyeing the goat-man’s physique. His athletic upper half fills out his shirt nicely, especially the flat ridges of his lean stomach and his tight biceps. Estevan’s lower half is all animal strength, able to pivot and dash at a moment’s notice. You compliment him on his lean, powerful form. Maybe it’s just drunken enthusiasm but Estevan seems to warm to your appreciative stare by the moment.", parse);
 		Text.NL();
-		Text.Add("<i>“Like what you see, eh? Don’t get me wrong; I’m no Cale.” He makes a dumb, leering face. <i>“But if you like a little bit of brain with your brawn then you can’t beat this. Not to mention that I don’t reek of wet dog.”</i>", parse);
+		Text.Add("<i>“Like what you see, eh? Don’t get me wrong; I’m no Cale.”</i> He makes a dumb, leering face. <i>“But if you like a little bit of brain with your brawn then you can’t beat this. Not to mention that I don’t reek of wet dog.”</i>", parse);
 		Text.NL();
 		Text.Add("A handful of bottles - you have thoroughly lost count of exactly how many - later, Estevan's eyes get bright and he starts grinning at you. He squints one eye, and says, ", parse);
 		if(player.Femininity() > 0.3)
