@@ -158,14 +158,13 @@ Encounter.prototype.SetButtons = function(activeChar, combatScreen) {
 			Input.buttons[6].SetFromAbility(encounter, entity, entity.abilities["Support"], BasePrompt);
 		if(entity.abilities["Seduce"].Empty() == false)
 			Input.buttons[7].SetFromAbility(encounter, entity, entity.abilities["Seduce"], BasePrompt);
-		Input.buttons[8].Setup("Submit", function() {
-			encounter.onLoss();
-		}, true);
+		Input.buttons[8].SetFromAbility(encounter, entity, Abilities.Wait, BasePrompt);
 		Input.buttons[9].Setup("Item", function() {
 			party.inventory.CombatInventory(encounter, entity, BasePrompt);
 		}, true);
-		
-		Input.buttons[10].SetFromAbility(encounter, entity, Abilities.Wait, BasePrompt);
+		Input.buttons[10].Setup("Submit", function() {
+			encounter.onLoss();
+		}, true);		
 		Input.buttons[11].SetFromAbility(encounter, entity, Abilities.Run, BasePrompt);
 		
 		combatScreen();
