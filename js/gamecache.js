@@ -41,6 +41,7 @@ InitCache = function() {
 	cale    = new Cale(gameCache.wolfie);
 	estevan = new Estevan(gameCache.estevan);
 	magnus  = new Magnus(gameCache.magnus);
+	patchwork = new Patchwork(gameCache.patches);
 	
 	lagon   = new Lagon(gameCache.lagon);
 	ophelia = new Ophelia(gameCache.ophelia);
@@ -67,7 +68,6 @@ InitCache = function() {
 	aria        = new Aria();
 	uru         = new Uru();
 	sylistraxia = new Sylistraxia();
-	patchwork   = new Patchwork();
 	ches        = new Ches();
 	lucille     = new Lucille();
 	
@@ -96,6 +96,7 @@ InitCache = function() {
 	world.EntityStorage.push(cale);
 	world.EntityStorage.push(estevan);
 	world.EntityStorage.push(magnus);
+	world.EntityStorage.push(patchwork);
 	
 	world.EntityStorage.push(lagon);
 	world.EntityStorage.push(ophelia);
@@ -121,7 +122,6 @@ InitCache = function() {
 	world.EntityStorage.push(aria);
 	world.EntityStorage.push(uru);
 	world.EntityStorage.push(sylistraxia);
-	world.EntityStorage.push(patchwork);
 	world.EntityStorage.push(ches);
 	world.EntityStorage.push(lucille);
 	
@@ -359,6 +359,7 @@ GameToCache = function() {
 	gameCache.wolfie  = cale.ToStorage();
 	gameCache.estevan = estevan.ToStorage();
 	gameCache.magnus  = magnus.ToStorage();
+	gameCache.patches = patchwork.ToStorage();
 	
 	gameCache.lagon   = lagon.ToStorage();
 	gameCache.ophelia = ophelia.ToStorage();
@@ -383,7 +384,6 @@ GameToCache = function() {
 	gameCache.aria        = aria.ToStorage();
 	gameCache.uru         = uru.ToStorage();
 	gameCache.sylistraxia = sylistraxia.ToStorage();
-	gameCache.patchwork   = patchwork.ToStorage();
 	gameCache.ches    = ches.ToStorage();
 	gameCache.lucille = lucille.ToStorage();
 	*/

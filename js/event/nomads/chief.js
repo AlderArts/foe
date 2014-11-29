@@ -210,11 +210,11 @@ Scenes.Chief.Interact = function() {
 				// PATCHWORK
 				scenes.push(function() {
 					Text.AddOutput("<i>“If you need anything, why don't you check out Patchwork's shop?”</i> the old man suggests, indicating an odd pile of clothes in front of the only wagon in the camp. It is barely possible to distinguish that a person is hidden somewhere inside the multicolored robes, which seems to be made from sewn-together pieces of colored cloth. <i>“Patches scavenges stuff from all around. If you aren't too particular about the origins of an item, or its price, you might find something of interest.”</i>", parse);
-					Text.Newline();
 					
-					// TODO: Conditional, later when patches is implemented 
-					
-					Text.AddOutput("Trying to not sound impolite, you ask the chief what Patchwork is exactly. Is it a woman, a man? The old man considers the immobile pile of cloth, puffing on his pipe. <i>“Trying to keep together this bunch for a few decades has had me seeing a lot weirder things than Patchwork,”</i> he finally grunts. <i>“If it matters so much to you, why don't you ask them?”</i>", parse);
+					if(patchwork.Met() < Patchwork.Met.KnowGender) {
+						Text.Newline();
+						Text.AddOutput("Trying to not sound impolite, you ask the chief what Patchwork is exactly. Is it a woman, a man? The old man considers the immobile pile of cloth, puffing on his pipe. <i>“Trying to keep together this bunch for a few decades has had me seeing a lot weirder things than Patchwork,”</i> he finally grunts. <i>“If it matters so much to you, why don't you ask them?”</i>", parse);
+					}
 					Gui.NextPrompt(Scenes.Chief.Interact);
 				});
 				// CHIEF
