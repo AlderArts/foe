@@ -43,7 +43,7 @@ CreditsScreen = function() {
 	Text.NL();
 	Text.Add(Text.BoldColor("Loyal patreons:"));
 	Text.NL();
-	Text.Add("StarcraftJunkie, Dane, Mark, Marco Zijlmans, Xcuphra, Eric Borrowman, Matthew Sellers, Xxeryon, Lasse, Sagara Saito, Sindri Myr, Timothy Rice, Mark Hawker, Dana Reitz, Minty Shine");
+	Text.Add("StarcraftJunkie, Dane, Mark, Marco Zijlmans, Xcuphra, Eric Borrowman, Matthew Sellers, Xxeryon, Lasse, Sagara Saito, Sindri Myr, Timothy Rice, Mark Hawker, Dana Reitz, Minty Shine, Sean");
 	Text.NL();
 	Text.Add("...and all the rest of you!");
 	Text.Flush();
