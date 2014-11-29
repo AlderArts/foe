@@ -227,6 +227,10 @@ Items.Homos.Short = function() { return "A bottle of Homos"; }
 Items.Homos.Long = function() { return "A bottle labeled Homos, with the picture of a regular human on it. The fluid within is clear and colorless, like water."; }
 Items.Homos.Recipe = [{it: Items.Hummus}, {it: Items.SpringWater}, {it: Items.Letter}];
 // Effects
+Items.Homos.PushEffect(TF.ItemEffects.SetBody, {odds: 0.4, race: Race.human, str: "human body"});
+Items.Homos.PushEffect(TF.ItemEffects.SetFace, {odds: 0.3, race: Race.human, str: "human face"});
+Items.Homos.PushEffect(TF.ItemEffects.SetArms, {odds: 0.3, race: Race.human, str: "human arms"});
+Items.Homos.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.3, race: Race.human, str: "human legs"});
 Items.Homos.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.human, str: "a human cock"});
 Items.Homos.PushEffect(TF.ItemEffects.RemHorn, {odds: 0.6, count: 2});
 Items.Homos.PushEffect(TF.ItemEffects.SetEars, {odds: 0.6, race: Race.human, str: "human ears"});
