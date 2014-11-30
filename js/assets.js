@@ -17,6 +17,7 @@ Images.lei          = "data/lei_avatar.png";
 Images.terry        = "data/terry.png";
 Images.terry_c      = "data/terry_c.png";
 Images.momo         = "data/momo.png";
+Images.uru1         = "data/uru1.png";
 
 Images.imp          = "data/imp.png";
 Images.introdemon   = "data/introdemon.png";

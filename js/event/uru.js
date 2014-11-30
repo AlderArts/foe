@@ -10,6 +10,8 @@ function Uru(storage) {
 	// Character stats
 	this.name = "Uru";
 	
+	this.avatar.combat = Images.uru1;
+	
 	this.maxHp.base        = 6000;
 	this.maxSp.base        = 1500;
 	this.maxLust.base      = 500;
