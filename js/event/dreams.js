@@ -47,10 +47,9 @@ Scenes.Dreams.Entry = function(func) {
 				Scenes.Dreams.RavenAfterDream(ravenTrigger, func);
 			}
 			
-			if(ret)
-				Gui.Callstack.push(end);
-			else
-				Gui.NextPrompt(end);
+			Gui.Callstack.push(end);
+			if(!ret)
+				PrintDefaultOptions();
 		}
 		
 		
