@@ -359,7 +359,7 @@ Abilities.Physical.Ensnare.OnMiss = function(encounter, caster, target) {
 
 
 Abilities.Physical.FocusStrike = new AttackPhysical();
-Abilities.Physical.FocusStrike.name = "FocusStrike";
+Abilities.Physical.FocusStrike.name = "Focus strike";
 Abilities.Physical.FocusStrike.Short = function() { return "Bypass defenses."; }
 Abilities.Physical.FocusStrike.cost = { hp: null, sp: 50, lp: null};
 Abilities.Physical.FocusStrike.defMod = 0.2;
