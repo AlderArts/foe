@@ -65,6 +65,8 @@ function Miranda(storage) {
 	
 	this.flags["Footjob"]  = 0;
 	
+	this.flags["Bruiser"]  = Miranda.Bruiser.Taught;
+	this.flags["trainSex"] = 0;
 	//Peasants' gate antics
 	this.flags["gBJ"]      = 0;
 	this.flags["gAnal"]    = 0;
@@ -214,6 +216,217 @@ Miranda.prototype.FuckedTerry = function() {
 
 // Events
 Scenes.Miranda = {};
+
+/*
+ * TODO implement
+ * 
+[Train]
+
+Ask her to teach you how to fight.
+
+#teaches PC bruiser if you are good enough.  ===> Locked if you have the job.
+ */
+
+Miranda.Bruiser = {
+	No       : 0,
+	Progress : 1,
+	Taught   : 2
+};
+
+Scenes.Miranda.BruiserTraining = function(backPrompt) {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	if(miranda.flags["Bruiser"] == Miranda.Bruiser.Progress) {
+		if(player.jobs["Fighter"].level < 4) {
+			Text.Add("<i>”Why embarrass yourself more?”</i> Miranda shakes her head. <i>”Come back when you got the basics down, then we can talk. Before that, the only blade I’ll let you touch is the one between my legs.”</i>", parse);
+			Text.NL();
+			Text.Add("<b>You’ll need some more experience as a fighter before Miranda will train you. Raise your fighter job to level 4 or above before you return.</b>", parse);
+			Text.Flush();
+			
+			backPrompt();
+		}
+		else {
+			Text.Add("<i>”Think you got it this time?”</i> Miranda downs her drink and motions for you to follow. <i>”Not going to babysit you, so be sure to keep up this time.", parse);
+			if(miranda.flags["trainSex"] != 0)
+				Text.Add(" I get paid by the hour, and the more time you waste here, the longer I get to lay waste to your ass.", parse);
+			Text.Add("”</i>");
+			
+			Scenes.Miranda.BruiserTrainingCont(backPrompt);
+		}
+		return;
+	}
+	
+	if(miranda.Attitude() >= Miranda.Attitude.Neutral)
+		Text.Add("<i>”I could show you a thing or two,”</i> Miranda takes another sip of her drink and smiles playfully. <i>”I am oh-so-busy though… what’s in it for me?”</i>", parse);
+	else // nasty
+		Text.Add("<i>”Sure, I could whack you around the yard for a bit, possibly teach you to be slightly less useless in a fight… but why should I?”</i> Miranda shoots back. <i>”I don’t work for free you know.”</i>", parse);
+	Text.NL();
+	Text.Add("What did she have in mind?", parse);
+	Text.NL();
+	Text.Add("<i>”Oh, don’t be simple now. You know which way I roll,”</i> the dobie gives you grin, patting her crotch. You hear a few snickers from the other guards.", parse);
+	Text.Flush();
+	
+	//[Decline][Blowjob][Assert]
+	var options = new Array();
+	options.push({ nameStr : "Decline",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>”Your call,”</i> Miranda shrugs, looking a little disappointed.", parse);
+			Text.Flush();
+			
+			backPrompt();
+		}, enabled : true,
+		tooltip : "Turn down her offer."
+	});
+	options.push({ nameStr : "Blowjob",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>”Would be a nice start. Might get you half a lesson,”</i> she toys with you, <i>”offering anything else?”</i>", parse);
+			Text.Flush();
+			
+			//[Decline][Get fucked]
+			var options = new Array();
+			options.push({ nameStr : "Get fucked",
+				func : function() {
+					Text.Clear();
+					Text.Add("<i>”Hear that, guys? Miranda still has the skills,”</i> the dobie boasts, earning her a few catcalls. You blush at the attention, but there’s no way out of this rabbit hole now.", parse);
+					Text.NL();
+					parse["slut"] = miranda.Attitude() >= Miranda.Attitude.Neutral ? "pet" : "slut";
+					Text.Add("<i>”Get down and spread ‘em, [slut]!”</i> the herm hoots, to the cheers of her colleagues. She’s barely able to keep herself from laughing.", parse);
+					Text.NL();
+					Text.Add("Fuck… here?", parse);
+					Text.Flush();
+					
+					var func = function() {
+						miranda.flags["trainSex"] = 1;
+						
+						Text.Add("<i>”...Oh man, you crack me up sometimes. Yanking your chain is just too much fun,”</i> Miranda gasps, clutching her sides. <i>”Well boys, I’ll see you later. Gotta teach this greenling a few things. Coming?”</i>", parse);
+						Text.NL();
+						Text.Add("Downing her drink, the guardswoman gets up, motioning you to follow her into the yard.", parse);
+						
+						Scenes.Miranda.BruiserTrainingCont(backPrompt);
+					}
+					
+					//[No way!][Obey]
+					var options = new Array();
+					options.push({ nameStr : "No way!",
+						func : function() {
+							Text.Clear();
+							miranda.subDom.IncreaseStat(100, 2);
+							player.subDom.DecreaseStat(-100, 1);
+							player.slut.IncreaseStat(100, 1);
+							func();
+						}, enabled : true,
+						tooltip : "That’s going too far!"
+					});
+					options.push({ nameStr : "Obey",
+						func : function() {
+							Text.Clear();
+							miranda.subDom.IncreaseStat(100, 5);
+							player.subDom.DecreaseStat(-100, 2);
+							player.slut.IncreaseStat(100, 3);
+							func();
+						}, enabled : true,
+						tooltip : "Go along with her whims."
+					});
+					Gui.SetButtonsFromList(options, false, null);
+				}, enabled : true,
+				tooltip : "Damn it Miranda… alright, you’re game."
+			});
+			options.push({ nameStr : "Decline",
+				func : function() {
+					Text.Clear();
+					Text.Add("<i>”Your call,”</i> Miranda shrugs, looking a little disappointed.", parse);
+					Text.Flush();
+					
+					backPrompt();
+				}, enabled : true,
+				tooltip : "Turn down her offer."
+			});
+			Gui.SetButtonsFromList(options, false, null);
+		}, enabled : true,
+		tooltip : "...Fine. She want’s you to suck her cock, right?"
+	});
+	if(miranda.Attitude() >= Miranda.Attitude.Neutral) {
+		var dom = player.SubDom() - miranda.SubDom();
+		options.push({ nameStr : "Assert",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>”You take all the fun out of things,”</i> Miranda sighs. <i>”We’ll, I guess I don’t really have anything better to do. Let’s get into the yard and get started, shall we?”</i> As the two of you head outside, you notice a few odd looks from the guardsmen. Apparently they aren’t used to Miranda not getting her way with things.", parse);
+				
+				player.subDom.IncreaseStat(100, 1);
+				miranda.subDom.DecreaseStat(-100, 3);
+				
+				Scenes.Miranda.BruiserTrainingCont(backPrompt);
+			}, enabled : dom + miranda.Relation() > 25,
+			tooltip : "Hasn’t she been mouthing up a bit too often lately? Can’t she help you for the sake of it, just once?"
+		});
+	}
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Miranda.BruiserTrainingCont = function(backPrompt) {
+	var parse = {
+		
+	};
+	
+	Text.NL();
+	Text.Add("Relatively few people are active in the yard when you step out, so the two of you will have plenty of room. The dog-morph gestures for you to pick up a large wooden sword from a nearby rack; really closer to a plank than a sword. It’s surprisingly heavy too; there must be some form of lead core inside. Miranda has acquired a similar practice blade, twirling it around effortlessly.", parse);
+	Text.NL();
+	Text.Add("<i>”The larger and heavier the blade, the greater the damage. You gotta learn to use the momentum to your advantage. Do it right, and even tough monsters will go down in one swing.”</i> She demonstrates by grasping her practice sword in two hands and making an overhand slash. You brace for the impact, almost expecting her to split the ground in two, but she stops just before the edge touches dirt. <i>”’Course, got to know the limits of your equipment too.”</i>", parse);
+	Text.NL();
+	Text.Add("You take a few practice swings with your plank, trying to get the hang of it. Miranda shakes her head, frowning.", parse);
+	Text.NL();
+	
+	world.TimeStep({hour: 1});
+	player.AddSPFraction(-0.5);
+	
+	if(player.jobs["Fighter"] < 4) {
+		Text.Add("<i>”You suck,”</i> she says bluntly. <i>”Perhaps you should reconsider your profession of choice. I hear the Shadow Lady is hiring.”</i>", parse);
+		Text.NL();
+		Text.Add("A bit stung by her words, you ask if she can’t show you instead.", parse);
+		Text.NL();
+		Text.Add("<i>”Not worth my time. Get some experience before you show your face here again.”</i> Disappointed, you put the practice sword back on the rack, heading back inside.", parse);
+		Text.NL();
+		Text.Add("<b>You’ll need some more experience as a fighter before Miranda will train you. Raise your fighter job to level 4 or above before you return.</b>", parse);
+		
+		miranda.flags["Bruiser"] = Miranda.Bruiser.Progress;
+		
+		backPrompt();
+		return;
+	}
+	
+	Text.Add("<i>”Your balance is off. Do it more like <b>this</b>.”</i> The dommy dobie demonstrates her slash again. You try to reproduce her movements, making swing after swing while Miranda studies you, offering the occasional advice and making some hands-on adjustments. You’re not sure the groping is really necessary though.", parse);
+	Text.NL();
+	Text.Add("After a while, swinging the heavy practice blade becomes draining on your poor arms. Best not to complain though.", parse);
+	Text.NL();
+	Text.Add("<i>”You’ll be able to do it easier with time,”</i> Miranda assures you. <i>”Building strength and stamina is key. And once you’ve got it down, bring it all out in an explosive blow - like <b>this</b>!”</i>", parse);
+	Text.NL();
+	Text.Add("Splinters of wood fly everywhere as Miranda puts her shoulder in it, roaring as she brings the blade crashing to the ground. The stress is too much for it to handle, and the practice sword shatters into a dozen pieces, the tip embedded a foot into the dirt below. The guardswoman is left standing there with her stump, looking rather foolish.", parse);
+	Text.NL();
+	Text.Add("<i>”Ah… I think we’re about done,”</i> she mutters. <i>”Shit, this is going to come out of my pay...”</i>", parse);
+	Text.NL();
+	Text.Add("Returning your own blade to the stand, the two of you head back toward the commons.", parse);
+	Text.NL();
+	if(miranda.flags["trainSex"] != 0) {
+		Text.Add("<i>”Now… I’m sure you said something about giving me a little reward for my teachings, did you not?”</i> Miranda gives you a jab in the side with her elbow. <i>”Nothing like a good fuck to round off a work-out, eh? I’m sure the boys’ll love the show!”</i>", parse);
+		Text.NL();
+		Text.Add("You leg it halfway into her speech, fleeing the dobie’s heckling laughter.", parse);
+	}
+	else
+		Text.Add("You thank Miranda for her help, happy to rest your tired limbs.", parse);
+	Text.NL();
+	Text.Add("<b>Unlocked the Bruiser job.</b>", parse);
+	Text.Flush();
+	
+	miranda.flags["trainSex"] = 0;
+	miranda.flags["Bruiser"] = Miranda.Bruiser.Taught;
+	
+	backPrompt();
+}
 
 Scenes.Miranda.RigardGatesDesc = function() {
 	Text.Add("<i>“Ho!”</i> Miranda greets you as you approach the gate. The dog-morph is lounging beside the gatehouse, ");

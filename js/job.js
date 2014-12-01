@@ -243,7 +243,7 @@ Jobs["Bruiser"].Long = function(entity) {
 }
 Jobs["Bruiser"].Unlocked = function(entity) {
 	if(entity == miranda) return true;
-	return false;
+	return miranda.flags["Bruiser"] == Miranda.Bruiser.Taught;
 } // TODO Tier 2 condition
 Jobs["Bruiser"].preqs.push({job : Jobs["Fighter"], lvl : 3});
 Jobs["Bruiser"].abilities.AddAbility(Abilities.Physical.Provoke);
