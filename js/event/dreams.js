@@ -90,19 +90,11 @@ Scenes.Dreams.RavenAfterDream = function(ravenTrigger, func) {
 			Text.NL();
 			Text.Add("Most of the dream you just experienced is clear in your mind, though fading fast. But there is some part that feels strangely obscured... clawing at your memory, wishing to be recalled, but just beyond your reach.");
 			Text.Flush();
-			Gui.NextPrompt(function() {
-				func(true);
-			});
-			return;
 		}
 		else if(r == RavenMother.Stage.ravenstage2 + 1) {
 			Text.NL();
 			Text.Add("The memories come clearer this time. And amid the clear memories, you distinguish one spot that is veiled in blackness, as if excised from your mind. You grab at it, pushing the veil aside with a mental effort, but it’s already faded too far. Next time you will be quicker.");
 			Text.Flush();
-			Gui.NextPrompt(function() {
-				func(true);
-			});
-			return;
 		}
 		else if(r == RavenMother.Stage.ravenstage2 + 2) {
 			Text.NL();
@@ -146,10 +138,6 @@ Scenes.Dreams.RavenAfterDream = function(ravenTrigger, func) {
 				return;
 			}
 			Text.Flush();
-			Gui.NextPrompt(function() {
-				func(true);
-			});
-			return;
 		}
 		else if(r == RavenMother.Stage.ravenstage2 + 3) {
 			Text.NL();
@@ -159,14 +147,12 @@ Scenes.Dreams.RavenAfterDream = function(ravenTrigger, func) {
 			Text.NL();
 			Text.Add("You do however feel that it’s somehow the power of the gem that’s letting you see through their obfuscations, and gain greater awareness while you sleep. Perhaps if you focus on it before going to sleep the next time, you’ll be able to figure something out within the dream.");
 			Text.Flush();
-			Gui.NextPrompt(function() {
-				func(true);
-			});
-			return;
 		}
 	}
 	
-	func(true);
+	Gui.NextPrompt(function() {
+		func(true);
+	});
 }
 
 Scenes.Dreams.RavenText = function(trigger, stage1, stage2, no) {
@@ -483,7 +469,7 @@ Scenes.Dreams.UruChoice = function(ravenTrigger) {
 		Text.Add("Sharp teeth dig into your flesh, and the sensation is almost welcome after the abuse Uru inflicted. As you feel your throat tear, you sit up and open your eyes, gasping for breath. A feeling of nauseous relief washes over you as you realize you are awake at last.", parse);
 		Text.Flush();
 		
-		Gui.NextPrompt();
+		PrintDefaultOptions();
 	});
 	
 	return true;
@@ -547,7 +533,7 @@ Scenes.Dreams.AriaTemple = function(ravenTrigger) {
 			Text.Add("Gradually, the goddess’ beautiful visage fades, leaving only the dreary world of reality. You wake up feeling enlightened, but the happiness quickly fades as you realize how useless her advice was.", parse);
 			Text.Flush();
 			
-			Gui.NextPrompt();
+			PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "Ask her for advice on how to complete your task."
 	});
@@ -610,8 +596,7 @@ Scenes.Dreams.AriaTemple = function(ravenTrigger) {
 			
 			Text.Flush();
 			
-			
-			Gui.NextPrompt();
+			PrintDefaultOptions();
 		}, enabled : true,
 		tooltip : "If none of this is real, it can’t hurt to ask the goddess to have sex with you."
 	});
