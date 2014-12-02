@@ -65,7 +65,7 @@ function Miranda(storage) {
 	
 	this.flags["Footjob"]  = 0;
 	
-	this.flags["Bruiser"]  = Miranda.Bruiser.Taught;
+	this.flags["Bruiser"]  = Miranda.Bruiser.No;
 	this.flags["trainSex"] = 0;
 	//Peasants' gate antics
 	this.flags["gBJ"]      = 0;
@@ -186,6 +186,8 @@ Miranda.prototype.Interact = function(switchSpot) {
 	Gui.SetButtonsFromList(options, true, PartyInteraction);
 }
 
+//TODO ADD BARRACKS
+
 // Schedule
 Miranda.prototype.IsAtLocation = function(location) {
 	if(party.InParty(miranda)) return false;
@@ -217,15 +219,18 @@ Miranda.prototype.FuckedTerry = function() {
 // Events
 Scenes.Miranda = {};
 
-/*
- * TODO implement
- * 
-[Train]
-
-Ask her to teach you how to fight.
-
-#teaches PC bruiser if you are good enough.  ===> Locked if you have the job.
- */
+Scenes.Miranda.BarracksApproach = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("PLACEHOLDER", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Scenes.Miranda.BarracksPrompt();
+}
 
 Miranda.Bruiser = {
 	No       : 0,
@@ -233,7 +238,39 @@ Miranda.Bruiser = {
 	Taught   : 2
 };
 
-Scenes.Miranda.BruiserTraining = function(backPrompt) {
+Scenes.Miranda.BarracksPrompt = function() {
+	var parse = {
+		
+	};
+	
+	//[Train]
+	var options = new Array();
+	//TODO
+	/*
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	*/
+	
+	if(miranda.flags["Bruiser"] < Miranda.Bruiser.Taught) {
+		options.push({ nameStr : "Train",
+			func : Scenes.Miranda.BruiserTraining, enabled : true,
+			tooltip : "Ask her to teach you how to fight."
+		});
+	}
+	Gui.SetButtonsFromList(options, true, function() {
+		//TODO
+		PrintDefaultOptions();
+	});
+}
+
+Scenes.Miranda.BruiserTraining = function() {
 	var parse = {
 		
 	};
@@ -246,7 +283,7 @@ Scenes.Miranda.BruiserTraining = function(backPrompt) {
 			Text.Add("<b>You’ll need some more experience as a fighter before Miranda will train you. Raise your fighter job to level 4 or above before you return.</b>", parse);
 			Text.Flush();
 			
-			backPrompt();
+			Scenes.Miranda.BarracksPrompt();
 		}
 		else {
 			Text.Add("<i>”Think you got it this time?”</i> Miranda downs her drink and motions for you to follow. <i>”Not going to babysit you, so be sure to keep up this time.", parse);
@@ -254,7 +291,7 @@ Scenes.Miranda.BruiserTraining = function(backPrompt) {
 				Text.Add(" I get paid by the hour, and the more time you waste here, the longer I get to lay waste to your ass.", parse);
 			Text.Add("”</i>");
 			
-			Scenes.Miranda.BruiserTrainingCont(backPrompt);
+			Scenes.Miranda.BruiserTrainingCont();
 		}
 		return;
 	}
@@ -277,7 +314,7 @@ Scenes.Miranda.BruiserTraining = function(backPrompt) {
 			Text.Add("<i>”Your call,”</i> Miranda shrugs, looking a little disappointed.", parse);
 			Text.Flush();
 			
-			backPrompt();
+			Scenes.Miranda.BarracksPrompt();
 		}, enabled : true,
 		tooltip : "Turn down her offer."
 	});
@@ -307,7 +344,7 @@ Scenes.Miranda.BruiserTraining = function(backPrompt) {
 						Text.NL();
 						Text.Add("Downing her drink, the guardswoman gets up, motioning you to follow her into the yard.", parse);
 						
-						Scenes.Miranda.BruiserTrainingCont(backPrompt);
+						Scenes.Miranda.BruiserTrainingCont();
 					}
 					
 					//[No way!][Obey]
@@ -342,7 +379,7 @@ Scenes.Miranda.BruiserTraining = function(backPrompt) {
 					Text.Add("<i>”Your call,”</i> Miranda shrugs, looking a little disappointed.", parse);
 					Text.Flush();
 					
-					backPrompt();
+					Scenes.Miranda.BarracksPrompt();
 				}, enabled : true,
 				tooltip : "Turn down her offer."
 			});
@@ -360,7 +397,7 @@ Scenes.Miranda.BruiserTraining = function(backPrompt) {
 				player.subDom.IncreaseStat(100, 1);
 				miranda.subDom.DecreaseStat(-100, 3);
 				
-				Scenes.Miranda.BruiserTrainingCont(backPrompt);
+				Scenes.Miranda.BruiserTrainingCont();
 			}, enabled : dom + miranda.Relation() > 25,
 			tooltip : "Hasn’t she been mouthing up a bit too often lately? Can’t she help you for the sake of it, just once?"
 		});
@@ -368,7 +405,7 @@ Scenes.Miranda.BruiserTraining = function(backPrompt) {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-Scenes.Miranda.BruiserTrainingCont = function(backPrompt) {
+Scenes.Miranda.BruiserTrainingCont = function() {
 	var parse = {
 		
 	};
@@ -384,7 +421,7 @@ Scenes.Miranda.BruiserTrainingCont = function(backPrompt) {
 	world.TimeStep({hour: 1});
 	player.AddSPFraction(-0.5);
 	
-	if(player.jobs["Fighter"] < 4) {
+	if(player.jobs["Fighter"].level < 4) {
 		Text.Add("<i>”You suck,”</i> she says bluntly. <i>”Perhaps you should reconsider your profession of choice. I hear the Shadow Lady is hiring.”</i>", parse);
 		Text.NL();
 		Text.Add("A bit stung by her words, you ask if she can’t show you instead.", parse);
@@ -392,10 +429,11 @@ Scenes.Miranda.BruiserTrainingCont = function(backPrompt) {
 		Text.Add("<i>”Not worth my time. Get some experience before you show your face here again.”</i> Disappointed, you put the practice sword back on the rack, heading back inside.", parse);
 		Text.NL();
 		Text.Add("<b>You’ll need some more experience as a fighter before Miranda will train you. Raise your fighter job to level 4 or above before you return.</b>", parse);
+		Text.Flush();
 		
 		miranda.flags["Bruiser"] = Miranda.Bruiser.Progress;
 		
-		backPrompt();
+		Scenes.Miranda.BarracksPrompt();
 		return;
 	}
 	
@@ -425,7 +463,7 @@ Scenes.Miranda.BruiserTrainingCont = function(backPrompt) {
 	miranda.flags["trainSex"] = 0;
 	miranda.flags["Bruiser"] = Miranda.Bruiser.Taught;
 	
-	backPrompt();
+	Scenes.Miranda.BarracksPrompt();
 }
 
 Scenes.Miranda.RigardGatesDesc = function() {

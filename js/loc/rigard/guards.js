@@ -130,6 +130,18 @@ world.loc.Rigard.Barracks.common.links.push(new Link(
 	}
 ));
 
+world.loc.Rigard.Barracks.common.events.push(new Link(
+	"Miranda", function() { return miranda.IsAtLocation(); }, true,
+	function() {
+		if(miranda.IsAtLocation())
+			Text.AddOutput("You spot Miranda hanging out with a few other guards, sneaking in a few drinks.<br/>");
+	},
+	function() {
+		Scenes.Miranda.BarracksApproach();
+	}
+));
+
+
 world.loc.Rigard.Barracks.common.endDescription = function() {
 	Text.AddOutput("What you do?<br/>");
 }
