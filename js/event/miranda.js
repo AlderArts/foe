@@ -186,15 +186,15 @@ Miranda.prototype.Interact = function(switchSpot) {
 	Gui.SetButtonsFromList(options, true, PartyInteraction);
 }
 
-//TODO ADD BARRACKS
-
 // Schedule
 Miranda.prototype.IsAtLocation = function(location) {
 	if(party.InParty(miranda)) return false;
 	location = location || party.location;
 	if(world.time.hour >= 7 && world.time.hour < 19) {
 		//Work
-		if(world.time.day % 2)
+		if(world.time.day % 3 == 0)
+			return (location == world.loc.Rigard.Barracks.common);
+		else if(world.time.day % 3 == 1)
 			return (location == world.loc.Plains.Gate) || (location == world.loc.Rigard.Gate);
 		else
 			return (location == world.loc.Rigard.Slums.gate);
