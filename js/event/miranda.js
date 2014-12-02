@@ -410,6 +410,9 @@ Scenes.Miranda.BruiserTrainingCont = function() {
 		
 	};
 	
+	party.location = world.loc.Rigard.Barracks.sparring;
+	world.TimeStep({minute: 5});
+	
 	Text.NL();
 	Text.Add("Relatively few people are active in the yard when you step out, so the two of you will have plenty of room. The dog-morph gestures for you to pick up a large wooden sword from a nearby rack; really closer to a plank than a sword. It’s surprisingly heavy too; there must be some form of lead core inside. Miranda has acquired a similar practice blade, twirling it around effortlessly.", parse);
 	Text.NL();
@@ -433,7 +436,16 @@ Scenes.Miranda.BruiserTrainingCont = function() {
 		
 		miranda.flags["Bruiser"] = Miranda.Bruiser.Progress;
 		
-		Scenes.Miranda.BarracksPrompt();
+		Gui.NextPrompt(function() {
+			Text.Clear();
+			Text.Add("You return inside the common room and sit down with Miranda.");
+			Text.Flush();
+			
+			party.location = world.loc.Rigard.Barracks.sparring;
+			world.TimeStep({minute: 5});
+			
+			Scenes.Miranda.BarracksPrompt();
+		});
 		return;
 	}
 	
@@ -463,7 +475,16 @@ Scenes.Miranda.BruiserTrainingCont = function() {
 	miranda.flags["trainSex"] = 0;
 	miranda.flags["Bruiser"] = Miranda.Bruiser.Taught;
 	
-	Scenes.Miranda.BarracksPrompt();
+	Gui.NextPrompt(function() {
+		Text.Clear();
+		Text.Add("You return inside the common room and sit down with Miranda.");
+		Text.Flush();
+		
+		party.location = world.loc.Rigard.Barracks.sparring;
+		world.TimeStep({minute: 5});
+		
+		Scenes.Miranda.BarracksPrompt();
+	});
 }
 
 Scenes.Miranda.RigardGatesDesc = function() {
