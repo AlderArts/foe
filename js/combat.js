@@ -242,8 +242,8 @@ Encounter.prototype.onVictory = function() {
 	Text.Newline();
 
 	var exp = 0, coin = 0;
-	for(var i = 0; i < this.enemy.members.length; i++) {
-		var e = this.enemy.members[i];
+	for(var i = 0; i < this.enemy.NumTotal(); i++) {
+		var e = this.enemy.Get(i);
 		exp  += e.combatExp;
 		coin += e.coinDrop;
 		
