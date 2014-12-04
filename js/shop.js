@@ -29,7 +29,58 @@ Shop.prototype.Buy = function(back, preventClear) {
 	
 	if(!preventClear)
 		Text.Clear();
-
+		
+	var buyFunc = function(obj) {
+		if(obj.func) {
+			var res = obj.func();
+			if(res) return;
+		}
+		
+		var cost = obj.cost;
+		var num  = party.Inv().QueryNum(obj.it) || 0;
+		
+		Text.Clear();
+		Text.AddOutput("Buy " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
+		
+		//[name]
+		var options = new Array();
+		options.push({ nameStr : "Buy 1",
+			func : function() {
+				// Remove cost
+				party.coin -= cost;
+				// Add item to inv
+				party.inventory.AddItem(obj.it);
+				buyFunc(obj);
+			}, enabled : party.coin >= cost,
+			tooltip : ""
+		});
+		options.push({ nameStr : "Buy 5",
+			func : function() {
+				// Remove cost
+				party.coin -= cost*5;
+				// Add item to inv
+				party.inventory.AddItem(obj.it, 5);
+				buyFunc(obj);
+			}, enabled : party.coin >= cost*5,
+			tooltip : ""
+		});
+		options.push({ nameStr : "Buy 10",
+			func : function() {
+				// Remove cost
+				party.coin -= cost*10;
+				// Add item to inv
+				party.inventory.AddItem(obj.it, 10);
+				buyFunc(obj);
+			}, enabled : party.coin >= cost*10,
+			tooltip : ""
+		});
+		Gui.SetButtonsFromList(options, true, function() {
+			// Recreate the menu
+			// TODO: Keep page!
+			shop.Buy(back);
+		});
+	};
+	
 	var options = new Array();
 	for(var i = 0; i < this.inventory.length; i++) {
 		var it       = this.inventory[i].it;
@@ -43,26 +94,7 @@ Shop.prototype.Buy = function(back, preventClear) {
 		Text.AddOutput("<b>" + cost + "g - </b>" + it.name + " - " + it.Short() + "<br/>");
 
 		options.push({ nameStr : it.name,
-			func : function(obj) {
-				if(obj.func) {
-					var res = obj.func();
-					if(res) return;
-				}
-				
-				// Remove cost
-				party.coin -= obj.cost;
-				// Add item to inv
-				party.inventory.AddItem(obj.it);
-
-				Text.Clear();
-				Text.AddOutput("You buy one " + obj.it.name + ".");
-				
-				Gui.NextPrompt(function() {
-					// Recreate the menu
-					// TODO: Keep page!
-					shop.Buy(back);
-				});
-			}, enabled : enabled,
+			func : buyFunc, enabled : enabled,
 			tooltip : it.Long(),
 			obj : {it: this.inventory[i].it, cost: cost, func: func }
 		});
@@ -93,7 +125,7 @@ Shop.prototype.Sell = function(back) {
 		Text.AddOutput("Sell " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
 		
 		var options = new Array();
-		options.push({ nameStr : "Sellx1",
+		options.push({ nameStr : "Sell 1",
 			func : function() {
 				// Add cash
 				party.coin += cost;
@@ -111,7 +143,7 @@ Shop.prototype.Sell = function(back) {
 			}, enabled : true,
 			tooltip : ""
 		});
-		options.push({ nameStr : "Sellx5",
+		options.push({ nameStr : "Sell 5",
 			func : function() {
 				var sold = Math.min(num, 5);
 				// Add cash
