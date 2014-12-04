@@ -697,12 +697,12 @@ Body.prototype.SkinDesc = function(part) {
 	switch(part) {
 		case Race.lizard:
 		case Race.snake:
-		case Race.dragon: return "a body covered with " + col + " scales";
+		case Race.dragon: return col + " scales";
 		
 		case Race.avian: return col + " feathers";
 		
 		case Race.cow:
-		case Race.horse: return "a thick " + col + "hide";
+		case Race.horse: return col + "hide";
 		
 		case Race.ferret:
 		case Race.wolf:
