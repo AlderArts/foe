@@ -170,7 +170,7 @@ Scenes.Patchwork.Interact = function() {
 			func : next, enabled : true,
 			tooltip : "What was it now?"
 		});
-		options.push({ nameStr : "[Something like…]",
+		options.push({ nameStr : "[Was it…]",
 			func : next, enabled : true,
 			tooltip : "What was it now?"
 		});
