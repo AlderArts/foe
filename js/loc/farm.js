@@ -1021,7 +1021,7 @@ Scenes.FarmIntro.ReturnToGwendy = function() {
 	Text.Newline();
 	
 	if(Scenes.FarmIntro.fuckedDanie) {
-		Text.AddOutput("A nervous chuckle escapes your lips as you deny performing any such actions. A knowing smile graces Gwendy's face as she comes closer and theatrically sniffs at you. <i>“You might say you haven't, but you smell an awful lot like sheep for someone just feeding them... but I won't worry you about it. I think can trust someone who's willing to help a gal out.”</i> You squirm under her gaze, but she soon backs off.", parse);
+		Text.AddOutput("A nervous chuckle escapes your lips as you deny performing any such actions. A knowing smile graces Gwendy's face as she comes closer and theatrically sniffs at you. <i>“You might say you haven't, but you smell an awful lot like sheep for someone just feeding them... but I won't worry you about it. I think I can trust someone who's willing to help a gal out.”</i> You squirm under her gaze, but she soon backs off.", parse);
 	}
 	else {
 		Text.AddOutput("You cast an indignant look at her, but she just chuckles. <i>“Calm down, silly. I know you're not the type to do something like that. Still, you have no idea how much help you were today. I appreciate it, and I hope you'll come by more often, even just to visit.”</i>", parse);
