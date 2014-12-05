@@ -843,7 +843,7 @@ world.loc.Rigard.Inn.common.events.push(new Link(
 	function() {
 		if(lei.IsAtLocation(world.loc.Rigard.Inn.common)) {
 			if(lei.flags["Met"] < Lei.Met.SeenGates) {
-				Text.Add("You notice a man sitting in the corner of the room on his own, a hood covering his face. There are a few others alone, a few others concealing their faces, but what draws your eye the most is his stillness. Whereas all others in the tavern are motion, he sits completely still, his only movements the occasional tilt of his head, as he seems to scan the room, and the movement of his hand as he nurses some drink in a dark glass. Everything about him works to pique your curiosity, but you can’t quite come up with a reason to approach him.");
+				Text.Add("You notice a man sitting in the corner of the room on his own, a hood covering his face. There are a few others alone, a few others concealing their faces, but what draws your eye the most is his stillness. Whereas all others in the tavern are in motion, he sits completely still, his only movements the occasional tilt of his head, as he seems to scan the room, and the movement of his hand as he nurses some drink in a dark glass. Everything about him works to pique your curiosity, but you can’t quite come up with a reason to approach him.");
 				lei.flags["Met"] = Lei.Met.SeenInn;
 			}
 			else if(lei.flags["Met"] == Lei.Met.SeenGates)
