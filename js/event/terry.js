@@ -1527,7 +1527,7 @@ Scenes.Terry.TalkFeelings = function() {
 					Text.Clear();
 					Text.Add("You sweep Terry into your arms, pulling the [foxvixen] into a passionate kiss. [HisHer] chest presses against yours, ", parse);
 					if(terry.FirstBreastRow().Size() > 3)
-						Text.Add("[hisher] [breasts] squishing pleasantly against your own [breastsDesc],", parse);
+						Text.Add("[hisher] [breasts] squishing pleasantly against your own [breastsDesc], ", parse);
 					Text.Add("and [heshe] moans softly in surprise before eagerly returning your kiss. Terry’s eyes sink shut in rapture, arms moving to fold themselves possessively around your waist. The [foxvixen]’s tail wags in delight over [hisher] shapely buttocks, enticing you to reach down and give it a stroke. When you release the kiss, [heshe] pants for breath, and you suggest moving to a more private spot for this.", parse);
 					Text.NL();
 					if(terry.Slut() >= 60)
@@ -7459,7 +7459,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 					Text.Add("Your hips slap against Terry’s with audible force - you just know the both of you are going to be walking a little funny after this. You can feel it, your cock[s] throbbing in anticipation; you’re going to blow any time now.", parse);
 					Text.NL();
 					parse["k"] = knotted ? Text.Parse(", your knot[s4] bloating to their full glory and anchoring you in place", parse) : "";
-					Text.Add("Grabbing Terry’s ass for dear life, you thrust yourself yourself as hard and as deeply as you can into [hisher] waiting hole[s]. You can feel it boiling within you, a rising tide of seed just aching to flood the [foxvixen]’s womb and fill [himher] with your child. Trembling in your excitement, you cry out and slam yourself in for the final time[k]. No sooner have your hips battered against Terry’s rear than you explode inside of [himher], hot seed gushing freely into [hisher] hole[s].", parse);
+					Text.Add("Grabbing Terry’s ass for dear life, you thrust yourself as hard and as deeply as you can into [hisher] waiting hole[s]. You can feel it boiling within you, a rising tide of seed just aching to flood the [foxvixen]’s womb and fill [himher] with your child. Trembling in your excitement, you cry out and slam yourself in for the final time[k]. No sooner have your hips battered against Terry’s rear than you explode inside of [himher], hot seed gushing freely into [hisher] hole[s].", parse);
 					Text.NL();
 					
 					terry.OrgasmCum();
