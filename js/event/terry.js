@@ -174,7 +174,7 @@ Terry.prototype.FromStorage = function(storage) {
 	this.SetLevelBonus();
 	this.Equip();
 		
-	if(this.flags["Met"] >= Terry.Met.Caught) {
+	if(this.flags["Met"] >= Terry.Met.Caught || this.Recruited()) {
 		this.name = "Terry";
 		this.avatar.combat = Images.terry_c;
 		this.monsterName = null;
