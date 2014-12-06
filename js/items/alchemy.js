@@ -491,6 +491,7 @@ Items.Testos.PushEffect(function(target) {
 			if(thk)
 				Text.Add("thicker", parse);
 			Text.Add(".", parse);
+			Text.Flush();
 		}
 	}
 });
