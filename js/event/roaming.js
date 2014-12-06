@@ -577,7 +577,7 @@ Scenes.Roaming.BanditsWin = function() {
 		
 	};
 	
-	parse = bandits.GetRandom().ParserPronouns(parse);
+	parse = bandits.GetRandom(true, true).ParserPronouns(parse);
 	
 	parse["comp"]  = party.Num() == 2 ? party.Get(1).name : "your companions";
 	parse["comp2"] = party.Num() == 2 ? "The two of you" : "You all";
