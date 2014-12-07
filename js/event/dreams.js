@@ -39,15 +39,16 @@ Scenes.Dreams.Entry = function(func) {
 			scenes.AddEnc(Scenes.Dreams.CunnilingusGive, 2.0, function() { return player.sex.gCunn >= 25; }, ravenTrigger);
 			scenes.AddEnc(Scenes.Dreams.CunnilingusRec, 2.0, function() { return player.sex.rCunn >= 25; }, ravenTrigger);
 			
-			var ret = scenes.Get();
-			
-			Text.Flush();
-			
 			var end = function() {
 				Scenes.Dreams.RavenAfterDream(ravenTrigger, func);
 			}
 			
 			Gui.Callstack.push(end);
+			
+			var ret = scenes.Get();
+			
+			Text.Flush();
+			
 			if(!ret)
 				PrintDefaultOptions();
 		}
