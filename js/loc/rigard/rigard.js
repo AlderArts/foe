@@ -1009,7 +1009,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		// Introductory text
 		Scenes.Rigard.ChatterIntro(parse, enteringArea);
 		Text.NL();
-		Text.Add("<i>“It’s hard to save up enough leave a good amount for all my children,”</i> the [NPC1] says. <i>“I wanted them to be comfortable, but it seems like they’ll have to make their own way.", parse);
+		Text.Add("<i>“It’s hard to save up enough leave a good amount for all my children,”</i> the [NPC1] says. <i>“I wanted them to be comfortable, but it seems like they’ll have to make their own way.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Tell me about it,”</i> the [NPC2] replies. <i>“I think I’m going to send my second daughter to the shrine of Aria. Getting in isn’t cheap, but it sure is cheaper than getting enough together to set her up on her own.”</i>", parse);
 		Text.NL();
