@@ -67,11 +67,11 @@ LactationHandler.prototype.Update = function(hours) {
 	if(this.Lactation())
 		inc -= this.lactationRate.Get() * hours;
 	
-	if(inc >= 0) {
+	if(inc > 0) {
 		this.milk.IncreaseStat(this.MilkCap(), inc, true);
 	}
-	else {
-		this.milk.DecreaseStat(0, -inc);
+	else if(inc < 0) {
+		this.milk.DecreaseStat(0, -inc, true);
 	}
 	
 	if(this.Milk() >= this.MilkCap()) {
