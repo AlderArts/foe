@@ -7021,9 +7021,9 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 		Text.NL();
 		Text.Add("Laying down like this, you’re free to get a better look at your vulpine lover. Terry’s cute face whenever [heshe] moans. [HisHer] ", parse);
 		if(terry.Cup() >= Terry.Breasts.Ccup)
-			Text.Add("luscious mounds, capped with erect little nubs poking out of [hisher] fluffy fur.", parse);
+			Text.Add("luscious mounds, capped with erect little nubs poking out of [hisher] fluffy fur. ", parse);
 		else if(terry.Cup() >= Terry.Breasts.Acup)
-			Text.Add("pert mounds, with tiny pearls that make [hisher] nipples poking out of the fluffy fur on [hisher] chest.", parse);
+			Text.Add("pert mounds, with tiny pearls that make [hisher] nipples poking out of the fluffy fur on [hisher] chest. ", parse);
 		else
 			Text.Add("little nipples, hardened in excitement, begging to be pressed like tiny pleasure buzzers. ", parse);
 		
