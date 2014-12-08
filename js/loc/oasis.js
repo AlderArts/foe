@@ -367,7 +367,7 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 				Text.Add("You take the lead this time, biting playfully at [rhisher] lip. As you look up to meet [rhisher] unfocused gaze, the caravan master squirms in pleasure, making your teeth tug harder with [rhisher] movements. ", parse);
 				if(piercings)
 					Text.Add("You shift your attention to the corner of [rhisher] lips, sucking the piercing into your mouth, swirling your tongue over it as you bite down a little harder. ", parse);
-				Text.Add("Your hapless victim moans loudly, pleasure running through [rhisher] body. You thought it was impossible to make someone orgasm from just kissing, but [rhisher] reactions almost make you want try.", parse);
+				Text.Add("Your hapless victim moans loudly, pleasure running through [rhisher] body. You thought it was impossible to make someone orgasm from just kissing, but [rhisher] reactions almost make you want to try.", parse);
 				Text.NL();
 				Text.Add("Nonetheless, you decide to pull back and give [rhimher] a little break… and focus your attention elsewhere. ", parse);
 				if(lizan.FirstCock()) {
