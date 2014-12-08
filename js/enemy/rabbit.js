@@ -1568,6 +1568,9 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 							Text.NL();
 							Text.Add("Seems like they’re gonna be a while...", parse);
 							Text.NL();
+							
+							var cum = terry.OrgasmCum();
+							
 							PrintDefaultOptions();
 						}
 					}, enabled : true,
