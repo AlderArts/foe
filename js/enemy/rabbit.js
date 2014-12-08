@@ -1152,7 +1152,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 		parse["oneof"]     = player.NumCocks() > 1 ? " one of" : "";
 		parse["thisThese"] = player.NumCocks() > 1 ? "these" : "this";
 		Text.Add("The buck closes his lips around[oneof] your [multiCockDesc], dutifully lathering it in bunny saliva. ", parse);
-		if(player.NumCocks())
+		if(player.NumCocks() > 1)
 			Text.Add("He shifts between your shafts, giving each of them equal time and keeping them hard with his paws when his mouth is otherwise busy. ", parse);
 		Text.Add("You can’t wait to stick [thisThese] into one of your submissive charges… maybe you’ll let this one be your first target.", parse);
 	}
