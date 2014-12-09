@@ -5726,6 +5726,7 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 	}, "Rough", "Beg her to give it to you rough!");
 }
 
+// TODO
 Scenes.Miranda.HomeDommyDungeonFirst = function() {
 	
 	var parse = {
@@ -5746,6 +5747,7 @@ Scenes.Miranda.HomeDommyDungeonFirst = function() {
 	});
 }
 
+// TODO
 Scenes.Miranda.HomeDommyDungeon = function() {
 	
 	var parse = {
@@ -5766,6 +5768,7 @@ Scenes.Miranda.HomeDommyDungeon = function() {
 	});
 }
 
+// TODO
 Scenes.Miranda.HomeSubbyDungeon = function() {
 	
 	var parse = {
@@ -5786,6 +5789,7 @@ Scenes.Miranda.HomeSubbyDungeon = function() {
 	});
 }
 
+// TODO
 Scenes.Miranda.TavernSexPrompt = function() {
 	var parse = {
 		
@@ -5987,6 +5991,9 @@ Scenes.Miranda.TavernSexBackroomSubbyVag = function(cocks) {
 	else                      parse["comp"] = "";
 	Text.Add("Once the two of you are recovered from your recent exertions, you clean up the mess you made as best you can, then get back into your respective gear. Miranda casually unblocks the door and the two of you head back out into the bar. There, you[comp] say goodbye to the dober-morph before leaving her to resume her drinking.", parse);
 	Text.Flush();
+	
+	world.TimeStep({hour: 1});
+	
 	Gui.NextPrompt();
 }
 
@@ -6477,6 +6484,8 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 		}
 	}
 	Text.Flush();
+	
+	world.TimeStep({minute: 30});
 	
 	//[Take It][69][Footjob]
 	var options = new Array();
