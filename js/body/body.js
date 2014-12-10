@@ -451,9 +451,9 @@ Body.prototype.FromStorage = function(storage) {
 	
 	this.muscleTone.base = parseFloat(storage.tone)   || this.muscleTone.base;
 	this.bodyMass.base   = parseFloat(storage.mass)   || this.bodyMass.base;
-	this.height.base     = parseFloat(storage.height) || this.height;
-	this.weigth.base     = parseFloat(storage.weigth) || this.weigth;
-	this.femininity.base = parseFloat(storage.fem)    || this.femininity;
+	this.height.base     = parseFloat(storage.height) || this.height.base;
+	this.weigth.base     = parseFloat(storage.weigth) || this.weigth.base;
+	this.femininity.base = parseFloat(storage.fem)    || this.femininity.base;
 	
 	this.head.race   = parseInt(storage.head.race) || this.head.race;
 	this.head.color  = parseInt(storage.head.col)  || this.head.color;
