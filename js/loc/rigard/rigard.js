@@ -1276,7 +1276,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Gui.SetButtonsFromList(options, false, null);
 		
 		return true;
-	}, 1.0, function() { return world.time.hour >= 6 && world.time.hour < 19; });
+	}, 1.0, function() { return rigard.Access() && world.time.hour >= 6 && world.time.hour < 19; });
 	scenes.AddEnc(function() {
 		Text.Add("A pair of elegantly dressed women are sitting together, sipping mulled wine. One of them looks to be in her early thirties, and leans forward, instructing her younger companion. <i>“I know it’s expensive, but it is of paramount importance that your children are well educated. Paramount.", parse);
 		Text.NL();

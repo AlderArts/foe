@@ -8,6 +8,7 @@ CHANGELOG for Fall of Eden
 Version 0.3s
 ------------
 * Fixed a bug in the save format.
+* You can no longer get into Rigard by mistake (before you have a pass) through the brothel announcer event.
 
 --------------------------------------------
              PREVIOUS VERSIONS
