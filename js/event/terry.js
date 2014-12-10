@@ -5311,6 +5311,9 @@ Scenes.Terry.SexWorship = function() {
 			Text.NL();
 			Text.Add("Slackening your grip slightly, you lean over and give the side of [hisher] flare a light nip. That’s all it takes to set the [foxvixen] off. [HeShe]’s spurting [hisher] load skywards even before a ripple of throbbing pleasure works its way through [hisher] equine mast. You don’t lose a beat and quickly tilt Terry’s shaft towards [himher]self, letting jet after powerful jet fly off through the air and land on the unsuspecting [foxvixen].", parse);
 			Text.NL();
+			
+			terry.OrgasmCum();
+			
 			Text.Add("Some of it falls on [hisher] open maw, as [heshe] cries out in pleasure. But most of it winds up plastering [hisher] body. To ensure not a single droplet is left behind, you make it a point to press your finger and massage [hisher] prostate, alternating between fingering [himher] and stroking the rock-hard horse-shaft in your hand.", parse);
 			Text.NL();
 			if(terry.FirstVag()) {
@@ -5451,6 +5454,9 @@ Scenes.Terry.SexWorship = function() {
 			Text.NL();
 			Text.Add("Terry cries out as [heshe] throbs inside you, [hisher] knot growing as big as it can. You feel [hisher] balls churn, almost vibrating with the effort of pumping all of [hisher] load up [hisher] footlong mast. The last signal you get is [hisher] tip flaring out as a veritable eruption of fox-seed heralds Terry’s climax.", parse);
 			Text.NL();
+			
+			terry.OrgasmCum();
+			
 			Text.Add("Stretched to the fullest, you shudder, arching your back as you feel the [foxvixen]’s seed roaring into your guts like a perverse volcano. You can practically feel the first wave of semen slapping against your stomach wall, your belly bulging from the liquid cannon-shot you have taken, before Terry fires again, and then again. Gush after jet after spurt cascades inside you, Terry’s knot sealing your ass and ensuring it has nowhere to go but up and in. Your stomach bloats obscenely, a perverse parody of pregnancy, slapping heavily into Terry’s own belly as you just keep growing, and growing...", parse);
 			Text.NL();
 			Text.Add("Finally, mercifully, Terry’s howl dies away into exhausted panting as [hisher] vul-quine seed factories deplete themselves, leaving the two of you cradling a belly that looks pregnant with a whole litter of Terry’s pups. Your stomach gurgles and you stifle a belch, tasting cum on the back of your tongue.", parse);
@@ -7175,7 +7181,6 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 							Text.Add("It certainly looks like it, you agree.", parse);
 						}
 						
-						terry.OrgasmCum();
 						cumbath = true;
 					}
 					else {
@@ -7208,10 +7213,10 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 						Text.Add("The [foxvixen] regards you with a pour, before sighing. <i>“I can’t really stay mad at you...”</i>", parse);
 						Text.NL();
 						Text.Add("You just smile, assure [himher] that’s part of [hisher] charms, and gently steal a quick kiss from [hisher] lips before snuggling back down.", parse);
-						
-						terry.OrgasmCum();
 					}
 					Text.NL();
+					
+					terry.OrgasmCum();
 					
 					if(cumbath) {
 						Text.Add("<i>“Ugh. I hope you like creamy [foxvixen]. I’m a total mess right now.”</i>", parse);
@@ -7401,6 +7406,10 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 							Text.Add("unlike the below-average fox-cock that’s firing it.", parse);
 						Text.NL();
 					}
+					
+					player.OrgasmCum();
+					terry.OrgasmCum();
+					
 					Text.Add("Terry is only capable of crying out in pleasure, as cum gathers in [hisher] once-soft fur. Utterly plastering it with the results of your recent activities. Some of the seed even manages to get into [hisher] mouth, but if [heshe] minds, or even notices, you can’t tell.", parse);
 					Text.NL();
 					Text.Add("Feeling mischievous, you angle your [multiCockDesc] to try and aim the last few spurts gushing from your dick[s] at Terry’s open mouth, ending with a few pitiful last dribbles that splatter messily on [hisher] belly.", parse);
