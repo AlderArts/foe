@@ -7807,7 +7807,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 				Scenes.Terry.TerryCleansPC();
 			}
 			else {
-				Text.Add("Though I’d appreciate it if you didn’t try to drown me next time,” [heshe] adds jokingly.", parse);
+				Text.Add("Though I’d appreciate it if you didn’t try to drown me next time,”</i> [heshe] adds jokingly.", parse);
 				Text.NL();
 				Text.Add("Well, maybe [heshe] should do so good a job at eating you out next time, you quip back, teasingly sticking your tongue out at [himher].", parse);
 				Text.NL();
