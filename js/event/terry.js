@@ -7809,14 +7809,14 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 			else {
 				Text.Add("Though I’d appreciate it if you didn’t try to drown me next time,”</i> [heshe] adds jokingly.", parse);
 				Text.NL();
-				Text.Add("Well, maybe [heshe] should do so good a job at eating you out next time, you quip back, teasingly sticking your tongue out at [himher].", parse);
+				Text.Add("Well, maybe [heshe] shouldn't do so good a job of eating you out next time, you quip back, teasingly sticking your tongue out at [himher].", parse);
 				Text.NL();
 				Text.Add("The [foxvixen] chuckles at your comeback, but otherwise doesn’t say anything. Eventually Terry gets back on [hisher] feet and offers you a helping hand.", parse);
 				Text.NL();
-				Text.Add("You eagerly reach out for it and allow the [foxvixen] to help you back upright again. Stretching a few kinks out of your joints; you smirk and playfully ask if Terry wouldn’t mind giving you back your [cockDesc].", parse);
+				Text.Add("You eagerly reach out for it and allow the [foxvixen] to help you back upright again. Stretching a few kinks out of your joints, you smirk and playfully ask if Terry wouldn’t mind giving you back your [cockDesc].", parse);
 				Text.NL();
 				if(terry.Relation() < 45) {
-					Text.Add("<i>“Huh? Oh right, sorry,”</i> the flustered [foxvixen] says, reaching between [hisher] legs to pull your [cockDesc] with a groan. <i>“Here you go… perv.”</i>", parse);
+					Text.Add("<i>“Huh? Oh right, sorry,”</i> the flustered [foxvixen] says, reaching between [hisher] legs to pull out your [cockDesc] with a groan. <i>“Here you go… perv.”</i>", parse);
 					Text.NL();
 					Text.Add("[HeShe] was almost about to walk off with it, and <b>you’re</b> the perv? Even as you say this, you grin and collect the toy off of [himher].", parse);
 					Text.NL();
