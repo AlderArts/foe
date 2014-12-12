@@ -108,7 +108,7 @@ Scenes.Kyna.Intro = function() {
 	Text.NL();
 	Text.Add("Stunned, she gathers her wits and sees you looming above her. <i>“Oh.... ’ello there, sorry bout that mate, but that stool came outta nowhere.”</i>", parse);
 	Text.NL();
-	Text.Add("Sighing, you offer her a hand and gently get her back on her feet. She dusts herself off as you get a closer look at her. She’s clad in a simple leather armor, with a simple tunic underneath. You’d need to have a better look to confirm, but if you had to guess, you’d say she’s a D-cup. Covering her legs, she wears a simple plaided dress, held by a leather belt.", parse);
+	Text.Add("Sighing, you offer her a hand and gently get her back on her feet. She dusts herself off as you get a closer look at her. She’s clad in a simple leather armor, with a simple tunic underneath. You’d need to have a better look to confirm, but if you had to guess, you’d say she’s a D-cup. Covering her legs, she wears a simple plaid dress, held by a leather belt.", parse);
 	Text.NL();
 	Text.Add("She looks a bit unsteady on her feet, so you decide to invite her to sit down with you.", parse);
 	Text.NL();
@@ -213,7 +213,7 @@ Scenes.Kyna.Intro = function() {
 	options.push({ nameStr : "Leave",
 		func : function() {
 			Text.Clear();
-			Text.Add("Even though you do feel sorry for her, you worry that getting friendly with Kyna may cause problems for you. A mercenary with a run of bad luck like her could likely draw you into a bad situation if you get too involved. You stay a little while for a drink and polite chat, before saying goodnight to the young ferret, wondering if you’ll see her again.", parse);
+			Text.Add("Even though you do feel sorry for her, you worry that getting friendly with Kyna may cause problems for you. A mercenary with a run of bad luck like her could likely draw you into a bad situation if you got too involved. You stay a little while for a drink and polite chat, before saying goodnight to the young ferret, wondering if you’ll see her again.", parse);
 			Text.Flush();
 			
 			kyna.flags["Met"] = Kyna.MetFlags.Left;
@@ -380,7 +380,7 @@ Scenes.Kyna.IntroSexPrompt = function() {
 				p1Cock = player.BiggestCock();
 				
 				Text.Clear();
-				Text.Add("Stepping forward, you close the distance between you and Kyna, bringing your [cockDesc] just in front of her face while stroking yourself with a free hand, telling her to blow you. <i>“W-Wha?”</i> She stammers nervously, <i>“I-I’ve never… It’s so... Oh f-fine!”</i> she says, resigning herself to the task as you stare down at her.", parse);
+				Text.Add("Stepping forward, you close the distance between you and Kyna, bringing your [cockDesc] just in front of her face while stroking yourself with a free hand, telling her to blow you. <i>“W-Wha?”</i> She stammers nervously, <i>“I-I’ve never… it’s so... oh f-fine!”</i> she says, resigning herself to the task as you stare down at her.", parse);
 				Text.NL();
 				Text.Add("<i>“But you’ll owe me for this!”</i> she states defiantly. Cautiously, Kyna edges forward and tentatively licks the head of your [cockDesc], tasting cock for the first time in her life. Grimacing slightly, she takes another lick, and then slowly takes the tip into her mouth. Sighing at the warm feeling of her mouth surrounding the [cockTip] of your cock, you put a hand on the back of her head and guide her movements along your shaft.", parse);
 				Text.NL();
@@ -389,19 +389,19 @@ Scenes.Kyna.IntroSexPrompt = function() {
 				kyna.FuckOral(kyna.Mouth(), p1Cock, 2);
 				player.Fuck(p1Cock, 2);
 				
-				Text.Add("You feel the urge to ferociously rut her face, but decide that as it’s Kyna’s first blowjob, you’ll let her set her own pace. She continues to suckle on your [cockDesc], then lets out a subtle moan; perplexed, you look down and see that she’s freed herself from most of her clothes and armor. The only things covering her nimble body are a pair of panties that are quickly becoming wet as her hand rubs her pussy through them.", parse);
+				Text.Add("You feel the urge to ferociously rut her face, but decide that as it’s Kyna’s first blowjob, you’ll let her set her own pace. She continues to suckle on your [cockDesc], then lets out a subtle moan; perplexed, you look down and see that she’s freed herself from most of her clothes and armor. The only thing covering her nimble body is a pair of panties that are quickly becoming wet as her hand rubs her pussy through them.", parse);
 				Text.NL();
-				Text.Add("Turning to sit on the bed, you open your legs and let Kyna access your manhood, which the now-relaxed and aroused ferret does with increased enthusiasm. Her renewed suckling on your cock makes you breathe sharply, amazed at how her attitude has changed so drastically. Every time she moans, fingers dancing between her legs, the vibrations travel along your dick, edging you closer to release and enhancing the sensations.", parse);
+				Text.Add("Turning to sit on the bed, you open your legs and let Kyna accesses your manhood, which the now-relaxed and aroused ferret does with increased enthusiasm. Her renewed suckling on your cock makes you breathe sharply, amazed at how her attitude has changed so drastically. Every time she moans, fingers dancing between her legs, the vibrations travel along your dick, edging you closer to release and enhancing the sensations.", parse);
 				Text.NL();
 				Text.Add("The zeal of Kyna’s ministrations more than make up for her lack of experience, and by the sound of it, she’s even enjoying herself. Her bra and panties are missing now, letting her D-cup breasts jiggle freely each time her body shudders from the feeling of her fingers rubbing her dripping cunt. You look down at her face and notice that she’s worked herself up so much that she’s sucking on you just out of instinct, the need to taste your [cockDesc] overwhelming her.", parse);
 				Text.NL();
-				Text.Add("Inevitably, the sustained fellatio you’ve been receiving is too much for you to take anymore. You instinctively put a hand on the back of her head and hold her down, spraying your cum right down her gullet. Kyna immediately snaps out of her cock-induced daze, the feeling of your cum being injected into her making her gag and swallow in order to breathe. As your orgasm tapers off, you realise what you’ve done, quickly taking your hand off of Kyna’s head.", parse);
+				Text.Add("Inevitably, the sustained fellatio you’ve been receiving is too much for you to take anymore. You instinctively put a hand on the back of her head and hold her down, spraying your cum right down her gullet. Kyna immediately snaps out of her cock-induced daze, the feeling of your cum being injected into her makes her gag and swallow in order to breathe. As your orgasm tapers off, you realise what you’ve done, quickly taking your hand off of Kyna’s head.", parse);
 				Text.NL();
 				
 				world.TimeStep({hour: 1});
 				var load = player.OrgasmCum();
 				
-				Text.Add("Springing upright, Kyna coughs several times before looking at you. <i>“YOU COULD HAVE WARNED ME!”</i> she exclaims, <i>“You almost fecking suffocated me!”</i> Coughing again, she looks down and sees her hand still gently rubbing against her feminine entrance. <i>“U-umm, could ya help me with this?”</i> she asks, looking up to see you’ve laid back on the bed, staring at her expectantly. <i>“W-what are ya oglin’ me like that for? Y-you don’t want me to… Finish meself do ya?”</i> She looks to you nervously, and you nod in reply.", parse);
+				Text.Add("Springing upright, Kyna coughs several times before looking at you. <i>“YOU COULD HAVE WARNED ME!”</i> she exclaims, <i>“You almost fecking suffocated me!”</i> Coughing again, she looks down and sees her hand still gently rubbing against her feminine entrance. <i>“U-umm, could ya help me with this?”</i> she asks, looking up to see you’ve laid back on the bed, staring at her expectantly. <i>“W-what are ya oglin’ me like that for? Y-you don’t want me to… finish meself do ya?”</i> She looks to you nervously, and you nod in reply.", parse);
 				Text.NL();
 				Text.Add("Sighing, she climbs up on the bed next to you and continues to rub herself in front of you. Her breathing steadily growing more ragged; her eyes close, the ferret-girl focusing on the sensations of her masturbation. Her fingers dance over her labia and clit, but she only ever lets the very tip of her fingers tease her entrance. Unable to take it anymore, you’re amazed to watch her bend right over, bringing her face level with her clit and start desperately licking it.", parse);
 				Text.NL();
@@ -519,11 +519,11 @@ Scenes.Kyna.IntroMorningAfter = function() {
 	Text.NL();
 	Text.Add("After a little wriggling, you feel like you may be able to slip out of her grasp. But, when you look at her to check if she’s still asleep, you notice she’s starting to wake up. <i>“Hmmm, so warm,”</i> she says groggily, clutching you a little tighter. Slowly it dawns on her that she’s cuddling something. She opens her eyes and sees your face right in front of hers, with an initial reaction of shock.", parse);
 	Text.NL();
-	Text.Add("<i>“Ah! … oh, umm. Hello.”</i> Kyna says nervously, blinking as the events of last night come back to her. <i>“Oh god… we... we did, didn’t we?!”</i> She stammers. If it wasn’t for the fur, you’d be sure she was blushing. <i>“Ah can’t believe I got so drunk I let someone talk me into… Oh god!”</i> she says to herself as her head vanishes beneath the covers. Giggling, you say good morning to her, and ask if last night was that bad.", parse);
+	Text.Add("<i>“Ah! …oh, umm. Hello.”</i> Kyna says nervously, blinking as the events of last night come back to her. <i>“Oh god… we... we did, didn’t we?!”</i> she stammers. If it wasn’t for the fur, you’d be sure she was blushing. <i>“Ah can’t believe I got so drunk I let someone talk me into… oh god!”</i> she says to herself as her head vanishes beneath the covers. Giggling, you say good morning to her, and ask if last night was that bad.", parse);
 	Text.NL();
 	Text.Add("A pair of ears peek up from below the covers, shortly followed by a pair of blue eyes looking through red hair. <i>“It wasn’t… bad. But I don’t think I should have done that! I’m a merc for fuck’s sake!”</i> she states quite bluntly. You’re about to apologize, when she suddenly throws the covers up and over you, exclaiming <i>“Shite! It’s morning! I’m supposed to meet dad’s mates about that job today!”</i> as she gathers up her scattered clothes.", parse);
 	Text.NL();
-	Text.Add("<i>“Fuck! Where are me knickers!?”</i> she asks, annoyed. Coughing to get her attention, you hold up the requested garment. <i>“GAH! Give em here!”</i> she demands, jumping after them. Laughing, you resist for a few moments, planting a sneaky kiss on her cheek. Kyna hops back in surprise, unaware that she managed to free her panties from your grasp. After a brief pause, she comes out of her daze and starts to get dressed.", parse);
+	Text.Add("<i>“Fuck! Where are me knickers!?”</i> she asks, annoyed. Coughing to get her attention, you hold up the requested garment. <i>“GAH! Give 'em here!”</i> she demands, jumping after them. Laughing, you resist for a few moments, planting a sneaky kiss on her cheek. Kyna hops back in surprise, unaware that she managed to free her panties from your grasp. After a brief pause, she comes out of her daze and starts to get dressed.", parse);
 	Text.NL();
 	Text.Add("You slide out of the bed and put your [armorDesc] on, occasionally looking up to watch Kyna dress. Buckling up the last straps of her armor, Kyna turns to you and says <i>“Look, I’m thankful for the money. Ah needed it, but I am goin’ tah find a job in Regard today. It’ll probably mean I’ll have to travel for a while, but I’ll be coming back here for mah pay anyway. Maybe I’ll see ya again.”</i> Nodding, you say goodbye, and she leaves you to gather the last of your gear and head out yourself.", parse);
 	Text.NL();
