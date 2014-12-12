@@ -102,23 +102,27 @@ Scenes.Kyna.Intro = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("Finding an empty table, you sit and look around at everyone in the tavern, maybe taking too long a look at some of the more pleasing patrons. Suddenly there's a loud crash as someone falls over a stool, landing on your table. As you get up to stand over the drunken and oddly clad figure slumped over the table, you judge by the body shape and the back-length, red, plaited ponytail that the person is probably female. Grabbing hold of her shoulder, you roll her over to face you.", parse);
+	Text.Add("As you enter the bar, you barely dodge a drunken, oddly clad, figure as she trips over a stool and crashes on a table nearby. She’s what appears to be a ferret-morph, with red braided hair done in a long ponytail reaching her lower back.", parse);
 	Text.NL();
-	Text.Add("Stunned, she gathers her wits and sees you looming above her. <i>“Oh.... ’ello there, sorry bout landin’ on your table mate, but that stool came outta nowhere.”</i>", parse);
+	Text.Add("You approach her and gently tap on her shoulder, asking if she’s alright.", parse);
 	Text.NL();
-	Text.Add("Now that you can get a better look at her, you realize she’s some sort of ferret-morph, going by her appearance. Her armor is pretty cheap and simple, made up of a single leather shoulder pad and a leather belt holding her kilt and sword. She rolls to try righting herself, making the top of her kilt slip and giving you a glimpse of what look to be D-cup mounds. The drunken ferret doesn’t seem to notice that she’s giving you a free show, until you give a polite cough and motion to her chest.", parse);
+	Text.Add("Stunned, she gathers her wits and sees you looming above her. <i>“Oh.... ’ello there, sorry bout that mate, but that stool came outta nowhere.”</i>", parse);
 	Text.NL();
-	Text.Add("After sitting down at the table and covering herself up, the drunken and embarrassed ferret introduces herself. <i>“Me name’s Kyna… Moran, from the Moran clan of mercenaries. I left home to make ma name in the trade, like my dad and the others.”</i> she says proudly, trying to salvage what little remains of her spilt drink and dignity.", parse);
+	Text.Add("Sighing, you offer her a hand and gently get her back on her feet. She dusts herself off as you get a closer look at her. She’s clad in a simple leather armor, with a simple tunic underneath. You’d need to have a better look to confirm, but if you had to guess, you’d say she’s a D-cup. Covering her legs, she wears a simple plaided dress, held by a leather belt.", parse);
 	Text.NL();
-	Text.Add("It looks like times have not been kind to the disheveled ferret-girl sitting across from you.", parse);
+	Text.Add("She looks a bit unsteady on her feet, so you decide to invite her to sit down with you.", parse);
 	Text.NL();
-	Text.Add("You ask her what happened to get her into such a sorry-looking state, pointing out that her long red ponytail has what appears to be dirt and twigs in it and that her leather armor doesn’t look like something a successful mercenary would wear.", parse);
+	Text.Add("<i>”Thanks, ‘an sorry for the rough greeting.”</i> She smiles embarrassedly. <i>”Name’s Kyna. Kyna Moran, from the Moran clan of mercenaries. I left home to make me’self a name in the trade, like my pa and the others,”</i> she says proudly.", parse);
+	Text.NL();
+	Text.Add("Doesn’t seem like she’s had much luck so far, considering her disheveled looks. There’s some dirt and a few twigs stuck in her braids, smears and small bits of tear cover her leather armor. She looks far from what you’d consider a ‘successful mercenary’.", parse);
+	Text.NL();
+	Text.Add("You ask her what happened to get her in such a sorry state.", parse);
 	Text.NL();
 	Text.Add("<i>“W-well... Ya see, I’ve had ta sleep rough for a bit after my last couple jobs went a bit sour, and because of a little misunderstanding, I didn’e get paid. But it’s not MY fault that the bleedin’ box ah was carryin’ fell offa cliff!”</i> she says with a sulky tone.", parse);
 	Text.NL();
 	Text.Add("…Is she a mercenary or a delivery girl? Curious, you ask her why she would take on such a menial job.", parse);
 	Text.NL();
-	Text.Add("<i>“Ah... umm... well...”</i> She stammers, while looking into her mug as if trying to find an answer. After a short, uncomfortable silence <i>“I was in bad need of the money, okay?”</i> she says quite bluntly. <i>“I’ve only had two jobs since I left home, and all the money I started with was spent on fixing things that got broken during ‘em! And when I got here ah felt like I might as well drink away the last of it... I’ll be okay sleepin’ outside again, before I go into town tomorrow.”</i>", parse);
+	Text.Add("<i>“Ah... umm... well...”</i> She stammers, while looking down as if trying to find an answer. After a short, uncomfortable silence <i>“I was in bad need of the money, okay?”</i> she says quite bluntly. <i>“I’ve only had two jobs since I left home, and all the money I started with was spent on fixing things that got broken during ‘em! And when I got here ah felt like I might as well drink away the last of it... I’ll be okay sleepin’ outside again, before I go into town tomorrow.”</i>", parse);
 	Text.NL();
 	Text.Add("The sorry state of the unlucky merc does make you feel bad for her. But all you could really do to help her at the moment is lend her enough money for a room for the night. Then again, she is a mercenary; maybe with a little pushing she’d be willing to do some “wet” work.", parse);
 	Text.Flush();
@@ -128,7 +132,7 @@ Scenes.Kyna.Intro = function() {
 	options.push({ nameStr : "Lend",
 		func : function() {
 			Text.Clear();
-			Text.Add("After a bit of thought you ask Kyna how long she’s staying in the area. If she intends to stay a while, you could lend her enough money to take care of herself for a short while, so long as she pays you back. Stunned, Kyna replies, <i>“Really? Thank you! I only really need enough for the next few days and ah’ll pay ya back somehow!”</i>  she says happily. <i>“Oh I know! How’s about when I get my next contract, I ask if ah can bring you in as a partner? I-if you don’t mind doing a little work that is.”</i> she asks with a hopeful smile.", parse);
+			Text.Add("After a bit of thought you ask Kyna how long she’s staying in the area. If she intends to stay a while, you could lend her enough money to take care of herself for a short while, so long as she pays you back. Stunned, Kyna replies, <i>“Really? Thank you! I only really need enough for the next few days and ah’ll pay ya back somehow!”</i> she says happily. <i>“Oh I know! How’s about when I get my next contract, I ask if ah can bring you in as a partner? I-if you don’t mind doing a little work that is.”</i> she asks with a hopeful smile.", parse);
 			Text.NL();
 			Text.Add("How do you reply?", parse);
 			Text.Flush();
@@ -163,7 +167,7 @@ Scenes.Kyna.Intro = function() {
 			options.push({ nameStr : "No",
 				func : function() {
 					Text.Clear();
-					Text.Add("Looking Kyna in the eye, you tell her that you don’t like the idea of having to work for money you’re owed. But you do want her to reimburse you as soon as possible. <i>“O-oh ok, well it was just an idea. It would’a been nice to have some company, is all,”</i> she says dejectedly. After handing her the money, you decide that you may as well finish your drinks and stay to talk with the klutzy ferret.", parse);
+					Text.Add("Looking Kyna in the eyes, you tell her that you don’t like the idea of having to work for money you’re owed. But you do want her to reimburse you as soon as possible. <i>“O-oh ok, well it was just an idea. It would’a been nice to have some company, is all,”</i> she says dejectedly. After handing her the money, you decide that you may as well finish your drinks and stay to talk with the klutzy ferret.", parse);
 					Text.NL();
 					Text.Add("Looking up from your drink, you mull over a few questions you have for her.", parse);
 					Text.Flush();
@@ -183,7 +187,7 @@ Scenes.Kyna.Intro = function() {
 			Text.Clear();
 			Text.Add("After slight pause, you ask her if she would be willing to take on a more “intimate” type of job, in exchange for enough money to look after herself for a few days. Kyna looks at you with a confused expression for a minute as she tries to figure out what you mean, and then her face drops. <i>“I-I’m a mercenary! Not a prostitute!”</i> she says to you defiantly. <i>“A-ah don’t need ta sell myself to survive!”</i> she states confidently while holding her head up, which is shortly followed by the sound of her stomach growling.", parse);
 			Text.NL();
-			Text.Add("Kyna’s face immediately drops again, and she buries her face in her folded arms, trying to hide it against the table. <i>“Um... I guess a meal and a decent bed would be nice. But… I dunno,”</i> she says uncertainly as she slowly looks up at you, her face wearing an increasingly embarrassed expression. After a little pushing and a quiet moment of thought, Kyna looks you in the eye and says <i>“... Okay, but nothin’... funny, and be gentle! I-I’m only doing it for the money, okay?”</i>", parse);
+			Text.Add("Kyna’s face immediately drops again, and she buries her face in her folded arms, trying to hide it against the table. <i>“Um... I guess a meal and a decent bed would be nice. But… I dunno,”</i> she says uncertainly as she slowly looks up at you, her face wearing an increasingly embarrassed expression. After a little pushing and a quiet moment of thought, Kyna looks you in the eyes and says <i>“... Okay, but nothin’... funny, and be gentle! I-I’m only doing it for the money, okay?”</i>", parse);
 			Text.NL();
 			Text.Add("Agreeing to her terms, you both finish your drinks and set out to complete your deal. The nervous ferret insists on getting a room, which you somewhat dubiously ask the barkeep about. He eyes the two of you knowingly, agreeing to let you rent a room. Curious, you didn’t think the Maidens’ Bane had rooms for hire.", parse);
 			Text.NL();
@@ -234,7 +238,7 @@ Scenes.Kyna.IntroChatPrompt = function() {
 				Text.Clear();
 				Text.Add("<i>“My plans? Well, after I got here, I got a letter from ma family telling me that I might find work if I talk to a couple old contacts of theirs in town. Me dad even got me a pass to get through the gates.”</i>", parse);
 				Text.NL();
-				Text.Add("She smiles. <i>“With any luck ah can get a nice an easy job scoutin’ for bandits or something,”</i> she says, taking a large swig of her drink. <i>“Hopefully I’ll get enough to look after myself and cover my expenses, long as ah’ can stop every bloody thing from going wrong.”</i> She says quietly, the last part so faint you nearly didn’t hear it; her face burying itself in her mug with a solemn expression.", parse);
+				Text.Add("She smiles. <i>“With any luck ah can get a nice an easy job scoutin’ for bandits or something,”</i> she says, taking a large swig of her drink. <i>“Hopefully I’ll get enough to look after myself and cover my expenses, long as ah’ can stop every bloody thing from going wrong,”</i> she says quietly, the last part so faint you nearly didn’t hear it; her face burying itself in her mug with a solemn expression.", parse);
 				Text.Flush();
 				
 				Scenes.Kyna.IntroTalkedPlans = true;
@@ -266,9 +270,9 @@ Scenes.Kyna.IntroChatPrompt = function() {
 				Text.Clear();
 				Text.Add("<i>“Not much to tell really; I grew up in my family’s stronghold. It’s a lovely place in a valley with heathlands as far as ya’ can see, and they look so beautiful in the misty mornings, ”</i> she says fondly. <i>“Dad wanted me to grow up safe after we lost my mum. So we moved in with the clan till ah got old enough to learn to fend for myself.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“After a while though, when I got older, ah wanted to go out and see the world, to travel and fight battles like in the stories I’d heard growin’ up. But my father wouldn’e have it. I guess he was worried I’d get hurt or something. So I snuck out one night; ah left a note to em saying I was on my way to the city looking for adventure. But my money started running out a short way into the trip. So I had to do a few jobs on the way, when I got here one of my father’s friends was already here waiting for me with a letter from him.”</i>", parse);
+				Text.Add("<i>“After a while though, when I got older, ah wanted to go out and see the world, to travel and fight battles like in the stories I’ve heard growin’ up. But my father wouldn’e have it. I guess he was worried I’d get hurt or something. So I snuck out one night; ah left a note to em saying I was on my way to the city looking for adventure. But my money started running out a short way into the trip. So I had to do a few jobs on the way, when I got here one of my father’s friends was already here waiting for me with a letter from him.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“I was half expecting he’d drag me off back to my clan, but he just made sure ah was ok, gave me the letter, and left for home,”</i> she says with a bewildered tone. <i>“When ah read the letter, my dad was… Well, more than slightly annoyed at what I’d done, but he wasn’t gonna force me to come home against my will. He said that if this was my decision, he’d respect it, as long as ah keep in touch to let em know I’m ok,”</i> Kyna says with a happy smile.", parse);
+				Text.Add("<i>“I was half expecting he’d drag me off back to my clan, but he just made sure ah was ok, gave me the letter, and left for home,”</i> she says with a bewildered tone. <i>“When ah read the letter, my dad was… well, more than slightly annoyed at what I’d done, but he wasn’t gonna force me to come home against my will. He said that if this was my decision, he’d respect it, as long as ah keep in touch to let em know I’m ok,”</i> Kyna says with a happy smile.", parse);
 				Text.Flush();
 				
 				Scenes.Kyna.IntroTalkedLife = true;
@@ -356,7 +360,7 @@ Scenes.Kyna.IntroSexPrompt = function() {
 				Text.NL();
 				Text.Add("Your rutting gradually gets faster and faster, slamming your hips into hers harder and harder as she screams to the heavens in a mix of pleasure and distress. Her first fucking has turned out to be much more intense than she might have imagined, making her juices run down her thighs in a sexual salute to your dominance of this unfortunate mercenary.", parse);
 				Text.NL();
-				Text.Add("The feeling of her shivering snatch on your [cockDesc], betrays her repeated orgasms as you continue to pound her senseless. Suddenly, you feel a hand on each side of your head as a pair of lips lock with yours, and a tongue forces its way in. Looking down, you realise that she has used an incredible amount of flexibility to bend backwards, all in order to kiss you out of lust.", parse);
+				Text.Add("The feeling of her shivering snatch on your [cockDesc], betrays her repeated orgasms as you continue to pound her senseless. Suddenly, you feel a hand on each side of your head as her lips lock with yours, and a tongue forces its way in. Looking down, you realise that she has used an incredible amount of flexibility to bend backwards, all in order to kiss you out of lust.", parse);
 				Text.NL();
 				Text.Add("This is the last sensation you need as you slam your [cockDesc] home one last time and release your load deep into the former virgin's womb, causing her to have the largest orgasm of her life to date and pass out beneath you.", parse);
 				Text.NL();
@@ -426,11 +430,11 @@ Scenes.Kyna.IntroSexPrompt = function() {
 				
 				Gui.NextPrompt(function() {
 					Text.Clear();
-					Text.Add("<i>“That was fast!”</i> you say to her happily, looking at the panting ferret laid out on the bed. <i>“I… Told you… I’d never… Done that before.”</i> she puffs breathlessly. You’re happy to have introduced the young ferret to feminine pleasures, yet you can’t help but feel left out. Your nethers tingle in a heated need for release. Feeling that one good turn deserves another, you lift yourself onto the bed and position your moist womanhood above her face.", parse);
+					Text.Add("<i>“That was fast!”</i> you say to her happily, looking at the panting ferret laid out on the bed. <i>“I… told you… I’ve never… done that before.”</i> she puffs breathlessly. You’re happy to have introduced the young ferret to feminine pleasures, yet you can’t help but feel left out. Your nethers tingle in a heated need for release. Feeling that one good turn deserves another, you lift yourself onto the bed and position your moist womanhood above her face.", parse);
 					if(player.FirstCock())
-						Text.Add(" Your erect cock[s] juts[notS] out eagerly, casting a shadow on her breasts.", parse);
+						Text.Add(" Your erect cock[s] juts[notS] out eagerly, casting a shadow over her breasts.", parse);
 					Text.NL();
-					Text.Add("Kyna lies there panting for a few moments longer before she stirs and notices your intimate parts hovering above her. <i>“Umm, ah dunno…”</i> she mumbles nervously. Growing impatient, you lower your dripping cunt to her mouth, insistently rubbing it against her muzzle. Getting the message, Kyna tentatively licks your folds, tasting pussy juices for the first time in her life.", parse);
+					Text.Add("Kyna lies there panting for a few moments longer before she stirs and notices your intimate parts hovering above her. <i>“Umm, ah dunno…”</i> she mumbles nervously. Growing impatient, you lower your dripping cunt to her mouth, insistently rubbing it against her muzzle. Getting the message, Kyna tentatively licks your folds, tasting pussy juice for the first time in her life.", parse);
 					Text.NL();
 					
 					Sex.Cunnilingus(kyna, player);
@@ -438,11 +442,11 @@ Scenes.Kyna.IntroSexPrompt = function() {
 					player.Fuck(null, 2);
 					kyna.Fuck(null, 2);
 					
-					Text.Add("She stops for a moment, analyzing your flavor. Deciding that she needs more encouragement, you bend down and slide your tongue along her dripping pussy. Kyna gasps at the second oral assault she’s ever felt, her womanhood still quivering and sensitive from the first. You pull your face away, telling her that if she wants more, she’ll have to work harder.", parse);
+					Text.Add("She stops for a moment, tasting your flavor. Deciding that she needs more encouragement, you bend down and slide your tongue along her dripping pussy. Kyna gasps at the second oral assault she’s ever felt, her womanhood still quivering and sensitive from the first. You pull your face away, telling her that if she wants more, she’ll have to work harder.", parse);
 					Text.NL();
 					Text.Add("<i>“Ah! Oh, ohhhkaay!”</i> the ferret-girl moans again as you continue to eat her out. She breathlessly forces herself up to return your attention, breathing heavily against your opening as often as she licks. Her oral skills leave something to be desired, but you carefully guide her onto your more sensitive areas by using your fingers to target her. It’s not hard for you to reduce the young mercenary to a soppy, shivering mess instinctively nibbling on your privates.", parse);
 					Text.NL();
-					Text.Add("Lapping at her fountaining juices, you feel her muscles twitching more and more, getting closer and closer to her second release. You’re growing near to your climax as well, her tongue and fingers persistent at probing your depths. Sealing your lips around her clit, you tease it fiercely, bringing Kyna to a wet and heavy orgasm. Her tongue dances against your dripping muff, stroking your clit and making you squeal as you cum over Kyna’s face.", parse);
+					Text.Add("Lapping at her fountaining juices, you feel her muscles twitching more and more, getting closer and closer to her second release. You’re nearing your own climax as well, her tongue and fingers persistent at probing your depths. Sealing your lips around her clit, you tease it fiercely, bringing Kyna to a wet and heavy orgasm. Her tongue dances against your dripping muff, stroking your clit and making you squeal as you cum over Kyna’s face.", parse);
 					Text.NL();
 					
 					world.TimeStep({hour: 1});
@@ -461,7 +465,7 @@ Scenes.Kyna.IntroSexPrompt = function() {
 				Text.Clear();
 				Text.Add("Approaching Kyna, you push her down on the bed, making her squeal in surprise. Giggling to yourself, you reach for her clothes and pick them away from her body piece by piece. Kyna wiggles nervously with each item removed, but you continue until you’re left with the uneasy ferret lying naked on the bed.", parse);
 				Text.NL();
-				Text.Add("You plant your hands on either side of her, holding yourself closely above her, inspecting every visible inch of her svelte little body. Your eyes roam all over, from her well shaped D-cups right down to her hidden nethers, her hands covering the glistening prize protectively. <i>“U-umm, I-i’m not sure about this,”</i> she stammers, uncomfortable being naked with another woman, especially with one so close and looking at her intimate areas.", parse);
+				Text.Add("You plant your hands on both sides of her, holding yourself closely above her, inspecting every visible inch of her svelte, lithe body. Your eyes roam all over, from her well shaped D-cups right down to her hidden nethers, her hands covering the glistening prize protectively. <i>“U-umm, I-I’m not sure about this,”</i> she stammers, uncomfortable being naked with another woman, especially with one so close and looking at her intimate areas.", parse);
 				Text.NL();
 				Text.Add("Grinning inwardly, you set one of your hands upon her belly, slowly letting it feel its way up to her shivering chest. The flustered ferret cautiously shies away from your touches, only starting to relax when you grope and massage her bosom. Kyna sighs and looks at a spot on the wall, trying to think of other things. But you’ll have none of that; seating yourself atop her, you tweak and fondle her modest breasts.", parse);
 				Text.NL();
@@ -469,17 +473,17 @@ Scenes.Kyna.IntroSexPrompt = function() {
 				Text.NL();
 				Text.Add("Seizing the opportunity, you quickly slide a hand between her legs, surprising her with gentle rubs on her untouched pussy. Breaking the kiss, you give her a moment to breathe, then resume playing with her feminine parts. Her moans and writhing limbs expose the stimulation she’s feeling.", parse);
 				Text.NL();
-				Text.Add("The sight of her pleasured expressions makes your loins tingle with need, but Kyna seems too distracted to answer your desire. An idea pops into your head, one which you both will enjoy. Removing your hand from between her legs, Kyna looks down to see why you stopped, still panting softly, only to notice you sliding between her legs.", parse);
+				Text.Add("The sight of her pleasured expression makes your loins tingle with need, but Kyna seems too distracted to answer your desire. An idea pops into your head, one which you both will enjoy. Removing your hand from between her legs, Kyna looks down to see why you stopped, still panting softly, only to notice you sliding between her legs.", parse);
 				Text.NL();
-				Text.Add("<i>“Wha-what’re ya doing!?”</i> She asks, confused as to what you’re planning. Once you hook your leg over her, bringing your moist [vagDesc] alongside hers, your plan quickly becomes apparent. Biting her lip, she quietly moans for more while rolling her hips in an effort to entice you on.", parse);
+				Text.Add("<i>“Wha-what’re ya doing!?”</i> she asks, confused as to what you’re planning. Once you hook your leg over her, bringing your moist [vagDesc] alongside hers, your plan quickly becomes apparent. Biting her lip, she quietly moans for more while rolling her hips in an effort to entice you on.", parse);
 				Text.NL();
 				Text.Add("While you are surprised at her sudden burst of enthusiasm, you don’t hesitate to lower yourself onto her, grinding your pussies together eagerly. The writhing of your ferrety partner beneath you spurs you to mash your [clitDesc] against hers. With your ministrations making her scream in appreciation of the increased friction of your combined nethers, her increasing wetness lets you move your hips faster and faster against her own excited gyrations.", parse);
 				Text.NL();
-				Text.Add("The sounds of Kyna’s moans and screams very quickly grow to the point where you’re sure that she’s about to cum, and you want to draw out her first experience. Lifting your hips away teasingly, you look down at the panting ferret-wench who’s looking back up at you so dejectedly. <i>“WHA! wh… why did you stop!?”</i> she exclaims. <i>“I… I was… so close! Please! More!”</i> she pleads breathlessly.", parse);
+				Text.Add("The sounds of Kyna’s moans and screams very quickly grow to the point where you’re sure that she’s about to cum, and you want to draw out her first experience. Lifting your hips away teasingly, you look down at the panting ferret-wench looking back up at you so dejectedly. <i>“WHA! wh… why did you stop!?”</i> she exclaims. <i>“I… I was… so close! Please! More!”</i> she pleads breathlessly.", parse);
 				Text.NL();
-				Text.Add("You tell her that she can’t cum until after you do, shaking your hips from side to side just above her own. You stroke yourself with a finger to illustrate your point.", parse);
+				Text.Add("You tell her that she can’t cum until you do, shaking your hips from side to side just above hers. You stroke yourself with a finger to illustrate your point.", parse);
 				Text.NL();
-				Text.Add("Kyna lies there looking at you for a few seconds more, then launches herself at you, flipping you onto the bed beneath her. Shocked at the ferret’s dominant actions, you have no time to try taking the top back again as she vigorously grinds against your feminine entrance. The pair of you start to moan and scream louder than before while your wet and dripping sexes slide atop each other.", parse);
+				Text.Add("Kyna lies there looking at you for a few seconds more, then launches herself at you, flipping you onto the bed beneath her. Shocked at the ferret’s dominant actions, you have no time to try taking the top back again as she vigorously grinds against your feminine entrance. The pair of you starts to moan and scream louder than before while your wet and dripping sexes slide atop each other.", parse);
 				Text.NL();
 				Text.Add("Knowing that she’ll likely finish first, Kyna bends practically in half to being herself face-to-face with your sex. She then proceeds to take your [clitDesc] into her mouth, gently sucking on it and flicking it with her tongue. Pinned beneath her as you are, and unable to bend in such a way, you have little choice but to lie there and suffer the whims of your flexible partner.", parse);
 				Text.NL();
