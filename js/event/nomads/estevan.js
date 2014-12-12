@@ -303,19 +303,23 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 ));
 
 Scenes.Estevan.SexGay = function() {
+	var p1cock = player.BiggestCock();
+	
 	var parse = {
 		playername    : player.name,
-		clothesDesc   : function() { return player.ArmorDesc(); },
+		armorDesc     : function() { return player.ArmorDesc(); },
 		buttDesc      : function() { return player.Butt().Short(); },
 		anusDesc      : function() { return player.Butt().AnalShort(); },
 		multiCockDesc : function() { return player.MultiCockDesc(); },
-		cockDesc      : function() { return player.FirstCock().Short(); },
-		cockTip       : function() { return player.FirstCock().TipShort(); },
+		cockDesc      : function() { return p1cock.Short(); },
+		cockTip       : function() { return p1cock.TipShort(); },
 		ballsDesc     : function() { return player.BallsDesc(); },
-		legDesc       : function() { return player.LegDesc(); }
+		legDesc       : function() { return player.LegDesc(); },
+		hipsDesc      : function() { return player.HipsDesc(); }
 	};
 	
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	
 	var first = !estevan.HadGaySex();
 	
@@ -355,7 +359,7 @@ Scenes.Estevan.SexGay = function() {
 		Text.NL();
 		Text.Add("Estevan's tone is still playful, but there's an edge to it now as if he's the only one in on the joke. You follow Estevan. He leads you behind an empty tent at the furthest edge of the camp. He grins at you in a dazed manner as if the wine has finally caught up with him.", parse);
 		Text.NL();
-		Text.Add("<i>“Take off your [clothesDesc],”</i> the satyr whispers. He comes in close and one of his hands wanders down your lower back and over your [buttDesc]. His wine-sweetened breath is hot and close. <i>“My greatest trick requires a hole. Would you like to volunteer yours? I bet it’d be the perfect fit.</i>", parse);
+		Text.Add("<i>“Take off your [armorDesc],”</i> the satyr whispers. He comes in close and one of his hands wanders down your lower back and over your [buttDesc]. His wine-sweetened breath is hot and close. <i>“My greatest trick requires a hole. Would you like to volunteer yours? I bet it’d be the perfect fit.</i>", parse);
 	}
 	else {
 		Text.Add("<i>”Back for a little more Estevan, huh? Can’t say I blame you. Who wouldn’t want a repeat performance once they see what I’ve got up my sleeves?</i>", parse);
@@ -473,7 +477,7 @@ Scenes.Estevan.SexGay = function() {
 					Text.NL();
 					Text.Add("<i>“Now, let's see the damage,”</i> Estevan says, and pulls out. A stream of the satyr’s cum drips down your [legDesc] when he unplugs your [anusDesc].", parse);
 					Text.NL();
-					Text.Add("Estevan watches this display with humorous interest. It takes a while, but once you think you've gotten all of the goat-man's cum out, you get dressed in your [clothesDesc] only to find more of it leaking out and staining your clothes.", parse);
+					Text.Add("Estevan watches this display with humorous interest. It takes a while, but once you think you've gotten all of the goat-man's cum out, you get dressed in your [armorDesc] only to find more of it leaking out and staining your clothes.", parse);
 					Text.NL();
 					Text.Add("Estevan shrugs. <i>“The perils of doing business with a satyr, I guess.”</i>", parse);
 					Text.NL();
@@ -555,10 +559,10 @@ Scenes.Estevan.SexGay = function() {
 					Text.NL();
 					Text.Add("<i>”You look great wearing my kids on your face, [playername],”</i> he jokes. <i>”Maybe next time you’ll let me ‘knock you up’ properly.”</i>", parse);
 					Text.NL();
-					Text.Add("You shoot back a joking remark of your own as you clean off your face and put your [clothesDesc] back on. Estevan thanks you for helping to get him off and you part ways.", parse);
+					Text.Add("You shoot back a joking remark of your own as you clean off your face and put your [armorDesc] back on. Estevan thanks you for helping to get him off and you part ways.", parse);
 					if(Math.random() < 0.5) {
 						Text.NL();
-						Text.Add("Your [multiCockDesc] jut[notS] out of your [clothesDesc] as you walk back to the camp. You rehash the intense blowjob you just gave and pat your slightly swollen belly, quite a bit hornier than you were before.", parse);
+						Text.Add("Your [multiCockDesc] jut[notS] out of your [armorDesc] as you walk back to the camp. You rehash the intense blowjob you just gave and pat your slightly swollen belly, quite a bit hornier than you were before.", parse);
 						player.AddLustFraction(0.75);
 					}
 					Text.Flush();
@@ -577,13 +581,171 @@ Scenes.Estevan.SexGay = function() {
 	});
 	options.push({ nameStr : "Taunt Estevan", //TODO
 		func : function() {
+			var firstSex = (estevan.flags["Gay"] & Estevan.GaySex.FuckedHim) == 0;
+			var fuckedBy = (estevan.flags["Gay"] & Estevan.GaySex.FuckedBy)  != 0;
+			
 			Text.Clear();
-			Text.Add("", parse);
+			if(firstSex) {
+				Text.Add("Estevan seems taken aback by the suggestion, but his slowly spreading smile might mean that he’s coming around to it.", parse);
+				Text.NL();
+				Text.Add("<i>“It’s not impossible that we could work something out.”</i>", parse);
+			}
+			else
+				Text.Add("<i>“Again?”</i> Estevan complains, then shakes his head and laughs. <i>“Well, who could blame you? I do have a magnificent ass.”</i>", parse);
 			Text.NL();
+			Text.Add("He gradually lifts his shirt, delighting in your hungry stare, and swaying drunkenly on his cloven hooves. His hands move up and down his lean chest and casually toy with both nipples. Your erection[s] throb[notS] a little painfully in your [armorDesc].", parse);
+			Text.NL();
+			Text.Add("<i>”Well, are you going to fuck me or not?”</i> the satyr says, leering.", parse);
+			Text.NL();
+			Text.Add("You approach Estevan and touch his flat stomach, which he seems to take great pride in, and he hisses as if your touch was searing hot. He takes your hand and guides it between his legs where his burly cock is gaining size.", parse);
+			Text.NL();
+			Text.Add("He grumbles, briefly, <i>”you should be on the other end of this monster. ", parse);
+			if(fuckedBy)
+				Text.Add("I bet your hole still remembers me. Doesn’t it get lonely? Does it ask about me?”</i>", parse);
+			else
+				Text.Add("I bet your hole gets warm and wet, like a real pussy does.”</i>", parse);
+			Text.NL();
+			Text.Add("You don’t intend to give Estevan the chance to weasel his way into your [buttDesc], not this time anyway. You move close enough that you can smell the floral notes of the light red wine you’ve both been drinking. After a few more tugs on his cock, you slip your hand further between his legs to prick the bud of his ass with your finger.", parse);
+			Text.NL();
+			Text.Add("Estevan snorts derisively at your efforts to penetrate him, but you can feel him pushing back against your finger, presumably to let you get more than just the tip inside. You’re close enough to kiss ", parse);
+			Text.NL();
+			
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("and the satyr leans in, pressing his mouth to yours as you finger his asshole. He whimpers softly while licking your bottom lip, then searches out your tongue with his own. When he pulls away, Estevan is blushing slightly.", parse);
+				Text.NL();
+				Text.Add("<i>”Tell anybody I did that and I’ll fill your tent with bear traps,”</i> he warns.", parse);
+			}, 15.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("but the satyr pulls away.", parse);
+				Text.NL();
+				Text.Add("<i>”Let’s not get ahead of ourselves, [playername]: we can fuck, but my tongue is into girls.”</i>", parse);
+			}, 85.0, function() { return true; });
+			
+			scenes.Get();
+			
+			Text.NL();
+			Text.Add("Estevan produces a jar of oil and insists that if he’s going to take your [multiCockDesc] then he ought to be well-prepared. You apply the unguent to his horny butt and though the satyr is clearly trying to act like your fingers inside him aren’t a big deal, he squirms and grunts under his breath when you push them deeper.", parse);
+			Text.NL();
+			Text.Add("His hole is prepped, pried open, and drooling with lube; you figure he’s ready for you. He takes one more apprehensive look at it before you turn him around and place the tip of[oneof] your [multiCockDesc] against his hole. His willing backside opens up for you as you push forward, sending thrilling jolts of pleasure down your shaft[s]. You take it slow at first, using controlled thrusts to ease the satyr into the fuck, but Estevan mocks you for it.", parse);
+			Text.NL();
+			
+			Sex.Anal(player, estevan);
+			estevan.FuckAnal(estevan.Butt(), p1cock, 3);
+			player.Fuck(p1cock, 3);
+			
+			Text.Add("<i>“Don’t hold back on my account. I can take whatever you throw at me,”</i> Estevan taunts.", parse);
+			Text.NL();
+			Text.Add("Well, in that case…", parse);
+			Text.NL();
+			Text.Add("You pull the entire length of your [cockDesc] out of him and slam the entire thing back up his fuckhole. The satyr throws back his head and yowls, out of the raw pleasure of rough usage and probably from a bit of pain as well. Now that you’ve established that his rear-end is pliable enough to take you, it’s time to really start plowing him.", parse);
+			Text.NL();
+			Text.Add("Each time you slam into him, the ranger’s legs shake but the goat man stands up admirably to your brutal fucking. ", parse);
+			if(player.NumCocks() > 1)
+				Text.Add("You give each of your cocks a turn with his increasingly loose ass and tease him by placing[allof] them against his sphincter and giving it just the slightest push.", parse);
+			else
+				Text.Add("You fuck his ass until it’s loose enough to swallow you up with each thrust without resistance.", parse);
+			Text.Add(" Estevan pants and pleads incoherently, his hair is matted down with sweat, which also runs freely down his back. He’s a mess, but his hole feels great around you and you intend to get some more use out of him yet.", parse);
+			Text.NL();
+			Text.Add("You command him down to his knees in the dirt and you can tell that you’ve pushed him out of his comfort zone because he complies with a half-hearted grumble instead of his usual jokes and mockery. Estevan gets down on his knees and presses his chest to the ground, he uses his hands to spread his ass-cheeks and his gaping hole awaits you.", parse);
+			Text.NL();
+			Text.Add("It takes one hard shove and your dick is back inside him. He bleats out a note of surprise, but the walls of his anus squeeze against you anyway. You growl into the goat-slut’s ear, letting him know how much you enjoy fucking him into the dirt. He tugs at his meaty cock, liberally dripping precum between his legs while you slam his backdoor. The satyr’s copious leakage gives you an idea and you brush his hand away from his cock, replacing his grip with your own. You squeeze down on his shaft while seeking out the hard nub of his prostate with your prick. The effect is instant: he gushes thick seminal fluid, groaning and squirming while you milk him like livestock.", parse);
+			Text.NL();
+			Text.Add("The handfuls of cum you extract from his rock-hard cock go straight onto your own. You plunge it back into him and he lets slip a grunt that turns into a long, hungry moan. You continue plowing him, using his own spunk as lube, and he pushes back against you as wanton and horny as ever.", parse);
+			Text.NL();
+			Text.Add("Maybe it’s the wine or maybe it’s Estevan’s sloppy butthole, but you’re starting to feel the lusty churn of need ", parse);
+			if(player.HasBalls())
+				Text.Add("in your [ballsDesc].", parse);
+			else
+				Text.Add("spreading through your crotch.", parse);
+			Text.Add(" You’re almost ready to blow your load, but where?", parse);
 			Text.Flush();
 			
+			world.TimeStep({minute: 30});
+			
 			estevan.flags["Gay"] |= Estevan.GaySex.FuckedHim;
-		}, enabled : false,
+			
+			//[Facial][Inside]
+			var options = new Array();
+			options.push({ nameStr : "Facial",
+				func : function() {
+					Text.Clear();
+					Text.Add("You give it a half-dozen more thrusts, just enough to push yourself to the absolute limit, before pulling out of Estevan’s butt. He makes a noise that’s either disappointment or gratitude, or maybe a bit of both. He’s still face-down in the dirt with his freshly-fucked ass wagging in front of you. It’s not his ass that you’re after though, is it?", parse);
+					Text.NL();
+					Text.Add("You order him to come clean you off and he scrambles up on to his knees, his mouth and tongue instinctively go to your [multiCockDesc]. He spit-shines your messy knob[s] while you pump the length of[oneof] your dick[s] with one hand.", parse);
+					Text.NL();
+					Text.Add("You give him a warning, but your load arrives hot and fast. You blast your first shot up over Estevan’s head, but the second lands square on his forehead and the thick cum slides down over the bridge of his nose. You push your erupting prick[s] right up to the satyr’s face and dump your hot cum right on his skin. The pleasure of your orgasm is intense, but the real satisfaction comes out of seeing the smirking satyr take a hot cum skin treatment straight from your engorged cock[s].", parse);
+					Text.NL();
+					
+					var cum = player.OrgasmCum();
+					
+					Text.Add("He licks the thick spooge off of his lips while you pant and come down from your sexual high. His hands are busy between his legs, one jerking his fat organ and the other disappearing into his prised-open fuckhole. The satyr’s member spurts more precum by the second and he repurposes it as lube to coat his swollen head.", parse);
+					Text.NL();
+					Text.Add("<i>“You’d better not...I’m not usually...I mean…”</i> he mutters, while cramming his sloppy hole with another finger or two. He tightens his grip around the shaft, and hisses, <i>“fuck!”</i>", parse);
+					Text.NL();
+					Text.Add("Estevan twitches and contorts in pleasure as his cock produces a veritable shower of spunk. The wild, directionless torrent ends up everywhere including your [armorDesc]. When it almost seems that Estevan won’t stop cumming, he starts to jerk his dick and the flood of semen slows to a trickle. He sighs and lets go of himself, but his still-hard rod continues to leak into the dirt.", parse);
+					Text.NL();
+					
+					var cum = estevan.OrgasmCum();
+					
+					Text.Add("<i>”Usually I’m on the other side of this equation,”</i> Estevan jokes. <i>”Maybe I’ll have more empathy for the poor souls who have to wash my cum out of their hair?”</i> He ponders the proposition for a while, then shrugs. <i>Nah…”</i>", parse);
+					PrintDefaultOptions();
+				}, enabled : true,
+				tooltip : "The satyr <i>would</i> look pretty hot with your spunk running down his face, wouldn’t he?"
+			});
+			options.push({ nameStr : "Inside",
+				func : function() {
+					Text.Clear();
+					Text.Add("There’s no reason to stop fucking Estevan, after all he’s willing, and—from the size of his cock and how madly it’s precumming as you bang his butt—he seems to be into it. Your lower half is nestled close against the satyr’s rump with just enough room to allow your [hipsDesc] to piston back and forth, driving[oneof] your cock[s] into his hole. He uses one of his hands to keep his ass cheeks spread open while yanking his own chain, getting himself off to the insistent rhythms of your aggressive fucking.", parse);
+					Text.NL();
+					Text.Add("You approach the point of no return and then go barrelling past it like a chariot on fire careening off of a cliff. Your [cockDesc] plunges deep into Estevan’s hole as you plant your first burst of cum inside him. ", parse);
+					if(player.NumCocks() > 1)
+						Text.Add("Your remaining cock[s2] spew[notS2] cum up between Estevan’s butt cheeks, splashing your hot seed on the hand he’s using to keep his hole open and available to you. ", parse);
+					Text.Add("The abrupt thrust of your entire dick into his depths stretches Estevan’s hole and brutalizes his prostate into orgasm. His anus clamps down on your spasming dick and milks your remaining load as the two of you press your sweating bodies together and ride out the waves of pleasure.", parse);
+					Text.NL();
+					
+					var cum = player.OrgasmCum();
+					estevan.OrgasmCum();
+					
+					Text.Add("The ranger leaves a wet mess in the dirt beneath him where he unburdened himself: it’s a puddle of semen that his cock adds to as it dribbles out a seemingly never ending trickle of cum. You add to his sticky dilemma when your [cockDesc] uncorks his ass and the sodden hole spits your cum back in creamy fits and starts.", parse);
+					Text.NL();
+					
+					if(cum > 6) {
+						Text.Add("Estevan is speechless, but moans intermittently as his pregnant-seeming belly expels its contents through his backdoor. Your titanic load spews wetly and noisily out of his ass in a gradual flow that soaks the fur of his quivering legs and makes for an incredibly raunchy sight.", parse);
+					}
+					else if(cum > 3) {
+						Text.Add("<i>”Did you have to cum inside me?</i> Estevan complains. Your cum emerges from his ass in thick splashes as he works to push it all out.", parse);
+					}
+					else {
+						Text.Add("<i>”Uhhhh…”</i> Estevan groans unintelligibly, as your spunk bubbles out of him.", parse);
+					}
+					
+					Text.NL();
+					Text.Add("It takes a few minutes before he manages to gather his wits and come out of his jizz-soaked reverie. If you have any question that the satyr enjoyed the thorough fucking, it’s answered when he swipes a finger across his oozing orifice then sucks the cum from his finger.", parse);
+					PrintDefaultOptions();
+				}, enabled : true,
+				tooltip : "You’ve already committed to fucking his ass, why give up before the grand finale?"
+			});
+			Gui.SetButtonsFromList(options, false, null);
+			
+			Gui.Callstack.push(function() {
+				Text.NL();
+				Text.Add("Estevan wipes his face with his sleeve and shakes his head.", parse);
+				Text.NL();
+				Text.Add("<i>“I don’t know why I even agreed to that,”</i> he wonders aloud, more to himself than to you. But then he grins and winks. <i>“Not that I wouldn’t consider doing it again, assuming you bring enough wine.”</i>", parse);
+				Text.NL();
+				Text.Add("The satyr looks at you and shakes his head again before wandering back to camp. You get dressed and follow, you’ll have to clean yourself up; the goat-man’s animal musk is all over you.", parse);
+				Text.NL();
+				Text.Add("Not that it’s necessarily a bad thing.", parse);
+				Text.Flush();
+				
+				world.TimeStep({minute: 10});
+				
+				player.subDom.IncreaseStat(75, 1);
+				
+				Scenes.Estevan.Prompt();
+			});
+		}, enabled : true,
 		tooltip : "Convince the satyr that he ought to let you have a turn at his ass. After all, he drank all your wine."
 	});
 	Gui.SetButtonsFromList(options, false, null);
