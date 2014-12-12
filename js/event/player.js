@@ -95,6 +95,9 @@ Player.prototype.HeShe = function() {
 Player.prototype.himher = function() {
 	return "you";
 }
+Player.prototype.HimHer = function() {
+	return "You";
+}
 Player.prototype.hisher = function() {
 	return "your";
 }

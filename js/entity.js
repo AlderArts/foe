@@ -999,6 +999,13 @@ Entity.prototype.himher = function() {
 	else if(gender == Gender.herm) return "her";
 	else return "them";
 }
+Entity.prototype.HimHer = function() {
+	var gender = this.body.Gender();
+	if(gender == Gender.male) return "Him";
+	else if(gender == Gender.female) return "Her";
+	else if(gender == Gender.herm) return "Her";
+	else return "Them";
+}
 Entity.prototype.hisher = function() {
 	var gender = this.body.Gender();
 	if(gender == Gender.male) return "his";
@@ -1052,6 +1059,7 @@ Entity.prototype.ParserPronouns = function(parse, prefix) {
 	parse[prefix + "heshe"]   = this.heshe();
 	parse[prefix + "HisHer"]  = this.HisHer();
 	parse[prefix + "hisher"]  = this.hisher();
+	parse[prefix + "HimHer"]  = this.HimHer();
 	parse[prefix + "himher"]  = this.himher();
 	parse[prefix + "hishers"] = this.hishers();
 	return parse;

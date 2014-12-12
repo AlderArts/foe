@@ -101,6 +101,11 @@ Patchwork.prototype.himher = function() {
 	if(gender == Gender.male) return "them";
 	else return "her";
 }
+Patchwork.prototype.HimHer = function() {
+	var gender = this.PronounGender();
+	if(gender == Gender.male) return "Them";
+	else return "Her";
+}
 Patchwork.prototype.hisher = function() {
 	var gender = this.PronounGender();
 	if(gender == Gender.male) return "their";

@@ -294,6 +294,11 @@ Terry.prototype.himher = function() {
 	if(gender == Gender.male) return "him";
 	else return "her";
 }
+Terry.prototype.HimHer = function() {
+	var gender = this.flags["PrefGender"];
+	if(gender == Gender.male) return "Him";
+	else return "Her";
+}
 Terry.prototype.hisher = function() {
 	var gender = this.flags["PrefGender"];
 	if(gender == Gender.male) return "his";
