@@ -413,6 +413,15 @@ world.loc.Plains.Gate.links.push(new Link(
 		MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 15});
 	}
 ));
+world.loc.Plains.Gate.links.push(new Link(
+	"King's road", true, true,
+	function() {
+		Text.AddOutput("Continue past the city to the plains beyond? ");
+	},
+	function() {
+		MoveToLocation(world.loc.KingsRoad.Road, {hour: 1});
+	}
+));
 world.loc.Plains.Gate.events.push(new Link(
 	"Miranda", function() { return miranda.IsAtLocation(); }, true,
 	null,
