@@ -40,7 +40,7 @@ Feline.Act = function(encounter, activeChar) {
 
 Scenes.Felines = {};
 
-function Wildcat(gender) {
+function Wildcat(gender, levelbonus) {
 	Entity.call(this);
 	
 	this.monsterName       = "the wildcat";
@@ -82,7 +82,8 @@ function Wildcat(gender) {
 	this.charisma.base     = 16;
 	
 	this.level             = 1;
-	if(Math.random() > 0.8) this.level = 2;
+	if(Math.random() > 0.8) this.level++;
+	this.level             += levelbonus || 0;
 	this.sexlevel          = 1;
 	
 	this.combatExp         = this.level;
@@ -103,25 +104,25 @@ Wildcat.prototype.constructor = Wildcat;
 Wildcat.prototype.DropTable = Feline.DropTable;
 Wildcat.prototype.Act = Feline.Act;
 
-Scenes.Felines.WildcatEnc = function() {
+Scenes.Felines.WildcatEnc = function(levelbonus) {
  	var enemy = new Party();
  	var r = Math.random();
  	if(r < 0.2) {
-		enemy.AddMember(new Wildcat(Gender.herm));
-		enemy.AddMember(new Wildcat(Gender.male));
-		enemy.AddMember(new Wildcat(Gender.female));
+		enemy.AddMember(new Wildcat(Gender.herm, levelbonus));
+		enemy.AddMember(new Wildcat(Gender.male, levelbonus));
+		enemy.AddMember(new Wildcat(Gender.female, levelbonus));
 	}
 	else if(r < 0.4) {
-		enemy.AddMember(new Wildcat(Gender.male));
-		enemy.AddMember(new Wildcat(Gender.female));
-		enemy.AddMember(new Wildcat(Gender.female));
-		enemy.AddMember(new Wildcat(Gender.female));
+		enemy.AddMember(new Wildcat(Gender.male, levelbonus));
+		enemy.AddMember(new Wildcat(Gender.female, levelbonus));
+		enemy.AddMember(new Wildcat(Gender.female, levelbonus));
+		enemy.AddMember(new Wildcat(Gender.female, levelbonus));
 	}
 	else {
-		enemy.AddMember(new Wildcat(Gender.Rand([3,4,1])));
+		enemy.AddMember(new Wildcat(Gender.Rand([3,4,1]), levelbonus));
 		for(var i = 0; i < 3; i++) {
 			if(Math.random() < 0.2)
-				enemy.AddMember(new Wildcat(Gender.Rand([3,4,1])));
+				enemy.AddMember(new Wildcat(Gender.Rand([3,4,1]), levelbonus));
 		}
 	}
 	var enc = new Encounter(enemy);
@@ -139,8 +140,8 @@ Scenes.Felines.WildcatEnc = function() {
 	return enc;
 }
 
-function Puma(gender) {
-	Wildcat.call(this, gender);
+function Puma(gender, levelbonus) {
+	Wildcat.call(this, gender, levelbonus);
 	
 	this.monsterName = "the puma";
 	this.MonsterName = "The puma";
@@ -164,25 +165,25 @@ function Puma(gender) {
 Puma.prototype = new Wildcat();
 Puma.prototype.constructor = Puma;
 
-Scenes.Felines.PumaEnc = function() {
+Scenes.Felines.PumaEnc = function(levelbonus) {
  	var enemy = new Party();
  	var r = Math.random();
  	if(r < 0.2) {
-		enemy.AddMember(new Puma(Gender.herm));
-		enemy.AddMember(new Puma(Gender.male));
-		enemy.AddMember(new Puma(Gender.female));
+		enemy.AddMember(new Puma(Gender.herm, levelbonus));
+		enemy.AddMember(new Puma(Gender.male, levelbonus));
+		enemy.AddMember(new Puma(Gender.female, levelbonus));
 	}
 	else if(r < 0.4) {
-		enemy.AddMember(new Puma(Gender.male));
-		enemy.AddMember(new Puma(Gender.female));
-		enemy.AddMember(new Puma(Gender.female));
-		enemy.AddMember(new Puma(Gender.female));
+		enemy.AddMember(new Puma(Gender.male, levelbonus));
+		enemy.AddMember(new Puma(Gender.female, levelbonus));
+		enemy.AddMember(new Puma(Gender.female, levelbonus));
+		enemy.AddMember(new Puma(Gender.female, levelbonus));
 	}
 	else {
-		enemy.AddMember(new Puma(Gender.Rand([3,4,1])));
+		enemy.AddMember(new Puma(Gender.Rand([3,4,1]), levelbonus));
 		for(var i = 0; i < 3; i++) {
 			if(Math.random() < 0.2)
-				enemy.AddMember(new Puma(Gender.Rand([3,4,1])));
+				enemy.AddMember(new Puma(Gender.Rand([3,4,1]), levelbonus));
 		}
 	}
 	var enc = new Encounter(enemy);
@@ -200,8 +201,8 @@ Scenes.Felines.PumaEnc = function() {
 	return enc;
 }
 
-function Jaguar(gender) {
-	Wildcat.call(this, gender);
+function Jaguar(gender, levelbonus) {
+	Wildcat.call(this, gender, levelbonus);
 	
 	this.monsterName = "the jaguar";
 	this.MonsterName = "The jaguar";
@@ -225,25 +226,25 @@ function Jaguar(gender) {
 Jaguar.prototype = new Wildcat();
 Jaguar.prototype.constructor = Jaguar;
 
-Scenes.Felines.JaguarEnc = function() {
+Scenes.Felines.JaguarEnc = function(levelbonus) {
  	var enemy = new Party();
  	var r = Math.random();
  	if(r < 0.2) {
-		enemy.AddMember(new Jaguar(Gender.herm));
-		enemy.AddMember(new Jaguar(Gender.male));
-		enemy.AddMember(new Jaguar(Gender.female));
+		enemy.AddMember(new Jaguar(Gender.herm, levelbonus));
+		enemy.AddMember(new Jaguar(Gender.male, levelbonus));
+		enemy.AddMember(new Jaguar(Gender.female, levelbonus));
 	}
 	else if(r < 0.4) {
-		enemy.AddMember(new Jaguar(Gender.male));
-		enemy.AddMember(new Jaguar(Gender.female));
-		enemy.AddMember(new Jaguar(Gender.female));
-		enemy.AddMember(new Jaguar(Gender.female));
+		enemy.AddMember(new Jaguar(Gender.male, levelbonus));
+		enemy.AddMember(new Jaguar(Gender.female, levelbonus));
+		enemy.AddMember(new Jaguar(Gender.female, levelbonus));
+		enemy.AddMember(new Jaguar(Gender.female, levelbonus));
 	}
 	else {
-		enemy.AddMember(new Jaguar(Gender.Rand([3,4,1])));
+		enemy.AddMember(new Jaguar(Gender.Rand([3,4,1]), levelbonus));
 		for(var i = 0; i < 3; i++) {
 			if(Math.random() < 0.2)
-				enemy.AddMember(new Jaguar(Gender.Rand([3,4,1])));
+				enemy.AddMember(new Jaguar(Gender.Rand([3,4,1]), levelbonus));
 		}
 	}
 	var enc = new Encounter(enemy);
@@ -261,8 +262,8 @@ Scenes.Felines.JaguarEnc = function() {
 	return enc;
 }
 
-function Lynx(gender) {
-	Wildcat.call(this, gender);
+function Lynx(gender, levelbonus) {
+	Wildcat.call(this, gender, levelbonus);
 	
 	this.monsterName = "the lynx";
 	this.MonsterName = "The lynx";
@@ -286,25 +287,25 @@ function Lynx(gender) {
 Lynx.prototype = new Wildcat();
 Lynx.prototype.constructor = Lynx;
 
-Scenes.Felines.LynxEnc = function() {
+Scenes.Felines.LynxEnc = function(levelbonus) {
 	var enemy = new Party();
  	var r = Math.random();
  	if(r < 0.2) {
-		enemy.AddMember(new Lynx(Gender.herm));
-		enemy.AddMember(new Lynx(Gender.male));
-		enemy.AddMember(new Lynx(Gender.female));
+		enemy.AddMember(new Lynx(Gender.herm, levelbonus));
+		enemy.AddMember(new Lynx(Gender.male, levelbonus));
+		enemy.AddMember(new Lynx(Gender.female, levelbonus));
 	}
 	else if(r < 0.4) {
-		enemy.AddMember(new Lynx(Gender.male));
-		enemy.AddMember(new Lynx(Gender.female));
-		enemy.AddMember(new Lynx(Gender.female));
-		enemy.AddMember(new Lynx(Gender.female));
+		enemy.AddMember(new Lynx(Gender.male, levelbonus));
+		enemy.AddMember(new Lynx(Gender.female, levelbonus));
+		enemy.AddMember(new Lynx(Gender.female, levelbonus));
+		enemy.AddMember(new Lynx(Gender.female, levelbonus));
 	}
 	else {
-		enemy.AddMember(new Lynx(Gender.Rand([3,4,1])));
+		enemy.AddMember(new Lynx(Gender.Rand([3,4,1]), levelbonus));
 		for(var i = 0; i < 3; i++) {
 			if(Math.random() < 0.2)
-				enemy.AddMember(new Lynx(Gender.Rand([3,4,1])));
+				enemy.AddMember(new Lynx(Gender.Rand([3,4,1]), levelbonus));
 		}
 	}
 	var enc = new Encounter(enemy);
@@ -323,8 +324,8 @@ Scenes.Felines.LynxEnc = function() {
 }
 
 // TODO
-function Lion(gender) {
-	Wildcat.call(this, gender);
+function Lion(gender, levelbonus) {
+	Wildcat.call(this, gender, levelbonus);
 	
 	this.monsterName = "the lion";
 	this.MonsterName = "The lion";

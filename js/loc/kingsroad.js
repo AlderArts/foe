@@ -50,7 +50,7 @@ world.loc.KingsRoad.Road.enc.AddEnc(function() {
 world.loc.KingsRoad.Road.AddEncounter({
 	nameStr : "Wildcat",
 	func    : function() {
-		return Scenes.Felines.WildcatEnc();
+		return Scenes.Felines.WildcatEnc(2);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true
 });
@@ -58,7 +58,7 @@ world.loc.KingsRoad.Road.AddEncounter({
 world.loc.KingsRoad.Road.AddEncounter({
 	nameStr : "Puma",
 	func    : function() {
-		return Scenes.Felines.PumaEnc();
+		return Scenes.Felines.PumaEnc(3);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true
 });
@@ -66,7 +66,7 @@ world.loc.KingsRoad.Road.AddEncounter({
 world.loc.KingsRoad.Road.AddEncounter({
 	nameStr : "Jaguar",
 	func    : function() {
-		return Scenes.Felines.JaguarEnc();
+		return Scenes.Felines.JaguarEnc(3);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true
 });
@@ -74,7 +74,7 @@ world.loc.KingsRoad.Road.AddEncounter({
 world.loc.KingsRoad.Road.AddEncounter({
 	nameStr : "Lynx",
 	func    : function() {
-		return Scenes.Felines.LynxEnc();
+		return Scenes.Felines.LynxEnc(3);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true
 });
@@ -82,7 +82,7 @@ world.loc.KingsRoad.Road.AddEncounter({
 world.loc.KingsRoad.Road.AddEncounter({
 	nameStr : "Equines",
 	func    : function() {
-		return Scenes.Equine.PairEnc();
+		return Scenes.Equine.PairEnc(4);
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true
 });

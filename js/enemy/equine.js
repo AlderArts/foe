@@ -4,7 +4,7 @@
  * 
  */
 
-function Equine(gender) {
+function Equine(gender, levelbonus) {
 	Entity.call(this);
 	
 	if(gender == Gender.male) {
@@ -50,7 +50,8 @@ function Equine(gender) {
 	this.charisma.base     = 12;
 	
 	this.level             = 2;
-	if(Math.random() > 0.8) this.level = 3;
+	if(Math.random() > 0.8) this.level++;
+	this.level             += levelbonus || 0;
 	this.sexlevel          = 2;
 	
 	this.combatExp         = this.level;
@@ -118,10 +119,10 @@ Scenes.Equine.StallionImpregnate = function(mother, father) {
 	});
 }
 
-Scenes.Equine.PairEnc = function() {
+Scenes.Equine.PairEnc = function(levelbonus) {
  	var enemy    = new Party();
- 	var stallion = new Equine(Gender.male);
- 	var mare     = new Equine(Gender.female);
+ 	var stallion = new Equine(Gender.male, levelbonus);
+ 	var mare     = new Equine(Gender.female, levelbonus);
 	enemy.AddMember(stallion);
 	enemy.AddMember(mare);
 	var enc      = new Encounter(enemy);

@@ -41,7 +41,7 @@ world.loc.Highlands.Hills.enc = new EncounterTable();
 world.loc.Highlands.Hills.AddEncounter({
 	nameStr : "Puma",
 	func    : function() {
-		return Scenes.Felines.PumaEnc();
+		return Scenes.Felines.PumaEnc(2);
 	}, odds : 0.5, enc : true,
 	visible : true, enabled : true, hunt : true
 });
@@ -49,7 +49,7 @@ world.loc.Highlands.Hills.AddEncounter({
 world.loc.Highlands.Hills.AddEncounter({
 	nameStr : "Lynx",
 	func    : function() {
-		return Scenes.Felines.LynxEnc();
+		return Scenes.Felines.LynxEnc(2);
 	}, odds : 0.5, enc : true,
 	visible : true, enabled : true, hunt : true
 });
