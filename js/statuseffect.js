@@ -13,7 +13,7 @@ StatusEffect = {
 	Blind   : 5, //OK
 	Siphon  : 6,
 	Seal    : 7,
-	Sleep   : 8,
+	Sleep   : 8, //OK
 	Enrage  : 9,
 	Fatigue : 10,
 	Bleed   : 11, //OK
@@ -44,6 +44,7 @@ LoadStatusImages = function(ready) {
 	Images.status[StatusEffect.Numb]    = "data/status/numb.png";
 	Images.status[StatusEffect.Venom]   = "data/status/venom.png";
 	Images.status[StatusEffect.Blind]   = "data/status/blind.png";
+	Images.status[StatusEffect.Sleep]   = "data/status/sleep.png";
 	Images.status[StatusEffect.Bleed]   = "data/status/bleed.png";
 	Images.status[StatusEffect.Haste]   = "data/status/haste.png";
 	Images.status[StatusEffect.Slow]    = "data/status/slow.png";
@@ -290,6 +291,34 @@ Status.Blind.Tick = function(target) {
 	}
 }
 
+
+Status.Sleep = function(target, opts) {
+	if(!target) return;
+	opts = opts || {};
+	
+	// Check for sleep resist
+	var odds = (opts.hit || 1) * (1 - target.SleepResist());
+	if(Math.random() > odds) {
+		return false;
+	}
+	// Number of turns effect lasts (static + random factor)
+	var turns = opts.turns || 0;
+	turns += Math.random() * (opts.turnsR || 0);
+	// Apply effect
+	target.combatStatus.stats[StatusEffect.Sleep] = {
+		turns   : turns,
+		Tick    : Status.Sleep.Tick
+	};
+	
+	return true;
+}
+Status.Sleep.Tick = function(target) {
+	this.turns--;
+	// Remove sleep effect
+	if(this.turns <= 0) {
+		target.combatStatus.stats[StatusEffect.Sleep] = null;
+	}
+}
 
 
 Status.Bleed = function(target, opts) {

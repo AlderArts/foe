@@ -380,14 +380,14 @@ Jobs["Elementalist"].Long = function(entity) {
 Jobs["Elementalist"].preqs.push({job : Jobs["Mage"], lvl : 3});
 //TODO
 Jobs["Elementalist"].abilities.AddAbility(Abilities.White.Heal);
-Jobs["Elementalist"].levels.push(new JobLevel(20,   null, {"str" : 0.2}));
 Jobs["Elementalist"].levels.push(new JobLevel(40,   null, {"str" : 0.2}));
+Jobs["Elementalist"].levels.push(new JobLevel(80,   null, {"str" : 0.2}));
 //TODO
-Jobs["Elementalist"].levels.push(new JobLevel(80,   [{ab: Abilities.White.Heal, set: "Support"}], {"int" : 0.1, "dex" : 0.1}));
-Jobs["Elementalist"].levels.push(new JobLevel(160,  null, {"str" : 0.2}));
+Jobs["Elementalist"].levels.push(new JobLevel(160,  [{ab: Abilities.White.Heal, set: "Support"}], {"int" : 0.1, "dex" : 0.1}));
 Jobs["Elementalist"].levels.push(new JobLevel(320,  null, {"str" : 0.2}));
 Jobs["Elementalist"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
 Jobs["Elementalist"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
+Jobs["Elementalist"].levels.push(new JobLevel(2560, null, {"str" : 0.2}));
 Jobs["Elementalist"].Unlocked = function(entity) {
 	return gameCache.flags["LearnedMagic"] >= 3;
 }
@@ -401,14 +401,14 @@ Jobs["Warlock"].Long = function(entity) {
 Jobs["Warlock"].preqs.push({job : Jobs["Mage"], lvl : 3});
 //TODO
 Jobs["Warlock"].abilities.AddAbility(Abilities.White.Heal);
-Jobs["Warlock"].levels.push(new JobLevel(20,   null, {"str" : 0.2}));
 Jobs["Warlock"].levels.push(new JobLevel(40,   null, {"str" : 0.2}));
+Jobs["Warlock"].levels.push(new JobLevel(80,   null, {"str" : 0.2}));
 //TODO
-Jobs["Warlock"].levels.push(new JobLevel(80,   [{ab: Abilities.White.Heal, set: "Support"}], {"int" : 0.1, "dex" : 0.1}));
-Jobs["Warlock"].levels.push(new JobLevel(160,  null, {"str" : 0.2}));
+Jobs["Warlock"].levels.push(new JobLevel(160,  [{ab: Abilities.White.Heal, set: "Support"}], {"int" : 0.1, "dex" : 0.1}));
 Jobs["Warlock"].levels.push(new JobLevel(320,  null, {"str" : 0.2}));
 Jobs["Warlock"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
 Jobs["Warlock"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
+Jobs["Warlock"].levels.push(new JobLevel(2560, null, {"str" : 0.2}));
 Jobs["Warlock"].Unlocked = function(entity) {
 	return gameCache.flags["LearnedMagic"] >= 3;
 }
@@ -417,20 +417,20 @@ Jobs["Hypnotist"] = new Job("Hypnotist");
 //TODO
 Jobs["Hypnotist"].Long = function(entity) {
 	var parse = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
-	return Text.Parse("", parse);
+	return Text.Parse("Hypnotists utilize the alluring magic of illusion and mental suggestion to manipulate others, both on and off the battlefield. Practitioners of this advanced art require intimate familiarity of the unbridled passions that rule us all, as well as knowledge of the arcane.", parse);
 }
 Jobs["Hypnotist"].preqs.push({job : Jobs["Mage"], lvl : 3});
 Jobs["Hypnotist"].preqs.push({job : Jobs["Courtesan"], lvl : 3});
 //TODO
-Jobs["Hypnotist"].abilities.AddAbility(Abilities.White.Heal);
-Jobs["Hypnotist"].levels.push(new JobLevel(20,   null, {"str" : 0.2}));
-Jobs["Hypnotist"].levels.push(new JobLevel(40,   null, {"str" : 0.2}));
+Jobs["Hypnotist"].abilities.AddAbility(Abilities.Seduction.Sleep);
+Jobs["Hypnotist"].levels.push(new JobLevel(40,   [{ab: Abilities.Seduction.Sleep, set: "Support"}], {"str" : 0.2}));
+Jobs["Hypnotist"].levels.push(new JobLevel(80,   null, {"str" : 0.2}));
 //TODO
-Jobs["Hypnotist"].levels.push(new JobLevel(80,   [{ab: Abilities.White.Heal, set: "Support"}], {"int" : 0.1, "dex" : 0.1}));
-Jobs["Hypnotist"].levels.push(new JobLevel(160,  null, {"str" : 0.2}));
+Jobs["Hypnotist"].levels.push(new JobLevel(160,  null, {"int" : 0.1, "dex" : 0.1}));
 Jobs["Hypnotist"].levels.push(new JobLevel(320,  null, {"str" : 0.2}));
 Jobs["Hypnotist"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
 Jobs["Hypnotist"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
+Jobs["Hypnotist"].levels.push(new JobLevel(2560, null, {"str" : 0.2}));
 Jobs["Hypnotist"].Unlocked = function(entity) {
 	return gameCache.flags["LearnedMagic"] >= 3;
 }
@@ -445,14 +445,14 @@ Jobs["Eromancer"].preqs.push({job : Jobs["Mage"], lvl : 3});
 Jobs["Eromancer"].preqs.push({job : Jobs["Courtesan"], lvl : 3});
 //TODO
 Jobs["Eromancer"].abilities.AddAbility(Abilities.White.Heal);
-Jobs["Eromancer"].levels.push(new JobLevel(20,   null, {"str" : 0.2}));
 Jobs["Eromancer"].levels.push(new JobLevel(40,   null, {"str" : 0.2}));
+Jobs["Eromancer"].levels.push(new JobLevel(80,   null, {"str" : 0.2}));
 //TODO
-Jobs["Eromancer"].levels.push(new JobLevel(80,   [{ab: Abilities.White.Heal, set: "Support"}], {"int" : 0.1, "dex" : 0.1}));
-Jobs["Eromancer"].levels.push(new JobLevel(160,  null, {"str" : 0.2}));
+Jobs["Eromancer"].levels.push(new JobLevel(160,  [{ab: Abilities.White.Heal, set: "Support"}], {"int" : 0.1, "dex" : 0.1}));
 Jobs["Eromancer"].levels.push(new JobLevel(320,  null, {"str" : 0.2}));
 Jobs["Eromancer"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
 Jobs["Eromancer"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
+Jobs["Eromancer"].levels.push(new JobLevel(2560, null, {"str" : 0.2}));
 Jobs["Eromancer"].Unlocked = function(entity) {
 	return gameCache.flags["LearnedMagic"] >= 3;
 }
@@ -467,14 +467,14 @@ Jobs["RunicKnight"].preqs.push({job : Jobs["Mystic"], lvl : 3});
 Jobs["RunicKnight"].preqs.push({job : Jobs["Fighter"], lvl : 3});
 //TODO
 Jobs["RunicKnight"].abilities.AddAbility(Abilities.White.Heal);
-Jobs["RunicKnight"].levels.push(new JobLevel(20,   null, {"str" : 0.2}));
 Jobs["RunicKnight"].levels.push(new JobLevel(40,   null, {"str" : 0.2}));
+Jobs["RunicKnight"].levels.push(new JobLevel(80,   null, {"str" : 0.2}));
 //TODO
-Jobs["RunicKnight"].levels.push(new JobLevel(80,   [{ab: Abilities.White.Heal, set: "Support"}], {"int" : 0.1, "dex" : 0.1}));
-Jobs["RunicKnight"].levels.push(new JobLevel(160,  null, {"str" : 0.2}));
+Jobs["RunicKnight"].levels.push(new JobLevel(160,  [{ab: Abilities.White.Heal, set: "Support"}], {"int" : 0.1, "dex" : 0.1}));
 Jobs["RunicKnight"].levels.push(new JobLevel(320,  null, {"str" : 0.2}));
 Jobs["RunicKnight"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
 Jobs["RunicKnight"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
+Jobs["RunicKnight"].levels.push(new JobLevel(2560, null, {"str" : 0.2}));
 Jobs["RunicKnight"].Unlocked = function(entity) {
 	return gameCache.flags["LearnedMagic"] >= 3;
 }

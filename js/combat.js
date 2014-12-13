@@ -390,6 +390,17 @@ Encounter.prototype.CombatTick = function() {
 				return;
 			}
 		}
+		
+		// Sleep
+		var sleep = currentActiveChar.combatStatus.stats[StatusEffect.Sleep];
+		if(sleep) {
+			Text.AddOutput("[name] [is] asleep and cannot act!",
+				{name: currentActiveChar.NameDesc(), is: currentActiveChar.is()});
+			Gui.NextPrompt(function() {
+				enc.CombatTick();
+			});
+			return;
+		}
 
 		var combatScreen = function() {
 			Text.Clear();

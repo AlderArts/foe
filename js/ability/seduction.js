@@ -76,9 +76,37 @@ TeaseSkill.prototype.OnAbsorb = function(encounter, caster, target, dmg) {
 }
 
 
-
-
-
+Abilities.Seduction.Sleep = new Ability();
+Abilities.Seduction.Sleep.name = "Sleep";
+Abilities.Seduction.Sleep.Short = function() { return "Put one enemy to sleep for a short while with magical charms."; }
+Abilities.Seduction.Sleep.cost = { hp: null, sp: 20, lp: null};
+Abilities.Seduction.Sleep.CastInternal = function(encounter, caster, target) {
+	var parse = {
+		Name   : caster.NameDesc(),
+		poss   : caster.possessive(),
+		notS   : caster.plural() ? "" : "s",
+		hisher : caster.hisher(),
+		hand   : caster.HandDesc(),
+		tname  : target.nameDesc(),
+		tName  : target.NameDesc(),
+		is     : target.is(),
+		has    : target.has(),
+		tnotS  : target.plural() ? "" : "s"
+	};
+	
+	Text.Add("[Name] weave[notS] [hisher] [hand]s in alluring patterns, winking seductively at [tname]. ", parse);
+	if(Status.Sleep(target, { hit : 0.6, turns : 2, turnsR : 2 })) {
+		Text.Add("[tName] [is] unable to resist looking at the hypnotic display, and fall[tnotS] into a slumber. [tName] [has] been afflicted with sleep!", parse);
+	}
+	else {
+		Text.Add("[tName] manage[notS] to shake off [poss] enchantment, resisting its drowsing effect.", parse);
+	}
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
 
 Abilities.Seduction.Rut = new Ability();
 Abilities.Seduction.Rut.name = "Rut";

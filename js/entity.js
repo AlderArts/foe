@@ -825,6 +825,11 @@ Entity.prototype.PhysDmgHP = function(encounter, caster, val) {
 		possessive : this.possessive()
 	};
 	
+	// Check for sleep
+	if(this.combatStatus.stats[StatusEffect.Sleep] != null) {
+		this.combatStatus.stats[StatusEffect.Sleep] = null;
+	}
+	
 	// Check for counter
 	if(this.combatStatus.stats[StatusEffect.Counter] != null) {
 		var onhit = this.combatStatus.stats[StatusEffect.Counter].OnHit;
@@ -1218,6 +1223,9 @@ Entity.prototype.NumbResist = function() {
 	return 0;
 }
 Entity.prototype.BlindResist = function() {
+	return 0;
+}
+Entity.prototype.SleepResist = function() {
 	return 0;
 }
 Entity.prototype.BleedResist = function() {
