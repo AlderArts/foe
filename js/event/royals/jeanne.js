@@ -294,7 +294,7 @@ Scenes.Jeanne.Talk = function() {
 					Text.Add("<i>“To start with, try to use spells intended to muddle the minds of your foes. Fuel your magic with your own emotions and transfer them to the unsuspecting enemy. I have found that someone thinking with their libido is far more… agreeable, compared to one suffused with rage.”</i> She hands you yet another scroll, the contents of which makes you blush faintly.", parse);
 					Text.NL();
 					Text.Add("<b>Unlocked the Hypnotist job.</b><br/>", parse);
-					Text.Add("<b>Unlocked the Lust Mage job.</b>", parse);
+					Text.Add("<b>Unlocked the Eromancer job.</b>", parse);
 					Text.NL();
 					Text.Add("<i>“I could spend more time to explain how to each of the disciplines work, and additional spells you could apply, but you would be better served by applying what I have shown you.”</i> Jeanne looks troubled. <i>“Had things been different, you could have taken your time to study this for a few years, but time is not a luxury we possess.”</i>", parse);
 					Text.NL();
