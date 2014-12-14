@@ -835,6 +835,10 @@ Entity.prototype.PhysDmgHP = function(encounter, caster, val) {
 	if(this.combatStatus.stats[StatusEffect.Sleep] != null) {
 		this.combatStatus.stats[StatusEffect.Sleep] = null;
 	}
+	// Check for confuse
+	if(this.combatStatus.stats[StatusEffect.Confuse] != null) {
+		this.combatStatus.stats[StatusEffect.Confuse].OnFade(encounter, this);
+	}
 	
 	// Check for counter
 	if(this.combatStatus.stats[StatusEffect.Counter] != null) {
@@ -1254,6 +1258,9 @@ Entity.prototype.HornyResist = function() {
 	return 0;
 }
 Entity.prototype.SlowResist = function() {
+	return 0;
+}
+Entity.prototype.ConfuseResist = function() {
 	return 0;
 }
 
@@ -2532,9 +2539,14 @@ GetAggroEntry = function(activeChar, entity) {
 }
 
 Entity.prototype.GetSingleTarget = function(encounter, activeChar, strategy) {
+	var isEnemy = activeChar.isEnemy;
+	var confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
+	if(confuse)
+		isEnemy = !isEnemy;
+
 	// Fetch all potential targets
 	var targets;
-	if(activeChar.isEnemy)
+	if(isEnemy)
 		targets = encounter.GetLivePartyArray();
 	else
 		targets = encounter.GetLiveEnemyArray();

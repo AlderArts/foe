@@ -27,9 +27,10 @@ StatusEffect = {
 	Bimbo   : 19,
 	Decoy   : 20, //OK
 	Counter : 21, //OK
-	Full    : 22,
+	Confuse : 22,
+	Full    : 23,
 	
-	LAST    : 23
+	LAST    : 24
 };
 
 LoadStatusImages = function(ready) {
@@ -53,6 +54,7 @@ LoadStatusImages = function(ready) {
 	Images.status[StatusEffect.Decoy]   = "data/status/decoy.png";
 	Images.status[StatusEffect.Counter] = "data/status/counter.png";
 	Images.status[StatusEffect.Full]    = "data/status/full.png";
+	Images.status[StatusEffect.Confuse] = "data/status/confuse.png";
 	
 	for(var i = 0; i < StatusEffect.LAST; i++) {
 		if(Images.status[i] == "") continue;
@@ -119,6 +121,7 @@ StatusList.prototype.EndOfCombat = function() {
 	this.stats[StatusEffect.Decoy]   = null;
 	this.stats[StatusEffect.Counter] = null;
 	//this.stats[StatusEffect.Full]    = null;
+	this.stats[StatusEffect.Confuse] = null;
 }
 
 Status.Venom = function(target, opts) {
@@ -522,7 +525,7 @@ Status.Counter = function(target, opts) {
 	var turns = opts.turns || 0;
 	turns += Math.random() * (opts.turnsR || 0);
 	var hits  = opts.hits || 0;
-	// Apply decoy
+	// Apply counter
 	target.combatStatus.stats[StatusEffect.Counter] = {
 		turns : turns,
 		hits  : hits,
@@ -534,7 +537,7 @@ Status.Counter = function(target, opts) {
 }
 Status.Counter.Tick = function(target) {
 	this.turns--;
-	// Remove horny effect
+	// Remove counter effect
 	if(this.turns <= 0) {
 		target.combatStatus.stats[StatusEffect.Counter] = null;
 	}
@@ -558,4 +561,58 @@ Status.Full.OverTime = function(target, hours) {
 	if(this.hours <= 0) {
 		target.combatStatus.stats[StatusEffect.Full] = null;
 	}
+}
+
+/*
+ * func = function(encounter, activeChar)
+ */
+Status.Confuse = function(target, opts) {
+	if(!target) return;
+	opts = opts || {};
+	
+	// Check for confuse resist
+	var odds = (opts.hit || 1) * (1 - target.ConfuseResist());
+	if(Math.random() > odds) {
+		return false;
+	}
+	
+	var turns = opts.turns || 0;
+	turns += Math.random() * (opts.turnsR || 0);
+	// Apply confuse
+	target.combatStatus.stats[StatusEffect.Confuse] = {
+		turns  : turns,
+		func   : opts.func || null,
+		Tick   : Status.Confuse.Tick,
+		OnFade : opts.fade || Status.Confuse.OnFade
+	};
+	
+	// cleanup
+	for(var i=0,j=curEncounter.combatOrder.length; i<j; i++){
+		var c = curEncounter.combatOrder[i];
+		if(c.entity == target) {
+			c.aggro = [];
+			break;
+		}
+	}
+	
+	return true;
+}
+Status.Confuse.Tick = function(target) {
+	this.turns--;
+	// Remove confuse effect
+	if(this.turns <= 0) {
+		target.combatStatus.stats[StatusEffect.Confuse] = null;
+	}
+}
+Status.Confuse.OnFade = function(encounter, entity) {
+	// cleanup
+	for(var i=0,j=encounter.combatOrder.length; i<j; i++){
+		var c = encounter.combatOrder[i];
+		if(c.entity == entity) {
+			c.aggro = [];
+			break;
+		}
+	}
+	// Remove confuse effect
+	entity.combatStatus.stats[StatusEffect.Confuse] = null;
 }

@@ -210,6 +210,38 @@ Abilities.Seduction.SIllusion.CastInternal = function(encounter, caster) {
 }
 
 
+Abilities.Seduction.Confuse = new Ability();
+Abilities.Seduction.Confuse.name = "Confuse";
+Abilities.Seduction.Confuse.Short = function() { return "Fuck a single opponent’s mind, temporarily drawing them to your side."; }
+Abilities.Seduction.Confuse.cost = { hp: null, sp: 30, lp: 20};
+Abilities.Seduction.Confuse.CastInternal = function(encounter, caster, target) {
+	var parse = {
+		Name    : caster.NameDesc(),
+		hisher  : caster.hisher(),
+		poss    : caster.possessive(),
+		notS    : caster.plural() ? "" : "s",
+		tName   : target.NameDesc(),
+		tname   : target.nameDesc(),
+		tis     : target.is(),
+		tnotS   : target.plural() ? "" : "s",
+		thimher : target.himher()
+	}
+
+	Text.AddOutput("[Name] perform[notS] a hypnotising dance, blending in [hisher] alluring magic and attempting to assume control of [tname]. ", parse);
+	
+	if(Status.Confuse(target, {hit: 0.75, turns: 3, turnsR: 3})) {
+		Text.AddOutput("[tName] [tis] unable to resist [poss] power, and utterly falls under [hisher] control.", parse);
+	}
+	else {
+		Text.AddOutput("[tName] manage[tnotS] to compose [thimher]self, resisting [poss] unnatural influence.", parse);
+	}
+	
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
+
+
 Abilities.Seduction.Rut = new Ability();
 Abilities.Seduction.Rut.name = "Rut";
 Abilities.Seduction.Rut.Short = function() { return "Hump away at target, dealing damage."; }
@@ -228,8 +260,8 @@ Abilities.Seduction.Rut.CastInternal = function(encounter, caster, target) {
 	target.AddLustAbs(dmg*0.25);
 	
 	var parse = {
-		name : caster.name,
-		tName : target.name
+		name : caster.NameDesc(),
+		tName : target.nameDesc()
 	}
 
 	// TODO: Make more flavor text	
@@ -252,7 +284,7 @@ Abilities.Seduction.Fantasize.CastInternal = function(encounter, caster) {
 	caster.AddLustAbs(dmg);
 	
 	var parse = {
-		name : caster.name
+		name : caster.NameDesc()
 	}
 
 	// TODO: Make more flavor text	

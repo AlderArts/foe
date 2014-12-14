@@ -286,7 +286,20 @@ Encounter.prototype.onVictory = function() {
 }
 
 Encounter.prototype.OnIncapacitate = function(entity) {
-	
+	for(var i=0,j=this.combatOrder.length; i<j; i++){
+		var e = this.combatOrder[i].entity;
+		if(e == entity) {
+			// Check for sleep
+			if(e.combatStatus.stats[StatusEffect.Sleep] != null) {
+				e.combatStatus.stats[StatusEffect.Sleep] = null;
+			}
+			// Check for confuse
+			if(e.combatStatus.stats[StatusEffect.Confuse] != null) {
+				e.combatStatus.stats[StatusEffect.Confuse].OnFade(this, e);
+			}
+			break;
+		}
+	}
 }
 
 Encounter.prototype.CombatTick = function() {
@@ -457,9 +470,16 @@ Encounter.prototype.CombatTick = function() {
 				activeChar.entity.Act(enc, activeChar);
 			}
 			else {
-				// TODO: if in control
-				
-				enc.SetButtons(activeChar, combatScreen);
+				// Confuse
+				var confuse = currentActiveChar.combatStatus.stats[StatusEffect.Confuse];
+				if(confuse) {
+					if(confuse.func)
+						confuse.func(enc, activeChar);
+					else
+						activeChar.entity.Act(enc, activeChar);
+				}
+				else
+					enc.SetButtons(activeChar, combatScreen);
 			}
 		}
 	}

@@ -40,3 +40,6 @@ BossEntity.prototype.HornyResist = function() {
 BossEntity.prototype.SlowResist = function() {
 	return 1;
 }
+BossEntity.prototype.ConfuseResist = function() {
+	return 1;
+}

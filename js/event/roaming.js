@@ -255,6 +255,7 @@ Scenes.Roaming.BanditsGen = function(capt) {
 	enc.capt = capt;
 	
 	enc.OnIncapacitate = function(entity) {
+		Encounter.prototype.OnIncapacitate.call(this, entity);
 		var enc = this;
 		var enemy = enc.enemy;
 		
