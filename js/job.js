@@ -425,11 +425,12 @@ Jobs["Hypnotist"].preqs.push({job : Jobs["Courtesan"], lvl : 3});
 //TODO Skills, stats
 Jobs["Hypnotist"].abilities.AddAbility(Abilities.Seduction.Sleep);
 Jobs["Hypnotist"].abilities.AddAbility(Abilities.Seduction.TIllusion);
+Jobs["Hypnotist"].abilities.AddAbility(Abilities.Seduction.SIllusion);
 Jobs["Hypnotist"].levels.push(new JobLevel(40,   [{ab: Abilities.Seduction.Sleep, set: "Support"}], {"str" : 0.2}));
 Jobs["Hypnotist"].levels.push(new JobLevel(80,   null, {"str" : 0.2}));
 Jobs["Hypnotist"].levels.push(new JobLevel(160,  [{ab: Abilities.Seduction.TIllusion, set: "Support"}], {"int" : 0.1, "dex" : 0.1}));
 Jobs["Hypnotist"].levels.push(new JobLevel(320,  null, {"str" : 0.2}));
-Jobs["Hypnotist"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
+Jobs["Hypnotist"].levels.push(new JobLevel(640,  [{ab: Abilities.Seduction.SIllusion, set: "Support"}], {"str" : 0.2}));
 Jobs["Hypnotist"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
 Jobs["Hypnotist"].levels.push(new JobLevel(2560, null, {"str" : 0.2}));
 Jobs["Hypnotist"].Unlocked = function(entity) {

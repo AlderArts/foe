@@ -159,6 +159,57 @@ Abilities.Seduction.TIllusion.CastInternal = function(encounter, caster) {
 }
 
 
+Abilities.Seduction.SIllusion = new Ability();
+Abilities.Seduction.SIllusion.name = "S.Illusion";
+Abilities.Seduction.SIllusion.Short = function() { return "Arouses your foes by creating a harem of alluring mirages."; }
+Abilities.Seduction.SIllusion.cost = { hp: null, sp: 10, lp: 25};
+Abilities.Seduction.SIllusion.targetMode = TargetMode.Self;
+Abilities.Seduction.SIllusion.CastInternal = function(encounter, caster) {
+	var parse = {
+		name   : caster.nameDesc(),
+		poss   : caster.possessive(),
+		notS   : caster.plural() ? "" : "s",
+		hisher : caster.hisher(),
+		hand   : caster.HandDesc()
+	};
+	var num = 2;
+	num += Math.random() * 3;
+	parse["num"] = Text.NumToText(num);
+	
+	Text.Add("Weaving [hisher] [hand]s in exotic patterns, [name] create[notS] [num] mesmerising and utterly lewd images which strut about invitingly; offering comfort and release with throaty groans and soft, alluring gasps.", parse);
+	Status.Decoy(caster, { copies : num, func : function(attacker) {
+		var decoy = caster.combatStatus.stats[StatusEffect.Decoy];
+		var num = decoy.copies;
+		decoy.copies--;
+		if(decoy.copies <= 0)
+			caster.combatStatus.stats[StatusEffect.Decoy] = null;
+		var parse = {
+			p : num > 1 ? "One of " + caster.possessive() : caster.Possessive(),
+			s : num > 1 ? "s" : "",
+			aposs   : attacker.possessive(),
+			aName   : attacker.NameDesc(),
+			ahimher : attacker.himher(),
+			ahisher : attacker.hisher(),
+			ahas    : attacker.has(),
+			anotS   : attacker.plural() ? "" : "s"
+		};
+		Text.AddOutput("[p] titillating apparition[s] quickly moves in the way of [aposs] attack, flowing into [ahimher] with an orgasmic cry. ", parse);
+		if(Status.Horny(attacker, { hit : 0.75, turns : 1, turnsR : 2, str : 1, dmg : 0.2 })) {
+			Text.AddOutput("[aName] stagger[anotS], flustered with visions of obscene acts. [aName] [ahas] been afflicted with horny!", parse);
+		}
+		else {
+			Text.AddOutput("[aName] resist[anotS], reigning in [ahisher] urges.", parse);
+		}
+		return false;
+	} });
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
+
+
 Abilities.Seduction.Rut = new Ability();
 Abilities.Seduction.Rut.name = "Rut";
 Abilities.Seduction.Rut.Short = function() { return "Hump away at target, dealing damage."; }
