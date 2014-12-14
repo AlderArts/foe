@@ -23,7 +23,7 @@ function Kiakai(storage) {
 	this.jobs["Mystic"]    = new JobDesc(Jobs.Mystic); this.jobs["Mystic"].mult = 2;
 	this.jobs["Healer"]    = new JobDesc(Jobs.Healer);
 	
-	this.jobs["Hypnotist"] = new JobDesc(Jobs.Mage);
+	this.jobs["Hypnotist"] = new JobDesc(Jobs.Hypnotist);
 	
 	this.weaponSlot   = Items.Weapons.WoodenStaff;
 	this.topArmorSlot = Items.Armor.SimpleRobes;
