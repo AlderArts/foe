@@ -796,6 +796,7 @@ Entity.prototype.Inhibited = function() {
 
 Entity.prototype.AddHPFraction = function(fraction) {
 	fraction = fraction || 0;
+	var old = this.curHp;
 	this.curHp += fraction * this.HP();
 	if(this.curHp > this.HP()) this.curHp = this.HP();
 	if(this.curHp < 0) {
@@ -806,25 +807,30 @@ Entity.prototype.AddHPFraction = function(fraction) {
 	
 	if(fraction > 0 && this.combatStatus.stats[StatusEffect.Bleed])
 		this.combatStatus.stats[StatusEffect.Bleed] = null;
+	return this.curHp - old;
 }
 Entity.prototype.AddSPFraction = function(fraction) {
 	fraction = fraction || 0;
+	var old = this.curSp;
 	this.curSp += fraction * this.SP();
 	if(this.curSp > this.SP()) this.curSp = this.SP();
 	if(this.curSp < 0) this.curSp = 0;
+	return this.curSp - old;
 }
 Entity.prototype.AddLustFraction = function(fraction) { // 0..1
 	fraction = fraction || 0;
+	var old = this.curLust;
 	this.curLust += fraction * this.Lust();
 	if(this.curLust > this.Lust()) this.curLust = this.Lust();
 	if(this.curLust < 0) this.curLust = 0;
+	return this.curLust - old;
 }
 
 Entity.prototype.PhysDmgHP = function(encounter, caster, val) {
 	var parse = {
 		possessive : this.possessive()
 	};
-	
+	var ent = this;
 	// Check for sleep
 	if(this.combatStatus.stats[StatusEffect.Sleep] != null) {
 		this.combatStatus.stats[StatusEffect.Sleep] = null;
@@ -857,18 +863,19 @@ Entity.prototype.PhysDmgHP = function(encounter, caster, val) {
 			parse["copy"]  = num > 1 ? "copies" : "copy";
 			Text.AddOutput("The attack is absorbed by[oneof] [possessive] [copy]!", parse);
 			Text.Newline();
-			this.combatStatus.stats[StatusEffect.Decoy].copies--;
-			if(this.combatStatus.stats[StatusEffect.Decoy].copies <= 0)
-				this.combatStatus.stats[StatusEffect.Decoy] = null;
+			ent.combatStatus.stats[StatusEffect.Decoy].copies--;
+			if(ent.combatStatus.stats[StatusEffect.Decoy].copies <= 0)
+				ent.combatStatus.stats[StatusEffect.Decoy] = null;
 			return false;
 		}
-		func(this);
+		return func(caster, val);
 	}
 	
 	return true;
 }
 Entity.prototype.AddHPAbs = function(val) {
 	val = val || 0;
+	var old = this.curHp;
 	this.curHp += val;
 	if(this.curHp > this.HP()) this.curHp = this.HP();
 	if(this.curHp < 0) {
@@ -879,18 +886,23 @@ Entity.prototype.AddHPAbs = function(val) {
 	
 	if(val > 0 && this.combatStatus.stats[StatusEffect.Bleed])
 		this.combatStatus.stats[StatusEffect.Bleed] = null;
+	return this.curHp - old;
 }
 Entity.prototype.AddSPAbs = function(val) {
 	val = val || 0;
+	var old = this.curSp;
 	this.curSp += val;
 	if(this.curSp > this.SP()) this.curSp = this.SP();
 	if(this.curSp < 0) this.curSp = 0;
+	return this.curSp - old;
 }
 Entity.prototype.AddLustAbs = function(val) {
 	val = val || 0;
+	var old = this.curLust;
 	this.curLust += val;
 	if(this.curLust > this.Lust()) this.curLust = this.Lust();
 	if(this.curLust < 0) this.curLust = 0;
+	return this.curLust - old;
 }
 
 Entity.prototype.RestFull = function() {
@@ -1227,6 +1239,9 @@ Entity.prototype.NumbResist = function() {
 	return 0;
 }
 Entity.prototype.BlindResist = function() {
+	return 0;
+}
+Entity.prototype.SiphonResist = function() {
 	return 0;
 }
 Entity.prototype.SleepResist = function() {

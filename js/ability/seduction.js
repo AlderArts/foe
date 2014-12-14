@@ -108,6 +108,57 @@ Abilities.Seduction.Sleep.CastInternal = function(encounter, caster, target) {
 	});
 }
 
+
+Abilities.Seduction.TIllusion = new Ability();
+Abilities.Seduction.TIllusion.name = "T.Illusion";
+Abilities.Seduction.TIllusion.Short = function() { return "Terrifies your foes by creating frightening phantasms that soak up any attacks directed at you."; }
+Abilities.Seduction.TIllusion.cost = { hp: null, sp: 25, lp: 10};
+Abilities.Seduction.TIllusion.targetMode = TargetMode.Self;
+Abilities.Seduction.TIllusion.CastInternal = function(encounter, caster) {
+	var parse = {
+		name   : caster.nameDesc(),
+		poss   : caster.possessive(),
+		notS   : caster.plural() ? "" : "s",
+		hisher : caster.hisher(),
+		hand   : caster.HandDesc()
+	};
+	var num = 2;
+	num += Math.random() * 3;
+	parse["num"] = Text.NumToText(num);
+	
+	Text.Add("Weaving [hisher] [hand]s in exotic patterns, [name] create[notS] [num] terrifying apparitions, which rise from purple smoke; bellowing in rage while drawing their phantasmal weapons.", parse);
+	Status.Decoy(caster, { copies : num, func : function(attacker) {
+		var decoy = caster.combatStatus.stats[StatusEffect.Decoy];
+		var num = decoy.copies;
+		decoy.copies--;
+		if(decoy.copies <= 0)
+			caster.combatStatus.stats[StatusEffect.Decoy] = null;
+		var parse = {
+			p : num > 1 ? "One of " + caster.possessive() : caster.Possessive(),
+			s : num > 1 ? "s" : "",
+			aposs   : attacker.possessive(),
+			aName   : attacker.NameDesc(),
+			ahisher : attacker.hisher(),
+			ahas    : attacker.has(),
+			anotS   : attacker.plural() ? "" : "s"
+		};
+		Text.AddOutput("[p] spectral servant[s] quickly moves in the way of [aposs] attack, flowing into [ahisher] body with a spine-chilling screech, vanishing. ", parse);
+		if(Status.Siphon(attacker, {turns: 1, turnsR: 2, hp: 25, sp: 5, caster: caster})) {
+			Text.AddOutput("[aName] stagger[anotS], the remnant of the revenant draining the energy from [ahisher] body. [aName] [ahas] been afflicted with siphon!", parse);
+		}
+		else {
+			Text.AddOutput("[aName] shrug[anotS] off the phantom’s chill.", parse);
+		}
+		return false;
+	} });
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
+
+
 Abilities.Seduction.Rut = new Ability();
 Abilities.Seduction.Rut.name = "Rut";
 Abilities.Seduction.Rut.Short = function() { return "Hump away at target, dealing damage."; }

@@ -25,6 +25,9 @@ BossEntity.prototype.NumbResist = function() {
 BossEntity.prototype.BlindResist = function() {
 	return 1;
 }
+BossEntity.prototype.SiphonResist = function() {
+	return 1;
+}
 BossEntity.prototype.SleepResist = function() {
 	return 1;
 }

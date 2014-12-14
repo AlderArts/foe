@@ -28,7 +28,7 @@ AttackItem = function(id, name) {
 	this.OnCast       = null;
 	this.TargetEffect = null;
 }
-AttackItem.prototype = new AttackItem();
+AttackItem.prototype = new CombatItem();
 AttackItem.prototype.constructor = AttackItem;
 
 AttackItem.prototype.UseCombatInternal = function(encounter, caster, target) {

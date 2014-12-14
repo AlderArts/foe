@@ -11,7 +11,7 @@ StatusEffect = {
 	Petrify : 3,
 	Venom   : 4, //OK
 	Blind   : 5, //OK
-	Siphon  : 6,
+	Siphon  : 6, //OK
 	Seal    : 7,
 	Sleep   : 8, //OK
 	Enrage  : 9,
@@ -44,6 +44,7 @@ LoadStatusImages = function(ready) {
 	Images.status[StatusEffect.Numb]    = "data/status/numb.png";
 	Images.status[StatusEffect.Venom]   = "data/status/venom.png";
 	Images.status[StatusEffect.Blind]   = "data/status/blind.png";
+	Images.status[StatusEffect.Siphon]  = "data/status/siphon.png";
 	Images.status[StatusEffect.Sleep]   = "data/status/sleep.png";
 	Images.status[StatusEffect.Bleed]   = "data/status/bleed.png";
 	Images.status[StatusEffect.Haste]   = "data/status/haste.png";
@@ -291,6 +292,48 @@ Status.Blind.Tick = function(target) {
 	}
 }
 
+
+Status.Siphon = function(target, opts) {
+	if(!target) return;
+	opts = opts || {};
+	
+	// Check for siphon resist
+	var odds = (opts.hit || 1) * (1 - target.SiphonResist());
+	if(Math.random() > odds) {
+		return false;
+	}
+	// Number of turns effect lasts (static + random factor)
+	var turns = opts.turns || 0;
+	turns += Math.random() * (opts.turnsR || 0);
+	// Apply effect
+	target.combatStatus.stats[StatusEffect.Siphon] = {
+		turns   : turns,
+		hp      : opts.hp || 0,
+		sp      : opts.sp || 0,
+		lp      : opts.lp || 0,
+		caster  : opts.caster || null,
+		Tick    : Status.Siphon.Tick
+	};
+	
+	return true;
+}
+Status.Siphon.Tick = function(target) {
+	this.turns--;
+	
+	var hp = target.AddHPAbs(-this.hp);
+	var sp = target.AddSPAbs(-this.sp);
+	var lp = target.AddLustAbs(-this.lp);
+	if(this.caster) {
+		this.caster.AddHPAbs(-hp);
+		this.caster.AddSPAbs(-sp);
+		this.caster.AddLustAbs(-lp);
+	}
+	
+	// Remove siphon effect
+	if(this.turns <= 0) {
+		target.combatStatus.stats[StatusEffect.Siphon] = null;
+	}
+}
 
 Status.Sleep = function(target, opts) {
 	if(!target) return;
