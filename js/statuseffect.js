@@ -463,7 +463,8 @@ Status.Decoy = function(target, opts) {
 	
 	// Apply decoy
 	target.combatStatus.stats[StatusEffect.Decoy] = {
-		copies  : opts.copies
+		copies  : opts.copies,
+		func    : opts.func
 	};
 	
 	return true;

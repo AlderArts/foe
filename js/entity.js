@@ -845,20 +845,24 @@ Entity.prototype.PhysDmgHP = function(encounter, caster, val) {
 		return ret;
 	}
 	// Check for decoy
-	if(this.combatStatus.stats[StatusEffect.Decoy] != null) {
-		var num = this.combatStatus.stats[StatusEffect.Decoy].copies;
+	var decoy = this.combatStatus.stats[StatusEffect.Decoy];
+	if(decoy != null) {
+		var num  = decoy.copies;
 		var toHit = 1 / (num + 1);
 		if(Math.random() < toHit)
 			return true;
 		
-		parse["oneof"] = num > 1 ? " one of" : "";
-		parse["copy"]  = num > 1 ? "copies" : "copy";
-		Text.AddOutput("The attack is absorbed by[oneof] [possessive] [copy]!", parse);
-		Text.Newline();
-		this.combatStatus.stats[StatusEffect.Decoy].copies--;
-		if(this.combatStatus.stats[StatusEffect.Decoy].copies <= 0)
-			this.combatStatus.stats[StatusEffect.Decoy] = null;
-		return false;
+		var func = decoy.func || function() {
+			parse["oneof"] = num > 1 ? " one of" : "";
+			parse["copy"]  = num > 1 ? "copies" : "copy";
+			Text.AddOutput("The attack is absorbed by[oneof] [possessive] [copy]!", parse);
+			Text.Newline();
+			this.combatStatus.stats[StatusEffect.Decoy].copies--;
+			if(this.combatStatus.stats[StatusEffect.Decoy].copies <= 0)
+				this.combatStatus.stats[StatusEffect.Decoy] = null;
+			return false;
+		}
+		func(this);
 	}
 	
 	return true;
