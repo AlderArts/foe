@@ -134,7 +134,7 @@ Scenes.Roaming.KingdomPatrol = function(entering) {
 		options.push({ nameStr : "Bandits!",
 			func : function() {
 				Text.Clear();
-				Text.Add("Trying to look nonchalant, you tell the sergeant that you are bandits, here to murder, rape, and kill.", parse);
+				Text.Add("Trying to keep a straight face, you proclaim that you are bandits, here to murder, rape, and kill!", parse);
 				Text.NL();
 				
 				var scenes = new EncounterTable();
@@ -157,7 +157,7 @@ Scenes.Roaming.KingdomPatrol = function(entering) {
 				Text.Add("<i>“I’m fining you fifteen coins for wasting my time. I call it the ‘not killing you for being an idiot’ tax.”</i>", parse);
 				Text.NL();
 				if(party.coin >= 15) {
-					Text.Add("You grumble a little, but faced with the [rmanwoman]’s menacing glare, agree to pay up. The coins neatly disappear from your hand into [rhisher] purse.", parse);
+					Text.Add("You grumble a little at [rhimher] being unable to take a joke, but faced with the [rmanwoman]’s menacing glare, agree to pay up. It's not worth getting in trouble with the kingdom to avoid a petty fine. The coins neatly disappear from your hand into [rhisher] purse.", parse);
 					Text.NL();
 					Text.Add("<i>“Pleasure doing business with you.”</i> The sergeant says, spitting to the side. <i>“Do respect the bloody soldiers, though. Or don’t, I suppose, I could always use more ale… or a new punching bag.”</i>", parse);
 					party.coin -= 15;
@@ -170,7 +170,7 @@ Scenes.Roaming.KingdomPatrol = function(entering) {
 					Text.Add("As you turn to leave, [rheshe] gives you a solid wack upside the head. <i>“Respect the bloody soldiers, though. We’re not here to mess around.”</i>", parse);
 				}
 				Text.NL();
-				Text.Add("Well, that didn’t exactly go well, but there were worse ways that proclaiming yourself a bandit could have ended.", parse);
+				Text.Add("Well, that didn’t exactly go well, but perhaps there were worse ways that proclaiming yourself a bandit could have ended. Perhaps expecting soldiers to laugh along was a little over-optimistic.", parse);
 				if(party.InParty(lei)) {
 					Text.NL();
 					Text.Add("Lei looks at you with a smug grin on his face. <i>“That was an excellent example of how speaking untruth is a bad idea. Though I must admit that most people who choose to lie at least select lies that are favorable to themselves.”</i>", parse);
@@ -181,7 +181,7 @@ Scenes.Roaming.KingdomPatrol = function(entering) {
 				
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : Text.Parse("Tell [rhimher] that you’re bandits. It might be a terrible idea, but it’s somehow tempting nonetheless.", parse)
+			tooltip : Text.Parse("Tell [rhimher] that you’re bandits. It'd be pretty funny to see [rhisher] reaction, right?", parse)
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	}, 1.0, function() { return party.Num() > 1; });
