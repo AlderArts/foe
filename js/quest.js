@@ -618,6 +618,63 @@ Quests.quests.push(new Quest({
 	]
 }));
 
+Quests.quests.push(new Quest({
+	name: function() {
+		return "Search for the scepter";
+	},
+	desc: function() {
+		return "Ophelia has asked you to search for Lagon's scepter, possibly the only thing that can help her mother.";
+	},
+	active: function() {
+		var status = Quests.Type.NotStarted;
+		if(burrows.flags["Access"] >= Burrows.AccessFlags.QuestlineComplete)
+			status |= Quests.Type.Completed;
+		else if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3)
+			status |= Quests.Type.Visible;
+		return status;
+	},
+	list: [
+		new QuestItem({
+			desc: function() { //TODO Roa met flag
+				return "Find Ophelia's brother, Roa. Your best lead seems to be looking for whorehouses...";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage4)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Follow the merchant lead.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage4)
+					status |= Quests.Type.Visible;
+				if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage5)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Return the scepter to the Burrows.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage5)
+					status |= Quests.Type.Visible;
+				if(burrows.flags["Access"] >= Burrows.AccessFlags.QuestlineComplete)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		})
+	]
+}));
+
 //TODO Krawitz(?), Burrows, Gwendy
 
 /*
