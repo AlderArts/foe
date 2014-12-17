@@ -42,6 +42,7 @@ Images.wolf         = "data/wolf.png";
 Images.scorp        = "data/scorp.png";
 Images.naga         = "data/naga.png";
 Images.drake        = "data/drake.png";
+Images.gol          = "data/gol.png";
 
 Images.bandit_male1 = "data/bandit_male1.png";
 Images.bandit_male2 = "data/bandit_male2.png";
