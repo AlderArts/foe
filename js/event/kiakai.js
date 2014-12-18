@@ -6192,7 +6192,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 			else {
 				Text.Add("<i>“Y-yes?”</i> you whisper.", parse);
 				Text.NL();
-				Text.Add("Instead of answering you, [name] bends down, trapping you with a loving kiss. Your mouths connect while [heshe] continues to ram [hisher] [kCockDesc] into you, thrusting in and out. Your tongues intermingle, caressing and wrestling with each other over dominion, but as you fell before the elf in the larger scale struggle, so does [heshe] take this victory, easily even. No matter how much you try, you cannot focus on anything except the pistoning [kCockDesc] wrecking havoc on your [anusDesc].", parse);
+				Text.Add("Instead of answering you, [name] bends down, trapping you with a loving kiss. Your mouths connect while [heshe] continues to ram [hisher] [kCockDesc] into you, thrusting in and out. Your tongues intermingle, caressing and wrestling with each other over dominion, but as you fell before the elf in the larger scale struggle, so does [heshe] take this victory, easily even. No matter how much you try, you cannot focus on anything except the pistoning [kCockDesc] wreaking havoc on your [anusDesc].", parse);
 			}
 			Text.Flush();
 			
@@ -6277,7 +6277,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 								Text.Add("<i>“H-hold on,”</i> you yelp, quickly rolling onto your back as [heshe] pulls out. <i>“Give it to me, I want you to soak me in your hot cum!”</i> You close your eyes as the first generous gouts of sticky liquid splatter across your body, a long strand painted straight across one of your [breastDesc]. The next shot goes even farther, clinging to your face. It's followed by a rapid succession of loads covering your entire body.", parse);
 								Text.NL();
 								var cum = kiakai.OrgasmCum();
-								Text.Add("When [name] is finally done hosing you down, you experimentally open your eye, peering down across your stained body. The elf has dropped down to [hisher] knees and crawled up to you, gleefully slurping up any globs of cream in [hisher] way as [heshe] dives onto your [genDesc]. Between [hisher] legs, you can see that [hisher] [kCockDesc] is pulsing weakly, still drooling cum.", parse);
+								Text.Add("When [name] is finally done hosing you down, you experimentally open an eye, peering down across your stained body. The elf has dropped down to [hisher] knees and crawled up to you, gleefully slurping up any globs of cream in [hisher] way as [heshe] dives onto your [genDesc]. Between [hisher] legs, you can see that [hisher] [kCockDesc] is pulsing weakly, still drooling cum.", parse);
 								kiakai.subDom.IncreaseStat(50, 1);
 								
 								Scenes.Kiakai.AnalCatchFinish();
