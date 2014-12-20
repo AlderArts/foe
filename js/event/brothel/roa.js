@@ -3,9 +3,11 @@
  * Define Roa
  * 
  */
+
+Scenes.Roa = {};
+
 function Roa(storage) {
 	Entity.call(this);
-	
 	
 	// Character stats
 	this.name = "Roa";
@@ -35,11 +37,22 @@ function Roa(storage) {
 	
 	this.SetLevelBonus();
 	this.RestFull();
+	
+	this.flags["Met"] = Roa.Met.NotMet;
 
 	if(storage) this.FromStorage(storage);
 }
 Roa.prototype = new Entity();
 Roa.prototype.constructor = Roa;
+
+Roa.Met = {
+	NotMet : 0,
+	Met    : 1
+};
+
+Roa.prototype.Met = function() {
+	return this.flags["Met"] >= Roa.Met.Met;
+}
 
 Roa.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
@@ -58,12 +71,12 @@ Roa.prototype.ToStorage = function() {
 	return storage;
 }
 
-// Schedule
+// Schedule //TODO
 Roa.prototype.IsAtLocation = function(location) {
 	return true;
 }
 
-// Party interaction
+// Party interaction //TODO
 Roa.prototype.Interact = function() {
 	Text.Clear();
 	Text.AddOutput("Rawr Imma bunny.");
@@ -82,4 +95,62 @@ Roa.prototype.Interact = function() {
 	Gui.NextPrompt(function() {
 		PartyInteraction();
 	});
+}
+
+Scenes.Roa.BrothelApproach = function() {
+	var parse = {
+		
+	};
+	
+	if(roa.Met()) {
+		Text.Clear();
+		Text.Add("PLACEHOLDER", parse);
+		Text.NL();
+		Text.Add("", parse);
+		Text.NL();
+		Text.Add("", parse);
+		Text.Flush();
+		
+		Scenes.Roa.BrothelPrompt();
+	}
+	else
+		Scenes.Roa.First();
+}
+
+Scenes.Roa.BrothelPrompt = function() {
+	var parse = {
+		
+	};
+	
+	//[name]
+	var options = new Array();
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Add("", parse);
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	Gui.SetButtonsFromList(options, true, function() {
+		PrintDefaultOptions();
+	}); // TODO leave
+}
+
+Scenes.Roa.First = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("PLACEHOLDER", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt();
 }

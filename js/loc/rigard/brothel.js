@@ -50,6 +50,19 @@ world.loc.Rigard.Brothel.brothel.events.push(new Link(
 		//TODO
 	}
 ));
+world.loc.Rigard.Brothel.brothel.events.push(new Link(
+	function() { return roa.Met() ? "Roa" : "Bunny"; }, true, true,
+	function() {
+		if(roa.Met())
+			Text.Add("Roa the lapin is at his usual spot, clad in his skimpy outfit. He looks around for a potential john or jill, visibly sighing at the apparent lack of interest.");
+		else
+			Text.Add("A petitely built feminine rabbit-morph is over near the corner, lounging amongst the pillows on a plush couch. She casts a hopeful eye towards any potential customers.");
+		Text.NL();
+	},
+	function() {
+		Scenes.Roa.BrothelApproach();
+	}
+));
 
 world.loc.Rigard.Brothel.brothel.endDescription = function() {
 	Text.Flush();
