@@ -2321,20 +2321,20 @@ Scenes.Rosalin.CombineCallback = function(item) {
 	}
 	else if(item == Items.Avia) {
 		if(rosalin.flags["Avia"] == 0) {
-			Text.Add("<i>”Shiny,”</i> Rosalin comments, holding up the gaudy trinket you brought to the light. <i>”I suppose I could melt it down… but I don’t have a strong enough fire. I wish I knew magic,”</i> [heshe] sighs.", parse);
+			Text.Add("<i>“Shiny,”</i> Rosalin comments, holding up the gaudy trinket you brought to the light. <i>“I suppose I could melt it down… but I don’t have a strong enough fire. I wish I knew magic,”</i> [heshe] sighs.", parse);
 			Text.NL();
 			Text.Add("You shudder to think of the imagery of Rosalin throwing fireballs left and right. Not to mention the distinct risk of being made to drink molten metal. It’s probably for the best that things stay the way they are.", parse);
 			Text.NL();
-			Text.Add("<i>”Ah well, I guess I’ll just leave it at the bottom of the pot for flavor,”</i> the alchemist shrugs.", parse);
+			Text.Add("<i>“Ah well, I guess I’ll just leave it at the bottom of the pot for flavor,”</i> the alchemist shrugs.", parse);
 			rosalin.flags["Avia"] = 1;
 		}
 		else {
-			Text.Add("<i>”Let’s see if I can make a stronger one this time, I was a bit disappointed with the last one,”</i> Rosalin mutters as [heshe] gets [hisher] gear ready.", parse);
+			Text.Add("<i>“Let’s see if I can make a stronger one this time, I was a bit disappointed with the last one,”</i> Rosalin mutters as [heshe] gets [hisher] gear ready.", parse);
 		}
 		Text.NL();
 		Text.Add("After some preparation, the ingredients go into a big pot and are left to stew for a while. Rosalin ponders the mixture, adding small portions of various herbs seemingly at random. Acting on some que perhaps only detectable by the alchemist, [heshe] fishes out the trinket from the potion and quickly pour the concoction into a bottle.", parse);
 		Text.NL();
-		Text.Add("<i>”There we go!”</i> [heshe] exclaims, looking happy with the result.", parse);
+		Text.Add("<i>“There we go!”</i> [heshe] exclaims, looking happy with the result.", parse);
 		Text.Flush();
 		
 		//[You][Rosalin][Discard]
@@ -2354,7 +2354,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 		options.push({ nameStr : "Rosalin",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>”Sure, I’ll try it!”</i> Rosalin readily agrees, quickly downing the potion. As always, the alchemist is eager to see the fruit of [hisher] efforts.", parse);
+				Text.Add("<i>“Sure, I’ll try it!”</i> Rosalin readily agrees, quickly downing the potion. As always, the alchemist is eager to see the fruit of [hisher] efforts.", parse);
 				Text.NL();
 				
 				var scenes = new EncounterTable();
@@ -2367,7 +2367,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				scenes.AddEnc(function() {
 					Text.Add("Rosalin’s tail quickly retracts, leaving no trace behind.", parse);
 					Text.NL();
-					Text.Add("<i>”Aww… but I liked that tail,”</i> [heshe] pouts.", parse);
+					Text.Add("<i>“Aww… but I liked that tail,”</i> [heshe] pouts.", parse);
 					TF.RemoveAppendage(rosalin.Back(), AppendageType.tail, 1);
 					Text.NL();
 				}, 1.0, function() { return rosalin.HasTail(); });
@@ -2379,7 +2379,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				
 				scenes.Get();
 				
-				Text.Add("<i>”Tastes very sweet,”</i> the alchemist comments, pursing [hisher] lips. <i>”Would go well with something salty… if you catch my drift.”</i>", parse);
+				Text.Add("<i>“Tastes very sweet,”</i> the alchemist comments, pursing [hisher] lips. <i>“Would go well with something salty… if you catch my drift.”</i>", parse);
 				Text.Flush();
 				Gui.NextPrompt(function() {
 					Scenes.Rosalin.SexPrompt(RosalinSexState.Regular);
@@ -2402,16 +2402,16 @@ Scenes.Rosalin.CombineCallback = function(item) {
 	}
 	else if(item == Items.Ovis) {
 		if(rosalin.flags["Ovis"] == 0) {
-			Text.Add("<i>”Hmm… doesn’t smell like cow milk. Is this… sheep?”</i> Rosalin frowns as [heshe] suspiciously sniffs the bottle you give [himher]. <i>”I wonder...”</i>", parse);
+			Text.Add("<i>“Hmm… doesn’t smell like cow milk. Is this… sheep?”</i> Rosalin frowns as [heshe] suspiciously sniffs the bottle you give [himher]. <i>“I wonder...”</i>", parse);
 			Text.NL();
 			Text.Add("The alchemist busies [himher]self with the ingredients you gave [himher], mixing them together in a pot. The horn is filed down to a fine powder on a bed of grass, and worked together with the milk using a pestle. Once the concoction has simmered over the flame for a while - and several herbs of various kinds have been added - the alchemist seems happy with it.", parse);
 			rosalin.flags["Ovis"] = 1;
 		}
 		else {
-			Text.Add("<i>”One sheep-tonic, coming up!”</i> The alchemist quickly goes to work on the ingredients you brought [himher], preparing them in a way you swear subtly differs from when [heshe] last made it.", parse);
+			Text.Add("<i>“One sheep-tonic, coming up!”</i> The alchemist quickly goes to work on the ingredients you brought [himher], preparing them in a way you swear subtly differs from when [heshe] last made it.", parse);
 		}
 		Text.NL();
-		Text.Add("<i>”Well, here it is,”</i> Rosalin declares, giving you a bottle containing a thick white fluid.", parse);
+		Text.Add("<i>“Well, here it is,”</i> Rosalin declares, giving you a bottle containing a thick white fluid.", parse);
 		Text.Flush();
 		
 		var rosalinUnlocked = true;
@@ -2422,7 +2422,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				func : function() {
 					Text.Clear();
 					Items.Ovis.Use(player);
-					Text.Add("<i>”Do you feel any… different?”</i> the alchemist asks you, notepad at the ready. <i>”Any urge to give up your quest and follow the masses?”</i>", parse);
+					Text.Add("<i>“Do you feel any… different?”</i> the alchemist asks you, notepad at the ready. <i>“Any urge to give up your quest and follow the masses?”</i>", parse);
 					Text.Flush();
 					Gui.NextPrompt(function() {
 						Alchemy.AlchemyPrompt(rosalin, party.inventory, Scenes.Rosalin.Interact, Scenes.Rosalin.CombineCallback);
@@ -2433,7 +2433,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 			options.push({ nameStr : "Rosalin",
 				func : function() {
 					Text.Clear();
-					Text.Add("<i>”Nu-uh,”</i> Rosalin shakes [hisher] head. <i>”I wouldn’t want to become a sheep! This stuff can make you really air-headed, I hear! I’ve some limits, you know. I couldn’t make potions if I were stupid!”</i>", parse);
+					Text.Add("<i>“Nu-uh,”</i> Rosalin shakes [hisher] head. <i>“I wouldn’t want to become a sheep! This stuff can make you really air-headed, I hear! I’ve some limits, you know. I couldn’t make potions if I were stupid!”</i>", parse);
 					Text.NL();
 					Text.Add("…[HeShe] says, wistfully eyeing the potion and licking [hisher] lips. Turning down drinking one of [hisher] own mixtures is a feat of willpower for [himher].", parse);
 					Text.Flush();

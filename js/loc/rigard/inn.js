@@ -901,32 +901,32 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 			
 			if(rigard.LB["OTerry"] != 0) {
 				if(party.InParty(terry)) {
-					Text.Add("<i>”It’s hard to trust you again, but it's a tough world out there. Take care of yourself, Terry,”</i> Orvin give a gruff nod to the [foxvixen].", parse);
+					Text.Add("<i>“It’s hard to trust you again, but it's a tough world out there. Take care of yourself, Terry,”</i> Orvin give a gruff nod to the [foxvixen].", parse);
 					Text.NL();
-					Text.Add("<i>”Thanks, and I’m really sorry about tricking you...”</i> Terry replies, bowing [hisher] head in shame.", parse);
+					Text.Add("<i>“Thanks, and I’m really sorry about tricking you...”</i> Terry replies, bowing [hisher] head in shame.", parse);
 					Text.NL();
 					Text.Add("Orvin merely inclines his head again, but you can see the hint of a smile on his lips.", parse);
 				}
 				else {
-					Text.Add("<i>”Yeah, that was a bit of a shock. Who’d think that she was actually a he? And a thief to boot? Guess sometimes you do what you have to to get by,”</i> he sighs.", parse);
+					Text.Add("<i>“Yeah, that was a bit of a shock. Who’d think that she was actually a he? And a thief to boot? Guess sometimes you do what you have to to get by,”</i> he sighs.", parse);
 				}
 			}
 			else if(party.InParty(terry)) {
-				Text.Add("<i>”Ah, don’t bring that up again,”</i> Orvin shakes his head. <i>”I can’t believe I was fooled by his...”</i> He trails off as he sees Terry peeking out from behind you. <i>”You!”</i> he exclaims.", parse);
+				Text.Add("<i>“Ah, don’t bring that up again,”</i> Orvin shakes his head. <i>“I can’t believe I was fooled by his...”</i> He trails off as he sees Terry peeking out from behind you. <i>“You!”</i> he exclaims.", parse);
 				Text.NL();
-				Text.Add("<i>”Umm… hello?”</i> Terry waves nervously, [hisher] ears drooping guiltily.", parse);
+				Text.Add("<i>“Umm… hello?”</i> Terry waves nervously, [hisher] ears drooping guiltily.", parse);
 				Text.NL();
 				Text.Add("You hurriedly tell him the terms of Terry’s release, assuring the innkeeper that all is in order. Orvin listens to your explanation, frowning as you explain the workings of the collar around Terry’s neck.", parse);
 				Text.NL();
-				Text.Add("<i>”I’m sorry for lying to you, I really did enjoy working here,”</i> Terry quickly adds, bowing [hisher] head apologetically.", parse);
+				Text.Add("<i>“I’m sorry for lying to you, I really did enjoy working here,”</i> Terry quickly adds, bowing [hisher] head apologetically.", parse);
 				Text.NL();
-				Text.Add("<i>”Ah… well,”</i> Orvin clears his throat, the apology clearly catching him off-guard. <i>”I wish you had just told me...”</i>", parse);
+				Text.Add("<i>“Ah… well,”</i> Orvin clears his throat, the apology clearly catching him off-guard. <i>“I wish you had just told me...”</i>", parse);
 				Text.NL();
-				Text.Add("<i>”You were really nice to me. I didn’t expect that from this shithole of a city. And I didn’t want to involve you in my little outing,”</i> Terry explains, ears flat against [hisher] skull.", parse);
+				Text.Add("<i>“You were really nice to me. I didn’t expect that from this shithole of a city. And I didn’t want to involve you in my little outing,”</i> Terry explains, ears flat against [hisher] skull.", parse);
 				Text.NL();
-				Text.Add("<i>”Well, if you feel like doing honest work again some time, I could use another hand, I suppose,”</i> Orvin finishes gruffly, going back to cleaning glasses.", parse);
+				Text.Add("<i>“Well, if you feel like doing honest work again some time, I could use another hand, I suppose,”</i> Orvin finishes gruffly, going back to cleaning glasses.", parse);
 				Text.NL();
-				Text.Add("<i>”Thanks, that means a lot to me.”</i> The [foxvixen] smiles as [hisher] tail begins wagging.", parse);
+				Text.Add("<i>“Thanks, that means a lot to me.”</i> The [foxvixen] smiles as [hisher] tail begins wagging.", parse);
 				
 				rigard.LB["OTerry"] = 1;
 			}

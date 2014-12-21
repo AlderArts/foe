@@ -112,7 +112,7 @@ Scenes.Kyna.Intro = function() {
 	Text.NL();
 	Text.Add("She looks a bit unsteady on her feet, so you decide to invite her to sit down with you.", parse);
 	Text.NL();
-	Text.Add("<i>”Thanks, ‘an sorry for the rough greeting.”</i> She smiles embarrassedly. <i>”Name’s Kyna. Kyna Moran, from the Moran clan of mercenaries. I left home to make me’self a name in the trade, like my pa and the others,”</i> she says proudly.", parse);
+	Text.Add("<i>“Thanks, ‘an sorry for the rough greeting.”</i> She smiles embarrassedly. <i>“Name’s Kyna. Kyna Moran, from the Moran clan of mercenaries. I left home to make me’self a name in the trade, like my pa and the others,”</i> she says proudly.", parse);
 	Text.NL();
 	Text.Add("Doesn’t seem like she’s had much luck so far, considering her disheveled looks. There’s some dirt and a few twigs stuck in her braids, smears and small bits of tear cover her leather armor. She looks far from what you’d consider a ‘successful mercenary’.", parse);
 	Text.NL();

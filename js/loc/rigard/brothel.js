@@ -189,13 +189,13 @@ Scenes.Brothel.MStrap = function() {
 		Text.Add("Through the shock, you feel your new flesh throb impatiently, a great wave of lust washing over your mind and drowning it out. Visions whirl through your mind’s eye, of lusty maidens with fertile pussies drooling in anticipation of seeding, of submissive little bitch-boys bent over and mewling with desire as your rod fucks their boycunts... gods, you <b>need</b> to <b>FUCK!</b> You don’t care who, or what, just give you a damn hole to fuck, and give it to you now!", parse);
 		Text.NL();
 		parse["fem"] = player.mfFem("sir", "ma’am");
-		Text.Add("<i>”Oh, forgive me [fem]. I thought this room wa-aah!”</i>", parse);
+		Text.Add("<i>“Oh, forgive me [fem]. I thought this room wa-aah!”</i>", parse);
 		Text.NL();
 		Text.Add("Overwhelmed by the unbearable lust sweeping through your body, you pounce upon the maid who so foolishly entered the room. You only dimly register her surprise, more focused on the impressive bulges of her C-cup bosom stretching out her top. You swing her off of her feet and around onto the bed, flipping up her skirt and yanking down her panties before she even stops bouncing.", parse);
 		Text.NL();
 		Text.Add("In a surge of motion you have clambered onto the bed, looming over her as you mercilessly spread her legs and all but dive between them. In a single fierce thrust, you have buried half your length into her cunt, your lips seizing her own plush, kissable lips to muffle her protests. Like one possessed, you start to swing your hips, breaking the kiss only to focus on rutting her like the animal you have become.", parse);
 		Text.NL();
-		Text.Add("<i>”Oh, yes! Fuck me! Harder! Faster!”</i> she begs as you continue to mercilessly pound her.", parse);
+		Text.Add("<i>“Oh, yes! Fuck me! Harder! Faster!”</i> she begs as you continue to mercilessly pound her.", parse);
 		Text.NL();
 		Text.Add("You eagerly comply, the bed squeaking and squealing from the force of your thrusts, matching the mewls and moans of the two of you. Lost in the haze of pleasure and lust that envelops you, it’s impossible to say how long you last; you only know when the molten ice of climax spikes in your brain and you cum, the maid under you shrieking loudly in climax as her cunt milks your newfound dick of its cream.", parse);
 		Text.NL();
@@ -204,7 +204,7 @@ Scenes.Brothel.MStrap = function() {
 		
 		Text.Add("When you have spent yourself at last, you roll limply away, your recent bedmate panting as heavily as you. Dimly, you register her huge grin of satisfaction.", parse);
 		Text.NL();
-		Text.Add("<i>”T-Thank you, [fem]. That was… amazing...”</i> she says before closing her eyes and passing out.", parse);
+		Text.Add("<i>“T-Thank you, [fem]. That was… amazing...”</i> she says before closing her eyes and passing out.", parse);
 		Text.NL();
 		Text.Add("Unthinkingly, you check on her to be sure she’s alright, then slowly rise from the bed. Looks like your new appendage is the real deal, then. Carefully you pull your [lowerArmourDesc] back on, then slip quietly out of the room, leaving your partner to sleep the sleep of the soundly fucked behind you.", parse);
 		
