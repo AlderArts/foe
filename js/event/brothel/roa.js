@@ -428,6 +428,8 @@ Scenes.Roa.First = function() {
 	
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
+	roa.flags["Met"] = Roa.Met.Met;
+	
 	Text.Clear();
 	Text.Add("As you make your way through the crowds and couches, you’re able to get a better look at the bunny. She’s a dainty little thing, as you’d expect a rabbit-morph to be; petitely built, but feminine, and covered in pink-tinged white fur. Her hair is long and kind of messy, falling forward over beautiful baby-blue eyes, but it’s an interesting sort of disheveled look.", parse);
 	Text.NL();
@@ -586,7 +588,8 @@ Scenes.Roa.TSLPitchAnal = function() {
 		legsDesc  : function() { return player.LegsDesc(); },
 		ballsDesc : function() { return player.BallsDesc(); },
 		vagDesc   : function() { return player.FirstVag().Short(); },
-		clitDesc  : function() { return player.FirstVag().ClitShort(); }
+		clitDesc  : function() { return player.FirstVag().ClitShort(); },
+		hand      : function() { return player.HandDesc(); }
 	};
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
@@ -1299,7 +1302,7 @@ Scenes.Roa.TSLPostSexPrompt = function(p1cock, mStrap) {
 				Text.Add("You shake your head and tut in disapproval; your Roa deserves better than that. You promise that you’ll come back as soon as it’s possible.", parse);
 			}
 			Text.NL();
-			Text.Add("Having dressed yourself again, you place the [coin] for Roa’s services on the dresser and head back out.", parse);
+			Text.Add("Having dressed yourself again, you head back out.", parse);
 			Text.Flush();
 			
 			roa.relation.IncreaseStat(50, 1);
@@ -1352,7 +1355,7 @@ Scenes.Roa.TSLPostSexPrompt = function(p1cock, mStrap) {
 		func : function() {
 			Text.Clear();
 			if(roa.Relation() < 20)
-				Text.Add("<i>“Very well, thank you for your patronage, [sirMa’am],”</i> he says, bowing with a smile.", parse);
+				Text.Add("<i>“Very well, thank you for your patronage, [fem],”</i> he says, bowing with a smile.", parse);
 			else if(roa.Relation() < 40)
 				Text.Add("<i>“That’s too bad. I guess I’ll see you some other time then, [playername],”</i> he says with a disappointed sigh.", parse);
 			else {
