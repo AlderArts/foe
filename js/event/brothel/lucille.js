@@ -139,7 +139,7 @@ Scenes.Lucille.WhoreAftermath = function(name, cost) {
 			func : function() {
 				Text.Clear();
 				payFunc();
-			}, enabled : true,
+			}, enabled : party.coin >= cost,
 			tooltip : Text.Parse("Pay the [coin] you owe her.", parse)
 		});
 		options.push({ nameStr : "Shark",
