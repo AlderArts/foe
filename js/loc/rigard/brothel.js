@@ -56,7 +56,7 @@ world.loc.Rigard.Brothel.brothel.events.push(new Link(
 		if(roa.Met())
 			Text.Add("Roa the lapin is at his usual spot, clad in his skimpy outfit. He looks around for a potential john or jill, visibly sighing at the apparent lack of interest.");
 		else
-			Text.Add("A petitely built feminine rabbit-morph is over near the corner, lounging amongst the pillows on a plush couch. She casts a hopeful eye towards any potential customers.");
+			Text.Add("A petitely built feminine rabbit-morph is over near the corner, lounging amongst the pillows on a plush couch. She casts a hopeful eye toward any potential customers.");
 		Text.NL();
 	},
 	function() {
@@ -91,7 +91,7 @@ Scenes.Brothel.First = function() {
 	Text.Add("Your view is obstructed by a wall of muscle and teeth, as a large, blocky shark-morph steps in front of you, eyeing you suspiciously. ", parse);
 	Text.Add(player.mfFem("He doesn’t look particularly happy to see you. Perhaps he doesn’t like your clothes.", "He quickly changes his expression as he gets a proper look at you, a wide, toothy grin slowly spreading across his face."));
 	Text.NL();
-	Text.Add("<i>“Now now, I’ll not have you take that attitude towards potential customers!”</i> The owner of the throaty voice, a stunning woman with dusky skin and curly jet black hair, makes her way over to you, her hips swaying alluringly. The blocky bouncer turns to face her, nodding slowly. He steps aside, returning his attention to the room at large.", parse);
+	Text.Add("<i>“Now now, I’ll not have you take that attitude toward potential customers!”</i> The owner of the throaty voice, a stunning woman with dusky skin and curly jet black hair, makes her way over to you, her hips swaying alluringly. The blocky bouncer turns to face her, nodding slowly. He steps aside, returning his attention to the room at large.", parse);
 	Text.NL();
 	Text.Add("<i>“Pardon me for that, [handsomePretty],”</i> the lady gushes, adjusting a stray lock of her hair. <i>“Now, what can I do to help you? The Shadow Lady provides many services for one such as you… and perhaps opportunities as well.”</i>", parse);
 	Text.NL();

@@ -469,7 +469,7 @@ Scenes.Kyna.IntroSexPrompt = function() {
 				Text.NL();
 				Text.Add("Grinning inwardly, you set one of your hands upon her belly, slowly letting it feel its way up to her shivering chest. The flustered ferret cautiously shies away from your touches, only starting to relax when you grope and massage her bosom. Kyna sighs and looks at a spot on the wall, trying to think of other things. But you’ll have none of that; seating yourself atop her, you tweak and fondle her modest breasts.", parse);
 				Text.NL();
-				Text.Add("Your sexually unpracticed partner tries to hide her reactions, unsure about the sensations she’s feeling at the hands of another woman. Deciding that it’s time your partner joined in more, you turn her face towards you and kiss her on the lips. Squealing from surprise, she tries in vain to push you away, moving her hands from their stalwart defence of her nethers.", parse);
+				Text.Add("Your sexually unpracticed partner tries to hide her reactions, unsure about the sensations she’s feeling at the hands of another woman. Deciding that it’s time your partner joined in more, you turn her face toward you and kiss her on the lips. Squealing from surprise, she tries in vain to push you away, moving her hands from their stalwart defence of her nethers.", parse);
 				Text.NL();
 				Text.Add("Seizing the opportunity, you quickly slide a hand between her legs, surprising her with gentle rubs on her untouched pussy. Breaking the kiss, you give her a moment to breathe, then resume playing with her feminine parts. Her moans and writhing limbs expose the stimulation she’s feeling.", parse);
 				Text.NL();

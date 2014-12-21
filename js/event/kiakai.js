@@ -4787,7 +4787,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 				if(attitude == Kiakai.SexFirstAttitude.Passive) {
 					Text.Add("<i>“C-could you do that thing you said?”</i> [name] nervously queries you. Smiling coyly, you ask the elf to be more specific.", parse);
 					Text.NL();
-					Text.Add("<i>“Before, you said that... there were different ways to have penetrative sex,”</i> [heshe] finishes lamely. Getting an inkling of what [heshe] is after, you rub the elf's back, your hand trailing down towards [hisher] [kButtDesc].", parse);
+					Text.Add("<i>“Before, you said that... there were different ways to have penetrative sex,”</i> [heshe] finishes lamely. Getting an inkling of what [heshe] is after, you rub the elf's back, your hand trailing down toward [hisher] [kButtDesc].", parse);
 					Text.NL();
 					Text.Add("<i>“Could it be... you mean <b>this</b>?”</i> you punctuate your question by slapping [name]'s exposed cheeks.", parse);
 					Text.NL();
@@ -5405,7 +5405,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 					Scenes.Kiakai.AnalCatchPrep(Kiakai.AnalCatchPrepScene.Selfsuck);
 				}, 1.0, function() { return kiaiCock.length.Get() >= 25; });
 				scenes.AddEnc(function() {
-					Text.Add("<i>“P-perhaps you can provide some?”</i> the elf stutter. When you raise your eyebrow quizzically, [heshe] gestures towards your [multiCockDesc], embarrassed.", parse);
+					Text.Add("<i>“P-perhaps you can provide some?”</i> the elf stutter. When you raise your eyebrow quizzically, [heshe] gestures toward your [multiCockDesc], embarrassed.", parse);
 					Scenes.Kiakai.AnalCatchPrep(Kiakai.AnalCatchPrepScene.Frot);
 				}, 1.0, function() { return player.FirstCock(); });
 				// TODO: Other oils?
@@ -6027,7 +6027,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 			scenes.AddEnc(function() {
 				Text.Add("Smiling shyly, [hisher] eyes twinkling at you past thick lashes, [name] rolls over on [hisher] back, sitting you down on [hisher] lap. Experimentally, [heshe] lifts you up, letting gravity ease you back down on [hisher] shaft. You hug the elf tightly against your [breastDesc], moving your hips up and down to help [himher] build a rhythm again.", parse);
 				Text.NL();
-				Text.Add("Your breath grows shorter as you impale yourself on [name]’s erect member. By now, both of you are too far gone to slow down, reduced to whimpering moans as you copulate, your sweaty bodies racing towards a simultaneous climax.", parse);
+				Text.Add("Your breath grows shorter as you impale yourself on [name]’s erect member. By now, both of you are too far gone to slow down, reduced to whimpering moans as you copulate, your sweaty bodies racing toward a simultaneous climax.", parse);
 				Text.NL();
 				Text.Add("<i>“I... almost there,”</i> [name] groans. The elf props [himher]self up with [hisher] hands, and begins to rapidly pump your [anusDesc], the movements of [hisher] hips repeatedly piercing your hovering sphincter.", parse);
 				Text.NL();
@@ -6260,7 +6260,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 								if(cum > 3)
 									Text.Add(" Whether you wanted it or not, you're receiving a literal shower, as a seemingly endless stream of sticky semen washes over you.", parse);
 								Text.NL();
-								Text.Add("[HisHer] legs unsteady, [name] staggers and stumbles onto [hisher] butt. The elf's hand trembles slightly as [heshe] leans over and caresses your painted backside, smearing [hisher] cum across your buttocks. You whimper slightly as your skin tingles from [hisher] touch. Taking pity on your needy state, [heshe] begins to pleasure you orally, urging you towards your own climax.", parse);
+								Text.Add("[HisHer] legs unsteady, [name] staggers and stumbles onto [hisher] butt. The elf's hand trembles slightly as [heshe] leans over and caresses your painted backside, smearing [hisher] cum across your buttocks. You whimper slightly as your skin tingles from [hisher] touch. Taking pity on your needy state, [heshe] begins to pleasure you orally, urging you toward your own climax.", parse);
 								kiakai.subDom.DecreaseStat(20, 1);
 							}
 							

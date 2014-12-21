@@ -134,7 +134,7 @@ Scenes.Magnus.Interact = function() {
 					Text.Add("He goes on to tell you various things about his studies of the art of magic, and you are amazed at how dry and boring he can make conjuring fireballs sound. Despite yourself, you sort of drowse off, shaking yourself in order to not fall asleep.", parse);
 					Text.NL();
 					if(magnus.flags["Confronted"] != 0) {
-						Text.Add("<i>“One day, I was no longer welcome there anymore.”</i> Magnus sighs sadly. <i>“If what you told me is true, I have my suspicions to what the cause may have been.”</i> The magician shakes his head despairingly. <i>“I- I must remain strong, and not let this entity become my master. I must study more...”</i> He waves towards his books uncertainly, grasping for the one constant in his troubled existence.", parse);
+						Text.Add("<i>“One day, I was no longer welcome there anymore.”</i> Magnus sighs sadly. <i>“If what you told me is true, I have my suspicions to what the cause may have been.”</i> The magician shakes his head despairingly. <i>“I- I must remain strong, and not let this entity become my master. I must study more...”</i> He waves toward his books uncertainly, grasping for the one constant in his troubled existence.", parse);
 					}
 					else {
 						Text.Add("<i>“But alas, one day I was not welcome at the academy anymore.”</i> Magnus sighs to himself, despairing at the unfair nature of the world. <i>“I couldn’t even get a rational statement out of my teachers, they just chucked me out on the street and told me to never come back. They seemed almost… afraid. I’m not sure why, I mostly studied and meditated, never harmed a fly.”</i> The apprentice shrugs and gestures to the old tome he is currently reading.", parse);

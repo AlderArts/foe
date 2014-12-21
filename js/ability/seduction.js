@@ -339,7 +339,7 @@ Abilities.Seduction.Charm.OnHit = function(encounter, caster, target, dmg) {
 	}
 	
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.AddOutput("[tName] become[s] charmed, gaining " + Text.BoldColor(dmg, "#FF8080") + " lust! [HeShe] become[s] less aggressive towards [name].", parse);
+	Text.AddOutput("[tName] become[s] charmed, gaining " + Text.BoldColor(dmg, "#FF8080") + " lust! [HeShe] become[s] less aggressive toward [name].", parse);
 	Text.Newline();
 }
 
@@ -366,6 +366,6 @@ Abilities.Seduction.Allure.OnHit = function(encounter, caster, target, dmg) {
 	}
 	
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.AddOutput("[tName] become[s] charmed, gaining " + Text.BoldColor(dmg, "#FF8080") + " lust! [HeShe] become[s] less aggressive towards [name].", parse);
+	Text.AddOutput("[tName] become[s] charmed, gaining " + Text.BoldColor(dmg, "#FF8080") + " lust! [HeShe] become[s] less aggressive toward [name].", parse);
 	Text.Newline();
 }

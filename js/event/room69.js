@@ -106,7 +106,7 @@ Scenes.Room69.Discovering69 = function() {
 	Text.NL();
 	Text.Add("A room?", parse);
 	Text.NL();
-	Text.Add("<i>“Do not let my seeming immobility fool you,”</i> the room says, <i>“for all the important bits move just fine.”</i> As if to punctuate the claim, one of the bed’s pillows crawls towards you in apparent invitation.", parse);
+	Text.Add("<i>“Do not let my seeming immobility fool you,”</i> the room says, <i>“for all the important bits move just fine.”</i> As if to punctuate the claim, one of the bed’s pillows crawls toward you in apparent invitation.", parse);
 	Text.Flush();
 	
 	Scenes.Room69.introTalkedSentience = false;
@@ -142,7 +142,7 @@ Scenes.Room69.Discovering69Prompt = function() {
 		options.push({ nameStr : "Leave",
 			func : function() {
 				Text.Clear();
-				Text.Add("Without saying a word, you turn around, and head towards the door. You attempt to turn the handle, but it simply refuses to move.", parse);
+				Text.Add("Without saying a word, you turn around, and head toward the door. You attempt to turn the handle, but it simply refuses to move.", parse);
 				Text.NL();
 				if(player.Str() < room69.Str()) {
 					Text.Add("<i>“Oh no, no, no,”</i> the room chides you, sounding almost petulant, <i>“you should not leave so soon. We have barely begun to get to know each other, dearest.”</i>", parse);
@@ -226,7 +226,7 @@ Scenes.Room69.Discovering69WhatNow = function() {
 				Text.NL();
 				Text.Add("You can’t help but feel a little bad for the room, but you see your chance to drive home your point and get out. <i>“No way. No how. I think something bit me while I was sitting here, you flea-ridden dump.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“J-just go. You’re so mean,”</i> the voice is sounding more feminine and on the verge of tears. The door swings open wide, and as you rise to leave you see the table edging towards you, as if to push you out.", parse);
+				Text.Add("<i>“J-just go. You’re so mean,”</i> the voice is sounding more feminine and on the verge of tears. The door swings open wide, and as you rise to leave you see the table edging toward you, as if to push you out.", parse);
 				Text.NL();
 				Text.Add("As you make your way out into the hallway, a petulant <i>“And don’t come back!”</i> comes from Sixtynine as the door slams shut behind you.", parse);
 				
@@ -435,13 +435,13 @@ Scenes.Room69.Discovering69Sex = function() {
 	if(player.FirstBreastRow().Size() > 3) {
 		Text.Add("Before you are even finished removing your top, the sheet snakes around you from behind under your clothes, curving around one of your breasts. <i>“Sorry, I couldn’t wait. So soft, so lovely...”</i>", parse);
 		Text.NL();
-		Text.Add("You bite your lip as the cloth tentacle squeezes your breast gently, and massages it in a circular motion beneath your clothes. You shiver as the tip traces slowly, too slowly, across your breast towards the center, barely brushing your skin. Finally, it twirls softly around your [nipsDesc], pinching it lightly. You gasp quietly, and press forward into the cloth, seeking greater stimulation.", parse);
+		Text.Add("You bite your lip as the cloth tentacle squeezes your breast gently, and massages it in a circular motion beneath your clothes. You shiver as the tip traces slowly, too slowly, across your breast toward the center, barely brushing your skin. Finally, it twirls softly around your [nipsDesc], pinching it lightly. You gasp quietly, and press forward into the cloth, seeking greater stimulation.", parse);
 		Text.NL();
 		Text.Add("<i>“Good [boygirl],”</i> Sixtynine says, punctuating the praise by gently twisting your nipple, which elicits a louder moan. <i>“You are so wonderfully sensitive. I’ll take you to heights you can’t imagine. All you have to do is behave.”</i>", parse);
 		Text.NL();
 		Text.Add("You feel another brush across your back as a second sheet twists itself under your [topArmorDesc], and gets to work on your other[nipType] nipple. <i>“Don’t forget about undressing, now,”</i> the silky voice gently chides. Blushing, you realise that you had done just that, sitting still, your breath coming in soft gasps, all your attention on the sheet tentacles playing with your breasts.", parse);
 		Text.NL();
-		Text.Add("With a burst of concentration, your [topArmorDesc] comes off, and you throw [topitthem] towards a corner. Your hands are torn between reaching up to help Sixtynine with your breasts and reaching down...", parse);
+		Text.Add("With a burst of concentration, your [topArmorDesc] comes off, and you throw [topitthem] toward a corner. Your hands are torn between reaching up to help Sixtynine with your breasts and reaching down...", parse);
 		Text.NL();
 		Text.Add("<i>“Oh, would you like me to be rougher? You need only ask,”</i> the room offers.", parse);
 		Text.NL();
@@ -485,7 +485,7 @@ Scenes.Room69.Discovering69Sex = function() {
 		parse["gen"] = Text.Parse("rigid erection[s]", {s: player.NumCocks() > 1 ? "s" : ""});
 	else if(player.FirstVag())
 		parse["gen"] = Text.Parse("wet opening", parse);
-	Text.Add(" With the path clear, your hands do not hesitate in plunging towards your [gen]. <i>“Ah-ah,”</i> Sixtynine interrupts you. <i>“Just lie back and let me take care of everything. We wouldn’t want your climax to be over too quickly...”</i>", parse);
+	Text.Add(" With the path clear, your hands do not hesitate in plunging toward your [gen]. <i>“Ah-ah,”</i> Sixtynine interrupts you. <i>“Just lie back and let me take care of everything. We wouldn’t want your climax to be over too quickly...”</i>", parse);
 	Text.NL();
 	Text.Add("The room has been good to you so far, and you decide to give it a chance here. You lie back on the bed, ", parse);
 	if(player.FirstBreastRow().Size() > 3)
@@ -778,7 +778,7 @@ Scenes.Room69.ApologizeTo69ForBreakingDoor = function() {
 			Text.NL();
 			Text.Add("<i>“No hinges, no you being here!”</i> the voice exclaims imperiously. <i>“Begone!”</i>", parse);
 			Text.NL();
-			Text.Add("The room’s lone chair advances menacingly towards you, and you decide you might as well go to avoid making the relationship any worse.", parse);
+			Text.Add("The room’s lone chair advances menacingly toward you, and you decide you might as well go to avoid making the relationship any worse.", parse);
 			Text.Flush();
 			world.TimeStep({minute: 10});
 			Gui.NextPrompt();
@@ -892,7 +892,7 @@ Scenes.Room69.ApologizeTo69ForBeingMean = function() {
 				Text.NL();
 				Text.Add("A chortle sounds from the air. <i>“Well, that was quite good, I have to admit,”</i> the ethereal voice says, pleased. <i>“I never knew a verbal punching bag could be so pleasant. Do come back some time - I’ll even spare you if you behave well for a change. Probably.”</i>", parse);
 				Text.NL();
-				Text.Add("Looks like you managed to make up with the room, after a fashion. Not the fashion you would have liked, but you decide that at this point it will do, and take the chance slink off towards the exit.", parse);
+				Text.Add("Looks like you managed to make up with the room, after a fashion. Not the fashion you would have liked, but you decide that at this point it will do, and take the chance slink off toward the exit.", parse);
 				// rel still -10
 			}
 			Text.Flush();

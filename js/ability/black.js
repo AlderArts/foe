@@ -89,7 +89,7 @@ Abilities.Black.Fireball.cost = { hp: null, sp: 10, lp: null};
 Abilities.Black.Fireball.damageType.mFire = 1;
 Abilities.Black.Fireball.OnCast = function(encounter, caster, target) {
 	var parse = { name : caster.NameDesc(), himher : caster.himher(), hisher : caster.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("[name] make[s] mystic incantations, waving [hisher] [hand]s in the air. Fiery glyphs appear in front of [himher], coalascing in a large fireball forming between [hisher] outstretched [hand]s. With a great roar, the molten ball of magic surge towards [tName]! ", parse);
+	Text.AddOutput("[name] make[s] mystic incantations, waving [hisher] [hand]s in the air. Fiery glyphs appear in front of [himher], coalascing in a large fireball forming between [hisher] outstretched [hand]s. With a great roar, the molten ball of magic surge toward [tName]! ", parse);
 }
 Abilities.Black.Fireball.OnAbsorb = function(encounter, caster, target, dmg) {
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s" };
@@ -183,7 +183,7 @@ Abilities.Black.Shimmer.damageType.mLight = 1;
 Abilities.Black.Shimmer.atkMod = 1.1;
 Abilities.Black.Shimmer.OnCast = function(encounter, caster, target) {
 	var parse = { possessive : caster.possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("A brilliant sphere of blinding light forms between [possessive] [hand]s, summoned by the power of [hisher] magic. At the uttering of a single word, it speeds towards [tName]! ", parse);
+	Text.AddOutput("A brilliant sphere of blinding light forms between [possessive] [hand]s, summoned by the power of [hisher] magic. At the uttering of a single word, it speeds toward [tName]! ", parse);
 }
 
 Abilities.Black.Shade = new AttackSpell();
@@ -216,7 +216,7 @@ Abilities.Black.WindShear.damageType.mWind = 1;
 Abilities.Black.WindShear.atkMod = 1.1;
 Abilities.Black.WindShear.OnCast = function(encounter, caster, target) {
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("[Possessive] [hand]s weave back and forth, summoning a powerful gale of shreaking winds. A frenzy of cutting and slicing air surge towards [tName]! ", parse);
+	Text.AddOutput("[Possessive] [hand]s weave back and forth, summoning a powerful gale of shreaking winds. A frenzy of cutting and slicing air surge toward [tName]! ", parse);
 }
 
 Abilities.Black.Stalagmite = new AttackSpell();
@@ -328,7 +328,7 @@ Abilities.Black.Venom.OnHit = null;
 Abilities.Black.Venom.OnAbsorb = null;
 Abilities.Black.Venom.OnCast = function(encounter, caster, target) {
 	var parse = { possessive : caster.possessive(), target : target.nameDesc(), heshe : caster.heshe(), hand : caster.HandDesc() };
-	Text.AddOutput("Toxic slime drips from [possessive] [hand]s as [heshe] points them towards [target]. ", parse);
+	Text.AddOutput("Toxic slime drips from [possessive] [hand]s as [heshe] points them toward [target]. ", parse);
 }
 Abilities.Black.Venom.TargetEffect = function(encounter, caster, target) {
 	var parse = { target : target.NameDesc(), has : target.has(), s : target.plural() ? "" : "s" };

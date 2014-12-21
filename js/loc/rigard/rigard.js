@@ -1313,7 +1313,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		parse["castle"] = rigard.CastleAccess() ? "the purple livery of a castle servant" : "purple livery of a fine quality";
 		Text.Add("You notice a girl struggling with an already massive sack approach one of the merchants’ stalls. She wears [castle] - looks like her mistress sent her on quite the large errand.", parse);
 		Text.NL();
-		Text.Add("She leans in towards the man, and whispers something, too quiet for you to hear. Her cheeks turn a bright crimson, and she darts looks everywhere but at the merchant’s face.", parse);
+		Text.Add("She leans in toward the man, and whispers something, too quiet for you to hear. Her cheeks turn a bright crimson, and she darts looks everywhere but at the merchant’s face.", parse);
 		Text.NL();
 		Text.Add("<i>“Ha! You want <b>what</b>, girl?”</i> the man asks, grinning wide. <i>“No one here carries bottles of that particular liquid!”</i>", parse);
 		Text.NL();
@@ -1378,7 +1378,7 @@ Scenes.Rigard.Lockdown = function() {
 			Text.Add("You'd sooner swallow live spiders in butter than help her, but you <b>don't</b> need this sort of hassle. Certainly not when you actually <b>are</b> a criminal who raided the Krawitz manor, even if you're not the one they're actually looking for. Swallowing back your resentment, you tell Miranda that you understand what she's saying; you'll help.", parse);
 		}
 		else {
-			Text.Add("Unconsciously, your eyes drift towards her legs, when you know her prodigious cock lies, and you lick your lips involuntarily. The... offer? threat? in her statement is <b>so</b> very tempting... still, you mightn't be the precise criminal they're after, but you still are a criminal. You can't afford to be taken in, even by accident. You quickly assure Miranda that you'll help her.", parse);
+			Text.Add("Unconsciously, your eyes drift toward her legs, when you know her prodigious cock lies, and you lick your lips involuntarily. The... offer? threat? in her statement is <b>so</b> very tempting... still, you mightn't be the precise criminal they're after, but you still are a criminal. You can't afford to be taken in, even by accident. You quickly assure Miranda that you'll help her.", parse);
 		}
 	}
 	Text.NL();
@@ -1421,7 +1421,7 @@ Scenes.Rigard.Lockdown = function() {
 	}
 	Text.Add("Adjusting yourself to your impromptu drafting, you ask the dog-morph if she has a plan as to where to begin.", parse);
 	Text.NL();
-	Text.Add("<i>“We should discuss a few details before we get started. So, let’s go to the Maiden’s Bane and plan our moves,”</i> she says, leading you towards her favorite watering hole.", parse);
+	Text.Add("<i>“We should discuss a few details before we get started. So, let’s go to the Maiden’s Bane and plan our moves,”</i> she says, leading you toward her favorite watering hole.", parse);
 	Text.Flush();
 	
 	party.location = world.loc.Rigard.Tavern.common;
@@ -1573,7 +1573,7 @@ Scenes.Rigard.Lockdown = function() {
 					Text.Clear();
 					Text.Add("<i>“What? Come on! You’re not gonna pussy out on me just because I have a dick now, are you?”</i> she frowns, clearly not happy with you.", parse);
 					Text.NL();
-					Text.Add("When you fail to reply she just rolls her eyes and pulls her pants back up. <i>“Typical… should’ve expected that.”</i> She walks past you, heading towards the door. <i>“You coming or you’re just going to stand there like an idiot?”</i>", parse);
+					Text.Add("When you fail to reply she just rolls her eyes and pulls her pants back up. <i>“Typical… should’ve expected that.”</i> She walks past you, heading toward the door. <i>“You coming or you’re just going to stand there like an idiot?”</i>", parse);
 					Text.NL();
 					Text.Add("Jolted into action, you follow after her, as she leads you out of the Maiden’s Bane and back inside Rigard’s gates.", parse);
 					Text.Flush();
@@ -1597,7 +1597,7 @@ Scenes.Rigard.Lockdown = function() {
 				options.push({ nameStr : "TakeCharge",
 					func : function() {
 						Text.Clear();
-						Text.Add("Authoritatively, you push your chair back and stand up. Throwing her a proud smirk, you saunter around the tabletop towards her, your gaze never leaving hers as you close the distance. Cupping her chin in your hand, your lips descend to cover hers possessively, hungrily thrusting your [tongueDesc] into the warm wetness of her mouth to wrestle with her own.", parse);
+						Text.Add("Authoritatively, you push your chair back and stand up. Throwing her a proud smirk, you saunter around the tabletop toward her, your gaze never leaving hers as you close the distance. Cupping her chin in your hand, your lips descend to cover hers possessively, hungrily thrusting your [tongueDesc] into the warm wetness of her mouth to wrestle with her own.", parse);
 						Text.NL();
 						Text.Add("For several long, pleasant moments the two of you tongue-wrestle, softly moaning and mumbling your pleasure into each other's lips, before you release her. Smirking down at the panting herm, her erection visibly tenting her pants from this angle, you mockingly ask her how she intends to have you sex her whilst she insists on keeping that pretty rump of hers all covered up in her uniform.", parse);
 						Text.Flush();

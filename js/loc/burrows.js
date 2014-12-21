@@ -276,7 +276,7 @@ Scenes.Burrows.FirstApproach = function() {
 	options.push({ nameStr : "Leave",
 		func : function() {
 			Text.NL();
-			Text.Add("You still have some second thoughts about approaching the unpredictable mob. You decide to head back towards the crossroads.", parse);
+			Text.Add("You still have some second thoughts about approaching the unpredictable mob. You decide to head back toward the crossroads.", parse);
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
@@ -314,7 +314,7 @@ Scenes.Burrows.FirstApproach = function() {
 			Text.NL();
 			Text.Add("<i>“Friend, yes? Join colony, yes?”</i> The alpha looks excited, and the mood seems to be spreading. Dimly, you notice that quite a large number of rabbits have gathered around you, whispering to each other and pointing at you. You nod, a bit uncertain, which seems to delight [m1himher].", parse);
 			Text.NL();
-			Text.Add("<i>“Big party! Come, come!”</i> Before you even have a chance to respond, you[comp] are whisked up by the mob, hoisted on the paws of dozens of lagomorphs. Ignoring your protests, the alpha leads the way towards the hills, with you in tow.", parse);
+			Text.Add("<i>“Big party! Come, come!”</i> Before you even have a chance to respond, you[comp] are whisked up by the mob, hoisted on the paws of dozens of lagomorphs. Ignoring your protests, the alpha leads the way toward the hills, with you in tow.", parse);
 			Text.NL();
 			Text.Add("Perhaps this wasn’t the most well thought out plan.", parse);
 			Text.Flush();
@@ -363,7 +363,7 @@ Scenes.Burrows.Arrival = function(alpha) {
 	Text.NL();
 	Text.Add("The room is packed with more of the small creatures, engaged in undoubtedly the largest orgy you have ever witnessed. There must be hundreds of them in there. The air is thick with the smells and sounds of sex; lustful moans and grunts so numerous they meld into a continuous drone.", parse);
 	Text.NL();
-	Text.Add("You are carried down a slope, presumably towards the center of the chamber. Sneaking a look to the side, you see what almost looks like irrigation canals carrying sticky sexual fluids downstream. Everywhere your eye can see, large clusters of rabbits are fornicating, driven by their frantic lust and seemingly endless supply of energy. It doesn’t seem just for reproduction either, as you see plenty of already pregnant females, a well as a large number of males, being on the receiving end.", parse);
+	Text.Add("You are carried down a slope, presumably toward the center of the chamber. Sneaking a look to the side, you see what almost looks like irrigation canals carrying sticky sexual fluids downstream. Everywhere your eye can see, large clusters of rabbits are fornicating, driven by their frantic lust and seemingly endless supply of energy. It doesn’t seem just for reproduction either, as you see plenty of already pregnant females, a well as a large number of males, being on the receiving end.", parse);
 	Text.NL();
 	Text.Add("The small streams of the intricate irrigation system join together into larger streams, finally seeping into what looks like a pool - a very sticky, cream-colored pool. You idly wonder how long this has been going on to gather this much... fluids. Knee-deep in the accumulated spooge is without a doubt the largest lagomorph specimen you have seen so far.", parse);
 	Text.NL();
@@ -569,7 +569,7 @@ Scenes.Burrows.ArrivalOpheliaTalk = function() {
 					Text.NL();
 					Text.Add("Before you have time to make your next move, you feel a sharp prick on the side of your neck. Ophelia lithely hops back as you twirl around to face your attacker. There is a dripping needle in one of her hands.", parse);
 					Text.NL();
-					Text.Add("<i>“Sorry, but you’ll have to go meet father,”</i> Ophelia tells you. You take a step towards her, but you are growing weak, your vision blurring as the substance injected into your veins starts to take effect. Sound fades as the world spins, the ground speeding in from the side, connecting with your skull in a dull thud.", parse);
+					Text.Add("<i>“Sorry, but you’ll have to go meet father,”</i> Ophelia tells you. You take a step toward her, but you are growing weak, your vision blurring as the substance injected into your veins starts to take effect. Sound fades as the world spins, the ground speeding in from the side, connecting with your skull in a dull thud.", parse);
 					Text.NL();
 					Text.Add("...", parse);
 					Text.NL();

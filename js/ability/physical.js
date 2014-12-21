@@ -267,7 +267,7 @@ Abilities.Physical.SetTrap.CastInternal = function(encounter, caster) {
 		if(encounter.combatOrder[i].entity == caster)
 			encounter.combatOrder[i].initiative -= 100;
 	}
-	// Reduce everyones aggro towards trapper
+	// Reduce everyones aggro toward trapper
 	for(var i = 0; i < encounter.combatOrder.length; i++) {
 		var activeChar = encounter.combatOrder[i];
 		var aggroEntry = GetAggroEntry(activeChar, caster);
@@ -477,7 +477,7 @@ Abilities.Physical.Provoke.OnHit = function(encounter, caster, target, dmg) {
 		aggroEntry.aggro += 1;
 	
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.AddOutput("[tName] become[s] agitated, becoming more aggressive towards [name]!", parse);
+	Text.AddOutput("[tName] become[s] agitated, becoming more aggressive toward [name]!", parse);
 	Text.Newline();
 }
 Abilities.Physical.Provoke.OnAbsorb = Abilities.Physical.Provoke.OnHit;
@@ -508,7 +508,7 @@ Abilities.Physical.Taunt.OnHit = function(encounter, caster, target, dmg) {
 		aggroEntry.aggro += 3;
 	
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.AddOutput("[tName] become[s] agitated, becoming more aggressive towards [name]!", parse);
+	Text.AddOutput("[tName] become[s] agitated, becoming more aggressive toward [name]!", parse);
 	Text.Newline();
 }
 Abilities.Physical.Taunt.OnAbsorb = Abilities.Physical.Taunt.OnHit;

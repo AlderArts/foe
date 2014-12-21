@@ -115,7 +115,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 				Text.Add("From what you gather these men belong to the royal guard, whose only task is to protect the nobility and the royal family. It seems like you are causing a bit of a scene, and a few curious passersby stop to watch, whispering among themselves. Frustrated, you decide to back down for now.", parse);
 				Text.NL();
 				
-				Text.Add("As you turn to leave, you spot a postern gate open in the wall a few hundred paces to your left, and two people come out. Both of them wear gray cloaks, their hoods drawn, so you cannot make out much of their features. They are of a height, and walk companionably side by side, heading out towards the city. You point them out, and ask the guards who they are, curiously.", parse);
+				Text.Add("As you turn to leave, you spot a postern gate open in the wall a few hundred paces to your left, and two people come out. Both of them wear gray cloaks, their hoods drawn, so you cannot make out much of their features. They are of a height, and walk companionably side by side, heading out toward the city. You point them out, and ask the guards who they are, curiously.", parse);
 				Text.NL();
 				if(humanity < 0.95) {
 					Text.Add("<i>“No one your kind need concern themselves with,”</i> you get for a response. You stubbornly look at the guard, and he rolls his eyes in annoyance. <i>“Look,”</i> he speaks slowly and clearly, as if to a child, <i>“there are esteemed personages for whom special allowances are made, and who may pass in or out wherever they please.”</i>", parse);
@@ -126,9 +126,9 @@ world.loc.Rigard.Plaza.links.push(new Link(
 					Text.Add("The guard sighs in exasperation. <i>“There are esteemed personages for whom special allowances are made, and who may pass in or out wherever they please. Even I don’t know who those two were.”</i> He sneers at you behind his visor. <i>“All I can say for sure is that they are so far above you, they would not even look at you.”</i>", parse);
 				}
 				Text.NL();
-				Text.Add("You turn to go, leaving the unfriendly watchmen behind you. The pair you saw exit the wall are still barely in sight, and on impulse you hurry towards them. Of course the guard said they wouldn’t speak to you, but it’s not like you have any better leads to follow.", parse);
+				Text.Add("You turn to go, leaving the unfriendly watchmen behind you. The pair you saw exit the wall are still barely in sight, and on impulse you hurry toward them. Of course the guard said they wouldn’t speak to you, but it’s not like you have any better leads to follow.", parse);
 				Text.NL();
-				Text.Add("Past the couple, you spot another figure heading slowly towards them. He seems almost innocuous, but after a few moments you spot what drew your attention to him. He carefully maintains a set distance from the couple, clearly following them. You can’t quite make out his face at the distance, but you notice that his right hand hovers at his hip, fingering the hilt of a sword.", parse);
+				Text.Add("Past the couple, you spot another figure heading slowly toward them. He seems almost innocuous, but after a few moments you spot what drew your attention to him. He carefully maintains a set distance from the couple, clearly following them. You can’t quite make out his face at the distance, but you notice that his right hand hovers at his hip, fingering the hilt of a sword.", parse);
 				if(lei.flags["Met"] == Lei.Met.SeenInn)
 					Text.Add(" You realize that you’ve seen him before, in the common room of the Lady’s Blessing inn.", parse);
 				Text.NL();

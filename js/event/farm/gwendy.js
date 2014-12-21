@@ -999,7 +999,7 @@ Scenes.Gwendy.ChallengeSexHands = function(cock, hangout) {
 	if(cock) {
 		parse["s"]     = player.NumCocks() > 1 ? "s" : "";
 		parse["oneof"] = player.NumCocks() > 1 ? " one of" : "";
-		Text.Add("Smirking, you thrust your groin towards her face. Gwendy stares at it for a moment, looking from your [multiCockDesc] to your eyes, then back at the rousing member[s]. Noticing the indecision on her face, you instruct Gwendy to pleasure you using just her hands.", parse);
+		Text.Add("Smirking, you thrust your groin toward her face. Gwendy stares at it for a moment, looking from your [multiCockDesc] to your eyes, then back at the rousing member[s]. Noticing the indecision on her face, you instruct Gwendy to pleasure you using just her hands.", parse);
 		if(first)
 			Text.Add(" She makes a small note of discomfort, but sets on fulfilling your desires.", parse);
 		else
@@ -1426,7 +1426,7 @@ Scenes.Gwendy.ChallengeSexOral = function(blow, hangout) {
 		if(!hangout)
 			Text.Add(" Besides, even if she did, she'd still have to honor the rules of the challenge.", parse);
 		Text.NL();
-		Text.Add("Spreading your legs, you invite her begin her task, and she gets to it silently. She starts with a lick, stroking your [clitDesc] in the process. She continues with tentative licks as she slowly works towards fully burying her tongue in your [vagDesc].", parse);
+		Text.Add("Spreading your legs, you invite her begin her task, and she gets to it silently. She starts with a lick, stroking your [clitDesc] in the process. She continues with tentative licks as she slowly works toward fully burying her tongue in your [vagDesc].", parse);
 		Text.NL();
 		
 		Sex.Cunnilingus(gwendy, player);
@@ -1709,7 +1709,7 @@ Scenes.Gwendy.ChallengeSexAnal = function(toys, hangout) {
 				Text.Add("you idly wonder who she was planning to use the latter on.", parse);
 			Text.Add(" As you look over the collection, you sense a certain theme here. Judging by her stash, Gwendy <i>really</i> seems to be into equine toys. More than two thirds of the toys are shaped like horsecocks of various sizes, some so big you are surprised her body could even take them.", parse);
 			Text.NL();
-			Text.Add("<i>“G-going through a girl’s private stuff like that,”</i> the farmer huffs, embarrassed as you let your curious gaze wander across her collection. Ignoring her, you ask if this is all of it, or if she is hiding more somewhere else. <i>“Yes!”</i> she pipes, though her eyes betray her, as she throws a brief glance towards a huge chest on the other end of the room. Chuckling, you walk over to it to see what she is hiding.", parse);
+			Text.Add("<i>“G-going through a girl’s private stuff like that,”</i> the farmer huffs, embarrassed as you let your curious gaze wander across her collection. Ignoring her, you ask if this is all of it, or if she is hiding more somewhere else. <i>“Yes!”</i> she pipes, though her eyes betray her, as she throws a brief glance toward a huge chest on the other end of the room. Chuckling, you walk over to it to see what she is hiding.", parse);
 			Text.NL();
 			Text.Add("Inside the chest, below some clothes, bed sheets and smaller trinkets, you find Gwendy’s old sword. Surely, this wasn’t what she meant... You are just about to close the chest when you spot a large bulge under one of the sheets. Pulling it aside, you reveal the biggest toy of her collection so far, an immense, double-ended horsecock dildo, at least fifteen inches to each side. It is quite well made, with flared heads and thick veiny sheaths. In addition to the obviously equine features of it, it’s covered in nubs, made to rub the user in all the right places.", parse);
 			Text.NL();
@@ -1991,7 +1991,7 @@ Scenes.Gwendy.ChallengeSexAnalToys = function(toy, hangout, first) {
 				
 				Gui.NextPrompt(function() {
 					Text.Clear();
-					Text.Add("<i>“Enough!”</i> Gwendy finally pants, dragging you back towards the loft.", parse);
+					Text.Add("<i>“Enough!”</i> Gwendy finally pants, dragging you back toward the loft.", parse);
 					Text.NL();
 					parse["cum"] = gwendy.FirstCock() ? "cum" : "clear liquid";
 					Text.Add("The last stretch is the worst for her, and as she climbs up the ladder in front of you, you see a trickle of [cum] slowly dripping down one of her legs. When you pull yourself up on the landing, Gwendy’s legs are shaking slightly in the afterglow of her anal orgasm.", parse);
@@ -2092,7 +2092,7 @@ Scenes.Gwendy.ChallengeSexAnalToys = function(toy, hangout, first) {
 			Text.Add("<i>“I think you’ll feel this one on your prostate,”</i> she grunts, punctuating her words with a roll of her hips. No doubt.", parse);
 		else
 			Text.Add("<i>“It feels good, doesn’t it?”</i> the farm girl sighs, letting you rest a bit before she starts moving in earnest.", parse);
-		Text.Add(" Entwining your legs together, you start to pull towards each other, pushing more and more of the double-ended toy into your respective holes. Before long, you start encountering the nubs. Oh Aria, the nubs. As if the toy itself wasn’t girthy enough, a myriad of bulging studs are set at irregular intervals, stretching your ring even farther when they pass it. Once inside, they drag against the walls of your colon, stirring you up even more.", parse);
+		Text.Add(" Entwining your legs together, you start to pull toward each other, pushing more and more of the double-ended toy into your respective holes. Before long, you start encountering the nubs. Oh Aria, the nubs. As if the toy itself wasn’t girthy enough, a myriad of bulging studs are set at irregular intervals, stretching your ring even farther when they pass it. Once inside, they drag against the walls of your colon, stirring you up even more.", parse);
 		Text.NL();
 		Text.Add("Nodding to Gwendy, you both get back on all fours, facing opposite directions. In unison, you start to rock your hips, trying to push against each other in order to force the toy deeper inside. ", parse);
 		if(player.AnalCap() >= 45) {
@@ -2301,7 +2301,7 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout, options) {
 						
 						Text.Add("As she lets out a happy sigh, you find yourself a little nervous about what she might do this time. The previous times, she just aggressively kissed and groped you, leaving you somewhat aroused but you’re sure this streak won’t continue.", parse);
 						Text.NL();
-						Text.Add("As if reading your exact thoughts, she approaches you. However, instead of doing something then and there she grabs your arm and pulls you towards her room. After climbing up the ladder, she pulls a chair from the table for you to sit in, while she stands and looks at you with a curious expression. Is she going to do something to get you off this time? That wasn’t something you’d expect from the victor, but you don’t mind it at all.", parse);
+						Text.Add("As if reading your exact thoughts, she approaches you. However, instead of doing something then and there she grabs your arm and pulls you toward her room. After climbing up the ladder, she pulls a chair from the table for you to sit in, while she stands and looks at you with a curious expression. Is she going to do something to get you off this time? That wasn’t something you’d expect from the victor, but you don’t mind it at all.", parse);
 						Text.NL();
 						Text.Add("However, it seems she has other ideas in mind. She tells you to strip your [armorDesc] before her as she steps closer, her expression changes to a predatory one. This can’t be good...", parse);
 						Text.NL();
@@ -2311,7 +2311,7 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout, options) {
 						Text.NL();
 						Text.Add("<i>“You feel up for another tease?”</i> Gwendy grins at your suggestion. <i>“I can keep you going for hours, and don’t expect me to let you get off. You must have a real masochistic streak, huh?”</i>", parse);
 						Text.NL();
-						Text.Add("Without allowing you any opportunity to respond, she bodily drags you towards the loft. After scaling the ladder, she pulls out a chair and instructs you to sit down.", parse);
+						Text.Add("Without allowing you any opportunity to respond, she bodily drags you toward the loft. After scaling the ladder, she pulls out a chair and instructs you to sit down.", parse);
 						Text.NL();
 					}
 					

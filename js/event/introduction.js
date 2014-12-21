@@ -2297,7 +2297,7 @@ Intro.KiaDecideOutset = function() {
 				tooltip : Text.Parse("You'll probably be better off on your own, could you really trust [name]?", {name : kiakai.name}),
 				func : function() {
 					kiakai.flags["Attitude"] = Kiakai.Attitude.Neutral;
-					Text.AddOutput("<i>“I understand,”</i> the elf nods sadly, <i>“I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.”</i> The elf bows to you and quietly moves towards the entrance of the tent, leaving you to your own devices.");
+					Text.AddOutput("<i>“I understand,”</i> the elf nods sadly, <i>“I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.”</i> The elf bows to you and quietly moves toward the entrance of the tent, leaving you to your own devices.");
 					Gui.NextPrompt(Intro.Finalizing);
 				}, enabled : true
 			});
@@ -2340,7 +2340,7 @@ Intro.KiaDecideOutset = function() {
 				tooltip : "What use could the elf possibly be?",
 				func : function() {
 					kiakai.flags["Attitude"] = Kiakai.Attitude.Neutral;
-					Text.AddOutput("<i>“I understand,”</i> the elf nods sadly, <i>“I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.”</i> The elf bows to you and quietly moves towards the entrance of the tent, leaving you to your own devices.");
+					Text.AddOutput("<i>“I understand,”</i> the elf nods sadly, <i>“I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.”</i> The elf bows to you and quietly moves toward the entrance of the tent, leaving you to your own devices.");
 					Gui.NextPrompt(Intro.Finalizing);
 				}, enabled : true
 			});

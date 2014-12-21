@@ -554,7 +554,7 @@ Scenes.Lei.ExplanationMain = function() {
 			Text.Clear();
 			Text.Add("You decide you might as well get it over with, and settle in to wait for the couple to come. You sit beside Lei, careful not to block his view, and the two of you drink in almost companionable silence while you wait.", parse);
 			Text.NL();
-			Text.Add("Sitting at the table by the wall, your only warning is the sound of two people’s steps before a red-headed couple emerge from the stairway. The way they walk, backs held straight, close enough that they are almost touching, seems familiar. Lei’s instant shift in attention towards them is enough to confirm your guess that this is the pair you were looking for.", parse);
+			Text.Add("Sitting at the table by the wall, your only warning is the sound of two people’s steps before a red-headed couple emerge from the stairway. The way they walk, backs held straight, close enough that they are almost touching, seems familiar. Lei’s instant shift in attention toward them is enough to confirm your guess that this is the pair you were looking for.", parse);
 			Text.NL();
 			Text.Add("To your surprise, you find that the young man and woman are wearing modest clothes - grey woolens better suited to poor commoners rather than the rich dress you expected to see. Perhaps they really are trying to be discrete, as Lei had said. If so, it’s not working very well, as the dull clothes provide a cute contrast to their blazing red hair, making them stand out all the more.", parse);
 			Text.NL();
@@ -618,7 +618,7 @@ Scenes.Lei.ObserveMain = function(first) {
 	if(first) {
 		Text.Add("Somehow, after talking to the man, you don’t feel like asking him after all. He probably wouldn’t answer anyway - it’ll be easier to find out for yourself.", parse);
 		Text.NL();
-		Text.Add("You murmur a goodbye and leave Lei’s table, making your way towards the middle of the common room. You pick out a seat at an empty table and settle in[comp]. It might be a little obvious you’re keeping track of him, but you figure there’s not much he can do about it.", parse);
+		Text.Add("You murmur a goodbye and leave Lei’s table, making your way toward the middle of the common room. You pick out a seat at an empty table and settle in[comp]. It might be a little obvious you’re keeping track of him, but you figure there’s not much he can do about it.", parse);
 		Text.NL();
 		Text.Add("You", parse);
 	}
@@ -631,7 +631,7 @@ Scenes.Lei.ObserveMain = function(first) {
 
 	// TODO #-drinks cost
 
-	Text.Add("Eventually, as you're beginning to wonder if this is really worth your time, your eyes snap up to the staircase and you see a red-haired couple descending. The way they walk, backs held straight, close enough that they are almost touching, seems familiar, and Lei’s instant shift in attention towards them is enough to confirm your suspicion that this is the pair you were looking for.", parse);
+	Text.Add("Eventually, as you're beginning to wonder if this is really worth your time, your eyes snap up to the staircase and you see a red-haired couple descending. The way they walk, backs held straight, close enough that they are almost touching, seems familiar, and Lei’s instant shift in attention toward them is enough to confirm your suspicion that this is the pair you were looking for.", parse);
 	Text.NL();
 	Text.Add("To your surprise, you find that the young man and woman are wearing modest clothes - grey woolens better suited to poor commoners rather than the rich garments you expected to see. Despite that, their proud bearing and the unusual blazing red of their hair somehow makes you feel like they’re more than their dress suggests.", parse);
 	Text.NL();
@@ -646,7 +646,7 @@ Scenes.Lei.ObserveMain = function(first) {
 	
 	Text.Add("As they pass by Lei, he again follows. By the time you remember you were supposed to talk to them and perhaps warn them about their stalker, they are most of the way to the door, and you hurry to catch up, pushing through the crowded common room.", parse);
 	Text.NL();
-	Text.Add("You make it through the door a little after Lei, and, spotting him walking down the street towards the lower sections of the city, hurry after him. You consider rushing past him towards the pair, but feel a tinge of worry at the idea. He would probably try to stop you, and you’re not sure you want to cross him without a good reason. Better to watch for now.", parse);
+	Text.Add("You make it through the door a little after Lei, and, spotting him walking down the street toward the lower sections of the city, hurry after him. You consider rushing past him toward the pair, but feel a tinge of worry at the idea. He would probably try to stop you, and you’re not sure you want to cross him without a good reason. Better to watch for now.", parse);
 	Text.NL();
 	Text.Add("You keep going in this odd little procession. Out front, the red-haired couple leads, Lei follows thirty paces behind them, and finally you [comp]trail another thirty paces behind him. Fortunately, there are still quite a few people out and about, so the fact that you’re following shouldn’t be too blatant.", parse);
 	Text.NL();
@@ -976,15 +976,15 @@ Scenes.Lei.BarFight = function() {
 									Text.Clear();
 									Text.Add("With a roar of outrage, you charge at Lei once more, your [feetDesc] finding even better purchase than before on the slightly damp cobblestones. Beyond the ability to form any coherent plans, you simply launch yourself at the man from three steps away, intending to simply hurl him down to the ground, and pound his head into the stones.", parse);
 									Text.NL();
-									Text.Add("<i>“So be it,”</i> his soft words seem to drift to you mid-jump, making your eyes go wide, your blood turning to ice, and your stomach lurching inside you. For a split moment, clarity seems to return to your thinking, and you wonder what it is you're doing, but you already see Lei drifting aside. He looks slow, languid even, his movements the gradual flow of a gentle stream as both his hands drift towards the hilt of his sword, and your momentum carries you slowly forward through the air.", parse);
+									Text.Add("<i>“So be it,”</i> his soft words seem to drift to you mid-jump, making your eyes go wide, your blood turning to ice, and your stomach lurching inside you. For a split moment, clarity seems to return to your thinking, and you wonder what it is you're doing, but you already see Lei drifting aside. He looks slow, languid even, his movements the gradual flow of a gentle stream as both his hands drift toward the hilt of his sword, and your momentum carries you slowly forward through the air.", parse);
 									Text.NL();
 									Text.Add("Lei's left hand reaches the pommel of his large bastard sword, and reverses course, pulling it upwards, as if it weighs nothing. His right, grips the hilt, accelerating the motion, and already imparting to the blade a soft circular spin before it even leaves the scabbard.", parse);
 									Text.NL();
-									Text.Add("Finally, the long dark blade emerges fully from its sheath, already tracing the arc it had begun, moving towards a yet-empty spot in the air like inevitability. As its trajectory and yours intersect, the blade passes through your neck too fast for you to feel anything, too fast for even a droplet of blood to cling to it, as it runs its course and returns smoothly to the scabbard.", parse);
+									Text.Add("Finally, the long dark blade emerges fully from its sheath, already tracing the arc it had begun, moving toward a yet-empty spot in the air like inevitability. As its trajectory and yours intersect, the blade passes through your neck too fast for you to feel anything, too fast for even a droplet of blood to cling to it, as it runs its course and returns smoothly to the scabbard.", parse);
 									Text.NL();
 									Text.Add("Momentarily, your vision continues flowing in the same arc, before turning black. You see nothing, hear nothing, as the sensation of an object touching your neck finally reaches your fading mind. There is no time to think anything, and then, for you, there is no time.", parse);
 									Text.NL();
-									Text.Add("<i>“I say to you thrice,”</i> Lei speaks, sounding a little sad, <i>“the fight is over.”</i> He steps past your body, and walks back towards the tavern.", parse);
+									Text.Add("<i>“I say to you thrice,”</i> Lei speaks, sounding a little sad, <i>“the fight is over.”</i> He steps past your body, and walks back toward the tavern.", parse);
 									Text.NL();
 									
 									if(party.Two())

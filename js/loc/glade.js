@@ -91,7 +91,7 @@ world.loc.Forest.Glade.onEntry = function() {
 	Text.NL();
 	Text.Add("Though you know this might be the only way to power up the gemstone, you can’t help but feel that there is danger ahead.", parse);
 	Text.NL();
-	Text.Add("Do you continue towards the glade?", parse);
+	Text.Add("Do you continue toward the glade?", parse);
 	Text.Flush();
 	
 	//[Enter][Leave]

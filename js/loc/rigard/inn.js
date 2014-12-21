@@ -123,7 +123,7 @@ world.loc.Rigard.Inn.common.DrunkHandler = function() {
 	Text.Clear();
 	Text.Add("You open your eyes with some effort and find yourself in the Lady’s Blessing recovery room. The air smells of pine, and you see a [busy] where the floor looks to have been recently scrubbed. ‘Recovery Room’ written on one of the walls.", parse);
 	Text.NL();
-	Text.Add("You gingerly get to your feet, and make your way towards the door, careful to keep your motions slow to avoid provoking your headache. Some of the decisions that led you to this state were probably not the best. Still, there’s a dark whisper in your mind asking if perhaps you’d feel better if you had just one more drink...", parse);
+	Text.Add("You gingerly get to your feet, and make your way toward the door, careful to keep your motions slow to avoid provoking your headache. Some of the decisions that led you to this state were probably not the best. Still, there’s a dark whisper in your mind asking if perhaps you’d feel better if you had just one more drink...", parse);
 	Text.Flush();
 	Gui.NextPrompt();
 }
@@ -418,7 +418,7 @@ Scenes.Rigard.LB.OrvinPrompt = function() {
 	parse["busyText"] = (busy == Rigard.LB.BusyState.busy) ? "the drinks dancing through his hands" : "handling the drinks he so often mixes";
 	Text.Add("You can’t quite tell the man’s age, but he seems to be well within his prime. There are a few streaks of grey in his dark brown hair, but his face is unlined, and his gaze attentive as he surveys the room. He’s wearing a black vest over a white shirt, which somehow remains spotless despite [busyText].", parse);
 	Text.NL();
-	Text.Add("<i>“What can I do for you, [sirmadam]?”</i> he asks, his voice low and gravelly, turning towards you at your approach.", parse);
+	Text.Add("<i>“What can I do for you, [sirmadam]?”</i> he asks, his voice low and gravelly, turning toward you at your approach.", parse);
 	Text.Flush();
 	
 	var innPrompt = function() {
@@ -729,7 +729,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 				Text.Clear();
 				Text.Add("You ask Orvin if he knows anything about the cloaked stranger [sit] alone by the wall.", {sit : leiPresent ? "sitting" : "who sits"});
 				Text.NL();
-				Text.Add("<i>“I don’t make it a habit of talking about my customers, but, between you and me, he really does look suspicious,”</i> he says, leaning in towards you.", parse);
+				Text.Add("<i>“I don’t make it a habit of talking about my customers, but, between you and me, he really does look suspicious,”</i> he says, leaning in toward you.", parse);
 				Text.NL();
 				Text.Add("<i>“He comes around here almost every evening, sometimes other times too, and sits there as you [see]. I think he’s been following a young red-headed couple around, but since they’re mostly here late in the day, it’s hard to tell with the crowds.”</i>", {see: leiPresent ? "see him" : "probably saw him"});
 				Text.NL();
@@ -837,7 +837,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 			// Long
 			if(world.time.season == Season.Spring) {
 				scenes.push(function() {
-					Text.Add("<i>“The winds have always been strongest in the spring, but I heard that this year they are especially bad. The desert is crawling towards the plains, the dunes shifting, taking a little bit of ground every day.”</i>", parse);
+					Text.Add("<i>“The winds have always been strongest in the spring, but I heard that this year they are especially bad. The desert is crawling toward the plains, the dunes shifting, taking a little bit of ground every day.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“It’s not as bad in other seasons. During the summer, some plants even begin to encroach on the desert, reclaiming land. It is a war of plants and wind, and usually no one is quite sure which side is winning.”</i>", parse);
 					Text.NL();
@@ -1660,7 +1660,7 @@ Scenes.Rigard.LB.RandomRoom = function(companion) {
 		Text.Add("Room 369 - perfect. You shove open the door, a little surprised to find it unlocked, and push through, stumbling slightly.", parse);
 		Text.NL();
 		if(companion)
-			Text.Add("Behind you, you hear [comp]’s alarmed voice, as the door slams shut, seemingly of its own volition. Confused and a little startled, you stumble towards the bed, grabbing on to one of the bedposts for balance.", {comp: companion.name});
+			Text.Add("Behind you, you hear [comp]’s alarmed voice, as the door slams shut, seemingly of its own volition. Confused and a little startled, you stumble toward the bed, grabbing on to one of the bedposts for balance.", {comp: companion.name});
 		else
 			Text.Add("As you reach the bed and grab onto a bedpost for balance, you hear the door slam shut behind you.", parse);
 		Text.Flush();

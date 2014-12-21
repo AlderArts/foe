@@ -235,7 +235,7 @@ Scenes.Dreams.Heartstone = function(ravenTrigger) {
 	
 	Text.Add("You are looking at yourself from outside your own sleeping body, curiously studying yourself.[raven] Do you really look that way to others? You are quickly distracted from your surface appearance, however, as you delve deeper, below your [skinDesc]. Seeing every tiny cell of your body in exquisite detail, your unnatural vision flits back and forth, focusing here and there on some odd part of your anatomy.", parse);
 	Text.NL();
-	Text.Add("As if being dragged there, you gravitate towards the core of you being, speeding through your veins lightning quick and arriving at where your heart should be. There, inside your chest, is the living purple gemstone, pulsing rhythmically, giving your body life.", parse);
+	Text.Add("As if being dragged there, you gravitate toward the core of you being, speeding through your veins lightning quick and arriving at where your heart should be. There, inside your chest, is the living purple gemstone, pulsing rhythmically, giving your body life.", parse);
 	Text.NL();
 	Text.Add("You awaken, a bit unsettled by the eerie vision.", parse);
 }
@@ -345,7 +345,7 @@ Scenes.Dreams.Hermit = function(ravenTrigger) {
 		raven : Scenes.Dreams.RavenText(ravenTrigger, " A raven perches on his shoulder, regarding you with beady eyes.", " A raven perches on his shoulder, almost as if it belongs there. But you’ve seen them enough, you know they are here to watch you. Now, you must only remember that when you wake.")
 	};
 	
-	Text.Add("You are climbing a mountain, your lungs burning as they draw in the cold thin air. Just a little further. Finally, you spot the entrance of the cave, and force yourself towards it. As you reach its mouth, the Hermit catches you in a stumble, leading you inside.[raven]", parse);
+	Text.Add("You are climbing a mountain, your lungs burning as they draw in the cold thin air. Just a little further. Finally, you spot the entrance of the cave, and force yourself toward it. As you reach its mouth, the Hermit catches you in a stumble, leading you inside.[raven]", parse);
 	Text.NL();
 	Text.Add("He lives up here alone, nourished only by what nature gives him willingly. He gives you a cup of goat’s milk, sweetened with the nectar of mountain flowers, and as you drink it down, you feel life flowing back into you. Finally, you ask him the question you came for - what to do next. How can you overcome the forces that oppose you and save the world?", parse);
 	Text.NL();
@@ -389,7 +389,7 @@ Scenes.Dreams.UruChoice = function(ravenTrigger) {
 	
 	Text.Add("Your skin crawls with the overspill of enormous magical forces, as you suddenly feel a hot breath of dry air blow against your back. Spinning around, you see the shapely form of Uru just a few steps away, with the bright edges of a portal behind her.", parse);
 	Text.NL();
-	Text.Add("<i>“Look what I made, pet!”</i> the omnibus purrs, grinning. <i>“And I thought to myself 'what could possibly be more fitting than visiting the person who made it all possible?'”</i> She takes a step towards you, caressing your cheek, her thumb brushing the corner of your mouth.", parse);
+	Text.Add("<i>“Look what I made, pet!”</i> the omnibus purrs, grinning. <i>“And I thought to myself 'what could possibly be more fitting than visiting the person who made it all possible?'”</i> She takes a step toward you, caressing your cheek, her thumb brushing the corner of your mouth.", parse);
 	Text.Flush();
 	
 	//[Resist][Support her]
@@ -483,7 +483,7 @@ Scenes.Dreams.UruRun = function(ravenTrigger) {
 	
 	Text.Add("You are running, haunted by flickering shadows and an all-encroaching fire. Loud cackles mock you as your feet patter across the dry, cracked desolation.[raven] You don’t dare to turn your head around even for a second, assured that your pursuers would catch you immediately if you do. The feeling of flames playfully licking your back further reinforces this idea.", parse);
 	Text.NL();
-	Text.Add("<i>“Scuttering like an ant, back and forth, round and round you go!”</i> Glancing up, you see Uru, the hermaphrodite demoness, hovering lazily above you, a wicked smile on her dark lips. <i>“Hurry now, or they’ll catch you,”</i> she zips in front of you, urging you forward into her arms. Those perfectly formed arms. The demon is truly breathtaking, her flawless red skin shiny beneath the glaring sun. Her toned muscles emphasize her hourglass figure, her large breasts jiggle enticingly as she touches them seductively. Between the demon’s legs, her girthy girlcock juts out towards you, stiff and dripping pre.", parse);
+	Text.Add("<i>“Scuttering like an ant, back and forth, round and round you go!”</i> Glancing up, you see Uru, the hermaphrodite demoness, hovering lazily above you, a wicked smile on her dark lips. <i>“Hurry now, or they’ll catch you,”</i> she zips in front of you, urging you forward into her arms. Those perfectly formed arms. The demon is truly breathtaking, her flawless red skin shiny beneath the glaring sun. Her toned muscles emphasize her hourglass figure, her large breasts jiggle enticingly as she touches them seductively. Between the demon’s legs, her girthy girlcock juts out toward you, stiff and dripping pre.", parse);
 	Text.NL();
 	Text.Add("Her alluring face is framed by her long black hair, and crowned by her long demonic horns. Below her dark eyes and cute nose, her gaping maw is filled with sharp teeth. Suddenly, you realize that you have been running in the wrong direction the entire time.", parse);
 	Text.NL();
@@ -862,7 +862,7 @@ Scenes.Dreams.CunnilingusGive = function(ravenTrigger) {
 	
 	Text.Add("The amazon queen is reclining on a grand dais, fanned by barely-clothed attendants. Her bronze skin shines with scented oils, perfectly accentuating her well-toned muscle and full breasts. The queen herself only wears jewelry, large bands of gold and iron, studded with pretty gemstones.[raven] From your kneeling position, you have an excellent view of her shaved crotch, which she flaunts casually, her legs spread as she looks down on you.", parse);
 	Text.NL();
-	Text.Add("She speaks a single word, pointing towards her pussy, a triumphant smile playing on her lips. The language isn’t one that you understand, but the meaning is clear - Lick. You need no further encouragement, eager to please your mistress - or was it captor? The details seem a bit fuzzy. Far more important is the taste of the amazon’s sweet nectar, which you lap up greedily. Your queen moans as you plunge your flexible tongue into her folds, using every technique within your considerable repertoire to please her.", parse);
+	Text.Add("She speaks a single word, pointing toward her pussy, a triumphant smile playing on her lips. The language isn’t one that you understand, but the meaning is clear - Lick. You need no further encouragement, eager to please your mistress - or was it captor? The details seem a bit fuzzy. Far more important is the taste of the amazon’s sweet nectar, which you lap up greedily. Your queen moans as you plunge your flexible tongue into her folds, using every technique within your considerable repertoire to please her.", parse);
 	Text.NL();
 	Text.Add("Her powerful legs wrap around your head, trapping you in an intimate embrace as she arches her back, shaking as she cries out. Clear nectar flows onto your tongue, a deliciously sweet ambrosia. You drink and drink from her ceaseless fountain, getting your fill and then some. Shakily, you raise your head, peering left and right at the queen’s guards. With the same triumphant smile, the amazon repeats her command, pointing to one of them.", parse);
 	Text.NL();

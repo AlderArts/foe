@@ -136,7 +136,7 @@ Scenes.Patchwork.Interact = function() {
 	
 	Text.Clear();
 	if(patchwork.flags["Met"] < Patchwork.Met.Met) {
-		Text.Add("You make your way towards the mysterious robed peddler and their makeshift shop, near the campfire. Even as you get right up to them, they remain as enigmatic as before; the robes they wear are so all-encompassing, you can’t make out anything about their features. You’re pretty sure that whatever’s under there is humanoid, but that’s as far as you’d dare to venture.", parse);
+		Text.Add("You make your way toward the mysterious robed peddler and their makeshift shop, near the campfire. Even as you get right up to them, they remain as enigmatic as before; the robes they wear are so all-encompassing, you can’t make out anything about their features. You’re pretty sure that whatever’s under there is humanoid, but that’s as far as you’d dare to venture.", parse);
 		Text.NL();
 		Text.Add("Wide, flared sleeves completely swallow their arms and hands alike, whilst the hem trails along the ground, preventing even the slightest glimpse of their feet. A raised neck - a shawl, maybe, but it’s hard to tell where any part of the robe ends and another begins - combines with a low-fallen hood to completely obscure the face. And all over, patches of fabric, a dazzling array of pattern-fragments and colors, scattered about without any semblance of rhyme or reason.", parse);
 		Text.NL();

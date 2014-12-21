@@ -124,7 +124,7 @@ Scenes.RavenMother.TheHunt = function(func) {
 		Text.Clear();
 		Text.Add("...Pancakes sizzle in your frying pan, as [person] waters the plants around your cozy cottage. Have you done this before? You can’t seem to quite recall.", parse);
 		Text.NL();
-		Text.Add("You feel a pull towards the table, the current of the dream dragging you to the next step. The pancakes should be on the plates, and then you’ll eat. You allow yourself to move along with the flow, but now it actually is a decision for you. You feel you can stop if you wish, now that the gem shields and anchors you.", parse);
+		Text.Add("You feel a pull toward the table, the current of the dream dragging you to the next step. The pancakes should be on the plates, and then you’ll eat. You allow yourself to move along with the flow, but now it actually is a decision for you. You feel you can stop if you wish, now that the gem shields and anchors you.", parse);
 		Text.NL();
 		Text.Add("At the table, you notice the design of a raven painted on your plate. That’s right, that’s what you’re here for. Picking the plate up, you glare at it, and tell the raven to come out and explain itself. Blessedly, you don’t even feel too foolish doing it - probably a positive side-effect of the dream.", parse);
 		Text.NL();
@@ -226,14 +226,14 @@ Scenes.RavenMother.TheHuntGlade = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("The circular clearing is two dozen steps across, with tall, ancient oaks marking its perimeter. The trees across from you are more black than green, their limbs covered in scores of ravens, a countless number of beaks turned towards you by the watchers.", parse);
+	Text.Add("The circular clearing is two dozen steps across, with tall, ancient oaks marking its perimeter. The trees across from you are more black than green, their limbs covered in scores of ravens, a countless number of beaks turned toward you by the watchers.", parse);
 	Text.NL();
 	parse["int"] = player.Int() > 30 ? " Well, all bird hearts beat fast, so that really doesn’t mean much." : "";
 	Text.Add("You spin around and see ravens landing on the trees you just passed. It seems you were not escaping from them. They were herding you. You clutch your prisoner tight to your chest, holding it firm, feeling its heart beating fast.[int] Maybe it would serve as a hostage, at least. Although you wonder how much they would care about the life of one of them when you are surrounded by thousands.", parse);
 	Text.NL();
 	Text.Add("<i>“Release her,”</i> a crackling voice speaks from behind you. You turn and see a girl facing you, sitting on an enormous stump in the middle of the glade. You somehow managed to overlook her when your eyes had met those of the watching birds.", parse);
 	Text.NL();
-	Text.Add("She sits on the stump naked, leaning back on her arms, her posture relaxed, face turned towards the sky. Her small B-cup breasts are carelessly thrust toward you. Instead of hair, soft black feathers cascade from her head down to her shoulderblades, outlining her face. A tracery of feathers also runs from her shoulders, down her arms, and along her sides to her hips. Her fingers and toes end in sharp-looking talons.", parse);
+	Text.Add("She sits on the stump naked, leaning back on her arms, her posture relaxed, face turned toward the sky. Her small B-cup breasts are carelessly thrust toward you. Instead of hair, soft black feathers cascade from her head down to her shoulderblades, outlining her face. A tracery of feathers also runs from her shoulders, down her arms, and along her sides to her hips. Her fingers and toes end in sharp-looking talons.", parse);
 	Text.NL();
 	Text.Add("<i>“Now.”</i> Her throaty voice cracks, apparently unused to speech, but her intonation leaves no doubt that she expects to be obeyed.", parse);
 	Text.Flush();

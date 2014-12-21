@@ -1261,7 +1261,7 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 		Text.Add("Before going, you instruct [comp] to take care of the farm while you two are away. [HeShe] nod[notS] in understanding and bid you a safe journey. You promise you’ll be back soon.", parse);
 		Text.NL();
 	}
-	Text.Add("Hopping in on the front of the cart, you let her know that you are. Gwendy takes her place as the driver, flicks the reins, and the carthorse starts trotting off. You settle back and make yourself comfortable as the creaking of the wheels fills the air, adjusting yourself to the rocking motions of the cart as it trundles slowly but steadily along the trodden path leading out of the farm and towards the road leading to the big city.", parse);
+	Text.Add("Hopping in on the front of the cart, you let her know that you are. Gwendy takes her place as the driver, flicks the reins, and the carthorse starts trotting off. You settle back and make yourself comfortable as the creaking of the wheels fills the air, adjusting yourself to the rocking motions of the cart as it trundles slowly but steadily along the trodden path leading out of the farm and toward the road leading to the big city.", parse);
 	Text.NL();
 	Text.Add("Time passes lazily as you sit back and let the carthorse do all the work for you. You probably could have made better time yourself, on foot, but given the amount of goods Gwendy is taking, that would have been far too impractical. It's far from unpleasant, however, as Gwendy proves a very lively travelling companion. The two of you chatter away about nothing in particular, and hardly notice the passing of time. Gwendy guides her horse with the near-instinctive ease of long practice, and evidently is a lot less distracted than you might have thought.", parse);
 	Text.NL();
@@ -1576,7 +1576,7 @@ Scenes.Farm.Market = function(haul, next) {
 		Text.NL();
 		Text.Add("You thank her for her kind words, accepting the praise with your usual modesty.", parse);
 		Text.NL();
-		Text.Add("She stacks the gold neatly in a few piles, separating a couple and pushing it towards you. <i>“Your cut, partner!”</i> she grins, bagging the rest.", parse);
+		Text.Add("She stacks the gold neatly in a few piles, separating a couple and pushing it toward you. <i>“Your cut, partner!”</i> she grins, bagging the rest.", parse);
 		Text.NL();
 		Text.Add("You accept the coins from her graciously, adding them to your purse. A very nice sum indeed.", parse);
 	}

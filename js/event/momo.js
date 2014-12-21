@@ -298,7 +298,7 @@ Scenes.Momo.Interact = function() {
 		Text.NL();
 		Text.Add("<i>“Ahah! There you are, you little rascal”</i> Humming to herself in satisfaction, Momo’s top half emerges from the tent, half-turning to reveal a large, worn-looking journal clasped in her arms. Upon seeing you, she grins widely in delight.", parse);
 		Text.NL();
-		Text.Add("<i>“Why, hello, [playername]! Welcome to my little kitchen... well, kitchen to be,”</i> she amends herself chipperly, nodding towards the various utensils scattered around.  <i>“That nice old man said he’d let me set up shop here... course, that means I gotta set up the shop first.”</i>", parse);
+		Text.Add("<i>“Why, hello, [playername]! Welcome to my little kitchen... well, kitchen to be,”</i> she amends herself chipperly, nodding toward the various utensils scattered around.  <i>“That nice old man said he’d let me set up shop here... course, that means I gotta set up the shop first.”</i>", parse);
 		Text.NL();
 		Text.Add("You recall she mentioned in passing when you first met that she’s a cook.", parse);
 		Text.NL();
@@ -695,9 +695,9 @@ Scenes.Momo.TalkPrompt = function() {
 						Text.Add("You slowly look Momo over, making it blatantly apparent that you’re checking her out. Then with a smirk, you suggest that you happen to know a thing or two about <i>feeling good down there</i>. Maybe she’d like you to show her?", parse);
 						Text.NL();
 						if(momo.IsFollower()) {
-							Text.Add("Momo's eyes widen at your innuendo, before her lips curl into a grin, the dragon-[girlMorph] strutting towards you. A hint of the old shyness shows through in the redness dusting her cheeks, but the smile curving her face is pure predator, eyes hooded in her sultriest expression.", parse);
+							Text.Add("Momo's eyes widen at your innuendo, before her lips curl into a grin, the dragon-[girlMorph] strutting toward you. A hint of the old shyness shows through in the redness dusting her cheeks, but the smile curving her face is pure predator, eyes hooded in her sultriest expression.", parse);
 							Text.NL();
-							Text.Add("<i>“That sounds like an invitation I just <b>have</b> to accept,“</i> she purrs, gently folding her arms around you, long tongue flicking out to slurp playfully over your cheek in a quick motion, tail curling around your [legsDesc]. Leaning her head in to bring it closer to your [earDesc], she stage whispers <i>“step into my parlor,“</i> and then releases you, swaying enticingly as she vanishes into her tent, tail flicking towards you in a “come hither“ gesture before it's gone.", parse);
+							Text.Add("<i>“That sounds like an invitation I just <b>have</b> to accept,“</i> she purrs, gently folding her arms around you, long tongue flicking out to slurp playfully over your cheek in a quick motion, tail curling around your [legsDesc]. Leaning her head in to bring it closer to your [earDesc], she stage whispers <i>“step into my parlor,“</i> and then releases you, swaying enticingly as she vanishes into her tent, tail flicking toward you in a “come hither“ gesture before it's gone.", parse);
 							Text.Flush();
 							
 							//TODO Momo Sex
