@@ -153,7 +153,7 @@ Scenes.Brothel.First = function() {
 
 Scenes.Brothel.MStrap = function() {
 	var parse = {
-		earsDesc : function() { return player.EarDesc(); },
+		earDesc : function() { return player.EarDesc(); },
 		legsDesc : function() { return player.LegsDesc(); },
 		lowerArmourDesc : function() { return player.LowerArmorDesc(); }
 	};

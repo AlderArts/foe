@@ -547,7 +547,7 @@ Scenes.Roa.First = function() {
 				//[Peg]
 				var tooltip = player.Strapon() ? "He’s just begging to get pegged, and you have the proper equipment to give him what he wants. So why not give this bunny-boy a good butt-fucking?" : "Come on, he’s begging for it; have him call in a toy for you so you can ream his ass.";
 				options.push({ nameStr : "Peg",
-					func : Scenes.Roa.TSLPitchAnal(), enabled : true,
+					func : Scenes.Roa.TSLPitchAnal, enabled : true,
 					tooltip : tooltip
 				});
 			}
@@ -685,6 +685,8 @@ Scenes.Roa.TSLPitchAnal = function() {
 		p1cock = Scenes.Brothel.NewMStrap();
 		rigard.Brothel["MStrap"]++;
 		mStrap = true;
+		
+		parse["multiCockDesc"] = function() { return p1cock.Short(); }
 	}
 	Text.NL();
 	
@@ -900,7 +902,7 @@ Scenes.Roa.TSLPitchAnal = function() {
 	roa.relation.IncreaseStat(50, 1);
 	world.TimeStep({hour : 1});
 	
-	Scenes.Roa.TSLPostSexPrompt(p1cock, mStrap);
+	Scenes.Roa.TSLPostSexPrompt(mStrap);
 }
 
 Scenes.Roa.TSLCatchVaginal = function() {
@@ -1235,7 +1237,7 @@ Scenes.Roa.TSLCatchVaginal = function() {
 	});
 }
 
-Scenes.Roa.TSLPostSexPrompt = function(p1cock, mStrap) {
+Scenes.Roa.TSLPostSexPrompt = function(mStrap) {
 	var parse = {
 		playername  : player.name,
 		skinDesc    : function() { return player.SkinDesc(); },
