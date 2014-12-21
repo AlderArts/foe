@@ -344,7 +344,7 @@ Scenes.Roa.TalkPrompt = function(backPrompt) {
 					}
 					Text.Flush();
 					
-					Scenes.Roa.TalkPrompt();
+					Scenes.Roa.TalkPrompt(backPrompt);
 				});
 			}, enabled : true,
 			tooltip : "Ask if he’s Ophelia’s brother; and if that’s so, what he’s done with Lagon scepter."
@@ -373,7 +373,7 @@ Scenes.Roa.TalkPrompt = function(backPrompt) {
 				}
 				Text.Flush();
 				
-				Scenes.Roa.TalkPrompt();
+				Scenes.Roa.TalkPrompt(backPrompt);
 			}, enabled : true,
 			tooltip : "" //TODO
 		});
@@ -387,7 +387,7 @@ Scenes.Roa.TalkPrompt = function(backPrompt) {
 				Scenes.Roa.RestoredVenaTalk();
 				Text.Flush();
 				
-				Scenes.Roa.TalkPrompt();
+				Scenes.Roa.TalkPrompt(backPrompt);
 			}, enabled : true,
 			tooltip : "" //TODO
 		});
@@ -856,7 +856,7 @@ Scenes.Roa.TSLPitchAnal = function() {
 		Text.NL();
 		Text.Add("Leisurely, you crawl your way over the lapin’s petite body, wrapping your [legsDesc] around his chest for balance, thrusting your muff boldly into his face. Now, it’s time he got to work on cleaning you up, you declare.", parse);
 		Text.NL();
-		Text.Add("Roa immediately sets to work, startinig on your [clitDesc] and licks along your slit. He hums in pleasure as he tastes your juces, tiny nose sniffing, drinking in your pheromones as he prepares to really start.", parse);
+		Text.Add("Roa immediately sets to work, startinig on your [clitDesc] and licks along your slit. He hums in pleasure as he tastes your juices, tiny nose sniffing, drinking in your pheromones as he prepares to really start.", parse);
 		Text.NL();
 		Text.Add("You coo in pleasure as the bunny-boy’s tongue busies itself in your [vagDesc]. Quick and nimble, the supple length of silky-soft flesh works expertly through your folds, stroking your more sensitive spots with repeated dabblings and tantalising flicks.", parse);
 		Text.NL();
