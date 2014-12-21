@@ -70,6 +70,14 @@ Burrows.prototype.HermActive = function() {
 Burrows.prototype.BrainyActive = function() {
 	return this.flags["BrainyTrait"] >= Burrows.TraitFlags.Active;
 }
+//TODO
+Burrows.prototype.LagonDefeated = function() {
+	return false;
+}
+//TODO
+Burrows.prototype.VenaRestored = function() {
+	return this.flags["Access"] >= Burrows.AccessFlags.QuestlineComplete;
+}
 
 Burrows.prototype.ToStorage = function() {
 	var storage = {};

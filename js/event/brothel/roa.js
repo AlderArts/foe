@@ -38,9 +38,10 @@ function Roa(storage) {
 	this.SetLevelBonus();
 	this.RestFull();
 	
-	this.flags["Met"] = Roa.Met.NotMet;
+	this.flags["Met"]   = Roa.Met.NotMet;
 	this.flags["Lagon"] = Roa.Lagon.No;
 	this.flags["sFuck"] = 0; //strapon fuck
+	this.flags["snug"]  = 0; //snuggle
 
 	if(storage) this.FromStorage(storage);
 }
@@ -55,7 +56,8 @@ Roa.Met = {
 Roa.Lagon = {
 	No       : 0,
 	Talked   : 1,
-	Defeated : 2
+	Defeated : 2,
+	Restored : 3
 };
 
 //TODO
@@ -218,12 +220,23 @@ Scenes.Roa.BrothelPrompt = function() {
 			if(player.FirstVag()) {
 				options.push({ nameStr : "Vaginal",
 					func : Scenes.Roa.TSLCatchVaginal, enabled : true,
-					tooltip : "" //TODO
+					tooltip : "Give the bunny a shot at your pussy."
 				});
 			}
 			Gui.SetButtonsFromList(options, false, null);
 		}, enabled : true,
 		tooltip : Text.Parse("What else do you do with a whore in a brothel? Take him back and let’s have some fun! If you remember correctly, his fee is [cost] coins.", parse)
+	});
+	options.push({ nameStr : "Talk",
+		func : function() {
+			Text.Clear();
+			Text.Add("PLACEHOLDER", parse); //TODO
+			Text.NL();
+			Text.Flush();
+			
+			Scenes.Roa.TalkPrompt(Scenes.Roa.BrothelPrompt);
+		}, enabled : true,
+		tooltip : ""
 	});
 	
 	/*
@@ -240,6 +253,163 @@ Scenes.Roa.BrothelPrompt = function() {
 	Gui.SetButtonsFromList(options, true, function() {
 		PrintDefaultOptions();
 	}); // TODO leave?
+}
+
+//TODO
+Scenes.Roa.TalkPrompt = function(backPrompt) {
+	var parse = {
+		
+	};
+	
+	//[name]
+	var options = new Array();
+	/*
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	*/
+	if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3 && roa.flags["Lagon"] < Roa.Lagon.Talked) {
+		options.push({ nameStr : "Scepter",
+			func : function() {
+				burrows.flags["Access"] = Burrows.AccessFlags.Stage4;
+				roa.flags["Lagon"] = Roa.Lagon.Talked;
+				
+				Text.Clear();
+				parse["Ches"] = ches.Met() ? "Ches" : "the huge shark-morph bouncer";
+				Text.Add("<i>”Y-you weren’t sent here by my father, were you?”</i> The little bunny visibly shrinks back, looking frightened. You hurriedly assure him that’s not the case, not wanting [Ches] to throw you out for harassing the employees. It takes some convincing and explaining, but Roa eventually calms down.", parse);
+				Text.NL();
+				Text.Add("<i>”That is right, I’m Ophelia’s brother… and Lagon’s my dad.”</i> Roa shudders, hugging himself. You wonder what the story behind him leaving the Burrows is, but you suppress the urge to ask, letting the bunny continue.", parse);
+				Text.NL();
+				Text.Add("<i>”So big sis asked you to come...”</i> His ears droop down, and he fidgets nervously. <i>”H-how is she?”</i> There is a twinge of guilt in his voice.", parse);
+				Text.NL();
+				Text.Add("The little bunny’s expression turns from guilty to aghast as you tell him what has transgressed in the Burrows in his absence. ", parse);
+				if(burrows.LagonDefeated()) {
+					roa.flags["Lagon"] = Roa.Lagon.Defeated;
+					Text.Add("His surprise knows no bounds when you tell him that you’ve defeated Lagon.", parse);
+					Text.NL();
+					Text.Add("<i>”Impossible!”</i> he spouts. <i>”T-there was no one who could even lay a finger on him in the Burrows! Just how strong are you?!”</i>", parse);
+					Text.NL();
+					Text.Add("You go on to tell him about the events that transpired after Lagon’s fall, and the search that Ophelia sent you on to help their mother. Roa still seems a bit overwhelmed at all of this, but nods slowly.", parse);
+					Text.NL();
+					Text.Add("<i>”Well… at least my sister will finally have peace. I should visit her some time… I’ve grown quite attached to this place though.”</i> The lagomorph scratches his head, blushing. You notice that he’s looking at you with new eyes, brimming with respect.", parse);
+					roa.relation.IncreaseStat(50, 10);
+				}
+				else {
+					Text.Add("Ophelia is in a really bad spot right now, and she’s convinced that the only thing that could help is to get the scepter back in order to restore Vena.", parse);
+					Text.NL();
+					Text.Add("<i>”I-I didn’t know it had such value,”</i> Roa pipes guiltily. <i>”Ah… I’ve made a real mess of things...”</i>", parse);
+					Text.NL();
+					Text.Add("It’s not a problem, he didn’t know about it after all. Besides, the situation might have been considerably more difficult if you had to wrest it from Lagon’s clutch instead. The rabbit doesn’t look very mollified by your reassurance, but he flashes you a quick smile.", parse);
+				}
+				Text.NL();
+				Text.Add("<i>”...Thank you for telling me about this,”</i> Roa whispers, almost too low for you to hear.", parse);
+				Text.Flush();
+				
+				roa.relation.IncreaseStat(50, 10);
+				
+				Gui.NextPrompt(function() {
+					Text.Clear();
+					Text.Add("<i>”...I took the scepter with me when I left. I don’t know why I did it, perhaps to spite dad. It’s not like he was using it anyways, it just laid around the throne room gathering dust.”</i>", parse);
+					Text.NL();
+					Text.Add("And? Where is it now?", parse);
+					Text.NL();
+					Text.Add("<i>”I don’t have it anymore,”</i> Roa confesses. <i>”Back when I first got here, I didn’t have any money… I don’t really know why you need money, either. Humans complicate things so much.”</i> He shakes his head, expressing his doubts about economics. <i>”I got a few coins from this guy in the merchant district for it; enough to get some food at least.”</i>", parse);
+					Text.NL();
+					Text.Add("If the scepter is as valuable as you’ve heard, he probably got the short end of that deal. In fact, it was probably close to highway robbery.", parse);
+					Text.NL();
+					Text.Add("<i>”I don’t really understand how it works anyways.”</i> The bunny suddenly brightens up. <i>”Imagine how lucky I was to find the Shadow Lady! They give me food and a place to sleep, <b>and</b> I get to fuck all the time! Just like home!”</i> Roa beams, happy to have found his place in the world.", parse);
+					Text.NL();
+					Text.Add("Focus. The scepter, where is that merchant now?", parse);
+					Text.NL();
+					Text.Add("<i>”Ah, yes, of course.”</i> Roa gives you instructions on where to find the establishment of the merchant.", parse);
+					Text.NL();
+					Text.Add("<i>”I heard that he might be going away soon though, a business trip to the free cities. I don’t remember which one.”</i>", parse);
+					Text.NL();
+					Text.Add("You thank the little lagomorph for the information, and assure him that you’ll do your best in ", parse);
+					if(burrows.LagonDefeated()) {
+						Text.Add("restoring his mother.", parse);
+						Text.NL();
+						Text.Add("<i>”I should be thanking <b>you</b>, mighty champion.”</i> Roa blushes, fidgeting. <i>”No reward is enough for what you’ve done already, but I shall give it my all to satisfy your desires!”</i>", parse);
+					}
+					else {
+						Text.Add("bringing down his father.", parse);
+						Text.NL();
+						Text.Add("<i>”Give this up before you get hurt,”</i> Roa pleads with you. <i>”You don’t know how strong he is!”</i>", parse);
+					}
+					Text.Flush();
+					
+					Scenes.Roa.TalkPrompt();
+				});
+			}, enabled : true,
+			tooltip : "Ask if he’s Ophelia’s brother; and if that’s so, what he’s done with Lagon scepter."
+		});
+	}
+	
+	//TODO
+	if(burrows.LagonDefeated() && roa.flags["Lagon"] < Roa.Lagon.Defeated) {
+		options.push({ nameStr : "Lagon",
+			func : function() {
+				Text.Clear();
+				roa.flags["Lagon"] = Roa.Lagon.Defeated;
+				Text.Add("<i>”Y-you did what?”</i> Roa looks shocked at your revelation, disbelief clear in his eyes. <i>”That’s impossible! No one in the Burrows could even touch my father! J-just how strong are you?!”</i>", parse);
+				Text.NL();
+				Text.Add("Once he has accepted your tale, the lagomorph’s expression changes to one brimming with respect; it’s almost worshipful. He hesitantly puts a trembling hand on your chest, poking at you to make sure you are really flesh and blood and not some demigod come down to Eden.", parse);
+				Text.NL();
+				Text.Add("<i>”Tell me, what of my sister?”</i> he asks. You fill him in on what happened after Lagon’s fall, the bunny listening to you attentively.", parse);
+				Text.NL();
+				
+				roa.relation.IncreaseStat(50, 10);
+				
+				if(burrows.flags["Access"] >= Burrows.AccessFlags.QuestlineComplete)
+					Scenes.Roa.RestoredVenaTalk();
+				else {
+					Text.Add("<i>”I cannot thank you enough.”</i> Roa bows his head humbly. <i>”You have freed my sister, and for that, you have my eternal gratitude.”</i>", parse);
+				}
+				Text.Flush();
+				
+				Scenes.Roa.TalkPrompt();
+			}, enabled : true,
+			tooltip : "" //TODO
+		});
+	}
+	
+	//TODO
+	if(burrows.VenaRestored() && roa.flags["Lagon"] < Roa.Lagon.Restored) {
+		options.push({ nameStr : "Vena",
+			func : function() {
+				Text.Clear();
+				Scenes.Roa.RestoredVenaTalk();
+				Text.Flush();
+				
+				Scenes.Roa.TalkPrompt();
+			}, enabled : true,
+			tooltip : "" //TODO
+		});
+	}
+	
+	Gui.SetButtonsFromList(options, true, function() {
+		backPrompt();
+	});
+}
+
+Scenes.Roa.RestoredVenaTalk = function() {
+	var parse = {
+		
+	};
+	
+	Text.Add("<i>”Y-you even got mother back to her old self?!”</i> There’s tears in Roa’s eyes, and he gives out a happy whoop as he jumps you, hugging you tightly. You let him be, patting his head awkwardly as he showers you in praise and kisses. Before his carnal instincts kick in, you disentangle yourself from the excited rabbit. Enough time for that later.", parse);
+	Text.NL();
+	Text.Add("<i>”I must visit sister and mother sometime...”</i> the bunny ponders, looking a bit guilty at having run away. He may find Vena a changed person from who she was before...", parse);
+	Text.NL();
+	Text.Add("<i>”I really cannot thank you enough.”</i> Roa bows his head humbly. <i>”You have freed my sister and cured my mother, and for that, you have my eternal gratitude.”</i>", parse);
+	
+	roa.relation.IncreaseStat(50, 10);
 }
 
 Scenes.Roa.First = function() {
@@ -724,10 +894,12 @@ Scenes.Roa.TSLPitchAnal = function() {
 		Text.Add("<i>”Might I offer some other service to you, [playername]? Maybe a post-sex cuddle to enjoy the afterglow?”</i> he asks hopefully.", parse);
 	Text.Flush();
 	
+	roa.relation.IncreaseStat(50, 1);
+	world.TimeStep({hour : 1});
+	
 	Scenes.Roa.TSLPostSexPrompt(p1cock, mStrap);
 }
 
-//TODO
 Scenes.Roa.TSLCatchVaginal = function() {
 	var parse = {
 		hand       : function() { return player.HandDesc(); },
@@ -1051,6 +1223,9 @@ Scenes.Roa.TSLCatchVaginal = function() {
 				Text.Add("<i>”There, all clean!”</i> he declares, setting the dildo down beside him. <i>”Any other way I may be of service, [fem]?”</i>", parse);
 				Text.Flush();
 				
+				roa.relation.IncreaseStat(25, 1);
+				world.TimeStep({hour : 1});
+				
 				Scenes.Roa.TSLPostSexPrompt();
 			});
 		});
@@ -1059,20 +1234,150 @@ Scenes.Roa.TSLCatchVaginal = function() {
 
 Scenes.Roa.TSLPostSexPrompt = function(p1cock, mStrap) {
 	var parse = {
-		
+		playername  : player.name,
+		skinDesc    : function() { return player.SkinDesc(); },
+		breastsDesc : function() { return player.FirstBreastRow().Short(); },
+		bellyDesc   : function() { return player.StomachDesc(); },
+		lipsDesc    : function() { return player.LipsDesc(); },
+		tongueDesc  : function() { return player.TongueDesc(); }
 	};
 	
-	//[name]
+	parse["fem"] = roa.Relation() >= 40 ? player.name : player.mfFem("sir", "ma’am");
+	
+	//[Snuggle] [Bathe] [Kiss] [Dismiss]
 	var options = new Array();
-	options.push({ nameStr : "name",
+	options.push({ nameStr : "Snuggle",
+		func : function() {
+			var first = roa.flags["snug"] == 0;
+			roa.flags["snug"]++;
+			
+			parse["own"] = player.HasFur() ? " own" : "";
+			
+			Text.Clear();
+			if(first) {
+				Text.Add("<i>”Snuggle? I’m sorry [fem]. But I’m afraid I’m not familiar with that,”</i> he smiles apologetically.", parse);
+				Text.NL();
+				Text.Add("Smirking, you assure him that it’s easy. All he has to do is stay quiet and let you hold him.", parse);
+				Text.NL();
+				Text.Add("<i>”And...”</i> he says twirling his hand. <i>”That’s all?”</i>", parse);
+				Text.NL();
+				Text.Add("That’s all he has to do, you assure him, and then forcefully beckon him to approach you.", parse);
+				Text.NL();
+				Text.Add("Shrugging, he does as instructed. <i>”Alright, if that’ll bring you pleasure, [fem].”</i>", parse);
+				Text.NL();
+				Text.Add("You don’t answer him verbally, instead wrapping your arms possessively around him and pulling this pillow-to-be bunny close, locking your grip to keep your catch right where you want him. You smile in satisfaction and rub your cheek gently against his own, basking in the feel of warm, soft, fluffy fur in your arms, rubbing against your[own] [skinDesc].", parse);
+			}
+			else {
+				Text.Add("The lapin whore smiles timidly and approaches you tentatively.", parse);
+				Text.NL();
+				Text.Add("Spreading your arms, you welcome Roa into your embrace, folding your arms around the bunny boy and holding him fit to never let go.", parse);
+				Text.NL();
+				Text.Add("Roa lets out a sigh of relaxation, avidly wriggling as close to you as he can get. His little arms wrap around you the best he can, and you return the favor, savoring the feel of being so close.", parse);
+			}
+			Text.NL();
+			Text.Add("With the two of you curled front to front, it’s easy to fit the pair of you together. Roa’s petite body seems to be just made for tucking into your arms, silky-soft fur brushing lightly against your[own] [skinDesc]. Although he wriggles a little as his cock grows hard, poking insistently against your [bellyDesc], Roa himself is as content as you to just enjoy being together like this. Your breath stirs his hair, and his own breaths puff lightly over your [breastsDesc], tickling with each exhalation.", parse);
+			Text.NL();
+			Text.Add("The two of you contently lay there in each other’s arms, enjoying one another’s company in quiet contentment... All good things must come to an end, however, and eventually you are forced to let Roa go and tell him that you have to be off now.", parse);
+			Text.NL();
+			Text.Add("<i>”Aww, just when I was starting to enjoy it,”</i> he grins.", parse);
+			Text.NL();
+			Text.Add("Well, if he’s lucky, maybe you’ll do it again when you next hire him, you tease back. Rolling off of the bed, you start hunting for your belongings; you need to get dressed before you go anywhere, after all...", parse);
+			Text.NL();
+			if(roa.Relation() < 20) {
+				Text.Add("<i>”I hope to see you again soon, [fem],”</i> he says with a genuine smile.", parse);
+				Text.NL();
+				Text.Add("You nod to show you heard, making a mental note that maybe you should consider dropping by again.", parse);
+			}
+			else if(roa.Relation() < 40) {
+				Text.Add("<i>”Come visit me soon, [playername]. You’re my favorite customer,”</i> he says with a smile.", parse);
+				Text.NL();
+				Text.Add("With a grin, you thank him for the flattery, assuring him that you’ll definitely consider purchasing him again.", parse);
+			}
+			else {
+				Text.Add("<i>”I’m gonna miss you… Please don’t take too long to come visit me again. Nobody is as kind to me as you are, [playername].”</i>", parse);
+				Text.NL();
+				Text.Add("You shake your head and tut in disapproval; your Roa deserves better than that. You promise that you’ll come back as soon as it’s possible.", parse);
+			}
+			Text.NL();
+			Text.Add("Having dressed yourself again, you place the [coin] for Roa’s services on the dresser and head back out.", parse);
+			Text.Flush();
+			
+			roa.relation.IncreaseStat(50, 1);
+			world.TimeStep({minute: 30});
+			
+			Gui.NextPrompt();
+		}, enabled : true,
+		tooltip : roa.Relation() < 20 ? "The little bunny’s actually kind of cuddly. Maybe a nice hug to unwind after sex wouldn’t be so bad?" :
+		          roa.Relation() < 40 ? "Why not spend some time snuggling with your favorite bunny?" : "You know Roa would just love if you stayed and snuggled awhile; why not indulge him?"
+	});
+	options.push({ nameStr : "Kiss",
 		func : function() {
 			Text.Clear();
-			Text.Add("", parse);
+			Text.Add("The only warning you give the lapin is a predatory smile. Roa lets out a delicious little squeak of shock before you swoop down on him like the proverbial bird of prey. Your arms crush him against your [breastsDesc], folding tightly around velvety white fur and holding him fast as your [lipsDesc] devour his own. His softness envelops your senses, prickling across your skin, his taste enrapturing your [tongueDesc] as it washes across its surface.", parse);
 			Text.NL();
+			Text.Add("You squeeze Roa as if determined to never let him go, so tight you can feel his little heart racing inside his chest, beating a rapid-fire tattoo against your skin. Your kiss deepens as if you could drink the lagomorph’s very essence; only when the need for oxygen becomes inescapable do you finally break the kiss with a noisy gasp, letting the puffing bunny fall back onto the bed.", parse);
+			Text.NL();
+			if(roa.Relation() < 40)
+				Text.Add("Roa is so surprised he can only blink and look up at you slackjawed.", parse);
+			else
+				Text.Add("Roa pants as you let him go, fingers touching his lips as he smiles at you.", parse);
+			Text.NL();
+			Text.Add("Looking down between his legs you can tell that he really liked the kiss, if his throbbing, pre-seeping shaft is any indication.", parse);
+			Text.NL();
+			Text.Add("Smirking down at him, your finger reaches out to tenderly stroke the very tip of his glans, tapping lightly against the oozing cum-slit. In your best casual tone, you tell him that was just a little something to remember you by. Another tap on his glans, and then you shuffle yourself off the bed, reaching for your gear and starting to dress yourself again.", parse);
+			Text.NL();
+			if(roa.Relation() < 40) {
+				Text.Add("<i>”R-Right… umm… I think I’ll go use the bathroom then...”</i> he says, sprinting and closing the door behind him. A moan of pleasure echoing through the door soon after.", parse);
+			}
+			else {
+				Text.Add("He pouts cutely and sighs. <i>”That’s mean, [playername]. You give me a boner and you’re not even going to take responsibility for it?”</i>", parse);
+				Text.NL();
+				Text.Add("Oh, you’d be happy to take responsibility for it, you insist sweetly. But, right now, you don’t have the time. He’ll just have to save it for when you can come back again - not that it’ll be too hard to make time for a sweetie like him.", parse);
+				Text.NL();
+				Text.Add("He chuckles. <i>”Oh, we both know I can’t wait that long. I’ll just have to take care of this by myself then, but I promise to have an even bigger boner next time we meet,”</i> he says, ducking out inside the bathroom. A moan of pleasure following in his wake moments afterward.", parse);
+			}
+			Text.NL();
+			Text.Add("With a chuckle, you finish dressing yourself again. Blowing a kiss in the direction of the bathroom, you call out for Roa to take care of himself. Stepping through the door, you start making your way out.", parse);
 			Text.Flush();
+			
+			roa.relation.IncreaseStat(50, 2);
+			world.TimeStep({minute: 30});
+			
+			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : ""
+		tooltip : roa.Relation() < 20 ? "Hey, you are paying for this, and he’s kind of cute. Why not enjoy a goodbye kiss before you go?" :
+		          roa.Relation() < 40 ? "You’re sure Roa would just love a little memento before you leave." : "How can you possibly leave without giving your favorite bunny boy-slut a goodbye kiss?"
+	});
+	options.push({ nameStr : "Dismiss",
+		func : function() {
+			Text.Clear();
+			if(roa.Relation() < 20)
+				Text.Add("<i>”Very well, thank you for your patronage, [sirMa’am],”</i> he says, bowing with a smile.", parse);
+			else if(roa.Relation() < 40)
+				Text.Add("<i>”That’s too bad. I guess I’ll see you some other time then, [playername],”</i> he says with a disappointed sigh.", parse);
+			else {
+				Text.Add("<i>”Aww. Not even a kiss?”</i> he asks with pleading eyes.", parse);
+				Text.NL();
+				Text.Add("Your hand shoots out and grab a particularly bushy puff of fur on his chest, hauling him in close to you. Your lips crash down like waves on a shore, your [tongueDesc] plunging shamelessly into Roa’s mouth. The lapin voices a muffled moan, sucking greedily as you feed him your tongue, before you break the kiss as sharply as you gave it.", parse);
+				Text.NL();
+				Text.Add("Smirking, you ask him how he could have possibly thought you’d let your favorite bunny go without a kiss, even as you release him and playfully push him a step back for measure.", parse);
+				Text.NL();
+				Text.Add("<i>”Now you’re making me blush!”</i> he giggles.", parse);
+			}
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		}, enabled : true,
+		tooltip : roa.Relation() < 20 ? "You have better things to do, it’s time to get going." :
+		          roa.Relation() < 40 ? "You don’t really have the time to spare. Maybe next time, you can stay longer?" : "You’re sorry, you really are, but you just can’t stay this time."
 	});
 	Gui.SetButtonsFromList(options, false, null);
+	
+	Gui.Callstack.push(function() {
+		Scenes.Lucille.WhoreAftermath("Roa", roa.Cost());
+	});
+	
+	if(mStrap) {
+		Gui.Callstack.push(Scenes.Brothel.MStrap);
+	}
 }
-
