@@ -4,6 +4,12 @@ Scenes.Brothel.IsOpen = function() {
 	return !rigard.UnderLockdown(); // No closed hours
 }
 
+Scenes.Brothel.NewMStrap = function() {
+	var cock = new Cock(Race.human);
+	cock.
+	return cock;
+}
+
 //
 // Brothel
 //

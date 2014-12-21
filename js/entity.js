@@ -1705,6 +1705,9 @@ Entity.prototype.SkinDesc = function() {
 Entity.prototype.SkinType = function() {
 	return this.body.torso.race;
 }
+Entity.prototype.LipsDesc = function() {
+	return this.body.LipsDesc();
+}
 Entity.prototype.TongueDesc = function() {
 	return this.body.TongueDesc();
 }

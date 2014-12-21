@@ -125,7 +125,8 @@ function Rigard(storage) {
 	this.Krawitz["Duel"] = 0; // 0 = no, 1 = superwin, 2 = win, 3 = loss
 	
 	this.Brothel = {};
-	this.Brothel["Visit"] = 0;
+	this.Brothel["Visit"]  = 0;
+	this.Brothel["MStrap"] = 0;
 	
 	this.CW = {};
 	this.CW["Visit"] = 0;

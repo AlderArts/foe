@@ -1170,6 +1170,11 @@ Body.prototype.HandDesc = function() {
 	}
 }
 
+//TODO
+Body.prototype.LipsDesc = function() {
+	return "lips";
+}
+
 // TODO: Color, length
 Body.prototype.TongueDesc = function() {
 	var tongue = this.head.mouth.tongue;

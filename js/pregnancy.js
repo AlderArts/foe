@@ -10,7 +10,8 @@ PregType = {
 	Lizard    : 4,
 	Naga      : 5,
 	
-	Terry     : 100
+	Terry     : 100,
+	Roa       : 101
 };
 
 // Progress
