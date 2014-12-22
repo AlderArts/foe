@@ -8075,7 +8075,7 @@ Scenes.Terry.SexCatchAnal = function() {
 			Text.Clear();
 			Text.Add("<i>“If that’s what you want, I’m happy to oblige!”</i>", parse);
 			Text.NL();
-			var next = options[Math.floor(Math.random() * options.length-1)].func;
+			var next = options[Math.floor(Math.random() * (options.length-1))].func;
 			next(true);
 		}, enabled : true,
 		tooltip : Text.Parse("You want Terry to really cut loose on you; [heshe] can do whatever [heshe] wants to you.", parse)
