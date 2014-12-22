@@ -2530,8 +2530,15 @@ Entity.prototype.Accessories = function() {
 	return [this.acc1Slot, this.acc2Slot];
 }
 
+//Note: bitmask in order to stack multiple
 TargetStrategy = {
-	None : 0
+	None      : 0, //Not used
+	NearDeath : 1,
+	LowHp     : 2,
+	HighHp    : 4,
+	Leader    : 8,
+	SPHunt    : 16,
+	LPHunt    : 32
 };
 
 GetAggroEntry = function(activeChar, entity) {
@@ -2569,25 +2576,68 @@ Entity.prototype.GetSingleTarget = function(encounter, activeChar, strategy) {
 			activeChar.aggro.push({entity: targets[i], aggro: 1});
 	}
 	
-	// Pick a random target
-	// TODO: more complex targetting (low hp etc)
-	switch(strategy) {
-	default:
-	case TargetStrategy.None:
-		break;
+	// make a temporary aggro array
+	var aggro = [];
+	for(var i=0; i < activeChar.aggro.length; i++) {
+		var a = activeChar.aggro[i];
+		aggro.push({entity: a.entity, aggro: a.aggro});
+	};
+	
+	// Strategies
+	if(strategy & TargetStrategy.NearDeath) {
+		for(var i = 0; i < aggro.length; i++) {
+			var hp  = 1 - aggro[i].entity.HPLevel();
+			hp *= hp;
+			aggro[i].aggro *= hp;
+		}
 	}
+	if(strategy & TargetStrategy.LowHp) {
+		for(var i = 0; i < aggro.length; i++) {
+			var hp  = 1 - aggro[i].entity.HPLevel();
+			aggro[i].aggro *= hp;
+		}
+	}
+	if(strategy & TargetStrategy.HighHp) {
+		for(var i = 0; i < aggro.length; i++) {
+			var hp  = aggro[i].entity.HPLevel();
+			aggro[i].aggro *= hp;
+		}
+	}
+	if(strategy & TargetStrategy.Leader) { //Test, this might be wrong
+		if(aggro.length > 0)
+			aggro[0].aggro *= 5;
+	}
+	if(strategy & TargetStrategy.SPHunt) {
+		for(var i = 0; i < aggro.length; i++) {
+			var sp = Math.log(aggro[i].entity.SP());
+			aggro[i].aggro *= sp;
+		}
+	}
+	if(strategy & TargetStrategy.LPHunt) {
+		for(var i = 0; i < aggro.length; i++) {
+			var lp = Math.log(aggro[i].entity.Lust());
+			aggro[i].aggro *= lp;
+		}
+	}
+	
+	// TODO: more complex targetting
+	/*
+	if(strategy & TargetStrategy.None) {
+		
+	}
+	*/
 	
 	// Weigthed random selection
 	var sum = 0;
-	for(var i = 0; i < activeChar.aggro.length; i++)
-		sum += activeChar.aggro[i].aggro;
+	for(var i = 0; i < aggro.length; i++)
+		sum += aggro[i].aggro;
 	
 	// Pick a target
 	var step = Math.random() * sum;
 	
-	for(var i = 0; i < activeChar.aggro.length; i++) {
-		step -= activeChar.aggro[i].aggro;
-		if(step <= 0.0) return activeChar.aggro[i].entity;
+	for(var i = 0; i < aggro.length; i++) {
+		step -= aggro[i].aggro;
+		if(step <= 0.0) return aggro[i].entity;
 	}
 }
 
