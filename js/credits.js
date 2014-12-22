@@ -35,6 +35,7 @@ CreditsScreen = function() {
 	Text.Add("Naga: LonelyRonin<br/>");
 	Text.Add("Estevan gay sex: Ben<br/>");
 	Text.Add("Patches: Me and LD<br/>");
+	Text.Add("Roa: Me, QB and LD<br/>");
 	
 	Text.NL();
 	

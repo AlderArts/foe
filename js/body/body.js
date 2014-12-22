@@ -1205,6 +1205,35 @@ Body.prototype.TongueDesc = function() {
 	}
 }
 
+// TODO: Color, length
+Body.prototype.TongueTipDesc = function() {
+	var tongue = this.head.mouth.tongue;
+	switch(tongue.race) {
+		case Race.fox:
+		case Race.wolf:
+		case Race.dog:
+		case Race.cow:
+		case Race.horse: return "broad tip";
+		
+		case Race.dragon:
+		case Race.snake:
+		case Race.lizard:
+		case Race.demon: return "forked tip";
+		
+		case Race.cat: return "barbed tip";
+		
+		case Race.ferret:
+		case Race.rabbit:
+		case Race.goat:
+		case Race.sheep:
+		case Race.satyr:
+		case Race.dryad:
+		case Race.elf:
+		case Race.human:
+		default: return "tip";
+	}
+}
+
 // TODO
 Body.prototype.HipsDesc = function(plural) {
 	var size = this.torso.hipSize.Get();
@@ -1248,7 +1277,6 @@ Body.prototype.HipsDesc = function(plural) {
 	
 	return adj + (plural ? " hips" : " hip");
 }
-
 
 // TODO: Preggo belly (use bellysize)
 Body.prototype.StomachDesc = function(bellysize) {

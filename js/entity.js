@@ -1711,6 +1711,9 @@ Entity.prototype.LipsDesc = function() {
 Entity.prototype.TongueDesc = function() {
 	return this.body.TongueDesc();
 }
+Entity.prototype.TongueTipDesc = function() {
+	return this.body.TongueTipDesc();
+}
 Entity.prototype.Hair = function() {
 	return this.body.head.hair;
 }
@@ -1822,7 +1825,7 @@ Entity.prototype.StomachDesc = function() {
 	return this.body.StomachDesc(bellysize);
 }
 Entity.prototype.HipDesc = function() {
-	return this.body.HipDesc();
+	return this.body.HipsDesc();
 }
 Entity.prototype.HipsDesc = function() {
 	return this.body.HipsDesc(true);
