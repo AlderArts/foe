@@ -154,6 +154,8 @@ InitCache = function() {
 	gameCache.flags["OutlawsRep"]     = gameCache.flags["OutlawsRep"] || 0;
 	
 	gameCache.flags["NagaVenom"]      = gameCache.flags["NagaVenom"] || 0;
+	
+	if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage5) rigard.flags["Scepter"] = 0;
 }
 
 CacheToGame = function() {

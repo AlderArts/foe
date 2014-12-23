@@ -278,7 +278,8 @@ Scenes.Roa.TalkPrompt = function(backPrompt) {
 		options.push({ nameStr : "Scepter",
 			func : function() {
 				burrows.flags["Access"] = Burrows.AccessFlags.Stage4;
-				roa.flags["Lagon"] = Roa.Lagon.Talked;
+				roa.flags["Lagon"]      = Roa.Lagon.Talked;
+				rigard.flags["Scepter"] = 1;
 				
 				Text.Clear();
 				parse["Ches"] = ches.Met() ? "Ches" : "the huge shark-morph bouncer";

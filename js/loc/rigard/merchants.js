@@ -139,6 +139,14 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 ));
 
 world.loc.Rigard.ShopStreet.street.events.push(new Link(
+	"Scepter", function() { return rigard.flags["Scepter"] != 0 && burrows.flags["Access"] < Burrows.AccessFlags.Stage5; }, true,
+	null,
+	function() {
+		Scenes.Rigard.ShopStreet();
+	}
+));
+
+world.loc.Rigard.ShopStreet.street.events.push(new Link(
 	"Martello", function() { return room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith || room69.flags["Hinges"] == Room69.HingesFlags.TalkedToSmith; }, function() { return world.time.hour >= 9 && world.time.hour < 18; },
 	function() {
 		if(room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith) {
@@ -517,5 +525,23 @@ Scenes.Rigard.ShopStreet.Speculate = function() {
 	Gui.SetButtonsFromList(options);
 }
 
-
+Scenes.Rigard.ShopStreet = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("Following Roa’s direction, you seek out the establishment of the merchant who swindled him out of Lagon’s scepter. It’s a rather small, nondescript shop, set on a side street away from the bustle of the main street. On the front door - which seems locked and barred - there is a notice telling you the proprietor is away on business to the free cities.", parse);
+	Text.NL();
+	Text.Add("There is also a date proclaiming the expected return date, long since expired. You don’t think you’ll find any more clues here - nor do you find it likely the merchant would leave a valuable item such as the scepter just lying around - perhaps you need to head toward his destination in order to find out the fate of the merchant.", parse);
+	Text.NL();
+	Text.Add("<b>Perhaps you should search along the King's Road.</b>", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 15});
+	
+	rigard.flags["Scepter"] = 0;
+	
+	Gui.NextPrompt()
+}
 

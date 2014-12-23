@@ -95,6 +95,7 @@ function Rigard(storage) {
 	
 	this.flags["TailorMet"]   = 0;
 	this.flags["BuyingExp"]   = 0;
+	this.flags["Scepter"]     = 0;
 	
 	
 	this.LB = {};
