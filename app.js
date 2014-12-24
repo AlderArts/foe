@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 3;
-VERSION_SUBSCRIPT = "r";
-VERSION_NAME = "Bandits and Bruisers";
+VERSION_SUBSCRIPT = "s";
+VERSION_NAME = "Roa";
 
 SAVE_VERSION = 19;
 // Save version 1: Initial
