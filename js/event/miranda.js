@@ -221,14 +221,22 @@ Scenes.Miranda = {};
 
 Scenes.Miranda.BarracksApproach = function() {
 	var parse = {
-		
+		playername : player.name
 	};
 	
 	Text.Clear();
-	Text.Add("PLACEHOLDER", parse);
-	Text.NL();
-	Text.Flush();
+	if(miranda.Attitude() >= Miranda.Attitude.Neutral)
+		Text.Add("<i>”Hey there, [playername]. What gives us the honor?”</i> the dobie greets you as you approach.", parse);
+	else
+		Text.Add("<i>”Oh. You. Why’re you here?”</i> The dobie frowns a bit at you showing up. <i>”Don’t loiter. I might be tempted to give you a night in the cells, and you wouldn’t like that.”</i>", parse);
 	
+	if(miranda.flags["Met"] < Miranda.Met.Tavern) {
+		Text.NL();
+		Text.Add("<i>”Say, how about you come by the Maidens’ Bane some time? Take a few drinks together in a more relaxed place? Just meet up with me there after work. As you can see, I’m a bit busy now.”</i>", parse);
+		Text.NL();
+		Text.Add("...From the looks of it, you’d guess she was already in a tavern, letting loose.", parse);
+	}
+	Text.Flush();
 	Scenes.Miranda.BarracksPrompt();
 }
 
@@ -240,7 +248,7 @@ Miranda.Bruiser = {
 
 Scenes.Miranda.BarracksPrompt = function() {
 	var parse = {
-		
+		playername : player.name
 	};
 	
 	//[Train]
@@ -257,10 +265,47 @@ Scenes.Miranda.BarracksPrompt = function() {
 		tooltip : ""
 	});
 	*/
+	var know = miranda.flags["Herm"] != 0;
+	options.push({ nameStr : "Spar",
+		func : function() {
+			Text.Clear();
+			if(miranda.Attitude() >= Miranda.Attitude.Neutral)
+				Text.Add("<i>”Hah, think you have a shot at beating me, [playername]? I’m not gonna play nice just cause I like you,”</i> Miranda replies, winking. <i>”I could use the workout. Well then, shall we?”</i>", parse);
+			else
+				Text.Add("<i>”Sure, I’ll fight you,”</i> Miranda replies, and evil glint in her eye. <i>”Can’t promise I won’t take advantage of your sorry ass once I’ve pounded it into the dirt, though.”</i>", parse);
+			Text.NL();
+			Text.Add("You follow behind the guardswoman as she heads out into the training yard, hips swaying.", parse);
+			Text.NL();
+			Text.Add("<i>”Don’t cry once I beat you up.”</i> Miranda grabs a practice sword from a weapon stand; more a log than a sword, from the size of it. She turns to face you, ready to fight. <i>”Do your best to entertain me!”</i>", parse);
+			Text.Flush();
+			
+			miranda.RestFull();
+			
+			party.SaveActiveParty();
+			party.ClearActiveParty();
+			party.AddMember(player);
+			
+			var enemy = new Party();
+			enemy.AddMember(miranda);
+			var enc = new Encounter(enemy);
+			
+			enc.canRun = false;
+			
+			//TODO miranda needs a better AI for the fight.
+			
+			enc.onLoss = Scenes.Miranda.SparLoss;
+			enc.onVictory = Scenes.Miranda.SparWin;
+			
+			Gui.NextPrompt(function() {
+				enc.Start();
+			});
+		}, enabled : know,
+		tooltip : "Ask her for a friendly spar in the yard."
+	});
 	
 	if(miranda.flags["Bruiser"] < Miranda.Bruiser.Taught) {
 		options.push({ nameStr : "Train",
-			func : Scenes.Miranda.BruiserTraining, enabled : true,
+			func : Scenes.Miranda.BruiserTraining, enabled : know,
 			tooltip : "Ask her to teach you how to fight."
 		});
 	}
@@ -268,6 +313,50 @@ Scenes.Miranda.BarracksPrompt = function() {
 		//TODO
 		PrintDefaultOptions();
 	});
+}
+
+Scenes.Miranda.SparLoss = function() {
+	SetGameState(GameState.Event);
+	var enc = this;
+	
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("<i>”Not a surprising conclusion,”</i> Miranda boasts, wiping the sweat off her brow. <i>”Now… to the victor goes the spoils, no?”</i> A smile is playing on her lips as she awaits your response.", parse);
+	Text.Flush();
+	
+	miranda.subDom.IncreaseStat(75, 3);
+	
+	party.LoadActiveParty();
+	miranda.RestFull();
+	
+	Gui.NextPrompt(); //TODO
+}
+
+Scenes.Miranda.SparWin = function() {
+	SetGameState(GameState.Event);
+	var enc = this;
+	
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("Miranda looks baffled as she falls to her knees, breathing heavily.", parse);
+	Text.NL();
+	Text.Add("<i>”N-not bad,”</i> the dobie gasps, struggling back to her feet. <i>”Guess I underestimated you. I’ll have to get serious next time.”</i> She tries to play it down, but both of you know that you beat her fair and square.", parse);
+	Text.NL();
+	Text.Add("Now, you’ve half a mind to take advantage of this situation...", parse);
+	Text.Flush();
+	
+	miranda.subDom.DecreaseStat(-50, 3);
+	
+	party.LoadActiveParty();
+	miranda.RestFull();
+	
+	Gui.NextPrompt(); //TODO
 }
 
 Scenes.Miranda.BruiserTraining = function() {
