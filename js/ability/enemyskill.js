@@ -213,3 +213,26 @@ Abilities.EnemySkill.TViolate.OnMiss = function(encounter, caster, target) {
 	Text.AddOutput("Even though [target] [tis] greatly aroused, [theshe] somehow manage[tnotS] to evade getting tangled up in the tentacles.", parse);
 	Text.Newline();
 }
+
+Abilities.EnemySkill.GolLustyPheromones = new TeaseSkill();
+Abilities.EnemySkill.GolLustyPheromones.name = "L.Pheromones";
+Abilities.EnemySkill.GolLustyPheromones.Short = function() { return "Attack with lusty pheromones."; }
+Abilities.EnemySkill.GolLustyPheromones.OnCast = function(encounter, caster, target) {
+	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), y : caster.plural() ? "y" : "ies", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
+	Text.AddOutput("The Gol reaches down to just below the joint of her humanoid upper body and mantis-like lower form where an immense, juicy-looking pussy lies. She hooks her fingers into either side of it, panting at the sensation, and pulls it open, allowing you gaze into the simmering, pink depths. It's easily big enough to swallow your arm, but far more alarming is the scent it exudes - sweet and enticing.", parse);
+	Text.Newline();
+	caster.AddLustFraction(0.1);
+}
+Abilities.EnemySkill.GolLustyPheromones.OnHit = function(encounter, caster, target, dmg) {
+	var parse = { notEs : caster.plural() ? "es" : "", Name : target.NameDesc(), hisher : target.hisher() };
+	
+	Text.AddOutput("[Name] blush[notEs] as [hisher] head swims with thoughts of naked trysts under the stars, overwhelmed by the Gol’s pheromones.", parse);
+	Text.Newline();
+}
+Abilities.EnemySkill.LustyPheromones.OnMiss = function(encounter, caster, target) {
+	var parse = { notS : caster.plural() ? "s" : "", Name : target.NameDesc(), hisher : target.hisher() };
+	
+	Text.AddOutput("[Name] hold[notS] [hisher] breath to avoid as much of it as possible. Frowning, the Gol releases her netherlips.", parse);
+	Text.Newline();
+}
+

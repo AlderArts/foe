@@ -57,6 +57,8 @@ function GolQueen() {
 	// Set hp and mana to full
 	this.SetLevelBonus();
 	this.RestFull();
+	
+	this.AddLustFraction(0.3);
 }
 GolQueen.prototype = new BossEntity();
 GolQueen.prototype.constructor = GolQueen;
@@ -76,20 +78,14 @@ GolQueen.prototype.Act = function(encounter, activeChar) {
 	};
 
 	var choice = Math.random();
-	if(choice < 0.2)
+	if(choice < 0.2) //TODO
 		Abilities.Attack.CastInternal(encounter, this, t);
-	else if(choice < 0.3 && Abilities.Black.ThunderStorm.enabledCondition(encounter, this))
-		Abilities.Black.ThunderStorm.Use(encounter, this, party);
-	else if(choice < 0.4 && Abilities.Black.WindShear.enabledCondition(encounter, this))
-		Abilities.Black.WindShear.Use(encounter, this, t);
-	else if(choice < 0.6 && Abilities.Physical.QAttack.enabledCondition(encounter, this))
-		Abilities.Physical.QAttack.Use(encounter, this, t);
-	else if(choice < 0.7 && Abilities.Physical.Frenzy.enabledCondition(encounter, this))
-		Abilities.Physical.Frenzy.Use(encounter, this, t);
-	else if(choice < 0.8 && Abilities.Black.Hellfire.enabledCondition(encounter, this))
-		Abilities.Black.Hellfire.Use(encounter, this, party);
-	else if(choice < 0.9 && Abilities.Seduction.Rut.enabledCondition(encounter, this))
-		Abilities.Seduction.Rut.Use(encounter, this, t);
+	else if(choice < 0.4 && Abilities.EnemySkill.GolLustyPheromones.enabledCondition(encounter, this))
+		Abilities.EnemySkill.GolLustyPheromones.Use(encounter, this, t);
+	else if(choice < 0.6 && Abilities.Physical.DAttack.enabledCondition(encounter, this))
+		Abilities.Physical.DAttack.Use(encounter, this, t);
+	else if(choice < 0.7 && Abilities.Physical.GrandSlam.enabledCondition(encounter, this))
+		Abilities.Physical.GrandSlam.Use(encounter, this, t);
 	else
 		Abilities.Attack.Use(encounter, this, t);
 }
@@ -285,7 +281,7 @@ Scenes.Gol.CombatLossIncEntry = function(gol) {
 	Text.NL();
 	Text.Add("Licking your lips, you answer, proud of how deceptively eager you sound, <i>“Yes! Use me as your eggholster!”</i> A decidedly panty-drenching thought occurs to you, and you can’t help but give it voice. <i>“Stuff me so full of eggs you have to web my gaped cunt shut just to hold them in!”</i> That was filthy, but it made your [vagina] weep with anticipation. Maybe she’ll wrap you up in webs and just let you hang there until it’s time for your next filling.", parse);
 	Text.NL();
-	Text.Add("Her voice cuts your fantasies short once more. <i>“I exist to serve.”</i> Her tone is anything but humble, but how could you care when that thick cunt-stretcher is being pointed in your direction. It’s so close to you now, the clear fluids it exudes painting a trail up the ruined quilt towards the ", parse);
+	Text.Add("Her voice cuts your fantasies short once more. <i>“I exist to serve.”</i> Her tone is anything but humble, but how could you care when that thick cunt-stretcher is being pointed in your direction. It’s so close to you now, the clear fluids it exudes painting a trail up the ruined quilt toward the ", parse);
 	if(player.LowerBodyType() != LowerBodyType.Single)
 		Text.Add("junction of your thighs", parse);
 	else
@@ -452,9 +448,9 @@ Scenes.Gol.CombatLossDrone = function(gol) {
 	else
 		Text.Add("And what a mess you made while she lavished her affections on you! You're drenched in frothing, ivory cream of your own creation. More still is rolling out of your bloated cocktip[s]. You wonder if you're ever going to completely stop cumming, or if you really care.", parse);
 	Text.NL();
-	Text.Add("The Gol's skittering legs carry her back towards a comfortable patch of grass, near where her other captives are. None are affected like you. They're all either packing egg-bulged bellies or far-away, hungry looks, but none bear your impressive manhood[s]. She settles next to a glassy-eyed woman and eases the tip of her tail into her willing incubator's cunt. <i>“Come here.”</i> The Gol Queen gestures to you. <i>“You may father the eggs of future hives if you wish, drone-king. All you have to do is cum in here, forever.”</i> She rubs anxiously at her slit, quivering with her own need for breeding.", parse);
+	Text.Add("The Gol's skittering legs carry her back toward a comfortable patch of grass, near where her other captives are. None are affected like you. They're all either packing egg-bulged bellies or far-away, hungry looks, but none bear your impressive manhood[s]. She settles next to a glassy-eyed woman and eases the tip of her tail into her willing incubator's cunt. <i>“Come here.”</i> The Gol Queen gestures to you. <i>“You may father the eggs of future hives if you wish, drone-king. All you have to do is cum in here, forever.”</i> She rubs anxiously at her slit, quivering with her own need for breeding.", parse);
 	Text.NL();
-	Text.Add("Staggering up, you grab hold of your oozing erection[s] and stumble towards your Queen. She needs you, and you need her. You understand that. Without an endless source of cum, she won't be able to spread her hive across the lands. She won't be able to make the rest of the world understand what you do: that there's endless pleasure to be found beneath her scepter.", parse);
+	Text.Add("Staggering up, you grab hold of your oozing erection[s] and stumble toward your Queen. She needs you, and you need her. You understand that. Without an endless source of cum, she won't be able to spread her hive across the lands. She won't be able to make the rest of the world understand what you do: that there's endless pleasure to be found beneath her scepter.", parse);
 	Text.Flush();
 	
 	Gui.NextPrompt(function() {
@@ -511,7 +507,7 @@ Scenes.Gol.CombatWin = function() {
 	}
 	else {
 		parse["fem"] = player.mfFem("king", "queen");
-		Text.Add("The Gol takes one shuddering step towards you before collapsing in a heap, moaning and thrashing. Her human arms dive into the simmering sexpot that dominates her crotch while the insectile ones cross behind her back, pressing her huge breasts in your direction enticingly. The flexible extension at the end of her abdomen raises up to point in your direction, dripping long strands of fragrant lubricant. <i>”You... win... Fuck me.... Be hive [fem]. I will serve you. Please! So hot!”</i>", parse);
+		Text.Add("The Gol takes one shuddering step toward you before collapsing in a heap, moaning and thrashing. Her human arms dive into the simmering sexpot that dominates her crotch while the insectile ones cross behind her back, pressing her huge breasts in your direction enticingly. The flexible extension at the end of her abdomen raises up to point in your direction, dripping long strands of fragrant lubricant. <i>”You... win... Fuck me.... Be hive [fem]. I will serve you. Please! So hot!”</i>", parse);
 		Text.NL();
 		Text.Add("Forgotten, the scepter rolls down the mound of rubble to stop at your [feet]. You can grab and go, but when will you get another chance to sexually dominate a Gol? Her eyes are glassy with lust, and her expression is pleading.", parse);
 	}
@@ -590,7 +586,7 @@ Scenes.Gol.CombatWinHyperFuck = function(enc, p1cock) {
 	
 	Text.Clear();
 	parse["c"] = player.NumCocks() > 1 ? Text.Parse(", followed shortly by its smaller brother[s2]", parse) : "";
-	Text.Add("There's no point in delaying satiation any longer. You pull your [cock] out into the open air[c]. Surging powerfully, [itThey] rush[notEs] towards full tumescence with a speed that makes your head light and your loins ache. You waver, pumping it with idle strokes while you adjust to the repositioning of so much blood. Veins pump powerfully against your palms, and you let out a quiet sigh of contentment. You've finally met someone that can take what you have to offer.", parse);
+	Text.Add("There's no point in delaying satiation any longer. You pull your [cock] out into the open air[c]. Surging powerfully, [itThey] rush[notEs] toward full tumescence with a speed that makes your head light and your loins ache. You waver, pumping it with idle strokes while you adjust to the repositioning of so much blood. Veins pump powerfully against your palms, and you let out a quiet sigh of contentment. You've finally met someone that can take what you have to offer.", parse);
 	Text.NL();
 	if(lusty)
 		Text.Add("Drooling all over herself, the Gol gushes in more ways than one, <i>“Such a big dick! It could give me many young. Are we to breed now?”</i>", parse);
@@ -693,7 +689,7 @@ Scenes.Gol.CombatWinTailfuck = function(enc, p1cock) {
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	
 	Text.Clear();
-	Text.Add("With a randy smile, you free your [cocks], hefting the engorging length[s] as you look over the prone Gol. Your eyes flick down her chitin-covered breasts towards the huge, dripping gash at her crotch, then along her side to the dripping entrance at the end of her tail. That entrance is far more appropriately sized for[oneof] your [cocks]. You step forward and stroke yourself to the sight of your alien prize, leaving her no doubt as to your intentions.", parse);
+	Text.Add("With a randy smile, you free your [cocks], hefting the engorging length[s] as you look over the prone Gol. Your eyes flick down her chitin-covered breasts toward the huge, dripping gash at her crotch, then along her side to the dripping entrance at the end of her tail. That entrance is far more appropriately sized for[oneof] your [cocks]. You step forward and stroke yourself to the sight of your alien prize, leaving her no doubt as to your intentions.", parse);
 	Text.NL();
 	Text.Add("<i>“Yes...”</i> the Gol hisses, <i>“your seed will make our children strong.”</i> She squirms on the rubble, twisting to present her insectile backside to you. It ripples from stem to stern, culminating in a gush of fluid from her pussy packing tail. She wiggles it back and forth and smiles over her shoulder. <i>“Go ahead. Stick it in. This will drink your essence as freely as the other.”</i> She digs her scythe-tipped arms into the rubble to stabilize herself. Her torso is bent low and her swollen abdomen raised up to present to you.", parse);
 	Text.NL();
@@ -781,7 +777,7 @@ Scenes.Gol.CombatWinTailfuck = function(enc, p1cock) {
 			Text.NL();
 			Text.Add("The monstrous woman's powerful contractions lead you to stay inside her for far longer than you otherwise would have. Or perhaps it's the way her pheromones linger in your head, making it oh so easy to think with your [cocks]. No matter the cause, you stay there until you're half limp and exhausted, withdrawing once she finally stops milking your length. Puddles of sexual fluid soak the rubble-covered ground for feet in every direction, and your lower body is practically coated in fuckjuice.", parse);
 			Text.NL();
-			Text.Add("You stagger away towards the scepter. You got your prize, and she got the cum she wanted. Win-win, right?", parse);
+			Text.Add("You stagger away toward the scepter. You got your prize, and she got the cum she wanted. Win-win, right?", parse);
 			Text.Flush();
 			
 			Gui.NextPrompt(function() {
@@ -825,7 +821,7 @@ Scenes.Gol.CombatWinCunn = function(enc) {
 	Text.NL();
 	Text.Add("Confused for a second, the monstrous woman cocks her head to the side. Then, she moans, letting her tongue roll out of her mouth all at once. It's a gleaming pink thing, at least a foot long and wiggling unsubtly in your direction. Thick, viscous saliva drips from the organ as it wavers  before you, eagerly reaching for your passion-inflamed groin. That will do.", parse);
 	Text.NL();
-	Text.Add("You waste no time in disrobing and move towards the squirming muscle, cooing slightly at the touch of it on your moistened gates. It flexes against your vulva in a way that you can only describe as beautiful. Your [hips] quiver and lurch, edging closer and closer to the Gol's lips while your hands reach out in search of support. They alight on the insect queen's head, finding purchase in her hair.", parse);
+	Text.Add("You waste no time in disrobing and move toward the squirming muscle, cooing slightly at the touch of it on your moistened gates. It flexes against your vulva in a way that you can only describe as beautiful. Your [hips] quiver and lurch, edging closer and closer to the Gol's lips while your hands reach out in search of support. They alight on the insect queen's head, finding purchase in her hair.", parse);
 	Text.NL();
 	Text.Add("The Gol's tongue insistently presses against your skin, somehow hotter than it felt a moment before. You arch forward, close enough for ", parse);
 	if(player.FirstCock())
