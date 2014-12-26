@@ -229,7 +229,7 @@ Abilities.EnemySkill.GolLustyPheromones.OnHit = function(encounter, caster, targ
 	Text.AddOutput("[Name] blush[notEs] as [hisher] head swims with thoughts of naked trysts under the stars, overwhelmed by the Gol’s pheromones.", parse);
 	Text.Newline();
 }
-Abilities.EnemySkill.LustyPheromones.OnMiss = function(encounter, caster, target) {
+Abilities.EnemySkill.GolLustyPheromones.OnMiss = function(encounter, caster, target) {
 	var parse = { notS : caster.plural() ? "s" : "", Name : target.NameDesc(), hisher : target.hisher() };
 	
 	Text.AddOutput("[Name] hold[notS] [hisher] breath to avoid as much of it as possible. Frowning, the Gol releases her netherlips.", parse);
@@ -268,3 +268,38 @@ Abilities.EnemySkill.GolCuntDash.OnMiss = function(encounter, caster, target) {
 	Text.AddOutput("[Name] barely toss[notEs] [himher]self out of the way in time!", parse);
 	Text.Newline();
 }
+
+
+Abilities.EnemySkill.GolPollen = new AttackPhysical();
+Abilities.EnemySkill.GolPollen.name = "S.Pollen";
+Abilities.EnemySkill.GolPollen.Short = function() { return "Submission pollen."; }
+Abilities.EnemySkill.GolPollen.cost = { hp: null, sp: null, lp: 250 };
+Abilities.EnemySkill.GolPollen.atkMod = 0;
+Abilities.EnemySkill.GolPollen.hitMod = 0.8;
+Abilities.EnemySkill.GolPollen.targetMode = TargetMode.Enemies;
+Abilities.EnemySkill.GolPollen.OnCast = function(encounter, caster, target) {
+	var parse = {};
+	Text.AddOutput("Sighing, the Gol runs her hands through her shimmering black hair in frustration. After her fingers' first pass, she repeats the action, then does it again. And again. Soon the air around her seems slightly foggy, and your nose itches. A sneeze wracks your body as she continues the motion, filling the air with... something. You can't say what, but it's making you sneeze, and causing your nose to get itchy and irritable. The insectile beauty seems taller and more imposing after each involuntary spasm of your body. Her breasts appear larger, her pussy more inviting, and her face more charmingly human. For a monster, she wouldn't be a bad one to settle down with.", parse);
+	Text.Newline();
+}
+Abilities.EnemySkill.GolPollen.OnHit = function(encounter, caster, target) {
+	var parse = { Name : target.NameDesc(), is : target.is() };
+	target.AddLustFraction(0.2);
+	
+	if(Status.Slow(target, { hit : 0.6, factor : 2, turns : 1, turnsR : 3 })) {
+		Text.AddOutput("[Name] [is] slowed! ", parse);
+	}
+	if(Status.Horny(target, { hit : 0.6, str : 1, dmg : 0.1, turns : 1, turnsR : 3 })) {
+		Text.Newline();
+		Text.AddOutput("[Name] [is] horny! ", parse);
+	}
+	if(Status.Sleep(target, { hit : 0.5, turns : 1, turnsR : 3 })) {
+		Text.Newline();
+		Text.AddOutput("[Name] [is] drowsy! ", parse);
+	}
+	if(Status.Confuse(target, { hit : 0.3, turns : 1, turnsR : 3 })) {
+		Text.Newline();
+		Text.AddOutput("[Name] [is] confused! ", parse);
+	}
+}
+Abilities.EnemySkill.GolPollen.OnMiss = null;
