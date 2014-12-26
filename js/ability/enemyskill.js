@@ -251,7 +251,7 @@ Abilities.EnemySkill.GolCuntDash.OnCast = function(encounter, caster, target) {
 	
 	caster.AddLustFraction(0.1);
 }
-Abilities.EnemySkill.Bash.OnHit = function(encounter, caster, target, dmg) {
+Abilities.EnemySkill.GolCuntDash.OnHit = function(encounter, caster, target, dmg) {
 	var parse = { Name : target.NameDesc(), name : target.nameDesc(), notS : target.plural() ? "s" : "", poss : target.possessive() };
 	parse = target.ParserPronouns(parse);
 	
@@ -262,7 +262,7 @@ Abilities.EnemySkill.Bash.OnHit = function(encounter, caster, target, dmg) {
 	Text.AddOutput("When she finishes charging past, [name] blink[notS] in a daze and stagger to [hisher] feet, uncomfortably warm in all the wrong places.", parse);
 	Text.Newline();
 }
-Abilities.EnemySkill.Bash.OnMiss = function(encounter, caster, target) {
+Abilities.EnemySkill.GolCuntDash.OnMiss = function(encounter, caster, target) {
 	var parse = { himher : target.himher(), notEs : target.plural() ? "" : "es", Name : target.NameDesc() };
 	
 	Text.AddOutput("[Name] barely toss[notEs] [himher]self out of the way in time!", parse);
