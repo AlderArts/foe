@@ -236,3 +236,35 @@ Abilities.EnemySkill.LustyPheromones.OnMiss = function(encounter, caster, target
 	Text.Newline();
 }
 
+
+Abilities.EnemySkill.GolCuntDash = new AttackPhysical();
+Abilities.EnemySkill.GolCuntDash.name = "C.Dash";
+Abilities.EnemySkill.GolCuntDash.Short = function() { return "Cunt dash!"; }
+Abilities.EnemySkill.GolCuntDash.cost = { hp: null, sp: 50, lp: null};
+Abilities.EnemySkill.GolCuntDash.atkMod = 1.3;
+Abilities.EnemySkill.GolCuntDash.hitMod = 0.8;
+Abilities.EnemySkill.GolCuntDash.damageType.pBlunt = 1;
+Abilities.EnemySkill.GolCuntDash.damageType.pLust = 0.5;
+Abilities.EnemySkill.GolCuntDash.OnCast = function(encounter, caster, target) {
+	var parse = { name : target.nameDesc() };
+	Text.AddOutput("Without warning, the Gol launches herself forward, legs clattering as she approaches [name] with blinding speed. ", parse);
+	
+	caster.AddLustFraction(0.1);
+}
+Abilities.EnemySkill.Bash.OnHit = function(encounter, caster, target, dmg) {
+	var parse = { Name : target.NameDesc(), name : target.nameDesc(), notS : target.plural() ? "s" : "", poss : target.possessive() };
+	parse = target.ParserPronouns(parse);
+	
+	Text.AddOutput("[Name] react[notS] a little too late to dive out the way, but [heshe] manage[notS] to duck low in an attempt to slip under her scythes… just not low enough. Her oncoming crotch and abdomen smack into [name], and her fragrant pussy drags across [poss] face and slimes it with a thick coat of her vaginal juices. The chitin of her underbelly is quite soft on [poss] cheek, almost like a pleasant caress.", parse);
+	Text.Newline();
+	Text.AddOutput("The Gol queen bashes [name] for " + Text.BoldColor(dmg, "#800000") + " damage, staggering [himher]!", parse);
+	Text.Newline();
+	Text.AddOutput("When she finishes charging past, [name] blink[notS] in a daze and stagger to [hisher] feet, uncomfortably warm in all the wrong places.", parse);
+	Text.Newline();
+}
+Abilities.EnemySkill.Bash.OnMiss = function(encounter, caster, target) {
+	var parse = { himher : target.himher(), notEs : target.plural() ? "" : "es", Name : target.NameDesc() };
+	
+	Text.AddOutput("[Name] barely toss[notEs] [himher]self out of the way in time!", parse);
+	Text.Newline();
+}

@@ -80,8 +80,10 @@ GolQueen.prototype.Act = function(encounter, activeChar) {
 	var choice = Math.random();
 	if(choice < 0.2) //TODO
 		Abilities.Attack.CastInternal(encounter, this, t);
-	else if(choice < 0.4 && Abilities.EnemySkill.GolLustyPheromones.enabledCondition(encounter, this))
+	else if(choice < 0.3 && Abilities.EnemySkill.GolLustyPheromones.enabledCondition(encounter, this))
 		Abilities.EnemySkill.GolLustyPheromones.Use(encounter, this, t);
+	else if(choice < 0.4 && Abilities.EnemySkill.GolCuntDash.enabledCondition(encounter, this))
+		Abilities.EnemySkill.GolCuntDash.Use(encounter, this, t);
 	else if(choice < 0.6 && Abilities.Physical.DAttack.enabledCondition(encounter, this))
 		Abilities.Physical.DAttack.Use(encounter, this, t);
 	else if(choice < 0.7 && Abilities.Physical.GrandSlam.enabledCondition(encounter, this))
