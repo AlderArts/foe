@@ -24,6 +24,14 @@ world.loc.KingsRoad.Road.links.push(new Link(
 	}
 ));
 
+world.loc.KingsRoad.Road.events.push(new Link(
+	"Scepter", function() { return burrows.flags["Access"] == Burrows.AccessFlags.Stage4; }, true,
+	null,
+	function() {
+		Scenes.Gol.SearchForScepter();
+	}
+));
+
 world.loc.KingsRoad.Road.enc = new EncounterTable();
 world.loc.KingsRoad.Road.enc.AddEnc(function() {
 	return Scenes.Momo.MomoEnc;

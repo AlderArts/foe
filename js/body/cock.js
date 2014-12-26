@@ -2,7 +2,8 @@
 CockType = {
 	ordinary : 0,
 	clitcock : 1,
-	tentacle : 2
+	tentacle : 2,
+	ovipositor : 3
 }
 
 function Cock(race, color) {
@@ -75,6 +76,11 @@ Cock.prototype.noun = function() {
 		var r = Rand(2);
 		if     (r == 0) noun = "tentacle";
 		else if(r == 1) noun = "tentacle-cock";
+	}
+	else if(this.type == CockType.ovipositor) {
+		var r = Rand(2);
+		if     (r == 0) noun = "ovipositor";
+		else if(r == 1) noun = "egg-layer";
 	}
 	else {
 		var r = Rand(11);

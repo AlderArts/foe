@@ -141,6 +141,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/enemy/naga.js \
 	js/enemy/drake.js \
 	js/enemy/orchid.js \
+	js/enemy/gol.js \
 	js/main.js \
 	js/credits.js \
 	js/cheats.js \
