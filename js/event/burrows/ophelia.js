@@ -979,19 +979,9 @@ Scenes.Ophelia.Reward = function() {
 					Text.NL();
 					Text.Add("<i>“T-this time, he has gone too f-far,”</i> she mutters under her breath, clutching your arm wearily. <i>“He leaves me no choice...”</i> You eye your escort warily, but they don’t seem to have noticed Ophelia’s treasonous aspirations. Once you are back at the lab, she shuts the door behind you, collapsing on top of a pile of straw intended for her ‘volunteers’.", parse);
 					Text.NL();
-					Text.Add("After a long pause, the lagomorph alchemist speaks. <i>“Would you help me with one final thing, [playername]?”</i> Her words are calm and resolute, though you can sense her barely contained fury just below the surface. <i>“My father needs to be stopped, no matter the cost. I won’t ask you to face him - he is much too strong… but there is perhaps one who can. Someone who was once like him.”</i> She looks over to you, her eyes haggard. <i>“My mother.”</i>", parse);
-					Text.NL();
-					Text.Add("<i>“I… I overheard my father ordering some of his soldiers to go and hunt down a certain object, a scepter that was previously in his possession.”</i> Ophelia makes her way over to her desk, pulling out a scroll from behind a set of jars. You get the sense that she’s kept it hidden there. <i>“I found this among the stuff scavenged by the patrols.”</i> The parchment depicts a strange rock, and it’s covered in a tiny scrawl.", parse);
-					Text.NL();
-					Text.Add("<i>“It took me a while to decipher it, since it wasn’t written in a language of this world, but it describes some rather interesting properties of this stone. Without going into details, I suspect it might have had more than a little role in my father’s ‘awakening’. Perhaps it could restore my mother.”</i>", parse);
-					Text.NL();
-					Text.Add("She leans forward intently. <i>“I recognized the stone right away. It was the main piece of father’s scepter! I suspect that he doesn’t know its true significance, or he would be pouring more resources into retrieving it.”</i>", parse);
-					Text.NL();
-					Text.Add("<i>“The problem is finding it… The scepter was stolen by my little brother, Roa, when he escaped the burrows some time ago.”</i> The alchemist looks wistful. <i>“I always liked little Roa, but he couldn’t stand living here. At the time, I thought him foolish for leaving the fold, but in hindsight, I wish I had joined him.”</i>", parse);
-					Text.NL();
-					Text.Add("<i>“It’s a long shot, but Roa might still have the scepter. If I only knew where he was...”</i> Ophelia hangs her head in defeat. <i>“Who knows if he is even alive. He was always the favorite amongst his brothers, and he seemed to secretly enjoy being used by them. Wherever he is now, I don’t think that has changed.”</i>", parse);
-					Text.NL();
-					Text.Add("You agree to look for the estranged rabbit and the scepter he may or may not carry. Ophelia looks desperately hopeful, as this is possibly her last strand of hope.", parse);
+					
+					Scenes.Ophelia.ScepterRequest(false);
+					
 					Text.Flush();
 					
 					party.location = world.loc.Burrows.Lab;
@@ -1002,6 +992,37 @@ Scenes.Ophelia.Reward = function() {
 			
 			Scenes.Ophelia.RewardChoices();
 		});
+	}
+}
+
+Scenes.Ophelia.ScepterRequest = function(fight) {
+	var parse = {
+		again : fight ? " again" : "",
+		haggardDetermined : fight ? "determined" : "haggard"
+	};
+	
+	Text.Add("After a long pause, the lagomorph alchemist speaks. <i>“Would you help me with one final thing, [playername]?”</i> Her words are calm and resolute, though you can sense her barely contained fury just below the surface. <i>“My father needs to be stopped, no matter the cost. I won’t ask you to face him[again] - he is much too strong… but there is perhaps someone who can. Someone who was once like him.”</i> She looks over to you, her eyes [haggardDetermined]. <i>“My mother.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“I… I overheard my father ordering some of his soldiers to go and hunt down a certain object, a scepter that was previously in his possession.”</i> ", parse);
+	if(fight)
+		Text.Add("Ophelia stares off into the distance, tapping her chin thoughtfully. <i>“Knowing I’d heard about something like it before, I scoured my notes, and found a scavenged document depicting said scepter- or at least the gem mounted in it.”</i>", parse);
+	else
+		Text.Add("Ophelia makes her way over to her desk, pulling out a scroll from behind a set of jars. You get the sense that she’s kept it hidden there. <i>“I found this among the stuff scavenged by the patrols.”</i> The parchment depicts a strange rock, and it’s covered in a tiny scrawl.", parse);
+	Text.NL();
+	Text.Add("<i>“It took me a while to decipher it, since it wasn’t written in a language of this world, but it describes some rather interesting properties of this stone. Without going into details, I suspect it might have had more than a little role in my father’s ‘awakening’. Perhaps it could restore my mother.”</i>", parse);
+	Text.NL();
+	Text.Add("She leans forward intently. <i>“I recognized the stone right away. It was the main piece of father’s scepter! I suspect that he doesn’t know its true significance, or he would be pouring more resources into retrieving it.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“The problem is finding it… The scepter was stolen by my little brother, Roa, when he escaped the burrows some time ago.”</i> The alchemist looks wistful. <i>“I always liked little Roa, but he couldn’t stand living here. At the time, I thought him foolish for leaving the fold, but in hindsight, I wish I had joined him.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“It’s a long shot, but Roa might still have the scepter. If I only knew where he was...”</i> Ophelia hangs her head in defeat. <i>“Who knows if he is even alive. He was always the favorite amongst his brothers, and he seemed to secretly enjoy being used by them. Wherever he is now, I don’t think that has changed.”</i>", parse);
+	Text.NL();
+	Text.Add("You agree to look for the estranged rabbit and the scepter he may or may not carry. Ophelia looks cheerfully optimistic, but you feel this is probably her last strand of hope.", parse);
+	if(fight) {
+		Text.NL();
+		Text.Add("<i>“You probably shouldn’t return until you have found the scepter; father’s guards are probably heading here as we speak.”</i> The alchemist puts on a brave face, though you see the fear hiding just beneath the surface. <i>“Don’t worry about me, I’ll lay low for a while.”</i>", parse);
+		Text.NL();
+		Text.Add("The hidden meaning behind her words is ‘hurry’.", parse);
 	}
 }
 
