@@ -410,7 +410,7 @@ Scenes.Mothgirl.WinAnal = function(enc, cocksInAss) {
 	Text.NL();
 	Text.Add("It isn't long before the moth-girl's grunts of discomfort give way to loud cries of pleasure. Her fingers work furiously between her legs, alternating between teasing her clit and plunging into her drooling cunt. ", parse);
 	if(cocksInAss.length > 1) {
-		Text.Add("You decide to have a little mercy on her, and grab[oneof] your other cock[s], angling it towards her gash. She makes a delighted little squeal when you slam your second member in, and her whole body goes limp with overwhelming pleasure. ", parse);
+		Text.Add("You decide to have a little mercy on her, and grab[oneof] your other cock[s], angling it toward her gash. She makes a delighted little squeal when you slam your second member in, and her whole body goes limp with overwhelming pleasure. ", parse);
 		
 		Sex.Vaginal(player, moth);
 		moth.FuckVag(moth.FirstVag(), p1cock, 2);
