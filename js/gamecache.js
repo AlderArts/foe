@@ -155,6 +155,8 @@ InitCache = function() {
 	
 	gameCache.flags["NagaVenom"]      = gameCache.flags["NagaVenom"] || 0;
 	
+	gameCache.flags["Moth"]      = gameCache.flags["Moth"] || 0;
+	
 	if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage5) rigard.flags["Scepter"] = 0;
 }
 

@@ -37,6 +37,7 @@ CreditsScreen = function() {
 	Text.Add("Patches: Me and LD<br/>");
 	Text.Add("Roa: Me, QB and LD<br/>");
 	Text.Add("Gol: Me and Fenoxo<br/>");
+	Text.Add("Mothgirl: Savin<br/>");
 	
 	Text.NL();
 	

@@ -1114,6 +1114,45 @@ Body.prototype.ThighsDesc = function() {
 	}
 }
 // TODO
+Body.prototype.KneesDesc = function(plural) {
+	var legs = this.legs;
+	if(!legs) return "body";
+	if(legs.count == 0) {
+		if(legs.race == Race.snake)
+			return "snake-like tail";
+		return "body";
+	}
+	
+	var adj = "";
+	switch(legs.race) {
+		case Race.dragon:
+		case Race.lizard:
+			adj += "scaled "; break;
+		
+		case Race.cow:
+		case Race.goat:
+		case Race.sheep:
+		case Race.satyr:
+		case Race.horse:
+		case Race.ferret:
+		case Race.rabbit:
+		case Race.fox:
+		case Race.wolf:
+		case Race.dog:
+		case Race.cat:
+			adj += "furred "; break;
+		
+		case Race.elf:
+		case Race.human:
+		case Race.demon:
+		case Race.dryad:
+		
+		default:
+	}
+	
+	return adj + plural ? "knees" : "knee";
+}
+// TODO
 Body.prototype.ArmDesc = function() {
 	var arm = this.arms;
 	if(!arm) return "body";

@@ -1849,6 +1849,12 @@ Entity.prototype.ThighDesc = function() {
 Entity.prototype.ThighsDesc = function() {
 	return this.body.ThighsDesc();
 }
+Entity.prototype.KneeDesc = function() {
+	return this.body.KneesDesc();
+}
+Entity.prototype.KneesDesc = function() {
+	return this.body.KneesDesc(true);
+}
 Entity.prototype.FeetDesc = function() {
 	return this.body.FeetDesc();
 }
