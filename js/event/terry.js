@@ -21,6 +21,15 @@ function Terry(storage) {
 	this.jobs["Fighter"].level = 3;
 	this.jobs["Fighter"].mult  = 2;
 	this.jobs["Rogue"]     = new JobDesc(Jobs.Rogue);
+	this.jobs["Ranger"]    = new JobDesc(Jobs.Ranger);    this.jobs["Ranger"].mult    = 2;
+	this.jobs["Scholar"]   = new JobDesc(Jobs.Scholar);   this.jobs["Scholar"].mult   = 3;
+	this.jobs["Courtesan"] = new JobDesc(Jobs.Courtesan); this.jobs["Courtesan"].mult = 2;
+
+	this.jobs["Mage"]      = new JobDesc(Jobs.Mage);   this.jobs["Mage"].mult   = 2;
+	this.jobs["Mystic"]    = new JobDesc(Jobs.Mystic); this.jobs["Mystic"].mult = 2;
+	this.jobs["Healer"]    = new JobDesc(Jobs.Healer); this.jobs["Healer"].mult = 2;
+	
+	this.jobs["Hypnotist"] = new JobDesc(Jobs.Hypnotist);
 	
 	this.maxHp.base        = 50;
 	this.maxSp.base        = 60; this.maxSp.growth        = 6;
