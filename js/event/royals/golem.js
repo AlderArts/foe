@@ -63,6 +63,13 @@ function GolemBoss(storage) {
 GolemBoss.prototype = new BossEntity();
 GolemBoss.prototype.constructor = GolemBoss;
 
+//TODO
+GolemBoss.prototype.DropTable = function() {
+	var drops = [];
+	//drops.push({ it: Items.Leporine });
+	return drops;
+}
+
 GolemBoss.prototype.FromStorage = function(storage) {
 	// Personality stats
 	

@@ -59,6 +59,13 @@ function OrchidBoss(storage) {
 OrchidBoss.prototype = new BossEntity();
 OrchidBoss.prototype.constructor = OrchidBoss;
 
+//TODO
+OrchidBoss.prototype.DropTable = function() {
+	var drops = [];
+	//drops.push({ it: Items.Leporine });
+	return drops;
+}
+
 OrchidBoss.prototype.FromStorage = function(storage) {
 	// Personality stats
 	

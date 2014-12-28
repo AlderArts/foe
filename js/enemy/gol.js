@@ -63,6 +63,13 @@ function GolQueen() {
 GolQueen.prototype = new BossEntity();
 GolQueen.prototype.constructor = GolQueen;
 
+//TODO
+GolQueen.prototype.DropTable = function() {
+	var drops = [];
+	//drops.push({ it: Items.Leporine });
+	return drops;
+}
+
 GolQueen.prototype.Act = function(encounter, activeChar) {
 	// TODO: Very TEMP
 	Text.AddOutput(this.name + " acts! Buzz!");

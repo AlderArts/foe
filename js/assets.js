@@ -19,6 +19,9 @@ Images.terry_c      = "data/terry_c.png";
 Images.momo         = "data/momo.png";
 Images.uru1         = "data/uru1.png";
 
+Images.lagon_r      = "data/lagon_r.png";
+Images.lagon_b      = "data/lagon_b.png";
+
 Images.imp          = "data/imp.png";
 Images.introdemon   = "data/introdemon.png";
 Images.stallion     = "data/stallion.png";
