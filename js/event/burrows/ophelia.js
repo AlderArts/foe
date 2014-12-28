@@ -229,6 +229,21 @@ Scenes.Ophelia.LabPrompt = function() {
 		}, enabled : true,
 		tooltip : "Donate some of your alchemical stock to Ophelia."
 	});
+	if(burrows.flags["Access"] == Burrows.AccessFlags.Stage3) {
+		options.push({ nameStr : "Roa",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>“My little brother is not a well versed adventurer like you. I fear he may have fallen prey to some horrible monster, perhaps a bloodthirsty fox, or even a ferret...”</i> The alchemist shudders. <i>“If he made it, he is hiding somewhere that my father’s soldiers cannot enter, like the big city or the deep forest.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“I wonder where he is… He could never stand being away from the breeding pit for long. I hope that he has found some nice friends to breed with.”</i> She sighs dejectedly.", parse);
+				Text.NL();
+				Text.Add("Sounds like the most likely place to find the estranged rabbit would be a whorehouse. Or the belly of some monster.", parse);
+				Text.Flush();
+				Scenes.Ophelia.LabPrompt();
+			}, enabled : true,
+			tooltip : "Ask Ophelia for clues on Roa’s whereabouts."
+		});
+	}
 	
 	//TODO
 	/*
