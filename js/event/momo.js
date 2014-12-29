@@ -591,7 +591,7 @@ Scenes.Momo.TalkPrompt = function() {
 			
 			world.TimeStep({minute: 15});
 			
-			momo.relation.IncreaseStat(20, 2);
+			momo.relation.IncreaseStat(25, 2);
 			
 			Scenes.Momo.TalkPrompt();
 		}, enabled : true,
@@ -627,7 +627,7 @@ Scenes.Momo.TalkPrompt = function() {
 			
 			world.TimeStep({minute: 30});
 			
-			momo.relation.IncreaseStat(20, 2);
+			momo.relation.IncreaseStat(25, 2);
 			
 			momo.flags["tSelf"] = 1;
 	
@@ -685,7 +685,7 @@ Scenes.Momo.TalkPrompt = function() {
 				if(momo.flags["tFamily"] == 0)
 					momo.flags["tFamily"] = 1;
 				
-				momo.relation.IncreaseStat(20, 2);
+				momo.relation.IncreaseStat(25, 2);
 				
 				//[Flirt][Nope]
 				var options = new Array();
@@ -784,7 +784,7 @@ Scenes.Momo.TalkPrompt = function() {
 				Text.Add("<i>“So, did you have any other questions?“</i> she asks brightly, a chipper look on her face as she looks at you.", parse);
 				Text.Flush();
 				
-				momo.relation.IncreaseStat(20, 2);
+				momo.relation.IncreaseStat(25, 2);
 				
 				world.TimeStep({minute: 20});
 				
@@ -914,7 +914,7 @@ Scenes.Momo.TalkPrompt = function() {
 				Text.Add("<i>“Well... I think that about sums it up,“</i> she notes, pausing thoughtfully. Nodding her head, she looks back at you. <i>“Anything else you wanted?“</i>", parse);
 				Text.Flush();
 				
-				momo.relation.IncreaseStat(20, 2);
+				momo.relation.IncreaseStat(25, 2);
 				
 				world.TimeStep({minute: 10});
 				
