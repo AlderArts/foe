@@ -16,15 +16,18 @@ Saver.SavePrompt = function(backFunc) {
 			Text.AddOutput(name);
 			options.push({ nameStr : "Game " + i,
 				func : function(obj) {
-					var conf = confirm("This will overwrite save slot " + obj + ", continue?");
-					if(conf == true) Saver.SaveGame(obj);
+					var prmpt = prompt("This will overwrite save slot " + obj + ", continue? \n\n Comment:");
+					if(prmpt != null) Saver.SaveGame(obj, prmpt);
 				}, enabled : true, obj : i
 			});
 		}
 		else {
 			Text.AddOutput("EMPTY");
 			options.push({ nameStr : "Game " + i,
-				func : Saver.SaveGame, enabled : true, obj : i
+				func : function(obj) {
+					var prmpt = prompt("This will save to slot " + obj + ", continue? \n\n Comment:");
+					if(prmpt != null) Saver.SaveGame(obj, prmpt);
+				}, enabled : true, obj : i
 			});
 		}
 		Text.Newline();
@@ -36,7 +39,7 @@ Saver.SavePrompt = function(backFunc) {
     	Text.AddOutput("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
 }
 
-Saver.SaveGame = function(nr) {
+Saver.SaveGame = function(nr, cmt) {
 	GameToCache();
 	var seen = [];
 	localStorage["savedata" + nr] = JSON.stringify(gameCache, function(key, val) {
@@ -47,8 +50,11 @@ Saver.SaveGame = function(nr) {
 	    }
 	    return val;
 	});
+	var saveName = gameCache.name;
+	if(cmt)
+		saveName += " ::: Comment: " + cmt;
 	// TODO: Name, level, time
-	localStorage["save" + nr] = gameCache.name;
+	localStorage["save" + nr] = saveName;
 	Saver.SavePrompt();
 }
 
