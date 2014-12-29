@@ -1480,7 +1480,7 @@ Scenes.Terry.TalkPrompt = function() {
 		himher  : terry.himher(),
 		hishers : terry.hishers()
 	};
-	
+
 	var options = new Array();
 	options.push({ nameStr : "Feelings",
 		func : Scenes.Terry.TalkFeelings, enabled : true,
@@ -1499,12 +1499,13 @@ Scenes.Terry.TalkPrompt = function() {
 		func : Scenes.Terry.TalkCompliment, enabled : true,
 		tooltip : Text.Parse("Let the [foxvixen] know how attractive [heshe] is.", parse)
 	});
-	
+
 	Gui.SetButtonsFromList(options, true, terry.Interact);
 }
 
 Scenes.Terry.TalkFeelings = function() {
 	var parse = {
+		playername: player.name,
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		HeShe   : terry.HeShe(),
 		heshe   : terry.heshe(),
@@ -1515,7 +1516,7 @@ Scenes.Terry.TalkFeelings = function() {
 		breasts : function() { return terry.FirstBreastRow().Short(); },
 		breastsDesc : function() { return player.FirstBreastRow().Short(); }
 	};
-	
+
 	Text.Clear();
 	if(terry.LustLevel() >= 0.5) {
 		if(terry.Relation() >= 60) {
