@@ -516,6 +516,7 @@ Scenes.Mothgirl.Loss = function(enc, traded) {
 		asshole : function() { return player.Butt().AnalShort(); },
 		balls   : function() { return player.BallsDesc(); },
 		skin    : function() { return player.SkinDesc(); },
+		hair    : function() { return player.Hair().Short(); },
 		breasts : function() { return player.FirstBreastRow().Short(); },
 		nipples : function() { return player.FirstBreastRow().NipsShort(); },
 		tongue  : function() { return player.TongueDesc(); }
@@ -570,8 +571,12 @@ Scenes.Mothgirl.Loss = function(enc, traded) {
 		Text.NL();
 		parse["c"] = player.FirstCock() ? " and fucking" : "";
 		Text.Add("You keep doing what you're doing, suckling and fingering[c], harder and faster until the moth throws her head back with an orgiastic scream of pleasure that echoes out around you, roaring with feminine ecstasy as fem-cum gushes out around you, smearing your crotch with her juices as she cums and cums, her orgasm lasting for what seems like a blissful eternity.", parse);
-		if(player.FirstCock())
+		if(player.FirstCock()) {
 			Text.Add(" Her cunt spasms and squeezes so wonderfully tight around your [cock] as she orgasms, drawing you so close to the edge you can hardly think, save to grab the moth's hips and slam her down on your dick, cramming every last inch into her. She gives another shriek of pleasure, not skipping a beat as she moves her hips to bring you over too. Your fingers dig into her skin, holding the moth-slut tight as you join her in orgasm, blowing your load deep inside her.", parse);
+			var cum = player.OrgasmCum();
+		}
+		else
+			player.AddLustFraction(0.2);
 		Text.NL();
 		Text.Add("You head falls back, chest heaving with exertion as the moth slumps forward, head resting against your [breasts]. Her wings flitter weakly behind her, arms wrapping around your neck to hold you tight. Pinned underneath a heap of warm, fuzzy moth-girl, you don't have many options but to lock your arms around her waist and return the favor, closing your eyes in momentary contentment.", parse);
 		Text.NL();
