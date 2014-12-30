@@ -48,6 +48,38 @@ function Item(id, name) {
 	ItemIds[id] = this;
 }
 
+Item.TypeToStr = function(type) {
+	switch(type) {
+		case ItemType.Weapon: return "Weapon";
+		case ItemType.TopArmor: return
+		case ItemType.BotArmor: return
+		case ItemType.FullArmor: return "Armor";
+		case ItemType.Accessory:
+		case ItemType.Acc1:
+		case ItemType.Acc2: return "Accessory";
+		case ItemType.StrapOn: return "Strapon";
+		case ItemType.None:
+		default:
+			return "Misc";
+	}
+}
+
+Item.prototype.Type = function() {
+	switch(this.EquipType) {
+		case ItemType.Weapon: return ItemType.Weapon;
+		case ItemType.TopArmor:
+		case ItemType.BotArmor:
+		case ItemType.FullArmor: return ItemType.FullArmor;
+		case ItemType.Accessory:
+		case ItemType.Acc1:
+		case ItemType.Acc2: return ItemType.Accessory;
+		case ItemType.StrapOn: return ItemType.StrapOn;
+		case ItemType.None:
+		default:
+			return ItemType.None;
+	}
+}
+
 //function(target)
 Item.prototype.Equip = function(target) {
 	if(this.effect.maxHp)        target.maxHp.bonus         += this.effect.maxHp;
@@ -290,16 +322,21 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 		Text.Clear();
 
 	var itemsByType = {};
-	var usableItems = [];
+	var usableItemsByType = {};
 	for(var i = 0; i < this.items.length; i++) {
 		var it = this.items[i].it;
 		var itemArr = [];
 		if(itemsByType.hasOwnProperty(it.EquipType))
-			itemArr = itemsByType[it.EquipType];
+			itemArr = itemsByType[it.Type()];
 		itemArr.push(this.items[i]);
-		itemsByType[it.EquipType] = itemArr;
+		itemsByType[it.Type()] = itemArr;
 
 		if(!it.Use) continue;
+
+		var usableItems = [];
+		if(usableItemsByType.hasOwnProperty(it.EquipType))
+			usableItems = usableItemsByType[it.Type()];
+		
 		usableItems.push({
 			nameStr: it.name + " x"+ this.items[i].num,
 			enabled: true,
@@ -338,25 +375,31 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 				Gui.SetButtonsFromList(target, true, backPrompt);
 			}
 		});
+		
+		usableItemsByType[it.Type()] = usableItems;
 	}
+
 
 	//TODO Probably should order the item output differently.
-	//TODO Probably should have more "display friendly" item type names
 	//TODO The output format could be much nicer,
-	for(var itemType in ItemType){
-		Text.Add("<b>"+itemType + "</b><br/>");
-		var items = itemsByType[ItemType[itemType]];
-		if(items)
-			for(var i=0; i < items.length; i++){
+	for(var key in itemsByType) {
+		Text.Add("<b>"+Item.TypeToStr(parseInt(key)) + ":</b><br/>");
+		var items = itemsByType[key];
+		if(items) {
+			for(var i=0; i < items.length; i++) {
 				Text.Add(items[i].it.name + " x"+items[i].num + "<br/>");
 			}
-		else
-			Text.Add("None <br/>");
+		}
 		Text.NL();
 	}
-
-
-	Gui.SetButtonsFromList(usableItems);
+	
+	var options = [];
+	for(var key in usableItemsByType) {
+		var items = usableItemsByType[key];
+		if(items)
+			options = options.concat(items);
+	}
+	Gui.SetButtonsFromList(options);
 	
 	if(this.items.length == 0)
 		Text.Add("You are not carrying anything at the moment.");
