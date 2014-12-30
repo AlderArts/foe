@@ -21,6 +21,7 @@ Images.uru1         = "data/uru1.png";
 
 Images.lagon_r      = "data/lagon_r.png";
 Images.lagon_b      = "data/lagon_b.png";
+Images.ophelia_b    = "data/ophelia_b.png";
 
 Images.imp          = "data/imp.png";
 Images.introdemon   = "data/introdemon.png";
