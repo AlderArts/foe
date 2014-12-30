@@ -326,8 +326,7 @@ Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItems
 			itemsByType[it.Type()] = itemArr;
 		}
 
-		if(usableItemsByType) {
-			if(!it.Use) continue;
+		if(usableItemsByType && it.Use) {
 			var itemArr = [];
 			if(usableItemsByType.hasOwnProperty(it.EquipType))
 				itemArr = usableItemsByType[it.Type()];
@@ -335,8 +334,7 @@ Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItems
 			usableItemsByType[it.Type()] = itemArr;
 		}
 		
-		if(combatItemsByType) {
-			if(!it.UseCombat) continue;
+		if(combatItemsByType && it.UseCombat) {
 			var itemArr = [];
 			if(combatItemsByType.hasOwnProperty(it.EquipType))
 				itemArr = combatItemsByType[it.Type()];
