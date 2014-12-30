@@ -295,7 +295,7 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 		Text.Add(this.items[i].num + "x " + it.name + " - " + it.Short() + "<br/>");
 		if(!it.Use) continue;
 		list.push({
-			nameStr: it.name,
+			nameStr: it.name + " x"+ this.items[i].num,
 			enabled: true,
 			//tooltip: it.Long(),
 			obj: it,
