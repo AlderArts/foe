@@ -315,6 +315,37 @@ Inventory.prototype.Print = function() {
 	}
 }
 
+Inventory.prototype.ItemByType = function(itemsByType, usableItemsByType, combatItemsByType) {
+	for(var i = 0; i < this.items.length; i++) {
+		var it = this.items[i].it;
+		if(itemsByType) {
+			var itemArr = [];
+			if(itemsByType.hasOwnProperty(it.EquipType))
+				itemArr = itemsByType[it.Type()];
+			itemArr.push(this.items[i]);
+			itemsByType[it.Type()] = itemArr;
+		}
+
+		if(usableItemsByType) {
+			if(!it.Use) continue;
+			var itemArr = [];
+			if(usableItemsByType.hasOwnProperty(it.EquipType))
+				itemArr = usableItemsByType[it.Type()];
+			itemArr.push(this.items[i]);
+			usableItemsByType[it.Type()] = itemArr;
+		}
+		
+		if(combatItemsByType) {
+			if(!it.UseCombat) continue;
+			var itemArr = [];
+			if(combatItemsByType.hasOwnProperty(it.EquipType))
+				itemArr = combatItemsByType[it.Type()];
+			itemArr.push(this.items[i]);
+			combatItemsByType[it.Type()] = itemArr;
+		}
+	}
+}
+
 Inventory.prototype.ShowInventory = function(preventClear) {
 	var inv = this;
 	var backPrompt = function() { inv.ShowInventory(); }
@@ -323,22 +354,35 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 
 	var itemsByType = {};
 	var usableItemsByType = {};
-	for(var i = 0; i < this.items.length; i++) {
-		var it = this.items[i].it;
-		var itemArr = [];
-		if(itemsByType.hasOwnProperty(it.EquipType))
-			itemArr = itemsByType[it.Type()];
-		itemArr.push(this.items[i]);
-		itemsByType[it.Type()] = itemArr;
+	
+	inv.ItemByType(itemsByType, usableItemsByType);
 
-		if(!it.Use) continue;
-
-		var usableItems = [];
-		if(usableItemsByType.hasOwnProperty(it.EquipType))
-			usableItems = usableItemsByType[it.Type()];
-		
-		usableItems.push({
-			nameStr: it.name + " x"+ this.items[i].num,
+	//TODO Probably should order the item output differently.
+	//TODO The output format could be much nicer,
+	for(var key in itemsByType) {
+		Text.Add("<b>"+Item.TypeToStr(parseInt(key)) + ":</b><br/>");
+		var items = itemsByType[key];
+		if(items) {
+			for(var i=0; i < items.length; i++) {
+				Text.Add(items[i].it.name + " x"+items[i].num + "<br/>");
+			}
+		}
+		Text.NL();
+	}
+	
+	var usable = [];
+	for(var key in usableItemsByType) {
+		var items = usableItemsByType[key];
+		if(items)
+			usable = usable.concat(items);
+	}
+	
+	var options = [];
+	for(var i = 0; i < usable.length; ++i) {
+		var it  = usable[i].it;
+		var num = usable[i].num;
+		options.push({
+			nameStr: it.name + " x"+ num,
 			enabled: true,
 			//tooltip: it.Long(),
 			obj: it,
@@ -375,29 +419,6 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 				Gui.SetButtonsFromList(target, true, backPrompt);
 			}
 		});
-		
-		usableItemsByType[it.Type()] = usableItems;
-	}
-
-
-	//TODO Probably should order the item output differently.
-	//TODO The output format could be much nicer,
-	for(var key in itemsByType) {
-		Text.Add("<b>"+Item.TypeToStr(parseInt(key)) + ":</b><br/>");
-		var items = itemsByType[key];
-		if(items) {
-			for(var i=0; i < items.length; i++) {
-				Text.Add(items[i].it.name + " x"+items[i].num + "<br/>");
-			}
-		}
-		Text.NL();
-	}
-	
-	var options = [];
-	for(var key in usableItemsByType) {
-		var items = usableItemsByType[key];
-		if(items)
-			options = options.concat(items);
 	}
 	Gui.SetButtonsFromList(options);
 	
@@ -415,12 +436,23 @@ Inventory.prototype.CombatInventory = function(encounter, entity, back) {
 		inv.CombatInventory(encounter, entity, back);
 	}
 	
-	var list = [];
-	for(var i = 0; i < this.items.length; i++) {
-		var it = this.items[i].it;
-		if(!it.UseCombat) continue;
-		Text.Add(this.items[i].num + "x " + it.name + " - " + it.Short() + "<br/>");
-		list.push({
+	var combatItemsByType = {};
+	inv.ItemByType(null, null, combatItemsByType);
+	
+	var usable = [];
+	for(var key in combatItemsByType) {
+		var items = combatItemsByType[key];
+		if(items)
+			usable = usable.concat(items);
+	}
+	
+	var options = [];
+	for(var i = 0; i < usable.length; ++i) {
+		var it  = usable[i].it;
+		var num = usable[i].num;
+		
+		Text.Add(num + "x " + it.name + " - " + it.Short() + "<br/>");
+		options.push({
 			nameStr: it.name,
 			enabled: true,
 			//tooltip: it.Long(),
@@ -436,9 +468,9 @@ Inventory.prototype.CombatInventory = function(encounter, entity, back) {
 			}
 		});
 	}
-	Gui.SetButtonsFromList(list, true, back);
+	Gui.SetButtonsFromList(options, true, back);
 	
-	if(list.length == 0)
+	if(options.length == 0)
 		Text.Add("You are not carrying any items usable in combat at the moment.");
 	Text.Flush();
 }
