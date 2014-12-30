@@ -288,14 +288,20 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 	var backPrompt = function() { inv.ShowInventory(); }
 	if(!preventClear)
 		Text.Clear();
-	
-	var list = [];
+
+	var itemsByType = {};
+	var usableItems = [];
 	for(var i = 0; i < this.items.length; i++) {
 		var it = this.items[i].it;
-		Text.Add(this.items[i].num + "x " + it.name + " - " + it.Short() + "<br/>");
+		var itemArr = [];
+		if(itemsByType.hasOwnProperty(it.EquipType))
+			itemArr = itemsByType[it.EquipType];
+		itemArr.push(this.items[i]);
+		itemsByType[it.EquipType] = itemArr;
+
 		if(!it.Use) continue;
-		list.push({
-			nameStr: it.name,
+		usableItems.push({
+			nameStr: it.name + " x"+ this.items[i].num,
 			enabled: true,
 			//tooltip: it.Long(),
 			obj: it,
@@ -333,7 +339,24 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 			}
 		});
 	}
-	Gui.SetButtonsFromList(list);
+
+	//TODO Probably should order the item output differently.
+	//TODO Probably should have more "display friendly" item type names
+	//TODO The output format could be much nicer,
+	for(var itemType in ItemType){
+		Text.Add("<b>"+itemType + "</b><br/>");
+		var items = itemsByType[ItemType[itemType]];
+		if(items)
+			for(var i=0; i < items.length; i++){
+				Text.Add(items[i].it.name + " x"+items[i].num + "<br/>");
+			}
+		else
+			Text.Add("None <br/>");
+		Text.NL();
+	}
+
+
+	Gui.SetButtonsFromList(usableItems);
 	
 	if(this.items.length == 0)
 		Text.Add("You are not carrying anything at the moment.");
