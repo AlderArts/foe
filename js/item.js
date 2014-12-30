@@ -315,14 +315,14 @@ Inventory.prototype.Print = function() {
 	}
 }
 
-Inventory.prototype.ItemByType = function(itemsByType, usableItemsByType, combatItemsByType) {
-	for(var i = 0; i < this.items.length; i++) {
-		var it = this.items[i].it;
+Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItemsByType) {
+	for(var i = 0; i < inv.length; i++) {
+		var it = inv[i].it;
 		if(itemsByType) {
 			var itemArr = [];
 			if(itemsByType.hasOwnProperty(it.EquipType))
 				itemArr = itemsByType[it.Type()];
-			itemArr.push(this.items[i]);
+			itemArr.push(inv[i]);
 			itemsByType[it.Type()] = itemArr;
 		}
 
@@ -331,7 +331,7 @@ Inventory.prototype.ItemByType = function(itemsByType, usableItemsByType, combat
 			var itemArr = [];
 			if(usableItemsByType.hasOwnProperty(it.EquipType))
 				itemArr = usableItemsByType[it.Type()];
-			itemArr.push(this.items[i]);
+			itemArr.push(inv[i]);
 			usableItemsByType[it.Type()] = itemArr;
 		}
 		
@@ -340,7 +340,7 @@ Inventory.prototype.ItemByType = function(itemsByType, usableItemsByType, combat
 			var itemArr = [];
 			if(combatItemsByType.hasOwnProperty(it.EquipType))
 				itemArr = combatItemsByType[it.Type()];
-			itemArr.push(this.items[i]);
+			itemArr.push(inv[i]);
 			combatItemsByType[it.Type()] = itemArr;
 		}
 	}
@@ -355,16 +355,16 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 	var itemsByType = {};
 	var usableItemsByType = {};
 	
-	inv.ItemByType(itemsByType, usableItemsByType);
+	Inventory.ItemByType(this.items, itemsByType, usableItemsByType);
 
 	//TODO Probably should order the item output differently.
 	//TODO The output format could be much nicer,
 	for(var key in itemsByType) {
-		Text.Add("<b>"+Item.TypeToStr(parseInt(key)) + ":</b><br/>");
+		Text.Add("<b>"+Item.TypeToStr(parseInt(key)) + ":</b>");
 		var items = itemsByType[key];
 		if(items) {
 			for(var i=0; i < items.length; i++) {
-				Text.Add(items[i].it.name + " x"+items[i].num + "<br/>");
+				Text.Add("<br/>" + items[i].it.name + " x"+items[i].num);
 			}
 		}
 		Text.NL();
@@ -437,7 +437,7 @@ Inventory.prototype.CombatInventory = function(encounter, entity, back) {
 	}
 	
 	var combatItemsByType = {};
-	inv.ItemByType(null, null, combatItemsByType);
+	Inventory.ItemByType(this.items, null, null, combatItemsByType);
 	
 	var usable = [];
 	for(var key in combatItemsByType) {

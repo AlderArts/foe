@@ -40,7 +40,8 @@ Shop.prototype.Buy = function(back, preventClear) {
 		var num  = party.Inv().QueryNum(obj.it) || 0;
 		
 		Text.Clear();
-		Text.AddOutput("Buy " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
+		Text.Add("Buy " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
+		Text.Flush();
 		
 		//[name]
 		var options = new Array();
@@ -81,35 +82,48 @@ Shop.prototype.Buy = function(back, preventClear) {
 		});
 	};
 	
-	var options = new Array();
-	for(var i = 0; i < this.inventory.length; i++) {
-		var it       = this.inventory[i].it;
-		var num      = this.inventory[i].num;
-		var enabled  = this.inventory[i].enabled ? this.inventory[i].enabled() : true;
-		var cost     = DEBUG ? 0 : Math.floor(this.inventory[i].price * it.price);
-		var func     = this.inventory[i].func;
+	var itemsByType = {};
+	Inventory.ItemByType(this.inventory, itemsByType);
+	
+	var options = [];
+	for(var key in itemsByType) {
+		Text.Add("<b>"+Item.TypeToStr(parseInt(key)) + ":</b>");
+		var items = itemsByType[key];
+		if(items) {
+			for(var i=0; i < items.length; i++) {
+				
+				var it       = items[i].it;
+				var num      = items[i].num;
+				var enabled  = items[i].enabled ? items[i].enabled() : true;
+				var cost     = DEBUG ? 0 : Math.floor(items[i].price * it.price);
+				var func     = items[i].func;
+				
+				enabled = enabled && (party.coin >= cost);
 		
-		enabled = enabled && (party.coin >= cost);
-
-		Text.AddOutput("<b>" + cost + "g - </b>" + it.name + " - " + it.Short() + "<br/>");
-
-		options.push({ nameStr : it.name,
-			func : buyFunc, enabled : enabled,
-			tooltip : it.Long(),
-			obj : {it: this.inventory[i].it, cost: cost, func: func }
-		});
+				Text.Add("<br/><b>" + cost + "g - </b>" + it.name + " - " + it.Short());
+		
+				options.push({ nameStr : it.name,
+					func : buyFunc, enabled : enabled,
+					tooltip : it.Long(),
+					obj : {it: items[i].it, cost: cost, func: func }
+				});
+			}
+		}
+		Text.NL();
 	}
+	Text.Flush();
 	Gui.SetButtonsFromList(options, true, back);
 }
 
-Shop.prototype.Sell = function(back) {
+Shop.prototype.Sell = function(back, preventClear) {
 	var shop = this;
 	back = back || PrintDefaultOptions;
 	
-	Text.Clear();
+	if(!preventClear)
+		Text.Clear();
 	
 	if(party.inventory.items.length == 0) {
-		Text.AddOutput("You have nothing to sell.");
+		Text.Add("You have nothing to sell.");
 	}
 	
 	var sellFunc = function(obj) {
@@ -122,7 +136,8 @@ Shop.prototype.Sell = function(back) {
 		var cost = Math.floor(shop.sellPrice * obj.it.price);
 
 		Text.Clear();
-		Text.AddOutput("Sell " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
+		Text.Add("Sell " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
+		Text.Flush();
 		
 		var options = new Array();
 		options.push({ nameStr : "Sell 1",
@@ -182,21 +197,34 @@ Shop.prototype.Sell = function(back) {
 		});
 	};
 	
-	var options = new Array();
-	for(var i = 0; i < party.inventory.items.length; i++) {
-		var it       = party.inventory.items[i].it;
-		var num      = party.inventory.items[i].num;
-		var price    = Math.floor(shop.sellPrice * it.price);
+	
+	var itemsByType = {};
+	Inventory.ItemByType(party.Inv().items, itemsByType);
+	
+	
+	var options = [];
+	for(var key in itemsByType) {
+		Text.Add("<b>"+Item.TypeToStr(parseInt(key)) + ":</b>");
+		var items = itemsByType[key];
+		if(items) {
+			for(var i=0; i < items.length; i++) {
+				var it       = items[i].it;
+				var num      = items[i].num;
+				var price    = Math.floor(shop.sellPrice * it.price);
+				
+				if(price <= 0) continue;
+				
+				Text.Add("<br/><b>" + price + "g -</b> " + it.name + " x" + num + " - " + it.Short());
 		
-		if(price <= 0) continue;
-		
-		Text.AddOutput("<b>" + price + "g -</b> " + it.name + " x" + num + " - " + it.Short() + "<br/>");
-
-		options.push({ nameStr : it.name,
-			func : sellFunc, enabled : true,
-			tooltip : it.Long(),
-			obj : party.inventory.items[i]
-		});
+				options.push({ nameStr : it.name,
+					func : sellFunc, enabled : true,
+					tooltip : it.Long(),
+					obj : items[i]
+				});
+			}
+		}
+		Text.NL();
 	}
+	Text.Flush();
 	Gui.SetButtonsFromList(options, true, back);
 }
