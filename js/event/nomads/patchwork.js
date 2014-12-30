@@ -242,10 +242,6 @@ Scenes.Patchwork.Prompt = function() {
 	});
 	options.push({ nameStr : "Buy",
 		func : function() {
-			var parse = {
-				
-			};
-			
 			Text.Clear();
 			Text.Add("<i>“What are ya buying?”</i> [heshe] ask[notS], opening [hisher] robes to show you the item-lined pockets.", parse);
 			Text.NL();
@@ -254,10 +250,6 @@ Scenes.Patchwork.Prompt = function() {
 	});
 	options.push({ nameStr : "Sell",
 		func : function() {
-			var parse = {
-				
-			};
-			
 			Text.Clear();
 			Text.Add("<i>“What are ya selling?”</i> [heshe] ask[notS], [hisher] telescopic monocle extending past [hisher] robes to examine your goods.", parse);
 			Text.NL();
