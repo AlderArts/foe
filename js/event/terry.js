@@ -7564,7 +7564,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 						Text.NL();
 						Text.Add("Bending down is a little awkward, but you manage to teasingly kiss the tip of one of Terry’s ears, which flicks at the touch. Why, you were simply overcome by Terry’s beauty, that’s all. And, well, you were convinced that now was the time to make a real effort toward expanding your little family with [himher]...", parse);
 						Text.NL();
-						Text.Add("<i>“I see.”</i> Terry takes a deep breath and smiles. <i>“Well, if you really want that, I have no objections, though I expected to be pampered and spoiled if it took,”</i> [heshe] adds teasingly", parse);
+						Text.Add("<i>“I see.”</i> Terry takes a deep breath and smiles. <i>“Well, if you really want that, I have no objections, though I expect to be pampered and spoiled if it took,”</i> [heshe] adds teasingly", parse);
 						Text.NL();
 						Text.Add("You chuckle, and assure Terry that’s exactly what you had in mind from the beginning. Though you have to ask, what if it didn’t take?", parse);
 						Text.NL();
