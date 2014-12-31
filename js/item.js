@@ -3,9 +3,17 @@
 // Namespace that item prototypes are kept in
 Items = {};
 ItemIds = {};
-
+//Represents the overall category an item falls under.
 ItemType = {
-	None      : -1,
+	Weapon :0,
+	Armor : 1,
+	Accessory : 2,
+	Potion : 3
+};
+//Represents a second level of categorization for items.
+//TODO Evaluate all of these properties. Many can be refactored out.
+ItemSubtype = {
+	None      : -1, //TODO Refactor this out later. None is a lazy catch that we shouldn't use :P
 	Weapon    : 0,
 	TopArmor  : 1,
 	BotArmor  : 2,
@@ -16,16 +24,19 @@ ItemType = {
 	StrapOn   : 7
 };
 
-function Item(id, name) {
+function Item(id, name, type) {
+	//Required (An item will always have these)
 	this.id     = id;
 	this.name   = name;
+	this.type  = ItemSubtype.None; //TODO No defaulting to None case. Force
+	//Optional (An item might not have these. So check for undefined!)
 	this.image  = new Image(); // TODO
 	this.price  = 0;
 	// Alchemical recipe, an array of {it: Item, num: Number} pairs
 	this.recipe = [];
 	//function(target)
 	this.Use        = null;
-	this.EquipType  = ItemType.None;
+
 	/* 
 	 * effect = {
 	 * 	 maxHp
@@ -50,33 +61,33 @@ function Item(id, name) {
 
 Item.TypeToStr = function(type) {
 	switch(type) {
-		case ItemType.Weapon: return "Weapon";
-		case ItemType.TopArmor: return
-		case ItemType.BotArmor: return
-		case ItemType.FullArmor: return "Armor";
-		case ItemType.Accessory:
-		case ItemType.Acc1:
-		case ItemType.Acc2: return "Accessory";
-		case ItemType.StrapOn: return "Strapon";
-		case ItemType.None:
+		case ItemSubtype.Weapon: return "Weapon";
+		case ItemSubtype.TopArmor: return
+		case ItemSubtype.BotArmor: return
+		case ItemSubtype.FullArmor: return "Armor";
+		case ItemSubtype.Accessory:
+		case ItemSubtype.Acc1:
+		case ItemSubtype.Acc2: return "Accessory";
+		case ItemSubtype.StrapOn: return "Strapon";
+		case ItemSubtype.None:
 		default:
 			return "Misc";
 	}
 }
 
 Item.prototype.Type = function() {
-	switch(this.EquipType) {
-		case ItemType.Weapon: return ItemType.Weapon;
-		case ItemType.TopArmor:
-		case ItemType.BotArmor:
-		case ItemType.FullArmor: return ItemType.FullArmor;
-		case ItemType.Accessory:
-		case ItemType.Acc1:
-		case ItemType.Acc2: return ItemType.Accessory;
-		case ItemType.StrapOn: return ItemType.StrapOn;
-		case ItemType.None:
+	switch(this.type) {
+		case ItemSubtype.Weapon: return ItemSubtype.Weapon;
+		case ItemSubtype.TopArmor:
+		case ItemSubtype.BotArmor:
+		case ItemSubtype.FullArmor: return ItemSubtype.FullArmor;
+		case ItemSubtype.Accessory:
+		case ItemSubtype.Acc1:
+		case ItemSubtype.Acc2: return ItemSubtype.Accessory;
+		case ItemSubtype.StrapOn: return ItemSubtype.StrapOn;
+		case ItemSubtype.None:
 		default:
-			return ItemType.None;
+			return ItemSubtype.None;
 	}
 }
 
