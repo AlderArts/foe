@@ -519,8 +519,8 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var item = Items.Leporine;
 				var enabled = true;
-				for(var j = 0; j < item.Recipe.length; j++) {
-					var component = item.Recipe[j];
+				for(var j = 0; j < item.recipe.length; j++) {
+					var component = item.recipe[j];
 					enabled &= (party.inventory.QueryNum(component.it) >= (component.num || 1));
 				}
 				

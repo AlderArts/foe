@@ -22,7 +22,7 @@ function Item(id, name) {
 	this.image  = new Image(); // TODO
 	this.price  = 0;
 	// Alchemical recipe, an array of {it: Item, num: Number} pairs
-	this.Recipe = [];
+	this.recipe = [];
 	//function(target)
 	this.Use        = null;
 	this.EquipType  = ItemType.None;

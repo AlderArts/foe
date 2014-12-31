@@ -304,8 +304,8 @@ Scenes.Rosalin.TalkPrompt = function() {
 				
 				// Removed requested items
 				var it = Items.Leporine;
-				for(var j = 0; j < it.Recipe.length; j++) {
-					var ingredient = it.Recipe[j];
+				for(var j = 0; j < it.recipe.length; j++) {
+					var ingredient = it.recipe[j];
 					party.inventory.RemoveItem(ingredient.it, ingredient.num);
 				}
 				
@@ -350,8 +350,8 @@ Scenes.Rosalin.TalkPrompt = function() {
 			}, enabled : (function() {
 				var item = Items.Leporine;
 				var enabled = true;
-				for(var j = 0; j < item.Recipe.length; j++) {
-					var component = item.Recipe[j];
+				for(var j = 0; j < item.recipe.length; j++) {
+					var component = item.recipe[j];
 					enabled &= (party.inventory.QueryNum(component.it) >= (component.num || 1));
 				}
 				return enabled;
