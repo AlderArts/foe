@@ -1,6 +1,6 @@
 Items.Toys = {};
 
-Items.Toys.SmallDildo = new Item("dildo0", "Small dildo");
+Items.Toys.SmallDildo = new Item("dildo0", "Small dildo", ItemType.Toy);
 Items.Toys.SmallDildo.price = 15;
 Items.Toys.SmallDildo.sDesc = function() { return "small dildo"; }
 Items.Toys.SmallDildo.lDesc = function() { return "a small dildo"; }
@@ -10,7 +10,7 @@ Items.Toys.SmallDildo.cock = new Cock();
 Items.Toys.SmallDildo.cock.thickness.base = 3;
 Items.Toys.SmallDildo.cock.length.base    = 15;
 
-Items.Toys.MediumDildo = new Item("dildo1", "Medium dildo");
+Items.Toys.MediumDildo = new Item("dildo1", "Medium dildo", ItemType.Toy);
 Items.Toys.MediumDildo.price = 25;
 Items.Toys.MediumDildo.sDesc = function() { return "dildo"; }
 Items.Toys.MediumDildo.lDesc = function() { return "a dildo"; }
@@ -20,7 +20,7 @@ Items.Toys.MediumDildo.cock = new Cock();
 Items.Toys.MediumDildo.cock.thickness.base = 5;
 Items.Toys.MediumDildo.cock.length.base    = 25;
 
-Items.Toys.LargeDildo = new Item("dildo2", "Large dildo");
+Items.Toys.LargeDildo = new Item("dildo2", "Large dildo", ItemType.Toy);
 Items.Toys.LargeDildo.price = 40;
 Items.Toys.LargeDildo.sDesc = function() { return "large dildo"; }
 Items.Toys.LargeDildo.lDesc = function() { return "a large dildo"; }
@@ -30,7 +30,7 @@ Items.Toys.LargeDildo.cock = new Cock();
 Items.Toys.LargeDildo.cock.thickness.base = 8;
 Items.Toys.LargeDildo.cock.length.base    = 40;
 
-Items.Toys.ThinDildo = new Item("dildo3", "Thin dildo");
+Items.Toys.ThinDildo = new Item("dildo3", "Thin dildo", ItemType.Toy);
 Items.Toys.ThinDildo.price = 20;
 Items.Toys.ThinDildo.sDesc = function() { return "thin dildo"; }
 Items.Toys.ThinDildo.lDesc = function() { return "a thin dildo"; }
@@ -40,7 +40,7 @@ Items.Toys.ThinDildo.cock = new Cock();
 Items.Toys.ThinDildo.cock.thickness.base = 2;
 Items.Toys.ThinDildo.cock.length.base    = 20;
 
-Items.Toys.ButtPlug = new Item("dildo4", "Buttplug");
+Items.Toys.ButtPlug = new Item("dildo4", "Buttplug", ItemType.Toy);
 Items.Toys.ButtPlug.price = 20;
 Items.Toys.ButtPlug.sDesc = function() { return "buttplug"; }
 Items.Toys.ButtPlug.lDesc = function() { return "a buttplug"; }
@@ -50,7 +50,7 @@ Items.Toys.ButtPlug.cock = new Cock();
 Items.Toys.ButtPlug.cock.thickness.base = 7;
 Items.Toys.ButtPlug.cock.length.base    = 7;
 
-Items.Toys.LargeButtPlug = new Item("dildo5", "L.Buttplug");
+Items.Toys.LargeButtPlug = new Item("dildo5", "L.Buttplug", ItemType.Toy);
 Items.Toys.LargeButtPlug.price = 40;
 Items.Toys.LargeButtPlug.sDesc = function() { return "large buttplug"; }
 Items.Toys.LargeButtPlug.lDesc = function() { return "a large buttplug"; }
@@ -60,7 +60,7 @@ Items.Toys.LargeButtPlug.cock = new Cock();
 Items.Toys.LargeButtPlug.cock.thickness.base = 15;
 Items.Toys.LargeButtPlug.cock.length.base    = 15;
 
-Items.Toys.AnalBeads = new Item("dildo6", "Anal beads");
+Items.Toys.AnalBeads = new Item("dildo6", "Anal beads", ItemType.Toy);
 Items.Toys.AnalBeads.price = 18;
 Items.Toys.AnalBeads.plural = true;
 Items.Toys.AnalBeads.sDesc = function() { return "anal beads"; }
@@ -71,7 +71,7 @@ Items.Toys.AnalBeads.cock = new Cock();
 Items.Toys.AnalBeads.cock.thickness.base = 3;
 Items.Toys.AnalBeads.cock.length.base    = 15;
 
-Items.Toys.LargeAnalBeads = new Item("dildo7", "L.Anal beads");
+Items.Toys.LargeAnalBeads = new Item("dildo7", "L.Anal beads", ItemType.Toy);
 Items.Toys.LargeAnalBeads.price = 23;
 Items.Toys.LargeAnalBeads.plural = true;
 Items.Toys.LargeAnalBeads.sDesc = function() { return "large anal beads"; }
@@ -82,7 +82,7 @@ Items.Toys.LargeAnalBeads.cock = new Cock();
 Items.Toys.LargeAnalBeads.cock.thickness.base = 8;
 Items.Toys.LargeAnalBeads.cock.length.base    = 40;
 
-Items.Toys.EquineDildo = new Item("dildo8", "Equine dildo");
+Items.Toys.EquineDildo = new Item("dildo8", "Equine dildo", ItemType.Toy);
 Items.Toys.EquineDildo.price = 70;
 Items.Toys.EquineDildo.sDesc = function() { return "large equine dildo"; }
 Items.Toys.EquineDildo.lDesc = function() { return "a large equine dildo"; }
@@ -94,7 +94,7 @@ Items.Toys.EquineDildo.cock.length.base    = 50;
 Items.Toys.EquineDildo.cock.race           = Race.horse;
 Items.Toys.EquineDildo.cock.sheath         = 1;
 
-Items.Toys.CanidDildo = new Item("dildo9", "Canine dildo");
+Items.Toys.CanidDildo = new Item("dildo9", "Canine dildo", ItemType.Toy);
 Items.Toys.CanidDildo.price = 70;
 Items.Toys.CanidDildo.sDesc = function() { return "large knotted dildo"; }
 Items.Toys.CanidDildo.lDesc = function() { return "a large knotted dildo"; }
@@ -106,7 +106,7 @@ Items.Toys.CanidDildo.cock.length.base    = 30;
 Items.Toys.CanidDildo.cock.race           = Race.dog;
 Items.Toys.CanidDildo.cock.knot           = 1;
 
-Items.Toys.ChimeraDildo = new Item("dildo8", "Chimera");
+Items.Toys.ChimeraDildo = new Item("dildo8", "Chimera", ItemType.Toy);
 Items.Toys.ChimeraDildo.price = 300;
 Items.Toys.ChimeraDildo.sDesc = function() { return "monstrous dildo"; }
 Items.Toys.ChimeraDildo.lDesc = function() { return "a monstrous dildo"; }
