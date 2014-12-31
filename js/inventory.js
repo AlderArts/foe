@@ -87,7 +87,7 @@ Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItems
         var it = inv[i].it;
         if(itemsByType) {
             var itemArr = [];
-            if(itemsByType.hasOwnProperty(it.EquipType))
+            if(itemsByType.hasOwnProperty(it.Type()))
                 itemArr = itemsByType[it.Type()];
             itemArr.push(inv[i]);
             itemsByType[it.Type()] = itemArr;
