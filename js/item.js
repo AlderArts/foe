@@ -8,7 +8,11 @@ ItemType = {
 	Weapon :0,
 	Armor : 1,
 	Accessory : 2,
-	Potion : 3
+	Potion : 3,
+	Card : 4,
+	Ingredient: 5,
+	Quest : 6,
+	Toy : 7
 };
 //Represents a second level of categorization for items.
 //TODO Evaluate all of these properties. Many can be refactored out.
@@ -28,13 +32,18 @@ function Item(id, name, type) {
 	this.id     = id;
 	this.name   = name;
 	this.type  = type;
-	//Optional (An item might not have these. So check for undefined!)
-	this.image  = new Image(); // TODO
+
+	//Optional, with default
+	this.image  = new Image(); // TODO This sounds interesting, so i'll look into it later.
 	this.price  = 0;
 	// Alchemical recipe, an array of {it: Item, num: Number} pairs
-	this.recipe = [];
+	this.recipe = []; //TODO Maybe should be set to null. I'll look into how recipes are used later.
+
+	//Optional, No default (don't forget your null checks if you're working with these!)
+	this.subtype = null;
 	//function(target)
 	this.Use        = null;
+
 
 	/* 
 	 * effect = {
