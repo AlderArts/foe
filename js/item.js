@@ -13,7 +13,6 @@ ItemType = {
 //Represents a second level of categorization for items.
 //TODO Evaluate all of these properties. Many can be refactored out.
 ItemSubtype = {
-	None      : -1, //TODO Refactor this out later. None is a lazy catch that we shouldn't use :P
 	Weapon    : 0,
 	TopArmor  : 1,
 	BotArmor  : 2,
@@ -28,7 +27,7 @@ function Item(id, name, type) {
 	//Required (An item will always have these)
 	this.id     = id;
 	this.name   = name;
-	this.type  = ItemSubtype.None; //TODO No defaulting to None case. Force
+	this.type  = type;
 	//Optional (An item might not have these. So check for undefined!)
 	this.image  = new Image(); // TODO
 	this.price  = 0;
@@ -58,7 +57,7 @@ function Item(id, name, type) {
 	
 	ItemIds[id] = this;
 }
-
+//TODO Refactor this out. No need for it now that we have two item types
 Item.TypeToStr = function(type) {
 	switch(type) {
 		case ItemSubtype.Weapon: return "Weapon";
@@ -69,12 +68,11 @@ Item.TypeToStr = function(type) {
 		case ItemSubtype.Acc1:
 		case ItemSubtype.Acc2: return "Accessory";
 		case ItemSubtype.StrapOn: return "Strapon";
-		case ItemSubtype.None:
 		default:
 			return "Misc";
 	}
 }
-
+//TODO Refactor this out. No need for it now that we have two item types
 Item.prototype.Type = function() {
 	switch(this.type) {
 		case ItemSubtype.Weapon: return ItemSubtype.Weapon;
@@ -85,9 +83,6 @@ Item.prototype.Type = function() {
 		case ItemSubtype.Acc1:
 		case ItemSubtype.Acc2: return ItemSubtype.Accessory;
 		case ItemSubtype.StrapOn: return ItemSubtype.StrapOn;
-		case ItemSubtype.None:
-		default:
-			return ItemSubtype.None;
 	}
 }
 
