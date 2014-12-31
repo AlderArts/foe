@@ -118,7 +118,7 @@ Momo.prototype.ToStorage = function() {
 // Schedule
 Momo.prototype.IsAtLocation = function(location) {
 	location = location || party.location;
-	if(location == world.loc.Plains.Nomads.Fireplace && this.AtCamp() && world.time.hour >= 7 && world.time.hour < 22) {
+	if(location == world.loc.Plains.Nomads.Fireplace && this.AtCamp() && world.time.hour >= 4 && world.time.hour < 21) {
 		return true;
 	}
 	return false;
