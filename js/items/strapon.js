@@ -1,6 +1,6 @@
 Items.StrapOn = {};
 
-Items.StrapOn.PlainStrapon = new Item("strapon0", "Plain strapon");
+Items.StrapOn.PlainStrapon = new Item("strapon0", "Plain strapon", ItemType.Toy);
 Items.StrapOn.PlainStrapon.price = 40;
 Items.StrapOn.PlainStrapon.sDesc = function() { return "plain strapon"; }
 Items.StrapOn.PlainStrapon.lDesc = function() { return "a plain strapon"; }
@@ -12,7 +12,7 @@ Items.StrapOn.PlainStrapon.cock.thickness.base = 3;
 Items.StrapOn.PlainStrapon.cock.length.base    = 15;
 Items.StrapOn.PlainStrapon.cock.isStrapon      = true;
 
-Items.StrapOn.LargeStrapon = new Item("strapon1", "Large strapon");
+Items.StrapOn.LargeStrapon = new Item("strapon1", "Large strapon", ItemType.Toy);
 Items.StrapOn.LargeStrapon.price = 70;
 Items.StrapOn.LargeStrapon.sDesc = function() { return "large strapon"; }
 Items.StrapOn.LargeStrapon.lDesc = function() { return "a large strapon"; }
@@ -24,7 +24,7 @@ Items.StrapOn.LargeStrapon.cock.thickness.base = 4;
 Items.StrapOn.LargeStrapon.cock.length.base    = 30;
 Items.StrapOn.LargeStrapon.cock.isStrapon      = true;
 
-Items.StrapOn.EquineStrapon = new Item("strapon2", "Equine strapon");
+Items.StrapOn.EquineStrapon = new Item("strapon2", "Equine strapon", ItemType.Toy);
 Items.StrapOn.EquineStrapon.price = 100;
 Items.StrapOn.EquineStrapon.sDesc = function() { return "equine strapon"; }
 Items.StrapOn.EquineStrapon.lDesc = function() { return "an equine strapon"; }
@@ -38,7 +38,7 @@ Items.StrapOn.EquineStrapon.cock.race           = Race.horse;
 Items.StrapOn.EquineStrapon.cock.sheath         = 1;
 Items.StrapOn.EquineStrapon.cock.isStrapon      = true;
 
-Items.StrapOn.CanidStrapon = new Item("strapon3", "Canid strapon");
+Items.StrapOn.CanidStrapon = new Item("strapon3", "Canid strapon", ItemType.Toy);
 Items.StrapOn.CanidStrapon.price = 100;
 Items.StrapOn.CanidStrapon.sDesc = function() { return "knotted strapon"; }
 Items.StrapOn.CanidStrapon.lDesc = function() { return "a knotted strapon"; }
@@ -52,7 +52,7 @@ Items.StrapOn.CanidStrapon.cock.race           = Race.dog;
 Items.StrapOn.CanidStrapon.cock.knot           = 1;
 Items.StrapOn.CanidStrapon.cock.isStrapon      = true;
 
-Items.StrapOn.ChimeraStrapon = new Item("strapon4", "Chimera strapon");
+Items.StrapOn.ChimeraStrapon = new Item("strapon4", "Chimera strapon", ItemType.Toy);
 Items.StrapOn.ChimeraStrapon.price = 400;
 Items.StrapOn.ChimeraStrapon.sDesc = function() { return "monstrous strapon"; }
 Items.StrapOn.ChimeraStrapon.lDesc = function() { return "a monstrous strapon"; }
