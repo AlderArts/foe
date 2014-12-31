@@ -113,6 +113,7 @@ Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItems
 
 Inventory.prototype.ShowInventory = function(preventClear) {
     var inv = this;
+    inv.items.sort(compareItemByProp("name"));
     var backPrompt = function() { inv.ShowInventory(); }
     if(!preventClear)
         Text.Clear();
@@ -122,7 +123,6 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 
     Inventory.ItemByType(this.items, itemsByType, usableItemsByType);
 
-    //TODO Probably should order the item output differently.
     //TODO The output format could be much nicer,
     for(var key in itemsByType) {
         Text.Add("<b>"+Item.TypeToStr(parseInt(key)) + ":</b>");

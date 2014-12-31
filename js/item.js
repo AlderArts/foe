@@ -230,3 +230,10 @@ Item.prototype.OnSelect = function(inv, encounter, caster, backPrompt) {
 	else
 		encounter.CombatTick();
 }
+
+//TODO Possibly reformat items array to just contain items instead of [{it:item, num:x}], so this function be can made a generic Array.prototype.sortByProp for sorting any array of objects by prop.
+function compareItemByProp(p){
+	return function(a,b){
+		return (a.it[p] > b.it[p]) ? 1 : (a.it[p] < b.it[p]) ? -1 : 0;
+	}
+}
