@@ -244,7 +244,7 @@ RaceScore.prototype.Sorted = function() {
  * 'this' is an Item
  */
 function TFItem(id, name) {
-	Item.call(this, id, name);
+	Item.call(this, id, name, ItemType.Potion);
 	this.Use     = TF.UseItem;
 	this.useStr  = TF.UseItemDesc;
 	this.effects = [];
