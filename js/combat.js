@@ -59,6 +59,10 @@ Encounter.prototype.PrepCombat = function() {
 	}
 
 	enemyParty = this.enemy;
+	//Uniquely identify enemies
+	for(var i=0; i < enemyParty.members.length; i++){
+		enemyParty.members[i].name += " ["+(i+1)+"]";
+	}
 
 	Gui.Callstack.push(function() {
 		for(var i = 0; i < party.members.length; i++) {
