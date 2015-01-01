@@ -5,14 +5,14 @@ Items = {};
 ItemIds = {};
 //Represents the overall category an item falls under.
 ItemType = {
-	Weapon :0,
-	Armor : 1,
-	Accessory : 2,
-	Potion : 3,
-	Card : 4,
-	Ingredient: 5,
-	Quest : 6,
-	Toy : 7
+	Weapon     : 0,
+	Armor      : 1,
+	Accessory  : 2,
+	Potion     : 3,
+	Card       : 4,
+	Ingredient : 5,
+	Quest      : 6,
+	Toy        : 7
 };
 //Represents a second level of categorization for items.
 //TODO Evaluate all of these properties. Many can be refactored out.
@@ -31,7 +31,7 @@ function Item(id, name, type) {
 	//Required (An item will always have these)
 	this.id     = id;
 	this.name   = name;
-	this.type  = type;
+	this.type   = type;
 
 	//Optional, with default
 	this.image  = new Image(); // TODO This sounds interesting, so i'll look into it later.
@@ -69,30 +69,21 @@ function Item(id, name, type) {
 //TODO Refactor this out. No need for it now that we have two item types
 Item.TypeToStr = function(type) {
 	switch(type) {
-		case ItemSubtype.Weapon: return "Weapon";
-		case ItemSubtype.TopArmor: return
-		case ItemSubtype.BotArmor: return
-		case ItemSubtype.FullArmor: return "Armor";
-		case ItemSubtype.Accessory:
-		case ItemSubtype.Acc1:
-		case ItemSubtype.Acc2: return "Accessory";
-		case ItemSubtype.StrapOn: return "Strapon";
+		case ItemType.Weapon:     return "Weapon";
+		case ItemType.Armor:      return "Armor";
+		case ItemType.Accessory:  return "Accessory";
+		case ItemType.Potion:     return "Potions";
+		case ItemType.Card:       return "Card";
+		case ItemType.Ingredient: return "Ingredients";
+		case ItemType.Quest:      return "Quest";
+		case ItemType.Toy:        return "Toy";
 		default:
 			return "Misc";
 	}
 }
 //TODO Refactor this out. No need for it now that we have two item types
 Item.prototype.Type = function() {
-	switch(this.type) {
-		case ItemSubtype.Weapon: return ItemSubtype.Weapon;
-		case ItemSubtype.TopArmor:
-		case ItemSubtype.BotArmor:
-		case ItemSubtype.FullArmor: return ItemSubtype.FullArmor;
-		case ItemSubtype.Accessory:
-		case ItemSubtype.Acc1:
-		case ItemSubtype.Acc2: return ItemSubtype.Accessory;
-		case ItemSubtype.StrapOn: return ItemSubtype.StrapOn;
-	}
+	return this.type;
 }
 
 //function(target)
