@@ -59,7 +59,10 @@ Encounter.prototype.PrepCombat = function() {
 	}
 
 	enemyParty = this.enemy;
-
+	//Add a unique name property to each enemy entity
+	for(var i=0; i < enemyParty.members.length; i++){
+		enemyParty.members[i].uniqueName = enemyParty.members[i].name+" ["+(i+1)+"]";
+	}
 	Gui.Callstack.push(function() {
 		for(var i = 0; i < party.members.length; i++) {
 			var e = party.members[i];
@@ -418,13 +421,15 @@ Encounter.prototype.CombatTick = function() {
 		var combatScreen = function() {
 			Text.Clear();
 			// TODO: DEBUG ?
+			var entityName = currentActiveChar.uniqueName ? currentActiveChar.uniqueName : currentActiveChar.name;
 			Text.AddOutput(Text.BoldColor("Turn order:<br/>"));
-			Text.AddOutput(Text.BoldColor(currentActiveChar.name + "<br/>"));
+			Text.AddOutput(Text.BoldColor(entityName + "<br/>"));
 			var tempParty = [];
 			for(var i=0,j=enc.combatOrder.length; i<j; i++){
 				var c = enc.combatOrder[i];
 				if(!c.entity.Incapacitated()) {
-					tempParty.push({name: c.entity.name, ini: c.initiative, inc: c.entity.Initiative()});
+					entityName = c.entity.uniqueName ? c.entity.uniqueName : c.entity.name;
+					tempParty.push({name: entityName, ini: c.initiative, inc: c.entity.Initiative()});
 				}
 			};
 			
