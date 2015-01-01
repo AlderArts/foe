@@ -87,26 +87,26 @@ Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItems
         var it = inv[i].it;
         if(itemsByType) {
             var itemArr = [];
-            if(itemsByType.hasOwnProperty(it.Type()))
-                itemArr = itemsByType[it.Type()];
+            if(itemsByType.hasOwnProperty(it.type))
+                itemArr = itemsByType[it.type];
             itemArr.push(inv[i]);
-            itemsByType[it.Type()] = itemArr;
+            itemsByType[it.type] = itemArr;
         }
 
         if(usableItemsByType && it.Use) {
             var itemArr = [];
             if(usableItemsByType.hasOwnProperty(it.type))
-                itemArr = usableItemsByType[it.Type()];
+                itemArr = usableItemsByType[it.type];
             itemArr.push(inv[i]);
-            usableItemsByType[it.Type()] = itemArr;
+            usableItemsByType[it.type] = itemArr;
         }
 
         if(combatItemsByType && it.UseCombat) {
             var itemArr = [];
             if(combatItemsByType.hasOwnProperty(it.type))
-                itemArr = combatItemsByType[it.Type()];
+                itemArr = combatItemsByType[it.type];
             itemArr.push(inv[i]);
-            combatItemsByType[it.Type()] = itemArr;
+            combatItemsByType[it.type] = itemArr;
         }
     }
 }

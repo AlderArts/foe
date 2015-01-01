@@ -81,10 +81,6 @@ Item.TypeToStr = function(type) {
 			return "Misc";
 	}
 }
-//TODO Refactor this out. No need for it now that we have two item types
-Item.prototype.Type = function() {
-	return this.type;
-}
 
 //function(target)
 Item.prototype.Equip = function(target) {
