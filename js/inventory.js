@@ -362,7 +362,8 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
                 backPrompt();
             },
             enabled : true,
-            obj     : it
+            obj     : it,
+            tooltip : it.Long()
         });
     };
 
