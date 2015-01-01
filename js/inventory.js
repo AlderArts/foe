@@ -248,24 +248,21 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
         var it = this.items[i].it;
         switch(type) {
             case ItemSubtype.Weapon:
-                if(it.type == ItemSubtype.Weapon) items.push(it);
+                if(it.type == ItemType.Weapon) items.push(it);
                 break;
             case ItemSubtype.TopArmor:
-                if     (it.type == ItemSubtype.TopArmor)  items.push(it);
-                else if(it.type == ItemSubtype.FullArmor) items.push(it);
+                if     (it.subtype == ItemSubtype.TopArmor)  items.push(it);
+                else if(it.subtype == ItemSubtype.FullArmor) items.push(it);
                 break;
             case ItemSubtype.BotArmor:
-                if(it.type == ItemSubtype.BotArmor) items.push(it);
+                if(it.subtype == ItemSubtype.BotArmor) items.push(it);
                 break;
             case ItemSubtype.Acc1:
             case ItemSubtype.Acc2:
-                if(it.type == ItemSubtype.Accessory) items.push(it);
-                break;
-            case ItemSubtype.Weapon:
-                if(it.type == ItemSubtype.Weapon) items.push(it);
+                if(it.type == ItemType.Accessory) items.push(it);
                 break;
             case ItemSubtype.StrapOn:
-                if(it.type == ItemSubtype.StrapOn) items.push(it);
+                if(it.subtype == ItemSubtype.StrapOn) items.push(it);
                 break;
         }
     }
