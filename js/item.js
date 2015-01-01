@@ -69,14 +69,14 @@ function Item(id, name, type) {
 //TODO Refactor this out. No need for it now that we have two item types
 Item.TypeToStr = function(type) {
 	switch(type) {
-		case ItemType.Weapon:     return "Weapon";
+		case ItemType.Weapon:     return "Weapons";
 		case ItemType.Armor:      return "Armor";
-		case ItemType.Accessory:  return "Accessory";
+		case ItemType.Accessory:  return "Accessories";
 		case ItemType.Potion:     return "Potions";
-		case ItemType.Card:       return "Card";
+		case ItemType.Card:       return "Cards";
 		case ItemType.Ingredient: return "Ingredients";
-		case ItemType.Quest:      return "Quest";
-		case ItemType.Toy:        return "Toy";
+		case ItemType.Quest:      return "Quest items";
+		case ItemType.Toy:        return "Toys";
 		default:
 			return "Misc";
 	}
