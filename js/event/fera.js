@@ -476,7 +476,7 @@ Scenes.Fera.SexPrompt = function() {
 	
 	var breasts = player.FirstBreastRow().size.Get() > 3;
 	parse["balls"] = player.HasBalls() ? function() { return Text.Parse(" and [ballsDesc]", parse); } : "";
-	parse["toparmor"] = (player.Armor() && player.Armor().EquipType != ItemType.FullArmor) ? " and " + player.ArmorDesc() : "";
+	parse["toparmor"] = (player.Armor() && player.Armor().type != ItemSubtype.FullArmor) ? " and " + player.ArmorDesc() : "";
 
 	Text.Clear();
 	Text.AddOutput("You decide you want to have some fun with Fera, and tell her you need some help trying something on.", parse);

@@ -2116,7 +2116,7 @@ Entity.prototype.EquipPrompt = function(backfunc) {
 				Text.NL();
 				Text.Add("<i>What weapon do[es] [heshe] equip?</i>", parse);
 				Text.Flush();
-				party.inventory.ShowEquippable(that, ItemType.Weapon, equipFunc);
+				party.inventory.ShowEquippable(that, ItemSubtype.Weapon, equipFunc);
 			}, enabled : true,
 			tooltip : ""
 		});
@@ -2125,7 +2125,7 @@ Entity.prototype.EquipPrompt = function(backfunc) {
 				Text.NL();
 				Text.Add("<i>What primary armor do[es] [heshe] equip?</i>", parse);
 				Text.Flush();
-				party.inventory.ShowEquippable(that, ItemType.TopArmor, equipFunc);
+				party.inventory.ShowEquippable(that, ItemSubtype.TopArmor, equipFunc);
 			}, enabled : true,
 			tooltip : ""
 		});
@@ -2134,7 +2134,7 @@ Entity.prototype.EquipPrompt = function(backfunc) {
 				Text.NL();
 				Text.Add("<i>What secondary armor do[es] [heshe] equip?</i>", parse);
 				Text.Flush();
-				party.inventory.ShowEquippable(that, ItemType.BotArmor, equipFunc);
+				party.inventory.ShowEquippable(that, ItemSubtype.BotArmor, equipFunc);
 			}, enabled : true,
 			tooltip : ""
 		});
@@ -2143,7 +2143,7 @@ Entity.prototype.EquipPrompt = function(backfunc) {
 				Text.NL();
 				Text.Add("<i>What primary accessory do[es] [heshe] equip?</i>", parse);
 				Text.Flush();
-				party.inventory.ShowEquippable(that, ItemType.Acc1, equipFunc);
+				party.inventory.ShowEquippable(that, ItemSubtype.Acc1, equipFunc);
 			}, enabled : true,
 			tooltip : ""
 		});
@@ -2152,7 +2152,7 @@ Entity.prototype.EquipPrompt = function(backfunc) {
 				Text.NL();
 				Text.Add("<i>What secondary accessory do[es] [heshe] equip?</i>", parse);
 				Text.Flush();
-				party.inventory.ShowEquippable(that, ItemType.Acc2, equipFunc);
+				party.inventory.ShowEquippable(that, ItemSubtype.Acc2, equipFunc);
 			}, enabled : true,
 			tooltip : ""
 		});
@@ -2161,7 +2161,7 @@ Entity.prototype.EquipPrompt = function(backfunc) {
 				Text.NL();
 				Text.Add("<i>What strapon do[es] [heshe] equip?</i>", parse);
 				Text.Flush();
-				party.inventory.ShowEquippable(that, ItemType.StrapOn, equipFunc);
+				party.inventory.ShowEquippable(that, ItemSubtype.StrapOn, equipFunc);
 			}, enabled : true,
 			tooltip : ""
 		});

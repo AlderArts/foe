@@ -3,8 +3,8 @@ Items.EquiniumPlus.price = 100;
 Items.EquiniumPlus.lDesc = function() { return "a bottle of Equinium+"; }
 Items.EquiniumPlus.Short = function() { return "A bottle of Equinium+"; }
 Items.EquiniumPlus.Long = function() { return "A bottle of Equinium, potent enough to significantly change your body. The fluid inside is creamy, smelling of male musk."; }
-//TODO Recipe
-Items.EquiniumPlus.Recipe = [{it: Items.Equinium, num: 3}, {it: Items.HorseHair}, {it: Items.HorseCum}];
+//TODO recipe
+Items.EquiniumPlus.recipe = [{it: Items.Equinium, num: 3}, {it: Items.HorseHair}, {it: Items.HorseCum}];
 // Effects
 Items.EquiniumPlus.PushEffect(TF.ItemEffects.SetEars, {odds: 0.8, race: Race.horse, str: "equine ears"});
 Items.EquiniumPlus.PushEffect(TF.ItemEffects.SetTail, {odds: 0.8, race: Race.horse, color: Color.brown, str: "a brown, bushy horse tail"});
@@ -82,7 +82,7 @@ Items.Tigris.lDesc = function() { return "a bottle of Tigris"; }
 Items.Tigris.Short = function() { return "A bottle of Tigris"; }
 Items.Tigris.Long = function() { return "A bottle labeled Tigris, with the picture of a large cat on it. The fluid within is a strange mixture of black and orange."; }
 //TODO ingredients
-Items.Tigris.Recipe = [{it: Items.Felinix}, {it: Items.HairBall}, {it: Items.CatClaw}];
+Items.Tigris.recipe = [{it: Items.Felinix}, {it: Items.HairBall}, {it: Items.CatClaw}];
 // Effects
 Items.Tigris.PushEffect(TF.ItemEffects.SetBody, {odds: 0.4, race: Race.cat, str: "a feline shape, complete with fur"});
 Items.Tigris.PushEffect(TF.ItemEffects.SetFace, {odds: 0.3, race: Race.cat, str: "a cat-like face"});
@@ -123,7 +123,7 @@ Items.InfernumPlus.price = 100;
 Items.InfernumPlus.lDesc = function() { return "a bottle of Infernum+"; }
 Items.InfernumPlus.Short = function() { return "A bottle of Infernum+"; }
 Items.InfernumPlus.Long = function() { return "A bottle of extra potent Infernum, with the picture of a large, decidedly male demon on it. The fluid within is a thick black sludge, reeking of corruption."; }
-Items.InfernumPlus.Recipe = [{it: Items.Infernum}, {it: Items.BlackGem}, {it: Items.DemonSeed, num: 3}];
+Items.InfernumPlus.recipe = [{it: Items.Infernum}, {it: Items.BlackGem}, {it: Items.DemonSeed, num: 3}];
 // Effects
 Items.InfernumPlus.PushEffect(function(target) {
 	var parse = {
@@ -186,7 +186,7 @@ Items.Nagazm.price = 7;
 Items.Nagazm.lDesc = function() { return "a bottle of Nagazm"; }
 Items.Nagazm.Short = function() { return "A bottle of Nagazm"; }
 Items.Nagazm.Long  = function() { return "A bottle with a pink, bubbly liquid, labeled Nagasm. It has the picture of a snake on it."; }
-Items.Nagazm.Recipe = [{it: Items.SnakeOil}, {it: Items.SnakeFang}, {it: Items.SnakeSkin}];
+Items.Nagazm.recipe = [{it: Items.SnakeOil}, {it: Items.SnakeFang}, {it: Items.SnakeSkin}];
 // Effects
 Items.Nagazm.PushEffect(function(target) {
 	var parse = {
@@ -212,7 +212,7 @@ Items.Taurico.price = 7;
 Items.Taurico.lDesc = function() { return "a bottle of Taurico"; }
 Items.Taurico.Short = function() { return "A bottle of Taurico"; }
 Items.Taurico.Long  = function() { return "A bottle filled with a strange, jelly-like substance. It has a picture of a centaur on it."; }
-Items.Taurico.Recipe = [{it: Items.HorseShoe}, {it: Items.CanisRoot}, {it: Items.Ramshorn}];
+Items.Taurico.recipe = [{it: Items.HorseShoe}, {it: Items.CanisRoot}, {it: Items.Ramshorn}];
 // Effects
 Items.Taurico.PushEffect(function(target) {
 	var parse = {

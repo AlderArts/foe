@@ -95,7 +95,7 @@ Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItems
 
         if(usableItemsByType && it.Use) {
             var itemArr = [];
-            if(usableItemsByType.hasOwnProperty(it.EquipType))
+            if(usableItemsByType.hasOwnProperty(it.type))
                 itemArr = usableItemsByType[it.Type()];
             itemArr.push(inv[i]);
             usableItemsByType[it.Type()] = itemArr;
@@ -103,7 +103,7 @@ Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItems
 
         if(combatItemsByType && it.UseCombat) {
             var itemArr = [];
-            if(combatItemsByType.hasOwnProperty(it.EquipType))
+            if(combatItemsByType.hasOwnProperty(it.type))
                 itemArr = combatItemsByType[it.Type()];
             itemArr.push(inv[i]);
             combatItemsByType[it.Type()] = itemArr;
@@ -247,37 +247,37 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
     for(var i = 0; i < this.items.length; i++) {
         var it = this.items[i].it;
         switch(type) {
-            case ItemType.Weapon:
-                if(it.EquipType == ItemType.Weapon) items.push(it);
+            case ItemSubtype.Weapon:
+                if(it.type == ItemSubtype.Weapon) items.push(it);
                 break;
-            case ItemType.TopArmor:
-                if     (it.EquipType == ItemType.TopArmor)  items.push(it);
-                else if(it.EquipType == ItemType.FullArmor) items.push(it);
+            case ItemSubtype.TopArmor:
+                if     (it.type == ItemSubtype.TopArmor)  items.push(it);
+                else if(it.type == ItemSubtype.FullArmor) items.push(it);
                 break;
-            case ItemType.BotArmor:
-                if(it.EquipType == ItemType.BotArmor) items.push(it);
+            case ItemSubtype.BotArmor:
+                if(it.type == ItemSubtype.BotArmor) items.push(it);
                 break;
-            case ItemType.Acc1:
-            case ItemType.Acc2:
-                if(it.EquipType == ItemType.Accessory) items.push(it);
+            case ItemSubtype.Acc1:
+            case ItemSubtype.Acc2:
+                if(it.type == ItemSubtype.Accessory) items.push(it);
                 break;
-            case ItemType.Weapon:
-                if(it.EquipType == ItemType.Weapon) items.push(it);
+            case ItemSubtype.Weapon:
+                if(it.type == ItemSubtype.Weapon) items.push(it);
                 break;
-            case ItemType.StrapOn:
-                if(it.EquipType == ItemType.StrapOn) items.push(it);
+            case ItemSubtype.StrapOn:
+                if(it.type == ItemSubtype.StrapOn) items.push(it);
                 break;
         }
     }
 
     var hasEquip = false;
     switch(type) {
-        case ItemType.Weapon:   if(entity.weaponSlot)   hasEquip = true; break;
-        case ItemType.TopArmor: if(entity.topArmorSlot) hasEquip = true; break;
-        case ItemType.BotArmor: if(entity.botArmorSlot) hasEquip = true; break;
-        case ItemType.Acc1:     if(entity.acc1Slot)     hasEquip = true; break;
-        case ItemType.Acc2:     if(entity.acc2Slot)     hasEquip = true; break;
-        case ItemType.StrapOn:  if(entity.strapOn)      hasEquip = true; break;
+        case ItemSubtype.Weapon:   if(entity.weaponSlot)   hasEquip = true; break;
+        case ItemSubtype.TopArmor: if(entity.topArmorSlot) hasEquip = true; break;
+        case ItemSubtype.BotArmor: if(entity.botArmorSlot) hasEquip = true; break;
+        case ItemSubtype.Acc1:     if(entity.acc1Slot)     hasEquip = true; break;
+        case ItemSubtype.Acc2:     if(entity.acc2Slot)     hasEquip = true; break;
+        case ItemSubtype.StrapOn:  if(entity.strapOn)      hasEquip = true; break;
     }
 
     var list = [];
@@ -285,27 +285,27 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
         nameStr : "Dequip",
         func    : function() {
             switch(type) {
-                case ItemType.Weapon:
+                case ItemSubtype.Weapon:
                     if(entity.weaponSlot) inv.AddItem(entity.weaponSlot);
                     entity.weaponSlot = null;
                     break;
-                case ItemType.TopArmor:
+                case ItemSubtype.TopArmor:
                     if(entity.weaponSlot) inv.AddItem(entity.topArmorSlot);
                     entity.topArmorSlot = null;
                     break;
-                case ItemType.BotArmor:
+                case ItemSubtype.BotArmor:
                     if(entity.weaponSlot) inv.AddItem(entity.botArmorSlot);
                     entity.botArmorSlot = null;
                     break;
-                case ItemType.Acc1:
+                case ItemSubtype.Acc1:
                     if(entity.acc1Slot) inv.AddItem(entity.acc1Slot);
                     entity.acc1Slot = null;
                     break;
-                case ItemType.Acc2:
+                case ItemSubtype.Acc2:
                     if(entity.acc2Slot) inv.AddItem(entity.acc2Slot);
                     entity.acc2Slot = null;
                     break;
-                case ItemType.StrapOn:
+                case ItemSubtype.StrapOn:
                     if(entity.strapOn) inv.AddItem(entity.strapOn);
                     entity.strapOn = null;
                     break;
@@ -322,41 +322,41 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
             nameStr : it.name,
             func    : function(t) {
                 inv.RemoveItem(t);
-                switch(t.EquipType) {
-                    case ItemType.Weapon:
+                switch(t.type) {
+                    case ItemSubtype.Weapon:
                         if(entity.weaponSlot) inv.AddItem(entity.weaponSlot);
                         entity.weaponSlot = t;
                         break;
 
-                    case ItemType.FullArmor:
+                    case ItemSubtype.FullArmor:
                         if(entity.topArmorSlot) inv.AddItem(entity.topArmorSlot);
                         if(entity.botArmorSlot) inv.AddItem(entity.botArmorSlot);
                         entity.topArmorSlot = t;
                         entity.botArmorSlot = null;
                         break;
 
-                    case ItemType.TopArmor:
+                    case ItemSubtype.TopArmor:
                         if(entity.topArmorSlot) inv.AddItem(entity.topArmorSlot);
                         entity.topArmorSlot = t;
                         break;
 
-                    case ItemType.BotArmor:
+                    case ItemSubtype.BotArmor:
                         if(entity.botArmorSlot) inv.AddItem(entity.botArmorSlot);
                         entity.botArmorSlot = t;
                         break;
 
-                    case ItemType.Accessory:
-                        if(type == ItemType.Acc1) {
+                    case ItemSubtype.Accessory:
+                        if(type == ItemSubtype.Acc1) {
                             if(entity.acc1Slot) inv.AddItem(entity.acc1Slot);
                             entity.acc1Slot = t;
                         }
-                        else if(type == ItemType.Acc2) {
+                        else if(type == ItemSubtype.Acc2) {
                             if(entity.acc2Slot) inv.AddItem(entity.acc2Slot);
                             entity.acc2Slot = t;
                         }
                         break;
 
-                    case ItemType.StrapOn:
+                    case ItemSubtype.StrapOn:
                         if(entity.strapOn) inv.AddItem(entity.strapOn);
                         entity.strapOn = t;
                         break;

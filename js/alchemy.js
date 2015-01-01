@@ -20,8 +20,8 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 		var item = alchemist.recipes[i];
 		var enabled = true;
 		var str = Text.BoldColor(item.name) + ": ";
-		for(var j = 0; j < item.Recipe.length; j++) {
-			var component = item.Recipe[j];
+		for(var j = 0; j < item.recipe.length; j++) {
+			var component = item.recipe[j];
 			var comps = inventory.QueryNum(component.it) || 0;
 			var en = (comps >= (component.num || 1));
 			if(j > 0) str += ", ";
@@ -42,8 +42,8 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 				Text.Clear();
 				Text.AddOutput("[name] mix[es] the ingredients, preparing 1x [item].", {name: alchemist.NameDesc(), es: alchemist.plural() ? "" : "es", item: it.name});
 				
-				for(var j = 0; j < it.Recipe.length; j++) {
-					var ingredient = it.Recipe[j];
+				for(var j = 0; j < it.recipe.length; j++) {
+					var ingredient = it.recipe[j];
 					inventory.RemoveItem(ingredient.it, ingredient.num);
 				}
 				

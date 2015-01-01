@@ -3,9 +3,20 @@
 // Namespace that item prototypes are kept in
 Items = {};
 ItemIds = {};
-
+//Represents the overall category an item falls under.
 ItemType = {
-	None      : -1,
+	Weapon :0,
+	Armor : 1,
+	Accessory : 2,
+	Potion : 3,
+	Card : 4,
+	Ingredient: 5,
+	Quest : 6,
+	Toy : 7
+};
+//Represents a second level of categorization for items.
+//TODO Evaluate all of these properties. Many can be refactored out.
+ItemSubtype = {
 	Weapon    : 0,
 	TopArmor  : 1,
 	BotArmor  : 2,
@@ -16,16 +27,24 @@ ItemType = {
 	StrapOn   : 7
 };
 
-function Item(id, name) {
+function Item(id, name, type) {
+	//Required (An item will always have these)
 	this.id     = id;
 	this.name   = name;
-	this.image  = new Image(); // TODO
+	this.type  = type;
+
+	//Optional, with default
+	this.image  = new Image(); // TODO This sounds interesting, so i'll look into it later.
 	this.price  = 0;
 	// Alchemical recipe, an array of {it: Item, num: Number} pairs
-	this.Recipe = [];
+	this.recipe = []; //TODO Maybe should be set to null. I'll look into how recipes are used later.
+
+	//Optional, No default (don't forget your null checks if you're working with these!)
+	this.subtype = null;
 	//function(target)
 	this.Use        = null;
-	this.EquipType  = ItemType.None;
+
+
 	/* 
 	 * effect = {
 	 * 	 maxHp
@@ -47,36 +66,32 @@ function Item(id, name) {
 	
 	ItemIds[id] = this;
 }
-
+//TODO Refactor this out. No need for it now that we have two item types
 Item.TypeToStr = function(type) {
 	switch(type) {
-		case ItemType.Weapon: return "Weapon";
-		case ItemType.TopArmor: return
-		case ItemType.BotArmor: return
-		case ItemType.FullArmor: return "Armor";
-		case ItemType.Accessory:
-		case ItemType.Acc1:
-		case ItemType.Acc2: return "Accessory";
-		case ItemType.StrapOn: return "Strapon";
-		case ItemType.None:
+		case ItemSubtype.Weapon: return "Weapon";
+		case ItemSubtype.TopArmor: return
+		case ItemSubtype.BotArmor: return
+		case ItemSubtype.FullArmor: return "Armor";
+		case ItemSubtype.Accessory:
+		case ItemSubtype.Acc1:
+		case ItemSubtype.Acc2: return "Accessory";
+		case ItemSubtype.StrapOn: return "Strapon";
 		default:
 			return "Misc";
 	}
 }
-
+//TODO Refactor this out. No need for it now that we have two item types
 Item.prototype.Type = function() {
-	switch(this.EquipType) {
-		case ItemType.Weapon: return ItemType.Weapon;
-		case ItemType.TopArmor:
-		case ItemType.BotArmor:
-		case ItemType.FullArmor: return ItemType.FullArmor;
-		case ItemType.Accessory:
-		case ItemType.Acc1:
-		case ItemType.Acc2: return ItemType.Accessory;
-		case ItemType.StrapOn: return ItemType.StrapOn;
-		case ItemType.None:
-		default:
-			return ItemType.None;
+	switch(this.type) {
+		case ItemSubtype.Weapon: return ItemSubtype.Weapon;
+		case ItemSubtype.TopArmor:
+		case ItemSubtype.BotArmor:
+		case ItemSubtype.FullArmor: return ItemSubtype.FullArmor;
+		case ItemSubtype.Accessory:
+		case ItemSubtype.Acc1:
+		case ItemSubtype.Acc2: return ItemSubtype.Accessory;
+		case ItemSubtype.StrapOn: return ItemSubtype.StrapOn;
 	}
 }
 
