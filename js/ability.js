@@ -178,13 +178,13 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt) {
 		var target = new Array();
 		for(var i=0,j=enemies.length; i<j; i++){
 			var t = enemies[i];
-			if(t.Incapacitated()) continue;
+			
 			target.push({
 			  	nameStr : t.name,
 			  	func    : function(t) {
 			  		ability.Use(encounter, caster, t);
 			  	},
-			  	enabled : ability.enabledTargetCondition(encounter, caster, t),
+			  	enabled : (!t.Incapacitated() && ability.enabledTargetCondition(encounter, caster, t)),
 			  	obj     : t
 			});
 		};
