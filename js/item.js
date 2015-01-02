@@ -15,15 +15,15 @@ ItemType = {
 	Toy        : "Toy"
 };
 //Represents a second level of categorization for items.
-//TODO Evaluate all of these properties. Many can be refactored out.
+//FIXME Attempt to remove Acc1/Acc2 from here. They can exist on entity, but shouldn't exist as a type in items.
 ItemSubtype = {
-	TopArmor  : 1,
-	BotArmor  : 2,
-	FullArmor : 3,
-	Accessory : 4,
+	FullArmor : "Full Armor",
+	TopArmor  : "Top Armor",
+	BotArmor  : "Bottom Armor",
 	Acc1      : 5,
 	Acc2      : 6,
-	StrapOn   : 7
+	StrapOn   : "Strap-on",
+	Dildo	  : "Dildo"
 };
 
 function Item(id, name, type) {
