@@ -42,27 +42,28 @@ Encounter.prototype.PrepCombat = function() {
 	// Set up combat order
 	for(var i = 0; i < party.members.length; i++)
 		this.combatOrder.push({
-			entity: party.members[i],
-			isEnemy: false});
+			entity  : party.members[i],
+			isEnemy : false});
 	for(var i = 0; i < this.enemy.members.length; i++)
 		this.combatOrder.push({
-			entity: this.enemy.members[i], 
-			isEnemy: true});
+			entity  : this.enemy.members[i], 
+			isEnemy : true,
+			aggro   : []});
 			
 	for(var i = 0; i < this.combatOrder.length; i++) {
 		this.combatOrder[i].initiative   = Math.random() * 5;
 		// Fill aggro table
 		if(this.combatOrder[i].isEnemy) {
-			this.combatOrder[i].aggro = [];
 			this.combatOrder[i].entity.GetSingleTarget(this, this.combatOrder[i]);
 		}
 	}
 
 	enemyParty = this.enemy;
 	//Add a unique name property to each enemy entity
-	for(var i=0; i < enemyParty.members.length; i++){
-		enemyParty.members[i].uniqueName = enemyParty.members[i].name+" ["+(i+1)+"]";
+	for(var i=0; i < enemyParty.NumTotal(); i++) {
+		enemyParty.Get(i).uniqueName = enemyParty.Get(i).name+" ["+(i+1)+"]";
 	}
+	
 	Gui.Callstack.push(function() {
 		for(var i = 0; i < party.members.length; i++) {
 			var e = party.members[i];
