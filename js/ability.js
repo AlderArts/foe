@@ -181,7 +181,7 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt) {
 			if(t.Incapacitated()) continue;
 			
 			target.push({
-			  	nameStr : t.name,
+			  	nameStr : t.uniqueName || t.name,
 			  	func    : function(t) {
 			  		ability.Use(encounter, caster, t);
 			  	},
