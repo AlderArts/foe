@@ -273,7 +273,7 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
                 break;
         }
     }
-
+    //Check if slot has an item equipped
     var hasEquip = false;
     switch(type) {
         case ItemType.Weapon:   if(entity.weaponSlot)   hasEquip = true; break;
@@ -283,7 +283,7 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
         case ItemSubtype.Acc2:     if(entity.acc2Slot)     hasEquip = true; break;
         case ItemSubtype.StrapOn:  if(entity.strapOn)      hasEquip = true; break;
     }
-
+    //Create de-equip function for the slot type
     var list = [];
     list.push({
         nameStr : "Dequip",
@@ -294,11 +294,11 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
                     entity.weaponSlot = null;
                     break;
                 case ItemSubtype.TopArmor:
-                    if(entity.weaponSlot) inv.AddItem(entity.topArmorSlot);
+                    if(entity.topArmorSlot) inv.AddItem(entity.topArmorSlot);
                     entity.topArmorSlot = null;
                     break;
                 case ItemSubtype.BotArmor:
-                    if(entity.weaponSlot) inv.AddItem(entity.botArmorSlot);
+                    if(entity.botArmorSlot) inv.AddItem(entity.botArmorSlot);
                     entity.botArmorSlot = null;
                     break;
                 case ItemSubtype.Acc1:
@@ -320,13 +320,14 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
         enabled : hasEquip
     });
 
+    //Create button and equip item function for each item valid for the passed in 'type'
     for(var i=0,j=items.length; i<j; i++) {
         var it = items[i];
         list.push({
             nameStr : it.name,
             func    : function(t) {
                 inv.RemoveItem(t);
-                switch(t.type) {
+                switch(t.subtype || t.type) {
                     case ItemType.Weapon:
                         if(entity.weaponSlot) inv.AddItem(entity.weaponSlot);
                         entity.weaponSlot = t;
@@ -349,7 +350,7 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
                         entity.botArmorSlot = t;
                         break;
 
-                    case ItemSubtype.Accessory:
+                    case ItemType.Accessory:
                         if(type == ItemSubtype.Acc1) {
                             if(entity.acc1Slot) inv.AddItem(entity.acc1Slot);
                             entity.acc1Slot = t;
