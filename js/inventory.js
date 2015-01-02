@@ -95,17 +95,12 @@ Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItems
     //Populate type arrays with items if they're defined
     for(var i = 0; i < inv.length; i++) {
         var it = inv[i].it;
-        if(itemsByType) {
+        if(itemsByType)
             itemsByType[it.type].push(inv[i]);
-        }
-
-        if(usableItemsByType && it.Use) {
+        if(usableItemsByType && it.Use)
             usableItemsByType[it.type].push(inv[i]);
-        }
-
-        if(combatItemsByType && it.UseCombat) {
+        if(combatItemsByType && it.UseCombat)
             combatItemsByType[it.type].push(inv[i]);
-        }
     }
     //Clear empty arrays
     for(var type in ItemType){
