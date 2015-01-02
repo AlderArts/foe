@@ -2086,12 +2086,12 @@ Entity.prototype.EquipPrompt = function(backfunc) {
 	};
 	
 	var equipFunc = function() {
-		parse["wep"]  = that.weaponSlot   ? that.weaponSlot.Short()   : "<i>None</i>";
-		parse["top"]  = that.topArmorSlot ? that.topArmorSlot.Short() : "<i>None</i>";
-		parse["bot"]  = that.botArmorSlot ? that.botArmorSlot.Short() : "<i>None</i>";
-		parse["acc1"] = that.acc1Slot     ? that.acc1Slot.Short()     : "<i>None</i>";
-		parse["acc2"] = that.acc2Slot     ? that.acc2Slot.Short()     : "<i>None</i>";
-		parse["toy"]  = that.strapOn      ? that.strapOn.Short()      : "<i>None</i>";
+		parse["wep"]  = that.weaponSlot   ? "[" + that.weaponSlot.name +"] "   + that.weaponSlot.Short()   : "<i>None</i>";
+		parse["top"]  = that.topArmorSlot ? "[" + that.topArmorSlot.name +"] " + that.topArmorSlot.Short() : "<i>None</i>";
+		parse["bot"]  = that.botArmorSlot ? "[" + that.botArmorSlot.name +"] " + that.botArmorSlot.Short() : "<i>None</i>";
+		parse["acc1"] = that.acc1Slot     ? "[" + that.acc1Slot.name +"] "     + that.acc1Slot.Short()     : "<i>None</i>";
+		parse["acc2"] = that.acc2Slot     ? "[" + that.acc2Slot.name +"] "     + that.acc2Slot.Short()     : "<i>None</i>";
+		parse["toy"]  = that.strapOn      ? "[" + that.strapOn.name +"] "      + that.strapOn.Short()      : "<i>None</i>";
 		
 		Text.Clear();
 		
