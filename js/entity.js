@@ -2116,7 +2116,7 @@ Entity.prototype.EquipPrompt = function(backfunc) {
 				Text.NL();
 				Text.Add("<i>What weapon do[es] [heshe] equip?</i>", parse);
 				Text.Flush();
-				party.inventory.ShowEquippable(that, ItemSubtype.Weapon, equipFunc);
+				party.inventory.ShowEquippable(that, ItemType.Weapon, equipFunc);
 			}, enabled : true,
 			tooltip : ""
 		});

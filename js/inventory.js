@@ -83,31 +83,38 @@ Inventory.prototype.Print = function() {
 }
 
 Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItemsByType) {
+    //Add all keys first. Ensures item output will be in whatever order our ItemType enum is in
+    for(var type in ItemType){
+        if(itemsByType)
+            itemsByType[type] = [];
+        if(usableItemsByType)
+            usableItemsByType[type] = [];
+        if(combatItemsByType)
+            combatItemsByType[type] = [];
+    }
+    //Populate type arrays with items if they're defined
     for(var i = 0; i < inv.length; i++) {
         var it = inv[i].it;
         if(itemsByType) {
-            var itemArr = [];
-            if(itemsByType.hasOwnProperty(it.type))
-                itemArr = itemsByType[it.type];
-            itemArr.push(inv[i]);
-            itemsByType[it.type] = itemArr;
+            itemsByType[it.type].push(inv[i]);
         }
 
         if(usableItemsByType && it.Use) {
-            var itemArr = [];
-            if(usableItemsByType.hasOwnProperty(it.type))
-                itemArr = usableItemsByType[it.type];
-            itemArr.push(inv[i]);
-            usableItemsByType[it.type] = itemArr;
+            usableItemsByType[it.type].push(inv[i]);
         }
 
         if(combatItemsByType && it.UseCombat) {
-            var itemArr = [];
-            if(combatItemsByType.hasOwnProperty(it.type))
-                itemArr = combatItemsByType[it.type];
-            itemArr.push(inv[i]);
-            combatItemsByType[it.type] = itemArr;
+            combatItemsByType[it.type].push(inv[i]);
         }
+    }
+    //Clear empty arrays
+    for(var type in ItemType){
+        if(itemsByType && itemsByType[type].length == 0)
+            delete itemsByType[type];
+        if(usableItemsByType && usableItemsByType[type].length == 0)
+            delete usableItemsByType[type];
+        if(combatItemsByType && combatItemsByType[type].length == 0)
+            delete combatItemsByType[type];
     }
 }
 
@@ -125,7 +132,7 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 
     //TODO The output format could be much nicer,
     for(var key in itemsByType) {
-        Text.Add("<b>"+Item.TypeToStr(parseInt(key)) + ":</b>");
+        Text.Add("<b>"+key + ":</b>");
         var items = itemsByType[key];
         if(items) {
             for(var i=0; i < items.length; i++) {
@@ -247,7 +254,7 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
     for(var i = 0; i < this.items.length; i++) {
         var it = this.items[i].it;
         switch(type) {
-            case ItemSubtype.Weapon:
+            case ItemType.Weapon:
                 if(it.type == ItemType.Weapon) items.push(it);
                 break;
             case ItemSubtype.TopArmor:
@@ -266,32 +273,32 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
                 break;
         }
     }
-
+    //Check if slot has an item equipped
     var hasEquip = false;
     switch(type) {
-        case ItemSubtype.Weapon:   if(entity.weaponSlot)   hasEquip = true; break;
+        case ItemType.Weapon:   if(entity.weaponSlot)   hasEquip = true; break;
         case ItemSubtype.TopArmor: if(entity.topArmorSlot) hasEquip = true; break;
         case ItemSubtype.BotArmor: if(entity.botArmorSlot) hasEquip = true; break;
         case ItemSubtype.Acc1:     if(entity.acc1Slot)     hasEquip = true; break;
         case ItemSubtype.Acc2:     if(entity.acc2Slot)     hasEquip = true; break;
         case ItemSubtype.StrapOn:  if(entity.strapOn)      hasEquip = true; break;
     }
-
+    //Create de-equip function for the slot type
     var list = [];
     list.push({
         nameStr : "Dequip",
         func    : function() {
             switch(type) {
-                case ItemSubtype.Weapon:
+                case ItemType.Weapon:
                     if(entity.weaponSlot) inv.AddItem(entity.weaponSlot);
                     entity.weaponSlot = null;
                     break;
                 case ItemSubtype.TopArmor:
-                    if(entity.weaponSlot) inv.AddItem(entity.topArmorSlot);
+                    if(entity.topArmorSlot) inv.AddItem(entity.topArmorSlot);
                     entity.topArmorSlot = null;
                     break;
                 case ItemSubtype.BotArmor:
-                    if(entity.weaponSlot) inv.AddItem(entity.botArmorSlot);
+                    if(entity.botArmorSlot) inv.AddItem(entity.botArmorSlot);
                     entity.botArmorSlot = null;
                     break;
                 case ItemSubtype.Acc1:
@@ -313,14 +320,15 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
         enabled : hasEquip
     });
 
+    //Create button and equip item function for each item valid for the passed in 'type'
     for(var i=0,j=items.length; i<j; i++) {
         var it = items[i];
         list.push({
             nameStr : it.name,
             func    : function(t) {
                 inv.RemoveItem(t);
-                switch(t.type) {
-                    case ItemSubtype.Weapon:
+                switch(t.subtype || t.type) {
+                    case ItemType.Weapon:
                         if(entity.weaponSlot) inv.AddItem(entity.weaponSlot);
                         entity.weaponSlot = t;
                         break;
@@ -342,7 +350,7 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
                         entity.botArmorSlot = t;
                         break;
 
-                    case ItemSubtype.Accessory:
+                    case ItemType.Accessory:
                         if(type == ItemSubtype.Acc1) {
                             if(entity.acc1Slot) inv.AddItem(entity.acc1Slot);
                             entity.acc1Slot = t;

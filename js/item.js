@@ -5,26 +5,25 @@ Items = {};
 ItemIds = {};
 //Represents the overall category an item falls under.
 ItemType = {
-	Weapon     : 0,
-	Armor      : 1,
-	Accessory  : 2,
-	Potion     : 3,
-	Card       : 4,
-	Ingredient : 5,
-	Quest      : 6,
-	Toy        : 7
+	Weapon     : "Weapon",
+	Armor      : "Armor",
+	Accessory  : "Accessory",
+	Potion     : "Potion",
+	Card       : "Card",
+	Ingredient : "Ingredient",
+	Quest      : "Quest",
+	Toy        : "Toy"
 };
 //Represents a second level of categorization for items.
-//TODO Evaluate all of these properties. Many can be refactored out.
+//FIXME Attempt to remove Acc1/Acc2 from here. They can exist on entity, but shouldn't exist as a type in items.
 ItemSubtype = {
-	Weapon    : 0,
-	TopArmor  : 1,
-	BotArmor  : 2,
-	FullArmor : 3,
-	Accessory : 4,
+	FullArmor : "Full Armor",
+	TopArmor  : "Top Armor",
+	BotArmor  : "Bottom Armor",
 	Acc1      : 5,
 	Acc2      : 6,
-	StrapOn   : 7
+	StrapOn   : "Strap-on",
+	Dildo	  : "Dildo"
 };
 
 function Item(id, name, type) {
@@ -65,21 +64,6 @@ function Item(id, name, type) {
 	this.effect = {};
 	
 	ItemIds[id] = this;
-}
-//TODO Refactor this out. No need for it now that we have two item types
-Item.TypeToStr = function(type) {
-	switch(type) {
-		case ItemType.Weapon:     return "Weapons";
-		case ItemType.Armor:      return "Armor";
-		case ItemType.Accessory:  return "Accessories";
-		case ItemType.Potion:     return "Potions";
-		case ItemType.Card:       return "Cards";
-		case ItemType.Ingredient: return "Ingredients";
-		case ItemType.Quest:      return "Quest items";
-		case ItemType.Toy:        return "Toys";
-		default:
-			return "Misc";
-	}
 }
 
 //function(target)
