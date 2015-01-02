@@ -12,7 +12,8 @@ ItemType = {
 	Card       : "Card",
 	Ingredient : "Ingredient",
 	Quest      : "Quest",
-	Toy        : "Toy"
+	Toy        : "Toy",
+	Misc       : "Misc"
 };
 //Represents a second level of categorization for items.
 //FIXME Attempt to remove Acc1/Acc2 from here. They can exist on entity, but shouldn't exist as a type in items.
@@ -30,7 +31,7 @@ function Item(id, name, type) {
 	//Required (An item will always have these)
 	this.id     = id;
 	this.name   = name;
-	this.type   = type;
+	this.type   = type || ItemType.Misc;
 
 	//Optional, with default
 	this.image  = new Image(); // TODO This sounds interesting, so i'll look into it later.
