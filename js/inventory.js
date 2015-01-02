@@ -254,7 +254,7 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
     for(var i = 0; i < this.items.length; i++) {
         var it = this.items[i].it;
         switch(type) {
-            case ItemSubtype.Weapon:
+            case ItemType.Weapon:
                 if(it.type == ItemType.Weapon) items.push(it);
                 break;
             case ItemSubtype.TopArmor:
@@ -276,7 +276,7 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
 
     var hasEquip = false;
     switch(type) {
-        case ItemSubtype.Weapon:   if(entity.weaponSlot)   hasEquip = true; break;
+        case ItemType.Weapon:   if(entity.weaponSlot)   hasEquip = true; break;
         case ItemSubtype.TopArmor: if(entity.topArmorSlot) hasEquip = true; break;
         case ItemSubtype.BotArmor: if(entity.botArmorSlot) hasEquip = true; break;
         case ItemSubtype.Acc1:     if(entity.acc1Slot)     hasEquip = true; break;
@@ -289,7 +289,7 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
         nameStr : "Dequip",
         func    : function() {
             switch(type) {
-                case ItemSubtype.Weapon:
+                case ItemType.Weapon:
                     if(entity.weaponSlot) inv.AddItem(entity.weaponSlot);
                     entity.weaponSlot = null;
                     break;
@@ -327,7 +327,7 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
             func    : function(t) {
                 inv.RemoveItem(t);
                 switch(t.type) {
-                    case ItemSubtype.Weapon:
+                    case ItemType.Weapon:
                         if(entity.weaponSlot) inv.AddItem(entity.weaponSlot);
                         entity.weaponSlot = t;
                         break;

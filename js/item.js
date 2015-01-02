@@ -17,7 +17,6 @@ ItemType = {
 //Represents a second level of categorization for items.
 //TODO Evaluate all of these properties. Many can be refactored out.
 ItemSubtype = {
-	Weapon    : 0,
 	TopArmor  : 1,
 	BotArmor  : 2,
 	FullArmor : 3,
