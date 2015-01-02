@@ -286,6 +286,7 @@ Scenes.Roaming.BanditsGen = function(capt) {
 							isEnemy    : true,
 							initiative : 0,
 							aggro      : []};
+						enc.GenerateUniqueName(ent);
 						
 						enc.combatOrder.push(ent);
 						ent.entity.GetSingleTarget(enc, ent);

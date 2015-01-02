@@ -61,7 +61,7 @@ Encounter.prototype.PrepCombat = function() {
 	enemyParty = this.enemy;
 	//Add a unique name property to each enemy entity
 	for(var i=0; i < enemyParty.NumTotal(); i++) {
-		enemyParty.Get(i).uniqueName = enemyParty.Get(i).name+" ["+(i+1)+"]";
+		this.GenerateUniqueName(enemyParty.Get(i));
 	}
 	
 	Gui.Callstack.push(function() {
@@ -76,6 +76,12 @@ Encounter.prototype.PrepCombat = function() {
 
 	// Start the combat
 	this.CombatTick();
+}
+
+Encounter.prototype.GenerateUniqueName = function(entity) {
+	this.uniqueID = this.uniqueID || 0;
+	this.uniqueID++;
+	entity.uniqueName = entity.name+" ["+this.uniqueID+"]";
 }
 
 Encounter.InitiativeSorter = function(a, b) {

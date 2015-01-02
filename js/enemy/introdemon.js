@@ -93,6 +93,7 @@ IntroDemon.prototype.Act = function(encounter, activeChar) {
 				isEnemy    : true,
 				initiative : 0,
 				aggro      : []};
+			encounter.GenerateUniqueName(ent);
 			
 			encounter.combatOrder.push(ent);
 			ent.entity.GetSingleTarget(encounter, ent);
