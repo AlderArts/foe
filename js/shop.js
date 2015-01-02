@@ -87,7 +87,7 @@ Shop.prototype.Buy = function(back, preventClear) {
 	
 	var options = [];
 	for(var key in itemsByType) {
-		Text.Add("<b>"+Item.TypeToStr(parseInt(key)) + ":</b>");
+		Text.Add("<b>"+ key + ":</b>");
 		var items = itemsByType[key];
 		if(items) {
 			for(var i=0; i < items.length; i++) {
@@ -204,7 +204,7 @@ Shop.prototype.Sell = function(back, preventClear) {
 	
 	var options = [];
 	for(var key in itemsByType) {
-		Text.Add("<b>"+Item.TypeToStr(parseInt(key)) + ":</b>");
+		Text.Add("<b>"+key + ":</b>");
 		var items = itemsByType[key];
 		if(items) {
 			for(var i=0; i < items.length; i++) {

@@ -83,31 +83,38 @@ Inventory.prototype.Print = function() {
 }
 
 Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItemsByType) {
+    //Add all keys first. Ensures item output will be in whatever order our ItemType enum is in
+    for(var type in ItemType){
+        if(itemsByType)
+            itemsByType[type] = [];
+        if(usableItemsByType)
+            usableItemsByType[type] = [];
+        if(combatItemsByType)
+            combatItemsByType[type] = [];
+    }
+    //Populate type arrays with items if they're defined
     for(var i = 0; i < inv.length; i++) {
         var it = inv[i].it;
         if(itemsByType) {
-            var itemArr = [];
-            if(itemsByType.hasOwnProperty(it.type))
-                itemArr = itemsByType[it.type];
-            itemArr.push(inv[i]);
-            itemsByType[it.type] = itemArr;
+            itemsByType[it.type].push(inv[i]);
         }
 
         if(usableItemsByType && it.Use) {
-            var itemArr = [];
-            if(usableItemsByType.hasOwnProperty(it.type))
-                itemArr = usableItemsByType[it.type];
-            itemArr.push(inv[i]);
-            usableItemsByType[it.type] = itemArr;
+            usableItemsByType[it.type].push(inv[i]);
         }
 
         if(combatItemsByType && it.UseCombat) {
-            var itemArr = [];
-            if(combatItemsByType.hasOwnProperty(it.type))
-                itemArr = combatItemsByType[it.type];
-            itemArr.push(inv[i]);
-            combatItemsByType[it.type] = itemArr;
+            combatItemsByType[it.type].push(inv[i]);
         }
+    }
+    //Clear empty arrays
+    for(var type in ItemType){
+        if(itemsByType && itemsByType[type].length == 0)
+            delete itemsByType[type];
+        if(usableItemsByType && usableItemsByType[type].length == 0)
+            delete usableItemsByType[type];
+        if(combatItemsByType && combatItemsByType[type].length == 0)
+            delete combatItemsByType[type];
     }
 }
 
@@ -125,7 +132,7 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 
     //TODO The output format could be much nicer,
     for(var key in itemsByType) {
-        Text.Add("<b>"+Item.TypeToStr(parseInt(key)) + ":</b>");
+        Text.Add("<b>"+key + ":</b>");
         var items = itemsByType[key];
         if(items) {
             for(var i=0; i < items.length; i++) {
