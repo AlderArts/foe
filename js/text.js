@@ -1,6 +1,6 @@
 
 Text.buffer = "";
-
+//TODO Refactor this out. Should use a CSS class
 Text.BoldColor = function(text, color) {
 	color = color || "black";
 	return "<b><font color =\"" + color + "\">" + text + "</font></b>";
@@ -23,7 +23,7 @@ Text.Say = function(imgSrc, text, align) {
 	else
 		textbox.innerHTML += text;
 }
-
+//TODO Refactor this out
 Text.AddOutput = function(text, parseStrings) {
 	var textbox = document.getElementById("mainTextArea");
 	textbox.innerHTML += Text.Parse(text, parseStrings);
@@ -67,7 +67,7 @@ Text.Parse = function(text, parseStrings) {
 		return Text.BoldColor("PARSE ERROR: { " + text + " }", "red");
 	}
 }
-
+//TODO Refactor this out.
 Text.Newline = function() {
 	var textbox = document.getElementById("mainTextArea");
 	textbox.innerHTML += "<br/><br/>";
@@ -96,18 +96,28 @@ Text.Clear = function() {
 
  * 
  */
-
-Text.Add = function(text, parse) {
-	Text.buffer += Text.Parse(text, parse);
+//TODO Would be wise to refactor/rename this to "AddSpan".
+//Adds text wrapped in a span.
+Text.Add = function(text, parse, cssClasses) {
+	var classesStr = (cssClasses)? cssClasses : "";
+	Text.buffer += "<span class=\""+classesStr+"\">"+Text.Parse(text, parse) + "</span>";
+}
+//Adds text wrapped in a div.
+Text.AddDiv = function(text, parse, cssClasses) {
+	var classesStr = (cssClasses)? cssClasses : "";
+	Text.buffer += "<div class=\""+classesStr+"\">"+Text.Parse(text, parse) + "</div>";
 }
 
 Text.NL = function() {
 	Text.buffer += "<br/><br/>";
 }
 
-Text.Flush = function() {
+Text.Flush = function(cssClasses) {
 	var textbox = document.getElementById("mainTextArea");
-	textbox.innerHTML += Text.buffer;
+
+	var classesStr = (cssClasses)? cssClasses : "";
+		textbox.innerHTML += "<span class=\""+classesStr+"\">"+Text.buffer + "</span>";
+
 	Text.buffer = "";
 }
 

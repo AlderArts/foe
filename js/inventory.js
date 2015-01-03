@@ -81,16 +81,17 @@ Inventory.prototype.Print = function() {
         Text.AddOutput(this.items[i].num + "x " + this.items[i].it.name + " - " + this.items[i].it.Short() + "<br/>");
     }
 }
-
+//Divides items by their 'type'
 Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItemsByType) {
     //Add all keys first. Ensures item output will be in whatever order our ItemType enum is in
     for(var type in ItemType){
+        var itemType = ItemType[type];
         if(itemsByType)
-            itemsByType[type] = [];
+            itemsByType[itemType] = [];
         if(usableItemsByType)
-            usableItemsByType[type] = [];
+            usableItemsByType[itemType] = [];
         if(combatItemsByType)
-            combatItemsByType[type] = [];
+            combatItemsByType[itemType] = [];
     }
     //Populate type arrays with items if they're defined
     for(var i = 0; i < inv.length; i++) {
@@ -104,14 +105,77 @@ Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItems
     }
     //Clear empty arrays
     for(var type in ItemType){
-        if(itemsByType && itemsByType[type].length == 0)
-            delete itemsByType[type];
-        if(usableItemsByType && usableItemsByType[type].length == 0)
-            delete usableItemsByType[type];
-        if(combatItemsByType && combatItemsByType[type].length == 0)
-            delete combatItemsByType[type];
+        var itemType = ItemType[type];
+        if(itemsByType && itemsByType[itemType].length == 0)
+            delete itemsByType[itemType];
+        if(usableItemsByType && usableItemsByType[itemType].length == 0)
+            delete usableItemsByType[itemType];
+        if(combatItemsByType && combatItemsByType[itemType].length == 0)
+            delete combatItemsByType[itemType];
     }
 }
+//Divides items by their 'type' and further by their 'subtype' inside each primary type. Items WITHOUT a subtype are under property 'None'
+Inventory.ItemByBothTypes = function(inv, itemsByType, usableItemsByType, combatItemsByType) {
+    //Add all keys first. Ensures item output will be in whatever order our ItemType enum is in
+    for(var type in ItemType){
+        var itemType = ItemType[type];
+        if(itemsByType) {
+            itemsByType[itemType] = {};
+        }
+        if(usableItemsByType){
+            usableItemsByType[itemType] = {};
+        }
+        if(combatItemsByType){
+            combatItemsByType[itemType] = {};
+        }
+
+        for(var subtype in ItemSubtype){
+            var itemSubtype = ItemSubtype[subtype];
+            if(itemsByType)
+                itemsByType[itemType][itemSubtype] = [];
+            if(usableItemsByType)
+                usableItemsByType[itemType][itemSubtype] = [];
+            if(combatItemsByType)
+                combatItemsByType[itemType][itemSubtype] = [];
+        }
+    }
+    //Populate type arrays with items if they're defined
+    for(var i = 0; i < inv.length; i++) {
+        var it = inv[i].it;
+        if(itemsByType) {
+            itemsByType[it.type][it.subtype].push(inv[i]);
+        }
+        if(usableItemsByType && it.Use) {
+           usableItemsByType[it.type][it.subtype].push(inv[i]);
+        }
+        if(combatItemsByType && it.UseCombat) {
+            combatItemsByType[it.type][it.subtype].push(inv[i]);
+        }
+    }
+    //Clear empty arrays
+    for(var type in ItemType){
+        var itemType = ItemType[type];
+        //Remove empty subtypes
+        for(var subtype in ItemSubtype){
+            var itemSubtype = ItemSubtype[subtype];
+            if(itemsByType && itemsByType[itemType][itemSubtype].length == 0)
+                delete itemsByType[itemType][itemSubtype];
+            if(usableItemsByType && usableItemsByType[itemType][itemSubtype].length == 0)
+                delete usableItemsByType[itemType][itemSubtype];
+            if(combatItemsByType && combatItemsByType[itemType][itemSubtype].length == 0)
+                delete combatItemsByType[itemType][itemSubtype];
+        }
+
+        //remove empty types
+        if(itemsByType && Object.keys(itemsByType[itemType]).length == 0)
+            delete itemsByType[itemType];
+        if(usableItemsByType && Object.keys(usableItemsByType[itemType]).length == 0)
+            delete usableItemsByType[itemType];
+        if(combatItemsByType && Object.keys(combatItemsByType[itemType]).length == 0)
+            delete combatItemsByType[itemType];
+    }
+}
+
 
 Inventory.prototype.ShowInventory = function(preventClear) {
     var inv = this;
@@ -123,15 +187,22 @@ Inventory.prototype.ShowInventory = function(preventClear) {
     var itemsByType = {};
     var usableItemsByType = {};
 
-    Inventory.ItemByType(this.items, itemsByType, usableItemsByType);
+    Inventory.ItemByBothTypes(this.items, itemsByType, usableItemsByType);
 
-    //TODO The output format could be much nicer,
-    for(var key in itemsByType) {
-        Text.Add("<b>"+key + ":</b>");
-        var items = itemsByType[key];
-        if(items) {
-            for(var i=0; i < items.length; i++) {
-                Text.Add("<br/>" + items[i].it.name + " x"+items[i].num);
+    for(var typeKey in itemsByType) {
+        //Add main types
+        Text.AddDiv("<hr>");
+        Text.AddDiv(typeKey, null, "itemTypeHeader");
+        Text.AddDiv("<hr>");
+        for(var subtypeKey in itemsByType[typeKey]){
+            //Add subtypes (except None type)
+            if(subtypeKey != ItemSubtype.None)
+                Text.AddDiv(subtypeKey, null, "itemSubtypeHeader");
+            var items = itemsByType[typeKey][subtypeKey];
+            if(items) {
+                for(var i=0; i < items.length; i++) {
+                    Text.AddDiv(items[i].it.name + " x"+items[i].num, null, "itemName");
+                }
             }
         }
         Text.NL();
@@ -139,9 +210,11 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 
     var usable = [];
     for(var key in usableItemsByType) {
-        var items = usableItemsByType[key];
-        if(items)
-            usable = usable.concat(items);
+        for(var subtypeKey in usableItemsByType[key]){
+            var items = usableItemsByType[key][subtypeKey];
+            if(items)
+                usable = usable.concat(items);
+        }
     }
 
     var options = [];
@@ -149,7 +222,7 @@ Inventory.prototype.ShowInventory = function(preventClear) {
         var it  = usable[i].it;
         var num = usable[i].num;
         options.push({
-            nameStr: it.name + " x"+ num,
+            nameStr: it.name + " x"+num,
             enabled: true,
             //tooltip: it.Long(),
             obj: it,
@@ -194,7 +267,7 @@ Inventory.prototype.ShowInventory = function(preventClear) {
     Text.Flush();
     SetExploreButtons();
 }
-
+//TODO Make this use the fancy GUI!
 Inventory.prototype.CombatInventory = function(encounter, entity, back) {
     var inv = this;
     Text.Clear();
@@ -322,7 +395,8 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
             nameStr : it.name,
             func    : function(t) {
                 inv.RemoveItem(t);
-                switch(t.subtype || t.type) {
+                var switchType = (t.subtype != ItemSubtype.None) ? t.subtype : t.type;
+                switch(switchType) {
                     case ItemType.Weapon:
                         if(entity.weaponSlot) inv.AddItem(entity.weaponSlot);
                         entity.weaponSlot = t;

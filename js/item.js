@@ -5,26 +5,27 @@ Items = {};
 ItemIds = {};
 //Represents the overall category an item falls under.
 ItemType = {
-	Weapon     : "Weapon",
-	Armor      : "Armor",
-	Accessory  : "Accessory",
-	Potion     : "Potion",
-	Card       : "Card",
-	Ingredient : "Ingredient",
-	Quest      : "Quest",
-	Toy        : "Toy",
-	Misc       : "Misc"
+	Weapon     : "Weapons",
+	Armor      : "Armors",
+	Accessory  : "Accessories",
+	Potion     : "Potions",
+	Card       : "Cards",
+	Ingredient : "Ingredients",
+	Quest      : "Quest Items",
+	Toy        : "Toys",
+	Misc       : "Misc" //Default catch all for all items. Should strive to not have this on any items though.
 };
 //Represents a second level of categorization for items.
 //FIXME Attempt to remove Acc1/Acc2 from here. They can exist on entity, but shouldn't exist as a type in items.
 ItemSubtype = {
-	FullArmor : "Full Armor",
-	TopArmor  : "Top Armor",
-	BotArmor  : "Bottom Armor",
+	FullArmor : "Full Armors",
+	TopArmor  : "Top Armors",
+	BotArmor  : "Bottom Armors",
 	Acc1      : 5,
 	Acc2      : 6,
-	StrapOn   : "Strap-on",
-	Dildo	  : "Dildo"
+	StrapOn   : "Strap-ons",
+	Dildo	  : "Dildos",
+	None	  : "None" //Should be default case for all items
 };
 
 function Item(id, name, type) {
@@ -36,11 +37,11 @@ function Item(id, name, type) {
 	//Optional, with default
 	this.image  = new Image(); // TODO This sounds interesting, so i'll look into it later.
 	this.price  = 0;
+	this.subtype = ItemSubtype.None;
 	// Alchemical recipe, an array of {it: Item, num: Number} pairs
 	this.recipe = []; //TODO Maybe should be set to null. I'll look into how recipes are used later.
 
 	//Optional, No default (don't forget your null checks if you're working with these!)
-	this.subtype = null;
 	//function(target)
 	this.Use        = null;
 
