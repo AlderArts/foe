@@ -23,7 +23,7 @@ ItemSubtype = {
 	BotArmor  : "Bottom Armors",
 	Acc1      : 5,
 	Acc2      : 6,
-	StrapOn   : "Strap-ons",
+	StrapOn   : "Strapons",
 	Dildo	  : "Dildos",
 	None	  : "None" //Should be default case for all items
 };
