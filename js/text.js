@@ -1,6 +1,6 @@
 
 Text.buffer = "";
-
+//TODO Refactor this out. Should use a CSS class
 Text.BoldColor = function(text, color) {
 	color = color || "black";
 	return "<b><font color =\"" + color + "\">" + text + "</font></b>";
@@ -23,7 +23,7 @@ Text.Say = function(imgSrc, text, align) {
 	else
 		textbox.innerHTML += text;
 }
-
+//TODO Refactor this out
 Text.AddOutput = function(text, parseStrings) {
 	var textbox = document.getElementById("mainTextArea");
 	textbox.innerHTML += Text.Parse(text, parseStrings);
@@ -67,7 +67,7 @@ Text.Parse = function(text, parseStrings) {
 		return Text.BoldColor("PARSE ERROR: { " + text + " }", "red");
 	}
 }
-
+//TODO Refactor this out.
 Text.Newline = function() {
 	var textbox = document.getElementById("mainTextArea");
 	textbox.innerHTML += "<br/><br/>";
@@ -97,17 +97,24 @@ Text.Clear = function() {
  * 
  */
 
-Text.Add = function(text, parse) {
-	Text.buffer += Text.Parse(text, parse);
+Text.Add = function(text, parse, cssClasses) {
+	if(cssClasses)
+		Text.buffer += "<span class=\""+cssClasses+"\">"+Text.Parse(text, parse) + "</span>";
+	else
+		Text.buffer += Text.Parse(text, parse);
 }
 
 Text.NL = function() {
 	Text.buffer += "<br/><br/>";
 }
 
-Text.Flush = function() {
+Text.Flush = function(cssClasses) {
 	var textbox = document.getElementById("mainTextArea");
-	textbox.innerHTML += Text.buffer;
+
+	if(cssClasses)
+		textbox.innerHTML += "<span class=\""+cssClasses+"\">"+Text.buffer + "</span>";
+	else
+		textbox.innerHTML += Text.buffer;
 	Text.buffer = "";
 }
 
