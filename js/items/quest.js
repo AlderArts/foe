@@ -15,3 +15,8 @@ Items.Quest.GolHusk = new Item("quest2", "Gol husk", ItemType.Quest);
 Items.Quest.GolHusk.price = 0;
 Items.Quest.GolHusk.Short = function() { return "A Gol husk"; }
 Items.Quest.GolHusk.Long  = function() { return "The husk looks like it once belonged to a large insectoid creature."; }
+
+Items.Quest.Scepter = new Item("quest3", "Scepter", ItemType.Quest);
+Items.Quest.Scepter.price = 0;
+Items.Quest.Scepter.Short = function() { return "Lagon's scepter"; }
+Items.Quest.Scepter.Long  = function() { return "There is a large gemstone set into the scepter, which looks to be of fine craftmanship."; }
