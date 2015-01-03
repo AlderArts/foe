@@ -209,6 +209,7 @@ Inventory.prototype.ShowInventory = function(preventClear) {
     }
 
     var usable = [];
+    //Copy usable items into usable array
     for(var key in usableItemsByType) {
         for(var subtypeKey in usableItemsByType[key]){
             var items = usableItemsByType[key][subtypeKey];
@@ -277,21 +278,44 @@ Inventory.prototype.CombatInventory = function(encounter, entity, back) {
     }
 
     var combatItemsByType = {};
-    Inventory.ItemByType(this.items, null, null, combatItemsByType);
+    Inventory.ItemByBothTypes(this.items, null, null, combatItemsByType);
 
     var usable = [];
+    //Copy usable items into usable array
     for(var key in combatItemsByType) {
-        var items = combatItemsByType[key];
-        if(items)
-            usable = usable.concat(items);
+        for(var subtypeKey in combatItemsByType[key]){
+            var items = combatItemsByType[key][subtypeKey];
+            if(items)
+                usable = usable.concat(items);
+        }
+    }
+    //Output combat items to central GUI
+    for(var typeKey in combatItemsByType) {
+        //Add main types
+        Text.AddDiv("<hr>");
+        Text.AddDiv(typeKey, null, "itemTypeHeader");
+        Text.AddDiv("<hr>");
+        for(var subtypeKey in combatItemsByType[typeKey]){
+            //Add subtypes (except None type)
+            if(subtypeKey != ItemSubtype.None)
+                Text.AddDiv(subtypeKey, null, "itemSubtypeHeader");
+            var items = combatItemsByType[typeKey][subtypeKey];
+            if(items) {
+                for(var i=0; i < items.length; i++) {
+                    Text.AddDiv(items[i].it.name + " x"+items[i].num, null, "itemName");
+                }
+            }
+        }
+        Text.NL();
     }
 
+    //Add combat items as buttons
     var options = [];
     for(var i = 0; i < usable.length; ++i) {
         var it  = usable[i].it;
         var num = usable[i].num;
 
-        Text.Add(num + "x " + it.name + " - " + it.Short() + "<br/>");
+        //Text.Add(num + "x " + it.name + " - " + it.Short() + "<br/>");
         options.push({
             nameStr: it.name,
             enabled: true,
