@@ -83,32 +83,39 @@ Shop.prototype.Buy = function(back, preventClear) {
 	};
 	
 	var itemsByType = {};
-	Inventory.ItemByType(this.inventory, itemsByType);
+	Inventory.ItemByBothTypes(this.inventory, itemsByType);
 	
 	var options = [];
-	for(var key in itemsByType) {
-		Text.Add("<b>"+ key + ":</b>");
-		var items = itemsByType[key];
-		if(items) {
-			for(var i=0; i < items.length; i++) {
-				
-				var it       = items[i].it;
-				var num      = items[i].num;
-				var enabled  = items[i].enabled ? items[i].enabled() : true;
-				var cost     = DEBUG ? 0 : Math.floor(items[i].price * it.price);
-				var func     = items[i].func;
-				
-				enabled = enabled && (party.coin >= cost);
-		
-				Text.Add("<br/><b>" + cost + "g - </b>" + it.name + " - " + it.Short());
-		
-				options.push({ nameStr : it.name,
-					func : buyFunc, enabled : enabled,
-					tooltip : it.Long(),
-					obj : {it: items[i].it, cost: cost, func: func }
-				});
+	for(var typeKey in itemsByType) {
+		//Add main types
+		Text.AddDiv("<hr>");
+		Text.AddDiv(typeKey, null, "itemTypeHeader");
+		Text.AddDiv("<hr>");
+		for(var subtypeKey in itemsByType[typeKey]){
+			//Add subtypes (except None type)
+			if(subtypeKey != ItemSubtype.None)
+				Text.AddDiv(subtypeKey, null, "itemSubtypeHeader");
+			var items = itemsByType[typeKey][subtypeKey];
+			if(items) {
+				for(var i=0; i < items.length; i++) {
+					var it       = items[i].it;
+					var num      = items[i].num;
+					var enabled  = items[i].enabled ? items[i].enabled() : true;
+					var cost     = DEBUG ? 0 : Math.floor(items[i].price * it.price);
+					var func     = items[i].func;
+
+					enabled = enabled && (party.coin >= cost);
+					Text.AddDiv("<b>" + cost + "g - </b>" + it.name + " - " + it.Short(), null, "itemName");
+
+					options.push({ nameStr : it.name,
+						func : buyFunc, enabled : enabled,
+						tooltip : it.Long(),
+						obj : {it: items[i].it, cost: cost, func: func }
+					});
+				}
 			}
 		}
+
 		Text.NL();
 	}
 	Text.Flush();
