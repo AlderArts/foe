@@ -1,0 +1,23 @@
+/*
+* Contains various CSS classes that are used for text output.
+*/
+
+.bold{
+    font-weight: bold;
+}
+
+
+
+
+
+/*
+Item display CSS classes
+*/
+.itemTypeHeader{
+    font-weight: bold;
+    font-size: 30px;
+}
+.itemSubtypeHeader{
+    font-weight: bold;
+    font-size:15px;
+}

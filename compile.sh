@@ -156,6 +156,7 @@ cp js/excanvas.compiled.js build/excanvas.compiled.js
 
 cp foe_min.html build/foe.html
 cp style.css build/style.css
+cp output.css build/output.css
 cp download.php build/download.php
 cp changelog build/changelog
 
