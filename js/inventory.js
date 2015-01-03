@@ -395,7 +395,8 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
             nameStr : it.name,
             func    : function(t) {
                 inv.RemoveItem(t);
-                switch(t.subtype || t.type) {
+                var switchType = (t.subtype != ItemSubtype.None) ? t.subtype : t.type;
+                switch(switchType) {
                     case ItemType.Weapon:
                         if(entity.weaponSlot) inv.AddItem(entity.weaponSlot);
                         entity.weaponSlot = t;
