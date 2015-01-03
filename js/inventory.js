@@ -267,7 +267,7 @@ Inventory.prototype.ShowInventory = function(preventClear) {
     Text.Flush();
     SetExploreButtons();
 }
-
+//TODO Make this use the fancy GUI!
 Inventory.prototype.CombatInventory = function(encounter, entity, back) {
     var inv = this;
     Text.Clear();

@@ -199,30 +199,38 @@ Shop.prototype.Sell = function(back, preventClear) {
 	
 	
 	var itemsByType = {};
-	Inventory.ItemByType(party.Inv().items, itemsByType);
+	Inventory.ItemByBothTypes(party.Inv().items, itemsByType);
 	
 	
 	var options = [];
-	for(var key in itemsByType) {
-		//Exclude quest items from shop output
-		if(key != ItemType.Quest)
-			Text.Add("<b>"+key + ":</b>");
-		var items = itemsByType[key];
-		if(items) {
-			for(var i=0; i < items.length; i++) {
-				var it       = items[i].it;
-				var num      = items[i].num;
-				var price    = Math.floor(shop.sellPrice * it.price);
-				
-				if(price <= 0) continue;
-				
-				Text.Add("<br/><b>" + price + "g -</b> " + it.name + " x" + num + " - " + it.Short());
-		
-				options.push({ nameStr : it.name,
-					func : sellFunc, enabled : true,
-					tooltip : it.Long(),
-					obj : items[i]
-				});
+	for(var typeKey in itemsByType) {
+		//Add main types, exclude quest items (can't sell quest items at shop)
+		if(typeKey != ItemType.Quest){
+			Text.AddDiv("<hr>");
+			Text.AddDiv(typeKey, null, "itemTypeHeader");
+			Text.AddDiv("<hr>");
+		}
+		for(var subtypeKey in itemsByType[typeKey]){
+			//Add subtypes (except None type)
+			if(subtypeKey != ItemSubtype.None)
+				Text.AddDiv(subtypeKey, null, "itemSubtypeHeader");
+			var items = itemsByType[typeKey][subtypeKey];
+			if(items) {
+				for(var i=0; i < items.length; i++) {
+					var it       = items[i].it;
+					var num      = items[i].num;
+					var price    = Math.floor(shop.sellPrice * it.price);
+
+					if(price <= 0) continue;
+					//TODO Could look better. Perhaps add 'table' functionality to text.js and use it here
+					Text.AddDiv("<b>"+price + "g</b> - " + it.name + " x" + num + " - " + it.Short(), null, "itemName");
+
+					options.push({ nameStr : it.name,
+						func : sellFunc, enabled : true,
+						tooltip : it.Long(),
+						obj : items[i]
+					});
+				}
 			}
 		}
 		Text.NL();
