@@ -5,26 +5,27 @@ Items = {};
 ItemIds = {};
 //Represents the overall category an item falls under.
 ItemType = {
-	Weapon     : "Weapon",
-	Armor      : "Armor",
-	Accessory  : "Accessory",
-	Potion     : "Potion",
-	Card       : "Card",
-	Ingredient : "Ingredient",
-	Quest      : "Quest",
-	Toy        : "Toy",
-	Misc       : "Misc"
+	Weapon     : "Weapons",
+	Armor      : "Armors",
+	Accessory  : "Accessorys",
+	Potion     : "Potions",
+	Card       : "Cards",
+	Ingredient : "Ingredients",
+	Quest      : "Quests",
+	Toy        : "Toys",
+	Misc       : "Misc" //Default catch all for all items. Should strive to not have this on any items though.
 };
 //Represents a second level of categorization for items.
 //FIXME Attempt to remove Acc1/Acc2 from here. They can exist on entity, but shouldn't exist as a type in items.
 ItemSubtype = {
-	FullArmor : "Full Armor",
-	TopArmor  : "Top Armor",
-	BotArmor  : "Bottom Armor",
+	FullArmor : "Full Armors",
+	TopArmor  : "Top Armors",
+	BotArmor  : "Bottom Armors",
 	Acc1      : 5,
 	Acc2      : 6,
-	StrapOn   : "Strap-on",
-	Dildo	  : "Dildo"
+	StrapOn   : "Strap-ons",
+	Dildo	  : "Dildos",
+	None	  : "None" //Should be default case for all items
 };
 
 function Item(id, name, type) {
