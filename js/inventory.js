@@ -81,7 +81,7 @@ Inventory.prototype.Print = function() {
         Text.AddOutput(this.items[i].num + "x " + this.items[i].it.name + " - " + this.items[i].it.Short() + "<br/>");
     }
 }
-
+//Divides items by their 'type'
 Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItemsByType) {
     //Add all keys first. Ensures item output will be in whatever order our ItemType enum is in
     for(var type in ItemType){
@@ -95,17 +95,12 @@ Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItems
     //Populate type arrays with items if they're defined
     for(var i = 0; i < inv.length; i++) {
         var it = inv[i].it;
-        if(itemsByType) {
+        if(itemsByType)
             itemsByType[it.type].push(inv[i]);
-        }
-
-        if(usableItemsByType && it.Use) {
+        if(usableItemsByType && it.Use)
             usableItemsByType[it.type].push(inv[i]);
-        }
-
-        if(combatItemsByType && it.UseCombat) {
+        if(combatItemsByType && it.UseCombat)
             combatItemsByType[it.type].push(inv[i]);
-        }
     }
     //Clear empty arrays
     for(var type in ItemType){
@@ -117,6 +112,90 @@ Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItems
             delete combatItemsByType[type];
     }
 }
+//Divides items by their 'type' and further by their 'subtype' inside each primary type. Items WITHOUT a subtype are under property 'None'
+Inventory.ItemByBothTypes = function(inv, itemsByType, usableItemsByType, combatItemsByType) {
+    //The object project that items with no subtype are added to. If you change this, check for usages of this function and make sure to change it if they're using it in their result.
+    var catchAll = 'None';
+
+    //Add all keys first. Ensures item output will be in whatever order our ItemType enum is in
+    for(var type in ItemType){
+        var itemType = ItemType[type];
+        if(itemsByType) {
+            itemsByType[itemType] = {};
+            itemsByType[itemType][catchAll] = [];
+        }
+        if(usableItemsByType){
+            usableItemsByType[itemType] = {};
+            usableItemsByType[itemType][catchAll] = [];
+        }
+        if(combatItemsByType){
+            combatItemsByType[itemType] = {};
+            combatItemsByType[itemType][catchAll] = [];
+        }
+
+        for(var subtype in ItemSubtype){
+            var itemSubtype = ItemSubtype[subtype];
+            if(itemsByType)
+                itemsByType[itemType][itemSubtype] = [];
+            if(usableItemsByType)
+                usableItemsByType[itemType][itemSubtype] = [];
+            if(combatItemsByType)
+                combatItemsByType[itemType][itemSubtype] = [];
+        }
+    }
+    //Populate type arrays with items if they're defined
+    for(var i = 0; i < inv.length; i++) {
+        var it = inv[i].it;
+        if(itemsByType) {
+            if(it.subtype)
+                itemsByType[it.type][it.subtype].push(inv[i]);
+            else
+                itemsByType[it.type][catchAll].push(inv[i]);
+        }
+        if(usableItemsByType && it.Use) {
+            if(it.subtype)
+                usableItemsByType[it.type][it.subtype].push(inv[i]);
+            else
+                usableItemsByType[it.type][catchAll].push(inv[i]);
+        }
+        if(combatItemsByType && it.UseCombat) {
+            if(it.subtype)
+                combatItemsByType[it.type][it.subtype].push(inv[i]);
+            else
+                combatItemsByType[it.type][catchAll].push(inv[i]);
+        }
+    }
+    //Clear empty arrays
+    for(var type in ItemType){
+        var itemType = ItemType[type];
+        //Remove empty subtypes
+        for(var subtype in ItemSubtype){
+            var itemSubtype = ItemSubtype[subtype];
+            if(itemsByType && itemsByType[itemType][itemSubtype].length == 0)
+                delete itemsByType[itemType][itemSubtype];
+            if(usableItemsByType && usableItemsByType[itemType][itemSubtype].length == 0)
+                delete usableItemsByType[itemType][itemSubtype];
+            if(combatItemsByType && combatItemsByType[itemType][itemSubtype].length == 0)
+                delete combatItemsByType[itemType][itemSubtype];
+        }
+        //Remove the "catch" all subtype if empty
+        if(itemsByType && itemsByType[itemType][catchAll].length == 0)
+            delete itemsByType[itemType][catchAll];
+        if(usableItemsByType && usableItemsByType[itemType][catchAll].length == 0)
+            delete usableItemsByType[itemType][catchAll];
+        if(combatItemsByType && combatItemsByType[itemType][catchAll].length == 0)
+            delete combatItemsByType[itemType][catchAll];
+
+        //remove empty types
+        if(itemsByType && Object.keys(itemsByType[itemType]).length == 0)
+            delete itemsByType[itemType];
+        if(usableItemsByType && Object.keys(usableItemsByType[itemType]).length == 0)
+            delete usableItemsByType[itemType];
+        if(combatItemsByType && Object.keys(combatItemsByType[itemType]).length == 0)
+            delete combatItemsByType[itemType];
+    }
+}
+
 
 Inventory.prototype.ShowInventory = function(preventClear) {
     var inv = this;
@@ -128,21 +207,24 @@ Inventory.prototype.ShowInventory = function(preventClear) {
     var itemsByType = {};
     var usableItemsByType = {};
 
-    Inventory.ItemByType(this.items, itemsByType, usableItemsByType);
+    Inventory.ItemByBothTypes(this.items, itemsByType, usableItemsByType);
 
     //TODO The output format could be much nicer,
-    for(var key in itemsByType) {
-        Text.Add("<b>"+key + ":</b>");
-        var items = itemsByType[key];
-        if(items) {
-            for(var i=0; i < items.length; i++) {
-                Text.Add("<br/>" + items[i].it.name + " x"+items[i].num);
+    for(var typeKey in itemsByType) {
+        Text.AddDiv(typeKey, null, "itemTypeHeader");
+        for(var subtypeKey in itemsByType[typeKey]){
+            if(subtypeKey != 'None')//If they're under none, they had no subtype. So we just put them under the main header
+                Text.AddDiv(subtypeKey, null, "itemSubtypeHeader");
+            var items = itemsByType[typeKey][subtypeKey];
+            if(items) {
+                for(var i=0; i < items.length; i++) {
+                    Text.AddDiv(items[i].it.name + " x"+items[i].num);
+                }
             }
         }
-        Text.NL();
     }
 
-    var usable = [];
+    /*var usable = [];
     for(var key in usableItemsByType) {
         var items = usableItemsByType[key];
         if(items)
@@ -192,7 +274,7 @@ Inventory.prototype.ShowInventory = function(preventClear) {
             }
         });
     }
-    Gui.SetButtonsFromList(options);
+    Gui.SetButtonsFromList(options);*/
 
     if(this.items.length == 0)
         Text.Add("You are not carrying anything at the moment.");
