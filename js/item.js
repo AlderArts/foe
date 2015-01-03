@@ -7,11 +7,11 @@ ItemIds = {};
 ItemType = {
 	Weapon     : "Weapons",
 	Armor      : "Armors",
-	Accessory  : "Accessorys",
+	Accessory  : "Accessories",
 	Potion     : "Potions",
 	Card       : "Cards",
 	Ingredient : "Ingredients",
-	Quest      : "Quests",
+	Quest      : "Quest Items",
 	Toy        : "Toys",
 	Misc       : "Misc" //Default catch all for all items. Should strive to not have this on any items though.
 };
@@ -37,11 +37,11 @@ function Item(id, name, type) {
 	//Optional, with default
 	this.image  = new Image(); // TODO This sounds interesting, so i'll look into it later.
 	this.price  = 0;
+	this.subtype = ItemSubtype.None;
 	// Alchemical recipe, an array of {it: Item, num: Number} pairs
 	this.recipe = []; //TODO Maybe should be set to null. I'll look into how recipes are used later.
 
 	//Optional, No default (don't forget your null checks if you're working with these!)
-	this.subtype = null;
 	//function(target)
 	this.Use        = null;
 

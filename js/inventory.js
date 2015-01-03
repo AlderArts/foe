@@ -85,12 +85,13 @@ Inventory.prototype.Print = function() {
 Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItemsByType) {
     //Add all keys first. Ensures item output will be in whatever order our ItemType enum is in
     for(var type in ItemType){
+        var itemType = ItemType[type];
         if(itemsByType)
-            itemsByType[type] = [];
+            itemsByType[itemType] = [];
         if(usableItemsByType)
-            usableItemsByType[type] = [];
+            usableItemsByType[itemType] = [];
         if(combatItemsByType)
-            combatItemsByType[type] = [];
+            combatItemsByType[itemType] = [];
     }
     //Populate type arrays with items if they're defined
     for(var i = 0; i < inv.length; i++) {
@@ -104,33 +105,28 @@ Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItems
     }
     //Clear empty arrays
     for(var type in ItemType){
-        if(itemsByType && itemsByType[type].length == 0)
-            delete itemsByType[type];
-        if(usableItemsByType && usableItemsByType[type].length == 0)
-            delete usableItemsByType[type];
-        if(combatItemsByType && combatItemsByType[type].length == 0)
-            delete combatItemsByType[type];
+        var itemType = ItemType[type];
+        if(itemsByType && itemsByType[itemType].length == 0)
+            delete itemsByType[itemType];
+        if(usableItemsByType && usableItemsByType[itemType].length == 0)
+            delete usableItemsByType[itemType];
+        if(combatItemsByType && combatItemsByType[itemType].length == 0)
+            delete combatItemsByType[itemType];
     }
 }
 //Divides items by their 'type' and further by their 'subtype' inside each primary type. Items WITHOUT a subtype are under property 'None'
 Inventory.ItemByBothTypes = function(inv, itemsByType, usableItemsByType, combatItemsByType) {
-    //The object project that items with no subtype are added to. If you change this, check for usages of this function and make sure to change it if they're using it in their result.
-    var catchAll = 'None';
-
     //Add all keys first. Ensures item output will be in whatever order our ItemType enum is in
     for(var type in ItemType){
         var itemType = ItemType[type];
         if(itemsByType) {
             itemsByType[itemType] = {};
-            itemsByType[itemType][catchAll] = [];
         }
         if(usableItemsByType){
             usableItemsByType[itemType] = {};
-            usableItemsByType[itemType][catchAll] = [];
         }
         if(combatItemsByType){
             combatItemsByType[itemType] = {};
-            combatItemsByType[itemType][catchAll] = [];
         }
 
         for(var subtype in ItemSubtype){
@@ -147,22 +143,13 @@ Inventory.ItemByBothTypes = function(inv, itemsByType, usableItemsByType, combat
     for(var i = 0; i < inv.length; i++) {
         var it = inv[i].it;
         if(itemsByType) {
-            if(it.subtype)
-                itemsByType[it.type][it.subtype].push(inv[i]);
-            else
-                itemsByType[it.type][catchAll].push(inv[i]);
+            itemsByType[it.type][it.subtype].push(inv[i]);
         }
         if(usableItemsByType && it.Use) {
-            if(it.subtype)
-                usableItemsByType[it.type][it.subtype].push(inv[i]);
-            else
-                usableItemsByType[it.type][catchAll].push(inv[i]);
+           usableItemsByType[it.type][it.subtype].push(inv[i]);
         }
         if(combatItemsByType && it.UseCombat) {
-            if(it.subtype)
-                combatItemsByType[it.type][it.subtype].push(inv[i]);
-            else
-                combatItemsByType[it.type][catchAll].push(inv[i]);
+            combatItemsByType[it.type][it.subtype].push(inv[i]);
         }
     }
     //Clear empty arrays
@@ -178,13 +165,6 @@ Inventory.ItemByBothTypes = function(inv, itemsByType, usableItemsByType, combat
             if(combatItemsByType && combatItemsByType[itemType][itemSubtype].length == 0)
                 delete combatItemsByType[itemType][itemSubtype];
         }
-        //Remove the "catch" all subtype if empty
-        if(itemsByType && itemsByType[itemType][catchAll].length == 0)
-            delete itemsByType[itemType][catchAll];
-        if(usableItemsByType && usableItemsByType[itemType][catchAll].length == 0)
-            delete usableItemsByType[itemType][catchAll];
-        if(combatItemsByType && combatItemsByType[itemType][catchAll].length == 0)
-            delete combatItemsByType[itemType][catchAll];
 
         //remove empty types
         if(itemsByType && Object.keys(itemsByType[itemType]).length == 0)
@@ -211,9 +191,11 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 
     //TODO The output format could be much nicer,
     for(var typeKey in itemsByType) {
+        //Add main types
         Text.AddDiv(typeKey, null, "itemTypeHeader");
         for(var subtypeKey in itemsByType[typeKey]){
-            if(subtypeKey != 'None')//If they're under none, they had no subtype. So we just put them under the main header
+            //Add subtypes (except None type)
+            if(subtypeKey != ItemSubtype.None)
                 Text.AddDiv(subtypeKey, null, "itemSubtypeHeader");
             var items = itemsByType[typeKey][subtypeKey];
             if(items) {
@@ -224,11 +206,13 @@ Inventory.prototype.ShowInventory = function(preventClear) {
         }
     }
 
-    /*var usable = [];
+    var usable = [];
     for(var key in usableItemsByType) {
-        var items = usableItemsByType[key];
-        if(items)
-            usable = usable.concat(items);
+        for(var subtypeKey in itemsByType[typeKey]){
+            var items = itemsByType[typeKey][subtypeKey];
+            if(items)
+                usable = usable.concat(items);
+        }
     }
 
     var options = [];
@@ -236,7 +220,7 @@ Inventory.prototype.ShowInventory = function(preventClear) {
         var it  = usable[i].it;
         var num = usable[i].num;
         options.push({
-            nameStr: it.name + " x"+ num,
+            nameStr: it.name,
             enabled: true,
             //tooltip: it.Long(),
             obj: it,
@@ -274,7 +258,7 @@ Inventory.prototype.ShowInventory = function(preventClear) {
             }
         });
     }
-    Gui.SetButtonsFromList(options);*/
+    Gui.SetButtonsFromList(options);
 
     if(this.items.length == 0)
         Text.Add("You are not carrying anything at the moment.");
