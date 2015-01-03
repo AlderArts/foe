@@ -96,12 +96,16 @@ Text.Clear = function() {
 
  * 
  */
-
+//TODO Would be wise to refactor/rename this to "AddSpan".
+//Adds text wrapped in a span.
 Text.Add = function(text, parse, cssClasses) {
-	if(cssClasses)
-		Text.buffer += "<span class=\""+cssClasses+"\">"+Text.Parse(text, parse) + "</span>";
-	else
-		Text.buffer += Text.Parse(text, parse);
+	var classesStr = (cssClasses)? cssClasses : "";
+	Text.buffer += "<span class=\""+classesStr+"\">"+Text.Parse(text, parse) + "</span>";
+}
+//Adds text wrapped in a div.
+Text.AddDiv = function(text, parse, cssClasses) {
+	var classesStr = (cssClasses)? cssClasses : "";
+	Text.buffer += "<div class=\""+classesStr+"\">"+Text.Parse(text, parse) + "</div>";
 }
 
 Text.NL = function() {
@@ -111,10 +115,9 @@ Text.NL = function() {
 Text.Flush = function(cssClasses) {
 	var textbox = document.getElementById("mainTextArea");
 
-	if(cssClasses)
-		textbox.innerHTML += "<span class=\""+cssClasses+"\">"+Text.buffer + "</span>";
-	else
-		textbox.innerHTML += Text.buffer;
+	var classesStr = (cssClasses)? cssClasses : "";
+		textbox.innerHTML += "<span class=\""+classesStr+"\">"+Text.buffer + "</span>";
+
 	Text.buffer = "";
 }
 
