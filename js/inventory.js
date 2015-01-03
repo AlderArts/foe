@@ -189,10 +189,11 @@ Inventory.prototype.ShowInventory = function(preventClear) {
 
     Inventory.ItemByBothTypes(this.items, itemsByType, usableItemsByType);
 
-    //TODO The output format could be much nicer,
     for(var typeKey in itemsByType) {
         //Add main types
+        Text.AddDiv("<hr>");
         Text.AddDiv(typeKey, null, "itemTypeHeader");
+        Text.AddDiv("<hr>");
         for(var subtypeKey in itemsByType[typeKey]){
             //Add subtypes (except None type)
             if(subtypeKey != ItemSubtype.None)
@@ -200,16 +201,17 @@ Inventory.prototype.ShowInventory = function(preventClear) {
             var items = itemsByType[typeKey][subtypeKey];
             if(items) {
                 for(var i=0; i < items.length; i++) {
-                    Text.AddDiv(items[i].it.name + " x"+items[i].num);
+                    Text.AddDiv(items[i].it.name + " x"+items[i].num, null, "itemName");
                 }
             }
         }
+        Text.NL();
     }
 
     var usable = [];
     for(var key in usableItemsByType) {
-        for(var subtypeKey in itemsByType[typeKey]){
-            var items = itemsByType[typeKey][subtypeKey];
+        for(var subtypeKey in usableItemsByType[key]){
+            var items = usableItemsByType[key][subtypeKey];
             if(items)
                 usable = usable.concat(items);
         }
@@ -220,7 +222,7 @@ Inventory.prototype.ShowInventory = function(preventClear) {
         var it  = usable[i].it;
         var num = usable[i].num;
         options.push({
-            nameStr: it.name,
+            nameStr: it.name + " x"+num,
             enabled: true,
             //tooltip: it.Long(),
             obj: it,

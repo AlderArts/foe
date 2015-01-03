@@ -16,11 +16,13 @@ Item display CSS classes
 .itemTypeHeader{
     font-weight: bold;
     font-size: 40px;
+    text-align:center;
 }
 .itemSubtypeHeader{
     font-weight: bold;
     font-size:25px;
+    text-align:center;
 }
 .itemName{
-
+    text-align:center;
 }
