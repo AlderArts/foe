@@ -204,7 +204,9 @@ Shop.prototype.Sell = function(back, preventClear) {
 	
 	var options = [];
 	for(var key in itemsByType) {
-		Text.Add("<b>"+key + ":</b>");
+		//Exclude quest items from shop output
+		if(key != ItemType.Quest)
+			Text.Add("<b>"+key + ":</b>");
 		var items = itemsByType[key];
 		if(items) {
 			for(var i=0; i < items.length; i++) {
