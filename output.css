@@ -29,11 +29,16 @@ Item display CSS classes
 /*
 Toolbar CSS classes
 */
-/*Automatically added to all toolbar buttons*/
-.tbarBtn{
+/*Automatically added to all toolbar inputs*/
+.tbarInput{
     background-repeat: no-repeat;
     font: bold 14pt Tahoma;
     border:0;
+    margin: 3px;
+}
+/*Automatically added to all toolbar labels*/
+.tbarLbl{
+    font-style: italic;
 }
 
 /*Button backgrounds - NOTE: Alternatively can simply apply them via code with Jquery .css() method*/

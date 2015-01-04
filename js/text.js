@@ -1,6 +1,7 @@
 
 Text.buffer = "";
-Text.toolbar = $('<div></div>');
+//A div that contains 'groups' of inputs. Each group is on a new line (so you can basically have multiple toolbars).
+Text.toolbars = $('<div></div>');
 
 Text.InsertImage = function(imgSrc, align) {
 	if(!RENDER_PICTURES) return "";
@@ -94,39 +95,34 @@ Text.AddDiv = function(text, parse, cssClasses) {
 	var classesStr = (cssClasses)? cssClasses : "";
 	Text.buffer += "<div class=\""+classesStr+"\">"+Text.Parse(text, parse) + "</div>";
 }
-//Adds button(s) to the toolbar buffer. This will be appended to the output when you flush.
-//FIXME The function and obj data should probably be saved using a closure instead of jquery.data(), but I suck at JS.
-Text.AddButtonsToToolbar = function(list, cssClasses){
-	var classesStr = (cssClasses)? cssClasses : "";
-	//Create button(s)
-	for(var i=0; i < list.length; i++){
-		var name = list[i].nameStr || "NULL";
-		var func = list[i].func;
-		var obj = list[i].obj;
-		var button = $('<input />', {
-			type  : 'button',
-			class : 'tbarBtn '+classesStr,
-			value : name,
-			id    : 'tbarBtn'+i,
-			on    : {
-				click: function() {
-					var data = $(this).data()
-					var item = data.obj;
-					var func = data.func;
-					func(item);
-				}
-			}
+
+/*
+*Adds the list of inputs as a new toolbar in the toolbars buffer.
+* List: A list of inputs that will be added. Current acceptable inputs are 'button' and 'select'.
+* ToolbarLabel: A text label that will be put at the very start of the toolbar. Default is no label.
+* cssClasses : A string of css classes that will be added to every input in the 'list' parameter.
+ */
+Text.AddToolbar = function(list, toolbarLabel, cssClasses){
+	var toolbar = $("<div>")
+	//Add toolbar label if specified
+	if(toolbarLabel){
+		var label= $('<span>', {
+			class : 'tbarLbl',
+			text : toolbarLabel
 		});
-		//Add obj and func to button data FIXME Related to above fixme.
-		$(button).data("obj", obj);
-		$(button).data("func", func);
-		Text.toolbar.append(button);
+		toolbar.append(label);
 	}
+	//Add inputs to new toolbar
+	for(var i=0; i < list.length; i++){
+		toolbar.append(createInput(list[i], cssClasses));
+	}
+	Text.toolbars.append(toolbar);
 }
-//Clears the toolbar buffer
-Text.ResetToolbar = function(){
-	Text.toolbar = $('<div></div>');
+//Clears the toolbars buffer
+Text.ResetToolbars = function(){
+	Text.toolbars = $('<div></div>');
 }
+
 Text.NL = function() {
 	Text.buffer += "<br/><br/>";
 }
@@ -137,12 +133,12 @@ Text.Flush = function(textCssClasses, toolbarCssClasses) {
 	var textClasses = (textCssClasses)? textCssClasses : "";
 	var toolbarClasses = (toolbarCssClasses)? toolbarCssClasses : "";
 	//textbox.innerHTML += "<div class=\""+toolbarClasses+"\">"+Text.toolbar+"</div>";
-	if(Text.toolbar)
-		textBox.append(Text.toolbar);
+	if(Text.toolbars)
+		textBox.append(Text.toolbars);
 	textBox.append("<span class=\""+textClasses+"\">"+Text.buffer + "</span>");
 
 	Text.buffer = "";
-	Text.toolbar = $('<div></div>');
+	Text.toolbars = $('<div></div>');
 }
 
 Text.DigitToText = function(num) {
@@ -295,7 +291,63 @@ Text.ParserPlural = function(parse, condition, prefix, postfix) {
 	
 	return parse;
 }
+/*Generates an input for a given input type
+ * For each 'type', the accepted paramters are listed below
+ * 	button   ::: (nameStr = button text), (func = on click func), (obj = will be passed to func), (classes = classes that will be added to the input)
+ *   select  ::: TODO
+ *   checkbox::: TODO
+ *   radio   ::: TODO
+ */
+var createInput = function(inputOptions, cssClasses){
+	var input;
+	var type = inputOptions.type || 'button';
+	var classesStr = (cssClasses || "") +" "+ (inputOptions.classes || "");
+	if(type.toLowerCase() == 'button'){
+		var btnName = inputOptions.nameStr;
+		var onclick = inputOptions.func;
+		var clickParam = inputOptions.param;
+		input = $('<input />', {
+			type  : 'button',
+			class : 'tbarInput '+classesStr,
+			value : btnName,
+			on    : {
+				click: function() {
+					var data = $(this).data()
+					var func = data.func;
+					func(data.param);
+				}
+			}
+		});
+		//Add function and parameter data to input
+		$(input).data("param", inputOptions.obj); //TODO
+		$(input).data("func", onclick);
 
+	}else if(type.toLowerCase() == 'select'){
+		//TODO Will finish when I need it later
+		/*var onSelect = inputOptions.func;
+		 var selectParam = inputOptions.param;
+		 input = $('<input />', {
+		 type  : 'select',
+		 class : 'tbarInput '+classesStr,
+		 on    : {
+		 select: function() {
+		 var data = $(this).data()
+		 var func = data.func;
+		 func(data.param);
+		 }
+		 }
+		 });
+		 //Add function and parameter data to input
+		 $(input).data("param", inputOptions.obj); //TODO
+		 $(input).data("func", onclick);*/
+	}else if(type.toLowerCase() == 'checkbox'){
+		//TODO
+	}
+	else if(type.toLowerCase() == 'rado'){
+		//TODO
+	}
+	return input;
+}
 /*
 	// REGULAR TEXT (NEW METHOD)
 	var parse = {
