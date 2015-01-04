@@ -29,12 +29,46 @@ Item display CSS classes
 /*
 Toolbar CSS classes
 */
-/*Applied to all toolbar buttons*/
+/*Automatically added to all toolbar buttons*/
 .tbarBtn{
-    background-image: url('data/gui/big_blue.png');
     background-repeat: no-repeat;
-    height: 35px;
-    width: 155px;
     font: bold 14pt Tahoma;
     border:0;
+}
+
+/*Button backgrounds - NOTE: Alternatively can simply apply them via code with Jquery .css() method*/
+.bigBlueButton{
+    background-image: url('data/gui/big_blue.png');
+    height: 35px;
+    width: 155px;
+}
+.bigGoldButton{
+    background-image: url('data/gui/big_gold.png');
+    height: 35px;
+    width: 155px;
+}
+.bigGrayButton{
+    background-image: url('data/gui/big_gray.png');
+    height: 35px;
+    width: 155px;
+}
+.bigGreenButton{
+    background-image: url('data/gui/big_green.png');
+    height: 35px;
+    width: 155px;
+}
+.smallBlueButton{
+    background-image: url('data/gui/small_blue.png');
+    height: 35px;
+    width: 155px;
+}
+.smallGoldButton{
+    background-image: url('data/gui/small_gray.png');
+    height: 35px;
+    width: 155px;
+}
+.smallGreenButton{
+    background-image: url('data/gui/small_green.png');
+    height: 35px;
+    width: 155px;
 }
