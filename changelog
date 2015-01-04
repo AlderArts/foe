@@ -9,9 +9,10 @@ Version 0.3t
 ------------
 * The search for the scepter is on! Includes about 10k words worth of scenes written by Fenoxo. The Gol has two loss scenes and three win scenes.
 * Mothgirl added, written by Savin. She can be encountered in the forest, and has 2 loss scenes and 3 win scenes.
-* The ability to add comments to saves has been added (thanks kspriv!)
 * It's now a bit easier to figure out which enemy is which and what the order of turns is. Enemies all have a unique number following their name.
 * Momo is now available in camp (when rescued) from 4:00 to 21:00.
+* The ability to add comments to saves has been added (thanks kspriv!)
+* Inventory management just got a hell of a lot cleaner (applies to shops, inventory and combat inventory). Thanks kspriv!
 
 --------------------------------------------
              PREVIOUS VERSIONS
