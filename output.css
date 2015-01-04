@@ -26,3 +26,15 @@ Item display CSS classes
 .itemName{
     text-align:center;
 }
+/*
+Toolbar CSS classes
+*/
+/*Applied to all toolbar buttons*/
+.tbarBtn{
+    background-image: url('data/gui/big_blue.png');
+    background-repeat: no-repeat;
+    height: 35px;
+    width: 155px;
+    font: bold 14pt Tahoma;
+    border:0;
+}

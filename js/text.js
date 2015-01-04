@@ -1,5 +1,6 @@
 
 Text.buffer = "";
+Text.toolbar = $('<div></div>');
 //TODO Refactor this out. Should use a CSS class
 Text.BoldColor = function(text, color) {
 	color = color || "black";
@@ -107,18 +108,55 @@ Text.AddDiv = function(text, parse, cssClasses) {
 	var classesStr = (cssClasses)? cssClasses : "";
 	Text.buffer += "<div class=\""+classesStr+"\">"+Text.Parse(text, parse) + "</div>";
 }
-
+//Adds button(s) to the toolbar buffer. This will be appended to the output when you flush.
+//FIXME The function and obj data should probably be saved using a closure instead of jquery.data(), but I suck at JS.
+Text.AddButtonsToToolbar = function(list, cssClasses){
+	var classesStr = (cssClasses)? cssClasses : "";
+	//Create button(s)
+	for(var i=0; i < list.length; i++){
+		var name = list[i].nameStr || "NULL";
+		var func = list[i].func;
+		var obj = list[i].obj;
+		var button = $('<input />', {
+			type  : 'button',
+			class : 'tbarBtn '+classesStr,
+			value : name,
+			id    : 'tbarBtn'+i,
+			on    : {
+				click: function() {
+					var data = $(this).data()
+					var item = data.obj;
+					var func = data.func;
+					func(item);
+				}
+			}
+		});
+		//Add obj and func to button data FIXME Related to above fixme.
+		$(button).data("obj", obj);
+		$(button).data("func", func);
+		Text.toolbar.append(button);
+	}
+}
+//Clears the toolbar buffer
+Text.ResetToolbar = function(){
+	Text.toolbar = $('<div></div>');
+}
 Text.NL = function() {
 	Text.buffer += "<br/><br/>";
 }
 
-Text.Flush = function(cssClasses) {
-	var textbox = document.getElementById("mainTextArea");
-
-	var classesStr = (cssClasses)? cssClasses : "";
-		textbox.innerHTML += "<span class=\""+classesStr+"\">"+Text.buffer + "</span>";
+Text.Flush = function(textCssClasses, toolbarCssClasses) {
+	//var textbox = document.getElementById("mainTextArea");
+	var textBox = $("#mainTextArea");
+	var textClasses = (textCssClasses)? textCssClasses : "";
+	var toolbarClasses = (toolbarCssClasses)? toolbarCssClasses : "";
+	//textbox.innerHTML += "<div class=\""+toolbarClasses+"\">"+Text.toolbar+"</div>";
+	if(Text.toolbar)
+		textBox.append(Text.toolbar);
+	textBox.append("<span class=\""+textClasses+"\">"+Text.buffer + "</span>");
 
 	Text.buffer = "";
+	Text.toolbar = $('<div></div>');
 }
 
 Text.DigitToText = function(num) {
