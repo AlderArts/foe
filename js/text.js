@@ -1,11 +1,6 @@
 
 Text.buffer = "";
 Text.toolbar = $('<div></div>');
-//TODO Refactor this out. Should use a CSS class
-Text.BoldColor = function(text, color) {
-	color = color || "black";
-	return "<b><font color =\"" + color + "\">" + text + "</font></b>";
-}
 
 Text.InsertImage = function(imgSrc, align) {
 	if(!RENDER_PICTURES) return "";
@@ -24,11 +19,7 @@ Text.Say = function(imgSrc, text, align) {
 	else
 		textbox.innerHTML += text;
 }
-//TODO Refactor this out
-Text.AddOutput = function(text, parseStrings) {
-	var textbox = document.getElementById("mainTextArea");
-	textbox.innerHTML += Text.Parse(text, parseStrings);
-}
+
 
 Text.SetTooltip = function(text, parseStrings) {
 	var textbox = document.getElementById("tooltipTextArea");
@@ -67,11 +58,6 @@ Text.Parse = function(text, parseStrings) {
 		alert(e.message + "........." + e.stack);
 		return Text.BoldColor("PARSE ERROR: { " + text + " }", "red");
 	}
-}
-//TODO Refactor this out.
-Text.Newline = function() {
-	var textbox = document.getElementById("mainTextArea");
-	textbox.innerHTML += "<br/><br/>";
 }
 
 Text.Clear = function() {
@@ -402,3 +388,26 @@ Text.ParserPlural = function(parse, condition, prefix, postfix) {
 	Text.Flush();
 */
 
+/*
+*
+* ANYTHING BELOW THIS POINT SHOULDN'T BE USED ANYMORE! IF SOMEONE IS FEELING BRAVE THEY SHOULD REFACTOR THEM OUT!
+* GOD BLESS THE SOUL THAT ATTEMPTS THIS!
+ */
+
+//TODO Refactor this out. (connected to Text.AddOutput). Will require the section using this to use Text.Flush()
+Text.Newline = function() {
+	var textbox = document.getElementById("mainTextArea");
+	textbox.innerHTML += "<br/><br/>";
+}
+
+//TODO Refactor this out (connected to Text.Newline). Will require the section using this to use Text.Flush()
+Text.AddOutput = function(text, parseStrings) {
+	var textbox = document.getElementById("mainTextArea");
+	textbox.innerHTML += Text.Parse(text, parseStrings);
+}
+
+//TODO Refactor this out. Should use a CSS class
+Text.BoldColor = function(text, color) {
+	color = color || "black";
+	return "<b><font color =\"" + color + "\">" + text + "</font></b>";
+}
