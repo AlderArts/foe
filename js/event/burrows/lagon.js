@@ -186,6 +186,64 @@ LagonBrute.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
+//TODO
+Scenes.Lagon.InteractRuler = function() {
+	var parse = {
+		
+	};
+	parse["stuttername"] = player.name[0] +"-"+ player.name;
+	
+	Text.Clear();
+	Text.Add("PLACEHOLDER", parse);
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	//[name]
+	var options = new Array();
+	/*
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	*/
+	if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3) {
+		options.push({ nameStr : "Usurp!",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>“And what can I do for you today, traveller?”</i> Lagon leisurely regards you with a bored expression. <i>“I believe that you already bought all the needed ingredients to Ophelia; I do not have any further requests for your currently.”</i> He shakes his head. <i>“I feel the girl grows rebellious. Perhaps it’s time to throw her in the Pit together with her mother, as I should have done long ago.”</i>", parse);
+				Text.NL();
+				Text.Add("He’ll do no such thing. The king’s eyebrows rises in question, as if he doesn’t quite understand what he’s hearing. <i>“I was thinking out loud, not asking for advice, traveller,”</i> he rests his chin on his knuckles, studying you. <i>“Do you presume to tell me what to do? What kind of nonsense has that girl been feeding you?”</i>", parse);
+				Text.NL();
+				Text.Add("You contemptuously tell him that you can see him for what he is; a savage beast that needs to be put down. Fury fills Lagon’s eyes, but before he can reply, your conversation is interrupted by the arrival of Ophelia, flanked by two guards.", parse);
+				Text.NL();
+				Text.Add("<i>“Y-you called for me, father?”</i> she falters, her gaze flickering between the two of you, locked in your staredown. The king is the first to break eye contact, casting his furious glare at his daughter.", parse);
+				Text.NL();
+				Text.Add("<i>“You!”</i> he screams, jumping to his feet, his face dark with rage. <i>“This fucking rebellious bullshit ends now! I’m throwing you into the fucking Pit for the rest of your damned life you sneaky little bitch!”</i> He starts making for her, but you step into his way.", parse);
+				Text.NL();
+				Text.Add("<i>“[stuttername]... this… please… no...”</i> Ophelia stammers. <i>“You can’t, I told you he’s too strong!”</i> This apparently doesn’t earn her any favors with daddy.", parse);
+				Text.NL();
+				Text.Add("<i>“Seize her, I’ll deal with her later! You three… take care of this cretin.”</i> Lagon hops back onto his throne as his guards rush to intercept you, his gaze drilling into you. <i>“As for you… when I’m done with you, you’ll be begging for me to throw you in the pit.”</i>", parse);
+				Text.NL();
+				Text.Add("It’s a fight!", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					Scenes.Lagon.Usurp();
+				});
+			}, enabled : true,
+			tooltip : "Lagon’s reign has gone on long enough! Scepter or no scepter, he’s going down!"
+		});
+	}
+	Gui.SetButtonsFromList(options, true);
+}
+
+
 
 Scenes.Lagon.PitDefianceWin = function() {
 	SetGameState(GameState.Event);
@@ -364,13 +422,13 @@ Scenes.Lagon.BadendBrute = function() {
 	Text.Add("Only one person remains standing against the brute - his daughter Ophelia, who stands up on shaking legs. ", parse);
 	if(scepter)
 		Text.Add("The scepter is gone somewhere, most likely broken and shattered against one of the walls. ", parse);
-	Text.Add("<i>”Please, stop this father!”</i> she cries out, begging him.", parse);
+	Text.Add("<i>“Please, stop this father!”</i> she cries out, begging him.", parse);
 	Text.NL();
 	Text.Add("Against all odds, her plea seems to be working. Lagon pauses for a moment, a vague look of recognition in his eyes as he looks down on his daughter; a mere ant in front of a hulking giant. He leans down and picks her up in one huge paw, effortlessly lifting the squirming alchemist off the ground.", parse);
 	Text.NL();
-	Text.Add("<i>”Oph-elia.”</i> The name rings oddly, as if the brute is trying to remember how to form words. A wide, malicious grin spreads on Lagon’s face. For good or ill, the king’s rage has subsided for the moment. <i>”Bring… bitch.”</i> He drops her, and she falls to the ground with a loud thump. Slowly, Ophelia makes her way over to you, her spirit defeated.", parse);
+	Text.Add("<i>“Oph-elia.”</i> The name rings oddly, as if the brute is trying to remember how to form words. A wide, malicious grin spreads on Lagon’s face. For good or ill, the king’s rage has subsided for the moment. <i>“Bring… bitch.”</i> He drops her, and she falls to the ground with a loud thump. Slowly, Ophelia makes her way over to you, her spirit defeated.", parse);
 	Text.NL();
-	Text.Add("<i>”Please come… we must do as he tells us, or he’ll kill everyone,”</i> she urges you. She’s right. You know from experience just how quickly the beast can move; there’s no use trying to escape.", parse);
+	Text.Add("<i>“Please come… we must do as he tells us, or he’ll kill everyone,”</i> she urges you. She’s right. You know from experience just how quickly the beast can move; there’s no use trying to escape.", parse);
 	Text.NL();
 	Text.Add("Lagon is trying to sit down on his throne as you and Ophelia crawl to his feet, but it ill fits his new frame. He tries to break of the arms of the seat, but it ends up just being uncomfortable. Shrugging, the king kicks the scraps of the chair crashing into a wall. He flops down on the ground, resting on his mound of treasure. When he notices you and Ophelia, he motions you to come to his side.", parse);
 	Text.NL();
@@ -384,7 +442,7 @@ Scenes.Lagon.BadendBrute = function() {
 	Text.NL();
 	Text.Add("Lagon’s thrusts grow quicker and quicker as he slides his massive member between your bodies, groaning as he unloads into the cocksleeve formed by his former enemies. The first stream of ejaculate hits you below the chin almost hard enough to knock you out. The following jets sail by just an inch above your face, the tail end of each blast leaving a thick rope of semen plastered across your face. By the time he’s finished both you and Ophelia are drenched in his cum, panting and gasping for breath.", parse);
 	Text.NL();
-	Text.Add("<i>”T-the Pit,”</i> Ophelia gasps. <i>”We must take him there before he needs to go again.”</i>", parse);
+	Text.Add("<i>“T-the Pit,”</i> Ophelia gasps. <i>“We must take him there before he needs to go again.”</i>", parse);
 	Text.NL();
 	Text.Add("Somehow, the two of you are able to coax the huge beast along with you, though he won’t let you escape from his reach. You move quickly, as both of you are aware of his slowly rising dick, and what he’ll demand of you when he’s ready to go again. As soon as he sees Vena, he discards Ophelia and throws himself at his mate with a lusty roar, dragging you along for the ride.", parse);
 	Text.NL();
@@ -411,4 +469,28 @@ Scenes.Lagon.BadendBrute = function() {
 		
 		SetGameOverButton();
 	});
+}
+
+//TODO
+Scenes.Lagon.Usurp = function() {
+	var parse = {
+		
+	};
+	
+	var enemy = new Party();
+	var lagonMob = new LagonRegular(true);
+	enemy.AddMember(lagonMob);
+	//TODO Adds (new mob type, bunny elite)
+	var enc = new Encounter(enemy);
+	
+	enc.canRun = false;
+	enc.VictoryCondition = function() {
+		return lagonMob.Incapacitated();
+	}
+	//TODO Win/Loss
+	/*
+	enc.onLoss = ...
+	enc.onVictory = ...
+	*/
+	enc.Start();
 }

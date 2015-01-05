@@ -205,6 +205,16 @@ world.loc.Burrows.Throne.links.push(new Link(
 	}
 ));
 
+world.loc.Burrows.Throne.events.push(new Link(
+	"Lagon", function() {
+		return lagon.IsAtLocation();
+	}, true,
+	null,
+	function() {
+		Scenes.Lagon.InteractRuler();
+	}
+));
+
 world.loc.Burrows.Throne.endDescription = function() {
 	Text.AddOutput("");
 }
