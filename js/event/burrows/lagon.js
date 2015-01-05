@@ -37,7 +37,7 @@ Lagon.prototype.ToStorage = function() {
 
 //For first fights
 function LagonRegular() {
-	Entity.call(this);
+	BossEntity.call(this);
 	
 	this.name              = "Lagon";
 	
@@ -78,7 +78,7 @@ function LagonRegular() {
 	this.SetLevelBonus();
 	this.RestFull();
 }
-LagonRegular.prototype = new Entity();
+LagonRegular.prototype = new BossEntity();
 LagonRegular.prototype.constructor = LagonRegular;
 
 //TODO
@@ -110,7 +110,7 @@ LagonRegular.prototype.Act = function(encounter, activeChar) {
 
 //For final fight
 function LagonBrute() {
-	Entity.call(this);
+	BossEntity.call(this);
 	
 	this.name              = "Lagon";
 	
@@ -151,7 +151,7 @@ function LagonBrute() {
 	this.SetLevelBonus();
 	this.RestFull();
 }
-LagonBrute.prototype = new Entity();
+LagonBrute.prototype = new BossEntity();
 LagonBrute.prototype.constructor = LagonBrute;
 
 //TODO
