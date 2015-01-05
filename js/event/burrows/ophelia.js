@@ -18,6 +18,7 @@ function Ophelia(storage) {
 	this.body.SetEyeColor(Color.blue);
 	
 	this.flags["Met"] = 0; // note, bitmask
+	this.burrowsCountdown = new Time();
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -32,19 +33,24 @@ Ophelia.Met = {
 
 Ophelia.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
-	
-	// Load flags
 	this.LoadFlags(storage);
+	
+	this.burrowsCountdown.FromStorage(storage.Btime);
 }
 
 Ophelia.prototype.ToStorage = function() {
 	var storage = {};
 	
 	this.SavePersonalityStats(storage);
-	
 	this.SaveFlags(storage);
 	
+	storage.Btime = this.burrowsCountdown.ToStorage();
+	
 	return storage;
+}
+
+Ophelia.prototype.Update = function(step) {
+	this.burrowsCountdown.Dec(step);
 }
 
 Ophelia.prototype.Recruited = function() {
@@ -815,7 +821,7 @@ Scenes.Ophelia.Reward = function() {
 		Scenes.Ophelia.fuckedByVena = false;
 		Scenes.Ophelia.stoppedVena  = false;
 		
-		//[Stop Vena][Watch][Offer]
+		//[Stop Vena][Watch][Offer][Attack]
 		var options = new Array();
 		options.push({ nameStr : "Stop Vena",
 			func : function() {
@@ -937,8 +943,7 @@ Scenes.Ophelia.Reward = function() {
 						
 						world.TimeStep({season: 1});
 						
-						Gui.ClearButtons();
-						Input.buttons[0].Setup("Game Over", GameOver, true, null, "This is where your journey comes to an end.");
+						SetGameOverButton();
 					});
 				}
 				else { // High sex level
@@ -968,6 +973,55 @@ Scenes.Ophelia.Reward = function() {
 				}
 			}, enabled : true,
 			tooltip : tooltip
+		});
+		options.push({ nameStr : "Attack",
+			func : function() {
+				Text.Clear();
+				Text.Add("No. Fuck this. You’re not going to let this go on for any longer. Time to put the self-proclaimed king of the rabbits in his place. Without letting your eyes off Lagon, you tell Ophelia to run away; to trust in you. A look of surprise passes over Lagon’s face, quickly replaced by a contemptuous sneer.", parse);
+				Text.NL();
+				Text.Add("<i>“So this is where you choose to defy me, traveller,”</i> he rumbles, casually rolling his shoulders. <i>“If you won’t take the carrot, I’ll have to use the stick instead. A curious twist of fate that the stage of your little rebellion will be your home from this point forth...”</i>", parse);
+				Text.NL();
+				Text.Add("If you hadn’t been closely watching out for it, the kick would have caught you right in the temple. As it is, you barely manage to pull out of its trajectory, settling into a combat stance.", parse);
+				Text.NL();
+				if(party.InParty(kiakai)) {
+					parse["name"] = kiakai.name;
+					Text.Add("<i>“I agree with [playername],”</i> [name] announces, standing at your shoulder. <i>“Your foul reign has gone on for too long!”</i>", parse);
+					Text.NL();
+				}
+				if(party.InParty(terry)) {
+					Text.Add("<i>“We really doing this?”</i> Terry looks around at the crowd nervously. <i>“We don’t really have the numbers on our side, [playername].”</i>", parse);
+					Text.NL();
+				}
+				if(party.InParty(miranda)) {
+					Text.Add("<i>“’Bout time we knocked you down to size,”</i> Miranda cracks her knuckles, grinning in anticipation. <i>“Bring it! Not every day I dethrone a king!”</i>", parse);
+					Text.NL();
+				}
+				Text.Add("Lagon shakes his head, laughing at the spectacle.", parse);
+				Text.NL();
+				Text.Add("<i>“Let’s see how cocky you are once I’ve pounded you into the ground!”</i> he roars, calling his troops to battle. It’s a fight!", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					var enemy = new Party();
+					var lagonMob = new LagonRegular(false);
+					enemy.AddMember(lagonMob);
+					enemy.AddMember(new LagomorphAlpha());
+					enemy.AddMember(new Lagomorph());
+					enemy.AddMember(new Lagomorph());
+					var enc = new Encounter(enemy);
+					
+					enc.canRun = true;
+					enc.VictoryCondition = function() {
+						return lagonMob.Incapacitated();
+					}
+					
+					enc.onLoss = Scenes.Lagon.PitDefianceLoss;
+					enc.onVictory = Scenes.Lagon.PitDefianceWin;
+					
+					enc.Start();
+				});
+			}, enabled : true,
+			tooltip : "This shit has gone on for too long. Time to wipe that grin off Lagon’s fucking face."
 		});
 		Gui.SetButtonsFromList(options, false, null);
 		

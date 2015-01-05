@@ -367,8 +367,7 @@ Scenes.Gol.CombatLossIncEntry = function(gol) {
 				
 				world.TimeStep({season: 1});
 				
-				Gui.ClearButtons();
-				Input.buttons[0].Setup("Game Over", GameOver, true, null, "This is where your journey comes to an end.");
+				SetGameOverButton();
 			});
 		});
 	});
@@ -489,9 +488,7 @@ Scenes.Gol.CombatLossDrone = function(gol) {
 		
 		world.TimeStep({season: 1});
 		
-		Gui.ClearButtons();
-		Input.buttons[0].Setup("Game Over", GameOver, true, null, "This is where your journey comes to an end.");
-
+		SetGameOverButton();
 	});
 }
 

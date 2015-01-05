@@ -527,8 +527,7 @@ Scenes.DryadGlade.FirstLoss = function() {
 		Text.Add("Somewhere on the bottom of the corrupted spring, the last fickle light in your discarded gemstone goes out, signalling the end of Eden’s hope. When Uru finally arrives, she will be welcomed to an already fallen world.", parse);
 		Text.Flush();
 		
-		Gui.ClearButtons();
-		Input.buttons[0].Setup("Game Over", GameOver, true, null, "This is where your journey comes to an end.");
+		SetGameOverButton();
 	});
 }
 

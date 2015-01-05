@@ -31,6 +31,12 @@ SetGameState = function(state) {
 	Gui.SetGameState(state);
 }
 
+SetGameOverButton = function(text) {
+	text = text || "This is where your journey comes to an end.";
+	Gui.ClearButtons();
+	Input.buttons[0].Setup("Game Over", GameOver, true, null, text);
+}
+
 // TODO: Stats, newgame+ etc
 GameOver = function() {
 	Gui.Callstack = [];

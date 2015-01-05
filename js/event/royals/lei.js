@@ -1000,8 +1000,7 @@ Scenes.Lei.BarFight = function() {
 									Text.Add("<b>You have perished.</b>", parse);
 									Text.Flush();
 									
-									Gui.ClearButtons();
-									Input.buttons[0].Setup("Game Over", GameOver, true, null, "This is where your journey comes to an end.");
+									SetGameOverButton();
 								}, enabled : true,
 								tooltip : "You don't care what he threatens, attacking this man is the only thing that matters."
 							});
