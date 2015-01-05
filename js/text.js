@@ -107,7 +107,7 @@ Text.AddToolbar = function(list, toolbarLabel, cssClasses){
 	//Add toolbar label if specified
 	if(toolbarLabel){
 		var label= $('<span>', {
-			class : 'tbarLbl',
+			"class" : 'tbarLbl',
 			text : toolbarLabel
 		});
 		toolbar.append(label);
@@ -308,7 +308,7 @@ var createInput = function(inputOptions, cssClasses){
 		var clickParam = inputOptions.param;
 		input = $('<input />', {
 			type  : 'button',
-			class : 'tbarInput '+classesStr,
+			"class" : 'tbarInput '+classesStr,
 			value : btnName,
 			on    : {
 				click: function() {
