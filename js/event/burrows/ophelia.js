@@ -62,6 +62,9 @@ Ophelia.prototype.Broken = function() {
 Ophelia.prototype.InParty = function() {
 	return this.flags["Met"] & Ophelia.Met.InParty;
 }
+Ophelia.prototype.CountdownExpired = function() {
+	return this.burrowsCountdown.Expired();
+}
 
 Ophelia.prototype.IsAtLocation = function(location) {
 	location = location || party.location;

@@ -13,6 +13,8 @@ function Lagon(storage) {
 	
 	this.sexlevel          = 8;
 	
+	this.flags["Usurp"] = 0;
+	
 	if(storage) this.FromStorage(storage);
 }
 Lagon.prototype = new Entity();
@@ -33,6 +35,11 @@ Lagon.prototype.ToStorage = function() {
 	this.SaveFlags(storage);
 	
 	return storage;
+}
+
+Lagon.Usurp = {
+	FirstFight : 1,
+	Defeated   : 2
 }
 
 //For first fights
@@ -278,6 +285,8 @@ Scenes.Lagon.PitDefianceWin = function() {
 	
 	Text.Flush();
 	
+	lagon.flags["Usurp"] |= Lagon.Usurp.FirstFight;
+	
 	world.TimeStep({minute: 30});
 	party.location = world.loc.Plains.Burrows.Enterance;
 	
@@ -469,6 +478,99 @@ Scenes.Lagon.BadendBrute = function() {
 		
 		SetGameOverButton();
 	});
+}
+
+Scenes.Lagon.ReturnToBurrowsAfterFight = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("Remembering how your last encounter with the lagomorph king ended, you pause at the cusp of entering the tunnel. You most likely have a fight on your hands if you proceed. Are you ready for this?", parse);
+	Text.Flush();
+	
+	//[Enter][Leave]
+	var options = new Array();
+	options.push({ nameStr : "Leave",
+		func : function() {
+			Text.Clear();
+			Text.Add("No… not yet.", parse);
+			Text.NL();
+			Text.Add("While it’s true that Lagon isn’t likely to be a major threat anytime soon, Ophelia is still in there. You wonder how she’s faring; hopefully she’s been able to stay out of trouble so far.", parse);
+			if(ophelia.CountdownExpired())
+				Text.Add(" It’s been a rather long time though...", parse);
+			Text.Flush();
+			
+			world.TimeStep({minute: 5});
+			Gui.NextPrompt();
+		}, enabled : true,
+		tooltip : "You’re not ready quite yet. Lagon isn’t going anywhere."
+	});
+	options.push({ nameStr : "Enter",
+		func : function() {
+			Text.Clear();
+			var toolate = ophelia.CountdownExpired();
+			
+			parse["comp"] = party.Num() == 2 ? party.Get(1).name :
+			                party.Num() >  2 ? "your companions" : "";
+			parse["c"] = party.Num() > 1 ? Text.Parse(" look at [comp] and", parse) : "";
+			Text.Add("Resolute, you[c] stride into the Burrows, expecting the worst. Best be on your guard from this moment on.", parse);
+			Text.NL();
+			Text.Add("You meet relatively few bunnies on your way in, and those you meet scurry out of your way as soon as they see you. The tunnels reek of fear, making your heart sink further. Figuring your first order of business is to locate Ophelia, you make for her lab.", parse);
+			Text.NL();
+			if(toolate)
+				Text.Add("It looks even worse than you first feared. The place has been sacked, crushed flasks and jars aplenty, and not a living soul around - even her usual test subjects have deserted. It doesn’t look like anyone has been here for quite a while.", parse);
+			else
+				Text.Add("You’re out of luck though, as the alchemist is not in here. It looks like someone has been rummaging through her stuff in a haste, and her notes are strewn all over the place. A few of her test subjects raise their heads hopefully, but look disappointed that you are not their mistress.", parse);
+			Text.Add(" Troubled, you make your way back into the tunnel, only to find the path outside blocked by a wall of armed and rather serious looking bunnies. Those are probably Lagon’s elite guards… either way, they don’t seem to want to attack you immediately, merely herd you in the direction of the throne room.", parse);
+			Text.NL();
+			Text.Add("Well, that is what you came here for, isn’t it? Keeping a close eye on your ‘escort’, you trek deeper into the underground kingdom, muscles tense. Before long, you reach Lagon’s high seat, and the lagomorph tyrant himself. There are more guards lining the walls of the throne room than when you last visited it, though the regular civilian slut detail is also present.", parse);
+			Text.NL();
+			if(toolate) {
+				Text.Add("Lagon is lounging in his chair, looking rather bored. His expression quickly changes as you enter the hall, and he springs up to greet you, a malicious smile playing on his lips.", parse);
+				Text.NL();
+				Text.Add("<i>“Ah, the prodigious traitor finally returns,”</i> the rabbit king smirks, spreading his arms invitingly. <i>“If nothing else, you have balls for coming back here, considering how last we parted.”</i> He turns around. <i>“Daughter, aren’t you happy? Soon, your old conspirator will join you in your duties. Familiar faces sure are comforting, are they not?”</i>", parse);
+				Text.NL();
+				Text.Add("Your heart sinks as you notice Ophelia, chained to the foot of the throne. Of her labcoat, there’s little more than rags left, and her fur is unkempt and soaked with cum. The look of despair on her face deals you another blow to the gut… the alchemist has not had a pleasant time while you were away. You can still see a spark of rebellion flash in her eyes as they meet yours, though it is but a weak flicker.", parse);
+				Text.NL();
+				Text.Add("Lagon is oblivious to what passed between you, but he’s not about to pass up on a moment to gloat over someone else’s misfortune. <i>“I was rather… vexed, when we last parted. My dear daughter has been oh so helpful in relieving my stress… she’s truly a diligent little slut.”</i> He cracks his knuckles.", parse);
+			}
+			else {
+				Text.Add("Lagon is in the middle of some kind of audience as you walk in. Before him on her knees sits Ophelia, two guards flanking her. The king gives you a wide grin as you approach.", parse);
+				Text.NL();
+				Text.Add("<i>“Ah, and here we have our other rat, just in time! I was just about to punish my wayward daughter for her rebellion, and in walks its ringleader!”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“[playername]!”</i> Ophelia gasps. <i>“Did they get you too?”</i> She looks confused as you shake your head resolutely.", parse);
+				Text.NL();
+				Text.Add("Lagon casually gives his daughter a backhanded slap, violently throwing her to the ground. Unconcerned, he continues to address you as if she never spoke. <i>“Tell me, what is the occasion? Or did you merely want to save me the trouble of hunting you down? Why not make this easy for yourself and give in… once I’m finished with you, the Pit awaits, and all your worries will fade away into endless bliss.”</i>", parse);
+			}
+			Text.NL();
+			Text.Add("In a huge leap, Lagon launches himself into the air, coming down to rest on his throne. <i>“I can tell that you don’t think you’re here to bend the knee… but bend it shall. Bend or break.”</i> At a wave of his hand, the elite guard closes up around you, weapons at the ready.", parse);
+			Text.NL();
+			Text.Add("<i>“As you will both learn, however, I’m not an impossible master, nor am I unnecessarily cruel. I simply reward obedience… and punish treachery. A king must be resolute in these things, yes?”</i>", parse);
+			Text.NL();
+			Text.Add("It’s a fight!", parse);
+			Text.Flush();
+			
+			world.TimeStep({minute: 30});
+			
+			Gui.NextPrompt(Scenes.Lagon.Usurp);
+		}, enabled : true,
+		tooltip : "The time has come to face off against this so called king."
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+//TODO
+Scenes.Lagon.ReturnToBurrowsAfterScepter = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
 }
 
 //TODO

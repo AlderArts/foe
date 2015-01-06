@@ -70,9 +70,11 @@ Burrows.prototype.HermActive = function() {
 Burrows.prototype.BrainyActive = function() {
 	return this.flags["BrainyTrait"] >= Burrows.TraitFlags.Active;
 }
-//TODO
 Burrows.prototype.LagonDefeated = function() {
-	return false;
+	return lagon.flags["Usurp"] & Lagon.Usurp.Defeated;
+}
+Burrows.prototype.LagonChallenged = function() {
+	return lagon.flags["Usurp"] & Lagon.Usurp.FirstFight;
 }
 //TODO
 Burrows.prototype.VenaRestored = function() {
@@ -114,7 +116,12 @@ world.loc.Burrows.Enterance.links.push(new Link(
 	"Inside", true, true,
 	null,
 	function() {
-		MoveToLocation(world.loc.Burrows.Tunnels, {minute: 10});
+		if(!burrows.LagonDefeated() && burrows.LagonChallenged())
+			Scenes.Lagon.ReturnToBurrowsAfterFight();
+		else if(!burrows.LagonDefeated() && burrows.flags["Access"] == Burrows.AccessFlags.Stage5)
+			Scenes.Lagon.ReturnToBurrowsAfterScepter();
+		else
+			MoveToLocation(world.loc.Burrows.Tunnels, {minute: 10});
 	}
 ));
 
