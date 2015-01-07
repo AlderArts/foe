@@ -1053,6 +1053,7 @@ Scenes.Ophelia.Reward = function() {
 		});
 		options.push({ nameStr : "Attack",
 			func : function() {
+				Gui.Callstack.pop();
 				Text.Clear();
 				Text.Add("No. Fuck this. You’re not going to let this go on for any longer. Time to put the self-proclaimed king of the rabbits in his place. Without letting your eyes off Lagon, you tell Ophelia to run away; to trust in you. A look of surprise passes over Lagon’s face, quickly replaced by a contemptuous sneer.", parse);
 				Text.NL();
@@ -1143,6 +1144,7 @@ Scenes.Ophelia.Reward = function() {
 
 Scenes.Ophelia.ScepterRequest = function(fight) {
 	var parse = {
+		playername : player.name,
 		again : fight ? " again" : "",
 		haggardDetermined : fight ? "determined" : "haggard"
 	};
