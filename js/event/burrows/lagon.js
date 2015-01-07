@@ -53,23 +53,23 @@ function LagonRegular(tougher) {
 	
 	this.avatar.combat     = Images.lagon_r;
 	//TODO tougher
-	this.maxHp.base        = 2000;
-	this.maxSp.base        = 500;
-	this.maxLust.base      = 500;
+	this.maxHp.base        = tougher ? 2000 : 1600;
+	this.maxSp.base        = tougher ?  500 :  300;
+	this.maxLust.base      = tougher ?  500 :  300;
 	// Main stats
-	this.strength.base     = 100;
-	this.stamina.base      = 120;
-	this.dexterity.base    = 150;
-	this.intelligence.base = 90;
-	this.spirit.base       = 100;
-	this.libido.base       = 100;
-	this.charisma.base     = 80;
+	this.strength.base     = tougher ? 100 :  80;
+	this.stamina.base      = tougher ? 120 : 100;
+	this.dexterity.base    = tougher ? 150 : 120;
+	this.intelligence.base = tougher ?  90 :  80;
+	this.spirit.base       = tougher ? 100 :  80;
+	this.libido.base       = tougher ? 100 :  80;
+	this.charisma.base     = tougher ?  80 :  70;
 	
-	this.level             = 15;
+	this.level             = tougher ?  16 :  14;
 	this.sexlevel          = 8;
 	
-	this.combatExp         = 200;
-	this.coinDrop          = 500;
+	this.combatExp         = tougher ? 200 : 150;
+	this.coinDrop          = tougher ? 500 : 300;
 	
 	this.body.DefMale();
 	
@@ -95,6 +95,7 @@ LagonRegular.prototype.constructor = LagonRegular;
 LagonRegular.prototype.DropTable = function() {
 	var drops = [];
 	drops.push({ it: Items.Leporine });
+	//TODO this.tougher
 	return drops;
 }
 
@@ -213,23 +214,23 @@ function LagonBrute(scepter) {
 	
 	this.avatar.combat     = Images.lagon_b;
 	//TODO scepter
-	this.maxHp.base        = 4000;
-	this.maxSp.base        = 700;
-	this.maxLust.base      = 500;
+	this.maxHp.base        = scepter ? 3000 : 4000;
+	this.maxSp.base        = scepter ?  400 :  700;
+	this.maxLust.base      = scepter ?  300 :  500;
 	// Main stats
-	this.strength.base     = 180;
-	this.stamina.base      = 150;
-	this.dexterity.base    = 100;
-	this.intelligence.base = 60;
-	this.spirit.base       = 80;
-	this.libido.base       = 100;
-	this.charisma.base     = 60;
+	this.strength.base     = scepter ? 140 : 180;
+	this.stamina.base      = scepter ? 130 : 150;
+	this.dexterity.base    = scepter ?  80 : 100;
+	this.intelligence.base = scepter ?  40 :  60;
+	this.spirit.base       = scepter ?  60 :  80;
+	this.libido.base       = scepter ?  80 : 100;
+	this.charisma.base     = scepter ?  50 :  60;
 	
-	this.level             = 20;
+	this.level             = scepter ? 18 : 20;
 	this.sexlevel          = 8;
 	
-	this.combatExp         = 500;
-	this.coinDrop          = 1000;
+	this.combatExp         = scepter ? 400 :  500;
+	this.coinDrop          = scepter ? 800 : 1000;
 	
 	this.body.DefMale();
 	
