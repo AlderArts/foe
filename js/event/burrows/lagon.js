@@ -98,6 +98,31 @@ LagonRegular.prototype.DropTable = function() {
 	return drops;
 }
 
+LagonRegular.prototype.PhysDmgHP = function(encounter, caster, val) {
+	var parse = {
+		poss : caster.possessive()
+	};
+	
+	if(Math.random() < 0.1) {
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			Text.Add("Before [poss] blow connects, a wall of bunnies interpose themselves, absorbing the damage for their king!", parse);
+			Text.NL();
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("Numerous bunnies throw themselves in the way of [poss] incoming attack, shielding their king!", parse);
+			Text.NL();
+		}, 1.0, function() { return true; });
+		
+		scenes.Get();
+		Text.Flush();
+		
+		return false;
+	}
+	else
+		return Entity.prototype.PhysDmgHP.call(this, encounter, caster, val);
+}
+
 //TODO
 LagonRegular.prototype.Act = function(enc, activeChar) {
 	// Pick a random target
