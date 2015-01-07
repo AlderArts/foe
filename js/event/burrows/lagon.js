@@ -99,35 +99,90 @@ LagonRegular.prototype.DropTable = function() {
 }
 
 //TODO
-LagonRegular.prototype.Act = function(encounter, activeChar) {
+LagonRegular.prototype.Act = function(enc, activeChar) {
 	// Pick a random target
-	var t = this.GetSingleTarget(encounter, activeChar);
+	var t = this.GetSingleTarget(enc, activeChar);
 
-	var parseVars = {
+	var parse = {
 		name   : this.name,
 		hisher : this.hisher(),
-		tName  : t.name
+		tName  : t.name,
+		phisher : player.mfFem("his", "her")
 	};
 
-	//TODO Adds
-	//if(this.tougher);
+	var tougher = this.tougher;
+	var enemy  = enc.enemy;
+	var fallen = [];
+	for(var i = 1; i < enemy.members.length; i++) {
+		if(enemy.members[i].Incapacitated())
+			fallen.push(enemy.members[i]);
+	}
+	if(fallen.length > 0 && Math.random() < 0.5) {
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			Text.Add("<i>”Come to me, my children!”</i> Lagon shouts, rallying additional troops to his side.", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>”The one to bring the rebel down gets to be second in line after I bang [phisher] brains out!”</i> With that, more bunnies rally to Lagon’s side.", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>”Rally to your king, my children!”</i> Lagon calls out, summoning more rabbits to his side.", parse);
+		}, 1.0, function() { return true; });
+
+		scenes.Get();
+		Text.NL();
+		Text.Flush();
+		
+		for(var i = 0; i < fallen.length; i++) {
+			enemy.SwitchOut(fallen[i]);
+			var entity;
+			if(tougher) {
+				var r = Math.random();
+				if(r < 0.3)
+					entity = new LagomorphBrute();
+				else if(r < 0.6)
+					entity = new LagomorphWizard();
+				else
+					entity = new LagomorphElite();
+			}
+			else {
+				if(Math.random() < 0.5)
+					entity = new LagomorphAlpha();
+				else
+					entity = new Lagomorph();
+			}
+			enemy.AddMember(entity);
+			
+			var ent = {
+				entity     : entity,
+				isEnemy    : true,
+				initiative : 0,
+				aggro      : []};
+			enc.GenerateUniqueName(ent);
+			
+			enc.combatOrder.push(ent);
+			ent.entity.GetSingleTarget(enc, ent);
+		}
+	}
 
 	var choice = Math.random();
-	if(choice < 0.2 && Abilities.Physical.DirtyBlow.enabledCondition(encounter, this))
-		Abilities.Physical.DirtyBlow.Use(encounter, this, t);
-	else if(choice < 0.4 && Abilities.Physical.FocusStrike.enabledCondition(encounter, this))
-		Abilities.Physical.FocusStrike.Use(encounter, this, t);
-	else if(choice < 0.6 && Abilities.Physical.TAttack.enabledCondition(encounter, this))
-		Abilities.Physical.TAttack.Use(encounter, this, t);
-	else if(choice < 0.8 && Abilities.Physical.DAttack.enabledCondition(encounter, this))
-		Abilities.Physical.DAttack.Use(encounter, this, t);
+	if(choice < 0.2 && Abilities.Physical.DirtyBlow.enabledCondition(enc, this))
+		Abilities.Physical.DirtyBlow.Use(enc, this, t);
+	else if(choice < 0.4 && Abilities.Physical.FocusStrike.enabledCondition(enc, this))
+		Abilities.Physical.FocusStrike.Use(enc, this, t);
+	else if(choice < 0.6 && Abilities.Physical.TAttack.enabledCondition(enc, this))
+		Abilities.Physical.TAttack.Use(enc, this, t);
+	else if(choice < 0.8 && Abilities.Physical.DAttack.enabledCondition(enc, this))
+		Abilities.Physical.DAttack.Use(enc, this, t);
 	else
-		Abilities.Attack.Use(encounter, this, t);
+		Abilities.Attack.Use(enc, this, t);
 }
 
 //For final fight
 function LagonBrute(scepter) {
 	BossEntity.call(this);
+	
+	this.turns = 0;
 	
 	this.name              = "Lagon";
 	
@@ -183,12 +238,44 @@ LagonBrute.prototype.Act = function(encounter, activeChar) {
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);
 
-	var parseVars = {
-		name   : this.name,
-		hisher : this.hisher(),
-		tName  : t.name
+	var parse = {
+		
 	};
 
+	var first = this.turns == 0;
+	this.turns++;
+	var scepter = party.Inv().QueryNum(Items.Quest.Scepter);
+	
+	if(scepter) {
+		if(first) {
+			Text.Add("Lagon is just about to jump on you when Ophelia gives out a triumphant yelp. The big brute growls, clutching at his head. Whatever she’s doing with the scepter, it seems to be doing something.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				encounter.CombatTick();
+			});
+		}
+		else if(Math.random() < 0.1) {
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("<i>”T-there, I have it!”</i> Ophelia yelps as she manages to fiddle the rod again, causing Lagon to shake his head in confusion.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("Just as he’s about to make his move, something distracts the king from his target. The beast throws his eyes around the hall, trying to figure out what’s going on.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("Lagon clutches his head as the scepter works its magic, distracted from his foes for a moment.", parse);
+			}, 1.0, function() { return true; });
+			
+			scenes.Get();
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				encounter.CombatTick();
+			});
+		}
+	}
+	
 	var choice = Math.random();
 	if(choice < 0.2 && Abilities.Physical.Bash.enabledCondition(encounter, this))
 		Abilities.Physical.Bash.Use(encounter, this, t);
@@ -696,7 +783,6 @@ Scenes.Lagon.ReturnToBurrowsAfterScepter = function() {
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-//TODO
 Scenes.Lagon.Usurp = function(toolate) {
 	var parse = {
 		
@@ -705,7 +791,9 @@ Scenes.Lagon.Usurp = function(toolate) {
 	var enemy = new Party();
 	var lagonMob = new LagonRegular(true);
 	enemy.AddMember(lagonMob);
-	//TODO Adds (new mob type, bunny elite)
+	enemy.AddMember(new LagomorphBrute());
+	enemy.AddMember(new LagomorphWizard());
+	enemy.AddMember(new LagomorphElite());
 	var enc = new Encounter(enemy);
 	enc.toolate = toolate;
 	

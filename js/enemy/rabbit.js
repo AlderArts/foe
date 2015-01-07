@@ -133,6 +133,43 @@ LagomorphAlpha.prototype.constructor = LagomorphAlpha;
  * TODO Drop table & act for alpha
  */
 
+function LagomorphElite(gender) {
+	Lagomorph.call(this, gender);
+	
+	this.name              = "Elite";
+	this.monsterName       = "the lagomorph elite";
+	this.MonsterName       = "The lagomorph elite";
+	
+	this.maxHp.base        *= 6;
+	this.maxSp.base        *= 4;
+	this.maxLust.base      *= 4;
+	// Main stats
+	this.strength.base     *= 4;
+	this.stamina.base      *= 4;
+	this.dexterity.base    *= 4;
+	this.intelligence.base *= 4;
+	this.spirit.base       *= 4;
+	this.libido.base       *= 4;
+	this.charisma.base     *= 4;
+	
+	this.level             = Math.floor(this.level * 4);
+	this.sexlevel          = Math.floor(this.sexlevel * 4);
+	
+	this.combatExp         *= 4;
+	this.coinDrop          *= 4;
+	
+	// Set hp and mana to full
+	this.SetLevelBonus();
+	this.RestFull();
+}
+LagomorphElite.prototype = new Lagomorph();
+LagomorphElite.prototype.constructor = LagomorphElite;
+
+
+/*
+ * TODO Drop table & act for elite
+ */
+
 
 function LagomorphBrute(gender) {
 	gender = gender || Gender.male;
