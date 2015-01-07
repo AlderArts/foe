@@ -2562,6 +2562,11 @@ Entity.prototype.GetPartyTarget = function(encounter, activeChar) {
 	var confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
 	if(confuse)
 		isEnemy = !isEnemy;
+	
+	if(isEnemy)
+		return party;
+	else
+		return encounter.enemy;
 
 	// Fetch all potential targets
 	var targets;
@@ -2572,8 +2577,18 @@ Entity.prototype.GetPartyTarget = function(encounter, activeChar) {
 }
 
 Entity.prototype.GetSingleTarget = function(encounter, activeChar, strategy) {
+	var isEnemy = activeChar.isEnemy;
+	var confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
+	if(confuse)
+		isEnemy = !isEnemy;
+	
 	// Fetch all potential targets
-	var targets = this.GetPartyTarget(encounter, activeChar);
+	var targets;
+	if(isEnemy)
+		targets = encounter.GetLivePartyArray();
+	else
+		targets = encounter.GetLiveEnemyArray();
+	
 	strategy = strategy || TargetStrategy.None;
 	
 	// cleanup

@@ -10,8 +10,22 @@ Scenes.Lagon = {};
 
 function Lagon(storage) {
 	Entity.call(this);
+	this.name = "Lagon";
 	
 	this.sexlevel          = 8;
+	
+	this.body.DefMale();
+	
+	this.FirstCock().thickness.base = 7;
+	this.FirstCock().length.base = 38;
+	this.Balls().size.base = 6;
+	
+	this.Butt().buttSize.base = 2;
+	
+	this.body.SetRace(Race.rabbit);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.rabbit, Color.white);
+	this.body.SetBodyColor(Color.white);
+	this.body.SetEyeColor(Color.blue);
 	
 	this.flags["Usurp"] = 0;
 	
@@ -358,7 +372,7 @@ Scenes.Lagon.InteractRuler = function() {
 		tooltip : ""
 	});
 	*/
-	if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3) {
+	if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3 && !burrows.LagonAlly()) {
 		options.push({ nameStr : "Usurp!",
 			func : function() {
 				Text.Clear();
@@ -533,7 +547,8 @@ Scenes.Lagon.BadendPit = function() {
 	else
 		Text.Add("Your pussy and womb are now the property of Lagon, and whomever he chooses to fill them.", parse);
 	Text.NL();
-	Text.Add("Your days are filled with endless fucking[, giving, receiving, it no longer matters to you]. All that fills your head is the next blissful orgasm, and the pleasure of knowing that you are <i>needed</i>, you serve a purpose. You and your sisters are to be the mothers of the rulers of Eden; with their rapidly growing numbers, the bunnies will soon be unstoppable.", parse);
+	parse["c"] = player.FirstCock() ? ", giving, receiving, it no longer matters to you" : "";
+	Text.Add("Your days are filled with endless fucking[c]. All that fills your head is the next blissful orgasm, and the pleasure of knowing that you are <i>needed</i>, you serve a purpose. You and your sisters are to be the mothers of the rulers of Eden; with their rapidly growing numbers, the bunnies will soon be unstoppable.", parse);
 	Text.NL();
 	Text.Add("News are slow to travel down here, but your master loves to gloat about his exploits. His armies have started moving; not against Rigard, not yet, but the highland tribes are quietly submitting, one by one. Before long, the rabbits will be too many to stop; a tide of fluffy bodies washing over the walls of Rigard and breaking the city with sheer numbers. And you are one of the proud mothers of this unstoppable army.", parse);
 	Text.NL();
@@ -780,7 +795,10 @@ Scenes.Lagon.ReturnToBurrowsAfterScepter = function() {
 					Text.NL();
 					Text.Add("Fuck you!", parse);
 					Text.NL();
-					Text.Add("<i>“Guards, put this pitiful display of misplaced chivalry to rest.”</i> The king leans back in his throne. <i>“The one that takes the traveller down will get sloppy seconds.”</i> The guards close in on you[ and [comp]], weapons raised.", parse);
+					parse["comp"] = party.Num() == 2 ? party.Get(1).name :
+					                party.Num() >  2 ? "your companions" : "";
+					parse["c"] = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
+					Text.Add("<i>“Guards, put this pitiful display of misplaced chivalry to rest.”</i> The king leans back in his throne. <i>“The one that takes the traveller down will get sloppy seconds.”</i> The guards close in on you[c], weapons raised.", parse);
 					Text.NL();
 					Text.Add("It’s a fight!", parse);
 					Text.Flush();
