@@ -308,6 +308,7 @@ LagonBrute.prototype.Act = function(encounter, activeChar) {
 			Gui.NextPrompt(function() {
 				encounter.CombatTick();
 			});
+			return;
 		}
 		else if(Math.random() < 0.1) {
 			var scenes = new EncounterTable();
@@ -330,6 +331,7 @@ LagonBrute.prototype.Act = function(encounter, activeChar) {
 			Gui.NextPrompt(function() {
 				encounter.CombatTick();
 			});
+			return;
 		}
 	}
 	
