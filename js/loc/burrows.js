@@ -202,7 +202,7 @@ world.loc.Burrows.Tunnels.enc = new EncounterTable();
 //
 // Burrows throne room
 //
-//TODO
+//TODO Fix after Lagon is defeated
 world.loc.Burrows.Throne.description = function() {
 	Text.AddOutput("You are standing in Lagon's throne room.");
 }
