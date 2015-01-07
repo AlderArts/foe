@@ -69,6 +69,7 @@ Drake.prototype.Act = function(encounter, activeChar) {
 	Text.Newline();
 	
 	// Pick a random target
+	var targets = this.GetPartyTarget(encounter, activeChar);
 	var t = this.GetSingleTarget(encounter, activeChar);
 
 	var parseVars = {
@@ -81,7 +82,7 @@ Drake.prototype.Act = function(encounter, activeChar) {
 	if(choice < 0.2)
 		Abilities.Attack.CastInternal(encounter, this, t);
 	else if(choice < 0.3 && Abilities.Black.ThunderStorm.enabledCondition(encounter, this))
-		Abilities.Black.ThunderStorm.Use(encounter, this, party);
+		Abilities.Black.ThunderStorm.Use(encounter, this, targets);
 	else if(choice < 0.4 && Abilities.Black.WindShear.enabledCondition(encounter, this))
 		Abilities.Black.WindShear.Use(encounter, this, t);
 	else if(choice < 0.6 && Abilities.Physical.QAttack.enabledCondition(encounter, this))
@@ -89,7 +90,7 @@ Drake.prototype.Act = function(encounter, activeChar) {
 	else if(choice < 0.7 && Abilities.Physical.Frenzy.enabledCondition(encounter, this))
 		Abilities.Physical.Frenzy.Use(encounter, this, t);
 	else if(choice < 0.8 && Abilities.Black.Hellfire.enabledCondition(encounter, this))
-		Abilities.Black.Hellfire.Use(encounter, this, party);
+		Abilities.Black.Hellfire.Use(encounter, this, targets);
 	else if(choice < 0.9 && Abilities.Seduction.Rut.enabledCondition(encounter, this))
 		Abilities.Seduction.Rut.Use(encounter, this, t);
 	else

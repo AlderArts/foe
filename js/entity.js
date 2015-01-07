@@ -2557,7 +2557,7 @@ GetAggroEntry = function(activeChar, entity) {
 	}
 }
 
-Entity.prototype.GetSingleTarget = function(encounter, activeChar, strategy) {
+Entity.prototype.GetPartyTarget = function(encounter, activeChar) {
 	var isEnemy = activeChar.isEnemy;
 	var confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
 	if(confuse)
@@ -2566,9 +2566,14 @@ Entity.prototype.GetSingleTarget = function(encounter, activeChar, strategy) {
 	// Fetch all potential targets
 	var targets;
 	if(isEnemy)
-		targets = encounter.GetLivePartyArray();
+		return encounter.GetLivePartyArray();
 	else
-		targets = encounter.GetLiveEnemyArray();
+		return encounter.GetLiveEnemyArray();
+}
+
+Entity.prototype.GetSingleTarget = function(encounter, activeChar, strategy) {
+	// Fetch all potential targets
+	var targets = this.GetPartyTarget(encounter, activeChar);
 	strategy = strategy || TargetStrategy.None;
 	
 	// cleanup

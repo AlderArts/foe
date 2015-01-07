@@ -177,6 +177,11 @@ Encounter.prototype.SetButtons = function(activeChar, combatScreen) {
 		}, true);		
 		Input.buttons[11].SetFromAbility(encounter, entity, Abilities.Run, BasePrompt);
 		
+		if(DEBUG) {
+			Input.navButtons[2].Setup("Cheat", function() {
+				encounter.onVictory();
+			}, true);
+		}
 		combatScreen();
 	}
 	

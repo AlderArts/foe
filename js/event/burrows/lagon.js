@@ -262,6 +262,7 @@ LagonBrute.prototype.DropTable = function() {
 //TODO
 LagonBrute.prototype.Act = function(encounter, activeChar) {
 	// Pick a random target
+	var targets = this.GetPartyTarget(encounter, activeChar);
 	var t = this.GetSingleTarget(encounter, activeChar);
 
 	var parse = {
@@ -316,7 +317,7 @@ LagonBrute.prototype.Act = function(encounter, activeChar) {
 	else if(choice < 0.6 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
 		Abilities.Physical.CrushingStrike.Use(encounter, this, t);
 	else if(choice < 0.8 && Abilities.Physical.GrandSlam.enabledCondition(encounter, this))
-		Abilities.Physical.GrandSlam.Use(encounter, this, t);
+		Abilities.Physical.GrandSlam.Use(encounter, this, targets);
 	else
 		Abilities.Attack.Use(encounter, this, t);
 }
