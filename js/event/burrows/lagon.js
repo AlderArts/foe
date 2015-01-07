@@ -214,8 +214,8 @@ function LagonBrute(scepter) {
 	
 	this.avatar.combat     = Images.lagon_b;
 	//TODO scepter
-	this.maxHp.base        = scepter ? 3000 : 4000;
-	this.maxSp.base        = scepter ?  400 :  700;
+	this.maxHp.base        = 4000;
+	this.maxSp.base        = 700;
 	this.maxLust.base      = scepter ?  300 :  500;
 	// Main stats
 	this.strength.base     = scepter ? 140 : 180;
@@ -277,6 +277,9 @@ LagonBrute.prototype.Act = function(encounter, activeChar) {
 			Text.Add("Lagon is just about to jump on you when Ophelia gives out a triumphant yelp. The big brute growls, clutching at his head. Whatever she’s doing with the scepter, it seems to be doing something.", parse);
 			Text.Flush();
 			
+			this.AddHPAbs(-1000);
+			this.AddSPAbs(-300);
+			
 			Gui.NextPrompt(function() {
 				encounter.CombatTick();
 			});
@@ -295,6 +298,9 @@ LagonBrute.prototype.Act = function(encounter, activeChar) {
 			
 			scenes.Get();
 			Text.Flush();
+			
+			this.AddHPAbs(-100);
+			this.AddSPAbs(-30);
 			
 			Gui.NextPrompt(function() {
 				encounter.CombatTick();
