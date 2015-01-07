@@ -336,7 +336,7 @@ Scenes.FarmIntro.EnterLoft = function() {
 	world.TimeStep({minute: 5});
 	Text.Clear();
 	
-	parse = {};
+	var parse = {};
 	
 	Text.AddOutput("Upon reaching the top, you are greeted with the homely sight of furniture spread somewhat clumsily around the place. There is a simple unmade bed with a rather worn, but comfy-looking, quilt resting atop it, and two pillows at the head. A pair of simple wooden drawers lie under the bed, and what looks to be the strap of a bra juts out from one of them. A dresser with a mirror sits close to a round wooden table with two chairs, and a small washtub is under the table filled with dirty dishes. A few essentials that come to mind, like a toilet, are missing, but you believe you saw an outhouse on the way here.", parse);
 	Text.Newline();
@@ -353,6 +353,10 @@ Scenes.FarmIntro.EnterLoft = function() {
 }
 
 Scenes.FarmIntro.GwendyQuestions1 = function() {
+	var parse = {
+		race : function() { return Race.Desc(player.body.Race()); }
+	};
+	
 	//[Sure][Guess so][Nah]
 	var options = new Array();
 	if(!Scenes.FarmIntro.talkedAboutGwendy) {
@@ -396,7 +400,7 @@ Scenes.FarmIntro.GwendyQuestions1 = function() {
 				if(player.body.Race() == Race.human)
 					Text.AddOutput("<i>“Why, were you thinking of coming around a bit more to keep me company, as a fellow human?”</i> She asks the question in an innocent enough tone, but her eyes look at you with some expectancy. You tease her, saying that you might just do that, if she doesn't mind. At that, she giggles before casting a flirtatious glance at you. <i>“Oh, I wouldn't mind at all. It might be a bit more fun with you around.”</i>", parse);
 				else
-					Text.AddOutput("<i>“Thinking about introducing me to a few other humans... or maybe getting to know me a little better, as [a/an playerrace]”</i> Her question intrigues you, but you say it was simple curiosity, though you might come around more if she doesn't mind having a friend that isn't a regular on the ranch. <i>“Well, thanks, I'd appreciate that. You'd better follow through and visit often!”</i>", parse);
+					Text.AddOutput("<i>“Thinking about introducing me to a few other humans... or maybe getting to know me a little better, as a [race]”</i> Her question intrigues you, but you say it was simple curiosity, though you might come around more if she doesn't mind having a friend that isn't a regular on the ranch. <i>“Well, thanks, I'd appreciate that. You'd better follow through and visit often!”</i>", parse);
 				Scenes.FarmIntro.talkedAboutAlone = true;
 				Scenes.FarmIntro.GwendyQuestions1();
 			}, enabled : true,
@@ -410,7 +414,6 @@ Scenes.FarmIntro.GwendyQuestions1 = function() {
 }
 
 Scenes.FarmIntro.GwendyQuestions2 = function() {
-	
 	var parse = {
 		playername : player.name,
 		breastDesc : function() { return player.FirstBreastRow().Short(); }
