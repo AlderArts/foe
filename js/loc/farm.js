@@ -88,12 +88,13 @@ world.loc.Farm.Fields.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
 
-		Text.AddOutput("Not having much else to do, you wander the fields for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.");
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("You pick up some fresh grass."));
+		Text.Add("Not having much else to do, you wander the fields for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.");
+		Text.NL();
+		Text.Add(Text.BoldColor("You pick up some fresh grass."));
 		party.inventory.AddItem(Items.FreshGrass);
 		
 		world.TimeStep({minute: 15});
+		Text.Flush();
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return world.time.season != Season.Winter; });
@@ -101,12 +102,14 @@ world.loc.Farm.Fields.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();
 
-		Text.AddOutput("Not having much else to do, you wander the fields for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.");
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("You pick up a Foxglove."));
+		Text.Add("Not having much else to do, you wander the fields for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.");
+		Text.NL();
+		Text.Add(Text.BoldColor("You pick up a Foxglove."));
 		party.inventory.AddItem(Items.Foxglove);
 		
 		world.TimeStep({minute: 15});
+		
+		Text.Flush();
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return world.time.season != Season.Winter; });
@@ -201,7 +204,8 @@ Scenes.FarmIntro.Start = function() {
 	
 	var parse = {};
 	
-	Text.AddOutput("While trekking along the rolling grasslands of the plains, you briefly wonder what else might lie out here, until you spot a foreign structure with a muddy pathway leading toward it. In the distance you see what appears to be an old and worn building. Although from here you are not sure what it is, you feel compelled to go out there and have a look.", parse);
+	Text.Add("While trekking along the rolling grasslands of the plains, you briefly wonder what else might lie out here, until you spot a foreign structure with a muddy pathway leading toward it. In the distance you see what appears to be an old and worn building. Although from here you are not sure what it is, you feel compelled to go out there and have a look.", parse);
+	Text.Flush();
 	
 	//[Approach][Nah]
 	var options = new Array();
@@ -211,8 +215,9 @@ Scenes.FarmIntro.Start = function() {
 	});
 	options.push({ nameStr : "Nah",
 		func : function() {
-			Text.Newline();
-			Text.AddOutput("Deciding to not explore the distant building, you continue on your journey.", parse);
+			Text.NL();
+			Text.Add("Deciding to not explore the distant building, you continue on your journey.", parse);
+			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "You've got other things to do. The building isn't going anywhere."
@@ -233,32 +238,33 @@ Scenes.FarmIntro.Approach = function() {
 	};
 	
 	if(party.Two()) {
-		Text.AddOutput("[name] seems to be doing good, refreshed by the passing breeze. With that, you head toward your destination.", { name: party.Get(1).name });
-		Text.Newline();
+		Text.Add("[name] seems to be doing good, refreshed by the passing breeze. With that, you head toward your destination.", { name: party.Get(1).name });
+		Text.NL();
 	}
 	else if(!party.Alone()) {
-		Text.AddOutput("Facing your group you see they are fine, looking a bit refreshed by the passing breeze. With that, you head forward to your destination.", parse);
-		Text.Newline();
+		Text.Add("Facing your group you see they are fine, looking a bit refreshed by the passing breeze. With that, you head forward to your destination.", parse);
+		Text.NL();
 	}
 	
-	Text.AddOutput("The building is a fair distance away, and you vaguely wonder how much longer it will take you to reach it. Much to your relief, you reach the building quickly, and are immediately rewarded with its identity. It turns out to be a timeworn barn in apparent danger of collapsing, if the patchwork repairs are any indication.", parse);
-	Text.Newline();
-	Text.AddOutput("To its sides, you see a variety of animals quietly grazing on the rather fertile-looking fields. Another look reveals various other life around, as well. The occasional equine and dog-morph tend to menial tasks, such as moving hay and sheaf, or watering cattle.", parse);
+	Text.Add("The building is a fair distance away, and you vaguely wonder how much longer it will take you to reach it. Much to your relief, you reach the building quickly, and are immediately rewarded with its identity. It turns out to be a timeworn barn in apparent danger of collapsing, if the patchwork repairs are any indication.", parse);
+	Text.NL();
+	Text.Add("To its sides, you see a variety of animals quietly grazing on the rather fertile-looking fields. Another look reveals various other life around, as well. The occasional equine and dog-morph tend to menial tasks, such as moving hay and sheaf, or watering cattle.", parse);
 	if(party.Two()) {
 		var member = party.Get(1);
-		Text.AddOutput(" You decide to split up for a while, and [name] heads off to explore the farm for [himher]self, leaving you alone.", { name: member.name, himher : member.himher() });
+		Text.Add(" You decide to split up for a while, and [name] heads off to explore the farm for [himher]self, leaving you alone.", { name: member.name, himher : member.himher() });
 	}
 	else if(!party.Alone()) {
-		Text.AddOutput(" Your party disperses, each of you going separate ways to see what else lies on the farm for themselves.", parse);
+		Text.Add(" Your party disperses, each of you going separate ways to see what else lies on the farm for themselves.", parse);
 	}
-	Text.Newline();
-	Text.AddOutput("The most distinct person visible from this mix of races has to be the human girl carrying two wooden buckets of water, each at the end of a wooden pole she skillfully hoists upon her shoulders. At a brief glance, she seems rather cute, with freckles spread lightly across her cheeks and bare shoulders, while her taut muscles complement her lean and sexy body. Her most notable trait, besides her short shorts and a crop top, is the long blonde braid reaching past her butt and tied with a blue ribbon, a much deeper shade than the vibrant blue of her eyes. As you look at her, she spots you and approaches with a friendly smile on her face, still carrying the two buckets of water.", parse);
-	Text.Newline();
-	Text.AddOutput("<i>“Well, how do you do, stranger?”</i> The girl asks as she stands before you, the contents of the bucket shaking a bit as she comes to a halt. <i>“Can't say I've seen you around here before. And I wouldn't forget a face as [handsomecute] as yours.”</i> You are taken slightly aback by the rather frank response, but the girl doesn't seem to notice. <i>“The name's Gwendy, if you're wondering what to call me. What's yours?”</i> You tell her your name, and she repeats it, as if for good measure. While the two of you get acquainted, she occasionally shuffles her weight a bit to shift her burden from one side to the other.", parse);
-	Text.Newline();
-	Text.AddOutput("Though she does not voice a complaint or ask for help, it would be common courtesy to lend a hand to the friendly farm girl.", parse);
+	Text.NL();
+	Text.Add("The most distinct person visible from this mix of races has to be the human girl carrying two wooden buckets of water, each at the end of a wooden pole she skillfully hoists upon her shoulders. At a brief glance, she seems rather cute, with freckles spread lightly across her cheeks and bare shoulders, while her taut muscles complement her lean and sexy body. Her most notable trait, besides her short shorts and a crop top, is the long blonde braid reaching past her butt and tied with a blue ribbon, a much deeper shade than the vibrant blue of her eyes. As you look at her, she spots you and approaches with a friendly smile on her face, still carrying the two buckets of water.", parse);
+	Text.NL();
+	Text.Add("<i>“Well, how do you do, stranger?”</i> The girl asks as she stands before you, the contents of the bucket shaking a bit as she comes to a halt. <i>“Can't say I've seen you around here before. And I wouldn't forget a face as [handsomecute] as yours.”</i> You are taken slightly aback by the rather frank response, but the girl doesn't seem to notice. <i>“The name's Gwendy, if you're wondering what to call me. What's yours?”</i> You tell her your name, and she repeats it, as if for good measure. While the two of you get acquainted, she occasionally shuffles her weight a bit to shift her burden from one side to the other.", parse);
+	Text.NL();
+	Text.Add("Though she does not voice a complaint or ask for help, it would be common courtesy to lend a hand to the friendly farm girl.", parse);
 	
 	Scenes.FarmIntro.hasBucket = false;
+	Text.Flush();
 	
 	//[Sure][Guess so][Nah]
 	var options = new Array();
@@ -268,14 +274,15 @@ Scenes.FarmIntro.Approach = function() {
 			player.strength.IncreaseStat(40, 1);
 			gwendy.relation.IncreaseStat(100, 5);
 			
-			Text.AddOutput("You grab a bucket of water from one side of the pole to give the poor girl a break, holding the pole in place for a moment to make sure the other bucket doesn't throw off her balance. She's surprised at first, but just chuckles when she sees you struggle to grip the uncomfortable handle.", parse);
-			Text.Newline();
-			Text.AddOutput("Taking the other bucket in both hands, she bumps her hip into yours playfully. <i>“Thanks for taking a load off my hands. It's a bit hard to find able help at moment's notice... but if you don't mind, could you follow me since you're so willing to help?”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("Gwendy walks in front of you with a swagger, giving you a nice view of her backside in motion. With a peek over her shoulder, she casts a sultry look your way before moving on. A slight victorious smile briefly tugs at the corner of your mouth while following the flirty girl, already wondering what else there could be.", parse);
+			Text.Add("You grab a bucket of water from one side of the pole to give the poor girl a break, holding the pole in place for a moment to make sure the other bucket doesn't throw off her balance. She's surprised at first, but just chuckles when she sees you struggle to grip the uncomfortable handle.", parse);
+			Text.NL();
+			Text.Add("Taking the other bucket in both hands, she bumps her hip into yours playfully. <i>“Thanks for taking a load off my hands. It's a bit hard to find able help at moment's notice... but if you don't mind, could you follow me since you're so willing to help?”</i>", parse);
+			Text.NL();
+			Text.Add("Gwendy walks in front of you with a swagger, giving you a nice view of her backside in motion. With a peek over her shoulder, she casts a sultry look your way before moving on. A slight victorious smile briefly tugs at the corner of your mouth while following the flirty girl, already wondering what else there could be.", parse);
 			
 			Scenes.FarmIntro.hasBucket = true;
-
+			
+			Text.Flush();
 			Gui.NextPrompt(Scenes.FarmIntro.EnterBarn);
 		}, enabled : true,
 		tooltip : "She has been kind and even gave you a compliment. Give her a hand!"
@@ -283,10 +290,11 @@ Scenes.FarmIntro.Approach = function() {
 	options.push({ nameStr : "Guess so",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("You offer a hand to her and ask if you could hold a bucket. She gives you a smirk before shuffling her weight once more. <i>“No one's forcing you to do anything, [playername]. I'm fine for now. Still, if you'd like to help, please follow me.”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("She begins to saunter off, moving with a sway that accentuates her toned, full thighs. Well, she said she wants your help, and she is cute, so what could be the harm in following to see what she wants?", parse);
+			Text.Add("You offer a hand to her and ask if you could hold a bucket. She gives you a smirk before shuffling her weight once more. <i>“No one's forcing you to do anything, [playername]. I'm fine for now. Still, if you'd like to help, please follow me.”</i>", parse);
+			Text.NL();
+			Text.Add("She begins to saunter off, moving with a sway that accentuates her toned, full thighs. Well, she said she wants your help, and she is cute, so what could be the harm in following to see what she wants?", parse);
 
+			Text.Flush();
 			Gui.NextPrompt(Scenes.FarmIntro.EnterBarn);
 		}, enabled : true,
 		tooltip : "Well, you have nothing better to do... offer her a hand?"
@@ -295,12 +303,13 @@ Scenes.FarmIntro.Approach = function() {
 		func : function() {
 			Text.Clear();
 			gwendy.relation.DecreaseStat(-100, 5);
-			Text.AddOutput("Well, as pretty as she may be, Gwendy should be more than capable of handling her own chores. She seems to have managed so far, so she'll be fine on her own for now. Your attitude becomes apparent to the girl as she shuffles once more, the buckets threatening to spill, but thanks to her balance and skill the crisis is averted.", parse);
-			Text.Newline();
-			Text.AddOutput("She looks at you with slight annoyance before saying, <i>“If I wanted a stone, I wouldn't be talking to you. Still, you're a visitor, so I'll try to be accommodating, even if you aren't the most friendly sort. Follow me, I might be able to find something for you to do that you won't mind.”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("Though she says that, it is true you are not exactly being the nicest person right now, so her irritation is understandable. Still, what could there be for you to do? Curious, you decide to follow her and find out. You hope she means to let you tap her for a bit.", parse);
+			Text.Add("Well, as pretty as she may be, Gwendy should be more than capable of handling her own chores. She seems to have managed so far, so she'll be fine on her own for now. Your attitude becomes apparent to the girl as she shuffles once more, the buckets threatening to spill, but thanks to her balance and skill the crisis is averted.", parse);
+			Text.NL();
+			Text.Add("She looks at you with slight annoyance before saying, <i>“If I wanted a stone, I wouldn't be talking to you. Still, you're a visitor, so I'll try to be accommodating, even if you aren't the most friendly sort. Follow me, I might be able to find something for you to do that you won't mind.”</i>", parse);
+			Text.NL();
+			Text.Add("Though she says that, it is true you are not exactly being the nicest person right now, so her irritation is understandable. Still, what could there be for you to do? Curious, you decide to follow her and find out. You hope she means to let you tap her for a bit.", parse);
 
+			Text.Flush();
 			Gui.NextPrompt(Scenes.FarmIntro.EnterBarn);
 		}, enabled : true,
 		tooltip : "You just came for the sake of it, you don't really have any inclination to help out."
@@ -316,18 +325,19 @@ Scenes.FarmIntro.EnterBarn = function() {
 	
 	Text.Clear();
 
-	Text.AddOutput("Following the girl into the barn, the first sight to strike you is the animals. It is almost like a zoo in here; horses, cows, sheep, and goats, alongside chickens, ducks, rabbits, and pigs. The collection is quite impressive and you say as much to Gwendy.", parse);
-	Text.Newline();
-	Text.AddOutput("She casually laughs it off while pouring the water into a trough for the pigs. <i>“Shoot, this is just another day in the life of a farmer for me. Tending to these guys is all I do, and I'm good at it. But enough of that,”</i> she says as the last of the water empties from the bucket, casting it aside neatly in a corner. <i>“Come with me, there's something I want you to see.”</i> With a happy turn she heads for the back.", parse);
-	Text.Newline();
+	Text.Add("Following the girl into the barn, the first sight to strike you is the animals. It is almost like a zoo in here; horses, cows, sheep, and goats, alongside chickens, ducks, rabbits, and pigs. The collection is quite impressive and you say as much to Gwendy.", parse);
+	Text.NL();
+	Text.Add("She casually laughs it off while pouring the water into a trough for the pigs. <i>“Shoot, this is just another day in the life of a farmer for me. Tending to these guys is all I do, and I'm good at it. But enough of that,”</i> she says as the last of the water empties from the bucket, casting it aside neatly in a corner. <i>“Come with me, there's something I want you to see.”</i> With a happy turn she heads for the back.", parse);
+	Text.NL();
 	
 	if(Scenes.FarmIntro.hasBucket) {
-		Text.AddOutput("Before you go any further, Gwendy asks you to pour the bucket you carried into the trough for the cattle before following her to the back of the barn. You quickly do so, more than eager to help her out. Afterward, you the put the empty bucket in the corner.", parse);
-		Text.Newline();
+		Text.Add("Before you go any further, Gwendy asks you to pour the bucket you carried into the trough for the cattle before following her to the back of the barn. You quickly do so, more than eager to help her out. Afterward, you the put the empty bucket in the corner.", parse);
+		Text.NL();
 	}
 	
-	Text.AddOutput("At the back of the barn, you see Gwendy standing next to a ladder leading to the upper floor, hay and straw jutting from the entryway. Gwendy begins climbing without a word, and you follow suit.", parse);
+	Text.Add("At the back of the barn, you see Gwendy standing next to a ladder leading to the upper floor, hay and straw jutting from the entryway. Gwendy begins climbing without a word, and you follow suit.", parse);
 	
+	Text.Flush();
 	Gui.NextPrompt(Scenes.FarmIntro.EnterLoft);
 }
 
@@ -338,11 +348,11 @@ Scenes.FarmIntro.EnterLoft = function() {
 	
 	var parse = {};
 	
-	Text.AddOutput("Upon reaching the top, you are greeted with the homely sight of furniture spread somewhat clumsily around the place. There is a simple unmade bed with a rather worn, but comfy-looking, quilt resting atop it, and two pillows at the head. A pair of simple wooden drawers lie under the bed, and what looks to be the strap of a bra juts out from one of them. A dresser with a mirror sits close to a round wooden table with two chairs, and a small washtub is under the table filled with dirty dishes. A few essentials that come to mind, like a toilet, are missing, but you believe you saw an outhouse on the way here.", parse);
-	Text.Newline();
-	Text.AddOutput("As you finish looking around her room, your attention returns to Gwendy, who has a slightly embarrassed look on her face. <i>“I don't usually get company, so pardon the mess. Anyways, this is my simple abode, where my day starts and ends.”</i> She spreads her arms for emphasis. <i>“At least, this is where I stay most of the time. I have another smaller house close-by, but it's usually easier to just stay here on the ranch. Maybe I'll show you, if you want.”</i> Though she offers, the expression on her face suggests she would rather not deal with that right now.", parse);
-	Text.Newline();
-	Text.AddOutput("<i>“Well, I'm a bit busy today, but if you want to talk for a bit, I don't mind taking some time off for that... not that spending time with someone like you is ever a bad thing.”</i> She stands before you, her hands behind her back waiting for your response.", parse);
+	Text.Add("Upon reaching the top, you are greeted with the homely sight of furniture spread somewhat clumsily around the place. There is a simple unmade bed with a rather worn, but comfy-looking, quilt resting atop it, and two pillows at the head. A pair of simple wooden drawers lie under the bed, and what looks to be the strap of a bra juts out from one of them. A dresser with a mirror sits close to a round wooden table with two chairs, and a small washtub is under the table filled with dirty dishes. A few essentials that come to mind, like a toilet, are missing, but you believe you saw an outhouse on the way here.", parse);
+	Text.NL();
+	Text.Add("As you finish looking around her room, your attention returns to Gwendy, who has a slightly embarrassed look on her face. <i>“I don't usually get company, so pardon the mess. Anyways, this is my simple abode, where my day starts and ends.”</i> She spreads her arms for emphasis. <i>“At least, this is where I stay most of the time. I have another smaller house close-by, but it's usually easier to just stay here on the ranch. Maybe I'll show you, if you want.”</i> Though she offers, the expression on her face suggests she would rather not deal with that right now.", parse);
+	Text.NL();
+	Text.Add("<i>“Well, I'm a bit busy today, but if you want to talk for a bit, I don't mind taking some time off for that... not that spending time with someone like you is ever a bad thing.”</i> She stands before you, her hands behind her back waiting for your response.", parse);
 	
 	Scenes.FarmIntro.talkedAboutGwendy = false;
 	Scenes.FarmIntro.talkedAboutBarn   = false;
@@ -357,17 +367,19 @@ Scenes.FarmIntro.GwendyQuestions1 = function() {
 		race : function() { return Race.Desc(player.body.Race()); }
 	};
 	
+	Text.Flush();
+	
 	//[Sure][Guess so][Nah]
 	var options = new Array();
 	if(!Scenes.FarmIntro.talkedAboutGwendy) {
 		options.push({ nameStr : "Gwendy",
 			func : function() {
 				Text.Clear();
-				Text.AddOutput("You tell her you'd like to know more about her, since it seems she manages the farm by herself. She smiles proudly before inviting you to sit at the table. <i>“Where do I start with this?”</i> she murmurs, looking off into the distance.", parse);
-				Text.Newline();
-				Text.AddOutput("After preparing herself a bit, she clears her throat and, standing up, spreads her arms in a dramatic manner. <i>“Welcome to Gwendy's Farm, the best one there is on this side of the plains! As you can see, I'm the proud owner of this facility, working day and night to make sure things are working right!”</i> Sitting down from that, she leans in a bit to see how you liked her little performance. <i>“It isn't often I get to boast like that, so I like to grab the chance when I have it. Like I said, I'm the owner of this barn, and I've been on the job as long as I can remember.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("You smile, and tell her she looks rather young to be managing an entire farm by herself. <i>“Hey, what can I say? Some people just know how to do what they need... though it does get a bit troublesome with these bandits roaming around from time to time. For all the kingdom says about helping its citizens, they really haven't done much in terms of making things easier for me.”</i> She ends on a bit of a huff, but she brightens up again as she returns her attention to you. <i>“So, what else do you want to know?”</i>", parse);
+				Text.Add("You tell her you'd like to know more about her, since it seems she manages the farm by herself. She smiles proudly before inviting you to sit at the table. <i>“Where do I start with this?”</i> she murmurs, looking off into the distance.", parse);
+				Text.NL();
+				Text.Add("After preparing herself a bit, she clears her throat and, standing up, spreads her arms in a dramatic manner. <i>“Welcome to Gwendy's Farm, the best one there is on this side of the plains! As you can see, I'm the proud owner of this facility, working day and night to make sure things are working right!”</i> Sitting down from that, she leans in a bit to see how you liked her little performance. <i>“It isn't often I get to boast like that, so I like to grab the chance when I have it. Like I said, I'm the owner of this barn, and I've been on the job as long as I can remember.”</i>", parse);
+				Text.NL();
+				Text.Add("You smile, and tell her she looks rather young to be managing an entire farm by herself. <i>“Hey, what can I say? Some people just know how to do what they need... though it does get a bit troublesome with these bandits roaming around from time to time. For all the kingdom says about helping its citizens, they really haven't done much in terms of making things easier for me.”</i> She ends on a bit of a huff, but she brightens up again as she returns her attention to you. <i>“So, what else do you want to know?”</i>", parse);
 				Scenes.FarmIntro.talkedAboutGwendy = true;
 				Scenes.FarmIntro.GwendyQuestions1();
 			}, enabled : true,
@@ -378,9 +390,9 @@ Scenes.FarmIntro.GwendyQuestions1 = function() {
 		options.push({ nameStr : "Barn",
 			func : function() {
 				Text.Clear();
-				Text.AddOutput("Though you admire the girl's obvious effort in maintaining the farm, you can't help but note the declining state of the barn. Gwendy's happy expression becomes a bit more sober when you point that out. You try to take your words back, but the girl shakes her head at your apologies. <i>“It's alright, I know that it's shabby. Even with trying to do repairs when I can, I don't have enough time and money to do that and keep paying these taxes <b>and</b> chase off the fools who come and make trouble... still, I do what I can to keep it functioning at least. That's the duty of a farmer, right?”</i> Even though she ends with a somewhat positive tone, the pain of dealing with a farm on the brink of collapse is apparent on her face. <i>“Well, it is what it is, but I promise I will have this place up and running, even if it takes me the rest of my life to do it!”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("Looking over the barn once more, it becomes obvious that accomplishing that would be almost miraculous, but perhaps you could lend a hand or two to revive this place? It would definitely win the favor of the farm girl for you...", parse);
+				Text.Add("Though you admire the girl's obvious effort in maintaining the farm, you can't help but note the declining state of the barn. Gwendy's happy expression becomes a bit more sober when you point that out. You try to take your words back, but the girl shakes her head at your apologies. <i>“It's alright, I know that it's shabby. Even with trying to do repairs when I can, I don't have enough time and money to do that and keep paying these taxes <b>and</b> chase off the fools who come and make trouble... still, I do what I can to keep it functioning at least. That's the duty of a farmer, right?”</i> Even though she ends with a somewhat positive tone, the pain of dealing with a farm on the brink of collapse is apparent on her face. <i>“Well, it is what it is, but I promise I will have this place up and running, even if it takes me the rest of my life to do it!”</i>", parse);
+				Text.NL();
+				Text.Add("Looking over the barn once more, it becomes obvious that accomplishing that would be almost miraculous, but perhaps you could lend a hand or two to revive this place? It would definitely win the favor of the farm girl for you...", parse);
 				Scenes.FarmIntro.talkedAboutBarn = true;
 				Scenes.FarmIntro.GwendyQuestions1();
 			}, enabled : true,
@@ -391,16 +403,16 @@ Scenes.FarmIntro.GwendyQuestions1 = function() {
 		options.push({ nameStr : "Alone?",
 			func : function() {
 				Text.Clear();
-				Text.AddOutput("Curiously, you point out that she's the only human on a farm full of animals and morphs. Doesn't that make her feel a bit secluded?", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“Well... to be honest, I'm not really alone. The morphs and animals here keep me company everyday. There's always work to do, so I get to work alongside them from time to time. As for other humans, I deal with enough of those guys as it is. Damn bandits and kingsmen,”</i> she mutters as she runs a hand through her hair. <i>“Anyway, I'm never truly alone, so it's not too bad...”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("She looks at you with a questioning look before asking:", parse);
-				Text.Newline();
+				Text.Add("Curiously, you point out that she's the only human on a farm full of animals and morphs. Doesn't that make her feel a bit secluded?", parse);
+				Text.NL();
+				Text.Add("<i>“Well... to be honest, I'm not really alone. The morphs and animals here keep me company everyday. There's always work to do, so I get to work alongside them from time to time. As for other humans, I deal with enough of those guys as it is. Damn bandits and kingsmen,”</i> she mutters as she runs a hand through her hair. <i>“Anyway, I'm never truly alone, so it's not too bad...”</i>", parse);
+				Text.NL();
+				Text.Add("She looks at you with a questioning look before asking:", parse);
+				Text.NL();
 				if(player.body.Race() == Race.human)
-					Text.AddOutput("<i>“Why, were you thinking of coming around a bit more to keep me company, as a fellow human?”</i> She asks the question in an innocent enough tone, but her eyes look at you with some expectancy. You tease her, saying that you might just do that, if she doesn't mind. At that, she giggles before casting a flirtatious glance at you. <i>“Oh, I wouldn't mind at all. It might be a bit more fun with you around.”</i>", parse);
+					Text.Add("<i>“Why, were you thinking of coming around a bit more to keep me company, as a fellow human?”</i> She asks the question in an innocent enough tone, but her eyes look at you with some expectancy. You tease her, saying that you might just do that, if she doesn't mind. At that, she giggles before casting a flirtatious glance at you. <i>“Oh, I wouldn't mind at all. It might be a bit more fun with you around.”</i>", parse);
 				else
-					Text.AddOutput("<i>“Thinking about introducing me to a few other humans... or maybe getting to know me a little better, as a [race]”</i> Her question intrigues you, but you say it was simple curiosity, though you might come around more if she doesn't mind having a friend that isn't a regular on the ranch. <i>“Well, thanks, I'd appreciate that. You'd better follow through and visit often!”</i>", parse);
+					Text.Add("<i>“Thinking about introducing me to a few other humans... or maybe getting to know me a little better, as a [race]”</i> Her question intrigues you, but you say it was simple curiosity, though you might come around more if she doesn't mind having a friend that isn't a regular on the ranch. <i>“Well, thanks, I'd appreciate that. You'd better follow through and visit often!”</i>", parse);
 				Scenes.FarmIntro.talkedAboutAlone = true;
 				Scenes.FarmIntro.GwendyQuestions1();
 			}, enabled : true,
@@ -419,6 +431,8 @@ Scenes.FarmIntro.GwendyQuestions2 = function() {
 		breastDesc : function() { return player.FirstBreastRow().Short(); }
 	}
 	
+	Text.Flush();
+	
 	//[Flirt][Help][Leave]
 	var options = new Array();
 	if(!Scenes.FarmIntro.flirtGwendy) {
@@ -427,12 +441,12 @@ Scenes.FarmIntro.GwendyQuestions2 = function() {
 				Text.Clear();
 				Scenes.FarmIntro.flirtGwendy = true;
 				
-				Text.AddOutput("Trying your best to appear suave, you lean in a bit and compliment her looks, saying that despite the rigorous and demanding work of the farm, she sure keeps quite the figure.", parse);
-				Text.Newline();
-				Text.AddOutput("She chuckles before setting both elbows on the table and resting her chin on her hands. <i>“Well, what can I say? If you've got it, flaunt it, right? No sense in being too modest, especially when you're out in the fields working all the time.”</i> You admit she has a point, but at the same time you doubt that you could be prudent and productive with her working beside you.", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“Well, since you say I have a nice body, mind telling me what's your favorite part?”</i> That was a bit unexpected, but it looks like you're on the spot now. What do you choose?", parse);
-				
+				Text.Add("Trying your best to appear suave, you lean in a bit and compliment her looks, saying that despite the rigorous and demanding work of the farm, she sure keeps quite the figure.", parse);
+				Text.NL();
+				Text.Add("She chuckles before setting both elbows on the table and resting her chin on her hands. <i>“Well, what can I say? If you've got it, flaunt it, right? No sense in being too modest, especially when you're out in the fields working all the time.”</i> You admit she has a point, but at the same time you doubt that you could be prudent and productive with her working beside you.", parse);
+				Text.NL();
+				Text.Add("<i>“Well, since you say I have a nice body, mind telling me what's your favorite part?”</i> That was a bit unexpected, but it looks like you're on the spot now. What do you choose?", parse);
+				Text.Flush();
 				/*
 				 * Options
 				 */
@@ -443,9 +457,9 @@ Scenes.FarmIntro.GwendyQuestions2 = function() {
 						Text.Clear();
 						player.AddLustFraction(0.2);
 						gwendy.relation.IncreaseStat(100, 5);
-						Text.AddOutput("You point out her breast are her most prominent feature, the bountiful beauties tempting any who look to reach out and touch. She smiles at your answer before cupping a hand under each breast and shaking them with alternating movements.", parse);
-						Text.Newline();
-						Text.AddOutput("<i>“So, you like looking at my lovely ladies, I see. Can't say I blame you. It isn't too often I see another person around here with boobs like mine. But I bet you want to do <b>something else</b> instead of looking at them...”</i> Gwendy looks at you seductively before removing her hands from her breasts. Although her tease was short, it still stirred something within you.", parse);
+						Text.Add("You point out her breast are her most prominent feature, the bountiful beauties tempting any who look to reach out and touch. She smiles at your answer before cupping a hand under each breast and shaking them with alternating movements.", parse);
+						Text.NL();
+						Text.Add("<i>“So, you like looking at my lovely ladies, I see. Can't say I blame you. It isn't too often I see another person around here with boobs like mine. But I bet you want to do <b>something else</b> instead of looking at them...”</i> Gwendy looks at you seductively before removing her hands from her breasts. Although her tease was short, it still stirred something within you.", parse);
 						Scenes.FarmIntro.GwendyQuestions2();
 					}, enabled : true,
 					tooltip : "Girl's got a nice pair of breasts!"
@@ -455,9 +469,9 @@ Scenes.FarmIntro.GwendyQuestions2 = function() {
 						Text.Clear();
 						player.AddLustFraction(0.1);
 						gwendy.relation.IncreaseStat(100, 3);
-						Text.AddOutput("You answer just as she moves a lock of hair out of her face. She's a bit surprised by your choice, but accepts the compliment nonetheless. <i>“I can see why you'd pick that, though I honestly thought you'd say something a little more... perverse? Still...”</i> ", parse);
-						Text.Newline();
-						Text.AddOutput("She runs her fingers through her silky hair before tucking a stray strand behind her ear, which draws out a bit more beauty from her already cute face. <i>“Momma always told me to aim to please, so I'm glad you like my hair.”</i>", parse);
+						Text.Add("You answer just as she moves a lock of hair out of her face. She's a bit surprised by your choice, but accepts the compliment nonetheless. <i>“I can see why you'd pick that, though I honestly thought you'd say something a little more... perverse? Still...”</i> ", parse);
+						Text.NL();
+						Text.Add("She runs her fingers through her silky hair before tucking a stray strand behind her ear, which draws out a bit more beauty from her already cute face. <i>“Momma always told me to aim to please, so I'm glad you like my hair.”</i>", parse);
 						Scenes.FarmIntro.GwendyQuestions2();
 					}, enabled : true,
 					tooltip : "Her hair is so pretty! You're kind of jealous."
@@ -467,9 +481,9 @@ Scenes.FarmIntro.GwendyQuestions2 = function() {
 						Text.Clear();
 						player.AddLustFraction(0.3);
 						gwendy.relation.IncreaseStat(100, 5);
-						Text.AddOutput("That ass. Gwendy actually blushes as you say that, taken slightly aback by your bold response. <i>“You sure know how to make a girl feel great about her body,”</i> she teases as her embarrassment eases away. <i>“I thought I felt someone staring at my butt, but to think you would admit to it so openly... I guess I can't blame you, especially when you consider what I wear.”</i> ", parse);
-						Text.Newline();
-						Text.AddOutput("As if to add emphasis on this point, she stands up and turns around while looking over her shoulder, throwing you a sexy look. Before you question what she's doing, she places her hands on her butt and gives it a little shake, making her ass jiggle wondrously. Seeing the look of appreciation on your face, she laughs a bit before sitting back down. <i>“Don't get too excited there, I was just showing you what you liked was all.”</i>", parse);
+						Text.Add("That ass. Gwendy actually blushes as you say that, taken slightly aback by your bold response. <i>“You sure know how to make a girl feel great about her body,”</i> she teases as her embarrassment eases away. <i>“I thought I felt someone staring at my butt, but to think you would admit to it so openly... I guess I can't blame you, especially when you consider what I wear.”</i> ", parse);
+						Text.NL();
+						Text.Add("As if to add emphasis on this point, she stands up and turns around while looking over her shoulder, throwing you a sexy look. Before you question what she's doing, she places her hands on her butt and gives it a little shake, making her ass jiggle wondrously. Seeing the look of appreciation on your face, she laughs a bit before sitting back down. <i>“Don't get too excited there, I was just showing you what you liked was all.”</i>", parse);
 						Scenes.FarmIntro.GwendyQuestions2();
 					}, enabled : true,
 					tooltip : "Baby got back!"
@@ -479,9 +493,9 @@ Scenes.FarmIntro.GwendyQuestions2 = function() {
 						Text.Clear();
 						player.AddLustFraction(0.1);
 						gwendy.relation.IncreaseStat(100, 2);
-						Text.AddOutput("You say her lips are undoubtedly the most alluring part of her. At this, she tilts her head to the side while looking at you with a sultry gaze through half-lidded eyes.<i>“Is that so? I wonder what you're imagining me doing with those lips of mine?”</i> In an effort to turn the insinuations back on her, you quip, saying the only person with dirty thoughts is her.", parse);
-						Text.Newline();
-						Text.AddOutput("<i>“Is that so? You might be right, but we'll never know, now will we?”</i> As she says that, she runs her tongue slowly over sumptuous lips, making them glossy and attractive. <i>“Oh well, I got my answer, so I'll be a bit more appreciative of these lips then.”</i> As she finishes, she blows a kiss to you, a playful smile on her face.", parse);
+						Text.Add("You say her lips are undoubtedly the most alluring part of her. At this, she tilts her head to the side while looking at you with a sultry gaze through half-lidded eyes.<i>“Is that so? I wonder what you're imagining me doing with those lips of mine?”</i> In an effort to turn the insinuations back on her, you quip, saying the only person with dirty thoughts is her.", parse);
+						Text.NL();
+						Text.Add("<i>“Is that so? You might be right, but we'll never know, now will we?”</i> As she says that, she runs her tongue slowly over sumptuous lips, making them glossy and attractive. <i>“Oh well, I got my answer, so I'll be a bit more appreciative of these lips then.”</i> As she finishes, she blows a kiss to you, a playful smile on her face.", parse);
 						Scenes.FarmIntro.GwendyQuestions2();
 					}, enabled : true,
 					tooltip : "Those lips bring many thoughts to your mind..."
@@ -491,11 +505,11 @@ Scenes.FarmIntro.GwendyQuestions2 = function() {
 						Text.Clear();
 						player.AddLustFraction(0.4);
 						gwendy.relation.IncreaseStat(100, 8);
-						Text.AddOutput("Unable to pick just one part on the sexy girl, you decide to say she's simply hot. <i>“Oh! Thank you, [playername]. Though I was expecting you to have a particular favorite, to be honest... but this just makes it easier for me to mess with you a little more!”</i>", parse);
-						Text.Newline();
-						Text.AddOutput("As she says that, Gwendy moves from her seat to your lap, a perverted smile on her face, as she wraps her arms around your neck. <i>“Since you can't decide, let me just give you a treat as a thank you...”</i> Leaning in, she presses her lips against yours while her lovely chest closes against your [breastDesc]. Meanwhile, in your lap, she grinds a bit, causing her ass to lightly brush against your crotch. All in all, she's doing more than teasing, but you don't mind at all.", parse);
-						Text.Newline();
-						Text.AddOutput("Before it goes any further though, Gwendy breaks the kiss and stops her lapdance. Getting up, she slowly walks back to her seat, tantalizingly shaking her ass. When she sits back down, she smiles and says, <i>“By the way, I like you too... all of you, if you couldn't tell.”</i>", parse);
+						Text.Add("Unable to pick just one part on the sexy girl, you decide to say she's simply hot. <i>“Oh! Thank you, [playername]. Though I was expecting you to have a particular favorite, to be honest... but this just makes it easier for me to mess with you a little more!”</i>", parse);
+						Text.NL();
+						Text.Add("As she says that, Gwendy moves from her seat to your lap, a perverted smile on her face, as she wraps her arms around your neck. <i>“Since you can't decide, let me just give you a treat as a thank you...”</i> Leaning in, she presses her lips against yours while her lovely chest closes against your [breastDesc]. Meanwhile, in your lap, she grinds a bit, causing her ass to lightly brush against your crotch. All in all, she's doing more than teasing, but you don't mind at all.", parse);
+						Text.NL();
+						Text.Add("Before it goes any further though, Gwendy breaks the kiss and stops her lapdance. Getting up, she slowly walks back to her seat, tantalizingly shaking her ass. When she sits back down, she smiles and says, <i>“By the way, I like you too... all of you, if you couldn't tell.”</i>", parse);
 						Scenes.FarmIntro.GwendyQuestions2();
 					}, enabled : true,
 					tooltip : "She's got it all, honestly."
@@ -517,8 +531,9 @@ Scenes.FarmIntro.GwendyQuestions2 = function() {
 			}
 			
 			gwendy.relation.IncreaseStat(100, 5);
-			Text.AddOutput("<i>“Wanna help, huh? Well, I know I mentioned it earlier, but it wouldn't be right of me to impose on you like that.”</i> You insist on helping, saying you have more than enough time to help out the person that greeted you so kindly and welcomed you to the farm. She looks a little unconvinced, but she shrugs her shoulders and says, <i>“Alright, if you say so. But in that case, don't complain about the work once we get started!”</i> With that the girl stands up from the table and climbs back down the ladder. You follow behind.", parse);
+			Text.Add("<i>“Wanna help, huh? Well, I know I mentioned it earlier, but it wouldn't be right of me to impose on you like that.”</i> You insist on helping, saying you have more than enough time to help out the person that greeted you so kindly and welcomed you to the farm. She looks a little unconvinced, but she shrugs her shoulders and says, <i>“Alright, if you say so. But in that case, don't complain about the work once we get started!”</i> With that the girl stands up from the table and climbs back down the ladder. You follow behind.", parse);
 			
+			Text.Flush();
 			Gui.NextPrompt(Scenes.FarmIntro.HelpAdrian);
 		}, enabled : true,
 		tooltip : "Offer a hand around the farm."
@@ -528,11 +543,12 @@ Scenes.FarmIntro.GwendyQuestions2 = function() {
 		func : function() {
 			Text.Clear();
 			
-			Text.AddOutput("You tell Gwendy that you're fine for now, but thank her for welcoming you into her room. She casts a questioning glance at you, but doesn't ask anything. <i>“Alright then, if that's what you want. I've things to do myself, so I'm leaving now. Of course, you can still check out the farm if you'd like, but I won't be there to help you get around. Other than that, see ya!”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("Standing up, she saunters away teasingly before climbing down the ladder, and you follow her promptly, not wanting to catch any accusations of loitering or doing anything else untoward in her room.", parse);
-			Text.Newline();
-			Text.AddOutput("With free reign right now, you have a few possible options. Leave or...", parse);
+			Text.Add("You tell Gwendy that you're fine for now, but thank her for welcoming you into her room. She casts a questioning glance at you, but doesn't ask anything. <i>“Alright then, if that's what you want. I've things to do myself, so I'm leaving now. Of course, you can still check out the farm if you'd like, but I won't be there to help you get around. Other than that, see ya!”</i>", parse);
+			Text.NL();
+			Text.Add("Standing up, she saunters away teasingly before climbing down the ladder, and you follow her promptly, not wanting to catch any accusations of loitering or doing anything else untoward in her room.", parse);
+			Text.NL();
+			Text.Add("With free reign right now, you have a few possible options. Leave or...", parse);
+			Text.Flush();
 
 			Scenes.FarmIntro.LeaveFarm();
 		}, enabled : true,
@@ -553,32 +569,32 @@ Scenes.FarmIntro.HelpAdrian = function() {
 		buttDesc   : function() { return player.Butt().Short(); }
 	};
 	
-	Text.AddOutput("Getting off the ladder, you are met with the butt-end of a pitchfork as you face the perky girl. Next to her is a rather tall equine-morph, having easily a foot over the girl. He is quite the specimen, too. He has a well-toned body with short silky brown fur coating the bulging muscles of his bare chest, and a flowing dark brown mane falling a little past his shoulders to emphasize his equine physique. He is wearing a pair of trousers made from rough cloth, hiding his presumably equine genitals.", parse);
-	Text.Newline();
-	Text.AddOutput("<i>“Hey, [playername], quit staring off into space! We've got work to do!”</i> Gwendy commands as she presses the pitchfork into your hand. <i>“I see you've taken notice of Adrian, here. He's a farmhand who helps me out on occasion, so he's familiar with the pace of things around here. Anyway, let's get started. The two of you can work on getting the hay up while I tend to the cows. Afterwards, we'll take care of whatever else comes up.”</i>", parse);
-	Text.Newline();
+	Text.Add("Getting off the ladder, you are met with the butt-end of a pitchfork as you face the perky girl. Next to her is a rather tall equine-morph, having easily a foot over the girl. He is quite the specimen, too. He has a well-toned body with short silky brown fur coating the bulging muscles of his bare chest, and a flowing dark brown mane falling a little past his shoulders to emphasize his equine physique. He is wearing a pair of trousers made from rough cloth, hiding his presumably equine genitals.", parse);
+	Text.NL();
+	Text.Add("<i>“Hey, [playername], quit staring off into space! We've got work to do!”</i> Gwendy commands as she presses the pitchfork into your hand. <i>“I see you've taken notice of Adrian, here. He's a farmhand who helps me out on occasion, so he's familiar with the pace of things around here. Anyway, let's get started. The two of you can work on getting the hay up while I tend to the cows. Afterwards, we'll take care of whatever else comes up.”</i>", parse);
+	Text.NL();
 	
 	if(party.Two()) {
 		var member = party.Get(1);
 		
-		Text.AddOutput("You call out to [name], hoping [heshe] will lend a hand with the coming chores. When [heshe] arrives in response to your call, you explain to [himher] you need [himher] to help around the farm and direct [himher] to Gwendy for instructions. She gives [name] a task and sends [himher] on [hisher] way, leaving Gwendy with a happy smile on her face.",
+		Text.Add("You call out to [name], hoping [heshe] will lend a hand with the coming chores. When [heshe] arrives in response to your call, you explain to [himher] you need [himher] to help around the farm and direct [himher] to Gwendy for instructions. She gives [name] a task and sends [himher] on [hisher] way, leaving Gwendy with a happy smile on her face.",
 		{	
 			name   : member.name,
 			heshe  : member.heshe(),
 			himher : member.himher(),
 			hisher : member.hisher()
 		});
-		Text.Newline();
+		Text.NL();
 	}
 	else if(!party.Alone()) {
-		Text.AddOutput("You call out to your companions, hoping they will lend a hand with the coming chores. When they arrive in response to your call, you explain to them you need them to help around the farm and direct them to Gwendy for instructions. She gives everyone a task and sends them on their way, leaving Gwendy with a happy smile on her face.", parse);
-		Text.Newline();
+		Text.Add("You call out to your companions, hoping they will lend a hand with the coming chores. When they arrive in response to your call, you explain to them you need them to help around the farm and direct them to Gwendy for instructions. She gives everyone a task and sends them on their way, leaving Gwendy with a happy smile on her face.", parse);
+		Text.NL();
 	}
 	
-	Text.AddOutput("Finished with her instructions, Gwendy goes to tend to the cows, leaving you and Adrian looking at one another in awkward silence before he walks off without a word. You follow on his heels to make sure you do not get lost.", parse);
-	Text.Newline();
-	Text.AddOutput("The two of you stop at a field littered with cut, dried hay, and Adrian begins slowly raking the grass into piles and then bundles. When he finishes with a bundle, it is about waist-high, giving you an idea of what your own work should look like. Squaring your shoulders, you get to it.", parse);
-	
+	Text.Add("Finished with her instructions, Gwendy goes to tend to the cows, leaving you and Adrian looking at one another in awkward silence before he walks off without a word. You follow on his heels to make sure you do not get lost.", parse);
+	Text.NL();
+	Text.Add("The two of you stop at a field littered with cut, dried hay, and Adrian begins slowly raking the grass into piles and then bundles. When he finishes with a bundle, it is about waist-high, giving you an idea of what your own work should look like. Squaring your shoulders, you get to it.", parse);
+	Text.Flush();
 	
 	//[Talk][Flirt][Gwendy][Just work]
 	var options = new Array();
