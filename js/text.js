@@ -88,7 +88,10 @@ Text.Clear = function() {
 //Adds text wrapped in a span.
 Text.Add = function(text, parse, cssClasses) {
 	var classesStr = (cssClasses)? cssClasses : "";
-	Text.buffer += "<span class=\""+classesStr+"\">"+Text.Parse(text, parse) + "</span>";
+	if(cssClasses)
+		Text.buffer += "<span class=\""+classesStr+"\">"+Text.Parse(text, parse) + "</span>";
+	else
+		Text.buffer += Text.Parse(text, parse);
 }
 //Adds text wrapped in a div.
 Text.AddDiv = function(text, parse, cssClasses) {
