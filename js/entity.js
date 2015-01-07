@@ -2086,28 +2086,28 @@ Entity.prototype.EquipPrompt = function(backfunc) {
 	};
 	
 	var equipFunc = function() {
-		parse["wep"]  = that.weaponSlot   ? "[" + that.weaponSlot.name +"] "   + that.weaponSlot.Short()   : "<i>None</i>";
-		parse["top"]  = that.topArmorSlot ? "[" + that.topArmorSlot.name +"] " + that.topArmorSlot.Short() : "<i>None</i>";
-		parse["bot"]  = that.botArmorSlot ? "[" + that.botArmorSlot.name +"] " + that.botArmorSlot.Short() : "<i>None</i>";
-		parse["acc1"] = that.acc1Slot     ? "[" + that.acc1Slot.name +"] "     + that.acc1Slot.Short()     : "<i>None</i>";
-		parse["acc2"] = that.acc2Slot     ? "[" + that.acc2Slot.name +"] "     + that.acc2Slot.Short()     : "<i>None</i>";
-		parse["toy"]  = that.strapOn      ? "[" + that.strapOn.name +"] "      + that.strapOn.Short()      : "<i>None</i>";
-		
 		Text.Clear();
+		
+		var slotFunc = function(slotname, slot) {
+			//Text.AddDiv("<hr>");
+	        Text.AddDiv(slotname, null, "itemTypeHeader");
+	        //Text.AddDiv("<hr>");
+	        if(slot) {
+	        	Text.AddDiv(slot.name, null, "itemSubtypeHeader");
+	        	Text.AddDiv(slot.Short(), null, "itemName");
+	        }
+	        else
+	        	Text.AddDiv("None", null, "itemSubtypeHeader");
+		}
 		
 		Text.Add("[name] [isAre] currently equipped with:", parse);
 		Text.NL();
-		Text.Add("<b>Weapon:</b> [wep]", parse);
-		Text.NL();
-		Text.Add("<b>Top armor:</b> [top]", parse);
-		Text.NL();
-		Text.Add("<b>Bottom armor:</b> [bot]", parse);
-		Text.NL();
-		Text.Add("<b>Accessory:</b> [acc1]", parse);
-		Text.NL();
-		Text.Add("<b>Accessory:</b> [acc2]", parse);
-		Text.NL();
-		Text.Add("<b>Toy:</b> [toy]", parse);
+        slotFunc("Weapon", that.weaponSlot);
+        slotFunc("Top armor", that.topArmorSlot);
+        slotFunc("Bottom armor", that.botArmorSlot);
+        slotFunc("Accessory", that.acc1Slot);
+        slotFunc("Accessory", that.acc2Slot);
+        slotFunc("Toy", that.strapOn);
 		Text.Flush();
 		
 		var options = new Array();
