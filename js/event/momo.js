@@ -296,7 +296,7 @@ Scenes.Momo.Interact = function() {
 		Text.NL();
 		Text.Add("As you approach the tent by the fire where Momo now lives, you hear the dragonette complaining about something. You see a great variety of pots, pans and other cooking implements scattered around the entry into the tent, whilst Momo herself is currently bent over rummaging through something in its interior. Her hips wriggle and twitch restlessly as she browses, making her ass jiggle quite nicely. The dragon-girl’s long, swaying tail above it draws your eyes to her shapely rump.", parse);
 		Text.NL();
-		Text.Add("<i>“Ahah! There you are, you little rascal”</i> Humming to herself in satisfaction, Momo’s top half emerges from the tent, half-turning to reveal a large, worn-looking journal clasped in her arms. Upon seeing you, she grins widely in delight.", parse);
+		Text.Add("<i>“Ahah! There you are, you little rascal!”</i> Humming to herself in satisfaction, Momo’s top half emerges from the tent, half-turning to reveal a large, worn-looking journal clasped in her arms. Upon seeing you, she grins widely in delight.", parse);
 		Text.NL();
 		Text.Add("<i>“Why, hello, [playername]! Welcome to my little kitchen... well, kitchen to be,”</i> she amends herself chipperly, nodding toward the various utensils scattered around.  <i>“That nice old man said he’d let me set up shop here... course, that means I gotta set up the shop first.”</i>", parse);
 		Text.NL();
