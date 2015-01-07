@@ -158,7 +158,7 @@ LagonRegular.prototype.Act = function(enc, activeChar) {
 				isEnemy    : true,
 				initiative : 0,
 				aggro      : []};
-			enc.GenerateUniqueName(ent);
+			enc.GenerateUniqueName(entity);
 			
 			enc.combatOrder.push(ent);
 			ent.entity.GetSingleTarget(enc, ent);
