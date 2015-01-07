@@ -37,6 +37,16 @@ Lagon.prototype.ToStorage = function() {
 	return storage;
 }
 
+// Schedule
+Lagon.prototype.IsAtLocation = function(location) {
+	if(burrows.LagonDefeated()) return false; //TODO slave mode
+	location = location || party.location;
+	if(world.time.hour >= 9 && world.time.hour < 20)
+		return (location == world.loc.Burrows.Throne);
+	else
+		return (location == world.loc.Burrows.Pit);
+}
+
 Lagon.Usurp = {
 	FirstFight : 1,
 	Defeated   : 2,
