@@ -76,6 +76,9 @@ Burrows.prototype.LagonDefeated = function() {
 Burrows.prototype.LagonChallenged = function() {
 	return lagon.flags["Usurp"] & Lagon.Usurp.FirstFight;
 }
+Burrows.prototype.LagonAlly = function() {
+	return lagon.flags["Usurp"] & Lagon.Usurp.SidedWith;
+}
 //TODO
 Burrows.prototype.VenaRestored = function() {
 	return this.flags["Access"] >= Burrows.AccessFlags.QuestlineComplete;

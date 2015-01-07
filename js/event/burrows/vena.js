@@ -45,3 +45,17 @@ Vena.prototype.ToStorage = function() {
 	
 	return storage;
 }
+
+//TODO
+Scenes.Vena.RestoreEntrypoint = function(fight) {
+	var parse = {
+		
+	};
+	
+	Text.Add("PLACEHOLDER", parse);
+	Text.NL();
+	Text.Flush();
+	
+	world.TimeStep({hour: 1});
+	Gui.NextPrompt();
+}

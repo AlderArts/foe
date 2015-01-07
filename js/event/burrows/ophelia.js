@@ -76,10 +76,83 @@ Ophelia.prototype.IsAtLocation = function(location) {
 	return false;
 }
 
+//For final fight
+function OpheliaBrute() {
+	BossEntity.call(this);
+	
+	this.name              = "Ophelia";
+	
+	this.avatar.combat     = Images.ophelia_b;
+	
+	this.maxHp.base        = 3000;
+	this.maxSp.base        = 700;
+	this.maxLust.base      = 300;
+	// Main stats
+	this.strength.base     = 100;
+	this.stamina.base      = 100;
+	this.dexterity.base    = 110;
+	this.intelligence.base = 70;
+	this.spirit.base       = 60;
+	this.libido.base       = 70;
+	this.charisma.base     = 70;
+	
+	this.level             = 15;
+	this.sexlevel          = 4;
+	
+	this.combatExp         = 400;
+	this.coinDrop          = 800;
+	
+	this.body.DefFemale();
+	
+	this.Butt().buttSize.base = 4;
+	
+	this.body.SetRace(Race.rabbit);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.rabbit, Color.white);
+	this.body.SetBodyColor(Color.white);
+	this.body.SetEyeColor(Color.red);
+
+	// Set hp and mana to full
+	this.SetLevelBonus();
+	this.RestFull();
+}
+OpheliaBrute.prototype = new BossEntity();
+OpheliaBrute.prototype.constructor = OpheliaBrute;
+
+//TODO
+OpheliaBrute.prototype.DropTable = function() {
+	var drops = [];
+	drops.push({ it: Items.Leporine });
+	return drops;
+}
+
+//TODO
+OpheliaBrute.prototype.Act = function(encounter, activeChar) {
+	// Pick a random target
+	var t = this.GetSingleTarget(encounter, activeChar);
+
+	var parseVars = {
+		name   : this.name,
+		hisher : this.hisher(),
+		tName  : t.name
+	};
+
+	var choice = Math.random();
+	if(choice < 0.2 && Abilities.Physical.Bash.enabledCondition(encounter, this))
+		Abilities.Physical.Bash.Use(encounter, this, t);
+	else if(choice < 0.4 && Abilities.Physical.Frenzy.enabledCondition(encounter, this))
+		Abilities.Physical.Frenzy.Use(encounter, this, t);
+	else if(choice < 0.6 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
+		Abilities.Physical.CrushingStrike.Use(encounter, this, t);
+	else if(choice < 0.8 && Abilities.Physical.GrandSlam.enabledCondition(encounter, this))
+		Abilities.Physical.GrandSlam.Use(encounter, this, t);
+	else
+		Abilities.Attack.Use(encounter, this, t);
+}
+
 Scenes.Ophelia.LabDesc = function() {
 	var parse = {
-		old : ophelia.flags["Met"] != 0 ? " old" : ""
-		
+		old  : ophelia.flags["Met"] != 0 ? " old" : "",
+		camp : gameCache.flags["Portals"] != 0 ? "the gemstead" : "camp"
 	};
 	
 	Text.Add("You are standing in Ophelia’s[old] makeshift laboratory, which is cast in bright light with a strangely greenish hue. Scrolls and books are stacked on narrow shelves alongside earthenware pots containing who-knows-what and odd mixtures boiling in large glass flasks. Grime and smoke have added a permanent patina of grease to everything in the room, which speaks to you of the wisdom of having an alchemical lab without a proper air vent. A handful of lapine guinea-pigs are shackled to one wall, either waiting for new experiments or under observation.", parse);
