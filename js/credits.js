@@ -38,6 +38,7 @@ CreditsScreen = function() {
 	Text.Add("Roa: Me, QB and LD<br/>");
 	Text.Add("Gol: Me and Fenoxo<br/>");
 	Text.Add("Mothgirl: Savin<br/>");
+	Text.Add("Cveta: The Observer<br/>");
 	
 	Text.NL();
 	
