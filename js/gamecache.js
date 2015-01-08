@@ -53,6 +53,7 @@ InitCache = function() {
 	adrian  = new Adrian(gameCache.adrian);
 	
 	maria   = new Maria(gameCache.maria);
+	cveta   = new Maria(gameCache.cveta);
 	
 	fera    = new Fera(gameCache.fera);
 	kyna    = new Kyna(gameCache.kyna);
@@ -108,6 +109,7 @@ InitCache = function() {
 	world.EntityStorage.push(adrian);
 	
 	world.EntityStorage.push(maria);
+	world.EntityStorage.push(cveta);
 	
 	world.EntityStorage.push(fera);
 	world.EntityStorage.push(kyna);
@@ -356,6 +358,7 @@ GameToCache = function() {
 	gameCache.room69  = room69.ToStorage();
 	
 	gameCache.maria   = maria.ToStorage();
+	gameCache.cveta   = cveta.ToStorage();
 	
 	// Other NPCs
 	gameCache.chief   = chief.ToStorage();

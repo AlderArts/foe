@@ -126,6 +126,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/nomads/magnus.js \
 	js/event/nomads/cavalcade.js \
 	js/event/outlaws/maria.js \
+	js/event/outlaws/cveta.js \
 	js/event/raven.js \
 	js/event/roaming.js \
 	js/event/citywatch.js \

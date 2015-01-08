@@ -2567,13 +2567,6 @@ Entity.prototype.GetPartyTarget = function(encounter, activeChar) {
 		return party;
 	else
 		return encounter.enemy;
-
-	// Fetch all potential targets
-	var targets;
-	if(isEnemy)
-		return encounter.GetLivePartyArray();
-	else
-		return encounter.GetLiveEnemyArray();
 }
 
 Entity.prototype.GetSingleTarget = function(encounter, activeChar, strategy) {
