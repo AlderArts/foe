@@ -64,7 +64,7 @@ world.loc.Outlaws.Camp.events.push(new Link(
 	}, true,
 	null,
 	function() {
-		//TODO
+		Scenes.Cveta.Performance();
 	}
 ));
 

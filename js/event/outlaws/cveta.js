@@ -398,3 +398,257 @@ Scenes.Cveta.FirstMeetingCont = function() {
 	
 	Gui.NextPrompt();
 }
+
+//TODO Buffs
+Scenes.Cveta.Performance = function() {
+	var parse = {
+		playername : player.name,
+		skinDesc : function() { return player.SkinDesc(); },
+		cocks : function() { return player.MultiCockDesc(); },
+		vagDesc : function() { return player.FirstVag().Short(); }
+	};
+	
+	var dawn = world.time.hour < 12;
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		parse["audience"] = "outlaws coming in from their watch shift";
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		parse["audience"] = "exiled morph nobles";
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		parse["audience"] = "a few ragtag individuals who've come for the entertainment";
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		parse["audience"] = "a sizeable crowd, graced by none other than Zenith himself";
+	}, 1.0, function() { return true; });
+	scenes.Get();
+	
+	Text.Clear();
+	parse["comp"] = party.Num() == 2 ? party.Get(1).name :
+	                party.Num() >  2 ? "your companions" : "";
+	parse["c"] = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
+	parse["dawn"] = dawn ? "last night's dying embers" : "the freshly lit bonfire";
+	Text.Add("Hurrying to the enormous fire pit that serves as the central gathering grounds of the outlaws' camp, you[c] arrive just in time to find Cveta seated by the edge of [dawn], warming up for the upcoming performance. A number of outlaws have gathered to hear her play, the audience this time being primarily comprised of [audience].", parse);
+	Text.NL();
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("Satisfied with the turnout, Cveta stands, taking a moment to dust off the seat of her gown before addressing the audience.", parse);
+		Text.NL();
+		Text.Add("<i>“Today, I will be playing 'Spirit of the Storm', Grahm's solo Violin Sonata number six in G major. Please, enjoy.”</i>", parse);
+		Text.NL();
+		Text.Add("With those few words, the bird-morph secures the violin you purchased for her against her shoulder and neck and begins to play, bow moving against strings in fluid, practiced movements. It quickly becomes obvious why this particular composition has been named such: the notes that emerge from Cveta's violin start off slow and languid at first, but rapidly gain in pace and energy, the bird-morph's fingers moving furiously to keep in time with the music that drives her.", parse);
+		Text.NL();
+		if(party.Num() > 1) {
+			var comp = party.GetRandom();
+			parse["name"]  = comp.name;
+			parse["heshe"] = comp.heshe();
+			parse["c"]     = Text.Parse(" cast a glance at [name], and [heshe] is utterly captivated by the tremendous energy of Cveta's music, while you yourself", parse);
+		}
+		else
+			parse["c"] = "";
+		
+		Text.Add("Even as the music itself rises to a crescendo, Cveta herself seems to slow, her eyes half-lidded in sheer concentration, her breathing slow and shallow. All around her, the whirl and frenzy of maddened music, she herself the eye of the storm, calm, peaceful, perfectly centered. It's impossible not to feel the charged atmosphere building up amongst the audience; you[c] feel invigorated, energized, and ready to go out into the rest of Eden to take names and kick asses. Thunder roars in your heart and lightning flashes through your veins to the pulse of Cveta's music, and for a moment, just for a fleeting moment, you think you could gain so much strength that you could take on anyone - even Uru herself - and come out on top…", parse);
+		Text.NL();
+		Text.Add("All good things must come to an end, though, and music and storm alike begin to die down, the last few raindrops petering out as Cveta strikes the final chord with a flourish. Carefully, she sets both violin and bow back into their case, and turns to face her audience.", parse);
+		
+		//TODO
+		//#Party gains 10% strength for the next twelve hours.
+	}, 1.0, function() { return cveta.Violin(); });
+	scenes.AddEnc(function() {
+		Text.Add("Once everyone is seated and quiet, Cveta stands, brushing away the locks of hair that usually obscure her left eye. Off to one side, you notice a dog-morph dragging in a set of large drums fashioned from wood and cured hide, and once the instruments are set up by the fire pit, Cveta gives him a nod and directs him to take up position with a pair of drumsticks.", parse);
+		Text.NL();
+		Text.Add("<i>“Welcome, everyone,”</i> she says, dipping her head. <i>“Today, Ernest and I will be performing 'March of the Summer Solstice' by Major Cernovitz of the Free Cities. Please, relax and enjoy what we have to offer. It is but a pared-down version of the original, but we have worked hard to make it enjoyable.”</i>", parse);
+		Text.NL();
+		Text.Add("At Cveta's signal, the dog-morph starts up a marching beat on the crude drum set, the rhythm of his pounding akin to the pulsing of a giant heart in the centre of the outlaw camp. Cveta herself waits for him to steady his tempo, then sits back down and launches into her own accompaniment on her lyre, supporting the instrument in her lap while she works away at the strings with both her fingers and pick. You wouldn't have expected such disparate instruments to play well together but they surprisingly do - the end result is a gritty piece with a distinct martial motif, definitely something a number of the outlaws can relate to.", parse);
+		Text.NL();
+		Text.Add("Pity there isn’t a trumpet or bugle for accompaniment, but where would the outlaws get their hands on one?", parse);
+		Text.NL();
+		parse["breakfastdinner"] = dawn ? "breakfast" : "dinner";
+		Text.Add("You have to admit, it's quite catchy. Several of the outlaws in the audience must agree with you, since they're following the beat in any way they can - stamping on the ground with their boots or banging their [breakfastdinner] utensils together with varied results.", parse);
+		Text.NL();
+		if(party.Num() > 1) {
+			var comp = party.GetRandom();
+			parse["name"]   = comp.name;
+			parse["hisher"] = comp.hisher();
+			Text.Add("Even [name] has given in to the urge to follow the music, bobbing [hisher] head in time with the drums.", parse);
+			Text.NL();
+		}
+		Text.Add("You can't quite put what you're feeling into words - there's something raw and primal about the drumbeat and underlying tones of the music that speak directly to the soul. You can practically envision in your mind's eye columns upon columns of troops in full regalia, rows upon rows marching past a cheering populace in triumphant glory… or if you interpreted it another way, the same soldiers marching in battered breastplates down dusty roads to their inescapable doom.", parse);
+		Text.NL();
+		Text.Add("Oblivious to the cacophony about them, both Cveta and the dog-morph dutifully continue to hammer out that marching beat, the latter's teeth clenched and sweat beading on his forehead even as he pounds away furiously on the drum. Yet he doesn't seem to show any signs of tiring - and come to think of it, neither do you or anyone else present in the audience. With this sort of beat at your back, you could probably march on forever…", parse);
+		Text.NL();
+		Text.Add("…Fatigue is an irritation to be cast aside like so much old trash. Sleep a weakness that one must be weaned off. Forward, onward, and only victory or death can stop you…", parse);
+		Text.NL();
+		Text.Add("Alas, all good things must eventually come to an end. As the pounding of the drums grows louder and louder as the music approaches its zenith, Cveta coaxes a few more notes out of the tortured strings of her lyre and with three, final, thunderous notes, brings the entire beat to a stop. The effect is immediate: it feels as if the heart had been ripped out of a living body. It's only then that the dog-morph seems to realize how utterly exhausted - and exhilarated - he is, mopping off his damp fur with a paw.", parse);
+		Text.NL();
+		Text.Add("<i>“Thank you, Ernest,”</i> Cveta says as she carefully sets down her lyre. <i>“I believe I speak for everyone present when I say that you performed admirably just now. Please, do not trouble yourself; I will have someone else bring back your instruments.”</i> With that, she stands and takes in her cheering audience with a satisfied air.", parse);
+		//TODO
+		//#Party gains 10% stamina for the next twelve hours.
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("Once everyone has seated themselves and quieted down, Cveta stands and acknowledges her audience with a brisk nod. She's brought nothing but herself this time round, but has made every effort to doll herself up, her hair and feathers preened to perfection, the worst of the blemishes on her gown hidden from view. The bird-morph opens and shuts her beak a few times in what looks like a silent set of vocal exercises, then finally speaks.", parse);
+		Text.NL();
+		Text.Add("<i>“Today, I will be performing ‘The Prophet’.”</i>", parse);
+		Text.NL();
+		if(party.InParty(kiakai)) {
+			parse["name"] = kiakai.name;
+			Text.Add("<i>“‘The Prophet’,”</i> [name] says in a hushed whisper. <i>“I would never have expected to hear that sung here, so far away from the shrine. The hymn is sacred to Lady Aria, [playername]. Please, if nothing else, show the proper respect and remain silent while she sings.”</i>", parse);
+			Text.NL();
+		}
+		Text.Add("Absolute silence reigns in the clearing before the fire pit, the expectation in the air palpable as Cveta brings her gloved hands upwards, clasping them before her bosom. Slowly, she closes her eyes as if meditating, then raises her bowed head and bursts into song.", parse);
+		Text.NL();
+		Text.Add("Her voice is divine.", parse);
+		Text.NL();
+		Text.Add("The melody is slow and rolling, soft and sad as it reaches the ears of everyone present. It doesn't stop there, though, worming its way into your mind and permeating every single fiber of your being. You close your eyes and let Cveta's unearthly soprano wash over you and carry you away into another world…", parse);
+		Text.NL();
+		Text.Add("In your mind's eye, the music evokes images of pain. Of loss. Of long-lasting suffering, and of shining hope.", parse);
+		Text.NL();
+		Text.Add("It speaks of roads long-travelled, of destiny, of endings. Of struggle, and divine providence to face the trials that await you.", parse);
+		Text.NL();
+		Text.Add("It reminds you of the beauty and peace of Aria's temple, unspoiled and eternal. Of things that are worth fighting and dying for.", parse);
+		Text.NL();
+		Text.Add("There are no lyrics to the hymn, yet it says so much a language all can understand, even though the exact words heard differ from one to another.", parse);
+		Text.NL();
+		if(party.InParty(kiakai)) {
+			parse["name"] = kiakai.name;
+			parse = kiakai.ParserPronouns(parse);
+			Text.Add("A soft sniffle comes from [name] beside you; it seems that [heshe], too, has heard the music calling out to [himher]. Vaguely, you wonder just what memories Cveta's music has stirred up in [himher].", parse);
+			Text.NL();
+			Text.Add("<i>“I-I am all right,”</i> [heshe] says when [heshe] notices you looking at [himher], trying to wipe away [hisher] tears without being obvious about it. <i>“I just… ”</i> [HeShe] seems to have forgotten [hisher] request for you to keep quiet during the performance. <i>“‘The Prophet’ was composed to honor one of the first high priestesses to serve Aria, long before my time; it represents her journey, and the trials and tribulations she faced in serving the lady. Yet through all the hardships she endured, Aria guided her when she became lost, lent her strength when her own failed. Enough such that nothing was impossible, but not so that she was not tested.", parse);
+			Text.NL();
+			Text.Add("“It may be that the hymn reflects what we ourselves will have to face before peace can return to Eden once more,”</i> [heshe] says, suddenly contemplative.", parse);
+			Text.NL();
+		}
+		Text.Add("Cveta's song continues to flow through the outlaws' camp, surging and growing as it nears its conclusion. The hope of the hymn fills your spirit, and in that moment you feel stronger, more focused, more determined to go on; the bird-morph herself has raised her voice to the heavens, her wings spread slightly, and you can't help but think she does resemble an angel quite a fair bit…", parse);
+		Text.NL();
+		Text.Add("Finally, the music stops, but it takes a few moments for most of the audience to register that fact. Most of them are sniffling openly, and even the most hardened of the outlaws look slightly less curmudgeonly after sitting through the performance. Taking a few deep breaths to calm her voice, Cveta slowly opens her eyes and unclasps her hands from her breast.", parse);
+		//TODO
+		//#Party gains 10% spirit for the next 12 hours.
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("Satisfied that everyone who will be present is accounted for and paying attention, Cveta rises and acknowledges their presence with a dip of her head.", parse);
+		Text.NL();
+		Text.Add("<i>“Today, I will be performing ‘The Bells of Rigard’ by Alan Witt, serenade number three in D major. Please, calm yourself and enjoy the music.”</i>", parse);
+		Text.NL();
+		Text.Add("With that, the bird-morph reseats herself and lifting her lyre into her lap. She gives its strings a few experimental strums, then launches into the melody in earnest.", parse);
+		Text.NL();
+		Text.Add("Despite her telling you to calm yourself, it’s hard to follow that advice. The music that rings from her strings is sweet and cloying like a caramel confection, flowing through the air like syrup and moving across your [skinDesc] like a lover’s caress. Try as you might, you can’t help but feel your thoughts start drifting towards some of the more lusty dreams you’ve had of late, wondering how nice it would be if some of them could be made reality…", parse);
+		Text.NL();
+		Text.Add("A light breeze has picked up in the camp, and your gaze wanders back to Cveta. The songstress is huddled in on herself as she plays, and your eyes are drawn to the ruffled beauty of her vermillion feathers, the flow of her gown, and those long, dexterous fingers working away with both strings and pick, fingers that could easily be put to much, much better use…", parse);
+		Text.NL();
+		if(party.InParty(kiakai) || party.InParty(terry) || party.InParty(momo)) {
+			var comp;
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				comp = kiakai;
+			}, 1.0, function() { return party.InParty(kiakai); });
+			scenes.AddEnc(function() {
+				comp = terry;
+			}, 1.0, function() { return party.InParty(terry); });
+			scenes.AddEnc(function() {
+				comp = momo;
+			}, 1.0, function() { return party.InParty(momo); });
+			scenes.Get();
+			parse["name"] = comp.name;
+			parse = comp.ParserPronouns(parse);
+			Text.Add("A slow panting from beside you draws your attention, and you turn to find [name] breathing heavily, eyes slightly glazed over. [HeShe] notices you looking at [himher], and cracks a weak smile. <i>”You know, [playername]… have I ever told you how attractive you are?”</i>", parse);
+			Text.NL();
+		}
+		Text.Add("There’s no doubt about it, not with your breath growing ragged, ", parse);
+		if(player.FirstCock())
+			Text.Add("[cocks] throbbing and growing painfully stiff, ", parse);
+		if(player.FirstVag())
+			Text.Add("[vagDesc] becoming noticeably moist, ", parse);
+		Text.Add("and the prickling of a flush creeping over your [skinDesc] as it spreads through your body. Sure, music can set the mood, but surely it can’t go that far on its own! Yet the sweet, honeyed notes continue to gush from Cveta’s lyre, working their magic on everyone present in the audience. You can hear a few stifled groans - perhaps it’s only propriety that’s keeping some of the more raunchy outlaws from masturbating right there and then.", parse);
+		Text.NL();
+		Text.Add("The bird-morph herself is seemingly the only one unaffected by the strange qualities of her music, her eyes closed in concentration as the piece slowly comes to an end, her fingers slowing to coax out the last few chords from her lyre. With impeccable grace, Cveta sets down her lyre and stands, and there’s a definite glint of satisfaction in her eye as she surveys her handiwork.", parse);
+		Text.NL();
+		Text.Add("After sitting through all that, you definitely feel more seductive, for the lack of a better word to describe it. Well, at least until that melody gets out of your head…", parse);
+		
+		player.AddLustFraction(0.5);
+		//TODO
+		//#Party gains 10% libido for the next 12 hours.
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("When everyone is seated - be it on stools dragged in, fallen logs or on the dirt ground, Cveta stands, adjusts the silken sash about her waist, and addresses her audience.", parse);
+		Text.NL();
+		Text.Add("<i>“Today, I will be playing ‘The Magister’s Aurora’, composer unknown, three movements in G Major. Please, relax and enjoy yourselves.”</i>", parse);
+		Text.NL();
+		Text.Add("With that, she gathers her lyre in her arms and begins, supporting the instrument with her petite frame as she plays. The music is slow and crystal-clear, an amorphous, ethereal quality to it as she works the strings with her fingers. Each note is deliberately drawn out, allowed to ring through the air and fade away before it’s followed by the next, the slow tempo occasionally punctuated by bursts of liveliness that link the verses together like the chains of a necklace link gemstones.", parse);
+		Text.NL();
+		Text.Add("Gradually, you can’t help but feel your eyes growing heavier, and even though you know it would be poor form to fall asleep during a performance, the world about you seems darkened and muted. In its place, a sense of vastness, of countless stars in the sky, of enormous, immortal suns. Each one is visible to your mind’s eye in perfect detail, and though you know the intervening distance must be immense, all you’d need to do to touch them would be to simply reach out…", parse);
+		Text.NL();
+		Text.Add("The pace of the music quickens, and you’re vaguely aware that Cveta has begun to accompany her instrument with her voice, the music of birdsong melding with that of the lyre.", parse);
+		Text.NL();
+		Text.Add("There is more to existence than can ever be perceived. Taste the colors of music. Feel the song of light upon your skin. The more you learn, the less you can truly say you know as your awareness of the whole’s immense vastness expands.", parse);
+		Text.NL();
+		Text.Add("The music slows again once more; even though there are no lyrics, the tale within unfolds before your ears. The magister sees the aurora - a splash of light in the winter sky - and wonders of the origins of such beauty. He crafts an elaborate system of lenses and mirrors to study it, makes charts and notes as to when the phenomenon appears, eventually ends up devoting his life to uncovering the secret the mysterious light display holds.", parse);
+		Text.NL();
+		Text.Add("Even unto his death, the magister never discovers the source of the aurora, yet through chasing its origins, learns so much to pass on to the next generation.", parse);
+		Text.NL();
+		Text.Add("Gradually, the melody begins to fade, the pause between each note lengthening, the movements of Cveta’s fingers still smooth and practiced. With great deliberation, she plucks the strings of her lyre for the final time, then closes her eyes and bows her head even as the veil begins to lift from your own thoughts, now sharp, refreshed and possessed of a clarity you’d scarcely thought possible.", parse);
+		//TODO
+		//#Party gains 10% intelligence for the next 12 hours.
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("Once everyone is calmed - a few of the more unruly outlaws shushed into silence by their peers - Cveta stands and hefts her violin from its case, no simple undertaking for her small frame.", parse);
+		Text.NL();
+		parse["dawn"] = dawn ? "morning" : "evening";
+		Text.Add("<i>“Thank you all for being present this [dawn],”</i> she says. <i>“Today, I will be playing ‘Defiance’ by Fenris Alwyn. Do enjoy; I believe it represents well what we all feel about the excesses of Rigard.”</i>", parse);
+		Text.NL();
+		Text.Add("Without further ado, the songstress launches into a blitz of music, an explosive start that only grows more intense as tortured notes are wrung out of her violin’s strings like water out of a stone. The furious melody that results is quick and lithe, as slippery as greased lightning, and possessed of a rampant, resilient energy that seeks release by… well, practically anything, in fact. If you calm your mind and slow your breathing, you can practically <i>feel</i> it seeping into you, tying your muscles in knots, coiling tight your thoughts, waiting for sudden release.", parse);
+		Text.NL();
+		parse["comp"] = party.Num() == 2 ? party.Get(1).name :
+		                party.Num() >  2 ? "your companions" : "";
+		parse["c"] = party.Num() > 1 ? Text.Parse(", even [comp],", parse) : "";
+		Text.Add("You’re not the only one to fall under the spell of Cveta’s music - practically everyone else present[c] is looking increasingly alert and wound-up. The watch and patrols aren’t going to be napping on the job today, that’s for sure.", parse);
+		Text.NL();
+		Text.Add("Your heart is pounding, your blood fire and lightning in your veins. Even Cveta herself isn’t impervious to her own performance - the songstress’ arms and fingers are a blur as she plays, and you wonder if she’s going to have to replace the strings on her violin when she’s done. Listening to Cveta, you could run forever, leap over walls and chasms, swim the mightiest ocean - and all without breaking a sweat.", parse);
+		Text.NL();
+		Text.Add("As impossible as it sounds, the screaming from Cveta’s violin can only intensify, most of the outlaws shouting and chanting along to the music, fists, paws and claws alike pumping in the air, the resultant rabble of noise a twin to the screeching or Cveta’s violin up to the point she finishes with a brazen flourish, and lets the bow in her hand hang limply by her side.", parse);
+		Text.NL();
+		Text.Add("The sudden silence hits like a ton of bricks, a deathly quietness hanging about the fire pit like a thick blanket. Then, and only then, is the inferno in your body allowed to slow.", parse);
+		//TODO
+		//#Party gains 10% dexterity for the next 12 hours.
+	}, 1.0, function() { return cveta.Violin(); });
+	scenes.AddEnc(function() {
+		parse["dawn"] = dawn ? "morning" : "evening";
+		Text.Add("It’s a little while before everyone is seated and settled down - seems like everyone in camp is a little restless this [dawn] for some reason - but at last, relative silence falls over the fire pit, and the show can go on.", parse);
+		Text.NL();
+		Text.Add("<i>“Today,”</i> Cveta announces as she stands and dusts off the seat of her gown, <i>“I will be singing ‘Golden Aeons’, by Lady Thera of the equally Golden Plains. Please, calm yourselves and enjoy what I have to offer.”</i>", parse);
+		Text.NL();
+		Text.Add("With that, she takes a deep breath, hums a little, and bursts into song.", parse);
+		Text.NL();
+		Text.Add("Instead of the high pitch of Cveta’s usual soprano, the songstress intentionally depresses her voice, projecting forth a rich, mellow melody and letting it sweep over her audience like a wave of gold over a shoreline. It’s a salve for the ears, and you can’t help but feel more relaxed as she continues to sing, letting your aches and worries be lifted away by the tide of her music.", parse);
+		Text.NL();
+		if(party.InParty(momo)) {
+			Text.Add("<i>“She’s pretty good, don’t you think?”</i> Momo says cheerfully, her tail swaying in time with Cveta’s singing. <i>“Although you’ve got to wonder how she crams a voice like that into her itty bitty self. You think she’d appreciate a nice meal? Poor thing could definitely use some meat on her bones.”</i>", parse);
+			Text.NL();
+		}
+		Text.Add("There’s warmth in the music, ridiculous as it sounds. It’s in the air, filling your lungs with each breath you take, thick and cloying to the touch as it seeps through your skin and flesh, right down to the bone. It fills the little world that consists of the fire pit in the middle of the outlaws’ camp, which so just happens to be the entirety of the world at the moment. Hardened and weary as each and every outlaw in the audience is - and as they have every right to be - at least they look less resentful, less downtrodden after the ministrations of Cveta’s smooth, silken voice.", parse);
+		Text.NL();
+		Text.Add("The songstress herself is lost in the effort of bringing forth her music, her single uncovered eye locked onto something unseen in the far distance, her bosom heaving with each breath she draws to turn into song. This is her gift, which she has shared with you, the warmth of the slow, drawling music filling you up and reminding you of sweet summer scents and fruit fresh from the bough, a warmth that lingers in the core of your chest and makes you want to share it with others…", parse);
+		Text.NL();
+		Text.Add("At long last, Cveta’s song begins to fade, the songstress lingering on her last few notes before letting the music trail off into nothingness. With careful deliberation, she folds in upon herself, takes a step back, then casts her gaze over her audience to survey her handiwork.", parse);
+		//TODO
+		//#Party gains 10% charisma for the next 12 hours.
+	}, 1.0, function() { return true; });
+	
+	scenes.Get();
+	
+	Text.NL();
+	parse["dawn"] = dawn ? "morning" : "evening";
+	Text.Add("<i>“I am done,”</i> the bird-morph states flatly, taking a full curtsey to a smattering of applause. <i>“Thank you for being here this [dawn].”</i> With that, she gathers herself and steps away from the fire pit, quickly slipping away into the audience and out of sight. One by one, the outlaws rise from their feet and wander off, throwing glances back to the fire pit, as if hoping there'll be an encore.", parse);
+	Text.NL();
+	parse["dawn"] = dawn ? "risen" : "set";
+	Text.Add("It's with reluctance that you pry yourself from your seat and head off about your business, the melody of Cveta's music still ringing in your head. Above you, the sun has already [dawn] - goodness, has so much time really passed?", parse);
+	Text.Flush();
+	
+	cveta.relation.IncreaseStat(25, 2);
+	world.TimeStep({hour : 2});
+	
+	Gui.NextPrompt();
+}
