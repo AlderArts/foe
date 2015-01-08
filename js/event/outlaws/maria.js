@@ -500,6 +500,8 @@ Scenes.Maria.ForestCamp = function() {
 		hisher     : player.mfTrue("his", "her")
 	};
 	
+	party.location = world.loc.Outlaws.Camp;
+	
 	Text.NL();
 	Text.Add("She turns on you abruptly, her tits set to jiggling at the motion. She cautions you to wait here while she informs the guards of your arrival. Sitting down behind a rooty embankment, you lean against the dirt and consider your situation.", parse);
 	Text.Flush();
@@ -601,8 +603,10 @@ Scenes.Maria.ForestEnd = function() {
 	Text.Add("The journey back takes less time than the walk there had. Along the way, Maria points out small markings in the brush and on the trees, and explains how to use them to find the camp. Armed with the knowledge of the Outlaw's signs you are reasonably certain you can find your way back whenever you wish.");
 	Text.Flush();
 	
+	party.location = world.loc.Forest.Outskirts;
+	
 	gameCache.flags["OutlawsRep"] = 1;
 	
 	world.TimeStep({hour: 3});
-	Gui.NextPrompt(PrintDefaultOptions);
+	Gui.NextPrompt();
 }

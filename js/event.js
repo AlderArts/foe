@@ -78,8 +78,9 @@ MoveToLocation = function(location, timestep) {
 
 Event.prototype.SleepFunc = function() {
 	SetGameState(GameState.Event);
-	Text.Newline();
-	Text.AddOutput("You sleep for 8 hours.");
+	Text.NL();
+	Text.Add("You sleep for 8 hours.");
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		Text.Clear();
 		var func = function() {
@@ -95,8 +96,9 @@ Event.prototype.SleepFunc = function() {
 
 Event.prototype.WaitFunc = function() {
 	SetGameState(GameState.Event);
-	Text.Newline();
-	Text.AddOutput("You wait for 1 hour.");
+	Text.NL();
+	Text.Add("You wait for 1 hour.");
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		world.TimeStep({hour: 1});
 		PrintDefaultOptions();
@@ -148,7 +150,7 @@ Event.prototype.PrintDesc = function() {
 		if(isFunction(this.description))
 			this.description();
 		else
-			Text.AddOutput(this.description);
+			Text.Add(this.description);
 	}
 	
 	for(var i = 0; i < this.links.length; i++) {
@@ -157,7 +159,7 @@ Event.prototype.PrintDesc = function() {
 			if(isFunction(link.print))
 				link.print();
 			else
-				Text.AddOutput(link.print);
+				Text.Add(link.print);
 		}
 	}
 	
@@ -167,7 +169,7 @@ Event.prototype.PrintDesc = function() {
 			if(isFunction(e.print))
 				e.print();
 			else
-				Text.AddOutput(e.print);
+				Text.Add(e.print);
 		}
 	}
 	
@@ -175,15 +177,16 @@ Event.prototype.PrintDesc = function() {
 		if(isFunction(this.endDescription))
 			this.endDescription();
 		else
-			Text.AddOutput(this.endDescription);
+			Text.Add(this.endDescription);
 	}
 	
 	// At safe locations you can sleep and save
 	if(party.location.safe()) {
-		Text.Newline();
-		Text.AddOutput("<b>This is a safe location, you can sleep and save here.</b>");
-		Text.Newline();
+		Text.NL();
+		Text.Add("<b>This is a safe location, you can sleep and save here.</b>");
+		Text.NL();
 	}
+	Text.Flush();
 }
 
 function Link(name, visibleCondition, enabledCondition, print, func, tooltip) {

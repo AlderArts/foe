@@ -76,6 +76,7 @@ Cveta.prototype.ToStorage = function() {
 
 // Schedule TODO
 Cveta.prototype.IsAtLocation = function(location) {
+	location = location || party.location;
 	return true;
 }
 
