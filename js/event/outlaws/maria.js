@@ -77,7 +77,10 @@ Maria.prototype.ToStorage = function() {
 
 // Schedule
 Maria.prototype.IsAtLocation = function(location) {
-	return true;
+	location = location || party.location;
+	if(location == world.loc.Outlaws.Camp)
+		return (world.time.hour >= 7 && world.time.hour < 22);
+	return false;
 }
 
 
@@ -110,10 +113,10 @@ Maria.prototype.Act = function(encounter, activeChar) {
 }
 
 
-// Party interaction
-Maria.prototype.Interact = function() {
-	Text.Clear();
-	Text.Add("Rawr Imma archer.");
+// Camp interaction
+Scenes.Maria.CampInteract = function() {
+	Text.Clear(); //TODO
+	Text.Add("PLACEHOLDER. Rawr Imma archer.");
 	
 	
 	if(DEBUG) {
@@ -127,9 +130,30 @@ Maria.prototype.Interact = function() {
 	}
 	Text.Flush();
 	
+	Scenes.Maria.CampPrompt();
+	/*
 	Gui.NextPrompt(function() {
 		PartyInteraction();
 	});
+	*/
+}
+
+Scenes.Maria.CampPrompt = function() {
+	var parse = {
+		
+	};
+	
+	//[name]
+	var options = new Array();
+	if(cveta.flags["Met"] == Cveta.Met.MariaTalk) {
+		options.push({ nameStr : "Princess",
+			func : function() {
+				Scenes.Cveta.MariaTalkRepeat();
+			}, enabled : cveta.WakingTime(),
+			tooltip : "You've changed your mind. If Maria really can't sort out this so-called princess, maybe you can."
+		});
+	}
+	Gui.SetButtonsFromList(options, true);
 }
 
 Scenes.Maria.ForestMeeting = function() {

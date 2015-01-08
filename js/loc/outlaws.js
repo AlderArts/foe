@@ -30,6 +30,18 @@ world.loc.Outlaws.Camp.links.push(new Link(
 ));
 
 world.loc.Outlaws.Camp.events.push(new Link(
+	"Maria", function() {
+		var time = maria.IsAtLocation();
+		return time;
+	}, true,
+	function() {
+		//TODO
+	},
+	function() {
+		Scenes.Maria.CampInteract();
+	}
+));
+world.loc.Outlaws.Camp.events.push(new Link(
 	"Cveta", function() {
 		var met  = cveta.flags["Met"] >= Cveta.Met.AccessibleTalk;
 		var time = cveta.WakingTime();
@@ -41,25 +53,6 @@ world.loc.Outlaws.Camp.events.push(new Link(
 	},
 	function() {
 		//TODO
-	}
-));
-
-world.loc.Outlaws.Camp.events.push(new Link(
-	"Princess", function() {
-		var met  = cveta.flags["Met"] == Cveta.Met.MariaTalk;
-		var time = cveta.WakingTime();
-		return met && time;
-	}, true,
-	function() {
-		var met  = cveta.flags["Met"] == Cveta.Met.MariaTalk;
-		var time = cveta.WakingTime();
-		if(met && time) {
-			Text.Add("You remember what Maria talked to you about before. If she really can't sort out this so-called princess, maybe you can.");
-			Text.NL();
-		}
-	},
-	function() {
-		Scenes.Cveta.MariaTalkRepeat();
 	}
 ));
 
