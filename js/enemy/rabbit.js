@@ -484,7 +484,8 @@ Scenes.Lagomorph.GroupLossOnPlainsBrainy = function(enc) {
 		tongueDesc : function() { return player.TongueDesc(); },
 		cockDesc   : function() { return p1cock.Short(); },
 		cockTip    : function() { return p1cock.TipShort(); },
-		multiCockDesc : function() { return player.MultiCockDesc(); }
+		multiCockDesc : function() { return player.MultiCockDesc(); },
+		vagDesc    : function() { return player.FirstVag().Short(); }
 	};
 	
 	parse["comp"] = party.Num() == 2 ? party.Get(1).name :
