@@ -67,7 +67,7 @@ world.loc.Plains.Crossroads.links.push(new Link(
 	function() { return gameCache.flags["FarmLockout"] == 0; },
 	function() {
 		if(gameCache.flags["FarmFound"] != 0)
-			Text.AddOutput("Go to the farm? ");
+			Text.Add("Go to the farm? ");
 	},
 	function() {
 		MoveToLocation(world.loc.Farm.Fields, {minute: 30});
@@ -79,8 +79,8 @@ world.loc.Plains.Crossroads.links.push(new Link(
 // Gwendy's farm, the fields
 //
 world.loc.Farm.Fields.description = function() {
-	Text.AddOutput("Fields.");
-	Text.Newline();
+	Text.Add("Fields.");
+	Text.NL();
 }
 
 world.loc.Farm.Fields.enc = new EncounterTable();
@@ -117,7 +117,7 @@ world.loc.Farm.Fields.enc.AddEnc(function() {
 world.loc.Farm.Fields.links.push(new Link(
 	"Crossroads", true, true,
 	function() {
-		Text.AddOutput("Leave for crossroads? ");
+		Text.Add("Leave for crossroads? ");
 	},
 	function() {
 		MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
@@ -126,27 +126,27 @@ world.loc.Farm.Fields.links.push(new Link(
 world.loc.Farm.Fields.links.push(new Link(
 	"Barn", true, true,
 	function() {
-		Text.AddOutput("Go into the barn? ");
+		Text.Add("Go into the barn? ");
 	},
 	function() {
 		MoveToLocation(world.loc.Farm.Barn, {minute: 5});
 	}
 ));
 world.loc.Farm.Fields.endDescription = function() {
-	Text.AddOutput("You weigh your options.");
+	Text.Add("You weigh your options.");
 }
 
 //
 // Gwendy's barn
 //
 world.loc.Farm.Barn.description = function() {
-	Text.AddOutput("Barn.");
-	Text.Newline();
+	Text.Add("Barn.");
+	Text.NL();
 }
 world.loc.Farm.Barn.links.push(new Link(
 	"Fields", true, true,
 	function() {
-		Text.AddOutput("Go outside? ");
+		Text.Add("Go outside? ");
 	},
 	function() {
 		MoveToLocation(world.loc.Farm.Fields, {minute: 5});
@@ -155,14 +155,14 @@ world.loc.Farm.Barn.links.push(new Link(
 world.loc.Farm.Barn.links.push(new Link(
 	"Loft", true, true,
 	function() {
-		Text.AddOutput("Go up to Gwendy's loft? ");
+		Text.Add("Go up to Gwendy's loft? ");
 	},
 	function() {
 		MoveToLocation(world.loc.Farm.Loft, {minute: 5});
 	}
 ));
 world.loc.Farm.Barn.endDescription = function() {
-	Text.AddOutput("You weigh your options.");
+	Text.Add("You weigh your options.");
 }
 
 //
@@ -172,20 +172,20 @@ world.SaveSpots["GwendysLoft"] = world.loc.Farm.Loft;
 world.loc.Farm.Loft.SaveSpot   = "GwendysLoft";
 world.loc.Farm.Loft.safe       = function() { return true; };
 world.loc.Farm.Loft.description = function() {
-	Text.AddOutput("Gwendy's loft. ");
-	Text.Newline();
+	Text.Add("Gwendy's loft. ");
+	Text.NL();
 }
 world.loc.Farm.Loft.links.push(new Link(
 	"Climb down", true, true,
 	function() {
-		Text.AddOutput("Go down? ");
+		Text.Add("Go down? ");
 	},
 	function() {
 		MoveToLocation(world.loc.Farm.Barn, {minute: 5});
 	}
 ));
 world.loc.Farm.Loft.endDescription = function() {
-	Text.AddOutput("You weigh your options.");
+	Text.Add("You weigh your options.");
 }
 
 

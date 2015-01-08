@@ -118,7 +118,7 @@ Scenes.Krawitz.EntitySuspicion = function(entity) {
 // Mansion
 //
 world.loc.Rigard.Krawitz.street.description = function() {
-	Text.AddOutput("You are in front of Krawitz's estate.<br/>");
+	Text.Add("You are in front of Krawitz's estate.<br/>");
 }
 
 world.SaveSpots["Krawitz"] = world.loc.Rigard.Krawitz.street;
@@ -139,8 +139,8 @@ world.loc.Rigard.Krawitz.street.links.push(new Link(
 	"Back street", function() { return rigard.Krawitz["Work"] == 1;}, true,
 	function() {
 		if(rigard.Krawitz["Work"] == 1) {
-			Text.AddOutput("Enter the servants' quarters through the back entrance?");
-			Text.Newline();
+			Text.Add("Enter the servants' quarters through the back entrance?");
+			Text.NL();
 		}
 	},
 	function() {
@@ -150,7 +150,7 @@ world.loc.Rigard.Krawitz.street.links.push(new Link(
 world.loc.Rigard.Krawitz.street.links.push(new Link(
 	"Grounds", true, function() { return world.time.hour >= 20; },
 	function() {
-		Text.AddOutput("Sneak into the main grounds? Better do this in the late hours of the day, though not too late. You suspect you'll need all the time you can get once inside.<br/>");
+		Text.Add("Sneak into the main grounds? Better do this in the late hours of the day, though not too late. You suspect you'll need all the time you can get once inside.<br/>");
 	},
 	function() {
 		Scenes.Krawitz.ApproachGates();
@@ -165,13 +165,13 @@ world.loc.Rigard.Krawitz.grounds.enc.AddEnc(function() { return Scenes.Krawitz.P
 world.loc.Rigard.Krawitz.grounds.enc.AddEnc(function() { return Scenes.Krawitz.WanderingServants;}, 1.0, function() { return !Scenes.Krawitz.stat.ServantSpikedWine; });
 
 world.loc.Rigard.Krawitz.grounds.description = function() {
-	Text.AddOutput("There is a lush garden spreading out before you, providing many hiding spots, should you need to avoid patrolling guardsmen or servants. Three buildings line the side of the grounds; if your guesses are correct, the one to your left houses the servants and the one on the right is some sort of bathhouse. ");
+	Text.Add("There is a lush garden spreading out before you, providing many hiding spots, should you need to avoid patrolling guardsmen or servants. Three buildings line the side of the grounds; if your guesses are correct, the one to your left houses the servants and the one on the right is some sort of bathhouse. ");
 	if(!Scenes.Krawitz.stat.Orgy)
-		Text.AddOutput("Sounds of decidedly feminine laughter echo between the stone pillars. Clearly someone has a party going on.");
+		Text.Add("Sounds of decidedly feminine laughter echo between the stone pillars. Clearly someone has a party going on.");
 	else
-		Text.AddOutput("Sounds of fornication emenating from the bathhouse echo throughout the district. You should probably stay clear of it for now.");
-	Text.Newline();
-	Text.AddOutput("At the back of the estate stands the main building, a two storey mansion.");
+		Text.Add("Sounds of fornication emenating from the bathhouse echo throughout the district. You should probably stay clear of it for now.");
+	Text.NL();
+	Text.Add("At the back of the estate stands the main building, a two storey mansion.");
 }
 
 world.loc.Rigard.Krawitz.grounds.onEntry = function() {
@@ -389,8 +389,8 @@ world.loc.Rigard.Krawitz.grounds.links.push(new Link(
 world.loc.Rigard.Krawitz.grounds.links.push(new Link(
 	"Street", true, true,
 	function() {
-		Text.Newline();
-		Text.AddOutput("If you feel you’ve caused enough trouble for one night, you could leave over the fence. You won’t be able to return again, as people will be a lot more suspicious of newcomers now.");
+		Text.NL();
+		Text.Add("If you feel you’ve caused enough trouble for one night, you could leave over the fence. You won’t be able to return again, as people will be a lot more suspicious of newcomers now.");
 	},
 	function() {
 		Text.Clear();
@@ -441,7 +441,7 @@ world.loc.Rigard.Krawitz.Mansion.hall.description = function() {
 world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
 	"Grounds", true, true,
 	function() {
-		Text.AddOutput("Go outside?<br/>");
+		Text.Add("Go outside?<br/>");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Krawitz.grounds);
@@ -506,7 +506,7 @@ world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
 world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
 	"Storeroom", true, true,
 	function() {
-		Text.AddOutput("Go to the storeroom?<br/>");
+		Text.Add("Go to the storeroom?<br/>");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Krawitz.Mansion.storeroom);
@@ -516,7 +516,7 @@ world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
 world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
 	"Study", true, function() { return Scenes.Krawitz.stat.Orgy || (!Scenes.Krawitz.stat.TFdKrawitz && Scenes.Krawitz.stat.KrawitzFood != 3); },
 	function() {
-		Text.AddOutput("Go to Krawitz' study?<br/>");
+		Text.Add("Go to Krawitz' study?<br/>");
 	},
 	function() {
 		party.location = world.loc.Rigard.Krawitz.Mansion.study;
@@ -838,7 +838,7 @@ world.loc.Rigard.Krawitz.Mansion.storeroom.events.push(new Link(
 // Mansion: Study
 //
 world.loc.Rigard.Krawitz.Mansion.study.description = function() {
-	Text.AddOutput("The room is empty, though the fireplace is still blazing merrily. On a nearby table, a half eaten meal is growing cold.");
+	Text.Add("The room is empty, though the fireplace is still blazing merrily. On a nearby table, a half eaten meal is growing cold.");
 }
 
 world.loc.Rigard.Krawitz.Mansion.study.links.push(new Link(

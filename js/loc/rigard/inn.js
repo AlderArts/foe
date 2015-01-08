@@ -87,7 +87,7 @@ world.loc.Rigard.Inn.penthouse.events.push(new Link(
 world.loc.Rigard.Inn.common.links.push(new Link(
 	"Backroom", true, false,
 	function() {
-		Text.AddOutput("Go backroom?<br/>");
+		Text.Add("Go backroom?<br/>");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Inn.backroom);
@@ -96,7 +96,7 @@ world.loc.Rigard.Inn.common.links.push(new Link(
 world.loc.Rigard.Inn.common.links.push(new Link(
 	"Cellar", true, false,
 	function() {
-		Text.AddOutput("Go cellar?<br/>");
+		Text.Add("Go cellar?<br/>");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Inn.cellar);
@@ -1703,7 +1703,7 @@ world.loc.Rigard.Inn.room.events.push(new Link(
 				name   : companion.name,
 				hisher : companion.hisher()
 			};
-			Text.AddOutput("[name] is sitting on [hisher] bed, watching you. ", parse);
+			Text.Add("[name] is sitting on [hisher] bed, watching you. ", parse);
 		}
 	},
 	function() {
@@ -1772,14 +1772,14 @@ world.loc.Rigard.Inn.room.SleepFunc = function() {
 world.loc.Rigard.Inn.room.links.push(new Link(
 	"Leave", true, true,
 	function() {
-		Text.AddOutput("You could head back downstairs. ");
+		Text.Add("You could head back downstairs. ");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Inn.common, {minute: 5});
 	}
 ));
 world.loc.Rigard.Inn.room.endDescription = function() {
-	Text.AddOutput("You weigh your options.");
+	Text.Add("You weigh your options.");
 }
 
 // SET UP EVENTS/LINKS

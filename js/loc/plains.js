@@ -125,8 +125,8 @@ world.loc.Plains.Nomads.Fireplace.endDescription = function() {
 // Crossroads
 //
 world.loc.Plains.Crossroads.description = function() {
-	Text.AddOutput("You are at the crossroads.");
-	Text.Newline();
+	Text.Add("You are at the crossroads.");
+	Text.NL();
 }
 
 world.loc.Plains.Crossroads.enc = new EncounterTable();
@@ -257,7 +257,7 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 world.loc.Plains.Crossroads.links.push(new Link(
 	"Nomads", true, true,
 	function() {
-		Text.AddOutput("Go to the nomad camp? ");
+		Text.Add("Go to the nomad camp? ");
 	},
 	function() {
 		MoveToLocation(world.loc.Plains.Nomads.Fireplace, {minute: 15});
@@ -267,7 +267,7 @@ world.loc.Plains.Crossroads.links.push(new Link(
 world.loc.Plains.Crossroads.links.push(new Link(
 	"Rigard", true, true,
 	function() {
-		Text.AddOutput("There is a large city in the distance. ");
+		Text.Add("There is a large city in the distance. ");
 	},
 	function() {
 		if(miranda.flags["Met"] != 0 && Math.random() < 0.1) {
@@ -300,7 +300,7 @@ world.loc.Plains.Crossroads.links.push(new Link(
 world.loc.Plains.Crossroads.links.push(new Link(
 	"Hills", true, true,
 	function() {
-		Text.AddOutput("A set of low hills rise in the distance. ");
+		Text.Add("A set of low hills rise in the distance. ");
 	},
 	function() {
 		MoveToLocation(world.loc.Highlands.Hills, {hour: 2});
@@ -309,7 +309,7 @@ world.loc.Plains.Crossroads.links.push(new Link(
 world.loc.Plains.Crossroads.links.push(new Link(
 	"Forest", true, true,
 	function() {
-		Text.AddOutput("The large forest is off in the distance. ");
+		Text.Add("The large forest is off in the distance. ");
 	},
 	function() {
 		MoveToLocation(world.loc.Forest.Outskirts, {hour: 2});
@@ -318,14 +318,14 @@ world.loc.Plains.Crossroads.links.push(new Link(
 world.loc.Plains.Crossroads.links.push(new Link(
 	"Desert", true, true,
 	function() {
-		Text.AddOutput("There is a desert. ");
+		Text.Add("There is a desert. ");
 	},
 	function() {
 		MoveToLocation(world.loc.Desert.Drylands, {hour: 2});
 	}
 ));
 world.loc.Plains.Crossroads.endDescription = function() {
-	Text.AddOutput("You weigh your options.<br/>");
+	Text.Add("You weigh your options.<br/>");
 }
 
 //
@@ -360,7 +360,7 @@ world.loc.Plains.Gate.description = function() {
 world.loc.Plains.Gate.links.push(new Link(
 	"Crossroads", true, true,
 	function() {
-		Text.AddOutput("Go back to the crossroads? ");
+		Text.Add("Go back to the crossroads? ");
 	},
 	function() {
 		MoveToLocation(world.loc.Plains.Crossroads, {hour: 2});
@@ -369,7 +369,7 @@ world.loc.Plains.Gate.links.push(new Link(
 world.loc.Plains.Gate.links.push(new Link(
 	"Rigard", true, true,
 	function() {
-		Text.AddOutput("Enter the city? ");
+		Text.Add("Enter the city? ");
 	},
 	function() {
 		// TODO
@@ -407,7 +407,7 @@ world.loc.Plains.Gate.links.push(new Link(
 world.loc.Plains.Gate.links.push(new Link(
 	"Slums", true, true,
 	function() {
-		Text.AddOutput("Go to the slums outside the walls? ");
+		Text.Add("Go to the slums outside the walls? ");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 15});
@@ -416,7 +416,7 @@ world.loc.Plains.Gate.links.push(new Link(
 world.loc.Plains.Gate.links.push(new Link(
 	"King's road", true, true,
 	function() {
-		Text.AddOutput("Continue past the city to the plains beyond? ");
+		Text.Add("Continue past the city to the plains beyond? ");
 	},
 	function() {
 		MoveToLocation(world.loc.KingsRoad.Road, {hour: 1});
@@ -430,6 +430,6 @@ world.loc.Plains.Gate.events.push(new Link(
 	}
 ))
 world.loc.Plains.Gate.endDescription = function() {
-	Text.AddOutput("You weigh your options.<br/>");
+	Text.Add("You weigh your options.<br/>");
 }
 

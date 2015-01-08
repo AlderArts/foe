@@ -14,13 +14,13 @@ world.loc.Highlands = {
 // Hills, main hunting grounds
 //
 world.loc.Highlands.Hills.description = function() {
-	Text.AddOutput("This place looks hilly. Looks good for hunting.<br/>");
+	Text.Add("This place looks hilly. Looks good for hunting.<br/>");
 }
 
 world.loc.Highlands.Hills.links.push(new Link(
 	"Crossroads", true, true,
 	function() {
-		Text.AddOutput("Behind you is the way back to the crossroads.<br/>");
+		Text.Add("Behind you is the way back to the crossroads.<br/>");
 	},
 	function() {
 		MoveToLocation(world.loc.Plains.Crossroads, {hour: 2});
@@ -29,7 +29,7 @@ world.loc.Highlands.Hills.links.push(new Link(
 world.loc.Highlands.Hills.links.push(new Link(
 	"Den entrance", true, true,
 	function() {
-		Text.AddOutput("A sheer cliffside rise in the distance. Somehow, it gives off an ominous feeling. ");
+		Text.Add("A sheer cliffside rise in the distance. Somehow, it gives off an ominous feeling. ");
 	},
 	function() {
 		MoveToLocation(world.loc.DragonDen.Entry, {minute: 15});
@@ -59,5 +59,5 @@ world.loc.Highlands.Hills.enc.AddEnc(function() {
 }, 1.0, function() { return momo.Wandering(); });
 
 world.loc.Highlands.Hills.endDescription = function() {
-	Text.AddOutput("What do you do?<br/>");
+	Text.Add("What do you do?<br/>");
 }

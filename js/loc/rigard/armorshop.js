@@ -10,7 +10,7 @@ Scenes.Rigard.ArmorShop.IsOpen = function() {
 
 
 world.loc.Rigard.ShopStreet.ArmorShop.description = function() {
-	Text.AddOutput("You are in the armor shop.<br/>");
+	Text.Add("You are in the armor shop.<br/>");
 }
 
 world.loc.Rigard.ShopStreet.ArmorShop.events.push(new Link(
@@ -28,7 +28,7 @@ world.loc.Rigard.ShopStreet.ArmorShop.events.push(new Link(
 ));
 
 world.loc.Rigard.ShopStreet.ArmorShop.endDescription = function() {
-	Text.AddOutput("Where you go?<br/>");
+	Text.Add("Where you go?<br/>");
 }
 
 Scenes.Rigard.ArmorShop.Prompt = function() {

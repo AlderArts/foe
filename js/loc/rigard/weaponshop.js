@@ -9,7 +9,7 @@ Scenes.Rigard.WeaponShop.IsOpen = function() {
 }
 
 world.loc.Rigard.ShopStreet.WeaponShop.description = function() {
-	Text.AddOutput("You are in the weapon shop.<br/>");
+	Text.Add("You are in the weapon shop.<br/>");
 }
 
 world.loc.Rigard.ShopStreet.WeaponShop.events.push(new Link(
@@ -27,7 +27,7 @@ world.loc.Rigard.ShopStreet.WeaponShop.events.push(new Link(
 ));
 
 world.loc.Rigard.ShopStreet.WeaponShop.endDescription = function() {
-	Text.AddOutput("Where you go?<br/>");
+	Text.Add("Where you go?<br/>");
 }
 
 Scenes.Rigard.WeaponShop.Prompt = function() {

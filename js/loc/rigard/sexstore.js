@@ -9,7 +9,7 @@ Scenes.Rigard.OddShop.IsOpen = function() {
 }
 
 world.loc.Rigard.ShopStreet.OddShop.description = function() {
-	Text.AddOutput("You are in the odd shop.<br/>");
+	Text.Add("You are in the odd shop.<br/>");
 }
 
 world.loc.Rigard.ShopStreet.OddShop.events.push(new Link(
@@ -27,7 +27,7 @@ world.loc.Rigard.ShopStreet.OddShop.events.push(new Link(
 ));
 
 world.loc.Rigard.ShopStreet.OddShop.endDescription = function() {
-	Text.AddOutput("Where you go?<br/>");
+	Text.Add("Where you go?<br/>");
 }
 
 Scenes.Rigard.OddShop.Prompt = function() {

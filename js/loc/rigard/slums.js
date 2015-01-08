@@ -46,7 +46,7 @@ world.loc.Rigard.Slums.gate.onEntry = function() {
 world.loc.Rigard.Slums.gate.links.push(new Link(
 	"Rigard", true, true,
 	function() {
-		Text.AddOutput("Enter the city? ");
+		Text.Add("Enter the city? ");
 	},
 	function() {
 		Text.Clear();
@@ -76,7 +76,7 @@ world.loc.Rigard.Slums.gate.links.push(new Link(
 world.loc.Rigard.Slums.gate.links.push(new Link(
 	"Main gate", true, true,
 	function() {
-		Text.AddOutput("Go to the main gate? ");
+		Text.Add("Go to the main gate? ");
 	},
 	function() {
 		MoveToLocation(world.loc.Plains.Gate, {minute: 15});
@@ -85,7 +85,7 @@ world.loc.Rigard.Slums.gate.links.push(new Link(
 world.loc.Rigard.Slums.gate.links.push(new Link(
 	"Tavern", true, true,
 	function() {
-		Text.AddOutput("Go to the tavern? ");
+		Text.Add("Go to the tavern? ");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Tavern.common, {minute: 10});
@@ -94,7 +94,7 @@ world.loc.Rigard.Slums.gate.links.push(new Link(
 world.loc.Rigard.Slums.gate.links.push(new Link(
 	"Lake", true, true,
 	function() {
-		Text.AddOutput("Go to the lake? ");
+		Text.Add("Go to the lake? ");
 	},
 	function() {
 		MoveToLocation(world.loc.Lake.Shore, {minute: 45});
@@ -109,5 +109,5 @@ world.loc.Rigard.Slums.gate.events.push(new Link(
 	}
 ));
 world.loc.Rigard.Slums.gate.endDescription = function() {
-	Text.AddOutput("Nothing else to see here.<br/>");
+	Text.Add("Nothing else to see here.<br/>");
 }

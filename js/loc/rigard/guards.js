@@ -99,13 +99,13 @@ world.loc.Rigard.Gate.endDescription = function() {
 // Barracks
 //
 world.loc.Rigard.Barracks.common.description = function() {
-	Text.AddOutput("You are at the barracks common room.<br/>");
+	Text.Add("You are at the barracks common room.<br/>");
 }
 
 world.loc.Rigard.Barracks.common.links.push(new Link(
 	"Gate", true, true,
 	function() {
-		Text.AddOutput("The gate is just outside.<br/>");
+		Text.Add("The gate is just outside.<br/>");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Gate, {minute: 5});
@@ -114,7 +114,7 @@ world.loc.Rigard.Barracks.common.links.push(new Link(
 world.loc.Rigard.Barracks.common.links.push(new Link(
 	"Yard", true, true,
 	function() {
-		Text.AddOutput("Sparring yard.<br/>");
+		Text.Add("Sparring yard.<br/>");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Barracks.sparring);
@@ -123,7 +123,7 @@ world.loc.Rigard.Barracks.common.links.push(new Link(
 world.loc.Rigard.Barracks.common.links.push(new Link(
 	"Captains", true, true,
 	function() {
-		Text.AddOutput("The captains quarters.<br/>");
+		Text.Add("The captains quarters.<br/>");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Barracks.captains);
@@ -134,7 +134,7 @@ world.loc.Rigard.Barracks.common.events.push(new Link(
 	"Miranda", function() { return miranda.IsAtLocation(); }, true,
 	function() {
 		if(miranda.IsAtLocation())
-			Text.AddOutput("You spot Miranda hanging out with a few other guards, sneaking in a few drinks.<br/>");
+			Text.Add("You spot Miranda hanging out with a few other guards, sneaking in a few drinks.<br/>");
 	},
 	function() {
 		Scenes.Miranda.BarracksApproach();
@@ -143,19 +143,19 @@ world.loc.Rigard.Barracks.common.events.push(new Link(
 
 
 world.loc.Rigard.Barracks.common.endDescription = function() {
-	Text.AddOutput("What you do?<br/>");
+	Text.Add("What you do?<br/>");
 }
 
 
 
 world.loc.Rigard.Barracks.sparring.description = function() {
-	Text.AddOutput("You are at sparring yard.<br/>");
+	Text.Add("You are at sparring yard.<br/>");
 }
 
 world.loc.Rigard.Barracks.sparring.links.push(new Link(
 	"Commons", true, true,
 	function() {
-		Text.AddOutput("Commons is inside.<br/>");
+		Text.Add("Commons is inside.<br/>");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Barracks.common);
@@ -163,19 +163,19 @@ world.loc.Rigard.Barracks.sparring.links.push(new Link(
 ));
 
 world.loc.Rigard.Barracks.sparring.endDescription = function() {
-	Text.AddOutput("What you do?<br/>");
+	Text.Add("What you do?<br/>");
 }
 
 
 
 world.loc.Rigard.Barracks.captains.description = function() {
-	Text.AddOutput("You are at captains quarters.<br/>");
+	Text.Add("You are at captains quarters.<br/>");
 }
 
 world.loc.Rigard.Barracks.captains.links.push(new Link(
 	"Commons", true, true,
 	function() {
-		Text.AddOutput("Commons is outside.<br/>");
+		Text.Add("Commons is outside.<br/>");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Barracks.common);
@@ -183,7 +183,7 @@ world.loc.Rigard.Barracks.captains.links.push(new Link(
 ));
 
 world.loc.Rigard.Barracks.captains.endDescription = function() {
-	Text.AddOutput("What you do?<br/>");
+	Text.Add("What you do?<br/>");
 }
 
 

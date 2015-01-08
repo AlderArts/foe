@@ -30,7 +30,7 @@ world.loc.Rigard.Residental.street.onEntry = function() {
 	if(!(world.time.hour >= 6 && world.time.hour < 22)) // Nighttime
 	{
 		if(Math.random() < 0.2) {
-			Text.AddOutput("You come across a group of bandits!");
+			Text.Add("You come across a group of bandits!");
 			
 			Gui.NextPrompt(function() {
 				var enemy = new Party();

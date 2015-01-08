@@ -15,7 +15,7 @@ world.loc.Forest = {
 //
 
 world.loc.Forest.Outskirts.description = function() {
-	Text.AddOutput("You are at the outskirts of a deep forest. With trees and stuff.<br/>");
+	Text.Add("You are at the outskirts of a deep forest. With trees and stuff.<br/>");
 }
 
 world.loc.Forest.Outskirts.enc = new EncounterTable();
@@ -148,7 +148,7 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 world.loc.Forest.Outskirts.links.push(new Link(
 	"Crossroads", true, true,
 	function() {
-		Text.AddOutput("Behind you is the way back to the crossroads.<br/>");
+		Text.Add("Behind you is the way back to the crossroads.<br/>");
 	},
 	function() {
 		MoveToLocation(world.loc.Plains.Crossroads, {hour: 2});
@@ -163,5 +163,5 @@ world.loc.Forest.Outskirts.links.push(new Link(
 ));
 
 world.loc.Forest.Outskirts.endDescription = function() {
-	Text.AddOutput("What do you do?<br/>");
+	Text.Add("What do you do?<br/>");
 }

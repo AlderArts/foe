@@ -103,13 +103,13 @@ Burrows.prototype.FromStorage = function(storage) {
 // Burrows entrance
 //
 world.loc.Burrows.Enterance.description = function() {
-	Text.AddOutput("");
+	Text.Add("");
 }
 
 world.loc.Burrows.Enterance.links.push(new Link(
 	"Plains", true, true,
 	function() {
-		Text.AddOutput("Behind you is the way back to the plains.<br/>");
+		Text.Add("Behind you is the way back to the plains.<br/>");
 	},
 	function() {
 		MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
@@ -129,7 +129,7 @@ world.loc.Burrows.Enterance.links.push(new Link(
 ));
 
 world.loc.Burrows.Enterance.endDescription = function() {
-	Text.AddOutput("");
+	Text.Add("");
 }
 
 world.loc.Burrows.Enterance.onEntry = function() {
@@ -144,7 +144,7 @@ world.loc.Plains.Crossroads.links.push(new Link(
 	"Burrows", function() { return burrows.flags["Access"] != Burrows.AccessFlags.Unknown; }, true,
 	function() {
 		if(burrows.flags["Access"] != Burrows.AccessFlags.Unknown)
-			Text.AddOutput("You know how to find the Burrows, should you want to.<br/>");
+			Text.Add("You know how to find the Burrows, should you want to.<br/>");
 	},
 	function() {
 		MoveToLocation(world.loc.Burrows.Enterance, {minute: 30});
@@ -156,8 +156,8 @@ world.loc.Plains.Crossroads.links.push(new Link(
 // Tunnels
 //
 world.loc.Burrows.Tunnels.description = function() {
-	Text.AddOutput("You are in the bowels of the Burrows, the twisting tunnels of the lagomorph stronghold. There is only a faint light to guide your way. Echoes of the giant orgy in the Pit can be heard even here.");
-	Text.Newline();
+	Text.Add("You are in the bowels of the Burrows, the twisting tunnels of the lagomorph stronghold. There is only a faint light to guide your way. Echoes of the giant orgy in the Pit can be heard even here.");
+	Text.NL();
 }
 
 world.loc.Burrows.Tunnels.links.push(new Link(
@@ -193,7 +193,7 @@ world.loc.Burrows.Tunnels.links.push(new Link(
 ));
 
 world.loc.Burrows.Tunnels.endDescription = function() {
-	Text.AddOutput("What do you do?");
+	Text.Add("What do you do?");
 }
 
 world.loc.Burrows.Tunnels.enc = new EncounterTable();
@@ -204,7 +204,7 @@ world.loc.Burrows.Tunnels.enc = new EncounterTable();
 //
 //TODO Fix after Lagon is defeated
 world.loc.Burrows.Throne.description = function() {
-	Text.AddOutput("You are standing in Lagon's throne room.");
+	Text.Add("You are standing in Lagon's throne room.");
 }
 
 world.loc.Burrows.Throne.links.push(new Link(
@@ -226,7 +226,7 @@ world.loc.Burrows.Throne.events.push(new Link(
 ));
 
 world.loc.Burrows.Throne.endDescription = function() {
-	Text.AddOutput("");
+	Text.Add("");
 }
 
 
@@ -235,7 +235,7 @@ world.loc.Burrows.Throne.endDescription = function() {
 //
 //TODO
 world.loc.Burrows.Pit.description = function() {
-	Text.AddOutput("You are in the Pit.");
+	Text.Add("You are in the Pit.");
 }
 
 world.loc.Burrows.Pit.links.push(new Link(
@@ -247,7 +247,7 @@ world.loc.Burrows.Pit.links.push(new Link(
 ));
 
 world.loc.Burrows.Pit.endDescription = function() {
-	Text.AddOutput("");
+	Text.Add("");
 }
 
 

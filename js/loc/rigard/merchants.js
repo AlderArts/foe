@@ -86,10 +86,10 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	"Armor", true, function() { return Scenes.Rigard.ArmorShop.IsOpen(); },
 	function() {
 		/*
-		Text.AddOutput("");
+		Text.Add("");
 		if(!Scenes.Rigard.ArmorShop.IsOpen())
-			Text.AddOutput("");
-		Text.AddOutput("<br/>");
+			Text.Add("");
+		Text.Add("<br/>");
 		*/
 	},
 	function() {
@@ -101,10 +101,10 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	"Weapons", true, function() { return Scenes.Rigard.WeaponShop.IsOpen(); },
 	function() {
 		/*
-		Text.AddOutput("");
+		Text.Add("");
 		if(!Scenes.Rigard.WeaponShop.IsOpen())
-			Text.AddOutput("");
-		Text.AddOutput("<br/>");
+			Text.Add("");
+		Text.Add("<br/>");
 		*/
 	},
 	function() {
@@ -115,10 +115,10 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	"Tailor", true, function() { return Scenes.Rigard.ClothShop.IsOpen() },
 	function() {
-		Text.AddOutput("There is a large two floor shop in the center of the street, with two guards watching the large, well crafted doors. The fancy sign above the door reads <i>Silken Delights</i>, and there are many beautiful and intricately crafted articles of clothing on display in the windows. The clothing store seems large, and there are pretty decorations bordering the display windows. A decorated sign next the the door informs you that the shops business hours are from 9 to 20.");
+		Text.Add("There is a large two floor shop in the center of the street, with two guards watching the large, well crafted doors. The fancy sign above the door reads <i>Silken Delights</i>, and there are many beautiful and intricately crafted articles of clothing on display in the windows. The clothing store seems large, and there are pretty decorations bordering the display windows. A decorated sign next the the door informs you that the shops business hours are from 9 to 20.");
 		if(!Scenes.Rigard.ClothShop.IsOpen())
-			Text.AddOutput(" The shop seems to be closed at the moment.");
-		Text.Newline();
+			Text.Add(" The shop seems to be closed at the moment.");
+		Text.NL();
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.ShopStreet.ClothShop, {minute: 5});
@@ -128,10 +128,10 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	"Odd shop", true, function() { return Scenes.Rigard.OddShop.IsOpen(); },
 	function() {
-		Text.AddOutput("One particular shop catch your eye. A garish sign hanging outside announce it the 'Shoppe of oddities', though from just the exterior it is a bit unclear what is actually on sale.");
+		Text.Add("One particular shop catch your eye. A garish sign hanging outside announce it the 'Shoppe of oddities', though from just the exterior it is a bit unclear what is actually on sale.");
 		if(!Scenes.Rigard.OddShop.IsOpen())
-			Text.AddOutput(" A small paper stapled to the front door states that the shop is 'Cloosd' at the moment.");
-		Text.AddOutput("<br/>");
+			Text.Add(" A small paper stapled to the front door states that the shop is 'Cloosd' at the moment.");
+		Text.Add("<br/>");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.ShopStreet.OddShop, {minute: 5});
@@ -150,12 +150,12 @@ world.loc.Rigard.ShopStreet.street.events.push(new Link(
 	"Martello", function() { return room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith || room69.flags["Hinges"] == Room69.HingesFlags.TalkedToSmith; }, function() { return world.time.hour >= 9 && world.time.hour < 18; },
 	function() {
 		if(room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith) {
-			Text.AddOutput("You could ask the smith Martello to make gilded hinges for Sixtynine’s door.");
-			Text.Newline();
+			Text.Add("You could ask the smith Martello to make gilded hinges for Sixtynine’s door.");
+			Text.NL();
 		}
 		else if(room69.flags["Hinges"] == Room69.HingesFlags.TalkedToSmith) {
-			Text.AddOutput("You could ask the smith Martello how the work on the gilded hinges for Sixtynine’s door is progressing.");
-			Text.Newline();
+			Text.Add("You could ask the smith Martello how the work on the gilded hinges for Sixtynine’s door is progressing.");
+			Text.NL();
 		}
 	},
 	function() {

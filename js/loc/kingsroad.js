@@ -13,7 +13,7 @@ world.loc.KingsRoad = {
 // Hills, main hunting grounds
 //
 world.loc.KingsRoad.Road.description = function() {
-	Text.AddOutput("You are standing on the King's road, which connects Rigard and the free cities.<br/>");
+	Text.Add("You are standing on the King's road, which connects Rigard and the free cities.<br/>");
 }
 
 world.loc.KingsRoad.Road.links.push(new Link(
@@ -97,5 +97,5 @@ world.loc.KingsRoad.Road.AddEncounter({
 
 
 world.loc.KingsRoad.Road.endDescription = function() {
-	Text.AddOutput("What do you do?<br/>");
+	Text.Add("What do you do?<br/>");
 }

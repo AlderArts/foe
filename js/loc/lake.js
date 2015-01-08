@@ -14,13 +14,13 @@ world.loc.Lake = {
 // Hills, main hunting grounds
 //
 world.loc.Lake.Shore.description = function() {
-	Text.AddOutput("This place looks lakey. Looks fishy.<br/>");
+	Text.Add("This place looks lakey. Looks fishy.<br/>");
 }
 
 world.loc.Lake.Shore.links.push(new Link(
 	"Rigard", true, true,
 	function() {
-		Text.AddOutput("Behind you is the way back to Rigard.<br/>");
+		Text.Add("Behind you is the way back to Rigard.<br/>");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 45});
@@ -57,5 +57,5 @@ world.loc.Lake.Shore.enc.AddEnc(function() {
 }, 1.0, function() { return burrows.Access() && burrows.flags["BrainyTrait"] == Burrows.TraitFlags.Inactive; });
 
 world.loc.Lake.Shore.endDescription = function() {
-	Text.AddOutput("What do you do?<br/>");
+	Text.Add("What do you do?<br/>");
 }
