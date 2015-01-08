@@ -38,6 +38,8 @@ Scenes.Dreams.Entry = function(func) {
 			scenes.AddEnc(Scenes.Dreams.BlowjobRec, 2.0, function() { return player.sex.rBlow >= 25; }, ravenTrigger);
 			scenes.AddEnc(Scenes.Dreams.CunnilingusGive, 2.0, function() { return player.sex.gCunn >= 25; }, ravenTrigger);
 			scenes.AddEnc(Scenes.Dreams.CunnilingusRec, 2.0, function() { return player.sex.rCunn >= 25; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Cveta.DreamRoses, 1.0, function() { return cveta.flags["Met"] >= Cveta.Met.FirstMeeting; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Cveta.DreamBrood, 1.0, function() { return cveta.flags["Met"] >= Cveta.Met.FirstMeeting; }, ravenTrigger);
 			
 			var end = function() {
 				Scenes.Dreams.RavenAfterDream(ravenTrigger, func);

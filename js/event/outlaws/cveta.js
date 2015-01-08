@@ -652,3 +652,50 @@ Scenes.Cveta.Performance = function() {
 	
 	Gui.NextPrompt();
 }
+
+Scenes.Cveta.DreamRoses = function() {
+	var parse = {
+
+	};
+	
+	Text.Add("Roses.", parse);
+	Text.NL();
+	Text.Add("They stretch away from you in all directions as far as the eye can see, rosebushes dotting the grassy earth, woody vines that creep along the ground, petals that drift through the air, carried in from some unknown source by the stiff breeze that blows across the fields unimpeded. Red, white and blue, roses, roses everywhere.", parse);
+	Text.NL();
+	Text.Add("And in the midst of it all, Cveta. She stands stiffly in the warm sunlight, head bowed and wings spread as she sings. There is no one to hear her save you and a raven perched on one of the thorny rosebushes, yet she sings anyway, the melancholy melody of the bird-morph’s divine soprano filling the air.", parse);
+	Text.NL();
+	Text.Add("You step forward to approach Cveta, but run face-first into an invisible barrier extending about an arm’s length from her. Testing the barrier only reveals that it encircles her completely with its confines - around, over, even under when you try to dig into the soft, loamy soil of the rose fields. Neither does trying to call to her from without the barrier work - even if she could hear you from within, she’s completely insensate to anything and everything.", parse);
+	Text.NL();
+	Text.Add("Everything, but her music.", parse);
+	Text.NL();
+	Text.Add("It is then you realize why the caged bird sings.", parse);
+	Text.NL();
+	Text.Add("<i>Music is my only escape,</i> the melody speaks to you. <i>Without it, I will wither and die, trapped in this shell as I am.</i>", parse);
+	Text.NL();
+	Text.Add("You wake, feeling strangely saddened.", parse);
+}
+
+
+Scenes.Cveta.DreamBrood = function() {
+	var parse = {
+		skinDesc : function() { return player.SkinDesc(); },
+		playername : player.name
+	};
+	
+	Text.Add("<i>“Wake up, beloved.”</i>", parse);
+	Text.NL();
+	Text.Add("You groan and roll over in the grass, the warmth of gentle spring sunlight on your [skinDesc] and against your lidded eyes. A breeze blows, bringing with it the scent of wildflowers and unripe fruit.", parse);
+	Text.NL();
+	Text.Add("<i>“Please, wake up.”</i> The voice drips so much honey, it’s practically impossible to disobey. Slowly, you open your eyes to find Cveta kneeling over you, wearing absolutely nothing but her gloves. Gone is the thin, waifish creature that you first met in the outlaws’ camp, now replaced by this curvy, full-bodied goddess and her equally alluring voice. As her brood has swelled, so have her breasts and hips to better provide for her many chicks; the feathers upon her chest can no longer hide the rise of her nipples, small bumps beneath her glorious, vibrant feathers, just waiting to be uncovered and teased.", parse);
+	Text.NL();
+	Text.Add("Not quite gone is the prudish demeanor, but it’s nice to know that she can be an absolute slut just for you. To be honest, it makes it feel a bit special.", parse);
+	Text.NL();
+	Text.Add("Judging by her flat belly, mischievous glint in her eye and the fact that the feathers about her groin are utterly soaked and glistening, it’s clear what your beautiful bird wants, and she wants it now. Off in the distance, high above the two of you, a raven circles in the air, its dark feathers starkly contrasting against the colorful scene. You can’t quite make it out, but does it look… jealous?", parse);
+	Text.NL();
+	Text.Add("<i>“I’ve been practicing my mating song again, [playername],”</i> Cveta croons, even as you reach up to run your fingers through her luscious feathers and across her wide, sumptuous, and above all, <i>fertile</i> hips. She tosses her head in that way only she can, and the way the waterfall of her crimson locks flows back into place is a sight to behold. <i>“Want to hear it?”</i>", parse);
+	Text.NL();
+	Text.Add("Without waiting for your reply, she opens her beak and begins to sing…", parse);
+	Text.NL();
+	Text.Add("You wake in a cold sweat, feeling slightly disappointed that you didn’t manage to remember any of the song.", parse);
+}
+
