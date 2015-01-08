@@ -53,7 +53,7 @@ InitCache = function() {
 	adrian  = new Adrian(gameCache.adrian);
 	
 	maria   = new Maria(gameCache.maria);
-	cveta   = new Maria(gameCache.cveta);
+	cveta   = new Cveta(gameCache.cveta);
 	
 	fera    = new Fera(gameCache.fera);
 	kyna    = new Kyna(gameCache.kyna);

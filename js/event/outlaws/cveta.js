@@ -44,9 +44,10 @@ Cveta.prototype = new Entity();
 Cveta.prototype.constructor = Cveta;
 
 Cveta.Met = {
-	NotMet    : 0,
-	MariaTalk : 1,
-	FirstMeeting : 2
+	NotMet       : 0,
+	MariaTalk    : 1,
+	FirstMeeting : 2,
+	Accessible   : 3
 };
 
 Scenes.Cveta = {};
@@ -80,19 +81,41 @@ Cveta.prototype.IsAtLocation = function(location) {
 	return true;
 }
 
+Cveta.prototype.PerformanceTime = function() {
+	return (world.time.hour >= 6 && world.time.hour < 8) || (world.time.hour >= 18 && world.time.hour < 20);
+}
+Cveta.prototype.WakingTime = function() {
+	return (world.time.hour >= 6 && world.time.hour < 20);
+}
+Cveta.prototype.InTent = function() {
+	return (world.time.hour >= 8 && world.time.hour < 10) || (world.time.hour >= 2 && world.time.hour < 6);
+}
+Cveta.prototype.Violin = function() { //TODO
+	return false;
+}
 
-/* TODO
+Scenes.Cveta.CampDesc = function() {
+	var parse = {
+		
+	};
+	
+	Text.Add("Near the back of the outlaws' camp, you can make out the modest form of Cveta's tent.", parse);
+	Text.NL();
+	if(!cveta.WakingTime())
+		Text.Add("The tent flaps are sealed at the moment, the songstress having set with the sun.", parse);
+	else if(cveta.PerformanceTime())
+		Text.Add("However, it is empty at the moment, Cveta herself having ventured out for her twice-daily performances. It's not too late to join in if you want to listen to her play.", parse);
+	else if(cveta.InTent()) {
+		if(cveta.Violin())
+			Text.Add("Music emanates from within, but you know that Cveta is amenable to entertaining your presence should you choose to visit.", parse);
+		else
+			Text.Add("Music emanates from within, and you think it best that you don't disturb Cveta at her practice.", parse);
+	}
+	else
+		Text.Add("The tent's flaps are open, making it clear that the songstress has gone out about her daily business. Maybe you should come back later.", parse);
+	Text.NL();
+}
 
-#Add time-dependent “Performance” option to the outlaw camp’s main menu.
-
-#Add description of Cveta’s tent to the outlaw camp’s description, but do not add the option to approach her yet.
-
- */
-
-/* TODO
- * 
-#Requires that the player have completed the Krawitz sequence
- */
 Scenes.Cveta.MariaTalkFirst = function() {
 	var parse = {
 		playername : player.name
@@ -148,7 +171,7 @@ Scenes.Cveta.MariaTalkFirst = function() {
 /* TODO
  * #Add “princess” option to Maria for if and when the player wants to pick this up again.
 
-[Princess] - You've changed your mind. If Maria really can't sort out this so-called princess, maybe you can.
+[Princess] - 
  */
 Scenes.Cveta.MariaTalkRepeat = function() {
 	var parse = {
@@ -212,7 +235,7 @@ Scenes.Cveta.FirstMeeting = function() {
 
 Scenes.Cveta.FirstMeetingPrompt = function(opts) {
 	var parse = {
-		
+		playername : player.name
 	};
 	
 	//[Wellbeing][Outlaws][Music][Weather][Give Up]

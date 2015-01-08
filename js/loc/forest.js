@@ -155,6 +155,13 @@ world.loc.Forest.Outskirts.links.push(new Link(
 	}
 ));
 world.loc.Forest.Outskirts.links.push(new Link(
+	"Outlaws", function() { return gameCache.flags["OutlawsRep"] > 0; }, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.Outlaws.Camp, {hour: 1});
+	}
+));
+world.loc.Forest.Outskirts.links.push(new Link(
 	"Glade", function() { return jeanne.flags["Met"] >= 1; }, true,
 	null,
 	function() {
