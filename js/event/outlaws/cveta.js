@@ -164,13 +164,13 @@ Scenes.Cveta.Prompt = function() {
 		}, enabled : true,
 		tooltip : "Speak with Cveta. She’s not one for small talk, though."
 	});
-	/* TODO
-	options.push({ nameStr : "name",
+	options.push({ nameStr : "Music",
 		func : function() {
-			
+			Scenes.Cveta.MusicPrompt();
 		}, enabled : true,
-		tooltip : ""
+		tooltip : "Have the beautiful bird give you a private performance."
 	});
+	/* TODO
 	options.push({ nameStr : "name",
 		func : function() {
 			
@@ -549,6 +549,338 @@ Scenes.Cveta.HerselfPrompt = function() {
 		tooltip : "Ask Cveta about her interest in music."
 	});
 	Gui.SetButtonsFromList(options, true, Scenes.Cveta.TalkPrompt);
+}
+
+Scenes.Cveta.MusicPrompt = function() {
+	var parse = {
+		playername : player.name,
+		skinDesc : function() { return player.SkinDesc(); }
+	};
+	
+	Text.Clear();
+	Text.Add("<i>“You would like to hear me practice?”</i> the songstress says. <i>“It will not be a proper performance, just so you know. This is the time when I choose to experiment with various styles and moods, amongst other things; it is improvisation, only worse. Composition was amongst the aspects of my craft I was merely passable in, as opposed to achieving the excellence I sought.”</i>", parse);
+	Text.NL();
+	Text.Add("You assure Cveta that you do indeed wish to hear her play, even if it’s but at practice. What better way to gain a greater appreciation for the final product than to watch it being crafted before one’s very eyes?", parse);
+	Text.NL();
+	Text.Add("With great deliberation, Cveta closes her eyes, draws a breath, then opens them again. Whether it’s in response to your flattery, or if it’s just her getting ready - well, you might as well try to read a brick wall. <i>“Very well then, [playername]. What would you have me practice?”</i>", parse);
+	Text.NL();
+	Text.Add("<b>You will not get buffs from a private performance.</b>", parse);
+	Text.Flush();
+	
+	//[Sing][Play Lyre][Play Violin]
+	var options = new Array();
+	options.push({ nameStr : "Sing",
+		func : function() {
+			Text.Clear();
+			Text.Add("You tell Cveta that you’d like to hear her lovely voice at work.", parse);
+			Text.NL();
+			Text.Add("<i>“Very well. I shall acquiesce to your request - it is high time I did some voice work of my own, in any case. Please, allow me some space.”</i>", parse);
+			Text.NL();
+			Text.Add("You waste no time in taking a few steps back and Cveta stands, setting down her lyre on her cot before working on a few vocal exercises to warm up her voice, some familiar to you, others you don’t remember. Those take but a handful of minutes to get through, and when she’s had a moment more to collect herself and adjust her posture, the songstress parts her beak and unleashes her voice upon the confines of her tent. Without lyrics or accompaniment, the song nevertheless sweeps you along like a handful of rose petals in a gale…", parse);
+			Text.NL();
+			
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("In your mind’s eye, you envision yourself as a mighty tree, deeply rooted in the earth - perhaps even the very tree at the heart of Eden itself, strong, solid, immovable. Your bark is rough and rugged, your heartwood stronger than the finest steel. Power seeps in through your feet - no, your roots - and wells up in your body, filling you right to your crown and the tips of your branches.", parse);
+				Text.NL();
+				Text.Add("You know that you will not be pushed aside. It is impossible, inconceivable. You have no heart, but the flow of the sap within you is drawn from the land itself. So long as it does not fall, then neither will you.", parse);
+				Text.NL();
+				Text.Add("Everything that transpires in and about you does not escape your notice, from the birds nesting in your boughs to the worms that crawl about your roots. Each and every one of the tiny creatures turns to you for sustenance and shelter, and this you dole out freely, allowing the little people to partake of your boundless energy. As you, the mighty tree, shield them from the dangers they cannot face alone, so do they trust you, dedicating their lives to defending you from worm and rot.", parse);
+				Text.NL();
+				Text.Add("Everything is within your control, within your grasp. You shall not ask nor demand of the little creatures; you shall <i>tell</i> them what needs to be done, and they will believe as deeply as you do in your success. So long as you will it with the core of your being, failure is impossible, and reality easily shaped to your desire.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("All around you, the fragrance of scented candles, the rustle of fine silks and linens. Jasmine, lavender, oleander - sweet but not cloying, the air cool but not uncomfortably cold, just enough to encourage one to seek out the presence of another warm body.", parse);
+				Text.NL();
+				Text.Add("You know that this is but an illusion, that somewhere in the distance, Cveta is still singing and her song is what has brought you to this place. Is this supposed to be one of your innermost desires… or is it one of your deepest fears? Surely something this calm and pleasurable can’t be a nightmare, can it? Yet that thought is distant, you are here, and it might as well be enjoyed while it lasts, should it not?", parse);
+				Text.NL();
+				Text.Add("Whispers echo in the black void that surrounds you, fragments of sweet nothings that tease and tempt you just on the edge of your hearing. An invisible hand glides across your [skinDesc] - with a sudden start, you realize that you are naked - leaving a flush of decidedly arousing warmth in its wake. This is quickly followed by another, and another, and another, until you’re suffused from head to toe in growing desire, rapidly approaching release.", parse);
+				Text.NL();
+				Text.Add("It is then that you realize that not only are you naked, but you are decidedly lacking in genitals, nipples, or any body part capable of effecting a release, doll-like smooth skin covering those portions of your body where they should be. You have to release, have to cum the buckets - no, the barrels that your body feels like letting loose, desire fogging your mind to the point where you can’t even remember your own name, all scents and sensations narrowing down to that single point of debilitating lust-", parse);
+				Text.NL();
+				Text.Add("Yes, a nightmare, very much a nightmare.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("You are walking over a road of burning coals, the sheer heat rising from them enough to set the air above to wavering and shimmering. Cinders and ashes leap from the ground, throw up by the wind; you do your best to ignore them and press on.", parse);
+				Text.NL();
+				if(party.InParty(kiakai)) {
+					parse["name"] = kiakai.name;
+					parse = kiakai.ParserPronouns(parse);
+					Text.Add("You are not alone, though. [name] travels down the fiery road by your side, the elf’s bare feet quickly eating up distance with nimble, graceful steps. Yet for all this, [heshe] never seems to fall ahead or behind you, instead content to press on as your companion. Every now and then, [heshe] turns to you and says something in an encouraging tone of voice, although you can’t quite make out the words.", parse);
+					Text.NL();
+				}
+				Text.Add("Slow and steady is the way to go; that way, there’s no chance that your feet will catch painfully on the coals or trip on the uneven surface. You know that so long as you move at an even pace and do not freeze or run, the flames are powerless to hurt you. Each step must be taken carefully but without lingering.", parse);
+				Text.NL();
+				Text.Add("How long is the road? It stretches on forever into the distance, as far as the eye can see. To either side is a sea of blank darkness, its surface inky and promising of vast depths hidden beneath. Above you, a black sky devoid of stars or moon. No, there is nothing here to distract you. If you are burned, you have no one but yourself to blame.", parse);
+				Text.NL();
+				if(Math.log(player.Spi()) >= 4) {
+					Text.Add("How far do you travel? Without landmarks, telling distance is impossible. Yet your spirit surges and your steps never falter. Surely there must be something waiting for you at the end of the road…", parse);
+					Text.NL();
+					Text.Add("And indeed there is. Gradually, the path of burning coals widens to form a circular island in the middle of the inky sea. Standing in the middle of the island is a single tree of indeterminate species, and perched upon its branches is Cveta. No, it isn’t her - but someone who looks distinctly like the songstress, with burning flames where her feathers should be, red and blue and green and gold.", parse);
+					Text.NL();
+					Text.Add("The flaming creature flutters down to stand before you, then draws you into her embrace without hesitation, arms and wings wrapping about you and ushering you into the center of the inferno. You know that you are being burned alive by her immense heat, that you are being reduced to little more than a handful of black ash, but it doesn’t seem to matter…", parse);
+				}
+				else {
+					Text.Add("Alas, somehow, your toe catches on a wayward coal, and a lance of flame runs up your leg. The pain causes you to stagger and falter, which only means the flames finally manage to find purchase on your body, consuming you from the bottom up with wanton glee. With blackened stumps for legs, you can no longer stand, and fall upon the burning coals: your last memory of the vision is the sight of the dark waves encroaching upon the burning road, waiting for you to be fully consumed so they can carry away your ashes…", parse);
+				}
+			}, 1.0, function() { return true; });
+			
+			scenes.Get();
+			
+			Text.NL();
+			Text.Add("At length, the song fades, and reality comes rushing back to you in a dizzy spell, leaving you more than a little disoriented. Instinctively, you reach for the first thing that comes to hand to steady yourself, and it just so happens that it’s Cveta’s sash. With perfect elegance, she eases your grasp away from her clothing and transfers it to her hand, then gives you a few moments to recover.", parse);
+			Text.NL();
+			Text.Add("<i>“Did you enjoy the performance?”</i>", parse);
+			Text.NL();
+			Text.Add("You’re not sure if you <i>enjoyed</i> it, but it was certainly a new experience, and not just in the musical sense.", parse);
+			Text.NL();
+			Text.Add("<i>“There is a reason why I do not use the full force of my voice when I sing to entertain, [playername]. This, however, was an improvised practice session. I did tell you.”</i>", parse);
+			Text.NL();
+			Text.Add("Right, right. Can someone please stop the world so you can get off?", parse);
+			Text.NL();
+			Text.Add("Ever the gracious hostess, Cveta tugs at your arm, guiding your path so you can shuffle your way out of her tent. <i>“I suggest that you do not undertake any strenuous activity for the next half-hour, please.”</i>", parse);
+			Text.Flush();
+			
+			world.TimeStep({hour: 2});
+			cveta.relation.IncreaseStat(100, 2);
+			
+			Gui.NextPrompt();
+		}, enabled : true,
+		tooltip : "Do you know why the caged bird sings?"
+	});
+	options.push({ nameStr : "Play lyre",
+		func : function() {
+			Text.Clear();
+			Text.Add("You indicate that you’d like to hear her play something on her lyre.", parse);
+			Text.NL();
+			Text.Add("<i>“Easily done,”</i> she replies, cutting off her current tune with a quick chord. <i>“Give me a few moments, please.”</i>", parse);
+			Text.NL();
+			Text.Add("She’s silent for a minute or so, and you can imagine the gears turning in her head, working furiously away to come up with something that will satisfy the both of you. At last, she’s done thinking and tosses her head back, getting a few stray hairs out of her vision. When she’s done, the songstress looks positively energized, humming to herself before giving you a nod.", parse);
+			Text.NL();
+			Text.Add("<i>“Let’s see what we can do with this experimental piece, then…”</i>", parse);
+			Text.NL();
+			
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("Cveta’s fingers gingerly test the strings of her lyre as if she were toeing the surface of a pool - the hesitation is brief, but it doesn’t go unnoticed.", parse);
+				Text.NL();
+				Text.Add("<i>“Spirits, I hate improv,”</i> she mutters to herself. Still, she begins anyway, tracing out familiar territory with a few scales before she launches into the great unknown, her fingers dancing across her instrument with utmost elegance and grace, the songstress herself in miniature.", parse);
+				Text.NL();
+				Text.Add("The change is nothing less than dramatic - the melody jitters back and forth like a metronome, alternating from fast to slow, turning and weaving its way through the air like a maddened acrobat. Cveta wasn’t joking when she said this would be experimental - what you’re hearing is nothing like the usual stuff she plays during performances. One verse seems completely disconnected from the other, others set your skin to crawling and teeth on edge.", parse);
+				Text.NL();
+				Text.Add("Still, it is music. Barely so, and of a particularly disjointed kind, but it is music. Even then, it’s not long before Cveta stops abruptly, clearly unsatisfied with her performance. A lesser musician might have smashed their instrument in distaste, but not her. Never her.", parse);
+				Text.NL();
+				Text.Add("<i>“That left a lot to be desired,”</i> she states flatly.", parse);
+				Text.NL();
+				Text.Add("If you might inquire… what exactly inspired that bout of barely-not-noise?", parse);
+				Text.NL();
+				Text.Add("<i>“I witnessed Maria arguing with someone else the other day,”</i> Cveta replies. <i>“I was hoping to be able to capture that intense energy she possessed, and the attempt did not go as well as expected. Perhaps I am going about things the wrong way.”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("Taking a deep breath, Cveta easily pierces the veil of silence that has gathered with quick measure. Even though you know the songstress was born and trained to this, she nevertheless makes it look so easy - as Cveta works the strings with finger and pick, it’s not too hard to imagine the songstress as a seamstress; the notes her threads and the lyre her loom, sheets upon sheets of fine-woven meter and verse pouring off the edge. This raw material still needs to be cut and sewn, dyed and hued into a garment of music that might be conceivably passable for one of her performances, but the idea is still there, and it seems like she’s approaching it from the right direction. It <i>is</i> quite impressive, and you ask Cveta what happened to spark this particular burst of inspiration.", parse);
+				Text.NL();
+				Text.Add("<i>“Oh, how I came up with this?”</i> she replies, not stopping the ebb and flow of the music. <i>“I just went for a walk in the forest. If you listen closely, nature is full of rhythms that one can find inspiring. It’s certainly worked for me.”</i>", parse);
+				Text.NL();
+				Text.Add("And what about the natural dangers of the forest?", parse);
+				Text.NL();
+				Text.Add("She tosses her head and winks at you. <i>“Why, those? They have never been a problem for me, [playername]. After I made the first few mothgirls imagine that the yellow-spotted mushrooms under the fir trees were something else quite similar in shape but completely different altogether, most of the forest creatures have been loathe to harass me.”</i>", parse);
+				Text.NL();
+				Text.Add("And what <i>exactly</i> did she make them imagine the mushrooms were, then?", parse);
+				Text.NL();
+				Text.Add("<i>“Oh,”</i> she replies airily. <i>“This and that, something or the other. Let’s just say that morels have a very distinctive shape and texture.”</i>", parse);
+				Text.NL();
+				Text.Add("Cveta’s tune continues on its way, merry and full of life. It’s definitely reminiscent of some of the more tranquil and beautiful spots you’ve come across while wandering the wilds, and you gradually find your eyes growing heavier…", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("What Cveta tries today is neither here nor there; the songstress flits from tune to tune like a butterfly from flower to flower, perhaps seeking out something that will fit her mood and sate her desires. She did warn you it was going to be experimental, after all. Sometimes she hums along with the music her instrument brings forth; at others, she is deathly still and silent, her eyes closed and the only accompaniment to her music the skillful movement of her dexterous fingers.", parse);
+				Text.NL();
+				Text.Add("The sudden burst of energy, when it comes, is as tremendous as it is unexpected. Something’s definitely inspired her - while the bird-morph can’t smile thanks to her beak, you can definitely <i>feel</i> a warm glow emanating from her, her gown seeming to shift and swirl of its own accord despite the still air within the tent.", parse);
+				Text.NL();
+				Text.Add("The piece, whatever it is, peters out to something approaching a slow waltz, and it’s with great focus and deliberation that the songstress keeps the melody in time and prevents it from running amok with her emotions. Still, as you listen on, you can’t help but envision the sound and fury of a gale, compressed and funnelled down before being used to drive a windmill.", parse);
+				Text.NL();
+				Text.Add("Music is the only escape.", parse);
+				Text.NL();
+				Text.Add("Cveta chirps in time with her music, a mother singing to her child - and with the way she handles her lyre, cradling the instrument against her side and on her lap, that description isn’t too far off the mark. Echoing with the soft sounds of song and string, the canvas walls of the tent seem more and more distant, more and more incorporeal…", parse);
+			}, 1.0, function() { return true; });
+			
+			scenes.Get();
+			
+			Text.NL();
+			Text.Add("The sound of Cveta’s closing notes jerks you back to the here and now, and after a moment’s pause, she sets down her lyre. <i>“I think I learned a few things back there.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, as you’re not exactly a musician of her stature and experience, you’ll take her word for it.", parse);
+			Text.NL();
+			Text.Add("<i>“Perhaps, but thank you for being here today. Having an audience changes the dynamics of things. I think your presence helped in no small measure.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, if she thinks that’s the case, you’ll be more than happy to sit in on another of her practice sessions some other time.", parse);
+			Text.NL();
+			Text.Add("<i>“Just so. Now, if you will please excuse me, I do have a few other matters to attend to. It may not be exceedingly gracious to ask you to leave right now, but would you not mind doing so anyway?”</i>", parse);
+			Text.Flush();
+			
+			world.TimeStep({hour: 2});
+			cveta.relation.IncreaseStat(100, 2);
+			
+			Gui.NextPrompt();
+		}, enabled : true,
+		tooltip : "Have Cveta work those slender, nimble fingers of hers… on her lyre."
+	});
+	if(cveta.Violin()) {
+		options.push({ nameStr : "Play violin",
+			func : function() {
+				Text.Clear();
+				Text.Add("You tell Cveta that you’d love to hear her play the violin.", parse);
+				Text.NL();
+				Text.Add("<i>“Ask, and you shall receive,”</i> Cveta replies, standing to put away her lyre and drawing the violin case out of her trunk. <i>“You went to the trouble of getting it for me; it is only right and proper that you should have a private taste of the fruits of your labors.”</i>", parse);
+				Text.NL();
+				Text.Add("It certainly is a fine instrument.", parse);
+				Text.NL();
+				Text.Add("<i>“Only a fine instrument for the fine,”</i> Cveta replies. <i>“Either you play the violin well, or you make others fear for their sanity. Normally, I would condone only polite displays of disapproval when a performance is poor, but I would not blame an audience for the traditional hail of rotten fruit for subjecting them to such horrors.”</i>", parse);
+				Text.NL();
+				Text.Add("Why, you get the impression that she’s bragging just a little.", parse);
+				Text.NL();
+				Text.Add("<i>“Me? Brag?”</i> the songstress replies with a sniff and plenty of mock indignation to go around. Hey, she can do the haughty noblewoman schtick quite well; it’s probably a good thing she doesn’t act that way all the time. <i>”Perish the thought! Do I look like someone who condones such uncouth behavior?”</i>", parse);
+				Text.NL();
+				Text.Add("With that, the songstress hefts the instrument to her shoulder, securing it against her chin, and begins to play, letting the music take a life of its own.", parse);
+				Text.NL();
+				
+				var scenes = new EncounterTable();
+				scenes.AddEnc(function() {
+					Text.Add("It’s hard to deny that bringing together musician and instrument was a good thing for everyone involved. Tuned and restored by the bird-morph’s loving hands, the instrument sounds as if it was practically made for her - Cveta appears to be experimenting with some of the more traditional classical styles today, and you recognize dribs and drabs of solo virtuoso pieces that you’ve heard before at her performances, this seamstress of sound and song piecing together a cloak of many colors in the hopes that it’ll turn out well. Like an actual cloak made this way, not all of it is very coherent or practical, but it certainly is a sight to behold.", parse);
+					Text.NL();
+					Text.Add("A deft touch of the bow as the songstress turns to more familiar ground, and the gentle, yearning melody turns almost as rich as her singing voice, each line of music flowing unbroken from one to the other. Hugging her wings close to her body, Cveta sways her body in time, the movement slight but noticeable under the gown that rests lightly on her petite frame. It’s rare that she actually plucks the strings, instead preferring to use the bow for almost all of the musical heavy lifting.", parse);
+					Text.NL();
+					Text.Add("Accompanying the haunting melody is the sound of silence. The daily noises of work and labor about the outlaw camp have all but quietened, and gone is the laughter, the chattering, the curses. All that remains is Cveta and the music of her violin, a free spirit as it twists and twirls in the air-", parse);
+					Text.NL();
+					Text.Add("And then she stops, the very last few notes quick and staccato before she sets down her bow and gives you an inquiring look. What sort of outro was that? Was there even one?", parse);
+					Text.NL();
+					Text.Add("<i>“Well?”</i> she says. <i>“How was it?”</i>", parse);
+					Text.Flush();
+					
+					//[Great!][Bad][Eh…]
+					var options = new Array();
+					options.push({ nameStr : "Great!",
+						func : function() {
+							Text.Clear();
+							Text.Add("Cveta sniffs at your answer. <i>“You do not have to flatter me, you know. That outro was deliberately bad. Whoever ends like that and lets an audience down on their expectations? They end up feeling empty and unfulfilled, you know. I am not so full of myself that I cannot bear someone pointing out a flaw in my playing, especially when the entire point of this session is to improve.”</i>", parse);
+							Text.NL();
+							PrintDefaultOptions();
+						}, enabled : true,
+						tooltip : "Tell Cveta it was pretty good."
+					});
+					options.push({ nameStr : "Bad",
+						func : function() {
+							Text.Clear();
+							Text.Add("Cveta nods. <i>“Well, at least you are honest about it. Yes, I did that poorly on purpose. I suppose I should not have sought to test you, [playername], but you have not disappointed me. It gets very tiring when the only thing that comes out of another’s mouth is praise - not because is is deserved, but because one seeks to flatter.”</i>", parse);
+							Text.NL();
+							PrintDefaultOptions();
+						}, enabled : true,
+						tooltip : "No, that wasn’t acceptable, especially that last bit."
+					});
+					options.push({ nameStr : "Eh…",
+						func : function() {
+							Text.Clear();
+							Text.Add("The songstress listens to your explanation and waves it off. <i>“That you are trying to be tactful in your honesty speaks well of you, [playername], but feel free to be blunt with me, especially when it come to the matter of critique. Now, be direct.”</i>", parse);
+							Text.NL();
+							Text.Add("As she wishes. You tell Cveta that while most of today’s session was here and there, the outro was pretty bad.", parse);
+							Text.NL();
+							Text.Add("<i>“Yes, it was bad, and that was the case because I made it so on purpose. My apologies for testing you this way, [playername], but I’ve heard enough honeyed words to last me a lifetime.”</i>", parse);
+							Text.NL();
+							PrintDefaultOptions();
+						}, enabled : true,
+						tooltip : "Tell the truth, but be diplomatic about it."
+					});
+					Gui.SetButtonsFromList(options, false, null);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("Cveta goes about today’s practice slowly and methodically, easing her way into the music like someone into a particularly stiff set of new clothes. Fingering the strings, easing the bow, she carefully draws out each note of what sounds like a funeral march. The bird-morph is definitely in the mood for sad things today; the languid music creeping from the violin strings being always in one minor key or the other. You cast a glance at her, wondering if this choice of pieces was simply a flight of fancy or indicative of some deeper emotion.", parse);
+					Text.NL();
+					Text.Add("Alas, the songstress’ face is carefully genteel and neutral, as always - as unreadable as a smooth stone wall.", parse);
+					Text.NL();
+					Text.Add("Flat and rolling, yet sad and depressed at the same time, the melody brings to mind a dim, misty bog, its atmosphere somber and weighty, yet calm and peaceful in equal measure. Cveta’s movements mirror her music, the songstress’ posture low and subdued, the flowing of her arms and fingers light and ethereal.", parse);
+					Text.NL();
+					Text.Add("Thin and easily snatched away by the wind, yet all is so calm that it settles and refuses to leave.", parse);
+					Text.NL();
+					Text.Add("Quiet and lonely to the point where a single voice could break the pallor that lies upon the land, yet all is bleak and blank.", parse);
+					Text.NL();
+					Text.Add("A sensation of vastness all about, yet one cannot even glimpse one’s own hands.", parse);
+					Text.NL();
+					Text.Add("The promise of something great hidden behind a veil, yet all that meets the eye is utter desolation.", parse);
+					Text.NL();
+					Text.Add("At long last, Cveta coaxes out the final note from the violin, and lets her bow come to rest at her side. She doesn’t raise her head or move otherwise, and considering how slow the final moments of her melody was, it’s a few seconds before you realize that she’s stopped for good and that wasn’t simply part of her performance.", parse);
+					Text.NL();
+					Text.Add("Perhaps you should ask if she’s feeling all right… even for a sad tune, this is different from her usual fare.", parse);
+					Text.Flush();
+					
+					//[Ask][Let it be]
+					var options = new Array();
+					options.push({ nameStr : "Ask",
+						func : function() {
+							Text.Clear();
+							Text.Add("You gently reach out to tap Cveta on the shoulder, and ask if anything happened to inspire today’s performance. The bird-morph doesn’t reply at first, but eventually looks up at you and shakes her head. <i>“No, I am myself today. I merely wished to experiment with a few styles I remember hearing in the distant past. It has been so long that my memories of them are not the sharpest… I merely wished to test myself to see if I could recall them satisfactorily.”</i>", parse);
+							Text.NL();
+							Text.Add("That sounds like what she would say if she were hiding something, but then by the same measure, that would be what she’d say if she <i>weren’t</i> hiding something, too. Out of curiosity, where <i>did</i> she hear the pieces that she was trying to recreate? Judging by how depressing they were, it’s unlikely that it was any sort of public performance.", parse);
+							Text.NL();
+							Text.Add("<i>“I do not remember,”</i> the songstress admits. <i>“I only remember the music, not where it was played, or even who the musician was. Memory is a fickle thing that way.”</i>", parse);
+							Text.NL();
+							PrintDefaultOptions();
+						}, enabled : true,
+						tooltip : "Question Cveta if she’s feeling all right."
+					});
+					options.push({ nameStr : "Let it be",
+						func : function() {
+							Text.Clear();
+							Text.Add("Knowing how much the songstress respects her own space, you decide to keep your concerns to yourself. After all, she’ll tell you of her own accord if and when she wants to - trying to pry words from her is harder than a yarn ball from a cat-morph, which everyone knows is almost impossible.", parse);
+							Text.NL();
+							PrintDefaultOptions();
+						}, enabled : true,
+						tooltip : "If she’s feeling out of sorts, she’ll want to keep it to herself. Respect her privacy and let her be."
+					});
+					Gui.SetButtonsFromList(options, false, null);
+					Gui.Callstack.push(function() {
+						Text.Add("<i>“Well.”</i> she says, assuming her usual pleasant demeanor as the melancholy mood lifts from her like mist with the sun. <i>“It was not the most jovial of pieces I could come up with, but it takes all kinds to make a world. Without sorrow, we would not be equipped to appreciate joy; without pain, pleasure would be meaningless.”</i>", parse);
+						Text.NL();
+						PrintDefaultOptions();
+					});
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("Without further ado, Cveta launches head-first into a serious, somber piece, the first few lines of music barely having left the violin strings before she accompanies it with a powerful, resonant humming from the back of her throat. It’s not something that could be projected across the outlaws’ fire pit, but at this distance you’re subjected to every ebb and flow, every push and pull of the two forces at play.", parse);
+					Text.NL();
+					Text.Add("The solemn timbre of the violin strings resonates beautifully with Cveta’s voice; at times they work together, other times they push against the other, just like a pair of dancers with the violin leading and the vocals trailing along in accompaniment. It’s something that only she would be able to pull off - skill has little to do with it, for that voice… those strings… yes, some things have to be gifted first, and only then can they be honed to sharp perfection.", parse);
+					Text.NL();
+					Text.Add("Caught up in the music, you get a sense of immenseness - no, it isn’t simple physical size that the music impresses upon you, but a sense of imminentness, of looming. It is a giant boulder balanced on the thinnest of precipices, poised in that final moment before being unleashed upon the mountainside, of the shadow of a wave before it breaks onto the surf. As you would expect, it hold you enraptured, entranced, enthralled until the very moment when it all comes crashing down-", parse);
+					Text.NL();
+					Text.Add("Yet, it never does.", parse);
+					Text.NL();
+					Text.Add("How long she can keep it up, you have no idea, yet Cveta continues to play away with exquisite finesse - you catch her gaze in one of your more lucid moments, and there’s a knowing glint in the large, dilated pupil of her uncovered eye. With one definitive pull of the bow, she lets it all go, holding the note for as long as it will last before it finally fades away into silence.", parse);
+					Text.NL();
+					Text.Add("<i>“I must say,”</i> she adds after you’ve recovered enough of your wits to pay attention, <i>“I am particularly pleased with the results of today’s practice.”</i>", parse);
+					Text.NL();
+					PrintDefaultOptions();
+				}, 1.0, function() { return true; });
+				Gui.Callstack.push(function() {
+					Text.Add("<i>“And that will be it for today’s session,”</i> Cveta says, setting down the violin on her cot and giving you a small curtsey in her usual fashion. “Would you mind showing yourself out, [playername]?”</i>", parse);
+					Text.NL();
+					Text.Add("Why, of course. It’s always a pleasure to hear her play.", parse);
+					Text.NL();
+					Text.Add("<i>“Then drop by tomorrow, and I will see what I can do for you,”</i> is the genial reply. <i>“Good health to you, my friend, and fare well.”</i>", parse);
+					Text.Flush();
+					
+					world.TimeStep({hour: 2});
+					cveta.relation.IncreaseStat(100, 2);
+					
+					Gui.NextPrompt();
+				});
+				scenes.Get();
+			}, enabled : true,
+			tooltip : "You’re certainly able to appreciate the finer things in life. The violin, please."
+		});
+	}
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“Very well.”</i>", parse);
+		Text.Flush();
+		Scenes.Cveta.Prompt();
+	});
 }
 
 Scenes.Cveta.MariaTalkFirst = function() {
