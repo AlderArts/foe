@@ -38,6 +38,8 @@ function Cveta(storage) {
 	
 	this.flags["Met"] = Cveta.Met.NotMet;
 	this.flags["Herself"] = Cveta.Herself.None;
+	
+	this.flirtTimer = new Time();
 
 	if(storage) this.FromStorage(storage);
 }
@@ -62,9 +64,9 @@ Cveta.prototype.FromStorage = function(storage) {
 	this.FirstVag().virgin   = parseInt(storage.virgin) == 1;
 	this.Butt().virgin       = parseInt(storage.avirgin) == 1;
 	
-	this.LoadPersonalityStats(storage);
+	this.flirtTimer.FromStorage(storage.Ftime);
 	
-	// Load flags
+	this.LoadPersonalityStats(storage);
 	this.LoadFlags(storage);
 }
 
@@ -74,8 +76,9 @@ Cveta.prototype.ToStorage = function() {
 		avirgin : this.Butt().virgin ? 1 : 0
 	};
 	
-	this.SavePersonalityStats(storage);
+	storage.Ftime = this.flirtTimer.ToStorage();
 	
+	this.SavePersonalityStats(storage);
 	this.SaveFlags(storage);
 	
 	return storage;
@@ -85,6 +88,10 @@ Cveta.prototype.ToStorage = function() {
 Cveta.prototype.IsAtLocation = function(location) {
 	location = location || party.location;
 	return true;
+}
+
+Cveta.prototype.Update = function(step) {
+	this.flirtTimer.Dec(step);
 }
 
 Cveta.prototype.PerformanceTime = function() {
@@ -170,6 +177,12 @@ Scenes.Cveta.Prompt = function() {
 		}, enabled : true,
 		tooltip : "Have the beautiful bird give you a private performance."
 	});
+	options.push({ nameStr : "Play",
+		func : function() {
+			Scenes.Cveta.PlayPrompt();
+		}, enabled : true,
+		tooltip : "Play around with Cveta. Maybe you can break that prudish attitude of hers…"
+	});
 	/* TODO
 	options.push({ nameStr : "name",
 		func : function() {
@@ -179,6 +192,82 @@ Scenes.Cveta.Prompt = function() {
 	});
 	*/
 	Gui.SetButtonsFromList(options, true); //TODO Leave
+}
+
+
+Scenes.Cveta.PlayPrompt = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("You take a long look at Cveta. The songstress is all calm and composed, distant and dignified - it’s little wonder that some might think her forever out of their reach. Not you, though.", parse);
+	Text.NL();
+	if(cveta.Relation() >= 60) {
+		Text.Add("She tilts her head, feeling your gaze upon her form, then gives you a knowing nod as her eyes brighten a little.", parse);
+		Text.NL();
+	}
+	Text.Add("Well, how do you want to handle your precious, petite pet today?", parse);
+	Text.Flush();
+	
+	//[Flirt][Pet][Get Intimate][Date]
+	var options = new Array();
+	options.push({ nameStr : "Flirt",
+		func : function() {
+			Text.Clear();
+			if(cveta.Relation() < 40) {
+				Text.Add("The songstress looks you directly in the eye, both gaze and face as blank as a stone wall. <i>“Why yes, [playername]. I am acutely aware of the fact that I am quite a desirable specimen of beauty. After all, it is part of the image I am deliberately cultivating for my performances. It helps if the eyes are soothed in addition to the ears.”</i>", parse);
+				Text.NL();
+				Text.Add("Can’t she stop being so utterly serious for once? You’re trying to flirt with her, for - for Aria’s sake!", parse);
+				Text.NL();
+				Text.Add("<i>“Yes, I am aware that you are attempting to flatter me. You are scarcely the first to do so, after all; men and women alike have found the flimsiest of excuses to compliment me on my appearance, or on attributes which I either did not possess or should not have been immediately obvious within minutes of my meeting them. Flattery is a skill that needs to be honed, or at the very least do not make your attempts painfully obvious.”</i> She coughs daintily, rolling her eyes as she does so. <i>“You get points for effort, though. That was a better attempt than some not-quite-subtle propositions I received about court.”</i>", parse);
+			}
+			else if(cveta.Relation() < 70) {
+				Text.Add("Cveta sighs and stops playing for a moment to bat at you with a gloved hand, but it’s a feeble, half-hearted swipe. <i>“Please, [playername]. I am acutely aware of the fact that I am, as some used to put it, ‘a pretty little thing’. I do not need reminding.”</i>", parse);
+				Text.NL();
+				Text.Add("She may not need reminding, but it’s fun to do just that.", parse);
+				Text.NL();
+				Text.Add("<i>“I am scarcely a toy for your amusement!”</i> she huffs, her vibrant feathers instinctively puffing up a little - which makes her look even <i>more</i> alluring. The whole “cute when mad” schtick may not always apply, but it certainly does in her case. A few moments pass in silence, tension palpable in the air, then she resumes playing.", parse);
+				Text.NL();
+				Text.Add("<i>“Look, [playername], this is awkward.”</i>", parse);
+				Text.NL();
+				Text.Add("You smile and feign ignorance. What is? She’s probably the only one who feels awkward about a simple compliment. Seeing as there’s nothing she can - or maybe, she wants - to do about the situation, Cveta shakes her head and resumes the little ditty she was playing.", parse);
+			}
+			else {
+				Text.Add("Cveta fidgets uncomfortably. The large pupil of her uncovered eye darts this way and that, as if desperately seeking escape from the confines of her head; she definitely seems flightier than usual.", parse);
+				Text.NL();
+				Text.Add("And she missed a note. It’s barely noticeable, her fingers quickly compensating for the error, but yes, she clearly missed a note there. You <i>heard</i> it.", parse);
+				Text.NL();
+				Text.Add("<i>“Am I really that pleasing to the eye that you <b>must</b> comment on it, [playername]?”</i>", parse);
+				Text.NL();
+				Text.Add("Why yes, she is, and you say as much. There’s no shame in that any more, is there? Not since you know each other so well?", parse);
+				Text.NL();
+				Text.Add("Cveta doesn’t say anything, but she misses another note. And another, and another, until her music dissolves into a mess of noise and she’s forced to stop playing. Scowling at you - although you’re pretty sure there’s no true malice in the gesture - she takes a few deep breaths to calm herself, reseats her lyre upon her lap, and begins the melody anew.", parse);
+				Text.NL();
+				Text.Add("<i>“Please, [playername]... let us talk about something else? Please?”</i>", parse);
+			}
+			Text.Flush();
+			
+			if(cveta.flirtTimer.Expired()) {
+				cveta.relation.IncreaseStat(50, 2);
+				cveta.flirtTimer = new Time(0,0,0,8,0);
+			}
+			Gui.NextPrompt(Scenes.Cveta.Prompt);
+		}, enabled : true,
+		tooltip : "Well, why not flirt a bit with the beautiful bird?"
+	});
+	/* TODO
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	*/
+	Gui.SetButtonsFromList(options, false, null);
 }
 
 Scenes.Cveta.TalkPrompt = function() {
