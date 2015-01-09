@@ -267,7 +267,7 @@ Scenes.Cveta.PlayPrompt = function() {
 		tooltip : ""
 	});
 	*/
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, true, Scenes.Cveta.Prompt);
 }
 
 Scenes.Cveta.TalkPrompt = function() {
