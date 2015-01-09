@@ -308,72 +308,73 @@ Scenes.Cveta.FirstMeetingPrompt = function(opts) {
 			tooltip : "A desperate fallback for the conversationally deprived, but it's got to be something to talk about, right?"
 		});
 	}
-	//TODO
-	options.push({ nameStr : "Give up",
-		func : function() {
-			Text.Clear();
-			Text.Add("There's nothing left. You're all out of options for making small talk, and Cveta here is remaining as uncooperative as ever. Maybe it would be best to just leave the entire bad situation and tell Maria to-", parse);
-			Text.NL();
-			Text.Add("<i>“[playername].”</i>", parse);
-			Text.NL();
-			Text.Add("What?", parse);
-			Text.NL();
-			Text.Add("<i>“Who set you up to this?”</i>", parse);
-			Text.NL();
-			Text.Add("You're about to protest, but Cveta shakes her head. <i>“This is a camp of outlaws, of people of disparate walks of life who have banded together to oppose the cruel policies of Rigard's aristocracy. It is certainly not expected for a stranger to ask to come into another's abode within this camp and make small talk of little consequence. Trust between neighbours is… varied.", parse);
-			Text.NL();
-			Text.Add("“So, I must ask again: will you please tell me who set you up to this? Rest assured that I do not mean to castigate whoever it happens to be.”</i>", parse);
-			Text.Flush();
-			
-			//[Truth][Silence]
-			var options = new Array();
-			options.push({ nameStr : "Truth",
-				func : function() {
-					Text.Clear();
-					Text.Add("You sigh and admit that Maria was getting worried about her putting on airs, and the effect it was having on some of the outlaws. Cveta listens intently to your words, then nods.", parse);
-					Text.NL();
-					Text.Add("<i>“I was beginning to suspect as much, [playername]. It has not escaped my attention that Maria has begun calling me ‘princess’ behind my back. What she mistakes for pompousness and haughtiness is merely simple decorum.", parse);
-					Text.NL();
-					Text.Add("“Nobility is more than just blood, [playername]. It is of the spirit, it is an ethos, it is what you are, not what you can buy or sell. It is… hard to put into words, yet all who see this elusive thing instinctively recognize it, either as peers, or as subordinates. You have seen Zenith, I presume; he possesses much of it. The form his nobility takes is more palatable to those unacquainted with refinement. The same cannot be said of me.”</i>", parse);
-					Text.NL();
-					Text.Add("Her piece said, Cveta closes her eyes a moment, humming to herself, and when she reopens them her gaze is a little more animated.", parse);
-					Text.NL();
-					Text.Add("<i>“Do not worry, [playername]. Believe me, I am at times tempted to be as aggravated with Maria and her ilk as they are with me; it would be strange if it were otherwise, since we come from ways of life that are vastly different. Nevertheless, I believe I can effect a reconciliation over time. Thank you for bringing this to my attention.”</i>", parse);
-					Text.NL();
-					Scenes.Cveta.FirstMeetingCont();
-				}, enabled : true,
-				tooltip : "Tell Cveta that Maria sent you to talk to her, and why."
-			});
-			options.push({ nameStr : "Silence",
-				func : function() {
-					Text.Clear();
-					Text.Add("Since Cveta's already figured out someone sent you, it'd do little good to claim you just came in for a stroll of your own accord. Shrugging, you opt to stay silent, which seems to be the best way to cover for Maria. After a few moments, Cveta realizes you aren't going to spill the beans and brushes the hair away from her usually covered eye, raising her gaze to meet your own.", parse);
-					Text.NL();
-					Text.Add("<i>“Such loyalty is impressive. I am sorry. Please forgive me… ”</i>", parse);
-					Text.NL();
-					Text.Add("As the bird-morph speaks, something changes in her eyes and the melody of her voice shifts subtly. Suddenly, you're more aware than ever of how pitiful and waifish Cveta looks, how utterly helpless she is, and how kind it would be to just give her what she wants…", parse);
-					Text.NL();
-					Text.Add("<i>“… But will you not please tell me who sent you on this errand?”</i>", parse);
-					Text.NL();
-					if(Math.log(player.Spi()) >= 4) {
-						Text.Add("Strange. That feeling… it's similar to what you felt when you approached Cveta's tent and heard the music she was playing, only this had a stronger quality to it. You rub your face, clearing your thoughts, and continue your silence until it's clear to Cveta that you really aren't going to surrender this information. If the bird-morph is upset by this, she certainly doesn't show it, keeping a stiff upper - right, she doesn't have lips.", parse);
+	if(options.length == 0) {
+		options.push({ nameStr : "Give up",
+			func : function() {
+				Text.Clear();
+				Text.Add("There's nothing left. You're all out of options for making small talk, and Cveta here is remaining as uncooperative as ever. Maybe it would be best to just leave the entire bad situation and tell Maria to-", parse);
+				Text.NL();
+				Text.Add("<i>“[playername].”</i>", parse);
+				Text.NL();
+				Text.Add("What?", parse);
+				Text.NL();
+				Text.Add("<i>“Who set you up to this?”</i>", parse);
+				Text.NL();
+				Text.Add("You're about to protest, but Cveta shakes her head. <i>“This is a camp of outlaws, of people of disparate walks of life who have banded together to oppose the cruel policies of Rigard's aristocracy. It is certainly not expected for a stranger to ask to come into another's abode within this camp and make small talk of little consequence. Trust between neighbours is… varied.", parse);
+				Text.NL();
+				Text.Add("“So, I must ask again: will you please tell me who set you up to this? Rest assured that I do not mean to castigate whoever it happens to be.”</i>", parse);
+				Text.Flush();
+				
+				//[Truth][Silence]
+				var options = new Array();
+				options.push({ nameStr : "Truth",
+					func : function() {
+						Text.Clear();
+						Text.Add("You sigh and admit that Maria was getting worried about her putting on airs, and the effect it was having on some of the outlaws. Cveta listens intently to your words, then nods.", parse);
 						Text.NL();
-						Text.Add("<i>“Very well. Hold your tongue, as you will. But please inform whoever sent you that in the future, he or she would be best suited to bring any grievances directly to my face instead of hiding behind a proxy.”</i> She looks askance. <i>“As for you, [playername]…  your actions speak well of you.”</i>", parse);
-					}
-					else {
-						Text.Add("Of course! That's what you'd been meaning to do all along! The words flow from your lips almost unbidden - Maria worrying about the “princess” putting on airs, and how she asked you to try and get Cveta to open up. After you've finished your little tale, Cveta looks satisfied and dismisses the concerns with a small wave of a gloved hand.", parse);
+						Text.Add("<i>“I was beginning to suspect as much, [playername]. It has not escaped my attention that Maria has begun calling me ‘princess’ behind my back. What she mistakes for pompousness and haughtiness is merely simple decorum.", parse);
 						Text.NL();
-						Text.Add("<i>“So, it was her. Do not worry, [playername]. I am comfortable as who I am; since Maria's ilk and I come from very different backgrounds, it would be amiss if there were no friction at all between our kind. It will merely take some time for them to get used to me, and for me to reciprocate the favor; I believe I can effect a reconciliation over time and get them to understand the importance of decorum in dealing with others. Thank you for bringing this to my attention.”</i>", parse);
-					}
-					Text.NL();
-					Scenes.Cveta.FirstMeetingCont();
-				}, enabled : true,
-				tooltip : "Refuse to tell Cveta Maria sent you."
-			});
-			Gui.SetButtonsFromList(options, false, null);
-		}, enabled : true,
-		tooltip : "This clearly isn't going anywhere. Cveta clearly isn't the chatty sort, and you're beating your head against a brick wall."
-	});
+						Text.Add("“Nobility is more than just blood, [playername]. It is of the spirit, it is an ethos, it is what you are, not what you can buy or sell. It is… hard to put into words, yet all who see this elusive thing instinctively recognize it, either as peers, or as subordinates. You have seen Zenith, I presume; he possesses much of it. The form his nobility takes is more palatable to those unacquainted with refinement. The same cannot be said of me.”</i>", parse);
+						Text.NL();
+						Text.Add("Her piece said, Cveta closes her eyes a moment, humming to herself, and when she reopens them her gaze is a little more animated.", parse);
+						Text.NL();
+						Text.Add("<i>“Do not worry, [playername]. Believe me, I am at times tempted to be as aggravated with Maria and her ilk as they are with me; it would be strange if it were otherwise, since we come from ways of life that are vastly different. Nevertheless, I believe I can effect a reconciliation over time. Thank you for bringing this to my attention.”</i>", parse);
+						Text.NL();
+						Scenes.Cveta.FirstMeetingCont();
+					}, enabled : true,
+					tooltip : "Tell Cveta that Maria sent you to talk to her, and why."
+				});
+				options.push({ nameStr : "Silence",
+					func : function() {
+						Text.Clear();
+						Text.Add("Since Cveta's already figured out someone sent you, it'd do little good to claim you just came in for a stroll of your own accord. Shrugging, you opt to stay silent, which seems to be the best way to cover for Maria. After a few moments, Cveta realizes you aren't going to spill the beans and brushes the hair away from her usually covered eye, raising her gaze to meet your own.", parse);
+						Text.NL();
+						Text.Add("<i>“Such loyalty is impressive. I am sorry. Please forgive me… ”</i>", parse);
+						Text.NL();
+						Text.Add("As the bird-morph speaks, something changes in her eyes and the melody of her voice shifts subtly. Suddenly, you're more aware than ever of how pitiful and waifish Cveta looks, how utterly helpless she is, and how kind it would be to just give her what she wants…", parse);
+						Text.NL();
+						Text.Add("<i>“… But will you not please tell me who sent you on this errand?”</i>", parse);
+						Text.NL();
+						if(Math.log(player.Spi()) >= 4) {
+							Text.Add("Strange. That feeling… it's similar to what you felt when you approached Cveta's tent and heard the music she was playing, only this had a stronger quality to it. You rub your face, clearing your thoughts, and continue your silence until it's clear to Cveta that you really aren't going to surrender this information. If the bird-morph is upset by this, she certainly doesn't show it, keeping a stiff upper - right, she doesn't have lips.", parse);
+							Text.NL();
+							Text.Add("<i>“Very well. Hold your tongue, as you will. But please inform whoever sent you that in the future, he or she would be best suited to bring any grievances directly to my face instead of hiding behind a proxy.”</i> She looks askance. <i>“As for you, [playername]…  your actions speak well of you.”</i>", parse);
+						}
+						else {
+							Text.Add("Of course! That's what you'd been meaning to do all along! The words flow from your lips almost unbidden - Maria worrying about the “princess” putting on airs, and how she asked you to try and get Cveta to open up. After you've finished your little tale, Cveta looks satisfied and dismisses the concerns with a small wave of a gloved hand.", parse);
+							Text.NL();
+							Text.Add("<i>“So, it was her. Do not worry, [playername]. I am comfortable as who I am; since Maria's ilk and I come from very different backgrounds, it would be amiss if there were no friction at all between our kind. It will merely take some time for them to get used to me, and for me to reciprocate the favor; I believe I can effect a reconciliation over time and get them to understand the importance of decorum in dealing with others. Thank you for bringing this to my attention.”</i>", parse);
+						}
+						Text.NL();
+						Scenes.Cveta.FirstMeetingCont();
+					}, enabled : true,
+					tooltip : "Refuse to tell Cveta Maria sent you."
+				});
+				Gui.SetButtonsFromList(options, false, null);
+			}, enabled : true,
+			tooltip : "This clearly isn't going anywhere. Cveta clearly isn't the chatty sort, and you're beating your head against a brick wall."
+		});
+	}
 	Gui.SetButtonsFromList(options, false, null);
 }
 
