@@ -43,7 +43,7 @@ world.loc.Outlaws.Camp.events.push(new Link(
 ));
 world.loc.Outlaws.Camp.events.push(new Link(
 	"Cveta", function() {
-		var met  = cveta.flags["Met"] >= Cveta.Met.AccessibleTalk;
+		var met  = cveta.flags["Met"] >= Cveta.Met.FirstMeeting;
 		var time = cveta.WakingTime();
 		return met && time;
 	}, true,
@@ -52,7 +52,7 @@ world.loc.Outlaws.Camp.events.push(new Link(
 			Scenes.Cveta.CampDesc();
 	},
 	function() {
-		//TODO
+		Scenes.Cveta.Approach();
 	}
 ));
 
