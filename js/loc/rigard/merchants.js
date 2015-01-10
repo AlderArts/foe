@@ -147,6 +147,100 @@ world.loc.Rigard.ShopStreet.street.events.push(new Link(
 ));
 
 world.loc.Rigard.ShopStreet.street.events.push(new Link(
+	"Violin", function() { return !rigard.UnderLockdown() && cveta.flags["Met"] == Cveta.Met.ViolinQ; }, function() { return party.coin >= 500; },
+	null,
+	function() {
+		var parse = {
+			playername : player.name,
+			sirmadam : player.mfFem("sir", "madam")
+		};
+		
+		cveta.flags["Met"] = Cveta.Met.ViolinGet;
+		
+		Text.Clear();
+		Text.Add("Walking down the length of the Merchants’ Street, you keep an eye out for the store that Cveta mentioned. It’s not too hard to find, being just across the street from Silken Delights, wedged in between a confectioner’s and haberdashers’. It’s a crooked little thing, slightly out of place in the finery of many of the other shops in the district, but a look at the antiques displayed in the shop window suggests that its dinginess is part of its marketing. After all, where better to find deals on such knick-knacks than in small corner stores like these? Even the letters on the sign, “Rintell’s”, have been made to resemble spidery writing, rather than being printed onto the wood like they reveal themselves to be on closer inspection.", parse);
+		Text.NL();
+		parse["comp"] = party.Num() == 2 ? party.Get(1).name :
+		                party.Num() >  2 ? "your companions" : "";
+		parse["c"] = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
+		Text.Add("Hoping someone else hasn’t come in already and bought the violin in question, you push open the door and step through, sending the bells affixed to the door to chiming. The interior of the shop is slightly musty but well-ventilated and equally brightly lit, and numerous pieces of merchandise are on display- on shelves for the smaller pieces, and in glass cases for the bulkier ones. There’re also some which <i>isn’t</i> on display- instead being packed away in boxes, which are currently being shuffled around by a young, bespectacled lion-morph who can’t be any more than twenty, dressed in a pair of simple white overalls. He looks up at you[c] as you approach, dusts off his hands and gives you a smile.", parse);
+		Text.NL();
+		Text.Add("<i>“Welcome to Rintell’s, curio extraordinaire, [sirmadam]. I am Dio Rintell, and can I help you? Perhaps you are just browsing, or maybe you have come for a conversation piece with which to spruce up your living room?”</i> He waggles a paw at the back of his shop, past the old paintings, seasoned instruments and antique dinnerware, amongst other things. <i>“Please forgive me for the state of the store. I’ve been taking inventory for the last couple of days and cleaning out some of the dustier spots. Grandpa was adamant about the store’s old image, but I think it’s time it had a makeover to appeal to the new tastes in Rigard’s upper crust.”</i>", parse);
+		Text.NL();
+		Text.Add("Wait. His grandfather <i>was</i> adamant?", parse);
+		Text.NL();
+		Text.Add("<i>“Umm… well, yes,”</i> Dio admits, scratching at his mane. <i>“Old Grandpa passed away scarcely less than a week ago, and left the place to me ‘cause Dad was already established where he was, and I always loved the old store. He never was the best bookkeeper, though, which is why I’ve been busy making lists and balancing figures for the last couple of days. Then there was the matter of the solicitor and getting enough coin to make claiming the inheritance smooth and easy, what with me being a morph and all, but…", parse);
+		Text.NL();
+		Text.Add("“Bah, I shouldn’t be troubling you with my personal problems. If you want to look around, feel free to do so; wouldn’t have opened for business otherwise, would I? You find something you like, just tell me, and if it doesn’t have a price tag then I’ll look in the books for one.”</i>", parse);
+		Text.NL();
+		parse["c"] = party.Num() > 1 ? Text.Parse(", leaving [comp] behind to admire the wonders of ancient clay mugs and candle-holders fashioned from preserved skulls,", parse) : "";
+		Text.Add("Sounds like a plan. You head for the back of the store[c] and make a beeline for the antique instruments lying about there. Dio clearly hasn’t gotten around to cleaning up this part of his inheritance yet, and wedged between an accordion and a huge, tarnished tuba is the only violin in the place. You lift it up, open the leather case and brush off the worst of the dust on the instrument’s varnished wood, looking for the maker’s mark somewhere on it. Sure enough, your efforts are rewarded with a faded seal near its bottom with the letters ‘GRA’ within it. This must be the violin Cveta sent you after!", parse);
+		Text.NL();
+		Text.Add("<i>“Oh-ho, that’s a fine piece indeed.”</i> You turn to find Dio struggling under a small mountain of cymbals, which he carefully sets down by an antique piano before pulling out a pocketbook from his overalls and flipping through its pages. <i>“Old Grandpa valued this one at… let’s see… five hundred coins, no more, no less. Full-bodied, mellow, solid construction - the strings in the bow and body could use replacing, but that’s only to be expected. With these old instruments, Grandpa always told me, the wood’s always the most important.", parse);
+		Text.NL();
+		Text.Add("“Again, five hundred coins if you want it, case, bow and all.”</i>", parse);
+		Text.NL();
+		Text.Add("You look at the lion-morph’s earnest face, and wonder if you should tell him the truth lest it weigh on your conscience…", parse);
+		Text.Flush();
+		
+		//[Yes][No]
+		var options = new Array();
+		options.push({ nameStr : "Yes",
+			func : function() {
+				Text.Clear();
+				Text.Add("Damn. Sure, Cveta did say the proprietor was going to try and cheat you, but that wasn’t Dio - that was his grandfather, and the old coot’s dead and buried now. Pulling off that sort of trick when he’s clearly new to the game- well, it’s not going to be easy on your conscience. Steeling yourself, you show Dio the maker’s mark on the bottom of the violin, explain what you think it is, and tell him that the instrument is probably worth a good deal more than his grandfather thought it was.", parse);
+				Text.NL();
+				Text.Add("<i>“Oh my,”</i> Dio says after a moment’s stunned silence. <i>“A honest customer. And Grandpa always said that the whole business was a game of nickel-and-diming…” He thinks a moment more. <i>“Tell me, [sirmadam], if you don’t mind me asking - just what do you intend to do with this lovely instrument here?”</i>", parse);
+				Text.NL();
+				Text.Add("Well, no better answer than the truth, is there? You tell Dio that the violin’s going to be restored and played in performances, and he mashes his paws together appreciatively, a huge grin on his leonine muzzle.", parse);
+				Text.NL();
+				Text.Add("<i>“Very well! Five hundred coins it is anyway, and give my regards to the fine musician who will be pulling those strings! I’m not going to miss coins that I’d never have even thought of if you hadn’t told me about them, am I?”</i>", parse);
+				Text.NL();
+				Text.Add("Seems like honesty <b>does</b> pay off, or at least in this case, it did. Dio leads you to the store counter, where he takes your money and records the sale in his pocketbook in impeccable handwriting before thrusting the violin and its accessories into your arms.", parse);
+				Text.NL();
+				if(party.InParty(kiakai)) {
+					parse["name"] = kiakai.name;
+					Text.Add("<i>“You did a good deed today.”</i>", parse);
+					Text.NL();
+					Text.Add("Despite the weight of the violin case in your arms, you manage to turn just enough to see [name] beaming at you.", parse);
+					Text.NL();
+					Text.Add("<i>“I saw it all, [playername]. And it is proof that not everyone is out to take advantage of another’s kindness. Would this happen more often- then Eden would be a far better place.”</i>", parse);
+					Text.NL();
+					Text.Add("You nod, and prepare to head out of the antique shop. Yes, you won’t have that burden on your conscience.", parse);
+					Text.NL();
+					kiakai.relation.IncreaseStat(100, 3);
+				}
+				PrintDefaultOptions();
+			}, enabled : true,
+			tooltip : "Tell the young lion-morph the violin is worth more than his grandfather’s valuation."
+		});
+		options.push({ nameStr : "No",
+			func : function() {
+				Text.Clear();
+				Text.Add("Remembering Cveta’s words, you nod and follow Dio to the counter before counting out his payment. The lion-morph watches the small pile of coins grow steadily, then sweeps them into a drawer before making a note in his pocketbook.", parse);
+				Text.NL();
+				Text.Add("<i>“Wonderful, my first sale!”</i> He’s practically beaming now, and reaches out to grab your hand and give it a mighty shake. <i>“And it’s all thanks to my first customer! I’m a little surprised that you didn’t try to haggle the price down - Grandpa always said that antiques collectors are the biggest skinflints on all the worlds - but I’m not going to complain! Thank you kindly again, - oh, I didn’t catch your name.”</i>", parse);
+				Text.NL();
+				Text.Add("Smiling weakly at the lion-morph, you assure him that it’s not needed, and quickly slip out of the door before he can ask any more inconvenient and awkward questions.", parse);
+				Text.NL();
+				PrintDefaultOptions();
+			}, enabled : true,
+			tooltip : "Pay Dio’s asking price for the violin."
+		});
+		Gui.Callstack.push(function() {
+			Text.Add("Now that you have the violin in your possession, maybe you ought to hurry and get it back to Cveta so you don’t have to lug it about with you. It’s not that the instrument’s exceptionally heavy - how much is a violin supposed to weigh, anyway? - but with an antique like this, it’s bound to be fragile!", parse);
+			Text.Flush();
+			
+			party.coin -= 500;
+			party.Inv().AddItem(Items.Quest.Violin);
+			
+			Gui.NextPrompt();
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+));
+
+world.loc.Rigard.ShopStreet.street.events.push(new Link(
 	"Martello", function() { return room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith || room69.flags["Hinges"] == Room69.HingesFlags.TalkedToSmith; }, function() { return world.time.hour >= 9 && world.time.hour < 18; },
 	function() {
 		if(room69.flags["Hinges"] == Room69.HingesFlags.TalkedToGoldsmith) {

@@ -36,9 +36,10 @@ function Cveta(storage) {
 	this.SetLevelBonus();
 	this.RestFull();
 	
-	this.flags["Met"] = Cveta.Met.NotMet;
+	this.flags["Met"]     = Cveta.Met.NotMet;
 	this.flags["Herself"] = Cveta.Herself.None;
 	
+	this.violinTimer = new Time();
 	this.flirtTimer = new Time();
 
 	if(storage) this.FromStorage(storage);
@@ -67,6 +68,7 @@ Cveta.prototype.FromStorage = function(storage) {
 	this.FirstVag().virgin   = parseInt(storage.virgin) == 1;
 	this.Butt().virgin       = parseInt(storage.avirgin) == 1;
 	
+	this.violinTimer.FromStorage(storage.Vtime);
 	this.flirtTimer.FromStorage(storage.Ftime);
 	
 	this.LoadPersonalityStats(storage);
@@ -79,6 +81,7 @@ Cveta.prototype.ToStorage = function() {
 		avirgin : this.Butt().virgin ? 1 : 0
 	};
 	
+	storage.Vtime = this.violinTimer.ToStorage();
 	storage.Ftime = this.flirtTimer.ToStorage();
 	
 	this.SavePersonalityStats(storage);
@@ -94,6 +97,7 @@ Cveta.prototype.IsAtLocation = function(location) {
 }
 
 Cveta.prototype.Update = function(step) {
+	this.violinTimer.Dec(step);
 	this.flirtTimer.Dec(step);
 }
 
@@ -106,8 +110,8 @@ Cveta.prototype.WakingTime = function() {
 Cveta.prototype.InTent = function() {
 	return (world.time.hour >= 8 && world.time.hour < 10) || (world.time.hour >= 2 && world.time.hour < 6);
 }
-Cveta.prototype.Violin = function() { //TODO
-	return false;
+Cveta.prototype.Violin = function() {
+	return this.flags["Met"] >= Cveta.Met.Available;
 }
 Cveta.prototype.BlueRoses = function() { //TODO
 	return false;
@@ -133,6 +137,158 @@ Scenes.Cveta.CampDesc = function() {
 	else
 		Text.Add("The tent's flaps are open, making it clear that the songstress has gone out about her daily business. Maybe you should come back later.", parse);
 	Text.NL();
+}
+
+Scenes.Cveta.ViolinApproach = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("As you’re making to leave from the fire pit with the rest of the outlaws, you hear light footsteps in the dirt behind you, and turn to find Cveta herself eating up the distance between the two of you in big strides - or at least, as big strides as her petite frame will allow.", parse);
+	Text.NL();
+	Text.Add("<i>“Excuse me, [playername]. Do you have a moment?”</i>", parse);
+	Text.Flush();
+	
+	//[Yes][No]
+	var options = new Array();
+	options.push({ nameStr : "Yes",
+		func : function() {
+			Text.Clear();
+			Text.Add("You ask Cveta what it is she wants.", parse);
+			Text.NL();
+			Text.Add("<i>“I have noticed you often at my performances, [playername]; I take it you have developed a ear for my music. How would you like to help me improve on those little shows?”</i>", parse);
+			Text.NL();
+			Text.Add("Is she asking you to join in on her performances? Because you probably don’t have the time to-", parse);
+			Text.NL();
+			Text.Add("<i>“No, no,”</i> Cveta says hurriedly, waving both hands to emphasize her point. <i>“Well, that is what I get for trying to be subtle; so be it, I will not beat about the bush. I am reliably informed that there is a store in Rigard that possesses a certain instrument I wish to purchase. I have the coin, but there is a small problem…”</i>", parse);
+			Text.NL();
+			Text.Add("She can’t get into Rigard?", parse);
+			Text.NL();
+			Text.Add("<i>“Your guess is correct. I had neither a visa nor enough of a human appearance to satisfy the gate guards’ sensibilities, so I tried to persuade them to let me in.”</i>", parse);
+			Text.NL();
+			Text.Add("Persuade? How exactly did she attempt to “persuade” the guards? From your own experience with getting into Rigard, you know that they’re the most stubborn, hard-headed, blindly obedient-", parse);
+			Text.NL();
+			Text.Add("A strange look creeps into the songstress’ uncovered eye. <i>“Why, what anyone else would do, of course. I merely asked them politely if they would be so kind as to let me through, and reassured them that they probably wouldn’t get into trouble for doing so.", parse);
+			Text.NL();
+			Text.Add("“It almost worked, too. They were just about to wave me through until the next shift decided they just had to come and relieve their fellows at that very moment. A matter of poor timing on my part.”</i>", parse);
+			Text.NL();
+			Text.Add("You frown and point out to Cveta that her story is too incredulous to be true. Why would the guards agree to let her into Rigard for no reason at all?", parse);
+			Text.NL();
+			Text.Add("At that question, Cveta suddenly grows serious and looks askance, seeming to shrink in on herself. <i>“[playername], since you are doing me a favor, I suppose it is only right that I tell you something about myself. A performer has to be able to read his or her audience, as you will understand. Music can work wonders - it can inflame passion or dull the senses, it can provoke or placate.This is common knowledge, and a feat any skilled bard can perform.", parse);
+			Text.NL();
+			Text.Add("“However, my family has had a small gift that has been passed through the generations. The guards’ minds were weak, [playername]; their weakness of will was not their fault, but it did not serve them well. All I had to do was-”</i> the sweet song of Cveta’s voice shifts perceptibly, enough so you’re clearly aware of the discordance hidden beneath- <i><b>“-tell them that they really, really wanted to let me through, and as an extremely important and trustworthy individual, they should not doubt a single word I said.</b>", parse);
+			Text.NL();
+			Text.Add("“Do you now understand how I ‘persuaded’ the guards?”</i>", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				Text.Clear();
+				Text.Add("You swallow hard, and nod.", parse);
+				Text.NL();
+				Text.Add("Cveta coughs to clear her throat, and her voice resumes its usual sweet demeanor. Still, she doesn’t look you in the eye. <i>“It is not a gift to be used lightly, [playername], and neither is it one to be publicized. I understand that having to continually doubt your own thoughts is a thoroughly unpleasant experience. I myself have resolved to use it sparingly, and only with good reason.", parse);
+				Text.NL();
+				Text.Add("“Well. The guards were not too pleased with my actions, and declared me some sort of witch in short order. If Zenith had not been near the city on some business of his own, it is likely I would be rotting in some cell at the moment - a most daunting prospect, I am sure you can agree. Nevertheless, the fact remains that I am… what is the term for it? Persona non grata within Rigard for a while, and I need someone to run this errand for me.", parse);
+				Text.NL();
+				parse["t"] = party.InParty(terry) ? ", enough to make Terry’s eyes instinctively light up at the mere sight of it" : "";
+				Text.Add("“So here it is, then.”</i> Cveta reaches into her gown and draws out a sizable pouch of coin. It’s quite heavy[t], but should one really be surprised that a “princess” has money? <i>“It is my wish that you head to the merchant street within Rigard and seek out the establishment known as ‘Rintell’s’. They have in stock a Grameria violin, although the proprietor is not appraised of the instrument’s true value. He will think he is getting the upper hand of the deal, while the converse is true; pay his asking price for violin, bow and case, and return to me with them. A simple errand.”</i>", parse);
+				Text.NL();
+				Text.Add("It certainly sounds simple enough. You tuck away the money carefully and promise Cveta that you’ll return soon with her instrument.", parse);
+				Text.NL();
+				Text.Add("<i>“Please do not tarry.”</i> Cveta raises her eyes and looks quite wistful, even as she brushes past you and is on her way. <i>“It has been a while since I have had a proper violin to practice on. Good health to you, [playername], and remain safe in these troubled times. When you have it in your possession, simply come to me after one of my performances and hand it over.”</i>", parse);
+				Text.Flush();
+				
+				party.coin += 500;
+				
+				cveta.flags["Met"] = Cveta.Met.ViolinQ;
+				
+				Gui.NextPrompt();
+			});
+		}, enabled : true,
+		tooltip : "You do have the time to hear what the songstress wants."
+	});
+	options.push({ nameStr : "No",
+		func : function() {
+			Text.Clear();
+			Text.Add("You tell Cveta that you’ll be a little busy for the next few days. Is it important?", parse);
+			Text.NL();
+			Text.Add("<i>“Not exceedingly so,”</i> Cveta replies. <i>“But your help would be appreciated. Very well, I will ask again in a handful of days. Good health to you, [playername].”</i>", parse);
+			Text.NL();
+			Text.Add("With that, she turns and melds back into the departing crowd, quickly vanishing from sight.", parse);
+			Text.Flush();
+			cveta.violinTimer = new Time(0,0,3,0,0);
+			Gui.NextPrompt();
+		}, enabled : true,
+		tooltip : "You’re a little busy right now. Can it wait?"
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Cveta.ViolinPrompt = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("As you’re leaving the performance, you hear the sound of soft footsteps behind you and turn to find Cveta herself hurrying up to you as quickly as her short legs will carry her. The songstress has an expectant look about her, and you know what she’s going to ask even before the words are out of her beak:", parse);
+	Text.NL();
+	Text.Add("<i>“Did you get the violin, [playername]?”</i>", parse);
+	Text.Flush();
+	
+	//[Yes][No]
+	var options = new Array();
+	options.push({ nameStr : "Yes",
+		func : function() {
+			Text.Clear();
+			Text.Add("She brightens immediately. <i>“You have it? Please, hand it over.”</i>", parse);
+			Text.NL();
+			Text.Add("Without further ado, you ease the violin, case and all, into Cveta’s gloved arms. She doesn’t seem to mind the musty smell of old leather - in fact, actively revels in the proof of its antiquity, opening the case like a child unwrapping a present, with much the same effect. With painstaking care and a little effort, she lifts the violin out of its case, cradling it like a newborn child even as she coos and fusses over it. Closing her eyes, the songstress plucks a few of the strings, listening to each note resonate softly in the air, then lets out an orgasmic sigh of pure satisfaction.", parse);
+			Text.NL();
+			Text.Add("<i>“It is wonderfully preserved,”</i> she says breathlessly. <i>“Oh, the strings and bow do need replacing, but I know where I can get my hands on some catgut and horsehair. With this in my hands, I can play a few more pieces at my performances; I hope you’ll show up regularly.”</i>", parse);
+			Text.NL();
+			Text.Add("With that, she replaces the violin in its case and leans it against a nearby tree, then looks around quickly, making sure no one’s around before fixing her gaze on you.", parse);
+			Text.NL();
+			Text.Add("<i>“You have done well, [playername], and ought to be rewarded.”</i>", parse);
+			Text.NL();
+			Text.Add("Without warning, she’s stepped forward and taken you into her embrace - or at least, as best as her tiny form can muster. You feel Cveta’s head nestling into the crook of your neck, the small mounds of her feathery breasts squashing just ", parse);
+			if(player.FirstBreastRow().Size() > 3)
+				Text.Add("below yours,", parse);
+			else
+				Text.Add("above your stomach,", parse);
+			Text.Add(" and she chirps before releasing her hold on your waist and stepping back, all prim, proper and distant again. She wasn’t just warm, she was <i>extra</i> warm, and so very, very nice to touch. Why does she do so little of it?", parse);
+			Text.NL();
+			Text.Add("<i>“Again, thank you for the favor, [playername]. Should you need to seek me out when I am not otherwise occupied, I would be delighted to receive your presence in my tent. For now, I must attend to the hurts of this poor thing; it could do with some attention with a wine cork. Remain in good health, and until we meet again.”</i>", parse);
+			Text.NL();
+			Text.Add("Cveta gives you a final curtsey, then gathers her new possession into her arms and hefts it in the direction of her tent, leaving you to consider your options.", parse);
+			Text.NL();
+			Text.Add("<b>You may now visit Cveta in her tent, accessible from the outlaws’ camp.</b>", parse);
+			Text.Flush();
+			
+			cveta.relation.IncreaseStat(100, 5);
+			cveta.flags["Met"] = Cveta.Met.Available;
+			party.Inv().RemoveItem(Items.Quest.Violin);
+			
+			Gui.NextPrompt();
+		}, enabled : cveta.flags["Met"] >= Cveta.Met.ViolinGet,
+		tooltip : "Yes, you got the violin. Here it is, in all its glory."
+	});
+	options.push({ nameStr : "No",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“I see. Are the gate guards being an exceptionally noisome lot of late?”</i>", parse);
+			Text.NL();
+			Text.Add("It’s not that, really, you explain hurriedly. It’s just that you haven’t had the time to head out and get it. Cveta’s expression is completely calm and neutral as she listens, betraying absolutely no trace of whether she believes your words or not.", parse);
+			Text.NL();
+			Text.Add("<i>“Mm. Please be reminded that I would truly appreciate it if you would make haste, [playername]. It would simply not do if someone else were to come in and pick it up before you had the chance to. There are not many Grameria violins on Eden - there are some rumors that they came from other worlds, back when portals were common, but whatever their origin, they product some of the richest music possible from a string instrument.”</i>", parse);
+			Text.NL();
+			Text.Add("Without waiting for a reply from you, she sweeps about and moves back into the crowd, her gown trailing behind her until it, too, vanishes from sight.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		}, enabled : true,
+		tooltip : "You haven’t had the opportunity to enter Rigard yet and get it for her."
+	});
+	Gui.SetButtonsFromList(options, false, null);
 }
 
 Scenes.Cveta.Approach = function() {
@@ -1505,7 +1661,12 @@ Scenes.Cveta.Performance = function() {
 	cveta.relation.IncreaseStat(25, 2);
 	world.TimeStep({hour : 2});
 	
-	Gui.NextPrompt();
+	if(cveta.flags["Met"] >= Cveta.Met.ViolinQ && cveta.flags["Met"] < Cveta.Met.Available)
+		Gui.NextPrompt(Scenes.Cveta.ViolinPrompt);
+	else if(cveta.flags["Met"] < Cveta.Met.ViolinQ && cveta.Relation() >= 10 && cveta.violinTimer.Expired())
+		Gui.NextPrompt(Scenes.Cveta.ViolinApproach);
+	else
+		Gui.NextPrompt();
 }
 
 Scenes.Cveta.DreamRoses = function() {

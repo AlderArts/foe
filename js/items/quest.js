@@ -20,3 +20,8 @@ Items.Quest.Scepter = new Item("quest3", "Scepter", ItemType.Quest);
 Items.Quest.Scepter.price = 0;
 Items.Quest.Scepter.Short = function() { return "Lagon's scepter"; }
 Items.Quest.Scepter.Long  = function() { return "There is a large gemstone set into the scepter, which looks to be of fine craftmanship."; }
+
+Items.Quest.Violin = new Item("quest4", "Violin", ItemType.Quest);
+Items.Quest.Violin.price = 0;
+Items.Quest.Violin.Short = function() { return "Cveta's Violin"; }
+Items.Quest.Violin.Long  = function() { return "An incredibly expensive instrument you bought from Dio Rintell in Rigard on the behest of Cveta."; }
