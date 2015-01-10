@@ -751,6 +751,7 @@ Scenes.Lagon.ReturnToBurrowsAfterScepter = function() {
 	options.push({ nameStr : "Enter",
 		func : function() {
 			Text.Clear();
+			burrows.flags["Access"] = Burrows.AccessFlags.QuestlineComplete;
 			party.location = world.loc.Burrows.Throne;
 			Text.Add("Steeling yourself, you head into the dark and dank underground. It’s unusually quiet in the tunnels, and the few bunnies you meet scurry out of sight before you can get close. At one point, you see group of heavily armed bunnies running down a side tunnel. These aren’t the usual horny and uncoordinated rabbits that fill this place; these look like Lagon’s personal guard, and they’re searching for something.", parse);
 			Text.NL();
@@ -837,6 +838,8 @@ Scenes.Lagon.ReturnToBurrowsAfterScepter = function() {
 					Text.NL();
 					Text.Add("It’s a fight!", parse);
 					Text.Flush();
+					
+					party.Inv().RemoveItem(Items.Quest.Scepter);
 					
 					Gui.NextPrompt(Scenes.Lagon.OpheliaFight);
 				}, enabled : true,

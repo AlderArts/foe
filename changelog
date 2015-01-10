@@ -5,6 +5,14 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.3t2
+-------------
+* Fixed a bug where Lagon fight would repeat after siding with Lagon. Doing this also removes the scepter, as intended.
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.3t
 ------------
 * The search for the scepter is on! Includes about 10k words worth of scenes written by Fenoxo. The Gol has two loss scenes and three win scenes.
@@ -30,10 +38,6 @@ Version 0.3t
  - Play (flirt).
 * Maria is added to the Outlaws' camp too, but only for the express reason of enabling Cveta's content.
 * A number of new items have been implemented as drops for the various bosses in the game. If you've already beaten Golem/Orchid, their drops will be added to your inventory.
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.3s
 ------------
