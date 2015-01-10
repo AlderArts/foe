@@ -330,7 +330,18 @@ CacheToGame = function() {
 		terry.SetExpToLevel();
 		miranda.SetExpToLevel();
 	}
-	
+	if(gameCache.version < 20) {
+		if(golem.flags["Met"] >= Scenes.Golem.State.Won_noLoss) {
+			party.Inv().AddItem(Items.Weapons.MageStaff);
+			party.Inv().AddItem(Items.Armor.MageRobes);
+		}
+		if(glade.flags["Visit"] >= 2) {
+			party.Inv().AddItem(Items.Weapons.VineWhip);
+			party.Inv().AddItem(Items.Armor.VineBra);
+			party.Inv().AddItem(Items.Armor.VinePanties);
+			party.Inv().AddItem(Items.Estros);
+		}
+	}
 }
 
 GameToCache = function() {
