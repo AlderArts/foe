@@ -49,7 +49,10 @@ Cveta.prototype.constructor = Cveta;
 Cveta.Met = {
 	NotMet       : 0,
 	MariaTalk    : 1,
-	FirstMeeting : 2
+	FirstMeeting : 2,
+	ViolinQ      : 3,
+	ViolinGet    : 4,
+	Available    : 5
 };
 Cveta.Herself = {
 	None     : 0,
