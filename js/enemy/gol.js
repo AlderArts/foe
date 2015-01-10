@@ -63,11 +63,11 @@ function GolQueen() {
 GolQueen.prototype = new BossEntity();
 GolQueen.prototype.constructor = GolQueen;
 
-//TODO
 GolQueen.prototype.DropTable = function() {
 	var drops = [];
 	drops.push({ it: Items.Quest.Scepter });
-	//drops.push({ it: Items.Leporine });
+	drops.push({ it: Items.Weapons.GolClaw });
+	drops.push({ it: Items.Fertilium });
 	return drops;
 }
 

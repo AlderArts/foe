@@ -297,9 +297,7 @@ Scenes.Cveta.Approach = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("Brushing aside the flaps, you step into Cveta’s tent, leaving behind the hubbub of the rest of the outlaw camp behind. As always, the songstress is perched on her stool, the picture of elegant composure as she acknowledges your entrance with a dip of her head.", parse);
-	if(cveta.Violin())
-		Text.Add(" The violin you bought for her rests in its case by her trunk, carefully sealed against dust and damp alike.", parse);
+	Text.Add("Brushing aside the flaps, you step into Cveta’s tent, leaving behind the hubbub of the rest of the outlaw camp behind. As always, the songstress is perched on her stool, the picture of elegant composure as she acknowledges your entrance with a dip of her head. The violin you bought for her rests in its case by her trunk, carefully sealed against dust and damp alike.", parse);
 	if(cveta.BlueRoses())
 		Text.Add(" A small pot with the stem cutting the two of you took from the estate sits by the tent’s entrance; the plant obviously well-cared for and wants for nothing. It’ll be a while before it can bring forth any blossoms, but it certainly isn’t going to wither on Cveta’s watch.", parse);
 	Text.NL();

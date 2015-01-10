@@ -115,11 +115,11 @@ function LagonRegular(tougher) {
 LagonRegular.prototype = new BossEntity();
 LagonRegular.prototype.constructor = LagonRegular;
 
-//TODO
 LagonRegular.prototype.DropTable = function() {
 	var drops = [];
 	drops.push({ it: Items.Leporine });
-	//TODO this.tougher
+	if(this.tougher)
+		drops.push({ it: Items.Leporine });
 	return drops;
 }
 
@@ -276,10 +276,12 @@ function LagonBrute(scepter) {
 LagonBrute.prototype = new BossEntity();
 LagonBrute.prototype.constructor = LagonBrute;
 
-//TODO
 LagonBrute.prototype.DropTable = function() {
 	var drops = [];
 	drops.push({ it: Items.Leporine });
+	drops.push({ it: Items.Testos });
+	drops.push({ it: Items.Virilium });
+	drops.push({ it: Items.Accessories.LagonCrown });
 	return drops;
 }
 

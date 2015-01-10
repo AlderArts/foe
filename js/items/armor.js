@@ -30,6 +30,18 @@ Items.Armor.BronzeChest.subtype = ItemSubtype.TopArmor;
 Items.Armor.BronzeChest.effect.defMod = 0.3;
 Items.Armor.BronzeChest.effect.stamina = 2;
 
+Items.Armor.VineBra = new Item("chest3", "V.Bra", ItemType.Armor);
+Items.Armor.VineBra.price = 300;
+Items.Armor.VineBra.sDesc = function() { return "vine bra"; }
+Items.Armor.VineBra.lDesc = function() { return "a vine bra"; }
+Items.Armor.VineBra.Short = function() { return "Vine bra"; }
+Items.Armor.VineBra.Long = function() { return "A vine bra."; }
+Items.Armor.VineBra.subtype = ItemSubtype.TopArmor;
+Items.Armor.VineBra.effect.defMod = 0.3;
+Items.Armor.VineBra.effect.stamina = 2;
+Items.Armor.VineBra.effect.libido = 3;
+Items.Armor.VineBra.effect.charisma = 2;
+
 Items.Armor.LeatherPants = new Item("pants0", "L.Pants", ItemType.Armor);
 Items.Armor.LeatherPants.price = 20;
 Items.Armor.LeatherPants.sDesc = function() { return "leather pants"; }
@@ -50,16 +62,39 @@ Items.Armor.BronzeLeggings.subtype = ItemSubtype.BotArmor;
 Items.Armor.BronzeLeggings.effect.defMod = 0.2;
 Items.Armor.BronzeLeggings.effect.stamina = 2;
 
-Items.Armor.SimpleRobes = new Item("robe0", "S.Robes", ItemType.Armor);
+Items.Armor.VinePanties = new Item("pants2", "V.Panties", ItemType.Armor);
+Items.Armor.VinePanties.price = 200;
+Items.Armor.VinePanties.sDesc = function() { return "vine panties"; }
+Items.Armor.VinePanties.lDesc = function() { return "a pair of vine panties"; }
+Items.Armor.VinePanties.Short = function() { return "Vine panties"; }
+Items.Armor.VinePanties.Long = function() { return "A pair of vine panties."; }
+Items.Armor.VinePanties.subtype = ItemSubtype.BotArmor;
+Items.Armor.VinePanties.effect.defMod = 0.3;
+Items.Armor.VinePanties.effect.stamina = 2;
+Items.Armor.VinePanties.effect.libido = 3;
+Items.Armor.VinePanties.effect.charisma = 2;
+
+Items.Armor.SimpleRobes = new Item("robe0", "S.Robe", ItemType.Armor);
 Items.Armor.SimpleRobes.price = 40;
-Items.Armor.SimpleRobes.sDesc = function() { return "simple robes"; }
-Items.Armor.SimpleRobes.lDesc = function() { return "simple cloth robes"; }
-Items.Armor.SimpleRobes.Short = function() { return "Simple robes"; }
-Items.Armor.SimpleRobes.Long = function() { return "Simple cloth robes."; }
+Items.Armor.SimpleRobes.sDesc = function() { return "simple robe"; }
+Items.Armor.SimpleRobes.lDesc = function() { return "simple cloth robe"; }
+Items.Armor.SimpleRobes.Short = function() { return "Simple robe"; }
+Items.Armor.SimpleRobes.Long = function() { return "Simple cloth robe."; }
 Items.Armor.SimpleRobes.subtype = ItemSubtype.FullArmor;
 Items.Armor.SimpleRobes.effect.defMod = 0;
 Items.Armor.SimpleRobes.effect.intelligence = 1;
 Items.Armor.SimpleRobes.effect.spirit = 1;
+
+Items.Armor.MageRobes = new Item("robe1", "M.Robe", ItemType.Armor);
+Items.Armor.MageRobes.price = 200;
+Items.Armor.MageRobes.sDesc = function() { return "mage robe"; }
+Items.Armor.MageRobes.lDesc = function() { return "stylized magician robe"; }
+Items.Armor.MageRobes.Short = function() { return "Mage robe"; }
+Items.Armor.MageRobes.Long = function() { return "Stylized magician robe."; }
+Items.Armor.MageRobes.subtype = ItemSubtype.FullArmor;
+Items.Armor.MageRobes.effect.defMod = 0.2;
+Items.Armor.MageRobes.effect.intelligence = 4;
+Items.Armor.MageRobes.effect.spirit = 3;
 
 Items.Armor.StylizedClothes = new Item("cloth0", "S.Clothes", ItemType.Armor);
 Items.Armor.StylizedClothes.price = 50;

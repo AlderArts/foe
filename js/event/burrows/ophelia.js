@@ -118,10 +118,12 @@ function OpheliaBrute() {
 OpheliaBrute.prototype = new BossEntity();
 OpheliaBrute.prototype.constructor = OpheliaBrute;
 
-//TODO
 OpheliaBrute.prototype.DropTable = function() {
 	var drops = [];
 	drops.push({ it: Items.Leporine });
+	drops.push({ it: Items.EquiniumPlus });
+	drops.push({ it: Items.Estros });
+	drops.push({ it: Items.Fertilium });
 	return drops;
 }
 

@@ -26,6 +26,16 @@ Items.Accessories.RaniFavor.effect.maxHp = 100;
 Items.Accessories.RaniFavor.effect.spirit = 5;
 Items.Accessories.RaniFavor.effect.charisma = 5;
 
+Items.Accessories.LagonCrown = new Item("head0", "Lagon's crown", ItemType.Accessory);
+Items.Accessories.LagonCrown.price = 1250;
+Items.Accessories.LagonCrown.Short = function() { return "Lagon's crown"; }
+Items.Accessories.LagonCrown.Long = function() { return "A crown once belonging to the lagomorph king."; }
+Items.Accessories.LagonCrown.effect.maxHp = 120;
+Items.Accessories.LagonCrown.effect.maxLust = 80;
+Items.Accessories.LagonCrown.effect.strength = 4;
+Items.Accessories.LagonCrown.effect.dexterity = 6;
+Items.Accessories.LagonCrown.effect.libido = 3;
+
 Items.Accessories.SimpleCuffs = new Item("cuffs0", "S.Cuffs", ItemType.Accessory);
 Items.Accessories.SimpleCuffs.price = 20;
 Items.Accessories.SimpleCuffs.Short = function() { return "Simple cuffs"; }

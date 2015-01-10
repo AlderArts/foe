@@ -66,7 +66,8 @@ GolemBoss.prototype.constructor = GolemBoss;
 //TODO
 GolemBoss.prototype.DropTable = function() {
 	var drops = [];
-	//drops.push({ it: Items.Leporine });
+	drops.push({ it: Items.Weapons.MageStaff });
+	drops.push({ it: Items.Armor.MageRobes });
 	return drops;
 }
 

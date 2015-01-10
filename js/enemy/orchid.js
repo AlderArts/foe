@@ -62,7 +62,10 @@ OrchidBoss.prototype.constructor = OrchidBoss;
 //TODO
 OrchidBoss.prototype.DropTable = function() {
 	var drops = [];
-	//drops.push({ it: Items.Leporine });
+	drops.push({ it: Items.Weapons.VineWhip });
+	drops.push({ it: Items.Armor.VinePanties });
+	drops.push({ it: Items.Armor.VineBra });
+	drops.push({ it: Items.Estros });
 	return drops;
 }
 
