@@ -118,7 +118,7 @@ Scenes.Mothgirl.LoneEnc = function() {
 	
 	enc.onEncounter = function() {
 		Text.Clear();
-		if(Mothgirl.Met()) {
+		if(!Mothgirl.Met()) {
 			Text.Add("As you make your way through the overgrown forest, you start to hear a faint… buzzing? You look around for the source of the strange noise, clutching your [weapon] tight as the alien sound grows louder and louder, coming from seemingly all around you. You back up, still scanning your surroundings for a threat. Suddenly, the world is spinning. You give a helpless cry as you tumble to the ground, foot caught on a thick root. With a grunt, you flop onto your backside, staring wide-eyed into the treetops.", parse);
 			Text.NL();
 			Text.Add("And there it is! A swirling mass of white, as fluffy as a cloud, is circling you from on high, carried aloft on a set of brilliant pink wings, so delicate and translucent they look like they'd be more at home on a butterfly than… whatever that is. It's human sized, and fast, buzzing around too quickly for you to get a good look at it. At least until it dive-bombs you. You twist and roll, tucking your [legs] up as you tumble out of the creature's way. You jump up, readying your [weapon] as the creature banks and flies back around, executing a roll of its own before coming to a stop a few paces from you, hovering just above the ground.", parse);
