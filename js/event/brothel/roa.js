@@ -54,10 +54,11 @@ Roa.Met = {
 };
 
 Roa.Lagon = {
-	No       : 0,
-	Talked   : 1,
-	Defeated : 2,
-	Restored : 3
+	No        : 0,
+	Talked    : 1,
+	Defeated  : 2,
+	Restored  : 3,
+	SidedWith : 4
 };
 
 //TODO
@@ -274,7 +275,26 @@ Scenes.Roa.TalkPrompt = function(backPrompt) {
 		tooltip : ""
 	});
 	*/
-	if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3 && roa.flags["Lagon"] < Roa.Lagon.Talked) {
+	
+	/*
+	if(burrows.LagonAlly() && roa.flags["Lagon"] < Roa.Lagon.SidedWith) {
+		options.push({ nameStr : "",
+			func : function() {
+				Text.Clear();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Flush();
+				
+				roa.flags["Lagon"] = Roa.Lagon.SidedWith;
+				
+				roa.relation.DecreaseStat(-100, 50);
+				
+				Scenes.Roa.TalkPrompt(backPrompt);
+			}, enabled : true,
+			tooltip : "" //TODO
+		});
+	}
+	else*/ if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3 && roa.flags["Lagon"] < Roa.Lagon.Talked) {
 		options.push({ nameStr : "Scepter",
 			func : function() {
 				burrows.flags["Access"] = Burrows.AccessFlags.Stage4;
@@ -351,9 +371,7 @@ Scenes.Roa.TalkPrompt = function(backPrompt) {
 			tooltip : "Ask if he’s Ophelia’s brother; and if that’s so, what he’s done with Lagon scepter."
 		});
 	}
-	
-	//TODO
-	if(burrows.LagonDefeated() && roa.flags["Lagon"] < Roa.Lagon.Defeated) {
+	else if(burrows.LagonDefeated() && roa.flags["Lagon"] < Roa.Lagon.Defeated) {
 		options.push({ nameStr : "Lagon",
 			func : function() {
 				Text.Clear();
@@ -376,12 +394,10 @@ Scenes.Roa.TalkPrompt = function(backPrompt) {
 				
 				Scenes.Roa.TalkPrompt(backPrompt);
 			}, enabled : true,
-			tooltip : "" //TODO
+			tooltip : "Tell him about how you defeated Lagon."
 		});
 	}
-	
-	//TODO
-	if(burrows.VenaRestored() && roa.flags["Lagon"] < Roa.Lagon.Restored) {
+	else if(burrows.VenaRestored() && roa.flags["Lagon"] < Roa.Lagon.Restored) {
 		options.push({ nameStr : "Vena",
 			func : function() {
 				Text.Clear();
@@ -390,7 +406,7 @@ Scenes.Roa.TalkPrompt = function(backPrompt) {
 				
 				Scenes.Roa.TalkPrompt(backPrompt);
 			}, enabled : true,
-			tooltip : "" //TODO
+			tooltip : "Tell him about how you restored Vena."
 		});
 	}
 	
