@@ -250,7 +250,7 @@ Scenes.Mothgirl.WinPrompt = function() {
 	
 	var cocksInAss = player.CocksThatFit(moth.Butt(), null, 30);
 	var p1cock = player.BiggestCock(cocksInAss);
-	var strapon = p1cock.isStrapon;
+	var strapon = p1cock ? p1cock.isStrapon : false;
 	
 	var parse = {
 		acocks : function() { return player.MultiCockDesc(cocksInAss); }
@@ -276,12 +276,14 @@ Scenes.Mothgirl.WinPrompt = function() {
 			tooltip : Text.Parse("Shove[oneof] your cock[s] between those big, succulent breasts of hers!", parse)
 		});
 	}
-	options.push({ nameStr : "Anal",
-		func : function() {
-			Scenes.Mothgirl.WinAnal(enc, cocksInAss);
-		}, enabled : cocksInAss.length > 0,
-		tooltip : Text.Parse("Stick your [acocks] in her butt!", parse)
-	});
+	if(p1cock) {
+		options.push({ nameStr : "Anal",
+			func : function() {
+				Scenes.Mothgirl.WinAnal(enc, cocksInAss);
+			}, enabled : cocksInAss.length > 0,
+			tooltip : Text.Parse("Stick your [acocks] in her butt!", parse)
+		});
+	}
 	if(player.FirstVag()) {
 		options.push({ nameStr : "Get Oral",
 			func : function() {
