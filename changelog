@@ -9,6 +9,7 @@ Version 0.3t2
 -------------
 * Fixed a bug where Lagon fight would repeat after siding with Lagon. Doing this also removes the scepter, as intended.
 * Fixed a bug in Mothgirl win for female players.
+* You can now leave the Mothgirl battle without playing a sex scene.
 
 --------------------------------------------
              PREVIOUS VERSIONS

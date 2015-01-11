@@ -292,7 +292,7 @@ Scenes.Mothgirl.WinPrompt = function() {
 			tooltip : Text.Parse("Play with the moth's tits and make her eat your pussy!", parse)
 		});
 	}
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, true);
 }
 
 Scenes.Mothgirl.WinTitfuck = function(enc) {
