@@ -1436,7 +1436,8 @@ Scenes.Lizards.LossPrompt = function() {
 		m1Name     : function() { return enc.male.NameDesc(); },
 		m1hisher   : function() { return enc.male.hisher(); },
 		m1HeShe    : function() { return enc.male.HeShe(); },
-		m1heshe    : function() { return enc.male.heshe(); }
+		m1heshe    : function() { return enc.male.heshe(); },
+		leg        : function() { return player.LegDesc(); }
 	};
 	
 	if(player.LustLevel() > 0.6) {
@@ -1451,7 +1452,7 @@ Scenes.Lizards.LossPrompt = function() {
 		}
 		// If herm
 		else if(player.FirstCock() && player.FirstVag()) {
-			Text.AddOutput("You find it hard to concentrate through the fog being pumped through your brain by your dually aroused sexes. Your [vagDesc] quivers, and you can feel your own fluids trickling down your leg. Set to the rhythm of your cunt's slick clenching, you can feel the pulses sending shivers up and down your spine from your [numCocks].", parse);
+			Text.AddOutput("You find it hard to concentrate through the fog being pumped through your brain by your dually aroused sexes. Your [vagDesc] quivers, and you can feel your own fluids trickling down your [leg]. Set to the rhythm of your cunt's slick clenching, you can feel the pulses sending shivers up and down your spine from your [numCocks].", parse);
 		}
 		Text.Newline();
 		Text.AddOutput("[m1Name] stops in front of you, gazing down over your heaving form, a smirk on [m1hisher] face. [m1HeShe] leans down, hands reaching for your shoulders. You don't even bother to resist. The way that [m1heshe] looks at you hungrily as [m1heshe] lifts you by your shoulders, intentions deviously obvious, you can't quite manage to bring yourself to regret losing the fight...", parse);
