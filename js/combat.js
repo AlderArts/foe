@@ -194,11 +194,13 @@ Encounter.prototype.Cleanup = function() {
 		var e = this.enemy.members[i];
 		e.ClearCombatBonuses();
 		e.combatStatus.EndOfCombat();
+		e.uniqueName = null;
 	}
 	for(var i = 0; i < party.members.length; i++) {
 		var e = party.members[i];
 		e.ClearCombatBonuses();
 		e.combatStatus.EndOfCombat();
+		e.uniqueName = null;
 	}
 	curEncounter = null;
 }

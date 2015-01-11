@@ -9,6 +9,7 @@ Version 0.3u
 ------------
 * Fixed a bug in mothgirl, the "first meeting" flag was flipped the wrong way.
 * Fixed a bug in Roa, where it was possible to lock yourself out of getting the scepter.
+* Fixed a bug when fighting named mobs that later join you (Terry, mainly).
 
 --------------------------------------------
              PREVIOUS VERSIONS
