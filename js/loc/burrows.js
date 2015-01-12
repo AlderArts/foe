@@ -81,7 +81,7 @@ Burrows.prototype.LagonAlly = function() {
 }
 //TODO
 Burrows.prototype.VenaRestored = function() {
-	return this.flags["Access"] >= Burrows.AccessFlags.QuestlineComplete;
+	return false;
 }
 
 Burrows.prototype.ToStorage = function() {
