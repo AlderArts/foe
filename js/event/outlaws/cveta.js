@@ -38,9 +38,12 @@ function Cveta(storage) {
 	
 	this.flags["Met"]     = Cveta.Met.NotMet;
 	this.flags["Herself"] = Cveta.Herself.None;
+	this.flags["Music"]   = Cveta.Music.No;
+	this.flags["Singer"]  = Cveta.Singer.No;
+	this.flags["Bard"]    = Cveta.Bard.No;
 	
 	this.violinTimer = new Time();
-	this.flirtTimer = new Time();
+	this.flirtTimer  = new Time();
 
 	if(storage) this.FromStorage(storage);
 }
@@ -60,7 +63,19 @@ Cveta.Herself = {
 	Outlaws  : 1,
 	Nobility : 2,
 	Mandate  : 3
+};
+Cveta.Music = {
+	No     : 0,
+	Talked : 1
 }
+Cveta.Bard = {
+	No     : 0,
+	Taught : 1
+};
+Cveta.Singer = {
+	No     : 0,
+	Taught : 1
+};
 
 Scenes.Cveta = {};
 
@@ -340,6 +355,14 @@ Scenes.Cveta.Prompt = function() {
 		}, enabled : true,
 		tooltip : "Play around with Cveta. Maybe you can break that prudish attitude of hers…"
 	});
+	if(cveta.flags["Music"] >= Cveta.Music.Talked && cveta.flags["Bard"] < Cveta.Bard.Taught && cveta.flags["Singer"] < Cveta.Singer.Taught) {
+		options.push({ nameStr : "Teach",
+			func : function() {
+				Scenes.Cveta.Teach();
+			}, enabled : cveta.Relation() >= 25,
+			tooltip : "Ask Cveta if she can teach you something of her craft."
+		});
+	}
 	/* TODO
 	options.push({ nameStr : "name",
 		func : function() {
@@ -351,6 +374,109 @@ Scenes.Cveta.Prompt = function() {
 	Gui.SetButtonsFromList(options, true); //TODO Leave
 }
 
+Scenes.Cveta.Teach = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	var bardAvailable   = false;
+	var singerAvailable = false;
+	for(var i = party.Num()-1; i >= 0; i--) {
+		var p = party.Get(i);
+		var bard   = p.jobs["Bard"];
+		var singer = p.jobs["Singer"];
+		if(bard   && bard.job.Available(p))   bardAvailable = p;
+		if(singer && singer.job.Available(p)) singerAvailable = p;
+	}
+	
+	Text.Clear();
+	if(singerAvailable && cveta.flags["Singer"] < Cveta.Singer.Taught) {
+		parse["name"] = singerAvailable.name;
+		parse["poss"] = singerAvailable.possessive();
+		parse = singerAvailable.ParserPronouns(parse);
+		
+		Text.Add("Setting down her lyre by her side, Cveta studies [name] for a good ten minutes, then brightens, her entire self perking up and becoming more animated. She’s clearly eager about this.", parse);
+		Text.NL();
+		Text.Add("<i>“Yes, I can definitely impart some of my knowledge on the use of voice, [playername]. It will take some time and there is much that must be learnt from personal experience after I am done, but I can certainly give instruction on the fundamentals.”</i>", parse);
+		Text.NL();
+		Text.Add("With that, she stands and gently corrects [poss] posture, instructing [name] to follow her in the most basic deep-breathing exercises to increase [poss] ability to hold a note. The songstress is an exacting teacher - it’s a good, long while before she’s satisfied with [hisher] form, and then she has [name] sing a few scales to better get a grip on [poss] vocal range.", parse);
+		Text.NL();
+		Text.Add("<i>“Well,”</i> she mutters to herself, clicking her beak. <i>“Now that I have a better idea of what I am to work with… let us see what can truly be done.”</i>", parse);
+		Text.NL();
+		parse["try"] = singerAvailable.plural() ? "try" : "tries";
+		parse["s"]   = singerAvailable.plural() ? "" : "s";
+		Text.Add("The next couple of hours are filled with her demonstrating the differences in resonance when one sings from the chest, the head, or even the nose. It’s quite a bit to swallow in one sitting, but [name] [try] to follow as best as possible. Cveta doesn’t hit, slap or strike, but the edge of disappointment in the songstress’ voice stings just as badly every time [name] fail[s] to sing on-key.", parse);
+		Text.NL();
+		Text.Add("<i>“Posture is important, as your voice is alive and reflects your mind and soul. Slouch and slump, and so will your voice - and more importantly, your audience. Breathe some life into those scales, [name]. I want to see you put some effort into it.”</i>", parse);
+		Text.NL();
+		Text.Add("Hours tick by, even as Cveta demonstrates how to practice the dynamics and agility of one’s voice, her divine soprano going from high to low and high again, entire scales and sequences of notes flowing from her beak like warm sunlight. More disappointment, more encouragement, more sips of water to soothe the throat - by the time the lessons are done, much of the day has passed.", parse);
+		Text.NL();
+		Text.Add("<i>“And there we have the basics. Perhaps in time, you will be able to truly control your voice and fully bring out the emotions of a song to sway your listeners, but that will be some ways down the road.”</i>", parse);
+		Text.NL();
+		Text.Add("Crossing the small space within the tent to her trunk, Cveta digs out a thick notebook, passing it over to [name]. <i>“Here. These are my notes from when I was a girl - everything I have taught you today may be found within its pages, plus so much more. I expect you to practice on your own and engage in much self-study if you are to make something of yourself.", parse);
+		Text.NL();
+		Text.Add("<i>“Now, please leave me. You need to rest your voice, and so do I, especially when I still have to perform later. Good health, and fare well.”</i>", parse);
+		Text.NL();
+		Text.Add("<b>You now have access to the Singer job.</b>", parse);
+		Text.Flush();
+		
+		cveta.flags["Singer"] = Cveta.Singer.Taught;
+		
+		world.TimeStep({hour : 8});
+		Gui.NextPrompt();
+	}
+	else if(bardAvailable && cveta.flags["Bard"] < Cveta.Bard.Taught) {
+		parse["name"] = bardAvailable.name;
+		parse["poss"] = bardAvailable.possessive();
+		parse = bardAvailable.ParserPronouns(parse);
+		
+		Text.Add("At the request, Cveta stops playing and studies [name] for a good ten minutes, then brightens, nodding. She’s clearly eager about this, and more than willing to get started.", parse);
+		Text.NL();
+		Text.Add("<i>“It seems that you have been working hard. Since you understand the basics of harmony and rhythm, there is no need for me to go through them again and thus waste precious time. Very well, let us begin. Do understand that I am trusting you greatly by allowing you to use my instruments for these exercises.”</i>", parse);
+		Text.NL();
+		Text.Add("Without further ado, she crosses the space to her cot and bids [name] sit down beside her, handing over her lyre, although she’s ready to grab it should it fall. Once satisfied that nothing untoward is going to happen, she eases [name] into an easy playing position and begins her instruction.", parse);
+		Text.NL();
+		Text.Add("The first lessons are on coaxing notes and scales from the lyre strings, strumming out chords, and adjusting the tone of the resulting music. As always, Cveta is an exacting teacher, freely using the tone of her voice to castigate [name] for the slightest mistake, although her explanations are always detailed, and correction always swift.", parse);
+		Text.NL();
+		Text.Add("<i>“I understand that I have been naturally gifted and extensively trained, and thus do not expect that you arrive at my level in one short session. But please, please, I beseech you, put some effort into it.”</i>", parse);
+		Text.NL();
+		Text.Add("More hours pass, and finally, she appears to be content with [poss] performance, for she gestures for [name] to put away the lyre and digs about in her trunk, bringing out a handful of old sheet music, thick and clustered.", parse);
+		Text.NL();
+		Text.Add("<i>“You will need to know something of musical notation; it will make your life immensely easier. I do not expect you to sight-read complex pieces and then play them effortlessly in the short time we have together; however, I must grant you the basics so that you have a good foundation to build upon. Once this is achieved, then maybe you can think about instilling something other than irritation and disgust in your listeners.”</i>", parse);
+		Text.NL();
+		Text.Add("At last, Cveta looks somewhat content with [poss] performance, and hands over the sheet music, along with yet more notebooks from her trunk. <i>“The last of my notes from when I was younger. Since everything is safely up here - ”</i> she reaches up with a gloved hand to tap her head - <i>“I can pass these on to you. I am not entirely sure why I took them with me - out of nostalgia, perhaps - but better that they be used to benefit someone else than lie rotting amongst my possessions.", parse);
+		Text.NL();
+		Text.Add("“Now, if you will excuse me, this has exhausted me. Would you please show yourself out?”</i>", parse);
+		Text.NL();
+		Text.Add("<b>You now have access to the Bard job.</b>", parse);
+		Text.Flush();
+		
+		cveta.flags["Bard"] = Cveta.Bard.Taught;
+		
+		world.TimeStep({hour: 8});
+		Gui.NextPrompt();
+	}
+	else {
+		Text.Add("Cveta stops playing, sets down her lyre and stares off into the distance. <i>“I’m afraid ", parse);
+		if(party.Num() > 1)
+			Text.Add("none of you", parse);
+		else
+			Text.Add("you do not", parse);
+		Text.Add(" meet the prerequisites for me to usefully instruct you in what I have to teach, alas. You do not ask to run before you can walk, fly before you can glide. While I could attempt to impart my knowledge of the musical arts this very moment, I fear it would be simply met with incomprehension due to one having a poor grasp of the basics. Perhaps you could come back another time?”</i>", parse);
+		Text.NL();
+		Text.Add("<b>You need someone with a sense of music that is a ", parse);
+		if(!singerAvailable)
+			Text.Add("level 3 Courtesan", parse);
+		else
+			Text.Add("level 5 Courtesan and level 3 Singer", parse);
+		Text.Add(" before Cveta can teach you more about music.</b>", parse);
+		Text.Flush();
+		
+		world.TimeStep({minute: 5});
+		
+		Scenes.Cveta.Prompt();
+	}
+}
 
 Scenes.Cveta.PlayPrompt = function() {
 	var parse = {
@@ -772,6 +898,9 @@ Scenes.Cveta.HerselfPrompt = function() {
 	options.push({ nameStr : "Music",
 		func : function() {
 			Text.Clear();
+			
+			if(cveta.flags["Music"] < Cveta.Music.Talked)
+				cveta.flags["Music"] = Cveta.Music.Talked;
 			Text.Add("Cveta doesn’t reply immediately upon hearing your question, instead half-lidding her eyes as she thinks. Slowly, she lets the current tune fade into silence and begins anew, a little ditty springing from the strings of her lyre, sharp and lively, yet with a strange yearning, a distant longing buried in the undertones, a longing for… something, but you don’t know what.", parse);
 			Text.NL();
 			Text.Add("Then as suddenly as it begun, the music’s mood changes in quick succession, turning hard and fast, then slowing to a sad crawl. One moment it gushes like a stream swollen with spring rain, then turns immovable, stolid, forbidding the next.", parse);

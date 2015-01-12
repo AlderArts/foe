@@ -367,6 +367,25 @@ Jobs["Healer"].Unlocked = function(entity) {
 	return gameCache.flags["LearnedMagic"] >= 1;
 }
 
+Jobs["Singer"] = new Job("Singer");
+Jobs["Singer"].Long = function(entity) {
+	var parse = {hisher: entity.hisher(), himher: entity.himher(), name: entity.nameDesc(), s: entity.plural() ? "" : "s"};
+	return Text.Parse("As a singer, [name] can sway those around [himher] with [hisher] songs, rousing courage in [hisher] allies or inducing dismay in [hisher] foes.", parse);
+}
+Jobs["Singer"].preqs.push({job : Jobs["Courtesan"], lvl : 3});
+//TODO Singer abilities
+Jobs["Singer"].abilities.AddAbility(Abilities.White.Detox);
+Jobs["Singer"].levels.push(new JobLevel(20,   [{ab: Abilities.White.Detox, set: "Support"}], {"spi" : 0.3}));
+Jobs["Singer"].levels.push(new JobLevel(40,   null, {"int" : 0.2, "cha" : 0.1}));
+Jobs["Singer"].levels.push(new JobLevel(80,   [{ab: Abilities.White.Cool, set: "Support"}], {"sta" : 0.2, "spi" : 0.1}));
+Jobs["Singer"].levels.push(new JobLevel(160,  null, {"spi" : 0.2, "int" : 0.1}));
+Jobs["Singer"].levels.push(new JobLevel(320,  [{ab: Abilities.White.Warm, set: "Support"}], {"int" : 0.3}));
+Jobs["Singer"].levels.push(new JobLevel(640,  null, {"cha" : 0.2, "sta" : 0.1}));
+Jobs["Singer"].levels.push(new JobLevel(1280, [{ab: Abilities.White.Heal, set: "Support"}], {"spi" : 0.4, "int" : 0.1}));
+Jobs["Singer"].Unlocked = function(entity) {
+	return cveta.flags["Singer"] >= Cveta.Singer.Taught;
+}
+
 ////////////
 // TIER 3 //
 ////////////
@@ -480,6 +499,27 @@ Jobs["RunicKnight"].Unlocked = function(entity) {
 	return gameCache.flags["LearnedMagic"] >= 3;
 }
 
+Jobs["Bard"] = new Job("Bard");
+//TODO
+Jobs["Bard"].Long = function(entity) {
+	var parse = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
+	return Text.Parse("", parse);
+}
+Jobs["Bard"].preqs.push({job : Jobs["Courtesan"], lvl : 5});
+Jobs["Bard"].preqs.push({job : Jobs["Singer"], lvl : 3});
+//TODO
+Jobs["Bard"].abilities.AddAbility(Abilities.White.Heal);
+Jobs["Bard"].levels.push(new JobLevel(40,   null, {"str" : 0.2}));
+Jobs["Bard"].levels.push(new JobLevel(80,   null, {"str" : 0.2}));
+//TODO
+Jobs["Bard"].levels.push(new JobLevel(160,  [{ab: Abilities.White.Heal, set: "Support"}], {"int" : 0.1, "dex" : 0.1}));
+Jobs["Bard"].levels.push(new JobLevel(320,  null, {"str" : 0.2}));
+Jobs["Bard"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
+Jobs["Bard"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
+Jobs["Bard"].levels.push(new JobLevel(2560, null, {"str" : 0.2}));
+Jobs["Bard"].Unlocked = function(entity) {
+	return gameCache.flags["LearnedMagic"] >= 3;
+}
 ////////////
 // TIER 4 //
 ////////////
