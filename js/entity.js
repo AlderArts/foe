@@ -2110,11 +2110,25 @@ Entity.prototype.EquipPrompt = function(backfunc) {
         slotFunc("Toy", that.strapOn);
 		Text.Flush();
 		
+		var slotFunc2 = function(slotname, slot) {
+			Text.AddDiv(slotname, null, "itemTypeHeader");
+			Text.AddDiv("<hr>");
+			Text.Add("[name] [isAre] currently equipped with:", parse);
+			Text.AddDiv("<hr>");
+	        if(slot)
+	        	slot.ShowEquipStats();
+	        else
+	        	Text.AddDiv("None", null, "itemSubtypeHeader");
+		}
+		
 		var options = new Array();
 		options.push({ nameStr : "Weapon",
 			func : function() {
-				Text.NL();
+				Text.Clear();
+				slotFunc2("Weapon", that.weaponSlot);
+				Text.AddDiv("<hr>");
 				Text.Add("<i>What weapon do[es] [heshe] equip?</i>", parse);
+				Text.AddDiv("<hr>");
 				Text.Flush();
 				party.inventory.ShowEquippable(that, ItemType.Weapon, equipFunc);
 			}, enabled : true,
@@ -2122,8 +2136,11 @@ Entity.prototype.EquipPrompt = function(backfunc) {
 		});
 		options.push({ nameStr : "Top",
 			func : function() {
-				Text.NL();
+				Text.Clear();
+				slotFunc2("Top armor", that.topArmorSlot);
+				Text.AddDiv("<hr>");
 				Text.Add("<i>What primary armor do[es] [heshe] equip?</i>", parse);
+				Text.AddDiv("<hr>");
 				Text.Flush();
 				party.inventory.ShowEquippable(that, ItemSubtype.TopArmor, equipFunc);
 			}, enabled : true,
@@ -2131,8 +2148,11 @@ Entity.prototype.EquipPrompt = function(backfunc) {
 		});
 		options.push({ nameStr : "Bottom",
 			func : function() {
-				Text.NL();
+				Text.Clear();
+				slotFunc2("Bottom armor", that.botArmorSlot);
+				Text.AddDiv("<hr>");
 				Text.Add("<i>What secondary armor do[es] [heshe] equip?</i>", parse);
+				Text.AddDiv("<hr>");
 				Text.Flush();
 				party.inventory.ShowEquippable(that, ItemSubtype.BotArmor, equipFunc);
 			}, enabled : true,
@@ -2140,8 +2160,11 @@ Entity.prototype.EquipPrompt = function(backfunc) {
 		});
 		options.push({ nameStr : "Acc.1",
 			func : function() {
-				Text.NL();
+				Text.Clear();
+				slotFunc2("Accessory", that.acc1Slot);
+				Text.AddDiv("<hr>");
 				Text.Add("<i>What primary accessory do[es] [heshe] equip?</i>", parse);
+				Text.AddDiv("<hr>");
 				Text.Flush();
 				party.inventory.ShowEquippable(that, ItemSubtype.Acc1, equipFunc);
 			}, enabled : true,
@@ -2149,8 +2172,11 @@ Entity.prototype.EquipPrompt = function(backfunc) {
 		});
 		options.push({ nameStr : "Acc.2",
 			func : function() {
-				Text.NL();
+				Text.Clear();
+				slotFunc2("Accessory", that.acc2Slot);
+				Text.AddDiv("<hr>");
 				Text.Add("<i>What secondary accessory do[es] [heshe] equip?</i>", parse);
+				Text.AddDiv("<hr>");
 				Text.Flush();
 				party.inventory.ShowEquippable(that, ItemSubtype.Acc2, equipFunc);
 			}, enabled : true,
@@ -2158,8 +2184,11 @@ Entity.prototype.EquipPrompt = function(backfunc) {
 		});
 		options.push({ nameStr : "Toy",
 			func : function() {
-				Text.NL();
+				Text.Clear();
+				slotFunc2("Toy", that.strapOn);
+				Text.AddDiv("<hr>");
 				Text.Add("<i>What strapon do[es] [heshe] equip?</i>", parse);
+				Text.AddDiv("<hr>");
 				Text.Flush();
 				party.inventory.ShowEquippable(that, ItemSubtype.StrapOn, equipFunc);
 			}, enabled : true,

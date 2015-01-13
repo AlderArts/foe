@@ -368,7 +368,7 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
     //Check if slot has an item equipped
     var hasEquip = false;
     switch(type) {
-        case ItemType.Weapon:   if(entity.weaponSlot)   hasEquip = true; break;
+        case ItemType.Weapon:      if(entity.weaponSlot)   hasEquip = true; break;
         case ItemSubtype.TopArmor: if(entity.topArmorSlot) hasEquip = true; break;
         case ItemSubtype.BotArmor: if(entity.botArmorSlot) hasEquip = true; break;
         case ItemSubtype.Acc1:     if(entity.acc1Slot)     hasEquip = true; break;
@@ -415,6 +415,8 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
     //Create button and equip item function for each item valid for the passed in 'type'
     for(var i=0,j=items.length; i<j; i++) {
         var it = items[i];
+        it.ShowEquipStats();
+        Text.AddDiv("<hr>");
         list.push({
             nameStr : it.name,
             func    : function(t) {
@@ -467,6 +469,6 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
             tooltip : it.Long()
         });
     };
-
+	Text.Flush();
     Gui.SetButtonsFromList(list, true, backPrompt);
 }

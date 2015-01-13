@@ -123,6 +123,54 @@ Item.prototype.Equip = function(target) {
 	}));
 }
 
+Item.prototype.ShowEquipStats = function() {
+	Text.AddDiv("["+this.name+"]", null, "itemTypeHeader");
+	Text.AddDiv(this.Short(), null, "itemSubtypeHeader");
+	if(this.effect.atkMod) Text.AddDiv("Atk: " + this.effect.atkMod, null, "itemName");
+	if(this.effect.defMod) Text.AddDiv("Def: " + this.effect.defMod, null, "itemName");
+	
+	if(this.effect.apSlash)   Text.AddDiv("Slash.Atk: "   + this.effect.apSlash,   null, "itemName");
+	if(this.effect.apBlunt)   Text.AddDiv("Blunt.Atk: "   + this.effect.apBlunt,   null, "itemName");
+	if(this.effect.apPierce)  Text.AddDiv("Pierce.Atk: "  + this.effect.apPierce,  null, "itemName");
+	if(this.effect.amVoid)    Text.AddDiv("Void.Atk: "    + this.effect.amVoid,    null, "itemName");
+	if(this.effect.amFire)    Text.AddDiv("Fire.Atk: "    + this.effect.amFire,    null, "itemName");
+	if(this.effect.amIce)     Text.AddDiv("Ice.Atk: "     + this.effect.amIce,     null, "itemName");
+	if(this.effect.amThunder) Text.AddDiv("Thunder.Atk: " + this.effect.amThunder, null, "itemName");
+	if(this.effect.amEarth)   Text.AddDiv("Earth.Atk: "   + this.effect.amEarth,   null, "itemName");
+	if(this.effect.amWater)   Text.AddDiv("Water.Atk: "   + this.effect.amWater,   null, "itemName");
+	if(this.effect.amWind)    Text.AddDiv("Wind.Atk: "    + this.effect.amWind,    null, "itemName");
+	if(this.effect.amLight)   Text.AddDiv("Light.Atk: "   + this.effect.amLight,   null, "itemName");
+	if(this.effect.amDark)    Text.AddDiv("Dark.Atk: "    + this.effect.amDark,    null, "itemName");
+	if(this.effect.amNature)  Text.AddDiv("Nature.Atk: "  + this.effect.amNature,  null, "itemName");
+	if(this.effect.alust)     Text.AddDiv("Lust.Atk: "    + this.effect.alust,     null, "itemName");
+	
+	if(this.effect.dpSlash)   Text.AddDiv("Slash.Def: "   + this.effect.dpSlash,   null, "itemName");
+	if(this.effect.dpBlunt)   Text.AddDiv("Blunt.Def: "   + this.effect.dpBlunt,   null, "itemName");
+	if(this.effect.dpPierce)  Text.AddDiv("Pierce.Def: "  + this.effect.dpPierce,  null, "itemName");
+	if(this.effect.dmVoid)    Text.AddDiv("Void.Def: "    + this.effect.dmVoid,    null, "itemName");
+	if(this.effect.dmFire)    Text.AddDiv("Fire.Def: "    + this.effect.dmFire,    null, "itemName");
+	if(this.effect.dmIce)     Text.AddDiv("Ice.Def: "     + this.effect.dmIce,     null, "itemName");
+	if(this.effect.dmThunder) Text.AddDiv("Thunder.Def: " + this.effect.dmThunder, null, "itemName");
+	if(this.effect.dmEarth)   Text.AddDiv("Earth.Def: "   + this.effect.dmEarth,   null, "itemName");
+	if(this.effect.dmWater)   Text.AddDiv("Water.Def: "   + this.effect.dmWater,   null, "itemName");
+	if(this.effect.dmWind)    Text.AddDiv("Wind.Def: "    + this.effect.dmWind,    null, "itemName");
+	if(this.effect.dmLight)   Text.AddDiv("Light.Def: "   + this.effect.dmLight,   null, "itemName");
+	if(this.effect.dmDark)    Text.AddDiv("Dark.Def: "    + this.effect.dmDark,    null, "itemName");
+	if(this.effect.dmNature)  Text.AddDiv("Nature.Def: "  + this.effect.dmNature,  null, "itemName");
+	if(this.effect.dlust)     Text.AddDiv("Lust.Def: "    + this.effect.dlust,     null, "itemName");
+	
+	if(this.effect.maxHp)        Text.AddDiv("HP: "  + this.effect.maxHp,        null, "itemName");
+	if(this.effect.maxSp)        Text.AddDiv("SP: "  + this.effect.maxSp,        null, "itemName");
+	if(this.effect.maxLust)      Text.AddDiv("LP: "  + this.effect.maxLust,      null, "itemName");
+	if(this.effect.strength)     Text.AddDiv("Str: " + this.effect.strength,     null, "itemName");
+	if(this.effect.stamina)      Text.AddDiv("Sta: " + this.effect.stamina,      null, "itemName");
+	if(this.effect.dexterity)    Text.AddDiv("Dex: " + this.effect.dexterity,    null, "itemName");
+	if(this.effect.intelligence) Text.AddDiv("Int: " + this.effect.intelligence, null, "itemName");
+	if(this.effect.spirit)       Text.AddDiv("Spi: " + this.effect.spirit,       null, "itemName");
+	if(this.effect.libido)       Text.AddDiv("Lib: " + this.effect.libido,       null, "itemName");
+	if(this.effect.charisma)     Text.AddDiv("Cha: " + this.effect.charisma,     null, "itemName");
+}
+
 Item.prototype.sDesc = function() { return this.name; }
 Item.prototype.lDesc = function() { return this.name; }
 Item.prototype.Short = function() { return this.name; }
