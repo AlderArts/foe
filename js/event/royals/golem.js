@@ -297,7 +297,7 @@ Scenes.Golem.OnLoss = function() {
 	}
 	Text.NL();
 	parse["continuing"] = player.LowerBodyType() == LowerBodyType.Single ? "circling around" : "continuing";
-	Text.Add("While tender yet immovable hands hold you in place, the golem explores your [buttDesc], massaging your cheeks with her lubricating oil. Her tongue travels downwards, giving your [anusDesc] a lick before [continuing] toward your crotch.", parse);
+	Text.Add("While tender yet immovable hands hold you in place, the golem explores your [buttDesc], massaging your cheeks with her lubricating oil. Her tongue travels downward, giving your [anusDesc] a lick before [continuing] toward your crotch.", parse);
 	Text.NL();
 	var target = BodyPartType.ass;
 	parse["targetDesc"] = parse["anusDesc"];

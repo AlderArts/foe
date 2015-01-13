@@ -690,7 +690,7 @@ Scenes.Dreams.RosalinTransformation = function(ravenTrigger) {
 	Text.NL();
 	Text.Add("As you talk to her, you notice that she starts to change, her form wavering and twisting, though somehow always remaining recognizably Rosalin. The catgirl looks unconcerned as her tail grows large scales, expanding behind her like a monstrous snake, already a dozen feet long. She puts her hand on yours, her newly acquired feathers tickling your [skinDesc] lightly. You look deeply into the girl’s four insectoid eyes, admiring her feral beauty.", parse);
 	Text.NL();
-	Text.Add("Not technically a girl any longer, as your gaze flits downwards, noticing a brace of animalistic cocks sprouting from between her four pairs of legs. She still has her great tits though, all three rows of them.", parse);
+	Text.Add("Not technically a girl any longer, as your gaze flits downward, noticing a brace of animalistic cocks sprouting from between her four pairs of legs. She still has her great tits though, all three rows of them.", parse);
 	Text.NL();
 	Text.Add("Your date goes smoothly, though by this point Rosalin has a bit of trouble reaching down to the bar disk due to the gargantuan size of her arachnid abdomen. Taking pity on her aimless grasping, trying to reach past her enormous bust, you grab her next shot and offer it to her. The alchemist smiles gratefully, downing the drink quickly.", parse);
 	Text.NL();

@@ -4015,7 +4015,7 @@ Scenes.Miranda.HomeDommySex = function() {
 		Scenes.Miranda.HomeDescFloor1();
 	}
 	Text.NL();
-	Text.Add("<i>“How do you want me?”</i> she moans softly in your ear. <i>“Decide quickly, or I might decide myself.”</i> One of her hands trail downwards, pawing at her britches in order to free her stiffening monster cock from its confines.", parse);
+	Text.Add("<i>“How do you want me?”</i> she moans softly in your ear. <i>“Decide quickly, or I might decide myself.”</i> One of her hands trail downward, pawing at her britches in order to free her stiffening monster cock from its confines.", parse);
 	Text.Flush();
 	
 	var cocksInVag = player.CocksThatFit(miranda.FirstVag(), false, 15);

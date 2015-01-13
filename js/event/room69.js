@@ -475,7 +475,7 @@ Scenes.Room69.Discovering69Sex = function() {
 			parse["gen"] = "and your lower lips growing moist";
 		Text.Add("At the sheets’ ministrations, you feel your breathing become heavier, [gen]. Relentlessly, the cloth continues its attentions. Caressing, tickling, brushing, its motions gentle, yet deliberate, driving you further and further in your mindless excitement.", parse);
 		Text.NL();
-		Text.Add("You reach downwards desperately, not sure how much longer you can endure this endless teasing. The tentacles tighten around your chest momentarily and you wonder if Sixtynine plans to stop you, but they release you just as quickly. <i>“Yes, you’d better take that off. We won’t be able to get to the real fun with it in the way.”</i>", parse);
+		Text.Add("You reach downward desperately, not sure how much longer you can endure this endless teasing. The tentacles tighten around your chest momentarily and you wonder if Sixtynine plans to stop you, but they release you just as quickly. <i>“Yes, you’d better take that off. We won’t be able to get to the real fun with it in the way.”</i>", parse);
 		Text.NL();
 		Text.Add("You are only too happy to oblige, stripping off your [bottomArmorDesc] feverishly.", parse);
 	}
@@ -489,7 +489,7 @@ Scenes.Room69.Discovering69Sex = function() {
 	Text.NL();
 	Text.Add("The room has been good to you so far, and you decide to give it a chance here. You lie back on the bed, ", parse);
 	if(player.FirstBreastRow().Size() > 3)
-		Text.Add("and with a little regret feel the sheet tentacles disengage from your breasts and slide downwards along your body.", parse);
+		Text.Add("and with a little regret feel the sheet tentacles disengage from your breasts and slide downward along your body.", parse);
 	else
 		Text.Add("and the sheets uncurl themselves from around you, leaving you feeling oddly exposed with them gone.", parse);
 	Text.Add(" You can’t help but giggle as the soft tentacles brush along your [stomachDesc], tickling you.", parse);

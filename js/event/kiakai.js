@@ -2733,7 +2733,7 @@ Scenes.Kiakai.HealingNice = function() {
 					Text.NL();
 					
 					if(kiakai.flags["Sexed"] > 20 /* && TODO anal allowed */) {
-						Text.Add("Feeling particularly adventurous, the fingers on [name]'s other hand travel slightly downwards, forgoing your [vagDesc] and insistently prodding at your [anusDesc]. Suddenly realizing what [heshe] is doing, the elf stops in place, gazing up at you for approval through [hisher] thick lashes.", parse);
+						Text.Add("Feeling particularly adventurous, the fingers on [name]'s other hand travel slightly downward, forgoing your [vagDesc] and insistently prodding at your [anusDesc]. Suddenly realizing what [heshe] is doing, the elf stops in place, gazing up at you for approval through [hisher] thick lashes.", parse);
 						Text.Flush();
 						//[Allow][Deny][Punish]
 						var options = new Array();
