@@ -11,6 +11,9 @@ Version 0.3u
 * Fixed a bug in Roa, where it was possible to lock yourself out of getting the scepter.
 * Fixed a bug when fighting named mobs that later join you (Terry, mainly).
 * Restructuring of Equip GUI. More to come.
+* New scenes for the lizards, written by me:
+ - A new loss scene for the female.
+* Quest items are now correctly removed when turning in the Burrows quests.
 
 --------------------------------------------
              PREVIOUS VERSIONS

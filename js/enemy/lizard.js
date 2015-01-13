@@ -91,8 +91,8 @@ Lizard.prototype.DropTable = function() {
 
 Lizard.prototype.Act = function(encounter, activeChar) {
 	// TODO: Very TEMP
-	Text.AddOutput(this.name + " acts! Hiss!");
-	Text.Newline();
+	Text.Add(this.name + " acts! Hiss!");
+	Text.NL();
 	
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);
@@ -200,7 +200,6 @@ Scenes.Lizards.GroupEnc = function() {
 
 Scenes.Lizards.WinPrompt = function() {
 	SetGameState(GameState.Event);
-	Text.Clear();
 	
 	var enc = this;
 	enc.finalize = function() {
@@ -296,6 +295,7 @@ Scenes.Lizards.WinMale = function(enc) {
 	else if(player.FirstVag()) {
 		Text.Add("The dull ache in your [vagDesc] and the feeling of your nipples hardening under your [clothesDesc] sends shivers down your spine... What do you do?", parse);
 	}
+	Text.Flush();
 	
 	var options = new Array();
 	if(player.FirstCock()) {
@@ -359,6 +359,7 @@ Scenes.Lizards.WinFemale = function(enc) {
 	else if(player.FirstVag()) {
 		Text.Add("You feel your [vagDesc] growing wet, and idly wonder what you could do with hers... The lizard looks up at you, her eyes seeming oddly sultry. She quickly glances back down. What do you do?", parse);
 	}
+	Text.Flush();
 	
 	var options = new Array();
 	if(player.FirstCock()) {
@@ -789,14 +790,14 @@ Scenes.Lizards.WinBlowjob = function(enc, enemy) {
 		}
 		parse["boygirl"] = enemy.body.Gender() == Gender.male ? "boy" : "girl";
 		Text.Add("When your orgasm tapers down, the last vestibules of your spunk dripping through the tip of your [cockDesc], you gaze down at [m1name], your cheeks flush with the afterglow of climax. <i>“Swallow,”</i> you order. [m1HeShe] pauses, looking up at you meekly. [m1HisHer] tail flicks in indecision behind [m1himher], before [m1heshe] takes a heavy <i>gulp</i>. You pat [m1hisher] muzzle. <i>“Good [boygirl],”</i> you mutter, pulling your dick from [m1hisher] muzzle. You take the spoils of the encounter, and turn to leave without another word, your pleasure taken.", parse);
+		Text.Flush();
 		
 		player.Fuck(player.FirstCock(), 2);
 		Sex.Blowjob(enemy, player);
 		
 		player.AddLustFraction(-1);
-		Gui.NextPrompt(enc.finalize);
 		
-		Text.Flush();
+		Gui.NextPrompt(enc.finalize);
 	});
 }
 
@@ -834,6 +835,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 	Text.Add("Stepping up to him, you kneel, inspecting his body. His scaled underbelly shows strongly packed muscle, barely an inch of fat on him. His arms are thick and powerful, and his strong, angular face gazes at you in uneasy curiosity. You slide forward, and place a single finger on the faint outline of his genital slit, pressing slightly. <i>“Get hard,”</i> you command, dragging your finger down.", parse);
 	Text.NL();
 	Text.Add("[m1Name] looks at you in surprise, but makes no objection. You watch as he quickly gets himself ready, his fingers beginning to massage his slit. In short order his pair of thick, bulbous shafts push out from his slit, throbbing into the air as they grow to an almost obscene length. You swallow, imagining just what it will be like to have one moving inside you.", parse);
+	Text.Flush();
 	
 	//[Sure][Nah]
 	var options = new Array();
@@ -851,8 +853,6 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 				if(player.FirstCock())
 					Text.Add(" You playfully grind it against your own, leaving him moaning softly.", parse);
 				Text.Add(" Back and forth you rock, his hands around your hips helping you both move to a steady rhythm. Before long you're both moaning softly, your cheeks red as he slides deeply inside of you.", parse);
-				Text.NL();
-				Text.Flush();
 				
 				var racescore   = new RaceScore(player.body);
 				var lizardScore = new RaceScore();
@@ -860,8 +860,10 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 				var compScore   = racescore.Compare(lizardScore);
 				
 				if(compScore > 0.2) {
+					Text.NL();
 					Text.Add("You find yourself imagining [m1name]'s seed filling your womb... Forming eggs, laying egg after egg for the strong, reptilian warrior underneath you. You blush as the fantasies that seem only half-alien fill your mind. The thought of being seeded by such a strong, handsome male...", parse);
 					
+					Text.Flush();
 					//[Sure][Nah]
 					var options = new Array();
 					options.push({ nameStr : "Yes!",
@@ -885,13 +887,12 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 								parse["comp"] = party.Two() ? "companion" : "party";
 								Text.Add("Your [comp] joins you, looking at you a little strangely.", parse);
 							}
+							Text.Flush();
 							
 							player.FuckVag(player.FirstVag(), enemy.FirstCock(), 4);
 							Sex.Vaginal(enemy, player);
 							
 							Scenes.Lizards.Impregnate(player, enemy);
-							
-							Text.Flush();
 							
 							player.AddLustFraction(-1);
 							Gui.NextPrompt(enc.finalize);
@@ -910,6 +911,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 					Gui.SetButtonsFromList(options);
 				}
 				else {
+					Text.Flush();
 					Gui.NextPrompt(function() {
 						Text.Clear();
 						Scenes.Lizards.WinPowerbottomDeny(enc);
@@ -1441,25 +1443,26 @@ Scenes.Lizards.LossPrompt = function() {
 	};
 	
 	if(player.LustLevel() > 0.6) {
-		Text.AddOutput("You slump to the ground, finding it hard to keep your eyes focused on the leering, scaled creatures standing over you. Your body aches, and not just from bruises. ", parse);
+		Text.Add("You slump to the ground, finding it hard to keep your eyes focused on the leering, scaled creatures standing over you. Your body aches, and not just from bruises. ", parse);
 		// If male
 		if(player.FirstCock() && !player.FirstVag()) {
-			Text.AddOutput("Your breathing comes in wheezes, and you can feel your pulse thundering in both your ears and your almost painfully aroused [numCocks].", parse);
+			Text.Add("Your breathing comes in wheezes, and you can feel your pulse thundering in both your ears and your almost painfully aroused [numCocks].", parse);
 		}
 		// If female
 		else if(!player.FirstCock() && player.FirstVag()) {
-			Text.AddOutput("Your [breastDesc] heave and you gaze steadily at the ground for several long, tense moments, feeling your [vagDesc] beginning to stick to your clothing as slick fluids drip from it.", parse);
+			Text.Add("Your [breastDesc] heave and you gaze steadily at the ground for several long, tense moments, feeling your [vagDesc] beginning to stick to your clothing as slick fluids drip from it.", parse);
 		}
 		// If herm
 		else if(player.FirstCock() && player.FirstVag()) {
-			Text.AddOutput("You find it hard to concentrate through the fog being pumped through your brain by your dually aroused sexes. Your [vagDesc] quivers, and you can feel your own fluids trickling down your [leg]. Set to the rhythm of your cunt's slick clenching, you can feel the pulses sending shivers up and down your spine from your [numCocks].", parse);
+			Text.Add("You find it hard to concentrate through the fog being pumped through your brain by your dually aroused sexes. Your [vagDesc] quivers, and you can feel your own fluids trickling down your [leg]. Set to the rhythm of your cunt's slick clenching, you can feel the pulses sending shivers up and down your spine from your [numCocks].", parse);
 		}
-		Text.Newline();
-		Text.AddOutput("[m1Name] stops in front of you, gazing down over your heaving form, a smirk on [m1hisher] face. [m1HeShe] leans down, hands reaching for your shoulders. You don't even bother to resist. The way that [m1heshe] looks at you hungrily as [m1heshe] lifts you by your shoulders, intentions deviously obvious, you can't quite manage to bring yourself to regret losing the fight...", parse);
+		Text.NL();
+		Text.Add("[m1Name] stops in front of you, gazing down over your heaving form, a smirk on [m1hisher] face. [m1HeShe] leans down, hands reaching for your shoulders. You don't even bother to resist. The way that [m1heshe] looks at you hungrily as [m1heshe] lifts you by your shoulders, intentions deviously obvious, you can't quite manage to bring yourself to regret losing the fight...", parse);
 	}
 	else { // NOT AROUSED
-		Text.AddOutput("The final hit knocks you down to the ground leaving you momentarily stunned. You shake your head to try to settle your scrambled thoughts, only to see two big, scaled feet stop in front of your battered body. Before you can escape, the lizard's weapon clatters to the ground and two frighteningly powerful hands hoist you up into the air, where you find yourself face to face with the leering reptile.", parse);
+		Text.Add("The final hit knocks you down to the ground leaving you momentarily stunned. You shake your head to try to settle your scrambled thoughts, only to see two big, scaled feet stop in front of your battered body. Before you can escape, the lizard's weapon clatters to the ground and two frighteningly powerful hands hoist you up into the air, where you find yourself face to face with the leering reptile.", parse);
 	}
+	Text.Flush();
 	
 	Gui.NextPrompt(function() {
 		var scenes = new EncounterTable();
@@ -1472,8 +1475,6 @@ Scenes.Lizards.LossPrompt = function() {
 }
 
 Scenes.Lizards.LossMale = function() {
-	Text.Clear();
-	
 	var enc = this;
 	
 	var member1 = party.members[1];
@@ -1501,13 +1502,13 @@ Scenes.Lizards.LossMale = function() {
 		m3name     : function() { return enc.third.nameDesc(); }
 	};
 	
-	
-	Text.AddOutput("The reptilian creature brings you closer, smirking at you lewdly. His slitted eyes watch you with keen interest, and you can feel them roaming lower. You dare a glance across your assailant's body and see exactly what you hoped you wouldn't see. Between his potently muscled legs, his [m1cockDesc] slowly, but surely are rising to attention. You struggle mightily, squirming and thrashing to try and break free, but in your already weakened state you are no match for the reptile.", parse);
-	Text.Newline();
+	Text.Clear();
+	Text.Add("The reptilian creature brings you closer, smirking at you lewdly. His slitted eyes watch you with keen interest, and you can feel them roaming lower. You dare a glance across your assailant's body and see exactly what you hoped you wouldn't see. Between his potently muscled legs, his [m1cockDesc] slowly, but surely are rising to attention. You struggle mightily, squirming and thrashing to try and break free, but in your already weakened state you are no match for the reptile.", parse);
+	Text.NL();
 	
 	if(player.Armor()) {
-		Text.AddOutput("He lifts your hands up above your head, one thick hand gripping your wrists, while his other hand draws close to your body. With a thick looking finger, he slowly tugs down the length of your [clothesDesc], letting them fall away from your bruised body, leaving them in a slump on the ground.", parse);
-		Text.Newline();
+		Text.Add("He lifts your hands up above your head, one thick hand gripping your wrists, while his other hand draws close to your body. With a thick looking finger, he slowly tugs down the length of your [clothesDesc], letting them fall away from your bruised body, leaving them in a slump on the ground.", parse);
+		Text.NL();
 		player.AddLustFraction(0.05);
 	}
 	
@@ -1516,70 +1517,71 @@ Scenes.Lizards.LossMale = function() {
 	var scenes = new EncounterTable();
 	// IF FEMALE OR HERM
 	scenes.AddEnc(function() {
-		Text.AddOutput("With a lascivious smirk, his eyes hungrily drink in the sight of your body.", parse);
+		Text.Add("With a lascivious smirk, his eyes hungrily drink in the sight of your body.", parse);
 		if(player.FirstBreastRow().size.Get() >= 3) {
-			Text.AddOutput(" His scaled hand comes up and roughly gropes your [breastDesc], a delighted look on his face as he plays with your exposed mounds.", parse);
+			Text.Add(" His scaled hand comes up and roughly gropes your [breastDesc], a delighted look on his face as he plays with your exposed mounds.", parse);
 		}
-		Text.Newline();
+		Text.NL();
 		
-		Text.AddOutput("His hand trails lower, rubbing over your belly. It feels slightly cool to the touch, almost as chilled as the harsh expression on his face. <i>“What a pretty thing,”</i> he hisses, his muzzle splitting into a grin. <i>“Does the little girly want to be played with?”</i> he asks, giving a sibilant chuckle.", parse);
-		Text.Newline();
+		Text.Add("His hand trails lower, rubbing over your belly. It feels slightly cool to the touch, almost as chilled as the harsh expression on his face. <i>“What a pretty thing,”</i> he hisses, his muzzle splitting into a grin. <i>“Does the little girly want to be played with?”</i> he asks, giving a sibilant chuckle.", parse);
+		Text.NL();
 		
 		if(player.LustLevel() < 0.5) {
-			Text.AddOutput("You shake your head avidly. You are definitely not in the mood right now. <i>“Too bad.”</i>", parse);
+			Text.Add("You shake your head avidly. You are definitely not in the mood right now. <i>“Too bad.”</i>", parse);
 		}
 		else {
-			Text.AddOutput("You close your eyes, trying to think of a way to say 'Yes' without degrading yourself. Your thoughts are broken by [m1name] chuckling darkly. <i>“Can't even bring yourself to say 'no', can you?”</i>", parse);
+			Text.Add("You close your eyes, trying to think of a way to say 'Yes' without degrading yourself. Your thoughts are broken by [m1name] chuckling darkly. <i>“Can't even bring yourself to say 'no', can you?”</i>", parse);
 		}
-		Text.AddOutput(" His hand trails lower, and you look away.", parse);
-		Text.Newline();
+		Text.Add(" His hand trails lower, and you look away.", parse);
+		Text.NL();
 		
 		if(member1 && enc.female.LustLevel() > 0.4) {
-			Text.AddOutput("You see [p1name] cringing, trying to get away from the reptile pinning [p1himher] to the ground. [m2Name] grins at [p1name] lewdly, holding [p1himher] down as [m2heshe] begins to grope and tease [p1himher].", parse);
+			Text.Add("You see [p1name] cringing, trying to get away from the reptile pinning [p1himher] to the ground. [m2Name] grins at [p1name] lewdly, holding [p1himher] down as [m2heshe] begins to grope and tease [p1himher].", parse);
 			if(member2 && enc.third) {
-				Text.AddOutput(" Meanwhile, [p2name] is battering at [m3name] with one fist that [p2heshe] managed to get free, but it only seems to be egging [m3name] on further.", parse);
+				Text.Add(" Meanwhile, [p2name] is battering at [m3name] with one fist that [p2heshe] managed to get free, but it only seems to be egging [m3name] on further.", parse);
 			}
-			Text.Newline();
+			Text.NL();
 			player.AddLustFraction(0.05);
 		}
 		
 		// Check for numcocks
 		var cockNum = player.NumCocks();
 		if(cockNum == 1) {
-			Text.AddOutput("His hand stops halfway down your body, hovering just above your [cockDesc] for a moment. His eyes narrow and his nostrils flare, before his hand trails lower... He doesn't seem that interested in it this time.", parse);
+			Text.Add("His hand stops halfway down your body, hovering just above your [cockDesc] for a moment. His eyes narrow and his nostrils flare, before his hand trails lower... He doesn't seem that interested in it this time.", parse);
 		}
 		else if(cockNum > 1) {
-			Text.AddOutput("His hand stops just above your groin, and he smirks. His fingers hover above your [numCocks] hesitantly, before moving further down.", parse);
+			Text.Add("His hand stops just above your groin, and he smirks. His fingers hover above your [numCocks] hesitantly, before moving further down.", parse);
 		}
 		
 		if(cockNum == 2) {
-			Text.AddOutput(" <i>“Halfway to being a [m1race]...”</i>", parse);
+			Text.Add(" <i>“Halfway to being a [m1race]...”</i>", parse);
 		}
-		Text.Newline();
-		Text.AddOutput("The sudden touch of his clawed finger to your [vagDesc] startles you back to attention, and your eyes widen.", parse);
+		Text.NL();
+		Text.Add("The sudden touch of his clawed finger to your [vagDesc] startles you back to attention, and your eyes widen.", parse);
 		if(player.LustLevel() < 0.5) {
-			Text.AddOutput(" You struggle to get away again, kicking at him, but your fatigued body just can't muster up the strength to fight him off.", parse);
+			Text.Add(" You struggle to get away again, kicking at him, but your fatigued body just can't muster up the strength to fight him off.", parse);
 		}
-		Text.AddOutput(" His finger begins to slowly rub and stroke your outer folds, slowly beginning to work itself inwards. ", parse);
+		Text.Add(" His finger begins to slowly rub and stroke your outer folds, slowly beginning to work itself inwards. ", parse);
 		if(player.LustLevel() < 0.5) {
-			Text.AddOutput("As much as you hate to admit it, his surprisingly gentle touch doesn't feel as bad as you think it should.", parse);
+			Text.Add("As much as you hate to admit it, his surprisingly gentle touch doesn't feel as bad as you think it should.", parse);
 		}
 		else {
-			Text.AddOutput("You bite your lip softly, squeezing your eyes shut. His teasing, slow touches drive you further into the pink haze of lust that threatens to engulf you.", parse);
+			Text.Add("You bite your lip softly, squeezing your eyes shut. His teasing, slow touches drive you further into the pink haze of lust that threatens to engulf you.", parse);
 		}
-		Text.Newline();
-		Text.AddOutput("The lizard draws his hand away and lifts it to his muzzle. <i>“I wonder how much it will take to make you squeal,”</i> he leers, popping his finger into his maw. When he pulls it back out, it glistens with saliva. You try to squirm away, but his hand holding you in the air leaves you helpless. You realize there's no one around able to help you.", parse);
-		Text.Newline();
-		Text.AddOutput("Suddenly his finger makes contact with your [vagDesc], this time that much slicker. He smirks, pushing it a half an inch in. He begins to twist it, stroking along your folds, seeming to revel in the heat of your body.", parse);
+		Text.NL();
+		Text.Add("The lizard draws his hand away and lifts it to his muzzle. <i>“I wonder how much it will take to make you squeal,”</i> he leers, popping his finger into his maw. When he pulls it back out, it glistens with saliva. You try to squirm away, but his hand holding you in the air leaves you helpless. You realize there's no one around able to help you.", parse);
+		Text.NL();
+		Text.Add("Suddenly his finger makes contact with your [vagDesc], this time that much slicker. He smirks, pushing it a half an inch in. He begins to twist it, stroking along your folds, seeming to revel in the heat of your body.", parse);
 		if(player.LustLevel() < 0.5) {
-			Text.AddOutput(" Before long, you find yourself growing wet, your cheeks a deep red.", parse);
+			Text.Add(" Before long, you find yourself growing wet, your cheeks a deep red.", parse);
 		}
 		else {
-			Text.AddOutput(" The slick moisture dripping from your [vagDesc] mixes with his saliva, and soon his finger has slid deep inside of you, playing with your eager hole.", parse);
+			Text.Add(" The slick moisture dripping from your [vagDesc] mixes with his saliva, and soon his finger has slid deep inside of you, playing with your eager hole.", parse);
 		}
-		Text.Newline();
-		Text.AddOutput("Finally, the lizard seems to call that enough and pushes you firmly toward the ground, still holding your wrists. He forces you forward until your [faceDesc] meets the ground, holding your wrists tightly together behind your back.", parse);
+		Text.NL();
+		Text.Add("Finally, the lizard seems to call that enough and pushes you firmly toward the ground, still holding your wrists. He forces you forward until your [faceDesc] meets the ground, holding your wrists tightly together behind your back.", parse);
 		
+		Text.Flush();
 		// RANDOM SCENE
 		Gui.NextPrompt(function() {
 			Scenes.Lizards.LossMaleVagVariations.call(enc);
@@ -1587,8 +1589,8 @@ Scenes.Lizards.LossMale = function() {
 	}, 2.0, function() { return player.FirstVag(); });
 	// IF MALE OR HERM
 	scenes.AddEnc(function() {
-		Text.AddOutput("His eyes drift down between your legs, and his eyes narrow.", parse);
-		Text.Newline();
+		Text.Add("His eyes drift down between your legs, and his eyes narrow.", parse);
+		Text.NL();
 		
 		Scenes.Lizards.LossMaleCockVariations.call(enc);
 	}, 1.0, function() { return player.FirstCock(); });
@@ -1631,69 +1633,69 @@ Scenes.Lizards.LossMaleVagVariations = function() {
 	var scenes = new EncounterTable();
 	// ANAL
 	scenes.AddEnc(function() {
-		Text.AddOutput("He leans over your back, and you feel his heavy pair of dense shafts flop down on you, one on either cheek. His hulking form looms over you, and you feel his muzzle slide up beside your ears. <i>“I wonder what your other hole feels like,”</i> he whispers... before you feel his hips draw back. In one swift roll of his hips, you feel a thick, slimy <i>presence</i> spear itself through your [anusDesc], a matching one sliding up between your cheeks as the lizard's other [m1cockDesc] squishes deep inside your body.", parse);
-		Text.Newline();
+		Text.Add("He leans over your back, and you feel his heavy pair of dense shafts flop down on you, one on either cheek. His hulking form looms over you, and you feel his muzzle slide up beside your ears. <i>“I wonder what your other hole feels like,”</i> he whispers... before you feel his hips draw back. In one swift roll of his hips, you feel a thick, slimy <i>presence</i> spear itself through your [anusDesc], a matching one sliding up between your cheeks as the lizard's other [m1cockDesc] squishes deep inside your body.", parse);
+		Text.NL();
 		
 		player.FuckAnal(player.Butt(), enc.male.FirstCock(), 2);
 		Sex.Anal(enc.male, player);
 		
 		player.AddLustFraction(-0.05);
 		
-		Text.AddOutput("Spots burst in front of your eyes, and you find yourself clutching weakly at the air as your [anusDesc] adjusts to his aching size. A deep, satisfied rumble sounds out from his throat, and his hand squeezes your wrists together firmly. He draws his hips back, the pulsing flesh of his cock surprisingly hotter than the rest of his body. You feel it slide slickly out of your sphincter, before he bucks his hips forward again. Once more you feel a warm, heavy pressure fill your [anusDesc], and he grunts. Cool scales press up against your [buttDesc], and he rocks himself against your body, using his groin to smear the lubricating slime that covered his shaft across your rear. His other [m1cockDesc] slides against your [playerSkin], smearing his slime across your [buttDesc].", parse);
-		Text.Newline();
-		Text.AddOutput("Soon he picks up the pace, beginning to lose himself to the pleasure your body gives him... and before long, you find that his strangely ridged length is reaming spots you didn't quite know you had. The alien feel of his dicks both deep inside you and against your [buttDesc] gradually gets less and less uncomfortable, and by the time you feel his [m1cockDesc] throbbing powerfully inside of you, you find it hard to suppress a moan.", parse);
-		Text.Newline();
-		
+		Text.Add("Spots burst in front of your eyes, and you find yourself clutching weakly at the air as your [anusDesc] adjusts to his aching size. A deep, satisfied rumble sounds out from his throat, and his hand squeezes your wrists together firmly. He draws his hips back, the pulsing flesh of his cock surprisingly hotter than the rest of his body. You feel it slide slickly out of your sphincter, before he bucks his hips forward again. Once more you feel a warm, heavy pressure fill your [anusDesc], and he grunts. Cool scales press up against your [buttDesc], and he rocks himself against your body, using his groin to smear the lubricating slime that covered his shaft across your rear. His other [m1cockDesc] slides against your [playerSkin], smearing his slime across your [buttDesc].", parse);
+		Text.NL();
+		Text.Add("Soon he picks up the pace, beginning to lose himself to the pleasure your body gives him... and before long, you find that his strangely ridged length is reaming spots you didn't quite know you had. The alien feel of his dicks both deep inside you and against your [buttDesc] gradually gets less and less uncomfortable, and by the time you feel his [m1cockDesc] throbbing powerfully inside of you, you find it hard to suppress a moan.", parse);
 		if(Math.random() < 0.5) {
-			Text.AddOutput("Halfway through, he seems to change his mind about what he said. You feel him simply pull himself out from your stuffed [anusDesc], only to swiftly roll his hips forward again. You feel his dual cocks push heavily against your own entrances.", parse);
-			Text.Newline();
+			Text.NL();
+			Text.Add("Halfway through, he seems to change his mind about what he said. You feel him simply pull himself out from your stuffed [anusDesc], only to swiftly roll his hips forward again. You feel his dual cocks push heavily against your own entrances.", parse);
+			Text.NL();
 			
 			if(player.LustLevel() < 0.5) {
-				Text.AddOutput("Your eyes widen and you bite your lip, the reptile taking it further than you prayed. Trying to push it out of mind, you squeeze your eyes shut tight, right as you feel the pressure build.", parse);
+				Text.Add("Your eyes widen and you bite your lip, the reptile taking it further than you prayed. Trying to push it out of mind, you squeeze your eyes shut tight, right as you feel the pressure build.", parse);
 			}
 			else {
-				Text.AddOutput("Your eyes cross and you close them, feeling the heat of his spaded tips push roughly against both of your entrances at the same time. Weakly you mouth, <i>“Please...”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("[m1Name] grunts out his ecstatic approval, and pushes all the harder.", parse);
+				Text.Add("Your eyes cross and you close them, feeling the heat of his spaded tips push roughly against both of your entrances at the same time. Weakly you mouth, <i>“Please...”</i>", parse);
+				Text.NL();
+				Text.Add("[m1Name] grunts out his ecstatic approval, and pushes all the harder.", parse);
 			}
-			Text.Newline();
-			Text.AddOutput("Suddenly the force of his tips against your slicked entrances grows too firm, and you feel his heated [m1multiCockDesc] spear into both your [anusDesc] and [vagDesc] simultaneously. Your eyes open in surprise, but he shoves you harder into the dirt. He pulls his hips back, then <i>rams</i> both his shafts deeper into both of your holes. Stars burst in front of your eyes again, and you feel your now slick [vagDesc] convulse around his [m1cockDesc] as his other pumps into your [anusDesc].", parse);
-			Text.Newline();
+			Text.NL();
+			Text.Add("Suddenly the force of his tips against your slicked entrances grows too firm, and you feel his heated [m1multiCockDesc] spear into both your [anusDesc] and [vagDesc] simultaneously. Your eyes open in surprise, but he shoves you harder into the dirt. He pulls his hips back, then <i>rams</i> both his shafts deeper into both of your holes. Stars burst in front of your eyes again, and you feel your now slick [vagDesc] convulse around his [m1cockDesc] as his other pumps into your [anusDesc].", parse);
+			Text.NL();
 			
 			player.FuckVag(player.FirstVag(), enc.male.FirstCock(), 2);
 			Sex.Vaginal(enc.male, player);
 			
 			if(player.body.Gender() == Gender.herm) {
-				Text.AddOutput("The way that his twin dicks both slide sloppily into your body, each throb making them squeeze together inside of you quickly sends your own [numCocks] pulsing to life. [m1Name] just smirks, letting out a grunt as he steadily begins to hump.", parse);
-				Text.Newline();
+				Text.Add("The way that his twin dicks both slide sloppily into your body, each throb making them squeeze together inside of you quickly sends your own [numCocks] pulsing to life. [m1Name] just smirks, letting out a grunt as he steadily begins to hump.", parse);
+				Text.NL();
 			}
-			Text.AddOutput("In and out he thrusts them, steadily working you into your own frenzy, his second dick pulsating between your slick walls, ridges grinding against your [clitDesc]. Just as you find yourself getting into it, beginning to move to his heavy rhythm and feeling his own fluids smearing around your [vagDesc] walls, he yanks himself back, popping both of his dicks free from you. With another push, you feel his first slide back into your [anusDesc], his second sliding between your cheeks again. His free hand pats your [buttDesc]. <i>“Maybe when you win, you'll get to finish...”</i>", parse);
+			Text.Add("In and out he thrusts them, steadily working you into your own frenzy, his second dick pulsating between your slick walls, ridges grinding against your [clitDesc]. Just as you find yourself getting into it, beginning to move to his heavy rhythm and feeling his own fluids smearing around your [vagDesc] walls, he yanks himself back, popping both of his dicks free from you. With another push, you feel his first slide back into your [anusDesc], his second sliding between your cheeks again. His free hand pats your [buttDesc]. <i>“Maybe when you win, you'll get to finish...”</i>", parse);
 			
 			player.AddLustFraction(0.2);
 		}
 		
+		Text.Flush();
 		Gui.NextPrompt(function() {
 			Text.Clear();
-			Text.AddOutput("Finally, with a powerful thrust of his hips, his [m1cockDesc] slams deep into your body. [m1Name] howls out, a bestial cry that makes a shudder run down your spine. He lets go of your hands, grabbing hold of your [buttDesc], rocking his hips against you. You feel his shafts pulsing heavily, before thick, warm fluid starts to fill your [anusDesc]. Thick gouts of it splatter over your back, making a mess of you both inside and out. Deeper and deeper his seed spills into your body, until he simply... pushes you off, jerking his first [m1cockDesc] out from you and leaving you in the dirt. A few, last ropes splatter over your body as he picks up his weapon, before turning and walking away. Exhausted and quivering from your own cruelly teased arousal, you roll onto your back and consign yourself to rest.", parse);
+			Text.Add("Finally, with a powerful thrust of his hips, his [m1cockDesc] slams deep into your body. [m1Name] howls out, a bestial cry that makes a shudder run down your spine. He lets go of your hands, grabbing hold of your [buttDesc], rocking his hips against you. You feel his shafts pulsing heavily, before thick, warm fluid starts to fill your [anusDesc]. Thick gouts of it splatter over your back, making a mess of you both inside and out. Deeper and deeper his seed spills into your body, until he simply... pushes you off, jerking his first [m1cockDesc] out from you and leaving you in the dirt. A few, last ropes splatter over your body as he picks up his weapon, before turning and walking away. Exhausted and quivering from your own cruelly teased arousal, you roll onto your back and consign yourself to rest.", parse);
 			if(player.body.Gender() == Gender.herm) {
-				Text.Newline();
-				Text.AddOutput("You feel your [numCocks] pulsing in the air, but after [m1name]'s heavy romp, you can't quite summon up the energy to do more than lie there, feeling your sexes throb in time to each other.", parse);
+				Text.NL();
+				Text.Add("You feel your [numCocks] pulsing in the air, but after [m1name]'s heavy romp, you can't quite summon up the energy to do more than lie there, feeling your sexes throb in time to each other.", parse);
 			}
 			if(!party.Alone()) {
-				Text.Newline();
-				Text.AddOutput("Dimly, you can hear the other reptile[s] finishing with your companion[s2], leaving [group] in a similar state...", { group: party.Two() ? "both of you" : "your entire group", s: enc.third ? "s" : "", s2: party.Two() ? "" : "s" });
+				Text.NL();
+				Text.Add("Dimly, you can hear the other reptile[s] finishing with your companion[s2], leaving [group] in a similar state...", { group: party.Two() ? "both of you" : "your entire group", s: enc.third ? "s" : "", s2: party.Two() ? "" : "s" });
 			}
-			
+			Text.Flush();
 			Gui.NextPrompt(enc.finalize);
 		});
 		
 	});
 	// VAG
 	scenes.AddEnc(function() {
-		Text.AddOutput("Without wasting any time, he steps up behind you, his scaled feet padding against the ground. A soft growl sounds from his throat, and you feel not one, but both of his thick, pulsating dicks press against your [vagDesc]. They feel slimy against your [vagDesc], no doubt slick with the slime in the lizard's slit designed to keep his [m1multiCockDesc] ready for use. In a mildly pleasant turn of events, his flesh feels much warmer than his scales. At least it won't be an <i>entirely</i> unpleasant experience.", parse);
-		Text.Newline();
-		Text.AddOutput("He grinds against you for what feels like an hour, though your mind idly reasons it can't be more than a minute. Finally, he draws back... and with a single, well placed buck of his powerful hips, both of his dense, hot shafts sink halfway into your dripping [vagDesc].", parse);
-		Text.Newline();
+		Text.Add("Without wasting any time, he steps up behind you, his scaled feet padding against the ground. A soft growl sounds from his throat, and you feel not one, but both of his thick, pulsating dicks press against your [vagDesc]. They feel slimy against your [vagDesc], no doubt slick with the slime in the lizard's slit designed to keep his [m1multiCockDesc] ready for use. In a mildly pleasant turn of events, his flesh feels much warmer than his scales. At least it won't be an <i>entirely</i> unpleasant experience.", parse);
+		Text.NL();
+		Text.Add("He grinds against you for what feels like an hour, though your mind idly reasons it can't be more than a minute. Finally, he draws back... and with a single, well placed buck of his powerful hips, both of his dense, hot shafts sink halfway into your dripping [vagDesc].", parse);
+		Text.NL();
 		
 		player.AddLustFraction(0.1);
 		
@@ -1702,84 +1704,85 @@ Scenes.Lizards.LossMaleVagVariations = function() {
 		Sex.Vaginal(enc.male, player);
 		
 		if(player.FirstVag().capacity.Get() > 30) {
-			Text.AddOutput("It feels just right, the pair sliding easily into your [vagDesc]. The lizard gives out a groan and grinds more steadily into you, forcing just an extra inch of each into your body. It leaves your loose, sloppy cunt clenching tightly and your body aching even more.", parse);
+			Text.Add("It feels just right, the pair sliding easily into your [vagDesc]. The lizard gives out a groan and grinds more steadily into you, forcing just an extra inch of each into your body. It leaves your loose, sloppy cunt clenching tightly and your body aching even more.", parse);
 			player.AddLustFraction(0.05);
 		}
 		else {
-			Text.AddOutput("It hurts as he forces both of them in at once. You squeeze your eyes shut, feeling your [vagDesc] stretched beyond its limits. They grind between your lips, forcing them ever wider. A deep heat floods your body as you realize how much looser you'll be if he goes on.", parse);
+			Text.Add("It hurts as he forces both of them in at once. You squeeze your eyes shut, feeling your [vagDesc] stretched beyond its limits. They grind between your lips, forcing them ever wider. A deep heat floods your body as you realize how much looser you'll be if he goes on.", parse);
 			player.AddLustFraction(-0.05);
 		}
-		Text.Newline();
-		Text.AddOutput("He hunches over you, stopping with his lengths buried only halfway inside. One hand grips your head, tilting it back. You see [m1name] grinning delightedly down at you.", parse);
-		Text.Newline();
+		Text.NL();
+		Text.Add("He hunches over you, stopping with his lengths buried only halfway inside. One hand grips your head, tilting it back. You see [m1name] grinning delightedly down at you.", parse);
+		Text.NL();
 		
 		if(virgin) {
-			Text.AddOutput("<i>“Looks like I get to be the first to break you in... You never forget your first,”</i> he mocks, grinding his [m1cockDesc] against your clenching walls. His free hand gropes your [buttDesc] roughly.", parse);
+			Text.Add("<i>“Looks like I get to be the first to break you in... You never forget your first,”</i> he mocks, grinding his [m1cockDesc] against your clenching walls. His free hand gropes your [buttDesc] roughly.", parse);
 		}
 		else if(player.FirstVag().capacity.Get() > 30) {
-			Text.AddOutput("<i>“Seems I'm not your first... Bit of a slut, aren't you? Don't bother denying it,”</i> he smirks, drawing his throbbing dicks a quarter of the way out, before pushing them slowly back in. You feel your walls stretch around him slickly.", parse);
+			Text.Add("<i>“Seems I'm not your first... Bit of a slut, aren't you? Don't bother denying it,”</i> he smirks, drawing his throbbing dicks a quarter of the way out, before pushing them slowly back in. You feel your walls stretch around him slickly.", parse);
 		}
 		else {
-			Text.AddOutput("<i>“So tight... I'll fix <b>that</b>.”</i>", parse);
+			Text.Add("<i>“So tight... I'll fix <b>that</b>.”</i>", parse);
 		}
-		Text.Newline();
-		Text.AddOutput("Without another word, he <i>pushes</i> his [m1multiCockDesc] the rest of the way into your [vagDesc]. Soft, fleshy ridges along his dicks bump against your [clitDesc] in sequence, sending electric tingles up your spine. Deeper and deeper his reptilian shaft sinks into your body, and by the time his hips meet yours, you can feel his every movement through the pair of rods deep in your quivering [vagDesc].", parse);
+		Text.NL();
+		Text.Add("Without another word, he <i>pushes</i> his [m1multiCockDesc] the rest of the way into your [vagDesc]. Soft, fleshy ridges along his dicks bump against your [clitDesc] in sequence, sending electric tingles up your spine. Deeper and deeper his reptilian shaft sinks into your body, and by the time his hips meet yours, you can feel his every movement through the pair of rods deep in your quivering [vagDesc].", parse);
 		if(player.LustLevel() < 0.5) {
-			Text.Newline();
-			Text.AddOutput("You close your eyes, cheeks red. The way that his dual members pulse inside of you, each at the same time... The way that they twitch within you, grinding against each other and your walls, you can feel your own arousal building rapidly.", parse);
+			Text.NL();
+			Text.Add("You close your eyes, cheeks red. The way that his dual members pulse inside of you, each at the same time... The way that they twitch within you, grinding against each other and your walls, you can feel your own arousal building rapidly.", parse);
 		}
+		Text.Flush();
 		
 		Gui.NextPrompt(function() {
 			Text.Clear();
 			
-			Text.AddOutput("Drawing his groin back, [m1name] pulls his [m1multiCockDesc] slowly, achingly out of your cunt, each inch leaving you feeling cooler as his flesh slips out from yours. His hand tightens around your wrists, and he shoves the entirety of both of his pulsating, thick cocks into you, only to yank them back out with a fleshy squish that you can't help but blush at to hear coming from your own body. He quickly settles into roughly humping your slick passage, and the feeling of his alien lengths sliding through your [vagDesc] makes it hard to concentrate. He smirks, and it takes you a moment to realize that it's because you're moaning softly.", parse);
-			Text.Newline();
-			Text.AddOutput("Finally his humps grow slower, more irregular.", parse);
-			Text.Newline();
+			Text.Add("Drawing his groin back, [m1name] pulls his [m1multiCockDesc] slowly, achingly out of your cunt, each inch leaving you feeling cooler as his flesh slips out from yours. His hand tightens around your wrists, and he shoves the entirety of both of his pulsating, thick cocks into you, only to yank them back out with a fleshy squish that you can't help but blush at to hear coming from your own body. He quickly settles into roughly humping your slick passage, and the feeling of his alien lengths sliding through your [vagDesc] makes it hard to concentrate. He smirks, and it takes you a moment to realize that it's because you're moaning softly.", parse);
+			Text.NL();
+			Text.Add("Finally his humps grow slower, more irregular.", parse);
+			Text.NL();
 			
 			var scenes2 = new EncounterTable();
 			scenes2.AddEnc(function() {
-				Text.AddOutput("He holds you steady and buries both of his [m1cockDesc]s deep inside you, his teeth clenching tightly as his thick shafts seem to <i>pulse</i>. Your eyes go wide as he holds you there, impaled on his pulsating dicks. Helpless to stop it, you feel his sticky, gooey sperm pumping deep into your passage, squeezing past your cervix and deep into your womb. He grins toothily and gazes almost menacingly at you as the realization grips your mind. Yet even as his climax slowly tapers off, he doesn't stop railing you roughly in the dirt. His [m1multiCockDesc] slide wetly in and out of your slippery [vagDesc], steadily pushing you toward your own edge. The pressure builds and builds inside of you, the pleasure growing almost unbearable.", parse);
-				Text.Newline();
-				Text.AddOutput("Finally, the growing ache seems to build inside your [clitDesc], every ounce of your being focusing into a point. Your [clitDesc] feels like it grows so very hot, and spots burst in front of your eyes as his [m1multiCockDesc] pound you over the edge. You cry out up at him, his eyes boring into yours as you feel your [vagDesc] convulse around his heavy, thick shafts. Your lips clench around him and you feel the pleasure swamp your vision as your legs give out from under you, leaving you propped up by his rock solid [m1multiCockDesc]. As your [vagDesc] juices itself, he smirks, feeling your fluids make a mess of both your groins. He pulls out of your sloppy [vagDesc], letting you slump to the ground. Picking up his weapon, he turns and walks away.", parse);
-				Text.Newline();
+				Text.Add("He holds you steady and buries both of his [m1cockDesc]s deep inside you, his teeth clenching tightly as his thick shafts seem to <i>pulse</i>. Your eyes go wide as he holds you there, impaled on his pulsating dicks. Helpless to stop it, you feel his sticky, gooey sperm pumping deep into your passage, squeezing past your cervix and deep into your womb. He grins toothily and gazes almost menacingly at you as the realization grips your mind. Yet even as his climax slowly tapers off, he doesn't stop railing you roughly in the dirt. His [m1multiCockDesc] slide wetly in and out of your slippery [vagDesc], steadily pushing you toward your own edge. The pressure builds and builds inside of you, the pleasure growing almost unbearable.", parse);
+				Text.NL();
+				Text.Add("Finally, the growing ache seems to build inside your [clitDesc], every ounce of your being focusing into a point. Your [clitDesc] feels like it grows so very hot, and spots burst in front of your eyes as his [m1multiCockDesc] pound you over the edge. You cry out up at him, his eyes boring into yours as you feel your [vagDesc] convulse around his heavy, thick shafts. Your lips clench around him and you feel the pleasure swamp your vision as your legs give out from under you, leaving you propped up by his rock solid [m1multiCockDesc]. As your [vagDesc] juices itself, he smirks, feeling your fluids make a mess of both your groins. He pulls out of your sloppy [vagDesc], letting you slump to the ground. Picking up his weapon, he turns and walks away.", parse);
+				Text.NL();
 				
 				player.AddLustFraction(-1);
 				
 				if(!party.Alone()) {
-					Text.AddOutput("As you lay there with your face flushed and your breathing heavy, still feeling the slimy spunk of [m1name] dripping from your abused [vagDesc], you see [p1name] being held down by another one of the lizards. [m2HeShe] has [m2hisher] groin pressed to [p1name]'s mouth, and you can see [p1himher] looking up into the eyes of [m2name] blearily.", parse);
-					if(party.Num() > 2) Text.AddOutput(" You can't see anyone else, though you can hear them...", parse);
-					Text.Newline();
+					Text.Add("As you lay there with your face flushed and your breathing heavy, still feeling the slimy spunk of [m1name] dripping from your abused [vagDesc], you see [p1name] being held down by another one of the lizards. [m2HeShe] has [m2hisher] groin pressed to [p1name]'s mouth, and you can see [p1himher] looking up into the eyes of [m2name] blearily.", parse);
+					if(party.Num() > 2) Text.Add(" You can't see anyone else, though you can hear them...", parse);
+					Text.NL();
 					if(player.FirstCock())
-						Text.AddOutput("You feel precum drooling from your [numCocks], and try not to focus on the sensation too much.", parse);
-					Text.Newline();
-					Text.AddOutput("You pass out watching [p1name] pleasure [m2name], feeling [m1name]'s seed settling in your womb.", parse);
+						Text.Add("You feel precum drooling from your [numCocks], and try not to focus on the sensation too much.", parse);
+					Text.NL();
+					Text.Add("You pass out watching [p1name] pleasure [m2name], feeling [m1name]'s seed settling in your womb.", parse);
 				}
 				else {
-					Text.AddOutput("You manage to pull your legs closed, but roll into the puddle you and [m1name] made.", parse);
+					Text.Add("You manage to pull your legs closed, but roll into the puddle you and [m1name] made.", parse);
 					if(player.NumCocks() == 1)
-						Text.AddOutput(" You let out a groan as a gob of precum trails up to the tip of your [cockDesc], oozing down your length.", parse);
+						Text.Add(" You let out a groan as a gob of precum trails up to the tip of your [cockDesc], oozing down your length.", parse);
 					else if(player.NumCocks() > 1)
-						Text.AddOutput("You let out a soft groan as gobs of precum trail up to the tip of your [numCocks], oozing down the length of each.", parse);
-					Text.AddOutput(" Blushing shamefully, you pass out to the sensations of his seed settling in your womb.", parse);
+						Text.Add("You let out a soft groan as gobs of precum trail up to the tip of your [numCocks], oozing down the length of each.", parse);
+					Text.Add(" Blushing shamefully, you pass out to the sensations of his seed settling in your womb.", parse);
 				}
-				
+				Text.Flush();
 				player.AddLustFraction(0.05);
 				Gui.NextPrompt(enc.finalize);
 			});
 			scenes2.AddEnc(function() {
-				Text.AddOutput("He holds you in place, before letting out a hiss. <i>“I don't want my line tainted by a weakling like you...”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("He slides his [m1multiCockDesc] out from your clenching, quivering cunt, dragging his tips across your lips. He snorts, before thrusting his hips forward, his [m1multiCockDesc] sliding wetly between your cheeks, aimed over your back.", parse);
-				Text.Newline();
-				Text.AddOutput("Suddenly you feel thick, slimy fluid splattering over your back. Some of it hits your hands, and you think you can feel some dripping into your hair. An almost alarming amount of cum begins to drip down your back, stopping after what feels like far too long to be normal. With a satisfied hiss, the reptile releases your hands, pushing you into the ground. He snorts, picking up his weapon, turning to go. <i>“Get a little stronger and next time I might just put you to real use,”</i> he smirks.", parse);
-				Text.Newline();
+				Text.Add("He holds you in place, before letting out a hiss. <i>“I don't want my line tainted by a weakling like you...”</i>", parse);
+				Text.NL();
+				Text.Add("He slides his [m1multiCockDesc] out from your clenching, quivering cunt, dragging his tips across your lips. He snorts, before thrusting his hips forward, his [m1multiCockDesc] sliding wetly between your cheeks, aimed over your back.", parse);
+				Text.NL();
+				Text.Add("Suddenly you feel thick, slimy fluid splattering over your back. Some of it hits your hands, and you think you can feel some dripping into your hair. An almost alarming amount of cum begins to drip down your back, stopping after what feels like far too long to be normal. With a satisfied hiss, the reptile releases your hands, pushing you into the ground. He snorts, picking up his weapon, turning to go. <i>“Get a little stronger and next time I might just put you to real use,”</i> he smirks.", parse);
+				Text.NL();
 				
 				if(party.Alone())
-					Text.AddOutput("You manage to spot [p1name] slumped in a similar heap not too far away. [p1heshe] looks unconscious. You let out a groan, succumbing to a similar state...", parse);
+					Text.Add("You manage to spot [p1name] slumped in a similar heap not too far away. [p1heshe] looks unconscious. You let out a groan, succumbing to a similar state...", parse);
 				else
-					Text.AddOutput("You shudder, feeling his slime dripping off your body. You close your eyes, and sleep quickly claims you.", parse);
-				
+					Text.Add("You shudder, feeling his slime dripping off your body. You close your eyes, and sleep quickly claims you.", parse);
+				Text.Flush();
 				player.AddLustFraction(0.15);
 				Gui.NextPrompt(enc.finalize);
 			});
@@ -1827,83 +1830,83 @@ Scenes.Lizards.LossMaleCockVariations = function() {
 	// DISS
 	scenes.AddEnc(function() {
 		if(player.FirstVag())
-			Text.AddOutput("His eyes narrow uncertainly, and you hear him <i>sniff</i> a few times. Abruptly he shoves one hand down under your male attributes. You feel a finger drag across the entrance to your [vagDesc], and he snorts. <i>“A real shame you're... spoiled,”</i> he mutters, dropping you to the ground, picking up his weapon and walking away.", parse);
+			Text.Add("His eyes narrow uncertainly, and you hear him <i>sniff</i> a few times. Abruptly he shoves one hand down under your male attributes. You feel a finger drag across the entrance to your [vagDesc], and he snorts. <i>“A real shame you're... spoiled,”</i> he mutters, dropping you to the ground, picking up his weapon and walking away.", parse);
 		else
-			Text.AddOutput("His eyes seem to darken, and his face falls. He snorts, and drops you to the ground. <i>“Figures, not even a cunt worth fucking,”</i> he growls, picking up his weapon, walking away.", parse);
-		Text.Newline();
-		Text.AddOutput("You're not sure whether you're glad to have gotten away unscathed, or offended. Out of nowhere the butt of his weapon collides with your head, and you black out entirely.", parse);
-		
+			Text.Add("His eyes seem to darken, and his face falls. He snorts, and drops you to the ground. <i>“Figures, not even a cunt worth fucking,”</i> he growls, picking up his weapon, walking away.", parse);
+		Text.NL();
+		Text.Add("You're not sure whether you're glad to have gotten away unscathed, or offended. Out of nowhere the butt of his weapon collides with your head, and you black out entirely.", parse);
+		Text.Flush();
 		player.AddLustFraction(-0.05);
 		Gui.NextPrompt(enc.finalize);
 	});
 	// ORAL
 	scenes.AddEnc(function() {
-		Text.AddOutput("He snorts, looking at you. [m1Name] glowers at you, his eyes piercing into yours.", parse);
+		Text.Add("He snorts, looking at you. [m1Name] glowers at you, his eyes piercing into yours.", parse);
 		if(!player.FirstVag())
-			Text.AddOutput(" <i>“Guess you don't have a cunt, but a mouth's a mouth.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("He drops you to the ground. Before you can so much as push yourself into a sitting position, one scaled hand slides under your arm, the other coming to the back of your [hairDesc]. A slick, hot presence pushes against your lips and pops them open, sliding rapidly through at the same time as a second, throbbing appendage slides against your face. The sight of the reptile's groin fills your vision as one of his [m1cockDesc] fills your startled face. <i>“Bite down and you'll <b>regret</b> it,”</i> he warns. You gulp around his invading flesh, looking up at the menacing, armored creature staring down at you. He rumbles in approval as your mouth constricts around his [m1cockDesc].", parse);
-		Text.Newline();
-		Text.AddOutput("You can feel it on your tongue, sliding between your lips. His other grinds against your [faceDesc] slickly, smearing slime over it. The hand on the back of your head keeps you from pulling off of him, and the reptile's dangerous form towering above you reminds you exactly why you should be doing what he says. He holds you there, one [m1cockDesc] resting between your lips, pulsing softly on your tongue. It tastes tangy and slightly earthy, the exotic flavor smearing over your taste buds. Ridges cover the side of his heavy meat, and he wastes no time in forcing each and every one past your lips.", parse);
-		Text.Newline();
-		Text.AddOutput("Before long you feel his tip mash up against the back of your throat, and you gag around it. His other tip bumps against one of your [earDesc]. He chuckles, holding you in place for a second. You gulp heavily around his [m1cockDesc], your nose pressed almost to his armored groin. A heady musk fills each of your breaths. Thankfully, before it gets too bad, he rolls his hips back, looking down at you.", parse);
-		Text.Newline();
+			Text.Add(" <i>“Guess you don't have a cunt, but a mouth's a mouth.”</i>", parse);
+		Text.NL();
+		Text.Add("He drops you to the ground. Before you can so much as push yourself into a sitting position, one scaled hand slides under your arm, the other coming to the back of your [hairDesc]. A slick, hot presence pushes against your lips and pops them open, sliding rapidly through at the same time as a second, throbbing appendage slides against your face. The sight of the reptile's groin fills your vision as one of his [m1cockDesc] fills your startled face. <i>“Bite down and you'll <b>regret</b> it,”</i> he warns. You gulp around his invading flesh, looking up at the menacing, armored creature staring down at you. He rumbles in approval as your mouth constricts around his [m1cockDesc].", parse);
+		Text.NL();
+		Text.Add("You can feel it on your tongue, sliding between your lips. His other grinds against your [faceDesc] slickly, smearing slime over it. The hand on the back of your head keeps you from pulling off of him, and the reptile's dangerous form towering above you reminds you exactly why you should be doing what he says. He holds you there, one [m1cockDesc] resting between your lips, pulsing softly on your tongue. It tastes tangy and slightly earthy, the exotic flavor smearing over your taste buds. Ridges cover the side of his heavy meat, and he wastes no time in forcing each and every one past your lips.", parse);
+		Text.NL();
+		Text.Add("Before long you feel his tip mash up against the back of your throat, and you gag around it. His other tip bumps against one of your [earDesc]. He chuckles, holding you in place for a second. You gulp heavily around his [m1cockDesc], your nose pressed almost to his armored groin. A heady musk fills each of your breaths. Thankfully, before it gets too bad, he rolls his hips back, looking down at you.", parse);
+		Text.NL();
 		
 		var scenes2 = new EncounterTable();
 		scenes2.AddEnc(function() {
 			if(player.body.HasLongSnout())
-				Text.AddOutput("<i>“Just the right size for my dick. You got your muzzle just for this, didn't you?”</i>", parse);
+				Text.Add("<i>“Just the right size for my dick. You got your muzzle just for this, didn't you?”</i>", parse);
 			else
-				Text.AddOutput("<i>“What a pretty little mouth you have... Shame it's not a snout, I might be able to fit it all in, then.”</i>", parse);
+				Text.Add("<i>“What a pretty little mouth you have... Shame it's not a snout, I might be able to fit it all in, then.”</i>", parse);
 		}, 3.0);
 		scenes2.AddEnc(function() {
-			Text.AddOutput("<i>“And here I thought all [playerRace]s were bad at sucking cock.”</i>", parse);
+			Text.Add("<i>“And here I thought all [playerRace]s were bad at sucking cock.”</i>", parse);
 		}, 4.0);
 		scenes2.AddEnc(function() {
-			Text.AddOutput("<i>“Such a pushover. Hope you like the taste, you're going to get it every time you run into my kind.”</i>", parse);
+			Text.Add("<i>“Such a pushover. Hope you like the taste, you're going to get it every time you run into my kind.”</i>", parse);
 		}, 3.0);
 		scenes2.Get();
 		
-		Text.AddOutput(" With a smirk, he pushes his hips forward, burying his [m1cockDesc] into your face, letting every inch of it he can fit press into your mouth. Red faced, you close your eyes. You can't push his thick rod out from your lips, and you realize that doing poorly will just make him go even harder. What should you do?", parse);
-		
+		Text.Add(" With a smirk, he pushes his hips forward, burying his [m1cockDesc] into your face, letting every inch of it he can fit press into your mouth. Red faced, you close your eyes. You can't push his thick rod out from your lips, and you realize that doing poorly will just make him go even harder. What should you do?", parse);
+		Text.Flush();
 		//[Give in][Resist]
 		var options = new Array();
 		options.push({ nameStr : "Give in",
 			func : function() {
 				player.AddLustFraction(0.15);
 				Text.Clear();
-				Text.AddOutput("With a heavy swallow that seems to leave his slime trickling down your throat, you resign yourself to pleasuring the reptile. You open your eyes, taking a deep breath as his thick rod pulls halfway out. Gazing up at him, you see him grinning toothily down at you as your tongue begins to lap at his tip. <i>“That's better. Get sucking,”</i> he growls. You drop your eyes shamefully, giving a mumble of assent.", parse);
-				Text.Newline();
-				Text.AddOutput("You push your face forward freely, taking his [m1cockDesc] deeper into your mouth. He groans softly as you willingly get into the act. He pushes his hips forward, and you meet him halfway. His tip bumps against the back of your throat, and you carefully, gently angle your head to give him the best angle. He seems to understand exactly what you're doing, and takes full advantage of it. With a roll of his hips, the last couple of inches sink into your mouth, your lips meeting his groin. At the same time, you feel his slimy, fat [m1cockDesc] push into your throat. Your muscles protest, but he doesn't seem to care.", parse);
-				Text.Newline();
+				Text.Add("With a heavy swallow that seems to leave his slime trickling down your throat, you resign yourself to pleasuring the reptile. You open your eyes, taking a deep breath as his thick rod pulls halfway out. Gazing up at him, you see him grinning toothily down at you as your tongue begins to lap at his tip. <i>“That's better. Get sucking,”</i> he growls. You drop your eyes shamefully, giving a mumble of assent.", parse);
+				Text.NL();
+				Text.Add("You push your face forward freely, taking his [m1cockDesc] deeper into your mouth. He groans softly as you willingly get into the act. He pushes his hips forward, and you meet him halfway. His tip bumps against the back of your throat, and you carefully, gently angle your head to give him the best angle. He seems to understand exactly what you're doing, and takes full advantage of it. With a roll of his hips, the last couple of inches sink into your mouth, your lips meeting his groin. At the same time, you feel his slimy, fat [m1cockDesc] push into your throat. Your muscles protest, but he doesn't seem to care.", parse);
+				Text.NL();
 				
 				player.FuckOral(player.Mouth(), enc.male.FirstCock(), 2);
 				Sex.Blowjob(enc.male, player);
 				
-				Text.AddOutput("The side of your face feels wet with his slick fluids. You swallow reflexively, and it elicits a soft moan from him. The noise sends a thrill through your body, abashed as it is. He steps forward, straddling your face and beginning to slowly, steadily hump your mouth. You kneel there, letting the reptile abuse your mouth freely, his scaled groin taking up your entire vision.", parse);
-				Text.Newline();
+				Text.Add("The side of your face feels wet with his slick fluids. You swallow reflexively, and it elicits a soft moan from him. The noise sends a thrill through your body, abashed as it is. He steps forward, straddling your face and beginning to slowly, steadily hump your mouth. You kneel there, letting the reptile abuse your mouth freely, his scaled groin taking up your entire vision.", parse);
+				Text.NL();
 				
 				if(player.FirstVag())
-					Text.AddOutput("You let your hand trail down to your groin, feeling tempted to join in the reptile's sensations... but the way that his shaft fills your face so entirely, its partner smearing the scaled creature's fluids over your [faceDesc] leaves you feeling an itch for something... else. Your hand trails lower, between your legs. Your fingers brush the wet folds of your [vagDesc], beginning to stroke across them, one finger just beginning to plumb your aching depths.", parse);
+					Text.Add("You let your hand trail down to your groin, feeling tempted to join in the reptile's sensations... but the way that his shaft fills your face so entirely, its partner smearing the scaled creature's fluids over your [faceDesc] leaves you feeling an itch for something... else. Your hand trails lower, between your legs. Your fingers brush the wet folds of your [vagDesc], beginning to stroke across them, one finger just beginning to plumb your aching depths.", parse);
 				else if(player.NumCocks() > 1)
-					Text.AddOutput("Your hand trails down to your groin, where you let it find your favorite dick. Slowly you squeeze it, blushing yet deeper as you feel precum start to drip from multiple tips.", parse);
+					Text.Add("Your hand trails down to your groin, where you let it find your favorite dick. Slowly you squeeze it, blushing yet deeper as you feel precum start to drip from multiple tips.", parse);
 				else
-					Text.AddOutput("You let your hand trail down to your [cockDesc], feeling yourself harden.", parse);
-				Text.Newline();
-				Text.AddOutput("Despite the position, the way his shaft slides over your tongue feels sinfully good. Before long, you find yourself pumping away at yourself as he pistons his heavy meat in and out of your maw. Finally, he grips your head tightly in both hands, and <i>rams</i> your face onto his crotch, his legs spread and tail arched in bliss. You feel his [m1cockDesc] spasm heavily, and thick bulges run down his shaft... emptying right into your throat. You can't even taste it, though you realize you want to. You just feel his potent cum flooding your throat, sliding down to your belly, its partner spraying sticky, oddly thick fluids across your [faceDesc]. <i>“Drink up,”</i> the lizard hisses, holding you there. ", parse);
+					Text.Add("You let your hand trail down to your [cockDesc], feeling yourself harden.", parse);
+				Text.NL();
+				Text.Add("Despite the position, the way his shaft slides over your tongue feels sinfully good. Before long, you find yourself pumping away at yourself as he pistons his heavy meat in and out of your maw. Finally, he grips your head tightly in both hands, and <i>rams</i> your face onto his crotch, his legs spread and tail arched in bliss. You feel his [m1cockDesc] spasm heavily, and thick bulges run down his shaft... emptying right into your throat. You can't even taste it, though you realize you want to. You just feel his potent cum flooding your throat, sliding down to your belly, its partner spraying sticky, oddly thick fluids across your [faceDesc]. <i>“Drink up,”</i> the lizard hisses, holding you there. ", parse);
 				if(player.FirstVag())
-					Text.AddOutput("You do so obediently, still pumping at yourself eagerly.", parse);
+					Text.Add("You do so obediently, still pumping at yourself eagerly.", parse);
 				else
-					Text.AddOutput("You do so obediently, still fingering yourself dazedly.", parse);
-				Text.Newline();
-				Text.AddOutput("Finally, he lets go... and draws his [m1multiCockDesc] back. The tip of one pops from your lips, and he smirks down at you. <i>“Next time, skip the fight, I love a good cocksucker,”</i> he mutters. You drop to the ground, feeling mixed fluids dripping from your lips and face. You lick them up, trying to taste him. Dropping to the ground, you keep working at yourself eagerly. He picks up his weapon and turns, gesturing to the rest of his party.", parse);
-				Text.Newline();
+					Text.Add("You do so obediently, still fingering yourself dazedly.", parse);
+				Text.NL();
+				Text.Add("Finally, he lets go... and draws his [m1multiCockDesc] back. The tip of one pops from your lips, and he smirks down at you. <i>“Next time, skip the fight, I love a good cocksucker,”</i> he mutters. You drop to the ground, feeling mixed fluids dripping from your lips and face. You lick them up, trying to taste him. Dropping to the ground, you keep working at yourself eagerly. He picks up his weapon and turns, gesturing to the rest of his party.", parse);
+				Text.NL();
 				if(!party.Alone()) {
-					Text.AddOutput("The lizards leave you and your companion[s], [group] looking smugly satisfied. You doubt that you were the only one to be used...", {s: party.Two() ? "" : "s", group: enc.third ? "all" : "both"});
-					Text.Newline();
+					Text.Add("The lizards leave you and your companion[s], [group] looking smugly satisfied. You doubt that you were the only one to be used...", {s: party.Two() ? "" : "s", group: enc.third ? "all" : "both"});
+					Text.NL();
 				}
-				Text.AddOutput("They follow him off. Just as you find yourself reaching climax, a sharp blow to your head sends you into blackness. The last thought you have before unconsciousness claims you is how badly you need to get off.", parse);
-				Text.Newline();
+				Text.Add("They follow him off. Just as you find yourself reaching climax, a sharp blow to your head sends you into blackness. The last thought you have before unconsciousness claims you is how badly you need to get off.", parse);
+				Text.Flush();
 				
 				player.AddLustFraction(0.25);
 				Gui.NextPrompt(enc.finalize);
@@ -1914,43 +1917,43 @@ Scenes.Lizards.LossMaleCockVariations = function() {
 			func : function() {
 				player.AddLustFraction(-0.05);
 				Text.Clear();
-				Text.AddOutput("You open your eyes, glaring up at him. The reptile looks down at you with a glare of his own. He snorts again and grips your head, thrusting into your mouth. You find your throat beginning to ache at the rough treatment. He goes hard and fast, and his spaded tip digs into the muscles of your throat painfully. Even so, you don't give in. Your body is your own, and if he wants pleasure from it, then he'll have to fight for every drop.", parse);
-				Text.Newline();
-				Text.AddOutput("[m1Name] holds your face steady for a while more, his slimy, dripping dick grinding into your tongue and across your [faceDesc]. The taste is strange, and you can't get rid of it. It's hard to avoid gagging. Suddenly, he grips your cheeks tighter still, thrusting his hips forward.", parse);
-				Text.Newline();
-				Text.AddOutput("His [m1cockDesc] rams against your throat. He smirks down at you, holding the pressure steady. Your eyes widen as you realize... he isn't pulling back! You <i>writhe</i> on his dick, but it's no use. Your throat stretches around his thick tip, and your mouth slides further down his shaft. Your lips meet his scaled groin, and he forces you to lewdly kiss it, rubbing it against your mouth. You feel his [m1cockDesc] throb again, and your eyes cross.", parse);
-				Text.Newline();
-				Text.AddOutput("H-he isn't. He can't be...");
-				Text.Newline();
-				Text.AddOutput("You swallow shamefully as you feel the first thick pulse of slime travel down his shaft, spilling into your throat. Thick, sticky ooze pumps down your gullet as he holds you there, and you can't even resist swallowing the creature's vile seed. You can feel your belly <i>filling</i> with it, even as the reptile's other shaft sends equally hot, viscous slime splattering over your face.", parse);
-				Text.Newline();
+				Text.Add("You open your eyes, glaring up at him. The reptile looks down at you with a glare of his own. He snorts again and grips your head, thrusting into your mouth. You find your throat beginning to ache at the rough treatment. He goes hard and fast, and his spaded tip digs into the muscles of your throat painfully. Even so, you don't give in. Your body is your own, and if he wants pleasure from it, then he'll have to fight for every drop.", parse);
+				Text.NL();
+				Text.Add("[m1Name] holds your face steady for a while more, his slimy, dripping dick grinding into your tongue and across your [faceDesc]. The taste is strange, and you can't get rid of it. It's hard to avoid gagging. Suddenly, he grips your cheeks tighter still, thrusting his hips forward.", parse);
+				Text.NL();
+				Text.Add("His [m1cockDesc] rams against your throat. He smirks down at you, holding the pressure steady. Your eyes widen as you realize... he isn't pulling back! You <i>writhe</i> on his dick, but it's no use. Your throat stretches around his thick tip, and your mouth slides further down his shaft. Your lips meet his scaled groin, and he forces you to lewdly kiss it, rubbing it against your mouth. You feel his [m1cockDesc] throb again, and your eyes cross.", parse);
+				Text.NL();
+				Text.Add("H-he isn't. He can't be...");
+				Text.NL();
+				Text.Add("You swallow shamefully as you feel the first thick pulse of slime travel down his shaft, spilling into your throat. Thick, sticky ooze pumps down your gullet as he holds you there, and you can't even resist swallowing the creature's vile seed. You can feel your belly <i>filling</i> with it, even as the reptile's other shaft sends equally hot, viscous slime splattering over your face.", parse);
+				Text.NL();
 				
 				player.FuckOral(player.Mouth(), enc.male.FirstCock(), 1);
 				Sex.Blowjob(enc.male, player);
 				
 				var scenes2 = new EncounterTable();
 				scenes2.AddEnc(function() {
-					Text.AddOutput("Right near the end though, he jerks his hips back. Your sore throat contracts, leaving you feeling normal again. Unfortunately [m1name] is still in the throes of orgasm, and with a shift of his hips you find <i>both</i> of his fat tips pressed between your lips. You feel his sticky slime pumping across your tongue, filling your cheeks quickly. It tastes bitter and salty, and strangely thick, as though there isn't much water in it. The thick, custard-like slime fills your mouth until you're forced to swallow it just to breathe. With a sickening gulp, you feel the sludge trickling down your throat. He smirks down at you, popping his tips free as you swallow, letting the last few ropes paint your face.", parse);
-					Text.Newline();
-					Text.AddOutput("He pushes you to the ground, and picks up his weapon. You gulp down sweet air, looking around.", parse);
-					Text.Newline();
+					Text.Add("Right near the end though, he jerks his hips back. Your sore throat contracts, leaving you feeling normal again. Unfortunately [m1name] is still in the throes of orgasm, and with a shift of his hips you find <i>both</i> of his fat tips pressed between your lips. You feel his sticky slime pumping across your tongue, filling your cheeks quickly. It tastes bitter and salty, and strangely thick, as though there isn't much water in it. The thick, custard-like slime fills your mouth until you're forced to swallow it just to breathe. With a sickening gulp, you feel the sludge trickling down your throat. He smirks down at you, popping his tips free as you swallow, letting the last few ropes paint your face.", parse);
+					Text.NL();
+					Text.Add("He pushes you to the ground, and picks up his weapon. You gulp down sweet air, looking around.", parse);
+					Text.NL();
 					if(!party.Alone()) {
-						Text.AddOutput("You can see that you're not the only one to have been humiliated. [p1name] has [p1hisher] [p1armor] splattered with a fluid you don't care to think about.", parse);
-						Text.Newline();
+						Text.Add("You can see that you're not the only one to have been humiliated. [p1name] has [p1hisher] [p1armor] splattered with a fluid you don't care to think about.", parse);
+						Text.NL();
 					}
-					Text.AddOutput("[m1Name] looks down at you. He snorts, before swinging the butt of his weapon toward you one more time. You try to dodge it, but still feel too dazed to.", parse);
-					Text.Newline();
-					Text.AddOutput("The blunt end strikes your temple, and you black out.", parse);
+					Text.Add("[m1Name] looks down at you. He snorts, before swinging the butt of his weapon toward you one more time. You try to dodge it, but still feel too dazed to.", parse);
+					Text.NL();
+					Text.Add("The blunt end strikes your temple, and you black out.", parse);
 				});
 				scenes2.AddEnc(function() {
-					Text.AddOutput("He holds you there, each rope pumping down your throat. You look up at him, waiting for him to pull out... Yet even as his climax ends, he just holds you there. You begin to writhe, to squirm, trying to push him off. He easily overpowers you, holding you there. You gasp for air, but his [m1cockDesc] plugs your throat. You find yourself feeling faint. He smirks down at you. Dimly you hear him say, <i>“Maybe next time you'll learn to suck better.”</i>", parse);
-					Text.Newline();
-					Text.AddOutput("You pass out...", parse);
+					Text.Add("He holds you there, each rope pumping down your throat. You look up at him, waiting for him to pull out... Yet even as his climax ends, he just holds you there. You begin to writhe, to squirm, trying to push him off. He easily overpowers you, holding you there. You gasp for air, but his [m1cockDesc] plugs your throat. You find yourself feeling faint. He smirks down at you. Dimly you hear him say, <i>“Maybe next time you'll learn to suck better.”</i>", parse);
+					Text.NL();
+					Text.Add("You pass out...", parse);
 					
 					player.AddLustFraction(-0.1);
 				});
 				scenes2.Get();
-				
+				Text.Flush();
 				Gui.NextPrompt(enc.finalize);
 			}, enabled : true,
 			tooltip : "You're not giving this monster pleasure without another fight!"
@@ -1959,41 +1962,41 @@ Scenes.Lizards.LossMaleCockVariations = function() {
 	});
 	// ANAL FUCK
 	scenes.AddEnc(function() {
-		Text.AddOutput("His eyes light up as he sees your [cockDesc]. He grins a toothy smile. <i>“Well, looks like my lucky day. Been too many females around lately, you have no idea how much I've been wanting a chance like this.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("You don't quite know what he means, exactly, but the guesses you can make leave a sinking feeling in your stomach. He pushes you to the ground.", parse);
-		Text.Newline();
+		Text.Add("His eyes light up as he sees your [cockDesc]. He grins a toothy smile. <i>“Well, looks like my lucky day. Been too many females around lately, you have no idea how much I've been wanting a chance like this.”</i>", parse);
+		Text.NL();
+		Text.Add("You don't quite know what he means, exactly, but the guesses you can make leave a sinking feeling in your stomach. He pushes you to the ground.", parse);
+		Text.NL();
 		
 		var scenes2 = new EncounterTable();
 		// 25%, fuck him
 		scenes2.AddEnc(function() {
-			Text.AddOutput("His claws push your back into the ground, and his nostrils flare. His feet step on your [feetDesc], splaying your legs to either side. He comes to a crouch between your legs, looking down at you with a hungry glint in his eyes.", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“What..?”</i> you ask, letting out a quivering breath. He grins.", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“Shut up. Today's your lucky day. Say another word though, and I'll fuck your ass till you pass out. I don't <b>need</b> this.”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("You nod quickly, quieting down. You watch on in a mixture of fear and trepidation as [m1name] focuses on your [cockDesc]. His hungry eyes watch your [cockDesc] as it rests there. One scaled hand comes up to it, and you feel cool fingers wrap around your shaft, giving it a few tentative squeezes.", parse);
-			Text.Newline();
+			Text.Add("His claws push your back into the ground, and his nostrils flare. His feet step on your [feetDesc], splaying your legs to either side. He comes to a crouch between your legs, looking down at you with a hungry glint in his eyes.", parse);
+			Text.NL();
+			Text.Add("<i>“What..?”</i> you ask, letting out a quivering breath. He grins.", parse);
+			Text.NL();
+			Text.Add("<i>“Shut up. Today's your lucky day. Say another word though, and I'll fuck your ass till you pass out. I don't <b>need</b> this.”</i>", parse);
+			Text.NL();
+			Text.Add("You nod quickly, quieting down. You watch on in a mixture of fear and trepidation as [m1name] focuses on your [cockDesc]. His hungry eyes watch your [cockDesc] as it rests there. One scaled hand comes up to it, and you feel cool fingers wrap around your shaft, giving it a few tentative squeezes.", parse);
+			Text.NL();
 			if(player.HasBalls()) {
-				Text.AddOutput("He smirks, his fingers trailing down, coming to cup your [ballsDesc]. You feel him give them a series of slow, sensual squeezes, tugging them slightly. <i>“So warm...”</i>", parse);
-				Text.Newline();
+				Text.Add("He smirks, his fingers trailing down, coming to cup your [ballsDesc]. You feel him give them a series of slow, sensual squeezes, tugging them slightly. <i>“So warm...”</i>", parse);
+				Text.NL();
 			}
-			Text.AddOutput("He draws his hand back, before licking his lips. Almost in disbelief, you watch as his head lowers down. His muzzle bumps against your [cockDesc], and you feel a warm, wet tongue flicker out, brushing against your tip. His lips part, and he draws your shaft into his mouth. A deep warmth envelops it, and he quickly begins to slurp and suckle on you. Before long, you find yourself growing helplessly hard. You don't mind too much, though.", parse);
-			Text.Newline();
+			Text.Add("He draws his hand back, before licking his lips. Almost in disbelief, you watch as his head lowers down. His muzzle bumps against your [cockDesc], and you feel a warm, wet tongue flicker out, brushing against your tip. His lips part, and he draws your shaft into his mouth. A deep warmth envelops it, and he quickly begins to slurp and suckle on you. Before long, you find yourself growing helplessly hard. You don't mind too much, though.", parse);
+			Text.NL();
 			
 			player.AddLustFraction(0.15);
 			
 			if(!party.Alone()) {
-				Text.AddOutput("A quick glance around at your team shows that you have by far the best fate.", parse);
-				Text.Newline();
+				Text.Add("A quick glance around at your team shows that you have by far the best fate.", parse);
+				Text.NL();
 			}
-			Text.AddOutput("When you find yourself at full attention, [m1name] pulls himself off, sniffing your [cockDesc] lightly, as though relishing the scent. Without a word, he slides across your body, moving toward your chest.", parse);
-			Text.Newline();
-			Text.AddOutput("He stops halfway, just above your groin. He grins at you. You feel a scaled hand grip your shaft, angling it upward, and you can see his [m1anusDesc] hovering just above your [cockDesc]. <i>“Not a word.”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("You clamp your mouth shut, watching in trepidation as he positions himself. Satisfied, he closes his slitted eyes, before simply... dropping. You feel your [cockDesc] meet his cool pucker, before it simply parts. Gravity does the rest, and his [m1anusDesc] quickly meets your groin. You can't hold back a sharp gasp of breath as you feel your shaft sink into his surprisingly warm confines. His tail rests between your legs, and he holds himself there with your shaft embedded inside his reptilian body.", parse);
-			Text.Newline();
+			Text.Add("When you find yourself at full attention, [m1name] pulls himself off, sniffing your [cockDesc] lightly, as though relishing the scent. Without a word, he slides across your body, moving toward your chest.", parse);
+			Text.NL();
+			Text.Add("He stops halfway, just above your groin. He grins at you. You feel a scaled hand grip your shaft, angling it upward, and you can see his [m1anusDesc] hovering just above your [cockDesc]. <i>“Not a word.”</i>", parse);
+			Text.NL();
+			Text.Add("You clamp your mouth shut, watching in trepidation as he positions himself. Satisfied, he closes his slitted eyes, before simply... dropping. You feel your [cockDesc] meet his cool pucker, before it simply parts. Gravity does the rest, and his [m1anusDesc] quickly meets your groin. You can't hold back a sharp gasp of breath as you feel your shaft sink into his surprisingly warm confines. His tail rests between your legs, and he holds himself there with your shaft embedded inside his reptilian body.", parse);
+			Text.NL();
 			
 			var virgin = enc.male.Butt().virgin;
 			player.Fuck(player.FirstCock(), virgin ? 5 : 3);
@@ -2001,66 +2004,68 @@ Scenes.Lizards.LossMaleCockVariations = function() {
 			Sex.Anal(player, enc.male);
 			
 			if(virgin)
-				Text.AddOutput("<i>“Ahhh...”</i> he hisses, slightly pained. <i>“That it would feel so good, I had no idea...”</i>", parse);
+				Text.Add("<i>“Ahhh...”</i> he hisses, slightly pained. <i>“That it would feel so good, I had no idea...”</i>", parse);
 			else if(player.FirstCock().Size() > 75)
-				Text.AddOutput("<i>“Oh, just... right,”</i> he hisses.", parse);
+				Text.Add("<i>“Oh, just... right,”</i> he hisses.", parse);
 			else
-				Text.AddOutput("<i>“This all you got?”</i> he shakes his head, seeming almost disappointed.", parse);
-			Text.Newline();
-			Text.AddOutput("Slowly he builds up a pace, bouncing up and down on your [cockDesc]. His hand presses against your belly as he rocks himself on your aching length, working you quickly to the edge. His own [m1multiCockDesc] bob in front of you almost hypnotically, and between the lewd motion and the pleasure of having his [m1anusDesc] squeezing around your shaft you quickly find yourself moving with him, aching for release.", parse);
-			Text.Newline();
-			Text.AddOutput("It comes quickly, and in just a few short minutes, you feel the bubbling pressure building to a crescendo inside you.", parse);
+				Text.Add("<i>“This all you got?”</i> he shakes his head, seeming almost disappointed.", parse);
+			Text.NL();
+			Text.Add("Slowly he builds up a pace, bouncing up and down on your [cockDesc]. His hand presses against your belly as he rocks himself on your aching length, working you quickly to the edge. His own [m1multiCockDesc] bob in front of you almost hypnotically, and between the lewd motion and the pleasure of having his [m1anusDesc] squeezing around your shaft you quickly find yourself moving with him, aching for release.", parse);
+			Text.NL();
+			Text.Add("It comes quickly, and in just a few short minutes, you feel the bubbling pressure building to a crescendo inside you.", parse);
 			if(player.HasBalls())
-				Text.AddOutput(" Your [ballsDesc] tighten, and you feel [m1name] grip your hips tightly.", parse);
-			Text.Newline();
-			Text.AddOutput("[m1Name] leans forward, and you feel both of his [m1cockDesc] push against your stomach. Your every muscle tenses, and you feel yourself tumbling over the edge as your spunk surges through your [cockDesc]. You feel spurt after spurt flood [m1name]'s body, and the reptile groans, his eyes fluttering open. <i>“Yessss...”</i> he hisses, still rocking atop you.", parse);
+				Text.Add(" Your [ballsDesc] tighten, and you feel [m1name] grip your hips tightly.", parse);
+			Text.NL();
+			Text.Add("[m1Name] leans forward, and you feel both of his [m1cockDesc] push against your stomach. Your every muscle tenses, and you feel yourself tumbling over the edge as your spunk surges through your [cockDesc]. You feel spurt after spurt flood [m1name]'s body, and the reptile groans, his eyes fluttering open. <i>“Yessss...”</i> he hisses, still rocking atop you.", parse);
+			Text.Flush();
 
 			Gui.NextPrompt(function() {
 				Text.Clear();
 				player.AddLustFraction(-1);
 				
-				Text.AddOutput("Finally your climax passes, and you grin at him. He smirks at you, still riding. It takes you a moment to realize that he isn't finished... and even though you feel yourself beginning to soften, he keeps up the pace. Before long, you find yourself helplessly hardening under the stimulation. Your hypersensitive [cockDesc] protests, but he doesn't seem to care.", parse);
-				Text.Newline();
-				Text.AddOutput("He holds you there as you writhe, trying to pull away. <i>“Uh-uh. I won, you're <b>mine</b>, and <b>I</b> say when you stop cumming,”</i> he growls. You can only whimper as he works your body to exhaustion...", parse);
-				Text.Newline();
+				Text.Add("Finally your climax passes, and you grin at him. He smirks at you, still riding. It takes you a moment to realize that he isn't finished... and even though you feel yourself beginning to soften, he keeps up the pace. Before long, you find yourself helplessly hardening under the stimulation. Your hypersensitive [cockDesc] protests, but he doesn't seem to care.", parse);
+				Text.NL();
+				Text.Add("He holds you there as you writhe, trying to pull away. <i>“Uh-uh. I won, you're <b>mine</b>, and <b>I</b> say when you stop cumming,”</i> he growls. You can only whimper as he works your body to exhaustion...", parse);
+				Text.NL();
 				parse.climaxNr = Math.floor(player.stamina.Get() / 5);
 				if(parse.climaxNr < 4) parse.climaxNr = 4;
 				if(parse.climaxNr > 21) parse.climaxNr = 21;
-				Text.AddOutput("After your [climaxNr]th climax, you find yourself growing faint... and black out, still with [m1name] milking your [cockDesc], even though you're only shooting blanks now...", parse);
+				Text.Add("After your [climaxNr]th climax, you find yourself growing faint... and black out, still with [m1name] milking your [cockDesc], even though you're only shooting blanks now...", parse);
+				Text.Flush();
 				Gui.NextPrompt(enc.finalize);
 			});
 		}, 1.0, function() { return player.FirstCock(); });
 		// 75%, get fucked
 		scenes2.AddEnc(function() {
-			Text.AddOutput("His claws find your [buttDesc], and he turns you around onto your stomach. You feel him slide up behind you. <i>“Mmh...”</i> he groans softly.", parse);
-			Text.Newline();
-			Text.AddOutput("He leans over your back, and you feel his heavy [m1multiCockDesc] flop down between your pert cheeks. His hulking form looms over you, and you feel his muzzle slide up beside your ear. <i>“[MalesHerms] feel so much better than females,”</i> he whispers in your ear. You feel his hips draw back. In one swift roll of his hips, you feel a thick, slimy <i>presence</i> spear itself through your [anusDesc], the [m1cockDesc] squishing up deep inside your body.", parse);
-			Text.Newline();
+			Text.Add("His claws find your [buttDesc], and he turns you around onto your stomach. You feel him slide up behind you. <i>“Mmh...”</i> he groans softly.", parse);
+			Text.NL();
+			Text.Add("He leans over your back, and you feel his heavy [m1multiCockDesc] flop down between your pert cheeks. His hulking form looms over you, and you feel his muzzle slide up beside your ear. <i>“[MalesHerms] feel so much better than females,”</i> he whispers in your ear. You feel his hips draw back. In one swift roll of his hips, you feel a thick, slimy <i>presence</i> spear itself through your [anusDesc], the [m1cockDesc] squishing up deep inside your body.", parse);
+			Text.NL();
 			
 			player.FuckAnal(player.Butt(), enc.male.FirstCock(), 3);
 			Sex.Anal(enc.male, player);
 			
-			Text.AddOutput("Spots burst in front of your eyes, and you find yourself clutching weakly at the air as your [anusDesc] adjusts to his aching size. A deep, satisfied rumble sounds from his throat, and his hands squeeze your rump cheeks, kneading them like dough. He draws his hips back, the pulsing flesh of his cock surprisingly hotter than the rest of his body. You feel it slide slickly out of your sphincter, before he bucks his hips forward again. Once more you feel a warm, heavy pressure fill your [anusDesc], and he grunts. <i>“Oh yeah... You feel so good... I'm gonna do this <b>every</b> time...”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("Cool scales press up against your [buttDesc], and he rocks himself against your body, using his groin to smear the lubricating slime that covered his shaft across your rear. Soon he picks up the pace, beginning to lose himself to the pleasure your body gives him... and before long, you find that his oddly ridged length is battering at your prostate, sending your own [cockDesc] surging to life. The alien feel of his dick deep inside you gradually gets less and less painful, and by the time you feel his [m1cockDesc] throbbing powerfully inside of you, you find it hard to suppress a moan. <i>“That's right, you love this, little slut...”</i>", parse);
-			Text.Newline();
-			
+			Text.Add("Spots burst in front of your eyes, and you find yourself clutching weakly at the air as your [anusDesc] adjusts to his aching size. A deep, satisfied rumble sounds from his throat, and his hands squeeze your rump cheeks, kneading them like dough. He draws his hips back, the pulsing flesh of his cock surprisingly hotter than the rest of his body. You feel it slide slickly out of your sphincter, before he bucks his hips forward again. Once more you feel a warm, heavy pressure fill your [anusDesc], and he grunts. <i>“Oh yeah... You feel so good... I'm gonna do this <b>every</b> time...”</i>", parse);
+			Text.NL();
+			Text.Add("Cool scales press up against your [buttDesc], and he rocks himself against your body, using his groin to smear the lubricating slime that covered his shaft across your rear. Soon he picks up the pace, beginning to lose himself to the pleasure your body gives him... and before long, you find that his oddly ridged length is battering at your prostate, sending your own [cockDesc] surging to life. The alien feel of his dick deep inside you gradually gets less and less painful, and by the time you feel his [m1cockDesc] throbbing powerfully inside of you, you find it hard to suppress a moan. <i>“That's right, you love this, little slut...”</i>", parse);
+			Text.NL();
 			
 			if(Math.random() < 0.6) {
-				Text.AddOutput("Halfway through, his right hand leaves your [buttDesc], sliding down between your legs. His cool hand wraps around your [cockDesc], and he begins to pump wildly, seemingly not caring how rough he goes. Your eyes snap wide open, and you find yourself unable to keep from clenching around his thick [m1cockDesc] as he gropes your hanging shaft.", parse);
-				Text.Newline();
-				Text.AddOutput("That seems to be what he wanted, though, and as your wildly squeezing [anusDesc] clenches around the ridges of his [m1cockDesc], he lets go again. His free hand pats your [buttDesc]. <i>“Maybe when you win, you'll get to finish...”</i>", parse);
-				Text.Newline();
+				Text.Add("Halfway through, his right hand leaves your [buttDesc], sliding down between your legs. His cool hand wraps around your [cockDesc], and he begins to pump wildly, seemingly not caring how rough he goes. Your eyes snap wide open, and you find yourself unable to keep from clenching around his thick [m1cockDesc] as he gropes your hanging shaft.", parse);
+				Text.NL();
+				Text.Add("That seems to be what he wanted, though, and as your wildly squeezing [anusDesc] clenches around the ridges of his [m1cockDesc], he lets go again. His free hand pats your [buttDesc]. <i>“Maybe when you win, you'll get to finish...”</i>", parse);
+				Text.NL();
 				
 				player.AddLustFraction(0.1);
 			}
 			
-			Text.AddOutput("Finally, with a powerful thrust of his hips, his [m1cockDesc] slams deep into your body. [m1Name] howls out, a bestial cry that makes a shudder run down your spine. He roughly squeezes your [buttDesc], rocking his hips against you. You feel his two shafts pulsing heavily, before thick, warm fluid starts to coat your back and fill your [anusDesc]. Deeper and deeper his seed spills into your body, until he simply... pushes you off, jerking his [m1cockDesc] out from you and leaving you in the dirt. A few, last ropes splatter over your body as he picks up his weapon, before turning and walking away. Exhausted and quivering from your cruelly teased arousal, you roll onto your back and consign yourself to rest.", parse);
-			Text.Newline();
+			Text.Add("Finally, with a powerful thrust of his hips, his [m1cockDesc] slams deep into your body. [m1Name] howls out, a bestial cry that makes a shudder run down your spine. He roughly squeezes your [buttDesc], rocking his hips against you. You feel his two shafts pulsing heavily, before thick, warm fluid starts to coat your back and fill your [anusDesc]. Deeper and deeper his seed spills into your body, until he simply... pushes you off, jerking his [m1cockDesc] out from you and leaving you in the dirt. A few, last ropes splatter over your body as he picks up his weapon, before turning and walking away. Exhausted and quivering from your cruelly teased arousal, you roll onto your back and consign yourself to rest.", parse);
+			Text.NL();
 			
 			if(!party.Alone())
-				Text.AddOutput("Dimly, you can hear the other reptile[s] finishing with [party], leaving [all] of you in a similar state...", { s: enc.third ? "s" : "", party: party.Two() ? member1.name : "your group", all: party.Two() ? "both" : "all" });
+				Text.Add("Dimly, you can hear the other reptile[s] finishing with [party], leaving [all] of you in a similar state...", { s: enc.third ? "s" : "", party: party.Two() ? member1.name : "your group", all: party.Two() ? "both" : "all" });
 			player.AddLustFraction(0.2);
+			Text.Flush();
 			Gui.NextPrompt(enc.finalize);
 		}, 3.0);
 		scenes2.Get();
@@ -2074,6 +2079,7 @@ Scenes.Lizards.LossFemale = function() {
 	var enc = this;
 	var third = enc.third;
 	var member1 = party.members[1];
+	var lizard = enc.female;
 	
 	var parse = {
 		playerName   : player.name,
@@ -2102,197 +2108,197 @@ Scenes.Lizards.LossFemale = function() {
 	};
 	
 	
-	Text.AddOutput("The reptile holds you steady, and you glance up and down the creature's body. The [m1breastDesc] she has almost hypnotize you while her hair falls silkily as she moves, and you swallow, unsure of what she might do with you.", parse);
-	Text.Newline();
+	Text.Add("The reptile holds you steady, and you glance up and down the creature's body. The [m1breastDesc] she has almost hypnotize you while her hair falls silkily as she moves, and you swallow, unsure of what she might do with you.", parse);
+	Text.NL();
 	if(player.Armor())
-		Text.AddOutput("She looks you over before reaching out with one clawed hand. She makes short work of your [armorDesc]. ", parse);
-	Text.AddOutput("With a smirk, she pushes you to the ground.", parse);
-	Text.Newline();
+		Text.Add("She looks you over before reaching out with one clawed hand. She makes short work of your [armorDesc]. ", parse);
+	Text.Add("With a smirk, she pushes you to the ground.", parse);
+	Text.NL();
 	
 	
 	var scenes = new EncounterTable();
 	// ORAL RAPE
 	scenes.AddEnc(function() {
-		Text.AddOutput("You grunt as your back hits the ground. When you look up, you see the reptile standing over you, her scant underwear already gone. She smirks down at you, your vision taken up mostly by her yellow-green scaled groin. She crouches down, straddling your face. You blush, trying to turn your head away, but her thighs close around your [faceDesc].", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Uh-uh. You're going to be a good [boygirl],”</i> she hisses. You find your nose pressed right against her groin. This close, you can see the vague cleft where her [m1vagDesc] must be, her physiology keeping it hidden and protected from the desert sand when not in use... something she seems very keen to remedy. <i>“Get to work...”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("You swallow heavily, and look up at her. She gazes down at you with a mixture of smugness and threatening expectancy. The scent of her fills your nose, and you find it hard to say no.", parse);
-		Text.Newline();
-		Text.AddOutput("The heady, soft aroma floods your [faceDesc], and you quiver softly at it. ", parse);
+		Text.Add("You grunt as your back hits the ground. When you look up, you see the reptile standing over you, her scant underwear already gone. She smirks down at you, your vision taken up mostly by her yellow-green scaled groin. She crouches down, straddling your face. You blush, trying to turn your head away, but her thighs close around your [faceDesc].", parse);
+		Text.NL();
+		Text.Add("<i>“Uh-uh. You're going to be a good [boygirl],”</i> she hisses. You find your nose pressed right against her groin. This close, you can see the vague cleft where her [m1vagDesc] must be, her physiology keeping it hidden and protected from the desert sand when not in use... something she seems very keen to remedy. <i>“Get to work...”</i>", parse);
+		Text.NL();
+		Text.Add("You swallow heavily, and look up at her. She gazes down at you with a mixture of smugness and threatening expectancy. The scent of her fills your nose, and you find it hard to say no.", parse);
+		Text.NL();
+		Text.Add("The heady, soft aroma floods your [faceDesc], and you quiver softly at it. ", parse);
 		if(player.NumAttributes(Race.lizard) > 2) {
-			Text.AddOutput("Her pheromones have a potent effect on your body, and you feel heat building between your own legs. She gazes down at you knowingly, one hand lowering to trace across your brow. <i>“That's right, just breathe deeply, let it take hold...”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("You blush, realizing you're falling under the spell of [m1name].", parse);
+			Text.Add("Her pheromones have a potent effect on your body, and you feel heat building between your own legs. She gazes down at you knowingly, one hand lowering to trace across your brow. <i>“That's right, just breathe deeply, let it take hold...”</i>", parse);
+			Text.NL();
+			Text.Add("You blush, realizing you're falling under the spell of [m1name].", parse);
 		}
 		else
-			Text.AddOutput("Her scent is exotic and strange, almost like a foreign spice. You find yourself entranced by it, though it doesn't have a strong effect on your body. You swallow heavily, and slowly bring your [faceDesc] toward her scaled slit.", parse);
-		Text.Newline();
-		Text.AddOutput("You find your tongue slipping out from between your lips, shakily bringing it to her [m1vagDesc], brushing gently against the cool folds there. She lets out a low, rumbling croon and presses herself forward, knees on either side of your head. Her black hair tumbles forward around her yellow-green muzzle, and she presses her scaled cunt right to your lips.", parse);
-		Text.Newline();
-		Text.AddOutput("You feel yourself licking softly at her slit, your [tongueDesc] sliding up against her, tasting her outer folds. Sinking deeper, you press your tongue harder against her body, and feel it slip between her moistening folds. As your wet, slick tongue slithers into her [m1vagDesc], [m1name] gives a soft moan and grinds her pussy into your mouth. Encouraged by her response, you let your tongue sink deeper into her, feeling her walls contract and squeeze down around you.", parse);
+			Text.Add("Her scent is exotic and strange, almost like a foreign spice. You find yourself entranced by it, though it doesn't have a strong effect on your body. You swallow heavily, and slowly bring your [faceDesc] toward her scaled slit.", parse);
+		Text.NL();
+		Text.Add("You find your tongue slipping out from between your lips, shakily bringing it to her [m1vagDesc], brushing gently against the cool folds there. She lets out a low, rumbling croon and presses herself forward, knees on either side of your head. Her black hair tumbles forward around her yellow-green muzzle, and she presses her scaled cunt right to your lips.", parse);
+		Text.NL();
+		Text.Add("You feel yourself licking softly at her slit, your [tongueDesc] sliding up against her, tasting her outer folds. Sinking deeper, you press your tongue harder against her body, and feel it slip between her moistening folds. As your wet, slick tongue slithers into her [m1vagDesc], [m1name] gives a soft moan and grinds her pussy into your mouth. Encouraged by her response, you let your tongue sink deeper into her, feeling her walls contract and squeeze down around you.", parse);
 		
 		Sex.Cunnilingus(player, enc.female);
 		player.FuckOral(player.Mouth(), enc.female.FirstVag(), 2);
+		Text.Flush();
 		
 		Gui.NextPrompt(function() {
 			Text.Clear();
 			
-			Text.AddOutput("You press your [faceDesc] against her heated [m1vagDesc] as her legs slide closed around your head.", parse);
-			Text.Newline();
+			Text.Add("You press your [faceDesc] against her heated [m1vagDesc] as her legs slide closed around your head.", parse);
+			Text.NL();
 			
 			var horns = player.HasHorns();
 			if(horns) {
 				parse.hornDesc = horns.Long();
-				Text.AddOutput("She reaches down and grabs onto your [hornDesc], holding on tightly and pressing you harder against her [m1vagDesc], a soft, breathy groan escaping her snout. Her eyes flutter shut, and you feel your [faceDesc] grow warm from her now wet pussy. Holding onto you by your horns, she uses your mouth almost like a personal toy, her lips clenching down around your tongue.", parse);
-				Text.Newline();
+				Text.Add("She reaches down and grabs onto your [hornDesc], holding on tightly and pressing you harder against her [m1vagDesc], a soft, breathy groan escaping her snout. Her eyes flutter shut, and you feel your [faceDesc] grow warm from her now wet pussy. Holding onto you by your horns, she uses your mouth almost like a personal toy, her lips clenching down around your tongue.", parse);
+				Text.NL();
 				player.AddLustFraction(0.1);
 			}
 			
 			if(player.LustLevel() > 0.6) {
-				Text.AddOutput("You find it hard to contain yourself now, and you start to push deeper into her. The sensations, the scents, the achingly delectable feel of her slippery tunnel squeezing around your tongue, it's all too much. You give in to pleasuring her, finding yourself growing quickly aroused as well...", parse);
-				Text.Newline();
+				Text.Add("You find it hard to contain yourself now, and you start to push deeper into her. The sensations, the scents, the achingly delectable feel of her slippery tunnel squeezing around your tongue, it's all too much. You give in to pleasuring her, finding yourself growing quickly aroused as well...", parse);
+				Text.NL();
 				player.AddLustFraction(0.05);
 			}
-			Text.AddOutput("You flicker your tongue through her lips and begin to tongue-fuck her slick, warm vent. She gasps in surprise, and presses harder against you. You take a deep, long breath of her scents and flick your tongue upward, trying to brush against her clit.", parse);
-			Text.Newline();
+			Text.Add("You flicker your tongue through her lips and begin to tongue-fuck her slick, warm vent. She gasps in surprise, and presses harder against you. You take a deep, long breath of her scents and flick your tongue upward, trying to brush against her clit.", parse);
+			Text.NL();
 			
 			if(player.dexterity.Get() > 25)
-				Text.AddOutput("You easily curl your tongue out from your lips, letting it slither up to [m1name]'s bud of flesh, flicking your heated muscle against it. She groans out in delight. <i>“Oh, yesssss,”</i> she whispers, her words slipping into a long hiss of pleasure. Her slick walls clamp around your tongue, and you soon abandon her [m1clitDesc] to plunge yourself back into her sensual, heated passage...", parse);
+				Text.Add("You easily curl your tongue out from your lips, letting it slither up to [m1name]'s bud of flesh, flicking your heated muscle against it. She groans out in delight. <i>“Oh, yesssss,”</i> she whispers, her words slipping into a long hiss of pleasure. Her slick walls clamp around your tongue, and you soon abandon her [m1clitDesc] to plunge yourself back into her sensual, heated passage...", parse);
 			else
-				Text.AddOutput("Unfortunately, you're just not dextrous enough to reach... Grunting in frustration, you let your tongue slurp back into her slimy passage, tonguing her ever more deeply.", parse);
-			Text.Newline();
+				Text.Add("Unfortunately, you're just not dextrous enough to reach... Grunting in frustration, you let your tongue slurp back into her slimy passage, tonguing her ever more deeply.", parse);
+			Text.NL();
 			
 			if(player.body.HasLongSnout()) {
-				Text.AddOutput("Finally, you can hear her breathing growing erratic, and know she must be close. You lap at her trickling juices, slurping on her wet cunt. Her legs spasm and clench around your head, and she holds your head tightly in her hands. Suddenly, her walls squeeze tightly around you, and she lets out a long, aching moan.", parse);
-				Text.Newline();
-				Text.AddOutput("Before you can do anything more, she <i>rams</i> your head forward, pushing your muzzle not against her dripping cunt, but <i>into</i> it. Your eyes snap open in surprise, but it's too late. Your nose fills with the thick, heady scent of her sex, and your tongue is forced deeper into her body.", parse);
-				Text.Newline();
-				Text.AddOutput("[m1Name] moans loudly, her slick walls squeezing and contracting around your snout, and you find your air supply rapidly runs out. Gulping her scent and her wet juices, you try to pleasure her now not just out of lust, but the need for her to let go and grant you air.", parse);
-				Text.Newline();
-				Text.AddOutput("Deeper and deeper you slurp with your tongue, grinding against her walls as she roughly humps your entire muzzle. Riding your snout, you feel her warm, slick walls squeeze rhythmically around you. You push your face forward, and feel her cunt suddenly clench down achingly tight. <i>“You f-feel so... so g-good... insiiiiiide!”</i> she cries, her head tilting back. Her walls spasm powerfully around your snout, rippling and squeezing you tightly.", parse);
-				Text.Newline();
-				Text.AddOutput("Suddenly you feel a wet gush of fluids hit your muzzle, filling your mouth and squirting out onto your face. You force your eyes shut as [m1name] squeals in delight, her quivering cunt clamping around you. Her slick, slightly sweet fluids flooding your muzzle, you gulp them down to clear your airway.", parse);
-				Text.Newline();
-				Text.AddOutput("For what seems like minutes she orgasms, gushes of her slippery juices coating your face and throat. Finally, she seems to calm down... and simply pulls herself off. You gasp for air, your every breath laced with her scents.", parse);
+				Text.Add("Finally, you can hear her breathing growing erratic, and know she must be close. You lap at her trickling juices, slurping on her wet cunt. Her legs spasm and clench around your head, and she holds your head tightly in her hands. Suddenly, her walls squeeze tightly around you, and she lets out a long, aching moan.", parse);
+				Text.NL();
+				Text.Add("Before you can do anything more, she <i>rams</i> your head forward, pushing your muzzle not against her dripping cunt, but <i>into</i> it. Your eyes snap open in surprise, but it's too late. Your nose fills with the thick, heady scent of her sex, and your tongue is forced deeper into her body.", parse);
+				Text.NL();
+				Text.Add("[m1Name] moans loudly, her slick walls squeezing and contracting around your snout, and you find your air supply rapidly runs out. Gulping her scent and her wet juices, you try to pleasure her now not just out of lust, but the need for her to let go and grant you air.", parse);
+				Text.NL();
+				Text.Add("Deeper and deeper you slurp with your tongue, grinding against her walls as she roughly humps your entire muzzle. Riding your snout, you feel her warm, slick walls squeeze rhythmically around you. You push your face forward, and feel her cunt suddenly clench down achingly tight. <i>“You f-feel so... so g-good... insiiiiiide!”</i> she cries, her head tilting back. Her walls spasm powerfully around your snout, rippling and squeezing you tightly.", parse);
+				Text.NL();
+				Text.Add("Suddenly you feel a wet gush of fluids hit your muzzle, filling your mouth and squirting out onto your face. You force your eyes shut as [m1name] squeals in delight, her quivering cunt clamping around you. Her slick, slightly sweet fluids flooding your muzzle, you gulp them down to clear your airway.", parse);
+				Text.NL();
+				Text.Add("For what seems like minutes she orgasms, gushes of her slippery juices coating your face and throat. Finally, she seems to calm down... and simply pulls herself off. You gasp for air, your every breath laced with her scents.", parse);
 				player.AddLustFraction(0.05);
 			}
 			else {
-				Text.AddOutput("She grips your head tightly, grinding her pussy up and down your lips. [m1Name] moans eagerly, her eyes fluttering open and shut as you eagerly lick at her dripping cunt. Her tail flickers over your body, and you feel it brush between your legs.", parse);
-				Text.Newline();
-				Text.AddOutput("Spurred on by her touches, you press your tongue deeper into her, lapping and slurping at her entrance. She moans softly, humping against your face slowly. <i>“Keep it up and I'll let you taste the waters of the desert,”</i> she whispers. You blush and inhale her scent again.", parse);
-				Text.Newline();
-				Text.AddOutput("On and on you slurp at her, your tongue running up and down her warm, moist pussy lips, her hips moving against you. You reach up and hold softly onto her, steadying her motions. It seems to drive her on even further, and soon the two of you are grinding away there on the sand...", parse);
-				Text.Newline();
-				Text.AddOutput("Finally, her breaths begin to come less and less regularly. Her [m1breastDesc] heave and her face flushes a deep red. Suddenly her [m1vagDesc] clamps down around your tongue, and she <i>squeals</i> out as a wet torrent of reptilian juices pours over your face. You quiver, swallowing every drop that floods your mouth, as the rest mats your [hairDesc] and pools behind your head.", parse);
-				Text.Newline();
-				Text.AddOutput("Slowing down, she shudders in her afterglow and then gradually stands. She gazes down at you, panting heavily.", parse);
+				Text.Add("She grips your head tightly, grinding her pussy up and down your lips. [m1Name] moans eagerly, her eyes fluttering open and shut as you eagerly lick at her dripping cunt. Her tail flickers over your body, and you feel it brush between your legs.", parse);
+				Text.NL();
+				Text.Add("Spurred on by her touches, you press your tongue deeper into her, lapping and slurping at her entrance. She moans softly, humping against your face slowly. <i>“Keep it up and I'll let you taste the waters of the desert,”</i> she whispers. You blush and inhale her scent again.", parse);
+				Text.NL();
+				Text.Add("On and on you slurp at her, your tongue running up and down her warm, moist pussy lips, her hips moving against you. You reach up and hold softly onto her, steadying her motions. It seems to drive her on even further, and soon the two of you are grinding away there on the sand...", parse);
+				Text.NL();
+				Text.Add("Finally, her breaths begin to come less and less regularly. Her [m1breastDesc] heave and her face flushes a deep red. Suddenly her [m1vagDesc] clamps down around your tongue, and she <i>squeals</i> out as a wet torrent of reptilian juices pours over your face. You quiver, swallowing every drop that floods your mouth, as the rest mats your [hairDesc] and pools behind your head.", parse);
+				Text.NL();
+				Text.Add("Slowing down, she shudders in her afterglow and then gradually stands. She gazes down at you, panting heavily.", parse);
 			}
-			Text.Newline();
+			Text.NL();
 			
-			Text.AddOutput("She moans softly, her cunt dripping onto your face still. You look away, and she smirks down at you through red cheeks.", parse);
-			Text.Newline();
+			Text.Add("She moans softly, her cunt dripping onto your face still. You look away, and she smirks down at you through red cheeks.", parse);
+			Text.NL();
 			parse["s"] = third ? "s" : "";
-			Text.AddOutput("<i>“Not... oh... bad,”</i> she pants. She collects her things - and some of your money - and then quickly heads off toward her companion[s].", parse);
+			Text.Add("<i>“Not... oh... bad,”</i> she pants. She collects her things - and some of your money - and then quickly heads off toward her companion[s].", parse);
 			
 			var coin = Math.min(Math.floor(5 + Math.random() * 20), party.coin);
 			party.coin -= coin;
-			Text.Newline();
+			Text.NL();
 			if(coin > 0) {
 				parse["coin"] = Text.NumToText(coin);
 				parse["s"] = coin > 1 ? "s" : "";
-				Text.AddOutput("<b>She takes [coin] coin[s] from you!</b>", parse);
+				Text.Add("<b>She takes [coin] coin[s] from you!</b>", parse);
 			}
 			else {
-				Text.AddOutput("<b>You didn't have any coins for her to take!</b>", parse);
+				Text.Add("<b>You didn't have any coins for her to take!</b>", parse);
 			}
-			
+			Text.Flush();
 			player.AddLustFraction(0.3);
 			Gui.NextPrompt(enc.finalize);
 		});
 	}, 1.0);
 	// GENDER SPECIFIC SCENES (COCK)
 	scenes.AddEnc(function() {
-		Text.AddOutput("Finding yourself flat on your back, she steps over you, reaching down and dropping her scant clothing. ", parse);
+		Text.Add("Finding yourself flat on your back, she steps over you, reaching down and dropping her scant clothing. ", parse);
 		if(player.LustLevel() > 0.5)
-			Text.AddOutput("You blush, your [numCocks] already hard from her coy behavior, and she smirks sultrily down at you. Right where she wants you, you can do little but look down as she slides over your body, straddling your hips.", parse);
+			Text.Add("You blush, your [numCocks] already hard from her coy behavior, and she smirks sultrily down at you. Right where she wants you, you can do little but look down as she slides over your body, straddling your hips.", parse);
 		else
-			Text.AddOutput("You look away, trying not to give her what she wants. But [m1name] doesn't seem to be taking 'no' for an answer, and slides across your body, straddling your hips.", parse);
-		Text.Newline();
+			Text.Add("You look away, trying not to give her what she wants. But [m1name] doesn't seem to be taking 'no' for an answer, and slides across your body, straddling your hips.", parse);
+		Text.NL();
 		
 		if(player.FirstBreastRow().size.Get() >= 3)
-			Text.AddOutput("Her hand presses to your [breastDesc], rubbing them slowly, sending delightful shivers through your body that feel more than a little shameful. At about the same time as she toys with your mounds, fingers tweaking and caressing your nipples, she lowers herself further...", parse);
+			Text.Add("Her hand presses to your [breastDesc], rubbing them slowly, sending delightful shivers through your body that feel more than a little shameful. At about the same time as she toys with your mounds, fingers tweaking and caressing your nipples, she lowers herself further...", parse);
 		else
-			Text.AddOutput("Her hand presses to your chest, rubbing it slowly as she lowers herself down further...", parse);
-		Text.Newline();
-		Text.AddOutput("You feel her [m1vagDesc] press against your ", parse);
+			Text.Add("Her hand presses to your chest, rubbing it slowly as she lowers herself down further...", parse);
+		Text.NL();
+		Text.Add("You feel her [m1vagDesc] press against your ", parse);
 		if(player.NumCocks() >= 3)
-			Text.AddOutput("numerous, half-hard dicks, grinding the middle one along her folds.", parse);
+			Text.Add("numerous, half-hard dicks, grinding the middle one along her folds.", parse);
 		else if(player.NumCocks() == 2)
-			Text.AddOutput("pair of thick shafts, her eyes lighting up in delight at the similarity to her own kinds' attributes. Her other hand slides down, and you feel her cool grip surround your twinned members. She presses them right against her [m1vagDesc], which seems suddenly more moist...", parse);
+			Text.Add("pair of thick shafts, her eyes lighting up in delight at the similarity to her own kinds' attributes. Her other hand slides down, and you feel her cool grip surround your twinned members. She presses them right against her [m1vagDesc], which seems suddenly more moist...", parse);
 		else
-			Text.AddOutput("heavy [cockDesc], letting out a coo of delight as it pushes against her entrance.", parse);
-		Text.Newline();
+			Text.Add("heavy [cockDesc], letting out a coo of delight as it pushes against her entrance.", parse);
+		Text.NL();
 		
 		player.AddLustFraction(0.25);
 		
-		Text.AddOutput("She licks her lips, and leans forward. Her tail lifts slightly, exposing her even further. You find yourself helplessly hard from her sensual touches. She reaches back and takes a hold of you, before aiming you upward... and sitting down.", parse);
-		Text.Newline();
+		Text.Add("She licks her lips, and leans forward. Her tail lifts slightly, exposing her even further. You find yourself helplessly hard from her sensual touches. She reaches back and takes a hold of you, before aiming you upward... and sitting down.", parse);
+		Text.NL();
 		
 		// TODO: Multidick
 		if(player.NumCocks() == 2) {
-			Text.AddOutput("You feel <i>both</i> of your [numCocks] push against her surprisingly wet, warm folds, before they easily part them. A heritage of taking two at once seems to have made her amazingly adapted...", parse);
-			Text.Newline();
-			Text.AddOutput("Your twin tips sink into the wet heat of her rippling passage, and her walls constrict around you. You feel your [numCocks] squish against each other and her silky confines, and she sinks deeper onto you. You roll your hips, letting out a soft moan as she lowers herself.", parse);
+			Text.Add("You feel <i>both</i> of your [numCocks] push against her surprisingly wet, warm folds, before they easily part them. A heritage of taking two at once seems to have made her amazingly adapted...", parse);
+			Text.NL();
+			Text.Add("Your twin tips sink into the wet heat of her rippling passage, and her walls constrict around you. You feel your [numCocks] squish against each other and her silky confines, and she sinks deeper onto you. You roll your hips, letting out a soft moan as she lowers herself.", parse);
 			player.AddLustFraction(0.15);
 		}
 		else {
-			Text.AddOutput("You feel your dick push against her wet entrance, her eyes watching you hungrily before it simply slips in. A deep, rich <i>heat</i> grips your cock as it sinks into her, and you find yourself softly moaning in surprise. The gentle feel of her body clenching around your [cockDesc] leaves you panting, and you bite your lip.", parse);
+			Text.Add("You feel your dick push against her wet entrance, her eyes watching you hungrily before it simply slips in. A deep, rich <i>heat</i> grips your cock as it sinks into her, and you find yourself softly moaning in surprise. The gentle feel of her body clenching around your [cockDesc] leaves you panting, and you bite your lip.", parse);
 		}
-		Text.Newline();
 		var virgin = enc.female.FirstVag().virgin;
 		Sex.Vaginal(player, enc.female);
 		player.Fuck(player.FirstCock(), virgin ? 5 : 3);
 		enc.female.FuckVag(enc.female.FirstVag(), player.FirstCock());
 		
 		if(virgin) {
-			Text.AddOutput("<i>“Consider yourself lucky on being my first,”</i> she hisses, her voice a mixture of pleasure and pain.", parse);
-			Text.Newline();
+			Text.NL();
+			Text.Add("<i>“Consider yourself lucky on being my first,”</i> she hisses, her voice a mixture of pleasure and pain.", parse);
 		}
-		
+		Text.Flush();
 		Gui.NextPrompt(function() {
 			Text.Clear();
 			
-			Text.AddOutput("She smirks, sensing the power she has over you now. You reach out to pull her down further, but as soon as you touch her... she stops. You grip her hips and struggle to pull her down, ", parse);
+			Text.Add("She smirks, sensing the power she has over you now. You reach out to pull her down further, but as soon as you touch her... she stops. You grip her hips and struggle to pull her down, ", parse);
 
 			var odds = (10 + player.strength.Get()) / 100;
 			if(odds > 0.95) odds = 0.95;
 			
 			if(Math.random() < odds) {
-				Text.AddOutput("and her eyes open wide as you succeed. You let out a lusty moan as you feel your [numCocks] sink deeper into her body, and she lets out a surprised hiss, tilting her head back as you force pleasure into her slick love canal. She tenses up, her lips squeezing around you tantalizingly, your thick tip being stroked by her rippling, undulating muscles.", parse);
+				Text.Add("and her eyes open wide as you succeed. You let out a lusty moan as you feel your [numCocks] sink deeper into her body, and she lets out a surprised hiss, tilting her head back as you force pleasure into her slick love canal. She tenses up, her lips squeezing around you tantalizingly, your thick tip being stroked by her rippling, undulating muscles.", parse);
 			}
 			else {
-				Text.AddOutput("but her strength outmatches yours, post-combat. She gives you a stern look, her muzzle curling into a growl. You meekly look down, grunting as her slick walls clench around you. She pushes your hands away, and ", parse);
+				Text.Add("but her strength outmatches yours, post-combat. She gives you a stern look, her muzzle curling into a growl. You meekly look down, grunting as her slick walls clench around you. She pushes your hands away, and ", parse);
 				
 				if(player.HasTail())
-					Text.AddOutput("twines her tail with yours, using it to pull herself down onto your [numCocks].", parse);
+					Text.Add("twines her tail with yours, using it to pull herself down onto your [numCocks].", parse);
 				else
-					Text.AddOutput("grips the side of your body, pulling herself down onto your [numCocks].", parse);
-				Text.Newline();
-				Text.AddOutput("She hisses out in delight, closing her eyes as her oddly warm, wet cunt squishes around your [numCocks], her fluids dripping down onto your groin.", parse);
+					Text.Add("grips the side of your body, pulling herself down onto your [numCocks].", parse);
+				Text.NL();
+				Text.Add("She hisses out in delight, closing her eyes as her oddly warm, wet cunt squishes around your [numCocks], her fluids dripping down onto your groin.", parse);
 			}
 
-			Text.Newline();
-			Text.AddOutput("Getting into it rapidly, she lifts one hand and gropes at her scaled, [m1breastDesc], her eyes lolling back as you sink deeper into her. She lifts her rump up a few inches, slickly pulling your [numCocks] out of her, the wet noises that accompany the act spurring you on further.", parse);
-			Text.Newline();
+			Text.NL();
+			Text.Add("Getting into it rapidly, she lifts one hand and gropes at her scaled, [m1breastDesc], her eyes lolling back as you sink deeper into her. She lifts her rump up a few inches, slickly pulling your [numCocks] out of her, the wet noises that accompany the act spurring you on further.", parse);
+			Text.NL();
 			
 			if(player.LustLevel() > 0.6)
-				Text.AddOutput("Encouraged by her actions, you reach up and take her scaly, pert breasts in your hands, squeezing them tightly. She gasps in surprise, her loose pussy clenching slickly around you and you let out a soft moan, your precum spurting deeper into her. She gives a delighted moan, letting you toy with her [m1breastDesc], her eyes shut.", parse);
+				Text.Add("Encouraged by her actions, you reach up and take her scaly, pert breasts in your hands, squeezing them tightly. She gasps in surprise, her loose pussy clenching slickly around you and you let out a soft moan, your precum spurting deeper into her. She gives a delighted moan, letting you toy with her [m1breastDesc], her eyes shut.", parse);
 			else
-				Text.AddOutput("She squeezes her [m1breastDesc] slowly, sensually as she rides you, and you find yourself steadily encouraged by the action - whatever else, it's very definitely naughty. You close your eyes and let out a long, shaky breath as her wet cunt milks your [numCocks] steadily.", parse);
-			Text.Newline();
-			Text.AddOutput("For what seems like ages she works over your [numCocks], humping and riding you with shameless abandon. You feel your cheeks flushed with heat, and find it hard to think straight through the pleasure she forced on you.", parse);
-
+				Text.Add("She squeezes her [m1breastDesc] slowly, sensually as she rides you, and you find yourself steadily encouraged by the action - whatever else, it's very definitely naughty. You close your eyes and let out a long, shaky breath as her wet cunt milks your [numCocks] steadily.", parse);
+			Text.NL();
+			Text.Add("For what seems like ages she works over your [numCocks], humping and riding you with shameless abandon. You feel your cheeks flushed with heat, and find it hard to think straight through the pleasure she forced on you.", parse);
+			Text.Flush();
 			player.AddLustFraction(0.1);
 			
 			Gui.NextPrompt(function() {
@@ -2300,100 +2306,339 @@ Scenes.Lizards.LossFemale = function() {
 				
 				// TODO More than 2 cocks?
 				if(player.NumCocks() == 2) {
-					Text.AddOutput("Finally, you feel like you can't take it anymore. You let out an aching moan... and then another. Soon you're groaning wantonly, thrusting and humping back up into her, your twinned, slick shafts pulsing inside her. She opens her muzzle, and you hear her sibilant yet sweet voice sound out, <i>“Cum in me... make me heavy with your eggs...”</i>", parse);
-					Text.Newline();
-					Text.AddOutput("You blush as she orders you to finish inside of her.", parse);
-					Text.Newline();
+					Text.Add("Finally, you feel like you can't take it anymore. You let out an aching moan... and then another. Soon you're groaning wantonly, thrusting and humping back up into her, your twinned, slick shafts pulsing inside her. She opens her muzzle, and you hear her sibilant yet sweet voice sound out, <i>“Cum in me... make me heavy with your eggs...”</i>", parse);
+					Text.NL();
+					Text.Add("You blush as she orders you to finish inside of her.", parse);
+					Text.NL();
 					
 					player.AddSexExp(1);
 					
 					if(player.NumAttributes(Race.lizard) > 3)
-						Text.AddOutput("<i>“Our hatchlings will have the brightest scales,”</i> she hisses, looking down at you. She seems to consider you lizard enough to breed with!", parse);
+						Text.Add("<i>“Our hatchlings will have the brightest scales,”</i> she hisses, looking down at you. She seems to consider you lizard enough to breed with!", parse);
 					else
-						Text.AddOutput("<i>“Such exotic hatchlings you'll give me,”</i> she hisses, looking down at you. You can't help but blush an even deeper red.", parse);
-					Text.Newline();
-					Text.AddOutput("She grinds her [m1vagDesc] messily against your two dicks, moaning eagerly as you fill her nicely. Finally though, you can't bear it any longer... and with a long drawn, breathless moan of your own, you feel climax pound through your brain. Hot, sticky ropes of cum spurt out through each of your tips deep into her body, and you feel the pressure in your taint surging, making every jet of spunk so agonizingly wonderful to fill her with.", parse);
-					Text.Newline();
+						Text.Add("<i>“Such exotic hatchlings you'll give me,”</i> she hisses, looking down at you. You can't help but blush an even deeper red.", parse);
+					Text.NL();
+					Text.Add("She grinds her [m1vagDesc] messily against your two dicks, moaning eagerly as you fill her nicely. Finally though, you can't bear it any longer... and with a long drawn, breathless moan of your own, you feel climax pound through your brain. Hot, sticky ropes of cum spurt out through each of your tips deep into her body, and you feel the pressure in your taint surging, making every jet of spunk so agonizingly wonderful to fill her with.", parse);
+					Text.NL();
 					
 					// CUM PRODUCTION
 					if(player.CumOutput() > 3) {
-						Text.AddOutput("You quickly feel your cum surging back around your [numCocks], the hot fluids coating your shafts as she rides you. Her belly seems to be bloating before your eyes as you pump your potent seed deep into her body... You cum and cum, unable to help yourself as you fill her to the brim, and her eyes simply glaze over in ecstasy.", parse);
-						Text.Newline();
-						Text.AddOutput("Harder and harder she rides you, until you hear her <i>shout</i> out to the air in bliss. Her wet, sloppy cunt tightens and squeezes around your pair of spurting cocks, trapping your seed even further. Her stomach grows even more, and by the time your own climax begins to die down, she looks mildly pregnant. Gasping for breath, she slumps forward, lying atop you.", parse);
+						Text.Add("You quickly feel your cum surging back around your [numCocks], the hot fluids coating your shafts as she rides you. Her belly seems to be bloating before your eyes as you pump your potent seed deep into her body... You cum and cum, unable to help yourself as you fill her to the brim, and her eyes simply glaze over in ecstasy.", parse);
+						Text.NL();
+						Text.Add("Harder and harder she rides you, until you hear her <i>shout</i> out to the air in bliss. Her wet, sloppy cunt tightens and squeezes around your pair of spurting cocks, trapping your seed even further. Her stomach grows even more, and by the time your own climax begins to die down, she looks mildly pregnant. Gasping for breath, she slumps forward, lying atop you.", parse);
 					}
 					else {
-						Text.AddOutput("Harder and harder she rides you, until you hear her <i>shout</i> out to the air in bliss. Her wet, sloppy cunt tightens and squeezes around your pair of spurting cocks, trapping your seed deep inside of her. She leans forward, holding tightly onto you as she rides out her own climax, her juices making a mess of your groin.", parse);
+						Text.Add("Harder and harder she rides you, until you hear her <i>shout</i> out to the air in bliss. Her wet, sloppy cunt tightens and squeezes around your pair of spurting cocks, trapping your seed deep inside of her. She leans forward, holding tightly onto you as she rides out her own climax, her juices making a mess of your groin.", parse);
 					}
 				}
 				// NUMCOCKS != 2
 				else {
-					Text.AddOutput("She pulls herself up, lifting her heated vent until just your thick tip rests inside of her. You feel her [m1vagDesc] clench around your slick tip and find it hard to keep from moaning. She smirks down at you in delight, before plunging herself back onto you.", parse);
-					Text.Newline();
-					Text.AddOutput("You let out a loud gasp, which seems to spur her on even further.", parse);
-					Text.Newline();
+					Text.Add("She pulls herself up, lifting her heated vent until just your thick tip rests inside of her. You feel her [m1vagDesc] clench around your slick tip and find it hard to keep from moaning. She smirks down at you in delight, before plunging herself back onto you.", parse);
+					Text.NL();
+					Text.Add("You let out a loud gasp, which seems to spur her on even further.", parse);
+					Text.NL();
 					
 					if(player.FirstVag() && Math.random() < 0.5) {
-						Text.AddOutput("She seems to be intent on tormenting you, though, and you see her hand move down behind her. You almost stop to ask her what she's doing, before you feel <i>exactly</i> what.", parse);
-						Text.Newline();
-						Text.AddOutput("Two, thick, scaled fingers press to your own wet lips, and she slowly massages your heated labia. You blush deeply, feeling your [cockDesc] pulse sympathetically. As she feels the way your dick spasms inside of her dripping cunt, [m1name] seems to settle on a course of action. You take a deep breath as you feel her fingers begin to rub and tease your [vagDesc].", parse);
-						Text.Newline();
-						Text.AddOutput("Her fingers move mercilessly, stroking up and down your folds, stopping to lightly brush your [clitDesc] with each motion. Every time she touches you, it makes your thick [cockDesc] pulse more achingly within her, and soon she's bouncing slowly up and down on your heavy dick as her fingers explore your feminine half.", parse);
-						Text.Newline();
-						Text.AddOutput("<i>“Mmm...”</i> she moans, her cunt clamping around your aching dick. She lifts herself up again, holding herself right at your tip. [m1Name] gives you a smirk... before dropping. You feel her wet passage engulf your dick right as her fingers straighten, and <i>plunge</i> into your wet [vagDesc]. Stars burst in front of your eyes, and you feel your body spasm. She groans delightedly, and begins to thrash about on your dense meat, her fingers filling your cunt to capacity.", parse);
-						Text.Newline();
-						Text.AddOutput("You can do little more than lie there in forced bliss as she abuses your [vagDesc], her fingers leaving you twitching and moaning in aching need. All the while, her own wet passage milks your [cockDesc] eagerly.", parse);
-						Text.Newline();
-						Text.AddOutput("Finally, it gets to be too much. You feel your climax approaching like a wave. Your eyes roll back, and you <i>howl</i> out in pleasure as your dick begins to spasm wildly, your legs thrashing behind [m1name] as your [vagDesc] clamps down around her fingers. Your juices gush around her fingers, pooling onto the ground quickly and leaving your [vagDesc] a mess. Your [cockDesc] throbs and spasms inside the reptile, and she lets out a delighted hiss, leaning forward.", parse);
-						Text.Newline();
-						Text.AddOutput("Your entire body goes tense with the sensation of filling a warm female, as your own cunt is filled so wonderfully. Dimly you're aware of the reptile's own climax, her pussy mimicking your own as it squeezes around your dick.", parse);
+						Text.Add("She seems to be intent on tormenting you, though, and you see her hand move down behind her. You almost stop to ask her what she's doing, before you feel <i>exactly</i> what.", parse);
+						Text.NL();
+						Text.Add("Two, thick, scaled fingers press to your own wet lips, and she slowly massages your heated labia. You blush deeply, feeling your [cockDesc] pulse sympathetically. As she feels the way your dick spasms inside of her dripping cunt, [m1name] seems to settle on a course of action. You take a deep breath as you feel her fingers begin to rub and tease your [vagDesc].", parse);
+						Text.NL();
+						Text.Add("Her fingers move mercilessly, stroking up and down your folds, stopping to lightly brush your [clitDesc] with each motion. Every time she touches you, it makes your thick [cockDesc] pulse more achingly within her, and soon she's bouncing slowly up and down on your heavy dick as her fingers explore your feminine half.", parse);
+						Text.NL();
+						Text.Add("<i>“Mmm...”</i> she moans, her cunt clamping around your aching dick. She lifts herself up again, holding herself right at your tip. [m1Name] gives you a smirk... before dropping. You feel her wet passage engulf your dick right as her fingers straighten, and <i>plunge</i> into your wet [vagDesc]. Stars burst in front of your eyes, and you feel your body spasm. She groans delightedly, and begins to thrash about on your dense meat, her fingers filling your cunt to capacity.", parse);
+						Text.NL();
+						Text.Add("You can do little more than lie there in forced bliss as she abuses your [vagDesc], her fingers leaving you twitching and moaning in aching need. All the while, her own wet passage milks your [cockDesc] eagerly.", parse);
+						Text.NL();
+						Text.Add("Finally, it gets to be too much. You feel your climax approaching like a wave. Your eyes roll back, and you <i>howl</i> out in pleasure as your dick begins to spasm wildly, your legs thrashing behind [m1name] as your [vagDesc] clamps down around her fingers. Your juices gush around her fingers, pooling onto the ground quickly and leaving your [vagDesc] a mess. Your [cockDesc] throbs and spasms inside the reptile, and she lets out a delighted hiss, leaning forward.", parse);
+						Text.NL();
+						Text.Add("Your entire body goes tense with the sensation of filling a warm female, as your own cunt is filled so wonderfully. Dimly you're aware of the reptile's own climax, her pussy mimicking your own as it squeezes around your dick.", parse);
 					}
 					// NOT THE HERM SCENE
 					else {
-						Text.AddOutput("Back and forth she rides you, grinding her scaled cunt against your groin with a delighted expression on her face. She lets out a hiss of lust, moving sensually atop you. Her slick walls squeeze your fat dick constantly, and you find yourself moving with her, bucking in. She drives you steadily toward the edge, and all you can think of is filling her reptilian womb with your seed, lacing her body with your sticky spunk.", parse);
-						Text.Newline();
-						Text.AddOutput("Her tight lips massage and squeeze your dick, and her hands again cup her breasts, groping and squeezing them. You lie there, watching shakily as you focus on pushing your hips up to hers, trying to push your [cockDesc] ever deeper.", parse);
-						Text.Newline();
+						Text.Add("Back and forth she rides you, grinding her scaled cunt against your groin with a delighted expression on her face. She lets out a hiss of lust, moving sensually atop you. Her slick walls squeeze your fat dick constantly, and you find yourself moving with her, bucking in. She drives you steadily toward the edge, and all you can think of is filling her reptilian womb with your seed, lacing her body with your sticky spunk.", parse);
+						Text.NL();
+						Text.Add("Her tight lips massage and squeeze your dick, and her hands again cup her breasts, groping and squeezing them. You lie there, watching shakily as you focus on pushing your hips up to hers, trying to push your [cockDesc] ever deeper.", parse);
+						Text.NL();
 						
 						// STAMINA CHECK
 						var odds = (10 + player.stamina.Get()) / 100;
 						if(Math.random() < odds) {
-							Text.AddOutput("You piston your hips hard against hers... and seem to hit just the <i>right</i> spot. Her eyes snap open, and her face makes a surprised, silent 'Oh!'", parse);
-							Text.Newline();
-							Text.AddOutput("Suddenly her cunt contracts around your [cockDesc], and you feel her humping grow more and more desperate. Up and down, grinding herself along your breeding pole, she works herself into a frenzy. Then her legs clamp tightly around your hips, and she tilts her head back and <i>howls</i> out. You feel slick, warm fluids squirt out around your [cockDesc], and [m1name] shudders as her cunt milks you hungrily. Her eyes glazed, she pants heavily as her climaxing pussy spasms around your dick, quickly pumping you into your own climax.", parse);
+							Text.Add("You piston your hips hard against hers... and seem to hit just the <i>right</i> spot. Her eyes snap open, and her face makes a surprised, silent 'Oh!'", parse);
+							Text.NL();
+							Text.Add("Suddenly her cunt contracts around your [cockDesc], and you feel her humping grow more and more desperate. Up and down, grinding herself along your breeding pole, she works herself into a frenzy. Then her legs clamp tightly around your hips, and she tilts her head back and <i>howls</i> out. You feel slick, warm fluids squirt out around your [cockDesc], and [m1name] shudders as her cunt milks you hungrily. Her eyes glazed, she pants heavily as her climaxing pussy spasms around your dick, quickly pumping you into your own climax.", parse);
 						}
 						else {
-							Text.AddOutput("It gets harder and harder to resist the squeezing, slippery folds that stroke your [cockDesc], and you find yourself looking at [m1name]'s smug face as she watches you lose to her body. She swivels her hips, grinding your wet, sensitive tip right against her walls deep within her slick passage, and you can't help but moan eagerly.", parse);
-							Text.Newline();
-							Text.AddOutput("<i>“Cum, little [race], you know you can't help yourself,”</i> she coos, sounding delighted at your predicament. But she's right... You grunt, panting heavily, your breath getting louder and harder to control. You feel orgasm surging to take you, and there's nothing you can do. It hits you like a wall, and your hips jerk and you buck needily into her waiting cunt. She lets out a hiss of pleasure as you thrust almost mindlessly into her reptilian pussy, pumping rope after rope of thick cum into her waiting depths.", parse);
-							Text.Newline();
-							Text.AddOutput("Still unsatisfied however, she keeps riding you, extracting more pleasure from you, driving you harder.", parse);
+							Text.Add("It gets harder and harder to resist the squeezing, slippery folds that stroke your [cockDesc], and you find yourself looking at [m1name]'s smug face as she watches you lose to her body. She swivels her hips, grinding your wet, sensitive tip right against her walls deep within her slick passage, and you can't help but moan eagerly.", parse);
+							Text.NL();
+							Text.Add("<i>“Cum, little [race], you know you can't help yourself,”</i> she coos, sounding delighted at your predicament. But she's right... You grunt, panting heavily, your breath getting louder and harder to control. You feel orgasm surging to take you, and there's nothing you can do. It hits you like a wall, and your hips jerk and you buck needily into her waiting cunt. She lets out a hiss of pleasure as you thrust almost mindlessly into her reptilian pussy, pumping rope after rope of thick cum into her waiting depths.", parse);
+							Text.NL();
+							Text.Add("Still unsatisfied however, she keeps riding you, extracting more pleasure from you, driving you harder.", parse);
 						}
 					}
 				}
-				Text.Newline();
-				Text.AddOutput("Your brain awash with pleasure, you pass into the haze of afterglow, and soon simply pass out...", parse);
+				Text.NL();
+				Text.Add("Your brain awash with pleasure, you pass into the haze of afterglow, and soon simply pass out...", parse);
 				player.AddLustFraction(-1);
-				Text.Newline();
+				Text.NL();
 				if(!party.Alone()) {
-					Text.AddOutput("You wake to [p1name] standing over you, shaking you gently. <i>“[playerName], wake up!”</i> [p1heshe] says. You groan softly, struggling to sit up. Looking a mess, you blush slightly, before thanking [p1himher] for helping you. Your party helps you gather your things, before you set off.", parse);
+					Text.Add("You wake to [p1name] standing over you, shaking you gently. <i>“[playerName], wake up!”</i> [p1heshe] says. You groan softly, struggling to sit up. Looking a mess, you blush slightly, before thanking [p1himher] for helping you. Your party helps you gather your things, before you set off.", parse);
 					player.AddLustFraction(0.05);
 				}
 				else
-					Text.AddOutput("Some time later you awake, and find her gone. You gather your things slowly, before heading off again.", parse);
-				
+					Text.Add("Some time later you awake, and find her gone. You gather your things slowly, before heading off again.", parse);
+				Text.Flush();
 				Gui.NextPrompt(enc.finalize);
 			});
 		});
 	}, 1.0, function() { return player.FirstCock(); });
-	// GENDER SPECIFIC SCENES (VAG)
-	scenes.AddEnc(function() {
-		Text.AddOutput("FEMALE ON VAG", parse);
-		Text.Newline();
+	scenes.AddEnc(function() { //TAILFUCK
+		var lusty = player.LustLevel() >= 0.7;
+		var parse = {
+			belly   : function() { return player.StomachDesc(); },
+			cocks   : function() { return player.MultiCockDesc(); },
+			balls   : function() { return player.BallsDesc(); },
+			thigh   : function() { return player.ThighDesc(); },
+			boygirl : player.mfTrue("boy", "girl"),
+			hair    : function() { return player.Hair().Short(); },
+			face    : function() { return player.FaceDesc(); },
+			tongue  : function() { return player.TongueDesc(); },
+			vag     : function() { return player.FirstVag().Short(); },
+			clit    : function() { return player.FirstVag().ClitShort(); },
+			breasts : function() { return player.FirstBreastRow().Short(); },
+			anus    : function() { return player.Butt().Short(); },
+			hips    : function() { return player.HipsDesc(); },
+			skin    : function() { return player.SkinDesc(); }
+		};
+		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+		parse = Text.ParserPlural(parse, third, null, "2");
 		
-		player.AddLustFraction(0.05);
+		Text.Add("<i>“Much better,”</i> she hisses, her voice slippery like snake oil. <i>“I was feeling so stressed until you came along. You will be my plaything, won’t you?”</i> Not that it seems like you have much choice in the matter. The reptilian enjoys you squirming under her gaze, lightly touching herself as she considers what to do with you. Her tail sways back and forth slowly; poised to strike should you dare escape her clutches.", parse);
+		Text.NL();
+		if(player.FirstCock()) {
+			Text.Add("<i>“I bet you take pride in [thatThose],”</i> she smirks, planting a scaled foot on your [cocks]. <i>“Do[notEs] [itThey] make the girls squeal in delight as you fuck them?”</i> The pressure grows as she starts to slowly stroke you, pushing your throbbing shaft[s] against your [belly].", parse);
+			if(player.HasBalls())
+				Text.Add(" She takes special care with your [balls], toying with them carefully with her foot. The girl is being nice and tender, but the occasional ‘accidental slip’ reminds you of just who is in charge here.", parse);
+			Text.NL();
+			if(player.FirstVag()) {
+				Text.Add("<i>“I’m far more interested in what lies below, though,”</i> she grins as she leans down, pulling your [cocks] aside, exposing your pussy. <i>“Perhaps another time.”</i>", parse);
+			}
+			else {
+				Text.Add("<i>“Does that feel good?”</i> There is a hungry look in her eyes, and an aroused flush on her face. <i>“Wouldn’t you like it more than anything else if I were to sink down on you right now and ride you like a bitch in heat?”</i> She continues toying with your maleness, raising [itThem] to full mast, though [itsTheyre] still pinned painfully against your stomach.", parse);
+				Text.NL();
+				if(lusty) {
+					Text.Add("You nod quickly. This is turning out a lot better than you could hope for.", parse);
+					Text.NL();
+				}
+				Text.Add("<i>“Well, I hate to disappoint you,”</i> the reptile drawls, <i>“but I’m not here to fulfill <b>your</b> needs… you are here to fulfill <b>mine</b>.”</i>", parse);
+				Text.NL();
+				Text.Add("That sounded ominous.", parse);
+			}
+			Text.NL();
+		}
+		if(player.FirstVag()) {
+			parse["l"] = player.LowerBodyType() != LowerBodyType.Single ? Text.Parse("up the inside of your [thigh]", parse) : "from your stomach down into the valley of your crotch";
+			Text.Add("<i>“Now <b>this</b> is a treat,”</i> the lizan licks her lips appreciatively as her finger traces a line [c]. After teasing your outer lips for a bit, she sinks two digits into your [vag], watching your face closely as she does. If you weren’t wet before, the sensual lizard sure does her best to push your buttons… but to what end? A tiny gasp slips out from your lips, much to her mirth.", parse);
+			Text.NL();
+			parse["c"] = player.FirstCock() ? Text.Parse(" removing her foot from your [cocks] as she gets down on all fours,", parse) : "";
+			Text.Add("<i>“Good plaything,”</i> she murmurs encouragingly. <i>“I’m going to need you nice and wet for this next part...”</i> The reptile leans down further,[c] and graces your nethers with her dexterous tongue. The slithering appendage darts into your folds, and by the time she’s tasted enough of you, you’re panting heavily.", parse);
+			Text.NL();
+		}
+		Text.Add("<i>“I think it’s time you give me some attention too.”</i> You gulp as the lizard looms over you, straddling your midsection and leaning down over you, her breasts inches from your face. <i>“You may start here,”</i> she whispers, her smoldering eyes boring into you as you give in to her whims and start kneading her scaly tits.", parse);
+		Text.NL();
+		Text.Add("<i>“Mmm… use your tongue too,”</i> she commands, grinding her hips down on you and leaving a wet trail from her pussy across your belly. ", parse);
+		if(player.FirstCock())
+			Text.Add("On her downstroke, she grinds your [cocks] between her buttcheeks, rubbing her pussy over [itThem], then drawing her inviting cleft out of your reach when your shaft[s] twitch[notEs] in response. Her slow torture is driving you wild - if you are not going to be allowed to use your [cocks], why must she torment you this way? ", parse);
+		Text.Add("Obediently, you wrap your lips around one of her nipples - are lizards supposed to have nipples? No matter, this one does, and they are quite fun to play with, quickly becoming stiff as you do so.", parse);
+		Text.NL();
+		if(player.sexlevel < 3)
+			Text.Add("<i>“No teeth!”</i> she warns you, frowning at your enthusiasm. <i>“What do they teach the [boygirl]s these days?”</i>", parse);
+		else
+			Text.Add("<i>“Good… just like that,”</i> she moans appreciatively. <i>“You’re a keeper, come and submit to me more often.”</i>", parse);
+		Text.Add(" Before long, her delicious boobies are pulled out of your reach, only to be replaced by her drooling snatch.", parse);
+		Text.NL();
+		Text.Add("<i>“Here, next,”</i> she pants, caressing your [hair] lightly as she straddles your [face], grinding her crotch all over you. Her scent is intoxicating, and you can’t resist giving in to her wishes, letting the spiral of lust drag you deeper and deeper into debauchery just as you bury your [tongue] into her needy slit. Your nose grinds against the rutting lizard’s delicate nub, making her squeal in pleasure.", parse);
+		Text.NL();
+		if(player.FirstCock()) {
+			parse["t"] = player.NumCocks() > 1 ? " together" : "";
+			Text.Add("You’re in for quite the surprise too, as you feel the reptilian wrap her scaly tail around your [cocks], hugging [itThem] tightly[t] as she jerks you off. Waves of pleasure surge through you, but she stops as soon as she notices your onsetting orgasm, releasing you from her hold and leaving you a panting mess.", parse);
+		}
+		else if(player.FirstVag()) {
+			Text.Add("You let out a muffled moan into the reptilian’s wet pussy as you feel her tail rub against your own entrance. The girl has expert control of the appendage, which she demonstrates as she gives your [clit] a light flick, making you shudder.", parse);
+		}
+		Text.NL();
+		Text.Add("<i>“Mmm… you’ve been a very good, obedient [boygirl],”</i> the busty lizard praises you, stifling a moan as her sweet, oily nectar trickles onto your [tongue]. <i>“Just do one more thing for me, and perhaps I shall reward you, yes?”</i>", parse);
+		Text.NL();
+		if(player.SubDom() > 0)
+			Text.Add("Well, it’s not like you have a choice, is it? Ignoring your defiant stare, your scaly mistress flashes you a grin.", parse);
+		else
+			Text.Add("Eager to please your scaly mistress, you nod expectantly.", parse);
+		Text.Add(" <i>“My tail is very sensitive, and I quite enjoy having it licked… won’t you indulge me, pet?”</i> Her voice is sultry, but you can sense the vague outline of a trap there. You don’t have much time to contemplate however, as the lizan takes your silence for agreement. That, or she wasn’t really asking for permission in the first place, merely stating your future. She adjusts her position so she sits straddling your [belly], her tail bent between her legs and snaking its way up your body.", parse);
+		Text.NL();
+		Text.Add("The lizan’s face is flushed as you begin slathering the scaly tip with your tongue. Splatters of oily femcum trickle down to your stomach; she’s grinding her newly pleasured pussy against her own tail, and the juices are spreading.", parse);
+		if(player.FirstCock())
+			Text.Add(" As you work your way up her tail, you can taste the salty tang of your own pre, reminding you of your spurned [cocks].", parse);
+		else if(player.FirstVag())
+			Text.Add(" Speaking of juices, you can taste your own on her tail; a reminder of where it was just a short while ago. Your loins twitch at the memory.", parse);
+		Text.NL();
 		
-		Gui.NextPrompt(enc.finalize);
-	}, 1.0, function() { return false}); // TODO INSERT VAG SCENES HERE
+		Sex.Cunnilingus(player, lizard);
+		player.Fuck(null, 2);
+		lizard.Fuck(null, 2);
+		
+		if(player.FirstBreastRow().Size() >= 6)
+			Text.Add("The girl smirks as she tops you, her scaly tail worming its way between your [breasts] and into your pliant mouth. <i>“If anyone were to see this, it’d look like you were giving me a blowjob, wouldn’t it?”</i> she murmurs coyly, pushing your breasts together to form a tight valley for her to thrust her tail into.", parse);
+		else
+			Text.Add("<i>“Come on, can’t you take more?”</i> she goads you, rolling her hips forward and feeding you more of the snake. It takes all you have to not gag on the thick prehensile appendage as it worms its way down your protesting gullet.", parse);
+		Text.Add(" Finally, she lets you go, pulling out of your mouth and leaving you coughing.", parse);
+		Text.NL();
+		Text.Add("<i>“I’ve always wondered what having a cock would feel like,”</i> the reptilian murmurs to herself as she caresses the saliva-coated tail. She looks you over thoughtfully, a slow grin spreading across her face. ", parse);
+		if(player.FirstVag())
+			Text.Add("<i>“I’d say it’s time for your reward, my pet.”</i>", parse);
+		else
+			Text.Add("<i>“Have you ever wondered what it would feel like to be fucked by one?”</i>", parse);
+		player.AddLustFraction(1);
+		
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			Text.Clear();
+			var dom = player.SubDom();
+			Text.Add("A quick look tells you that the lizard isn’t joking, and she’s too far gone into the haze of lust to be reasoned with. ", parse);
+			if(dom > 25)
+				Text.Add("You fume at the thought of the scaly girl persuming to lord it over you like if you were some common slut, but your words lack fire; she and her companion[s2] have already bested you once, they could undoubtedly do so again in your current state.", parse);
+			else if(dom > -25)
+				Text.Add("A quick glance tells you that her companion[s2] [isAre2] still around, watching events unfold with curiosity. You can’t really stand up to them the way you are, perhaps it’s better to just let her do her thing and get it over with.", parse);
+			else
+				Text.Add("Not that you’d want to… the thought of your mistress’s tail impaling you is too arousing to let go of. The more you think about it, the more receptive you become to the idea.", parse);
+			Text.Add(" Either way, it’s becoming harder to think straight. Your loins are aching with need… maybe you should just give in, if only to have your own release.", parse);
+			Text.NL();
+			parse["l"] = player.HasLegs() ? "between your legs" : "into the valley of your crotch";
+			Text.Add("<i>“Good, that’s the expression I want you to have,”</i> she encourages you as her hand slides down [l]. <i>“I’ll ease you open, then it’s time...”</i> Her tail sways back and forth eagerly, glistening with your saliva.", parse);
+			Text.NL();
+			
+			var target = BodyPartType.ass;
+			
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				target = BodyPartType.vagina;
+				Text.Add("You moan as she once again thrusts her fingers into your [vag]; the reptile savouring your discomfort. <i>“Don’t try to fool me, you’re wet as the Oasis itself,”</i> she leans closer and taunts you. <i>“You can put on a defiant facade if you want; your body sings a different song.”</i>", parse);
+				Text.NL();
+				parse["dom"] = dom > 25 ? " reluctantly" :
+				               dom > -25 ? "" : " eagerly";
+				Text.Add("She’s right… it’s no use denying it. You[dom] let go of your last sliver of self-control and close your eyes, only focusing on the heavenly feeling of her hand pounding your pussy. Filling your thoughts is the promise of something more; that scaly and deliciously thick fuckstick that you helped prepare yourself.", parse);
+			}, 3.0, function() { return player.FirstVag(); });
+			scenes.AddEnc(function() {
+				parse["l"] = player.HasLegs() ? "on all fours" : "face forward";
+				var tail = player.HasTail();
+				parse["tail"] = tail ? tail.Short() : "";
+				parse["t"] = tail ? Text.Parse(", roughly pulls your [tail] out of the way", parse) : "";
+				Text.Add("Though her words are soothing, her actions are all but. You’re quickly hoisted around [l], head pushed down into the sand as the lizard takes a seat straddling your back, using you as furniture. You’d be hard pressed to think of a way she could humiliate you further, but she easily exceeds your expectations when she wets her fingers[t] and reaches between your buttcheeks, lightly prodding your [anus]. You clench reflexively, but she’s not about to have any of that. She pushes the first finger in, probing your depths and testing how stretchy you are, and you moan despite yourself.", parse);
+				Text.NL();
+				Text.Add("<i>“It doesn’t have to hurt, I have this oil...”</i> She briefly pulls out her fingers, rummaging through her pack for a bit. A cool liquid seeps between your cheeks, dulling the pain and coaxing another appreciative moan from you. The lizard works it in, spreading you wider and wider. Before long, she fits digit after digit into your relaxing butt, until she can easily make room for her entire hand. This is just the beginning, though; you know how thick her tail is.", parse);
+			}, 1.0, function() { return true; });
+			
+			scenes.Get();
+			parse["target"] = target == BodyPartType.vagina ? parse["vag"] : parse["anus"];
+			var pussy = target == BodyPartType.vagina;
+			
+			Text.NL();
+			Text.Add("<i>“Mmm, you’re so hot inside,”</i> the reptile sighs, probing deeper and deeper. <i>“My cock wants you, are you ready for it?”</i> ", parse);
+			if(player.FirstCock()) {
+				if(player.HasLegs()) {
+					parse["hind"] = player.NumLegs() > 2 ? " hind" : "";
+					parse["b"] = player.HasBalls() ? Text.Parse(" fondling your [balls] and", parse) : "";
+					Text.Add("Her other hand reaches between your[hind] legs,[b] tugging on your [cocks].", parse);
+				}
+				else {
+					parse["b"] = player.HasBalls() ? Text.Parse(" and your [balls]", parse) : "";
+					Text.Add("Her other hand reaches around you, playing with your [cocks][b].", parse);
+				}
+				Text.Add(" With the dual stimulation, you feel like you could come then and there, but she once again cruelly prevents your orgasm, her tight grip clamping your cumvein shut. If you want release, it’s going to have to be through other means. ", parse);
+			}
+			parse["more"] = !pussy ? " more" : "";
+			Text.Add("Interpreting your muffled moan as an affirmative, she quickly takes her place, the tip of her tail poised at your [target]. Your to-be lover coats her already glistening tail in[more] sticky oil, retrieved from her belongings. It seems like she’s been preparing for something like this for quite some time now.", parse);
+			Text.NL();
+			Text.Add("She leans down, whispering: <i>“I’ll go slow at the start.”</i> Not very convincing, nor reassuring. You bite your lip as she guides her tail inside your [target], the thin tip passing easily. The scaly appendage only grows thicker the more of it she feeds you, however, and she has a good four feet at her disposal.", parse);
+			Text.NL();
+			
+			if(pussy) {
+				Sex.Vaginal(lizard, player);
+				player.FuckVag(player.FirstVag(), null, 3);
+				lizard.Fuck(null, 3);
+			}
+			else {
+				Sex.Anal(lizard, player);
+				player.FuckAnal(player.Butt(), null, 3);
+				lizard.Fuck(null, 3);
+			}
+			
+			Text.Add("Stuffing you is an agonizingly slow process. Each scale that goes into you imprints its texture on your sensitive opening, and once inside, it joins a whole army of its brothers, intent on claiming your deepest reaches. ", parse);
+			var cap = cap * stretch; //TODO !!!!
+			if(cap > large) {
+				Text.Add("Your well-trained [target] has no trouble receiving the girl’s girth - she mutters a muffled oath of surprise at how stretchy you are.", parse);
+				Text.NL();
+				Text.Add("<i>“This isn’t your first time, is it,”</i> she gasps, impressed at your capacity. <i>“I might even be able to go ‘balls deep’!”</i>", parse);
+			}
+			else if(cap > mid) {
+				Text.Add("The first foot or two is reasonably thin, but the girl soon encounters resistance when she tries to push the girthier part of her tail into you.", parse);
+				Text.NL();
+				Text.Add("<i>“Don’t worry,”</i> she comforts you, <i>“we have a looot of time to get you used to this...”</i> It doesn’t seem like she’s about to be discouraged by a minor setback like this.", parse);
+			}
+			else {
+				Text.Add("<i>“Hng… you’re tight,”</i> she grunts, barely a foot of her tail in your [target] before she meets resistance. <i>“Guess I’m a bit too big for you… perhaps I should ask some of my friends to stretch you out first...”</i> Either way, it doesn’t look like she’s about to be discouraged by a minor setback like this.", parse);
+			}
+			Text.NL();
+			parse["back"] = pussy ? "stomach" : "back";
+			Text.Add("Placing her hands firmly on your [hips], the lizard pulls back out part of the way, taking a stance on her knees with an appropriate length of her tail pressed tightly between her thighs. <i>“This way, I can move easier,”</i> she murmurs, caressing your [skin] affectionately, running a hand across your [back]. You try to brace for the impact, but she still manages to surprise you when she slams her hips forward, plunging into your [target].", parse);
+			Text.NL();
+			if(pussy) {
+				Text.Add("Your scaly lover is easily able to penetrate all the way to your womb, her thrusts further setting you off as her tail doubles back over, making it feel like there’s a wild snake loose in your straining pussy, coiling over and over. It’s very different from a cock; the tail is fully prehensile, and the lizard seems to take perverse delight in twisting it this way and that as she pistons you, coaxing you into moaning louder and louder.", parse);
+			}
+			else {
+				Text.Add("The feeling of her tail creeping up your colon is truly something else. Due to its flexibility, it can easily twist and turn the way no normal cock could, eagerly exploring depths usually untouched. ", parse);
+				if(player.FirstCock())
+					Text.Add("Not to mention, the endless row of nubby scales endlessly grinding against your prostate. Whether you want to or not, she’s going to push you over the edge with this sooner rather than later. ", parse);
+				Text.Add("You’re grateful for the lube, because she sure as hell isn’t going easy on you.", parse);
+			}
+			Text.NL();
+			Text.Add("The reptile doesn’t seem to be very experienced in having sex this way, but she makes up for it in enthusiasm, slamming her hips up against yours time and time again at breakneck pace. She quickly establishes a rough rhythm, moaning as her movements grind the underside of her tail against her drooling slit.", parse);
+			Text.NL();
+			parse["hisher"] = third ? "their" : "his";
+			parse["heshe"]  = third ? "they" : "he";
+			Text.Add("The lizan’s friend[s2] [isAre2] watching in rapt attention, probably surprised at this turn of events. You can’t tell from [hisher] expression[s2] if [heshe] [isAre2] apprehensive at being the next one in line to sate her lusts, turned on, or both.", parse);
+			Text.NL();
+			
+			var cum = player.OrgasmCum();
+			
+			Text.Add("You lover keeps trying to force more and more of her tail into your protesting hole, and it’s not long before your body can’t take any more of it. With a nerve-wrecking shudder, your orgasm hits, and it’s going to be a messy one.", parse);
+			if(player.FirstCock()) {
+				if(!pussy)
+					Text.Add(" Your prostate is ablaze, the continuous grinding of her tail too much for you.", parse);
+				parse["cum"] = cum > 6 ? "blasting" :
+				               cum > 3 ? "jetting" : "shooting";
+				parse["p"] = pussy ? Text.Parse("your [belly]", parse) : "the sands below";
+				Text.Add(" Finally getting [itsTheir] long-awaited release, your [cocks] [cum] [itsTheir] load[s] all over [p].", parse);
+			}
+			if(player.FirstVag()) {
+				parse["p"] = pussy ? " overstuffed" : "";
+				Text.Add(" Juices spill from your[p] [vag], gushing from it in streams.", parse);
+			}
+			Text.NL();
+			Text.Add("The girl gradually slows down when she realizes that you’re spent, giving you some respite. She doesn’t pull out though. <i>“You can go again, right?”</i> she asks, sounding slightly worried. <i>“I wanted to try some more things too...”</i> It doesn’t seem like you’ll be getting away from this one for a while… at least not until she’s had her fill.", parse);
+			Text.NL();
+			Text.Add("Time passes...", parse);
+			Text.NL();
+			parse["comp"] = party.Num() == 2 ? member1.name : "your companions";
+			parse["c"] = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
+			Text.Add("You’re thoroughly exhausted when the playful lizard finally leaves you alone. Wobbling slightly, you[c] set out on your journey again.", parse);
+			Text.Flush();
+			
+			world.TimeStep({hour: 2});
+			player.subDom.DecreaseStat(-75, 1);
+			
+			Gui.NextPrompt(enc.finalize);
+		});
+	}, 1.0, function() { return true; });
 	scenes.Get();
 }
 

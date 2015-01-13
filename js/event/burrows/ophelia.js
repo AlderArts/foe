@@ -502,6 +502,8 @@ Scenes.Ophelia.DeliverCactoids = function() {
 	Text.Add("The other test subjects perk up at this, eager to be helpful.", parse);
 	Text.Flush();
 	
+	party.Inv().RemoveItem(Items.Quest.Cactoid, 3);
+	
 	world.TimeStep({hour: 1});
 	
 	burrows.flags["BruteTrait"] = Burrows.TraitFlags.Active;
@@ -547,6 +549,8 @@ Scenes.Ophelia.DeliverGolHusks = function() {
 	Text.NL();
 	Text.Add("<i>“I need to have something to show daddy, don’t I?”</i> she answers the bunny’s accusatory stare. She turns back to the other volunteer - you are not quite sure which one, male or female. <i>“I… I’m sure the others can help you out. It should go soft if you do it a few more times. I think.”</i> The herm doesn’t seem to be complaining, quickly finding a group of her siblings to fuck and be fucked by.", parse);
 	Text.Flush();
+	
+	party.Inv().RemoveItem(Items.Quest.GolHusk, 3);
 
 	world.TimeStep({hour: 1});
 	
@@ -581,6 +585,8 @@ Scenes.Ophelia.DeliverAlgae = function() {
 	Text.NL();
 	Text.Add("You still have your doubts. While the lagomorph certainly seems more articulate than before, her mind seems to wander easily. Ophelia tries to show her a few books, but she seems more interested in returning to her fellow volunteers and fuck them. Can’t win every battle, you suppose.", parse);
 	Text.Flush();
+	
+	party.Inv().RemoveItem(Items.Quest.RedAlgae, 3);
 	
 	world.TimeStep({hour: 1});
 	
