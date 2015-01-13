@@ -213,7 +213,7 @@ Items.Combat.LustDart.OnMiss = function(encounter, caster, target) {
 	var parse = {
 		Name : caster.NameDesc(),
 		s    : caster.plural() ? "" : "s",
-		target : target.nameDesc()
+		Target : target.NameDesc()
 	};
 	Text.Add("[Target] manage[s] to deftly sidestep the dart.", parse);
 	Text.NL();
@@ -259,7 +259,7 @@ Items.Combat.PoisonDart.OnMiss = function(encounter, caster, target) {
 	var parse = {
 		Name : caster.NameDesc(),
 		s    : caster.plural() ? "" : "s",
-		target : target.nameDesc()
+		Target : target.NameDesc()
 	};
 	Text.Add("[Target] manage[s] to deftly sidestep the dart.", parse);
 	Text.NL();
