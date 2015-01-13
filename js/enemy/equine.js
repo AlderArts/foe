@@ -899,7 +899,7 @@ Scenes.Equine.WinRideHimVag = function(enc) {
 		Text.Add(", making your legs feel weak and nerveless", parse);
 	Text.Add(". You refuse to let that stop you now. Gritting your teeth, you bounce on his dick like one possessed, gyrating against him as fast as you are physically capable.", parse);
 	Text.NL();
-	Text.Add("Out of reflex, the stallion bucks his hips upwards just as you happen to be descending. The slight change in angle is enough to rub the top of his shaft against a very special spot, while the extra force pushes the flared head fractionally deeper inside your aching chasm. Lightning shoots up your spine and back down to your groin, followed by an explosion of white-hot pleasure that causes every muscle in your body to contract. Your [vagDesc] clamps down on the stallion's prick with a death grip – tight enough to be painful, if his low whine is any indication – and you scream your climax to the heavens, clutching at your [breastDesc] as tremors wrack your frame from top to bottom.", parse);
+	Text.Add("Out of reflex, the stallion bucks his hips upward just as you happen to be descending. The slight change in angle is enough to rub the top of his shaft against a very special spot, while the extra force pushes the flared head fractionally deeper inside your aching chasm. Lightning shoots up your spine and back down to your groin, followed by an explosion of white-hot pleasure that causes every muscle in your body to contract. Your [vagDesc] clamps down on the stallion's prick with a death grip – tight enough to be painful, if his low whine is any indication – and you scream your climax to the heavens, clutching at your [breastDesc] as tremors wrack your frame from top to bottom.", parse);
 	Text.NL();
 	
 	var cum = player.OrgasmCum();

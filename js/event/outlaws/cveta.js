@@ -1636,7 +1636,7 @@ Scenes.Cveta.Performance = function() {
 			Text.Add("<i>“‘The Prophet’,”</i> [name] says in a hushed whisper. <i>“I would never have expected to hear that sung here, so far away from the shrine. The hymn is sacred to Lady Aria, [playername]. Please, if nothing else, show the proper respect and remain silent while she sings.”</i>", parse);
 			Text.NL();
 		}
-		Text.Add("Absolute silence reigns in the clearing before the fire pit, the expectation in the air palpable as Cveta brings her gloved hands upwards, clasping them before her bosom. Slowly, she closes her eyes as if meditating, then raises her bowed head and bursts into song.", parse);
+		Text.Add("Absolute silence reigns in the clearing before the fire pit, the expectation in the air palpable as Cveta brings her gloved hands upward, clasping them before her bosom. Slowly, she closes her eyes as if meditating, then raises her bowed head and bursts into song.", parse);
 		Text.NL();
 		Text.Add("Her voice is divine.", parse);
 		Text.NL();

@@ -978,7 +978,7 @@ Scenes.Lei.BarFight = function() {
 									Text.NL();
 									Text.Add("<i>“So be it,”</i> his soft words seem to drift to you mid-jump, making your eyes go wide, your blood turning to ice, and your stomach lurching inside you. For a split moment, clarity seems to return to your thinking, and you wonder what it is you're doing, but you already see Lei drifting aside. He looks slow, languid even, his movements the gradual flow of a gentle stream as both his hands drift toward the hilt of his sword, and your momentum carries you slowly forward through the air.", parse);
 									Text.NL();
-									Text.Add("Lei's left hand reaches the pommel of his large bastard sword, and reverses course, pulling it upwards, as if it weighs nothing. His right, grips the hilt, accelerating the motion, and already imparting to the blade a soft circular spin before it even leaves the scabbard.", parse);
+									Text.Add("Lei's left hand reaches the pommel of his large bastard sword, and reverses course, pulling it upward, as if it weighs nothing. His right, grips the hilt, accelerating the motion, and already imparting to the blade a soft circular spin before it even leaves the scabbard.", parse);
 									Text.NL();
 									Text.Add("Finally, the long dark blade emerges fully from its sheath, already tracing the arc it had begun, moving toward a yet-empty spot in the air like inevitability. As its trajectory and yours intersect, the blade passes through your neck too fast for you to feel anything, too fast for even a droplet of blood to cling to it, as it runs its course and returns smoothly to the scabbard.", parse);
 									Text.NL();

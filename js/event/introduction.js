@@ -305,7 +305,7 @@ Intro.Mirror3 = function() {
 	Text.NL();
 	Text.Add("<b>Acquired purple gemstone!</b>");
 	Text.NL();
-	Text.Add("Your eyes are drawn upwards by a reddish glow. Gasping in genuine shock, you stumble back a few steps. The surface of the mirror has completely transformed. While you can still see your own reflection, the room behind you has vanished. In its place is a hellish landscape of fire and smoke. Panicking, you whip your head around, relieved to find that you are, indeed, still in the old dusty attic. Perhaps the mirror is a portal to another world? If so, it doesn't look like it leads to a place you want to visit.");
+	Text.Add("Your eyes are drawn upward by a reddish glow. Gasping in genuine shock, you stumble back a few steps. The surface of the mirror has completely transformed. While you can still see your own reflection, the room behind you has vanished. In its place is a hellish landscape of fire and smoke. Panicking, you whip your head around, relieved to find that you are, indeed, still in the old dusty attic. Perhaps the mirror is a portal to another world? If so, it doesn't look like it leads to a place you want to visit.");
 	Text.Flush();
 	
 	Gui.NextPrompt(Intro.Mirror4);
