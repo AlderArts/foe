@@ -4144,9 +4144,9 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 		Text.Add("<i>“Don’t… get too cocky, [playername],”</i> the guardswoman moans. <i>“Next time, it’s your turn to be the - hngh! - bottom.”</i> We’ll see about that.", parse);
 	Text.Add(" You ignore her muffled yips and groans as you plunge your [cockDesc] deeper into her, gritting your teeth as her colon clamps down on your shaft. ", parse);
 	parse["balls"] = player.HasBalls() ? Text.Parse(" as your [ballsDesc] slap against hers", parse) : "";
-	if(pCock.length.Get() < miranda.Butt().capacity.Get() - 10)
+	if(pCock.length.Get() < 20)
 		Text.Add("Before long, your hips bump against her rear, and you sigh contentedly[balls].", parse);
-	else if(pCock.length.Get() < miranda.Butt().capacity.Get() + 10)
+	else if(pCock.length.Get() < 35)
 		Text.Add("It’s going to take some work until you can hilt the herm, but she’s a big girl. You’re sure she can take it.", parse);
 	else
 		Text.Add("No amount of lube is going to help you hilt your monster cock inside the straining asshole of the herm, but you’ll be damned if you don’t try.", parse);
@@ -4246,7 +4246,7 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 		Text.NL();
 		
 		if(knotted) {
-			parse["size"] = pCock.length.Get() > miranda.Butt().capacity.Get() ? " despite your size" : "";
+			parse["size"] = pCock.length.Get() > 30 ? " despite your size" : "";
 			parse["real"] = !pCock.isStrapon ? " as it begins to swell" : "";
 			Text.Add("You push yourself to the hilt[size], your significantly thicker knot popping inside her rectum and tying you to the horny dobie[real]. No longer able to hold back you let yourself go as you achieve your long-delayed climax.", parse);
 			Text.NL();
@@ -4287,7 +4287,7 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 				Text.Add("Your [hipsDesc] are shaking as you ride your pleasure high, causing Miranda to gasp as you grind the thick, knotted strapon in her ass.", parse);
 		}
 		else {
-			parse["size"] = pCock.length.Get() > miranda.Butt().capacity.Get() ? "Despite your size, y" : "Y";
+			parse["size"] = pCock.length.Get() > 30 ? "Despite your size, y" : "Y";
 			Text.Add("[size]ou push yourself to the hilt inside her, triggering sparks of pleasure in both of you. No longer able to contain yourself, you cum.", parse);
 			if(!pCock.isStrapon) {
 				load = player.OrgasmCum();
@@ -4899,7 +4899,7 @@ Scenes.Miranda.HomeDommySexFuckDobieVag = function(cocks) {
 		Text.Add("You adjust your hold on her hips, pulling her back onto your [cockDesc]. Soon, you’ve established a rhythm - rough and deep, just the way she likes it. The guardswoman is resting on her elbows, her tits bouncing back and forth each time you drive into her. Between her spread legs lie her pride and glory flopping about uselessly, staining the sheets with her pre.", parse);
 	}
 	Text.NL();
-	var cap = pCock.length.Get() - miranda.FirstVag().capacity.Get();
+	var cap = pCock.length.Get() - 30;
 	if(cap > 10) {
 		Text.Add("Miranda grunts, gritting her teeth as your grind against her cervix. Before she met you, you doubt she had taken any cock bigger than her own, and certainly nothing like yours. It must be a humbling experience for her.", parse);
 		miranda.subDom.DecreaseStat(-75, 1);

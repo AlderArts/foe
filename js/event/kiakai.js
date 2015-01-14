@@ -5581,7 +5581,7 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 	Text.Clear();
 	
 	var len = kiaiCock.length.Get();
-	var cap = player.Butt().capacity.Get();
+	var cap = 25;
 	
 	if     (choice == Kiakai.AnalCatchPrepScene.Rim) {
 		parse["legs"] = player.LowerBodyType() != LowerBodyType.Single ? ", pushing your legs back" : "";
