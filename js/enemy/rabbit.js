@@ -443,34 +443,34 @@ Scenes.Lagomorph.GroupLossOnPlains = function() {
 	Text.Clear();
 	
 	var enc = this;
-	enc.finalize = function() {
-		Encounter.prototype.onLoss.call(enc);
-	};
+	Gui.Callstack.push(function() {
+		var scenes = new EncounterTable();
 	
-	var scenes = new EncounterTable();
-	
-	// TODO: Add alternate loss scene that 
-	scenes.AddEnc(function() {
-		Scenes.Lagomorph.GroupLossOnPlainsToBurrows(enc);
-	}, 1.0, function() { return burrows.flags["Access"] == Burrows.AccessFlags.Unknown; });
-	
-	if(enc.brainy) {
+		// TODO: Add alternate loss scene that 
 		scenes.AddEnc(function() {
-			Scenes.Lagomorph.GroupLossOnPlainsBrainy(enc);
-		}, 1.0, function() { return true; });
-	}
-	else {
+			Scenes.Lagomorph.GroupLossOnPlainsToBurrows(enc);
+		}, 1.0, function() { return burrows.flags["Access"] == Burrows.AccessFlags.Unknown; });
+		
+		if(enc.brainy) {
+			scenes.AddEnc(function() {
+				Scenes.Lagomorph.GroupLossOnPlainsBrainy(enc);
+			}, 1.0, function() { return true; });
+		}
+		else {
+			scenes.AddEnc(function() {
+				PrintDefaultOptions();
+			}, 1.0, function() { return true; });
+		}
+		/*
 		scenes.AddEnc(function() {
-			enc.finalize();
+			Text.Add("", parse);
+			Text.NL();
 		}, 1.0, function() { return true; });
-	}
-	/*
-	scenes.AddEnc(function() {
-		Text.Add("", parse);
-		Text.NL();
-	}, 1.0, function() { return true; });
-	*/
-	scenes.Get();
+		*/
+		scenes.Get();
+	});
+	
+	Encounter.prototype.onLoss.call(enc);
 }
 
 
@@ -615,9 +615,7 @@ Scenes.Lagomorph.GroupLossOnPlainsBrainy = function(enc) {
 	Text.Add("They squeak and mutter in protest, but shuffle off of you and wander away, leaving you to catch your breath. By the time you have recovered, the whole orgy has up and vanished, leaving just you[comp2] behind. You clean yourself off as best you can, get dressed again, and set off once more.", parse);
 	Text.Flush();
 	
-	Gui.NextPrompt(function() {
-		enc.finalize();
-	});
+	Gui.NextPrompt();
 }
 
 Scenes.Lagomorph.GroupLossOnPlainsToBurrows = function(enc) {
@@ -717,83 +715,145 @@ Scenes.Lagomorph.GroupWinOnPlainsPrompt = function() {
 	SetGameState(GameState.Event);
 	
 	var enc = this;
-	enc.finalize = function() {
-		Encounter.prototype.onVictory.call(enc);
-	};
 	
 	var parse = {
 		
 	};
 	
-	Text.Clear();
-	if(enc.brute) {
-		Text.Add("The large brute looks incredulous as he lands on his butt, completely defeated. The rest of his group huddle behind him, eyeing your warily… or perhaps lustily? It seems that you have impressed them quite a bit by beating their alpha, and all they really wanted was sex. Are you willing to provide it? Or perhaps, you want to have them pull out some of their comrades from the pile that are more to your liking.", parse);
-	}
-	else if(enc.brainy) {
-		Text.Add("The bespectacled leader of the rabbit mob sulks as you stand victorious over her.", parse);
-		Text.NL();
-		Text.Add("<i>“You big meanie, we just wanted to have some fun with you...”</i> she pouts, crossing her arms over her fluffy chest. Her companions are already distracted again, eyeing the rutting pile longingly.", parse);
-		Text.NL();
-		Text.Add("Well, if that was what they wanted, why didn’t they say so? You could have a bit of fun with this girl - she seems to be a lot sharper than her siblings - or perhaps have her companions drag someone more to your liking from the pile.", parse);
-	}
-	else if(enc.herm) {
-		Text.Add("The hermaphrodite bunny scowls at you sulkily, her plans to rape you shattered by your stubborn resistance. Regardless, sex is even closer on her mind than before, as you can see her male parts at full mast. She blushes a bit under your gaze, and bites her lip sultrily.", parse);
-		Text.NL();
-		Text.Add("<i>“You… fuck? Me bad girl, punish!”</i> she moans, offering herself as her natural instincts to mate take over. She’s a girl with quite a few options, sporting both a regular pussy and a more uncommon cock. You could appease the horny rabbit’s needs… or you could have her comrades drag out some rabbits more to your liking from the pile.", parse);
-	}
-	else {
-		Text.Add("The last of the rabbits fall before you, unable to fight on anymore. The critters still look like they want to fuck you though, so maybe - just maybe - you’ll humor them? You could deal with this group here, or have them drag out some of their comrades from the pile that are more to your liking.", parse);
-	}
-	
-	var options = new Array();
-	
-	if(burrows.flags["Access"] == Burrows.AccessFlags.Unknown) {
-		Text.NL();
-		Text.Add("...Just what is going on here? Where are all these bunnies coming from anyways?", parse);
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		if(enc.brute) {
+			Text.Add("The large brute looks incredulous as he lands on his butt, completely defeated. The rest of his group huddle behind him, eyeing your warily… or perhaps lustily? It seems that you have impressed them quite a bit by beating their alpha, and all they really wanted was sex. Are you willing to provide it? Or perhaps, you want to have them pull out some of their comrades from the pile that are more to your liking.", parse);
+		}
+		else if(enc.brainy) {
+			Text.Add("The bespectacled leader of the rabbit mob sulks as you stand victorious over her.", parse);
+			Text.NL();
+			Text.Add("<i>“You big meanie, we just wanted to have some fun with you...”</i> she pouts, crossing her arms over her fluffy chest. Her companions are already distracted again, eyeing the rutting pile longingly.", parse);
+			Text.NL();
+			Text.Add("Well, if that was what they wanted, why didn’t they say so? You could have a bit of fun with this girl - she seems to be a lot sharper than her siblings - or perhaps have her companions drag someone more to your liking from the pile.", parse);
+		}
+		else if(enc.herm) {
+			Text.Add("The hermaphrodite bunny scowls at you sulkily, her plans to rape you shattered by your stubborn resistance. Regardless, sex is even closer on her mind than before, as you can see her male parts at full mast. She blushes a bit under your gaze, and bites her lip sultrily.", parse);
+			Text.NL();
+			Text.Add("<i>“You… fuck? Me bad girl, punish!”</i> she moans, offering herself as her natural instincts to mate take over. She’s a girl with quite a few options, sporting both a regular pussy and a more uncommon cock. You could appease the horny rabbit’s needs… or you could have her comrades drag out some rabbits more to your liking from the pile.", parse);
+		}
+		else {
+			Text.Add("The last of the rabbits fall before you, unable to fight on anymore. The critters still look like they want to fuck you though, so maybe - just maybe - you’ll humor them? You could deal with this group here, or have them drag out some of their comrades from the pile that are more to your liking.", parse);
+		}
 		
-		options.push({ nameStr : "Question",
-			func : function() {
-				Scenes.Lagomorph.GroupWinInterrorigate(enc);
-			}, enabled : true,
-			tooltip : "Interrorigate the leader to find out more about the rabbits."
-		});
-	}
-	Text.Flush();
-	
-	
-	var group = {};
-	
-	group.males   = 0;
-	group.females = 0;
-	for(var i=0,j=enc.enemy.Num(); i<j; ++i) {
-		var mob = enc.enemy.Get(i);
-		if(mob.Gender() == Gender.male)   group.males++;
-		if(mob.Gender() == Gender.female) group.females++;
-	}
-	
-	if(enc.brute || enc.brainy || enc.herm) {}
-	else {
-		group.malegroup   = group.males > 0 && group.females == 0;
-		group.femalegroup = group.females > 0 && group.males == 0;
-		group.mixedgroup  = !group.malegroup && !group.femalegroup;
-	}
-	
-	if(party.Num() == 2)
-		parse["comp"] = party.Get(1).name + " is";
-	else if(party.Num() > 2)
-		parse["comp"] = "your companions are";
-	
-	// Brute TODO
-	if(enc.brute) {
-		//[Fuck Him][Vaginal Ride][Anal Ride]
-		if(player.FirstCock() || player.Strapon()) {
-			options.push({ nameStr : "Fuck him",
+		var options = new Array();
+		
+		if(burrows.flags["Access"] == Burrows.AccessFlags.Unknown) {
+			Text.NL();
+			Text.Add("...Just what is going on here? Where are all these bunnies coming from anyways?", parse);
+			
+			options.push({ nameStr : "Question",
 				func : function() {
-					Scenes.Lagomorph.GroupWinOnPlainsFuckBrute(enc);
+					Scenes.Lagomorph.GroupWinInterrorigate(enc);
 				}, enabled : true,
-				tooltip : "You’re pretty sure this big guy’s butt is pretty much unused. So why not use his backdoor to relieve yourself?"
+				tooltip : "Interrorigate the leader to find out more about the rabbits."
 			});
 		}
+		Text.Flush();
+		
+		
+		var group = {};
+		
+		group.males   = 0;
+		group.females = 0;
+		for(var i=0,j=enc.enemy.Num(); i<j; ++i) {
+			var mob = enc.enemy.Get(i);
+			if(mob.Gender() == Gender.male)   group.males++;
+			if(mob.Gender() == Gender.female) group.females++;
+		}
+		
+		if(enc.brute || enc.brainy || enc.herm) {}
+		else {
+			group.malegroup   = group.males > 0 && group.females == 0;
+			group.femalegroup = group.females > 0 && group.males == 0;
+			group.mixedgroup  = !group.malegroup && !group.femalegroup;
+		}
+		
+		if(party.Num() == 2)
+			parse["comp"] = party.Get(1).name + " is";
+		else if(party.Num() > 2)
+			parse["comp"] = "your companions are";
+		
+		// Brute TODO
+		if(enc.brute) {
+			//[Fuck Him][Vaginal Ride][Anal Ride]
+			if(player.FirstCock() || player.Strapon()) {
+				options.push({ nameStr : "Fuck him",
+					func : function() {
+						Scenes.Lagomorph.GroupWinOnPlainsFuckBrute(enc);
+					}, enabled : true,
+					tooltip : "You’re pretty sure this big guy’s butt is pretty much unused. So why not use his backdoor to relieve yourself?"
+				});
+			}
+			/* TODO
+			options.push({ nameStr : "name",
+				func : function() {
+					Text.Clear();
+					Text.Add("", parse);
+					Text.NL();
+					Text.Flush();
+				}, enabled : true,
+				tooltip : ""
+			});
+			*/
+		}
+		// Brainy TODO
+		else if(enc.brainy) {
+			/* TODO
+			options.push({ nameStr : "name",
+				func : function() {
+					Text.Clear();
+					Text.Add("", parse);
+					Text.NL();
+					Text.Flush();
+				}, enabled : true,
+				tooltip : ""
+			});
+			*/
+		}
+		// Herm TODO
+		else if(enc.herm) {
+			/* TODO
+			options.push({ nameStr : "name",
+				func : function() {
+					Text.Clear();
+					Text.Add("", parse);
+					Text.NL();
+					Text.Flush();
+				}, enabled : true,
+				tooltip : ""
+			});
+			*/
+		}
+		
+		//[Get fucked (M)]
+		var tooltip = "You want to put all that bunny cock to good use and get a nice fuck. As the saying goes, they ‘fuck like rabbits’, and when one goes down, there are plenty to take his place.";
+		if(party.Num() > 1)
+			tooltip += " They probably won’t discriminate though, so hopefully [comp] okay with getting a thorough reaming.";
+		
+		options.push({ nameStr : "Get fucked (M)",
+			func : function() {
+				Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM(enc, group);
+			}, enabled : true,
+			tooltip : Text.Parse(tooltip, parse)
+		});
+		
+		//[Fuck (M)]
+		var tooltip = "Sure are plenty of cocky bucks around… time to put them in their place for attacking you.";
+		if(party.Num() > 1)
+			tooltip += " Who knows, perhaps [comp] will join you as well.";
+		options.push({ nameStr : "Fuck (M)",
+			func : function() {
+				Scenes.Lagomorph.GroupWinOnPlainsFuckM(enc, group);
+			}, enabled : true,
+			tooltip : Text.Parse(tooltip, parse)
+		});
+		
 		/* TODO
 		options.push({ nameStr : "name",
 			func : function() {
@@ -805,78 +865,17 @@ Scenes.Lagomorph.GroupWinOnPlainsPrompt = function() {
 			tooltip : ""
 		});
 		*/
-	}
-	// Brainy TODO
-	else if(enc.brainy) {
-		/* TODO
-		options.push({ nameStr : "name",
+		
+		options.push({ nameStr : "Leave",
 			func : function() {
-				Text.Clear();
-				Text.Add("", parse);
-				Text.NL();
-				Text.Flush();
+				PrintDefaultOptions();
 			}, enabled : true,
-			tooltip : ""
+			tooltip : "Leave the rabbits."
 		});
-		*/
-	}
-	// Herm TODO
-	else if(enc.herm) {
-		/* TODO
-		options.push({ nameStr : "name",
-			func : function() {
-				Text.Clear();
-				Text.Add("", parse);
-				Text.NL();
-				Text.Flush();
-			}, enabled : true,
-			tooltip : ""
-		});
-		*/
-	}
-	
-	//[Get fucked (M)]
-	var tooltip = "You want to put all that bunny cock to good use and get a nice fuck. As the saying goes, they ‘fuck like rabbits’, and when one goes down, there are plenty to take his place.";
-	if(party.Num() > 1)
-		tooltip += " They probably won’t discriminate though, so hopefully [comp] okay with getting a thorough reaming.";
-	
-	options.push({ nameStr : "Get fucked (M)",
-		func : function() {
-			Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM(enc, group);
-		}, enabled : true,
-		tooltip : Text.Parse(tooltip, parse)
+		Gui.SetButtonsFromList(options);
+		
 	});
-	
-	//[Fuck (M)]
-	var tooltip = "Sure are plenty of cocky bucks around… time to put them in their place for attacking you.";
-	if(party.Num() > 1)
-		tooltip += " Who knows, perhaps [comp] will join you as well.";
-	options.push({ nameStr : "Fuck (M)",
-		func : function() {
-			Scenes.Lagomorph.GroupWinOnPlainsFuckM(enc, group);
-		}, enabled : true,
-		tooltip : Text.Parse(tooltip, parse)
-	});
-	
-	/* TODO
-	options.push({ nameStr : "name",
-		func : function() {
-			Text.Clear();
-			Text.Add("", parse);
-			Text.NL();
-			Text.Flush();
-		}, enabled : true,
-		tooltip : ""
-	});
-	*/
-	
-	options.push({ nameStr : "Leave",
-		func : function() {
-			enc.finalize();
-		}, enabled : true,
-		tooltip : "Leave the rabbits."
-	});
-	Gui.SetButtonsFromList(options);
+	Encounter.prototype.onVictory.call(enc);
 }
 
 Scenes.Lagomorph.GroupWinOnPlainsFuckBrute = function(enc) {
@@ -1096,9 +1095,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckBrute = function(enc) {
 	
 	world.TimeStep({hour: 1});
 	
-	Gui.NextPrompt(function() {
-		enc.finalize();
-	});
+	Gui.NextPrompt();
 }
 
 Scenes.Lagomorph.GroupWinOnPlainsBruteIntro = function() {
@@ -1666,9 +1663,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 				
 				world.TimeStep({hour: 1});
 				
-				Gui.NextPrompt(function() {
-					enc.finalize();
-				});
+				Gui.NextPrompt();
 			});
 		});
 		
@@ -1916,9 +1911,7 @@ Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 		
 		world.TimeStep({hour: 1});
 		
-		Gui.NextPrompt(function() {
-			enc.finalize();
-		});
+		Gui.NextPrompt();
 	});
 }
 
@@ -1963,9 +1956,7 @@ Scenes.Lagomorph.GroupWinInterrorigate = function(enc) {
 			Text.Add("You gather your gear and prepare to continue your journey, ignoring the frightened critter as it scurries away.", parse);
 			Text.Flush();
 			
-			Gui.NextPrompt(function() {
-				enc.finalize();
-			});
+			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "You are just wasting time here."
 	});
@@ -2002,9 +1993,7 @@ Scenes.Lagomorph.GroupWinInterrorigate = function(enc) {
 			
 			burrows.flags["Access"] = Burrows.AccessFlags.KnownNotVisited;
 			
-			Gui.NextPrompt(function() {
-				enc.finalize();
-			});
+			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "Force some answers from your captive."
 	});
@@ -2051,9 +2040,7 @@ Scenes.Lagomorph.GroupWinInterrorigate = function(enc) {
 						Scenes.Burrows.Arrival(alpha);
 					});
 					
-					Gui.NextPrompt(function() {
-						enc.finalize();
-					});
+					Gui.NextPrompt();
 				}, enabled : true,
 				tooltip : "Follow the alpha into the crowd."
 			});
@@ -2090,9 +2077,7 @@ Scenes.Lagomorph.GroupWinInterrorigate = function(enc) {
 					
 					burrows.flags["Access"] = Burrows.AccessFlags.KnownNotVisited;
 					
-					Gui.NextPrompt(function() {
-						enc.finalize();
-					});
+					Gui.NextPrompt();
 				}, enabled : true,
 				tooltip : Text.Parse("You’re not quite ready to tackle this yet. Give the alpha what [m1heshe] wants and be off.", parse)
 			});
