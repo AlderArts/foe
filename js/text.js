@@ -284,6 +284,8 @@ Text.ParserPlural = function(parse, condition, prefix, postfix) {
 	parse[prefix + "eachof" + postfix] = condition ? " each of" : "";
 	parse[prefix + "allof" + postfix]  = condition ? " all of" : "";
 	
+	parse[prefix + "ItThey" + postfix]    = condition ? "They" : "It";
+	
 	parse[prefix + "itThey" + postfix]    = condition ? "they" : "it";
 	parse[prefix + "itThem" + postfix]    = condition ? "them" : "it";
 	parse[prefix + "itsTheir" + postfix]  = condition ? "their" : "its";

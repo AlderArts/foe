@@ -464,7 +464,7 @@ Scenes.Roa.First = function() {
 		Text.Add(" Roa... why does that name sound familiar...?", parse);
 	Text.NL();
 	if(player.FirstCock()) {
-		Text.Add("<i>“I’m not going to lie to you [fem], but [thatThose] cock[notS] you’re hiding in there,”</i> he points at your crotch. <i>“They smell delicious...”</i> he sniffs the air with a smile, taking in your scent and relishing in it. <i>“Mouthwatering, really,”</i> he licks his lips. <i>“It’s a bit hard for me to contain myself. I keep wondering how [itThey]’d feel inside. Care to show me?”</i>", parse);
+		Text.Add("<i>“I’m not going to lie to you [fem], but [thatThose] cock[notS] you’re hiding in there,”</i> he points at your crotch. <i>“[ItThey] smell[notS] delicious...”</i> he sniffs the air with a smile, taking in your scent and relishing in it. <i>“Mouthwatering, really,”</i> he licks his lips. <i>“It’s a bit hard for me to contain myself. I keep wondering how [itThey]’d feel inside. Care to show me?”</i>", parse);
 		Text.NL();
 		Text.Add("The rabbit’s little tongue dabs nervously at his lips, and he rubs his thighs together impatiently. His cock is fully erect, jutting like a defiant pillar of pinkness against his white fur. He’s clearly not acting; he means every word he just said. What a slut...", parse);
 		Text.NL();

@@ -184,15 +184,15 @@ Scenes.Cveta.ViolinApproach = function() {
 			Text.NL();
 			Text.Add("Persuade? How exactly did she attempt to “persuade” the guards? From your own experience with getting into Rigard, you know that they’re the most stubborn, hard-headed, blindly obedient-", parse);
 			Text.NL();
-			Text.Add("A strange look creeps into the songstress’ uncovered eye. <i>“Why, what anyone else would do, of course. I merely asked them politely if they would be so kind as to let me through, and reassured them that they probably wouldn’t get into trouble for doing so.", parse);
+			Text.Add("A strange look creeps into the songstress’ uncovered eye. <i>“Why, what anyone else would do, of course. I merely asked them politely if they would be so kind as to let me through, and reassured them that they probably wouldn’t get into trouble for doing so.”", parse);
 			Text.NL();
 			Text.Add("“It almost worked, too. They were just about to wave me through until the next shift decided they just had to come and relieve their fellows at that very moment. A matter of poor timing on my part.”</i>", parse);
 			Text.NL();
 			Text.Add("You frown and point out to Cveta that her story is too incredulous to be true. Why would the guards agree to let her into Rigard for no reason at all?", parse);
 			Text.NL();
-			Text.Add("At that question, Cveta suddenly grows serious and looks askance, seeming to shrink in on herself. <i>“[playername], since you are doing me a favor, I suppose it is only right that I tell you something about myself. A performer has to be able to read his or her audience, as you will understand. Music can work wonders - it can inflame passion or dull the senses, it can provoke or placate.This is common knowledge, and a feat any skilled bard can perform.", parse);
+			Text.Add("At that question, Cveta suddenly grows serious and looks askance, seeming to shrink in on herself. <i>“[playername], since you are doing me a favor, I suppose it is only right that I tell you something about myself. A performer has to be able to read his or her audience, as you will understand. Music can work wonders - it can inflame passion or dull the senses, it can provoke or placate. This is common knowledge, and a feat any skilled bard can perform.”", parse);
 			Text.NL();
-			Text.Add("“However, my family has had a small gift that has been passed through the generations. The guards’ minds were weak, [playername]; their weakness of will was not their fault, but it did not serve them well. All I had to do was-”</i> the sweet song of Cveta’s voice shifts perceptibly, enough so you’re clearly aware of the discordance hidden beneath- <i><b>“-tell them that they really, really wanted to let me through, and as an extremely important and trustworthy individual, they should not doubt a single word I said.</b>", parse);
+			Text.Add("“However, my family has had a small gift that has been passed through the generations. The guards’ minds were weak, [playername]; their weakness of will was not their fault, but it did not serve them well. All I had to do was-”</i> the sweet song of Cveta’s voice shifts perceptibly, enough so you’re clearly aware of the discordance hidden beneath- <i><b>“-tell them that they really, really wanted to let me through, and as an extremely important and trustworthy individual, they should not doubt a single word I said.</b>”", parse);
 			Text.NL();
 			Text.Add("“Do you now understand how I ‘persuaded’ the guards?”</i>", parse);
 			Text.Flush();
@@ -201,9 +201,9 @@ Scenes.Cveta.ViolinApproach = function() {
 				Text.Clear();
 				Text.Add("You swallow hard, and nod.", parse);
 				Text.NL();
-				Text.Add("Cveta coughs to clear her throat, and her voice resumes its usual sweet demeanor. Still, she doesn’t look you in the eye. <i>“It is not a gift to be used lightly, [playername], and neither is it one to be publicized. I understand that having to continually doubt your own thoughts is a thoroughly unpleasant experience. I myself have resolved to use it sparingly, and only with good reason.", parse);
+				Text.Add("Cveta coughs to clear her throat, and her voice resumes its usual sweet demeanor. Still, she doesn’t look you in the eye. <i>“It is not a gift to be used lightly, [playername], and neither is it one to be publicized. I understand that having to continually doubt your own thoughts is a thoroughly unpleasant experience. I myself have resolved to use it sparingly, and only with good reason.”", parse);
 				Text.NL();
-				Text.Add("“Well. The guards were not too pleased with my actions, and declared me some sort of witch in short order. If Zenith had not been near the city on some business of his own, it is likely I would be rotting in some cell at the moment - a most daunting prospect, I am sure you can agree. Nevertheless, the fact remains that I am… what is the term for it? Persona non grata within Rigard for a while, and I need someone to run this errand for me.", parse);
+				Text.Add("“Well. The guards were not too pleased with my actions, and declared me some sort of witch in short order. If Zenith had not been near the city on some business of his own, it is likely I would be rotting in some cell at the moment - a most daunting prospect, I am sure you can agree. Nevertheless, the fact remains that I am… what is the term for it? Persona non grata within Rigard for a while, and I need someone to run this errand for me.”", parse);
 				Text.NL();
 				parse["t"] = party.InParty(terry) ? ", enough to make Terry’s eyes instinctively light up at the mere sight of it" : "";
 				Text.Add("“So here it is, then.”</i> Cveta reaches into her gown and draws out a sizable pouch of coin. It’s quite heavy[t], but should one really be surprised that a “princess” has money? <i>“It is my wish that you head to the merchant street within Rigard and seek out the establishment known as ‘Rintell’s’. They have in stock a Grameria violin, although the proprietor is not appraised of the instrument’s true value. He will think he is getting the upper hand of the deal, while the converse is true; pay his asking price for violin, bow and case, and return to me with them. A simple errand.”</i>", parse);
@@ -413,7 +413,7 @@ Scenes.Cveta.Teach = function() {
 		Text.NL();
 		Text.Add("<i>“And there we have the basics. Perhaps in time, you will be able to truly control your voice and fully bring out the emotions of a song to sway your listeners, but that will be some ways down the road.”</i>", parse);
 		Text.NL();
-		Text.Add("Crossing the small space within the tent to her trunk, Cveta digs out a thick notebook, passing it over to [name]. <i>“Here. These are my notes from when I was a girl - everything I have taught you today may be found within its pages, plus so much more. I expect you to practice on your own and engage in much self-study if you are to make something of yourself.", parse);
+		Text.Add("Crossing the small space within the tent to her trunk, Cveta digs out a thick notebook, passing it over to [name]. <i>“Here. These are my notes from when I was a girl - everything I have taught you today may be found within its pages, plus so much more. I expect you to practice on your own and engage in much self-study if you are to make something of yourself.”", parse);
 		Text.NL();
 		Text.Add("<i>“Now, please leave me. You need to rest your voice, and so do I, especially when I still have to perform later. Good health, and fare well.”</i>", parse);
 		Text.NL();
@@ -628,7 +628,7 @@ Scenes.Cveta.TalkPrompt = function() {
 						Text.Add("<i>“I miss the fruit from back home,”</i> Cveta says wistfully, her gaze distant. <i>“Delicious, delicious fruit… golden pears still wet with dew, berries that burst in the mouth and taste of the golden sun, winter melons that you could either eat raw or boil into soup. It seemed that no matter what time of year it was, there was always some delectable seasonal fruit waiting to be sampled.”</i>", parse);
 					}, 1.0, function() { return true; });
 					scenes.AddEnc(function() {
-						Text.Add("<i>“I did not leave home unprepared. It was a calculated move, planned two months in advance - stories of young people leaving home aimlessly to seek their fortunes or such rot are just that, stories, and rarely do they have good endings.", parse);
+						Text.Add("<i>“I did not leave home unprepared. It was a calculated move, planned two months in advance - stories of young people leaving home aimlessly to seek their fortunes or such rot are just that, stories, and rarely do they have good endings.”", parse);
 						Text.NL();
 						Text.Add("“Still, it has been harder than I expected - theory is always easier than practical - and the best laid plans of even the most meticulous mouse-morphs tend to go awry, to use the proverb. I count myself fortunate to have met Zenith.”</i>", parse);
 					}, 1.0, function() { return true; });
@@ -676,7 +676,7 @@ Scenes.Cveta.HerselfPrompt = function() {
 			else
 				Text.Add("You say that you’d like to hear it again. Cveta sighs, but it’s a good-natured one and she clears her throat.", parse);
 			Text.NL();
-			Text.Add("<i>“Well, as I told you, Zenith was passing by Rigard on his own business - we have our own ways into the city, after all - and happened to spot me in trouble. Gathering a few of his men, he created a small diversion in order to convince the guard to take their eyes off me for a moment, whereupon I - to use the common term for the action - booked it.", parse);
+			Text.Add("<i>“Well, as I told you, Zenith was passing by Rigard on his own business - we have our own ways into the city, after all - and happened to spot me in trouble. Gathering a few of his men, he created a small diversion in order to convince the guard to take their eyes off me for a moment, whereupon I - to use the common term for the action - booked it.”", parse);
 			Text.NL();
 			Text.Add("“I hadn’t gotten very far back down the road, though, when he approached me, explained what he had done, and extended an invitation for me to join him here in his camp. Understand that I was not exactly in the best of situations, [playername] - one of the reasons that I risked using my voice to gain passage to Rigard was that I was running dangerously low on provisions, amongst other problems. Here was someone who had just demonstrated considerable goodwill in risking himself to help me, and the least I could do was to hear him out. It could be reasonably inferred that he was not about to do something like… hmm… hold me hostage for ransom from my father. Yes.”</i>", parse);
 			Text.NL();
@@ -686,7 +686,7 @@ Scenes.Cveta.HerselfPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“Look about you, [playername],”</i> Cveta replies curtly, her expression growing dark. <i>“Look beyond the confines of this tent, and tell me what you see. Many of those in this camp have been thrown out of hearth and home for not being human. Of those who have broken laws, many of those laws are either cruel or frivolous. Yes, there are those who are of a more criminal disposition amongst them. No, they are not allowed to make trouble on Zenith’s watch. Ordinary people mostly want to live from day to day, [playername]. They desire for tomorrow to be the same as today, because they know that however hard today has been, they have lived through it. How poor do you imagine things must be that they take up arms in hopes of changing tomorrow?", parse);
 			Text.NL();
-			Text.Add("“By virtue of being of aristocratic descent, one is entrusted with a legacy, certain privileges, and duties to go with them. The nobles of Rigard have forgotten their duties to those whom they have been entrusted with stewardship over - court consists of infantile bickering and posturing instead of serious discussion over matters of economy, culture and policy. Those who should conduct themselves better engage in the sort of activities only lowlifes should stoop to. Rumors abound about the impropriety of the royal family, about the king and queen, about the royal twins running about the city causing mischief when they should be preparing for their eventual reign. Every step in the system has broken down - the king absconds from his duty to rein in wayward nobles, the nobles refuse to do anything about their underlings, and the underlings themselves turn a blind eye to rogues and ruffians in exchange for a palm greased with coin.", parse);
+			Text.Add("“By virtue of being of aristocratic descent, one is entrusted with a legacy, certain privileges, and duties to go with them. The nobles of Rigard have forgotten their duties to those whom they have been entrusted with stewardship over - court consists of infantile bickering and posturing instead of serious discussion over matters of economy, culture and policy. Those who should conduct themselves better engage in the sort of activities only lowlifes should stoop to. Rumors abound about the impropriety of the royal family, about the king and queen, about the royal twins running about the city causing mischief when they should be preparing for their eventual reign. Every step in the system has broken down - the king absconds from his duty to rein in wayward nobles, the nobles refuse to do anything about their underlings, and the underlings themselves turn a blind eye to rogues and ruffians in exchange for a palm greased with coin.”", parse);
 			Text.NL();
 			Text.Add("“They are a group of disgusting, decadent degenerates and it is only right that anyone with a shred of actual nobility should encourage them to get their act together, lest they lose even the thin facade of legitimacy they have left.”</i>", parse);
 			Text.NL();
@@ -711,11 +711,11 @@ Scenes.Cveta.HerselfPrompt = function() {
 				Text.NL();
 				Text.Add("You assure her that you do want to hear it - you wouldn’t have asked otherwise, would you?", parse);
 				Text.NL();
-				Text.Add("<i>“Very well,” she begins, easing herself into a more comfortable position on her seat. <i>“Allow me to begin with what I have already let slip. Nobility is more than just blood, [playername]. While it can tend to run in lines, there are times when it does not manifest in such illustrious families for generations at a time, yet crops up from time to time in personages unknown. It is… hard to describe, yet all who come into contact with it are immediately struck by its presence, for better or for worse.", parse);
+				Text.Add("<i>“Very well,” she begins, easing herself into a more comfortable position on her seat. <i>“Allow me to begin with what I have already let slip. Nobility is more than just blood, [playername]. While it can tend to run in lines, there are times when it does not manifest in such illustrious families for generations at a time, yet crops up from time to time in personages unknown. It is… hard to describe, yet all who come into contact with it are immediately struck by its presence, for better or for worse.”", parse);
 				Text.NL();
 				Text.Add("“Zenith, as I have mentioned before, is someone who is possessed of a form of this elusive trait. It is why I am not as concerned about the true lowlifes and criminals that dot his merry band as one imagines I should be - those who can be redeemed are inspired by him to turn their lives around. Those who are set in their ways at least have their evil curtailed by his watchful eye, and are thus rendered harmless.", parse);
 				Text.NL();
-				Text.Add("“Contrast this with the degenerates of Rigard. For all the trappings of nobility they clothe themselves and prance around in, they are hardly given to any true elevation of the mind, body or spirit. No, one need not be perfect to be noble, but they are not merely indifferent at the negligence of their duties to their subjects, but actively revel in their ability to get away with it.", parse);
+				Text.Add("“Contrast this with the degenerates of Rigard. For all the trappings of nobility they clothe themselves and prance around in, they are hardly given to any true elevation of the mind, body or spirit. No, one need not be perfect to be noble, but they are not merely indifferent at the negligence of their duties to their subjects, but actively revel in their ability to get away with it.”", parse);
 				Text.NL();
 				Text.Add("“Excuse me a moment. All this talking has made me a little thirsty.”</i> Leaning forward to reach into her trunk, Cveta pulls out a small metal canteen and unscrews the top, dipping her beak in to sip daintily at the contents.", parse);
 				Text.NL();
@@ -723,11 +723,11 @@ Scenes.Cveta.HerselfPrompt = function() {
 				Text.NL();
 				Text.Add("“A noble soul, when given power over a lesser, does not seek to abuse that power, but uses it to guide and serve as much as a parent would a child.", parse);
 				Text.NL();
-				Text.Add("“A noble body, when relieved from the fear of want, does not render him or herself insensate in a gluttonous fit of hedonism as most would do, but uses the newfound time to improve on one’s faculties.", parse);
+				Text.Add("“A noble body, when relieved from the fear of want, does not render him or herself insensate in a gluttonous fit of hedonism as most would do, but uses the newfound time to improve on one’s faculties.”", parse);
 				Text.NL();
-				Text.Add("“A noble mind, possessed of the ability to perceive the truth, freely shares it with those who are not as gifted.", parse);
+				Text.Add("“A noble mind, possessed of the ability to perceive the truth, freely shares it with those who are not as gifted.”", parse);
 				Text.NL();
-				Text.Add("“My father taught me that because of who we are, what we are, we are held to a higher standard than others with greater expectations laid upon our shoulders, and to do otherwise is a betrayal of the trust people have laid in us. It is the way of the Mandate of the Spirits.", parse);
+				Text.Add("“My father taught me that because of who we are, what we are, we are held to a higher standard than others with greater expectations laid upon our shoulders, and to do otherwise is a betrayal of the trust people have laid in us. It is the way of the Mandate of the Spirits.”", parse);
 				Text.NL();
 				Text.Add("“What do you think?”</i>", parse);
 				Text.Flush();
@@ -755,7 +755,7 @@ Scenes.Cveta.HerselfPrompt = function() {
 				options.push({ nameStr : "Idealistic",
 					func : function() {
 						Text.Clear();
-						Text.Add("<i>“Well, of course it is,”</i> Cveta remarks dryly. <i>“It is an ideal, and thus I do not realistically expect it to be attained by anyone without immense effort, if attaining it is possible at all. Yet all things ought to strive, [playername], and it helps and inspires when one has something in mind to strive for. Aimless wandering can hardly be expected to produce results, and time is too precious to be wasted on games of chance.", parse);
+						Text.Add("<i>“Well, of course it is,”</i> Cveta remarks dryly. <i>“It is an ideal, and thus I do not realistically expect it to be attained by anyone without immense effort, if attaining it is possible at all. Yet all things ought to strive, [playername], and it helps and inspires when one has something in mind to strive for. Aimless wandering can hardly be expected to produce results, and time is too precious to be wasted on games of chance.”", parse);
 						Text.NL();
 						Text.Add("“Eden can be a harsh place, and I know my way of seeing things can be hard to swallow by those weary with the world. At least you did not insult my intelligence by suggesting I had no knowledge of the ‘real’ world, as some would put it.”</i>", parse);
 						Text.NL();
@@ -787,9 +787,9 @@ Scenes.Cveta.HerselfPrompt = function() {
 		options.push({ nameStr : "Mandate",
 			func : function() {
 				Text.Clear();
-				Text.Add("Cveta blinks, then composes herself. <i>“I am surprised you caught that, [playername]. The Mandate of the Spirits is but a saying from where I come from. The idea goes as such: if the monarch and aristocracy of a land rule it well and justly, their reign will be blessed with peace and prosperity.", parse);
+				Text.Add("Cveta blinks, then composes herself. <i>“I am surprised you caught that, [playername]. The Mandate of the Spirits is but a saying from where I come from. The idea goes as such: if the monarch and aristocracy of a land rule it well and justly, their reign will be blessed with peace and prosperity.”", parse);
 				Text.NL();
-				Text.Add("“Conversely, once they forget their duties and descend into decadence and misrule, divine wrath will be visited upon the land in the forms of plagues, floods, droughts, demons running amok, milk turning bad, birds flying backwards, disasters natural and unnatural alike in that vein. Those are to be taken as signs that their rule is no longer legitimate, and it is time for the people to depose them and install more competent rulers in their place.", parse);
+				Text.Add("“Conversely, once they forget their duties and descend into decadence and misrule, divine wrath will be visited upon the land in the forms of plagues, floods, droughts, demons running amok, milk turning bad, birds flying backwards, disasters natural and unnatural alike in that vein. Those are to be taken as signs that their rule is no longer legitimate, and it is time for the people to depose them and install more competent rulers in their place.”", parse);
 				Text.NL();
 				Text.Add("“It may not be wholly true, but the actual truth of the legend needs not have bearing on the lessons one can take away from it. Does that answer your question?”</i>", parse);
 				Text.Flush();
@@ -821,7 +821,7 @@ Scenes.Cveta.HerselfPrompt = function() {
 				Text.NL();
 				Text.Add("Come again?", parse);
 				Text.NL();
-				Text.Add("<i>“They were all lovely, but the blue roses were the best. Not just because of their scent or appearance, but in the way they were cultivated with extreme care in order to bring out the best in them, [playername]. Cross a blue rose with another, and it is no longer blue. They represented… generations upon generations of single-minded dedication to a craft, the passing down of the proverbial torch with the trust that it would not be cast aside.", parse);
+				Text.Add("<i>“They were all lovely, but the blue roses were the best. Not just because of their scent or appearance, but in the way they were cultivated with extreme care in order to bring out the best in them, [playername]. Cross a blue rose with another, and it is no longer blue. They represented… generations upon generations of single-minded dedication to a craft, the passing down of the proverbial torch with the trust that it would not be cast aside.”", parse);
 				Text.NL();
 				Text.Add("“That made them so much more than oddly-colored flowers.”</i>", parse);
 			}
@@ -830,9 +830,9 @@ Scenes.Cveta.HerselfPrompt = function() {
 				Text.NL();
 				Text.Add("Yes? What does she remember?", parse);
 				Text.NL();
-				Text.Add("Cveta’s gaze grows distant and glassy. <i>“I remember that Father used to take me to court. Twice every month, he would tell me to get dressed, and we would make the flight from home to the City, Father, Mother, and I. Each session lasted two days; we would stay the night in the City before flying back the next day.", parse);
+				Text.Add("Cveta’s gaze grows distant and glassy. <i>“I remember that Father used to take me to court. Twice every month, he would tell me to get dressed, and we would make the flight from home to the City, Father, Mother, and I. Each session lasted two days; we would stay the night in the City before flying back the next day.”", parse);
 				Text.NL();
-				Text.Add("“Mother did not like it; she said that court was no place for a child to be. That just made me all the more determined to get what I could out of those trips.”</i> The songstress pauses her music, idly strumming the strings of her lyre as she’s lost in thought, then starts up the tune again. <i>“We argued a lot. Most of our disagreements only ended because I did not want my voice to wear thin.", parse);
+				Text.Add("“Mother did not like it; she said that court was no place for a child to be. That just made me all the more determined to get what I could out of those trips.”</i> The songstress pauses her music, idly strumming the strings of her lyre as she’s lost in thought, then starts up the tune again. <i>“We argued a lot. Most of our disagreements only ended because I did not want my voice to wear thin.”", parse);
 				Text.NL();
 				Text.Add("“Mother was right, though. Court is not a place for a child to be. Therefore, I could not be one while I was there. It was a lesson in and of itself, and I hope I paid enough attention.”</i>", parse);
 			}
@@ -875,11 +875,11 @@ Scenes.Cveta.HerselfPrompt = function() {
 			Text.NL();
 			Text.Add("Cveta lowers her gaze into her lap for a moment, wringing her fingers, then shrugs, fluttering her wings in the process. <i>“Oh, why am I being reluctant about it? I have already entrusted you with so much. It is in the best interest of our mutual understanding that you know,”</i> she says, although it seems to be more to herself than to you.", parse);
 			Text.NL();
-			Text.Add("<i>“Very well, [playername]. First and foremost, I can sway the emotions of others, but this is hardly anything special in and of itself. Anyone skilled in the arts of oration or music can do that, and without the need for some mystical gift at that.", parse);
+			Text.Add("<i>“Very well, [playername]. First and foremost, I can sway the emotions of others, but this is hardly anything special in and of itself. Anyone skilled in the arts of oration or music can do that, and without the need for some mystical gift at that.”", parse);
 			Text.NL();
-			Text.Add("“The other thing I can do is tell someone they ought to do or believe something. Understand that this is not as easy as it looks, [playername]. To go against someone of strong will and firm beliefs, and make them act in a way they would not, is… well, I would not say it is impossible. Father or Mother might be able to manage it over a period of time, perhaps two months. However, I think it out of my reach until I practice some more, and I do not wish to practice frivolously.", parse);
+			Text.Add("“The other thing I can do is tell someone they ought to do or believe something. Understand that this is not as easy as it looks, [playername]. To go against someone of strong will and firm beliefs, and make them act in a way they would not, is… well, I would not say it is impossible. Father or Mother might be able to manage it over a period of time, perhaps two months. However, I think it out of my reach until I practice some more, and I do not wish to practice frivolously.”", parse);
 			Text.NL();
-			Text.Add("“The unfortunate thing is, many people do not have strong wills, if only from lack of opportunity to cultivate such. And even if they did, their desires are often hidden from them, such that they often do not realize it until it is too late. A man covets his neighbour’s land and house for years while appearing respectable; a few words in the right place can awaken that desire and incite him to murder. But to turn someone against her lifelong friend is to ask the impossible.", parse);
+			Text.Add("“The unfortunate thing is, many people do not have strong wills, if only from lack of opportunity to cultivate such. And even if they did, their desires are often hidden from them, such that they often do not realize it until it is too late. A man covets his neighbour’s land and house for years while appearing respectable; a few words in the right place can awaken that desire and incite him to murder. But to turn someone against her lifelong friend is to ask the impossible.”", parse);
 			Text.NL();
 			Text.Add("“The gate guards on duty that day were simple creatures, [playername],”</i> Cveta muses, tapping her beak. <i>“Their purposes in life were to stuff their holes and sate their hungers, their minds full of the petty power with which they tormented those who wished entrance to Rigard. It was but a simple matter to pick them apart, make a good guess as to their innermost fears and desires, and turn those against them. They feared punishment, so I made them believe that I was an important envoy from the Free Cities, and they really, really wanted to let me through if they did not want to get into trouble.”</i>", parse);
 			Text.NL();
@@ -911,11 +911,11 @@ Scenes.Cveta.HerselfPrompt = function() {
 			Text.NL();
 			Text.Add("Yeah, that’s true, but at the same time, you get the sense that there’s something she’s not telling you. Knowing her, though, you won’t be wrangling it from her beak until she’s ready.", parse);
 			Text.NL();
-			Text.Add("<i>“What else? Mother first taught me all she knew on the subject, then Father hired the best tutors his money could purchase. The Academy of Higher Arts is a school of magical learning first and foremost, which may have explained why the few musicians present were so desperate for any sort of patron to throw a handful of coin their way.", parse);
+			Text.Add("<i>“What else? Mother first taught me all she knew on the subject, then Father hired the best tutors his money could purchase. The Academy of Higher Arts is a school of magical learning first and foremost, which may have explained why the few musicians present were so desperate for any sort of patron to throw a handful of coin their way.”", parse);
 			Text.NL();
-			Text.Add("“Given such opportunity, [playername], I worked to learn all I could. Voice, string, keyboard… I miss the deep, regal music of a proper pipe organ. Everything but wind and brass, the reason for which should be plain-”</i> she snaps her beak with an audible click- <i>“and percussion, which my small frame was not entirely suited for. It is why I keep Ernest around to play the drums where they are needed, a task he takes great joy in.", parse);
+			Text.Add("“Given such opportunity, [playername], I worked to learn all I could. Voice, string, keyboard… I miss the deep, regal music of a proper pipe organ. Everything but wind and brass, the reason for which should be plain-”</i> she snaps her beak with an audible click- <i>“and percussion, which my small frame was not entirely suited for. It is why I keep Ernest around to play the drums where they are needed, a task he takes great joy in.”", parse);
 			Text.NL();
-			Text.Add("“Surprisingly, it was possible for me to make a living from music even in these times, [playername]. You might imagine that folk would save their coin for the basic necessities of life, but I discovered that people will pay dearly for a few moments’ respite from their burdens and troubles. Far from enough to live the luxuriant life I once did, but sufficient to keep myself fed and clothed without digging into my reserves.", parse);
+			Text.Add("“Surprisingly, it was possible for me to make a living from music even in these times, [playername]. You might imagine that folk would save their coin for the basic necessities of life, but I discovered that people will pay dearly for a few moments’ respite from their burdens and troubles. Far from enough to live the luxuriant life I once did, but sufficient to keep myself fed and clothed without digging into my reserves.”", parse);
 			Text.NL();
 			Text.Add("“And that is the story of my music, [playername],”</i> Cveta finishes, bobbing her head at you. <i>“Would you like to move on from here?”</i>", parse);
 			Text.Flush();

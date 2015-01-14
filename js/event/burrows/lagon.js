@@ -519,7 +519,7 @@ Scenes.Lagon.PitDefianceLoss = function() {
 			Text.Add("Your [vagDesc] receives equal treatment to your ass; countless cocks ravage your insides, flooding your womb with virile lagomorph seed. You realize that you will most likely spend the rest of your life just like Vena - constantly pregnant, only getting a short respite from fucking when you give birth.", parse);
 			Text.NL();
 		}
-		if(player.FirstVag()) {
+		if(player.FirstCock()) {
 			parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 			Text.Add("Your [cocks] [isAre] all but forgotten, though no small amount of the jizz you are bathing in comes from yourself. On Lagon’s orders, none of the other bunnies touch [itThem], though the rabbit king promises that you will get your turn if you behave like a good slut.", parse);
 			Text.NL();
