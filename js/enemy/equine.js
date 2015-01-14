@@ -169,9 +169,6 @@ Scenes.Equine.LossPrompt = function() {
 	
 	// this = encounter
 	var enc = this;
-	enc.finalize = function() {
-		Encounter.prototype.onLoss.call(enc);
-	};
 	
 	var parse = {
 		party         : !party.Alone() ? " and your party" : "",
@@ -187,110 +184,114 @@ Scenes.Equine.LossPrompt = function() {
 	};
 	enc.parse = parse;
 	
-	var scenes = new EncounterTable();
-	scenes.AddEnc(function() {
-		Text.Add("You[party] collapse, unable to dispute the equine couple's victory. The two approach you, the stallion eying your crumpled figure with desire.", parse);
-		Text.NL();
-		Text.Add("<i>“You in the mood?”</i> The male questions, turned to the mare, his groin twitching in the process.", parse);
-		Text.NL();
-		Text.Add("<i>“You're <b>always</b> in the mood, aren't you? Maybe if you aren't satisfied with me, you should  just leave.”</i> The busty female turns her back to the stallion, fuming.", parse);
-		Text.NL();
-		Text.Add("<i>“Yeah, okay, sure. When <b>you're</b> in the mood, you'd fuck a demon to death, but when <b>I</b> want to have some fun-”</i>", parse);
-		Text.NL();
-		Text.Add("The two continue to argue for quite some time, allowing you[party] to slink away unnoticed. Still, you find the loss to two bickering equines quite embarrassing.", parse);
-		Text.Flush();
-		Gui.NextPrompt(enc.finalize);
-	}, 1.0);
-	scenes.AddEnc(function() {
-		Text.Add("The final blow breaks your will and you grudgingly drop to your knees, unable to fight back. Your eyes look around and you hear the telltale click of animalistic tongues.", parse);
-		Text.NL();
-		Text.Add("<i>“I thought they'd last a little longer than that...”</i> The mare comments, looking to [hisher2] comrade as [heshe2] finishes. ", parse);
-		Text.NL();
-		Text.Add("The stallion matches [hisher2] glare. <i>“I know that look.”</i> [HeShe1] takes this moment to rake [hisher1] eyes over your figure.", parse);
-		Text.NL();
-		
-		if(player.NumCocks() > 0) {
-			Text.Add("[HeShe1] chuckles briefly. <i>“Don't let your prey see your mouth water.”</i> The mare gives you a telling ogle.", parse);
+	Gui.Callstack.push(function() {
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			Text.Add("You[party] collapse, unable to dispute the equine couple's victory. The two approach you, the stallion eying your crumpled figure with desire.", parse);
 			Text.NL();
-			Text.Add("[HeShe2] replied sharply. <i>“Mind your damn business...”</i> [HisHer2] eyes stayed pinned to your figure as [heshe2] spoke. It's not that you mind the attention, but you do feel a little uneasy under those stares. ", parse);
-		}
-		else if(player.NumVags() > 0) {
-			Text.Add("The mare gave a shrug. <i>“Well, it's your call. She can't seem to stop staring at you.”</i>", parse);
+			Text.Add("<i>“You in the mood?”</i> The male questions, turned to the mare, his groin twitching in the process.", parse);
 			Text.NL();
-			Text.Add("You look away from the stallion after the female mentions it and feel heat rise into your cheeks. It's not your fault: his... equipment is simply not an everyday sight.", parse);
-		}
-		Text.NL();
-		Text.Add("The two opponents grow restless with their own hesitation and finally turn to question you.", parse);
-		Text.NL();
-		
-		if(player.NumCocks() > 0) {
-			Text.Add("<i>“You wanna play with me?”</i> The mare smiles, approaching you while pressing her chest out. The small amount of leather covering her [breastDesc2] pulls tightly around her [nipDesc2], the outline quite visible.", parse);
-		}
-		else if(player.NumVags() > 0) {
-			Text.Add("<i>“So, you wanna have some fun?”</i> The stallion questions while moving forward, closing the distance. His musk fills your nostrils, and despite how disgusting the idea might be, you can feel your insides squirm. ", parse);
-		}
-		
-		if(player.LustLevel() >= 0.8) {
+			Text.Add("<i>“You're <b>always</b> in the mood, aren't you? Maybe if you aren't satisfied with me, you should  just leave.”</i> The busty female turns her back to the stallion, fuming.", parse);
 			Text.NL();
-			Text.Add("<b>Aroused as you are, you cannot bring yourself to refuse their offer.</b>");
-		}
-		Text.Flush();
-		// SET UP CHOICES
-		
-		//[Fuck her][Get fucked][Threesome][No]
-		var options = new Array();
-		if(player.NumCocks() > 0) {
-			options.push({ nameStr : "Fuck her",
-				func : function() {
-					Scenes.Equine.FuckFemale(enc);
-				}, enabled : true,
-				tooltip : "The female equine has caught your interest, and judging from her demeanor, she likely wouldn't object."
-			});
-		}
-		if(player.NumVags() > 0) {
-			options.push({ nameStr : "Get fucked",
-				func : function() {
-					Scenes.Equine.GetFucked(enc);
-				}, enabled : true,
-				tooltip : "Taking on that thick horse cock looks like a challenge, but you can't let that stop you!"
-			});
-		}
-		
-		if(player.NumCocks() > 0) {
-			options.push({ nameStr : "Threesome",
-				func : function() {
-					Scenes.Equine.Threesome1(enc);
-				}, enabled : true,
-				tooltip : "Why not have both of them join in? The stallion looks like he is willing to share his partner... that, and they both have parts you could play with."
-			});
-		}
-		else if(player.NumVags() > 0) {
-			options.push({ nameStr : "Threesome",
-				func : function() {
-					Scenes.Equine.Threesome2(enc);
-				}, enabled : true,
-				tooltip : "Why not have both of them join in? That cock looks like it could serve both you and the mare."
-			});
-		}
-		options.push({ nameStr : "No",
-			func : function() {
-				parse.party = !party.Alone() ? " and wake your incapacitated party" : "";
-				
-				Text.Clear();
-				Text.Add("They sigh and shrug, both looking disappointed.", parse);
+			Text.Add("<i>“Yeah, okay, sure. When <b>you're</b> in the mood, you'd fuck a demon to death, but when <b>I</b> want to have some fun-”</i>", parse);
+			Text.NL();
+			Text.Add("The two continue to argue for quite some time, allowing you[party] to slink away unnoticed. Still, you find the loss to two bickering equines quite embarrassing.", parse);
+			Text.Flush();
+			Gui.NextPrompt();
+		}, 1.0);
+		scenes.AddEnc(function() {
+			Text.Add("The final blow breaks your will and you grudgingly drop to your knees, unable to fight back. Your eyes look around and you hear the telltale click of animalistic tongues.", parse);
+			Text.NL();
+			Text.Add("<i>“I thought they'd last a little longer than that...”</i> The mare comments, looking to [hisher2] comrade as [heshe2] finishes. ", parse);
+			Text.NL();
+			Text.Add("The stallion matches [hisher2] glare. <i>“I know that look.”</i> [HeShe1] takes this moment to rake [hisher1] eyes over your figure.", parse);
+			Text.NL();
+			
+			if(player.NumCocks() > 0) {
+				Text.Add("[HeShe1] chuckles briefly. <i>“Don't let your prey see your mouth water.”</i> The mare gives you a telling ogle.", parse);
 				Text.NL();
-				if(player.NumCocks() > 0)		
-					Text.Add("The mare turns to you and asks. <i>“You sure?”</i> You nod your head with certainty and turn the two away. You quickly get a hold of yourself[party] before heading out, thankful that you managed to leave with some dignity. ", parse);
-				else
-					Text.Add("The stallion turns away from you and scoffs. <i>“You're missing the ride of your life.”</i> You furrow your eyebrows with anger and turn away from the two. You quickly get a hold of yourself[party] before heading out, thankful that you managed to leave with some dignity.", parse);
-				Gui.NextPrompt(enc.finalize);
-			}, enabled : player.LustLevel() < 0.8,
-			tooltip : "Refuse their offer."
-		});
-		Gui.SetButtonsFromList(options);
-	}, 1.0);
-	
-	scenes.Get();
+				Text.Add("[HeShe2] replied sharply. <i>“Mind your damn business...”</i> [HisHer2] eyes stayed pinned to your figure as [heshe2] spoke. It's not that you mind the attention, but you do feel a little uneasy under those stares. ", parse);
+			}
+			else if(player.NumVags() > 0) {
+				Text.Add("The mare gave a shrug. <i>“Well, it's your call. She can't seem to stop staring at you.”</i>", parse);
+				Text.NL();
+				Text.Add("You look away from the stallion after the female mentions it and feel heat rise into your cheeks. It's not your fault: his... equipment is simply not an everyday sight.", parse);
+			}
+			Text.NL();
+			Text.Add("The two opponents grow restless with their own hesitation and finally turn to question you.", parse);
+			Text.NL();
+			
+			if(player.NumCocks() > 0) {
+				Text.Add("<i>“You wanna play with me?”</i> The mare smiles, approaching you while pressing her chest out. The small amount of leather covering her [breastDesc2] pulls tightly around her [nipDesc2], the outline quite visible.", parse);
+			}
+			else if(player.NumVags() > 0) {
+				Text.Add("<i>“So, you wanna have some fun?”</i> The stallion questions while moving forward, closing the distance. His musk fills your nostrils, and despite how disgusting the idea might be, you can feel your insides squirm. ", parse);
+			}
+			
+			if(player.LustLevel() >= 0.8) {
+				Text.NL();
+				Text.Add("<b>Aroused as you are, you cannot bring yourself to refuse their offer.</b>");
+			}
+			Text.Flush();
+			// SET UP CHOICES
+			
+			//[Fuck her][Get fucked][Threesome][No]
+			var options = new Array();
+			if(player.NumCocks() > 0) {
+				options.push({ nameStr : "Fuck her",
+					func : function() {
+						Scenes.Equine.FuckFemale(enc);
+					}, enabled : true,
+					tooltip : "The female equine has caught your interest, and judging from her demeanor, she likely wouldn't object."
+				});
+			}
+			if(player.NumVags() > 0) {
+				options.push({ nameStr : "Get fucked",
+					func : function() {
+						Scenes.Equine.GetFucked(enc);
+					}, enabled : true,
+					tooltip : "Taking on that thick horse cock looks like a challenge, but you can't let that stop you!"
+				});
+			}
+			
+			if(player.NumCocks() > 0) {
+				options.push({ nameStr : "Threesome",
+					func : function() {
+						Scenes.Equine.Threesome1(enc);
+					}, enabled : true,
+					tooltip : "Why not have both of them join in? The stallion looks like he is willing to share his partner... that, and they both have parts you could play with."
+				});
+			}
+			else if(player.NumVags() > 0) {
+				options.push({ nameStr : "Threesome",
+					func : function() {
+						Scenes.Equine.Threesome2(enc);
+					}, enabled : true,
+					tooltip : "Why not have both of them join in? That cock looks like it could serve both you and the mare."
+				});
+			}
+			options.push({ nameStr : "No",
+				func : function() {
+					parse.party = !party.Alone() ? " and wake your incapacitated party" : "";
+					
+					Text.Clear();
+					Text.Add("They sigh and shrug, both looking disappointed.", parse);
+					Text.NL();
+					if(player.NumCocks() > 0)		
+						Text.Add("The mare turns to you and asks. <i>“You sure?”</i> You nod your head with certainty and turn the two away. You quickly get a hold of yourself[party] before heading out, thankful that you managed to leave with some dignity. ", parse);
+					else
+						Text.Add("The stallion turns away from you and scoffs. <i>“You're missing the ride of your life.”</i> You furrow your eyebrows with anger and turn away from the two. You quickly get a hold of yourself[party] before heading out, thankful that you managed to leave with some dignity.", parse);
+					Gui.NextPrompt();
+				}, enabled : player.LustLevel() < 0.8,
+				tooltip : "Refuse their offer."
+			});
+			Gui.SetButtonsFromList(options);
+		}, 1.0);
+		
+		scenes.Get();
+		
+	});
+	Encounter.prototype.onLoss.call(enc);
 }
 
 Scenes.Equine.FuckFemale = function(enc) {
@@ -393,7 +394,7 @@ Scenes.Equine.FuckFemale = function(enc) {
 		Text.Flush();
 		player.AddLustFraction(-1);
 		
-		Gui.NextPrompt(enc.finalize);
+		Gui.NextPrompt();
 	});
 }
 
@@ -460,7 +461,7 @@ Scenes.Equine.GetFucked = function(enc) {
 		
 		player.AddLustFraction(-1);
 		
-		Gui.NextPrompt(enc.finalize);
+		Gui.NextPrompt();
 	});
 }
 
@@ -534,7 +535,7 @@ Scenes.Equine.Threesome1 = function(enc) {
 		
 		player.AddLustFraction(-1);
 		
-		Gui.NextPrompt(enc.finalize);
+		Gui.NextPrompt();
 	});
 }
 
@@ -587,7 +588,7 @@ Scenes.Equine.Threesome2 = function(enc) {
 	
 	player.AddLustFraction(-1);
 
-	Gui.NextPrompt(enc.finalize);
+	Gui.NextPrompt();
 }
 
 
