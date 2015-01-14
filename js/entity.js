@@ -1631,36 +1631,80 @@ Entity.prototype.FuckOral = function(mouth, cock, expMult) {
 
 // Fuck entitys anus (anus, cock)
 Entity.prototype.FuckAnal = function(butt, cock, expMult) {
+	var parse = {
+		poss   : this.Possessive(),
+		name   : this.NameDesc(),
+		has    : this.has(),
+		hisher : this.hisher()
+	};
 	expMult = expMult || 1;
 	if(butt.virgin) {
 		butt.virgin = false;
-		Text.Add("<b>[name] [has] lost [hisher] anal virginity.</b>",
-		{ name : this.NameDesc(), has : this.has(), hisher : this.hisher() });
+		Text.Add("<b>[name] [has] lost [hisher] anal virginity.</b>", parse);
 		Text.NL();
-		Text.Flush();
 		this.AddSexExp(5 * expMult);
 	}
 	else
 		this.AddSexExp(expMult);
 	
 	// TODO: Stretch
+	if(cock) {
+		var stretch = butt.Tightness();
+		var thk = cock.Thickness();
+		var cap = butt.Cap();
+		var ratio = thk / cap;
+		if(ratio > 0.75)
+			butt.stretch.IncreaseStat(Butt.Tightness.gaping, 0.1);
+		var stretch2 = butt.Tightness();
+		if(stretch < Butt.Tightness.loose && stretch2 >= Butt.Tightness.loose) {
+			Text.Add("<b>[poss] butt has become loose.</b>", parse);
+			Text.NL();
+		}
+		if(stretch < Butt.Tightness.gaping && stretch2 >= Butt.Tightness.gaping) {
+			Text.Add("<b>[poss] butt has become gaping.</b>", parse);
+			Text.NL();
+		}
+	}
+	Text.Flush();
 }
 
 // Fuck entitys vagina (vag, cock)
 Entity.prototype.FuckVag = function(vag, cock, expMult) {
+	var parse = {
+		poss   : this.Possessive(),
+		name   : this.NameDesc(),
+		has    : this.has(),
+		hisher : this.hisher()
+	};
 	expMult = expMult || 1;
 	if(vag.virgin) {
 		vag.virgin = false;
-		Text.Add("<b>[name] [has] lost [hisher] virginity.</b>",
-		{ name : this.NameDesc(), has : this.has(), hisher : this.hisher() });
+		Text.Add("<b>[name] [has] lost [hisher] virginity.</b>", parse);
 		Text.NL();
-		Text.Flush();
 		this.AddSexExp(5 * expMult);
 	}
 	else
 		this.AddSexExp(expMult);
 	
 	// TODO: Stretch
+	if(cock) {
+		var stretch = vag.Tightness();
+		var thk = cock.Thickness();
+		var cap = vag.Cap();
+		var ratio = thk / cap;
+		if(ratio > 0.75)
+			vag.stretch.IncreaseStat(Vagina.Tightness.gaping, 0.1);
+		var stretch2 = vag.Tightness();
+		if(stretch < Vagina.Tightness.loose && stretch2 >= Vagina.Tightness.loose) {
+			Text.Add("<b>[poss] pussy has become loose.</b>", parse);
+			Text.NL();
+		}
+		if(stretch < Vagina.Tightness.gaping && stretch2 >= Vagina.Tightness.gaping) {
+			Text.Add("<b>[poss] pussy has become gaping.</b>", parse);
+			Text.NL();
+		}
+	}
+	Text.Flush();
 }
 
 /*
