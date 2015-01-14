@@ -376,6 +376,14 @@ Scenes.Lizards.WinFemale = function(enc) {
 			tooltip : "With a muzzle that long, you bet she could take every inch..."
 		});
 	}
+	if(player.FirstCock() || player.Strapon()) {
+		options.push({ nameStr : "Fuck",
+			func : function() {
+				Scenes.Lizards.WinFuckVag(enc);
+			}, enabled : true,
+			tooltip : "Give her some dick."
+		});
+	}
 	
 	//[Tailpeg][Leave]
 	if(player.sexlevel > 2) {
@@ -397,6 +405,111 @@ Scenes.Lizards.WinFemale = function(enc) {
 	});
 	Gui.SetButtonsFromList(options);
 	Text.Flush();
+}
+
+Scenes.Lizards.WinFuckVag = function(enc) {
+	var enemy = enc.female;
+	var third = enc.third;
+	
+	var p1cock = player.BiggestCock(null, true);
+	var realCock = p1cock.isStrapon == false;
+	
+	var parse = {
+		clothes : function() { return player.ArmorDesc(); },
+		cocks : function() { return player.MultiCockDesc(); },
+		cock  : function() { return p1cock.Short(); },
+		vag   : function() { return player.FirstVag().Short(); }
+	};
+	
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, null, "2");
+	
+	var girthy = p1cock.Thickness() > enemy.FirstVag().Cap();
+	
+	Text.Clear();
+	Text.Add("To the victor go the spoils, and before you now you see a desert flower just begging to be spoiled. The lizan girl gulps as you shrug your way out of your [clothes], ", parse);
+	if(realCock)
+		Text.Add("letting out an impressed yelp as you reveal your stiffening cock[s].", parse);
+	else
+		Text.Add("letting out a surprised yelp when you pull on your [cock], fastening it securely. You wonder if it’s her first time seeing such a thing - at the very least, it’ll probably be the first time someone uses one on her.", parse);
+	if(girthy)
+		Text.Add(" She looks a little apprehensive at your girth, but from what you’ve heard, scalies are quite flexible - there shouldn’t be any problems once you get started.", parse);
+	Text.NL();
+	Text.Add("You’re pretty sure she knows where this is going; her body language tells you that she wants it as much as you do. It’s subtle; a slight parting of the lips, a quickening of her breath, the soft slither of scale on scale as her thighs rub together. From the way she’s seated, her nethers are hidden from you, though you get a brief flash of her wet slit now and then as she moves her tail lazily back and forth.", parse);
+	Text.NL();
+	Text.Add("<i>”Ah… and what am I supposed to do with that?”</i> she asks coyly, eyeing your [cocks] with feigned disinterest. <i>”What do I look like to you, a snake handler?”</i>", parse);
+	Text.NL();
+	Text.Add("Very funny. You’re willing to bet that she’s handled quite a few ‘snakes’ in her day. The lizard blushes faintly, but doesn’t refute your words. You suggest that she start by coming closer; perhaps a more intimate inspection will clue her in. She rolls her eyes, but obediently crawls up to you on all fours. ", parse);
+	if(realCock)
+		Text.Add("Her scaly hand is cold as it comes to rest on[oneof] your [cocks], and she lightly runs it down the appendage, tracing the veins in fascination.", parse);
+	else
+		Text.Add("She experimentally prods your artificial cock, as if pondering how such a strange thing came to be.", parse);
+	Text.Add(" It’s probably as much a surprise for her as for you when her forked tongue flits forward, giving your [cock] a light flick.", parse);
+	Text.NL();
+	Text.Add("That’s right, get to know each other, you encourage her.", parse);
+	Text.NL();
+	Text.Add("The reptile gives you a dirty look, but nonetheless cups your [cock] in the palm of her hand and gives it a more thorough lick, from tip to base. The light kiss turns into an intricate makeout session as the girl starts to get worked up. Swallowing her hesitation - and quite a lot more - she wraps her lips around your shaft and takes it into her mouth.", parse);
+	Text.NL();
+	parse["you"] = realCock ? "you" : "it";
+	Text.Add("You let her play with [you] for a while before suggesting that now that her mouth is on such good terms with the snake, perhaps she should introduce it to some of her other orifices. With a loud slurp, she pops your [cock] out of her mouth, dripping of her saliva. She slowly turns over on all fours, wiggling her butt at you invitingly. Her tail is held high, allowing you full access to both her stretchy holes.", parse);
+	Text.NL();
+	Text.Add("The lizard gasps as you close in, putting a firm hand on her soft butt as you run your lubed-up cock between her cheeks, prodding at the entrance of her labia and gently rubbing her tailhole. You continue to tease the girl for a while longer, delighting in how she squirms and tries to grind her hips back against you. Finally, you align your [cock] with her slit and slide it in.", parse);
+	if(realCock)
+		Text.Add(" Her insides are deliciously tight, and hot like a furnace.", parse);
+	Text.NL();
+	
+	Sex.Vaginal(player, enemy);
+	enemy.FuckVag(enemy.FirstVag(), player.FirstCock(), 4);
+	player.Fuck(player.FirstCock(), 4);
+	
+	Text.Add("<i>”S-such a naughty snake!”</i> she moans, rocking her hips back to meet yours. ", parse);
+	if(girthy)
+		Text.Add("Just as you suspected, her opening is incredibly flexible, forming a perfect cock-sheath for you, a hand in a glove. ", parse);
+	Text.Add("A naughty snake for a naughty snake handler, you reply amiably, giving her another thrust. She grunts, her tail swaying back and forth above her jiggling butt.", parse);
+	Text.NL();
+	Text.Add("You build up a rhythm, each of her goading taunts echoed by you slamming your hips home, filling up the feisty lizard. Before long, she can’t even muster that; she’s reduced to base moans and lustful panting, every thought but the need of your shaft in her hot loins scattered to the winds. She’s accepted her place as the willing receptacle of your [cock], and she’s enjoying every second of it.", parse);
+	Text.NL();
+	Text.Add("The need for words is gone, all that remains is your passion for each other as your bodies grind together, the girl doing her best to diligently milk your [cock]. ", parse);
+	if(realCock)
+		Text.Add("She’s taking at least as much pleasure from this as you are, shamelessly moaning and egging you on.", parse);
+	else
+		Text.Add("You can’t help but think that she’s getting the sweeter side of the deal here, wrapped tightly around your artificial member. On the other hand, every powerful backstroke grinds the base of the toy into your own [vag], so you can’t really complain.", parse);
+	Text.Add(" You feel your control over the situation slip as your rutting slowly turns more insistent, becoming the instinctive actions of the lusty beast inside you. Her tail snakes around you, caressing your back fondly and keeping you inside her reach, as if she’s afraid you’ll pull away and end her bliss prematurely.", parse);
+	Text.NL();
+	Text.Add("Like you’re going to let that happen! With still quite a bit left in you, you set to it, intent on making this as good as possible for both of you. ", parse);
+	if(player.NumCocks() > 1)
+		Text.Add("Your other cock[s2] grind[notS2] against her taint, a carnal promise of more to come. Deciding to let [itThem2] have a little action, you pull out, immediately filling her again with a different member. You switch back and forth a while before plugging her with your main [cock] again.", parse);
+	else
+		Text.Add("You keep your hands busy by toying with the sensitive lizan; caressing the soft scales on the underside of her tail, squeezing her plush butt and circling your thumb on her taint.", parse);
+	Text.Add(" She does her best to keep up with you, but after a while of incessant fucking, her breath starts to grow shorter and shorter, her moans more insistent. Finally, the constant pummelling of your [cock] becomes too much for the girl, and she collapses in throes of ecstasy.", parse);
+	Text.NL();
+	
+	var cum = player.OrgasmCum();
+	
+	Text.Add("While she’s the first one to cum, you’re not far behind. ", parse);
+	if(realCock) {
+		parse["cum"] = cum > 6 ? "copious" :
+		               cum > 3 ? "generous" : "large";
+		Text.Add("Letting out a groan, you unload and flood her with a [cum] amount of nut-batter. You idly wonder if you’ll fertilize her eggs, the thought of a pregnant lizard sending another spurt from your [cock].", parse);
+		if(player.NumCocks() > 1)
+			Text.Add(" Your other cock[s2] blast [itTheir2] load[s2] across her back, coating her in jizz both inside and out.", parse);
+	}
+	else
+		Text.Add("Even if you can’t feel the lizan squeezing her walls around your artificial cock, her passionate thrashing grinding the base of the toy against your private parts is enough to set you off. You cry out, waves of pleasure spreading through your loins as you fall onto her back.", parse);
+	Text.NL();
+	parse["real"] = realCock ? " and the girl’s belly filled with your seed" : "";
+	Text.Add("Spent, you try to pull out of the reptile, but her tail snares you in and holds you close as she rides out her own climax, her pussy reflexively clenching around your [cock]. When she finally lets go, you’re both thoroughly exhausted by the ordeal. You give her a shaky hand up, and you share a smile before you go your separate ways, both of you sated[real].", parse);
+	if(party.Num() > 1) {
+		parse["Comp"] = party.Num() == 2 ? party.Get(1).name : "Your companions";
+		parse["notS"] = party.Num() == 2 ? "s" : "";
+		Text.NL();
+		Text.Add("[Comp] join[notS] you, helping you gather your gear before you set out on your journey again.", parse);
+	}
+	Text.Flush();
+	
+	world.TimeStep({minute : 30});
+	
+	Gui.NextPrompt(enc.finalize);
 }
 
 Scenes.Lizards.WinTailpeg = function(enc) {
@@ -2437,7 +2550,7 @@ Scenes.Lizards.LossFemale = function() {
 		}
 		if(player.FirstVag()) {
 			parse["l"] = player.LowerBodyType() != LowerBodyType.Single ? Text.Parse("up the inside of your [thigh]", parse) : "from your stomach down into the valley of your crotch";
-			Text.Add("<i>“Now <b>this</b> is a treat,”</i> the lizan licks her lips appreciatively as her finger traces a line [c]. After teasing your outer lips for a bit, she sinks two digits into your [vag], watching your face closely as she does. If you weren’t wet before, the sensual lizard sure does her best to push your buttons… but to what end? A tiny gasp slips out from your lips, much to her mirth.", parse);
+			Text.Add("<i>“Now <b>this</b> is a treat,”</i> the lizan licks her lips appreciatively as her finger traces a line [l]. After teasing your outer lips for a bit, she sinks two digits into your [vag], watching your face closely as she does. If you weren’t wet before, the sensual lizard sure does her best to push your buttons… but to what end? A tiny gasp slips out from your lips, much to her mirth.", parse);
 			Text.NL();
 			parse["c"] = player.FirstCock() ? Text.Parse(" removing her foot from your [cocks] as she gets down on all fours,", parse) : "";
 			Text.Add("<i>“Good plaything,”</i> she murmurs encouragingly. <i>“I’m going to need you nice and wet for this next part...”</i> The reptile leans down further,[c] and graces your nethers with her dexterous tongue. The slithering appendage darts into your folds, and by the time she’s tasted enough of you, you’re panting heavily.", parse);
