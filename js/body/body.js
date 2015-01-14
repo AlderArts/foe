@@ -469,7 +469,7 @@ Body.prototype.ToStoragePartial = function(opts) {
 		}
 		storage.vag = vag;
 	}
-	if(opts.butt) {
+	if(opts.ass) {
 		storage.ass = this.body.ass.ToStorage(opts.full);
 	}
 	if(opts.breasts && this.body.breasts.length > 0) {
