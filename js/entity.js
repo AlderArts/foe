@@ -1294,10 +1294,15 @@ Entity.prototype.Update = function(step) {
 		this.LactationOverTime(hours);
 		this.PregnancyOverTime(hours);
 		this.HandleDrunknessOverTime(hours);
+		this.HandleStretchOverTime(hours);
 		
 		for(var i = 0; i < this.effects.length; i++)
 			this.effects[i].timer.Dec(step);
 	}
+}
+
+Entity.prototype.HandleStretchOverTime = function(hours) {
+	this.body.HandleStretchOverTime(hours);
 }
 
 Entity.prototype.HandleTimers = function() {

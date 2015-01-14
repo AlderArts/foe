@@ -1,13 +1,14 @@
 
 function Butt() {
-	this.capacity = new Stat(4);
-	this.stretch  = new Stat(1);
-	this.buttSize = new Stat(1); // TODO: Default
+	this.capacity   = new Stat(4);
+	this.minStretch = new Stat(1);
+	this.stretch    = new Stat(1);
+	this.buttSize   = new Stat(1); // TODO: Default
 	// This is a special case for anal pregnancy
 	// Only appliable for incubation/eggs
-	this.womb     = new Womb();
+	this.womb       = new Womb();
 	
-	this.virgin   = true;
+	this.virgin     = true;
 }
 
 Butt.prototype.ToStorage = function(full) {
@@ -16,16 +17,19 @@ Butt.prototype.ToStorage = function(full) {
 		str    : this.stretch.base.toFixed(2),
 		virgin : this.virgin ? 1 : 0
 	};
-	if(full)
+	if(full) {
 		storage.size = this.buttSize.base.toFixed(2);
+		storage.mstr = this.minStretch.base.toFixed(2);
+	}
 	return storage;
 }
 
 Butt.prototype.FromStorage = function(storage) {
-	this.capacity.base = parseFloat(storage.cap)  || this.capacity.base;
-	this.stretch.base  = parseFloat(storage.str)  || this.stretch.base;
-	this.buttSize.base = parseFloat(storage.size) || this.buttSize.base;
-	this.virgin        = parseInt(storage.virgin) == 1;
+	this.capacity.base   = parseFloat(storage.cap)  || this.capacity.base;
+	this.minStretch.base = parseFloat(storage.mstr) || this.minStretch.base;
+	this.stretch.base    = parseFloat(storage.str)  || this.stretch.base;
+	this.buttSize.base   = parseFloat(storage.size) || this.buttSize.base;
+	this.virgin          = parseInt(storage.virgin) == 1;
 }
 
 Butt.prototype.Cap = function() {
@@ -46,6 +50,10 @@ Butt.Tightness = {
 	tight  : 1,
 	loose  : 2,
 	gaping : 3
+}
+Butt.prototype.HandleStretchOverTime = function(hours) {
+	//TODO rate
+	this.stretch.DecreaseStat(this.minStretch.Get(), hours * 0.02);
 }
 Butt.prototype.noun = function() {
 	var size = this.buttSize.Get();

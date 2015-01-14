@@ -594,6 +594,11 @@ Body.prototype.FromStorage = function(storage) {
 	}
 }
 
+Body.prototype.HandleStretchOverTime = function(hours) {
+	for(var i = 0; i < this.vagina.length; i++)
+		this.vagina[i].HandleStretchOverTime(hours);
+	this.ass.HandleStretchOverTime(hours);
+}
 
 Body.prototype.NumCocks = function() {
 	return this.cock.length;

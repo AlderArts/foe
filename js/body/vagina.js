@@ -9,6 +9,7 @@ function Vagina() {
 	this.color         = Color.pink;
 	
 	this.capacity      = new Stat(5);
+	this.minStretch    = new Stat(1);
 	this.stretch       = new Stat(1);
 	this.wetness       = new Stat(1);
 	this.clitThickness = new Stat(0.5);
@@ -31,6 +32,7 @@ Vagina.prototype.ToStorage = function(full) {
 		storage.col   = this.color.toFixed();
 		storage.clitT = this.clitThickness.base.toFixed(2);
 		storage.clitL = this.clitLength.base.toFixed(2);
+		storage.mstr  = this.minStretch.base.toFixed(2);
 	}
 	return storage;
 }
@@ -38,6 +40,7 @@ Vagina.prototype.ToStorage = function(full) {
 Vagina.prototype.FromStorage = function(storage) {
 	this.color              = parseInt(storage.col)     || this.color;
 	this.capacity.base      = parseFloat(storage.cap)   || this.capacity.base;
+	this.minStretch.base    = parseFloat(storage.mstr)  || this.minStretch.base;
 	this.stretch.base       = parseFloat(storage.str)   || this.stretch.base;
 	this.wetness.base       = parseFloat(storage.wet)   || this.wetness.base;
 	this.clitThickness.base = parseFloat(storage.clitT) || this.clitThickness.base;
@@ -64,7 +67,10 @@ Vagina.Tightness = {
 	loose  : 2,
 	gaping : 3
 }
-
+Vagina.prototype.HandleStretchOverTime = function(hours) {
+	//TODO rate
+	this.stretch.DecreaseStat(this.minStretch.Get(), hours * 0.02);
+}
 // Create a clitcock from a vagina
 // Returns the cock
 Vagina.prototype.CreateClitcock = function() {
