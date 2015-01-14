@@ -384,6 +384,19 @@ Entity.prototype.SaveLactation = function(storage) {
 	storage.lact = this.lactHandler.ToStorage();
 }
 
+//Only saves some stats from body
+/*
+ * opts: cock
+ *       balls
+ *       vag
+ *       ass
+ *       breasts
+ *       full
+ */
+Entity.prototype.SaveBodyPartial = function(storage, opts) {
+	storage.body = this.body.ToStoragePartial(opts);
+}
+
 // Convert to a format easy to write to/from memory
 Entity.prototype.ToStorage = function() {
 	var storage = {

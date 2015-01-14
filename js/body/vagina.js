@@ -20,16 +20,18 @@ function Vagina() {
 	this.virgin        = true;
 }
 
-Vagina.prototype.ToStorage = function() {
+Vagina.prototype.ToStorage = function(full) {
 	var storage = {
-		col    : this.color.toFixed(),
 		cap    : this.capacity.base.toFixed(2),
 		str    : this.stretch.base.toFixed(2),
 		wet    : this.wetness.base.toFixed(2),
-		clitT  : this.clitThickness.base.toFixed(2),
-		clitL  : this.clitLength.base.toFixed(2),
 		virgin : this.virgin ? 1 : 0
 	};
+	if(full) {
+		storage.col   = this.color.toFixed();
+		storage.clitT = this.clitThickness.base.toFixed(2);
+		storage.clitL = this.clitLength.base.toFixed(2);
+	}
 	return storage;
 }
 

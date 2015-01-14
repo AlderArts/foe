@@ -10,13 +10,14 @@ function Butt() {
 	this.virgin   = true;
 }
 
-Butt.prototype.ToStorage = function() {
+Butt.prototype.ToStorage = function(full) {
 	var storage = {
 		cap    : this.capacity.base.toFixed(2),
 		str    : this.stretch.base.toFixed(2),
-		size   : this.buttSize.base.toFixed(2),
 		virgin : this.virgin ? 1 : 0
 	};
+	if(full)
+		storage.size = this.buttSize.base.toFixed(2);
 	return storage;
 }
 

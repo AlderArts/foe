@@ -20,17 +20,19 @@ function Breasts(race, color) {
 Breasts.prototype = new BodyPart();
 Breasts.prototype.constructor = Breasts;
 
-Breasts.prototype.ToStorage = function() {
+Breasts.prototype.ToStorage = function(full) {
 	var storage = {
-		col     : this.color.toFixed(),
-		race    : this.race.toFixed(),
-		nipC    : this.nippleCount.toFixed(),
-		size    : this.size.base.toFixed(2),
-		nipThk  : this.nippleThickness.base.toFixed(2),
-		nipLen  : this.nippleLength.base.toFixed(2),
-		aerS    : this.aerolaSize.base.toFixed(2),
-		nipType : this.nippleType.toFixed()
+		size    : this.size.base.toFixed(2)
 	};
+	if(full) {
+		storage.nipC    = this.nippleCount.toFixed();
+		storage.col     = this.color.toFixed();
+		storage.race    = this.race.toFixed();
+		storage.nipThk  = this.nippleThickness.base.toFixed(2);
+		storage.nipLen  = this.nippleLength.base.toFixed(2);
+		storage.aerS    = this.aerolaSize.base.toFixed(2);
+		storage.nipType = this.nippleType.toFixed();
+	}
 	return storage;
 }
 

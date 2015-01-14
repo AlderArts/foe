@@ -18,17 +18,19 @@ Balls.prototype.SackSize = function() {
 	return this.size.Get() * this.count.Get();
 }
 
-Balls.prototype.ToStorage = function() {
+Balls.prototype.ToStorage = function(full) {
 	var storage = {
-		race  : this.race.toFixed(),
-		col   : this.color.toFixed(),
-		count : this.count.base.toFixed(),
 		size  : this.size.base.toFixed(2),
 		cum   : this.cum.base.toFixed(2),
 		cumP  : this.cumProduction.base.toFixed(2),
 		cumC  : this.cumCap.base.toFixed(2),
 		fer   : this.fertility.base.toFixed(2)
 	};
+	if(full) {
+		storage.race  = this.race.toFixed();
+		storage.col   = this.color.toFixed();
+		storage.count = this.count.base.toFixed();
+	}
 	return storage;
 }
 

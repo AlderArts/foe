@@ -410,27 +410,27 @@ Body.prototype.ToStorage = function() {
 		storage.cock = new Array();
 		for(var i = 0; i < this.cock.length; i++) {
 			var a = this.cock[i];
-			var c = a.ToStorage();
+			var c = a.ToStorage(true);
 			if(a.vag)
 				c.ccIdx = this.vagina.indexOf(a.vag);
 			storage.cock.push(c);
 		}
 	}
-	storage.balls = this.balls.ToStorage();
+	storage.balls = this.balls.ToStorage(true);
 	
 	if(this.vagina.length > 0) {
 		storage.vag = new Array();
 		for(var i = 0; i < this.vagina.length; i++) {
-			storage.vag.push(this.vagina[i].ToStorage());
+			storage.vag.push(this.vagina[i].ToStorage(true));
 		}
 	}
 	
-	storage.ass = this.ass.ToStorage();
+	storage.ass = this.ass.ToStorage(true);
 	
 	if(this.breasts.length > 0) {
 		storage.breasts = new Array();
 		for(var i = 0; i < this.breasts.length; i++) {
-			storage.breasts.push(this.breasts[i].ToStorage());
+			storage.breasts.push(this.breasts[i].ToStorage(true));
 		}
 	}
 	
@@ -447,6 +447,38 @@ Body.prototype.ToStorage = function() {
 		count : this.legs.count.toFixed()
 	};
 
+	return storage;
+}
+
+Body.prototype.ToStoragePartial = function(opts) {
+	var storage;
+	if(opts.cock && this.body.cock.length > 0) {
+		var cock = [];
+		for(var i = 0; i < this.body.cock.length; ++i) {
+			cock.push(this.body.cock[i].ToStorage(opts.full));
+		}
+		storage.cock = cock;
+	}
+	if(opts.balls) {
+		storage.balls = this.body.balls.ToStorage(opts.full);
+	}
+	if(opts.vag && this.body.vagina.length > 0) {
+		var vag = [];
+		for(var i = 0; i < this.body.vagina.length; ++i) {
+			vag.push(this.body.vagina[i].ToStorage(opts.full));
+		}
+		storage.vag = vag;
+	}
+	if(opts.butt) {
+		storage.ass = this.body.ass.ToStorage(opts.full);
+	}
+	if(opts.breasts && this.body.breasts.length > 0) {
+		var breasts = [];
+		for(var i = 0; i < this.body.breasts.length; ++i) {
+			breasts.push(this.body.breasts[i].ToStorage(opts.full));
+		}
+		storage.breasts = breasts;
+	}
 	return storage;
 }
 

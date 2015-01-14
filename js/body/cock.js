@@ -19,19 +19,21 @@ function Cock(race, color) {
 Cock.prototype = new BodyPart();
 Cock.prototype.constructor = Cock;
 
-Cock.prototype.ToStorage = function() {
+Cock.prototype.ToStorage = function(full) {
 	var storage = {
-		race   : this.race.toFixed(),
-		col    : this.color.toFixed(),
 		len    : this.length.base.toFixed(2),
 		thk    : this.thickness.base.toFixed(2)
 	};
-	if(this.type != CockType.ordinary)
-		storage.type = this.type.toFixed();
-	if(this.knot != 0)
-		storage.knot = this.knot.toFixed();
-	if(this.sheath != 0)
-		storage.sheath = this.sheath.toFixed();
+	if(full) {
+		storage.race = this.race.toFixed();
+		storage.col  = this.color.toFixed();
+		if(this.type != CockType.ordinary)
+			storage.type = this.type.toFixed();
+		if(this.knot != 0)
+			storage.knot = this.knot.toFixed();
+		if(this.sheath != 0)
+			storage.sheath = this.sheath.toFixed();
+	}
 	return storage;
 }
 
