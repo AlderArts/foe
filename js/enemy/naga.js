@@ -174,10 +174,6 @@ Scenes.Naga.DesertLoss = function() {
 		vagDesc       : function() { return player.FirstVag().Short(); }
 	};
 	
-	enc.finalize = function() {
-		Encounter.prototype.onLoss.call(enc);
-	};
-	
 	if(party.Num() == 2)
 		parse["comp"] = party.Get(1).name;
 	else if(party.Num() > 2)
@@ -185,49 +181,52 @@ Scenes.Naga.DesertLoss = function() {
 	else
 		parse["comp"] = "";
 	
-	Text.Clear();
-	Text.Add("You collapse to the sand with a thud, lacking the energy to resist any further.", parse);
-	Text.NL();
-	parse["c"] = party.Num() > 1 ? Text.Parse(", completely ignoring [comp]", parse) : "";
-	Text.Add("<i>“You went and tired yourself out! I told you it would be easier if you didn’t resist. Don’t worry though, I won’t hurt you… much...”</i> the naga says with a lusty chuckle as she slithers toward your prone form[c]. Your eyes are drawn to her crotch and impressive genitals. Her pulsating pair of enormous cocks throbs and her reptilian slit oozes, its juices dripping to the sand. She coils her tail around you and squeezes just tightly enough to avoid hurting you as she lifts you off the ground, raising your face to hers.", parse);
-	Text.NL();
-	Text.Add("The naga’s forked tongue tastes your sweat, plays across your lips, and licks at your [earDesc]. She leans over to whisper in your ear: <i>“We’re going to have some fun now… I’m going to use you, but I’m sure you’ll get off in the process.”</i> She giggles and nibbles on your earlobe, her fangs thankfully retracted.", parse);
-	Text.NL();
-	Text.Add("As she pulls away from your ear, you find your eyes drawn to hers by the sound of her voice, and feel an irresistible urge to gaze deep into her piercing magenta eyes. Any resistance that you might have mustered slips away, leaving only complete obedience.", parse);
-	if(player.FirstCock()) {
-		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-		Text.Add(" Blood surges to your [multiCockDesc] as you fall under the naga’s spell, and [itThey] throb[notS] in anticipation of the pleasure to come.", parse);
-	}
-	if(player.FirstVag())
-		Text.Add(" You feel your [vagDesc] moisten as you stare into your captor’s eyes, lubricating you liberally for the impending penetration.", parse);
-	Text.NL();
-	
-	//TODO Redo into a proper scene structure
-	
-	var scenes = new EncounterTable();
-	scenes.AddEnc(function() {
-		Scenes.Naga.DesertLossGetDPd(enc);
-		return true;
-	}, 1.0, function() { return player.FirstVag() && player.LowerBodyType() != LowerBodyType.Single; });
-	scenes.AddEnc(function() {
-		Scenes.Naga.DesertLossUseCock(enc);
-		return true;
-	}, 1.0, function() { return player.FirstCock(); });
-	/*
-	scenes.AddEnc(function() {
-		Text.Add("", parse);
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		Text.Add("You collapse to the sand with a thud, lacking the energy to resist any further.", parse);
 		Text.NL();
-	}, 1.0, function() { return true; });
-	*/
-	
-	var ret = scenes.Get();
-	
-	
-	if(!ret) {
-		Text.Add("PLACEHOLDER...");
-		Text.Flush();
-		Gui.NextPrompt();
-	}
+		parse["c"] = party.Num() > 1 ? Text.Parse(", completely ignoring [comp]", parse) : "";
+		Text.Add("<i>“You went and tired yourself out! I told you it would be easier if you didn’t resist. Don’t worry though, I won’t hurt you… much...”</i> the naga says with a lusty chuckle as she slithers toward your prone form[c]. Your eyes are drawn to her crotch and impressive genitals. Her pulsating pair of enormous cocks throbs and her reptilian slit oozes, its juices dripping to the sand. She coils her tail around you and squeezes just tightly enough to avoid hurting you as she lifts you off the ground, raising your face to hers.", parse);
+		Text.NL();
+		Text.Add("The naga’s forked tongue tastes your sweat, plays across your lips, and licks at your [earDesc]. She leans over to whisper in your ear: <i>“We’re going to have some fun now… I’m going to use you, but I’m sure you’ll get off in the process.”</i> She giggles and nibbles on your earlobe, her fangs thankfully retracted.", parse);
+		Text.NL();
+		Text.Add("As she pulls away from your ear, you find your eyes drawn to hers by the sound of her voice, and feel an irresistible urge to gaze deep into her piercing magenta eyes. Any resistance that you might have mustered slips away, leaving only complete obedience.", parse);
+		if(player.FirstCock()) {
+			parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+			Text.Add(" Blood surges to your [multiCockDesc] as you fall under the naga’s spell, and [itThey] throb[notS] in anticipation of the pleasure to come.", parse);
+		}
+		if(player.FirstVag())
+			Text.Add(" You feel your [vagDesc] moisten as you stare into your captor’s eyes, lubricating you liberally for the impending penetration.", parse);
+		Text.NL();
+		
+		//TODO Redo into a proper scene structure
+		
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			Scenes.Naga.DesertLossGetDPd(enc);
+			return true;
+		}, 1.0, function() { return player.FirstVag() && player.LowerBodyType() != LowerBodyType.Single; });
+		scenes.AddEnc(function() {
+			Scenes.Naga.DesertLossUseCock(enc);
+			return true;
+		}, 1.0, function() { return player.FirstCock(); });
+		/*
+		scenes.AddEnc(function() {
+			Text.Add("", parse);
+			Text.NL();
+		}, 1.0, function() { return true; });
+		*/
+		
+		var ret = scenes.Get();
+		
+		
+		if(!ret) {
+			Text.Add("PLACEHOLDER...");
+			Text.Flush();
+			Gui.NextPrompt();
+		}
+	});
+	Encounter.prototype.onLoss.call(enc);
 }
 
 Scenes.Naga.DesertLossGetDPd = function(enc) {
@@ -372,7 +371,7 @@ Scenes.Naga.DesertLossGetDPd = function(enc) {
 	
 	world.TimeStep({hour: 2});
 	
-	Gui.NextPrompt(enc.finalize);
+	Gui.NextPrompt();
 }
 
 
@@ -597,7 +596,7 @@ Scenes.Naga.DesertLossUseCock = function(enc) {
 		
 		world.TimeStep({hour: 1});
 		
-		Gui.NextPrompt(enc.finalize);
+		Gui.NextPrompt();
 	});
 }
 
