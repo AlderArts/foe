@@ -8,7 +8,7 @@ Capacity = {
 function Vagina() {
 	this.color         = Color.pink;
 	
-	this.capacity      = new Stat(20);
+	this.capacity      = new Stat(5);
 	this.stretch       = new Stat(1);
 	this.wetness       = new Stat(1);
 	this.clitThickness = new Stat(0.5);
@@ -52,7 +52,7 @@ Vagina.prototype.Pregnant = function() {
 // TODO
 Vagina.prototype.Fits = function(cock, extension) {
 	extension = extension || 0;
-	return cock.length.Get() <= (this.capacity.Get() + extension);
+	return cock.length.Thickness() <= (this.Cap() + extension);
 }
 
 // Create a clitcock from a vagina

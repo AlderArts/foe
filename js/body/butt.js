@@ -1,6 +1,6 @@
 
 function Butt() {
-	this.capacity = new Stat(25);
+	this.capacity = new Stat(4);
 	this.stretch  = new Stat(1);
 	this.buttSize = new Stat(1); // TODO: Default
 	// This is a special case for anal pregnancy
@@ -36,7 +36,7 @@ Butt.prototype.Pregnant = function() {
 // TODO
 Butt.prototype.Fits = function(cock, extension) {
 	extension = extension || 0;
-	return cock.length.Get() <= (this.capacity.Get() + extension);
+	return cock.Thickness() <= (this.Cap() + extension);
 }
 Butt.prototype.Tightness = function() {
 	return this.stretch.Get();
