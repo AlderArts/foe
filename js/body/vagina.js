@@ -52,7 +52,7 @@ Vagina.prototype.Pregnant = function() {
 // TODO
 Vagina.prototype.Fits = function(cock, extension) {
 	extension = extension || 0;
-	return cock.length.Thickness() <= (this.Cap() + extension);
+	return cock.Thickness() <= (this.Cap() + extension);
 }
 Vagina.prototype.Tightness = function() {
 	return this.stretch.Get();
