@@ -1350,10 +1350,6 @@ Scenes.Felines.LossRegular = function() {
 	else
 		parse["comp"] = "";
 	
-	enc.finalize = function() {
-		Encounter.prototype.onLoss.call(enc);
-	};
-	
 	var numMales   = 0;
 	var numFemales = 0;
 	var numHerms   = 0;
@@ -1377,44 +1373,47 @@ Scenes.Felines.LossRegular = function() {
 		}
 	}
 	
-	Text.Clear();
-	Text.Add("You fall on your back,[comp] defeated by the ferocious cat[s]. ", parse);
-	if(group)
-		Text.Add("The felines bicker among themselves, though their argument seems to be less about what they are going to do with you than about who gets to do it first. All you can do is wait for them to decide.", parse);
-	else
-		Text.Add("Victorious, the feline settles down licking [hisher] fur thoughtfully, [hisher] fierce, unblinking eyes fixed on your prone form. After a tentative effort to crawl away is easily rebuked by your captor hopping over to place [himher]self in your path, you settle down and wait for what the feline will do to you. You don’t have to wait for long.", parse);
-	Text.Flush();
-	
-	
-	var scenes = new EncounterTable();
-	if(male) {
-		scenes.AddEnc(function() {
-			return Scenes.Felines.LossCatchVaginal(male, group, enc);
-		}, 1.0, function() { return player.FirstVag(); });
-	}
-	if(female) {
-		var cocksInVag = player.CocksThatFit(female.FirstVag());
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		Text.Add("You fall on your back,[comp] defeated by the ferocious cat[s]. ", parse);
+		if(group)
+			Text.Add("The felines bicker among themselves, though their argument seems to be less about what they are going to do with you than about who gets to do it first. All you can do is wait for them to decide.", parse);
+		else
+			Text.Add("Victorious, the feline settles down licking [hisher] fur thoughtfully, [hisher] fierce, unblinking eyes fixed on your prone form. After a tentative effort to crawl away is easily rebuked by your captor hopping over to place [himher]self in your path, you settle down and wait for what the feline will do to you. You don’t have to wait for long.", parse);
+		Text.Flush();
 		
-		scenes.AddEnc(function() {
-			return Scenes.Felines.LossPitchVaginal(female, group, enc, cocksInVag);
-		}, 1.0, function() { return cocksInVag.length > 0; });
-	}
-	if(herm) {
-		var cocksInVag = player.CocksThatFit(herm.FirstVag());
 		
-		scenes.AddEnc(function() {
-			return Scenes.Felines.LossCatchVaginal(herm, group, enc);
-		}, 1.0, function() { return player.FirstVag(); });
-		scenes.AddEnc(function() {
-			return Scenes.Felines.LossPitchVaginal(herm, group, enc, cocksInVag);
-		}, 1.0, function() { return cocksInVag.length > 0; });
-	}
-	
-	var ret = scenes.Get();
-	
-	if(!ret) {
-		Gui.NextPrompt(enc.finalize);
-	}
+		var scenes = new EncounterTable();
+		if(male) {
+			scenes.AddEnc(function() {
+				return Scenes.Felines.LossCatchVaginal(male, group, enc);
+			}, 1.0, function() { return player.FirstVag(); });
+		}
+		if(female) {
+			var cocksInVag = player.CocksThatFit(female.FirstVag());
+			
+			scenes.AddEnc(function() {
+				return Scenes.Felines.LossPitchVaginal(female, group, enc, cocksInVag);
+			}, 1.0, function() { return cocksInVag.length > 0; });
+		}
+		if(herm) {
+			var cocksInVag = player.CocksThatFit(herm.FirstVag());
+			
+			scenes.AddEnc(function() {
+				return Scenes.Felines.LossCatchVaginal(herm, group, enc);
+			}, 1.0, function() { return player.FirstVag(); });
+			scenes.AddEnc(function() {
+				return Scenes.Felines.LossPitchVaginal(herm, group, enc, cocksInVag);
+			}, 1.0, function() { return cocksInVag.length > 0; });
+		}
+		
+		var ret = scenes.Get();
+		
+		if(!ret) {
+			Gui.NextPrompt();
+		}
+	});
+	Encounter.prototype.onLoss.call(enc);
 }
 
 Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
@@ -1628,7 +1627,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 			
 			player.AddLustFraction(-1);
 			
-			Gui.NextPrompt(enc.finalize);
+			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : Text.Parse("Tell [himher] to cum inside. You wouldn’t mind giving birth to a cute kitten or two!", parse)
 	});
@@ -1658,7 +1657,7 @@ Scenes.Felines.LossCatchVaginal = function(cat, group, enc) {
 			
 			player.AddLustFraction(-1);
 			
-			Gui.NextPrompt(enc.finalize);
+			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : Text.Parse("You don’t want to risk pregnancy. Tell [himher] to cum outside.", parse)
 	});
@@ -1852,7 +1851,7 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 			
 			player.AddLustFraction(-1);
 			
-			Gui.NextPrompt(enc.finalize);
+			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "Let’s make sure she’ll remember you for the coming weeks!"
 	});
@@ -1912,7 +1911,7 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 			
 			player.AddLustFraction(-1);
 			
-			Gui.NextPrompt(enc.finalize);
+			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "This feels too good, plus she’s won fair and square. She can finish you off herself."
 	});
@@ -1958,7 +1957,7 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 			
 			player.AddLustFraction(-1);
 			
-			Gui.NextPrompt(enc.finalize);
+			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "You’re not about to be responsible for a bastard, so you’d better pull out and finish up on her chest. You doubt she’ll mind."
 	});
