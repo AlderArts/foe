@@ -342,6 +342,17 @@ CacheToGame = function() {
 			party.Inv().AddItem(Items.Estros);
 		}
 	}
+	if(gameCache.version < 21) {
+		if(player.body.vagina[0])
+			player.body.vagina[0].capacity.base = 5;
+		player.body.ass.capacity.base = 4;
+		if(kiakai.body.vagina[0])
+			kiakai.body.vagina[0].capacity.base = 5;
+		kiakai.body.ass.capacity.base = 4;
+		if(rosalin.body.vagina[0])
+			rosalin.body.vagina[0].capacity.base = 5;
+		rosalin.body.ass.capacity.base = 4;
+	}
 }
 
 GameToCache = function() {

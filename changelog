@@ -16,6 +16,7 @@ Version 0.3u
  - A new win scene for the female.
 * Quest items are now correctly removed when turning in the Burrows quests.
 * Restructured the end of combat so the Defeat/Win screen with exp and loot always shows up first. Report if there are fights that don't behave this way (or are suddenly acting odd).
+* Restructured how capacity and stretch works. Still pending some balance. The values have been set on a different scale, and scenes lockouts should now only be based on cock thickness (not length). There may still be some weirdness. Saves have been tweaked for player, kiakai and rosalin.
 
 --------------------------------------------
              PREVIOUS VERSIONS

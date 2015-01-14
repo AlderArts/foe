@@ -9,7 +9,7 @@ VERSION_MINOR = 3;
 VERSION_SUBSCRIPT = "t2";
 VERSION_NAME = "Burrows, pt.2 + Cveta fixes";
 
-SAVE_VERSION = 20;
+SAVE_VERSION = 21;
 // Save version 1: Initial
 // Save version 2: Added inventory
 // Save version 3: Fixed clitcock restoration + height, weigth
@@ -30,6 +30,7 @@ SAVE_VERSION = 20;
 // Save version 18: Terry & Miranda exp to level fix
 // Save version 19: Terry & Miranda exp to level fix
 // Save version 20: Boss drops
+// Save version 21: Capacity rewrite
 
 
 VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + VERSION_SUBSCRIPT + ": " + VERSION_NAME;
