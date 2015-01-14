@@ -2561,25 +2561,29 @@ Scenes.Lizards.LossFemale = function() {
 			Text.Add("She leans down, whispering: <i>“I’ll go slow at the start.”</i> Not very convincing, nor reassuring. You bite your lip as she guides her tail inside your [target], the thin tip passing easily. The scaly appendage only grows thicker the more of it she feeds you, however, and she has a good four feet at her disposal.", parse);
 			Text.NL();
 			
+			var cap;
 			if(pussy) {
 				Sex.Vaginal(lizard, player);
 				player.FuckVag(player.FirstVag(), null, 3);
 				lizard.Fuck(null, 3);
+				
+				cap = player.FirstVag().Cap();
 			}
 			else {
 				Sex.Anal(lizard, player);
 				player.FuckAnal(player.Butt(), null, 3);
 				lizard.Fuck(null, 3);
+				
+				cap = player.Butt().Cap();
 			}
 			
 			Text.Add("Stuffing you is an agonizingly slow process. Each scale that goes into you imprints its texture on your sensitive opening, and once inside, it joins a whole army of its brothers, intent on claiming your deepest reaches. ", parse);
-			var cap = cap * stretch; //TODO !!!!
-			if(cap > large) {
+			if(cap > Capacity.loose) {
 				Text.Add("Your well-trained [target] has no trouble receiving the girl’s girth - she mutters a muffled oath of surprise at how stretchy you are.", parse);
 				Text.NL();
 				Text.Add("<i>“This isn’t your first time, is it,”</i> she gasps, impressed at your capacity. <i>“I might even be able to go ‘balls deep’!”</i>", parse);
 			}
-			else if(cap > mid) {
+			else if(cap > Capacity.tight) {
 				Text.Add("The first foot or two is reasonably thin, but the girl soon encounters resistance when she tries to push the girthier part of her tail into you.", parse);
 				Text.NL();
 				Text.Add("<i>“Don’t worry,”</i> she comforts you, <i>“we have a looot of time to get you used to this...”</i> It doesn’t seem like she’s about to be discouraged by a minor setback like this.", parse);

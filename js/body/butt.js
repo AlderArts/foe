@@ -27,6 +27,9 @@ Butt.prototype.FromStorage = function(storage) {
 	this.virgin        = parseInt(storage.virgin) == 1;
 }
 
+Vagina.prototype.Cap = function() {
+	return this.capacity.Get() * this.stretch.Get();
+}
 Butt.prototype.Pregnant = function() {
 	return this.womb.pregnant;
 }

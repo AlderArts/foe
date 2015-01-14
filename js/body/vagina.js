@@ -1,4 +1,10 @@
 
+Capacity = {
+	tight  : 2,
+	loose  : 5,
+	gaping : 10
+};
+
 function Vagina() {
 	this.color         = Color.pink;
 	
@@ -37,6 +43,9 @@ Vagina.prototype.FromStorage = function(storage) {
 	this.virgin             = parseInt(storage.virgin) == 1;
 }
 
+Vagina.prototype.Cap = function() {
+	return this.capacity.Get() * this.stretch.Get();
+}
 Vagina.prototype.Pregnant = function() {
 	return this.womb.pregnant;
 }
