@@ -63,9 +63,10 @@ Vagina.prototype.Tightness = function() {
 	return this.stretch.Get();
 }
 Vagina.Tightness = {
-	tight  : 1,
-	loose  : 2,
-	gaping : 3
+	tight    : 1,
+	flexible : 2,
+	loose    : 3,
+	gaping   : 4
 }
 Vagina.prototype.HandleStretchOverTime = function(hours) {
 	//TODO rate
