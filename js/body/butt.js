@@ -111,14 +111,14 @@ Butt.prototype.analNoun = function() {
 }
 Butt.prototype.AnalDesc = function() {
 	var area = this.capacity.Get() * this.stretch.Get();
-	if     (area <= 5  ) ret = {a:"an", adj: "extremely tight"};
-	else if(area <= 10 ) ret = {a:"a", adj: "very tight"};
-	else if(area <= 20 ) ret = {a:"a", adj: "tight"};
-	else if(area <= 30 ) ret = {a:"a", adj: "well-proportioned"};
-	else if(area <= 40 ) ret = {a:"a", adj: "flexible"};
-	else if(area <= 50 ) ret = {a:"a", adj: "very flexible"};
-	else if(area <= 70 ) ret = {a:"a", adj: "loose"};
-	else if(area <= 100) ret = {a:"a", adj: "slutty"};
+	if     (area <= 2 ) ret = {a:"an", adj: "extremely tight"};
+	else if(area <= 3 ) ret = {a:"a", adj: "very tight"};
+	else if(area <= 4 ) ret = {a:"a", adj: "tight"};
+	else if(area <= 5 ) ret = {a:"a", adj: "well-proportioned"};
+	else if(area <= 7 ) ret = {a:"a", adj: "flexible"};
+	else if(area <= 9 ) ret = {a:"a", adj: "very flexible"};
+	else if(area <= 11) ret = {a:"a", adj: "loose"};
+	else if(area <= 15) ret = {a:"a", adj: "slutty"};
 	else                    ret = {a:"a", adj: "gaping"};
 	return ret;
 }

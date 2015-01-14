@@ -2662,8 +2662,8 @@ Scenes.Rosalin.SexPrompt = function(state) {
 					Text.Add("Taking a firm grip on your [legsDesc], Rosalin pushes them toward your head, splaying you out below [himher].", parse);
 					Text.NL();
 				}
-				var looseness = targetObj.stretch.Get() / rosalin.FirstCock().thickness.Get();
-				if(looseness < 0.5)
+				var looseness = targetObj.Cap() / rosalin.FirstCock().Thickness();
+				if(looseness < 0.8)
 					Text.Add("<i>“Fuck, so tight,”</i> [heshe] grunts, thrusting as much of [hisher] [rCockDesc] inside you as [heshe] can fit. <i>“Gotta work you over more often, I think!”</i>", parse);
 				else {
 					Text.Add("<i>“Woah, seems you have been around!”</i> [heshe] exclaims, <i>“guess I'm not the first one to this hole!”</i>", parse);

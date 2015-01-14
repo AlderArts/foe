@@ -1050,7 +1050,7 @@ Scenes.Gwendy.ChallengeSexHands = function(cock, hangout) {
 		Text.Add("Pressing against your folds, she experimentally pushes a finger into you, eliciting a soft moan. Hearing this, she works it inside you, either intent on pleasing you, or perhaps to end this as fast as possible. You coo in pleasure as moisture begins to drip from your folds.", parse);
 		Text.NL();
 		
-		var num = Math.floor(player.FirstVag().stretch.Get() * 1.5);
+		var num = Math.floor(player.FirstVag().Tightness() * 1.5);
 		if(num < 2) num = 2;
 		if(num > 5) num = 5;
 		parse["fingernum"] = Text.Quantify(num);

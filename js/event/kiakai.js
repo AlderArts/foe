@@ -4105,7 +4105,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 						Text.Add("Given little else to work with, you decide to focus on [name]'s [kButtDesc]. You let your fingers trail down [hisher] taint, reaching for [hisher] [kAnusDesc].", parse);
 					}
 					Text.NL();
-					var eagerness = kiakai.flags["AnalExp"] * (1+kiakai.LustLevel()+kiakai.Butt().stretch.Get()/5);
+					var eagerness = kiakai.flags["AnalExp"] * (1+kiakai.LustLevel()*kiakai.Butt().Tightness());
 					if(eagerness < 50) {
 						Text.Add("You attempt to push some of your fingers into the elf's tight rosebud, but you are immediately met with resistance. Only with a lot of effort and a bit of saliva do you manage to breach [hisher] defenses, plunging first one, then two fingers into [hisher] stubborn hole.", parse);
 					}
@@ -5069,8 +5069,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 
 						Text.Flush();
 						
-						// TODO: Butt stretch
-						kiakai.Butt().stretch.IncreaseStat(3, 0.5);
+						kiakai.Butt().stretch.IncreaseStat(Butt.Tightness.loose, 0.5);
 						kiakai.subDom.DecreaseStat(0, 1);
 						world.TimeStep({hour: 1});
 						player.AddLustFraction(-1);
@@ -5161,8 +5160,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 						
 						Text.Flush();
 						
-						// TODO: Butt stretch
-						kiakai.Butt().stretch.IncreaseStat(3, 0.5);
+						kiakai.Butt().stretch.IncreaseStat(Butt.Tightness.loose, 0.5);
 						kiakai.subDom.DecreaseStat(-50, 2);
 						
 						world.TimeStep({hour: 1});
@@ -5267,9 +5265,8 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 							Text.Add("The two of you equip your gear, readying yourself to continue on your travels.", parse);
 							Text.Flush();
 							
-							// TODO: Butt stretch
 							kiakai.AddSPFraction(-1);
-							kiakai.Butt().stretch.IncreaseStat(5, 1);
+							kiakai.Butt().stretch.IncreaseStat(Butt.Tightness.gaping, 1);
 							kiakai.subDom.DecreaseStat(-75, 10);
 							kiakai.Butt().capacity.IncreaseStat(len, 5);
 							

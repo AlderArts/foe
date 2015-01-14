@@ -606,10 +606,10 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 			Text.Add("You feel the slick lips of your cunt being forced wider and wider as she starts to slide yet more of her tail into you, keeping you completely filled. You spread your legs as wide as you can to try to ease the pressure, but it's no use. You find yourself stretched achingly wide, and feel your vision blur as your pussy squeezes around the lizard's cool, undulating tail.", parse);
 			Text.NL();
 			Text.Add("[m1Name] seems to be getting decidedly into it, and you feel her start to <i>wriggle</i> her tail inside of you. Like a living, thrashing creature it writhes inside of you, grinding against your heated walls deviously. You feel her whip-like tail-tip tickle spots deep inside of you, and your cunt clamps down around her again. Leaning forward, you grind yourself on her tail, your cunt stretched wide as it can go...", parse);
-			if(player.FirstVag().stretch.Get() < 6) {
+			if(player.FirstVag().Tightness() < Vagina.Tightness.gaping) {
 				Text.NL();
 				Text.Add("...and then she shoves in even <i>more</i>. You cry out in shock as you feel yourself stretch beyond your limits, going cross-eyed.", parse);
-				player.FirstVag().stretch.IncreaseStat(3, 2);
+				player.FirstVag().stretch.IncreaseStat(Vagina.Tightness.gaping, 1);
 				player.AddLustFraction(0.2);
 			}
 		}
@@ -619,14 +619,14 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 			Text.Add("[m1Name] picks up on it immediately, a coy smile on her lips. Wordless as ever, you feel her tail slow, and her tip slither back to brush your prostate again. You fix your gaze on her, and her eyes almost dare you to object. Drawn on by the supple motions of her serpentine tail, you're not sure you want to...", parse);
 			Text.NL();
 			Text.Add("Suddenly her tail twitches again, and her tip <i>grinds</i> against your prostate. Your eyes widen, and she <i>shoves</i> another four inches of her now painfully thick tail into you. Pleasure blankets out the pain and you spasm on top of her, your [multiCockDesc] throbbing at attention as you press harder against her.", parse);
-			if(player.Butt().stretch.Get() < 10) {
+			if(player.Butt().Tightness < Butt.Tightness.gaping) {
 				Text.NL();
 				Text.Add("You feel your [anusDesc] stretching agonizingly wide, and you know it will be a while before you feel tight again...", parse);
-				player.Butt().stretch.IncreaseStat(4, 1);
+				player.Butt().stretch.IncreaseStat(Butt.Tightness.gaping, 1);
 				player.AddLustFraction(0.2);
 			}
 		}
-	}, function() { return (player.FirstVag() ? (60 + player.FirstVag().stretch.Get() * 5) : (20 + player.Butt().stretch.Get() * 5)) / 100; });
+	}, function() { return (player.FirstVag() ? (60 + player.FirstVag().Tightness() * 5) : (20 + player.Butt().Tightness() * 5)) / 100; });
 	scenes.AddEnc(function() {
 		Text.Add("Slowly she begins to slide it out from your body again. You feel her sinuous tail slithering out, tugging on your ", parse);
 		if(player.FirstVag())
@@ -635,7 +635,7 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 			Text.Add("clenching sphincter as it moves, making it distend outwards as she twitches it inside of you.", parse);
 		Text.NL();
 		Text.Add("You let your hands come forward, taking hold of her legs to steady yourself as she slowly pulls her tail out of you... only to push it back in, equally as slow. You feel her tip sliding against your most sensitive spot, and her rough scales grinding across it leave you gasping for breath. She lets out a hiss of delight at the sight of you shuddering.", parse);
-	}, function() { return Math.max((player.FirstVag() ? (40 - player.FirstVag().stretch.Get() * 5) : (80 - player.Butt().stretch.Get() * 5)) / 100, 0); });
+	}, function() { return Math.max((player.FirstVag() ? (40 - player.FirstVag().Tightness() * 5) : (80 - player.Butt().Tightness() * 5)) / 100, 0); });
 	
 	scenes.Get();
 	
@@ -1048,7 +1048,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 			}
 			Text.Add("Slowly you begin to lower yourself downward, feeling his slippery, pulsing dicks press against your [buttDesc]. He lets out a hiss of breath as you feel his twin, spaded tips slide between your cheeks, squeezing them between your [buttDesc] teasingly. [m1Name] gazes steadily at you, his slitted eyes caught somewhere between being excited and frustrated.", parse);
 			Text.NL();
-			if(player.Butt().stretch.Get() > 5) {
+			if(player.Butt().Tightness() > Butt.Tightness.loose) {
 				Text.Add("You decide to give him a real treat this time. Just one can't satisfy your loose hole, and you need more... and luckily for the both of you, [m1name] can accommodate. You lower yourself down, and feel his twin tips slip toward your [anusDesc]. They slip away, and you reach back with one hand. You squeeze his dicks together, and he hisses in surprise.", parse);
 				Text.NL();
 				Text.Add("<i>“Careful,”</i> he hisses. You smirk, angling him upward, his ridged, fleshy shafts pulsing in your grip. You sit downward, and feel his two slimy, wet tips push against your sphincter. Relaxing all of your muscles, you slowly sit down, your [feetDesc] gripping the ground on either side of his hips.", parse);
@@ -1058,10 +1058,10 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 				Sex.Anal(enemy, player);
 				
 				Text.Add("The reptile's eyes widen, and he scratches at the ground as your [buttDesc] sinks down onto both of his slimy dicks at once. You can feel his immense girth stretching you <b>wide</b> open, the flexing shafts tugging at your hole with surprising strength. You can feel him flexing them both eagerly inside of you, his face quickly melting into a mask of ecstasy. <i>“O-oh... Ah...”</i> he whispers. You clench down <i>hard</i>, and his eyes cross as his [m1multiCockDesc] squish against each other.", parse);
-				if(player.Butt().stretch.Get() > 10) {
+				if(player.Butt().Tightness() < Butt.Tightness.gaping) {
 					Text.NL();
 					Text.Add("You feel your body stretching slowly around him, his twin lengths almost painfully large inside of you.", parse);
-					player.Butt().stretch.IncreaseStat(3, 0.5);
+					player.Butt().stretch.IncreaseStat(Butt.Tightness.gaping, 0.5);
 				}
 				
 				player.AddLustFraction(0.2);
@@ -1115,7 +1115,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 							Text.NL();
 							Text.Add("His hands are strong as steel though, and he holds you tightly.", parse);
 							Text.NL();
-							if(player.Butt().stretch.Get() > 5) {
+							if(player.Butt().Tightness() > Butt.Tightness.loose) {
 								Text.Add("<i>“Not many can fit both in one hole... Mmm...”</i> his sibilant whispers come. You swallow.", parse);
 							}
 							else {
@@ -1138,14 +1138,14 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 							player.AddLustFraction(-0.05);
 							Text.Add("A heavy pressure fills your body, and your [anusDesc] stretches painfully and quickly. Your eyes go wide and you feel the air burst out from your lungs as his fat, slimy ", parse);
 							Text.NL();
-							if(player.Butt().stretch.Get() > 5)
+							if(player.Butt().Tightness() > Butt.Tightness.loose)
 								Text.Add("dicks both slide deeper into you in the span of a half second. Your cheeks redden, and you feel your entire body filled with his dual dicks.", parse);
 							else
 								Text.Add("cock sinks deeper and deeper into your clenching hole within a second. You feel your cheeks burning as he fills you.", parse);
 							Text.NL();
 							Text.Add("A loud hiss of pleasure escapes his muzzle as you feel your [buttDesc] press up to his slit, and with a dull ache that spreads through your rump, you realize that he's hilted in you.", parse);
 							Text.NL();
-							if(player.Butt().stretch.Get() > 5)
+							if(player.Butt().Tightness() > Butt.Tightness.loose)
 								Text.Add("His fingers squeeze your [buttDesc] tighter, kneading your cheeks like dough as his nostrils flare. You feel yourself lifted upward, and his ridged, bulbous cocks slip back out from your loose hole. <i>“Oh yessss... So good,”</i> he hisses, his eyes halfway closing.", parse);
 							else
 								Text.Add("You feel him groping your [buttDesc] in his powerful hands, his breathing coming raggedly as he lifts you up again, tugging his dripping length out of your body. His eyes open again and he gives a lascivious grin, licking his lips.", parse);
@@ -1158,18 +1158,18 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 							else {
 								Text.Add("Despite yourself, you feel your ", parse);
 								if(player.NumCocks() > 1) {
-									parse["s"] = player.Butt().stretch.Get() > 5 ? "s" : "";
+									parse["s"] = player.Butt().Tightness() > Butt.Tightness.loose ? "s" : "";
 									Text.Add("dicks throbbing at aching attention, and can feel [m1name]'s fat dick[s] mashing against your prostate.", parse);
 								}
 								else {
 									Text.Add("[cockDesc] throbbing at aching attention, dripping slowly onto the reptile's stomach. ", parse);
-									if(player.Butt().stretch.Get() > 5)
+									if(player.Butt().Tightness() > Butt.Tightness.loose)
 										Text.Add("His dual cocks mash up against your prostate, sending electric tingles through your entire body.", parse);
 									else
 										Text.Add("[m1Name]’s heavy shaft throbs inside you, its brother pushing against your [buttDesc].", parse);
 								}
 								Text.NL();
-								if(player.Butt().stretch.Get() > 5)
+								if(player.Butt().Tightness() > Butt.Tightness.loose)
 									Text.Add("As those ridged, slick appendages squish ", parse);
 								else
 									Text.Add("As his ridged, slimy prick squishes up ", parse);
@@ -1178,18 +1178,18 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 							}
 							Text.NL();
 							Text.Add("Up and down he lifts you and pulls you down, forcing his ", parse);
-							if(player.Butt().stretch.Get() > 5)
+							if(player.Butt().Tightness() > Butt.Tightness.loose)
 								Text.Add("[m1multiCockDesc] through your achingly stretched [anusDesc]. You can hear wet, fleshy noises as he squeezes his throbbing dicks between your sore cheeks again.", parse);
 							else
 								Text.Add("slimy, wet meat through your increasingly sloppier [anusDesc]. You can feel your clenches growing weaker, feel it becoming increasingly difficult to keep him out as his bulbous ridges and strangely textured rod slides in and out of your aching hole.", parse);
 							Text.NL();
 							Text.Add("For what seems like ages he drives into you, hoisting you up until less than an inch remains, leaving just his spaded, slick ", parse);
-							if(player.Butt().stretch.Get() > 5)
+							if(player.Butt().Tightness() > Butt.Tightness.loose)
 								Text.Add("tips inside of you, only for his tightly gripping claws to shove you down to the base of his throbbing spires. With his heavy shafts pulsating inside of you, you find yourself unable to hold back a quiet moan. [m1Name] smirks, grinding his hips against your [buttDesc]", parse);
 							else
 								Text.Add("tip lodged inside of your squeezable, [buttDesc]. His claws hold you tightly and you feel him suddenly wrenching you downward, burying his shaft in your soft insides. Grinning in satisfaction, he grinds his groin against your [buttDesc]", parse);
 							if(player.FirstCock()) {
-								if(player.Butt().stretch.Get() > 5)
+								if(player.Butt().Tightness() > Butt.Tightness.loose)
 									Text.Add(", his [m1multiCockDesc]", parse);
 								else
 									Text.Add(", his slimy flesh", parse);
@@ -1202,7 +1202,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 							
 							Gui.NextPrompt(function() {
 								Text.Clear();
-								if(player.Butt().stretch.Get() > 5) {
+								if(player.Butt().Tightness() > Butt.Tightness.loose) {
 									Text.Add("With one great <i>heave</i>, he shoves you upward, and you feel your [anusDesc] clench down around his pulsating tips. Even as they begin to twitch, you know what's coming. You relax your loose entrance as much as you can, right as you feel his firm hands pull you downward. At the same time, he bucks his hips upward, plunging himself into you one last time. Ridge after firm, fleshy ridge sinks into your body, and you feel his spaded tips sink deep into you, stretching your insides until they ache.", parse);
 									Text.NL();
 									Text.Add("His [m1multiCockDesc] spasm and pulse inside of you, and his hands squeeze your taut rump tightly.", parse);
@@ -1219,19 +1219,19 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 								var scenes = new EncounterTable();
 								scenes.AddEnc(function() {
 									if(player.FirstCock()) {
-										parse["s"] = player.Butt().stretch.Get() > 5 ? "s" : "";
-										parse["notS"] = player.Butt().stretch.Get() > 5 ? "" : "s";
+										parse["s"] = player.Butt().Tightness() > Butt.Tightness.loose ? "s" : "";
+										parse["notS"] = player.Butt().Tightness() > Butt.Tightness.loose ? "" : "s";
 										Text.Add("As his fat, slimy tip[s] hammer[notS] against your prostate, you feel yourself clenching tighter and tighter, your whole body locking up.", parse);
 										Text.NL();
 									}
 									Text.Add("The feeling of him sliding in and out of your body grows harder and harder to ignore, and the lizard's every thrust and hump makes your [anusDesc] <i>stretch</i> around his fat ridges. Faster and faster he rails you, until you can't hold it in anymore. You feel your head fall back, the sky looming above you, and you <i>howl</i> out as your slick hole clenches around [m1name]. You can feel the tubes running down the underside of his twin cocks bulge heavily, his potent, sticky cum quickly pumping through them and directly into ", parse);
-									if(player.Butt().stretch.Get() <= 5)
+									if(player.Butt().Tightness() <= Butt.Tightness.loose)
 										Text.Add("and onto ", parse);
 									Text.Add("your body.", parse);
 									Text.NL();
 									Text.Add("[m1Name]'s eyes roll back in his head as he rocks with you, and you feel your already full hole flooding with hot, reptilian cum.", parse);
 									Text.NL();
-									if(player.Butt().stretch.Get() > 5)
+									if(player.Butt().Tightness() > Butt.Tightness.loose)
 										Text.Add("Through both of his fat, bulbous dicks he fills you scarily quickly, and you feel it pushing deeper into your body with fleshy, grumbling noises centered on your gut. Viscous slime gushes out from your [anusDesc] in spurts as he overfills you, and his constant thrusting smears it all over your [buttDesc].", parse);
 									else
 										Text.Add("His heavy dick pumps thick, sticky gouts of reptilian slime into your gut, filling you with a deep seated heat. You feel [m1name]’s second dick throbbing and jumping between your cheeks, painting your [buttDesc] with virile, gooey spunk; you feel it dripping slowly down your flesh.", parse);
@@ -1260,8 +1260,8 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 								scenes.AddEnc(function() {
 									Text.Add("You feel him rocking faster and faster inside of you. His muzzle parts, and his tongue hangs out from his maw. You can feel his every thrust burying his fat, heavy ridges deeper inside of you, stretching you so achingly wide. It feels wonderful, the warm slime of his [m1multiCockDesc] sliding through your [anusDesc].", parse);
 									Text.NL();
-									parse["s"] = player.Butt().stretch.Get() > 5 ? "s" : "";
-									parse["notS"] = player.Butt().stretch.Get() > 5 ? "" : "s";
+									parse["s"] = player.Butt().Tightness() > Butt.Tightness.loose ? "s" : "";
+									parse["notS"] = player.Butt().Tightness() > Butt.Tightness.loose ? "" : "s";
 									if(player.FirstCock()) {
 										Text.Add("His fat, slick tip[s] batter[notS] your prostate, driving you harder against your own pleasure which grows harder and harder to resist. The wet slaps of his groin against you becomes hard to ignore, and you lean forward to try and support yourself.", parse);
 										Text.NL();
@@ -1276,7 +1276,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 									Text.Add("His thrusting grows shorter and shorter, and you can see his slitted eyes unfocusing. His breath comes heavily, and you can tell he's right at his limit. You wish you were at yours... Finally, with one, hard <i>thrust</i>, he slams his hips up against your [buttDesc], letting out a loud hiss of delight.", parse);
 									Text.NL();
 									Text.Add("Suddenly you feel his ", parse);
-									if(player.Butt().stretch.Get() > 5)
+									if(player.Butt().Tightness() > Butt.Tightness.loose)
 										Text.Add("twin ", parse);
 									else
 										Text.Add("immense ", parse);
@@ -1296,7 +1296,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 								Text.Add("In a moment, you can see that he's passed out.", parse);
 								Text.NL();
 								Text.Add("Gingerly you stand up, breathing hard, your cheeks burning. As his flesh pops free from your pucker you tremble, feeling his potent slime dripping from your hole. ", parse);
-								if(player.Butt().stretch.Get() > 5)
+								if(player.Butt().Tightness() > Butt.Tightness.loose)
 									Text.Add("Clenching your [anusDesc] as much as you can, you blush as you realize that it isn't managing to close entirely. ", parse);
 								Text.Add("As [m1name]'s thick spunk drips down your legs, you gather your things, claim the spoils of victory, and make to leave...", parse);
 								player.AddLustFraction(0.25);
@@ -1364,7 +1364,7 @@ Scenes.Lizards.WinPowerbottomAssert = function(enc) {
 	
 	Text.Clear();
 	Text.Add("You push his hands away, giving him a dark, sultry look. He lets out a low, hissing whine of discontentment. You can't help but grin, rolling your hips against his body as you stop him taking control. You know that your pleasure will be the last thing on [m1name]'s mind, and this is about <i>you</i>. You won. You clench your loose hole around his ", parse);
-	if(player.Butt().stretch.Get())
+	if(player.Butt().Tightness() > Butt.Tightness.loose)
 		Text.Add("pair of pulsing dicks ", parse);
 	else
 		Text.Add("twitching, eager shaft ", parse);
@@ -1379,7 +1379,7 @@ Scenes.Lizards.WinPowerbottomAssert = function(enc) {
 		Text.Add("Your [multiCockDesc] throb[notS], and you feel a shudder run down your spine as [m1name]'s own pair pulse in rhythm with yours.", parse);
 		Text.NL();
 	}
-	parse["s"] = player.Butt().stretch.Get() > 5 ? "s" : "";
+	parse["s"] = player.Butt().Tightness() > Butt.Tightness.loose ? "s" : "";
 	Text.Add("[m1Name] thrusts upward, burying his rock-solid, ridged pole[s] into your waiting passage. Your hands press down on his stomach, while his grip the ground firmly. Your [anusDesc] burns gently from the stretch, but he doesn’t let up, slowly pressing his hips upward against you. You hear yourself groaning softly, and move yourself steadily up, keeping him from sinking in further.", parse);
 	Text.NL();
 	Text.Add("<i>“Stop moving,”</i> you order. He ignores it, trying to push himself deeper again. You grunt softly and start to pull off of him as he lets out a hiss of discontentment. You pause, feeling his spires pulse, thick spurts of slime invading your body. Suddenly [m1name] stops moving, waiting, watching you carefully. You stop pulling off of him, and he begins to slide deeper into you once more. Immediately, you pull yourself off again, feeling his slippery flesh tugging free of your loose ass. [m1Name] tenses up, coming to a halt again.", parse);
@@ -1391,15 +1391,15 @@ Scenes.Lizards.WinPowerbottomAssert = function(enc) {
 		Text.Clear();
 		
 		Text.Add("Slowly, you begin to press yourself down onto him, keeping things to your own pace. The reptile under you squirms steadily, his face contorted uncomfortably as he holds himself back from bucking upward into you. Every time he looks at you, his muzzle reddened and his breathing heavy, you give him a warning look to remind him who’s in control, and what happens if he pushes. You feel his fat ridges sinking into you, ", parse);
-		if(player.Butt().stretch.Get() > 5)
+		if(player.Butt().Tightness() > Butt.Tightness.loose)
 			Text.Add("filling your body completely, both of his wet, slimy poles squishing together inside of you.", parse);
 		else
 			Text.Add("his twitching dick pulsing inside of you. His every movement sends tingles down your spine even as his second spire leaks that musky ooze onto your flesh.", parse);
 		Text.NL();
 		
 		if(player.FirstCock()) {
-			parse["s"] = player.Butt().stretch.Get() > 5 ? "s" : "";
-			parse["notS"] = player.Butt().stretch.Get() > 5 ? "" : "s";
+			parse["s"] = player.Butt().Tightness() > Butt.Tightness.loose ? "s" : "";
+			parse["notS"] = player.Butt().Tightness() > Butt.Tightness.loose ? "" : "s";
 			Text.Add("His spongy, drooling tip[s] grind[notS] against your engorged prostate, and you hear a soft, fleshy squelch as you grind yourself down onto him. He lets out a hiss of pleasure as you send a slick spurt of precum from your [multiCockDesc] over his chest.", parse);
 			Text.NL();
 		}
@@ -1412,12 +1412,12 @@ Scenes.Lizards.WinPowerbottomAssert = function(enc) {
 		else
 			Text.Add("into you once more.", parse);
 		Text.Add(" Deeper and deeper he slides, filling your clenching passageway completely.", parse);
-		if(player.Butt().stretch.Get() > 5)
+		if(player.Butt().Tightness() > Butt.Tightness.loose)
 			Text.Add(" Even loose as you are now, it’s a challenge to fit both of him at the same time.", parse);
 		Text.NL();
 		Text.Add("Each time you come close to fitting him completely, you find him just a little too thick, and have to rise again. Yet each time you stop, you find yourself fitting just a little bit more...", parse);
 		Text.NL();
-		if(player.Butt().stretch.Get() > 5) {
+		if(player.Butt().Tightness() > Butt.Tightness.loose) {
 			Text.Add("[m1Name] hisses out, his eyes glazing over as he squirms underneath you, and you clench around his twin lengths, delighting in the gasp it draws from his muzzle... and the warm fluid you feel filling you. You spread your legs further, feeling the muscles in your legs stretch as [m1name] stretches other ones for you. Up and down you bounce in his lap, breathing harder with each moment, your blood pounding in your ears.", parse);
 			Text.NL();
 			Text.Add("He feels so big inside of you, being taken by what feels like two males at once. You can feel him getting closer...", parse);
@@ -1438,7 +1438,7 @@ Scenes.Lizards.WinPowerbottomAssert = function(enc) {
 			Text.Add("You lift one hand, grabbing hold of your [multiCockDesc], stroking yourself rapidly, your eyes closing. It feels so good, you could almost...", parse);
 			Text.NL();
 		}
-		parse["of"] = player.Butt().stretch.Get() > 5 ? "of" : "and against";
+		parse["of"] = player.Butt().Tightness() > Butt.Tightness.loose ? "of" : "and against";
 		Text.Add("You can’t hold yourself back any longer. You feel it coming already, and can’t stop yourself as his fat meat pushes deep into you, sending you over the edge. You moan loudly, <i>ramming</i> yourself down into his lap, feeling his dense cocks hilt inside [of] you as your climax erupts.", parse);
 
 		player.AddLustFraction(-1);
@@ -1453,7 +1453,7 @@ Scenes.Lizards.WinPowerbottomAssert = function(enc) {
 			Text.NL();
 		}
 		Text.Add("As your pucker clenches down around [m1name] over and over, he <i>howls</i> out. Helplessly he bucks upward into you, humping against your entrance wildly and sending sharp jolts through your system. Cumming messily, you dimly feel his own twin cocks begin to throb heavily, set off by your powerful clenching. Scaled hands grip your hips, holding you down as he finishes inside your ", parse);
-		if(player.Butt().stretch.Get() > 5)
+		if(player.Butt().Tightness() > Butt.Tightness.loose)
 			Text.Add("loose, aching hole. His twin, heavy dicks spurt inside of you, sending jet after jet of sticky lizard spunk deep into your gut. You feel yourself rapidly growing full. As his internal balls empty out inside of you, it grows too much. His slimy cum gushes out of your aching hole, still clenching to try and keep as much as possible.", parse);
 		else
 			Text.Add("tight, clenching hole. You feel his dicks stiffen, growing thicker right before a wet, sticky gush of reptilian sperm pumps into your body. As one dick fills you with his slimy essence, you feel warm spunk splattering between your cheeks, [m1name]’s second shaft coating you in his warmth.", parse);

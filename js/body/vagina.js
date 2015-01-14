@@ -104,14 +104,14 @@ Vagina.prototype.nounPlural = function() {
 }
 Vagina.prototype.Desc = function() {
 	var vagArea = this.capacity.Get() * this.stretch.Get();
-	if     (vagArea <= 5  ) ret = {a:"an", adj: "extremely tight"};
-	else if(vagArea <= 10 ) ret = {a:"a", adj: "very tight"};
-	else if(vagArea <= 20 ) ret = {a:"a", adj: "tight"};
-	else if(vagArea <= 30 ) ret = {a:"a", adj: "well-proportioned"};
-	else if(vagArea <= 40 ) ret = {a:"a", adj: "flexible"};
-	else if(vagArea <= 50 ) ret = {a:"a", adj: "very flexible"};
-	else if(vagArea <= 70 ) ret = {a:"a", adj: "loose"};
-	else if(vagArea <= 100) ret = {a:"a", adj: "slutty"};
+	if     (vagArea <= 3 ) ret = {a:"an", adj: "extremely tight"};
+	else if(vagArea <= 4 ) ret = {a:"a", adj: "very tight"};
+	else if(vagArea <= 5 ) ret = {a:"a", adj: "tight"};
+	else if(vagArea <= 6 ) ret = {a:"a", adj: "well-proportioned"};
+	else if(vagArea <= 8 ) ret = {a:"a", adj: "flexible"};
+	else if(vagArea <= 10) ret = {a:"a", adj: "very flexible"};
+	else if(vagArea <= 12) ret = {a:"a", adj: "loose"};
+	else if(vagArea <= 15) ret = {a:"a", adj: "slutty"};
 	else                    ret = {a:"a", adj: "gaping"};
 	return ret;
 }
