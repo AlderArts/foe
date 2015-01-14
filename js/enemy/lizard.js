@@ -282,7 +282,7 @@ Scenes.Lizards.WinMale = function(enc) {
 	};
 	
 	Text.Clear();
-	Text.Add("You grin triumphantly, standing over the reptile you just trounced, looking down at him victoriously. He lays there on the ground, his chest heaving and his breath coming as a sibilant hiss. He gazes to your feet, his slitted eyes defeated.", parse);
+	Text.Add("You grin triumphantly, standing over the reptile you just trounced, looking down at him victoriously. He lies there on the ground, his chest heaving and his breath coming as a sibilant hiss. He gazes to your feet, his slitted eyes defeated.", parse);
 	Text.NL();
 	Text.Add("You smirk at him. The creatures are known for abusing those they beat, perhaps you should return the favour?", parse);
 	
@@ -940,7 +940,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 	
 	Text.Clear();
 	
-	Text.Add("Your eyes drop to the reptile's groin, and you give him a broad grin. You step up to him, pushing a hand to his snout. <i>“Lay down,”</i> you instruct. He looks questioningly at you, but you ignore him. He's not the one who won, after all. After a moment of hesitation, he slowly lays down on his back. His legs cross just enough to cover his [m1anusDesc] from you. You smirk, finding it cute that the bulky male fears you might do something like that to him.", parse);
+	Text.Add("Your eyes drop to the reptile's groin, and you give him a broad grin. You step up to him, pushing a hand to his snout. <i>“Lie down,”</i> you instruct. He looks questioningly at you, but you ignore him. He's not the one who won, after all. After a moment of hesitation, he slowly lies down on his back. His legs cross just enough to cover his [m1anusDesc] from you. You smirk, finding it cute that the bulky male fears you might do something like that to him.", parse);
 	Text.NL();
 	if(!player.FirstCock()) {
 		Text.Add("You're not even really sure what you'd do.", parse);
@@ -957,7 +957,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 		options.push({ nameStr : "Cunt",
 			func : function() {
 				Text.Clear();
-				Text.Add("Slowly you inch forward, moving until your rump is poised just over his slimier looking shaft, your aching cunt hovering above his reptilian, bulbous tip. He looks at you in excitement, seeming to have realized that he won't be abused today. His hand raise to help steady your hips, and you let him. Feeling his strong, scaled hands on your hips, you slowly begin to lower yourself, feeling his slick, heavy [m1cockDesc] meet the outer folds of your wet [vagDesc].", parse);
+				Text.Add("Slowly you inch forward, moving until your rump is poised just over his slimier looking shaft, your aching cunt hovering above his reptilian, bulbous tip. He looks at you in excitement, seeming to have realized that he won't be abused today. The lizard raises his hand to help steady your hips, and you let him. Feeling his strong, scaled hands on your hips, you slowly begin to lower yourself, feeling his slick, heavy [m1cockDesc] meet the outer folds of your wet [vagDesc].", parse);
 				Text.NL();
 				Text.Add("You let gravity help you, and his strong hands. The pressure builds at your entrance, before you hear him let out a hiss. At the same time, his fat, hot tip pushes past the lips of your cunt, and you feel him throb powerfully inside of you. He tries to pull you down further onto his dick, but your hands grab a hold of his warningly. [m1Name] stops, seeming slightly sullen. Too bad, you think. This is <i>your</i> victory.", parse);
 				Text.NL();
@@ -1043,7 +1043,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 			Text.Add("You let out a soft breath, closing your eyes.", parse);
 			Text.NL();
 			if(player.FirstVag()) {
-				Text.Add("Your moist cunt aches to be filled, but you want to scratch a different itch with the yellow-green reptile under you. Another reason not to let him hold your hips; he'd breed you til you blacked out if he got control, most likely.", parse);
+				Text.Add("Your moist cunt aches to be filled, but you want to scratch a different itch with the yellow-green reptile under you. Another reason not to let him hold your hips; he'd breed you till you blacked out if he got control, most likely.", parse);
 				Text.NL();
 				player.AddLustFraction(0.1);
 			}
@@ -1100,7 +1100,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 			Gui.NextPrompt(function() {
 				Text.Clear();
 				if(player.LustLevel() > 0.75) {
-					Text.Add("Slowly you let gravity force you downward, feeling as inch after inch of his flesh slides into your body. His hands again come to your hips.", parse);
+					Text.Add("Slowly you let gravity force you downward, feeling inch after inch of his flesh slide into your body. His hands again come to your hips.", parse);
 					Text.NL();
 					Text.Add("You move to brush them away again, but pause... The look on his face is one of mounting bliss, and the pleasure that courses through your body has your veins aflame with need. You'll never be taken as hard as if you let him take you – but maybe that's a good thing...", parse);
 					Text.Flush();
