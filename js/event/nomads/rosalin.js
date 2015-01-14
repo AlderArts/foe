@@ -546,7 +546,7 @@ Scenes.Rosalin.TalkPrompt = function() {
 				Text.NL();
 				// Set slut to 60
 				cale.slut.IncreaseStat(60, 100);
-				cale.Butt().capacity.base = 90;
+				cale.Butt().capacity.base = 15;
 				
 				Text.Add("<i>“Haah… hot… so hot,”</i> Cale pants, barely able to form sentences anymore, so overwhelmed is he by the new sensations. <i>“Fuck! Need to fuck! Someone… fuck me!”</i> He begins pawing at his butt desperately, throwing pleading glances at you and Rosalin.", parse);
 				var cocksInAss = player.CocksThatFit(cale.Butt());

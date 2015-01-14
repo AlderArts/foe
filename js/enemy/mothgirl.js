@@ -248,7 +248,7 @@ Scenes.Mothgirl.WinPrompt = function() {
 	var moth = enc.moth;
 	SetGameState(GameState.Event);
 	
-	var cocksInAss = player.CocksThatFit(moth.Butt(), null, 30);
+	var cocksInAss = player.CocksThatFit(moth.Butt(), null, 5);
 	var p1cock = player.BiggestCock(cocksInAss);
 	var strapon = p1cock ? p1cock.isStrapon : false;
 	

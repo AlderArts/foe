@@ -623,7 +623,7 @@ Intro.DemonGift = function() {
 			func : function() {
 				Text.AddOutput("You let out a shuddering gasp as you feel your insides shift around. You feel you could probably take a lot bigger cocks now...");
 				
-				player.FirstVag().capacity.base += 15;
+				player.FirstVag().capacity.base++;
 				
 				Intro.timesTakenDemonGift++;
 			
@@ -665,7 +665,7 @@ Intro.DemonGift = function() {
 		func : function() {
 			Text.AddOutput("Groaning, you feel your insides shift around, allowing for larger things being to be put in you butt!");
 			
-			player.Butt().capacity.base += 15;
+			player.Butt().capacity.base++;
 			
 			Intro.timesTakenDemonGift++;
 			

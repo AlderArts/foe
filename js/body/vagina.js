@@ -54,6 +54,14 @@ Vagina.prototype.Fits = function(cock, extension) {
 	extension = extension || 0;
 	return cock.length.Thickness() <= (this.Cap() + extension);
 }
+Vagina.prototype.Tightness = function() {
+	return this.stretch.Get();
+}
+Vagina.Tightness = {
+	tight  : 1,
+	loose  : 2,
+	gaping : 3
+}
 
 // Create a clitcock from a vagina
 // Returns the cock

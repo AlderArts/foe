@@ -4018,8 +4018,8 @@ Scenes.Miranda.HomeDommySex = function() {
 	Text.Add("<i>“How do you want me?”</i> she moans softly in your ear. <i>“Decide quickly, or I might decide myself.”</i> One of her hands trail downward, pawing at her britches in order to free her stiffening monster cock from its confines.", parse);
 	Text.Flush();
 	
-	var cocksInVag = player.CocksThatFit(miranda.FirstVag(), false, 15);
-	var cocksInAss = player.CocksThatFit(miranda.Butt(), false, 15);
+	var cocksInVag = player.CocksThatFit(miranda.FirstVag(), false, 5);
+	var cocksInAss = player.CocksThatFit(miranda.Butt(), false, 5);
 	
 	//[Fuck vag][Fuck anal][Ride vag][Ride anal][Cellar/Dungeon]
 	var options = new Array();

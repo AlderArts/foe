@@ -51,7 +51,7 @@ function GolQueen() {
 	this.FirstCock().thickness.base = 10;
 	
 	//3'
-	this.FirstVag().capacity.base = 91;
+	this.FirstVag().capacity.base = 30;
 	this.FirstVag().virgin = false;
 	
 	// Set hp and mana to full

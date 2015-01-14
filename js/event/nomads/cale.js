@@ -82,10 +82,10 @@ function Cale(storage) {
 	if(storage) this.FromStorage(storage);
 	
 	if(this.Slut() >= 60) {
-		this.Butt().capacity.base = 90;
+		this.Butt().capacity.base = 15;
 	}
 	else {
-		this.Butt().capacity.base = 35;
+		this.Butt().capacity.base = 5;
 	}
 }
 Cale.prototype = new Entity();
