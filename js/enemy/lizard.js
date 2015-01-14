@@ -202,71 +202,72 @@ Scenes.Lizards.WinPrompt = function() {
 	SetGameState(GameState.Event);
 	
 	var enc = this;
-	enc.finalize = function() {
-		Encounter.prototype.onVictory.call(enc);
-	}
 	
-	Text.Clear();
-	
-	var parse = {
-		two : enc.third ? " two" : ""
-	};
-	var scene;
-	
-	var odds = enc.third ? (enc.third.body.Gender() == Gender.male ? 0.66 : 0.33) : 0.5;
-	
-	// Male
-	if(Math.random() < odds) {
-		scene = function() { Scenes.Lizards.WinMale(enc); };
-		parse["m1himher"]  = "him";
-		parse["m1hisher"]  = "his";
-		parse["m2hisher"]  = "her";
-	}
-	// Female
-	else {
-		scene = function() { Scenes.Lizards.WinFemale(enc); };
-		parse["m1himher"]  = "her";
-		parse["m1hisher"]  = "her";
-		parse["m2hisher"]  = "his";
-	}
-	parse["m2hisherTheir"] = enc.third ? "their" : parse["m2hisher"];
-	
-	if(Math.random() < 0.6) {
-		Text.Add("With a solid <i>thump</i>, you beat your foe to the ground. The reptile tries to scramble away, but you step in front of [m1himher], blocking [m1hisher] path. As you stop [m1himher], you see the other[two] scurry away, leaving [m2hisherTheir] companion to [m1hisher] fate...", parse);
+	Gui.Callstack.push(function() {
+		Text.Clear();
 		
-		Gui.NextPrompt(function() {
-			scene(enc);
-		});
-	}
-	else {
-		Text.Add("You feint one way, then strike the finishing blow to the surprised reptile in front of you. She slumps to the ground, and you move to block her escape. Suddenly you hear an alarmed hiss of breath. Turning your head, you see the beaten male looking up at you, breathing slowly. He looks to the female, then back at you.", parse);
-		Text.NL();
-		Text.Add("<i>“Spare her,”</i> he hisses. <i>“Take... me.”</i>", parse);
-		Text.NL();
-		Text.Add("You blink in pleased surprise. It seems that, this time, you have your pick of the litter...", parse);
+		var parse = {
+			two : enc.third ? " two" : ""
+		};
+		var scene;
 		
-		//[Male][Female]
-		var options = new Array();
-		options.push({ nameStr : "Male",
-			func : function() { Scenes.Lizards.WinMale(enc); }, enabled : true,
-			tooltip : "Listen to his pleas and take out your victory on him instead."
-		});
-		options.push({ nameStr : "Female",
-			func : function() { Scenes.Lizards.WinFemale(enc); }, enabled : true,
-			tooltip : "Ignore him and claim his female companion."
-		});
-		options.push({ nameStr : "Neither",
-			func : function() {
-				Text.NL();
-				Text.Add("Rather than taking out your victory rush on your fallen foes, you opt to continue on your travels.", parse);
-				Text.Flush();
-				Gui.NextPrompt(enc.finalize);
-			}, enabled : true,
-			tooltip : "Have mercy on them."
-		});
-		Gui.SetButtonsFromList(options);
-	}
-	Text.Flush();
+		var odds = enc.third ? (enc.third.body.Gender() == Gender.male ? 0.66 : 0.33) : 0.5;
+		
+		// Male
+		if(Math.random() < odds) {
+			scene = function() { Scenes.Lizards.WinMale(enc); };
+			parse["m1himher"]  = "him";
+			parse["m1hisher"]  = "his";
+			parse["m2hisher"]  = "her";
+		}
+		// Female
+		else {
+			scene = function() { Scenes.Lizards.WinFemale(enc); };
+			parse["m1himher"]  = "her";
+			parse["m1hisher"]  = "her";
+			parse["m2hisher"]  = "his";
+		}
+		parse["m2hisherTheir"] = enc.third ? "their" : parse["m2hisher"];
+		
+		if(Math.random() < 0.6) {
+			Text.Add("With a solid <i>thump</i>, you beat your foe to the ground. The reptile tries to scramble away, but you step in front of [m1himher], blocking [m1hisher] path. As you stop [m1himher], you see the other[two] scurry away, leaving [m2hisherTheir] companion to [m1hisher] fate...", parse);
+			
+			Gui.NextPrompt(function() {
+				scene(enc);
+			});
+		}
+		else {
+			Text.Add("You feint one way, then strike the finishing blow to the surprised reptile in front of you. She slumps to the ground, and you move to block her escape. Suddenly you hear an alarmed hiss of breath. Turning your head, you see the beaten male looking up at you, breathing slowly. He looks to the female, then back at you.", parse);
+			Text.NL();
+			Text.Add("<i>“Spare her,”</i> he hisses. <i>“Take... me.”</i>", parse);
+			Text.NL();
+			Text.Add("You blink in pleased surprise. It seems that, this time, you have your pick of the litter...", parse);
+			
+			//[Male][Female]
+			var options = new Array();
+			options.push({ nameStr : "Male",
+				func : function() { Scenes.Lizards.WinMale(enc); }, enabled : true,
+				tooltip : "Listen to his pleas and take out your victory on him instead."
+			});
+			options.push({ nameStr : "Female",
+				func : function() { Scenes.Lizards.WinFemale(enc); }, enabled : true,
+				tooltip : "Ignore him and claim his female companion."
+			});
+			options.push({ nameStr : "Neither",
+				func : function() {
+					Text.NL();
+					Text.Add("Rather than taking out your victory rush on your fallen foes, you opt to continue on your travels.", parse);
+					Text.Flush();
+					Gui.NextPrompt();
+				}, enabled : true,
+				tooltip : "Have mercy on them."
+			});
+			Gui.SetButtonsFromList(options);
+		}
+		Text.Flush();
+	});
+	
+	Encounter.prototype.onVictory.call(enc);
 }
 
 Scenes.Lizards.WinMale = function(enc) {
@@ -325,7 +326,7 @@ Scenes.Lizards.WinMale = function(enc) {
 			Text.Clear();
 			Text.Add("You shake your head, looking down at [m1name]. He gazes up at you warily, as if expecting something bad to happen. Lucky for him, you're not in the mood for reptile today.", parse);
 			Text.Flush();
-			Gui.NextPrompt(enc.finalize);
+			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "It's tempting, but you have better things to do than teach a reptile his place."
 	});
@@ -399,7 +400,7 @@ Scenes.Lizards.WinFemale = function(enc) {
 			Text.Clear();
 			Text.Add("You shake your head, looking down at [m1name]. She gazes up at you warily, as if expecting something bad to happen. Lucky for her, you're not in the mood for reptile today.", parse);
 			Text.Flush();
-			Gui.NextPrompt(enc.finalize);
+			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "It's tempting, but you have better things to do than teach a reptile her place."
 	});
@@ -509,7 +510,7 @@ Scenes.Lizards.WinFuckVag = function(enc) {
 	
 	world.TimeStep({minute : 30});
 	
-	Gui.NextPrompt(enc.finalize);
+	Gui.NextPrompt();
 }
 
 Scenes.Lizards.WinTailpeg = function(enc) {
@@ -718,7 +719,7 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 			Text.Add("Your party joins you.", parse);
 		}
 		Text.Flush();
-		Gui.NextPrompt(enc.finalize);
+		Gui.NextPrompt();
 	});
 }
 
@@ -842,7 +843,7 @@ Scenes.Lizards.WinClaimAss = function(enc, enemy) {
 		}
 		Text.Flush();
 		
-		Gui.NextPrompt(enc.finalize);
+		Gui.NextPrompt();
 	});
 }
 
@@ -910,7 +911,7 @@ Scenes.Lizards.WinBlowjob = function(enc, enemy) {
 		
 		player.AddLustFraction(-1);
 		
-		Gui.NextPrompt(enc.finalize);
+		Gui.NextPrompt();
 	});
 }
 
@@ -1008,7 +1009,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 							Scenes.Lizards.Impregnate(player, enemy);
 							
 							player.AddLustFraction(-1);
-							Gui.NextPrompt(enc.finalize);
+							Gui.NextPrompt();
 						}, enabled : true,
 						tooltip : "Being egg-heavy to a virile male like this one sounds perfect."
 					});
@@ -1311,7 +1312,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 								}
 								Text.Flush();
 								
-								Gui.NextPrompt(enc.finalize);
+								Gui.NextPrompt();
 							});
 							
 						}, enabled : true,
@@ -1476,7 +1477,7 @@ Scenes.Lizards.WinPowerbottomAssert = function(enc) {
 		}
 		Text.Flush();
 		
-		Gui.NextPrompt(enc.finalize);
+		Gui.NextPrompt();
 	});
 }
 
@@ -1532,17 +1533,13 @@ Scenes.Lizards.WinPowerbottomDeny = function(enc) {
 	Text.Flush();
 							
 	player.AddLustFraction(-1);
-	Gui.NextPrompt(enc.finalize);
+	Gui.NextPrompt();
 }
 
 Scenes.Lizards.LossPrompt = function() {
 	SetGameState(GameState.Event);
-	Text.Clear();
 	
 	var enc = this;
-	enc.finalize = function() {
-		Encounter.prototype.onLoss.call(enc);
-	}
 	
 	var parse = {
 		breastDesc : function() { return player.FirstBreastRow().Short(); },
@@ -1555,36 +1552,42 @@ Scenes.Lizards.LossPrompt = function() {
 		leg        : function() { return player.LegDesc(); }
 	};
 	
-	if(player.LustLevel() > 0.6) {
-		Text.Add("You slump to the ground, finding it hard to keep your eyes focused on the leering, scaled creatures standing over you. Your body aches, and not just from bruises. ", parse);
-		// If male
-		if(player.FirstCock() && !player.FirstVag()) {
-			Text.Add("Your breathing comes in wheezes, and you can feel your pulse thundering in both your ears and your almost painfully aroused [numCocks].", parse);
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		if(player.LustLevel() > 0.6) {
+			Text.Add("You slump to the ground, finding it hard to keep your eyes focused on the leering, scaled creatures standing over you. Your body aches, and not just from bruises. ", parse);
+			// If male
+			if(player.FirstCock() && !player.FirstVag()) {
+				Text.Add("Your breathing comes in wheezes, and you can feel your pulse thundering in both your ears and your almost painfully aroused [numCocks].", parse);
+			}
+			// If female
+			else if(!player.FirstCock() && player.FirstVag()) {
+				Text.Add("Your [breastDesc] heave and you gaze steadily at the ground for several long, tense moments, feeling your [vagDesc] beginning to stick to your clothing as slick fluids drip from it.", parse);
+			}
+			// If herm
+			else if(player.FirstCock() && player.FirstVag()) {
+				Text.Add("You find it hard to concentrate through the fog being pumped through your brain by your dually aroused sexes. Your [vagDesc] quivers, and you can feel your own fluids trickling down your [leg]. Set to the rhythm of your cunt's slick clenching, you can feel the pulses sending shivers up and down your spine from your [numCocks].", parse);
+			}
+			Text.NL();
+			Text.Add("[m1Name] stops in front of you, gazing down over your heaving form, a smirk on [m1hisher] face. [m1HeShe] leans down, hands reaching for your shoulders. You don't even bother to resist. The way that [m1heshe] looks at you hungrily as [m1heshe] lifts you by your shoulders, intentions deviously obvious, you can't quite manage to bring yourself to regret losing the fight...", parse);
 		}
-		// If female
-		else if(!player.FirstCock() && player.FirstVag()) {
-			Text.Add("Your [breastDesc] heave and you gaze steadily at the ground for several long, tense moments, feeling your [vagDesc] beginning to stick to your clothing as slick fluids drip from it.", parse);
+		else { // NOT AROUSED
+			Text.Add("The final hit knocks you down to the ground leaving you momentarily stunned. You shake your head to try to settle your scrambled thoughts, only to see two big, scaled feet stop in front of your battered body. Before you can escape, the lizard's weapon clatters to the ground and two frighteningly powerful hands hoist you up into the air, where you find yourself face to face with the leering reptile.", parse);
 		}
-		// If herm
-		else if(player.FirstCock() && player.FirstVag()) {
-			Text.Add("You find it hard to concentrate through the fog being pumped through your brain by your dually aroused sexes. Your [vagDesc] quivers, and you can feel your own fluids trickling down your [leg]. Set to the rhythm of your cunt's slick clenching, you can feel the pulses sending shivers up and down your spine from your [numCocks].", parse);
-		}
-		Text.NL();
-		Text.Add("[m1Name] stops in front of you, gazing down over your heaving form, a smirk on [m1hisher] face. [m1HeShe] leans down, hands reaching for your shoulders. You don't even bother to resist. The way that [m1heshe] looks at you hungrily as [m1heshe] lifts you by your shoulders, intentions deviously obvious, you can't quite manage to bring yourself to regret losing the fight...", parse);
-	}
-	else { // NOT AROUSED
-		Text.Add("The final hit knocks you down to the ground leaving you momentarily stunned. You shake your head to try to settle your scrambled thoughts, only to see two big, scaled feet stop in front of your battered body. Before you can escape, the lizard's weapon clatters to the ground and two frighteningly powerful hands hoist you up into the air, where you find yourself face to face with the leering reptile.", parse);
-	}
-	Text.Flush();
-	
-	Gui.NextPrompt(function() {
-		var scenes = new EncounterTable();
+		Text.Flush();
 		
-		scenes.AddEnc(function() { Scenes.Lizards.LossMale.call(enc);   });
-		scenes.AddEnc(function() { Scenes.Lizards.LossFemale.call(enc); });
-		
-		scenes.Get();
+		Gui.NextPrompt(function() {
+			var scenes = new EncounterTable();
+			
+			scenes.AddEnc(function() { Scenes.Lizards.LossMale.call(enc);   });
+			scenes.AddEnc(function() { Scenes.Lizards.LossFemale.call(enc); });
+			
+			scenes.Get();
+		});
 	});
+	
+	
+	Encounter.prototype.onLoss.call(enc);
 }
 
 Scenes.Lizards.LossMale = function() {
@@ -1799,7 +1802,7 @@ Scenes.Lizards.LossMaleVagVariations = function() {
 				Text.Add("Dimly, you can hear the other reptile[s] finishing with your companion[s2], leaving [group] in a similar state...", { group: party.Two() ? "both of you" : "your entire group", s: enc.third ? "s" : "", s2: party.Two() ? "" : "s" });
 			}
 			Text.Flush();
-			Gui.NextPrompt(enc.finalize);
+			Gui.NextPrompt();
 		});
 		
 	});
@@ -1881,7 +1884,7 @@ Scenes.Lizards.LossMaleVagVariations = function() {
 				}
 				Text.Flush();
 				player.AddLustFraction(0.05);
-				Gui.NextPrompt(enc.finalize);
+				Gui.NextPrompt();
 			});
 			scenes2.AddEnc(function() {
 				Text.Add("He holds you in place, before letting out a hiss. <i>“I don't want my line tainted by a weakling like you...”</i>", parse);
@@ -1897,7 +1900,7 @@ Scenes.Lizards.LossMaleVagVariations = function() {
 					Text.Add("You shudder, feeling his slime dripping off your body. You close your eyes, and sleep quickly claims you.", parse);
 				Text.Flush();
 				player.AddLustFraction(0.15);
-				Gui.NextPrompt(enc.finalize);
+				Gui.NextPrompt();
 			});
 			scenes2.Get();
 		});
@@ -1950,7 +1953,7 @@ Scenes.Lizards.LossMaleCockVariations = function() {
 		Text.Add("You're not sure whether you're glad to have gotten away unscathed, or offended. Out of nowhere the butt of his weapon collides with your head, and you black out entirely.", parse);
 		Text.Flush();
 		player.AddLustFraction(-0.05);
-		Gui.NextPrompt(enc.finalize);
+		Gui.NextPrompt();
 	});
 	// ORAL
 	scenes.AddEnc(function() {
@@ -2022,7 +2025,7 @@ Scenes.Lizards.LossMaleCockVariations = function() {
 				Text.Flush();
 				
 				player.AddLustFraction(0.25);
-				Gui.NextPrompt(enc.finalize);
+				Gui.NextPrompt();
 			}, enabled : true,
 			tooltip : "There's no point fighting with his cock already halfway down your throat..."
 		});
@@ -2067,7 +2070,7 @@ Scenes.Lizards.LossMaleCockVariations = function() {
 				});
 				scenes2.Get();
 				Text.Flush();
-				Gui.NextPrompt(enc.finalize);
+				Gui.NextPrompt();
 			}, enabled : true,
 			tooltip : "You're not giving this monster pleasure without another fight!"
 		});
@@ -2145,7 +2148,7 @@ Scenes.Lizards.LossMaleCockVariations = function() {
 				if(parse.climaxNr > 21) parse.climaxNr = 21;
 				Text.Add("After your [climaxNr]th climax, you find yourself growing faint... and black out, still with [m1name] milking your [cockDesc], even though you're only shooting blanks now...", parse);
 				Text.Flush();
-				Gui.NextPrompt(enc.finalize);
+				Gui.NextPrompt();
 			});
 		}, 1.0, function() { return player.FirstCock(); });
 		// 75%, get fucked
@@ -2179,7 +2182,7 @@ Scenes.Lizards.LossMaleCockVariations = function() {
 				Text.Add("Dimly, you can hear the other reptile[s] finishing with [party], leaving [all] of you in a similar state...", { s: enc.third ? "s" : "", party: party.Two() ? member1.name : "your group", all: party.Two() ? "both" : "all" });
 			player.AddLustFraction(0.2);
 			Text.Flush();
-			Gui.NextPrompt(enc.finalize);
+			Gui.NextPrompt();
 		}, 3.0);
 		scenes2.Get();
 	});
@@ -2328,7 +2331,7 @@ Scenes.Lizards.LossFemale = function() {
 			}
 			Text.Flush();
 			player.AddLustFraction(0.3);
-			Gui.NextPrompt(enc.finalize);
+			Gui.NextPrompt();
 		});
 	}, 1.0);
 	// GENDER SPECIFIC SCENES (COCK)
@@ -2500,7 +2503,7 @@ Scenes.Lizards.LossFemale = function() {
 				else
 					Text.Add("Some time later you awake, and find her gone. You gather your things slowly, before heading off again.", parse);
 				Text.Flush();
-				Gui.NextPrompt(enc.finalize);
+				Gui.NextPrompt();
 			});
 		});
 	}, 1.0, function() { return player.FirstCock(); });
@@ -2753,7 +2756,7 @@ Scenes.Lizards.LossFemale = function() {
 			world.TimeStep({hour: 2});
 			player.subDom.DecreaseStat(-75, 1);
 			
-			Gui.NextPrompt(enc.finalize);
+			Gui.NextPrompt();
 		});
 	}, 1.0, function() { return true; });
 	scenes.Get();
