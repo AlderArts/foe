@@ -259,40 +259,39 @@ Scenes.Mothgirl.WinPrompt = function() {
 	
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
-	enc.finalize = function() {
-		Encounter.prototype.onVictory.call(enc);
-	};
-	
-	Text.Clear();
-	Text.Add("With a cry, the moth-girl tumbles to the ground, finally beaten. She tries to scramble away from you, but you easily take hold of the downy fuzz around her neck, hefting her to her feet as you decide what to do with this bold little slut…", parse);
-	Text.Flush();
-	
-	var options = new Array();
-	if(player.FirstCock()) {
-		options.push({ nameStr : "Titfuck",
-			func : function() {
-				Scenes.Mothgirl.WinTitfuck(enc);
-			}, enabled : true,
-			tooltip : Text.Parse("Shove[oneof] your cock[s] between those big, succulent breasts of hers!", parse)
-		});
-	}
-	if(p1cock) {
-		options.push({ nameStr : "Anal",
-			func : function() {
-				Scenes.Mothgirl.WinAnal(enc, cocksInAss);
-			}, enabled : cocksInAss.length > 0,
-			tooltip : Text.Parse("Stick your [acocks] in her butt!", parse)
-		});
-	}
-	if(player.FirstVag()) {
-		options.push({ nameStr : "Get Oral",
-			func : function() {
-				Scenes.Mothgirl.WinCunn(enc);
-			}, enabled : true,
-			tooltip : Text.Parse("Play with the moth's tits and make her eat your pussy!", parse)
-		});
-	}
-	Gui.SetButtonsFromList(options, true);
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		Text.Add("With a cry, the moth-girl tumbles to the ground, finally beaten. She tries to scramble away from you, but you easily take hold of the downy fuzz around her neck, hefting her to her feet as you decide what to do with this bold little slut…", parse);
+		Text.Flush();
+		
+		var options = new Array();
+		if(player.FirstCock()) {
+			options.push({ nameStr : "Titfuck",
+				func : function() {
+					Scenes.Mothgirl.WinTitfuck(enc);
+				}, enabled : true,
+				tooltip : Text.Parse("Shove[oneof] your cock[s] between those big, succulent breasts of hers!", parse)
+			});
+		}
+		if(p1cock) {
+			options.push({ nameStr : "Anal",
+				func : function() {
+					Scenes.Mothgirl.WinAnal(enc, cocksInAss);
+				}, enabled : cocksInAss.length > 0,
+				tooltip : Text.Parse("Stick your [acocks] in her butt!", parse)
+			});
+		}
+		if(player.FirstVag()) {
+			options.push({ nameStr : "Get Oral",
+				func : function() {
+					Scenes.Mothgirl.WinCunn(enc);
+				}, enabled : true,
+				tooltip : Text.Parse("Play with the moth's tits and make her eat your pussy!", parse)
+			});
+		}
+		Gui.SetButtonsFromList(options, true);
+	});
+	Encounter.prototype.onVictory.call(enc);
 }
 
 Scenes.Mothgirl.WinTitfuck = function(enc) {
@@ -349,7 +348,7 @@ Scenes.Mothgirl.WinTitfuck = function(enc) {
 	
 	player.AddSexExp(2);
 	
-	Gui.NextPrompt(enc.finalize);
+	Gui.NextPrompt();
 }
 
 Scenes.Mothgirl.WinAnal = function(enc, cocksInAss) {
@@ -446,7 +445,7 @@ Scenes.Mothgirl.WinAnal = function(enc, cocksInAss) {
 	Text.Add("You laugh and pat her thigh before grabbing your gear and staggering off, leaving her to enjoy her cum-soaked afterglow.", parse);
 	Text.Flush();
 	
-	Gui.NextPrompt(enc.finalize);
+	Gui.NextPrompt();
 }
 
 Scenes.Mothgirl.WinCunn = function(enc) {
@@ -495,7 +494,7 @@ Scenes.Mothgirl.WinCunn = function(enc) {
 	Text.Add("When you come to your senses, you find yourself rolled on your back beside the moth-girl, panting hard. She grins at you, <i>“You really know how to go right for a girl's weak spot, huh?”</i> she giggles. You cock an eyebrow at the thief, seeing her grinning dumbly as her long tongue laps your fem-spunk off the tops of her breasts, happily sucking up your juices. For someone who just lost a fight, she's sure happy about it. For your part, you grab your gear before staggering off, leaving her to enjoy her cum-soaked afterglow.", parse);
 	Text.Flush();
 	
-	Gui.NextPrompt(enc.finalize);
+	Gui.NextPrompt();
 }
 
 Scenes.Mothgirl.Loss = function(enc, traded) {

@@ -608,48 +608,47 @@ Scenes.Equine.WinPrompt = function() {
 	else
 		parse["party"] = "";
 	
-	enc.finalize = function() {
-		Encounter.prototype.onVictory.call(enc);
-	};
-	
-	Text.Clear();
-	Text.Add("You[party] stand down as the defeated equines slump to the ground, panting with exhaustion. The pair exchanges resigned glances, weakly holding hands as they brace themselves for whatever abuse you intend to inflict. The way they fidget indicates that they might even be excited by the prospect.", parse);
-	Text.Flush();
-	
-	//[name]
-	var options = new Array();
-	if(player.FirstCock()) {
-		options.push({ nameStr : "Fuck her",
-			func : function() {
-				Scenes.Equine.WinFuckHer(enc);
-			}, enabled : true,
-			tooltip : "This rowdy mare gave you a hard time - it’s only proper you return the favor..."
-		});
-	}
-	if(player.FirstVag()) {
-		options.push({ nameStr : "Ride him",
-			func : function() {
-				Scenes.Equine.WinRideHimVag(enc);
-			}, enabled : true,
-			tooltip : "Time for a little rodeo. Mount up!"
-		});
-	}
-	/* TODO
-	options.push({ nameStr : "Leave",
-		func : function() {
-			
-		}, enabled : true,
-		tooltip : ""
-	});
-	*/
-	
-	Gui.SetButtonsFromList(options, true, function() {
-		Text.NL();
-		Text.Add("However, you aren't interesting in taking that kind of tribute right now. You content yourself with rifling through their meager belongings, getting in a quick grope on one or the other just to hear them moan. You stow your loot and turn on your heel, leaving your foes to stare after you in confusion and relief... and perhaps a bit of disappointment.", parse);
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		Text.Add("You[party] stand down as the defeated equines slump to the ground, panting with exhaustion. The pair exchanges resigned glances, weakly holding hands as they brace themselves for whatever abuse you intend to inflict. The way they fidget indicates that they might even be excited by the prospect.", parse);
 		Text.Flush();
 		
-		Gui.NextPrompt(enc.finalize);
+		//[name]
+		var options = new Array();
+		if(player.FirstCock()) {
+			options.push({ nameStr : "Fuck her",
+				func : function() {
+					Scenes.Equine.WinFuckHer(enc);
+				}, enabled : true,
+				tooltip : "This rowdy mare gave you a hard time - it’s only proper you return the favor..."
+			});
+		}
+		if(player.FirstVag()) {
+			options.push({ nameStr : "Ride him",
+				func : function() {
+					Scenes.Equine.WinRideHimVag(enc);
+				}, enabled : true,
+				tooltip : "Time for a little rodeo. Mount up!"
+			});
+		}
+		/* TODO
+		options.push({ nameStr : "Leave",
+			func : function() {
+				
+			}, enabled : true,
+			tooltip : ""
+		});
+		*/
+		
+		Gui.SetButtonsFromList(options, true, function() {
+			Text.NL();
+			Text.Add("However, you aren't interesting in taking that kind of tribute right now. You content yourself with rifling through their meager belongings, getting in a quick grope on one or the other just to hear them moan. You stow your loot and turn on your heel, leaving your foes to stare after you in confusion and relief... and perhaps a bit of disappointment.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		});
 	});
+	Encounter.prototype.onVictory.call(enc);
 }
 
 //TODO
@@ -785,7 +784,7 @@ Scenes.Equine.WinFuckHer = function(enc) {
 	Text.Add("The equine male stares at you blankly until understanding washes over him, and he flattens his ears against his head in embarrassment at your order. With noticeable reluctance, he leans over the mare and begins licking up your seed, wincing at the taste but not daring to refuse you. Satisfied that you've made an impression on the pair, you turn about and[p] head back to the road.", parse);
 	Text.Flush();
 	
-	Gui.NextPrompt(enc.finalize);
+	Gui.NextPrompt();
 }
 
 Scenes.Equine.WinRideHimVag = function(enc) {
@@ -926,5 +925,5 @@ Scenes.Equine.WinRideHimVag = function(enc) {
 	Text.Add("Parting shot, indeed.", parse);
 	Text.Flush();
 	
-	Gui.NextPrompt(enc.finalize);
+	Gui.NextPrompt();
 }

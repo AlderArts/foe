@@ -512,137 +512,137 @@ Scenes.Felines.WinPrompt = function() {
 		heshe        : group ? "they" : mainCat.heshe()
 	};
 	
-	enc.finalize = function() {
-		Encounter.prototype.onVictory.call(enc);
-	};
-	
-	Text.Clear();
-	Text.Add("Your [enemyEnemies] lie[notS] defeated, rolling over on [hisher] back[s] in submission to your authority. You consider what you are going to do with the feline[s].", parse);
-	if(player.LustLevel() > 0.5)
-		Text.Add(" Regardless of what your head is thinking, your body has its own ideas of what it wants you to do to your fallen foe[s], beaten and helpless as [heshe] [isAre].", parse);
-	Text.Flush();
-	
-	var numMales   = 0;
-	var numFemales = 0;
-	var numHerms   = 0;
-	var male       = null;
-	var female     = null;
-	var herm       = null;
-	for(var i = 0; i < enemy.Num(); ++i) {
-		var ent    = enemy.Get(i);
-		var gender = ent.Gender();
-		if(gender == Gender.male) {
-			numMales++;
-			if(male == null) male = ent;
-		}
-		else if(gender == Gender.female) {
-			numFemales++;
-			if(female == null) female = ent;
-		}
-		else if(gender == Gender.herm) {
-			numHerms++;
-			if(herm == null) herm = ent;
-		}
-	}
-	
-	var options = new Array();
-	if(female) {
-		var cocksInVag = player.CocksThatFit(female.FirstVag());
-		var cocksInAss = player.CocksThatFit(female.Butt());
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		Text.Add("Your [enemyEnemies] lie[notS] defeated, rolling over on [hisher] back[s] in submission to your authority. You consider what you are going to do with the feline[s].", parse);
+		if(player.LustLevel() > 0.5)
+			Text.Add(" Regardless of what your head is thinking, your body has its own ideas of what it wants you to do to your fallen foe[s], beaten and helpless as [heshe] [isAre].", parse);
+		Text.Flush();
 		
-		if(cocksInVag.length > 0) {
-			options.push({ nameStr : "Fuck vag(F)",
-				func : function() {
-					Scenes.Felines.WinFuckVag(female, group, enc, cocksInVag, numFemales);
-				}, enabled : cocksInVag,
-				tooltip : "Get some pussy."
-			});
+		var numMales   = 0;
+		var numFemales = 0;
+		var numHerms   = 0;
+		var male       = null;
+		var female     = null;
+		var herm       = null;
+		for(var i = 0; i < enemy.Num(); ++i) {
+			var ent    = enemy.Get(i);
+			var gender = ent.Gender();
+			if(gender == Gender.male) {
+				numMales++;
+				if(male == null) male = ent;
+			}
+			else if(gender == Gender.female) {
+				numFemales++;
+				if(female == null) female = ent;
+			}
+			else if(gender == Gender.herm) {
+				numHerms++;
+				if(herm == null) herm = ent;
+			}
 		}
-		if(cocksInAss.length > 0) {
-			options.push({ nameStr : "Fuck ass(F)",
-				func : function() {
-					Scenes.Felines.WinFuckButt(female, group, enc, cocksInAss);
-				}, enabled : true,
-				tooltip : Text.Parse("Push[oneof] [himher] down on [hisher] back and fuck [himher] in the ass.", parse)
-			});
-		}
-		if(player.FirstCock()) {
-			options.push({ nameStr : "Get blowjob(F)",
-				func : function() {
-					Scenes.Felines.WinGetBlowjob(female, group, enc);
-				}, enabled : true,
-				tooltip : Text.Parse("Order[oneof] [himher] to give you a blowjob.", parse)
-			});
-		}
-	}
-	if(male) {
-		var cocksInAss = player.CocksThatFit(male.Butt());
 		
-		if(cocksInAss.length > 0) {
-			options.push({ nameStr : "Fuck ass(M)",
-				func : function() {
-					Scenes.Felines.WinFuckButt(male, group, enc, cocksInAss);
-				}, enabled : true,
-				tooltip : Text.Parse("Push[oneof] [himher] down on [hisher] back and fuck [himher] in the ass.", parse)
-			});
-		}
-		if(player.FirstCock()) {
-			options.push({ nameStr : "Get blowjob(M)",
-				func : function() {
-					Scenes.Felines.WinGetBlowjob(male, group, enc);
-				}, enabled : true,
-				tooltip : Text.Parse("Order[oneof] [himher] to give you a blowjob.", parse)
-			});
-		}
-	}
-	if(herm) {
-		var cocksInVag = player.CocksThatFit(herm.FirstVag());
-		var cocksInAss = player.CocksThatFit(herm.Butt());
-		
-		if(cocksInVag.length > 0) {
-			options.push({ nameStr : "Fuck vag(H)",
-				func : function() {
-					Scenes.Felines.WinFuckVag(herm, group, enc, cocksInVag, numHerms);
-				}, enabled : true,
-				tooltip : "Get some pussy."
-			});
-		}
-		if(cocksInAss.length > 0) {
-			options.push({ nameStr : "Fuck ass(H)",
-				func : function() {
-					Scenes.Felines.WinFuckButt(herm, group, enc, cocksInAss);
-				}, enabled : true,
-				tooltip : Text.Parse("Push[oneof] [himher] down on [hisher] back and fuck [himher] in the ass.", parse)
-			});
-		}
-		if(player.FirstCock()) {
-			options.push({ nameStr : "Get blowjob(H)",
-				func : function() {
-					Scenes.Felines.WinGetBlowjob(herm, group, enc);
-				}, enabled : true,
-				tooltip : Text.Parse("Order[oneof] [himher] to give you a blowjob.", parse)
-			});
-		}
-	}
-	/*
-		options.push({ nameStr : "Nah",
-			func : function() {
-				Scenes.Felines.WinFuckVag(female, enc);
-			}, enabled : true,
-			tooltip : ""
-		});
-	*/
-	options.push({ nameStr : "Leave",
-		func : function() {
-			Text.Clear();
-			Text.Add("You gather up your belongings and leave the defeated feline[s] behind you.", {s: group ? "s" : ""});
-			Text.Flush();
+		var options = new Array();
+		if(female) {
+			var cocksInVag = player.CocksThatFit(female.FirstVag());
+			var cocksInAss = player.CocksThatFit(female.Butt());
 			
-			Gui.NextPrompt(enc.finalize);
-		}, enabled : true,
-		tooltip : Text.Parse("Just leave [himher] and be on your way.", parse)
+			if(cocksInVag.length > 0) {
+				options.push({ nameStr : "Fuck vag(F)",
+					func : function() {
+						Scenes.Felines.WinFuckVag(female, group, enc, cocksInVag, numFemales);
+					}, enabled : cocksInVag,
+					tooltip : "Get some pussy."
+				});
+			}
+			if(cocksInAss.length > 0) {
+				options.push({ nameStr : "Fuck ass(F)",
+					func : function() {
+						Scenes.Felines.WinFuckButt(female, group, enc, cocksInAss);
+					}, enabled : true,
+					tooltip : Text.Parse("Push[oneof] [himher] down on [hisher] back and fuck [himher] in the ass.", parse)
+				});
+			}
+			if(player.FirstCock()) {
+				options.push({ nameStr : "Get blowjob(F)",
+					func : function() {
+						Scenes.Felines.WinGetBlowjob(female, group, enc);
+					}, enabled : true,
+					tooltip : Text.Parse("Order[oneof] [himher] to give you a blowjob.", parse)
+				});
+			}
+		}
+		if(male) {
+			var cocksInAss = player.CocksThatFit(male.Butt());
+			
+			if(cocksInAss.length > 0) {
+				options.push({ nameStr : "Fuck ass(M)",
+					func : function() {
+						Scenes.Felines.WinFuckButt(male, group, enc, cocksInAss);
+					}, enabled : true,
+					tooltip : Text.Parse("Push[oneof] [himher] down on [hisher] back and fuck [himher] in the ass.", parse)
+				});
+			}
+			if(player.FirstCock()) {
+				options.push({ nameStr : "Get blowjob(M)",
+					func : function() {
+						Scenes.Felines.WinGetBlowjob(male, group, enc);
+					}, enabled : true,
+					tooltip : Text.Parse("Order[oneof] [himher] to give you a blowjob.", parse)
+				});
+			}
+		}
+		if(herm) {
+			var cocksInVag = player.CocksThatFit(herm.FirstVag());
+			var cocksInAss = player.CocksThatFit(herm.Butt());
+			
+			if(cocksInVag.length > 0) {
+				options.push({ nameStr : "Fuck vag(H)",
+					func : function() {
+						Scenes.Felines.WinFuckVag(herm, group, enc, cocksInVag, numHerms);
+					}, enabled : true,
+					tooltip : "Get some pussy."
+				});
+			}
+			if(cocksInAss.length > 0) {
+				options.push({ nameStr : "Fuck ass(H)",
+					func : function() {
+						Scenes.Felines.WinFuckButt(herm, group, enc, cocksInAss);
+					}, enabled : true,
+					tooltip : Text.Parse("Push[oneof] [himher] down on [hisher] back and fuck [himher] in the ass.", parse)
+				});
+			}
+			if(player.FirstCock()) {
+				options.push({ nameStr : "Get blowjob(H)",
+					func : function() {
+						Scenes.Felines.WinGetBlowjob(herm, group, enc);
+					}, enabled : true,
+					tooltip : Text.Parse("Order[oneof] [himher] to give you a blowjob.", parse)
+				});
+			}
+		}
+		/*
+			options.push({ nameStr : "Nah",
+				func : function() {
+					Scenes.Felines.WinFuckVag(female, enc);
+				}, enabled : true,
+				tooltip : ""
+			});
+		*/
+		options.push({ nameStr : "Leave",
+			func : function() {
+				Text.Clear();
+				Text.Add("You gather up your belongings and leave the defeated feline[s] behind you.", {s: group ? "s" : ""});
+				Text.Flush();
+				
+				Gui.NextPrompt();
+			}, enabled : true,
+			tooltip : Text.Parse("Just leave [himher] and be on your way.", parse)
+		});
+		Gui.SetButtonsFromList(options);
 	});
-	Gui.SetButtonsFromList(options);
+	
+	Encounter.prototype.onVictory.call(enc);
 }
 
 Scenes.Felines.WinFuckVag = function(cat, group, enc, cocks, numFemales) {
@@ -766,7 +766,7 @@ Scenes.Felines.WinFuckVag = function(cat, group, enc, cocks, numFemales) {
 		
 		world.TimeStep({hour: 1});
 		
-		Gui.NextPrompt(enc.finalize);
+		Gui.NextPrompt();
 	});
 	
 	
@@ -1047,7 +1047,7 @@ Scenes.Felines.WinFuckButt = function(cat, group, enc, cocks) {
 		player.subDom.IncreaseStat(50, 1);
 		world.TimeStep({hour: 1});
 		
-		Gui.NextPrompt(enc.finalize);
+		Gui.NextPrompt();
 	});
 	
 	
@@ -1218,9 +1218,6 @@ Scenes.Felines.WinGetBlowjob = function(cat, group, enc) {
 	var load = player.OrgasmCum();
 	var throat = false;
 	
-	
-	
-	
 	//[Face][Mouth][Throat]
 	var options = new Array();
 	options.push({ nameStr : "Face",
@@ -1323,7 +1320,7 @@ Scenes.Felines.WinGetBlowjob = function(cat, group, enc) {
 		player.subDom.IncreaseStat(40, 1);
 		world.TimeStep({minute: 30});
 		
-		Gui.NextPrompt(enc.finalize);
+		Gui.NextPrompt();
 	});
 }
 

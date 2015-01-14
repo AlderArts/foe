@@ -612,26 +612,25 @@ Scenes.Naga.DesertWinPrompt = function() {
 		master : player.mfFem("master", "mistress")
 	};
 	
-	enc.finalize = function() {
-		Encounter.prototype.onVictory.call(enc);
-	};
-	
 	parse["comp"] = party.Num() == 2 ? party.Get(1).name :
 	                party.Num() > 2 ? "your companions" : "";
 	
-	Text.Clear();
-	Text.Add("The naga slumps down, defeated. Her upper body falls to the sand with a thump, where she rests, breathing heavily. ", parse);
-	if(naga.LustLevel() > 0.75)
-		Text.Add("Her cheeks flush deeply with arousal from your battle, her tongue lolling out of her wide-open mouth, giving her a positively whorish countenance. ", parse);
-	parse["c"] = party.Num() > 1 ? Text.Parse(", [comp] wandering off to rest and recuperate", parse) : "";
-	Text.Add("You take a moment to catch your breath and stow your [weapon][c].", parse);
-	Text.NL();
-	Text.Add("When you turn your attention back to the naga, she has regained some of her composure, though she’s lost her air of aggressive dominance. Her upper body lies prostrated before you in a gesture of complete submission.", parse);
-	Text.NL();
-	Text.Add("<i>“Please forgive me, [master]. I had no idea you were this… powerful.”</i> Her surrender is delivered in a breathy, clearly aroused voice, and she licks her lips enticingly when she pauses. It’s blatantly obvious that the naga will let you do whatever you want to her.", parse);
-	Text.Flush();
-	
-	Scenes.Naga.DesertWinPrompt2(enc, false);
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		Text.Add("The naga slumps down, defeated. Her upper body falls to the sand with a thump, where she rests, breathing heavily. ", parse);
+		if(naga.LustLevel() > 0.75)
+			Text.Add("Her cheeks flush deeply with arousal from your battle, her tongue lolling out of her wide-open mouth, giving her a positively whorish countenance. ", parse);
+		parse["c"] = party.Num() > 1 ? Text.Parse(", [comp] wandering off to rest and recuperate", parse) : "";
+		Text.Add("You take a moment to catch your breath and stow your [weapon][c].", parse);
+		Text.NL();
+		Text.Add("When you turn your attention back to the naga, she has regained some of her composure, though she’s lost her air of aggressive dominance. Her upper body lies prostrated before you in a gesture of complete submission.", parse);
+		Text.NL();
+		Text.Add("<i>“Please forgive me, [master]. I had no idea you were this… powerful.”</i> Her surrender is delivered in a breathy, clearly aroused voice, and she licks her lips enticingly when she pauses. It’s blatantly obvious that the naga will let you do whatever you want to her.", parse);
+		Text.Flush();
+		
+		Scenes.Naga.DesertWinPrompt2(enc, false);
+	});
+	Encounter.prototype.onVictory.call(enc);
 }
 
 Scenes.Naga.DesertWinPrompt2 = function(enc, hypno) {
@@ -704,7 +703,7 @@ Scenes.Naga.DesertWinPrompt2 = function(enc, hypno) {
 			Text.Add("You[c] leave the defeated naga behind.", parse);
 			Text.Flush();
 			
-			Gui.NextPrompt(enc.finalize);
+			Gui.NextPrompt();
 		}, enabled : true,
 		tooltip : "You want nothing more to do with the naga, set her free."
 	});
@@ -881,7 +880,7 @@ Scenes.Naga.DesertWinFuckJerk = function(enc, hypno) {
 	
 	world.TimeStep({hour: 1});
 	
-	Gui.NextPrompt(enc.finalize);
+	Gui.NextPrompt();
 }
 
 Scenes.Naga.DesertWinGetFuckedVag = function(enc, hypno) {
@@ -1040,7 +1039,7 @@ Scenes.Naga.DesertWinGetFuckedVag = function(enc, hypno) {
 			
 			world.TimeStep({hour: 1});
 			
-			Gui.NextPrompt(enc.finalize);
+			Gui.NextPrompt();
 		}
 	});
 }
