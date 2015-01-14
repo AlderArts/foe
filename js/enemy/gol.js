@@ -502,78 +502,78 @@ Scenes.Gol.CombatWin = function() {
 		foot : function() { return player.FootDesc(); }
 	};
 	
-	enc.finalize = function() {
-		Encounter.prototype.onVictory.call(enc);
-	};
-	
-	Text.Clear();
-	if(gol.LustLevel() < 0.5) {
-		Text.Add("The Gol collapses under the weight of her body now that her strength is exhausted. All six legs splay out, and her human-like torso dips forward, barely held aloft by her four quivering arms. The scepter lies discarded so that she might stay at least partially upright.", parse);
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		if(gol.LustLevel() < 0.5) {
+			Text.Add("The Gol collapses under the weight of her body now that her strength is exhausted. All six legs splay out, and her human-like torso dips forward, barely held aloft by her four quivering arms. The scepter lies discarded so that she might stay at least partially upright.", parse);
+			Text.NL();
+			Text.Add("<i>“How? I... so much power. I could do anything! I... was... sure...”</i> she pants. Her eyes gleam with the undimmed light of defiance, but her body, weakened by the fight, is unable to offer up a sliver of resistance.", parse);
+			Text.NL();
+			Text.Add("The scepter you came for rolls down the heaped rubble to your [foot]. You can grab it and go, but you might never get a chance to make it with a Gol, and she seemed quite keen on breeding with you.", parse);
+		}
+		else {
+			parse["fem"] = player.mfFem("king", "queen");
+			Text.Add("The Gol takes one shuddering step toward you before collapsing in a heap, moaning and thrashing. Her human arms dive into the simmering sexpot that dominates her crotch while the insectile ones cross behind her back, pressing her huge breasts in your direction enticingly. The flexible extension at the end of her abdomen raises up to point in your direction, dripping long strands of fragrant lubricant. <i>”You... win... Fuck me.... Be hive [fem]. I will serve you. Please! So hot!”</i>", parse);
+			Text.NL();
+			Text.Add("Forgotten, the scepter rolls down the mound of rubble to stop at your [feet]. You can grab and go, but when will you get another chance to sexually dominate a Gol? Her eyes are glassy with lust, and her expression is pleading.", parse);
+		}
 		Text.NL();
-		Text.Add("<i>“How? I... so much power. I could do anything! I... was... sure...”</i> she pants. Her eyes gleam with the undimmed light of defiance, but her body, weakened by the fight, is unable to offer up a sliver of resistance.", parse);
-		Text.NL();
-		Text.Add("The scepter you came for rolls down the heaped rubble to your [foot]. You can grab it and go, but you might never get a chance to make it with a Gol, and she seemed quite keen on breeding with you.", parse);
-	}
-	else {
-		parse["fem"] = player.mfFem("king", "queen");
-		Text.Add("The Gol takes one shuddering step toward you before collapsing in a heap, moaning and thrashing. Her human arms dive into the simmering sexpot that dominates her crotch while the insectile ones cross behind her back, pressing her huge breasts in your direction enticingly. The flexible extension at the end of her abdomen raises up to point in your direction, dripping long strands of fragrant lubricant. <i>”You... win... Fuck me.... Be hive [fem]. I will serve you. Please! So hot!”</i>", parse);
-		Text.NL();
-		Text.Add("Forgotten, the scepter rolls down the mound of rubble to stop at your [feet]. You can grab and go, but when will you get another chance to sexually dominate a Gol? Her eyes are glassy with lust, and her expression is pleading.", parse);
-	}
-	Text.NL();
-	Text.Add("For now, the others seem to be gone, along with their captives. Perhaps they’ve retreated to the hive the Gol spoke about… at any rate, you think you have at least some time before they return.", parse);
-	Text.Flush();
-	
-	//[Hyper fuck][Tailfuck][Cunnilingus][Scepter]
-	var options = new Array();
-	if(player.FirstCock()) {
-		var p1cock = player.BiggestCock();
+		Text.Add("For now, the others seem to be gone, along with their captives. Perhaps they’ve retreated to the hive the Gol spoke about… at any rate, you think you have at least some time before they return.", parse);
+		Text.Flush();
 		
-		var cocksInTail = player.CocksThatFit(gol.FirstVag(), true);
-		var p2cock = player.BiggestCock(cocksInTail);
-		
-		options.push({ nameStr : "Hyper fuck",
-			func : function() {
-				Scenes.Gol.CombatWinHyperFuck(enc, p1cock);
-			}, enabled : p1cock.Len() >= 61, // > 2'
-			tooltip : "It’s not often you find someone who can take a cock as big as yours… the opportunity is too good to pass up."
-		});
-		options.push({ nameStr : "Tailfuck",
-			func : function() {
-				Scenes.Gol.CombatWinTailfuck(enc, p2cock);
-			}, enabled : p2cock, // < 3'
-			tooltip : "Fuck that tailgina until it’s dripping and leaking eggs!"
-		});
-	}
-	if(player.FirstVag()) {
-		options.push({ nameStr : "Cunnilingus",
-			func : function() {
-				Scenes.Gol.CombatWinCunn(enc);
-			}, enabled : true,
-			tooltip : "Have her eat you out."
-		});
-	}
-	options.push({ nameStr : "Scepter",
-		func : function() {
-			Text.Clear();
-			Text.Add("No… you shouldn’t forget why you came here. You grab hold of the scepter and back away from the creature, still wary of her.", parse);
-			Text.NL();
-			Text.Add("<i>”M-my scepter!”</i> she mumbles, reaching after you half-heartedly, but you are able to easily avoid her grasping scythes. Feeling a bit curious, you ask her what it does.", parse);
-			Text.NL();
-			Text.Add("<i>”I… before, I… don’t remember,”</i> she struggles, faltering on her words. <i>”I remember standing there, the scepter in hand, and it all seemed so clear. I was to be ruler of all!”</i> The Gol shakes her head, a confused look on her face.", parse);
-			Text.NL();
-			Text.Add("<i>”I was… as none of my race has been before. With this, I could take down even the mighty towers of your people!”</i> You look at the scepter in wonder. Apparently, it holds quite a lot of power… you should be careful to not let it fall in the wrong hands. It seemingly played a role in giving the Gol an intellect far surpassing her old, feral mind. It’s not a stretch to say that it probably did the same for Lagon and his brood.", parse);
-			Text.Flush();
+		//[Hyper fuck][Tailfuck][Cunnilingus][Scepter]
+		var options = new Array();
+		if(player.FirstCock()) {
+			var p1cock = player.BiggestCock();
 			
-			world.TimeStep({minute: 30});
+			var cocksInTail = player.CocksThatFit(gol.FirstVag(), true);
+			var p2cock = player.BiggestCock(cocksInTail);
 			
-			Gui.NextPrompt(function() {
-				Scenes.Gol.CombatAftermath(enc);
+			options.push({ nameStr : "Hyper fuck",
+				func : function() {
+					Scenes.Gol.CombatWinHyperFuck(enc, p1cock);
+				}, enabled : p1cock.Len() >= 61, // > 2'
+				tooltip : "It’s not often you find someone who can take a cock as big as yours… the opportunity is too good to pass up."
 			});
-		}, enabled : true,
-		tooltip : "Just grab the scepter and go."
+			options.push({ nameStr : "Tailfuck",
+				func : function() {
+					Scenes.Gol.CombatWinTailfuck(enc, p2cock);
+				}, enabled : p2cock, // < 3'
+				tooltip : "Fuck that tailgina until it’s dripping and leaking eggs!"
+			});
+		}
+		if(player.FirstVag()) {
+			options.push({ nameStr : "Cunnilingus",
+				func : function() {
+					Scenes.Gol.CombatWinCunn(enc);
+				}, enabled : true,
+				tooltip : "Have her eat you out."
+			});
+		}
+		options.push({ nameStr : "Scepter",
+			func : function() {
+				Text.Clear();
+				Text.Add("No… you shouldn’t forget why you came here. You grab hold of the scepter and back away from the creature, still wary of her.", parse);
+				Text.NL();
+				Text.Add("<i>”M-my scepter!”</i> she mumbles, reaching after you half-heartedly, but you are able to easily avoid her grasping scythes. Feeling a bit curious, you ask her what it does.", parse);
+				Text.NL();
+				Text.Add("<i>”I… before, I… don’t remember,”</i> she struggles, faltering on her words. <i>”I remember standing there, the scepter in hand, and it all seemed so clear. I was to be ruler of all!”</i> The Gol shakes her head, a confused look on her face.", parse);
+				Text.NL();
+				Text.Add("<i>”I was… as none of my race has been before. With this, I could take down even the mighty towers of your people!”</i> You look at the scepter in wonder. Apparently, it holds quite a lot of power… you should be careful to not let it fall in the wrong hands. It seemingly played a role in giving the Gol an intellect far surpassing her old, feral mind. It’s not a stretch to say that it probably did the same for Lagon and his brood.", parse);
+				Text.Flush();
+				
+				world.TimeStep({minute: 30});
+				
+				Gui.NextPrompt(function() {
+					Scenes.Gol.CombatAftermath(enc);
+				});
+			}, enabled : true,
+			tooltip : "Just grab the scepter and go."
+		});
+		Gui.SetButtonsFromList(options, false, null);
+		
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Encounter.prototype.onVictory.call(enc);
 }
 
 Scenes.Gol.CombatWinHyperFuck = function(enc, p1cock) {
@@ -940,5 +940,5 @@ Scenes.Gol.CombatAftermath = function(enc) {
 	
 	burrows.flags["Access"] = Burrows.AccessFlags.Stage5;
 	
-	Gui.NextPrompt(enc.finalize);
+	Gui.NextPrompt();
 }
