@@ -536,10 +536,6 @@ Scenes.DryadGlade.FirstWin = function(enc) {
 	
 	var enc = this;
 	
-	enc.finalize = function() {
-		Encounter.prototype.onVictory.call(enc);
-	};
-	
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name,
@@ -550,73 +546,77 @@ Scenes.DryadGlade.FirstWin = function(enc) {
 		HisHer : kiakai.HisHer()
 	};
 	
-	Text.Clear();
-	Text.Add("Orchid finally falls back, eyeing you hatefully. She lets go of Mother Tree, letting the exhausted dryad slump back against the trunk of her tree, dripping with corrupted cum. The defeated dryad looks like she still has some fight in her, but she can no longer muster the energy to move her tentacles and grab you.", parse);
-	Text.NL();
-	Text.Add("<i>“P-please, have mercy on her,”</i> Mother Tree pleads weakly, coughing up seed. <i>“Orchid is not herself; I do not know what has happened to her.”</i> Even if she says that, you’re not sure how long the corrupted dryad will stay down, nor if you could stop her if she regains her strength.", parse);
-	Text.NL();
-	Text.Add("<i>“Come on, do your worst!”</i> Orchid pants, her eyes still defiant. <i>“Fuck me while you can. As soon as I can use my tentacles again, I’m going to spitroast you and fuck your brains out!”</i> The offer is tempting, as despite her obvious corruption, the dryad is a very pretty girl.", parse);
-	Text.NL();
-	Text.Add("Before you have time to contemplate your options further, you notice the little girl from before peeking out from behind the trunk of the huge tree. Her skin is a light green, covered by a modest dress of twined grass and leaves. Her deep brown eyes are big as saucers as she silently observes the scene in front of her.", parse);
-	Text.NL();
-	Text.Add("<i>“Spirit! You are safe!”</i> Mother Tree cries out, relieved. <i>“Don’t worry, the danger has passed.”</i> The little dryad girl hops forward, her steps light as the wind. Her long, dark green hair flutters as she settles down next to Orchid. For a moment, the corrupted dryad’s eyes change, as she looks confused.", parse);
-	Text.NL();
-	Text.Add("<i>“...little sister?”</i> she falters, grasping at her head as if she’s in pain. Without saying a word, the little girl hunches down beside Orchid, placing a hand on her brow. The effect is gradual, but you can slowly see the purple veins straining beneath the dryad’s skin recede as the corruption drains from her. When Orchid looks up again, the hateful frenzy in her eyes has been replaced by despairing sadness as she realizes what she has done.", parse);
-	Text.NL();
-	Text.Add("<i>“S-sister! Oh mother, I’m so sorry, I’m so sorry!”</i> the dryad wails, hugging the little girl tightly. <i>“What have I-”</i> The corruption that clouded her mind seems to have left her, though the dryad’s tentacles still remain.", parse);
-	Text.NL();
-	Text.Add("The creatures of the forest that fled have returned, cautiously peering out between the trees and approaching you. Orchid turns to you, tears in her eyes. <i>“H-how can I ever repay you? If you hadn’t stopped me...”</i>", parse);
-	Text.NL();
-	Text.Add("<i>“You were not yourself, daughter,”</i> Mother Tree consoles her. <i>“Tell me, what happened?”</i> The exhausted dryad wearily starts to clean herself up. <i>“Do not worry about me, I am made of sturdy wood,”</i> she declares stoically.", parse);
-	Text.NL();
-	Text.Add("It takes a while longer before everything is returned to normality and you can begin to piece together Orchid’s story. The creatures of the forest gather around you, still eyeing the betentacled dryad warily.", parse);
-	Text.Flush();
-	
-	world.TimeStep({ hour : 1 });
-	
-	Gui.NextPrompt(function() {
+	Gui.Callstack.push(function() {
 		Text.Clear();
-		Text.Add("Orchid sniffles, wiping away her tears as she tries to compose herself.", parse);
+		Text.Add("Orchid finally falls back, eyeing you hatefully. She lets go of Mother Tree, letting the exhausted dryad slump back against the trunk of her tree, dripping with corrupted cum. The defeated dryad looks like she still has some fight in her, but she can no longer muster the energy to move her tentacles and grab you.", parse);
 		Text.NL();
-		Text.Add("<i>“It’s all fuzzy, I don’t… I was playing around deeper within the forest, when I saw a strange creature. It looked like a person, but all hunched over and weird and huddled in a cape… so I followed it.”</i> She sniffles again, shuddering.", parse);
+		Text.Add("<i>“P-please, have mercy on her,”</i> Mother Tree pleads weakly, coughing up seed. <i>“Orchid is not herself; I do not know what has happened to her.”</i> Even if she says that, you’re not sure how long the corrupted dryad will stay down, nor if you could stop her if she regains her strength.", parse);
 		Text.NL();
-		Text.Add("<i>“It was heading for one of the clear springs, and the way it was moving, I thought it was hurt. When it got there though, it didn’t drink, it… it had a flask of some kind, and it poured it into the water, which turned all murky and icky.”</i> The child called Spirit pats her sister on the head consolingly, urging her to go on.", parse);
+		Text.Add("<i>“Come on, do your worst!”</i> Orchid pants, her eyes still defiant. <i>“Fuck me while you can. As soon as I can use my tentacles again, I’m going to spitroast you and fuck your brains out!”</i> The offer is tempting, as despite her obvious corruption, the dryad is a very pretty girl.", parse);
 		Text.NL();
-		Text.Add("<i>“That’s when they ambushed me, half a dozen… creatures. Pointy ears.”</i> The dryad whimpers, wiping her tears with a sodden tentacle. <i>“They were elves, but really really nasty ones! Their skins were all purple and veiny, and they had sharp pointy teeth!”</i>", parse);
+		Text.Add("Before you have time to contemplate your options further, you notice the little girl from before peeking out from behind the trunk of the huge tree. Her skin is a light green, covered by a modest dress of twined grass and leaves. Her deep brown eyes are big as saucers as she silently observes the scene in front of her.", parse);
 		Text.NL();
-		if(party.InParty(kiakai)) {
-			Text.Add("[name] looks very troubled by all this, stepping up beside you.", parse);
-			Text.NL();
-			Text.Add("<i>“This… sounds familiar, [playername],”</i> [heshe] says, brow furrowed. <i>“In my youth, I met such creatures; elves corrupted by dark forces from beyond the portals. I almost became one of them, if not for Yrissa and the priests of Lady Aria...”</i> The elf shakes [himher]self. <i>“But what this girl is saying is impossible! No trace of the taint was left after the Lady purified the village, and the portals have been closed for decades!”</i>", parse);
-			Text.NL();
-			Text.Add("The dryad shrinks back, suddenly fearful of possibly the least intimidating person you’ve ever met. Whatever those elves were, they clearly left an impression on her. You admonish [name] with a stern glance. You can discuss this later, for now you should both listen to the rest of her tale.", parse);
-			Text.NL();
-		}
-		Text.Add("<i>“T-they dragged me to the spring, and threw me in front of the robed creep. He… I didn’t see, but I think it was some sort of lizard, with scales and a thin tail. He made my skin crawl,”</i> she whimpers, shuddering as she hugs herself.", parse);
+		Text.Add("<i>“Spirit! You are safe!”</i> Mother Tree cries out, relieved. <i>“Don’t worry, the danger has passed.”</i> The little dryad girl hops forward, her steps light as the wind. Her long, dark green hair flutters as she settles down next to Orchid. For a moment, the corrupted dryad’s eyes change, as she looks confused.", parse);
 		Text.NL();
-		Text.Add("<i>“Then, they made me… they made me drink the water. After that, it’s all fuzzy. I grew these… <b>things</b> too,”</i> she adds, waving at her tentacles. The dryad slumps down, tired. <i>“I… I don’t even want to consider what I did after that, but I somehow came back here. I came back to… to...”</i> she breaks down wailing again, and you let the little girl comfort her.", parse);
+		Text.Add("<i>“...little sister?”</i> she falters, grasping at her head as if she’s in pain. Without saying a word, the little girl hunches down beside Orchid, placing a hand on her brow. The effect is gradual, but you can slowly see the purple veins straining beneath the dryad’s skin recede as the corruption drains from her. When Orchid looks up again, the hateful frenzy in her eyes has been replaced by despairing sadness as she realizes what she has done.", parse);
 		Text.NL();
-		Text.Add("<i>“I am truly grateful for your help, [playername],”</i> Mother Tree bows her head wearily. <i>“Please forgive my errant daughter.”</i> There is nothing to forgive, you insist, she was clearly not in control of her own mind. The dryad gives you a weak but warm smile, bowing her head again.", parse);
+		Text.Add("<i>“S-sister! Oh mother, I’m so sorry, I’m so sorry!”</i> the dryad wails, hugging the little girl tightly. <i>“What have I-”</i> The corruption that clouded her mind seems to have left her, though the dryad’s tentacles still remain.", parse);
 		Text.NL();
-		Text.Add("<i>“I am worried about this spring that Orchid spoke of. It must be further investigated,”</i> she continues, absently wiping some corrupted cum off her breasts, leaving a glistening shine. You somehow manage to drag your eyes back to her face, focusing on what she’s saying.", parse);
+		Text.Add("The creatures of the forest that fled have returned, cautiously peering out between the trees and approaching you. Orchid turns to you, tears in her eyes. <i>“H-how can I ever repay you? If you hadn’t stopped me...”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“It pains me that our hero must leave empty handed, but neither I nor Orchid can give you what you seek,”</i> she admits sadly. <i>“I cannot ask this of any of my other daughters either-”</i> she pauses as the little girl returns, tugging on a twig hanging from Mother Tree’s hair. <i>“Yes, child? How is Orch-”</i> she falls silent as her daughter gives her another insistent tug, glancing at you. The old dryad’s eyes slowly widen as she realizes what Spirit wants.", parse);
+		Text.Add("<i>“You were not yourself, daughter,”</i> Mother Tree consoles her. <i>“Tell me, what happened?”</i> The exhausted dryad wearily starts to clean herself up. <i>“Do not worry about me, I am made of sturdy wood,”</i> she declares stoically.", parse);
 		Text.NL();
-		Text.Add("<i>“My daughter, do you know what this will mean?”</i> Mother Tree asks. The little girl nods, a determined look on her face. The dryad slowly turns back to you, sighing. <i>“Spirit has decided to aid you,”</i> she explains. <i>“To you she may look only a child, but she is powerful. Time will only make her more so. She says to tell you that it is her way of thanking you for saving her sister and the entire glade.”</i>", parse);
-		Text.NL();
-		Text.Add("You take a closer look at the little girl. She shares some of her looks with her older sister, though you’d say she looks to be about ten years old. She distinctly lacks tentacles. <i>“Hold out the gem, Lifegiver,”</i> Mother Dryad intones, oddly formal. You obey her, unsure what's about to happen. Spirit gives you a happy little smile as she reaches out to touch it…", parse);
-		Text.NL();
-		Text.Add("There is a sudden flash of light, and then the little girl is gone. The stone in your hand is warm, pulsing with newfound power. <i>“Do not fear for her, she is alive and well, just in a different form,”</i> Mother Tree assures you. <i>“Still, I cannot help but feel saddened that she must leave me so soon… but a mother cannot hold on to her children forever.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“There is yet much to speak about, but I understand it if you are in a hurry. Return later, for I very much would like to speak with my savior more. I am sure Orchid feels the same way,”</i> she adds, looking over to the betentacled dryad. She notices you watching and blushes prettily.", parse);
-		Text.NL();
-		Text.Add("You thank Mother Tree for her help, the warm stone grasped tightly in your hand. You hope the little girl is all right, as you’re still not sure of the properties of the gem. The best person to ask would be Jeanne, and she awaits you near the crossroads.", parse);
+		Text.Add("It takes a while longer before everything is returned to normality and you can begin to piece together Orchid’s story. The creatures of the forest gather around you, still eyeing the betentacled dryad warily.", parse);
 		Text.Flush();
 		
-		glade.flags["Visit"] = 2;
+		world.TimeStep({ hour : 1 });
 		
-		Gui.NextPrompt(enc.finalize);
+		Gui.NextPrompt(function() {
+			Text.Clear();
+			Text.Add("Orchid sniffles, wiping away her tears as she tries to compose herself.", parse);
+			Text.NL();
+			Text.Add("<i>“It’s all fuzzy, I don’t… I was playing around deeper within the forest, when I saw a strange creature. It looked like a person, but all hunched over and weird and huddled in a cape… so I followed it.”</i> She sniffles again, shuddering.", parse);
+			Text.NL();
+			Text.Add("<i>“It was heading for one of the clear springs, and the way it was moving, I thought it was hurt. When it got there though, it didn’t drink, it… it had a flask of some kind, and it poured it into the water, which turned all murky and icky.”</i> The child called Spirit pats her sister on the head consolingly, urging her to go on.", parse);
+			Text.NL();
+			Text.Add("<i>“That’s when they ambushed me, half a dozen… creatures. Pointy ears.”</i> The dryad whimpers, wiping her tears with a sodden tentacle. <i>“They were elves, but really really nasty ones! Their skins were all purple and veiny, and they had sharp pointy teeth!”</i>", parse);
+			Text.NL();
+			if(party.InParty(kiakai)) {
+				Text.Add("[name] looks very troubled by all this, stepping up beside you.", parse);
+				Text.NL();
+				Text.Add("<i>“This… sounds familiar, [playername],”</i> [heshe] says, brow furrowed. <i>“In my youth, I met such creatures; elves corrupted by dark forces from beyond the portals. I almost became one of them, if not for Yrissa and the priests of Lady Aria...”</i> The elf shakes [himher]self. <i>“But what this girl is saying is impossible! No trace of the taint was left after the Lady purified the village, and the portals have been closed for decades!”</i>", parse);
+				Text.NL();
+				Text.Add("The dryad shrinks back, suddenly fearful of possibly the least intimidating person you’ve ever met. Whatever those elves were, they clearly left an impression on her. You admonish [name] with a stern glance. You can discuss this later, for now you should both listen to the rest of her tale.", parse);
+				Text.NL();
+			}
+			Text.Add("<i>“T-they dragged me to the spring, and threw me in front of the robed creep. He… I didn’t see, but I think it was some sort of lizard, with scales and a thin tail. He made my skin crawl,”</i> she whimpers, shuddering as she hugs herself.", parse);
+			Text.NL();
+			Text.Add("<i>“Then, they made me… they made me drink the water. After that, it’s all fuzzy. I grew these… <b>things</b> too,”</i> she adds, waving at her tentacles. The dryad slumps down, tired. <i>“I… I don’t even want to consider what I did after that, but I somehow came back here. I came back to… to...”</i> she breaks down wailing again, and you let the little girl comfort her.", parse);
+			Text.NL();
+			Text.Add("<i>“I am truly grateful for your help, [playername],”</i> Mother Tree bows her head wearily. <i>“Please forgive my errant daughter.”</i> There is nothing to forgive, you insist, she was clearly not in control of her own mind. The dryad gives you a weak but warm smile, bowing her head again.", parse);
+			Text.NL();
+			Text.Add("<i>“I am worried about this spring that Orchid spoke of. It must be further investigated,”</i> she continues, absently wiping some corrupted cum off her breasts, leaving a glistening shine. You somehow manage to drag your eyes back to her face, focusing on what she’s saying.", parse);
+			Text.NL();
+			Text.Add("<i>“It pains me that our hero must leave empty handed, but neither I nor Orchid can give you what you seek,”</i> she admits sadly. <i>“I cannot ask this of any of my other daughters either-”</i> she pauses as the little girl returns, tugging on a twig hanging from Mother Tree’s hair. <i>“Yes, child? How is Orch-”</i> she falls silent as her daughter gives her another insistent tug, glancing at you. The old dryad’s eyes slowly widen as she realizes what Spirit wants.", parse);
+			Text.NL();
+			Text.Add("<i>“My daughter, do you know what this will mean?”</i> Mother Tree asks. The little girl nods, a determined look on her face. The dryad slowly turns back to you, sighing. <i>“Spirit has decided to aid you,”</i> she explains. <i>“To you she may look only a child, but she is powerful. Time will only make her more so. She says to tell you that it is her way of thanking you for saving her sister and the entire glade.”</i>", parse);
+			Text.NL();
+			Text.Add("You take a closer look at the little girl. She shares some of her looks with her older sister, though you’d say she looks to be about ten years old. She distinctly lacks tentacles. <i>“Hold out the gem, Lifegiver,”</i> Mother Dryad intones, oddly formal. You obey her, unsure what's about to happen. Spirit gives you a happy little smile as she reaches out to touch it…", parse);
+			Text.NL();
+			Text.Add("There is a sudden flash of light, and then the little girl is gone. The stone in your hand is warm, pulsing with newfound power. <i>“Do not fear for her, she is alive and well, just in a different form,”</i> Mother Tree assures you. <i>“Still, I cannot help but feel saddened that she must leave me so soon… but a mother cannot hold on to her children forever.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“There is yet much to speak about, but I understand it if you are in a hurry. Return later, for I very much would like to speak with my savior more. I am sure Orchid feels the same way,”</i> she adds, looking over to the betentacled dryad. She notices you watching and blushes prettily.", parse);
+			Text.NL();
+			Text.Add("You thank Mother Tree for her help, the warm stone grasped tightly in your hand. You hope the little girl is all right, as you’re still not sure of the properties of the gem. The best person to ask would be Jeanne, and she awaits you near the crossroads.", parse);
+			Text.Flush();
+			
+			glade.flags["Visit"] = 2;
+			
+			Gui.NextPrompt();
+		});
 	});
+	
+	Encounter.prototype.onVictory.call(enc);
 }
 
 Scenes.DryadGlade.MotherTree = function() {
