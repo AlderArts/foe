@@ -483,6 +483,7 @@ Body.prototype.ToStoragePartial = function(opts) {
 }
 
 Body.prototype.FromStorage = function(storage) {
+	storage = storage || {};
 	
 	this.muscleTone.base = parseFloat(storage.tone)   || this.muscleTone.base;
 	this.bodyMass.base   = parseFloat(storage.mass)   || this.bodyMass.base;
