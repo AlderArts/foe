@@ -632,7 +632,7 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 		if(player.FirstVag())
 			Text.Add("slick cunt as it moves, a slick coating of your fluids on her scales.", parse);
 		else
-			Text.Add("clenching sphincter as it moves, making it distend outwards as she twitches it inside of you.", parse);
+			Text.Add("clenching sphincter as it moves, making it distend outwards as she twitches her tail inside of you.", parse);
 		Text.NL();
 		Text.Add("You let your hands come forward, taking hold of her legs to steady yourself as she slowly pulls her tail out of you... only to push it back in, equally as slow. You feel her tip sliding against your most sensitive spot, and her rough scales grinding across it leave you gasping for breath. She lets out a hiss of delight at the sight of you shuddering.", parse);
 	}, function() { return Math.max((player.FirstVag() ? (40 - player.FirstVag().Tightness() * 5) : (80 - player.Butt().Tightness() * 5)) / 100, 0); });
