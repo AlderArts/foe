@@ -224,19 +224,19 @@ Scenes.Mothgirl.LoneEnc = function() {
 	enc.onLoss = function() {
 		SetGameState(GameState.Event);
 		
-		enc.finalize = function() {
-			Encounter.prototype.onLoss.call(enc);
-		}
+		Gui.Callstack.push(function() {
+			Text.Clear();
+			Text.Add("<i>“Gah!”</i> you cry, falling onto your ass. The moth-girl makes a disappointed <i>“tsk”</i> at you, grabbing your hands and disarming you.", parse);
+			Text.NL();
+			parse["gen"] = player.FirstCock() ? Text.Parse("[cocks]", parse) : "sodden crotch, slick with your feminine excitement";
+			parse["lust"] = player.LustLevel() > 0.7 ? "you're practically begging for it" : "It's only fun when we both enjoy it";
+			Text.Add("<i>“See? We could have saved all this trouble, but now, I'll just </i>take<i> what I wanted… and maybe a little something else besides. I'd hate to let a pretty piece of ass like you slip by, after all. Oh, don't look so put out… [lust],”</i> she grins, reaching down to grab your [gen], wholly aroused at seeing her huge, bare breasts so close you that could kiss them… if you weren't about to be subjected to the moth-girl's baser intentions.", parse);
+			Text.NL();
+	
+			Scenes.Mothgirl.Loss(enc);
+		});
 		
-		Text.Clear();
-		Text.Add("<i>“Gah!”</i> you cry, falling onto your ass. The moth-girl makes a disappointed <i>“tsk”</i> at you, grabbing your hands and disarming you.", parse);
-		Text.NL();
-		parse["gen"] = player.FirstCock() ? Text.Parse("[cocks]", parse) : "sodden crotch, slick with your feminine excitement";
-		parse["lust"] = player.LustLevel() > 0.7 ? "you're practically begging for it" : "It's only fun when we both enjoy it";
-		Text.Add("<i>“See? We could have saved all this trouble, but now, I'll just </i>take<i> what I wanted… and maybe a little something else besides. I'd hate to let a pretty piece of ass like you slip by, after all. Oh, don't look so put out… [lust],”</i> she grins, reaching down to grab your [gen], wholly aroused at seeing her huge, bare breasts so close you that could kiss them… if you weren't about to be subjected to the moth-girl's baser intentions.", parse);
-		Text.NL();
-
-		Scenes.Mothgirl.Loss(enc);
+		Encounter.prototype.onLoss.call(enc);
 	}
 	enc.onVictory = Scenes.Mothgirl.WinPrompt;
 	
@@ -672,5 +672,5 @@ Scenes.Mothgirl.Loss = function(enc, traded) {
 		party.coin -= enc.coin;
 	}
 	Text.Flush();
-	Gui.NextPrompt(enc.finalize);
+	Gui.NextPrompt();
 }
