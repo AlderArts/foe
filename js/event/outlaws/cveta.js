@@ -41,6 +41,7 @@ function Cveta(storage) {
 	this.flags["Music"]   = Cveta.Music.No;
 	this.flags["Singer"]  = Cveta.Singer.No;
 	this.flags["Bard"]    = Cveta.Bard.No;
+	this.flags["Wings"]   = 0;
 	
 	this.violinTimer = new Time();
 	this.flirtTimer  = new Time();
@@ -123,7 +124,7 @@ Cveta.prototype.WakingTime = function() {
 	return (world.time.hour >= 6 && world.time.hour < 20);
 }
 Cveta.prototype.InTent = function() {
-	return (world.time.hour >= 8 && world.time.hour < 10) || (world.time.hour >= 2 && world.time.hour < 6);
+	return (world.time.hour >= 8 && world.time.hour < 10) || (world.time.hour >= 14 && world.time.hour < 18);
 }
 Cveta.prototype.Violin = function() {
 	return this.flags["Met"] >= Cveta.Met.Available;
@@ -539,6 +540,10 @@ Scenes.Cveta.PlayPrompt = function() {
 		}, enabled : true,
 		tooltip : "Well, why not flirt a bit with the beautiful bird?"
 	});
+	options.push({ nameStr : "Pet",
+		func : Scenes.Cveta.Pet, enabled : true,
+		tooltip : "Cveta’s feathers are so luxuriant, you can’t help but want to show her what a pretty petite pet she is."
+	});
 	/* TODO
 	options.push({ nameStr : "name",
 		func : function() {
@@ -551,6 +556,201 @@ Scenes.Cveta.PlayPrompt = function() {
 	});
 	*/
 	Gui.SetButtonsFromList(options, true, Scenes.Cveta.Prompt);
+}
+
+
+
+Scenes.Cveta.Pet = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("Eyeing Cveta’s pretty plumage and fluffy little body, you really, <i>really</i> want to touch those feathers of hers. Yes, yes, you definitely want to feel them in your fingers. What do you intend?", parse);
+	Text.Flush();
+	
+	//[Scratch][Preen][Wings]
+	var options = new Array();
+	options.push({ nameStr : "Scratch",
+		func : function() {
+			Text.Clear();
+			Text.Add("You tell Cveta that she’s been looking quite tense of late, and you’d love to help the beautiful bird work out a little stress. The songstress stops playing, but doesn’t set down her lyre and instead closes her eyes and takes a few deep breaths, the heaving of her chest noticeable from under her gown.", parse);
+			Text.NL();
+			Text.Add("<i>“Yes, [playername],”</i> she says after a few moments’ silence. <i>“I would appreciate that. Start with the back of my neck, please - I get so sore there.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, since she asked so nicely, you’ll respect the lady’s wishes. Cveta bows her head as you approach, allowing you to easily reach into her wavy curtain of hair and dig deep into her feathers, past the outer guard layer and into the soft, fluffy down that lines her skin. It’s easy to guess where she must ache, at the base of her neck where it joins her spine, and your beautiful bird chirps when you begin kneading and scratching, letting you know you’ve found the right spot.", parse);
+			Text.NL();
+			Text.Add("<i>“Mmm… ohh,”</i> Cveta croons, her voice thick and rich as molten gold, betraying her pleasure. <i>“Your hands, [playername]... they are so warm. Back home, they say that good people have warm hands… “</i>", parse);
+			Text.NL();
+			Text.Add("If your hands are warm, then the songstress’ feathers are burning, smooth and silken as they slip between and beneath your fingers - you swear they glisten in what light filters into the tent. Just how does she keep it in such condition, considering that the outlaws’ camp is hardly the finest living to be had on Eden?", parse);
+			Text.NL();
+			Text.Add("Your thoughts are cut short by Cveta instinctively pushing back against your fingers, urging your fingers further down her back - it won’t be long until your hands are on the fabric of her gown.", parse);
+			Text.NL();
+			Text.Add("At last, it seems that she has enough presence of mind to set down her instrument. <i>“Do not stop, please… “</i>", parse);
+			Text.NL();
+			if(cveta.Relation() >= 50) {
+				Text.Add("<i>“…I need someplace else scratched.”</i>", parse);
+				Text.NL();
+				Text.Add("As you continue to tend to the songstress, she reaches up to the satin-lined neck of her gown and picks at the buttons with her gloved hands. Bit by bit, the front of her gown gives way, revealing yet more and more of her body, the deep vermillion of her feathers paling as they approach her belly. Cveta wears no bra, the small, pert lumps of her breasts completely subsumed by her feathers; she throws upon her gown with a flourish, letting you gaze upon the gloss and shine of her glorious feathers as she settles back onto the stool.", parse);
+				Text.NL();
+				Text.Add("<i>“Tend to my tummy, please?”</i> she asks in a small voice. Well, what were you expecting? This <i>is</i> her, after all.", parse);
+				Text.NL();
+				Text.Add("Moving your fingers from the beautiful bird’s neck to her stomach, you find your hands in the softest, most delectable material you’ve ever felt - well, maybe not ever, but it comes pretty damned close. Briefly, you entertain thoughts of plucking her bare and stuffing a pillow - no, an entire mattress - with her feathers; you’d never have trouble falling asleep ever again. Cveta herself is definitely enjoying your ministrations as you continue to scratch her belly, crooning and chirping to herself, rendered speechless by sheer, simple pleasure.", parse);
+				Text.NL();
+				Text.Add("This goes on for a while, you playing your petite pet like a wind-up music box, finding the right places to scratch and knead that she chirps and sings just so with that beautiful voice of hers. On impulse, you work your hands through Cveta’s feathers and over her lower belly until you’re reasonably sure they’re above her womb, then press down gently. The effect is immediate, eliciting a rather undignified half-squawk, half-wail from your petite pet that isn’t one of pain.", parse);
+				Text.NL();
+				Text.Add("<i>“I… I think you can stop now…“</i>", parse);
+				Text.NL();
+			}
+			Text.Add("Grinning, you give her what she wants and return to work on her neck, only this time reaching up and over to give the entirety of her head a good, lovely do-over. Her eyes closed, Cveta chirps and makes to nibble and nuzzle at your hand with her beak, savoring the last of the scratching session before sinking into her stool with a sigh, the songstress’ wings slightly splayed in an insensate stupor. Yes, she’s definitely a lot less uptight now.", parse);
+			Text.NL();
+			Text.Add("<i>“Thank you.”</i>", parse);
+			Text.NL();
+			Text.Add("No, it’s your pleasure to be able to place your hands on such fine feathers.", parse);
+			Text.NL();
+			Text.Add("<i>“Still, it was appreciated, [playername]. Finding someone you can trust to give you a good scratch is hard, and someone who will be discreet about it more so. I hope you can show yourself out, because-”</i> Cveta gestures at herself, ruffled all over from your fingers- “I can’t be seen like this.”</i>", parse);
+			Text.Flush();
+			
+			cveta.relation.IncreaseStat(70, 3);
+			world.TimeStep({hour: 2});
+			Gui.NextPrompt();
+		}, enabled : true,
+		tooltip : "Give the fluffier bits of her body a good scratching. She needs to loosen up."
+	});
+	options.push({ nameStr : "Preen",
+		func : function() {
+			Text.Clear();
+			Text.Add("You tell Cveta that you’d love to help her look her best for her twice-daily performances.", parse);
+			Text.NL();
+			Text.Add("<i>“I would like that very much, [playername],”</i> she replies, perking up immediately. <i>“Having a second pair of eyes and hands about makes it go so much more smoothly.”</i>", parse);
+			Text.NL();
+			Text.Add("Letting the last few notes fade away before setting down her instrument, the songstress then directs you to the trunk at the foot of her cot. Held within are a number of personal possessions and knick-knacks, but it’s a long-handled comb and brush that she directs your attention to - exquisite things with long handles coated with mother-of-pearl.", parse);
+			Text.NL();
+			Text.Add("<i>“Mementos of my previous life,”</i> she says offhandedly as she meets your questioning expression. <i>“They are ripe targets for theft, yes, but I was loath to sell them - and it is hard to get a decent brush these days.”</i>", parse);
+			Text.NL();
+			Text.Add("As with so many things she says, you get the feeling that there’s something more to her words - but then, it pops up often enough that there’s got to be a dud every so often, right? Shaking your head, you push that thought out of your mind and watch as Cveta sets up a small mirror on the trunk, making minute adjustments to its angle until she’s finally satisfied with her reflection.", parse);
+			Text.NL();
+			Text.Add("<i>“The comb, please.”</i>", parse);
+			Text.NL();
+			Text.Add("You hand Cveta the comb, and she stands briefly to undo the sash about her waist, letting it fall to the floor. You’re rewarded with the briefest flash of white silken panties as she loosens her skirts enough to bring out her tailfeathers, then uses her sash to cover what was just exposed. A tantalizing taste of the future, perhaps…", parse);
+			Text.NL();
+			Text.Add("<i>“There, you may start on my tail with the brush. No peeking any more than is absolutely necessary.”</i>", parse);
+			Text.NL();
+			Text.Add("You reassure Cveta that no, you’re not going to peek, even as you start the brush on the glorious plumage of the bird-morph’s tailfeathers - they’re so long that they must drag on the ground when she walks, and yet they’re clean and pristine. Does she have a pocket or fold in the inside of her skirts that keeps them off the dirt? There’s certainly enough space in the ankle-length fabric for such a thing, after all.", parse);
+			Text.NL();
+			Text.Add("Cveta seems entirely focused now on the task of doing her hair - as you watch, she tosses her head with a quick snap of her neck, sending the wavy waterfalls of her crimson locks loose to flow where they will, revealing her usually covered left eye. Her hair unfolds in smooth succession, reaching just below the small of her back, and she hums delightedly before gathering it in her hands and starting work with the brush. Judging by how animated she is as she admires herself in the mirror, there’s no doubt that Cveta knows she’s a pretty little lady in red, and intends to use that fact to her advantage.", parse);
+			Text.NL();
+			Text.Add("Time for you to get to work, too. Save for two long, stiff feathers that look like they belong more on her wings than her tail, Cveta’s tailfeathers are smooth and fluffy, the brush running through them easily without hitting any tangles. Bits of downy fluff come off on occasion as you continue to stroke away, but the songstress’ evident disinterest suggests that it’s not out of the ordinary.", parse);
+			Text.NL();
+			Text.Add("You’re not sure how much time passes like this, the two of you sharing a moment of silence while you work the make the beautiful bird more so. Idly, you find yourself wondering how it would be to brush the entirety of her body, and not just her tail…", parse);
+			Text.NL();
+			Text.Add("<i>“This will be sufficient, I believe.”</i>", parse);
+			Text.NL();
+			Text.Add("Snapping out of your daydream, you find the songstress putting her hair back in place, carefully shaping it with her fingers as best as she can with the aid of the mirror. She smooths it out a little, then lets her locks fall over her left eye, obscuring it from view.", parse);
+			Text.NL();
+			Text.Add("<i>“Wonderful, [playername]. Thank you for your help - please, leave the brush by my side, and I will deal with it once I am done. Your help has been very much appreciated, but I fear I must press upon you to show yourself out, for there is still a little more that needs to be done in preparation for this evening’s performance.”</i>", parse);
+			Text.Flush();
+			
+			cveta.relation.IncreaseStat(70, 3);
+			world.TimeStep({hour: 2});
+			Gui.NextPrompt();
+		}, enabled : true,
+		tooltip : "Help Cveta make sure she’s always looking regal and proper."
+	});
+	options.push({ nameStr : "Wings",
+		func : function() {
+			Text.Clear();
+			if(cveta.Relation() < 50) {
+				Text.Add("<i>“The offer is appreciated, but I believe that I will be fine with handling them on my own,”</i> Cveta tells you. <i>“My wings are very delicate things, as you might imagine, and quite sensitive, too. A deft touch is needed.”</i>", parse);
+				Text.NL();
+				Text.Add("Yeah, you can see why she’s reluctant to let you near her wings, and it’s not just because she needs them in good condition to be able to fly. Looking at the bird-morph’s wings, each and every one of her flight feathers is the rich vermillion of her body, barred with streaks of brown and tipped with a deep violet. It’s hard resist wanting to touch them, yet at the same time it seems so certain that doing so will only damage their beauty… or that you won’t be able to resist the temptation to filch a feather.", parse);
+				Text.NL();
+				Text.Add("<i>“Do not misconstrue my words,”</i> she says, meeting your gaze with a gentle one of her own. <i>“Having someone to deal with the locations I cannot reach would be lovely - my arms are only so long, after all - but I do not think there is anyone around whom I can trust to that degree yet.”</i>", parse);
+				Text.NL();
+				Text.Add("You nod, and back off. She stated as much - you’ll have to get her to trust you more before she’ll let you at her back.", parse);
+				Text.Flush();
+			}
+			else {
+				var first = cveta.flags["Wings"] == 0;
+				cveta.flags["Wings"] = 1;
+				
+				Text.Add("Wordlessly, Cveta sets down her lyre, then rolls her shoulders a few times, loosening up her muscles before spreading her wings. There’s not enough space in the tent for her to extend them fully - they look like they might stretch about one and a half times as long as she is tall if you measured them from wingtip to wingtip, but it’s hard to be certain considering how well they can fold. Each glossy feather is a slightly darker shade of vermillion than her body is, and is barred with brown and tipped with a deep, rich violet.", parse);
+				Text.NL();
+				Text.Add("The songstress doesn’t complain when you unbutton her gown and ease it off her back, her wings instinctively moving in accordance with your hands as you guide them through the slits meant to accommodate them. She certainly doesn’t seem hung up about baring her top in front of you, which is probably because most of what could be seen is hidden under her lush coat of feathers. After instructing you to grab two mirrors from her trunk, she directs you in setting them up so she can see her back.", parse);
+				Text.NL();
+				if(first) {
+					Text.Add("<i>“I presume this is your first time doing this sort of thing?”</i> Cveta asks, twisting her neck to look behind her at you.", parse);
+					Text.NL();
+					Text.Add("You admit that it is.", parse);
+					Text.NL();
+					Text.Add("<i>“Listen clearly, then. Flight feathers are very sensitive and delicate. You are not to use a brush or comb on any of them.”</i>", parse);
+					Text.NL();
+					Text.Add("Then how…?", parse);
+					Text.NL();
+					Text.Add("<i>“By hand,”</i> she replies matter-of-factly, then quickly outlines what you’re supposed to do - look for gaps in her feathers, pick out dirt, gently push back into place anything that’s misaligned, amongst a few other things. You nod, feeling reasonably secure about what you’re supposed to be doing here, and sit down on the cot behind her and set to work. Cveta watches you like a hawk for the first few minutes, then relaxes a little when you fail to make any serious mistakes.", parse);
+				}
+				else {
+					Text.Add("You’ve done this before, and sit down on the cot to steady yourself before you get to work. Ever mindful of her appearance, Cveta watches you for a few moments, then chirps and relaxes when she’s satisfied that you remember how to go about the task.", parse);
+				}
+				Text.NL();
+				Text.Add("Cveta’s flight feathers are long and stiff, yet smooth to the touch - your fingers glide over them as if they were oiled, and considering the soft, glossy sheen emanating from them, it wouldn’t be surprising if that happened to be the case. There isn’t much in the way of dirt or dust to pick out - as could be expected of a fastidious little thing like Cveta - but the bird-morph seems to truly enjoy someone else’s fingers in her sensitive wings.", parse);
+				Text.NL();
+				if(first) {
+					Text.Add("Come to think of it, are they really as sensitive as she says they are? Wanting to find out, you dig your fingers a little deeper, reaching to the roots of her feathers and stroking the thin, muscular membranes beneath. The effect is immediate: a small half-gasp, half-chirp escapes Cveta’s beak, followed by a soft hum of pure contentment.", parse);
+				}
+				else {
+					Text.Add("Knowing just what the songstress needs, you ease your fingers into her wings and begin stroking gently at the sensitive flesh beneath. Cveta hums in wordless contentment, her divine voice filling the tent’s confines as you begin to work on her flight feathers.", parse);
+				}
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					Text.Clear();
+					Text.Add("You ask her if she’s enjoying herself, and she responds by arching her back into your grasp, giving you a good feel of the slight shivers running up her spine and into her wings. Now that’s definitely a yes - you’re tempted to be a little less delicate, add a little pressure here and there, but with how finely sculpted Cveta’s wings are - how great the pressures they must bear when she’s flying, and yet how easily it is for them to be broken or damaged when mishandled - the line that divides pleasure from pain is bound to be a fine one.", parse);
+					Text.NL();
+					Text.Add("<i>“Ah…lower, please. Lower!”</i> She’s practically begging for it, the need and desperation plain in her voice, so you give it to her good and hard, teasing the oh-so-sensitive flesh of her wings as you work. Cveta sucks in a sharp breath, her bosom visibly rising with the sheer effort of doing so, then after making a faint strangled noise in the back of her throat, lets it all out in a generous sigh, her hair falling free and cascading where it will.", parse);
+					Text.NL();
+					Text.Add("<i>“Ohhh…”</i>", parse);
+					Text.NL();
+					parse["hisher"] = player.mfFem("his", "her");
+					Text.Add("At last, you think you’ve done all you can for the bird-morph, and tap her on the shoulder to let her know you’re done. Flicking open dreamy eyes that quickly snap back into focus, she studies herself in both mirrors and reaches behind her to fix a few spots you missed before turning and giving you a nod. <i>“Most satisfactory, for someone who has not been doing this for the entirety of [hisher] life.”</i>", parse);
+					Text.NL();
+					var inc = player.dexterity.IncreaseStat(40, 1);
+					if(inc)
+						Text.Add("Your fingers are aching like…well, something that aches a lot, but you have to admit, you did a good job. In fact, they’ll probably end up a little swifter and more nimble from all the exercise and contorting they’ve been through - once the soreness fades, of course.", parse);
+					else
+						Text.Add("Beaming, you step back and admire your handiwork. It really isn’t bad, considering how nimble your fingers were at the job. Besides, Cveta got an itch she needed scratched, so it’s all good.", parse);
+					Text.NL();
+					
+					cveta.relation.IncreaseStat(70, 3);
+					
+					var wings = player.HasWings();
+					
+					if(wings && wings.Feathered()) {
+						Text.Add("Slowly, shakily, Cveta gets up from the stool and shrugs her shoulders violently a few times, easing her wings back into their usual folded position on her back. When she’s done, she gives you and your own pair of wings an appraising look while she gathers up the top of her gown and folds it up neatly.", parse);
+						Text.NL();
+						Text.Add("<i>“Would you be so kind as to sit down? I wish to reciprocate the favor you have done for me.”</i>", parse);
+						Text.NL();
+						Text.Add("She truly means what she says - the moment you’re seated and ready, the bird-morph has you extend your wings and casts a critical eye upon them.", parse);
+						Text.NL();
+						Text.Add("<i>“Just what have you been getting yourself into, [playername]? No, do not tell me. I am sure you encounter all sorts of misadventures in your travels, but do remember that if you wish to actually use your power of flight in any effective capacity, you will need to keep your feathers in good condition. Please, even if you cannot get anyone else to do it for you, you can still reach behind your back a little, right?”</i>", parse);
+						Text.NL();
+						Text.Add("With that, she begins to work on your feathers with her nimble little fingers, doing for you what you did for her - with much greater proficiency, of course. Humming a joyous, lively tune to herself, she smooths out your feathers, sets them back in their proper places, and cleans out a good deal of wedged grime - how did that even get in there? Your wings aren’t as sensitive as Cveta’s, but it still feels good to have someone who knows what she’s doing to give them a run-through.", parse);
+						Text.NL();
+						Text.Add("Eventually, she’s done, and in much less time than you took, too. Stepping back from the mirrors to let you admire yourself, she beams at you, her eyes wide and bright, and you can’t deny that your wings look a great deal neater than they did before.", parse);
+						Text.NL();
+						cveta.relation.IncreaseStat(70, 1);
+					}
+					Text.Add("<i>“Well,”</i> Cveta says cheerily, putting away her top in her trunk, <i>“That is that. Please, do show yourself out when you are ready, for I am feeling somewhat…“</i> she hesitates a moment, seeking the right words. <i>“Unlike myself. Perhaps I need to lie down for a little while…”</i>", parse);
+					Text.Flush();
+					
+					world.TimeStep({hour: 2});
+					Gui.NextPrompt();
+				});
+			}
+		}, enabled : true,
+		tooltip : "Help Cveta take good care of those delicate and sensitive wings of hers."
+	});
+	Gui.SetButtonsFromList(options, false, null);
 }
 
 Scenes.Cveta.TalkPrompt = function() {
@@ -1796,16 +1996,16 @@ Scenes.Cveta.Performance = function() {
 		Gui.NextPrompt();
 }
 
-Scenes.Cveta.DreamRoses = function() {
+Scenes.Cveta.DreamRoses = function(ravenTrigger) {
 	var parse = {
-
+		raven : Scenes.Dreams.RavenText(ravenTrigger, " and a raven perched on one of the thorny rosebushes", " and the familiar form of a raven perched on one of the rosebushes, something you should remember")
 	};
 	
 	Text.Add("Roses.", parse);
 	Text.NL();
 	Text.Add("They stretch away from you in all directions as far as the eye can see, rosebushes dotting the grassy earth, woody vines that creep along the ground, petals that drift through the air, carried in from some unknown source by the stiff breeze that blows across the fields unimpeded. Red, white and blue, roses, roses everywhere.", parse);
 	Text.NL();
-	Text.Add("And in the midst of it all, Cveta. She stands stiffly in the warm sunlight, head bowed and wings spread as she sings. There is no one to hear her save you and a raven perched on one of the thorny rosebushes, yet she sings anyway, the melancholy melody of the bird-morph’s divine soprano filling the air.", parse);
+	Text.Add("And in the midst of it all, Cveta. She stands stiffly in the warm sunlight, head bowed and wings spread as she sings. There is no one to hear her save you[raven], yet she sings anyway, the melancholy melody of the bird-morph’s divine soprano filling the air.", parse);
 	Text.NL();
 	Text.Add("You step forward to approach Cveta, but run face-first into an invisible barrier extending about an arm’s length from her. Testing the barrier only reveals that it encircles her completely with its confines - around, over, even under when you try to dig into the soft, loamy soil of the rose fields. Neither does trying to call to her from without the barrier work - even if she could hear you from within, she’s completely insensate to anything and everything.", parse);
 	Text.NL();
@@ -1819,10 +2019,11 @@ Scenes.Cveta.DreamRoses = function() {
 }
 
 
-Scenes.Cveta.DreamBrood = function() {
+Scenes.Cveta.DreamBrood = function(ravenTrigger) {
 	var parse = {
 		skinDesc : function() { return player.SkinDesc(); },
-		playername : player.name
+		playername : player.name,
+		raven : Scenes.Dreams.RavenText(ravenTrigger, " Off in the distance, high above the two of you, a raven circles in the air, its dark feathers starkly contrasting against the colorful scene. You can’t quite make it out, but does it look… jealous?", " There’s that raven again, spying on the two of you from up high in the clouds, the voyeuristic little thing. You should really remember it when you wake up.")
 	};
 	
 	Text.Add("<i>“Wake up, beloved.”</i>", parse);
@@ -1833,7 +2034,7 @@ Scenes.Cveta.DreamBrood = function() {
 	Text.NL();
 	Text.Add("Not quite gone is the prudish demeanor, but it’s nice to know that she can be an absolute slut just for you. To be honest, it makes it feel a bit special.", parse);
 	Text.NL();
-	Text.Add("Judging by her flat belly, mischievous glint in her eye and the fact that the feathers about her groin are utterly soaked and glistening, it’s clear what your beautiful bird wants, and she wants it now. Off in the distance, high above the two of you, a raven circles in the air, its dark feathers starkly contrasting against the colorful scene. You can’t quite make it out, but does it look… jealous?", parse);
+	Text.Add("Judging by her flat belly, mischievous glint in her eye and the fact that the feathers about her groin are utterly soaked and glistening, it’s clear what your beautiful bird wants, and she wants it now.[raven]", parse);
 	Text.NL();
 	Text.Add("<i>“I’ve been practicing my mating song again, [playername],”</i> Cveta croons, even as you reach up to run your fingers through her luscious feathers and across her wide, sumptuous, and above all, <i>fertile</i> hips. She tosses her head in that way only she can, and the way the waterfall of her crimson locks flows back into place is a sight to behold. <i>“Want to hear it?”</i>", parse);
 	Text.NL();

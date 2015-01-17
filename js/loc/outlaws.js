@@ -44,7 +44,7 @@ world.loc.Outlaws.Camp.events.push(new Link(
 world.loc.Outlaws.Camp.events.push(new Link(
 	"Cveta", function() {
 		var met  = cveta.flags["Met"] >= Cveta.Met.Available;
-		var time = cveta.WakingTime();
+		var time = cveta.InTent();
 		return met && time;
 	}, true,
 	function() {

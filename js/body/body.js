@@ -705,6 +705,14 @@ Hair.prototype.Long = function() {
 }
 
 
+BodyPart.prototype.Feathered = function() {
+	var race = this.race;
+	switch(race) {
+		case Race.avian: return true;
+		default: return false;
+	}
+}
+
 /*
 Race = {
 	human  : 0,

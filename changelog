@@ -19,6 +19,9 @@ Version 0.3u
 * Restructured how capacity and stretch works. Still pending some balance. The values have been set on a different scale, and scenes lockouts should now only be based on cock thickness (not length). There may still be some weirdness. Saves have been tweaked for player, kiakai and rosalin.
 * Added mastery skills for all the implemented jobs. These are only unlocked after you reach master level.
 * Bandits on the kings road are a bit tougher now, sometimes.
+* Added new scenes for Cveta by The Observer:
+ - Teach (jobs not 100% implemented yet)
+ - Pet: Scratch, Preen, Wings
 
 --------------------------------------------
              PREVIOUS VERSIONS
