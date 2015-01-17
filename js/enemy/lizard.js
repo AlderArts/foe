@@ -493,7 +493,7 @@ Scenes.Lizards.WinFuckVag = function(enc) {
 		               cum > 3 ? "generous" : "large";
 		Text.Add("Letting out a groan, you unload and flood her with a [cum] amount of nut-batter. You idly wonder if you’ll fertilize her eggs, the thought of a pregnant lizard sending another spurt from your [cock].", parse);
 		if(player.NumCocks() > 1)
-			Text.Add(" Your other cock[s2] blast [itTheir2] load[s2] across her back, coating her in jizz both inside and out.", parse);
+			Text.Add(" Your other cock[s2] blast [itsTheir2] load[s2] across her back, coating her in jizz both inside and out.", parse);
 	}
 	else
 		Text.Add("Even if you can’t feel the lizan squeezing her walls around your artificial cock, her passionate thrashing grinding the base of the toy against your private parts is enough to set you off. You cry out, waves of pleasure spreading through your loins as you fall onto her back.", parse);
