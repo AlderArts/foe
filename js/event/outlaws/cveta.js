@@ -160,7 +160,7 @@ Scenes.Cveta.ViolinApproach = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("As you’re making to leave from the fire pit with the rest of the outlaws, you hear light footsteps in the dirt behind you, and turn to find Cveta herself eating up the distance between the two of you in big strides - or at least, as big strides as her petite frame will allow.", parse);
+	Text.Add("As you’re making to leave from the fire pit with the rest of the outlaws, you hear light footsteps in the dirt behind you, and turn to find Cveta herself eating up the distance between the two of you in big strides - or at least, strides as big as her petite frame will allow.", parse);
 	Text.NL();
 	Text.Add("<i>“Excuse me, [playername]. Do you have a moment?”</i>", parse);
 	Text.Flush();
@@ -172,7 +172,7 @@ Scenes.Cveta.ViolinApproach = function() {
 			Text.Clear();
 			Text.Add("You ask Cveta what it is she wants.", parse);
 			Text.NL();
-			Text.Add("<i>“I have noticed you often at my performances, [playername]; I take it you have developed a ear for my music. How would you like to help me improve on those little shows?”</i>", parse);
+			Text.Add("<i>“I have noticed you often at my performances, [playername]; I take it you have developed an ear for my music. How would you like to help me improve on those little shows?”</i>", parse);
 			Text.NL();
 			Text.Add("Is she asking you to join in on her performances? Because you probably don’t have the time to-", parse);
 			Text.NL();
@@ -206,7 +206,7 @@ Scenes.Cveta.ViolinApproach = function() {
 				Text.Add("“Well. The guards were not too pleased with my actions, and declared me some sort of witch in short order. If Zenith had not been near the city on some business of his own, it is likely I would be rotting in some cell at the moment - a most daunting prospect, I am sure you can agree. Nevertheless, the fact remains that I am… what is the term for it? Persona non grata within Rigard for a while, and I need someone to run this errand for me.”", parse);
 				Text.NL();
 				parse["t"] = party.InParty(terry) ? ", enough to make Terry’s eyes instinctively light up at the mere sight of it" : "";
-				Text.Add("“So here it is, then.”</i> Cveta reaches into her gown and draws out a sizable pouch of coin. It’s quite heavy[t], but should one really be surprised that a “princess” has money? <i>“It is my wish that you head to the merchant street within Rigard and seek out the establishment known as ‘Rintell’s’. They have in stock a Grameria violin, although the proprietor is not appraised of the instrument’s true value. He will think he is getting the upper hand of the deal, while the converse is true; pay his asking price for violin, bow and case, and return to me with them. A simple errand.”</i>", parse);
+				Text.Add("“So here it is, then.”</i> Cveta reaches into her gown and draws out a sizable pouch of coin. It’s quite heavy[t], but should one really be surprised that a “princess” has money? <i>“It is my wish that you head to the merchant street within Rigard and seek out the establishment known as ‘Rintell’s’. They have in stock a Grameria violin, although the proprietor is not informed of the instrument’s true value. He will think he is getting the upper hand of the deal, while the reverse is true; pay his asking price for violin, bow and case, and return to me with them. A simple errand.”</i>", parse);
 				Text.NL();
 				Text.Add("It certainly sounds simple enough. You tuck away the money carefully and promise Cveta that you’ll return soon with her instrument.", parse);
 				Text.NL();
@@ -294,7 +294,7 @@ Scenes.Cveta.ViolinPrompt = function() {
 			Text.NL();
 			Text.Add("It’s not that, really, you explain hurriedly. It’s just that you haven’t had the time to head out and get it. Cveta’s expression is completely calm and neutral as she listens, betraying absolutely no trace of whether she believes your words or not.", parse);
 			Text.NL();
-			Text.Add("<i>“Mm. Please be reminded that I would truly appreciate it if you would make haste, [playername]. It would simply not do if someone else were to come in and pick it up before you had the chance to. There are not many Grameria violins on Eden - there are some rumors that they came from other worlds, back when portals were common, but whatever their origin, they product some of the richest music possible from a string instrument.”</i>", parse);
+			Text.Add("<i>“Mm. Please be reminded that I would truly appreciate it if you would make haste, [playername]. It would simply not do if someone else were to come in and pick it up before you had the chance to. There are not many Grameria violins on Eden - there are some rumors that they came from other worlds, back when portals were common, but whatever their origin, they produce some of the richest music possible from a string instrument.”</i>", parse);
 			Text.NL();
 			Text.Add("Without waiting for a reply from you, she sweeps about and moves back into the crowd, her gown trailing behind her until it, too, vanishes from sight.", parse);
 			Text.Flush();
@@ -312,9 +312,9 @@ Scenes.Cveta.Approach = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("Brushing aside the flaps, you step into Cveta’s tent, leaving behind the hubbub of the rest of the outlaw camp behind. As always, the songstress is perched on her stool, the picture of elegant composure as she acknowledges your entrance with a dip of her head. The violin you bought for her rests in its case by her trunk, carefully sealed against dust and damp alike.", parse);
+	Text.Add("Brushing aside the flaps, you step into Cveta’s tent, leaving behind the hubbub of the rest of the outlaw camp. As always, the songstress is perched on her stool, the picture of elegant composure as she acknowledges your entrance with a dip of her head. The violin you bought for her rests in its case by her trunk, carefully sealed against dust and damp alike.", parse);
 	if(cveta.BlueRoses())
-		Text.Add(" A small pot with the stem cutting the two of you took from the estate sits by the tent’s entrance; the plant obviously well-cared for and wants for nothing. It’ll be a while before it can bring forth any blossoms, but it certainly isn’t going to wither on Cveta’s watch.", parse);
+		Text.Add(" A small pot with the stem cutting the two of you took from the estate sits by the tent’s entrance; the plant obviously well-cared for and wanting for nothing. It’ll be a while before it can bring forth any blossoms, but it certainly isn’t going to wither on Cveta’s watch.", parse);
 	Text.NL();
 	Text.Add("<i>“Welcome, [playername],”</i> she says, toning down the music from her lyre but not stopping, providing a faint musical backdrop to your conversation.", parse);
 	if(cveta.Relation() >= 80)
