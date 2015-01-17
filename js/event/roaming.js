@@ -38,6 +38,8 @@ Scenes.Roaming.KingdomPatrol = function(entering) {
 		playername : player.name
 	};
 	
+	var bonus = party.location == world.loc.KingsRoad.Road;
+	
 	Text.Clear();
 	if(entering)
 		Text.Add("As you make your way to the plains,", parse);
@@ -59,7 +61,7 @@ Scenes.Roaming.KingdomPatrol = function(entering) {
 	var scenes = new EncounterTable();
 	
 	scenes.AddEnc(function() {
-		rigard.bandits = Scenes.Roaming.BanditsGen(capt);
+		rigard.bandits = Scenes.Roaming.BanditsGen(capt, bonus ? 3 : 0);
 		parse["rbanditsdesc"] = rigard.bandits.desc;
 		
 		Text.Add("The [rmanwoman] at the front of the group waves for [rhisher] companions to wait, and rides up to you on [rhisher] own. [rHeShe] is a young pure human [rmanwoman] and is wearing new looking armor, though dirt staining the tabard points to heavier recent use.", parse);
@@ -189,12 +191,12 @@ Scenes.Roaming.KingdomPatrol = function(entering) {
 	scenes.Get();
 }
 
-Scenes.Roaming.BanditsGen = function(capt) {
+Scenes.Roaming.BanditsGen = function(capt, levelbonus) {
 	var CreateBandit = function() {
 		var rand = Math.random();
 		var gender = rand < 0.5 ? Gender.male :
 		             rand < 0.9 ? Gender.female : Gender.herm;
-		return new Bandit(gender);
+		return new Bandit(gender, levelbonus);
 	};
 	
 	var colors = ["red", "blue", "green", "beige", "purple", "yellow", "orange", "puce"];

@@ -90,7 +90,7 @@ StreetUrchin.prototype = new Entity();
 StreetUrchin.prototype.constructor = StreetUrchin;
 
 
-function Bandit(gender) {
+function Bandit(gender, levelbonus) {
 	Entity.call(this);
 	this.monsterName       = "the bandit";
 	this.MonsterName       = "The bandit";
@@ -132,6 +132,7 @@ function Bandit(gender) {
 	
 	this.level             = 3;
 	if(Math.random() > 0.8) this.level = 4;
+	this.level             += levelbonus || 0;
 	this.sexlevel          = 2;
 	
 	this.combatExp         = this.level;
