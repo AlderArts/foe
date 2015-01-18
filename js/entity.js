@@ -13,7 +13,7 @@ function Stat(base) {
 }
 Stat.prototype.Get = function() { return this.base + this.bonus + this.level + this.temp + this.cheat; }
 Stat.prototype.Clear = function() { this.bonus = 0; this.temp = 0; }
-Stat.prototype.GrowthRank = function() { return Math.floor((this.growth * 10) - 9); }
+Stat.prototype.GrowthRank = function() { return Math.round((this.growth * 10) - 9, -1); }
 // Changes _ONE_ stat, closing in on the ideal
 // Cap the change to a maximum value
 // Returns the applied difference, unless the diff is zero

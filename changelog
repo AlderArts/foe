@@ -23,6 +23,7 @@ Version 0.3u
  - Teach (jobs not 100% implemented yet)
  - Pet: Scratch, Preen, Wings
 * Reduced the effects that Testos has on your cock.
+* Fixed a bug where stat Rank would be incorrectly shown due to rounding errors.
 
 --------------------------------------------
              PREVIOUS VERSIONS
