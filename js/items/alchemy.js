@@ -489,20 +489,14 @@ Items.Testos.PushEffect(function(target) {
 		var len = false, thk = false;
 		for(var i = 0; i < cocks.length; i++) {
 			// Base size
-			var inc  = cocks[i].length.IncreaseStat(25, 100);
-			var inc2 = cocks[i].thickness.IncreaseStat(7, 100);
-			if(inc == null)
-				inc = cocks[i].length.IncreaseStat(50, 5);
-			if(inc2 == null)
-				inc2 = cocks[i].thickness.IncreaseStat(12, 1);
-			len |= inc;
-			thk |= inc2;
+			len = cocks[i].length.IncreaseStat(25, 1);
+			thk = cocks[i].thickness.IncreaseStat(7, 1);
 		}
 		if(len || thk) {
 			parse["s"]    = target.NumCocks() > 1 ? "s" : "";
 			parse["notS"] = target.NumCocks() > 1 ? "" : "s";
 			Text.NL();
-			Text.Add("[Poss] [multiCockDesc] shudder[notS], the stiff dick[s] growing significantly ", parse);
+			Text.Add("[Poss] [multiCockDesc] shudder[notS], the stiff dick[s] growing ", parse);
 			if(len)
 				Text.Add("longer", parse);
 			if(len && thk)
