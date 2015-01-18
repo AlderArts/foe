@@ -49,7 +49,7 @@ Estevan.GaySex = {
 
 Estevan.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
-	
+	this.body.FromStorage(storage.body);
 	// Load flags
 	this.LoadFlags(storage);
 }
@@ -58,7 +58,7 @@ Estevan.prototype.ToStorage = function() {
 	var storage = {};
 	
 	this.SavePersonalityStats(storage);
-	
+	this.SaveBodyPartial(storage, {ass: true});
 	this.SaveFlags(storage);
 	
 	return storage;

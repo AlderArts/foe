@@ -451,31 +451,31 @@ Body.prototype.ToStorage = function() {
 }
 
 Body.prototype.ToStoragePartial = function(opts) {
-	var storage;
-	if(opts.cock && this.body.cock.length > 0) {
+	var storage = {};
+	if(opts.cock && this.cock.length > 0) {
 		var cock = [];
-		for(var i = 0; i < this.body.cock.length; ++i) {
-			cock.push(this.body.cock[i].ToStorage(opts.full));
+		for(var i = 0; i < this.cock.length; ++i) {
+			cock.push(this.cock[i].ToStorage(opts.full));
 		}
 		storage.cock = cock;
 	}
 	if(opts.balls) {
-		storage.balls = this.body.balls.ToStorage(opts.full);
+		storage.balls = this.balls.ToStorage(opts.full);
 	}
-	if(opts.vag && this.body.vagina.length > 0) {
+	if(opts.vag && this.vagina.length > 0) {
 		var vag = [];
-		for(var i = 0; i < this.body.vagina.length; ++i) {
-			vag.push(this.body.vagina[i].ToStorage(opts.full));
+		for(var i = 0; i < this.vagina.length; ++i) {
+			vag.push(this.vagina[i].ToStorage(opts.full));
 		}
 		storage.vag = vag;
 	}
 	if(opts.ass) {
-		storage.ass = this.body.ass.ToStorage(opts.full);
+		storage.ass = this.ass.ToStorage(opts.full);
 	}
-	if(opts.breasts && this.body.breasts.length > 0) {
+	if(opts.breasts && this.breasts.length > 0) {
 		var breasts = [];
-		for(var i = 0; i < this.body.breasts.length; ++i) {
-			breasts.push(this.body.breasts[i].ToStorage(opts.full));
+		for(var i = 0; i < this.breasts.length; ++i) {
+			breasts.push(this.breasts[i].ToStorage(opts.full));
 		}
 		storage.breasts = breasts;
 	}
@@ -491,40 +491,50 @@ Body.prototype.FromStorage = function(storage) {
 	this.weigth.base     = parseFloat(storage.weigth) || this.weigth.base;
 	this.femininity.base = parseFloat(storage.fem)    || this.femininity.base;
 	
-	this.head.race   = parseInt(storage.head.race) || this.head.race;
-	this.head.color  = parseInt(storage.head.col)  || this.head.color;
-	this.head.mouth.tongue.race       = parseInt(storage.head.mouth.ton.race) || this.head.mouth.tongue.race;
-	this.head.mouth.tongue.color      = parseInt(storage.head.mouth.ton.col)  || this.head.mouth.tongue.color;
-	this.head.mouth.capacity.base     = parseFloat(storage.head.mouth.cap)    || this.head.mouth.capacity.base;
-	this.head.mouth.tongueLength.base = parseFloat(storage.head.mouth.tonL)   || this.head.mouth.tongueLength.base;
-	
-	this.head.hair.race        = parseInt(storage.head.hair.race)  || this.head.hair.race;
-	this.head.hair.color       = parseInt(storage.head.hair.col)   || this.head.hair.color;
-	this.head.hair.length.base = parseInt(storage.head.hair.len)   || this.head.hair.length.base;
-	this.head.hair.style       = parseInt(storage.head.hair.style) || this.head.hair.style;
-	
-	this.head.eyes.race        = parseInt(storage.head.eyes.race)  || this.head.eyes.race;
-	this.head.eyes.color       = parseInt(storage.head.eyes.col)   || this.head.eyes.color;
-	this.head.eyes.count.base  = parseInt(storage.head.eyes.count) || this.head.eyes.count.base;
-	
-	this.head.ears.race        = parseInt(storage.head.ears.race)  || this.head.ears.race;
-	this.head.ears.color       = parseInt(storage.head.ears.col)   || this.head.ears.color;
-	
-	this.head.appendages = new Array();
-	if(storage.head.app) {
-		for(var i = 0; i < storage.head.app.length; i++) {
-			var newApp = new Appendage();
-			newApp.FromStorage(storage.head.app[i]);
-			this.head.appendages.push(newApp);
+	if(storage.head) {
+		this.head.race   = parseInt(storage.head.race) || this.head.race;
+		this.head.color  = parseInt(storage.head.col)  || this.head.color;
+		
+		if(storage.head.mouth) {
+			this.head.mouth.tongue.race       = parseInt(storage.head.mouth.ton.race) || this.head.mouth.tongue.race;
+			this.head.mouth.tongue.color      = parseInt(storage.head.mouth.ton.col)  || this.head.mouth.tongue.color;
+			this.head.mouth.capacity.base     = parseFloat(storage.head.mouth.cap)    || this.head.mouth.capacity.base;
+			this.head.mouth.tongueLength.base = parseFloat(storage.head.mouth.tonL)   || this.head.mouth.tongueLength.base;
+		}
+		if(storage.head.hair) {
+			this.head.hair.race        = parseInt(storage.head.hair.race)  || this.head.hair.race;
+			this.head.hair.color       = parseInt(storage.head.hair.col)   || this.head.hair.color;
+			this.head.hair.length.base = parseInt(storage.head.hair.len)   || this.head.hair.length.base;
+			this.head.hair.style       = parseInt(storage.head.hair.style) || this.head.hair.style;
+		}
+		if(storage.head.eyes) {
+			this.head.eyes.race        = parseInt(storage.head.eyes.race)  || this.head.eyes.race;
+			this.head.eyes.color       = parseInt(storage.head.eyes.col)   || this.head.eyes.color;
+			this.head.eyes.count.base  = parseInt(storage.head.eyes.count) || this.head.eyes.count.base;
+		}
+		if(storage.head.ears) {
+			this.head.ears.race        = parseInt(storage.head.ears.race)  || this.head.ears.race;
+			this.head.ears.color       = parseInt(storage.head.ears.col)   || this.head.ears.color;
+		}
+		
+		if(storage.head.app) {
+			this.head.appendages = new Array();
+			for(var i = 0; i < storage.head.app.length; i++) {
+				var newApp = new Appendage();
+				newApp.FromStorage(storage.head.app[i]);
+				this.head.appendages.push(newApp);
+			}
 		}
 	}
 	
-	this.torso.race         = parseInt(storage.torso.race) || this.torso.race;
-	this.torso.color        = parseInt(storage.torso.col)  || this.torso.color;
-	this.torso.hipSize.base = parseFloat(storage.torso.hip)  || this.torso.hipSize.base;
+	if(storage.torso) {
+		this.torso.race         = parseInt(storage.torso.race) || this.torso.race;
+		this.torso.color        = parseInt(storage.torso.col)  || this.torso.color;
+		this.torso.hipSize.base = parseFloat(storage.torso.hip)  || this.torso.hipSize.base;
+	}
 	
-	this.backSlots = new Array();
 	if(storage.back) {
+		this.backSlots = new Array();
 		for(var i = 0; i < storage.back.length; i++) {
 			var newApp = new Appendage();
 			newApp.FromStorage(storage.back[i]);
@@ -566,7 +576,6 @@ Body.prototype.FromStorage = function(storage) {
 		}
 	}
 
-	this.ass = new Butt();
 	this.ass.FromStorage(storage.ass);
 	
 	if(storage.breasts) {
@@ -577,16 +586,16 @@ Body.prototype.FromStorage = function(storage) {
 			this.breasts.push(b);
 		}
 	}
-
-	this.arms = new BodyPart();
-	{
+	if(storage.arms) {
+		this.arms = new BodyPart();
 		var a = storage.arms;
 		this.arms.race  = parseInt(a.race)  || this.torso.race;
 		this.arms.color = parseInt(a.col)   || this.torso.color;
 		this.arms.count = parseInt(a.count) || 2;
 	}
-	this.legs = new BodyPart();
-	{
+	
+	if(storage.legs) {
+		this.legs = new BodyPart();
 		var a = storage.legs;
 		this.legs.race  = parseInt(a.race)  || this.torso.race;
 		this.legs.color = parseInt(a.col)   || this.torso.color;

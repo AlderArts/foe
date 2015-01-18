@@ -37,6 +37,7 @@ Breasts.prototype.ToStorage = function(full) {
 }
 
 Breasts.prototype.FromStorage = function(storage) {
+	storage = storage || {};
 	this.color                = parseInt(storage.col)      || this.color;
 	this.race                 = parseInt(storage.race)     || this.race;
 	this.nippleCount          = parseInt(storage.nipC)     || this.nippleCount;

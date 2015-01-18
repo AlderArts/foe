@@ -25,11 +25,12 @@ Butt.prototype.ToStorage = function(full) {
 }
 
 Butt.prototype.FromStorage = function(storage) {
+	storage = storage || {};
 	this.capacity.base   = parseFloat(storage.cap)  || this.capacity.base;
 	this.minStretch.base = parseFloat(storage.mstr) || this.minStretch.base;
 	this.stretch.base    = parseFloat(storage.str)  || this.stretch.base;
 	this.buttSize.base   = parseFloat(storage.size) || this.buttSize.base;
-	this.virgin          = parseInt(storage.virgin) == 1;
+	this.virgin          = storage.hasOwnProperty("virgin") ? parseInt(storage.virgin) == 1 : this.virgin;
 }
 
 Butt.prototype.Cap = function() {

@@ -38,6 +38,7 @@ Vagina.prototype.ToStorage = function(full) {
 }
 
 Vagina.prototype.FromStorage = function(storage) {
+	storage = storage || {};
 	this.color              = parseInt(storage.col)     || this.color;
 	this.capacity.base      = parseFloat(storage.cap)   || this.capacity.base;
 	this.minStretch.base    = parseFloat(storage.mstr)  || this.minStretch.base;
@@ -45,7 +46,7 @@ Vagina.prototype.FromStorage = function(storage) {
 	this.wetness.base       = parseFloat(storage.wet)   || this.wetness.base;
 	this.clitThickness.base = parseFloat(storage.clitT) || this.clitThickness.base;
 	this.clitLength.base    = parseFloat(storage.clitL) || this.clitLength.base;
-	this.virgin             = parseInt(storage.virgin) == 1;
+	this.virgin             = storage.hasOwnProperty("virgin") ? parseInt(storage.virgin) == 1 : this.virgin;
 }
 
 Vagina.prototype.Cap = function() {

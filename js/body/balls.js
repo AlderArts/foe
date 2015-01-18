@@ -35,6 +35,7 @@ Balls.prototype.ToStorage = function(full) {
 }
 
 Balls.prototype.FromStorage = function(storage) {
+	storage = storage || {};
 	this.race               = parseInt(storage.race)   || this.race;
 	this.color              = parseInt(storage.col)    || this.color;
 	this.count.base         = parseInt(storage.count)  || this.count.base;
