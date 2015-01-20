@@ -336,7 +336,7 @@ Items.Virilium.PushEffect(function(target) {
 		itThey : target.HasBalls() ? "they" : "it"
 	};
 	if(target.HasBalls() && Math.random() < 0.4) {
-		var res = target.Balls().size.IncreaseStat(10, 1);
+		var res = target.Balls().size.IncreaseStat(14, 1);
 		if(res > 0) {
 			Text.Add("[Poss] balls have grown in size to [ballsDesc]!", parse);
 			Text.NL();
@@ -441,18 +441,26 @@ Items.Testos.PushEffect(function(target) {
 });
 Items.Testos.PushEffect(function(target) {
 	var parse = {
+		Name: target.NameDesc(),
 		Poss: target.Possessive(),
 		ballsDesc : function() { return target.BallsDesc(); },
 		s      : target.HasBalls() ? "s" : "",
 		notS   : target.HasBalls() ? "" : "s",
+		notS2  : target.plural()   ? "" : "s",
 		itThey : target.HasBalls() ? "they" : "it"
 	};
 	if(target.HasBalls() && Math.random() < 0.6) {
-		var res = target.Balls().size.IncreaseStat(10, 1);
+		var res = target.Balls().size.IncreaseStat(14, 1);
 		if(res > 0) {
 			Text.Add("[Poss] balls have grown in size to [ballsDesc]!", parse);
 			Text.NL();
 		}
+	}
+	if(!target.HasBalls() && target.FirstCock() && Math.random() < 0.5) {
+		target.Balls().count.base = 2;
+		target.Balls().size.base = 3;
+		Text.Add("[Name] grow[notS2] a pair of average testicles.", parse);
+		Text.NL();
 	}
 	Text.Flush();
 });
@@ -489,8 +497,8 @@ Items.Testos.PushEffect(function(target) {
 		var len = false, thk = false;
 		for(var i = 0; i < cocks.length; i++) {
 			// Base size
-			len = cocks[i].length.IncreaseStat(25, 1);
-			thk = cocks[i].thickness.IncreaseStat(7, 1);
+			len = cocks[i].length.IncreaseStat(35, 1);
+			thk = cocks[i].thickness.IncreaseStat(10, .5);
 		}
 		if(len || thk) {
 			parse["s"]    = target.NumCocks() > 1 ? "s" : "";
