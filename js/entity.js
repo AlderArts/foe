@@ -2,18 +2,20 @@
 // Basic game entity
 // Enemies and player inherit from Entity
 
-function Stat(base) {
+function Stat(base, growth, growthStep) {
 	this.base   = base || 0; // Base stat, increased by levelling and TFs
 	this.bonus  = 0; // Bonuses got by equipment/auras/perks etc
 	this.level  = 0; // Bonuses got from levels
 	this.temp   = 0; // Bonuses or penalties that are cleared after end of each combat
 	this.cheat  = 0; // Bonuses got by DEBUG flag etc
-	this.growth = 1;
+	this.growth = growth || 1;
+	this.growthStep = growthStep || 0.1;
+	this.growthBase = this.growth;
 	this.debug  = null;
 }
 Stat.prototype.Get = function() { return this.base + this.bonus + this.level + this.temp + this.cheat; }
 Stat.prototype.Clear = function() { this.bonus = 0; this.temp = 0; }
-Stat.prototype.GrowthRank = function() { return Math.round((this.growth * 10) - 9, -1); }
+Stat.prototype.GrowthRank = function() { return Math.round(((this.growth-this.growthBase) / this.growthStep) + 1, -1); }
 // Changes _ONE_ stat, closing in on the ideal
 // Cap the change to a maximum value
 // Returns the applied difference, unless the diff is zero
@@ -147,32 +149,32 @@ function Entity() {
 	
 	// Health stat and functions
 	this.curHp        = 0;
-	this.maxHp        = new Stat(10); this.maxHp.growth        = 10;
+	this.maxHp        = new Stat(10, 10, 5);
 	this.maxHp.debug = function() { return that.name + ".maxHp"; }
 	// SP
 	this.curSp        = 0;
-	this.maxSp        = new Stat(10); this.maxSp.growth        = 5;
+	this.maxSp        = new Stat(10, 5, 5);
 	this.maxSp.debug = function() { return that.name + ".maxSp"; }
 
 	// Lust stat and functions
 	this.curLust      = 0;
-	this.maxLust      = new Stat(10); this.maxLust.growth      = 5;
+	this.maxLust      = new Stat(10, 5, 5);
 	this.maxLust.debug = function() { return that.name + ".maxLust"; }
 	
 	// Main stats
-	this.strength     = new Stat(0); this.strength.growth     = 1;
+	this.strength     = new Stat(0, 1, 0.1);
 	this.strength.debug = function() { return that.name + ".strength"; }
-	this.stamina      = new Stat(0); this.stamina.growth      = 1;
+	this.stamina      = new Stat(0, 1, 0.1);
 	this.stamina.debug = function() { return that.name + ".stamina"; }
-	this.dexterity    = new Stat(0); this.dexterity.growth    = 1;
+	this.dexterity    = new Stat(0, 1, 0.1);
 	this.dexterity.debug = function() { return that.name + ".dexterity"; }
-	this.intelligence = new Stat(0); this.intelligence.growth = 1;
+	this.intelligence = new Stat(0, 1, 0.1);
 	this.intelligence.debug = function() { return that.name + ".intelligence"; }
-	this.spirit       = new Stat(0); this.spirit.growth       = 1;
+	this.spirit       = new Stat(0, 1, 0.1);
 	this.spirit.debug = function() { return that.name + ".spirit"; }
-	this.libido       = new Stat(0); this.libido.growth       = 1;
+	this.libido       = new Stat(0, 1, 0.1);
 	this.libido.debug = function() { return that.name + ".libido"; }
-	this.charisma     = new Stat(0); this.charisma.growth     = 1;
+	this.charisma     = new Stat(0, 1, 0.1);
 	this.charisma.debug = function() { return that.name + ".charisma"; }
 	
 	// Equipment
@@ -2037,13 +2039,16 @@ Entity.prototype.LevelUpPrompt = function(backFunc) {
 				Text.Add("[job] level [lvl]/[maxlvl] (exp " + Math.floor(jd.experience) + "/" + Math.floor(toLevel) + ")</td></tr>", parse);
 		}
 	}
-	Text.Add("<tr><td><b>Strength:</b></td><td>"     + Math.floor(this.Str()) + " (Rank " + this.strength.GrowthRank() + ")</td></tr>");
-	Text.Add("<tr><td><b>Stamina:</b></td><td>"      + Math.floor(this.Sta()) + " (Rank " + this.stamina.GrowthRank() + ")</td></tr>");
-	Text.Add("<tr><td><b>Dexterity:</b></td><td>"    + Math.floor(this.Dex()) + " (Rank " + this.dexterity.GrowthRank() + ")</td></tr>");
-	Text.Add("<tr><td><b>Intelligence:</b></td><td>" + Math.floor(this.Int()) + " (Rank " + this.intelligence.GrowthRank() + ")</td></tr>");
-	Text.Add("<tr><td><b>Spirit:</b></td><td>"       + Math.floor(this.Spi()) + " (Rank " + this.spirit.GrowthRank() + ")</td></tr>");
-	Text.Add("<tr><td><b>Libido:</b></td><td>"       + Math.floor(this.Lib()) + " (Rank " + this.libido.GrowthRank() + ")</td></tr>");
-	Text.Add("<tr><td><b>Charisma:</b></td><td>"     + Math.floor(this.Cha()) + " (Rank " + this.charisma.GrowthRank() + ")</td></tr>");
+	Text.Add("<tr><td><b>HP:</b></td><td>"           + Math.floor(this.HP())   + " (Rank " + this.maxHp.GrowthRank() + ")</td></tr>");
+	Text.Add("<tr><td><b>SP:</b></td><td>"           + Math.floor(this.SP())   + " (Rank " + this.maxSp.GrowthRank() + ")</td></tr>");
+	Text.Add("<tr><td><b>Lust:</b></td><td>"         + Math.floor(this.Lust()) + " (Rank " + this.maxLust.GrowthRank() + ")</td></tr>");
+	Text.Add("<tr><td><b>Strength:</b></td><td>"     + Math.floor(this.Str())  + " (Rank " + this.strength.GrowthRank() + ")</td></tr>");
+	Text.Add("<tr><td><b>Stamina:</b></td><td>"      + Math.floor(this.Sta())  + " (Rank " + this.stamina.GrowthRank() + ")</td></tr>");
+	Text.Add("<tr><td><b>Dexterity:</b></td><td>"    + Math.floor(this.Dex())  + " (Rank " + this.dexterity.GrowthRank() + ")</td></tr>");
+	Text.Add("<tr><td><b>Intelligence:</b></td><td>" + Math.floor(this.Int())  + " (Rank " + this.intelligence.GrowthRank() + ")</td></tr>");
+	Text.Add("<tr><td><b>Spirit:</b></td><td>"       + Math.floor(this.Spi())  + " (Rank " + this.spirit.GrowthRank() + ")</td></tr>");
+	Text.Add("<tr><td><b>Libido:</b></td><td>"       + Math.floor(this.Lib())  + " (Rank " + this.libido.GrowthRank() + ")</td></tr>");
+	Text.Add("<tr><td><b>Charisma:</b></td><td>"     + Math.floor(this.Cha())  + " (Rank " + this.charisma.GrowthRank() + ")</td></tr>");
 	
 	Text.Add("</table>");
 	Text.NL();
