@@ -173,14 +173,14 @@ Jobs["Fighter"].Long = function(entity) {
 Jobs["Fighter"].abilities.AddAbility(Abilities.Physical.Bash);
 Jobs["Fighter"].abilities.AddAbility(Abilities.Physical.Pierce);
 Jobs["Fighter"].abilities.AddAbility(Abilities.Physical.DAttack);
-Jobs["Fighter"].abilities.AddAbility(Abilities.Physical.CrushingStrike);
+Jobs["Fighter"].abilities.AddAbility(Abilities.Physical.Provoke);
 Jobs["Fighter"].levels.push(new JobLevel(10,  [{ab: Abilities.Physical.Bash, set: "Skills"}], {"str" : 0.2}));
 Jobs["Fighter"].levels.push(new JobLevel(20,  null, {"str" : 0.1, "sta" : 0.1}));
 Jobs["Fighter"].levels.push(new JobLevel(40,  [{ab: Abilities.Physical.Pierce, set: "Skills"}], {"str" : 0.1, "dex" : 0.1}));
 Jobs["Fighter"].levels.push(new JobLevel(80,  null, {"str" : 0.2}));
 Jobs["Fighter"].levels.push(new JobLevel(160, [{ab: Abilities.Physical.DAttack, set: "Skills"}], {"str" : 0.1, "sta" : 0.1}));
 Jobs["Fighter"].levels.push(new JobLevel(320, null, {"str" : 0.1, "dex" : 0.1}));
-Jobs["Fighter"].levels.push(new JobLevel(640, [{ab: Abilities.Physical.CrushingStrike, set: "Skills"}, {ab: Abilities.Physical.TAttack, set: "Skills"}], {"str" : 0.2, "sta" : 0.2, "dex" : 0.2, "hp" : 5}));
+Jobs["Fighter"].levels.push(new JobLevel(640, [{ab: Abilities.Physical.Provoke, set: "Skills"}, {ab: Abilities.Physical.TAttack, set: "Skills"}], {"str" : 0.2, "sta" : 0.2, "dex" : 0.2, "hp" : 5}));
 
 Jobs["Scholar"] = new Job("Scholar");
 Jobs["Scholar"].Long = function(entity) {
@@ -249,17 +249,17 @@ Jobs["Bruiser"].Unlocked = function(entity) {
 	return miranda.flags["Bruiser"] == Miranda.Bruiser.Taught;
 } // TODO Tier 2 condition
 Jobs["Bruiser"].preqs.push({job : Jobs["Fighter"], lvl : 3});
-Jobs["Bruiser"].abilities.AddAbility(Abilities.Physical.Provoke);
+Jobs["Bruiser"].abilities.AddAbility(Abilities.Physical.CrushingStrike);
 Jobs["Bruiser"].abilities.AddAbility(Abilities.Physical.FocusStrike);
 Jobs["Bruiser"].abilities.AddAbility(Abilities.Physical.TAttack);
 Jobs["Bruiser"].abilities.AddAbility(Abilities.Physical.GrandSlam);
-Jobs["Bruiser"].levels.push(new JobLevel(20,   [{ab: Abilities.Physical.Provoke, set: "Skills"}], {"str" : 0.1, "sta" : 0.2}));
-Jobs["Bruiser"].levels.push(new JobLevel(40,   null, {"sta" : 0.2, "dex" : 0.1}));
+Jobs["Bruiser"].levels.push(new JobLevel(20,   [{ab: Abilities.Physical.CrushingStrike, set: "Skills"}], {"str" : 0.2, "sta" : 0.1}));
+Jobs["Bruiser"].levels.push(new JobLevel(40,   null, {"str" : 0.2, "dex" : 0.1}));
 Jobs["Bruiser"].levels.push(new JobLevel(80,   [{ab: Abilities.Physical.FocusStrike, set: "Skills"}], {"str" : 0.2, "sta" : 0.1}));
-Jobs["Bruiser"].levels.push(new JobLevel(160,  null, {"sta" : 0.3}));
+Jobs["Bruiser"].levels.push(new JobLevel(160,  null, {"sta" : 0.2, "str" : 0.1}));
 Jobs["Bruiser"].levels.push(new JobLevel(320,  [{ab: Abilities.Physical.TAttack, set: "Skills"}], {"str" : 0.2, "sta" : 0.1}));
 Jobs["Bruiser"].levels.push(new JobLevel(640,  null, {"sta" : 0.2, "dex" : 0.1}));
-Jobs["Bruiser"].levels.push(new JobLevel(1280, [{ab: Abilities.Physical.GrandSlam, set: "Skills"}, {ab: Abilities.Physical.Taunt, set: "Skills"}], {"str" : 0.1, "sta" : 0.3, "dex" : 0.1, "hp" : 5}));
+Jobs["Bruiser"].levels.push(new JobLevel(1280, [{ab: Abilities.Physical.GrandSlam, set: "Skills"}, {ab: Abilities.Physical.Frenzy, set: "Skills"}], {"str" : 0.3, "sta" : 0.1, "dex" : 0.1, "hp" : 5}));
 
 Jobs["Rogue"] = new Job("Rogue");
 Jobs["Rogue"].Long = function(entity) {
@@ -304,6 +304,30 @@ Jobs["Ranger"].levels.push(new JobLevel(160,  null, {"dex" : 0.3}));
 Jobs["Ranger"].levels.push(new JobLevel(320,  [{ab: Abilities.Physical.Hamstring, set: "Skills"}], {"int" : 0.1, "sta" : 0.2}));
 Jobs["Ranger"].levels.push(new JobLevel(640,  null, {"spi" : 0.2, "dex" : 0.1}));
 Jobs["Ranger"].levels.push(new JobLevel(1280, [{ab: Abilities.Physical.SetTrap, set: "Skills"}, {ab: Abilities.Physical.Swift, set: "Skills"}], {"int" : 0.1, "sta" : 0.1, "dex" : 0.3}));
+
+Jobs["Squire"] = new Job("Squire");
+Jobs["Squire"].Long = function(entity) {
+	var parse = {hisher: entity.hisher(), HeShe: entity.HeShe(), name: entity.nameDesc(), is: entity.is()};
+	//TODO Desc
+	return Text.Parse("Tank", parse);
+}
+Jobs["Squire"].Unlocked = function(entity) {
+	return false; //TODO Trainer
+}
+Jobs["Squire"].preqs.push({job : Jobs["Fighter"], lvl : 3});
+Jobs["Squire"].abilities.AddAbility(Abilities.Physical.Provoke);
+//TODO Skills
+Jobs["Squire"].abilities.AddAbility(Abilities.Physical.FocusStrike);
+Jobs["Squire"].abilities.AddAbility(Abilities.Physical.Hamstring);
+Jobs["Squire"].abilities.AddAbility(Abilities.Physical.Taunt);
+//TODO Skills
+Jobs["Squire"].levels.push(new JobLevel(20,   [{ab: Abilities.Physical.Provoke, set: "Skills"}], {"sta" : 0.2, "spi" : 0.1}));
+Jobs["Squire"].levels.push(new JobLevel(40,   null, {"sta" : 0.1, "dex" : 0.1, "str" : 0.1}));
+Jobs["Squire"].levels.push(new JobLevel(80,   [{ab: Abilities.Physical.FocusStrike, set: "Skills"}], {"sta" : 0.2, "dex" : 0.1}));
+Jobs["Squire"].levels.push(new JobLevel(160,  null, {"sta" : 0.3}));
+Jobs["Squire"].levels.push(new JobLevel(320,  [{ab: Abilities.Physical.Hamstring, set: "Skills"}], {"spi" : 0.1, "sta" : 0.2}));
+Jobs["Squire"].levels.push(new JobLevel(640,  null, {"spi" : 0.2, "dex" : 0.1}));
+Jobs["Squire"].levels.push(new JobLevel(1280, [{ab: Abilities.Physical.Taunt, set: "Skills"}], {"spi" : 0.1, "sta" : 0.3, "dex" : 0.1}));
 
 
 Jobs["Mage"] = new Job("Mage");
