@@ -227,9 +227,8 @@ CacheToGame = function() {
 		
 		Gui.Callstack.push(function() {
 			Text.Clear();
-
-			Text.AddOutput("What profession do you wish to start as?");
-			Text.Newline();
+			Text.Add("What profession do you wish to start as?");
+			Text.Flush();
 			
 			var options = new Array();
 			options.push({ nameStr : "Fighter",

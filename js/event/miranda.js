@@ -3928,7 +3928,7 @@ Scenes.Miranda.HomeDommySexLeavingFuckedHer = function() {
 	else {
 		var dom = miranda.SubDom() - player.SubDom();
 		if(dom > 0)
-			Text.Add("<i>“Leaving already? I haven’t returned the favor yet,”</i> Miranda moans voluptuously. Perhaps another time. <i>“Stop by again some time… little Miranda is always up to fucking a tight hole.”</i>", parse);
+			Text.Add("<i>“Leaving already? I can go again, and rougher than that,”</i> Miranda moans voluptuously. Perhaps another time. <i>“Stop by again some time… little Miranda is always up to fucking a tight hole.”</i>", parse);
 		else
 			Text.Add("<i>“Mmm… I like it when you’re rough, [playername],”</i> Miranda moans, fingering herself. <i>“You can come back for more of that <b>any</b> time!”</i>", parse);
 		Text.NL();

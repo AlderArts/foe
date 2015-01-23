@@ -229,7 +229,7 @@ Encounter.prototype.LossCondition = function() {
 
 Encounter.prototype.onLoss = function() {
 	Text.Clear();
-	Text.AddOutput("Defeat!");
+	Text.Add("Defeat!");
 	// TODO: XP loss? 
 	
 	this.Cleanup();
@@ -237,6 +237,7 @@ Encounter.prototype.onLoss = function() {
 	// TEMP TODO
 	world.TimeStep({hour: 1});
 	
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		SetGameState(GameState.Game);
 		PrintDefaultOptions();
@@ -255,8 +256,8 @@ Encounter.prototype.VictoryCondition = function() {
 
 Encounter.prototype.onVictory = function() {
 	Text.Clear();
-	Text.AddOutput("Victory!");
-	Text.Newline();
+	Text.Add("Victory!");
+	Text.NL();
 
 	var exp = 0, coin = 0;
 	for(var i = 0; i < this.enemy.NumTotal(); i++) {
@@ -269,12 +270,12 @@ Encounter.prototype.onVictory = function() {
 			var it  = drops[j].it;
 			var num = drops[j].num || 1;
 			
-			Text.AddOutput("The party finds " + num + "x " + it.name + ".<br/>");
+			Text.Add("The party finds " + num + "x " + it.name + ".<br/>");
 			party.inventory.AddItem(it, num);
 		}
 	}
 	
-	Text.AddOutput("The party gains " + exp + " experience and " + coin + " coins.");
+	Text.Add("The party gains " + exp + " experience and " + coin + " coins.");
 	
 	for(var i = 0; i < party.members.length; i++) {
 		var e = party.members[i];
@@ -296,6 +297,7 @@ Encounter.prototype.onVictory = function() {
 	// TEMP TODO
 	world.TimeStep({hour: 1});
 	
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		SetGameState(GameState.Game);
 		PrintDefaultOptions();

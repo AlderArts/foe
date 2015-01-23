@@ -60,13 +60,13 @@ IntroDemon.prototype.Act = function(encounter, activeChar) {
 	
 	// Kill off an imp now and then (cannot end the fight)
 	if(this.turnCounter % 6 == 0 && encounter.GetLiveEnemyArray().length > 2) {
-		Text.AddOutput("<b>AM I MAKING IT TOO HARD FOR YOU, PET?</b> the demon quips. In a swift motion, he grabs one of the imps by one leg, throwing the screaming creature into his waiting maw, crushing it in a shower of blood.");
+		Text.Add("<b>AM I MAKING IT TOO HARD FOR YOU, PET?</b> the demon quips. In a swift motion, he grabs one of the imps by one leg, throwing the screaming creature into his waiting maw, crushing it in a shower of blood.");
 		encounter.enemy.members.pop();
 	}
 	else {
 		var r = Rand(7);
 		if(r == 0) { // Boost imp
-			Text.AddOutput("As you fight, the demon has been idly scratching the ground, forming an intricate design with its clawed finger. With a menacing grin, the demon flicks his finger in the direction of one of the imps. The tiny creature screams as a surge of magic energy originating from the mark hits it. A strange light enters his eyes, it seems he has powered up. In more ways than one, you realize, as you notice his swelling member, growing to an obscene size for his body.");
+			Text.Add("As you fight, the demon has been idly scratching the ground, forming an intricate design with its clawed finger. With a menacing grin, the demon flicks his finger in the direction of one of the imps. The tiny creature screams as a surge of magic energy originating from the mark hits it. A strange light enters his eyes, it seems he has powered up. In more ways than one, you realize, as you notice his swelling member, growing to an obscene size for his body.");
 			// Pick a random imp
 			var targets = encounter.GetLiveEnemyArray();
 			var t = targets[Rand(targets.length - 1) + 1];
@@ -81,10 +81,10 @@ IntroDemon.prototype.Act = function(encounter, activeChar) {
 			t.name = "Buffed imp";
 		}
 		else if(r == 1) { // Banter
-			Text.AddOutput("<b>FIGHTING ME WILL DO YOU NO GOOD YOU KNOW,</b> the demon laughs.");
+			Text.Add("<b>FIGHTING ME WILL DO YOU NO GOOD YOU KNOW,</b> the demon laughs.");
 		}
 		else if(r == 2 && encounter.enemy.members.length <= 5) { // Summon imp (if less than four imps)
-			Text.AddOutput("<b>...I GROW BORED,</b> the demon snaps his fingers and another imp materializes in a puff of smoke, running up to join the others.");
+			Text.Add("<b>...I GROW BORED,</b> the demon snaps his fingers and another imp materializes in a puff of smoke, running up to join the others.");
 			var newImp = new Imp();
 			encounter.enemy.AddMember(newImp);
 			
@@ -99,14 +99,15 @@ IntroDemon.prototype.Act = function(encounter, activeChar) {
 			ent.entity.GetSingleTarget(encounter, ent);
 		}
 		else if(r == 3 || r == 4) { // Lust attack
-			Text.AddOutput("As you fight, the demon has been idly scratching the ground, forming an intricate design with its clawed finger. With a menacing grin, the demon flicks his finger in your direction, causing a stream of red magical energy to surge forward from the mark, hitting you squarely in the chest. You grunt as your body is filled with raging heat, greatly arousing you.");
+			Text.Add("As you fight, the demon has been idly scratching the ground, forming an intricate design with its clawed finger. With a menacing grin, the demon flicks his finger in your direction, causing a stream of red magical energy to surge forward from the mark, hitting you squarely in the chest. You grunt as your body is filled with raging heat, greatly arousing you.");
 			player.AddLustAbs(20);
 		}
 		else { // Banter
-			Text.AddOutput("The demon chuckles evilly, amused by your resistance.");
+			Text.Add("The demon chuckles evilly, amused by your resistance.");
 		}
 	}
 	
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
 	});
