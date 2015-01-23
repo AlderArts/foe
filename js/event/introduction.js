@@ -2249,12 +2249,13 @@ Intro.KiaDecideOutset = function() {
 	
 	Text.Clear();
 	
-	Text.AddOutput("The time has come to consider your stance in this. Are you really going to go off on some save-the-world quest in the service of some goddess you only met briefly? Still, finding out how the gemstone works would probably be a good idea. If you could open another one of these portals, you might be able to return home and leave all of this behind.");
-	Text.Newline();
-	Text.AddOutput("Or... you could open a portal to somewhere else, maybe teach Uru a lesson once you have achieved some measure of power of your own.");
-	Text.Newline();
-	Text.AddOutput("Either way, you will have to decide what to do with " + name + ". The elf seems intent on joining your quest.");
-	Text.Newline();
+	Text.Add("The time has come to consider your stance in this. Are you really going to go off on some save-the-world quest in the service of some goddess you only met briefly? Still, finding out how the gemstone works would probably be a good idea. If you could open another one of these portals, you might be able to return home and leave all of this behind.");
+	Text.NL();
+	Text.Add("Or... you could open a portal to somewhere else, maybe teach Uru a lesson once you have achieved some measure of power of your own.");
+	Text.NL();
+	Text.Add("Either way, you will have to decide what to do with " + name + ". The elf seems intent on joining your quest.");
+	Text.NL();
+	Text.Flush();
 	
 	// [Save world][Go Home][Gain Power]
 	var options = new Array();
@@ -2265,14 +2266,14 @@ Intro.KiaDecideOutset = function() {
 			kiakai.flags["Attitude"] = Kiakai.Attitude.Nice;
 			kiakai.relation.IncreaseStat(100, 10);
 			
-			Text.AddOutput("You agree, the demon must be stopped, and following the advice of " + name + " seems like a good start, at least. You also have to find out more about this land you have found yourself stuck in.");
-			Text.Newline();
-			Text.AddOutput("<i>“Good, let us get to it then!”</i> the elf chimes in, happy that you decided to do the right thing.");
-			Text.Newline();
-			Text.AddOutput("<b>" + name + " joins your party!</b>");
+			Text.Add("You agree, the demon must be stopped, and following the advice of " + name + " seems like a good start, at least. You also have to find out more about this land you have found yourself stuck in.");
+			Text.NL();
+			Text.Add("<i>“Good, let us get to it then!”</i> the elf chimes in, happy that you decided to do the right thing.");
+			Text.NL();
+			Text.Add("<b>" + name + " joins your party!</b>");
 			
 			party.AddMember(kiakai);
-			
+			Text.Flush();
 			Gui.NextPrompt(Intro.KiaNiceSex);
 		}, enabled : true
 	});
@@ -2281,12 +2282,13 @@ Intro.KiaDecideOutset = function() {
 		func : function() {
 			gameCache.flags["IntroOutset"] = Intro.Outset.GoHome;
 			
-			Text.AddOutput("<i>“Look, I know you mean well, but I just want to go home,”</i> you explain to the disappointed elf, <i>“Saving the world is not my job.”</i>");
-			Text.Newline();
-			Text.AddOutput("<i>“I can understand how you feel, believe me,”</i> " + name + " says, <i>“However, that does not change my instructions from lady Aria. I will follow you and try to help you, in any way I can.”</i>");
-			Text.Newline();
-			Text.AddOutput("Do you want to bring " + himher + " along? And, if so, what attitude do you take?");
-			Text.Newline();
+			Text.Add("<i>“Look, I know you mean well, but I just want to go home,”</i> you explain to the disappointed elf, <i>“Saving the world is not my job.”</i>");
+			Text.NL();
+			Text.Add("<i>“I can understand how you feel, believe me,”</i> " + name + " says, <i>“However, that does not change my instructions from lady Aria. I will follow you and try to help you, in any way I can.”</i>");
+			Text.NL();
+			Text.Add("Do you want to bring " + himher + " along? And, if so, what attitude do you take?");
+			Text.NL();
+			Text.Flush();
 			
 			// [Accept][I'm the boss][Decline]
 			var options = new Array();
@@ -2296,12 +2298,12 @@ Intro.KiaDecideOutset = function() {
 					kiakai.flags["Attitude"] = Kiakai.Attitude.Nice;
 					kiakai.relation.IncreaseStat(100, 5);
 					
-					Text.AddOutput("You accept the company of the elf, feeling glad that you will have someone along who knows the land.");
-					Text.Newline();
-					Text.AddOutput("<b>" + name + " joins your party!</b>");
+					Text.Add("You accept the company of the elf, feeling glad that you will have someone along who knows the land.");
+					Text.NL();
+					Text.Add("<b>" + name + " joins your party!</b>");
 					
 					party.AddMember(kiakai);
-					
+					Text.Flush();
 					Gui.NextPrompt(Intro.KiaNiceSex);
 				}, enabled : true
 			});
@@ -2311,12 +2313,12 @@ Intro.KiaDecideOutset = function() {
 					kiakai.flags["Attitude"] = Kiakai.Attitude.Naughty;
 					kiakai.relation.DecreaseStat(-100, 5);
 					
-					Text.AddOutput("<i>“You may come along if you wish, but don't think that you, or your lady, is in charge here,”</i> you declare. " + name + " looks shocked for a moment, but humbly nods, content that " + heshe + " can follow you and help you.");
-					Text.Newline();
-					Text.AddOutput("<b>" + name + " joins your party!</b>");
+					Text.Add("<i>“You may come along if you wish, but don't think that you, or your lady, is in charge here,”</i> you declare. " + name + " looks shocked for a moment, but humbly nods, content that " + heshe + " can follow you and help you.");
+					Text.NL();
+					Text.Add("<b>" + name + " joins your party!</b>");
 					
 					party.AddMember(kiakai);
-					
+					Text.Flush();
 					Gui.NextPrompt(Intro.KiaNaughtySex);
 				}, enabled : true
 			});
@@ -2324,7 +2326,8 @@ Intro.KiaDecideOutset = function() {
 				tooltip : Text.Parse("You'll probably be better off on your own, could you really trust [name]?", {name : kiakai.name}),
 				func : function() {
 					kiakai.flags["Attitude"] = Kiakai.Attitude.Neutral;
-					Text.AddOutput("<i>“I understand,”</i> the elf nods sadly, <i>“I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.”</i> The elf bows to you and quietly moves toward the entrance of the tent, leaving you to your own devices.");
+					Text.Add("<i>“I understand,”</i> the elf nods sadly, <i>“I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.”</i> The elf bows to you and quietly moves toward the entrance of the tent, leaving you to your own devices.");
+					Text.Flush();
 					Gui.NextPrompt(Intro.Finalizing);
 				}, enabled : true
 			});
@@ -2339,14 +2342,15 @@ Intro.KiaDecideOutset = function() {
 			kiakai.subDom.DecreaseStat(-100, 5);
 			kiakai.relation.DecreaseStat(-100, 10);
 				
-			Text.AddOutput("<i>“That's cute and all, but this isn't how we're going to do things,”</i> you dismiss the holier-than-thou elf.");
-			Text.Newline();
-			Text.AddOutput("<i>“W-what?”</i> " + heshe + " stutters, confused by your words.");
-			Text.Newline();
-			Text.AddOutput("<i>“Getting the know-how to use the portals is a good first step, but why not use it to our advantage, eh? If we can amass enough power, a demon or two shouldn't be a problem.”</i>");
-			Text.Newline();
-			Text.AddOutput("The elf gives you a long look, reevaluating " + hisher + " opinion of you. <i>“You are underestimating what Uru is capable of,”</i> " + heshe + " says darkly, <i>“And what of me? My orders from lady Aria remain unchanged, will you still let me help you?”</i>");
-			Text.Newline();
+			Text.Add("<i>“That's cute and all, but this isn't how we're going to do things,”</i> you dismiss the holier-than-thou elf.");
+			Text.NL();
+			Text.Add("<i>“W-what?”</i> " + heshe + " stutters, confused by your words.");
+			Text.NL();
+			Text.Add("<i>“Getting the know-how to use the portals is a good first step, but why not use it to our advantage, eh? If we can amass enough power, a demon or two shouldn't be a problem.”</i>");
+			Text.NL();
+			Text.Add("The elf gives you a long look, reevaluating " + hisher + " opinion of you. <i>“You are underestimating what Uru is capable of,”</i> " + heshe + " says darkly, <i>“And what of me? My orders from lady Aria remain unchanged, will you still let me help you?”</i>");
+			Text.NL();
+			Text.Flush();
 			
 			// [I'm the boss][Decline]
 			var options = new Array();
@@ -2354,12 +2358,12 @@ Intro.KiaDecideOutset = function() {
 				tooltip : Text.Parse("The elf could be useful to you, but [heshe] needs to be put in [hisher] place.", {heshe : kiakai.heshe(), hisher : kiakai.hisher()}),
 				func : function() {
 					kiakai.flags["Attitude"] = Kiakai.Attitude.Naughty;
-					Text.AddOutput("<i>“You may come along if you wish, but don't think that you, or your lady, is in charge here,”</i> you declare. " + name + " looks shocked for a moment, but humbly nods, content that " + heshe + " can follow you and help you.");
-					Text.Newline();
-					Text.AddOutput("<b>" + name + " joins your party!</b>");
+					Text.Add("<i>“You may come along if you wish, but don't think that you, or your lady, is in charge here,”</i> you declare. " + name + " looks shocked for a moment, but humbly nods, content that " + heshe + " can follow you and help you.");
+					Text.NL();
+					Text.Add("<b>" + name + " joins your party!</b>");
 					
 					party.AddMember(kiakai);
-					
+					Text.Flush();
 					Gui.NextPrompt(Intro.KiaNaughtySex);
 				}, enabled : true
 			});
@@ -2367,7 +2371,8 @@ Intro.KiaDecideOutset = function() {
 				tooltip : "What use could the elf possibly be?",
 				func : function() {
 					kiakai.flags["Attitude"] = Kiakai.Attitude.Neutral;
-					Text.AddOutput("<i>“I understand,”</i> the elf nods sadly, <i>“I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.”</i> The elf bows to you and quietly moves toward the entrance of the tent, leaving you to your own devices.");
+					Text.Add("<i>“I understand,”</i> the elf nods sadly, <i>“I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.”</i> The elf bows to you and quietly moves toward the entrance of the tent, leaving you to your own devices.");
+					Text.Flush();
 					Gui.NextPrompt(Intro.Finalizing);
 				}, enabled : true
 			});
@@ -2394,8 +2399,9 @@ Intro.KiaNiceSex = function() {
 	if(player.NumCocks() > 0)
 		cockDesc = function() { return player.FirstCock().Short(); }
 	
-	Text.AddOutput("You are just about ready to head out, when a stirring in your nether regions makes itself known. You could ask " + name + " for some help with that, or try to deal with it later, yourself.");
-	Text.Newline();
+	Text.Add("You are just about ready to head out, when a stirring in your nether regions makes itself known. You could ask " + name + " for some help with that, or try to deal with it later, yourself.");
+	Text.NL();
+	Text.Flush();
 	
 	// [Male][Female]
 	var options = new Array();

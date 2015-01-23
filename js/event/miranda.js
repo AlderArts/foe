@@ -163,17 +163,18 @@ Miranda.prototype.Interact = function(switchSpot) {
 	var that = miranda;
 	
 	that.PrintDescription();
+	Text.Flush();
 	
 	var options = new Array();
 	options.push({ nameStr: "Release",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("[Placeholder] Miranda masturbates fiercely, cumming buckets.");
+			Text.Add("[Placeholder] Miranda masturbates fiercely, cumming buckets.");
 			
 			world.TimeStep({minute : 10});
 			
 			that.OrgasmCum();
-			
+			Text.Flush();
 			Gui.NextPrompt(function() {
 				that.Interact(switchSpot);
 			});
@@ -1206,64 +1207,65 @@ Scenes.Miranda.WelcomeToRigard = function() {
 		parse["comp"] = "";
 
 	Text.Clear();
-	Text.AddOutput("You set out toward the large city of Rigard, announced by a weathered sign next to the road. The city is built on a tall hill, and a wide river snakes its way past the far side. On the top of the hill stands a castle, its thick walls jutting out from the bedrock and reaching for the heavens. The city itself spreads out below it, divided into several levels by the steep slope.", parse);
-	Text.Newline();
-	Text.AddOutput("Though you see stone walls surrounding Rigard, you notice that there is a large number of residencies beyond their limits, especially toward the waterfront, where a sprawling slum stretches along the river.", parse);
-	Text.Newline();
+	Text.Add("You set out toward the large city of Rigard, announced by a weathered sign next to the road. The city is built on a tall hill, and a wide river snakes its way past the far side. On the top of the hill stands a castle, its thick walls jutting out from the bedrock and reaching for the heavens. The city itself spreads out below it, divided into several levels by the steep slope.", parse);
+	Text.NL();
+	Text.Add("Though you see stone walls surrounding Rigard, you notice that there is a large number of residencies beyond their limits, especially toward the waterfront, where a sprawling slum stretches along the river.", parse);
+	Text.NL();
 	if(party.InParty(kiakai)) {
-		Text.AddOutput("As you walk, [name] brings you up to date on the city. Rigard is the largest city on Eden, and the capital of the kingdom holding sway over a large part of the island.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“I have heard that there is some difficulty entering the city,”</i> the elf informs you, <i>“but since I am a servant of Lady Aria, there should be no problem getting in. The rulers of the kingdom have always been good friends of the order.”</i>", parse);
+		Text.Add("As you walk, [name] brings you up to date on the city. Rigard is the largest city on Eden, and the capital of the kingdom holding sway over a large part of the island.", parse);
+		Text.NL();
+		Text.Add("<i>“I have heard that there is some difficulty entering the city,”</i> the elf informs you, <i>“but since I am a servant of Lady Aria, there should be no problem getting in. The rulers of the kingdom have always been good friends of the order.”</i>", parse);
 	}
 	else {
-		Text.AddOutput("While you don't really know much of the Rigard, other than it seems to be the largest city you have seen so far, possibly the largest on Eden, it is probably a good place to gather information.", parse);
+		Text.Add("While you don't really know much of the Rigard, other than it seems to be the largest city you have seen so far, possibly the largest on Eden, it is probably a good place to gather information.", parse);
 	}
-	Text.Newline();
+	Text.NL();
 	if(rosalin.flags["Met"] != 0) {
-		Text.AddOutput("If you could get inside the city, there is a possibility you could get a hold of Rosalin's former teacher, a person who sounds like she could help you out with the gemstone.", parse);
-		Text.Newline();
+		Text.Add("If you could get inside the city, there is a possibility you could get a hold of Rosalin's former teacher, a person who sounds like she could help you out with the gemstone.", parse);
+		Text.NL();
 	}
 	if(world.time.hour >= 22 || world.time.hour < 6)
-		Text.AddOutput("As you come closer, you are guided by the light of torches, illuminating a large gate in the wall surrounding the city. It is currently shut for the night. You spot torches drifting along the top of the walls, carried by patrolling guards, another two of whom are posted outside the gatehouse.", parse);
+		Text.Add("As you come closer, you are guided by the light of torches, illuminating a large gate in the wall surrounding the city. It is currently shut for the night. You spot torches drifting along the top of the walls, carried by patrolling guards, another two of whom are posted outside the gatehouse.", parse);
 	else // 6-22
-		Text.AddOutput("As you come closer, you spot a short line of people, most of them farmers, waiting to be let into the city. There are a few guards posted on top of the walls, and another group guarding the gate. You patiently await your turn, as the last wagon in front of you is inspected and allowed inside.", parse);
-	Text.Newline();
-	Text.AddOutput("One of the guards, a striking female dog-morph with short dark fur, steps forward to meet you, toying with the pommel of a short sword strapped to her hip. She flicks a lock of black hair out of her eyes, looking you over curiously.", parse);
-	Text.Newline();
-	Text.AddOutput("<i>“Reason for visiting Rigard? Carrying any illegal substances? Planning to kill any important officials?”</i> she drones mechanically, going through her routine while allowing her gaze to unabashedly roam your body. Not to be outdone, you return the gesture.", parse);
-	Text.Newline();
-	Text.AddOutput("She is tall and athletic, her movements suggesting powerful muscles beneath her short fur - mostly black or dark brown, with patches of a bright orange on her hands, legs, chest and face. Her long black hair is pulled back in a loose braid hanging down to her waist. Strangely enough, you note that it is held together by a pink ribbon, very much at odds with her otherwise martial outfit.", parse);
-	Text.Newline();
-	Text.AddOutput("Said outfit does a poor job of containing her generous bust, which seems to be ready to spring out at any moment. Her uniform is made from tight-fitting studded leather, with a short leather skirt that ends just above the knees. As the guardswoman shifts her hips, something seems to move under the skirt.", parse);
+		Text.Add("As you come closer, you spot a short line of people, most of them farmers, waiting to be let into the city. There are a few guards posted on top of the walls, and another group guarding the gate. You patiently await your turn, as the last wagon in front of you is inspected and allowed inside.", parse);
+	Text.NL();
+	Text.Add("One of the guards, a striking female dog-morph with short dark fur, steps forward to meet you, toying with the pommel of a short sword strapped to her hip. She flicks a lock of black hair out of her eyes, looking you over curiously.", parse);
+	Text.NL();
+	Text.Add("<i>“Reason for visiting Rigard? Carrying any illegal substances? Planning to kill any important officials?”</i> she drones mechanically, going through her routine while allowing her gaze to unabashedly roam your body. Not to be outdone, you return the gesture.", parse);
+	Text.NL();
+	Text.Add("She is tall and athletic, her movements suggesting powerful muscles beneath her short fur - mostly black or dark brown, with patches of a bright orange on her hands, legs, chest and face. Her long black hair is pulled back in a loose braid hanging down to her waist. Strangely enough, you note that it is held together by a pink ribbon, very much at odds with her otherwise martial outfit.", parse);
+	Text.NL();
+	Text.Add("Said outfit does a poor job of containing her generous bust, which seems to be ready to spring out at any moment. Her uniform is made from tight-fitting studded leather, with a short leather skirt that ends just above the knees. As the guardswoman shifts her hips, something seems to move under the skirt.", parse);
+	Text.Flush();
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
-		Text.AddOutput("<i>“Hey, eyes up here,”</i> she barks sharply, slightly amused. <i>“Well?”</i> she challenges, holding out her hand. A bit embarrassed, you realize that you completely spaced out for a second there. <i>“Visitor's pass?”</i> she repeats her question.", parse);
-		Text.Newline();
+		Text.Add("<i>“Hey, eyes up here,”</i> she barks sharply, slightly amused. <i>“Well?”</i> she challenges, holding out her hand. A bit embarrassed, you realize that you completely spaced out for a second there. <i>“Visitor's pass?”</i> she repeats her question.", parse);
+		Text.NL();
 		
 		if(party.InParty(kiakai)) {
-			Text.AddOutput("<i>“Ah, madam, excuse me?”</i> [name] piques in. The guardswoman turns her icy stare on the elf. [HeShe] shrinks back a little, swallowing. <i>“Um, you see, I am from the order-”</i>", parse);
-			Text.Newline();
-			Text.AddOutput("<i>“Do you have a pass?”</i> the dog-morph cuts [himher] off. The elf looks crestfallen, shaking [hisher] head miserably. <i>“Then I'm afraid I can't let you in.”</i>", parse);
+			Text.Add("<i>“Ah, madam, excuse me?”</i> [name] piques in. The guardswoman turns her icy stare on the elf. [HeShe] shrinks back a little, swallowing. <i>“Um, you see, I am from the order-”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Do you have a pass?”</i> the dog-morph cuts [himher] off. The elf looks crestfallen, shaking [hisher] head miserably. <i>“Then I'm afraid I can't let you in.”</i>", parse);
 		}
 		else
-			Text.AddOutput("You shake your head, bewildered. This is the first you've heard of this.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Look, I'm sorry,”</i> the guard apologizes. <i>“New directives from above, I can't let anyone into the city without a valid pass.”</i> You ask her where one would get such a pass. <i>“From the identification bureau, corner of Bankers' and Minstrel street.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("What? It is <i>inside</i> the city?", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Look, I didn't say it made sense, but it's the law,”</i> she sighs, exasperated, <i>“I'd like to let you in, but I just can't. You've shown up in times of unrest, the royals and noble families are very suspicious of strangers, what with the outlaw insurgency going on.”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Is there a problem, Miranda?”</i> The dog-morph's partner, a muscular guardsman sporting feline ears.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Nosir, no problem sarge,”</i> the woman - apparently named Miranda - replies languidly. She somehow manages to make this sound mocking. Grumbling, her superior shrugs, heading inside again. The dog-morph rolls her eyes.", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“Well, you got mine, what's yours?”</i>", parse);
-		Text.Newline();
-		Text.AddOutput("Seeing as you don't seem to be getting anywhere, you introduce yourself[comp].", parse);
-		Text.Newline();
-		Text.AddOutput("<i>“A pleasure,”</i> Miranda grins.", parse);
+			Text.Add("You shake your head, bewildered. This is the first you've heard of this.", parse);
+		Text.NL();
+		Text.Add("<i>“Look, I'm sorry,”</i> the guard apologizes. <i>“New directives from above, I can't let anyone into the city without a valid pass.”</i> You ask her where one would get such a pass. <i>“From the identification bureau, corner of Bankers' and Minstrel street.”</i>", parse);
+		Text.NL();
+		Text.Add("What? It is <i>inside</i> the city?", parse);
+		Text.NL();
+		Text.Add("<i>“Look, I didn't say it made sense, but it's the law,”</i> she sighs, exasperated, <i>“I'd like to let you in, but I just can't. You've shown up in times of unrest, the royals and noble families are very suspicious of strangers, what with the outlaw insurgency going on.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Is there a problem, Miranda?”</i> The dog-morph's partner, a muscular guardsman sporting feline ears.", parse);
+		Text.NL();
+		Text.Add("<i>“Nosir, no problem sarge,”</i> the woman - apparently named Miranda - replies languidly. She somehow manages to make this sound mocking. Grumbling, her superior shrugs, heading inside again. The dog-morph rolls her eyes.", parse);
+		Text.NL();
+		Text.Add("<i>“Well, you got mine, what's yours?”</i>", parse);
+		Text.NL();
+		Text.Add("Seeing as you don't seem to be getting anywhere, you introduce yourself[comp].", parse);
+		Text.NL();
+		Text.Add("<i>“A pleasure,”</i> Miranda grins.", parse);
 
 		Scenes.Miranda.WelcomeToRigardPASS    = true;
 		Scenes.Miranda.WelcomeToRigardOUTLAWS = true;
@@ -1286,18 +1288,18 @@ Scenes.Miranda.WelcomeToRigardQnA = function() {
 		
 		guygirl : player.body.femininity.Get() > 0 ? "girl" : "guy"
 	};
-		
+	Text.Flush();
 	//[Pass][Outlaws][Miranda]
 	var options = new Array();
 	if(Scenes.Miranda.WelcomeToRigardPASS)
 		options.push({ nameStr : "Pass",
 			func : function() {
 				Text.Clear();
-				Text.AddOutput("<i>“As I said, the only way to legitimately obtain a pass is to apply for one inside the city itself. That can be quite a bothersome process, though,”</i> Miranda explains. <i>“Another way to get inside is to have someone reputable vouch for you. There are a great number of traders and farmers entering and leaving the city daily, and any one of those could provide you entry.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("She shakes her head at your brightening expression.", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“Don't get your hopes up too high. Due to the harsh punishment for harboring outlaws, knowingly or not, don't expect people to open up that easily to you. I'm sure you're a nice [guygirl], but these are suspicious times.”</i>", parse);
+				Text.Add("<i>“As I said, the only way to legitimately obtain a pass is to apply for one inside the city itself. That can be quite a bothersome process, though,”</i> Miranda explains. <i>“Another way to get inside is to have someone reputable vouch for you. There are a great number of traders and farmers entering and leaving the city daily, and any one of those could provide you entry.”</i>", parse);
+				Text.NL();
+				Text.Add("She shakes her head at your brightening expression.", parse);
+				Text.NL();
+				Text.Add("<i>“Don't get your hopes up too high. Due to the harsh punishment for harboring outlaws, knowingly or not, don't expect people to open up that easily to you. I'm sure you're a nice [guygirl], but these are suspicious times.”</i>", parse);
 				
 				Scenes.Miranda.WelcomeToRigardPASS = false;
 				Scenes.Miranda.WelcomeToRigardQnA();
@@ -1308,11 +1310,11 @@ Scenes.Miranda.WelcomeToRigardQnA = function() {
 		options.push({ nameStr : "Outlaws",
 			func : function() {
 				Text.Clear();
-				Text.AddOutput("<i>“You really aren't from around here, are you?”</i> the dog-morph looks at you suspiciously. <i>“I'd have a hard time believing there's someone who isn't familiar with the war and the current tension resulting from it.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“I say war, but it was really more of an insurgency, rich merchant families and their allies standing up against the authority of the king. It was an ugly, ugly mess, and though most of the ringleaders were rounded up, there are still some active today. More than that, others have joined their ranks. Deserters from the army, men with prices on their heads, common criminals and murderers, the list goes on. Most of these 'freedom fighters' are little more than bandits.”</i>", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“From what I've heard, there is a large group of them holed up somewhere in the forest,”</i> she tells you, motioning toward the dark trees off in the distance. <i>“That said, by the amount of unrest in Rigard right now, you'd almost suspect their base was in the city!”</i>", parse);
+				Text.Add("<i>“You really aren't from around here, are you?”</i> the dog-morph looks at you suspiciously. <i>“I'd have a hard time believing there's someone who isn't familiar with the war and the current tension resulting from it.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“I say war, but it was really more of an insurgency, rich merchant families and their allies standing up against the authority of the king. It was an ugly, ugly mess, and though most of the ringleaders were rounded up, there are still some active today. More than that, others have joined their ranks. Deserters from the army, men with prices on their heads, common criminals and murderers, the list goes on. Most of these 'freedom fighters' are little more than bandits.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“From what I've heard, there is a large group of them holed up somewhere in the forest,”</i> she tells you, motioning toward the dark trees off in the distance. <i>“That said, by the amount of unrest in Rigard right now, you'd almost suspect their base was in the city!”</i>", parse);
 				
 				Scenes.Miranda.WelcomeToRigardOUTLAWS = false;
 				Scenes.Miranda.WelcomeToRigardQnA();
@@ -1323,11 +1325,11 @@ Scenes.Miranda.WelcomeToRigardQnA = function() {
 		options.push({ nameStr : "Miranda",
 			func : function() {
 				Text.Clear();
-				Text.AddOutput("<i>“Me?”</i> She purses her lips, studying you thoughtfully. <i>“I'm not anyone that special... well, besides being the best fighter the watch's got.”</i> Her confident stance and athletic build give you the impression that this isn't just bravado. Still... curiously, you ask why she is posted watching the gates if she is so important?", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“Nice comeback,”</i> she grins. <i>“You could say I haven't exactly made many friends upstairs. That, and people of my kind aren't really appreciated in Rigard as of late.”</i> People of her... kind?", parse);
-				Text.Newline();
-				Text.AddOutput("<i>“Fur, ears, tail, tell you nothing?”</i> she waves at her appearance, a little annoyed. <i>“I'm a dog-morph, not a human. In Rigard, that makes a large difference.”</i> Clearly not a topic she wants to linger on, so you drop it.", parse);
+				Text.Add("<i>“Me?”</i> She purses her lips, studying you thoughtfully. <i>“I'm not anyone that special... well, besides being the best fighter the watch's got.”</i> Her confident stance and athletic build give you the impression that this isn't just bravado. Still... curiously, you ask why she is posted watching the gates if she is so important?", parse);
+				Text.NL();
+				Text.Add("<i>“Nice comeback,”</i> she grins. <i>“You could say I haven't exactly made many friends upstairs. That, and people of my kind aren't really appreciated in Rigard as of late.”</i> People of her... kind?", parse);
+				Text.NL();
+				Text.Add("<i>“Fur, ears, tail, tell you nothing?”</i> she waves at her appearance, a little annoyed. <i>“I'm a dog-morph, not a human. In Rigard, that makes a large difference.”</i> Clearly not a topic she wants to linger on, so you drop it.", parse);
 	
 				Scenes.Miranda.WelcomeToRigardMIRANDA = false;
 				Scenes.Miranda.WelcomeToRigardQnA();
@@ -1360,26 +1362,27 @@ Scenes.Miranda.WelcomeToRigardEnd = function() {
 		parse["comp"] = "";
 		
 	Text.Clear();
-	Text.AddOutput("<i>“I enjoyed talking with you, believe it or not, but I've got a job to do here,”</i> she walks back to her post, looking at you over her shoulder. <i>“If you'd like to continue this conversation in a more... casual setting,”</i> she quips, hips swaying suggestively, <i>“meet me after work in the slums. There is a tavern there called the Maidens' Bane. We can hit the town, get to know each other a bit, eh?”</i>", parse);
-	Text.Newline();
-	Text.AddOutput("Quite the bold vixen, Miranda. You say your goodbyes and tell her you'll think about it.", parse);
-	Text.Newline();
-	Text.AddOutput("Now... how should you proceed? Talking with Miranda has given you a few ideas on how to get into the capital.", parse);
-	Text.Newline();
-	Text.AddOutput("From what the dog-morph said, farmers should be able to bring in hired help, which might give you temporary access to the city. ", parse);
+	Text.Add("<i>“I enjoyed talking with you, believe it or not, but I've got a job to do here,”</i> she walks back to her post, looking at you over her shoulder. <i>“If you'd like to continue this conversation in a more... casual setting,”</i> she quips, hips swaying suggestively, <i>“meet me after work in the slums. There is a tavern there called the Maidens' Bane. We can hit the town, get to know each other a bit, eh?”</i>", parse);
+	Text.NL();
+	Text.Add("Quite the bold vixen, Miranda. You say your goodbyes and tell her you'll think about it.", parse);
+	Text.NL();
+	Text.Add("Now... how should you proceed? Talking with Miranda has given you a few ideas on how to get into the capital.", parse);
+	Text.NL();
+	Text.Add("From what the dog-morph said, farmers should be able to bring in hired help, which might give you temporary access to the city. ", parse);
 	if(gameCache.flags["FarmFound"] != 0)
-		Text.AddOutput("Perhaps you could ask Gwendy about it.", parse);
+		Text.Add("Perhaps you could ask Gwendy about it.", parse);
 	else
-		Text.AddOutput("Perhaps you could find a friendly farmer on the great plains.", parse);
-	Text.Newline();
-	Text.AddOutput("Miranda herself seems like she isn't really the sort to bow to authority. She is at work now, but perhaps she could be persuaded to let you into the city if you meet up with her in the slums during the evening hours.", parse);
-	Text.Newline();
-	Text.AddOutput("Failing all else, if those outlaws are as crafty as the guardswoman made them out to be, they should have some way of accessing the city. ", parse);
+		Text.Add("Perhaps you could find a friendly farmer on the great plains.", parse);
+	Text.NL();
+	Text.Add("Miranda herself seems like she isn't really the sort to bow to authority. She is at work now, but perhaps she could be persuaded to let you into the city if you meet up with her in the slums during the evening hours.", parse);
+	Text.NL();
+	Text.Add("Failing all else, if those outlaws are as crafty as the guardswoman made them out to be, they should have some way of accessing the city. ", parse);
 	if(gameCache.flags["OutlawsRep"] != 0)
-		Text.AddOutput("Asking Zenith or Maria could perhaps give you a clue on how to proceed.", parse);
+		Text.Add("Asking Zenith or Maria could perhaps give you a clue on how to proceed.", parse);
 	else
-		Text.AddOutput("From what Miranda said, they are probably holed up somewhere in the forest... perhaps it's worth seeking them out.", parse);
+		Text.Add("From what Miranda said, they are probably holed up somewhere in the forest... perhaps it's worth seeking them out.", parse);
 	world.TimeStep({hour : 1});
+	Text.Flush();
 	Gui.NextPrompt();
 }
 
@@ -1408,7 +1411,7 @@ Scenes.Miranda.CatchThatThief = function() {
 	Text.Flush();
 	
 	world.TimeStep({minute : 30});
-	
+	Text.Flush();
 	Gui.NextPrompt();
 }
 
@@ -2519,7 +2522,7 @@ Scenes.Miranda.MaidensBaneNasty = function() {
 world.loc.Rigard.Tavern.common.events.push(new Link("Miranda", function() { return miranda.IsAtLocation(); }, true,
 function() {
 	if(miranda.IsAtLocation())
-		Text.AddOutput("Miranda is lounging at a table in the shady tavern. ");
+		Text.Add("Miranda is lounging at a table in the shady tavern. ");
 },
 Scenes.Miranda.MaidensBaneTalk,
 "Miranda is lounging at a table in the shady tavern."));
