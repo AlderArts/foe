@@ -4038,27 +4038,344 @@ Scenes.Miranda.HomeDommySex = function() {
 		}, enabled : cocksInAss.length > 0,
 		tooltip : "The dommy doggie likes giving, let’s see if she likes receiving."
 	});
+	if(player.FirstVag()) {
+		options.push({ nameStr : "Ride vag",
+			func : function() {
+				Scenes.Miranda.HomeDommySexRideDobieCockVag();
+			}, enabled : true,
+			tooltip : "Pin Miranda on her back and ride her like there’s no tomorrow."
+		});
+	}
 	options.push({ nameStr : "Ride anal",
 		func : function() {
 			Scenes.Miranda.HomeDommySexRideDobieCockAnal();
 		}, enabled : true,
 		tooltip : "Take that juicy cock of hers for a ride she won’t soon forget."
 	});
-	
-	/*
-	options.push({ nameStr : "Nah",
-		func : function() {
-			Text.Clear();
-			Text.Add("", parse);
-			Text.NL();
-			Text.Flush();
-		}, enabled : true,
-		tooltip : ""
-	});
-	*/
 	Gui.SetButtonsFromList(options);
 }
 
+Scenes.Miranda.HomeDommySexRideDobieCockVag = function() {
+	var parse = {
+		playername : player.name,
+		master : player.mfFem("master", "mistress"),
+		vag    : function() { return player.FirstVag().Short(); },
+		clit   : function() { return player.FirstVag().ClitShort(); },
+		cocks  : function() { return player.MultiCockDesc(); },
+		hip    : function() { return player.HipDesc(); },
+		hips   : function() { return player.HipsDesc(); },
+		hand   : function() { return player.HandDesc(); }
+	};
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, null, "2");
+	
+	Text.Clear();
+	
+	Scenes.Miranda.HomeDommySexRideDobieCockShared();
+	
+	var dom = player.SubDom() - miranda.SubDom();
+	
+	Text.NL();
+	if(dom > 25)
+		Text.Add("<i>“I’ve been a good girl, right?”</i> Miranda pants, looking up at you with puppy eyes. <i>“Will [master] give me a treat?”</i>", parse);
+	else if(dom > -25)
+		Text.Add("<i>“I think you want this as badly as I do,”</i> she huffs, stroking herself while she waits for your [vag] to descend. <i>“If you have a needy hole, my cock’s always ready!”</i>", parse);
+	else
+		Text.Add("<i>“Come on, what are you waiting for?”</i> Miranda huffs, grinning as she caresses your bare [hip]. <i>“I’m a dog you know, I can smell a bitch in heat from a mile away, and your crotch is practically soaked! Just have a seat on little Miranda, and everything will be alright.”</i>", parse);
+	Text.NL();
+	Text.Add("Ignoring her banter, you lower yourself, just barely allowing the tip of her crimson member to rub against your folds. ", parse);
+	if(dom > 0)
+		Text.Add("The dobie tries to contain herself, shivering as you tease her with your wet entrance. From her expression, it takes an act of will to restrain her instincts, which makes your sensual torment all the more sweet.", parse);
+	else {
+		Text.Add("The dobie is quick to thrust her hips upward, letting out an indignant growl as you pull just out of her reach. You hold the reins this time, and you’re not about to turn them over just yet.", parse);
+		Text.NL();
+		Text.Add("<i>“Enough teasing, you know you want it too!”</i> she complains.", parse);
+	}
+	Text.NL();
+	Text.Add("You hover there for a moment longer, letting the sweet promise of your hot cunny mesmerize the guardswoman. You have her in quite a nice position, but there’s a hungry glint in her eyes; a predator waiting to spring.", parse);
+	Text.Flush();
+	
+	var stickymiranda = false;
+	
+	//[Take oral][Fuck][Submit]
+	var options = new Array();
+	options.push({ nameStr : "Take oral",
+		func : function() {
+			Text.Clear();
+			if(dom < -25) {
+				Text.Add("An incredulous look crosses Miranda’s face at your demand, followed by her breaking out into laughter. She places a firm hand on your hip, and slowly drives her cock home, impaling you on her rigid shaft. You let out a surprised yelp, but are unable to push her off. The grinning dobie just grins at your fidgeting attempts to escape her.", parse);
+				Text.NL();
+				
+				Sex.Vaginal(miranda, player);
+				player.FuckVag(player.FirstVag(), miranda.FirstCock(), 4);
+				miranda.Fuck(miranda.FirstCock(), 4);
+				
+				Text.Add("<i>“You whimper and whine, but your body tells a different tale,”</i> Miranda growls into your ear as she pulls you down into a tight embrace. <i>“If you don’t want me there, how come your pussy is clenching around my cock so tightly, refusing to let go?”</i>", parse);
+				Text.NL();
+				Text.Add("She’s right… that thick piece of dog-meat feels wonderful inside your sensitive passage, and she hasn’t even gotten to the knot yet. Letting out a sigh, you surrender to your mistress’s whims, letting her roll you over on your back.", parse);
+				Text.NL();
+				Text.Add("<i>“Now then, does my little pet want a ride?”</i> You nod eagerly, your flitting dreams of dominance shattered by the incessant pounding of Miranda’s girthy battering ram.", parse);
+				Text.NL();
+				Scenes.Miranda.HomeDommySexRideDobieCockVagSubmit();
+				return;
+			}
+			else if(dom < 25)
+				Text.Add("<i>“My, aren’t you taking airs, [playername],”</i> the dobie glowers, her eyes searching yours. <i>“But fair enough. I will be getting a piece of that later anyways.”</i>", parse);
+			else
+				Text.Add("Wordlessly, the dog-morph moves to obey.", parse);
+			Text.Add(" You shift your [hips] forward, offering her access to your nethers. If she’s a good girl, she will get what she wants, but for now, she better put that mouth of hers to work.", parse);
+			Text.NL();
+			
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("Miranda quickly digs in, her tongue eagerly lapping at your [cocks]. Her eyes lock with yours as her hands roams, trying to judge your reactions as she explores your body. You look down confidently at the herm, satisfied at her compliance. It feels wonderful when she wraps her lips around[oneof] your shaft[s], alternately sucking and stroking you.", parse);
+				Text.NL();
+				
+				Sex.Blowjob(miranda, player);
+				miranda.FuckOral(miranda.Mouth(), player.FirstCock(), 2);
+				player.Fuck(player.FirstCock(), 2);
+				
+				parse["grunts"] = player.mfFem("grunts", "moans");
+				Text.Add("Spurred on by your encouraging [grunts], the guardswoman grows bolder, taking more and more of you cock. There’s a limit to what she can do from this angle though, so you decide to help her out, leaning over her and placing your [hand]s on the bed behind her. From your new position, you’re free to move yourself, and able to penetrate much deeper than before. ", parse);
+				if(player.NumCocks() > 1)
+					Text.Add("Your other dick[s2] rub[notS2] against her face as you grind, leaving sloppy drops of pre smeared across her forehead. ", parse);
+				Text.Add("The change hasn’t escaped Miranda, who voices a muffled, half-hearted complaint. Too bad her mouth is too filled with cock for you to hear the words.", parse);
+				Text.NL();
+				Text.Add("For a while, the burning need in your loins are subdued by a sudden urge to dominate the horny morph, and you hump away, enjoying the feeling of her hot, tight throat. She still has some fighting spirit left though; even as her mouth is being filled by your throbbing cock, the naughty doggie sneaks her fingers in from below, making you gasp as she plunges them into your snatch.", parse);
+				Text.NL();
+				Text.Add("Your stamina is short lived with Miranda’s digits probing your soddy depths, her thumb prodding at your [clit]. With the dual stimulation, it’s not long before you cry out and cum, pouring your seed down the herm’s gullet[ and splashing all over her face and bed]. When you finally pull out, she’s a panting mess, though she hasn’t forgotten her promised reward.", parse);
+				
+				if(player.FirstCock() > 1) stickymiranda = true;
+			}, 1.0, function() { return player.FirstCock() && dom > 0; });
+			scenes.AddEnc(function() {
+				parse["c"] = player.FirstVag().clitCock ? " the base of" : "";
+				Text.Add("Miranda quickly digs in, burying herself in your wet, needy pussy. Her being a dog gives her quite the proficiency at lapping; her long, flexible tongue seeks out every crevice of your feminine sex, hungrily slurping up your juices. The dobie’s cold, wet nose prods[c] your [clit], her eagerness making you gasp in delight.", parse);
+				Text.NL();
+				
+				Sex.Cunnilingus(miranda, player);
+				miranda.Fuck(null, 2);
+				player.Fuck(null, 2);
+				
+				Text.Add("<i>“Does it feel good, [master]?”</i> she queries, her tongue lolling playfully. You respond with a frustrated moan, a hand in her hair holding Miranda in place as you shove her muzzle back where it belongs: eating out your cunt. The guardswoman is quick on the uptake and returns to the task with redoubled fervor.", parse);
+				Text.NL();
+				Text.Add("Her hands refuse to be idle, exploring your body and probing you relentlessly; now trailing a line down your side, barely touching your hip; now burying deep between your ass-cheeks, not-so-gently seeking out your hidden rosebud within.", parse);
+				Text.NL();
+				Text.Add("You squirm in pleasure - the girl just doesn’t let up! - and before long the throes of orgasm are upon you. You let out a gasping moan as your nethers convulse, desperately grasping after a cock that isn’t there. ", parse);
+				if(player.FirstCock())
+					Text.Add("Jets of cum burst from your [cocks], basting the herm and her bed in long ropes of sticky cock-batter. ", parse);
+				Text.Add("It’s a while before your hips finally stop shaking, your recovery not helped by Miranda continuing to lap on your twitching pussy. She, at least, hasn’t forgotten about her promised reward.", parse);
+				if(player.FirstCock()) stickymiranda = true;
+			}, 1.0, function() { return true; });
+			scenes.Get();
+			
+			var cum = player.OrgasmCum();
+			player.AddLustFraction(0.5);
+			
+			Text.NL();
+			Text.Add("<i>“Now, don’t you think it’s time to give <b>me</b> some lovin’, [playername]?”</i> she asks pointedly, a smug smile playing on her lips. <i>“My cock’s all stiff and aching, and it’s pretty bummed at being left out...”</i>", parse);
+			Text.NL();
+			Text.Add("She <i>has</i> earned it, you concede. Having just climaxed, you’re a bit unsteady, but with the help of Miranda’s guiding hands you’re soon back in your former position, straddling her rigid shaft, tip playing at your raw entrance. This time, the dobie doesn’t wait for your permission before pulling you down and thrusting her thick crimson pillar into your [vag].", parse);
+			Text.NL();
+			
+			player.subDom.IncreaseStat(75, 1);
+			miranda.subDom.DecreaseStat(-50, 1);
+			world.TimeStep({minute: 15});
+			
+			Scenes.Miranda.HomeDommySexRideDobieCockVagFuck(stickymiranda, true);
+		}, enabled : true,
+		tooltip : "No, she’s not going to have it that easy. How about <i>she</i> pleasure <i>you</i> first?"
+	});
+	options.push({ nameStr : "Fuck",
+		func : function() {
+			Text.Clear();
+			Text.Add("Well, lets see if she’s ready for <i>this</i>. In a sudden motion you thrust your [hips] downward, impaling yourself on the dog-herm’s cock all the way to the knot. Your ferocity catches Miranda off-guard, though she’s quick on the uptake, placing her hands on your hips to help guide your frenzied fucking.", parse);
+			Text.NL();
+			Scenes.Miranda.HomeDommySexRideDobieCockVagFuck(stickymiranda, false);
+		}, enabled : true,
+		tooltip : "You can’t wait to get started!"
+	});
+	options.push({ nameStr : "Submit",
+		func : function() {
+			Text.Clear();
+			if(dom < -25) {
+				Text.Add("Your slight hesitation and the faint blush on your cheeks are the only signs of submission the dommy dobie needs. With a smug grin, she flips you over on your back, her cock hovering at your entrance.", parse);
+				Text.NL();
+				Text.Add("<i>“There, isn’t this more comfortable for you?”</i> she murmurs, giving you a playful lick.", parse);
+			}
+			else if(dom < 25) {
+				Text.Add("<i>“You sure? I thought you wanted to be on top this time,”</i> Miranda jabs playfully. She clearly enjoys watching you squirm. <i>“But if you insist...”</i> Before you know it, you’re on your back with a panting herm pressing the tip of her cock against your wet opening.", parse);
+			}
+			else {
+				Text.Add("<i>“You’re too kind, [master],”</i> she murmurs, pulling you down into a kiss. <i>“Don’t think I’ve forgotten how to take charge, I’m gonna show you a <b>real</b> good time...”</i>", parse);
+				Text.NL();
+				Text.Add("Before you know it, you’re on your back, with the horny herm on top, the tip of her cock searching for entrance into your eager snatch.", parse);
+			}
+			Text.NL();
+			Text.Add("A second later, Miranda is buried inside your needy pussy to the hilt, the bulge of her deflated knot threatening to spread you even further. Just as quickly as she thrusts inside you, she almost pulls out, leaving only her tip and an aching emptiness inside you.", parse);
+			Text.NL();
+			
+			Sex.Vaginal(miranda, player);
+			player.FuckVag(player.FirstVag(), miranda.FirstCock(), 4);
+			miranda.Fuck(miranda.FirstCock(), 4);
+			
+			Scenes.Miranda.HomeDommySexRideDobieCockVagSubmit(true);
+		}, enabled : true,
+		tooltip : "There’s something about that glare that just makes you want to give in and let her take you..."
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Miranda.HomeDommySexRideDobieCockVagFuck = function(stickymiranda, came) {
+	var dom = player.SubDom() - miranda.SubDom();
+	var parse = {
+		playername : player.name,
+		master : dom < 25 ? player.name : player.mfFem("master", "mistress"),
+		cocks : function() { return player.MultiCockDesc(); },
+		hand : function() { return player.HandDesc(); }
+	};
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
+	Sex.Vaginal(miranda, player);
+	player.FuckVag(player.FirstVag(), miranda.FirstCock(), 3);
+	miranda.Fuck(miranda.FirstCock(), 3);
+	
+	parse["c"] = came ? " still-aching" : "";
+	Text.Add("<i>“Damn you’re tight, [master]!”</i> the dobie yips happily. The two of you quickly settle into a rhythm, rutting against each other with mutual fervor. Miranda’s turgid member repeatedly barges into your[c] cunt, her pointed tip breaking the way for her significantly thicker shaft.", parse);
+	Text.NL();
+	Text.Add("Each time you lower yourself on her hermhood, your nether lips strain around the deliciously thick swelling at the base of her dick. At the height of the doggie’s pleasure, it’ll swell even thicker, locking anyone caught in her intimate embrace and preventing them from pulling away. You suspect that time could be upon you any moment now.", parse);
+	Text.NL();
+	if(dom < -25) {
+		Text.Add("<i>“Come here, you,”</i> Miranda growls, a hand at the back of your neck pulling you down into a rough kiss. When you resurface, gasping for air, that predatory grin of hers is back with a vengeance. <i>“You’re doing pretty good, but why don’t you let me be on top for a while, show you how a bitch fucks?”</i>", parse);
+		Text.NL();
+		Text.Add("Not waiting for your answer, the dobie flips you over on your back, rolling on top of you. <i>“My turn,”</i> she huffs, slamming her cock into your [vag]. She’s not messing around either; her position gives her full leeway to rut her hips, which she does as fast as she is able.", parse);
+		Text.NL();
+		Scenes.Miranda.HomeDommySexRideDobieCockVagSubmit();
+		return;
+	}
+	Text.Add("First, however, you’re going to get as much out of her as possible. Miranda gasps as you repeatedly impale yourself on her shaft, your vaginal walls clenching tightly around it. ", parse);
+	if(player.FirstCock())
+		Text.Add("Your [cocks] bob[notS] in time with your bouncing, a throb going through [itThem] each time you slam your hips down. The dobie is right in your firing zone, but she doesn’t seem to care, encouraging you to keep going with rhythmic thrusts of her hips. ", parse);
+	Text.Add("<i>“Just… a bit longer...”</i> she pants. You can feel her throb inside you, her member somehow growing even girthier. Your stretched passage can almost trace the veins on the hot pillar, and you can definitely feel the the rumblings deeper within her body as her climax nears.", parse);
+	Text.NL();
+	Text.Add("<i>“Fuuuuuck!”</i> the morph yells, pulling you down hard, trying to push her rapidly swelling knot inside you. The sudden girth is enough to trigger your own climax, making you clench even harder around the pulsing shaft. ", parse);
+	if(player.FirstCock()) {
+		parse["m"] = stickymiranda ? " yet another serving of" : "";
+		Text.Add("You baste Miranda in[m] your cum, plastering her with strands of white seed, much like the ones about to flood your pussy. ", parse);
+		stickymiranda = true;
+	}
+	Text.Add("You’re trembling as your juices mix with hers and trickle down on her deliciously thick knot… just a move of your hips, and she’ll have you tied completely...", parse);
+	Text.NL();
+	
+	var cum = player.OrgasmCum();
+	
+	Text.Flush();
+	//[Knot][No knot]
+	var options = new Array();
+	options.push({ nameStr : "Knot",
+		func : function() {
+			Text.Clear();
+			Text.Add("Even as you feel the first jet of dog-seed pour inside your used sex, you press down <i>hard</i> knowing that your only shot of forcing Miranda’s massive knot inside you is before it has time to expand to its full size. It’s an incredibly tight fit, but in a joint effort and with the aid of gravity, your crotches finally grind together, sealed with a bulge the size of a coconut.", parse);
+			Text.NL();
+			Text.Add("With nowhere else to go, the herm’s load floods your cunt and the womb within, making your belly rapidly swell with each throbbing ejaculation. Not even the airtight seal of your pussy around the base of her knot is enough to withstand the pressure building up, and a slight trickle seeps out. After what seems like an eternity, the dobie’s molten barrage of your womb cedes, though not before your stomach has swollen to a large dome.", parse);
+			Text.NL();
+			Text.Add("The two of you gradually come down from your euphoric high, and you collapse on top of the spent herm, her still-hard member buried and sealed inside you together with a copious amount of cum.", parse);
+			Text.NL();
+			if(stickymiranda) {
+				Text.Add("<i>“Since we are going to be like this for a while, mind helping me clean up?”</i> Miranda murmurs, her flexible tongue licking a thick strand of your seed from her muzzle.", parse);
+				Text.NL();
+				if(dom > 0) {
+					Text.Add("Sure… you can help gather it up if she’s willing to gulp it down, you reply, grinning.", parse);
+					Text.NL();
+					Text.Add("<i>“A fair deal,”</i> she smiles.", parse);
+				}
+				else
+					Text.Add("You nod, blushing a bit at how much of a mess you made of the herm.", parse);
+				Text.NL();
+				Text.Add("Together, the two of you manage to get most of the cum out of her fur, though it’s still a while longer until her knot finally deflates and you are able to separate.", parse);
+			}
+			else {
+				Text.Add("<i>“I can tell that <b>someone</b> doesn’t want to miss even a drop of my seed,”</i> Miranda grins at your eagerness. <i>“You seeking to carry a litter of my puppies, [playername]?”</i>", parse);
+				Text.NL();
+				Text.Add("Well… either way, you’re stuck here for a while. You cuddle together until her knot finally deflates, allowing her to pull out with a loud, sloppy plop.", parse);
+			}
+			Text.Add(" A gush of cum pours out from your gaping gash, though you still have a visible bulge on your belly from her massive load; walking around is going to be a bit tough for a while.", parse);
+			world.TimeStep({hour: 1, minute: 30});
+			PrintDefaultOptions();
+		}, enabled : true,
+		tooltip : "Just a little more, make her breed you!"
+	});
+	options.push({ nameStr : "No knot",
+		func : function() {
+			Text.Clear();
+			Text.Add("You strain your [hand]s on her chest, barely managing to overpower the exhausted doggie before she pulls you down on her knot. Realizing that she’s grown too big to fit inside you, Miranda abandons her efforts, letting her hands fall down to her sides while she rides out her orgasm. Knot or not, you can still feel copious amounts of dog-seed basting your innards, though as least as much escapes your cunt pool between Miranda’s legs.", parse);
+			Text.NL();
+			Text.Add("<i>“Mm… you’re quite a good fuck, [playername],”</i> the herm sighs contentedly. <i>“Why don’t you let me show my stuff next time, though?”</i>", parse);
+			Text.NL();
+			Text.Add("You’ll think about it. ", parse);
+			if(player.FirstCock()) {
+				Text.Add("Perhaps, next time, it’ll be <i>your</i> cock in <i>her</i> pussy instead.", parse);
+				Text.NL();
+				Text.Add("<i>“I could live with that, I suppose,”</i> she shrugs. ", parse);
+			}
+			parse["m1"] = stickymiranda ? " herself and" : "";
+			parse["m2"] = stickymiranda ? " both of" : "";
+			parse["is"] = stickymiranda ? "are" : "is";
+			Text.Add("<i>“Now, how about you help me clean up this mess?”</i> Miranda gestures to[m1] the bed,[m2] which [is] soaked in cum.", parse);
+			Text.NL();
+			Text.Add("Least you could do after that, you suppose.", parse);
+			world.TimeStep({hour: 1});
+			PrintDefaultOptions();
+		}, enabled : true,
+		tooltip : "That thick bulge is too intimidating, leave it out!"
+	});
+	Gui.SetButtonsFromList(options, false, null);
+	
+	Gui.Callstack.push(function() {
+		Text.NL();
+		player.subDom.IncreaseStat(75, 1);
+		miranda.subDom.DecreaseStat(-50, 1);
+		
+		Scenes.Miranda.HomeDommySexLeavingFuckedHer();
+	});
+}
+
+Scenes.Miranda.HomeDommySexRideDobieCockVagSubmit = function(submit) {
+	var parse = {
+		breasts : function() { return player.FirstBreastRow().Short(); },
+		skin : function() { return player.SkinDesc(); },
+		vag : function() { return player.FirstVag().Short(); }
+	};
+	
+	Text.Add("Once she’s gotten started, there’s only one thing that’s gonna stop her: pouring a gallon of hot cum into your womb. Each time she drives into you, you can feel her heavy balls slap against your [skin]; a potent promise of future stickiness if ever there was one.", parse);
+	Text.NL();
+	parse["b"] = player.FirstBreastRow().Size() > 3 ? Text.Parse(" and a quick grope on your [breasts]", parse) : "";
+	parse["l"] = player.HasLegs() ? " on all fours" : "";
+	parse["s"] = submit ? "to hear you scream for more until your body can’t take it any longer" : "your defiance gradually turning to begging adoration";
+	Text.Add("<i>“It goes against my instincts to fuck you like this,”</i> the herm grunts, leaning in closer for a kiss[b]. <i>“They tell me to turn you over[l] and fuck you senseless, breed you and seal the deal with my knot. I bet you’d love that, wouldn’t you?”</i> she grins. <i>“But… it’s also fun to see your face as I fuck you, [s].”</i>", parse);
+	Text.NL();
+	Text.Add("Your reply catches in your throat as she dives in for another kiss, wrestling your tongue into submission. All the while, her hips are a blur, ruthlessly pistoning in and out of your aching pussy. True to her word, the dommy dobie traps your head between her arms as she leans down over you, her taut nipples brushing against your [breasts]. There’s no escaping her eyes, burning with lust as they bore into you; locking you with her gaze, the hermaphrodite passionately asserts her dominance over you.", parse);
+	Text.NL();
+	
+	var cum = player.OrgasmCum();
+	
+	Text.Add("<i>“You know what’s coming next, don’t you?”</i> she barks, her breath coming in short bursts. With her massive shaft throbbing erratically deep in your loins, it’s hard not to. Both of you groan when she pushes her swelling knot past the last remnants of your ravaged defenses, sealing her inside you even as you feel the first hot cascade of her potent load erupt in your [vag]. You aren’t far behind her, your vaginal walls clamping down as best as they can around the girthy rod and the even thicker knot.", parse);
+	if(player.FirstCock()) {
+		parse["cum"] = cum > 6 ? "outshining even Miranda’s in volume" :
+		               cum > 3 ? "comparable to Miranda’s" : "pathetic in comparison to Miranda’s";
+		Text.Add(" Your own climax, [cum], splatters uselessly all over your chest, soaking you, the herm and her bed in sticky seed.", parse);
+	}
+	Text.NL();
+	Text.Add("When the torrential stream is finally extinguished, your belly is significantly rounder than before, stuffed to the brim with potent dog-cum. Bred like a bitch in truth… this perhaps wasn’t what you intended at first, but you can’t deny the overwhelming feeling of contentment as you lie there caressing your bloated tummy.", parse);
+	Text.NL();
+	Text.Add("<i>“Come back for another serving any time,”</i> Miranda growls familiarly, nuzzling beside you. There’s a sharp tug of pleasure in your used pussy as the herm plops over on her side, her knot dragging you with her. It’s quite a while before her knot deflates and she’s finally able to pull out again.", parse);
+	Text.NL();
+	
+	player.subDom.DecreaseStat(-75, 1);
+	miranda.subDom.IncreaseStat(75, 2);
+	world.TimeStep({hour: 1, minute: 30});
+	
+	Scenes.Miranda.HomeDommySexLeavingFuckedHer();
+}
 
 Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 	var pCock = cocks[0];
@@ -4420,6 +4737,33 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 }
 
 
+Scenes.Miranda.HomeDommySexRideDobieCockShared = function() {
+	var parse = {
+		armorDesc     : function() { return player.ArmorDesc(); }
+	};
+	
+	if(player.SubDom() < 0)
+		Text.Add("With a coy smile, you close the distance between you, staring into Miranda's eyes as you tenderly stroke the prominent bulge between her legs, asking her if she doesn't think she's a little overdressed for things. If she were to slip into something more comfortable and join you upstairs, you promise her she'll enjoy what you have in mind. You give her cock a tender squeeze through her pants for emphasis, then turn and head for the stairs yourself. You smile as you hear the horny herm stripping herself off as fast as she can behind you and giving hot pursuit.", parse);
+	else
+		Text.Add("Without hesitation, you close the distance between you and begin peeling off Miranda's armor, hoisting her top up over her head and casting it aside carelessly before pulling down her pants. The morph happily complies with your actions, lifting her arms to facilitate the removal of her top, then almost daintily stepping out of her pants once they're on the floor, cock bobbing in the air before her as she does so. Straightening back up, you lecherously stroke her cock before ordering her up to her room, using her dick like a handle to draw her eagerly along as you head for the stairs.", parse);
+	Text.NL();
+	if(miranda.flags["Floor"] < 2)
+		Scenes.Miranda.HomeDescFloor2();
+	else {
+		Text.Add("Messy… not that you expected any different by now.", parse);
+	}
+	Text.NL();
+	if(player.SubDom() < 0) {
+		Text.Add("Approaching the bed, you turn back to Miranda and, with a seductive smirk, indicate the bed with one hand, asking her to go ahead and make herself comfortable.", parse);
+		Text.NL();
+		Text.Add("<i>“I like where this is going… don’t keep me waiting now,”</i> she grins sitting down on the bed, legs spread to put her cock on full display.", parse);
+		Text.NL();
+		Text.Add("Smiling back at her, you lean in and kiss her gently, your fingers moving to tenderly stroke the jutting canine erection between her thighs. Then you place your hands on her shoulders and carefully push her down against the bed, the smile never leaving the morph's face as she immediately wriggles herself into a more comfortable position. You quickly move to undress, carefully placing your [armorDesc] at the base of the bed for easy retrieval, and then climb atop the bed in turn, moving to straddle Miranda.", parse);
+	}
+	else
+		Text.Add("You don't hesitate in leading Miranda toward her bed; her cock really makes a good handle for controlling the dog-morph. Once her hip bumps against the side of the mattress, you release her penis and take her by the shoulders, giving her a gentle but firm push that sends her toppling over onto her back atop the bed. Reaching down, you maneuver her a little to ensure she's more properly on the bed, and then set about removing your own [armorDesc], tossing them casually aside to join the other piles of discarded gear already scattered about the room. Now naked, you waste no time in climbing atop of Miranda, straddling her.", parse);
+}
+
 Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 	var parse = {
 		playername    : player.name,
@@ -4446,26 +4790,9 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 	var dom = miranda.SubDom() - player.SubDom();
 	
 	Text.Clear();
-	if(player.SubDom() < 0)
-		Text.Add("With a coy smile, you close the distance between you, staring into Miranda's eyes as you tenderly stroke the prominent bulge between her legs, asking her if she doesn't think she's a little overdressed for things. If she were to slip into something more comfortable and join you upstairs, you promise her she'll enjoy what you have in mind. You give her cock a tender squeeze through her pants for emphasis, then turn and head for the stairs yourself. You smile as you hear the horny herm stripping herself off as fast as she can behind you and giving hot pursuit.", parse);
-	else
-		Text.Add("Without hesitation, you close the distance between you and begin peeling off Miranda's armor, hoisting her top up over her head and casting it aside carelessly before pulling down her pants. The morph happily complies with your actions, lifting her arms to facilitate the removal of her top, then almost daintily stepping out of her pants once they're on the floor, cock bobbing in the air before her as she does so. Straightening back up, you lecherously stroke her cock before ordering her up to her room, using her dick like a handle to draw her eagerly along as you head for the stairs.", parse);
-	Text.NL();
-	if(miranda.flags["Floor"] < 2)
-		Scenes.Miranda.HomeDescFloor2();
-	else {
-		Text.Add("Messy… not that you expected any different by now.", parse);
-	}
-	Text.NL();
-	if(player.SubDom() < 0) {
-		Text.Add("Approaching the bed, you turn back to Miranda and, with a seductive smirk, indicate the bed with one hand, asking her to go ahead and make herself comfortable.", parse);
-		Text.NL();
-		Text.Add("<i>“I like where this is going… don’t keep me waiting now,”</i> she grins sitting down on the bed, legs spread to put her cock on full display.", parse);
-		Text.NL();
-		Text.Add("Smiling back at her, you lean in and kiss her gently, your fingers moving to tenderly stroke the jutting canine erection between her thighs. Then you place your hands on her shoulders and carefully push her down against the bed, the smile never leaving the morph's face as she immediately wriggles herself into a more comfortable position. You quickly move to undress, carefully placing your [armorDesc] at the base of the bed for easy retrieval, and then climb atop the bed in turn, moving to straddle Miranda.", parse);
-	}
-	else
-		Text.Add("You don't hesitate in leading Miranda toward her bed; her cock really makes a good handle for controlling the dog-morph. Once her hip bumps against the side of the mattress, you release her penis and take her by the shoulders, giving her a gentle but firm push that sends her toppling over onto her back atop the bed. Reaching down, you maneuver her a little to ensure she's more properly on the bed, and then set about removing your own [armorDesc], tossing them casually aside to join the other piles of discarded gear already scattered about the room. Now naked, you waste no time in climbing atop of Miranda, straddling her.", parse);
+	
+	Scenes.Miranda.HomeDommySexRideDobieCockShared();
+	
 	Text.NL();
 	if(dom < -25)
 		Text.Add("Miranda’s hands dart to your hips, gripping you tightly. <i>“You gonna get started or do I have to show you how to take cock?”</i>", parse);
