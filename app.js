@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 3;
-VERSION_SUBSCRIPT = "t2";
-VERSION_NAME = "Burrows, pt.2 + Cveta fixes";
+VERSION_SUBSCRIPT = "u";
+VERSION_NAME = "Tweaking";
 
 SAVE_VERSION = 21;
 // Save version 1: Initial
