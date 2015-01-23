@@ -4128,7 +4128,7 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 	Text.NL();
 	Text.Add("<i>“L-lube,”</i> she pants, fumbling with a bottle. ", parse);
 	if(dom < 0 && Math.random() < 0.5)
-		Text.Add("You swat it away, ignoring her growling complaints as you apply a generous amount of saliva to your [cockDesc], preparing Miranda for penetration with your own natural lubricant. She eye show a hint of hesitance, but she grits her teeth and accepts it.", parse);
+		Text.Add("You swat it away, ignoring her growling complaints as you apply a generous amount of saliva to your [cockDesc], preparing Miranda for penetration with your own natural lubricant. Her eyes show a hint of hesitation, but she grits her teeth and accepts it.", parse);
 	else
 		Text.Add("You quickly swipe the bottle, pouring nearly all of its contents on your [cockDesc] and down Miranda’s crack. A bit more grinding has her ass ready for action, puckered and eager.", parse);
 	Text.NL();
@@ -4449,7 +4449,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 	if(player.SubDom() < 0)
 		Text.Add("With a coy smile, you close the distance between you, staring into Miranda's eyes as you tenderly stroke the prominent bulge between her legs, asking her if she doesn't think she's a little overdressed for things. If she were to slip into something more comfortable and join you upstairs, you promise her she'll enjoy what you have in mind. You give her cock a tender squeeze through her pants for emphasis, then turn and head for the stairs yourself. You smile as you hear the horny herm stripping herself off as fast as she can behind you and giving hot pursuit.", parse);
 	else
-		Text.Add("Without hesitation, you close the distance between you and begin peeling off Miranda's armour, hoisting her top up over her head and casting it aside carelessly before pulling down her pants. The morph happily complies with your actions, lifting her arms to facilitate the removal of her top, then almost daintily stepping out of her pants once they're on the floor, cock bobbing in the air before her as she does so. Straightening back up, you lecherously stroke her cock before ordering her up to her room, using her dick like a handle to draw her eagerly along as you head for the stairs.", parse);
+		Text.Add("Without hesitation, you close the distance between you and begin peeling off Miranda's armor, hoisting her top up over her head and casting it aside carelessly before pulling down her pants. The morph happily complies with your actions, lifting her arms to facilitate the removal of her top, then almost daintily stepping out of her pants once they're on the floor, cock bobbing in the air before her as she does so. Straightening back up, you lecherously stroke her cock before ordering her up to her room, using her dick like a handle to draw her eagerly along as you head for the stairs.", parse);
 	Text.NL();
 	if(miranda.flags["Floor"] < 2)
 		Scenes.Miranda.HomeDescFloor2();
@@ -4475,7 +4475,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 		Text.Add("<i>“Come on now, that’s enough teasing,”</i> she pants. <i>“Have mercy on me, [masterMistress]!”</i>", parse);
 	Text.NL();
 	parse["sorry"] = player.SubDom() < 0 ? " sorry, but for now" : "";
-	Text.Add("You don't respond verbally to Miranda's comments. Instead, you reach back with one hand and begin to stroke her balls, running your fingers tenderly over the apple-sized cum factories before closing them firmly around one swollen nut. Not hard enough to actually hurt her, but definitely with enough force to make the doberherm's eyes widen in surprise. Patiently, you chastise her for rushing;[sorry] you're in charge here. She just needs to be a good doggie, lay back, and let you take care of everything...", parse);
+	Text.Add("You don't respond verbally to Miranda's comments. Instead, you reach back with one hand and begin to stroke her balls, running your fingers tenderly over the apple-sized cum factories before closing them firmly around one swollen nut. Not hard enough to actually hurt her, but definitely with enough force to make the doberherm's eyes widen in surprise. Patiently, you chastise her for rushing;[sorry] you're in charge here. She just needs to be a good doggie, lie back, and let you take care of everything...", parse);
 	Text.NL();
 	if(dom < -25)
 		Text.Add("The doberman’s hands immediately release you, gripping the sheets instead. <i>“That’s a low blow [playername]. Hope you know what you’re doing, because payback can be a bitch.”</i>", parse);
@@ -4484,7 +4484,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 	else
 		Text.Add("<i>“Well, you know what I like. So enjoy yourself,”</i> she winks.", parse);
 	Text.NL();
-	Text.Add("Seeing as the morph is going to be obedient and lay still, you turn your attention to other matters of importance. Namely, how to properly prepare yourself to ride Miranda's cock...", parse);
+	Text.Add("Seeing as the morph is going to be obedient and lie still, you turn your attention to other matters of importance. Namely, how to properly prepare yourself to ride Miranda's cock...", parse);
 	Text.Flush();
 	
 	//[GetLube] [Pre-Lube] [Blow-Lube] [Cunt-Lube]
@@ -4494,7 +4494,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 			Text.Clear();
 			Text.Add("<i>“Hang on,”</i> she says, reaching for a nearby drawer. She fumbles around with the contents before producing a jar. <i>“Catch!</i> she exclaims as she tosses the jar.", parse);
 			Text.NL();
-			Text.Add("You snag it deftly and give it a cursory glance. The brand-name on the bottle reads ‘Easy-in - for when you don't have time to take it easy’. Somehow, that motto is just so Miranda... With a little work, you manage to unscrew the jar-top with just one hand - it's very clear that Miranda uses it regularly. Placing it atop Miranda's stomach, you dig into the well-used interior of the jar, scooping out a generous dollop of pale green ointment, which you then reach around and start to work it into your anus.", parse);
+			Text.Add("You snag it deftly and give it a cursory glance. The brand-name on the bottle reads ‘Easy-in - for when you don't have time to take it easy’. Somehow, that motto is just so Miranda... With a little work, you manage to unscrew the jar-top with just one hand - it's very clear that Miranda uses it regularly. Placing it atop Miranda's stomach, you dig into the well-used interior of the jar, scooping out a generous dollop of pale green ointment, then reach around and start to work it into your anus.", parse);
 			Text.NL();
 			Text.Add("Closing your eyes to concentrate, you moan softly as you stroke and caress your anal ring, massaging the lube ointment into its surface, pushing your way inside to ensure a nice internal coating as well. Once satisfied with your own lubing, you remove your fingers from your ass and return them to the jar. This time, you start smearing the fresh dose of lube on Miranda's cock, rubbing up and down to ensure it's well-coated in the slick, smooth ointment.", parse);
 			Text.NL();
@@ -4510,7 +4510,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 			Text.Clear();
 			Text.Add("You reach back with your other hand, the other still grasping her balls to ensure her obedience. With your free hand, you start to stroke her cock, sliding up and down her length with smooth, even strokes, toying with her pointy glans with thumb and fingertips. Precum bubbles hot and wet from her urethra, spilling over your fingers, and you massage her cock until your hand is nice and slick. Deeming it sufficiently covered, you remove your fingers from Miranda's shaft, a soft whimper escaping the herm, and begin to massage your [anusDesc], tenderly rubbing the sexual fluids into your back passage. You allow your eyes to close and moan softly in pleasure as you stroke and play with your asshole, working a thumbtip inside to ensure a nice solid coating inside and out.", parse);
 			Text.NL();
-			Text.Add("Several times you repeat the process, stroking Miranda to get nice and slick with her precum, then massaging it into your anal ring, until you deem yourself sufficiently lubed. Playfully you apologise for keeping her waiting, but assure her that it will be well worth it.", parse);
+			Text.Add("Several times you repeat the process, stroking Miranda to get nice and slick with her precum, then massaging it into your anal ring, until you deem yourself sufficiently lubed. Playfully you apologize for keeping her waiting, but assure her that it will be well worth it.", parse);
 			Text.NL();
 			Text.Add("<i>“Finally, I was wondering how long you were going to keep me waiting,”</i> she licks her lips.", parse);
 			Text.NL();
@@ -4522,10 +4522,10 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 	options.push({ nameStr : "Blow-Lube",
 		func : function() {
 			Text.Clear();
-			Text.Add("Still retaining your grip on the herm's balls, you swivel your hips around until you are reverse-straddling her, your face pointing toward Miranda's feet... and, more importantly, her cock. You allow yourself to be seated on her stomach and then lay down, pushing your rear up toward the dog-morph's face and bringing your own face down to be level with Miranda's jutting girl-cock. Sticking out your tongue, you start to gently lap at the ruddy flesh before you, running your tongue up and down its length with smooth motions, painstakingly coating it with your saliva.", parse);
+			Text.Add("Still retaining your grip on the herm's balls, you swivel your hips around until you are reverse-straddling her, your face pointing toward Miranda's feet... and, more importantly, her cock. You allow yourself to be seated on her stomach and then lie down, pushing your rear up toward the dog-morph's face and bringing your own face down to be level with Miranda's jutting girl-cock. Sticking out your tongue, you start to gently lap at the ruddy flesh before you, running your tongue up and down its length with smooth motions, painstakingly coating it with your saliva.", parse);
 			Text.NL();
 			if(miranda.SubDom() < -25)
-				Text.Add("<i>“Ah, yes! That feels great [playername]!”</i> she exclaims, tongue lolling out. She looks at your exposed [buttDesc]. An idea comes to her and she puts both hands on your buttcheeks. You consider giving her balls a little squeeze to dissuade her from whatever she’s thinking, but when you feel a wet tongue lapping your buttcrack as she spreads you, you relent. Seems she’s decide to help you lube yourself some too.", parse);
+				Text.Add("<i>“Ah, yes! That feels great [playername]!”</i> she exclaims, tongue lolling out. She looks at your exposed [buttDesc]. An idea comes to her and she puts both hands on your buttcheeks. You consider giving her balls a little squeeze to dissuade her from whatever she’s thinking, but when you feel a wet tongue lapping your buttcrack as she spreads you, you relent. Seems she’s decided to help you lube yourself some too.", parse);
 			else {
 				Text.Add("<i>“Yes! Suck my cock like a proper slut!”</i> she exclaims.", parse);
 				Text.NL();
@@ -4592,7 +4592,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 		player.FuckAnal(player.Butt(), miranda.FirstCock(), 3);
 		miranda.Fuck(miranda.FirstCock(), 3);
 		
-		Text.Add("Finally, you have taken sufficient of Miranda's cock that all that remains is the final engorged bulb of her knot. Content to leave that untouched for the moment, and having given yourself the necessary moments to adjust to the feelings of nearly a foot of turgid flesh inside of you, you begin to rhythmically rise and fall atop of your partner.", parse);
+		Text.Add("Finally, you have taken enough of Miranda's cock that all that remains is the final engorged bulb of her knot. Content to leave that untouched for the moment, and having given yourself the necessary moments to adjust to the feelings of nearly a foot of turgid flesh inside of you, you begin to rhythmically rise and fall atop of your partner.", parse);
 		Text.NL();
 		Text.Add("Clenching your anal muscles so as to feel every bulging vein scrape most deliciously inside of you, you sink and gyrate, grinding down to the knot and then teasingly raising yourself up again until you almost pop free, only to slide down again. Your eyes close in concentration so that you can fully focus on the feelings Miranda is giving you, hissing between your teeth as you find a particularly inviting spot inside of you and grind it into her cock.", parse);
 		Text.NL();
@@ -4606,7 +4606,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 				Text.Add("You can feel the flames of desire burning inside of you, growing stronger and hotter with every pump and touch and stroke. A welcome tingling sensation runs down your spine, and you give yourself over to what it entails, making sure to aim your cock[s] right at the open target of Miranda's face. Orgasm washes through you, and you cry out as your [multiCockDesc] fountains its seed.", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.Add("Eyes fixated on the D-cup tits wobbling so enticingly atop your partner's chest, you push up and forward until Miranda's dick pops free of your ass. A dismayed whimper escape the morph beneath you, and your ass itself clenches in sympathy at having been so emptied, but you have another prize to attend to. Sliding along Miranda's stomach, you bring your [multiCockDesc] to bear in-between the morph's luscious breasts, your hands wrapping around the firmly toned, velvety-furred orbs and mashing them together around your shaft[s].", parse);
+				Text.Add("Eyes fixated on the D-cup tits wobbling so enticingly atop your partner's chest, you push up and forward until Miranda's dick pops free of your ass. A dismayed whimper escapes the morph beneath you, and your ass itself clenches in sympathy at having been so emptied, but you have another prize to attend to. Sliding along Miranda's stomach, you bring your [multiCockDesc] to bear in-between the morph's luscious breasts, your hands wrapping around the firmly toned, velvety-furred orbs and mashing them together around your shaft[s].", parse);
 				Text.NL();
 				Text.Add("You eagerly grind and thrust yourself through Miranda's breasts, your sensitive flesh prickling most deliciously at the warmth and soft fur that surrounds [itThem], a sensation that builds upon the feelings already stoked within you by your riding of Miranda's cock. Pleasure mounts and rises inside of you, battering down your will, until you arch your back and thrust as deeply into the morph's cleavage as you can, unleashing your seed without a care.", parse);
 			}, 1.0, function() { return true; });
@@ -4630,7 +4630,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 			var load = player.OrgasmCum();
 			
 			if(load > 6)
-				Text.Add("Gush after massive gush jets from your squirting [multiCockDesc], absolutely drenching the dog-morph's head and upper torso in your seed. Her face is liberally plastered in off-white spunk, her breasts similarly coated and a veritable river of semen drooling down the canyon of her cleavage and over her belly.", parse);
+				Text.Add("Gush after massive gush jets from your squirting [multiCockDesc], absolutely drenching the dog-morph's head and upper torso in your seed. Her face is liberally plastered in off-white spunk, her breasts similarly coated and a veritable river of semen drools down the canyon of her cleavage and over her belly.", parse);
 			else if(load > 3)
 				Text.Add("Thick ropes of sperm plaster themselves over Miranda's face and tits, draping her in a veritable veil of streaks of off-white. The dickmilk is everywhere, coating her face and her breasts alike in your liquid climax.", parse);
 			else
@@ -4705,7 +4705,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 		options.push({ nameStr : "Take knot",
 			func : function() {
 				Text.Clear();
-				Text.Add("Mind made up, your next sink is your last as you force yourself upon the bloated bulge of flesh at the base of Miranda's girl-cock. Your teeth clench and your whole body strains at the effort, it feels like you're trying to insert an apple up your ass, but your determination and sheer stubbornness prevails over the weakness of the flesh.", parse);
+				Text.Add("Mind made up, your next sink is your last as you force yourself upon the bloated bulge of flesh at the base of Miranda's girl-cock. Your teeth clench and your whole body strains at the effort; it feels like you're trying to insert an apple up your ass, but your determination and sheer stubbornness prevails over the weakness of the flesh.", parse);
 				Text.NL();
 				parse["cock"] = player.FirstCock() ? " knot squeezing against your prostate," : "";
 				Text.Add("You scream in a cocktail of pleasure, pain and triumph as Miranda's knot is forced inside of you, the swollen flesh stretching you out impossibly as it swells to anchor the two of you together. The feeling of being stretched so much, filled so full,[cock] is just too much to bear and your ass clamps down as you are wracked with the throes of climax.", parse);
@@ -4718,9 +4718,9 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 				Text.NL();
 				Text.Add("Your orgasm promptly triggers Miranda's in turn. The doberherm throws her head back and bays like the dog she so resembles as her balls clench up and unleash their torrential cascade of semen inside of your defenseless guts. You can feel the tidal wave of hot bitch-spunk flooding up inside of you, forcing its way into your very stomach with its volume and energy, your belly beginning to swell from the volume.", parse);
 				Text.NL();
-				Text.Add("It's an indescribable experience as the near-endless cascade of girl-jizz stretches you out fatter and fuller; by the time Miranda shudders her last, your stomach could pass for a pregnant woman's somewhere in her third trimester. It's so big and heavy it almost reaches down to lay atop Miranda's own stomach, and unconsciously you lean back to better support yourself with your newly increased girth.", parse);
+				Text.Add("It's an indescribable experience as the near-endless cascade of girl-jizz stretches you out fatter and fuller; by the time Miranda shudders her last, your stomach could pass for a pregnant woman's somewhere in her third trimester. It's so big and heavy it almost reaches down to rest atop Miranda's own stomach, and unconsciously you lean back to better support yourself with your newly increased girth.", parse);
 				Text.NL();
-				Text.Add("The two of you lay there in silence, panting for breath, until Miranda speaks up.", parse);
+				Text.Add("The two of you lie there in silence, panting for breath, until Miranda speaks up.", parse);
 				Text.NL();
 				if(dom < -25)
 					Text.Add("<i>“Ahh. You’re the best [playername]. I’d never thought getting used like a cheap dildo could feel this good. I’m so glad I get to be your plaything, come use me anytime, anyhow, and anywhere.”</i>", parse);
@@ -4760,7 +4760,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 				if(player.FirstVag())
 					Text.Add(" Female honey pours from your neglected womanhood, slopping wetly over Miranda's stomach as you climax.", parse);
 				Text.NL();
-				Text.Add("The dober-morph's cascade of semen forces itself inside of you, defying gravity with the sheer ferocity of its jets. Your stomach visibly bulges, even though the bulk of her seed pours back down from your used anus like a perverse waterfall, painting Miranda from the waist down in her own semen by the time she finally stops. With mutual groaning sighs of pleasure, you sink back down and settle yourself atop of Miranda's body, laying atop her like a great cushions.", parse);
+				Text.Add("The dober-morph's cascade of semen forces itself inside of you, defying gravity with the sheer ferocity of its jets. Your stomach visibly bulges, even though the bulk of her seed pours back down from your used anus like a perverse waterfall, painting Miranda from the waist down in her own semen by the time she finally stops. With mutual groaning sighs of pleasure, you sink back down and settle yourself atop of Miranda's body, lying atop her like a great cushion.", parse);
 				Text.NL();
 				Text.Add("The two of you lay there in silence for several long moments, panting for breath.", parse);
 				Text.NL();
@@ -5256,7 +5256,7 @@ Scenes.Miranda.HomeSubbySex = function() {
 		if(world.time.season >= Season.Autumn)
 			Text.Add("<i>“Let me start a fire, get the chill out of our bones,”</i> Miranda says as she pulls you along, throwing you on the fluffy pelt while she fumbles with flint and iron. In short order, the competent guardswoman has a merry fire going, quickly raising the temperature in the room.", parse);
 		else
-			Text.Add("<i>“Screw foreplay,”</i> Miranda growls, pulling you along and throwing you on top of the fluffy pelt in next to the hearth. <i>“I’m just going to take you here and now!”</i>", parse);
+			Text.Add("<i>“Screw foreplay,”</i> Miranda growls, pulling you along and throwing you on top of the fluffy pelt next to the hearth. <i>“I’m just going to take you here and now!”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Listen close,”</i> she says, stalking up to you while tearing her own clothes off, <i>“if you stain the rug, you are gonna lick it up. And trust me, you are going to stain the rug.”</i> She discards her top, letting her large breasts bounce freely. Downstairs, her cock is quickly rising to attention.", parse);
 		Text.NL();
@@ -5276,7 +5276,7 @@ Scenes.Miranda.HomeSubbySex = function() {
 		Text.NL();
 		Text.Add("<i>“Try to find a dry pillow to bite down on, you’ll need it,”</i> comes Miranda’s mocking voice from behind you, accompanied by a rustling as she sheds her clothes. Turning to face her, you gulp as you are hit by her stunning beauty. The doberman’s toned body has curves in all the right places; from top to toe she’s built like an athlete. Not that you’d expect any less from a guardswoman.", parse);
 		Text.NL();
-		Text.Add("Taut muscle hiding just below her short, shiny fur. Flat stomach and broad hips that flare out enticingly, giving her an attractive hourglass figure. Her ass is deliciously rounded, just begging to be groped. Up above, her pillowy breasts heave with her breathing, the shiny black nipples capping each mound stiff with arousal. If you had to guess, you’d say she’s about a D-cup. Of course, it’s not like you can hardly ignore the massive knotted shaft sticking out proudly between her legs either.", parse);
+		Text.Add("Taut muscle hiding just below her short, shiny fur. Flat stomach and broad hips that flare out enticingly, giving her an attractive hourglass figure. Her ass is deliciously rounded, just begging to be groped. Up above, her pillowy breasts heave with her breathing, the shiny black nipples capping each mound stiff with arousal. If you had to guess, you’d say she’s about a D-cup. Of course, it’s not like you can ignore the massive knotted shaft sticking out proudly between her legs either.", parse);
 		Text.NL();
 		Text.Add("<i>“Check out the goods all you like,”</i> Miranda quips sultrily, tossing her long hair over her shoulder. <i>“Don’t daydream for too long, though. As you can see, I’m getting kinda antsy.”</i>", parse);
 		Text.NL();
@@ -5368,7 +5368,7 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 	else {
 		Text.Add("She’s going to take what she wants either way, so why not humor her? Smiling seductively, you wave for her to come over, giving your [buttDesc] an inviting slap. <i>“A [manWoman] of my own tastes,”</i> Miranda chuckles, hips swaying as she closes in on you.", parse);
 		Text.NL();
-		Text.Add("<i>“Did you imagine this was what was going to happen when you followed me here?”</i> Miranda murmurs as she cups your cheeks, something wet and stiff poking you in the back. She rubs her breasts against your back, inexorably pushing your forward until you are bent over [loc1].", parse);
+		Text.Add("<i>“Did you imagine this was what was going to happen when you followed me here?”</i> Miranda murmurs as she cups your cheeks, something wet and stiff poking you in the back. She rubs her breasts against your back, inexorably pushing you forward until you are bent over [loc1].", parse);
 		Text.NL();
 		Text.Add("Reaching back to spread your buttcheeks, you admit that you considered it a looming possibility. <i>“You won’t be disappointed, [lover].”</i>", parse);
 	}
@@ -5390,7 +5390,7 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 	player.FuckAnal(player.Butt(), miranda.FirstCock(), 3);
 	miranda.Fuck(miranda.FirstCock(), 3);
 	
-	Text.Add("Once her head has firmly established its breach in your protesting ass, the herm grabs you by the hips and sinks her knotted dick deeper into you, conquering your colon one inch at a time. You bite down, enduring her rough treatment. As she goes deeper, her cock stirs something within you, a inebriating pleasure roaring out all other thoughts. Overcome by the sensation, you let out a whimpering moan.", parse);
+	Text.Add("Once her head has firmly established its breach in your protesting ass, the herm grabs you by the hips and sinks her knotted dick deeper into you, conquering your colon one inch at a time. You bite down, enduring her rough treatment. As she goes deeper, her cock stirs something within you, an inebriating pleasure roaring out all other thoughts. Overcome by the sensation, you let out a whimpering moan.", parse);
 	Text.NL();
 	if(nasty)
 		Text.Add("<i>“Doesn’t it feel much better to give in to your true nature, my little slut?”</i> Miranda eggs you mockingly as she pushes forward. <i>“There is no one to hide it from here, you can yell at the top of your lungs how much you want to be fucked.”</i>", parse);
@@ -5421,7 +5421,7 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 			Text.Add(" Your [multiCockDesc] flop[notS] around wildly, roused to full mast through the herm’s repeated assault on your prostate.", parse);
 		}
 		if(player.FirstVag())
-			Text.Add(" Your [vagDesc], feeling left out, aches for your attention. Almost without thinking about it, your [hand] sneaks its way down there, fingering your wet folds.", parse);
+			Text.Add(" Your [vagDesc], feeling left out, aches for your attention. Almost without you thinking about it, your [hand] sneaks its way down there, fingering your wet folds.", parse);
 		Text.NL();
 		Text.Add("Once Miranda has gotten started, there is no respite for your poor sphincter. Here in her own home, she doesn’t have to worry about being interrupted, which likely means she’ll continue fucking you until she collapses. Unfortunately for you, given her stamina, that is going to be a while. From the way she’s reaming you, it seems like she’s trying to fuck you through [loc1].", parse);
 		Text.NL();
@@ -5628,7 +5628,7 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 				options.push({ nameStr : "Toys",
 					func : function() {
 						Text.Clear();
-						Text.Add("You make a token effort to rouse the exhausted herm, but it looks like you’ve outlasted her. Growling in frustration, your gaze wanders… falling on Miranda’s rather impressive collection of toys. A slow smile spreads on your lips.", parse);
+						Text.Add("You make a token effort to rouse the exhausted herm, but it looks like you’ve outlasted her. Growling in frustration, you let your gaze wander… to fall on Miranda’s rather impressive collection of toys. A slow smile spreads on your lips.", parse);
 						Text.NL();
 						Text.Add("You flop off her, releasing a cascade of cum from countless orgasms as her knot is forcibly dislodged from your aching hole. The dobie moans, stirring weakly, but resigns to just watching you while she recovers. Through a haze of feverish lust, you single out a large dildo with a flared base. The thing is at least the size of Miranda’s impressive member, a fat slab of artificial cock just begging to be inside you.", parse);
 						Text.NL();
@@ -5659,7 +5659,7 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 						
 						PrintDefaultOptions();
 					}, enabled : true,
-					tooltip : "Make use of some of her toys laying about in order to get off."
+					tooltip : "Make use of some of her toys lying about in order to get off."
 				});
 				
 				if(player.FirstCock()) {
@@ -5751,7 +5751,7 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 							if(p1Cock.isStrapon)
 								Text.Add("Sliding off Miranda’s softening cock, you reach down for your pack, retrieving your [cockDesc]. The herm’s eyes slowly widen in dazed shock as you methodically strap it to your crotch, securing it tightly.", parse);
 							else
-								Text.Add("Sliding off Miranda’s softening cock, you make a great show off stroking your own [multiCockDesc], gazing down at her through eyes clouded with lust. If she doesn’t get what you’re planning to do, she’s sure to in just a moment.", parse);
+								Text.Add("Sliding off Miranda’s softening cock, you make a great show of stroking your own [multiCockDesc], gazing down at her through eyes clouded with lust. If she doesn’t get what you’re planning to do, she’s sure to in just a moment.", parse);
 							Text.NL();
 							Text.Add("You coyly complain that it’s hardly fair for you to have all the fun… shouldn’t she get to have a good time too? ", parse);
 							if(nasty)
