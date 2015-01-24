@@ -338,7 +338,7 @@ Scenes.Jeanne.Talk = function() {
 			
 			Scenes.Jeanne.Talk();
 		}, enabled : true,
-		tooltip : "Ask Jeanne is she has any dealings with the elves anymore. How was it growing up among them?"
+		tooltip : "Ask Jeanne if she has any dealings with the elves anymore. How was it growing up among them?"
 	});
 	options.push({ nameStr : "Jeanne",
 		func : function() {
