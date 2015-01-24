@@ -587,7 +587,8 @@ Scenes.Gol.CombatWinHyperFuck = function(enc, p1cock) {
 		skinDesc : function() { return player.SkinDesc(); },
 		legs : function() { return player.LegsDesc(); },
 		hips : function() { return player.HipsDesc(); },
-		balls : function() { return player.BallsDesc(); }
+		balls : function() { return player.BallsDesc(); },
+		chest : function() { return player.FirstBreastRow().Short(); }
 	};
 	
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
