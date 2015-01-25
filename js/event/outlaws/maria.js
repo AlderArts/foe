@@ -172,7 +172,7 @@ Scenes.Maria.ForestMeeting = function() {
 	
 	if(maria.flags["Met"] == 0) {
 		maria.flags["Met"] = 1;
-		Text.Add("Off in the distance, the massive tree at the center of Eden overlooks the entire verdant area, casting long shadows and slightly eclipsing the sun. This far into the forest, the trees grow close together, and even the smallest is far too tall for you to climb. All around, the sounds of the forest pound against against your ears. Up in the high branches, birds twitter at each other. Wind whistles through the limbs, brushing them against each other in a comforting melody. Dozens of unseen insects send mating songs through the air.", parse);
+		Text.Add("Off in the distance, the massive tree at the center of Eden overlooks the entire verdant area, casting long shadows and slightly eclipsing the sun. This far into the forest, the trees grow close together, and even the smallest is far too tall for you to climb. All around, the sounds of the forest pound against your ears. Up in the high branches, birds twitter at each other. Wind whistles through the limbs, brushing them against each other in a comforting melody. Dozens of unseen insects send mating songs through the air.", parse);
 		Text.NL();
 		Text.Add("The pleasant buzz distracts you from the soreness settling in your limbs. After a few more minutes of walking, you decide to take a break, and sit down at the base of a tree. The rough bark rubs against you through your [armorDesc]. Before long, you fall into a doze.", parse);
 		Text.NL();
