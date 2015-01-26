@@ -457,7 +457,7 @@ Items.Testos.PushEffect(function(target) {
 	}
 	if(!target.HasBalls() && target.FirstCock() && Math.random() < 0.5) {
 		target.Balls().count.base = 2;
-		target.Balls().size.base = 3;
+		target.Balls().size.base  = 3;
 		Text.Add("[Name] grow[notS2] a pair of average testicles.", parse);
 		Text.NL();
 	}
@@ -466,6 +466,7 @@ Items.Testos.PushEffect(function(target) {
 Items.Testos.PushEffect(function(target) {
 	var parse = {
 		Name : target.NameDesc(),
+		poss : target.possessive(),
 		Poss : target.Possessive(),
 		multiCockDesc : function() { return target.MultiCockDesc(); }
 	};
@@ -473,31 +474,43 @@ Items.Testos.PushEffect(function(target) {
 	
 	var vags  = target.AllVags();
 	var cocks = target.AllCocks();
-	if(vags.length > 0 && Math.random() < 0.2) {
+	if(vags.length > 0 && Math.random() < 0.4) {
 		var randVag = Math.floor(Math.random() * vags.length);
 		var vag = vags[randVag];
-		vags.remove(randVag);
-		//Clear clitcock
-		if(vag.clitCock)
-			vag.clitCock.vag = null;
-		if(vags.length > 0) {
-			Text.Add("[Name] loses one of [hisher] cunts!", parse);
+		
+		vag.capacity.DecreaseStat(1, 1);
+		
+		if(vag.capacity.Get() <= 2)
+		{
+			vags.remove(randVag);
+			//Clear clitcock
+			if(vag.clitCock)
+				vag.clitCock.vag = null;
+			if(vags.length > 0) {
+				Text.Add("[Name] loses one of [hisher] cunts!", parse);
+			}
+			else {
+				Text.Add("[Poss] pussy shrinks until it disappears completely.", parse);
+				if(cocks.length == 0) {
+					Text.Add(" It's replaced by a brand new cock!");
+					cocks.push(new Cock());
+				}
+			}
 		}
 		else {
-			Text.Add("[Poss] pussy shrinks until it disappears completely.", parse);
-			if(cocks.length == 0) {
-				Text.Add(" It's replaced by a brand new cock!");
-				cocks.push(new Cock());
-			}
+			if(vags.length > 0)
+				Text.Add("One of [poss] pussies shrinks, becoming tighter.", parse);
+			else
+				Text.Add("[Poss] pussy shrinks, becoming tighter.", parse);
 		}
 		Text.Flush();
 	}
-	else if(Math.random() < 0.5) {
+	if(Math.random() < 0.75) {
 		var len = false, thk = false;
 		for(var i = 0; i < cocks.length; i++) {
 			// Base size
-			len = cocks[i].length.IncreaseStat(35, 1);
-			thk = cocks[i].thickness.IncreaseStat(10, .5);
+			len |= cocks[i].length.IncreaseStat(35, 1);
+			thk |= cocks[i].thickness.IncreaseStat(10, .5);
 		}
 		if(len || thk) {
 			parse["s"]    = target.NumCocks() > 1 ? "s" : "";
@@ -562,28 +575,45 @@ Items.Estros.PushEffect(function(target) {
 	
 	var cocks = target.AllCocks();
 	var vags  = target.AllVags();
-	if(cocks.length > 0 && Math.random() < 0.2) {
+	if(cocks.length > 0 && Math.random() < 0.4) {
 		var randCock = Math.floor(Math.random() * cocks.length);
 		var cock = cocks[randCock];
-		cocks.remove(randCock);
-		//Clear clitcock
-		if(cock.vag)
-			cock.vag.clitCock = null;
-		if(cocks.length > 0) {
-			Text.Add("[Name] loses one of [hisher] cocks!", parse);
+		
+		cock.length.DecreaseStat(5, 1);
+		cock.thickness.DecreaseStat(1, .5);
+		
+		if(cock.Len() <= 7 || cock.Thickness() <= 2)
+		{
+			cocks.remove(randCock);
+			//Clear clitcock
+			if(cock.vag)
+				cock.vag.clitCock = null;
+			if(cocks.length > 0) {
+				Text.Add("[Name] loses one of [hisher] cocks!", parse);
+			}
+			else {
+				Text.Add("[Poss] cock shrinks until it disappears completely.", parse);
+				if(target.NumVags() == 0) {
+					Text.Add(" It's replaced by a brand new pussy!");
+					vags.push(new Vagina());
+				}
+			}
 		}
 		else {
-			Text.Add("[Poss] cock shrinks until it disappears completely.", parse);
-			if(target.NumVags() == 0) {
-				Text.Add(" It's replaced by a brand new pussy!");
-				vags.push(new Vagina());
-			}
+			parse = Text.ParserPlural(parse, target.NumCocks() > 1);
+			Text.Add("[Poss] [multiCockDesc] shudder[notS],[oneof] the stiff dick[s] shrinking in girth and length.", parse);
 		}
 		Text.Flush();
 	}
-	/*
-	else if(Math.random() < 0.5) {
-		// TODO: vag capacity
+	if(Math.random() < 0.75) {
+		var growth = false;
+		for(var i = 0; i < vags.length; i++) {
+			growth |= vags[i].capacity.IncreaseStat(10, .5);
+		}
+		if(growth) {
+			parse = Text.ParserPlural(parse, target.NumVags() > 1);
+			Text.Add("[Poss] cunt[s] shudder[notS], growing looser.", parse);
+			Text.Flush();
+		}
 	}
-	*/
 });
