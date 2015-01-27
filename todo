@@ -88,6 +88,9 @@ Version 0.3
 
 * Miranda stuff
  - Subby home scenes
+ - Dungeon
+ - Dates
+ - Guardhouse
  - Bar scenes
   - Redo bar talk prompt!
 
@@ -175,9 +178,11 @@ Feedback:
  - Traps
  - Enemy affinity
 * Combat
+ - AI archetypes
  - Leaders
   + Grant bonus effects when in combat
   + Demoralized when leader is downed
+ - Balancing
 
 * The generic scene
  - Stanzas
@@ -312,10 +317,12 @@ PART I:
 * Momo
 * Outlaws
  - Maria
+ - Cveta
 * Gwendy's farm
  - Gwendy
  - Adrian
  - Danie
+ - Layla
  - Farm expansion
 * Burrows
  - Rabbits (underway)
@@ -325,13 +332,14 @@ PART I:
 * Brothel
  - Lucille
  - Ches
- - Roa
+ - Roa (pre-follower done)
  - Belinda
 * Rigard
  - Stores
  - Random encounters (Del)
 * Twins & Lei
  - Lei jobs
+ - Twins interactions
 * Jeanne & Golem
  - Magnus interactions
 * Random enemies
@@ -344,7 +352,8 @@ PART I:
  - Naga (70%)
 * Lake
 * Glade
- - Cleansed dryad
+ - Cleansed Orchid
+ - Mother Tree
 * The Portal Opening
 
 MILESTONE: PORTAL OPENING
@@ -357,22 +366,25 @@ PART II:
 * Elven village
 * Free cities
  - Academy of high arts
+ - Arena
 * The temple of Aria
  - Yrissa
 
 # Worlds
  * Giant world
- * Desert world
+ * Desert world - Igni Cog
  * Water world
- * Fallen world
+ * Forge world - Hyperborea
 
 # Major Quests
- * Court
- * Brothel
- * Highlands
+ * Court/Outlaws (Corruption)
+ * Brothel (Lust)
+ * Highlands (Malice)
+ * Corrupted elves
 
 * Tree city
 * The Boneyard
+ - Kadja
 * The Demon City
 
 
@@ -387,69 +399,3 @@ PART IV:
 * Tree city
 * Final battles
 * Ending
-
-
-
-
-
--------------------------------------------------
-               VERSION MILESTONES - OLD
--------------------------------------------------
-
-Version 0.4
------------
-* More combat encounters - fleshed out
-* Story progressed to the point that gem is active
-* Subworlds
-* Summon spirits
-
-Version 0.5
------------
-* Interactive scenes
-
-
-
-HALFWAY POINT
---------------------
-* Publishing/Hosting
---------------------
-
-
-
-Version 0.6
------------
-* Customizable dialogue system
-* More combat encounters
-* Pregnancy and offspring
-
-Version 0.7
------------
-* Special NPCs:
- - Miranda
- - Roa
- - Gwendy
-* Thumbnail art
-* More combat encounters
-
-Version 0.8
------------
-* More combat encounters
-
-Version 0.9
------------
-* Main storyline
-* Balancing
-* More combat encounters
-
-Version 1.0
------------
-* Release of a playable game
-
-Version 1.x
------------
-* Content patches
- - NPCs
- - New enemies
- - New locations
- - Continuation of storyline
-
