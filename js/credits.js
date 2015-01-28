@@ -36,6 +36,7 @@ CreditsScreen = function() {
 	Text.Add("Estevan gay sex: Ben<br/>");
 	Text.Add("Patches: Me and LD<br/>");
 	Text.Add("Roa: Me, QB and LD<br/>");
+	Text.Add("Ophelia: Me, QB and LD<br/>");
 	Text.Add("Gol: Me and Fenoxo<br/>");
 	Text.Add("Mothgirl: Savin<br/>");
 	Text.Add("Cveta: The Observer<br/>");
