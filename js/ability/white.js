@@ -424,7 +424,7 @@ Abilities.White.Sermon.CastInternal = function(encounter, caster, target) {
 	Text.AddOutput("[name] start[s] proselytizing to the enemy party. [HeShe] somehow manage[s] to sound extremely condensending, but immensly boring at the same time!", parse);
 
 	for(var i = 0; i < target.length; i++) {
-		var e      = target[i];
+		var e = target[i];
 		
 		parse["s2"] = e.plural() ? "" : "s";
 		parse["tName"] = e.nameDesc();
@@ -438,7 +438,7 @@ Abilities.White.Sermon.CastInternal = function(encounter, caster, target) {
 		dmg = Math.floor(dmg);
 	
 		if(Math.random() < 0.75) {
-			target.AddSPAbs(-dmg);
+			e.AddSPAbs(-dmg);
 			
 			Text.AddOutput(" It seems to be working, [tName] look[s2] slightly annoyed! [name] drain[s] " + Text.BoldColor(dmg, "#000080") + " SP from [tName]!", parse);
 		}
