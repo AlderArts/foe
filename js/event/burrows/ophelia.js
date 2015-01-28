@@ -458,15 +458,14 @@ Scenes.Ophelia.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("Well, you were wondering if she might be interested in seeing if you can teach her something new or not...", parse);
 				Text.NL();
-				Text.Add("<i>“Well...”</i> She taps her chin in thought. <i>“I’ve only experimented with my siblings, and I’d be lying if I said I don’t wonder what it’d be like to have sex with someone from the outside of the colony. So, I think I’m up for a little research on the subject,”</i> she concludes, smiling flirtatiously at you.", parse);
+				Text.Add("<i>“Well...”</i> She taps her chin in thought. <i>“I’ve only experimented with my siblings, and I’d be lying if I said I don’t wonder what it’d be like to have sex with someone from outside the colony. So, I think I’m up for a little research on the subject,”</i> she concludes, smiling flirtatiously at you.", parse);
 				Text.NL();
 				Text.Add("In that case, you’re happy to oblige her.", parse);
 				ophelia.relation.IncreaseStat(100, 3);
 			}
 			Text.Flush();
 			
-			ophelia.flags["Talk"] |= Ophelia.Talk.Sex;
-			Scenes.Ophelia.SexPrompt();
+			Scenes.Ophelia.SexEntryPoint();
 		}, enabled : true,
 		tooltip : "Ophelia’s... different... to the other bunnies in the warren. What does she think of sex?"
 	});
@@ -738,10 +737,12 @@ Scenes.Ophelia.TalkVena = function() {
 }
 
 //TODO
-Scenes.Ophelia.SexPrompt = function() {
+Scenes.Ophelia.SexEntryPoint = function() {
 	var parse = {
 		
 	};
+	
+	ophelia.flags["Talk"] |= Ophelia.Talk.Sex;
 	
 	Text.NL();
 	Text.Add("PLACEHOLDER", parse);
