@@ -17,7 +17,8 @@ function Ophelia(storage) {
 	this.body.SetBodyColor(Color.white);
 	this.body.SetEyeColor(Color.blue);
 	
-	this.flags["Met"] = 0; // note, bitmask
+	this.flags["Met"] = 0; // note, bitmask Ophelia.Met
+	this.flags["Talk"] = 0; // note, bitmask Ophelia.Talk
 	this.burrowsCountdown = new Time();
 	
 	if(storage) this.FromStorage(storage);
@@ -29,6 +30,12 @@ Ophelia.Met = {
 	Recruited : 1,
 	Broken    : 2,
 	InParty   : 4
+};
+
+Ophelia.Talk = {
+	Herself : 1,
+	Sex     : 2,
+	Vena    : 4
 };
 
 Ophelia.prototype.FromStorage = function(storage) {
@@ -201,13 +208,11 @@ Scenes.Ophelia.LabApproach = function() {
 	Scenes.Ophelia.LabPrompt();
 }
 
-Scenes.Ophelia.LabPrompt = function() {
+Scenes.Ophelia.TraitPrompt = function(options) {
 	var parse = {
 		
 	};
 	
-	//[name]
-	var options = new Array();
 	if(burrows.flags["BruteTrait"] == Burrows.TraitFlags.Inactive) {
 		options.push({ nameStr : "Cactoid",
 			func : function() {
@@ -302,18 +307,332 @@ Scenes.Ophelia.LabPrompt = function() {
 			tooltip : "Ask Ophelia about the brainy trait."
 		});
 	}
-	options.push({ nameStr : "Potions",
+}
+
+//TODO
+Scenes.Ophelia.TalkPrompt = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	//[Herself] [Her lab] [Sex] [Vena] [Lagon]
+	var options = new Array();
+	options.push({ nameStr : "Herself",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>“If you have any, I’ll trade you coins for new alchemical brews that may be of use to the colony.”</i>", parse);
+			if(ophelia.flags["Talk"] & Ophelia.Talk.Herself) {
+				Text.Add("<i>“Again?”</i>", parse);
+				Text.NL();
+				Text.Add("With a nod and a grin, you confirm it. After all, you like hearing about herself.", parse);
+				Text.NL();
+				Text.Add("<i>“If you insist,”</i> she says with a soft smile.", parse);
+			}
+			else {
+				Text.Add("<i>“Me? I’m not really that interesting,”</i> she says nonchalantly.", parse);
+				Text.NL();
+				Text.Add("Smiling, you assure her that you still want to hear something about her past. Everyone has a story to tell, and you’d love if she’d share hers with you.", parse);
+				Text.NL();
+				Text.Add("<i>“Alright, then. If you really wish to know,”</i> she smiles softly.", parse);
+			}
 			Text.NL();
-			Text.Add("Do you offer any potions to Ophelia?", parse);
+			Text.Add("<i>“I’m not really that special. I was born when my mother, Vena, still had her full faculties. Mother was always caring and loving while father was… less so. Still, me and my siblings, we were treated well and I was happy.”</i>", parse);
+			Text.NL();
+			Text.Add("It sounds like a happy time, you note. Was her family anywhere near as large as it is now back then, or was it smaller when she was young?", parse);
+			Text.NL();
+			Text.Add("<i>“It was much smaller. I mean… sex was nothing new. Both father and mother would enjoy themselves with my older siblings, but it was nothing like what you would see in the pits. I remember that I’d always looked forward to the day I would join them.”</i>", parse);
+			Text.NL();
+			Text.Add("There’s a fond, wistful smile on the lagomorph’s face as she says this, and you are starkly reminded of just how alien a life she’s led. But there’s something about her particular choice of words that’s catching your attention.", parse);
+			Text.NL();
+			Text.Add("Rolling the thought around in your head, you comment that Ophelia describes her anticipation in the past tense. Did something happen, on her first time with her parents? Was it not as good as she’d hoped it would be?", parse);
+			Text.NL();
+			if(ophelia.Relation() < 30) {
+				Text.Add("<i>“Nothing really happened. Losing my virginity hurt at first, but I expect it was the same for every sister of mine.”</i>", parse);
+				Text.NL();
+				Text.Add("Ophelia’s tone is steady and even, but her body language betrays her. The tension in her shoulders, the slightly haunted look in her eyes. Clearly, there’s more to this than she’s letting on.", parse);
+				Text.NL();
+				Text.Add("Still, you decide to drop the topic, simply nodding in feigned acceptance. She’s clearly being evasive because she doesn’t trust you with the whole truth. Maybe if she knew you better, she’d be comfortable with telling you the real details.", parse);
+			}
+			else {
+				Text.Add("<i>“...No, it was nothing like I expected,”</i> she says, looking downcast.", parse);
+				Text.NL();
+				Text.Add("The lapin alchemist looks so sad and vulnerable that a twinge of sympathy forces itself through your heart. Gently, you ask if she can tell you what she expected - and what she actually got.", parse);
+				Text.NL();
+				Text.Add("<i>“I didn’t expect much, really. My sisters spoke to me about what it was like, so I kinda knew what to expect, mom also helped. But my first time was with father, and he was not gentle.”</i>", parse);
+				Text.NL();
+				parse["former"] = burrows.LagonDefeated() ? " former" : "";
+				Text.Add("Remembering your own meetings with the[former] king of the burrows, you can imagine that. Tenderly, you indicate Ophelia should continue.", parse);
+				Text.NL();
+				Text.Add("<i>“It hurt. It also felt somewhat good, father is pretty big… but it still hurt. I had my first orgasm, felt him fill me for the first time, then he discarded me and went to my sister. He didn’t say a word, didn’t look back, he just dropped me and moved on.”</i>", parse);
+				Text.NL();
+				Text.Add("Another pang of sympathy pierces you, stronger than the one before. You can just see it in your mind’s eye. A young, baffled Ophelia, nethers dripping her father’s seed, watching in pained confusion as her sire discards her like a used condom to fuck a fresh hole.", parse);
+				Text.NL();
+				Text.Add("<i>“I was pretty sore. Couldn’t get up at all. Roa, my brother, was the one who helped me up. He cleaned me up, made me feel better. He’s always been nice to me...”</i>", parse);
+				Text.NL();
+				Text.Add("Despite everything, a slight smile crosses your lips upon hearing that. Roa truly does sound like he was a good brother to Ophelia.", parse);
+				Text.NL();
+				Text.Add("<i>“Mother was pretty mad at father after that. She scolded him and made him apologise to me. It made me feel a lot better,”</i> she adds, smiling softly.", parse);
+				Text.NL();
+				Text.Add("She clears her throat, recomposing herself. <i>“After that I had other experiences with my brothers, and even my sisters. I learned a lot, and had a good time. I also had a few turns with father after that. He was at least a little gentler the following times. But I didn’t, and still don’t enjoy having sex with him that much.”</i>", parse);
+				Text.NL();
+				Text.Add("Well, you can hardly blame her for that, even if her reasonings are a little off compared to why most people wouldn’t enjoy screwing their dad. No wonder she spends so much time cooped up in her lab; best way to avoid getting noticed by him, after all.", parse);
+			}
+			Text.NL();
+			Text.Add("With a sagacious nod, you thank Ophelia for sharing about herself. It’s always interesting to find out more about the people you meet.", parse);
+			Text.NL();
+			Text.Add("<i>“Sure, anytime [playername].”</i>", parse);
 			Text.Flush();
 			
-			Scenes.Ophelia.PotionsPrompt();
+			ophelia.relation.IncreaseStat(20, 1);
+			
+			ophelia.flags["Talk"] |= Ophelia.Talk.Herself;
+			
+			Scenes.Ophelia.TalkPrompt();
 		}, enabled : true,
-		tooltip : "Donate some of your alchemical stock to Ophelia."
+		tooltip : "You’d like to know a little more about Ophelia."
 	});
+	options.push({ nameStr : "Her Lab",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“Sometimes we steal things from passing merchants or wanderers. One time, after a successful picking, we got a few books on alchemy. I got interested, and started researching the subject.”</i>", parse);
+			Text.NL();
+			Text.Add("That makes sense. It’s quite obvious that Lagon and his brood have been thieving for who knows how long, and Ophelia always did strike you as somewhat of a bookworm - if only in comparison to her brothers and sisters. Nodding absently, you ask if Ophelia remembers the first potion she tried to brew.", parse);
+			Text.NL();
+			Text.Add("<i>“Yes, I do actually. My knowledge is somewhat limited, so whatever I learn, I usually do through experimentation. I try many things, but I’m not always successful. A while ago I tried to experiment with a feminising potion on one of my brothers. But all it did was give him budding breasts. He was quite happy with them though.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, that makes sense, from what you’ve seen of her siblings. So, does she rely on trial-and-error exclusively, then?", parse);
+			Text.NL();
+			Text.Add("<i>“We usually look for more alchemy books whenever we can, but they’re hard to come by. So experimentation is the only real way I can make some progress. These days I have many volunteers, but it wasn’t always so. Most of my brothers and sisters are more worried with sex than helping me with new discoveries, so father had to intervene. He’s always had a keen interest in my alchemy.”</i>", parse);
+			Text.NL();
+			Text.Add("Recalling the very first task Lagon set for you upon your being brought here, you just bet he has. Being diplomatic, you ask if that means Ophelia never had to prove herself as an alchemist to her father. He never challenged her to produce a specific potion before he promoted her to the ‘royal alchemist’, so to speak?", parse);
+			Text.NL();
+			if(ophelia.Relation() < 30) {
+				Text.Add("<i>“Not really, he just pushes me to make more,”</i> she says, with a hint of hesitation.", parse);
+				Text.NL();
+				Text.Add("Hmm... interesting. You have a feeling there’s more to it than that, but you don’t think she’ll explain it better unless she trusts you more.", parse);
+			}
+			else {
+				Text.Add("<i>“That’s… difficult to answer. Father doesn’t ask for specific potions but he constantly pressures me. It’s like… if I don’t produce something useful, I’m scared what he might do to me...”</i>", parse);
+				Text.NL();
+				Text.Add("That... sounds just like Lagon. You have no doubts in the slightest that he would turn on even Ophelia if she stopped being useful to him. You hold your tongue, though; no point in scaring her with that fact.", parse);
+			}
+			Text.NL();
+			Text.Add("<i>“Well, that’s most of the story. This lab, I built with the help of my brothers and sisters, using whatever we managed to scavenge. And then you showed up to help me.”</i>", parse);
+			Text.NL();
+			Text.Add("Seeing the smile on Ophelia’s face makes you smile in turn. You assure her that it was nothing, and thank her for telling you this.", parse);
+			Text.Flush();
+			
+			ophelia.relation.IncreaseStat(20, 1);
+			Scenes.Ophelia.TalkPrompt();
+		}, enabled : true,
+		tooltip : "So, how did Ophelia start working with alchemy anyway?"
+	});
+	options.push({ nameStr : "Sex",
+		func : function() {
+			Text.Clear();
+			if(ophelia.flags["Talk"] & Ophelia.Talk.Sex) {
+				Text.Add("<i>“ I love sex. You should know. You’ve had me.”</i>", parse);
+				Text.NL();
+				Text.Add("You smile at her and apologise. You simply thought it would be a nice little icebreaker; a girl like her deserves a little more finesse than just ‘hey, wanna fuck?’", parse);
+				Text.NL();
+				Text.Add("<i>“Oh...”</i> She smiles. <i>“Thanks. Now that the ice is broken, what are you going to do?”</i>", parse);
+				Text.NL();
+				Text.Add("Well, if she’s in the mood, you’re sure you have something new to teach her...", parse);
+				Text.NL();
+				Text.Add("<i>“Of course. I’m always in the mood for a little more research,”</i> she smiles.", parse);
+				ophelia.relation.IncreaseStat(30, 1);
+			}
+			else {
+				Text.Add("<i>“I love sex. There’s nothing quite like a big, gentle partner, who knows exactly what you like,”</i> she says, closing her eyes and smiling at the mental picture she conjures for herself.", parse);
+				Text.NL();
+				Text.Add("Really? You always thought that she seemed... well, if you’re honest, less obsessed with sex than her siblings. So, she enjoys a nice romp between the sheets too?", parse);
+				Text.NL();
+				Text.Add("<i>“Maybe I am less obsessed. But that doesn’t mean I don’t enjoy it just as much. It’s just that I can’t contain my curiosity. I love discovering new things.”</i>", parse);
+				Text.NL();
+				Text.Add("The hook is just too obvious for you to ignore. A knowing grin crosses your lips as you quip that she must surely like discovering new things for the bedroom best of all.", parse);
+				Text.NL();
+				Text.Add("Ophelia smiles knowingly, nodding in confirmation of your suspicions. <i>“Yes, it’s actually the reason I got so interested in alchemy. Ever since my first experiment, I’ve been trying to find new mixtures to spice things up. I usually test my volunteers myself.”</i>", parse);
+				Text.NL();
+				Text.Add("You nod slowly, rubbing your chin as a thought takes hold. So... does she always leave her ‘learning’ for after her alchemy experiments? Or is she willing to learn something new without that sort of ‘foreplay’ first?", parse);
+				Text.NL();
+				Text.Add("The lapin alchemist looks at you in curiosity. <i>“Umm, why? What do you have in mind?”</i>", parse);
+				Text.NL();
+				Text.Add("Well, you were wondering if she might be interested in seeing if you can teach her something new or not...", parse);
+				Text.NL();
+				Text.Add("<i>“Well...”</i> She taps her chin in thought. <i>“I’ve only experimented with my siblings, and I’d be lying if I said I don’t wonder what it’d be like to have sex with someone from the outside of the colony. So, I think I’m up for a little research on the subject,”</i> she concludes, smiling flirtatiously at you.", parse);
+				Text.NL();
+				Text.Add("In that case, you’re happy to oblige her.", parse);
+				ophelia.relation.IncreaseStat(100, 3);
+			}
+			Text.Flush();
+			
+			ophelia.flags["Talk"] |= Ophelia.Talk.Sex;
+			Scenes.Ophelia.SexPrompt();
+		}, enabled : true,
+		tooltip : "Ophelia’s... different... to the other bunnies in the warren. What does she think of sex?"
+	});
+	options.push({ nameStr : "Vena",
+		func : function() {
+			Text.Clear();
+			if(burrows.VenaRestored()) {
+				Text.Add("<i>“If you want to know more about her, you should consider asking her yourself. Mom is a lot more approachable than father.”</i> Ophelia reminds you, a slight grin on her face. <i>“But I have no problem talking to you about her. What exactly did you have in mind?”</i>", parse);
+				Text.NL();
+				Scenes.Ophelia.TalkVena();
+			}
+			else {
+				if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3) {
+					Text.Add("<i>“Speaking of which, have you had any luck tracking down the scepter?”</i>", parse);
+					Text.Flush();
+					
+					//[Yes] [No]
+					var options = new Array();
+					options.push({ nameStr : "Yes",
+						func : function() {							
+							// TODO
+							Text.Clear();
+							Text.Add("PLACEHOLDER", parse);
+							Text.NL();
+							Scenes.Vena.RestoreEntrypoint();
+						}, enabled : burrows.flags["Access"] >= Burrows.AccessFlags.QuestlineComplete,
+						tooltip : "Show her the scepter."
+					});
+					options.push({ nameStr : "No",
+						func : function() {
+							Text.Clear();
+							Text.Add("With a shake of your head, you inform her that you haven’t managed to find it yet. You do promise that you’ll let her know as soon as you do have it.", parse);
+							Text.NL();
+							Scenes.Ophelia.TalkVena();
+						}, enabled : true,
+						tooltip : "You don’t have the scepter yet."
+					});
+					Gui.SetButtonsFromList(options, false, null);
+				}
+				else {
+					Text.Add("<i>“I wish I knew of a way to restore her. Then you could ask her yourself. But right now? At most she’ll have the brains to ask for sex...”</i> Ophelia says with a sad face and drooping ears.", parse);
+					Text.NL();
+					Scenes.Ophelia.TalkVena();
+				}
+			}
+		}, enabled : true,
+		tooltip : "If she’s okay with it, you’d like to know more about her mom."
+	});
+	options.push({ nameStr : "Lagon",
+		func : function() {
+			Text.Clear();
+			if(burrows.LagonDefeated()) {
+				Text.Add("<i>“Thank you so much for stopping him,”</i> Ophelia says with a grin. <i>“I still can’t believe you beat him.”</i>", parse);
+				Text.NL();
+				Text.Add("You assure Ophelia that it was the least you could do. Lagon needed to be stopped, and so you did it.", parse);
+				Text.NL();
+				Text.Add("<i>“I know, I just can’t believe you actually did it,”</i> she smiles. <i>“Father was so powerful, and he even had my potion. You must be some kind of hero to have accomplished this.”</i>", parse);
+				Text.Flush();
+				
+				var options = new Array();
+				options.push({ nameStr : "Be modest",
+					func : function() {
+						Text.Clear();
+						Text.Add("She merely shakes her head. <i>“No, believe me, I’m not. Even if there are some of us who don’t seem to care, the truth is that you’ve done a great service for the colony.”</i>", parse);
+						Text.NL();
+						Text.Add("With a sheepish smile, you insist that you were just doing what anyone would have done - indeed, should have done - when faced with Lagon’s cruel tyranny.", parse);
+						PrintDefaultOptions();
+					}, enabled : true,
+					tooltip : "Ophelia is giving you far too much credit."
+				});
+				options.push({ nameStr : "Boast",
+					func : function() {
+						Text.Clear();
+						Text.Add("Thrusting out your chin, you fold your arms over your chest and give a triumphant grin. With a firm tone you praise Ophelia for her attentiveness; it’s good to see she, at least, appreciates your efforts in rescuing her and her siblings from Lagon.", parse);
+						Text.NL();
+						Text.Add("<i>“It’s not just me. I know my brothers and sister seem like they don’t care much for what you did. But some of them do. You truly are a hero, [playername].”</i>", parse);
+						PrintDefaultOptions();
+					}, enabled : true,
+					tooltip : "Of course you’re a hero, so why not accept the praise that is your due?"
+				});
+				Gui.Callstack.push(function() {
+					Text.NL();
+					if(burrows.VenaRestored()) {
+						Text.Add("<i>“Defeating father was a huge step. But restoring my mother… I don’t think there’ll ever be a way for me to repay you for all you did for us.”</i>", parse);
+						Text.NL();
+						Text.Add("You’re just happy that the burrows will be making a change for the better, with Lagon out of the picture and a much better ruler taking his place. Of course, that it gave her back her mother is also important, too.", parse);
+					}
+					else {
+						Text.Add("<i>“Now that father has been defeated, all that’s left is for us to restore mother. She’s the only one fit to lead this colony, and I’m confident she’ll be a better ruler than my tyrannical father.”</i>", parse);
+						Text.NL();
+						Text.Add("You nod to show that you understand, promising that you’ll keep an eye out for the scepter in your travels so that Vena can be restored.", parse);
+					}
+					Text.Flush();
+					
+					ophelia.relation.IncreaseStat(50, 1);
+					Scenes.Ophelia.TalkPrompt();
+				});
+				Gui.SetButtonsFromList(options, false, null);
+			}
+			else if(ophelia.Relation() >= 30) {
+				Text.Add("<i>“My father...”</i> she starts, looking around. Then she takes a deep breath to steel herself. <i>“He’s a tyrant.”</i>", parse);
+				Text.NL();
+				Text.Add("That’s a... surprisingly harsh assessment.", parse);
+				Text.NL();
+				Text.Add("<i>“You met him. He doesn’t care about his daughters and sons. All he cares about is power. Power and breeding. And he’ll stop at nothing to get what he wants. Just look what he’s done to mother!”</i>", parse);
+				Text.NL();
+				Text.Add("You never said it wasn’t an accurate assessment. It doesn’t quite look like Ophelia’s listening to you, though. It seems the lapin is building up to quite a passionate tirade.", parse);
+				Text.NL();
+				Text.Add("<i>“He keeps me around because he still thinks I’m useful. That’s the only reason I haven’t been turned into a dumb slut and thrown into the Pit to birth more soldiers for his army. I live in constant fear that he will just decide on a whim that I’m not longer worth anything anymore and discard me,”</i> she continues, tears welling up in her eyes.", parse);
+				Text.NL();
+				Text.Add("Without thinking about it, you reach out and place a hand on her shoulder, offering what little comfort you possibly can in the face of such ugly truths. For a moment, you consider offering to help her escape this awful place - to take her somewhere that she’ll be safe from Lagon.", parse);
+				Text.Flush();
+				
+				//[Come with me] [Stay silent]
+				var options = new Array();
+				options.push({ nameStr : "Come with me",
+					func : function() {
+						Text.Clear();
+						Text.Add("There’s a moment of hesitation as the lapin alchemist considers your invitation. But she takes your hand and pushes it off her shoulders. <i>“I’m sorry, [playername]. I’m so sorry. But I can’t leave my mother here to suffer while I run. And that is assuming we could even run in the first place. If we tried, my father would surely hunt us down, and he would find us. It’s… it’s just too dangerous. I’m sorry,”</i> she says in resignation.", parse);
+						Text.NL();
+						Text.Add("She has nothing to apologize for; you just felt you had to make the offer.", parse);
+						Text.NL();
+						Text.Add("<i>“But, for what it’s worth, I do appreciate the invitation,”</i> she smiles weakly.", parse);
+						Text.NL();
+						Text.Add("If she ever changes her mind, you’ll leave it open for her.", parse);
+						Text.Flush();
+						ophelia.relation.IncreaseStat(50, 2);
+						Scenes.Ophelia.TalkPrompt();
+					}, enabled : true,
+					tooltip : "Invite Ophelia to leave the burrows and join you in your travels."
+				});
+				options.push({ nameStr : "Stay silent",
+					func : function() {
+						Text.Clear();
+						Text.Add("<i>“I’m sorry. I’m fine now,”</i> she says, rubbing her eyes and brushing your hand off her shoulder. <i>“Thank you.”</i>", parse);
+						Text.NL();
+						Text.Add("It was nothing, you assure her.", parse);
+						Text.Flush();
+						ophelia.relation.IncreaseStat(40, 1);
+						Scenes.Ophelia.TalkPrompt();
+					}, enabled : true,
+					tooltip : "Just keep your mouth shut and let Ophelia regain control."
+				});
+				Gui.SetButtonsFromList(options, false, null);
+			}
+			else {
+				Text.Add("<i>“My father?”</i> she repeats hesitantly. <i>“He’s our king, our leader...”</i>", parse);
+				Text.NL();
+				Text.Add("You interrupt, telling her that you know all that already. But you want to know what she thinks of him as a person - as her father. She’s his daughter, after all...", parse);
+				Text.NL();
+				Text.Add("<i>“I... think he’s a wonderful leader,”</i> she says, forcing a smile. <i>“There’s no one else I’d rather rule us.”</i>", parse);
+				Text.NL();
+				Text.Add("She doesn’t sound very convinced of what she’s saying... what’s wrong?", parse);
+				Text.NL();
+				Text.Add("<i>“Yes, of course. Now if you’re done questioning me, I have to get back to my research,”</i> she says, turning and going back to what she was doing.", parse);
+				Text.NL();
+				Text.Add("...Okay, that’s definitely <b>not</b> something she’s comfortable talking about. It’s clear that this isn’t something she’s willing to talk about, at least, not without more trust in you.", parse);
+				Text.NL();
+				Text.Add("Deciding to leave before you outright offend her, you say your goodbyes to her stubbornly turned back and withdraw.", parse);
+				Text.Flush();
+				Gui.NextPrompt();
+			}
+		}, enabled : true,
+		tooltip : "Can she tell you anything about her father?"
+	});
+	
 	if(burrows.flags["Access"] == Burrows.AccessFlags.Stage3) {
 		options.push({ nameStr : "Roa",
 			func : function() {
@@ -329,6 +648,146 @@ Scenes.Ophelia.LabPrompt = function() {
 			tooltip : "Ask Ophelia for clues on Roa’s whereabouts."
 		});
 	}
+	Gui.SetButtonsFromList(options, true, Scenes.Ophelia.LabPrompt);
+}
+
+Scenes.Ophelia.TalkVena = function() {
+	var parse = {
+		playername : player.name,
+		breastsDesc : function() { return player.FirstBreastRow().Short(); },
+		topArmorDesc : function() { return player.ArmorDesc(); }
+	};
+	
+	if(!burrows.VenaRestored()) {
+		Text.Add("<i>“Regardless, and since she’s unable to. I’d be happy to talk to you about her. What exactly did you have in mind in regards to mother?”</i>", parse);
+		Text.NL();
+	}
+	Text.Add("Well... for starters, what kind of person was she like? Before she wound up as the centerpiece in the Pit?", parse);
+	Text.NL();
+	Text.Add("<i>“Mom was always caring and nice. She’s what kept father in check. I mean, she’d always valued father’s opinion and his desires, but she also had opinions of her own. They argued a lot, but mom would always come out on top. She was as much our queen, as father was our king.”</i>", parse);
+	Text.NL();
+	Text.Add("Sounds like it was a pretty good relationship, something healthy for all concerned.", parse);
+	Text.NL();
+	if(burrows.VenaRestored()) {
+		Text.Add("So, has she noticed any changes in Vena’s personality, since the two of you restored her? Between what Lagon did to her, and her other transformations, it wouldn’t surprise you if the queen rabbit was at least a little different.", parse);
+		Text.NL();
+		Text.Add("Ophelia smiles and shakes her head. <i>“No, mother is still the same as ever. She’s truly a strong rabbit. I don’t think I’d even be the same if father did the same to me.”</i>", parse);
+		Text.NL();
+		Text.Add("You think Ophelia isn’t giving herself enough credit. But, she is right; Vena must be one tough bunny to come through that without even the slightest of changes. You’d have expected having to adjust to being a herm at the least would make her a little different.", parse);
+		Text.NL();
+	}
+	Text.Add("So, Ophelia mentioned that her parents would argue a lot - what exactly did they argue about?", parse);
+	Text.NL();
+	Text.Add("<i>“It was mostly about our family. Father always thought we should grow and expand, while mother just wanted us to be a family and not worry about any of that. My father used to call her short-sighted, but in the end mom would always make him see things her way.”</i>", parse);
+	Text.NL();
+	Text.Add("An idle curiosity about exactly <i>how</i> Vena accomplished that flashes a fin, but you dismiss it. Something else has your attention. Cautiously, you ask if Ophelia has any idea how or when that changed - when Vena stopped being the queen of the burrows and became the breeder in the pit.", parse);
+	Text.NL();
+	Text.Add("Ophelia’s ears flatten. ", parse);
+	if(ophelia.Relation() < 30) {
+		Text.Add("<i>“I’m sorry, [playername]. But that’s really not something that I’d like to talk about. I lost so much that day… I’m sorry.”</i>", parse);
+		Text.NL();
+		Text.Add("You apologize for bringing it up; you didn’t want to make her uncomfortable like that. You decide to switch to a more neutral topic, once she’s had a moment to collect herself.", parse);
+	}
+	else {
+		Text.Add("She takes a deep breath and visibly steels herself. <i>“That day… it was all my fault.”</i>", parse);
+		Text.NL();
+		if(ophelia.flags["Talk"] & Ophelia.Talk.Vena) {
+			Text.Add("You place a comforting hand on Ophelia’s shoulder. It wasn’t her fault, you assure her. She created the potion, yes, but Lagon was the one who tricked Vena into taking it. Lagon is to blame here, not Ophelia.", parse);
+			Text.NL();
+			Text.Add("<i>“Thank you for saying that, [playername]. But I still feel guilty all the same...”</i>", parse);
+			Text.NL();
+			Text.Add("Well, she shouldn’t, and you tell her this firmly. The only one to blame here is the corrupt soul who poisoned her mother in the first place. All of the guilt is Lagon’s, not hers.", parse);
+			Text.NL();
+			Text.Add("<i>“Thank you, [playername]. But can we just talk about something else?”</i>", parse);
+			Text.NL();
+			Text.Add("Of course, you don’t want to make her uncomfortable.", parse);
+			ophelia.relation.IncreaseStat(45, 1);
+		}
+		else {
+			Text.Add("How could that possibly be? Ophelia clearly loves her mom; she’d never have done anything to hurt her! You simply don’t believe it.", parse);
+			Text.NL();
+			Text.Add("<i>“I was experimenting, as usual. And I’d made a new potion. I had tested it on a sister of mine, and she instantly became lustful and wanted nothing more than to have sex. It’s like that was the only thing she could think about. Sex.”</i>", parse);
+			Text.NL();
+			Text.Add("The thought occurs to you that doesn’t sound much different to how Ophelia’s siblings are normally, but you stay silent, allowing her to continue her story unabated.", parse);
+			Text.NL();
+			Text.Add("<i>“Back then, whenever I made a discovery, I would present my findings to mom and dad. Mother would usually congratulate me and father would offer some comments on what I had created. This time, mother praised me as usual, but said the potion didn’t have much use and I should dispose of it.”</i>", parse);
+			Text.NL();
+			Text.Add("You can see her mother’s point there. As much fun as sex might be, someone incapable of doing anything but fuck 24/7 would be kind of useless for keeping the colony going.", parse);
+			Text.NL();
+			Text.Add("<i>“I was understandably bummed. I thought my discovery would help the colony. Particularly my shyer brothers and sisters. But if mother didn’t think it was going to be useful, I might as well as dispose of it. Father hadn’t said anything, but by then that was no surprise. This wasn’t the first of my discoveries that he had ignored. I was so naive... ”</i>", parse);
+			Text.NL();
+			Text.Add("At Ophelia’s crestfallen expression, and thinking back to your own interactions with King Rabbit, you have a sinking feeling about what happened. Quietly, you confirm the worst; Lagon used the potion on Vena, didn’t he?", parse);
+			Text.NL();
+			Text.Add("<i>“Yes,”</i> she replies, tearing up. <i>“I should have done what mother instructed me to right then. But I didn’t want to waste what I thought was a perfectly good potion. So I kept it in my lab. Father stole it and drugged mother. And then he took control of the colony. With no one to oppose him, we quickly became what you see.”</i>", parse);
+			Text.NL();
+			Text.Add("Instinctively, you try to comfort Ophelia. She shouldn’t blame herself; she wasn’t the one who drugged her mother, this is Lagon’s fault, not hers.", parse);
+			Text.NL();
+			Text.Add("At your words, Ophelia seems to break down. The lab-coated lapin throws her arms around you and hugs you as tightly as she can manage. Her face buries itself against your [breastsDesc], tears dampening your [topArmorDesc] as she sobs loudly.", parse);
+			Text.NL();
+			Text.Add("A little awkwardly, you hug her back, stroking her hair in an attempt to calm her down as she hangs on for dear life. You lose track of time as she weeps against you, but finally, she seems to cry herself out. She sniffles loudly, nuzzles her face against your chest to try and dry her face off, and then gently pushes back from you, breaking the embrace.", parse);
+			Text.NL();
+			Text.Add("<i>“Thank you, [playername].”</i> She smiles.", parse);
+			Text.NL();
+			Text.Add("You pet her head and smile, assuring her that you don’t mind. Now, why don’t the two of you talk about something else?", parse);
+			ophelia.relation.IncreaseStat(100, 3);
+		}
+		ophelia.flags["Talk"] |= Ophelia.Talk.Vena;
+	}
+	Text.Flush();
+	Scenes.Ophelia.TalkPrompt();
+}
+
+//TODO
+Scenes.Ophelia.SexPrompt = function() {
+	var parse = {
+		
+	};
+	
+	Text.NL();
+	Text.Add("PLACEHOLDER", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt();
+}
+
+Scenes.Ophelia.LabPrompt = function() {
+	var parse = {
+		
+	};
+	
+	//[name]
+	var options = new Array();
+	
+	options.push({ nameStr : "Talk",
+		func : function() {
+			Text.Clear();
+			if(burrows.VenaRestored())
+				Text.Add("<i>“Sure, I got time. What would you like to talk about?”</i>", parse);
+			else if(burrows.LagonDefeated())
+				Text.Add("<i>“Alright, I can spare a few moments to chat. But we really need to restore mother, before the colony descends into chaos.”</i>", parse);
+			else
+				Text.Add("<i>“Okay, I can spare a few moments. But don’t take too long. I really need to get back to my research.”</i>", parse);
+			Text.Flush();
+			
+			Scenes.Ophelia.TalkPrompt();
+		}, enabled : true,
+		tooltip : "Have a chat with the bunny alchemist."
+	});
+	
+	Scenes.Ophelia.TraitPrompt(options);
+	
+	options.push({ nameStr : "Potions",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“If you have any, I’ll trade you coins for new alchemical brews that may be of use to the colony.”</i>", parse);
+			Text.NL();
+			Text.Add("Do you offer any potions to Ophelia?", parse);
+			Text.Flush();
+			
+			Scenes.Ophelia.PotionsPrompt();
+		}, enabled : true,
+		tooltip : "Donate some of your alchemical stock to Ophelia."
+	});
 	
 	//TODO
 	/*
