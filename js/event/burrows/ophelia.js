@@ -323,7 +323,7 @@ Scenes.Ophelia.TalkPrompt = function() {
 			if(ophelia.flags["Talk"] & Ophelia.Talk.Herself) {
 				Text.Add("<i>“Again?”</i>", parse);
 				Text.NL();
-				Text.Add("With a nod and a grin, you confirm it. After all, you like hearing about herself.", parse);
+				Text.Add("Yes, please, you’d like to hear it again.", parse);
 				Text.NL();
 				Text.Add("<i>“If you insist,”</i> she says with a soft smile.", parse);
 			}
