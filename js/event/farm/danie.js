@@ -47,9 +47,7 @@ Danie.prototype.constructor = Danie;
 
 
 Danie.prototype.FromStorage = function(storage) {
-	this.Butt().virgin       = parseInt(storage.avirgin) == 1;
-	this.FirstVag().virgin   = parseInt(storage.virgin) == 1;
-
+	this.body.FromStorage(storage.body);
 	this.LoadPersonalityStats(storage);
 	
 	// Load flags
@@ -57,10 +55,9 @@ Danie.prototype.FromStorage = function(storage) {
 }
 
 Danie.prototype.ToStorage = function() {
-	var storage = {
-		avirgin : this.Butt().virgin ? 1 : 0,
-		virgin  : this.FirstVag().virgin ? 1 : 0
-	};
+	var storage = {};
+	
+	this.SaveBodyPartial(storage, {ass: true, vag: true});
 	
 	this.SavePersonalityStats(storage);
 	

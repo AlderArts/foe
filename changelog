@@ -12,6 +12,7 @@ Version 0.3v
 * Added scenes for Ophelia:
  - Talk (multiple topics), written by QB and LD.
 * Fixed a bug in the sermon spell.
+* Restructured the save format a bit to account for stretch/capacity on some NPCs. This may have some side effects, such as Terry's body resetting the first time you load an old save.
 
 --------------------------------------------
              PREVIOUS VERSIONS

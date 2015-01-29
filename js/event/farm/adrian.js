@@ -43,8 +43,7 @@ Adrian.prototype.constructor = Adrian;
 
 
 Adrian.prototype.FromStorage = function(storage) {
-	this.Butt().virgin       = parseInt(storage.virgin) == 1;
-	
+	this.body.FromStorage(storage.body);
 	this.LoadPersonalityStats(storage);
 	
 	// Load flags
@@ -52,10 +51,9 @@ Adrian.prototype.FromStorage = function(storage) {
 }
 
 Adrian.prototype.ToStorage = function() {
-	var storage = {
-		virgin  : this.Butt().virgin ? 1 : 0
-	};
+	var storage = {};
 	
+	this.SaveBodyPartial(storage, {ass: true});
 	this.SavePersonalityStats(storage);
 	
 	this.SaveFlags(storage);

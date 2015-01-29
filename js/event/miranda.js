@@ -131,6 +131,7 @@ Miranda.prototype.FromStorage = function(storage) {
 	this.LoadEffects(storage);
 	this.LoadJobs(storage);
 	this.LoadEquipment(storage);
+	this.body.FromStorage(storage.body);
 	
 	// Load flags
 	this.LoadFlags(storage);
@@ -149,6 +150,7 @@ Miranda.prototype.ToStorage = function() {
 	this.SaveEffects(storage);
 	this.SaveJobs(storage);
 	this.SaveEquipment(storage);
+	this.SaveBodyPartial(storage, {ass: true, vag: true, balls: true});
 	
 	// Save flags
 	this.SaveFlags(storage);

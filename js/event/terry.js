@@ -92,7 +92,6 @@ function Terry(storage) {
 	
 	this.SetBreasts();
 	this.SetLactation();
-	this.SetPussy();
 	this.SetCock();
 }
 Terry.prototype = new Entity();
@@ -166,8 +165,6 @@ Terry.prototype.Recruited = function() {
 }
 
 Terry.prototype.FromStorage = function(storage) {
-	this.Butt().virgin       = parseInt(storage.virgin) == 1;
-	
 	this.LoadCombatStats(storage);
 	this.LoadPersonalityStats(storage);
 	this.LoadEffects(storage);
@@ -175,6 +172,7 @@ Terry.prototype.FromStorage = function(storage) {
 	this.LoadEquipment(storage);
 	this.LoadPregnancy(storage);
 	this.LoadLactation(storage);
+	this.body.FromStorage(storage.body);
 	
 	// Load flags
 	this.LoadFlags(storage);
@@ -193,9 +191,7 @@ Terry.prototype.FromStorage = function(storage) {
 }
 
 Terry.prototype.ToStorage = function() {
-	var storage = {
-		virgin : this.Butt().virgin ? 1 : 0
-	};
+	var storage = {};
 	
 	this.SaveCombatStats(storage);
 	this.SavePersonalityStats(storage);
@@ -204,6 +200,7 @@ Terry.prototype.ToStorage = function() {
 	this.SaveEquipment(storage);
 	this.SavePregnancy(storage);
 	this.SaveLactation(storage);
+	this.SaveBodyPartial(storage, {ass: true, vag: true, balls: true});
 	
 	// Save flags
 	this.SaveFlags(storage);
@@ -248,11 +245,14 @@ Terry.prototype.Lactation = function() {
 	return terry.flags["lact"] != 0;
 }
 Terry.prototype.SetPussy = function() {
-	this.body.vagina = [];
-	if(this.flags["vag"] != Terry.Pussy.None) {
+	var vag = this.flags["vag"];
+	if(vag != Terry.Pussy.None && !this.FirstVag()) {
 		this.body.vagina.push(new Vagina());
-		if(this.flags["vag"] == Terry.Pussy.Used)
+		if(vag == Terry.Pussy.Used)
 			this.FirstVag().virgin = false;
+	}
+	else if(vag == Terry.Pussy.None && this.FirstVag()) {
+		this.body.vagina = [];
 	}
 }
 Terry.prototype.SetCock = function() {

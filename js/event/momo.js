@@ -85,10 +85,8 @@ Momo.prototype.Update = function(step) {
 }
 
 Momo.prototype.FromStorage = function(storage) {
-	this.Butt().virgin     = parseInt(storage.avirgin) == 1;
-	this.FirstVag().virgin = parseInt(storage.virgin)  == 1;
-	
 	this.LoadPersonalityStats(storage);
+	this.body.FromStorage(storage.body);
 	
 	// Load flags
 	this.LoadFlags(storage);
@@ -100,12 +98,10 @@ Momo.prototype.FromStorage = function(storage) {
 }
 
 Momo.prototype.ToStorage = function() {
-	var storage = {
-		avirgin : this.Butt().virgin ? 1 : 0,
-		virgin  : this.FirstVag().virgin ? 1 : 0
-	};
+	var storage = {};
 	
 	this.SavePersonalityStats(storage);
+	this.SaveBodyPartial(storage, {ass: true, vag: true});
 	
 	this.SaveFlags(storage);
 	this.SaveSexStats(storage);

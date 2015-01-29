@@ -61,19 +61,16 @@ Patchwork.prototype.Met = function() {
 }
 
 Patchwork.prototype.FromStorage = function(storage) {
-	this.Butt().virgin     = parseInt(storage.avirgin) == 1;
-	this.FirstVag().virgin = parseInt(storage.virgin)  == 1;
-	
+	this.body.FromStorage(storage.body);
 	this.LoadPersonalityStats(storage);
 	this.LoadFlags(storage);
 	this.LoadSexFlags(storage);
 }
 
 Patchwork.prototype.ToStorage = function() {
-	var storage = {
-		avirgin : this.Butt().virgin     ? 1 : 0,
-		virgin  : this.FirstVag().virgin ? 1 : 0
-	};
+	var storage = {};
+	
+	this.SaveBodyPartial(storage, {ass: true, vag: true});
 	
 	this.SavePersonalityStats(storage);
 	this.SaveFlags(storage);

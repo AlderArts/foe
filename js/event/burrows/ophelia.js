@@ -12,6 +12,9 @@ function Ophelia(storage) {
 	this.name              = "Ophelia";
 	this.body.DefFemale();
 	
+	this.Butt().virgin = false;
+	this.FirstVag().virgin = false;
+	
 	this.body.SetRace(Race.rabbit);
 	TF.SetAppendage(this.Back(), AppendageType.tail, Race.rabbit, Color.white);
 	this.body.SetBodyColor(Color.white);

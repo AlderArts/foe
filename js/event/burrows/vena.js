@@ -13,6 +13,8 @@ function Vena(storage) {
 	
 	this.body.DefFemale();
 	
+	this.Butt().virgin = false;
+	this.FirstVag().virgin = false;
 	this.Butt().buttSize.base = 15;
 	
 	this.body.SetRace(Race.rabbit);
