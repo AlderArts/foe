@@ -5703,7 +5703,7 @@ Scenes.Miranda.HomeSubbySexDommyRide = function(location, Loc) {
 	var psize = Math.sqrt(p1cock.Volume());
 	var diff  = psize - msize;
 	
-	var size = diff < -10 ? Size.small :
+	var size = diff < -15 ? Size.small :
 	           diff <   5 ? Size.medium : Size.huge;
 	
 	if(!player.FirstCock()) {
