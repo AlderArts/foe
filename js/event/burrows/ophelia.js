@@ -745,13 +745,336 @@ Scenes.Ophelia.SexEntryPoint = function() {
 		
 	};
 	
-	ophelia.flags["Talk"] |= Ophelia.Talk.Sex;
+	//[name]
+	var options = new Array();
+	if(player.FirstCock()) {
+		options.push({ nameStr : "Vaginal",
+			func : function() {
+				ophelia.flags["Talk"] |= Ophelia.Talk.Sex;
+				Scenes.Ophelia.SexVaginal();
+			}, enabled : true,
+			tooltip : "Well, if she wants to research, the traditional way is always the best."
+		});
+	}
+	/* TODO
+	options.push({ nameStr : "name",
+		func : function() {
+			ophelia.flags["Talk"] |= Ophelia.Talk.Sex;
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	*/
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“Suit yourself,”</i> she shrugs, looking disappointed.", parse);
+		Text.Flush();
+		Scenes.Ophelia.LabPrompt();
+	});
+}
+
+Scenes.Ophelia.SexVaginal = function() {
+	var p1cock = player.BiggestCock();
+	var knotted = p1cock ? p1cock.knot != 0 : false;
 	
+	var parse = {
+		playername : player.name,
+		armorDesc : function() { return player.ArmorDesc(); },
+		earsDesc : function() { return player.EarDesc(); },
+		tongueTipDesc : function() { return player.TongueTipDesc(); },
+		tongueDesc : function() { return player.TongueDesc(); },
+		multiCockDesc : function() { return player.MultiCockDesc(); },
+		thighsDesc : function() { return player.ThighsDesc(); },
+		cockDesc : function() { return p1cock.Short(); },
+		cockTip : function() { return p1cock.TipShort(); }
+	};
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
+	Text.Clear();
+	Text.Add("<i>“Sounds good to me. You should probably undress,”</i> she points out.", parse);
 	Text.NL();
-	Text.Add("PLACEHOLDER", parse);
+	Text.Add("Well, what would you expect from a bunny? Without hesitation, you start to remove your [armorDesc], putting your belongings aside where you’re reasonably certain that they’re not going to get dirty.", parse);
+	Text.NL();
+	Text.Add("Ophelia just looks at you undress with a smile, no doubt admiring the view. You can see her reaching between her legs.", parse);
+	Text.NL();
+	Text.Add("From the look on Ophelia’s face, the bunny is clearly waiting for you to make the first move. Now, how to get her out of that coat...?", parse);
 	Text.Flush();
 	
-	Gui.NextPrompt();
+	//[Slowly] [Don’t bother]
+	var options = new Array();
+	options.push({ nameStr : "Slowly",
+		func : function() {
+			Text.Clear();
+			Text.Add("A smile on your lips, you stride purposefully towards Ophelia. The female lagomorph smiles a little nervously at you, excitement obvious as she shifts her weight from foot to foot. Tenderly, you reach out with your hand, running your fingers through her soft hair, and then you shift upwards. You take the rim of her elongated ear between forefingers and thumb, stroking the sensitive flesh with delicate twitches of your fingers.", parse);
+			Text.NL();
+			Text.Add("She moans softly, body turning to jelly as she almost creams herself over your tender touch. The pitter-patter of her arousal reaches your [earsDesc] and you smile. If she wasn’t ready then, now she’s more than ready.", parse);
+			Text.NL();
+			Text.Add("That’s what you were hoping for, but you’re not done playing yet. The hand that was stroking her ear loosens its grip, creeping down along her face. Playfully, your fingers stroke her cheek, and then curl under her chin. Lifting her face so you can sweetly claim the lapin’s lips in a passionate kiss.", parse);
+			Text.NL();
+			if(ophelia.Relation() < 15)
+				Text.Add("At first she’s surprised, but with some coaxing she grants you entrance and begins kissing you back.", parse);
+			else if(ophelia.Relation() < 30)
+				Text.Add("Ophelia kisses you back, granting you entrance as well as probing your own mouth with her tongue.", parse);
+			else
+				Text.Add("She kisses you back with almost as much passion as you kiss her. Her own tongue dances with yours as she moans into your kiss.", parse);
+			Text.NL();
+			Text.Add("Even as you keep Ophelia drawn into your kiss, your other hand starts to move. You reach out and take the flap of her labcoat. An idle thought flashes through your brain, thankful that she doesn’t button it. Fingers close around the fabric and you start to slide it open, exposing the supple curve of her neck and her dainty shoulder.", parse);
+			Text.NL();
+			Text.Add("Your lips detach from Ophelia’s, leaving her gasping for breath. Releasing her chin, you make your way down her neck. Her soft fur tickles slightly against your lips, brushing against your nose as you open your mouth. Your teeth close against her skin, just hard enough that the lapin can feel them grazing her flesh in a primal kiss.", parse);
+			Text.NL();
+			Text.Add("Ophelia lets out a soft squeak, wriggling against you in response. She makes no efforts to pull away, quite content to let you ravish her. What a good bunny...", parse);
+			Text.NL();
+			Text.Add("Even as you play, you don’t forget your objective. With both your hands free, Ophelia’s coat offers no resistance. One hand closes upon her collar, gently pulling it back away from the nape of her neck. The other, still fastened upon the flap of her coat, draws its piece further along. Her arm slides free of the sleeve, allowing half of the coat to hang limply down her back.", parse);
+			Text.NL();
+			Text.Add("Lifting your head from Ophelia’s neck, the swell of her now-exposed breast is the first thing to catch your eye. Almost absently, you release the loosened flap of her coat. The hand on her collar starts to pull, drawing the remainder of her coat off of her body, allowing it to fall into a heap behind her rabbit-like paws.", parse);
+			Text.NL();
+			Text.Add("With that little distraction out of the way, your free hand closes around one pert breast. It squishes nicely between your fingers, coaxing you to squeeze and knead. Firm enough that she can feel it, but tender enough to not hurt, you enjoy the feel of her in your palm, complimenting her on what a nice set of tits she has.", parse);
+			Text.NL();
+			Text.Add("She moans softly at your touch, thighs grinding together as her juices flow freely. <i>“M-My nipples,”</i> she pleads.", parse);
+			Text.NL();
+			Text.Add("Now, how can you possibly refuse? Fingers slide about her breast, adjusting their grip so you can take the nipple between forefinger and thumb. Adjusting your stance, your mouth lowers to the unoccupied nipple. As your lips part, your [tongueTipDesc] slide forth, just barely touching the pink pearl of flesh.", parse);
+			Text.NL();
+			Text.Add("The taste of her washes over your [tongueDesc] as you lick her nipple. In circles and spirals you trail your tongue-tip over Ophelia’s little bud, feeling every bump and groove sliding under your tongue. At the same time, your hand caresses and squeezes her other nub, tenderly matching your oral ministrations.", parse);
+			Text.NL();
+			Text.Add("The lapin alchemist groans, arms looping around your head as she pushes you against her soft breasts. <i>“More!”</i>", parse);
+			Text.NL();
+			Text.Add("Feeling your [multiCockDesc] throbbing with need, head swimming with the scent of her womanhood, you couldn’t agree more with her statement. Boldly, you nip at her nipple, eliciting a sharp squeal of surprise from the female rabbit.", parse);
+			Text.NL();
+			Text.Add("Her arms slacken, and you seize control. Rising back to your full height, it is your turn to wrap your arms around her. Seizing her by the hips, not even pausing to enjoy the squish of her buttocks in your palms, you sweep her off her feet, eliciting a surprised squeak from the horny bunny.", parse);
+			Text.NL();
+			Text.Add("You can feel the warm wetness drooling over your [thighsDesc] as Ophelia’s nectar flows freely. The scent of her lust floods your nostrils, making you ache as you stagger to a convenient spot and lay Ophelia down on her back.", parse);
+			Text.NL();
+			Text.Add("The rabbit needs no words, no encouragement. She spreads her legs the second her hips hit the ground, little pink tongue dabbing hungrily at her lips as she gazes up at you expectantly. Once she’s in place, you loom over her, a hand on her shoulder, the other anxiously aligning[oneof] your [multiCockDesc] with her womanhood.", parse);
+			Text.NL();
+			Text.Add("You pause for just a second, feeling the hot fluids already smearing over your [cockTip], and then begin to push forward.", parse);
+			Text.NL();
+			Text.Add("There’s not the slightest resistance. You don’t think there would be much anyway, but with Ophelia so absolutely sopping wet as she is, she might as well be twice her actual size. Without the slightest impediment, your [cockDesc] glides home into hot, sloppy, velvety flesh, already trying to suck you deeper.", parse);
+			Text.NL();
+			
+			Sex.Vaginal(player, ophelia);
+			ophelia.FuckVag(ophelia.FirstVag(), player.FirstCock(), 3);
+			player.Fuck(player.FirstCock(), 3);
+			
+			Text.Add("<i>“Ah, yes!”</i> Ophelia cries, legs wrapping around your waist as she tries to bring you deeper inside her.", parse);
+			Text.NL();
+			Text.Add("With Ophelia’s encouragement, you push on into her sodden depths, not stopping until she has taken you to the very hilt.", parse);
+			var lCock = new Cock();
+			lCock.thickness.base = 7;
+			lCock.length.base = 38;
+			var asBigAsLagon = p1cock.Volume() >= lCock.Volume();
+			if(asBigAsLagon) {
+				Text.Add(" Her stomach bulges visibly around the sheer quantity of man-meat crammed inside her snatch, but the distension only seems to arouse her further.", parse);
+				Text.NL();
+				Text.Add("<i>“Omph! You’re pretty big. Might not have been such a good idea to take all of you like that.”</i>", parse);
+				Text.NL();
+				Text.Add("Her words penetrate your budding haze, and you ask if she’s okay.", parse);
+				Text.NL();
+				Text.Add("<i>“Don’t worry about me. I’m fine, just need to get adjusted,”</i> she says, wiggling herself to find a better position.", parse);
+				Text.NL();
+				Text.Add("An appreciative moan escapes your throat as muscles deep within her flex and twist to match the ones in her legs. You don’t know if she’s doing it purposefully or not, but you don’t really care.", parse);
+				Text.NL();
+				Text.Add("<i>“There, that’s good,”</i> she smiles. <i>“I’m ready, so show me what you can do.”</i>", parse);
+				Text.NL();
+				Text.Add("With all due pleasure...", parse);
+			}
+			else {
+				Text.Add("<i>“You’re not the biggest partner I’ve had. But you fit snugly,”</i> she notes.", parse);
+				Text.NL();
+				Text.Add("Reaching out with your free finger, you tap her playfully on the nose. Size isn’t everything when it comes to this, you mock-chide her.", parse);
+				Text.NL();
+				Text.Add("<i>“Oh, sorry. I meant no offense,”</i> she says in mild embarrassment. <i>“It’s just that when my partner is too big it can hurt a little.”</i>", parse);
+				Text.NL();
+				Text.Add("No offense taken, you assure her.", parse);
+				Text.NL();
+				Text.Add("<i>“Well, then. You said something about making up for your size? Care to show me?”</i> she grins.", parse);
+				Text.NL();
+				Text.Add("Gladly...", parse);
+			}
+			Text.NL();
+			parse["b"] = player.HasBalls() ? " and dripping onto your balls" : "";
+			Text.Add("Running your fingers fondly through her hair one last time, you place your hands on her hips. Balance restored, you inhale deeply, and start to thrust. As best you can with Ophelia’s legs locked in their death grip upon your waist. You slide backwards, nearly drawing your [cockDesc] free of her, and then push forward again. Slow and steady, you build a rhythm, pumping your hips with smooth, easy motions. Fluids glaze slickly over your phallus, oozing over your [thighsDesc][b] at the motion.", parse);
+			Text.NL();
+			Text.Add("<i>“Hmm, yes. That feels good. Try to thrust a bit more to the right.”</i>", parse);
+			Text.NL();
+			Text.Add("Your gaze flicks down to Ophelia, whose own eyes are screwed tightly shut. She bites her bottom lip, then lets out a mewl of pleasure as you follow her instructions. It is her body, after all; listening to her should be good for both of you.", parse);
+			Text.NL();
+			Text.Add("<i>“Ooh! Yes, right there,”</i> she says, moaning loudly as you rub her most sensitive spots with your [cockDesc].", parse);
+			Text.NL();
+			Text.Add("Ophelia rewards you with ever-firmer squeezes, her silken walls rippling as she does her considerable best to milk you. The feel of her, the sight of her writhing in pleasure beneath you, it stokes your own pleasure higher and higher. Deep inside you, the sensation wells up, mounting like a wave about to crash down. It’s all you can do to keep your rhythm.", parse);
+			Text.NL();
+			Text.Add("Trembles wrack your body as your will starts to crumble. Gasping for air to try and hold back the inevitable, you warn Ophelia that you’re about to cum.", parse);
+			Text.NL();
+			Text.Add("The bunny gazes at you with lust-ridden eyes, completely lost in the pleasure of the act. <i>“Ahn! Do it! Fill Ophelia’s pussy with your hot cum! I <b>need</b> it!”</i>", parse);
+			Text.NL();
+			parse["k"] = knotted ? " without knotting yourself" : "";
+			parse["c"] = player.NumCocks() > 1 ? Text.Parse(", your other cock[notS] spilling [itsTheir] seed upon the ground", parse) : "";
+			Text.Add("Hearing the wanton words spilling from her mouth is the final straw. With a cry of pleasure, you bury your [cockDesc] as deep into her willing cunt as you possibly can[k] and let fly[c].", parse);
+			Text.NL();
+			
+			var cum = player.OrgasmCum();
+			
+			if(cum > 6) {
+				Text.Add("You can almost see Ophelia’s stomach explode outwards as your first titanic shot erupts into her waiting cunt. A cascade of cream surges inside of the lusty lapin, making her belly swell enormously as you continue pouring inside. By the time you finally finish, Ophelia is sporting a huge potbelly, nearly as big as Vena’s ", parse);
+				if(burrows.VenaRestored())
+					Text.Add("was, back when she was trapped in the pit.", parse);
+				else
+					Text.Add("seemingly permanent breeder’s gut.", parse);
+				Text.NL();
+				Text.Add("The bunny alchemist’s cunt continues to milk your [cockDesc], despite there being no more room inside her womb. <i>“Haa… Haa… So full...”</i>", parse);
+				Text.NL();
+				Text.Add("Panting for breath, you manage to gasp out a query, asking her if she’s alright.", parse);
+				Text.NL();
+				Text.Add("<i>“Y-Yeah. But you should probably pull out. Let some pressure out,”</i> she says with a groan.", parse);
+				Text.NL();
+				Text.Add("It’s not easy; despite Ophelia’s words, her cunt has a death grip on you cock. But finally you manage to pop yourself free, like a perverse cork from a bottle of champagne. A mental image strengthened by the rivers of white near-froth that come spilling from her gaping hole.", parse);
+				Text.NL();
+				Text.Add("Ophelia sighs hugely in relief, toes wriggling as the pressure starts to ease.", parse);
+			}
+			else if(cum > 3) {
+				Text.Add("Thick ropes of semen pour from you, flooding into your lover’s cunt like an incoming tide. Like bread in an oven, her belly starts to rise, stomach bulging out into a great, cum-stuffed dome that juts from her midriff like a monument to your efforts.", parse);
+				Text.NL();
+				Text.Add("Only when you come down from your orgasmic high do you notice Ophelia’s pussy is still rippling in an effort to milk you, even though you don’t have any more seed to give her. <i>“Hng… m-more...”</i> she says airily.", parse);
+				Text.NL();
+				Text.Add("With an exhausted laugh and a shake of your head, you inform her that you don’t have any more to give her.", parse);
+				Text.NL();
+				Text.Add("<i>“That’s too bad. I’m feeling so full...”</i>", parse);
+				Text.NL();
+				Text.Add("You quip back that she looks it too. In fact, you doubt she could hold much more than this. So best you stop tempting her...", parse);
+				Text.NL();
+				Text.Add("Ophelia pouts a little, but you won’t be swayed. Instead, you slide free of her hole, watching as a nearly equal mixture of your cum and hers pours in a perverse river from the twitching labia.", parse);
+			}
+			else {
+				Text.Add("Nearly washed away in the rivers of female honey already pouring from Ophelia’s womanly flower, your seed vanishes into her depths, gamely doing its best to get to where it belongs.", parse);
+				Text.NL();
+				Text.Add("<i>“Aah… that hit the spot,”</i> Ophelia says, rubbing her belly.", parse);
+				Text.NL();
+				Text.Add("Inhaling deeply and steadily, you finally manage to grin at her, assuring her that you’re happy to please her.", parse);
+				Text.NL();
+				Text.Add("Ophelia just smiles at you. <i>“So… Are you done or are you keeping me pinned to the ground for a reason?”</i> she asks teasingly.", parse);
+				Text.NL();
+				Text.Add("Well, if she wants you off that badly... You pet her cheek, and then pull yourself free of her well-used hole. Thick ropes of bunny-honey trail from your member, splatting heavily onto the ground at your feet.", parse);
+			}
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				Text.Clear();
+				Text.Add("Ophelia wipes her glasses with the hem of her lab coat. It takes a bit of time for the rabbit alchemist to recompose herself, but she finally finishes and looks at you. She clears her throat before starting. <i>“Based on my research, I conclude that sex with an outsider is… very fulfilling,”</i> she smiles. <i>“I believe there is more to be discovered, but further testing would be required. If the subject is willing?”</i>", parse);
+				Text.NL();
+				Text.Add("Of course, you’d be very willing. But... not just now.", parse);
+				Text.NL();
+				Text.Add("<i>“As soon as you are willing then. I love researching, you know?”</i> she says with a grin.", parse);
+				Text.NL();
+				Text.Add("Well, you can definitely understand the appeal it has yourself. Winking back at her, you excuse yourself and leave.", parse);
+				Text.Flush();
+				
+				ophelia.relation.IncreaseStat(50, 1);
+				world.TimeStep({hour: 1});
+				
+				Gui.NextPrompt();
+			});
+		}, enabled : true,
+		tooltip : "Why not have some fun before you get down to business? A little foreplay never hurt anyone..."
+	});
+	options.push({ nameStr : "Don’t bother",
+		func : function() {
+			Text.Clear();
+			Text.Add("No sense in beating around the bush, you know what you want and what she wants. Without further ado, you tell her to get on four as circle behind her. She complies without protest, looking over her shoulders to watch your movements as you move to lift the hem of her lab coat and grab her ass.", parse);
+			Text.NL();
+			Text.Add("Ophelia moans as you begin massaging her buttcheeks. Her lab coat usually keeps them hidden, but the truth is that she has a very nice ass. Fit for a breeder.", parse);
+			Text.NL();
+			Text.Add("<i>“Thank you- Ah!”</i>", parse);
+			Text.NL();
+			Text.Add("The rabbit’s whole body jolts as your hand cracks against one firm buttcheek. The perky flesh ripples in the afterwash, jiggling deliciously, but you have already moved on.", parse);
+			Text.NL();
+			Text.Add("Your hand slides along Ophelia’s inner thigh. The white fur is silken soft there, brushing tenderly against the skin of your fingers as you caress her. Up her thigh your hand travels, seeking out the womanly treasure that lies between.", parse);
+			Text.NL();
+			Text.Add("Without fail, your fingers find what they seek. Warm fluid, slightly sticky in consistency, oozes sluggishly over your probing digits. Its touch draws you on, guiding you home. You don’t need to look; your fingers tell you all that you need. Under your hand, you can feel Ophelia’s petals, spreading slightly as you trace their edges. They scarcely need any pressure to coax them open.", parse);
+			Text.NL();
+			Text.Add("She’s already nice and wet, like a good little bunny slut. But you think she needs a little more before you’re ready to begin...", parse);
+			Text.NL();
+			Text.Add("Investigating blindly, your fingers trail around the rabbit’s plump netherlips, working their way to her hood and the helpful little button sprouting from it. A quiet gasp of pleasure reaches your ears as you close forefinger and thumb upon Ophelia’s clitoris, squeezing firmly yet carefully. You roll the nub of flesh across the surface of your fingers, feeling its softness against your skin.", parse);
+			Text.NL();
+			Text.Add("The rabbit moans wantonly, her knees buckling as she shakes in pleasure. <i>“Ophelia wants it! Give it to Ophelia!”</i> she cries.", parse);
+			Text.NL();
+			Text.Add("Warm wetness spatters across your wrist and your forearm, as if you needed more proof that she is ready. Without further ado, you release her clitoris and assume your own position behind her. One hand rests itself upon her buttocks, absently kneading the plump orb. The other hand reaches down, closing around[oneof] your [multiCockDesc] to align it with her entrance.", parse);
+			Text.NL();
+			Text.Add("Once you are ready, you thrust forward without a word, impaling Ophelia upon your shaft.", parse);
+			Text.NL();
+			
+			Sex.Vaginal(player, ophelia);
+			ophelia.FuckVag(ophelia.FirstVag(), player.FirstCock(), 3);
+			player.Fuck(player.FirstCock(), 3);
+			
+			Text.Add("<i>“Ah! It’s inside Ophelia!”</i> she cries. Her trained cunt grasps your shaft, milking you and sucking inside.", parse);
+			Text.NL();
+			Text.Add("You wonder for a second where the smart, level-headed bunny of before went. Is this something sex does to her, or does she think it pleases you to hear her like this? The thought barely crosses your mind before you dismiss it. There are more important things to occupy yourself with.", parse);
+			Text.NL();
+			Text.Add("A hand on either of the lagomorph’s hips now, you buck your own hips forward, burying another few inches of dickflesh into your partner. Silky, steaming hot flesh surrounds you, flexing and squirming against your intruding flesh. Audible slurping reaches your ears as you pull back and then thrust home again, eliciting a groan from Ophelia.", parse);
+			Text.NL();
+			Text.Add("Time fades away, losing all meaning to you. There is only the slap of flesh on flesh, the feel of Ophelia’s pussy milking you dry, and the pleased moans of a horny bunny beneath you. You thrust away, firm and fast, building up as quick a rhythm as you can manage.", parse);
+			Text.NL();
+			parse["k"] = knotted ? ", just barely stopping yourself from knotting" : "";
+			Text.Add("Eventually, you can feel the pressure welling within you, building at the base of your spine. Spots flash in front of your eyes and you cry out, making one final, fierce thrust into Ophelia’s used cunt[k] and allowing yourself to explode inside of her waiting depths.", parse);
+			Text.NL();
+			Text.Add("<i>“Ahn! Ophelia can feel the cream!”</i>", parse);
+			Text.NL();
+			
+			var cum = player.OrgasmCum();
+			
+			if(cum > 6) {
+				Text.Add("Underneath your bodies, Ophelia’s stomach begins to bulge and swell. Like a ripening fruit, it grows rounder and fuller, hanging down under its new weight. It sways slightly as the two of you shift, full to the point that rivers of seed keep backwashing out around your [cockDesc], but still it grows. Her belly button begins to drag along the ground, forcing her to grow several inches outward rather than downward before you finally stop.", parse);
+				Text.NL();
+				Text.Add("<i>“Hng… full...”</i> she groans.", parse);
+				Text.NL();
+				Text.Add("Glancing down, somewhat awkwardly, you can see the reason why. You absently pet her on the small of her back, promising her you’ll help with that. As carefully as you can, you pull yourself free - not an easy task, as she clings to you with her cunt, despite her complaints. A veritable waterfall of semen pours from her backside as you do.", parse);
+			}
+			else if(cum > 3) {
+				Text.Add("Under the sheer weight of your climax, the lagomorph’s stomach begins to distend. Gravity greedily grasps the growing gut, exaggerating its size as it is pulled closer to the earth. By the time your climax finishes, each motion the two of you makes causes it to sway like a ripened fruit in the breeze.", parse);
+				Text.NL();
+				Text.Add("<i>“Ahh. So much hot cum,”</i> she says, panting.", parse);
+				Text.NL();
+				Text.Add("You’re glad she approves. Placing a hand on her butt for leverage, you start to pull yourself free. It takes a bit of force, but you finally manage to escape her clutches. In your wake, her pussy continues to drool seed, despite its best efforts to hold it in.", parse);
+			}
+			else {
+				Text.Add("All you have to offer is swallowed greedily into the bunny’s waiting depths. Even when you run dry, her pussy continues to flex and squirm, as if hoping to milk you of just one more drop of seed.", parse);
+				Text.NL();
+				Text.Add("<i>“Hmm… More?”</i> she asks, looking over her shoulder with lusty eyes.", parse);
+				Text.NL();
+				Text.Add("No, no more, you reply. She pouts, but you won’t be swayed. It takes a surprising amount of effort to pop yourself free of her grasping pussy; she’s quite strong down there...", parse);
+			}
+			Text.NL();
+			Text.Add("You make yourself comfortable; the both of you are quite worn out from your little escapade. It’s going to take some time before you’ll feel like moving.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				Text.Clear();
+				Text.Add("As Ophelia lets go of your hand, fully back on her feet, you look around at the considerable mess the two of you made, and you apologise. It looks like you got a little more carried away than you thought.", parse);
+				Text.NL();
+				Text.Add("<i>“Don’t worry about that, I’ll have one of my assistants clean that up later. Or maybe I’ll scoop up some for experimenting...”</i>", parse);
+				Text.NL();
+				Text.Add("With a nod of acceptance, you move on to a more important matter. Asking how you did.", parse);
+				Text.NL();
+				Text.Add("<i>“Not bad, [playername]. Fucking like that, you would fit in perfectly with my family.”</i>", parse);
+				Text.NL();
+				Text.Add("You reply that sounds like pretty high praise, coming from her.", parse);
+				Text.NL();
+				Text.Add("She smiles. <i>“Personally, I wouldn’t mind seeing what else you can do. But we should do that another time.”</i>", parse);
+				Text.NL();
+				Text.Add("You’ll have to keep that in mind. But, for now, you have other matters to attend to, and so you say your goodbyes and leave.", parse);
+				Text.Flush();
+				
+				ophelia.relation.IncreaseStat(35, 1);
+				world.TimeStep({hour: 1});
+				
+				Gui.NextPrompt();
+			});
+		}, enabled : true,
+		tooltip : "She doesn’t wear panties, why go to the trouble of taking it all the way off?"
+	});
+	Gui.SetButtonsFromList(options, false, null);
 }
 
 Scenes.Ophelia.LabPrompt = function() {
@@ -792,7 +1115,32 @@ Scenes.Ophelia.LabPrompt = function() {
 		}, enabled : true,
 		tooltip : "Donate some of your alchemical stock to Ophelia."
 	});
-	
+	options.push({ nameStr : "Sex",
+		func : function() {
+			Text.Clear();
+			var first = !(ophelia.flags["Talk"] & Ophelia.Talk.Sex);
+			if(first) {
+				Text.Add("The lapin alchemist looks you over for a moment, then breaks into a soft smile. <i>“Okay, I’ll admit I haven’t had any experience with outsiders. I’m curious about how you’d perform...”</i> she trails off tapping her chin in thought.", parse);
+				Text.NL();
+				if(player.sexlevel >= 5)
+					Text.Add("With a confident grin, you assure her that she’s never had anyone like you before, of that you’re certain.", parse);
+				else if(player.sexlevel >= 3)
+					Text.Add("None of your other partners have ever complained; you doubt she’ll be the first.", parse);
+				else
+					Text.Add("Well, the two of you will just have to see. This ought to be a learning experience for the both of you.", parse);
+				Text.NL();
+				Text.Add("<i>“I guess there’s just one way of finding out then. What do you have in mind for us?”</i>", parse);
+			}
+			else {
+				Text.Add("<i>“I’ll never say no to more research,”</i> she says with a smile.", parse);
+				Text.NL();
+				Text.Add("With a chuckle, you note that you doubted she would.", parse);
+			}
+			Text.Flush();
+			Scenes.Ophelia.SexEntryPoint();
+		}, enabled : true,
+		tooltip : "Ask if Ophelia’s interested in have sex with you."
+	});
 	//TODO
 	/*
 	options.push({ nameStr : "name",
