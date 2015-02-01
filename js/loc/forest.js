@@ -168,7 +168,3 @@ world.loc.Forest.Outskirts.links.push(new Link(
 		MoveToLocation(world.loc.Forest.Glade, {minute: 15});
 	}
 ));
-
-world.loc.Forest.Outskirts.endDescription = function() {
-	Text.Add("What do you do?<br/>");
-}
