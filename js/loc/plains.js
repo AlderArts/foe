@@ -346,20 +346,15 @@ world.loc.Plains.Gate.description = function() {
 }
 world.loc.Plains.Gate.links.push(new Link(
 	"Crossroads", true, true,
-	function() {
-		Text.Add("Go back to the crossroads? ");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Plains.Crossroads, {hour: 2});
 	}
 ));
 world.loc.Plains.Gate.links.push(new Link(
 	"Rigard", true, true,
+	null,
 	function() {
-		Text.Add("Enter the city? ");
-	},
-	function() {
-		// TODO
 		Text.Clear();
 		if(miranda.IsAtLocation()) {
 			Scenes.Miranda.RigardGatesEnter();
@@ -393,18 +388,14 @@ world.loc.Plains.Gate.links.push(new Link(
 ));
 world.loc.Plains.Gate.links.push(new Link(
 	"Slums", true, true,
-	function() {
-		Text.Add("Go to the slums outside the walls? ");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 15});
 	}
 ));
 world.loc.Plains.Gate.links.push(new Link(
 	"King's road", true, true,
-	function() {
-		Text.Add("Continue past the city to the plains beyond? ");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.KingsRoad.Road, {hour: 1});
 	}

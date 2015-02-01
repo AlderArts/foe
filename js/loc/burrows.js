@@ -108,9 +108,7 @@ world.loc.Burrows.Enterance.description = function() {
 
 world.loc.Burrows.Enterance.links.push(new Link(
 	"Plains", true, true,
-	function() {
-		Text.Add("Behind you is the way back to the plains.<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
 	}
@@ -128,9 +126,6 @@ world.loc.Burrows.Enterance.links.push(new Link(
 	}
 ));
 
-world.loc.Burrows.Enterance.endDescription = function() {
-	Text.Add("");
-}
 
 world.loc.Burrows.Enterance.onEntry = function() {
 	if(burrows.flags["Access"] == Burrows.AccessFlags.KnownNotVisited) {
@@ -143,8 +138,10 @@ world.loc.Burrows.Enterance.onEntry = function() {
 world.loc.Plains.Crossroads.links.push(new Link(
 	"Burrows", function() { return burrows.flags["Access"] != Burrows.AccessFlags.Unknown; }, true,
 	function() {
-		if(burrows.flags["Access"] != Burrows.AccessFlags.Unknown)
-			Text.Add("You know how to find the Burrows, should you want to.<br/>");
+		if(burrows.flags["Access"] != Burrows.AccessFlags.Unknown) {
+			Text.NL();
+			Text.Add("You know how to find the Burrows, should you want to.");
+		}
 	},
 	function() {
 		MoveToLocation(world.loc.Burrows.Enterance, {minute: 30});
@@ -192,9 +189,6 @@ world.loc.Burrows.Tunnels.links.push(new Link(
 	}
 ));
 
-world.loc.Burrows.Tunnels.endDescription = function() {
-	Text.Add("What do you do?");
-}
 
 world.loc.Burrows.Tunnels.enc = new EncounterTable();
 //TODO add encounters
@@ -225,10 +219,6 @@ world.loc.Burrows.Throne.events.push(new Link(
 	}
 ));
 
-world.loc.Burrows.Throne.endDescription = function() {
-	Text.Add("");
-}
-
 
 //
 // Burrows Pit
@@ -246,15 +236,11 @@ world.loc.Burrows.Pit.links.push(new Link(
 	}
 ));
 
-world.loc.Burrows.Pit.endDescription = function() {
-	Text.Add("");
-}
 
 
 //
 // Burrows Lab
 //
-//TODO
 world.loc.Burrows.Lab.description = function() {
 	Scenes.Ophelia.LabDesc();
 }
@@ -276,10 +262,6 @@ world.loc.Burrows.Lab.events.push(new Link(
 		Scenes.Ophelia.LabApproach();
 	}
 ));
-
-world.loc.Burrows.Lab.endDescription = function() {
-	Text.Flush();
-}
 
 
 Scenes.Burrows.FirstApproach = function() {
