@@ -114,12 +114,6 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 ));
 */
 
-world.loc.Plains.Nomads.Fireplace.endDescription = function() {
-	Text.Add("You weigh your options.<br/>");
-	Text.Flush();
-}
-
-
 
 //
 // Crossroads
@@ -429,7 +423,4 @@ world.loc.Plains.Gate.events.push(new Link(
 		Scenes.Miranda.RigardGatesInteract();
 	}
 ))
-world.loc.Plains.Gate.endDescription = function() {
-	Text.Add("You weigh your options.<br/>");
-}
 
