@@ -14,8 +14,6 @@ world.loc.Rigard.Tavern.common.description = function() {
 	Text.NL();
 	Text.Add("The omnipresent bartender is a tall equine, perpetually busy with wiping a mug that doesn’t ever seem to get any cleaner.");
 	Text.NL();
-	
-	Text.Flush();
 }
 
 world.loc.Rigard.Tavern.common.links.push(new Link(
@@ -26,9 +24,6 @@ world.loc.Rigard.Tavern.common.links.push(new Link(
 	}
 ));
 
-world.loc.Rigard.Tavern.common.endDescription = function() {
-	
-}
 
 world.loc.Rigard.Tavern.common.onEntry = function() {
 	if(kyna.flags["Met"] == Kyna.MetFlags.NotMet && world.time.hour > 17 && Math.random() < 0.2) {
