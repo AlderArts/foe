@@ -53,10 +53,6 @@ world.loc.Plains.Nomads.Tent.links.push(new Link(
 	}
 ));
 
-world.loc.Plains.Nomads.Tent.endDescription = function() {
-	Text.Add("You weigh your options.<br/>");
-	Text.Flush();
-}
 
 world.loc.Plains.Nomads.Fireplace.description = function() {
 	Text.Add("The nomad camp is currently set up in the middle of a wide grassland spreading out in all directions. [TreeFar] In the middle of the gathering of disparate tents that make up the nomad camp - about twenty in total - is a large fire pit.", {TreeFar: world.TreeFarDesc()});
@@ -318,9 +314,6 @@ world.loc.Plains.Crossroads.links.push(new Link(
 		MoveToLocation(world.loc.Desert.Drylands, {hour: 2});
 	}
 ));
-world.loc.Plains.Crossroads.endDescription = function() {
-	Text.Add("You weigh your options.<br/>");
-}
 
 //
 // Gate house
