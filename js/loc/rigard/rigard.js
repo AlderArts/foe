@@ -190,6 +190,9 @@ Rigard.prototype.Visa = function() {
 	return this.flags["Visa"] != 0;
 }
 
+Rigard.prototype.Visited = function() {
+	return miranda.flags["Met"] != 0;
+}
 // TODO: add other ways
 Rigard.prototype.Access = function() {
 	return this.Visa();

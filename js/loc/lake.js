@@ -14,14 +14,12 @@ world.loc.Lake = {
 // Hills, main hunting grounds
 //
 world.loc.Lake.Shore.description = function() {
-	Text.Add("This place looks lakey. Looks fishy.<br/>");
+	Text.Add("You are standing on the shore of the great lake in which the river that passes Rigard pours its waters. Further upstream, you can see the slums and docks of the great city spread out. Despite this, the lake looks pristine; you figure there must be multiple sources of its waters. Further out, you spot an island, and beyond that Eden ends and the cloudy void begins.");
 }
 
 world.loc.Lake.Shore.links.push(new Link(
-	"Rigard", true, true,
-	function() {
-		Text.Add("Behind you is the way back to Rigard.<br/>");
-	},
+	"Slums", true, true,
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 45});
 	}
@@ -55,7 +53,3 @@ world.loc.Lake.Shore.enc.AddEnc(function() {
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return burrows.Access() && burrows.flags["BrainyTrait"] == Burrows.TraitFlags.Inactive; });
-
-world.loc.Lake.Shore.endDescription = function() {
-	Text.Add("What do you do?<br/>");
-}

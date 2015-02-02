@@ -13,7 +13,10 @@ world.loc.KingsRoad = {
 // Hills, main hunting grounds
 //
 world.loc.KingsRoad.Road.description = function() {
-	Text.Add("You are standing on the King's road, which connects Rigard and the free cities.<br/>");
+	var parse = {
+		TreeFar : world.TreeFarDesc()
+	};
+	Text.Add("You are standing on the well-paved road leading from Rigard to the free cities, a major trading route on Eden. Estates and farm holds dot the landscape, which is a blend of flat plains on one side, and rougher country on the other as the gentle grasslands are swallowed by the great forest. [TreeFar]", parse);
 }
 
 world.loc.KingsRoad.Road.links.push(new Link(
@@ -94,8 +97,3 @@ world.loc.KingsRoad.Road.AddEncounter({
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true
 });
-
-
-world.loc.KingsRoad.Road.endDescription = function() {
-	Text.Add("What do you do?<br/>");
-}

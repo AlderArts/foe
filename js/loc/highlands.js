@@ -14,23 +14,20 @@ world.loc.Highlands = {
 // Hills, main hunting grounds
 //
 world.loc.Highlands.Hills.description = function() {
-	Text.Add("This place looks hilly. Looks good for hunting.<br/>");
+	Text.Add("The highlands are a much rougher part of Eden than the rolling plains below. A multitude of small lakes and moors dot the landscape, which looks like its at some point been crinkled up by a large earthquake. Sheer cliffs make the area difficult to traverse, and if you don’t know where you’re going, you can easily end up having to retrace your steps.");
+	Text.NL();
 }
 
 world.loc.Highlands.Hills.links.push(new Link(
 	"Crossroads", true, true,
-	function() {
-		Text.Add("Behind you is the way back to the crossroads.<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Plains.Crossroads, {hour: 2});
 	}
 ));
 world.loc.Highlands.Hills.links.push(new Link(
 	"Den entrance", true, true,
-	function() {
-		Text.Add("A sheer cliffside rise in the distance. Somehow, it gives off an ominous feeling. ");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.DragonDen.Entry, {minute: 15});
 	}
@@ -57,7 +54,3 @@ world.loc.Highlands.Hills.AddEncounter({
 world.loc.Highlands.Hills.enc.AddEnc(function() {
 	return Scenes.Momo.MomoEnc;
 }, 1.0, function() { return momo.Wandering(); });
-
-world.loc.Highlands.Hills.endDescription = function() {
-	Text.Add("What do you do?<br/>");
-}

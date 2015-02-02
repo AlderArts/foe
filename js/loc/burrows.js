@@ -80,6 +80,14 @@ Burrows.prototype.LagonAlly = function() {
 	return lagon.flags["Usurp"] & Lagon.Usurp.SidedWith;
 }
 //TODO
+Burrows.prototype.LagonChained = function() {
+	return burrows.LagonDefeated(); //TODO
+}
+//TODO
+Burrows.prototype.LagonPit = function() {
+	return false;
+}
+//TODO
 Burrows.prototype.VenaRestored = function() {
 	return false;
 }
@@ -103,7 +111,15 @@ Burrows.prototype.FromStorage = function(storage) {
 // Burrows entrance
 //
 world.loc.Burrows.Enterance.description = function() {
-	Text.Add("");
+	var parse = {
+		TreeFar : world.TreeFarDesc(),
+		l : burrows.LagonDefeated() ? "the lagomorph" : "Lagon’s"
+	};
+	
+	Text.Add("Just beyond lies the dark tunnel that leads down into [l] lair. It looks innocent enough on the outside, with a few bunny-morphs hopping around and frolicking, but you know very well what lies underground.", parse);
+	Text.NL();
+	Text.Add("The burrows are located in a group of low hills on the plains, still quite a ways from the forest. [TreeFar]", parse);
+	Text.NL();
 }
 
 world.loc.Burrows.Enterance.links.push(new Link(
@@ -153,7 +169,7 @@ world.loc.Plains.Crossroads.links.push(new Link(
 // Tunnels
 //
 world.loc.Burrows.Tunnels.description = function() {
-	Text.Add("You are in the bowels of the Burrows, the twisting tunnels of the lagomorph stronghold. There is only a faint light to guide your way. Echoes of the giant orgy in the Pit can be heard even here.");
+	Text.Add("The burrows are a confusing maze of tunnels criss-crossing through the hillside. There is no real way to navigate in the faintly lit darkness of the lagomorph stronghold, so moving around is a bit of guesswork. Still, you think you could find your way around, given some time. Echoes of the giant orgy in the Pit can be heard even here, finding that place will at least be easy.");
 	Text.NL();
 }
 
@@ -196,9 +212,26 @@ world.loc.Burrows.Tunnels.enc = new EncounterTable();
 //
 // Burrows throne room
 //
-//TODO Fix after Lagon is defeated
 world.loc.Burrows.Throne.description = function() {
-	Text.Add("You are standing in Lagon's throne room.");
+	var parse = {
+		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon"
+	};
+	
+	Text.Add("[Lagon]’s throne room is where the bunnies have gathered all the riches that they’ve scavenged from around the land. Due to their non-conventional measure of value, it’s an odd collection to say the least. There’s mounds of coins, jewels and gear of various kinds, to be sure, but also various oddments like wheelbarrows and iron pots - not exactly your usual treasures.", parse);
+	Text.NL();
+	if(burrows.VenaRestored())
+		Text.Add("The lagomorph matriarch is busy dealing with the everyday ruling of her little kingdom, and often sends out messengers to tend to various tasks. She still has a long way to go before her vision of the colony is realized. Progress is halted now and again when her pent up lust forces her to call some of her harem to aid her. Old habits die hard.", parse);
+	else if(burrows.LagonDefeated())
+		Text.Add("After Lagon’s defeat at your hands, the throne stands empty, waiting for a new ruler of the lagomorphs.", parse);
+	else
+		Text.Add("The lagomorph king himself rests on his seat, a bored look on his face as he oversees the matters of his kingdom - punishes those that need punishing, fucks those that need fucking. His personal harem is close at hand, attentive to his whims.", parse);
+	Text.NL();
+	if(burrows.LagonDefeated()) {
+		if(burrows.LagonChained())
+			Text.Add("The former king is chained to a nearby wall, wearing a rather sullen expression and little else. He looks to be well treated, but the members of his former harem seem to be avoiding him, perhaps out of fear that he’ll lash out at them.", parse);
+		else if(burrows.LagonPit())
+			Text.Add("The former king is probably where he usually is; in the depths of the Pit getting his every hole fucked by the endless mob of rabbits. From what you’ve gathered, he doesn’t seem to want to leave, even if he’s free to.", parse);
+	}
 }
 
 world.loc.Burrows.Throne.links.push(new Link(
@@ -223,9 +256,15 @@ world.loc.Burrows.Throne.events.push(new Link(
 //
 // Burrows Pit
 //
-//TODO
 world.loc.Burrows.Pit.description = function() {
-	Text.Add("You are in the Pit.");
+	var parse = {
+		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon"
+	};
+	
+	Text.Add("The Pit is a place of everlasting depravity; a huge cavern in the lagomorph compound, dwarfing even [Lagon]’s throneroom. Countless bunnies writhe together in the never-ending orgy, seeking to sate their needs among their brothers and sisters. Far below, in the center of the chamber, their seed has coalesced to form a pond of sticky white.", parse);
+	if(!burrows.VenaRestored())
+		Text.Add(" Down there, you know you’ll find Vena, the ever-pregnant lagomorph matriarch.", parse);
+	Text.NL();
 }
 
 world.loc.Burrows.Pit.links.push(new Link(

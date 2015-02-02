@@ -12,6 +12,9 @@ world.loc.Plains = {
 		Fireplace  : new Event("Fireplace")
 	},
 	Crossroads     : new Event("Crossroads"),
+	Portals        : new Event(function() {
+		return gameCache.flags["Portals"] != 0 ? "Nexus" : "Mound";
+	}),
 	Gate           : new Event("Town gates"),
 	Burrows        :
 	{
@@ -115,8 +118,21 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 // Crossroads
 //
 world.loc.Plains.Crossroads.description = function() {
-	Text.Add("You are at the crossroads.");
+	var parse = {
+		TreeFar : world.TreeFarDesc(),
+		Rigard : rigard.Visited() ? "Rigard" : "a big city in the distance"
+	};
+	
+	Text.Clear();
+	Text.Add("The rolling plains go on for miles and miles around you, the occasional farm or homestead breaking the monotonous flatlands. You are standing on an intersection of several major roads leading off into the distance. The main thoroughfare leads to [Rigard] in one direction, and up into a rougher, hillier country in the other, snowy mountains reaching for the sky far away.", parse);
+	Text.Add("Crossing this path is a smaller, less travelled one, leading from the deep forest into a dry wasteland in the other direction. [TreeFar]", parse);
 	Text.NL();
+	Text.Add("Nearby, there is a low hill with some strange standing stones on it. ", parse);
+	if(gameCache.flags["Portals"] != 0)
+		Text.Add("The gem glows in the presence of the portals, inexplicably drawn to them. ", parse);
+	else if(jeanne.flags["Met"] != 0)
+		Text.Add("This is probably the place that Jeanne was talking about. ", parse);
+	Text.Add("The Nomad camp where you first arrived on Eden lies on the horizon, one beacon of familiarity in this strange land.", parse);
 }
 
 world.loc.Plains.Crossroads.enc = new EncounterTable();
@@ -246,19 +262,21 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 
 world.loc.Plains.Crossroads.links.push(new Link(
 	"Nomads", true, true,
-	function() {
-		Text.Add("Go to the nomad camp? ");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Plains.Nomads.Fireplace, {minute: 15});
 	}
 ));
-
+world.loc.Plains.Crossroads.links.push(new Link(
+	function() { return gameCache.flags["Portals"] != 0 ? "Nexus" : "Mound"; }, true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.Plains.Portals, {minute: 10});
+	}
+));
 world.loc.Plains.Crossroads.links.push(new Link(
 	"Rigard", true, true,
-	function() {
-		Text.Add("There is a large city in the distance. ");
-	},
+	null,
 	function() {
 		if(miranda.flags["Met"] != 0 && Math.random() < 0.1) {
 			Text.Clear();
@@ -289,29 +307,53 @@ world.loc.Plains.Crossroads.links.push(new Link(
 ));
 world.loc.Plains.Crossroads.links.push(new Link(
 	"Hills", true, true,
-	function() {
-		Text.Add("A set of low hills rise in the distance. ");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Highlands.Hills, {hour: 2});
 	}
 ));
 world.loc.Plains.Crossroads.links.push(new Link(
 	"Forest", true, true,
-	function() {
-		Text.Add("The large forest is off in the distance. ");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Forest.Outskirts, {hour: 2});
 	}
 ));
 world.loc.Plains.Crossroads.links.push(new Link(
 	"Desert", true, true,
-	function() {
-		Text.Add("There is a desert. ");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Desert.Drylands, {hour: 2});
+	}
+));
+
+//
+// Mound
+//
+
+world.loc.Plains.Portals.description = function() {
+	var parse = {};
+	
+	Text.Add("Located near the crossroads at the center of the great plains lies a lone hill, visible for miles around. ", parse);
+	if(gameCache.flags["Portals"] != 0)
+		Text.Add("You are standing at its apex, near the portal stones. Each one is taller than two men in height and covered in intricate magical runes glowing brightly. There is an eerie hum in the air, and the gemstone in your pocket pulses in time with your heartbeat. From here, you can reach out and open portals to other realms.", parse);
+	else {
+		Text.Add("You are standing at its apex, studying the strange stone obelisks standing in a large circle. Each one taller than two men in height, the black slates are covered in intricate magical runes, a few of them glowing faintly. There is an eerie feeling in the air around them.", parse);
+		Text.NL();
+		if(glade.flags["Visit"] >= 2) {
+			Text.Add("Not far from the strange stone pillars you can see Jeanne standing near a small tent, working on some form of magical device powered by a set of crystals.", parse);
+			if(!world.time.IsDay())
+				Text.Add(" She’s set up some torches to light her way, and that together with the glowing runes gives you just enough illumination to see.", parse);
+		}
+		else
+			Text.Add("The area is deserted. Even though it’s so close to one of the major intersections on this vast plain, few travelers wish to linger near this place.", parse);
+	}
+}
+world.loc.Plains.Portals.links.push(new Link(
+	"Crossroads", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.Plains.Crossroads, {minute: 10});
 	}
 ));
 
@@ -326,9 +368,7 @@ world.loc.Plains.Gate.onEntry = function() {
 		PrintDefaultOptions();
 }
 world.loc.Plains.Gate.description = function() {
-	Text.Add("You stand on a stone paved road leading up to Rigard.");
-	Text.NL();
-	
+	Text.Add("You are standing on a split in the road leading from the great plains to the city of Rigard. Just up ahead you can see the gates of the great city, and the castle towering above a river flowing beside the town. ");
 	if(miranda.IsAtLocation())
 		Scenes.Miranda.RigardGatesDesc();
 	else {
@@ -340,9 +380,10 @@ world.loc.Plains.Gate.description = function() {
 	
 	// Town events
 	
-	Text.Add("There is a deep forest to the north, some of the trees creeping quite close to the walls. You spy a lake to the south.");
+	Text.Add("The walls have been unable to contain the city’s growth, and there is a large, sprawling slum spreading out by the riverside. Further downstream, the river leads to a large lake at the very edge of Eden, presumably launching its waters into the great void below.");
 	Text.NL();
-	Text.Flush();
+	Text.Add("The other path goes around the city, leading into the plains beyond, threading close to the vast forest. [TreeFar]", {TreeFar: world.TreeFarDesc()});
+	Text.NL();
 }
 world.loc.Plains.Gate.links.push(new Link(
 	"Crossroads", true, true,

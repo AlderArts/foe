@@ -16,6 +16,7 @@ Version 0.3v
 * Restructured the save format a bit to account for stretch/capacity on some NPCs. This may have some side effects, such as Terry's body resetting the first time you load an old save.
 * New Miranda scene:
  - Dommy Miranda, have her ride you.
+* New location descriptors for a lot of locations, replacing a lot of placeholder stuff. If you see any that I've missed (and I know there are a few), feel free to point them out in the comments.
 
 --------------------------------------------
              PREVIOUS VERSIONS

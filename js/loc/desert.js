@@ -13,7 +13,7 @@ world.loc.Desert = {
 // Den entrance
 //
 world.loc.Desert.Drylands.description = function() {
-	Text.Add("The grass is dried here. It seems like you are at the edge of a large desert.<br/>");
+	Text.Add("You’re standing in the drylands, the border between the fertile plains and the barren desert. Beyond here, you’d need the help of the desert dwellers to cross; venturing into the sandy wastes on your own would be foolhardy.");
 }
 
 world.loc.Desert.Drylands.enc = new EncounterTable();
@@ -54,17 +54,11 @@ world.loc.Desert.Drylands.enc.AddEnc(function() {
 
 world.loc.Desert.Drylands.links.push(new Link(
 	"Crossroads", true, true,
-	function() {
-		Text.Add("Behind you is the way back to the crossroads.<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Plains.Crossroads, {hour: 2});
 	}
 ));
-
-world.loc.Desert.Drylands.endDescription = function() {
-	Text.Add("Going into the desert unprepared is probably a bad idea.<br/>");
-}
 
 world.loc.Desert.Drylands.enc.AddEnc(function() {
 	return Scenes.Roaming.FindSomeCoins;

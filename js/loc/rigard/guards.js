@@ -99,32 +99,26 @@ world.loc.Rigard.Gate.endDescription = function() {
 // Barracks
 //
 world.loc.Rigard.Barracks.common.description = function() {
-	Text.Add("You are at the barracks common room.<br/>");
+	Text.Add("There’s always some people around in the dimly lit barracks; a few eating, playing cards or trying to catch a few minutes of shut-eye before returning to their shifts. From the broad variety on display, the city watch consists of both humans and morphs of many kinds.");
 }
 
 world.loc.Rigard.Barracks.common.links.push(new Link(
 	"Gate", true, true,
-	function() {
-		Text.Add("The gate is just outside.<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Gate, {minute: 5});
 	}
 ));
 world.loc.Rigard.Barracks.common.links.push(new Link(
 	"Yard", true, true,
-	function() {
-		Text.Add("Sparring yard.<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Barracks.sparring);
 	}
 ));
 world.loc.Rigard.Barracks.common.links.push(new Link(
 	"Captains", true, true,
-	function() {
-		Text.Add("The captains quarters.<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Barracks.captains);
 	}
@@ -142,29 +136,18 @@ world.loc.Rigard.Barracks.common.events.push(new Link(
 ));
 
 
-world.loc.Rigard.Barracks.common.endDescription = function() {
-	Text.Add("What you do?<br/>");
-}
-
-
 
 world.loc.Rigard.Barracks.sparring.description = function() {
-	Text.Add("You are at sparring yard.<br/>");
+	Text.Add("The sparring yard is used by the city watch to do basic training and drills for new recruits. There are a few strawman targets and an archery range, as well as racks of wooden practice weapons of various kinds.");
 }
 
 world.loc.Rigard.Barracks.sparring.links.push(new Link(
 	"Commons", true, true,
-	function() {
-		Text.Add("Commons is inside.<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Barracks.common);
 	}
 ));
-
-world.loc.Rigard.Barracks.sparring.endDescription = function() {
-	Text.Add("What you do?<br/>");
-}
 
 
 
