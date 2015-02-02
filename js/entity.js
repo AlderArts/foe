@@ -1093,7 +1093,7 @@ Entity.prototype.Race = function() {
 }
 
 Entity.prototype.ParserPronouns = function(parse, prefix) {
-	parse = parse || {};
+	parse  = parse  || {};
 	prefix = prefix || "";
 	parse[prefix + "HeShe"]   = this.HeShe();
 	parse[prefix + "heshe"]   = this.heshe();
@@ -1102,6 +1102,25 @@ Entity.prototype.ParserPronouns = function(parse, prefix) {
 	parse[prefix + "HimHer"]  = this.HimHer();
 	parse[prefix + "himher"]  = this.himher();
 	parse[prefix + "hishers"] = this.hishers();
+	return parse;
+}
+
+Entity.prototype.ParserTags = function(parse, prefix) {
+	parse  = parse  || {};
+	prefix = prefix || "";
+	parse[prefix + "cocks"]     = function() { return this.MultiCockDesc(); }
+	parse[prefix + "cock"]      = function() { return this.FirstCock().Short(); }
+	parse[prefix + "cockTip"]   = function() { return this.FirstCock().TipShort(); }
+	parse[prefix + "balls"]     = function() { return this.BallsDesc(); }
+	parse[prefix + "vag"]       = function() { return this.FirstVag().Short(); }
+	parse[prefix + "clit"]      = function() { return this.FirstVag().ClitShort(); }
+	parse[prefix + "breasts"]   = function() { return this.FirstBreastRow().Short(); }
+	parse[prefix + "tongue"]    = function() { return this.TongueDesc(); }
+	parse[prefix + "tongueTip"] = function() { return this.TongueTipDesc(); }
+	parse[prefix + "skin"]      = function() { return this.SkinDesc(); }
+	parse[prefix + "hair"]      = function() { return this.Hair().Short(); }
+	parse[prefix + "face"]      = function() { return this.FaceDesc(); }
+	parse[prefix + "legs"]      = function() { return this.LegsDesc(); }
 	return parse;
 }
 
