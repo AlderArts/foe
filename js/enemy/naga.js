@@ -31,6 +31,11 @@ function Naga() {
 	this.libido.base       = 24;
 	this.charisma.base     = 27;
 	
+	this.elementDef.dmg[Element.lust]   =   0.5;
+	this.elementDef.dmg[Element.mFire]  =   0.5;
+	this.elementDef.dmg[Element.mIce]   =  -0.5;
+	this.elementDef.dmg[Element.mWater] = -0.25;
+	
 	this.level             = 4;
 	if(Math.random() > 0.8) this.level = 6;
 	this.sexlevel          = 2;

@@ -24,6 +24,9 @@ function Imp() {
 	this.libido.base       = 18;
 	this.charisma.base     = 4;
 	
+	this.elementDef.dmg[Element.mFire] = 0.5;
+	this.elementDef.dmg[Element.mDark] = 0.5;
+	
 	this.level             = 1;
 	this.sexlevel          = 1;
 	

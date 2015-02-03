@@ -24,6 +24,8 @@ function Lagomorph(gender) {
 	this.libido.base       = 17;
 	this.charisma.base     = 12;
 	
+	this.elementDef.dmg[Element.mFire] = -0.5;
+	
 	this.level             = 1;
 	if(Math.random() > 0.8) this.level = 2;
 	this.sexlevel          = 3;

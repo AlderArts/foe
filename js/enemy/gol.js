@@ -35,7 +35,10 @@ function GolQueen() {
 	this.combatExp         = 350;
 	this.coinDrop          = 1500;
 	
-	this.elementDef.dmg[Element.mIce] = -1;
+	this.elementAtk.dmg[Element.pSlash]   =    1;
+	this.elementDef.dmg[Element.mNature]  =  0.5;
+	this.elementDef.dmg[Element.mIce]     =   -1;
+	this.elementDef.dmg[Element.mThunder] = -0.5;
 	
 	this.body              = new Body(this);
 	

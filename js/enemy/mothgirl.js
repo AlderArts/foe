@@ -30,6 +30,11 @@ function Mothgirl() {
 	this.libido.base       = 20;
 	this.charisma.base     = 20;
 	
+	this.elementDef.dmg[Element.mEarth]   =  0.5;
+	this.elementDef.dmg[Element.mFire]    = -0.5;
+	this.elementDef.dmg[Element.mThunder] = -0.5;
+	this.elementDef.dmg[Element.mWind]    =  0.5;
+	
 	this.level             = 4 + Math.floor(Math.random() * 4);
 	this.sexlevel          = 3;
 	

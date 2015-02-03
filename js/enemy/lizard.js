@@ -55,6 +55,11 @@ function Lizard(gender) {
 	this.libido.base       = 14;
 	this.charisma.base     = 15;
 	
+	this.elementDef.dmg[Element.mFire]    =   0.5;
+	this.elementDef.dmg[Element.mIce]     =  -0.5;
+	this.elementDef.dmg[Element.mWater]   = -0.25;
+	this.elementDef.dmg[Element.mThunder] =  -0.5;
+	
 	this.level             = 1;
 	if(Math.random() > 0.8) this.level = 2;
 	this.sexlevel          = 1;

@@ -35,7 +35,8 @@ function OrchidBoss(storage) {
 	this.combatExp         = 300;
 	this.coinDrop          = 1000;
 	
-	this.elementDef.dmg[Element.mFire] = -1;
+	this.elementDef.dmg[Element.mFire]   =  -1;
+	this.elementDef.dmg[Element.mNature] = 0.5;
 	
 	this.body              = new Body(this);
 	

@@ -38,6 +38,11 @@ function GolemBoss(storage) {
 	this.libido.base       = 30;
 	this.charisma.base     = 20;
 	
+	this.elementDef.dmg[Element.mFire]    =  0.5;
+	this.elementDef.dmg[Element.mIce]     =  0.5;
+	this.elementDef.dmg[Element.mThunder] =  0.5;
+	this.elementDef.dmg[Element.mEarth]   =   -1;
+	
 	this.level             = 10;
 	this.sexlevel          = 2;
 	

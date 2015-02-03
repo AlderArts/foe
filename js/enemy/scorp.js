@@ -31,6 +31,13 @@ function Scorpion() {
 	this.libido.base       = 19;
 	this.charisma.base     = 23;
 	
+	this.elementAtk.dmg[Element.pPierce] =  0.5;
+	this.elementAtk.dmg[Element.mNature] =  0.5;
+	this.elementDef.dmg[Element.mNature] =  0.5;
+	this.elementDef.dmg[Element.mFire]   =  0.5;
+	this.elementDef.dmg[Element.mIce]    =   -1;
+	this.elementDef.dmg[Element.mWater]  = -0.5;
+	
 	this.level             = 5 + Math.floor(Math.random() * 4);
 	this.sexlevel          = 3;
 	

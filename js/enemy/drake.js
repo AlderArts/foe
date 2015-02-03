@@ -26,6 +26,11 @@ function Drake() {
 	this.libido.base       = 200;
 	this.charisma.base     = 240;
 	
+	this.elementDef.dmg[Element.pSlash]   = 0.5;
+	this.elementDef.dmg[Element.mFire]    = 0.5;
+	this.elementDef.dmg[Element.mThunder] = 0.5;
+	this.elementDef.dmg[Element.mIce]     = 0.5;
+	
 	this.level             = 60 + Math.floor(Math.random() * 10);
 	this.sexlevel          = 30;
 	

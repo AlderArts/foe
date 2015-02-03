@@ -49,6 +49,10 @@ function Equine(gender, levelbonus) {
 	this.libido.base       = 14;
 	this.charisma.base     = 12;
 	
+	this.elementDef.dmg[Element.mEarth] = 0.5;
+	this.elementDef.dmg[Element.mWind]  = 0.5;
+	this.elementDef.dmg[Element.pBlunt] = 0.3;
+	
 	this.level             = 2;
 	if(Math.random() > 0.8) this.level++;
 	this.level             += levelbonus || 0;
