@@ -169,7 +169,7 @@ world.loc.Plains.Crossroads.links.push(new Link(
 // Tunnels
 //
 world.loc.Burrows.Tunnels.description = function() {
-	Text.Add("The burrows are a confusing maze of tunnels criss-crossing through the hillside. There is no real way to navigate in the faintly lit darkness of the lagomorph stronghold, so moving around is a bit of guesswork. Still, you think you could find your way around, given some time. Echoes of the giant orgy in the Pit can be heard even here, finding that place will at least be easy.");
+	Text.Add("The burrows are a confusing maze of tunnels criss-crossing through the hillside. There is no real way to navigate in the faintly lit darkness of the lagomorph stronghold, so moving around is a bit of guesswork. Still, you think you could find your way around, given some time. Echoes of the giant orgy in the Pit can be heard even here; finding that place will at least be easy.");
 	Text.NL();
 }
 
