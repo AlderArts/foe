@@ -618,7 +618,11 @@ Scenes.Roa.TSLPitchAnal = function() {
 	if(player.FirstCock()) {
 		Text.Add("Since Roa has so nicely gotten into the proper position, it would be a shame to waste it. Crossing the distance between you, your hand reaches out to possessively clutch at his head, guiding his mouth to[oneof] your bobbing [multiCockDesc] until his nose is rubbing along the sensitive flesh of your [cockDesc].", parse);
 		Text.NL();
-		Text.Add("The lapin whore needs no prompting to start sucking and licking your shaft with abandon. His technique is pretty good and his enthusiasm unabated. He blows you with a deep hunger that only serves to make the act more erotic.", parse);
+		if(p1cock.Thickness() >= 8)
+			Text.Add("<i>“Ooh...”</i> he shivers at the sight of your massive cock. <i>“I need you inside me!”</i>", parse);
+		else
+			Text.Add("<i>“Mm… nice and juicy,”</i> he moans.", parse);
+		Text.Add(" The lapin whore needs no prompting to start sucking and licking your shaft with abandon. His technique is pretty good and his enthusiasm unabated. He blows you with a deep hunger that only serves to make the act more erotic.", parse);
 		Text.NL();
 		Text.Add("Sparks of pleasure crackle along your [skinDesc], and you can’t help but moan your satisfaction with the lagomorph’s oral skills. For a moment, you are sorely tempted to just give yourself over to the hungry wetness of his mouth, to let him suck and gulp and swallow until you have emptied yourself into his waiting belly. But the moment passes and, with a final shudder, you push him away, his mouth popping as it leaves your now-dripping dick.", parse);
 		Text.NL();
@@ -730,7 +734,10 @@ Scenes.Roa.TSLPitchAnal = function() {
 	parse["knothilt"] = knot ? "knot" : "hilt";
 	Text.Add("With a grunt of effort, you draw yourself back until you almost pop free, and then slam home, burying yourself nearly to the [knothilt] in a single powerful motion. Roa rocks at the force of your impact, a squeak escaping him, before you pull out and slam in again. Rough and firm, you start to build up steam, humping the lapin’s ass as strongly as you can.", parse);
 	Text.NL();
-	Text.Add("<i>“Ah! Yeah! This is paradise...”</i> Roa says airily, humping back against you, intent on taking everything that you have and more.", parse);
+	if(p1cock.Thickness() >= 8)
+		Text.Add("<i>“Ah! Fuck yes! Take me!”</i> Roa moans unabashedly, humping back against you as he tries to jam your massive member into his ass. <i>“You’re so - unf - <b>big</b>!”</i> he groans. <i>“F-filling me up, s-so good!”</i> <i>Someone</i> is a bit of a size queen.", parse);
+	else
+		Text.Add("<i>“Ah! Yeah! This is paradise...”</i> Roa says airily, humping back against you, intent on taking everything that you have and more.", parse);
 	Text.NL();
 	Text.Add("You can’t hold back a satisfied smirk at that. If he’s so enamored with just your efforts back here, then what if...? Your hand creeps up under his waist, fingers feeling for the warm, pre-slick length of throbbing fuckflesh there. Finding your target, you wrap your fingers around it, squeezing it possessively.", parse);
 	Text.NL();
