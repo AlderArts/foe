@@ -638,7 +638,7 @@ Scenes.Ophelia.TalkPrompt = function() {
 		tooltip : "Can she tell you anything about her father?"
 	});
 	
-	if(burrows.flags["Access"] == Burrows.AccessFlags.Stage3) {
+	if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3) {
 		options.push({ nameStr : "Roa",
 			func : function() {
 				Scenes.Ophelia.TalkRoa();
@@ -649,7 +649,6 @@ Scenes.Ophelia.TalkPrompt = function() {
 	Gui.SetButtonsFromList(options, true, Scenes.Ophelia.LabPrompt);
 }
 
-// TODO
 Scenes.Ophelia.TalkRoa = function() {
 	var parse = {
 		playername : player.name
@@ -663,10 +662,11 @@ Scenes.Ophelia.TalkRoa = function() {
 		Text.NL();
 		Text.Add("Sounds like the most likely place to find the estranged rabbit would be a whorehouse. Or the belly of some monster.", parse);
 		Text.Flush();
-		Scenes.Ophelia.LabPrompt();
+		Scenes.Ophelia.TalkPrompt();
 	}
 	else {
 		var first = !(ophelia.flags["Talk"] & Ophelia.Talk.Roa);
+		ophelia.flags["Talk"] |= Ophelia.Talk.Roa;
 		if(first) {
 			Text.Add("<i>“You’ve found my brother? It’s great to know he’s safe, but tell me? How is he?”</i> she asks enthusiastically, grasping your arm.", parse);
 			Text.NL();
@@ -804,24 +804,26 @@ Scenes.Ophelia.TalkRoa = function() {
 					Text.NL();
 					Text.Add("You note that her writing seems to get better and more descriptive over time. <i>“Thanks, it’s a learning process,”</i> she says, returning the page to the binder.", parse);
 				});
-				scenes.push(function() {
-					Text.Add("What’s the most interesting transformation that she’s been able to get from Roa?", parse);
-					Text.NL();
-					Text.Add("<i>“There were some that were… fun, but worrying. If it had been another bunny, I don’t know what the long term effects would have been. Some alchemical compounds seem to affect the mind in addition to the body.”</i> Ophelia sighs, slumping her shoulders. <i>“Some of them, I wish I never tested.”</i>", parse);
-					Text.NL();
-					Text.Add("<i>“A certain mixture will push the sexual urges of the one who takes it to the extreme; so much that all other thoughts and desires fade. The problem is that so far, I haven’t found any way to reverse the process. Roa was thankfully fine due to his resistance; I had to put him in the Pit for several days, but eventually he returned to normal.”</i>", parse);
-					Text.NL();
-					if(burrows.VenaRestored()) {
-						Text.Add("<i>“When father fed the same potion to mother… she was not so lucky. Thankfully, you were able to find the scepter and bring her back.”</i>", parse);
+				if(ophelia.Relation() >= 40) {
+					scenes.push(function() {
+						Text.Add("What’s the most interesting transformation that she’s been able to get from Roa?", parse);
 						Text.NL();
-						Text.Add("Is she angry at Roa for taking the scepter in the first place?", parse);
+						Text.Add("<i>“There were some that were… fun, but worrying. If it had been another bunny, I don’t know what the long term effects would have been. Some alchemical compounds seem to affect the mind in addition to the body.”</i> Ophelia sighs, slumping her shoulders. <i>“Some of them, I wish I never tested.”</i>", parse);
 						Text.NL();
-						Text.Add("Ophelia shakes her head. <i>“If he hadn’t, I don’t think I’d ever been able to get hold of it myself; father or one of his guards was always near the treasure-trove.”</i>", parse);
-					}
-					else {
-						Text.Add("<i>“When father fed the same potion to mother… she was not so lucky.”</i> The alchemist hugs herself. <i>“Sorry, could we talk about something else?”</i>", parse);
-					}
-				}, 1.0, function() { return ophelia.Relation() >= 40; });
+						Text.Add("<i>“A certain mixture will push the sexual urges of the one who takes it to the extreme; so much that all other thoughts and desires fade. The problem is that so far, I haven’t found any way to reverse the process. Roa was thankfully fine due to his resistance; I had to put him in the Pit for several days, but eventually he returned to normal.”</i>", parse);
+						Text.NL();
+						if(burrows.VenaRestored()) {
+							Text.Add("<i>“When father fed the same potion to mother… she was not so lucky. Thankfully, you were able to find the scepter and bring her back.”</i>", parse);
+							Text.NL();
+							Text.Add("Is she angry at Roa for taking the scepter in the first place?", parse);
+							Text.NL();
+							Text.Add("Ophelia shakes her head. <i>“If he hadn’t, I don’t think I’d ever been able to get hold of it myself; father or one of his guards was always near the treasure-trove.”</i>", parse);
+						}
+						else {
+							Text.Add("<i>“When father fed the same potion to mother… she was not so lucky.”</i> The alchemist hugs herself. <i>“Sorry, could we talk about something else?”</i>", parse);
+						}
+					});
+				}
 				
 				var sceneId = ophelia.flags["rotRExp"];
 				if(sceneId >= scenes.length) sceneId = 0;
@@ -834,6 +836,7 @@ Scenes.Ophelia.TalkRoa = function() {
 				Text.NL();
 				Text.Add("You thank her for her story.", parse);
 				Text.Flush();
+				Scenes.Ophelia.TalkPrompt();
 			}, enabled : true,
 			tooltip : "Ask about the experiments that she performed on Roa."
 		});
@@ -855,7 +858,7 @@ Scenes.Ophelia.TalkRoa = function() {
 					Text.Add("Well, from that the brothel sounds like a perfect place for him.", parse);
 					Text.NL();
 					Text.Add("<i>“I’m glad that brother has found somewhere to call home outside!”</i> the alchemist says cheerfully. <i>“Was there something else you wanted to ask?”</i>", parse);
-				}, 1.0, function() { return true; });
+				});
 				scenes.push(function() {
 					Text.Add("Who was Roa’s favorite partner? And how did he prefer to have sex?", parse);
 					Text.NL();
@@ -870,7 +873,7 @@ Scenes.Ophelia.TalkRoa = function() {
 					Text.Add("How about when he visited the Pit?", parse);
 					Text.NL();
 					Text.Add("<i>“Oh, he was quite popular. With that pink fur he’s very cute, you know. Every now and then, father would take him. Dad’s huge, and he can be very rough, but Roa told me he didn’t mind.”</i>", parse);
-				}, 1.0, function() { return true; });
+				});
 				scenes.push(function() {
 					Text.Add("What’d Roa make of this new brute strain that Ophelia’s experiments have given rise to? Those giants sound like something that’d be right up his alley.", parse);
 					Text.NL();
@@ -879,38 +882,40 @@ Scenes.Ophelia.TalkRoa = function() {
 					Text.Add("Could he really take someone that big?", parse);
 					Text.NL();
 					Text.Add("<i>“I’ve seen him take dad; they’re not much bigger than him.”</i>", parse);
-				}, 1.0, function() { return true; });
+				});
 				scenes.push(function() {
 					Text.Add("How about the recent surge of hermaphrodites in the burrows, what’d Roa make of that?", parse);
 					Text.NL();
 					Text.Add("<i>“Might make him a bit more interested in girls, that’s for sure,”</i> Ophelia grins fondly. <i>“Don’t get me wrong; he was before, but with that extra piece of equipment he’d be completely infatuated.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“I’m sure my sisters would have a fun time with him too.”</i>", parse);
-				}, 1.0, function() { return true; });
-				scenes.push(function() {
-					Text.Add("<i>“So… um, you’ve fucked my brother, haven’t you?”</i> She peers at you inquisitorially.", parse);
-					Text.NL();
-					Text.Add("...You have, you confirm.", parse);
-					Text.NL();
-					if(ophelia.flags["Talk"] & Ophelia.Talk.Sex) {
-						if(player.sexlevel > 3)
-							Text.Add("<i>“I’m sure he was as satisfied as I was,”</i> Ophelia nods to herself confidently.", parse);
-						else
-							Text.Add("<i>“I hope you enjoyed yourselves,”</i> Ophelia nods to herself.", parse);
-						Text.Add(" <i>“And?”</i> she grins, her eyes twinkling behind her glasses. <i>“Which one of us did you prefer?”</i>", parse);
+				});
+				if(roa.flags["Met"] >= Roa.Met.Sexed) {
+					scenes.push(function() {
+						Text.Add("<i>“So… um, you’ve fucked my brother, haven’t you?”</i> She peers at you inquisitorially.", parse);
 						Text.NL();
-						Text.Add("That’s a bit unfair…", parse);
+						Text.Add("...You have, you confirm.", parse);
 						Text.NL();
-						Text.Add("<i>“Don’t worry,”</i> she giggles, <i>“I’m just teasing. You outsiders have such strange conceptions about sex.”</i>", parse);
-					}
-					else {
-						Text.Add("<i>“I do hope you satisfied him, [playername],”</i> Ophelia studies you curiously.", parse);
-						Text.NL();
-						Text.Add("What, she doesn’t believe that you’re able?", parse);
-						Text.NL();
-						Text.Add("<i>“Now now, I’m a scientist, you know,”</i> she admonishes you. <i>“I back my observations with empirical data. It just so happens I don’t have any on you… yet.”</i>", parse);
-					}
-				}, 1.0, function() { return roa.flags["Met"] >= Roa.Met.Sexed; });
+						if(ophelia.flags["Talk"] & Ophelia.Talk.Sex) {
+							if(player.sexlevel > 3)
+								Text.Add("<i>“I’m sure he was as satisfied as I was,”</i> Ophelia nods to herself confidently.", parse);
+							else
+								Text.Add("<i>“I hope you enjoyed yourselves,”</i> Ophelia nods to herself.", parse);
+							Text.Add(" <i>“And?”</i> she grins, her eyes twinkling behind her glasses. <i>“Which one of us did you prefer?”</i>", parse);
+							Text.NL();
+							Text.Add("That’s a bit unfair…", parse);
+							Text.NL();
+							Text.Add("<i>“Don’t worry,”</i> she giggles, <i>“I’m just teasing. You outsiders have such strange conceptions about sex.”</i>", parse);
+						}
+						else {
+							Text.Add("<i>“I do hope you satisfied him, [playername],”</i> Ophelia studies you curiously.", parse);
+							Text.NL();
+							Text.Add("What, she doesn’t believe that you’re able?", parse);
+							Text.NL();
+							Text.Add("<i>“Now now, I’m a scientist, you know,”</i> she admonishes you. <i>“I back my observations with empirical data. It just so happens I don’t have any on you… yet.”</i>", parse);
+						}
+					});
+				}
 				
 				var sceneId = ophelia.flags["rotRSex"];
 				if(sceneId >= scenes.length) sceneId = 0;
@@ -920,6 +925,7 @@ Scenes.Ophelia.TalkRoa = function() {
 				scenes[sceneId]();
 				
 				Text.Flush();
+				Scenes.Ophelia.TalkPrompt();
 			}, enabled : true,
 			tooltip : "Ask about Roa’s attitude to sex, and his uncanny libido."
 		});
