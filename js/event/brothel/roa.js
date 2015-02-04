@@ -50,7 +50,8 @@ Roa.prototype.constructor = Roa;
 
 Roa.Met = {
 	NotMet : 0,
-	Met    : 1
+	Met    : 1,
+	Sexed  : 2
 };
 
 Roa.Lagon = {
@@ -592,6 +593,9 @@ Scenes.Roa.First = function() {
 }
 
 Scenes.Roa.TSLPitchAnal = function() {
+	if(roa.flags["Met"] < Roa.Met.Sexed)
+		roa.flags["Met"] = Roa.Met.Sexed;
+	
 	var p1cock = player.BiggestCock(null, true);
 	
 	var parse = {
@@ -930,6 +934,9 @@ Scenes.Roa.TSLPitchAnal = function() {
 }
 
 Scenes.Roa.TSLCatchVaginal = function() {
+	if(roa.flags["Met"] < Roa.Met.Sexed)
+		roa.flags["Met"] = Roa.Met.Sexed;
+	
 	var parse = {
 		hand       : function() { return player.HandDesc(); },
 		vagDesc    : function() { return player.FirstVag().Short(); },

@@ -20,8 +20,10 @@ function Ophelia(storage) {
 	this.body.SetBodyColor(Color.white);
 	this.body.SetEyeColor(Color.blue);
 	
-	this.flags["Met"] = 0; // note, bitmask Ophelia.Met
+	this.flags["Met"]  = 0; // note, bitmask Ophelia.Met
 	this.flags["Talk"] = 0; // note, bitmask Ophelia.Talk
+	this.flags["rotRExp"] = 0;
+	this.flags["rotRSex"] = 0;
 	this.burrowsCountdown = new Time();
 	
 	if(storage) this.FromStorage(storage);
@@ -38,7 +40,8 @@ Ophelia.Met = {
 Ophelia.Talk = {
 	Herself : 1,
 	Sex     : 2,
-	Vena    : 4
+	Vena    : 4,
+	Roa     : 8
 };
 
 Ophelia.prototype.FromStorage = function(storage) {
@@ -638,19 +641,290 @@ Scenes.Ophelia.TalkPrompt = function() {
 	if(burrows.flags["Access"] == Burrows.AccessFlags.Stage3) {
 		options.push({ nameStr : "Roa",
 			func : function() {
-				Text.Clear();
-				Text.Add("<i>“My little brother is not a well versed adventurer like you. I fear he may have fallen prey to some horrible monster, perhaps a bloodthirsty fox, or even a ferret...”</i> The alchemist shudders. <i>“If he made it, he is hiding somewhere that my father’s soldiers cannot enter, like the big city or the deep forest.”</i>", parse);
-				Text.NL();
-				Text.Add("<i>“I wonder where he is… He could never stand being away from the breeding pit for long. I hope that he has found some nice friends to breed with.”</i> She sighs dejectedly.", parse);
-				Text.NL();
-				Text.Add("Sounds like the most likely place to find the estranged rabbit would be a whorehouse. Or the belly of some monster.", parse);
-				Text.Flush();
-				Scenes.Ophelia.LabPrompt();
+				Scenes.Ophelia.TalkRoa();
 			}, enabled : true,
-			tooltip : "Ask Ophelia for clues on Roa’s whereabouts."
+			tooltip : burrows.flags["Access"] >= Burrows.AccessFlags.Stage4 ? "Talk to Ophelia about Roa." : "Ask Ophelia for clues on Roa’s whereabouts."
 		});
 	}
 	Gui.SetButtonsFromList(options, true, Scenes.Ophelia.LabPrompt);
+}
+
+// TODO
+Scenes.Ophelia.TalkRoa = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	if(burrows.flags["Access"] < Burrows.AccessFlags.Stage4) {
+		Text.Add("<i>“My little brother is not a well versed adventurer like you. I fear he may have fallen prey to some horrible monster, perhaps a bloodthirsty fox, or even a ferret...”</i> The alchemist shudders. <i>“If he made it, he is hiding somewhere that my father’s soldiers cannot enter, like the big city or the deep forest.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“I wonder where he is… He could never stand being away from the breeding pit for long. I hope that he has found some nice friends to breed with.”</i> She sighs dejectedly.", parse);
+		Text.NL();
+		Text.Add("Sounds like the most likely place to find the estranged rabbit would be a whorehouse. Or the belly of some monster.", parse);
+		Text.Flush();
+		Scenes.Ophelia.LabPrompt();
+	}
+	else {
+		var first = !(ophelia.flags["Talk"] & Ophelia.Talk.Roa);
+		if(first) {
+			Text.Add("<i>“You’ve found my brother? It’s great to know he’s safe, but tell me? How is he?”</i> she asks enthusiastically, grasping your arm.", parse);
+			Text.NL();
+			Text.Add("Roa’s just fine, you assure her. You explain that he’s found himself the perfect safe haven for a bunny like him; he’s a whore at the Shadow Lady brothel in Rigard.", parse);
+			Text.NL();
+			Text.Add("<i>“I see. But if you don’t mind me asking, what’s a brothel? And what’s a whore?”</i>", parse);
+			Text.NL();
+			Text.Add("Oh, yes, you had forgotten that Ophelia doesn’t really know anything about society beyond her burrows. She talks so eloquently compared to her siblings that you tend to assume she knows more than she does.", parse);
+			Text.NL();
+			Text.Add("After a few moments thought, you explain to Ophelia that a whore is someone who offers sex to people in exchange for them paying him or her back in various ways. And that a brothel is a place where whores live and wait for people to come and have sex with them.", parse);
+			Text.NL();
+			Text.Add("You know this is a rather drastic simplification, but it probably isn’t a good idea to bring up the whole monetary system thing. That would just complicate matters more.", parse);
+			Text.NL();
+			parse["l"] = burrows.LagonDefeated() ? "" : ", if father allows";
+			Text.Add("<i>“That sounds like a nice job for a rabbit. And I would love to visit a brothel sometime[l],”</i> Ophelia muses, her eyes distant as she tries to picture what it would be like. <i>“Brother Roa must be happy then. He could never stay away from the Pit for long, even before I experimented on him.”</i>", parse);
+			Text.NL();
+			Text.Add("It’s the sort of job that rabbits have an affinity for, you agree. You have little doubt she’d enjoy a visit, too. But, what’s this about her experimenting on Roa? Did she try out some sort of libido booster on him or something?", parse);
+		}
+		else {
+			Text.Add("<i>“I think you’re better off talking to him directly. But I can share a thing or two if you want. What do you want to hear about?”</i>", parse);
+			Text.NL();
+			Text.Add("You’d like her to tell you about her and Roa’s childhood together, and about the experiments she performed on him.", parse);
+			Text.NL();
+			Text.Add("<i>“Well, if you want to hear about that again...”</i>", parse);
+		}
+		Text.NL();
+		Text.Add("Ophelia walks over to her workbench, sifting through her things. Finally, she pulls out a bundle of parchment filled with messily scribbled notes. It looks rather old.", parse);
+		Text.NL();
+		Text.Add("<i>“Brother was the first who volunteered to work with me,”</i> she explains, wistfully flipping through the pages. <i>“I couldn’t write as well back then, but this journal details my findings.”</i> The alchemist taps her cheek thoughtfully. <i>“Roa was different than my more recent subjects; perhaps it’s due to natural resistance, perhaps to the sheer amount of alchemical mixtures I poured into him, but for whatever reason, the transformations would never stick very long on him. This made him a perfect subject for repeated tests.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Of course, since I was just starting out, many of my potions didn’t do very much. As I began learning more things though, I had quite a fun time thinking up new ways to play with his body.”</i> She flashes you a naughty grin.", parse);
+		if(first) {
+			Text.NL();
+			Text.Add("Oh? Does that mean she… became intimate with him?", parse);
+			Text.NL();
+			Text.Add("<i>“Of course! He was my favorite brother, so why not? Besides, I had to test out the changes, didn’t I?”</i> You suppose that makes a weird kind of sense, thinking like a lagomorph.", parse);
+			Text.NL();
+			Text.Add("<i>“Roa always spent a lot of time in the Pit - he was quite popular there too.”</i> She cocks her head thoughtfully. <i>“He gets enough attention at this brothel, right? He’d always get fidgety if I kept him pent up for too long.”</i> She sighs. <i>“I regret a little that I lacked the parts to fully give him what he wanted; he was always nice with me, but I could tell he preferred to be the one getting taken.”</i>", parse);
+		}
+		Text.Flush();
+		
+		//[Experiments][Sex]
+		var options = new Array();
+		options.push({ nameStr : "Experiments",
+			func : function() {
+				Text.Clear();
+				
+				var scenes = [];
+				
+				scenes.push(function() {
+					Text.Add("<i>“At first, I just mixed things together at random, just to see what I could get. A lot of my experiments didn’t do very much, some just had Roa complaining about the taste. Thankfully, he has an iron stomach.”</i> Ophelia smiles fondly at the memory, flipping through the pages of her old journal. <i>“We kept at it though, and I gradually started to understand the workings of alchemy, and how to decipher the recipes brought in from outside.”</i>", parse);
+					Text.NL();
+					Text.Add("What was her first successful experiment?", parse);
+					Text.NL();
+					if(ophelia.Relation() < 30) {
+						Text.Add("<i>“I… It was somewhat of a dare, not really something I’m proud of,”</i> Ophelia mutters, blushing. <i>“I’d really rather not talk about it. Suffice to say that I finally managed to get a lasting effect on Roa, though not the one I wanted. Thankfully, he reverted to his old self after a day.”</i>", parse);
+					}
+					else {
+						Text.Add("<i>“It… ah, how to put this,”</i> Ophelia blushes, biting her lip. <i>“I was a lot younger back then, and fell for the teasing of some of my stupid sisters. They were bullying me over never succeeding with my alchemy, and rather hanging out with Roa than with the cool kids - that’d be them. They teased that he was weak and girly, and wouldn’t stand a chance against <b>their</b> boyfriends.”</i>", parse);
+						Text.NL();
+						Text.Add("The alchemist shakes her head. <i>“I don’t really blame them; they were just being kids and I did something stupid and selfish. Angry at them and at the world in general, I tried to mix together something that would show them; something that would make Roa big and strong, a real stud.”</i>", parse);
+						Text.NL();
+						Text.Add("<i>“In short, it backfired. I lacked the proper ingredients for the recipe, so the effects were something entirely different, but it <b>did</b> work.”</i> Finding the correct page, she reads from the journal.", parse);
+						Text.NL();
+						Text.Add("<i>“Roa, experiment nr.84: Studmuffin. Goal: make Larissa shut up. Prepared the ingredients according to recipe - missing cactoids, tried beetles instead. Mixture should take on a teal color, not sure what that is. I think pink is close? Fed the potion to subject, no immediate reaction. Says it tasted like strawberry. Success! Kinda. Subject is experiencing changes to body. Becoming softer and rounder - perhaps it swells up and becomes more defined later? Subject breasts swelling, hips widening. I think something has gone wrong. Subject acting strange. The others should be coming soon...”</i> Ophelia chuckles, shaking her head as she returns the page to the binder.", parse);
+						Text.NL();
+						Text.Add("<i>“I’d invited Larissa and her friends over to meet ‘my new boyfriend’, and I guess they told some of my brothers too. They were going over there to pick on the nerd, but when they got there they found me desperately trying to fend of a hyper-aroused Roa with tits the size of my head.”</i> She smirks. <i>“First thing that happened he threw himself on the poor boys, who were eager to help him out with his itch. Larissa was furious.”</i>", parse);
+						Text.NL();
+						Text.Add("The alchemist shakes her head. <i>“It didn’t exactly pan out the way I had planned, but I guess the end goal was achieved. Roa went back to his usual self a day later, and I apologized profusely for using him in my little plot for vengeance.”</i>", parse);
+					}
+					Text.NL();
+					Text.Add("<i>“Anyways,”</i> she hurries on, <i>“once I could read the texts properly, I progressed a lot faster, and the concoctions became much... safer.”</i>", parse);
+				});
+				scenes.push(function() {
+					Text.Add("<i>“At first, I thought that Roa’s resistance to transformations was due to my mixtures not being potent enough, but they seemed to be working just fine on my other siblings. Well, mostly fine. It’s just that whatever I fed him, it seemed to revert within a day or two.”</i>", parse);
+					Text.NL();
+					Text.Add("Does she know why this happened?", parse);
+					Text.NL();
+					Text.Add("<i>“No, I’m not quite sure. It could be something in his blood, but then again, I’ve never seen anything like it in any of our siblings, and we share the same blood.”</i> Ophelia gestures toward the journal containing her experiments on Roa. <i>“I had quite a few unsuccessful experiments before I got the hang of it. I’m guessing that maybe something clicked within his body with all this stuff I poured into him.”</i> She flips through the earlier pages, squinting at her bad handwriting. <i>“There’s no telling what might have triggered it, there’s so much stuff here, and a lot of it I didn’t even know what it was at the time.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Here, for example,”</i> she reads from the journal: ", parse);
+					
+					var scenes = new EncounterTable();
+					scenes.AddEnc(function() {
+						Text.Add("<i>“Roa, experiment nr.23: Green stuff. Goal: test herbs found outside. Prepared plants, tried making salad. No effect on subject. Tried grinding and mixing with liquids. Result: gruel. No effect on subject, icky texture. Found strange weed with purple flowers. Subject fell asleep. Cancelling trials.”</i>", parse);
+					}, 1.0, function() { return true; });
+					scenes.AddEnc(function() {
+						Text.Add("<i>“Roa, experiment nr.38: ???. Goal: Bored. Found some goop in bottles behind bench. Maybe from experiment nr.12? Time changed it somehow? No effect on subject. Smells a little. Stupid Larissa came along. Cancelling trials.”</i>", parse);
+					}, 1.0, function() { return true; });
+					scenes.AddEnc(function() {
+						Text.Add("<i>“Roa, experiment nr.57: Liquids. Goal: test properties of semen. Notes suggest seminal fluid from some creatures have transformative elements. Might need preparation. Asked subject for help. Enthusiastic.”</i> You peek over her shoulder, noticing a stain on the page. <i>“Tested mixing with samples M, P and Q. No effect on subject. Tried harvesting from captured equine male. Results messy. Tested mixing with sample E and L. No effect on subject.”</i> Further down, there is a quick scribble saying: <i>“Subject distracted. Cancelling trials.”</i>", parse);
+					}, 1.0, function() { return true; });
+					
+					scenes.Get();
+					
+					Text.Add(" Ophelia shakes her head. <i>“I have no clue what half of that stuff was.”</i>", parse);
+					Text.NL();
+					Text.Add("You can imagine that having a test subject that you could perform repeated experiments on without lasting effects would be very useful for an aspiring scientist.", parse);
+					Text.NL();
+					Text.Add("<i>“It was! Only lasting effect I ever got from him was that his fur seemed to grow steadily pinker over time… Things became more difficult after he left.”</i> She trails off, hanging her head. ", parse);
+					if(ophelia.Relation() < 30)
+						Text.Add("You wait for her to continue, but she doesn’t follow up on the thought.", parse);
+					else
+						Text.Add("<i>“I kind of lost my drive for a while... daddy gave me other volunteers, but it just wasn’t the same. More than a test subject, Roa was my friend.”</i>", parse);
+				});
+				scenes.push(function() {
+					Text.Add("<i>“After a while, I developed a feel for what would work with what, and how certain ingredients could be processed and what their uses were. The texts gathered from outside were a big help, but they have large holes in their explanations; basic stuff they just assume you understand.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Once I had more confidence in my skills, I could begin to systematically research different fields, even try to develop my own mixtures based on my observations.”</i>", parse);
+					if(rosalin.flags["Met"] != 0)
+						Text.Add(" It strikes you that Ophelia’s methods are similar to those of Rosalin. Well, more structured, perhaps. Certainly less fuelled by insanity. Rosalin had the advantage of an education, while the lagomorph has based her alchemy almost entirely on trial and error.", parse);
+					Text.NL();
+					Text.Add("<i>“Let’s see, let me find some examples,”</i> the alchemist muses, flipping through her journal.", parse);
+					Text.NL();
+					
+					var scenes = new EncounterTable();
+					scenes.AddEnc(function() {
+						Text.Add("<i>“Roa, experiment nr.213: Minotaur. Goal: study the effects of ingredients salvaged from bull-morphs. I’ve made earlier experiments focused on strengthening the body - see nr.84 (failed), nr.118, nr.162-165 - and I think that ingredients gathered from the minotaur could prove useful in this endeavour. Previous experiments suggest that hooves, horns, fur and semen and blood could be tested. Unable to find live specimen, but gatherers have brought back what seems to be a broken horn from a bull.”</i>", parse);
+						Text.NL();
+						Text.Add("<i>“Ground up sample, put in marked jar. Tested mixing substance with rosemary and dried cloves. Together with a sample from experiment nr.164, the effects were increased. Subject experienced expanded muscle mass in torso and leg areas. Effect further enhanced by adding two measures of milk. Side effects: noticed growth of small horns, enlarging of the penis and testes. Further experiments put on hold until subject has calmed down.”</i>", parse);
+					}, 1.0, function() { return true; });
+					scenes.AddEnc(function() {
+						Text.Add("<i>“Roa, experiment nr.291: Lizan scales. Goal: study preparation of lizan scales. Previous experiments suggest that lizan scales can be used effectively in a number of ways - see nr.241-246 - but recent findings with fish scales suggest that putting them in oil and distilling the solution could prove successful.”</i>", parse);
+						Text.NL();
+						Text.Add("<i>“Several samples prepared and put in different liquids. Only oil seems to have any sort of effect in extraction, but timing is extremely important. Letting it sit too long spoils the sample. Tried mixing resulting salve into previous recipes with known effects, but with no obvious success. Thought for future experiment: study effects on a different subject over a longer period of time. Perhaps use female subject.”</i>", parse);
+					}, 1.0, function() { return true; });
+					scenes.AddEnc(function() {
+						Text.Add("<i>“Roa, experiment nr.329: Dryad vine. Goal: study effects of plant matter. The gatherers found a real treasure today, the plant-like hair tentacle from what is presumably a dryad. Very rare ingredient! Sample seems to still be alive, have planted it in a pot. Responds positively to water, but seems to be wilting. Will try to move it outside and plant in sunlight.”</i>", parse);
+						Text.NL();
+						Text.Add("<i>“Rubbing the sample gives of a thick sap, which has strong transformative properties. Mixing it with the suggested ingredients - see scroll on animated vegetation - resulted in the subject’s tongue and penis changing into long prehensile vines. Harvested more of the sap from subject for later use. Scroll also suggests that flowers blooming from the vines have interesting properties, experiments will have to wait until a larger sample has been grown.”</i>", parse);
+					}, 1.0, function() { return true; });
+					
+					scenes.Get();
+					
+					Text.NL();
+					Text.Add("You note that her writing seems to get better and more descriptive over time. <i>“Thanks, it’s a learning process,”</i> she says, returning the page to the binder.", parse);
+				});
+				scenes.push(function() {
+					Text.Add("What’s the most interesting transformation that she’s been able to get from Roa?", parse);
+					Text.NL();
+					Text.Add("<i>“There were some that were… fun, but worrying. If it had been another bunny, I don’t know what the long term effects would have been. Some alchemical compounds seem to affect the mind in addition to the body.”</i> Ophelia sighs, slumping her shoulders. <i>“Some of them, I wish I never tested.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“A certain mixture will push the sexual urges of the one who takes it to the extreme; so much that all other thoughts and desires fade. The problem is that so far, I haven’t found any way to reverse the process. Roa was thankfully fine due to his resistance; I had to put him in the Pit for several days, but eventually he returned to normal.”</i>", parse);
+					Text.NL();
+					if(burrows.VenaRestored()) {
+						Text.Add("<i>“When father fed the same potion to mother… she was not so lucky. Thankfully, you were able to find the scepter and bring her back.”</i>", parse);
+						Text.NL();
+						Text.Add("Is she angry at Roa for taking the scepter in the first place?", parse);
+						Text.NL();
+						Text.Add("Ophelia shakes her head. <i>“If he hadn’t, I don’t think I’d ever been able to get hold of it myself; father or one of his guards was always near the treasure-trove.”</i>", parse);
+					}
+					else {
+						Text.Add("<i>“When father fed the same potion to mother… she was not so lucky.”</i> The alchemist hugs herself. <i>“Sorry, could we talk about something else?”</i>", parse);
+					}
+				}, 1.0, function() { return ophelia.Relation() >= 40; });
+				
+				var sceneId = ophelia.flags["rotRExp"];
+				if(sceneId >= scenes.length) sceneId = 0;
+				
+				ophelia.flags["rotRExp"] = sceneId + 1;
+				
+				// Play scene
+				scenes[sceneId]();
+				
+				Text.NL();
+				Text.Add("You thank her for her story.", parse);
+				Text.Flush();
+			}, enabled : true,
+			tooltip : "Ask about the experiments that she performed on Roa."
+		});
+		options.push({ nameStr : "Sex",
+			func : function() {
+				Text.Clear();
+				
+				var scenes = [];
+				
+				scenes.push(function() {
+					Text.Add("Just why is he so horny all the time?", parse);
+					Text.NL();
+					Text.Add("<i>“What do you mean?”</i> Ophelia asks, cocking her head to the side.", parse);
+					Text.NL();
+					Text.Add("Well, from what you gather, he craves sex constantly, right?", parse);
+					Text.NL();
+					Text.Add("<i>“Doesn’t everyone?”</i> She looks puzzled. <i>“Sure, he spent a lot of time in the Pit, but so do almost all of my brothers and sisters. I feel the same urges, but I try to not let it get in the way of my research.”</i>", parse);
+					Text.NL();
+					Text.Add("Well, from that the brothel sounds like a perfect place for him.", parse);
+					Text.NL();
+					Text.Add("<i>“I’m glad that brother has found somewhere to call home outside!”</i> the alchemist says cheerfully. <i>“Was there something else you wanted to ask?”</i>", parse);
+				}, 1.0, function() { return true; });
+				scenes.push(function() {
+					Text.Add("Who was Roa’s favorite partner? And how did he prefer to have sex?", parse);
+					Text.NL();
+					if(roa.flags["Met"] >= Roa.Met.Sexed)
+						Text.Add("<i>“You’ve been with him, and you couldn’t tell? Guess you aren’t as sharp as I thought, [playername],”</i> Ophelia replies smugly. ", parse);
+					Text.Add("<i>“When he has the urge, brother will have sex with anyone in order to get release. He very much prefers being fucked over fucking, though, and the bigger the better.”</i> The alchemist adjusts her glasses, peering at you. <i>“Sadly, that meant I couldn’t always satisfy him, but being with him was still nice. I found some ways, but I couldn’t compare to a thick, juicy cock.”</i>", parse);
+					Text.NL();
+					Text.Add("What ways would that be?", parse);
+					Text.NL();
+					Text.Add("<i>“Oh, I’d work him with my fingers or my tongue. He’d yelp in the cutest way.”</i> Ophelia smiles fondly. <i>“I’d also sometimes ask another one of my brothers to fuck him while he fucked me. He liked that.”</i>", parse);
+					Text.NL();
+					Text.Add("How about when he visited the Pit?", parse);
+					Text.NL();
+					Text.Add("<i>“Oh, he was quite popular. With that pink fur he’s very cute, you know. Every now and then, father would take him. Dad’s huge, and he can be very rough, but Roa told me he didn’t mind.”</i>", parse);
+				}, 1.0, function() { return true; });
+				scenes.push(function() {
+					Text.Add("What’d Roa make of this new brute strain that Ophelia’s experiments have given rise to? Those giants sound like something that’d be right up his alley.", parse);
+					Text.NL();
+					Text.Add("<i>“Certainly,”</i> she nods. <i>“A cock that size’d keep him happy for hours on end. I’m sure he’d appreciate their stamina as well.”</i>", parse);
+					Text.NL();
+					Text.Add("Could he really take someone that big?", parse);
+					Text.NL();
+					Text.Add("<i>“I’ve seen him take dad; they’re not much bigger than him.”</i>", parse);
+				}, 1.0, function() { return true; });
+				scenes.push(function() {
+					Text.Add("How about the recent surge of hermaphrodites in the burrows, what’d Roa make of that?", parse);
+					Text.NL();
+					Text.Add("<i>“Might make him a bit more interested in girls, that’s for sure,”</i> Ophelia grins fondly. <i>“Don’t get me wrong; he was before, but with that extra piece of equipment he’d be completely infatuated.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“I’m sure my sisters would have a fun time with him too.”</i>", parse);
+				}, 1.0, function() { return true; });
+				scenes.push(function() {
+					Text.Add("<i>“So… um, you’ve fucked my brother, haven’t you?”</i> She peers at you inquisitorially.", parse);
+					Text.NL();
+					Text.Add("...You have, you confirm.", parse);
+					Text.NL();
+					if(ophelia.flags["Talk"] & Ophelia.Talk.Sex) {
+						if(player.sexlevel > 3)
+							Text.Add("<i>“I’m sure he was as satisfied as I was,”</i> Ophelia nods to herself confidently.", parse);
+						else
+							Text.Add("<i>“I hope you enjoyed yourselves,”</i> Ophelia nods to herself.", parse);
+						Text.Add(" <i>“And?”</i> she grins, her eyes twinkling behind her glasses. <i>“Which one of us did you prefer?”</i>", parse);
+						Text.NL();
+						Text.Add("That’s a bit unfair…", parse);
+						Text.NL();
+						Text.Add("<i>“Don’t worry,”</i> she giggles, <i>“I’m just teasing. You outsiders have such strange conceptions about sex.”</i>", parse);
+					}
+					else {
+						Text.Add("<i>“I do hope you satisfied him, [playername],”</i> Ophelia studies you curiously.", parse);
+						Text.NL();
+						Text.Add("What, she doesn’t believe that you’re able?", parse);
+						Text.NL();
+						Text.Add("<i>“Now now, I’m a scientist, you know,”</i> she admonishes you. <i>“I back my observations with empirical data. It just so happens I don’t have any on you… yet.”</i>", parse);
+					}
+				}, 1.0, function() { return roa.flags["Met"] >= Roa.Met.Sexed; });
+				
+				var sceneId = ophelia.flags["rotRSex"];
+				if(sceneId >= scenes.length) sceneId = 0;
+				
+				ophelia.flags["rotRSex"] = sceneId + 1;
+				// Play scene
+				scenes[sceneId]();
+				
+				Text.Flush();
+			}, enabled : true,
+			tooltip : "Ask about Roa’s attitude to sex, and his uncanny libido."
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
 }
 
 Scenes.Ophelia.TalkVena = function() {
