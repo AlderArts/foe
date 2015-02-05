@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 3;
-VERSION_SUBSCRIPT = "u";
-VERSION_NAME = "Tweaking";
+VERSION_SUBSCRIPT = "v";
+VERSION_NAME = "Ophelia";
 
 SAVE_VERSION = 21;
 // Save version 1: Initial
