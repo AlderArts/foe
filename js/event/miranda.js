@@ -229,13 +229,13 @@ Scenes.Miranda.BarracksApproach = function() {
 	
 	Text.Clear();
 	if(miranda.Attitude() >= Miranda.Attitude.Neutral)
-		Text.Add("<i>”Hey there, [playername]. What gives us the honor?”</i> the dobie greets you as you approach.", parse);
+		Text.Add("<i>“Hey there, [playername]. What gives us the honor?”</i> the dobie greets you as you approach.", parse);
 	else
-		Text.Add("<i>”Oh. You. Why’re you here?”</i> The dobie frowns a bit at you showing up. <i>”Don’t loiter. I might be tempted to give you a night in the cells, and you wouldn’t like that.”</i>", parse);
+		Text.Add("<i>“Oh. You. Why’re you here?”</i> The dobie frowns a bit at you showing up. <i>“Don’t loiter. I might be tempted to give you a night in the cells, and you wouldn’t like that.”</i>", parse);
 	
 	if(miranda.flags["Met"] < Miranda.Met.Tavern) {
 		Text.NL();
-		Text.Add("<i>”Say, how about you come by the Maidens’ Bane some time? Take a few drinks together in a more relaxed place? Just meet up with me there after work. As you can see, I’m a bit busy now.”</i>", parse);
+		Text.Add("<i>“Say, how about you come by the Maidens’ Bane some time? Take a few drinks together in a more relaxed place? Just meet up with me there after work. As you can see, I’m a bit busy now.”</i>", parse);
 		Text.NL();
 		Text.Add("...From the looks of it, you’d guess she was already in a tavern, letting loose.", parse);
 	}
@@ -273,13 +273,13 @@ Scenes.Miranda.BarracksPrompt = function() {
 		func : function() {
 			Text.Clear();
 			if(miranda.Attitude() >= Miranda.Attitude.Neutral)
-				Text.Add("<i>”Hah, think you have a shot at beating me, [playername]? I’m not gonna play nice just cause I like you,”</i> Miranda replies, winking. <i>”I could use the workout. Well then, shall we?”</i>", parse);
+				Text.Add("<i>“Hah, think you have a shot at beating me, [playername]? I’m not gonna play nice just cause I like you,”</i> Miranda replies, winking. <i>“I could use the workout. Well then, shall we?”</i>", parse);
 			else
-				Text.Add("<i>”Sure, I’ll fight you,”</i> Miranda replies, and evil glint in her eye. <i>”Can’t promise I won’t take advantage of your sorry ass once I’ve pounded it into the dirt, though.”</i>", parse);
+				Text.Add("<i>“Sure, I’ll fight you,”</i> Miranda replies, and evil glint in her eye. <i>“Can’t promise I won’t take advantage of your sorry ass once I’ve pounded it into the dirt, though.”</i>", parse);
 			Text.NL();
 			Text.Add("You follow behind the guardswoman as she heads out into the training yard, hips swaying.", parse);
 			Text.NL();
-			Text.Add("<i>”Don’t cry once I beat you up.”</i> Miranda grabs a practice sword from a weapon stand; more a log than a sword, from the size of it. She turns to face you, ready to fight. <i>”Do your best to entertain me!”</i>", parse);
+			Text.Add("<i>“Don’t cry once I beat you up.”</i> Miranda grabs a practice sword from a weapon stand; more a log than a sword, from the size of it. She turns to face you, ready to fight. <i>“Do your best to entertain me!”</i>", parse);
 			Text.Flush();
 			
 			miranda.RestFull();
@@ -327,7 +327,7 @@ Scenes.Miranda.SparLoss = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("<i>”Not a surprising conclusion,”</i> Miranda boasts, wiping the sweat off her brow. <i>”Now… to the victor goes the spoils, no?”</i> A smile is playing on her lips as she awaits your response.", parse);
+	Text.Add("<i>“Not a surprising conclusion,”</i> Miranda boasts, wiping the sweat off her brow. <i>“Now… to the victor goes the spoils, no?”</i> A smile is playing on her lips as she awaits your response.", parse);
 	Text.Flush();
 	
 	miranda.subDom.IncreaseStat(75, 3);
@@ -349,7 +349,7 @@ Scenes.Miranda.SparWin = function() {
 	Text.Clear();
 	Text.Add("Miranda looks baffled as she falls to her knees, breathing heavily.", parse);
 	Text.NL();
-	Text.Add("<i>”N-not bad,”</i> the dobie gasps, struggling back to her feet. <i>”Guess I underestimated you. I’ll have to get serious next time.”</i> She tries to play it down, but both of you know that you beat her fair and square.", parse);
+	Text.Add("<i>“N-not bad,”</i> the dobie gasps, struggling back to her feet. <i>“Guess I underestimated you. I’ll have to get serious next time.”</i> She tries to play it down, but both of you know that you beat her fair and square.", parse);
 	Text.NL();
 	Text.Add("Now, you’ve half a mind to take advantage of this situation...", parse);
 	Text.Flush();
@@ -1740,9 +1740,17 @@ Scenes.Miranda.BarChatOptions = function(options, back) {
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
 				Text.Add("<i>“Watch your back if you head to the mountains,”</i> Miranda warns you, <i>“I've heard that there are bandits hiding out somewhere there, and it is very close to the boneyard, and that place you should <b>really</b> avoid.”</i>", parse);
-				Text.NL();
 			}, 1.0, function() { return true; });
-			
+			scenes.AddEnc(function() {
+				Text.Add("<i>“There’s been a rather odd rumor going around lately,”</i> Miranda tells you. <i>“Apparently, there have been increased sightings of rabbits roaming the countryside. Don’t look at me like that, I’m not making this shit up!”</i> The dog-morph gives you a light punch on the shoulder.", parse);
+				Text.NL();
+				Text.Add("<i>“They walk on two legs, though they are still pretty small. There have been reports of them attacking in large packs, stealing stuff from unwary travelers. Perhaps they are also involved with the recent disappearances.”</i>", parse);
+				Text.NL();
+				Text.Add("You ask her if she’s ever seen one.", parse);
+				Text.NL();
+				Text.Add("<i>“Yeah, they are pretty common critters, I saw them running around occasionally when I worked as a merc, before I joined the watch. Usually kept to themselves, living in holes underground. They are dumb as doorposts, not interested in anything but eating and fucking all day long, which makes those reports even stranger.”</i> She grins at you playfully. <i>“Wouldn’t that be the life, eh?”</i>", parse);
+			}, 1.0, function() { return !burrows.Access(); });
+
 			scenes.Get();
 			Text.Flush();
 			
@@ -5678,11 +5686,11 @@ Scenes.Miranda.HomeSubbySexDommyRide = function(location, Loc) {
 	
 	Text.Clear();
 	if(nasty) {
-		Text.Add("<i>”What the fuck makes you think that you have earned that privilege?”</i> Miranda laughs mockingly, rejecting your suggestion. <i>”I’m the one doing the fucking; you’re the one staggering home bowlegged.”</i>", parse);
+		Text.Add("<i>“What the fuck makes you think that you have earned that privilege?”</i> Miranda laughs mockingly, rejecting your suggestion. <i>“I’m the one doing the fucking; you’re the one staggering home bowlegged.”</i>", parse);
 		Text.Flush();
 		return;
 	}
-	Text.Add("<i>”Taking airs, aren’t we? I don’t think I’ve trained you well enough yet…”</i> She taps her chin thoughtfully, her other hand resting on her generous hip. <i>”Not that I don’t like being on the receiving end once in a while… but <b>I’m</b> going to be the one in charge. You just… lie down and take it.”</i>", parse);
+	Text.Add("<i>“Taking airs, aren’t we? I don’t think I’ve trained you well enough yet…”</i> She taps her chin thoughtfully, her other hand resting on her generous hip. <i>“Not that I don’t like being on the receiving end once in a while… but <b>I’m</b> going to be the one in charge. You just… lie down and take it.”</i>", parse);
 	Text.NL();
 	Text.Add("Well… perhaps not what you were after, but it looks like this is all you’re going to get for the moment. Miranda pushes you down on [loc2], seating herself on your [breasts], facing away from you. ", parse);
 	
