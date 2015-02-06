@@ -352,6 +352,15 @@ CacheToGame = function() {
 			rosalin.body.vagina[0].capacity.base = 5;
 		rosalin.body.ass.capacity.base = 4;
 	}
+	if(gameCache.version < 22) {
+		var vag = terry.flags["vag"];
+		if(vag != Terry.Pussy.None) {
+			terry.body.vagina = [];
+			terry.body.vagina.push(new Vagina());
+			if(vag == Terry.Pussy.Used)
+				terry.FirstVag().virgin = false;
+		}
+	}
 }
 
 GameToCache = function() {

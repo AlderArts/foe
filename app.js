@@ -9,7 +9,7 @@ VERSION_MINOR = 3;
 VERSION_SUBSCRIPT = "v";
 VERSION_NAME = "Ophelia";
 
-SAVE_VERSION = 21;
+SAVE_VERSION = 22;
 // Save version 1: Initial
 // Save version 2: Added inventory
 // Save version 3: Fixed clitcock restoration + height, weigth
@@ -31,6 +31,7 @@ SAVE_VERSION = 21;
 // Save version 19: Terry & Miranda exp to level fix
 // Save version 20: Boss drops
 // Save version 21: Capacity rewrite
+// Save version 22: Terry save format
 
 
 VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + VERSION_SUBSCRIPT + ": " + VERSION_NAME;
