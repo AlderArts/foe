@@ -87,9 +87,8 @@ Burrows.prototype.LagonChained = function() {
 Burrows.prototype.LagonPit = function() {
 	return false;
 }
-//TODO
 Burrows.prototype.VenaRestored = function() {
-	return false;
+	return vena.flags["Met"] & Vena.Met.Restored;
 }
 
 Burrows.prototype.ToStorage = function() {

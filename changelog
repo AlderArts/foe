@@ -5,13 +5,17 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
-Version 0.3v2
--------------
-* Fixed a bug in Terry save format
+Version 0.3w
+------------
+* Vena restoration added. You need to find the scepter and bring it to Ophelia. If you've already defeated Lagon, the scene should still trigger.
 
 --------------------------------------------
              PREVIOUS VERSIONS
 --------------------------------------------
+
+Version 0.3v2
+-------------
+* Fixed a bug in Terry save format
 
 Version 0.3v
 ------------

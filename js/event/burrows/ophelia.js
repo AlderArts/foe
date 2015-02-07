@@ -1421,6 +1421,22 @@ Scenes.Ophelia.LabPrompt = function() {
 		}, enabled : true,
 		tooltip : "Ask if Ophelia’s interested in have sex with you."
 	});
+	if(burrows.flags["Access"] < Burrows.AccessFlags.QuestlineComplete && party.Inv().QueryNum(Items.Quest.Scepter))
+	options.push({ nameStr : "Scepter",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“You brought it?”</i> Ophelia drops what she’s working with, throwing herself into your arms. <i>“Thank you!”</i> Tears are streaming down her cheeks. <i>“You don’t know how much this means to me. Trying to take care of things here alone has been so difficult...”</i> You comfort her as best you can, then hand over the scepter.", parse);
+			Text.NL();
+			Text.Add("<i>“Let me find it...”</i> the bunny scrambles through her notes, retrieving the scroll that details the workings of the scepter. You look over her shoulder as she studies it. The scroll makes no mention of the scepter itself, but describes the gemstone in quite a lot of detail.", parse);
+			Text.NL();
+			Text.Add("<i>“You found it without any problems? What about my brother?”</i> Her eyes grow larger and larger as you describe your adventures to retrieve the scepter.", parse);
+			Text.NL();
+			Text.Add("The alchemist motions for you to follow, studying the rod as the two of you head toward the Pit. The queen’s guards silently fold in around you, staying close to their interim matriarch.", parse);
+			Text.NL();
+			Scenes.Vena.RestoreEntrypoint(false);
+		}, enabled : true,
+		tooltip : "Give Ophelia the scepter."
+	});
 	//TODO
 	/*
 	options.push({ nameStr : "name",
@@ -1433,6 +1449,7 @@ Scenes.Ophelia.LabPrompt = function() {
 		tooltip : ""
 	});
 	*/
+	
 	Gui.SetButtonsFromList(options, true);
 }
 
@@ -2036,6 +2053,9 @@ Scenes.Ophelia.Reward = function() {
 			func : function() {
 				Text.Clear();
 				Scenes.Ophelia.fuckedByVena = true;
+				
+				vena.flags["Sex"] |= Vena.Sex.FuckedBy;
+				vena.flags["Sex"] |= Vena.Sex.Forced;
 				
 				parse["himher"] = player.mfTrue("him", "her");
 				Text.Add("You shout for her to wait, to take you instead, tearing off your gear quickly. Vena’s clouded gaze flits between you and her daughter in confusion, torn between the initial target of her lust and the new, willing slut presenting [himher]self. After a brief moment of indecision, she jumps you, nearly crushing you with her weight.", parse);
