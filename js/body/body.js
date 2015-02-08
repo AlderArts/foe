@@ -961,6 +961,34 @@ Body.prototype.HasLongSnout = function() {
 	}
 }
 
+Body.prototype.HasNightvision = function() {
+	switch(this.head.eyes.race) {
+		case Race.dragon:
+		case Race.demon:
+		case Race.wolf:
+		case Race.fox:
+		case Race.cat:
+		return true;
+		
+		case Race.horse:
+		case Race.cow:
+		case Race.lizard:
+		case Race.snake:
+		case Race.goat:
+		case Race.sheep:
+		case Race.satyr:
+		case Race.elf:
+		case Race.dryad:
+		case Race.rabbit:
+		case Race.dog:
+		case Race.human:
+		case Race.avian:
+		case Race.ferret:
+		default:
+		return false;
+	}
+}
+
 Body.prototype.SoftFeet = function() {
 	var legs = this.legs;
 	if(!legs || legs.count == 0) return false;

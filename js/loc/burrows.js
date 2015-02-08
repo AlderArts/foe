@@ -115,10 +115,37 @@ world.loc.Burrows.Enterance.description = function() {
 		l : burrows.LagonDefeated() ? "the lagomorph" : "Lagon’s"
 	};
 	
-	Text.Add("Just beyond lies the dark tunnel that leads down into [l] lair. It looks innocent enough on the outside, with a few bunny-morphs hopping around and frolicking, but you know very well what lies underground.", parse);
+	Text.Add("Just beyond lies the dark tunnel that leads down into [l] lair. It looks innocent enough on the outside, with a few bunny-morphs hopping around and frolicking aimlessly, but you know very well what lies underground.", parse);
 	Text.NL();
 	Text.Add("The burrows are located in a group of low hills on the plains, still quite a ways from the forest. [TreeFar]", parse);
 	Text.NL();
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("There is a curious group of rabbits gathered a short distance from the main tunnel. They are carrying what looks like makeshift farming tools, poking at a patch of ground haphazardly. It looks like they are trying to plant carrots.", parse);
+		if(world.time.season == Season.Winter) {
+			Text.NL();
+			Text.Add("You consider telling them that the snow will probably complicate things, but they seem to be having fun.", parse);
+		}
+		Text.NL();
+	}, 1.0, function() { return burrows.BrainyActive(); });
+	scenes.AddEnc(function() {
+		Text.Add("You see a strange structure being put together close by. A pile of scrap material is being stacked in the rough semblance of a house, but with barely enough room for a person to fit in. A short female lagomorph seems to be directing a small workforce in the assembly, gesturing insistently. Nodding to herself, she waves the others off and crawls inside the rickety hovel, smiling triumphantly at this defiance of the elements.", parse);
+		Text.NL();
+		Text.Add("The elements in question have something else to say about the matter though, as a slight breeze causes the structure to wobble unsteadily, before slowly collapsing in on itself, trapping the squealing architect beneath the rubble. Her fellow construction workers mill around uncertainly, apparently unsure if they should be helping her, before pulling away some of the material, freeing her head. She seems to be largely unharmed, although trapped in place.", parse);
+		Text.NL();
+		Text.Add("At her insistent pleading, most of the rubble covering the lagomorph is removed, but a particularly heavy crossbeam is pinning her midsection to the ground. The others make a few half-hearted attempts to pull it aside, but failing that, they shrug and make the best of the situation. Ignoring her muffled protests, three of the male workers set to filling her front and back, quickly reducing the enterprising architect to a moaning slut.", parse);
+		Text.NL();
+	}, 1.0, function() { return burrows.BrainyActive(); });
+	scenes.AddEnc(function() {
+		Text.Add("A group of female lagomorphs are flocking around a bulging brute of a rabbit, at least twice as tall as the regular creatures. He looks almost as wide as he is tall, bulging with muscles, and from the delighted oohs and aahs of the crowd, he is likely sporting quite the third leg. The hulking rabbit is wearing a huge grin and not much else, flexing pompously for his admirers.", parse);
+		Text.NL();
+	}, 1.0, function() { return burrows.BruteActive(); });
+	scenes.AddEnc(function() {
+		Text.Add("There is a small crowd of rabbits gathered close by, hooting and cheering. The focus of their attention is a trio of lagomorphs, panting and grinding against each other. At first you judge them to be female due to their breasts, but all three seems to be sporting rather respectable dicks. One is on her back, cock flopping around freely as she is railed by one of her moaning companions. She, in turn, is getting a good fucking from the third hermaphrodite.", parse);
+		Text.NL();
+	}, 1.0, function() { return burrows.HermActive(); });
+	
+	scenes.Get();
 }
 
 world.loc.Burrows.Enterance.links.push(new Link(
@@ -227,7 +254,7 @@ world.loc.Burrows.Throne.description = function() {
 	Text.NL();
 	if(burrows.LagonDefeated()) {
 		if(burrows.LagonChained())
-			Text.Add("The former king is chained to a nearby wall, wearing a rather sullen expression and little else. He looks to be well treated, but the members of his former harem seem to be avoiding him, perhaps out of fear that he’ll lash out at them.", parse);
+			Text.Add("The former king is locked away nearby in his cell, away from the bustle of the everyday activities of running the lagomorph realm.", parse);
 		else if(burrows.LagonPit())
 			Text.Add("The former king is probably where he usually is; in the depths of the Pit getting his every hole fucked by the endless mob of rabbits. From what you’ve gathered, he doesn’t seem to want to leave, even if he’s free to.", parse);
 	}
@@ -260,9 +287,25 @@ world.loc.Burrows.Pit.description = function() {
 		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon"
 	};
 	
-	Text.Add("The Pit is a place of everlasting depravity; a huge cavern in the lagomorph compound, dwarfing even [Lagon]’s throneroom. Countless bunnies writhe together in the never-ending orgy, seeking to sate their needs among their brothers and sisters. Far below, in the center of the chamber, their seed has coalesced to form a pond of sticky white.", parse);
-	if(!burrows.VenaRestored())
-		Text.Add(" Down there, you know you’ll find Vena, the ever-pregnant lagomorph matriarch.", parse);
+	Text.Add("The Pit is probably the largest cavern in the lagomorph colony, a giant breeding chamber filled with the never-ending grunts and moans of the giant orgy. Several hundred rabbits have joined in the party, with those too tired to go on continually being replaced by new arrivals. The floor tilts towards the center of the chamber, the narrow open pathways sticky with cum.", parse);
+	Text.NL();
+	if(burrows.LagonPit()) {
+		if(world.time.hour >= 2 && world.time.hour < 6)
+			Text.Add("At the bottom of the pit, the former king of the lagomorphs is sleeping deeply, exhausted from perpetual sex. A dozen or so of his children are curled up against him, sharing the heat of their bodies with their father.", parse);
+		else
+			Text.Add("At the very bottom of the pit, in a knee-deep pool of sexual fluids, Lagon the former rabbit king is getting pounded by several of his willing breeders, not unlike how Vena once was.", parse);
+	}
+	else if(burrows.VenaRestored())
+		Text.Add("The orgy still continues in Vena’s absence, though it’s just not the same without her.", parse);
+	else {
+		if(world.time.hour >= 2 && world.time.hour < 6)
+			Text.Add("At the bottom of the pit, Vena is sleeping deeply, heavy with child. A dozen or so of her children are curled up against her, sharing the heat of their bodies with her.", parse);
+		else
+			Text.Add("At the very bottom of the pit, in a knee-deep pool of sexual fluids, Vena the rabbit matriarch is getting pounded by several of her willing breeders.", parse);
+	}
+	Text.NL();
+	parse["e"] = player.HasNightvision() ? ", and even with your good night vision, you can only just make out the other side of the immense room" : ", but it’s much too dark to see the other end";
+	Text.Add("The cavern is dimly lit by the same strange pots placed in many of the tunnels[e]. Several tunnels lead out from the chamber, bustling with activity as exhausted rabbits hobble away to rest, and diligent youths bring platters of food for the participants. The raw smell of sex permeates the air like incense, making you light-headed.", parse);
 	Text.NL();
 }
 

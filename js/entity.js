@@ -1953,6 +1953,9 @@ Entity.prototype.FootDesc = function() {
 Entity.prototype.Appendages = function() {
 	return this.body.head.appendages;
 }
+Entity.prototype.HasNightvision = function() {
+	return this.body.HasNightvision();
+}
 Entity.prototype.HasHorns = function() {
 	for(var i = 0; i < this.body.head.appendages.length; i++)
 		if(this.body.head.appendages[i].type == AppendageType.horn)
