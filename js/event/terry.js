@@ -246,13 +246,14 @@ Terry.prototype.Lactation = function() {
 }
 Terry.prototype.SetPussy = function() {
 	var vag = this.flags["vag"];
-	if(vag != Terry.Pussy.None && !this.FirstVag()) {
+	if(vag == Terry.Pussy.None) {
+		if(this.FirstVag())
+			this.body.vagina = [];
+	}
+	else if(this.NumVags() == 0) {
 		this.body.vagina.push(new Vagina());
 		if(vag == Terry.Pussy.Used)
 			this.FirstVag().virgin = false;
-	}
-	else if(vag == Terry.Pussy.None && this.FirstVag()) {
-		this.body.vagina = [];
 	}
 }
 Terry.prototype.SetCock = function() {
