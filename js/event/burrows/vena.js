@@ -140,7 +140,12 @@ Scenes.Vena.RestoreEntrypoint = function(fight) {
 		Text.NL();
 		Text.Add("Your party finally arrives in the throne room, the eyes of the harem turning to watch you incredulously as Vena strides into the hall. With her new amazonian frame, she strikes quite an impressive figure only accentuated by the massive behemoth hanging between her legs, which draws the hungry eyes of her sons and daughters.", parse);
 		Text.NL();
-		Text.Add("<i>“Time enough for that later, children,”</i> she waves them away dismissively. <i>“Where is my mate?”</i> One of her sons wordlessly points toward one of the walls, where Lagon is chained. Gathering herself, the lagomorph matriarch walks up to the fallen king. She stands over him; the hulking amazon regarding her mate’s diminished form.", parse);
+		Text.Add("<i>“Time enough for that later, children,”</i> she waves them away dismissively. <i>“Where is my mate?”</i> ", parse);
+		if(fight)
+			Text.Add("One of her sons wordlessly points toward one of the walls, where Lagon is chained.", parse);
+		else
+			Text.Add("On Ophelia’s command, some of the guards run off and fetch Lagon from his cell.", parse);
+		Text.Add(" Gathering herself, the lagomorph matriarch walks up to the fallen king. She stands over him; the hulking amazon regarding her mate’s diminished form.", parse);
 		Text.NL();
 		Text.Add("<i>“Did it have to come to this, love?”</i> she asks sadly. <i>“I often tried to dissuade you of your hubris… why, <b>why</b> could you not have been content with what you had?”</i> Slowly, Lagon raises his head, staring defiantly at Vena.", parse);
 		Text.NL();

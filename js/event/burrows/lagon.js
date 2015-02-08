@@ -1081,7 +1081,7 @@ Scenes.Lagon.WinToBruteLagon = function() {
 			
 			Gui.NextPrompt(function() {
 				Text.Clear();
-				Text.Add("Lagon, now reduced to a shadow of his former self, is chained to a wall in the throne room. He’ll await justice there until Vena stands judgement over him. Ophelia hints that you also have a say in this, since if it weren’t for you, he’d still be on the throne. Time enough to worry about that later.", parse);
+				Text.Add("Lagon, now reduced to a shadow of his former self, is hauled off and chained in a cell somewhere close to the throne room. He’ll await justice there until Vena stands judgement over him. Ophelia hints that you also have a say in this, since if it weren’t for you, he’d still be on the throne. Time enough to worry about that later.", parse);
 				Text.NL();
 				Text.Add("<i>“I really cannot thank you enough,”</i> Ophelia bows her head again. <i>“Without you… if there’s <b>anything</b> you need at all, we are at your service.”</i> Her eyes burn with a very different kind of fire as she meets yours. <i>“<b>I</b> am at your service.”</i>", parse);
 				Text.NL();
