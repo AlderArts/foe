@@ -1822,7 +1822,7 @@ Scenes.Cale.SexGetEatenEntrypoint = function(outside) {
 		Text.NL();
 		
 		player.AddLustFraction(0.3);
-	}, 1.0, function() { return true; });
+	}, 1.0, function() { return player.FirstCock(); });
 	
 	scenes.Get();
 	
