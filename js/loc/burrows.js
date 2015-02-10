@@ -12,7 +12,8 @@ world.loc.Burrows = {
 	Tunnels   : new Event("Burrows: Tunnels"),
 	Pit       : new Event("Burrows: The Pit"),
 	Lab       : new Event("Burrows: Lab"),
-	Throne    : new Event("Burrows: Throne room")
+	Throne    : new Event("Burrows: Throne room"),
+	LagonCell : new Event("Burrows: Lagon's cell") //Only used for the name
 }
 
 
