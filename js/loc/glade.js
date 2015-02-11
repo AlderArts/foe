@@ -30,6 +30,9 @@ DryadGlade.prototype.Update = function(step) {
 
 Scenes.DryadGlade = {};
 
+world.SaveSpots["Dryads"] = world.loc.Forest.Glade;
+world.loc.Forest.Glade.SaveSpot = "Dryads";
+world.loc.Forest.Glade.safe = function() { return true; };
 world.loc.Forest.Glade.description = function() {
 	var parse = {
 		

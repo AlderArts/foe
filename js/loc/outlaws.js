@@ -9,6 +9,9 @@ world.loc.Outlaws = {
 	Camp : new Event("Outlaws' camp")
 }
 
+world.SaveSpots["Outlaws"] = world.loc.Outlaws.Camp;
+world.loc.Outlaws.Camp.SaveSpot = "Outlaws";
+world.loc.Outlaws.Camp.safe = function() { return true; };
 //TODO
 world.loc.Outlaws.Camp.description = function() {
 	Text.Add("You are in the outlaws' camp.<br/>");

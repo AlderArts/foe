@@ -83,6 +83,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/loc/rigard/magetower.js \
 	js/loc/treecity/treecity.js \
 	js/loc/plains.js \
+	js/loc/nomads.js \
 	js/loc/highlands.js \
 	js/loc/dragonden.js \
 	js/loc/forest.js \

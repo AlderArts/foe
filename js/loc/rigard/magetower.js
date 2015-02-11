@@ -3,6 +3,9 @@
 //
 // Castle: Mage tower
 //
+world.SaveSpots["Jeanne"] = world.loc.Rigard.Castle.MageTower;
+world.loc.Rigard.Castle.MageTower.SaveSpot = "Jeanne";
+world.loc.Rigard.Castle.MageTower.safe = function() { return true; };
 world.loc.Rigard.Castle.MageTower.description = function() {
 	Text.Add("You are standing on the top floor of Jeanne’s tower, inside the court mage’s study.");
 	Text.NL();
