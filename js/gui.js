@@ -594,7 +594,6 @@ Gui.RenderEntity = function(entity, set, obj) {
 	};
 	*/
 	
-	// TODO: Wait for Google Chrome to fix SVG opacity bug (Google Chrome v 34)
 	if(entity.avatar.combat)
 		obj.portrait.attr({src: entity.avatar.combat, opacity: entity.Incapacitated() ? .5 : 1});
 	

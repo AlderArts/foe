@@ -40,13 +40,11 @@ TODO:
  - Super dommy in nice mode
 
 * Minigame framework (use for Pit, Miranda dungeon, possibly others)
- - Three stats, will, stamina, lust (use hp/sp/lp bars)
- - Need to rig GUI to show these instead (how to do best way?)
-  + Perhaps just use the regular values, and use fractional increases.
-  + Remove/rescale numeric values?
- - Stamina depletes over time and with exhertion. Can be restored with food/rest.
+ - Use the three stats, hp, sp, lust (equivalent of will/stamina/lust)
+ - Use the regular values, and use fractional increases?
+ - Stamina(sp) depletes over time and with exhertion. Can be restored with food/rest.
  - Lust increases over time and by teasing. Depleted by orgasm.
- - Will is your lifebar. Decreases when you are broken down. Goes down quicker if you're out of stamina or full on lust.
+ - Will(hp) is your lifebar. Decreases when you are broken down. Goes down quicker if you're out of stamina or full on lust.
  - When you run out of will, you reach the minigame failstate.
  - While doing the minigame, you have very limited options, and are confined to a single location.
   + Each action takes up a block of time.
@@ -54,6 +52,7 @@ TODO:
   + Short interactions with the others, dependant on their will/stamina/lust values.
   + Example, Kiai is captured and locked in with you in Miranda's dungeon. Talking with them will raise both your will values a little.
  - The win state is endurance (or escape).
+ - What happens if follower reaches 0 will? Broken state?
 
 
 REWRITE OF GUI:
