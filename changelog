@@ -12,6 +12,7 @@ Version 0.3w
  - Outlaws camp
  - Dryad's glade
  - Jeanne's tower
+* GUI change: defeated enemies have their portraits faded. Report if this causes graphics glitches on some browsers.
 
 --------------------------------------------
              PREVIOUS VERSIONS
