@@ -64,6 +64,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/alchemy.js \
 	js/quest.js \
 	js/cavalcade.js \
+	js/prison.js \
 	js/event/introduction.js \
 	js/loc/rigard/rigard.js \
 	js/loc/rigard/residential.js \
