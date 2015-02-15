@@ -71,6 +71,11 @@ Roa.prototype.Met = function() {
 	return this.flags["Met"] >= Roa.Met.Met;
 }
 
+//TODO (Met flag?)
+Roa.prototype.Recruited = function() {
+	return false;
+}
+
 Roa.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
 	

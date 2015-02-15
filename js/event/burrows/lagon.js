@@ -28,6 +28,7 @@ function Lagon(storage) {
 	this.body.SetEyeColor(Color.blue);
 	
 	this.flags["Usurp"] = 0;
+	this.flags["Talk"]  = 0; // bitmask
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -50,6 +51,12 @@ Lagon.prototype.ToStorage = function() {
 	
 	return storage;
 }
+
+Lagon.Talk = {
+	AlliedFirst : 1,
+	ScepterTalk : 2,
+	RoaTalk     : 4
+};
 
 // Schedule
 Lagon.prototype.IsAtLocation = function(location) {
@@ -350,22 +357,60 @@ LagonBrute.prototype.Act = function(encounter, activeChar) {
 		Abilities.Attack.Use(encounter, this, t);
 }
 
-//TODO
 Scenes.Lagon.InteractRuler = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("Lagon, the king of the rabbits, holds court in his throne room amidst a mound of riches, treasures and junk gathered from the outside world. He’s lounging on his throne with a bored look on his face and a submissive daughter tending to his cock.", parse);
+	Text.NL();
+	if(lagon.Relation() < 0)
+		Text.Add("<i>“And what do you want?”</i> Lagon looks annoyed at your approach, seeming far more interested in the blowjob he’s getting.", parse);
+	else if(lagon.Relation() < 25)
+		Text.Add("<i>“Traveller,”</i> Lagon gives you a nod, caressing his daughter’s bobbing head.", parse);
+	else if(lagon.Relation() < 50)
+		Text.Add("<i>“Welcome back,”</i> Lagon smiles, motioning you to step forward. <i>“I’m almost finished with this one, perhaps you’d like to take her place?”</i> You blush uncertainly.", parse);
+	else
+		Text.Add("<i>“Ah, my favorite little slut,”</i> Lagon grins, waving for you to come sit at his feet. You eagerly crawl forward, seating yourself before the throne, head in your master’s lap.", parse);
+	Text.NL();
+	if(burrows.LagonAlly())
+		Text.Add("<i>“So good to see you again,”</i> he almost purrs. <i>“Any more insurgents you’d like to report?”</i>", parse);
+	else if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3)
+		Text.Add("<i>“You did a fine job bringing all the ingredients to my daughter. Are you perhaps looking for more work? The Pit should have a few spots open, if you’re into that.”</i>", parse);
+	else {
+		parse["more"] = burrows.flags["Access"] >= Burrows.AccessFlags.Stage1 ? " more" : "";
+		Text.Add("<i>“Have you found any[more] ingredients for Ophelia? If so, bring them to her so she can prepare them.”</i>", parse);
+	}
+	Text.Flush();
+	
+	Scenes.Lagon.RulerPrompt();
+}
+
+Scenes.Lagon.RulerPrompt = function() {
 	var parse = {
 		
 	};
 	parse["stuttername"] = player.name[0] +"-"+ player.name;
 	
-	Text.Clear();
-	Text.Add("PLACEHOLDER", parse);
-	Text.Add("", parse);
-	Text.NL();
-	Text.Flush();
-	
-	//[name]
+	//[Talk][Sex] ( [Usurp] )
 	var options = new Array();
-	/*
+	options.push({ nameStr : "Talk",
+		func : function() {
+			Text.Clear();
+			if(lagon.Relation() < 0)
+				Text.Add("<i>“Make it quick, I’m busy,”</i> he responds shortly. It doesn’t look like the king appreciates you butting into his affairs.", parse);
+			else if(lagon.Relation() < 50)
+				Text.Add("<i>“And what would you ask?”</i> Lagon prompts, a bored expression on his face. It looks like he’s far more interested in his blowjob than in any questions you could possibly have.", parse);
+			else
+				Text.Add("<i>“And what thoughts have gone through your vapid little head?”</i> Lagon queries, scratching said head fondly.", parse);
+			Text.Flush();
+			
+			Scenes.Lagon.RegularTalkPrompt();
+		}, enabled : true,
+		tooltip : "There’s something you want to ask the king."
+	});
+	/* TODO
 	options.push({ nameStr : "name",
 		func : function() {
 			Text.Clear();
@@ -407,7 +452,513 @@ Scenes.Lagon.InteractRuler = function() {
 	Gui.SetButtonsFromList(options, true);
 }
 
+Scenes.Lagon.AlliedFirst = function() {
+	var parse = {
+		
+	};
+	
+	lagon.flags["Talk"] |= Lagon.Talk.AlliedFirst;
+	
+	Text.Clear();
+	Text.Add("<i>“Ah, if it isn’t my little loyal minion,”</i> Lagon greets you expansively as you approach. The king is lounging on his throne as usual, a pretty little lagomorph female kneeling at his feet, dutifully polishing the royal cock. He irritably shoves her away, letting the glistening pillar of flesh out into the air. Lagon lets it bob there, unconcerned about the pre forming on the tip. You shift uncomfortably, uncertain what he has in mind.", parse);
+	Text.NL();
+	Text.Add("<i>“Now, far be it from me to withhold such a loyal subject their dues, yes? You know well that I always richly reward obedience...”</i> He lets the promise hang in the air a while, seeing if you’ll take the bait. <i>“So… what award could be worthy of your betrayal?”</i> There’s a guilty twinge as the king reminds you of Ophelia. No, it was the only way.", parse);
+	Text.NL();
+	Text.Add("<i>“Yes, yes, that is truly the highest honor I could bestow,”</i> Lagon drawls to himself, tapping his chin. Turning to you, the king gives you a wide grin. <i>“For your services to the lagomorph kingdom, you are hereby rewarded with the king himself deigning to bed you.”</i>", parse);
+	Text.NL();
+	Text.Add("You stiffen, not quite sure how to respond to that. The lagomorph’s massive member bobs invitingly as Lagon leans forward. <i>“I insist,”</i> he adds.", parse);
+	Text.Flush();
+	
+	lagon.relation.IncreaseStat(40, 100);
+	//[Blowjob][Get fucked][The Pit][Decline]
+	var options = new Array();
+	options.push({ nameStr : "Blowjob",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“Is my loyal minion apprehensive? Or perhaps just hungry?”</i> Lagon grins, motioning for you to come closer. <i>“You have your king’s permission to suck his cock.”</i> He reclines, eyes intent on you as he waits for you to get started. Swallowing your doubts, you kneel down between his legs, licking your lips.", parse);
+			Text.NL();
+			Scenes.Lagon.RulerBlowjobEntrypoint();
+		}, enabled : true,
+		tooltip : "Perhaps just start with what the girl was doing as you came in."
+	});
+	options.push({ nameStr : "Get fucked",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“Very good,”</i> Lagon murmurs, motioning for you to approach. <i>“The king shall share his bounty with his loyal subject… with his slut.”</i> You gulp as your eyes meet his. There is a hunger in them, a raging fire that seeks to use and consume all that stands before it… and right now, you are in his sights. And Aria help you, you want to be there.", parse);
+			Text.NL();
+			Scenes.Lagon.RulerGetFuckedEntrypoint();
+		}, enabled : true,
+		tooltip : "Yes… you want this. Accept the king’s reward."
+	});
+	options.push({ nameStr : "The Pit",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“You keep exceeding my expectations, my little slut,”</i> Lagon laughs, slapping the arm of his throne. <i>“But very well, I shall entertain your request. You’ll receive a place of honor right next to my dear mate, and you may stay there for as long as you please. All your needs will be taken care of, and I will personally grace you whenever the mood strikes me. Is that what you wish for?”</i>", parse);
+			Text.NL();
+			Text.Add("You nod eagerly… there’s nothing you could wish for more.", parse);
+			Text.NL();
+			parse["step"] = player.HasLegs() ? "step" : "slither";
+			Text.Add("<i>“Then follow me, slut.”</i> The lagomorph king bounds to his feet, throwing a familiar arm around your shoulder as he marches you out of the throne room and into the tunnels. <i>“I’d give you a good fuck before we go, but I think it best to wait until we’re there… I think you’d have trouble walking for a while, and I’m sure you wouldn’t want to miss out on any action.”</i> With your heart in your throat, you keep pace with him, a skip in your [step].", parse);
+			Text.NL();
+			Scenes.Lagon.RulerPitEntrypoint();
+		}, enabled : true,
+		tooltip : "You wish for nothing more than to be fucked by him… by him and everyone of his men, by Vena, by the entire Pit."
+	});
+	options.push({ nameStr : "Decline",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“How noble of you, declining your just payment,”</i> Lagon drawls, waving for another one of his daughters to claim your reward instead. <i>“Truly, you’re a paragon of honor, shedding your blood for your king without wishing for anything in return.”</i> He looks disappointed at your refusal to humiliate yourself, but it’s not about to ruin his good mood.", parse);
+			Text.NL();
+			Text.Add("<i>“Now, what did you want?”</i>", parse);
+			Text.Flush();
+			
+			Scenes.Lagon.RulerPrompt();
+		}, enabled : true,
+		tooltip : "You… ah, you really have to pass."
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
 
+Scenes.Lagon.RegularTalkPrompt = function() {
+	var parse = {
+		tongue : function() { return player.TongueDesc(); }
+	};
+	
+	//[Burrows][Lagon][Vena][Ophelia] { [Scepter][Roa] }
+	var options = new Array();
+	options.push({ nameStr : "Burrows",
+		func : function() {
+			Text.Clear();
+			world.TimeStep({minute: 10});
+			if(lagon.Relation() < 25) {
+				Text.Add("<i>“I don’t find any reason to share my plans with an outsider,”</i> Lagon frowns. <i>“You are here because you are somewhat useful to me, and I pay you for being useful. Don’t think it’s anything more than that.”</i>", parse);
+				Text.Flush();
+				Scenes.Lagon.RegularTalkPrompt();
+				return;
+			}
+			else if(lagon.Relation() < 50)
+				Text.Add("<i>“I only wish what’s best for me and my extended family,”</i> Lagon replies, waving expansively. <i>“There are many on the outside who would wish us exterminated, and hunt my kind like vermin. We are fully justified in protecting ourselves.”</i>", parse);
+			else
+				Text.Add("<i>“Ah, my simple little friend, what do you think I plan to do with it?”</i> Lagon scratches your head fondly. <i>“My children will continue to multiply and spread across the lands, until there are no more predators that will hunt us. Of course, I won’t be a heartless ruler; anyone we subjugate are free to become part of the colony and take their place in the breeding pits.”</i>", parse);
+			Text.NL();
+			Text.Add("How did it all start?", parse);
+			Text.NL();
+			Text.Add("<i>“It started when I gained the strength to strike back. I vowed to never let myself be stepped on by those pitiful outsiders again. They’ll pay for what they’ve done, mark my words.”</i> The king taps the armrest of his throne restlessly.", parse);
+			Text.NL();
+			Text.Add("<i>“This is why I’ve ordered my subjects to ravage the caravans of the surface dwellers; we weaken them and gather the tools of their downfall.”</i> Lagon smiles at you. ", parse);
+			if(lagon.Relation() < 50)
+				Text.Add("<i>“It’s an uneven but just battle.”</i>", parse);
+			else
+				Text.Add("<i>“Sometimes, I’m able to find fine tools indeed,”</i> he adds, patting your head.", parse);
+			if(burrows.LagonAlly()) {
+				Text.NL();
+				Text.Add("And… what now? What will his next move be?", parse);
+				Text.NL();
+				Text.Add("<i>“Thanks to your loyalty, I no longer have a rebellion brewing. Thus, the time has come to turn our eyes outside.”</i> Lagon taps his chin thoughtfully. <i>“My scouts bring me word that there’s unrest in the human kingdom. It’s right on our doorstep, and the less they think to look our way, the better. As my little agent, I’m sure you could infiltrate the ranks of the rebellious exiles and stir some havoc in Rigard.”</i>", parse);
+				Text.NL();
+				Text.Add("The king smiles. <i>“You can do that for me, can’t you? You’ve proven yourself in the past to be an expert betrayer.”</i> The words sting, even though they are true.", parse);
+			}
+			Text.Flush();
+			Scenes.Lagon.RegularTalkPrompt();
+		}, enabled : true,
+		tooltip : "This colony, this kingdom of his… what’s he planning to do with it?"
+	});
+	options.push({ nameStr : "Lagon",
+		func : function() {
+			Text.Clear();
+			world.TimeStep({minute: 10});
+			if(lagon.Relation() < 0) {
+				Text.Add("<i>“I don’t think you’ve earned learning anything about my past, outsider,”</i> Lagon frowns, <i>“and asking about it is very presumptuous. Know that I am king and master here in the burrows. Anything else, you’ll have to work for.”</i>", parse);
+				Text.Flush();
+				Scenes.Lagon.RegularTalkPrompt();
+				return;
+			}
+			else if(lagon.Relation() < 50) {
+				Text.Add("<i>“A question worth asking, certainly,”</i> Lagon nods, scratching his chin. <i>“I fully understand that it’s strange to find a being such as I among my people.”</i>", parse);
+				lagon.relation.IncreaseStat(25, 1);
+			}
+			else {
+				Text.Add("<i>“Shouldn’t you be quite familiar with me already?”</i> Lagon chuckles, momentarily pulling his daughter off his cock to let you get a taste. You drag your [tongue] along the length of his massive shaft, relishing in his masculine musk. It’s almost enough to make you forget what you asked in the first place.", parse);
+				Text.NL();
+				Text.Add("<i>“But nonetheless, I’ll regale you with my tale, since you so desire. Just keep that up, and I’ll answer whatever questions you may have.”</i> You nod happily, licking his cock together with his daughter.", parse);
+				lagon.relation.IncreaseStat(60, 1);
+			}
+			Text.NL();
+			Text.Add("<i>“A suitable place to start would be the beginnings of our race,”</i> the king continues, leaning back in his throne. <i>“The lagomorphs are considered lesser morphs by the surface dwellers, since their nature does not allow them to live in the cities built by men. As such, my people are outcast, sometimes even hunted as pests by these hypocritical and ‘civilized’ folks.”</i> There’s anger in his voice, ", parse);
+			if(lagon.Relation() < 50)
+				Text.Add("and he clenches his fist irritably.", parse);
+			else {
+				Text.Add("and you can feel his hand press on the back of your head, urging you to relieve his tension. Hasting to pleasure your master, you fondle his balls while you wrap your lips around the bulbous tip of his member, eagerly swallowing his pre.", parse);
+				Sex.Blowjob(player, lagon);
+				player.FuckOral(player.Mouth(), lagon.FirstCock(), 1);
+				lagon.Fuck(lagon.FirstCock(), 1);
+			}
+			Text.NL();
+			Text.Add("<i>“Among these ‘lesser’ morphs, I was born. Unlike my weaker siblings, I did not hesitate to take what was my due and strike back at my oppressors. Together with my mate, Vena, I claimed my kingdom and founded my dynasty.”</i> Talking about Vena seems to calm him down, and he smiles fondly. <i>“My queen understood, and she agreed that we had to protect our family. The only way to do so with these barbaric surface dwellers is by force. Thus, we build our strength and deal with trespassers accordingly.”</i>", parse);
+			Text.NL();
+			Text.Add("Didn’t he have any rivals or competitors for the throne? To you, it sounds like the lagomorphs used to live in much smaller groups than this.", parse);
+			Text.NL();
+			if(lagon.Relation() >= 50)
+				Text.Add("Lagon irritably motions for you to continue with your blowjob, annoyed at the interruption. ", parse);
+			Text.Add("<i>“Of course there were, but they lacked the strength and ambition to follow through with it. Breaking them down was amusing. My minions know full well what happens to disobedient traitors.”</i> ", parse);
+			if(burrows.LagonAlly())
+				Text.Add("Yes… you remember well what he did to his own daughter. It’s best to keep staying on his good side.", parse);
+			else if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3)
+				Text.Add("You gulp, hoping that he didn’t notice. If he found out what Ophelia asked you to do...", parse);
+			else
+				Text.Add("You keep your thoughts about this to yourself.", parse);
+			Text.NL();
+			parse["rel"] = lagon.Relation() >= 50 ? " - unf -" : "";
+			Text.Add("<i>“Most of my soldiers are my children; dutiful, good children that will[rel] birth me even more minions and further extend our family.”</i>", parse);
+			
+			if(lagon.Relation() >= 50) {
+				Text.NL();
+				Text.Add("<i>“Now… anything else you’d like to know, little slut?”</i> Lagon grunts, suddenly thrusting his hips forward. The hand at the back of your neck keeps your head firmly in place as the well-endowed lapin stuffs your throat with his gargantuan flesh-pole. You’re helpless to do anything other than sit there and take it, moaning weakly as the powerful male ravages your gullet.", parse);
+				Text.NL();
+				Text.Add("<i>“Perhaps what my seed tastes like? Or would you prefer to not - ngh - spill any of it?”</i> The king has gotten up on his feet, now able to thrust with the full power of his legs. His rutting is growing more erratic, announcing his impending climax. With a primal roar, Lagon unloads into your stomach, pouring a veritable torrent of cum down your throat. Regardless of your own wishes, you get plenty of opportunity to taste him as he slowly withdraws his throbbing member, stray ejaculate quickly filling your mouth and painting your face white. His daughter quickly joins in cleaning you up, eager to get her share of cream.", parse);
+				Text.NL();
+				Text.Add("<i>“I hope you found our session educational,”</i> Lagon chuckles, flopping back onto his throne, letting his daughter clean up his leaking member. With a wave, he dismisses you from his presence.", parse);
+				Text.Flush();
+				world.TimeStep({minute: 10});
+				player.AddLustFraction(0.3);
+				Gui.NextPrompt();
+			}
+			else {
+				Text.Flush();
+				Scenes.Lagon.RegularTalkPrompt();
+			}
+		}, enabled : true,
+		tooltip : "Ask him about himself."
+	});
+	options.push({ nameStr : "Vena",
+		func : function() {
+			Text.Clear();
+			world.TimeStep({minute: 10});
+			if(lagon.Relation() < 0)
+				Text.Add("<i>“Vena is a loyal and true wife. She willingly sacrifice herself for the greater good. That is all you need to know,”</i> Lagon replies.", parse);
+			else if(lagon.Relation() < 50)
+				Text.Add("<i>“My dear Vena has always been true and loyal to me. Her heartfelt obedience and dedication is truly inspiring, don’t you think?”</i> Lagon looks at you meaningfully.", parse);
+			else
+				Text.Add("<i>“My mate is the prime example of a loyal subject. Obedient and willing; diligent in her service to me.”</i> There’s pride in his voice as he speaks of her. The king scratches your head fondly.", parse);
+			Text.Add(" <i>“Her duty is one reserved for those I hold in highest regard. Thanks to her, my army grows stronger every day.”</i>", parse);
+			Text.NL();
+			Text.Add("Then he’s… not bothered by the fact that she’s always being fucked by everyone in the Pit?", parse);
+			Text.NL();
+			Text.Add("<i>“Why would I be?”</i> Lagon queries, scratching his daughter’s ear as she bobs her head on his cock. <i>“My wife has needs, and I cannot attend her constantly. It’s only fair I let her children care for her. Besides, I make sure to always be the one who impregnates her.”</i> He studies you inquiringly. <i>“And what do you make of this little arrangement?”</i>", parse);
+			Text.Flush();
+			
+			//[Fair][Admirable][Questionable]
+			var options = new Array();
+			options.push({ nameStr : "Fair",
+				func : function() {
+					Text.Clear();
+					Text.Add("As an outsider, you cannot fault the lagomorphs’ customs.", parse);
+					Text.NL();
+					Text.Add("<i>“Indeed, it’s not your place to criticize,”</i> Lagon agrees sagely. <i>“Know that all she does, she does on her own volition, out of the goodness of her heart and her dedication to me.”</i>", parse);
+					Text.NL();
+					Text.Add("You keep your thoughts to yourself.", parse);
+					Text.Flush();
+					Scenes.Lagon.RegularTalkPrompt();
+				}, enabled : true,
+				tooltip : "Better not anger him."
+			});
+			options.push({ nameStr : "Admirable",
+				func : function() {
+					Text.Clear();
+					Text.Add("You agree that he’s lucky to have a mate such as Vena. Anyone would be envious to be in her place.", parse);
+					Text.NL();
+					Text.Add("<i>“Luck has nothing to do with it,”</i> Lagon scoffs. <i>“I’m not king for nothing. It’s a title that belongs to the strongest and most capable, and I am both.”</i> The way he phrases it, it’s no boast, merely a statement of fact. It’s no lie either.", parse);
+					Text.NL();
+					Text.Add("<i>“You are correct that there are many who would offer much to take her place at my side, but they lack her dedication. Many of my daughters have offered themselves as such, but they all break after a week or two. Such a pity,”</i> he sighs.", parse);
+					if(lagon.Relation() >= 50) {
+						Text.NL();
+						parse["ally"] = burrows.LagonAlly() ? "you merely have to ask" : "prove your loyalty to me and I shall consider it";
+						Text.Add("<i>“Now, one such as you, who are both strong and dedicated, that is the sort of subject fit to take on such a task,”</i> he cherishes you. <i>“I know there may be many things that you hold to be important, but if you wish to let them go and receive the same honors as Vena, [ally].”</i>", parse);
+					}
+					Text.Flush();
+					lagon.relation.IncreaseStat(10, 1);
+					Scenes.Lagon.RegularTalkPrompt();
+				}, enabled : true,
+				tooltip : "Agree that it truly is a high honor. Anyone would be envious to be in Vena’s place."
+			});
+			options.push({ nameStr : "Questionable",
+				func : function() {
+					Text.Clear();
+					Text.Add("<i>“Your ways may not be ours, but do not presume to judge my mate’s dedication.”</i> There’s a thinly veiled threat in his voice, suggesting that you shouldn’t continue this train of thought. <i>“My mate is mine to treat as I please.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Now, if there’s nothing else, be on your way traveller,”</i> Lagon dismisses you curtly, putting a firm hand on his daughter’s head and pressing down until the girl is almost choking on his dick. He seems to be in a bad mood; perhaps it’s best to leave for now.", parse);
+					Text.Flush();
+					lagon.relation.DecreaseStat(0, -2);
+					Gui.NextPrompt();
+				}, enabled : !burrows.LagonAlly(),
+				tooltip : "That’s not how he should treat his wife."
+			});
+			Gui.SetButtonsFromList(options, false, null);
+		}, enabled : true,
+		tooltip : "Ask him about his mate, Vena."
+	});
+	options.push({ nameStr : "Ophelia",
+		func : function() {
+			Text.Clear();
+			world.TimeStep({minute: 10});
+			if(burrows.LagonAlly()) {
+				Text.Add("The king’s expression darkens as you remind him of his rebellious daughter. <i>“That traitorous bitch got what was coming to her,”</i> he growls. <i>“Her potions may have proven useful, but I hold no value in pawns that go against my will. Not like you,”</i> he adds, <i>“you’ll continue being my loyal pet, won’t you?”</i>", parse);
+				Text.NL();
+				Text.Add("You gulp uncertainly and nod. You wouldn’t dream of going against him.", parse);
+				Text.NL();
+				Text.Add("<i>“Do not worry, I know you don’t have it in you to betray me, pet,”</i> he assures you. Looking imploringly at you, Lagon adds: <i>“And how is my daughter treating you? I hope that she’s to your satisfaction?”</i>", parse);
+				Text.NL();
+				parse["master"] = player.mfFem("master", "mistress");
+				if(ophelia.InParty())
+					Text.Add("<i>“New [master] is great!”</i> Ophelia chimes in, gushing over you. <i>“Treats Ophelia good!”</i> The perky lapin gives you a hug, rubbing her breasts against your arm sultrily. She probably needs some attention when this is said and done.", parse);
+				else
+					Text.Add("You assure him that you have no complaints.", parse);
+				Text.NL();
+				Text.Add("<i>“Excellent,”</i> he leans back, satisfied with his answer.", parse);
+			}
+			else {
+				Text.Add("The king smiles as you remind him of his favorite daughter. <i>“She’s a diligent one, isn’t she?”</i> he says proudly. <i>“Quite sharp too, reminds me of her mother at times.”</i>", parse);
+				Text.NL();
+				if(lagon.Relation() < 0) {
+					Text.Add("<i>“She shows her loyalty by brewing potions for me. Some of them are even quite useful.”</i> That seems to be all that Lagon wishes to say. Perhaps you’re better off asking Ophelia herself.", parse);
+					Text.Flush();
+					Gui.NextPrompt();
+					return;
+				}
+				else
+					Text.Add("<i>“She’s one of my favorites. Such a clever girl.”</i> Though he’s talking about his own daughter, his tone and his words make it sound as if he’s a kid boasting about a cool toy.", parse);
+			}
+			Text.NL();
+			Text.Add("<i>“Unlike most of her brothers and sisters, Ophelia inherited some portion of my intellect,”</i> Lagon continues. <i>“It was quite amusing to see her sift through the junk scavenged from the surface and put it together into something useful.”</i>", parse);
+			Text.NL();
+			if(burrows.LagonAlly())
+				Text.Add("<i>“Her tricks were cute, but in the end they were only mere shortcuts to real strength. I’m saddened that I had to punish her for her disobedient behavior, but I cannot be lenient when my children attempts to bite the hand that feeds them. I’m sure you can understand.”</i>", parse);
+			else {
+				parse["rel"] = lagon.Relation() >= 50 ? " Not to mention, Vena’s current condition is all thanks to her." : "";
+				Text.Add("<i>“Her tricks have been quite useful to me so far, allowing me to take shortcuts to gain strength more rapidly.[rel]”</i>", parse);
+			}
+			Text.Flush();
+			Scenes.Lagon.RegularTalkPrompt();
+		}, enabled : true,
+		tooltip : "Ask him about his daughter, Ophelia."
+	});
+	//TODO Followers
+	/*
+	if() { //TODO, only available once
+		options.push({ nameStr : "Followers",
+			func : function() {
+				Text.Clear();
+				world.TimeStep({minute: 10});
+				Text.Add("<i>”A fair request.”</i> The lagomorph king claps his hands sharply, summoning four young rabbits. <i>”As I said, I can’t offer you Ophelia, but this lot should do well enough.”</i> You take some time to examine your prizes. There are two males, slim and lithe, and two females with exquisite curved forms. All of them have coats of fine white fur, silky to the touch. <i>”Are these to your liking? You’ll have to excuse me for not remembering their names, they are simple enough creatures, call them whatever you like.”</i>", parse);
+				Text.NL();
+				parse["master"] = player.mfTrue("master", "mistress");
+				Text.Add("You nod, pleased with your reward. Lagon’s children hop over to your side, cuddling up close to their new [master].", parse);
+				Text.NL();
+				Text.Add("<b>A group of Lagon’s children have joined you. They aren’t going to be much use in combat as they are pretty weak, but they make up for it in their eagerness to please you.</b>", parse);
+				Text.Flush();
+				Scenes.Lagon.RegularTalkPrompt();
+			}, enabled : true,
+			tooltip : "Ask him for a selection of his sons and daughters to join you."
+		});
+	}
+	*/
+	if(burrows.LagonAlly()) {
+		if(!party.Inv().QueryItem(Items.Quest.Scepter)) {
+			options.push({ nameStr : "Scepter",
+				func : function() {
+					Text.Clear();
+					world.TimeStep({minute: 10});
+					Text.Add("<i>“A mere trinket acquired during my youth,”</i> Lagon dismisses it, <i>“though if it carries such power as Ophelia seemed to think, perhaps I should have guarded it more carefully. In either case, it’s of little use to me now.”</i>", parse);
+					Text.NL();
+					Text.Add("How did he lose it in the first place?", parse);
+					Text.NL();
+					Text.Add("<i>“It was the day that little sissy ran away… his name escapes me, one of my sons. I think the only one to match him for sluttiness is Vena. That kid would bend over for anyone.”</i> The king shakes his head in disgust. <i>“I guess he thought to use it to trade with the surface dwellers. Losing it was a minor irk, but betrayal still stings.”</i>", parse);
+					Text.NL();
+					if(!roa.Recruited()) {
+						Text.Add("<i>“You said that you found him during your travels? Roa, was it?”</i> You nod, confirming that you’ve met the wayward bunny in the whorehouses of Rigard when you were searching for the scepter.", parse);
+						Text.NL();
+						Text.Add("<i>“I’d like it if you could bring him back here… perhaps his sister can convince him to come. I don’t want his juvenile rebellion to go unpunished.”</i> He waves dismissively. <i>“After I’m done with him, you can do what you please with him.”</i>", parse);
+						Text.NL();
+					}
+					Text.Add("The powerful lapin picks up the scepter from where it was discarded in his treasure pile, studying it lazily. <i>“It’s pretty enough, but nothing more than that.”</i>", parse);
+					Text.Flush();
+					
+					//[Silence][Request]
+					var options = new Array();
+					options.push({ nameStr : "Silence",
+						func : function() {
+							Text.Clear();
+							Text.Add("<i>“If there’s nothing else, I have better things to do,”</i> the kind dismisses you.", parse);
+							Text.Flush();
+							Scenes.Lagon.RegularTalkPrompt();
+						}, enabled : true,
+						tooltip : "Say nothing."
+					});
+					options.push({ nameStr : "Request",
+						func : function() {
+							Text.Clear();
+							if(lagon.Relation() < 50) {
+								Text.Add("<i>“I don’t think that you’ve quite earned something like that yet, pet,”</i> Lagon drawls lazily, without his eyes leaving the valuable stone. <i>“You’ll have to be a little more… shall we say enthusiastic? Request denied.”</i>", parse);
+								Text.NL();
+								Text.Add("You’re pretty sure you know in what way the king would like you to show your ‘loyalty’ to him.", parse);
+								Text.Flush();
+								Scenes.Lagon.RegularTalkPrompt();
+								return;
+							}
+							else if(lagon.flags["Talk"] & Lagon.Talk.ScepterTalk == 0) {
+								Text.Add("<i>“Oh? What value has it to you?”</i> Lagon asks curiously.", parse);
+								Text.NL();
+								Text.Add("Well, a powerful artifact like that could be of much use to you in your fight.", parse);
+								Text.NL();
+								Text.Add("<i>“Well… I can’t let it go just like that, now can I?”</i> he gives it a twirl, scratching your head fondly.", parse);
+								Text.NL();
+								Text.Add("Wait, didn’t he just say that it was of no use to him?", parse);
+								Text.NL();
+								Text.Add("<i>“Don’t contradict me, pet,”</i> he idly chastises you. <i>“It has sentimental value. I couldn’t just let something like this go… without something in return.”</i>", parse);
+								Text.NL();
+								Text.Add("Ah… what did he have in mind, exactly?", parse);
+								Text.NL();
+								Text.Add("<i>“Oh, nothing much. My sons and daughters grow antsy when they’re idle for too long… I’d like you to entertain them for a while.”</i>", parse);
+								Text.NL();
+								Text.Add("How?", parse);
+								Text.NL();
+								Text.Add("<i>“Spend a week in the Pit, for anyone to use and abuse,”</i> Lagon purrs. <i>“Embrace your slutty nature and take your place beside Vena. Endure for a week, and it shall be yours.”</i>", parse);
+								Text.NL();
+								Text.Add("You give the king a dubious glance. He’s obviously testing you… but you have no leverage here. <i>“Of course, you are free to refuse,”</i> he shrugs, carelessly throwing the scepter back on the pile. <i>“No Pit, no scepter.”</i>", parse);
+								lagon.flags["Talk"] |= Lagon.Talk.ScepterTalk;
+							}
+							else {
+								Text.Add("<i>“Oh, would you like to reconsider our deal?”</i> The lecherous king grins. <i>“Give me a week, and it shall be yours.”</i>", parse);
+							}
+							Text.Flush();
+							
+							//[Refuse][Accept]
+							var options = new Array();
+							options.push({ nameStr : "Refuse",
+								func : function() {
+									Text.Clear();
+									Text.Add("<i>“Your loss,”</i> Lagon shrugs.", parse);
+									Text.Flush();
+									Scenes.Lagon.RegularTalkPrompt();
+								}, enabled : true,
+								tooltip : "Ah… no. You don’t really need it, come to think of it."
+							});
+							options.push({ nameStr : "Accept",
+								func : function() {
+									Text.Clear();
+									Text.Add("<i>“Excellent… this shall be very entertaining, I’m sure,”</i> Lagon grins, scratching your head. He leans down, adding. <i>“Of course, avoiding your duty or leaving the Pit for any reason will count as breaking the deal. Only a full week will do.”</i>", parse);
+									Text.NL();
+									Text.Add("You nod, uncertain what you’ve gotten yourself into.", parse);
+									Text.NL();
+									Text.Add("<i>“Then there is no time like the present! Best begin at once, you have a long week ahead of you, my horny little bitch.”</i> With that, he roughly hauls you to your feet and twist you around, giving you a shove in the direction of the entrance. As you set off into the tunnel, the king joins you, leading you on. <i>“Don’t want you having cold feet now, right?”</i> he jibes, throwing a possessive arm around your waist.", parse);
+									Text.NL();
+									
+									/*
+									 * TODO
+#set up 1 week challenge
+
+#goto Pit entry point
+
+Pit win (todo)
+
+
+Pit loss (todo)
+									 */
+									//TODO parameters
+									Scenes.Lagon.RulerPitEntrypoint();
+								}, enabled : true,
+								tooltip : player.Slut() < 75 ? "You really want that scepter." : "Scepter or not, that proposal sounds really enticing..."
+							});
+							Gui.SetButtonsFromList(options, false, null);
+						}, enabled : true,
+						tooltip : "Ask him to give you the scepter."
+					});
+					Gui.SetButtonsFromList(options, false, null);
+				}, enabled : true,
+				tooltip : "Ask him about the story of the scepter, and what it’s significance is. You’ve seen its effects up close with the Gol queen."
+			});
+		}
+		options.push({ nameStr : "Roa",
+			func : function() {
+				Text.Clear();
+				world.TimeStep({minute: 10});
+				if(roa.Recruited()) {
+					//TODO Recruited Roa talk
+				}
+				else if(lagon.flags["Talk"] & Lagon.Talk.RoaTalk) {
+					Text.Add("<i>“Him again?”</i> Lagon frowns. <i>“If you have the time to waste your breath asking about that slut, why don’t you go and fetch him instead? I’d like to talk to him about disobedience.”</i>", parse);
+				}
+				else {
+					Text.Add("<i>“Who?”</i> Lagon looks confused before you remind him about his son; the one who ran away with the scepter? <i>“Ah, so that’s what his name was.”</i> He shrugs. <i>“What about him?”</i>", parse);
+					Text.NL();
+					Text.Add("Well… uh… it’s his son, right? The lapin laughs haughtily.", parse);
+					Text.NL();
+					Text.Add("<i>“I have more sons than I can count, the only reason I remember this one is because he had the gall to run away.”</i> He taps his chin, trying to recall something about the wayward bunny. <i>“Roa was weak; a kid half his age could push him around. He’d take it too; don’t think I’ve seen a wimpier rabbit in my life. He’d moan like a bitch in heat when you fucked him too, begging for more.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“I think… yes, he was the one always hiding behind Ophelia’s shirttails and gulping down her potions. Not even her alchemy could make him man up, apparently.”</i> Lagon chuckles, waving dismissively.", parse);
+					Text.NL();
+					Text.Add("<i>“He’s inconsequential. You bringing him up reminds me though… Even with him stealing from my hoard, chasing him down would be too much of a bother. Now that you know where he is though...”</i> The king idly scratches his daughter’s head, collecting his thoughts. <i>“Why don’t you do me a favor, pet?”</i>", parse);
+					Text.NL();
+					Text.Add("What does he have in mind?", parse);
+					Text.NL();
+					Text.Add("<i>“I’d like you to fetch my son and bring him here. I’m sure his sister can convince him to come along, he always looked up to her.”</i> There’s a malicious smile playing on the lapin’s lips. <i>“I’d like to talk with him on the subject of disobedience.”</i>", parse);
+					lagon.flags["Talk"] |= Lagon.Talk.RoaTalk;
+				}
+				Text.Flush();
+				Scenes.Lagon.RegularTalkPrompt();
+			}, enabled : true,
+			tooltip : "Ask about Roa."
+		});
+	}
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“Very well. Anything else?”</i>", parse);
+		Text.Flush();
+		
+		Scenes.Lagon.RulerPrompt();
+	});
+}
+
+
+//TODO
+Scenes.Lagon.RulerBlowjobEntrypoint = function() {
+	var parse = {
+		
+	};
+	
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Gui.NextPrompt();
+}
+
+//TODO
+Scenes.Lagon.RulerGetFuckedEntrypoint = function() {
+	var parse = {
+		
+	};
+	
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Gui.NextPrompt();
+}
+
+//TODO
+Scenes.Lagon.RulerPitEntrypoint = function() {
+	var parse = {
+		
+	};
+	
+	Text.Add("PLACEHOLDER (pick something else for now)", parse);
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Gui.NextPrompt();
+}
 
 Scenes.Lagon.PitDefianceWin = function() {
 	SetGameState(GameState.Event);
