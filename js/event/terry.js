@@ -6245,7 +6245,7 @@ Scenes.Terry.TerryCleansPC = function(func, opts) {
 
 Scenes.Terry.FuckedByBunnyMob = function(male, parse) {
 	if(terry.Slut() < 45) {
-		Text.Add("<i>“Whoa, wait you bunch of pervs! I didn’t- mmf!”</i> Terry’s protests get immediately silenced as one of the males kiss [himher] straight on the lips. ", parse);
+		Text.Add("<i>“Whoa, wait you bunch of pervs! I didn’t- mmf!”</i> Terry’s protests get immediately silenced as one of the males kisses [himher] straight on the lips. ", parse);
 		if(terry.PronounGender() == Gender.male)
 			Text.Add("Maybe because Terry looks just so girly...", parse);
 		else

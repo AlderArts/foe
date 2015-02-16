@@ -725,7 +725,7 @@ Scenes.Lagomorph.GroupWinOnPlainsPrompt = function() {
 	Gui.Callstack.push(function() {
 		Text.Clear();
 		if(enc.brute) {
-			Text.Add("The large brute looks incredulous as he lands on his butt, completely defeated. The rest of his group huddle behind him, eyeing your warily… or perhaps lustily? It seems that you have impressed them quite a bit by beating their alpha, and all they really wanted was sex. Are you willing to provide it? Or perhaps, you want to have them pull out some of their comrades from the pile that are more to your liking.", parse);
+			Text.Add("The large brute looks incredulous as he lands on his butt, completely defeated. The rest of his group huddles behind him, eyeing your warily… or perhaps lustily? It seems that you have impressed them quite a bit by beating their alpha, and all they really wanted was sex. Are you willing to provide it? Or perhaps you want to have them pull out some of their comrades from the pile that are more to your liking?", parse);
 		}
 		else if(enc.brainy) {
 			Text.Add("The bespectacled leader of the rabbit mob sulks as you stand victorious over her.", parse);
@@ -1204,7 +1204,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 	Text.Add("Patting his head, you tell him what a good boy he is. Looking around to the others, you suggest that they start getting themselves ready too… and you don’t mean their cocks. Shuffling a bit and looking at each other uncertainly, the remaining bunnies pair up, using tongues and paws to prepare themselves for your onslaught. Fingering and rimming each other, the bunnies moan as their respective partners loosen their butts for whatever you have in store for them.", parse);
 	Text.NL();
 	if(p1cock) {
-		Text.Add("You pull away the jack blowing your [cockDesc], gesturing for him to roll around on all fours. Telling the others that they’ll be next, you grasp the bunny by the hips and slowly insert your shaft into his colon. He whimpers and moans, but from how easily he stretches around your [cockDesc], this isn’t his first time on the receiving end. You find that your furry cocksleave is quite sturdy, and quickly pick up your pace, encouraged by his lewd moans.", parse);
+		Text.Add("You pull away the jack blowing your [cockDesc], gesturing for him to roll around on all fours. Telling the others that they’ll be next, you grasp the bunny by the hips and slowly insert your shaft into his colon. He whimpers and moans, but from how easily he stretches around your [cockDesc], this isn’t his first time on the receiving end. You find that your furry cocksleeve is quite sturdy, and quickly pick up your pace, encouraged by his lewd moans.", parse);
 		Text.NL();
 		
 		Sex.Anal(player, male);
@@ -1845,7 +1845,7 @@ Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 			
 			var cum = kiakai.OrgasmCum();
 						
-			Text.Add("Soon, [name]’s moans join with yours as they echo across the plains. Looks like your elf has grown to like getting fucked, you should make sure [heshe] gets [hisher] fill more often...", parse);
+			Text.Add("Soon, [name]’s moans join with yours as they echo across the plains. Looks like your elf has grown to like getting fucked; you should make sure [heshe] gets [hisher] fill more often...", parse);
 		}
 		else { //Prude
 			Text.Add("<i>“...You can only use my mouth though,”</i> [name] adds, fidgeting. The elf gets down on [hisher] knees, looking up apprehensively as the two rabbits close in. One of them offers the [priest] his cock, while the other sidles up behind [himher], hugging [himher].", parse);
