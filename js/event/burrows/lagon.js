@@ -425,26 +425,45 @@ Scenes.Lagon.RulerPrompt = function() {
 		options.push({ nameStr : "Usurp!",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>“And what can I do for you today, traveller?”</i> Lagon leisurely regards you with a bored expression. <i>“I believe that you already bought all the needed ingredients to Ophelia; I do not have any further requests for your currently.”</i> He shakes his head. <i>“I feel the girl grows rebellious. Perhaps it’s time to throw her in the Pit together with her mother, as I should have done long ago.”</i>", parse);
-				Text.NL();
-				Text.Add("He’ll do no such thing. The king’s eyebrows rises in question, as if he doesn’t quite understand what he’s hearing. <i>“I was thinking out loud, not asking for advice, traveller,”</i> he rests his chin on his knuckles, studying you. <i>“Do you presume to tell me what to do? What kind of nonsense has that girl been feeding you?”</i>", parse);
-				Text.NL();
-				Text.Add("You contemptuously tell him that you can see him for what he is; a savage beast that needs to be put down. Fury fills Lagon’s eyes, but before he can reply, your conversation is interrupted by the arrival of Ophelia, flanked by two guards.", parse);
-				Text.NL();
-				Text.Add("<i>“Y-you called for me, father?”</i> she falters, her gaze flickering between the two of you, locked in your staredown. The king is the first to break eye contact, casting his furious glare at his daughter.", parse);
-				Text.NL();
-				Text.Add("<i>“You!”</i> he screams, jumping to his feet, his face dark with rage. <i>“This fucking rebellious bullshit ends now! I’m throwing you into the fucking Pit for the rest of your damned life you sneaky little bitch!”</i> He starts making for her, but you step into his way.", parse);
-				Text.NL();
-				Text.Add("<i>“[stuttername]... this… please… no...”</i> Ophelia stammers. <i>“You can’t, I told you he’s too strong!”</i> This apparently doesn’t earn her any favors with daddy.", parse);
-				Text.NL();
-				Text.Add("<i>“Seize her, I’ll deal with her later! You three… take care of this cretin.”</i> Lagon hops back onto his throne as his guards rush to intercept you, his gaze drilling into you. <i>“As for you… when I’m done with you, you’ll be begging for me to throw you in the pit.”</i>", parse);
-				Text.NL();
-				Text.Add("It’s a fight!", parse);
+				Text.Add("Uh... are you sure that you’re ready for this? Once you go up against Lagon, there’s no turning back.", parse);
 				Text.Flush();
 				
-				Gui.NextPrompt(function() {
-					Scenes.Lagon.Usurp();
+				var options = new Array();
+				options.push({ nameStr : "Do it!",
+					func : function() {Text.Clear();
+						Text.Add("<i>“And what can I do for you today, traveller?”</i> Lagon leisurely regards you with a bored expression. <i>“I believe that you already bought all the needed ingredients to Ophelia; I do not have any further requests for your currently.”</i> He shakes his head. <i>“I feel the girl grows rebellious. Perhaps it’s time to throw her in the Pit together with her mother, as I should have done long ago.”</i>", parse);
+						Text.NL();
+						Text.Add("He’ll do no such thing. The king’s eyebrows rises in question, as if he doesn’t quite understand what he’s hearing. <i>“I was thinking out loud, not asking for advice, traveller,”</i> he rests his chin on his knuckles, studying you. <i>“Do you presume to tell me what to do? What kind of nonsense has that girl been feeding you?”</i>", parse);
+						Text.NL();
+						Text.Add("You contemptuously tell him that you can see him for what he is; a savage beast that needs to be put down. Fury fills Lagon’s eyes, but before he can reply, your conversation is interrupted by the arrival of Ophelia, flanked by two guards.", parse);
+						Text.NL();
+						Text.Add("<i>“Y-you called for me, father?”</i> she falters, her gaze flickering between the two of you, locked in your staredown. The king is the first to break eye contact, casting his furious glare at his daughter.", parse);
+						Text.NL();
+						Text.Add("<i>“You!”</i> he screams, jumping to his feet, his face dark with rage. <i>“This fucking rebellious bullshit ends now! I’m throwing you into the fucking Pit for the rest of your damned life you sneaky little bitch!”</i> He starts making for her, but you step into his way.", parse);
+						Text.NL();
+						Text.Add("<i>“[stuttername]... this… please… no...”</i> Ophelia stammers. <i>“You can’t, I told you he’s too strong!”</i> This apparently doesn’t earn her any favors with daddy.", parse);
+						Text.NL();
+						Text.Add("<i>“Seize her, I’ll deal with her later! You three… take care of this cretin.”</i> Lagon hops back onto his throne as his guards rush to intercept you, his gaze drilling into you. <i>“As for you… when I’m done with you, you’ll be begging for me to throw you in the pit.”</i>", parse);
+						Text.NL();
+						Text.Add("It’s a fight!", parse);
+						Text.Flush();
+						
+						Gui.NextPrompt(function() {
+							Scenes.Lagon.Usurp();
+						});
+					}, enabled : true,
+					tooltip : "You’re ready to take him on!"
 				});
+				options.push({ nameStr : "No",
+					func : function() {
+						Text.Clear();
+						Text.Add("You reconsider. Attacking right now would be foolhardy.", parse);
+						Text.Flush();
+						Scenes.Lagon.RulerPrompt();
+					}, enabled : true,
+					tooltip : "On second thought..."
+				});
+				Gui.SetButtonsFromList(options, false, null);
 			}, enabled : true,
 			tooltip : "Lagon’s reign has gone on long enough! Scepter or no scepter, he’s going down!"
 		});

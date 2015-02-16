@@ -10,6 +10,7 @@ Version 0.3w
 * Vena restoration added. You need to find the scepter and bring it to Ophelia. If you've already defeated Lagon, the scene should still trigger.
 * Lagon scenes added:
  - Talk scenes
+ - Tweaked the "Usurp!" option so you can't trigger it by accident.
 * Added several Save locations:
  - Outlaws camp
  - Dryad's glade
