@@ -1106,21 +1106,26 @@ Entity.prototype.ParserPronouns = function(parse, prefix) {
 }
 
 Entity.prototype.ParserTags = function(parse, prefix) {
+	var ent = this;
 	parse  = parse  || {};
 	prefix = prefix || "";
-	parse[prefix + "cocks"]     = function() { return this.MultiCockDesc(); }
-	parse[prefix + "cock"]      = function() { return this.FirstCock().Short(); }
-	parse[prefix + "cockTip"]   = function() { return this.FirstCock().TipShort(); }
-	parse[prefix + "balls"]     = function() { return this.BallsDesc(); }
-	parse[prefix + "vag"]       = function() { return this.FirstVag().Short(); }
-	parse[prefix + "clit"]      = function() { return this.FirstVag().ClitShort(); }
-	parse[prefix + "breasts"]   = function() { return this.FirstBreastRow().Short(); }
-	parse[prefix + "tongue"]    = function() { return this.TongueDesc(); }
-	parse[prefix + "tongueTip"] = function() { return this.TongueTipDesc(); }
-	parse[prefix + "skin"]      = function() { return this.SkinDesc(); }
-	parse[prefix + "hair"]      = function() { return this.Hair().Short(); }
-	parse[prefix + "face"]      = function() { return this.FaceDesc(); }
-	parse[prefix + "legs"]      = function() { return this.LegsDesc(); }
+	parse[prefix + "cocks"]     = function() { return ent.MultiCockDesc(); }
+	parse[prefix + "cock"]      = function() { return ent.FirstCock().Short(); }
+	parse[prefix + "cockTip"]   = function() { return ent.FirstCock().TipShort(); }
+	parse[prefix + "balls"]     = function() { return ent.BallsDesc(); }
+	parse[prefix + "butt"]      = function() { return ent.Butt().Short(); }
+	parse[prefix + "anus"]      = function() { return ent.Butt().AnalShort(); }
+	parse[prefix + "vag"]       = function() { return ent.FirstVag().Short(); }
+	parse[prefix + "clit"]      = function() { return ent.FirstVag().ClitShort(); }
+	parse[prefix + "breasts"]   = function() { return ent.FirstBreastRow().Short(); }
+	parse[prefix + "tongue"]    = function() { return ent.TongueDesc(); }
+	parse[prefix + "tongueTip"] = function() { return ent.TongueTipDesc(); }
+	parse[prefix + "skin"]      = function() { return ent.SkinDesc(); }
+	parse[prefix + "hair"]      = function() { return ent.Hair().Short(); }
+	parse[prefix + "face"]      = function() { return ent.FaceDesc(); }
+	parse[prefix + "legs"]      = function() { return ent.LegsDesc(); }
+	parse[prefix + "hand"]      = function() { return ent.HandDesc(); }
+	parse[prefix + "hips"]      = function() { return ent.HipsDesc(); }
 	return parse;
 }
 
