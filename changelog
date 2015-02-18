@@ -5,6 +5,14 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.3x
+------------
+* 
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.3w
 ------------
 * Vena restoration added. You need to find the scepter and bring it to Ophelia. If you've already defeated Lagon, the scene should still trigger.
@@ -21,10 +29,6 @@ Version 0.3w
  - Jeanne's tower
  - Ophelia's lab
 * GUI change: defeated enemies have their portraits faded. Report if this causes graphics glitches on some browsers.
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.3v2
 -------------

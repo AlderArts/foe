@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 3;
-VERSION_SUBSCRIPT = "v2";
-VERSION_NAME = "Ophelia (Terry save fix)";
+VERSION_SUBSCRIPT = "w";
+VERSION_NAME = "Lagon";
 
 SAVE_VERSION = 22;
 // Save version 1: Initial
