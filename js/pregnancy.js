@@ -11,7 +11,8 @@ PregType = {
 	Naga      : 5,
 	
 	Terry     : 100,
-	Roa       : 101
+	Roa       : 101,
+	Lagon     : 102
 };
 
 // Progress
