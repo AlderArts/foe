@@ -55,7 +55,7 @@ Butt.Tightness = {
 }
 Butt.prototype.HandleStretchOverTime = function(hours) {
 	//TODO rate
-	this.stretch.DecreaseStat(this.minStretch.Get(), hours * 0.02);
+	this.stretch.DecreaseStat(this.minStretch.Get(), hours * 0.05);
 }
 Butt.prototype.noun = function() {
 	var size = this.buttSize.Get();
