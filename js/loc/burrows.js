@@ -330,6 +330,10 @@ world.loc.Burrows.Lab.description = function() {
 	Scenes.Ophelia.LabDesc();
 }
 
+
+world.SaveSpots["Burrows"] = world.loc.Burrows.Lab;
+world.loc.Burrows.Lab.SaveSpot = "Burrows";
+world.loc.Burrows.Lab.safe = function() { return true; };
 world.loc.Burrows.Lab.links.push(new Link(
 	"Tunnels", true, true,
 	null,
