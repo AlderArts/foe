@@ -1686,8 +1686,12 @@ Entity.prototype.FuckAnal = function(butt, cock, expMult) {
 		var thk = cock.Thickness();
 		var cap = butt.Cap();
 		var ratio = thk / cap;
-		if(ratio > 0.75)
-			butt.stretch.IncreaseStat(Butt.Tightness.gaping, 0.5);
+		if(ratio < 0.5)
+			butt.stretch.IncreaseStat(Butt.Tightness.flexible, 0.25);
+		else if(ratio < 1)
+			butt.stretch.IncreaseStat(Butt.Tightness.loose, 0.5);
+		else
+			butt.stretch.IncreaseStat(Butt.Tightness.gaping, 0.75);
 		var stretch2 = butt.Tightness();
 		if(stretch < Butt.Tightness.flexible && stretch2 >= Butt.Tightness.flexible) {
 			Text.Add("<b>[poss] butt has become loose.</b>", parse);
@@ -1725,8 +1729,12 @@ Entity.prototype.FuckVag = function(vag, cock, expMult) {
 		var thk = cock.Thickness();
 		var cap = vag.Cap();
 		var ratio = thk / cap;
-		if(ratio > 0.75)
-			vag.stretch.IncreaseStat(Vagina.Tightness.gaping, 0.5);
+		if(ratio < 0.5)
+			vag.stretch.IncreaseStat(Vagina.Tightness.flexible, 0.25);
+		else if(ratio < 1)
+			vag.stretch.IncreaseStat(Vagina.Tightness.loose, 0.5);
+		else
+			vag.stretch.IncreaseStat(Vagina.Tightness.gaping, 0.75);
 		var stretch2 = vag.Tightness();
 		if(stretch < Vagina.Tightness.flexible && stretch2 >= Vagina.Tightness.flexible) {
 			Text.Add("<b>[poss] pussy has become loose.</b>", parse);
