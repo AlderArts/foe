@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 3;
-VERSION_SUBSCRIPT = "w";
-VERSION_NAME = "Lagon";
+VERSION_SUBSCRIPT = "w2";
+VERSION_NAME = "Lagon (bugfixes)";
 
 SAVE_VERSION = 22;
 // Save version 1: Initial
