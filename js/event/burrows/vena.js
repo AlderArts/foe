@@ -70,6 +70,7 @@ Scenes.Vena.RestoreEntrypoint = function(fight) {
 	};
 	
 	vena.flags["Met"] |= Vena.Met.Restored;
+	burrows.flags["Access"] = Burrows.AccessFlags.QuestlineComplete;
 	
 	ophelia.relation.IncreaseStat(100, 25);
 	party.location = world.loc.Burrows.Pit;

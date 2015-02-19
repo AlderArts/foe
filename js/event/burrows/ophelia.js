@@ -491,13 +491,9 @@ Scenes.Ophelia.TalkPrompt = function() {
 					//[Yes] [No]
 					var options = new Array();
 					options.push({ nameStr : "Yes",
-						func : function() {							
-							// TODO
-							Text.Clear();
-							Text.Add("PLACEHOLDER", parse);
-							Text.NL();
-							Scenes.Vena.RestoreEntrypoint();
-						}, enabled : burrows.flags["Access"] >= Burrows.AccessFlags.QuestlineComplete,
+						func : function() {
+							Scenes.Ophelia.TurnInScepter();
+						}, enabled : party.Inv().QueryNum(Items.Quest.Scepter),
 						tooltip : "Show her the scepter."
 					});
 					options.push({ nameStr : "No",
@@ -1424,16 +1420,7 @@ Scenes.Ophelia.LabPrompt = function() {
 	if(burrows.flags["Access"] < Burrows.AccessFlags.QuestlineComplete && party.Inv().QueryNum(Items.Quest.Scepter))
 	options.push({ nameStr : "Scepter",
 		func : function() {
-			Text.Clear();
-			Text.Add("<i>“You brought it?”</i> Ophelia drops what she’s working with, throwing herself into your arms. <i>“Thank you!”</i> Tears are streaming down her cheeks. <i>“You don’t know how much this means to me. Trying to take care of things here alone has been so difficult...”</i> You comfort her as best you can, then hand over the scepter.", parse);
-			Text.NL();
-			Text.Add("<i>“Let me find it...”</i> the bunny scrambles through her notes, retrieving the scroll that details the workings of the scepter. You look over her shoulder as she studies it. The scroll makes no mention of the scepter itself, but describes the gemstone in quite a lot of detail.", parse);
-			Text.NL();
-			Text.Add("<i>“You found it without any problems? What about my brother?”</i> Her eyes grow larger and larger as you describe your adventures to retrieve the scepter.", parse);
-			Text.NL();
-			Text.Add("The alchemist motions for you to follow, studying the rod as the two of you head toward the Pit. The queen’s guards silently fold in around you, staying close to their interim matriarch.", parse);
-			Text.NL();
-			Scenes.Vena.RestoreEntrypoint(false);
+			Scenes.Ophelia.TurnInScepter();
 		}, enabled : true,
 		tooltip : "Give Ophelia the scepter."
 	});
@@ -1451,6 +1438,23 @@ Scenes.Ophelia.LabPrompt = function() {
 	*/
 	
 	Gui.SetButtonsFromList(options, true);
+}
+
+Scenes.Ophelia.TurnInScepter = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("<i>“You brought it?”</i> Ophelia drops what she’s working with, throwing herself into your arms. <i>“Thank you!”</i> Tears are streaming down her cheeks. <i>“You don’t know how much this means to me. Trying to take care of things here alone has been so difficult...”</i> You comfort her as best you can, then hand over the scepter.", parse);
+	Text.NL();
+	Text.Add("<i>“Let me find it...”</i> the bunny scrambles through her notes, retrieving the scroll that details the workings of the scepter. You look over her shoulder as she studies it. The scroll makes no mention of the scepter itself, but describes the gemstone in quite a lot of detail.", parse);
+	Text.NL();
+	Text.Add("<i>“You found it without any problems? What about my brother?”</i> Her eyes grow larger and larger as you describe your adventures to retrieve the scepter.", parse);
+	Text.NL();
+	Text.Add("The alchemist motions for you to follow, studying the rod as the two of you head toward the Pit. The queen’s guards silently fold in around you, staying close to their interim matriarch.", parse);
+	Text.NL();
+	Scenes.Vena.RestoreEntrypoint(false);
 }
 
 Scenes.Ophelia.PotionsPrompt = function() {
