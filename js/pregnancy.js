@@ -184,6 +184,11 @@ PregnancyHandler.prototype.IsPregnant = function(opts) {
 	return womb.pregnant;
 }
 
+PregnancyHandler.prototype.MPregEnabled = function() {
+	return false; //TODO
+}
+
+
 /*
  * opts:
  * 	slot   := PregnancyHandler.Slot
@@ -211,6 +216,7 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 	
 	if(womb == null)  return false;
 	if(womb.pregnant) return false;
+	if(slot == PregnancyHandler.Slot.Butt && !this.MPregEnabled()) return false;
 	
 	// TODO: Check for sterility, herbs etc
 	
