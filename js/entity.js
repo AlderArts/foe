@@ -1390,6 +1390,16 @@ Entity.prototype.PregnancyTrigger = function(womb, slot) {
 	// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
 	Gui.Callstack.unshift(function() {
 		womb.pregnant = false;
+		
+		var parse = {
+			
+		};
+		
+		Text.Clear();
+		Text.Add("PLACEHOLDER: Terry gave birth.", parse);
+		Text.NL();
+		Text.Flush();
+		Gui.NextPrompt();
 	});
 }
 

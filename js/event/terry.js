@@ -503,14 +503,15 @@ Scenes.Terry.Appearance = function() {
 	Text.Add("Your gaze sweeps down Terry’s form, toward [hisher] waist. ", parse);
 	// Pregnancy
 	var womb = terry.PregHandler().Womb();
-	var stage = womb ? womb.progress : null;
-	if     (womb && stage > 0.8)
+	var preg = womb && womb.pregnant;
+	var stage = preg ? womb.progress : null;
+	if     (preg && stage > 0.8)
 		Text.Add("Seems like Terry’s pregnancy is in its final stages. The [foxvixen]’s belly is nice and round. When you put your hand on [hisher] belly, you can feel the baby inside kick you. The big belly coupled with the [foxvixen]’s sometimes distant gaze make [himher] look very attractive...", parse);
-	else if(womb && stage > 0.6)
+	else if(preg && stage > 0.6)
 		Text.Add("[HisHer] pregnancy has come a long way. You don’t think there’s much more [heshe] can grow before [heshe]’s ripe for birthing a little fox into the world. Terry sometimes rubs [hisher] belly with a smile, it’s clear that despite the burdens [hisher] pregnancy have imposed on [himher], [heshe]’s looking forward to popping the little fox out.", parse);
-	else if(womb && stage > 0.4)
+	else if(preg && stage > 0.4)
 		Text.Add("Terry’s belly is growing nicely. The [foxvixen] sometimes has cravings, but that’s to be expected of a pregnant [foxvixen]. At least [heshe]’s not feeling sick anymore. You gotta say though, this pretty belly of [hishers] makes [himher] look very feminine and attractive. Maybe you should consider calling Terry over for some alone time later...", parse);
-	else if(womb && stage > 0.2)
+	else if(preg && stage > 0.2)
 		Text.Add("[HisHer] belly’s developing a nice paunch, and you can see that [hisher] pregnancy is taking its toll on the poor [foxvixen]. Sometimes Terry looks sick or tired, but that only lasts an instant before the [foxvixen] recomposes [himher]self.", parse);
 	else
 		Text.Add("Your [foxvixen] is nicely trim, lean, flat-bellied and perfectly suited for sneaking through windows or wriggling under couches. But there’s not really anything else to say about it, so your gaze keeps sweeping down toward [hisher] loins...", parse);
