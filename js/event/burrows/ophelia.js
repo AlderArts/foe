@@ -1218,7 +1218,7 @@ Scenes.Ophelia.SexVaginal = function() {
 				Text.NL();
 				Text.Add("<i>“That’s too bad. I’m feeling so full...”</i>", parse);
 				Text.NL();
-				Text.Add("You quip back that she looks it too. In fact, you doubt she could hold much more than this. So best you stop tempting her...", parse);
+				Text.Add("You quip back that she looks it too. In fact, you doubt she could hold much more than this. So she best stop tempting you...", parse);
 				Text.NL();
 				Text.Add("Ophelia pouts a little, but you won’t be swayed. Instead, you slide free of her hole, watching as a nearly equal mixture of your cum and hers pours in a perverse river from the twitching labia.", parse);
 			}
