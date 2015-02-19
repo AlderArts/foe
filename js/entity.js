@@ -1392,11 +1392,11 @@ Entity.prototype.PregnancyTrigger = function(womb, slot) {
 		womb.pregnant = false;
 		
 		var parse = {
-			
+			name : this.name
 		};
 		
 		Text.Clear();
-		Text.Add("PLACEHOLDER: Terry gave birth.", parse);
+		Text.Add("PLACEHOLDER: [name] gave birth.", parse);
 		Text.NL();
 		Text.Flush();
 		Gui.NextPrompt();
