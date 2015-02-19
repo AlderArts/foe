@@ -1634,7 +1634,7 @@ Scenes.Lagon.RulerTalkPrompt = function() {
 	}
 	*/
 	if(burrows.LagonAlly()) {
-		if(!party.Inv().QueryItem(Items.Quest.Scepter)) {
+		if(!party.Inv().QueryNum(Items.Quest.Scepter)) {
 			options.push({ nameStr : "Scepter",
 				func : function() {
 					Text.Clear();

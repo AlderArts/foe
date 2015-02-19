@@ -10,6 +10,7 @@ Version 0.3x
 * Fixed broken Vena restoration (doesn't loop anymore).
 * Removed ability for Lagon to impregnate your butt.
 * Fixed a bug that gave Terry perpeptual pregnancy.
+* Fixed a bug that would break talking to Lagon when you had sided with him.
 
 --------------------------------------------
              PREVIOUS VERSIONS
