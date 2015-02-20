@@ -9,6 +9,8 @@ Images.pc_fem       = "data/fem_pc.png";
 
 Images.kiakai       = "data/avatar_kiakai.png";
 Images.maria        = "data/avatar_maria.png";
+Images.cveta        = "data/cveta.png";
+Images.cveta_b      = "data/cveta_b.png";
 Images.gwendy       = "data/avatar_gwendy.png";
 Images.miranda      = "data/miranda.png";
 Images.roa          = "data/roa_avatar.png";
