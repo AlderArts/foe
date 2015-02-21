@@ -8,8 +8,9 @@ function Cveta(storage) {
 
 	// Character stats
 	this.name = "Cveta";
+	
+	this.avatar.combat = Images.cveta;
 	/*
-	//this.avatar.combat = Images.maria;
 	
 	this.maxHp.base        = 100;
 	this.maxSp.base        = 80;
@@ -42,6 +43,7 @@ function Cveta(storage) {
 	this.flags["Singer"]  = Cveta.Singer.No;
 	this.flags["Bard"]    = Cveta.Bard.No;
 	this.flags["Wings"]   = 0;
+	this.flags["BRoses"]  = 0;
 	
 	this.violinTimer = new Time();
 	this.flirtTimer  = new Time();
@@ -89,6 +91,9 @@ Cveta.prototype.FromStorage = function(storage) {
 	
 	this.LoadPersonalityStats(storage);
 	this.LoadFlags(storage);
+	
+	if(this.flags["BRoses"] != 0)
+		this.avatar.combat = Images.cveta_b;
 }
 
 Cveta.prototype.ToStorage = function() {
