@@ -52,8 +52,10 @@ InitCache = function() {
 	danie   = new Danie(gameCache.danie);
 	adrian  = new Adrian(gameCache.adrian);
 	
-	maria   = new Maria(gameCache.maria);
-	cveta   = new Cveta(gameCache.cveta);
+	outlaws  = new Outlaws(gameCache.outlaws);
+	aquilius = new Aquilius(gameCache.aquilius);
+	maria    = new Maria(gameCache.maria);
+	cveta    = new Cveta(gameCache.cveta);
 	
 	fera    = new Fera(gameCache.fera);
 	kyna    = new Kyna(gameCache.kyna);
@@ -79,6 +81,7 @@ InitCache = function() {
 	world.EntityStorage.push(farm);
 	world.EntityStorage.push(glade);
 	world.EntityStorage.push(oasis);
+	world.EntityStorage.push(outlaws);
 	
 	// Put entities in world storage
 	world.EntityStorage.push(player);
@@ -108,6 +111,7 @@ InitCache = function() {
 	world.EntityStorage.push(danie);
 	world.EntityStorage.push(adrian);
 	
+	world.EntityStorage.push(aquilius);
 	world.EntityStorage.push(maria);
 	world.EntityStorage.push(cveta);
 	
@@ -387,8 +391,10 @@ GameToCache = function() {
 	gameCache.twins   = twins.ToStorage();
 	gameCache.room69  = room69.ToStorage();
 	
-	gameCache.maria   = maria.ToStorage();
-	gameCache.cveta   = cveta.ToStorage();
+	gameCache.outlaws  = outlaws.ToStorage();
+	gameCache.aquilius = aquilius.ToStorage();
+	gameCache.maria    = maria.ToStorage();
+	gameCache.cveta    = cveta.ToStorage();
 	
 	// Other NPCs
 	gameCache.chief   = chief.ToStorage();
