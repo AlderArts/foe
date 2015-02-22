@@ -49,7 +49,7 @@ Scenes.Maria = {};
 // Add initial event, only trigger 6-20
 world.loc.Forest.Outskirts.enc.AddEnc(function() {
 	return Scenes.Maria.ForestMeeting;
-}, 3.0, function() { return miranda.flags["Met"] >= Miranda.Met.Met && gameCache.flags["OutlawsRep"] == 0 && (world.time.hour >= 6 && world.time.hour < 20); });
+}, 3.0, function() { return miranda.flags["Met"] >= Miranda.Met.Met && outlaws.Rep() == 0 && (world.time.hour >= 6 && world.time.hour < 20); });
 
 
 Maria.prototype.FromStorage = function(storage) {
@@ -629,7 +629,7 @@ Scenes.Maria.ForestEnd = function() {
 	
 	party.location = world.loc.Forest.Outskirts;
 	
-	gameCache.flags["OutlawsRep"] = 1;
+	outlaws.relation.IncreaseStat(1, 1);
 	
 	world.TimeStep({hour: 3});
 	Gui.NextPrompt();

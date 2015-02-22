@@ -1379,7 +1379,7 @@ Scenes.Miranda.WelcomeToRigardEnd = function() {
 	Text.Add("Miranda herself seems like she isn't really the sort to bow to authority. She is at work now, but perhaps she could be persuaded to let you into the city if you meet up with her in the slums during the evening hours.", parse);
 	Text.NL();
 	Text.Add("Failing all else, if those outlaws are as crafty as the guardswoman made them out to be, they should have some way of accessing the city. ", parse);
-	if(gameCache.flags["OutlawsRep"] != 0)
+	if(outlaws.Rep() > 0)
 		Text.Add("Asking Zenith or Maria could perhaps give you a clue on how to proceed.", parse);
 	else
 		Text.Add("From what Miranda said, they are probably holed up somewhere in the forest... perhaps it's worth seeking them out.", parse);

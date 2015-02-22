@@ -71,8 +71,8 @@ InitCache = function() {
 	aria        = new Aria();
 	uru         = new Uru();
 	sylistraxia = new Sylistraxia();
-	ches        = new Ches();
-	lucille     = new Lucille();
+	ches        = new Ches(); //TODO
+	lucille     = new Lucille(); //TODO
 	
 	world.EntityStorage = new Array();
 	
@@ -156,8 +156,6 @@ InitCache = function() {
 	gameCache.flags["FarmFound"]      = gameCache.flags["FarmFound"] || 0;
 	gameCache.flags["FarmLockout"]    = gameCache.flags["FarmLockout"] || 0;
 	
-	// OUTLAWS
-	gameCache.flags["OutlawsRep"]     = gameCache.flags["OutlawsRep"] || 0;
 	
 	gameCache.flags["NagaVenom"]      = gameCache.flags["NagaVenom"] || 0;
 	
@@ -364,6 +362,11 @@ CacheToGame = function() {
 			if(vag == Terry.Pussy.Used)
 				terry.FirstVag().virgin = false;
 		}
+	}
+	if(gameCache.version < 23) {
+		// OUTLAWS
+		outlaws.relation.base = gameCache.flags["OutlawsRep"] || 0;
+		gameCache.flags["OutlawsRep"] = null;
 	}
 }
 
