@@ -1,20 +1,21 @@
 /*
  * 
- * Mothgirl, lvl 4-6
+ * Zebra Shaman
  * 
  */
 
-Scenes.FeralWolf = {};
+Scenes.ZebraShaman = {};
 
-function FeralWolf(levelbonus) {
+function ZebraShaman(levelbonus) {
 	Entity.call(this);
 	
-	this.avatar.combat     = Images.wolf;
-	this.name              = "Wolf";
-	this.monsterName       = "the wolf";
-	this.MonsterName       = "The wolf";
-	this.body.DefMale(); // TODO: Feral form
+	//this.avatar.combat     = Images.wolf;
+	this.name              = "Shaman";
+	this.monsterName       = "the zebra shaman";
+	this.MonsterName       = "The zebra shaman";
+	this.body.DefMale();
 	
+	//TODO
 	this.maxHp.base        = 200;
 	this.maxSp.base        = 60;
 	this.maxLust.base      = 45;
@@ -34,33 +35,33 @@ function FeralWolf(levelbonus) {
 	
 	this.combatExp         = 5 + this.level;
 	this.coinDrop          = 2 + this.level * 4;
-	
-	this.body.SetRace(Race.wolf);
+	//TODO
+	this.body.SetRace(Race.horse);
 	this.body.SetBodyColor(Color.gray);
 	
-	this.body.SetEyeColor(Color.gold);
+	this.body.SetEyeColor(Color.blue);
 	
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.wolf, Color.gray);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.horse, Color.black);
 
 	// Set hp and mana to full
 	this.SetLevelBonus();
 	this.RestFull();
 }
-FeralWolf.prototype = new Entity();
-FeralWolf.prototype.constructor = FeralWolf;
+ZebraShaman.prototype = new Entity();
+ZebraShaman.prototype.constructor = ZebraShaman;
 
-FeralWolf.prototype.DropTable = function() {
+ZebraShaman.prototype.DropTable = function() {
 	var drops = [];
-	if(Math.random() < 0.05) drops.push({ it: Items.Lobos });
-	if(Math.random() < 0.5)  drops.push({ it: Items.WolfFang });
-	if(Math.random() < 0.5)  drops.push({ it: Items.WolfPelt });
-	if(Math.random() < 0.5)  drops.push({ it: Items.CanisRoot });
+	if(Math.random() < 0.05) drops.push({ it: Items.Equinium });
+	if(Math.random() < 0.5)  drops.push({ it: Items.HorseCum });
+	if(Math.random() < 0.5)  drops.push({ it: Items.HorseHair });
+	if(Math.random() < 0.5)  drops.push({ it: Items.HorseShoe });
 	return drops;
 }
 
-FeralWolf.prototype.Act = function(encounter, activeChar) {
+ZebraShaman.prototype.Act = function(encounter, activeChar) {
 	// TODO: Very TEMP
-	Text.Add(this.name + " acts! Growl!");
+	Text.Add(this.name + " acts!");
 	Text.NL();
 	Text.Flush();
 	
@@ -73,6 +74,7 @@ FeralWolf.prototype.Act = function(encounter, activeChar) {
 		tName  : t.name
 	};
 
+	//TODO
 	var choice = Math.random();
 	if(choice < 0.5)
 		Abilities.Attack.Use(encounter, this, t);
@@ -84,9 +86,9 @@ FeralWolf.prototype.Act = function(encounter, activeChar) {
 		Abilities.Seduction.Tease.Use(encounter, this, t);
 }
 
-Scenes.FeralWolf.LoneEnc = function() {
+Scenes.ZebraShaman.LoneEnc = function() {
  	var enemy = new Party();
-	enemy.AddMember(new FeralWolf());
+	enemy.AddMember(new ZebraShaman());
 	var enc = new Encounter(enemy);
 	/*
 	enc.canRun = false;
