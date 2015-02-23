@@ -148,6 +148,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/enemy/scorp.js \
 	js/enemy/naga.js \
 	js/enemy/drake.js \
+	js/enemy/zebra.js \
 	js/enemy/orchid.js \
 	js/enemy/gol.js \
 	js/main.js \
