@@ -40,6 +40,7 @@ CreditsScreen = function() {
 	Text.Add("Gol: Me and Fenoxo<br/>");
 	Text.Add("Mothgirl: Savin<br/>");
 	Text.Add("Cveta: The Observer<br/>");
+	Text.Add("Zebra shaman: Bluebusterman<br/>");
 	
 	Text.NL();
 	
