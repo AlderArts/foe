@@ -51,6 +51,14 @@ world.loc.Highlands.Hills.AddEncounter({
 	visible : true, enabled : true, hunt : true
 });
 
+world.loc.Highlands.Hills.AddEncounter({
+	nameStr : "Zebra",
+	func    : function() {
+		return Scenes.ZebraShaman.LoneEnc();
+	}, odds : 1, enc : true,
+	visible : true, enabled : true, hunt : true
+});
+
 world.loc.Highlands.Hills.enc.AddEnc(function() {
 	return Scenes.Momo.MomoEnc;
 }, 1.0, function() { return momo.Wandering(); });
