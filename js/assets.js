@@ -58,6 +58,7 @@ Images.knight       = "data/knight.png";
 
 Images.golemboss    = "data/golem.png";
 Images.corr_orchid  = "data/orchid.png";
+Images.corishev     = "data/corishev.png";
 
 Images.imgButtonEnabled     = "data/gui/big_blue.png";
 Images.imgButtonEnabled2    = "data/gui/big_green.png";
