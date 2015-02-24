@@ -14,27 +14,29 @@ function ZebraShaman(levelbonus) {
 	this.monsterName       = "the zebra shaman";
 	this.MonsterName       = "The zebra shaman";
 	this.body.DefMale();
+	this.FirstCock().thickness.base = 7;
+	this.FirstCock().length.base = 35;
+	this.Balls().size.base = 6;
 	
-	//TODO
-	this.maxHp.base        = 200;
-	this.maxSp.base        = 60;
-	this.maxLust.base      = 45;
+	this.maxHp.base        = 250;
+	this.maxSp.base        = 150;
+	this.maxLust.base      = 80;
 	// Main stats
-	this.strength.base     = 25;
-	this.stamina.base      = 20;
-	this.dexterity.base    = 19;
-	this.intelligence.base = 15;
-	this.spirit.base       = 19;
-	this.libido.base       = 18;
-	this.charisma.base     = 14;
+	this.strength.base     = 20;
+	this.stamina.base      = 30;
+	this.dexterity.base    = 16;
+	this.intelligence.base = 30;
+	this.spirit.base       = 35;
+	this.libido.base       = 16;
+	this.charisma.base     = 18;
 	
-	this.level             = 4 + Math.floor(Math.random() * 4);
+	this.level             = 6 + Math.floor(Math.random() * 4);
 	this.sexlevel          = 2;
 	if(levelbonus)
 		this.level += levelbonus;
 	
-	this.combatExp         = 5 + this.level;
-	this.coinDrop          = 2 + this.level * 4;
+	this.combatExp         = 6 + this.level;
+	this.coinDrop          = 8 + this.level * 4;
 	//TODO
 	this.body.SetRace(Race.horse);
 	this.body.SetBodyColor(Color.gray);

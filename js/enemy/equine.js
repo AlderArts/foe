@@ -13,6 +13,9 @@ function Equine(gender, levelbonus) {
 		this.monsterName       = "the stallion";
 		this.MonsterName       = "The stallion";
 		this.body.DefMale();
+		this.FirstCock().thickness.base = 7;
+		this.FirstCock().length.base = 35;
+		this.Balls().size.base = 6;
 	}
 	else if(gender == Gender.female) {
 		this.avatar.combat     = Images.mare;

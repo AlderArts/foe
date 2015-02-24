@@ -14,6 +14,9 @@ function FeralWolf(levelbonus) {
 	this.monsterName       = "the wolf";
 	this.MonsterName       = "The wolf";
 	this.body.DefMale(); // TODO: Feral form
+	this.FirstCock().thickness.base = 6;
+	this.FirstCock().length.base = 28;
+	this.Balls().size.base = 5;
 	
 	this.maxHp.base        = 200;
 	this.maxSp.base        = 60;
