@@ -54,6 +54,7 @@ Images.gol          = "data/gol.png";
 Images.bandit_male1 = "data/bandit_male1.png";
 Images.bandit_male2 = "data/bandit_male2.png";
 Images.bandit_female1 = "data/bandit_female1.png";
+Images.knight       = "data/knight.png";
 
 Images.golemboss    = "data/golem.png";
 Images.corr_orchid  = "data/orchid.png";
