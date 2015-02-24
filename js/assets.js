@@ -45,6 +45,7 @@ Images.lizard_male  = "data/lizard_male.png";
 Images.lizard_fem   = "data/lizard_fem.png";
 Images.mothgirl     = "data/moth.png";
 Images.wolf         = "data/wolf.png";
+Images.zebra        = "data/zebra.png";
 Images.scorp        = "data/scorp.png";
 Images.naga         = "data/naga.png";
 Images.drake        = "data/drake.png";

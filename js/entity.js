@@ -1109,9 +1109,12 @@ Entity.prototype.ParserTags = function(parse, prefix) {
 	var ent = this;
 	parse  = parse  || {};
 	prefix = prefix || "";
+	
+	var p1cock = ent.BiggestCock();
+	
 	parse[prefix + "cocks"]     = function() { return ent.MultiCockDesc(); }
-	parse[prefix + "cock"]      = function() { return ent.FirstCock().Short(); }
-	parse[prefix + "cockTip"]   = function() { return ent.FirstCock().TipShort(); }
+	parse[prefix + "cock"]      = function() { return p1cock.Short(); }
+	parse[prefix + "cockTip"]   = function() { return p1cock.TipShort(); }
 	parse[prefix + "balls"]     = function() { return ent.BallsDesc(); }
 	parse[prefix + "butt"]      = function() { return ent.Butt().Short(); }
 	parse[prefix + "anus"]      = function() { return ent.Butt().AnalShort(); }
@@ -1125,6 +1128,7 @@ Entity.prototype.ParserTags = function(parse, prefix) {
 	parse[prefix + "hair"]      = function() { return ent.Hair().Short(); }
 	parse[prefix + "face"]      = function() { return ent.FaceDesc(); }
 	parse[prefix + "legs"]      = function() { return ent.LegsDesc(); }
+	parse[prefix + "leg"]       = function() { return ent.LegDesc(); }
 	parse[prefix + "feet"]      = function() { return ent.FeetDesc(); }
 	parse[prefix + "hand"]      = function() { return ent.HandDesc(); }
 	parse[prefix + "hips"]      = function() { return ent.HipsDesc(); }
