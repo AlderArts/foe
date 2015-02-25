@@ -4630,7 +4630,7 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 					parse["load"] = "meager";
 				Text.Add(" The dominated dobie gasps as she feels the first splatters of your [load] load hit her inner walls, hot and sticky. You keep thrusting into her as you shoot wad after wad of thick cum, painting her anal passage white.", parse);
 				if(load > 3) {
-					parse["several"] = Text.NumToText(Math.max(Math.floor(2 + (load - 3)*2), 9));
+					parse["several"] = Text.NumToText(Math.min(Math.floor(2 + (load - 3)*2), 9));
 					Text.Add(" The herm swells up rapidly as your seed rushes into her stomach, ending with her looking [several] months pregnant.", parse);
 					if(load > 6) {
 						Text.Add(" That which can’t fit inside her bloated belly splashes out around your throbbing member, staining her sheets as it dribbles out into a large pool beneath her ravaged ass.", parse);
