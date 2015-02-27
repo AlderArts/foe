@@ -10,6 +10,7 @@ Version 0.3x
 * Zebra shaman encounter added to highlands, written by Bluebusterman. Current scenes:
  - Win, Fuck him
 * Completely refactored out use of old Text.AddOutput and Text.Newline. It's possible that this might have some adverse effects. Holler if there are suddenly blank screens or missing text somewhere.
+* Made a tweak to image preloading code that should hopefully help with the loader freezing on 86/88 or similar. Holler if the issue still persists
 
 --------------------------------------------
              PREVIOUS VERSIONS

@@ -113,6 +113,6 @@ function assetsOverlay() {
 LoadImage = function(src, func) {
 	var Preload = new Image();
 	NUM_ASSETS++;
-	Preload.src    = src;
 	Preload.onload = func;
+	Preload.src    = src;
 }
