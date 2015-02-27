@@ -79,8 +79,8 @@ Mothgirl.prototype.DropTable = function() {
 
 Mothgirl.prototype.Act = function(encounter, activeChar) {
 	// TODO: Very TEMP
-	Text.AddOutput(this.name + " acts! Bounce bounce!");
-	Text.Newline();
+	Text.Add(this.name + " acts! Bounce bounce!");
+	Text.NL();
 	
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);

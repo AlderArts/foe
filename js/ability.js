@@ -104,7 +104,8 @@ Ability.prototype.CastInternal = function(encounter, caster, target) {
 		target : TargetMode.ToString(this.targetMode)
 		}
 	
-	Text.AddOutput("[name] used [ability] on [target] (not implemented).", parse);
+	Text.Add("[name] used [ability] on [target] (not implemented).", parse);
+	Text.Flush();
 	
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
@@ -297,9 +298,10 @@ AbilityCollection.prototype.OnSelect = function(encounter, caster, backPrompt) {
 		
 		for(var i = 0; i < collection.AbilitySet.length; i++) {
 			var ability = collection.AbilitySet[i];
-			Text.AddOutput("[ability] ([cost]): [desc]<br/>",
+			Text.Add("[ability] ([cost]): [desc]<br/>",
 				{ability: ability.name, cost: ability.CostStr(), desc: ability.Short()});
 		}
+		Text.Flush();
 	};
 	
 	var ret = function() {

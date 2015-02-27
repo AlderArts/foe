@@ -75,8 +75,8 @@ Naga.prototype.DropTable = function() {
 
 Naga.prototype.Act = function(encounter, activeChar) {
 	// TODO: Very TEMP
-	Text.AddOutput(this.name + " acts! Hiss!");
-	Text.Newline();
+	Text.Add(this.name + " acts! Hiss!");
+	Text.NL();
 	
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);

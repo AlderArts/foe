@@ -76,8 +76,8 @@ GolQueen.prototype.DropTable = function() {
 
 GolQueen.prototype.Act = function(encounter, activeChar) {
 	// TODO: Very TEMP
-	Text.AddOutput(this.name + " acts! Buzz!");
-	Text.Newline();
+	Text.Add(this.name + " acts! Buzz!");
+	Text.NL();
 	
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);

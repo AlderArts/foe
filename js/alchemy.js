@@ -40,7 +40,8 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 			obj:     item,
 			func: function(it) {
 				Text.Clear();
-				Text.AddOutput("[name] mix[es] the ingredients, preparing 1x [item].", {name: alchemist.NameDesc(), es: alchemist.plural() ? "" : "es", item: it.name});
+				Text.Add("[name] mix[es] the ingredients, preparing 1x [item].", {name: alchemist.NameDesc(), es: alchemist.plural() ? "" : "es", item: it.name});
+				Text.Flush();
 				
 				for(var j = 0; j < it.recipe.length; j++) {
 					var ingredient = it.recipe[j];

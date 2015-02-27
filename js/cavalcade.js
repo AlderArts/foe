@@ -78,17 +78,18 @@ Cavalcade.prototype.Finish = function() {
 		for(var j = 0; j < this.house.length; j++)
 			this.players[i].hand.push(this.house[j]);
 		// TODO: TEMP
-		Text.AddOutput("[Poss] hand:<br/>", {Poss: this.players[i].Possessive()});
+		Text.Add("[Poss] hand:<br/>", {Poss: this.players[i].Possessive()});
 		for(var j = 0; j < this.players[i].hand.length; j++) {
 			var card = this.players[i].hand[j];
 			if(card == this.stag)
-				Text.AddOutput(card.name + Text.BoldColor(" (*)"));
+				Text.Add(card.name + Text.BoldColor(" (*)"));
 			else
-				Text.AddOutput(card.name);
-			Text.AddOutput(", ");
+				Text.Add(card.name);
+			Text.Add(", ");
 		}
-		Text.AddOutput("<br/>");
+		Text.Add("<br/>");
 	}
+	Text.Flush();
 }
 
 Cavalcade.CardCountSorter = function(a, b) {

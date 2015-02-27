@@ -17,8 +17,8 @@ Feline.DropTable = function() {
 
 Feline.Act = function(encounter, activeChar) {
 	// TODO: Very TEMP
-	Text.AddOutput(this.name + " acts! Meow!");
-	Text.Newline();
+	Text.Add(this.name + " acts! Meow!");
+	Text.NL();
 	
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);

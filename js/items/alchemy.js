@@ -64,8 +64,9 @@ Items.Lacertium.PushEffect(function(target) {
 	var cocks = target.AllCocks();
 	if(cocks.length == 1 && cocks[0].race == Race.lizard && Math.random() < 0.1) {
 		cocks.push(cocks[0].Clone());
-		Text.AddOutput("[Poss] reptilian cock splits in two identical dicks!", { Poss: target.Possessive() });
-		Text.Newline();
+		Text.Add("[Poss] reptilian cock splits in two identical dicks!", { Poss: target.Possessive() });
+		Text.NL();
+		Text.Flush();
 	}
 });
 Items.Lacertium.PushEffect(TF.ItemEffects.RemAntenna, {odds: 0.2, count: 2});
@@ -113,8 +114,8 @@ Items.Bovia.PushEffect(function(target) {
 		for(var i = 0; i < breasts.length; i++) {
 			var diff = breasts[i].size.IncreaseStat(40, Math.random() * 5);
 			if(diff) {
-				Text.AddOutput("[Poss] breasts grow larger by " + diff + "cm.", parse);
-				Text.Newline();
+				Text.Add("[Poss] breasts grow larger by " + diff + "cm.", parse);
+				Text.NL();
 				break;
 			}
 		}
@@ -122,19 +123,20 @@ Items.Bovia.PushEffect(function(target) {
 		if(Math.random() < 0.5) {
 			var diff = target.lactHandler.lactationRate.IdealStat(10, 1);
 			if(diff) {
-				Text.AddOutput("[Poss] breasts starts to lactate more than before.", parse);
-				Text.Newline();
+				Text.Add("[Poss] breasts starts to lactate more than before.", parse);
+				Text.NL();
 			}
 		}
 		
 		if(Math.random() < 0.5) {
 			var diff = target.lactHandler.milkProduction.IncreaseStat(5, 1);
 			if(diff) {
-				Text.AddOutput("[Poss] breasts swell, as they become able to produce milk at a quicker rate.", parse);
-				Text.Newline();
+				Text.Add("[Poss] breasts swell, as they become able to produce milk at a quicker rate.", parse);
+				Text.NL();
 			}
 		}
 	}
+	Text.Flush();
 });
 Items.Bovia.PushEffect(TF.ItemEffects.IncStr, {odds: 0.5, ideal: 35, max: 1});
 Items.Bovia.PushEffect(TF.ItemEffects.IncSta, {odds: 0.4, ideal: 30, max: 1});

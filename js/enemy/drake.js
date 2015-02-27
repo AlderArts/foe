@@ -70,8 +70,8 @@ Drake.prototype.DropTable = function() {
 
 Drake.prototype.Act = function(encounter, activeChar) {
 	// TODO: Very TEMP
-	Text.AddOutput(this.name + " acts! ROOOAR!");
-	Text.Newline();
+	Text.Add(this.name + " acts! ROOOAR!");
+	Text.NL();
 	
 	// Pick a random target
 	var targets = this.GetPartyTarget(encounter, activeChar);

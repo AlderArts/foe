@@ -67,9 +67,9 @@ Items.LizardEgg.Long = function() { return "An unfertilized lizard egg. Good for
 Items.LizardEgg.Use = function(target) {
 	target.AddHPFraction(0.02);
 	var parse = { name: target.NameDesc(), s: target == player ? "" : "s" };
-	Text.AddOutput("[name] eat[s] a lizard egg. It is slightly invigorating.", parse);
-	Text.Newline();
-	
+	Text.Add("[name] eat[s] a lizard egg. It is slightly invigorating.", parse);
+	Text.NL();
+	Text.Flush();
 	return {consume: true};
 }
 
@@ -94,9 +94,9 @@ Items.GoatMilk.Long = function() { return "A bottle of goat milk."; }
 Items.GoatMilk.Use = function(target) {
 	target.AddHPFraction(0.02);
 	var parse = { name: target.NameDesc(), s: target == player ? "" : "s" };
-	Text.AddOutput("[name] drink[s] a bottle of milk. It is slightly invigorating.", parse);
-	Text.Newline();
-	
+	Text.Add("[name] drink[s] a bottle of milk. It is slightly invigorating.", parse);
+	Text.NL();
+	Text.Flush();
 	return {consume: true};
 }
 
@@ -109,9 +109,9 @@ Items.SheepMilk.Long = function() { return "A bottle of sheep milk."; }
 Items.SheepMilk.Use = function(target) {
 	target.AddHPFraction(0.02);
 	var parse = { name: target.NameDesc(), s: target == player ? "" : "s" };
-	Text.AddOutput("[name] drink[s] a bottle of milk. It is slightly invigorating.", parse);
-	Text.Newline();
-	
+	Text.Add("[name] drink[s] a bottle of milk. It is slightly invigorating.", parse);
+	Text.NL();
+	Text.Flush();
 	return {consume: true};
 }
 Items.Ramshorn = new Item("ovis2", "Ramshorn", ItemType.Ingredient);
@@ -128,9 +128,9 @@ Items.CowMilk.Long = function() { return "A bottle of ordinary cow milk."; }
 Items.CowMilk.Use = function(target) {
 	target.AddHPFraction(0.02);
 	var parse = { name: target.NameDesc(), s: target == player ? "" : "s" };
-	Text.AddOutput("[name] drink[s] a bottle of milk. It is slightly invigorating.", parse);
-	Text.Newline();
-	
+	Text.Add("[name] drink[s] a bottle of milk. It is slightly invigorating.", parse);
+	Text.NL();
+	Text.Flush();
 	return {consume: true};
 }
 Items.CowBell = new Item("bov2", "Cowbell", ItemType.Ingredient);
@@ -162,9 +162,9 @@ Items.DogBiscuit.Long = function() { return "A biscuit, commonly given to dogs a
 Items.DogBiscuit.Use = function(target) {
 	target.AddHPFraction(0.02);
 	var parse = { name: target.NameDesc(), s: target == player ? "" : "s" };
-	Text.AddOutput("[name] chew[s] on a dog biscuit. It is slightly invigorating.", parse);
-	Text.Newline();
-	
+	Text.Add("[name] chew[s] on a dog biscuit. It is slightly invigorating.", parse);
+	Text.NL();
+	Text.Flush();
 	return {consume: true};
 }
 
@@ -221,8 +221,9 @@ Items.DemonSeed.Use = function(target) {
 		s: target == player ? "" : "s",
 		hisher : target.hisher()
 	};
-	Text.AddOutput("[name] swallow[s] a vial of demonic seed. Lust courses through [hisher] veins.", parse);
-	Text.Newline();
+	Text.Add("[name] swallow[s] a vial of demonic seed. Lust courses through [hisher] veins.", parse);
+	Text.NL();
+	Text.Flush();
 	return {consume: true};
 }
 
@@ -235,8 +236,9 @@ Items.Hummus.Long = function() { return "Hummus: a foodlike substance."; }
 Items.Hummus.Use = function(target) {
 	target.AddHPFraction(0.03);
 	var parse = { name: target.NameDesc(), s: target == player ? "" : "s" };
-	Text.AddOutput("[name] eat[s] some hummus. It is slightly invigorating.", parse);
-	Text.Newline();
+	Text.Add("[name] eat[s] some hummus. It is slightly invigorating.", parse);
+	Text.NL();
+	Text.Flush();
 	return {consume: true};
 }
 

@@ -37,9 +37,10 @@ Inventory.prototype.AddItem = function(item, num) {
     num = num || 1;
 
     if(DEBUG) {
-        Text.Newline();
-        Text.AddOutput(Text.BoldColor("DEBUG: Added " + num + " " + item.name + " (ID: " + item.id + ")"));
-        Text.Newline();
+        Text.NL();
+        Text.Add(Text.BoldColor("DEBUG: Added " + num + " " + item.name + " (ID: " + item.id + ")"));
+        Text.NL();
+        Text.Flush();
     }
 
     // Try to find if there is already an entry
@@ -58,9 +59,10 @@ Inventory.prototype.RemoveItem = function(item, num) {
     num = num || 1;
 
     if(DEBUG) {
-        Text.Newline();
-        Text.AddOutput(Text.BoldColor("DEBUG: Removed " + num + " " + item.name + " (ID: " + item.id + ")"));
-        Text.Newline();
+        Text.NL();
+        Text.Add(Text.BoldColor("DEBUG: Removed " + num + " " + item.name + " (ID: " + item.id + ")"));
+        Text.NL();
+        Text.Flush();
     }
 
     // Try to find a stack containing said item
@@ -78,8 +80,9 @@ Inventory.prototype.RemoveItem = function(item, num) {
 // Todo temp
 Inventory.prototype.Print = function() {
     for(var i = 0; i < this.items.length; i++) {
-        Text.AddOutput(this.items[i].num + "x " + this.items[i].it.name + " - " + this.items[i].it.Short() + "<br/>");
+        Text.Add(this.items[i].num + "x " + this.items[i].it.name + " - " + this.items[i].it.Short() + "<br/>");
     }
+    Text.Flush();
 }
 //Divides items by their 'type'
 Inventory.ItemByType = function(inv, itemsByType, usableItemsByType, combatItemsByType) {

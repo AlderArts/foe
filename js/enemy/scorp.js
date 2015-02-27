@@ -72,8 +72,8 @@ Scorpion.prototype.DropTable = function() {
 
 Scorpion.prototype.Act = function(encounter, activeChar) {
 	// TODO: Very TEMP
-	Text.AddOutput(this.name + " acts! Stab stab hiss!");
-	Text.Newline();
+	Text.Add(this.name + " acts! Stab stab hiss!");
+	Text.NL();
 	
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);

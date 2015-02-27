@@ -2042,8 +2042,9 @@ Entity.prototype.ResetVirgin = function() {
 
 Entity.prototype.Act = function(encounter, activeChar) {
 	// TODO: Very TEMP
-	Text.AddOutput(this.name + " acts! Rawr!");
-	Text.Newline();
+	Text.Add(this.name + " acts! Rawr!");
+	Text.NL();
+	Text.Flush();
 	
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);

@@ -190,7 +190,8 @@ Party.prototype.SwitchPrompt = function(member) {
 	var active = this.InParty(member);
 	var that = this;
 	Text.Clear();
-	Text.AddOutput("Switch [name] with who?", parse);
+	Text.Add("Switch [name] with who?", parse);
+	Text.Flush();
 	
 	if(active) {
 		var options = [];
@@ -380,7 +381,7 @@ Party.prototype.ShowAbilities = function() {
 				if(ability.CastInternalOOC) {
 					var en = ability.enabledCondition(null, entity);
 					
-					Text.AddOutput("[name] can use [ability] for [cost]: [desc]<br/>",
+					Text.Add("[name] can use [ability] for [cost]: [desc]<br/>",
 						{name: Text.BoldColor(entity.name), ability: ability.name, cost: ability.CostStr(), desc: ability.Short()});
 					
 					list.push({
@@ -389,9 +390,10 @@ Party.prototype.ShowAbilities = function() {
 						obj     : { caster: entity, skill : ability },
 						func    : function(obj) {
 							Text.Clear();
-							Text.AddOutput("Who will [name] cast [ability] on?",
+							Text.Add("Who will [name] cast [ability] on?",
 								{name: obj.caster.name, ability: obj.skill.name});
-							Text.Newline();
+							Text.NL();
+							Text.Flush();
 							
 							var target = new Array();
 							for(var i=0,j=that.members.length; i<j; i++){
@@ -418,6 +420,7 @@ Party.prototype.ShowAbilities = function() {
 		for(coll in abilities)
 			pushAbilities(abilities[coll], jobAbilities);
 	}
+	Text.Flush();
 	
 	Gui.SetButtonsFromList(list);
 }

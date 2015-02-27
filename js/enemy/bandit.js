@@ -180,8 +180,8 @@ Bandit.prototype.DropTable = function() {
 
 Bandit.Act = function(encounter, activeChar) {
 	// TODO: Very TEMP
-	Text.AddOutput(this.name + " acts! Yah!");
-	Text.Newline();
+	Text.Add(this.name + " acts! Yah!");
+	Text.NL();
 	
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);
