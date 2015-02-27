@@ -1988,7 +1988,7 @@ Scenes.Terry.TalkPast = function(force) {
 		Text.NL();
 		Text.Add("Oh? And who was the lucky one?", parse);
 		Text.NL();
-		Text.Add("<i>“Krawitz seemed like a good mark. He was a bigot to morphs and an asshole to most people. I figured no one would mind if the old fool got robbed blind. So I did what I always did. Prepared, gathered intel, and in honor of my late mentor? I decided to don his costume and replicate his MO. Thought I should let the good lord know that a morph outwitted him and robbed him.”</i>", parse);
+		Text.Add("<i>“Krawitz seemed like a good mark. He was a bigot to morphs and an asshole to most people. I figured no one would mind if the old fool got robbed blind. So I did what I always did. Prepared, gathered intel, and in honor of my late mentor? I decided to don his costume and replicate his signature style. Thought I should let the good lord know that a morph outwitted him and robbed him.”</i>", parse);
 		Text.NL();
 		Text.Add("You decide not to say anything. Your own crimes got pinned on Terry, after all. It wouldn’t do you both any good if [heshe] found out you were there with [himher] that day...", parse);
 		Text.NL();
@@ -4561,7 +4561,7 @@ Scenes.Terry.JeanneTFGrowBoobs = function() {
 	if(terry.Cup() <= Terry.Breasts.Flat) {
 		Text.Add("The naked [foxvixen] twitches, looking down in surprise at [hisher] chest as the transformative’s effects begin taking hold. [HisHer] nipples perk up, though who can say if from arousal or the magic, like little cherry-pink nubs through Terry’s fur. Terry groans softly at the sensation, [hisher] formerly flat chest begins to bulk up; fat visibly swelling into being underneath the skin and fur and pushing [hisher] nipples outwards. Within moments, what was a flat chest is now sporting a dainty pair of feminine A-cup breasts.", parse);
 		Text.NL();
-		Text.Add("The [foxvixen] pants, as [heshe] recovers from the TF. Then [heshe] slowly rises to [hisher] feet, experimentally pinching a nipple and gasping as [heshe] does so. <i>“Sensitive...”</i> [heshe] comments under [hisher] breath.", parse);
+		Text.Add("The [foxvixen] pants, as [heshe] recovers from the transformation. Then [heshe] slowly rises to [hisher] feet, experimentally pinching a nipple and gasping as [heshe] does so. <i>“Sensitive...”</i> [heshe] comments under [hisher] breath.", parse);
 		Text.NL();
 		Text.Add("Now that’s too tempting to pass up. Without hesitation, your hands reach for your vulpine pet’s new bosom, gently stroking each of the new A-cups in turn, squeezing the plush flesh through its soft fur before caressing [hisher] erect nipples with your thumbs.", parse);
 		Text.NL();
@@ -4885,7 +4885,7 @@ Scenes.Terry.JeanneTFRemVag = function() {
 			Text.Add("[HeShe] most certainly doesn’t.", parse);
 		}
 		else {
-			Text.Add("The now flat, featureless expanse of Terry’s crotch suddenly bulges alarming, fur stretching into three indistinct shapes; one oval, two rounded. Within seconds, they reshape themselves into something clearer; two dangling, dainty balls, much like the ones Terry originally had. The identity of the third shape becomes clear when a throbbing, crimson-fleshed fox prick thrusts its quivering shape out of the opening at its end, spraying semen into the puddle of sexual fluids below the [foxvixen]’s form.", parse);
+			Text.Add("The now flat, featureless expanse of Terry’s crotch suddenly bulges alarmingly, fur stretching into three indistinct shapes; one oval, two rounded. Within seconds, they reshape themselves into something clearer; two dangling, dainty balls, much like the ones Terry originally had. The identity of the third shape becomes clear when a throbbing, crimson-fleshed fox prick thrusts its quivering shape out of the opening at its end, spraying semen into the puddle of sexual fluids below the [foxvixen]’s form.", parse);
 			Text.NL();
 			Text.Add("<i>“Hey there, old buddy,”</i> [heshe] says, touching [hisher] sensitive foxhood.", parse);
 			Text.NL();
