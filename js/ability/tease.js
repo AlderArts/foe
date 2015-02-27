@@ -7,7 +7,7 @@ Abilities.Seduction.Tease.Short = function() { return "Raises the lust of target
 Abilities.Seduction.Tease.atkMod = 0.5;
 Abilities.Seduction.Tease.OnCast = function(encounter, caster, target) {
 	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.AddOutput("[name] tease[s] [tName], shaking [hisher] [hipsDesc]! ", parse);
+	Text.Add("[name] tease[s] [tName], shaking [hisher] [hipsDesc]! ", parse);
 }
 
 
@@ -18,7 +18,7 @@ Abilities.Seduction.Seduce.Short = function() { return "Raises the lust of targe
 Abilities.Seduction.Seduce.atkMod = 1;
 Abilities.Seduction.Seduce.OnCast = function(encounter, caster, target) {
 	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.AddOutput("[name] tease[s] [tName], shaking [hisher] [hipsDesc]! ", parse);
+	Text.Add("[name] tease[s] [tName], shaking [hisher] [hipsDesc]! ", parse);
 }
 
 
@@ -30,5 +30,5 @@ Abilities.Seduction.StripTease.atkMod = 1.5;
 Abilities.Seduction.StripTease.targetMode = TargetMode.Enemies;
 Abilities.Seduction.StripTease.OnCast = function(encounter, caster, target) {
 	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.AddOutput("[name] tease[s] the enemy party, shaking [hisher] [hipsDesc]! ", parse);
+	Text.Add("[name] tease[s] the enemy party, shaking [hisher] [hipsDesc]! ", parse);
 }

@@ -23,8 +23,8 @@ PrintDefaultOptions = function(preventClear) {
 		return;
 	
 	if(party.location == null) {
-		Text.AddOutput("ERROR, LOCATION IS NULL");
-		Text.Newline();
+		Text.Add("ERROR, LOCATION IS NULL");
+		Text.Flush();
 		return;
 	}
 	
@@ -93,11 +93,12 @@ LimitedDataPrompt = function(backFunc) {
 	Text.Clear();
 	Gui.ClearButtons();
 	
-	Text.AddOutput("Fall of Eden saves using JavaScript localStorage (also known as Web Storage). Exactly how and where this will put your save is up to browser implementation, but the standard ensures at least 5MB of storage space, more than enough for 12 full save slots.");
-	Text.Newline();
-	Text.AddOutput("You can only save at 'safe' locations in the world (the same places you can sleep), but you can load/start a new game from anywhere.");
-	Text.Newline();
-	Text.AddOutput("<b>NEW:</b> Use the save to text if you are having problems using save to file. Copy the text that appears into a text file, and save it. You will be able to use it with load from file.");
+	Text.Add("Fall of Eden saves using JavaScript localStorage (also known as Web Storage). Exactly how and where this will put your save is up to browser implementation, but the standard ensures at least 5MB of storage space, more than enough for 12 full save slots.");
+	Text.NL();
+	Text.Add("You can only save at 'safe' locations in the world (the same places you can sleep), but you can load/start a new game from anywhere.");
+	Text.NL();
+	Text.Add("<b>NEW:</b> Use the save to text if you are having problems using save to file. Copy the text that appears into a text file, and save it. You will be able to use it with load from file.");
+	Text.Flush();
 	
 	Input.buttons[0].Setup("Save game", function() {
 		Saver.SavePrompt(LimitedDataPrompt);
@@ -134,7 +135,8 @@ LimitedDataPrompt = function(backFunc) {
 			    return val;
 			});
 		Text.Clear();
-		Text.AddOutput(data);
+		Text.Add(data);
+		Text.Flush();
 		Gui.NextPrompt(function() {
 			LimitedDataPrompt(backFunc);
 		});
@@ -151,11 +153,12 @@ DataPrompt = function() {
 	Text.Clear();
 	Gui.ClearButtons();
 	
-	Text.AddOutput("Fall of Eden saves using JavaScript localStorage (also known as Web Storage). Exactly how and where this will put your save is up to browser implementation, but the standard ensures at least 5MB of storage space, more than enough for 12 full save slots.");
-	Text.Newline();
-	Text.AddOutput("You can only save at 'safe' locations in the world (the same places you can sleep), but you can load/start a new game from anywhere.");
-	Text.Newline();
-	Text.AddOutput("<b>NEW:</b> Use the save to text if you are having problems using save to file. Copy the text that appears into a text file, and save it. You will be able to use it with load from file.");
+	Text.Add("Fall of Eden saves using JavaScript localStorage (also known as Web Storage). Exactly how and where this will put your save is up to browser implementation, but the standard ensures at least 5MB of storage space, more than enough for 12 full save slots.");
+	Text.NL();
+	Text.Add("You can only save at 'safe' locations in the world (the same places you can sleep), but you can load/start a new game from anywhere.");
+	Text.NL();
+	Text.Add("<b>NEW:</b> Use the save to text if you are having problems using save to file. Copy the text that appears into a text file, and save it. You will be able to use it with load from file.");
+	Text.Flush();
 	
 	Input.buttons[0].Setup("Save game", function() {
 		Saver.SavePrompt(DataPrompt);
@@ -210,7 +213,8 @@ DataPrompt = function() {
 			    return val;
 			});
 		Text.Clear();
-		Text.AddOutput(data);
+		Text.Add(data);
+		Text.Flush();
 		Gui.NextPrompt(DataPrompt);
 	}, safeLocation);
 	
@@ -249,8 +253,8 @@ Explore = function(preventClear) {
 		Text.Clear();
 	
 	if(party.location == null) {
-		Text.AddOutput("ERROR, LOCATION IS NULL");
-		Text.Newline();
+		Text.Add("ERROR, LOCATION IS NULL");
+		Text.Flush();
 		return;
 	}
 	
@@ -282,8 +286,8 @@ Fight = function(preventClear) {
 	if(!preventClear)
 		Text.Clear();
 	if(party.location == null) {
-		Text.AddOutput("ERROR, LOCATION IS NULL");
-		Text.Newline();
+		Text.Add("ERROR, LOCATION IS NULL");
+		Text.Flush();
 		return;
 	}
 
@@ -296,7 +300,8 @@ Fight = function(preventClear) {
 			enc();
 	}
 	else {
-		Text.AddOutput("You didn't find anything.");
+		Text.Add("You didn't find anything.");
+		Text.Flush();
 		SetGameState(GameState.Game);
 	}
 }
@@ -305,8 +310,8 @@ ShowInventory = function(preventClear) {
 	if(!preventClear)
 		Text.Clear();
 	if(party.inventory == null) {
-		Text.AddOutput("ERROR, INVENTORY IS NULL");
-		Text.Newline();
+		Text.Add("ERROR, INVENTORY IS NULL");
+		Text.Flush();
 		return;
 	}
 	Gui.ClearButtons();

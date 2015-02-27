@@ -29,14 +29,15 @@ Stat.prototype.IdealStat = function(ideal, maxChange, fraction) {
 	var old = this.base;
 	this.base += diff;
 	if(DEBUG && this.debug) {
-		Text.Newline();
+		Text.NL();
 		if(diff > 0)
-			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", "blue"));
+			Text.Add(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", "blue"));
 		else if(diff == 0)
-			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", "black"));
+			Text.Add(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", "black"));
 		else
-			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", "red"));
-		Text.Newline();
+			Text.Add(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", "red"));
+		Text.NL();
+		Text.Flush();
 	}
 	if(fraction)
 		return this.base - old;
@@ -56,12 +57,13 @@ Stat.prototype.IncreaseStat = function(ideal, maxChange, fraction) {
 	var old = this.base;
 	this.base += diff;
 	if(DEBUG && this.debug) {
-		Text.Newline();
+		Text.NL();
 		if(diff == 0)
-			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", "black"));
+			Text.Add(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", "black"));
 		else
-			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (max: " + ideal + ")", "blue"));
-		Text.Newline();
+			Text.Add(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (max: " + ideal + ")", "blue"));
+		Text.NL();
+		Text.Flush();
 	}
 	if(fraction)
 		return this.base - old;
@@ -81,12 +83,13 @@ Stat.prototype.DecreaseStat = function(ideal, maxChange, fraction) {
 	var old = this.base;
 	this.base -= diff;
 	if(DEBUG && this.debug) {
-		Text.Newline();
+		Text.NL();
 		if(diff == 0)
-			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", "black"));
+			Text.Add(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", "black"));
 		else
-			Text.AddOutput(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (min: " + ideal + ")", "red"));
-		Text.Newline();
+			Text.Add(Text.BoldColor("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (min: " + ideal + ")", "red"));
+		Text.NL();
+		Text.Flush();
 	}
 	if(fraction)
 		return this.base - old;
@@ -880,11 +883,12 @@ Entity.prototype.PhysDmgHP = function(encounter, caster, val) {
 		var func = decoy.func || function() {
 			parse["oneof"] = num > 1 ? " one of" : "";
 			parse["copy"]  = num > 1 ? "copies" : "copy";
-			Text.AddOutput("The attack is absorbed by[oneof] [possessive] [copy]!", parse);
-			Text.Newline();
+			Text.Add("The attack is absorbed by[oneof] [possessive] [copy]!", parse);
+			Text.NL();
 			ent.combatStatus.stats[StatusEffect.Decoy].copies--;
 			if(ent.combatStatus.stats[StatusEffect.Decoy].copies <= 0)
 				ent.combatStatus.stats[StatusEffect.Decoy] = null;
+			Text.Flush();
 			return false;
 		}
 		return func(caster, val);
@@ -1932,9 +1936,10 @@ Entity.prototype.OrgasmCum = function(mult) {
 	
 	balls.cum.DecreaseStat(0, cumQ);
 	if(DEBUG) {
-		Text.Newline();
-		Text.AddOutput("<b>[name] came ([cum]).</b>", {name: this.NameDesc(), cum: cumQ.toFixed(2)});
-		Text.Newline();
+		Text.NL();
+		Text.Add("<b>[name] came ([cum]).</b>", {name: this.NameDesc(), cum: cumQ.toFixed(2)});
+		Text.NL();
+		Text.Flush();
 	}
 	return cumQ;
 }

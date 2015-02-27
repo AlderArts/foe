@@ -86,8 +86,8 @@ Maria.prototype.IsAtLocation = function(location) {
 
 Maria.prototype.Act = function(encounter, activeChar) {
 	// TODO: AI!
-	Text.AddOutput("The huntress hops around nimbly.");
-	Text.Newline();
+	Text.Add("The huntress hops around nimbly.");
+	Text.NL();
 	
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);

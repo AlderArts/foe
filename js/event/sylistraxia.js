@@ -66,19 +66,20 @@ Sylistraxia.prototype.IsAtLocation = function(location) {
 // Party interaction
 Sylistraxia.prototype.Interact = function() {
 	Text.Clear();
-	Text.AddOutput("Rawr Imma dragon.");
+	Text.Add("Rawr Imma dragon.");
 	
 	
 	if(DEBUG) {
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: relation: " + sylistraxia.relation.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: subDom: " + sylistraxia.subDom.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: slut: " + sylistraxia.slut.Get()));
-		Text.Newline();
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: relation: " + sylistraxia.relation.Get()));
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: subDom: " + sylistraxia.subDom.Get()));
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: slut: " + sylistraxia.slut.Get()));
+		Text.NL();
 	}
 	
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		PartyInteraction();
 	});

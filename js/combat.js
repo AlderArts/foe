@@ -414,8 +414,9 @@ Encounter.prototype.CombatTick = function() {
 		var numb = currentActiveChar.combatStatus.stats[StatusEffect.Numb];
 		if(numb) {
 			if(Math.random() < numb.proc) {
-				Text.AddOutput("[name] [is] stunned and cannot move!",
+				Text.Add("[name] [is] stunned and cannot move!",
 					{name: currentActiveChar.NameDesc(), is: currentActiveChar.is()});
+				Text.Flush();
 				Gui.NextPrompt(function() {
 					enc.CombatTick();
 				});
@@ -426,8 +427,9 @@ Encounter.prototype.CombatTick = function() {
 		// Sleep
 		var sleep = currentActiveChar.combatStatus.stats[StatusEffect.Sleep];
 		if(sleep) {
-			Text.AddOutput("[name] [is] asleep and cannot act!",
+			Text.Add("[name] [is] asleep and cannot act!",
 				{name: currentActiveChar.NameDesc(), is: currentActiveChar.is()});
+			Text.Flush();
 			Gui.NextPrompt(function() {
 				enc.CombatTick();
 			});
@@ -438,8 +440,8 @@ Encounter.prototype.CombatTick = function() {
 			Text.Clear();
 			// TODO: DEBUG ?
 			var entityName = currentActiveChar.uniqueName ? currentActiveChar.uniqueName : currentActiveChar.name;
-			Text.AddOutput(Text.BoldColor("Turn order:<br/>"));
-			Text.AddOutput(Text.BoldColor(entityName + "<br/>"));
+			Text.Add(Text.BoldColor("Turn order:<br/>"));
+			Text.Add(Text.BoldColor(entityName + "<br/>"));
 			var tempParty = [];
 			for(var i=0,j=enc.combatOrder.length; i<j; i++){
 				var c = enc.combatOrder[i];
@@ -467,21 +469,22 @@ Encounter.prototype.CombatTick = function() {
 				}
 				
 				found.ini -= 100;
-				Text.AddOutput(found.name + "<br/>");
+				Text.Add(found.name + "<br/>");
 			}
-			Text.Newline();
+			Text.NL();
 			
 			if(activeChar.entity == player)
-				Text.AddOutput("It's your turn.");
+				Text.Add("It's your turn.");
 			else
-				Text.AddOutput(activeChar.entity.Possessive() + " turn.");
-			Text.Newline();
+				Text.Add(activeChar.entity.Possessive() + " turn.");
+			Text.NL();
 		}
 		
 		combatScreen();
 
 		if(Math.random() < activeChar.entity.LustCombatTurnLossChance()) {
-			Text.AddOutput("[name] is too aroused to do anything worthwhile!", {name: activeChar.entity.name});
+			Text.Add("[name] is too aroused to do anything worthwhile!", {name: activeChar.entity.name});
+			Text.Flush();
 			Gui.NextPrompt(function() {
 				enc.CombatTick();
 			});
@@ -502,6 +505,7 @@ Encounter.prototype.CombatTick = function() {
 				else
 					enc.SetButtons(activeChar, combatScreen);
 			}
+			Text.Flush();
 		}
 	}
 }

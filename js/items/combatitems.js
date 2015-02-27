@@ -15,6 +15,7 @@ CombatItem.prototype.UseCombat = function(inv, encounter, caster, target) {
 	this.UseCombatInternal(encounter, caster, target);
 }
 CombatItem.prototype.UseCombatInternal = function(encounter, caster, target) {
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
 	});

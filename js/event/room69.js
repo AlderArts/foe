@@ -70,18 +70,19 @@ Room69.prototype.IsAtLocation = function(location) {
 // Party interaction
 Scenes.Room69.Interact = function() {
 	Text.Clear();
-	Text.AddOutput("Rawr Imma room.");
+	Text.Add("Rawr Imma room.");
 	
 	
 	if(DEBUG) {
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: relation: " + room69.relation.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: subDom: " + room69.subDom.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: slut: " + room69.slut.Get()));
-		Text.Newline();
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: relation: " + room69.relation.Get()));
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: subDom: " + room69.subDom.Get()));
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: slut: " + room69.slut.Get()));
+		Text.NL();
 	}
+	Text.Flush();
 }
 
 Scenes.Room69.Discovering69 = function() {

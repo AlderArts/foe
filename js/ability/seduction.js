@@ -58,7 +58,7 @@ TeaseSkill.prototype.CastInternal = function(encounter, caster, target) {
 		}
 		if(this.TargetEffect) this.TargetEffect(encounter, caster, e);
 	}
-	
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
 	});
@@ -66,13 +66,13 @@ TeaseSkill.prototype.CastInternal = function(encounter, caster, target) {
 // Default messages
 TeaseSkill.prototype.OnHit = function(encounter, caster, target, dmg) {
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s" };
-	Text.AddOutput("[tName] become[s] aroused, gaining " + Text.BoldColor(dmg, "#FF8080") + " lust!", parse);
-	Text.Newline();
+	Text.Add("[tName] become[s] aroused, gaining " + Text.BoldColor(dmg, "#FF8080") + " lust!", parse);
+	Text.NL();
 }
 TeaseSkill.prototype.OnAbsorb = function(encounter, caster, target, dmg) {
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", is : target.is() };
-	Text.AddOutput("[tName] [is] turned off, losing " + Text.BoldColor(dmg, "#000060") + " lust!", parse);
-	Text.Newline();
+	Text.Add("[tName] [is] turned off, losing " + Text.BoldColor(dmg, "#000060") + " lust!", parse);
+	Text.NL();
 }
 
 
@@ -142,13 +142,14 @@ Abilities.Seduction.TIllusion.CastInternal = function(encounter, caster) {
 			ahas    : attacker.has(),
 			anotS   : attacker.plural() ? "" : "s"
 		};
-		Text.AddOutput("[p] spectral servant[s] quickly moves in the way of [aposs] attack, flowing into [ahisher] body with a spine-chilling screech, vanishing. ", parse);
+		Text.Add("[p] spectral servant[s] quickly moves in the way of [aposs] attack, flowing into [ahisher] body with a spine-chilling screech, vanishing. ", parse);
 		if(Status.Siphon(attacker, {turns: 1, turnsR: 2, hp: 25, sp: 5, caster: caster})) {
-			Text.AddOutput("[aName] stagger[anotS], the remnant of the revenant draining the energy from [ahisher] body. [aName] [ahas] been afflicted with siphon!", parse);
+			Text.Add("[aName] stagger[anotS], the remnant of the revenant draining the energy from [ahisher] body. [aName] [ahas] been afflicted with siphon!", parse);
 		}
 		else {
-			Text.AddOutput("[aName] shrug[anotS] off the phantom’s chill.", parse);
+			Text.Add("[aName] shrug[anotS] off the phantom’s chill.", parse);
 		}
+		Text.Flush();
 		return false;
 	} });
 	Text.Flush();
@@ -193,13 +194,14 @@ Abilities.Seduction.SIllusion.CastInternal = function(encounter, caster) {
 			ahas    : attacker.has(),
 			anotS   : attacker.plural() ? "" : "s"
 		};
-		Text.AddOutput("[p] titillating apparition[s] quickly moves in the way of [aposs] attack, flowing into [ahimher] with an orgasmic cry. ", parse);
+		Text.Add("[p] titillating apparition[s] quickly moves in the way of [aposs] attack, flowing into [ahimher] with an orgasmic cry. ", parse);
 		if(Status.Horny(attacker, { hit : 0.75, turns : 1, turnsR : 2, str : 1, dmg : 0.2 })) {
-			Text.AddOutput("[aName] stagger[anotS], flustered with visions of obscene acts. [aName] [ahas] been afflicted with horny!", parse);
+			Text.Add("[aName] stagger[anotS], flustered with visions of obscene acts. [aName] [ahas] been afflicted with horny!", parse);
 		}
 		else {
-			Text.AddOutput("[aName] resist[anotS], reigning in [ahisher] urges.", parse);
+			Text.Add("[aName] resist[anotS], reigning in [ahisher] urges.", parse);
 		}
+		Text.Flush();
 		return false;
 	} });
 	Text.Flush();
@@ -227,15 +229,15 @@ Abilities.Seduction.Confuse.CastInternal = function(encounter, caster, target) {
 		thimher : target.himher()
 	}
 
-	Text.AddOutput("[Name] perform[notS] a hypnotising dance, blending in [hisher] alluring magic and attempting to assume control of [tname]. ", parse);
+	Text.Add("[Name] perform[notS] a hypnotising dance, blending in [hisher] alluring magic and attempting to assume control of [tname]. ", parse);
 	
 	if(Status.Confuse(target, {hit: 0.75, turns: 3, turnsR: 3})) {
-		Text.AddOutput("[tName] [tis] unable to resist [poss] power, and utterly falls under [hisher] control.", parse);
+		Text.Add("[tName] [tis] unable to resist [poss] power, and utterly falls under [hisher] control.", parse);
 	}
 	else {
-		Text.AddOutput("[tName] manage[tnotS] to compose [thimher]self, resisting [poss] unnatural influence.", parse);
+		Text.Add("[tName] manage[tnotS] to compose [thimher]self, resisting [poss] unnatural influence.", parse);
 	}
-	
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
 	});
@@ -265,8 +267,8 @@ Abilities.Seduction.Rut.CastInternal = function(encounter, caster, target) {
 	}
 
 	// TODO: Make more flavor text	
-	Text.AddOutput("[name] ruts against [tName] for " + Text.BoldColor(dmg, "#800000") + " damage! Sexy!", parse);
-	Text.Newline();
+	Text.Add("[name] ruts against [tName] for " + Text.BoldColor(dmg, "#800000") + " damage! Sexy!", parse);
+	Text.Flush();
 	
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
@@ -288,8 +290,8 @@ Abilities.Seduction.Fantasize.CastInternal = function(encounter, caster) {
 	}
 
 	// TODO: Make more flavor text	
-	Text.AddOutput("[name] fantasizes, building " + Text.BoldColor(dmg, "#FF8080") + " lust! Sexy!", parse);
-	Text.Newline();
+	Text.Add("[name] fantasizes, building " + Text.BoldColor(dmg, "#FF8080") + " lust! Sexy!", parse);
+	Text.Flush();
 	
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
@@ -303,7 +305,7 @@ Abilities.Seduction.Distract.cost = { hp: null, sp: 10, lp: 20};
 Abilities.Seduction.Distract.atkMod = 0.8;
 Abilities.Seduction.Distract.OnCast = function(encounter, caster, target) {
 	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.AddOutput("[name] distract[s] [tName], shaking [hisher] [hipsDesc]! ", parse);
+	Text.Add("[name] distract[s] [tName], shaking [hisher] [hipsDesc]! ", parse);
 }
 Abilities.Seduction.Distract.OnHit = function(encounter, caster, target, dmg) {
 	for(var i = 0; i < encounter.combatOrder.length; i++) {
@@ -312,8 +314,8 @@ Abilities.Seduction.Distract.OnHit = function(encounter, caster, target, dmg) {
 	}
 	
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe() };
-	Text.AddOutput("[tName] become[s] aroused, gaining " + Text.BoldColor(dmg, "#FF8080") + " lust! [HeShe] become[s] distracted.", parse);
-	Text.Newline();
+	Text.Add("[tName] become[s] aroused, gaining " + Text.BoldColor(dmg, "#FF8080") + " lust! [HeShe] become[s] distracted.", parse);
+	Text.NL();
 }
 
 
@@ -324,7 +326,7 @@ Abilities.Seduction.Charm.cost = { hp: null, sp: 10, lp: 10};
 Abilities.Seduction.Charm.atkMod = 0.3;
 Abilities.Seduction.Charm.OnCast = function(encounter, caster, target) {
 	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.AddOutput("[name] charm[s] [tName], shaking [hisher] [hipsDesc]! ", parse);
+	Text.Add("[name] charm[s] [tName], shaking [hisher] [hipsDesc]! ", parse);
 }
 Abilities.Seduction.Charm.OnHit = function(encounter, caster, target, dmg) {
 	var activeChar;
@@ -339,8 +341,8 @@ Abilities.Seduction.Charm.OnHit = function(encounter, caster, target, dmg) {
 	}
 	
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.AddOutput("[tName] become[s] charmed, gaining " + Text.BoldColor(dmg, "#FF8080") + " lust! [HeShe] become[s] less aggressive toward [name].", parse);
-	Text.Newline();
+	Text.Add("[tName] become[s] charmed, gaining " + Text.BoldColor(dmg, "#FF8080") + " lust! [HeShe] become[s] less aggressive toward [name].", parse);
+	Text.NL();
 }
 
 
@@ -351,7 +353,7 @@ Abilities.Seduction.Allure.cost = { hp: null, sp: 30, lp: 60};
 Abilities.Seduction.Allure.atkMod = 1;
 Abilities.Seduction.Allure.OnCast = function(encounter, caster, target) {
 	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.AddOutput("[name] charm[s] [tName], shaking [hisher] [hipsDesc]! ", parse);
+	Text.Add("[name] charm[s] [tName], shaking [hisher] [hipsDesc]! ", parse);
 }
 Abilities.Seduction.Allure.OnHit = function(encounter, caster, target, dmg) {
 	var activeChar;
@@ -366,6 +368,6 @@ Abilities.Seduction.Allure.OnHit = function(encounter, caster, target, dmg) {
 	}
 	
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.AddOutput("[tName] become[s] charmed, gaining " + Text.BoldColor(dmg, "#FF8080") + " lust! [HeShe] become[s] less aggressive toward [name].", parse);
-	Text.Newline();
+	Text.Add("[tName] become[s] charmed, gaining " + Text.BoldColor(dmg, "#FF8080") + " lust! [HeShe] become[s] less aggressive toward [name].", parse);
+	Text.NL();
 }

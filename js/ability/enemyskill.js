@@ -10,19 +10,19 @@ Abilities.EnemySkill.Sting.hitMod = 0.8;
 Abilities.EnemySkill.Sting.damageType.pPierce = 1;
 Abilities.EnemySkill.Sting.OnCast = function(encounter, caster, target) {
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), y : caster.plural() ? "y" : "ies", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("[name] read[y] [hisher] stinger, aiming it at [tName]!", parse);
-	Text.Newline();
+	Text.Add("[name] read[y] [hisher] stinger, aiming it at [tName]!", parse);
+	Text.NL();
 }
 Abilities.EnemySkill.Sting.OnHit = function(encounter, caster, target, dmg) {
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : target.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", notS : caster.plural() ? "s" : "", tName : target.nameDesc() };
 	
-	Text.AddOutput("[name] sting[notS] [tName] for " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
-	Text.Newline();
+	Text.Add("[name] sting[notS] [tName] for " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
+	Text.NL();
 }
 Abilities.EnemySkill.Sting.TargetEffect = function(encounter, caster, target) {
 	var parse = { target : target.NameDesc(), has : target.has(), s : target.plural() ? "" : "s" };
 	if(Status.Venom(target, { hit : 0.6, turns : 3, turnsR : 3, str : 1, dmg : 0.15 })) {
-		Text.AddOutput("[target] [has] been poisoned! ", parse);
+		Text.Add("[target] [has] been poisoned! ", parse);
 	}
 }
 
@@ -33,20 +33,20 @@ Abilities.EnemySkill.TSnare.cost = { hp: null, sp: 20, lp: null};
 Abilities.EnemySkill.TSnare.damageType.pLust = 0.1;
 Abilities.EnemySkill.TSnare.OnCast = function(encounter, caster, target) {
 	var parse = { Caster : caster.NameDesc(), notS : caster.plural() ? "" : "s", hisher : caster.hisher(), target : target.nameDesc(), thimher : target.himher() };
-	Text.AddOutput("[Caster] send[notS] [hisher] tentacles rushing toward [target], wrapping around [thimher]. ", parse);
+	Text.Add("[Caster] send[notS] [hisher] tentacles rushing toward [target], wrapping around [thimher]. ", parse);
 }
 Abilities.EnemySkill.TSnare.OnHit = function(encounter, caster, target, dmg) {
 	var parse = { target : target.nameDesc(), thisher : target.hisher() };
 	if(Status.Slow(target, { hit : 0.6, factor : 2, turns : 3, turnsR : 3 })) {
-		Text.AddOutput("The tentacles successfully snare [target], restricting [thisher] movements!", parse);
+		Text.Add("The tentacles successfully snare [target], restricting [thisher] movements!", parse);
 	}
-	Text.Newline();
+	Text.NL();
 }
 Abilities.EnemySkill.TSnare.OnAbsorb = Abilities.EnemySkill.TSnare.OnHit;
 Abilities.EnemySkill.TSnare.OnMiss = function(encounter, caster, target) {
 	var parse = { Target : target.NameDesc(), tnotS : target.plural() ? "" : "s" };
-	Text.AddOutput("[Target] only narrowly avoid[tnotS] getting caught by the vines!", parse);
-	Text.Newline();
+	Text.Add("[Target] only narrowly avoid[tnotS] getting caught by the vines!", parse);
+	Text.NL();
 }
 
 Abilities.EnemySkill.TSpray = new AttackPhysical();
@@ -57,20 +57,20 @@ Abilities.EnemySkill.TSpray.damageType.pLust = 0.1;
 Abilities.EnemySkill.TSpray.targetMode = TargetMode.Enemies;
 Abilities.EnemySkill.TSpray.OnCast = function(encounter, caster, target) {
 	var parse = { Caster : caster.NameDesc(), notEs : caster.plural() ? "" : "es", hisher : caster.hisher(), s : target.length > 1 ? "s" : "" };
-	Text.AddOutput("[Caster] brandish[notEs] [hisher] tentacles, pointing them toward [hisher] foe[s]. In a great fountain, sticky strands of cum splatter from the cock-like tentacles!", parse);
-	Text.Newline();
+	Text.Add("[Caster] brandish[notEs] [hisher] tentacles, pointing them toward [hisher] foe[s]. In a great fountain, sticky strands of cum splatter from the cock-like tentacles!", parse);
+	Text.NL();
 }
 Abilities.EnemySkill.TSpray.OnHit = function(encounter, caster, target, dmg) {
 	var parse = { Target : target.NameDesc(), tnotS : target.plural() ? "" : "s"};
-	Text.AddOutput("[Target] take[tnotS] the full brunt of the spray, gaining a thick coating of tentacle spunk!", parse);
-	Text.Newline();
+	Text.Add("[Target] take[tnotS] the full brunt of the spray, gaining a thick coating of tentacle spunk!", parse);
+	Text.NL();
 	target.AddLustFraction(0.2);
 }
 Abilities.EnemySkill.TSpray.OnAbsorb = Abilities.EnemySkill.TSpray.OnHit;
 Abilities.EnemySkill.TSpray.OnMiss = function(encounter, caster, target) {
 	var parse = { Target : target.NameDesc(), tnotS : target.plural() ? "" : "s" };
-	Text.AddOutput("[Target] manage[tnotS] to avoid getting hit by the blast!", parse);
-	Text.Newline();
+	Text.Add("[Target] manage[tnotS] to avoid getting hit by the blast!", parse);
+	Text.NL();
 }
 
 Abilities.EnemySkill.TVenom = new AttackPhysical();
@@ -81,23 +81,23 @@ Abilities.EnemySkill.TVenom.hitMod = 0.8;
 Abilities.EnemySkill.TVenom.damageType.pLust = 0.3;
 Abilities.EnemySkill.TVenom.OnCast = function(encounter, caster, target) {
 	var parse = { Caster : caster.NameDesc(), notS : caster.plural() ? "" : "s", hisher : caster.hisher(), target : target.nameDesc(), thimher : target.himher() };
-	Text.AddOutput("[Caster] direct[notS] [hisher] tentacles toward [target], spraying a long gout of toxic goop toward [thimher]! ", parse);
+	Text.Add("[Caster] direct[notS] [hisher] tentacles toward [target], spraying a long gout of toxic goop toward [thimher]! ", parse);
 }
 Abilities.EnemySkill.TVenom.OnHit = function(encounter, caster, target, dmg) {
 	var parse = { Target : target.NameDesc(), tnotS : target.plural() ? "" : "s", theshe : target.heshe() };
 	
-	Text.AddOutput("[Target] cough[tnotS] and sputter[tnotS] as [theshe] is hit by the poisonous liquid!", parse);
-	Text.Newline();
+	Text.Add("[Target] cough[tnotS] and sputter[tnotS] as [theshe] is hit by the poisonous liquid!", parse);
+	Text.NL();
 }
 Abilities.EnemySkill.TVenom.OnMiss = function(encounter, caster, target) {
 	var parse = { Target : target.NameDesc(), tnotS : target.plural() ? "" : "s" };
-	Text.AddOutput("[Target] narrowly avoid[tnotS] the blast, escaping unharmed!", parse);
-	Text.Newline();
+	Text.Add("[Target] narrowly avoid[tnotS] the blast, escaping unharmed!", parse);
+	Text.NL();
 }
 Abilities.EnemySkill.TVenom.TargetEffect = function(encounter, caster, target) {
 	var parse = { target : target.NameDesc(), has : target.has(), s : target.plural() ? "" : "s" };
 	if(Status.Venom(target, { hit : 0.6, turns : 3, turnsR : 3, str : 1, dmg : 0.15 })) {
-		Text.AddOutput("[target] [has] been poisoned! ", parse);
+		Text.Add("[target] [has] been poisoned! ", parse);
 	}
 }
 
@@ -109,7 +109,7 @@ Abilities.EnemySkill.TRavage.damageType.pBlunt = 0.5;
 Abilities.EnemySkill.TRavage.damageType.pLust = 0.5;
 Abilities.EnemySkill.TRavage.OnCast = function(encounter, caster, target) {
 	var parse = { Caster : caster.NameDesc(), notS : caster.plural() ? "" : "s", hisher : caster.hisher(), target : target.nameDesc(), thimher : target.himher() };
-	Text.AddOutput("[Caster] send[notS] [hisher] tentacles rushing toward [target], aiming to catch [thimher]! ", parse);
+	Text.Add("[Caster] send[notS] [hisher] tentacles rushing toward [target], aiming to catch [thimher]! ", parse);
 }
 Abilities.EnemySkill.TRavage.OnHit = function(encounter, caster, target, dmg) {
 	var parse = { Target : target.NameDesc(), thisher : target.hisher(), theshe : target.heshe(), tyIes : target.plural() ? "y" : "ies", thimher : target.himher(), tpossessive : target.possessive(), tnotS : target.plural() ? "" : "s", possessive : caster.possessive() };
@@ -124,8 +124,8 @@ Abilities.EnemySkill.TRavage.OnHit = function(encounter, caster, target, dmg) {
 }
 Abilities.EnemySkill.TRavage.OnMiss = function(encounter, caster, target) {
 	var parse = { target : target.nameDesc(), thimher : target.himher() };
-	Text.AddOutput("The tentacles narrowly miss [target], merely grazing [thimher].", parse);
-	Text.Newline();
+	Text.Add("The tentacles narrowly miss [target], merely grazing [thimher].", parse);
+	Text.NL();
 }
 
 Abilities.EnemySkill.TWhip = new AttackPhysical();
@@ -136,18 +136,18 @@ Abilities.EnemySkill.TWhip.damageType.pBlunt = 1;
 Abilities.EnemySkill.TWhip.damageType.pLust = 0.5;
 Abilities.EnemySkill.TWhip.OnCast = function(encounter, caster, target) {
 	var parse = { Caster : caster.NameDesc(), notEs : caster.plural() ? "" : "es", hisher : caster.hisher(), target : target.nameDesc() };
-	Text.AddOutput("[Caster] thrash[notEs] out with [hisher] tentacles, slashing [target]! ", parse);
+	Text.Add("[Caster] thrash[notEs] out with [hisher] tentacles, slashing [target]! ", parse);
 }
 Abilities.EnemySkill.TWhip.OnHit = function(encounter, caster, target, dmg) {
 	var parse = { Target : target.NameDesc(), tis : target.is(), tnotS : target.plural() ? "" : "s" };
-	Text.AddOutput("[Target] [tis] unable to avoid the blow, and stagger[tnotS] back as it hits, dealing " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
-	Text.Newline();
+	Text.Add("[Target] [tis] unable to avoid the blow, and stagger[tnotS] back as it hits, dealing " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
+	Text.NL();
 	target.AddLustFraction(0.3);
 }
 Abilities.EnemySkill.TWhip.OnMiss = function(encounter, caster, target) {
 	var parse = { target : target.nameDesc() };
-	Text.AddOutput("The tentacles narrowly miss [target], hitting empty air!", parse);
-	Text.Newline();
+	Text.Add("The tentacles narrowly miss [target], hitting empty air!", parse);
+	Text.NL();
 }
 
 Abilities.EnemySkill.TViolate = new AttackPhysical();
@@ -159,7 +159,7 @@ Abilities.EnemySkill.TViolate.damageType.pLust = 1;
 Abilities.EnemySkill.TViolate.hitMod = 2;
 Abilities.EnemySkill.TViolate.OnCast = function(encounter, caster, target) {
 	var parse = { target : target.nameDesc() };
-	Text.AddOutput("Orchid grins lewdly as she lashes out with her tentacles, aiming for [target]! ", parse);
+	Text.Add("Orchid grins lewdly as she lashes out with her tentacles, aiming for [target]! ", parse);
 }
 Abilities.EnemySkill.TViolate.OnHit = function(encounter, caster, target, dmg) {
 	var parse = { Target : target.NameDesc(), target : target.nameDesc(), tis : target.is(), tnotS : target.plural() ? "" : "s", thisher : target.hisher(), thimher : target.himher(), tpossessive : target.possessive(), tarmorDesc : target.ArmorDesc() };
@@ -210,8 +210,8 @@ Abilities.EnemySkill.TViolate.OnHit = function(encounter, caster, target, dmg) {
 Abilities.EnemySkill.TViolate.OnAbsorb = Abilities.EnemySkill.TViolate.OnHit;
 Abilities.EnemySkill.TViolate.OnMiss = function(encounter, caster, target) {
 	var parse = { target : target.nameDesc(), tis : target.is(), theshe : target.heshe(), tnotS : target.plural() ? "" : "s" };
-	Text.AddOutput("Even though [target] [tis] greatly aroused, [theshe] somehow manage[tnotS] to evade getting tangled up in the tentacles.", parse);
-	Text.Newline();
+	Text.Add("Even though [target] [tis] greatly aroused, [theshe] somehow manage[tnotS] to evade getting tangled up in the tentacles.", parse);
+	Text.NL();
 }
 
 Abilities.EnemySkill.GolLustyPheromones = new TeaseSkill();
@@ -219,21 +219,21 @@ Abilities.EnemySkill.GolLustyPheromones.name = "L.Pheromones";
 Abilities.EnemySkill.GolLustyPheromones.Short = function() { return "Attack with lusty pheromones."; }
 Abilities.EnemySkill.GolLustyPheromones.OnCast = function(encounter, caster, target) {
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), y : caster.plural() ? "y" : "ies", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("The Gol reaches down to just below the joint of her humanoid upper body and mantis-like lower form where an immense, juicy-looking pussy lies. She hooks her fingers into either side of it, panting at the sensation, and pulls it open, allowing you gaze into the simmering, pink depths. It's easily big enough to swallow your arm, but far more alarming is the scent it exudes - sweet and enticing.", parse);
-	Text.Newline();
+	Text.Add("The Gol reaches down to just below the joint of her humanoid upper body and mantis-like lower form where an immense, juicy-looking pussy lies. She hooks her fingers into either side of it, panting at the sensation, and pulls it open, allowing you gaze into the simmering, pink depths. It's easily big enough to swallow your arm, but far more alarming is the scent it exudes - sweet and enticing.", parse);
+	Text.NL();
 	caster.AddLustFraction(0.1);
 }
 Abilities.EnemySkill.GolLustyPheromones.OnHit = function(encounter, caster, target, dmg) {
 	var parse = { notEs : caster.plural() ? "es" : "", Name : target.NameDesc(), hisher : target.hisher() };
 	
-	Text.AddOutput("[Name] blush[notEs] as [hisher] head swims with thoughts of naked trysts under the stars, overwhelmed by the Gol’s pheromones.", parse);
-	Text.Newline();
+	Text.Add("[Name] blush[notEs] as [hisher] head swims with thoughts of naked trysts under the stars, overwhelmed by the Gol’s pheromones.", parse);
+	Text.NL();
 }
 Abilities.EnemySkill.GolLustyPheromones.OnMiss = function(encounter, caster, target) {
 	var parse = { notS : caster.plural() ? "s" : "", Name : target.NameDesc(), hisher : target.hisher() };
 	
-	Text.AddOutput("[Name] hold[notS] [hisher] breath to avoid as much of it as possible. Frowning, the Gol releases her netherlips.", parse);
-	Text.Newline();
+	Text.Add("[Name] hold[notS] [hisher] breath to avoid as much of it as possible. Frowning, the Gol releases her netherlips.", parse);
+	Text.NL();
 }
 
 
@@ -247,7 +247,7 @@ Abilities.EnemySkill.GolCuntDash.damageType.pBlunt = 1;
 Abilities.EnemySkill.GolCuntDash.damageType.pLust = 0.5;
 Abilities.EnemySkill.GolCuntDash.OnCast = function(encounter, caster, target) {
 	var parse = { name : target.nameDesc() };
-	Text.AddOutput("Without warning, the Gol launches herself forward, legs clattering as she approaches [name] with blinding speed. ", parse);
+	Text.Add("Without warning, the Gol launches herself forward, legs clattering as she approaches [name] with blinding speed. ", parse);
 	
 	caster.AddLustFraction(0.1);
 }
@@ -255,18 +255,18 @@ Abilities.EnemySkill.GolCuntDash.OnHit = function(encounter, caster, target, dmg
 	var parse = { Name : target.NameDesc(), name : target.nameDesc(), notS : target.plural() ? "s" : "", poss : target.possessive() };
 	parse = target.ParserPronouns(parse);
 	
-	Text.AddOutput("[Name] react[notS] a little too late to dive out the way, but [heshe] manage[notS] to duck low in an attempt to slip under her scythes… just not low enough. Her oncoming crotch and abdomen smack into [name], and her fragrant pussy drags across [poss] face and slimes it with a thick coat of her vaginal juices. The chitin of her underbelly is quite soft on [poss] cheek, almost like a pleasant caress.", parse);
-	Text.Newline();
-	Text.AddOutput("The Gol queen bashes [name] for " + Text.BoldColor(dmg, "#800000") + " damage, staggering [himher]!", parse);
-	Text.Newline();
-	Text.AddOutput("When she finishes charging past, [name] blink[notS] in a daze and stagger to [hisher] feet, uncomfortably warm in all the wrong places.", parse);
-	Text.Newline();
+	Text.Add("[Name] react[notS] a little too late to dive out the way, but [heshe] manage[notS] to duck low in an attempt to slip under her scythes… just not low enough. Her oncoming crotch and abdomen smack into [name], and her fragrant pussy drags across [poss] face and slimes it with a thick coat of her vaginal juices. The chitin of her underbelly is quite soft on [poss] cheek, almost like a pleasant caress.", parse);
+	Text.NL();
+	Text.Add("The Gol queen bashes [name] for " + Text.BoldColor(dmg, "#800000") + " damage, staggering [himher]!", parse);
+	Text.NL();
+	Text.Add("When she finishes charging past, [name] blink[notS] in a daze and stagger to [hisher] feet, uncomfortably warm in all the wrong places.", parse);
+	Text.NL();
 }
 Abilities.EnemySkill.GolCuntDash.OnMiss = function(encounter, caster, target) {
 	var parse = { himher : target.himher(), notEs : target.plural() ? "" : "es", Name : target.NameDesc() };
 	
-	Text.AddOutput("[Name] barely toss[notEs] [himher]self out of the way in time!", parse);
-	Text.Newline();
+	Text.Add("[Name] barely toss[notEs] [himher]self out of the way in time!", parse);
+	Text.NL();
 }
 
 
@@ -279,27 +279,27 @@ Abilities.EnemySkill.GolPollen.hitMod = 0.8;
 Abilities.EnemySkill.GolPollen.targetMode = TargetMode.Enemies;
 Abilities.EnemySkill.GolPollen.OnCast = function(encounter, caster, target) {
 	var parse = {};
-	Text.AddOutput("Sighing, the Gol runs her hands through her shimmering black hair in frustration. After her fingers' first pass, she repeats the action, then does it again. And again. Soon the air around her seems slightly foggy, and your nose itches. A sneeze wracks your body as she continues the motion, filling the air with... something. You can't say what, but it's making you sneeze, and causing your nose to get itchy and irritable. The insectile beauty seems taller and more imposing after each involuntary spasm of your body. Her breasts appear larger, her pussy more inviting, and her face more charmingly human. For a monster, she wouldn't be a bad one to settle down with.", parse);
-	Text.Newline();
+	Text.Add("Sighing, the Gol runs her hands through her shimmering black hair in frustration. After her fingers' first pass, she repeats the action, then does it again. And again. Soon the air around her seems slightly foggy, and your nose itches. A sneeze wracks your body as she continues the motion, filling the air with... something. You can't say what, but it's making you sneeze, and causing your nose to get itchy and irritable. The insectile beauty seems taller and more imposing after each involuntary spasm of your body. Her breasts appear larger, her pussy more inviting, and her face more charmingly human. For a monster, she wouldn't be a bad one to settle down with.", parse);
+	Text.NL();
 }
 Abilities.EnemySkill.GolPollen.OnHit = function(encounter, caster, target) {
 	var parse = { Name : target.NameDesc(), is : target.is() };
 	target.AddLustFraction(0.2);
 	
 	if(Status.Slow(target, { hit : 0.6, factor : 2, turns : 1, turnsR : 3 })) {
-		Text.AddOutput("[Name] [is] slowed! ", parse);
+		Text.Add("[Name] [is] slowed! ", parse);
 	}
 	if(Status.Horny(target, { hit : 0.6, str : 1, dmg : 0.1, turns : 1, turnsR : 3 })) {
-		Text.Newline();
-		Text.AddOutput("[Name] [is] horny! ", parse);
+		Text.NL();
+		Text.Add("[Name] [is] horny! ", parse);
 	}
 	if(Status.Sleep(target, { hit : 0.5, turns : 1, turnsR : 3 })) {
-		Text.Newline();
-		Text.AddOutput("[Name] [is] drowsy! ", parse);
+		Text.NL();
+		Text.Add("[Name] [is] drowsy! ", parse);
 	}
 	if(Status.Confuse(target, { hit : 0.3, turns : 1, turnsR : 3 })) {
-		Text.Newline();
-		Text.AddOutput("[Name] [is] confused! ", parse);
+		Text.NL();
+		Text.Add("[Name] [is] confused! ", parse);
 	}
 }
 Abilities.EnemySkill.GolPollen.OnMiss = null;

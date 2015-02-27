@@ -66,7 +66,7 @@ AttackPhysical.prototype.CastInternal = function(encounter, caster, target) {
 				if(this.OnMiss) this.OnMiss(encounter, caster, e);
 		}
 	}
-	
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
 	});
@@ -74,18 +74,18 @@ AttackPhysical.prototype.CastInternal = function(encounter, caster, target) {
 // Default messages
 AttackPhysical.prototype.OnHit = function(encounter, caster, target, dmg) {
 	var parse = { tName : target.nameDesc() };
-	Text.AddOutput("The attack hits [tName] for " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
-	Text.Newline();
+	Text.Add("The attack hits [tName] for " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
+	Text.NL();
 }
 AttackPhysical.prototype.OnMiss = function(encounter, caster, target) {
 	var parse = { tName : target.nameDesc() };
-	Text.AddOutput("The attack narrowly misses [tName], dealing no damage!", parse);
-	Text.Newline();
+	Text.Add("The attack narrowly misses [tName], dealing no damage!", parse);
+	Text.NL();
 }
 AttackPhysical.prototype.OnAbsorb = function(encounter, caster, target, dmg) {
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s" };
-	Text.AddOutput("[tName] absorb[s] the attack, gaining " + Text.BoldColor(dmg, "#008000") + " health!", parse);
-	Text.Newline();
+	Text.Add("[tName] absorb[s] the attack, gaining " + Text.BoldColor(dmg, "#008000") + " health!", parse);
+	Text.NL();
 }
 
 
@@ -102,7 +102,7 @@ Abilities.Physical.Bash.hitMod = 0.9;
 Abilities.Physical.Bash.damageType.pBlunt = 1;
 Abilities.Physical.Bash.OnCast = function(encounter, caster, target) {
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), y : caster.plural() ? "y" : "ies", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("[name] read[y] a powerful blow, aiming to stun [tName]! ", parse);
+	Text.Add("[name] read[y] a powerful blow, aiming to stun [tName]! ", parse);
 }
 Abilities.Physical.Bash.OnHit = function(encounter, caster, target, dmg) {
 	if(Math.random() < 0.5) {
@@ -114,8 +114,8 @@ Abilities.Physical.Bash.OnHit = function(encounter, caster, target, dmg) {
 	
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : target.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
 	
-	Text.AddOutput("[name] bash[es] [tName] for " + Text.BoldColor(dmg, "#800000") + " damage, staggering [himher]!", parse);
-	Text.Newline();
+	Text.Add("[name] bash[es] [tName] for " + Text.BoldColor(dmg, "#800000") + " damage, staggering [himher]!", parse);
+	Text.NL();
 }
 
 Abilities.Physical.GrandSlam = new AttackPhysical();
@@ -128,7 +128,7 @@ Abilities.Physical.GrandSlam.damageType.pBlunt = 1;
 Abilities.Physical.GrandSlam.targetMode = TargetMode.Enemies;
 Abilities.Physical.GrandSlam.OnCast = function(encounter, caster, target) {
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), y : caster.plural() ? "y" : "ies", s : caster.plural() ? "" : "s" };
-	Text.AddOutput("[name] read[y] a powerful blow, aiming to stun any who stand in [hisher] way! ", parse);
+	Text.Add("[name] read[y] a powerful blow, aiming to stun any who stand in [hisher] way! ", parse);
 }
 Abilities.Physical.GrandSlam.OnHit = function(encounter, caster, target, dmg) {
 	if(Math.random() < 0.5) {
@@ -140,8 +140,8 @@ Abilities.Physical.GrandSlam.OnHit = function(encounter, caster, target, dmg) {
 	
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : target.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
 	
-	Text.AddOutput("[name] slam[s] [tName] for " + Text.BoldColor(dmg, "#800000") + " damage, staggering [himher]!", parse);
-	Text.Newline();
+	Text.Add("[name] slam[s] [tName] for " + Text.BoldColor(dmg, "#800000") + " damage, staggering [himher]!", parse);
+	Text.NL();
 }
 
 Abilities.Physical.Pierce = new AttackPhysical();
@@ -152,7 +152,7 @@ Abilities.Physical.Pierce.defMod = 0.5;
 Abilities.Physical.Pierce.damageType.pPierce = 1;
 Abilities.Physical.Pierce.OnCast = function(encounter, caster, target) {
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tPossessive : target.possessive() };
-	Text.AddOutput("[name] aims [hisher] strike on a weak point in [tPossessive] guard! ", parse);
+	Text.Add("[name] aims [hisher] strike on a weak point in [tPossessive] guard! ", parse);
 }
 
 
@@ -164,13 +164,13 @@ Abilities.Physical.DirtyBlow.defMod = 0.3;
 Abilities.Physical.DirtyBlow.damageType.pPierce = 1.1;
 Abilities.Physical.DirtyBlow.OnCast = function(encounter, caster, target) {
 	var parse = { Possessive : caster.Possessive(), s : target.plural() ? "" : "s", name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tPossessive : target.possessive() };
-	Text.AddOutput("[name] throw[s] a low blow, striking a weak point in [tPossessive] guard! ", parse);
+	Text.Add("[name] throw[s] a low blow, striking a weak point in [tPossessive] guard! ", parse);
 }
 Abilities.Physical.DirtyBlow.TargetEffect = function(encounter, caster, target) {
 	var parse = { target : target.NameDesc(), has : target.has() };
 	if(Status.Numb(target, { hit : 0.2, turns : 3, turnsR : 3, proc : 0.25 })) {
-		Text.AddOutput("[target] [has] been afflicted with numb! ", parse);
-		Text.Newline();
+		Text.Add("[target] [has] been afflicted with numb! ", parse);
+		Text.NL();
 	}
 }
 
@@ -188,17 +188,17 @@ Abilities.Physical.Hamstring.OnCast = function(encounter, caster, target) {
 		name : caster.NameDesc(),
 		y : caster.plural() ? "y" : "ies"
 	};
-	Text.AddOutput("[name] tr[y] [tname] with a light attack, aiming to wound! ", parse);
+	Text.Add("[name] tr[y] [tname] with a light attack, aiming to wound! ", parse);
 }
 Abilities.Physical.Hamstring.OnHit = function(encounter, caster, target, dmg) {
 	var parse = { name : caster.NameDesc(), s : caster.plural() ? "" : "s", tname : target.nameDesc(), tName : target.NameDesc(), has : target.has() };
 	
-	Text.AddOutput("[name] deal[s] " + Text.BoldColor(dmg, "#800000") + " damage to [tname]!", parse);
-	Text.Newline();
+	Text.Add("[name] deal[s] " + Text.BoldColor(dmg, "#800000") + " damage to [tname]!", parse);
+	Text.NL();
 	
 	if(Status.Bleed(target, { hit : 0.75, turns : 3, turnsR : 3, dmg : 0.15 })) {
-		Text.AddOutput("[tName] [has] been afflicted with bleed! ", parse);
-		Text.Newline();
+		Text.Add("[tName] [has] been afflicted with bleed! ", parse);
+		Text.NL();
 	}
 }
 
@@ -210,20 +210,20 @@ Abilities.Physical.Kicksand.cost = { hp: null, sp: 15, lp: null};
 Abilities.Physical.Kicksand.atkMod = 0.05;
 Abilities.Physical.Kicksand.OnCast = function(encounter, caster, target) {
 	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.AddOutput("[name] kick[s] some dirt toward [tName]! ", parse);
+	Text.Add("[name] kick[s] some dirt toward [tName]! ", parse);
 }
 Abilities.Physical.Kicksand.OnHit = function(encounter, caster, target, dmg) {
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", himher : target.himher(), name : caster.nameDesc() };
 	if(Status.Blind(target, { hit : 0.8, str : 0.5, turns : 3, turnsR : 3 })) {
-		Text.AddOutput("[tName] get[s] a face-full of dirt, blinding [himher]!", parse);
+		Text.Add("[tName] get[s] a face-full of dirt, blinding [himher]!", parse);
 	}
-	Text.Newline();
+	Text.NL();
 }
 Abilities.Physical.Kicksand.OnAbsorb = Abilities.Physical.Kicksand.OnHit;
 Abilities.Physical.Kicksand.OnMiss = function(encounter, caster, target) {
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.AddOutput("[tName] easily avoid[s] the attack.", parse);
-	Text.Newline();
+	Text.Add("[tName] easily avoid[s] the attack.", parse);
+	Text.NL();
 }
 
 
@@ -241,8 +241,8 @@ Abilities.Physical.Swift.CastInternal = function(encounter, caster) {
 
 	Status.Haste(caster, { turns : 3, turnsR : 3, factor : 2 });
 
-	Text.AddOutput("[name] focus[es], briefly boosting [hisher] speed!", parse);
-	Text.Newline();
+	Text.Add("[name] focus[es], briefly boosting [hisher] speed!", parse);
+	Text.Flush();
 	
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
@@ -281,7 +281,7 @@ Abilities.Physical.SetTrap.CastInternal = function(encounter, caster) {
 			parse["s2"]  = attacker.plural() ? "" : "s";
 			parse["HeShe"] = attacker.HeShe();
 			
-			Text.AddOutput("[atk] spring[s2] [poss] trap! ", parse);
+			Text.Add("[atk] spring[s2] [poss] trap! ", parse);
 			
 			var atkDmg = target.PAttack();
 			var def    = attacker.PDefense();
@@ -297,19 +297,19 @@ Abilities.Physical.SetTrap.CastInternal = function(encounter, caster) {
 				
 				if(attacker.PhysDmgHP(encounter, target, dmg)) {
 					attacker.AddHPAbs(-dmg);
-					Text.AddOutput("[HeShe] take[s2] " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
+					Text.Add("[HeShe] take[s2] " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
 				}
 			}
 			else {
-				Text.AddOutput("[HeShe] narrowly avoid[s2] taking damage!", parse);
+				Text.Add("[HeShe] narrowly avoid[s2] taking damage!", parse);
 			}
-			Text.Newline();
+			Text.Flush();
 			return false;
 		}
 	});
 
-	Text.AddOutput("[name] set[s] a trap!", parse);
-	Text.Newline();
+	Text.Add("[name] set[s] a trap!", parse);
+	Text.Flush();
 	
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
@@ -327,7 +327,7 @@ Abilities.Physical.Backstab.hitMod = 2;
 Abilities.Physical.Backstab.damageType = null;
 Abilities.Physical.Backstab.OnCast = function(encounter, caster, target) {
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tname : target.nameDesc() };
-	Text.AddOutput("[name] dance[s] around [tname], dealing a crippling backstab! ", parse);
+	Text.Add("[name] dance[s] around [tname], dealing a crippling backstab! ", parse);
 }
 Abilities.Physical.Backstab.enabledTargetCondition = function(encounter, caster, target) {
 	return target.Inhibited();
@@ -341,20 +341,20 @@ Abilities.Physical.Ensnare.cost = { hp: null, sp: 20, lp: null};
 Abilities.Physical.Ensnare.atkMod = 0;
 Abilities.Physical.Ensnare.OnCast = function(encounter, caster, target) {
 	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.AddOutput("[name] throw[s] a net toward [tName]! ", parse);
+	Text.Add("[name] throw[s] a net toward [tName]! ", parse);
 }
 Abilities.Physical.Ensnare.OnHit = function(encounter, caster, target, dmg) {
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", himher : target.himher(), name : caster.nameDesc() };
 	if(Status.Slow(target, { hit : 0.6, factor : 2, turns : 3, turnsR : 3 })) {
-		Text.AddOutput("[tName] get[s] caught in the net, slowing [himher]!", parse);
+		Text.Add("[tName] get[s] caught in the net, slowing [himher]!", parse);
 	}
-	Text.Newline();
+	Text.NL();
 }
 Abilities.Physical.Ensnare.OnAbsorb = Abilities.Physical.Ensnare.OnHit;
 Abilities.Physical.Ensnare.OnMiss = function(encounter, caster, target) {
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.AddOutput("[tName] easily avoid[s] the attack.", parse);
-	Text.Newline();
+	Text.Add("[tName] easily avoid[s] the attack.", parse);
+	Text.NL();
 }
 
 
@@ -366,7 +366,7 @@ Abilities.Physical.FocusStrike.defMod = 0.2;
 Abilities.Physical.FocusStrike.damageType.pPierce = 1.5;
 Abilities.Physical.FocusStrike.OnCast = function(encounter, caster, target) {
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tPossessive : target.possessive() };
-	Text.AddOutput("[name] aim[s] [hisher] strike on a weak point in [tPossessive] guard! ", parse);
+	Text.Add("[name] aim[s] [hisher] strike on a weak point in [tPossessive] guard! ", parse);
 }
 
 
@@ -379,8 +379,8 @@ Abilities.Physical.DAttack.hitMod = 0.75;
 Abilities.Physical.DAttack.nrAttacks = 2;
 Abilities.Physical.DAttack.OnCast = function(encounter, caster, target) {
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("[name] perform[s] two attacks against [tName] in rapid succession!", parse);
-	Text.Newline();
+	Text.Add("[name] perform[s] two attacks against [tName] in rapid succession!", parse);
+	Text.NL();
 }
 
 
@@ -393,8 +393,8 @@ Abilities.Physical.TAttack.hitMod = 0.75;
 Abilities.Physical.TAttack.nrAttacks = 3;
 Abilities.Physical.TAttack.OnCast = function(encounter, caster, target) {
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("[name] perform[s] three attacks against [tName] in rapid succession! ", parse);
-	Text.Newline();
+	Text.Add("[name] perform[s] three attacks against [tName] in rapid succession! ", parse);
+	Text.NL();
 }
 
 
@@ -407,8 +407,8 @@ Abilities.Physical.QAttack.hitMod = 0.75;
 Abilities.Physical.QAttack.nrAttacks = 4;
 Abilities.Physical.QAttack.OnCast = function(encounter, caster, target) {
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("[name] perform[s] four attacks against [tName] in rapid succession!", parse);
-	Text.Newline();
+	Text.Add("[name] perform[s] four attacks against [tName] in rapid succession!", parse);
+	Text.NL();
 }
 
 
@@ -426,8 +426,8 @@ Abilities.Physical.Frenzy.OnCast = function(encounter, caster, target) {
 	}
 		
 	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("[name] perform[s] a frenzied assault, attacking [tName] with five rapid blows!", parse);
-	Text.Newline();
+	Text.Add("[name] perform[s] a frenzied assault, attacking [tName] with five rapid blows!", parse);
+	Text.NL();
 }
 
 
@@ -440,7 +440,7 @@ Abilities.Physical.CrushingStrike.atkMod = 1.5;
 Abilities.Physical.CrushingStrike.hitMod = 0.9;
 Abilities.Physical.CrushingStrike.OnCast = function(encounter, caster, target) {
 	var parse = { name : caster.NameDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.AddOutput("[name] perform[s] a wild assault against [tName]! ", parse);
+	Text.Add("[name] perform[s] a wild assault against [tName]! ", parse);
 }
 Abilities.Physical.CrushingStrike.OnHit = function(encounter, caster, target, dmg) {
 	if(Math.random() < 0.8) {
@@ -452,8 +452,8 @@ Abilities.Physical.CrushingStrike.OnHit = function(encounter, caster, target, dm
 	
 	var parse = { name : caster.NameDesc(), himher : target.himher(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
 	
-	Text.AddOutput("[name] deliver[s] a crushing blow to [tName] for " + Text.BoldColor(dmg, "#800000") + " damage, staggering [himher]!", parse);
-	Text.Newline();
+	Text.Add("[name] deliver[s] a crushing blow to [tName] for " + Text.BoldColor(dmg, "#800000") + " damage, staggering [himher]!", parse);
+	Text.NL();
 }
 
 
@@ -464,7 +464,7 @@ Abilities.Physical.Provoke.cost = { hp: null, sp: 15, lp: null};
 Abilities.Physical.Provoke.atkMod = 0.1;
 Abilities.Physical.Provoke.OnCast = function(encounter, caster, target) {
 	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.AddOutput("[name] taunt[s] [tName]! ", parse);
+	Text.Add("[name] taunt[s] [tName]! ", parse);
 }
 Abilities.Physical.Provoke.OnHit = function(encounter, caster, target, dmg) {
 	var activeChar;
@@ -477,14 +477,14 @@ Abilities.Physical.Provoke.OnHit = function(encounter, caster, target, dmg) {
 		aggroEntry.aggro += 1;
 	
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.AddOutput("[tName] become[s] agitated, becoming more aggressive toward [name]!", parse);
-	Text.Newline();
+	Text.Add("[tName] become[s] agitated, becoming more aggressive toward [name]!", parse);
+	Text.NL();
 }
 Abilities.Physical.Provoke.OnAbsorb = Abilities.Physical.Provoke.OnHit;
 Abilities.Physical.Provoke.OnMiss = function(encounter, caster, target) {
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.AddOutput("[tName] doesn't look very impressed.", parse);
-	Text.Newline();
+	Text.Add("[tName] doesn't look very impressed.", parse);
+	Text.NL();
 }
 
 
@@ -495,7 +495,7 @@ Abilities.Physical.Taunt.cost = { hp: null, sp: 30, lp: null};
 Abilities.Physical.Taunt.atkMod = 0.5;
 Abilities.Physical.Taunt.OnCast = function(encounter, caster, target) {
 	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.AddOutput("[name] taunt[s] [tName]! ", parse);
+	Text.Add("[name] taunt[s] [tName]! ", parse);
 }
 Abilities.Physical.Taunt.OnHit = function(encounter, caster, target, dmg) {
 	var activeChar;
@@ -508,13 +508,13 @@ Abilities.Physical.Taunt.OnHit = function(encounter, caster, target, dmg) {
 		aggroEntry.aggro += 3;
 	
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.AddOutput("[tName] become[s] agitated, becoming more aggressive toward [name]!", parse);
-	Text.Newline();
+	Text.Add("[tName] become[s] agitated, becoming more aggressive toward [name]!", parse);
+	Text.NL();
 }
 Abilities.Physical.Taunt.OnAbsorb = Abilities.Physical.Taunt.OnHit;
 Abilities.Physical.Taunt.OnMiss = function(encounter, caster, target) {
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.AddOutput("[tName] doesn't look very impressed.", parse);
-	Text.Newline();
+	Text.Add("[tName] doesn't look very impressed.", parse);
+	Text.NL();
 }
 

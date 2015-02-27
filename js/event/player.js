@@ -290,8 +290,8 @@ Player.prototype.Interact = function(switchSpot) {
 	options.push({ nameStr: "Fantasize",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("[Placeholder] You dream about sexy things.");
-			
+			Text.Add("[Placeholder] You dream about sexy things.");
+			Text.Flush();
 			world.TimeStep({hour : 1});
 			
 			that.AddLustFraction(0.5);
@@ -303,8 +303,8 @@ Player.prototype.Interact = function(switchSpot) {
 	options.push({ nameStr: "Release",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("[Placeholder] You masturbate fiercely, cumming buckets.");
-			
+			Text.Add("[Placeholder] You masturbate fiercely, cumming buckets.");
+			Text.Flush();
 			world.TimeStep({minute : 10});
 			
 			that.OrgasmCum();
@@ -318,8 +318,8 @@ Player.prototype.Interact = function(switchSpot) {
 	options.push({ nameStr: "Meditate",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("[Placeholder] You sit down and attempt to calm your thoughts.");
-			
+			Text.Add("[Placeholder] You sit down and attempt to calm your thoughts.");
+			Text.Flush();
 			world.TimeStep({minute : 30});
 			
 			that.AddLustFraction(-1);

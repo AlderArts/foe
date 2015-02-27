@@ -70,19 +70,20 @@ Adrian.prototype.IsAtLocation = function(location) {
 // Party interaction
 Adrian.prototype.Interact = function() {
 	Text.Clear();
-	Text.AddOutput("Rawr Imma horse.");
+	Text.Add("Rawr Imma horse.");
 	
 	
 	if(DEBUG) {
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: relation: " + adrian.relation.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: subDom: " + adrian.subDom.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: slut: " + adrian.slut.Get()));
-		Text.Newline();
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: relation: " + adrian.relation.Get()));
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: subDom: " + adrian.subDom.Get()));
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: slut: " + adrian.slut.Get()));
+		Text.NL();
 	}
 	
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		PartyInteraction();
 	});

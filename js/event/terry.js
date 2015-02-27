@@ -595,8 +595,8 @@ Scenes.Terry.Prompt = function() {
 	options.push({ nameStr: "Release",
 		func : function() {
 			Text.Clear();
-			Text.AddOutput("[Placeholder] Terry masturbates fiercely, cumming buckets.");
-			
+			Text.Add("[Placeholder] Terry masturbates fiercely, cumming buckets.");
+			Text.Flush();
 			world.TimeStep({minute : 10});
 			
 			that.OrgasmCum();
@@ -615,8 +615,8 @@ Scenes.Terry.Prompt = function() {
 
 Terry.prototype.Act = function(encounter, activeChar) {
 	// TODO: AI!
-	Text.AddOutput("The thief hops around nimbly.");
-	Text.Newline();
+	Text.Add("The thief hops around nimbly.");
+	Text.NL();
 	
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);

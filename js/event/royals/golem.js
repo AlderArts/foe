@@ -92,8 +92,8 @@ GolemBoss.prototype.ToStorage = function() {
 
 GolemBoss.prototype.Act = function(encounter, activeChar) {
 	// TODO: AI!
-	Text.AddOutput(this.NameDesc() + " shuffles around cumbersomely.");
-	Text.Newline();
+	Text.Add(this.NameDesc() + " shuffles around cumbersomely.");
+	Text.NL();
 	
 	// Pick a random target
 	var t = this.GetSingleTarget(encounter, activeChar);

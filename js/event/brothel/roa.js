@@ -115,19 +115,20 @@ Scenes.Roa.Impregnate = function(mother, load) {
 // Party interaction //TODO
 Roa.prototype.Interact = function() {
 	Text.Clear();
-	Text.AddOutput("Rawr Imma bunny.");
+	Text.Add("Rawr Imma bunny.");
 	
 	
 	if(DEBUG) {
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: relation: " + roa.relation.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: subDom: " + roa.subDom.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: slut: " + roa.slut.Get()));
-		Text.Newline();
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: relation: " + roa.relation.Get()));
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: subDom: " + roa.subDom.Get()));
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: slut: " + roa.slut.Get()));
+		Text.NL();
 	}
 	
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		PartyInteraction();
 	});

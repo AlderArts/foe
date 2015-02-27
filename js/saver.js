@@ -5,15 +5,15 @@ Saver.slots = 12;
 Saver.SavePrompt = function(backFunc) {
 	Text.Clear();
 	
-	Text.AddOutput("Save game:");
-	Text.Newline();
+	Text.Add("Save game:");
+	Text.NL();
 	
 	var options = new Array();
 	for(var i=0; i<Saver.slots; i++) {
-		Text.AddOutput("Game " + i + ": ");
+		Text.Add("Game " + i + ": ");
 		var name = localStorage["save" + i];
 		if(name) {
-			Text.AddOutput(name);
+			Text.Add(name);
 			options.push({ nameStr : "Game " + i,
 				func : function(obj) {
 					var prmpt = prompt("This will overwrite save slot " + obj + ", continue? \n\n Comment:");
@@ -22,7 +22,7 @@ Saver.SavePrompt = function(backFunc) {
 			});
 		}
 		else {
-			Text.AddOutput("EMPTY");
+			Text.Add("EMPTY");
 			options.push({ nameStr : "Game " + i,
 				func : function(obj) {
 					var prmpt = prompt("This will save to slot " + obj + ", continue? \n\n Comment:");
@@ -30,13 +30,14 @@ Saver.SavePrompt = function(backFunc) {
 				}, enabled : true, obj : i
 			});
 		}
-		Text.Newline();
+		Text.NL();
 	}
 	Gui.SetButtonsFromList(options, true, backFunc);
 	
-    Text.Newline();
+    Text.NL();
     if(Saver.HasSaves())
-    	Text.AddOutput("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
+    	Text.Add("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
+    Text.Flush();
 }
 
 Saver.SaveGame = function(nr, cmt) {
@@ -69,27 +70,28 @@ Saver.HasSaves = function() {
 Saver.LoadPrompt = function(backFunc) {
 	Text.Clear();
 	
-	Text.AddOutput("Load game:");
-	Text.Newline();
+	Text.Add("Load game:");
+	Text.NL();
 	
 	var options = new Array();
 	for(var i=0; i<Saver.slots; i++) {
-		Text.AddOutput("Game " + i + ": ");
+		Text.Add("Game " + i + ": ");
 		var name = localStorage["save" + i];
 		if(name)
-			Text.AddOutput(name);
+			Text.Add(name);
 		else
-			Text.AddOutput("EMPTY");
-		Text.Newline();
+			Text.Add("EMPTY");
+		Text.NL();
 		options.push({ nameStr : "Game " + i,
 			func : Saver.LoadGame, enabled : Saver.SaveHeader(i), obj : i
 		});
 	}
 	Gui.SetButtonsFromList(options, true, backFunc);
 	
-    Text.Newline();
+    Text.NL();
     if(Saver.HasSaves())
-    	Text.AddOutput("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
+    	Text.Add("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
+    Text.Flush();
 }
 
 Saver.LoadGame = function(nr) {

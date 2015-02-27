@@ -36,7 +36,7 @@ HealingSpell.prototype.CastInternal = function(encounter, caster, target) {
 		if(this.OnHit) this.OnHit(encounter, caster, e, healing);
 		if(this.TargetEffect) this.TargetEffect(encounter, caster, e);
 	}
-	
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
 	});
@@ -66,15 +66,15 @@ HealingSpell.prototype.CastInternalOOC = function(encounter, caster, target) {
 		if(this.OnHit) this.OnHit(encounter, caster, e, healing);
 		if(this.TargetEffect) this.TargetEffect(encounter, caster, e);
 	}
-	
+	Text.Flush();
 	Gui.NextPrompt(ShowAbilities);
 }
 // Default messages
 HealingSpell.prototype.OnHit = function(encounter, caster, target, dmg) {
 	if(dmg <= 0) return;
 	var parse = { tName : target.nameDesc() };
-	Text.AddOutput("It heals [tName] for " + Text.BoldColor(dmg, "#008000") + " damage!", parse);
-	Text.Newline();
+	Text.Add("It heals [tName] for " + Text.BoldColor(dmg, "#008000") + " damage!", parse);
+	Text.NL();
 }
 
 
@@ -95,8 +95,8 @@ Abilities.White.FirstAid.healMod = 1;
 Abilities.White.FirstAid.OnCast = function(encounter, caster, target) {
 	var parse = { name : caster.NameDesc(), HeShe : caster.HeShe(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hand : caster.HandDesc(), tName : target.nameDesc(), y : caster.plural() ? "y" : "ies", possessive : target.possessive(), skin : target.SkinDesc()
 	}
-	Text.AddOutput("[name] prepare[s] some soothing salves, gently applying it to [possessive] [skin] with [hisher] [hand]s.", parse);
-	Text.Newline();
+	Text.Add("[name] prepare[s] some soothing salves, gently applying it to [possessive] [skin] with [hisher] [hand]s.", parse);
+	Text.NL();
 }
 
 
@@ -197,8 +197,8 @@ Abilities.White.Heal.healMod = 1.5;
 Abilities.White.Heal.OnCast = function(encounter, caster, target) {
 	var parse = { name : caster.NameDesc(), HeShe : caster.HeShe(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hand : caster.HandDesc(), tName : target.nameDesc(), y : caster.plural() ? "y" : "ies"
 	}
-	Text.AddOutput("[name] read[y] a healing spell, forming a sphere of soothing white magic between [hisher] [hand]s. [HeShe] cast[s] the enchantment on [tName]", parse);
-	Text.Newline();
+	Text.Add("[name] read[y] a healing spell, forming a sphere of soothing white magic between [hisher] [hand]s. [HeShe] cast[s] the enchantment on [tName]", parse);
+	Text.NL();
 }
 
 
@@ -211,8 +211,8 @@ Abilities.White.Recover.healMod = 2;
 Abilities.White.Recover.OnCast = function(encounter, caster, target) {
 	var parse = { name : caster.NameDesc(), HeShe : caster.HeShe(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hand : caster.HandDesc(), tName : target.nameDesc(), y : caster.plural() ? "y" : "ies"
 	}
-	Text.AddOutput("[name] read[y] a powerful healing spell, forming a glowing sphere of soothing white magic between [hisher] [hand]s. [HeShe] cast[s] the enchantment on [tName]", parse);
-	Text.Newline();
+	Text.Add("[name] read[y] a powerful healing spell, forming a glowing sphere of soothing white magic between [hisher] [hand]s. [HeShe] cast[s] the enchantment on [tName]", parse);
+	Text.NL();
 }
 
 
@@ -229,15 +229,15 @@ Abilities.White.Cheer.CastInternal = function(encounter, caster, target) {
 		s : caster.plural() ? "" : "s"
 	}
 
-	Text.AddOutput("[name] cheer[s] the party on, raising morale!", parse);
-	Text.Newline();
+	Text.Add("[name] cheer[s] the party on, raising morale!", parse);
+	Text.NL();
 	
 	for(var i = 0; i < target.members.length; i++) {
 		var e = target.members[i];
 		e.stamina.temp = Math.max(e.stamina.temp, caster.MAttack() / 5);
 		e.spirit.temp = Math.max(e.spirit.temp, caster.MAttack() / 5);
 	}
-	
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
 	});
@@ -260,8 +260,8 @@ Abilities.White.Pinpoint.CastInternal = function(encounter, caster, target) {
 	}
 
 	// TODO: Make more flavor text
-	Text.AddOutput("[name] cast[s] pinpoint on [tName], making them more limber!", parse);
-	Text.Newline();
+	Text.Add("[name] cast[s] pinpoint on [tName], making them more limber!", parse);
+	Text.Flush();
 	
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
@@ -287,8 +287,8 @@ Abilities.White.Toughen.CastInternal = function(encounter, caster, target) {
 	}
 
 	// TODO: Make more flavor text
-	Text.AddOutput("[name] cast[s] toughen on [tName], protecting them from harm!", parse);
-	Text.Newline();
+	Text.Add("[name] cast[s] toughen on [tName], protecting them from harm!", parse);
+	Text.Flush();
 	
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
@@ -314,8 +314,8 @@ Abilities.White.Empower.CastInternal = function(encounter, caster, target) {
 	}
 
 	// TODO: Make more flavor text
-	Text.AddOutput("[name] cast[s] empower on [tName], filling them with strength!", parse);
-	Text.Newline();
+	Text.Add("[name] cast[s] empower on [tName], filling them with strength!", parse);
+	Text.Flush();
 	
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
@@ -351,12 +351,12 @@ Abilities.White.Tirade.CastInternal = function(encounter, caster, target) {
 	if(Math.random() < 0.5) {
 		target.AddSPAbs(-dmg);
 		
-		Text.AddOutput("[name] start[s] rambling about petty things in an attempt to distract [tName]. It seems to be working, [heshe] look[s] slightly annoyed! [name] drain[s] " + Text.BoldColor(dmg, "#000080") + " SP from [tName]!", parse);
+		Text.Add("[name] start[s] rambling about petty things in an attempt to distract [tName]. It seems to be working, [heshe] look[s] slightly annoyed! [name] drain[s] " + Text.BoldColor(dmg, "#000080") + " SP from [tName]!", parse);
 	}
 	else {
-		Text.AddOutput("[name] start[s] rambling about petty things, but [tName] doesn't look very impressed!", parse);
+		Text.Add("[name] start[s] rambling about petty things, but [tName] doesn't look very impressed!", parse);
 	}
-	Text.Newline();
+	Text.Flush();
 	
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
@@ -392,12 +392,12 @@ Abilities.White.Preach.CastInternal = function(encounter, caster, target) {
 	if(Math.random() < 0.75) {
 		target.AddSPAbs(-dmg);
 		
-		Text.AddOutput("[name] start[s] preaching to [tName]. It seems to be working, [heshe] look[s2] slightly drowsy! [name] drain[s] " + Text.BoldColor(dmg, "#000080") + " SP from [tName]!", parse);
+		Text.Add("[name] start[s] preaching to [tName]. It seems to be working, [heshe] look[s2] slightly drowsy! [name] drain[s] " + Text.BoldColor(dmg, "#000080") + " SP from [tName]!", parse);
 	}
 	else {
-		Text.AddOutput("[name] start[s] preaching, but [tName] doesn't look very impressed!", parse);
+		Text.Add("[name] start[s] preaching, but [tName] doesn't look very impressed!", parse);
 	}
-	Text.Newline();
+	Text.Flush();
 	
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
@@ -421,7 +421,7 @@ Abilities.White.Sermon.CastInternal = function(encounter, caster, target) {
 		HeShe : caster.HeShe()
 	}
 	
-	Text.AddOutput("[name] start[s] proselytizing to the enemy party. [HeShe] somehow manage[s] to sound extremely condensending, but immensly boring at the same time!", parse);
+	Text.Add("[name] start[s] proselytizing to the enemy party. [HeShe] somehow manage[s] to sound extremely condensending, but immensly boring at the same time!", parse);
 
 	for(var i = 0; i < target.length; i++) {
 		var e = target[i];
@@ -440,14 +440,14 @@ Abilities.White.Sermon.CastInternal = function(encounter, caster, target) {
 		if(Math.random() < 0.75) {
 			e.AddSPAbs(-dmg);
 			
-			Text.AddOutput(" It seems to be working, [tName] look[s2] slightly annoyed! [name] drain[s] " + Text.BoldColor(dmg, "#000080") + " SP from [tName]!", parse);
+			Text.Add(" It seems to be working, [tName] look[s2] slightly annoyed! [name] drain[s] " + Text.BoldColor(dmg, "#000080") + " SP from [tName]!", parse);
 		}
 		else {
-			Text.AddOutput(" However, [tName] doesn't look very impressed!", parse);
+			Text.Add(" However, [tName] doesn't look very impressed!", parse);
 		}
 	}
 	
-	Text.Newline();
+	Text.Flush();
 	
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();

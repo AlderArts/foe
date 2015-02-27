@@ -87,7 +87,7 @@ Text.Clear = function() {
 //TODO Would be wise to refactor/rename this to "AddSpan".
 //Adds text wrapped in a span.
 Text.Add = function(text, parse, cssClasses) {
-	var classesStr = (cssClasses)? cssClasses : "";
+	var classesStr = (cssClasses) ? cssClasses : "";
 	if(cssClasses)
 		Text.buffer += "<span class=\""+classesStr+"\">"+Text.Parse(text, parse) + "</span>";
 	else
@@ -95,7 +95,7 @@ Text.Add = function(text, parse, cssClasses) {
 }
 //Adds text wrapped in a div.
 Text.AddDiv = function(text, parse, cssClasses) {
-	var classesStr = (cssClasses)? cssClasses : "";
+	var classesStr = (cssClasses) ? cssClasses : "";
 	Text.buffer += "<div class=\""+classesStr+"\">"+Text.Parse(text, parse) + "</div>";
 }
 
@@ -450,18 +450,6 @@ var createInput = function(inputOptions, cssClasses){
 * ANYTHING BELOW THIS POINT SHOULDN'T BE USED ANYMORE! IF SOMEONE IS FEELING BRAVE THEY SHOULD REFACTOR THEM OUT!
 * GOD BLESS THE SOUL THAT ATTEMPTS THIS!
  */
-
-//TODO Refactor this out. (connected to Text.AddOutput). Will require the section using this to use Text.Flush()
-Text.Newline = function() {
-	var textbox = document.getElementById("mainTextArea");
-	textbox.innerHTML += "<br/><br/>";
-}
-
-//TODO Refactor this out (connected to Text.Newline). Will require the section using this to use Text.Flush()
-Text.AddOutput = function(text, parseStrings) {
-	var textbox = document.getElementById("mainTextArea");
-	textbox.innerHTML += Text.Parse(text, parseStrings);
-}
 
 //TODO Refactor this out. Should use a CSS class
 Text.BoldColor = function(text, color) {

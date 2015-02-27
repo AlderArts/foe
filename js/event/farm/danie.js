@@ -75,19 +75,19 @@ Danie.prototype.IsAtLocation = function(location) {
 // Party interaction
 Danie.prototype.Interact = function() {
 	Text.Clear();
-	Text.AddOutput("Baah Imma sheep.");
+	Text.Add("Baah Imma sheep.");
 	
 	
 	if(DEBUG) {
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: relation: " + danie.relation.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: subDom: " + danie.subDom.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: slut: " + danie.slut.Get()));
-		Text.Newline();
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: relation: " + danie.relation.Get()));
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: subDom: " + danie.subDom.Get()));
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: slut: " + danie.slut.Get()));
+		Text.NL();
 	}
-	
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		PartyInteraction();
 	});

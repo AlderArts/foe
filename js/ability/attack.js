@@ -31,14 +31,14 @@ Abilities.Attack.CastInternal = function(encounter, caster, target) {
 			target.AddHPAbs(-dmg);
 	
 			// TODO: Make more flavor text	
-			Text.AddOutput("[name] attacks [tName] for " + Text.BoldColor(dmg, "#800000") + " damage! Waagh!", parse);
+			Text.Add("[name] attacks [tName] for " + Text.BoldColor(dmg, "#800000") + " damage! Waagh!", parse);
 		}
 	}
 	else {
-		Text.AddOutput("[name] attacks [tName], but the blow misses!", parse);
+		Text.Add("[name] attacks [tName], but the blow misses!", parse);
 	}
-	Text.Newline();
-	
+		
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
 	});

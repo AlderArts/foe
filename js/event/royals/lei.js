@@ -115,19 +115,20 @@ Lei.prototype.IsAtLocation = function(location) {
 // Party interaction
 Lei.prototype.Interact = function() {
 	Text.Clear();
-	Text.AddOutput("Rawr Imma stabbitystab.");
+	Text.Add("Rawr Imma stabbitystab.");
 	
 	
 	if(DEBUG) {
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: relation: " + lei.relation.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: subDom: " + lei.subDom.Get()));
-		Text.Newline();
-		Text.AddOutput(Text.BoldColor("DEBUG: slut: " + lei.slut.Get()));
-		Text.Newline();
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: relation: " + lei.relation.Get()));
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: subDom: " + lei.subDom.Get()));
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: slut: " + lei.slut.Get()));
+		Text.NL();
 	}
 	
+	Text.Flush();
 	Gui.NextPrompt(function() {
 		PartyInteraction();
 	});
