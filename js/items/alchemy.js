@@ -123,7 +123,7 @@ Items.Bovia.PushEffect(function(target) {
 		if(Math.random() < 0.5) {
 			var diff = target.lactHandler.lactationRate.IdealStat(10, 1);
 			if(diff) {
-				Text.Add("[Poss] breasts starts to lactate more than before.", parse);
+				Text.Add("[Poss] breasts start to lactate more than before.", parse);
 				Text.NL();
 			}
 		}
