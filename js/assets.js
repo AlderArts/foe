@@ -89,20 +89,31 @@ function LoadImages() {
 	
 	LoadStatusImages(ready);
 	
-	var loaderFunc = setInterval(function() {
+	var loaderFunc;
+	var backupFunc;
+	var startUp = function() {
+		clearInterval(loaderFunc);
+		clearInterval(backupFunc);
+		assetsOverlay();
+		
+		// Go to credits screen
+		SplashScreen();
+		// Render first frame
+		setTimeout(Render, 100);
+	}
+	
+	loaderFunc = setInterval(function() {
 		var el = document.getElementById("progressDiv");
 		el.innerHTML = "Loading assets: " + count + "/" + NUM_ASSETS;
 		
 		if(count == NUM_ASSETS) {
-			clearInterval(loaderFunc);
-    		assetsOverlay();
-    		
-			// Go to credits screen
-			SplashScreen();
-			// Render first frame
-			setTimeout(Render, 100);
+			startUp();
 		}
 	}, 100);
+	
+	backupFunc = setInterval(function() {
+		startUp();
+	}, 10000);
 }
 
 function assetsOverlay() {
