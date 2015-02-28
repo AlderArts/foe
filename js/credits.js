@@ -44,6 +44,12 @@ CreditsScreen = function() {
 	
 	Text.NL();
 	
+	Text.Add(Text.BoldColor("Code snippets:"));
+	Text.NL();
+	Text.Add("Image pre-loader: https://github.com/DimitarChristoff/pre-loader<br/>");
+	
+	Text.NL();
+	
 	Text.Add(Text.BoldColor("Art:"));
 	Text.NL();
 	Text.Add("Cavalcade cards: Jass Befrold (colors by Alder)<br/>");

@@ -73,57 +73,59 @@ Images.imgWaitDisabled      = "data/gui/wait_disabled.png";
 Images.imgSleepEnabled      = "data/gui/sleep_enabled.png";
 Images.imgSleepDisabled     = "data/gui/sleep_disabled.png";
 
-var NUM_ASSETS = 0;
-
 function LoadImages() {
+	//Fill image array
+	var imageArray = [];
+	for(var image in Images)
+		imageArray.push(Images[image]);
+	LoadCardImages(imageArray);
+	LoadStatusImages(imageArray);
+	
+	// fetch HTML5 progress element
+	var progress = document.getElementById('progressDiv');
+	progress.setAttribute('max', imageArray.length);
+	progress.setAttribute('value', 0);
+	
+	var legend = document.getElementById('progressLabel');
+	
+	// Show progress element
 	assetsOverlay();
 	
-	var count = 0;
-	
-	var ready = function() { count++; };
-	
-	for(var image in Images)
-		LoadImage(Images[image], ready);
-	
-	LoadCardImages(ready);
-	
-	LoadStatusImages(ready);
-	
-	var loaderFunc;
-	var backupFunc;
-	var startUp = function() {
-		clearInterval(loaderFunc);
-		clearInterval(backupFunc);
-		assetsOverlay();
-		
-		// Go to credits screen
-		SplashScreen();
-		// Render first frame
-		setTimeout(Render, 100);
-	}
-	
-	loaderFunc = setInterval(function() {
-		var el = document.getElementById("progressDiv");
-		el.innerHTML = "Loading assets: " + count + "/" + NUM_ASSETS;
-		
-		if(count == NUM_ASSETS) {
-			startUp();
-		}
-	}, 100);
-	
-	backupFunc = setInterval(function() {
-		startUp();
-	}, 10000);
+	// instantiate the pre-loader with an onProgress and onComplete handler
+	new preLoader(imageArray, {
+	    onProgress: function(img, imageEl, index) {
+	        // fires every time an image is done or errors. 
+	        // imageEl will be falsy if error
+	        //console.log('just ' +  (!imageEl ? 'failed: ' : 'loaded: ') + img);
+	        
+	        var percent = Math.floor((100 / this.queue.length) * this.completed.length);
+	        
+	        // update the progress element
+	        legend.innerHTML = '<span>' + index + ' / ' + this.queue.length + ' ('+percent+'%)</span>';
+	        progress.value = index;
+	        
+	        // can access any propery of this
+	        //console.log(this.completed.length + this.errors.length + ' / ' + this.queue.length + ' done');
+	    }, 
+	    onComplete: function(loaded, errors) {
+	        // fires when whole list is done. cache is primed.
+	        //console.log('done', loaded);
+	        
+			assetsOverlay();
+			
+			// Go to credits screen
+			SplashScreen();
+			// Render first frame
+			setTimeout(Render, 100);
+	        
+	        if(errors) {
+	            console.log('the following failed', errors);
+	        }
+	    }
+	});
 }
 
 function assetsOverlay() {
 	var el = document.getElementById("overlay_assets");
 	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
-}
-
-LoadImage = function(src, func) {
-	var Preload = new Image();
-	NUM_ASSETS++;
-	Preload.onload = func;
-	Preload.src    = src;
 }

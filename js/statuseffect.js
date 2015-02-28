@@ -33,7 +33,7 @@ StatusEffect = {
 	LAST    : 24
 };
 
-LoadStatusImages = function(ready) {
+LoadStatusImages = function(imageArray) {
 	Images.status = [];
 	for(var i = 0; i < StatusEffect.LAST; i++) {
 		Images.status[i]  = "";
@@ -58,7 +58,7 @@ LoadStatusImages = function(ready) {
 	
 	for(var i = 0; i < StatusEffect.LAST; i++) {
 		if(Images.status[i] == "") continue;
-		LoadImage(Images.status[i], ready);
+		imageArray.push(Images.status[i]);
 	}
 }
 
