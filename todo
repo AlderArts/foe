@@ -1,13 +1,6 @@
 TODO for Fall of Eden
 ---------------------
 
-FoE2 Mindstorm
---------------
-Strategy
-Evolve strains
-Manage minions
-Repopulate
-
 -----------------
     IMMEDIATE
 -----------------
@@ -61,17 +54,17 @@ REWRITE OF GUI:
 * Gem
 * Job screen
 * Combat screen? (partly done)
+* Equipment screen (partly done)
+* Item screen? (management)
+
+* Replace placeholder art (bg)
 
 
 
 
-
-
-Version 0.3
------------
+TODO stuff
+----------
 * Pregnancy
-
-* Wolf - write
 
 * Rewrite farm stuff
  - Gwendy
@@ -80,13 +73,8 @@ Version 0.3
   - E+
 
 
-
-
 * Map - show where?
 * Name generation
-
-
-
 
 
 * Stuff for KiaKai
@@ -167,13 +155,6 @@ Feedback:
 * Prison/cell area at guard house
 * Standing with the guard
 
-* Replace placeholder art (bg)
-
-------------------------
-        BUGFIXES
-------------------------
-
-
 
 ------------------------
        IDEAS
@@ -207,7 +188,6 @@ Feedback:
 ---------------
  WRITING IDEAS
 ---------------
-
 
 * Gwendy's farm
  - Restoration initiative
@@ -279,7 +259,6 @@ Feedback:
  MAIN STORYLINE IDEAS
 ----------------------
 
-
 * Eden
  - Floating island where the fabric of reality is thin
   + easier to open portals to/from here
@@ -291,13 +270,11 @@ Feedback:
   + Can be accessed through dragon, desert nomads or subterranian tunnels
 
 
-
 * Alliser
  - The "old man"
  - Known as a reclusive sage in the land of Eden
  - A magician/alchemist with knowledge of the planes
  - Important to the endgame
-
 
 
 * Jeanne
@@ -306,7 +283,6 @@ Feedback:
  - Dabbling alchemist
   + Weird and dangerous formulas
  - Knows of Alliser
-
 
 
 * Planes concept
@@ -325,12 +301,10 @@ Feedback:
   + Goo world
 
 
-
 * Uru, demon omnibus
  - Ruler of the dark aspect
  - Vily, horny
  - Seeks conquest of Eden, and as many planes as she can
-
 
 
 * Aria, angelic being (female)
@@ -338,7 +312,6 @@ Feedback:
  - Serene
  - Seeks to prevent Uru's plans
  - Agenda to close off the planes?
-
 
 
 * The dragons
@@ -371,7 +344,7 @@ PART I:
 * Brothel
  - Lucille
  - Ches
- - Roa (pre-follower done)
+ - Roa (pre-follower done-ish)
  - Belinda
 * Rigard
  - Stores
