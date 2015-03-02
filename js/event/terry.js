@@ -2219,7 +2219,8 @@ Scenes.Terry.SkinshipPrompt = function() {
 		boygirl : terry.mfTrue("boy", "girl"),
 		playername : player.name,
 		hand    : function() { return player.HandDesc(); },
-		breastsDesc : function() { return player.FirstBreastRow().Short(); }
+		breastsDesc : function() { return player.FirstBreastRow().Short(); },
+		tongueDesc : function() { return player.TongueDesc(); }
 	};
 	
 	Text.Clear();
@@ -2381,6 +2382,164 @@ Scenes.Terry.SkinshipPromptChoices = function() {
 		tooltip : Text.Parse("Terry’s lovely bushy tail looks like it needs a lot of attention to look its best. Why don’t you do your [foxvixen] a favor and give it a nice brushing?", parse)
 	});
 	
+	options.push({ nameStr : "Kiss",
+		func : function() {
+			Text.Clear();
+			Text.Add("Bridging the distance between you, your hands reach out towards Terry’s face. One tenderly caresses [hisher] cheek, whilst the other tucks itself under the [foxvixen]’s chin, tilting [hisher] head for a better angle.", parse);
+			Text.NL();
+			if(terry.Relation() < 60) {
+				Text.Add("Terry looks a bit unsure of [himher]self, but [heshe] makes no move to push you away either.", parse);
+				Text.NL();
+				Text.Add("You give [himher] a reassuring smile, trying to calm [hisher] nerves. When it’s clear [heshe]’s not going to stop you, you allow your lips to close the gap and press against [hisher] own.", parse);
+			}
+			else {
+				Text.Add("The [foxvixen] closes [hisher] eyes, moving to meet your intended kiss.", parse);
+				Text.NL();
+				Text.Add("Eager little thing, isn’t [heshe]? You intercept [himher] halfway, not willing to entirely give up the initiative in this.", parse);
+			}
+			Text.NL();
+			if(player.sexlevel < 3) {
+				Text.Add("The warmth of the [foxvixen]’s lips on your own is an intriguing sensation, one you could happily lose yourself in. Your eyes flutter closed, allowing you to bask in the feeling as you press your lips to [hisher] own, instinctively pushing your tongue into [hisher] mouth. The taste of Terry floods your senses, and you try to concentrate as it assaults your tastebuds, softly and amateurishly stroking Terry’s tongue with sporadic twitches and tugs.", parse);
+				
+				terry.AddLustFraction(0.2);
+			}
+			else if(player.sexlevel < 5) {
+				Text.Add("Your eyes sink closed, allowing you to fully concentrate on what you’re doing, and you embrace Terry’s lips with your own. With practiced skill, you insinuate your tongue into the [foxvixen]’s mouth, savoring [hisher] flavor as it washes over you. Your [tongueDesc] curls itself around Terry’s own flat muscle, squeezing gently as you make an effort to explore the depths of [hisher] mouth.", parse);
+				
+				terry.AddLustFraction(0.4);
+			}
+			else {
+				Text.Add("Your teeth close purposefully upon Terry’s lower lip; not hard enough to pierce the skin, but not so soft that [heshe] can’t feel them as you nibble teasingly. You suck the soft skin into your mouth, working it with your own lips, releasing only to then conquer [hisher] mouth in a single fell swoop.", parse);
+				Text.NL();
+				Text.Add("With serpentine sensuality, your [tongueDesc] invades the [foxvixen]’s mouth, curling around [hisher] tongue and drawing it into your mouth. Greedily you suckle upon Terry’s tongue, massaging it with your lips and letting [hisher] flavor consume your world, moaning around your fleshy muffler in your pleasure at the feel and the taste.", parse);
+				Text.NL();
+				Text.Add("Teeth descend, just hard enough that Terry can feel them raking over [hisher] tongue as you let it slip back into [hisher] mouth so you can breath. Then you pounce once more, grinding your lips against [hishers] as you feed [himher] your tongue.", parse);
+				
+				terry.AddLustFraction(0.7);
+			}
+			Text.NL();
+			if(terry.Slut() < 30) {
+				Text.Add("Terry kisses you back. [HeShe] might lack technique, but makes up for it with enthusiasm. The [foxvixen] tries to match your movements and massage your tongue as best as [heshe] can.", parse);
+				
+				player.AddLustFraction(0.2);
+			}
+			else if(terry.Slut() < 60) {
+				Text.Add("Terry kisses back with abandon, clinging to you as [heshe] explores your mouth with [hisher] tongue, licking the roof of your mouth in controlled strokes to further excite you. It’s a strange technique, being licked inside your mouth, but it’s also very effective. You can’t resist the moan that wells up when [hisher] tongue suddenly makes a dive to pull your own [tongueDesc] back into [hisher] mouth.", parse);
+				
+				player.AddLustFraction(0.4);
+			}
+			else {
+				Text.Add("Terry grinds [himher]self against you, while [heshe] fellates your tongue and explores the inside of your mouth. You can’t even decide what to focus on. It’s as if the [foxvixen] has turned into a blanket and is trying [hisher] best to envelop all of you.", parse);
+				Text.NL();
+				Text.Add("Slurping sounds emanate from your joined lips as Terry drinks your saliva in measured suckles, exchanging it with [hisher] own moments later. You can see [himher] gulping it down as if it were the sweetest nectar [heshe]’d ever tasted.", parse);
+				Text.NL();
+				Text.Add("[HeShe] can’t help but moan against you, a deep sound that passes a very clear message - Terry wants you.", parse);
+				
+				player.AddLustFraction(0.7);
+			}
+			Text.NL();
+			parse["metaphorical"] = player.HasLegs() ? "" : " metaphorical";
+			Text.Add("Eventually, the need for oxygen forces you to break the kiss. You take a[metaphorical] step back as you inhale and exhale, allowing your heart to slow down.", parse);
+			Text.NL();
+			if(terry.LustLevel() < 0.3) {
+				Text.Add("<i>“Not bad, [playername]. That was pretty nice.”</i> [HeShe] smiles, tail wagging in obvious enjoyment.", parse);
+				Text.NL();
+				Text.Add("You’re glad that [heshe] liked it so much. You thought that it would brighten [hisher] day a little.", parse);
+				Text.NL();
+				Text.Add("<i>“It did.”</i> Terry nods. <i>“So, now that my day is a bit brighter… is there anything else you’d like to do?”</i>", parse);
+				
+				Scenes.Terry.Prompt();
+			}
+			else if(terry.LustLevel() < 0.6) {
+				Text.Add("<i>“Wow… I didn’t think a kiss could feel this intense...”</i> [heshe] breathes, panting heavily. <i>“Almost makes me sad it had to end...”</i>", parse);
+				Text.NL();
+				Text.Add("Well, there's plenty of other things that the two of you can do, if [heshe] liked that so much...", parse);
+				Text.NL();
+				Text.Add("<i>“Really? And what exactly do you have in mind?”</i> The [foxvixen] cocks [hisher] head quizically.", parse);
+				Text.NL();
+				if(player.LustLevel() >= 30)
+					Text.Add("Oh, you have some rather naughty ideas in store… ", parse);
+				Text.Add("You mentally pause for a second to consider your answers. It looks like Terry wouldn’t be averse to a nice little bedroom romp, in the mood [heshe]’s in. On the other hand, a bit more friendly intimacy certainly wouldn’t be turned down, either.", parse);
+				Text.NL();
+				Text.Add("You’re also aware of a little voice in the back of your mind, whispering about the enticing nature of the first option.", parse);
+				Text.NL();
+				Text.Add("Terry is looking at you expectantly; what are you going to suggest?", parse);
+				
+				//[Intimacy] [Sex]
+				var options = new Array();
+				options.push({ nameStr : "Intimacy",
+					func : function() {
+						Text.Clear();
+						Text.Add("[HeShe] smiles softly. <i>“Sure, I wouldn’t be against that at all.”</i>", parse);
+						Text.Flush();
+						
+						Scenes.Terry.SkinshipPromptChoices();
+					}, enabled : true,
+					tooltip : Text.Parse("Since [heshe] loved kissing so much, how about the two of you play around a little more?", parse)
+				});
+				options.push({ nameStr : "Sex",
+					func : function() {
+						Text.Clear();
+						Text.Add("<i>“Hotter than kissing, huh?”</i> the [foxvixen] muses, shooting you a knowing grin. <i>“I can only imagine what you really mean by that. Not that it’s any surprise,”</i> [heshe] says, leaning closer. <i>“Ya big perv.”</i>", parse);
+						Text.NL();
+						Text.Add("You simply grin at that. It takes one to know one.", parse);
+						Text.NL();
+						Scenes.Terry.SexPrompt();
+					}, enabled : true,
+					tooltip : "Why don’t the two of you enjoy something a little hotter than kissing? [HeShe] certainly looks in the mood for it..."
+				});
+				Gui.SetButtonsFromList(options, false, null);
+			}
+			else {
+				Text.Add("<i>“[playername], you big tease. Surely you don’t expect to end this with just a kiss,”</i> [heshe] says, smiling seductively. <i>“That was pretty good. So good, in fact, that now I’m craving something more.”</i>", parse);
+				Text.NL();
+				Text.Add("Trying to hold back a smile, you carefully raise a quizzical eyebrow and ask what [heshe] wants.", parse);
+				Text.NL();
+				Text.Add("<i>“Oh, I don’t know...”</i> [heshe] says, looking you over. ", parse);
+				parse["raceDesc"] = player.body.RaceStr();
+				if(player.MuscleTone() > 0.5)
+					Text.Add("<i>“I have a craving for a hunky [raceDesc]. You don’t know where I could find one of those, do you?”</i> [HeShe] smiles mischievously.", parse);
+				else
+					Text.Add("<i>“I could go for a sexy [raceDesc]. Yes, that would hit the spot,”</i> [heshe] teases, licking [hisher] lips in a clearly predatory gesture.", parse);
+				Text.NL();
+				Text.Add("Looks like <i>somebody</i> really got excited with your little kiss. Perhaps you should offer to ‘help out’, as it were?", parse);
+				
+				//[Yes] [No]
+				var options = new Array();
+				options.push({ nameStr : "Yes",
+					func : function() {
+						Text.Clear();
+						Text.Add("With a mischievous grin, you saunter closer, reaching out to tickle the [foxvixen]’s chin. Well, you might not know exactly where [heshe] could find what [heshe]’s looking for, but you’d be happy to help [himher] with [hisher] cravings...", parse);
+						Text.NL();
+						Text.Add("<i>“I’m sure you would,”</i> [heshe] replies with a knowing grin.", parse);
+						Text.NL();
+						Scenes.Terry.SexPrompt();
+					}, enabled : true,
+					tooltip : Text.Parse("Oh, come on, [heshe]’s practically <i>begging</i> for it! How could you possibly turn [himher] down now, of all times?", parse)
+				});
+				options.push({ nameStr : "No",
+					func : function() {
+						Text.Clear();
+						Text.Add("You tell Terry that you’re not in the mood for sex right now.", parse);
+						Text.NL();
+						Text.Add("<i>“Pity. I guess we can do this some other time then.”</i>", parse);
+						Text.NL();
+						Text.Add("Absently nodding your agreement, you tell [himher] that there was something else that you wanted.", parse);
+						Text.Flush();
+						
+						Scenes.Terry.Prompt();
+					}, enabled : true,
+					tooltip : Text.Parse("As much as you sympathise, you’re really not in the mood. You’ll just have to turn [himher] down.", parse)
+				});
+				Gui.SetButtonsFromList(options, false, null);
+			}
+			Text.Flush();
+			
+			terry.relation.IncreaseStat(70, 1);
+		}, enabled : terry.Relation() >= 40,
+		tooltip : Text.Parse("What better way to show your feelings for [himher] than a nice warm kiss? Your [foxvixen] deserves to know that you care for [himher].", parse)
+	});
+	
 	parse["gen"] = "";
 	if(terry.HasBalls()) parse["gen"] += " nuts";
 	if(terry.HasBalls() && terry.Lactation()) parse["gen"] += " and";
@@ -2390,6 +2549,18 @@ Scenes.Terry.SkinshipPromptChoices = function() {
 		tooltip : Text.Parse("See how much fluid Terry is packing in [hisher][gen].", parse)
 	});
 	//TODO
+	/*
+	//[name]
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	 */
 	Gui.SetButtonsFromList(options, false, null);
 }
 
@@ -2399,7 +2570,7 @@ Scenes.Terry.BrushTail = function() {
 		boygirl        : terry.mfPronoun("boy", "girl"),
 		tarmorDesc     : function() { return terry.ArmorDesc(); },
 		tlowerArmor    : function() { return terry.LowerArmorDesc(); },
-		tbreastDesc   : function() { return terry.FirstBreastRow().Short(); },
+		tbreastDesc    : function() { return terry.FirstBreastRow().Short(); },
 		tcockDesc      : function() { return terry.MultiCockDesc(); },
 		bellydesc      : function() { return terry.StomachDesc(); },
 		skinDesc       : function() { return player.SkinDesc(); },
