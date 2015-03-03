@@ -27,62 +27,6 @@ Array.prototype.remove = function(from, to) {
 	return this.push.apply(this, rest);
 };
 
-RenderGlow = function(context, rect, rad, color) {
-	// Top
-	var linearGrad = context.createLinearGradient(0,0,0,-rad);
-	linearGrad.addColorStop(0.0, color);
-	linearGrad.addColorStop(1.0, 'rgba(0,0,0,0.0)');
-	context.fillStyle = linearGrad;
-	context.fillRect(0, -rad, rect.w, rad);
-	// Bot
-	var linearGrad = context.createLinearGradient(0,0,0,rad);
-	linearGrad.addColorStop(0.0, color);
-	linearGrad.addColorStop(1.0, 'rgba(0,0,0,0.0)');
-	context.fillStyle = linearGrad;
-	context.save();
-	context.translate(0, rect.h);
-	context.fillRect(0, 0, rect.w, rad);
-	context.restore();
-	// Right
-	var linearGrad = context.createLinearGradient(0,0,-rad,0);
-	linearGrad.addColorStop(0.0, color);
-	linearGrad.addColorStop(1.0, 'rgba(0,0,0,0.0)');
-	context.fillStyle = linearGrad;
-	context.fillRect(-rad, 0, rad, rect.h);
-	// Left
-	var linearGrad = context.createLinearGradient(0,0,rad,0);
-	linearGrad.addColorStop(0.0, color);
-	linearGrad.addColorStop(1.0, 'rgba(0,0,0,0.0)');
-	context.fillStyle = linearGrad;
-	context.save();
-	context.translate(rect.w, 0);
-	context.fillRect(0, 0, rad, rect.h);
-	context.restore();
-	
-	// Corners
-	var radialGrad = context.createRadialGradient(0,0,0,0,0,rad);
-	radialGrad.addColorStop(0.0, color);
-	radialGrad.addColorStop(1.0, 'rgba(0,0,0,0.0)');
-	context.fillStyle = radialGrad;
-	// Top-left
-	context.fillRect(-rad, -rad, rad, rad);
-	// Top-right
-	context.save();
-	context.translate(rect.w, 0);
-	context.fillRect(0, -rad, rad, rad);
-	context.restore();
-	// Bot-left
-	context.save();
-	context.translate(0, rect.h);
-	context.fillRect(-rad, 0, rad, rad);
-	context.restore();
-	// Bot-right
-	context.save();
-	context.translate(rect.w, rect.h);
-	context.fillRect(0, 0, rad, rad);
-	context.restore();
-}
-
 /*
 	$.generateFile({
 		filename	: 'export.txt',
