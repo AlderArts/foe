@@ -73,7 +73,9 @@ Lagon.prototype.IsAtLocation = function(location) {
 Lagon.Usurp = {
 	FirstFight : 1,
 	Defeated   : 2,
-	SidedWith  : 4
+	SidedWith  : 4,
+	JailFirst  : 8,
+	JailSec    : 16
 }
 
 Scenes.Lagon.LagonImpregnate = function(mother, father, slot) {
@@ -191,13 +193,13 @@ LagonRegular.prototype.Act = function(enc, activeChar) {
 	if(fallen.length > 0 && Math.random() < 0.5) {
 		var scenes = new EncounterTable();
 		scenes.AddEnc(function() {
-			Text.Add("<i>”Come to me, my children!”</i> Lagon shouts, rallying additional troops to his side.", parse);
+			Text.Add("<i>“Come to me, my children!”</i> Lagon shouts, rallying additional troops to his side.", parse);
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
-			Text.Add("<i>”The one to bring the rebel down gets to be second in line after I bang [phisher] brains out!”</i> With that, more bunnies rally to Lagon’s side.", parse);
+			Text.Add("<i>“The one to bring the rebel down gets to be second in line after I bang [phisher] brains out!”</i> With that, more bunnies rally to Lagon’s side.", parse);
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
-			Text.Add("<i>”Rally to your king, my children!”</i> Lagon calls out, summoning more rabbits to his side.", parse);
+			Text.Add("<i>“Rally to your king, my children!”</i> Lagon calls out, summoning more rabbits to his side.", parse);
 		}, 1.0, function() { return true; });
 
 		scenes.Get();
@@ -336,7 +338,7 @@ LagonBrute.prototype.Act = function(encounter, activeChar) {
 		else if(Math.random() < 0.1) {
 			var scenes = new EncounterTable();
 			scenes.AddEnc(function() {
-				Text.Add("<i>”T-there, I have it!”</i> Ophelia yelps as she manages to fiddle the rod again, causing Lagon to shake his head in confusion.", parse);
+				Text.Add("<i>“T-there, I have it!”</i> Ophelia yelps as she manages to fiddle the rod again, causing Lagon to shake his head in confusion.", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
 				Text.Add("Just as he’s about to make his move, something distracts the king from his target. The beast throws his eyes around the hall, trying to figure out what’s going on.", parse);
@@ -1620,7 +1622,7 @@ Scenes.Lagon.RulerTalkPrompt = function() {
 			func : function() {
 				Text.Clear();
 				world.TimeStep({minute: 10});
-				Text.Add("<i>”A fair request.”</i> The lagomorph king claps his hands sharply, summoning four young rabbits. <i>”As I said, I can’t offer you Ophelia, but this lot should do well enough.”</i> You take some time to examine your prizes. There are two males, slim and lithe, and two females with exquisite curved forms. All of them have coats of fine white fur, silky to the touch. <i>”Are these to your liking? You’ll have to excuse me for not remembering their names, they are simple enough creatures, call them whatever you like.”</i>", parse);
+				Text.Add("<i>“A fair request.”</i> The lagomorph king claps his hands sharply, summoning four young rabbits. <i>“As I said, I can’t offer you Ophelia, but this lot should do well enough.”</i> You take some time to examine your prizes. There are two males, slim and lithe, and two females with exquisite curved forms. All of them have coats of fine white fur, silky to the touch. <i>“Are these to your liking? You’ll have to excuse me for not remembering their names, they are simple enough creatures, call them whatever you like.”</i>", parse);
 				Text.NL();
 				parse["master"] = player.mfTrue("master", "mistress");
 				Text.Add("You nod, pleased with your reward. Lagon’s children hop over to your side, cuddling up close to their new [master].", parse);
@@ -2587,4 +2589,321 @@ Scenes.Lagon.WinToOphelia = function() {
 	});
 	
 	Encounter.prototype.onVictory.call(enc);
+}
+
+Scenes.Lagon.InteractDefeated = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	party.location = world.loc.Burrows.LagonCell;
+	
+	Text.Clear();
+	Text.Add("The former rabbit king’s new home is guarded by a surprisingly solid-looking door of unknown origin, wedged into place over a chamber opening and barred by a thick wooden log. Two guards - lagomorphs wearing haphazard piecemeal armor and carrying makeshift spears - stand watch at the sides of the door.", parse);
+	Text.NL();
+	if(~lagon.flags["Usurp"] & Lagon.Usurp.JailFirst) {
+		lagon.flags["Usurp"] |= Lagon.Usurp.JailFirst;
+		
+		Text.Add("You motion for the guards to step aside. You’re here to visit the former king. The bunny guards look at each other, then back at you before finally stepping aside and letting you in.", parse);
+		Text.NL();
+		Text.Add("Lagon’s cell is pretty bare-bones. It’s little more than a hole dug into the wall. There’s enough room for you to stand and even walk about a little, but nothing else. In one corner you spot a pile of hay, likely Lagon’s bed. Nearby, there’s a bucket of fresh water, in case the former king feels thirsty. Speaking of the king... where is he?", parse);
+		Text.NL();
+		Text.Add("<i>“Traitor!”</i> Lagon yells, jumping out from behind you, taking a swing at you with all his might. You’re caught unaware, but he’s not nearly as fast as he once was. Reacting reflexively, you sidestep his punch and swipe his legs from under him, sending the former king crashing face-first into the ground.", parse);
+		Text.NL();
+		Text.Add("Not keen on giving him a second shot at you, you immediately move to pin him down.", parse);
+		Text.NL();
+		Text.Add("<i>“Unhand me, filthy surface dweller! Your king demands it!”</i>", parse);
+		Text.Flush();
+		
+		//[Punish][Back off]
+		var options = new Array();
+		options.push({ nameStr : "Punish",
+			func : function() {
+				Text.Clear();
+				
+				Scenes.Lagon.InteractDefeatedPunishEntrypoint();
+			}, enabled : true,
+			tooltip : "That fucking does it; you’ve had enough shit from Lagon. Make the pathetic former king eat his words."
+		});
+		options.push({ nameStr : "Back off",
+			func : function() {
+				Text.Clear();
+				Text.Add("It irks you a bit that it pretty much looks like you’re obeying his orders by backing away, but you don’t really want to deal with him when he’s acting like this. The king hops to his feet when you let your weight off him, sneering triumphantly.", parse);
+				Text.NL();
+				Text.Add("<i>“That’s right, bitch,”</i> he snarls, baring his teeth at you in defiance. <i>“Get the fuck out of here, and don’t return unless it’s to kneel down and suck my cock!”</i>", parse);
+				Text.NL();
+				Text.Add("You make a hasty retreat, your cheeks burning in shame. That didn’t quite go the way you hoped it would. Once outside, the guards bar the door, and you let out a sigh of relief. Perhaps you’ll have to consider taking another approach with Lagon. Force seems to be the only thing he understands. You head back to the throne room as you mull things over.", parse);
+				Text.Flush();
+				
+				party.location = world.loc.Burrows.Throne;
+				world.TimeStep({minute: 10});
+				player.subDom.DecreaseStat(-100, 3);
+				
+				Gui.NextPrompt();
+			}, enabled : true,
+			tooltip : "Ugh… he’s being so difficult… You don’t think you’re going to be able to get anything useful conversation out of him this way. Perhaps just back off for now, he’s not going anywhere."
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+	else if(~lagon.flags["Usurp"] & Lagon.Usurp.JailSec) {
+		Text.Add("The guards on duty seem to recognize you from last time. They raise their spears in a somewhat clumsy yet sincere salute and nod to you before opening the door. You return the nod and square your shoulders, striding past them. You doubt that this encounter with the king will be more pleasant than the last.", parse);
+		Text.NL();
+		Text.Add("<i>“Back again?”</i> Lagon is lounging on his bed, and he throws you a malicious glare as you enter the cell. The former king hops to his feet in a smooth motion, standing to face you. Well, at least he’s not trying to jump you again.", parse);
+		Text.NL();
+		Text.Add("<i>“You returning here after that whiny display last time can only mean one thing, traitor,”</i> he snarls, giving you a sharp poke in the chest. <i>“You’ve finally gathered the courage to crawl back to your king and repent.”</i> He leans in closer, his voice lower but still just as demanding. <i>“Well? Are you going to run away again like the little bitch you are, or are you going to beg forgiveness? Get down and start sucking, or stop wasting my time.”</i>", parse);
+		Text.Flush();
+		
+		//[Punish][Back off]
+		var options = new Array();
+		options.push({ nameStr : "Punish",
+			func : function() {
+				Text.Clear();
+				Text.Add("You tell him that last time you checked, he was the bitch, beaten and imprisoned after you ended his rule. He couldn’t stand against you when he had transformed himself into a hulking monster; what possible chance could he stand in his current state? So why not drop the pretense and be a little more humble, as is fitting for the defeated?", parse);
+				Text.NL();
+				Text.Add("This time, you are expecting the blow that the furious lagomorph throws at you. With a quick sidestep, you avoid the impotent punch and pull on his outstretched arm, almost casually tripping the former king and sending him crashing to the ground. Before he has a chance of getting to his feet, you pin him down, easily subduing the weakened bunny.", parse);
+				Text.NL();
+				Text.Add("<i>“Unhand me, filthy surface dweller! Your king demands it!”</i>", parse);
+				Text.NL();
+				
+				Scenes.Lagon.InteractDefeatedPunishEntrypoint();
+			}, enabled : true,
+			tooltip : "That fucking does it; you’ve had enough shit from Lagon. Make the pathetic former king eat his words."
+		});
+		options.push({ nameStr : "Back off",
+			func : function() {
+				Text.Clear();
+				Text.Add("You let out a frustrated growl, backing away from the haughty lapin. If he’s not ready to face the reality of his defeat, you’re not going to waste your time on him. He can just stay here and rot.", parse);
+				Text.NL();
+				Text.Add("<i>“What’s the matter? The bunny has you scared, little bitch? Run away then, traitor, and keep running. When I get out of here, I’ll hunt you down, and I’ll make you pay.”</i> His taunting words follow you out of the cell, muffled as the guards close the door behind you.", parse);
+				Text.NL();
+				Text.Add("Well, that could have gone better. Salvaging your pride, you head back to the throne room.", parse);
+				Text.Flush();
+				
+				party.location = world.loc.Burrows.Throne;
+				world.TimeStep({minute: 10});
+				player.subDom.DecreaseStat(-100, 1);
+				
+				Gui.NextPrompt();
+			}, enabled : true,
+			tooltip : "Gah… this is pointless. If he’s not going to behave he can just stay here and pout."
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+	else {
+		Text.Add("The guards on duty seem to recognize you. They raise their spears in a somewhat clumsy yet sincere salute and nod to you before opening the door. You return the nod and stride past them, hearing the door slam shut behind you.", parse);
+		Text.NL();
+		Text.Add("As always, Lagon’s cell is sparse yet comfortable. It was probably a storeroom before it was repurposed - just a small oval of tunnelled space, with a pile of straw for a bed and a bucket of drinking water.", parse);
+		Text.NL();
+		if(lagon.Slut() < 30) {
+			Text.Add("It’s easy to spot Lagon. The former tyrant is lounging upon his straw-pile bed, sprawled on his back with one foot idly twitching over the other knee.", parse);
+			Text.NL();
+			Text.Add("As soon as Lagon looks up to see who’s come to visit he groans. <i>“Oh, it’s just the traitor. And here I was hoping Vena had decided to come grant me release. Well? What do you want?”</i>", parse);
+		}
+		else if(lagon.Slut() < 60) {
+			Text.Add("The straw rustles softly as the lagomorph sprawled upon it turns, shifting so he can look at you more easily.", parse);
+			Text.NL();
+			Text.Add("<i>“Oh, it’s you again. Why do you insist on being such a bother?”</i> he sighs. <i>“Well? What do you want this time?”</i>", parse);
+			Text.NL();
+			Text.Add("For all his attitude, you can see quite clearly that Lagon’s dick is growing with anticipation. Once a bunny, always a bunny; the prospect of sex is clearly diluting any anger he may still feel.", parse);
+		}
+		else {
+			parse["ear"] = player.EarDesc();
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("Soft grunts fill your [ear]s, drawing your gaze magnetically to the straw pile. Lagon is sprawled upon it, busily pumping away at his erection with one hand. He stops, blinking, as he notices you are in the room, and lets go of his throbbing cock.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("Turning toward the straw pile, you are presented with quite a view of waving bunny-butt. Lagon is kneeling upon his bedding, one hand wrapped around his cock - presumably, given the way his obscured arm is moving - and the other is busily thrusting away at his ass.", parse);
+				Text.NL();
+				Text.Add("You cough deliberately, watching a quiver run up Lagon’s spine. He immediately yanks the hand away from his ass, pucker still gaping slightly from his withdrawal.", parse);
+				Text.NL();
+				Text.Add("In the quiet of the room, you can hear him licking his other hand clean. With as much dignity as he can muster, he rolls himself over, flopping onto his back on the straw.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("Quite the tableaux presents itself to you when you glance at Lagon’s bed. The wide-eyed former king has his hands wrapped around his knees, trying his hardest to engage in a bit of auto-fellatio.", parse);
+				Text.NL();
+				Text.Add("It’s clearly a doomed effort; his cock is still pretty big, and he’s pretty small, but he’s just not flexible enough to get it deep enough into his mouth to properly suck it.", parse);
+				Text.NL();
+				Text.Add("The embarrassed ex-monarch immediately lets go of his legs, allowing himself to flop back into the straw, cock slapping wetly against his belly.", parse);
+			}, 1.0, function() { return true; });
+			
+			scenes.Get();
+			
+			Text.NL();
+			Text.Add("<i>“[playername]...”</i> he says with a defeated sigh. <i>“What do you want? Come back to use me again?”</i>", parse);
+		}
+		Text.Flush();
+		
+		Scenes.Lagon.DefeatedPrompt();
+	}
+}
+
+
+Scenes.Lagon.InteractDefeatedPunishEntrypoint = function() {
+	var parse = {
+		foot : function() { return player.FootDesc(); }
+	};
+	
+	lagon.flags["Usurp"] |= Lagon.Usurp.JailSec;
+	
+	Text.Add("Oh will he just shut up? You grab his head and forcefully press it down into the ground, forcing him to be quiet or risk swallowing dirt. Lagon is a has-been. He’s no longer king of anything, and damn lucky that his fate thus far has been nothing worse than imprisonment.", parse);
+	Text.NL();
+	Text.Add("With the list of crimes he’s committed, he deserved a much less fortunate future. And that can still be changed if he doesn’t behave himself.", parse);
+	Text.NL();
+	Text.Add("Despite that, he continues to struggle against you. At least he’s not talking anymore. Seeing no other option, you yell for one of the guards to fetch you a sturdy rope. If Lagon won’t cooperate, then you’ll happily do this the hard way.", parse);
+	Text.NL();
+	Text.Add("Moments later, one of the guards enters the cell and hands you the length of rope you requested. He quickly darts out as soon as his task is accomplished, though. Seems like they’re still scared of Lagon…", parse);
+	Text.NL();
+	Text.Add("Leaning down, you grab Lagon by his long ears and order him to be quiet.", parse);
+	Text.NL();
+	Text.Add("<i>“Nev-”</i>", parse);
+	Text.NL();
+	parse["metaphorical"] = player.HasLegs() ? "" : " metaphorical";
+	parse["kick"] = player.HasLegs() ? "kick" : "hit"; 
+	Text.Add("You don’t ever let him finish before you forcefully shove his head back against the ground, then get back on your[metaphorical] feet and [kick] him in the side, knocking the air out of his lungs.", parse);
+	Text.NL();
+	Text.Add("While he struggles to catch his breath, you take care to thoroughly bind his arms, then pick him up and throw him onto his makeshift bed. Before he can struggle anew, you pin him down with your [foot], stepping firmly on his chest as you look him straight in the eye and ask him if he’s done now or if he wants you to beat him up some more?", parse);
+	Text.NL();
+	Text.Add("Lagon pants, still winded after your blow earlier. He looks at you defiantly, but doesn’t say anything. Instead, he just turns his head away with an indignant huff. Good, seems like you got your point across.", parse);
+	Text.NL();
+	Text.Add("You remove your [foot] from his chest and notify him that you’ll be nice and release him from his bindings <i>if</i> he plays nice and behaves. Otherwise, you’re sure you could find more rope for his legs, maybe also gag him, and eventually you could also call a few of his more brutish sons to have some fun with the former king while you’re at it.", parse);
+	Text.NL();
+	Text.Add("At the thought of what his sons might do to him in that state, the king flinches, but he quickly goes back to glaring angrily at you.", parse);
+	Text.NL();
+	Text.Add("So? What will it be?", parse);
+	Text.NL();
+	Text.Add("<i>“...I’ll behave,”</i> he says through gritted teeth.", parse);
+	Text.NL();
+	Text.Add("Good. You approach and remove his bindings, tossing the rope back to the guards outside. You thank them and tell them to keep it handy in case you need it again. They nod in understanding and shut the door.", parse);
+	Text.NL();
+	Text.Add("When you look back at Lagon, he’s lounging insolently on his bed as if it were a luxurious throne, still glaring at you animously. <i>“So? What do you want?”</i>", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 20});
+	player.subDom.IncreaseStat(100, 3);
+	
+	Scenes.Lagon.DefeatedPrompt();
+}
+	
+Scenes.Lagon.DefeatedPrompt = function(sexed) {
+	var parse = {
+		
+	};
+	
+	//[name]
+	var options = new Array();
+	options.push({ nameStr : "name",
+		func : function() {
+			Scenes.Lagon.DefeatedSex(sexed);
+		}, enabled : true,
+		tooltip : "Take the former king for a spin and use him to get off. He’s used to doing it all the time, after all."
+	});
+	/* TODO
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	*/
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("Your business with the former king finished, you head back to the throne room. ", parse);
+		if(sexed)
+			Text.Add("He is too distracted from your rough fucking to throw any of his taunts at you. Considering the situation, it’d be a hollow jab either way.", parse);
+		else
+			Text.Add("He is about to throw some final insult at your back, but bites it down sullenly when you raise an eyebrow.", parse);
+		Text.Flush();
+		
+		party.location = world.loc.Burrows.Throne;
+		world.TimeStep({minute: 10});
+		
+		Gui.NextPrompt();
+	});
+}
+
+Scenes.Lagon.DefeatedSex = function(sexed) {
+	var parse = {
+		master : player.mfTrue("master", "mistress")
+	};
+	
+	Text.Clear();
+	Text.Add("You tell him that you’ve come here to use him. He was very sexually active when he was in power; you’re sure he understands what it feels like to have an itch that needs scratching.", parse);
+	Text.NL();
+	if(lagon.Slut() < 30) {
+		Text.Add("<i>“You want me to fuck you? I’ll try to contain my surprise, slut,”</i> he replies haughtily, spreading his legs to show you his stiffening shaft. <i>“It’ll keep me from getting bored, I suppose. What would you prefer: getting a skullfucking befitting a traitor or me bending you over and ruining your ass?”</i>", parse);
+		Text.NL();
+		Text.Add("Oh, has <b>he</b> got the wrong idea! Folding your arms across your chest, you sneer at him. If you wanted to be someone’s bitch, you’d find someone worth your time. The only one who’ll be bending over here is him.", parse);
+		Text.NL();
+		Text.Add("The lagomorph grins at that. <i>“Would you stop kidding yourself? We both know that you’re nothing more than a slut. If you’re not on your knees sucking <b>my</b> cock, you’re most likely on your knees sucking Vena’s.”</i>", parse);
+		Text.NL();
+		Text.Add("That’s it. You give him a stinging slap across the face, growling a reminder that you can always call the guards for some rope again. Perhaps he’d like that: being bound up like a dog? You’re getting what you came for one way or another, and you’re not going to take any of his bitching.", parse);
+		Text.NL();
+		Text.Add("It looks like he’s about to mouth off again, but before he has a chance you lean over and give his balls a squeeze. Not enough to damage, but enough to tell him that it’s well within your power to do so. Lagon’s cock twitches at your touch, to your amusement, and much to the former king’s chargin.", parse);
+		Text.NL();
+		Text.Add("Still holding his sack hostage, you smile sweetly and ask if the great Lagon isn’t getting as much tail as he’s used to. Some sacrifices have to be made when one goes from being king to prison bitch, some borders stretched. Perhaps he’d like your help in widening his horizons a bit, seeing what’s on the other side of the fence, so to speak.", parse);
+		Text.NL();
+		Text.Add("<i>“What do you want?”</i> the lapin growls, trying to ignore his boner. At the full fifteen inches, it’s a futile effort.", parse);
+		Text.NL();
+		Text.Add("There’s an easy and a hard way to do this. The easy way, he does what you tell him to and pleasures you in whatever way you wish. The hard way, you call in the guards and have them fuck him into submission, however long that takes. Then he does what you tell him to and pleasures you in whatever way you wish. Slowly letting go of his balls, you suggest that if he’s a good boy, you might even let him cum.", parse);
+		Text.NL();
+		Text.Add("He eyes you suspiciously, but the fight seems to have gone out of him. <i>“Get on with it then,”</i> he snaps.", parse);
+	}
+	else if(lagon.Slut() < 60) {
+		Text.Add("At the mention of Sex, you notice Lagon’s shaft throbbing in expectation. The former king still retains some of his former sass though… <i>“Why don’t you find something better to do than wasting my time? If you want sex, go to the Pit. I’m sure my sons and daughters would be glad to use you and breed you like the slut you are,”</i> he snaps back dismissively.", parse);
+		Text.NL();
+		Text.Add("That might be the case, but you weren’t in the mood for being bred. You’re in the mood to do some breeding, and he’s just the slutty little bunny to make you happy.", parse);
+		Text.NL();
+		Text.Add("He glares at you with an angry scowl. You see a bead of pre forming on the tip of his huge bunny-cock, betraying his true desires. <i>“As if you are fit to be my [master].”</i>", parse);
+		Text.NL();
+		Text.Add("You give him a wide grin and praise him; such a good boy, finally starting to get the hang of the situation. You’ll indeed show him that you have what it takes to train him into an obedient little slut for you to use; for you and for anyone else that you allow.", parse);
+		Text.NL();
+		Text.Add("The king scowls and regards you in sullen silence. Experience has taught him that fighting back doesn’t help, and besides, this is the only way he’s getting off at all, not counting Vena occasionally dropping by or him masturbating.", parse);
+	}
+	else {
+		Text.Add("<i>“Let’s get it over with then,”</i> he says, just a bit too quickly for it to sound like an offhand remark. The king adjusts himself ever so subtly to show you his huge erection. <i>“How will you have me today?”</i>", parse);
+		Text.NL();
+		Text.Add("You smile proudly. That’s a good boy; he’s starting to learn his place, isn’t he? Why, you might even reward him by letting him cum this time, since he’s on such good behavior. Wouldn’t he like that? Lagon gives you a sidelong glance and the faintest of nods.", parse);
+		Text.NL();
+		Text.Add("Then again, does it really matter to him at this point? He’s turned into such an obedient little slut, eager to be used however his [master] wants. No wonder he went and gave his wife such a huge dick of her own; he must just love it when she deigns to fuck his little ass the way he used to fuck hers.", parse);
+		Text.NL();
+		Text.Add("Lagon simply scowls at you, but otherwise doesn’t offer any response. All he does is sigh in resignation. <i>“Are you going to continue with this pointless tirade or get on with it? I’d like to get off <b>today</b> if you don’t mind,”</i> he says, softly stroking his erection.", parse);
+		Text.NL();
+		Text.Add("Although he still tries to act like he has some semblance of defiance left in him, the trembles of anticipation sweeping through his body and the way his eyes keep darting to your crotch show the truth. It’s nothing but a hollow facade, and you both know it.", parse);
+		Text.NL();
+		Text.Add("Lagon clearly wants this as much as you do. So, what should you do with your captive slut today...", parse);
+	}
+	Text.Flush();
+	
+	Scenes.Lagon.DefeatedSexPrompt(sexed);
+}
+
+Scenes.Lagon.DefeatedSexPrompt = function(sexed) {
+	var parse = {
+		
+	};
+	
+	//[name]
+	var options = new Array();
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	Gui.SetButtonsFromList(options, true, function() {
+		//TODO
+		Text.Clear();
+		Text.Add("PLACEHOLDER: Aww...", parse);
+		Text.NL();
+		Text.Flush();
+		
+		Scenes.Lagon.DefeatedPrompt(sexed);
+	});
 }
