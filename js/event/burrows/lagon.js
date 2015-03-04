@@ -29,6 +29,9 @@ function Lagon(storage) {
 	
 	this.flags["Usurp"] = 0;
 	this.flags["Talk"]  = 0; // bitmask
+	this.flags["Deny"]  = 0;
+	
+	this.bbTimer = new Time();
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -37,19 +40,51 @@ Lagon.prototype.constructor = Lagon;
 
 Lagon.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
+	this.body.FromStorage(storage.body);
 	
 	// Load flags
 	this.LoadFlags(storage);
+	
+	this.bbTimer.FromStorage(storage.bbTim);
 }
 
 Lagon.prototype.ToStorage = function() {
 	var storage = {};
 	
 	this.SavePersonalityStats(storage);
+	this.SaveBodyPartial(storage, {ass: true});
 	
 	this.SaveFlags(storage);
 	
+	storage.bbTim  = this.bbTimer.ToStorage();
+	
 	return storage;
+}
+
+Lagon.prototype.Update = function(step) {
+	Entity.prototype.Update.call(this, step);
+	
+	this.bbTimer.Dec(step);
+	if(this.bbTimer.Expired())
+		this.flags["Deny"] = 0;
+}
+
+Lagon.prototype.OrgasmCum = function(mult) {
+	Entity.prototype.OrgasmCum.call(this, mult);
+	
+	this.bbTimer = new Time();
+	this.flags["Deny"] = 0;
+}
+
+Lagon.prototype.Deny = function(inc) {
+	inc = inc || 1;
+	this.flags["Deny"] += inc;
+	if(this.flags["Deny"] >= 3)
+		this.bbTimer = new Time(0,0,1,0,0); //24 hours
+}
+
+Lagon.prototype.Blueballed = function() {
+	return !this.bbTimer.Expired();
 }
 
 Lagon.Talk = {
@@ -62,7 +97,7 @@ Lagon.Talk = {
 
 // Schedule TODO
 Lagon.prototype.IsAtLocation = function(location) {
-	if(burrows.LagonDefeated()) return false; //TODO slave mode
+	//if(burrows.LagonChained()) //Slave
 	location = location || party.location;
 	//if(world.time.hour >= 9 && world.time.hour < 20)
 		return (location == world.loc.Burrows.Throne);
@@ -2792,7 +2827,7 @@ Scenes.Lagon.DefeatedPrompt = function(sexed) {
 	
 	//[name]
 	var options = new Array();
-	options.push({ nameStr : "name",
+	options.push({ nameStr : "Sex",
 		func : function() {
 			Scenes.Lagon.DefeatedSex(sexed);
 		}, enabled : true,
@@ -2888,14 +2923,11 @@ Scenes.Lagon.DefeatedSexPrompt = function(sexed) {
 	
 	//[name]
 	var options = new Array();
-	options.push({ nameStr : "name",
+	options.push({ nameStr : "Fuck Ass",
 		func : function() {
-			Text.Clear();
-			Text.Add("", parse);
-			Text.NL();
-			Text.Flush();
-		}, enabled : true,
-		tooltip : ""
+			Scenes.Lagon.DefeatedSexFuckAss();
+		}, enabled : player.FirstCock() || player.Strapon(),
+		tooltip : "What better way to put Lagon in his place than to fuck his ass?"
 	});
 	Gui.SetButtonsFromList(options, true, function() {
 		//TODO
@@ -2905,5 +2937,502 @@ Scenes.Lagon.DefeatedSexPrompt = function(sexed) {
 		Text.Flush();
 		
 		Scenes.Lagon.DefeatedPrompt(sexed);
+	});
+}
+
+Scenes.Lagon.DefeatedSexFuckAss = function() {
+	var p1cock = player.BiggestCock(null, true);
+	var strapon = p1cock.isStrapon;
+	var blueballed = lagon.Blueballed();
+	
+	var lagonSize = lagon.FirstCock().Size();
+	var size = p1cock.Size();
+	
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
+	
+	var dom = player.SubDom() + lagon.Slut();
+	
+	Text.Clear();
+	parse["c"] = strapon ? Text.Parse(" and check that your [cock] is properly attached", parse) : "";
+	Text.Add("You quickly undress[c], then tell Lagon to be a good boy and spread his legs for you.", parse);
+	Text.NL();
+	if(lagon.Slut() < 30) {
+		Text.Add("<i>“And why should I? As if a king would even consider following orders from a traitorous slut such as yourself,”</i> he replies with a sneer.", parse);
+		if(blueballed)
+			Text.Add(" <i>“That said, I could use some release myself, so why don’t <b>you</b> spread your legs for me?”</i>", parse);
+		Text.NL();
+		Text.Add("Oh? Has Lagon gone and forgotten his place? He is no longer a king. All he is now is a lowly prisoner, shunned by his own kind. He should be thankful that you and Vena took pity on him and still visit him despite his crimes. Otherwise the only way he’s going to get any action is if he uses his own hands.", parse);
+		Text.NL();
+		Text.Add("He glares at you. <i>“I had everything! The future of my kind was all but guaranteed until you and my traitorous bitch of daughter decided to plot my empire’s downfall! No one asked you to come here, so why don’t you leave me alone and go relieve yourself in the Pit like the slut that you are!”</i> he blurts out angrily, rolling on his side to face away from you.", parse);
+		Text.NL();
+		Text.Add("Seem like you struck a nerve, but still, you came here for a reason… You unceremoniously walk up to the former king and grab him by the legs, forcefully rolling him onto his back and spreading his legs so you can look at his member, already fully erect and dripping pre despite himself.", parse);
+		Text.NL();
+		Text.Add("And what is his excuse for this hard-on he’s sporting right now? You ask teasingly. ", parse);
+		if(blueballed)
+			Text.Add("<i>“I haven’t had any release in a while, can you really blame me for being hard?”</i>", parse);
+		else
+			Text.Add("He doesn’t bother replying, preferring instead to avert his gaze.", parse);
+		Text.NL();
+		Text.Add("You simply chuckle at his reaction. Well it’s time to get down to business, so you decide to lay down the terms for the lagomorph.", parse);
+		Text.NL();
+		Text.Add("He can either be a good boy and comply, and you’ll be gracious enough to lube him up before taking him. Or he can continue to defy you, and you’ll knock him around some more and take him dry. His call…", parse);
+		Text.NL();
+		Text.Add("After a long moment’s pause, he finally sighs and concedes. <i>“Fine, I’ll comply. But you better hope I never escape this rudimentary prison, or I’ll be coming for you! Mark my words!”</i>", parse);
+		Text.NL();
+		if(dom < 0)
+			Text.Add("For a moment you’re struck with genuine worry over his threat. What if he actually manages to get out? But worrying about that right now won’t do any good. Plus you already beat him before, when he was much stronger. With that in mind, you release him and go fetch some lube from your belongings.", parse);
+		else
+			Text.Add("More empty threats… nevertheless you’ve made your point. So you release him and go fetch some lube from your belongings.", parse);
+	}
+	else if(lagon.Slut() < 60) {
+		Text.Add("Sighing, the former king regards you with disdain. <i>“Why must you keep bothering me? If you want some tail, go to the Pit. My sons and daughters will happily put out for a traitorous slut like you. Or, if you prefer, go see Vena about that. I bet that bitch would be happy to put out for you too, slutty as she is.”</i>", parse);
+		Text.NL();
+		Text.Add("You could go to the Pit, you could go to Vena, but you chose to come here and take him instead. He should be thankful you decided to come here play with him.", parse);
+		Text.NL();
+		Text.Add("He huffs dismissively. <i>“You’re not going away are you?”</i>", parse);
+		Text.NL();
+		Text.Add("Nope, you reaffirm.", parse);
+		Text.NL();
+		if(blueballed) {
+			Text.Add("<i>“At least let me cum this time. I haven’t had any release in a while,”</i> he says, spreading his legs hesitantly and exposing his throbbing maleness, already dripping pre.", parse);
+			Text.NL();
+			Text.Add("You’ll consider his request. His compliance and eagerness does go a long way towards convincing you.", parse);
+		}
+		else {
+			Text.Add("<i>“Fine, just be quick about it. I can only stomach you for so long,”</i> he says, hesitantly spreading his legs and showing you his erect maleness.", parse);
+			Text.NL();
+			Text.Add("For someone so dismissive, he seems pretty happy you decided to use him, you note. Lagon simply rolls his eyes in response.", parse);
+		}
+		Text.NL();
+		Text.Add("Alright then, time to go fetch some lube.", parse);
+	}
+	else {
+		parse["throbbing"] = blueballed ? " throbbing" : "";
+		Text.Add("Lagon obediently spreads his legs, letting you gaze at his[throbbing] cock as he holds his legs up to give you access.", parse);
+		Text.NL();
+		Text.Add("Very good, you praise him. Obedient and no talking back - you can see Lagon is going places.", parse);
+		Text.NL();
+		Text.Add("He furrows his brow, but rather than talking back in the usual display of defiance, he simply sighs. <i>“Let’s just get this over with. You’re going to use me no matter what I say, so what’s the point?”</i>", parse);
+		Text.NL();
+		Text.Add("Yes, you will. It’s good to see that he finally understands his position.", parse);
+		Text.NL();
+		if(blueballed) {
+			Text.Add("<i>“Can I cum this time?”</i> he asks with a shaky voice. If you didn’t know better, you’d guess he’s almost pleading...", parse);
+			Text.NL();
+			Text.Add("Maybe, it depends on your mood.", parse);
+			Text.NL();
+		}
+		Text.Add("No sense beating around the bush any longer. You go to your belongings and fetch some lube.", parse);
+	}
+	Text.NL();
+	parse["higher"] = lagon.Slut() >= 30 ? " higher" : "";
+	Text.Add("First you apply a generous helping to[oneof] your cock[s]. Then you return to Lagon and order him to lift his legs[higher] so you can access his tailhole.", parse);
+	Text.NL();
+	Text.Add("He does as you ask and you apply another helping to your [hand]s, then smear the slick fluids around his ass.", parse);
+	Text.NL();
+	Text.Add("Lagon grunts in discomfort as you insert your fingers to massage his butt, stretching him out and lubing his entrance in preparation for his penetration.", parse);
+	Text.NL();
+	Text.Add("Once you’re done, you put away the lube and position yourself between his legs. Without thinking, you let your [cock] flop over his own shaft and balls, gently frotting him.", parse);
+	Text.NL();
+	if(size * 2 < lagon) {
+		Text.Add("<i>“What’s the matter? Envious of what a real cock is supposed to be like? With that little clit of yours I doubt I’ll even feel it,”</i> he sneers.", parse);
+		Text.NL();
+		Text.Add("Oh he’ll be feeling enough, you reassure him...", parse);
+		
+		lagon.slut.DecreaseStat(0, 1);
+	}
+	else if(size < lagon) {
+		Text.Add("Lagon smirks as he sees that he’s still bigger than you, but he wisely refrains from saying anything.", parse);
+		Text.NL();
+		Text.Add("It doesn’t matter what kind of advantage the lagomorph thinks he has over you, you’ll still be the one claiming his ass.", parse);
+	}
+	else {
+		Text.Add("You watch as Lagon swallows audibly. It’s clear that he’s intimidated by your size, and considering how his own member is throbbing against yours, you’d say even a little excited.", parse);
+		Text.NL();
+		Text.Add("You promise him that you’ll be gentle.", parse);
+		
+		lagon.slut.IncreaseStat(100, 1);
+	}
+	Text.NL();
+	Text.Add("Pulling back, you prod his butt with your [cock], until you manage to nestle it against his rosebud, then you begin pushing in.", parse);
+	Text.NL();
+	
+	var score = 0;
+	parse["ballsHips"] = player.HasBalls() ? "balls" : "hips";
+	
+	if(lagon.sex.rAnal == 0) {
+		Text.Add("Despite your initial stretching he’s still as tight as the virgin he is. It takes quite a bit of work just to push your [cockTip] past his resisting sphincter. And even after you manage to do so, the lagomorph continues to constrict you, trying his best to push out the intruder. You have no intention of stopping, however.", parse);
+		Text.NL();
+		Text.Add("Lagon grunts in discomfort as you spread him like he was never spread before. His face is a grimace of pain, but beneath that you can see a spark of unwanted pleasure. He’s enjoying himself.", parse);
+		Text.NL();
+		
+		Sex.Anal(player, lagon);
+		lagon.FuckAnal(lagon.Butt(), p1cock, 4);
+		player.Fuck(p1cock, 4);
+		
+		Text.Add("Once you manage to bury yourself as deep as you can, you hold yourself there, letting him get used to your girth and size before you start moving.", parse);
+	}
+	else if(lagon.sex.rAnal < 5) {
+		Text.Add("Lagon is no virgin, but he’s still pretty tight. You have to work to push your [cockTip] past his entrance, though once you do you’re able to glide in smoothly. Seems like the former king’s learned to relax.", parse);
+		Text.NL();
+		
+		Sex.Anal(player, lagon);
+		lagon.FuckAnal(lagon.Butt(), p1cock, 4);
+		player.Fuck(p1cock, 4);
+		
+		Text.Add("He still grunts in discomfort, though he doesn’t look to be in pain anymore. Despite his attitude, his own cock throbs with each inch you feed his greedy ass, a testament to the lagomorph’s true feelings.", parse);
+		Text.NL();
+		Text.Add("When your [ballsHips] touch his butt, you hold yourself there, giving him the precious moments he needs to adjust to your size. Once you feel his anal walls contract on your [cock] you know it’s time to get moving.", parse);
+	}
+	else if(lagon.sex.rAnal < 20) {
+		parse["c"] = size * 2 < lagonSize ? Text.Parse("your entire [cock]", parse) : "half your shaft";
+		Text.Add("Lagon is loose enough now that you no longer have to worry about breaking him, so without holding back you swiftly bury [c] with a single thrust, eliciting a groan from the former king. His own cock spurts pre on his belly, undeniable proof of how much he really enjoys getting taken in such a fashion.", parse);
+		Text.NL();
+		
+		Sex.Anal(player, lagon);
+		lagon.FuckAnal(lagon.Butt(), p1cock, 4);
+		player.Fuck(p1cock, 4);
+		
+		parse["c"] = size * 2 < lagonSize ? Text.Parse("withdraw and grind your shaft home again, resting your [ballsHips]", parse) : Text.Parse("finish feeding his hungry ass the rest of your shaft, until your [ballsHips] rest", parse);
+		Text.Add("He no longer seems to feel pain - only pleasure - at having his ass taken, much to his humiliation. The lagomorph fights hard to suppress his ecstatic moans as you [c] flush against his soft butt.", parse);
+		Text.NL();
+		Text.Add("You still give him some time to adapt, although you don’t have to. As soon as you’re finished thrusting into him, his ass begins gripping and milking your cock, eager to get its reward. And you oblige by beginning to pump into his greedy cocksleeve.", parse);
+		score += 1;
+	}
+	else {
+		Text.Add("Lagon’s body betrays his eagerness. No sooner have you begun pushing your [cockTip] past his sphincter than his ass contracts, sucking you into its cock-hungry depths. You bottom out in a single thrust, slapping your hips against his ass with a perverted squelch.", parse);
+		Text.NL();
+		
+		Sex.Anal(player, lagon);
+		lagon.FuckAnal(lagon.Butt(), p1cock, 4);
+		player.Fuck(p1cock, 4);
+		
+		Text.Add("Try as he might, he cannot contain his moan of pleasure. His expression is one of pleasure, though he grits his teeth to avoid making any other sounds. It’s no use though - he cannot hide how much he’s come to enjoy being fucked in ass. Even if he won’t admit it, his body tells no lies. And neither does his pre-oozing cock, standing as hard as it’ll ever get.", parse);
+		Text.NL();
+		Text.Add("As much as you’d like to admire Lagon’s effort, you’re soon brought back to the task at hand, as his ass begins milking you as expertly as any vagina. Without further ado, you begin pumping into his greedy ass.", parse);
+		score += 2;
+	}
+	Text.NL();
+	if(player.sexlevel < 3) {
+		Text.Add("Though Lagon grunts occasionally when you thrust into his boypussy, it’s clear that he’s not enjoying the fucking. Not that you care at this point. This is more about your own pleasure than his anyway, so you speed up the pace, trying to bring yourself closer to orgasm. This would be a lot better if your partner were more enthusiastic, rather than sitting back and letting you do all the work.", parse);
+	}
+	else if(player.sexlevel < 5) {
+		Text.Add("Lagon grunts with every thrust. Though he grits his teeth and tries to look pissed, you still spot the slight flush on his cheeks, visible even through his fur. His own cock bounces with each thrust, splattering pre about as you ream his ass.", parse);
+		Text.NL();
+		Text.Add("His pitiful resistance to the pleasure you’re inflicting on his anus only fuels your own lust, and you up the pace, angling yourself so you stroke his prostate with each press and pull of your dick.", parse);
+		Text.NL();
+		Text.Add("Lagon rewards you with a moan, then immediately clamps his mouth shut to prevent any more from coming out. You chuckle at this - who would have guessed the domineering king would like catching so much?", parse);
+		
+		score += 1;
+	}
+	else {
+		Text.Add("Lagon tries his best to resist you, fighting his groans and grunts of pleasure, but his effort is futile. You’re an expert at this and can play his body like a well-tuned instrument. A little adjustment here, a small twist there, some occasional grinding, and the former king’s pride crumbles beneath the barrage of pleasure.", parse);
+		Text.NL();
+		Text.Add("The lagomorph moans whorishly, no longer caring about maintaining his facade. He bucks back into your thrusts, his ass clings to your cock like a long lost lover, his legs wrap around you to allow to thrust ever deeper. It’s truly a sight to see. His face is twisted into an expression of the purest pleasure, tongue lolling out as you force him to moan for you.", parse);
+		Text.NL();
+		Text.Add("His own cock throbs in tune with your thrusts. Each pump earning a spurt of pre. If only you could capture this moment… the former king, reduced to nothing more than a sex toy, moaning in bliss as your [cock] brings him ever closer to his pinnacle.", parse);
+		
+		score += 2;
+	}
+	if(blueballed) {
+		Text.NL();
+		Text.Add("Looking down, you watch Lagon’s balls, taut and barely rocking despite your ceaseless thrusting. You reach over and feel how full they are. It must be torture for the lust-driven lagomorph, to be unable to cum.", parse);
+		Text.NL();
+		Text.Add("<i>“P-Please, let me cum!”</i> he pleads.", parse);
+		Text.NL();
+		Text.Add("Hearing him plead is so rare it leaves you stunned for a moment, but you quickly recover and resume your thrusting.", parse);
+		
+		score += 2;
+	}
+	if(score >= 2) {
+		Text.Add(" Lagon is going to cum - you can tell by the way his shaft is throbbing, no longer bouncing around due to how hard it’s become. His balls are already churning with his impending climax.", parse);
+		Text.NL();
+		Text.Add("If you wanted to stop him from cumming, now would be the time to act.", parse);
+		Text.Flush();
+		
+		//[Let Cum][Deny]
+		var options = new Array();
+		options.push({ nameStr : "Let Cum",
+			func : function() {
+				Text.Clear();
+				Text.Add("With a few more powerful thrusts, you hear Lagon cry out as his ass clenches around your [cock].", parse);
+				Text.NL();
+				
+				var cum = lagon.OrgasmCum();
+				
+				if(score < 4) {
+					Text.Add("A powerful jet of cum heralds the beginning of Lagon’s orgasm, followed by ropes of seed that drape across his chest. His hot bunny cream blends well with his white fur. Unfortunately his climax doesn’t last long, tapering off into a last couple weak spurts that cling to his glans. Still, he remains hard. Lagomorphs have amazing an libido.", parse);
+					lagon.slut.IncreaseStat(100, 1);
+				}
+				else if(score < 6) {
+					Text.Add("A veritable eruption of hot bunny cum shoots out of Lagon’s dick, painting lines across his chest as he spews his seed like a garden hose, some of it plastering across his face, not that he would care at this point. After what seems like a few minutes, he finally tapers off, leaving his dick half-erect.", parse);
+					lagon.slut.IncreaseStat(100, 2);
+				}
+				else {
+					Text.Add("The lagomorph’s orgasm is so powerful he hits the ceiling with his initial blast, and you quickly move to grab his throbbing shaft and aim it at his own face. The second jet is not nearly as powerful, but it still shoots out forcefully enough to splatter across Lagon’s face, and even dart over his head.", parse);
+					Text.NL();
+					Text.Add("He cums for several minutes, and when it seems like he’s finally going to taper off, you make him spew more seed by massaging his balls and thrusting just in the right spot to catch his prostate, making an already enormous climax last even longer.", parse);
+					Text.NL();
+					Text.Add("By the time he comes down, he’s teetering on the edge of consciousness. High with the afterglow and sporting a silly smile as he pants with exhaustion.", parse);
+					lagon.slut.IncreaseStat(100, 3);
+				}
+				Text.NL();
+				
+				if(strapon)
+					Scenes.Lagon.DefeatedSexFuckAssStrapon(parse);
+				else
+					Scenes.Lagon.DefeatedSexFuckAssCock(parse);
+			}, enabled : true,
+			tooltip : "Let Lagon cum from having his ass fucked. Show him what a buttslut he really is."
+		});
+		options.push({ nameStr : "Deny",
+			func : function() {
+				Text.Clear();
+				//TODO
+				parse["toy"] = "cockring";
+				Text.Add("You extract yourself from Lagon’s depths to rummage through your belongings, easily finding the [toy] you were looking for. You return to the bewildered lapin, and before he can protest you shove the [toy] over his erect shaft, effectively closing off his cumvein and ensuring there is no chance Lagon might cum.", parse);
+				Text.NL();
+				if(blueballed) {
+					Text.Add("<i>“No, no, no, NO! Let me cum!”</i> he scrambles to remove the [toy], but you easily intercept him and pin him down before he can so much as touch it. His cock throbs painfully against your toy, a clear sign that Lagon’s close to his climax.", parse);
+					Text.NL();
+					Text.Add("<i>“I won’t be denied again!”</i> he protests, fighting against you, but it’s useless. He’s weak and pitiful now. Any resistance he puts up only serves to further stimulate you and make his ass even tighter for you.", parse);
+					Text.NL();
+					Text.Add("<i>“No… please! Please!”</i> he begs.", parse);
+					Text.NL();
+					Text.Add("You simply smile as you continue to buttfuck him. He hasn’t earned his orgasm yet. And until you think he deserves it, he’ll just have to endure the tension.", parse);
+					Text.NL();
+					Text.Add("<i>“C-curse you, traitor!”</i> he cries out, but you can tell that whatever spirit he’s had now lies broken before you. He’s powerless and he knows it.", parse);
+					
+					lagon.slut.IncreaseStat(100, 3);
+				}
+				else {
+					Text.Add("<i>“What the hell!?”</i> he protests, moving to grab your [toy]. You easily bat his hands away, though.", parse);
+					Text.NL();
+					Text.Add("Lagon hasn’t earned the right to climax, you think. And until you change your mind, he’s not getting any release. At least not from you.", parse);
+					Text.NL();
+					Text.Add("<i>“You fucking traitor...”</i> he rumbles menacingly. For a moment you think he’s going to lash out, but he recomposes himself quickly enough.", parse);
+					Text.NL();
+					Text.Add("<i>“Fine, have it your way. As if I need a slut like you to find release.”</i>", parse);
+				}
+				Text.NL();
+				
+				lagon.Deny(1);
+				
+				if(strapon)
+					Scenes.Lagon.DefeatedSexFuckAssStrapon(parse);
+				else
+					Scenes.Lagon.DefeatedSexFuckAssCock(parse);
+			}, enabled : true, //TODO requires cockring
+			tooltip : "No, Lagon doesn’t deserve to cum. Not yet."
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+	else if(strapon)
+		Scenes.Lagon.DefeatedSexFuckAssStrapon(parse);
+	else
+		Scenes.Lagon.DefeatedSexFuckAssCock(parse);
+}
+
+//TODO
+Scenes.Lagon.DefeatedSexFuckAssCock = function(parse) {
+	Text.Add("You’re getting close; you can feel it. Just a little more and you’ll be dumping your load on the former king. Which reminds you, where exactly should you cum?", parse);
+	Text.Flush();
+	world.TimeStep({hour: 1});
+	
+	var p1cock = player.BiggestCock();
+	var knotted = p1cock.knot != 0;
+	
+	//[Inside][Knot][Outside][Leave]
+	var options = new Array();
+	options.push({ nameStr : "Inside",
+		func : function() {
+			Text.Clear();
+			parse["knot"] = knotted ? ", bringing his sphincter flush with your knot," : "";
+			Text.Add("You give one last powerful thrust into Lagon’s depths[knot] as you feel your [cock] throb within and begin filling him up with your seed.", parse);
+			Text.NL();
+			
+			var cum = player.OrgasmCum();
+			
+			if(cum > 6) {
+				Text.Add("Trickles of cum find their way out his loosened opening with each eruption of seed, but the bulk of your hot seed pushes deeper and deeper inside the former king’s gut, inflating him like a balloon.", parse);
+				Text.NL();
+				Text.Add("By the time you’re finished, he looks like he’s one of his daughters after a full day in the Pit. If you didn’t know better, you’d say Lagon was expecting a litter…", parse);
+				lagon.slut.IncreaseStat(100, 1);
+			}
+			else if(cum > 3) {
+				Text.Add("A blast of seed erupts from your [cockTip], painting the Lagon’s anal walls white as you easily fill him up to the brim. Some of your cum actually flows back out of his ass, leaving Lagon’s butt a white mess.", parse);
+			}
+			else {
+				Text.Add("You fill his ass up with as much seed as you can muster. Which isn’t a whole lot, but it’s enough to stuff Lagon up with a nice creampie.", parse);
+			}
+			Text.NL();
+			if(player.NumCocks() > 1) {
+				Text.Add("Your other cock[s2] contribute to the mess by spewing [itsTheir2] load all over Lagon’s ass and bed. He’ll be smelling like you for a while.", parse);
+				Text.NL();
+			}
+			Text.Add("Satisfied, you leave the panting lagomorph and retrieve your gear. A few moments later you’re all dressed and ready to go. You knock on the door to notify the guards you’ll be leaving and go on your way.", parse);
+			Text.NL();
+			Text.Add("As you pass them, you note the hard-ons they’re sporting. Seems like they enjoyed listening…", parse);
+			Text.Flush();
+			
+			lagon.slut.IncreaseStat(100, 1);
+			
+			Gui.NextPrompt(function() {
+				party.location = world.loc.Burrows.Throne;
+				PrintDefaultOptions();
+			});
+		}, enabled : true,
+		tooltip : "Fill his ass to the brim with your seed."
+	});
+	if(knotted) {
+		options.push({ nameStr : "Knot",
+			func : function() {
+				Text.Clear();
+				Text.Add("You grab Lagon’s buttcheeks and forcefully spread them, pulling him down as you give him a brutal thrust, burying your shaft all the way inside and banging your knot against his sphincter. A couple more powerful thrusts and you feel yourself slip in with a wet slurp. The feeling is intense, and you cry out as you finally cum inside the former king.", parse);
+				Text.NL();
+				
+				var cum = player.OrgasmCum();
+				
+				if(cum > 6) {
+					Text.Add("A torrent of seed spews forth, filling Lagon’s anus to the brim within moments, and yet you’ve barely begun dumping your load into your bunny cocksleeve. Each subsequent jet of cum increasingly enlarges Lagon’s belly as if he were one of his pregnant daughters. Each spurt seemingly advancing his <i>pregnancy</i>. First one month pregnant, then two, then three, and so it goes, until he peaks at nine months pregnant. With a full litter.", parse);
+					Text.NL();
+					Text.Add("Only when it seems like Lagon’s about to deliver do you stop.", parse);
+					Text.NL();
+					Text.Add("Wiping some sweat from your forehead, you remark that this is fine look for the former king. Bred like the lowest bitch in the Pit.", parse);
+					Text.NL();
+					Text.Add("The only reply you receive is a groan.", parse);
+					lagon.slut.IncreaseStat(100, 1);
+				}
+				else if(cum > 3) {
+					Text.Add("A blast of seed erupts from your [cockTip], painting the Lagon’s anal walls white as you easily fill him up to the brim. With nowhere to else to go, your cream begins to seep into Lagon’s guts, inflating him until he appears to be a few months pregnant.", parse);
+				}
+				else {
+					Text.Add("You fill his ass up with as much seed as you can muster. Which isn’t a whole lot, but it’s enough to stuff Lagon up with a nice creampie.", parse);
+				}
+				Text.NL();
+				if(player.NumCocks() > 1) {
+					Text.Add("Your other cock[s2] create a mess as [itThey2] spew[notS2] [itsTheir2] load all over Lagon’s ass and bed. He’ll be smelling like you for a while.", parse);
+					Text.NL();
+				}
+				Text.Add("It’ll be a while until your knot deflates enough to pull out, so you lean back and enjoy the feeling of Lagon’s ass, still milking you for more cum. The former king himself doesn’t say anything, and considering his relaxed breathing, you’d guess he passed out sometime during your climax. Well, at least this way he’ll keep his mouth shut.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					Text.Clear();
+					Text.Add("After your knot deflates enough to pull out, you clean yourself up on Lagon’s fur and fetch your gear. A few moments later, you’re fully dressed and ready to go. You knock on the door to let the guards know you’re ready to leave.", parse);
+					Text.NL();
+					Text.Add("As you pass by, you notice the smell of sex. Looking back, you see that both bunny guardsmen are more than a little flustered, and you flash them a knowing grin. Seems like they’ve had some fun...", parse);
+					Text.Flush();
+					
+					lagon.slut.IncreaseStat(100, 2);
+					
+					world.TimeStep({minute: 15});
+					
+					Gui.NextPrompt(function() {
+						party.location = world.loc.Burrows.Throne;
+						PrintDefaultOptions();
+					});
+				});
+			}, enabled : true,
+			tooltip : "Tie him like the bitch he is and breed his ass."
+		});
+	}
+	options.push({ nameStr : "Outside",
+		func : function() {
+			Text.Clear();
+			Text.Add("In one fluid motion, you pull out of the former king’s ass and stand over him, aiming your [cocks] at him and stroking yourself vigorously. In no time at all you feel the familiar pangs of an oncoming orgasm.", parse);
+			Text.NL();
+			
+			var cum = player.OrgasmCum();
+			
+			if(cum > 6) {
+				parse["a"] = player.NumCocks() > 1 ? "" : " a";
+				Text.Add("Your [cockTip][s] erupt[notS] like[a] perverted volcano[s], sending seed rocketing through the air to splatter over Lagon’s chest and face. The former king spits and sputters. His mouth had been open when you nailed him in the face, which means he probably ate some of your spunk.", parse);
+				Text.NL();
+				Text.Add("Smiling to yourself, you purposefully aim your cum-spouting shaft[s] at his face again, giving him a second load to contend with. He tries to block with an arm, but that only helps so much.", parse);
+				Text.NL();
+				Text.Add("Seeing that there’s no point in keeping your shots focused on his head, you aim at the rest of his body, covering his torso, legs and even his own cock in a thick coating of seed.", parse);
+				Text.NL();
+				Text.Add("When you’re done, and your flow finally tapers off, Lagon is an absolute mess. He looks like he spent the day in the lowest parts of the Pit, covered in cum as he is. There’s no way he can hide that he’s been made your bitch now. He’ll be smelling like your cum for weeks, or at least long enough for his scent to blend together with the constant scent of sex emanating from the Pit.", parse);
+			}
+			else if(cum > 3) {
+				parse["Aj"] = player.NumCocks() > 1 ? "J" : "A j";
+				Text.Add("[Aj]et[s] of cum arcs through the air, splatting wetly on Lagon’s chest. A small adjustment later, you hit his face as well. You aim to cover as much of his body in your seed as you can.", parse);
+				Text.NL();
+				Text.Add("Lagon moves to protect his face with an arm after the first blast, but otherwise displays no reaction as you finish covering his upper body in a thin coating of cum.", parse);
+			}
+			else {
+				Text.Add("Ropes of cum leave your [cockTip][s], painting streaks across the lagomorph as you do your best to paint him with your seed.", parse);
+			}
+			
+			Text.NL();
+			Text.Add("That’s a nice look for him, you say. Truly worthy of a king.", parse);
+			Text.NL();
+			Text.Add("<i>“Fuck you!”</i> he snaps , though he’s much too tired to do anything else but pant with exhaustion.", parse);
+			Text.NL();
+			Text.Add("Your job done, you retrieve your gear and dress up, then knock on the door to let the guards know that you’re done.", parse);
+			Text.NL();
+			Text.Add("As you pass by them, you note that they have erect cocks. Seems like they enjoyed listening.", parse);
+			Text.Flush();
+			
+			lagon.slut.IncreaseStat(100, 1);
+			
+			Gui.NextPrompt(function() {
+				party.location = world.loc.Burrows.Throne;
+				PrintDefaultOptions();
+			});
+		}, enabled : true,
+		tooltip : "Cum all over him and mark him as your property."
+	});
+	options.push({ nameStr : "Leave",
+		func : function() {
+			Text.Clear();
+			Text.Add("In the end, you decide to simply pull out without finishing. You’d rather not waste your precious seed on the former king.", parse);
+			Text.NL();
+			Text.Add("Lagon just glares at you, still panting with exhaustion.", parse);
+			Text.NL();
+			Text.Add("Without saying so much as a word to the prone lagomorph, you retrieve your gear and dress yourself, then knock on the door signalling to the guards that you’d like to leave.", parse);
+			Text.NL();
+			Text.Add("Maybe you should visit Vena to have your release...", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				party.location = world.loc.Burrows.Throne;
+				PrintDefaultOptions();
+			});
+		}, enabled : true,
+		tooltip : "He’s not worthy of your seed, leave him."
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Lagon.DefeatedSexFuckAssStrapon = function(parse) {
+	Text.Add("You’re getting tired of fucking the lagomorph. And by the looks of it, neither of you are going to climax. Maybe you should just stop for now. Lagon seems like he’s had enough too.", parse);
+	Text.NL();
+	Text.Add("With one last forceful thrust, you pull away with a wet slurp, leaving Lagon’s ass empty and spread for a moment, before his muscles begin clenching shut.", parse);
+	Text.NL();
+	Text.Add("It’s too bad you don’t have a real cock to fuck him with, otherwise you’d be filling his ass full of your seed. You bet he’d like that, considering he gave his wife one, and a pretty big one at that.", parse);
+	Text.NL();
+	Text.Add("<i>“Go to hell,”</i> he says, closing his legs and rolling away.", parse);
+	Text.NL();
+	Text.Add("You give his butt an appreciative slap and tell him to keep himself ready - you’ll be back to take his sweet ass again some other time. Right now, however, you have other business to take care of, so you’ll be taking your leave.", parse);
+	Text.NL();
+	Text.Add("He doesn’t react or bother replying.", parse);
+	Text.NL();
+	Text.Add("You shrug and gather your stuff, dressing up and knocking on the door to signal to the guards that you’re leaving. As you pass by, you notice that the two of them are sporting erections. Seems like they enjoyed the show...", parse);
+	Text.Flush();
+	
+	player.AddLustFraction(0.5);
+	
+	world.TimeStep({hour: 1});
+	
+	Gui.NextPrompt(function() {
+		party.location = world.loc.Burrows.Throne;
+		PrintDefaultOptions();
 	});
 }

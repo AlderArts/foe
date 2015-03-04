@@ -1114,7 +1114,7 @@ Entity.prototype.ParserTags = function(parse, prefix) {
 	parse  = parse  || {};
 	prefix = prefix || "";
 	
-	var p1cock = ent.BiggestCock();
+	var p1cock = ent.BiggestCock(null, true);
 	
 	parse[prefix + "cocks"]     = function() { return ent.MultiCockDesc(); }
 	parse[prefix + "cock"]      = function() { return p1cock.Short(); }

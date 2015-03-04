@@ -277,6 +277,8 @@ world.loc.Burrows.Throne.events.push(new Link(
 	function() {
 		if(burrows.LagonAlly() && (lagon.flags["Talk"] & Lagon.Talk.AlliedFirst == 0))
 			Scenes.Lagon.AlliedFirst();
+		else if(burrows.LagonChained())
+			Scenes.Lagon.InteractDefeated();
 		else
 			Scenes.Lagon.InteractRuler();
 	}
