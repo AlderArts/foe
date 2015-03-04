@@ -3238,7 +3238,6 @@ Scenes.Lagon.DefeatedSexFuckAss = function() {
 		Scenes.Lagon.DefeatedSexFuckAssCock(parse);
 }
 
-//TODO
 Scenes.Lagon.DefeatedSexFuckAssCock = function(parse) {
 	Text.Add("You’re getting close; you can feel it. Just a little more and you’ll be dumping your load on the former king. Which reminds you, where exactly should you cum?", parse);
 	Text.Flush();
