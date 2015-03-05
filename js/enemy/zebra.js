@@ -116,7 +116,7 @@ Scenes.ZebraShaman.Encounter = function() {
 	Text.Add("Slowly, your mind and sight grow fuzzier, and your body grows limp. ", parse);
 	if(party.Num() > 1) {
 		parse["s"] = party.Num() == 2 ? "s" : "";
-		parse["hisher"] = party.Num() == 2 ? party.get(1).hisher() : "their";
+		parse["hisher"] = party.Num() == 2 ? party.Get(1).hisher() : "their";
 		Text.Add("Even [comp] seem[s] to be having some trouble with [hisher] thoughts. ", parse);
 	}
 	Text.Add("As you struggle to compose yourself, you hear a faint sound in the distance. At first you can’t quite understand what it is, but gradually the sound grows louder and louder. Soon you can clearly hear the sound of chanting. Looking up, you can just barely make out a figure standing before you, quite possibly the source of your current predicament.", parse);
