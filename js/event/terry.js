@@ -2281,7 +2281,8 @@ Scenes.Terry.SkinshipPromptChoices = function() {
 		boygirl : terry.mfTrue("boy", "girl"),
 		playername : player.name,
 		hand    : function() { return player.HandDesc(); },
-		breastsDesc : function() { return player.FirstBreastRow().Short(); }
+		breastsDesc : function() { return player.FirstBreastRow().Short(); },
+		tongueDesc : function() { return player.TongueDesc(); }
 	};
 	
 	//[Hug]
@@ -2561,7 +2562,12 @@ Scenes.Terry.SkinshipPromptChoices = function() {
 		tooltip : ""
 	});
 	 */
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("", parse);
+		Text.NL();
+		Text.Flush();
+	});
 }
 
 Scenes.Terry.BrushTail = function() {
