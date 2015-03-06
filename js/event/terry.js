@@ -2562,11 +2562,14 @@ Scenes.Terry.SkinshipPromptChoices = function() {
 		tooltip : ""
 	});
 	 */
+	//TODO
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
 		Text.Add("", parse);
 		Text.NL();
 		Text.Flush();
+		
+		Scenes.Terry.Prompt();
 	});
 }
 
