@@ -7204,6 +7204,11 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 			parse["oneof2"] = player.NumCocks() > 2 ? " one of" : "";
 			Text.Add("Once you have withdrawn properly, you break the kiss, both of you panting for breath. As Terry is preoccupied, your hand snakes underneath you, reaching for[oneof2] your other [multiCockDesc2] and aligning it with the puckered hole beneath Terry’s tail. Once confident of your efforts, you start to push forward again, beginning to spear into Terry’s tailhole even as you sink deeper inside of [hisher] cunt.", parse);
 			Text.NL();
+			
+			Sex.Anal(player, terry);
+			terry.FuckAnal(terry.Butt(), p1cock, 2);
+			player.Fuck(p1cock, 2);
+			
 			Text.Add("<i>“Ahn! My butt too?”</i> [heshe] asks, bewildered.", parse);
 			Text.NL();
 			parse["c"] = player.NumCocks() > 2 ? " at least" : "";
