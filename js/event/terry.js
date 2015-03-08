@@ -2562,11 +2562,9 @@ Scenes.Terry.SkinshipPromptChoices = function() {
 		tooltip : ""
 	});
 	 */
-	//TODO
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
-		Text.Add("", parse);
-		Text.NL();
+		Text.Add("<i>“Oh, okay. Is there anything else you want to do?”</i>", parse);
 		Text.Flush();
 		
 		Scenes.Terry.Prompt();
