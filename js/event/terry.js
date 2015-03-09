@@ -3332,6 +3332,18 @@ Scenes.Terry.SexPromptChoice = function(backPrompt) {
 			tooltip : Text.Parse("Give your [foxvixen]’s mighty horsecock the love and attention that it deserves!", parse)
 		});
 	}
+	options.push({ nameStr : "Get Oral",
+		func : function() {
+			Text.Clear();
+			Text.Add("PLACEHOLDER", parse);
+			Text.NL();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+			Scenes.Terry.Prompt();
+		}, enabled : true,
+		tooltip : Text.Parse("Let’s put your little [foxvixen]’s clever tongue to work, shall we?", parse)
+	});
 	/* //TODO
 	options.push({ nameStr : "name",
 		func : function() {
