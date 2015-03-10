@@ -44,6 +44,7 @@ Lagon.prototype.FromStorage = function(storage) {
 	
 	// Load flags
 	this.LoadFlags(storage);
+	this.LoadSexFlags(storage);
 	
 	this.bbTimer.FromStorage(storage.bbTim);
 }
@@ -55,6 +56,7 @@ Lagon.prototype.ToStorage = function() {
 	this.SaveBodyPartial(storage, {ass: true});
 	
 	this.SaveFlags(storage);
+	this.SaveSexStats(storage);
 	
 	storage.bbTim  = this.bbTimer.ToStorage();
 	
@@ -65,7 +67,7 @@ Lagon.prototype.Update = function(step) {
 	Entity.prototype.Update.call(this, step);
 	
 	this.bbTimer.Dec(step);
-	if(this.bbTimer.Expired())
+	if(this.bbTimer.Expired() && this.flags["Deny"] >= 3)
 		this.flags["Deny"] = 0;
 }
 
@@ -2824,6 +2826,12 @@ Scenes.Lagon.DefeatedPrompt = function(sexed) {
 	var parse = {
 		
 	};
+	
+	if(DEBUG) {
+		Text.NL();
+		Text.Add("DEBUG: Blueballed [x]/3. [act]. Timer: [t] hours left.", {x: lagon.flags["Deny"], act: lagon.Blueballed() ? "Active" : "Inactive", t: lagon.bbTimer.ToHours().toFixed(2) }, "bold");
+		Text.Flush();
+	}
 	
 	//[name]
 	var options = new Array();
