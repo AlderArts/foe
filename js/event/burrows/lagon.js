@@ -56,7 +56,7 @@ Lagon.prototype.ToStorage = function() {
 	this.SaveBodyPartial(storage, {ass: true});
 	
 	this.SaveFlags(storage);
-	this.SaveSexStats(storage);
+	this.SaveSexFlags(storage);
 	
 	storage.bbTim  = this.bbTimer.ToStorage();
 	

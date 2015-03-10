@@ -154,7 +154,7 @@ Miranda.prototype.ToStorage = function() {
 	
 	// Save flags
 	this.SaveFlags(storage);
-	this.SaveSexStats(storage);
+	this.SaveSexFlags(storage);
 	
 	return storage;
 }

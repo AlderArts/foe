@@ -250,7 +250,7 @@ Entity.prototype.SetLevelBonus = function() {
 	this.charisma.level     = this.level * this.charisma.growth;
 }
 
-Entity.prototype.SaveSexStats = function(storage) {
+Entity.prototype.SaveSexFlags = function(storage) {
 	var sex = {};
 	if(this.sex.rBlow != 0) sex.rBlow = this.sex.rBlow;
 	if(this.sex.gBlow != 0) sex.gBlow = this.sex.gBlow;
@@ -420,7 +420,7 @@ Entity.prototype.ToStorage = function() {
 	this.SaveLactation(storage);
 
 	this.SaveFlags(storage);
-	this.SaveSexStats(storage);
+	this.SaveSexFlags(storage);
 	this.SavePerks(storage);
 	
 	// TODO

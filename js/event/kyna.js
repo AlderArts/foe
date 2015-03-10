@@ -70,7 +70,7 @@ Kyna.prototype.ToStorage = function() {
 	this.SavePersonalityStats(storage);
 	
 	this.SaveFlags(storage);
-	this.SaveSexStats(storage);
+	this.SaveSexFlags(storage);
 	
 	return storage;
 }

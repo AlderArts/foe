@@ -104,7 +104,7 @@ Momo.prototype.ToStorage = function() {
 	this.SaveBodyPartial(storage, {ass: true, vag: true});
 	
 	this.SaveFlags(storage);
-	this.SaveSexStats(storage);
+	this.SaveSexFlags(storage);
 	
 	storage.wTime = this.wanderTimer.ToStorage();
 	
