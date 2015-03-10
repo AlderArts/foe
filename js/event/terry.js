@@ -3292,6 +3292,7 @@ Scenes.Terry.SexPrompt = function(backPrompt) {
 
 Scenes.Terry.SexPromptChoice = function(backPrompt) {
 	var parse = {
+		playername : player.name,
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		master : player.mfTrue("master", "mistress")
 	};
@@ -3335,12 +3336,58 @@ Scenes.Terry.SexPromptChoice = function(backPrompt) {
 	options.push({ nameStr : "Get Oral",
 		func : function() {
 			Text.Clear();
-			Text.Add("PLACEHOLDER", parse);
-			Text.NL();
-			Text.Add("", parse);
-			Text.NL();
-			Text.Flush();
-			Scenes.Terry.Prompt();
+			if(terry.Relation() < 30) {
+				Text.Add("<i>“I’m not sure I like the sound of that,”</i> [heshe] says warily.", parse);
+				Text.NL();
+				Text.Add("It’s just a little oral sex - nothing to be scared of. Or does [heshe] think [heshe] can’t handle something as simple as that, hmm?", parse);
+				Text.NL();
+				Text.Add("<i>“I can handle it just fine. But that doesn’t mean I have to like it,”</i> [heshe] replies indignantly.", parse);
+				Text.NL();
+				Text.Add("That’s... probably the best you’re going to get out of [himher]. Knowing you can simply order [himher] if [heshe] is too stubborn to obey, you consider what you want [himher] to do.", parse);
+			}
+			else if(terry.Relation() < 60) {
+				Text.Add("<i>“Okay, sure. What do you have in mind?”</i>", parse);
+			}
+			else {
+				Text.Add("<i>“Gee, [playername]. That almost makes me think you don’t like to hear me speak,”</i> [heshe] replies, teasing. <i>“So, what kind of tasty treat are you gonna give me now?”</i>", parse);
+				Text.NL();
+				Text.Add("With a mischievous grin, you make a show of contemplating your answer.", parse);
+			}
+			
+			var options = new Array();
+			if(player.FirstCock()) {
+				parse["cock"] = player.BiggestCock().Short();
+				var tooltip = terry.Relation() < 60 ? "Terry can start by sucking your [cock]." : "Well, how about a fresh serving of warm, gooey cream?";
+				options.push({ nameStr : "Cock",
+					func : function() {
+						Text.Clear();
+						Scenes.Terry.SexGetOralCock();
+					}, enabled : true,
+					tooltip : Text.Parse(tooltip, parse)
+				});
+			}
+			if(player.FirstVag()) {
+				parse["vag"] = player.FirstVag().Short();
+				var tooltip = player.Relation() < 60 ? "Terry can start by licking your [vag]." : "Well, how about a nice dose of honey, straight from your own pretty little flower?";
+				options.push({ nameStr : "Pussy",
+					func : function() {
+						Text.Clear();
+						Scenes.Terry.SexGetOralPussy();
+					}, enabled : true,
+					tooltip : Text.Parse(tooltip, parse)
+				});
+			}
+			if(options.length > 1) {
+				Text.Flush();
+				Gui.SetButtonsFromList(options, false, null);
+			}
+			else {
+				Text.NL();
+				if(player.FirstCock())
+					Scenes.Terry.SexGetOralCock();
+				else
+					Scenes.Terry.SexGetOralPussy();
+			}
 		}, enabled : true,
 		tooltip : Text.Parse("Let’s put your little [foxvixen]’s clever tongue to work, shall we?", parse)
 	});
@@ -3356,6 +3403,198 @@ Scenes.Terry.SexPromptChoice = function(backPrompt) {
 	});
 	 */
 	Gui.SetButtonsFromList(options, backPrompt, backPrompt);
+}
+
+//TODO
+Scenes.Terry.SexGetOralPussy = function() {
+	var parse = {
+		playername : player.name,
+		foxvixen : terry.mfPronoun("fox", "vixen"),
+		master : player.mfTrue("master", "mistress")
+	};
+	parse = terry.ParserPronouns(parse);
+	parse = player.ParserTags(parse);
+	parse = terry.ParserTags(parse, "t");
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
+	if(terry.Relation() < 30)
+		Text.Add("Terry lets out a long-suffering sigh before replying with a grudging <i>“Fiiiine.”</i>", parse);
+	else if(terry.Relation() < 60) {
+		Text.Add("<i>“Okay, try not to get too excited,”</i> [heshe] replies, teasing.", parse);
+		Text.NL();
+		Text.Add("You smirk and wave a finger, declaring you’ll make no such promise. Terry’s just too good at what [heshe] does.", parse);
+	}
+	else {
+		Text.Add("<i>“You know I love my sweets,”</i> Terry replies, licking [hisher] lips.", parse);
+		Text.NL();
+		Text.Add("Oh, you do know. You’ve never seen a [foxvixen] with such a sweet tooth as your little Terry.", parse);
+		Text.NL();
+		parse["boyGirl"] = player.mfTrue("boy", "girl");
+		Text.Add("<i>“Now be a good [boyGirl] and spread ‘em for me.”</i>", parse);
+	}
+	Text.NL();
+	Text.Add("You settle on the ground and ", parse);
+	if(player.HasLegs())
+		Text.Add("spread your [legs] to give Terry easy access to your [vag].", parse);
+		Text.Add("adjust your [legs] to ensure Terry can easily access your [vag].", parse);
+	var c = "";
+	if(player.FirstCock()) c += ", carefully moving your [cocks]";
+	if(player.FirstCock() && player.HasBalls()) c += " and [balls]";
+	if(player.FirstCock()) c += " out of the way";
+	parse["c"] = Text.Parse(c, parse);
+	
+	Text.Add(" You spread your pussy lips with a pair of fingers and beckon the [foxvixen] over with a crooked finger[c].", parse);
+	Text.NL();
+	
+	var relslut = terry.Relation() + terry.Slut();
+	
+	if(relslut < 45)
+		Text.Add("Terry swallows audibly as [heshe] watches your lewd display, but [heshe] doesn’t shy away. Instead [heshe] approaches and kneels before you, with some reluctance extending a pair of fingers to gently massage your opened slit.", parse);
+	else
+		Text.Add("Terry smiles in excitement, licking [hisher] lips as [heshe] kneels before you and inhales your scent. [HeShe] looks like [heshe]’s about to lick you, but instead decides to gently tease your inner folds with a pair of fingers.", parse);
+	Text.NL();
+	Text.Add("With the very first touch, a spark of pleasure races under your skin and you let out a sharp hiss. Those dextrous fingers, trained for the delicate art of thievery, start to work their magic upon your [vag]. It’s as if your pussy were just another lock waiting to be picked.", parse);
+	Text.NL();
+	Text.Add("Terry’s touch is feather-soft, almost too light to feel at times, and yet [heshe] manages to leave ripples of pleasure in [hisher] wake. [HeShe] seeks out your sensitive spots without even trying, applying just the right amount of pressure to make you melt. Moisture begins to well within you, and droplets slowly seep out of your entrance as warmth flares through your [vag], making you melt in bliss.", parse);
+	Text.NL();
+	if(relslut < 45) {
+		Text.Add("For all the pleasure that Terry’s fingers grant you, this isn’t what you asked of [himher]. It almost feels like [heshe]’s stalling, and a spark of irritation begins to grow within you. Impatiently, you ask when [heshe] intends to stop teasing and get to work.", parse);
+		Text.NL();
+		Text.Add("[HeShe] looks at you and sighs. <i>“Soon...”</i>", parse);
+		Text.NL();
+		Text.Add("Not ‘soon’. <i>Now</i>! And that’s an order.", parse);
+		Text.NL();
+		Text.Add("The [foxvixen] clicks [hisher] tongue, already feeling the collar tighten around [hisher] neck. <i>“F-Fine!”</i>", parse);
+	}
+	else {
+		if(terry.Relation() < 60)
+			Text.Add("Satisfied with the results, the [foxvixen] withdraws, licking [hisher] fingers clean and leaning over to get closer to [hisher] target.", parse);
+		else {
+			Text.Add("<i>“Nice and wet,”</i> [heshe] notes, taking [hisher] fingers away and licking them clean of your juices. <i>“Hmm, delicious. ", parse);
+			if(terry.FirstCock()) {
+				Text.Add("You sure you just want me to lick you? Because I could totally get behind the idea of pulling my [tcock] out and fucking you right here, right now,”</i> [heshe] says, licking [hisher] lips.", parse);
+				Text.NL();
+				parse["vulpineEquine"] = terry.HorseCock() ? "equine" : "vulpine";
+				Text.Add("Even from where you are, you can see the pillar of [vulpineEquine] flesh rising from Terry’s loins, fat droplets of precum welling at its tip. With a smile and a shake of your head you reply that as much as you may like [hisher] ", parse);
+				if(terry.HorseCock())
+					Text.Add("big juicy", parse);
+				else
+					Text.Add("sweet little", parse);
+				Text.Add(" dick, if you wanted it, you’d have asked for it. Now let’s see [himher] start licking!", parse);
+				Text.NL();
+				Text.Add("[HeShe] grins confidently. <i>“One of these days I’m going to disobey you and just take what’s mine,”</i> [heshe] teases.", parse);
+				Text.NL();
+				Text.Add("With a laugh, you reply that you’ll believe that when you see it.", parse);
+			}
+			else {
+				Text.Add("If I had a cock I might just give up on licking you and fuck you instead,”</i> [heshe] says with a mischievous grin.", parse);
+				Text.NL();
+				Text.Add("Isn’t it a pity for [himher] then that you’re quite happy with [hisher] tongue?", parse);
+				Text.NL();
+				Text.Add("Terry shrugs, chuckling softly. <i>“Well, you never know. Maybe you’ll change your mind. Maybe you’ll make me grow a big cock to fuck you with?”</i>", parse);
+				Text.NL();
+				Text.Add("You chuckle at the thought, favoring [himher] with a ‘maybe’.", parse);
+				Text.NL();
+				Text.Add("<i>“Course, I’m not picky. I could always settle for a strap-on too. Wouldn’t feel as good, but y’know. It’s the thought that counts.”</i> [HeShe] chuckles.", parse);
+				Text.NL();
+				Text.Add("Right now, you’d settle for deed over thought. Let’s see that clever tongue of [hisher] already.", parse);
+			}
+		}
+	}
+	Text.NL();
+	Text.Add("Without delay, Terry sets about licking your folds. [HeShe] dives straight for your insides, sometimes pulling away to give a wandering lick on your [clit].", parse);
+	Text.NL();
+	
+	Sex.Cunnilingus(terry, player);
+	terry.Fuck(null, 2);
+	player.Fuck(null, 2);
+	
+	Text.Add("You moan, deep, loud and sharp as Terry’s tongue dances across your sensitive flesh. A quiver races through you, and your limbs tremble as pleasure dances like a shower of sparks in your brain.", parse);
+	Text.NL();
+	if(relslut < 45) {
+		Text.Add("Beneath it all, a dim hint of surprise at how eager the once-shy [foxvixen] has become flashes a fin, only to be swept away in the tide of your feelings.", parse);
+		Text.NL();
+	}
+	if(terry.Relation() >= 60 && player.FirstCock()) {
+		Text.Add("Without warning, you feel Terry’s broad tongue leave your [vag] with a wet slurp. You wonder what [heshe]’s planning, when you suddenly feel [hisher] tongue on ", parse);
+		if(player.HasBalls())
+			Text.Add("your [balls]. Terry laps at you with glee, kissing and sucking on each of your nuts before moving to ", parse);
+		Text.Add("[oneof] your [cocks]. [HeShe] licks the base and moves upward, tracing a stream of pre along the way, until [heshe] reaches your [cockTip].", parse);
+		Text.NL();
+		Text.Add("You groan in pleasure, and then laugh softly. That really does feel nice, but you asked [himher] to eat you out, not suck you off.", parse);
+		Text.NL();
+		Text.Add("<i>“Just making a little detour to get an appetizer. I’ll be right back where you want me, [master],”</i> [heshe] teases, giving your [cockTip] a kiss before moving back to your [vag].", parse);
+		Text.NL();
+	}
+	Text.Add("You writhe and squirm, moaning in rapture as Terry lavishes all the care [hisher] vulpine tongue can give upon your sensitive petals. Warm wetness builds within as your juices flow freely, mixing with Terry’s saliva.", parse);
+	Text.NL();
+	Text.Add("Shivers race along your spine, your brain clouded by a fog of pleasure. A hot pressure wells within your belly, your body quivering as the sensation grows stronger. You’re close... oh, so close...", parse);
+	Text.NL();
+	
+	var cum = player.OrgasmCum();
+	
+	Text.Add("A cry of pleasure rips its way out of your throat as the dam breaks within you. Juices sluice forth and splatter onto Terry’s muzzle, washing over [hisher] tongue in your orgasm.", parse);
+	if(player.FirstCock())
+		Text.Add(" Your [cocks] erupt[notS] in sympathy, firing ropes of seed over Terry’s head to spatter across [hisher] shoulders.", parse);
+	Text.NL();
+	if(relslut < 45)
+		Text.Add("The [foxvixen] tries to move away, but you stop [himher] by grabbing [hisher] head and pulling it against your [vag], giving Terry two options: drink or drown.", parse);
+	else
+		Text.Add("Though initially surprised, Terry quickly moves closer to your quivering twat, hoping to drink as much of your juice as [heshe] can. As [heshe] does so, your hands instinctively hold onto [hisher] head, both for support and to ensure [heshe] can make the most of your spilling juices.", parse);
+	Text.NL();
+	Text.Add("Having lost yourself to bliss, you don’t know how much time passes. But, inevitably, your climax ends and leaves behind only a warm fuzzy feeling. With a luxuriating sigh, you settle yourself back to bask in the afterglow. As an afterthought, you lazily release the [foxvixen], whose face is still buried in your cunt.", parse);
+	Text.NL();
+	Text.Add("The [foxvixen] coughs, trying [hisher] best to catch [hisher] breath.", parse);
+	Text.NL();
+	if(terry.Relation() < 30) {
+		Text.Add("<i>“There. Happy now?”</i> [heshe] asks, feigning nonchalance.", parse);
+		Text.NL();
+		Text.Add("Very much so. Terry is a wonderful little muffdiver; you just knew [heshe] had it in [himher].", parse);
+	}
+	else if(terry.Relation() < 60) {
+		Text.Add("<i>“Pretty tasty, but I’d appreciate it if you didn’t try to suffocate me with your muff next time,”</i> [heshe] teases.", parse);
+		Text.NL();
+		Text.Add("You’re sorry, but [heshe] just does too good a job. You want to make sure [heshe] gets everything [heshe] teased out of you.", parse);
+	}
+	else {
+		Text.Add("<i>“It’s always a thrill with you isn’t it, [playername]? I love your pussy, but someday I know you’re going to hold on too long and smother me with your cunt. Though I suppose there’s worse ways to go,”</i> Terry teases, chuckling at the idea.", parse);
+		Text.NL();
+		Text.Add("Well, you have no intention of letting [himher] go that way anytime soon. What would you do without your favorite pussy-licker?", parse);
+		Text.NL();
+		Text.Add("<i>“What indeed, ya huge perv!”</i>", parse);
+	}
+	Text.Flush();
+	
+	terry.AddLustFraction(0.4);
+	
+	world.TimeStep({minute: 30});
+	
+	if(relslut)
+		terry.relation.DecreaseStat(0, 1);
+	else if(terry.Relation() >= 30)
+		terry.relation.IncreaseStat(50, 1);
+	
+	Scenes.Terry.Prompt();
+}
+
+//TODO
+Scenes.Terry.SexGetOralCock = function() {
+	var parse = {
+		playername : player.name,
+		foxvixen : terry.mfPronoun("fox", "vixen"),
+		master : player.mfTrue("master", "mistress")
+	};
+	parse = terry.ParserPronouns(parse);
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
+	Text.Add("PLACEHOLDER", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Gui.NextPrompt();
 }
 
 
