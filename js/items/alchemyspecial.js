@@ -72,6 +72,10 @@ Items.EquiniumPlus.PushEffect(TF.ItemEffects.IncStr, {odds: 0.4, ideal: 50, max:
 Items.EquiniumPlus.PushEffect(TF.ItemEffects.IncSta, {odds: 0.4, ideal: 50, max: 3});
 Items.EquiniumPlus.PushEffect(TF.ItemEffects.DecInt, {odds: 0.2, ideal: 20, max: 1});
 Items.EquiniumPlus.PushEffect(TF.ItemEffects.DecDex, {odds: 0.2, ideal: 20, max: 1});
+Items.EquiniumPlus.PushEffect(TF.ItemEffects.SetBody, {odds: 0.4, race: Race.horse, str: "an equine shape"});
+Items.EquiniumPlus.PushEffect(TF.ItemEffects.SetFace, {odds: 0.3, race: Race.horse, str: "a horse-like face"});
+Items.EquiniumPlus.PushEffect(TF.ItemEffects.SetArms, {odds: 0.3, race: Race.horse, str: "furred equine arms"});
+Items.EquiniumPlus.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.3, race: Race.horse, str: "furred equine legs, with hooves"});
 
 
 
@@ -171,6 +175,7 @@ Items.InfernumPlus.PushEffect(function(target) {
 	}
 	Text.Flush();
 });
+Items.InfernumPlus.PushEffect(TF.ItemEffects.SetBody, {odds: 0.3, race: Race.demon, color: Color.red, str: "a fully demonic form"});
 Items.InfernumPlus.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.5, race: Race.demon, color: Color.red, str: "plantigrade, demonic legs with clawed feet"});
 Items.InfernumPlus.PushEffect(TF.ItemEffects.SetArms, {odds: 0.5, race: Race.demon, color: Color.red, str: "demonic arms with clawed hands"});
 Items.InfernumPlus.PushEffect(TF.ItemEffects.SetTail, {odds: 0.6, race: Race.demon, color: Color.red, str: "a red, spaded demon tail"});
