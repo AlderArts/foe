@@ -387,7 +387,25 @@ Items.Fertilium.recipe = [{it: Items.Felinix}, {it: Items.Leporine}, {it: Items.
 // Effects
 Items.Fertilium.PushEffect(TF.ItemEffects.IncLib, {odds: 0.3, ideal: 40, max: 2});
 Items.Fertilium.PushEffect(TF.ItemEffects.IncCha, {odds: 0.2, ideal: 40, max: 2});
-Items.Fertilium.PushEffect(TF.ItemEffects.RemBalls, {odds: 0.1, ideal: 0, count: 2});
+Items.Fertilium.PushEffect(function(target) {
+	var parse = {
+		Poss: target.Possessive(),
+		notS: target.plural() ? "" : "s"
+	};
+	if(target.HasBalls() && Math.random() < 0.6) {
+		var res = target.Balls().size.DecreaseStat(1, 1);
+		if(target.Balls().size.Get() <= 1) {
+			target.Balls().count.base = 0;
+			Text.Add("[Poss] balls shrivel and disappear completely!", parse);
+			Text.NL();
+		}
+		else {
+			Text.Add("[Poss] balls have shrunk in size!", parse);
+			Text.NL();
+		}
+	}
+	Text.Flush();
+});
 Items.Fertilium.PushEffect(function(target) {
 	var parse = {
 		name  : target.nameDesc(),
