@@ -1125,17 +1125,24 @@ Entity.prototype.ParserTags = function(parse, prefix) {
 	parse[prefix + "vag"]       = function() { return ent.FirstVag().Short(); }
 	parse[prefix + "clit"]      = function() { return ent.FirstVag().ClitShort(); }
 	parse[prefix + "breasts"]   = function() { return ent.FirstBreastRow().Short(); }
+	parse[prefix + "nip"]       = function() { return ent.FirstBreastRow().NipShort(); }
 	parse[prefix + "nips"]      = function() { return ent.FirstBreastRow().NipsShort(); }
 	parse[prefix + "tongue"]    = function() { return ent.TongueDesc(); }
 	parse[prefix + "tongueTip"] = function() { return ent.TongueTipDesc(); }
 	parse[prefix + "skin"]      = function() { return ent.SkinDesc(); }
 	parse[prefix + "hair"]      = function() { return ent.Hair().Short(); }
 	parse[prefix + "face"]      = function() { return ent.FaceDesc(); }
-	parse[prefix + "legs"]      = function() { return ent.LegsDesc(); }
-	parse[prefix + "leg"]       = function() { return ent.LegDesc(); }
-	parse[prefix + "feet"]      = function() { return ent.FeetDesc(); }
 	parse[prefix + "hand"]      = function() { return ent.HandDesc(); }
 	parse[prefix + "hips"]      = function() { return ent.HipsDesc(); }
+	parse[prefix + "thighs"]    = function() { return ent.ThighsDesc(); }
+	parse[prefix + "thigh"]     = function() { return ent.ThighDesc(); }
+	parse[prefix + "legs"]      = function() { return ent.LegsDesc(); }
+	parse[prefix + "leg"]       = function() { return ent.LegDesc(); }
+	parse[prefix + "foot"]      = function() { return ent.FootDesc(); }
+	parse[prefix + "feet"]      = function() { return ent.FeetDesc(); }
+	
+	parse[prefix + "weapon"]    = function() { return ent.WeaponDesc(); }
+	parse[prefix + "armor"]     = function() { return ent.ArmorDesc(); }
 	return parse;
 }
 
