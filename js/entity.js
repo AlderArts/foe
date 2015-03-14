@@ -404,9 +404,7 @@ Entity.prototype.SaveBodyPartial = function(storage, opts) {
 
 // Convert to a format easy to write to/from memory
 Entity.prototype.ToStorage = function() {
-	var storage = {
-		
-	};
+	var storage = {};
 	
 	storage.body = this.body.ToStorage();
 	
@@ -548,24 +546,27 @@ Entity.prototype.LoadLactation = function(storage) {
 }
 
 Entity.prototype.FromStorage = function(storage) {
+	storage = storage || {};
+	
 	if(storage.body) {
 		this.body = new Body(this);
 		this.body.FromStorage(storage.body);
 	}
-	
-	this.LoadCombatStats(storage);
-	this.LoadPersonalityStats(storage);
-	this.LoadRecipes(storage);
-	this.LoadEffects(storage);
-	this.LoadJobs(storage);
-	this.LoadEquipment(storage);
 	this.LoadPregnancy(storage);
 	this.LoadLactation(storage);
 	
 	// Load flags
 	this.LoadFlags(storage);
 	this.LoadSexFlags(storage);
+	this.LoadCombatStats(storage);
+	this.LoadPersonalityStats(storage);
+	
+	this.LoadRecipes(storage);
+	this.LoadEffects(storage);
+	this.LoadJobs(storage);
+	this.LoadEquipment(storage);
 	this.LoadPerks(storage);
+	
 	
 	this.RecallAbilities(); // TODO: Implement for special abilitiy sources (flag dependent)
 	this.SetLevelBonus();

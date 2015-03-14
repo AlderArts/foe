@@ -63,25 +63,27 @@ Rosalin.PastDialog = {
 }
 
 Rosalin.prototype.FromStorage = function(storage) {
-	this.LoadPersonalityStats(storage);
+	storage = storage || {};
+
+	this.body.FromStorage(storage.body);
 	this.LoadPregnancy(storage);
 	this.LoadLactation(storage);
 	
-	this.body.FromStorage(storage.body);
-	
 	// Load flags
 	this.LoadFlags(storage);
+	this.LoadPersonalityStats(storage);
 }
 
 Rosalin.prototype.ToStorage = function() {
 	var storage = {};
 	
-	this.SavePersonalityStats(storage);
+	storage.body = this.body.ToStorage();
 	this.SavePregnancy(storage);
 	this.SaveLactation(storage);
 	
 	this.SaveFlags(storage);
-	storage.body = this.body.ToStorage();
+	this.SavePersonalityStats(storage);
+	
 	return storage;
 }
 

@@ -165,18 +165,21 @@ Terry.prototype.Recruited = function() {
 }
 
 Terry.prototype.FromStorage = function(storage) {
-	this.LoadCombatStats(storage);
-	this.LoadPersonalityStats(storage);
-	this.LoadEffects(storage);
-	this.LoadJobs(storage);
-	this.LoadEquipment(storage);
-	this.LoadPregnancy(storage);
-	this.LoadLactation(storage);
+	storage = storage || {};
+	
 	this.body.FromStorage(storage.body);
+	this.LoadLactation(storage);
+	this.LoadPregnancy(storage);
 	
 	// Load flags
 	this.LoadFlags(storage);
 	this.LoadSexFlags(storage);
+	this.LoadCombatStats(storage);
+	this.LoadPersonalityStats(storage);
+	
+	this.LoadEffects(storage);
+	this.LoadJobs(storage);
+	this.LoadEquipment(storage);
 	
 	this.RecallAbilities();
 	this.SetLevelBonus();
@@ -192,19 +195,19 @@ Terry.prototype.FromStorage = function(storage) {
 
 Terry.prototype.ToStorage = function() {
 	var storage = {};
-	
-	this.SaveCombatStats(storage);
-	this.SavePersonalityStats(storage);
-	this.SaveEffects(storage);
-	this.SaveJobs(storage);
-	this.SaveEquipment(storage);
-	this.SavePregnancy(storage);
-	this.SaveLactation(storage);
 	this.SaveBodyPartial(storage, {ass: true, vag: true, balls: true});
+	this.SaveLactation(storage);
+	this.SavePregnancy(storage);
 	
 	// Save flags
 	this.SaveFlags(storage);
 	this.SaveSexFlags(storage);
+	this.SaveCombatStats(storage);
+	this.SavePersonalityStats(storage);
+	
+	this.SaveEffects(storage);
+	this.SaveJobs(storage);
+	this.SaveEquipment(storage);
 	
 	return storage;
 }
