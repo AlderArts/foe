@@ -176,27 +176,29 @@ Scenes.Gwendy.LoftPrompt = function() {
 	Gui.SetButtonsFromList(options, true);
 }
 
-Scenes.Gwendy.LoftSexPrompt = function(back) {
+Scenes.Gwendy.LoftSexPrompt = function(back, disableSleep) {
 	var parse = {};
 	var options = new Array();
 	Scenes.Gwendy.ChallengeSexWonPrompt(true, options);
 	Scenes.Gwendy.ChallengeSexLostPrompt(true, options);
-	options.push({ nameStr : "Sleep",
-		func : function() {
-			Text.Clear();
-			Text.Add("<i>“Ah, could use to work out some of my kinks - if you know what I mean - but if you are tired, fair enough.”</i> Gwendy yawns, stretching. <i>“I guess I need some sleep as well, running this farm is tiring work.”</i>", parse);
-			Text.NL();
-			Text.Add("With that said, the farm girl undresses, putting on quite a show for you. There is a slight sheen of perspiration on her freckled skin, and she dries herself off with a towel before heading for her bed, stark naked. She sways her butt enticingly as she walks, showing off the horseshoe tattoo on her lower back.", parse);
-			Text.NL();
-			Text.Add("<i>“Sure you haven’t changed your mind?”</i> Gwendy asks sultrily, noticing your stare. You shake your head a bit, trying to clear it. Undressing, you join her in bed. You fall asleep to the calm beat of her heart, her skin warm against yours.", parse);
-			Text.Flush();
-			
-			Gui.NextPrompt(function() {
-				world.loc.Farm.Loft.SleepFunc();
-			});
-		}, enabled : true,
-		tooltip : "Just sleep for now."
-	});
+	if(!disableSleep) {
+		options.push({ nameStr : "Sleep",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>“Ah, could use to work out some of my kinks - if you know what I mean - but if you are tired, fair enough.”</i> Gwendy yawns, stretching. <i>“I guess I need some sleep as well, running this farm is tiring work.”</i>", parse);
+				Text.NL();
+				Text.Add("With that said, the farm girl undresses, putting on quite a show for you. There is a slight sheen of perspiration on her freckled skin, and she dries herself off with a towel before heading for her bed, stark naked. She sways her butt enticingly as she walks, showing off the horseshoe tattoo on her lower back.", parse);
+				Text.NL();
+				Text.Add("<i>“Sure you haven’t changed your mind?”</i> Gwendy asks sultrily, noticing your stare. You shake your head a bit, trying to clear it. Undressing, you join her in bed. You fall asleep to the calm beat of her heart, her skin warm against yours.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					world.loc.Farm.Loft.SleepFunc();
+				});
+			}, enabled : true,
+			tooltip : "Just sleep for now."
+		});
+	}
 	
 	if(back)
 		Gui.SetButtonsFromList(options, true, back);
@@ -1281,7 +1283,7 @@ Scenes.Gwendy.ChallengeSexBody = function(titjob, hangout) {
 			
 			// TODO: Conditional?
 			
-			//[Sure][Nah]
+			//[Cuddle][Sex]
 			var options = new Array();
 			options.push({ nameStr : "Cuddle",
 				func : function() {
