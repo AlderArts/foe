@@ -114,6 +114,10 @@ Miranda.prototype.IsFollower = function() {
 	return false; //Met? Questline?
 }
 
+Miranda.prototype.Met = function() {
+	return this.flags["Met"] >= Miranda.Met.Met;
+}
+
 Miranda.prototype.Attitude = function() {
 	return this.flags["Attitude"];
 }
@@ -1371,7 +1375,7 @@ Scenes.Miranda.WelcomeToRigardEnd = function() {
 	Text.Add("Now... how should you proceed? Talking with Miranda has given you a few ideas on how to get into the capital.", parse);
 	Text.NL();
 	Text.Add("From what the dog-morph said, farmers should be able to bring in hired help, which might give you temporary access to the city. ", parse);
-	if(gameCache.flags["FarmFound"] != 0)
+	if(farm.Found())
 		Text.Add("Perhaps you could ask Gwendy about it.", parse);
 	else
 		Text.Add("Perhaps you could find a friendly farmer on the great plains.", parse);

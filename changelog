@@ -9,6 +9,7 @@ Version 0.3y
 ------------
 * Fixed a bug that showed up on firefox where the game wouldn't load.
 * Fixed Terry's pregnancy getting reset on save/load.
+* Did some refactoring on the farm, removing the Loiter scene and cleaning up the intro a bit.
 
 --------------------------------------------
              PREVIOUS VERSIONS

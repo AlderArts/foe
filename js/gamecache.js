@@ -152,10 +152,6 @@ InitCache = function() {
 	// Controls access to town
 	gameCache.flags["TalkedToTownGuard"]       = gameCache.flags["TalkedToTownGuard"] || 0;
 	
-	// GWENDY'S FARM
-	gameCache.flags["FarmFound"]      = gameCache.flags["FarmFound"] || 0;
-	gameCache.flags["FarmLockout"]    = gameCache.flags["FarmLockout"] || 0;
-	
 	
 	gameCache.flags["NagaVenom"]      = gameCache.flags["NagaVenom"] || 0;
 	
@@ -367,6 +363,11 @@ CacheToGame = function() {
 		// OUTLAWS
 		outlaws.relation.base = gameCache.flags["OutlawsRep"] || 0;
 		gameCache.flags["OutlawsRep"] = null;
+	}
+	if(gameCache.version < 24) {
+		// GWENDY'S FARM
+		farm.flags["Visit"] = gameCache.flags["FarmFound"] || 0;
+		gameCache.flags["FarmFound"] = null;
 	}
 }
 

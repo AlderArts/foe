@@ -7,11 +7,14 @@
 /*
  * Structure to hold farm management minigame
  */
+Scenes.Farm = {};
+
 function Farm(storage) {
 	this.coin = 1000;
 	
 	this.flags = {};
 	//this.flags["flag"] = 0;
+	this.flags["Visit"] = 0;
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -35,7 +38,9 @@ Farm.prototype.Update = function(step) {
 	// TODO: Farm produce etc
 }
 
-
+Farm.prototype.Found = function() {
+	return this.flags["Visit"] != 0;
+}
 
 
 
@@ -59,12 +64,12 @@ world.loc.Farm = {
 // Add initial event, only trigger 7-17
 world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	return Scenes.FarmIntro.Start;
-}, 3.0, function() { return miranda.flags["Met"] >= Miranda.Met.Met && gameCache.flags["FarmFound"] == 0 && (world.time.hour >= 7 && world.time.hour < 17); });
+}, 3.0, function() { return miranda.Met() && !farm.Found() && (world.time.hour >= 7 && world.time.hour < 17); });
 
 world.loc.Plains.Crossroads.links.push(new Link(
 	"Farm",
-	function() { return gameCache.flags["FarmFound"] == 1; },
-	function() { return gameCache.flags["FarmLockout"] == 0; },
+	function() { return farm.Found(); },
+	true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Farm.Fields, {minute: 30});
@@ -399,7 +404,7 @@ Scenes.FarmIntro.GwendyQuestions1 = function() {
 	if(options.length > 0)
 		Gui.SetButtonsFromList(options);
 	else
-		Gui.NextPrompt(Scenes.FarmIntro.GwendyQuestions2);
+		Scenes.FarmIntro.GwendyQuestions2();
 }
 
 Scenes.FarmIntro.GwendyQuestions2 = function() {
@@ -524,10 +529,43 @@ Scenes.FarmIntro.GwendyQuestions2 = function() {
 			Text.NL();
 			Text.Add("Standing up, she saunters away teasingly before climbing down the ladder, and you follow her promptly, not wanting to catch any accusations of loitering or doing anything else untoward in her room.", parse);
 			Text.NL();
-			Text.Add("With free reign right now, you have a few possible options. Leave or...", parse);
+			Text.Add("You look over the farm once more, but decide that right now, you're too busy with current events to dawdle around.", parse);
+			Text.NL();
+			
+			if(party.Two()) {
+				var member = party.Get(1);
+		
+				Text.Add("You call [name] back, telling [himher] it's time to go. [HeShe] returns swiftly, already looking forward to the next visit.", { name: member.name, himher : member.himher(), HeShe : member.HeShe() });
+				Text.NL();
+			}
+			else if(!party.Alone()) {
+				Text.Add("You call your party back, telling them it's time to go. They return swiftly, already looking forward to the next visit.", parse);
+				Text.NL();
+			}
+			
+			danie.flags["Met"] = 1;
+			adrian.flags["Met"] = 1;
+			
+			parse["party"] = party.Two() ? " and your companion" : !party.Alone() ? " and your companions" : "";
+			
+			Text.Add("As you leave, you see a strapping example of an equine tending to the flowerbed at the entrance of the farm. Politely, you wave at him before introducing yourself[party]. He stands up, introducing himself as Adrian. He seems kind of shy, but you figure you can get to know him later.", parse);
+			Text.NL();
+			Text.Add("Before you can talk with him more, a sheep girl with a dark coat of fur falls between the two of you, apparently tripping on something. Adrian hurries forward to help her, gently scolding the girl. From their exchange, you find out that her name is Danie, and that she is another denizen of the farm.", parse);
+			Text.NL();
+			Text.Add("You chuckle a bit at the two, happy to meet some interesting characters here before leaving. Still, as much as you’d like to get to know them, you pardon yourself with a wave.", parse);
+			Text.NL();
+			
+			Text.Add("With that you head out for your next destination.", parse);
+			Text.NL();
+			farm.flags["Visit"] = 1;
+			Text.Add("<b>Found Gwendy's Farm (can now be visited from plains)</b>");
 			Text.Flush();
-
-			Scenes.FarmIntro.LeaveFarm();
+			
+			world.TimeStep({minute: 20});
+			
+			Gui.NextPrompt(function() {
+				MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
+			});
 		}, enabled : true,
 		tooltip : "It is time to get going, you have other matters to attend."
 	});
@@ -1049,204 +1087,14 @@ Scenes.FarmIntro.ReturnToGwendy = function() {
 		Text.Add("You call out to your party, telling them you are heading back out.", parse);
 	}
 	
+	Text.NL();
+	farm.flags["Visit"] = 1;
+	Text.Add("<b>Found Gwendy's Farm (can now be visited from plains).</b>");
 	Text.Flush();
 	Gui.NextPrompt(function() {
-		Text.Clear();
-		gameCache.flags["FarmFound"] = 1;
-		Text.Add("<b>Found Gwendy's Farm (can now be visited from plains).</b>");
-		Text.Flush();
-		Gui.NextPrompt(function() {
-			MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
-		});
+		MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
 	});
 }
-
-Scenes.FarmIntro.LeaveFarm = function() {
-	party.location = world.loc.Farm.Fields;
-	world.TimeStep({minute: 20});
-	
-	var parse = {
-		playername : player.name
-	};
-	
-	
-	//[Leave][Loiter]
-	var options = new Array();
-	options.push({ nameStr : "Leave",
-		func : function() {
-			Text.Clear();
-			Text.Add("You look over the farm once more, but decide that right now, you're too busy with current events to dawdle around.", parse);
-			Text.NL();
-			
-			if(party.Two()) {
-				var member = party.Get(1);
-		
-				Text.Add("You call [name] back, telling [himher] it's time to go. [HeShe] returns swiftly, already looking forward to the next visit.", { name: member.name, himher : member.himher(), HeShe : member.HeShe() });
-				Text.NL();
-			}
-			else if(!party.Alone()) {
-				Text.Add("You call your party back, telling them it's time to go. They return swiftly, already looking forward to the next visit.", parse);
-				Text.NL();
-			}
-			
-			danie.flags["Met"] = 1;
-			adrian.flags["Met"] = 1;
-			
-			parse["party"] = party.Two() ? " and your companion" : !party.Alone() ? " and your companions" : "";
-			
-			Text.Add("As you leave, you see a strapping example of an equine tending to the flowerbed at the entrance of the farm. Politely, you wave at him before introducing yourself[party]. He stands up, introducing himself as Adrian. He seems kind of shy, but you figure you can get to know him later.", parse);
-			Text.NL();
-			Text.Add("Before you can talk with him more, a sheep girl with a dark coat of fur falls between the two of you, apparently tripping on something. Adrian hurries forward to help her, gently scolding the girl. From their exchange, you find out that her name is Danie, and that she is another denizen of the farm.", parse);
-			Text.NL();
-			Text.Add("You chuckle a bit at the two, happy to meet some interesting characters here before leaving. Still, as much as you’d like to get to know them, you pardon yourself with a wave.", parse);
-			Text.NL();
-			
-			Text.Add("With that you head out for your next destination.", parse);
-			Text.Flush();
-			
-			Gui.NextPrompt(function() {
-				Text.Clear();
-				gameCache.flags["FarmFound"] = 1;
-				Text.Add("<b>Found Gwendy's Farm (can now be visited from plains)</b>");
-				Text.Flush();
-				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
-				});
-			});
-		}, enabled : true,
-		tooltip : "Go about your journey."
-	});
-	options.push({ nameStr : "Loiter",
-		func : Scenes.Farm.Loiter, enabled : true,
-		tooltip : "Look around and have some fun at the residents' expense."
-	});
-	Gui.SetButtonsFromList(options);
-}
-
-
-
-
-Scenes.Farm = {};
-
-Scenes.Farm.Loiter = function() {
-	Text.Clear();
-	
-	var parse = {
-		playername : player.name
-	}
-	
-	gwendy.relation.DecreaseStat(-100, 5);
-	adrian.relation.DecreaseStat(-100, 5);
-	danie.relation.DecreaseStat(-100, 5);
-	
-	Text.Add("Well, the scenery here is pretty but it doesn't seem like there's much to do. You figure it'd be better to get to know some of the denizens, if they have time for you.", parse);
-	Text.NL();
-	
-	if(adrian.flags["Met"] == 1) {
-		Text.Add("As you walk, you see Adrian, relaxing while quietly looking over the pastures, as if in deep thought. Seems like he isn't doing anything worthwhile, so you go in, breaking his tranquil atmosphere with a loud shout. It causes him to cringe a bit as he looks at you, slightly annoyed.", parse);
-	}
-	else {
-		Text.Add("As you walk, you see a muscular equine-morph quietly relaxing, watching a pasture while chewing on a piece of straw. You decide to try and talk with him, since he seems to have nothing else to do. You call out to him with a rather rude 'Horsey', and he turns slightly to look at you before turning back to his field gazing. With a snort, Horsey defensively says, <i>“My name isn't Horsey, it's Adrian... jerk.”</i>", parse);
-	}
-	Text.NL();
-	Text.Add("Still, you approach him, wanting to spend a little time to with him to see if he'll open up. In response he sighs and starts to edge away, but you keep hounding him down with questions and random thoughts, mostly on derogatory topics like the similarity between horses and equines.", parse);
-	Text.NL();
-	Text.Add("Finally at his limit, the morph turns to you and says in a deep voice, <i>“Can you please leave me alone? I'm trying to enjoy my break.”</i> You apologize for being intrusive, but he doesn't seem too convinced. It doesn't seem like he's going to talk more than simply telling you to buzz off, so you take your business elsewhere. Hopefully you'll find someone who actually <i>wants</i> to do something other than sit and stare.", parse);
-	Text.Flush();
-	
-	Gui.NextPrompt(function() {
-		Text.Clear();
-		Text.Add("While you wander, you hear a melody being sung by a choir of of sweet voices. Curious, you go to check it out. It's coming from the field where the sheep and sheep-folk reside, and as you see the sheep lazily grazing about, the morphs chatter and sing amongst themselves. It would be a waste to leave without talking to them, right?", parse);
-		Text.NL();
-		
-		if(danie.flags["Met"] == 1) {
-			Text.Add("Danie, the cute ovine girl you've befriended, walks up to you to talk for a bit. It's company like hers you need while you're lounging about. As you talk with her, she sees a rather beautiful butterfly pass by you and makes to go after it only to trip, knocking you over in the process.", parse);
-		}
-		else {
-			Text.Add("You try and approach a few, but they scurry away before you can even get close. Growling irritably, frustrated by their behavior, you consider leaving when you feel a tap on your shoulder. Turning around, you see a cute dark-skinned, gray-wooled sheep-girl smiling brightly at you.", parse);
-			Text.NL();
-			Text.Add("<i>“Hi, what's your name?”</i> the girl asks as she moves a little closer to you. Seems like at least someone is trying to get to know you in this place, so you introduce yourself to the cute sheep-girl. <i>“It's nice to meet you, [playername]. My name is Danie, and welcome to the sheep's pasture!”</i> Looks like everyone here isn't quite a stick in the mud, and you gladly welcome the companionship of Danie. The girl smiles happily and moves to hug you, tripping and knocking you down in the process.", parse);
-		}
-		Text.NL();
-		Text.Add("She gets up and looks horrified at the clumsy mistake she made and apologizes promptly. However, you whine and tell her that you have business elsewhere, the kind that doesn't deal with potential klutzes. She takes obvious offense and pouts before storming off, and you think you see tears welling up in her eyes as she goes. Oh well, better safe than sorry, since you're a guest and all. It wouldn't make sense to let company get hurt, right?", parse);
-		Text.Flush();
-		
-		Gui.NextPrompt(function() {
-			Text.Clear();
-			
-			if(danie.flags["Met"] != 1 && adrian.flags["Met"] != 1) {
-				Text.Add("Continuing, you scour the barn and look for someone else to talk to. It seems that everyone has something to do, which is kind of a bummer. Still, you do talk to a few others besides Adrian and Danie, but they have more or less the same attitude as Adrian did. As for Danie, if you ever decide to encounter her again, it's probably best to be prepared.", parse);
-				danie.flags["Met"] = 1;
-				adrian.flags["Met"] = 1;
-			}
-			else {
-				Text.Add("Seems like the few people you knew on the farm had absolutely nothing worthwhile to bring to you in terms of entertainment. Maybe it'd be better if you actually managed to find someone who isn't borderline mute or with enough wits about them to think a little more about what they do. Then you might get somewhere. Stupid animal people...", parse);
-			}
-			Text.NL();
-			Text.Add("While thinking about this lack of interesting companionship, you notice Gwendy standing on a nearby field and looking dead at you, her cute face marred by annoyance. This can't be good.", parse);
-			Text.NL();
-			
-			// TODO Remove the || true
-			if(gwendy.relation.Get() > -25 || true) {
-				Text.Add("As you approach the farm girl, she lets out a sigh before talking in a decidedly cautious tone. <i>“Listen, I don't mind you being on the farm or anything, but don't go harassing and bullying those who live here. It's hard enough making it through what we have to deal with here without having you add to our troubles.", parse);
-				Text.NL();
-				Text.Add("That said, it'd be best if you leave the farm for now. If you stay any longer, I can't promise to hold myself back if I have to keep dealing with your crap.”</i> You take her words seriously when coupled with her worried but stern expression.", parse);
-				Text.NL();
-				Text.Add("You tell her you're done, and you'll leave now. Relief clearly washes over her, but she warns you, <i>“Just try to limit yourself next time. Being excited is understandable, but don't be rude about it. Well, I've got things to do, so I'll see you when you have a better attitude.”</i> She places a sympathetic hand on your shoulder before walking off.", parse);
-				Text.NL();
-				Text.Add("Well, it seems your fun on the farm ends for today so you head onward, maybe to reflect on what you did for a while.", parse);
-				Text.NL();
-			}
-			else {
-				// TODO Add refined scene
-				Text.Add("", parse);
-				Text.NL();
-				Text.Add("", parse);
-				Text.NL();
-				Text.Add("", parse);
-				Text.NL();
-				Text.Add("", parse);
-				Text.NL();
-			}
-			
-			if(gameCache.flags["FarmLockout"] == 1) {
-				Text.Add("Despite what Gwendy says, you're not done with the farm yet. Deciding to come back to exact revenge, you leave for now with a malicious smile.", parse);
-			}
-			else {
-				Text.Add("Finished with farm for now, you smile as you leave, knowing you can come and go as you please.", parse);
-			}
-			
-			if(party.Two()) {
-				var member = party.Get(1);
-		
-				Text.NL();
-				Text.Add("[name] meets up with you at the entrance, silent as you walk past [himher].", { name: member.name, himher : member.himher() });
-			}
-			else if(!party.Alone()) {
-				Text.NL();
-				Text.Add("Your party meets up with you at the entrance, silent as you walk past them.", parse);
-			}
-			
-			if(gameCache.flags["FarmFound"] != 1) {
-				Text.NL();
-				Text.Add("<b>Found Gwendy's Farm (can now be visited from plains).</b>")
-			}
-			
-			if(gameCache.flags["FarmLockout"] == 1) {
-				Text.NL();
-				Text.Add("<b>You can still come here, but you should be prepared to face the consequences...</b>");
-			}
-			
-			gameCache.flags["FarmFound"] = 1;
-			Text.Flush();
-			
-			Gui.NextPrompt(function() {
-				MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
-			});
-		});
-	});
-}
-
 
 Scenes.Farm.GoToMarketFirst = function(backfunc) {
 	var parse = {

@@ -296,7 +296,7 @@ Quests.quests.push(new Quest({
 		var status = Quests.Type.NotStarted;
 		if(rigard.RoyalAccess())
 			status |= Quests.Type.Completed;
-		else if(miranda.flags["Met"] >= Miranda.Met.Met)
+		else if(miranda.Met())
 			status |= Quests.Type.Visible;
 		return status;
 	},

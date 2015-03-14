@@ -9,7 +9,7 @@ VERSION_MINOR = 3;
 VERSION_SUBSCRIPT = "x2";
 VERSION_NAME = "Lagon fixed";
 
-SAVE_VERSION = 23;
+SAVE_VERSION = 24;
 // Save version 1: Initial
 // Save version 2: Added inventory
 // Save version 3: Fixed clitcock restoration + height, weigth
@@ -33,6 +33,7 @@ SAVE_VERSION = 23;
 // Save version 21: Capacity rewrite
 // Save version 22: Terry save format
 // Save version 23: Outlaws restructuring
+// Save version 24: Farm restructuring
 
 
 VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + VERSION_SUBSCRIPT + ": " + VERSION_NAME;
