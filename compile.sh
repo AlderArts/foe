@@ -114,6 +114,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/farm/gwendy.js \
 	js/event/farm/adrian.js \
 	js/event/farm/danie.js \
+	js/event/farm/layla.js \
 	js/event/uru.js \
 	js/event/aria.js \
 	js/event/royals/lei.js \

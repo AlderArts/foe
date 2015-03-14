@@ -51,6 +51,7 @@ InitCache = function() {
 	gwendy  = new Gwendy(gameCache.gwendy);
 	danie   = new Danie(gameCache.danie);
 	adrian  = new Adrian(gameCache.adrian);
+	layla   = new Layla(gameCache.layla);
 	
 	outlaws  = new Outlaws(gameCache.outlaws);
 	aquilius = new Aquilius(gameCache.aquilius);
@@ -110,6 +111,7 @@ InitCache = function() {
 	world.EntityStorage.push(gwendy);
 	world.EntityStorage.push(danie);
 	world.EntityStorage.push(adrian);
+	world.EntityStorage.push(layla);
 	
 	world.EntityStorage.push(aquilius);
 	world.EntityStorage.push(maria);
@@ -416,6 +418,7 @@ GameToCache = function() {
 	gameCache.gwendy  = gwendy.ToStorage();
 	gameCache.adrian  = adrian.ToStorage();
 	gameCache.danie   = danie.ToStorage();
+	gameCache.layla   = layla.ToStorage();
 	
 	gameCache.fera    = fera.ToStorage();
 	gameCache.kyna    = kyna.ToStorage();
