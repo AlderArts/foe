@@ -6,9 +6,16 @@ $(function() {
 
 // Set the main entrypoint of the application
 function EntryPoint() {
-	online = localStorage ? true : false;
-	// Setup the application
-	Setup();
+	try {
+		online = localStorage ? true : false;
+	}
+	catch(ex) {
+		online = false;
+	}
+	finally {
+		// Setup the application
+		Setup();
+	}
 }
 // Make sure that this loads
 window.onload = EntryPoint;
