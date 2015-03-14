@@ -24,8 +24,8 @@ function Layla(storage) {
 	this.libido.base       = 20;
 	this.charisma.base     = 18;
 	
-	this.level = 5;
-	this.sexlevel = 3;
+	this.level = 10;
+	this.sexlevel = 1;
 	
 	*/
 	
@@ -92,6 +92,70 @@ Layla.prototype.IsAtLocation = function(location) {
 		return (world.time.hour >= 7 && world.time.hour < 22);
 	return false;
 }
+
+
+function LaylaMob() {
+	Entity.call(this);
+
+	// Character stats
+	this.name = "Creature";
+	this.monsterName       = "the creature";
+	this.MonsterName       = "The creature";
+	
+	//this.avatar.combat = Images.maria;
+	
+	/* TODO
+	this.maxHp.base        = 100;
+	this.maxSp.base        = 80;
+	this.maxLust.base      = 50;
+	// Main stats
+	this.strength.base     = 20;
+	this.stamina.base      = 22;
+	this.dexterity.base    = 16;
+	this.intelligence.base = 17;
+	this.spirit.base       = 15;
+	this.libido.base       = 20;
+	this.charisma.base     = 18;
+	*/
+	
+	this.level = 10;
+	this.sexlevel = 1;
+	
+	this.body.DefFemale();
+	this.FirstBreastRow().size.base = 12.5;
+	this.Butt().buttSize.base = 5;
+	this.SetSkinColor(Color.blue);
+	this.SetHairColor(Color.black);
+	this.SetEyeColor(Color.red);
+	
+	this.SetLevelBonus();
+	this.RestFull();
+}
+LaylaMob.prototype = new Entity();
+LaylaMob.prototype.constructor = LaylaMob;
+
+LaylaMob.prototype.Act = function(encounter, activeChar) {
+	// TODO: Very TEMP
+	Text.Add(this.MonsterName + " acts! Rawr!");
+	Text.NL();
+	Text.Flush();
+	
+	// Pick a random target
+	var t = this.GetSingleTarget(encounter, activeChar);
+
+	var parseVars = {
+		name   : this.name,
+		hisher : this.hisher(),
+		tName  : t.name
+	};
+
+	var choice = Math.random();
+	if(choice < 0.6)
+		Abilities.Attack.Use(encounter, this, t);
+	else if(choice < 0.8 && Abilities.Physical.Bash.enabledCondition(encounter, this))
+		Abilities.Physical.Bash.Use(encounter, this, t);
+}
+
 
 /*
  * TODO Trigger meetings:
