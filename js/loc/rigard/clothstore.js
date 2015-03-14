@@ -26,7 +26,7 @@ world.loc.Rigard.ShopStreet.ClothShop.onEntry = function() {
 		Text.NL();
 		Text.Add("There are beautiful dresses in the windows facing the street, and many tall racks of countless other types of clothes lining the large and well decorated store interior. The counter is straight ahead from the door, and draped with the same red velvet as the walls and windows. The long racks of clothes stretch down a hallway to the left as well, where you can see large shelves of shoes and four large stalls along the back wall which you assume are fitting rooms for customers.", parse);
 		Text.NL();
-		Text.Add("The whole store is amazingly clean, with no sign of dirt or dust anywhere. There are numerous customers in the store, most that you can see are nobles. As you[comp] walk down the main aisle toward the counter you see a tall, full-figured woman in a long, flowing blue dress with long and curly blonde hair, measuring something on the counter with a large wooden ruler. As you[comp] approach, she turns her head to both sides as if looking for something.", parse);
+		Text.Add("The whole store is amazingly clean, with no sign of dirt or dust anywhere. There are numerous customers in the store; most that you can see are nobles. As you[comp] walk down the main aisle toward the counter you see a tall, full-figured woman in a long, flowing blue dress with long and curly blonde hair, measuring something on the counter with a large wooden ruler. Noticing you[comp] approach, she turns her head to both sides as if looking for something.", parse);
 		Text.NL();
 		Text.Add("<i>“<b>Fera!</b>”</i> she yells. A few seconds later, you see a short figure with brown hair carrying a pile of clothes rushing down the fitting room hallway, heading around the corner toward the counter.", parse);
 		Text.NL();
@@ -126,7 +126,7 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 			else if(humanScore > 0.5)
 				Text.Add("<i>“Yes? Do you need something?”</i> she asks without pausing in her work.", parse);
 			else
-				Text.Add("You can feel her cold stare as you walk over. <i>“The bargain clothes are over by the door, thats probably what you want. If you need help you should go find Fera, and remember, if you damage anything, you buy it. If you can't afford it, I'll make you work it off,”</i> she says coldly before resuming her work.", parse);
+				Text.Add("You can feel her cold stare as you walk over. <i>“The bargain clothes are over by the door, that’s probably what you want. If you need help you should go find Fera, and remember, if you damage anything, you buy it. If you can't afford it, I'll make you work it off,”</i> she says coldly before resuming her work.", parse);
 			
 			Text.Flush();
 			//[Nexelle][Store][Guards][City][Fera][Fera's mom]
@@ -167,7 +167,7 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 					Text.Clear();
 					Text.Add("You ask Miss Nexelle about the guards she has outside her store.", parse);
 					Text.NL();
-					Text.Add("<i>“John and Laura have worked here for years, they worked here back when my mother ran the shop, before she died five years ago. I believe good security is important to a successful business, so I kept them on.”</i> The tailor flips her hair and scratches her head a bit. <i>“I seem to recall mother saying they used to be part of some mercenary group before they started here.”</i>", parse);
+					Text.Add("<i>“John and Laura have worked here for years; they worked here back when my mother ran the shop, before she died five years ago. I believe good security is important to a successful business, so I kept them on.”</i> The tailor flips her hair and scratches her head a bit. <i>“I seem to recall mother saying they used to be part of some mercenary group before they started here.”</i>", parse);
 					Text.Flush();
 				}, enabled : true,
 				tooltip : "Ask her about the two guards outside the store."
@@ -237,13 +237,6 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 		scenes.AddEnc(function() {
 			Text.Add("You can see the cute catgirl organizing some robes on the racks.", parse);
 		}, 1.0, function() { return true; });
-		/*
-		scenes.AddEnc(function() {
-			Text.Add("You cannot see Fera, perhaps Miss Nexelle sent her out on an errand.", parse);
-			// TODO: TIMER
-			// #disable ferachat for this visit/an hour
-		}, 1.0, function() { return true; });
-		*/
 		scenes.Get();
 		
 		Text.NL();
