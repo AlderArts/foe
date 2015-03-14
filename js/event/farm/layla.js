@@ -27,13 +27,14 @@ function Layla(storage) {
 	this.level = 5;
 	this.sexlevel = 3;
 	
+	*/
+	
 	this.body.DefFemale();
 	this.FirstBreastRow().size.base = 12.5;
 	this.Butt().buttSize.base = 5;
-	this.SetSkinColor(Color.brown);
+	this.SetSkinColor(Color.blue);
 	this.SetHairColor(Color.black);
-	this.SetEyeColor(Color.blue);
-	*/
+	this.SetEyeColor(Color.red);
 	
 	this.SetLevelBonus();
 	this.RestFull();
