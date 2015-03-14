@@ -1042,7 +1042,7 @@ Scenes.FarmIntro.DanieAnalSex = function() {
 	Text.NL();
 	Text.Add("Her ass is hot as only Aria knows what, and seems to have adjusted to your [cockDesc]'s girth, letting you move smoother and faster. Her butt repeatedly smacks against your groin now, causing the sounds of your act to carry to anyone in the vicinity. You give Danie another spank and call out to ask her how she feels, but she is long lost in a world of lust, her tail wagging nonstop while her tongue lolls out of her mouth. The sight drives you close to the edge, but you hold back.", parse);
 	Text.NL();
-	Text.Add("However, that effort is wasted, as Danie suddenly cries out, her [anusDesc] crushing down on your [cockDesc] as she cums. With her backdoor gripping and squeezing your overstimulated member, you can't help but to release your load. With one last, shallow thrust your dam bursts, filling her with your seed. When you both finish you pull out of her, cum following you and dripping down from her ass.", parse);
+	Text.Add("However, that effort is wasted, as Danie suddenly cries out, her [anusDesc] crushing down on your [cockDesc] as she cums. With her back door gripping and squeezing your overstimulated member, you can't help but to release your load. With one last, shallow thrust your dam bursts, filling her with your seed. When you both finish you pull out of her, cum following you and dripping down from her ass.", parse);
 	Text.NL();
 	Text.Add("Checking on the girl, you find she's still dazed and glossy-eyed, with a dopey smile on her face. Seems either you went overboard, or she really enjoyed herself just now. In any event, you get the girl on her bed before leaving, thanking her for helping you out.", parse);
 	

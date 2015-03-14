@@ -649,7 +649,7 @@ Scenes.Estevan.SexGay = function() {
 			Text.NL();
 			Text.Add("You command him down to his knees in the dirt and you can tell that you’ve pushed him out of his comfort zone because he complies with a half-hearted grumble instead of his usual jokes and mockery. Estevan gets down on his knees and presses his chest to the ground, he uses his hands to spread his ass-cheeks and his gaping hole awaits you.", parse);
 			Text.NL();
-			Text.Add("It takes one hard shove and your dick is back inside him. He bleats out a note of surprise, but the walls of his anus squeeze against you anyway. You growl into the goat-slut’s ear, letting him know how much you enjoy fucking him into the dirt. He tugs at his meaty cock, liberally dripping precum between his legs while you slam his backdoor. The satyr’s copious leakage gives you an idea and you brush his hand away from his cock, replacing his grip with your own. You squeeze down on his shaft while seeking out the hard nub of his prostate with your prick. The effect is instant: he gushes thick seminal fluid, groaning and squirming while you milk him like livestock.", parse);
+			Text.Add("It takes one hard shove and your dick is back inside him. He bleats out a note of surprise, but the walls of his anus squeeze against you anyway. You growl into the goat-slut’s ear, letting him know how much you enjoy fucking him into the dirt. He tugs at his meaty cock, liberally dripping precum between his legs while you slam his back door. The satyr’s copious leakage gives you an idea and you brush his hand away from his cock, replacing his grip with your own. You squeeze down on his shaft while seeking out the hard nub of his prostate with your prick. The effect is instant: he gushes thick seminal fluid, groaning and squirming while you milk him like livestock.", parse);
 			Text.NL();
 			Text.Add("The handfuls of cum you extract from his rock-hard cock go straight onto your own. You plunge it back into him and he lets slip a grunt that turns into a long, hungry moan. You continue plowing him, using his own spunk as lube, and he pushes back against you as wanton and horny as ever.", parse);
 			Text.NL();
@@ -711,7 +711,7 @@ Scenes.Estevan.SexGay = function() {
 					Text.NL();
 					
 					if(cum > 6) {
-						Text.Add("Estevan is speechless, but moans intermittently as his pregnant-seeming belly expels its contents through his backdoor. Your titanic load spews wetly and noisily out of his ass in a gradual flow that soaks the fur of his quivering legs and makes for an incredibly raunchy sight.", parse);
+						Text.Add("Estevan is speechless, but moans intermittently as his pregnant-seeming belly expels its contents through his back door. Your titanic load spews wetly and noisily out of his ass in a gradual flow that soaks the fur of his quivering legs and makes for an incredibly raunchy sight.", parse);
 					}
 					else if(cum > 3) {
 						Text.Add("<i>“Did you have to cum inside me?</i> Estevan complains. Your cum emerges from his ass in thick splashes as he works to push it all out.", parse);

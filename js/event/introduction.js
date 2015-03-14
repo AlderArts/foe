@@ -512,7 +512,7 @@ Intro.DemonFight = function() {
 				 + " has moved behind you and grabs hold of your " 
 				 + player.Butt().Short() + " and pushes his " 
 				 + imps[2].FirstCock().Short() 
-				 + " against your tight backdoor. The going is pretty rough, but, soon, he is pistoning all his length inside you, setting your poor colon on fire.");
+				 + " against your tight back door. The going is pretty rough, but, soon, he is pistoning all his length inside you, setting your poor colon on fire.");
 				Text.NL();
 				
 				player.FuckAnal(player.Butt(), imps[2].FirstCock(), 2);

@@ -789,7 +789,7 @@ Scenes.Lagomorph.GroupWinOnPlainsPrompt = function() {
 					func : function() {
 						Scenes.Lagomorph.GroupWinOnPlainsFuckBrute(enc);
 					}, enabled : true,
-					tooltip : "You’re pretty sure this big guy’s butt is pretty much unused. So why not use his backdoor to relieve yourself?"
+					tooltip : "You’re pretty sure this big guy’s butt is pretty much unused. So why not use his back door to relieve yourself?"
 				});
 			}
 			/* TODO
@@ -1539,7 +1539,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 							Text.NL();
 							Text.Add("The rabbit moans greedily, tongue slurping wetly over his snout to catch Terry’s pre.", parse);
 							Text.NL();
-							Text.Add("The [foxvixen] grabs the lapin below by the shoulders and pushes him toward his prone brother, the rabbit crashing into him and falling atop his brother, muzzle to muzzle. Without missing a beat, Terry thrusts into the backdoor of the top bunny, entering him just as easily as he did his sibling.", parse);
+							Text.Add("The [foxvixen] grabs the lapin below by the shoulders and pushes him toward his prone brother, the rabbit crashing into him and falling atop his brother, muzzle to muzzle. Without missing a beat, Terry thrusts into the back door of the top bunny, entering him just as easily as he did his sibling.", parse);
 							Text.NL();
 							Text.Add("As the bunslut gasps and groans appreciatively, wriggling his hips to thrust back against the [foxvixen]-prick filling him up so deliciously, his brother jealously reaches up and pulls him into a passionate kiss. Their tongues tangle as they moan softly into each other’s mouths, arms wrapping around one another in a passionate embrace as their hips slide back and forth, doubtlessly grinding their dripping dicks together.", parse);
 							Text.NL();

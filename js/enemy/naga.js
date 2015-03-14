@@ -1034,7 +1034,7 @@ Scenes.Naga.DesertWinGetFuckedVag = function(enc, hypno) {
 			Text.NL();
 			Text.Add("Your orgasm continues for what feels like hours, your muscles slowly releasing you from your ecstasy-induced paralysis. The naga lays on the ground below, knocked unconscious by her own furious climax. ", parse);
 			if(tailPeg)
-				Text.Add("You carefully remove her tail from your backdoor, sliding it from your [anusDesc] rather unceremoniously, and letting it land with a soft thud on the sand. ", parse);
+				Text.Add("You carefully remove her tail from your back door, sliding it from your [anusDesc] rather unceremoniously, and letting it land with a soft thud on the sand. ", parse);
 			parse["comp"] = party.Num() == 2 ? party.Get(1).name :
 			                "your companions";
 			parse["c"] = party.Num() > 1 ? Text.Parse(", and rejoin [comp]", parse) : "";
@@ -1065,7 +1065,7 @@ Scenes.Naga.DesertWinTailpeg = function(opts) {
 			parse["hypno1"] = hypno ? "order" : "instruct";
 			parse["hypno2"] = hypno ? "entranced, " : "";
 			parse["hypno3"] = hypno ? "her " + player.mfTrue("master", "mistress") : "you";
-			Text.Add("Licking your lips, you [hypno1] the naga to put her tail to good use and fuck you in your [anusDesc]. Her [hypno2]lusty eyes light up, clearly excited at the chance to please [hypno3]. You feel her serpentine lower body shift ever so slightly just before you feel a tickle at your lonely pucker. That tickle becomes a gentle push, and in no time her scaly tail is probing inside your backdoor. More and more smooth scaly skin enters you, and your anal passage stretches to accommodate. The feeling of fullness inside you is exquisite, and your eyes roll back in their sockets as the sensation floods your body with warmth.", parse);
+			Text.Add("Licking your lips, you [hypno1] the naga to put her tail to good use and fuck you in your [anusDesc]. Her [hypno2]lusty eyes light up, clearly excited at the chance to please [hypno3]. You feel her serpentine lower body shift ever so slightly just before you feel a tickle at your lonely pucker. That tickle becomes a gentle push, and in no time her scaly tail is probing inside your back door. More and more smooth scaly skin enters you, and your anal passage stretches to accommodate. The feeling of fullness inside you is exquisite, and your eyes roll back in their sockets as the sensation floods your body with warmth.", parse);
 			Text.NL();
 			
 			Sex.Anal(naga, player);

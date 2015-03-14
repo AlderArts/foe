@@ -4594,7 +4594,7 @@ Scenes.Miranda.HomeDommySexFuckDobieAss = function(cocks) {
 				else
 					parse["load"] = "meager";
 				parse["load2"] = load > 3 ? " and bloating it" : "";
-				Text.Add("You fill her backdoor with your [load] load. With your knot sealing her tightly, the cum has nowhere to go but her belly, filling it up[load2] under your continuous flood.", parse);
+				Text.Add("You fill her back door with your [load] load. With your knot sealing her tightly, the cum has nowhere to go but her belly, filling it up[load2] under your continuous flood.", parse);
 				if(load > 3) {
 					parse["several"] = Text.NumToText(Math.max(Math.floor(2 + (load - 3)*2), 9));
 					Text.Add(" By the time your seed reduces to a trickle she’s swollen as if [several] months pregnant.", parse);
@@ -5023,7 +5023,7 @@ Scenes.Miranda.HomeDommySexRideDobieCockAnal = function() {
 				Text.NL();
 				Text.Add("Your fingers tap a tattoo against her balls and you remind her that you're waiting to hear some begging.", parse);
 				Text.NL();
-				Text.Add("She clears her throat. <i>“Please, [playername]. Allow me to plow the depths of your [buttDesc]. I can’t stand not being able to deposit my huge load of doggie-cum up your backdoor.”</i>", parse);
+				Text.Add("She clears her throat. <i>“Please, [playername]. Allow me to plow the depths of your [buttDesc]. I can’t stand not being able to deposit my huge load of doggie-cum up your back door.”</i>", parse);
 				Text.NL();
 				Text.Add("...Is that really supposed to be begging? You look at her, trying to gauge whether she truly was trying or was simply making a poor joke. You squeeze gently at her nuts, making her bite her lip, but decide to be magnanimous. Besides, your own form is quivering with desire, eager to achieve climax in turn.", parse);
 			}
@@ -6326,7 +6326,7 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 							else
 								Text.Add("<i>“Fuck… taking advantage of me while I’m down huh,”</i> Miranda huffs grumpily. <i>“Fiiine, if it’ll get you off my ass.”</i> Yes, you’ll get her ass off, you assure her. <i>“Uh...”</i>", parse);
 							Text.NL();
-							Text.Add("Not wishing to waste any more time, you place[oneof] your [multiCockDesc] at the panting herm’s backdoor. You’re going to pay her back in plenty for the last few hours… and claim your own reward. Using some of her own cum from her slick member, you lube yourself up and thrust forward. ", parse);
+							Text.Add("Not wishing to waste any more time, you place[oneof] your [multiCockDesc] at the panting herm’s back door. You’re going to pay her back in plenty for the last few hours… and claim your own reward. Using some of her own cum from her slick member, you lube yourself up and thrust forward. ", parse);
 							if(player.NumCocks() > 1) {
 								parse["anotheroneof"] = player.NumCocks() > 2 ? " another one of" : "";
 								parse["other"] = player.NumCocks() > 2 ? "" : " other";

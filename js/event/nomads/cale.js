@@ -2078,7 +2078,7 @@ Scenes.Cale.SexFuckHim = function(outside, opts) {
 					Text.Add("<i>“You, ah, know how to handle that thing pretty well,”</i> Cale pants, still trying to recover from his orgasm.", parse);
 				else {
 					if(cum > 6) {
-						Text.Add("<i>“W-woah! What are you, a minotaur?”</i> Cale whines as your torrential orgasm floods his backdoor, rapidly expanding his poor tummy. <i>“Look, I’m a guy, I can’t get pregnant, okay?!”</i> Well, not for lack of trying, certainly. ", parse);
+						Text.Add("<i>“W-woah! What are you, a minotaur?”</i> Cale whines as your torrential orgasm floods his back door, rapidly expanding his poor tummy. <i>“Look, I’m a guy, I can’t get pregnant, okay?!”</i> Well, not for lack of trying, certainly. ", parse);
 						if(knotted)
 							Text.Add("Not even your knot can contain the massive amount of cum you are pouring into the wolf, and large splashes of white seed seep out through the tight seal of his colon, having nowhere else to go.", parse);
 						else

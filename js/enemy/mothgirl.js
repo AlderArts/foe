@@ -444,7 +444,7 @@ Scenes.Mothgirl.WinAnal = function(enc, cocksInAss) {
 	parse["c"] = cocksInAss.length > 1 ? "your second cock" : "her fingers";
 	Text.Add(" She joins you in orgasm a moment later, spurred on by the hard fucking: pussyjuices squirt out around [c] and she chokes back a scream as she joins you in bliss.", parse);
 	Text.NL();
-	parse["c"] = strapon ? "" : ", smiling to yourself at the sight of semen drooling from the moth's well-used backdoor";
+	parse["c"] = strapon ? "" : ", smiling to yourself at the sight of semen drooling from the moth's well-used back door";
 	Text.Add("<i>“That was... different,”</i> she murmurs a moment later, still breathing hard. You answer her with a slap on the ass as you withdraw yourself from her[c]. When you pop out of her, the would-be bandit rolls onto her back and makes a contented moan, immediately shoving her fingers down into her twat. <i>“I don't think I'm gonna be able to walk for a while...”</i> ", parse);
 	Text.NL();
 	Text.Add("You laugh and pat her thigh before grabbing your gear and staggering off, leaving her to enjoy her cum-soaked afterglow.", parse);

@@ -2636,7 +2636,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 						target = BodyPartType.vagina;
 					}
 					else
-						Text.Add("<i>“Today... I feel like using your backdoor.”</i>", parse);
+						Text.Add("<i>“Today... I feel like using your back door.”</i>", parse);
 					Text.NL();
 				}
 				var targetObj = (target == BodyPartType.vagina) ?

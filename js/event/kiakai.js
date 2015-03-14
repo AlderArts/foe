@@ -2741,7 +2741,7 @@ Scenes.Kiakai.HealingNice = function() {
 							func : function() {
 								Text.Clear();
 								// TODO: Increase odds of scene
-								Text.Add("Smiling broadly, you nod slowly, encouraging the elf to continue. [HisHer] restrictions lifted, [name] insistently presses two fingers into your [anusDesc], probing your backdoor while [heshe] returns to lapping at your [vagDesc].", parse);
+								Text.Add("Smiling broadly, you nod slowly, encouraging the elf to continue. [HisHer] restrictions lifted, [name] insistently presses two fingers into your [anusDesc], probing your back door while [heshe] returns to lapping at your [vagDesc].", parse);
 								Text.NL();
 								Text.Add("Chuckling, you point out to the elf how this is something [heshe] would never have thought of doing when you first met, let alone taken the initiative at it. [name] doesn't let up on [hisher] dual assault of your holes, but [hisher] brightly burning cheeks indicate that your comment hit home.", parse);
 								Text.NL();
@@ -3258,7 +3258,7 @@ Scenes.Kiakai.PleasureElf = function() {
 			if(kiakai.FirstCock()) {
 				parse = Text.ParserPlural(parse, kiakai.NumCocks() > 1);
 				
-				Text.Add("While you let your fingers work away at the elf's once-tight backdoor, your other hand prods and teases [name]'s [kMultiCockDesc]. The member[s] bob[notS] and twitch[notEs] at your rapid thrusts, bouncing against your hovering hand occasionally, hot to the touch.", parse);
+				Text.Add("While you let your fingers work away at the elf's once-tight back door, your other hand prods and teases [name]'s [kMultiCockDesc]. The member[s] bob[notS] and twitch[notEs] at your rapid thrusts, bouncing against your hovering hand occasionally, hot to the touch.", parse);
 				Text.NL();
 				Text.Add("[name], by this point, is moaning deliriously, whether for you to stop or to ream [himher] harder, it's a bit difficult to tell. Somehow, you discern from [hisher] ramblings that [heshe] wants you to pay some attention to [hisher] [kMultiCockDesc] too.", parse);
 				Text.NL();
@@ -3292,7 +3292,7 @@ Scenes.Kiakai.PleasureElf = function() {
 					Text.Add("Streaks of white from the elf's twitching member[s] land on [hisher] cheeks, in [hisher] [kHairDesc] and on [hisher] lolling [kTongueDesc]. Dazed, [name] laps up [hisher] ejaculate, cleaning [himher]self up.", parse);
 			}
 			else if(kiakai.FirstVag()) {
-				Text.Add("As your pumping fingers deal with [name]'s once-tight backdoor, you let your other hand play with [hisher] wet [kVagDesc]. The elf's pliant folds part easily, [hisher] passage already dripping with juices from your anal teasing.", parse);
+				Text.Add("As your pumping fingers deal with [name]'s once-tight back door, you let your other hand play with [hisher] wet [kVagDesc]. The elf's pliant folds part easily, [hisher] passage already dripping with juices from your anal teasing.", parse);
 				Text.NL();
 				Text.Add("[name], by this point, is moaning deliriously, whether for you to stop or to ream [himher] harder, it's a bit difficult to tell. Somehow, you discern from [hisher] ramblings that [heshe] wants you to pay some attention to [hisher] clit too.", parse);
 				Text.NL();
@@ -3370,7 +3370,7 @@ Scenes.Kiakai.PleasureElf = function() {
 				if(kiakai.FirstVag())
 					Text.Add("finding [hisher] moist [kVagDesc].", parse);
 				else
-					Text.Add("massaging [hisher] taint and probing [hisher] backdoor.", parse);
+					Text.Add("massaging [hisher] taint and probing [hisher] back door.", parse);
 				Text.Add(" It's not long before the elf cries out in pleasure, [hisher] [kCockDesc] spraying [hisher] seed on the ground.", parse);
 			}
 			else if(kiakai.FirstVag()) {
