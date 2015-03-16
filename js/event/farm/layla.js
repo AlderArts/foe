@@ -40,6 +40,7 @@ function Layla(storage) {
 	this.RestFull();
 	
 	this.flags["Met"] = Layla.Met.NotMet;
+	this.flags["Take"] = 0;
 
 	if(storage) this.FromStorage(storage);
 }
@@ -514,12 +515,12 @@ Scenes.Layla.FarmCombatWin = function() {
 			Text.Add("Hmm... you could always try and take the creature along with you. She could be useful in your party.", parse);
 			Text.Flush();
 			
-			var take = false;
-			
 			//[Take] [Don’t take]
 			var options = new Array();
 			options.push({ nameStr : "Take",
 				func : function() {
+					layla.flags["Take"] = 1;
+					
 					Text.Clear();
 					Text.Add("<i>“That’s not a half-bad idea. But...”</i> She turns her gaze back to the strange girl. <i>“There’s the matter of broken storage doors, the shelves, pots and crates. Not to mention my frightened animals and workers.”</i>", parse);
 					PrintDefaultOptions();
@@ -558,7 +559,7 @@ Scenes.Layla.FarmCombatWin = function() {
 				Text.NL();
 				Text.Add("The girl stops crying for a moment, just looking at the farmer with curiosity and fear in her eyes.", parse);
 				Text.NL();
-				if(take) {
+				if(layla.flags["Take"] != 0) {
 					Text.Add("<i>“You will work and repair the doors you broke, clean up the storage and apologize to everyone you scared. Then I’ll let [playername] take you. Agreed?”</i>", parse);
 					Text.NL();
 					Text.Add("The creature nods slowly.", parse);
@@ -598,3 +599,94 @@ Scenes.Layla.FarmCombatWin = function() {
 	});
 }
 
+//TODO
+//Automatically happens 3 days after you won against Layla. As soon as the PC steps on the field. No time restriction.
+Scenes.Layla.SecondMeeting = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("As you reach the fields, you spot Gwendy’s recent ‘houseguest’ as she busies herself stacking some firewood for later use. After placing the last logs, she wipes her brow with a forearm, letting out a tired sigh. Feeling inquisitive, you decide to see how she’s doing.", parse);
+	Text.NL();
+	Text.Add("As you get closer, you wonder why Gwendy doesn’t seem to have had any luck teaching her how to wear clothes yet. She’s still totally naked, just as she had been when you found her. It’s only when you get right up to her that you can see that you were wrong. She <b>is</b> clothed, wearing a simple dress that shows not the slightest ornamentation, but quite effectively preserves her modesty. It’s just that it’s so tight, and so closely matches her own gray and dull silver coloration, that it blends in with her skin.", parse);
+	Text.NL();
+	Text.Add("She turns at your approach  and jumps a little in surprise. A timid smile creeps onto her face as she greets you with a simple, <i>”Hello.”</i>", parse);
+	Text.NL();
+	Text.Add("Smiling encouragingly back at her, you return her greeting and ask her how she’s doing now that Gwendy’s taken her in.", parse);
+	Text.NL();
+	Text.Add("<i>”Oh, I’m doing fine,”</i> she says, then lowers her head. <i>”Sorry for attacking you...”</i>", parse);
+	Text.NL();
+	Text.Add("You wave it off, assuring her that it’s fine. You were kind of threatening her, after all.", parse);
+	Text.NL();
+	Text.Add("<i>”Oh, miss Gwendy said I should always introduce myself when I meet someone new,”</i> she clears her throat. <i>”Hello, I’m Layla. Nice to meet you… umm...”</i>", parse);
+	Text.NL();
+	Text.Add("[playername], you reply. Your name is [playername]. So, she’s called Layla now? That’s a pretty name.", parse);
+	Text.NL();
+	Text.Add("<i>”Thank you! I picked it myself. Your name is pretty too!”</i> she says with a smile.", parse);
+	Text.NL();
+	Text.Add("You thank her for the compliment. Then, curious, you ask how long she thinks it will take for her to work off the cost of the damage she did to Gwendy’s storeroom.", parse);
+	Text.NL();
+	Text.Add("<i>”It’s already paid for. I’m just helping around a bit.”</i> She smiles.", parse);
+	Text.NL();
+	Text.Add("You figured Gwendy was generous, but all the same, you’re surprised to see Layla’s already paid off her debt.", parse);
+	Text.NL();
+	if(layla.flags["Take"] != 0) {
+		Text.Add("Pushing that thought aside, you ask Layla if she remembers what you and Gwendy had in mind - about her coming with you once her debt was paid off?", parse);
+		Text.NL();
+		Text.Add("<i>”Yes. I’ve been waiting for you. I just want to say goodbye to everyone and we can go.”</i>", parse);
+		Text.NL();
+		Text.Add("So, she’s made some friends here? Of course she can have some time to say goodbye; you can wait for her to do that.", parse);
+		Text.NL();
+		
+		Scenes.Layla.LaylaLeavesGwendy();
+	}
+	else {
+		Text.Add("Dismissing the thought, you ask Layla what she intends to do now that she’s free of her debt to Gwendy.", parse);
+		Text.NL();
+		Text.Add("The alien-looking girl stops to think for a moment. <i>”I’d like to find out where I come from, or even who I am. But I don’t stand a chance travelling alone, and everyone has been so nice to me here, even after I was so bad.”</i> She looks down for a moment, but quickly perks up. <i>”So I guess I’ll stay here.”</i>", parse);
+		Text.NL();
+		Text.Add("Well, if she’s found herself a home of sorts here, then that’s probably the smartest choice, you tell her. Privately, you consider her words. Maybe she’d be willing to come along with you if you ever offered her a place in your party? It’s something to keep in mind in the future.", parse);
+		Text.Flush();
+		//#Layla can now be visited on Gwendy’s Farm Fields. From 8:00 to 19:00
+		
+		//TODO FLAGS
+	
+		Gui.NextPrompt();
+	}
+	world.TimeStep({minute: 30});
+}
+
+Scenes.Layla.LaylaLeavesGwendy = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Add("<i>”Okay! I’ll be right back!”</i> she says, dashing off at an impressive speed. It takes only a few minutes before she returns, with Gwendy in tow.", parse);
+	Text.NL();
+	Text.Add("<i>”So you’re taking Layla away,”</i> Gwendy states.", parse);
+	Text.NL();
+	Text.Add("You nod and tell her that you are. Was there something she wanted to say to Layla before she left? Or to you, for that matter?", parse);
+	Text.NL();
+	Text.Add("<i>”Just wanted to tell you to watch out for her. She’s a good girl,”</i> she says, then turns to Layla and embraces her in a hug. <i>”Gonna miss having you around, don’t forget to visit, ‘kay?”</i>", parse);
+	Text.NL();
+	Text.Add("<i>”‘Kay!”</i> Layla replies, hugging back.", parse);
+	Text.NL();
+	Text.Add("Well, look at that; certainly not what you would have expected given how they met. The sight brings a smile to your lips.", parse);
+	Text.NL();
+	Text.Add("<i>”Bye, Miss Gwendy. Thank you for everything,”</i> Layla says with a smile.", parse);
+	Text.NL();
+	Text.Add("<i>”Bye, Layla. [playername]. You two take care.”</i> Gwendy waves you off.", parse);
+	Text.NL();
+	Text.Add("Layla has joined your party.", parse, bold);
+	
+	party.AddMember(layla);
+	
+	Text.Flush();
+	
+	//TODO FLAGS
+	
+	Gui.NextPrompt(function() {
+		MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
+	});
+}
