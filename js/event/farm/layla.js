@@ -57,8 +57,10 @@ Layla.prototype.constructor = Layla;
 
 Layla.Met = {
 	NotMet : 0,
-	First : 1,
-	Won : 2
+	First  : 1,
+	Won    : 2,
+	Farm   : 3,
+	Party  : 4
 };
 
 Scenes.Layla = {};
@@ -649,8 +651,7 @@ Scenes.Layla.SecondMeeting = function() {
 		Text.Add("Well, if she’s found herself a home of sorts here, then that’s probably the smartest choice, you tell her. Privately, you consider her words. Maybe she’d be willing to come along with you if you ever offered her a place in your party? It’s something to keep in mind in the future.", parse);
 		Text.Flush();
 		//#Layla can now be visited on Gwendy’s Farm Fields. From 8:00 to 19:00
-		
-		//TODO FLAGS
+		layla.flags["Met"] = Layla.Met.Farm;
 	
 		Gui.NextPrompt();
 	}
@@ -684,7 +685,8 @@ Scenes.Layla.LaylaLeavesGwendy = function() {
 	
 	Text.Flush();
 	
-	//TODO FLAGS
+	layla.flags["Met"] = Layla.Met.Party;
+	layla.flags["Take"] = 0;
 	
 	Gui.NextPrompt(function() {
 		MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
