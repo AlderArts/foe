@@ -31,6 +31,7 @@ Party.prototype.ToStorage = function() {
 	this.SaveMember(storage, kiakai, "kiakai");
 	this.SaveMember(storage, miranda, "miranda");
 	this.SaveMember(storage, terry, "terry");
+	this.SaveMember(storage, layla, "layla");
 	
 	storage["coin"] = this.coin;
 	storage["loc"]  = this.location.SaveSpot;
@@ -55,6 +56,7 @@ Party.prototype.FromStorage = function(storage) {
 	this.LoadMember(storage, kiakai, "kiakai");
 	this.LoadMember(storage, miranda, "miranda");
 	this.LoadMember(storage, terry, "terry");
+	this.LoadMember(storage, layla, "layla");
 	
 	
 	this.coin = parseInt(storage["coin"]) || this.coin;

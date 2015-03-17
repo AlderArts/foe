@@ -179,8 +179,8 @@ Scenes.Gwendy.LoftPrompt = function() {
 Scenes.Gwendy.LoftSexPrompt = function(back, disableSleep) {
 	var parse = {};
 	var options = new Array();
-	Scenes.Gwendy.ChallengeSexWonPrompt(true, options);
-	Scenes.Gwendy.ChallengeSexLostPrompt(true, options);
+	Scenes.Gwendy.ChallengeSexWonPrompt(true, options, disableSleep);
+	Scenes.Gwendy.ChallengeSexLostPrompt(true, options, disableSleep);
 	if(!disableSleep) {
 		options.push({ nameStr : "Sleep",
 			func : function() {
@@ -783,7 +783,7 @@ Scenes.Gwendy.ChallengeSex = function(skillcheck, lose) {
 	}
 }
 
-Scenes.Gwendy.ChallengeSexWonPrompt = function(hangout, options) {
+Scenes.Gwendy.ChallengeSexWonPrompt = function(hangout, options, disableSleep) {
 	var parse = {
 		playername : player.name
 	};
@@ -857,14 +857,14 @@ Scenes.Gwendy.ChallengeSexWonPrompt = function(hangout, options) {
 		if(player.FirstCock()) {
 			options.push({ nameStr : "Titfuck",
 				func : function() {
-					Scenes.Gwendy.ChallengeSexBody(true, hangout);
+					Scenes.Gwendy.ChallengeSexBody(true, hangout, disableSleep);
 				}, enabled : true,
 				tooltip : "Those tits could be fun to play with."
 			});
 		}
 		options.push({ nameStr : "Tease",
 			func : function() {
-				Scenes.Gwendy.ChallengeSexBody(false, hangout);
+				Scenes.Gwendy.ChallengeSexBody(false, hangout, disableSleep);
 			}, enabled : true,
 			tooltip : "Play a little with her body, teasing her."
 		});
@@ -1098,7 +1098,7 @@ Scenes.Gwendy.ChallengeSexHands = function(cock, hangout) {
 }
 
 
-Scenes.Gwendy.ChallengeSexBody = function(titjob, hangout) {
+Scenes.Gwendy.ChallengeSexBody = function(titjob, hangout, disableSleep) {
 	
 	var parse = {
 		playername     : player.name,
@@ -1304,7 +1304,7 @@ Scenes.Gwendy.ChallengeSexBody = function(titjob, hangout) {
 					Text.Add("<i>“Say... are you really just going to leave it like that?”</i> she manages to pant, grinding back against your body. <i>“Come on... I need it...”</i>", parse);
 					Text.Flush();
 					
-					Scenes.Gwendy.LoftSexPrompt();					
+					Scenes.Gwendy.LoftSexPrompt(false, disableSleep);					
 				}, enabled : true,
 				tooltip : "She is ready and more than willing."
 			});
@@ -2142,7 +2142,7 @@ Scenes.Gwendy.ChallengeSexAnalToys = function(toy, hangout, first) {
 	}
 }
 
-Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout, options) {
+Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout, options, disableSleep) {
 	Text.Clear();
 	
 	var parse = {
@@ -2202,7 +2202,7 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout, options) {
 					scenes.AddEnc(function() {
 						Text.Add("As she breaks the kiss, you find yourself slightly aroused. The same could be said for Gwendy and her amorous glance. <i>“Heheh, sorry, [playername], but that's all for now.”</i> She smiles upon noticing your disappointment, though she makes up with another, longer kiss. <i>“Then again, I might not be able to resist so easily... whaddaya say we kick it up a notch?”</i>", parse);
 						Text.Flush();
-						Scenes.Gwendy.LoftSexPrompt();
+						Scenes.Gwendy.LoftSexPrompt(false, disableSleep);
 					}, 1.0, function() { return lossScene >= 1 || wonScene >= 1; });
 					
 					scenes.Get();

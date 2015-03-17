@@ -85,6 +85,14 @@ world.loc.Farm.Fields.description = function() {
 	Text.NL();
 }
 
+// Set up Layla events
+world.loc.Farm.Fields.onEntry = function(x, from) {
+	if(from == world.loc.Plains.Crossroads) {
+		if(Scenes.Layla.FarmMeetingTrigger(true)) return;
+	}
+	PrintDefaultOptions();
+}
+
 world.loc.Farm.Fields.enc = new EncounterTable();
 world.loc.Farm.Fields.enc.AddEnc(function() {
 	return function() {
@@ -171,6 +179,43 @@ world.loc.Farm.Loft.links.push(new Link(
 	}
 ));
 
+world.loc.Farm.Loft.SleepFunc = function() {
+	var parse = {
+		
+	};
+	
+	SetGameState(GameState.Event);
+	
+	Text.Clear();
+	
+	//TODO
+	Text.Add("PLACEHOLDER", parse);
+	Text.NL();
+	Text.Add("You head off to bed", parse);
+	Text.NL();
+	Text.Add("", parse);
+	
+	Text.Flush();
+	
+	var func = function(dream) {
+		world.TimeStep({hour: 8});
+		party.Sleep();
+		
+		if(Scenes.Layla.FarmMeetingTrigger()) return;
+		
+		//TODO
+		Text.Add("You wake up, feeling rested and refreshed.", parse);
+		
+		Text.Flush();
+		PrintDefaultOptions(true);
+	}
+	
+	Gui.NextPrompt(function() {
+		Text.Clear();
+		
+		Scenes.Dreams.Entry(func);
+	});
+}
 
 /*
  * ----------------------

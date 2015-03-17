@@ -3,6 +3,13 @@
  * Define Layla
  * 
  */
+
+Scenes.Layla = {};
+
+/*
+ * TODO Stats
+ * Avatar
+ */
 function Layla(storage) {
 	Entity.call(this);
 
@@ -42,37 +49,32 @@ function Layla(storage) {
 	this.flags["Met"] = Layla.Met.NotMet;
 	this.flags["Take"] = 0;
 
+	this.farmTimer = new Time();
+
 	if(storage) this.FromStorage(storage);
 }
 Layla.prototype = new Entity();
 Layla.prototype.constructor = Layla;
 
-/*
- * TODO Stats
- * Combat mob
- * Act AI
- * Avatar (2?)
- */
-
 
 Layla.Met = {
-	NotMet : 0,
-	First  : 1,
-	Won    : 2,
-	Farm   : 3,
-	Party  : 4
+	NotMet : 0,//Never seen
+	First  : 1,//Met at least once, not defeated
+	Won    : 2,//Defeated
+	Farm   : 3,//Talked to at farm, not in party
+	Party  : 4 //Recruited to party
 };
 
-Scenes.Layla = {};
 
 Layla.prototype.FromStorage = function(storage) {
 	this.FirstVag().virgin   = parseInt(storage.virgin) == 1;
 	this.Butt().virgin       = parseInt(storage.avirgin) == 1;
 	
-	this.LoadPersonalityStats(storage);
-	
 	// Load flags
+	this.LoadPersonalityStats(storage);
 	this.LoadFlags(storage);
+	
+	this.farmTimer.FromStorage(storage.ft);
 }
 
 Layla.prototype.ToStorage = function() {
@@ -82,10 +84,16 @@ Layla.prototype.ToStorage = function() {
 	};
 	
 	this.SavePersonalityStats(storage);
-	
 	this.SaveFlags(storage);
 	
+	storage.ft = this.farmTimer.ToStorage();
+	
 	return storage;
+}
+
+Layla.prototype.Update = function(step) {
+	Entity.prototype.Update.call(this, step);
+	this.farmTimer.Dec(step);
 }
 
 // Schedule
@@ -96,6 +104,14 @@ Layla.prototype.IsAtLocation = function(location) {
 	return false;
 }
 
+
+
+/*
+ * TODO Stats
+ * Combat mob
+ * Act AI
+ * Avatar (2?)
+ */
 
 function LaylaMob() {
 	Entity.call(this);
@@ -161,13 +177,54 @@ LaylaMob.prototype.Act = function(encounter, activeChar) {
 
 
 /*
- * TODO Trigger meetings:
+ * Trigger meetings:
  * 
  * 1. First meeting. On approaching farm from plains. On waking up from sleep on farm.
  * 2. Repeat meeting (if you lost). Same as above.
  * 3. Meeting after defeating Layla.
  * 
  */
+
+Scenes.Layla.FarmMeetingTrigger = function(approach) {
+	if(glade.flags["Visit"] < 2) return false; //TODO: change to after portals open?
+	if(layla.flags["Met"] == Layla.Met.NotMet) {
+		if(approach) {
+			if(world.time.hour >= 11 && world.time.hour < 16) {
+				Scenes.Layla.FirstMeeting(true);
+				return true;
+			}
+			else return false;
+		}
+		else {
+			Scenes.Layla.FirstMeeting(false);
+			return true;
+		}
+	}
+	else if(layla.flags["Met"] == Layla.Met.First) {
+		if(!layla.farmTimer.Expired()) return false;
+		if(approach) {
+			if(world.time.hour >= 11 && world.time.hour < 16) {
+				Scenes.Layla.RepeatMeeting(true);
+				return true;
+			}
+			else return false;
+		}
+		else {
+			Scenes.Layla.RepeatMeeting(false);
+			return true;
+		}
+	}
+	else if(layla.flags["Met"] == Layla.Met.Won) {
+		if(!layla.farmTimer.Expired()) return false;
+		if(approach) {
+			if(world.time.hour >= 4 && world.time.hour < 22) {
+				Scenes.Layla.SecondMeeting();
+				return true;
+			}
+		}
+	}
+	return false;
+}
 
 //approaching/sleeping
 Scenes.Layla.FirstMeeting = function(approach) {
@@ -237,7 +294,6 @@ Scenes.Layla.FirstMeeting = function(approach) {
 }
 
 
-//TODO
 //In case you let her get away. This happens 3 days after that. And continue repeating every 3 days till you win.
 Scenes.Layla.RepeatMeeting = function(approach) {
 	var parse = {
@@ -346,6 +402,8 @@ Scenes.Layla.FarmCombatLoss = function() {
 	
 	world.TimeStep({minute: 30});
 	
+	layla.farmTimer = new Time(0,0,3,0,0);
+	
 	Gui.NextPrompt();
 }
 
@@ -431,7 +489,7 @@ Scenes.Layla.FarmCombatWin = function() {
 				
 				hadSex = true;
 				
-				Scenes.Gwendy.LoftSexPrompt(function() { //TODO back
+				Scenes.Gwendy.LoftSexPrompt(function() {
 					hadSex = false;
 					
 					Text.Clear();
@@ -446,13 +504,13 @@ Scenes.Layla.FarmCombatWin = function() {
 					Text.Add("Goddamnit. She’s chuckles to herself, disappearing from view.", parse);
 					Text.Flush();
 					Gui.NextPrompt();
-				}, true); //disable sleep
-			}, enabled : true, //TODO //Only available if you can normally access her Sex menu, otherwise disable this button.
+				}, true); // disable sleep (or this can potentially trigger the scene with Layla again...)
+			}, enabled : gwendy.Sexed(), //Only available if you can normally access her Sex menu, otherwise disable this button.
 			tooltip : "If she wants to show you her gratitude, you can think of a more enjoyable way for her to do that..."
 		});
 		Gui.SetButtonsFromList(options, false, null);
 		
-		Gui.Callstack.push(function() { //TODO
+		Gui.Callstack.push(function() {
 			Text.Clear();
 			
 			world.TimeStep({hour: 2});
@@ -595,14 +653,15 @@ Scenes.Layla.FarmCombatWin = function() {
 				
 				world.TimeStep({hour: 1});
 				
+				layla.farmTimer = new Time(0,0,3,0,0);
+				
 				Gui.NextPrompt();
 			});
 		});
 	});
 }
 
-//TODO
-//Automatically happens 3 days after you won against Layla. As soon as the PC steps on the field. No time restriction.
+//Automatically happens 3 days after you won against Layla. As soon as the PC steps on the field.
 Scenes.Layla.SecondMeeting = function() {
 	var parse = {
 		playername : player.name
@@ -650,6 +709,7 @@ Scenes.Layla.SecondMeeting = function() {
 		Text.NL();
 		Text.Add("Well, if she’s found herself a home of sorts here, then that’s probably the smartest choice, you tell her. Privately, you consider her words. Maybe she’d be willing to come along with you if you ever offered her a place in your party? It’s something to keep in mind in the future.", parse);
 		Text.Flush();
+		//TODO
 		//#Layla can now be visited on Gwendy’s Farm Fields. From 8:00 to 19:00
 		layla.flags["Met"] = Layla.Met.Farm;
 	
@@ -679,14 +739,14 @@ Scenes.Layla.LaylaLeavesGwendy = function() {
 	Text.NL();
 	Text.Add("<i>”Bye, Layla. [playername]. You two take care.”</i> Gwendy waves you off.", parse);
 	Text.NL();
-	Text.Add("Layla has joined your party.", parse, bold);
+	Text.Add("Layla has joined your party.", parse, "bold");
 	
 	party.AddMember(layla);
 	
 	Text.Flush();
 	
-	layla.flags["Met"] = Layla.Met.Party;
-	layla.flags["Take"] = 0;
+	layla.flags["Met"]  = Layla.Met.Party;
+	layla.flags["Take"] = 0; //Remove variable from save
 	
 	Gui.NextPrompt(function() {
 		MoveToLocation(world.loc.Plains.Crossroads, {minute: 30});
