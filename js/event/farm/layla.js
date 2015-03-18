@@ -62,7 +62,8 @@ Layla.Met = {
 	First  : 1,//Met at least once, not defeated
 	Won    : 2,//Defeated
 	Farm   : 3,//Talked to at farm, not in party
-	Party  : 4 //Recruited to party
+	Party  : 4,//Recruited to party
+	Talked : 5 //Talked to her in party
 };
 
 
@@ -175,6 +176,185 @@ LaylaMob.prototype.Act = function(encounter, activeChar) {
 		Abilities.Physical.Bash.Use(encounter, this, t);
 }
 
+
+// Party interaction
+Layla.prototype.Interact = function(switchSpot) {
+	Scenes.Layla.PartyRegular(switchSpot);
+}
+
+Scenes.Layla.Prompt = function(switchSpot) {
+	var parse = {
+		
+	};
+	
+	var that = layla;
+	
+	var options = new Array();
+	options.push({ nameStr: "Release",
+		func : function() {
+			Text.Clear();
+			Text.Add("[Placeholder] Layla masturbates fiercely, cumming buckets.");
+			
+			world.TimeStep({minute : 10});
+			
+			that.AddLustFraction(-1);
+			Text.Flush();
+			Gui.NextPrompt(function() {
+				that.Interact(switchSpot);
+			});
+		}, enabled : true,
+		tooltip : "Pleasure yourself."
+	});
+	//Equip, stats, job, switch
+	//Layla can't equip things
+	that.InteractDefault(options, switchSpot, false, true, true, true);
+	
+	Gui.SetButtonsFromList(options, true, PartyInteraction);
+}
+
+Scenes.Layla.PartyRegular = function(switchSpot) {
+	var parse = {
+		playername : player.name
+	};
+	
+	var first = layla.flags["Met"] < Layla.Met.Talked;
+	Text.Clear();
+	if(first) {
+		layla.flags["Met"] = Layla.Met.Talked;
+		Text.Add("You ask if Layla has a moment, you’d like to talk to her.", parse);
+		Text.NL();
+		Text.Add("<i>“Sure!”</i> she replies enthusiastically. ", parse);
+		Text.NL();
+		Text.Add("She glances at you for a moment, then bites her lip. It seems she wants to say something, and you urge her with a gentle smile.", parse);
+		Text.NL();
+		Text.Add("She offers a timid <i>“Thank you.”</i>", parse);
+		Text.NL();
+		Text.Add("Curious, you ask her why she’s thanking you.", parse);
+		Text.NL();
+		Text.Add("<i>“I want to find out more about myself. I don’t know who I am, or where I’m from. And I don’t stand a chance out there on my own… So thanks for taking me with you,”</i> she says with a happy grin.", parse);
+		Text.NL();
+		Text.Add("You’re not sure if you’ll have any luck figuring out more about her, but she’s welcome to accompany you for as long as she wants. Granted she doesn’t cause trouble along the way, at least.", parse);
+		Text.NL();
+		Text.Add("<i>“No! Of course not!”</i> she says, waving her hands.", parse);
+		Text.NL();
+		Text.Add("You tell her to calm down, you’re not threatening her of anything - just teasing her a little bit.", parse);
+		Text.NL();
+		Text.Add("<i>“Oh… okay.”</i>", parse);
+		Text.NL();
+		Text.Add("Layla is a very strange creature; as you ponder this, it strikes you that you don’t know exactly <i>what</i> she is. You can’t just keep calling her <i>creature</i> or <i>thing</i>, so you decide to ask her if she knows her species.", parse);
+		Text.NL();
+		Text.Add("<i>“Umm… I’m Layla!”</i>", parse);
+		Text.NL();
+		parse["race"] = Race.Desc(player.Race());
+		Text.Add("Gently, you correct her that’s her name, not what she is. She’s not <i>a</i> Layla, she’s just Layla. You’re a [race], but you are [playername]. Does she understand you?", parse);
+		Text.NL();
+		Text.Add("<i>“I guess. But I… hmm.”</i> She taps her chin with a claw, thinking. After a few moments, she looks to you and shrugs.", parse);
+		Text.NL();
+		Text.Add("So she doesn’t know what species she is. Maybe she could come up with a name for her species then? At least until you figure out what she actually is?", parse);
+		var pNum = switchSpot ? party.NumTotal() : party.Num();
+		if(pNum > 1) {
+			parse["comp"] = pNum == 2 ? party.Get(1).name : "your companions";
+			Text.Add(" Maybe [comp] can offer some insight.", parse);
+			Text.NL();
+			if(party.InParty(kiakai, switchSpot)) {
+				parse["name"] = kiakai.name;
+				parse["heshe"] = kiakai.heshe();
+				Text.Add("[name] takes a moment to look over Layla’s features. <i>“She has elven ears, but she is no elf, I can tell you that,”</i> [heshe] offers.", parse);
+				Text.NL();
+			}
+			if(party.InParty(terry, switchSpot)) {
+				parse["hisher"] = terry.hisher();
+				parse["heshe"] = terry.heshe();
+				Text.Add("Terry scratches [hisher] head as [heshe] circles the confused girl. <i>“I’ve seen all kinds of people, but none like her. Her tail looks kinda like a lizan’s though...”</i>", parse);
+				Text.NL();
+			}
+			if(party.InParty(momo, switchSpot)) {
+				Text.Add("<i>“Well, I don’t really know a lot of races, but I think she looks like a mixed breed of some kind,”</i> Momo muses, tapping her chin thoughtfully.", parse);
+				Text.NL();
+			}
+			if(party.InParty(miranda, switchSpot)) {
+				Text.Add("<i>“Whatever she is, I’m pretty sure I haven’t fucked one before,”</i> Miranda shrugs.", parse);
+				Text.NL();
+			}
+			if(party.InParty(roa, switchSpot)) {
+				if(burrows.LagonDefeated()) { //Regular
+					Text.Add("Roa and Ophelia look at each other in confusion, then shift their gazes back at Layla.", parse);
+					Text.NL();
+					Text.Add("<i>“I’m afraid I’ve never seen anything like her. I could run some tests if you want,”</i> Ophelia offers.", parse);
+					Text.NL();
+					Text.Add("It’s probably best if she doesn’t, at least for now, considering what you’ve seen of Layla’s knack for getting rid of bindings. Plus you’re pretty sure she wouldn’t take kindly to that kind of treatment…", parse);
+					Text.NL();
+					Text.Add("What about Roa?", parse);
+					Text.NL();
+					Text.Add("<i>“Sorry, [playername],”</i> he shrugs.", parse);
+				}
+				else { //Slut
+					Text.Add("The lagomorph siblings share a glance, then stride up to Layla with determined looks. <i>“Ophelia… run tests!”</i> the former alchemist proclaims, while her brother starts eagerly pawing the strange specimen.", parse);
+					Text.NL();
+					Text.Add("You stop the lusty lapins before they have a chance to take things further. They probably wouldn’t figure out anything, even if they did <i>test</i> Layla...", parse);
+				}
+				Text.NL();
+			}
+			if(party.InParty(cveta, switchSpot)) {
+				Text.Add("Quietly, Cveta takes a step back and eyes Layla, the songstress keeping a politely detached air as she examines her without obviously staring.", parse);
+				Text.NL();
+				Text.Add("<i>“It is unfortunate that anthropology was not my forte, or indeed, a field I paid much attention to. The nature of this… person eludes me, [playername].”</i>", parse);
+				Text.NL();
+			}
+		}
+		else
+			Text.NL();
+		Text.Add("Looking her over once more, she has a reptilian tail, but elven ears. Her hands and feet look human enough, save for the claws. Her eyes are red, and her skin has a very unique pattern and feel. It’s like she’s not really any one thing. So maybe that is what you should refer to her as.", parse);
+		Text.NL();
+		Text.Add("Layla looks at you in curiosity, wondering what you have in mind.", parse);
+		Text.NL();
+		Text.Add("Where you come from, there’s a legendary creature that has the parts of several different species, called a chimera. That’s what Layla reminds you of. So, until you both manage to figure out what she really is, you’ll call her a chimera. Does she mind if you call her that, you ask.", parse);
+		Text.NL();
+		Text.Add("<i>“Chimera… I like it!”</i> she says with a grin.", parse);
+		Text.NL();
+		Text.Add("Then that’s what you’ll call her, you reply. Her cheerful enthusiasm is infectious and you find yourself grinning back. It may only be a placeholder, but it feels like you just helped her find a piece of her missing identity.", parse);
+	}
+	else { //Repeat
+		Text.Add("Layla is a… well you’re not sure what she is exactly, so you’re just calling her a chimera for now. She stands at about 5’4” and looks about in curiosity, just taking in her surroundings. It’s not until you draw her attention to yourself that she notices you.", parse);
+		Text.NL();
+		
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			Text.Add("Layla smiles as you wave her over.", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“Hi!”</i> Layla says with a grin.", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“Hmm?”</i> Layla tilts her head to the side a little, wondering what you want with her.", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“Yes, [playername]?”</i>", parse);
+		}, 1.0, function() { return true; });
+		if(!layla.FirstVag().virgin) {
+			scenes.AddEnc(function() {
+				Text.Add("Layla wraps you in a hug, as soon as you are within reach.", parse);
+				Text.NL();
+				Text.Add("Smiling, you hug your chimeric lover back, feeling her warm, smooth skin under your fingers.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“Hey, [playername]. You wanna do it again?”</i> she asks.", parse);
+				Text.NL();
+				Text.Add("You chuckle and tell her that maybe later.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("When you come closer, Layla playfully leaps into the air, crashing into you and nuzzling you affectionately.", parse);
+				Text.NL();
+				Text.Add("You stagger slightly at the impact, but manage to catch her. Wrapping your arms around her, you chuckle and stroke her hair. You’d ask if she was happy to see you, but the answer’s pretty obvious.", parse);
+			}, 1.0, function() { return true; });
+		}
+		
+		scenes.Get();
+	}
+	Text.Flush();
+	
+	Scenes.Layla.Prompt(switchSpot);
+}
 
 /*
  * Trigger meetings:
@@ -672,30 +852,30 @@ Scenes.Layla.SecondMeeting = function() {
 	Text.NL();
 	Text.Add("As you get closer, you wonder why Gwendy doesn’t seem to have had any luck teaching her how to wear clothes yet. She’s still totally naked, just as she had been when you found her. It’s only when you get right up to her that you can see that you were wrong. She <b>is</b> clothed, wearing a simple dress that shows not the slightest ornamentation, but quite effectively preserves her modesty. It’s just that it’s so tight, and so closely matches her own gray and dull silver coloration, that it blends in with her skin.", parse);
 	Text.NL();
-	Text.Add("She turns at your approach  and jumps a little in surprise. A timid smile creeps onto her face as she greets you with a simple, <i>”Hello.”</i>", parse);
+	Text.Add("She turns at your approach  and jumps a little in surprise. A timid smile creeps onto her face as she greets you with a simple, <i>“Hello.”</i>", parse);
 	Text.NL();
 	Text.Add("Smiling encouragingly back at her, you return her greeting and ask her how she’s doing now that Gwendy’s taken her in.", parse);
 	Text.NL();
-	Text.Add("<i>”Oh, I’m doing fine,”</i> she says, then lowers her head. <i>”Sorry for attacking you...”</i>", parse);
+	Text.Add("<i>“Oh, I’m doing fine,”</i> she says, then lowers her head. <i>“Sorry for attacking you...”</i>", parse);
 	Text.NL();
 	Text.Add("You wave it off, assuring her that it’s fine. You were kind of threatening her, after all.", parse);
 	Text.NL();
-	Text.Add("<i>”Oh, miss Gwendy said I should always introduce myself when I meet someone new,”</i> she clears her throat. <i>”Hello, I’m Layla. Nice to meet you… umm...”</i>", parse);
+	Text.Add("<i>“Oh, miss Gwendy said I should always introduce myself when I meet someone new,”</i> she clears her throat. <i>“Hello, I’m Layla. Nice to meet you… umm...”</i>", parse);
 	Text.NL();
 	Text.Add("[playername], you reply. Your name is [playername]. So, she’s called Layla now? That’s a pretty name.", parse);
 	Text.NL();
-	Text.Add("<i>”Thank you! I picked it myself. Your name is pretty too!”</i> she says with a smile.", parse);
+	Text.Add("<i>“Thank you! I picked it myself. Your name is pretty too!”</i> she says with a smile.", parse);
 	Text.NL();
 	Text.Add("You thank her for the compliment. Then, curious, you ask how long she thinks it will take for her to work off the cost of the damage she did to Gwendy’s storeroom.", parse);
 	Text.NL();
-	Text.Add("<i>”It’s already paid for. I’m just helping around a bit.”</i> She smiles.", parse);
+	Text.Add("<i>“It’s already paid for. I’m just helping around a bit.”</i> She smiles.", parse);
 	Text.NL();
 	Text.Add("You figured Gwendy was generous, but all the same, you’re surprised to see Layla’s already paid off her debt.", parse);
 	Text.NL();
 	if(layla.flags["Take"] != 0) {
 		Text.Add("Pushing that thought aside, you ask Layla if she remembers what you and Gwendy had in mind - about her coming with you once her debt was paid off?", parse);
 		Text.NL();
-		Text.Add("<i>”Yes. I’ve been waiting for you. I just want to say goodbye to everyone and we can go.”</i>", parse);
+		Text.Add("<i>“Yes. I’ve been waiting for you. I just want to say goodbye to everyone and we can go.”</i>", parse);
 		Text.NL();
 		Text.Add("So, she’s made some friends here? Of course she can have some time to say goodbye; you can wait for her to do that.", parse);
 		Text.NL();
@@ -705,7 +885,7 @@ Scenes.Layla.SecondMeeting = function() {
 	else {
 		Text.Add("Dismissing the thought, you ask Layla what she intends to do now that she’s free of her debt to Gwendy.", parse);
 		Text.NL();
-		Text.Add("The alien-looking girl stops to think for a moment. <i>”I’d like to find out where I come from, or even who I am. But I don’t stand a chance travelling alone, and everyone has been so nice to me here, even after I was so bad.”</i> She looks down for a moment, but quickly perks up. <i>”So I guess I’ll stay here.”</i>", parse);
+		Text.Add("The alien-looking girl stops to think for a moment. <i>“I’d like to find out where I come from, or even who I am. But I don’t stand a chance travelling alone, and everyone has been so nice to me here, even after I was so bad.”</i> She looks down for a moment, but quickly perks up. <i>“So I guess I’ll stay here.”</i>", parse);
 		Text.NL();
 		Text.Add("Well, if she’s found herself a home of sorts here, then that’s probably the smartest choice, you tell her. Privately, you consider her words. Maybe she’d be willing to come along with you if you ever offered her a place in your party? It’s something to keep in mind in the future.", parse);
 		Text.Flush();
@@ -723,21 +903,21 @@ Scenes.Layla.LaylaLeavesGwendy = function() {
 		playername : player.name
 	};
 	
-	Text.Add("<i>”Okay! I’ll be right back!”</i> she says, dashing off at an impressive speed. It takes only a few minutes before she returns, with Gwendy in tow.", parse);
+	Text.Add("<i>“Okay! I’ll be right back!”</i> she says, dashing off at an impressive speed. It takes only a few minutes before she returns, with Gwendy in tow.", parse);
 	Text.NL();
-	Text.Add("<i>”So you’re taking Layla away,”</i> Gwendy states.", parse);
+	Text.Add("<i>“So you’re taking Layla away,”</i> Gwendy states.", parse);
 	Text.NL();
 	Text.Add("You nod and tell her that you are. Was there something she wanted to say to Layla before she left? Or to you, for that matter?", parse);
 	Text.NL();
-	Text.Add("<i>”Just wanted to tell you to watch out for her. She’s a good girl,”</i> she says, then turns to Layla and embraces her in a hug. <i>”Gonna miss having you around, don’t forget to visit, ‘kay?”</i>", parse);
+	Text.Add("<i>“Just wanted to tell you to watch out for her. She’s a good girl,”</i> she says, then turns to Layla and embraces her in a hug. <i>“Gonna miss having you around, don’t forget to visit, ‘kay?”</i>", parse);
 	Text.NL();
-	Text.Add("<i>”‘Kay!”</i> Layla replies, hugging back.", parse);
+	Text.Add("<i>“‘Kay!”</i> Layla replies, hugging back.", parse);
 	Text.NL();
 	Text.Add("Well, look at that; certainly not what you would have expected given how they met. The sight brings a smile to your lips.", parse);
 	Text.NL();
-	Text.Add("<i>”Bye, Miss Gwendy. Thank you for everything,”</i> Layla says with a smile.", parse);
+	Text.Add("<i>“Bye, Miss Gwendy. Thank you for everything,”</i> Layla says with a smile.", parse);
 	Text.NL();
-	Text.Add("<i>”Bye, Layla. [playername]. You two take care.”</i> Gwendy waves you off.", parse);
+	Text.Add("<i>“Bye, Layla. [playername]. You two take care.”</i> Gwendy waves you off.", parse);
 	Text.NL();
 	Text.Add("Layla has joined your party.", parse, "bold");
 	
