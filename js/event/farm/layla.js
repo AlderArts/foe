@@ -48,6 +48,7 @@ function Layla(storage) {
 	
 	this.flags["Met"] = Layla.Met.NotMet;
 	this.flags["Take"] = 0;
+	this.flags["Skin"] = 0;
 
 	this.farmTimer = new Time();
 
@@ -105,6 +106,9 @@ Layla.prototype.IsAtLocation = function(location) {
 	return false;
 }
 
+Layla.prototype.Virgin = function() {
+	return this.FirstVag().virgin;
+}
 
 
 /*
@@ -190,6 +194,35 @@ Scenes.Layla.Prompt = function(switchSpot) {
 	var that = layla;
 	
 	var options = new Array();
+	
+	options.push({ nameStr : "Talk",
+		func : function() {
+			Text.Clear();
+			Text.Add("Layla tilts her head to the side, looking at you inquisitively. Her long tail sways behind her as she waits to hear what you want to talk to her about.", parse);
+			
+			Scenes.Layla.TalkPrompt(switchSpot);
+		}, enabled : true,
+		tooltip : "You’d like to talk about some things with Layla, if she doesn’t mind."
+	});
+	//TODO
+	options.push({ nameStr : "Sex",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+			
+			Scenes.Layla.SexPrompt(switchSpot);
+		}, enabled : false, //TODO
+		tooltip : ""
+	});
+	options.push({ nameStr : "Appearance",
+		func : function() {
+			Scenes.Layla.Appearance(switchSpot);
+		}, enabled : true,
+		tooltip : "You want to take a closer look at Layla’s body."
+	});
+	/*
 	options.push({ nameStr: "Release",
 		func : function() {
 			Text.Clear();
@@ -205,11 +238,216 @@ Scenes.Layla.Prompt = function(switchSpot) {
 		}, enabled : true,
 		tooltip : "Pleasure yourself."
 	});
+	*/
 	//Equip, stats, job, switch
 	//Layla can't equip things
 	that.InteractDefault(options, switchSpot, false, true, true, true);
 	
 	Gui.SetButtonsFromList(options, true, PartyInteraction);
+}
+
+Scenes.Layla.TalkPrompt = function(switchSpot) {
+	var parse = {
+		
+	};
+	
+	//[name]
+	var options = new Array();
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("PLACEHOLDER: Okay~", parse);
+		Text.NL();
+		Text.Add("", parse);
+		Text.NL();
+		Text.Flush();
+		
+		Scenes.Layla.Prompt(switchSpot);
+	});
+}
+
+Scenes.Layla.FirstTimeSkinShift = function() {
+	var parse = {
+		
+	};
+
+	Text.Add("You almost don’t register her words. Staring at her naked body, you still can’t believe what you just saw, even with everything else you’ve seen in this world. Snapping your gaze back to meet her own politely bemused stare, you ask her how she did that.", parse);
+	Text.NL();
+	Text.Add("<i>“Did what?”</i> she asks in confusion.", parse);
+	Text.NL();
+	Text.Add("Her clothes - they just sort of melted into her skin. How did she make them do that?", parse);
+	Text.NL();
+	Text.Add("<i>“Oh, that? Miss Gwendy said I shouldn’t walk around naked, so I shifted my skin to look like a few clothes she had.”</i> She demonstrates it by shifting her clothes back on, then off again.", parse);
+	Text.NL();
+	Text.Add("She... shifted her skin? Shaking your head in bewilderment, you ask her how she does that; you’ve never seen anyone who could do that before!", parse);
+	Text.NL();
+	Text.Add("Layla shrugs. <i>“I don’t know. I just do. It’s like raising your hand I guess...”</i>", parse);
+	Text.NL();
+	Text.Add("Well, it seems she’s not going to be able to clear up that little mystery. You’ll just have to accept that the ability is part of who she is. With a chuckle, you quip that Layla is just full of surprises. Back to business then...", parse);
+	Text.NL();
+	
+	layla.flags["Skin"] = 1;
+}
+
+Scenes.Layla.Appearance = function(switchSpot) {
+	var parse = {
+		name : kiakai.name,
+		playername : player.name
+	};
+	
+	Text.Clear();
+	if(layla.flags["Skin"] == 0) {
+		Text.Add("You watch in amazement as Layla’s clothes seemingly shift off her body, becoming part of her skin and revealing her pert nipples and virgin pussy for you to gaze at.", parse);
+		Text.NL();
+		Text.Add("<i>“Is this good?”</i>", parse);
+		Text.NL();
+		
+		Scenes.Layla.FirstTimeSkinShift();
+	}
+	else {
+		Text.Add("Layla isn’t wearing any real clothing, and the clothing she appears to wear is nothing but her own skin, shifted to appear as clothing. She wills it back to her <i>naked</i> appearance, exposing her assets to you without shame or embarrassment.", parse);
+		Text.NL();
+		Text.Add("<i>“Is this good?”</i>", parse);
+		Text.NL();
+		Text.Add("That’s perfect, you assure her, adding a nod of approval for emphasis. Layla’s lips curl into a proud smile and she stands just a little bit straighter. This gives you free rein to start looking her over.", parse);
+	}
+	Text.NL();
+	if(layla.Virgin()) {
+		Text.Add("You’d be lying if you claimed to know precisely what species she is. But, as far as you can tell, she’s female, complete with a virginal pussy lying between her thighs.", parse);
+	}
+	else {
+		Text.Add("Though you’re still not sure what she is, you know that she’s more than she seems. She’s presenting herself as female now, but you’re intimately aware that she’s more than that. Hidden within a secret groove just above her vagina, concealed by her shifting skin, lies a retractable phallus. When exposed, it looks perfectly human, save perhaps its color, which is an indigo blue shade. She has demonstrated she can make its base swell into an impromptu knot as well. From what you’ve seen, you’d say it’s twelve inches long and two and a half inches thick.", parse);
+		Text.NL();
+		Text.Add("A second such phallus conceals itself within the tip of her long tail, like a lewd version of a stinger. Though much smaller than the first phallus - only six inches long and an inch thick - it is otherwise identical.", parse);
+		Text.NL();
+		Text.Add("Highlighting her alien nature, you know for a fact that her control over her genitalia is uncanny. She can manipulate her vaginal walls, altering their capacity and texture, as well as moving them when you couple. Likewise, she can make her phalluses erect at will, whether they are exposed or not.", parse);
+	}
+	Text.NL();
+	Text.Add("Having taken in her gender, you focus your attention on her head. In all honesty, looking at Layla’s face alone, you’d think she was an elf. At first glance, she has the same cast to her features as [name] does, especially when it comes to having the same long, slender, pointed ears. But the small horns sweeping back from her forehead quickly dash any notion of her being an elf.", parse);
+	Text.NL();
+	Text.Add("Layla’s skin is a dark gray. Not charcoal colored, but closer to black than white - something like very dark ashes. Naked as she is, you can easily take in that she has two-toned skin. While most of her skin is darker, starting in a small triangle on her chin and sweeping down her torso, widening to encompass her breasts before narrowing so that it ends on her inner thighs, the skin is a much lighter shade of gray. Almost a drab silver, really.", parse);
+	Text.NL();
+	Text.Add("Her eyes are human enough - with round pupils and white sclera - so long as you look past the deep crimson of her irises. Raven black hair falls in a shoulder-length mane from her head, trailing over her neck. When she grins, the teeth she reveals are perfectly human-like. Strangely, this seems to make her <b>more</b> unusual rather than less.", parse);
+	Text.NL();
+	Text.Add("Finished taking in her features, you allow your gaze to sweep down towards her chest.", parse);
+	Text.NL();
+	if(layla.Virgin()) {
+		Text.Add("A perky set of dun-silver C-cups sit upon her chest, each adorned with a large, prominently erect nipple the same dark gray color as the rest of her skin. Other than their coloration and the size - and seemingly permanent erection - her nipples seem quite human.", parse);
+		Text.NL();
+		Text.Add("Layla watches you gazing at her breasts, but otherwise displays no reaction. You simply shrug and allow your eyes to drift down her body.", parse);
+	}
+	else {
+		Text.Add("Layla’s boobs are a large C-cup, but that’s because she feels that’s the most comfortable, yet noticeable, of sizes. When she feels like it, she can expand them, inflating herself up to a large E-cup. If that isn’t alien enough, the large, permanently erect nipples she has can be teased open, revealing vagina-like orifices filled with slick lubricating juices. Her breast skin is dull silver in color, whilst her nipples are dark gray on the outside and blue like her cocks on the inside.", parse);
+		Text.NL();
+		Text.Add("She notices where you are gazing and puffs out her chest, moving her arms to push them together enticingly.", parse);
+		Text.NL();
+		Text.Add("You chuckle softly and shake your head; for now, you just want to look. Layla pouts and you allow your view to drift down her body.", parse);
+	}
+	Text.NL();
+	// Pregnancy
+	var womb = terry.PregHandler().Womb();
+	var preg = womb && womb.pregnant;
+	var stage = preg ? womb.progress : null;
+	if(preg && stage > 0.8) {
+		Text.Add("Layla’s stomach bulges out to an almost obscene degree, though her elastic skin shows not a single stretch-mark. The child within is nearly full-grown now, soon to make its entry into the world.", parse);
+		Text.NL();
+		Text.Add("<i>“Anytime now,”</i> she says, lightly rubbing her bulge.", parse);
+	}
+	else if(preg && stage > 0.6) {
+		Text.Add("A great belly swells out from Layla’s midriff, easily comparable to a full-term human pregnancy. But you have a feeling she’s not done growing quite yet...", parse);
+		Text.NL();
+		Text.Add("<i>“Almost there,”</i> Layla says, gently rubbing her belly.", parse);
+	}
+	else if(preg && stage > 0.4) {
+		Text.Add("Layla’s formerly trim stomach has grown considerably distended. A full orb of flesh hangs below her breasts now, sheltering a growing child within.", parse);
+		Text.NL();
+		Text.Add("Layla smiles softly but doesn’t say anything.", parse);
+	}
+	else if(preg && stage > 0.2) {
+		Text.Add("Your inhuman lover has grown a very distinct potbelly. It’s not so large yet, but she’s visibly rounded at the waist. You have a strong suspicion that she’s pregnant.", parse);
+		Text.NL();
+		Text.Add("<i>“We should prepare,”</i> she says, rubbing her belly. Seems like your suspicion has just been confirmed.", parse);
+	}
+	else {
+		Text.Add("Layla’s belly is trim and flat - not muscular, but clearly well-toned and slender. Strangely, she doesn’t have a bellybutton. With nothing in particular to hold your gaze there, you continue looking her over.", parse);
+	}
+	Text.NL();
+	Text.Add("You ask Layla if she would turn around for you; you need a better look at her back.", parse);
+	Text.NL();
+	Text.Add("Her tail sways to and fro, and she starts turning for you, deliberately slow. There is an undeniable grace to her movements, as she finishes turning. <i>“Better?”</i>", parse);
+	Text.NL();
+	if(layla.Virgin())
+		Text.Add("Much better, you assure her, nodding your thanks for emphasis. Since her tail is still swishing back and forth, it naturally draws your attention first.", parse);
+	else
+		Text.Add("Layla’s tail brushes its very tip tenderly against your cheek, making your smile fit to match the grin she herself is sporting. It’s certainly a flattering angle for her, you reply, and reach up to stroke the sensitive tip of her tail with your fingers. Needless to say, you resume your inspection with the appendage continuing to caress you.", parse);
+	Text.NL();
+	Text.Add("All in all, it’s fairly reptilian-looking. Discounting that she has smooth skin as opposed to scales, of course. It’s clearly prehensile, starting with a broader base and ending in a narrow tip. You estimate its length to be about four and a half feet long, and it moves with an almost eel-like sinuousness.", parse);
+	Text.NL();
+	if(!layla.Virgin()) {
+		Text.Add("Curious, you close your fingers around her tail tip and bring it in for a closer look. Even though you know she’s hiding a secondary cock inside her tail, there isn’t the slightest clue to its presence.", parse);
+		Text.NL();
+		Text.Add("Your inquisitive fingers try to disprove what your eyes are telling you, eliciting a moan of appreciation, but they find nothing. No hidden groove, no concealed slit, no muscle-lips, nothing to show where it emerges. You’re not even certain she doesn’t simply transforms her tail-tip when she needs her tail-cock.", parse);
+		Text.NL();
+		Text.Add("<i>“That feels pretty nice, [playername]. Do you want it?”</i> she asks with a smile.", parse);
+		Text.NL();
+		Text.Add("Not at the moment, no, you reply. You’re not quite done with what you’re doing yet. Petting her tail one last time, you let it go.", parse);
+		Text.NL();
+		Text.Add("<i>“Pity,”</i> she says, looking back at you with a smile.", parse);
+		Text.NL();
+	}
+	Text.Add("Having followed her tail all the way to its base, you take this moment to admire Layla’s rear. It’s not huge, but it’s round and perky in its curviness, meshing perfectly with her build. ", parse);
+	if(!layla.Virgin())
+		Text.Add("You know she can plump it up at will, just like she can with her breasts, but she’s most comfortable with it as it is. ", parse);
+	Text.Add("Her hips are similar in stature - wide enough to give her a feminine shapeliness, but not so wide as to look absurd on her slender build.", parse);
+	Text.NL();
+	if(layla.Virgin()) {
+		Text.Add("Touching her is tempting, but you’re not sure how she would react. As you try to move away, her tail loops around a wrist, pulling you forward as she bends slightly forward. <i>“It’s okay,”</i> she says, looking back at you.", parse);
+	}
+	else {
+		Text.Add("Layla’s butt is just begging to be touched, and without thinking you reach out and grope one svelte cheek. As your fingers close around the curvaceous flesh, you can feel the tone of her muscles, firm and strong beneath the shapely exterior.", parse);
+		Text.NL();
+		Text.Add("You hear a sharp intake of breath from the chimeric girl, and a moment later she bends forward slightly, thrusting her buttcheeks into your palms. She looks back at you with a soft smile and nods.", parse);
+	}
+	Text.NL();
+	Text.Add("Since she has given you such obvious permission, you see no reason to hold back. With both hands now, you start to explore her rear. Running your fingers over her hips, squeezing her butt-flesh between your fingers. Affectionately, you compliment the chimera on her butt; she’s got a very nice specimen indeed back here.", parse);
+	Text.NL();
+	Text.Add("She giggles softly at your compliment. <i>“Thank you. I like yours too!”</i>", parse);
+	Text.NL();
+	if(layla.Virgin()) {
+		Text.Add("You can’t help a soft chuckle at her words and thank her for the compliment.", parse);
+		Text.NL();
+		Text.Add("She wags her tail a bit, then lets it rest on your shoulder.", parse);
+	}
+	else {
+		Text.Add("For a moment you ponder if that was an innocent compliment or if she meant something more by it. Your gaze sweeps over her swishing tail-tip and to the cleft between her legs, where you know her two cocks are hidden. It’s best not to think too hard about it...", parse);
+	}
+	Text.NL();
+	Text.Add("You bend  slightly to get a better view, and your gaze falls upon the womanly flower lying hidden between Layla’s thighs. Even from this angle, you can make it out quite clearly. Visually, it looks perfectly human, so long as you ignore the dark gray of its labia against the dun-silver of her surrounding flesh.", parse);
+	Text.NL();
+		if(!layla.Virgin()) {
+		Text.Add("As you’ve learned, there’s more than meets the eye to her womanhood. In addition to its colors - dark gray lips, indigo blue interior - Layla can also manipulate her walls at will, allowing her to milk, grip and even suckle without moving the rest of her body.", parse);
+		Text.NL();
+		Text.Add("It’s also impossibly elastic. There doesn’t seem to be any limit to how far she can stretch without feeling pain, handling even the biggest of insertions with pleasure and ease.", parse);
+		Text.NL();
+	}
+	Text.Add("From where you are, it’s natural to move on to her legs. They’re human in shape, slender and shapely like a woman’s should be. And yet, there’s a sense of power to them, of muscle hidden beneath the curves. Without thinking about it, you reach out and place a hand on her calf, feeling the sinews ripple beneath her gray skin.", parse);
+	Text.NL();
+	Text.Add("Finally, your gaze ends up on Layla’s feet. Like her legs, they’re human at first glance. But the toes are just slightly... off. They’re a joint longer than they should be, and they’re capped in small claws. They’re feet designed for running, and for climbing.", parse);
+	Text.NL();
+	Text.Add("Satisfied with your inspection, you stand up straight again and thank Layla for satisfying your curiosity.", parse);
+	Text.NL();
+	Text.Add("<i>“Any time, [playername],”</i> she says, shifting her skin back into makeshift clothes.", parse);
+	Text.Flush();
+	
+	Scenes.Layla.Prompt(switchSpot);
 }
 
 Scenes.Layla.PartyRegular = function(switchSpot) {
@@ -331,7 +569,7 @@ Scenes.Layla.PartyRegular = function(switchSpot) {
 		scenes.AddEnc(function() {
 			Text.Add("<i>“Yes, [playername]?”</i>", parse);
 		}, 1.0, function() { return true; });
-		if(!layla.FirstVag().virgin) {
+		if(!layla.Virgin()) {
 			scenes.AddEnc(function() {
 				Text.Add("Layla wraps you in a hug, as soon as you are within reach.", parse);
 				Text.NL();
