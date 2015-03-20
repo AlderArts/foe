@@ -49,6 +49,7 @@ function Layla(storage) {
 	this.flags["Met"] = Layla.Met.NotMet;
 	this.flags["Take"] = 0;
 	this.flags["Skin"] = 0;
+	this.flags["Talk"] = 0; //Bitmask
 
 	this.farmTimer = new Time();
 
@@ -65,6 +66,10 @@ Layla.Met = {
 	Farm   : 3,//Talked to at farm, not in party
 	Party  : 4,//Recruited to party
 	Talked : 5 //Talked to her in party
+};
+
+Layla.Talk = {
+	Sex : 1 //Talked about sex
 };
 
 
@@ -204,17 +209,22 @@ Scenes.Layla.Prompt = function(switchSpot) {
 		}, enabled : true,
 		tooltip : "You’d like to talk about some things with Layla, if she doesn’t mind."
 	});
-	//TODO
+	var tooltip = layla.Virgin() ? "It’s time to make good on your promise and teach her about proper sex." : "You’re feeling a tad horny, and you doubt the pretty chimera would have anything against some intimacy.";
 	options.push({ nameStr : "Sex",
 		func : function() {
-			Text.Clear();
-			Text.Add("", parse);
-			Text.NL();
-			Text.Flush();
-			
-			Scenes.Layla.SexPrompt(switchSpot);
-		}, enabled : false, //TODO
-		tooltip : ""
+			if(layla.Virgin())
+				Scenes.Layla.SexFirstTime();
+			else {
+				Text.Clear();
+				Text.Add("<i>“I’d love to!”</i> She exclaims, happily clinging onto you.", parse);
+				Text.NL();
+				Text.Add("You stroke her back and chuckle, remarking that you thought she’d be happy. Now, as for what you want to do to her this time...", parse);
+				Text.Flush();
+
+				Scenes.Layla.SexPrompt(switchSpot);
+			}
+		}, enabled : layla.flags["Talk"] & Layla.Talk.Sex,
+		tooltip : tooltip
 	});
 	options.push({ nameStr : "Appearance",
 		func : function() {
@@ -246,7 +256,98 @@ Scenes.Layla.Prompt = function(switchSpot) {
 	Gui.SetButtonsFromList(options, true, PartyInteraction);
 }
 
+
+//TODO
 Scenes.Layla.TalkPrompt = function(switchSpot) {
+	var parse = {
+		playername : player.name
+	};
+	
+	var options = new Array();
+	
+	
+	var tooltip = layla.Virgin() ? "Despite her apparent innocence, Layla does have a nice body. So why not proposition the chimeric beauty for a little romp in the hay?" : "Now that Layla knows what it is, what does she think about sex?";
+	options.push({ nameStr : "Sex",
+		func : function() {
+			Text.Clear();
+			
+			layla.flags["Talk"] |= Layla.Talk.Sex;
+			
+			if(layla.Virgin()) {
+				Text.Add("<i>“What is sex?”</i> she asks in confusion.", parse);
+				Text.NL();
+				Text.Add("Okay... she’s a bit more innocent than she looks. Now, how to put this in terms she’ll understand?", parse);
+				Text.NL();
+				Text.Add("After a few moments of thought, you explain to Layla that sex is something that two people do together that brings them both pleasure.", parse);
+				Text.NL();
+				Text.Add("<i>“Pleasure? Like something I like?”</i>", parse);
+				Text.NL();
+				Text.Add("Well, yes, more or less.", parse);
+				Text.NL();
+				Text.Add("<i>“I like being with you!”</i> she states happily.", parse);
+				Text.NL();
+				Text.Add("Well, that is pleasing to hear. But, just being with someone you like isn’t the same thing as sex. That’s... well, it’s difficult to put into words. But you can show her, if she’s willing?", parse);
+				Text.NL();
+				Text.Add("<i>“Yes, please!”</i>", parse);
+				Text.NL();
+				Text.Add("Alright then, you promise to show her, but you’ll do so another time. Can she bear it and wait until you’re ready?", parse);
+				Text.NL();
+				Text.Add("<i>“Oh, okay.”</i>", parse);
+				Text.NL();
+				Text.Add("You muse to yourself that perhaps the best way to introduce her to the act would be something more traditional. ", parse);
+				if(player.FirstCock() || player.Strapon())
+					Text.Add("Luckily you’re already equipped for it, so it’s just a matter of approaching her at the right time.", parse);
+				else
+					Text.Add("You should probably get a toy or something - maybe a strap-on - to help you with the lesson. You could introduce her to lesbian sex, but you feel it’s best to explain how it’s supposed to go between a man and woman first.", parse);
+			}
+			else { //not virgin
+				Text.Add("<i>“I love it! I hope we can do it again!”</i>", parse);
+				Text.NL();
+				Text.Add("You chuckle softly at her enthusiasm. Of course you can do it again. But you were hoping for a little more detail on what she thinks of it than that.", parse);
+				Text.NL();
+				Text.Add("She looks at you curiously then stops to think about it for a moment, finally… she shrugs. <i>“I love it. And I’d like to learn more about it, but I’m not sure what else to say...”</i>", parse);
+				Text.NL();
+				Text.Add("Not much for words, is she? But you smile and thank her, telling her that if that’s all she has to say on the matter, that’s good enough for you. You’re happy she trusts you enough to share her feelings with you.", parse);
+				Text.NL();
+				Text.Add("<i>“Sure, any time, [playername]. But...”</i>", parse);
+				Text.NL();
+				Text.Add("Yes?", parse);
+				Text.NL();
+				Text.Add("<i>“When can we do it again?”</i>", parse);
+				Text.NL();
+				Text.Add("Chuckling at the expression on her face, you promise her that it’ll be soon.", parse);
+			}
+			Text.Flush();
+			Scenes.Layla.TalkPrompt(switchSpot);
+		}, enabled : true,
+		tooltip : tooltip
+	});
+	/* //TODO
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	*/
+	
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("PLACEHOLDER: Okay~", parse);
+		Text.NL();
+		Text.Add("", parse);
+		Text.NL();
+		Text.Flush();
+		
+		Scenes.Layla.Prompt(switchSpot);
+	});
+}
+
+//TODO
+Scenes.Layla.SexPrompt = function(switchSpot) {
 	var parse = {
 		
 	};
@@ -262,17 +363,42 @@ Scenes.Layla.TalkPrompt = function(switchSpot) {
 		}, enabled : true,
 		tooltip : ""
 	});
-	Gui.SetButtonsFromList(options, true, function() {
-		Text.Clear();
-		Text.Add("PLACEHOLDER: Okay~", parse);
-		Text.NL();
-		Text.Add("", parse);
-		Text.NL();
-		Text.Flush();
-		
-		Scenes.Layla.Prompt(switchSpot);
-	});
+	Gui.SetButtonsFromList(options, false, null);
+	
+	Scenes.Layla.Prompt(switchSpot);
 }
+
+Scenes.Layla.SexFirstTime = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.Flush();
+}
+
+/*
+ * 
+ */
 
 Scenes.Layla.FirstTimeSkinShift = function() {
 	var parse = {
