@@ -19,6 +19,8 @@ Images.lei          = "data/lei_avatar.png";
 Images.terry        = "data/terry.png";
 Images.terry_c      = "data/terry_c.png";
 Images.momo         = "data/momo.png";
+//Images.layla        = "data/layla.png";
+//Images.layla_f      = "data/layla_f.png";
 Images.uru1         = "data/uru1.png";
 
 Images.lagon_r      = "data/lagon_r.png";

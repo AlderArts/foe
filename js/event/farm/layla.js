@@ -16,7 +16,7 @@ function Layla(storage) {
 	// Character stats
 	this.name = "Layla";
 	
-	//this.avatar.combat = Images.maria;
+	//this.avatar.combat = Images.layla;
 	
 	/* TODO
 	this.maxHp.base        = 100;
@@ -131,7 +131,7 @@ function LaylaMob() {
 	this.monsterName       = "the creature";
 	this.MonsterName       = "The creature";
 	
-	//this.avatar.combat = Images.maria;
+	//this.avatar.combat = Images.layla_f;
 	
 	/* TODO
 	this.maxHp.base        = 100;
