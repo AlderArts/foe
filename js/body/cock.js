@@ -70,6 +70,12 @@ Cock.prototype.Volume = function() {
 	var r = this.thickness.Get() / 2;
 	return Math.PI * r * r * this.length.Get();
 }
+Cock.prototype.Knot = function() {
+	return this.knot != 0;
+}
+Cock.prototype.Sheath = function() {
+	return this.sheath != 0;
+}
 
 Cock.prototype.noun = function() {
 	var noun;

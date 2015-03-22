@@ -17,6 +17,17 @@ Gender.Desc = function(gender) {
 	default: return "genderless";
 	}
 }
+Gender.Noun = function(gender) {
+	var r;
+	switch(gender) {
+	case Gender.male: return "man";
+	case Gender.female: return "woman";
+	case Gender.herm: r = Rand(2);
+		if(r == 0) return "herm";
+		else return "herm";
+	default: return "neuter";
+	}
+}
 Gender.Short = function(gender) {
 	var r;
 	switch(gender) {
