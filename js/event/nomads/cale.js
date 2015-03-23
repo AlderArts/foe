@@ -836,7 +836,7 @@ Scenes.Cale.TalkPast = function() {
 		Text.NL();
 		Text.Add("<i>“I guess I’ll just go ahead and say that I wasn’t always such a nice guy. Back in the day I was running with some rather… unsavory sorts. Thugs, thieves, robbers and the likes. The wrong crowd, if you will. I wasn’t born in a very golden cradle, in fact I don’t think I actually had a cradle to begin with, but life was good. Or as good as it could be for a kid living in the slums. Never met my mum, and dad worked hard at the docks to keep us fed.”</i> He smiles softly remembering the good old days.", parse);
 		Text.NL();
-		Text.Add("<i>“But yeah… might be a little cliche, but my dad was involved in an accident. Box full of iron fittings fell right over him. Got his leg smashed to bits. After that life got harder, cuz dad couldn’t work anymore and we didn’t have enough coins to afford a decent healer to look at his leg. So, that’s about when I started looking for work. I should have been so lucky to find actual work… but in my case, work found me.”</i>", parse);
+		Text.Add("<i>“But yeah… might be a little cliché, but my dad was involved in an accident. Box full of iron fittings fell right over him. Got his leg smashed to bits. After that life got harder, cuz dad couldn’t work anymore and we didn’t have enough coins to afford a decent healer to look at his leg. So, that’s about when I started looking for work. I should have been so lucky to find actual work… but in my case, work found me.”</i>", parse);
 		Text.NL();
 		Text.Add("You have two really good ideas about what that 'work' might have been, but you ask him to explain what happened.", parse);
 		Text.NL();
