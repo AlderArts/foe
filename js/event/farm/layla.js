@@ -862,7 +862,7 @@ Scenes.Layla.SexFirstTime = function() {
 						else gen += "Your";
 						gen += " [vag] juices itself";
 					}
-					gen = Text.Parse(gen, parse);
+					parse["gen"] = Text.Parse(gen, parse);
 					Text.Add("It concentrates itself in your loins, a burning that makes you moan with need. [gen] as lust swirls through your veins. You pant heavily at the warmth inside of you.", parse);
 					Text.NL();
 					Text.Add("<i>“Did you like it?”</i> Layla asks innocently.", parse);
