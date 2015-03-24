@@ -12,7 +12,8 @@ PregType = {
 	
 	Terry     : 100,
 	Roa       : 101,
-	Lagon     : 102
+	Lagon     : 102,
+	Layla     : 103
 };
 
 // Progress
@@ -178,10 +179,24 @@ PregnancyHandler.prototype.Womb = function(opts) {
  */
 PregnancyHandler.prototype.IsPregnant = function(opts) {
 	opts = opts || {};
-	var slot = opts.slot || PregnancyHandler.Slot.Vag;
-	var womb = this.Womb(slot);
-
-	return womb.pregnant;
+	var slot = opts.slot;
+	if(slot) {
+		return this.Womb(slot).pregnant;
+	}
+	else {
+		var preg = false;
+		var ent = this.entity;
+		
+		var vags = ent.AllVags();
+		for(var i = 0; i < vags.length; ++i) {
+			var womb = vags[i].womb;
+			preg = preg || womb.pregnant;
+		}
+		var womb = ent.Butt().womb;
+		preg = preg || womb.pregnant;
+		
+		return preg;
+	}
 }
 
 PregnancyHandler.prototype.MPregEnabled = function() {
