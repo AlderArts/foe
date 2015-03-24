@@ -225,14 +225,14 @@ Scenes.Layla.Prompt = function(switchSpot) {
 		func : function() {
 			Text.Clear();
 			Text.Add("Layla tilts her head to the side, looking at you inquisitively. Her long tail sways behind her as she waits to hear what you want to talk to her about.", parse);
-			
+			Text.Flush();
 			Scenes.Layla.TalkPrompt(switchSpot);
 		}, enabled : true,
 		tooltip : "You’d like to talk about some things with Layla, if she doesn’t mind."
 	});
 	var tooltip = layla.Virgin() ? "It’s time to make good on your promise and teach her about proper sex." : "You’re feeling a tad horny, and you doubt the pretty chimera would have anything against some intimacy.";
 	var enabled = layla.flags["Talk"] & Layla.Talk.Sex;
-	if(layla.Virgin()) enabled &= (player.FirstCock() || player.Strapon());
+	if(layla.Virgin()) enabled = enabled && (player.FirstCock() || player.Strapon());
 	options.push({ nameStr : "Sex",
 		func : function() {
 			if(layla.Virgin())
@@ -431,9 +431,15 @@ Scenes.Layla.SexPrompt = function(switchSpot) {
 		tooltip : ""
 	});
 	*/
-	Gui.SetButtonsFromList(options, false, null);
-	
-	Scenes.Layla.Prompt(switchSpot);
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("PLACEHOLDER", parse);
+		Text.NL();
+		Text.Add("", parse);
+		Text.NL();
+		Text.Flush();
+		Scenes.Layla.Prompt(switchSpot);
+	});	
 }
 
 Scenes.Layla.SexFirstTime = function() {
