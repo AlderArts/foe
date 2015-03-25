@@ -1385,7 +1385,7 @@ Body.prototype.HipsDesc = function(plural) {
 	}
 	if(size >= 2 && size < 5) {
 		adjs.push("well-proportioned");
-		if(this.femininity.Get() < 0)
+		if(this.femininity.Get() > 0)
 			adjs.push("girly");
 		adjs.push("unnoticable");
 	}
@@ -1396,7 +1396,7 @@ Body.prototype.HipsDesc = function(plural) {
 		adjs.push("flared");
 	}
 	if(size >= 8 && size < 17) {
-		if(this.femininity.Get() < 0) {
+		if(this.femininity.Get() > 0) {
 			adjs.push("womanly");
 			adjs.push("vulptous");
 		}
@@ -1406,7 +1406,7 @@ Body.prototype.HipsDesc = function(plural) {
 	if(size >= 15) {
 		adjs.push("absurdly wide");
 		adjs.push("cow-like");
-		if(this.femininity.Get() < 0)
+		if(this.femininity.Get() > 0)
 			adjs.push("broodmother");
 	}
 	var adj = adjs[Rand(adjs.length)];
