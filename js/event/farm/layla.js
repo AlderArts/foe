@@ -1117,8 +1117,8 @@ Scenes.Layla.SexCatchAnal = function() {
 				Text.NL();
 				
 				Sex.Anal(layla, player);
-				player.FuckAnal(player.Butt(), layla.FirstCock(), 3);
-				layla.Fuck(layla.FirstCock(), 3);
+				player.FuckAnal(player.Butt(), layla.FirstCock(), 1);
+				layla.Fuck(layla.FirstCock(), 1);
 				
 				Text.Add("A groan of pleasure wrings itself from your throat as you feel your [anus] spreading its lips wide to receive the chimera’s alien cock. Thick juices ooze over your interior, drooling from her tailcock like a leaky faucet, and each inch pushed inside sends them cascading down into your bowels.", parse);
 				Text.NL();
@@ -1151,6 +1151,11 @@ Scenes.Layla.SexCatchAnal = function() {
 				Text.NL();
 				Text.Add("A huge moan of pleasure rushes from your lungs as Layla sinks into you. Despite the considerable difference in sizes between her cocks, there is almost no effort on her part. The thick lubing slime she filled you with ensures that you spread effortlessly before her advancing member.", parse);
 				Text.NL();
+				
+				Sex.Anal(layla, player);
+				player.FuckAnal(player.Butt(), layla.FirstCock(), 3);
+				layla.Fuck(layla.FirstCock(), 3);
+				
 				if(player.sexlevel >= 5) {
 					Text.Add("Of course, the fact that you actually know your way around lovemaking always helps. You angle yourself just right and clench in the right spots to make this as pleasurable as you can for both of you.", parse);
 					Text.NL();
@@ -1237,6 +1242,11 @@ Scenes.Layla.SexCatchAnal = function() {
 					Text.NL();
 					Text.Add("As soon as you give her the go ahead, she starts pushing into your [anus]. You arch your back, heaving forth a great sigh of desire as you are impaled. Thanks to the generous lubing your lover has given you, there is only utter bliss as inch after inch vanishes into your rapidly stretching tunnel.", parse);
 					Text.NL();
+					
+					Sex.Anal(layla, player);
+					player.FuckAnal(player.Butt(), layla.FirstCock(), 3);
+					layla.Fuck(layla.FirstCock(), 3);
+					
 					Text.Add("You swear you can hear your flesh shift as it is displaced around the huge intruder advancing relentlessly as it glides within. When Layla’s hips connect, audibly slapping against your butt, it’s all you can do to hold back a groan of disappointment.", parse);
 					Text.NL();
 					Text.Add("<i>“Warm,”</i> Layla giggles, lying down upon your back to hug you from behind.", parse);
@@ -1329,6 +1339,11 @@ Scenes.Layla.SexCatchAnalBlowher = function(parse) {
 	Text.NL();
 	Text.Add("You moan and arch your back, feeling your [anus] spreading wide around the substantial girth of chimera cock entering you. As lubed as she is, you can still feel every inch of thick, throbbing flesh as it stretches you open, gliding deeper inside.", parse);
 	Text.NL();
+	
+	Sex.Anal(layla, player);
+	player.FuckAnal(player.Butt(), layla.FirstCock(), 3);
+	layla.Fuck(layla.FirstCock(), 3);
+	
 	Text.Add("<i>“Let’s begin!”</i>", parse);
 	Text.NL();
 	
