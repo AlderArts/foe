@@ -2708,10 +2708,12 @@ TargetStrategy = {
 	None      : 0, //Not used
 	NearDeath : 1,
 	LowHp     : 2,
-	HighHp    : 4,
-	Leader    : 8,
-	SPHunt    : 16,
-	LPHunt    : 32
+	LowAbsHp  : 4,
+	HighHp    : 8,
+	HighAbsHp : 16,
+	Leader    : 32,
+	SPHunt    : 64,
+	LPHunt    : 128
 };
 
 GetAggroEntry = function(activeChar, entity) {
@@ -2789,6 +2791,29 @@ Entity.prototype.GetSingleTarget = function(encounter, activeChar, strategy) {
 			aggro[i].aggro *= hp;
 		}
 	}
+	
+	// Normalize hp
+	var min, max;
+	for(var i = 0; i < aggro.length; i++) {
+		var hp = aggro[i].entity.curHp;
+		min = min || hp; if(min > hp) min = hp;
+		max = max || hp; if(max < hp) max = hp;
+	}
+	var span = max - min;
+	if(strategy & TargetStrategy.LowAbsHp) {
+		for(var i = 0; i < aggro.length; i++) {
+			var hp = (aggro[i].entity.curHp - min) / span;
+			var hp  = 1 - hp;
+			aggro[i].aggro *= hp;
+		}
+	}
+	if(strategy & TargetStrategy.HighAbsHp) {
+		for(var i = 0; i < aggro.length; i++) {
+			var hp = (aggro[i].entity.curHp - min) / span;
+			aggro[i].aggro *= hp;
+		}
+	}
+	
 	if(strategy & TargetStrategy.Leader) { //Test, this might be wrong
 		if(aggro.length > 0)
 			aggro[0].aggro *= 5;

@@ -6,8 +6,7 @@
 
 Scenes.Layla = {};
 
-/*
- * TODO Stats
+/*TODO
  * Avatar
  */
 function Layla(storage) {
@@ -16,25 +15,22 @@ function Layla(storage) {
 	// Character stats
 	this.name = "Layla";
 	
-	//this.avatar.combat = Images.layla;
+	this.avatar.combat = Images.layla;
 	
-	/* TODO
 	this.maxHp.base        = 100;
-	this.maxSp.base        = 80;
-	this.maxLust.base      = 50;
+	this.maxSp.base        = 60;
+	this.maxLust.base      = 80;
 	// Main stats
-	this.strength.base     = 20;
-	this.stamina.base      = 22;
-	this.dexterity.base    = 16;
-	this.intelligence.base = 17;
-	this.spirit.base       = 15;
-	this.libido.base       = 20;
-	this.charisma.base     = 18;
+	this.strength.base     = 20; this.strength.growth     = 1.3;
+	this.stamina.base      = 22; this.stamina.growth      = 1.4;
+	this.dexterity.base    = 30; this.dexterity.growth    = 1.5;
+	this.intelligence.base = 30; this.intelligence.growth = 1.5;
+	this.spirit.base       = 35; this.spirit.growth       = 1.8;
+	this.libido.base       = 30; this.libido.growth       = 1.6;
+	this.charisma.base     = 25; this.charisma.growth     = 1.5;
 	
-	this.level = 10;
+	this.level = 12;
 	this.sexlevel = 1;
-	
-	*/
 	
 	this.body.DefHerm();
 	this.FirstBreastRow().size.base = 12.5;
@@ -79,8 +75,7 @@ Layla.prototype.FromStorage = function(storage) {
 	this.body.FromStorage(storage.body);
 	this.LoadPersonalityStats(storage);
 	this.LoadFlags(storage);
-	/*
-	 * 
+	
 	this.LoadPregnancy(storage);
 	this.LoadSexFlags(storage);
 	this.LoadCombatStats(storage);
@@ -88,11 +83,9 @@ Layla.prototype.FromStorage = function(storage) {
 	
 	this.LoadEffects(storage);
 	this.LoadJobs(storage);
-	this.LoadEquipment(storage);
 	
 	this.RecallAbilities();
 	this.SetLevelBonus();
-	 */
 	
 	this.farmTimer.FromStorage(storage.ft);
 }
@@ -103,8 +96,7 @@ Layla.prototype.ToStorage = function() {
 	this.SaveBodyPartial(storage, {ass: true, vag: true});
 	this.SavePersonalityStats(storage);
 	this.SaveFlags(storage);
-	/*
-	 * 
+
 	this.SavePregnancy(storage);
 	this.SaveSexFlags(storage);
 	this.SaveCombatStats(storage);
@@ -112,7 +104,6 @@ Layla.prototype.ToStorage = function() {
 	
 	this.SaveEffects(storage);
 	this.SaveJobs(storage);
-	 */
 	
 	storage.ft = this.farmTimer.ToStorage();
 	
@@ -137,11 +128,8 @@ Layla.prototype.Virgin = function() {
 }
 
 
-/*
- * TODO Stats
- * Combat mob
+/* TODO
  * Act AI
- * Avatar (2?)
  */
 
 function LaylaMob() {
@@ -152,23 +140,22 @@ function LaylaMob() {
 	this.monsterName       = "the creature";
 	this.MonsterName       = "The creature";
 	
-	//this.avatar.combat = Images.layla_f;
+	this.avatar.combat = Images.layla_f;
 	
-	/* TODO
-	this.maxHp.base        = 100;
-	this.maxSp.base        = 80;
-	this.maxLust.base      = 50;
+	// TODO
+	this.maxHp.base        = 1000;
+	this.maxSp.base        = 200;
+	this.maxLust.base      = 350;
 	// Main stats
 	this.strength.base     = 20;
 	this.stamina.base      = 22;
-	this.dexterity.base    = 16;
-	this.intelligence.base = 17;
-	this.spirit.base       = 15;
-	this.libido.base       = 20;
-	this.charisma.base     = 18;
-	*/
+	this.dexterity.base    = 30;
+	this.intelligence.base = 32;
+	this.spirit.base       = 40;
+	this.libido.base       = 34;
+	this.charisma.base     = 25;
 	
-	this.level = 10;
+	this.level = 12;
 	this.sexlevel = 1;
 	
 	this.body.DefHerm();
@@ -190,8 +177,8 @@ LaylaMob.prototype.Act = function(encounter, activeChar) {
 	Text.NL();
 	Text.Flush();
 	
-	// Pick a random target
-	var t = this.GetSingleTarget(encounter, activeChar);
+	// Pick a random target (go for lowest abs HP)
+	var t = this.GetSingleTarget(encounter, activeChar, TargetStrategy.LowAbsHp);
 
 	var parseVars = {
 		name   : this.name,
