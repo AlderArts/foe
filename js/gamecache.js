@@ -156,6 +156,7 @@ InitCache = function() {
 	
 	
 	gameCache.flags["NagaVenom"]      = gameCache.flags["NagaVenom"] || 0;
+	gameCache.flags["NagaMate"]       = gameCache.flags["NagaMate"] || 0;
 	
 	gameCache.flags["Moth"]      = gameCache.flags["Moth"] || 0;
 	
