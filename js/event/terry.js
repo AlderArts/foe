@@ -3572,7 +3572,7 @@ Scenes.Terry.SexGetOralPussy = function() {
 	
 	world.TimeStep({minute: 30});
 	
-	if(relslut)
+	if(relslut < 45)
 		terry.relation.DecreaseStat(0, 1);
 	else if(terry.Relation() >= 30)
 		terry.relation.IncreaseStat(50, 1);
