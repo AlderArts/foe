@@ -1184,7 +1184,7 @@ Scenes.Farm.GoToMarketFirst = function(backfunc) {
 	party.SaveActiveParty();
 	party.ClearActiveParty();
 	party.SwitchIn(player);
-	party.AddMember(gwendy);
+	party.AddMember(gwendy, true);
 	
 	gwendy.RestFull();
 

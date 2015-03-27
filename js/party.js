@@ -8,6 +8,7 @@ function Party(storage) {
 	this.members = [];
 	this.reserve = [];
 	this.saved   = [];
+	this.temp    = [];
 	this.coin = 0;
 	this.location = null;
 	this.inventory = new Inventory();
@@ -19,6 +20,7 @@ Party.prototype.SaveMember = function(storage, entity, str) {
 	if(this.InParty(entity))   storage["members"].push(str);
 	if(this.InReserve(entity)) storage["reserve"].push(str);
 	if(this.InSaved(entity))   storage["saved"].push(str);
+	if(this.InTemp(entity))    storage["temp"].push(str);
 }
 
 Party.prototype.ToStorage = function() {
@@ -26,6 +28,7 @@ Party.prototype.ToStorage = function() {
 	storage["members"] = [];
 	storage["reserve"] = [];
 	storage["saved"]   = [];
+	storage["temp"]    = [];
 	
 	this.SaveMember(storage, player, "player");
 	this.SaveMember(storage, kiakai, "kiakai");
@@ -44,6 +47,7 @@ Party.prototype.LoadMember = function(storage, entity, str) {
 	if(storage["members"].indexOf(str) != -1) this.AddMember(entity);
 	if(storage["reserve"].indexOf(str) != -1) this.AddReserve(entity);
 	if(storage["saved"].indexOf(str)   != -1) this.AddReserve(entity);
+	if(storage["temp"].indexOf(str)    != -1) this.AddReserve(entity);
 }
 
 Party.prototype.FromStorage = function(storage) {
@@ -51,6 +55,7 @@ Party.prototype.FromStorage = function(storage) {
 	storage["members"] = storage["members"] || [];
 	storage["reserve"] = storage["reserve"] || [];
 	storage["saved"]   = storage["saved"]   || [];
+	storage["temp"]    = storage["temp"]    || [];
 	
 	this.LoadMember(storage, player, "player");
 	this.LoadMember(storage, kiakai, "kiakai");
@@ -100,6 +105,7 @@ Party.prototype.Inv = function() {
 }
 
 Party.prototype.SaveActiveParty = function() {
+	this.temp = [];
 	this.saved = [];
 	for(var i = 0; i < this.members.length; ++i)
 		this.saved.push(this.members[i]);
@@ -114,6 +120,9 @@ Party.prototype.LoadActiveParty = function() {
 	for(var i = 0; i < this.saved.length; ++i)
 		this.SwitchIn(this.saved[i]);
 	this.saved = [];
+	for(var i = 0; i < this.temp.length; i++)
+		this.RemoveMember(this.temp[i]);
+	this.temp = [];
 }
 // From "Total"
 Party.prototype.Get = function(num) {
@@ -157,8 +166,12 @@ Party.prototype.InSaved = function(member) {
 	var idx = this.saved.indexOf(member); // Find the index
 	return (idx!=-1);
 }
+Party.prototype.InTemp = function(member) {
+	var idx = this.temp.indexOf(member); // Find the index
+	return (idx!=-1);
+}
 
-Party.prototype.AddMember = function(member) {
+Party.prototype.AddMember = function(member, temporary) {
 	var idx = this.members.indexOf(member); // Find the index
 	if(idx==-1) {
 		if(this.members.length >= 4)
@@ -167,6 +180,7 @@ Party.prototype.AddMember = function(member) {
 			this.members.push(member); // Only add if not already added
 	}
 	if(this == party) member.DebugMode(DEBUG);
+	if(temporary) this.temp.push(member);
 }
 
 Party.prototype.AddReserve = function(member) {

@@ -2116,7 +2116,7 @@ Scenes.Layla.FirstMeeting = function(approach) {
 			
 			gwendy.RestFull();
 			party.SaveActiveParty();
-			party.AddMember(gwendy);
+			party.AddMember(gwendy, true);
 			
 			Text.NL();
 			Text.Add("Gwendy temporarily joins your party.", parse, "bold");
@@ -2150,7 +2150,7 @@ Scenes.Layla.RepeatMeeting = function(approach) {
 	if(party.Num() < 4) {
 		gwendy.RestFull();
 		party.SaveActiveParty();
-		party.AddMember(gwendy);
+		party.AddMember(gwendy, true);
 	}
 	
 	parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
