@@ -1,6 +1,7 @@
 #!/bin/bash
 
 java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
+	js/lodash.min.js \
 	js/jquery-1.9.1.min.js \
 	js/raphael-min.js \
 	js/pre-loader.js \
