@@ -1398,7 +1398,7 @@ Scenes.Rigard.Lockdown = function() {
 	party.SaveActiveParty();
 	party.ClearActiveParty();
 	party.SwitchIn(player);
-	party.AddMember(miranda);
+	party.AddMember(miranda, true);
 	
 	if(miranda.Sexed()) {
 		if(miranda.SubDom() > 25) {
