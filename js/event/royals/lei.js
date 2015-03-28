@@ -344,7 +344,7 @@ Scenes.Lei.InnPrompt = function() {
 			else
 				parse["comp"] = "";
 			if(first) {
-				Text.Add("You clear your throat, and are rewarded with a flicker of the eyes from Lei, before he resumes his vigil over the room. Steeling yourself, you tell him that you saw him stalking a couple wearing grey cloaks after they left the castle grounds, and that you want an explanation.", parse);
+				Text.Add("You clear your throat, and are rewarded with a flicker of the eyes from Lei, before he resumes his vigil over the room. Steeling yourself, you tell him that you saw him stalking a couple wearing gray cloaks after they left the castle grounds, and that you want an explanation.", parse);
 				Text.NL();
 				Text.Add("<i>“No.”</i> You look at him incredulously.", parse);
 				Text.NL();
@@ -557,7 +557,7 @@ Scenes.Lei.ExplanationMain = function() {
 			Text.NL();
 			Text.Add("Sitting at the table by the wall, your only warning is the sound of two people’s steps before a red-headed couple emerge from the stairway. The way they walk, backs held straight, close enough that they are almost touching, seems familiar. Lei’s instant shift in attention toward them is enough to confirm your guess that this is the pair you were looking for.", parse);
 			Text.NL();
-			Text.Add("To your surprise, you find that the young man and woman are wearing modest clothes - grey woolens better suited to poor commoners rather than the rich dress you expected to see. Perhaps they really are trying to be discrete, as Lei had said. If so, it’s not working very well, as the dull clothes provide a cute contrast to their blazing red hair, making them stand out all the more.", parse);
+			Text.Add("To your surprise, you find that the young man and woman are wearing modest clothes - gray woolens better suited to poor commoners rather than the rich dress you expected to see. Perhaps they really are trying to be discrete, as Lei had said. If so, it’s not working very well, as the dull clothes provide a cute contrast to their blazing red hair, making them stand out all the more.", parse);
 			Text.NL();
 			Text.Add("As they pass the table, Lei rises, and you follow suit and accompany him to the door.", parse);
 			Text.NL();
@@ -634,7 +634,7 @@ Scenes.Lei.ObserveMain = function(first) {
 
 	Text.Add("Eventually, as you're beginning to wonder if this is really worth your time, your eyes snap up to the staircase and you see a red-haired couple descending. The way they walk, backs held straight, close enough that they are almost touching, seems familiar, and Lei’s instant shift in attention toward them is enough to confirm your suspicion that this is the pair you were looking for.", parse);
 	Text.NL();
-	Text.Add("To your surprise, you find that the young man and woman are wearing modest clothes - grey woolens better suited to poor commoners rather than the rich garments you expected to see. Despite that, their proud bearing and the unusual blazing red of their hair somehow makes you feel like they’re more than their dress suggests.", parse);
+	Text.Add("To your surprise, you find that the young man and woman are wearing modest clothes - gray woolens better suited to poor commoners rather than the rich garments you expected to see. Despite that, their proud bearing and the unusual blazing red of their hair somehow makes you feel like they’re more than their dress suggests.", parse);
 	Text.NL();
 	
 	if(party.Two())

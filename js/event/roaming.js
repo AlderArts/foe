@@ -79,7 +79,7 @@ Scenes.Roaming.KingdomPatrol = function(entering) {
 		Gui.NextPrompt();
 	}, 2.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("They shout for you to halt, and you decide to comply and wait while they ride up to you. Up close, you see that their armor is covered in scratches and dents, though it seems well maintained for its age. Their leader, a burly [rmanwoman] with grey hairs peeking from underneath [rhisher] helmet dismounts and regards you with a bored expression.", parse);
+		Text.Add("They shout for you to halt, and you decide to comply and wait while they ride up to you. Up close, you see that their armor is covered in scratches and dents, though it seems well maintained for its age. Their leader, a burly [rmanwoman] with gray hairs peeking from underneath [rhisher] helmet dismounts and regards you with a bored expression.", parse);
 		Text.NL();
 		Text.Add("[rHeShe] introduces [rhimher]self as a sergeant of the armed forces of Rigard before getting down to business. <i>“What are you doing here?”</i> [rheshe] asks. <i>“You’re not farmers, you’re not traders, and judging by your weapons, you’re not laborers.”</i>", parse);
 		Text.Flush();

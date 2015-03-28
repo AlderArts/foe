@@ -231,7 +231,7 @@ Scenes.Rigard.LB.OrderFood = function() {
 		parse["heshe"] = "she";
 	}
 	else if(randW < 4) {
-		parse["waiterDesc"] = "Your waitress is a matronly woman with greying hair and slightly stooped posture. Smile wrinkles adorn the corners of her mouth, and she looks at the customers beneficently.";
+		parse["waiterDesc"] = "Your waitress is a matronly woman with graying hair and slightly stooped posture. Smile wrinkles adorn the corners of her mouth, and she looks at the customers beneficently.";
 		parse["HeShe"] = "She";
 		parse["heshe"] = "she";
 	}
@@ -416,7 +416,7 @@ Scenes.Rigard.LB.OrvinPrompt = function() {
 		Text.Add("[IkName] sits on a stool behind the counter, looking bored. You decide he might welcome the distraction if you went over and talked to him.", parse);
 	Text.NL();
 	parse["busyText"] = (busy == Rigard.LB.BusyState.busy) ? "the drinks dancing through his hands" : "handling the drinks he so often mixes";
-	Text.Add("You can’t quite tell the man’s age, but he seems to be well within his prime. There are a few streaks of grey in his dark brown hair, but his face is unlined, and his gaze attentive as he surveys the room. He’s wearing a black vest over a white shirt, which somehow remains spotless despite [busyText].", parse);
+	Text.Add("You can’t quite tell the man’s age, but he seems to be well within his prime. There are a few streaks of gray in his dark brown hair, but his face is unlined, and his gaze attentive as he surveys the room. He’s wearing a black vest over a white shirt, which somehow remains spotless despite [busyText].", parse);
 	Text.NL();
 	Text.Add("<i>“What can I do for you, [sirmadam]?”</i> he asks, his voice low and gravelly, turning toward you at your approach.", parse);
 	Text.Flush();

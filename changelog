@@ -8,6 +8,8 @@ CHANGELOG for Fall of Eden
 Version 0.3z
 ------------
 * Naga mating scene added (requires player being a naga and losing to the naga)
+* Various minor bugs fixed
+* Various typos fixed
 
 --------------------------------------------
              PREVIOUS VERSIONS
@@ -771,7 +773,7 @@ Version 0.2k2
 * Added another save point in the "Garden" area during the intro, if you want to replay Kia's initial scenes or make a different choice during the outset.
 * A popup prompts you when overwriting old saves
 * Selectable bg color (can be found on the credits screen and in the Data menu). This setting is saved.
-* Removed the previously "greyed out" options when selecting dead enemies in combat, unusable items in the inventory etc.
+* Removed the previously "grayed out" options when selecting dead enemies in combat, unusable items in the inventory etc.
 
 Version 0.2k
 ------------
