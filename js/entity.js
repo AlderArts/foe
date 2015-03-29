@@ -1538,8 +1538,10 @@ Entity.prototype.CocksThatFit = function(orifice, onlyRealCocks, extension) {
 		if(!orifice || orifice.Fits(c, extension))
 			ret.push(c);
 	};
-	if(!onlyRealCocks && this.strapOn && (!orifice || orifice.Fits(this.strapOn.cock, extension)))
-		ret.push(this.strapOn.cock);
+	if(ret.length == 0) {
+		if(!onlyRealCocks && this.strapOn && (!orifice || orifice.Fits(this.strapOn.cock, extension)))
+			ret.push(this.strapOn.cock);
+	}
 	return ret;
 }
 Entity.prototype.AllCocksCopy = function() {
