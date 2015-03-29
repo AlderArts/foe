@@ -103,6 +103,8 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/kyna.js \
 	js/event/miranda.js \
 	js/event/terry.js \
+	js/event/terry-tf.js \
+	js/event/terry-sex.js \
 	js/event/momo.js \
 	js/event/sylistraxia.js \
 	js/event/kiakai.js \
