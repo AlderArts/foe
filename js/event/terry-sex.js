@@ -643,7 +643,7 @@ Scenes.Terry.SexGetOralCockCont = function(parse, p1cock) {
 					Text.Add("Smiling, you congratulate [himher] on [hisher] efforts. You think [heshe] enjoyed that almost as much as you did.", parse);
 				}
 				else {
-					Text.Add("Terry swallows your entire load, and when you pull out, he eagerly moves to lick you clean. <i>“Hmm, such a tasty cock. Feeling better now?”</i>", parse);
+					Text.Add("Terry swallows your entire load, and when you pull out, [heshe] eagerly moves to lick you clean. <i>“Hmm, such a tasty cock. Feeling better now?”</i>", parse);
 					Text.NL();
 					Text.Add("<i>Much</i> better, you assure [himher]. It’s always such a treat to put [hisher] wonderful little mouth to work. Knowing [heshe] enjoys it too helps a lot, of course.", parse);
 					Text.NL();
