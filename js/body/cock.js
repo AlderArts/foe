@@ -222,5 +222,5 @@ Cock.prototype.Long = function() {
 	var noun    = this.noun();
 	var knotted = this.knot   != 0 ? ", knotted" : "";
 	var sheath  = this.sheath != 0 ? ", sheathed" : "";
-	return desc.adj + knotted + sheath + " " + Race.Desc(this.race) + " " + cock.noun() + ", " + desc.len + " long and " + desc.thickness + " thick";
+	return desc.adj + knotted + sheath + " " + Race.Desc(this.race) + " " + this.noun() + ", " + desc.len + " long and " + desc.thickness + " thick";
 }

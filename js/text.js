@@ -248,18 +248,18 @@ Text.Quantify = function(num) {
 	}
 }
 
-Text.Ordinal = function(num) {
+Text.Ordinal = function(num, capital) {
 	num = Math.floor(num);
 	switch(num) {
-		case 1: return "first";
-		case 2: return "second";
-		case 3: return "third";
-		case 4: return "fourth";
-		case 5: return "fifth";
-		case 6: return "sixth";
-		case 7: return "seventh";
-		case 8: return "eight";
-		case 9: return "ninth";
+		case 1: return capital ? "First"   : "first";
+		case 2: return capital ? "Second"  : "second";
+		case 3: return capital ? "Third"   : "third";
+		case 4: return capital ? "Fourth"  : "fourth";
+		case 5: return capital ? "Fifth"   : "fifth";
+		case 6: return capital ? "Sixth"   : "sixth";
+		case 7: return capital ? "Seventh" : "seventh";
+		case 8: return capital ? "Eight"   : "eight";
+		case 9: return capital ? "Ninth"   : "ninth";
 		default: return num + "th"; // decent fallback
 	}
 }
