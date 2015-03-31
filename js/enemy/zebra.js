@@ -166,6 +166,14 @@ Scenes.ZebraShaman.OnWin = function() {
 			}, enabled : player.FirstCock(),
 			tooltip : "Perhaps you can convince him to have a bit of fun with you? After all, he did assault you… letting you fuck his ass is the least he can do."
 		});
+		if(player.FirstVag()) {
+			options.push({ nameStr : "Get Fucked",
+				func : function() {
+					Scenes.ZebraShaman.OnWinVaginal(enc);
+				}, enabled : true,
+				tooltip : "You consider it rather rude of him for attacking you and then waving it off as a simple mistake. It's only right that he should apologize to you properly, but words alone aren't going to cut it. You need him to make it up to you, and if the heat in your loins is anything to go by, you know exactly how he can do it."
+			});
+		}
 		/* TODO
 		options.push({ nameStr : "name",
 			func : function() {
@@ -178,7 +186,10 @@ Scenes.ZebraShaman.OnWin = function() {
 		});
 		 */
 		Gui.SetButtonsFromList(options, true, function() {
-			PrintDefaultOptions(); //TODO
+			Text.Clear();
+			Text.Add("You decide to not take advantage of the poor shaman. What’s done is done, and it would be best if your continued on your way. With all your equipment in order, you make your way over a nearby hill and leave the shaman to his own devices.", parse);
+			Text.Flush();
+			Gui.NextPrompt();
 		});
 	});
 	Encounter.prototype.onVictory.call(enc);
@@ -289,3 +300,128 @@ Scenes.ZebraShaman.OnWinFuckHim = function(enc) {
 	});
 }
 
+Scenes.ZebraShaman.OnWinVaginal = function(enc) {
+	var zebra = enc.zebra;
+	
+	var lusty = zebra.LustLevel() > 0.5;
+	var p1cock = player.BiggestCock();
+	
+	var parse = {
+		clothes : function() { return player.ArmorDesc(); }
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
+	Text.Clear();
+	Text.Add("It's time to set your naughty plan into motion. The shaman is still fatigued from the battle, using his staff to prop himself up with what little strength he has left. Thankfully, he won't be needing that for now - you grab the staff with both hands and rip it from his grasp before he has a chance to react. His sore muscles coupled with the force of your pull causes him to topple over and land on his side.", parse);
+	Text.NL();
+	Text.Add("<i>“Ouch!”</i> he yowls. <i>“H-hey, what was that for?! And what are you doing with my staff?! Give it back to me, or I'll-</i>”", parse);
+	Text.NL();
+	Text.Add("You cut his protests off with a finger to his lips. <i>“Shut up,”</i> you tell him sternly, <i>“or I'll break it in two.”</i> The zebra-morph begrudgingly complies with your command, knowing that he's in no position to argue. Now that you've got his attention, you let him know that you're not too thrilled with his half-hearted excuse of an apology. You're going to ensure he makes it up to you properly, patting your groin to let him know your intentions. It only takes a second for him to catch your drift, blushing lightly in response to your lewd suggestion. <i>“I... I don't know... I don't think I have the energy for something like that,”</i> he mutters. Aww, poor guy. That's too bad. You'd like to believe him, but if he's telling the truth, then what's that growing between his legs, hmm? You point it out to him in a sultry manner by rubbing his crotch with your hand.", parse);
+	Text.NL();
+	if(lusty)
+		Text.Add("<i>“Alright... I... I want to fuck you,”</i> he admits bluntly, <i>“but just because I want to doesn't mean I can. I can barely hold myself up, let alone have sex.”</i> That's a pretty poor excuse, you think to yourself; he's got a pouch full of various concoctions. Surely there’s at least one potion that can give him the energy he needs. After a moment of pondering, his ears perk up in realization. <i>“Oh!”</i> He exclaims, <i>“I think have one... but I never intended for it to be used like this.”</i>", parse);
+	else
+		Text.Add("<i>“I... I don't know what you're talking about!”</i> he snaps, quickly covering his groin with both hands in a poor attempt to hide his growing arousal. What a liar! He may not be totally enthused with the idea of romping with you, but it certainly doesn't turn him off. You tell him that if he really isn't interested, you'll just have to take his staff as compensation. <i>“N-no! Don't!”</i> he begs, <i>“Alright, I'll... I'll do it…”</i>", parse);
+	Text.NL();
+	Text.Add("Using what's left of his strength, he pushes himself to his knees and proceeds to dig through his satchel. One after the other, he pulls out several potions and looks them over, before finally settling on a bottle filled with a red substance. <i>“This is a potion that can enhance a male's muscle mass, stamina, and... um... libido.”</i> He explains, <i>“It's meant for combat purposes mostly, but there are some who use it for more... sexual activities.”</i>", parse);
+	Text.NL();
+	Text.Add("You crouch down beside him and tug the cork off, sending a strong, spicy fragrance through the air. The smell is practically the essence of masculinity; so much so that it makes your [vag] tingle ", parse);
+	if(player.FirstCock())
+		Text.Add("and your [cocks] grow[notS] harder ", parse);
+	Text.Add("with excitement each time you inhale the fumes. You'd say it's about time he gives that stuff a try before you end up masturbating from the scent alone.", parse);
+	if(!lusty)
+		Text.Add(" The zebra-morph hesitates for a moment, then looks at you. You give him a stern look, a silent confirmation of your expectations.", parse);
+	Text.NL();
+	Text.Add("<i>“I've never actually used it before,”</i> he tells you, <i>“but... here goes nothing.”</i> He takes a few deep breaths, then brings the potion to his mouth, drinking down every last drop in one gulp before tossing the empty bottle aside. It doesn't go down easy it seems, as he grabs his abdomen in pain shortly after.", parse);
+	Text.NL();
+	Text.Add("With a groan, his body begins flexing and the muscles beneath his skin slowly grow in size, becoming more defined. Curious to see more, you push him down on his back to give him a thorough inspection. Placing a hand on his chest, you can feel the muscles pulsate and harden, forming perfectly chiseled pecs. Further down, your eyes are drawn to his fully erect member, which grows by the second. When all is said and done, the shaman has undergone a complete transformation. He's no longer the thinly framed zebra from before; now, he's a stallion with the kind of body most men could only dream of. More importantly than that, however, is his enormous equine cock which has grown in size by at least a third. The musk coming off it is incredible, and more than enough to make your head spin.", parse);
+	Text.NL();
+	Text.Add("That's it. You need his cock, and you need it <b>now</b>.", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		Text.Clear();
+		Text.Add("Without so much as a second thought – or even an attempt to remove your clothes – you throw yourself onto the shaman, inadvertently knocking the wind out of him. You lower yourself down, bringing your face in close to his monster of a cock and hovering your rear just above his pecs. Standing at a foot and a half in length, his large shaft dwarfs most that you've come across here in Eden. It's so large, in fact, that you find yourself unable to fully wrap your fingers around it. His balls seemed to have become enlarged as well, swollen with the desire to breed. To top it all off, the tip is dripping precum like a faucet. You can't imagine you'll easily be able to take the whole thing, but that's not going to stop you from trying.", parse);
+		Text.NL();
+		Text.Add("You lean in close and press your tongue flat against the base, dragging it over every square inch of his meaty cock and catching each drop of pre as it slowly leaks down. The shaman is certainly enjoying it, giving off a grunt or snort with every drawn out lick across his throbbing phallus. When you've made your way to the top, you wrap your lips around the flat head of his horsecock and pump the shaft with your hand, rewarding you with several dollops of precum. That's not enough for you, though. With a deep breath you lower yourself down, letting inch after inch of his beastial member slide down your gullet. ", parse);
+		if(player.sexlevel < 4)
+			Text.Add("Unfortunately, due to your lack of experience, you’re not even able to take half of it. To make up for that, you use both hands to stroke and rub the rest of his shaft while you heartily swallow the first six inches or so.", parse);
+		else
+			Text.Add("Though at first it seems like an impossibility, you manage to swallow it whole without much discomfort on your part.", parse);
+		Text.NL();
+		
+		Sex.Blowjob(player, zebra);
+		player.FuckOral(player.Mouth(), zebra.FirstCock(), 1);
+		zebra.Fuck(zebra.FirstCock(), 1);
+		
+		parse["botArmor"] = function() { return player.LowerArmorDesc(); };
+		
+		Text.Add("All the while, the shaman has taken an interest in your [butt], which you’ve so kindly presented him. ", parse);
+		if(player.LowerArmor())
+			Text.Add("Since you elected not to strip yourself, he resorts to trying to tear a hole in your [botArmor].", parse);
+		else
+			Text.Add("Rather than taking the time to remove your underwear properly, he tears them off with one hand and tosses them to the side, giving himself more access to play with your naughty bits.", parse);
+		Text.Add(" You’re somewhat startled by his animalistic behavior, but since it’s your fault he’s acting so aggressively, you might as well let him have what he wants.", parse);
+		if(!player.LowerArmor())
+			Text.Add(" To make things easier for him, you help him pull off your [botArmor], giving him full access to your naughty bits.", parse);
+		Text.NL();
+		Text.Add("In an instant, his hands dart straight for your tush, groping and rubbing your nethers with a firm grip. His fingers dig into your flesh, kneeding your [butt] like dough and occasionally flicking your [clit]", parse);
+		if(player.HasBalls())
+			Text.Add(" and caressing your [balls]", parse);
+		Text.Add(". He even gives you a few good spanks just to watch the ripples course through your rump. Thanks to the meaty horsecock currently lodged in your throat, you can do nothing but grunt in appreciation at his ministrations.", parse);
+		Text.NL();
+		Text.Add("Once he's grown bored of teasing you, he moves his face in close and buries his nose in your crotch. You can feel the air rush past your groin as he breathes in deeply, taking in your scent. Judging by his increased breathing, you'd say he's getting pretty excited. Then, without warning, he pushes his tongue past your entrance and deep into your moistened tunnel. It catches you off guard, forcing you to pull yourself off his member entirely and gasp audibly. You lift yourself up and look back, watching as the zebra eats you out with wild abandon. He's going at your muff like a man possessed, and the feeling is unreal.", parse);
+		Text.NL();
+		Text.Add("Not one to just sit back and watch, you turn your attention back to his raging hard on and redouble your efforts. You don't go as far down as before, instead using your hands to attend to the rest of his shaft; you use one hand to roughly pump his member as best as you can, while the other caresses and plays with his swollen nads. The all-out attack is enough to set him off. You can feel the tell-tale signs of his orgasm, and prepare yourself for what's surely going to be a huge amount of jizz headed your way.", parse);
+		Text.NL();
+		Text.Add("Just as you thought, the first of several waves of his orgasm hits you. Literally. The force of his ejaculation is enough to push your mouth off his member and send you into a coughing fit while still coating your face and [breasts] in zebra spunk. You manage to calm yourself enough to catch a few of the last spurts in your mouth. By the time it's over, you look more like a glazed donut than an adventurer.", parse);
+		Text.NL();
+		Text.Add("The shaman hasn't slowed down on his end, however. Thanks to his unrelenting tongue fuck, you cry out in ecstasy as your own orgasm hits. Your inner walls clench down on the shaman's tongue, fruitlessly trying to wring it for semen; at the same time, your [vag] sprays its juices all over his face and into his mouth, and he makes sure to lap up every drop.", parse);
+		if(player.FirstCock())
+			Text.Add(" Even your [cock] joins in on the fun, spurting globs of cum on his chiseled pecs beneath you.", parse);
+		Text.NL();
+		Text.Add("You barely have time to come down from your orgasmic high before he pushes you off his chest and onto your back. ", parse);
+		if(player.HasLegs())
+			Text.Add("From there, he grabs your legs and pushes them up and over your head, positioning", parse);
+		else if(player.IsNaga())
+			Text.Add("From there, he holds down your serpentine half with his one knee and positions", parse);
+		else
+			Text.Add("From there, he pins you down under his weight as he positions", parse);
+		Text.Add(" the flat tip of his horsecock at the entrance of your still quivering [vag]. Although he's already had an orgasm, he's still hard as a rock. You glance up at him and you can see in his face a look of utmost desire. He needs this badly, and you're willing to oblige.", parse);
+		Text.NL();
+		Text.Add("You take deep breaths, relaxing as best you can while he pushes himself into you. ", parse);
+		if(player.FirstVag().Cap() > zebra.FirstCock().Thickness())
+			Text.Add("Thanks to your history of wonton romping and taking big dicks like his, your [vag] has no trouble accommodating all eighteen inches of his throbbing phallus.", parse);
+		else
+			Text.Add("Even as much as you want this, you find it difficult for your [vag] to accommodate his huge phallus. That doesn’t stop him, though; he continues until all eighteen inches of his thick, meaty horsecock have bottomed out inside you.", parse);
+		Text.Add(" Immediately upon reaching his limit, he retracts himself until only the tip remains, then follows it up with a hard thrust that forces his member back into your tunnel. He repeats the motion again and again, each thrust sending shockwaves of pleasure - and a bit of pain - coursing through your body. He doesn’t relent on the assault he’s giving your [vag], only picking up the pace as he goes on.", parse);
+		Text.NL();
+		
+		Sex.Vaginal(zebra, player);
+		player.FuckVag(player.FirstVag(), zebra.FirstCock(), 3);
+		zebra.Fuck(zebra.FirstCock(), 3);
+		
+		Text.Add("You reach your hands to the back of his head and pull him in close, bringing his face and yours together and locking lips in a passionate kiss. You can taste the remnants of the potion as your tongues dance about. Though not enough to cause any sort of change to your own body, you can feel your muscles tense as the spicy essence makes its way into your mouth and down your throat. Your [vag] is also affected, involuntarily clenching around his shaft as he continues to vigorously pound you raw. It’s enough to push him over the edge.", parse);
+		Text.NL();
+		Text.Add("The shaman pulls away from the kiss and throws his head back, letting out a loud snort as the tip of his member flares up and sends wave after wave of potent seed flooding into your well-used hole. The amount of spunk he pours into you is far greater than what you can handle, and most of it ends up spraying back out. His orgasm sets off your own, sending your mind into a whirlwind of pleasure as your [vag] clamps down once more, this time making sure to get the spunk it needs.", parse);
+		Text.NL();
+		if(player.FirstCock()) {
+			Text.Add("Just when you thought it couldn't get any better, the shaman surprises you by grabbing[oneof] your [cocks] and starting to pump it furiously, making you shoot several strands of seed into the air which splatter across your [breasts] and face, mixing with the the fluids he covered you in earlier.", parse);
+			Text.NL();
+		}
+		Text.Add("When the shaman's orgasm finally comes to an end, he collapses onto his back. His equine member follows suit, exiting your abused [vag] with a loud pop. You take a few moments to lay there and catch your breath, staring up at the clouds and basking in the sunlight. That was one hell of a fuck, you think to yourself; you’ll probably be walking funny for a while.", parse);
+		Text.NL();
+		
+		var cum = player.OrgasmCum();
+		
+		Text.Add("When you've regained your energy, you flip over and push yourself to your feet. As you dust the dirt off your clothes, you hear the sounds of snoring just behind you and turn around to look, seeing that the shaman has returned to his normal form and is completely passed out. You chuckle at the sight. The poor guy really must have worn himself out, even with all that energy the potion gave him. You kneel down beside him and give him a small kiss on the forehead. His ears flick adorably in response.", parse);
+		Text.NL();
+		Text.Add("You walk over to the nearby watering hole and wash yourself, making sure to clean off as much zebra spunk as you can before you make your way out of there.", parse);
+		Text.Flush();
+		
+		world.TimeStep({hour: 1});
+		
+		Gui.NextPrompt();
+	});
+}
