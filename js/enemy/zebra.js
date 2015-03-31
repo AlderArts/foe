@@ -92,10 +92,43 @@ Scenes.ZebraShaman.LoneEnc = function(levelbonus) {
 	
 	enc.onEncounter = Scenes.ZebraShaman.Encounter;
 	enc.onVictory   = Scenes.ZebraShaman.OnWin;
-	/* TODO
-	enc.onLoss = ...
-	*/
+	enc.onLoss      = Scenes.ZebraShaman.OnLoss;
+	
 	return enc;
+}
+
+Scenes.ZebraShaman.OnLoss = function() {
+	var enc = this;
+	var zebra = enc.zebra;
+	SetGameState(GameState.Event);
+	
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("You collapse on the ground before the shaman, barely keeping yourself upright. The shaman approaches you yet again, raising his staff and chanting the same chant from before. This time, you are unable to break free of your mental bindings and quickly fall under his control. Your thoughts become hazy, unable to concentrate as the shaman’s chanting echoes through your mind for what seems like an eternity.", parse);
+	Text.NL();
+	Text.Add("Suddenly, the chanting stops and the fogginess dissipates, causing you to fall to the ground with a resounding 'thump'. It takes a minute or two for you to regain your senses, but when you do you realize you’ve found yourself in an entirely different part of the Highlands. ", parse);
+	if(party.Num() > 1) {
+		if(party.Num() == 2) {
+			var c = party.Get(1);
+			parse["comp"]  = c.name;
+			parse["heshe"] = c.heshe();
+		}
+		else {
+			parse["comp"]  = "your companions";
+			parse["heshe"] = "they";
+		}
+		parse["isAre"] = party.Num() == 2 ? "is" : "are";
+		parse["notS"]  = party.Num() == 2 ? "s" : "";
+		
+		Text.Add("Thankfully, [comp] [isAre] still with you, though [heshe] look[notS] just as perplexed as you are. ", parse);
+	}
+	Text.Add("Why the shaman would have taken the time to put you in a trance just to make you traverse such a long distance is something you can't quite grasp. Whatever the case may be, you decide to rest up and attend to your wounds before continuing on your way. Hopefully you don’t run into him again.", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt();
 }
 
 Scenes.ZebraShaman.Encounter = function() {
