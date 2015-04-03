@@ -72,8 +72,12 @@ Ophelia.prototype.Recruited = function() {
 Ophelia.prototype.Broken = function() {
 	return this.flags["Met"] & Ophelia.Met.Broken;
 }
+//TODO account for Roa
 Ophelia.prototype.InParty = function() {
 	return this.flags["Met"] & Ophelia.Met.InParty;
+}
+Ophelia.prototype.InPartyAndBroken = function() {
+	return this.Broken() && this.InParty();
 }
 Ophelia.prototype.CountdownExpired = function() {
 	return this.burrowsCountdown.Expired();

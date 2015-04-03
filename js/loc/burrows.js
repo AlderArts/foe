@@ -323,7 +323,15 @@ world.loc.Burrows.Pit.links.push(new Link(
 	}
 ));
 
-
+world.loc.Burrows.Pit.events.push(new Link(
+	"Vena", function() {
+		return !burrows.VenaRestored();
+	}, true,
+	null,
+	function() {
+		Scenes.Vena.PitApproach();
+	}
+));
 
 //
 // Burrows Lab

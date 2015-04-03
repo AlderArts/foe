@@ -63,7 +63,186 @@ Vena.prototype.ToStorage = function() {
 	return storage;
 }
 
-//TODO
+Scenes.Vena.PitApproach = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("You make your way to the bottom of the Pit, treading carefully on the slippery ground and sidestepping fornicating bunnies. At the center of the chamber, the lagomorph matriarch spends her time in blissful ecstasy, forever caught up in the carnal cycle of impregnation and birth.", parse);
+	Text.NL();
+	
+	if(burrows.BruteActive()) {
+		Text.Add("Vena is huge - she was large for a bunny when you first arrived to the Burrows, but it’s nothing when compared to her current amazonian form. At six foot seven, most of her children are dwarfed by her size. Her limbs are bulging with taut muscles only barely hidden by her white fur, though her overall frame is still very feminine and rounded. The hulking matriarch has hips and breasts fit for a breeder, and her stomach is swollen with a growing litter as always. Around her neck, her fur thickens, forming a fluffy collar.  Her hair is very long, almost reaching her ankles, and a pair of floppy rabbit ears lay flat against her back.", parse);
+		Text.NL();
+		Text.Add("Since her transformation, the broodmother has gained even more stamina than before, and is easily keeping up with her multitude of partners.", parse);
+		if(burrows.HermActive())
+			Text.Add(" Between her legs, Vena has one of the biggest cocks you’ve ever seen. Even for her huge frame, the over two feet long monstrosity looks ridiculously oversized.", parse);
+	}
+	else {
+		Text.Add("Vena is tall for a bunny - about the same size as Lagon, but her features are softer and more feminine. The breeder has immense hips and breasts, well equipped to handle her perpetual pregnancy. Soft fur matted with sweat and sexual fluids covers her motherly form, with a thick fluffy collar surrounding her neck. Her white hair is long, almost reaching her ankles. A pair of huge, floppy rabbit ears lay flat against her back.", parse);
+		if(burrows.HermActive())
+			Text.Add(" Between her legs, Vena has a nine inch cock in place of her clit, protruding from just above her pussy.", parse);
+	}
+	Text.NL();
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("When you approach, the bunny is receiving a thorough fucking by half a dozen of her children. The matriarch is on her knees in the pool of spunk, stifling moans as an acrobatic trio of males are pummeling away at her pussy and ass. Her remaining sons are hovering around her awaiting their turn, stroking themselves.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		parse["c"] = burrows.HermActive() ? "lips glued around Vena’s cock" : "lapping at Vena’s clit";
+		Text.Add("The bunny is on her back, her hips raised to give her two sons a better angle as they rail her. Two female lagomorphs suckle at her massive breasts, while a third is straddling her stomach, [c]. She looks up at the new arrival expectantly.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("For the moment, there is a lull in the onslaught of her children. The matriarch is curled up on her side, cradling three of her sleeping daughters. Behind her, one of her sons is resting with his arms around her midsection, cock stuffed into her snatch. The entire group is covered in cum from their recent coitus.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		parse["child"] = Math.random() < 0.5 ? "son" : "daughter";
+		Text.Add("Vena is up on her knees, pounding her length into one of her eager [child]s even as she’s is in turn fucked from behind. As you approach, the matriarch cries out, giving her [child] a bellyful of hot bunny cream. She pulls out, shooting a few more strands of sloppy spunk on the collapsed figure, her cock glistening with sexual juices. She looks at you expectantly, licking her lip.", parse);
+	}, 1.0, function() { return burrows.HermActive(); });
+	
+	scenes.Get();
+	
+	
+	Text.NL();
+	if(burrows.BrainyActive())
+		Text.Add("<i>“You… different than the others… you here to make me feel good? Give me lots of children?”</i> There’s a flicker of recognition in her eyes as they meet yours, but it’s overshadowed by the veil of insatiable lust fogging her mind. <i>“I… need!”</i>", parse);
+	else
+		Text.Add("<i>“Ahh… you… different. Fuck me?”</i> There’s no sense of recognition in her eyes; you’re just another fucktoy come to use and pleasure her. From her rapt, ecstatic expression, she couldn’t be any happier.", parse);
+	Text.Flush();
+	world.TimeStep({minute: 5});
+	
+	Scenes.Vena.PitPrompt();
+}
+
+Scenes.Vena.PitPrompt = function() {
+	var parse = {
+		
+	};
+	
+	var options = new Array();
+	options.push({ nameStr : "Talk",
+		func : function() {
+			Text.Clear();
+			world.TimeStep({minute: 5});
+			Text.Add("You make an attempt at catching Vena’s attention, trying to divert her mind from sex for a few moments. Caressing her cheek, you ask if she wants to answer a few questions.", parse);
+			Text.NL();
+			if(burrows.BrainyActive()) {
+				Text.Add("<i>“What… talk about?”</i> she responds, cocking her head to the side.", parse);
+				Text.Flush();
+				
+				Scenes.Vena.PitTalkPrompt();
+			}
+			else {
+				Text.Add("<i>“Mm… talk… fuck?”</i> she pants quizzically. Some of her children take up on the call, and she’s quickly distracted with more pressing matters. You make another frustrated attempt to get her focused, but she’s too far gone.", parse);
+				Text.Flush();
+				
+				Scenes.Vena.PitPrompt();
+			}
+		}, enabled : true,
+		tooltip : "You’re not sure how much good it’ll do, but trying to get her attention can’t hurt."
+	});
+	/* TODO
+	options.push({ nameStr : "name",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Flush();
+		}, enabled : true,
+		tooltip : ""
+	});
+	*/
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("You are already forgotten as you step away from the matriarch, a swarm of her offspring flowing in demanding attention and sex.", parse);
+		Text.NL();
+		
+		PrintDefaultOptions(true);
+	});
+}
+
+Scenes.Vena.PitTalkPrompt = function() {
+	var parse = {
+		
+	};
+	
+	//[Herself][Lagon][Ophelia][Roa][The Pit][Back]
+	var options = new Array();
+	options.push({ nameStr : "Herself",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“Vena is loyal slut,”</i> she boasts proudly. <i>“Makes lots and lots of babies for my mate.”</i>", parse);
+			Text.NL();
+			Text.Add("Does she like it here? Would she want to return to the way she was before?", parse);
+			Text.NL();
+			Text.Add("<i>“Don’t… remember before.”</i> She struggles, trying to concentrate. <i>“Vena feels good here. Warm and safe, always lots of sex!”</i>", parse);
+			Text.Flush();
+			world.TimeStep({minute: 5});
+		}, enabled : true,
+		tooltip : "Ask Vena about herself and her past."
+	});
+	options.push({ nameStr : "Lagon",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“Vena loves her mate,”</i> the matriarch replies staunchly. <i>“Births many children for him!”</i> She isn’t lying, you can tell, she really does feel this way about the tyrant king. Perhaps she doesn’t understand her current circumstances.", parse);
+			Text.NL();
+			Text.Add("<i>“Vena and Lagon were together from beginning. Happy family, lots of children. We have many more now.”</i>", parse);
+			Text.NL();
+			Text.Add("Well… that’s certainly an understatement.", parse);
+			Text.Flush();
+			world.TimeStep({minute: 5});
+		}, enabled : true,
+		tooltip : "How does she feel about Lagon? How did he rise to his throne?"
+	});
+	options.push({ nameStr : "Ophelia",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“Good girl,”</i> Vena says proudly. <i>“Helps her father much. Want to see more of her...”</i>", parse);
+			Text.NL();
+			if(burrows.LagonDefeated())
+				Text.Add("You try to explain that Lagon isn’t in charge anymore, Ophelia is, but Vena doesn’t seem to grasp the concept.", parse);
+			else if(ophelia.InPartyAndBroken())
+				Text.Add("The matriarch gives Ophelia a happy squee, embracing her. <i>“Me here, mother!”</i> It’s actually quite touching.", parse);
+			Text.Flush();
+			world.TimeStep({minute: 5});
+		}, enabled : true,
+		tooltip : "How does she feel about her daughter Ophelia?"
+	});
+	if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage3) {
+		options.push({ nameStr : "Roa",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>“Roa is good boy!”</i> Vena replies. <i>“Often kept me company here in Pit.”</i> She licks her lips, and one of her hands absently strays to her massive cock. <i>“Would… love keep him company again.”</i>", parse);
+				if(party.InParty(roa)) {
+					Text.NL();
+					Text.Add("<i>“I’m here, mother,”</i> Roa reassures her, petting the larger bunny. You catch his gaze drifting to his mother’s erection, the slutty little trap eyeing it hungrily.", parse);
+				}
+				Text.Flush();
+				world.TimeStep({minute: 5});
+			}, enabled : true,
+			tooltip : "Does she remember her son, Roa?"
+		});
+	}
+	options.push({ nameStr : "The Pit",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“This my home, everyone nice here,”</i> she proclaims, nuzzling her children. <i>“They care for Vena, give me all the food and warmth and sex I need.”</i>", parse);
+			Text.Flush();
+			world.TimeStep({minute: 5});
+		}, enabled : true,
+		tooltip : "How does she like it here?"
+	});
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“...We fuck now?”</i> Vena looks at you hopefully.", parse);
+		Text.Flush();
+		
+		Scenes.Vena.PitPrompt();
+	});
+}
+
 Scenes.Vena.RestoreEntrypoint = function(fight) {
 	var parse = {
 		playername : player.name
@@ -160,11 +339,11 @@ Scenes.Vena.RestoreEntrypoint = function(fight) {
 		Text.NL();
 		Text.Add("<i>“No. Your words are foul poison and I’ll no longer listen to them. You’re no longer the man I loved. You’ve become nothing more than a twisted and spiteful beast.”</i> As the words spill out, her voice grows stronger and more confident. <i>“You’re so worried with your quest for power that you have all but forgotten what really matters. Your family.”</i>", parse);
 		Text.NL();
-		Text.Add("Lagon bursts out laughing, hysterically. <i>”Family!? Always the simpleton Vena, you could never see what’s beyond the here and now. Always getting in my way. Don’t you see? Our future is on the surface, and the others would never accept our ascension. They would send armies to crush us, unless we crush them first! Are you so stupid you cannot even see this much!?”</i> he asks enraged.", parse);
+		Text.Add("Lagon bursts out laughing, hysterically. <i>“Family!? Always the simpleton Vena, you could never see what’s beyond the here and now. Always getting in my way. Don’t you see? Our future is on the surface, and the others would never accept our ascension. They would send armies to crush us, unless we crush them first! Are you so stupid you cannot even see this much!?”</i> he asks enraged.", parse);
 		Text.NL();
 		Text.Add("The lapin recoils at his words, but she easily regains her composure this time. For a moment you catch a glimpse of tears forming in Vena’s eyes as she looks overcome with sadness. But it quickly disappears as her expression turns to one of pity.", parse);
 		Text.NL();
-		Text.Add("<i>”Your ambition ends here and now, dear; no longer shall our kind strive for mastery over the lands above. You shall remain in chains until I decide what to do with you. Take him away.”</i> Before the stunned Lagon has a chance to respond, she turns her back to him, returning to your side with Ophelia. With a tired expression on her face, the lagomorph matriarch takes her place on her throne as guards drag her mate away.", parse);
+		Text.Add("<i>“Your ambition ends here and now, dear; no longer shall our kind strive for mastery over the lands above. You shall remain in chains until I decide what to do with you. Take him away.”</i> Before the stunned Lagon has a chance to respond, she turns her back to him, returning to your side with Ophelia. With a tired expression on her face, the lagomorph matriarch takes her place on her throne as guards drag her mate away.", parse);
 		Text.NL();
 		Text.Add("<i>“What now, mother?”</i> Ophelia asks, her voice rife with uncertainty.", parse);
 		Text.NL();
