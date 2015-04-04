@@ -631,7 +631,7 @@ Scenes.FarmIntro.HelpAdrian = function() {
 	
 	Text.Add("Getting off the ladder, you are met with the butt-end of a pitchfork as you face the perky girl. Next to her is a rather tall equine-morph, having easily a foot over the girl. He is quite the specimen, too. He has a well-toned body with short silky brown fur coating the bulging muscles of his bare chest, and a flowing dark brown mane falling a little past his shoulders to emphasize his equine physique. He is wearing a pair of trousers made from rough cloth, hiding his presumably equine genitals.", parse);
 	Text.NL();
-	Text.Add("<i>“Hey, [playername], quit staring off into space! We've got work to do!”</i> Gwendy commands as she presses the pitchfork into your hand. <i>“I see you've taken notice of Adrian, here. He's a farmhand who helps me out on occasion, so he's familiar with the pace of things around here. Anyway, let's get started. The two of you can work on getting the hay up while I tend to the cows. Afterwards, we'll take care of whatever else comes up.”</i>", parse);
+	Text.Add("<i>“Hey, [playername], quit staring off into space! We've got work to do!”</i> Gwendy commands as she presses the pitchfork into your hand. <i>“I see you've taken notice of Adrian, here. He's a farmhand who helps me out on occasion, so he's familiar with the pace of things around here. Anyway, let's get started. The two of you can work on getting the hay up while I tend to the cows. Afterward, we'll take care of whatever else comes up.”</i>", parse);
 	Text.NL();
 	
 	if(party.Two()) {

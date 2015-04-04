@@ -2621,7 +2621,7 @@ Scenes.Terry.BrushTail = function() {
 		Text.NL();
 		Text.Add("<i>“Hey, those clothes would only get in the way. Plus I was hoping to convince you to brush the rest of my fur too. Especially since you seem so fond of making it messy,”</i> [heshe] chuckles.", parse);
 		Text.NL();
-		Text.Add("True, true... well, you’ll both have to see if there’s anything you can do with the rest of [hisher] fur afterwards.", parse);
+		Text.Add("True, true... well, you’ll both have to see if there’s anything you can do with the rest of [hisher] fur afterward.", parse);
 		Text.NL();
 		Text.Add("The, now naked, [foxvixen] sashays your way, laying down atop your lap, tush high for easy access.", parse);
 		naked = true;

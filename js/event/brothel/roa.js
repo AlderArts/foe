@@ -736,7 +736,7 @@ Scenes.Roa.TSLPitchAnal = function() {
 		Text.Add("You’re more than willing to please him, so if that’s what he wants...", parse);
 	}
 	else {
-		Text.Add("<i>“[playername], you know me. I love your sweet side, but I also love getting railed like crazy. So go ahead, let loose. Fuck my ass like you mean it. You know I can take it. We can cuddle afterwards,”</i> he says, bucking back against you and clenching his ass.", parse);
+		Text.Add("<i>“[playername], you know me. I love your sweet side, but I also love getting railed like crazy. So go ahead, let loose. Fuck my ass like you mean it. You know I can take it. We can cuddle afterward,”</i> he says, bucking back against you and clenching his ass.", parse);
 		Text.NL();
 		Text.Add("You can’t hold back a chuckle; doesn’t little Roa know you better than that? You’re going to give him what he needs, you just need a moment to get warmed up...", parse);
 	}

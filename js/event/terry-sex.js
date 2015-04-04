@@ -1878,7 +1878,7 @@ Scenes.Terry.SexWorship = function() {
 		Text.NL();
 		Text.Add("Eyes half-closed, smouldering seductively as they stare into the baffled [foxvixen]’s own, your own [tongueDesc] slides slowly and deliberately from between your lips. You carefully lick the strand of mingled juices clear on your end, curling it purposefully into your mouth. Tilting your head, you swallow loudly, throat visibly flexing as you gulp down the fluid you took, a faint hum of pleasure bubbling up from between your lips.", parse);
 		Text.NL();
-		Text.Add("Following your lead, the [foxvixen] tilts [hisher] own head back and swallows, smacking [hisher] lips afterwards. <i>“...Good?”</i> [heshe] smiles nervously.", parse);
+		Text.Add("Following your lead, the [foxvixen] tilts [hisher] own head back and swallows, smacking [hisher] lips afterward. <i>“...Good?”</i> [heshe] smiles nervously.", parse);
 		Text.NL();
 		Text.Add("Smiling proudly, you nod your head and confirm that’s very good.", parse);
 	}
@@ -3766,7 +3766,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 					}
 					else {
 						if(cum > 6) {
-							Text.Add("Cum explodes into Terry’s depths like a perverted volcano eruption. Though much of it spurts back out afterwards, the bulk of it spirals deep into Terry’s belly, ballooning it outwards with such vigor it thrusts itself against you.", parse);
+							Text.Add("Cum explodes into Terry’s depths like a perverted volcano eruption. Though much of it spurts back out afterward, the bulk of it spirals deep into Terry’s belly, ballooning it outwards with such vigor it thrusts itself against you.", parse);
 							Text.NL();
 							parse["andass"] = player.NumCocks() > 1 ? " and ass" : "";
 							Text.Add("By the time you finally finish, Terry looks to have doubled [hisher] previous weight, with all the extra bulk concentrated on [hisher] belly, and a veritable river of semen flows from [hisher] cunt[andass] down between your respective legs.", parse);

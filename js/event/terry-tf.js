@@ -201,7 +201,7 @@ Scenes.Terry.JeanneTFCraft = function(item, scene, horseTF) {
 	Text.Clear();
 	Text.Add("Jeanne smiles as she takes the necessary ingredients from you, as well as the coins. <i>“Wait here, I’ll be right back.”</i>", parse);
 	Text.NL();
-	Text.Add("The elven mage moves about her room, collecting the materials she’ll need and setting them all up on a clear spot at a table nearby. Jeanne begins by taking the ingredients you’ve given and pouring them all into a bowl. She mixes it until she has worked the mix into an oddly-colored soup. Afterwards, she immediately pours the soup into a distill and starts the distilling process with a flick of her finger.", parse);
+	Text.Add("The elven mage moves about her room, collecting the materials she’ll need and setting them all up on a clear spot at a table nearby. Jeanne begins by taking the ingredients you’ve given and pouring them all into a bowl. She mixes it until she has worked the mix into an oddly-colored soup. Afterward, she immediately pours the soup into a distill and starts the distilling process with a flick of her finger.", parse);
 	Text.NL();
 	Text.Add("While waiting for the process to finish, she opens a box nearby and takes out a strange-looking vial. It is about three inches long and one inch thick, ending in a rounded-out tip. She plugs the open vial to the end of the distill and sits back to watch the process conclude.", parse);
 	Text.Flush();

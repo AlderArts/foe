@@ -1017,7 +1017,7 @@ Scenes.Miranda.RigardGatesBribe = function() {
 					player.FuckAnal(player.Butt(), miranda.FirstCock(), 4);
 					miranda.Fuck(miranda.FirstCock(), 3);
 					
-					Text.Add("<i>“Not sure you’ll be able to walk after this one,”</i> the guardswoman grunts as she slams her hips against yours. <i>“Would be a shame, wouldn’t it, going through all of this only to be unable to enter the city afterwards!”</i>", parse);
+					Text.Add("<i>“Not sure you’ll be able to walk after this one,”</i> the guardswoman grunts as she slams her hips against yours. <i>“Would be a shame, wouldn’t it, going through all of this only to be unable to enter the city afterward!”</i>", parse);
 				}
 				else { // repeat >= 5
 					parse["hisher"] = player.mfTrue("his", "her");
@@ -7571,7 +7571,7 @@ Scenes.Miranda.TerryTavernSexSubbyVag = function(cocks) {
 			Text.Add("You can't help but smile back, and thank her for understanding. Besides, it's certainly not a bad thing, being tied to someone like her.", parse);
 		}
 		Text.NL();
-		Text.Add("It takes a while before you’re finally able to pull out of Miranda’s well-used honeypot, and you’re somewhat loathe to do so, but you gotta get going. Cleaning up takes long, but you expected as much. The bigger the party the bigger the aftermath you gotta clean up afterwards.", parse);
+		Text.Add("It takes a while before you’re finally able to pull out of Miranda’s well-used honeypot, and you’re somewhat loathe to do so, but you gotta get going. Cleaning up takes long, but you expected as much. The bigger the party the bigger the aftermath you gotta clean up afterward.", parse);
 		Text.NL();
 		Text.Add("After scouting for a missing pants, you’re both fully dressed, if a bit sore. <i>“Let’s get going [playername],”</i> Miranda announces with a pat on your back.", parse);
 		Text.NL();

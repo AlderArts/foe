@@ -598,7 +598,7 @@ Scenes.Fera.SexPrompt = function() {
 							Text.Add("As she gulps futilely, your other [multiCockDesc] cum[notS2] all over the floor and make[notS2] a mess. ", parse);
 						Text.Add("She pulls your [cockDesc] out of her mouth, wiping it as she catches her breath.", parse);
 						Text.NL();
-						Text.Add("Afterwards, the catgirl licks[eachof] your [multiCockDesc][balls] as well as her hands clean. She gives your softening [multiCockDesc] a few playful strokes as she kisses you one more time. Fera then helps you get dressed and you help her clean up before she leads out of the dressing room.", parse);
+						Text.Add("Afterward, the catgirl licks[eachof] your [multiCockDesc][balls] as well as her hands clean. She gives your softening [multiCockDesc] a few playful strokes as she kisses you one more time. Fera then helps you get dressed and you help her clean up before she leads out of the dressing room.", parse);
 					}
 					else {
 						Text.Add("The catgirl eagerly gulps down your cum as your [multiCockDesc] blow[notS] [itsTheir] load[s]. Once she finishes, Fera licks her lips happily and proceeds to lick[eachof] your [multiCockDesc][balls] clean with her rough tongue.", parse);
@@ -620,7 +620,7 @@ Scenes.Fera.SexPrompt = function() {
 					parse["legs"] = function() { return player.LegsDesc(); }
 					Text.Add("A few minutes later you can take no more, and your body tenses as you orgasm. Fera pulls her wet fingers out of your [vagDesc] and helps you remain standing as your [legs] weaken slightly. Your breathing slows as you cuddle with her for a moment.", parse);
 					Text.NL();
-					Text.Add("Afterwards, she helps you get dressed and leads you out.", parse);
+					Text.Add("Afterward, she helps you get dressed and leads you out.", parse);
 				}
 				
 				world.TimeStep({minute: 30});

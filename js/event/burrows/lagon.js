@@ -716,7 +716,7 @@ Scenes.Lagon.RulerBlowjobEntrypoint = function() {
 		
 		Text.Add(" the alchemist starts uncertainly, only to be cut off by her father.", parse);
 		Text.NL();
-		Text.Add("<i>“If it’s no more important than that, it can wait,”</i> he interrupts her. <i>“I’m sure you can have some fun with your brothers over there while I... finish my business. Stay, but stay quiet. Depending on how well my little pet performs, I may have need of you afterwards.”</i>", parse);
+		Text.Add("<i>“If it’s no more important than that, it can wait,”</i> he interrupts her. <i>“I’m sure you can have some fun with your brothers over there while I... finish my business. Stay, but stay quiet. Depending on how well my little pet performs, I may have need of you afterward.”</i>", parse);
 		Text.NL();
 		Text.Add("Out of the corner of your eye, you see Ophelia demurely walk over to join the harem nearby, absentmindedly swatting away one of her horny brothers who makes a grab for the alchemist. With yet another person joining your audience, you try to clear your mind and focus on the task at hand.", parse);
 		Text.NL();
@@ -997,7 +997,7 @@ Scenes.Lagon.RulerGetFuckedEntrypoint = function(opheliaPresent) {
 		else if(player.FirstBreastRow().Size() < 15)
 			Text.Add("You cup your [breasts], giving them an alluring bounce. <i>“You have my attention.”</i> Lagon stretches languidly, grinning as you prance and squeeze your bounty for him.", parse);
 		else
-			Text.Add("You squeeze your [breasts] together, a slight smirk playing on your lips as you mesmerize the lapin king with your generous mass of titflesh. <i>“Not bad at all,”</i> he compliments you. <i>“Once I’m done banging your brains out, perhaps I’ll let you clean me up with those afterwards.”</i>", parse);
+			Text.Add("You squeeze your [breasts] together, a slight smirk playing on your lips as you mesmerize the lapin king with your generous mass of titflesh. <i>“Not bad at all,”</i> he compliments you. <i>“Once I’m done banging your brains out, perhaps I’ll let you clean me up with those afterward.”</i>", parse);
 		Text.Add(" Swaying your [hips] sensually, you slowly move your hands down your body, closing in on your loins.", parse);
 		Text.NL();
 		if(p1cock) {
