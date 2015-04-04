@@ -35,6 +35,13 @@ Outlaws.prototype.Update = function(step) {
 	
 }
 
+// TODO
+Outlaws.prototype.TurnedInBinder = function() {
+	return false;
+}
+
 Outlaws.prototype.Rep = function() {
 	return this.relation.Get();
 }
+
+
