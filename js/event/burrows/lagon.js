@@ -2179,7 +2179,7 @@ Scenes.Lagon.ReturnToBurrowsAfterScepter = function() {
 			Text.NL();
 			Text.Add("Not waiting for your reply, she drags you along, dashing from cover to cover. <i>“Shit!”</i> she mutters. Peeking around her, you see that the way ahead is blocked and guarded by a dozen soldier bunnies. <i>“We can’t go through here, but I know another way.”</i> This venture, too, proves short lived, as the way back is blocked by another patrol hurrying your way.", parse);
 			Text.NL();
-			Text.Add("<i>“They are herding us!”</i> Ophelia growls anxiously, pulling you down another side passage. She’s right; you’re no expert at navigating these mad tunnels, but you seem to be steadily pushed away from the Pit and towards the throne room. Then again, perhaps this is for the best.", parse);
+			Text.Add("<i>“They are herding us!”</i> Ophelia growls anxiously, pulling you down another side passage. She’s right; you’re no expert at navigating these mad tunnels, but you seem to be steadily pushed away from the Pit and toward the throne room. Then again, perhaps this is for the best.", parse);
 			Text.NL();
 			Text.Add("<i>“Y-you can’t face him alone, you can’t!”</i> Ophelia begs you, pulling on your arm.", parse);
 			Text.NL();
@@ -2254,7 +2254,7 @@ Scenes.Lagon.ReturnToBurrowsAfterScepter = function() {
 					Text.NL();
 					Text.Add("<i>“I’d say that your first order of business as my agent should be to take care of this mess,”</i> Lagon suggests, languidly returning to his throne. <i>“Now, entertain me!”</i>", parse);
 					Text.NL();
-					Text.Add("You ready yourself for combat as the furious she-brute bounds towards you.", parse);
+					Text.Add("You ready yourself for combat as the furious she-brute bounds toward you.", parse);
 					Text.NL();
 					Text.Add("It’s a fight!", parse);
 					Text.Flush();
@@ -3009,7 +3009,7 @@ Scenes.Lagon.DefeatedSexFuckAss = function() {
 		if(blueballed) {
 			Text.Add("<i>“At least let me cum this time. I haven’t had any release in a while,”</i> he says, spreading his legs hesitantly and exposing his throbbing maleness, already dripping pre.", parse);
 			Text.NL();
-			Text.Add("You’ll consider his request. His compliance and eagerness does go a long way towards convincing you.", parse);
+			Text.Add("You’ll consider his request. His compliance and eagerness does go a long way toward convincing you.", parse);
 		}
 		else {
 			Text.Add("<i>“Fine, just be quick about it. I can only stomach you for so long,”</i> he says, hesitantly spreading his legs and showing you his erect maleness.", parse);

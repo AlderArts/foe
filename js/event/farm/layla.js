@@ -1764,7 +1764,7 @@ Scenes.Layla.Appearance = function(switchSpot) {
 	Text.NL();
 	Text.Add("Her eyes are human enough - with round pupils and white sclera - so long as you look past the deep crimson of her irises. Raven black hair falls in a shoulder-length mane from her head, trailing over her neck. When she grins, the teeth she reveals are perfectly human-like. Strangely, this seems to make her <b>more</b> unusual rather than less.", parse);
 	Text.NL();
-	Text.Add("Finished taking in her features, you allow your gaze to sweep down towards her chest.", parse);
+	Text.Add("Finished taking in her features, you allow your gaze to sweep down toward her chest.", parse);
 	Text.NL();
 	if(layla.Virgin()) {
 		Text.Add("A perky set of dun-silver C-cups sit upon her chest, each adorned with a large, prominently erect nipple the same dark gray color as the rest of her skin. Other than their coloration and the size - and seemingly permanent erection - her nipples seem quite human.", parse);
@@ -2084,7 +2084,7 @@ Scenes.Layla.FirstMeeting = function(approach) {
 	
 	Text.Clear();
 	if(approach) {
-		Text.Add("As you[c] make your way across the fields towards the farmhouse, your ears are filled with a great furor. Shouts, curses, screams, bleats; a cacophony of distress torn from throats animal and otherwise.", parse);
+		Text.Add("As you[c] make your way across the fields toward the farmhouse, your ears are filled with a great furor. Shouts, curses, screams, bleats; a cacophony of distress torn from throats animal and otherwise.", parse);
 		Text.NL();
 		Text.Add("Instinctively, you pick up your pace, racing to investigate. As you approach the barn, you see Gwendy pelting over the turf, swearing to herself. She lunges for a pitchfork that was left leaning against the side of the barn and spins on her heel to start back the way she had come.", parse);
 		Text.NL();

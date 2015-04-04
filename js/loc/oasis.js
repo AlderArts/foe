@@ -371,7 +371,7 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 				Text.NL();
 				Text.Add("Nonetheless, you decide to pull back and give [rhimher] a little break… and focus your attention elsewhere. ", parse);
 				if(lizan.FirstCock()) {
-					Text.Add("Your hands glide down [rhisher] body, feeling the relief of toned muscles under your fingertips, until you reach [rhisher] hips. You stroke along [rhisher] butt, to the front of [rhisher] thighs, and inwards. The hard pair of ridged cocks strain against the fabric of [rhisher] pants, desperately pressing into your palms.", parse);
+					Text.Add("Your hands glide down [rhisher] body, feeling the relief of toned muscles under your fingertips, until you reach [rhisher] hips. You stroke along [rhisher] butt, to the front of [rhisher] thighs, and inward. The hard pair of ridged cocks strain against the fabric of [rhisher] pants, desperately pressing into your palms.", parse);
 					Text.NL();
 					Text.Add("Your strokes seem to reawaken your companion, and [rheshe] grabs hold of you, pushing you firmly toward the bed. You stumble going over backwards and land softly on the mattress with an involuntary squeal. The lizan is not far behind, dropping onto hands and knees on top of you, [rhisher] snout inches away from yours.", parse);
 					Text.NL();

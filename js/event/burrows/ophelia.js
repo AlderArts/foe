@@ -1088,7 +1088,7 @@ Scenes.Ophelia.SexVaginal = function() {
 	options.push({ nameStr : "Slowly",
 		func : function() {
 			Text.Clear();
-			Text.Add("A smile on your lips, you stride purposefully towards Ophelia. The female lagomorph smiles a little nervously at you, excitement obvious as she shifts her weight from foot to foot. Tenderly, you reach out with your hand, running your fingers through her soft hair, and then you shift upwards. You take the rim of her elongated ear between forefingers and thumb, stroking the sensitive flesh with delicate twitches of your fingers.", parse);
+			Text.Add("A smile on your lips, you stride purposefully toward Ophelia. The female lagomorph smiles a little nervously at you, excitement obvious as she shifts her weight from foot to foot. Tenderly, you reach out with your hand, running your fingers through her soft hair, and then you shift upwards. You take the rim of her elongated ear between forefingers and thumb, stroking the sensitive flesh with delicate twitches of your fingers.", parse);
 			Text.NL();
 			Text.Add("She moans softly, body turning to jelly as she almost creams herself over your tender touch. The pitter-patter of her arousal reaches your [earsDesc] and you smile. If she wasn’t ready then, now she’s more than ready.", parse);
 			Text.NL();

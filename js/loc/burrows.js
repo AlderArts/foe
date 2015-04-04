@@ -293,7 +293,7 @@ world.loc.Burrows.Pit.description = function() {
 		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon"
 	};
 	
-	Text.Add("The Pit is probably the largest cavern in the lagomorph colony, a giant breeding chamber filled with the never-ending grunts and moans of the giant orgy. Several hundred rabbits have joined in the party, with those too tired to go on continually being replaced by new arrivals. The floor tilts towards the center of the chamber, the narrow open pathways sticky with cum.", parse);
+	Text.Add("The Pit is probably the largest cavern in the lagomorph colony, a giant breeding chamber filled with the never-ending grunts and moans of the giant orgy. Several hundred rabbits have joined in the party, with those too tired to go on continually being replaced by new arrivals. The floor tilts toward the center of the chamber, the narrow open pathways sticky with cum.", parse);
 	Text.NL();
 	if(burrows.LagonPit()) {
 		if(world.time.hour >= 2 && world.time.hour < 6)

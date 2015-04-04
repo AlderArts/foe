@@ -713,7 +713,7 @@ Scenes.Terry.SexGetOralCockCont = function(parse, p1cock) {
 				else {
 					Text.Add("Terry’s brows are furrowed in concentration as [heshe] forces your [cockTip] down [hisher] throat to take as much of your seed in as [heshe] can. [HisHer] throat moves as if it was an extension of your shaft, moving and milking away alongside the bulges of pent up seed that you pump down.", parse);
 					Text.NL();
-					Text.Add("That’s your brave, clever [boygirl]. Excitedly, you exhort [himher] to take it all, that you know [heshe] can handle everything you have to give. Stirred by your words, Terry manages to take you even deeper, ensuring that not so much as a drop escapes its cascade towards [hisher] stomach.", parse);
+					Text.Add("That’s your brave, clever [boygirl]. Excitedly, you exhort [himher] to take it all, that you know [heshe] can handle everything you have to give. Stirred by your words, Terry manages to take you even deeper, ensuring that not so much as a drop escapes its cascade toward [hisher] stomach.", parse);
 					Text.NL();
 					Text.Add("It’s a good thing that [heshe] undressed first, because otherwise you know [hisher] belly would tear [hisher] shirt clean open with how fast it swells. You find yourself wondering just how much [heshe] can take, but fortunately it seems you’re within [hisher] limits.", parse);
 					Text.NL();

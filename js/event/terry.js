@@ -2389,7 +2389,7 @@ Scenes.Terry.SkinshipPromptChoices = function() {
 	options.push({ nameStr : "Kiss",
 		func : function() {
 			Text.Clear();
-			Text.Add("Bridging the distance between you, your hands reach out towards Terry’s face. One tenderly caresses [hisher] cheek, whilst the other tucks itself under the [foxvixen]’s chin, tilting [hisher] head for a better angle.", parse);
+			Text.Add("Bridging the distance between you, your hands reach out toward Terry’s face. One tenderly caresses [hisher] cheek, whilst the other tucks itself under the [foxvixen]’s chin, tilting [hisher] head for a better angle.", parse);
 			Text.NL();
 			if(terry.Relation() < 60) {
 				Text.Add("Terry looks a bit unsure of [himher]self, but [heshe] makes no move to push you away either.", parse);
