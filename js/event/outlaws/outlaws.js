@@ -8,6 +8,8 @@ Scenes.Outlaws = {};
 function Outlaws(storage) {
 	this.flags = {};
 	
+	this.flags["BT"] = 0; // Bitmask
+	
 	this.relation = new Stat(0);
 	
 	if(storage) this.FromStorage(storage);
@@ -34,6 +36,7 @@ Outlaws.prototype.FromStorage = function(storage) {
 Outlaws.prototype.Update = function(step) {
 	
 }
+
 
 // TODO
 Outlaws.prototype.TurnedInBinder = function() {

@@ -4,7 +4,14 @@
  * Flags in outlaws
  */
 
-
+Outlaws.BullTower = {
+	AlaricFreed     : 1,
+	StatueDestroyed : 2,
+	CaravansIgnited : 4,
+	AnimalsFreed    : 8
+	
+	
+};
 
 
 /*
@@ -391,6 +398,14 @@ Scenes.BullTower.MovingOut = function() {
 				Text.Add("With that thought in mind, you step into the deserted main courtyard of Bull Tower, the main structure of the ancient outpost standing before you, a remnant of a time when Eden was wilder and yet more prosperous. The shadows cast by the walls are as thick on the inside as they are on the outside, and it is into the cover of these that the two of you dive, taking a moment to catch your breaths and plan your next move.", parse);
 				Text.Flush();
 				
+				party.SaveActiveParty();
+				party.ClearActiveParty();
+				
+				party.SwitchIn(player);
+				party.AddMember(cveta, true);
+				
+				gwendy.RestFull();
+				
 				MoveToLocation(world.loc.BullTower.Courtyard.Yard, {hour: 3});
 			});
 		}, enabled : true,
@@ -398,4 +413,289 @@ Scenes.BullTower.MovingOut = function() {
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
+
+
+world.loc.BullTower.Courtyard.Yard.description = function() {
+	Text.Add("You are standing in the main courtyard of Bull Tower, flanked by high walls on three sides and the old watchtower to the north. The gates - the only way in or out of the old fortress - lie to the south, watched over by the two guards whom Cveta ‘persuaded’ to let you in. The effects of age and neglect are clearly visible in the appearance of the grounds  - the old training field is overgrown with weeds and wildflowers, and while the walls are still solid, bits of crumbling masonry lie at the base.");
+	Text.NL();
+	if(outlaws.flags["BT"] & Outlaws.BullTower.StatueDestroyed) {
+		Text.Add("The results of your heroic vandalism of Preston’s statue lie plain for all to see, and you can’t help but take a second or two to savor your handiwork. Toppled and smashed, only the feet remain attached to the plinth - the main body of the statue has been reduced to several chunks of marble, and the head has disappeared somewhere in the overgrown training field.");
+		Text.NL();
+		Text.Add("It’s a very poignant scene.");
+	}
+	else {
+		Text.Add("Dumped not too far from the gate - perhaps due to its clearly hefty weight - is a gigantic marble statue of Preston, the bottom wrapped in canvas and secured with rope for transport. This clearly isn’t its final destination. The artist has embellished Preston quite a bit - well, a lot. The man’s apparently replaced a good fifteen pounds of fat with muscle since you last saw him, if the statue’s to be believed. However, the ground beneath it isn’t quite even - probably an oversight of whoever offloaded it here, one that could  perhaps be turned to your advantage…");
+	}
+	Text.NL();
+	Text.Add("From your hiding spot, you can see a set of animal pens - to call them stables would be too generous - to the west, and a sheltered courtyard to the east.");
+	Text.NL();
+	if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited) {
+		Text.Add("Remains of the smugglers’ wagons you set aflame give off thin trails smoke that dissipate somewhere in the dark. While the courtyard’s roof is keeping it somewhat contained, someone is going to notice the smoke sooner or later.");
+		Text.NL();
+	}
+	Text.Add("You take a moment to consider what you should do next.");
+}
+
+
+// TODO
+//[Animal Pens][Caravan][Enter][Statue][Slip Out]
+world.loc.BullTower.Courtyard.Yard.links.push(new Link(
+	"", true, true,
+	null,
+	function() {
+		
+	}
+));
+world.loc.BullTower.Courtyard.Yard.links.push(new Link(
+	"Animal Pens", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.BullTower.Courtyard.Pens, {minute: 5});
+	}
+));
+
+world.loc.BullTower.Courtyard.Yard.events.push(new Link(
+	"Statue", function() {
+		return !outlaws.flags["BT"] & Outlaws.BullTower.StatueDestroyed;
+	}, true,
+	null,
+	function() {
+		var parse = {
+			playername: player.name
+		};
+		
+		Text.Clear();
+		Text.Add("You give Preston’s statue another look-over. If not for the fact that you know better, the depiction of the man could almost be called noble. The statue’s forward pose, the pure white marble it’s made of, the literally chiseled features… it’s absolutely nothing like the Preston who burst into the warehouse and claimed credit for Miranda’s catch for himself.", parse);
+		Text.NL();
+		Text.Add("A pretentious statue for a pretentious man. Very fitting. The more you look at it, though, the more you feel it would look, much, much better in several pieces. With the way it’s balanced right now, wrapped up and bound on uneven ground, it’s truly itching for a good hurting. Just a little push in the right direction…", parse);
+		Text.NL();
+		Text.Add("You hear Cveta click her beak as she steps up to your side. <i>“I take it that your thoughts and mine are aligned with regards to this pompous travesty?”</i>", parse);
+		Text.NL();
+		Text.Add("Why yes, you do believe they are. ", parse);
+		if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed) {
+			Text.Add("Even Alaric appears grimly pleased at the prospect, the little bean counter’s lips thin and straight, his eyes hard.", parse);
+			Text.NL();
+			Text.Add("<i>“I’ll gladly help too,”</i> he says. <i>“I know I won’t get the chance to actually put a fist to Preston’s jaw, so this’ll have to do. And I daresay I deserve it.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, since you’ve done what you came to do, there’d probably be no harm in you engaging in a little heroic vandalism. You’re on your way out already, and anything that distracts the royal guards from pursuit would be helpful. Will you do it?", parse);
+		}
+		else {
+			Text.Add("It certainly is tempting to topple the statue and smash it into a thousand tiny pieces, but the resulting noise would probably attract a lot of attention. Nevertheless, if you’re really determined, you <i>could</i> do so anyway. Will you topple the statue?", parse);
+		}
+		Text.Flush();
+		
+		//[Yes][No]
+		var options = new Array();
+		options.push({ nameStr : "Yes",
+			func : function() {
+				Text.Clear();
+				if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed) {
+					Text.Add("<i>“Let’s get started, then!”</i> Alaric says, a twinge of vindictive glee in his voice. Without further ado, the three of you stride up to the statue’s base and, on a count of three, give it an experimental push. It wobbles a little, which is all the encouragement you need to set it to rocking dangerously. The statue’s fate is sealed - one final shove, good and hard, and it tips off-balance and tumbles from its plinth. Weeks, perhaps months’ worth of work by an artisan sculptor ruined in a matter of minutes, Preston’s chiseled form shattering into an assortment of fragments both large and small when it hits the ground.", parse);
+					Text.NL();
+					Text.Add("It’s a while before the echoes fade, contained within the high walls as they are. Without anything to hold onto, the ropes and canvas that once bound the statue lie loose in the dirt, and Alaric’s found the statue’s disembodied head; as you watch, he punts it into the tall grass with a savage kick. There’s a surprising amount of strength in that small frame of his - won’t he hurt his foot like that?", parse);
+					Text.NL();
+					Text.Add("You turn to Cveta, but she shakes her head. <i>“Let him vent his frustration, [playername]. We should be leaving soon. I suppose I should do my part, too.”</i>", parse);
+					Text.NL();
+					Text.Add("As you watch, Cveta produces a small stick of charcoal from a pocket. Focusing her attention on the dim light, she sketches the outlaws’ symbol - a stylized paw - on the toppled plinth with a few broad strokes. <i>“That should suffice. With that, I suggest that we vacate the premises posthaste - better to leave on our own terms rather than being forced to flee.”</i>", parse);
+				}
+				else {
+					Text.Add("To the wind with caution! You want to see Preston’s face smashed so badly that you’re willing to take this risk. Pressing your back against the marble statue, you give it an experimental push. The effort is rewarded when you find it rocks slightly on the uneven ground, and you note with grim satisfaction that it could probably be toppled. Maybe not by you alone, but with Cveta helping…", parse);
+					Text.NL();
+					Text.Add("Their carelessness, your gain. Cveta looks a little uneasy about the idea, but eventually gives in and follows your lead, pushing her slight frame against the statue. She doesn’t add very much, but it’s enough to tip the scales and send it careening to the ground where it shatters into a thousand pieces with a mighty crash. It takes a good while for the echoes to fade - while someone has definitely heard that and will eventually arrive to investigate, smashing that statue felt <i>good</i>, didn’t it?", parse);
+					
+					//TODO Suspicion +20
+				}
+				Text.Flush();
+				
+				world.TimeStep({minute: 20});
+				outlaws.flags["BT"] |= Outlaws.BullTower.StatueDestroyed;
+				
+				Gui.NextPrompt();
+			}, enabled : true,
+			tooltip : "Time for some heroic vandalism!"
+		});
+		options.push({ nameStr : "No",
+			func : function() {
+				Text.Clear();
+				Text.Add("Despite you being sorely tempted to send the likeness of that pompous ass careening to the ground, you stay your hand for now and step back from the statue. Now’s not the time to give in to impulses of petty vindictiveness.", parse);
+				if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed) {
+					Text.NL();
+					Text.Add("<i>“Oh?”</i> Cveta says, seeing you change your mind. <i>“Is there something you still need to accomplish in this place, [playername]? Time does grow short - we should keep backtracking to a minimum, lest we overstay our welcome.”</i>", parse);
+				}
+				Text.Flush();
+				
+				world.TimeStep({minute: 5});
+				
+				Gui.NextPrompt();
+			}, enabled : true,
+			tooltip : "Nah, it can wait."
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+));
+
+world.loc.BullTower.Courtyard.Yard.links.push(new Link(
+	"Slip out", true, true,
+	null,
+	function() {
+		var parse = {
+			
+		};
+		
+		Text.Clear();
+		if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed) {
+			Text.Add("With Alaric freed and the main objective of your mission completed, you could leave the fortress with a clean conscience - and it would be best to do so before the diversion runs its course and you’re forced to make a desperate escape. Best to quit while you’re ahead, as the saying goes.", parse);
+			Text.NL();
+			Text.Add("With that in mind, will you really leave the fortress now?", parse);
+			Text.Flush();
+			
+			//[Yes][No]
+			var options = new Array();
+			options.push({ nameStr : "Yes",
+				func : function() {
+					Scenes.BullTower.SlipOut();
+				}, enabled : true,
+				tooltip : "Best leave while still ahead."
+			});
+			options.push({ nameStr : "No",
+				func : function() {
+					Text.Clear();
+					Text.Add("The urge to leave the tower grounds is strong - the less you linger, the smaller the chance you’ll be detected, after all - but you fight the impulse to flee. There’s still work to be done here.", parse);
+					Text.Flush();
+					
+					Gui.NextPrompt();
+				}, enabled : true,
+				tooltip : "There’s still work to be done here."
+			});
+			Gui.SetButtonsFromList(options, false, null);
+		}
+		else {
+			Text.Add("You look at the open archway and drawn portcullis. It’s true you could leave now, but you still haven’t accomplished what you set out to do. Retreat is not an option at this point, especially not with Cveta watching you and the fact that if you left now, you’d have a really hard time trying to explain things to Zenith.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		}
+	}
+));
+
+
+world.loc.BullTower.Courtyard.Pens.description = function() {
+	Text.Add("These pens look like they used to be proper stables, but time and neglect have eaten away at the supporting timbers. A few serviceable stalls remain, but… well, it wouldn’t be right to call them stables without a single horse in it.");
+	Text.NL();
+	Text.Add("The prevailing smell in the air is one of mold and old dirt rather than that of animals; any feeding or water troughs have long since decayed into dust, with hooks for tack and other riding gear long rusted down to brown stubs. Even with the wealthy royal guard secretly occupying Bull Tower, the building is not getting much use - they must do most of their travel on foot.");
+	Text.NL();
+	Text.Add("The only part of these pens which could be considered relatively new are the latches on the stall doors, which although not exactly shiny, have yet to accumulate the thick coat of rust and grime that covers every other metal object in the vicinity.");
+	Text.NL();
+	if(outlaws.flags["BT"] & Outlaws.BullTower.AnimalsFreed)
+		Text.Add("Having released the mules, there’s nothing else for you to do here. The beasts mill about the grounds placidly, creating a bit of noise but presenting no immediate difficulty that would require the attention of the guard. It’s quite a clever diversion, now that you think about it - any strange noises that you or Cveta inadvertently make would in all probability be blamed on the poor animals and not investigated until sunup.");
+	else
+		Text.Add("The twenty or so mules that have been housed here are rather docile. The animals are clearly used to human-ish presence and give no reaction to your entry save for faint whuffs of breath and the occasional flick of a ear or tail. It might be worthwhile to let them out of their pens as a diversion.");
+	Text.NL();
+	Text.Add("Well, what will you do?");
+}
+
+world.loc.BullTower.Courtyard.Pens.links.push(new Link(
+	"Courtyard", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.BullTower.Courtyard.Yard, {minute: 5});
+	}
+));
+
+world.loc.BullTower.Courtyard.Pens.events.push(new Link(
+	"Free Animals", function() {
+		return !outlaws.flags["BT"] & Outlaws.BullTower.AnimalsFreed;
+	}, true,
+	null,
+	function() {
+		var parse = {
+			
+		};
+		
+		Text.Clear();
+		Text.Add("Looking at the placid beasts in their stalls, an idea comes to mind. Moving to each old stall - and trying not to think too hard about the moldy stench as you do so - you undo the latches on each of the pen doors in turn, throwing gates wide open for the mules to make their escape. After taking a few moments to notice that freedom and grazing is now within their reach, they trot out of the ancient building to the overgrown courtyard, which seems far more to their liking.", parse);
+		Text.NL();
+		Text.Add("Your actions don’t go unnoticed, though - not with all twenty-odd mules put to pasture. Soon enough, a pair of lights appear atop the section of wall closest to the animal pens, a trio of silhouettes peering down into the darkness below. Quickly, you duck behind the cover of a low, crumbling wall, Cveta following in your step.", parse);
+		Text.NL();
+		Text.Add("<i>“Crap, the mules got out again.”</i> The voice is faint as it floats down from the ramparts.", parse);
+		Text.NL();
+		Text.Add("<i>“That’s the third time this month. Damn it, Fred, we should really get better latches.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“It’s not a matter of the latches, dimwit. They hold well enough. The critters are just smarter than we give them credit for. I told you, I saw one of them nose it open couple of weeks ago, just like that.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Does that matter right now? The damned things are out and all over the courtyard. Who’s going to go down and get them back in?”</i>", parse);
+		Text.NL();
+		Text.Add("Silence. You hold your breath, not taking your eyes off the flickering lights.", parse);
+		Text.NL();
+		Text.Add("<i>“You know what? It’s far too dark for this crap.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“What?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“What I’m saying is that those dumb critters aren’t going to go anywhere, not unless they try to get through the gate, and it’s too dark to be romping around trying to herd them back in. If they want out, well, they can fucking well stay out. I say it can damn well wait till dawn.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“I’m not so sure about that, Fred…”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Besides, don’t we have orders to be on the lookout for intruders while everyone else is out on the road? We should be looking out, not in. You really want to risk explaining to the lieutenant that we abandoned our posts for a few stupid animals? Let them make a bit of noise - that’s the most they’re going to be doing.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Is that really alright?..”</i>", parse);
+		Text.NL();
+		Text.Add("Fred must have won the argument, for the lights eventually disappear, leaving you and Cveta to be on your way.", parse);
+		Text.Flush();
+		
+		outlaws.flags["BT"] |= Outlaws.BullTower.AnimalsFreed;
+		
+		world.TimeStep({ minute : 15 });
+		
+		//TODO suspicion - 20
+		
+		Gui.NextPrompt();
+	}
+));
+
+
+//TODO
+Scenes.BullTower.SlipOut = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("PLACEHOLDER", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	party.RemoveMember(cveta);
+	party.LoadActiveParty();
+	
+	//TODO
+	MoveToLocation(world.loc.Outlaws.Camp, {hour: 3});
+}
+
+
+
+
+
+world.loc.BullTower.Courtyard.Yard.description = function() {
+	Text.Add("");
+	Text.NL();
+	Text.Add("");
+}
+
+world.loc.BullTower.Courtyard.Yard.links.push(new Link(
+	"", true, true,
+	null,
+	function() {
+		
+	}
+));
+
+world.loc.BullTower.Courtyard.Yard.events.push(new Link(
+	"", true, true,
+	null,
+	function() {
+		
+	}
+));
 
