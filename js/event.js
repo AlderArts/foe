@@ -65,7 +65,7 @@ Event.prototype.switchSpot = function() {
 	return false;
 }
 
-MoveToLocation = function(location, timestep) {
+MoveToLocation = function(location, timestep, preventClear) {
 	var oldLocation = party.location;
 	party.location = location;
 
@@ -73,7 +73,7 @@ MoveToLocation = function(location, timestep) {
 	timestep = timestep || new Time();
 	world.TimeStep(timestep);
 	
-	location.onEntry(false, oldLocation);
+	location.onEntry(preventClear, oldLocation);
 }
 
 Event.prototype.SleepFunc = function() {

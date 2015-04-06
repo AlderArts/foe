@@ -2,14 +2,33 @@
  * Contains the "Blue roses" quest
  * 
  * Flags in outlaws
+ * stats in outlaws.BT
  */
+
+function BullTowerStats() {
+	this.suspicion = new Stat(0);
+	this.suspicion.debug = function() { return "Suspicion"; };
+};
+BullTowerStats.prototype.Suspicion = function() {
+	return this.suspicion.Get();
+}
+//TODO add this to all move states
+BullTowerStats.prototype.IncSuspicion = function(max, inc) {
+	this.suspicion.IncreaseStat(max, inc);
+	
+	//TODO check for exit states
+}
+BullTowerStats.prototype.DecSuspicion = function(min, dec) {
+	this.suspicion.DecreaseStat(min, dec);
+}
+
 
 Outlaws.BullTower = {
 	AlaricFreed     : 1,
 	StatueDestroyed : 2,
 	CaravansIgnited : 4,
-	AnimalsFreed    : 8
-	
+	CaravanGuardsDown : 8,
+	AnimalsFreed    : 16
 	
 };
 
@@ -404,7 +423,9 @@ Scenes.BullTower.MovingOut = function() {
 				party.SwitchIn(player);
 				party.AddMember(cveta, true);
 				
-				gwendy.RestFull();
+				party.RestFull();
+				
+				outlaws.BT = new BullTowerStats();
 				
 				MoveToLocation(world.loc.BullTower.Courtyard.Yard, {hour: 3});
 			});
@@ -673,8 +694,56 @@ Scenes.BullTower.SlipOut = function() {
 	MoveToLocation(world.loc.Outlaws.Camp, {hour: 3});
 }
 
+world.loc.BullTower.Building.Hall.description = function() {
+	Text.Add("The main hall of Bull Tower is just inside the archway of the main entrance. Walls where banners and tapestries once hung now lie bare, their only adornment dust gathering in the cracks between the stones. Built to accommodate the hundreds who were once garrisoned here, it now lies empty, its expansiveness causing even the lightest of your footsteps to echo in the darkness.");
+	Text.NL();
+	Text.Add("While most of the staircases are too precarious to navigate, you do note that there are footprints on two sets of steps: one spiraling upward into the darkness of the main watchtower, and one leading downward below ground level. Similarly, most of the doors have been boarded up and nailed shut, but there are a few which look like they’ve seen some use of late.");
+	Text.NL();
+	Text.Add("Behind you lies the exit to the main courtyard, should you need to beat a hasty retreat.");
+}
 
-
+//[Warehouse][Office][Watchtower][Cell][Courtyard]
+world.loc.BullTower.Building.Hall.links.push(new Link(
+	"Warehouse", true, true,
+	null,
+	function() {
+		var parse = {
+			
+		};
+		
+		Text.Clear();
+		if(outlaws.flags["BT"] & Outlaws.BullTower.CaravanGuardsDown) {
+			if(outlaws.BT.warehouseRepeat) {
+				Text.Add("Slipping through the now-unlocked door to the warehouse, you carefully close it behind you.", parse);
+			}
+			else {
+				outlaws.BT.warehouseRepeat = true;
+				Text.Add("The key that you found on the caravan guards looks like it might fit the lock on the door, and indeed, it slips in easily, the tumblers moving without so much as a squeak. Seems like this door is used often enough for the guards to keep the lock in good condition.", parse);
+			}
+			Text.NL();
+			MoveToLocation(world.loc.BullTower.Building.Warehouse, {minute: 5}, true);
+		}
+		else {
+			if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed)
+				Text.Add("You try every one of the keys on the key ring that you picked off Corishev’s pants, but none of them fit the keyhole. Guess he wasn’t holding onto the key for this door, then. Where is it?", parse);
+			else {
+				parse["t"] = party.InParty(terry, true) ? "would have daunted even Terry" : "would daunt even the most skilled of thieves";
+				Text.Add("You push and pull on the stout iron handle, but it’s no good - the door is locked by an impressive-looking mechanism that [t]. You’re not going to be getting into the warehouse without the proper key.", parse);
+			}
+			Text.Flush();
+			Gui.NextPrompt();
+		}
+	}
+));
+/* TODO more locations
+world.loc.BullTower.Building.Hall.links.push(new Link(
+	"", true, true,
+	null,
+	function() {
+		
+	}
+));
+*/
 
 
 world.loc.BullTower.Courtyard.Yard.description = function() {
