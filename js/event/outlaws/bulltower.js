@@ -436,6 +436,9 @@ Scenes.BullTower.MovingOut = function() {
 }
 
 
+/*
+ * Dungeon starts here
+ */
 world.loc.BullTower.Courtyard.Yard.description = function() {
 	Text.Add("You are standing in the main courtyard of Bull Tower, flanked by high walls on three sides and the old watchtower to the north. The gates - the only way in or out of the old fortress - lie to the south, watched over by the two guards whom Cveta ‘persuaded’ to let you in. The effects of age and neglect are clearly visible in the appearance of the grounds  - the old training field is overgrown with weeds and wildflowers, and while the walls are still solid, bits of crumbling masonry lie at the base.");
 	Text.NL();
@@ -472,6 +475,7 @@ world.loc.BullTower.Courtyard.Yard.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(world.loc.BullTower.Courtyard.Pens, {minute: 5});
+		outlaws.BT.IncSuspicion(100, 2.5);
 	}
 ));
 
@@ -510,6 +514,7 @@ world.loc.BullTower.Courtyard.Yard.events.push(new Link(
 		options.push({ nameStr : "Yes",
 			func : function() {
 				Text.Clear();
+				var sus;
 				if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed) {
 					Text.Add("<i>“Let’s get started, then!”</i> Alaric says, a twinge of vindictive glee in his voice. Without further ado, the three of you stride up to the statue’s base and, on a count of three, give it an experimental push. It wobbles a little, which is all the encouragement you need to set it to rocking dangerously. The statue’s fate is sealed - one final shove, good and hard, and it tips off-balance and tumbles from its plinth. Weeks, perhaps months’ worth of work by an artisan sculptor ruined in a matter of minutes, Preston’s chiseled form shattering into an assortment of fragments both large and small when it hits the ground.", parse);
 					Text.NL();
@@ -523,8 +528,7 @@ world.loc.BullTower.Courtyard.Yard.events.push(new Link(
 					Text.Add("To the wind with caution! You want to see Preston’s face smashed so badly that you’re willing to take this risk. Pressing your back against the marble statue, you give it an experimental push. The effort is rewarded when you find it rocks slightly on the uneven ground, and you note with grim satisfaction that it could probably be toppled. Maybe not by you alone, but with Cveta helping…", parse);
 					Text.NL();
 					Text.Add("Their carelessness, your gain. Cveta looks a little uneasy about the idea, but eventually gives in and follows your lead, pushing her slight frame against the statue. She doesn’t add very much, but it’s enough to tip the scales and send it careening to the ground where it shatters into a thousand pieces with a mighty crash. It takes a good while for the echoes to fade - while someone has definitely heard that and will eventually arrive to investigate, smashing that statue felt <i>good</i>, didn’t it?", parse);
-					
-					//TODO Suspicion +20
+					sus = true;
 				}
 				Text.Flush();
 				
@@ -532,6 +536,8 @@ world.loc.BullTower.Courtyard.Yard.events.push(new Link(
 				outlaws.flags["BT"] |= Outlaws.BullTower.StatueDestroyed;
 				
 				Gui.NextPrompt();
+				if(sus)
+					outlaws.BT.IncSuspicion(100, 20);
 			}, enabled : true,
 			tooltip : "Time for some heroic vandalism!"
 		});
@@ -548,6 +554,7 @@ world.loc.BullTower.Courtyard.Yard.events.push(new Link(
 				world.TimeStep({minute: 5});
 				
 				Gui.NextPrompt();
+				outlaws.BT.IncSuspicion(100, 2.5);
 			}, enabled : true,
 			tooltip : "Nah, it can wait."
 		});
@@ -620,6 +627,7 @@ world.loc.BullTower.Courtyard.Pens.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(world.loc.BullTower.Courtyard.Yard, {minute: 5});
+		outlaws.BT.IncSuspicion(100, 2.5);
 	}
 ));
 
@@ -667,9 +675,8 @@ world.loc.BullTower.Courtyard.Pens.events.push(new Link(
 		
 		world.TimeStep({ minute : 15 });
 		
-		//TODO suspicion - 20
-		
 		Gui.NextPrompt();
+		outlaws.BT.DecSuspicion(-100, 20);
 	}
 ));
 
@@ -733,6 +740,7 @@ world.loc.BullTower.Building.Hall.links.push(new Link(
 			Text.Flush();
 			Gui.NextPrompt();
 		}
+		outlaws.BT.IncSuspicion(100, 2.5);
 	}
 ));
 /* TODO more locations
