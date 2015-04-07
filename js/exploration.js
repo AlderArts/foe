@@ -51,8 +51,7 @@ ExploreButtonIndex = {
 };
 
 SetExploreButtons = function() {
-	// TODO
-	var waitLocation = true;
+	var waitLocation = party.location.wait();
 	// At safe locations you can sleep and save
 	var safeLocation = party.location.safe();
 	

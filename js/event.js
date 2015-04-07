@@ -58,6 +58,9 @@ Event.prototype.AddEncounter = function(opts) {
 	}
 }
 
+Event.prototype.wait = function() {
+	return true;
+}
 Event.prototype.safe = function() {
 	return false;
 }

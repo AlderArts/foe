@@ -8,16 +8,19 @@
 function BullTowerStats() {
 	this.suspicion = new Stat(0);
 	this.suspicion.debug = function() { return "Suspicion"; };
+	
+	this.stoleLatern = false;
 };
 BullTowerStats.prototype.Suspicion = function() {
 	return this.suspicion.Get();
 }
-//TODO add this to all move states
+// outlaws.BT.IncSuspicion(100, 2.5);
 BullTowerStats.prototype.IncSuspicion = function(max, inc) {
 	this.suspicion.IncreaseStat(max, inc);
 	
 	//TODO check for exit states
 }
+// outlaws.BT.DecSuspicion(-100, 20);
 BullTowerStats.prototype.DecSuspicion = function(min, dec) {
 	this.suspicion.DecreaseStat(min, dec);
 }
@@ -27,8 +30,9 @@ Outlaws.BullTower = {
 	AlaricFreed     : 1,
 	StatueDestroyed : 2,
 	CaravansIgnited : 4,
-	CaravanGuardsDown : 8,
-	AnimalsFreed    : 16
+	CaravansSearched : 8,
+	CaravanGuardsDown : 16,
+	AnimalsFreed    : 32
 	
 };
 
@@ -55,6 +59,15 @@ world.loc.BullTower = {
 		Watchtower : new Event("Watchtower")
 	}
 };
+
+world.loc.BullTower.Courtyard.Yard.wait = function() { return false; };
+world.loc.BullTower.Courtyard.Pens.wait = function() { return false; };
+world.loc.BullTower.Courtyard.Caravans.wait = function() { return false; };
+world.loc.BullTower.Building.Hall.wait = function() { return false; };
+world.loc.BullTower.Building.Cell.wait = function() { return false; };
+world.loc.BullTower.Building.Office.wait = function() { return false; };
+world.loc.BullTower.Building.Warehouse.wait = function() { return false; };
+world.loc.BullTower.Building.Watchtower.wait = function() { return false; };
 
 // TODO areas
 
@@ -461,13 +474,21 @@ world.loc.BullTower.Courtyard.Yard.description = function() {
 }
 
 
-// TODO
 //[Animal Pens][Caravan][Enter][Statue][Slip Out]
 world.loc.BullTower.Courtyard.Yard.links.push(new Link(
-	"", true, true,
+	"Enter tower", true, true,
 	null,
 	function() {
-		
+		MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
+		outlaws.BT.IncSuspicion(100, 2.5);
+	}
+));
+world.loc.BullTower.Courtyard.Caravans.links.push(new Link(
+	"Caravans", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.BullTower.Courtyard.Caravans, {minute: 5});
+		outlaws.BT.IncSuspicion(100, 2.5);
 	}
 ));
 world.loc.BullTower.Courtyard.Yard.links.push(new Link(
@@ -607,6 +628,331 @@ world.loc.BullTower.Courtyard.Yard.links.push(new Link(
 ));
 
 
+world.loc.BullTower.Courtyard.Caravans.description = function() {
+	Text.Add("Off to the east of the main tower building, this small courtyard is roofed, presumably to keep the wind and rain off carts, carriages and wagons parked in it. However, age has caused the roof to fall apart in places, allowing moonlight to shine through holes in the old masonry work.");
+	Text.NL();
+	if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited) {
+		Text.Add("The wagons are still alight - all that wood, oilcloth and canvas will sustain a lovely low fire that’ll burn till dawn. You can only hope that no one will actually notice it until you and Cveta have made your escape, and that the guards won’t come to their senses from all the heat and smoke wafting over and raise the alarm.");
+	}
+	else {
+		Text.Add("The dust on the wagons’ wheels is still fresh - you guess that they can’t have been here more than a few hours. With sides painted a dark gray, presumably to be less visible at night, it’s unlikely that this is just another trading caravan.");
+		Text.NL();
+		Text.Add("One of the wagons has its rear end facing toward you, and you can see that it’s largely empty - at least of any visible cargo. If anything was brought here, it’s been offloaded to who knows where.");
+		Text.NL();
+		if(outlaws.flags["BT"] & Outlaws.BullTower.CaravanGuardsDown)
+			Text.Add("Now that the guards have been dealt with, you can do as you please with the contraband caravan.");
+		else
+			Text.Add("Four guards have been posted by the wagons - clearly the home guard while everyone else’s out on the road; they fidget and glance about nervously from time to time, but don’t budge from their posts. If you want to get at the wagons, you’ll have to find a way to deal with them first.");
+	}
+}
+
+world.loc.BullTower.Courtyard.Caravans.links.push(new Link(
+	"Courtyard", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.BullTower.Courtyard.Yard, {minute: 5});
+		outlaws.BT.IncSuspicion(100, 2.5);
+	}
+));
+
+world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
+	"Guards", function() {
+		return !(outlaws.flags["BT"] & Outlaws.BullTower.CaravanGuardsDown);
+	}, true,
+	null,
+	function() {
+		var parse = {
+			playername : player.name
+		};
+		
+		Text.Clear();
+		Text.Add("Creeping as close as the shadows will allow, you spy on the caravan guards. Like their fellows at the gates, none of them are actually in uniform, but the unmarked armor they wear is solid and they look comfortable with their weapons - it’d be reasonable to assume that they aren’t greenhorns. With them stretched out in a line across the entrance to the courtyard, it looks like there’s going to be no sneaking past them - you’ll have to take them out if you want to get to the wagons.", parse);
+		Text.NL();
+		Text.Add("A few possibilities present themselves; what will you do?", parse);
+		Text.Flush();
+		
+		//[Sneak][Distract][Lull][Back]
+		var options = new Array();
+		options.push({ nameStr : "Sneak",
+			func : function() {
+				Text.Clear();
+				Text.Add("You outline your plan to Cveta: sneak in as close as possible, wait for an opening and take out as many of the guards as you can before they can react. The songstress looks a little uncertain at the idea, but you reassure her of your confidence in your abilities.", parse);
+				Text.NL();
+				Text.Add("<i>“Well,”</i> she says at last. <i>“I shall trust you to know what you are doing. Please, make your move; I will be right behind you.”</i>", parse);
+				Text.NL();
+				Text.Add("Nodding, you creep closer and closer to the nearest guard until you’re at the very edge of the shadows; about thirty paces lie between you and him. Seconds tick by - although they may very well have been hours, for how slowly they pass - and the moment he turns his gaze, you burst out of your hiding place at a sprint, making a beeline for him.", parse);
+				Text.NL();
+				
+				var enemy = new Party();
+				enemy.AddMember(new Footman());
+				enemy.AddMember(new Footman());
+				
+				var dex = player.Dex() + Math.random() * 20;
+				if(dex >= 70) {
+					Text.Add("Your feet are light, your steps like the wind; bursting out of the shadows like an arrow loosed from a bow, you manage to strike the guard closest to you on the head, taking him out. His friend whips around, eyes wide with surprise. Before he can manage to move, you take him out in the same fashion and are ready with your weapon drawn as the remaining two guards turn on you and Cveta.", parse);
+					//#Start 2 guard combat
+				}
+				else {
+					Text.Add("Unfortunately, you’re simply too slow to get the drop on the guards. Though you’re moving as fast as your feet will carry you, they’ve long noticed you coming and are ready to welcome you with their pikes. Gritting your teeth, you prepare yourself for battle.", parse);
+					//#Start 4 guard combat
+					enemy.AddMember(new Footman());
+					enemy.AddMember(new Footman());
+				}
+				Text.Flush();
+				
+				var enc = new Encounter(enemy);
+				
+				enc.canRun = false;
+				enc.onLoss = Scenes.BullTower.GuardsLoss;
+				enc.onVictory = Scenes.BullTower.GuardsWin;
+				
+				Gui.NextPrompt(function() {
+					enc.Start();
+				});
+			}, enabled : true,
+			tooltip : "Sneak up to the guards and knock them out."
+		});
+		options.push({ nameStr : "Distract",
+			func : function() {
+				Text.Clear();
+				Text.Add("You briefly outline your plan to Cveta: distract the guards so they’re looking the other way, then sneak up on them from behind and take them out with a minimum of fuss.", parse);
+				Text.NL();
+				Text.Add("<i>“And what do you hope to distract them with? I doubt that they are the sort to go chasing a thrown rock.”</i>", parse);
+				Text.NL();
+				Text.Add("Well, she can do it with her voice, can’t she?", parse);
+				Text.NL();
+				Text.Add("<i>“Pardon?”</i>", parse);
+				Text.NL();
+				Text.Add("She can circle around to the other side and make a little noise; since the guards are already on edge with one of the caravans under attack, it shouldn’t be too hard to ‘persuade’ them to investigate and draw them away from their posts. When they have their backs turned to you, you’ll come up from behind and take out as many of them as you can.", parse);
+				Text.NL();
+				Text.Add("<i>“Yes, I can do that. Give me a few moments, please.”</i>", parse);
+				Text.NL();
+				Text.Add("With that, Cveta creeps off, disappearing through the shadows and into the overgrown weeds that cover much of the tower grounds. It’s a minute or so before anything else happens, but it’s unmistakable when it does: a barely audible song tugs at your consciousness, beckoning you over.", parse);
+				Text.NL();
+				Text.Add("Even though you know it’s Cveta, it takes a noticeable effort to restrain yourself from wandering over to investigate the faint singing. Not that you have to hold back for long - the guards are already being drawn in by Cveta’s music, although they’re still cautious in approaching her hiding spot.", parse);
+				Text.NL();
+				Text.Add("Now that they have their backs turned, it’s time for you to make your move. Breaking into a light-footed run, you make a beeline for the guard closest to you, ready to knock him out.", parse);
+				Text.NL();
+				
+				var enemy = new Party();
+				enemy.AddMember(new Footman());
+				enemy.AddMember(new Footman());
+				
+				var intel = player.Int() + Math.random() * 20;
+				
+				if(intel >= 70) {
+					Text.Add("Distracted as they are, the guards don’t see or hear you coming. You strike the first guard on the head and bring him down with ease; the second is brought down with a bit of a scuffle and you’re ready for the third and fourth as they round on you. Gritting your teeth, you get ready for combat, Cveta emerging from the grass to back you up.", parse);
+					//#Start 2 guard combat
+				}
+				else {
+					Text.Add("Distracted as they are, the guards nevertheless manage to hear you coming and spin to face you, just barely drawing their weapons to mount a hasty defense. Seeing your ruse fail, you grit your teeth and prepare for battle, with Cveta emerging from the shadows to back you up.", parse);
+					//#Start 4 guard combat
+					enemy.AddMember(new Footman());
+					enemy.AddMember(new Footman());
+				}
+				Text.Flush();
+				
+				var enc = new Encounter(enemy);
+				
+				enc.canRun = false;
+				enc.onLoss = Scenes.BullTower.GuardsLoss;
+				enc.onVictory = Scenes.BullTower.GuardsWin;
+				
+				Gui.NextPrompt(function() {
+					enc.Start();
+				});
+			}, enabled : true,
+			tooltip : "Try to trick the guards to turn the other way and jump them from behind."
+		});
+		options.push({ nameStr : "Lull",
+			func : function() {
+				Text.Clear();
+				Text.Add("You quickly assess the situation and ask Cveta if she can put her talents to use here. Ordering these particular sentries away like she did with the gate guards might be useful.", parse);
+				Text.NL();
+				Text.Add("<i>“I am not sure that would be the best course of action,”</i> Cveta replies after studying the guards herself. <i>“It is unlikely that they are expecting anyone at this time… but I think they do look a little tired.”</i>", parse);
+				Text.NL();
+				Text.Add("Well, what does she intend, then?", parse);
+				Text.NL();
+				Text.Add("<i>“I will encourage them to give in to their fatigue. It is but Preston’s own fault if he overworks his men to the point that they fall asleep on the job. Would you please cover your ears, [playername]?”</i>", parse);
+				Text.NL();
+				Text.Add("Good idea. You don’t want to be falling asleep yourself. Covering your ears with your hands, you look on as Cveta takes a few breaths before launching into a soothing lullaby, projecting her voice directly at the sentries.", parse);
+				Text.NL();
+				
+				var enemy = new Party();
+				enemy.AddMember(new Footman());
+				enemy.AddMember(new Footman());
+				
+				if(Math.random() >= 0.4) {
+					Text.Add("It works like a charm. The two guards closest to your hiding spot are soon having trouble staying awake, yawning and swaying, before dropping where they stand in a snoozing heap. Their remaining fellows look absolutely shocked, but waste no time in drawing their weapons and advancing upon you and Cveta. It’s a fight!", parse);
+					//#Start 2 guard combat
+				}
+				else {
+					Text.Add("Either Cveta’s voice didn’t carry well enough or the guards are made of sterner stuff than you thought. While those closest to you look somewhat unsteady on their feet, they manage to resist the effects of Cveta’s voice and advance upon you in formation, weapons drawn. It’s a fight!", parse);
+					//#Start 4 guard combat
+					enemy.AddMember(new Footman());
+					enemy.AddMember(new Footman());
+				}
+				Text.Flush();
+
+				var enc = new Encounter(enemy);
+				
+				enc.canRun = false;
+				enc.onLoss = Scenes.BullTower.GuardsLoss;
+				enc.onVictory = Scenes.BullTower.GuardsWin;
+				
+				Gui.NextPrompt(function() {
+					enc.Start();
+				});
+			}, enabled : true,
+			tooltip : "Have Cveta attempt to lull the guards to slumber with a song."
+		});
+		Gui.SetButtonsFromList(options, true, function() {
+			Text.Clear();
+			Text.Add("You decide that messing with these guards isn’t worth it right now. With that thought in mind, you slink back into the safety of the shadows, Cveta in tow.", parse);
+			Text.NL();
+			PrintDefaultOptions(true);
+			outlaws.BT.IncSuspicion(100, 2.5);
+		});
+	}
+));
+
+Scenes.BullTower.GuardsWin = function() {
+	var enc  = this;
+	SetGameState(GameState.Event);
+	
+	var parse = {
+		
+	};
+	
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		Text.Add("The last of the sentries guarding the caravans collapses to the ground, succumbing to his wounds. Wasting no time, you hurry to hide your unconscious adversaries in an overgrown patch of weeds - the thigh-height grass conceals them nicely, and they should stay out cold for a good while.", parse);
+		Text.NL();
+		Text.Add("Naturally, you rifle through their pockets, but fail to find much of use. A box of matches, a few loose cigarettes - the sort of thing guards on duty might have on their person. One particular item stands out, though - a key that looks almost as ancient as the fortress. Wondering if it unlocks something in the tower, you pocket the thing. Maybe it’ll come in handy later.", parse);
+		Text.Flush();
+		
+		outlaws.flags["BT"] |= Outlaws.BullTower.CaravanGuardsDown;
+		
+		Gui.NextPrompt();
+		outlaws.BT.IncSuspicion(100, 2.5);
+	});
+	Encounter.prototype.onVictory.call(enc);
+}
+
+Scenes.BullTower.GuardsLoss = function() {
+	var enc  = this;
+	SetGameState(GameState.Event);
+	
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("Seems like this scuffle isn’t going as you planned. Deciding to disengage while you still can, you quickly signal to Cveta to beat a fighting retreat. The caravan guards break off pursuit after just a few more blows, and the reason for that soon becomes apparent: the two of you have barely crossed the courtyard when the loud clanging of a bell being rung echoes across the entirety of the ancient fortress - the alarm!", parse);
+	Text.NL();
+	
+	Scenes.BullTower.Failure();
+}
+
+world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
+	"Search Caravans", function() {
+		return !(outlaws.flags["BT"] & Outlaws.BullTower.CaravansSearched) &&
+		       !(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited);
+	}, function() {
+		return outlaws.flags["BT"] & Outlaws.BullTower.CaravanGuardsDown;
+	},
+	null,
+	function() {
+		var parse = {
+			playername : player.name
+		};
+		
+		Text.Clear();
+		Text.Add("With the guards out of the way, it’s a simple matter to saunter up to the caravan wagons and start searching; Cveta and you split up to look through everything as quickly as possible, rummaging away in the dim light.", parse);
+		Text.NL();
+		Text.Add("Most of the cargo has been unloaded, leaving just the caravaneers’ personal effects for the two of you to sift through. Spare clothing, cooking utensils, the odd keepsake - it’s not until you come to the lead wagon that you manage to find a small trunk lying beneath a couple of bedrolls. Opening it reveals a stack of invoices tied together with string, and a quick glance at the goods involved and the money that’s changed hands leaves little doubt that this is the evidence you need to prove the royal guards’ complicity in this smuggling operation. For them to be leaving this around, even if it was hidden… well, the guards may be cautious, but the caravaneers are certainly much less so.", parse);
+		Text.NL();
+		Text.Add("<i>“I recognize some of the buyers’ names,”</i> Cveta says from behind you. She’s clutching a small sheaf of receipts in her hands, each one signed very neatly. <i>“An assortment of the degenerates who call themselves Rigard’s high society. This is damning evidence, [playername]. I don’t doubt that they’ll be able to weasel their way out of the penalties for tax evasion, but the truth is powerful in and of itself.”</i>", parse);
+		Text.NL();
+		Text.Add("Hey, she’s right. Now that she’s brought it to your attention… Krawitz’s name <i>does</i> appear on a few of the invoices and receipts. The handwriting is small and spidery, but there’s no doubt about it - he’s listed as the buyer in no uncertain terms.", parse);
+		Text.NL();
+		Text.Add("If there weren’t already enough reason to dislike the little man…", parse);
+		Text.NL();
+		Text.Add("Well, you’ve seen enough to know that Zenith will very definitely be interested in these. Hastily bundling both receipts and invoices together, you stow them with your other belongings and turn to other matters.", parse);
+		Text.Flush();
+		
+		outlaws.flags["BT"] |= Outlaws.BullTower.CaravansSearched;
+		
+		Gui.NextPrompt();
+		outlaws.BT.IncSuspicion(100, 2.5);
+	}
+));
+
+
+world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
+	"Burn Caravans", function() {
+		return !(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited);
+	}, true,
+	null,
+	function() {
+		var parse = {
+			
+		};
+		
+		Text.Clear();
+		if(Jobs["Mage"].Unlocked(player))
+			Text.Add("As soon as the idea forms in your mind, so does a spark at your fingertips. Magic really makes things convenient, doesn’t it? Indeed, you could easily set the whole wagon train ablaze with a fireball; the canvas and oilcloth hoods should catch easily enough.", parse);
+		else if(outlaws.BT.stoleLatern)
+			Text.Add("You smile as the thought comes to mind. Maybe this oil lantern might actually come in useful. The canvas and oilcloth of the wagon hoods should catch fire easily, should you desire to set them ablaze.", parse);
+		else {
+			Text.Add("It <i>is</i> a nice thought, but you don’t have any means of starting a fire on hand. Can’t burn the wagons if you can’t set them alight, can you?", parse);
+			Text.Flush();
+			Gui.NextPrompt();
+			return;
+		}
+		Text.NL();
+		if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed)
+			Text.Add("Alaric catches your eye, and the injured dissident gives both you and Cveta a brisk nod. Torching the smuggling caravan would be a good way to cover your retreat and give the royal guard something to do other than hunt you down. Are you going to do it?", parse);
+		else
+			Text.Add("On the other hand, it’s very likely that once the sight and smoke of the burning wagons spreads beyond the confines of this small enclosure, you’re going to be feeling a lot of heat on your back. Are you sure you want to do this?", parse);
+		Text.Flush();
+		
+		//[Yes][No]
+		var options = new Array();
+		options.push({ nameStr : "Yes",
+			func : function() {
+				Text.Clear();
+				Text.Add("Yes, the wagons are close enough that the fire should easily spread between them. You’re a bit surprised at how readily the canvas hoods catch flame - it’s almost as if they <i>want</i> to be destroyed - and just for good measure, you pay extra attention to the wooden frames, going over them carefully and making sure there’s going to be nothing salvageable after the intense heat has done its work.", parse);
+				if(!outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed) {
+					Text.NL();
+					Text.Add("With all the heat and smoke the burning wagons are creating, you’ve probably drawn plenty of attention to yourself. The roof will keep the inferno contained for a little while, but the smoke will spill out and someone is going to notice eventually - if the guards you took out aren’t roused by the flames first, that is.", parse);
+				}
+				Text.Flush();
+				
+				outlaws.flags["BT"] |= Outlaws.BullTower.CaravansIgnited;
+				
+				Gui.NextPrompt();
+				if(!outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed)
+					outlaws.BT.IncSuspicion(100, 30);
+				else
+					outlaws.BT.IncSuspicion(100, 2.5);
+			}, enabled : true,
+			tooltip : "Light ‘em up!"
+		});
+		options.push({ nameStr : "No",
+			func : function() {
+				Text.Clear();
+				Text.Add("Reconsidering, you step back from the wagons. If you burned them, there’d be no turning back if you decided that they could be useful later. Maybe you could return and finish the job just before you leave the tower grounds for good?", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt();
+			}, enabled : true,
+			tooltip : "It can wait for now."
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+));
+
 world.loc.BullTower.Courtyard.Pens.description = function() {
 	Text.Add("These pens look like they used to be proper stables, but time and neglect have eaten away at the supporting timbers. A few serviceable stalls remain, but… well, it wouldn’t be right to call them stables without a single horse in it.");
 	Text.NL();
@@ -681,26 +1027,6 @@ world.loc.BullTower.Courtyard.Pens.events.push(new Link(
 ));
 
 
-//TODO
-Scenes.BullTower.SlipOut = function() {
-	var parse = {
-		
-	};
-	
-	Text.Clear();
-	Text.Add("PLACEHOLDER", parse);
-	Text.NL();
-	Text.Add("", parse);
-	Text.NL();
-	Text.Flush();
-	
-	party.RemoveMember(cveta);
-	party.LoadActiveParty();
-	
-	//TODO
-	MoveToLocation(world.loc.Outlaws.Camp, {hour: 3});
-}
-
 world.loc.BullTower.Building.Hall.description = function() {
 	Text.Add("The main hall of Bull Tower is just inside the archway of the main entrance. Walls where banners and tapestries once hung now lie bare, their only adornment dust gathering in the cracks between the stones. Built to accommodate the hundreds who were once garrisoned here, it now lies empty, its expansiveness causing even the lightest of your footsteps to echo in the darkness.");
 	Text.NL();
@@ -753,26 +1079,46 @@ world.loc.BullTower.Building.Hall.links.push(new Link(
 ));
 */
 
-
-world.loc.BullTower.Courtyard.Yard.description = function() {
-	Text.Add("");
+//TODO
+Scenes.BullTower.SlipOut = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("PLACEHOLDER", parse);
 	Text.NL();
-	Text.Add("");
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Scenes.BullTower.Cleanup();
+	
+	//TODO
+	MoveToLocation(world.loc.Outlaws.Camp, {hour: 3});
 }
 
-world.loc.BullTower.Courtyard.Yard.links.push(new Link(
-	"", true, true,
-	null,
-	function() {
-		
-	}
-));
 
-world.loc.BullTower.Courtyard.Yard.events.push(new Link(
-	"", true, true,
-	null,
-	function() {
+//TODO
+Scenes.BullTower.Failure = function() {
+	var parse = {
 		
-	}
-));
+	};
+	
+	Text.Clear();
+	Text.Add("PLACEHOLDER", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Flush();
+	
+	Scenes.BullTower.Cleanup();
+	
+	//TODO
+	MoveToLocation(world.loc.Outlaws.Camp, {hour: 3});
+}
 
+Scenes.BullTower.Cleanup = function() {
+	party.RemoveMember(cveta);
+	party.LoadActiveParty();
+}
