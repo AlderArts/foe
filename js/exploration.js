@@ -101,7 +101,9 @@ LimitedDataPrompt = function(backFunc) {
 	Text.Flush();
 	
 	Input.buttons[0].Setup("Save game", function() {
-		Saver.SavePrompt(LimitedDataPrompt);
+		Saver.SavePrompt(function() {
+			LimitedDataPrompt(backFunc);
+		});
     }, online);
     
     Input.buttons[2].Setup("Save file", function() {
