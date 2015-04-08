@@ -9,7 +9,7 @@ function BullTowerStats() {
 	this.suspicion = new Stat(0);
 	this.suspicion.debug = function() { return "Suspicion"; };
 	
-	this.stoleLatern = false;
+	this.stoleLantern = false;
 };
 BullTowerStats.prototype.Suspicion = function() {
 	return this.suspicion.Get();
@@ -628,6 +628,7 @@ world.loc.BullTower.Courtyard.Yard.links.push(new Link(
 ));
 
 
+
 world.loc.BullTower.Courtyard.Caravans.description = function() {
 	Text.Add("Off to the east of the main tower building, this small courtyard is roofed, presumably to keep the wind and rain off carts, carriages and wagons parked in it. However, age has caused the roof to fall apart in places, allowing moonlight to shine through holes in the old masonry work.");
 	Text.NL();
@@ -902,7 +903,7 @@ world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
 		Text.Clear();
 		if(Jobs["Mage"].Unlocked(player))
 			Text.Add("As soon as the idea forms in your mind, so does a spark at your fingertips. Magic really makes things convenient, doesn’t it? Indeed, you could easily set the whole wagon train ablaze with a fireball; the canvas and oilcloth hoods should catch easily enough.", parse);
-		else if(outlaws.BT.stoleLatern)
+		else if(outlaws.BT.stoleLantern)
 			Text.Add("You smile as the thought comes to mind. Maybe this oil lantern might actually come in useful. The canvas and oilcloth of the wagon hoods should catch fire easily, should you desire to set them ablaze.", parse);
 		else {
 			Text.Add("It <i>is</i> a nice thought, but you don’t have any means of starting a fire on hand. Can’t burn the wagons if you can’t set them alight, can you?", parse);
