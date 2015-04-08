@@ -10,6 +10,7 @@ function BullTowerStats() {
 	this.suspicion.debug = function() { return "Suspicion"; };
 	
 	this.stoleLantern = false;
+	this.guardsDown = false;
 };
 BullTowerStats.prototype.Suspicion = function() {
 	return this.suspicion.Get();
@@ -31,8 +32,7 @@ Outlaws.BullTower = {
 	StatueDestroyed : 2,
 	CaravansIgnited : 4,
 	CaravansSearched : 8,
-	CaravanGuardsDown : 16,
-	AnimalsFreed    : 32
+	AnimalsFreed    : 16
 	
 };
 
@@ -640,7 +640,7 @@ world.loc.BullTower.Courtyard.Caravans.description = function() {
 		Text.NL();
 		Text.Add("One of the wagons has its rear end facing toward you, and you can see that it’s largely empty - at least of any visible cargo. If anything was brought here, it’s been offloaded to who knows where.");
 		Text.NL();
-		if(outlaws.flags["BT"] & Outlaws.BullTower.CaravanGuardsDown)
+		if(outlaws.BT.guardsDown)
 			Text.Add("Now that the guards have been dealt with, you can do as you please with the contraband caravan.");
 		else
 			Text.Add("Four guards have been posted by the wagons - clearly the home guard while everyone else’s out on the road; they fidget and glance about nervously from time to time, but don’t budge from their posts. If you want to get at the wagons, you’ll have to find a way to deal with them first.");
@@ -658,7 +658,7 @@ world.loc.BullTower.Courtyard.Caravans.links.push(new Link(
 
 world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
 	"Guards", function() {
-		return !(outlaws.flags["BT"] & Outlaws.BullTower.CaravanGuardsDown);
+		return !(outlaws.BT.guardsDown);
 	}, true,
 	null,
 	function() {
@@ -832,7 +832,7 @@ Scenes.BullTower.GuardsWin = function() {
 		Text.Add("Naturally, you rifle through their pockets, but fail to find much of use. A box of matches, a few loose cigarettes - the sort of thing guards on duty might have on their person. One particular item stands out, though - a key that looks almost as ancient as the fortress. Wondering if it unlocks something in the tower, you pocket the thing. Maybe it’ll come in handy later.", parse);
 		Text.Flush();
 		
-		outlaws.flags["BT"] |= Outlaws.BullTower.CaravanGuardsDown;
+		outlaws.BT.guardsDown = true;
 		
 		Gui.NextPrompt();
 		outlaws.BT.IncSuspicion(100, 2.5);
@@ -860,7 +860,7 @@ world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
 		return !(outlaws.flags["BT"] & Outlaws.BullTower.CaravansSearched) &&
 		       !(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited);
 	}, function() {
-		return outlaws.flags["BT"] & Outlaws.BullTower.CaravanGuardsDown;
+		return outlaws.BT.guardsDown;
 	},
 	null,
 	function() {
@@ -1046,7 +1046,7 @@ world.loc.BullTower.Building.Hall.links.push(new Link(
 		};
 		
 		Text.Clear();
-		if(outlaws.flags["BT"] & Outlaws.BullTower.CaravanGuardsDown) {
+		if(outlaws.BT.guardsDown) {
 			if(outlaws.BT.warehouseRepeat) {
 				Text.Add("Slipping through the now-unlocked door to the warehouse, you carefully close it behind you.", parse);
 			}
