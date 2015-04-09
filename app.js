@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 3;
-VERSION_SUBSCRIPT = "y";
-VERSION_NAME = "Layla";
+VERSION_SUBSCRIPT = "z";
+VERSION_NAME = "Terry oral + bugfixes";
 
 SAVE_VERSION = 24;
 // Save version 1: Initial
