@@ -1080,6 +1080,418 @@ world.loc.BullTower.Building.Hall.links.push(new Link(
 ));
 */
 
+
+world.loc.BullTower.Building.Cell.onEntry = function() {
+	var parse = {
+		playername : player.name,
+		weapon : function() { return player.WeaponDesc(); }
+	};
+	
+	Text.Clear();
+	if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed) {
+		Text.Add("Now that Alaric’s been freed, there’s no reason for you to return to that horrible place, and neither is there any need to distress an already shaken Alaric by doing so. Besides, you’re not sure whether the lieutenant remains unconscious, and given the deafeningly loud silence that comes from within the cell, you’d rather not risk unlocking the door to find out.", parse);
+		Text.NL();
+		Text.Add("Best to let sleeping dog-morphs lie, as the saying goes. Quietly, you slip back to the main hall.", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
+			outlaws.BT.IncSuspicion(100, 2.5);
+		});
+	}
+	else {
+		Text.Add("You creep down the cold stone stairs that lead into the darkness, with Cveta following closely behind, feeling your way down the forbidding passageway. This isn’t a true dungeon - Bull Tower was never meant to hold prisoners for any length of time - but the guards of old would have needed a secure place to lock up ruffians and miscreants they picked up off the King’s Road. As you proceed, a voice drifts up the stairwell, sounding not quite sane:", parse);
+		Text.NL();
+		Text.Add("<i>“Scream! Scream for me! So, are you going to sign it, or not? I have it ready in the office upstairs. All you need to do is sign, and I won’t have to whip you any more.”</i>", parse);
+		Text.NL();
+		Text.Add("You inch closer to the worm-eaten door that separates the hallway from the cell. While there’s no slit or window to allow you a glimpse of what lies within, at least there’s some form of light shining through the cracks in the wood.", parse);
+		Text.NL();
+		Text.Add("<i>“If… if I sign… you’ll just kill me anyway.”</i> A second voice, clearly pained. <i>“And I’m… not signing that which I know… isn’t true.”</i>", parse);
+		Text.NL();
+		Text.Add("The unmistakable crack of a whip as it sails through the air comes clearly through the door, and the voice erupts in a muffled scream.", parse);
+		Text.NL();
+		Text.Add("<i>“You mean you weren’t the one who was stealing from the treasury, my dear? Spirits forbid! We have plenty of evidence on you!”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“You don’t… bastard…”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Guilty as charged - never knew my father. Now, it’s perfectly fine with me if you won’t confess, because I’ll get to whip you all night, and whip you good. However, Preston won’t be too pleased with your refusal. He doesn’t like it when crimes go unsolved, you know. Reflects badly on us. Ever since the royal guard took on more responsibility, we’ve had a yearly decrease in petty crime across the board, and I have targets to meet.”</i>", parse);
+		Text.NL();
+		Text.Add("Guess it must be Corishev and Alaric in there - time for you to make an entrance. Are you ready?", parse);
+		Text.Flush();
+		
+		//[Yes][No]
+		var options = new Array();
+		options.push({ nameStr : "No",
+			func : function() {
+				Text.Clear();
+				Text.Add("As much as you want to burst in right now, you realize that it’s better to prepare first. You can mostly guess what’s going on the other side of that door… but if you are missing something, you don’t want to be caught with your pants down.", parse);
+				Text.NL();
+				Text.Add("With that in mind, you head back up the stairs to the main hall.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
+					outlaws.BT.IncSuspicion(100, 2.5);
+				});
+			}, enabled : true,
+			tooltip : "As much as you want to burst in right now, you realize that it’s better to prepare first."
+		});
+		options.push({ nameStr : "Yes",
+			func : function() {
+				Text.Clear();
+				Text.Add("Well, this is it, then. Looking to Cveta, you ask her in a hurried whisper if she can do anything to give the two of you an edge.", parse);
+				Text.NL();
+				Text.Add("<i>“I could try, but success is unlikely,”</i> she whispers back. <i>“The torturer on the other side of the door is rather unhinged and maniacal. He would probably realize something was amiss before my voice could properly take hold.”</i>", parse);
+				Text.NL();
+				parse["w"] = player.Weapon() ? Text.Parse(", your [weapon] in hand and at the ready", parse) : "";
+				Text.Add("Seems like there’s little else to be done, then. Steeling yourself, you grip the handle of the old door and push - to your surprise, it isn’t locked - then throw it open[w].", parse);
+				Text.NL();
+				Text.Add("What greets your eyes is a garish sight. The first thing you notice is that the stone floor is glistening with fluids. Most of the mess is clear - probably sweat - but there are faint traces of red and white in the slick mix that spreads outward from the centre. What little furniture there is in the room has been broken; what used to be a couple of wooden chairs lie in splinters, and even the bare-bones metal jail bed has been torn off its supports where it was once affixed on the wall.", parse);
+				Text.NL();
+				Text.Add("In the midst of it all is a set of chains and cuffs - chains hanging from the ceiling, cuffs affixed to the floor - and hanging naked on it, like a pelt on a curing rack, is a little man, perhaps in his late twenties or early thirties. His hairline is receding, and his skin glistens with sweat and a greenish, slimy substance. Several lash marks, thin, red and weeping blood, have been expertly applied to his back, and yet, despite the pain he must be feeling, he’s sporting a raging erection.", parse);
+				Text.NL();
+				Text.Add("This, you presume, must be Alaric.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					Text.Clear();
+					Text.Add("Though he hangs limply in the midst of the mess, he lifts his head weakly as Cveta and you enter, eyes widening in equal parts hope and fear. He looks frantic, and his lips move, the man clearly trying to mouth some words, but you don’t get what he’s trying to tell you.", parse);
+					Text.NL();
+					Text.Add("Nevertheless, you quickly discover why Alaric was mouthing words instead of speaking directly. Following his gaze, you turn to see a thin, lanky man standing at the far end of the room, applying the contents of a vial onto the cruel barbs of the whip he’s brandishing, no doubt the same weapon that’s been used on Alaric.", parse);
+					Text.NL();
+					
+					var racescore = new RaceScore(player.body);
+					var humanScore = new RaceScore();
+					humanScore.score[Race.human] = 1;
+					var humanity = racescore.Compare(humanScore);
+					
+					parse["h"] = humanity > 0.95 ? ", not to mention a beast-lover, too" : "";
+					
+					Text.Add("<i>“Hello, my lovelies,”</i> he says in a little sing-song voice, turning to face you, his eyes bloodshot, a cheeky grin plastered onto his face. You note that the same green slime that was on Alaric and the whip is also plastered all over his exposed lower half, beads of pre dripping from his veined, throbbing dick. An aphrodisiac? The slime has seeped into the top of the royal guard uniform he has on, so you have little doubt that whatever the effects of this stuff, he’s gotten a strong dose of it, and his unfocused gaze only serves to confirm your suspicions. <i>“Come to share in my private stash of Gol venom? Preston told me to expect trouble on the road tonight, but I wasn’t expecting furbag scum to come straight to my doorstep[h]! Never mind, though, I’ve enough venom for everyone, even if it did cost me a pretty penny! Seems like I’ll have to whip the guards for letting you in here, though. They’re all very naughty boys, like our friend here.”</i> He cracks the whip in Alaric’s direction.", parse);
+					Text.NL();
+					
+					parse["g"] = burrows.flags["Access"] < Burrows.AccessFlags.Stage5 ? ", from what you've heard" : "";
+					Text.Add("Gol venom. Yes[g], that would certainly intoxicate - and arouse - the bastard into the crazed state he’s currently in.", parse);
+					Text.NL();
+					Text.Add("Cveta looks unimpressed. <i>“You filthy degenerate. How does even a man like Preston stand having you around?”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“How does he, indeed? Simple: I get the job done, and ask no inconvenient questions, something our friend here-”</i> he cracks the whip again, sending Alaric cringing <i>“-apparently couldn’t do. Oh, but where are my manners? I am Lieutenant Corishev, and I oversee discipline amongst the royal guard; there are so many bad boys and girls who need the naughtiness beaten out of them these days, so I’ve had to work double-time. Now that we’ve been introduced, can we get down to business? I’ve planned a public flogging in the merchant’s square tomorrow, and all it needs to be perfect is for a furbag or two to be guests of honor at the event!”</i>", parse);
+					Text.NL();
+					Text.Add("With that, the perverse officer advances upon you.", parse);
+					Text.NL();
+					Text.Add("It’s a fight!", parse);
+					Text.Flush();
+					
+					Gui.NextPrompt(function() {
+						var enemy = new Party();
+						var corishev = new Corishev();
+						enemy.AddMember(corishev);
+						var enc = new Encounter(enemy);
+						
+						enc.corishev = corishev;
+						
+						enc.canRun = false;
+						enc.onLoss = Scenes.BullTower.CorishevLoss;
+						enc.onVictory = Scenes.BullTower.CorishevWin;
+						
+						enc.Start();
+					});
+				});
+			}, enabled : true,
+			tooltip : "Well, this is it, then. Time to do what you came here for."
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+}
+
+Scenes.BullTower.CorishevLoss = function() {
+	var enc  = this;
+	SetGameState(GameState.Event);
+	
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("Despite success being right before your eyes, you’re quickly realizing why the royal guards are so terrified of Corishev’s whip. It’s not only the force of the blows or the barbs on the whip that make this so difficult. The venom makes it hard to think about anything other than sweet, sweet sex, which in turn allows him to land more blows on you, letting more venom mingle with your blood…", parse);
+	Text.NL();
+	Text.Add("As hard as it is to admit, you’re losing. It’s getting harder to concentrate, and you can feel your strength starting to flag; it’s best to beat a tactical retreat while you can and avoid ending up in irons alongside Alaric.", parse);
+	Text.NL();
+	Text.Add("You croak out an apology as you start a fighting retreat towards the door behind you, Cveta doing her best to cover your back. Alaric goes wide-eyed as he realizes his would-be saviors are abandoning him, and struggles against his chains.", parse);
+	Text.NL();
+	Text.Add("<i>“Don’t leave me here! ”</i> he cries.", parse);
+	Text.NL();
+	Text.Add("<i>“Where are you going, would-be heroes?”</i> Judging by Corishev’s maniacal giggling and the lewd undertones of his voice, it’s clear that he’s completely intoxicated by all the Gol venom he’s smeared on himself. The orgulous sight of him jacking off to your escape is enough to make Cveta’s face crumple in disgust. <i>“Come back! You forgot your damsel in distress!”</i>", parse);
+	Text.NL();
+	Text.Add("Trying your best to shut the sounds coming from behind you out of your mind, you throw open the door and fly up the stairs as quickly as your legs will carry you. The lieutenant doesn’t seem to be pursuing you - the reason for which soon becomes clear when the alarm sounds throughout the entirety of the ancient fortress. Seems like he’s leaving the chore of hunting you down to his underlings.", parse);
+	Text.NL();
+	Scenes.BullTower.Failure();
+}
+
+Scenes.BullTower.CorishevWin = function() {
+	var enc  = this;
+	var corishev = enc.corishev;
+	SetGameState(GameState.Event);
+	
+	var parse = {
+		playername : player.name
+	};
+	
+	outlaws.flags["BT"] |= Outlaws.BullTower.AlaricFreed;
+	
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		Text.Add("That last blow did the trick. Still grinning madly - whether it’s the venom, or whether he’s just plain unhinged by now is anyone’s guess - Corishev staggers backward a few steps, perhaps to give himself a little breathing space. His wide, maniacal gaze darts this way and that, his breathing labored as you advance on him. Too bad there’s nowhere for him to run.", parse);
+		Text.NL();
+		Text.Add("<i>“Kids these days. Beaten by… a couple of young punks…”</i>", parse);
+		Text.NL();
+		parse["w"] = player.Weapon() ? "the blunt end of your weapon" : "your fist";
+		Text.Add("Ducking under a desperate overhead lash, you slip within his guard and land a solid blow to his head with [w]. Giggling, he doesn’t seem to notice it at first, then the force of your blow finally registers and he crumples to the ground like a folded reed, his barbed whip falling out of his grasp and clattering on the floor. With a twitch, his cock ejects one last spurt of cum, a whitish streak mixing with the sweat and blood on the floor, then goes as limp as the rest of him.", parse);
+		Text.NL();
+		Text.Add("<i>“Very fitting,”</i> Cveta remarks dryly at the sight, doing her best to avoid stepping in any of the mess.", parse);
+		Text.NL();
+		Text.Add("<i>“Finally.”</i> Alaric’s been so quiet throughout the whole fight that you’d almost forgotten he was there. He pauses to catch his breath, summoning the strength to speak properly. <i>“Could you get me out of here? He’s got the keys in his pants - they’re hanging over by the door.”</i>", parse);
+		Text.NL();
+		Text.Add("Wasting no time, you tiptoe around the fallen lieutenant and reach for the pants Alaric mentioned. Searching the pockets unearths an empty coin purse, several vials of clear green liquid you try not to look at too closely, and a large iron keyring from which several keys hang. With the keys, it’s a small matter to unlock the chains and cuffs that hold Alaric in place, and he collapses to the ground, groaning.", parse);
+		Text.NL();
+		parse["m"] = player.mfFem("Mister", "Miss");
+		Text.Add("<i>“Ow. Ow. Ow. Fucking. Ow. Thank you, um, [m]…?”<i/>", parse);
+		Text.NL();
+		Text.Add("You nod, and tell him your name.", parse);
+		Text.NL();
+		Text.Add("<i>“Right. Thank you, then, [m] [playername], and -”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“My name is Cveta.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Cveta, then. I’m Alaric. For the record, I didn’t embezzle anything. In fact, the royal guards have been taking payoffs from anyone and everyone who has connections to turn a blind eye to tax evasion on imports! They’re keeping the money up top in a trapped safe - I overheard the lieutenant talking to one of his men about it - and the key should be on his keyring-”", parse);
+		Text.NL();
+		Text.Add("<i>“You do not need to prove your innocence to us, Alaric,”</i> Cveta replies. <i>“We know who you are, and were specifically sent to get you. Do you think you can walk?”</i>", parse);
+		Text.NL();
+		Text.Add("Alaric tries to rise, grimacing and wincing, then staggers back onto his knees. <i>“No. But I’m going to have to do it anyway, aren’t I? I’ll just have to walk it off,”</i> he replies with a forced laugh. <i>“I guess that’s enough for introductions and thanks - can we please get out of here before the crazy bastard comes to?”</i>", parse);
+		Text.Flush();
+		
+		//[Fuck][Leave]
+		var options = new Array();
+		options.push({ nameStr : "Fuck",
+			func : function() {
+				Text.Clear();
+				Text.Add("Just a minute, you tell Alaric. There’s some unfinished business you have to take care of - if Cveta would be kind enough to help him out? You’ll catch up with them in a moment.", parse);
+				Text.NL();
+				Text.Add("Cveta gives you an odd look, but agrees and helps Alaric to his feet. It takes her a little effort, considering her slight stature, but the songstress eventually gets a firm grip under Alaric’s arm and begins hefting him out of the cell and up the stairs.", parse);
+				Text.NL();
+				Text.Add("Now that you’re alone, you look down at the lieutenant. The bastard is still largely out cold, save for the occasional twitch and groan, and you’re certain that between the Gol venom and having the wind knocked out of him, he’s not going to put up much of a fight for what you have in mind for him.", parse);
+				Text.NL();
+				Text.Add("Come to think of it, what <i>did</i> you have in mind?", parse);
+				Text.Flush();
+				
+				Scenes.BullTower.CorishevFuck(corishev);
+			}, enabled : true,
+			tooltip : "The bastard lieutenant sure can dish it out; let’s see how well he can take it."
+		});
+		options.push({ nameStr : "Leave",
+			func : function() {
+				Text.Clear();
+				Text.Add("You find yourself in total agreement with the little bean counter. Not wishing to spend one moment longer in the cell, you help Alaric to his feet, you and Cveta each grabbing him under a shoulder and lifting. Before stepping onto the stairs, you relieve the lieutenant of his venom-coated whip, which could make a good weapon. The little bean-counter is still bleeding from his lashes, but he summons the strength to keep pace with both of you. Together, the three of you hobble up the steps and to the main hall, but not before you lock the cell door with the keys you found. On the off-chance that the lieutenant comes to before dawn, he can stew there until his underlings come and get him out.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
+				});
+			}, enabled : true,
+			tooltip : "Get out of here before things get any worse."
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	});
+	Encounter.prototype.onVictory.call(enc);
+}
+
+Scenes.BullTower.CorishevFuck = function(corishev) {
+	var p1cock = player.BiggestCock(null, true);
+	
+	var parse = {
+		playername : player.name,
+		lowerarmordesc : function() { return player.LowerArmorDesc(); }
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
+	
+	
+	//[Whip][Ride][Anal][Reconsider]
+	var options = new Array();
+	options.push({ nameStr : "Whip",
+		func : function() {
+			Text.Clear();
+			Text.Add("An evil grin spreads across your lips as you reach down and pick up the lieutenant’s whip from the floor. While it looks quite nice as it is, you carefully pick off the barbs - you don’t want to kill the twisted bastard, as much as he deserves it, just bleed and humiliate him a little. It’s still got a thick coat of aphrodisiac venom on it, but you reach over for the vials you discovered and give the whip a second coating until it’s practically dripping with the stuff. Taking a step back to admire your handiwork, you shake your head at the poetic justice of the lieutenant becoming victim to the very same methods with which he tormented others.", parse);
+			Text.NL();
+			Text.Add("Well, time to administer justice. Lots and lots of justice. A good flick of your wrist sends the length of leather sailing through the air to land squarely on Corishev’s exposed ass. Droplets of viscous venom sail into the air as the coating on the whip’s length splatters, some of it landing on you. Oh well - you aren’t about to let it diminish your satisfaction at seeing a thin red welt rise up on his pale peaches. Pulling your arm back for a second stroke, you let loose with all your might, and by some quirk of fate or good fortune, the second lash lands in almost the same spot as the first.", parse);
+			Text.NL();
+			Text.Add("This one’s strong enough to cut through the lieutenant’s unconscious state, the bastard instinctively twitching and moaning at the pain, the original welt turning an angry red and beginning to seep blood. Wait, moaning? Then again, he was already pretty much hopped up on Gol venom when you came in. As you watch, his flaccid cock twitches as it pushes against the slick stone floor; you roll him over with a foot, and once given enough space, it stands at full mast, just begging to be used.", parse);
+			Text.NL();
+			Text.Add("Well. If he’s <i>enjoying</i> it…", parse);
+			Text.NL();
+			Text.Add("You’re feeling a little lightheaded yourself - maybe it’s the venom in the air? Can it be inhaled, or did some of it get onto you? Then again, who cares? Stifling the impulse to laugh, you let swing zealously with the whip, the whoosh of it travelling through the air, the crack of leather against skin music to your ears. Corishev accompanies it with grunts and moans, squirming in the mixture of sweat, blood and cum that covers the floor. The overdose of Gol venom has pretty much short-circuited his senses by now, turning pain and pleasure into one.", parse);
+			Text.NL();
+			parse["la"] = player.LowerArmor() ? Text.Parse(" rip off your [lowerarmordesc] and", parse) : "";
+			Text.Add("You judge him guilty as charged on all counts! Of corruption! - a swipe, a lash, a splatter of viscous, cum-like venom. Of unlawful abduction! - you’re finding it hard not to giggle with glee, the weight of the whip’s handle the centre of your world. Of conspiracy against the good name of the crown! - the smell of the potent mixture rising from the floor is almost too much to bear now. Barely hesitating, you[la] begin to openly fondle yourself, ", parse);
+			if(player.FirstCock() && player.FirstVag())
+				Text.Add("alternating your free hand between both your [cocks] and [vag], sticky fluids dribbling down and adding to the mess on the floor as you try to get all the pleasure you can out of the strange situation.", parse);
+			else if(player.FirstCock())
+				Text.Add("jerking off your [cocks], pumping away at your shaft[s] furiously with your free hand.", parse);
+			else
+				Text.Add("fingering yourself at the sight of justice being dealt, girl-honey running down from your [vag], onto your fingers and into the palm of your free hand, making it nice and slick.", parse);
+			Text.NL();
+			Text.Add("Whip it! Whip it good! A misaimed blow rips apart the shirt of Corishev’s royal guard uniform, but you’re not too concerned. It’s sort of hard to aim with one hand, especially when you’re trying to get yourself off with the other. Too weak, dazed, or lustful - probably a combination of all three - to form any intelligible words at the tender ministrations of the whip, the lieutenant writhes and wriggles between moans and pants, beads of precum dribbling from the tip of his cock. He thrusts at the air feebly with his hips, grinding away at some invisible mate.", parse);
+			Text.NL();
+			Text.Add("Pain is pleasure, and pleasure is yet even more pleasure. And from the looks of it, justice is pleasure, too, which is a good thing for you. Criminals have got to be punished, after all, and doubly so if the crime is being a hypocritical bastard. By now, the whip is just an extension of your body. You move your hand just like <i>this</i>, and its very tip coils about the lieutenant’s raging erection like some kind of prehensile vine or tentacle, still infused with more than enough of the potent venom to do its work. The Gol venom seeps through skin and flesh, and you flash a triumphant smile as Corishev bucks against empty air, his member bulging and twitching against its restraints. Slowly, you ease the whip so that it unwinds like a snake climbing a tree - venom, venom everywhere - and the moment it slides off, you bring it down again onto his now tattered and torn uniform with everything you’ve got.", parse);
+			Text.NL();
+			Text.Add("It’s too much for the poor bastard to bear. With a cry of pleasure-pain, Corishev orgasms, an arc of cum shooting from the debased lieutenant’s coated cock to splatter on his legs and the floor. Despite all the fluids mixed in the mess, the only thing you can smell right now is Gol venom - a heady, heavy smell that feels synonymous with sex.", parse);
+			Text.NL();
+			
+			var gen = "";
+			if(player.FirstCock()) gen += "[cocks]";
+			if(player.FirstCock() && player.FirstVag()) gen += " and ";
+			if(player.FirstVag()) gen += "[vag]";
+			parse["gen"] = Text.Parse(gen, parse);
+			
+			if(player.FirstCock() && player.FirstVag())
+				parse["gen2"] = "working both sets of your equipment";
+			else if(player.FirstCock())
+				parse["gen2"] = "jerking yourself off";
+			else
+				parse["gen2"] = "fingering yourself";
+			
+			Text.Add("You aren’t done yet, though, and you decide there’s no need to feel remorse about it; this is what he’d have done to Alaric in the end, and it’s only right that he get a taste of his own medicine. Standing over the lieutenant, you let the whip fall to the ground and focus your attentions on your [gen], a trickle of drool hanging from your open mouth as you work yourself into a frenzy [gen2].", parse);
+			Text.NL();
+			
+			var cum = player.OrgasmCum(2);
+			
+			Text.Add("It’s not long before you simply can’t hold back any more; with a groan that sets your knees trembling, you unload ", parse);
+			if(player.FirstCock()) {
+				if(cum > 4)
+					Text.Add("a veritable torrent of nice, hot cum from your [cocks] onto the dazed lieutenant. There’s so much of it, more than enough to completely soak his tattered and torn uniform and give him a good glazing. String upon string of thick, ropy seed spurts from your [cockTip][s] in a seemingly never-ending cascade, an impossibly long orgasm helped along by all the Gol venom in the air and on your skin.", parse);
+				else
+					Text.Add("burst after burst of cum from your [cockTip][s] onto the dazed lieutenant, strings of your seed arcing through the air and splattering on him in the most ignoble fashion. Moaning, eyes unfocused, you jack off furiously, coaxing every last drop of seed out of your [balls] and onto Corishev.", parse);
+				if(player.FirstVag()) {
+					Text.NL();
+					Text.Add("While your [cocks] may have had enough, the rest of your body is far from done, though. The sheer strength of the venom-assisted orgasm causes your [vag] to clench tightly about your fingers. An orgiastic spray of your girl-cum squirts from from your [vag], honey mixing in with the mess of cum your cock created.", parse);
+				}
+			}
+			else {
+				Text.Add("plentiful squirts of girl-cum from your [vag] onto the dazed lieutenant, panting in pleasure as you unload your honey onto him in a glistening sheen. Desperately fingering yourself until there’s nothing left, you shudder at the exquisite sensations of the last few warm trickles running down your thighs and down to your calves.", parse);
+			}
+			Text.NL();
+			Text.Add("Well. That should quite thoroughly humiliate Preston’s lapdog. Doing your best - which, admittedly, isn’t very good - to clean yourself up, you get up on shaky feet and hurriedly dress yourself, trying to hide the worst of the cum stains. Once you’re certain you’re not going to slip on the slick floor, you stash the venom-coated whip with the rest of your belongings and hobble up the stairs to catch up with Cveta and Alaric, but not before locking the cell door behind you. Corishev will certainly be an interesting sight for his men when they get the door open and find him.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 20});
+			});
+		}, enabled : true,
+		tooltip : "Whip him. Whip him good."
+	});
+	parse["gen"] = player.FirstVag() ? "pussy" : "ass";
+	options.push({ nameStr : "Ride",
+		func : function() {
+			Text.Clear();
+			Text.Add("The sight of the lieutenant’s limp prick gives you an idea. Sure, it’s pretty dead at the moment, but with all that Gol venom on it getting the little soldier to stand to attention shouldn’t be too hard. Your suspicions are confirmed when you reach down and get a firm hold on his flaccid prick - a few strokes are all it takes to have it up and ready, as thick and vital as it was when you entered the cell.", parse);
+			Text.NL();
+			
+			var pussy = player.FirstVag();
+			if(pussy)
+				parse["gen"] = Text.Parse("wet folds into your [vag]", parse);
+			else
+				parse["gen"] = Text.Parse("[anus]", parse);
+			
+			Text.Add("Perfect. Still not quite coherent, Corishev tries to fend you off with a weak flail of his arm, but you easily knock it away and lower yourself on top of him. Gripping his shoulders as you straddle him, you steady yourself and pin him down in one easy movement. Having positioned yourself, you’re ready now - with one violent movement, you let yourself drop, impaling yourself onto his veined, venom-slick shaft and feeling him push past your [gen].", parse);
+			Text.NL();
+			
+			if(pussy) {
+				Sex.Vaginal(corishev, player);
+				player.FuckVag(player.FirstVag(), corishev.FirstCock(), 4);
+				corishev.Fuck(corishev.FirstCock(), 4);
+			}
+			else {
+				Sex.Anal(corishev, player);
+				player.FuckAnal(player.Butt(), corishev.FirstCock(), 4);
+				corishev.Fuck(corishev.FirstCock(), 4);
+			}
+			
+			parse["target"] = Text.Parse(pussy ? "[vag]" : "[anus]", parse);
+			
+			Text.Add("Once he’s hilted to the base inside you, flashes of warmth creeping into your [target]’s inner walls as the Gol venom works its magic, you shift your weight forward and begin to ride his shaft roughly. As if eager to make sure that your fun isn’t spoiled halfway, your [target] grips his member tightly, ensuring that he isn’t going to be escaping anytime soon.", parse);
+			Text.NL();
+			Text.Add("Not that he intends to, of course. There’s not much behind those fogged eyes of his, but the lieutenant’s body responds eagerly enough to the rough, dominant fucking you’re giving him. Your grip on his shoulders tightens to the point that your knuckles are growing white. Corishev moans and struggles underneath you, the occasional crazed giggle slipping through his teeth as you administer a good heap of fucking justice upon him. There’s a certain thrill to fucking an intoxicated madman - perhaps due to the sheer danger of it all - that only makes things more exciting, and the venom encroaching upon your senses only serves to inflame that insane desire even further.", parse);
+			Text.NL();
+			Text.Add("Harder and faster you work your humiliated fucktoy, slamming your hips down on on his cock even as he instinctively rises to meet you, the pace of the grinding and slurping only quickening as sparks of pleasure erupt from the motions to send electric tingles down your spine. Perhaps remembering that he’s supposed to be trying to stop you, Corishev attempts to swat you off him from time to time, but you simply grin and quash his pathetic attempts to unseat you with ease. You give the bastard a good shaking by the shoulders and ask him how it feels to be utterly helpless and at the mercy of someone else who’s giving him a good thorough fucking.", parse);
+			Text.NL();
+			Text.Add("The only response you get is a shudder and moan as the lieutenant’s member throbs inside you, alternating between swelling and clenching as he nears his peak. Fuck that, can’t he last longer than two minutes? You’re not even halfway done! Unfortunately for you, Corishev picks that very moment to explode inside you, filling your [target] with meagre gobs of hot seed, barely enough to trickle out about the seal joining the two of you. Snarling, you keep pounding away mercilessly, the ground beneath the two of you squelching with your effort, but it seems like he’s all spent. Even with the venom aiding him, the lieutenant is softening rapidly inside you, leaving you feeling very much unsatisfied.", parse);
+			Text.NL();
+			parse["la"] = player.LowerArmor() ? Text.Parse(" and pull on your [lowerarmordesc]", parse) : "";
+			Text.Add("This is the best of Preston’s men, an idiot who can’t even last five minutes? Having fucked your fucktoy senseless, you sniff disdainfully at his form sprawled out in the midst of the sticky, slimy mess on the cell floor. Levering yourself off the unconscious Corishev, you clean yourself as best you can[la] before heading for the door, picking up the dropped whip on the way. Hey, at least it might be a little more useful than this loser here. Taking a moment to lock the cell door behind you - best to make sure he stays in there until the rest of the guards have a chance to find him - you hurry along to catch up with Cveta and Alaric, hoping they didn’t miss you too much while you were gone.", parse);
+			
+			player.AddLustFraction(0.5);
+			
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 20});
+			});
+		}, enabled : true,
+		tooltip : Text.Parse("Ride Corishev’s Cock with your [gen] and show him who’s boss.", parse)
+	});
+	options.push({ nameStr : "Anal",
+		func : function() {
+			var strapon = p1cock.isStrapon;
+			
+			Text.Clear();
+			parse["c"] = Text.Parse(strapon ? "pull out and affix your strap-on, knowing that your toy will be more than enough to get the job done with maximal efficiency" : "whip out your package, feeling the venom do its work as your [cocks] swell[notS] and stiffen[notS] with alarming rapidity, internal pressure building up in your ramming rod", parse);
+			parse["c2"] = player.NumCocks() > 1 ? " the biggest of your cocks" : "";
+			Text.Add("A mad grin splitting your face from ear to ear, you grab Corishev roughly by the shoulders and flip him over, forcing him on his hands and knees, ass high in the air and presented nicely to you. He tries to fight you off, but to no avail, as you easily overpower him in his defeated state. Since he’s so used to giving, let’s see how good he is at receiving. With great gusto, you [c]. The lieutenant half-snarls, half-giggles, squirming in your grasp as he dimly realizes through his drug-fogged mind what’s about to happen, but you keep a firm hold on his thin, bony ass and thrust[c2] into him without so much as a second thought.", parse);
+			Text.NL();
+			parse["knot"] = p1cock.Knot() ? ", especially with all the whimpering and whining when you force your knot into him, its prodigious bulge grinding against his entrance" : "";
+			Text.Add("Corishev is a tight fit - he yelps and growls wordlessly as you begin to pound his pucker rhythmically; you can’t help but wonder if that ass of his was virginal[knot]. All the more humiliating for him, then - you had thought that if he’s so into power games, he would have tried being on the receiving end as well. You had planned to start slow, but maybe it’s best to make it fast and hard, break him into it a little more quickly. Giving the lieutenant’s ass a good smack that leaves your palm stinging and a growing red mark on his rump, you grin and tell him in no uncertain terms how you’re going to very thoroughly use his hole even harder than you are doing already. His ass walls clench about your shaft as he wriggles, trying to escape your vicious thrusts, but you’re expecting it by now and pull him back.", parse);
+			Text.NL();
+			parse["c"] = player.NumCocks() > 1 ? ", your other cock[s2] waving about and leaking pre like some ecstatic tentacled monster" : "";
+			Text.Add("Just for that, you’re going to teach him even more of a lesson. Groping about on his skin for a good hold, you redouble your efforts, violating the lieutenant as best your [cock] will allow[c]. Corishev howls and yips like a mad dog at the repeated and forceful intrusions of your magnificent member, his protests growing even more forceful as you reach between his legs to jerk off his stiff cock. You touch gently at first, caressing the veins and glans with your fingertips, but before long you’ve grasped the shaft in your palm and are yanking away in tandem with the pounding you’re giving his ass.", parse);
+			Text.NL();
+			parse["c"] = strapon ? "elicit a moan of pleasure-pain from the lieutenant" : "cum over and over again into his bowels";
+			parse["c2"] = player.NumCocks() > 1 ? Text.Parse(", your other cock[s2] spraying seed all over him to drip off and mix in with the mess on the floor", parse) : "";
+			parse["knot"] = p1cock.Knot() ? " and knot" : "";
+			Text.Add("It seems doubtful that he can take much more, and to be frank, neither can you. With a final, hard thrust, you [c][c2]. Corishev’s rectum instinctively clenches down hard about your shaft[knot], his cock simultaneously expelling the remainder of his seed. Satisfied that you’ve taught the bastard a lesson in humility, you begin the arduous task of retrieving your shaft from his ass, letting him slump off you and into the puddle of sexual fluids on the floor.", parse);
+			Text.NL();
+			
+			var cum = player.OrgasmCum();
+			
+			parse["la"] = player.LowerArmor() ? Text.Parse(", don your [lowerarmordesc]", parse) : "";
+			Text.Add("Finally, done! You clean yourself up as best you can[la] and head for the exit, stopping along the way to pick up Corishev’s whip, still on the floor where it had been dropped. Taking care, you lock the cell behind you - best to make sure he stays in there until the rest of the guards have a chance to find him - and hurry to rejoin Cveta and Alaric. Hopefully you haven’t taken too long in administering that much-needed dose of discipline.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 20});
+			});
+		}, enabled : p1cock,
+		tooltip : Text.Parse("Fuck that ass of his with your [cocks].", parse)
+	});
+	options.push({ nameStr : "Reconsider",
+		func : function() {
+			Text.Clear();
+			Text.Add("Looking down at the defeated lieutenant, you shake your head. What were you thinking, wasting precious time on this? Turning heel on the scene, you stop on the way to pick up Corishev’s whip - it might be useful as a weapon - and lock the cell door behind you with the keys you found. Hopefully it’ll keep him from raising the alarm if he comes around too quickly.", parse);
+			Text.NL();
+			Text.Add("With that done, you hurry up the steps to rejoin Cveta and Alaric in the main hall.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
+			});
+		}, enabled : true,
+		tooltip : "Nah, now’s not the time to be doing this."
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+
+
 //TODO
 Scenes.BullTower.SlipOut = function() {
 	var parse = {
@@ -1106,7 +1518,6 @@ Scenes.BullTower.Failure = function() {
 		
 	};
 	
-	Text.Clear();
 	Text.Add("PLACEHOLDER", parse);
 	Text.NL();
 	Text.Add("", parse);
