@@ -157,6 +157,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/enemy/zebra.js \
 	js/enemy/orchid.js \
 	js/enemy/gol.js \
+	js/enemy/corishev.js \
 	js/main.js \
 	js/credits.js \
 	js/cheats.js \
