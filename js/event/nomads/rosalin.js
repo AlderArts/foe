@@ -674,7 +674,7 @@ Scenes.Rosalin.FirstTime = function() {
 		Text.Clear();
 		Text.Add("Rosalin is cut off mid-sentence as her alchemical mixture picks this exact moment to violently explode, throwing you flat on your back, with a buxom catgirl pressed against your [faceDesc]. Almost as quickly as you've fallen, the catgirl jumps off you with a happy yowl. <i>“Ah! It is finished!”</i> Groaning, you get to your feet, carefully following the crazy feline.", parse);
 		Text.NL();
-		Text.Add("With disbelief, you ask if she really expected the mixture the explode like that.", parse);
+		Text.Add("With disbelief, you ask if she really expected the mixture to explode like that.", parse);
 		Text.NL();
 		Text.Add("<i>“Oh, don't worry about that, it does that occasionally,”</i> she waves off your concern. Though her entire workbench is pretty much ruined, its contents thrown to the ground by the initial blast, the beaker itself is somehow fine. It must be made from a really sturdy material, not glass like it first seemed. Shoving the debris aside, Rosalin studies the liquid within the container. It still has a pungent odor, but it no longer looks unstable. The alchemist pours the mixture into a glass that also survived the explosion, a drop of the liquid splattering on the table. You watch as it slowly erodes the woodwork, a tiny column of smoke rising from the puddle. Jotting down a few more notes, she pockets her notepad and grabs the glass. In one long swig, she downs the entire concoction, to your dismayed cry. Does she want to kill herself?!", parse);
 		Text.NL();
