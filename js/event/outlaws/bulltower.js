@@ -11,6 +11,9 @@ function BullTowerStats() {
 	
 	this.stoleLantern = false;
 	this.guardsDown = false;
+	this.inspectedSafe = false;
+	this.openedSafe = false;
+	this.disarmedTrap = false;
 };
 BullTowerStats.prototype.Suspicion = function() {
 	return this.suspicion.Get();
@@ -28,11 +31,12 @@ BullTowerStats.prototype.DecSuspicion = function(min, dec) {
 
 
 Outlaws.BullTower = {
-	AlaricFreed     : 1,
-	StatueDestroyed : 2,
-	CaravansIgnited : 4,
+	AlaricFreed      : 1,
+	StatueDestroyed  : 2,
+	CaravansIgnited  : 4,
 	CaravansSearched : 8,
-	AnimalsFreed    : 16
+	AnimalsFreed     : 16,
+	SafeLooted       : 32
 	
 };
 
@@ -1491,6 +1495,237 @@ Scenes.BullTower.CorishevFuck = function(corishev) {
 }
 
 
+world.loc.BullTower.Building.Office.description = function() {
+	
+	var parse = {
+		t : terry.Recruited() ? ", perhaps so well that even Terry would find it quite the challenge" : ""
+	};
+	
+	Text.Add("There’s no sign of what this room used to be, but what it is right now is a small office. As devoid of embellishments as the main hall, this small, musty room is adorned with a serviceable desk and chair, as well as a chest of drawers leaning against the wall; searching through the latter only turns up a number of carefully-wrapped quill pens, inkwells, and blank pieces of paper. The royal guard may do their paperwork here, but it’s clear that they’re smart enough to not leave incriminating evidence lying about for anyone passing by to swipe.", parse);
+	Text.NL();
+	Text.Add("The only other interesting detail in this room is a rather impressive-looking safe set into the wall, probably intended to be hidden behind a painting or somesuch. ", parse);
+	if(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted)
+		Text.Add("Now that you’ve defeated the trap and looted the safe’s contents, it lies open, the door hanging forlornly open in the air. There’s not much point in closing it to disguise that you were here - by the time the sun comes up, the fact that someone was in the tower grounds is going to be common knowledge.", parse);
+	else
+		Text.Add("At first glance, the safe looks very well crafted[t]. You’ll have to get closer in order to inspect it in the dim light, though.", parse);
+}
+
+world.loc.BullTower.Building.Office.links.push(new Link(
+	"Hall", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
+		outlaws.BT.IncSuspicion(100, 2.5);
+	}
+));
+
+world.loc.BullTower.Building.Office.events.push(new Link(
+	"Safe", function() {
+		return !outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted;
+	}, true,
+	null,
+	function() {
+		var parse = {
+			
+		};
+		
+		Text.Clear();
+		Text.Add("Gingerly, you step toward the wall safe, half-expecting a couple of guards to burst in through the entrance behind you, but thankfully nothing of the sort happens. Well, what will you do?", parse);
+		Text.Flush();
+		
+		Scenes.BullTower.SafePrompt();
+	}
+));
+
+Scenes.BullTower.SafePrompt = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	//[Inspect][Unlock][Disarm][Fake Out][Leave]
+	var options = new Array();
+	options.push({ nameStr : "Inspect",
+		func : function() {
+			Text.Clear();
+			Text.Add("Leaning closer in the dim light, you take a closer look at the safe and its mechanisms. About the size of a bedside stand, it’s newer than the masonry that surrounds it, having yet to gain the coat of tarnish or rust that covers most of the metal objects remaining in the tower. Rapping on the solid steel door with your knuckles fails to produce a hollow sound - it’s unlikely you’ll be able to break into it by brute force, then.", parse);
+			Text.NL();
+			parse["t"] = Jobs.Rogue.Master(player) ? "you know enough about thieving to know that this workmanship is beyond your abilities. Something really important must be stowed away in there" : terry.Recruited() ? "perhaps if Terry were here, the thief would be able to make some sense of this, but you definitely can’t" : "most likely beyond your abilities to pick";
+			Text.Add("Set in the side of the safe’s door is a small, intricate keyhole - [t]. One thing’s certain: you’re not getting inside without the key. You wonder what the guards have in here that warrants such security… Just under the safe itself, framed by steel, is a thin slot at about thigh height - an obvious trap to make would-be thieves think twice about attempting to crack the safe.", parse);
+			Text.NL();
+			Text.Add("You look to Cveta to see if she has anything to say, but the songstress simply shakes her head. Should have expected as much - it’s not her area of expertise. Well, looks like it’s up to you to try and figure this one out.", parse);
+			Text.Flush();
+			outlaws.BT.inspectedSafe = true;
+			
+			Scenes.BullTower.SafePrompt();
+		}, enabled : true,
+		tooltip : "Inspect the safe in detail."
+	});
+	if(outlaws.BT.inspectedSafe && !outlaws.BT.openedSafe) {
+		if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed) {
+			options.push({ nameStr : "Unlock",
+				func : function() {
+					Text.Clear();
+					Text.Add("Could it be? Is it? Steadying yourself, you take out the key you picked off the lecherous lieutenant and push it into the keyhole. It’s a perfect fit, the tumblers slide smoothly, and there’s an audible click from within as the latch moves. Unfortunately, there’s also a click from the slot beneath you, something sliding into place and poised to spring once triggered.", parse);
+					Text.NL();
+					Text.Add("<i>“Well, looks like I wasn’t wrong,”</i> Alaric mumbles from behind you, forcing a grin despite his pained expression. <i>“Watch out, though, [playername]. There’s still the trap to deal with, and I’ve no idea how to prevent it from triggering once you open the door.”</i>", parse);
+					Text.Flush();
+					outlaws.BT.openedSafe = true;
+					
+					Scenes.BullTower.SafePrompt();
+				}, enabled : true,
+				tooltip : "Open the safe with the key you acquired from the lieutenant."
+			});
+		}
+	}
+	if(outlaws.BT.openedSafe && !outlaws.BT.disarmedTrap) {
+		options.push({ nameStr : "Disarm",
+			func : function() {
+				Text.Clear();
+				Text.Add("Crouching down so you’re level with the slot, you do your best to take stock of the workings of the trap. Both Cveta and Alaric stand a healthy distance back as you begin to work, the latter looking distinctly nervous as you begin your fiddling.", parse);
+				Text.NL();
+				Text.Add("<i>“Be careful, friend.”</i>", parse);
+				Text.NL();
+				Text.Add("As if you needed telling. After some inspection, you’re fairly certain that this indeed is a spring-loaded blade trap, which would explain the second click you heard when unlocking the safe; the blade is designed to whip out in an arc when released, slash the would-be thief opening the safe door across the thighs, then retreat into the slot once more. As for options… you <b>could</b> try taking apart the frame that surrounds the slot and try to see if you can disarm the mechanism inside - it’s the only obvious way you could get at the trap’s inner workings, anyway. Standing, you briefly explain your findings to Cveta and Alaric.", parse);
+				Text.NL();
+				Text.Add("<i>“Are you sure you want to risk this, [playername]?”</i> the songstress whispers. <i>“If you are incapacitated here…”</i>", parse);
+				Text.NL();
+				Text.Add("Yes, you’re willing to risk this, and tell her as much. Cveta tilts her head at your words, but says nothing and steps back to watch as you kneel once more and begin your work in earnest.", parse);
+				Text.NL();
+				
+				var check = (player.Int() + player.Dex())/2 + Math.random() * 20;
+				check += player.jd['Rogue'].level * 5;
+				
+				if(DEBUG) {
+					Text.Add("Int/Dex check (with bonuses for Rogue levels): [check] vs 80", {check: check}, 'bold');
+					Text.NL();
+				}
+				
+				if(check >= 80) {
+					Text.Add("Loosening the screws on the frame with a small knife Cveta provides, you carefully ease it off the wall, widening the slot considerably. You suspected that both safe and trap weren’t here when the tower was first built, and the rectangular recess that’s been revealed makes it all but certain.", parse);
+					Text.NL();
+					if(Jobs.Rogue.Master(player))
+						Text.Add("Your mastery of rogue skills serves you well here. ", parse);
+					Text.Add("You get as close a look at the trap as you dare. Even though you can see both spring and blade glinting in the dark recess, you still have no idea how long their reach is - you study the mechanisms before making your move. It’s a surprisingly simple system; opening the safe releases a catch which allows the springs holding the blade in place to whip outward. There’s also a deadbolt that prevents the trap from triggering and must be how the lieutenant safely accesses the safe’s contents, but you see no obvious way to set it in place.", parse);
+					Text.NL();
+					Text.Add("Well, as the saying goes, there’s more than one way to skin a cat. Holding your breath and willing your fingers not to shake, you reach in with your knife and cut away at the springs. The catch looks solid, and so long as it isn’t released, you should be safe… you cut through the springs one at a time, setting them off with audible twangs until you’re sure you’re done and the trap is wholly disarmed.", parse);
+					Text.NL();
+					
+					Scenes.BullTower.SafeSuccess();
+				}
+				else {
+					Text.Add("Things don’t go quite as planned, though. You must’ve fumbled somewhere, made a mistake; there’s a glint of light, the faintest of swishing sounds, and sudden, terrible pain flares up on your shoulder and across your collarbone. Just a little higher, and the blade - now wet and glistening with your blood - would have removed your head from your shoulders.", parse);
+					Text.NL();
+					
+					Scenes.BullTower.SafeFailure();
+				}
+			}, enabled : true,
+			tooltip : "Attempt to disarm the trap."
+		});
+		options.push({ nameStr : "Fake Out",
+			func : function() {
+				Text.Clear();
+				Text.Add("You think it better that you don’t actually attempt to disarm the trap and instead set it off safely.", parse);
+				Text.NL();
+				Text.Add("<i>“How do you intend to do that?”</i> Alaric whispers. <i>“Surely you don’t intend to just dance out of its path?”</i>", parse);
+				Text.NL();
+				Text.Add("Why, that <i>was</i> what you’d intended, save with a few extra precautions. While the desk is fixed to the floor and can’t be moved, the chair and drawers can - and no matter how sharp this blade is, surely they’d buy you some time at the very least.", parse);
+				Text.NL();
+				Text.Add("Alaric shakes his head and looks to Cveta, but the songstress has her all-too-familiar dispassionate face on, as readable as a brick wall. With a sigh, the bean-counter takes an unsteady step back. <i>“I’ll trust you to know what you’re doing, [playername]. It would be a horrible turn of fate if you ended up being the one needing rescuing.”</i>", parse);
+				Text.NL();
+				Text.Add("It’s a risk you’re willing to take, you assure him as you shift the small chest of drawers and chair up against the slot. With how long the slot is, the maximum arc of the blade would be this much, and you guess you’d need to be this far after the trap is sprung…", parse);
+				Text.NL();
+				Text.Add("Well, you’re as ready as you’ll ever be. Feeling both Cveta and Alaric’s gazes on the back of your neck and the tension building up in your muscles, you grasp the safe’s handle with both hands and heave. There’s a slight resistance which must be the triggering mechanism, a twang of released tension, and then a flash of light as a sharp blade slices through the air and sinks into the old furniture.", parse);
+				Text.NL();
+				
+				var check = player.Dex() + Math.random() * 20;
+				check += player.jd['Rogue'].level * 5;
+				
+				if(DEBUG) {
+					Text.Add("Dex check (with bonuses for Rogue levels): [check] vs 90", {check: check}, 'bold');
+					Text.NL();
+				}
+				
+				if(check >= 90) {
+					if(Jobs.Rogue.Master(player))
+						Text.Add("Your mastery of a rogue’s reflexes comes in handy here. ", parse);
+					Text.Add("Although the blade is fast, your movements are faster - by the time it’s cleaved through the dry rot of the old furniture you’ve placed in its path, you’re well out of its range. The drawer and chair were rickety to begin with, and they’re but so many splinters now, the blade having sheared them apart with its passage.", parse);
+					Text.NL();
+					Text.Add("<i>“Wow,”</i> Alaric says after the dust has settled. <i>“Impressive.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Perhaps, but we should not be wasting time. With the amount of noise this has created and how well sound carries in this place, I am sure someone will be coming to investigate before long. Please, [playername], would you finish opening the safe with all due haste?”</i>", parse);
+					Text.NL();
+					
+					Scenes.BullTower.SafeSuccess();
+				}
+				else {
+					Text.Add("Things don’t go quite as planned, though. Weakened with years of neglect and dry rot, the chair and drawers don’t hold up as long as you’d hoped they would, nor are you as quick as you imagined you’d be. Tearing through the old wood in a shower of splinters, the blade flashes in the dim light as it sings through the air, sharp and serrated. Numbness comes first, then pain flares up on your outer thigh just under your hips. You’re vaguely aware through the sudden surge of dizziness that hits you that there’s now blood on the edge of the sprung blade - blood that used to be in your body.", parse);
+					Text.NL();
+					
+					Scenes.BullTower.SafeFailure();
+				}
+			}, enabled : true,
+			tooltip : "Attempt to set off the trap safely."
+		});
+	}
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("Taking one last look at the safe, you shake your head and turn your back on it. You decide to leave the steel-bound thing for later - it’s not as if it’ll be going anywhere should you change your mind, after all.", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt();
+	});
+}
+
+Scenes.BullTower.SafeSuccess = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Add("Wasting no time, you fling open the safe and reach greedily into its recesses. Alaric’s eyes grow wide at the sight of the small fortune stashed inside, and even Cveta is impressed enough to raise an eyebrow. No wonder the guards went to such lengths to secure the safe - and it also explains how Preston managed to afford the statue, amongst other things.", parse);
+	Text.NL();
+	Text.Add("<i>“We should take these coin bags with us,”</i> Alaric says, grinning weakly. <i>“Shouldn’t leave valuables like that lying around. Someone might…uh, steal them.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“If that was a jest, it failed to provoke much amusement on my part,”</i> Cveta replies dryly. <i>“However, I am in agreement that we should purloin the royal guards’ ill-gotten gains. It will be valuable evidence that they have been ‘on the take’, as I believe it is called.”</i>", parse);
+	Text.NL();
+	Text.Add("Even consider leaving the lot after you went to so much trouble to get at it? Perish the thought! The money bags are as heavy as they look, but you’re certain that you can get out with them in tow. Even Alaric, injured as he is, manages to summon up the strength to heft one of the smaller bags over his shoulder.", parse);
+	Text.NL();
+	Text.Add("Well then. There’s nothing left for you in this room - time to move along before someone thinks to check in on all the noise.", parse);
+	Text.Flush();
+	
+	//TODO Reward
+	
+	Gui.NextPrompt();
+}
+
+Scenes.BullTower.SafeFailure = function() {
+	var parse = {
+		playername : player.name,
+		heshe : player.mfTrue("he", "she")
+	};
+	
+	Text.Add("With how hard you’re clenching your teeth in a bid not to scream, it’s only through good fortune that you don’t bite off your tongue. Staggering away from the safe, blood seeping into your clothing, you manage to stay upright just long enough for Alaric and Cveta to catch you before you slump to the ground.", parse);
+	Text.NL();
+	Text.Add("<i>“[playername]! Alaric, your shirt.”</i> Is that Cveta speaking? It probably is, but it’s hard to be completely certain through the warm haze that’s creeping in around your senses. Everything feels lighter, fluffier…", parse);
+	Text.NL();
+	Text.Add("<i>“Huh?”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Your clothing is already mostly rags, and we need to staunch the bleeding. Your shirt, now.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Right!”</i>", parse);
+	Text.NL();
+	Text.Add("What happens afterward is a bit of a blur. Bursts of pain lance through your consciousness, providing sharp moments of clarity that rapidly sink back into the dull haze that shrouds your mind. Something tight is tied about your wound, staunching the pain a little, and you’re grateful for that. Support comes by way of a gentle pressure under your arms, and you inch forward, one step at a time, seeking the music.", parse);
+	Text.NL();
+	Text.Add("The music. Where did it come from? Where is it leading you? Such questions melt away into insignificance; the music fills the world, <i>is</i> the world. A small bird of golden orange light flutters on in the darkness, its aura trailing behind it; you do your best to follow the warm melody, your steps faltering but never failing.", parse);
+	Text.NL();
+	Text.Add("<i>“Is [heshe] going to bleed out? I knew trying to open that safe was a bad idea!”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“…Hindsight… do not complain… keep moving…”</i>", parse);
+	Text.Flush();
+	
+	//TODO #End mission, go to injured ending.
+	
+	Gui.NextPrompt();
+}
 
 //TODO
 Scenes.BullTower.SlipOut = function() {
