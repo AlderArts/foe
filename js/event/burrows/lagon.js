@@ -149,7 +149,7 @@ function LagonRegular(tougher) {
 	this.libido.base       = tougher ? 100 :  80;
 	this.charisma.base     = tougher ?  80 :  70;
 	
-	this.level             = tougher ?  16 :  14;
+	this.level             = tougher ?  22 :  16;
 	this.sexlevel          = 8;
 	
 	this.combatExp         = tougher ? 200 : 150;
@@ -310,7 +310,7 @@ function LagonBrute(scepter) {
 	this.libido.base       = scepter ?  80 : 100;
 	this.charisma.base     = scepter ?  50 :  60;
 	
-	this.level             = scepter ? 18 : 20;
+	this.level             = scepter ? 22 : 24;
 	this.sexlevel          = 8;
 	
 	this.combatExp         = scepter ? 400 :  500;

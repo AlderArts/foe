@@ -36,8 +36,9 @@ Outlaws.BullTower = {
 	CaravansIgnited  : 4,
 	CaravansSearched : 8,
 	AnimalsFreed     : 16,
-	SafeLooted       : 32
-	
+	SafeLooted       : 32,
+	BlueRoses        : 64,
+	ContrabandStolen : 128
 };
 
 
@@ -1074,16 +1075,22 @@ world.loc.BullTower.Building.Hall.links.push(new Link(
 		outlaws.BT.IncSuspicion(100, 2.5);
 	}
 ));
-/* TODO more locations
 world.loc.BullTower.Building.Hall.links.push(new Link(
-	"", true, true,
+	"Office", true, true,
 	null,
 	function() {
-		
+		MoveToLocation(world.loc.BullTower.Building.Office, {minute: 5});
+		outlaws.BT.IncSuspicion(100, 2.5);
 	}
 ));
-*/
-
+world.loc.BullTower.Building.Hall.links.push(new Link(
+	"Cell", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.BullTower.Building.Cell, {minute: 5});
+		outlaws.BT.IncSuspicion(100, 2.5);
+	}
+));
 
 world.loc.BullTower.Building.Cell.onEntry = function() {
 	var parse = {
@@ -1726,6 +1733,87 @@ Scenes.BullTower.SafeFailure = function() {
 	
 	Gui.NextPrompt();
 }
+
+world.loc.BullTower.Building.Warehouse.description = function() {
+	Text.Add("This must be where the guards are keeping the contraband until it’s eventually passed on to the high society of Rigard. Stacked in whatever open space is available, the royal guard has turned what was once a mess or meeting hall into a makeshift warehouse that’s surprisingly neat and orderly. There’s far too much in the way of ill-gotten gains for it to have come in with a single caravan - this has clearly been going on for some time.");
+	Text.NL();
+	Text.Add("<i>“I would not be surprised if some of this originated as confiscated property.”</i> Cveta muses. <i>“It is not unknown for confiscated goods to resurface now and again.”</i>");
+	Text.NL();
+	Text.Add("Wandering amidst the boxes, sacks and barrels - the vast majority of them holding luxury goods of the sort no commoner would have the means to buy, the sort that’s heavily taxed - it’s hard to guess exactly how much in the way of levies is going unpaid on all these.");
+	if(!outlaws.flags["BT"] & Outlaws.BullTower.BlueRoses) {
+		Text.NL();
+		Text.Add("There’s even a small potted plant on top of one of the stacks of crates, looking a little unhealthy in the dim room. On closer inspection, it’s a stem cutting of some kind of plant with blue flower buds, and someone’s scrawled ‘Handle carefully! For Preston!’ on the pot in charcoal.");
+	}
+}
+
+world.loc.BullTower.Building.Warehouse.links.push(new Link(
+	"Hall", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
+		outlaws.BT.IncSuspicion(100, 2.5);
+	}
+));
+
+world.loc.BullTower.Building.Warehouse.events.push(new Link(
+	"Contraband", function() {
+		return outlaws.flags["BT"] & Outlaws.BullTower.ContrabandStolen;
+	}, true,
+	null,
+	function() {
+		var parse = {
+			
+		};
+		
+		Text.Clear();
+		Text.Add("You look at all the crates with their contents clearly marked - finely aged wines, horrendously ostentatious fabrics, bits and bobs of extravagant jewellery are merely commonplace here. The crates are far too large and heavy for you to sneak out with, but you decide to pilfer the most valuable thing you see - a small bag of assorted gemstones the size of your fist, presumably destined to be set into some trinket or gewgaw. Surely the outlaws can use some extra funding, and they should have access to a fence…", parse);
+		Text.NL();
+		Text.Add("Cveta nods, clearly approving of your decision, but doesn’t pick out anything herself. Stowing away your acquisition with your other possessions, you return your attention to the task at hand.", parse);
+		Text.Flush();
+		
+		outlaws.flags["BT"] |= Outlaws.BullTower.ContrabandStolen;
+		
+		Gui.NextPrompt();
+		outlaws.BT.IncSuspicion(100, 2.5);
+	}
+));
+
+world.loc.BullTower.Building.Warehouse.events.push(new Link(
+	"Roses", function() {
+		return outlaws.flags["BT"] & Outlaws.BullTower.BlueRoses;
+	}, true,
+	null,
+	function() {
+		var parse = {
+			playername : player.name
+		};
+		
+		Text.Clear();
+		Text.Add("You inspect the stem cutting in the pot. While the blue flower buds haven’t bloomed yet, there is nevertheless a faint fragrance rising from the unopened petals, its sweetness just enough to hold the smell of stale air at bay. Whoever brought this in here, while careful, clearly had no idea how to care for a plant like this. It’s not quite dead yet, but it’s begun to wilt. As it is, it’s probably not going to be the showpiece that Preston probably hoped it would be.", parse);
+		Text.NL();
+		Text.Add("<i>“A pompous pig like Preston does not deserve to have these,”</i> Cveta declares, picking up the wrapped pot. <i>“You do not set treasures before those who will not fully appreciate them.”</i>", parse);
+		Text.NL();
+		Text.Add("Just what is this, anyway?", parse);
+		Text.NL();
+		Text.Add("<i>“Blue roses from the lands near the Tree, [playername]. They do not exist in nature, and are the fruit of many generations’ efforts in cultivating the finest blossoms. For Preston to be able to order these…”</i> she thinks a moment. <i>“It is conceivable that he might have done so on his own power, but I would wager that he had a helping hand. These are very rare and expensive, [playername], and furthermore, those who cultivate the plants do not part with them easily. For a Rigardian noble of middling stature like Preston to be in possession of these… if he were to display them in his garden, he would definitely enjoy the admiration of those as shallow as him for a while.”</i>", parse);
+		Text.NL();
+		Text.Add("Well, that stands to reason. If these are eventually going to end up in the hands of Rigard’s upper crust, then they would be inclined to do some favors for him, wouldn’t they?", parse);
+		Text.NL();
+		Text.Add("Cveta huffs and nods. <i>“However Preston managed to negotiate their sale, I will wager that he only sees the benefit of elevated status that these blossoms will bring him, and not the link they represent with those who came before us, and in turn, those who will come after our passing. He will not have these.”</i>", parse);
+		Text.NL();
+		Text.Add("And she will?", parse);
+		Text.NL();
+		Text.Add("<i>“Mother knew something of horticulture, yes. But now is not the time to get into extended discussions, [playername]. Suffice to say that I intend to take these with me. They do not deserve to wither for the sin of being sold to a brute. Do not worry; I will not be unduly burdened.”</i>", parse);
+		Text.Flush();
+		
+		outlaws.flags["BT"] |= Outlaws.BullTower.BlueRoses;
+		
+		Gui.NextPrompt();
+		outlaws.BT.IncSuspicion(100, 2.5);
+	}
+));
+
+
 
 //TODO
 Scenes.BullTower.SlipOut = function() {
