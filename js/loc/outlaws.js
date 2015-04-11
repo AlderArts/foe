@@ -20,6 +20,13 @@ world.loc.Outlaws.Camp.description = function() {
 world.loc.Outlaws.Camp.onEntry = function() {
 	if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry && cveta.flags["Met"] < Cveta.Met.MariaTalk)
 		Scenes.Cveta.MariaTalkFirst();
+		
+		/* TODO
+		 * #Initiates when Cveta is at 60 rel. (Consider rel requirements for Zenith as well?)
+		 * #Triggers when the player enters the outlaw camp in the evening.
+		 */
+	else if(DEBUG && outlaws.flags["BullTower"] < Outlaws.BullTowerQuest.Initiated) //TODO
+		Scenes.BullTower.Initiation();
 	else
 		PrintDefaultOptions();
 }
@@ -29,6 +36,16 @@ world.loc.Outlaws.Camp.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(world.loc.Forest.Outskirts, {hour: 1});
+	}
+));
+
+world.loc.Outlaws.Camp.links.push(new Link(
+	"Tower", function() {
+		return outlaws.flags["BullTower"] == Outlaws.BullTowerQuest.Initiated;
+	}, true,
+	null,
+	function() {
+		Scenes.BullTower.MovingOut();
 	}
 ));
 
@@ -44,6 +61,7 @@ world.loc.Outlaws.Camp.events.push(new Link(
 		Scenes.Maria.CampInteract();
 	}
 ));
+
 world.loc.Outlaws.Camp.events.push(new Link(
 	"Cveta", function() {
 		var met  = cveta.flags["Met"] >= Cveta.Met.Available;
@@ -70,7 +88,3 @@ world.loc.Outlaws.Camp.events.push(new Link(
 		Scenes.Cveta.Performance();
 	}
 ));
-
-world.loc.Outlaws.Camp.endDescription = function() {
-	Text.Add("What do you do?<br/>");
-}

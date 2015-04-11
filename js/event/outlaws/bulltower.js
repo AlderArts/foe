@@ -11,6 +11,7 @@ function BullTowerStats() {
 	
 	this.stoleLantern = false;
 	this.guardsDown = false;
+	this.towerGuardDown = false;
 	this.inspectedSafe = false;
 	this.openedSafe = false;
 	this.disarmedTrap = false;
@@ -29,7 +30,7 @@ BullTowerStats.prototype.DecSuspicion = function(min, dec) {
 	this.suspicion.DecreaseStat(min, dec);
 }
 
-
+// Quest results
 Outlaws.BullTower = {
 	AlaricFreed      : 1,
 	StatueDestroyed  : 2,
@@ -41,6 +42,12 @@ Outlaws.BullTower = {
 	ContrabandStolen : 128
 };
 
+// Quest state
+Outlaws.BullTowerQuest = {
+	NotStarted : 0,
+	Initiated  : 1,
+	Completed  : 2
+};
 
 /*
  * 
@@ -74,21 +81,17 @@ world.loc.BullTower.Building.Office.wait = function() { return false; };
 world.loc.BullTower.Building.Warehouse.wait = function() { return false; };
 world.loc.BullTower.Building.Watchtower.wait = function() { return false; };
 
-// TODO areas
 
 Scenes.BullTower = {};
 
 
 
-/* TODO
- * #Initiates when Cveta is at 60 rel. (Consider rel requirements for Zenith as well?)
-
-#Triggers when the player enters the outlaw camp in the evening.
- */
 Scenes.BullTower.Initiation = function() {
 	var parse = {
 		playername: player.name
 	};
+	
+	outlaws.flags["BullTower"] = Outlaws.BullTowerQuest.Initiated;
 	
 	Text.Clear();
 	Text.Add("The outlaw camp is always calmest at dawn and at dusk - the camp may never sleep, but it does have lulls when one shift of workers - be they hunters, sentries or otherwise - replaces another. It’s at one of these shift rotations that you arrive in the camp, feeling momentarily calmed by the brief surfeit of activity before you’re grabbed by the shoulder from behind.", parse);
@@ -306,19 +309,12 @@ Scenes.BullTower.InitiationQuestions = function(opts) {
 			world.TimeStep({ minute : 5 });
 			
 			Gui.NextPrompt();
-			//TODO Set flag
 		}, enabled : true,
 		tooltip : "You’re about done here."
 	});
 	Gui.SetButtonsFromList(options, false, null);
 }
 
-/*
- * TODO
- * Moving Out
-
-[Tower] - Head off to Bull Tower with Cveta.
- */
 Scenes.BullTower.MovingOut = function() {
 	var parse = {
 		playername : player.name
@@ -488,7 +484,7 @@ world.loc.BullTower.Courtyard.Yard.links.push(new Link(
 		outlaws.BT.IncSuspicion(100, 2.5);
 	}
 ));
-world.loc.BullTower.Courtyard.Caravans.links.push(new Link(
+world.loc.BullTower.Courtyard.Yard.links.push(new Link(
 	"Caravans", true, true,
 	null,
 	function() {
@@ -507,7 +503,7 @@ world.loc.BullTower.Courtyard.Yard.links.push(new Link(
 
 world.loc.BullTower.Courtyard.Yard.events.push(new Link(
 	"Statue", function() {
-		return !outlaws.flags["BT"] & Outlaws.BullTower.StatueDestroyed;
+		return !(outlaws.flags["BT"] & Outlaws.BullTower.StatueDestroyed);
 	}, true,
 	null,
 	function() {
@@ -897,7 +893,7 @@ world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
 
 world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
 	"Burn Caravans", function() {
-		return !(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited);
+		return outlaws.BT.guardsDown && !(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited);
 	}, true,
 	null,
 	function() {
@@ -929,7 +925,7 @@ world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
 			func : function() {
 				Text.Clear();
 				Text.Add("Yes, the wagons are close enough that the fire should easily spread between them. You’re a bit surprised at how readily the canvas hoods catch flame - it’s almost as if they <i>want</i> to be destroyed - and just for good measure, you pay extra attention to the wooden frames, going over them carefully and making sure there’s going to be nothing salvageable after the intense heat has done its work.", parse);
-				if(!outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed) {
+				if(!(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed)) {
 					Text.NL();
 					Text.Add("With all the heat and smoke the burning wagons are creating, you’ve probably drawn plenty of attention to yourself. The roof will keep the inferno contained for a little while, but the smoke will spill out and someone is going to notice eventually - if the guards you took out aren’t roused by the flames first, that is.", parse);
 				}
@@ -938,7 +934,7 @@ world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
 				outlaws.flags["BT"] |= Outlaws.BullTower.CaravansIgnited;
 				
 				Gui.NextPrompt();
-				if(!outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed)
+				if(!(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed))
 					outlaws.BT.IncSuspicion(100, 30);
 				else
 					outlaws.BT.IncSuspicion(100, 2.5);
@@ -985,7 +981,7 @@ world.loc.BullTower.Courtyard.Pens.links.push(new Link(
 
 world.loc.BullTower.Courtyard.Pens.events.push(new Link(
 	"Free Animals", function() {
-		return !outlaws.flags["BT"] & Outlaws.BullTower.AnimalsFreed;
+		return !(outlaws.flags["BT"] & Outlaws.BullTower.AnimalsFreed);
 	}, true,
 	null,
 	function() {
@@ -1043,6 +1039,14 @@ world.loc.BullTower.Building.Hall.description = function() {
 
 //[Warehouse][Office][Watchtower][Cell][Courtyard]
 world.loc.BullTower.Building.Hall.links.push(new Link(
+	"Courtyard", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.BullTower.Courtyard.Yard, {minute: 5});
+		outlaws.BT.IncSuspicion(100, 2.5);
+	}
+));
+world.loc.BullTower.Building.Hall.links.push(new Link(
 	"Warehouse", true, true,
 	null,
 	function() {
@@ -1088,6 +1092,14 @@ world.loc.BullTower.Building.Hall.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(world.loc.BullTower.Building.Cell, {minute: 5});
+		outlaws.BT.IncSuspicion(100, 2.5);
+	}
+));
+world.loc.BullTower.Building.Hall.links.push(new Link(
+	"Tower", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.BullTower.Building.Watchtower, {minute: 5});
 		outlaws.BT.IncSuspicion(100, 2.5);
 	}
 ));
@@ -1528,7 +1540,7 @@ world.loc.BullTower.Building.Office.links.push(new Link(
 
 world.loc.BullTower.Building.Office.events.push(new Link(
 	"Safe", function() {
-		return !outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted;
+		return !(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted);
 	}, true,
 	null,
 	function() {
@@ -1600,7 +1612,7 @@ Scenes.BullTower.SafePrompt = function() {
 				Text.NL();
 				
 				var check = (player.Int() + player.Dex())/2 + Math.random() * 20;
-				check += player.jd['Rogue'].level * 5;
+				check += player.jobs['Rogue'].level * 5;
 				
 				if(DEBUG) {
 					Text.Add("Int/Dex check (with bonuses for Rogue levels): [check] vs 80", {check: check}, 'bold');
@@ -1645,7 +1657,7 @@ Scenes.BullTower.SafePrompt = function() {
 				Text.NL();
 				
 				var check = player.Dex() + Math.random() * 20;
-				check += player.jd['Rogue'].level * 5;
+				check += player.jobs['Rogue'].level * 5;
 				
 				if(DEBUG) {
 					Text.Add("Dex check (with bonuses for Rogue levels): [check] vs 90", {check: check}, 'bold');
@@ -1740,7 +1752,7 @@ world.loc.BullTower.Building.Warehouse.description = function() {
 	Text.Add("<i>“I would not be surprised if some of this originated as confiscated property.”</i> Cveta muses. <i>“It is not unknown for confiscated goods to resurface now and again.”</i>");
 	Text.NL();
 	Text.Add("Wandering amidst the boxes, sacks and barrels - the vast majority of them holding luxury goods of the sort no commoner would have the means to buy, the sort that’s heavily taxed - it’s hard to guess exactly how much in the way of levies is going unpaid on all these.");
-	if(!outlaws.flags["BT"] & Outlaws.BullTower.BlueRoses) {
+	if(!(outlaws.flags["BT"] & Outlaws.BullTower.BlueRoses)) {
 		Text.NL();
 		Text.Add("There’s even a small potted plant on top of one of the stacks of crates, looking a little unhealthy in the dim room. On closer inspection, it’s a stem cutting of some kind of plant with blue flower buds, and someone’s scrawled ‘Handle carefully! For Preston!’ on the pot in charcoal.");
 	}
@@ -1814,6 +1826,120 @@ world.loc.BullTower.Building.Warehouse.events.push(new Link(
 ));
 
 
+world.loc.BullTower.Building.Watchtower.description = function() {
+	Text.Add("From the outside, the ancient watchtower of Bull Tower looks proud and strong in spite of its age. On the inside, it’s just dusty and claustrophobic. The long, spiral staircase up to the top is enough to take the wind out of anyone, and leads to a landing and a ladder that in turn leads up to the belfry. Flickering light filters down from above. A peek upward through the hatch reveals that ");
+	if(outlaws.BT.towerGuardDown)
+		Text.Add("the lookout you dealt with earlier is still out cold and unlikely to raise the alarm anytime soon.");
+	else
+		Text.Add("there’s a single guard posted in the watchtower, peering intently into the darkness that lies beyond the walls and certainly not looking for danger coming up from below. All the better for you, then, if you decided to take him out.");
+	Text.NL();
+	Text.Add("The remainder of the watchtower’s nest is visible from below if you angle yourself properly; the room’s not very big. A few flickering lanterns, an old but comfortable chair, an ancient steel hook from which an enormous bell hangs, complete with striker and clapper. Strictly functional and utilitarian, as it should be.");
+}
+
+world.loc.BullTower.Building.Watchtower.links.push(new Link(
+	"Hall", true, true,
+	null,
+	function() {
+		MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
+		outlaws.BT.IncSuspicion(100, 2.5);
+	}
+));
+
+world.loc.BullTower.Building.Watchtower.events.push(new Link(
+	"Guard", function() {
+		return !outlaws.BT.towerGuardDown;
+	}, true,
+	null,
+	function() {
+		var parse = {
+			
+		};
+		
+		Text.Clear();
+		Text.Add("You look up through the hatch at the guard above you. Yes, he’s definitely going to be a problem if you want to investigate the top of the tower in any detail, and considering his proximity to the bell, you’re going to have to take him out quickly - if you decide to actually do so, that is. The poor fellow looks extremely tired, although determined to stay awake, shifting his weight from one foot to the other and taking an occasional swig from a small flask on his belt.", parse);
+		Text.NL();
+		Text.Add("You think for a moment and weigh the possibilities that come to mind.", parse);
+		Text.Flush();
+		
+		//[Sneak][Lull][Leave]
+		var options = new Array();
+		options.push({ nameStr : "Sneak",
+			func : function() {
+				Text.Clear();
+				Text.Add("In a low whisper, you explain to Cveta that you’re going to sneak up the ladder and knock out the guard. She nods, and you begin your ascent.", parse);
+				Text.NL();
+				
+				var check = player.Dex() + Math.random() * 20;
+				
+				if(DEBUG) {
+					Text.Add("Dex check, [check] vs 60", {check: check}, 'bold');
+					Text.NL();
+				}
+				if(check >= 60) {
+					Text.Add("The ladder might be old and creaky, but your feet are light and your hands nimble, hardly making a sound as you flit from rung to rung. Intently focusing outwards, the guard doesn’t notice the threat from behind until you’ve given him a good thump on the back of his head. With a soft sigh, his eyes roll up and he collapses to the floor in a heap.", parse);
+				}
+				else {
+					Text.Add("However, your feet aren’t as light as you’d hoped. The ladder’s old, and one particularly worn rung creaks underfoot just as you’re almost at the top. Hearing the old wood groan, the guard turns, his eyes growing wide as he sees you and begins reaching for the striker.", parse);
+					Text.NL();
+					Text.Add("There’s no time to waste. Springing up the last few rungs and into the tower’s nest, you jump-tackle the guard just before he manages to reach the striker, both of you hitting the ground in a cloud of dust. The guard puts up a struggle, and in the tussle a potted plant tumbles from its place beside a window to shatter loudly on a rock below. Despite his resistance, you eventually get the upper hand and knock him out cold with a solid blow to the head.", parse);
+					
+					outlaws.BT.IncSuspicion(100, 15);
+				}
+				Text.NL();
+				Text.Add("After you’ve dragged the unconscious guard into a corner of the room, you signal to Cveta to come up and join you, which she does, nimbly ascending the ladder. Now that you can search the room uninterrupted, this should be easier.", parse);
+				Text.Flush();
+				
+				outlaws.BT.towerGuardDown = true;
+				
+				Gui.NextPrompt();
+			}, enabled : true,
+			tooltip : "Sneak up the ladder and knock him out cold."
+		});
+		options.push({ nameStr : "Lull",
+			func : function() {
+				Text.Clear();
+				Text.Add("As you watch the guard, an idea comes to mind. Since the guard is already struggling to stay awake, it shouldn’t take too much effort to send him to sleep, should it? You tell Cveta as much; the songstress steps back, studies the guard herself, then nods.", parse);
+				Text.NL();
+				Text.Add("<i>“I agree. It should not be too hard - perhaps Preston will learn to treat his underlings better, but I do not hold out hope for that. Allow me to compose myself, please.”</i>", parse);
+				Text.NL();
+				Text.Add("Cveta’s small breasts heave as she takes a deep breath, clearing her throat, then she opens her beak and sings. The music speaks to you of soft comfort, of warm blankets and warmer companions - even though you know it’s coming, you can’t help but feel a little drowsy yourself. The guard, though, has no such forewarning - you hear a soft thud from above within the minute. Climbing the ladder and peering around the tower nest, you drag the poor, overworked sop into a corner to sleep it off, then signal down for Cveta to follow you up.", parse);
+				Text.Flush();
+				
+				outlaws.BT.towerGuardDown = true;
+				
+				Gui.NextPrompt();
+			}, enabled : true,
+			tooltip : "Have Cveta lull the guard to sleep where he stands."
+		});
+		Gui.SetButtonsFromList(options, true, function() {
+			Text.Clear();
+			Text.Add("Looking at how close the guard and the bell are, you decide against taking him on for now. Maybe when you’re feeling more confident about it, or if the situation’s changed…", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		});
+	}
+));
+world.loc.BullTower.Building.Watchtower.events.push(new Link(
+	"Lantern", function() {
+		return outlaws.BT.towerGuardDown && !outlaws.BT.stoleLantern;
+	}, true,
+	null,
+	function() {
+		var parse = {
+			
+		};
+		
+		Text.Clear();
+		Text.Add("Eyeing one of the lanterns hanging from the wall, you grab it off its hook. It’s small and portable, possessed of mirrored hoods that allow you to shut off most of the light when you hide, and the oil in the reservoir should sustain the flame that flickers within until dawn. It could certainly help you see better in the darkness without giving you away.", parse);
+		Text.Flush();
+		
+		outlaws.BT.stoleLantern = true;
+		
+		Gui.NextPrompt();
+	}
+));
+
 
 //TODO
 Scenes.BullTower.SlipOut = function() {
@@ -1856,4 +1982,6 @@ Scenes.BullTower.Failure = function() {
 Scenes.BullTower.Cleanup = function() {
 	party.RemoveMember(cveta);
 	party.LoadActiveParty();
+	
+	outlaws.flags["BullTower"] = Outlaws.BullTowerQuest.Completed;
 }

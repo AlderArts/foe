@@ -9,6 +9,7 @@ function Outlaws(storage) {
 	this.flags = {};
 	
 	this.flags["BT"] = 0; // Bitmask
+	this.flags["BullTower"] = 0;
 	
 	this.relation = new Stat(0);
 	
@@ -41,6 +42,14 @@ Outlaws.prototype.Update = function(step) {
 // TODO
 Outlaws.prototype.TurnedInBinder = function() {
 	return false;
+}
+
+Outlaws.prototype.BullTowerCompleted = function() {
+	return this.flags["BullTower"] >= Outlaws.BullTowerQuest.Completed;
+}
+
+Outlaws.prototype.AlaricSaved = function() {
+	return this.BullTowerCompleted() && (this.flags["BT"] & Outlaws.BullTower.AlaricFreed);
 }
 
 Outlaws.prototype.Rep = function() {
