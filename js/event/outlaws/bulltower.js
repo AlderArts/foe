@@ -13,8 +13,7 @@ function BullTowerStats() {
 	this.guardsDown = false;
 	this.towerGuardDown = false;
 	this.inspectedSafe = false;
-	this.openedSafe = false;
-	this.disarmedTrap = false;
+	this.unlockedSafe = false;
 };
 BullTowerStats.prototype.Suspicion = function() {
 	return this.suspicion.Get();
@@ -39,7 +38,8 @@ Outlaws.BullTower = {
 	AnimalsFreed     : 16,
 	SafeLooted       : 32,
 	BlueRoses        : 64,
-	ContrabandStolen : 128
+	ContrabandStolen : 128,
+	SafeLooted       : 256
 };
 
 // Quest state
@@ -72,6 +72,7 @@ world.loc.BullTower = {
 	}
 };
 
+// Disable wait for all locations
 world.loc.BullTower.Courtyard.Yard.wait = function() { return false; };
 world.loc.BullTower.Courtyard.Pens.wait = function() { return false; };
 world.loc.BullTower.Courtyard.Caravans.wait = function() { return false; };
@@ -81,6 +82,35 @@ world.loc.BullTower.Building.Office.wait = function() { return false; };
 world.loc.BullTower.Building.Warehouse.wait = function() { return false; };
 world.loc.BullTower.Building.Watchtower.wait = function() { return false; };
 
+// Add onEntry, conversations to all locations (not Cell)
+world.loc.BullTower.Courtyard.Yard.onEntry = function() {
+	if(Math.random() < 0.7) Scenes.BullTower.Coversations(true);
+	else PrintDefaultOptions();
+}
+world.loc.BullTower.Courtyard.Pens.onEntry = function() {
+	if(Math.random() < 0.7) Scenes.BullTower.Coversations(true);
+	else PrintDefaultOptions();
+}
+world.loc.BullTower.Courtyard.Caravans.onEntry = function() {
+	if(Math.random() < 0.7) Scenes.BullTower.Coversations(true);
+	else PrintDefaultOptions();
+}
+world.loc.BullTower.Building.Hall.onEntry = function() {
+	if(Math.random() < 0.7) Scenes.BullTower.Coversations();
+	else PrintDefaultOptions();
+}
+world.loc.BullTower.Building.Office.onEntry = function() {
+	if(Math.random() < 0.7) Scenes.BullTower.Coversations();
+	else PrintDefaultOptions();
+}
+world.loc.BullTower.Building.Warehouse.onEntry = function() {
+	if(Math.random() < 0.7) Scenes.BullTower.Coversations();
+	else PrintDefaultOptions();
+}
+world.loc.BullTower.Building.Watchtower.onEntry = function() {
+	if(Math.random() < 0.7) Scenes.BullTower.Coversations();
+	else PrintDefaultOptions();
+}
 
 Scenes.BullTower = {};
 
@@ -1579,7 +1609,7 @@ Scenes.BullTower.SafePrompt = function() {
 		}, enabled : true,
 		tooltip : "Inspect the safe in detail."
 	});
-	if(outlaws.BT.inspectedSafe && !outlaws.BT.openedSafe) {
+	if(outlaws.BT.inspectedSafe && !outlaws.BT.unlockedSafe) {
 		if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed) {
 			options.push({ nameStr : "Unlock",
 				func : function() {
@@ -1588,7 +1618,7 @@ Scenes.BullTower.SafePrompt = function() {
 					Text.NL();
 					Text.Add("<i>“Well, looks like I wasn’t wrong,”</i> Alaric mumbles from behind you, forcing a grin despite his pained expression. <i>“Watch out, though, [playername]. There’s still the trap to deal with, and I’ve no idea how to prevent it from triggering once you open the door.”</i>", parse);
 					Text.Flush();
-					outlaws.BT.openedSafe = true;
+					outlaws.BT.unlockedSafe = true;
 					
 					Scenes.BullTower.SafePrompt();
 				}, enabled : true,
@@ -1596,7 +1626,7 @@ Scenes.BullTower.SafePrompt = function() {
 			});
 		}
 	}
-	if(outlaws.BT.openedSafe && !outlaws.BT.disarmedTrap) {
+	if(outlaws.BT.unlockedSafe && !(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted)) {
 		options.push({ nameStr : "Disarm",
 			func : function() {
 				Text.Clear();
@@ -1709,9 +1739,13 @@ Scenes.BullTower.SafeSuccess = function() {
 	Text.Add("Even consider leaving the lot after you went to so much trouble to get at it? Perish the thought! The money bags are as heavy as they look, but you’re certain that you can get out with them in tow. Even Alaric, injured as he is, manages to summon up the strength to heft one of the smaller bags over his shoulder.", parse);
 	Text.NL();
 	Text.Add("Well then. There’s nothing left for you in this room - time to move along before someone thinks to check in on all the noise.", parse);
+	Text.NL();
+	Text.Add("You loot 10000 coins from the safe.", parse, 'bold')
 	Text.Flush();
 	
-	//TODO Reward
+	party.coin += 10000;
+	
+	outlaws.flags["BT"] |= Outlaws.BullTower.SafeLooted;
 	
 	Gui.NextPrompt();
 }
@@ -1769,7 +1803,7 @@ world.loc.BullTower.Building.Warehouse.links.push(new Link(
 
 world.loc.BullTower.Building.Warehouse.events.push(new Link(
 	"Contraband", function() {
-		return outlaws.flags["BT"] & Outlaws.BullTower.ContrabandStolen;
+		return !(outlaws.flags["BT"] & Outlaws.BullTower.ContrabandStolen);
 	}, true,
 	null,
 	function() {
@@ -1792,7 +1826,7 @@ world.loc.BullTower.Building.Warehouse.events.push(new Link(
 
 world.loc.BullTower.Building.Warehouse.events.push(new Link(
 	"Roses", function() {
-		return outlaws.flags["BT"] & Outlaws.BullTower.BlueRoses;
+		return !(outlaws.flags["BT"] & Outlaws.BullTower.BlueRoses);
 	}, true,
 	null,
 	function() {
@@ -1939,6 +1973,137 @@ world.loc.BullTower.Building.Watchtower.events.push(new Link(
 		Gui.NextPrompt();
 	}
 ));
+
+Scenes.BullTower.Coversations = function(outside) {
+	var parse = {
+		a : outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed ? " and Alaric" : ""
+	};
+	
+	Text.Clear();
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("Lurking about in the deep shadows cast by the walls, you hear snatches of conversation drifting down from the ramparts:", parse);
+	}, 1.0, function() { return outside; });
+	scenes.AddEnc(function() {
+		Text.Add("Crouched in the tall grass that surrounds the tower proper, you overhear two silhouettes chatting as they make their rounds:", parse);
+	}, 1.0, function() { return outside; });
+	scenes.AddEnc(function() {
+		Text.Add("The interior of Bull Tower might be solid stone, but sound echoes easily through the ancient hallways. Cveta quickly ducks into a shadowed alcove and you[a] follow suit as footsteps pass by, their owners unseen:", parse);
+	}, 1.0, function() { return !outside; });
+	
+	scenes.Get();
+	
+	Text.NL();
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("<i>“So… why’d you join up, anyway?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“You want to know? You really want to know?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Yeah.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“The outfit’s good, and it’s okay pay.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“What? That’s all?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“What did you expect? Work is hard to come by these days…”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>“You think that blast down the road is what we were told to prepare for?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“What else would it be? Bloody forest-dwelling outlaws.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“I dunno, I’m just glad I’m not the one who has to check it out.”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>“So what’s up with the statue they brought in earlier today?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“I think it’s for his garden. That, and the blue roses, too. That second one came all the way from the Tree, I heard.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“I knew Preston can be full of it, but what sort of ass has a damned <b>statue</b> of himself made? He’s worse than my mother-in-law!”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“I wouldn’t let the lieutenant catch you saying that if I were you… he’ll take any excuse to use that whip of his.”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>“This isn’t right, you know.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“What isn’t?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“This! We should be in the streets of Rigard, in the palace defending his Majesty and the rest of the royal family, not lurking about in this old dump. Calling it a ‘special assignment’ doesn’t change what it is. I feel like we’re just no-name bit-parters in some stage production. You know, the kind who’re just there to be a minor annoyance to the hero and are never remembered…”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>“Where’s the little guy?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“In the cells. Lieutenant’s interrogating him right now.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Ooh, nasty.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Standing orders are for him not to be disturbed, no matter what we hear coming from inside.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Anyone told him about the explosion down the road yet?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Fred went down earlier, although he took a lot of convincing.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“I don’t blame him - I don’t want to be down there, either. Well, you can’t deny that he gets results, especially with that odd venom he uses…”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>“You know that brothel we raided the other day? That one in the slums? You didn’t hear it from me, but I think someone high up was refused service and asked Preston to do something about it.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“You sure about that?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Everyone gets that his whole ‘The Shining’ schtick is as fake as a strap-on, and you ought to know better.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Not saying that it isn’t - armor should be too battered and dented to take a good shine - but how do you know that <b>this</b> raid wasn’t legit? We did see some weird shit in there…”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>“I can’t believe we’re out here in the cold of night on some emergency. I was supposed to be off duty, damn it! Fuck Preston!”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“You shouldn’t speak of him that way.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Why not? He certainly deserves it, and you know as much. Why, you gonna snitch on me, old man?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“It’s not that. He wasn’t always like that. His first assignment, during the rebellion... things didn’t go down the way it’s told in the books. Something happened to him… I was there when it happened, you know. Saw it with my own eyes. Preston was never the same man after that.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Ooh, tell me more…”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>“So, everything’s in the warehouse?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Locked up tight; Jimmy has the key, and he’s on caravan duty. Spirits, my back aches, and it’s only going to get worse tomorrow.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Well, I said to lift with your knees, but would you listen?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Shut up, Fred. I didn’t sign on with the royal guard to be a stevedore.”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>“…Taking down tough guys isn’t that bad. At least when you beat them, they’ve the brains to know when they’re beat. No, it’s the crazy ones you have to worry about.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Like that little guy we tried to pull for loitering the other day?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Yeah, or like the Lieutenant when he’s hopped up on Gol venom. He’s bearable otherwise, but let him get at the stuff… ugh. I saw what happened to Randell - and just for fidgeting during parade. Five lashes in front of everyone.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Y’know, for someone who calls himself the Shining, I wonder why Preston puts up with someone like that.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“That’s ‘cause he does all the stuff Preston won’t dirty his hands with…”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>“Something is up tonight, and I don’t like it.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“You mean the explosion down the road?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Not just that… something’s up inside the fort. Feels like there’s eyes watching me from the shadows...”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“You were always paranoid.”</i>", parse);
+	}, 3.0, function() { return outlaws.BT.Suspicion() >= 50; });
+
+	scenes.Get();
+	
+	Text.NL();
+	
+	PrintDefaultOptions(true);
+}
 
 
 //TODO
