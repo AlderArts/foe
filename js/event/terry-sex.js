@@ -733,6 +733,7 @@ Scenes.Terry.SexGetOralCockCont = function(parse, p1cock) {
 			world.TimeStep({hour: 1});
 			
 			if(clean) {
+				Text.Flush();
 				Scenes.Terry.PCCleansTerry();
 			}
 			else if(terry.Relation() < 30) {
