@@ -20,10 +20,52 @@ BullTowerStats.prototype.Suspicion = function() {
 }
 // outlaws.BT.IncSuspicion(100, 2.5);
 BullTowerStats.prototype.IncSuspicion = function(max, inc) {
-	this.suspicion.IncreaseStat(max, inc);
+	var parse = {
+		
+	};
 	
-	//TODO check for exit states
+	var oldSuspicion = this.Suspicion();
+	this.suspicion.IncreaseStat(max, inc);
+	var newSuspicion = this.Suspicion();
+	
+	if(newSuspicion >= 100) {
+		Gui.Callstack.push(function() {
+			Text.Clear();
+			Text.Add("Sneaking through the fortress grounds, you suddenly hear a shout echoing across the old courtyard. Hoping that it’s just a fluke, you emerge to investigate, but the shout is quickly followed by the old bell in the tower being sounded, the steady bong-bong-bong of the striker hitting metal breaking the silence of night like a hammer against a window pane. Someone’s finally noticed what you’ve been up to, and the guards’ attention is turning inwards as they realize that the fortress has been infiltrated all this while.", parse);
+			Text.NL();
+			parse["two"] = outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed ? "three" : "two";
+			Text.Add("No time to lose, then. Torches burst into life on the ramparts as the [two] of you break into a run across the courtyard, doing your best to avoid the scrambling guards.", parse);
+			Text.NL();
+			
+			Scenes.BullTower.Failure();
+		});
+	}
+	else if(newSuspicion >= 75 && oldSuspicion < 75) {
+		Gui.Callstack.push(function() {
+			Text.Clear();
+			Text.Add("As you prowl through the shadows of the old fortress, you hear muttering and the distant trampling of boots from the King’s Road outside; it seems that the diversion has nearly run its course, and the game’ll be up once it has. You don’t have that much time left; if you have anything left to do, you’d best be about it - and quickly, too.", parse);
+			Text.NL();
+			PrintDefaultOptions(true);
+		});
+	}
+	else if(newSuspicion >= 50 && oldSuspicion < 50) {
+		Gui.Callstack.push(function() {
+			Text.Clear();
+			Text.Add("Even as you silently make your way through the old fortress, you sense that the entire compound is growing more and more restless, a collective consciousness, perhaps, becoming aware of your intrusion despite the diversion Zenith created for you. You should not linger any longer than is absolutely necessary to get the job done.", parse);
+			Text.NL();
+			PrintDefaultOptions(true);
+		});
+	}
+	else if(newSuspicion >= 25 && oldSuspicion < 25) {
+		Gui.Callstack.push(function() {
+			Text.Clear();
+			Text.Add("Moving through the grounds of the old fortress as silently as you can, you catch pieces and snatches of conversation from the front gate guard that Cveta “persuaded” to let the two of you through, carried to you by the wind. You’ve managed to remain undetected so far, but the longer you spend in here, the thinner your luck is going to stretch.", parse);
+			Text.NL();
+			PrintDefaultOptions(true);
+		});
+	}
 }
+
 // outlaws.BT.DecSuspicion(-100, 20);
 BullTowerStats.prototype.DecSuspicion = function(min, dec) {
 	this.suspicion.DecreaseStat(min, dec);
