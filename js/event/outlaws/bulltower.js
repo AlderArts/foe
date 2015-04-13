@@ -1791,10 +1791,8 @@ Scenes.BullTower.SafeSuccess = function() {
 	Text.NL();
 	Text.Add("Well then. There’s nothing left for you in this room - time to move along before someone thinks to check in on all the noise.", parse);
 	Text.NL();
-	Text.Add("You loot 10000 coins from the safe.", parse, 'bold')
+	Text.Add("You loot a few bags of coins from the safe.", parse, 'bold')
 	Text.Flush();
-	
-	party.coin += 10000;
 	
 	outlaws.flags["BT"] |= Outlaws.BullTower.SafeLooted;
 	
