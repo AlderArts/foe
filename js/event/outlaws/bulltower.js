@@ -88,7 +88,8 @@ Outlaws.BullTower = {
 	SafeLooted       : 32,
 	BlueRoses        : 64,
 	ContrabandStolen : 128,
-	SafeLooted       : 256
+	SafeLooted       : 256,
+	PerfectScore     : 512
 };
 
 // Quest state
@@ -2285,6 +2286,7 @@ Scenes.BullTower.EndingDebrief = function(injured) {
 	if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansSearched) score += 1;
 	if(outlaws.BT.Suspicion() < 100) score += 1;
 	//TOTAL: 10
+	if(score >= 10) outlaws.flags["BT"] |= Outlaws.BullTower.PerfectScore;
 	
 	var relevant = false;
 	if(outlaws.flags["BT"] & Outlaws.BullTower.ContrabandStolen) relevant = true;
@@ -2398,7 +2400,163 @@ Scenes.BullTower.EndingDebrief = function(injured) {
 		Text.Flush();
 		
 		Gui.NextPrompt();
+		
+		//TODO SET TIMER
 	});
 }
 
 
+// TODO Link
+//#This will trigger three days after the event if the player saved Alaric.
+Scenes.BullTower.AftermathAlaric = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("A curious sight greets you as you enter the outlaw camp. Standing by the drawbridge is Alaric, the little bean-counter all dressed and with a single sackcloth bag in hand. He’s healed up decently - though some of the lash marks are going to leave scars, alas - and looks up at you in surprise when he sees you.", parse);
+	Text.NL();
+	Text.Add("<i>“[playername].”</i>", parse);
+	Text.NL();
+	Text.Add("Leaving already?", parse);
+	Text.NL();
+	Text.Add("<i>“Well, yes,”</i> he replies, a little flustered. <i>“I wanted to see you, to thank you properly for getting me out of the royal guards’ hands, but couldn’t find you anywhere in camp. People said you move around a lot and didn’t know when you’d be back, so I thought of leaving a note…”</i>", parse);
+	Text.NL();
+	Text.Add("Well, it seems like that won’t be necessary.", parse);
+	Text.NL();
+	Text.Add("<i>“Um. Well. Thanks. I’ve already told Zenith what I know of the whole matter, and he seemed satisfied with just that, so…”</i>", parse);
+	Text.NL();
+	Text.Add("You don’t need anything from him. You aren’t going to press Alaric when he’s already unsure about his future. But would he mind sharing his story with you as well before he goes? There wasn’t time for much conversation back in Bull Tower, after all, and you’d like to know his side of the tale.", parse);
+	Text.NL();
+	Text.Add("<i>“Well, I suppose it can’t hurt. What’s going over it one more time?”</i> he sits down on his luggage and hunches over, putting his chin in his hands, then invites you to sit beside him. <i>“I think I mentioned back there that I worked for the Treasury. Not as anyone important, just a number adder doing the incoming taxes and tariffs I was assigned, and handling the monthly balance account statement for my department. Both eventually got me into trouble.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“I was just too good at my job, I guess. The first thing I noticed was that some of the income statements submitted by a number of nobles just didn’t match up with what their businesses were reporting. It’s not that they hadn’t tried to cook the books, but at the end of the day who’s going to believe that a cartload of chickens was sold at four or five times market price on every Tuesday?”</i>", parse);
+	Text.NL();
+	Text.Add("An honest accountant? Will wonders never cease? Next thing you know, an honest advocate will pop up in this neck of the woods.", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 10});
+	
+	Gui.NextPrompt(function() {
+		Text.Clear();
+		Text.Add("<i>“I’d rather you not belittle my profession,”</i> Alaric huffs. <i>“I know we don’t exactly have the best of reputations, there’s no need to press home the point.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Well, after a few pages’ worth of overpriced chickens, highly-valued fruit, and sweetmeats that must been gemstones the way they were priced, I went and reported my findings to my superiors. Sure, I was a little naive, but the Treasury is supposed to be under the direct purview of Rewyn himself and I had all the evidence down in black and white. All of it. He should have been happy to realize that he was been fleeced…”</i>", parse);
+		Text.NL();
+		Text.Add("But it didn’t work out that way, did it?", parse);
+		Text.NL();
+		Text.Add("<i>“No, it didn’t. I was told to keep quiet and forget all about it. Naturally, that only spurred me to dig deeper - and I guess I must’ve dug too deep too visibly, because next thing I know, I’m hearing unsettling rumors about Majid taking an interest in our affairs at the counting-house. You know. Rewyn’s advisor. That strange man.”</i>", parse);
+		Text.NL();
+		Text.Add("And that was important because…?", parse);
+		Text.NL();
+		Text.Add("<i>“Because while I had no concrete evidence, what I’d dug up strongly suggested that Majid had been siphoning off money from the treasury. His embezzlement was always careful - never too much at one time, and always attached to legitimate expenses. Nevertheless, a few hundred or thousand coins here and there, tacked onto the bills for many projects… it added up to a considerable sum.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Nevertheless, I got spooked. Thought I’d take an unpaid leave of absence, hide out at my sister’s in the countryside, lie low for a few weeks until this thing blew over. Then I got stopped on the King’s Road, and… well, you know the rest.”</i>", parse);
+		Text.NL();
+		Text.Add("Indeed, you do. Well then, what is he going to do now? It’s not as if he can waltz back into his old job at the treasury.", parse);
+		Text.NL();
+		Text.Add("Alaric turns away from you at your words. <i>“Yeah. I can’t go back. Zenith advised me against even trying to see any of my family - I’d only be putting them in danger, since the royal guard is likely to have someone watching them on the chance I turn up at their doorsteps. He said he’d sneak a message to them, though, so they aren’t left wondering what happened to me.", parse);
+		Text.NL();
+		Text.Add("<i>“I’m going to be shipped off near the Free Cities, where Zenith knows someone who needs a good accountant to do the bookkeeping and, more importantly, where Majid won’t be able to get at me.”</i>", parse);
+		Text.NL();
+		Text.Add("Is he certain it’s connected? That Majid set the royal guard on him, that is.", parse);
+		Text.NL();
+		Text.Add("Alaric shrugs. <i>“As I said, I don’t have any concrete evidence. But he had a motive, since I was snooping around his accounts, and he definitely has the authority to order around the royal guard and create the proclamations blaming the outlaws for my disappearance. It’s just a hunch, and yes, I could be wrong - but it were my hunches which led me to discovering the errors in both the nobles’ and Majid’s accounts.”</i>", parse);
+		Text.NL();
+		Text.Add("Hmm. Majid.", parse);
+		Text.NL();
+		Text.Add("<i>“Alaric!”</i> a rather gruff voice calls from the other side of the camp wall. <i>“You done? We’re about to set off!”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Well, it looks like I should be going now.”</i> Gritting his teeth with the effort, Alaric stands and hefts his luggage over his shoulder. <i>“I’ll have an escort to the Free Cities and we won’t be taking the King’s Road, so don’t worry about me. If you ever find yourself there, don’t hesitate to find me at this address.”</i> He hands you a slip of paper. <i>“Well then, [playername]. Thanks again, and keep yourself safe. Or at least, safer than I’ve been.”</i>", parse);
+		Text.NL();
+		Text.Add("One last thing. The Lieutenant clearly expected Cveta and you, which would explain why all the guards in the fortress were on high alert that night. Does he know anything about that?", parse);
+		Text.NL();
+		Text.Add("<i>“Sadly, I don’t. But if the information got out… [playername], usually that means someone passed it on. A spy, if you will. Well, that’s all I’ve got. Please, if you ever find yourself in the Free Cities, I’d like to extend my welcome again. I owe my life to you, after all.”</i>", parse);
+		Text.NL();
+		Text.Add("With that, the little bean-counter gives you a final wave and hobbles off. The camp guards hurry to lower the drawbridge so he can cross, and after a moment, he turns and is out of sight.", parse);
+		Text.Flush();
+		
+		world.TimeStep({minute: 20});
+		
+		//TODO Set flag
+		
+		Gui.NextPrompt();
+	});
+}
+
+
+// TODO LINK
+//#Triggers three days after the quest if the player has at least stolen the goods and payoff. Alaric’s scene takes precedence over this, though.
+Scenes.BullTower.AftermathZenith = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("As you approaching the outlaw camp, something about it strikes you as odd. Is it just you, or do the guards look a little on edge today? You don’t have long to wonder, though - the moment you step over the drawbridge and into the camp, one of the guards, the fox-morph - comes marching up to you.", parse);
+	Text.NL();
+	Text.Add("<i>“[playername]?”</i>", parse);
+	Text.NL();
+	Text.Add("That would indeed be you, yes.", parse);
+	Text.NL();
+	Text.Add("<i>“The chief’s made it known that he wants a word with you. If we see so much as your shadow, we’re to let you know you ought to wait in his place.”</i>", parse);
+	Text.NL();
+	Text.Add("What about, though?", parse);
+	Text.NL();
+	parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
+	parse["c"] = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
+	parse["c2"] = party.Num() > 1 ? "yourselves" : "yourself";
+	Text.Add("<i>“He didn’t say, although it sounded important. Guess you should go find out.”</i> With that, the fox-morph turns and heads back to his post, leaving you to find your own way to Zenith’s place. The building is easy to find - you’re not likely to forget the day you learned of the outlaws, after all - and no one stops you as you open the door and step inside. The table with the map is still there, the papers too; there are some chairs in a corner, and you[c] seat [c2] there, waiting for Zenith to turn up.", parse);
+	Text.NL();
+	Text.Add("You don’t have to wait long. The outlaw leader is in an uncharacteristically good mood, throwing the door open with a resounding slam as he enters the room. The grin on Zenith’s face grows even wider when he sees you, and he crosses the map room in a few easy strides to give you a generous, crushing hug.", parse);
+	Text.NL();
+	Text.Add("<i>“[playername]! I came the moment the guard told me you’d come visiting. I trust that you’ve not had too much adventure yet?”</i>", parse);
+	Text.NL();
+	Text.Add("Very nice, but if he’d let go of you…", parse);
+	Text.NL();
+	Text.Add("<i>“Right, right. Sorry about that.”</i> The hug is released as quickly as it’d engulfed you, and you feel good, clean air flowing into your lungs. <i>“I wanted you to know that we’ve managed to fence off a good number of the gemstones you brought back a few days ago. Combined with all the money you lifted off the royal guard, we’re definitely going to be able to purchase a number of much-needed supplies and maybe even make a few improvements to the camp.”</i>", parse);
+	Text.NL();
+	Text.Add("Well, that would explain why Zenith is feeling upbeat today. But why call you out?", parse);
+	Text.NL();
+	Text.Add("<i>“Well, you did a good job. Maria, Aquilius and I discussed it amongst ourselves and we’ve decided to give you a cut.”</i>", parse);
+	Text.NL();
+	Text.Add("A cut?", parse);
+	Text.NL();
+	Text.Add("<i>“Yes, a cut. A moment, please.”</i>", parse);
+	Text.NL();
+	Text.Add("Without another word, the badger-morph strides to the opposite corner of the room and reaches into the shadows, drawing out a rather large bundle wrapped in paper and cord. With much aplomb, he returns to you and thrusts the bundle into your hands. <i>“While Aquilius and I were out getting a good price for your gems from the fences, we spotted something you might like. Why don’t you open it and see?”</i>", parse);
+	Text.NL();
+	Text.Add("He’s so eager and expectant that it’d be a travesty to refuse. Carefully, you unwrap the cord and paper to draw out a small shortsword. It’s rather plain, save for the rubies set into either side of the crossguard. You peer into the gems’ depths, each ruby as large as an eyeball, and notice runes embedded in each.", parse);
+	if(Jobs.Mage.Unlocked(player))
+		Text.Add(" There’s little doubt about it; the sword is enchanted. It’s not a very potent spell, but it’s strong enough for you to sense the magical aura, concentrated about the gems and extending through the blade.", parse);
+	Text.NL();
+	
+	//TODO #Gain jewelled mageblade.
+	
+	Text.Add("<i>“I’d be careful with that, if I were you. All you need to do is to grab its hilt, think hard, and the blade bursts into flame. Then, think hard about it going out, and it does just that. The fence was going to charge us a pretty penny for it - with it being magic and all - but we haggled the price down to something more reasonable. I think you’ve earned that much.”</i>", parse);
+	Text.NL();
+	if(outlaws.flags["BT"] & Outlaws.BullTower.PerfectScore) {
+		Text.Add("<i>“That’s not all, though.”</i> Zenith produces another wrapped package, flatter and rounder than the first, then presses it into your hands. <i>“We heard that Preston’s been in a terrible mood for the last few days, and it’s all thanks to our efforts. Thought we’d spread the extra cheer around. Go on, open it.”</i>", parse);
+		Text.NL();
+		Text.Add("Tearing apart cord and paper, you find a small buckler inside, polished and gleaming. No doubt there’s supposed to be some kind of irony here…", parse);
+		Text.NL();
+		Text.Add("<i>“Oh, I’m sure you’ll scratch and dent it soon enough so it won’t hold a proper shine,”</i> the badger-morph says, grinning as he claps you on the shoulder.", parse);
+		Text.NL();
+		
+		//TODO #Gain silvered buckler.
+	}
+	Text.Add("Putting away the gifts, you thank Zenith.", parse);
+	Text.NL();
+	Text.Add("He brushes off your words with an easy wave. <i>“You’ve earned them. Back in the day, the Guilds rewarded those who had ability and worked hard. They may no longer exist, but I’ve kept that tradition alive.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“So long as you continue to prove your worth, friend, I’ll be more than happy to reward you. Now, if there’s nothing else, might I trouble you to step out? We’re going to have a little meeting here at the turn of the hour, discuss our strategy in light of recent events. Terribly boring stuff, I assure you,”</i> he adds, evidently noticing the question on your face.", parse);
+	Text.NL();
+	Text.Add("You nod and stand, thanking the badger-morph once again. He simply shrugs, grins, and ushers you out with your new possessions, leaving you to take in the cool, fresh air of the outlaw camp.", parse);
+	Text.Flush();
+	
+	world.TimeStep({hour: 1});
+	
+	//TODO SET FLAG
+	
+	Gui.NextPrompt();
+}
