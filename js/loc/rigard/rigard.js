@@ -312,10 +312,13 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 	Text.Clear();
 	var parse = {};
 	
+	var posh = false;
+	
 	var npcsA = [];
 	var npcsB = [];
 	if(party.location == world.loc.Rigard.Plaza) {
 		parse.areaname = "plaza";
+		posh = true;
 		
 		npcsA.push({noun: "old nobleman", a: "an", gender: Gender.male});
 		npcsA.push({noun: "wealthy merchant", a: "a", gender: Math.random() > 0.2 ? Gender.male : Gender.female});
@@ -527,6 +530,84 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 			Text.Add("The [NPC2] shakes [hisher2] head in disappointment. <i>“He might be a bastard, but you have to hand it to him - he's a master with that blade.”</i>", parse);
 		}
 	}, 1.0, function() { return rigard.Krawitz["Duel"] != 0; });
+	// Bull tower
+	if(outlaws.BullTowerCompleted() && !hasRoyalGuard) {
+		if(outlaws.AlaricSaved()) {
+			scenes.AddEnc(function() {
+				Text.Add("<i>“So I caught the servants gossiping about something dreadful the other day,”</i> the [NPC1] says.", parse);
+				Text.NL();
+				Text.Add("<i>“Oh? What was it?”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“They believe that the royal guard has taken to doing away with those whom they don’t like.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“How shocking! Truly, the envy of the poor knows no bounds.”</i>", parse);
+				Text.NL();
+				Text.Add("The [NPC1] shakes [hisher1] head. <i>“They’d rather conjure up stories of oppression than take a long, hard look at their own failings.”</i>", parse);
+			}, 1.0, function() { return posh; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“I’ve heard talk that the royal guard have been disappearing people the nobles find troublesome,”</i> the [NPC1] says.", parse);
+				Text.NL();
+				Text.Add("<i>“What?! You can’t be serious! I mean, I can see them shaking down someone or just beating them up, but killing them?”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Ssh! Not so loud! This one guy got jumped by them and survived, you see…”</i>", parse);
+			}, 1.0, function() { return !posh; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“I’ve had word that the treasury’s coffers are running dry again.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“So long as it doesn’t mean raised taxes…”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“What do you think are the chances of that? There’s been a lot of road-laying and wall-building this year. Even with just the new paving of the roads leading out of the slums Rewyn’s going through money like a dragon.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Eh, I wouldn’t know…”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Have you heard the rumors that someone’s stealing from under Rewyn’s nose? Now that…”</i>", parse);
+			}, 1.0, function() { return true; });
+		}
+		else {
+			scenes.AddEnc(function() {
+				Text.Add("<i>“I hear those forest outlaws are getting more dangerous these days,”</i> [NPC1] says.", parse);
+				Text.NL();
+				Text.Add("<i>“Dangerous? I don’t know, I haven’t seen a single one.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“It’s true! I heard they tried to break one of their fellows out from the clink, but the royal guard stopped them dead cold.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“And where did you hear this from? The royal guard?”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Um…”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“I heard those outlaws have been taking out royal officials,”</i> [NPC1] says. <i>“They took a guy from the royal treasury.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“That one? I heard about it, too. But it was this royal guard who was saying it…”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“I know they aren’t the most trustworthy of the lot, but who else is going to report on crimes on folk in the palace?”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“That’s true… but I still can’t bring myself to trust them. I guess it’s a dangerous time to be working for the king. Squeezed between his Highness and the people who hate him…”</i>", parse);
+			}, 1.0, function() { return true; });
+		}
+		//Success or failure
+		scenes.AddEnc(function() {
+			Text.Add("<i>“I’ve heard that people are disappearing on the King’s Road now. First it was the outlying caravan trails, now it’s the King’s Road.”</i> The [NPC1] looks a little worried. <i>“Soon there won’t be anywhere that’s safe. It won’t be good for business if the Free Cities are cut off from Rigard.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Yeah, but look at it this way. At least it’s better to die by bandits than just vanish into the unknown. Leastways there’s a body, right?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“You’re asking if it’s better to die from being run through or burned alive, you dolt. Dead either way, you know?”</i> [NPC1] sighs. <i>“The old king should never have decommissioned Bull Tower.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Those were safer times…”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“And these aren’t. Rewyn needs to garrison it again.”</i>", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“The royal guard is getting really antsy about this whole outlaw thing.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Oh? I didn’t listen to Preston’s public proclamation. Wasn’t it the usual nonsense on how he’s going to eradicate vice and crime in the city? He’s given the same speech a thousand times. Sometimes he doesn’t even change the words.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“No, it was something else. How he’s taking personal charge of the move against those forest folk, since the regular guard is being completely and utterly worthless when it comes to stopping them.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“I don’t know about that - I haven’t seen a single outlaw in the city…”</i>", parse);
+		}, 1.0, function() { return true; });
+	}
+	
 	// TODO: MORE RUMORS AFTER NIGHT INFILTRATION
 	scenes.Get();
 	
