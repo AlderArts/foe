@@ -2531,7 +2531,8 @@ Scenes.BullTower.AftermathZenith = function() {
 		Text.Add(" There’s little doubt about it; the sword is enchanted. It’s not a very potent spell, but it’s strong enough for you to sense the magical aura, concentrated about the gems and extending through the blade.", parse);
 	Text.NL();
 	
-	//TODO #Gain jewelled mageblade.
+	//#Gain jewelled mageblade.
+	party.Inv().AddItem(Items.Weapons.JewelledMageblade);
 	
 	Text.Add("<i>“I’d be careful with that, if I were you. All you need to do is to grab its hilt, think hard, and the blade bursts into flame. Then, think hard about it going out, and it does just that. The fence was going to charge us a pretty penny for it - with it being magic and all - but we haggled the price down to something more reasonable. I think you’ve earned that much.”</i>", parse);
 	Text.NL();
