@@ -43,3 +43,18 @@ Items.Accessories.SimpleCuffs.Long = function() { return "Simple restraints"; }
 Items.Accessories.SimpleCuffs.effect.maxLust = 10;
 Items.Accessories.SimpleCuffs.effect.libido = 1;
 
+Items.Accessories.IronBuckler = new Item("buckler0", "I.Buckler", ItemType.Accessory);
+Items.Accessories.IronBuckler.price = 75;
+Items.Accessories.IronBuckler.Short = function() { return "Iron buckler"; }
+Items.Accessories.IronBuckler.Long = function() { return "A crude iron buckler, designed to protect the wearer from harm."; }
+Items.Accessories.IronBuckler.effect.maxHp = 30;
+Items.Accessories.IronBuckler.effect.stamina = 2;
+Items.Accessories.IronBuckler.effect.spirit = 1;
+
+Items.Accessories.SilverBuckler = new Item("buckler1", "S.Buckler", ItemType.Accessory);
+Items.Accessories.SilverBuckler.price = 500;
+Items.Accessories.SilverBuckler.Short = function() { return "Silvered buckler"; }
+Items.Accessories.SilverBuckler.Long = function() { return "A fine, silvered buckler to be strapped to one’s off-hand. Try not to use this as a plate or mirror."; }
+Items.Accessories.SilverBuckler.effect.maxHp = 120;
+Items.Accessories.SilverBuckler.effect.stamina = 5;
+Items.Accessories.SilverBuckler.effect.spirit = 5;

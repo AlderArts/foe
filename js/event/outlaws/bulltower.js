@@ -2543,7 +2543,8 @@ Scenes.BullTower.AftermathZenith = function() {
 		Text.Add("<i>“Oh, I’m sure you’ll scratch and dent it soon enough so it won’t hold a proper shine,”</i> the badger-morph says, grinning as he claps you on the shoulder.", parse);
 		Text.NL();
 		
-		//TODO #Gain silvered buckler.
+		//#Gain silvered buckler.		
+		party.Inv().AddItem(Items.Accessories.SilverBuckler);
 	}
 	Text.Add("Putting away the gifts, you thank Zenith.", parse);
 	Text.NL();

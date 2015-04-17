@@ -68,6 +68,8 @@ function Rigard(storage) {
 	this.ArmorShop.AddItem(Items.Armor.LeatherPants, 5);
 	this.ArmorShop.AddItem(Items.Armor.BronzeChest, 5);
 	this.ArmorShop.AddItem(Items.Armor.BronzeLeggings, 5);
+	this.ArmorShop.AddItem(Items.Accessories.IronBangle, 5);
+	this.ArmorShop.AddItem(Items.Accessories.IronBuckler, 5);
 	
 	this.WeaponShop = new Shop();
 	this.WeaponShop.AddItem(Items.Weapons.Dagger, 5);
