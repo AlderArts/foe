@@ -10,23 +10,38 @@ function Cveta(storage) {
 	this.name = "Cveta";
 	
 	this.avatar.combat = Images.cveta;
-	/*
 	
-	this.maxHp.base        = 100;
+	// TODO Jobs, multipliers
+	this.currentJob = Jobs.Courtesan;
+	this.jobs["Fighter"]   = new JobDesc(Jobs.Fighter);   this.jobs["Fighter"].mult   = 3;
+	this.jobs["Scholar"]   = new JobDesc(Jobs.Scholar);   this.jobs["Scholar"].mult   = 2;
+	this.jobs["Courtesan"] = new JobDesc(Jobs.Courtesan);
+
+	this.jobs["Bruiser"]   = new JobDesc(Jobs.Bruiser); this.jobs["Bruiser"].mult = 3;
+	this.jobs["Rogue"]     = new JobDesc(Jobs.Rogue);   this.jobs["Rogue"].mult   = 3;
+	this.jobs["Ranger"]    = new JobDesc(Jobs.Ranger);  this.jobs["Ranger"].mult  = 3;
+	
+	this.jobs["Mage"]      = new JobDesc(Jobs.Mage);   this.jobs["Mage"].mult   = 2;
+	this.jobs["Mystic"]    = new JobDesc(Jobs.Mystic); this.jobs["Mystic"].mult = 2;
+	this.jobs["Healer"]    = new JobDesc(Jobs.Healer); this.jobs["Healer"].mult = 2;
+	
+	this.jobs["Hypnotist"] = new JobDesc(Jobs.Hypnotist); this.jobs["Hypnotist"].mult = 1.2;
+	
+	this.maxHp.base        = 80;
 	this.maxSp.base        = 80;
-	this.maxLust.base      = 50;
+	this.maxLust.base      = 80;
 	// Main stats
-	this.strength.base     = 20;
-	this.stamina.base      = 22;
-	this.dexterity.base    = 16;
-	this.intelligence.base = 17;
-	this.spirit.base       = 15;
-	this.libido.base       = 20;
-	this.charisma.base     = 18;
+	this.strength.base     = 17; this.strength.growth     = 1.3;
+	this.stamina.base      = 20; this.stamina.growth      = 1.4; 
+	this.dexterity.base    = 20; this.dexterity.growth    = 1.5;
+	this.intelligence.base = 30; this.intelligence.growth = 1.7;
+	this.spirit.base       = 30; this.spirit.growth       = 1.5;
+	this.libido.base       = 25; this.libido.growth       = 1.3;
+	this.charisma.base     = 40; this.charisma.growth     = 1.9;
 	
-	this.level = 5;
-	this.sexlevel = 3;
-	*/
+	this.level = 12;
+	this.sexlevel = 1;
+	
 	this.body.DefFemale();
 	this.FirstBreastRow().size.base = 5;
 	this.Butt().buttSize.base = 3;
