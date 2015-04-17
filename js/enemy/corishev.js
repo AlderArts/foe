@@ -9,19 +9,17 @@ function Corishev(storage) {
 	
 	this.name              = "Corishev";
 	
-	// TODO Stats
-	
 	this.maxHp.base        = 1500;
 	this.maxSp.base        = 500;
 	this.maxLust.base      = 500;
 	// Main stats
 	this.strength.base     = 20;
 	this.stamina.base      = 50;
-	this.dexterity.base    = 35;
+	this.dexterity.base    = 85;
 	this.intelligence.base = 30;
 	this.spirit.base       = 40;
-	this.libido.base       = 80;
-	this.charisma.base     = 50;
+	this.libido.base       = 50;
+	this.charisma.base     = 30;
 	
 	this.level             = 12;
 	this.sexlevel          = 6;
