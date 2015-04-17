@@ -119,3 +119,17 @@ Items.Weapons.VineWhip.effect.libido  = 5;
 Items.Weapons.VineWhip.effect.charisma = 3;
 Items.Weapons.VineWhip.effect.apSlash = 1;
 Items.Weapons.VineWhip.effect.amNature = 0.5;
+
+Items.Weapons.GolWhip = new Item("whip2", "G.Whip", ItemType.Weapon);
+Items.Weapons.GolWhip.price = 900;
+Items.Weapons.GolWhip.sDesc = function() { return "Gol whip"; }
+Items.Weapons.GolWhip.lDesc = function() { return "a whip dripping with Gol venom"; }
+Items.Weapons.GolWhip.Short = function() { return "Gol whip"; }
+Items.Weapons.GolWhip.Long = function() { return "A whip dripping with Gol venom."; }
+Items.Weapons.GolWhip.effect.maxLust = 100;
+Items.Weapons.GolWhip.effect.atkMod  = 0.8;
+Items.Weapons.GolWhip.effect.libido  = 9;
+Items.Weapons.GolWhip.effect.charisma = 5;
+Items.Weapons.GolWhip.effect.apSlash = 1;
+Items.Weapons.GolWhip.effect.amNature = 0.5;
+Items.Weapons.GolWhip.effect.alust = 0.5;
