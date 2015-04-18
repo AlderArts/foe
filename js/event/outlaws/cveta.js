@@ -13,14 +13,9 @@ function Cveta(storage) {
 	
 	// TODO Jobs, multipliers
 	this.currentJob = Jobs.Courtesan;
-	this.jobs["Fighter"]   = new JobDesc(Jobs.Fighter);   this.jobs["Fighter"].mult   = 3;
 	this.jobs["Scholar"]   = new JobDesc(Jobs.Scholar);   this.jobs["Scholar"].mult   = 2;
 	this.jobs["Courtesan"] = new JobDesc(Jobs.Courtesan);
 
-	this.jobs["Bruiser"]   = new JobDesc(Jobs.Bruiser); this.jobs["Bruiser"].mult = 3;
-	this.jobs["Rogue"]     = new JobDesc(Jobs.Rogue);   this.jobs["Rogue"].mult   = 3;
-	this.jobs["Ranger"]    = new JobDesc(Jobs.Ranger);  this.jobs["Ranger"].mult  = 3;
-	
 	this.jobs["Mage"]      = new JobDesc(Jobs.Mage);   this.jobs["Mage"].mult   = 2;
 	this.jobs["Mystic"]    = new JobDesc(Jobs.Mystic); this.jobs["Mystic"].mult = 2;
 	this.jobs["Healer"]    = new JobDesc(Jobs.Healer); this.jobs["Healer"].mult = 2;

@@ -46,9 +46,12 @@ Corishev.prototype.constructor = Corishev;
 Corishev.prototype.DropTable = function() {
 	var drops = [];
 	drops.push({ it: Items.Weapons.GolWhip });
+	
+	//TODO
 	drops.push({ it: Items.Armor.BronzeChest });
 	drops.push({ it: Items.Armor.BronzeLeggings });
 	drops.push({ it: Items.Testos });
+	
 	return drops;
 }
 
