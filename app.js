@@ -9,7 +9,7 @@ VERSION_MINOR = 3;
 VERSION_SUBSCRIPT = "z";
 VERSION_NAME = "Terry oral + bugfixes";
 
-SAVE_VERSION = 24;
+SAVE_VERSION = 25;
 // Save version 1: Initial
 // Save version 2: Added inventory
 // Save version 3: Fixed clitcock restoration + height, weigth
@@ -34,6 +34,7 @@ SAVE_VERSION = 24;
 // Save version 22: Terry save format
 // Save version 23: Outlaws restructuring
 // Save version 24: Farm restructuring
+// Save version 25: Layla level pacing
 
 
 VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + VERSION_SUBSCRIPT + ": " + VERSION_NAME;

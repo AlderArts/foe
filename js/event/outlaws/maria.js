@@ -25,6 +25,7 @@ function Maria(storage) {
 	
 	this.level = 5;
 	this.sexlevel = 3;
+	this.SetExpToLevel();
 	
 	this.body.DefFemale();
 	this.FirstBreastRow().size.base = 12.5;

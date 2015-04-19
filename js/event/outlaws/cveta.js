@@ -36,6 +36,7 @@ function Cveta(storage) {
 	
 	this.level = 12;
 	this.sexlevel = 1;
+	this.SetExpToLevel();
 	
 	this.body.DefFemale();
 	this.FirstBreastRow().size.base = 5;

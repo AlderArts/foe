@@ -23,6 +23,7 @@ function Aria(storage) {
 	
 	this.level = 50;
 	this.sexlevel = 40;
+	this.SetExpToLevel();
 	
 	this.body.DefFemale();
 	this.FirstBreastRow().size.base = 15;

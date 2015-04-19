@@ -46,6 +46,7 @@ function Layla(storage) {
 	
 	this.level = 12;
 	this.sexlevel = 1;
+	this.SetExpToLevel();
 	
 	this.body.DefHerm();
 	this.FirstBreastRow().size.base = 12.5;

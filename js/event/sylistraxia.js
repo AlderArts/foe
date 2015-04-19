@@ -25,6 +25,7 @@ function Sylistraxia(storage) {
 	
 	this.level = 10;
 	this.sexlevel = 10;
+	this.SetExpToLevel();
 	
 	this.body.DefHerm(false);
 	this.FirstBreastRow().size.base = 14;

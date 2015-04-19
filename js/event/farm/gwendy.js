@@ -25,6 +25,7 @@ function Gwendy(storage) {
 	
 	this.level = 1;
 	this.sexlevel = 1;
+	this.SetExpToLevel();
 	
 	// Note, since kia has no fixed gender, create body later
 	this.body.DefFemale();

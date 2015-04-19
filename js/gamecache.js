@@ -372,6 +372,10 @@ CacheToGame = function() {
 		farm.flags["Visit"] = gameCache.flags["FarmFound"] || 0;
 		gameCache.flags["FarmFound"] = null;
 	}
+	if(gameCache.version < 25) {
+		// LAYLA LEVEL PACING
+		layla.SetExpToLevel();
+	}
 }
 
 GameToCache = function() {

@@ -26,6 +26,7 @@ function Adrian(storage) {
 	
 	this.level = 5;
 	this.sexlevel = 3;
+	this.SetExpToLevel();
 	
 	this.body.DefMale();
 	this.body.SetRace(Race.horse);

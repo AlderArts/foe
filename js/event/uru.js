@@ -26,6 +26,7 @@ function Uru(storage) {
 	
 	this.level = 50;
 	this.sexlevel = 50;
+	this.SetExpToLevel();
 	
 	this.body.DefHerm(false);
 	this.FirstBreastRow().size.base = 16;

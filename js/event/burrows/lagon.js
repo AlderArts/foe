@@ -13,6 +13,7 @@ function Lagon(storage) {
 	this.name = "Lagon";
 	
 	this.sexlevel          = 8;
+	this.SetExpToLevel();
 	
 	this.body.DefMale();
 	
