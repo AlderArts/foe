@@ -2275,6 +2275,10 @@ Scenes.BullTower.EndingDebrief = function(injured) {
 	
 	outlaws.flags["BullTower"] = Outlaws.BullTowerQuest.Completed;
 	
+	var foundOut = outlaws.BT.Suspicion() < 100;
+	if(outlaws.BT.foughtCorishev && !(outlaws.AlaricSaved()))
+		foundOut = true;
+	
 	var score = 0;
 	if(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed)      score += 2;
 	if(outlaws.flags["BT"] & Outlaws.BullTower.ContrabandStolen) score += 1;
@@ -2284,7 +2288,7 @@ Scenes.BullTower.EndingDebrief = function(injured) {
 	if(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted)       score += 1;
 	if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited)  score += 1;
 	if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansSearched) score += 1;
-	if(outlaws.BT.Suspicion() < 100) score += 1;
+	if(!foundOut) score += 1;
 	//TOTAL: 10
 	if(score >= 10) outlaws.flags["BT"] |= Outlaws.BullTower.PerfectScore;
 	
@@ -2297,112 +2301,123 @@ Scenes.BullTower.EndingDebrief = function(injured) {
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
-		if(outlaws.AlaricSaved()) {
-			Text.Add("<i>“Thank you for pulling this off without a hitch,”</i> Zenith says, a rare smile on the outlaw leader’s face. <i>“I confess that I had some doubts about your abilities and wondered if I should have sent Maria in your place, but it seems you and Cveta made a fine team and put Preston to shame. It’s not often that I’m glad to be proven wrong.</i>", parse);
-			Text.NL();
-			Text.Add("<i>“You don’t have to worry about Alaric. We’ll feed him, treat his wounds as best we can, and ask him to tell his tale. It’s unlikely that he’ll be able to go back to his old life now that he’s a wanted fugitive, but we should be able to set him up somewhere in the Free Cities. Honest accountants are hard to come by and in high demand.”</i>", parse);
-			Text.NL();
-			Text.Add("That makes sense. Even if there aren’t any official charges, it wouldn’t be hard for Preston to trump some up, you point out.", parse);
-			Text.NL();
-			parse["o"] = relevant ? " Now, let’s go over the other things you did…" : "";
-			Text.Add("<i>“Exactly,”</i> Zenith replies. <i>“Most of us didn’t choose to be outlaws; I think of us as exiles, thrown out on one flimsy charge or another. But we make the most of the hand we’ve been dealt.[o]</i>", parse);
-			Text.NL();
-			if(outlaws.flags["BT"] & Outlaws.BullTower.StatueDestroyed) {
-				Text.Add("<i>“Smashing Preston’s statue was a very appropriate touch. I knew the man was pompous - we’re reminded of the fact every time we get news out of Rigard - but this is something else altogether. An entire marble statue… how much did it cost him, and how much of that money was earmarked for his underlings’ pay and equipment, I wonder?”</i>", parse);
-				Text.NL();
-				Text.Add("It was Cveta who thought to leave the outlaws’ mark on the plinth, you point out.", parse);
-				Text.NL();
-				Text.Add("<i>“So she did, and she gets credit for that. I wish I could have been there to help you topple the thing.”</i> Zenith sounds a little wistful. <i>“Still, it’s important to remember that Preston is merely Rewyn’s hand. So long as the head remains, the snake lives on.”</i>", parse);
-				Text.NL();
-			}
-			if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansSearched) {
-				Text.Add("<i>“If the invoices and receipts the two of you found are indeed what they seem, we have a potent weapon for proving to the people what Rigard’s nobles think of their own laws. To impose taxes on those who bake the very bread they stuff themselves with, while they evade their share… that’s unforgivable. It is just one of the ways they attempted to break the guilds back then… but I’m rambling.”</i>", parse);
-				Text.NL();
-				Text.Add("What does he intend to do with this knowledge, by the by? You get the feeling that reporting the lot to the guard isn’t going to do very much.", parse);
-				Text.NL();
-				Text.Add("<i>“Of course not,”</i> Zenith replies with a snort. <i>“I’ll go over the figures later and note down each and every one of the greedy pieces of filth. Then maybe we’ll have them copied, a few rumors spread in the right places… attacking or accusing them head-on isn’t going to do much, but the people of Rigard are already suspicious of their self-proclaimed leaders. It won’t take much effort on our part to turn that into hostility.”</i>", parse);
-				Text.NL();
-			}
-			if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited) {
-				Text.Add("<i>“With those caravans you burned… well, perhaps they will think twice about consorting with the corrupt and decadent. I suspect that our friends will be having trouble finding someone to run their goods for them for a little while.”</i>", parse);
-				Text.NL();
-			}
-			if(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted) {
-				Text.Add("As he’s about to continue, a dog-morph comes running up to Zenith and salutes. <i>“Sir!”</i>", parse);
-				Text.NL();
-				Text.Add("<i>“Yes, Serana?”</i>", parse);
-				Text.NL();
-				Text.Add("<i>“We’ve counted the money [playername] brought back, as you requested.”</i>", parse);
-				Text.NL();
-				Text.Add("<i>“And the total is?”</i>", parse);
-				Text.NL();
-				Text.Add("<i>“I’d rather not say it in the open, sir.”</i>", parse);
-				Text.NL();
-				Text.Add("Zenith blinks, truly surprised, but leans in while the dog-morph whispers in his ear. His eyes grow wide for a second or two, until his features settle into a more composed, bemused expression.", parse);
-				Text.NL();
-				Text.Add("<i>“Thank you, Serana. You may take your leave now.”</i> As the dog-morph pads off, Zenith turns back to you and sighs. <i>“Well! It appears that our royal guards have been on the take for quite the sum. Ten thousand coins… considerable, but if caravans’ worth of goods are being regularly smuggled into Rigard, the price would have been worth it, from the nobles’ point of view.”</i>", parse);
-				Text.NL();
-				Text.Add("<i>“Just how deep does the corruption run, I wonder? And Rewyn is always complaining that the treasury is empty, using that as an excuse to squeeze the people…”</i>", parse);
-				Text.NL();
-				Text.Add("Ten thousand, hmm?", parse);
-				Text.NL();
-				Text.Add("<i>“At least that much,”</i> Zenith says. <i>“Serana says they’re recounting right now, but some sums of money are such that past a certain point, the exact number becomes meaningless. This is one of them. Good work, [playername]. This news will soon find its way onto the streets of Rigard, I promise you that.”</i>", parse);
-				Text.NL();
-			}
-			if(outlaws.flags["BT"] & Outlaws.BullTower.ContrabandStolen) {
-				Text.Add("<i>“And finally, we come to the matter of the gemstones you brought back. Cut and polished, no less - we won’t be dumping these all at once, since even the best fences will have problems washing these clean. Still, it seems that we won’t be needing to worry about money for a while, and it’s all thanks to Preston and the incompetence of his little outfit. That’s what you get when you worry about polishing your armor more than how well your men are trained.”</i>", parse);
-				Text.NL();
-			}
-			Text.Add("<i>“Once more, I’ll congratulate you on your success. The blow you struck might be small, but it is nevertheless important - after all, Eden wasn’t settled in a day. ", parse);
-			if(score >= 10)
-				Text.Add("The two of you did a most excellent job in there - I couldn’t have done better myself. Causing that much mayhem and yet managing to escape undetected; Preston is going to throw a fit once word of this gets to him. I knew I made the right choice in picking you and Cveta for this task.”</i>", parse);
-			else if(score >= 6)
-				Text.Add("The two of you performed admirably tonight - you certainly had an eye for spotting opportunities while not losing track of what you were there for. I expect to see a lot of unhappy royal guards tomorrow.”</i>", parse);
-			else
-				Text.Add("You two performed well tonight, nothing less than I expected of you. Congratulations on getting Alaric out safely.”</i>", parse);
-			Text.NL();
-			Text.Add("<i>“There is one more thing. They were prepared for us, [playername]. We still managed to pull off the diversion thanks to everyone’s grit and dedication, but the guards knew we were coming, even if the caravaneers didn’t. They turned up far sooner than we had expected them to. We didn’t get to claim much in the way of spoils from that attack, though since Alaric is free, I’ll nonetheless consider tonight a success. Still, it raises serious questions that I’ll have to look into later.</i>", parse);
-			Text.NL();
-			parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
-			parse["c"] = party.Num() > 1 ? Text.Parse(", and perhaps reassure [comp] that you’re fine", parse) : "";
-			parse["injured"] = injured ? "and that gash will take time to heal" : "and I’d rather not see you worn out";
-			Text.Add("<i>“Now, I suggest that you get some rest[c]. You’ve had enough adventure for a single night, [injured].”</i> With that, Zenith gives you one final nod, then turns and stalks away, his wide, easy stride eating up distance until he disappears amidst the camp’s morning activity.", parse);
-			var inc = 10;
-			
-			if(outlaws.flags["BT"] & Outlaws.BullTower.ContrabandStolen) inc += 2;
-			if(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted) inc += 2;
-			if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansSearched) inc += 2;
-			if(outlaws.flags["BT"] & Outlaws.BullTower.StatueDestroyed) inc += 2;
-			if(outlaws.flags["BT"] & Outlaws.BullTower.BlueRoses) inc += 2;
-			if(outlaws.BT.Suspicion() < 100) inc += 2;
-			if(score >= 10) inc += 3;
-
-			outlaws.relation.IncreaseStat(100, inc);
-		}
-		else {
-			Text.Add("<i>“Well. You failed,”</i> Zenith states bluntly. <i>“And through no fault of Cveta’s, either - since you were de facto leader of this foray, she did all she could to aid you in your decisions, even if she didn’t agree with all of them. She did her part as a follower, but did you do yours as a leader?”</i>", parse);
-			Text.NL();
-			parse["c"] = outlaws.BT.foughtCorishev ? " You tried your best in attempting to save him, but alas, your best was not enough, and I won’t mince words: I don’t give points for effort." : "";
-			Text.Add("The outlaw leader paces in a small circle, each step slow and measured. <i>“This is going to be troublesome. Yes, we have a contingency plan in case you should fail to bring Alaric to us, but clearing our name is going to be much harder without his testimony. That, and one can only wonder what the royal guard is going to do with the man; it’s likely that we’ll never see or hear of him again.[c]</i>", parse);
-			Text.NL();
-			Text.Add("<i>“Perhaps it would have been better if I’d sent Maria instead.”</i>", parse);
-			Text.NL();
-			if(score >= 4) {
-				Text.Add("<i>“In the future, I suggest that you focus on the task at hand. Doing more than what’s strictly needed is appreciated, but not if it is a detriment to the main task.”</i>", parse);
-				Text.NL();
-			}
-			Text.Add("<i>“There is one more thing. They were prepared for us, [playername]. We still managed to pull off the diversion thanks to everyone’s grit and dedication, but the guards knew we were coming, even if the caravaneers didn’t. They turned up far sooner than we had expected them to - we didn’t get to claim any spoils from that attack, which would at least have prevented this from being a complete loss.</i>", parse);
-			Text.NL();
-			Text.Add("<i>“All in all, [playername], we are a very fair people here in this camp. Your standing depends on the goods you bring to the table, and I’m afraid I may have to reconsider your help when it comes to other sensitive tasks. Not that I doubt your loyalty to us, but it’s better to match tasks to people by their abilities. Have a good rest - too much adventure in one night is bad for one’s health.”</i> With that, he turns on his heels and strides off, taking big, determined steps, leaving you to wallow in your failure.", parse);
-			
-			outlaws.relation.DecreaseStat(-100, 10);
-		}
+		Text.Add("<b>Final Score:</b><br/>", parse);
+		Text.Add("Suspicion raised: " + outlaws.BT.Suspicion() + "/100<br/>", parse);
+		Text.Add("Mayhem spread: " + score + "/10<br/>", parse);
+		Text.Add("Alarm raised: " + (foundOut ? "yes" : "no"), parse);
 		Text.Flush();
 		
-		Gui.NextPrompt();
+		Gui.NextPrompt(function() {
+			Text.Clear();
+			if(outlaws.AlaricSaved()) {
+				Text.Add("<i>“Thank you for pulling this off without a hitch,”</i> Zenith says, a rare smile on the outlaw leader’s face. <i>“I confess that I had some doubts about your abilities and wondered if I should have sent Maria in your place, but it seems you and Cveta made a fine team and put Preston to shame. It’s not often that I’m glad to be proven wrong.</i>", parse);
+				Text.NL();
+				Text.Add("<i>“You don’t have to worry about Alaric. We’ll feed him, treat his wounds as best we can, and ask him to tell his tale. It’s unlikely that he’ll be able to go back to his old life now that he’s a wanted fugitive, but we should be able to set him up somewhere in the Free Cities. Honest accountants are hard to come by and in high demand.”</i>", parse);
+				Text.NL();
+				Text.Add("That makes sense. Even if there aren’t any official charges, it wouldn’t be hard for Preston to trump some up, you point out.", parse);
+				Text.NL();
+				parse["o"] = relevant ? " Now, let’s go over the other things you did…" : "";
+				Text.Add("<i>“Exactly,”</i> Zenith replies. <i>“Most of us didn’t choose to be outlaws; I think of us as exiles, thrown out on one flimsy charge or another. But we make the most of the hand we’ve been dealt.[o]</i>", parse);
+				Text.NL();
+				if(outlaws.flags["BT"] & Outlaws.BullTower.StatueDestroyed) {
+					Text.Add("<i>“Smashing Preston’s statue was a very appropriate touch. I knew the man was pompous - we’re reminded of the fact every time we get news out of Rigard - but this is something else altogether. An entire marble statue… how much did it cost him, and how much of that money was earmarked for his underlings’ pay and equipment, I wonder?”</i>", parse);
+					Text.NL();
+					Text.Add("It was Cveta who thought to leave the outlaws’ mark on the plinth, you point out.", parse);
+					Text.NL();
+					Text.Add("<i>“So she did, and she gets credit for that. I wish I could have been there to help you topple the thing.”</i> Zenith sounds a little wistful. <i>“Still, it’s important to remember that Preston is merely Rewyn’s hand. So long as the head remains, the snake lives on.”</i>", parse);
+					Text.NL();
+				}
+				if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansSearched) {
+					Text.Add("<i>“If the invoices and receipts the two of you found are indeed what they seem, we have a potent weapon for proving to the people what Rigard’s nobles think of their own laws. To impose taxes on those who bake the very bread they stuff themselves with, while they evade their share… that’s unforgivable. It is just one of the ways they attempted to break the guilds back then… but I’m rambling.”</i>", parse);
+					Text.NL();
+					Text.Add("What does he intend to do with this knowledge, by the by? You get the feeling that reporting the lot to the guard isn’t going to do very much.", parse);
+					Text.NL();
+					Text.Add("<i>“Of course not,”</i> Zenith replies with a snort. <i>“I’ll go over the figures later and note down each and every one of the greedy pieces of filth. Then maybe we’ll have them copied, a few rumors spread in the right places… attacking or accusing them head-on isn’t going to do much, but the people of Rigard are already suspicious of their self-proclaimed leaders. It won’t take much effort on our part to turn that into hostility.”</i>", parse);
+					Text.NL();
+				}
+				if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansIgnited) {
+					Text.Add("<i>“With those caravans you burned… well, perhaps they will think twice about consorting with the corrupt and decadent. I suspect that our friends will be having trouble finding someone to run their goods for them for a little while.”</i>", parse);
+					Text.NL();
+				}
+				if(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted) {
+					Text.Add("As he’s about to continue, a dog-morph comes running up to Zenith and salutes. <i>“Sir!”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Yes, Serana?”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“We’ve counted the money [playername] brought back, as you requested.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“And the total is?”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“I’d rather not say it in the open, sir.”</i>", parse);
+					Text.NL();
+					Text.Add("Zenith blinks, truly surprised, but leans in while the dog-morph whispers in his ear. His eyes grow wide for a second or two, until his features settle into a more composed, bemused expression.", parse);
+					Text.NL();
+					Text.Add("<i>“Thank you, Serana. You may take your leave now.”</i> As the dog-morph pads off, Zenith turns back to you and sighs. <i>“Well! It appears that our royal guards have been on the take for quite the sum. Ten thousand coins… considerable, but if caravans’ worth of goods are being regularly smuggled into Rigard, the price would have been worth it, from the nobles’ point of view.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Just how deep does the corruption run, I wonder? And Rewyn is always complaining that the treasury is empty, using that as an excuse to squeeze the people…”</i>", parse);
+					Text.NL();
+					Text.Add("Ten thousand, hmm?", parse);
+					Text.NL();
+					Text.Add("<i>“At least that much,”</i> Zenith says. <i>“Serana says they’re recounting right now, but some sums of money are such that past a certain point, the exact number becomes meaningless. This is one of them. Good work, [playername]. This news will soon find its way onto the streets of Rigard, I promise you that.”</i>", parse);
+					Text.NL();
+				}
+				if(outlaws.flags["BT"] & Outlaws.BullTower.ContrabandStolen) {
+					Text.Add("<i>“And finally, we come to the matter of the gemstones you brought back. Cut and polished, no less - we won’t be dumping these all at once, since even the best fences will have problems washing these clean. Still, it seems that we won’t be needing to worry about money for a while, and it’s all thanks to Preston and the incompetence of his little outfit. That’s what you get when you worry about polishing your armor more than how well your men are trained.”</i>", parse);
+					Text.NL();
+				}
+				Text.Add("<i>“Once more, I’ll congratulate you on your success. The blow you struck might be small, but it is nevertheless important - after all, Eden wasn’t settled in a day. ", parse);
+				if(score >= 10)
+					Text.Add("The two of you did a most excellent job in there - I couldn’t have done better myself. Causing that much mayhem and yet managing to escape undetected; Preston is going to throw a fit once word of this gets to him. I knew I made the right choice in picking you and Cveta for this task.”</i>", parse);
+				else if(score >= 6)
+					Text.Add("The two of you performed admirably tonight - you certainly had an eye for spotting opportunities while not losing track of what you were there for. I expect to see a lot of unhappy royal guards tomorrow.”</i>", parse);
+				else
+					Text.Add("You two performed well tonight, nothing less than I expected of you. Congratulations on getting Alaric out safely.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“There is one more thing. They were prepared for us, [playername]. We still managed to pull off the diversion thanks to everyone’s grit and dedication, but the guards knew we were coming, even if the caravaneers didn’t. They turned up far sooner than we had expected them to. We didn’t get to claim much in the way of spoils from that attack, though since Alaric is free, I’ll nonetheless consider tonight a success. Still, it raises serious questions that I’ll have to look into later.</i>", parse);
+				Text.NL();
+				parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
+				parse["c"] = party.Num() > 1 ? Text.Parse(", and perhaps reassure [comp] that you’re fine", parse) : "";
+				parse["injured"] = injured ? "and that gash will take time to heal" : "and I’d rather not see you worn out";
+				Text.Add("<i>“Now, I suggest that you get some rest[c]. You’ve had enough adventure for a single night, [injured].”</i> With that, Zenith gives you one final nod, then turns and stalks away, his wide, easy stride eating up distance until he disappears amidst the camp’s morning activity.", parse);
+				var inc = 10;
+				
+				if(outlaws.flags["BT"] & Outlaws.BullTower.ContrabandStolen) inc += 2;
+				if(outlaws.flags["BT"] & Outlaws.BullTower.SafeLooted) inc += 2;
+				if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansSearched) inc += 2;
+				if(outlaws.flags["BT"] & Outlaws.BullTower.StatueDestroyed) inc += 2;
+				if(outlaws.flags["BT"] & Outlaws.BullTower.BlueRoses) inc += 2;
+				if(outlaws.BT.Suspicion() < 100) inc += 2;
+				if(score >= 10) inc += 3;
+	
+				outlaws.relation.IncreaseStat(100, inc);
+			}
+			else {
+				Text.Add("<i>“Well. You failed,”</i> Zenith states bluntly. <i>“And through no fault of Cveta’s, either - since you were de facto leader of this foray, she did all she could to aid you in your decisions, even if she didn’t agree with all of them. She did her part as a follower, but did you do yours as a leader?”</i>", parse);
+				Text.NL();
+				parse["c"] = outlaws.BT.foughtCorishev ? " You tried your best in attempting to save him, but alas, your best was not enough, and I won’t mince words: I don’t give points for effort." : "";
+				Text.Add("The outlaw leader paces in a small circle, each step slow and measured. <i>“This is going to be troublesome. Yes, we have a contingency plan in case you should fail to bring Alaric to us, but clearing our name is going to be much harder without his testimony. That, and one can only wonder what the royal guard is going to do with the man; it’s likely that we’ll never see or hear of him again.[c]</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Perhaps it would have been better if I’d sent Maria instead.”</i>", parse);
+				Text.NL();
+				if(score >= 4) {
+					Text.Add("<i>“In the future, I suggest that you focus on the task at hand. Doing more than what’s strictly needed is appreciated, but not if it is a detriment to the main task.”</i>", parse);
+					Text.NL();
+				}
+				Text.Add("<i>“There is one more thing. They were prepared for us, [playername]. We still managed to pull off the diversion thanks to everyone’s grit and dedication, but the guards knew we were coming, even if the caravaneers didn’t. They turned up far sooner than we had expected them to - we didn’t get to claim any spoils from that attack, which would at least have prevented this from being a complete loss.</i>", parse);
+				Text.NL();
+				Text.Add("<i>“All in all, [playername], we are a very fair people here in this camp. Your standing depends on the goods you bring to the table, and I’m afraid I may have to reconsider your help when it comes to other sensitive tasks. Not that I doubt your loyalty to us, but it’s better to match tasks to people by their abilities. Have a good rest - too much adventure in one night is bad for one’s health.”</i> With that, he turns on his heels and strides off, taking big, determined steps, leaving you to wallow in your failure.", parse);
+				
+				outlaws.relation.DecreaseStat(-100, 10);
+			}
+			Text.Flush();
+			
+			Gui.NextPrompt();
+			
+			//TODO SET TIMER
+		});
 		
-		//TODO SET TIMER
 	});
+	
 }
 
 
