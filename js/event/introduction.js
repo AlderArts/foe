@@ -1491,7 +1491,7 @@ Intro.UruSexGetFuckedLead = function() {
 		targetDesc = function() { return player.Butt().AnalShort(); }
 	var buttDesc = function() { return player.Butt().Short(); }
 	
-	Text.Add("You shake your head slightly. The demon has been taking charge far too much, it is time to turn this around! Determined, you get back on your feet and push the surprised omnibus back. She lands, ass first, on the throne, cock bouncing up and down excitedly. <i>“Why, <i>" + player.name + "<i>!”</i> she exclaims delighted, <i>“Getting really forward aren't w-”</i>");
+	Text.Add("You shake your head slightly. The demon has been taking charge far too much, it is time to turn this around! Determined, you get back on your feet and push the surprised omnibus back. She lands, ass first, on the throne, cock bouncing up and down excitedly. <i>“Why, " + player.name + "!”</i> she exclaims delighted, <i>“Getting really forward aren't w-”</i>");
 	Text.NL();
 	Text.Add("You cut her off with a deep kiss as you straddle her hips, her perky " + uruCockDesc() + " rubbing against your soft undercarriage. Positioning yourself so that her cock is pointing straight at your " + targetDesc() + ". You sigh with euphoria as you ease yourself down, relishing in the feeling of the omnibus entering you.");
 	

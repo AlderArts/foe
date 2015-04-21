@@ -12,7 +12,8 @@ function Cveta(storage) {
 	this.avatar.combat = Images.cveta;
 	
 	// TODO Jobs, multipliers
-	this.currentJob = Jobs.Courtesan;
+	this.currentJob = Jobs.Songstress;
+	this.jobs["Songstress"] = new JobDesc(Jobs.Songstress);
 	this.jobs["Scholar"]   = new JobDesc(Jobs.Scholar);   this.jobs["Scholar"].mult   = 2;
 	this.jobs["Courtesan"] = new JobDesc(Jobs.Courtesan);
 

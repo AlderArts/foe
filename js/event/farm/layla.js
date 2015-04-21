@@ -2366,7 +2366,7 @@ Scenes.Layla.FarmCombatWin = function() {
 				Text.NL();
 				Text.Add("<i>“Uhh… boss? She’s awake.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“Alright, thanks,”</i> Gwendy replies, unfaced by the farmhand’s discomfort. The farmer turns to you, flashing you a quick grin. <i>“Shall we go see what this little intruder is up to, then? Or are you still feeling antsy?”</i> The cowgirl disappears down the ladder, ears burning.", parse);
+				Text.Add("<i>“Alright, thanks,”</i> Gwendy replies, unfazed by the farmhand’s discomfort. The farmer turns to you, flashing you a quick grin. <i>“Shall we go see what this little intruder is up to, then? Or are you still feeling antsy?”</i> The cowgirl disappears down the ladder, ears burning.", parse);
 			}
 			else {
 				Text.Add("You relax and chat with Gwendy for a while, until a cowgirl pokes up over the edge of the loft, interrupting you.", parse);

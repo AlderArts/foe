@@ -1683,7 +1683,7 @@ Scenes.Miranda.HeyThereCatPorn = function() {
 						Text.Add("<i>“For the show,”</i> he explains grinning, <i>“we could use some more of that around here, it draws a crowd. You think you two can come more often?”</i> The two of you blush deeply as he returns to the bar, laughing. The conversations start to pick up again around you.", parse);
 						Text.NL();
 						if(player.FirstVag())
-							Text.Add("<i>“As much as I like an audience, do you think you can hold out until next time?</i> she murmurs, lightly caressing your wet crotch.", parse);
+							Text.Add("<i>“As much as I like an audience, do you think you can hold out until next time?”</i> she murmurs, lightly caressing your wet crotch.", parse);
 						else
 							Text.Add("<i>“Too bad we are the center of attention, I’d love to… continue this,”</i> she grins, caressing your [buttDesc] fondly.", parse);
 						Text.NL();

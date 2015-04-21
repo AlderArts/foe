@@ -234,6 +234,23 @@ Jobs["Acolyte"].levels.push(new JobLevel(160, [{ab: Abilities.White.Toughen, set
 Jobs["Acolyte"].levels.push(new JobLevel(320, null, {"int" : 0.1, "cha" : 0.1}));
 Jobs["Acolyte"].levels.push(new JobLevel(640, [{ab: Abilities.White.Empower, set: "Support"}, {ab: Abilities.White.Sermon, set: "Support"}], {"int" : 0.2, "spi" : 0.2, "cha" : 0.2, "hp" : 5, "sp" : 10}));
 
+// Cveta specific
+Jobs["Songstress"] = new Job("Songstress");
+Jobs["Songstress"].Long = function(entity) {
+	var parse = {};
+	return Text.Parse("All may practice hard, but some gifts are inborn and cannot be imparted through teaching. The Songstress uses the strange, magical qualities of her voice to sway the tides of battle.", parse);
+}
+//TODO Singer abilities
+Jobs["Songstress"].abilities.AddAbility(Abilities.White.Detox);
+Jobs["Songstress"].levels.push(new JobLevel(10,  [{ab: Abilities.White.Detox, set: "Support"}], {"spi" : 0.3}));
+Jobs["Songstress"].levels.push(new JobLevel(20,  null, {"int" : 0.2, "cha" : 0.1}));
+Jobs["Songstress"].levels.push(new JobLevel(40,  [{ab: Abilities.White.Cool, set: "Support"}], {"sta" : 0.2, "spi" : 0.1}));
+Jobs["Songstress"].levels.push(new JobLevel(80,  null, {"spi" : 0.2, "int" : 0.1}));
+Jobs["Songstress"].levels.push(new JobLevel(160, [{ab: Abilities.White.Warm, set: "Support"}], {"int" : 0.3}));
+Jobs["Songstress"].levels.push(new JobLevel(320, null, {"cha" : 0.2, "sta" : 0.1}));
+Jobs["Songstress"].levels.push(new JobLevel(640, [{ab: Abilities.White.Heal, set: "Support"}], {"spi" : 0.4, "int" : 0.1}));
+
+
 ////////////
 // TIER 2 //
 ////////////
@@ -410,6 +427,7 @@ Jobs["Singer"].levels.push(new JobLevel(320,  [{ab: Abilities.White.Warm, set: "
 Jobs["Singer"].levels.push(new JobLevel(640,  null, {"cha" : 0.2, "sta" : 0.1}));
 Jobs["Singer"].levels.push(new JobLevel(1280, [{ab: Abilities.White.Heal, set: "Support"}], {"spi" : 0.4, "int" : 0.1}));
 Jobs["Singer"].Unlocked = function(entity) {
+	if(entity == cveta) return true;
 	return cveta.flags["Singer"] >= Cveta.Singer.Taught;
 }
 
@@ -545,6 +563,7 @@ Jobs["Bard"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
 Jobs["Bard"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
 Jobs["Bard"].levels.push(new JobLevel(2560, null, {"str" : 0.2}));
 Jobs["Bard"].Unlocked = function(entity) {
+	if(entity == cveta) return true;
 	return gameCache.flags["LearnedMagic"] >= 3;
 }
 ////////////
