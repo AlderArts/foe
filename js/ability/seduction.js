@@ -241,8 +241,10 @@ Abilities.Seduction.Soothe.CastInternal = function(encounter, caster, target) {
 	
 	for(var i = 0; i < targets.length; i++) {
 		var e = targets[i];
+		if(e.Incapacitated()) continue;
 		
-		var soothe = caster.LDefense();
+		var mult = 1 + (Math.random()-0.5)*0.2;
+		var soothe = caster.Spi() * 3;
 		
 		e.AddLustAbs(soothe);
 		
@@ -266,6 +268,92 @@ Abilities.Seduction.Soothe.OnHit = function(encounter, caster, target, dmg) {
 }
 
 
+Abilities.Seduction.Captivate = new Ability();
+Abilities.Seduction.Captivate.name = "Captivate";
+Abilities.Seduction.Captivate.cost = { hp: null, sp: null, lp: 40};
+Abilities.Seduction.Captivate.Short = function() { return "Attempt to immobilize and slow a foe with a captivating song. Success rate dependent on your charisma and the target’s lust. If it fails, the target is nevertheless slowed."; }
+Abilities.Seduction.Captivate.CastInternal = function(encounter, caster, target) {
+	this.OnCast(encounter, caster, target)
+	
+	var hit    = hitMod * caster.LHit();
+	var evade  = target.LEvade();
+	var toHit  = Ability.ToHit(hit, evade);
+	
+	var success = Math.random() < toHit;
+	if(success)
+		success = Status.Numb(target, { hit : 0.8, turns : 1, proc : 1 });
+	
+	if(success)
+		this.OnHit(encounter, caster, target);
+	else
+		this.OnMiss(encounter, caster, target);
+	
+	Status.Slow(target, { hit : 0.6, factor : 2, turns : 3, turnsR : 3 });
+	
+	Text.Flush();
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
+Abilities.Seduction.Captivate.OnCast = function(encounter, caster, target) {
+	var parse = {
+		tname: target.nameDesc(),
+		name: caster.nameDesc(),
+		s: caster.plural() ? "" : "s",
+		hisher: caster.hisher()
+	};
+	Text.Add("Fixing [tname] with a piercing gaze, [name] begin[s] singing, [hisher] song’s captivating undertones ringing through the air. ", parse);
+}
+Abilities.Seduction.Captivate.OnHit = function(encounter, caster, target) {
+	var parse = {
+		tName: target.NameDesc(),
+		poss: caster.possessive()
+	};
+	Text.Add("[tName] is utterly entranced by [poss] song and is slowed to a stop, completely immobilized.", parse);
+}
+Abilities.Seduction.Captivate.OnMiss = function(encounter, caster, target) {
+	var parse = {
+		tName: target.NameDesc(),
+		s: target.plural() ? "" : "s",
+		thisher: target.hisher()
+	};
+	Text.Add("[tName] manage[s] to resist the brunt of the mesmerizing melody, but still finds [thisher] movements slowed.", parse);
+}
 
+
+Abilities.Seduction.Lull = new Ability();
+Abilities.Seduction.Lull.name = "Lull";
+Abilities.Seduction.Lull.cost = { hp: null, sp: 10, lp: 10};
+Abilities.Seduction.Lull.Short = function() { return "Put the foe to sleep with a soothing song."; }
+Abilities.Seduction.Lull.CastInternal = function(encounter, caster, target) {
+	this.OnCast(encounter, caster, target)
+	
+	var hit    = hitMod * caster.LHit();
+	var evade  = target.LEvade();
+	var toHit  = Ability.ToHit(hit, evade);
+	
+	var parse = {
+		Name : caster.NameDesc(),
+		poss : caster.possessive(),
+		s : caster.plural() ? "" : "s",
+		hisher : caster.hisher(),
+		tname : target.nameDesc(),
+		tName : target.NameDesc(),
+		ts : target.plural() ? "" : "s"
+	};
+	
+	Text.Add("[Name] raise[s] [hisher] voice in a soothing song, lulling [tname] with the haunting tune. ", parse);
+	
+	if(Status.Sleep(target, { hit : 0.8, turns : 3, turnsR : 3 })) {
+		Text.Add("Overcome by [poss] song, [tname] falls asleep.", parse);
+	}
+	else
+		Text.Add("[tName] shrug[ts] it off, managing to stay awake.", parse);
+	
+	Text.Flush();
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
 
 

@@ -35,6 +35,7 @@ AttackPhysical.prototype.CastInternal = function(encounter, caster, target) {
 	
 	for(var i = 0; i < targets.length; i++) {
 		var e   = targets[i];
+		if(e.Incapacitated()) continue;
 		
 		for(var j = 0; j < nrAttacks; j++) {
 			var atkDmg     = atkMod * caster.PAttack();

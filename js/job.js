@@ -240,22 +240,23 @@ Jobs["Songstress"].Long = function(entity) {
 	var parse = {};
 	return Text.Parse("All may practice hard, but some gifts are inborn and cannot be imparted through teaching. The Songstress uses the strange, magical qualities of her voice to sway the tides of battle.", parse);
 }
-//TODO Singer abilities
-Jobs["Songstress"].abilities.AddAbility(Abilities.White.Detox);
-Jobs["Songstress"].levels.push(new JobLevel(10,  [{ab: Abilities.White.Detox, set: "Support"}], {"spi" : 0.3}));
+Jobs["Songstress"].abilities.AddAbility(Abilities.Seduction.Soothe);
+Jobs["Songstress"].abilities.AddAbility(Abilities.Seduction.Inflame);
+Jobs["Songstress"].abilities.AddAbility(Abilities.Seduction.Lull);
+Jobs["Songstress"].abilities.AddAbility(Abilities.Seduction.Captivate);
+Jobs["Songstress"].levels.push(new JobLevel(10,  [{ab: Abilities.Seduction.Soothe, set: "Support"}], {"spi" : 0.3}));
 Jobs["Songstress"].levels.push(new JobLevel(20,  null, {"int" : 0.2, "cha" : 0.1}));
-Jobs["Songstress"].levels.push(new JobLevel(40,  [{ab: Abilities.White.Cool, set: "Support"}], {"sta" : 0.2, "spi" : 0.1}));
-Jobs["Songstress"].levels.push(new JobLevel(80,  null, {"spi" : 0.2, "int" : 0.1}));
-Jobs["Songstress"].levels.push(new JobLevel(160, [{ab: Abilities.White.Warm, set: "Support"}], {"int" : 0.3}));
-Jobs["Songstress"].levels.push(new JobLevel(320, null, {"cha" : 0.2, "sta" : 0.1}));
-Jobs["Songstress"].levels.push(new JobLevel(640, [{ab: Abilities.White.Heal, set: "Support"}], {"spi" : 0.4, "int" : 0.1}));
+Jobs["Songstress"].levels.push(new JobLevel(40,  [{ab: Abilities.Seduction.Inflame, set: "Seduce"}], {"cha" : 0.2, "spi" : 0.1}));
+Jobs["Songstress"].levels.push(new JobLevel(80,  null, {"cha" : 0.2, "lib" : 0.1}));
+Jobs["Songstress"].levels.push(new JobLevel(160, [{ab: Abilities.Seduction.Lull, set: "Support"}], {"cha" : 0.1, "int" : 0.2 }));
+Jobs["Songstress"].levels.push(new JobLevel(320, null, {"cha" : 0.2, "lib" : 0.1}));
+Jobs["Songstress"].levels.push(new JobLevel(640, [{ab: Abilities.Seduction.Captivate, set: "Seduce"}, {ab: Abilities.Black.Scream, set: "Spells"}], {"cha" : 0.4, "lib" : 0.1}));
 
 
 ////////////
 // TIER 2 //
 ////////////
 
-// TODO: EXP 2 LEVEL
 Jobs["Bruiser"] = new Job("Bruiser");
 Jobs["Bruiser"].Long = function(entity) {
 	var parse = {hisher: entity.hisher(), HeShe: entity.HeShe(), name: entity.nameDesc(), is: entity.is(), s: entity.plural() ? "" : "s"};
@@ -264,7 +265,7 @@ Jobs["Bruiser"].Long = function(entity) {
 Jobs["Bruiser"].Unlocked = function(entity) {
 	if(entity == miranda) return true;
 	return miranda.flags["Bruiser"] == Miranda.Bruiser.Taught;
-} // TODO Tier 2 condition
+}
 Jobs["Bruiser"].preqs.push({job : Jobs["Fighter"], lvl : 3});
 Jobs["Bruiser"].abilities.AddAbility(Abilities.Physical.CrushingStrike);
 Jobs["Bruiser"].abilities.AddAbility(Abilities.Physical.FocusStrike);

@@ -32,6 +32,8 @@ AttackSpell.prototype.CastInternal = function(encounter, caster, target) {
 	
 	for(var i = 0; i < targets.length; i++) {
 		var e      = targets[i];
+		if(e.Incapacitated()) continue;
+		
 		var atkDmg = atkMod * caster.MAttack();
 		var def    = defMod * e.MDefense();
 		
@@ -358,7 +360,7 @@ Abilities.Black.Hellfire.Short = function() { return "Demon magic, targets all e
 Abilities.Black.Hellfire.targetMode = TargetMode.Enemies;
 Abilities.Black.Hellfire.cost = { hp: null, sp: 500, lp: null};
 Abilities.Black.Hellfire.damageType.mFire = 3;
-Abilities.Black.Hellfire.damageType.mFire = 3;
+Abilities.Black.Hellfire.damageType.mDark = 3;
 Abilities.Black.Hellfire.atkMod = 1.5;
 Abilities.Black.Hellfire.OnCast = function(encounter, caster, target) {
 	for(var i = 0; i < encounter.combatOrder.length; i++) {
@@ -368,4 +370,27 @@ Abilities.Black.Hellfire.OnCast = function(encounter, caster, target) {
 	
 	var parse = { possessive : caster.possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s"};
 	Text.Add("[name] summons the most vile of magic, unleashing a sea of dark fire on [hisher] enemies! ", parse);
+}
+
+Abilities.Black.Scream = new AttackSpell();
+Abilities.Black.Scream.name = "Scream";
+Abilities.Black.Scream.Short = function() { return "Unleash the destructive power of your voice, damaging all foes on the field."; }
+Abilities.Black.Scream.targetMode = TargetMode.Enemies;
+Abilities.Black.Scream.cost = { hp: null, sp: 30, lp: 30 };
+Abilities.Black.Scream.damageType.pSlash = 0.5;
+Abilities.Black.Scream.damageType.mWind = 0.5;
+Abilities.Black.Scream.atkMod = 1;
+Abilities.Black.Scream.OnCast = function(encounter, caster, target) {
+	var parse = { Poss : caster.Possessive(), hisher : caster.hisher() };
+	Text.Add("[Poss] lets out a ear-splitting shriek, the sheer force of [hisher] voice rippling through the air. ", parse);
+}
+Abilities.Black.Scream.OnHit = function(encounter, caster, target, dmg) {
+	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", is: target.is() };
+	Text.Add("[tName] [is] severely buffeted by the sudden burst of sound, taking " + Text.BoldColor(dmg, "#008000") + " damage!", parse);
+	Text.NL();
+}
+Abilities.Black.Scream.OnAbsorb = function(encounter, caster, target, dmg) {
+	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", is: target.is() };
+	Text.Add("[tName] [is] struck by the sudden piercing screech, but manage[s] to resist its effects.", parse);
+	Text.NL();
 }

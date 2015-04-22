@@ -18,6 +18,8 @@ TeaseSkill.prototype.constructor = TeaseSkill;
 TeaseSkill.prototype.CastInternal = function(encounter, caster, target) {
 	var atkMod     = this.atkMod || 1;
 	var defMod     = this.defMod || 1;
+	var hitMod     = this.atkMod || 1;
+	var nrAttacks  = this.nrAttacks || 1;
 	var targetMode = this.targetMode || TargetMode.Enemy;
 	
 	var damageType = new DamageType(this.damageType);
@@ -33,25 +35,36 @@ TeaseSkill.prototype.CastInternal = function(encounter, caster, target) {
 	
 	for(var i = 0; i < targets.length; i++) {
 		var e      = targets[i];
-		var atkDmg = atkMod * caster.LAttack();
-		var def    = defMod * e.LDefense();
+		if(e.Incapacitated()) continue;
 		
-		//var dmg = atkDmg - def;
-		var dmg = Ability.Damage(atkDmg, def, caster.level, e.level);
-		if(dmg < 0) dmg = 0;
-		
-		dmg = damageType.ApplyDmgType(e.elementDef, dmg);
-		dmg = Math.floor(dmg);
-	
-		e.AddLustAbs(dmg);
-		
-		if(dmg >= 0) {
-			if(this.OnHit) this.OnHit(encounter, caster, e, dmg);
+		for(var j = 0; j < nrAttacks; j++) {
+			var atkDmg = atkMod * caster.LAttack();
+			var def    = defMod * e.LDefense();
+			var hit    = hitMod * caster.LHit();
+			var evade  = e.LEvade();
+			var toHit  = Ability.ToHit(hit, evade);
+			
+			if(Math.random() < toHit) {
+				//var dmg = atkDmg - def;
+				var dmg = Ability.Damage(atkDmg, def, caster.level, e.level);
+				if(dmg < 0) dmg = 0;
+				
+				dmg = damageType.ApplyDmgType(e.elementDef, dmg);
+				dmg = Math.floor(dmg);
+			
+				e.AddLustAbs(dmg);
+				
+				if(dmg >= 0) {
+					if(this.OnHit) this.OnHit(encounter, caster, e, dmg);
+				}
+				else {
+					if(this.OnAbsorb) this.OnAbsorb(encounter, caster, e, -dmg);
+				}
+				if(this.TargetEffect) this.TargetEffect(encounter, caster, e);
+			}
+			else
+				if(this.OnMiss) this.OnMiss(encounter, caster, e);
 		}
-		else {
-			if(this.OnAbsorb) this.OnAbsorb(encounter, caster, e, -dmg);
-		}
-		if(this.TargetEffect) this.TargetEffect(encounter, caster, e);
 	}
 	Text.Flush();
 	Gui.NextPrompt(function() {
@@ -67,6 +80,11 @@ TeaseSkill.prototype.OnHit = function(encounter, caster, target, dmg) {
 TeaseSkill.prototype.OnAbsorb = function(encounter, caster, target, dmg) {
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", is : target.is() };
 	Text.Add("[tName] [is] turned off, losing " + Text.BoldColor(dmg, "#000060") + " lust!", parse);
+	Text.NL();
+}
+TeaseSkill.prototype.OnMiss = function(encounter, caster, target) {
+	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s"};
+	Text.Add("[tName] manage[s] to resist the temptation!", parse);
 	Text.NL();
 }
 
@@ -188,12 +206,12 @@ Abilities.Seduction.Inflame.OnCast = function(encounter, caster, target) {
 	var parse = { Name: caster.NameDesc(), s: caster.plural() ? "" : "s", hisher: caster.hisher(), tname: target.nameDesc() };
 	Text.Add("[Name] slowly sing[s] a few verses of a soft, sensual melody, projecting [hisher] rich voice at [tname]. ", parse);
 }
-Abilities.Seduction.OnHit = function(encounter, caster, target, dmg) {
+Abilities.Seduction.Inflame.OnHit = function(encounter, caster, target, dmg) {
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s" };
 	Text.Add("[tName] squirm[s] at the subtle undertones of the song, becoming greatly aroused. [tName] gain[s] " + Text.BoldColor(dmg, "#FF8080") + " lust!", parse);
 	Text.NL();
 }
-Abilities.Seduction.OnAbsorb = function(encounter, caster, target, dmg) {
+Abilities.Seduction.Inflame.OnAbsorb = function(encounter, caster, target, dmg) {
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", poss: caster.possessive() };
 	Text.Add("[tName] manage[s] to shake off the desire-inducing effects of [poss] voice. ", parse);
 	Text.NL();

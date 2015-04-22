@@ -1286,6 +1286,25 @@ Entity.prototype.LDefense = function() {
 	return comStat /* * comLust*/ * comRand;
 }
 
+// TODO temp
+Entity.prototype.LHit = function() {
+	var hitStat = 3 * this.Lib() + 2 * this.Cha();
+	
+	return hitStat;
+}
+
+// TODO temp
+Entity.prototype.LEvade = function(attack) {
+	var evadeStat = 3 * this.Spi() + this.Sta() + this.Int();
+	
+	var blind = this.combatStatus.stats[StatusEffect.Blind];
+	if(blind) {
+		evadeStat *= (1 + blind.str);
+	}
+	
+	return evadeStat;
+}
+
 // TODO: How to handle resistances?
 Entity.prototype.PoisonResist = function() {
 	return 0;

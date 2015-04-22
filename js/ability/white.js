@@ -26,6 +26,7 @@ HealingSpell.prototype.CastInternal = function(encounter, caster, target) {
 	
 	for(var i = 0; i < targets.length; i++) {
 		var e      = targets[i];
+		if(e.Incapacitated()) continue;
 
 		var healing = healMod * caster.MAttack();
 		if(healing < 0) healing = 0;
