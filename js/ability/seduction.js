@@ -246,7 +246,7 @@ Abilities.Seduction.Soothe.CastInternal = function(encounter, caster, target) {
 		var mult = 1 + (Math.random()-0.5)*0.2;
 		var soothe = caster.Spi() * 3;
 		
-		e.AddLustAbs(soothe);
+		e.AddLustAbs(-soothe);
 		
 		this.OnHit(encounter, caster, e, soothe);
 	}
@@ -275,13 +275,13 @@ Abilities.Seduction.Captivate.Short = function() { return "Attempt to immobilize
 Abilities.Seduction.Captivate.CastInternal = function(encounter, caster, target) {
 	this.OnCast(encounter, caster, target)
 	
-	var hit    = hitMod * caster.LHit();
+	var hit    = caster.LHit();
 	var evade  = target.LEvade();
 	var toHit  = Ability.ToHit(hit, evade);
 	
 	var success = Math.random() < toHit;
 	if(success)
-		success = Status.Numb(target, { hit : 0.8, turns : 1, proc : 1 });
+		success = Status.Numb(target, { hit : 0.8, turns : 2, proc : 1 });
 	
 	if(success)
 		this.OnHit(encounter, caster, target);
@@ -326,9 +326,7 @@ Abilities.Seduction.Lull.name = "Lull";
 Abilities.Seduction.Lull.cost = { hp: null, sp: 10, lp: 10};
 Abilities.Seduction.Lull.Short = function() { return "Put the foe to sleep with a soothing song."; }
 Abilities.Seduction.Lull.CastInternal = function(encounter, caster, target) {
-	this.OnCast(encounter, caster, target)
-	
-	var hit    = hitMod * caster.LHit();
+	var hit    = caster.LHit();
 	var evade  = target.LEvade();
 	var toHit  = Ability.ToHit(hit, evade);
 	
