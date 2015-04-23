@@ -10,7 +10,7 @@ function Corishev(storage) {
 	this.name              = "Corishev";
 	
 	this.maxHp.base        = 1500;
-	this.maxSp.base        = 500;
+	this.maxSp.base        = 400;
 	this.maxLust.base      = 500;
 	// Main stats
 	this.strength.base     = 20;
@@ -36,22 +36,19 @@ function Corishev(storage) {
 	// Set hp and mana to full
 	this.SetLevelBonus();
 	this.RestFull();
+	// Start with some lust
+	this.AddLustFraction(0.4);
 
 	if(storage) this.FromStorage(storage);
 }
 Corishev.prototype = new BossEntity();
 Corishev.prototype.constructor = Corishev;
 
-//TODO DROPS
 Corishev.prototype.DropTable = function() {
 	var drops = [];
 	drops.push({ it: Items.Weapons.GolWhip });
-	
-	//TODO
-	drops.push({ it: Items.Armor.BronzeChest });
-	drops.push({ it: Items.Armor.BronzeLeggings });
-	drops.push({ it: Items.Testos });
-	
+	drops.push({ it: Items.Combat.LustDart });
+	drops.push({ it: Items.Accessories.SimpleCuffs });
 	return drops;
 }
 
