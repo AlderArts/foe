@@ -26,6 +26,8 @@ Abilities.EnemySkill.Sting.TargetEffect = function(encounter, caster, target) {
 	}
 }
 
+
+// Orchid
 Abilities.EnemySkill.TSnare = new AttackPhysical();
 Abilities.EnemySkill.TSnare.name = "T.Snare";
 Abilities.EnemySkill.TSnare.Short = function() { return "Slows down the target and raises lust."; }
@@ -214,6 +216,8 @@ Abilities.EnemySkill.TViolate.OnMiss = function(encounter, caster, target) {
 	Text.NL();
 }
 
+
+// Gol
 Abilities.EnemySkill.GolLustyPheromones = new TeaseSkill();
 Abilities.EnemySkill.GolLustyPheromones.name = "L.Pheromones";
 Abilities.EnemySkill.GolLustyPheromones.Short = function() { return "Attack with lusty pheromones."; }
@@ -303,3 +307,132 @@ Abilities.EnemySkill.GolPollen.OnHit = function(encounter, caster, target) {
 	}
 }
 Abilities.EnemySkill.GolPollen.OnMiss = null;
+
+
+// Corishev
+Abilities.EnemySkill.Corishev = {};
+Abilities.EnemySkill.Corishev.Whip = new AttackPhysical();
+Abilities.EnemySkill.Corishev.Whip.name = "Whip";
+Abilities.EnemySkill.Corishev.Whip.Short = function() { return "Corishev Whip."; }
+Abilities.EnemySkill.Corishev.Whip.atkMod = 1;
+Abilities.EnemySkill.Corishev.Whip.hitMod = 1;
+Abilities.EnemySkill.Corishev.Whip.damageType.pSlash = 1;
+Abilities.EnemySkill.Corishev.Whip.OnCast = function(encounter, caster, target) {
+	var parse = { tname : target.nameDesc() };
+	Text.Add("The lieutenant raises his arm, sending his whip lashing toward [tname].", parse);
+	Text.NL();
+}
+Abilities.EnemySkill.Corishev.Whip.TargetEffect = function(encounter, caster, target) {
+	var parse = { himher : target.himher() };
+	Text.Add("The whip’s lust inducing poison quickly seeps into the wound, arousing [himher]!", parse);
+	
+	target.AddLustFraction(0.3 * Math.random());
+}
+
+
+Abilities.EnemySkill.Corishev.Lashing = new AttackPhysical();
+Abilities.EnemySkill.Corishev.Lashing.name = "Corishev.Lashing";
+Abilities.EnemySkill.Corishev.Lashing.Short = function() { return "Corishev lashing."; }
+Abilities.EnemySkill.Corishev.Lashing.cost = { hp: null, sp: 30, lp: 50};
+Abilities.EnemySkill.Corishev.Lashing.atkMod = 0.6;
+Abilities.EnemySkill.Corishev.Lashing.hitMod = 0.7;
+Abilities.EnemySkill.Corishev.Lashing.nrAttacks = 4;
+Abilities.EnemySkill.Corishev.Lashing.damageType.pPierce = 1;
+Abilities.EnemySkill.Corishev.Lashing.OnCast = function(encounter, caster, target) {
+	var parse = { tname : target.nameDesc() };
+	Text.Add("Laughing maniacally, Corishev swings his whip wildly, raining down a hail of lashes on [tname].", parse);
+	Text.NL();
+}
+Abilities.EnemySkill.Corishev.Lashing.OnHit = function(encounter, caster, target, dmg) {
+	var parse = { tposs : target.possessive(), skin : target.SkinDesc() };
+	
+	Text.Add("The barbed tip of the poisoned whip slashes across [tposs] [skin], dealing " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
+	Text.NL();
+}
+Abilities.EnemySkill.Corishev.Lashing.OnMiss = function(encounter, caster, target) {
+	var parse = { HeShe: target.HeShe(), s: target.plural() ? "" : "s" };
+	
+	Text.Add("[HeShe] barely manage[s] to evade the blow.", parse);
+	Text.NL();
+}
+
+
+Abilities.EnemySkill.Corishev.WideStrike = new AttackPhysical();
+Abilities.EnemySkill.Corishev.WideStrike.name = "Corishev.WideStrike";
+Abilities.EnemySkill.Corishev.WideStrike.Short = function() { return "Corishev lashing."; }
+Abilities.EnemySkill.Corishev.WideStrike.cost = { hp: null, sp: 30, lp: 30};
+Abilities.EnemySkill.Corishev.WideStrike.atkMod = 1.2;
+Abilities.EnemySkill.Corishev.WideStrike.targetMode = TargetMode.Enemies;
+Abilities.EnemySkill.Corishev.WideStrike.damageType.pPierce = 1;
+Abilities.EnemySkill.Corishev.WideStrike.OnCast = function(encounter, caster, target) {
+	var parse = {};
+	Text.Add("The crazed lieutenant swings his whip in an arc, hoping to catch the both of you with a single strike.", parse);
+	Text.NL();
+}
+Abilities.EnemySkill.Corishev.WideStrike.OnHit = function(encounter, caster, target, dmg) {
+	var parse = { tposs : target.possessive(), himher : target.himher() };
+	
+	Text.Add("Poisoned barbs sink into [tposs] flesh, causing [himher] to take " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
+	Text.NL();
+}
+Abilities.EnemySkill.Corishev.WideStrike.OnMiss = function(encounter, caster, target) {
+	var parse = { tname : target.nameDesc() };
+	
+	Text.Add("Thankfully, the blow swings wide, missing [tname] completely.", parse);
+	Text.NL();
+}
+
+
+Abilities.EnemySkill.Corishev.SelfHarm = new Ability();
+Abilities.EnemySkill.Corishev.SelfHarm.name = "SelfHarm";
+Abilities.EnemySkill.Corishev.SelfHarm.Short = function() { return "Corishev SelfHarm."; }
+Abilities.EnemySkill.Corishev.SelfHarm.targetMode = TargetMode.Self;
+Abilities.EnemySkill.Corishev.SelfHarm.CastInternal = function(encounter, caster) {
+	var parse = {
+		
+	};
+	
+	Text.Add("<i>“Yes… Yes!”</i> Corishev pants, the sounds of his whip repeatedly hitting his own flesh echoing throughout the dungeon. <i>“Ah… the fight excites me so… I’ll let you have a taste of it too, this burning lust!”</i>", parse);
+	Text.Flush();
+	
+	caster.AddLustFraction(0.3);
+	
+	Status.Horny(caster, { hit : 2, str : 1, dmg : 0.1, turns : 3, turnsR : 3 });
+	
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
+
+
+Abilities.EnemySkill.Corishev.Punish = new AttackPhysical();
+Abilities.EnemySkill.Corishev.Punish.name = "Corishev.Punish";
+Abilities.EnemySkill.Corishev.Punish.Short = function() { return "Corishev lashing."; }
+Abilities.EnemySkill.Corishev.Punish.cost = { hp: null, sp: null, lp: 200 };
+Abilities.EnemySkill.Corishev.Punish.atkMod = 3;
+Abilities.EnemySkill.Corishev.Punish.hitMod = 2;
+Abilities.EnemySkill.Corishev.Punish.damageType.pPierce = 1;
+Abilities.EnemySkill.Corishev.Punish.OnCast = function(encounter, caster, target) {
+	var parse = { tname : target.nameDesc(), tName : target.NameDesc(), himher: target.himher(), is: target.is() };
+	Text.Add("<i>“You can feel it, can you not? This burning fire coursing through your veins...”</i> Corishev purrs as he licks his whip, fixing his eyes on [tname]. <i>“Let it flow, let the pain mix with the pleasure, until it consumes you whole!”</i> Whirling around with dizzying speed, the crazed lieutenant unleashes a massive attack toward [himher].", parse);
+	Text.NL();
+	
+	if(Status.Horny(target, { hit : 0.6, str : 1, dmg : 0.1, turns : 1, turnsR : 3 })) {
+		Text.Add("[tName] [is] horny! ", parse);
+		Text.NL();
+	}
+}
+Abilities.EnemySkill.Corishev.Punish.OnHit = function(encounter, caster, target, dmg) {
+	var parse = { tname : target.nameDesc(), is : target.is(), yIes: target.plural() ? "y" : "ies" };
+	
+	parse = target.ParserPronouns(parse);
+	
+	Text.Add("Caught by surprise - or perhaps distracted by [hisher] pounding heart - [tname] [is] unable to dodge the flurry of blows raining down on [himher]. [HeShe] cr[yIes] out in pain as the whip lacerates [hisher] flesh time and time again, dealing " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
+	Text.NL();
+}
+Abilities.EnemySkill.Corishev.Punish.OnMiss = function(encounter, caster, target) {
+	var parse = { tName: target.NameDesc(), is: target.is(), hisher: target.hisher(), skin: target.SkinDesc() };
+	
+	Text.Add("[tName] [is] barely able to avoid the brunt of Corishev’s onslaught, but some of the poison from his whip still lands on [hisher] [skin], causing some vicious burning.", parse);
+	Text.NL();
+}
