@@ -96,7 +96,9 @@ Outlaws.BullTower = {
 Outlaws.BullTowerQuest = {
 	NotStarted : 0,
 	Initiated  : 1,
-	Completed  : 2
+	Completed  : 2,
+	AlaricFollowup : 3,
+	ZenithFollowup : 4
 };
 
 /*
@@ -2263,19 +2265,19 @@ Scenes.BullTower.EndingInjured = function() {
 	Scenes.BullTower.EndingDebrief(true);
 }
 
-//TODO score, loot, money
 Scenes.BullTower.EndingDebrief = function(injured) {
 	var parse = {
 		playername : player.name
 	};
 	
-	MoveToLocation(world.loc.Outlaws.Camp, {hour: 3});
+	party.location = world.loc.Outlaws.Camp;
+	world.TimeStep({hour: 3});
 	
 	Text.Flush();
 	
 	outlaws.flags["BullTower"] = Outlaws.BullTowerQuest.Completed;
 	
-	var foundOut = outlaws.BT.Suspicion() < 100;
+	var foundOut = outlaws.BT.Suspicion() >= 100;
 	if(outlaws.BT.foughtCorishev && !(outlaws.AlaricSaved()))
 		foundOut = true;
 	
@@ -2413,7 +2415,7 @@ Scenes.BullTower.EndingDebrief = function(injured) {
 			
 			Gui.NextPrompt();
 			
-			//TODO SET TIMER
+			outlaws.BTRewardTimer = new Time(0,0,3,0,0);
 		});
 		
 	});
@@ -2421,7 +2423,6 @@ Scenes.BullTower.EndingDebrief = function(injured) {
 }
 
 
-// TODO Link
 //#This will trigger three days after the event if the player saved Alaric.
 Scenes.BullTower.AftermathAlaric = function() {
 	var parse = {
@@ -2493,15 +2494,16 @@ Scenes.BullTower.AftermathAlaric = function() {
 		
 		world.TimeStep({minute: 20});
 		
-		//TODO Set flag
+		outlaws.BTRewardTimer = new Time(0,0,1,0,0);
+		
+		outlaws.flags["BullTower"] = Outlaws.BullTowerQuest.AlaricFollowup;
 		
 		Gui.NextPrompt();
 	});
 }
 
 
-// TODO LINK
-//#Triggers three days after the quest if the player has at least stolen the goods and payoff. Alaric’s scene takes precedence over this, though.
+//#Triggers one day after the Alaric scene if the player has at least stolen the goods and payoff.
 Scenes.BullTower.AftermathZenith = function() {
 	var parse = {
 		playername : player.name
@@ -2573,7 +2575,7 @@ Scenes.BullTower.AftermathZenith = function() {
 	
 	world.TimeStep({hour: 1});
 	
-	//TODO SET FLAG
+	outlaws.flags["BullTower"] = Outlaws.BullTowerQuest.ZenithFollowup;
 	
 	Gui.NextPrompt();
 }
