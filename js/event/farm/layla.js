@@ -1781,7 +1781,7 @@ Scenes.Layla.Appearance = function(switchSpot) {
 	}
 	Text.NL();
 	// Pregnancy
-	var womb = terry.PregHandler().Womb();
+	var womb = layla.PregHandler().Womb();
 	var preg = womb && womb.pregnant;
 	var stage = preg ? womb.progress : null;
 	if(preg && stage > 0.8) {
