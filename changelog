@@ -8,6 +8,7 @@ CHANGELOG for Fall of Eden
 Version 0.4b
 ------------
 * Fixed a bug where Layla would appear pregnant when actually Terry was. Weird, that.
+* Fixed a Bull Tower bug that would cause the ending to loop, resulting in all kinds of weirdness.
 
 --------------------------------------------
              PREVIOUS VERSIONS
