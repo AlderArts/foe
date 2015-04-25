@@ -25,7 +25,8 @@ BullTowerStats.prototype.StoleSomething = function() {
 BullTowerStats.prototype.Suspicion = function() {
 	return this.suspicion.Get();
 }
-// outlaws.BT.IncSuspicion(100, 2.5);
+BullTowerStats.MoveSuspicion = 4;
+// outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 BullTowerStats.prototype.IncSuspicion = function(max, inc) {
 	var parse = {
 		
@@ -563,7 +564,7 @@ world.loc.BullTower.Courtyard.Yard.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
-		outlaws.BT.IncSuspicion(100, 2.5);
+		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 world.loc.BullTower.Courtyard.Yard.links.push(new Link(
@@ -571,7 +572,7 @@ world.loc.BullTower.Courtyard.Yard.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(world.loc.BullTower.Courtyard.Caravans, {minute: 5});
-		outlaws.BT.IncSuspicion(100, 2.5);
+		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 world.loc.BullTower.Courtyard.Yard.links.push(new Link(
@@ -579,7 +580,7 @@ world.loc.BullTower.Courtyard.Yard.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(world.loc.BullTower.Courtyard.Pens, {minute: 5});
-		outlaws.BT.IncSuspicion(100, 2.5);
+		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 
@@ -658,7 +659,7 @@ world.loc.BullTower.Courtyard.Yard.events.push(new Link(
 				world.TimeStep({minute: 5});
 				
 				Gui.NextPrompt();
-				outlaws.BT.IncSuspicion(100, 2.5);
+				outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 			}, enabled : true,
 			tooltip : "Nah, it can wait."
 		});
@@ -735,7 +736,7 @@ world.loc.BullTower.Courtyard.Caravans.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(world.loc.BullTower.Courtyard.Yard, {minute: 5});
-		outlaws.BT.IncSuspicion(100, 2.5);
+		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 
@@ -895,7 +896,7 @@ world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
 			Text.Add("You decide that messing with these guards isn’t worth it right now. With that thought in mind, you slink back into the safety of the shadows, Cveta in tow.", parse);
 			Text.NL();
 			PrintDefaultOptions(true);
-			outlaws.BT.IncSuspicion(100, 2.5);
+			outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 		});
 	}
 ));
@@ -918,7 +919,7 @@ Scenes.BullTower.GuardsWin = function() {
 		outlaws.BT.guardsDown = true;
 		
 		Gui.NextPrompt();
-		outlaws.BT.IncSuspicion(100, 2.5);
+		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	});
 	Encounter.prototype.onVictory.call(enc);
 }
@@ -968,7 +969,7 @@ world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
 		outlaws.flags["BT"] |= Outlaws.BullTower.CaravansSearched;
 		
 		Gui.NextPrompt();
-		outlaws.BT.IncSuspicion(100, 2.5);
+		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 
@@ -1019,7 +1020,7 @@ world.loc.BullTower.Courtyard.Caravans.events.push(new Link(
 				if(!(outlaws.flags["BT"] & Outlaws.BullTower.AlaricFreed))
 					outlaws.BT.IncSuspicion(100, 30);
 				else
-					outlaws.BT.IncSuspicion(100, 2.5);
+					outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 			}, enabled : true,
 			tooltip : "Light ‘em up!"
 		});
@@ -1057,7 +1058,7 @@ world.loc.BullTower.Courtyard.Pens.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(world.loc.BullTower.Courtyard.Yard, {minute: 5});
-		outlaws.BT.IncSuspicion(100, 2.5);
+		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 
@@ -1125,7 +1126,7 @@ world.loc.BullTower.Building.Hall.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(world.loc.BullTower.Courtyard.Yard, {minute: 5});
-		outlaws.BT.IncSuspicion(100, 2.5);
+		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 world.loc.BullTower.Building.Hall.links.push(new Link(
@@ -1158,7 +1159,7 @@ world.loc.BullTower.Building.Hall.links.push(new Link(
 			Text.Flush();
 			Gui.NextPrompt();
 		}
-		outlaws.BT.IncSuspicion(100, 2.5);
+		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 world.loc.BullTower.Building.Hall.links.push(new Link(
@@ -1166,7 +1167,7 @@ world.loc.BullTower.Building.Hall.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(world.loc.BullTower.Building.Office, {minute: 5});
-		outlaws.BT.IncSuspicion(100, 2.5);
+		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 world.loc.BullTower.Building.Hall.links.push(new Link(
@@ -1174,7 +1175,7 @@ world.loc.BullTower.Building.Hall.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(world.loc.BullTower.Building.Cell, {minute: 5});
-		outlaws.BT.IncSuspicion(100, 2.5);
+		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 world.loc.BullTower.Building.Hall.links.push(new Link(
@@ -1182,7 +1183,7 @@ world.loc.BullTower.Building.Hall.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(world.loc.BullTower.Building.Watchtower, {minute: 5});
-		outlaws.BT.IncSuspicion(100, 2.5);
+		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 
@@ -1201,7 +1202,7 @@ world.loc.BullTower.Building.Cell.onEntry = function() {
 		
 		Gui.NextPrompt(function() {
 			MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
-			outlaws.BT.IncSuspicion(100, 2.5);
+			outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 		});
 	}
 	else {
@@ -1236,7 +1237,7 @@ world.loc.BullTower.Building.Cell.onEntry = function() {
 				
 				Gui.NextPrompt(function() {
 					MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
-					outlaws.BT.IncSuspicion(100, 2.5);
+					outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 				});
 			}, enabled : true,
 			tooltip : "As much as you want to burst in right now, you realize that it’s better to prepare first."
@@ -1618,7 +1619,7 @@ world.loc.BullTower.Building.Office.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
-		outlaws.BT.IncSuspicion(100, 2.5);
+		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 
@@ -1849,7 +1850,7 @@ world.loc.BullTower.Building.Warehouse.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
-		outlaws.BT.IncSuspicion(100, 2.5);
+		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 
@@ -1872,7 +1873,7 @@ world.loc.BullTower.Building.Warehouse.events.push(new Link(
 		outlaws.flags["BT"] |= Outlaws.BullTower.ContrabandStolen;
 		
 		Gui.NextPrompt();
-		outlaws.BT.IncSuspicion(100, 2.5);
+		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 
@@ -1907,7 +1908,7 @@ world.loc.BullTower.Building.Warehouse.events.push(new Link(
 		outlaws.flags["BT"] |= Outlaws.BullTower.BlueRoses;
 		
 		Gui.NextPrompt();
-		outlaws.BT.IncSuspicion(100, 2.5);
+		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 
@@ -1927,7 +1928,7 @@ world.loc.BullTower.Building.Watchtower.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(world.loc.BullTower.Building.Hall, {minute: 5});
-		outlaws.BT.IncSuspicion(100, 2.5);
+		outlaws.BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	}
 ));
 
