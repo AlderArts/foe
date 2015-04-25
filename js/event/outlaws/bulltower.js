@@ -182,7 +182,7 @@ Scenes.BullTower.Initiation = function() {
 	Text.NL();
 	Text.Add("It seems rather impolite to decline the outlaw leader, so you nod.", parse);
 	Text.NL();
-	Text.Add("<i>“Everyone’s waiting,”<i> he rumbles. <i>“Let’s go.”</i>", parse);
+	Text.Add("<i>“Everyone’s waiting,”</i> he rumbles. <i>“Let’s go.”</i>", parse);
 	Text.NL();
 	Text.Add("What Zenith means by ‘everyone’ soon becomes clear: you’re led to his tent, and a small group has gathered within, clustered around the map table, sitting on anything and everything that can serve as a seat. You recognize Maria, Cveta, and a few others, but most of those present aren’t known to you. It seems like a pretty lively conversation’s going on, too.", parse);
 	Text.NL();
