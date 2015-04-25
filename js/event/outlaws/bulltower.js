@@ -35,7 +35,7 @@ BullTowerStats.prototype.IncSuspicion = function(max, inc) {
 	this.suspicion.IncreaseStat(max, inc);
 	var newSuspicion = this.Suspicion();
 	
-	if(newSuspicion >= 100) {
+	if(newSuspicion >= 100 && oldSuspicion < 100) {
 		Gui.Callstack.push(function() {
 			Text.Clear();
 			Text.Add("Sneaking through the fortress grounds, you suddenly hear a shout echoing across the old courtyard. Hoping that it’s just a fluke, you emerge to investigate, but the shout is quickly followed by the old bell in the tower being sounded, the steady bong-bong-bong of the striker hitting metal breaking the silence of night like a hammer against a window pane. Someone’s finally noticed what you’ve been up to, and the guards’ attention is turning inwards as they realize that the fortress has been infiltrated all this while.", parse);
