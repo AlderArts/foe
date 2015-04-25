@@ -2035,7 +2035,7 @@ Scenes.Layla.FarmMeetingTrigger = function(approach) {
 	if(glade.flags["Visit"] < 2) return false; //TODO: change to after portals open?
 	if(layla.flags["Met"] == Layla.Met.NotMet) {
 		if(approach) {
-			if(world.time.hour >= 11 && world.time.hour < 16) {
+			if(world.time.hour >= 8 && world.time.hour < 18) {
 				Scenes.Layla.FirstMeeting(true);
 				return true;
 			}
@@ -2049,7 +2049,7 @@ Scenes.Layla.FarmMeetingTrigger = function(approach) {
 	else if(layla.flags["Met"] == Layla.Met.First) {
 		if(!layla.farmTimer.Expired()) return false;
 		if(approach) {
-			if(world.time.hour >= 11 && world.time.hour < 16) {
+			if(world.time.hour >= 8 && world.time.hour < 18) {
 				Scenes.Layla.RepeatMeeting(true);
 				return true;
 			}
