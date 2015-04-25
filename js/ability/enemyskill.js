@@ -326,7 +326,7 @@ Abilities.EnemySkill.Corishev.Whip.TargetEffect = function(encounter, caster, ta
 	var parse = { Name: target.NameDesc(), is: target.is(), himher : target.himher() };
 	Text.Add("The whip’s lust inducing poison quickly seeps into the wound, arousing [himher]!", parse);
 	
-	target.AddLustFraction(0.3 * Math.random());
+	target.AddLustFraction(0.2 + 0.3 * Math.random());
 	
 	if(Status.Bleed(target, { hit : 0.6, str : 1, dmg : 0.1, turns : 1, turnsR : 2 })) {
 		Text.NL();
