@@ -4867,8 +4867,9 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 			
 			Text.NL();
 		
-			var len = playerCock.length.Get();
-			var cap = kiakai.Butt().capacity.Get();
+			var len = playerCock.Len();
+			var thk = playerCock.Thickness();
+			var cap = kiakai.Butt().Cap();
 				
 			// First time
 			if(kiakai.flags["SexPitchAnal"] == 0) {
@@ -4894,14 +4895,14 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 				Text.Add("<i>“Don't be such a baby. See? There goes another inch!”</i> you tell [himher] encouragingly, pushing another fraction of your length into [himher] to match your words.", parse);
 				Text.NL();
 				
-				if(len < cap / 2) {
+				if(len < 15) {
 					Text.Add("<i>“That wasn't so bad, was it?”</i> you comfort [name] as your [hipsDesc] lightly tap against [hisher] [kButtDesc], your [cockDesc] bottoming out inside the elf.", parse);
 					Text.NL();
 					Text.Add("<i>“I... I guess,”</i> [name] whimpers.", parse);
 					Text.NL();
 					Text.Add("Then doing it a few more times shouldn't be a problem, should it?", parse);
 				}
-				else if(len <= cap) {
+				else if(len < 22) {
 					Text.Add("<i>“Halfway there!”</i> you announce happily, continuing to push your [cockDesc] forward, burying it bit by bit inside the elf.", parse);
 					Text.NL();
 					Text.Add("<i>“T-there is more?!”</i> [name] gasps, <i>“It will not fit!”</i>", parse);
@@ -4913,19 +4914,19 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 					Text.NL();
 					Text.Add("<i>“Nonsense.”</i> The first six inches bury inside [himher] without any problems.", parse);
 					Text.NL();
-					if(cap > 23) {
+					if(len > 23) {
 						Text.Add("<i>“You are tearing me asunder!”</i> the elf cries out. Nine inches.", parse);
 						Text.NL();
 					}
-					if(cap > 30) {
+					if(len > 30) {
 						Text.Add("<i>“P-please,”</i> [name] whimpers. Twelve inches. You are starting to encounter resistance, and you sense that you are close to reaching the elf's limits.", parse);
 						Text.NL();
 					}
-					if(cap > 40) {
+					if(len > 40) {
 						Text.Add("Fifteen inches. By now, the elf's protests are reduced to wordless moans.", parse);
 						Text.NL();
 					}
-					if(cap > 50) {
+					if(len > 50) {
 						Text.Add("...Twenty inches. By Aria indeed, just how much can [heshe] fit?", parse);
 						Text.NL();
 					}
@@ -4942,9 +4943,9 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 				
 				parse["balls"] = kiakai.HasBalls() && player.HasBalls() ? Text.Parse(", your balls lightly slapping against [hishers]", parse) : "";
 				
-				if(len < cap / 2)
+				if(len < 20)
 					Text.Add("Your [cockDesc] easily bottoms out in your groaning companion, joining the two of you at the hip[balls].", parse);
-				else if(len <= cap)
+				else if(len < 35)
 					Text.Add("It takes some effort, but soon all of your [cockDesc] is lodged inside the groaning elf, testing the limits of [hisher] body.", parse);
 				else
 					Text.Add("Try as you might, you can't fit all of your impressive length inside the groaning elf, leaving a significant portion of the [cockDesc] outside as you strain against [name]'s physical limits.", parse);
@@ -4952,7 +4953,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 			Text.NL();
 			Text.Add("<i>“I'm going to start moving now,”</i> you announce, beginning your slow withdrawal from [hisher] expanded tunnel. Leaving a trail of fire in the elf's ravaged innards, you pull your [cockDesc] almost completely back out, preparing to plunge in again. Poised on the edge, with just the tip of your [cockDesc] still resting inside the elf, you lovingly caress [hisher] bare behind.", parse);
 			Text.NL();
-			parse["stretch"] = len >= cap ? Text.Parse(", stretching the elf to [hisher] limits", parse) : "";
+			parse["stretch"] = thk >= cap ? Text.Parse(", stretching the elf to [hisher] limits", parse) : "";
 			Text.Add("Your next thrust is much faster than the first, not stopping to let [name] adjust to the sudden intrusion until you have bottomed out[stretch].", parse);
 			Text.NL();
 			Text.Add("<i>“Hah... hah...”</i> overwhelmed by the feelings of pleasure and pain wrecking [hisher] [kAnusDesc], [name] can hardly keep [himher]self up, and only your firm grip on [hisher] [kHipsDesc] prevents [himher] from collapsing in a quivering puddle.", parse);
@@ -4965,7 +4966,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 			else {
 				Text.NL();
 				Text.Add("<i>“M-more!”</i> [name] begs you, <i>“take me deeper!”</i> With [hisher] extensive experience with anal sex, you don't doubt that [heshe] could take it.", parse);
-				if(kiakai.SPLevel() < 0.75 && cap < len) {
+				if(kiakai.SPLevel() < 0.75 && cap < thk) {
 					Text.NL();
 					Text.Add("A glimmer of a naughty idea flits through your mind, but the elf seems too exhausted for it to be enacted.", parse);
 				}
@@ -5035,7 +5036,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 						Text.Clear();
 						
 						if(player.FirstCock()) {
-							parse["depth"] = len > cap ? "as far as you can go" : "until your hips are connected";
+							parse["depth"] = len > 35 ? "as far as you can go" : "until your hips are connected";
 							Text.Add("Finally, you can feel your climax approaching rapidly. Pushing into the elf [depth], you switch from thrusting to slowly grinding against the depths of [hisher] passage.", parse);
 							if(playerCock.knot)
 								Text.Add(" Pretty soon you have little choice but to stay where you are, as your swelling knot traps you inside the moaning elf.", parse);
@@ -5124,7 +5125,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 								Text.Add(" The elf's stomach bulges slightly from the excessive quantity of spunk being pumped into [himher].", parse);
 							Text.NL();
 							
-							if(playerCock.knot && len < cap) {
+							if(playerCock.knot && len < 35) {
 								Text.Add("Not a single drop escapes from [name]'s ravaged hole, as your [knotDesc] seals [hisher] [kAnusDesc] shut. Seems like you will be here for a while.", parse);
 								if(player.LustLevel() > 0.5)
 									Text.Add(" For good measure, you grind against [name]'s bum, trying to squeeze another orgasm out of the two of you before your energy is completely spent. Your knot doesn't give you much leeway, but it is enough for your intentions.", parse);
@@ -5172,7 +5173,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 				}, enabled : true,
 				tooltip : Text.Parse("[HeShe] can take it, give [himher] a rough ride.", parse)
 			});
-			if(kiakai.flags["AnalExp"] < 30 && kiakai.subDom.Get() < 0) {
+			if(kiakai.flags["AnalExp"] >= 20 && kiakai.subDom.Get() < 0) {
 				options.push({ nameStr : "Ruin",
 					func : function() {
 						Text.Clear();
@@ -5200,9 +5201,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 							parse["isAre"] = kiakai.NumCocks() > 1 ? "are" : "is";
 							Text.Add("[name]'s [kMultiCockDesc] [isAre] drooling cum, the thick fluid seeping out continuously rather than coming in short bursts. You'd guess [heshe] has orgasmed several times, but [hisher] body is too confused to handle the intense sensation.", parse);
 							Text.NL();
-							var cum = kiakai.OrgasmCum();
-							var cum = kiakai.OrgasmCum();
-							var cum = kiakai.OrgasmCum();
+							var cum = kiakai.OrgasmCum(3);
 						}
 						Text.Add("The two of you lose all sense of time, your world reduced to relishing in your carnal desires, the relentless pounding of flesh, the tingling wash of healing energy that courses through you.", parse);
 						Text.Flush();
@@ -5216,13 +5215,13 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 								
 								var cum = player.OrgasmCum();
 								
-								if(playerCock.knot && len < 1.2 * cap) {
+								if(playerCock.knot && thk < 1.2 * cap) {
 									Text.Add("So close... if you could only push a little bit more in, you could knot the elf. Groaning, you keep pushing, trying to force your swelling knot past [name]'s sphincter. [HeShe] tries to protest weakly, there is way too much, and [heshe] is stretched past [hisher] limits already. You are past reason though, taken over by animalistic need, the irrational urge to breed the elf.", parse);
 									Text.NL();
 									Text.Add("Both of you cry out as something gives, and your [knotDesc] finally snaps inside [himher]. No amount of preparation could help [name] for the intense stretching, and the elf almost passes out. There is no going back now, you are firmly stuck inside [himher], and you are likely to stay that way for a while.", parse);
 									Text.NL();
 									
-									kiakai.Butt().capacity.IncreaseStat(len, 3);
+									kiakai.Butt().capacity.IncreaseStat(thk, 1);
 									world.TimeStep({minute: 30});
 								}
 								if(cum > 3) {
@@ -5276,7 +5275,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 							
 							Gui.NextPrompt();
 						});
-					}, enabled : cap < len && kiakai.SPLevel() >= 0.75,
+					}, enabled : cap < thk && kiakai.SPLevel() >= 0.75,
 					tooltip : Text.Parse("You are beyond caring about anything but your own pleasure. Your [cockDesc] is way too big, but you'll make [himher] take it.", parse)
 				});
 			}
