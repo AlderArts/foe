@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 4;
-VERSION_SUBSCRIPT = "a";
-VERSION_NAME = "Bull Tower";
+VERSION_SUBSCRIPT = "a2";
+VERSION_NAME = "Bug Tower";
 
 SAVE_VERSION = 25;
 // Save version 1: Initial

@@ -7,15 +7,19 @@ CHANGELOG for Fall of Eden
 
 Version 0.4b
 ------------
+* 
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
+Version 0.4a2
+-------------
 * Fixed a bug where Layla would appear pregnant when actually Terry was. Weird, that.
 * Increased the timespan when Layla could be encountered to 8-18.
 * Fixed a Bull Tower bug that would cause the ending to loop, resulting in all kinds of weirdness.
 * Increased the suspicion gain from moving about in Bull Tower, making it more difficult to get away clean. Perfect run should be 60 suspicion.
 * Increased the lust gain from Corishev's whip.
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.4a
 ------------
