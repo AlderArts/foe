@@ -7,6 +7,10 @@ TODO for Fall of Eden
 
 
 - Diva stats/abilities
+- Health potion
+- Magic shop items
+
+
 
 Rigard:
 TSL
@@ -38,6 +42,14 @@ TFs
 
 Capacity rewrite: there are some rather large capacity increases left here and there.
 Also, there's some NPCs that can no longer be fucked due to the changes (terry, kia). Look into.
+
+
+Combat rewrite:
+* Delayed actions/casting time, cancellable
+* Damage types (more flexible basic attack). Damage hp/sp/lp
+
+* Persistent status effects
+
 
 IDEAS:
 ------
