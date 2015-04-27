@@ -64,6 +64,9 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 			}
 		});
 	}
+	
+	list = _.sortBy(list, 'nameStr');
+	
 	Gui.SetButtonsFromList(list, backPrompt, backPrompt);
 	Text.Flush();
 }
