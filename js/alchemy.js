@@ -13,7 +13,6 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 	if(!preventClear)
 		Text.Clear();
 	Text.Add("[name] can transmute the following items:", {name: alchemist.NameDesc()});
-	Text.NL();
 	
 	list = [];
 	for(var i = 0; i < alchemist.recipes.length; i++) {
@@ -30,10 +29,9 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 			if(!en) str += "</b>";
 			enabled &= en;
 		}
-		Text.Add(str);
-		Text.NL();
 		
 		list.push({
+			_recipeStr: str,
 			nameStr: item.name,
 			enabled: enabled,
 			tooltip: item.Long(),
@@ -66,6 +64,11 @@ Alchemy.AlchemyPrompt = function(alchemist, inventory, backPrompt, callback, pre
 	}
 	
 	list = _.sortBy(list, 'nameStr');
+	
+	_.each(list, function(it) {
+		Text.NL();
+		Text.Add(it._recipeStr);
+	});
 	
 	Gui.SetButtonsFromList(list, backPrompt, backPrompt);
 	Text.Flush();
