@@ -15,6 +15,9 @@ function Patchwork(storage) {
 	 * Set up patchworks shop
 	 */
 	this.Shop = new Shop();
+	
+	this.Shop.AddItem(Items.Combat.HPotion, 5, null, Scenes.Patchwork.BuyFunc);
+	
 	this.Shop.AddItem(Items.Equinium, 5, null, Scenes.Patchwork.BuyFunc);
 	//this.Shop.AddItem(Items.HorseHair, 5, null, Scenes.Patchwork.BuyFunc);
 	this.Shop.AddItem(Items.HorseShoe, 5, null, Scenes.Patchwork.BuyFunc);

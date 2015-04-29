@@ -113,19 +113,19 @@ AttackPhysical.prototype.OnAbsorb = function(encounter, caster, target, dmg) {
 Items.Combat = {};
 
 Items.Combat.HPotion = new CombatItem("pot0", "H.Potion");
-Items.Combat.HPotion.price = 25;
+Items.Combat.HPotion.price = 20;
 Items.Combat.HPotion.Short = function() { return "A health potion."; }
 Items.Combat.HPotion.Long = function() { return "A weak health potion."; }
 Items.Combat.HPotion.targetMode = TargetMode.Ally;
 Items.Combat.HPotion.UseCombatInternal = function(encounter, caster, target) {
-	var parse = {
-		
-	};
-	// TODO
+	var parse = { Name: caster.NameDesc(), s: caster.plural() ? "" : "s", tName : target.nameDesc() };
 	Text.Clear();
-	Text.Add("", parse);
+	Text.Add("[Name] use[s] a potion.", parse);
 	Text.NL();
+	Text.Add("It heals [tName] for " + Text.BoldColor(100, "#008000") + "!", parse);
 	Text.Flush();
+	
+	target.AddHPAbs(100);
 	
 	Gui.NextPrompt(function() {
 		encounter.CombatTick();
