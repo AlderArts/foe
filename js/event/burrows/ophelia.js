@@ -200,8 +200,15 @@ Scenes.Ophelia.LabDesc = function() {
 			Text.Add("The lab is run by one of the brainy lagomorphs after Ophelia’s downfall. These days, the former alchemist spends all her time in the Pit with her mother; a dutiful breeding slut to Lagon.", parse);
 		else if(ophelia.IsAtLocation())
 			Text.Add("Ophelia is at her workbench, working on a new experiment of some sort.", parse);
-		else
-			Text.Add("You don’t see the owner of the lab anywhere, though signs of relatively recent activity tell you she probably isn’t very far away. Perhaps she has gone to sleep, or to speak with her father.", parse);
+		else {
+			Text.Add("You don’t see the owner of the lab anywhere, though signs of relatively recent activity tell you she probably isn’t very far away. Perhaps she has gone to sleep", parse);
+			if(burrows.VenaRestored())
+				Text.Add(", or to speak with her mother.");
+			else if(burrows.LagonDefeated())
+				Text.Add(".");
+			else
+				Text.Add(", or to speak with her father.");
+		}
 	}
 	Text.NL();
 }

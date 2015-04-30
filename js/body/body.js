@@ -1398,7 +1398,7 @@ Body.prototype.HipsDesc = function(plural) {
 	if(size >= 8 && size < 17) {
 		if(this.femininity.Get() > 0) {
 			adjs.push("womanly");
-			adjs.push("vulptous");
+			adjs.push("voluptuous");
 		}
 		adjs.push("wide");
 		adjs.push("thick");

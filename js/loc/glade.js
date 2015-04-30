@@ -38,7 +38,7 @@ world.loc.Forest.Glade.description = function() {
 		
 	};
 	
-	Text.Add("As always, there is a serene stillness to the dryad’s glade. A few nymphs are playing around in the spring, their peals of laughter a pure song of joy. Yet more forest creatures lounge about the flower field, waving to you when they see you. A soft glow that seems to emanate from the spring itself spreads warmth throughout the area.", parse);
+	Text.Add("As always, there is a serene stillness to the dryads’ glade. A few nymphs are playing around in the spring, their peals of laughter a pure song of joy. More forest creatures lounge about the flower field, waving to you when they see you. A soft glow that seems to emanate from the spring itself spreads warmth throughout the area.", parse);
 	Text.NL();
 	Text.Add("At the center of the glade stands the old Mother Tree, the voluptuous dryad herself resting on some of the low roots.", parse);
 	Text.NL();

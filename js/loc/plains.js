@@ -36,6 +36,7 @@ world.loc.Plains.Crossroads.description = function() {
 	
 	Text.Clear();
 	Text.Add("The rolling plains go on for miles and miles around you, the occasional farm or homestead breaking the monotonous flatlands. You are standing on an intersection of several major roads leading off into the distance. The main thoroughfare leads to [Rigard] in one direction, and up into a rougher, hillier country in the other, snowy mountains reaching for the sky far away.", parse);
+	Text.NL();
 	Text.Add("Crossing this path is a smaller, less travelled one, leading from the deep forest into a dry wasteland in the other direction. [TreeFar]", parse);
 	Text.NL();
 	Text.Add("Nearby, there is a low hill with some strange standing stones on it. ", parse);

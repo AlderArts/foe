@@ -1110,8 +1110,8 @@ Scenes.Terry.SexPitchAnal = function(cocksInAss) {
 									Text.Add("That’s... that’s a very welcoming idea. Deciding words are unnecessary, you gently pull yourself free of Terry’s ass, letting your seed start to [seeppourgush] from [hisher] depths. Once [heshe]’s properly uncorked, you ease [himher] fully to the ground, snuggling up closer and wrapping your arms around the [foxvixen] as you rest your head in the crook of [hisher] neck.", parse);
 								}
 								else {
-									parse["c"] = cum > 6 ? "pregnant-looking" :
-									             cum > 3 ? "distended" : "";
+									parse["c"] = cum > 6 ? " pregnant-looking" :
+									             cum > 3 ? " distended" : "";
 									Text.Add("<i>“Yes, hmm. Let it all out for me,”</i> [heshe] says, patting [hisher][c] belly. <i>“Pack me full of your seed.”</i>", parse);
 									Text.NL();
 									Text.Add("You shudder, managing to squeeze out a last tiny trickle of semen, before announcing that [heshe]’s as full as you can make [himher].", parse);

@@ -2684,7 +2684,7 @@ Scenes.Lagon.InteractDefeated = function() {
 		Gui.SetButtonsFromList(options, false, null);
 	}
 	else if(~lagon.flags["Usurp"] & Lagon.Usurp.JailSec) {
-		Text.Add("The guards on duty seem to recognize you from last time. They raise their spears in a somewhat clumsy yet sincere salute and nod to you before opening the door. You return the nod and square your shoulders, striding past them. You doubt that this encounter with the king will be more pleasant than the last.", parse);
+		Text.Add("The guards on duty seem to recognize you from last time. They raise their spears in a somewhat clumsy, yet sincere salute and nod to you before opening the door. You return the nod and square your shoulders, striding past them. You doubt that this encounter with the king will be more pleasant than the last.", parse);
 		Text.NL();
 		Text.Add("<i>“Back again?”</i> Lagon is lounging on his bed, and he throws you a malicious glare as you enter the cell. The former king hops to his feet in a smooth motion, standing to face you. Well, at least he’s not trying to jump you again.", parse);
 		Text.NL();
@@ -2730,7 +2730,7 @@ Scenes.Lagon.InteractDefeated = function() {
 	else {
 		Text.Add("The guards on duty seem to recognize you. They raise their spears in a somewhat clumsy yet sincere salute and nod to you before opening the door. You return the nod and stride past them, hearing the door slam shut behind you.", parse);
 		Text.NL();
-		Text.Add("As always, Lagon’s cell is sparse yet comfortable. It was probably a storeroom before it was repurposed - just a small oval of tunnelled space, with a pile of straw for a bed and a bucket of drinking water.", parse);
+		Text.Add("As always, Lagon’s cell is sparse, yet comfortable. It was probably a storeroom before it was repurposed - just a small oval of tunneled space with a pile of straw for a bed and a bucket of drinking water.", parse);
 		Text.NL();
 		if(lagon.Slut() < 30) {
 			Text.Add("It’s easy to spot Lagon. The former tyrant is lounging upon his straw-pile bed, sprawled on his back with one foot idly twitching over the other knee.", parse);
@@ -2748,7 +2748,7 @@ Scenes.Lagon.InteractDefeated = function() {
 			parse["ear"] = player.EarDesc();
 			var scenes = new EncounterTable();
 			scenes.AddEnc(function() {
-				Text.Add("Soft grunts fill your [ear]s, drawing your gaze magnetically to the straw pile. Lagon is sprawled upon it, busily pumping away at his erection with one hand. He stops, blinking, as he notices you are in the room, and lets go of his throbbing cock.", parse);
+				Text.Add("Soft grunts fill your [ear], drawing your gaze magnetically to the straw pile. Lagon is sprawled upon it, busily pumping away at his erection with one hand. He stops, blinking as he notices you are in the room and lets go of his throbbing cock.", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
 				Text.Add("Turning toward the straw pile, you are presented with quite a view of waving bunny-butt. Lagon is kneeling upon his bedding, one hand wrapped around his cock - presumably, given the way his obscured arm is moving - and the other is busily thrusting away at his ass.", parse);
@@ -3276,14 +3276,14 @@ Scenes.Lagon.DefeatedSexFuckAssCock = function(parse) {
 				Text.Add("A blast of seed erupts from your [cockTip], painting the Lagon’s anal walls white as you easily fill him up to the brim. Some of your cum actually flows back out of his ass, leaving Lagon’s butt a white mess.", parse);
 			}
 			else {
-				Text.Add("You fill his ass up with as much seed as you can muster. Which isn’t a whole lot, but it’s enough to stuff Lagon up with a nice creampie.", parse);
+				Text.Add("You fill his ass up with as much seed as you can muster - which isn’t a whole lot, but enough to stuff Lagon up with a nice creampie.", parse);
 			}
 			Text.NL();
 			if(player.NumCocks() > 1) {
 				Text.Add("Your other cock[s2] contribute to the mess by spewing [itsTheir2] load all over Lagon’s ass and bed. He’ll be smelling like you for a while.", parse);
 				Text.NL();
 			}
-			Text.Add("Satisfied, you leave the panting lagomorph and retrieve your gear. A few moments later you’re all dressed and ready to go. You knock on the door to notify the guards you’ll be leaving and go on your way.", parse);
+			Text.Add("Satisfied, you leave the panting lagomorph and retrieve your gear. A few moments later, you’re all dressed and ready to go. You knock on the door to notify the guards you’ll be leaving and go on your way.", parse);
 			Text.NL();
 			Text.Add("As you pass them, you note the hard-ons they’re sporting. Seems like they enjoyed listening…", parse);
 			Text.Flush();
