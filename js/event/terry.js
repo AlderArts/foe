@@ -2181,21 +2181,21 @@ Scenes.Terry.SkinshipRummagePack = function() {
 	
 	Text.Add("You find Terry’s pack and rummage through it. ", parse);
 	if(terry.Slut() >= 60) {
-		Text.Add("At first you just find a few spare clothes, panties, few tools of the trade, and a couple dry snacks. But once you get to the bottom you raise a brow at what you see. A dildo, lube, a cockring, another dildo, an inflatable buttplug, more lube, and some honey. Chuckling to yourself you ask whyever [heshe] would need all of that? Doesn’t it get heavy having to lug around all these toys?", parse);
+		Text.Add("At first, you just find a few spare clothes, panties, few tools of the trade, and a couple dry snacks. But once you get to the bottom, you raise a brow at what you see. A dildo, lube, a cockring, another dildo, an inflatable buttplug, more lube, and some honey. Chuckling to yourself, you ask whyever [heshe] would need all of that? Doesn’t it get heavy having to lug around all these toys?", parse);
 		Text.NL();
-		Text.Add("<i>“Gotta be prepared for when you’re not around, my dear [master]. Plus in case you’re feeling kinky in the middle of the forest, I’d rather not have to wait until we find a city to go after the big [boygirl] toys,”</i> [heshe] grins innocently.", parse);
+		Text.Add("<i>“Gotta be prepared for when you’re not around, my dear [master]. Plus, in case you’re feeling kinky in the middle of the forest, I’d rather not have to wait until we find a city to go after the big [boygirl] toys,”</i> [heshe] grins innocently.", parse);
 		Text.NL();
 		Text.Add("...You think you created a monster…", parse);
 		Text.NL();
 		if(terry.Relation() < 60)
 			Text.Add("<i>“Damn right you did, and now you gotta take care of me,”</i> [heshe] states.", parse);
 		else {
-			Text.Add("<i>“Maybe you did, but I loved every second of it. And so did you.”</i>", parse);
+			Text.Add("<i>“Maybe you did, but I loved every second of it, and so did you.”</i>", parse);
 			Text.NL();
-			Text.Add("True. In that case you’ll just have to enjoy the spoils of your hard labor.", parse);
+			Text.Add("True. In that case, you’ll just have to enjoy the spoils of your hard labor.", parse);
 		}
 		Text.NL();
-		Text.Add("After digging through quite a few toys, you finally manage to secure Terry’s comb and brush. Carefully you put away everything back into [hisher] pack and move to the grinning [foxvixen].", parse);
+		Text.Add("After digging through quite a few toys, you finally manage to secure Terry’s comb and brush. Carefully, you return everything to [hisher] pack and move to the grinning [foxvixen].", parse);
 	}
 	else if(terry.Slut() >= 30) {
 		Text.Add("Terry keeps [hisher] pack fairly organized. A few spare clothes, some lockpicks, assorted tools for crafting [hisher] gadgets… a bottle of lube? You set that aside and rummage a bit deeper, grinning to yourself once you find what looks like a fairly small buttplug. Has Terry being having fun behind your back?", parse);
@@ -2263,7 +2263,7 @@ Scenes.Terry.SkinshipPrompt = function() {
 		Text.NL();
 		Text.Add("A much bigger idiot than your clever [foxvixen], you immediately reply, chest swelling with pride at [hisher] response.", parse);
 		Text.NL();
-		Text.Add("<i>“You got it! Now what did you have in store for little old me?”</i>", parse);
+		Text.Add("<i>“You got it! Now, what did you have in store for little old me?”</i>", parse);
 	}
 	Text.Flush();
 	
@@ -2341,9 +2341,9 @@ Scenes.Terry.SkinshipPromptChoices = function() {
 			else {
 				Text.Add("<i>“Something wrong with my hair?”</i> Terry asks, a hint of mischief in [hisher] voice.", parse);
 				Text.NL();
-				Text.Add("You pretend to examine it with great scrutiny before admitting you just want some quality time together. Plus you gotta help your [foxvixen] maintain [himher]self.", parse);
+				Text.Add("You pretend to examine it with great scrutiny before admitting you just want some quality time together. Plus, you gotta help your [foxvixen] maintain [himher]self.", parse);
 				Text.NL();
-				Text.Add("<i>“As good an excuse as any. You know where I keep my comb and my brush right?”</i>", parse);
+				Text.Add("<i>“Well, as good an excuse as any I suppose. You know where I keep my comb and my brush, right?”</i>", parse);
 			}
 			Text.NL();
 			
@@ -2356,7 +2356,7 @@ Scenes.Terry.SkinshipPromptChoices = function() {
 			else
 				Text.Add("sits on the ground cross-legged.", parse);
 			Text.NL();
-			Text.Add("You circle [himher] until you’re behind [himher], then remove the small strap holding [hisher] pony tail. Terry doesn’t look half-bad with [hisher] bangs loose… Well, plenty of time to admire later; first of all you decide to begin with the comb. As neat as the [foxvixen] is, [hisher] hair is perfectly cared for and provides minimal resistance as you rake the comb through [hisher] locks. Then you set down the comb and grab the brush.", parse);
+			Text.Add("You circle [himher] until you’re behind [himher], then remove the small strap holding [hisher] pony tail. Terry doesn’t look half-bad with [hisher] bangs loose… Well, plenty of time to admire later. First of all, you decide to begin with the comb. As neat as the [foxvixen] is, [hisher] hair is perfectly cared for and provides minimal resistance as you rake the comb through [hisher] locks. Then, you set down the comb and grab the brush.", parse);
 			Text.NL();
 			Text.Add("<i>“Ah… this feels pretty nice.”</i>", parse);
 			Text.NL();

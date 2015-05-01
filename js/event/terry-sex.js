@@ -23,7 +23,7 @@ Scenes.Terry.SexPrompt = function(backPrompt) {
 	});
 	
 	if(terry.Slut() >= 60) {
-		Text.Add("With practiced motions, Terry begins stripping [hisher] [tarmorDesc], each motion a flourish that emphasises [hisher] assets. You watch the delicate [foxvixen]’s strip-tease enraptured, drinking in every detail on [hisher] lithe body, until [heshe] is completely naked.", parse);
+		Text.Add("With practiced motions, Terry begins stripping [hisher] [tarmorDesc], each motion a flourish that emphasizes [hisher] assets. You watch the delicate [foxvixen]’s strip-tease enraptured, drinking in every detail on [hisher] lithe body, until [heshe] is completely naked.", parse);
 		player.AddLustFraction(0.2);
 	}
 	else if(terry.Slut() >= 30)
@@ -3024,14 +3024,14 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 		parse["lady"] = terry.mfPronoun("'lady'", "lady");
 		Text.Add("Well, you’re certainly happy to oblige; anything your [lady] desires...", parse);
 		Text.NL();
-		Text.Add("<i>“If you got time to be cheeky, you also have time for foreplay. So why haven’t you started yet? And why are you still dressed?”</i>", parse);
+		Text.Add("<i>“If you got time to be cheeky, you also have time for foreplay. So, why haven’t you started yet? And why are you still dressed?”</i>", parse);
 	}
 	Text.NL();
-	Text.Add("One eye focused on the naked [foxvixen] before you, you make short work of your own [armorDesc], stripping away your clothes until you’re standing before [himher] equally naked. ", parse);
+	Text.Add("One eye focused on the naked [foxvixen] before you, you make short work of your own [armorDesc], stripping away your attire until you’re standing before [himher] equally naked. ", parse);
 	if(strapon)
 		Text.Add("You quickly check your [cockDesc], making sure that it’s properly secured to its place. Don’t want it to fall out while you’re fucking Terry, after all.", parse);
 	else
-		Text.Add("Your own erect [multiCockDesc] stands proudly before you, signalling your readiness to begin whenever Terry gives the okay.", parse);
+		Text.Add("Your own erect [multiCockDesc] stands proudly before you, signaling your readiness to begin whenever Terry gives the okay.", parse);
 	Text.NL();
 	
 	if(virgin) {
@@ -3861,7 +3861,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 						Text.NL();
 						Text.Add("Smiling, you tap an index finger playfully against the [foxvixen]’s nose, teasing [himher] about how [heshe]’s just so adorable when [heshe] tries to feign being mad at you.", parse);
 						Text.NL();
-						Text.Add("The [foxvixen] regards you with a pour, before sighing. <i>“I can’t really stay mad at you...”</i>", parse);
+						Text.Add("The [foxvixen] regards you with a pout, before sighing. <i>“I can’t really stay mad at you...”</i>", parse);
 						Text.NL();
 						Text.Add("You just smile, assure [himher] that’s part of [hisher] charms, and gently steal a quick kiss from [hisher] lips before snuggling back down.", parse);
 					}
