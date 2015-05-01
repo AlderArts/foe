@@ -12,7 +12,7 @@ world.loc.Plains.Nomads.Tent.description = function() {
 	else if(world.time.hour >= 19 || world.time.hour < 2) light = "firelight";
 	else light = "moonlight";
 	
-	Text.Add("The interior of the tent is dim, with little of the [light] reaching inside. Various pots, pans and other cooking utensils are packed away in an open wooden chest, should you want to prepare some food. There is little actual furniture besides that; a few rugs rolled out to protect bared feet and a set of bed rolls are free for you to use.", {light: light});
+	Text.Add("The interior of the tent is dim, with little of the [light] reaching inside. Various pots, pans and other cooking utensils are packed away in an open wooden chest, should you want to prepare some food. There is little actual furniture besides that; a few rugs rolled out to protect bare feet and a set of bed rolls are free for you to use.", {light: light});
 	Text.NL();
 }
 

@@ -427,7 +427,7 @@ Scenes.Kiakai.TalkAria = function() {
 		else {
 			Text.Add("<i>“Certainly!”</i> The elf looks happy that you brought up this particular topic, it seems that [heshe] definitely is a devout follower. ", parse);
 		}
-		Text.Add("<i>“Lady Aria is revered by many here on Eden, and for good reason. While it is not common, there have been incidents with portals to other worlds opening up prior to your arrival here,”</i> [name] starts out, <i>“Sometimes through design, sometimes due to happenstance, sometimes due to malice. The times that something... untoward emerged from the other side, the lady exerted her powers to bind it before it could cause significant harm.”</i>", parse);
+		Text.Add("<i>“Lady Aria is revered by many here on Eden, and with good reason. While it is not common, there have been incidents with portals to other worlds opening up prior to your arrival here,”</i> [name] starts out, <i>“Sometimes through design, sometimes due to happenstance, sometimes due to malice. The times that something... untoward emerged from the other side, the lady exerted her powers to bind it before it could cause significant harm.”</i>", parse);
 		Text.NL();
 		Text.Add("You ask how long this has been going on. <i>“The records are not clear on this, and the records of my people go back a long time,”</i> [name] answers you. <i>“These kinds of portals have been opening on Eden for thousands of years, as far as I know.”</i>", parse);
 		Text.NL();
