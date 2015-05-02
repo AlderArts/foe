@@ -129,92 +129,79 @@ Ability.prototype.CastInternal = function(encounter, caster, target) {
 Ability.prototype.OnSelect = function(encounter, caster, backPrompt) {
 	var ability = this;
 	// TODO: Buttons (use portraits for target?)
-	if(this.targetMode == TargetMode.Self) {
-		this.Use(encounter, caster);
-	}
-	else if(this.targetMode == TargetMode.Ally) {
-		var target = new Array();
-		for(var i=0,j=party.members.length; i<j; i++){
-			var t = party.members[i];
-			if(t.Incapacitated()) continue;
-			target.push({
-			  	nameStr : t.name,
-			  	func    : function(t) {
-			  		ability.Use(encounter, caster, t);
-			  	},
-			  	enabled : ability.enabledTargetCondition(encounter, caster, t),
-			  	obj     : t
-			});
-		};
+	
+	var target = [];
+	
+	switch(ability.targetMode) {
+		case TargetMode.Self:
+			ability.Use(encounter, caster);
+			break;
 		
-		Gui.SetButtonsFromList(target, true, backPrompt);
-	}
-	else if(this.targetMode == TargetMode.AllyNotSelf) {
-		var target = new Array();
-		for(var i=0,j=party.members.length; i<j; i++){
-			var t = party.members[i];
-			// Skip self
-			if(t == caster) continue;
-			if(t.Incapacitated()) continue;
-			target.push({
-			  	nameStr : t.name,
-			  	func    : function(t) {
-			  		ability.Use(encounter, caster, t);
-			  	},
-			  	enabled : ability.enabledTargetCondition(encounter, caster, t),
-			  	obj     : t
+		case TargetMode.Ally:
+		case TargetMode.AllyNotSelf:
+		case TargetMode.AllyFallen:
+			_.each(party.members, function(t) {
+				// Don't add self unless allowed
+				if(ability.targetMode == TargetMode.AllyNotSelf && t == caster) return;
+				// Don't add incapacitated unless allowed
+				var incap = t.Incapacitated();
+				if(ability.targetMode == TargetMode.AllyFallen && !t.incap()) return;
+				else if(incap) return;
+				
+				target.push({
+				  	nameStr : t.name,
+				  	func    : function(t) {
+				  		ability.Use(encounter, caster, t);
+				  	},
+				  	enabled : ability.enabledTargetCondition(encounter, caster, t),
+				  	obj     : t
+				});
 			});
-		};
-		
-		Gui.SetButtonsFromList(target, true, backPrompt);
-	}
-	else if(this.targetMode == TargetMode.AllyFallen) {
-		var target = new Array();
-		for(var i=0,j=party.members.length; i<j; i++){
-			var t = party.members[i];
-			// Skip self (as you are obviously not fallen)
-			if(t == caster) continue;
-			if(!t.Incapacitated()) continue;
-			target.push({
-			  	nameStr : t.name,
-			  	func    : function(t) {
-			  		ability.Use(encounter, caster, t);
-			  	},
-			  	enabled : ability.enabledTargetCondition(encounter, caster, t),
-			  	obj     : t
-			});
-		};
-		
-		Gui.SetButtonsFromList(target, true, backPrompt);
-	}
-	else if(this.targetMode == TargetMode.Enemy) {
-		var enemies = encounter.enemy.members;
-		var target = new Array();
-		for(var i=0,j=enemies.length; i<j; i++){
-			var t = enemies[i];
-			if(t.Incapacitated()) continue;
 			
-			target.push({
-			  	nameStr : t.uniqueName || t.name,
-			  	func    : function(t) {
-			  		ability.Use(encounter, caster, t);
-			  	},
-			  	enabled : ability.enabledTargetCondition(encounter, caster, t),
-			  	obj     : t
-			});
-		};
+			Gui.SetButtonsFromList(target, true, backPrompt);
+			break;
 		
-		Gui.SetButtonsFromList(target, true, backPrompt);
+		case TargetMode.Enemy:
+			_.each(encounter.enemy.members, function(t) {
+				// Don't add incapacitated
+				var incap = t.Incapacitated();
+				if(incap) return;
+				
+				target.push({
+				  	nameStr : t.uniqueName || t.name,
+				  	func    : function(t) {
+				  		ability.Use(encounter, caster, t);
+				  	},
+				  	enabled : ability.enabledTargetCondition(encounter, caster, t),
+				  	obj     : t
+				});
+			});
+			
+			Gui.SetButtonsFromList(target, true, backPrompt);
+			break;
+		
+		case TargetMode.Party:
+			ability.Use(encounter, caster, party);
+			break;
+		case TargetMode.Enemies:
+			ability.Use(encounter, caster, encounter.enemy);
+			break;
+		default:
+			encounter.CombatTick();
 	}
-	else if(this.targetMode == TargetMode.Party) {
-		this.Use(encounter, caster, party);
-	}
-	else if(this.targetMode == TargetMode.Enemies) {
-		this.Use(encounter, caster, encounter.enemy);
-	}
-	// Fallback
-	else
-		encounter.CombatTick();
+}
+
+Ability.EnabledCost = function(ab, caster) {
+	if(ab.cost.hp && ab.cost.hp > caster.curHp) return false;
+	if(ab.cost.sp && ab.cost.sp > caster.curSp) return false;
+	if(ab.cost.lp && ab.cost.lp > caster.curLust) return false;
+	return true;
+}
+
+Ability.ApplyCost = function(ab, caster) {
+	if(ab.cost.hp) caster.curHp -= ab.cost.hp;
+	if(ab.cost.sp) caster.curSp -= ab.cost.sp;
+	if(ab.cost.lp) caster.curLust -= ab.cost.lp;
 }
 
 Ability.prototype.Use = function(encounter, caster, target) {
@@ -222,18 +209,13 @@ Ability.prototype.Use = function(encounter, caster, target) {
 }
 
 Ability.prototype.UseOutOfCombat = function(caster, target) {
-	if(this.cost.hp) caster.curHp -= this.cost.hp;
-	if(this.cost.sp) caster.curSp -= this.cost.sp;
-	if(this.cost.lp) caster.curLust -= this.cost.lp;
+	Ability.ApplyCost(this, caster);
 	
 	this.CastInternalOOC(null, caster, target);
 }
 
 Ability.prototype.enabledCondition = function(encounter, caster) {
-	if(this.cost.hp && this.cost.hp > caster.curHp) return false;
-	if(this.cost.sp && this.cost.sp > caster.curSp) return false;
-	if(this.cost.lp && this.cost.lp > caster.curLust) return false;
-	return true;
+	return Ability.EnabledCost(this, caster);
 }
 
 Ability.prototype.enabledTargetCondition = function(encounter, caster, target) {
