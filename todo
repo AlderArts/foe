@@ -44,8 +44,10 @@ Also, there's some NPCs that can no longer be fucked due to the changes (terry, 
 
 
 Combat rewrite:
+** Started work on ability rewrite. Needs testing
+ * Damage types (more flexible basic attack). Damage hp/sp/lp
+
 * Delayed actions/casting time, cancellable
-* Damage types (more flexible basic attack). Damage hp/sp/lp
 
 * Persistent status effects
 
