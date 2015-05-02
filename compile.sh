@@ -38,6 +38,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event.js \
 	js/world.js \
 	js/exploration.js \
+	js/ability/node.js \
 	js/ability/attack.js \
 	js/ability/physical.js \
 	js/ability/seduction.js \

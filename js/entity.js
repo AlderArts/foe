@@ -2724,6 +2724,15 @@ Entity.prototype.Accessories = function() {
 	return [this.acc1Slot, this.acc2Slot];
 }
 
+//TODO Structure
+Entity.prototype.FinishCastInternal = function(ability, encounter, caster, targets) {
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		encounter.CombatTick();
+	});
+}
+
 //Note: bitmask in order to stack multiple
 TargetStrategy = {
 	None      : 0, //Not used
@@ -2737,14 +2746,18 @@ TargetStrategy = {
 	LPHunt    : 128
 };
 
+Entity.prototype.GetCombatEntry = function(encounter) {
+	_.each(encounter.combatOrder, function(it) {
+		if(it.entity == this)
+			return it;
+	});
+}
+
 GetAggroEntry = function(activeChar, entity) {
-	if(activeChar.aggro) {
-		for(var j = 0; j < activeChar.aggro.length; j++) {
-			if(activeChar.aggro[j].entity == entity) {
-				return activeChar.aggro[j];
-			}
-		}
-	}
+	_.each(activeChar.aggro, function(it) {
+		if(it.entity == entity)
+			return it;
+	});
 }
 
 Entity.prototype.GetPartyTarget = function(encounter, activeChar) {
@@ -2775,64 +2788,61 @@ Entity.prototype.GetSingleTarget = function(encounter, activeChar, strategy) {
 	strategy = strategy || TargetStrategy.None;
 	
 	// cleanup
-	for(var i = 0; i < activeChar.aggro.length; i++) {
-		if(activeChar.aggro[i].entity.Incapacitated())
-			activeChar.aggro.remove(i);
-	}
-	// adding new aggro targets
-	for(var i = 0; i < targets.length; i++) {
-		if(!GetAggroEntry(activeChar, targets[i]))
-			activeChar.aggro.push({entity: targets[i], aggro: 1});
-	}
+	activeChar.aggro = _.reject(activeChar.aggro, function(it) {
+		return it.entity.Incapacitated();
+	});
 	
+	// adding new aggro targets
+	_.each(targets, function(t) {
+		if(!GetAggroEntry(activeChar, t))
+			activeChar.aggro.push({entity: t, aggro: 1});
+	});
+
 	// make a temporary aggro array
-	var aggro = [];
-	for(var i=0; i < activeChar.aggro.length; i++) {
-		var a = activeChar.aggro[i];
-		aggro.push({entity: a.entity, aggro: a.aggro});
-	};
+	var aggro = _.clone(activeChar.aggro);
 	
 	// Strategies
 	if(strategy & TargetStrategy.NearDeath) {
-		for(var i = 0; i < aggro.length; i++) {
-			var hp  = 1 - aggro[i].entity.HPLevel();
+		_.each(aggro, function(a) {
+			var hp  = 1 - a.entity.HPLevel();
 			hp *= hp;
-			aggro[i].aggro *= hp;
-		}
+			a.aggro *= hp;
+		});
 	}
 	if(strategy & TargetStrategy.LowHp) {
-		for(var i = 0; i < aggro.length; i++) {
-			var hp  = 1 - aggro[i].entity.HPLevel();
-			aggro[i].aggro *= hp;
-		}
+		_.each(aggro, function(a) {
+			var hp  = 1 - a.entity.HPLevel();
+			a.aggro *= hp;
+		});
 	}
 	if(strategy & TargetStrategy.HighHp) {
-		for(var i = 0; i < aggro.length; i++) {
-			var hp  = aggro[i].entity.HPLevel();
-			aggro[i].aggro *= hp;
-		}
+		_.each(aggro, function(a) {
+			var hp  = a.entity.HPLevel();
+			a.aggro *= hp;
+		});
 	}
 	
 	// Normalize hp
-	var min, max;
-	for(var i = 0; i < aggro.length; i++) {
-		var hp = aggro[i].entity.curHp;
-		min = min || hp; if(min > hp) min = hp;
-		max = max || hp; if(max < hp) max = hp;
-	}
+	var min = _.min(aggro.length, function(a) {
+		return a.entity.curHp;
+	});
+	var max = _.max(aggro.length, function(a) {
+		return a.entity.curHp;
+	});
+	
 	var span = max - min;
 	if(strategy & TargetStrategy.LowAbsHp) {
-		for(var i = 0; i < aggro.length; i++) {
-			var hp = (aggro[i].entity.curHp - min) / span;
+		_.each(aggro, function(a) {
+			var hp = (a.entity.curHp - min) / span;
 			var hp  = 1 - hp;
-			aggro[i].aggro *= hp;
-		}
+			a.aggro *= hp;
+		});
 	}
 	if(strategy & TargetStrategy.HighAbsHp) {
-		for(var i = 0; i < aggro.length; i++) {
-			var hp = (aggro[i].entity.curHp - min) / span;
-			aggro[i].aggro *= hp;
-		}
+		_.each(aggro, function(a) {
+			var hp = (a.entity.curHp - min) / span;
+			a.aggro *= hp;
+		});
 	}
 	
 	if(strategy & TargetStrategy.Leader) { //Test, this might be wrong
@@ -2860,9 +2870,9 @@ Entity.prototype.GetSingleTarget = function(encounter, activeChar, strategy) {
 	*/
 	
 	// Weigthed random selection
-	var sum = 0;
-	for(var i = 0; i < aggro.length; i++)
-		sum += aggro[i].aggro;
+	var sum = _.sum(aggro, function(a) {
+		return a.aggro;
+	});
 	
 	// Pick a target
 	var step = Math.random() * sum;

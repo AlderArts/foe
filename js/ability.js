@@ -86,7 +86,17 @@ Ability = function() {
 	this.name = "ABILITY";
 	//TODO: Tooltip
 	this.cost = { hp: null, sp: null, lp: null};
-		
+	//TODO: Cancel/cast time
+	this.castTime = 100;
+	this.cancellable = true;
+	this.cancelThreshold = 50;
+	
+	// Preparation nodes
+	this.onCast   = [];
+	// Actual cast nodes
+	this.castTree = [];
+	
+	// Note, if CastInternalOOC is defined, ability will be usable out of combat
 	//this.CastInternalOOC = function(caster, target) {
 	//	Gui.NextPrompt(ShowAbilities);
 	//}
@@ -97,19 +107,22 @@ Ability.prototype.Short = function() {
 	return "NO DESC";
 }
 
-Ability.prototype.CastInternal = function(encounter, caster, target) {
-	var parse = {
-		name : caster.name,
-		ability : this.name,
-		target : TargetMode.ToString(this.targetMode)
-		}
-	
-	Text.Add("[name] used [ability] on [target] (not implemented).", parse);
-	Text.Flush();
-	
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
+Ability.prototype.StartCast = function(encounter, caster, target) {
+	_.each(this.onCast, function(node) {
+		node(this, encounter, caster, target);
 	});
+}
+
+Ability.prototype.CastInternal = function(encounter, caster, target) {
+	if(this.cost.hp) caster.curHp   -= this.cost.hp;
+	if(this.cost.sp) caster.curSp   -= this.cost.sp;
+	if(this.cost.lp) caster.curLust -= this.cost.lp;
+	
+	_.each(this.castTree, function(node) {
+		node(this, encounter, caster, target);
+	});
+	
+	caster.FinishCastInternal(this, encounter, caster, target);
 }
 
 // Used as entrypoint for PC/Party (active selection)
@@ -205,10 +218,6 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt) {
 }
 
 Ability.prototype.Use = function(encounter, caster, target) {
-	if(this.cost.hp) caster.curHp -= this.cost.hp;
-	if(this.cost.sp) caster.curSp -= this.cost.sp;
-	if(this.cost.lp) caster.curLust -= this.cost.lp;
-	
 	this.CastInternal(encounter, caster, target);
 }
 
