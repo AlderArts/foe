@@ -114,9 +114,7 @@ Ability.prototype.StartCast = function(encounter, caster, target) {
 }
 
 Ability.prototype.CastInternal = function(encounter, caster, target) {
-	if(this.cost.hp) caster.curHp   -= this.cost.hp;
-	if(this.cost.sp) caster.curSp   -= this.cost.sp;
-	if(this.cost.lp) caster.curLust -= this.cost.lp;
+	Ability.ApplyCost(this, caster);
 	
 	_.each(this.castTree, function(node) {
 		node(this, encounter, caster, target);
@@ -192,16 +190,20 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt) {
 }
 
 Ability.EnabledCost = function(ab, caster) {
-	if(ab.cost.hp && ab.cost.hp > caster.curHp) return false;
-	if(ab.cost.sp && ab.cost.sp > caster.curSp) return false;
-	if(ab.cost.lp && ab.cost.lp > caster.curLust) return false;
+	if(_.isObject(ab.cost)) {
+		if(ab.cost.hp && ab.cost.hp > caster.curHp) return false;
+		if(ab.cost.sp && ab.cost.sp > caster.curSp) return false;
+		if(ab.cost.lp && ab.cost.lp > caster.curLust) return false;
+	}
 	return true;
 }
 
 Ability.ApplyCost = function(ab, caster) {
-	if(ab.cost.hp) caster.curHp -= ab.cost.hp;
-	if(ab.cost.sp) caster.curSp -= ab.cost.sp;
-	if(ab.cost.lp) caster.curLust -= ab.cost.lp;
+	if(_.isObject(ab.cost)) {
+		if(ab.cost.hp) caster.curHp -= ab.cost.hp;
+		if(ab.cost.sp) caster.curSp -= ab.cost.sp;
+		if(ab.cost.lp) caster.curLust -= ab.cost.lp;
+	}
 }
 
 Ability.prototype.Use = function(encounter, caster, target) {
