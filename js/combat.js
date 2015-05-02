@@ -358,25 +358,21 @@ Encounter.prototype.CombatTick = function() {
 		
 		var found = false;
 		while(!found) {
-			for(var i=0,j=enc.combatOrder.length; i<j; i++) {
-				var c = enc.combatOrder[i];
-				
+			_.each(enc.combatOrder, function(c) {
 				if(!c.entity.Incapacitated()) {
 					if(c.initiative >= 100) {
 						found = true;
-						break;
+						return false;
 					}
 				}
-			}
+			});
 			
 			if(found) break;
 			
-			for(var i=0,j=enc.combatOrder.length; i<j; i++) {
-				var c = enc.combatOrder[i];
-				
+			_.each(enc.combatOrder, function(c) {
 				if(!c.entity.Incapacitated())
 					c.initiative += c.entity.Initiative();
-			}
+			});
 		}
 		
 		enc.combatOrder.sort(Encounter.InitiativeSorter);
@@ -397,11 +393,10 @@ Encounter.prototype.CombatTick = function() {
 		activeChar.initiative -= ini;
 		
 		// Add lust
-		for(var i=0,j=enc.combatOrder.length; i<j; i++){
-			var c = enc.combatOrder[i];
+		_.each(enc.combatOrder, function(c) {
 			if(!c.entity.Incapacitated())
 				c.entity.AddLustOverTime(0.02);
-		};
+		});
 		
 		// Tick status effects
 		currentActiveChar.combatStatus.Tick(currentActiveChar);
@@ -442,35 +437,33 @@ Encounter.prototype.CombatTick = function() {
 			var entityName = currentActiveChar.uniqueName ? currentActiveChar.uniqueName : currentActiveChar.name;
 			Text.Add(Text.BoldColor("Turn order:<br/>"));
 			Text.Add(Text.BoldColor(entityName + "<br/>"));
+			
 			var tempParty = [];
-			for(var i=0,j=enc.combatOrder.length; i<j; i++){
-				var c = enc.combatOrder[i];
+			_.each(enc.combatOrder, function(c) {
 				if(!c.entity.Incapacitated()) {
 					entityName = c.entity.uniqueName ? c.entity.uniqueName : c.entity.name;
 					tempParty.push({name: entityName, ini: c.initiative, inc: c.entity.Initiative()});
 				}
-			};
+			});
 			
-			for(var t = 0; t < 8; t++) {
+			_.times(8, function() {
 				var found = null;
 				while(!found) {
-					for(var i=0,j=tempParty.length; i<j; i++) {
-						var c = tempParty[i];
+					_.each(tempParty, function(c) {
 						if(c.ini >= 100) {
 							found = c;
-							break;
+							return false;
 						}
-					}
+					});					
 					if(found) break;
-					for(var i=0,j=tempParty.length; i<j; i++) {
-						var c = tempParty[i];
+					_.each(tempParty, function(c) {
 						c.ini += c.inc;
-					}
+					});
 				}
 				
 				found.ini -= 100;
 				Text.Add(found.name + "<br/>");
-			}
+			});
 			Text.NL();
 			
 			if(activeChar.entity == player)

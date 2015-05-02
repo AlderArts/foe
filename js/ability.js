@@ -84,12 +84,14 @@ Abilities = {};
 Ability = function() {
 	this.targetMode = TargetMode.Enemy;
 	this.name = "ABILITY";
-	//TODO: Tooltip
+	//TODO: Tooltip?
 	this.cost = { hp: null, sp: null, lp: null};
+	
 	//TODO: Cancel/cast time
 	this.castTime = 100;
 	this.cancellable = true;
 	this.cancelThreshold = 50;
+	this.cooldown = 0; //nr of rounds cooldown
 	
 	// Preparation nodes
 	this.onCast   = [];
