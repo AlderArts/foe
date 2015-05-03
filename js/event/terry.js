@@ -1831,7 +1831,7 @@ Scenes.Terry.TalkPast = function(force) {
 		Text.NL();
 		Text.Add("You scoop the [foxvixen] up into your arms and embrace [himher]. Eventually [heshe] breaks the hug, looking at least a bit better.", parse);
 		Text.NL();
-		Text.Add("<i>“Anyways. I was all alone, and I had to fend for myself. Daddy’s skills came in pretty handy. But I was pretty scrawny by comparison. So working at the docks? No dice.”</i> [HeShe] shakes [hisher] head.", parse);
+		Text.Add("<i>“Anyways, I was all alone, and I had to fend for myself. Daddy’s skills came in pretty handy, but I was pretty scrawny by comparison. Working at the docks? No dice.”</i> [HeShe] shakes [hisher] head.", parse);
 		Text.NL();
 		Text.Add("<i>“Instead I managed to land a job at the local inn. It wasn’t as safe as the docks, but at least I could pick my marks. And my fingers were light enough that few even noticed missing goods. I didn’t steal anything major, after all.”</i> A smile breaks on [hisher] muzzle.", parse);
 		Text.NL();
