@@ -174,7 +174,7 @@ Scenes.Twins.TalkPrompt = function() {
 					Text.NL();
 					Text.Add("<i>“And he can’t harm you either. If he breaks one of these rules, the collar will unleash its magic and... disable him,”</i> Rani adds.", parse);
 					Text.NL();
-					Text.Add("<i>“We’ll let you figure out exactly how it does that,”</i> Rumi says, as the twins grin mischievously. <i>“Go to the jail in the castle grounds and present a guardsmen with this letter,”</i> Rumi says, handing you a sealed letter.", parse);
+					Text.Add("<i>“We’ll let you figure out exactly how it does that,”</i> Rumi says, as the twins grin mischievously. <i>“Go to the jail in the castle grounds and present the guardsmen with this letter,”</i> Rumi says, handing you a sealed letter.", parse);
 					Text.NL();
 					Text.Add("<i>“And don’t forget to attach the collar,”</i> Rani adds, presenting you with the collar.", parse);
 					Text.NL();
