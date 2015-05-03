@@ -415,7 +415,7 @@ Scenes.Terry.Appearance = function() {
 	else if(terry.Relation() < 60)
 		Text.Add("Terry grins nervously, once [heshe] realizes you’re checking [himher] out. Aside from [hisher] apparent nervousness, [heshe] makes no move to block your view.", parse);
 	else
-		Text.Add("The [foxvixen]’s eyes dart toward you, and as your gaze meets [hisher]’s, [heshe] smiles. Terry adjusts [hisher] hair a bit and straightens [hisher] posture as [heshe] stretches languidly, giving you a perfectly unobstructed view of [himher]self.", parse);
+		Text.Add("The [foxvixen]’s eyes dart toward you and as your gaze meets [hishers], [heshe] smiles. Terry adjusts [hisher] hair a bit and straightens [hisher] posture as [heshe] stretches languidly, giving you a perfect, unobstructed view of [himher]self.", parse);
 	Text.NL();
 	Text.Add("Despite the crimson mane atop the [foxvixen]’s head, the rest of [hisher] fur is a very different color; golden yellow offsetting white. Though most of [hisher] face is pure white, a large ring of gold around each eye blurs together over the bridge of the nose, creating a very domino mask-like effect. [HisHer] ears are, likewise, pure gold on the outside and pure white on the inside. White gives way to gold at [hisher] neck, and you know for a fact that most of Terry’s fur is gold; only on [hisher] forelimbs, legs from knees to ankle, stomach, buttocks, and the very tip of [hisher] tail does the white return.", parse);
 	Text.NL();
@@ -492,7 +492,7 @@ Scenes.Terry.Appearance = function() {
 			Text.NL();
 			Text.Add("Well, maybe you should just have [himher] go around naked; you think [heshe]’d like that.", parse);
 			Text.NL();
-			Text.Add("<i>“Ha! I will if you really want me to. But you’ll have to go naked yourself. If I’m going to be giving you eye-candy all the time, I expect the same treatment,”</i> [heshe] quips back.", parse);
+			Text.Add("<i>“Ha! I will if you really want me to, but you’ll have to go naked yourself. If I’m going to be giving you eye-candy all the time, I expect the same treatment,”</i> [heshe] quips back.", parse);
 			Text.NL();
 			Text.Add("You shoot back that you’ll consider it, but right now, you want to keep looking at Terry.", parse);
 		}
@@ -513,7 +513,7 @@ Scenes.Terry.Appearance = function() {
 	else if(preg && stage > 0.6)
 		Text.Add("[HisHer] pregnancy has come a long way. You don’t think there’s much more [heshe] can grow before [heshe]’s ripe for birthing a little fox into the world. Terry sometimes rubs [hisher] belly with a smile, it’s clear that despite the burdens [hisher] pregnancy have imposed on [himher], [heshe]’s looking forward to popping the little fox out.", parse);
 	else if(preg && stage > 0.4)
-		Text.Add("Terry’s belly is growing nicely. The [foxvixen] sometimes has cravings, but that’s to be expected of a pregnant [foxvixen]. At least [heshe]’s not feeling sick anymore. You gotta say though, this pretty belly of [hishers] makes [himher] look very feminine and attractive. Maybe you should consider calling Terry over for some alone time later...", parse);
+		Text.Add("Terry’s belly is growing nicely. The [foxvixen] sometimes has cravings, but that’s to be expected of a pregnant [foxvixen] - at least [heshe]’s not feeling sick anymore. You gotta say though, this pretty belly of [hishers] makes [himher] look very feminine and attractive. Maybe you should consider calling Terry over for some alone time later...", parse);
 	else if(preg && stage > 0.2)
 		Text.Add("[HisHer] belly’s developing a nice paunch, and you can see that [hisher] pregnancy is taking its toll on the poor [foxvixen]. Sometimes Terry looks sick or tired, but that only lasts an instant before the [foxvixen] recomposes [himher]self.", parse);
 	else
@@ -1833,9 +1833,9 @@ Scenes.Terry.TalkPast = function(force) {
 		Text.NL();
 		Text.Add("<i>“Anyways, I was all alone, and I had to fend for myself. Daddy’s skills came in pretty handy, but I was pretty scrawny by comparison. Working at the docks? No dice.”</i> [HeShe] shakes [hisher] head.", parse);
 		Text.NL();
-		Text.Add("<i>“Instead I managed to land a job at the local inn. It wasn’t as safe as the docks, but at least I could pick my marks. And my fingers were light enough that few even noticed missing goods. I didn’t steal anything major, after all.”</i> A smile breaks on [hisher] muzzle.", parse);
+		Text.Add("<i>“Instead, I managed to land a job at the local inn. It wasn’t as safe as the docks, but at least I could pick my marks - also, my fingers were light enough that few even noticed missing goods. I didn’t steal anything major, after all.”</i> A smile breaks on [hisher] muzzle.", parse);
 		Text.NL();
-		Text.Add("<i>“I was pretty naive back then. Also pretty darn careless. That’s how I met my master, actually. But that’s a tale for another time.”</i>", parse);
+		Text.Add("<i>“I was pretty naive back then - and pretty darn careless. That’s how I met my master, actually. But that’s a tale for another time.”</i>", parse);
 		
 		if(max < 3)
 			terry.relation.IncreaseStat(100, 1);
@@ -1854,7 +1854,7 @@ Scenes.Terry.TalkPast = function(force) {
 		Text.NL();
 		Text.Add("<i>“He caught me in an instant, I thought I was done for. But to my surprise, he smiled and turned the alarm off. Told me I had talent, he hadn’t even noticed his key was gone. Instead of ratting me out, he offered to train me. Teach me the finer points of being a thief. Not a two-bit one like I was, but a pro thief.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“Since I really didn’t want to deal with the authorities, I accepted. Initially that was my motivation. But as time passed and he trained me, I grew to like him. That, however, is a tale for another time. Maybe later?”</i>", parse);
+		Text.Add("<i>“Since I really didn’t want to deal with the authorities, I accepted. Initially, that was my motivation. But as time passed and he trained me, I grew to like him. That, however, is a tale for another time. Maybe later?”</i>", parse);
 		Text.NL();
 		Text.Add("You nod your head in understanding, smiling softly before you thank [himher] for [hisher] time.", parse);
 		
@@ -1883,11 +1883,11 @@ Scenes.Terry.TalkPast = function(force) {
 		Text.NL();
 		Text.Add("<i>“He would dress up in some colorful clothes, rob the mark blind, then leave a calling card. The masked fox, he would call himself. It was quite funny seeing the reaction of the local authorities as we snuck away,”</i> Terry laughs.", parse);
 		Text.NL();
-		Text.Add("<i>“Life was good again, and it was so for a few years. I didn’t go into heists myself, just helped Thorn with info and prepared gadgets. He said I was pretty good as a thief already, and all I needed was to complement my skills, so that’s what I focused on. Can’t say I loved wearing a few of those frilly dresses tho...”</i>", parse);
+		Text.Add("<i>“Life was good again, and it was so for a few years. I didn’t go into heists myself, just helped Thorn with info and prepared gadgets. He said I was pretty good as a thief already, and all I needed was to complement my skills, so that’s what I focused on. Can’t say I loved wearing a few of those frilly dresses though...”</i>", parse);
 		Text.NL();
 		Text.Add("Dresses... Thorn made [himher] dress up as a girl? You consider what you’ve been told for a moment, and then ask if Thorn was just using the old ‘honeypot trick’, or if he had ulterior motives for it.", parse);
 		Text.NL();
-		Text.Add("<i>“It was easier to collect info, plus people were less likely to suspect a vixen of a crime committed by a fox. You can’t believe the things people will babble about to a pretty face and some giggles. And I played the part well. What’s with me looking all girly and everything...”</i>", parse);
+		Text.Add("<i>“It was easier to collect info, plus people were less likely to suspect a vixen of a crime committed by a fox. You can’t believe the things people will babble about to a pretty face and some giggles. I played the part well - what with me looking all girly and everything...”</i>", parse);
 		Text.NL();
 		Text.Add("You can’t help but nod your head and agree; [heshe] certainly could play the part of the vixen well. You never would have guessed what was really under that waitress getup until you caught ‘her’ back then.", parse);
 		Text.NL();
@@ -1919,11 +1919,11 @@ Scenes.Terry.TalkPast = function(force) {
 				Text.Add("You just bet Thorn would have something to say about Terry’s new body; [heshe] was girly to begin with, but with the new breasts and a new pussy too, well, that’s a whole new level, isn’t it?", parse);
 			Text.NL();
 		}
-		Text.Add("<i>“He… ugh, he wouldn’t let me hear the end of it. My girly physique was always something he’d mock me about. Not that I resent him for that. It was all in good fun. Tho there was a time when I kicked him in the nuts for a particularly offensive remark.”</i>", parse);
+		Text.Add("<i>“He… ugh, he wouldn’t let me hear the end of it. My girly physique was always something he’d mock me about. Not that I resent him for that. It was all in good fun, though there was a time when I kicked him in the nuts for a particularly offensive remark.”</i>", parse);
 		Text.NL();
 		Text.Add("Well... he kind of deserved it, from what Terry just told you.", parse);
 		Text.NL();
-		Text.Add("<i>“Yeah, he kinda did. We had a good run, but eventually I guess he was too cocky and things didn’t end up well for him. But let’s visit that some other time, alright?”</i>", parse);
+		Text.Add("<i>“Yeah, he kinda did. We had a good run... but eventually, I guess he got too cocky and things didn’t end up well for him. But let’s visit that some other time, alright?”</i>", parse);
 		Text.NL();
 		parse["again"] = (max == cur) ? "" : " again";
 		Text.Add("Of course; Terry should take [hisher] time, [heshe]’ll talk when [heshe]’s ready. You thank [himher] for telling you about Thorn[again].", parse);
@@ -1938,15 +1938,15 @@ Scenes.Terry.TalkPast = function(force) {
 		
 		Text.Add("<i>“We kept avoiding capture by travelling a lot under the pretense of being merchants. Thorn was very pleased with our successful heists. We had a system that worked really well,”</i> Terry smiles softly, but the smile quickly fades.", parse);
 		Text.NL();
-		Text.Add("<i>“About then we caught wind of a VIP that was visiting the town we were in. Thorn’s eyes were aglow. That was a great mark if there ever was one, and best of all? He had little security with him. It was an opportunity, and if there’s a thing you learn in thievery, it’s that you never miss an opportunity.”</i>", parse);
+		Text.Add("<i>“About then, we caught wind of a VIP that was visiting the town we were in. Thorn’s eyes were aglow. That was a great mark if there ever was one... and best of all? He had little security with him. It was an opportunity, and if there’s a thing you learn in thievery, it’s that you never miss an opportunity.”</i>", parse);
 		Text.NL();
 		Text.Add("You nod your head in understanding, and ask who this VIP was.", parse);
 		Text.NL();
-		Text.Add("<i>“Our mark was Duke Kane, he was responsible for the neighbouring town and had vast amount of land under his name. Naturally, despite the opportunity, we couldn’t just take risks blindly, so I set out to gather info my usual way. Thorn was stalking the Duke, gathering info on his own.”</i>", parse);
+		Text.Add("<i>“Our mark was Duke Kane. He was responsible for the neighbouring town and had a vast amount of land under his name. Naturally, despite the opportunity, we couldn’t just take risks blindly, so I set out to gather info my usual way. Thorn was stalking the Duke, gathering info on his own.”</i>", parse);
 		Text.NL();
 		Text.Add("You nod your head in understanding, then inquisitively ask just how close Terry was able to get to Kane; did [heshe] have to settle for just chasing rumors? Or did the Duke welcome the chance to spend a little time with a sexy vixen who was just so interested in him?", parse);
 		Text.NL();
-		Text.Add("<i>“No, he didn’t stay anywhere near me. I was simply a maid at the local inn. But I did get the chance to speak with a few guards. Naturally also had to deflect more flirts than I’d like,”</i> Terry adds, cringing at the memory.", parse);
+		Text.Add("<i>“No, he didn’t stay anywhere near me. I was simply a maid at the local inn, but I did get the chance to speak with a few guards. Naturally, I also had to deflect more flirts than I’d like,”</i> Terry adds, cringing at the memory.", parse);
 		Text.NL();
 		Text.Add("<i>“So, as you can guess, gathering info on this mark was slow. We were approaching our deadline, and we didn’t have near enough info on the Duke and his guards to make a proper heist. My dad always preached that I should be patient. Same goes for thievery. You rush into the danger and you’ll wind up caught or worse.”</i>", parse);
 		Text.NL();
@@ -1975,11 +1975,11 @@ Scenes.Terry.TalkPast = function(force) {
 		Text.NL();
 		Text.Add("You nod in confirmation.", parse);
 		Text.NL();
-		Text.Add("<i>“Well after that, I performed the last rites, quit my job at the inn and got in the first caravan headed out of the city. I wanted to get away from it all, plus there was always the chance people would find out I was with Thorn. Then I’d be in trouble too.”</i>", parse);
+		Text.Add("<i>“Well after that, I performed the last rites, quit my job at the inn and got in the first caravan headed out of the city. I wanted to get away from it all, plus there was always the chance people would find out I was with Thorn and then I’d be in trouble too.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“I had nowhere to go, and I was feeling too depressed to think about anything. So I just idled, waiting for the caravan to reach its destination. It was a long trip, but eventually we made our way to Rigard.”</i>", parse);
 		Text.NL();
-		Text.Add("So [heshe] wound up in [hisher] hometown. Did he recall it at all from [hisher] childhood?", parse);
+		Text.Add("So [heshe] wound up in [hisher] hometown. Did [heshe] recall it at all from [hisher] childhood?", parse);
 		Text.NL();
 		Text.Add("<i>“I didn’t recall too much about it, no. But from what dad told me, the city was shit back then as well,”</i> Terry sighs, frowning in disapproval.", parse);
 		Text.NL();
@@ -1987,7 +1987,7 @@ Scenes.Terry.TalkPast = function(force) {
 		Text.NL();
 		Text.Add("Ah yes, you had a hard time getting past the gates yourself...", parse);
 		Text.NL();
-		Text.Add("<i>“I was lucky enough to make it inside the city, but I couldn’t just rob anyone. Even long after the that conflict that took my mother from me, people were still on edge. So finding a mark was tough. In the end I decided if I wanted to score some decent loot, I’d have to rob one of the local nobles.”</i>", parse);
+		Text.Add("<i>“I was lucky enough to make it inside the city, but I couldn’t just rob anyone. Even long after the conflict that took my mother from me, people were still on edge. Finding a mark was tough. In the end, I decided if I wanted to score some decent loot, I’d have to rob one of the local nobles.”</i>", parse);
 		Text.NL();
 		Text.Add("Oh? And who was the lucky one?", parse);
 		Text.NL();
@@ -2086,7 +2086,7 @@ Scenes.Terry.TalkCompliment = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("A studious look on your face, you start to circle Terry, intensely observing [himher] from all angles, gaze moving up and down, back and forth, as you continue to trail around the puzzled vulpine.", parse);
+	Text.Add("With a studious look on your face, you start to circle Terry, intensely observing [himher] from all angles, gaze moving up and down, back and forth, as you continue to trail around the puzzled vulpine.", parse);
 	Text.NL();
 	if(terry.Relation() >= 60) {
 		Text.Add("Terry looks a bit nervous. <i>“Um, everything is alright, right? I didn’t miss any spots combing my fur… maybe my hair is not good?”</i>", parse);
