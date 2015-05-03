@@ -461,7 +461,7 @@ Encounter.prototype.CombatTick = function() {
 					});
 				}
 				
-				found.ini -= 100;
+				found.ini -= 100; //TODO cast time for predict
 				Text.Add(found.name + "<br/>");
 			});
 			Text.NL();
@@ -483,6 +483,7 @@ Encounter.prototype.CombatTick = function() {
 			});
 		}
 		else {
+			// TODO: Confuse? Is this correctly implemented?
 			if(activeChar.isEnemy) {
 				activeChar.entity.Act(enc, activeChar);
 			}
