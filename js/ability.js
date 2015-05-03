@@ -88,9 +88,8 @@ Ability = function() {
 	this.cost = { hp: null, sp: null, lp: null};
 	
 	//TODO: Cancel/cast time
-	this.castTime = 100;
+	this.castTime = 0;
 	this.cancellable = true;
-	this.cancelThreshold = 50;
 	this.cooldown = 0; //nr of rounds cooldown
 	
 	// Preparation nodes
@@ -116,8 +115,6 @@ Ability.prototype.StartCast = function(encounter, caster, target) {
 }
 
 Ability.prototype.CastInternal = function(encounter, caster, target) {
-	Ability.ApplyCost(this, caster);
-	
 	_.each(this.castTree, function(node) {
 		node(this, encounter, caster, target);
 	});
@@ -209,7 +206,25 @@ Ability.ApplyCost = function(ab, caster) {
 }
 
 Ability.prototype.Use = function(encounter, caster, target) {
-	this.CastInternal(encounter, caster, target);
+	Ability.ApplyCost(this, caster);
+	this.StartCast(encounter, caster, target);
+	
+	if(this.castTime > 0) {
+		var entry = caster.GetCombatEntry(encounter);
+		entry.initiative -= this.castTime;
+		entry.casting = {
+			ability : this,
+			target  : target
+		};
+		
+		Text.Flush();
+		Gui.NextPrompt(function() {
+			encounter.CombatTick();
+		});
+	}
+	else {
+		this.CastInternal(encounter, caster, target);
+	}
 }
 
 Ability.prototype.UseOutOfCombat = function(caster, target) {

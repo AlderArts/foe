@@ -332,8 +332,9 @@ Encounter.prototype.CombatTick = function() {
 	
 	currentActiveChar = null;
 	
-	if(enc.onTick)
+	if(enc.onTick) {
 		enc.onTick();
+	}
 	
 	if(enc.LossCondition()) {
 		enc.onLoss();
@@ -379,6 +380,9 @@ Encounter.prototype.CombatTick = function() {
 		var activeChar = enc.combatOrder[0];
 		
 		currentActiveChar = activeChar.entity;
+		
+		var casting = activeChar.casting;
+		activeChar.casting = null;
 		
 		var ini = 100;
 		
@@ -462,7 +466,8 @@ Encounter.prototype.CombatTick = function() {
 				}
 				
 				found.ini -= 100; //TODO cast time for predict
-				Text.Add(found.name + "<br/>");
+				var tempCasting = found.casting ? " (casting...)" : "";
+				Text.Add(found.name + tempCasting + "<br/>");
 			});
 			Text.NL();
 			
@@ -475,7 +480,10 @@ Encounter.prototype.CombatTick = function() {
 		
 		combatScreen();
 
-		if(Math.random() < activeChar.entity.LustCombatTurnLossChance()) {
+		if(casting) {
+			casting.ability.CastInternal(encounter, activeChar.entity, casting.target);
+		}
+		else if(Math.random() < activeChar.entity.LustCombatTurnLossChance()) {
 			Text.Add("[name] is too aroused to do anything worthwhile!", {name: activeChar.entity.name});
 			Text.Flush();
 			Gui.NextPrompt(function() {
