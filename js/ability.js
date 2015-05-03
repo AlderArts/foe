@@ -211,7 +211,7 @@ Ability.prototype.Use = function(encounter, caster, target) {
 	
 	if(this.castTime > 0) {
 		var entry = caster.GetCombatEntry(encounter);
-		entry.initiative -= this.castTime;
+		entry.initiative = 100 - this.castTime; //TODO: not really good to have the fixed 100 here...
 		entry.casting = {
 			ability : this,
 			target  : target
