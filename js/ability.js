@@ -308,8 +308,9 @@ AbilityCollection.prototype.OnSelect = function(encounter, caster, backPrompt) {
 		
 		for(var i = 0; i < collection.AbilitySet.length; i++) {
 			var ability = collection.AbilitySet[i];
-			Text.Add("[ability] ([cost]): [desc]<br/>",
-				{ability: ability.name, cost: ability.CostStr(), desc: ability.Short()});
+			var castTime = ability.castTime != 0 ? ability.castTime : "instant";
+			Text.Add("[ability] (Cost: [cost], Cast time: [time]): [desc]<br/>",
+				{ability: ability.name, cost: ability.CostStr(), time: castTime, desc: ability.Short()});
 		}
 		Text.Flush();
 	};
