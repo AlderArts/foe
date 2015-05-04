@@ -41,6 +41,8 @@ Text.Parse = function(text, parseStrings) {
 					replaceStr = parseStrings[code];
 					if(isFunction(replaceStr))
 						replaceStr = replaceStr();
+					if(_.isUndefined(replaceStr))
+						replaceStr = "<b>['" + code + "' is undefined]</b>";
 				}
 				else {
 					replaceStr = "<b>['" + code + "' couldn't be parsed]</b>";

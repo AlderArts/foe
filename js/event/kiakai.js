@@ -4147,7 +4147,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 					if(player.Mouth().tongueLength.Get() > 15) {
 						options.push({ nameStr : "Tongue",
 							func : function() {
-								parse["penDesc"] = function() { Text.Parse("your [tongueDesc]", parse); };
+								parse["penDesc"] = function() { return Text.Parse("your [tongueDesc]", parse); };
 								Text.Clear();
 								Text.Add("Your [tongueDesc], rival of a cock in length, snakes out and buries itself deep inside [name], immediately beginning to thrust in and out.", parse);
 								if(kiakai.FirstCock())
