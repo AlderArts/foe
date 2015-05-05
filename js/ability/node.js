@@ -132,23 +132,23 @@ AbilityNode.EvadeFunc.Lust = function(caster, target) {
 AbilityNode.ToDamage = {};
 AbilityNode.ToDamage.Regular = function(caster, target) {
 	var damageType = this.damageType ? this.damageType : caster.elementAtk;
-	var atkMod     = that.atkMod || 1;
-	var defMod     = that.defMod || 1;
+	var atkMod     = this.atkMod || 1;
+	var defMod     = this.defMod || 1;
 	
 	var atkDmg     = atkMod * this.atkFunc(caster, target);
 	var def        = defMod * this.defFunc(caster, target);
 	
 	//var dmg = atkDmg - def;
-	var dmg = Ability.Damage(atkDmg, def, caster.level, e.level);
+	var dmg = Ability.Damage(atkDmg, def, caster.level, target.level);
 	if(dmg < 0) dmg = 0;
 	
-	dmg = damageType.ApplyDmgType(e.elementDef, dmg);
+	dmg = damageType.ApplyDmgType(target.elementDef, dmg);
 	dmg = Math.floor(dmg);
 	
 	return -dmg;
 }
 AbilityNode.ToDamage.Heal = function(caster, target) {
-	var atkMod  = that.atkMod || 1;
+	var atkMod  = this.atkMod || 1;
 	
 	var healing = atkMod * this.atkFunc(caster, target);
 	
@@ -216,8 +216,8 @@ AbilityNode.Run = function(ability, encounter, caster, target, result) {
 			// Check if it hits
 			if(Math.random() < that.toHit(caster, e)) {
 				// If it can damage
-				if(that.ToDamage) {
-					var dmg = that.ToDamage(caster, e);
+				if(that.toDamage) {
+					var dmg = that.toDamage(caster, e);
 					
 					that.damageFunc(caster, e, dmg);
 					

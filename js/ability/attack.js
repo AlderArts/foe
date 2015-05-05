@@ -6,40 +6,17 @@
 Abilities.Attack = new Ability();
 Abilities.Attack.name = "Attack";
 Abilities.Attack.Short = function() { return "Perform a physical attack."; }
-Abilities.Attack.CastInternal = function(encounter, caster, target) {
-	var atkDmg = caster.PAttack();
-	var def    = target.PDefense();
-	
-	var hit    = caster.PHit();
-	var evade  = target.PEvade();
-	
-	var toHit  = Ability.ToHit(hit, evade);
-
-	var parse = {
-		name  : caster.name,
-		tName : target.name
-	}
-	
-	if(Math.random() < toHit) {
-		//var dmg = atkDmg - def;
-		var dmg = Ability.Damage(atkDmg, def, caster.level, target.level);
-		if(dmg < 0) dmg = 0;
-		dmg = caster.elementAtk.ApplyDmgType(target.elementDef, dmg);
-		dmg = Math.floor(dmg);
-		
-		if(target.PhysDmgHP(encounter, caster, dmg)) {
-			target.AddHPAbs(-dmg);
-	
-			// TODO: Make more flavor text	
-			Text.Add("[name] attacks [tName] for " + Text.BoldColor(dmg, "#800000") + " damage! Waagh!", parse);
-		}
-	}
-	else {
-		Text.Add("[name] attacks [tName], but the blow misses!", parse);
-	}
-		
-	Text.Flush();
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
+Abilities.Attack.castTree.push(AbilityNode.Template.Physical({
+	onMiss: [function(ability, encounter, caster, target) {
+		var parse = {name: caster.NameDesc(), tName: target.nameDesc(), s: caster.plural() ? "" : "s"};
+		Text.Add("[name] attack[s] [tName], but the blow misses!", parse);
+	}],
+	onDamage: [function(ability, encounter, caster, target, dmg) {
+		var parse = {name: caster.NameDesc(), tName: target.nameDesc(), s: caster.plural() ? "" : "s"};
+		Text.Add("[name] attack[s] [tName] for " + Text.BoldColor(-dmg, "#800000") + " damage! Waagh!", parse);
+	}],
+	onAbsorb: [function(ability, encounter, caster, target, dmg) {
+		var parse = {name: caster.NameDesc(), tName: target.nameDesc(), theshe: target.heshe(), s: caster.plural() ? "" : "s", ts: target.plural() ? "" : "s"};
+		Text.Add("[name] attack[s] [tName], but [theshe] absorb[ts] the blow for " + Text.BoldColor(dmg, "#008000") + " damage!");
+	}]
+}));

@@ -446,7 +446,7 @@ Encounter.prototype.CombatTick = function() {
 			_.each(enc.combatOrder, function(c) {
 				if(!c.entity.Incapacitated()) {
 					entityName = c.entity.uniqueName ? c.entity.uniqueName : c.entity.name;
-					tempParty.push({name: entityName, ini: c.initiative, inc: c.entity.Initiative()});
+					tempParty.push({entry: c, name: entityName, ini: c.initiative, inc: c.entity.Initiative()});
 				}
 			});
 			
@@ -466,7 +466,7 @@ Encounter.prototype.CombatTick = function() {
 				}
 				
 				found.ini -= 100; //TODO cast time for predict
-				var tempCasting = found.casting ? " (casting...)" : "";
+				var tempCasting = found.entry.casting ? " (casting...)" : "";
 				Text.Add(found.name + tempCasting + "<br/>");
 			});
 			Text.NL();
@@ -476,12 +476,13 @@ Encounter.prototype.CombatTick = function() {
 			else
 				Text.Add(activeChar.entity.Possessive() + " turn.");
 			Text.NL();
+			Text.Flush();
 		}
 		
 		combatScreen();
 
 		if(casting) {
-			casting.ability.CastInternal(encounter, activeChar.entity, casting.target);
+			casting.ability.CastInternal(enc, activeChar.entity, casting.target);
 		}
 		else if(Math.random() < activeChar.entity.LustCombatTurnLossChance()) {
 			Text.Add("[name] is too aroused to do anything worthwhile!", {name: activeChar.entity.name});

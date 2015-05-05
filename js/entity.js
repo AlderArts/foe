@@ -2747,17 +2747,26 @@ TargetStrategy = {
 };
 
 Entity.prototype.GetCombatEntry = function(encounter) {
+	var ent = this;
+	var found;
 	_.each(encounter.combatOrder, function(it) {
-		if(it.entity == this)
-			return it;
+		if(it.entity == ent) {
+			found = it;
+			return false;
+		}
 	});
+	return found;
 }
 
 GetAggroEntry = function(activeChar, entity) {
+	var found;
 	_.each(activeChar.aggro, function(it) {
-		if(it.entity == entity)
-			return it;
+		if(it.entity == entity) {
+			found = it;
+			return false;
+		}
 	});
+	return found;
 }
 
 Entity.prototype.GetPartyTarget = function(encounter, activeChar) {
