@@ -482,33 +482,46 @@ Encounter.prototype.CombatTick = function() {
 		combatScreen();
 
 		if(casting) {
-			casting.ability.CastInternal(enc, activeChar.entity, casting.target);
-		}
-		else if(Math.random() < activeChar.entity.LustCombatTurnLossChance()) {
-			Text.Add("[name] is too aroused to do anything worthwhile!", {name: activeChar.entity.name});
-			Text.Flush();
-			Gui.NextPrompt(function() {
-				enc.CombatTick();
-			});
+			var ability = casting.ability;
+			ability.CastInternal(enc, activeChar.entity, casting.target);
 		}
 		else {
-			// TODO: Confuse? Is this correctly implemented?
-			if(activeChar.isEnemy) {
-				activeChar.entity.Act(enc, activeChar);
+			// Reduce cooldowns
+			if(activeChar.cooldown) {
+				_.each(activeChar.cooldown, function(c) {
+					c.cooldown--;
+				});
+				activeChar.cooldown = _.filter(activeChar.cooldown, function(c) {
+					return c.cooldown > 0;
+				});
+			}
+			
+			if(Math.random() < activeChar.entity.LustCombatTurnLossChance()) {
+			Text.Add("[name] is too aroused to do anything worthwhile!", {name: activeChar.entity.name});
+				Text.Flush();
+				Gui.NextPrompt(function() {
+					enc.CombatTick();
+				});
 			}
 			else {
-				// Confuse
-				var confuse = currentActiveChar.combatStatus.stats[StatusEffect.Confuse];
-				if(confuse) {
-					if(confuse.func)
-						confuse.func(enc, activeChar);
-					else
-						activeChar.entity.Act(enc, activeChar);
+				// TODO: Confuse? Is this correctly implemented?
+				if(activeChar.isEnemy) {
+					activeChar.entity.Act(enc, activeChar);
 				}
-				else
-					enc.SetButtons(activeChar, combatScreen);
+				else {
+					// Confuse
+					var confuse = currentActiveChar.combatStatus.stats[StatusEffect.Confuse];
+					if(confuse) {
+						if(confuse.func)
+							confuse.func(enc, activeChar);
+						else
+							activeChar.entity.Act(enc, activeChar);
+					}
+					else
+						enc.SetButtons(activeChar, combatScreen);
+				}
+				Text.Flush();
 			}
-			Text.Flush();
 		}
 	}
 }

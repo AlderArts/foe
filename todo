@@ -50,10 +50,10 @@ Combat rewrite:
  * Delayed actions/casting time
  * Default attack replaced
  * Retargetting (fallen)
+ * Ability cooldowns
 TODO:
 -----
 * Cancellable
-* Ability cooldowns
 * Making parser usage easier!
 
 * Persistent status effects

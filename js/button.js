@@ -162,7 +162,9 @@ Button.prototype.SetFromAbility = function(encounter, caster, ability, backPromp
 	this.SetText(ability.name);
 	this.tooltip = ability.tooltip;
 	this.SetVisible(true);
-	this.SetEnabled(ability.enabledCondition ? ability.enabledCondition(encounter, caster) : true);
+	var enabled = ability.enabledCondition ? ability.enabledCondition(encounter, caster) : true;
+	
+	this.SetEnabled(enabled);
 	
 	this.func = function() {
 		ability.OnSelect(encounter, caster, backPrompt);

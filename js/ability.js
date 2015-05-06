@@ -87,9 +87,8 @@ Ability = function() {
 	//TODO: Tooltip?
 	this.cost = { hp: null, sp: null, lp: null};
 	
-	//TODO: Cancel/cast time
 	this.castTime = 0;
-	this.cancellable = true;
+	this.cancellable = true; // TODO
 	this.cooldown = 0; //nr of rounds cooldown
 	
 	// Preparation nodes
@@ -209,8 +208,18 @@ Ability.prototype.Use = function(encounter, caster, target) {
 	Ability.ApplyCost(this, caster);
 	this.StartCast(encounter, caster, target);
 	
+	var entry = caster.GetCombatEntry(encounter);
+	
+	// Set cooldown
+	if(this.cooldown) {
+		entry.cooldown = entry.cooldown || [];
+		entry.cooldown.push({
+			cooldown: this.cooldown,
+			ability: this
+		});
+	}
+	
 	if(this.castTime > 0) {
-		var entry = caster.GetCombatEntry(encounter);
 		entry.initiative = 100 - this.castTime; //TODO: not really good to have the fixed 100 here...
 		entry.casting = {
 			ability : this,
@@ -234,7 +243,21 @@ Ability.prototype.UseOutOfCombat = function(caster, target) {
 }
 
 Ability.prototype.enabledCondition = function(encounter, caster) {
-	return Ability.EnabledCost(this, caster);
+	var onCooldown = this.OnCooldown(caster.GetCombatEntry(encounter));
+	
+	return Ability.EnabledCost(this, caster) && !onCooldown;
+}
+
+Ability.prototype.OnCooldown = function(casterEntry) {
+	var ability = this;
+	var onCooldown = false;
+	_.each(casterEntry.cooldown, function(c) {
+		if(ability == c.ability) {
+			onCooldown = c.cooldown;
+			return false;
+		}	
+	});
+	return onCooldown;
 }
 
 Ability.prototype.enabledTargetCondition = function(encounter, caster, target) {
@@ -303,15 +326,21 @@ AbilityCollection.prototype.Empty = function() {
 
 AbilityCollection.prototype.OnSelect = function(encounter, caster, backPrompt) {
 	var collection = this;
+	var entry = caster.GetCombatEntry(encounter);
 	var prompt = function() {
 		Text.Clear();
-		
-		for(var i = 0; i < collection.AbilitySet.length; i++) {
-			var ability = collection.AbilitySet[i];
+		_.each(collection.AbilitySet, function(ability) {
 			var castTime = ability.castTime != 0 ? ability.castTime : "instant";
-			Text.Add("[ability] (Cost: [cost], Cast time: [time]): [desc]<br/>",
-				{ability: ability.name, cost: ability.CostStr(), time: castTime, desc: ability.Short()});
-		}
+			var cooldown = ability.OnCooldown(entry);
+			Text.Add("[ability] (Cost: [cost], Cast time: [time][cd]): [desc]<br/>",
+				{
+					ability: ability.name,
+					cost: ability.CostStr(),
+					time: castTime,
+					desc: ability.Short(),
+					cd: cooldown ? (", cooling down... " + cooldown + " turns") : ""
+				});
+		});
 		Text.Flush();
 	};
 	
