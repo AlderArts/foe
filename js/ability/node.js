@@ -15,7 +15,8 @@ AbilityNode.Template.Blank = function(node) {
 	node.onDamage  = node.onDamage || [];
 	node.onAbsorb  = node.onAbsorb || [];
 	
-	node.hitFallen = node.hitFallen || false;
+	node.hitFallen = node.hitFallen;
+	node.retarget  = node.retarget;
 	
 	node.hitMod    = node.hitMod;
 	node.atkMod    = node.atkMod;
@@ -35,7 +36,8 @@ AbilityNode.Template.Blank = function(node) {
 AbilityNode.Template.Physical = function(node) {
 	var node = node || {};
 	
-	node.hitFallen = false;
+	node.hitFallen = node.hitFallen;
+	node.retarget  = node.retarget;
 	
 	node.damageType = node.damageType ? new DamageType(node.damageType) : null;
 	
@@ -53,7 +55,8 @@ AbilityNode.Template.Physical = function(node) {
 AbilityNode.Template.Magical = function(node) {
 	var node = node || {};
 	
-	node.hitFallen = false;
+	node.hitFallen = node.hitFallen;
+	node.retarget  = node.retarget;
 	
 	node.damageType = node.damageType ? new DamageType(node.damageType) : null;
 	
@@ -71,7 +74,8 @@ AbilityNode.Template.Magical = function(node) {
 AbilityNode.Template.Lust = function(node) {
 	var node = node || {};
 	
-	node.hitFallen = false;
+	node.hitFallen = node.hitFallen;
+	node.retarget  = node.retarget;
 	
 	node.damageType = node.damageType ? new DamageType(node.damageType) : null;
 	
@@ -191,8 +195,30 @@ AbilityNode.DamageFunc.Lust = function(caster, target, dmg) {
 	target.AddLustAbs(dmg);
 }
 
+AbilityNode.Retarget = {};
+AbilityNode.Retarget.Fallen = function(ability, encounter, caster, target, result) {
+	if(!_.has(target, 'members') && target.Incapacitated()) {
+		var entry = target.GetCombatEntry(encounter);
+		if(entry) {
+			var group = party.members;
+			if(entry.isEnemy)
+				group = encounter.enemy.members;
+			target = _.sample(_.filter(group, function(e) {
+				return !e.Incapacitated();
+			}));
+		}
+	}
+	
+	return target;
+}
+
 AbilityNode.Run = function(ability, encounter, caster, target, result) {
 	var that = this;
+	
+	if(that.retarget) {
+		target = that.retarget(ability, encounter, caster, target, result);
+	}
+	
 	// OnCast, allways apply no matter what
 	_.each(that.onCast, function(node) {
 		node(ability, encounter, caster, target);

@@ -49,9 +49,9 @@ Combat rewrite:
  * Damage types (more flexible basic attack). Damage hp/sp/lp
  * Delayed actions/casting time
  * Default attack replaced
+ * Retargetting (fallen)
 TODO:
 -----
-* Retargetting (fallen). Needs some complex logic
 * Cancellable
 * Ability cooldowns
 * Making parser usage easier!
