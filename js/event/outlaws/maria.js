@@ -240,11 +240,11 @@ Scenes.Maria.ForestConfront = function() {
 		func : function() {
 			Text.Clear();
 			if(party.Alone())
-				Text.Add("You've had just about enough of this presumptuous  highwaywoman. Lunging forward, you tackle the archer to the ground before she has the chance to respond.", parse);
+				Text.Add("You've had just about enough of this presumptuous highwaywoman. Lunging forward, you tackle the archer to the ground before she has the chance to respond.", parse);
 			else {
 				parse.companion = party.Two() ? "companion is" : "companions are";
 				parse.their     = party.Two() ? p1.hisher() : "their";
-				Text.Add("You watch as your [companion] led away ahead of you, [their] captors apparently deciding on the course of action faster than Maria. You decide you've had just about enough of the presumptuous highwaywoman, and as soon as her allies are out of sight, take your chance.", parse);
+				Text.Add("You watch as your [companion] led away ahead of you, [their] captors apparently deciding on their course of action faster than Maria. You decide you've had just about enough of the presumptuous highwaywoman, and as soon as her allies are out of sight, take your chance.", parse);
 				Text.NL();
 				Text.Add("You lunge forward, tackling the archer to the ground before she has the chance to respond.", parse);
 			}
@@ -272,7 +272,7 @@ Scenes.Maria.ForestConfront = function() {
 				party.members = enc.oldParty;
 				Scenes.Maria.fight = 3;
 				Text.Clear();
-				Text.Add("You fall to the ground, utterly defeated. The bow woman kicks away your [weaponDesc] and levels an arrow at you. Glaring at you, she orders you to stand. As you wobble to your feet, she comes up behind you, binding your hands fast with some rope. Cold shivers run up your spine as you feel the sharp point of a knife dig into the soft flesh between your shoulder blades.", parse);
+				Text.Add("You fall to the ground, utterly defeated. The archer kicks away your [weaponDesc] and levels an arrow at you. Glaring at you, she orders you to stand. As you wobble to your feet, she comes up behind you, binding your hands fast with some rope. Cold shivers run up your spine as you feel the sharp point of a knife dig into the soft flesh between your shoulder blades.", parse);
 				Text.NL();
 				if(maria.LustLevel() > 0.5) {
 					Text.Add("Throwing you to the ground, Maria roughly pins you to the leaf-strewn forest floor. Holding you there with a foot, she strips off her laughably tiny shorts and kneels down over you. Pressing her steaming cunt into your mouth, she orders you, <i>“Lick.”</i>", parse);
@@ -372,7 +372,7 @@ Scenes.Maria.ForestConfrontWin = function() {
 					Text.NL();
 					Text.Add("Pulling your fingers from the archer's wanton hole, you notice her lift her legs, begging for more of the delicious friction. Tutting softly, you circle a finger around her clit. It pokes from its hood, red and engorged. She begins bucking underneath you, but you pull away before she can cum. Pulling your [cockDesc] from her mouth, you turn around.", parse);
 					Text.NL();
-					Text.Add("As juiced up as she is, you have no problem pounding straight into her core. Thrashing away at her slick pussy, you lose yourself in a haze of lust and feel yourself getting closer to the edge you had been skirting after her oral earlier assault. Her walls ripple around you convulsively as she cums under the assault. Moments later you glaze her insides with your liquid lust.", parse);
+					Text.Add("As juiced up as she is, you have no problem pounding straight into her core. Thrashing away at her slick pussy, you lose yourself in a haze of lust and feel yourself getting closer to the edge you had been skirting after her earlier oral assault. Her walls ripple around you convulsively as she cums under the assault. Moments later you glaze her insides with your liquid lust.", parse);
 					
 					var cum = player.OrgasmCum();
 					
@@ -451,7 +451,7 @@ Scenes.Maria.ForestAftermath = function() {
 		Text.Add("Dropping your [weaponDesc], you ", parse);
 	else
 		Text.Add("You ");
-	Text.Add("step back and raise your hands non-threateningly. An orange cat-morph steps forward and ties your hands behind your back, then forces you down onto the ground and ties your feet to your hands.  Shakily, the bow woman rises to her feet with the help of a red-armoured wolf-eared man. She takes the lead and heads... well, you don't know where she plans on taking you, but you're beginning to think it might not have been such a good idea to attack her.", parse);
+	Text.Add("step back and raise your hands non-threateningly. An orange cat-morph steps forward and ties your hands behind your back, then forces you down onto the ground and ties your feet to your hands. Shakily, the archer rises to her feet with the help of a red-armoured, wolf-eared man. She takes the lead and heads... well, you don't know where she plans on taking you, but you're beginning to think it might not have been such a good idea to attack her.", parse);
 
 	Text.Flush();
 	Gui.NextPrompt(Scenes.Maria.ForestFollow);
@@ -463,7 +463,7 @@ Scenes.Maria.ForestFollow = function() {
 	Text.Clear();
 	Text.Add("You decide the best course of action is to follow Maria.", parse);
 	Text.NL();
-	Text.Add("Turning on her heel, Maria guides you through the massive oak trees, clambering over roots and around massive, tangled thickets with ease. She leads you through a labyrinthine assortment of vegetation, constantly switching back and forth, seemingly at random. The ground under your feet begins turning softer, and the footing becomes harder to keep the longer you follow the bowwoman.", parse);
+	Text.Add("Turning on her heel, Maria guides you through the massive oak trees, clambering over roots and around massive, tangled thickets with ease. She leads you through a labyrinthine assortment of vegetation, constantly switching back and forth between trails, seemingly at random. The ground under your feet begins turning softer, and the footing becomes harder to keep the longer you follow the bowwoman.", parse);
 	Text.NL();
 	Text.Add("As you watch her climb up and around the huge tree roots, you are treated to the lovely sight of her generous ass swaying back and forth. Her wide hips fill out the shorts she wears very tightly, accentuating each curve of her body. Thinking it through, you realize that all her clothing is cut to accentuate her form, and draw your eyes to the more delectable parts of her body.", parse);
 	Text.Flush();
@@ -538,7 +538,7 @@ Scenes.Maria.ForestCamp = function() {
 			Text.Add(" Without your weapon, you can't force her to help you either.", parse);
 		Text.Add(" Unsettled by this sudden turn of events, you nonetheless eagerly await her return. It seems she's decided to bring you to the outlaw camp you heard about. Maybe they can get you inside of the city.", parse);
 		Text.NL();
-		Text.Add("Once Maria finally comes back, she's followed closely by a large fox-morph wielding a greatsword. Its slung across his shoulder, resting there easily. The muscles in his arms bulge as he adjusts the way it sits on him. His russet fur ruffles in the soft wind, and you can see his muscles rippling as he moves. His yellow eyes regard you suspiciously, and his hands shift across the hilt. Maria gestures for you to follow her again, and the three of you head up over the rooty embankment. Laying eyes on the 'camp', you gasp in surprise. When you had heard a few outlaws had taken up residence in the forest, you never imagined something like this.", parse);
+		Text.Add("Once Maria finally comes back, she's followed closely by a large fox-morph wielding a greatsword. It's slung across his shoulder, resting there easily. The muscles in his arms bulge as he adjusts the way it sits on him. His russet fur ruffles in the soft wind, and you can see his muscles rippling as he moves. His yellow eyes regard you suspiciously, and his hands shift across the hilt. Maria gestures for you to follow her again, and the three of you head up over the rooty embankment. Laying eyes on the 'camp', you gasp in surprise. When you had heard a few outlaws had taken up residence in the forest, you never imagined something like this.", parse);
 		Text.NL();
 		Text.Add("Trees larger than most others, even this deep in the forest, block out most of the sunlight. Shafts of light scatter down through the leaves, leaving everything in a constantly shifting twilight. In front of you, a trench at least five feet wide drops straight into the ground for a ways, and the bottom holds an uncountable number of sharpened stakes. Falling down there would certainly mean death for anyone. But more impressive than any of that, is the wall.", parse);
 		Text.NL();
