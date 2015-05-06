@@ -59,7 +59,7 @@ Scenes.Chief.Interact = function() {
 		options.push({ nameStr : "Polite",
 			func : function() {
 				chief.relation.IncreaseStat(100, 10);
-				Text.Add("You politely ask what he means, not sure what [elfname] has promised, or who the old man is, for that matter. The second question is answered almost immediately, as the grizzled man speaks. <i>“I'm the chief, herding these here folks in about the same direction, looking out for their interests so to speak.”</i> The old man takes a deep draft from his pipe before continuing.", parse);
+				Text.Add("You politely ask what he means, not sure what [elfname] has promised, or who the old man is, for that matter. The second question is answered almost immediately, as the grizzled man speaks. <i>“I'm the chief, herding these here folks in about the same direction, looking out for their interests, so to speak.”</i> The old man takes a deep draft from his pipe before continuing.", parse);
 				Text.NL();
 				PrintDefaultOptions();
 			}, enabled : true,
@@ -224,7 +224,7 @@ Scenes.Chief.Interact = function() {
 						Text.NL();
 						Text.Add("<i>“A long, surprisingly uninteresting story, I'm afraid,”</i> the old man tells you. <i>“I'll try to keep it short, so as not to bore you.”</i> Settling down comfortably beside him, you urge him to begin.", parse);
 						Text.NL();
-						Text.Add("<i>“I was a vagrant in my youth, a street rat hanging around the poorer parts of the capital. I hung out with the wrong sorts, or so the city watch felt about it, anyway”</i> he looks around the camp fondly. <i>“Those wrong sorts are now my family,”</i> he waves broadly at the nomad camp.", parse);
+						Text.Add("<i>“I was a vagrant in my youth, a street rat hanging around the poorer parts of the capital. I hung out with the wrong sorts, or so the city watch felt about it, anyway.”</i> He looks around the camp fondly. <i>“Those wrong sorts are now my family,”</i> he waves broadly at the nomad camp.", parse);
 						Text.NL();
 						Text.Add("<i>“As time went by, I managed to find more people like me, those who came from other worlds and had no place to stay. We formed a commune of sorts in the slums of the capital, but the city watch soon drove us out. Over the years, we traveled to every place on Eden, visiting the desert oasis, the strange city hidden among the branches of the Great Tree, the hidden glades of the dryads, and many others.”</i>", parse);
 						Text.NL();
