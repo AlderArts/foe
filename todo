@@ -51,10 +51,11 @@ Combat rewrite:
  * Default attack replaced
  * Retargetting (fallen)
  * Ability cooldowns
+ * Making parser usage easier!
 TODO:
 -----
 * Cancellable
-* Making parser usage easier!
+* Status effects
 
 * Persistent status effects
 

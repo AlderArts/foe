@@ -1,5 +1,31 @@
 
 AbilityNode = {};
+
+AbilityNode.DefaultParser = function(caster, target) {
+	var parse = {};
+	
+	parse         = caster.ParserPronouns(parse);
+	parse["name"] = caster.nameDesc();
+	parse["Name"] = caster.NameDesc();
+	parse["poss"] = caster.possessive();
+	parse["Poss"] = caster.Possessive();
+	parse["s"]    = caster.plural() ? "" : "s";
+	parse["notS"] = caster.plural() ? "s" : "";
+	parse["is"]   = caster.is();
+	parse["hand"] = function() { return caster.HandDesc(); };
+	if(target) {
+		parse          = target.ParserPronouns(parse, "t");
+		parse["tname"] = target.nameDesc();
+		parse["tName"] = target.NameDesc();
+		parse["tposs"] = target.possessive();
+		parse["tPoss"] = target.Possessive();
+		parse["ts"]    = target.plural() ? "" : "s";
+		parse["tnotS"] = target.plural() ? "s" : "";
+		parse["tis"]   = target.is();
+	}
+	return parse;
+}
+
 AbilityNode.Template = {};
 
 AbilityNode.Template.Blank = function(node) {
