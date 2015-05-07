@@ -1390,7 +1390,7 @@ Body.prototype.HipsDesc = function(plural) {
 		adjs.push("unnoticable");
 	}
 	if(size >= 5 && size < 10) {
-		adjs.push("noticable");
+		adjs.push("noticeable");
 		adjs.push("pleasant");
 		adjs.push("waspish");
 		adjs.push("flared");
