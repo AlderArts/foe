@@ -88,7 +88,7 @@ Ability = function() {
 	this.cost = { hp: null, sp: null, lp: null};
 	
 	this.castTime = 0;
-	this.cancellable = true; // TODO
+	this.cancellable = true; // can be a function(ability, encounter, caster, target, result)
 	this.cooldown = 0; //nr of rounds cooldown
 	
 	// Preparation nodes

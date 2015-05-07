@@ -4,15 +4,17 @@ AbilityNode = {};
 AbilityNode.DefaultParser = function(caster, target) {
 	var parse = {};
 	
-	parse         = caster.ParserPronouns(parse);
-	parse["name"] = caster.nameDesc();
-	parse["Name"] = caster.NameDesc();
-	parse["poss"] = caster.possessive();
-	parse["Poss"] = caster.Possessive();
-	parse["s"]    = caster.plural() ? "" : "s";
-	parse["notS"] = caster.plural() ? "s" : "";
-	parse["is"]   = caster.is();
-	parse["hand"] = function() { return caster.HandDesc(); };
+	if(caster) {
+		parse         = caster.ParserPronouns(parse);
+		parse["name"] = caster.nameDesc();
+		parse["Name"] = caster.NameDesc();
+		parse["poss"] = caster.possessive();
+		parse["Poss"] = caster.Possessive();
+		parse["s"]    = caster.plural() ? "" : "s";
+		parse["notS"] = caster.plural() ? "s" : "";
+		parse["is"]   = caster.is();
+		parse["hand"] = function() { return caster.HandDesc(); };
+	}
 	if(target) {
 		parse          = target.ParserPronouns(parse, "t");
 		parse["tname"] = target.nameDesc();
@@ -40,14 +42,14 @@ AbilityNode.Template.Blank = function(node) {
 	node.onMiss    = node.onMiss   || [];
 	node.onDamage  = node.onDamage || [];
 	node.onAbsorb  = node.onAbsorb || [];
-	
+	/*
 	node.hitFallen = node.hitFallen;
 	node.retarget  = node.retarget;
 	
 	node.hitMod    = node.hitMod;
 	node.atkMod    = node.atkMod;
 	node.defMod    = node.defMod;
-	
+	*/
 	node.toHit     = node.toHit     || AbilityNode.ToHit.Regular;
 	node.toDamage  = node.toDamage  || AbilityNode.ToDamage.Regular;
 	
@@ -61,10 +63,10 @@ AbilityNode.Template.Blank = function(node) {
 }
 AbilityNode.Template.Physical = function(node) {
 	var node = node || {};
-	
+	/*
 	node.hitFallen = node.hitFallen;
 	node.retarget  = node.retarget;
-	
+	*/
 	node.damageType = node.damageType ? new DamageType(node.damageType) : null;
 	
 	node.toHit     = node.toHit     || AbilityNode.ToHit.Regular;
@@ -80,10 +82,10 @@ AbilityNode.Template.Physical = function(node) {
 }
 AbilityNode.Template.Magical = function(node) {
 	var node = node || {};
-	
+	/*
 	node.hitFallen = node.hitFallen;
 	node.retarget  = node.retarget;
-	
+	*/
 	node.damageType = node.damageType ? new DamageType(node.damageType) : null;
 	
 	node.toHit     = node.toHit     || AbilityNode.ToHit.Regular;
@@ -99,10 +101,10 @@ AbilityNode.Template.Magical = function(node) {
 }
 AbilityNode.Template.Lust = function(node) {
 	var node = node || {};
-	
+	/*
 	node.hitFallen = node.hitFallen;
 	node.retarget  = node.retarget;
-	
+	*/
 	node.damageType = node.damageType ? new DamageType(node.damageType) : null;
 	
 	node.toHit     = node.toHit     || AbilityNode.ToHit.Regular;
@@ -123,6 +125,70 @@ AbilityNode.Template.Fallthrough = function(node) {
 	node.damageFunc = node.damageFunc || AbilityNode.DamageFunc.Physical;
 	
 	return _.bind(AbilityNode.RunFallthrough, node);
+}
+AbilityNode.RunFallthrough = function(ability, encounter, caster, target, result) {
+	var that = this;
+	var fraction = that.fraction || 1;
+	
+	var dmg = fraction * result;
+	
+	that.damageFunc(caster, e, dmg);
+	
+	// On dealing damage (dmg is negative)
+	if(dmg <= 0) {
+		_.each(that.onDamage, function(node) {
+			node(ability, encounter, caster, e, dmg);
+		});
+	}
+	// On healing/absorbing (dmg is positive)
+	else {
+		_.each(that.onAbsorb, function(node) {
+			node(ability, encounter, caster, e, dmg);
+		});
+	}
+}
+
+AbilityNode.Template.Cancel = function(node) {
+	var node = node || {};
+	/*
+	node.result = node.result;
+	*/
+	node.onHit     = node.onHit    || [];
+	node.onMiss    = node.onMiss   || [];
+	return _.bind(AbilityNode.RunCancel, node);
+}
+AbilityNode.RunCancel = function(ability, encounter, caster, target, result) {
+	var that = this;
+	var entry = target.GetCombatEntry(encounter);
+	// Only trigger if target is casting
+	if(entry && entry.casting) {
+		// Override result
+		result = that.result || result;
+		// Is casted ability cancellable?
+		var cancellable = entry.casting.ability.cancellable;
+		// Check if applicable in this situation (for super special cancels)
+		if(_.isFunction(cancellable))
+			cancellable = cancellable(ability, encounter, caster, target, result);
+		// When all is said and done, proceed?
+		if(cancellable) {
+			var parse = AbilityNode.DefaultParser(caster, target);
+			Text.NL();
+			Text.Add("[tPoss] concentration is broken!", parse, 'bold');
+			Text.NL();
+			// Cancel casting
+			entry.casting = null;
+			// Apply any additional effects
+			_.each(that.onHit, function(node) {
+				node(ability, encounter, caster, target, result);
+			});
+		}
+		else {
+			// On miss
+			_.each(that.onMiss, function(node) {
+				node(ability, encounter, caster, target);
+			});
+		}
+	}
 }
 
 AbilityNode.ToHit = {};
@@ -300,27 +366,5 @@ AbilityNode.Run = function(ability, encounter, caster, target, result) {
 			}
 		});
 	});
-}
-
-AbilityNode.RunFallthrough = function(ability, encounter, caster, target, result) {
-	var that = this;
-	var fraction = that.fraction || 1;
-	
-	var dmg = fraction * result;
-	
-	that.damageFunc(caster, e, dmg);
-	
-	// On dealing damage (dmg is negative)
-	if(dmg <= 0) {
-		_.each(that.onDamage, function(node) {
-			node(ability, encounter, caster, e, dmg);
-		});
-	}
-	// On healing/absorbing (dmg is positive)
-	else {
-		_.each(that.onAbsorb, function(node) {
-			node(ability, encounter, caster, e, dmg);
-		});
-	}
 }
 
