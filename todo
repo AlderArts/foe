@@ -53,10 +53,10 @@ Combat rewrite:
  * Ability cooldowns
  * Making parser usage easier!
  * Cancellable (TEST)
+ * Spell stack
 TODO:
 -----
 * Status effects
-* Spell stack
 
 * Persistent status effects
 

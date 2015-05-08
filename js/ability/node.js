@@ -120,7 +120,10 @@ AbilityNode.Template.Lust = function(node) {
 }
 AbilityNode.Template.Fallthrough = function(node) {
 	var node = node || {};
-	
+
+	node.onDamage  = node.onDamage || [];
+	node.onAbsorb  = node.onAbsorb || [];
+
 	node.fraction = node.fraction || 1;
 	node.damageFunc = node.damageFunc || AbilityNode.DamageFunc.Physical;
 	
@@ -132,18 +135,86 @@ AbilityNode.RunFallthrough = function(ability, encounter, caster, target, result
 	
 	var dmg = fraction * result;
 	
-	that.damageFunc(caster, e, dmg);
+	that.damageFunc(caster, target, dmg);
 	
 	// On dealing damage (dmg is negative)
 	if(dmg <= 0) {
 		_.each(that.onDamage, function(node) {
-			node(ability, encounter, caster, e, dmg);
+			node(ability, encounter, caster, target, dmg);
 		});
 	}
 	// On healing/absorbing (dmg is positive)
 	else {
 		_.each(that.onAbsorb, function(node) {
-			node(ability, encounter, caster, e, dmg);
+			node(ability, encounter, caster, target, dmg);
+		});
+	}
+}
+
+AbilityNode.Template.AddSpellstack = function(node) {
+	var node = node || {};
+	/*
+	node.value = node.value;
+	*/
+	return _.bind(AbilityNode.RunAddSpellstack, node);
+}
+AbilityNode.RunAddSpellstack = function(ability, encounter, caster, target, result) {
+	var that = this;
+	
+	var value = _.isFunction(that.value) ? that.value() : that.value;
+	
+	var entry = target.GetCombatEntry(encounter);
+	entry.spellstack = entry.spellstack || [];
+	entry.spellstack.push(value);
+}
+
+AbilityNode.Template.MatchSpellstack = function(node) {
+	var node = node || {};
+	/*
+	node.consume = node.consume;
+	 */
+	
+	// Stack to match
+	node.stack  = node.stack  || [];
+	
+	node.onHit  = node.onHit  || [];
+	node.onMiss = node.onMiss || [];
+	
+	return _.bind(AbilityNode.RunMatchSpellstack, node);
+}
+AbilityNode.RunMatchSpellstack = function(ability, encounter, caster, target, result) {
+	var that = this;
+	
+	var consume = that.consume;
+	var entry = target.GetCombatEntry(encounter);
+	var spellstack = entry.spellstack || [];
+	var stack = that.stack;
+	var match = true;
+	if(spellstack.length >= stack.length) {
+		var first = 0;
+		_.each(stack, function(spell) {
+			first = _.indexOf(spellstack, spell, first);
+			if(first == -1) {
+				match = false;
+				return false;
+			}
+			else
+				first++;
+		});
+	}
+	else
+		match = false;
+	
+	if(match) {
+		if(consume) entry.spellstack = [];
+		
+		_.each(that.onHit, function(node) {
+			node(ability, encounter, caster, target, result);
+		});
+	}
+	else {
+		_.each(that.onMiss, function(node) {
+			node(ability, encounter, caster, target, result);
 		});
 	}
 }
