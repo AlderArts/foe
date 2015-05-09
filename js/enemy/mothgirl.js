@@ -536,11 +536,11 @@ Scenes.Mothgirl.Loss = function(enc, traded) {
 		tongue  : function() { return player.TongueDesc(); }
 	};
 	
-	parse = Text.ParserPlural(parse, player.NumCocks());
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() { // PC eats her out
-		Text.Add("The moth-girl tsks her tongue as your wandering eyes drinking in the soft mounds of her bare breasts, the stiffening peaks of her pink nipples as they harden under your lustful gaze. She grins, planting her hands on her big hips and puffing her chest out a bit for you. <i>“Like what you see? I have to say, they're </i>definitely<i> my best assets, don't you think?”</i>", parse);
+		Text.Add("The moth-girl clicks her tongue as your wandering eyes drinking in the soft mounds of her bare breasts, the stiffening peaks of her pink nipples as they harden under your lustful gaze. She grins, planting her hands on her big hips and puffing her chest out a bit for you. <i>“Like what you see? I have to say, they're <b>definitely</b> my best assets, don't you think?”</i>", parse);
 		Text.NL();
 		Text.Add("You nod dumbly as the mammoth mammaries inch closer as the moth leans over you. Teasingly, she slips a finger into one of her inverted points, shivering as she swirls her digit through the slit of her nipple until the rosy point peeks out enough for her to pinch it. While you're enthralled by the display, her other hand works its way down to her waist, thumb hooking through her belt and hiking her pants down. She steps out of them, kicking her breeches and sword out of the way and leaving herself more or less bare for you. Her hand returns upward, cupping her other breast, leaning it in give you a tantalizing look at her massive assets.", parse);
 		Text.NL();
@@ -567,7 +567,7 @@ Scenes.Mothgirl.Loss = function(enc, traded) {
 		parse["gen"] = player.FirstCock() ? "pumping your prick" : "jilling your slit";
 		Text.Add("You moan into her tits, pinned against the tree as you are, lavishing her nipples with affection in trade for her hand's wonderful work. She moves faster, [gen] as she starts to grind her hips against your own crotch, gaining just a little more pleasure from your body. With a mischievous grin, her free hand cups your cheek, pulling you back into a moment-long kiss... before guiding you down to one of her teats, planting your lips right on the pink disc of her areola.", parse);
 		Text.NL();
-		Text.Add("You suckle on the moth's tit, tongue lavishing it with licks and slurps and gentle teases between your teeth as she grinds herself against you, her ragged breath turning to sweet moans and little gasps and cries. Your hands slip down from her expansive bust, trailing across the sensitive skin of her waist and hips before slipping down to the sodden lake between your groins. The moth gives a shrill scream of pleasure as your digits bury themselves in her dripping cooch, spreading her spasming lips wide to reveal the glistening pink channel of her sex, thumbs reaching up to tease and caress the pink bulb of her clit.", parse);
+		Text.Add("You suckle on the moth's tit, tongue lavishing it with licks, slurps and gentle teases between your teeth as she grinds herself against you, her ragged breath turning to sweet moans, little gasps and cries. Your hands slip down from her expansive bust, trailing across the sensitive skin of her waist and hips before slipping down to the sodden lake between your groins. The moth gives a shrill scream of pleasure as your digits bury themselves in her dripping cooch, spreading her spasming lips wide to reveal the glistening pink channel of her sex, thumbs reaching up to tease and caress the pink bulb of her clit.", parse);
 		Text.NL();
 		if(p1cock) {
 			Text.Add("<i>“Ah... alright, alright, just... stick it in, already...”</i> the moth-girl moans, her domineering facade fading to quivering, eager sex as you bring her closer and closer to her breaking point. With a muted little gasp, the moth shifts her hips to give your throbbing member easy access to her waiting womanhood; you plunge in without hesitation, trading the wringing grasp of her fluffy fingers to the clinging, wet tightness of the thief's sodden sex.", parse);
@@ -581,10 +581,11 @@ Scenes.Mothgirl.Loss = function(enc, traded) {
 			Text.NL();
 		}
 		parse["c"] = player.FirstCock() ? " and cock" : "";
-		Text.Add("The moth's eyes roll back in mindless pleasure, hips rocking atop you, riding you for everything you're worth, tits pressing into your face until you're nearly blinded by the massive orbs of titflesh. Her movements became faster, breath less and less steady as your mouth and fingers[c] work their magic on her tender body, working all her sensitive spots until she's a writhing mess of near-orgasmic bug-slut, all but begging for release. <i>“Yeah, yeah, just like that! Give it to me, baby! Yeah!”</i>", parse);
+		parse['and'] = player.FirstCock() ? "," : " and"
+		Text.Add("The moth's eyes roll back in mindless pleasure, hips rocking atop you, riding you for everything you're worth, tits pressing into your face until you're nearly blinded by the massive orbs of titflesh. Her movements became faster, her breath less and less steady as your mouth[and] fingers[c] work their magic on her tender body, working all her sensitive spots until she's a writhing mess of near-orgasmic bug-slut, all but begging for release. <i>“Yeah, yeah, just like that! Give it to me, baby! Yeah!”</i>", parse);
 		Text.NL();
 		parse["c"] = player.FirstCock() ? " and fucking" : "";
-		Text.Add("You keep doing what you're doing, suckling and fingering[c], harder and faster until the moth throws her head back with an orgiastic scream of pleasure that echoes out around you, roaring with feminine ecstasy as fem-cum gushes out around you, smearing your crotch with her juices as she cums and cums, her orgasm lasting for what seems like a blissful eternity.", parse);
+		Text.Add("You keep doing what you're doing, suckling[and] fingering[c] harder and faster until the moth throws her head back with an orgasmic scream of pleasure that echoes out around you. She roars in feminine ecstasy as fem-cum gushes out around you, smearing your crotch with her juices as she cums and cums, her orgasm lasting for what seems like a blissful eternity.", parse);
 		if(player.FirstCock()) {
 			Text.Add(" Her cunt spasms and squeezes so wonderfully tight around your [cock] as she orgasms, drawing you so close to the edge you can hardly think, save to grab the moth's hips and slam her down on your dick, cramming every last inch into her. She gives another shriek of pleasure, not skipping a beat as she moves her hips to bring you over too. Your fingers dig into her skin, holding the moth-slut tight as you join her in orgasm, blowing your load deep inside her.", parse);
 			var cum = player.OrgasmCum();
