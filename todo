@@ -43,21 +43,9 @@ Capacity rewrite: there are some rather large capacity increases left here and t
 Also, there's some NPCs that can no longer be fucked due to the changes (terry, kia). Look into.
 
 
-Combat rewrite:
----------------
-** Started work on ability rewrite. Needs moar testing
- * Damage types (more flexible basic attack). Damage hp/sp/lp
- * Delayed actions/casting time
- * Default attack replaced
- * Retargetting (fallen)
- * Ability cooldowns
- * Making parser usage easier!
- * Cancellable (TEST)
- * Spell stack
 TODO:
 -----
-* Status effects
-
+* Combat status effects
 * Persistent status effects
 
 
