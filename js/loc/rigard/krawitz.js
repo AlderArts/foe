@@ -777,7 +777,7 @@ world.loc.Rigard.Krawitz.Mansion.storeroom.description = function() {
 			Text.NL();
 			Text.Add(" Recalling the conversation you overheard, you make your way to the back of the room, uncovering a small ornate chest hidden behind a drapery.");
 		}
-		else if(player.Int() > 30) {
+		else if(player.Int() > 40) {
 			Text.NL();
 			Text.Add(" Where could the good stuff be hidden? Scanning the room once more, your eyes hone in on a drapery hanging at the very back of the room. Pulling it aside, you uncover a small ornate chest. Too easy.");
 		}
