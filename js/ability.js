@@ -243,7 +243,7 @@ Ability.prototype.UseOutOfCombat = function(caster, target) {
 }
 
 Ability.prototype.enabledCondition = function(encounter, caster) {
-	var onCooldown = this.OnCooldown(caster.GetCombatEntry(encounter));
+	var onCooldown = encounter ? this.OnCooldown(caster.GetCombatEntry(encounter)) : false;
 	
 	return Ability.EnabledCost(this, caster) && !onCooldown;
 }
