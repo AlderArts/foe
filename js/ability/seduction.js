@@ -6,6 +6,7 @@
 Abilities.Seduction = {};
 
 
+//TODO REPLACE
 Abilities.Seduction.Sleep = new Ability();
 Abilities.Seduction.Sleep.name = "Sleep";
 Abilities.Seduction.Sleep.Short = function() { return "Put one enemy to sleep for a short while with magical charms."; }
@@ -39,6 +40,7 @@ Abilities.Seduction.Sleep.CastInternal = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.Seduction.TIllusion = new Ability();
 Abilities.Seduction.TIllusion.name = "T.Illusion";
 Abilities.Seduction.TIllusion.Short = function() { return "Terrifies your foes by creating frightening phantasms that soak up any attacks directed at you."; }
@@ -90,6 +92,7 @@ Abilities.Seduction.TIllusion.CastInternal = function(encounter, caster) {
 }
 
 
+//TODO REPLACE
 Abilities.Seduction.SIllusion = new Ability();
 Abilities.Seduction.SIllusion.name = "S.Illusion";
 Abilities.Seduction.SIllusion.Short = function() { return "Arouses your foes by creating a harem of alluring mirages."; }
@@ -142,6 +145,7 @@ Abilities.Seduction.SIllusion.CastInternal = function(encounter, caster) {
 }
 
 
+//TODO REPLACE
 Abilities.Seduction.Confuse = new Ability();
 Abilities.Seduction.Confuse.name = "Confuse";
 Abilities.Seduction.Confuse.Short = function() { return "Fuck a single opponent’s mind, temporarily drawing them to your side."; }
@@ -174,6 +178,7 @@ Abilities.Seduction.Confuse.CastInternal = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.Seduction.Rut = new Ability();
 Abilities.Seduction.Rut.name = "Rut";
 Abilities.Seduction.Rut.Short = function() { return "Hump away at target, dealing damage."; }
@@ -205,6 +210,7 @@ Abilities.Seduction.Rut.CastInternal = function(encounter, caster, target) {
 	});
 }
 
+//TODO REPLACE
 Abilities.Seduction.Fantasize = new Ability();
 Abilities.Seduction.Fantasize.name = "Fantasize";
 Abilities.Seduction.Fantasize.Short = function() { return "Raise own lust."; }
@@ -229,6 +235,7 @@ Abilities.Seduction.Fantasize.CastInternal = function(encounter, caster) {
 }
 
 
+//TODO REPLACE
 Abilities.Seduction.Soothe = new Ability();
 Abilities.Seduction.Soothe.name = "Soothe";
 Abilities.Seduction.Soothe.cost = { hp: null, sp: 20, lp: null};
@@ -268,6 +275,7 @@ Abilities.Seduction.Soothe.OnHit = function(encounter, caster, target, dmg) {
 }
 
 
+//TODO REPLACE
 Abilities.Seduction.Captivate = new Ability();
 Abilities.Seduction.Captivate.name = "Captivate";
 Abilities.Seduction.Captivate.cost = { hp: null, sp: null, lp: 40};
@@ -321,6 +329,7 @@ Abilities.Seduction.Captivate.OnMiss = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.Seduction.Lull = new Ability();
 Abilities.Seduction.Lull.name = "Lull";
 Abilities.Seduction.Lull.cost = { hp: null, sp: 10, lp: 10};

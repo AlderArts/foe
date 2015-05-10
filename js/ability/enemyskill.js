@@ -1,6 +1,7 @@
 
 Abilities.EnemySkill = {};
 
+//TODO REPLACE
 Abilities.EnemySkill.Sting = new AttackPhysical();
 Abilities.EnemySkill.Sting.name = "Sting";
 Abilities.EnemySkill.Sting.Short = function() { return "Tail attack with chance of poisoning the target."; }
@@ -28,6 +29,7 @@ Abilities.EnemySkill.Sting.TargetEffect = function(encounter, caster, target) {
 
 
 // Orchid
+//TODO REPLACE
 Abilities.EnemySkill.TSnare = new AttackPhysical();
 Abilities.EnemySkill.TSnare.name = "T.Snare";
 Abilities.EnemySkill.TSnare.Short = function() { return "Slows down the target and raises lust."; }
@@ -51,6 +53,7 @@ Abilities.EnemySkill.TSnare.OnMiss = function(encounter, caster, target) {
 	Text.NL();
 }
 
+//TODO REPLACE
 Abilities.EnemySkill.TSpray = new AttackPhysical();
 Abilities.EnemySkill.TSpray.name = "T.Spray";
 Abilities.EnemySkill.TSpray.Short = function() { return "Sprays the targets in sticky tentacle seed. Raises lust."; }
@@ -75,6 +78,7 @@ Abilities.EnemySkill.TSpray.OnMiss = function(encounter, caster, target) {
 	Text.NL();
 }
 
+//TODO REPLACE
 Abilities.EnemySkill.TVenom = new AttackPhysical();
 Abilities.EnemySkill.TVenom.name = "T.Venom";
 Abilities.EnemySkill.TVenom.Short = function() { return "Sprays one target in poisonous goop."; }
@@ -103,6 +107,7 @@ Abilities.EnemySkill.TVenom.TargetEffect = function(encounter, caster, target) {
 	}
 }
 
+//TODO REPLACE
 Abilities.EnemySkill.TRavage = new AttackPhysical();
 Abilities.EnemySkill.TRavage.name = "T.Ravage";
 Abilities.EnemySkill.TRavage.Short = function() { return "Grasps the enemy and constricts them, dealing damage and raising lust."; }
@@ -130,6 +135,7 @@ Abilities.EnemySkill.TRavage.OnMiss = function(encounter, caster, target) {
 	Text.NL();
 }
 
+//TODO REPLACE
 Abilities.EnemySkill.TWhip = new AttackPhysical();
 Abilities.EnemySkill.TWhip.name = "T.Whip";
 Abilities.EnemySkill.TWhip.Short = function() { return "Standard attack. Whips target for blunt damage."; }
@@ -152,6 +158,7 @@ Abilities.EnemySkill.TWhip.OnMiss = function(encounter, caster, target) {
 	Text.NL();
 }
 
+//TODO REPLACE
 Abilities.EnemySkill.TViolate = new AttackPhysical();
 Abilities.EnemySkill.TViolate.name = "T.Violate";
 Abilities.EnemySkill.TViolate.Short = function() { return "Orchid's violate attack."; }
@@ -218,6 +225,7 @@ Abilities.EnemySkill.TViolate.OnMiss = function(encounter, caster, target) {
 
 
 // Gol
+//TODO REPLACE
 Abilities.EnemySkill.GolLustyPheromones = new TeaseSkill();
 Abilities.EnemySkill.GolLustyPheromones.name = "L.Pheromones";
 Abilities.EnemySkill.GolLustyPheromones.Short = function() { return "Attack with lusty pheromones."; }
@@ -241,6 +249,7 @@ Abilities.EnemySkill.GolLustyPheromones.OnMiss = function(encounter, caster, tar
 }
 
 
+//TODO REPLACE
 Abilities.EnemySkill.GolCuntDash = new AttackPhysical();
 Abilities.EnemySkill.GolCuntDash.name = "C.Dash";
 Abilities.EnemySkill.GolCuntDash.Short = function() { return "Cunt dash!"; }
@@ -274,6 +283,7 @@ Abilities.EnemySkill.GolCuntDash.OnMiss = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.EnemySkill.GolPollen = new AttackPhysical();
 Abilities.EnemySkill.GolPollen.name = "S.Pollen";
 Abilities.EnemySkill.GolPollen.Short = function() { return "Submission pollen."; }
@@ -310,6 +320,7 @@ Abilities.EnemySkill.GolPollen.OnMiss = null;
 
 
 // Corishev
+//TODO REPLACE
 Abilities.EnemySkill.Corishev = {};
 Abilities.EnemySkill.Corishev.Whip = new AttackPhysical();
 Abilities.EnemySkill.Corishev.Whip.name = "Whip";
@@ -335,6 +346,7 @@ Abilities.EnemySkill.Corishev.Whip.TargetEffect = function(encounter, caster, ta
 }
 
 
+//TODO REPLACE
 Abilities.EnemySkill.Corishev.Lashing = new AttackPhysical();
 Abilities.EnemySkill.Corishev.Lashing.name = "Corishev.Lashing";
 Abilities.EnemySkill.Corishev.Lashing.Short = function() { return "Corishev lashing."; }
@@ -362,6 +374,7 @@ Abilities.EnemySkill.Corishev.Lashing.OnMiss = function(encounter, caster, targe
 }
 
 
+//TODO REPLACE
 Abilities.EnemySkill.Corishev.WideStrike = new AttackPhysical();
 Abilities.EnemySkill.Corishev.WideStrike.name = "Corishev.WideStrike";
 Abilities.EnemySkill.Corishev.WideStrike.Short = function() { return "Corishev lashing."; }
@@ -388,6 +401,7 @@ Abilities.EnemySkill.Corishev.WideStrike.OnMiss = function(encounter, caster, ta
 }
 
 
+//TODO REPLACE
 Abilities.EnemySkill.Corishev.SelfHarm = new Ability();
 Abilities.EnemySkill.Corishev.SelfHarm.name = "SelfHarm";
 Abilities.EnemySkill.Corishev.SelfHarm.Short = function() { return "Corishev SelfHarm."; }
@@ -410,6 +424,7 @@ Abilities.EnemySkill.Corishev.SelfHarm.CastInternal = function(encounter, caster
 }
 
 
+//TODO REPLACE
 Abilities.EnemySkill.Corishev.Punish = new AttackPhysical();
 Abilities.EnemySkill.Corishev.Punish.name = "Corishev.Punish";
 Abilities.EnemySkill.Corishev.Punish.Short = function() { return "Corishev lashing."; }

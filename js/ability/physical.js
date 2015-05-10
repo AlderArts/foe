@@ -3,6 +3,7 @@
  * Physical attacks
  * 
  */
+//TODO REMOVE
 AttackPhysical = function() {
 	this.damageType   = {}; // Set to null to use weapon attack
 	this.targetMode   = TargetMode.Enemy;
@@ -174,7 +175,7 @@ Abilities.Physical.GrandSlam.castTree.push(AbilityNode.Template.Physical({
 	onAbsorb: [Abilities.Physical._onAbsorb],
 }));
 
-//TODO
+//TODO REPLACE
 Abilities.Physical.Pierce = new AttackPhysical();
 Abilities.Physical.Pierce.name = "Pierce";
 Abilities.Physical.Pierce.Short = function() { return "Bypass defenses."; }
@@ -187,6 +188,7 @@ Abilities.Physical.Pierce.OnCast = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.Physical.DirtyBlow = new AttackPhysical();
 Abilities.Physical.DirtyBlow.name = "Dirty Blow";
 Abilities.Physical.DirtyBlow.Short = function() { return "Bypass defenses, low chance of stun."; }
@@ -206,6 +208,7 @@ Abilities.Physical.DirtyBlow.TargetEffect = function(encounter, caster, target) 
 }
 
 
+//TODO REPLACE
 Abilities.Physical.Hamstring = new AttackPhysical();
 Abilities.Physical.Hamstring.name = "Hamstring";
 Abilities.Physical.Hamstring.Short = function() { return "Nicks the target, making a lingering wound."; }
@@ -234,6 +237,7 @@ Abilities.Physical.Hamstring.OnHit = function(encounter, caster, target, dmg) {
 }
 
 
+//TODO REPLACE
 Abilities.Physical.Kicksand = new AttackPhysical();
 Abilities.Physical.Kicksand.name = "Kick sand";
 Abilities.Physical.Kicksand.Short = function() { return "Kick dirt in the enemy's eyes, blinding them. Single target."; }
@@ -258,6 +262,7 @@ Abilities.Physical.Kicksand.OnMiss = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.Physical.Swift = new Ability();
 Abilities.Physical.Swift.name = "Swift";
 Abilities.Physical.Swift.Short = function() { return "Briefly boosts the caster's speed."; }
@@ -281,6 +286,7 @@ Abilities.Physical.Swift.CastInternal = function(encounter, caster) {
 }
 
 
+//TODO REPLACE
 Abilities.Physical.SetTrap = new Ability();
 Abilities.Physical.SetTrap.name = "Set trap";
 Abilities.Physical.SetTrap.Short = function() { return "Sets a trap for an enemy."; }
@@ -348,6 +354,7 @@ Abilities.Physical.SetTrap.CastInternal = function(encounter, caster) {
 }
 
 
+//TODO REPLACE
 Abilities.Physical.Backstab = new AttackPhysical();
 Abilities.Physical.Backstab.name = "Backstab";
 Abilities.Physical.Backstab.Short = function() { return "Deal high damage against a disabled target."; }
@@ -365,6 +372,7 @@ Abilities.Physical.Backstab.enabledTargetCondition = function(encounter, caster,
 }
 
 
+//TODO REPLACE
 Abilities.Physical.Ensnare = new AttackPhysical();
 Abilities.Physical.Ensnare.name = "Ensnare";
 Abilities.Physical.Ensnare.Short = function() { return "Slows down an enemy by throwing a net at them."; }
@@ -389,6 +397,7 @@ Abilities.Physical.Ensnare.OnMiss = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.Physical.FocusStrike = new AttackPhysical();
 Abilities.Physical.FocusStrike.name = "Focus strike";
 Abilities.Physical.FocusStrike.Short = function() { return "Bypass defenses."; }
@@ -481,6 +490,7 @@ Abilities.Physical.Frenzy.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
+//TODO REPLACE
 Abilities.Physical.CrushingStrike = new AttackPhysical();
 Abilities.Physical.CrushingStrike.name = "Crushing.S";
 Abilities.Physical.CrushingStrike.Short = function() { return "Crushing strike that deals massive damage, with high chance of stunning. Slight recoil effect."; }
@@ -507,6 +517,7 @@ Abilities.Physical.CrushingStrike.OnHit = function(encounter, caster, target, dm
 }
 
 
+//TODO REPLACE
 Abilities.Physical.Provoke = new AttackPhysical();
 Abilities.Physical.Provoke.name = "Provoke";
 Abilities.Physical.Provoke.Short = function() { return "Try to provoke the enemy to focus on you. Single target."; }
@@ -538,6 +549,7 @@ Abilities.Physical.Provoke.OnMiss = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.Physical.Taunt = new AttackPhysical();
 Abilities.Physical.Taunt.name = "Taunt";
 Abilities.Physical.Taunt.Short = function() { return "Try to taunt the enemy to focus on you. Single target."; }

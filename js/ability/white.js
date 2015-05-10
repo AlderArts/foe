@@ -3,6 +3,7 @@
  * Healing [temp]
  * 
  */
+//TODO REMOVE
 HealingSpell = function() {
 	this.OnCast       = null;
 	this.TargetEffect = null;
@@ -87,6 +88,7 @@ HealingSpell.prototype.OnHit = function(encounter, caster, target, dmg) {
 
 Abilities.White = {};
 
+//TODO REPLACE
 Abilities.White.FirstAid = new HealingSpell();
 Abilities.White.FirstAid.name = "First aid";
 Abilities.White.FirstAid.Short = function() { return "Heals minor damage, single target."; }
@@ -101,6 +103,7 @@ Abilities.White.FirstAid.OnCast = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.White.Detox = new Ability();
 Abilities.White.Detox.name = "Detox";
 Abilities.White.Detox.Short = function() { return "Heals minor venom, single target."; }
@@ -130,6 +133,7 @@ Abilities.White.Detox.CastInternal = function(encounter, caster, target) {
 	});
 }
 
+//TODO REPLACE
 Abilities.White.Cool = new Ability();
 Abilities.White.Cool.name = "Cool";
 Abilities.White.Cool.Short = function() { return "Heals minor burn, single target."; }
@@ -159,6 +163,7 @@ Abilities.White.Cool.CastInternal = function(encounter, caster, target) {
 	});
 }
 
+//TODO REPLACE
 Abilities.White.Warm = new Ability();
 Abilities.White.Warm.name = "Warm";
 Abilities.White.Warm.Short = function() { return "Heals minor freeze, single target."; }
@@ -189,6 +194,7 @@ Abilities.White.Warm.CastInternal = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.White.Heal = new HealingSpell();
 Abilities.White.Heal.name = "Heal";
 Abilities.White.Heal.Short = function() { return "Heals some damage, single target."; }
@@ -203,6 +209,7 @@ Abilities.White.Heal.OnCast = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.White.Recover = new HealingSpell();
 Abilities.White.Recover.name = "Recover";
 Abilities.White.Recover.Short = function() { return "Heals moderate damage, single target."; }
@@ -218,6 +225,7 @@ Abilities.White.Recover.OnCast = function(encounter, caster, target) {
 
 
 // TODO: Flavor text, status effects
+//TODO REPLACE
 Abilities.White.Cheer = new Ability();
 Abilities.White.Cheer.name = "Cheer";
 Abilities.White.Cheer.Short = function() { return "Boosts party morale, raising spirit and stamina slightly (doesn't stack)."; }
@@ -246,6 +254,7 @@ Abilities.White.Cheer.CastInternal = function(encounter, caster, target) {
 
 
 // TODO: Flavor text, status effects
+//TODO REPLACE
 Abilities.White.Pinpoint = new Ability();
 Abilities.White.Pinpoint.name = "Pinpoint";
 Abilities.White.Pinpoint.Short = function() { return "Buffs accuracy of one target (doesn't stack)."; }
@@ -273,6 +282,7 @@ Abilities.White.Pinpoint.CastInternal = function(encounter, caster, target) {
 /*
  * TODO: Remake into a status effect?
  */
+//TODO REPLACE
 Abilities.White.Toughen = new Ability();
 Abilities.White.Toughen.name = "Toughen";
 Abilities.White.Toughen.Short = function() { return "Buffs stamina of one target (doesn't stack)."; }
@@ -300,6 +310,7 @@ Abilities.White.Toughen.CastInternal = function(encounter, caster, target) {
 /*
  * TODO: Remake into a status effect?
  */
+//TODO REPLACE
 Abilities.White.Empower = new Ability();
 Abilities.White.Empower.name = "Empower";
 Abilities.White.Empower.Short = function() { return "Buffs strength of one target (doesn't stack)."; }
@@ -324,6 +335,7 @@ Abilities.White.Empower.CastInternal = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.White.Tirade = new Ability();
 Abilities.White.Tirade.name = "Tirade";
 Abilities.White.Tirade.Short = function() { return "Attempt to bore the enemy with meaningless drivel. Drain enemy SP."; }
@@ -365,6 +377,7 @@ Abilities.White.Tirade.CastInternal = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.White.Preach = new Ability();
 Abilities.White.Preach.name = "Preach";
 Abilities.White.Preach.Short = function() { return "Attempt to bore the enemy with pompous religious drivel. Drain enemy SP."; }
@@ -406,6 +419,7 @@ Abilities.White.Preach.CastInternal = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.White.Sermon = new Ability();
 Abilities.White.Sermon.name = "Sermon";
 Abilities.White.Sermon.Short = function() { return "Attempt to bore the enemy party with religious proselytizing. Drain enemy SP."; }

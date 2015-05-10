@@ -3,6 +3,7 @@
  * Attack magic
  * 
  */
+//TODO REMOVE
 AttackSpell = function() {
 	this.damageType   = {};
 	this.targetMode   = TargetMode.Enemy;
@@ -73,6 +74,7 @@ AttackSpell.prototype.OnAbsorb = function(encounter, caster, target, dmg) {
 
 Abilities.Black = {};
 
+//TODO REPLACE
 Abilities.Black.Surge = new AttackSpell();
 Abilities.Black.Surge.name = "Surge";
 Abilities.Black.Surge.Short = function() { return "Weak non-elemental magic, single target."; }
@@ -84,6 +86,7 @@ Abilities.Black.Surge.OnCast = function(encounter, caster, target) {
 	Text.Add("[name] call[s] on a surge of pure magical energy, brusting forth in a flash of light from [hisher] outstretched [hand]s. ", parse);
 }
 
+//TODO REPLACE
 Abilities.Black.Fireball = new AttackSpell();
 Abilities.Black.Fireball.name = "Fireball";
 Abilities.Black.Fireball.Short = function() { return "Fire magic, single target."; }
@@ -106,6 +109,7 @@ Abilities.Black.Fireball.TargetEffect = function(encounter, caster, target) {
 	}
 }
 
+//TODO REPLACE
 Abilities.Black.Freeze = new AttackSpell();
 Abilities.Black.Freeze.name = "Freeze";
 Abilities.Black.Freeze.Short = function() { return "Ice magic, single target."; }
@@ -123,6 +127,7 @@ Abilities.Black.Freeze.TargetEffect = function(encounter, caster, target) {
 	}
 }
 
+//TODO REPLACE
 Abilities.Black.Bolt = new AttackSpell();
 Abilities.Black.Bolt.name = "Bolt";
 Abilities.Black.Bolt.Short = function() { return "Thunder magic, single target."; }
@@ -145,6 +150,7 @@ Abilities.Black.Bolt.TargetEffect = function(encounter, caster, target) {
 	}
 }
 
+//TODO REPLACE
 Abilities.Black.Gust = new AttackSpell();
 Abilities.Black.Gust.name = "Gust";
 Abilities.Black.Gust.Short = function() { return "Slashing wind magic, single target."; }
@@ -156,6 +162,7 @@ Abilities.Black.Gust.OnCast = function(encounter, caster, target) {
 	Text.Add("[name] make[s] a sweeping gesture, calling on the power of wind to do [hisher] bidding. Erratic gusts of wind dance around, focusing into a single burst homing in on [tName]! ", parse);
 }
 
+//TODO REPLACE
 Abilities.Black.Spire = new AttackSpell();
 Abilities.Black.Spire.name = "Spire";
 Abilities.Black.Spire.Short = function() { return "Bashing earth magic, single target."; }
@@ -167,6 +174,7 @@ Abilities.Black.Spire.OnCast = function(encounter, caster, target) {
 	Text.Add("There is a loud rumble as the ground shakes, forced from its natural state by the power of [possessive] magic. A pillar of rock bursts from the earth below, slamming into [tName]! ", parse);
 }
 
+//TODO REPLACE
 Abilities.Black.Spray = new AttackSpell();
 Abilities.Black.Spray.name = "Spray";
 Abilities.Black.Spray.Short = function() { return "Water magic, single target."; }
@@ -177,6 +185,7 @@ Abilities.Black.Spray.OnCast = function(encounter, caster, target) {
 	Text.Add("Moisture from the air coalesce into a sphere of water between [possessive] [hand]s, summoned by the power of [hisher] magic. In a rapid surge, the water slams into [tName]! ", parse);
 }
 
+//TODO REPLACE
 Abilities.Black.Shimmer = new AttackSpell();
 Abilities.Black.Shimmer.name = "Shimmer";
 Abilities.Black.Shimmer.Short = function() { return "Light magic, single target."; }
@@ -188,6 +197,7 @@ Abilities.Black.Shimmer.OnCast = function(encounter, caster, target) {
 	Text.Add("A brilliant sphere of blinding light forms between [possessive] [hand]s, summoned by the power of [hisher] magic. At the uttering of a single word, it speeds toward [tName]! ", parse);
 }
 
+//TODO REPLACE
 Abilities.Black.Shade = new AttackSpell();
 Abilities.Black.Shade.name = "Shade";
 Abilities.Black.Shade.Short = function() { return "Dark magic, single target."; }
@@ -199,6 +209,7 @@ Abilities.Black.Shade.OnCast = function(encounter, caster, target) {
 	Text.Add("[Possessive] [hand]s are wreathed in shadow, summoned by the power of [hisher] dark magic. Quick as lightning, the shade darts across the ground, wrapping itself around [tName]! ", parse);
 }
 
+//TODO REPLACE
 Abilities.Black.Thorn = new AttackSpell();
 Abilities.Black.Thorn.name = "Thorn";
 Abilities.Black.Thorn.Short = function() { return "Nature magic, single target."; }
@@ -209,6 +220,7 @@ Abilities.Black.Thorn.OnCast = function(encounter, caster, target) {
 	Text.Add("[name] call[s] on the power of nature, summoning prickly vines that snake around [tName], the sharp thorns raking [hisher] [skin]! ", parse);
 }
 
+//TODO REPLACE
 Abilities.Black.WindShear = new AttackSpell();
 Abilities.Black.WindShear.name = "WindShear";
 Abilities.Black.WindShear.Short = function() { return "Wind magic, single target."; }
@@ -221,6 +233,7 @@ Abilities.Black.WindShear.OnCast = function(encounter, caster, target) {
 	Text.Add("[Possessive] [hand]s weave back and forth, summoning a powerful gale of shreaking winds. A frenzy of cutting and slicing air surge toward [tName]! ", parse);
 }
 
+//TODO REPLACE
 Abilities.Black.Stalagmite = new AttackSpell();
 Abilities.Black.Stalagmite.name = "Stalagmite";
 Abilities.Black.Stalagmite.Short = function() { return "Earth magic, single target."; }
@@ -234,6 +247,7 @@ Abilities.Black.Stalagmite.OnCast = function(encounter, caster, target) {
 	Text.Add("The earth rumble, as a large pillar of rock bursts from the ground, raised with [possessive] magic. The great stalagmite throws [tName] to the ground! ", parse);
 }
 
+//TODO REPLACE
 Abilities.Black.Whirlwind = new AttackSpell();
 Abilities.Black.Whirlwind.name = "Whirlwind";
 Abilities.Black.Whirlwind.Short = function() { return "Wind magic, targets all enemies."; }
@@ -246,6 +260,7 @@ Abilities.Black.Whirlwind.OnCast = function(encounter, caster, target) {
 	Text.Add("[Possessive] [hand]s raise a large torrent of wind, throwing things every which way. The huge whirlwind envelops the opposing party, cutting and slashing! ", parse);
 }
 
+//TODO REPLACE
 Abilities.Black.Eruption = new AttackSpell();
 Abilities.Black.Eruption.name = "Eruption";
 Abilities.Black.Eruption.Short = function() { return "Fire magic, targets all enemies."; }
@@ -257,6 +272,7 @@ Abilities.Black.Eruption.OnCast = function(encounter, caster, target) {
 	Text.Add("[name] summon[s] a wave of fire and smoke, boiling forth from the ground. The flames envelop the opposing party! ", parse);
 }
 
+//TODO REPLACE
 Abilities.Black.Spread = new AttackSpell();
 Abilities.Black.Spread.name = "Spread";
 Abilities.Black.Spread.Short = function() { return "Water magic, targets all enemies."; }
@@ -268,6 +284,7 @@ Abilities.Black.Spread.OnCast = function(encounter, caster, target) {
 	Text.Add("[name] summon[s] a wave of rushing water, sprouting forth from the ground. The great torrent sweeps over the opposing party! ", parse);
 }
 
+//TODO REPLACE
 Abilities.Black.Shock = new AttackSpell();
 Abilities.Black.Shock.name = "Shock";
 Abilities.Black.Shock.Short = function() { return "Thunder magic, single target. Moderate chance of stunning the enemy."; }
@@ -294,6 +311,7 @@ Abilities.Black.Shock.TargetEffect = function(encounter, caster, target) {
 	}
 }
 
+//TODO REPLACE
 Abilities.Black.ThunderStorm = new AttackSpell();
 Abilities.Black.ThunderStorm.name = "T.Storm";
 Abilities.Black.ThunderStorm.Short = function() { return "Thunder magic, targets all enemies. Moderate chance of stunning the enemy."; }
@@ -322,6 +340,7 @@ Abilities.Black.ThunderStorm.TargetEffect = function(encounter, caster, target) 
 }
 
 
+//TODO REPLACE
 Abilities.Black.Venom = new AttackSpell();
 Abilities.Black.Venom.name = "Venom";
 Abilities.Black.Venom.Short = function() { return "Poisons single target."; }
@@ -343,6 +362,7 @@ Abilities.Black.Venom.TargetEffect = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.Black.Ivy = new AttackSpell();
 Abilities.Black.Ivy.name = "Ivy";
 Abilities.Black.Ivy.Short = function() { return "Nature magic, targets all enemies."; }
@@ -354,6 +374,7 @@ Abilities.Black.Ivy.OnCast = function(encounter, caster, target) {
 	Text.Add("[name] summon[s] a mass of writhing thorn and ivy, sprouting forth from the ground to entangle the opposing party! ", parse);
 }
 
+//TODO REPLACE
 Abilities.Black.Hellfire = new AttackSpell();
 Abilities.Black.Hellfire.name = "Hellfire";
 Abilities.Black.Hellfire.Short = function() { return "Demon magic, targets all enemies."; }
@@ -372,6 +393,7 @@ Abilities.Black.Hellfire.OnCast = function(encounter, caster, target) {
 	Text.Add("[name] summons the most vile of magic, unleashing a sea of dark fire on [hisher] enemies! ", parse);
 }
 
+//TODO REPLACE
 Abilities.Black.Scream = new AttackSpell();
 Abilities.Black.Scream.name = "Scream";
 Abilities.Black.Scream.Short = function() { return "Unleash the destructive power of your voice, damaging all foes on the field."; }

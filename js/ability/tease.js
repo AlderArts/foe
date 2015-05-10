@@ -5,6 +5,7 @@
  * Basic tease
  * 
  */
+//TODO REMOVE
 TeaseSkill = function() {
 	this.damageType   = { lust : 1 };
 	this.targetMode   = TargetMode.Enemy;
@@ -89,6 +90,7 @@ TeaseSkill.prototype.OnMiss = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.Seduction.Tease = new TeaseSkill();
 Abilities.Seduction.Tease.name = "Tease";
 Abilities.Seduction.Tease.Short = function() { return "Raises the lust of target."; }
@@ -99,6 +101,7 @@ Abilities.Seduction.Tease.OnCast = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.Seduction.Seduce = new TeaseSkill();
 Abilities.Seduction.Seduce.name = "Seduce";
 Abilities.Seduction.Seduce.cost = { hp: null, sp: 10, lp: 10};
@@ -110,6 +113,7 @@ Abilities.Seduction.Seduce.OnCast = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.Seduction.StripTease = new TeaseSkill();
 Abilities.Seduction.StripTease.name = "StripTease";
 Abilities.Seduction.StripTease.Short = function() { return "Raises the lust of enemy party."; }
@@ -122,6 +126,7 @@ Abilities.Seduction.StripTease.OnCast = function(encounter, caster, target) {
 }
 
 
+//TODO REPLACE
 Abilities.Seduction.Distract = new TeaseSkill();
 Abilities.Seduction.Distract.name = "Distract";
 Abilities.Seduction.Distract.Short = function() { return "Raise enemy lust and lower their initiative."; }
@@ -143,6 +148,7 @@ Abilities.Seduction.Distract.OnHit = function(encounter, caster, target, dmg) {
 }
 
 
+//TODO REPLACE
 Abilities.Seduction.Charm = new TeaseSkill();
 Abilities.Seduction.Charm.name = "Charm";
 Abilities.Seduction.Charm.Short = function() { return "Try to dissuade the enemy from attacking you."; }
@@ -170,6 +176,7 @@ Abilities.Seduction.Charm.OnHit = function(encounter, caster, target, dmg) {
 }
 
 
+//TODO REPLACE
 Abilities.Seduction.Allure = new TeaseSkill();
 Abilities.Seduction.Allure.name = "Allure";
 Abilities.Seduction.Allure.Short = function() { return "Try to dissuade the enemy from attacking you."; }
@@ -197,6 +204,7 @@ Abilities.Seduction.Allure.OnHit = function(encounter, caster, target, dmg) {
 }
 
 
+//TODO REPLACE
 Abilities.Seduction.Inflame = new TeaseSkill();
 Abilities.Seduction.Inflame.name = "Inflame";
 Abilities.Seduction.Inflame.cost = { hp: null, sp: null, lp: 25};

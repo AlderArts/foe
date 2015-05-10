@@ -3,6 +3,7 @@
  * Wait
  * 
  */
+//TODO REPLACE
 Abilities.Wait = new Ability();
 Abilities.Wait.name = "Wait";
 Abilities.Wait.Short = function() { return "Wait a while."; }
