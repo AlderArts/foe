@@ -332,13 +332,14 @@ AbilityCollection.prototype.OnSelect = function(encounter, caster, backPrompt) {
 		_.each(collection.AbilitySet, function(ability) {
 			var castTime = ability.castTime != 0 ? ability.castTime : "instant";
 			var cooldown = ability.OnCooldown(entry);
+			var plural   = (cooldown > 1 ? "s" : "");
 			Text.Add("[ability] (Cost: [cost], Cast time: [time][cd]): [desc]<br/>",
 				{
 					ability: ability.name,
 					cost: ability.CostStr(),
 					time: castTime,
 					desc: ability.Short(),
-					cd: cooldown ? (", cooling down... " + cooldown + " turns") : ""
+					cd: cooldown ? (", cooling down... " + cooldown + " turn" + plural) : ""
 				});
 		});
 		Text.Flush();

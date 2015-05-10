@@ -9,17 +9,18 @@ Version 0.4b
 ------------
 * Alchemy menu is sorted alphabetically
 * Added a weak health potion. Can be bought from Patchwork
-* A metric fuckton of typos
-
+* A metric fuckton of typos and minor bugs fixed (thanks CalmKhaos!)
 * Combat rewrite (not much of this is instantiated yet, just the basic framwork that makes it possible)
  - Damage types (more flexible basic attack). Damage hp/sp/lp
  - Delayed actions/casting time
- - Default attack replaced
  - Retargetting (fallen)
  - Ability cooldowns
  - Making parser usage easier!
  - Cancellable
  - Spell stack
+* Actual effects of rewrite:
+ - Default attack replaced
+ - Bash replaced. Now has a cancelling effect and a 3 turn cooldown
 
 --------------------------------------------
              PREVIOUS VERSIONS
