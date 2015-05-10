@@ -97,7 +97,7 @@ Abilities.Physical = {};
 // Default messages
 Abilities.Physical._onDamage = function(ability, encounter, caster, target, dmg) {
 	var parse = AbilityNode.DefaultParser(caster, target);
-	Text.Add("The attack hits [tname] for " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
+	Text.Add("The attack hits [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage!", parse);
 	Text.NL();
 }
 Abilities.Physical._onMiss = function(ability, encounter, caster, target) {
@@ -138,7 +138,7 @@ Abilities.Physical.Bash.castTree.push(AbilityNode.Template.Physical({
 		
 		Text.Add("[Name] bash[es] [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage, staggering [thimher]!", parse);
 		Text.NL();
-	}, AbilityNode.Template.Cancel],
+	}, AbilityNode.Template.Cancel()],
 	onAbsorb: [Abilities.Physical._onAbsorb],
 }));
 
@@ -170,11 +170,11 @@ Abilities.Physical.GrandSlam.castTree.push(AbilityNode.Template.Physical({
 		
 		Text.Add("[Name] slam[s] [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage, staggering [thimher]!", parse);
 		Text.NL();
-	}, AbilityNode.Template.Cancel],
+	}, AbilityNode.Template.Cancel()],
 	onAbsorb: [Abilities.Physical._onAbsorb],
 }));
 
-
+//TODO
 Abilities.Physical.Pierce = new AttackPhysical();
 Abilities.Physical.Pierce.name = "Pierce";
 Abilities.Physical.Pierce.Short = function() { return "Bypass defenses."; }
@@ -401,65 +401,84 @@ Abilities.Physical.FocusStrike.OnCast = function(encounter, caster, target) {
 }
 
 
-Abilities.Physical.DAttack = new AttackPhysical();
+
+Abilities.Physical.DAttack = new Ability();
 Abilities.Physical.DAttack.name = "D.Attack";
 Abilities.Physical.DAttack.Short = function() { return "Perform two low accuracy hits."; }
 Abilities.Physical.DAttack.cost = { hp: null, sp: 25, lp: null};
-Abilities.Physical.DAttack.damageType = null;
-Abilities.Physical.DAttack.hitMod = 0.75;
-Abilities.Physical.DAttack.nrAttacks = 2;
-Abilities.Physical.DAttack.OnCast = function(encounter, caster, target) {
-	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.Add("[name] perform[s] two attacks against [tName] in rapid succession!", parse);
-	Text.NL();
-}
+Abilities.Physical.DAttack.cooldown = 2;
+Abilities.Physical.DAttack.castTree.push(AbilityNode.Template.Physical({
+	hitMod: 0.75,
+	nrAttacks: 2,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] perform[s] two attacks against [tname] in rapid succession!", parse);
+	}],
+	onMiss: [Abilities.Physical._onMiss],
+	onDamage: [Abilities.Physical._onDamage],
+	onAbsorb: [Abilities.Physical._onAbsorb],
+}));
 
 
-Abilities.Physical.TAttack = new AttackPhysical();
+Abilities.Physical.TAttack = new Ability();
 Abilities.Physical.TAttack.name = "T.Attack";
 Abilities.Physical.TAttack.Short = function() { return "Perform three low accuracy hits."; }
 Abilities.Physical.TAttack.cost = { hp: null, sp: 60, lp: null};
-Abilities.Physical.TAttack.damageType = null;
-Abilities.Physical.TAttack.hitMod = 0.75;
-Abilities.Physical.TAttack.nrAttacks = 3;
-Abilities.Physical.TAttack.OnCast = function(encounter, caster, target) {
-	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.Add("[name] perform[s] three attacks against [tName] in rapid succession! ", parse);
-	Text.NL();
-}
+Abilities.Physical.TAttack.cooldown = 3;
+Abilities.Physical.TAttack.castTree.push(AbilityNode.Template.Physical({
+	hitMod: 0.75,
+	nrAttacks: 3,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] perform[s] three attacks against [tname] in rapid succession!", parse);
+	}],
+	onMiss: [Abilities.Physical._onMiss],
+	onDamage: [Abilities.Physical._onDamage],
+	onAbsorb: [Abilities.Physical._onAbsorb],
+}));
 
 
-Abilities.Physical.QAttack = new AttackPhysical();
+Abilities.Physical.QAttack = new Ability();
 Abilities.Physical.QAttack.name = "Q.Attack";
 Abilities.Physical.QAttack.Short = function() { return "Perform four low accuracy hits."; }
 Abilities.Physical.QAttack.cost = { hp: null, sp: 100, lp: null};
-Abilities.Physical.QAttack.damageType = null;
-Abilities.Physical.QAttack.hitMod = 0.75;
-Abilities.Physical.QAttack.nrAttacks = 4;
-Abilities.Physical.QAttack.OnCast = function(encounter, caster, target) {
-	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.Add("[name] perform[s] four attacks against [tName] in rapid succession!", parse);
-	Text.NL();
-}
+Abilities.Physical.QAttack.cooldown = 4;
+Abilities.Physical.QAttack.castTree.push(AbilityNode.Template.Physical({
+	hitMod: 0.75,
+	nrAttacks: 4,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] perform[s] four attacks against [tname] in rapid succession!", parse);
+	}],
+	onMiss: [Abilities.Physical._onMiss],
+	onDamage: [Abilities.Physical._onDamage],
+	onAbsorb: [Abilities.Physical._onAbsorb],
+}));
 
 
-Abilities.Physical.Frenzy = new AttackPhysical();
+Abilities.Physical.Frenzy = new Ability();
 Abilities.Physical.Frenzy.name = "Frenzy";
 Abilities.Physical.Frenzy.Short = function() { return "Perform a flurry of five strikes, leaving you exhausted."; }
 Abilities.Physical.Frenzy.cost = { hp: 100, sp: 80, lp: null};
-Abilities.Physical.Frenzy.damageType = null;
-Abilities.Physical.Frenzy.hitMod = 1;
-Abilities.Physical.Frenzy.nrAttacks = 5;
-Abilities.Physical.Frenzy.OnCast = function(encounter, caster, target) {
-	for(var i = 0; i < encounter.combatOrder.length; i++) {
-		if(encounter.combatOrder[i].entity == caster)
-			encounter.combatOrder[i].initiative -= 150;
-	}
-		
-	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.Add("[name] perform[s] a frenzied assault, attacking [tName] with five rapid blows!", parse);
-	Text.NL();
-}
+Abilities.Physical.Frenzy.cooldown = 5;
+Abilities.Physical.Frenzy.castTime = 100;
+Abilities.Physical.Frenzy.onCast.push(function(ability, encounter, caster, target) {
+	var parse = AbilityNode.DefaultParser(caster, target);
+	Text.Add("[Name] [is] riling [himher]self up, preparing to launch an onslaught of blows on [tname]!", parse);
+});
+Abilities.Physical.Frenzy.castTree.push(AbilityNode.Template.Physical({
+	nrAttacks: 5,
+	onCast: [function(ability, encounter, caster, target) {
+		var entry = caster.GetCombatEntry(encounter);
+		if(entry)
+			entry.initiative -= 50;
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] perform[s] a frenzied assault, attacking [tname] with five rapid blows!", parse);
+	}],
+	onMiss: [Abilities.Physical._onMiss],
+	onDamage: [Abilities.Physical._onDamage],
+	onAbsorb: [Abilities.Physical._onAbsorb],
+}));
 
 
 Abilities.Physical.CrushingStrike = new AttackPhysical();

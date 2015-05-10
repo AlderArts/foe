@@ -18,10 +18,12 @@ Version 0.4b
  - Making parser usage easier!
  - Cancellable
  - Spell stack
-* Actual effects of rewrite:
+* Actual effects of rewrite (so far):
  - Default attack replaced
  - Bash replaced. Now has a cancelling effect and a 3 turn cooldown
  - GrandSlam replaced. Now has a cancelling effect and a 5 turn cooldown
+ - D/T/Q.Attack replaced, added cooldowns
+ - Frenzy replaced, added casting time (cancellable) and a 5 turn cooldown
 
 --------------------------------------------
              PREVIOUS VERSIONS
