@@ -140,7 +140,7 @@ Abilities.Physical.Bash.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("[Name] bash[es] [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage, staggering [thimher]!", parse);
 		Text.NL();
 	}, AbilityNode.Template.Cancel()],
-	onAbsorb: [Abilities.Physical._onAbsorb],
+	onAbsorb: [Abilities.Physical._onAbsorb]
 }));
 
 
@@ -172,7 +172,7 @@ Abilities.Physical.GrandSlam.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("[Name] slam[s] [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage, staggering [thimher]!", parse);
 		Text.NL();
 	}, AbilityNode.Template.Cancel()],
-	onAbsorb: [Abilities.Physical._onAbsorb],
+	onAbsorb: [Abilities.Physical._onAbsorb]
 }));
 
 //TODO REPLACE
@@ -425,7 +425,7 @@ Abilities.Physical.DAttack.castTree.push(AbilityNode.Template.Physical({
 	}],
 	onMiss: [Abilities.Physical._onMiss],
 	onDamage: [Abilities.Physical._onDamage],
-	onAbsorb: [Abilities.Physical._onAbsorb],
+	onAbsorb: [Abilities.Physical._onAbsorb]
 }));
 
 
@@ -443,7 +443,7 @@ Abilities.Physical.TAttack.castTree.push(AbilityNode.Template.Physical({
 	}],
 	onMiss: [Abilities.Physical._onMiss],
 	onDamage: [Abilities.Physical._onDamage],
-	onAbsorb: [Abilities.Physical._onAbsorb],
+	onAbsorb: [Abilities.Physical._onAbsorb]
 }));
 
 
@@ -461,7 +461,7 @@ Abilities.Physical.QAttack.castTree.push(AbilityNode.Template.Physical({
 	}],
 	onMiss: [Abilities.Physical._onMiss],
 	onDamage: [Abilities.Physical._onDamage],
-	onAbsorb: [Abilities.Physical._onAbsorb],
+	onAbsorb: [Abilities.Physical._onAbsorb]
 }));
 
 
@@ -486,7 +486,7 @@ Abilities.Physical.Frenzy.castTree.push(AbilityNode.Template.Physical({
 	}],
 	onMiss: [Abilities.Physical._onMiss],
 	onDamage: [Abilities.Physical._onDamage],
-	onAbsorb: [Abilities.Physical._onAbsorb],
+	onAbsorb: [Abilities.Physical._onAbsorb]
 }));
 
 
