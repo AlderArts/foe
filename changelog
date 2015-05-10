@@ -21,6 +21,7 @@ Version 0.4b
 * Actual effects of rewrite:
  - Default attack replaced
  - Bash replaced. Now has a cancelling effect and a 3 turn cooldown
+ - GrandSlam replaced. Now has a cancelling effect and a 5 turn cooldown
 
 --------------------------------------------
              PREVIOUS VERSIONS

@@ -111,6 +111,7 @@ Abilities.Physical._onAbsorb = function(ability, encounter, caster, target, dmg)
 	Text.NL();
 }
 
+
 Abilities.Physical.Bash = new Ability();
 Abilities.Physical.Bash.name = "Bash";
 Abilities.Physical.Bash.Short = function() { return "Stun effect, low accuracy."; }
@@ -142,31 +143,37 @@ Abilities.Physical.Bash.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.Physical.GrandSlam = new AttackPhysical();
+Abilities.Physical.GrandSlam = new Ability();
 Abilities.Physical.GrandSlam.name = "Grand Slam";
 Abilities.Physical.GrandSlam.Short = function() { return "Stun effect, low accuracy to multiple targets."; }
 Abilities.Physical.GrandSlam.cost = { hp: null, sp: 50, lp: null};
-Abilities.Physical.GrandSlam.atkMod = 1.1;
-Abilities.Physical.GrandSlam.hitMod = 0.9;
-Abilities.Physical.GrandSlam.damageType.pBlunt = 1;
 Abilities.Physical.GrandSlam.targetMode = TargetMode.Enemies;
-Abilities.Physical.GrandSlam.OnCast = function(encounter, caster, target) {
-	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), y : caster.plural() ? "y" : "ies", s : caster.plural() ? "" : "s" };
-	Text.Add("[name] read[y] a powerful blow, aiming to stun any who stand in [hisher] way! ", parse);
-}
-Abilities.Physical.GrandSlam.OnHit = function(encounter, caster, target, dmg) {
-	if(Math.random() < 0.5) {
-		for(var i = 0; i < encounter.combatOrder.length; i++) {
-			if(encounter.combatOrder[i].entity == target)
-				encounter.combatOrder[i].initiative -= 50;
+Abilities.Physical.GrandSlam.cooldown = 5;
+Abilities.Physical.GrandSlam.castTree.push(AbilityNode.Template.Physical({
+	atkMod: 1.1,
+	hitMod: 0.8,
+	damageType: {pBlunt: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster);
+		Text.Add("[Name] read[y] a powerful blow, aiming to stun any who stand in [hisher] way! ", parse);
+	}],
+	onMiss: [Abilities.Physical._onMiss],
+	onDamage: [function(ability, encounter, caster, target, dmg) {
+		if(Math.random() < 0.5) {
+			var entry = target.GetCombatEntry(encounter);
+			if(entry) {
+				entry.initiative -= 50;
+			}
 		}
-	}
-	
-	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : target.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	
-	Text.Add("[name] slam[s] [tName] for " + Text.BoldColor(dmg, "#800000") + " damage, staggering [himher]!", parse);
-	Text.NL();
-}
+		
+		var parse = AbilityNode.DefaultParser(caster, target);
+		
+		Text.Add("[Name] slam[s] [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage, staggering [thimher]!", parse);
+		Text.NL();
+	}, AbilityNode.Template.Cancel],
+	onAbsorb: [Abilities.Physical._onAbsorb],
+}));
+
 
 Abilities.Physical.Pierce = new AttackPhysical();
 Abilities.Physical.Pierce.name = "Pierce";
