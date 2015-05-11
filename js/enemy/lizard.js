@@ -454,7 +454,7 @@ Scenes.Lizards.WinFuckVag = function(enc) {
 	Text.NL();
 	Text.Add("That’s right, get to know each other, you encourage her.", parse);
 	Text.NL();
-	Text.Add("The reptile gives you a dirty look, but nonetheless cups your [cock] in the palm of her hand and gives it a more thorough lick, from tip to base. The light kiss turns into an intricate makeout session as the girl starts to get worked up. Swallowing her hesitation - and quite a lot more - she wraps her lips around your shaft and takes it into her mouth.", parse);
+	Text.Add("The reptile gives you a dirty look, but nonetheless cups your [cock] in the palm of her hand and gives it a more thorough lick from tip to base. The light kiss turns into an intricate makeout session as the girl starts to get worked up. Swallowing her hesitation - and quite a lot more - she wraps her lips around your shaft and takes it into her mouth.", parse);
 	Text.NL();
 	parse["you"] = realCock ? "you" : "it";
 	Text.Add("You let her play with [you] for a while before suggesting that now that her mouth is on such good terms with the snake, perhaps she should introduce it to some of her other orifices. With a loud slurp, she pops your [cock] out of her mouth, dripping of her saliva. She slowly turns over on all fours, wiggling her butt at you invitingly. Her tail is held high, allowing you full access to both her stretchy holes.", parse);
@@ -473,21 +473,21 @@ Scenes.Lizards.WinFuckVag = function(enc) {
 		Text.Add("Just as you suspected, her opening is incredibly flexible, forming a perfect cock-sheath for you, a hand in a glove. ", parse);
 	Text.Add("A naughty snake for a naughty snake handler, you reply amiably, giving her another thrust. She grunts, her tail swaying back and forth above her jiggling butt.", parse);
 	Text.NL();
-	Text.Add("You build up a rhythm, each of her goading taunts echoed by you slamming your hips home, filling up the feisty lizard. Before long, she can’t even muster that; she’s reduced to base moans and lustful panting, every thought but the need of your shaft in her hot loins scattered to the winds. She’s accepted her place as the willing receptacle of your [cock], and she’s enjoying every second of it.", parse);
+	Text.Add("You build up a rhythm, each of her goading taunts echoed by you slamming your hips home, filling up the feisty lizard. Before long, she can’t even muster that. Now that she's reduced to base moans and lustful panting, her every thought other than the need of your shaft in her hot loins is scattered to the winds. She’s accepted her place as the willing receptacle of your [cock] and she’s enjoying every second of it.", parse);
 	Text.NL();
-	Text.Add("The need for words is gone, all that remains is your passion for each other as your bodies grind together, the girl doing her best to diligently milk your [cock]. ", parse);
+	Text.Add("The need for words is gone. All that remains is your passion for each other as your bodies grind together, the girl doing her best to diligently milk your [cock]. ", parse);
 	if(realCock)
 		Text.Add("She’s taking at least as much pleasure from this as you are, shamelessly moaning and egging you on.", parse);
 	else
 		Text.Add("You can’t help but think that she’s getting the sweeter side of the deal here, wrapped tightly around your artificial member. On the other hand, every powerful backstroke grinds the base of the toy into your own [vag], so you can’t really complain.", parse);
-	Text.Add(" You feel your control over the situation slip as your rutting slowly turns more insistent, becoming the instinctive actions of the lusty beast inside you. Her tail snakes around you, caressing your back fondly and keeping you inside her reach, as if she’s afraid you’ll pull away and end her bliss prematurely.", parse);
+	Text.Add(" You feel your control over the situation slip as your rutting slowly turns more insistent, becoming the instinctive actions of the lusty beast inside you. Her tail snakes around you, caressing your back fondly and keeping you inside her reach as if she’s afraid you’ll pull away and end her bliss prematurely.", parse);
 	Text.NL();
 	Text.Add("Like you’re going to let that happen! With still quite a bit left in you, you set to it, intent on making this as good as possible for both of you. ", parse);
 	if(player.NumCocks() > 1)
 		Text.Add("Your other cock[s2] grind[notS2] against her taint, a carnal promise of more to come. Deciding to let [itThem2] have a little action, you pull out, immediately filling her again with a different member. You switch back and forth a while before plugging her with your main [cock] again.", parse);
 	else
 		Text.Add("You keep your hands busy by toying with the sensitive lizan; caressing the soft scales on the underside of her tail, squeezing her plush butt and circling your thumb on her taint.", parse);
-	Text.Add(" She does her best to keep up with you, but after a while of incessant fucking, her breath starts to grow shorter and shorter, her moans more insistent. Finally, the constant pummelling of your [cock] becomes too much for the girl, and she collapses in throes of ecstasy.", parse);
+	Text.Add(" She does her best to keep up with you, but after a while of incessant fucking, her breath starts to grow shorter and shorter, her moans more insistent. Finally, the constant pummeling of your [cock] becomes too much for the girl and she collapses in throes of ecstasy.", parse);
 	Text.NL();
 	
 	var cum = player.OrgasmCum();
@@ -496,7 +496,7 @@ Scenes.Lizards.WinFuckVag = function(enc) {
 	if(realCock) {
 		parse["cum"] = cum > 6 ? "copious" :
 		               cum > 3 ? "generous" : "large";
-		Text.Add("Letting out a groan, you unload and flood her with a [cum] amount of nut-batter. You idly wonder if you’ll fertilize her eggs, the thought of a pregnant lizard sending another spurt from your [cock].", parse);
+		Text.Add("Letting out a groan, you unload and flood her with a [cum] amount of nut-batter. You idly wonder if you’ll fertilize her eggs; the thought of a pregnant lizard sending another spurt from your [cock].", parse);
 		if(player.NumCocks() > 1)
 			Text.Add(" Your other cock[s2] blast [itsTheir2] load[s2] across her back, coating her in jizz both inside and out.", parse);
 	}
@@ -526,6 +526,7 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 		cockDesc      : function() { return player.FirstCock().Short(); },
 		multiCockDesc : function() { return player.MultiCockDesc(); },
 		vagDesc       : function() { return player.FirstVag().Short(); },
+		clit          : function() { return player.FirstVag().ClitShort(); },
 		armorDesc     : function() { return player.ArmorDesc(); },
 		facedesc      : function() { return player.FaceDesc(); },
 		ballsDesc     : function() { return player.BallsDesc(); },
@@ -556,9 +557,9 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 	else
 		Text.Add(" featureless crotch bare to the world.", parse);
 	Text.NL();
-	Text.Add("You stop just a step shy of her, and she looks up at you from the ground, her oasis-blue eyes locking onto yours. You drop to your hands and knees, your eyes bright as you slide over the top of her. When your hands don't move to her underwear, her expression becomes slightly confused. Your hands meet her legs, her cool scales firm against your fingers. You trail them downward, letting touch guide your hands to the base of her tail, and then lower...", parse);
+	Text.Add("You stop just a step shy of her. She looks up at you from the ground, her oasis-blue eyes locking onto yours. You drop to your hands and knees, your eyes bright as you slide over the top of her. When your hands don't move to her underwear, her expression becomes slightly confused. Your hands meet her legs, her cool scales firm against your fingers. You trail them downward, letting touch guide your hands to the base of her tail, and then lower...", parse);
 	Text.NL();
-	Text.Add("[m1Name]'s tail twitches back and forth, flicking in your grip as she leans backwards. Her legs slightly spread, she watches you confusedly, her mind trying to work out just what you intend to do with her. You don't leave her to wait too long, however, as your fingers near her tail's tip. You take a firm hold of it, giving her a teasing smile, before <i>pulling</i> it upward. The reptile swallows, her eyes widening.", parse);
+	Text.Add("[m1Name]'s tail twitches back and forth, flicking in your grip as she leans backwards. Her legs slightly spread, she watches you confusedly, her mind trying to work out just what you intend to do with her. You don't leave her to wait too long, however, as your fingers near her tail's tip. You take a firm hold of it, giving her a teasing smile before <i>pulling</i> it upward. The reptile swallows, her eyes widening.", parse);
 	Text.NL();
 	Text.Add("Bringing her tail up between your legs, ", parse);
 	if(player.FirstVag())
@@ -571,13 +572,13 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 	                 player.Race() == Race.feline ? "purr" :
 	                 (player.Race() == Race.dog || player.Race() == Race.wolf || player.Race() == Race.fox) ? "whine" :
 	                 "moan";
-	Text.Add("[m1Name] tenses, before her eyeridges drop lower in thought. As understanding dawns on her, a sly look passes her muzzle, and she twitches her tail against you. The tip, so very thin, easily slips a half inch inside of you between your fingers, and you feel it wriggle just inside your body. The motion feels strange, but oddly pleasant, and you find yourself holding her tail tight, keeping it from sliding back out from your flesh. You let out a small [sound] of pleasure, and [m1name] grins in satisfaction.", parse);
+	Text.Add("[m1Name] tenses, before her eyeridges drop lower in thought. As understanding dawns on her, a sly look passes her muzzle and she twitches her tail against you. The tip, so very thin, easily slips a half inch inside of you between your fingers and you feel it wriggle just inside your body. The motion feels strange, but oddly pleasant, and you find yourself holding her tail tight, keeping it from sliding back out from your flesh. You let out a small [sound] of pleasure, and [m1name] grins in satisfaction.", parse);
 	player.AddLustFraction(0.1);
 	Text.NL();
 	Text.Add("Gradually, you begin to feed her tail into your body, ", parse);
 	var analVirgin = player.Butt().virgin;
 	if(player.FirstVag()) {
-		Text.Add("your heated cunt gradually filling with her thickening tail. She twitches it frequently, and you don't tell her to stop; the way it undulates and slithers through your lips sends electric thrills through your body, and you feel your wet mound squeezing tightly around the reptile's tail.", parse);
+		Text.Add("your heated cunt gradually filling with her thickening tail. She twitches it frequently, and you don't tell her to stop; the way it undulates and slithers through your lips sends electric thrills through your body and you feel your wet mound squeezing tightly around the reptile's tail.", parse);
 		Text.NL();
 		player.FuckVag(player.FirstVag(), null, 3);
 		Sex.Vaginal(enemy, player);
@@ -592,9 +593,8 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 		player.FuckAnal(player.Butt(), null, 3);
 		Sex.Anal(enemy, player);
 	}
-	Text.Add("Thicker and thicker her tail grows, and you feel yourself slowly, achingly stretching to take the growing girth of her tail.", parse);
+	Text.Add("Thicker and thicker her tail grows and you feel yourself slowly, achingly stretching to take the growing girth of her tail.", parse);
 	Text.NL();
-	
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
@@ -634,13 +634,13 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 		}
 	}, function() { return (player.FirstVag() ? (60 + player.FirstVag().Tightness() * 5) : (20 + player.Butt().Tightness() * 5)) / 100; });
 	scenes.AddEnc(function() {
-		Text.Add("Slowly she begins to slide it out from your body again. You feel her sinuous tail slithering out, tugging on your ", parse);
+		Text.Add("Slowly, she begins to slide it out from your body again. You feel her sinuous tail slithering out, tugging on your ", parse);
 		if(player.FirstVag())
-			Text.Add("slick cunt as it moves, a slick coating of your fluids on her scales.", parse);
+			Text.Add("slick cunt as it moves, coating her scales with your fluids.", parse);
 		else
 			Text.Add("clenching sphincter as it moves, making it distend outwards as she twitches her tail inside of you.", parse);
 		Text.NL();
-		Text.Add("You let your hands come forward, taking hold of her legs to steady yourself as she slowly pulls her tail out of you... only to push it back in, equally as slow. You feel her tip sliding against your most sensitive spot, and her rough scales grinding across it leave you gasping for breath. She lets out a hiss of delight at the sight of you shuddering.", parse);
+		Text.Add("You let your hands come forward, taking hold of her legs to steady yourself as she slowly pulls her tail out of you... only to push it back in, equally as slow. You feel her tip sliding against your most sensitive spot, her rough scales grinding across it leave you gasping for breath. She lets out a hiss of delight at the sight of you shuddering.", parse);
 	}, function() { return Math.max((player.FirstVag() ? (40 - player.FirstVag().Tightness() * 5) : (80 - player.Butt().Tightness() * 5)) / 100, 0); });
 	
 	scenes.Get();
@@ -656,9 +656,9 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 			Text.NL();
 		}
 	}
-	Text.Add("[m1Name] gets an impish twinkle in her eyes, and she presses her tail gently against you. Before you can wonder what she's doing, you feel her entire tail undulate inside of you, rippling through your body. Back and forth it squirms inside you, pressing against your tender flesh. You feel a soft gurgling coming from deep inside you, and her slick tail wriggles in another inch. Your muscles stretch around her, and you bite your lip, your eyes closing.", parse);
+	Text.Add("[m1Name] gets an impish twinkle in her eyes and she presses her tail gently against you. Before you can wonder what she's doing, you feel her entire tail undulate inside of you, rippling through your body. Back and forth it squirms inside of you, pressing against your tender flesh. You feel a soft gurgling coming from deep inside you and her slick tail wriggles in another inch. Your muscles stretch around her, and you bite your lip, your eyes closing.", parse);
 	Text.NL();
-	Text.Add("[m1Name] sets into a slow, tormenting rhythm, her undulating tail slithering in and out of your body. Each time she draws her sinuous tail out, you feel your body begin to clench... before she <i>rams</i> it back in, sending a jolt through your pelvis as she forces you open again. You rapidly feel yourself approaching your own climax as her wriggling tail teases your most intimate of spots, very deliberately.", parse);
+	Text.Add("[m1Name] sets into a slow, tormenting rhythm as her undulating tail slithers in and out of your body. Each time she draws her sinuous tail out, you feel your body begin to clench... before she <i>rams</i> it back in, sending a jolt through your pelvis as she forces you open again. You rapidly feel yourself approaching your own climax as her wriggling tail teases your most intimate of spots, very deliberately.", parse);
 	Text.Flush();
 	
 	Gui.NextPrompt(function() {
@@ -668,26 +668,26 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 			if(player.HasBalls())
 				Text.Add(" Her tail lifts your [ballsDesc] up and out of the way to gain better access to your strained pussy.", parse);
 			Text.NL();
-			Text.Add("You feel your walls clenching down helplessly, and you find it hard to keep yourself upright on her. Her tail fills you so wonderfully that you find it hard to think straight. Her undulating tip strokes your g-spot, and the base of her thick tail grinds against your pulsing clit. <i>“That's it, my desert flower,”</i> she whispers then. Her tail ripples inside of you, and you can't keep back a moan. Your cunt clamps heavily down around her, and she leans forward.", parse);
+			Text.Add("You feel your walls clenching down helplessly and you find it hard to keep yourself upright on her. Her tail fills you so wonderfully that you find it hard to think straight. Her undulating tip strokes your g-spot and the base of her thick tail grinds against your pulsing [clit]. <i>“That's it, my desert flower,”</i> she whispers then. Her tail ripples inside of you and you are unable to prevent yourself from moaning. Your cunt clamps heavily down around her, and she leans forward.", parse);
 			Text.NL();
 			if(player.FirstBreastRow().size.Get() > 3)
-				Text.Add("Her hands suddenly lift to your [breastDesc], and you feel her cool fingers brush your [nipsDesc]. Her tail twitches inside of you again, and your pussy squeezes it tight, your fluids dripping down her tail. Then her fingers gently take hold of your breasts... and begin to squeeze, lightly tweaking your nipples as her tail keeps you almost docile, speeding toward the edge.", parse);
+				Text.Add("Her hands suddenly lift to your [breastDesc] and you feel her cool fingers brush your [nipsDesc]. Her tail twitches inside of you again, and your pussy squeezes it tight, your fluids dripping down her tail. Her fingers gently take hold of your breasts... and begin to squeeze, lightly tweaking your nipples as her tail keeps you almost docile, speeding toward the edge.", parse);
 			Text.NL();
-			Text.Add("Suddenly she <i>rams</i> her tail into you, and you feel her deepest inches make a fleshy thump against your cervix. You see double, and your wet pussy squeezes achingly around her undulating tail. You hear a loud moaning, and it takes you a few moments to realize that it's you. You feel your clit throbbing achingly, and feel yourself teetering at the edge. <i>“Mm... The rewards of victory are yours,”</i> she whispers. You look at her hungrily... before your hands slide down to her tail, and <i>shove</i> it deeper into you. Her tail-tip curls slightly, and you feel it stroking your g-spot relentlessly. Your eyes widen, and you feel your lips clamp down on her.", parse);
+			Text.Add("Suddenly, she <i>rams</i> her tail into you and you feel her deepest inches make a fleshy thump against your cervix. You begin to see double and your wet pussy squeezes achingly around her undulating tail. You hear a loud moaning, and it takes you a few moments to realize that it's you. You feel your [clit] throbbing achingly, and feel yourself teetering at the edge. <i>“Mm... The rewards of victory are yours,”</i> she whispers. You look at her hungrily... before your hands slide down to her tail and <i>shove</i> it deeper into you. Her tail-tip curls slightly as you feel it stroking your g-spot relentlessly. Your eyes widen and you feel your lips clamp down on her.", parse);
 			Text.NL();
-			Text.Add("You fall onto her as pleasure rips through your mind, your cunt clenching down powerfully around her tail as it continues undulating and wriggling inside of you. Your hot juices flood your passage, and then splatter out onto her tail, making a mess of her yellow-green scales. She lets out a satisfied hiss as you climax at her touches, flicking her tail deep within you. As your hands hold her tight, you ride her tail like a flexible, living sex toy, pulling the last inch out and cramming it back inside over and over, a moan plastered on your face.", parse);
+			Text.Add("You fall onto her as pleasure rips through your mind, your cunt clenching down powerfully around her tail as it continues undulating and wriggling inside of you. Your hot juices flood your passage, and then splatter out onto her tail, making a mess of her yellow-green scales. She lets out a satisfied hiss as you climax at her touches, flicking her tail deep within you. Using your hands to hold her tight, you ride her tail like a flexible, living sex toy, pulling the last inch out and cramming it back inside over and over, a look of pure bliss plastered on your face.", parse);
 			Text.NL();
-			Text.Add("Harder and harder you ream yourself with her constantly moving tail, your juices gushing from your quivering cunt as your cheeks go dark red. Even when your climax begins to fade, her tail continues wriggling and twitching inside of you, keeping you going, not letting your pleasure end. You feel her tail-tip squirming so deeply inside of you, feel it slowly driving you crazy.", parse);
+			Text.Add("Harder and harder, you ream yourself with her constantly moving tail, your juices gushing from your quivering cunt as your cheeks go dark red. Even when your climax begins to fade, her tail continues wriggling and twitching inside of you, keeping you going, not letting your pleasure end. You feel her tail-tip squirming so deeply inside of you, and it's slowly driving you crazy.", parse);
 			Text.NL();
-			Text.Add("You hump her tail desperately, trying to extract as much pleasure as physically possible as your cunt ripples around her merciless tail. Your eyes roll back in your head, and you make a wet mess of her for what feels like forever.", parse);
+			Text.Add("You hump her tail desperately, trying to extract as much pleasure as physically possible as your cunt ripples around her merciless tail. Your eyes roll back in your head as you make a wet mess of her for what feels like forever.", parse);
 			Text.NL();
-			Text.Add("Suddenly her tail drives you to the peak again, and you see white as your slathered cunt clamps down once more, another torrent of your juices pouring over her tail. <i>“Cum again, my desert rose,”</i> the lizard whispers as you ride out a second orgasm, your eyes rolling back. Still her tail wriggles, thrusting in and out of you. Her tip grinds your g-spot, and you find yourself drooling. She smirks delightedly, twisting and thrusting her tail inside you until you feel your pussy radiating an agonizing heat. You squeal out helplessly as she makes you cum a third time, impaled on her thick tail.", parse);
+			Text.Add("Suddenly, her tail drives you to the peak again, and you see white as your slathered cunt clamps down once more, another torrent of your juices pouring over her tail. <i>“Cum again, my desert rose,”</i> the lizard whispers as you ride out a second orgasm, your eyes rolling back as her tail continues to wriggle, thrusting in and out of you. Her tip grinds your g-spot and you find yourself drooling. She smirks delightedly, twisting and thrusting her tail inside you until you feel your pussy radiating an agonizing heat. You squeal out helplessly as she makes you cum a third time, impaled on her thick tail.", parse);
 			Text.NL();
-			Text.Add("Finally, though, you feel your muscles come back under control, feel your wet cunt begin to calm down, even with her tail continuing to flail inside of you.", parse);
+			Text.Add("Finally, you feel your muscles come back under control, feeling your wet cunt begin to calm down, even with her tail continuing to flail inside of you.", parse);
 		}
 		// TODO: Kinda breaks for genderless
 		else if(player.FirstCock()) {
-			Text.Add("Slowly you feel her slender tail sliding through your heated passage, filling your rear so completely. You close your eyes, feeling your body trembling as she keeps you stretched so wide. The tip of her tail continues grinding against your prostate, twitching and flickering against it with every passing moment, keeping the pressure high.", parse);
+			Text.Add("Slowly, you feel her slender tail sliding through your heated passage, filling your rear so completely. You close your eyes, feeling your body trembling as she keeps you stretched so wide. The tip of her tail continues grinding against your prostate, twitching and flickering against it with every passing moment, keeping the pressure high.", parse);
 			Text.NL();
 			Text.Add("You feel your [multiCockDesc] twitching, pulsing in aching need, but the way her tail torments your nerves, simply riding her feels even better.", parse);
 			if(!analVirgin)
@@ -709,9 +709,9 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 		}
 		player.AddLustFraction(-1);
 		Text.NL();
-		Text.Add("Weakly you begin to pull her tail out of your body, sliding it back. Several inches slip free. Then a foot. Then another. Your eyes widen as you realize just how <i>deep</i> she was inside of you.", parse);
+		Text.Add("Weakly, you begin to pull her tail out of your body, sliding it back. Several inches slip free... then a foot... then another. Your eyes widen as you realize just how <i>deep</i> she was inside of you.", parse);
 		Text.NL();
-		Text.Add("Finally you feel her tip sliding free. She wriggles it just slightly, brushing your entrance one last time. You shudder in pleasure, but pull it the rest of the way out.", parse);
+		Text.Add("Finally, you feel her tip sliding free. She wriggles it just slightly, brushing your entrance one last time. You shudder in pleasure, but pull it the rest of the way out.", parse);
 		Text.NL();
 		Text.Add("You quickly gather your things and the spoils of victory, and cast a look at her. [m1Name] smirks coyly at you, her slick tail twitching in your direction. You blush, and turn away.", parse);
 		
