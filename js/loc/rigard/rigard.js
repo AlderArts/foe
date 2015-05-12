@@ -63,13 +63,9 @@ function Rigard(storage) {
 	this.ClothShop.AddItem(Items.Armor.SimpleRobes, 5);
 	this.ClothShop.AddItem(Items.Armor.StylizedClothes, 5);
 	
-	this.ArmorShop = new Shop();
-	this.ArmorShop.AddItem(Items.Armor.LeatherChest, 5);
-	this.ArmorShop.AddItem(Items.Armor.LeatherPants, 5);
-	this.ArmorShop.AddItem(Items.Armor.BronzeChest, 5);
-	this.ArmorShop.AddItem(Items.Armor.BronzeLeggings, 5);
-	this.ArmorShop.AddItem(Items.Accessories.IronBangle, 5);
-	this.ArmorShop.AddItem(Items.Accessories.IronBuckler, 5);
+	var armShops = Scenes.Rigard.ArmorShop.CreateShop();
+	this.ArmorShop = armShops[0];
+	this.ArmorShopSpecial = armShops[1];
 	
 	this.WeaponShop = new Shop();
 	this.WeaponShop.AddItem(Items.Weapons.Dagger, 5);
@@ -102,6 +98,9 @@ function Rigard(storage) {
 	this.flags["BuyingExp"]   = 0;
 	this.flags["Scepter"]     = 0;
 	
+	this.Twopenny = {};
+	this.Twopenny["Met"]   = 0;
+	this.Twopenny["TShop"] = 0;
 	
 	this.LB = {};
 	this.LB["Visit"]    = 0;
@@ -153,6 +152,7 @@ Rigard.prototype.ToStorage = function() {
 	var storage = {};
 	
 	storage.flags   = this.flags;
+    storage.twoP    = this.Twopenny;
     storage.Krawitz = this.Krawitz;
     storage.Brothel = this.Brothel;
     storage.CW      = this.CW;
@@ -175,6 +175,8 @@ Rigard.prototype.FromStorage = function(storage) {
 	// Load flags
 	for(var flag in storage.flags)
 		this.flags[flag] = parseInt(storage.flags[flag]);
+	for(var flag in storage.twoP)
+		this.Twopenny[flag] = parseInt(storage.twoP[flag]);
     for(var flag in storage.Krawitz)
         this.Krawitz[flag] = parseInt(storage.Krawitz[flag]);
     for(var flag in storage.Brothel)

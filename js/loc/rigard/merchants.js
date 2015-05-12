@@ -12,7 +12,7 @@ world.loc.Rigard.ShopStreet =
 	ClothShop    : new Event("Silken Delights"),
 	GeneralShop  : new Event("General shop*"),
 	WeaponShop   : new Event("Weapon shop*"),
-	ArmorShop    : new Event("Armor shop*"),
+	ArmorShop    : new Event("Twopenny's"),
 	AlchemyShop  : new Event("Alchemical Wonders"),
 	MagicShop    : new Event("Magic shop*"),
 	
@@ -85,12 +85,13 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	"Armor", true, function() { return Scenes.Rigard.ArmorShop.IsOpen(); },
 	function() {
-		/*
-		Text.Add("");
-		if(!Scenes.Rigard.ArmorShop.IsOpen())
-			Text.Add("");
-		Text.Add("<br/>");
-		*/
+		Text.Add("You catch sight of a ramshackle shop tucked away into a cul-de-sac. An old, weather-beaten sign swings over the entrance with “Twopenny's Used Protectives” printed on it in faded paint. ");
+		if(Scenes.Rigard.ArmorShop.IsOpen())
+			Text.Add("The door leading in is open, although light doesn't get very far in.");
+		else
+			Text.Add("The shop is closed, its entrance securely padlocked and barred - perhaps the only part of the establishment that's relatively new.");
+		Text.NL();
+		
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.ShopStreet.ArmorShop, {minute: 5});

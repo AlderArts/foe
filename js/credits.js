@@ -23,6 +23,7 @@ CreditsScreen = function() {
 	Text.Add("Lei: Del<br/>");
 	Text.Add("Lady's Blessing and Room 69: Del<br/>");
 	Text.Add("Silken Delights & Fera: Resar<br/>");
+	Text.Add("Donovan Twopenny: The Observer<br/>");
 	Text.Add("Outlaws: Derp wolf<br/>");
 	Text.Add("Rosalin cock worship scene: Fenoxo<br/>");
 	Text.Add("Dreams & ravens: About half of them, Del<br/>");

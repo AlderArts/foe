@@ -1,7 +1,16 @@
 
 
-
-function Shop(sellPrice) {
+/*
+ * opts: {
+ * 	buyPromptFunc : func(item, cost)
+ *  buySuccessFunc : func(item, cost, num)
+ *  buyFailFunc : func(item, cost)
+ * 	sellPromptFunc : func(item, cost)
+ *  sellSuccessFunc : func(item, cost, num)
+ *  sellFailFunc : func(item, cost)
+ * }
+ */
+function Shop(opts) {
 	// Contains {it: Item, [num: Number], [enabled: Function], [func: Function], [price: Number]}
 	// Set num to null for infinite stock
 	// Set enabled to null for unconditional
@@ -10,7 +19,15 @@ function Shop(sellPrice) {
 	// price: 1 = regular price, 0.5 = half price, 2 = double price
 	// How to save sold limited stock?
 	this.inventory = [];
-	this.sellPrice = sellPrice || 1;
+	
+	opts = opts || {};
+	this.sellPrice       = opts.sellPrice || 1;
+	this.buyPromptFunc   = opts.buyPromptFunc;
+	this.buySuccessFunc  = opts.buySuccessFunc;
+	this.buyFailFunc     = opts.buyFailFunc;
+	this.sellPromptFunc  = opts.sellPromptFunc;
+	this.sellSuccessFunc = opts.sellSuccessFunc;
+	this.sellFailFunc    = opts.sellFailFunc;
 }
 
 Shop.prototype.AddItem = function(item, price, enabled, func, num) {
@@ -29,8 +46,10 @@ Shop.prototype.Buy = function(back, preventClear) {
 	
 	if(!preventClear)
 		Text.Clear();
+	else
+		Text.NL();
 		
-	var buyFunc = function(obj) {
+	var buyFunc = function(obj, bought) {
 		if(obj.func) {
 			var res = obj.func();
 			if(res) return;
@@ -40,6 +59,7 @@ Shop.prototype.Buy = function(back, preventClear) {
 		var num  = party.Inv().QueryNum(obj.it) || 0;
 		
 		Text.Clear();
+		if(shop.buyPromptFunc) shop.buyPromptFunc(obj.it, cost);
 		Text.Add("Buy " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
 		Text.Flush();
 		
@@ -47,38 +67,42 @@ Shop.prototype.Buy = function(back, preventClear) {
 		var options = new Array();
 		options.push({ nameStr : "Buy 1",
 			func : function() {
+				if(shop.buySuccessFunc) shop.buySuccessFunc(obj.it, cost, 1);
 				// Remove cost
 				party.coin -= cost;
 				// Add item to inv
 				party.inventory.AddItem(obj.it);
-				buyFunc(obj);
+				buyFunc(obj, true);
 			}, enabled : party.coin >= cost,
 			tooltip : ""
 		});
 		options.push({ nameStr : "Buy 5",
 			func : function() {
+				if(shop.buySuccessFunc) shop.buySuccessFunc(obj.it, cost, 5);
 				// Remove cost
 				party.coin -= cost*5;
 				// Add item to inv
 				party.inventory.AddItem(obj.it, 5);
-				buyFunc(obj);
+				buyFunc(obj, true);
 			}, enabled : party.coin >= cost*5,
 			tooltip : ""
 		});
 		options.push({ nameStr : "Buy 10",
 			func : function() {
+				if(shop.buySuccessFunc) shop.buySuccessFunc(obj.it, cost, 10);
 				// Remove cost
 				party.coin -= cost*10;
 				// Add item to inv
 				party.inventory.AddItem(obj.it, 10);
-				buyFunc(obj);
+				buyFunc(obj, true);
 			}, enabled : party.coin >= cost*10,
 			tooltip : ""
 		});
 		Gui.SetButtonsFromList(options, true, function() {
 			// Recreate the menu
 			// TODO: Keep page!
-			shop.Buy(back);
+			if(!bought && shop.buyFailFunc) shop.buyFailFunc(obj.it, cost);
+			shop.Buy(back, true);
 		});
 	};
 	
@@ -128,12 +152,14 @@ Shop.prototype.Sell = function(back, preventClear) {
 	
 	if(!preventClear)
 		Text.Clear();
+	else
+		Text.NL();
 	
 	if(party.inventory.items.length == 0) {
 		Text.Add("You have nothing to sell.");
 	}
 	
-	var sellFunc = function(obj) {
+	var sellFunc = function(obj, havesold) {
 		if(obj.func) {
 			var res = obj.func();
 			if(res) return;
@@ -143,12 +169,14 @@ Shop.prototype.Sell = function(back, preventClear) {
 		var cost = Math.floor(shop.sellPrice * obj.it.price);
 
 		Text.Clear();
+		if(shop.sellPromptFunc) shop.sellPromptFunc(obj.it, cost);
 		Text.Add("Sell " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
 		Text.Flush();
 		
 		var options = new Array();
 		options.push({ nameStr : "Sell 1",
 			func : function() {
+				if(shop.sellSuccessFunc) shop.sellSuccessFunc(obj.it, cost, 1);
 				// Add cash
 				party.coin += cost;
 				// Remove item from inv
@@ -157,17 +185,17 @@ Shop.prototype.Sell = function(back, preventClear) {
 				num -= 1;
 				if(num <= 0) {
 					// Recreate the menu
-					// TODO: Keep page!
-					shop.Sell(back);
+					shop.Sell(back, true);
 				}
 				else
-					sellFunc(obj);
+					sellFunc(obj, true);
 			}, enabled : true,
 			tooltip : ""
 		});
 		options.push({ nameStr : "Sell 5",
 			func : function() {
 				var sold = Math.min(num, 5);
+				if(shop.sellSuccessFunc) shop.sellSuccessFunc(obj.it, cost, sold);
 				// Add cash
 				party.coin += cost * sold;
 				// Remove item from inv
@@ -176,16 +204,16 @@ Shop.prototype.Sell = function(back, preventClear) {
 				num -= sold;
 				if(num <= 0) {
 					// Recreate the menu
-					// TODO: Keep page!
-					shop.Sell(back);
+					shop.Sell(back, true);
 				}
 				else
-					sellFunc(obj);
+					sellFunc(obj, true);
 			}, enabled : true,
 			tooltip : ""
 		});
 		options.push({ nameStr : "Sell all",
 			func : function() {
+				if(shop.sellSuccessFunc) shop.sellSuccessFunc(obj.it, cost, num);
 				// Add cash
 				party.coin += cost * num;
 				// Remove item from inv
@@ -193,14 +221,15 @@ Shop.prototype.Sell = function(back, preventClear) {
 				
 				// Recreate the menu
 				// TODO: Keep page!
-				shop.Sell(back);
+				shop.Sell(back, true);
 			}, enabled : true,
 			tooltip : ""
 		});
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, function() {			
+			if(!havesold && shop.sellFailFunc) shop.sellFailFunc(obj.it, cost);
 			// Recreate the menu
 			// TODO: Keep page!
-			shop.Sell(back);
+			shop.Sell(back, true);
 		});
 	};
 	
