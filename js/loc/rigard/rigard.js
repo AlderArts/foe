@@ -63,9 +63,8 @@ function Rigard(storage) {
 	this.ClothShop.AddItem(Items.Armor.SimpleRobes, 5);
 	this.ClothShop.AddItem(Items.Armor.StylizedClothes, 5);
 	
-	var armShops = Scenes.Rigard.ArmorShop.CreateShop();
-	this.ArmorShop = armShops[0];
-	this.ArmorShopSpecial = armShops[1];
+	this.ArmorShop = Scenes.Rigard.ArmorShop.Shop;
+	this.ArmorShopSpecial = Scenes.Rigard.ArmorShop.SpecialShop;
 	
 	this.WeaponShop = new Shop();
 	this.WeaponShop.AddItem(Items.Weapons.Dagger, 5);

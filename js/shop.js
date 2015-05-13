@@ -2,12 +2,12 @@
 
 /*
  * opts: {
- * 	buyPromptFunc : func(item, cost)
+ * 	buyPromptFunc : func(item, cost, bought)
  *  buySuccessFunc : func(item, cost, num)
- *  buyFailFunc : func(item, cost)
- * 	sellPromptFunc : func(item, cost)
+ *  buyFailFunc : func(item, cost, sold)
+ * 	sellPromptFunc : func(item, cost, sold)
  *  sellSuccessFunc : func(item, cost, num)
- *  sellFailFunc : func(item, cost)
+ *  sellFailFunc : func(item, cost, sold)
  * }
  */
 function Shop(opts) {
@@ -58,8 +58,8 @@ Shop.prototype.Buy = function(back, preventClear) {
 		var cost = obj.cost;
 		var num  = party.Inv().QueryNum(obj.it) || 0;
 		
-		Text.Clear();
-		if(shop.buyPromptFunc) shop.buyPromptFunc(obj.it, cost);
+		if(shop.buyPromptFunc) shop.buyPromptFunc(obj.it, cost, bought);
+		else Text.Clear();
 		Text.Add("Buy " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
 		Text.Flush();
 		
@@ -101,7 +101,7 @@ Shop.prototype.Buy = function(back, preventClear) {
 		Gui.SetButtonsFromList(options, true, function() {
 			// Recreate the menu
 			// TODO: Keep page!
-			if(!bought && shop.buyFailFunc) shop.buyFailFunc(obj.it, cost);
+			if(shop.buyFailFunc) shop.buyFailFunc(obj.it, cost, bought);
 			shop.Buy(back, true);
 		});
 	};
@@ -168,8 +168,8 @@ Shop.prototype.Sell = function(back, preventClear) {
 		var num = obj.num;
 		var cost = Math.floor(shop.sellPrice * obj.it.price);
 
-		Text.Clear();
-		if(shop.sellPromptFunc) shop.sellPromptFunc(obj.it, cost);
+		if(shop.sellPromptFunc) shop.sellPromptFunc(obj.it, cost, havesold);
+		else Text.Clear();
 		Text.Add("Sell " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
 		Text.Flush();
 		
@@ -226,7 +226,7 @@ Shop.prototype.Sell = function(back, preventClear) {
 			tooltip : ""
 		});
 		Gui.SetButtonsFromList(options, true, function() {			
-			if(!havesold && shop.sellFailFunc) shop.sellFailFunc(obj.it, cost);
+			if(shop.sellFailFunc) shop.sellFailFunc(obj.it, cost, havesold);
 			// Recreate the menu
 			// TODO: Keep page!
 			shop.Sell(back, true);

@@ -14,6 +14,7 @@ Scenes.Rigard.ArmorShop.CreateShop = function() {
 			sirmadam : player.mfTrue("sir", "madam")
 		};
 		
+		Text.Clear();
 		var scenes = new EncounterTable();
 		scenes.AddEnc(function() { Text.Add("<i>“Wonderful,”</i> Donovan says, making your money disappear somewhere on his person - you can’t tell where, he moves so quickly. <i>“I’d advise you to check your brand-new acquisition before leaving the premises. Once you’re out the doors, I’m not going to entertain any requests for refunds.”</i>", parse); });
 		scenes.AddEnc(function() { Text.Add("Donovan’s smile doesn’t shift in the slightest as he counts and pockets your money with astounding speed. <i>“And thank you for shopping with us today, [sirmadam]. I’m sure your new purchase will serve you better than it did its previous owner.”</i>", parse); });
@@ -23,23 +24,28 @@ Scenes.Rigard.ArmorShop.CreateShop = function() {
 		
 		Text.NL();
 	};
-	var buyFailFunc = function(item, cost) {
+	var buyFailFunc = function(item, cost, bought) {
 		var parse = {
 			sirmadam : player.mfTrue("sir", "madam")
 		};
 		
-		var scenes = new EncounterTable();
-		scenes.AddEnc(function() { Text.Add("A flicker of disappointment flashes across Donovan’s face, but he recovers with all the ease of an experienced salesman, quickly returning to his pleasant demeanor. <i>“Well, such a pity! Is there anything else I can do for you, [sirmadam]?”</i>", parse); });
-		scenes.AddEnc(function() { Text.Add("<i>“Oh? Changed your mind? Well, I guess it wouldn’t have looked that good on you anyway.”</i> Donovan rubs his paws. <i>“Tell me, [sirmadam], would you be interested in looking at something else?”</i>", parse); });
-		scenes.AddEnc(function() { Text.Add("Donovan winces, but clears his throat and pretends nothing happened. <i>“Oh. Well, you don’t want to do impulse buys, anyway - I want to my customers to leave truly happy with their purchases. Think I could interest you in something else?”</i>", parse); });
-		scenes.AddEnc(function() { Text.Add("<i>“That one not to your liking? Was it the shine? The size? Or maybe it was a bad fit?”</i> Without waiting for your reply, Donovan begins to let both his gaze and paws wander about the aisles once more. <i>“Well, [sirmadam], don’t worry if that one didn’t quite tickle your fancy. I’ve got some more surprises waiting in the back…”</i>", parse); });
-		scenes.Get();
-		
+		Text.Clear();
+		if(bought) {
+			Text.Add("<i>“Anything else, [sirmadam]?”</i>", parse);
+		}
+		else {
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() { Text.Add("A flicker of disappointment flashes across Donovan’s face, but he recovers with all the ease of an experienced salesman, quickly returning to his pleasant demeanor. <i>“Well, such a pity! Is there anything else I can do for you, [sirmadam]?”</i>", parse); });
+			scenes.AddEnc(function() { Text.Add("<i>“Oh? Changed your mind? Well, I guess it wouldn’t have looked that good on you anyway.”</i> Donovan rubs his paws. <i>“Tell me, [sirmadam], would you be interested in looking at something else?”</i>", parse); });
+			scenes.AddEnc(function() { Text.Add("Donovan winces, but clears his throat and pretends nothing happened. <i>“Oh. Well, you don’t want to do impulse buys, anyway - I want to my customers to leave truly happy with their purchases. Think I could interest you in something else?”</i>", parse); });
+			scenes.AddEnc(function() { Text.Add("<i>“That one not to your liking? Was it the shine? The size? Or maybe it was a bad fit?”</i> Without waiting for your reply, Donovan begins to let both his gaze and paws wander about the aisles once more. <i>“Well, [sirmadam], don’t worry if that one didn’t quite tickle your fancy. I’ve got some more surprises waiting in the back…”</i>", parse); });
+			scenes.Get();
+		}
 		Text.NL();
 	};
 	
 	var shop = new Shop({
-		buyPromptFunc : function(item, cost) {
+		buyPromptFunc : function(item, cost, bought) {
 			var coin = Text.NumToText(cost);
 			var parse = {
 				sirmadam : player.mfTrue("sir", "madam"),
@@ -47,7 +53,7 @@ Scenes.Rigard.ArmorShop.CreateShop = function() {
 				coin : coin,
 				Coin : _.capitalize(coin)
 			};
-			
+			if(!bought) Text.Clear();
 			var scenes = new EncounterTable();
 			scenes.AddEnc(function() { Text.Add("Donovan peers at your selection. <i>“Oh, [item]?” That’s a very lovely choice. Don’t mind the spot there, the previous owner wasn’t that good at dodging swords. How’s [coin] coins sound to you? A very fair deal, if I dare say so.”</i>", parse); });
 			scenes.AddEnc(function() { Text.Add("<i>“That’s a very fine [item] you’ve picked out there, [sirmadam]. Used to belong to a little old lady, hardly ever used, she only put it on during weekends to watch her son in the city watch parades.”</i> Donovan rubs his paws together. <i>“[Coin] coins, and it’s yours.”</i>", parse); });
@@ -60,7 +66,7 @@ Scenes.Rigard.ArmorShop.CreateShop = function() {
 		},
 		buySuccessFunc : buySuccessFunc,
 		buyFailFunc : buyFailFunc,
-		sellPromptFunc : function(item, cost) {
+		sellPromptFunc : function(item, cost, sold) {
 			var coin = Text.NumToText(cost);
 			var parse = {
 				sirmadam : player.mfTrue("sir", "madam"),
@@ -69,6 +75,7 @@ Scenes.Rigard.ArmorShop.CreateShop = function() {
 				Coin : _.capitalize(coin)
 			};
 			
+			if(!sold) Text.Clear();
 			var scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				Text.Add("<i>“Hmm.”</i> Donovan takes your [item] and lays it out on the counter, running his paws over it. <i>“I see. Age, quality, metallic flexibility, thaumatheurgical mileage, quadratic tensiles, number of reticulated splines… well, all things considered, I’ll give you [coin] coins for it. How’s that sound to you?”</i>", parse);
@@ -99,6 +106,7 @@ Scenes.Rigard.ArmorShop.CreateShop = function() {
 				sirmadam : player.mfTrue("sir", "madam")
 			};
 			
+			Text.Clear();
 			var scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				Text.Add("<i>“Very good. I’ll just take it… and here’s your bit.”</i>", parse);
@@ -114,18 +122,24 @@ Scenes.Rigard.ArmorShop.CreateShop = function() {
 			
 			Text.NL();
 		},
-		sellFailFunc : function(item, cost) {
+		sellFailFunc : function(item, cost, sold) {
 			var parse = {
 				sirmadam : player.mfTrue("sir", "madam"),
 				item : item.sDesc()
 			};
 			
-			var scenes = new EncounterTable();
-			scenes.AddEnc(function() { Text.Add("Donovan shrugs. <i>“Sorry we couldn’t do business, but I don’t haggle. My prices are what they are - already cutting my own throat on most of my deals as it is. Sometimes, a man gets tired of eating watery gruel and cabbage for dinner every night, you know? Well, anything else I can do for you?”</i>", parse); });
-			scenes.AddEnc(function() { Text.Add("<i>“Changed your mind? I’m afraid I can’t go any higher on that; I’m already one to two months’ operating expenses from selling sausages in buns at the plaza. Still… is there anything I can do for you, since you’re here?”</i>", parse); });
-			scenes.AddEnc(function() { Text.Add("<i>“Sorry, [sirmadam]. I can’t go any higher on that. Can’t make exceptions, won’t play favourites, gotta treat all customers with respect. You ever change your mind about changing your mind, and I’ll be more than happy to take it off your hands.”</i>", parse); });
-			scenes.AddEnc(function() { Text.Add("Donovan lets out a small sigh as he pushes your [item] back to you and straightens his tie. <i>“Pity we couldn’t see eye-to-eye, [sirmadam]. Still, I’ll be here if you ever change your mind, so there’s no rush. Can I help you with something else?”</i>", parse); });
-			scenes.Get();
+			Text.Clear();
+			if(sold) {
+				Text.Add("<i>“Do you have anything else for me, [sirmadam]?”</i>", parse);
+			}
+			else {
+				var scenes = new EncounterTable();
+				scenes.AddEnc(function() { Text.Add("Donovan shrugs. <i>“Sorry we couldn’t do business, but I don’t haggle. My prices are what they are - already cutting my own throat on most of my deals as it is. Sometimes, a man gets tired of eating watery gruel and cabbage for dinner every night, you know? Well, anything else I can do for you?”</i>", parse); });
+				scenes.AddEnc(function() { Text.Add("<i>“Changed your mind? I’m afraid I can’t go any higher on that; I’m already one to two months’ operating expenses from selling sausages in buns at the plaza. Still… is there anything I can do for you, since you’re here?”</i>", parse); });
+				scenes.AddEnc(function() { Text.Add("<i>“Sorry, [sirmadam]. I can’t go any higher on that. Can’t make exceptions, won’t play favourites, gotta treat all customers with respect. You ever change your mind about changing your mind, and I’ll be more than happy to take it off your hands.”</i>", parse); });
+				scenes.AddEnc(function() { Text.Add("Donovan lets out a small sigh as he pushes your [item] back to you and straightens his tie. <i>“Pity we couldn’t see eye-to-eye, [sirmadam]. Still, I’ll be here if you ever change your mind, so there’s no rush. Can I help you with something else?”</i>", parse); });
+				scenes.Get();
+			}
 			
 			Text.NL();
 		}
@@ -164,8 +178,11 @@ Scenes.Rigard.ArmorShop.CreateShop = function() {
 	shop.AddItem(Items.Armor.BronzeLeggings, 5);
 	shop.AddItem(Items.Accessories.IronBangle, 5);
 	shop.AddItem(Items.Accessories.IronBuckler, 5);
-	return [shop, specialShop];
+	
+	Scenes.Rigard.ArmorShop.Shop = shop;
+	Scenes.Rigard.ArmorShop.SpecialShop = specialShop;
 }
+Scenes.Rigard.ArmorShop.CreateShop();
 
 
 world.loc.Rigard.ShopStreet.ArmorShop.description = function() {
@@ -358,10 +375,8 @@ Scenes.Rigard.ArmorShop.Prompt = function() {
 				scenes.Get();
 				
 				rigard.ArmorShop.Buy(function() {
-					//TODO
 					Text.Clear();
-					Text.Add("", parse);
-					Text.NL();
+					Text.Add("<i>“Right, I see, I see.”</i> The weaselly little stoat doesn’t even miss a beat. <i>“Well then, anything else I can help you with?”</i>", parse);
 					Text.Flush();
 					prompt();
 				}, true);
@@ -380,10 +395,8 @@ Scenes.Rigard.ArmorShop.Prompt = function() {
 				Text.Add("<i>“A word of warning: I’d make sure I really wanted to let go of my stuff, if I were you. Once sold, I don’t do buybacks.”</i>", parse);
 
 				rigard.ArmorShop.Sell(function() {
-					//TODO
 					Text.Clear();
-					Text.Add("", parse);
-					Text.NL();
+					Text.Add("<i>“Right, I see, I see.”</i> The weaselly little stoat doesn’t even miss a beat. <i>“Well then, anything else I can help you with?”</i>", parse);
 					Text.Flush();
 					prompt();
 				}, true);
@@ -392,14 +405,15 @@ Scenes.Rigard.ArmorShop.Prompt = function() {
 		options.push({ nameStr : "Specials",
 			func : function() {
 				Text.Clear();
-				
-				// TODO
+				var scenes = new EncounterTable();
+				scenes.AddEnc(function() { Text.Add("<i>“Ah! I see, I see. You’re looking for something special today, aren’t you, my good [sirmadam]? Well, I’m sure I can hook you up with something one way or the other, just let me check what’s in the back.”</i>", parse); });
+				scenes.AddEnc(function() { Text.Add("<i>“Thinking of making a big purchase today?”</i> The stoat reaches up and scratches his little round ears; you can practically see the gears turning in his head. Well, in Donovan’s case, it’s more of a cash register, but the point still stands. <i>“Well, I’m the one you should be looking for when it comes to spending lots of money in one place! Let me show you what I’ve in the back, and we can get started!”</i>", parse); });
+				scenes.AddEnc(function() { Text.Add("Donovan grins, and you can swear light’s glinting off his teeth despite the gloom of his shop. <i>“So you’re looking for something out of the ordinary? Well… have a look at these! Blessed by a bona fide shaman straight out of the highlands… or was it cursed by the shaman and <b>then</b> blessed twenty minutes later? Fellow must have been hitting the good stuff! If only I could afford that…”</i>", parse); });
+				scenes.Get();
 				
 				rigard.ArmorShopSpecial.Buy(function() {
-					//TODO
 					Text.Clear();
-					Text.Add("", parse);
-					Text.NL();
+					Text.Add("<i>“Right, I see, I see.”</i> The weaselly little stoat doesn’t even miss a beat. <i>“Well then, anything else I can help you with?”</i>", parse);
 					Text.Flush();
 					prompt();
 				}, true);
