@@ -92,17 +92,17 @@ AttackItem.prototype.UseCombatInternal = function(encounter, caster, target) {
 	});
 }
 // Default messages
-AttackPhysical.prototype.OnHit = function(encounter, caster, target, dmg) {
+AttackItem.prototype.OnHit = function(encounter, caster, target, dmg) {
 	var parse = { tName : target.nameDesc() };
 	Text.Add("The attack hits [tName] for " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
 	Text.NL();
 }
-AttackPhysical.prototype.OnMiss = function(encounter, caster, target) {
+AttackItem.prototype.OnMiss = function(encounter, caster, target) {
 	var parse = { tName : target.nameDesc() };
 	Text.Add("The attack narrowly misses [tName], dealing no damage!", parse);
 	Text.NL();
 }
-AttackPhysical.prototype.OnAbsorb = function(encounter, caster, target, dmg) {
+AttackItem.prototype.OnAbsorb = function(encounter, caster, target, dmg) {
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s" };
 	Text.Add("[tName] absorb[s] the attack, gaining " + Text.BoldColor(dmg, "#008000") + " health!", parse);
 	Text.NL();
