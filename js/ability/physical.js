@@ -388,6 +388,7 @@ Abilities.Physical.Ensnare = new Ability();
 Abilities.Physical.Ensnare.name = "Ensnare";
 Abilities.Physical.Ensnare.Short = function() { return "Slows down an enemy by throwing a net at them."; }
 Abilities.Physical.Ensnare.cost = { hp: null, sp: 20, lp: null};
+Abilities.Physical.Ensnare.cooldown = 3;
 Abilities.Physical.Ensnare.castTree.push(AbilityNode.Template.Physical({
 	toDamage: null,
 	onCast: [function(ability, encounter, caster, target) {
@@ -493,8 +494,7 @@ Abilities.Physical.Frenzy.castTree.push(AbilityNode.Template.Physical({
 	nrAttacks: 5,
 	onCast: [function(ability, encounter, caster, target) {
 		var entry = caster.GetCombatEntry(encounter);
-		if(entry)
-			entry.initiative -= 50;
+		if(entry) entry.initiative -= 50;
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] perform[s] a frenzied assault, attacking [tname] with five rapid blows!", parse);
 	}],
@@ -504,31 +504,31 @@ Abilities.Physical.Frenzy.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-//TODO REPLACE
-Abilities.Physical.CrushingStrike = new AttackPhysical();
+Abilities.Physical.CrushingStrike = new Ability();
 Abilities.Physical.CrushingStrike.name = "Crushing.S";
 Abilities.Physical.CrushingStrike.Short = function() { return "Crushing strike that deals massive damage, with high chance of stunning. Slight recoil effect."; }
 Abilities.Physical.CrushingStrike.cost = { hp: 25, sp: 10, lp: null};
-Abilities.Physical.CrushingStrike.damageType = null;
-Abilities.Physical.CrushingStrike.atkMod = 1.5;
-Abilities.Physical.CrushingStrike.hitMod = 0.9;
-Abilities.Physical.CrushingStrike.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.NameDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.Add("[name] perform[s] a wild assault against [tName]! ", parse);
-}
-Abilities.Physical.CrushingStrike.OnHit = function(encounter, caster, target, dmg) {
-	if(Math.random() < 0.8) {
-		for(var i = 0; i < encounter.combatOrder.length; i++) {
-			if(encounter.combatOrder[i].entity == target)
-				encounter.combatOrder[i].initiative -= 75;
+Abilities.Physical.CrushingStrike.cooldown = 2;
+Abilities.Physical.CrushingStrike.castTree.push(AbilityNode.Template.Physical({
+	atkMod: 1.5,
+	hitMod: 0.9,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] perform[notS] a wild assault against [tname]! ", parse);
+	}],
+	onMiss: [Abilities.Physical._onMiss],
+	onDamage: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] deliver[notS] a crushing blow to [tname] for " + Text.BoldColor(dmg, "#800000") + " damage, staggering [thimher]!", parse);
+	}],
+	onHit: [function(ability, encounter, caster, target) {
+		if(Math.random() < 0.8) {
+			var entry = target.GetCombatEntry(encounter);
+			if(entry) entry.initiative -= 75;
 		}
-	}
-	
-	var parse = { name : caster.NameDesc(), himher : target.himher(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	
-	Text.Add("[name] deliver[s] a crushing blow to [tName] for " + Text.BoldColor(dmg, "#800000") + " damage, staggering [himher]!", parse);
-	Text.NL();
-}
+	}],
+	onAbsorb: [Abilities.Physical._onAbsorb]
+}));
 
 
 //TODO REPLACE
