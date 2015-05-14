@@ -15,6 +15,7 @@ AbilityNode.DefaultParser = function(caster, target) {
 		parse["es"]   = caster.plural() ? "" : "es";
 		parse["notS"] = caster.plural() ? "s" : "";
 		parse["is"]   = caster.is();
+		parse["has"]  = caster.has();
 		parse["hand"] = function() { return caster.HandDesc(); };
 	}
 	if(target) {
@@ -28,6 +29,7 @@ AbilityNode.DefaultParser = function(caster, target) {
 		parse["tes"]   = target.plural() ? "" : "es";
 		parse["tnotS"] = target.plural() ? "s" : "";
 		parse["tis"]   = target.is();
+		parse["thas"]  = target.has();
 	}
 	return parse;
 }

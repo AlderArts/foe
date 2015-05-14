@@ -211,65 +211,63 @@ Abilities.Physical.DirtyBlow.castTree.push(AbilityNode.Template.Physical({
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Numb(target, { hit : 0.2, turns : 3, turnsR : 3, proc : 0.25 })) {
-			Text.Add("[tName] [has] been afflicted with numb!", parse);
+			Text.Add("[tName] [thas] been afflicted with numb!", parse);
 			Text.NL();
 		}
 	}]
 }));
 
 
-//TODO REPLACE
-Abilities.Physical.Hamstring = new AttackPhysical();
+Abilities.Physical.Hamstring = new Ability();
 Abilities.Physical.Hamstring.name = "Hamstring";
 Abilities.Physical.Hamstring.Short = function() { return "Nicks the target, making a lingering wound."; }
 Abilities.Physical.Hamstring.cost = { hp: null, sp: 20, lp: null};
-Abilities.Physical.Hamstring.atkMod = 0.5;
-Abilities.Physical.Hamstring.damageType.pPierce = 1;
-Abilities.Physical.Hamstring.OnCast = function(encounter, caster, target) {
-	var parse = {
-		tname : target.nameDesc(),
-		Possessive : caster.Possessive(),
-		name : caster.NameDesc(),
-		y : caster.plural() ? "y" : "ies"
-	};
-	Text.Add("[name] tr[y] [tname] with a light attack, aiming to wound! ", parse);
-}
-Abilities.Physical.Hamstring.OnHit = function(encounter, caster, target, dmg) {
-	var parse = { name : caster.NameDesc(), s : caster.plural() ? "" : "s", tname : target.nameDesc(), tName : target.NameDesc(), has : target.has() };
-	
-	Text.Add("[name] deal[s] " + Text.BoldColor(dmg, "#800000") + " damage to [tname]!", parse);
-	Text.NL();
-	
-	if(Status.Bleed(target, { hit : 0.75, turns : 3, turnsR : 3, dmg : 0.15 })) {
-		Text.Add("[tName] [has] been afflicted with bleed! ", parse);
-		Text.NL();
-	}
-}
+Abilities.Physical.Hamstring.cooldown = 2;
+Abilities.Physical.Hamstring.castTree.push(AbilityNode.Template.Physical({
+	atkMod: 0.5,
+	damageType: {pPierce: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] tr[y] to hit [tname] with a light attack, aiming to wound! ", parse);
+	}],
+	onMiss: [Abilities.Physical._onMiss],
+	onDamage: [Abilities.Physical._onDamage],
+	onAbsorb: [Abilities.Physical._onAbsorb],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		if(Status.Bleed(target, { hit : 0.75, turns : 3, turnsR : 3, dmg : 0.15 })) {
+			Text.Add("[tName] [thas] been afflicted with bleed! ", parse);
+			Text.NL();
+		}
+	}]
+}));
 
 
-//TODO REPLACE
-Abilities.Physical.Kicksand = new AttackPhysical();
+Abilities.Physical.Kicksand = new Ability();
 Abilities.Physical.Kicksand.name = "Kick sand";
 Abilities.Physical.Kicksand.Short = function() { return "Kick dirt in the enemy's eyes, blinding them. Single target."; }
 Abilities.Physical.Kicksand.cost = { hp: null, sp: 15, lp: null};
 Abilities.Physical.Kicksand.atkMod = 0.05;
-Abilities.Physical.Kicksand.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.Add("[name] kick[s] some dirt toward [tName]! ", parse);
-}
-Abilities.Physical.Kicksand.OnHit = function(encounter, caster, target, dmg) {
-	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", himher : target.himher(), name : caster.nameDesc() };
-	if(Status.Blind(target, { hit : 0.8, str : 0.5, turns : 3, turnsR : 3 })) {
-		Text.Add("[tName] get[s] a face-full of dirt, blinding [himher]!", parse);
-	}
-	Text.NL();
-}
-Abilities.Physical.Kicksand.OnAbsorb = Abilities.Physical.Kicksand.OnHit;
-Abilities.Physical.Kicksand.OnMiss = function(encounter, caster, target) {
-	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.Add("[tName] easily avoid[s] the attack.", parse);
-	Text.NL();
-}
+Abilities.Physical.Kicksand.cooldown = 1;
+Abilities.Physical.Kicksand.castTree.push(AbilityNode.Template.Physical({
+	atkMod: 0.5,
+	damageType: {pPierce: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] kick[notS] some dirt toward [tname]! ", parse);
+	}],
+	onMiss: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] easily avoid[tnotS] the attack.", parse);
+	}],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		if(Status.Blind(target, { hit : 0.8, str : 0.5, turns : 3, turnsR : 3 })) {
+			Text.Add("[tName] get[tnotS] a face-full of dirt, blinding [thimher]!", parse);
+		}
+	}]
+}));
+
 
 
 //TODO REPLACE
