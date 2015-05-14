@@ -384,29 +384,27 @@ Abilities.Physical.Backstab.enabledTargetCondition = function(encounter, caster,
 }
 
 
-//TODO REPLACE
-Abilities.Physical.Ensnare = new AttackPhysical();
+Abilities.Physical.Ensnare = new Ability();
 Abilities.Physical.Ensnare.name = "Ensnare";
 Abilities.Physical.Ensnare.Short = function() { return "Slows down an enemy by throwing a net at them."; }
 Abilities.Physical.Ensnare.cost = { hp: null, sp: 20, lp: null};
-Abilities.Physical.Ensnare.atkMod = 0;
-Abilities.Physical.Ensnare.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.Add("[name] throw[s] a net toward [tName]! ", parse);
-}
-Abilities.Physical.Ensnare.OnHit = function(encounter, caster, target, dmg) {
-	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", himher : target.himher(), name : caster.nameDesc() };
-	if(Status.Slow(target, { hit : 0.6, factor : 2, turns : 3, turnsR : 3 })) {
-		Text.Add("[tName] get[s] caught in the net, slowing [himher]!", parse);
-	}
-	Text.NL();
-}
-Abilities.Physical.Ensnare.OnAbsorb = Abilities.Physical.Ensnare.OnHit;
-Abilities.Physical.Ensnare.OnMiss = function(encounter, caster, target) {
-	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.Add("[tName] easily avoid[s] the attack.", parse);
-	Text.NL();
-}
+Abilities.Physical.Ensnare.castTree.push(AbilityNode.Template.Physical({
+	toDamage: null,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] throw[notS] a net toward [tname]! ", parse);
+	}],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		if(Status.Slow(target, { hit : 0.6, factor : 2, turns : 3, turnsR : 3 })) {
+			Text.Add("[tName] get[tnotS] caught in the net, slowing [thimher]!", parse);
+		}
+	}],
+	onMiss: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] easily avoid[ts] the attack.", parse);
+	}]
+}));
 
 
 Abilities.Physical.FocusStrike = new Ability();
@@ -414,7 +412,7 @@ Abilities.Physical.FocusStrike.name = "Focus strike";
 Abilities.Physical.FocusStrike.Short = function() { return "Bypass defenses."; }
 Abilities.Physical.FocusStrike.cost = { hp: null, sp: 50, lp: null};
 Abilities.Physical.FocusStrike.cooldown = 2;
-Abilities.Physical.FocusStrike.castTree.push(AbilityNode({
+Abilities.Physical.FocusStrike.castTree.push(AbilityNode.Template.Physical({
 	defMod: 0.2,
 	damageType: {pPierce: 1.5},
 	onCast: [function(ability, encounter, caster, target) {

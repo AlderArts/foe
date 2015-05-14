@@ -56,8 +56,8 @@ AbilityNode.Template.Blank = function(node) {
 	node.atkMod    = node.atkMod;
 	node.defMod    = node.defMod;
 	*/
-	node.toHit     = node.toHit     || AbilityNode.ToHit.Regular;
-	node.toDamage  = node.toDamage  || AbilityNode.ToDamage.Regular;
+	node.toHit     = _.has(node, 'toHit')    ? node.toHit    : AbilityNode.ToHit.Regular;
+	node.toDamage  = _.has(node, 'toDamage') ? node.toDamage : AbilityNode.ToDamage.Regular;
 	
 	node.hitFunc   = node.hitFunc   || AbilityNode.HitFunc.Physical;
 	node.evadeFunc = node.evadeFunc || AbilityNode.EvadeFunc.Physical;
@@ -75,8 +75,8 @@ AbilityNode.Template.Physical = function(node) {
 	*/
 	node.damageType = node.damageType ? new DamageType(node.damageType) : null;
 	
-	node.toHit     = node.toHit     || AbilityNode.ToHit.Regular;
-	node.toDamage  = node.toDamage  || AbilityNode.ToDamage.Regular;
+	node.toHit     = _.has(node, 'toHit')    ? node.toHit    : AbilityNode.ToHit.Regular;
+	node.toDamage  = _.has(node, 'toDamage') ? node.toDamage : AbilityNode.ToDamage.Regular;
 	
 	node.hitFunc   = node.hitFunc   || AbilityNode.HitFunc.Physical;
 	node.evadeFunc = node.evadeFunc || AbilityNode.EvadeFunc.Physical;
@@ -94,8 +94,8 @@ AbilityNode.Template.Magical = function(node) {
 	*/
 	node.damageType = node.damageType ? new DamageType(node.damageType) : null;
 	
-	node.toHit     = node.toHit     || AbilityNode.ToHit.Regular;
-	node.toDamage  = node.toDamage  || AbilityNode.ToDamage.Regular;
+	node.toHit     = _.has(node, 'toHit')    ? node.toHit    : AbilityNode.ToHit.Regular;
+	node.toDamage  = _.has(node, 'toDamage') ? node.toDamage : AbilityNode.ToDamage.Regular;
 	
 	node.hitFunc   = node.hitFunc   || AbilityNode.HitFunc.Magical;
 	node.evadeFunc = node.evadeFunc || AbilityNode.EvadeFunc.Magical;
@@ -113,8 +113,8 @@ AbilityNode.Template.Lust = function(node) {
 	*/
 	node.damageType = node.damageType ? new DamageType(node.damageType) : null;
 	
-	node.toHit     = node.toHit     || AbilityNode.ToHit.Regular;
-	node.toDamage  = node.toDamage  || AbilityNode.ToDamage.Regular;
+	node.toHit     = _.has(node, 'toHit')    ? node.toHit    : AbilityNode.ToHit.Regular;
+	node.toDamage  = _.has(node, 'toDamage') ? node.toDamage : AbilityNode.ToDamage.Regular;
 	
 	node.hitFunc   = node.hitFunc   || AbilityNode.HitFunc.Lust;
 	node.evadeFunc = node.evadeFunc || AbilityNode.EvadeFunc.Lust;
@@ -408,8 +408,9 @@ AbilityNode.Run = function(ability, encounter, caster, target, result) {
 		if(!that.hitFallen && e.Incapacitated()) return;
 		// For x number of strikes
 		_.times(nrAttacks, function() {
+			var hit = that.toHit ? Math.random() < that.toHit(caster, e) : true;
 			// Check if it hits
-			if(Math.random() < that.toHit(caster, e)) {
+			if(hit) {
 				// If it can damage
 				if(that.toDamage) {
 					var dmg = that.toDamage(caster, e);
