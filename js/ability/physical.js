@@ -500,66 +500,50 @@ Abilities.Physical.CrushingStrike.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-//TODO REPLACE
-Abilities.Physical.Provoke = new AttackPhysical();
+Abilities.Physical.Provoke = new Ability();
 Abilities.Physical.Provoke.name = "Provoke";
 Abilities.Physical.Provoke.Short = function() { return "Try to provoke the enemy to focus on you. Single target."; }
 Abilities.Physical.Provoke.cost = { hp: null, sp: 15, lp: null};
-Abilities.Physical.Provoke.atkMod = 0.1;
-Abilities.Physical.Provoke.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.Add("[name] taunt[s] [tName]! ", parse);
-}
-Abilities.Physical.Provoke.OnHit = function(encounter, caster, target, dmg) {
-	var activeChar;
-	for(var i = 0; i < encounter.combatOrder.length; i++) {
-		if(encounter.combatOrder[i].entity == target)
-			activeChar = encounter.combatOrder[i];
-	}
-	var aggroEntry = GetAggroEntry(activeChar, caster);
-	if(aggroEntry)
-		aggroEntry.aggro += 1;
-	
-	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.Add("[tName] become[s] agitated, becoming more aggressive toward [name]!", parse);
-	Text.NL();
-}
-Abilities.Physical.Provoke.OnAbsorb = Abilities.Physical.Provoke.OnHit;
-Abilities.Physical.Provoke.OnMiss = function(encounter, caster, target) {
-	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.Add("[tName] doesn't look very impressed.", parse);
-	Text.NL();
-}
+Abilities.Physical.Provoke.castTree.push(AbilityNode.Template.Physical({
+	atkMod: 0.1,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] taunt[notS] [tname]! ", parse);
+	}],
+	onMiss: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] doesn't look very impressed.", parse);
+	}],
+	onHit: [function(ability, encounter, caster, target) {
+		var aggroEntry = GetAggroEntry(target.GetCombatEntry(encounter), caster);
+		if(aggroEntry)
+			aggroEntry.aggro += 1;
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] become[tnotS] agitated, turning more aggressive toward [name]!", parse);
+	}]
+}));
 
 
-//TODO REPLACE
-Abilities.Physical.Taunt = new AttackPhysical();
+Abilities.Physical.Taunt = new Ability();
 Abilities.Physical.Taunt.name = "Taunt";
 Abilities.Physical.Taunt.Short = function() { return "Try to taunt the enemy to focus on you. Single target."; }
 Abilities.Physical.Taunt.cost = { hp: null, sp: 30, lp: null};
-Abilities.Physical.Taunt.atkMod = 0.5;
-Abilities.Physical.Taunt.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.Add("[name] taunt[s] [tName]! ", parse);
-}
-Abilities.Physical.Taunt.OnHit = function(encounter, caster, target, dmg) {
-	var activeChar;
-	for(var i = 0; i < encounter.combatOrder.length; i++) {
-		if(encounter.combatOrder[i].entity == target)
-			activeChar = encounter.combatOrder[i];
-	}
-	var aggroEntry = GetAggroEntry(activeChar, caster);
-	if(aggroEntry)
-		aggroEntry.aggro += 3;
-	
-	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.Add("[tName] become[s] agitated, becoming more aggressive toward [name]!", parse);
-	Text.NL();
-}
-Abilities.Physical.Taunt.OnAbsorb = Abilities.Physical.Taunt.OnHit;
-Abilities.Physical.Taunt.OnMiss = function(encounter, caster, target) {
-	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe(), name : caster.nameDesc() };
-	Text.Add("[tName] doesn't look very impressed.", parse);
-	Text.NL();
-}
-
+Abilities.Physical.Taunt.castTree.push(AbilityNode.Template.Physical({
+	atkMod: 0.5,
+	hitMod: 1.1,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] taunt[notS] [tname]! ", parse);
+	}],
+	onMiss: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] doesn't look very impressed.", parse);
+	}],
+	onHit: [function(ability, encounter, caster, target) {
+		var aggroEntry = GetAggroEntry(target.GetCombatEntry(encounter), caster);
+		if(aggroEntry)
+			aggroEntry.aggro += 3;
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] become[tnotS] agitated, turning more aggressive toward [name]!", parse);
+	}]
+}));
