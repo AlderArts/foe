@@ -11,9 +11,10 @@ AbilityNode.DefaultParser = function(caster, target) {
 		parse["poss"] = caster.possessive();
 		parse["Poss"] = caster.Possessive();
 		parse["y"]    = caster.plural() ? "y" : "ies";
-		parse["s"]    = caster.plural() ? "" : "s";
-		parse["es"]   = caster.plural() ? "" : "es";
-		parse["notS"] = caster.plural() ? "s" : "";
+		parse["s"]    = caster.plural() ? "s" : "";
+		parse["es"]   = caster.plural() ? "es" : "";
+		parse["notS"] = caster.plural() ? "" : "s";
+		parse["notEs"] = caster.plural() ? "" : "es";
 		parse["is"]   = caster.is();
 		parse["has"]  = caster.has();
 		parse["hand"] = function() { return caster.HandDesc(); };
@@ -25,9 +26,10 @@ AbilityNode.DefaultParser = function(caster, target) {
 		parse["tposs"] = target.possessive();
 		parse["tPoss"] = target.Possessive();
 		parse["ty"]    = target.plural() ? "y" : "ies";
-		parse["ts"]    = target.plural() ? "" : "s";
-		parse["tes"]   = target.plural() ? "" : "es";
-		parse["tnotS"] = target.plural() ? "s" : "";
+		parse["ts"]    = target.plural() ? "s" : "";
+		parse["tes"]   = target.plural() ? "es" : "";
+		parse["tnotS"] = target.plural() ? "" : "s";
+		parse["tnotEs"] = target.plural() ? "" : "es";
 		parse["tis"]   = target.is();
 		parse["thas"]  = target.has();
 	}
@@ -141,19 +143,21 @@ AbilityNode.RunFallthrough = function(ability, encounter, caster, target, result
 	
 	var dmg = fraction * result;
 	
-	that.damageFunc(caster, target, dmg);
+	var onattack = that.damageFunc(caster, target, dmg);
 	
-	// On dealing damage (dmg is negative)
-	if(dmg <= 0) {
-		_.each(that.onDamage, function(node) {
-			node(ability, encounter, caster, target, dmg);
-		});
-	}
-	// On healing/absorbing (dmg is positive)
-	else {
-		_.each(that.onAbsorb, function(node) {
-			node(ability, encounter, caster, target, dmg);
-		});
+	if(onattack) {
+		// On dealing damage (dmg is negative)
+		if(dmg <= 0) {
+			_.each(that.onDamage, function(node) {
+				node(ability, encounter, caster, target, dmg);
+			});
+		}
+		// On healing/absorbing (dmg is positive)
+		else {
+			_.each(that.onAbsorb, function(node) {
+				node(ability, encounter, caster, target, dmg);
+			});
+		}
 	}
 }
 
@@ -354,14 +358,21 @@ AbilityNode.DefFunc.Lust = function(caster, target) {
 }
 
 AbilityNode.DamageFunc = {};
-AbilityNode.DamageFunc.Physical = function(caster, target, dmg) {
-	target.AddHPAbs(dmg);
+AbilityNode.DamageFunc.Physical = function(encounter, caster, target, dmg) {
+	if(target.PhysDmgHP(encounter, caster, dmg)) {
+		target.AddHPAbs(dmg);
+		return true;
+	}
+	else
+		return false;
 }
-AbilityNode.DamageFunc.Magical = function(caster, target, dmg) {
+AbilityNode.DamageFunc.Magical = function(encounter, caster, target, dmg) {
 	target.AddSPAbs(dmg);
+	return true;
 }
-AbilityNode.DamageFunc.Lust = function(caster, target, dmg) {
+AbilityNode.DamageFunc.Lust = function(encounter, caster, target, dmg) {
 	target.AddLustAbs(dmg);
+	return true;
 }
 
 AbilityNode.Retarget = {};
@@ -415,19 +426,21 @@ AbilityNode.Run = function(ability, encounter, caster, target, result) {
 				if(that.toDamage) {
 					var dmg = that.toDamage(caster, e);
 					
-					that.damageFunc(caster, e, dmg);
+					var onattack = that.damageFunc(encounter, caster, e, dmg);
 					
-					// On dealing damage (dmg is negative)
-					if(dmg <= 0) {
-						_.each(that.onDamage, function(node) {
-							node(ability, encounter, caster, e, dmg);
-						});
-					}
-					// On healing/absorbing (dmg is positive)
-					else {
-						_.each(that.onAbsorb, function(node) {
-							node(ability, encounter, caster, e, dmg);
-						});
+					if(onattack) {
+						// On dealing damage (dmg is negative)
+						if(dmg <= 0) {
+							_.each(that.onDamage, function(node) {
+								node(ability, encounter, caster, e, dmg);
+							});
+						}
+						// On healing/absorbing (dmg is positive)
+						else {
+							_.each(that.onAbsorb, function(node) {
+								node(ability, encounter, caster, e, dmg);
+							});
+						}
 					}
 				}
 				

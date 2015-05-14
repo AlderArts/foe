@@ -108,7 +108,7 @@ Abilities.Physical._onMiss = function(ability, encounter, caster, target) {
 }
 Abilities.Physical._onAbsorb = function(ability, encounter, caster, target, dmg) {
 	var parse = AbilityNode.DefaultParser(caster, target);
-	Text.Add("[tName] absorb[ts] the attack, gaining " + Text.BoldColor(dmg, "#008000") + " health!", parse);
+	Text.Add("[tName] absorb[tnotS] the attack, gaining " + Text.BoldColor(dmg, "#008000") + " health!", parse);
 	Text.NL();
 }
 
@@ -137,7 +137,7 @@ Abilities.Physical.Bash.castTree.push(AbilityNode.Template.Physical({
 		
 		var parse = AbilityNode.DefaultParser(caster, target);
 		
-		Text.Add("[Name] bash[es] [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage, staggering [thimher]!", parse);
+		Text.Add("[Name] bash[notEs] [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage, staggering [thimher]!", parse);
 		Text.NL();
 	}, AbilityNode.Template.Cancel()],
 	onAbsorb: [Abilities.Physical._onAbsorb]
@@ -169,7 +169,7 @@ Abilities.Physical.GrandSlam.castTree.push(AbilityNode.Template.Physical({
 		
 		var parse = AbilityNode.DefaultParser(caster, target);
 		
-		Text.Add("[Name] slam[s] [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage, staggering [thimher]!", parse);
+		Text.Add("[Name] slam[notS] [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage, staggering [thimher]!", parse);
 		Text.NL();
 	}, AbilityNode.Template.Cancel()],
 	onAbsorb: [Abilities.Physical._onAbsorb]
@@ -269,49 +269,35 @@ Abilities.Physical.Kicksand.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-
-//TODO REPLACE
 Abilities.Physical.Swift = new Ability();
 Abilities.Physical.Swift.name = "Swift";
 Abilities.Physical.Swift.Short = function() { return "Briefly boosts the caster's speed."; }
 Abilities.Physical.Swift.targetMode = TargetMode.Self;
 Abilities.Physical.Swift.cost = { hp: null, sp: 25, lp: null};
-Abilities.Physical.Swift.CastInternal = function(encounter, caster) {
-	var parse = {
-		name : caster.NameDesc(),
-		es : caster.plural() ? "" : "es",
-		hisher : caster.hisher()
-	}
+Abilities.Physical.Swift.castTree.push(function(ability, encounter, caster) {
+	var parse = AbilityNode.DefaultParser(caster);
 
 	Status.Haste(caster, { turns : 3, turnsR : 3, factor : 2 });
 
-	Text.Add("[name] focus[es], briefly boosting [hisher] speed!", parse);
-	Text.Flush();
-	
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
+	Text.Add("[Name] focus[notEs], briefly boosting [hisher] speed!", parse);
+});
 
 
-//TODO REPLACE
 Abilities.Physical.SetTrap = new Ability();
 Abilities.Physical.SetTrap.name = "Set trap";
 Abilities.Physical.SetTrap.Short = function() { return "Sets a trap for an enemy."; }
 Abilities.Physical.SetTrap.targetMode = TargetMode.Self;
 Abilities.Physical.SetTrap.cost = { hp: null, sp: 50, lp: null};
-Abilities.Physical.SetTrap.CastInternal = function(encounter, caster) {
-	var parse = {
-		name : caster.NameDesc(),
-		poss : caster.possessive(),
-		s    : caster.plural() ? "" : "s",
-		hisher : caster.hisher()
-	}
-	// Takes a long time to cast
-	for(var i = 0; i < encounter.combatOrder.length; i++) {
-		if(encounter.combatOrder[i].entity == caster)
-			encounter.combatOrder[i].initiative -= 100;
-	}
+Abilities.Physical.SetTrap.castTime = 100;
+Abilities.Physical.SetTrap.cooldown = 3;
+Abilities.Physical.SetTrap.onCast = [function(ability, encounter, caster) {
+	var parse = AbilityNode.DefaultParser(caster);
+	Text.Add("[Name] begin[notS] to set a trap!", parse);
+}];
+Abilities.Physical.SetTrap.castTree.push(function(ability, encounter, caster) {
+	var parse = AbilityNode.DefaultParser(caster);
+	Text.Add("[Name] set[notS] a trap!", parse);
+	
 	// Reduce everyones aggro toward trapper
 	for(var i = 0; i < encounter.combatOrder.length; i++) {
 		var activeChar = encounter.combatOrder[i];
@@ -321,45 +307,28 @@ Abilities.Physical.SetTrap.CastInternal = function(encounter, caster) {
 	}
 
 	Status.Counter(caster, { turns : 999, hits : 1, OnHit :
-		function(enc, target, attacker, dmg) {
-			parse["atk"] = attacker.NameDesc();
-			parse["s2"]  = attacker.plural() ? "" : "s";
-			parse["HeShe"] = attacker.HeShe();
-			
-			Text.Add("[atk] spring[s2] [poss] trap! ", parse);
-			
-			var atkDmg = target.PAttack();
-			var def    = attacker.PDefense();
-			var hit    = target.PHit();
-			var evade  = attacker.PEvade();
-			var toHit  = Ability.ToHit(hit, evade);
-			if(Math.random() < toHit) {
-				var dmg = Ability.Damage(atkDmg, def, target.level, attacker.level);
-				if(dmg < 0) dmg = 0;
-				
-				dmg = target.elementAtk.ApplyDmgType(attacker.elementDef, dmg);
-				dmg = Math.floor(dmg);
-				
-				if(attacker.PhysDmgHP(encounter, target, dmg)) {
-					attacker.AddHPAbs(-dmg);
-					Text.Add("[HeShe] take[s2] " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
-				}
-			}
-			else {
-				Text.Add("[HeShe] narrowly avoid[s2] taking damage!", parse);
-			}
-			Text.Flush();
+		function(enc, caster, attacker, dmg) {
+			Abilities.Physical.SpringTrap.Use(encounter, caster, attacker);
 			return false;
 		}
 	});
-
-	Text.Add("[name] set[s] a trap!", parse);
-	Text.Flush();
-	
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
+});
+Abilities.Physical.SpringTrap = new Ability();
+Abilities.Physical.SpringTrap.castTree.push(AbilityNode.Template.Physical({
+	defMod: 0.3,
+	atkMod: 1.3,
+	hitMod: 2,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] spring[tnotS] [poss] trap! ", parse);
+	}],
+	onMiss: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tHeShe] narrowly avoid[tnotS] taking damage! ", parse);
+	}],
+	onDamage: [Abilities.Physical._onDamage],
+	onAbsorb: [Abilities.Physical._onAbsorb]
+}));
 
 
 Abilities.Physical.Backstab = new Ability();
@@ -403,7 +372,7 @@ Abilities.Physical.Ensnare.castTree.push(AbilityNode.Template.Physical({
 	}],
 	onMiss: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[tName] easily avoid[ts] the attack.", parse);
+		Text.Add("[tName] easily avoid[tnotS] the attack.", parse);
 	}]
 }));
 
@@ -436,7 +405,7 @@ Abilities.Physical.DAttack.castTree.push(AbilityNode.Template.Physical({
 	nrAttacks: 2,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[Name] perform[s] two attacks against [tname] in rapid succession!", parse);
+		Text.Add("[Name] perform[notS] two attacks against [tname] in rapid succession! ", parse);
 	}],
 	onMiss: [Abilities.Physical._onMiss],
 	onDamage: [Abilities.Physical._onDamage],
@@ -454,7 +423,7 @@ Abilities.Physical.TAttack.castTree.push(AbilityNode.Template.Physical({
 	nrAttacks: 3,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[Name] perform[s] three attacks against [tname] in rapid succession!", parse);
+		Text.Add("[Name] perform[notS] three attacks against [tname] in rapid succession! ", parse);
 	}],
 	onMiss: [Abilities.Physical._onMiss],
 	onDamage: [Abilities.Physical._onDamage],
@@ -472,7 +441,7 @@ Abilities.Physical.QAttack.castTree.push(AbilityNode.Template.Physical({
 	nrAttacks: 4,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[Name] perform[s] four attacks against [tname] in rapid succession!", parse);
+		Text.Add("[Name] perform[notS] four attacks against [tname] in rapid succession! ", parse);
 	}],
 	onMiss: [Abilities.Physical._onMiss],
 	onDamage: [Abilities.Physical._onDamage],
@@ -488,7 +457,7 @@ Abilities.Physical.Frenzy.cooldown = 5;
 Abilities.Physical.Frenzy.castTime = 100;
 Abilities.Physical.Frenzy.onCast.push(function(ability, encounter, caster, target) {
 	var parse = AbilityNode.DefaultParser(caster, target);
-	Text.Add("[Name] [is] riling [himher]self up, preparing to launch an onslaught of blows on [tname]!", parse);
+	Text.Add("[Name] [is] riling [himher]self up, preparing to launch an onslaught of blows on [tname]! ", parse);
 });
 Abilities.Physical.Frenzy.castTree.push(AbilityNode.Template.Physical({
 	nrAttacks: 5,
@@ -496,7 +465,7 @@ Abilities.Physical.Frenzy.castTree.push(AbilityNode.Template.Physical({
 		var entry = caster.GetCombatEntry(encounter);
 		if(entry) entry.initiative -= 50;
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[Name] perform[s] a frenzied assault, attacking [tname] with five rapid blows!", parse);
+		Text.Add("[Name] perform[notS] a frenzied assault, attacking [tname] with five rapid blows!", parse);
 	}],
 	onMiss: [Abilities.Physical._onMiss],
 	onDamage: [Abilities.Physical._onDamage],
