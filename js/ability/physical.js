@@ -117,7 +117,7 @@ Abilities.Physical.Bash = new Ability();
 Abilities.Physical.Bash.name = "Bash";
 Abilities.Physical.Bash.Short = function() { return "Stun effect, low accuracy."; }
 Abilities.Physical.Bash.cost = { hp: null, sp: 10, lp: null};
-Abilities.Physical.Bash.cooldown = 3;
+Abilities.Physical.Bash.cooldown = 2;
 Abilities.Physical.Bash.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 1.1,
 	hitMod: 0.9,
@@ -149,7 +149,7 @@ Abilities.Physical.GrandSlam.name = "Grand Slam";
 Abilities.Physical.GrandSlam.Short = function() { return "Stun effect, low accuracy to multiple targets."; }
 Abilities.Physical.GrandSlam.cost = { hp: null, sp: 50, lp: null};
 Abilities.Physical.GrandSlam.targetMode = TargetMode.Enemies;
-Abilities.Physical.GrandSlam.cooldown = 5;
+Abilities.Physical.GrandSlam.cooldown = 3;
 Abilities.Physical.GrandSlam.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 1.1,
 	hitMod: 0.8,
@@ -175,37 +175,47 @@ Abilities.Physical.GrandSlam.castTree.push(AbilityNode.Template.Physical({
 	onAbsorb: [Abilities.Physical._onAbsorb]
 }));
 
-//TODO REPLACE
-Abilities.Physical.Pierce = new AttackPhysical();
+
+Abilities.Physical.Pierce = new Ability();
 Abilities.Physical.Pierce.name = "Pierce";
 Abilities.Physical.Pierce.Short = function() { return "Bypass defenses."; }
 Abilities.Physical.Pierce.cost = { hp: null, sp: 10, lp: null};
-Abilities.Physical.Pierce.defMod = 0.5;
-Abilities.Physical.Pierce.damageType.pPierce = 1;
-Abilities.Physical.Pierce.OnCast = function(encounter, caster, target) {
-	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tPossessive : target.possessive() };
-	Text.Add("[name] aims [hisher] strike on a weak point in [tPossessive] guard! ", parse);
-}
+Abilities.Physical.Pierce.castTree.push(AbilityNode.Template.Physical({
+	defMod: 0.5,
+	damageType: {pPierce: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] aim[notS] [hisher] strike on a weak point in [tposs] guard! ", parse);
+	}],
+	onMiss: [Abilities.Physical._onMiss],
+	onDamage: [Abilities.Physical._onDamage],
+	onAbsorb: [Abilities.Physical._onAbsorb]
+}));
 
 
-//TODO REPLACE
-Abilities.Physical.DirtyBlow = new AttackPhysical();
+Abilities.Physical.DirtyBlow = new Ability();
 Abilities.Physical.DirtyBlow.name = "Dirty Blow";
 Abilities.Physical.DirtyBlow.Short = function() { return "Bypass defenses, low chance of stun."; }
 Abilities.Physical.DirtyBlow.cost = { hp: null, sp: 20, lp: null};
-Abilities.Physical.DirtyBlow.defMod = 0.3;
-Abilities.Physical.DirtyBlow.damageType.pPierce = 1.1;
-Abilities.Physical.DirtyBlow.OnCast = function(encounter, caster, target) {
-	var parse = { Possessive : caster.Possessive(), s : target.plural() ? "" : "s", name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tPossessive : target.possessive() };
-	Text.Add("[name] throw[s] a low blow, striking a weak point in [tPossessive] guard! ", parse);
-}
-Abilities.Physical.DirtyBlow.TargetEffect = function(encounter, caster, target) {
-	var parse = { target : target.NameDesc(), has : target.has() };
-	if(Status.Numb(target, { hit : 0.2, turns : 3, turnsR : 3, proc : 0.25 })) {
-		Text.Add("[target] [has] been afflicted with numb! ", parse);
-		Text.NL();
-	}
-}
+Abilities.Physical.DirtyBlow.cooldown = 2;
+Abilities.Physical.DirtyBlow.castTree.push(AbilityNode.Template.Physical({
+	defMod: 0.3,
+	damageType: {pPierce: 1.1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] throw[notS] a low blow, striking a weak point in [tposs] guard! ", parse);
+	}],
+	onMiss: [Abilities.Physical._onMiss],
+	onDamage: [Abilities.Physical._onDamage],
+	onAbsorb: [Abilities.Physical._onAbsorb],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		if(Status.Numb(target, { hit : 0.2, turns : 3, turnsR : 3, proc : 0.25 })) {
+			Text.Add("[tName] [has] been afflicted with numb!", parse);
+			Text.NL();
+		}
+	}]
+}));
 
 
 //TODO REPLACE
