@@ -486,9 +486,9 @@ Abilities.Physical.CrushingStrike.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("[Name] perform[notS] a wild assault against [tname]! ", parse);
 	}],
 	onMiss: [Abilities.Physical._onMiss],
-	onDamage: [function(ability, encounter, caster, target) {
+	onDamage: [function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[Name] deliver[notS] a crushing blow to [tname] for " + Text.BoldColor(dmg, "#800000") + " damage, staggering [thimher]!", parse);
+		Text.Add("[Name] deliver[notS] a crushing blow to [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage, staggering [thimher]!", parse);
 	}],
 	onHit: [function(ability, encounter, caster, target) {
 		if(Math.random() < 0.8) {
