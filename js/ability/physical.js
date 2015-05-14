@@ -405,18 +405,22 @@ Abilities.Physical.Ensnare.OnMiss = function(encounter, caster, target) {
 }
 
 
-//TODO REPLACE
-Abilities.Physical.FocusStrike = new AttackPhysical();
+Abilities.Physical.FocusStrike = new Ability();
 Abilities.Physical.FocusStrike.name = "Focus strike";
 Abilities.Physical.FocusStrike.Short = function() { return "Bypass defenses."; }
 Abilities.Physical.FocusStrike.cost = { hp: null, sp: 50, lp: null};
-Abilities.Physical.FocusStrike.defMod = 0.2;
-Abilities.Physical.FocusStrike.damageType.pPierce = 1.5;
-Abilities.Physical.FocusStrike.OnCast = function(encounter, caster, target) {
-	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tPossessive : target.possessive() };
-	Text.Add("[name] aim[s] [hisher] strike on a weak point in [tPossessive] guard! ", parse);
-}
-
+Abilities.Physical.FocusStrike.cooldown = 2;
+Abilities.Physical.FocusStrike.castTree.push(AbilityNode({
+	defMod: 0.2,
+	damageType: {pPierce: 1.5},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] aim[notS] [hisher] strike on a weak point in [tposs] guard! ", parse);
+	}],
+	onMiss: [Abilities.Physical._onMiss],
+	onDamage: [Abilities.Physical._onDamage],
+	onAbsorb: [Abilities.Physical._onAbsorb]
+}));
 
 
 Abilities.Physical.DAttack = new Ability();
