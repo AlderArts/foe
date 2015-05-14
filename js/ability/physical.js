@@ -362,19 +362,23 @@ Abilities.Physical.SetTrap.CastInternal = function(encounter, caster) {
 }
 
 
-//TODO REPLACE
-Abilities.Physical.Backstab = new AttackPhysical();
+Abilities.Physical.Backstab = new Ability();
 Abilities.Physical.Backstab.name = "Backstab";
 Abilities.Physical.Backstab.Short = function() { return "Deal high damage against a disabled target."; }
 Abilities.Physical.Backstab.cost = { hp: null, sp: 30, lp: null};
-Abilities.Physical.Backstab.atkMod = 2;
-Abilities.Physical.Backstab.defMod = 0.75;
-Abilities.Physical.Backstab.hitMod = 2;
-Abilities.Physical.Backstab.damageType = null;
-Abilities.Physical.Backstab.OnCast = function(encounter, caster, target) {
-	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), es : caster.plural() ? "" : "es", s : caster.plural() ? "" : "s", tname : target.nameDesc() };
-	Text.Add("[name] dance[s] around [tname], dealing a crippling backstab! ", parse);
-}
+Abilities.Physical.Backstab.cooldown = 1;
+Abilities.Physical.Backstab.castTree.push(AbilityNode.Template.Physical({
+	atkMod: 2,
+	defMod: 0.75,
+	hitMod: 2,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] dance[notS] around [tname], dealing a crippling backstab! ", parse);
+	}],
+	onMiss: [Abilities.Physical._onMiss],
+	onDamage: [Abilities.Physical._onDamage],
+	onAbsorb: [Abilities.Physical._onAbsorb]
+}));
 Abilities.Physical.Backstab.enabledTargetCondition = function(encounter, caster, target) {
 	return target.Inhibited();
 }
