@@ -90,40 +90,56 @@ TeaseSkill.prototype.OnMiss = function(encounter, caster, target) {
 }
 
 
-//TODO REPLACE
-Abilities.Seduction.Tease = new TeaseSkill();
-Abilities.Seduction.Tease.name = "Tease";
+Abilities.Seduction.Tease = new Ability("Tease");
 Abilities.Seduction.Tease.Short = function() { return "Raises the lust of target."; }
-Abilities.Seduction.Tease.atkMod = 0.5;
-Abilities.Seduction.Tease.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.Add("[name] tease[s] [tName], shaking [hisher] [hipsDesc]! ", parse);
-}
+Abilities.Seduction.Tease.castTree.push(AbilityNode.Template.Lust({
+	atkMod: 0.5,
+	damageType: {lust: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		parse["hips"] = caster.HipsDesc();
+		Text.Add("[Name] tease[notS] [tname], shaking [hisher] [hips]! ", parse);
+	}],
+	onMiss: [Abilities.Seduction._onMiss],
+	onDamage: [Abilities.Seduction._onDamage],
+	onAbsorb: [Abilities.Seduction._onAbsorb]
+}));
 
 
-//TODO REPLACE
-Abilities.Seduction.Seduce = new TeaseSkill();
-Abilities.Seduction.Seduce.name = "Seduce";
-Abilities.Seduction.Seduce.cost = { hp: null, sp: 10, lp: 10};
+Abilities.Seduction.Seduce = new Ability("Seduce");
 Abilities.Seduction.Seduce.Short = function() { return "Raises the lust of target."; }
-Abilities.Seduction.Seduce.atkMod = 1;
-Abilities.Seduction.Seduce.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.Add("[name] tease[s] [tName], shaking [hisher] [hipsDesc]! ", parse);
-}
+Abilities.Seduction.Seduce.cost = { hp: null, sp: 10, lp: 10};
+Abilities.Seduction.Seduce.castTree.push(AbilityNode.Template.Lust({
+	atkMod: 1,
+	damageType: {lust: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		parse["hips"] = caster.HipsDesc();
+		Text.Add("[Name] tease[notS] [tname], shaking [hisher] [hips]! ", parse);
+	}],
+	onMiss: [Abilities.Seduction._onMiss],
+	onDamage: [Abilities.Seduction._onDamage],
+	onAbsorb: [Abilities.Seduction._onAbsorb]
+}));
 
 
-//TODO REPLACE
-Abilities.Seduction.StripTease = new TeaseSkill();
-Abilities.Seduction.StripTease.name = "StripTease";
+Abilities.Seduction.StripTease = new Ability("StripTease");
 Abilities.Seduction.StripTease.Short = function() { return "Raises the lust of enemy party."; }
-Abilities.Seduction.StripTease.cost = { hp: null, sp: 50, lp: 50};
-Abilities.Seduction.StripTease.atkMod = 1.5;
+Abilities.Seduction.StripTease.cost = { hp: null, sp: 40, lp: 40};
+Abilities.Seduction.StripTease.cooldown = 2;
 Abilities.Seduction.StripTease.targetMode = TargetMode.Enemies;
-Abilities.Seduction.StripTease.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hipsDesc : caster.HipsDesc(), tName : target.nameDesc() };
-	Text.Add("[name] tease[s] the enemy party, shaking [hisher] [hipsDesc]! ", parse);
-}
+Abilities.Seduction.StripTease.castTree.push(AbilityNode.Template.Lust({
+	atkMod: 1.5,
+	damageType: {lust: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster);
+		parse["hips"] = caster.HipsDesc();
+		Text.Add("[Name] tease[notS] the enemy party, shaking [hisher] [hips]! ", parse);
+	}],
+	onMiss: [Abilities.Seduction._onMiss],
+	onDamage: [Abilities.Seduction._onDamage],
+	onAbsorb: [Abilities.Seduction._onAbsorb]
+}));
 
 
 //TODO REPLACE
@@ -137,10 +153,7 @@ Abilities.Seduction.Distract.OnCast = function(encounter, caster, target) {
 	Text.Add("[name] distract[s] [tName], shaking [hisher] [hipsDesc]! ", parse);
 }
 Abilities.Seduction.Distract.OnHit = function(encounter, caster, target, dmg) {
-	for(var i = 0; i < encounter.combatOrder.length; i++) {
-		if(encounter.combatOrder[i].entity == target)
-			encounter.combatOrder[i].initiative -= 25;
-	}
+	target.GetCombatEntry().initiative -= 25;
 	
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", HeShe : target.HeShe() };
 	Text.Add("[tName] become[s] aroused, gaining " + Text.BoldColor(dmg, "#FF8080") + " lust! [HeShe] become[s] distracted.", parse);
@@ -159,12 +172,7 @@ Abilities.Seduction.Charm.OnCast = function(encounter, caster, target) {
 	Text.Add("[name] charm[s] [tName], shaking [hisher] [hipsDesc]! ", parse);
 }
 Abilities.Seduction.Charm.OnHit = function(encounter, caster, target, dmg) {
-	var activeChar;
-	for(var i = 0; i < encounter.combatOrder.length; i++) {
-		if(encounter.combatOrder[i].entity == target)
-			activeChar = encounter.combatOrder[i];
-	}
-	var aggroEntry = GetAggroEntry(activeChar, caster);
+	var aggroEntry = GetAggroEntry(target.GetCombatEntry(), caster);
 	if(aggroEntry) {
 		aggroEntry.aggro -= 0.4;
 		if(aggroEntry.aggro < 0) aggroEntry.aggro = 0;
@@ -187,12 +195,7 @@ Abilities.Seduction.Allure.OnCast = function(encounter, caster, target) {
 	Text.Add("[name] charm[s] [tName], shaking [hisher] [hipsDesc]! ", parse);
 }
 Abilities.Seduction.Allure.OnHit = function(encounter, caster, target, dmg) {
-	var activeChar;
-	for(var i = 0; i < encounter.combatOrder.length; i++) {
-		if(encounter.combatOrder[i].entity == target)
-			activeChar = encounter.combatOrder[i];
-	}
-	var aggroEntry = GetAggroEntry(activeChar, caster);
+	var aggroEntry = GetAggroEntry(target.GetCombatEntry(), caster);
 	if(aggroEntry) {
 		aggroEntry.aggro -= 0.8;
 		if(aggroEntry.aggro < 0) aggroEntry.aggro = 0;
@@ -204,23 +207,24 @@ Abilities.Seduction.Allure.OnHit = function(encounter, caster, target, dmg) {
 }
 
 
-//TODO REPLACE
-Abilities.Seduction.Inflame = new TeaseSkill();
-Abilities.Seduction.Inflame.name = "Inflame";
-Abilities.Seduction.Inflame.cost = { hp: null, sp: null, lp: 25};
+Abilities.Seduction.Inflame = new Ability("Inflame");
 Abilities.Seduction.Inflame.Short = function() { return "Greatly arouse the passions of a single foe with the power of song."; }
-Abilities.Seduction.Inflame.atkMod = 2;
-Abilities.Seduction.Inflame.OnCast = function(encounter, caster, target) {
-	var parse = { Name: caster.NameDesc(), s: caster.plural() ? "" : "s", hisher: caster.hisher(), tname: target.nameDesc() };
-	Text.Add("[Name] slowly sing[s] a few verses of a soft, sensual melody, projecting [hisher] rich voice at [tname]. ", parse);
-}
-Abilities.Seduction.Inflame.OnHit = function(encounter, caster, target, dmg) {
-	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s" };
-	Text.Add("[tName] squirm[s] at the subtle undertones of the song, becoming greatly aroused. [tName] gain[s] " + Text.BoldColor(dmg, "#FF8080") + " lust!", parse);
-	Text.NL();
-}
-Abilities.Seduction.Inflame.OnAbsorb = function(encounter, caster, target, dmg) {
-	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s", poss: caster.possessive() };
-	Text.Add("[tName] manage[s] to shake off the desire-inducing effects of [poss] voice. ", parse);
-	Text.NL();
-}
+Abilities.Seduction.Inflame.cost = { hp: null, sp: null, lp: 25};
+Abilities.Seduction.Inflame.castTree.push(AbilityNode.Template.Lust({
+	atkMod: 2,
+	damageType: {lust: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] slowly sing[notS] a few verses of a soft, sensual melody, projecting [hisher] rich voice at [tname]. ", parse);
+	}],
+	onMiss: [Abilities.Seduction._onMiss],
+	onDamage: [function(ability, encounter, caster, target, dmg) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] squirm[tnotS] at the subtle undertones of the song, becoming greatly aroused. [tName] gain[tnotS] " + Text.BoldColor(-dmg, "#FF8080") + " lust!", parse);
+	}],
+	onAbsorb: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] manage[tnotS] to shake off the desire-inducing effects of [poss] voice.", parse);
+	}]
+}));
+

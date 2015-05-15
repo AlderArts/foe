@@ -122,7 +122,7 @@ AbilityNode.Template.Lust = function(node) {
 	node.evadeFunc = node.evadeFunc || AbilityNode.EvadeFunc.Lust;
 	node.atkFunc   = node.atkFunc   || AbilityNode.AtkFunc.Lust;
 	node.defFunc   = node.defFunc   || AbilityNode.DefFunc.Lust;
-	node.damageFunc = node.damageFunc || AbilityNode.DamageFunc.Physical;
+	node.damageFunc = node.damageFunc || AbilityNode.DamageFunc.Lust;
 	
 	return _.bind(AbilityNode.Run, node);
 }
@@ -371,7 +371,7 @@ AbilityNode.DamageFunc.Magical = function(encounter, caster, target, dmg) {
 	return true;
 }
 AbilityNode.DamageFunc.Lust = function(encounter, caster, target, dmg) {
-	target.AddLustAbs(dmg);
+	target.AddLustAbs(-dmg);
 	return true;
 }
 
