@@ -765,7 +765,7 @@ Body.prototype.SkinDesc = function(part) {
 		case Race.avian: return col + " feathers";
 		
 		case Race.cow:
-		case Race.horse: return col + "hide";
+		case Race.horse: return col + " hide";
 		
 		case Race.ferret:
 		case Race.wolf:

@@ -225,40 +225,54 @@ Abilities.Black.Spray.castTree.push(AbilityNode.Template.Magical({
 }));
 
 
-//TODO REPLACE
-Abilities.Black.Shimmer = new AttackSpell();
-Abilities.Black.Shimmer.name = "Shimmer";
+Abilities.Black.Shimmer = new Ability("Shimmer");
 Abilities.Black.Shimmer.Short = function() { return "Light magic, single target."; }
 Abilities.Black.Shimmer.cost = { hp: null, sp: 15, lp: null};
-Abilities.Black.Shimmer.damageType.mLight = 1;
-Abilities.Black.Shimmer.atkMod = 1.1;
-Abilities.Black.Shimmer.OnCast = function(encounter, caster, target) {
-	var parse = { possessive : caster.possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.Add("A brilliant sphere of blinding light forms between [possessive] [hand]s, summoned by the power of [hisher] magic. At the uttering of a single word, it speeds toward [tName]! ", parse);
-}
+Abilities.Black.Shimmer.castTree.push(AbilityNode.Template.Magical({
+	damageType: {mLight: 1},
+	atkMod: 1.1,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("A brilliant sphere of blinding light forms between [poss] [hand]s, summoned by the power of [hisher] magic. At the uttering of a single word, it speeds toward [tname]! ", parse);
+	}],
+	onMiss: [Abilities.Black._onMiss],
+	onDamage: [Abilities.Black._onDamage],
+	onAbsorb: [Abilities.Black._onAbsorb]
+}));
 
-//TODO REPLACE
-Abilities.Black.Shade = new AttackSpell();
-Abilities.Black.Shade.name = "Shade";
+
+Abilities.Black.Shade = new Ability("Shade");
 Abilities.Black.Shade.Short = function() { return "Dark magic, single target."; }
 Abilities.Black.Shade.cost = { hp: null, sp: 15, lp: null};
-Abilities.Black.Shade.damageType.mDark = 1;
-Abilities.Black.Shade.atkMod = 1.1;
-Abilities.Black.Shade.OnCast = function(encounter, caster, target) {
-	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.Add("[Possessive] [hand]s are wreathed in shadow, summoned by the power of [hisher] dark magic. Quick as lightning, the shade darts across the ground, wrapping itself around [tName]! ", parse);
-}
+Abilities.Black.Shade.castTree.push(AbilityNode.Template.Magical({
+	damageType: {mDark: 1},
+	atkMod: 1.1,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Poss] [hand]s are wreathed in shadow, summoned by the power of [hisher] dark magic. Quick as lightning, the shade darts across the ground, wrapping itself around [tname]! ", parse);
+	}],
+	onMiss: [Abilities.Black._onMiss],
+	onDamage: [Abilities.Black._onDamage],
+	onAbsorb: [Abilities.Black._onAbsorb]
+}));
 
-//TODO REPLACE
-Abilities.Black.Thorn = new AttackSpell();
-Abilities.Black.Thorn.name = "Thorn";
+
+Abilities.Black.Thorn = new Ability("Thorn");
 Abilities.Black.Thorn.Short = function() { return "Nature magic, single target."; }
 Abilities.Black.Thorn.cost = { hp: null, sp: 15, lp: null};
-Abilities.Black.Thorn.damageType.mNature = 1;
-Abilities.Black.Thorn.OnCast = function(encounter, caster, target) {
-	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : target.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc(), skin : target.SkinDesc() };
-	Text.Add("[name] call[s] on the power of nature, summoning prickly vines that snake around [tName], the sharp thorns raking [hisher] [skin]! ", parse);
-}
+Abilities.Black.Thorn.castTree.push(AbilityNode.Template.Magical({
+	damageType: {mNature: 1},
+	atkMod: 1.1,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		parse["skin"] = target.SkinDesc();
+		Text.Add("[Name] call[notS] on the power of nature, summoning prickly vines that snake around [tname], the sharp thorns raking [thisher] [skin]! ", parse);
+	}],
+	onMiss: [Abilities.Black._onMiss],
+	onDamage: [Abilities.Black._onDamage],
+	onAbsorb: [Abilities.Black._onAbsorb]
+}));
+
 
 //TODO REPLACE
 Abilities.Black.WindShear = new AttackSpell();
