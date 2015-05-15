@@ -12,16 +12,7 @@ Version 0.4c
 * Continuation on the combat rewrite:
  - Fixed some typos and borked stuff
  - Cooldowns on Bash/Grand slam reduced
- - Pierce replaced
- - Dirty blow replaced
- - Hamstring replaced
- - Kicksand replaced
- - FocusStrike replaced
- - Backstab replaced
- - Ensnare replaced
- - CrushingStrike replaced
- - SetTrap replaced, more powerful
- - Provoke and Taunt replaced
+ - The rest of the physical skills replaced
  - EnemySkills replaced: Scorpion, Orchid
 
 --------------------------------------------
