@@ -81,9 +81,9 @@ DamageType.prototype.ApplyDmgType = function(def, atkDmg) {
 
 Abilities = {};
 
-Ability = function() {
+Ability = function(name) {
 	this.targetMode = TargetMode.Enemy;
-	this.name = "ABILITY";
+	this.name = name || "ABILITY";
 	//TODO: Tooltip?
 	this.cost = { hp: null, sp: null, lp: null};
 	
@@ -108,12 +108,14 @@ Ability.prototype.Short = function() {
 }
 
 Ability.prototype.StartCast = function(encounter, caster, target) {
+	Text.NL();
 	_.each(this.onCast, function(node) {
 		node(this, encounter, caster, target);
 	});
 }
 
 Ability.prototype.CastInternal = function(encounter, caster, target) {
+	Text.NL();
 	_.each(this.castTree, function(node) {
 		node(this, encounter, caster, target);
 	});

@@ -3,8 +3,7 @@
  * Basic attack
  * 
  */
-Abilities.Attack = new Ability();
-Abilities.Attack.name = "Attack";
+Abilities.Attack = new Ability("Attack");
 Abilities.Attack.Short = function() { return "Perform a physical attack."; }
 Abilities.Attack.castTree.push(AbilityNode.Template.Physical({
 	onMiss: [function(ability, encounter, caster, target) {

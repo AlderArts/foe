@@ -5,6 +5,22 @@
  */
 Abilities.Seduction = {};
 
+// Default messages
+Abilities.Seduction._onDamage = function(ability, encounter, caster, target, dmg) {
+	var parse = AbilityNode.DefaultParser(caster, target);
+	Text.Add("[tName] become[tnotS] aroused, gaining " + Text.BoldColor(-dmg, "#FF8080") + " lust!", parse);
+	Text.NL();
+}
+Abilities.Seduction._onAbsorb = function(ability, encounter, caster, target, dmg) {
+	var parse = AbilityNode.DefaultParser(caster, target);
+	Text.Add("[tName] [tis] turned off, losing " + Text.BoldColor(dmg, "#000060") + " lust!", parse);
+	Text.NL();
+}
+Abilities.Seduction._onMiss = function(ability, encounter, caster, target) {
+	var parse = AbilityNode.DefaultParser(caster, target);
+	Text.Add("[tName] manage[tnotS] to resist the temptation!", parse);
+	Text.NL();
+}
 
 //TODO REPLACE
 Abilities.Seduction.Sleep = new Ability();

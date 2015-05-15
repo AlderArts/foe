@@ -1,8 +1,7 @@
 
 Abilities.EnemySkill = {};
 
-Abilities.EnemySkill.Sting = new Ability();
-Abilities.EnemySkill.Sting.name = "Sting";
+Abilities.EnemySkill.Sting = new Ability("Sting");
 Abilities.EnemySkill.Sting.Short = function() { return "Tail attack with chance of poisoning the target."; }
 Abilities.EnemySkill.Sting.cost = { hp: null, sp: 10, lp: null};
 Abilities.EnemySkill.Sting.cooldown = 2;
@@ -32,8 +31,7 @@ Abilities.EnemySkill.Sting.castTree.push(AbilityNode.Template.Physical({
 
 
 // Orchid
-Abilities.EnemySkill.TSnare = new Ability();
-Abilities.EnemySkill.TSnare.name = "T.Snare";
+Abilities.EnemySkill.TSnare = new Ability("T.Snare");
 Abilities.EnemySkill.TSnare.Short = function() { return "Slows down the target and raises lust."; }
 Abilities.EnemySkill.TSnare.cost = { hp: null, sp: 20, lp: null};
 Abilities.EnemySkill.TSnare.castTree.push(AbilityNode.Template.Physical({
@@ -59,8 +57,7 @@ Abilities.EnemySkill.TSnare.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.EnemySkill.TSpray = new Ability();
-Abilities.EnemySkill.TSpray.name = "T.Spray";
+Abilities.EnemySkill.TSpray = new Ability("T.Spray");
 Abilities.EnemySkill.TSpray.Short = function() { return "Sprays the targets in sticky tentacle seed. Raises lust."; }
 Abilities.EnemySkill.TSpray.cost = { hp: null, sp: 40, lp: null};
 Abilities.EnemySkill.TSpray.targetMode = TargetMode.Enemies;
@@ -89,8 +86,7 @@ Abilities.EnemySkill.TSpray.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.EnemySkill.TVenom = new Ability();
-Abilities.EnemySkill.TVenom.name = "T.Venom";
+Abilities.EnemySkill.TVenom = new Ability("T.Venom");
 Abilities.EnemySkill.TVenom.Short = function() { return "Sprays one target in poisonous goop."; }
 Abilities.EnemySkill.TVenom.cost = { hp: null, sp: 20, lp: null};
 Abilities.EnemySkill.TSpray.cooldown = 1;
@@ -120,8 +116,7 @@ Abilities.EnemySkill.TVenom.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.EnemySkill.TRavage = new Ability();
-Abilities.EnemySkill.TRavage.name = "T.Ravage";
+Abilities.EnemySkill.TRavage = new Ability("T.Ravage");
 Abilities.EnemySkill.TRavage.Short = function() { return "Grasps the enemy and constricts them, dealing damage and raising lust."; }
 Abilities.EnemySkill.TRavage.cost = { hp: null, sp: 25, lp: null};
 Abilities.EnemySkill.TRavage.castTree.push(AbilityNode.Template.Physical({
@@ -147,8 +142,7 @@ Abilities.EnemySkill.TRavage.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.EnemySkill.TWhip = new Ability();
-Abilities.EnemySkill.TWhip.name = "T.Whip";
+Abilities.EnemySkill.TWhip = new Ability("T.Whip");
 Abilities.EnemySkill.TWhip.Short = function() { return "Standard attack. Whips target for blunt damage."; }
 Abilities.EnemySkill.TWhip.cost = { hp: null, sp: null, lp: null};
 Abilities.EnemySkill.TWhip.castTree.push(AbilityNode.Template.Physical({
@@ -171,8 +165,7 @@ Abilities.EnemySkill.TWhip.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.EnemySkill.TViolate = new Ability();
-Abilities.EnemySkill.TViolate.name = "T.Violate";
+Abilities.EnemySkill.TViolate = new Ability("T.Violate");
 Abilities.EnemySkill.TViolate.Short = function() { return "Orchid's violate attack."; }
 Abilities.EnemySkill.TViolate.cost = { hp: null, sp: null, lp: null};
 Abilities.EnemySkill.TViolate.castTree.push(AbilityNode.Template.Physical({
@@ -235,101 +228,95 @@ Abilities.EnemySkill.TViolate.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-
-
 // Gol
-//TODO REPLACE
-Abilities.EnemySkill.GolLustyPheromones = new TeaseSkill();
-Abilities.EnemySkill.GolLustyPheromones.name = "L.Pheromones";
+Abilities.EnemySkill.GolLustyPheromones = new Ability("L.Pheromones");
 Abilities.EnemySkill.GolLustyPheromones.Short = function() { return "Attack with lusty pheromones."; }
-Abilities.EnemySkill.GolLustyPheromones.OnCast = function(encounter, caster, target) {
-	var parse = { Possessive : caster.Possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), y : caster.plural() ? "y" : "ies", s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.Add("The Gol reaches down to just below the joint of her humanoid upper body and mantis-like lower form where an immense, juicy-looking pussy lies. She hooks her fingers into either side of it, panting at the sensation, and pulls it open, allowing you gaze into the simmering, pink depths. It's easily big enough to swallow your arm, but far more alarming is the scent it exudes - sweet and enticing.", parse);
-	Text.NL();
-	caster.AddLustFraction(0.1);
-}
-Abilities.EnemySkill.GolLustyPheromones.OnHit = function(encounter, caster, target, dmg) {
-	var parse = { notEs : caster.plural() ? "es" : "", Name : target.NameDesc(), hisher : target.hisher() };
-	
-	Text.Add("[Name] blush[notEs] as [hisher] head swims with thoughts of naked trysts under the stars, overwhelmed by the Gol’s pheromones.", parse);
-	Text.NL();
-}
-Abilities.EnemySkill.GolLustyPheromones.OnMiss = function(encounter, caster, target) {
-	var parse = { notS : caster.plural() ? "s" : "", Name : target.NameDesc(), hisher : target.hisher() };
-	
-	Text.Add("[Name] hold[notS] [hisher] breath to avoid as much of it as possible. Frowning, the Gol releases her netherlips.", parse);
-	Text.NL();
-}
+Abilities.EnemySkill.GolLustyPheromones.castTree.push(AbilityNode.Template.Lust({
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("The Gol reaches down to just below the joint of her humanoid upper body and mantis-like lower form where an immense, juicy-looking pussy lies. She hooks her fingers into either side of it, panting at the sensation, and pulls it open, allowing you gaze into the simmering, pink depths. It's easily big enough to swallow your arm, but far more alarming is the scent it exudes - sweet and enticing.", parse);
+		Text.NL();
+		caster.AddLustFraction(0.1);
+	}],
+	onMiss: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] hold[tnotS] [thisher] breath to avoid as much of it as possible. Frowning, the Gol releases her netherlips.", parse);
+	}],
+	onDamage: [function(ability, encounter, caster, target, dmg) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] blush[tnotEs] as [thisher] head swims with thoughts of naked trysts under the stars, overwhelmed by the Gol’s pheromones.", parse);
+		target.AddLustFraction(0.3);
+	}],
+	onAbsorb: [Abilities.Seduction._onAbsorb],
+	damageFunc: AbilityNode.DamageFunc.Lust
+}));
 
 
-//TODO REPLACE
-Abilities.EnemySkill.GolCuntDash = new AttackPhysical();
-Abilities.EnemySkill.GolCuntDash.name = "C.Dash";
+Abilities.EnemySkill.GolCuntDash = new Ability("C.Dash");
 Abilities.EnemySkill.GolCuntDash.Short = function() { return "Cunt dash!"; }
 Abilities.EnemySkill.GolCuntDash.cost = { hp: null, sp: 50, lp: null};
-Abilities.EnemySkill.GolCuntDash.atkMod = 1.3;
-Abilities.EnemySkill.GolCuntDash.hitMod = 0.8;
-Abilities.EnemySkill.GolCuntDash.damageType.pBlunt = 1;
-Abilities.EnemySkill.GolCuntDash.damageType.pLust = 0.5;
-Abilities.EnemySkill.GolCuntDash.OnCast = function(encounter, caster, target) {
-	var parse = { name : target.nameDesc() };
-	Text.Add("Without warning, the Gol launches herself forward, legs clattering as she approaches [name] with blinding speed. ", parse);
-	
-	caster.AddLustFraction(0.1);
-}
-Abilities.EnemySkill.GolCuntDash.OnHit = function(encounter, caster, target, dmg) {
-	var parse = { Name : target.NameDesc(), name : target.nameDesc(), notS : target.plural() ? "s" : "", poss : target.possessive() };
-	parse = target.ParserPronouns(parse);
-	
-	Text.Add("[Name] react[notS] a little too late to dive out the way, but [heshe] manage[notS] to duck low in an attempt to slip under her scythes… just not low enough. Her oncoming crotch and abdomen smack into [name], and her fragrant pussy drags across [poss] face and slimes it with a thick coat of her vaginal juices. The chitin of her underbelly is quite soft on [poss] cheek, almost like a pleasant caress.", parse);
-	Text.NL();
-	Text.Add("The Gol queen bashes [name] for " + Text.BoldColor(dmg, "#800000") + " damage, staggering [himher]!", parse);
-	Text.NL();
-	Text.Add("When she finishes charging past, [name] blink[notS] in a daze and stagger to [hisher] feet, uncomfortably warm in all the wrong places.", parse);
-	Text.NL();
-}
-Abilities.EnemySkill.GolCuntDash.OnMiss = function(encounter, caster, target) {
-	var parse = { himher : target.himher(), notEs : target.plural() ? "" : "es", Name : target.NameDesc() };
-	
-	Text.Add("[Name] barely toss[notEs] [himher]self out of the way in time!", parse);
-	Text.NL();
-}
+Abilities.EnemySkill.GolCuntDash.castTree.push(AbilityNode.Template.Physical({
+	atkMod: 1.3,
+	hitMod: 0.8,
+	damageType: {pBlunt: 1, lust: 0.5},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("Without warning, the Gol launches herself forward, legs clattering as she approaches [tname] with blinding speed. ", parse);
+		
+		caster.AddLustFraction(0.1);
+	}],
+	onMiss: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] barely toss[tnotEs] [thimher]self out of the way in time!", parse);
+		Text.NL();
+	}],
+	onDamage: [function(ability, encounter, caster, target, dmg) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] react[tnotS] a little too late to dive out the way, but [theshe] manage[tnotS] to duck low in an attempt to slip under her scythes… just not low enough. Her oncoming crotch and abdomen smack into [tname], and her fragrant pussy drags across [tposs] face and slimes it with a thick coat of her vaginal juices. The chitin of her underbelly is quite soft on [tposs] cheek, almost like a pleasant caress.", parse);
+		Text.NL();
+		Text.Add("The Gol queen bashes [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage, staggering [thimher]!", parse);
+		Text.NL();
+		Text.Add("When she finishes charging past, [tname] blink[tnotS] in a daze and stagger to [thisher] feet, uncomfortably warm in all the wrong places.", parse);
+		target.AddLustFraction(0.3);
+	}],
+	onAbsorb: [Abilities.Physical._onAbsorb]
+}));
 
 
-//TODO REPLACE
-Abilities.EnemySkill.GolPollen = new AttackPhysical();
-Abilities.EnemySkill.GolPollen.name = "S.Pollen";
+Abilities.EnemySkill.GolPollen = new Ability("S.Pollen");
 Abilities.EnemySkill.GolPollen.Short = function() { return "Submission pollen."; }
 Abilities.EnemySkill.GolPollen.cost = { hp: null, sp: null, lp: 250 };
-Abilities.EnemySkill.GolPollen.atkMod = 0;
-Abilities.EnemySkill.GolPollen.hitMod = 0.8;
 Abilities.EnemySkill.GolPollen.targetMode = TargetMode.Enemies;
-Abilities.EnemySkill.GolPollen.OnCast = function(encounter, caster, target) {
-	var parse = {};
-	Text.Add("Sighing, the Gol runs her hands through her shimmering black hair in frustration. After her fingers' first pass, she repeats the action, then does it again. And again. Soon the air around her seems slightly foggy, and your nose itches. A sneeze wracks your body as she continues the motion, filling the air with... something. You can't say what, but it's making you sneeze, and causing your nose to get itchy and irritable. The insectile beauty seems taller and more imposing after each involuntary spasm of your body. Her breasts appear larger, her pussy more inviting, and her face more charmingly human. For a monster, she wouldn't be a bad one to settle down with.", parse);
-	Text.NL();
-}
-Abilities.EnemySkill.GolPollen.OnHit = function(encounter, caster, target) {
-	var parse = { Name : target.NameDesc(), is : target.is() };
-	target.AddLustFraction(0.2);
-	
-	if(Status.Slow(target, { hit : 0.6, factor : 2, turns : 1, turnsR : 3 })) {
-		Text.Add("[Name] [is] slowed! ", parse);
-	}
-	if(Status.Horny(target, { hit : 0.6, str : 1, dmg : 0.1, turns : 1, turnsR : 3 })) {
+Abilities.EnemySkill.GolPollen.castTree.push(AbilityNode.Template.Physical({
+	hitMod: 0.8,
+	toDamage: null,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = {};
+		Text.Add("Sighing, the Gol runs her hands through her shimmering black hair in frustration. After her fingers' first pass, she repeats the action, then does it again. And again. Soon the air around her seems slightly foggy, and your nose itches. A sneeze wracks your body as she continues the motion, filling the air with... something. You can't say what, but it's making you sneeze, and causing your nose to get itchy and irritable. The insectile beauty seems taller and more imposing after each involuntary spasm of your body. Her breasts appear larger, her pussy more inviting, and her face more charmingly human. For a monster, she wouldn't be a bad one to settle down with.", parse);
 		Text.NL();
-		Text.Add("[Name] [is] horny! ", parse);
-	}
-	if(Status.Sleep(target, { hit : 0.5, turns : 1, turnsR : 3 })) {
-		Text.NL();
-		Text.Add("[Name] [is] drowsy! ", parse);
-	}
-	if(Status.Confuse(target, { hit : 0.3, turns : 1, turnsR : 3 })) {
-		Text.NL();
-		Text.Add("[Name] [is] confused! ", parse);
-	}
-}
-Abilities.EnemySkill.GolPollen.OnMiss = null;
+	}],
+	onMiss: [Abilities.Physical._onMiss],
+	onHit: [function(ability, encounter, caster, target, dmg) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		target.AddLustFraction(0.2);
+		
+		if(Status.Slow(target, { hit : 0.6, factor : 2, turns : 1, turnsR : 3 })) {
+			Text.Add("[tName] [tis] slowed! ", parse);
+		}
+		if(Status.Horny(target, { hit : 0.6, str : 1, dmg : 0.1, turns : 1, turnsR : 3 })) {
+			Text.NL();
+			Text.Add("[tName] [tis] horny! ", parse);
+		}
+		if(Status.Sleep(target, { hit : 0.5, turns : 1, turnsR : 3 })) {
+			Text.NL();
+			Text.Add("[tName] [tis] drowsy! ", parse);
+		}
+		if(Status.Confuse(target, { hit : 0.3, turns : 1, turnsR : 3 })) {
+			Text.NL();
+			Text.Add("[tName] [tis] confused! ", parse);
+		}
+	}]
+}));
 
 
 // Corishev

@@ -113,8 +113,7 @@ Abilities.Physical._onAbsorb = function(ability, encounter, caster, target, dmg)
 }
 
 
-Abilities.Physical.Bash = new Ability();
-Abilities.Physical.Bash.name = "Bash";
+Abilities.Physical.Bash = new Ability("Bash");
 Abilities.Physical.Bash.Short = function() { return "Stun effect, low accuracy."; }
 Abilities.Physical.Bash.cost = { hp: null, sp: 10, lp: null};
 Abilities.Physical.Bash.cooldown = 2;
@@ -144,8 +143,7 @@ Abilities.Physical.Bash.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.Physical.GrandSlam = new Ability();
-Abilities.Physical.GrandSlam.name = "Grand Slam";
+Abilities.Physical.GrandSlam = new Ability("Grand Slam");
 Abilities.Physical.GrandSlam.Short = function() { return "Stun effect, low accuracy to multiple targets."; }
 Abilities.Physical.GrandSlam.cost = { hp: null, sp: 50, lp: null};
 Abilities.Physical.GrandSlam.targetMode = TargetMode.Enemies;
@@ -176,8 +174,7 @@ Abilities.Physical.GrandSlam.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.Physical.Pierce = new Ability();
-Abilities.Physical.Pierce.name = "Pierce";
+Abilities.Physical.Pierce = new Ability("Pierce");
 Abilities.Physical.Pierce.Short = function() { return "Bypass defenses."; }
 Abilities.Physical.Pierce.cost = { hp: null, sp: 10, lp: null};
 Abilities.Physical.Pierce.castTree.push(AbilityNode.Template.Physical({
@@ -193,8 +190,7 @@ Abilities.Physical.Pierce.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.Physical.DirtyBlow = new Ability();
-Abilities.Physical.DirtyBlow.name = "Dirty Blow";
+Abilities.Physical.DirtyBlow = new Ability("Dirty Blow");
 Abilities.Physical.DirtyBlow.Short = function() { return "Bypass defenses, low chance of stun."; }
 Abilities.Physical.DirtyBlow.cost = { hp: null, sp: 20, lp: null};
 Abilities.Physical.DirtyBlow.cooldown = 2;
@@ -218,8 +214,7 @@ Abilities.Physical.DirtyBlow.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.Physical.Hamstring = new Ability();
-Abilities.Physical.Hamstring.name = "Hamstring";
+Abilities.Physical.Hamstring = new Ability("Hamstring");
 Abilities.Physical.Hamstring.Short = function() { return "Nicks the target, making a lingering wound."; }
 Abilities.Physical.Hamstring.cost = { hp: null, sp: 20, lp: null};
 Abilities.Physical.Hamstring.cooldown = 2;
@@ -243,8 +238,7 @@ Abilities.Physical.Hamstring.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.Physical.Kicksand = new Ability();
-Abilities.Physical.Kicksand.name = "Kick sand";
+Abilities.Physical.Kicksand = new Ability("Kick sand");
 Abilities.Physical.Kicksand.Short = function() { return "Kick dirt in the enemy's eyes, blinding them. Single target."; }
 Abilities.Physical.Kicksand.cost = { hp: null, sp: 15, lp: null};
 Abilities.Physical.Kicksand.atkMod = 0.05;
@@ -269,8 +263,7 @@ Abilities.Physical.Kicksand.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.Physical.Swift = new Ability();
-Abilities.Physical.Swift.name = "Swift";
+Abilities.Physical.Swift = new Ability("Swift");
 Abilities.Physical.Swift.Short = function() { return "Briefly boosts the caster's speed."; }
 Abilities.Physical.Swift.targetMode = TargetMode.Self;
 Abilities.Physical.Swift.cost = { hp: null, sp: 25, lp: null};
@@ -283,8 +276,7 @@ Abilities.Physical.Swift.castTree.push(function(ability, encounter, caster) {
 });
 
 
-Abilities.Physical.SetTrap = new Ability();
-Abilities.Physical.SetTrap.name = "Set trap";
+Abilities.Physical.SetTrap = new Ability("Set trap");
 Abilities.Physical.SetTrap.Short = function() { return "Sets a trap for an enemy."; }
 Abilities.Physical.SetTrap.targetMode = TargetMode.Self;
 Abilities.Physical.SetTrap.cost = { hp: null, sp: 50, lp: null};
@@ -313,7 +305,7 @@ Abilities.Physical.SetTrap.castTree.push(function(ability, encounter, caster) {
 		}
 	});
 });
-Abilities.Physical.SpringTrap = new Ability();
+Abilities.Physical.SpringTrap = new Ability("Spring trap");
 Abilities.Physical.SpringTrap.castTree.push(AbilityNode.Template.Physical({
 	defMod: 0.3,
 	atkMod: 1.3,
@@ -331,8 +323,7 @@ Abilities.Physical.SpringTrap.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.Physical.Backstab = new Ability();
-Abilities.Physical.Backstab.name = "Backstab";
+Abilities.Physical.Backstab = new Ability("Backstab");
 Abilities.Physical.Backstab.Short = function() { return "Deal high damage against a disabled target."; }
 Abilities.Physical.Backstab.cost = { hp: null, sp: 30, lp: null};
 Abilities.Physical.Backstab.cooldown = 1;
@@ -353,8 +344,7 @@ Abilities.Physical.Backstab.enabledTargetCondition = function(encounter, caster,
 }
 
 
-Abilities.Physical.Ensnare = new Ability();
-Abilities.Physical.Ensnare.name = "Ensnare";
+Abilities.Physical.Ensnare = new Ability("Ensnare");
 Abilities.Physical.Ensnare.Short = function() { return "Slows down an enemy by throwing a net at them."; }
 Abilities.Physical.Ensnare.cost = { hp: null, sp: 20, lp: null};
 Abilities.Physical.Ensnare.cooldown = 3;
@@ -377,8 +367,7 @@ Abilities.Physical.Ensnare.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.Physical.FocusStrike = new Ability();
-Abilities.Physical.FocusStrike.name = "Focus strike";
+Abilities.Physical.FocusStrike = new Ability("Focus strike");
 Abilities.Physical.FocusStrike.Short = function() { return "Bypass defenses."; }
 Abilities.Physical.FocusStrike.cost = { hp: null, sp: 50, lp: null};
 Abilities.Physical.FocusStrike.cooldown = 2;
@@ -395,8 +384,7 @@ Abilities.Physical.FocusStrike.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.Physical.DAttack = new Ability();
-Abilities.Physical.DAttack.name = "D.Attack";
+Abilities.Physical.DAttack = new Ability("D.Attack");
 Abilities.Physical.DAttack.Short = function() { return "Perform two low accuracy hits."; }
 Abilities.Physical.DAttack.cost = { hp: null, sp: 25, lp: null};
 Abilities.Physical.DAttack.cooldown = 2;
@@ -413,8 +401,7 @@ Abilities.Physical.DAttack.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.Physical.TAttack = new Ability();
-Abilities.Physical.TAttack.name = "T.Attack";
+Abilities.Physical.TAttack = new Ability("T.Attack");
 Abilities.Physical.TAttack.Short = function() { return "Perform three low accuracy hits."; }
 Abilities.Physical.TAttack.cost = { hp: null, sp: 60, lp: null};
 Abilities.Physical.TAttack.cooldown = 3;
@@ -431,8 +418,7 @@ Abilities.Physical.TAttack.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.Physical.QAttack = new Ability();
-Abilities.Physical.QAttack.name = "Q.Attack";
+Abilities.Physical.QAttack = new Ability("Q.Attack");
 Abilities.Physical.QAttack.Short = function() { return "Perform four low accuracy hits."; }
 Abilities.Physical.QAttack.cost = { hp: null, sp: 100, lp: null};
 Abilities.Physical.QAttack.cooldown = 4;
@@ -449,8 +435,7 @@ Abilities.Physical.QAttack.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.Physical.Frenzy = new Ability();
-Abilities.Physical.Frenzy.name = "Frenzy";
+Abilities.Physical.Frenzy = new Ability("Frenzy");
 Abilities.Physical.Frenzy.Short = function() { return "Perform a flurry of five strikes, leaving you exhausted."; }
 Abilities.Physical.Frenzy.cost = { hp: 100, sp: 80, lp: null};
 Abilities.Physical.Frenzy.cooldown = 5;
@@ -473,8 +458,7 @@ Abilities.Physical.Frenzy.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.Physical.CrushingStrike = new Ability();
-Abilities.Physical.CrushingStrike.name = "Crushing.S";
+Abilities.Physical.CrushingStrike = new Ability("Crushing.S");
 Abilities.Physical.CrushingStrike.Short = function() { return "Crushing strike that deals massive damage, with high chance of stunning. Slight recoil effect."; }
 Abilities.Physical.CrushingStrike.cost = { hp: 25, sp: 10, lp: null};
 Abilities.Physical.CrushingStrike.cooldown = 2;
@@ -500,8 +484,7 @@ Abilities.Physical.CrushingStrike.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.Physical.Provoke = new Ability();
-Abilities.Physical.Provoke.name = "Provoke";
+Abilities.Physical.Provoke = new Ability("Provoke");
 Abilities.Physical.Provoke.Short = function() { return "Try to provoke the enemy to focus on you. Single target."; }
 Abilities.Physical.Provoke.cost = { hp: null, sp: 15, lp: null};
 Abilities.Physical.Provoke.castTree.push(AbilityNode.Template.Physical({
@@ -524,8 +507,7 @@ Abilities.Physical.Provoke.castTree.push(AbilityNode.Template.Physical({
 }));
 
 
-Abilities.Physical.Taunt = new Ability();
-Abilities.Physical.Taunt.name = "Taunt";
+Abilities.Physical.Taunt = new Ability("Taunt");
 Abilities.Physical.Taunt.Short = function() { return "Try to taunt the enemy to focus on you. Single target."; }
 Abilities.Physical.Taunt.cost = { hp: null, sp: 30, lp: null};
 Abilities.Physical.Taunt.castTree.push(AbilityNode.Template.Physical({
