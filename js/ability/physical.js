@@ -151,10 +151,9 @@ Abilities.Physical.Hamstring.castTree.push(AbilityNode.Template.Physical({
 Abilities.Physical.Kicksand = new Ability("Kick sand");
 Abilities.Physical.Kicksand.Short = function() { return "Kick dirt in the enemy's eyes, blinding them. Single target."; }
 Abilities.Physical.Kicksand.cost = { hp: null, sp: 15, lp: null};
-Abilities.Physical.Kicksand.atkMod = 0.05;
 Abilities.Physical.Kicksand.cooldown = 1;
 Abilities.Physical.Kicksand.castTree.push(AbilityNode.Template.Physical({
-	atkMod: 0.5,
+	atkMod: 0.05,
 	damageType: {pPierce: 1},
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
@@ -164,6 +163,7 @@ Abilities.Physical.Kicksand.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] easily avoid[tnotS] the attack.", parse);
 	}],
+	onDamage: [Abilities.Physical._onDamage],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		if(Status.Blind(target, { hit : 0.8, str : 0.5, turns : 3, turnsR : 3 })) {
@@ -407,6 +407,7 @@ Abilities.Physical.Provoke.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] doesn't look very impressed.", parse);
 	}],
+	onDamage: [Abilities.Physical._onDamage],
 	onHit: [function(ability, encounter, caster, target) {
 		var aggroEntry = GetAggroEntry(target.GetCombatEntry(encounter), caster);
 		if(aggroEntry)
@@ -431,6 +432,7 @@ Abilities.Physical.Taunt.castTree.push(AbilityNode.Template.Physical({
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] doesn't look very impressed.", parse);
 	}],
+	onDamage: [Abilities.Physical._onDamage],
 	onHit: [function(ability, encounter, caster, target) {
 		var aggroEntry = GetAggroEntry(target.GetCombatEntry(encounter), caster);
 		if(aggroEntry)
