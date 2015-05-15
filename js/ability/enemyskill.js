@@ -232,6 +232,7 @@ Abilities.EnemySkill.TViolate.castTree.push(AbilityNode.Template.Physical({
 Abilities.EnemySkill.GolLustyPheromones = new Ability("L.Pheromones");
 Abilities.EnemySkill.GolLustyPheromones.Short = function() { return "Attack with lusty pheromones."; }
 Abilities.EnemySkill.GolLustyPheromones.castTree.push(AbilityNode.Template.Lust({
+	damageType: {lust: 1},
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("The Gol reaches down to just below the joint of her humanoid upper body and mantis-like lower form where an immense, juicy-looking pussy lies. She hooks her fingers into either side of it, panting at the sensation, and pulls it open, allowing you gaze into the simmering, pink depths. It's easily big enough to swallow your arm, but far more alarming is the scent it exudes - sweet and enticing.", parse);
