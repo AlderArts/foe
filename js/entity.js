@@ -1256,6 +1256,19 @@ Entity.prototype.MDefense = function() {
 	return magDef * magRand;
 }
 
+Entity.prototype.MHit = function() {
+	var hitStat = 3 * this.Int() + this.Spi() + this.Cha();
+	
+	return hitStat;
+}
+
+// TODO temp
+Entity.prototype.MEvade = function(attack) {
+	var evadeStat = 3 * this.Spi() + this.Int() + this.Dex();
+	
+	return evadeStat;
+}
+
 Entity.prototype.LAttack = function() {
 	// Stat based
 	var sedStat = (this.Dex() + 2 * this.Lib() + 2 * this.Cha()) / 2;

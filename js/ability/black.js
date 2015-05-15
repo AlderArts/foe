@@ -74,116 +74,156 @@ AttackSpell.prototype.OnAbsorb = function(encounter, caster, target, dmg) {
 
 Abilities.Black = {};
 
-//TODO REPLACE
-Abilities.Black.Surge = new AttackSpell();
-Abilities.Black.Surge.name = "Surge";
+// Default messages
+Abilities.Black._onDamage = function(ability, encounter, caster, target, dmg) {
+	var parse = AbilityNode.DefaultParser(caster, target);
+	Text.Add("It hits [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage!", parse);
+	Text.NL();
+}
+Abilities.Black._onAbsorb = function(ability, encounter, caster, target, dmg) {
+	var parse = AbilityNode.DefaultParser(caster, target);
+	Text.Add("[tName] absorb[tnotS] the spell, gaining " + Text.BoldColor(dmg, "#008000") + " health!", parse);
+	Text.NL();
+}
+Abilities.Black._onMiss = function(ability, encounter, caster, target) {
+	var parse = AbilityNode.DefaultParser(caster, target);
+	Text.Add("[tName] manage[tnotS] to resist the effects of the spell!", parse);
+	Text.NL();
+}
+
+
+Abilities.Black.Surge = new Ability("Surge");
 Abilities.Black.Surge.Short = function() { return "Weak non-elemental magic, single target."; }
 Abilities.Black.Surge.cost = { hp: null, sp: 5, lp: null};
-Abilities.Black.Surge.atkMod = 0.5;
-Abilities.Black.Surge.damageType.mVoid = 1;
-Abilities.Black.Surge.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.NameDesc(), hisher : caster.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s" };
-	Text.Add("[name] call[s] on a surge of pure magical energy, brusting forth in a flash of light from [hisher] outstretched [hand]s. ", parse);
-}
+Abilities.Black.Surge.castTree.push(AbilityNode.Template.Magical({
+	atkMod: 0.5,
+	damageType: {mVoid: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] call[notS] on a surge of pure magical energy, brusting forth in a flash of light from [hisher] outstretched [hand]s. ", parse);
+	}],
+	onMiss: [Abilities.Black._onMiss],
+	onDamage: [Abilities.Black._onDamage],
+	onAbsorb: [Abilities.Black._onAbsorb]
+}));
 
-//TODO REPLACE
-Abilities.Black.Fireball = new AttackSpell();
-Abilities.Black.Fireball.name = "Fireball";
+
+Abilities.Black.Fireball = new Ability("Fireball");
 Abilities.Black.Fireball.Short = function() { return "Fire magic, single target."; }
 Abilities.Black.Fireball.cost = { hp: null, sp: 10, lp: null};
-Abilities.Black.Fireball.damageType.mFire = 1;
-Abilities.Black.Fireball.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.NameDesc(), himher : caster.himher(), hisher : caster.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.Add("[name] make[s] mystic incantations, waving [hisher] [hand]s in the air. Fiery glyphs appear in front of [himher], coalascing in a large fireball forming between [hisher] outstretched [hand]s. With a great roar, the molten ball of magic surge toward [tName]! ", parse);
-}
-Abilities.Black.Fireball.OnAbsorb = function(encounter, caster, target, dmg) {
-	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s" };
-	Text.Add("[tName] absorb[s] the flames, gaining " + Text.BoldColor(dmg, "#008000") + " health!", parse);
-	Text.NL();
-}
-Abilities.Black.Fireball.TargetEffect = function(encounter, caster, target) {
-	var parse = { target : target.NameDesc(), has : target.has(), s : target.plural() ? "" : "s" };
-	if(Status.Burn(target, { hit : 0.2, turns : 3, turnsR : 5, str : 1, dmg : 0.2 })) {
-		Text.Add("[target] [has] been burned!", parse);
-		Text.NL();
-	}
-}
+Abilities.Black.Fireball.castTree.push(AbilityNode.Template.Magical({
+	damageType: {mFire: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] make[notS] mystic incantations, waving [hisher] [hand]s in the air. Fiery glyphs appear in front of [himher], coalascing in a large fireball forming between [hisher] outstretched [hand]s. With a great roar, the molten ball of magic surge toward [tname]! ", parse);
+	}],
+	onMiss: [Abilities.Black._onMiss],
+	onDamage: [Abilities.Black._onDamage],
+	onAbsorb: [function(ability, encounter, caster, target, dmg) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] absorb[tnotS] the flames, gaining " + Text.BoldColor(dmg, "#008000") + " health!", parse);
+	}],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		if(Status.Burn(target, { hit : 0.2, turns : 3, turnsR : 5, str : 1, dmg : 0.2 })) {
+			Text.NL();
+			Text.Add("[tName] [thas] been burned!", parse);
+		}
+	}]
+}));
 
-//TODO REPLACE
-Abilities.Black.Freeze = new AttackSpell();
-Abilities.Black.Freeze.name = "Freeze";
+
+Abilities.Black.Freeze = new Ability("Freeze");
 Abilities.Black.Freeze.Short = function() { return "Ice magic, single target."; }
 Abilities.Black.Freeze.cost = { hp: null, sp: 10, lp: null};
-Abilities.Black.Freeze.damageType.mIce = 1;
-Abilities.Black.Freeze.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.nameDesc(), himher : caster.himher(), hisher : caster.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.Add("The temperature drops in the air around [tName], as [name] call[s] on the power of ice. There is a loud crackle as the cold snap hits, forming icicles on [tName]! ", parse);
-}
-Abilities.Black.Freeze.TargetEffect = function(encounter, caster, target) {
-	var parse = { target : target.NameDesc(), has : target.has(), s : target.plural() ? "" : "s" };
-	if(Status.Freeze(target, { hit : 0.2, turns : 3, turnsR : 5, proc : 0.5, str : 1.2 })) {
-		Text.Add("[target] [has] been afflicted with freeze!", parse);
-		Text.NL();
-	}
-}
+Abilities.Black.Freeze.castTree.push(AbilityNode.Template.Magical({
+	damageType: {mIce: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("The temperature drops in the air around [tname], as [name] call[notS] on the power of ice. There is a loud crackle as the cold snap hits, forming icicles on [tname]! ", parse);
+	}],
+	onMiss: [Abilities.Black._onMiss],
+	onDamage: [Abilities.Black._onDamage],
+	onAbsorb: [Abilities.Black._onAbsorb],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		if(Status.Freeze(target, { hit : 0.2, turns : 3, turnsR : 5, proc : 0.5, str : 1.2 })) {
+			Text.NL();
+			Text.Add("[tName] [thas] been afflicted with freeze!", parse);
+		}
+	}]
+}));
 
-//TODO REPLACE
-Abilities.Black.Bolt = new AttackSpell();
-Abilities.Black.Bolt.name = "Bolt";
+
+Abilities.Black.Bolt = new Ability("Bolt");
 Abilities.Black.Bolt.Short = function() { return "Thunder magic, single target."; }
 Abilities.Black.Bolt.cost = { hp: null, sp: 10, lp: null};
-Abilities.Black.Bolt.damageType.mThunder = 1;
-Abilities.Black.Bolt.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.nameDesc(), himher : caster.himher(), hisher : caster.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.Add("The air tingles as [name] call[s] on the power of thunder. There is a great crackle and a blinding flash of light as a bolt of lightning strikes [tName]! ", parse);
-}
-Abilities.Black.Bolt.OnAbsorb = function(encounter, caster, target, dmg) {
-	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s" };
-	Text.Add("[tName] absorb[s] the shock, gaining " + Text.BoldColor(dmg, "#008000") + " health!", parse);
-	Text.NL();
-}
-Abilities.Black.Bolt.TargetEffect = function(encounter, caster, target) {
-	var parse = { target : target.NameDesc(), has : target.has() };
-	if(Status.Numb(target, { hit : 0.2, turns : 3, turnsR : 5, proc : 0.25 })) {
-		Text.Add("[target] [has] been afflicted with numb!", parse);
-		Text.NL();
-	}
-}
+Abilities.Black.Bolt.castTree.push(AbilityNode.Template.Magical({
+	damageType: {mThunder: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("The air tingles as [name] call[notS] on the power of thunder. There is a great crackle and a blinding flash of light as a bolt of lightning strikes [tname]! ", parse);
+	}],
+	onMiss: [Abilities.Black._onMiss],
+	onDamage: [Abilities.Black._onDamage],
+	onAbsorb: [function(ability, encounter, caster, target, dmg) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] absorb[tnotS] the shock, gaining " + Text.BoldColor(dmg, "#008000") + " health!", parse);
+	}],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		if(Status.Numb(target, { hit : 0.2, turns : 3, turnsR : 5, proc : 0.25 })) {
+			Text.NL();
+			Text.Add("[tName] [thas] been afflicted with numb!", parse);
+		}
+	}]
+}));
 
-//TODO REPLACE
-Abilities.Black.Gust = new AttackSpell();
-Abilities.Black.Gust.name = "Gust";
+
+Abilities.Black.Gust = new Ability("Gust");
 Abilities.Black.Gust.Short = function() { return "Slashing wind magic, single target."; }
 Abilities.Black.Gust.cost = { hp: null, sp: 10, lp: null};
-Abilities.Black.Gust.damageType.mWind = 0.7;
-Abilities.Black.Gust.damageType.mSlash = 0.3;
-Abilities.Black.Gust.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.NameDesc(), himher : caster.himher(), hisher : caster.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.Add("[name] make[s] a sweeping gesture, calling on the power of wind to do [hisher] bidding. Erratic gusts of wind dance around, focusing into a single burst homing in on [tName]! ", parse);
-}
+Abilities.Black.Gust.castTree.push(AbilityNode.Template.Magical({
+	damageType: {mWind: 0.7, pSlash: 0.3},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] make[notS] a sweeping gesture, calling on the power of wind to do [hisher] bidding. Erratic gusts of wind dance around, focusing into a single burst homing in on [tname]! ", parse);
+	}],
+	onMiss: [Abilities.Black._onMiss],
+	onDamage: [Abilities.Black._onDamage],
+	onAbsorb: [Abilities.Black._onAbsorb]
+}));
 
-//TODO REPLACE
-Abilities.Black.Spire = new AttackSpell();
-Abilities.Black.Spire.name = "Spire";
+
+Abilities.Black.Spire = new Ability("Spire");
 Abilities.Black.Spire.Short = function() { return "Bashing earth magic, single target."; }
 Abilities.Black.Spire.cost = { hp: null, sp: 10, lp: null};
-Abilities.Black.Spire.damageType.mEarth = 0.7;
-Abilities.Black.Spire.damageType.mBlunt = 0.3;
-Abilities.Black.Spire.OnCast = function(encounter, caster, target) {
-	var parse = { possessive : caster.possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.Add("There is a loud rumble as the ground shakes, forced from its natural state by the power of [possessive] magic. A pillar of rock bursts from the earth below, slamming into [tName]! ", parse);
-}
+Abilities.Black.Spire.castTree.push(AbilityNode.Template.Magical({
+	damageType: {mEarth: 0.7, pBlunt: 0.3},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("There is a loud rumble as the ground shakes, forced from its natural state by the power of [poss] magic. A pillar of rock bursts from the earth below, slamming into [tname]! ", parse);
+	}],
+	onMiss: [Abilities.Black._onMiss],
+	onDamage: [Abilities.Black._onDamage],
+	onAbsorb: [Abilities.Black._onAbsorb]
+}));
 
-//TODO REPLACE
-Abilities.Black.Spray = new AttackSpell();
-Abilities.Black.Spray.name = "Spray";
+
+Abilities.Black.Spray = new Ability("Spray");
 Abilities.Black.Spray.Short = function() { return "Water magic, single target."; }
 Abilities.Black.Spray.cost = { hp: null, sp: 10, lp: null};
-Abilities.Black.Spray.damageType.mWater = 1;
-Abilities.Black.Spray.OnCast = function(encounter, caster, target) {
-	var parse = { possessive : caster.possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.Add("Moisture from the air coalesce into a sphere of water between [possessive] [hand]s, summoned by the power of [hisher] magic. In a rapid surge, the water slams into [tName]! ", parse);
-}
+Abilities.Black.Spray.castTree.push(AbilityNode.Template.Magical({
+	damageType: {mWater: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("Moisture from the air coalesce into a sphere of water between [poss] [hand]s, summoned by the power of [hisher] magic. In a rapid surge, the water slams into [tname]! ", parse);
+	}],
+	onMiss: [Abilities.Black._onMiss],
+	onDamage: [Abilities.Black._onDamage],
+	onAbsorb: [Abilities.Black._onAbsorb]
+}));
+
 
 //TODO REPLACE
 Abilities.Black.Shimmer = new AttackSpell();
