@@ -100,7 +100,7 @@ Abilities.Black.Surge.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mVoid: 1},
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[Name] call[notS] on a surge of pure magical energy, brusting forth in a flash of light from [hisher] outstretched [hand]s. ", parse);
+		Text.Add("[Name] call[notS] on a surge of pure magical energy which bursts forth in a flash of light from [hisher] outstretched [hand]s. ", parse);
 	}],
 	onMiss: [Abilities.Black._onMiss],
 	onDamage: [Abilities.Black._onDamage],
@@ -115,7 +115,7 @@ Abilities.Black.Fireball.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mFire: 1},
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[Name] make[notS] mystic incantations, waving [hisher] [hand]s in the air. Fiery glyphs appear in front of [himher], coalascing in a large fireball forming between [hisher] outstretched [hand]s. With a great roar, the molten ball of magic surge toward [tname]! ", parse);
+		Text.Add("[Name] make[notS] mystic incantations, waving [hisher] [hand]s in the air. Fiery glyphs appear in front of [himher], coalescing in a large fireball forming between [hisher] outstretched [hand]s. With a great roar, the molten ball of magic surge toward [tname]! ", parse);
 	}],
 	onMiss: [Abilities.Black._onMiss],
 	onDamage: [Abilities.Black._onDamage],
@@ -140,7 +140,7 @@ Abilities.Black.Freeze.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mIce: 1},
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("The temperature drops in the air around [tname], as [name] call[notS] on the power of ice. There is a loud crackle as the cold snap hits, forming icicles on [tname]! ", parse);
+		Text.Add("The temperature drops in the air around [tname] as [name] call[notS] on the power of ice. There is a loud crackle as the cold snap hits, forming icicles on [tname]! ", parse);
 	}],
 	onMiss: [Abilities.Black._onMiss],
 	onDamage: [Abilities.Black._onDamage],
@@ -298,7 +298,9 @@ Abilities.Black.Stalagmite.atkMod = 1.5;
 Abilities.Black.Stalagmite.defMod = 0.5;
 Abilities.Black.Stalagmite.OnCast = function(encounter, caster, target) {
 	var parse = { possessive : caster.possessive(), name : caster.NameDesc(), heshe : caster.heshe(), himher : caster.himher(), hisher : caster.hisher(), hand : caster.HandDesc(), s : caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.Add("The earth rumble, as a large pillar of rock bursts from the ground, raised with [possessive] magic. The great stalagmite throws [tName] to the ground! ", parse);
+	Text.Add("The earth rumbles as a large pillar of rock bursts from the ground, raised with [possessive] magic. ", parse);
+	//TODO On hit
+	Text.Add("The great stalagmite throws [tName] to the ground! ", parse);
 }
 
 //TODO REPLACE
