@@ -10,7 +10,7 @@ Abilities.Run.targetMode = TargetMode.Self;
 Abilities.Run.enabledCondition = function(encounter, caster) {
 	return encounter.canRun;
 }
-Abilities.Run.castTree.push(function(ability, encounter, caster) {
+Abilities.Run.CastInternal = function(encounter, caster) {
 	// TODO: Make more flavor text	
 	Text.Add("You try to run away!");
 	Text.NL();
@@ -18,4 +18,4 @@ Abilities.Run.castTree.push(function(ability, encounter, caster) {
 	// TODO: random chance on success
 	Text.Flush();
 	encounter.onRun();
-});
+}
