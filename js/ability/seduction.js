@@ -22,54 +22,29 @@ Abilities.Seduction._onMiss = function(ability, encounter, caster, target) {
 	Text.NL();
 }
 
-//TODO REPLACE
-Abilities.Seduction.Sleep = new Ability();
-Abilities.Seduction.Sleep.name = "Sleep";
+
+Abilities.Seduction.Sleep = new Ability("Sleep");
 Abilities.Seduction.Sleep.Short = function() { return "Put one enemy to sleep for a short while with magical charms."; }
 Abilities.Seduction.Sleep.cost = { hp: null, sp: 20, lp: null};
-Abilities.Seduction.Sleep.CastInternal = function(encounter, caster, target) {
-	var parse = {
-		Name   : caster.NameDesc(),
-		poss   : caster.possessive(),
-		notS   : caster.plural() ? "" : "s",
-		hisher : caster.hisher(),
-		hand   : caster.HandDesc(),
-		tname  : target.nameDesc(),
-		tName  : target.NameDesc(),
-		is     : target.is(),
-		has    : target.has(),
-		tnotS  : target.plural() ? "" : "s"
-	};
+Abilities.Seduction.Sleep.castTree.push(function(ability, encounter, caster, target) {
+	var parse = AbilityNode.DefaultParser(caster, target);
 	
 	Text.Add("[Name] weave[notS] [hisher] [hand]s in alluring patterns, winking seductively at [tname]. ", parse);
 	if(Status.Sleep(target, { hit : 0.6, turns : 2, turnsR : 2 })) {
-		Text.Add("[tName] [is] unable to resist looking at the hypnotic display, and fall[tnotS] into a slumber. [tName] [has] been afflicted with sleep!", parse);
+		Text.Add("[tName] [tis] unable to resist looking at the hypnotic display, and fall[tnotS] into a slumber. [tName] [thas] been afflicted with sleep!", parse);
 	}
 	else {
 		Text.Add("[tName] manage[notS] to shake off [poss] enchantment, resisting its drowsing effect.", parse);
 	}
-	Text.Flush();
-	
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
+});
 
 
-//TODO REPLACE
-Abilities.Seduction.TIllusion = new Ability();
-Abilities.Seduction.TIllusion.name = "T.Illusion";
+Abilities.Seduction.TIllusion = new Ability("T.Illusion");
 Abilities.Seduction.TIllusion.Short = function() { return "Terrifies your foes by creating frightening phantasms that soak up any attacks directed at you."; }
 Abilities.Seduction.TIllusion.cost = { hp: null, sp: 25, lp: 10};
 Abilities.Seduction.TIllusion.targetMode = TargetMode.Self;
-Abilities.Seduction.TIllusion.CastInternal = function(encounter, caster) {
-	var parse = {
-		name   : caster.nameDesc(),
-		poss   : caster.possessive(),
-		notS   : caster.plural() ? "" : "s",
-		hisher : caster.hisher(),
-		hand   : caster.HandDesc()
-	};
+Abilities.Seduction.TIllusion.castTree.push(function(ability, encounter, caster) {
+	var parse = AbilityNode.DefaultParser(caster);
 	var num = 2;
 	num += Math.random() * 3;
 	parse["num"] = Text.NumToText(num);
@@ -100,28 +75,15 @@ Abilities.Seduction.TIllusion.CastInternal = function(encounter, caster) {
 		Text.Flush();
 		return false;
 	} });
-	Text.Flush();
-	
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
+});
 
 
-//TODO REPLACE
-Abilities.Seduction.SIllusion = new Ability();
-Abilities.Seduction.SIllusion.name = "S.Illusion";
+Abilities.Seduction.SIllusion = new Ability("S.Illusion");
 Abilities.Seduction.SIllusion.Short = function() { return "Arouses your foes by creating a harem of alluring mirages."; }
 Abilities.Seduction.SIllusion.cost = { hp: null, sp: 10, lp: 25};
 Abilities.Seduction.SIllusion.targetMode = TargetMode.Self;
-Abilities.Seduction.SIllusion.CastInternal = function(encounter, caster) {
-	var parse = {
-		name   : caster.nameDesc(),
-		poss   : caster.possessive(),
-		notS   : caster.plural() ? "" : "s",
-		hisher : caster.hisher(),
-		hand   : caster.HandDesc()
-	};
+Abilities.Seduction.SIllusion.castTree.push(function(ability, encounter, caster) {
+	var parse = AbilityNode.DefaultParser(caster);
 	var num = 2;
 	num += Math.random() * 3;
 	parse["num"] = Text.NumToText(num);
@@ -153,31 +115,14 @@ Abilities.Seduction.SIllusion.CastInternal = function(encounter, caster) {
 		Text.Flush();
 		return false;
 	} });
-	Text.Flush();
-	
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
+});
 
 
-//TODO REPLACE
-Abilities.Seduction.Confuse = new Ability();
-Abilities.Seduction.Confuse.name = "Confuse";
+Abilities.Seduction.Confuse = new Ability("Confuse");
 Abilities.Seduction.Confuse.Short = function() { return "Fuck a single opponent’s mind, temporarily drawing them to your side."; }
 Abilities.Seduction.Confuse.cost = { hp: null, sp: 30, lp: 20};
-Abilities.Seduction.Confuse.CastInternal = function(encounter, caster, target) {
-	var parse = {
-		Name    : caster.NameDesc(),
-		hisher  : caster.hisher(),
-		poss    : caster.possessive(),
-		notS    : caster.plural() ? "" : "s",
-		tName   : target.NameDesc(),
-		tname   : target.nameDesc(),
-		tis     : target.is(),
-		tnotS   : target.plural() ? "" : "s",
-		thimher : target.himher()
-	}
+Abilities.Seduction.Confuse.castTree.push(function(ability, encounter, caster, target) {
+	var parse = AbilityNode.DefaultParser(caster, target);
 
 	Text.Add("[Name] perform[notS] a hypnotising dance, blending in [hisher] alluring magic and attempting to assume control of [tname]. ", parse);
 	
@@ -187,11 +132,7 @@ Abilities.Seduction.Confuse.CastInternal = function(encounter, caster, target) {
 	else {
 		Text.Add("[tName] manage[tnotS] to compose [thimher]self, resisting [poss] unnatural influence.", parse);
 	}
-	Text.Flush();
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
+});
 
 
 //TODO REPLACE
@@ -226,12 +167,11 @@ Abilities.Seduction.Rut.CastInternal = function(encounter, caster, target) {
 	});
 }
 
-//TODO REPLACE
-Abilities.Seduction.Fantasize = new Ability();
-Abilities.Seduction.Fantasize.name = "Fantasize";
+//TODO Tweak
+Abilities.Seduction.Fantasize = new Ability("Fantasize");
 Abilities.Seduction.Fantasize.Short = function() { return "Raise own lust."; }
 Abilities.Seduction.Fantasize.targetMode = TargetMode.Self;
-Abilities.Seduction.Fantasize.CastInternal = function(encounter, caster) {
+Abilities.Seduction.Fantasize.castTree.push(function(ability, encounter, caster) {
 	var dmg = 1 * caster.LAttack();
 	dmg = Math.floor(dmg);
 	
@@ -243,12 +183,7 @@ Abilities.Seduction.Fantasize.CastInternal = function(encounter, caster) {
 
 	// TODO: Make more flavor text	
 	Text.Add("[name] fantasizes, building " + Text.BoldColor(dmg, "#FF8080") + " lust! Sexy!", parse);
-	Text.Flush();
-	
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
+});
 
 
 //TODO REPLACE
@@ -345,38 +280,25 @@ Abilities.Seduction.Captivate.OnMiss = function(encounter, caster, target) {
 }
 
 
-//TODO REPLACE
-Abilities.Seduction.Lull = new Ability();
-Abilities.Seduction.Lull.name = "Lull";
+//TODO Tweak
+Abilities.Seduction.Lull = new Ability("Lull");
 Abilities.Seduction.Lull.cost = { hp: null, sp: 10, lp: 10};
 Abilities.Seduction.Lull.Short = function() { return "Put the foe to sleep with a soothing song."; }
-Abilities.Seduction.Lull.CastInternal = function(encounter, caster, target) {
+Abilities.Seduction.Lull.castTree.push(function(ability, encounter, caster, target) {
+	/*
 	var hit    = caster.LHit();
 	var evade  = target.LEvade();
 	var toHit  = Ability.ToHit(hit, evade);
+	*/
+	var parse = AbilityNode.DefaultParser(caster, target);
 	
-	var parse = {
-		Name : caster.NameDesc(),
-		poss : caster.possessive(),
-		s : caster.plural() ? "" : "s",
-		hisher : caster.hisher(),
-		tname : target.nameDesc(),
-		tName : target.NameDesc(),
-		ts : target.plural() ? "" : "s"
-	};
-	
-	Text.Add("[Name] raise[s] [hisher] voice in a soothing song, lulling [tname] with the haunting tune. ", parse);
+	Text.Add("[Name] raise[notS] [hisher] voice in a soothing song, lulling [tname] with the haunting tune. ", parse);
 	
 	if(Status.Sleep(target, { hit : 0.8, turns : 3, turnsR : 3 })) {
 		Text.Add("Overcome by [poss] song, [tname] falls asleep.", parse);
 	}
 	else
 		Text.Add("[tName] shrug[ts] it off, managing to stay awake.", parse);
-	
-	Text.Flush();
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
+});
 
 
