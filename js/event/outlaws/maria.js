@@ -550,11 +550,11 @@ Scenes.Maria.ForestCamp = function() {
 		Text.NL();
 		Text.Add("Tents cover the ground everywhere you look. A small stream flows through the camp, and some small willow trees grow by its banks. You don't get a chance to look around further as the ebony beauty elbows you into one of the only two buildings in the camp.", parse);
 		Text.NL();
-		Text.Add("Inside, a large round table dominates the room. Immediately, the map lying on it grabs your attention. Different figurines stand in seemingly random places. Paper is scattered across the map table and the floor, filled by an illegible scrawl. It almost looks like another language. A door to your left opens, and out walks a very peculiar figure.", parse);
+		Text.Add("Inside, a large round table dominates the room. Immediately, the map lying on it grabs your attention. Different figurines stand in seemingly random places. Paper is scattered across the map table and the floor, filled by an illegible scrawl. It almost looks like another language. A door to your left opens, and out walks a very peculiar looking badger-morph.", parse);
 		Text.NL();
-		Text.Add("At first, you can't tell what makes him seem odd. Then it hits you. It looks almost as if all the color in his body has been drained away. His silvery hair doesn't reflect the light, but it looks like it somehow should. The stranger's hair is cut short, and sticks up in odd directions, as if he'd just been sleeping on it. His jawline is well defined, covered with a short stubble the same silvery color as his hair. A scar on his cheek travels diagonally upward toward his temple and it pulls your attention to his eyes. The gray irises fix you with an distrustful stare. They stand out prominently against the black sclera, and his pupils contract to vertical slits for a moment.", parse);
+		Text.Add("It seems that at some point his body tried to figure out which parts of him should be badger and which should be human and simply gave up. His face is mostly human, save for his nose, but small, round furry ears sit atop his head, nestled in a shock of dark black hair. The latter is divided by a single silvery-white stripe, much like that of a badger. A day’s worth of stubble covers his square jaw, and you follow the scar that starts from his chin up to his eyes, pale grey irises that fix themselves upon you distrustfully.", parse);
 		Text.NL();
-		Text.Add("He crosses his arms, and you take notice of his unusual clothing. He wears what appears to be a mix and match of armor types the likes of which haven't seen before. His right arm is completely bare, and a long scar runs down most of it. Both the ring and pinky finger of that hand are missing, leaving the hand looking lopsided.", parse);
+		Text.Add("He wears what appears to be a weird mishmash of armor types, part of a leather hauberk here, cloth padding over there, a few straps and scraps of improvised plating sewn on and holding it all together. A long scar runs down the entirety of his right arm, bare of fur. Both the ring and pinky finger of that hand are missing, leaving the hand looking lopsided, especially with the sharp claws that protrude from his fingertips. A scabbard is affixed to his belt, bearing a sturdy short sword within.", parse);
 		Text.NL();
 		Text.Add("A deep, sonorous bass rumbles from his chest, bringing to mind storm clouds. <i>“Maria. I see you brought a stranger to our camp.”</i> His gaze pinions your feet to the floor and you unconsciously start thinking of excuses for why you entered his territory. Before you can speak, the archer begins explaining her actions.", parse);
 		Text.Flush();
@@ -597,7 +597,7 @@ Scenes.Maria.ForestCamp = function() {
 				Text.Clear();
 				Text.Add("You interrupt the busty archer with a question. Facing down Zenith, you demand he explain why he has agents capturing people in the forest. For a moment, he looks at you in surprise. It quickly passes, however, replaced by a far more intimidating look of annoyance.", parse);
 				Text.NL();
-				Text.Add("He turns to Maria, fixing her with his intense gaze. <i>“I don't. This is an unusual case.”</i> Shrinking back, the bow woman looks at the floor. The monochrome man turns back to you. <i>“As for you in particular? Well... I will let you leave this time.”</i>", parse);
+				Text.Add("He turns to Maria, fixing her with his intense gaze. <i>“I don’t. This is an unusual case.”</i> Shrinking back, the archer looks at the floor. The badger-morph turns back to you. <i>“As for you in particular? Well... I will let you leave this time.”</i>", parse);
 				Text.NL();
 				
 				if(Scenes.Maria.fight == 1 || Scenes.Maria.fight == 2)
@@ -605,7 +605,7 @@ Scenes.Maria.ForestCamp = function() {
 				else if(Scenes.Maria.fight == 3)
 					Text.Add("<i>“Seems there was a bit of a misunderstanding. We bear you no ill will, unless you decide to go against us.”</i> Shaking your head, you let Zenith continue. <i>“Come back later then. I'll have some things to discuss with you. For now, you should head back to wherever you call home.”</i>", parse);
 				else
-					Text.Add("<i>“Since you showed no violence toward myself or my people, you are free to return if you wish. If you need supplies, feel free to speak with Tryss near the entrance to the camp the next time you come around.”</i> As if that settles the entire matter, he shoos you from the room and shuts the door behind you and Maria.", parse);
+					Text.Add("<i>“Since you showed no violence towards myself or my people, you are free to return if you wish.”</i> As if that settles the entire matter, he shoos you from the room and shuts the door behind you and Maria.", parse);
 				
 				maria.relation.DecreaseStat(-100, 5);
 				Text.Flush();
