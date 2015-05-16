@@ -355,7 +355,7 @@ Abilities.Black.Venom.cost = { hp: null, sp: 15, lp: null};
 Abilities.Black.Venom.castTree.push(AbilityNode.Template.Magical({
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("Toxic slime drips from [poss] [hand]s as [heshe] points them toward [tname]. ", parse);
+		Text.Add("Toxic slime drips from [poss] [hand]s as [heshe] point[notS] them toward [tname]. ", parse);
 	}],
 	onMiss: [Abilities.Black._onMiss],
 	onHit: [function(ability, encounter, caster, target) {
