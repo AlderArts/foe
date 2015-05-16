@@ -213,7 +213,7 @@ Abilities.Black.WindShear.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 1.1,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[Poss] [hand]s weave back and forth, summoning a powerful gale of shreaking winds. A frenzy of cutting and slicing air surge toward [tname]! ", parse);
+		Text.Add("[Poss] [hand]s weave back and forth, summoning a powerful gale of shrieking winds. A frenzy of cutting and slicing air surge toward [tname]! ", parse);
 	}],
 	onMiss: [Abilities.Black._onMiss],
 	onDamage: [Abilities.Black._onDamage],
