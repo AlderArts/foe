@@ -1,227 +1,133 @@
 /*
  * 
- * Healing [temp]
+ * Healing
  * 
  */
-//TODO REMOVE
-HealingSpell = function() {
-	this.OnCast       = null;
-	this.TargetEffect = null;
-	this.targetMode   = TargetMode.Ally;
-}
-HealingSpell.prototype = new Ability();
-HealingSpell.prototype.constructor = HealingSpell;
-
-HealingSpell.prototype.CastInternal = function(encounter, caster, target) {
-	var healMod    = this.healMod || 0;
-	var targetMode = this.targetMode || TargetMode.Ally;
-	
-	if(this.OnCast)
-		this.OnCast(encounter, caster, target);
-	
-	var targets;
-	if(targetMode == TargetMode.Party)
-		targets = target.members;
-	else //(targetMode == TargetMode.Ally)
-		targets = [target];
-	
-	for(var i = 0; i < targets.length; i++) {
-		var e      = targets[i];
-		if(e.Incapacitated()) continue;
-
-		var healing = healMod * caster.MAttack();
-		if(healing < 0) healing = 0;
-		healing = Math.floor(healing);
-	
-		target.AddHPAbs(healing);
-		
-		if(this.OnHit) this.OnHit(encounter, caster, e, healing);
-		if(this.TargetEffect) this.TargetEffect(encounter, caster, e);
-	}
-	Text.Flush();
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
-HealingSpell.prototype.CastInternalOOC = function(encounter, caster, target) {
-	var healMod    = this.healMod || 0;
-	var targetMode = this.targetMode || TargetMode.Ally;
-	
-	if(this.OnCast)
-		this.OnCast(encounter, caster, target);
-	
-	var targets;
-	if(targetMode == TargetMode.Party)
-		targets = target.members;
-	else //(targetMode == TargetMode.Ally)
-		targets = [target];
-	
-	for(var i = 0; i < targets.length; i++) {
-		var e      = targets[i];
-
-		var healing = healMod * caster.MAttack();
-		if(healing < 0) healing = 0;
-		healing = Math.floor(healing);
-	
-		target.AddHPAbs(healing);
-		
-		if(this.OnHit) this.OnHit(encounter, caster, e, healing);
-		if(this.TargetEffect) this.TargetEffect(encounter, caster, e);
-	}
-	Text.Flush();
-	Gui.NextPrompt(ShowAbilities);
-}
-// Default messages
-HealingSpell.prototype.OnHit = function(encounter, caster, target, dmg) {
-	if(dmg <= 0) return;
-	var parse = { tName : target.nameDesc() };
-	Text.Add("It heals [tName] for " + Text.BoldColor(dmg, "#008000") + " damage!", parse);
-	Text.NL();
-}
-
-
-
-
-
-
 
 
 Abilities.White = {};
-
-//TODO REPLACE
-Abilities.White.FirstAid = new HealingSpell();
-Abilities.White.FirstAid.name = "First aid";
-Abilities.White.FirstAid.Short = function() { return "Heals minor damage, single target."; }
-Abilities.White.FirstAid.targetMode = TargetMode.Ally;
-Abilities.White.FirstAid.cost = { hp: null, sp: 5, lp: null};
-Abilities.White.FirstAid.healMod = 1;
-Abilities.White.FirstAid.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.NameDesc(), HeShe : caster.HeShe(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hand : caster.HandDesc(), tName : target.nameDesc(), y : caster.plural() ? "y" : "ies", possessive : target.possessive(), skin : target.SkinDesc()
-	}
-	Text.Add("[name] prepare[s] some soothing salves, gently applying it to [possessive] [skin] with [hisher] [hand]s.", parse);
+Abilities.White._onHeal = function(ability, encounter, caster, target, dmg) {
+	if(dmg <= 0) return;
+	var parse = AbilityNode.DefaultParser(caster, target);
+	Text.Add("It heals [tname] for " + Text.BoldColor(dmg, "#008000") + " damage!", parse);
 	Text.NL();
 }
 
 
-//TODO REPLACE
-Abilities.White.Detox = new Ability();
-Abilities.White.Detox.name = "Detox";
+Abilities.White.FirstAid = new Ability("First aid");
+Abilities.White.FirstAid.Short = function() { return "Heals minor damage, single target."; }
+Abilities.White.FirstAid.targetMode = TargetMode.Ally;
+Abilities.White.FirstAid.cost = { hp: null, sp: 5, lp: null};
+Abilities.White.FirstAid.castTree.push(AbilityNode.Template.Heal({
+	atkMod: 1,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		parse["skin"] = target.SkinDesc();
+		Text.Add("[Name] prepare[notS] some soothing salves, gently applying it to [tposs] [skin] with [hisher] [hand]s.", parse);
+		Text.NL();
+	}],
+	onAbsorb: [Abilities.White._onHeal]
+}));
+
+
+Abilities.White.Detox = new Ability("Detox");
 Abilities.White.Detox.Short = function() { return "Heals minor venom, single target."; }
 Abilities.White.Detox.targetMode = TargetMode.Ally;
 Abilities.White.Detox.cost = { hp: null, sp: 10, lp: null};
-Abilities.White.Detox.CastInternal = function(encounter, caster, target) {
-	var parse = { Name : caster.NameDesc(), s : caster.plural() ? "" : "s", tname : target.nameDesc(), Possessive : caster.Possessive(), tPossessive : target.Possessive(), tpossessive : target.possessive()
-	}
+Abilities.White.Detox.castTree.push(function(ability, encounter, caster, target) {
+	var parse = AbilityNode.DefaultParser(caster, target);
 	
 	var venom = target.combatStatus.stats[StatusEffect.Venom];
 	if(venom) {
-		Text.Add("[Name] prepare[s] a purifying spell, purging the venom from [tpossessive] body.", parse);
+		Text.Add("[Name] prepare[notS] a purifying spell, purging the venom from [tposs] body.", parse);
 		venom.str -= 1;
 		if(venom.str <= 0) {
 			Text.NL();
-			Text.Add("[tPossessive] venom has been completely purged!", parse);
+			Text.Add("[tPoss] venom has been completely purged!", parse);
 			target.combatStatus.stats[StatusEffect.Venom] = null;
 		}
 	}
 	else {
-		Text.Add("[Possessive] purifying spell has no effect on [tname].", parse);
+		Text.Add("[Poss] purifying spell has no effect on [tname].", parse);
 	}
-	
-	Text.Flush();
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
+});
 
-//TODO REPLACE
-Abilities.White.Cool = new Ability();
-Abilities.White.Cool.name = "Cool";
+
+Abilities.White.Cool = new Ability("Cool");
 Abilities.White.Cool.Short = function() { return "Heals minor burn, single target."; }
 Abilities.White.Cool.targetMode = TargetMode.Ally;
 Abilities.White.Cool.cost = { hp: null, sp: 10, lp: null};
-Abilities.White.Cool.CastInternal = function(encounter, caster, target) {
-	var parse = { Name : caster.NameDesc(), s : caster.plural() ? "" : "s", tname : target.nameDesc(), Possessive : caster.Possessive(), tPossessive : target.Possessive(), tpossessive : target.possessive()
-	}
+Abilities.White.Cool.castTree.push(function(ability, encounter, caster, target) {
+	var parse = AbilityNode.DefaultParser(caster, target);
 	
 	var burn = target.combatStatus.stats[StatusEffect.Burn];
 	if(burn) {
-		Text.Add("[Name] prepare[s] a soothing spell, easing the burning sensation from [tpossessive] body.", parse);
+		Text.Add("[Name] prepare[notS] a soothing spell, easing the burning sensation from [tposs] body.", parse);
 		burn.str -= 1;
 		if(burn.str <= 0) {
 			Text.NL();
-			Text.Add("[tPossessive] burn has been completely cooled!", parse);
+			Text.Add("[tPoss] burn has been completely cooled!", parse);
 			target.combatStatus.stats[StatusEffect.Burn] = null;
 		}
 	}
 	else {
-		Text.Add("[Possessive] cooling spell has no effect on [tname].", parse);
+		Text.Add("[Poss] cooling spell has no effect on [tname].", parse);
 	}
-	
-	Text.Flush();
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
+});
 
-//TODO REPLACE
-Abilities.White.Warm = new Ability();
-Abilities.White.Warm.name = "Warm";
+
+Abilities.White.Warm = new Ability("Warm");
 Abilities.White.Warm.Short = function() { return "Heals minor freeze, single target."; }
 Abilities.White.Warm.targetMode = TargetMode.Ally;
 Abilities.White.Warm.cost = { hp: null, sp: 10, lp: null};
-Abilities.White.Warm.CastInternal = function(encounter, caster, target) {
-	var parse = { Name : caster.NameDesc(), s : caster.plural() ? "" : "s", tname : target.nameDesc(), Possessive : caster.Possessive(), tPossessive : target.Possessive(), tpossessive : target.possessive()
-	}
+Abilities.White.Warm.castTree.push(function(ability, encounter, caster, target) {
+	var parse = AbilityNode.DefaultParser(caster, target);
 	
 	var freeze = target.combatStatus.stats[StatusEffect.Freeze];
 	if(freeze) {
-		Text.Add("[Name] prepare[s] a warming spell, heating up [tpossessive] frozen body.", parse);
+		Text.Add("[Name] prepare[notS] a warming spell, heating up [tposs] frozen body.", parse);
 		freeze.str -= 1;
 		if(freeze.str <= 0) {
 			Text.NL();
-			Text.Add("[tPossessive] freeze has been completely removed!", parse);
+			Text.Add("[tPoss] freeze has been completely removed!", parse);
 			target.combatStatus.stats[StatusEffect.Freeze] = null;
 		}
 	}
 	else {
-		Text.Add("[Possessive] warming spell has no effect on [tname].", parse);
+		Text.Add("[Poss] warming spell has no effect on [tname].", parse);
 	}
-	
-	Text.Flush();
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
+});
 
 
-//TODO REPLACE
-Abilities.White.Heal = new HealingSpell();
-Abilities.White.Heal.name = "Heal";
+Abilities.White.Heal = new Ability("Heal");
 Abilities.White.Heal.Short = function() { return "Heals some damage, single target."; }
 Abilities.White.Heal.targetMode = TargetMode.Ally;
 Abilities.White.Heal.cost = { hp: null, sp: 10, lp: null};
-Abilities.White.Heal.healMod = 1.5;
-Abilities.White.Heal.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.NameDesc(), HeShe : caster.HeShe(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hand : caster.HandDesc(), tName : target.nameDesc(), y : caster.plural() ? "y" : "ies"
-	}
-	Text.Add("[name] read[y] a healing spell, forming a sphere of soothing white magic between [hisher] [hand]s. [HeShe] cast[s] the enchantment on [tName]", parse);
-	Text.NL();
-}
+Abilities.White.Heal.castTree.push(AbilityNode.Template.Heal({
+	atkMod: 1.5,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] read[y] a healing spell, forming a sphere of soothing white magic between [hisher] [hand]s. [HeShe] cast[notS] the enchantment on [tname]", parse);
+		Text.NL();
+	}],
+	onAbsorb: [Abilities.White._onHeal]
+}));
 
 
-//TODO REPLACE
-Abilities.White.Recover = new HealingSpell();
-Abilities.White.Recover.name = "Recover";
+Abilities.White.Recover = new Ability("Recover");
 Abilities.White.Recover.Short = function() { return "Heals moderate damage, single target."; }
 Abilities.White.Recover.targetMode = TargetMode.Ally;
 Abilities.White.Recover.cost = { hp: null, sp: 30, lp: null};
-Abilities.White.Recover.healMod = 2;
-Abilities.White.Recover.OnCast = function(encounter, caster, target) {
-	var parse = { name : caster.NameDesc(), HeShe : caster.HeShe(), hisher : caster.hisher(), s : caster.plural() ? "" : "s", hand : caster.HandDesc(), tName : target.nameDesc(), y : caster.plural() ? "y" : "ies"
-	}
-	Text.Add("[name] read[y] a powerful healing spell, forming a glowing sphere of soothing white magic between [hisher] [hand]s. [HeShe] cast[s] the enchantment on [tName]", parse);
-	Text.NL();
-}
+Abilities.White.Recover.castTree.push(AbilityNode.Template.Heal({
+	atkMod: 2,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] read[y] a powerful healing spell, forming a glowing sphere of soothing white magic between [hisher] [hand]s. [HeShe] cast[notS] the enchantment on [tname]", parse);
+		Text.NL();
+	}],
+	onAbsorb: [Abilities.White._onHeal]
+}));
+
 
 
 // TODO: Flavor text, status effects

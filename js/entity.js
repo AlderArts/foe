@@ -850,6 +850,10 @@ Entity.prototype.PhysDmgHP = function(encounter, caster, val) {
 		possessive : this.possessive()
 	};
 	var ent = this;
+	
+	//Healing
+	if(val >= 0) return true;
+	
 	// Check for sleep
 	if(this.combatStatus.stats[StatusEffect.Sleep] != null) {
 		this.combatStatus.stats[StatusEffect.Sleep] = null;

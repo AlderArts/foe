@@ -126,6 +126,24 @@ AbilityNode.Template.Lust = function(node) {
 	
 	return _.bind(AbilityNode.Run, node);
 }
+AbilityNode.Template.Heal = function(node) {
+	var node = node || {};
+	/*
+	node.hitFallen = node.hitFallen;
+	node.retarget  = node.retarget;
+	*/
+	node.toHit     = _.has(node, 'toHit')    ? node.toHit    : null;
+	node.toDamage  = _.has(node, 'toDamage') ? node.toDamage : AbilityNode.ToDamage.Heal;
+	/*
+	node.hitFunc   = node.hitFunc;
+	node.evadeFunc = node.evadeFunc;
+	node.defFunc   = node.defFunc;
+	*/
+	node.atkFunc   = node.atkFunc || AbilityNode.AtkFunc.Magical;
+	node.damageFunc = node.damageFunc || AbilityNode.DamageFunc.Physical;
+	
+	return _.bind(AbilityNode.Run, node);
+}
 AbilityNode.Template.Fallthrough = function(node) {
 	var node = node || {};
 
