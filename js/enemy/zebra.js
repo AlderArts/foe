@@ -440,7 +440,7 @@ Scenes.ZebraShaman.OnWinVaginal = function(enc) {
 		Text.Add("The shaman pulls away from the kiss and throws his head back, letting out a loud snort as the tip of his member flares up and sends wave after wave of potent seed flooding into your well-used hole. The amount of spunk he pours into you is far greater than what you can handle, and most of it ends up spraying back out. His orgasm sets off your own, sending your mind into a whirlwind of pleasure as your [vag] clamps down once more, this time making sure to get the spunk it needs.", parse);
 		Text.NL();
 		if(player.FirstCock()) {
-			Text.Add("Just when you thought it couldn't get any better, the shaman surprises you by grabbing[oneof] your [cocks] and starting to pump it furiously, making you shoot several strands of seed into the air which splatter across your [breasts] and face, mixing with the the fluids he covered you in earlier.", parse);
+			Text.Add("Just when you thought it couldn't get any better, the shaman surprises you by grabbing[oneof] your [cocks] and starting to pump it furiously, making you shoot several strands of seed into the air which splatter across your [breasts] and face, mixing with the fluids he covered you in earlier.", parse);
 			Text.NL();
 		}
 		Text.Add("When the shaman's orgasm finally comes to an end, he collapses onto his back. His equine member follows suit, exiting your abused [vag] with a loud pop. You take a few moments to lay there and catch your breath, staring up at the clouds and basking in the sunlight. That was one hell of a fuck, you think to yourself; you’ll probably be walking funny for a while.", parse);
