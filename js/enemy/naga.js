@@ -846,7 +846,7 @@ Scenes.Naga.DesertWinFuckJerk = function(enc, hypno) {
 	Text.Add("You present the naga with your[biggest] cock, holding it in front of her gaping mouth. You tell her to finish getting you hard, and quickly[hypno1]. <i>“Yes, [master]![hypno2]”</i> she replies [hypno3], hungrily diving on her appetizer.", parse);
 	Text.NL();
 	parse["hypno"] = hypno ? ", clouded" : "";
-	Text.Add("The naga eagerly wraps your cock’s head first in her tongue, then with her mouth, her lips closing around the the bottom of your [cockTip]. She begins to suck vigorously, her lusty[hypno] eyes locked to your gaze as she coaxes your shaft to become more and more rigid. Her tongue plays over the surface of your member as she slides her lips lower, wrapping more of your length in her mouth’s delightful warmth and moisture.", parse);
+	Text.Add("The naga eagerly wraps your cock’s head first in her tongue, then with her mouth, her lips closing around the bottom of your [cockTip]. She begins to suck vigorously, her lusty[hypno] eyes locked to your gaze as she coaxes your shaft to become more and more rigid. Her tongue plays over the surface of your member as she slides her lips lower, wrapping more of your length in her mouth’s delightful warmth and moisture.", parse);
 	Text.NL();
 	if(p1cock.Len() <= 13)
 		Text.Add("Before you know it, the scaly slut takes the entirety of your [cockDesc] into her organic vacuum of a mouth, its insides hot and soft around your member. The suction on your prick intensifies, and she begins to bob her head up and down, blowing you slowly but fiercely. The air is filled with wet slurps and gulps as pre starts to leak from your [cockTip], only to be swallowed almost immediately.", parse);
