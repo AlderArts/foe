@@ -135,37 +135,20 @@ Abilities.Seduction.Confuse.castTree.push(function(ability, encounter, caster, t
 });
 
 
-//TODO REPLACE
-Abilities.Seduction.Rut = new Ability();
-Abilities.Seduction.Rut.name = "Rut";
+Abilities.Seduction.Rut = new Ability("Rut");
 Abilities.Seduction.Rut.Short = function() { return "Hump away at target, dealing damage."; }
 Abilities.Seduction.Rut.cost = { hp: null, sp: null, lp: 10};
-Abilities.Seduction.Rut.CastInternal = function(encounter, caster, target) {
-	var atkDmg = caster.LAttack();
-	var def = target.LDefense();
+Abilities.Seduction.Rut.castTree.push(AbilityNode.Template.Lust({
+	damageFunc: AbilityNode.DamageFunc.Physical,
+	damageType: {pBlunt: 0.2, lust: 0.8},
+	onDamage: [function(ability, encounter, caster, target, dmg) {
+		target.AddLustAbs(-dmg*0.25);
+	}, function(ability, encounter, caster, target, dmg) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] ruts against [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage! Sexy!", parse);
+	}]
+}));
 
-	var dmg = Ability.Damage(atkDmg, def, caster.level, target.level);
-	if(dmg < 0) dmg = 0;
-	var atkType = new DamageType({pBlunt : 0.2, lust : 0.8});
-	dmg = atkType.ApplyDmgType(target.elementDef, dmg);
-	dmg = Math.floor(dmg);
-			
-	target.AddHPAbs(-dmg);
-	target.AddLustAbs(dmg*0.25);
-	
-	var parse = {
-		name : caster.NameDesc(),
-		tName : target.nameDesc()
-	}
-
-	// TODO: Make more flavor text	
-	Text.Add("[name] ruts against [tName] for " + Text.BoldColor(dmg, "#800000") + " damage! Sexy!", parse);
-	Text.Flush();
-	
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
 
 //TODO Tweak
 Abilities.Seduction.Fantasize = new Ability("Fantasize");
@@ -186,98 +169,61 @@ Abilities.Seduction.Fantasize.castTree.push(function(ability, encounter, caster)
 });
 
 
-//TODO REPLACE
-Abilities.Seduction.Soothe = new Ability();
-Abilities.Seduction.Soothe.name = "Soothe";
+Abilities.Seduction.Soothe = new Ability("Soothe");
 Abilities.Seduction.Soothe.cost = { hp: null, sp: 20, lp: null};
 Abilities.Seduction.Soothe.Short = function() { return "Calm the wayward thoughts of your allies with the gentle touch of your voice."; }
 Abilities.Seduction.Soothe.targetMode = TargetMode.Party;
-Abilities.Seduction.Soothe.CastInternal = function(encounter, caster, target) {
+Abilities.Seduction.Soothe.castTree.push(function(ability, encounter, caster, target) {
 	var targets = target.members;
 	
-	this.OnCast(encounter, caster, targets);
+	var group = targets.length > 1;
+	var parse = {
+		Poss: caster.Possessive(),
+		their: group ? "their" : caster.hisher(),
+		himher: group ? caster.hisher() + ' party' : caster.himher()
+	};
+	Text.Add("[Poss] gentle voice washes over [himher], calming [their] desires.", parse);
 	
-	for(var i = 0; i < targets.length; i++) {
-		var e = targets[i];
-		if(e.Incapacitated()) continue;
+	_.each(targets, function(e) {
+		if(e.Incapacitated()) return;
 		
 		var mult = 1 + (Math.random()-0.5)*0.2;
-		var soothe = caster.Spi() * 3;
+		var soothe = Math.floor(caster.Spi() * 3 * mult);
 		
 		e.AddLustAbs(-soothe);
 		
-		this.OnHit(encounter, caster, e, soothe);
-	}
-	
-	Text.Flush();
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
+		var parse = AbilityNode.DefaultParser(null, e);
+		Text.NL();
+		Text.Add("The music washes over [tposs] mind, leaving [thimher] feeling clean and pristine. [tName] lose[tnotS] " + Text.BoldColor(soothe, "#000060") + " lust!", parse);
 	});
-}
-Abilities.Seduction.Soothe.OnCast = function(encounter, caster, targets) {
-	var group = targets.length > 1;
-	var parse = { Poss: caster.Possessive(), their: group ? "their" : caster.hisher(), himher: group ? caster.hisher() + ' party' : caster.himher() };
-	Text.Add("[Poss] gentle voice washes over [himher], calming [their] desires.", parse);
-}
-Abilities.Seduction.Soothe.OnHit = function(encounter, caster, target, dmg) {
-	var parse = { tposs: target.possessive(), thimher: target.himher(), tName : target.NameDesc(), s: target.plural() ? "" : "s" };
-	Text.NL();
-	Text.Add("The music washes over [tposs] mind, leaving [thimher] feeling clean and pristine. [tName] lose[s] " + Text.BoldColor(dmg, "#000060") + " lust!", parse);
-}
+});
 
 
-//TODO REPLACE
-Abilities.Seduction.Captivate = new Ability();
-Abilities.Seduction.Captivate.name = "Captivate";
+Abilities.Seduction.Captivate = new Ability("Captivate");
 Abilities.Seduction.Captivate.cost = { hp: null, sp: null, lp: 40};
 Abilities.Seduction.Captivate.Short = function() { return "Attempt to immobilize and slow a foe with a captivating song. Success rate dependent on your charisma and the target’s lust. If it fails, the target is nevertheless slowed."; }
-Abilities.Seduction.Captivate.CastInternal = function(encounter, caster, target) {
-	this.OnCast(encounter, caster, target)
-	
-	var hit    = caster.LHit();
-	var evade  = target.LEvade();
-	var toHit  = Ability.ToHit(hit, evade);
-	
-	var success = Math.random() < toHit;
-	if(success)
-		success = Status.Numb(target, { hit : 0.8, turns : 2, proc : 1 });
-	
-	if(success)
-		this.OnHit(encounter, caster, target);
-	else
-		this.OnMiss(encounter, caster, target);
-	
-	Status.Slow(target, { hit : 0.6, factor : 2, turns : 3, turnsR : 3 });
-	
-	Text.Flush();
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
+Abilities.Seduction.Captivate._onMiss = function(ability, encounter, caster, target) {
+	var parse = AbilityNode.DefaultParser(caster, target);
+	Text.Add("[tName] manage[tnotS] to resist the brunt of the mesmerizing melody, but still finds [thisher] movements slowed.", parse);
 }
-Abilities.Seduction.Captivate.OnCast = function(encounter, caster, target) {
-	var parse = {
-		tname: target.nameDesc(),
-		name: caster.nameDesc(),
-		s: caster.plural() ? "" : "s",
-		hisher: caster.hisher()
-	};
-	Text.Add("Fixing [tname] with a piercing gaze, [name] begin[s] singing, [hisher] song’s captivating undertones ringing through the air. ", parse);
-}
-Abilities.Seduction.Captivate.OnHit = function(encounter, caster, target) {
-	var parse = {
-		tName: target.NameDesc(),
-		poss: caster.possessive()
-	};
-	Text.Add("[tName] is utterly entranced by [poss] song and is slowed to a stop, completely immobilized.", parse);
-}
-Abilities.Seduction.Captivate.OnMiss = function(encounter, caster, target) {
-	var parse = {
-		tName: target.NameDesc(),
-		s: target.plural() ? "" : "s",
-		thisher: target.hisher()
-	};
-	Text.Add("[tName] manage[s] to resist the brunt of the mesmerizing melody, but still finds [thisher] movements slowed.", parse);
-}
+Abilities.Seduction.Captivate.castTree.push(AbilityNode.Template.Lust({
+	toDamage: null,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("Fixing [tname] with a piercing gaze, [name] begin[notS] singing, [hisher] song’s captivating undertones ringing through the air. ", parse);
+		Status.Slow(target, { hit : 0.6, factor : 2, turns : 3, turnsR : 3 });
+	}],
+	onHit: [function(ability, encounter, caster, target) {
+		if(Status.Numb(target, { hit : 0.8, turns : 2, proc : 1 })) {
+			var parse = AbilityNode.DefaultParser(caster, target);
+			Text.Add("[tName] is utterly entranced by [poss] song and is slowed to a stop, completely immobilized.", parse);
+		}
+		else
+			Abilities.Seduction.Captivate._onMiss(ability, encounter, caster, target);
+	}],
+	onMiss: [Abilities.Seduction.Captivate._onMiss]
+}));
+
 
 
 //TODO Tweak
