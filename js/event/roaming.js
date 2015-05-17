@@ -346,7 +346,7 @@ Scenes.Roaming.Bandits = function() {
 	
 	var scenes = new EncounterTable();
 	scenes.AddEnc(function() {
-		Text.Add("the the lay of the land around the local farms, and which farmers have been doing the best.", parse);
+		Text.Add("the lay of the land around the local farms, and which farmers have been doing the best.", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
 		Text.Add("which marinade is best for mutton, and whether they can get their hands on some lemons around here.", parse);
@@ -411,7 +411,7 @@ Scenes.Roaming.Bandits = function() {
 			if(party.Num() == 2)
 				Text.Add("[name] shadowing your steps, you", {name: party.Get(1).name});
 			else if(party.Num() > 2)
-				Text.Add("You companions a step behind you, you", parse);
+				Text.Add("Your companions a step behind you, you", parse);
 			else
 				Text.Add("You", parse);
 			Text.Add(" give the door a hard kick, sending it screeching open on rusted hinges. As [num] startled faces look up at you from around the table, you step inside, readying yourself for combat.", parse);
