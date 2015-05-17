@@ -59,7 +59,7 @@ Scenes.Rigard.ArmorShop.CreateShop = function() {
 			scenes.AddEnc(function() { Text.Add("<i>“That’s a very fine [item] you’ve picked out there, [sirmadam]. Used to belong to a little old lady, hardly ever used, she only put it on during weekends to watch her son in the city watch parades.”</i> Donovan rubs his paws together. <i>“[Coin] coins, and it’s yours.”</i>", parse); });
 			scenes.AddEnc(function() { Text.Add("<i>“You’re thinking of making this [item] your very own, [sirmadam]? Can’t recommend this one enough - last owner had a sudden identity crisis and went off to be a cat or bat or rat or something. Whatever they ended up as, it didn’t fit him any more. Or her. Or it. You get the point.  Anyway, it’ll be [coin] coins if you want it.”</i>", parse); });
 			scenes.AddEnc(function() { Text.Add("<i>“Oh, you have a good eye there. This [item] here’s City Watch surplus, seems like they didn’t have that many recruits in that size last year. You want to make it yours? [Coin] coins. Trust me, you won’t regret it.”</i>", parse); });
-			scenes.AddEnc(function() { Text.Add("<i>“Excellent specimen of [item] you’ve got there, vintage - no, antique, even. I’d rather not call it battered; it’s got <b>character</b>, and that’s the important thing. Stood the the test of time, it has, and it can be yours for only [coin] coins.”</i>", parse); });
+			scenes.AddEnc(function() { Text.Add("<i>“Excellent specimen of [item] you’ve got there, vintage - no, antique, even. I’d rather not call it battered; it’s got <b>character</b>, and that’s the important thing. Stood the test of time, it has, and it can be yours for only [coin] coins.”</i>", parse); });
 			scenes.Get();
 			
 			Text.NL();
