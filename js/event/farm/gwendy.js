@@ -1788,7 +1788,7 @@ Scenes.Gwendy.ChallengeSexAnal = function(toys, hangout) {
 		if(gwendy.FirstCock())
 			Text.Add(" As you massage and prep her entrance, you mash against her prostate, causing her already rigid member to bounce up and down listlessly. You swear, she even begins dripping pre from the stimulation. What a buttslut!", parse);
 		Text.NL();
-		Text.Add("When you have her warmed up, you replace the fingers with you [cockDesc], pushing into her warm depths in one swift motion. Pausing for a moment, you let the gasping farm girl adjust, allowing her muscles to become acquainted with your shape before you start fucking her in earnest.", parse);
+		Text.Add("When you have her warmed up, you replace the fingers with your [cockDesc], pushing into her warm depths in one swift motion. Pausing for a moment, you let the gasping farm girl adjust, allowing her muscles to become acquainted with your shape before you start fucking her in earnest.", parse);
 		Text.NL();
 		
 		Sex.Anal(player, gwendy);
