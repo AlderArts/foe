@@ -1216,7 +1216,7 @@ Scenes.Ophelia.SexVaginal = function() {
 				Text.NL();
 				Text.Add("<i>“Y-Yeah. But you should probably pull out. Let some pressure out,”</i> she says with a groan.", parse);
 				Text.NL();
-				Text.Add("It’s not easy; despite Ophelia’s words, her cunt has a death grip on you cock. But finally you manage to pop yourself free, like a perverse cork from a bottle of champagne. A mental image strengthened by the rivers of white near-froth that come spilling from her gaping hole.", parse);
+				Text.Add("It’s not easy; despite Ophelia’s words, her cunt has a death grip on your cock. But finally you manage to pop yourself free, like a perverse cork from a bottle of champagne. A mental image strengthened by the rivers of white near-froth that come spilling from her gaping hole.", parse);
 				Text.NL();
 				Text.Add("Ophelia sighs hugely in relief, toes wriggling as the pressure starts to ease.", parse);
 			}
