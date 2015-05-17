@@ -726,7 +726,15 @@ Scenes.Naga.DesertWinPrompt2 = function(enc, hypno) {
 		tooltip : ""
 	});
 	 */
-	if(Naga.HypnoUnlocked()) {
+	if(Jobs.Hypnotist.Master(player)) {
+		options.push({ nameStr : "Hypnotize",
+			func : function() {
+				Scenes.Naga.DesertWinHypnotizeOwn(enc);
+			}, enabled : !hypno,
+			tooltip : "Several times during the battle, you’ve caught a familiar glint in the naga’s eyes. Wouldn’t it be fun to show this creature what a true hypnotist can do?"
+		});
+	}
+	else if(Naga.HypnoUnlocked()) {
 		options.push({ nameStr : "Hypnotize",
 			func : function() {
 				Scenes.Naga.DesertWinHypnotize(enc);
@@ -792,6 +800,27 @@ Scenes.Naga.DesertWinHypnotize = function(enc) {
 	Scenes.Naga.DesertWinPrompt2(enc, true);
 }
 
+Scenes.Naga.DesertWinHypnotizeOwn = function(enc) {
+	var naga = enc.naga;
+	
+	var parse = {
+		master : player.mfFem("master", "mistress")
+	};
+	
+	Text.Clear();
+	Text.Add("Powerful? She doesn’t know half of it. You motion for her to raise her head and look into your eyes. The naga catches her breath in surprise as she’s caught up in your hypnotizing gaze; her own power turned against her. Her eyelids flutter drowsily as she feebly tries to resist you, but after a momentary struggle, she’s yours. The naga’s breathing becomes heavy as you pour all your lust-inducing power into her, making her the sex-slave she wished to make you.", parse);
+	Text.NL();
+	Text.Add("You chuckle in satisfaction as you step back, the naga’s eyes now completely lust-crazed and devoid of disobedience. Her chest is heaving, her entire body aching for pleasure, wishing to become your tool to use. <i>“H-how may I serve you, [master]?”</i> she stammers, awkwardly reaching for the rock hard cocks poking out of her genital slit, unable to contain her lust.", parse);
+	Text.NL();
+	Text.Add("Much better. Now, how should you make your toy pleasure you?", parse);
+	Text.Flush();
+	
+	player.subDom.IncreaseStat(75, 1);
+	
+	world.TimeStep({minute : 5});
+	
+	Scenes.Naga.DesertWinPrompt2(enc, true);
+}
 
 Scenes.Naga.DesertWinFuckJerk = function(enc, hypno) {
 	var naga = enc.naga;
