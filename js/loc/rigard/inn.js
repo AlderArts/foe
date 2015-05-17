@@ -692,7 +692,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 				Text.NL();
 				Text.Add("<i>“I don’t rightly know, to be honest,”</i> he tells you, <i>“the king has proclaimed that they are a serious and imminent threat. He is gathering forces, and the nobles are gearing up as well. What’s actually going on is harder to tell.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“Rumors are flying. Some say that the the outlaws are nothing more than a small band of poachers, and the king is simply using them as an excuse to raise taxes. Others, that their encampment is double the size of Rigard, and that they have thoroughly infiltrated the city. Still others, that they are dragons come back from the dead, wearing the skins of men, out for revenge.”</i> A deep laugh rumbles from him at the notion.", parse);
+				Text.Add("<i>“Rumors are flying. Some say that the outlaws are nothing more than a small band of poachers, and the king is simply using them as an excuse to raise taxes. Others, that their encampment is double the size of Rigard, and that they have thoroughly infiltrated the city. Still others, that they are dragons come back from the dead, wearing the skins of men, out for revenge.”</i> A deep laugh rumbles from him at the notion.", parse);
 				Text.NL();
 				Text.Add("<i>“What the reality of the situation is no one seems to know. But I expect we’ll find out soon enough,”</i> he concludes, looking grim.", parse);
 				Text.Flush();
@@ -705,7 +705,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 				Text.Clear();
 				Text.Add("You ask Orvin what the royal guards are doing.", parse);
 				Text.NL();
-				Text.Add("<i>“The royal guards have always been just that - royal. Their place is supposed to be by the king and in his pavillion. Technically, that is the extent of their jurisdiction. Lately, however, they have become more and more full of themselves,”</i> he tells you, frowning.", parse);
+				Text.Add("<i>“The royal guards have always been just that - royal. Their place is supposed to be by the king and in his pavilion. Technically, that is the extent of their jurisdiction. Lately, however, they have become more and more full of themselves,”</i> he tells you, frowning.", parse);
 				Text.NL();
 				Text.Add("<i>“It’s the new commander they got a couple years ago - it seems like he forgets the ‘guard’ part of ‘royal guard’ half the time. He’s the second son of the one of the ministers. Seems to think that blood is what makes a man, maybe because it’s the only thing he has going for him.”</i> You’re not sure why, but Orvin looks angrier than you would’ve expected.", parse);
 				Text.NL();
