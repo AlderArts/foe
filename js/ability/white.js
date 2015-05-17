@@ -307,7 +307,7 @@ Abilities.White.Sermon.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mVoid: 1},
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster);
-		Text.Add("[Name] start[notS] proselytizing to the enemy party. [HeShe] somehow manage[notS] to sound extremely condensending, but immensly boring at the same time!", parse);
+		Text.Add("[Name] start[notS] proselytizing to the enemy party. Somehow, [heshe] manage[notS] to sound extremely condescending and immensly boring at the same time!", parse);
 		Text.NL();
 	}],
 	onDamage: [function(ability, encounter, caster, target, dmg) {
