@@ -1267,7 +1267,7 @@ Scenes.Gwendy.ChallengeSexBody = function(titjob, hangout, disableSleep) {
 		Text.NL();
 		Text.Add("The curvy farmer tries to stifle a moan, but with a sharp slap on her butt from your free hand, she lets it out, her hips moving of their own accord as your fingers thrust within her. Just as you wanted it: Gwendy, aroused beyond words or thoughts, and you in control.", parse);
 		Text.NL();
-		Text.Add("But, keeping to your internal promise, you only do this to tease her. After a few moments, you stop moving your fingers, but leave them in and settle on lightly spanking Gwendy. Based on the the clenching felt around your fingers, she's getting a bit too close to orgasm, so you withdraw your hand altogether.", parse);
+		Text.Add("But, keeping to your internal promise, you only do this to tease her. After a few moments, you stop moving your fingers, but leave them in and settle on lightly spanking Gwendy. Based on the clenching felt around your fingers, she's getting a bit too close to orgasm, so you withdraw your hand altogether.", parse);
 		Text.NL();
 		
 		world.TimeStep({minute: 30});
