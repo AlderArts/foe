@@ -145,7 +145,7 @@ Abilities.Seduction.Rut.castTree.push(AbilityNode.Template.Lust({
 		target.AddLustAbs(-dmg*0.25);
 	}, function(ability, encounter, caster, target, dmg) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[Name] ruts against [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage! Sexy!", parse);
+		Text.Add("[Name] rut[notS] against [tname] for " + Text.BoldColor(-dmg, "#800000") + " damage! Sexy!", parse);
 	}]
 }));
 
