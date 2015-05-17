@@ -241,137 +241,80 @@ Abilities.White.Empower.CastInternal = function(encounter, caster, target) {
 }
 
 
-//TODO REPLACE
-Abilities.White.Tirade = new Ability();
+Abilities.White.Tirade = new Ability("Tirade");
 Abilities.White.Tirade.name = "Tirade";
 Abilities.White.Tirade.Short = function() { return "Attempt to bore the enemy with meaningless drivel. Drain enemy SP."; }
-Abilities.White.Tirade.targetMode = TargetMode.Enemy;
 Abilities.White.Tirade.cost = { hp: null, sp: 10, lp: null};
-Abilities.White.Tirade.CastInternal = function(encounter, caster, target) {
-	var drain = caster.MAttack() / 3;
-	if(drain < 0) drain = 0;
-	drain = Math.floor(drain);
-	
-	var def   = target.MDefense();
-	
-	//var dmg = atkDmg - def;
-	var dmg = Ability.Damage(drain, def, caster.level, target.level);
-	if(dmg < 0) dmg = 0;
-	dmg = Math.floor(dmg);
-
-	var parse = {
-		name  : caster.NameDesc(),
-		s     : caster.plural() ? "" : "s",
-		s2    : target.plural() ? "" : "s",
-		tName : target.nameDesc(),
-		heshe : target.heshe()
-	}
-
-	if(Math.random() < 0.5) {
-		target.AddSPAbs(-dmg);
-		
-		Text.Add("[name] start[s] rambling about petty things in an attempt to distract [tName]. It seems to be working, [heshe] look[s] slightly annoyed! [name] drain[s] " + Text.BoldColor(dmg, "#000080") + " SP from [tName]!", parse);
-	}
-	else {
-		Text.Add("[name] start[s] rambling about petty things, but [tName] doesn't look very impressed!", parse);
-	}
-	Text.Flush();
-	
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
+Abilities.White.Tirade.cooldown = 1;
+Abilities.White.Tirade._onMiss = function(ability, encounter, caster, target) {
+	var parse = AbilityNode.DefaultParser(null, target);
+	Text.Add(", but [tname] [tis]n't very impressed!", parse);
 }
+Abilities.White.Tirade.castTree.push(AbilityNode.Template.Magical({
+	hitMod: 0.7,
+	atkMod: 0.5,
+	damageFunc: AbilityNode.DamageFunc.Magical,
+	damageType: {mVoid: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster);
+		Text.Add("[Name] start[notS] rambling about petty things", parse);
+	}],
+	onDamage: [function(ability, encounter, caster, target, dmg) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add(" in an attempt to distract [tname]. It seems to be working, [theshe] look[tnotS] slightly annoyed! [Name] drain[notS] " + Text.BoldColor(-dmg, "#000080") + " SP from [tname]!", parse);
+	}],
+	onAbsorb: [Abilities.White.Tirade._onMiss],
+	onMiss: [Abilities.White.Tirade._onMiss]
+}));
 
 
-//TODO REPLACE
-Abilities.White.Preach = new Ability();
-Abilities.White.Preach.name = "Preach";
+Abilities.White.Preach = new Ability("Preach");
 Abilities.White.Preach.Short = function() { return "Attempt to bore the enemy with pompous religious drivel. Drain enemy SP."; }
-Abilities.White.Preach.targetMode = TargetMode.Enemy;
-Abilities.White.Preach.cost = { hp: null, sp: 30, lp: null};
-Abilities.White.Preach.CastInternal = function(encounter, caster, target) {
-	var drain = caster.MAttack() / 2;
-	if(drain < 0) drain = 0;
-	drain = Math.floor(drain);
-	
-	var def   = target.MDefense();
-	
-	//var dmg = atkDmg - def;
-	var dmg = Ability.Damage(drain, def, caster.level, target.level);
-	if(dmg < 0) dmg = 0;
-	dmg = Math.floor(dmg);
-
-	var parse = {
-		name  : caster.NameDesc(),
-		s     : caster.plural() ? "" : "s",
-		s2    : target.plural() ? "" : "s",
-		tName : target.nameDesc(),
-		heshe : target.heshe()
-	}
-
-	if(Math.random() < 0.75) {
-		target.AddSPAbs(-dmg);
-		
-		Text.Add("[name] start[s] preaching to [tName]. It seems to be working, [heshe] look[s2] slightly drowsy! [name] drain[s] " + Text.BoldColor(dmg, "#000080") + " SP from [tName]!", parse);
-	}
-	else {
-		Text.Add("[name] start[s] preaching, but [tName] doesn't look very impressed!", parse);
-	}
-	Text.Flush();
-	
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
+Abilities.White.Preach.cost = { hp: null, sp: 20, lp: null};
+Abilities.White.Preach.cooldown = 2;
+Abilities.White.Preach._onMiss = function(ability, encounter, caster, target) {
+	var parse = AbilityNode.DefaultParser(null, target);
+	Text.Add("However, [tname] [tis]n't very impressed!", parse);
+	Text.NL();
 }
+Abilities.White.Preach.castTree.push(AbilityNode.Template.Magical({
+	hitMod: 1,
+	damageFunc: AbilityNode.DamageFunc.Magical,
+	damageType: {mVoid: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] start[notS] preaching to [tname]. ", parse);
+		Text.NL();
+	}],
+	onDamage: [function(ability, encounter, caster, target, dmg) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("It seems to be working, [tname] look[tnotS] slightly annoyed! [Name] drain[notS] " + Text.BoldColor(-dmg, "#000080") + " SP from [tname]!", parse);
+		Text.NL();
+	}],
+	onAbsorb: [Abilities.White.Preach._onMiss],
+	onMiss: [Abilities.White.Preach._onMiss]
+}));
 
 
-//TODO REPLACE
-Abilities.White.Sermon = new Ability();
-Abilities.White.Sermon.name = "Sermon";
+Abilities.White.Sermon = new Ability("Sermon");
 Abilities.White.Sermon.Short = function() { return "Attempt to bore the enemy party with religious proselytizing. Drain enemy SP."; }
 Abilities.White.Sermon.targetMode = TargetMode.Enemies;
-Abilities.White.Sermon.cost = { hp: null, sp: 70, lp: null};
-Abilities.White.Sermon.CastInternal = function(encounter, caster, target) {
-	var drain = caster.MAttack();
-	if(drain < 0) drain = 0;
-	drain = Math.floor(drain);
-	
-	var parse = {
-		name  : caster.NameDesc(),
-		s     : caster.plural() ? "" : "s",
-		HeShe : caster.HeShe()
-	}
-	
-	Text.Add("[name] start[s] proselytizing to the enemy party. [HeShe] somehow manage[s] to sound extremely condensending, but immensly boring at the same time!", parse);
-
-	for(var i = 0; i < target.length; i++) {
-		var e = target[i];
-		
-		parse["s2"] = e.plural() ? "" : "s";
-		parse["tName"] = e.nameDesc();
-		parse["heshe"] = e.heshe();
-		
-		var def   = e.MDefense();
-	
-		//var dmg = atkDmg - def;
-		var dmg = Ability.Damage(drain, def, caster.level, e.level);
-		if(dmg < 0) dmg = 0;
-		dmg = Math.floor(dmg);
-	
-		if(Math.random() < 0.75) {
-			e.AddSPAbs(-dmg);
-			
-			Text.Add(" It seems to be working, [tName] look[s2] slightly annoyed! [name] drain[s] " + Text.BoldColor(dmg, "#000080") + " SP from [tName]!", parse);
-		}
-		else {
-			Text.Add(" However, [tName] doesn't look very impressed!", parse);
-		}
-	}
-	
-	Text.Flush();
-	
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
-
+Abilities.White.Sermon.cost = { hp: null, sp: 50, lp: null};
+Abilities.White.Sermon.cooldown = 3;
+Abilities.White.Sermon.castTree.push(AbilityNode.Template.Magical({
+	hitMod: 1,
+	damageFunc: AbilityNode.DamageFunc.Magical,
+	damageType: {mVoid: 1},
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster);
+		Text.Add("[Name] start[notS] proselytizing to the enemy party. [HeShe] somehow manage[notS] to sound extremely condensending, but immensly boring at the same time!", parse);
+		Text.NL();
+	}],
+	onDamage: [function(ability, encounter, caster, target, dmg) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("It seems to be working, [tname] look[tnotS] slightly annoyed! [Name] drain[notS] " + Text.BoldColor(-dmg, "#000080") + " SP from [tname]!", parse);
+		Text.NL();
+	}],
+	onAbsorb: [Abilities.White.Preach._onMiss],
+	onMiss: [Abilities.White.Preach._onMiss]
+}));
