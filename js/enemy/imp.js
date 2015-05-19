@@ -98,7 +98,7 @@ Intro.ImpsWinPrompt = function() {
 	var options = new Array();
 	options.push({ nameStr : "No",
 		func : function() {
-			Text.Add("With a shake of your head you regain your composure, leaving the pile of imps to their own devices. You catch the demon throwing you a disappointed glance before he returns to his own thoughts.");
+			Text.Add("With a shake of your head, you regain your composure, leaving the pile of imps to their own devices. You catch the demon throwing you a disappointed glance before he returns to his own thoughts.");
 			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
@@ -248,7 +248,7 @@ Intro.ImpsWinUseFemale = function() {
 			Text.NL();
 			Text.Add("The creature may be small, but his cock certainly isn't. Getting the whole thing into your mouth is quite the challenge, but you somehow manage. Juices are streaming freely from your [cuntDesc], and you grind your hips against your demonic lover, your moans muffled by the cock rammed into your mouth.", parse);
 			Text.NL();
-			Text.Add("Both of you come simultaneously, salty semen lathering your tongue as you ride out your own trembling orgasm. When your legs have finished shaking, you get up, wiping the remains of the imp's ejaculate from your lips.", parse);
+			Text.Add("Both of you cum simultaneously, salty semen lathering your tongue as you ride out your own trembling orgasm. When your legs have finished shaking, you get up, wiping the remains of the imp's ejaculate from your lips.", parse);
 			
 			player.Fuck(player.FirstCock());
 			Sex.Blowjob(player, imp);
@@ -266,7 +266,7 @@ Intro.ImpsWinUseFemale = function() {
 				Intro.cuntBlocked = true;
 				Text.Add("<i>“Fuah, I... I need more!”</i> putting a foot on the imp's shoulder, you push him to the ground, <i>“Now, be a good boy and stay like that,”</i> you breathe lustily, working him to full arousal with the sole of your foot. Straddling the imp's cock, you rub your wet labia against the tip, but when you try to sink down on the impressive tool, something blocks you. Moaning in frustration you try to press down again, but the imp's [cockDesc] just slides to the side, harmlessly.", parse);
 				Text.NL();
-				Text.Add("<b>YOUR VIRGINITY IS <i>MINE</i>,<b> the demon rumbles maliciously, <b>THESE TRASH CAN MAKE DO WITH YOUR OTHER HOLES.</b>", parse);
+				Text.Add("<b>YOUR VIRGINITY IS <i>MINE</i>,</b> the demon rumbles maliciously, <b>THESE TRASH CAN MAKE DO WITH YOUR OTHER HOLES.</b>", parse);
 				Text.NL();
 				Text.Add("Grumbling, you give it one more try, but the invisible barrier opposes you once more. Frustrated, you adjust your aim, placing your ass over the raised imp-cock.", parse);
 			}
@@ -449,7 +449,7 @@ Intro.ImpsWinGroup = function() {
 		Text.Add("The multiple penetration finally becomes too much for you, and you buck your hips into the face of the imp buried in your crotch, dripping the juices from your release all over him.", parse);
 		
 	Text.NL();
-	Text.Add("The two imps sharing your [anusDesc] change their rhythm subtly, so that. instead of alternating, they are thrusting into you at the same time. Thankfully, they do not last long, soon pouring their corrupted seed into your stomach.", parse);
+	Text.Add("The two imps sharing your [anusDesc] change their rhythm subtly, so that instead of alternating, they are thrusting into you at the same time. Thankfully, they do not last long, soon pouring their corrupted seed into your stomach.", parse);
 	Text.NL();
 	Text.Add("To top off your little orgy, the remaining imps gather around you, jerking themselves off and covering every part of you in white, sticky fluids. It would probably be best to get cleaned up before moving on.", parse);
 	Text.Flush();
