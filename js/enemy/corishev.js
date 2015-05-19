@@ -44,6 +44,10 @@ function Corishev(storage) {
 Corishev.prototype = new BossEntity();
 Corishev.prototype.constructor = Corishev;
 
+Corishev.prototype.WeaknessResist = function() {
+	return 0;
+}
+
 Corishev.prototype.DropTable = function() {
 	var drops = [];
 	drops.push({ it: Items.Weapons.GolWhip });

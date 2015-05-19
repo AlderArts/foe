@@ -284,11 +284,10 @@ Ability.ToHit = function(hit, evade) {
 }
 
 /*
-Ability.prototype.Damage = function(atk, def) {
+Ability.Damage = function(atk, def) {
 	return atk * (atk / (2.2*def+30));
 }
 */
-
 Ability.Damage = function(atk, def, casterLvl, targetLvl) {
 	// Safeguard
 	casterLvl = casterLvl || 1;

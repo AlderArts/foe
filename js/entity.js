@@ -1201,7 +1201,7 @@ Entity.prototype.PAttack = function() {
 	var atkWep = this.atkMod;
 	
 	// Currently range the attack between 0.9 and 1.1
-	var atkRand = 0.2 * (Math.random() - 0.5) + 1;
+	var atkRand = _.random(0.9, 1.1);
 	
 	return atkStat * atkWep * atkRand;
 }
@@ -1216,7 +1216,7 @@ Entity.prototype.PDefense = function() {
 	// Reduce effect of armour due to armour penetration (TODO)
 	
 	// Currently range the attack between 0.9 and 1.1
-	var defRand = 0.2 * (Math.random() - 0.5) + 1;
+	var defRand = _.random(0.9, 1.1);
 	
 	// Combine the result
 	return defStat * defArmour * defRand;
@@ -1245,7 +1245,7 @@ Entity.prototype.PEvade = function(attack) {
 Entity.prototype.MAttack = function() {
 	var magStat = (3 * this.Int() + this.Spi() + this.Cha()) / 2;
 	
-	var magRand = 0.2 * (Math.random() - 0.5) + 1;
+	var magRand = _.random(0.9, 1.1);
 	
 	return magStat * magRand;
 }
@@ -1255,7 +1255,7 @@ Entity.prototype.MDefense = function() {
 	var magDef = this.Sta() + 3 * this.Spi();
 	if(magDef < 0) magDef = 0;
 	
-	var magRand = 0.2 * (Math.random() - 0.5) + 1;
+	var magRand = _.random(0.9, 1.1);
 	
 	return magDef * magRand;
 }
@@ -1283,7 +1283,7 @@ Entity.prototype.LAttack = function() {
 	var sedArmour = 1;
 	
 	// Currently range the attack between 0.9 and 1.1
-	var sedRand = 0.2 * (Math.random() - 0.5) + 1;
+	var sedRand = _.random(0.9, 1.1);
 	
 	return sedStat /* * sedLust*/ * sedArmour * sedRand;
 }
@@ -1298,7 +1298,7 @@ Entity.prototype.LDefense = function() {
 	
 	
 	// Currently range the attack between 0.9 and 1.1
-	var comRand = 0.2 * (Math.random() - 0.5) + 1;
+	var comRand = _.random(0.9, 1.1);
 	
 	return comStat /* * comLust*/ * comRand;
 }
@@ -1354,6 +1354,9 @@ Entity.prototype.SlowResist = function() {
 	return 0;
 }
 Entity.prototype.ConfuseResist = function() {
+	return 0;
+}
+Entity.prototype.WeaknessResist = function() {
 	return 0;
 }
 

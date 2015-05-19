@@ -43,3 +43,6 @@ BossEntity.prototype.SlowResist = function() {
 BossEntity.prototype.ConfuseResist = function() {
 	return 1;
 }
+BossEntity.prototype.WeaknessResist = function() {
+	return 1;
+}

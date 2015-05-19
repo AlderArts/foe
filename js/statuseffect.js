@@ -5,32 +5,33 @@
 var Status = {};
 
 StatusEffect = {
-	Burn    : 0, //OK
-	Freeze  : 1, //OK
-	Numb    : 2, //OK
-	Petrify : 3,
-	Venom   : 4, //OK
-	Blind   : 5, //OK
-	Siphon  : 6, //OK
-	Seal    : 7,
-	Sleep   : 8, //OK
-	Enrage  : 9,
-	Fatigue : 10,
-	Bleed   : 11, //OK
-	Haste   : 12, //OK
-	Slow    : 13, //OK
-	Regen   : 14,
-	Boon    : 15,
-	Horny   : 16, //OK
-	Aroused : 17,
-	Limp    : 18,
-	Bimbo   : 19,
-	Decoy   : 20, //OK
-	Counter : 21, //OK
-	Confuse : 22,
-	Full    : 23,
+	Burn     : 0, //OK
+	Freeze   : 1, //OK
+	Numb     : 2, //OK
+	Petrify  : 3,
+	Venom    : 4, //OK
+	Blind    : 5, //OK
+	Siphon   : 6, //OK
+	Seal     : 7,
+	Sleep    : 8, //OK
+	Enrage   : 9,
+	Fatigue  : 10,
+	Bleed    : 11, //OK
+	Haste    : 12, //OK
+	Slow     : 13, //OK
+	Regen    : 14,
+	Boon     : 15,
+	Horny    : 16, //OK
+	Aroused  : 17,
+	Limp     : 18,
+	Bimbo    : 19,
+	Decoy    : 20, //OK
+	Counter  : 21, //OK
+	Confuse  : 22, //OK
+	Full     : 23,
+	Weakness : 24,
 	
-	LAST    : 24
+	LAST     : 25
 };
 
 LoadStatusImages = function(imageArray) {
@@ -40,21 +41,22 @@ LoadStatusImages = function(imageArray) {
 	}
 	
 	// Status effects
-	Images.status[StatusEffect.Burn]    = "data/status/burn.png";
-	Images.status[StatusEffect.Freeze]  = "data/status/freeze.png";
-	Images.status[StatusEffect.Numb]    = "data/status/numb.png";
-	Images.status[StatusEffect.Venom]   = "data/status/venom.png";
-	Images.status[StatusEffect.Blind]   = "data/status/blind.png";
-	Images.status[StatusEffect.Siphon]  = "data/status/siphon.png";
-	Images.status[StatusEffect.Sleep]   = "data/status/sleep.png";
-	Images.status[StatusEffect.Bleed]   = "data/status/bleed.png";
-	Images.status[StatusEffect.Haste]   = "data/status/haste.png";
-	Images.status[StatusEffect.Slow]    = "data/status/slow.png";
-	Images.status[StatusEffect.Horny]   = "data/status/horny.png";
-	Images.status[StatusEffect.Decoy]   = "data/status/decoy.png";
-	Images.status[StatusEffect.Counter] = "data/status/counter.png";
-	Images.status[StatusEffect.Full]    = "data/status/full.png";
-	Images.status[StatusEffect.Confuse] = "data/status/confuse.png";
+	Images.status[StatusEffect.Burn]     = "data/status/burn.png";
+	Images.status[StatusEffect.Freeze]   = "data/status/freeze.png";
+	Images.status[StatusEffect.Numb]     = "data/status/numb.png";
+	Images.status[StatusEffect.Venom]    = "data/status/venom.png";
+	Images.status[StatusEffect.Blind]    = "data/status/blind.png";
+	Images.status[StatusEffect.Siphon]   = "data/status/siphon.png";
+	Images.status[StatusEffect.Sleep]    = "data/status/sleep.png";
+	Images.status[StatusEffect.Bleed]    = "data/status/bleed.png";
+	Images.status[StatusEffect.Haste]    = "data/status/haste.png";
+	Images.status[StatusEffect.Slow]     = "data/status/slow.png";
+	Images.status[StatusEffect.Horny]    = "data/status/horny.png";
+	Images.status[StatusEffect.Decoy]    = "data/status/decoy.png";
+	Images.status[StatusEffect.Counter]  = "data/status/counter.png";
+	Images.status[StatusEffect.Full]     = "data/status/full.png";
+	Images.status[StatusEffect.Confuse]  = "data/status/confuse.png";
+	Images.status[StatusEffect.Weakness] = "data/status/weakness.png";
 	
 	for(var i = 0; i < StatusEffect.LAST; i++) {
 		if(Images.status[i] == "") continue;
@@ -615,4 +617,33 @@ Status.Confuse.OnFade = function(encounter, entity) {
 	}
 	// Remove confuse effect
 	entity.combatStatus.stats[StatusEffect.Confuse] = null;
+}
+
+Status.Weakness = function(target, opts) {
+	if(!target) return;
+	opts = opts || {};
+	
+	// Check for horny resist
+	var odds = (opts.hit || 1) * (1 - target.WeaknessResist());
+	if(Math.random() > odds) {
+		return false;
+	}
+	
+	var turns = opts.turns || 0;
+	turns += Math.random() * (opts.turnsR || 0);
+	// Apply weakness
+	target.combatStatus.stats[StatusEffect.Weakness] = {
+		turns : turns,
+		str   : opts.str || 1,
+		Tick  : Status.Weakness.Tick
+	};
+	
+	return true;
+}
+Status.Weakness.Tick = function(target) {
+	this.turns--;
+	// Remove counter effect
+	if(this.turns <= 0) {
+		target.combatStatus.stats[StatusEffect.Weakness] = null;
+	}
 }

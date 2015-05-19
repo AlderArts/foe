@@ -378,11 +378,18 @@ AbilityNode.DefFunc.Lust = function(caster, target) {
 AbilityNode.DamageFunc = {};
 AbilityNode.DamageFunc.Physical = function(encounter, caster, target, dmg) {
 	if(target.PhysDmgHP(encounter, caster, dmg)) {
+		// Reduce defense due to bad status effect
+		var weakness = target.combatStatus.stats[StatusEffect.Weakness];
+		if(weakness) {
+			var reduction = target.LustLevel() * weakness.str;
+			dmg += dmg * reduction;
+		}
+		
 		target.AddHPAbs(dmg);
-		return true;
+		return {dmg: dmg};
 	}
 	else
-		return false;
+		return null;
 }
 AbilityNode.DamageFunc.Magical = function(encounter, caster, target, dmg) {
 	target.AddSPAbs(dmg);
@@ -444,9 +451,12 @@ AbilityNode.Run = function(ability, encounter, caster, target, result) {
 				if(that.toDamage) {
 					var dmg = that.toDamage(caster, e);
 					
-					var onattack = that.damageFunc(encounter, caster, e, dmg);
+					var ret = that.damageFunc(encounter, caster, e, dmg);
 					
-					if(onattack) {
+					if(ret) {
+						if(ret.dmg) dmg = ret.dmg;
+						
+						dmg = Math.floor(dmg);
 						// On dealing damage (dmg is negative)
 						if(dmg <= 0) {
 							_.each(that.onDamage, function(node) {

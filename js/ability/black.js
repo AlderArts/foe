@@ -431,3 +431,29 @@ Abilities.Black.Scream.castTree.push(AbilityNode.Template.Magical({
 		Text.NL();
 	}]
 }));
+
+
+Abilities.Black.Dischord = new Ability("Dischord");
+Abilities.Black.Dischord.Short = function() { return "Attempt to unnerve a foe with your music, hampering their ability to defend themselves. Effectiveness increases with the target’s lust, which is drained in the process."; }
+Abilities.Black.Dischord.cost = { hp: null, sp: 20, lp: 30 };
+Abilities.Black.Dischord._onMiss = function(ability, encounter, caster, target) {
+	var parse = AbilityNode.DefaultParser(caster, target);
+	Text.Add("[tName] manage[tnotS] to resist the chaotic discordance of [poss] song.", parse);
+}
+Abilities.Black.Dischord.castTree.push(AbilityNode.Template.Magical({
+	toDamage: null,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] direct[notS] [hisher] voice at [tname], singing a verse rich with dark, subtle undertones. ", parse);
+	}],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		if(Status.Weakness(target, { hit : 0.8, turns : 3, turnsR : 3, str: 0.25 })) {
+			Text.Add("The sheer discordance of [poss] voice grips [tname], crippling [thisher] ability to defend [thimher]self!", parse);
+		}
+		else {
+			Abilities.Black.Dischord._onMiss(ability, encounter, caster, target);
+		}
+	}],
+	onMiss: [Abilities.Black.Dischord._onMiss]
+}));
