@@ -419,8 +419,8 @@ Jobs["Singer"].Long = function(entity) {
 }
 Jobs["Singer"].preqs.push({job : Jobs["Courtesan"], lvl : 3});
 //TODO Singer abilities
-Jobs["Singer"].abilities.AddAbility(Abilities.White.Detox);
-Jobs["Singer"].levels.push(new JobLevel(20,   [{ab: Abilities.White.Detox, set: "Support"}], {"spi" : 0.3}));
+Jobs["Singer"].abilities.AddAbility(Abilities.Seduction.Lull);
+Jobs["Singer"].levels.push(new JobLevel(20,   [{ab: Abilities.Seduction.Lull, set: "Support"}], {"spi" : 0.3}));
 Jobs["Singer"].levels.push(new JobLevel(40,   null, {"int" : 0.2, "cha" : 0.1}));
 Jobs["Singer"].levels.push(new JobLevel(80,   [{ab: Abilities.White.Cool, set: "Support"}], {"sta" : 0.2, "spi" : 0.1}));
 Jobs["Singer"].levels.push(new JobLevel(160,  null, {"spi" : 0.2, "int" : 0.1}));
