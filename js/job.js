@@ -242,13 +242,13 @@ Jobs["Songstress"].Long = function(entity) {
 }
 Jobs["Songstress"].abilities.AddAbility(Abilities.Seduction.Soothe);
 Jobs["Songstress"].abilities.AddAbility(Abilities.Seduction.Inflame);
-Jobs["Songstress"].abilities.AddAbility(Abilities.Seduction.Lull);
+Jobs["Songstress"].abilities.AddAbility(Abilities.Black.Dischord);
 Jobs["Songstress"].abilities.AddAbility(Abilities.Seduction.Captivate);
 Jobs["Songstress"].levels.push(new JobLevel(10,  [{ab: Abilities.Seduction.Soothe, set: "Support"}], {"spi" : 0.3}));
 Jobs["Songstress"].levels.push(new JobLevel(20,  null, {"int" : 0.2, "cha" : 0.1}));
 Jobs["Songstress"].levels.push(new JobLevel(40,  [{ab: Abilities.Seduction.Inflame, set: "Seduce"}], {"cha" : 0.2, "spi" : 0.1}));
 Jobs["Songstress"].levels.push(new JobLevel(80,  null, {"cha" : 0.2, "lib" : 0.1}));
-Jobs["Songstress"].levels.push(new JobLevel(160, [{ab: Abilities.Seduction.Lull, set: "Support"}], {"cha" : 0.1, "int" : 0.2 }));
+Jobs["Songstress"].levels.push(new JobLevel(160, [{ab: Abilities.Black.Dischord, set: "Spells"}], {"cha" : 0.1, "int" : 0.2 }));
 Jobs["Songstress"].levels.push(new JobLevel(320, null, {"cha" : 0.2, "lib" : 0.1}));
 Jobs["Songstress"].levels.push(new JobLevel(640, [{ab: Abilities.Seduction.Captivate, set: "Seduce"}, {ab: Abilities.Black.Scream, set: "Spells"}], {"cha" : 0.4, "lib" : 0.1}));
 
