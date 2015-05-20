@@ -27,7 +27,6 @@ Abilities.Black.Surge = new Ability("Surge");
 Abilities.Black.Surge.Short = function() { return "Weak non-elemental magic, single target."; }
 Abilities.Black.Surge.cost = { hp: null, sp: 5, lp: null};
 Abilities.Black.Surge.castTree.push(AbilityNode.Template.Magical({
-	atkMod: 0.5,
 	damageType: {mVoid: 1},
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
@@ -42,8 +41,10 @@ Abilities.Black.Surge.castTree.push(AbilityNode.Template.Magical({
 Abilities.Black.Fireball = new Ability("Fireball");
 Abilities.Black.Fireball.Short = function() { return "Fire magic, single target."; }
 Abilities.Black.Fireball.cost = { hp: null, sp: 10, lp: null};
+Abilities.Black.Fireball.castTime = 75;
 Abilities.Black.Fireball.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mFire: 1},
+	atkMod: 2,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] make[notS] mystic incantations, waving [hisher] [hand]s in the air. Fiery glyphs appear in front of [himher], coalescing in a large fireball forming between [hisher] outstretched [hand]s. With a great roar, the molten ball of magic surge toward [tname]! ", parse);
@@ -67,8 +68,10 @@ Abilities.Black.Fireball.castTree.push(AbilityNode.Template.Magical({
 Abilities.Black.Freeze = new Ability("Freeze");
 Abilities.Black.Freeze.Short = function() { return "Ice magic, single target."; }
 Abilities.Black.Freeze.cost = { hp: null, sp: 10, lp: null};
+Abilities.Black.Freeze.castTime = 70;
 Abilities.Black.Freeze.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mIce: 1},
+	atkMod: 1.9,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("The temperature drops in the air around [tname] as [name] call[notS] on the power of ice. There is a loud crackle as the cold snap hits, forming icicles on [tname]! ", parse);
@@ -89,8 +92,10 @@ Abilities.Black.Freeze.castTree.push(AbilityNode.Template.Magical({
 Abilities.Black.Bolt = new Ability("Bolt");
 Abilities.Black.Bolt.Short = function() { return "Thunder magic, single target."; }
 Abilities.Black.Bolt.cost = { hp: null, sp: 10, lp: null};
+Abilities.Black.Bolt.castTime = 60;
 Abilities.Black.Bolt.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mThunder: 1},
+	atkMod: 1.8,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("The air tingles as [name] call[notS] on the power of thunder. There is a great crackle and a blinding flash of light as a bolt of lightning strikes [tname]! ", parse);
@@ -114,8 +119,10 @@ Abilities.Black.Bolt.castTree.push(AbilityNode.Template.Magical({
 Abilities.Black.Gust = new Ability("Gust");
 Abilities.Black.Gust.Short = function() { return "Slashing wind magic, single target."; }
 Abilities.Black.Gust.cost = { hp: null, sp: 10, lp: null};
+Abilities.Black.Gust.castTime = 50;
 Abilities.Black.Gust.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mWind: 0.7, pSlash: 0.3},
+	atkMod: 1.5,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] make[notS] a sweeping gesture, calling on the power of wind to do [hisher] bidding. Erratic gusts of wind dance around, focusing into a single burst homing in on [tname]! ", parse);
@@ -129,8 +136,10 @@ Abilities.Black.Gust.castTree.push(AbilityNode.Template.Magical({
 Abilities.Black.Spire = new Ability("Spire");
 Abilities.Black.Spire.Short = function() { return "Bashing earth magic, single target."; }
 Abilities.Black.Spire.cost = { hp: null, sp: 10, lp: null};
+Abilities.Black.Spire.castTime = 70;
 Abilities.Black.Spire.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mEarth: 0.7, pBlunt: 0.3},
+	atkMod: 1.9,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("There is a loud rumble as the ground shakes, forced from its natural state by the power of [poss] magic. A pillar of rock bursts from the earth below, slamming into [tname]! ", parse);
@@ -392,10 +401,10 @@ Abilities.Black.Hellfire = new Ability("Hellfire");
 Abilities.Black.Hellfire.Short = function() { return "Demon magic, targets all enemies."; }
 Abilities.Black.Hellfire.targetMode = TargetMode.Enemies;
 Abilities.Black.Hellfire.cost = { hp: null, sp: 500, lp: null};
-Abilities.Black.Hellfire.castTime = 150;
+Abilities.Black.Hellfire.castTime = 200;
 Abilities.Black.Hellfire.cooldown = 3;
 Abilities.Black.Hellfire.castTree.push(AbilityNode.Template.Magical({
-	atkMod: 1.5,
+	atkMod: 3,
 	damageType: {mFire: 3, mDark: 3},
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster);
@@ -414,6 +423,7 @@ Abilities.Black.Scream.targetMode = TargetMode.Enemies;
 Abilities.Black.Scream.cost = { hp: null, sp: 30, lp: 30 };
 Abilities.Black.Scream.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mWind: 0.5, pBlunt: 0.5},
+	atkMod: 2,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Poss] lets out a ear-splitting shriek, the sheer force of [hisher] voice rippling through the air.", parse);
