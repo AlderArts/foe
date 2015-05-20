@@ -849,11 +849,11 @@ Scenes.Rosalin.FirstFuck = function() {
 							
 							Text.Add("Shrugging, you shuffle around so that you are straddling the alchemist's face, your back to the wolf. Without hesitation, she leans in, ", parse);
 							if(player.FirstCock())
-								Text.Add("sucking your [cockDesc] into her eager mouth.", parse);
+								Text.Add("sucking your [cockDesc] into her eager mouth. ", parse);
 							else if(player.FirstVag())
-								Text.Add("burying her tongue in your wet [vagDesc].", parse);
+								Text.Add("burying her tongue in your wet [vagDesc]. ", parse);
 							else
-								Text.Add("her tongue going wild on your bare crotch.", parse);
+								Text.Add("her tongue going wild on your bare crotch. ", parse);
 							
 							Text.Add("Thoroughly enjoying yourself, you ride her face, rocking your hips back and forth.", parse);
 							if(p1Cock && p1Cock.length.Get() > 20)
