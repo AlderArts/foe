@@ -43,28 +43,28 @@ AbilityNode.Template.Blank = function(node) {
 	
 	node.damageType = node.damageType ? new DamageType(node.damageType) : null;
 	
-	node.cost      = node.cost || { hp: null, sp: null, lp: null};
+	node.cost       = node.cost     || { hp: null, sp: null, lp: null};
 	
-	node.onCast    = node.onCast   || [];
-	node.onHit     = node.onHit    || [];
-	node.onMiss    = node.onMiss   || [];
-	node.onDamage  = node.onDamage || [];
-	node.onAbsorb  = node.onAbsorb || [];
+	node.onCast     = node.onCast   || [];
+	node.onHit      = node.onHit    || [];
+	node.onMiss     = node.onMiss   || [];
+	node.onDamage   = node.onDamage || [];
+	node.onAbsorb   = node.onAbsorb || [];
 	/*
-	node.hitFallen = node.hitFallen;
-	node.retarget  = node.retarget;
+	node.hitFallen  = node.hitFallen;
+	node.retarget   = node.retarget;
 	
-	node.hitMod    = node.hitMod;
-	node.atkMod    = node.atkMod;
-	node.defMod    = node.defMod;
+	node.hitMod     = node.hitMod;
+	node.atkMod     = node.atkMod;
+	node.defMod     = node.defMod;
 	*/
-	node.toHit     = _.has(node, 'toHit')    ? node.toHit    : AbilityNode.ToHit.Regular;
-	node.toDamage  = _.has(node, 'toDamage') ? node.toDamage : AbilityNode.ToDamage.Regular;
+	node.toHit      = _.has(node, 'toHit')    ? node.toHit    : AbilityNode.ToHit.Regular;
+	node.toDamage   = _.has(node, 'toDamage') ? node.toDamage : AbilityNode.ToDamage.Regular;
 	
-	node.hitFunc   = node.hitFunc   || AbilityNode.HitFunc.Physical;
-	node.evadeFunc = node.evadeFunc || AbilityNode.EvadeFunc.Physical;
-	node.atkFunc   = node.atkFunc   || AbilityNode.AtkFunc.Physical;
-	node.defFunc   = node.defFunc   || AbilityNode.DefFunc.Physical;
+	node.hitFunc    = node.hitFunc    || AbilityNode.HitFunc.Physical;
+	node.evadeFunc  = node.evadeFunc  || AbilityNode.EvadeFunc.Physical;
+	node.atkFunc    = node.atkFunc    || AbilityNode.AtkFunc.Physical;
+	node.defFunc    = node.defFunc    || AbilityNode.DefFunc.Physical;
 	node.damageFunc = node.damageFunc || AbilityNode.DamageFunc.Physical;
 	
 	return _.bind(AbilityNode.Run, node);
