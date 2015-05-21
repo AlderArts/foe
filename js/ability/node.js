@@ -376,6 +376,10 @@ AbilityNode.DefFunc.Lust = function(caster, target) {
 }
 
 AbilityNode.DamageFunc = {};
+/*
+ * TODO: Need to know the actual type of attack in order to apply PhysDmgHP, weakness etc.
+ * Shouldn't trigger on being hit by spell, for example
+ */
 AbilityNode.DamageFunc.Physical = function(encounter, caster, target, dmg) {
 	if(target.PhysDmgHP(encounter, caster, dmg)) {
 		// Reduce defense due to bad status effect
