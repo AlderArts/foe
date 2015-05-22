@@ -208,7 +208,7 @@ Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty) {
 	var barOffsetX = 6;
 	var barOffsetY = 30;
 	
-	var glowColor = (isParty) ? "green" : "red";
+	var glowColor = (isParty) ? "#00FF00" : "#FF1111";
 	
 	var charSet   = Gui.canvas.set();
 	var statusSet = Gui.canvas.set();
@@ -220,7 +220,7 @@ Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty) {
 		name    : {},
 		lvl     : {},
 		status  : [],
-		glow    : portrait.glow({opacity: 1, color: glowColor}),
+		glow    : portrait.glow({opacity: 1, color: glowColor, width: 20}),
 		hpBack  : Gui.canvas.rect(xoffset+barStart, yoffset+10, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#000"}),
 		hpBar   : Gui.canvas.rect(xoffset+barStart, yoffset+10, barWidth, barHeigth).attr({fill: "#f00"}),
 		hpStr   : Gui.canvas.text(xoffset+barStart+barWidth-5, yoffset+25, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}),
