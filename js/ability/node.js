@@ -60,6 +60,7 @@ AbilityNode.Template.Blank = function(node) {
 	*/
 	node.toHit      = _.has(node, 'toHit')    ? node.toHit    : AbilityNode.ToHit.Regular;
 	node.toDamage   = _.has(node, 'toDamage') ? node.toDamage : AbilityNode.ToDamage.Regular;
+	node.damagePool = node.damagePool || [];
 	
 	node.hitFunc    = node.hitFunc    || AbilityNode.HitFunc.Physical;
 	node.evadeFunc  = node.evadeFunc  || AbilityNode.EvadeFunc.Physical;
@@ -85,6 +86,7 @@ AbilityNode.Template.Physical = function(node) {
 	node.atkFunc   = node.atkFunc   || AbilityNode.AtkFunc.Physical;
 	node.defFunc   = node.defFunc   || AbilityNode.DefFunc.Physical;
 	node.damageFunc = node.damageFunc || AbilityNode.DamageFunc.Physical;
+	node.damagePool = node.damagePool || [AbilityNode.DamagePool.Physical];
 	
 	return _.bind(AbilityNode.Run, node);
 }
@@ -103,7 +105,8 @@ AbilityNode.Template.Magical = function(node) {
 	node.evadeFunc = node.evadeFunc || AbilityNode.EvadeFunc.Magical;
 	node.atkFunc   = node.atkFunc   || AbilityNode.AtkFunc.Magical;
 	node.defFunc   = node.defFunc   || AbilityNode.DefFunc.Magical;
-	node.damageFunc = node.damageFunc || AbilityNode.DamageFunc.Physical;
+	node.damageFunc = node.damageFunc || AbilityNode.DamageFunc.Magical;
+	node.damagePool = node.damagePool || [AbilityNode.DamagePool.Physical];
 	
 	return _.bind(AbilityNode.Run, node);
 }
@@ -123,6 +126,7 @@ AbilityNode.Template.Lust = function(node) {
 	node.atkFunc   = node.atkFunc   || AbilityNode.AtkFunc.Lust;
 	node.defFunc   = node.defFunc   || AbilityNode.DefFunc.Lust;
 	node.damageFunc = node.damageFunc || AbilityNode.DamageFunc.Lust;
+	node.damagePool = node.damagePool || [AbilityNode.DamagePool.Lust];
 	
 	return _.bind(AbilityNode.Run, node);
 }
@@ -140,7 +144,8 @@ AbilityNode.Template.Heal = function(node) {
 	node.defFunc   = node.defFunc;
 	*/
 	node.atkFunc   = node.atkFunc || AbilityNode.AtkFunc.Magical;
-	node.damageFunc = node.damageFunc || AbilityNode.DamageFunc.Physical;
+	node.damageFunc = node.damageFunc || AbilityNode.DamageFunc.Magical;
+	node.damagePool = node.damagePool || [AbilityNode.DamagePool.Physical];
 	
 	return _.bind(AbilityNode.Run, node);
 }
@@ -152,6 +157,7 @@ AbilityNode.Template.Fallthrough = function(node) {
 
 	node.fraction = node.fraction || 1;
 	node.damageFunc = node.damageFunc || AbilityNode.DamageFunc.Physical;
+	node.damagePool = node.damagePool || [AbilityNode.DamagePool.Physical];
 	
 	return _.bind(AbilityNode.RunFallthrough, node);
 }
@@ -376,10 +382,6 @@ AbilityNode.DefFunc.Lust = function(caster, target) {
 }
 
 AbilityNode.DamageFunc = {};
-/*
- * TODO: Need to know the actual type of attack in order to apply PhysDmgHP, weakness etc.
- * Shouldn't trigger on being hit by spell, for example
- */
 AbilityNode.DamageFunc.Physical = function(encounter, caster, target, dmg) {
 	if(target.PhysDmgHP(encounter, caster, dmg)) {
 		// Reduce defense due to bad status effect
@@ -387,21 +389,30 @@ AbilityNode.DamageFunc.Physical = function(encounter, caster, target, dmg) {
 		if(weakness) {
 			var reduction = target.LustLevel() * weakness.str;
 			dmg += dmg * reduction;
+			dmg = Math.floor(dmg);
 		}
 		
-		target.AddHPAbs(dmg);
-		return {dmg: dmg};
+		return dmg;
 	}
 	else
 		return null;
 }
 AbilityNode.DamageFunc.Magical = function(encounter, caster, target, dmg) {
-	target.AddSPAbs(dmg);
-	return true;
+	return dmg;
 }
 AbilityNode.DamageFunc.Lust = function(encounter, caster, target, dmg) {
+	return dmg;
+}
+
+AbilityNode.DamagePool = {};
+AbilityNode.DamagePool.Physical = function(ability, encounter, caster, target, dmg) {
+	target.AddHPAbs(dmg);
+}
+AbilityNode.DamagePool.Magical = function(ability, encounter, caster, target, dmg) {
+	target.AddSPAbs(dmg);
+}
+AbilityNode.DamagePool.Lust = function(ability, encounter, caster, target, dmg) {
 	target.AddLustAbs(-dmg);
-	return true;
 }
 
 AbilityNode.Retarget = {};
@@ -455,12 +466,15 @@ AbilityNode.Run = function(ability, encounter, caster, target, result) {
 				if(that.toDamage) {
 					var dmg = that.toDamage(caster, e);
 					
-					var ret = that.damageFunc(encounter, caster, e, dmg);
+					if(that.damageFunc)
+						dmg = that.damageFunc(encounter, caster, e, dmg);
 					
-					if(ret) {
-						if(ret.dmg) dmg = ret.dmg;
+					if(_.isNumber(dmg)) {
+						// Apply damage to pools
+						_.each(that.damagePool, function(node) {
+							node(ability, encounter, caster, e, dmg);
+						});
 						
-						dmg = Math.floor(dmg);
 						// On dealing damage (dmg is negative)
 						if(dmg <= 0) {
 							_.each(that.onDamage, function(node) {
