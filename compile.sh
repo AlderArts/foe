@@ -18,6 +18,9 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/statuseffect.js \
 	js/ability.js \
 	js/entity.js \
+	js/body/gender.js \
+	js/body/color.js \
+	js/body/race.js \
 	js/body/body.js \
 	js/body/appendage.js \
 	js/body/balls.js \
