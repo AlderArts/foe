@@ -6140,6 +6140,7 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 					Text.Add(" So as not to leave your [multiCockDesc] unattended, the dogmorph gives [itThem] some attention with her tongue[nice].", parse);
 				}
 				if(player.FirstVag()) {
+					Text.NL();
 					Text.Add("In order to relieve your aching [vagDesc], the dogmorph stuffs some of her toys into the wet cleft. She casually mentions that she’s going to use that hole instead next time, since you’re whimpering so much about it.", parse);
 				}
 				Text.NL();
