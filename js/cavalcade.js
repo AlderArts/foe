@@ -27,7 +27,7 @@ function Cavalcade(players, opts) {
 	this.pot = 0;
 }
 
-cavalcade = null;
+var cavalcade = null;
 
 Cavalcade.Score = {
 	Cavalcade : 0,
@@ -51,21 +51,21 @@ Cavalcade.prototype.PrepGame = function(keepOut) {
 	SetGameState(GameState.Cavalcade);
 	cavalcade = this;
 	
-	for(var i = 0; i < this.players.length; i++) {
+	_.each(this.players, function(p) {
 		if(!keepOut) {
-			this.players[i].out = false;
+			p.out = false;
 		}
 		
-		this.players[i].hand = [];
-		if(this.players[i].out)
-			this.players[i].folded = true;
+		p.hand = [];
+		if(p.out)
+			p.folded = true;
 		else {
-			this.players[i].hand.push(this.PullCard());
-			this.players[i].hand.push(this.PullCard());
-			this.players[i].folded = false;
+			p.hand.push(cavalcade.PullCard());
+			p.hand.push(cavalcade.PullCard());
+			p.folded = false;
 		}
-		this.players[i].res = null;
-	}
+		p.res = null;
+	});
 	this.house = [];
 	this.house.push(this.PullCard());
 	this.house.push(this.PullCard());
@@ -73,22 +73,24 @@ Cavalcade.prototype.PrepGame = function(keepOut) {
 }
 
 Cavalcade.prototype.Finish = function() {
-	for(var i = 0; i < this.players.length; i++) {
-		if(this.players[i].folded) continue;
-		for(var j = 0; j < this.house.length; j++)
-			this.players[i].hand.push(this.house[j]);
+	var cav = this;
+	_.each(cav.players, function(p) {
+		if(p.folded) return;
+		_.each(cav.house, function(h) {
+			p.hand.push(h);
+		});
 		// TODO: TEMP
-		Text.Add("[Poss] hand:<br/>", {Poss: this.players[i].Possessive()});
-		for(var j = 0; j < this.players[i].hand.length; j++) {
-			var card = this.players[i].hand[j];
-			if(card == this.stag)
-				Text.Add(card.name + Text.BoldColor(" (*)"));
+		Text.Add("[Poss] hand:<br/>", {Poss: p.Possessive()});
+		_.each(p.hand, function(h, key) {
+			if(key > 0)
+				Text.Add(", ");
+			if(h == cav.stag)
+				Text.Add(h.name + Text.BoldColor(" (*)"));
 			else
-				Text.Add(card.name);
-			Text.Add(", ");
-		}
+				Text.Add(h.name);
+		});
 		Text.Add("<br/>");
-	}
+	});
 	Text.Flush();
 }
 
@@ -270,11 +272,11 @@ Cavalcade.prototype.CoinGameRound = function() {
 	
 	switch(that.round) {
 	case 0:
-		for(var i = 0; i < that.players.length; i++) {
-			if(that.players[i].folded) continue;
-			that.players[i].purse.coin -= that.bet;
+		_.each(that.players, function(p) {
+			if(p.folded) return;
+			p.purse.coin -= that.bet;
 			that.pot += that.bet;
-		}
+		});
 		if(!player.out) {
 			Text.Add("You put [bet] [token]s in the pot. The dealer gives you two cards.", parse);
 			Text.NL();
@@ -359,11 +361,11 @@ Cavalcade.prototype.CoinGameRound = function() {
 				Text.Clear();
 				Text.Add("You raise the bet.");
 				Text.NL();
-				for(var i = 0; i < that.players.length; i++) {
-					if(that.players[i].folded) continue;
-					that.players[i].purse.coin -= Math.min(that.bet, that.players[i].purse.coin);
+				_.each(that.players, function(p) {
+					if(p.folded) return;
+					p.purse.coin -= Math.min(that.bet, p.purse.coin);
 					that.pot += that.bet;
-				}
+				});
 				that.NextRound();
 			}, that.players[0].purse.coin >= that.bet); // TODO
 			Input.buttons[8].Setup("Fold", function() {
@@ -382,32 +384,32 @@ Cavalcade.prototype.CoinGameRound = function() {
 		Text.NL();
 		
 		that.winners = [];
-		for(var i = 0; i < that.players.length; i++) {
-			if(that.players[i].folded) continue;
-			that.winners.push(that.players[i]);
-		}
-
-		for(var i = 0; i < that.winners.length; i++) {
-			Text.Add("HAND EVALUATION ([p]):<br/>", {p: that.winners[i].name});
-			that.winners[i].res = that.EvaluateHand(that.winners[i].hand);
-			Text.Add("Hand evaluated as: " + that.ResultStr(that.winners[i].res));
-			Text.NL();
-		}
+		_.each(that.players, function(p) {
+			if(p.folded) return;
+			that.winners.push(p);
+		});
 		
+		_.each(that.winners, function(w) {
+			Text.Add("HAND EVALUATION ([p]):<br/>", {p: w.name});
+			w.res = that.EvaluateHand(w.hand);
+			Text.Add("Hand evaluated as: " + that.ResultStr(w.res));
+			Text.NL();
+		});
+
 		that.winners.sort(Cavalcade.EvaluateWinnerSorter);
 		var draw = false;
 		if(that.winners[0].res.draw) {
 			draw = true;
 			Text.Add("There was a draw! The pot is split between the winners.");
 			that.pot = Math.floor(that.pot/that.winners.length);
-			for(var i = 0; i < that.winners.length; i++) {
-				that.winners[i].purse.coin += that.pot;
-				if(party.InParty(that.winners[i])) {
+			_.each(that.winners, function(w) {
+				w.purse.coin += that.pot;
+				if(party.InParty(w)) {
 					Text.NL();
 					parse["pot"] = that.pot;
 					Text.Add("The party gains [pot] [token]s!", parse);
 				}
-			}
+			});
 		}
 		else {
 			that.winner = that.winners[0];
