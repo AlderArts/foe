@@ -133,9 +133,10 @@ Race = {
 	snake    : 21,
 	goo      : 22,
 	insect   : 23,
+	jackal   : 24,
 	
 	// TODO: Keep updated!
-	numRaces : 24
+	numRaces : 25
 }
 Race.Desc = function(race) {
 	var r;
@@ -190,6 +191,7 @@ Race.Desc = function(race) {
 		else       return "naga";
 	case Race.goo: return "goo";
 	case Race.insect: return "insect";
+	case Race.jackal: return "jackal";
 	default: return "undefined";
 	}
 }
@@ -254,6 +256,7 @@ Race.Quantifier = function(race) {
 		else       return "a serpentine";
 	case Race.goo: return "a gelatinous";
 	case Race.insect: return "an insectoid";
+	case Race.jackal: return "a canine";
 	default: return "an undefined";
 	}
 }

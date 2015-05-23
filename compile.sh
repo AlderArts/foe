@@ -100,6 +100,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/loc/glade.js \
 	js/loc/burrows.js \
 	js/event/dreams.js \
+	js/event/asche.js \
 	js/event/fera.js \
 	js/event/kyna.js \
 	js/event/miranda.js \
