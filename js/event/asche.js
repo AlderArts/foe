@@ -608,7 +608,7 @@ What? Why?
 			Text.Add("<i>“As customer is wishing.”</i> Is that a hint of sourness you hear in her voice? <i>“Is there any other business that [heshe] has with Asche?”</i>", parse);
 			Text.Flush();
 			
-			Scenes.Asche.FortuneTellingPrompt();
+			Scenes.Asche.Prompt();
 		}, enabled : true
 	});
 	
