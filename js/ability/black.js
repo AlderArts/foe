@@ -145,7 +145,7 @@ Abilities.Black.Spire.castTree.push(AbilityNode.Template.Magical({
 		Text.Add("There is a loud rumble as the ground shakes, forced from its natural state by the power of [poss] magic. A pillar of rock bursts from the earth below, slamming into [tname]! ", parse);
 	}],
 	onMiss: [Abilities.Black._onMiss],
-	onDamage: [Abilities.Black._onDamage],
+	onDamage: [Abilities.Black._onDamage, AbilityNode.Template.Cancel()],
 	onAbsorb: [Abilities.Black._onAbsorb]
 }));
 
@@ -153,8 +153,10 @@ Abilities.Black.Spire.castTree.push(AbilityNode.Template.Magical({
 Abilities.Black.Spray = new Ability("Spray");
 Abilities.Black.Spray.Short = function() { return "Water magic, single target."; }
 Abilities.Black.Spray.cost = { hp: null, sp: 10, lp: null};
+Abilities.Black.Spray.castTime = 50;
 Abilities.Black.Spray.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mWater: 1},
+	atkMod: 1.9,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("Moisture from the air coalesce into a sphere of water between [poss] [hand]s, summoned by the power of [hisher] magic. In a rapid surge, the water slams into [tname]! ", parse);
@@ -166,43 +168,58 @@ Abilities.Black.Spray.castTree.push(AbilityNode.Template.Magical({
 
 
 Abilities.Black.Shimmer = new Ability("Shimmer");
-Abilities.Black.Shimmer.Short = function() { return "Light magic, single target."; }
+Abilities.Black.Shimmer.Short = function() { return "Blinding light magic, single target."; }
 Abilities.Black.Shimmer.cost = { hp: null, sp: 15, lp: null};
+Abilities.Black.Shimmer.castTime = 75;
 Abilities.Black.Shimmer.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mLight: 1},
-	atkMod: 1.1,
+	atkMod: 1.9,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("A brilliant sphere of blinding light forms between [poss] [hand]s, summoned by the power of [hisher] magic. At the uttering of a single word, it speeds toward [tname]! ", parse);
 	}],
 	onMiss: [Abilities.Black._onMiss],
 	onDamage: [Abilities.Black._onDamage],
-	onAbsorb: [Abilities.Black._onAbsorb]
+	onAbsorb: [Abilities.Black._onAbsorb],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		if(Status.Blind(target, { hit : 0.8, str : 0.5, turns : 3, turnsR : 3 })) {
+			Text.Add("[tName] become[tnotS] blinded by the light!", parse);
+		}
+	}]
 }));
 
 
 Abilities.Black.Shade = new Ability("Shade");
-Abilities.Black.Shade.Short = function() { return "Dark magic, single target."; }
+Abilities.Black.Shade.Short = function() { return "Dark, constricting magic, single target."; }
 Abilities.Black.Shade.cost = { hp: null, sp: 15, lp: null};
+Abilities.Black.Shade.castTime = 85;
 Abilities.Black.Shade.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mDark: 1},
-	atkMod: 1.1,
+	atkMod: 2.2,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Poss] [hand]s are wreathed in shadow, summoned by the power of [hisher] dark magic. Quick as lightning, the shade darts across the ground, wrapping itself around [tname]! ", parse);
 	}],
 	onMiss: [Abilities.Black._onMiss],
 	onDamage: [Abilities.Black._onDamage],
-	onAbsorb: [Abilities.Black._onAbsorb]
+	onAbsorb: [Abilities.Black._onAbsorb],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		if(Status.Slow(target, { hit : 0.6, factor : 2, turns : 3, turnsR : 3 })) {
+			Text.Add("[tName] get[tnotS] tangled by the tendrils, slowing [thimher]!", parse);
+		}
+	}]
 }));
 
 
 Abilities.Black.Thorn = new Ability("Thorn");
 Abilities.Black.Thorn.Short = function() { return "Nature magic, single target."; }
 Abilities.Black.Thorn.cost = { hp: null, sp: 15, lp: null};
+Abilities.Black.Thorn.castTime = 75;
 Abilities.Black.Thorn.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mNature: 1},
-	atkMod: 1.1,
+	atkMod: 2.0,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		parse["skin"] = target.SkinDesc();
@@ -217,9 +234,10 @@ Abilities.Black.Thorn.castTree.push(AbilityNode.Template.Magical({
 Abilities.Black.WindShear = new Ability("WindShear");
 Abilities.Black.WindShear.Short = function() { return "Wind magic, single target."; }
 Abilities.Black.WindShear.cost = { hp: null, sp: 45, lp: null};
+Abilities.Black.WindShear.castTime = 120;
 Abilities.Black.WindShear.castTree.push(AbilityNode.Template.Magical({
 	damageType: {pSlash: 1, mWind: 1},
-	atkMod: 1.1,
+	atkMod: 1.5,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Poss] [hand]s weave back and forth, summoning a powerful gale of shrieking winds. A frenzy of cutting and slicing air surge toward [tname]! ", parse);
@@ -233,9 +251,10 @@ Abilities.Black.WindShear.castTree.push(AbilityNode.Template.Magical({
 Abilities.Black.Stalagmite = new Ability("Stalagmite");
 Abilities.Black.Stalagmite.Short = function() { return "Earth magic, single target."; }
 Abilities.Black.Stalagmite.cost = { hp: null, sp: 30, lp: null};
+Abilities.Black.Stalagmite.castTime = 120;
 Abilities.Black.Stalagmite.castTree.push(AbilityNode.Template.Magical({
 	damageType: {pBlunt: 0.5, mEarth: 1},
-	atkMod: 1.5,
+	atkMod: 2.5,
 	defMod: 0.8,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
@@ -247,7 +266,7 @@ Abilities.Black.Stalagmite.castTree.push(AbilityNode.Template.Magical({
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("The great stalagmite throws [tname] to the ground! ", parse);
-	}]
+	}, AbilityNode.Template.Cancel()]
 }));
 
 
@@ -255,9 +274,10 @@ Abilities.Black.Whirlwind = new Ability("Whirlwind");
 Abilities.Black.Whirlwind.Short = function() { return "Wind magic, targets all enemies."; }
 Abilities.Black.Whirlwind.cost = { hp: null, sp: 35, lp: null};
 Abilities.Black.Whirlwind.targetMode = TargetMode.Enemies;
+Abilities.Black.Whirlwind.castTime = 120;
 Abilities.Black.Whirlwind.castTree.push(AbilityNode.Template.Magical({
 	damageType: {pSlash: 0.3, mWind: 1},
-	atkMod: 1.1,
+	atkMod: 1.9,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Poss] [hand]s raise a large torrent of wind, throwing things every which way. The huge whirlwind envelops the opposing party, cutting and slashing! ", parse);
@@ -272,8 +292,10 @@ Abilities.Black.Eruption = new Ability("Eruption");
 Abilities.Black.Eruption.Short = function() { return "Fire magic, targets all enemies."; }
 Abilities.Black.Eruption.cost = { hp: null, sp: 30, lp: null};
 Abilities.Black.Eruption.targetMode = TargetMode.Enemies;
+Abilities.Black.Eruption.castTime = 110;
 Abilities.Black.Eruption.castTree.push(AbilityNode.Template.Magical({
-	damageType: {mFire: 1},
+	damageType: {mFire: 1.2},
+	atkMod: 2.1,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] summon[notS] a wave of fire and smoke, boiling forth from the ground. The flames envelop the opposing party! ", parse);
@@ -288,8 +310,10 @@ Abilities.Black.Spread = new Ability("Spread");
 Abilities.Black.Spread.Short = function() { return "Water magic, targets all enemies."; }
 Abilities.Black.Spread.cost = { hp: null, sp: 40, lp: null};
 Abilities.Black.Spread.targetMode = TargetMode.Enemies;
+Abilities.Black.Spread.castTime = 110;
 Abilities.Black.Spread.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mWater: 1.3},
+	atkMod: 2.1,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] summon[notS] a wave of rushing water, sprouting forth from the ground. The great torrent sweeps over the opposing party! ", parse);
@@ -303,9 +327,10 @@ Abilities.Black.Spread.castTree.push(AbilityNode.Template.Magical({
 Abilities.Black.Shock = new Ability("Shock");
 Abilities.Black.Shock.Short = function() { return "Thunder magic, single target. Moderate chance of stunning the enemy."; }
 Abilities.Black.Shock.cost = { hp: null, sp: 25, lp: null};
+Abilities.Black.Shock.castTime = 80;
 Abilities.Black.Shock.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mThunder: 1},
-	atkMod: 1.3,
+	atkMod: 3.0,
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("The air tingles as [name] call[notS] on the power of thunder. There is a great crackle and a blinding flash of light as a surge of electricity flows through [tname]!", parse);
@@ -332,8 +357,9 @@ Abilities.Black.ThunderStorm = new Ability("ThunderStorm");
 Abilities.Black.ThunderStorm.Short = function() { return "Thunder magic, targets all enemies. Moderate chance of stunning the enemy."; }
 Abilities.Black.ThunderStorm.cost = { hp: null, sp: 50, lp: null};
 Abilities.Black.ThunderStorm.targetMode = TargetMode.Enemies;
+Abilities.Black.ThunderStorm.castTime = 100;
 Abilities.Black.ThunderStorm.castTree.push(AbilityNode.Template.Magical({
-	atkMod: 1.3,
+	atkMod: 2.2,
 	damageType: {mThunder: 1},
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster);
@@ -361,6 +387,7 @@ Abilities.Black.ThunderStorm.castTree.push(AbilityNode.Template.Magical({
 Abilities.Black.Venom = new Ability("Venom");
 Abilities.Black.Venom.Short = function() { return "Poisons single target."; }
 Abilities.Black.Venom.cost = { hp: null, sp: 15, lp: null};
+Abilities.Black.Venom.castTime = 50;
 Abilities.Black.Venom.castTree.push(AbilityNode.Template.Magical({
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
@@ -369,7 +396,7 @@ Abilities.Black.Venom.castTree.push(AbilityNode.Template.Magical({
 	onMiss: [Abilities.Black._onMiss],
 	onHit: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
-		if(Status.Venom(target, { hit : 0.75, turns : 3, turnsR : 5, str : 1, dmg : 0.2 })) {
+		if(Status.Venom(target, { hit : 0.9, turns : 3, turnsR : 5, str : 1, dmg : 0.2 })) {
 			Text.Add("[tName] [thas] been poisoned!", parse);
 		}
 		else {
@@ -384,7 +411,9 @@ Abilities.Black.Ivy = new Ability("Ivy");
 Abilities.Black.Ivy.Short = function() { return "Nature magic, targets all enemies."; }
 Abilities.Black.Ivy.cost = { hp: null, sp: 40, lp: null};
 Abilities.Black.Ivy.targetMode = TargetMode.Enemies;
+Abilities.Black.Ivy.castTime = 100;
 Abilities.Black.Ivy.castTree.push(AbilityNode.Template.Magical({
+	atkMod: 2,
 	damageType: {mNature: 1.3},
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster);
