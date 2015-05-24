@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 4;
-VERSION_SUBSCRIPT = "b";
-VERSION_NAME = "Combat rewrite, pt.1";
+VERSION_SUBSCRIPT = "c";
+VERSION_NAME = "Combat rewrite, pt.2";
 
 SAVE_VERSION = 25;
 // Save version 1: Initial
