@@ -17,7 +17,9 @@ function Asche(storage) {
 	this.Butt().buttSize.base = 6;
 	this.body.SetRace(Race.Jackal);
 	
-	this.flags["Met"]     = Asche.Met.NotMet;
+	this.flags["Met"]   = Asche.Met.NotMet;
+	this.flags["Talk"]  = 0; //Bitmask
+	this.flags["Magic"] = 0;
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -27,7 +29,23 @@ Asche.prototype.constructor = Asche;
 Asche.Met = {
 	NotMet : 0,
 	Met    : 1
-}
+};
+Asche.Talk = {
+	Shop    : 1,
+	Herself : 2,
+	Sister  : 4,
+	Stock   : 8
+};
+Asche.Magic = {
+	Components : 1,
+	Rituals    : 2
+};
+Asche.Tasks = {
+	Started_1  : 1,
+	Finished_1 : 2,
+	Starget_2  : 3,
+	Finished_2 : 4
+};
 
 Asche.prototype.Update = function(step) {
 	
@@ -90,6 +108,7 @@ Scenes.Asche.FirstEntry = function() {
 
 Scenes.Asche.Prompt = function() {
 	var parse = {
+		handsomepretty : player.mfFem("handsome", "pretty"),
 		heshe: player.mfFem("he", "she"),
 		hisher: player.mfFem("his", "her")
 	};
@@ -99,6 +118,18 @@ Scenes.Asche.Prompt = function() {
 		tooltip : "Study the jackal-morph.",
 		func : Scenes.Asche.Appearance,
 		enabled : true
+	});
+	options.push({ nameStr : "Talk",
+		tooltip : "Chat up Asche.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Asche looks around the her shop for a bit, craning her neck this way and that. Once the jackaless is content that business isn’t too brisk to prevent a bit of chit-chat, she lounges on the counter with all the nonchalance of a lazy cat and smiles at you.", parse);
+			Text.NL();
+			Text.Add("<i>“Well, it seems like Asche has a little time for making small talk with [handsomepretty] customer like you. Maybe call it customer relations? Maybe with enough luck, can be called customer service, too.”</i> She chuckles at her own joke. <i>“Well, what does good customer wish to gossip about?”</i>", parse);
+			Text.Flush();
+			
+			Scenes.Asche.TalkPrompt();
+		}, enabled : true
 	});
 	//TODO
 	/*
@@ -149,4 +180,224 @@ Scenes.Asche.Appearance = function() {
 	Text.NL();
 	Text.Add("<i>“Is [handsomepretty] customer done admiring Asche?”</i> she asks slyly, her muzzle splitting in a canine grin even as her long, fluffy tail begins wagging eagerly. <i>“Asche loves to feel treasured, yes yes, but even though she is magical, she is not for sale.”</i>", parse);
 	Text.Flush();
+}
+
+
+Scenes.Asche.TalkPrompt = function() {
+	var parse = {
+		handsomepretty : player.mfFem("handsome", "pretty"),
+		heshe: player.mfFem("he", "she"),
+		hisher: player.mfFem("his", "her"),
+		himher : player.mfFem("him", "her")
+	};
+	
+	//[Shop][Magic][Herself][Sister][Stock][Tasks][Back]
+	var options = new Array();
+	options.push({ nameStr : "Shop",
+		tooltip : "That’s a nice shop she has there.",
+		func : function() {
+			Text.Clear();
+			Text.Add("The shop’s a pretty nice place, you mention, looking around. It definitely has that feel that one gets when entering one of those tiny antique shops, or perhaps an old bookstore - the kind in which forgotten treasures are found, treasures which have entire stories revolving about them.", parse);
+			Text.NL();
+			Text.Add("Asche beams. <i>“Did not happen by accident, Asche spent years cultivating atmosphere, you know. Was not very good at first, customers would come in, take a look, then go; long time getting the jasmine scent correct, to help customers be at ease while not sending them to sleeping or driving them away.”</i>", parse);
+			Text.NL();
+			Text.Add("Years, huh. Just how long has she had the shop?", parse);
+			Text.NL();
+			Text.Add("<i>“Oh, long, long time. As you can guess, Asche is older than she looks, yes?”</i> The jackaless’ muzzle parts in a sly smile, her tail wagging back and forth even more vigorously now. <i>“Maybe not by so much by way some are reckoning time, but she is not afraid to admit it. Lying to oneself is quick way to meet sticky end in her line of work.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“But since you are wanting to know… if you are asking old man in streets how long Asche’s shop has been around, then he will remember it being there as a small boy. Owner was also jackaless named Asche, but the one running shop today must be her daughter, also named Asche… no one is young forever, right?”</i>", parse);
+			Text.NL();
+			Text.Add("So… is she <i>really</i> that old, or is she the daughter of the former proprietor? Or maybe she really isn’t a jackal-morph and something else masquerading as one? The possibilities are endless!", parse);
+			Text.NL();
+			Text.Add("The jackaless raises a finger to her lips. <i>“I cannot be so easily telling that. Is part of shop’s mystique, and am afraid much of it would be gone if you are knowing answer. Maybe nice customer can be earning knowledge of that later on, maybe not.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“But all customer needs to be knowing is that Asche is here running her shop, selling safe solutions to customers’ problems. That is all that is really needed, yes?”</i>", parse);
+			Text.NL();
+			Text.Add("Well, from a business standpoint, you suppose it is. From a more personal point of view, though, it’s hardly enough. Nevertheless, it’s probably not good to press her for too much in one go…", parse);
+			Text.Flush();
+			
+			asche.flags["Talk"] |= Asche.Talk.Shop;
+			
+			Scenes.Asche.TalkPrompt();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Magic",
+		tooltip : "Discuss Asche’s particular brand of magic with her.",
+		func : function() {
+			Text.Clear();
+			// Lesson one - Components
+			if(asche.flags["Magic"] < Asche.Magic.Components) {
+				Text.Add("You’d like to discuss the nature of magic with her. It seems quite different from what is usually practiced on Eden.", parse);
+				Text.NL();
+				Text.Add("<i>“Oh-ho,”</i> the jackaless replies, eyeing you with a raised eyebrow, her tail swishing from side to side. <i>“Customer is wanting to know the secrets of highlander witch doctors, herb women, and shamans? Is taking many years to truly understand, as well as good memory; Asche spent her whole time as girl learning basics of such magic.”</i>", parse);
+				Text.NL();
+				Text.Add("Well, maybe she could give you a condensed version of the idea?", parse);
+				Text.NL();
+				Text.Add("<i>“Yes, yes. Well, to be simply saying, basics of magic is not too different from that of lowlanders with their staves and fancy clothes and sparkling crystals. Is all about energy. But just as one can be choosing to be carrying water in barrel or bucket, so can these energies be moved in different ways.</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Differences between lowlander and highlander magic are being many, but most important one is this: highlander magic is often - but not always - being employing the use of magical components, as if brewing potion. These components are being items which are representing facets of natural world which is having magic in them; by using these components in casting of spell, shaman is being able to draw much energy to fuel spell.”</i>", parse);
+				Text.NL();
+				Text.Add("So, it’s like brewing a potion… you kind of get it, yet at the same time, there’s something off about Asche’s explanation you can’t quite put a finger on…", parse);
+				Text.NL();
+				Text.Add("<i>“Good point about using magic component in casting of spell is that is allowing skilled herb woman or witch doctor to harness far more magic than self can draw. Bad point is that if caster is not having component, spell is weaker or even worse, not working. In such case, highlander magician is having to fall back on spells which are being not so powerful.”</i>", parse);
+				Text.NL();
+				Text.Add("Yeah, it sounds like an obvious tradeoff to you. So, what are some of these components? You’d imagine they’d be pretty rare and mystical…", parse);
+				Text.NL();
+				Text.Add("Asche shrugs. <i>“It is really being depending on what customer has in mind. For example, best item for drawing forth power of sea is being black pearl, which is being incredibly rare. Pearl is also working, but not as powerful, to be needing more of them as compared to black ones. To be representing life and growth is very simple, just needing pinch of common basil herb. Invoking fire and light is requiring volcanic ash from deep underground, but coal can also be sufficing if simple magic is what is needed.", parse);
+				Text.NL();
+				Text.Add("<i>“Rituals is also being important in working of highlander magic, but maybe is discussion best saved for another time, is it not? Asche’s tongue is getting dry from so much talking, maybe is wanting something to drink.”</i> The jackaless chuckles.", parse);
+				
+				asche.flags["Magic"] = Asche.Magic.Components;
+				
+				Text.Flush();
+				Scenes.Asche.TalkPrompt();
+			}
+			// Lesson two - Ritual
+			else if(asche.flags["Magic"] < Asche.Magic.Rituals && asche.flags["Tasks"] >= Asche.Tasks.Finished_1) {
+				Text.Add("<i>“Now that customer has had chance to see shamanistic power for [himher]self, Asche is thinking that maybe [heshe] is ready for deeper explanation. But… really, this jackaless is curious - she cannot be teaching customer to be doing highlander magic, so why is customer being asking so many questions?”</i>", parse);
+				Text.NL();
+				Text.Add("Curiosity, nothing more.", parse);
+				Text.NL();
+				Text.Add("Asche considers that a moment, a soft rustle accompanying movements under her snow-white sari. <i>“Well, if it is curiosity that customer is giving as reason, then Asche shall be giving answer that is fitting. Let us be moving onto next portion of highlander magic: ritual.</i>", parse);
+				Text.NL();
+				Text.Add("<i>“You may be already knowing that lowlander magicians may be speaking words to help concentrate their focus; others are being making gestures to same effect. Both are not being strictly necessary, but are helping to sharpen mind and direct intent. Lowlanders is often seeing it as crutch, sign of weakness to be discarded.”</i>", parse);
+				Text.NL();
+				Text.Add("The jackaless looks at you to make sure you’re still listening, then continues. <i>“Ritual being used in highlander magic is same basic idea, to use actions and symbols to be focusing mind. Difference is that is very tricky. Even Asche does not use it much, only when true power is being called for.”</i>", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					Text.Clear();
+					Text.Add("<i>“Maybe best explanation is being through example. Say there is not being rain for some time, and shaman is asked to summon rain so that crops may have water. First thing shaman does is to retreat into cave and start preparing large amount of woad. During this time, shaman is also fasting from dawn to dusk to prepare mind for ritual, this period is being lasting two days.</i>", parse);
+					Text.NL();
+					Text.Add("<i>“When this is being over, shaman is taking prepared woad to standing stones, which are being arranged in circle. With this, he is to be pouring woad dye and connecting all stones in one unbroken line. Is being very important that stream is unbroken, if shaman is being stopping pouring even once and resuming, ritual is not working. After circle is joined, is time to draw patterns.</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Patterns on stones are to be made in woad, patterns on shaman’s body are to be made in henna. Red of henna is being contrasting with blue of woad to produce opposites between animate and inanimate, which is becoming during dance.”</i>", parse);
+					Text.NL();
+					Text.Add("Wow, that’s quite a speech, and she’s not done yet. Asche brings out a small flask of what looks like milk tea from under the counter and takes a deep, long swig, running her tongue over her muzzle to wet her lips.", parse);
+					Text.NL();
+					Text.Add("<i>“Now where was Asche? Ah, yes, actual dance to be summoning rain. Too complicated for Asche to be describing right here, but is quite intricate and is consisting of many steps. Also, better if many people are watching. Not just many people, but many people whom shaman is knowing and caring for. This is usually meaning tribe.</i>", parse);
+					Text.NL();
+					Text.Add("<i>“To be sure, is not easy thing. Many steps must be done in right order, with right movements, in right place and at right time for magic to be correctly worked. But when it is working, result of ritual can be incredibly powerful. If given three days to prepare, single shaman can summon rain over entire mountain with rain dance. What many people are seeing is end result - dance that is lasting maybe half an hour, but much preparation is going into ritual magic.”</i>", parse);
+					Text.NL();
+					Text.Add("Wow. That certainly is a lot.", parse);
+					Text.NL();
+					Text.Add("Asche shakes her head, soft clinks of gold against gold accompanying the movement. <i>“What Asche has told good customer is being very, very summarised. There is reason why next herb woman is almost certainly being daughter of previous one, as training is beginning from moment child is able to walk and speak. Maybe even before, if customer is seeing it that way.</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Now, Asche has said enough, and has shop to tend to. Maybe you buy something to make up for Asche telling you long grandmother story, yes?”</i>", parse);
+					
+					asche.flags["Magic"] = Asche.Magic.Rituals;
+					
+					Text.Flush();
+					Scenes.Asche.TalkPrompt();
+				});
+			}
+			//TODO more lessons
+			else {
+				Text.Add("The jackaless makes a show of looking contemplative, leaning on the counter as she taps her chin and rolls her eyes in an exaggerated display of thoughtfulness. <i>“Hmm… customer is wanting to be talking more magic with Asche? This jackaless is thinking not so quickly… maybe good customer is getting one step ahead of [himher]self, yes? Perhaps is best to be contemplating and internalizing things which are being told, lessons which are being taught, having some time to be seeing it in action.</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Maybe it is being best for good customer if [heshe] is coming back after Asche is finding opportunity to be sending [himher] to experience it in field.”</i>", parse);
+				Text.Flush();
+				Scenes.Asche.TalkPrompt();
+			}
+			
+		}, enabled : true
+	});
+	options.push({ nameStr : "Herself",
+		tooltip : "Ask the jackaless about herself.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Perhaps she could tell you something about herself.", parse);
+			Text.NL();
+			Text.Add("<i>“Customer is wanting to know about Asche? To be commended, for most are merely interested in what she can do for them. Oh, do not worry. Asche can tell you many things about herself that are true, but do not make shop look more mundane than it should be.”</i>", parse);
+			Text.NL();
+			Text.Add("Well then, you say, settling down for a long talk. You’re all ears.", parse);
+			Text.NL();
+			Text.Add("<i>“Asche grew up in highlands of Eden,”</i> the jackaless begins, idly drumming the fingers of one hand on the counter. <i>“Was pretty much shithole, as much as she remembers it. Returned to visit family few years back, still is much of a shithole, was reminded why she came to city.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Highlands may be shithole, but still is mystical shithole. Magic there is not like magic of coasts and lowlands, and Asche’s mother was herb woman for tribe; did pretty well for herself by taking chieftain as mate. Was not long before big sister and Asche were born; big sister was intended to take on mother’s mantle but Asche learned too anyway, mostly in secret. Still, only room for one herb woman in a tribe. Asche is not stupid, so she left before big sister arranged for accident to happen to her. Later on, sister is also deciding that tribe is too small for her, you know? Wants to see world? So everything is for nothing.”</i>", parse);
+			Text.NL();
+			Text.Add("Ouch. That’s nasty.", parse);
+			Text.NL();
+			Text.Add("Asche shakes her head. <i>“Is only natural for those who scheme to think others are scheming too; they are always imagining that others also thinking like them. Now where were we? Right! Asche comes to city. Was long and tiring walk, also some interesting things happened, but best to save those for later.”</i>", parse);
+			Text.NL();
+			Text.Add("What happened next?", parse);
+			Text.NL();
+			Text.Add("<i>“Asche makes living casting small spells,”</i> the jackaless replies. <i>“Keep bugs away from grain bin and sleeping place, get rid of rats, soothe mild fever, that kind of thing. Many swindlers in those days, so is hard to get started, but once people are knowing that you are not cheating them by talking nonsense and passing off colored water as potions, they are the ones who are finding you rather than other way round.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Soon enough, Asche is having enough money to rent out small place in merchants’ district - rent of this place was very much cheaper back then, so easier to do. When she is earning enough money later on, she is buying place and making it her own. Is very nice story, no?”</i>", parse);
+			Text.Flush();
+			
+			asche.flags["Talk"] |= Asche.Talk.Herself;
+			
+			Scenes.Asche.TalkPrompt();
+		}, enabled : true
+	});
+	//Requires having asked about herself and shop
+	options.push({ nameStr : "Sister",
+		tooltip : "So, this sister she mentioned…",
+		func : function() {
+			Text.Clear();
+			Text.Add("The jackaless’ ears flick at your question. <i>“Why yes, Asche has one big sister. Much lovelier than Asche, too - and much more nasty. Big sister also runs shop much like Asche’s, only with much fewer scruples; while Asche is careful not to sell things that harm customers unless misused, big sister does not think twice about doing so. That is why while Asche can remain in one place, big sister was always having to move shop before shop was moved for her, if you are understanding Asche’s meaning.”</i>", parse);
+			Text.NL();
+			Text.Add("Sounds like she doesn’t like that sister of hers very much.", parse);
+			Text.NL();
+			Text.Add("<i>“Of course not. When Asche was little, big sister was always making Asche do things for her; Asche, fetch this, Asche, carry that. Later on, was also always tricking customers into doing things for her, often because she sells them bad things, cursed things, things which have hidden prices. She is doing it even when simple paying of money would be easier; habits are hard in dying. There was this time when she was having this monkey’s paw…”</i>", parse);
+			Text.NL();
+			Text.Add("You clear your throat, interrupting the jackaless before she gets drawn off on a tangent. And… <i>was</i> having to move shop? One can only take it karma caught up with Asche’s elder sister?", parse);
+			Text.NL();
+			Text.Add("<i>“In a sense of speaking, yes.”</i> Asche chuckles, the jackal-morph’s grin growing wider. <i>“Last Asche heard of sister, she was bragging how she had made customer into good little slave with magical ankhs, help her get rare items she is too lazy to get herself. Have not had news from her since, but one has come across rumors…”</i>", parse);
+			Text.NL();
+			Text.Add("Asche laughs, not even bothering to hide the undertones of dark glee in her voice. She raises an eyebrow and cozies up to the counter, gazing straight into your eyes.", parse);
+			Text.NL();
+			Text.Add("<i>“Nevertheless, if you are finding in your travels shop much like Asche’s, and also owner who looks like Asche, only she has black and silver fur instead… customer is not to be buying anything and leaving immediately. But there is little to fear from Asche, good customer. Asche is a nice girl, and knows not to salt earth. None of Asche’s merchandise will harm you - unless you mean to do evil with it.”</i>", parse);
+			Text.Flush();
+			
+			asche.flags["Talk"] |= Asche.Talk.Sister;
+			
+			Scenes.Asche.TalkPrompt();
+		}, enabled : (asche.flags["Talk"] & Asche.Talk.Shop) && (asche.flags["Talk"] & Asche.Talk.Herself)
+	});
+	options.push({ nameStr : "Stock",
+		tooltip : "Where does she get all the stuff she sells?",
+		func : function() {
+			Text.Clear();
+			Text.Add("You’ll admit to being a bit curious - just where does Asche get her stock? Some of the things she sells are positively odd; you don’t think the likes of them can be found in any other shop in Rigard - in fact, you’re pretty sure some of her goods would be more at home in the Academy of Higher Arts rather than sitting on her shelves.", parse);
+			Text.NL();
+			Text.Add("Asche whistles innocently and rolls her eyes in the most exaggerated fashion, then gives you a toothy grin. <i>“Oh, little bit here, little bit there, many a mickle makes a muckle, as saying goes. Some of it is coming from customers like you, wanting to sell things and not knowing what they truly are - for example, once had a fellow come in who was using pretty powerful artifact to help grow pumpkins, and wanted to get rid of it because he was selling farm and moving to Afaris. Such waste; Asche was more than willing to buy from him. More yet is also coming from dealers Asche trusts, although she is not going to be revealing their names.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Other stock, Asche admits, is being pulled out of box, although she is making sure that everything is safe to use; some things are disguising themselves and slipping through box’s protections. After being victim of many of big sister’s pranks, Asche has good skill at scenting dark magic.”</i> The jackaless taps her nose for emphasis. <i>“If she cannot be destroying item, she knows enough to at least send it back where it is coming from.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“As for potions, all are brewed by Asche. Simple ones anyone who studies can make, but some are Asche’s special recipe and she is not letting such secrets slip easily.”</i> With that, the jackaless clears her throat and gestures at her store. <i>“Asche has not stayed in business for so long by being stupid or careless; she is having many loyal customers who be relying on her not to make mistake.”</i>", parse);
+			Text.Flush();
+			
+			asche.flags["Talk"] |= Asche.Talk.Stock;
+			
+			Scenes.Asche.TalkPrompt();
+		}, enabled : true
+	});
+	// TODO Default response:
+	options.push({ nameStr : "Tasks",
+		tooltip : "Does she perchance need the services of an adventurer?",
+		func : function() {
+			//Play this if the player isn’t eligible for a new task at the moment.
+			Text.Clear();
+			Text.Add("You ask the jackal-morph shopkeeper if she has anything for you to do.", parse);
+			Text.NL();
+			Text.Add("<i>“Ah, so adventuring spirit is surging in good customer? Asking shopkeepers and people in bars is time-honored way of receiving important tasks of saving world and such things.”</i>", parse);
+			Text.NL();
+			Text.Add("That, and being bequeathed tasks by mysterious goddesses whom you just met moments before.", parse);
+			Text.NL();
+			Text.Add("<i>“Well, that is being not so common. But still happens, so customer has point.”</i> Asche looks thoughtful for a moment. <i>“Still, Asche is not having anything for you at the moment - she is not wanting other people to be helping with things she can be doing herself, and she is to be avoiding debts if she can help it. Asche is hating being in debt - is possibly one of worst things in world. Maybe to be asking later, yes?”</i>", parse);
+			Text.Flush();
+			
+			Scenes.Asche.TalkPrompt();
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“Customer is having enough of chit-chat, maybe mouth is getting dry?”</i> Leaning forward on the counter, Asche grins at you playfully. <i>“Asche has many nice teas for long conversations, maybe customer can be purchasing some. But is there anything else customer wishes to have to do with Asche before this meeting is over?”</i>", parse);
+		Text.Flush();
+		
+		Scenes.Asche.Prompt();
+	});
 }
