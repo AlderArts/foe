@@ -164,8 +164,8 @@ Cock.prototype.Short = function() {
 	var knotted = ((this.knot   != 0) && (Math.random() < 0.5)) ? ", knotted"  : "";
 	var sheath  = ((this.sheath != 0) && (Math.random() < 0.5)) ? ", sheathed" : "";
 	var race = " ";
-	if((this.race == Race.Human) && (Math.random() < 0.1)) race += this.race.Short();
-	if((this.race != Race.Human) && (Math.random() < 0.5)) race += this.race.Short();
+	if((this.race == Race.Human) && (Math.random() < 0.1)) race += this.race.Short(Gender.male);
+	if((this.race != Race.Human) && (Math.random() < 0.5)) race += this.race.Short(Gender.male);
 	return desc.adj + knotted + sheath + race + " " + noun;
 }
 // TODO
@@ -194,7 +194,7 @@ Cock.prototype.aLong = function() {
 	var noun    = this.noun();
 	var knotted = (this.knot   != 0) ? ", knotted" : "";
 	var sheath  = (this.sheath != 0) ? ", sheathed" : "";
-	return desc.a + " " + desc.adj + knotted + sheath + " " + this.race.Short() + " " + noun + ", " + desc.len + " long and " + desc.thickness + " thick";
+	return desc.a + " " + desc.adj + knotted + sheath + " " + this.race.Short(Gender.male) + " " + noun + ", " + desc.len + " long and " + desc.thickness + " thick";
 }
 // TODO: Better descriptions
 Cock.prototype.Long = function() {
@@ -202,5 +202,5 @@ Cock.prototype.Long = function() {
 	var noun    = this.noun();
 	var knotted = (this.knot   != 0) ? ", knotted" : "";
 	var sheath  = (this.sheath != 0) ? ", sheathed" : "";
-	return desc.adj + knotted + sheath + " " + this.race.Short() + " " + this.noun() + ", " + desc.len + " long and " + desc.thickness + " thick";
+	return desc.adj + knotted + sheath + " " + this.race.Short(Gender.male) + " " + this.noun() + ", " + desc.len + " long and " + desc.thickness + " thick";
 }
