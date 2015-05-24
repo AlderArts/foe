@@ -137,6 +137,7 @@ world.loc.Rigard.ShopStreet.MagicShop.description = function() {
 		
 	};
 	
+	//TODO Technically not correct. Belongs in a RegularEntry function
 	Text.Add("Stepping into the interior of the brightly-lit shop to the jingle of chimes, you are immediately surrounded by the scent of sandalwood and jasmine. Its source is easily identified: a large, porcelain, pig-shaped incense burner hanging from the ceiling by a trio of stout chains. The smell is jarring at first, but rapidly fades into the background as your nose gets used to it, and you have to admit, it definitely sets the mood of the little store.", parse);
 	Text.NL();
 	Text.Add("A hefty portion of the merchandise on display consists of antiques, knick-knacks, and gewgaws of all shapes, sizes and colors, most of them small pieces of jewellery supposedly charmed for one purpose or another - one to ward off illness, another to bring wealth, and yet another to make one appear more attractive. You doubt that most of them actually work, or at least function in the way that they’re intended to; nevertheless, each item has a small placard in front of it, detailing exactly what it does.", parse);
