@@ -26,11 +26,11 @@ RaceDesc.prototype.Desc = function(gender) {
 	var desc = this.desc;
 	if(_.isNumber(gender)) {
 		if(gender == Gender.male)
-			desc.concat(this.descMale);
+			desc = desc.concat(this.descMale);
 		else
-			desc.concat(this.descFemale);
+			desc = desc.concat(this.descFemale);
 	}
-	if(this.superclass) desc.concat(this.superclass.Desc(gender));
+	if(this.superclass) desc = desc.concat(this.superclass.Desc(gender));
 	return desc;
 }
 
@@ -59,11 +59,11 @@ RaceDesc.prototype.Quantifier = function(aAn, gender) {
 	var quantify = this.quantify;
 	if(_.isNumber(gender)) {
 		if(gender == Gender.male)
-			quantify.concat(this.quantifyMale);
+			quantify = quantify.concat(this.quantifyMale);
 		else
-			quantify.concat(this.quantifyFemale);
+			quantify = quantify.concat(this.quantifyFemale);
 	}
-	if(this.superclass) quantify.concat(this.superclass.Quantifier(aAn, gender));
+	if(this.superclass) quantify = quantify.concat(this.superclass.Quantifier(aAn, gender));
 	return quantify;
 }
 
