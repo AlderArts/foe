@@ -184,14 +184,14 @@ Race.Gol = new RaceDesc("gol", 33, {
 }, Race.Insect);
 Race.Cow = new RaceDesc("cow", 14, {
 	desc: [{a:"a", noun:"bovine"}],
-	descMale: [{a:"a", noun:"cow"}],
-	descFemale: [{a:"a", noun:"bull"}],
+	descMale: [{a:"a", noun:"bull"}],
+	descFemale: [{a:"a", noun:"cow"}],
 	quantify: [{a:"a", noun:"bovine"}]
 });
 Race.Goat = new RaceDesc("goat", 13, {
 	desc: [{a:"a", noun:"goat"}, {a:"a", noun:"caprine"}],
-	descMale: [{a:"a", noun:"doe"}],
-	descFemale: [{a:"a", noun:"buck"}],
+	descMale: [{a:"a", noun:"buck"}],
+	descFemale: [{a:"a", noun:"doe"}],
 	quantify: [{a:"a", noun:"caprine"}]
 });
 Race.Satyr = new RaceDesc("satyr", 11, {
