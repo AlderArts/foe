@@ -14,8 +14,6 @@ world.loc.Rigard = {
 		captains : new Event("Captains quarters")
 	},
 	
-	
-	
 	Residental   :
 	{
 		street   : new Event("Residental street"), // Will also contain gate to slums
@@ -81,8 +79,7 @@ function Rigard(storage) {
 	this.SexShop.AddItem(Items.StrapOn.ChimeraStrapon, 5);
 	this.SexShop.AddItem(Items.Weapons.LWhip, 5);
 	
-	this.MagicShop = new Shop();
-	this.MagicShop.AddItem(Items.Combat.HPotion, 5);
+	this.MagicShop = Scenes.Rigard.MagicShop.Shop;
 	
 	// Have accessed town (not necessarily free access)
 	this.flags["Visa"] = 0;

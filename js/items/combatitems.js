@@ -114,6 +114,8 @@ Items.Combat = {};
 
 Items.Combat.HPotion = new CombatItem("pot0", "H.Potion");
 Items.Combat.HPotion.price = 20;
+Items.Combat.HPotion.sDesc = function() { return "health potion"; }
+Items.Combat.HPotion.lDesc = function() { return "a weak health potion"; }
 Items.Combat.HPotion.Short = function() { return "A health potion."; }
 Items.Combat.HPotion.Long = function() { return "A weak health potion."; }
 Items.Combat.HPotion.targetMode = TargetMode.Ally;

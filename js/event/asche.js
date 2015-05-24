@@ -114,7 +114,8 @@ Scenes.Asche.Prompt = function() {
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		heshe: player.mfFem("he", "she"),
-		hisher: player.mfFem("his", "her")
+		hisher: player.mfFem("his", "her"),
+		himher: player.mfFem("him", "her")
 	};
 	
 	var options = new Array();
@@ -135,6 +136,46 @@ Scenes.Asche.Prompt = function() {
 			Scenes.Asche.TalkPrompt();
 		}, enabled : true
 	});
+	options.push({ nameStr : "Buy",
+		tooltip : "Ask to see her wares.",
+		func : function() {
+			Text.Clear();
+			Text.Add("The jackaless nods and beams at you. <i>“Asche is happy to be able to service customer! Please to be browsing, perusing, going through. If customer is finding anything to [hisher] liking, then is but small matter of money to be bringing it away with [himher].”</i>", parse);
+			
+			rigard.MagicShop.Buy(function() {
+				Text.Clear();
+				
+				var scenes = new EncounterTable();
+				scenes.AddEnc(function() {
+					Text.Add("<i>“Oh? There is being nothing here that is interesting customer?”</i> Heaving a small sigh, Asche shrugs and spreads her hands, palms upward. <i>“Well, it is being what it is, so maybe customer should be looking at something else?”</i>", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("Licking her muzzle, Asche proceeds to smack her lips. <i>“Eh? Nothing is catching customer’s eye? Is not big problem, Asche would rather have customer be buying useful thing rather than just buying for the sake of making Asche happy. This jackaless is not so hard up that she is needing others to be buying everything she is putting on the shelves.”</i>", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("<i>“Is pity that customer is not fancying anything right now, but maybe [heshe] has not come across right item yet,”</i> Asche says as she puts her goods away. <i>“Is not big deal, anyway - these days Asche is doing this more for practice and amusement than actually needing to feed her face. To be coming again another time, when she has different things?”</i>", parse);
+				}, 1.0, function() { return true; });
+				scenes.Get();
+				
+				Text.Flush();
+				Scenes.Asche.Prompt();
+			}, true);
+		}, enabled : true
+	});
+	options.push({ nameStr : "Sell",
+		tooltip : "Get rid of some of your surplus.",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“Customer is wanting to sell something to Asche?”</i> The jackaless rubs her hands together, a movement accompanied by the clinking of bangles. <i>“Let Asche see item, and she will tell you how much she thinks she will buy it for.”</i>", parse);
+			
+			rigard.MagicShop.Sell(function() {
+				Text.Clear();
+				Text.Add("<i>“Customer come back to Asche if [heshe] wants to sell things, yes?”</i>", parse);
+				Text.Flush();
+				Scenes.Asche.Prompt();
+			}, true);
+		}, enabled : true
+	});
 	options.push({ nameStr : "Fortune Telling",
 		tooltip : "Ask Asche to see what the future has in store for you.",
 		func : function() {
@@ -146,18 +187,6 @@ Scenes.Asche.Prompt = function() {
 			Scenes.Asche.FortuneTellingPrompt();
 		}, enabled : true
 	});
-	//TODO 
-	/*
-	options.push({ nameStr : "name",
-		tooltip : "",
-		func : function() {
-			Text.Clear();
-			Text.Add("", parse);
-			Text.NL();
-			Text.Flush();
-		}, enabled : true
-	});
-	*/
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
 		
@@ -196,7 +225,6 @@ Scenes.Asche.Appearance = function() {
 	Text.Add("<i>“Is [handsomepretty] customer done admiring Asche?”</i> she asks slyly, her muzzle splitting in a canine grin even as her long, fluffy tail begins wagging eagerly. <i>“Asche loves to feel treasured, yes yes, but even though she is magical, she is not for sale.”</i>", parse);
 	Text.Flush();
 }
-
 
 Scenes.Asche.TalkPrompt = function() {
 	var parse = {
