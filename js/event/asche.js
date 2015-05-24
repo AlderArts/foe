@@ -26,6 +26,10 @@ function Asche(storage) {
 Asche.prototype = new Entity();
 Asche.prototype.constructor = Asche;
 
+Asche.FortuneCost = function() {
+	return 10;
+}
+
 Asche.Met = {
 	NotMet : 0,
 	Met    : 1
@@ -131,7 +135,18 @@ Scenes.Asche.Prompt = function() {
 			Scenes.Asche.TalkPrompt();
 		}, enabled : true
 	});
-	//TODO
+	options.push({ nameStr : "Fortune Telling",
+		tooltip : "Ask Asche to see what the future has in store for you.",
+		func : function() {
+			Text.Clear();
+			parse["coin"] = Text.NumToText(Asche.FortuneCost());
+			Text.Add("<i>Ah, you are wanting Asche to be divining what future holds for you?”</i> the jackaless says with a smirk and wink. <i>“Can be done, for the price of [coin] coins.”</i>", parse);
+			Text.Flush();
+			
+			Scenes.Asche.FortuneTellingPrompt();
+		}, enabled : true
+	});
+	//TODO 
 	/*
 	options.push({ nameStr : "name",
 		tooltip : "",
@@ -400,4 +415,202 @@ Scenes.Asche.TalkPrompt = function() {
 		
 		Scenes.Asche.Prompt();
 	});
+}
+
+
+Scenes.Asche.FortuneTellingPrompt = function() {
+	var parse = {
+		handsomepretty : player.mfFem("handsome", "pretty"),
+		heshe: player.mfFem("he", "she"),
+		hisher: player.mfFem("his", "her"),
+		himher : player.mfFem("him", "her")
+	};
+	
+	var cost = Asche.FortuneCost();
+	
+	//[Fortune][Fate][Explain][Never Mind]
+	var options = new Array();
+	options.push({ nameStr : "Fortune",
+		tooltip : "Ask for a quick, light and easy reading.",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“Mm.”</i> The jackaless pulls at her shawl as you pass her the money, then dips her head. <i>“All right. Good customer is to be holding out hand, please.”</i>", parse);
+			Text.NL();
+			Text.Add("Obediently, you do as Asche requests. Her fingers tickle as they ply along the contours of your palm, while she mumbles all the while. There’s no obvious indication of worked magic, but she seems to be concentrating furiously, her eyes narrowed and face set; it’s a minute or so before she finally relaxes her grip on your hand.", parse);
+			Text.NL();
+			
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("<i>“Hmm. Asche is thinking that you are being having romantic problems in near future.”</i> The jackaless looks up from your palm, her expression serious. <i>”Maybe is being a bit of a headache.”</i>", parse);
+				Text.NL();
+				Text.Add("Is there anything you can do to avoid it?", parse);
+				Text.NL();
+				Text.Add("The jackaless thinks a moment, then grins, her dark eyes glinting in the shop’s light. <i>“Actually, Asche is suggesting that customer should be lying back and accepting [hisher] fate.”</i>", parse);
+				Text.NL();
+				Text.Add("What? Isn’t the whole point of knowing a bad fortune to try and avert it?", parse);
+				Text.NL();
+				Text.Add("<i>“Is only headache, and looks like will have no really bad consequences for customer. Will make [himher] stronger for real trouble, does [heshe] not agree?”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("The jackaless looks up from your palm, her expression contemplative. <i>“Am thinking that you may not want to be overindulging if you are ever visiting Lady Blessing’s inn.”</i>", parse);
+				Text.NL();
+				Text.Add("Why? Is someone going to pick your pocket when you’re passed out? The inn seems like too nice a place for that kind of riff-raff…", parse);
+				Text.NL();
+				Text.Add("<i>“Is not coming from another living thing.”</i> Asche looks truly worried, a rare thing for the shopkeeper. <i>“Asche… is not sure. But unless you are being thrill-seeker, Asche is asking you nicely not to be tempting fate.”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“Hmm. Fortune for near future is being indeterminate.”</i>", parse);
+				Text.NL();
+				Text.Add("What’s the matter?", parse);
+				Text.NL();
+				Text.Add("<i>“Other would simply make up nonsense for customer to hear, but I think is more important to tell truth. Next few days for you… is wrapped in chaos. Like highland mist or fog… hard to see clearly. Asche advises you to be cautious, that is all; is but period of uncertainty.”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“Is customer fond of swimming?”</i>", parse);
+				Text.NL();
+				Text.Add("You might be, or might not, you reply. Is there something up?", parse);
+				Text.NL();
+				Text.Add("<i>“Asche is suggesting that maybe you are staying away from large bodies of water tomorrow,”</i> the jackaless replies. <i>“That, and you are best to be avoiding seafood and letting sleeping dogs lie. Is best for your own safety, and is only for one day, so maybe little is being lost if customer follows advice?”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“Asche is thinking that today Lady Luck is being smiling on you. If good customer is wanting to play games of chance, then is probably best to be doing it before midnight.</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Of course, always to be warned that Lady Luck can get tired of carrying same person around for too long, so while to be taking advantage of good fortune, best not to be abusing it.”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.Get();
+			Text.Flush();
+			
+			party.coin -= cost;
+			
+			Scenes.Asche.FortuneTellingPrompt();
+		}, enabled : party.coin >= cost
+	});
+	options.push({ nameStr : "Fate",
+		tooltip : "So, you’re serious about asking Asche to read what the future has in store for you…",
+		func : function() {
+			Text.Clear();
+			Text.Add("All trace of nonchalance drops from the jackaless’ face. Her eyes harden, her lips thin, and you notice that she’s begun fiddling with the hem of her shawl. <i>“So, you are being serious about this, then.”</i>", parse);
+			Text.NL();
+			Text.Add("If she can really tell you of your fate, then yes, you’d like to hear what she has to say; forewarned is forearmed, after all. You place your money on the counter, and watch as Asche sweeps the coins into her palm.", parse);
+			Text.NL();
+			Text.Add("<i>“Very well. Customer is to be holding out hand.”</i>", parse);
+			Text.NL();
+			Text.Add("You do as instructed, and Asche takes hold of your hand, tracing her fingers along the contours of your palm, exploring the ridges of your thumb and fingers. You half-wonder if she’s going to feel your knuckles as well, but thankfully she’s only interested in the top of your hand.", parse);
+			Text.NL();
+			Text.Add("As the jackaless chants softly under her breath, you sense a growing tension in the air, like static electricity gathering - and then it’s released in an instant, a popping sensation against your skin, just as she releases your hand and looks up at you.", parse);
+			Text.NL();
+			Text.Add("<i>“Asche is ready to be telling you what she is seeing in your fate.</i>", parse);
+			Text.NL();
+			
+			var scenes = new EncounterTable();
+			
+			//Fate readings for first phase of game
+			
+			scenes.AddEnc(function() {
+				// Referencing Uru at portal opening.
+				Text.Add("<i>“Customer is to be wary; an old adversary is to be turning up soon. While customer is knowing that [heshe] will eventually have to confront this enemy, meeting will be far sooner than expected.</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Asche is seeing that there is no escaping this fate, so customer must be finding way to deal with it and pass through unharmed. Maybe a safe path will be revealing itself.”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				// If player rejected Kiai at the start.
+				Text.Add("<i>“Asche sees that one whom you rejected will be eventually returning to your side. Your destinies are intertwined like roots twisting about each other; more you try to tear apart, more they cleave back together. Rejecting this one has only made the inevitable stronger; there is not much customer can be doing to fight it, and maybe is better that way.”</i>", parse);
+			}, 1.0, function() { return !party.InParty(kiakai, true); });
+			scenes.AddEnc(function() {
+				// References Corruption, Malice and Lust.
+				Text.Add("<i>“Before customer’s quest is over, [heshe] will be meeting three foes who will be standing out against the many others that [heshe] will meet along [hisher] travels. Customer may already have heard of or even met them, although [heshe] will not know who they are. These three foes may be seeming to be disconnected at first, but they are being sharing common goal, and struggle against them will be no easy task. Asche suggests that you be steeling yourself for what is lying ahead.”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				// References gemstead.
+				Text.Add("<i>“Customer must be careful about who [heshe] is making friends with,”</i> Asche says. <i>“Is more than just friendship. The more who are knowing of your cause, the more are gathering their energies to aid it; the way these energies are being manifesting will soon make themselves clear as customer proceeds towards [hisher] chosen fate. Of course, customer does not want to be making the wrong friends, trusting the wrong people…“</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				//Requires that PC has met Layla.
+				Text.Add("<i>“The creature that customer is being calling a chimaera…”</i> Asche looks strangely intent. <i>“Is old. Very, very old, but not in shape that customer now knows; body is old, but mind to be like that of a newborn. She is very pliable thing… Asche is hoping that you are making wise decisions in choosing to mold her.”</i>", parse);
+			}, 1.0, function() { return party.InParty(layla, true); });
+			scenes.AddEnc(function() {
+				//Requires that player have recruited Terry.
+				Text.Add("<i>“Perhaps may be coming time when you will not be needing collar around foxy companion’s neck, good customer,”</i> Asche says. <i>“May be some time off yet, but is still being possible… provided wise choices are being made. But where to be making wise choices… that is not clear to Asche. This jackaless is sorry, but the mists are being clouding your future, and seeing through them is hard.”</i>", parse);
+			}, 1.0, function() { return party.InParty(terry, true); });
+			/* TODO Jin
+			scenes.AddEnc(function() {
+				Text.Add("", parse);
+				Text.NL();
+				Text.Add("", parse);
+			}, 1.0, function() { return true; });
+			
+#scene
+//References Jin.
+
+<i>“If in future you are being caught in magical trap and cat-morph is making bargain with you, Asche is strongly suggesting that customer be accepting deal.”</i>
+
+What? Why?
+
+<i>“Asche is not sure of the details…”</i> The jackaless concentrates furiously, her eyes aglow. <i>“But Asche is completely certain that if customer is not accepting, only other outcome is being a bad ending. Asche is thinking that customer is wanting to avoid that, yes?”</i>
+
+#converge
+*/
+			if(gameCache.flags["Portals"] >= 1) {
+				scenes.AddEnc(function() {
+					Text.Add("The jackaless throws you a suspicious glare. <i>“All muddy. Customer is messing things up! Things Asche saw before are still being there, still connected, but in different way… is confusing.”</i>", parse);
+					Text.NL();
+					Text.Add("That… sounds more like an accusation than a prediction.", parse);
+					Text.NL();
+					Text.Add("<i>“It is all being very strange,”</i> Asche shrugs. <i>“Foe is friend and friend is foe, the child is being the corruptor, the void is awaking. Customer is to be traveling back to journey forth.”</i> She gives your palm another affronted glance. <i>“Customer’s fate is all mixed like casserole, [heshe] is better being fixing it,”</i> she advises.", parse);
+				}, 1.0, function() { return true; });
+			}
+			/*
+			 * 
+//TODO
+//Third phase
+
+//Fourth phase
+
+			scenes.AddEnc(function() {
+				Text.Add("", parse);
+				Text.NL();
+				Text.Add("", parse);
+			}, 1.0, function() { return true; });
+			*/
+			scenes.Get();
+			
+			party.coin -= cost;
+			
+			Text.Flush();
+			
+			Scenes.Asche.FortuneTellingPrompt();
+		}, enabled : party.coin >= cost
+	});
+	options.push({ nameStr : "Explain",
+		tooltip : "How does this fortune-telling of her work, anyway?",
+		func : function() {
+			Text.Clear();
+			Text.Add("Eyeing Asche, you tell the jackaless you’d probably be interested in having your fortune told, but perhaps if you knew a little more about what you were getting yourself into, you could be more enthusiastic about the prospect…", parse);
+			Text.NL();
+			Text.Add("Asche smiles and holds out her hands palms skyward, the movement setting her jewellery clinking. <i>“Certainly. Asche has little to hide.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“To be starting at beginning, there is belief amongst some clans in highlands that is possible to foretell future of person by seeing length and shape of fingers and palm lines. Each combination is having meaning and way it is impacting bearer’s life and can be used to paint hazy picture of what is to come.”</i>", parse);
+			Text.NL();
+			Text.Add("It does sound rather incredible, you have to admit. It seems as difficult to make sense of as reading the future in the entrails of birds and other such practices. Besides, with alchemy letting anyone change one’s body - and one presumes, hands - how is it that one’s fate can stay the same when one’s palm changes?", parse);
+			Text.NL();
+			Text.Add("<i>“It is what it is; not all things are being seen by eye alone.”</i> The jackaless shrugs. <i>“If you are doubting usefulness of fortune, then maybe you are not to be basing your decisions on it and just taking what Asche says for fun. Good money is being spent on more trivial entertainments.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“That aside, Asche can tell customer [hisher] fate, or fortune. Latter is light and easy to do, maybe small prediction of what is going to be happening later when customer goes to bed, or whether customer is going to be lucky in love. Fate is…”</i> The jackaless grows more somber, her lips pulling into a thin, straight line. <i>“More important, for lack of better word to be describing it. Asche knows what she is saying just now, but fate is not so easily brushed off, is not something done for fun. If you are taking such things lightly or not believing what this jackaless is saying, please not to be asking Asche to read your fate.”</i>.", parse);
+			Text.Flush();
+			
+			Scenes.Asche.FortuneTellingPrompt();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Never Mind",
+		tooltip : "Maybe another time.",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“As customer is wishing.”</i> Is that a hint of sourness you hear in her voice? <i>“Is there any other business that [heshe] has with Asche?”</i>", parse);
+			Text.Flush();
+			
+			Scenes.Asche.FortuneTellingPrompt();
+		}, enabled : true
+	});
+	
+	Gui.SetButtonsFromList(options, false, null);
 }
