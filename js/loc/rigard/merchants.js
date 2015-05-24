@@ -14,7 +14,7 @@ world.loc.Rigard.ShopStreet =
 	WeaponShop   : new Event("Weapon shop*"),
 	ArmorShop    : new Event("Twopenny's"),
 	AlchemyShop  : new Event("Alchemical Wonders"),
-	MagicShop    : new Event("Magic shop*"),
+	MagicShop    : new Event("Asche's Fanciful Trinkets"),
 	
 	gate         : new Event("Merchants' Gate")
 }
@@ -123,6 +123,21 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.ShopStreet.ClothShop, {minute: 5});
+	}
+));
+
+world.loc.Rigard.ShopStreet.street.links.push(new Link(
+	"Magic", true, function() { return Scenes.Rigard.MagicShop.IsOpen(); },
+	function() {
+		Text.Add("Off on a side street, a small, brightly lit building stands sandwiched between a barber shop and a bakery. The wide, glass-panelled shopfront has an impressive number of curios on display, and by the looks of it, there are many more on the shelves within. ");
+		if(Scenes.Rigard.MagicShop.IsOpen())
+			Text.Add("A small wooden sign in a slot in the door declares the shop to be open.");
+		else
+			Text.Add("The wooden sign has been turned over, declaring: “The shop is closed until it’s open once more.” Isn’t that kind of redundant?");
+		Text.NL();
+	},
+	function() {
+		MoveToLocation(world.loc.Rigard.ShopStreet.MagicShop, {minute: 5});
 	}
 ));
 

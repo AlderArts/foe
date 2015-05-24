@@ -59,6 +59,7 @@ InitCache = function() {
 	cveta    = new Cveta(gameCache.cveta);
 	
 	fera    = new Fera(gameCache.fera);
+	asche   = new Asche(gameCache.asche);
 	kyna    = new Kyna(gameCache.kyna);
 	
 	jeanne  = new Jeanne(gameCache.jeanne);
@@ -118,6 +119,7 @@ InitCache = function() {
 	world.EntityStorage.push(cveta);
 	
 	world.EntityStorage.push(fera);
+	world.EntityStorage.push(asche);
 	world.EntityStorage.push(kyna);
 	
 	world.EntityStorage.push(jeanne);
@@ -426,6 +428,7 @@ GameToCache = function() {
 	gameCache.layla   = layla.ToStorage();
 	
 	gameCache.fera    = fera.ToStorage();
+	gameCache.asche   = asche.ToStorage();
 	gameCache.kyna    = kyna.ToStorage();
 	
 	gameCache.jeanne  = jeanne.ToStorage();
