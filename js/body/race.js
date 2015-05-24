@@ -7,9 +7,12 @@ function RaceDesc(name, id, opts, superclass) {
 	this.name = name || 'RACE';
 	this.superclass = superclass;
 	
-	this.desc       = opts.desc || [];
-	this.descMale   = opts.descMale || [];
-	this.descFemale = opts.descFemale || [];
+	this.desc           = opts.desc           || [];
+	this.descMale       = opts.descMale       || [];
+	this.descFemale     = opts.descFemale     || [];
+	this.quantify       = opts.quantify       || [];
+	this.quantifyMale   = opts.quantifyMale   || [];
+	this.quantifyFemale = opts.quantifyFemale || [];
 	
 	this.id = id;
 	RaceDesc.Num++;
