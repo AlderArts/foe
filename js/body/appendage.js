@@ -16,7 +16,7 @@ Appendage.prototype.constructor = Appendage;
 
 Appendage.prototype.ToStorage = function() {
 	var storage = {
-		race  : this.race.toFixed(),
+		race  : this.race.id.toFixed(),
 		col   : this.color.toFixed(),
 		type  : this.type.toFixed(),
 		count : this.count.toFixed()
@@ -26,7 +26,7 @@ Appendage.prototype.ToStorage = function() {
 
 Appendage.prototype.FromStorage = function(storage) {
 	storage = storage || {};
-	this.race   = parseInt(storage.race)   || this.race;
+	this.race   = RaceDesc.IdToRace[parseInt(storage.race)] || this.race;
 	this.color  = parseInt(storage.col)    || this.color;
 	this.type   = parseInt(storage.type)   || this.type;
 	this.count  = parseInt(storage.count)  || this.count;
@@ -51,91 +51,36 @@ Appendage.prototype.Short = function() {
 // Is the appendage prehensile or not?
 Appendage.prototype.Prehensile = function() {
 	if(this.type == AppendageType.tail) {
-		switch(this.race) {
-			case Race.lizard:
-			case Race.dragon:
-			case Race.demon:
-			return true;
-			
-			default: return false;
-		}
+		if(this.race.isRace(Race.Reptile)) return true;
+		if(this.race.isRace(Race.Demon)) return true;
 	}
 	return false;
 }
-/*
-Race = {
-	human  : 0,
-	horse  : 1,
-	cat    : 2,
-	dog    : 3,
-	fox    : 4,
-	lizard : 5,
-	rabbit : 6,
-	demon  : 7,
-	dragon : 8,
-	dryad  : 9,
-	elf    : 10
-	satyr  : 11,
-	sheep  : 12,
-	goat   : 13,
-	cow    : 14,
-	wolf   : 15,
-	avian  : 16
-}
- */
+
 Appendage.prototype.Long = function() {
 	var count = Text.Quantify(this.count);
+	var desc = this.race.qShort();
 	if     (this.type == AppendageType.horn) {
-		switch(this.race) {
-			case Race.demon:  return count + " of demonic horns";
-			case Race.dragon: return count + " of draconian horns";
-			case Race.dryad:  return count + " of antlers";
-			case Race.goat:
-			case Race.satyr:  return count + " of goat-like horns";
-			case Race.sheep:  return count + " of sheep-like horns";
-			case Race.cow:    return count + " of bovine horns";
-			default: return count + " of strange horns";
+		switch(this.race.id) {
+			case Race.Dryad.id: return count + " of antlers";
+			default: return count + " of " + desc + " horns";
 		}
 	}
 	else if(this.type == AppendageType.antenna) {
-		switch(this.race) {
-			case Race.moth:   return count + " moth-like antenna";
+		switch(this.race.id) {
+			case Race.Moth.id:   return count + " moth-like antenna";
 			default: return count + " of strange antenna";
 		}
 	}
 	else if(this.type == AppendageType.tail) {
-		switch(this.race) {
-			case Race.horse:  return "horse tail";
-			case Race.cow:    return "long thin tail, ending in a furred tip";
-			case Race.cat:    return "long thin feline tail";
-			case Race.dog:    return "fluffy canid tail";
-			case Race.wolf:   return "fluffy wolf tail";
-			case Race.fox:    return "large fluffy fox tail";
-			case Race.lizard: return "long, scaled lizard-like tail";
-			case Race.demon:  return "long, thin demonic tail, with a spaded tip";
-			case Race.dragon: return "long, scaled draconic tail";
-			case Race.ferret: return "long, fluffy ferret tail";
-			
-			case Race.avian:  return "tail feathers";
-			
-			case Race.scorpion: return "segmented tail, with a stinger";
-			
-			case Race.rabbit:
-			case Race.dryad:
-			case Race.sheep:
-			case Race.goat:
-			case Race.satyr:  return "small fluffy tail";
-			default: return "strange tail";
+		switch(this.race.id) {
+			case Race.Avian.id:  return "tail feathers";
+			case Race.Scorpion.id: return "segmented tail, with a stinger";
+			default: return desc + " tail";
 		}
 	}
 	else if(this.type == AppendageType.wing) {
-		switch(this.race) {
-			case Race.avian:  return count + " of bird-like wings";
-			case Race.demon:  return count + " of bat-like, demonic wings";
-			case Race.dragon: return count + " of large draconic wings";
-			case Race.moth:   return count + " of flimsy insectoid wings";
-			default: return count + " of strange wings";
-		}
+		return count + " of " + desc + " wings";
 	}
 	else return "strange growth";
 }

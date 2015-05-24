@@ -1270,7 +1270,7 @@ world.loc.BullTower.Building.Cell.onEntry = function() {
 					
 					var racescore = new RaceScore(player.body);
 					var humanScore = new RaceScore();
-					humanScore.score[Race.human] = 1;
+					humanScore.score[Race.Human] = 1;
 					var humanity = racescore.Compare(humanScore);
 					
 					parse["h"] = humanity > 0.95 ? ", not to mention a beast-lover, too" : "";

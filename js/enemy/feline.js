@@ -89,10 +89,10 @@ function Wildcat(gender, levelbonus) {
 	this.combatExp         = this.level;
 	this.coinDrop          = this.level * 4;
 	
-	this.body.SetRace(Race.cat);
+	this.body.SetRace(Race.Feline);
 	this.body.SetBodyColor(Color.brown);
 	this.body.SetEyeColor(Color.green);
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.cat, Color.brown);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Feline, Color.brown);
 
 	// Set hp and mana to full
 	this.SetLevelBonus();

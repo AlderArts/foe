@@ -41,7 +41,7 @@ function Drake() {
 	
 	this.body.SetEyeColor(Color.white);
 	
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.dragon, Color.green);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Dragon, Color.green);
 
 	// Set hp and mana to full
 	this.SetLevelBonus();

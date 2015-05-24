@@ -100,7 +100,7 @@ Items.Toys.EquineDildo.cock = new Cock();
 Items.Toys.EquineDildo.subtype = ItemSubtype.Dildo;
 Items.Toys.EquineDildo.cock.thickness.base = 8;
 Items.Toys.EquineDildo.cock.length.base    = 50;
-Items.Toys.EquineDildo.cock.race           = Race.horse;
+Items.Toys.EquineDildo.cock.race           = Race.Horse;
 Items.Toys.EquineDildo.cock.sheath         = 1;
 
 Items.Toys.CanidDildo = new Item("dildo9", "Canine dildo", ItemType.Toy);
@@ -113,7 +113,7 @@ Items.Toys.CanidDildo.cock = new Cock();
 Items.Toys.CanidDildo.subtype = ItemSubtype.Dildo;
 Items.Toys.CanidDildo.cock.thickness.base = 7;
 Items.Toys.CanidDildo.cock.length.base    = 30;
-Items.Toys.CanidDildo.cock.race           = Race.dog;
+Items.Toys.CanidDildo.cock.race           = Race.Canine;
 Items.Toys.CanidDildo.cock.knot           = 1;
 
 Items.Toys.ChimeraDildo = new Item("dildo8", "Chimera", ItemType.Toy);
@@ -126,7 +126,7 @@ Items.Toys.ChimeraDildo.cock = new Cock();
 Items.Toys.ChimeraDildo.subtype = ItemSubtype.Dildo;
 Items.Toys.ChimeraDildo.cock.thickness.base = 11;
 Items.Toys.ChimeraDildo.cock.length.base    = 60;
-Items.Toys.ChimeraDildo.cock.race           = Race.cat;
+Items.Toys.ChimeraDildo.cock.race           = Race.Feline;
 Items.Toys.ChimeraDildo.cock.sheath         = 1;
 Items.Toys.ChimeraDildo.cock.knot           = 1;
 

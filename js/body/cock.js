@@ -25,7 +25,7 @@ Cock.prototype.ToStorage = function(full) {
 		thk    : this.thickness.base.toFixed(2)
 	};
 	if(full) {
-		storage.race = this.race.toFixed();
+		storage.race = this.race.id.toFixed();
 		storage.col  = this.color.toFixed();
 		if(this.type != CockType.ordinary)
 			storage.type = this.type.toFixed();
@@ -39,7 +39,7 @@ Cock.prototype.ToStorage = function(full) {
 
 Cock.prototype.FromStorage = function(storage) {
 	storage = storage || {};
-	this.race           = parseInt(storage.race)   || this.race;
+	this.race           = RaceDesc.IdToRace[parseInt(storage.race)] || this.race;
 	this.color          = parseInt(storage.col)    || this.color;
 	this.type           = parseInt(storage.type)   || this.type;
 	this.length.base    = parseFloat(storage.len)  || this.length.base;
@@ -164,45 +164,25 @@ Cock.prototype.Short = function() {
 	var knotted = ((this.knot   != 0) && (Math.random() < 0.5)) ? ", knotted"  : "";
 	var sheath  = ((this.sheath != 0) && (Math.random() < 0.5)) ? ", sheathed" : "";
 	var race = " ";
-	if((this.race == Race.human) && (Math.random() < 0.1)) race += Race.Desc(this.race);
-	if((this.race != Race.human) && (Math.random() < 0.5)) race += Race.Desc(this.race);
+	if((this.race == Race.Human) && (Math.random() < 0.1)) race += this.race.Short();
+	if((this.race != Race.Human) && (Math.random() < 0.5)) race += this.race.Short();
 	return desc.adj + knotted + sheath + race + " " + noun;
 }
 // TODO
 Cock.prototype.TipShort = function() {
-	var qualifier = "";
+	var adj = "";
 	
-	switch(this.race) {
-		case Race.horse: qualifier = "flared "; break;
-		
-		case Race.wolf:
-		case Race.dragon:
-		case Race.lizard:
-		case Race.fox:
-		case Race.dog: qualifier = "tapered "; break;
-		
-		case Race.cat: qualifier = "barbed "; break;
-		
-		case Race.ferret:
-		case Race.demon:
-		case Race.cow:
-		case Race.rabbit:
-		case Race.goat:
-		case Race.sheep:
-		case Race.satyr:
-		case Race.dryad:
-		case Race.elf:
-		case Race.human:
-		default: break;
-	}
+	if(this.race.isRace(Race.Horse)) adj = "flared ";
+	else if(this.race.isRace(Race.Canine, Race.Reptile)) adj = "tapered ";
+	else if(this.race.isRace(Race.Feline)) adj = "barbed ";
 	
 	var nouns = [
 	"tip",
 	"head"
 	];
-	var noun = nouns[Math.floor(Math.random() * nouns.length)];
+	var noun = _.sample(nouns);
 	
-	return qualifier + noun;
+	return adj + noun;
 }
 // TODO (knot size?)
 Cock.prototype.KnotShort = function() {
@@ -214,7 +194,7 @@ Cock.prototype.aLong = function() {
 	var noun    = this.noun();
 	var knotted = (this.knot   != 0) ? ", knotted" : "";
 	var sheath  = (this.sheath != 0) ? ", sheathed" : "";
-	return desc.a + " " + desc.adj + knotted + sheath + " " + Race.Desc(this.race) + " " + noun + ", " + desc.len + " long and " + desc.thickness + " thick";
+	return desc.a + " " + desc.adj + knotted + sheath + " " + this.race.Short() + " " + noun + ", " + desc.len + " long and " + desc.thickness + " thick";
 }
 // TODO: Better descriptions
 Cock.prototype.Long = function() {
@@ -222,5 +202,5 @@ Cock.prototype.Long = function() {
 	var noun    = this.noun();
 	var knotted = (this.knot   != 0) ? ", knotted" : "";
 	var sheath  = (this.sheath != 0) ? ", sheathed" : "";
-	return desc.adj + knotted + sheath + " " + Race.Desc(this.race) + " " + this.noun() + ", " + desc.len + " long and " + desc.thickness + " thick";
+	return desc.adj + knotted + sheath + " " + this.race.Short() + " " + this.noun() + ", " + desc.len + " long and " + desc.thickness + " thick";
 }

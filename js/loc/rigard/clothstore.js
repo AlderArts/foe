@@ -118,7 +118,7 @@ world.loc.Rigard.ShopStreet.ClothShop.events.push(new Link(
 			Text.NL();
 			
 			var human = new RaceScore();
-			human.score[Race.human] = 1;
+			human.score[Race.Human] = 1;
 			var humanScore = human.Compare(new RaceScore(player.body));
 			
 			if(humanScore > 0.9 || player.charisma.Get() >= 50)

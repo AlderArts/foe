@@ -34,9 +34,9 @@ function RavenMother(storage) {
 	
 	this.Butt().buttSize.base = 2;
 	
-	this.body.SetRace(Race.avian);
+	this.body.SetRace(Race.Avian);
 	
-	TF.SetAppendage(this.Back(), AppendageType.wing, Race.avian, Color.black);
+	TF.SetAppendage(this.Back(), AppendageType.wing, Race.Avian, Color.black);
 	
 	this.body.SetBodyColor(Color.white);
 	

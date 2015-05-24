@@ -54,7 +54,7 @@ function Terry(storage) {
 	this.SetSkinColor(Color.gold);
 	this.SetHairColor(Color.red);
 	this.SetEyeColor(Color.blue);
-	this.body.SetRace(Race.fox);
+	this.body.SetRace(Race.Fox);
 	this.body.height.base      = 157;
 	this.body.weigth.base      = 45;
 	
@@ -265,7 +265,7 @@ Terry.prototype.SetCock = function() {
 		this.body.cock.push(new Cock());
 		this.FirstCock().length.base = 11;
 		this.FirstCock().thickness.base = 2;
-		this.FirstCock().race = Race.fox;
+		this.FirstCock().race = Race.Fox;
 		this.FirstCock().knot = 1;
 		this.FirstCock().sheath = 1;
 		this.Balls().cumCap.base = 5;
@@ -276,7 +276,7 @@ Terry.prototype.SetCock = function() {
 		this.body.cock.push(new Cock());
 		this.FirstCock().length.base = 33;
 		this.FirstCock().thickness.base = 6;
-		this.FirstCock().race = Race.horse;
+		this.FirstCock().race = Race.Horse;
 		this.FirstCock().knot = 1;
 		this.FirstCock().sheath = 1;
 		this.Balls().cumCap.base = 10;
@@ -335,7 +335,7 @@ Terry.prototype.mfPronoun = function(male, female) {
 }
 
 Terry.prototype.HorseCock = function() {
-	return (this.FirstCock() && this.FirstCock().race == Race.horse);
+	return (this.FirstCock() && this.FirstCock().race.isRace(Race.Horse));
 }
 Terry.prototype.Cup = function() {
 	return this.flags["breasts"];

@@ -30,7 +30,7 @@ function Sylistraxia(storage) {
 	this.body.DefHerm(false);
 	this.FirstBreastRow().size.base = 14;
 	this.Butt().buttSize.base = 7;
-	this.body.SetRace(Race.dragon);
+	this.body.SetRace(Race.Dragon);
 	this.FirstVag().virgin = false;
 	this.Butt().virgin = false;
 	

@@ -51,7 +51,7 @@ function GolemBoss(storage) {
 	
 	this.body              = new Body(this);
 	
-	this.body.SetRace(Race.demon);
+	this.body.SetRace(Race.Demon);
 	
 	this.body.SetBodyColor(Color.black);
 	

@@ -27,7 +27,7 @@ Balls.prototype.ToStorage = function(full) {
 		fer   : this.fertility.base.toFixed(2)
 	};
 	if(full) {
-		storage.race  = this.race.toFixed();
+		storage.race  = this.race.id.toFixed();
 		storage.col   = this.color.toFixed();
 		storage.count = this.count.base.toFixed();
 	}
@@ -36,7 +36,7 @@ Balls.prototype.ToStorage = function(full) {
 
 Balls.prototype.FromStorage = function(storage) {
 	storage = storage || {};
-	this.race               = parseInt(storage.race)   || this.race;
+	this.race               = RaceDesc.IdToRace[parseInt(storage.race)] || this.race;
 	this.color              = parseInt(storage.col)    || this.color;
 	this.count.base         = parseInt(storage.count)  || this.count.base;
 	this.size.base          = parseFloat(storage.size) || this.size.base;

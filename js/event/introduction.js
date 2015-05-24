@@ -594,7 +594,7 @@ Intro.DemonAftermath = function() {
 	Intro.timesTakenDemonGift = 0;
 	Intro.cuntBlocked = false;
 
-	TF.SetAppendage(player.Appendages(), AppendageType.horn, Race.demon, Color.red, 2);
+	TF.SetAppendage(player.Appendages(), AppendageType.horn, Race.Demon, Color.red, 2);
 	
 	player.RestFull();
 	Gui.NextPrompt(function() {
@@ -1737,7 +1737,7 @@ Intro.UruSexAftermath = function() {
 	Text.NL();
 	Text.Add("You moan as a long thin tail sprouts from your quivering behind, snaking around wildly before you gain control of your new appendage. Forgetting yourself, you take a moment to study it, noting the dark reddish color and the spaded tip. Even suspended in the air as you are, the thing almost reaches the ground. Touching it sends shivers up your, now extended, spine.");
 	
-	TF.SetAppendage(player.Back(), AppendageType.tail, Race.demon, Color.red);
+	TF.SetAppendage(player.Back(), AppendageType.tail, Race.Demon, Color.red);
 	
 	Text.NL();
 	Text.Add("Snapping back to reality, you flinch as the omnibus looms over you, but her attention is not directed at you. The growth of your tail apparently dislodged the purple gem you were carrying from your shredded clothes. The stone now lies on the ground, emanating a dull glow.");

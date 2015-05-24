@@ -39,7 +39,7 @@ function Jeanne(storage) {
 	this.body.DefFemale();
 	this.FirstBreastRow().size.base = 9;
 	this.Butt().buttSize.base = 7;
-	this.body.SetRace(Race.elf);
+	this.body.SetRace(Race.Elf);
 	
 	this.SetLevelBonus();
 	this.RestFull();

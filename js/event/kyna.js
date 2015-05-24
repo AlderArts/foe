@@ -30,7 +30,7 @@ function Kyna(storage) {
 	this.body.DefFemale();
 	this.FirstBreastRow().size.base = 12.5;
 	this.Butt().buttSize.base = 6;
-	this.body.SetRace(Race.ferret);
+	this.body.SetRace(Race.Ferret);
 	
 	this.SetLevelBonus();
 	this.RestFull();

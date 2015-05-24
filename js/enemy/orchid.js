@@ -42,11 +42,11 @@ function OrchidBoss(storage) {
 	
 	this.body.DefHerm();
 	
-	this.body.SetRace(Race.dryad);
+	this.body.SetRace(Race.Dryad);
 	this.body.SetBodyColor(Color.green);
 	this.body.SetHairColor(Color.green);	
 	this.body.SetEyeColor(Color.black);
-	this.FirstCock().race = Race.plant;
+	this.FirstCock().race = Race.Plant;
 	this.FirstCock().type = CockType.tentacle;
 	this.FirstCock().length.base = 400;
 	this.FirstCock().thickness.base = 10;

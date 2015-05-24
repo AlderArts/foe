@@ -365,7 +365,7 @@ Scenes.Gwendy.Talk = function(backfunc) {
 				
 				var racescore = new RaceScore(player.body);
 				var humanScore = new RaceScore();
-				humanScore.score[Race.human] = 1;
+				humanScore.score[Race.Human] = 1;
 				var humanity = racescore.Compare(humanScore);
 				
 				Text.Add("<i>“You’d like to help me? Great, but you should know this first. Rigard isn’t a particularly nice city, just warning you. There is a reason I usually do this alone and don’t bring Adrian along.”</i>", parse);
@@ -1815,7 +1815,7 @@ Scenes.Gwendy.ChallengeSexAnal = function(toys, hangout) {
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
 				Text.Add("<i>“I just can’t get enough of it!”</i> the horny farmer gasps. <i>“I love being fucked by a horsecock, so big...”</i>", parse);
-			}, 1.0, function() { return player.FirstCock().type == Race.horse; });
+			}, 1.0, function() { return player.FirstCock().race.isRace(Race.Horse); });
 			
 			scenes.Get();
 		}
@@ -2343,7 +2343,7 @@ Scenes.Gwendy.ChallengeSexLostPrompt = function(hangout, options, disableSleep) 
 					Text.Add("Gwendy’s hands gently caress your [multiCockDesc], raising small murmurs of delight from you as she coaxes your shaft[s] to [itsTheir] full size.", parse);
 					if(player.HasBalls())
 						Text.Add(" She even manages to get your [ballsDesc] into her hand, groping and rolling them over as she plays with[oneof] your [multiCockDesc].", parse);
-					if(player.FirstCock().race == Race.horse)
+					if(player.FirstCock().race.isRace(Race.Horse))
 						Text.Add(" Most of her attention focuses on your equine member, as if she just can’t get enough of it. It’s almost as if she were petting it, admiring your pony pecker despite herself.", parse);
 					Text.NL();
 					Text.Add("It feels great, and you even feel the pending surge of ejaculation welling from her skilled handjob. You realize that your torment has just begun, however, when her supple fingers forcefully squeeze your [multiCockDesc], halting your seed’s exit.", parse);

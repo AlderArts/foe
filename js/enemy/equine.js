@@ -64,11 +64,11 @@ function Equine(gender, levelbonus) {
 	this.combatExp         = this.level;
 	this.coinDrop          = this.level * 4;
 	
-	this.body.SetRace(Race.horse);
+	this.body.SetRace(Race.Horse);
 	
 	this.body.SetBodyColor(Color.brown);
 	
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.horse, Color.brown);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Horse, Color.brown);
 	
 	this.body.SetEyeColor(Color.green);
 

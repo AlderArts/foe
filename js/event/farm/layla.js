@@ -1911,8 +1911,8 @@ Scenes.Layla.PartyRegular = function(switchSpot) {
 		Text.NL();
 		Text.Add("<i>“Umm… I’m Layla!”</i>", parse);
 		Text.NL();
-		parse["race"] = Race.Desc(player.Race());
-		Text.Add("Gently, you correct her that’s her name, not what she is. She’s not <i>a</i> Layla, she’s just Layla. You’re a [race], but you are [playername]. Does she understand you?", parse);
+		parse["race"] = player.Race().aShort();
+		Text.Add("Gently, you correct her that’s her name, not what she is. She’s not <i>a</i> Layla, she’s just Layla. You’re [race], but you are [playername]. Does she understand you?", parse);
 		Text.NL();
 		Text.Add("<i>“I guess. But I… hmm.”</i> She taps her chin with a claw, thinking. After a few moments, she looks to you and shrugs.", parse);
 		Text.NL();

@@ -38,12 +38,12 @@ function ZebraShaman(levelbonus) {
 	this.combatExp         = 6 + this.level;
 	this.coinDrop          = 8 + this.level * 4;
 	//TODO
-	this.body.SetRace(Race.horse);
+	this.body.SetRace(Race.Zebra);
 	this.body.SetBodyColor(Color.gray);
 	
 	this.body.SetEyeColor(Color.blue);
 	
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.horse, Color.black);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Zebra, Color.black);
 
 	// Set hp and mana to full
 	this.SetLevelBonus();

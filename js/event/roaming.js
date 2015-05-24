@@ -102,7 +102,7 @@ Scenes.Roaming.KingdomPatrol = function(entering) {
 				
 				var racescore = new RaceScore(player.body);
 				var humanScore = new RaceScore();
-				humanScore.score[Race.human] = 1;
+				humanScore.score[Race.Human] = 1;
 				var humanity = racescore.Compare(humanScore);
 				
 				parse["human"] = humanity > 0.8 ? " human" : "...";

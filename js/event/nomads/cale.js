@@ -12,9 +12,9 @@ function Cale(storage) {
 	this.shop = new Shop();
 	
 	this.body.DefMale();
-	this.body.SetRace(Race.wolf);
+	this.body.SetRace(Race.Wolf);
 	this.SetSkinColor(Color.gray);
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.wolf, Color.gray);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Wolf, Color.gray);
 	this.FirstCock().length.base = 23;
 	this.FirstCock().thickness.base = 5;
 	

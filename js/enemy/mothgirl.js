@@ -45,8 +45,8 @@ function Mothgirl() {
 	
 	this.body.SetEyeColor(Color.red);
 	
-	TF.SetAppendage(this.Back(), AppendageType.wing, Race.moth, Color.purple);
-	TF.SetAppendage(this.Appendages(), AppendageType.antenna, Race.moth, Color.purple);
+	TF.SetAppendage(this.Back(), AppendageType.wing, Race.Moth, Color.purple);
+	TF.SetAppendage(this.Appendages(), AppendageType.antenna, Race.Moth, Color.purple);
 
 	// Set hp and mana to full
 	this.SetLevelBonus();

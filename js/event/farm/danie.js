@@ -32,9 +32,9 @@ function Danie(storage) {
 	this.body.DefFemale();
 	this.FirstBreastRow().size.base = 9;
 	this.Butt().buttSize.base = 7;
-	this.body.SetRace(Race.sheep);
-	TF.SetAppendage(this.Appendages(), AppendageType.horn, Race.sheep, Color.gray, 2);
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.sheep, Color.black);
+	this.body.SetRace(Race.Sheep);
+	TF.SetAppendage(this.Appendages(), AppendageType.horn, Race.Sheep, Color.gray, 2);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Sheep, Color.black);
 	
 	this.SetLevelBonus();
 	this.RestFull();

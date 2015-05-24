@@ -1930,10 +1930,10 @@ Entity.prototype.HasLegs = function() {
 }
 Entity.prototype.IsNaga = function() {
 	return (this.body.legs.count < 2) &&
-		(this.body.legs.race == Race.snake); //TODO
+		(this.body.legs.race == Race.Snake); //TODO
 }
 Entity.prototype.IsGoo = function() {
-	return (this.body.legs.race == Race.goo); //TODO
+	return (this.body.legs.race == Race.Goo); //TODO
 }
 Entity.prototype.Butt = function() {
 	return this.body.ass;
@@ -2567,11 +2567,11 @@ Entity.prototype.PrintDescription = function() {
 	}
 	else if(this.body.legs.count > 2) {
 		parse["num"] = Text.NumToText(this.body.legs.count);
-		parse["race"] = Race.Desc(this.body.legs.race);
-		Text.Add("[name] [has] arms and [num], [race] legs.", parse);
+		parse["race"] = this.body.legs.race.qShort();
+		Text.Add("[name] [has] arms and [num] [race] legs.", parse);
 	}
 	else {
-		parse["race"] = Race.Quantifier(this.body.legs.race);
+		parse["race"] = this.body.legs.race.qShort();
 		Text.Add("[name] [has] arms and [race] lower body.", parse);
 	}
 	Text.NL();

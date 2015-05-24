@@ -23,8 +23,8 @@ function Lagon(storage) {
 	
 	this.Butt().buttSize.base = 2;
 	
-	this.body.SetRace(Race.rabbit);
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.rabbit, Color.white);
+	this.body.SetRace(Race.Rabbit);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Rabbit, Color.white);
 	this.body.SetBodyColor(Color.white);
 	this.body.SetEyeColor(Color.blue);
 	
@@ -164,8 +164,8 @@ function LagonRegular(tougher) {
 	
 	this.Butt().buttSize.base = 2;
 	
-	this.body.SetRace(Race.rabbit);
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.rabbit, Color.white);
+	this.body.SetRace(Race.Rabbit);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Rabbit, Color.white);
 	this.body.SetBodyColor(Color.white);
 	this.body.SetEyeColor(Color.blue);
 
@@ -325,8 +325,8 @@ function LagonBrute(scepter) {
 	
 	this.Butt().buttSize.base = 2;
 	
-	this.body.SetRace(Race.rabbit);
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.rabbit, Color.white);
+	this.body.SetRace(Race.Rabbit);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Rabbit, Color.white);
 	this.body.SetBodyColor(Color.white);
 	this.body.SetEyeColor(Color.red);
 

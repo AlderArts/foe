@@ -29,8 +29,8 @@ function Adrian(storage) {
 	this.SetExpToLevel();
 	
 	this.body.DefMale();
-	this.body.SetRace(Race.horse);
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.horse, Color.brown);
+	this.body.SetRace(Race.Horse);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Horse, Color.brown);
 	
 	this.SetLevelBonus();
 	this.RestFull();

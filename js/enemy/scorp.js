@@ -48,7 +48,7 @@ function Scorpion() {
 	
 	this.body.SetEyeColor(Color.yellow);
 	
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.scorpion, Color.black);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Scorpion, Color.black);
 
 	// Set hp and mana to full
 	this.SetLevelBonus();

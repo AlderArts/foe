@@ -27,7 +27,7 @@ Breasts.prototype.ToStorage = function(full) {
 	if(full) {
 		storage.nipC    = this.nippleCount.toFixed();
 		storage.col     = this.color.toFixed();
-		storage.race    = this.race.toFixed();
+		storage.race    = this.race.id.toFixed();
 		storage.nipThk  = this.nippleThickness.base.toFixed(2);
 		storage.nipLen  = this.nippleLength.base.toFixed(2);
 		storage.aerS    = this.aerolaSize.base.toFixed(2);
@@ -39,7 +39,7 @@ Breasts.prototype.ToStorage = function(full) {
 Breasts.prototype.FromStorage = function(storage) {
 	storage = storage || {};
 	this.color                = parseInt(storage.col)      || this.color;
-	this.race                 = parseInt(storage.race)     || this.race;
+	this.race                 = RaceDesc.IdToRace[parseInt(storage.race)] || this.race;
 	this.nippleCount          = parseInt(storage.nipC)     || this.nippleCount;
 	this.size.base            = parseFloat(storage.size)   || this.size.base;
 	this.nippleThickness.base = parseFloat(storage.nipThk) || this.nippleThickness.base;

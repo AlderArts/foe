@@ -10,10 +10,10 @@ function Estevan(storage) {
 	this.name         = "Estevan";
 	
 	this.body.DefMale();
-	this.body.legs.race = Race.satyr;
+	this.body.legs.race = Race.Satyr;
 	this.SetSkinColor(Color.olive);
 	this.SetHairColor(Color.black);
-	TF.SetAppendage(this.Back(), AppendageType.horn, Race.satyr, Color.black, 2);
+	TF.SetAppendage(this.Back(), AppendageType.horn, Race.Satyr, Color.black, 2);
 	
 	this.SetLevelBonus();
 	this.RestFull();

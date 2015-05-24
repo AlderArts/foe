@@ -41,7 +41,7 @@ function StreetUrchin() {
 			this.FirstVag().virgin = false;
 	}
 	
-	this.body.SetRace(Race.human);
+	this.body.SetRace(Race.Human);
 	
 	var col = Math.random();
 	if(col < 0.6)
@@ -70,15 +70,15 @@ function StreetUrchin() {
 		
 	}
 	else if(r < 0.8) { // dog-morph
-		this.body.head.ears.race = Race.dog;
+		this.body.head.ears.race = Race.Dog;
 		this.body.head.ears.color = this.body.head.hair.color;
 	}
 	else if(r < 0.9) { // cat-morph
-		this.body.head.ears.race = Race.cat;
+		this.body.head.ears.race = Race.Feline;
 		this.body.head.ears.color = this.body.head.hair.color;
 	}
 	else { // equine
-		this.body.head.ears.race = Race.horse;
+		this.body.head.ears.race = Race.Horse;
 		this.body.head.ears.color = this.body.head.hair.color;
 	}
 	
@@ -138,7 +138,7 @@ function Bandit(gender, levelbonus) {
 	this.combatExp         = this.level;
 	this.coinDrop          = this.level * 4;
 	
-	this.body.SetRace(Race.human);
+	this.body.SetRace(Race.Human);
 	
 	var col = Math.random();
 	if(col < 0.6)

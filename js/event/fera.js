@@ -13,8 +13,8 @@ function Fera(storage) {
 	this.body.DefFemale();
 	this.FirstBreastRow().size.base = 6;
 	this.Butt().buttSize.base = 4;
-	this.body.SetRace(Race.cat);
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.cat, Color.brown);
+	this.body.SetRace(Race.Feline);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Feline, Color.brown);
 	
 	this.flags["Met"] = 0;
 	this.flags["Mom"] = 0;
@@ -99,7 +99,7 @@ Scenes.Fera.Interact = function() {
 	}
 	
 	var cat = new RaceScore();
-	cat.score[Race.cat] = 1;
+	cat.score[Race.Feline] = 1;
 	var catScore = cat.Compare(new RaceScore(player.body));
 	
 	var parse = {

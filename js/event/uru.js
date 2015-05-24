@@ -33,13 +33,13 @@ function Uru(storage) {
 	this.Butt().buttSize.base = 9;
 	this.FirstCock().thickness.base = 8;
 	this.FirstCock().length.base    = 40;
-	this.body.SetRace(Race.demon);
+	this.body.SetRace(Race.Demon);
 	this.body.SetBodyColor(Color.red);
 	this.body.SetHairColor(Color.black);
 	this.body.SetEyeColor(Color.orange);
 	
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.demon, Color.red);
-	TF.SetAppendage(this.Appendages(), AppendageType.horn, Race.demon, Color.black);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Demon, Color.red);
+	TF.SetAppendage(this.Appendages(), AppendageType.horn, Race.Demon, Color.black);
 	
 	this.FirstVag().virgin = false;
 	this.Butt().virgin = false;

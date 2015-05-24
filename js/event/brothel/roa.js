@@ -33,7 +33,7 @@ function Roa(storage) {
 	this.FirstBreastRow().size.base = 2;
 	this.Butt().buttSize.base = 3;
 	this.Butt().virgin = false;
-	this.body.SetRace(Race.rabbit);
+	this.body.SetRace(Race.Rabbit);
 	
 	this.SetLevelBonus();
 	this.RestFull();

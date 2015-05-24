@@ -177,7 +177,7 @@ CacheToGame = function() {
 	                      parseInt(gameCache.time.minute));
 	
 	if(gameCache.version < 4) {
-		kiakai.body.SetRace(Race.elf);
+		kiakai.body.SetRace(Race.Elf);
 	}
 	if(gameCache.version < 6) {
 		if     (gameCache.flags["KiakaiAttitude"] == 0) gameCache.flags["KiakaiAttitude"] = Kiakai.Attitude.Nice;
@@ -219,7 +219,7 @@ CacheToGame = function() {
 		rosalin.FirstBreastRow().size.base /= 2;
 	}
 	if(gameCache.version < 10) {
-		TF.SetRaceOne(rosalin.Eyes(), Race.cat);
+		TF.SetRaceOne(rosalin.Eyes(), Race.Feline);
 		rosalin.Eyes().color = Color.green;
 	}
 	if(gameCache.version < 11) {

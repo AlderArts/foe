@@ -67,10 +67,10 @@ function Lizard(gender) {
 	this.combatExp         = this.level;
 	this.coinDrop          = this.level * 4;
 	
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.lizard, Color.brown);
-	TF.SetAppendage(this.Appendages(), AppendageType.horn, Race.lizard, Color.green);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Lizard, Color.brown);
+	TF.SetAppendage(this.Appendages(), AppendageType.horn, Race.Lizard, Color.green);
 	
-	this.body.SetRace(Race.lizard);
+	this.body.SetRace(Race.Lizard);
 	
 	this.body.SetBodyColor(Color.green);
 	
@@ -567,10 +567,10 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 	else
 		Text.Add("you press her thin, green-yellow scaled tail-tip against your pucker, drawing in a breath.", parse);
 	Text.NL();
-	parse["sound"] = player.Race() == Race.horse ? "nicker" :
-	                 (player.Race() == Race.lizard || player.Race() == Race.dragon) ? "hiss" :
-	                 player.Race() == Race.feline ? "purr" :
-	                 (player.Race() == Race.dog || player.Race() == Race.wolf || player.Race() == Race.fox) ? "whine" :
+	parse["sound"] = player.Race().isRace(Race.Horse) ? "nicker" :
+	                 player.Race().isRace(Race.Reptile) ? "hiss" :
+	                 player.Race().isRace(Race.Feline) ? "purr" :
+	                 player.Race().isRace(Race.Canine) ? "whine" :
 	                 "moan";
 	Text.Add("[m1Name] tenses, before her eyeridges drop lower in thought. As understanding dawns on her, a sly look passes her muzzle and she twitches her tail against you. The tip, so very thin, easily slips a half inch inside of you between your fingers and you feel it wriggle just inside your body. The motion feels strange, but oddly pleasant, and you find yourself holding her tail tight, keeping it from sliding back out from your flesh. You let out a small [sound] of pleasure, and [m1name] grins in satisfaction.", parse);
 	player.AddLustFraction(0.1);
@@ -975,7 +975,7 @@ Scenes.Lizards.WinPowerbottom = function(enc) {
 				
 				var racescore   = new RaceScore(player.body);
 				var lizardScore = new RaceScore();
-				lizardScore.score[Race.lizard] = 1;
+				lizardScore.score[Race.Lizard] = 1;
 				var compScore   = racescore.Compare(lizardScore);
 				
 				if(compScore > 0.2) {
@@ -2247,7 +2247,7 @@ Scenes.Lizards.LossFemale = function() {
 		Text.Add("You swallow heavily, and look up at her. She gazes down at you with a mixture of smugness and threatening expectancy. The scent of her fills your nose, and you find it hard to say no.", parse);
 		Text.NL();
 		Text.Add("The heady, soft aroma floods your [faceDesc], and you quiver softly at it. ", parse);
-		if(player.NumAttributes(Race.lizard) > 2) {
+		if(player.NumAttributes(Race.Lizard) > 2) {
 			Text.Add("Her pheromones have a potent effect on your body, and you feel heat building between your own legs. She gazes down at you knowingly, one hand lowering to trace across your brow. <i>“That's right, just breathe deeply, let it take hold...”</i>", parse);
 			Text.NL();
 			Text.Add("You blush, realizing you're falling under the spell of [m1name].", parse);
@@ -2434,7 +2434,7 @@ Scenes.Lizards.LossFemale = function() {
 					
 					player.AddSexExp(1);
 					
-					if(player.NumAttributes(Race.lizard) > 3)
+					if(player.NumAttributes(Race.Lizard) > 3)
 						Text.Add("<i>“Our hatchlings will have the brightest scales,”</i> she hisses, looking down at you. She seems to consider you lizard enough to breed with!", parse);
 					else
 						Text.Add("<i>“Such exotic hatchlings you'll give me,”</i> she hisses, looking down at you. You can't help but blush an even deeper red.", parse);

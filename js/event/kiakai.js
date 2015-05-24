@@ -48,7 +48,7 @@ function Kiakai(storage) {
 	this.body.head.hair.color  = Color.silver;
 	this.body.head.hair.length.base = 15;
 	this.body.head.eyes.color  = Color.purple;
-	this.body.SetRace(Race.elf);
+	this.body.SetRace(Race.Elf);
 	
 	this.SetLevelBonus();
 	this.RestFull();

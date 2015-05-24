@@ -166,7 +166,7 @@ Body.prototype.DefHerm = function(balls) {
 
 Body.prototype.SetRace = function(race) {
 	// Default
-	race = race || Race.human;
+	race = race || Race.Human;
 	
 	// Head
 	this.head.race = race;
@@ -182,29 +182,19 @@ Body.prototype.SetRace = function(race) {
 	
 	// Genetalia
 	for(var i=0,j=this.cock.length; i<j; i++) {
-		switch(race) {
-			case Race.horse:
-			case Race.cow:
-			case Race.sheep:
-			case Race.goat:
-			case Race.cat:
-			case Race.dog:
-			case Race.fox:
-			case Race.wolf:
-			case Race.rabbit:
-			case Race.ferret:
-				this.cock[i].sheath = true;
-			default: break;
-		}
+		if(race.isRace(
+			Race.Horse,
+			Race.Cow,
+			Race.Sheep,
+			Race.Goat,
+			Race.Feline,
+			Race.Canine,
+			Race.Musteline,
+			Race.Rabbit
+		)) this.cock[i].sheath = true;
 		
-		switch(race) {
-			case Race.dog:
-			case Race.fox:
-			case Race.wolf:
-				this.cock[i].knot = true;
-			default: break;
-		}
-		
+		if(race.isRace(Race.Canine))
+			this.cock[i].knot = true;
 		this.cock[i].race = race;
 	}
 	this.balls.race = race;

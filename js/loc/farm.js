@@ -391,7 +391,7 @@ Scenes.FarmIntro.EnterLoft = function() {
 
 Scenes.FarmIntro.GwendyQuestions1 = function() {
 	var parse = {
-		race : function() { return Race.Desc(player.body.Race()); }
+		race : function() { return player.body.Race().Short(player.Gender()); }
 	};
 	
 	Text.Flush();
@@ -436,7 +436,7 @@ Scenes.FarmIntro.GwendyQuestions1 = function() {
 				Text.NL();
 				Text.Add("She looks at you with a questioning look before asking:", parse);
 				Text.NL();
-				if(player.body.Race() == Race.human)
+				if(player.body.Race() == Race.Human)
 					Text.Add("<i>“Why, were you thinking of coming around a bit more to keep me company, as a fellow human?”</i> She asks the question in an innocent enough tone, but her eyes look at you with some expectancy. You tease her, saying that you might just do that, if she doesn't mind. At that, she giggles before casting a flirtatious glance at you. <i>“Oh, I wouldn't mind at all. It might be a bit more fun with you around.”</i>", parse);
 				else
 					Text.Add("<i>“Thinking about introducing me to a few other humans... or maybe getting to know me a little better, as a [race]”</i> Her question intrigues you, but you say it was simple curiosity, though you might come around more if she doesn't mind having a friend that isn't a regular on the ranch. <i>“Well, thanks, I'd appreciate that. You'd better follow through and visit often!”</i>", parse);
@@ -1396,7 +1396,7 @@ Scenes.Farm.Market = function(haul, next) {
 	
 	var racescore = new RaceScore(player.body);
 	var humanScore = new RaceScore();
-	humanScore.score[Race.human] = 1;
+	humanScore.score[Race.Human] = 1;
 	var humanity = racescore.Compare(humanScore);
 	
 	party.location = world.loc.Rigard.ShopStreet.street;

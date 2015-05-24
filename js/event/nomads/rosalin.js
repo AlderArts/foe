@@ -93,11 +93,11 @@ Rosalin.prototype.ResetBody = function() {
 	this.body.DefFemale();
 	this.FirstVag().virgin = false;
 	this.Butt().virgin = false;
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.cat, Color.brown);
-	TF.SetRaceOne(this.Ears(), Race.cat);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Feline, Color.brown);
+	TF.SetRaceOne(this.Ears(), Race.Feline);
 	this.SetSkinColor(Color.bronze);
 	this.Ears().color = Color.brown;
-	TF.SetRaceOne(this.Eyes(), Race.cat);
+	TF.SetRaceOne(this.Eyes(), Race.Feline);
 	this.Eyes().color = Color.green;
 	this.Hair().color = Color.teal;
 	this.body.height.base = 155;
@@ -340,7 +340,7 @@ Scenes.Rosalin.TalkPrompt = function() {
 				Text.Add("<b>Alchemy is now accessible from the menu.</b>", parse);
 				Text.Flush();
 				
-				TF.SetRaceOne(rosalin.Ears(), Race.rabbit);
+				TF.SetRaceOne(rosalin.Ears(), Race.Rabbit);
 				rosalin.Ears().color = Color.black;
 
 				player.alchemyLevel = 1;
@@ -1296,25 +1296,25 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				// EARS
 				scenes.AddEnc(function() {
 					Text.Add("A pair of floppy rabbit ears pop out of Rosalin's [rHairDesc]. Cute!", parse);
-					TF.SetRaceOne(rosalin.Ears(), Race.rabbit);
+					TF.SetRaceOne(rosalin.Ears(), Race.Rabbit);
 					Text.NL();
-				}, 1.0, function() { return rosalin.Ears().race != Race.rabbit; });
+				}, 1.0, function() { return rosalin.Ears().race != Race.Rabbit; });
 				// TAIL
 				scenes.AddEnc(function() {
 					Text.Add("Rosalin shakes [hisher] butt at you, showing off [hisher] new fluffy bunny tail.", parse);
-					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.rabbit, Color.brown);
+					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.Rabbit, Color.brown);
 					Text.NL();
-				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.rabbit); });
+				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.Rabbit); });
 				scenes.AddEnc(function() {
 					parse["oneof"] = rosalin.NumCocks() > 1 ? "One of " : "";
 					Text.Add("[oneof]Rosalin's [rMultiCockDesc] shifts into a smooth rabbit-like cock.", parse);
-					TF.SetRaceOne(rosalin.AllCocks(), Race.rabbit);
+					TF.SetRaceOne(rosalin.AllCocks(), Race.Rabbit);
 					Text.NL();
 				}, 1.0, function() {
 					var unchanged = false;
 					var cocks = rosalin.AllCocks();
 					for(var i = 0; i < cocks.length; i++)
-						if(cocks[i].race != Race.rabbit) unchanged = true;
+						if(cocks[i].race != Race.Rabbit) unchanged = true;
 					return unchanged;
 				});
 				scenes.Get();
@@ -1379,7 +1379,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					var hasHcock = false;
 					var cocks = player.AllCocks();
 					for(var i = 0; i < cocks.length; i++)
-						if(cocks[i].race == Race.horse) hasHcock = true;
+						if(cocks[i].race == Race.Horse) hasHcock = true;
 					return hasHcock;
 				};
 				
@@ -1412,7 +1412,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					Text.NL();
 					Text.Add("Both of you look at the huge throbbing erection in awe. Rosalin looks at [hisher] cock. Then at you. Then at the cock. Then at you.", parse);
 					
-					var cock = new Cock(Race.horse, Color.pink);
+					var cock = new Cock(Race.Horse, Color.pink);
 					cock.sheath = 1;
 					cock.length.base    = 25;
 					cock.thickness.base = 7;
@@ -1428,7 +1428,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					parse["allof"]  = rosalin.NumCocks() > 1 ? "all of " : "";
 					
 					var cocks   = rosalin.AllCocks();
-					var changed = TF.SetRaceAll(cocks, Race.horse);
+					var changed = TF.SetRaceAll(cocks, Race.Horse);
 					if(changed == TF.Effect.Changed) {
 						parse["quantity"] = rosalin.NumCocks() > 1 ? Text.Quantify(rosalin.NumCocks()) + " of " : "";
 						Text.NL();
@@ -1471,7 +1471,7 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					Text.NL();
 					Text.Add("Moaning as the effects start to set in, the alchemist gasps as a ten-inch horsecock sprouts from [hisher] groin, complete with a set of heavy, loaded balls. The large member is stiff and throbbing, ready for action.", parse);
 					
-					var cock = new Cock(Race.horse, Color.pink);
+					var cock = new Cock(Race.Horse, Color.pink);
 					cock.length.base    = 25;
 					cock.thickness.base = 7;
 					cock.sheath = 1;
@@ -1546,33 +1546,33 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				// EARS
 				scenes.AddEnc(function() {
 					Text.Add("A pair of equine ears pop out of Rosalin's [rHairDesc], perking up to attention. Cute!", parse);
-					TF.SetRaceOne(rosalin.Ears(), Race.horse);
+					TF.SetRaceOne(rosalin.Ears(), Race.Horse);
 					Text.NL();
-				}, 1.0, function() { return rosalin.Ears().race != Race.horse; });
+				}, 1.0, function() { return rosalin.Ears().race != Race.Horse; });
 				// TAIL
 				scenes.AddEnc(function() {
 					Text.Add("Rosalin shakes [hisher] butt at you, showing off [hisher] new horselike tail.", parse);
-					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.horse, Color.brown);
+					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.Horse, Color.brown);
 					Text.NL();
-				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.horse); });
+				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.Horse); });
 				scenes.AddEnc(function() {
 					parse["oneof"] = rosalin.NumCocks() > 1 ? "one of " : "";
 					Text.Add("Rosalin groans slightly as [oneof][hisher] [rMultiCockDesc] shifts into a more equine form, complete with a flat, flared head.", parse);
-					TF.SetRaceOne(rosalin.AllCocks(), Race.horse);
+					TF.SetRaceOne(rosalin.AllCocks(), Race.Horse);
 					Text.NL();
 				}, 1.0, function() {
 					var unchanged = false;
 					var cocks = rosalin.AllCocks();
 					for(var i = 0; i < cocks.length; i++)
-						if(cocks[i].race != Race.horse) unchanged = true;
+						if(cocks[i].race != Race.Horse) unchanged = true;
 					return unchanged;
 				});
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Ooh, that's cute!”</i> Rosalin admires [hisher] new hooves. [HeShe] experiments a bit, making clopping noises with them against the hard earth.", parse);
-					TF.SetRaceOne(rosalin.Legs(), Race.horse);
+					TF.SetRaceOne(rosalin.Legs(), Race.Horse);
 					if(rosalin.LowerBodyType() == LowerBodyType.Single) rosalin.Legs().count = 2;
 					Text.NL();
-				}, 1.0, function() { return rosalin.Legs().race != Race.horse; });
+				}, 1.0, function() { return rosalin.Legs().race != Race.Horse; });
 				scenes.Get();
 				
 				var state = RosalinSexState.Regular;
@@ -1652,18 +1652,18 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				// TAIL
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Long, thick, scaly, aaand...”</i> Curling [hisher] new reptile tail experimentally, Rosalin confirms [hisher] guess, <i>“... prehensile. Hehe, I'm going to have a lot of fun with this.”</i>", parse);
-					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.lizard, Color.green);
+					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.Lizard, Color.green);
 					Text.NL();
-				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.lizard); });
+				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.Lizard); });
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Hmm, I rather like it,”</i> Rosalin comments on [hisher] new reptilian cock, ridged on the underside and ending in a tapered tip.", parse);
-					TF.SetRaceOne(rosalin.AllCocks(), Race.lizard);
+					TF.SetRaceOne(rosalin.AllCocks(), Race.Lizard);
 					Text.NL();
 				}, 1.0, function() {
 					var unchanged = false;
 					var cocks = rosalin.AllCocks();
 					for(var i = 0; i < cocks.length; i++)
-						if(cocks[i].race != Race.lizard) unchanged = true;
+						if(cocks[i].race != Race.Lizard) unchanged = true;
 					return unchanged;
 				});
 				scenes.AddEnc(function() {
@@ -1742,19 +1742,19 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				// TAIL
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Moo?”</i> Rosalin says, experimentally swishing [hisher] new bovine tail behind [himher].", parse);
-					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.cow, Color.black);
+					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.Cow, Color.black);
 					Text.NL();
-				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.cow); });
+				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.Cow); });
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Careful I don't accidentally gore you with these!”</i> Rosalin gingerly pokes at [hisher] new budding horns, feeling their sharpness.", parse);
-					TF.SetAppendage(rosalin.Appendages(), AppendageType.horn, Race.cow, Color.black, 2);
+					TF.SetAppendage(rosalin.Appendages(), AppendageType.horn, Race.Cow, Color.black, 2);
 					Text.NL();
-				}, 1.0, function() { var horns = rosalin.HasHorns(); return !horns || (horns.race != Race.cow); });
+				}, 1.0, function() { var horns = rosalin.HasHorns(); return !horns || (horns.race != Race.Cow); });
 				scenes.AddEnc(function() {
 					Text.Add("A pair of bovine ears pop out of Rosalin's [rHairDesc]! <i>“Moo.”</i>", parse);
-					TF.SetRaceOne(rosalin.Ears(), Race.cow);
+					TF.SetRaceOne(rosalin.Ears(), Race.Cow);
 					Text.NL();
-				}, 1.0, function() { return rosalin.Ears().race != Race.cow; });
+				}, 1.0, function() { return rosalin.Ears().race != Race.Cow; });
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Won't these get in the way?”</i> Rosalin ponders, feeling [hisher] expanding [rBreastDesc].", parse);
 					rosalin.FirstBreastRow().size.IncreaseStat(40, 10);
@@ -1892,26 +1892,26 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				// TAIL
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Hehe, it’s so fluffy!”</i> Rosalin prances around, wagging [hisher] new dog-tail happily.", parse);
-					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.dog, Color.gray);
+					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.Dog, Color.gray);
 					Text.NL();
-				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.dog); });
+				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.Dog); });
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Woah, I can hear so clearly with these!”</i> Rosalin exclaims, touching [hisher] new canine ears.", parse);
-					TF.SetRaceOne(rosalin.Ears(), Race.dog);
+					TF.SetRaceOne(rosalin.Ears(), Race.Dog);
 					Text.NL();
-				}, 1.0, function() { return rosalin.Ears().race != Race.dog; });
+				}, 1.0, function() { return rosalin.Ears().race != Race.Dog; });
 				scenes.AddEnc(function() {
 					parse["oneof"] = rosalin.NumCocks() > 1 ? "one of " : "";
 					Text.Add("<i>“Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rMultiCockDesc] has turned into a pointed canine cock, complete with a knot.", parse);
 					var ret = {};
-					TF.SetRaceOne(rosalin.AllCocks(), Race.dog, ret);
+					TF.SetRaceOne(rosalin.AllCocks(), Race.Dog, ret);
 					if(ret.bodypart) ret.bodypart.knot = 1;
 					Text.NL();
 				}, 1.0, function() {
 					var unchanged = false;
 					var cocks = rosalin.AllCocks();
 					for(var i = 0; i < cocks.length; i++)
-						if(cocks[i].race != Race.dog) unchanged = true;
+						if(cocks[i].race != Race.Dog) unchanged = true;
 					return unchanged;
 				});
 				scenes.AddEnc(function() {
@@ -1997,26 +1997,26 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				// TAIL
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Hehe, it’s so fluffy!”</i> Rosalin prances around, wagging [hisher] new wolf-tail happily. <i>“Makes me look dangerous!”</i>", parse);
-					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.wolf, Color.gray);
+					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.Wolf, Color.gray);
 					Text.NL();
-				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.wolf); });
+				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.Wolf); });
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Woah, I can hear so clearly with these!”</i> Rosalin exclaims, touching [hisher] new canine ears.", parse);
-					TF.SetRaceOne(rosalin.Ears(), Race.wolf);
+					TF.SetRaceOne(rosalin.Ears(), Race.Wolf);
 					Text.NL();
-				}, 1.0, function() { return rosalin.Ears().race != Race.wolf; });
+				}, 1.0, function() { return rosalin.Ears().race != Race.Wolf; });
 				scenes.AddEnc(function() {
 					parse["oneof"] = rosalin.NumCocks() > 1 ? "one of " : "";
 					Text.Add("<i>“Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rMultiCockDesc] has turned into a pointed canine cock, complete with a knot.", parse);
 					var ret = {};
-					TF.SetRaceOne(rosalin.AllCocks(), Race.dog, ret);
+					TF.SetRaceOne(rosalin.AllCocks(), Race.Wolf, ret);
 					if(ret.bodypart) ret.bodypart.knot = 1;
 					Text.NL();
 				}, 1.0, function() {
 					var unchanged = false;
 					var cocks = rosalin.AllCocks();
 					for(var i = 0; i < cocks.length; i++)
-						if(cocks[i].race != Race.dog) unchanged = true;
+						if(cocks[i].race != Race.Wolf) unchanged = true;
 					return unchanged;
 				});
 				scenes.AddEnc(function() {
@@ -2101,26 +2101,26 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				// TAIL
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Hehe, it’s so pretty, and fluffy too!”</i> Rosalin prances around, wagging [hisher] bushy fox-tail happily.", parse);
-					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.fox, Color.gray);
+					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.Fox, Color.gray);
 					Text.NL();
-				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.fox); });
+				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.Fox); });
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Woah, I can hear so clearly with these!”</i> Rosalin exclaims, touching [hisher] new foxy ears.", parse);
-					TF.SetRaceOne(rosalin.Ears(), Race.fox);
+					TF.SetRaceOne(rosalin.Ears(), Race.Fox);
 					Text.NL();
-				}, 1.0, function() { return rosalin.Ears().race != Race.fox; });
+				}, 1.0, function() { return rosalin.Ears().race != Race.Fox; });
 				scenes.AddEnc(function() {
 					parse["oneof"] = rosalin.NumCocks() > 1 ? "one of " : "";
 					Text.Add("<i>“Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rMultiCockDesc] has turned into a pointed canine cock, complete with a knot.", parse);
 					var ret = {};
-					TF.SetRaceOne(rosalin.AllCocks(), Race.dog, ret);
+					TF.SetRaceOne(rosalin.AllCocks(), Race.Fox, ret);
 					if(ret.bodypart) ret.bodypart.knot = 1;
 					Text.NL();
 				}, 1.0, function() {
 					var unchanged = false;
 					var cocks = rosalin.AllCocks();
 					for(var i = 0; i < cocks.length; i++)
-						if(cocks[i].race != Race.dog) unchanged = true;
+						if(cocks[i].race != Race.Fox) unchanged = true;
 					return unchanged;
 				});
 				scenes.AddEnc(function() {
@@ -2205,9 +2205,9 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				// TAIL
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Neat!”</i> [heshe] exclaims, flexing [hisher] new insectoid tail. The stinger at the end looks like it contains some quite potent poison… probably best to avoid that.", parse);
-					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.scorpion, Color.black);
+					TF.SetAppendage(rosalin.Back(), AppendageType.tail, Race.Scorpion, Color.black);
 					Text.NL();
-				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.scorpion); });
+				}, 1.0, function() { var tail = rosalin.HasTail(); return !tail || (tail.race != Race.Scorpion); });
 				//TODO: more?
 				scenes.Get();
 				
@@ -2272,14 +2272,14 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				// TAIL
 				scenes.AddEnc(function() {
 					Text.Add("A pair of purple fairy-like wings sprout from the alchemist’s back, exuding glittering dust as [heshe] experimentally flaps them.", parse);
-					TF.SetAppendage(rosalin.Back(), AppendageType.wing, Race.moth, Color.purple, 2);
+					TF.SetAppendage(rosalin.Back(), AppendageType.wing, Race.Moth, Color.purple, 2);
 					Text.NL();
-				}, 1.0, function() { var wings = rosalin.HasWings(); return !wings || (wings.race != Race.moth); });
+				}, 1.0, function() { var wings = rosalin.HasWings(); return !wings || (wings.race != Race.Moth); });
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Well, this is new,”</i> [heshe] notes, carefully touching [hisher] newly sprouted moth-like feelers. From [hisher] expression, the new appendages are very sensitive.", parse);
-					TF.SetAppendage(rosalin.Appendages(), AppendageType.antenna, Race.moth, Color.purple, 2);
+					TF.SetAppendage(rosalin.Appendages(), AppendageType.antenna, Race.Moth, Color.purple, 2);
 					Text.NL();
-				}, 1.0, function() { var antenna = rosalin.HasAntenna(); return !antenna || (antenna.race != Race.moth); });
+				}, 1.0, function() { var antenna = rosalin.HasAntenna(); return !antenna || (antenna.race != Race.Moth); });
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Aww… I will miss that one,”</i> the alchemist pouts, lamenting the loss of [hisher] canid knot.", parse);
 					Text.NL();
@@ -2362,9 +2362,9 @@ Scenes.Rosalin.CombineCallback = function(item) {
 				var scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					Text.Add("A pair of feathery wings sprout from [hisher] back, majestic in their own right but probably not large enough to fly with.", parse);
-					TF.SetAppendage(rosalin.Back(), AppendageType.wing, Race.avian, Color.bronze, 2);
+					TF.SetAppendage(rosalin.Back(), AppendageType.wing, Race.Avian, Color.bronze, 2);
 					Text.NL();
-				}, 1.0, function() { var wings = rosalin.HasWings(); return !wings || (wings.race != Race.avian); });
+				}, 1.0, function() { var wings = rosalin.HasWings(); return !wings || (wings.race != Race.Avian); });
 				// TAIL
 				scenes.AddEnc(function() {
 					Text.Add("Rosalin’s tail quickly retracts, leaving no trace behind.", parse);
@@ -2543,7 +2543,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 	var compScore = rosalin.origRaceScore.Compare(racescore);
 	
 	var humanScore = new RaceScore();
-	humanScore.score[Race.human] = 1;
+	humanScore.score[Race.Human] = 1;
 	var rHumanity = racescore.Compare(humanScore);
 	
 	var cocksInVag = player.CocksThatFit(rosalin.FirstVag());
@@ -3004,7 +3004,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 					scenes.AddEnc(function() {
 						Text.Add("Spinning [himher] around and pushing [himher] down on top of a nearby barrel, you rub your [multiCockDesc] against [hisher] wet labia.", parse);
 						Text.NL();
-						if(player.FirstCock().race != Race.human)
+						if(player.FirstCock().race != Race.Human)
 							Text.Add("<i>“Ooh, a bad boy,”</i> Rosalin breathlessly compliments your [cockDesc]. <i>“Fuck me good! Fuck me like an animal!”</i>", parse);
 						else
 							Text.Add("<i>“Come on, what are you waiting for?”</i> [heshe] moans, shivering from your teasing.", parse);
@@ -3191,7 +3191,7 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 		Text.Add("[HisHer] cleft trickles lubricants, the mons almost oiled with the fine sheen of sweat the [raceDesc] has broken out in.", parse);
 	Text.NL();
 	parse["ballsCunt"] = rosalin.HasBalls() ? Text.Parse("[rBallsDesc]", parse) : "cunt";
-	parse["type"] = Race.Quantifier(cock.race);
+	parse["type"] = cock.race.qShort();
 	Text.Add("[HeShe] cups [hisher] [ballsCunt] lewdly and hefts [hisher] [type] endowment with the other, unashamedly jacking [himher]self off in your direction, the [rCockTip] expanding ever-so-slightly under [hisher] ministration. ", parse);
 	if(cock.sheath == 1)
 		Text.Add("Rosalin sighs and digs a digit into [hisher] sheath, massaging [himher]self under the folds of concealing skin to further fuel [hisher] ardor. Gathering some of the moisture from inside, the [raceDesc] works it across [hisher] glistening shaft, moaning a little whenever [hisher] hands pass the ring of prepuce in the middle and pushing [himher]self toward greater pleasure.", parse);
@@ -3221,7 +3221,7 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	else if(rosalin.FirstVag())
 		Text.Add("You respond by palming [hisher] [rVagDesc], your thumb resting upon [hisher] [rClitDesc], slowly ticking back and forth like the arm of a perverse metronome. [HisHer] juices run freely into your hand, anointing you with the warm secretions of [hisher] pleasure.", parse);
 	Text.NL();
-	parse["anim"] = cock.race != Race.human ? " and animalistic" : "";
+	parse["anim"] = cock.race != Race.Human ? " and animalistic" : "";
 	Text.Add("The alchemist's marvellous genitalia are so potent[anim] that you unwittingly find yourself pushing forward, trying to cram [himher] further into your throat. It's difficult to resist, but you endure in order to more properly worship [hisher] wonderful tool. There will be time to deepthroat it when [heshe]'s about to climax.", parse);
 	Text.NL();
 	if(cock.sheath == 1)
@@ -3249,7 +3249,7 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	Text.Add("Rosalin grunts from your latest affections, a slightly more confident expression appearing on [hisher] face in between exhalations of bliss. <i>“If you like me this much like this.... I need more Equinium, don't I?”</i> You're too busy lavishing [hisher] [rCockDesc] with adulation to respond. <i>“Would you like me to dose myself with it a few more times, maybe add some extra equine spunk to see if we can make it so potent that you get addicted to my pheromones? Or maybe just the taste of my cream? I can put it in any potions I make for you.”</i>", parse);
 	Text.NL();
 	Text.Add("That sounds lovely. Though being addicted might be a bit much, you're too turned on to think clearly. You show your agreement in the only way a horny, cock-addled mouth-slut can: by opening wide and sucking [himher] inside.", parse);
-	if(cock.race == Race.horse)
+	if(cock.race.isRace(Race.Horse))
 		Text.Add(" [HisHer] flare is getting so large that it nearly catches on your teeth, but you wrangle it in, gulping noisily as it slides into the back of your throat to keep yourself from gagging.", parse);
 	Text.NL();
 	Text.Add("[HisHer] rigid [rCockDesc] is just soft and spongy enough to bend and slide into your throat, stretching you uncomfortably.", parse);
@@ -3261,14 +3261,14 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	else
 		Text.Add("<i>“Ohhhhhhhhhh,”</i> Rosalin croons as [heshe] grabs hold of your head, holding you in place. <i>“GonnacumgonnacumgonnacumOHGODI'MCUMMIIIINNNG!”</i> ", parse);
 	Text.Add("[HisHer] hips shiver and thrust, sliding your body back into the wall, pinning you there as [heshe] mates with your throat", parse);
-	if(cock.race == Race.horse)
+	if(cock.race.isRace(Race.Horse))
 		Text.Add(", [hisher] tip expanding to form a tight seal.", parse);
 	else
 		Text.Add(".", parse);
 	Text.NL();
 	if(rosalin.HasBalls()) {
 		Text.Add("The supple sack below [himher] heaves, lifting the cum-swollen balls rhythmically inside as their mass slightly diminishes, the weight going elsewhere. You squeeze it encouragingly", parse);
-		if(cock.race == Race.horse)
+		if(cock.race.isRace(Race.Horse))
 			Text.Add(", which makes [hisher] flare bloom even bigger.", parse);
 		else
 			Text.Add(".", parse);

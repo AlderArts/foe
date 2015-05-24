@@ -38,12 +38,12 @@ function FeralWolf(levelbonus) {
 	this.combatExp         = 5 + this.level;
 	this.coinDrop          = 2 + this.level * 4;
 	
-	this.body.SetRace(Race.wolf);
+	this.body.SetRace(Race.Wolf);
 	this.body.SetBodyColor(Color.gray);
 	
 	this.body.SetEyeColor(Color.gold);
 	
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.wolf, Color.gray);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Wolf, Color.gray);
 
 	// Set hp and mana to full
 	this.SetLevelBonus();

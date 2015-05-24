@@ -15,7 +15,7 @@ function Asche(storage) {
 	this.body.DefFemale();
 	this.FirstBreastRow().size.base = 12.5;
 	this.Butt().buttSize.base = 6;
-	this.body.SetRace(Race.jackal);
+	this.body.SetRace(Race.Jackal);
 	
 	this.SetLevelBonus();
 	this.RestFull();

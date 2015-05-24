@@ -5,7 +5,7 @@ Scenes.Brothel.IsOpen = function() {
 }
 
 Scenes.Brothel.NewMStrap = function() {
-	var cock = new Cock(Race.human);
+	var cock = new Cock(Race.Human);
 	//#PC now has a 9” by 2” thick human cock.
 	cock.length.base = 23;
 	cock.thickness.base = 5;

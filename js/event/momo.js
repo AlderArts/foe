@@ -33,7 +33,7 @@ function Momo(storage) {
 	this.body.DefFemale();
 	this.FirstBreastRow().size.base = 12.5;
 	this.Butt().buttSize.base = 6;
-	this.body.SetRace(Race.dragon);
+	this.body.SetRace(Race.Dragon);
 	
 	this.SetLevelBonus();
 	this.RestFull();

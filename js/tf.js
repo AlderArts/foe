@@ -163,39 +163,37 @@ function RaceScore(body) {
 	if(body)
 	{
 		// Generic attributes
-		this.score[body.head.race]++;
-		this.score[body.head.mouth.tongue.race]++;
-		this.score[body.head.eyes.race]++;
-		this.score[body.head.ears.race]++;
-		this.score[body.torso.race]++;
-		this.score[body.arms.race]++;
-		this.score[body.legs.race]++;
+		this.score[body.head.race.id]++;
+		this.score[body.head.mouth.tongue.race.id]++;
+		this.score[body.head.eyes.race.id]++;
+		this.score[body.head.ears.race.id]++;
+		this.score[body.torso.race.id]++;
+		this.score[body.arms.race.id]++;
+		this.score[body.legs.race.id]++;
 		
 		for(var i = 0; i < body.cock.length; i++)
-			this.score[body.cock[i].race]++;
-		if(body.balls.count.Get() > 0) this.score[body.balls.race]++;
+			this.score[body.cock[i].race.id]++;
+		if(body.balls.count.Get() > 0) this.score[body.balls.race.id]++;
 		for(var i = 0; i < body.backSlots.length; i++)
-			this.score[body.backSlots[i].race]++;
+			this.score[body.backSlots[i].race.id]++;
 		for(var i = 0; i < body.head.appendages.length; i++)
-			this.score[body.head.appendages[i].race]++;
+			this.score[body.head.appendages[i].race.id]++;
 		
 		// Specific attributes
 		// KNOT (CANID)
 		for(var i = 0; i < body.cock.length; i++) {
 			if(body.cock[i].knot) {
-				this.score[Race.dog]++;
-				this.score[Race.fox]++;
-				this.score[Race.wolf]++;
+				this.score[Race.Canine.id]++;
 			}
 		}
 		//IF 2 COCKS
 		if(body.cock.length == 2) {
-			this.score[Race.lizard]++;
+			this.score[Race.Lizard.id]++;
 		}
 		
 		// Human-ish looks
-		if(body.arms.count == 2) this.score[Race.human] += 2;
-		if(body.legs.count == 2) this.score[Race.human] += 2;
+		if(body.arms.count == 2) this.score[Race.Human.id] += 2;
+		if(body.legs.count == 2) this.score[Race.Human.id] += 2;
 		
 		this.len = 0;
 		// EQUALIZE

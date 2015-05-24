@@ -34,7 +34,7 @@ Items.StrapOn.EquineStrapon.subtype = ItemSubtype.StrapOn;
 Items.StrapOn.EquineStrapon.cock = new Cock();
 Items.StrapOn.EquineStrapon.cock.thickness.base = 7;
 Items.StrapOn.EquineStrapon.cock.length.base    = 40;
-Items.StrapOn.EquineStrapon.cock.race           = Race.horse;
+Items.StrapOn.EquineStrapon.cock.race           = Race.Horse;
 Items.StrapOn.EquineStrapon.cock.sheath         = 1;
 Items.StrapOn.EquineStrapon.cock.isStrapon      = true;
 
@@ -48,7 +48,7 @@ Items.StrapOn.CanidStrapon.subtype = ItemSubtype.StrapOn;
 Items.StrapOn.CanidStrapon.cock = new Cock();
 Items.StrapOn.CanidStrapon.cock.thickness.base = 5;
 Items.StrapOn.CanidStrapon.cock.length.base    = 25;
-Items.StrapOn.CanidStrapon.cock.race           = Race.dog;
+Items.StrapOn.CanidStrapon.cock.race           = Race.Canine;
 Items.StrapOn.CanidStrapon.cock.knot           = 1;
 Items.StrapOn.CanidStrapon.cock.isStrapon      = true;
 
@@ -62,7 +62,7 @@ Items.StrapOn.ChimeraStrapon.subtype = ItemSubtype.StrapOn;
 Items.StrapOn.ChimeraStrapon.cock = new Cock();
 Items.StrapOn.ChimeraStrapon.cock.thickness.base = 11;
 Items.StrapOn.ChimeraStrapon.cock.length.base    = 60;
-Items.StrapOn.ChimeraStrapon.cock.race           = Race.cat;
+Items.StrapOn.ChimeraStrapon.cock.race           = Race.Feline;
 Items.StrapOn.ChimeraStrapon.cock.sheath         = 1;
 Items.StrapOn.ChimeraStrapon.cock.knot           = 1;
 Items.StrapOn.ChimeraStrapon.cock.isStrapon      = true;

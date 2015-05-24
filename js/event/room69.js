@@ -834,20 +834,21 @@ Scenes.Room69.ApologizeTo69ForBeingMean = function() {
 			var racescore = new RaceScore(player.body);
 			var majorRace = racescore.Sorted()[0];
 			var undef = false;
-			switch(majorRace) {
-				case Race.human:  parse["race"] = " monkeys";    break;
-				case Race.horse:  parse["race"] = " horsies";    break;
-				case Race.dog:    parse["race"] = " doggies";    break;
-				case Race.cat:    parse["race"] = " kitties";    break;
-				case Race.fox:    parse["race"] = " foxies";     break;
-				case Race.avian:  parse["race"] = " birdies";    break;
-				case Race.lizard: parse["race"] = " hatchlings"; break;
-				case Race.rabbit: parse["race"] = " bunnies";    break;
-				case Race.sheep:  parse["race"] = " lambs";      break;
-				case Race.wolf:   parse["race"] = " wolfies";    break;
-				default:          parse["race"] = "... whatever you are"; undef = true; break;
+			if(majorRace.isRace(Race.Human)) parse["race"] = " monkeys";
+			else if(majorRace.isRace(Race.Horse)) parse["race"] = " horsies";
+			else if(majorRace.isRace(Race.Dog)) parse["race"] = " doggies";
+			else if(majorRace.isRace(Race.Feline)) parse["race"] = " kitties";
+			else if(majorRace.isRace(Race.Fox)) parse["race"] = " foxies";
+			else if(majorRace.isRace(Race.Avian)) parse["race"] = " birdies";
+			else if(majorRace.isRace(Race.Reptile)) parse["race"] = " hatchlings";
+			else if(majorRace.isRace(Race.Rabbit)) parse["race"] = " bunnies";
+			else if(majorRace.isRace(Race.Sheep)) parse["race"] = " lambs";
+			else if(majorRace.isRace(Race.Wolf)) parse["race"] = " wolfies";
+			else {
+				parse["race"] = "... whatever you are";
+				undef = true;
 			}
-			
+
 			Text.Add("<i>“Well... I suppose, someone like you might start panicking in that situation. I will admit I made a mistake. I knew that one should not corner dangerous animals, for they are likely to then attack,”</i> the voice remarks coolly. <i>“I just had not realized the same applied to[race].”</i>", parse);
 			Text.NL();
 			parse["race"] = undef ? "You seethe a little, but" : "Well, at least you got compared to a cute animal. That’s good. Probably. Right? In any case,";

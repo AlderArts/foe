@@ -99,7 +99,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 				
 				var racescore = new RaceScore(player.body);
 				var humanScore = new RaceScore();
-				humanScore.score[Race.human] = 1;
+				humanScore.score[Race.Human] = 1;
 				var humanity = racescore.Compare(humanScore);
 				
 				if(humanity < 0.95) {
@@ -172,7 +172,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 				
 				var racescore = new RaceScore(player.body);
 				var humanScore = new RaceScore();
-				humanScore.score[Race.human] = 1;
+				humanScore.score[Race.Human] = 1;
 				var humanity = racescore.Compare(humanScore);
 				
 				parse["plebFilth"] = humanity > 0.95 ? "pleb" : "filth";

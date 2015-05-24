@@ -34,7 +34,7 @@ function IntroDemon() {
 	
 	this.body.DefMale();
 	
-	this.body.SetRace(Race.demon);
+	this.body.SetRace(Race.Demon);
 	
 	this.body.SetBodyColor(Color.red);
 	

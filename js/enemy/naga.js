@@ -43,7 +43,7 @@ function Naga() {
 	this.combatExp         = this.level;
 	this.coinDrop          = this.level * 4;
 	
-	this.body.SetRace(Race.snake);
+	this.body.SetRace(Race.Snake);
 	
 	this.body.SetBodyColor(Color.olive);
 	

@@ -3,10 +3,28 @@
  */
 
 function BodyPart(race, color) {
-	race       = race  || Race.human;
-	color      = color || Color.white;
-	this.race  = race;
-	this.color = color;
+	this.race  = race || Race.Human;
+	this.color = color || Color.white;
+}
+
+BodyPart.HasFur = function(race) {
+	return race.isRace(
+		Race.Canine,
+		Race.Feline,
+		Race.Goat,
+		Race.Sheep,
+		Race.Musteline,
+		Race.Rabbit);
+}
+BodyPart.HasScales = function(race) {
+	return race.isRace(Race.Reptile);
+}
+BodyPart.HasSkin = function(race) {
+	return race.isRace(
+		Race.Human,
+		Race.Elf,
+		Race.Demon,
+		Race.Dryad);
 }
 
 BodyPartType = {
@@ -120,27 +138,27 @@ Body.prototype.ToStorage = function() {
 	};
 	
 	storage.head = {
-		race : this.head.race.toFixed(),
+		race : this.head.race.id.toFixed(),
 		col  : this.head.color.toFixed()
 	};
 	storage.head.mouth = {
 		cap  : this.head.mouth.capacity.base.toFixed(2),
-		ton  : {race : this.head.mouth.tongue.race.toFixed(), col : this.head.mouth.tongue.color.toFixed()},
+		ton  : {race : this.head.mouth.tongue.race.id.toFixed(), col : this.head.mouth.tongue.color.toFixed()},
 		tonL : this.head.mouth.tongueLength.base.toFixed(2)
 	};
 	storage.head.hair = {
-		race  : this.head.hair.race.toFixed(),
+		race  : this.head.hair.race.id.toFixed(),
 		col   : this.head.hair.color.toFixed(),
 		len   : this.head.hair.length.base.toFixed(2),
 		style : this.head.hair.style.toFixed()
 	};
 	storage.head.eyes = {
-		race  : this.head.eyes.race.toFixed(),
+		race  : this.head.eyes.race.id.toFixed(),
 		col   : this.head.eyes.color.toFixed(),
 		count : this.head.eyes.count.base.toFixed()
 	};
 	storage.head.ears = {
-		race : this.head.ears.race.toFixed(),
+		race : this.head.ears.race.id.toFixed(),
 		col  : this.head.ears.color.toFixed()
 	};
 	if(this.head.appendages.length > 0) {
@@ -150,7 +168,7 @@ Body.prototype.ToStorage = function() {
 		}
 	}
 	storage.torso = {
-		race : this.torso.race.toFixed(),
+		race : this.torso.race.id.toFixed(),
 		col  : this.torso.color.toFixed(),
 		hip  : this.torso.hipSize.base.toFixed(2)
 	};
@@ -191,13 +209,13 @@ Body.prototype.ToStorage = function() {
 	
 	// Arms and legs
 	storage.arms = {
-		race  : this.arms.race.toFixed(),
+		race  : this.arms.race.id.toFixed(),
 		col   : this.arms.color.toFixed(),
 		count : this.arms.count.toFixed()
 	};
 	
 	storage.legs = {
-		race  : this.legs.race.toFixed(),
+		race  : this.legs.race.id.toFixed(),
 		col   : this.legs.color.toFixed(),
 		count : this.legs.count.toFixed()
 	};
@@ -247,28 +265,28 @@ Body.prototype.FromStorage = function(storage) {
 	this.femininity.base = parseFloat(storage.fem)    || this.femininity.base;
 	
 	if(storage.head) {
-		this.head.race   = parseInt(storage.head.race) || this.head.race;
+		this.head.race   = RaceDesc.IdToRace[parseInt(storage.head.race)] || this.head.race;
 		this.head.color  = parseInt(storage.head.col)  || this.head.color;
 		
 		if(storage.head.mouth) {
-			this.head.mouth.tongue.race       = parseInt(storage.head.mouth.ton.race) || this.head.mouth.tongue.race;
+			this.head.mouth.tongue.race       = RaceDesc.IdToRace[parseInt(storage.head.mouth.ton.race)] || this.head.mouth.tongue.race;
 			this.head.mouth.tongue.color      = parseInt(storage.head.mouth.ton.col)  || this.head.mouth.tongue.color;
 			this.head.mouth.capacity.base     = parseFloat(storage.head.mouth.cap)    || this.head.mouth.capacity.base;
 			this.head.mouth.tongueLength.base = parseFloat(storage.head.mouth.tonL)   || this.head.mouth.tongueLength.base;
 		}
 		if(storage.head.hair) {
-			this.head.hair.race        = parseInt(storage.head.hair.race)  || this.head.hair.race;
+			this.head.hair.race        = RaceDesc.IdToRace[parseInt(storage.head.hair.race)]  || this.head.hair.race;
 			this.head.hair.color       = parseInt(storage.head.hair.col)   || this.head.hair.color;
 			this.head.hair.length.base = parseInt(storage.head.hair.len)   || this.head.hair.length.base;
 			this.head.hair.style       = parseInt(storage.head.hair.style) || this.head.hair.style;
 		}
 		if(storage.head.eyes) {
-			this.head.eyes.race        = parseInt(storage.head.eyes.race)  || this.head.eyes.race;
+			this.head.eyes.race        = RaceDesc.IdToRace[parseInt(storage.head.eyes.race)]  || this.head.eyes.race;
 			this.head.eyes.color       = parseInt(storage.head.eyes.col)   || this.head.eyes.color;
 			this.head.eyes.count.base  = parseInt(storage.head.eyes.count) || this.head.eyes.count.base;
 		}
 		if(storage.head.ears) {
-			this.head.ears.race        = parseInt(storage.head.ears.race)  || this.head.ears.race;
+			this.head.ears.race        = RaceDesc.IdToRace[parseInt(storage.head.ears.race)]  || this.head.ears.race;
 			this.head.ears.color       = parseInt(storage.head.ears.col)   || this.head.ears.color;
 		}
 		
@@ -283,7 +301,7 @@ Body.prototype.FromStorage = function(storage) {
 	}
 	
 	if(storage.torso) {
-		this.torso.race         = parseInt(storage.torso.race) || this.torso.race;
+		this.torso.race         = RaceDesc.IdToRace[parseInt(storage.torso.race)] || this.torso.race;
 		this.torso.color        = parseInt(storage.torso.col)  || this.torso.color;
 		this.torso.hipSize.base = parseFloat(storage.torso.hip)  || this.torso.hipSize.base;
 	}
@@ -344,7 +362,7 @@ Body.prototype.FromStorage = function(storage) {
 	if(storage.arms) {
 		this.arms = new BodyPart();
 		var a = storage.arms;
-		this.arms.race  = parseInt(a.race)  || this.torso.race;
+		this.arms.race  = RaceDesc.IdToRace[parseInt(a.race)]  || this.torso.race;
 		this.arms.color = parseInt(a.col)   || this.torso.color;
 		this.arms.count = parseInt(a.count) || 2;
 	}
@@ -352,7 +370,7 @@ Body.prototype.FromStorage = function(storage) {
 	if(storage.legs) {
 		this.legs = new BodyPart();
 		var a = storage.legs;
-		this.legs.race  = parseInt(a.race)  || this.torso.race;
+		this.legs.race  = RaceDesc.IdToRace[parseInt(a.race)]  || this.torso.race;
 		this.legs.color = parseInt(a.col)   || this.torso.color;
 		this.legs.count = parseInt(a.count) || 2;
 	}
@@ -395,7 +413,7 @@ Body.prototype.Race = function() {
 	return this.torso.race;
 }
 Body.prototype.RaceStr = function() {
-	return Race.Desc(this.Race());
+	return this.Race().Short();
 }
 
 
@@ -470,367 +488,120 @@ Hair.prototype.Long = function() {
 
 
 BodyPart.prototype.Feathered = function() {
-	var race = this.race;
-	switch(race) {
-		case Race.avian: return true;
-		default: return false;
-	}
+	return this.race.isRace(Race.Avian);
 }
 
-/*
-Race = {
-	human  : 0,
-	horse  : 1,
-	cat    : 2,
-	dog    : 3,
-	fox    : 4,
-	lizard : 5,
-	rabbit : 6,
-	demon  : 7,
-	dragon : 8,
-	dryad  : 9,
-	elf    : 10,
-	satyr  : 11,
-	sheep  : 12,
-	goat   : 13,
-	cow    : 14,
-	wolf   : 15,
-	avian  : 16
-}
-*/
 Body.prototype.SkinDesc = function(part) {
 	var col = Color.Desc(this.torso.color);
 	part = part || this.torso.race;
-	switch(part) {
-		case Race.lizard:
-		case Race.snake:
-		case Race.dragon: return col + " scales";
-		
-		case Race.avian: return col + " feathers";
-		
-		case Race.cow:
-		case Race.horse: return col + " hide";
-		
-		case Race.ferret:
-		case Race.wolf:
-		case Race.sheep:
-		case Race.goat:
-		case Race.cat:
-		case Race.dog:
-		case Race.fox:
-		case Race.rabbit: return col + " fur";
-		
-		case Race.goo: return col + " slime";
-		
-		case Race.human:
-		case Race.elf:
-		case Race.demon:
-		case Race.dryad:
-		default: return col + " skin";
-	}
+	
+	if(part.isRace(Race.Reptile)) return col + " scales";
+	if(part.isRace(Race.Avian)) return col + " feathers";
+	if(part.isRace(Race.Cow, Race.Horse)) return col + " hide";
+	if(part.isRace(Race.Canine, Race.Feline, Race.Goat, Race.Sheep, Race.Musteline, Race.Rabbit)) return col + " fur";
+	if(part.isRace(Race.Goo)) return col + " slime";
+	return col + " skin";
 }
 
-Body.prototype.HasFur = function() {
-	switch(this.torso.race) {
-		case Race.wolf:
-		case Race.sheep:
-		case Race.goat:
-		case Race.cat:
-		case Race.dog:
-		case Race.fox:
-		case Race.rabbit:
-		case Race.ferret:
-			return true;
-		default:
-			return false;
-	}
+Body.prototype.HasFur = function(race) {
+	return BodyPart.HasFur(this.torso.race);
 }
-Body.prototype.HasScales = function() {
-	switch(this.torso.race) {
-		case Race.lizard:
-		case Race.dragon:
-		case Race.snake:
-			return true;
-		default:
-			return false;
-	}
+Body.prototype.HasScales = function(race) {
+	return BodyPart.HasScales(this.torso.race);
 }
-Body.prototype.HasSkin = function() {
-	switch(this.torso.race) {
-		case Race.human:
-		case Race.elf:
-		case Race.demon:
-		case Race.dryad:
-			return true;
-		default:
-			return false;
-	}
+Body.prototype.HasSkin = function(race) {
+	return BodyPart.HasSkin(this.torso.race);
 }
 
 // TODO
 Body.prototype.FaceDesc = function() {
-	switch(this.head.race) {
-		case Race.human:  return "face";
-		case Race.horse:  return "horse-like face";
-		case Race.cat:    return "feline face";
-		case Race.ferret: return "pointed, ferret-like face";
-		case Race.rabbit: return "narrow, rabbit-like face";
-		case Race.fox:
-		case Race.wolf:
-		case Race.dog:    return "canid face";
-		case Race.lizard: return "lizard-like face";
-			
-		case Race.elf:    return "elven face";
-		default:          return "face";
-	}
+	var desc = this.head.race.qShort();
+	if(this.head.race.isRace(Race.Human)) return "face";
+	else return desc + " face";
 }
 Body.prototype.FaceDescLong = function() {
-	switch(this.head.race) {
-		case Race.human:  return "a human face with smooth skin";
-		case Race.horse:  return "a long, flat, horse-like face";
-		case Race.cat:    return "a triangular face with feline properties";
-		case Race.ferret: return "a pointed, ferret-like face";
-		case Race.rabbit: return "a narrow, rabbit-like face";
-		case Race.fox:
-		case Race.wolf:
-		case Race.dog:    return "a canid face";
-			
-		case Race.elf:    return "an elven face, the delicate features showing an ageless grace";
-		default:          return "a face";
-	}
+	return this.head.race.aqShort() + " face";
 }
 Body.prototype.EyeDesc = function() {
-	var eyes = this.head.eyes;
-	switch(eyes.race) {
-		case Race.lizard:
-		case Race.snake:
-		case Race.dragon: return "reptilian eye";
-		
-		case Race.demon: return "demonic eye";
-		
-		case Race.ferret:
-		case Race.cat:
-		case Race.fox:
-		case Race.wolf:
-		case Race.dog: return "feral eye";
-			
-		case Race.human:
-		case Race.horse:
-		case Race.rabbit:
-		case Race.elf:
-		case Race.dryad:
-		default: return "eye";
-	}
+	var eyes = this.head.eyes.race;
+	return eyes.qShort() + " eye";
 }
 
 Body.prototype.EarDesc = function() {
-	var ears = this.head.ears;
-	switch(ears.race) {
-		case Race.lizard:
-		case Race.snake:
-		case Race.dragon: return "pointed, scaled ears";
-		
-		case Race.elf:
-		case Race.dryad:
-		case Race.demon: return "pointed elfin ears";
-		
-		case Race.horse: return "long equine ears";
-		
-		case Race.ferret: return "furred ferret ears";
-		case Race.cat: return "fuzzy feline ears";
-		case Race.fox: return "fuzzy vulpine ears";
-		case Race.wolf:
-		case Race.dog: return "furred canine ears";
-			
-		case Race.rabbit: return "floppy rabbit ears";
-		
-		case Race.human: 
-		default: return "ears";
-	}
+	var ears = this.head.ears.race;
+	if(ears.isRace(Race.Reptile)) return "pointed, scaled ears";
+	if(ears.isRace(Race.Elf, Race.Dryad, Race.Demon)) return "pointed elfin ears";
+	if(ears.isRace(Race.Rabbit)) return "floppy rabbit ears";
+	if(ears.isRace(Race.Human)) return "ears";
+	return ears.qShort() + " ears";
 }
 
 Body.prototype.HasFlexibleEars = function() {
-	var ears = this.head.ears;
-	switch(ears.race) {
-		case Race.horse:
-		case Race.cat:
-		case Race.dog:
-		case Race.fox:
-		case Race.rabbit:
-		case Race.sheep:
-		case Race.goat:
-		case Race.cow:
-		case Race.wolf:
-		case Race.ferret:
-			return true;
-		default: return false;
-	}
+	var ears = this.head.ears.race;
+	return ears.isRace(
+		Race.Horse,
+		Race.Feline,
+		Race.Canine,
+		Race.Rabbit,
+		Race.Sheep,
+		Race.Cow,
+		Race.Goat,
+		Race.Musteline
+	);
 }
 
-/*
-Race = {
-	human  : 0,
-	horse  : 1,
-	cat    : 2,
-	dog    : 3,
-	fox    : 4,
-	lizard : 5,
-	rabbit : 6,
-	demon  : 7,
-	dragon : 8,
-	dryad  : 9,
-	elf    : 10,
-	satyr  : 11,
-	sheep  : 12,
-	goat   : 13,
-	cow    : 14,
-	wolf   : 15,
-	avian  : 16
-}
- */
 Body.prototype.HasLongSnout = function() {
-	switch(this.head.race) {
-		case Race.horse:
-		case Race.dragon:
-		case Race.cow:
-		case Race.lizard:
-		return true;
-		
-		case Race.snake:
-		case Race.goat:
-		case Race.sheep:
-		case Race.satyr:
-		case Race.elf:
-		case Race.dryad:
-		case Race.demon:
-		case Race.rabbit:
-		case Race.fox:
-		case Race.dog:
-		case Race.wolf:
-		case Race.cat:
-		case Race.human:
-		case Race.avian:
-		case Race.ferret:
-		default:
-		return false;
-	}
+	return this.head.race.isRace(
+		Race.Horse,
+		Race.Reptile,
+		Race.Cow,
+		Race.Goat,
+		Race.Sheep
+	);
 }
 
 Body.prototype.HasNightvision = function() {
-	switch(this.head.eyes.race) {
-		case Race.dragon:
-		case Race.demon:
-		case Race.wolf:
-		case Race.fox:
-		case Race.cat:
-		return true;
-		
-		case Race.horse:
-		case Race.cow:
-		case Race.lizard:
-		case Race.snake:
-		case Race.goat:
-		case Race.sheep:
-		case Race.satyr:
-		case Race.elf:
-		case Race.dryad:
-		case Race.rabbit:
-		case Race.dog:
-		case Race.human:
-		case Race.avian:
-		case Race.ferret:
-		default:
-		return false;
-	}
+	return this.head.eyes.race.isRace(
+		Race.Dragon,
+		Race.Demon,
+		Race.Wolf,
+		Race.Fox,
+		Race.Feline
+	);
 }
 
 Body.prototype.SoftFeet = function() {
 	var legs = this.legs;
 	if(!legs || legs.count == 0) return false;
 	
-	switch(legs.race) {
-		case Race.cow:
-		case Race.goat:
-		case Race.sheep:
-		case Race.satyr:
-		case Race.dryad:
-		case Race.horse: return false;
-		
-		case Race.avian:
-		case Race.dragon:
-		case Race.lizard:
-		case Race.demon:
-		
-		case Race.ferret:
-		case Race.rabbit:
-		case Race.fox:
-		case Race.wolf:
-		case Race.dog:
-		case Race.cat:
-		
-		case Race.elf:
-		case Race.human:
-		default: return true;
-	}
+	return !legs.race.isRace(
+		Race.Cow,
+		Race.Goat,
+		Race.Sheep,
+		Race.Dryad,
+		Race.Horse
+	);
 }
 
 Body.prototype.FeetDesc = function() {
 	var legs = this.legs;
 	if(!legs || legs.count == 0) return "lower body";
 	
-	switch(legs.race) {
-		case Race.cow:
-		case Race.goat:
-		case Race.sheep:
-		case Race.satyr:
-		case Race.dryad:
-		case Race.horse: return "hoofs";
-		
-		case Race.avian:
-		case Race.dragon:
-		case Race.lizard:
-		case Race.demon: return "clawed feet";
-		
-		case Race.ferret:
-		case Race.rabbit:
-		case Race.fox:
-		case Race.wolf:
-		case Race.dog:
-		case Race.cat: return "paws";
-		
-		case Race.elf:
-		case Race.human:
-		default: return "feet";
-	}
+	if(legs.race.isRace(Race.Cow, Race.Goat, Race.Sheep, Race.Dryad, Race.Horse)) return "hoofs";
+	if(legs.race.isRace(Race.Avian, Race.Reptile, Race.Demon)) return "clawed feet";
+	if(legs.race.isRace(Race.Musteline, Race.Rabbit, Race.Canine, Race.Feline)) return "paws";
+	
+	return "feet";
 }
 Body.prototype.FootDesc = function() {
 	var legs = this.legs;
 	if(!legs || legs.count == 0) return "lower body";
 	
-	switch(legs.race) {
-		case Race.cow:
-		case Race.goat:
-		case Race.sheep:
-		case Race.satyr:
-		case Race.dryad:
-		case Race.horse: return "hoof";
+	if(legs.race.isRace(Race.Cow, Race.Goat, Race.Sheep, Race.Dryad, Race.Horse)) return "hoof";
+	if(legs.race.isRace(Race.Avian, Race.Reptile, Race.Demon)) return "clawed foot";
+	if(legs.race.isRace(Race.Musteline, Race.Rabbit, Race.Canine, Race.Feline)) return "paw";
 		
-		case Race.avian:
-		case Race.dragon:
-		case Race.lizard:
-		case Race.demon: return "clawed foot";
-		
-		case Race.ferret:
-		case Race.rabbit:
-		case Race.fox:
-		case Race.wolf:
-		case Race.dog:
-		case Race.cat: return "paw";
-		
-		case Race.elf:
-		case Race.human:
-		default: return "foot";
-	}
+	return "foot";
 }
 
 // TODO
@@ -838,155 +609,42 @@ Body.prototype.LegDesc = function() {
 	var legs = this.legs;
 	if(!legs || legs.count == 0) return "lower body";
 	
-	switch(legs.race) {
-		case Race.cow:
-		case Race.goat:
-		case Race.sheep:
-		case Race.satyr:
-		case Race.dryad:
-		case Race.horse:
-		
-		case Race.dragon:
-		case Race.lizard:
-		case Race.demon:
-		
-		case Race.ferret:
-		case Race.rabbit:
-		case Race.fox:
-		case Race.wolf:
-		case Race.dog:
-		case Race.cat:
-		
-		case Race.elf:
-		case Race.human:
-		default: return "leg";
-	}
+	return "leg";
 }
 // TODO
 Body.prototype.LegsDesc = function() {
 	var legs = this.legs;
 	if(!legs || legs.count == 0) return "lower body";
 	
-	switch(legs.race) {
-		case Race.cow:
-		case Race.goat:
-		case Race.sheep:
-		case Race.satyr:
-		case Race.dryad:
-		case Race.horse:
-		
-		case Race.dragon:
-		case Race.lizard:
-		case Race.demon:
-		
-		case Race.ferret:
-		case Race.rabbit:
-		case Race.fox:
-		case Race.wolf:
-		case Race.dog:
-		case Race.cat:
-		
-		case Race.elf:
-		case Race.human:
-		
-		default: return "legs";
-	}
+	return "legs";
 }
 // TODO
 Body.prototype.ThighDesc = function() {
 	var legs = this.legs;
 	if(!legs || legs.count == 0) return "body";
 	
-	switch(legs.race) {
-		case Race.cow:
-		case Race.goat:
-		case Race.sheep:
-		case Race.satyr:
-		case Race.dryad:
-		case Race.horse:
-		
-		case Race.dragon:
-		case Race.lizard:
-		case Race.demon:
-		
-		case Race.ferret:
-		case Race.rabbit:
-		case Race.fox:
-		case Race.wolf:
-		case Race.dog:
-		case Race.cat:
-		
-		case Race.elf:
-		case Race.human:
-		default: return "thigh";
-	}
+	return "thigh";
 }
 // TODO
 Body.prototype.ThighsDesc = function() {
 	var legs = this.legs;
 	if(!legs || legs.count == 0) return "body";
 	
-	switch(legs.race) {
-		case Race.cow:
-		case Race.goat:
-		case Race.sheep:
-		case Race.satyr:
-		case Race.dryad:
-		case Race.horse:
-		
-		case Race.dragon:
-		case Race.lizard:
-		case Race.demon:
-		
-		case Race.ferret:
-		case Race.rabbit:
-		case Race.fox:
-		case Race.wolf:
-		case Race.dog:
-		case Race.cat:
-		
-		case Race.elf:
-		case Race.human:
-		
-		default: return "thighs";
-	}
+	return "thighs";
 }
 // TODO
 Body.prototype.KneesDesc = function(plural) {
 	var legs = this.legs;
 	if(!legs) return "body";
 	if(legs.count == 0) {
-		if(legs.race == Race.snake)
+		if(legs.race.isRace(Race.Reptile))
 			return "snake-like tail";
 		return "body";
 	}
 	
 	var adj = "";
-	switch(legs.race) {
-		case Race.dragon:
-		case Race.lizard:
-			adj += "scaled "; break;
-		
-		case Race.cow:
-		case Race.goat:
-		case Race.sheep:
-		case Race.satyr:
-		case Race.horse:
-		case Race.ferret:
-		case Race.rabbit:
-		case Race.fox:
-		case Race.wolf:
-		case Race.dog:
-		case Race.cat:
-			adj += "furred "; break;
-		
-		case Race.elf:
-		case Race.human:
-		case Race.demon:
-		case Race.dryad:
-		
-		default:
-	}
+	if(BodyPart.HasScales(legs.race)) adj += "scaled ";
+	else if(BodyPart.HasFur(legs.race)) adj += "furred ";
 	
 	return adj + plural ? "knees" : "knee";
 }
@@ -995,29 +653,7 @@ Body.prototype.ArmDesc = function() {
 	var arm = this.arms;
 	if(!arm) return "body";
 	
-	switch(arm.race) {
-		case Race.cow:
-		case Race.goat:
-		case Race.sheep:
-		case Race.satyr:
-		case Race.dryad:
-		case Race.horse:
-		
-		case Race.dragon:
-		case Race.lizard:
-		case Race.demon:
-		
-		case Race.ferret:
-		case Race.rabbit:
-		case Race.fox:
-		case Race.wolf:
-		case Race.dog:
-		case Race.cat:
-		
-		case Race.elf:
-		case Race.human:
-		default: return "arm";
-	}
+	return "arm";
 }
 
 // TODO
@@ -1025,29 +661,12 @@ Body.prototype.HandDesc = function() {
 	var arm = this.arms;
 	if(!arm) return "body";
 	
-	switch(arm.race) {
-		case Race.ferret:
-		case Race.rabbit:
-		case Race.fox:
-		case Race.wolf:
-		case Race.dog:
-		case Race.cat: return "paw";
-		
-		case Race.cow:
-		case Race.goat:
-		case Race.sheep:
-		case Race.satyr:
-		case Race.dryad:
-		case Race.horse:
-		
-		case Race.dragon:
-		case Race.lizard:
-		case Race.demon:
-		
-		case Race.elf:
-		case Race.human:
-		default: return "hand";
-	}
+	if(arm.race.isRace(
+		Race.Musteline,
+		Race.Rabbit,
+		Race.Feline,
+		Race.Canine)) return "paw";
+	else return "hand";
 }
 
 //TODO
@@ -1058,60 +677,20 @@ Body.prototype.LipsDesc = function() {
 // TODO: Color, length
 Body.prototype.TongueDesc = function() {
 	var tongue = this.head.mouth.tongue;
-	switch(tongue.race) {
-		case Race.cow:
-		case Race.horse: return "broad tongue";
-		
-		case Race.dragon:
-		case Race.snake:
-		case Race.lizard:
-		case Race.demon: return "forked tongue";
-		
-		case Race.fox:
-		case Race.wolf:
-		case Race.dog: return "animalistic tongue";
-		
-		case Race.cat: return "barbed tongue";
-		
-		case Race.ferret:
-		case Race.rabbit:
-		case Race.goat:
-		case Race.sheep:
-		case Race.satyr:
-		case Race.dryad:
-		case Race.elf:
-		case Race.human:
-		default: return "tongue";
-	}
+	if(tongue.race.isRace(Race.Cow, Race.Horse)) return "broad tongue";
+	if(tongue.race.isRace(Race.Reptile, Race.Demon)) return "forked tongue";
+	if(tongue.race.isRace(Race.Canine)) return "animalistic tongue";
+	if(tongue.race.isRace(Race.Feline)) return "barbed tongue";
+	return "tongue";
 }
 
 // TODO: Color, length
 Body.prototype.TongueTipDesc = function() {
 	var tongue = this.head.mouth.tongue;
-	switch(tongue.race) {
-		case Race.fox:
-		case Race.wolf:
-		case Race.dog:
-		case Race.cow:
-		case Race.horse: return "broad tip";
-		
-		case Race.dragon:
-		case Race.snake:
-		case Race.lizard:
-		case Race.demon: return "forked tip";
-		
-		case Race.cat: return "barbed tip";
-		
-		case Race.ferret:
-		case Race.rabbit:
-		case Race.goat:
-		case Race.sheep:
-		case Race.satyr:
-		case Race.dryad:
-		case Race.elf:
-		case Race.human:
-		default: return "tip";
-	}
+	if(tongue.race.isRace(Race.Canine, Race.Cow, Race.Horse)) return "broad tip";
+	if(tongue.race.isRace(Race.Demon, Race.Reptile)) return "forked tip";
+	if(tongue.race.isRace(Race.Feline)) return "barbed tip";
+	return "tip";
 }
 
 // TODO

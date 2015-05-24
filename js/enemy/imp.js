@@ -36,10 +36,10 @@ function Imp() {
 	this.body.DefMale();
 	this.Butt().virgin = false;
 	
-	this.body.SetRace(Race.demon);
+	this.body.SetRace(Race.Demon);
 	
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.demon, Color.red);
-	TF.SetAppendage(this.Appendages(), AppendageType.horn, Race.demon, Color.red);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Demon, Color.red);
+	TF.SetAppendage(this.Appendages(), AppendageType.horn, Race.Demon, Color.red);
 	
 	var col = Math.random();
 	if(col < 0.3)

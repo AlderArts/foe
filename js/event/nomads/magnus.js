@@ -10,11 +10,11 @@ function Magnus(storage) {
 	this.name         = "Magnus";
 	
 	this.body.DefMale();
-	this.body.SetRace(Race.human);
+	this.body.SetRace(Race.Human);
 	this.SetSkinColor(Color.white);
 	this.FirstCock().length.base    = 100;
 	this.FirstCock().thickness.base = 8;
-	this.FirstCock().race           = Race.demon;
+	this.FirstCock().race           = Race.Demon;
 	this.body.cock.push(this.FirstCock().Clone());
 	this.body.cock.push(this.FirstCock().Clone());
 	

@@ -19,9 +19,9 @@ function Vena(storage) {
 	this.FirstVag().virgin = false;
 	this.Butt().buttSize.base = 15;
 	
-	this.body.SetRace(Race.rabbit);
+	this.body.SetRace(Race.Rabbit);
 	
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.rabbit, Color.white);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Rabbit, Color.white);
 	
 	this.body.SetBodyColor(Color.white);
 	

@@ -53,9 +53,9 @@ function Lagomorph(gender) {
 	this.Butt().buttSize.base = 2;
 	this.Butt().virgin = false;
 	
-	this.body.SetRace(Race.rabbit);
+	this.body.SetRace(Race.Rabbit);
 	
-	TF.SetAppendage(this.Back(), AppendageType.tail, Race.rabbit, Color.white);
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Rabbit, Color.white);
 	
 	this.body.SetBodyColor(Color.white);
 	
@@ -1710,7 +1710,7 @@ Scenes.Lagomorph.GroupWinOnPlainsGetFuckedM = function(enc, group) {
 		}
 		Text.NL();
 	}
-	parse["be"] = player.Ears().race == Race.rabbit ? " much like your own" : "";
+	parse["be"] = player.Ears().race.isRace(Race.Rabbit) ? " much like your own" : "";
 	Text.Add("You briefly survey the strapping young bucks lined up in front of you. The bunnies are lithe in build and covered in white fur, their heads topped by long floppy ears[be]. Thanks to their short stature, their rigid dicks are quite large in proportion to their body-size. You plan to study those delicious-looking things in much closer detail in the coming hour.", parse);
 	Text.NL();
 	

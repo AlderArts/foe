@@ -44,11 +44,11 @@ function GolQueen() {
 	
 	this.body.DefHerm();
 	
-	this.body.SetRace(Race.insect);
+	this.body.SetRace(Race.Gol);
 	this.body.SetBodyColor(Color.green);
 	this.body.SetHairColor(Color.green);	
 	this.body.SetEyeColor(Color.red);
-	this.FirstCock().race = Race.insect;
+	this.FirstCock().race = Race.Gol;
 	this.FirstCock().type = CockType.ovipositor;
 	this.FirstCock().length.base = 400;
 	this.FirstCock().thickness.base = 10;

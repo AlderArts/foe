@@ -41,7 +41,7 @@ function Miranda(storage) {
 	this.Butt().virgin = false;
 	this.Balls().size.base = 6;
 	this.Balls().cumProduction.base = 4;
-	this.body.SetRace(Race.dog);
+	this.body.SetRace(Race.Dog);
 	this.SetSkinColor(Color.black);
 	this.SetHairColor(Color.blue);
 	this.SetEyeColor(Color.green);

@@ -32,7 +32,7 @@ function Footman(levelbonus) {
 	this.combatExp         = this.level + 5;
 	this.coinDrop          = this.level * 6;
 	
-	this.body.SetRace(Race.human);
+	this.body.SetRace(Race.Human);
 	
 	var col = Math.random();
 	if(col < 0.6)

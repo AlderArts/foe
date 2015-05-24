@@ -31,17 +31,25 @@ RaceDesc.prototype.Desc = function(gender) {
 	return desc;
 }
 
-RaceDesc.prototype.short = function(gender) {
-	var desc = _.sample(this.Desc(gender));
-	return desc ? desc.noun : ("ERROR in " + this.name + ".short()");
+// Checks if this race (or any of its )
+RaceDesc.prototype.isRace = function() {
+	for(var i = 0; i < arguments.length; ++i)
+		if(this == arguments[i]) return true;
+	if(this.superclass) return RaceDesc.prototype.isRace.apply(this.superclass, arguments);
+	return false;
 }
+
 RaceDesc.prototype.Short = function(gender) {
 	var desc = _.sample(this.Desc(gender));
-	return desc ? _.capitalize(desc.noun) : ("ERROR in " + this.name + ".Short()");
+	return desc ? desc.noun : ("ERROR in " + this.name + ".Short()");
 }
-RaceDesc.prototype.ashort = function(gender) {
+RaceDesc.prototype.CShort = function(gender) {
 	var desc = _.sample(this.Desc(gender));
-	return desc ? (desc.a + " " + desc.noun) : ("ERROR in " + this.name + ".ashort()");
+	return desc ? _.capitalize(desc.noun) : ("ERROR in " + this.name + ".CShort()");
+}
+RaceDesc.prototype.aShort = function(gender) {
+	var desc = _.sample(this.Desc(gender));
+	return desc ? (desc.a + " " + desc.noun) : ("ERROR in " + this.name + ".aShort()");
 }
 
 RaceDesc.prototype.Quantifier = function(aAn, gender) {
@@ -56,17 +64,17 @@ RaceDesc.prototype.Quantifier = function(aAn, gender) {
 	return quantify;
 }
 
-RaceDesc.prototype.qshort = function(gender) {
-	var desc = _.sample(this.Quantifier(gender));
-	return desc ? desc.noun : ("ERROR in " + this.name + ".qshort()");
-}
 RaceDesc.prototype.qShort = function(gender) {
 	var desc = _.sample(this.Quantifier(gender));
-	return desc ? _.capitalize(desc.noun) : ("ERROR in " + this.name + ".qShort()");
+	return desc ? desc.noun : ("ERROR in " + this.name + ".qShort()");
 }
-RaceDesc.prototype.aqshort = function(gender) {
+RaceDesc.prototype.qCShort = function(gender) {
 	var desc = _.sample(this.Quantifier(gender));
-	return desc ? (desc.a + " " + desc.noun) : ("ERROR in " + this.name + ".aqshort()");
+	return desc ? _.capitalize(desc.noun) : ("ERROR in " + this.name + ".qCShort()");
+}
+RaceDesc.prototype.aqShort = function(gender) {
+	var desc = _.sample(this.Quantifier(gender));
+	return desc ? (desc.a + " " + desc.noun) : ("ERROR in " + this.name + ".aqShort()");
 }
 
 //{a:"", noun:""}
@@ -83,6 +91,9 @@ Race.Horse = new RaceDesc("horse", 1, {
 	descMale: [{a:"a", noun:"stallion"}],
 	descFemale: [{a:"a", noun:"mare"}],
 	quantify: [{a:"an", noun:"equine"}]
+});
+Race.Zebra = new RaceDesc("zebra", 39, {
+	desc: [{a:"a", noun:"zebra"}]
 });
 Race.Feline = new RaceDesc("feline", 2, {
 	desc: [{a:"a", noun:"cat"}, {a:"a", noun:"feline"}],
@@ -111,7 +122,7 @@ Race.Lynx = new RaceDesc("lynx", 29, {
 }, Race.Feline);
 Race.Lion = new RaceDesc("lion", 30, {
 	descMale: [{a:"a", noun:"lion"}],
-	descFemale: [{a:"a", noun:"lioness"}],
+	descFemale: [{a:"a", noun:"lioness"}]
 }, Race.Feline);
 Race.Canine = new RaceDesc("canine", 31, {
 	desc: [{a:"a", noun:"canine"}, {a:"a", noun:"canid"}],

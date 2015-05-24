@@ -553,7 +553,7 @@ world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
 				Text.NL();
 				var racescore = new RaceScore(player.body);
 				var humanScore = new RaceScore();
-				humanScore.score[Race.human] = 1;
+				humanScore.score[Race.Human] = 1;
 				var humanity = racescore.Compare(humanScore);
 				parse["human"] = humanity < 0.95 ? ", face contorting in disgust as he sees your non-human features" : "";
 				Text.Add("<i>“</i>I expressly told that oaf I was <b>not</b> to be disturbed tonight!”</i></i> he mutters, more to himself than to you. He gives you a brief glance[human], shaking his head.", parse);
@@ -916,7 +916,7 @@ Scenes.Krawitz.Scouting = function() {
 				
 				var racescore = new RaceScore(player.body);
 				var humanScore = new RaceScore();
-				humanScore.score[Race.human] = 1;
+				humanScore.score[Race.Human] = 1;
 				var humanity = racescore.Compare(humanScore);
 				
 				if(humanity < 0.5 || player.LowerBodyType() != LowerBodyType.Humanoid) {
@@ -1685,7 +1685,7 @@ Scenes.Krawitz.Bathhouse = function() {
 	
 	var racescore = new RaceScore(player.body);
 	var humanScore = new RaceScore();
-	humanScore.score[Race.human] = 1;
+	humanScore.score[Race.Human] = 1;
 	var humanity = racescore.Compare(humanScore);
 	
 	parse["human"] = humanity < 0.9 ? ", a non-human" : "";
@@ -1874,7 +1874,7 @@ Scenes.Krawitz.Bathhouse = function() {
 								Text.Add("With Marlene’s attention focused elsewhere, Gina is quick to monopolize your [multiCockDesc], using both her mouth and soft breasts to pleasure you.", parse);
 							}
 							else {
-								parse["skin"] = player.SkinType() != Race.human ? Text.Parse(", marvelling at the unfamiliar feel of your [skinDesc]", parse) : "";
+								parse["skin"] = player.SkinType() != Race.Human ? Text.Parse(", marvelling at the unfamiliar feel of your [skinDesc]", parse) : "";
 								Text.Add("Gina crawls up behind you, pressing her nude, dripping body against your bare back. Her stiff nipples grind against you insistently as her hands caress and explore your body[skin]. Slowly, she works her way down your body, falling to her knees as she kneads your [buttDesc]. You gasp in surprise as you feel her fingers prying your cheeks apart, her tongue slipping insider your [anusDesc], probing the sensitive passage.", parse);
 							}
 							Text.NL();
@@ -2546,14 +2546,14 @@ Scenes.Krawitz.Duel = function() {
 			Text.NL();
 			var racescore = new RaceScore(player.body);
 			var humanScore = new RaceScore();
-			humanScore.score[Race.human] = 1;
+			humanScore.score[Race.Human] = 1;
 			var humanity = racescore.Compare(humanScore);
 			parse["morph"] = humanity < 0.95 ? " filthy morph!" : "";
 			Text.Add("<i>“Why... you...[morph]”</i> he sputters, his faces growing redder with rage. <i>“I will have you pay for this!”</i>", parse);
 			Text.NL();
 			Text.Add("You tell him that you’ll be glad to pay if he can make you. You’ll fight him here and now if he wants.", parse);
 			Text.NL();
-			parse["race"] = (player.body.torso.race != Race.human) ? Race.Desc(player.body.torso.race) : player.mfFem("man", "woman");
+			parse["race"] = (player.Race() != Race.Human) ? player.Race().Short(player.Gender()) : player.mfFem("man", "woman");
 			parse["himher"] = player.mfFem("him", "her");
 			Text.Add("He visibly concentrates, regaining a modicum of composure. His brow is still covered in deep furrows, but he forces his breathing to grow steadier. <i>“Very well, I accept. Since you challenged me, I choose the method - fencing blades to first blood. Since you don’t have a suitable sword, I’ll have my servants fetch you one. Rufio, bring this... [race]... something, so none may say that I carved [himher] up unjustly.”</i>", parse);
 			Text.NL();
