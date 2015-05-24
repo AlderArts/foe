@@ -95,7 +95,7 @@ Scenes.Asche.FirstEntry = function() {
 	Text.NL();
 	Text.Add("So… what exactly does she sell here? Looking around you, you kind of have an idea, but it’s best to ask anyway.", parse);
 	Text.NL();
-	Text.Add("<i>“Customer wants to know what Asche sells? Anything and everything, so long as it bears some relation to the magical.”<i/> The jackaless waggles her fingers. <i>“Truly, that is making for some degree of clutter, but it makes better chances that customer who comes in will be able to find something to buy, yes?</i>", parse);
+	Text.Add("<i>“Customer wants to know what Asche sells? Anything and everything, so long as it bears some relation to the magical.”</i> The jackaless waggles her fingers. <i>“Truly, that is making for some degree of clutter, but it makes better chances that customer who comes in will be able to find something to buy, yes?</i>", parse);
 	Text.NL();
 	Text.Add("<i>“Asche has for sale some books, trinkets, staves - and of course, clothes to match.”</i> She gestures at the shelves, then at herself. <i>“Is very important to not just stay in style, but also character. Customers expect certain appearances when they are coming in, and Asche hopes to please; in same way, people are expecting certain things of magic workers.</i>", parse);
 	Text.NL();
@@ -258,7 +258,7 @@ Scenes.Asche.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("Yeah, it sounds like an obvious tradeoff to you. So, what are some of these components? You’d imagine they’d be pretty rare and mystical…", parse);
 				Text.NL();
-				Text.Add("Asche shrugs. <i>“It is really being depending on what customer has in mind. For example, best item for drawing forth power of sea is being black pearl, which is being incredibly rare. Pearl is also working, but not as powerful, to be needing more of them as compared to black ones. To be representing life and growth is very simple, just needing pinch of common basil herb. Invoking fire and light is requiring volcanic ash from deep underground, but coal can also be sufficing if simple magic is what is needed.", parse);
+				Text.Add("Asche shrugs. <i>“It is really being depending on what customer has in mind. For example, best item for drawing forth power of sea is being black pearl, which is being incredibly rare. Pearl is also working, but not as powerful, to be needing more of them as compared to black ones. To be representing life and growth is very simple, just needing pinch of common basil herb. Invoking fire and light is requiring volcanic ash from deep underground, but coal can also be sufficing if simple magic is what is needed.</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Rituals is also being important in working of highlander magic, but maybe is discussion best saved for another time, is it not? Asche’s tongue is getting dry from so much talking, maybe is wanting something to drink.”</i> The jackaless chuckles.", parse);
 				
@@ -329,11 +329,11 @@ Scenes.Asche.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“Asche grew up in highlands of Eden,”</i> the jackaless begins, idly drumming the fingers of one hand on the counter. <i>“Was pretty much shithole, as much as she remembers it. Returned to visit family few years back, still is much of a shithole, was reminded why she came to city.</i>", parse);
 			Text.NL();
-			Text.Add("<i>“Highlands may be shithole, but still is mystical shithole. Magic there is not like magic of coasts and lowlands, and Asche’s mother was herb woman for tribe; did pretty well for herself by taking chieftain as mate. Was not long before big sister and Asche were born; big sister was intended to take on mother’s mantle but Asche learned too anyway, mostly in secret. Still, only room for one herb woman in a tribe. Asche is not stupid, so she left before big sister arranged for accident to happen to her. Later on, sister is also deciding that tribe is too small for her, you know? Wants to see world? So everything is for nothing.”</i>", parse);
+			Text.Add("<i>“Highlands may be shithole, but still is mystical shithole. Magic there is not like magic of coasts and lowlands, and Asche’s mother was herb woman for tribe; did pretty well for herself by taking chieftain as mate. Was not long before big sister and Asche were born; big sister was intended to take on mother’s mantle, but Asche learned too anyway - mostly in secret. Still, only room for one herb woman in a tribe. Asche is not stupid, so she left before big sister arranged for accident to happen to her. Later on, sister is also deciding that tribe is too small for her, you know? Wants to see world? So everything is for nothing.”</i>", parse);
 			Text.NL();
 			Text.Add("Ouch. That’s nasty.", parse);
 			Text.NL();
-			Text.Add("Asche shakes her head. <i>“Is only natural for those who scheme to think others are scheming too; they are always imagining that others also thinking like them. Now where were we? Right! Asche comes to city. Was long and tiring walk, also some interesting things happened, but best to save those for later.”</i>", parse);
+			Text.Add("Asche shakes her head. <i>“Is only natural for those who scheme to think others are scheming too; they are always imagining that others also thinking like them. Now, where were we? Right! Asche comes to city. Was long and tiring walk, also some interesting things happened, but best to save those for later.”</i>", parse);
 			Text.NL();
 			Text.Add("What happened next?", parse);
 			Text.NL();
