@@ -659,7 +659,6 @@ Scenes.Equine.WinPrompt = function() {
 	Encounter.prototype.onVictory.call(enc);
 }
 
-//TODO
 Scenes.Equine.WinFuckHer = function(enc) {
 	var mare     = enc.mare;
 	var stallion = enc.stallion;
