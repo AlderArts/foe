@@ -650,7 +650,7 @@ Scenes.Equine.WinPrompt = function() {
 		
 		Gui.SetButtonsFromList(options, true, function() {
 			Text.NL();
-			Text.Add("However, you aren't interesting in taking that kind of tribute right now. You content yourself with rifling through their meager belongings, getting in a quick grope on one or the other just to hear them moan. You stow your loot and turn on your heel, leaving your foes to stare after you in confusion and relief... and perhaps a bit of disappointment.", parse);
+			Text.Add("However, you aren't interested in taking that kind of tribute right now. You content yourself with rifling through their meager belongings, getting in a quick grope on one or the other just to hear them moan. You stow your loot and turn on your heel, leaving your foes to stare after you in confusion and relief... and perhaps a bit of disappointment.", parse);
 			Text.Flush();
 			
 			Gui.NextPrompt();
