@@ -2910,6 +2910,8 @@ Entity.prototype.GetSingleTarget = function(encounter, activeChar, strategy) {
 		step -= aggro[i].aggro;
 		if(step <= 0.0) return aggro[i].entity;
 	}
+	
+	return _.sample(aggro).entity;
 }
 
 Entity.prototype.AddAlchemy = function(item) {

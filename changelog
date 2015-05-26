@@ -7,7 +7,7 @@ CHANGELOG for Fall of Eden
 
 Version 0.4d
 ------------
-* 
+* Fixed a bug in the combat code that'd cause the fight against Layla to break.
 
 --------------------------------------------
              PREVIOUS VERSIONS
