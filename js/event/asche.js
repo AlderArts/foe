@@ -505,6 +505,31 @@ Scenes.Asche.FortuneTellingPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“Of course, always to be warned that Lady Luck can get tired of carrying same person around for too long, so while to be taking advantage of good fortune, best not to be abusing it.”</i>", parse);
 			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“Asche is remembering good saying: that is important to be learning from mistakes. This jackaless is hoping that customer will be remembering that.”</i>", parse);
+				Text.NL();
+				Text.Add("Well, it’s solid enough advice in general, but why bring that up in particular?", parse);
+				Text.NL();
+				Text.Add("<i>“Because Asche is thinking that customer will be having chance to be learning very much, very soon, in very short time.”</i> She flashes you a cheerful grin. <i>“To be wishing good luck upon customer.”</i>", parse);
+				Text.NL();
+				Text.Add("But… but shouldn’t she give you some sort of advice on how to deal with whatever’s coming up?", parse);
+				Text.NL();
+				Text.Add("Asche shrugs, the motion causing more than a little clinking on her part. <i>“What is customer wanting Asche to do? To be telling [himher] to be buying clothing or furniture in effort of ward off ill fortune? Customer must act accordingly and appropriately.”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("The jackaless looks up from your palm and thinks a moment. <i>“Hmm. Asche is suggesting that customer is to be finding a peaceful place where [heshe] may be making plans for future.”</i>", parse);
+				Text.NL();
+				Text.Add("And… well, you’re curious. What if one doesn’t exist?", parse);
+				Text.NL();
+				Text.Add("<i>“Then customer is to be creating one,”</i> Asche replies matter-of-factly. <i>“Is being simple as that. Will be doing [himher] much good in the future, so is strong recommendation that customer be following Asche’s advice.”</i>", parse);
+			}, 1.0, function() { return true; });
+			/*
+			scenes.AddEnc(function() {
+				Text.Add("", parse);
+				Text.NL();
+				Text.Add("", parse);
+			}, 1.0, function() { return true; });
+			 */
 			scenes.Get();
 			Text.Flush();
 			
@@ -560,6 +585,17 @@ Scenes.Asche.FortuneTellingPrompt = function() {
 				//Requires that player have recruited Terry.
 				Text.Add("<i>“Perhaps may be coming time when you will not be needing collar around foxy companion’s neck, good customer,”</i> Asche says. <i>“May be some time off yet, but is still being possible… provided wise choices are being made. But where to be making wise choices… that is not clear to Asche. This jackaless is sorry, but the mists are being clouding your future, and seeing through them is hard.”</i>", parse);
 			}, 1.0, function() { return party.InParty(terry, true); });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“Customer must be seeking out spirits.”</i>", parse);
+				Text.NL();
+				Text.Add("Huh?", parse);
+				Text.NL();
+				Text.Add("<i>“Customer is already being in possession of one spirit, is [heshe] not?”</i> Asche jabs a finger in the direction of your gem, as if she can see it directly in your pocket. <i>“This jackaless is sensing presence of such with customer; [heshe] has done well to gain such an ally, but more are being required.”</i>", parse);
+				Text.NL();
+				Text.Add("Can she give you an idea of how many more?", parse);
+				Text.NL();
+				Text.Add("<i>“All customer can be having. More the merrier, as saying goes; customer will be requiring everything that [heshe] can be bringing to bear.”</i>", parse);
+			}, 1.0, function() { return glade.flags["Visit"] >= DryadGlade.DefeatedOrchid; });
 			/* TODO Jin
 			scenes.AddEnc(function() {
 				Text.Add("", parse);

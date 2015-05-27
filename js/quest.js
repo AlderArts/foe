@@ -165,7 +165,7 @@ Quests.quests.push(new Quest({
 				var status = Quests.Type.NotStarted;
 				if(jeanne.flags["Met"] != 0)
 					status |= Quests.Type.Visible;
-				if(glade.flags["Visit"] >= 2)
+				if(glade.flags["Visit"] >= DryadGlade.DefeatedOrchid)
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -176,7 +176,7 @@ Quests.quests.push(new Quest({
 			},
 			active: function() {
 				var status = Quests.Type.NotStarted;
-				if(glade.flags["Visit"] >= 2)
+				if(glade.flags["Visit"] >= DryadGlade.DefeatedOrchid)
 					status |= Quests.Type.Visible;
 				//TODO
 				return status;

@@ -7,10 +7,16 @@
 function DryadGlade(storage) {
 	this.flags = {};
 	
-	this.flags["Visit"] = 0;
+	this.flags["Visit"] = DryadGlade.NotVisited;
 	
 	if(storage) this.FromStorage(storage);
 }
+
+DryadGlade.Visit = {
+	NotVisited     : 0,
+	Visited        : 1,
+	DefeatedOrchid : 2
+};
 
 DryadGlade.prototype.ToStorage = function() {
 	var storage = {};
