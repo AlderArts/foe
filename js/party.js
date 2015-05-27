@@ -394,7 +394,7 @@ Party.prototype.ShowAbilities = function() {
 				var ability = coll.AbilitySet[ab];
 				if(jobAbilities && jobAbilities.HasAbility(ability)) continue;
 		
-				if(ability.CastInternalOOC) {
+				if(ability.OOC) {
 					var en = ability.enabledCondition(null, entity);
 					
 					Text.Add("[name] can use [ability] for [cost]: [desc]<br/>",

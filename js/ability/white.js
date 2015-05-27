@@ -18,6 +18,7 @@ Abilities.White.FirstAid = new Ability("First aid");
 Abilities.White.FirstAid.Short = function() { return "Heals minor damage, single target."; }
 Abilities.White.FirstAid.targetMode = TargetMode.Ally;
 Abilities.White.FirstAid.cost = { hp: null, sp: 5, lp: null};
+Abilities.White.FirstAid.OOC = true;
 Abilities.White.FirstAid.castTree.push(AbilityNode.Template.Heal({
 	atkMod: 1,
 	onCast: [function(ability, encounter, caster, target) {
@@ -103,6 +104,7 @@ Abilities.White.Heal = new Ability("Heal");
 Abilities.White.Heal.Short = function() { return "Heals some damage, single target."; }
 Abilities.White.Heal.targetMode = TargetMode.Ally;
 Abilities.White.Heal.cost = { hp: null, sp: 10, lp: null};
+Abilities.White.Heal.OOC = true;
 Abilities.White.Heal.castTree.push(AbilityNode.Template.Heal({
 	atkMod: 1.5,
 	onCast: [function(ability, encounter, caster, target) {
@@ -118,6 +120,7 @@ Abilities.White.Recover = new Ability("Recover");
 Abilities.White.Recover.Short = function() { return "Heals moderate damage, single target."; }
 Abilities.White.Recover.targetMode = TargetMode.Ally;
 Abilities.White.Recover.cost = { hp: null, sp: 30, lp: null};
+Abilities.White.Recover.OOC = true;
 Abilities.White.Recover.castTree.push(AbilityNode.Template.Heal({
 	atkMod: 2,
 	onCast: [function(ability, encounter, caster, target) {

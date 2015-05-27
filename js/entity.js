@@ -2749,7 +2749,10 @@ Entity.prototype.FinishCastInternal = function(ability, encounter, caster, targe
 	Text.Flush();
 	
 	Gui.NextPrompt(function() {
-		encounter.CombatTick();
+		if(encounter)
+			encounter.CombatTick();
+		else
+			PrintDefaultOptions();
 	});
 }
 

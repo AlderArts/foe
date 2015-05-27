@@ -240,8 +240,8 @@ Ability.prototype.Use = function(encounter, caster, target) {
 
 Ability.prototype.UseOutOfCombat = function(caster, target) {
 	Ability.ApplyCost(this, caster);
-	
-	this.CastInternalOOC(null, caster, target);
+	this.StartCast(null, caster, target);
+	this.CastInternal(null, caster, target);
 }
 
 Ability.prototype.enabledCondition = function(encounter, caster) {
