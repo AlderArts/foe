@@ -7,13 +7,17 @@ CHANGELOG for Fall of Eden
 
 Version 0.4d
 ------------
-* Fixed a bug in the combat code that'd cause the fight against Layla to break.
-* Fixed a bug in the code that'd break Out of Combat abilities. First Aid/Heal should work again.
-* Some additional Asche fortunes
+* 
 
 --------------------------------------------
              PREVIOUS VERSIONS
 --------------------------------------------
+
+Version 0.4c2
+-------------
+* Fixed a bug in the combat code that'd cause the fight against Layla to break.
+* Fixed a bug in the code that'd break Out of Combat abilities. First Aid/Heal should work again.
+* Some additional Asche fortunes
 
 Version 0.4c
 ------------
