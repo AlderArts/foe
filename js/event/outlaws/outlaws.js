@@ -167,7 +167,7 @@ Scenes.Outlaws.MariasBouquet = function() {
 		Text.Add("<i>Enrico</i><br>", parse);
 		Text.Add("...", parse);
 		Text.NL();
-		Text.Add("They just stretch on and on, spidery scrawl across grey stone, and you swallow hard. <i>“Beyond these are the nameless thousands who didn’t have someone to remember them, whole familiy lines wiped out and forgotten.”</i> The huntress turns to look at you, her eyes filled with sadness.", parse);
+		Text.Add("They just stretch on and on, spidery scrawl across grey stone, and you swallow hard. <i>“Beyond these are the nameless thousands who didn’t have someone to remember them, whole family lines wiped out and forgotten.”</i> The huntress turns to look at you, her eyes filled with sadness.", parse);
 		Text.NL();
 		Text.Add("<i>“As to why I asked you to accompany me while I paid my respects, [playername]... I had hoped to impress upon you what we’re fighting for here.”</i> Maria’s voice trembles. <i>“There were mass graves, everyone knows that - there simply wouldn’t have been enough time or money to give all the bodies on the streets a proper burial before they began to rot - but no one can remember just where they were sited. This is all we’ve left - names upon names, brought to us by those who still remember. This is part of why we fight - so that they won’t be forgotten, so that more won’t have to join them.”</i>", parse);
 		Text.NL();
@@ -198,7 +198,7 @@ Scenes.Outlaws.MariasBouquetPrompt = function(opts) {
 				Text.NL();
 				Text.Add("That must have been horrible for the young girl that she must have been to go through. Are… are their names carved here, too?", parse);
 				Text.NL();
-				Text.Add("<i>“No. I don’t know their names, [playername]. I had no need of them; they were always ‘Papa’, ‘Mama’, and ‘Brother’ to me. And while I still remember something of their faces, the memory grows dimmer with each passing year.”</i> Maria’s voice is strangely quiet. <i>“If I were to die tomorrow, there’d be no one in all the planes who remembers them any more.</i>", parse);
+				Text.Add("<i>“No. I don’t know their names, [playername]. I had no need of them; they were always ‘Papa’, ‘Mama’, and ‘Brother’ to me. And while I still remember something of their faces, the memory grows dimmer with each passing year.”</i> Maria’s voice is strangely quiet. <i>“If I were to die tomorrow, there’d be no one in all the planes who remembers them anymore.</i>", parse);
 				Text.NL();
 				Text.Add("<i>“In the beginning, I used to wonder if at least one of them still lived, since I never saw any bodies. I’ve long since grown out of such fancies - Zenith is my only family now, has been since I was… four? Five? I’m not even sure how old I was when it all happened. All my memories from that time are so hazy…”</i>", parse);
 				Text.NL();
