@@ -258,6 +258,7 @@ Abilities.White.Tirade.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 0.5,
 	damageFunc: AbilityNode.DamageFunc.Magical,
 	damageType: {mVoid: 1},
+	damagePool: [AbilityNode.DamagePool.Magical],
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] start[notS] rambling about petty things", parse);
@@ -284,6 +285,7 @@ Abilities.White.Preach.castTree.push(AbilityNode.Template.Magical({
 	hitMod: 1,
 	damageFunc: AbilityNode.DamageFunc.Magical,
 	damageType: {mVoid: 1},
+	damagePool: [AbilityNode.DamagePool.Magical],
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] start[notS] preaching to [tname]. ", parse);
@@ -308,6 +310,7 @@ Abilities.White.Sermon.castTree.push(AbilityNode.Template.Magical({
 	hitMod: 1,
 	damageFunc: AbilityNode.DamageFunc.Magical,
 	damageType: {mVoid: 1},
+	damagePool: [AbilityNode.DamagePool.Magical],
 	onCast: [function(ability, encounter, caster, target) {
 		var parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] start[notS] proselytizing to the enemy party. Somehow, [heshe] manage[notS] to sound extremely condescending and immensly boring at the same time!", parse);
