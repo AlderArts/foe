@@ -7,7 +7,7 @@ CHANGELOG for Fall of Eden
 
 Version 0.4d
 ------------
-* 
+* Fixed several bugged abilities (due to the new damagePool property) that were targeting the wrong stats. This applies to Rut, Tirade, Preach and Sermon.
 
 --------------------------------------------
              PREVIOUS VERSIONS
