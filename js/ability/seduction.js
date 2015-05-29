@@ -140,6 +140,7 @@ Abilities.Seduction.Rut.Short = function() { return "Hump away at target, dealin
 Abilities.Seduction.Rut.cost = { hp: null, sp: null, lp: 10};
 Abilities.Seduction.Rut.castTree.push(AbilityNode.Template.Lust({
 	damageFunc: AbilityNode.DamageFunc.Physical,
+	damagePool: [AbilityNode.DamagePool.Physical],
 	damageType: {pBlunt: 0.2, lust: 0.8},
 	onDamage: [function(ability, encounter, caster, target, dmg) {
 		target.AddLustAbs(-dmg*0.25);

@@ -44,13 +44,14 @@ AbilityNode.Template.Blank = function(node) {
 	node.damageType = node.damageType ? new DamageType(node.damageType) : null;
 	
 	node.cost       = node.cost     || { hp: null, sp: null, lp: null};
-	
+
+	/*	
 	node.onCast     = node.onCast   || [];
 	node.onHit      = node.onHit    || [];
 	node.onMiss     = node.onMiss   || [];
 	node.onDamage   = node.onDamage || [];
 	node.onAbsorb   = node.onAbsorb || [];
-	/*
+	
 	node.hitFallen  = node.hitFallen;
 	node.retarget   = node.retarget;
 	
