@@ -493,7 +493,7 @@ BodyPart.prototype.Feathered = function() {
 
 Body.prototype.SkinDesc = function(part) {
 	var col = Color.Desc(this.torso.color);
-	part = part || this.torso.race;
+	part = part.race || this.torso.race;
 	
 	if(part.isRace(Race.Reptile)) return col + " scales";
 	if(part.isRace(Race.Avian)) return col + " feathers";
