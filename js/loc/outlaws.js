@@ -153,3 +153,13 @@ world.loc.Outlaws.Infirmary.links.push(new Link(
 		MoveToLocation(world.loc.Outlaws.Camp, {minute: 5});
 	}
 ));
+
+world.loc.Outlaws.Infirmary.events.push(new Link(
+	"Aquilius", function() {
+		return aquilius.IsAtLocation();
+	}, true,
+	null,
+	function() {
+		Scenes.Aquilius.Approach();
+	}
+));

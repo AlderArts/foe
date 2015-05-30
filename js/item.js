@@ -173,8 +173,8 @@ Item.prototype.ShowEquipStats = function() {
 
 Item.prototype.sDesc = function() { return this.name; }
 Item.prototype.lDesc = function() { return this.name; }
-Item.prototype.Short = function() { return this.name; }
-Item.prototype.Long = function()  { return this.name; }
+Item.prototype.Short = function() { return _.capitalize(this.sDesc()); }
+Item.prototype.Long  = function() { return _.capitalize(this.lDesc()); }
 
 //TODO Possibly reformat items array to just contain items instead of [{it:item, num:x}], so this function be can made a generic Array.prototype.sortByProp for sorting any array of objects by prop.
 function compareItemByProp(p){
