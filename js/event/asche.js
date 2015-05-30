@@ -449,6 +449,7 @@ Scenes.Asche.TalkPrompt = function() {
 Scenes.Asche.FortuneTellingPrompt = function() {
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
+		HeShe: player.mfFem("He", "She"),
 		heshe: player.mfFem("he", "she"),
 		hisher: player.mfFem("his", "her"),
 		himher : player.mfFem("him", "her")
@@ -596,6 +597,19 @@ Scenes.Asche.FortuneTellingPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“All customer can be having. More the merrier, as saying goes; customer will be requiring everything that [heshe] can be bringing to bear.”</i>", parse);
 			}, 1.0, function() { return glade.flags["Visit"] >= DryadGlade.DefeatedOrchid; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“Asche recognizes this place where customer is standing, is minotaur village in highlands. Barricades, they are being there, but are likely to be of not much use against foe customer faces, a fearsome man-beast. Behind each, two evenly matched forces.”</i> The jackaless scratches her muzzle. <i>“Asche will say that she is finding customer’s fate disturbing. Is not liking to think that old tribe may be caught up in strife, too.”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“Asche is seeing customer wandering across endless hot sands, seeking something that [heshe] cannot see with the eye alone. Customer is to be speaking with two siblings on that plane, a brother and sister, a jeweller and tailor. They are being telling customer something of great importance.”</i>", parse);
+				Text.NL();
+				Text.Add("The desert?", parse);
+				Text.NL();
+				Text.Add("<i>“Not here. Not on Eden. This desert being different… a red hot forge inhabited by gargantuan metallic beasts… is very odd. Asche has never heard of this place.”</i>", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("<i>“Asche is seeing customer walking amidst ruins belonging to a lost people of the sky. [Heshe] is being flying through clouds, walking on air, carried by wings of wind.”</i> The jackaless concentrates furiously. <i>“There is being a spirit, whispering, pleading. Customer is being piecing together memories belonging to ancient people of sky plane. [Heshe] is being requiring one of their number as companion to do so…”</i>", parse);
+			}, 1.0, function() { return true; });
 			/* TODO Jin
 			scenes.AddEnc(function() {
 				Text.Add("", parse);
