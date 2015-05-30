@@ -346,6 +346,7 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
     // Populate item list
     var items = [];
     _.each(this.items, function(it) {
+        it = it.it;
         switch(type) {
             case ItemType.Weapon:
                 if(it.type == ItemType.Weapon) items.push(it);
@@ -468,7 +469,8 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
             obj     : it,
             tooltip : it.Long()
         });
-    });
+	});
+	
 	Text.Flush();
     Gui.SetButtonsFromList(list, true, backPrompt);
 }
