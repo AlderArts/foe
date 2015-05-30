@@ -2756,6 +2756,11 @@ Entity.prototype.FinishCastInternal = function(ability, encounter, caster, targe
 	});
 }
 
+// Can be overrided to allow for selective cancellation
+Entity.prototype.CanBeInterrupted = function(ability, encounter, caster, result) {
+	return true;
+}
+
 //Note: bitmask in order to stack multiple
 TargetStrategy = {
 	None      : 0, //Not used

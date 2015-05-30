@@ -276,7 +276,7 @@ AbilityNode.RunCancel = function(ability, encounter, caster, target, result) {
 		if(_.isFunction(cancellable))
 			cancellable = cancellable(ability, encounter, caster, target, result);
 		// When all is said and done, proceed?
-		if(cancellable) {
+		if(cancellable && target.CanBeInterrupted(ability, encounter, caster, result)) {
 			var parse = AbilityNode.DefaultParser(caster, target);
 			Text.NL();
 			Text.Add("[tPoss] concentration is broken!", parse, 'bold');
