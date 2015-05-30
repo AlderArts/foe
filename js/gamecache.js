@@ -68,10 +68,10 @@ InitCache = function() {
 	orchid  = new OrchidBoss(gameCache.orchid);
 	
 	ravenmother = new RavenMother(gameCache.raven);
+	uru         = new Uru(gameCache.uru);
 	
 	// Don't load for now
 	aria        = new Aria();
-	uru         = new Uru();
 	sylistraxia = new Sylistraxia();
 	ches        = new Ches(); //TODO
 	lucille     = new Lucille(); //TODO
@@ -146,11 +146,6 @@ InitCache = function() {
 	gameCache.flags["Portals"]                 = gameCache.flags["Portals"] || 0;
 	
 	// Intro flags
-	gameCache.flags["IntroLostToImps"]         = gameCache.flags["IntroLostToImps"] || 0;
-	//TODO move to uru
-	gameCache.flags["IntroToldUruAboutMirror"] = gameCache.flags["IntroToldUruAboutMirror"] || 0;
-	gameCache.flags["IntroFuckedUru"]          = gameCache.flags["IntroFuckedUru"] || 0;
-	gameCache.flags["IntroFuckedByUru"]        = gameCache.flags["IntroFuckedByUru"] || 0;
 	gameCache.flags["IntroOutset"]             = gameCache.flags["IntroOutset"] || Intro.Outset.SaveWorld;
 
 	// Controls access to town
@@ -378,6 +373,13 @@ CacheToGame = function() {
 		// LAYLA LEVEL PACING
 		layla.SetExpToLevel();
 	}
+	if(gameCache.version < 26) {
+		// URU INTRO FLAGS
+		uru.flags["Intro"] |= gameCache.flags["IntroLostToImps"] ? Uru.IntroFlags.LostToImps : 0;
+		uru.flags["Intro"] |= gameCache.flags["IntroToldUruAboutMirror"] ? Uru.IntroFlags.ToldUruAboutMirror : 0;
+		uru.flags["Intro"] |= gameCache.flags["IntroFuckedUru"] ? Uru.IntroFlags.FuckedUru : 0;
+		uru.flags["Intro"] |= gameCache.flags["IntroFuckedByUru"] ? Uru.IntroFlags.FuckedByUru : 0;
+	}
 }
 
 GameToCache = function() {
@@ -437,10 +439,10 @@ GameToCache = function() {
 	gameCache.orchid  = orchid.ToStorage();
 	
 	gameCache.raven   = ravenmother.ToStorage();
+	gameCache.uru     = uru.ToStorage();
 	
 	/*
 	gameCache.aria        = aria.ToStorage();
-	gameCache.uru         = uru.ToStorage();
 	gameCache.sylistraxia = sylistraxia.ToStorage();
 	gameCache.ches    = ches.ToStorage();
 	gameCache.lucille = lucille.ToStorage();

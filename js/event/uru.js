@@ -47,10 +47,20 @@ function Uru(storage) {
 	this.SetLevelBonus();
 	this.RestFull();
 
+	this.flags["Intro"] = 0;
+
 	if(storage) this.FromStorage(storage);
 }
 Uru.prototype = new Entity();
 Uru.prototype.constructor = Uru;
+
+Uru.IntroFlags = {
+	LostToImps         : 1,
+	ToldUruAboutMirror : 2,
+	FuckedUru          : 4,
+	FuckedByUru        : 8,
+	GotClitcock        : 16
+};
 
 Uru.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);

@@ -470,7 +470,7 @@ Intro.DemonFight = function() {
 		enc.canRun = false;
 		// Set a custom loss scene (imp rape)
 		enc.onLoss = function() {
-			gameCache.flags.IntroLostToImps = 1;
+			uru.flags["Intro"] |= Uru.IntroFlags.LostToImps;
 			
 			Text.Clear();
 			Text.Add("Exhausted from the fight, you fall to your knees, your body hurting too much to keep up. The great demon looks down on you incredulously and laughs, a grotesque hissing and thundering sound. <b>HAHAHA! YOU THOUGHT THAT YOU COULD STAND UP TO ME? YET YOU CAN'T EVEN BEAT A BUNCH OF IMPS!</b> The demon seems greatly amused by your plight, but only observes you as you squirm around, trying to get away.");
@@ -758,7 +758,7 @@ world.loc.DarkAspect.Peak.events.push(new Link(
 					Text.Add("Thinking back, the thing that sticks to your mind is the mirror you found in the attic. When you mention it, Uru perks up again. <i>“Yeah, that sounds kind of plausible, a magical artifact, no doubt. Maybe even that runt could have managed it, in that case.”</i> She purses her lips. <i>“Actually, it sounds kind of familiar... but enough about that for now, though, I want to know more about you!”</i>");
 					Text.Flush();
 					
-					gameCache.flags.IntroToldUruAboutMirror = 1;
+					uru.flags["Intro"] |= Uru.IntroFlags.ToldUruAboutMirror;
 					
 					Gui.NextPrompt(Intro.UruGift);
 				}, enabled : true,
@@ -771,8 +771,6 @@ world.loc.DarkAspect.Peak.events.push(new Link(
 					Text.NL();
 					Text.Add("<i>“You better not be lying, it's impolite to lie!”</i> Angrily lashing her tail about her, she fumes a bit before announcing that she wants to know more about you, instead.");
 					Text.Flush();
-					
-					gameCache.flags.IntroToldUruAboutMirror = 0;
 					
 					Gui.NextPrompt(Intro.UruGift);
 				}, enabled : true,
@@ -836,7 +834,7 @@ Intro.UruConfirmGift = function() {
 	
 	Text.Add("Uru looks at you dubiously. <i>“You really think you could become someone like that?”</i> She ponders, <i>“The way I see it, you were pretty pathetic back there.”</i>");
 	Text.NL();
-	if(gameCache.flags.IntroLostToImps != 0) {
+	if(uru.flags["Intro"] & Uru.IntroFlags.LostToImps) {
 		Text.Add("She giggles, <i>“Watching you get railed by imps was fun though, it looked like you enjoyed it!”</i> You blush angrily at that, it's not like you lost on purpose!");
 		Text.NL();
 	}
@@ -919,7 +917,7 @@ Intro.UruSexChoice = function() {
 	var options = new Array();
 	options.push({ nameStr : "Fuck vagina",
 		func : function() {
-			gameCache.flags["IntroFuckedUru"] = 1;
+			uru.flags["Intro"] |= Uru.IntroFlags.FuckedUru;
 			if(player.body.Gender() == Gender.female) {
 				Gui.Callstack.push(Intro.UruSexFuckVagina);
 				Intro.UruGiveClitcock();
@@ -931,7 +929,7 @@ Intro.UruSexChoice = function() {
 	});
 	options.push({ nameStr : "Fuck anal",
 		func : function() {
-			gameCache.flags["IntroFuckedUru"] = 1;
+			uru.flags["Intro"] |= Uru.IntroFlags.FuckedUru;
 			if(player.body.Gender() == Gender.female) {
 				Gui.Callstack.push(Intro.UruSexFuckAnal);
 				Intro.UruGiveClitcock();
@@ -943,7 +941,7 @@ Intro.UruSexChoice = function() {
 	});
 	options.push({ nameStr : "Get fucked",
 		func : function() {
-			gameCache.flags["IntroFuckedByUru"] = 1;
+			uru.flags["Intro"] |= Uru.IntroFlags.FuckedByUru;
 			Intro.UruSexGetFucked();
 		}, enabled : true,
 		tooltip : "Your eyes constantly stray to the thick cock between her legs. What would it be like if she used it on you?"
@@ -967,6 +965,8 @@ Intro.UruGiveClitcock = function() {
 	Text.Add("Panting, you realize that you have just had an orgasm. Smirking, Uru sucks out the last of your ejaculate. Idly, you wonder if the stuff is potent, though your musings are cut short as the omnibus hugs you, jamming her tongue into your mouth in a rough french kiss, forcing your own cum into your mouth. Her own rock hard dick rubs between your bodies, as she pulls back, licking her lips and leaning back, looking at you expectantly.");
 	Text.Flush();
 
+	uru.flags["Intro"] |= Uru.IntroFlags.GotClitcock;
+
 	// Gain clit cock
 	var cc = player.FirstVag().CreateClitcock();
 	cc.length.base = 10;
@@ -977,7 +977,7 @@ Intro.UruGiveClitcock = function() {
 		func : function() {
 			Text.Clear();
 			Text.Add("Coughing, you spit the thick fluid on the ground. The taste is strangely sweet... ");
-			if(gameCache.flags.IntroLostToImps != 0)
+			if(uru.flags["Intro"] & Uru.IntroFlags.LostToImps)
 				Text.Add("very different from the bitter sperm that the imps pumped you full of");
 			else
 				Text.Add("not that you'd know what cum usually tastes like");
@@ -1108,7 +1108,7 @@ Intro.UruSexFuckVagina = function() {
 		});
 		options.push({ nameStr : "Get fucked",
 			func : function() {
-				gameCache.flags["IntroFuckedByUru"] = 1;
+				uru.flags["Intro"] |= Uru.IntroFlags.FuckedByUru;
 				Text.Clear();
 				Text.Add("To your muddled mind, this doesn't seem like such a bad idea, and you eagerly nod. With the same wicked smile, the omnibus lets go of you, allowing you to withdraw your spent " + cockDesc() + " from her depths, only for her to suddenly manhandle you with surprising strength until you are on all fours. <i>“No regrets, right?”</i> she murmurs into your ear. On second thought, you are not so sure anymore.");
 				Text.Flush();
@@ -1185,7 +1185,7 @@ Intro.UruSexFuckAnal = function() {
 			Text.Add("You ignore her complaints and move your focus to the tip of her " + uruCockDesc() + ", lapping at the urethra. Already you can taste her spunk on your tongue, a delightful mix of sweet and salty. Your senses are reeling, assaulted by, not only sight and touch, but also taste and smell. You take a deep breath and eagerly swallow as much of her cock as you can manage.");
 			Text.NL();
 			
-			if(gameCache.flags.IntroLostToImps != 0)
+			if(uru.flags["Intro"] & Uru.IntroFlags.LostToImps)
 				Text.Add("You are certainly no expert in the art of blowjobs - though you could definitely get addicted the way things are going! - but the encounter with the imps has at least prepared you a little. That being said, nothing could prepare you for the sheer size of the hermaphrodite's member.");
 			else
 				Text.Add("Having never done this before, you are a bit uncertain on how to proceed. A combination of sucking on the head and lapping at it with your tongue seems to do the trick, though.");			
@@ -1276,7 +1276,7 @@ Intro.UruSexFuckAnal = function() {
 			var options = new Array();
 			options.push({ nameStr : "Get fucked",
 				func : function() {
-					gameCache.flags["IntroFuckedByUru"] = 1;
+					uru.flags["Intro"] |= Uru.IntroFlags.FuckedByUru;
 					Text.Clear();
 					Text.Add("To your muddled mind, this doesn't seem like such a bad idea, and you eagerly nod. With a wicked smile, the omnibus lets go of you, allowing you to withdraw your spent member. With surprising strength, she manhandles you until you are on all fours. <i>“No regrets, right?”</i> she murmurs into your ear. On second thought, you are not so sure anymore.");
 					Text.Flush();
@@ -1724,7 +1724,7 @@ Intro.UruSexAftermath = function() {
 	player.curSp.base = 0;
 	
 	Text.Add("<i>“Aww... and things were just starting to get fun,”</i> Uru complains as she stands above your fallen form. She trails one of her sharp nails - colored black, you idly note - down your stomach and toward your exposed crotch. <i>“There is sooo much you will tell me,”</i> she purrs, <i>“Why not start with how you got here, again? </i>");
-	if(gameCache.flags.IntroToldUruAboutMirror != 0)
+	if(uru.flags["Intro"] & Uru.IntroFlags.ToldUruAboutMirror)
 		Text.Add("<i>That mirror you talked about... where did you find it, exactly?”</i>");
 	else
 		Text.Add("<i>See, I'm not quite buying your original story, and I told you it was impolite to lie to me!”</i>");

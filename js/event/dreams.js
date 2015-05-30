@@ -402,7 +402,8 @@ Scenes.Dreams.UruChoice = function(ravenTrigger) {
 			Text.Add("You shout defiance at the demon, and jump back, preparing to fight. In an instant, she’s stripped you of your weapons and armor, leaving your belongings in a messy heap behind her.", parse);
 			Text.NL();
 			Text.Add("<i>“Now, now, there’s no need for that,”</i> Uru chides, as you stand naked before her. <i>“I’m just going to give you one final reward, and then you’ll never see me again. ", parse);
-			if(gameCache.flags["IntroFuckedUru"] != 0 || gameCache.flags["IntroFuckedByUru"] != 0)
+			if(uru.flags["Intro"] & Uru.IntroFlags.FuckedUru ||
+			   uru.flags["Intro"] & Uru.IntroFlags.FuckedByUru)
 				Text.Add("Didn’t you enjoy having sex with me last time?”</i>", parse);
 			else
 				Text.Add("You didn’t want to fuck me last time, but I’ll show you just what you missed...”</i>", parse);
@@ -415,7 +416,8 @@ Scenes.Dreams.UruChoice = function(ravenTrigger) {
 			Text.Clear();
 			Text.Add("You take hold of Uru’s hand, and tell her that you’ve been hoping all along that she’d succeed. A being as beautiful as her should naturally rule the worlds. A little flattery can’t possibly hurt...", parse);
 			Text.NL();
-			if(gameCache.flags["IntroFuckedUru"] != 0 || gameCache.flags["IntroFuckedByUru"] != 0)
+			if(uru.flags["Intro"] & Uru.IntroFlags.FuckedUru ||
+			   uru.flags["Intro"] & Uru.IntroFlags.FuckedByUru)
 				Text.Add("<i>“You’re quite the little flirt, aren’t you?”</i> she asks. <i>“Did you love sex with me that much? I suppose it’s time for some more, as a final reward.”</i>", parse);
 			else
 				Text.Add("<i>“Then why did you turn me down?”</i> she demands. <i>“Well, maybe you were a little shy. I’ll make it simpler for you this time - I’m not taking ‘no’ for an answer.”</i>", parse);
@@ -567,7 +569,7 @@ Scenes.Dreams.AriaTemple = function(ravenTrigger) {
 				Text.Add("There is a piercing pain… and then you are awake, heart pounding in your chest, and sweating profusely.", parse);
 				
 				player.AddLustFraction(0.3);
-			}, 1.0, function() { return (gameCache.flags["IntroFuckedUru"] != 0 || gameCache.flags["IntroFuckedByUru"] != 0); });
+			}, 1.0, function() { return (uru.flags["Intro"] & Uru.IntroFlags.FuckedUru || uru.flags["Intro"] & Uru.IntroFlags.FuckedByUru); });
 			scenes.AddEnc(function() {
 				parse["oneof"] = player.NumCocks() > 1 ? " one of" : "";
 				parse["s"] = player.NumCocks() > 1 ? "s" : "";
