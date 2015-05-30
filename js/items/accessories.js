@@ -4,7 +4,13 @@ Items.Accessories.CrudeBook = new Item("book0", "C.Book", ItemType.Accessory);
 Items.Accessories.CrudeBook.price = 20;
 Items.Accessories.CrudeBook.Short = function() { return "Crude book"; }
 Items.Accessories.CrudeBook.Long = function() { return "A heavy book on a rather dry subject. Not a very interesting read."; }
-Items.Accessories.CrudeBook.effect.intelligence = 1;
+Items.Accessories.CrudeBook.effect.intelligence = 2;
+
+Items.Accessories.TrashyNovel = new Item("book1", "Trashy novel", ItemType.Accessory);
+Items.Accessories.TrashyNovel.price = 20;
+Items.Accessories.TrashyNovel.Short = function() { return "Trashy novel"; }
+Items.Accessories.TrashyNovel.Long = function() { return "A trashy hardcore romance novel of the sort terribly bored housewives might read. Features jackal-morphs heavily."; }
+Items.Accessories.TrashyNovel.effect.libido = 2;
 
 Items.Accessories.IronBangle = new Item("bangle0", "I.Bangle", ItemType.Accessory);
 Items.Accessories.IronBangle.price = 30;
@@ -39,7 +45,7 @@ Items.Accessories.LagonCrown.effect.libido = 3;
 Items.Accessories.SimpleCuffs = new Item("cuffs0", "S.Cuffs", ItemType.Accessory);
 Items.Accessories.SimpleCuffs.price = 20;
 Items.Accessories.SimpleCuffs.Short = function() { return "Simple cuffs"; }
-Items.Accessories.SimpleCuffs.Long = function() { return "Simple restraints"; }
+Items.Accessories.SimpleCuffs.Long = function() { return "Simple restraints."; }
 Items.Accessories.SimpleCuffs.effect.maxLust = 10;
 Items.Accessories.SimpleCuffs.effect.libido = 1;
 
@@ -58,3 +64,9 @@ Items.Accessories.SilverBuckler.Long = function() { return "A fine, silvered buc
 Items.Accessories.SilverBuckler.effect.maxHp = 120;
 Items.Accessories.SilverBuckler.effect.stamina = 5;
 Items.Accessories.SilverBuckler.effect.spirit = 5;
+
+Items.Accessories.SimpleCharm = new Item("charm0", "S.Charm", ItemType.Accessory);
+Items.Accessories.SimpleCharm.price = 20;
+Items.Accessories.SimpleCharm.Short = function() { return "Simple charm"; }
+Items.Accessories.SimpleCharm.Long = function() { return "A simple charm that disrupts harmful energies."; }
+Items.Accessories.SimpleCharm.effect.spirit = 2;

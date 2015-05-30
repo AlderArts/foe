@@ -98,6 +98,18 @@ Items.Weapons.MageStaff.effect.intelligence = 5;
 Items.Weapons.MageStaff.effect.spirit = 3;
 Items.Weapons.MageStaff.effect.apBlunt = 1;
 
+Items.Weapons.AmberStaff = new Item("staff2", "A.Staff", ItemType.Weapon);
+Items.Weapons.AmberStaff.price = 1000;
+Items.Weapons.AmberStaff.sDesc = function() { return "amber staff"; }
+Items.Weapons.AmberStaff.lDesc = function() { return "an old amber staff"; }
+Items.Weapons.AmberStaff.Short = function() { return "Old amber staff"; }
+Items.Weapons.AmberStaff.Long = function() { return "A weathered staff with a knob made of amber. While old, it’s still useful as a conduit for electrical energies."; }
+Items.Weapons.AmberStaff.effect.atkMod = 0.5;
+Items.Weapons.AmberStaff.effect.intelligence = 10;
+Items.Weapons.AmberStaff.effect.spirit = 10;
+Items.Weapons.AmberStaff.effect.apBlunt = 0.5;
+Items.Weapons.AmberStaff.effect.amThunder = 0.5;
+
 Items.Weapons.LWhip = new Item("whip0", "L.Whip", ItemType.Weapon);
 Items.Weapons.LWhip.price = 30;
 Items.Weapons.LWhip.sDesc = function() { return "leather whip"; }

@@ -131,9 +131,12 @@ Scenes.Rigard.MagicShop.CreateShop = function() {
 	shop.AddItem(Items.Combat.SpeedPotion, 5);
 	shop.AddItem(Items.Combat.DecoyStick, 5);
 	shop.AddItem(Items.Accessories.CrudeBook, 5);
+	shop.AddItem(Items.Accessories.TrashyNovel, 5);
 	shop.AddItem(Items.Accessories.GoldEarring, 5);
+	shop.AddItem(Items.Accessories.SimpleCharm, 5);
 	shop.AddItem(Items.Weapons.WoodenStaff, 5);
 	shop.AddItem(Items.Weapons.MageStaff, 5);
+	shop.AddItem(Items.Weapons.AmberStaff, 5);
 	
 	Scenes.Rigard.MagicShop.Shop = shop;
 }
