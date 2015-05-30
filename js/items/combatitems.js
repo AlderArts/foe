@@ -52,12 +52,28 @@ Items.Combat.HPotion.lDesc = function() { return "a weak health potion"; }
 Items.Combat.HPotion.Short = function() { return "A health potion."; }
 Items.Combat.HPotion.Long = function() { return "A weak health potion."; }
 Items.Combat.HPotion.combat.castTree.push(function(ability, encounter, caster, target) {
-	var parse = { Name: caster.NameDesc(), s: caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.Add("[Name] use[s] a potion.", parse);
+	var parse = AbilityNode.DefaultParser(caster, target);
+	Text.Add("[Name] use[notS] a potion.", parse);
 	Text.NL();
-	Text.Add("It heals [tName] for " + Text.BoldColor(100, "#008000") + "!", parse);
+	Text.Add("It heals [tname] for " + Text.BoldColor(100, "#008000") + "!", parse);
 	
 	target.AddHPAbs(100);
+});
+
+
+Items.Combat.EPotion = new CombatItem("epot0", "E.Potion");
+Items.Combat.EPotion.price = 40;
+Items.Combat.EPotion.sDesc = function() { return "energy potion"; }
+Items.Combat.EPotion.lDesc = function() { return "a weak energy potion"; }
+Items.Combat.EPotion.Short = function() { return "An energy potion."; }
+Items.Combat.EPotion.Long = function() { return "A weak energy potion."; }
+Items.Combat.EPotion.combat.castTree.push(function(ability, encounter, caster, target) {
+	var parse = AbilityNode.DefaultParser(caster, target);
+	Text.Add("[Name] ues[notS] an energy potion.", parse);
+	Text.NL();
+	Text.Add("A brief surge of energy runs through [tname], restoring " + Text.BoldColor(100, "#000080") + " points of energy!", parse);
+	
+	target.AddSPAbs(100);
 });
 
 
