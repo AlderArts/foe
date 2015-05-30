@@ -181,6 +181,7 @@ Scenes.Aquilius.Approach = function() {
 					Text.Add("Aquilius clicks his beak, finishes wrapping up your gift, then stows it away out of sight. <i>“Well, I promised you a little something, and it’d be remiss for me to go back on my word. Here, have this.”</i> He pushes a small portion of fragrant dried leaves and grasses into your hands, wrapped in that same waxed paper. <i>“My very own blend; you won’t find a more relaxing smoke on the face of Eden. I’m sure you’ll enjoy.”</i>", parse);
 					Text.Flush();
 					
+					party.Inv().RemoveItem(item);
 					party.Inv().AddItem(Items.PipeLeaf);
 					
 					outlaws.relation.IncreaseStat(30, 1);
