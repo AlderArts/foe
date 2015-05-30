@@ -5,23 +5,26 @@ function Inventory() {
 
 Inventory.prototype.ToStorage = function() {
     var storage = [];
-    for(var i = 0; i < this.items.length; i++) {
-        storage.push(
-            {	it: this.items[i].it.id,
-                num: this.items[i].num});
-    }
+    _.each(this.items, function(item) {
+        storage.push({
+        	it  : item.it.id,
+            num : item.num
+        });
+    });
     return storage;
 }
 
 Inventory.prototype.FromStorage = function(storage) {
-    this.items = [];
-    for(var i = 0; i < storage.length; i++) {
+	var list = [];
+    _.each(storage, function(s) {
         var item = {
-            it: ItemIds[storage[i].it],
-            num: parseInt(storage[i].num)};
+            it  : ItemIds[s.it],
+            num : parseInt(s.num)
+        };
         if(item.it)
-            this.items.push(item);
-    }
+            list.push(item);
+    });
+    this.items = list;
 }
 
 Inventory.prototype.QueryNum = function(item) {
