@@ -69,7 +69,7 @@ Items.Combat.EPotion.Short = function() { return "An energy potion."; }
 Items.Combat.EPotion.Long = function() { return "A weak energy potion."; }
 Items.Combat.EPotion.combat.castTree.push(function(ability, encounter, caster, target) {
 	var parse = AbilityNode.DefaultParser(caster, target);
-	Text.Add("[Name] ues[notS] an energy potion.", parse);
+	Text.Add("[Name] use[notS] an energy potion.", parse);
 	Text.NL();
 	Text.Add("A brief surge of energy runs through [tname], restoring " + Text.BoldColor(100, "#000080") + " points of energy!", parse);
 	
@@ -89,7 +89,7 @@ Items.Combat.SpeedPotion.combat.castTree.push(function(ability, encounter, caste
 
 	Status.Haste(caster, { turns : 3, turnsR : 3, factor : 2 });
 
-	Text.Add("[Name] uncork[notS] a slender vial and drinks its contents. [HeShe] briefly boost[notS] [hisher] speed!", parse);
+	Text.Add("[Name] uncork[notS] a slender vial and drink[notS] its contents. [HeShe] briefly boost[notS] [hisher] speed!", parse);
 });
 
 
@@ -117,7 +117,7 @@ Items.Combat.DecoyStick.combat.targetMode = TargetMode.Self;
 Items.Combat.DecoyStick.combat.castTree.push(function(ability, encounter, caster) {
 	var parse = AbilityNode.DefaultParser(caster);
 	
-	Text.Add("[Name] grab[notS] a decoy stick and breaks it. A flash of light emanates, and when it subsides [heshe] [has] split into four copies.", parse);
+	Text.Add("[Name] grab[notS] a decoy stick and break[notS] it. A flash of light emanates, and when it subsides, [heshe] [has] split into four copies.", parse);
 	
 	Status.Decoy(caster, {copies: 3});
 });
