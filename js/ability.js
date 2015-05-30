@@ -124,7 +124,7 @@ Ability.prototype.CastInternal = function(encounter, caster, target) {
 }
 
 // Used as entrypoint for PC/Party (active selection)
-Ability.prototype.OnSelect = function(encounter, caster, backPrompt) {
+Ability.prototype.OnSelect = function(encounter, caster, backPrompt, ext) {
 	var ability = this;
 	// TODO: Buttons (use portraits for target?)
 	
@@ -132,7 +132,7 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt) {
 	
 	switch(ability.targetMode) {
 		case TargetMode.Self:
-			ability.Use(encounter, caster);
+			ability.Use(encounter, caster, null, ext);
 			break;
 		
 		case TargetMode.Ally:
@@ -149,7 +149,7 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt) {
 				target.push({
 				  	nameStr : t.name,
 				  	func    : function(t) {
-				  		ability.Use(encounter, caster, t);
+				  		ability.Use(encounter, caster, t, ext);
 				  	},
 				  	enabled : ability.enabledTargetCondition(encounter, caster, t),
 				  	obj     : t
@@ -157,7 +157,7 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt) {
 			});
 			
 			Gui.SetButtonsFromList(target, true, backPrompt);
-			break;
+			return true;
 		
 		case TargetMode.Enemy:
 			_.each(encounter.enemy.members, function(t) {
@@ -168,7 +168,7 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt) {
 				target.push({
 				  	nameStr : t.uniqueName || t.name,
 				  	func    : function(t) {
-				  		ability.Use(encounter, caster, t);
+				  		ability.Use(encounter, caster, t, ext);
 				  	},
 				  	enabled : ability.enabledTargetCondition(encounter, caster, t),
 				  	obj     : t
@@ -176,13 +176,13 @@ Ability.prototype.OnSelect = function(encounter, caster, backPrompt) {
 			});
 			
 			Gui.SetButtonsFromList(target, true, backPrompt);
-			break;
+			return true;
 		
 		case TargetMode.Party:
-			ability.Use(encounter, caster, party);
+			ability.Use(encounter, caster, party, ext);
 			break;
 		case TargetMode.Enemies:
-			ability.Use(encounter, caster, encounter.enemy);
+			ability.Use(encounter, caster, encounter.enemy, ext);
 			break;
 		default:
 			encounter.CombatTick();

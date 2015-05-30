@@ -1,108 +1,41 @@
 
+function CombatItemAbility(item) {
+	Ability.call(this);
+	this.targetMode = TargetMode.Ally;
+	this.item = item;
+}
+CombatItemAbility.prototype = new Ability();
+CombatItemAbility.prototype.constructor = CombatItemAbility;
+
+CombatItemAbility.prototype.Use = function(encounter, caster, target, inv) {
+	if(inv && this.item.consume) {
+		inv.RemoveItem(this.item);
+	}
+	
+	Ability.prototype.Use.call(this, encounter, caster, target);
+}
+
 function CombatItem(id, name) {
 	Item.call(this, id, name);
-	this.targetMode = TargetMode.Ally;
 	this.consume = true;
+	this.combat = new CombatItemAbility(this);
 }
 CombatItem.prototype = new Item();
 CombatItem.prototype.constructor = CombatItem;
 
-CombatItem.prototype.UseCombat = function(inv, encounter, caster, target) {
-	if(inv && this.consume) {
-		inv.RemoveItem(this);
-	}
-	
-	this.UseCombatInternal(encounter, caster, target);
-}
-CombatItem.prototype.UseCombatInternal = function(encounter, caster, target) {
-	Text.Flush();
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
 
-AttackItem = function(id, name) {
-	CombatItem.call(this, id, name);
-	this.damageType   = {}; // Set to null to use weapon attack
-	this.targetMode   = TargetMode.Enemy;
-	
-	this.OnCast       = null;
-	this.TargetEffect = null;
-}
-AttackItem.prototype = new CombatItem();
-AttackItem.prototype.constructor = AttackItem;
-
-AttackItem.prototype.UseCombatInternal = function(encounter, caster, target) {
-	var atkMod     = this.atkMod || 1;
-	var defMod     = this.defMod || 1;
-	var hitMod     = this.hitMod || 1;
-	var nrAttacks  = this.nrAttacks || 1;
-	var targetMode = this.targetMode || TargetMode.Enemy;
-	
-	var damageType = new DamageType();
-	if(this.damageType)
-		damageType = new DamageType(this.damageType);
-
-	if(this.OnCast)
-		this.OnCast(encounter, caster, target);
-	
-	var targets;
-	if(targetMode == TargetMode.Enemies)
-		targets = target.members;
-	else //(targetMode == TargetMode.Enemy)
-		targets = [target];
-	
-	for(var i = 0; i < targets.length; i++) {
-		var e   = targets[i];
-		
-		for(var j = 0; j < nrAttacks; j++) {
-			var atkDmg = atkMod;
-			var def = defMod * e.PDefense();
-			var hit = hitMod * caster.PHit();
-			var evade = e.PEvade();
-			var toHit = Ability.ToHit(hit, evade);
-			if(Math.random() < toHit) {
-				//var dmg = atkDmg - def;
-				var dmg = Ability.Damage(atkDmg, def, caster.level, e.level);
-				if(dmg < 0) dmg = 0;
-				
-				dmg = damageType.ApplyDmgType(e.elementDef, dmg);
-				dmg = Math.floor(dmg);
-				
-				if(e.PhysDmgHP(encounter, caster, dmg)) {
-					e.AddHPAbs(-dmg);
-					
-					if(dmg >= 0) {
-						if(this.OnHit) this.OnHit(encounter, caster, e, dmg);
-					}
-					else {
-						if(this.OnAbsorb) this.OnAbsorb(encounter, caster, e, -dmg);
-					}
-					if(this.TargetEffect) this.TargetEffect(encounter, caster, e);
-				}
-			}
-			else
-				if(this.OnMiss) this.OnMiss(encounter, caster, e);
-		}
-	}
-	Text.Flush();
-	
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
 // Default messages
-AttackItem.prototype.OnHit = function(encounter, caster, target, dmg) {
+CombatItem._onDamage = function(ability, encounter, caster, target, dmg) {
 	var parse = { tName : target.nameDesc() };
 	Text.Add("The attack hits [tName] for " + Text.BoldColor(dmg, "#800000") + " damage!", parse);
 	Text.NL();
 }
-AttackItem.prototype.OnMiss = function(encounter, caster, target) {
+CombatItem._onMiss = function(ability, encounter, caster, target) {
 	var parse = { tName : target.nameDesc() };
 	Text.Add("The attack narrowly misses [tName], dealing no damage!", parse);
 	Text.NL();
 }
-AttackItem.prototype.OnAbsorb = function(encounter, caster, target, dmg) {
+CombatItem._onAbsorb = function(ability, encounter, caster, target, dmg) {
 	var parse = { tName : target.NameDesc(), s : target.plural() ? "" : "s" };
 	Text.Add("[tName] absorb[s] the attack, gaining " + Text.BoldColor(dmg, "#008000") + " health!", parse);
 	Text.NL();
@@ -118,154 +51,106 @@ Items.Combat.HPotion.sDesc = function() { return "health potion"; }
 Items.Combat.HPotion.lDesc = function() { return "a weak health potion"; }
 Items.Combat.HPotion.Short = function() { return "A health potion."; }
 Items.Combat.HPotion.Long = function() { return "A weak health potion."; }
-Items.Combat.HPotion.targetMode = TargetMode.Ally;
-Items.Combat.HPotion.UseCombatInternal = function(encounter, caster, target) {
+Items.Combat.HPotion.combat.castTree.push(function(ability, encounter, caster, target) {
 	var parse = { Name: caster.NameDesc(), s: caster.plural() ? "" : "s", tName : target.nameDesc() };
-	Text.Clear();
 	Text.Add("[Name] use[s] a potion.", parse);
 	Text.NL();
 	Text.Add("It heals [tName] for " + Text.BoldColor(100, "#008000") + "!", parse);
-	Text.Flush();
 	
 	target.AddHPAbs(100);
-	
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
+});
+
 
 Items.Combat.SmokeBomb = new CombatItem("esc0", "S.Bomb");
 Items.Combat.SmokeBomb.price = 100;
 Items.Combat.SmokeBomb.Short = function() { return "A smoke bomb."; }
 Items.Combat.SmokeBomb.Long = function() { return "A glass sphere containing an alchemical concoction that disperses in thick, oily smoke when mixed with air. Smashing the bomb creates instant cover."; }
-Items.Combat.SmokeBomb.targetMode = TargetMode.Self;
-Items.Combat.SmokeBomb.UseCombatInternal = function(encounter, caster) {
-	var parse = {
-		Name   : caster.NameDesc(),
-		es     : caster.plural() ? "" : "es",
-		hisher : caster.hisher()
-	};
-	
-	Text.Add("[Name] toss[es] a smoke bomb at the ground. It explodes in a cloud of smoke, covering for [hisher] escape!", parse);
+Items.Combat.SmokeBomb.combat.targetMode = TargetMode.Self;
+Items.Combat.SmokeBomb.combat.CastInternal = function(encounter, caster) {
+	var parse = AbilityNode.DefaultParser(caster);
+	Text.Clear();
+	Text.Add("[Name] toss[notEs] a smoke bomb at the ground. It explodes in a cloud of smoke, covering for [hisher] escape!", parse);
 	Text.NL();
 	Text.Flush();
 	
 	encounter.onRun();
 }
 
+
 Items.Combat.DecoyStick = new CombatItem("decoy0", "Decoy");
 Items.Combat.DecoyStick.price = 250;
 Items.Combat.DecoyStick.Short = function() { return "A decoy stick."; }
 Items.Combat.DecoyStick.Long = function() { return "A stick containing the shards of an enchanted mirror, when broken it will generate illusory copies of the user, confusing targets."; }
-Items.Combat.DecoyStick.targetMode = TargetMode.Self;
-Items.Combat.DecoyStick.UseCombatInternal = function(encounter, caster) {
-	var parse = {
-		Name  : caster.NameDesc(),
-		heshe : caster.heshe(),
-		s     : caster.plural() ? "" : "s",
-		has   : caster.has()
-	};
+Items.Combat.DecoyStick.combat.targetMode = TargetMode.Self;
+Items.Combat.DecoyStick.combat.castTree.push(function(ability, encounter, caster) {
+	var parse = AbilityNode.DefaultParser(caster);
 	
-	Text.Clear();
-	Text.Add("[Name] grab[s] a decoy stick and breaks it. A flash of light emanates, and when it subsides [heshe] [has] split into four copies.", parse);
-	Text.Flush();
+	Text.Add("[Name] grab[notS] a decoy stick and breaks it. A flash of light emanates, and when it subsides [heshe] [has] split into four copies.", parse);
 	
 	Status.Decoy(caster, {copies: 3});
-	
-	Gui.NextPrompt(function() {
-		encounter.CombatTick();
-	});
-}
+});
 
-Items.Combat.LustDart = new AttackItem("dart0", "Lust darts");
+
+Items.Combat.LustDart = new CombatItem("dart0", "Lust darts");
 Items.Combat.LustDart.price = 25;
 Items.Combat.LustDart.Short = function() { return "Aphrodisiac-tipped darts."; }
 Items.Combat.LustDart.Long = function() { return "Throwing darts smeared in potent aphrodisiacs. On a hit, they will charm an enemy."; }
-Items.Combat.LustDart.targetMode = TargetMode.Enemy;
-Items.Combat.LustDart.OnHit = null;
-Items.Combat.LustDart.OnAbsorb = null;
-Items.Combat.LustDart.OnCast = function(encounter, caster, target) {
-	var parse = {
-		Name : caster.NameDesc(),
-		s    : caster.plural() ? "" : "s",
-		target : target.nameDesc()
-	};
-	Text.Add("[Name] throw[s] a lust dart at [target].", parse);
-	Text.NL();
-}
-Items.Combat.LustDart.TargetEffect = function(encounter, caster, target) {
-	var parse = {
-		Name : caster.NameDesc(),
-		s    : caster.plural() ? "" : "s",
-		himher : target.himher(),
-		target : target.nameDesc(),
-		Target : target.NameDesc(),
-		is     : target.is()
-	};
-	Text.Add("It strikes [target], inflicting [himher] with charm!", parse);
-	Text.NL();
-	if(Status.Horny(target, { hit : 0.75, turns : 3, turnsR : 5, str : 1, dmg : 0.2 })) {
-		Text.Add("[Target] [is] charmed!", parse);
-	}
-	else {
-		Text.Add("[Target] resist[s] the aphrodisiac!", parse);
-	}
-	Text.NL();
-}
-Items.Combat.LustDart.OnMiss = function(encounter, caster, target) {
-	var parse = {
-		Name : caster.NameDesc(),
-		s    : caster.plural() ? "" : "s",
-		Target : target.NameDesc()
-	};
-	Text.Add("[Target] manage[s] to deftly sidestep the dart.", parse);
-	Text.NL();
-}
+Items.Combat.LustDart.combat.targetMode = TargetMode.Enemy;
+Items.Combat.LustDart.combat.castTree.push(AbilityNode.Template.Physical({
+	toDamage : null,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] throw[notS] a lust dart at [tname].", parse);
+		Text.NL();
+	}],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(null, target);
+		Text.Add("It strikes [tname], inflicting [thimher] with charm!", parse);
+		Text.NL();
+		if(Status.Horny(target, { hit : 0.75, turns : 3, turnsR : 5, str : 1, dmg : 0.2 })) {
+			Text.Add("[tName] [tis] charmed!", parse);
+		}
+		else {
+			Text.Add("[tName] resist[tnotS] the aphrodisiac!", parse);
+		}
+		Text.NL();
+	}],
+	onMiss: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(null, target);
+		Text.Add("[tName] manage[tnotS] to deftly sidestep the dart.", parse);
+		Text.NL();
+	}]
+}));
 
 
-Items.Combat.PoisonDart = new AttackItem("dart1", "Poison darts");
+Items.Combat.PoisonDart = new CombatItem("dart1", "Poison darts");
 Items.Combat.PoisonDart.price = 40;
 Items.Combat.PoisonDart.Short = function() { return "Poison-tipped darts."; }
 Items.Combat.PoisonDart.Long = function() { return "Throwing darts smeared in a fast-acting venom, making them quite dangerous."; }
-Items.Combat.PoisonDart.targetMode = TargetMode.Enemy;
-Items.Combat.PoisonDart.OnHit = null;
-Items.Combat.PoisonDart.OnAbsorb = null;
-Items.Combat.PoisonDart.OnCast = function(encounter, caster, target) {
-	var parse = {
-		Name : caster.NameDesc(),
-		s    : caster.plural() ? "" : "s",
-		target : target.nameDesc()
-	};
-	Text.Add("[Name] throw[s] a poison dart at [target].", parse);
-	Text.NL();
-}
-Items.Combat.PoisonDart.TargetEffect = function(encounter, caster, target) {
-	var parse = {
-		Name : caster.NameDesc(),
-		s    : caster.plural() ? "" : "s",
-		himher : target.himher(),
-		target : target.nameDesc(),
-		Target : target.NameDesc(),
-		is     : target.is()
-	};
-	Text.Add("It strikes [target] inflicting [himher] with poison!", parse);
-	Text.NL();
-	if(Status.Venom(target, { hit : 0.75, turns : 3, turnsR : 5, str : 1, dmg : 0.2 })) {
-		Text.Add("[Target] [is] poisoned!", parse);
-	}
-	else {
-		Text.Add("[Target] resist[s] the poison!", parse);
-	}
-	Text.NL();
-}
-Items.Combat.PoisonDart.OnMiss = function(encounter, caster, target) {
-	var parse = {
-		Name : caster.NameDesc(),
-		s    : caster.plural() ? "" : "s",
-		Target : target.NameDesc()
-	};
-	Text.Add("[Target] manage[s] to deftly sidestep the dart.", parse);
-	Text.NL();
-}
-
+Items.Combat.PoisonDart.combat.targetMode = TargetMode.Enemy;
+Items.Combat.PoisonDart.combat.castTree.push(AbilityNode.Template.Physical({
+	toDamage : null,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] throw[notS] a poison dart at [tname].", parse);
+		Text.NL();
+	}],
+	onHit: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(null, target);
+		Text.Add("It strikes [tname], inflicting [thimher] with poison!", parse);
+		Text.NL();
+		if(Status.Venom(target, { hit : 0.75, turns : 3, turnsR : 5, str : 1, dmg : 0.2 })) {
+			Text.Add("[tName] [tis] poisoned!", parse);
+		}
+		else {
+			Text.Add("[tName] resist[tnotS] the poison!", parse);
+		}
+		Text.NL();
+	}],
+	onMiss: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(null, target);
+		Text.Add("[tName] manage[tnotS] to deftly sidestep the dart.", parse);
+		Text.NL();
+	}]
+}));
 

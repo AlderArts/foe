@@ -585,6 +585,10 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		party.inventory.AddItem(Items.StrapOn.ChimeraStrapon);
 		
 		party.inventory.AddItem(Items.Combat.DecoyStick);
+		party.inventory.AddItem(Items.Combat.HPotion);
+		party.inventory.AddItem(Items.Combat.LustDart);
+		party.inventory.AddItem(Items.Combat.PoisonDart);
+		party.inventory.AddItem(Items.Combat.SmokeBomb);
 		
 		DEBUG = true;
 		

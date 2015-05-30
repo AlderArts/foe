@@ -17,5 +17,11 @@ Abilities.Run.CastInternal = function(encounter, caster) {
 	
 	// TODO: random chance on success
 	Text.Flush();
-	encounter.onRun();
+	if(encounter.canRun)
+		encounter.onRun();
+	else {
+		Gui.NextPrompt(function() {
+			encounter.CombatTick();
+		});
+	}
 }

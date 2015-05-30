@@ -151,7 +151,7 @@ Inventory.ItemByBothTypes = function(inv, itemsByType, usableItemsByType, combat
         if(usableItemsByType && it.Use) {
            usableItemsByType[it.type][it.subtype].push(inv[i]);
         }
-        if(combatItemsByType && it.UseCombat) {
+        if(combatItemsByType && it.combat) {
             combatItemsByType[it.type][it.subtype].push(inv[i]);
         }
     }
@@ -238,8 +238,7 @@ Inventory.prototype.ShowInventory = function(preventClear) {
                 Text.Flush();
 
                 var target = new Array();
-                for(var i=0,j=party.members.length; i<j; i++){
-                    var t = party.members[i];
+                _.each(party.members, function(t) {
                     target.push({
                         nameStr : t.name,
                         func    : function(t) {
@@ -258,7 +257,7 @@ Inventory.prototype.ShowInventory = function(preventClear) {
                         enabled : t.ItemUsable(item),
                         obj     : t
                     });
-                };
+                });
 
                 Gui.SetButtonsFromList(target, true, backPrompt);
             }
@@ -325,13 +324,13 @@ Inventory.prototype.CombatInventory = function(encounter, entity, back) {
             //tooltip: it.Long(),
             obj: it,
             func: function(item) {
-                Text.Clear();
-                Text.Add(item.Long());
-                Text.NL();
-                Text.Add("Use [it] on whom?", {it: item.name});
-                Text.Flush();
-
-                it.OnSelect(inv, encounter, entity, backPrompt);
+                if(item.combat.OnSelect(encounter, entity, backPrompt, inv)) {
+	                Text.Clear();
+	                Text.Add(item.Long());
+	                Text.NL();
+	                Text.Add("Use [it] on whom?", {it: item.name});
+	                Text.Flush();
+                }
             }
         });
     }
@@ -346,8 +345,7 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
     var inv = this;
     // Populate item list
     var items = [];
-    for(var i = 0; i < this.items.length; i++) {
-        var it = this.items[i].it;
+    _.each(this.items, function(it) {
         switch(type) {
             case ItemType.Weapon:
                 if(it.type == ItemType.Weapon) items.push(it);
@@ -367,7 +365,7 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
                 if(it.subtype == ItemSubtype.StrapOn) items.push(it);
                 break;
         }
-    }
+    });
     //Check if slot has an item equipped
     var hasEquip = false;
     switch(type) {
@@ -416,8 +414,7 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
     });
 
     //Create button and equip item function for each item valid for the passed in 'type'
-    for(var i=0,j=items.length; i<j; i++) {
-        var it = items[i];
+    _.each(items, function(it) {
         it.ShowEquipStats();
         Text.AddDiv("<hr>");
         list.push({
@@ -471,7 +468,7 @@ Inventory.prototype.ShowEquippable = function(entity, type, backPrompt) {
             obj     : it,
             tooltip : it.Long()
         });
-    };
+    });
 	Text.Flush();
     Gui.SetButtonsFromList(list, true, backPrompt);
 }
