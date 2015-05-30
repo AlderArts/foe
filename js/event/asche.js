@@ -628,6 +628,7 @@ What? Why?
 
 #converge
 */
+			// SECOND PHASE
 			if(gameCache.flags["Portals"] >= 1) {
 				scenes.AddEnc(function() {
 					Text.Add("The jackaless throws you a suspicious glare. <i>“All muddy. Customer is messing things up! Things Asche saw before are still being there, still connected, but in different way… is confusing.”</i>", parse);
