@@ -45,7 +45,7 @@ CombatItem._onAbsorb = function(ability, encounter, caster, target, dmg) {
 
 Items.Combat = {};
 
-Items.Combat.HPotion = new CombatItem("pot0", "H.Potion");
+Items.Combat.HPotion = new CombatItem("pot0", "Health Pot");
 Items.Combat.HPotion.price = 20;
 Items.Combat.HPotion.sDesc = function() { return "health potion"; }
 Items.Combat.HPotion.lDesc = function() { return "a weak health potion"; }
@@ -61,7 +61,7 @@ Items.Combat.HPotion.combat.castTree.push(function(ability, encounter, caster, t
 });
 
 
-Items.Combat.EPotion = new CombatItem("epot0", "E.Potion");
+Items.Combat.EPotion = new CombatItem("pot1", "Energy Pot");
 Items.Combat.EPotion.price = 40;
 Items.Combat.EPotion.sDesc = function() { return "energy potion"; }
 Items.Combat.EPotion.lDesc = function() { return "a weak energy potion"; }
@@ -74,6 +74,22 @@ Items.Combat.EPotion.combat.castTree.push(function(ability, encounter, caster, t
 	Text.Add("A brief surge of energy runs through [tname], restoring " + Text.BoldColor(100, "#000080") + " points of energy!", parse);
 	
 	target.AddSPAbs(100);
+});
+
+
+Items.Combat.SpeedPotion = new CombatItem("pot2", "Speed Pot");
+Items.Combat.SpeedPotion.price = 100;
+Items.Combat.SpeedPotion.sDesc = function() { return "speed potion"; }
+Items.Combat.SpeedPotion.lDesc = function() { return "a speed potion"; }
+Items.Combat.SpeedPotion.Short = function() { return "A speed potion."; }
+Items.Combat.SpeedPotion.Long = function() { return "A speed potion."; }
+Items.Combat.SpeedPotion.combat.targetMode = TargetMode.Self;
+Items.Combat.SpeedPotion.combat.castTree.push(function(ability, encounter, caster, target) {
+	var parse = AbilityNode.DefaultParser(caster);
+
+	Status.Haste(caster, { turns : 3, turnsR : 3, factor : 2 });
+
+	Text.Add("[Name] uncork[notS] a slender vial and drinks its contents. [HeShe] briefly boost[notS] [hisher] speed!", parse);
 });
 
 
