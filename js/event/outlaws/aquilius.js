@@ -633,6 +633,7 @@ Scenes.Aquilius.AlchemyHelp = function() {
 		Text.Add("And what does he make here, anyway?", parse);
 		Text.NL();
 		Text.Add("<i>“A bit of this, a bit of that as circumstances demand. Mostly, I just cook up alcohol for cleaning purposes - we go through that like a drunk with a bottle, but there’re some other popular bits and pieces, though. Come on, let me demonstrate.”</i>", parse);
+		aquilius.flags["Talk"] |= Aquilius.Talk.AlchemyHelp;
 	}
 	Text.NL();
 	
