@@ -196,6 +196,9 @@ Scenes.Aquilius.Approach = function() {
 		//#Set timer on helping out at infirmary for the rest of the day.
 		aquilius.helpTimer = aquilius.HelpCooldown();
 		
+		if(aquilius.flags["Met"] < Aquilius.Met.Helped)
+			aquilius.flags["Met"] = Aquilius.Met.Helped;
+		
 		var item = aquilius.herbIngredient;
 		aquilius.herbIngredient = null;
 		
@@ -997,6 +1000,9 @@ Scenes.Aquilius.TendToSick = function() {
 		playername : player.name
 	};
 	
+	if(aquilius.flags["Met"] < Aquilius.Met.Helped)
+		aquilius.flags["Met"] = Aquilius.Met.Helped;
+	
 	Text.Clear();
 	Text.Add("You indicate to Aquilius that you since you know something about medicine, you wouldn’t mind helping out with the injured and infirm.", parse);
 	Text.NL();
@@ -1105,6 +1111,9 @@ Scenes.Aquilius.AlchemyHelp = function() {
 		
 	};
 	
+	if(aquilius.flags["Met"] < Aquilius.Met.Helped)
+		aquilius.flags["Met"] = Aquilius.Met.Helped;
+		
 	Text.Clear();
 	Text.Add("Knowing something of alchemy yourself, you offer to watch the proverbial pots so Aquilius can go about his more important tasks.", parse);
 	Text.NL();
