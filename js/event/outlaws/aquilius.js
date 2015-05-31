@@ -32,7 +32,8 @@ Aquilius.Met = {
 	Helped : 2
 };
 Aquilius.Talk = {
-	TendToSick : 1
+	TendToSick : 1,
+	AlchemyHelp : 2
 };
 Aquilius.Herbs = {
 	No       : 0,
@@ -99,10 +100,14 @@ Aquilius.prototype.HelpCooldown = function() {
 }
 Aquilius.prototype.QualifiesForAnyJob = function(entity) {
 	return aquilius.QualifiesForHerbs(entity) ||
-	       aquilius.QualifiesForHealing(entity); //TODO
+	       aquilius.QualifiesForHealing(entity) ||
+	       aquilius.QualifiesForAlchemy(entity); //TODO
 }
 Aquilius.prototype.QualifiesForHealing = function(entity) {
 	return Jobs.Healer.Unlocked(entity);
+}
+Aquilius.prototype.QualifiesForAlchemy = function(entity) {
+	return entity.alchemyLevel >= 1;
 }
 Aquilius.prototype.QualifiesForHerbs = function(entity) {
 	return Jobs.Ranger.Unlocked(entity);
@@ -433,6 +438,10 @@ Scenes.Aquilius.HelpOutPrompt = function() {
 		tooltip : "Offer to help out in the infirmary.",
 		func : Scenes.Aquilius.TendToSick, enabled : aquilius.QualifiesForHealing(player)
 	});
+	options.push({ nameStr : "Alchemy",
+		tooltip : "Ask to help with the brewing.",
+		func : Scenes.Aquilius.AlchemyHelp, enabled : aquilius.QualifiesForAlchemy(player)
+	});
 	/* TODO
 	options.push({ nameStr : "name",
 		tooltip : "",
@@ -597,3 +606,79 @@ Scenes.Aquilius.TendToSick = function() {
 	Gui.NextPrompt();
 }
 
+Scenes.Aquilius.AlchemyHelp = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("Knowing something of alchemy yourself, you offer to watch the proverbial pots so Aquilius can go about his more important tasks.", parse);
+	Text.NL();
+	if(aquilius.flags["Talk"] & Aquilius.Talk.AlchemyHelp) {
+		Text.Add("<i>“Well, I guess I can trust you with the apparatus.”</i>", parse);
+		Text.NL();
+		Text.Add("You’re about to say that you’ll be careful, but he waves you off. <i>“Yes, I know you’ll be careful. Let’s get started.”</i>", parse);
+	}
+	else {
+		Text.Add("Aquilius gives you a long, hard look. <i>“Hmm… I don’t know…”</i>", parse);
+		Text.NL();
+		Text.Add("You promise that you’ll be careful.", parse);
+		Text.NL();
+		Text.Add("<i>“That’s what they all say. Words don’t necessarily mean much, it’s actions that count.”</i> He considers you for a little while longer, then slumps his shoulders. <i>“All right, know what? Sure, why not, I’ll let you have a go. Still, give me a while to explain the getup I have here…”</i>", parse);
+		Text.NL();
+		Text.Add("Aquilius is as good as his word, quickly showing you through the alchemical apparatus he has on hand. A lot of it is jury-rigged from glass tubes, empty wine bottles and other odds and ends, but it’s still recognisable as such. No bubbling cauldrons here, alas, but heat is provided by way of a burner that flickers with an intense orange flame when activated.", parse);
+		Text.NL();
+		Text.Add("<i>“This is my second little alchemist’s set,”</i> the good surgeon explains. <i>“First one got turned into a moonshine distillery when I didn’t need it any more.”</i>", parse);
+		Text.NL();
+		Text.Add("And what does he make here, anyway?", parse);
+		Text.NL();
+		Text.Add("<i>“A bit of this, a bit of that as circumstances demand. Mostly, I just cook up alcohol for cleaning purposes - we go through that like a drunk with a bottle, but there’re some other popular bits and pieces, though. Come on, let me demonstrate.”</i>", parse);
+	}
+	Text.NL();
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("Today’s task is relatively simple: the distillation of alcohol from spirits. It seems like Aquilius had been just about to get started before you came in; the reservoir is full and the burner positioned under it; all that’s required to get things started is to light the burner, which the good surgeon does posthaste.", parse);
+		Text.NL();
+		Text.Add("<i>“Alcohol’s dissolves many things that plain water can’t, so that makes it important for cleaning and as a potion base,”</i> Aquilius explains. <i>“Some potions that call for a measure of alcohol won’t work if you just use water.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Now, all I need you to do is to watch the mixture, and snuff out the flame once most of what we’re after has been distilled away. That, and watch the condenser, too - since I can’t get flowing water in here, you’ll need to top up the canister every now and then with cool water.”</i> He points down at a large bucket at the foot of the table. <i>“Well, I’ll leave you to it. Please don’t do anything stupid, there are sick people in here.”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("Today’s task is a mundane one: stirring. Leading you out of the infirmary tent and around the back, Aquilius points you at a large cauldron. Contained within is a clear, viscous liquid, and he picks up a long wooden stirrer and hands if to you without further comment.", parse);
+		Text.NL();
+		Text.Add("You ask him what’s inside.", parse);
+		Text.NL();
+		Text.Add("<i>“Preventatives,”</i> he answers with a completely straight face.", parse);
+		Text.NL();
+		Text.Add("Oh. You’d better not mess up then, right?", parse);
+		Text.NL();
+		Text.Add("<i>“Right. Slowly and evenly does the trick; no point tiring yourself out early on.”</i> Aquilius lights the fire under the cauldron with a snap of his fingers, then passes you a few wax-paper packages. <i>“Just watch out for the color changes in the mixture - they’ll be pretty obvious - and add these reagents one at a time. It’s pretty hard to mess up.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Well, don’t let me get in your way. I’ll see you in a couple of hours.”</i>", parse);
+	}, 1.0, function() { return true; });
+	
+	//TODO More scenes later?
+	
+	scenes.Get();
+	
+	Text.NL();
+	Text.Add("Well, nothing to do but to get to work. You do the best you can, following Aquilius’ instructions to the letter; a faint alchemical smell begins to fill the air as the mixture comes to a boil. The good surgeon himself pops in every now and then to check in on your progress; while he doesn’t say anything, there’s always a mild apprehension about him that one could very well find irritating. Sure, you can understand his tendency to worry when it comes to alchemy, but why bother delegating in the first place if he’s going to supervise you that much?", parse);
+	Text.NL();
+	Text.Add("After a few hours, though, taps you on the shoulder and gives you a nod. <i>“That’ll do.”</i>", parse);
+	Text.NL();
+	Text.Add("You look up and turn to him, stretching your stiff muscles. That’ll do?", parse);
+	Text.NL();
+	Text.Add("<i>“Yes, it’ll do. You’ve done adequately, and for that, you do have my gratitude. I’m afraid there’s not much I can pay you directly with, but everyone in the camp respects those who’re willing to do more than the minimum to scrape by. Go and get some rest, and if you still want to turn up here tomorrow, I won’t say no.”</i>", parse);
+	Text.Flush();
+	
+	world.TimeStep({hour: 5});
+	
+	outlaws.relation.IncreaseStat(30, 1);
+	aquilius.relation.IncreaseStat(100, 2);
+	
+	//#Set timer on helping out at infirmary for the rest of the day.
+	aquilius.helpTimer = aquilius.HelpCooldown();
+	
+	Gui.NextPrompt();
+}
