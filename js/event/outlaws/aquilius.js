@@ -16,6 +16,7 @@ function Aquilius(storage) {
 	
 	this.flags["Met"]   = Aquilius.Met.NotMet;
 	this.flags["Herbs"] = Aquilius.Herbs.No;
+	this.flags["Talk"]  = 0; //Bitmask
 	this.herbIngredient = null;
 	
 	this.helpTimer  = new Time();
@@ -29,6 +30,9 @@ Aquilius.Met = {
 	NotMet : 0,
 	Met    : 1,
 	Helped : 2
+};
+Aquilius.Talk = {
+	TendToSick : 1
 };
 Aquilius.Herbs = {
 	No       : 0,
@@ -94,7 +98,11 @@ Aquilius.prototype.HelpCooldown = function() {
 	return new Time(0,0,0,12,0);
 }
 Aquilius.prototype.QualifiesForAnyJob = function(entity) {
-	return aquilius.QualifiesForHerbs(entity); //TODO
+	return aquilius.QualifiesForHerbs(entity) ||
+	       aquilius.QualifiesForHealing(entity); //TODO
+}
+Aquilius.prototype.QualifiesForHealing = function(entity) {
+	return Jobs.Healer.Unlocked(entity);
 }
 Aquilius.prototype.QualifiesForHerbs = function(entity) {
 	return Jobs.Ranger.Unlocked(entity);
@@ -421,6 +429,10 @@ Scenes.Aquilius.HelpOutPrompt = function() {
 			Gui.NextPrompt();
 		}, enabled : aquilius.QualifiesForHerbs(player)
 	});
+	options.push({ nameStr : "Tend to sick",
+		tooltip : "Offer to help out in the infirmary.",
+		func : Scenes.Aquilius.TendToSick, enabled : aquilius.QualifiesForHealing(player)
+	});
 	/* TODO
 	options.push({ nameStr : "name",
 		tooltip : "",
@@ -475,3 +487,113 @@ Scenes.Aquilius.PickHerbs = function() {
 	
 	Gui.NextPrompt();
 }
+
+// Tend to sick (requires healer job available)
+Scenes.Aquilius.TendToSick = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("You indicate to Aquilius that you since you know something about medicine, you wouldn’t mind helping out with the injured and infirm.", parse);
+	Text.NL();
+	if(aquilius.flags["Talk"] & Aquilius.Talk.TendToSick) {
+		Text.Add("<i>“While there’s no shortage of folk willing to do the menial jobs about these parts, we could always use an extra pair of skilled hands around,”</i> Aquilius tells you. <i>“Of course you’re more than welcome to do your share - more, if you’re so inclined.”</i>", parse);
+	}
+	else {
+		Text.Add("Aquilius eyes you suspiciously after hearing your offer. <i>“Well, [playername], it’s not as if I couldn’t use the help around these parts. However, you’re a new and unknown quantity when it comes to the job, and I’m ultimately responsible for my patients. Why don’t we start you off slow, explain what needs to be done about these parts, and we can see what you’re capable of?”</i>", parse);
+		Text.NL();
+		Text.Add("That sounds fair. He clearly takes his job seriously.", parse);
+		Text.NL();
+		Text.Add("The introduction is concise but thorough: Aquilius walks you through the infirmary tent, briefly explaining the purpose of each and every implement in the vicinity, from the operating table to the small distillery he has going on. <i>“I know at times I’m probably sounding like I’m insulting your intelligence,”</i> he says as he points out the shelves and each of the contents, <i>“but it’s better to swallow your pride and bear with me rather than do something stupid down the line because you weren’t paying attention now. If the well-being of others weren’t at stake I wouldn’t care what you did, but since it is I’m not going to stand for sloppiness.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“It doesn’t help that much of the equipment that I use here is makeshift, jury-rigged from the bits and pieces that Zenith’s people have brought to me over the months, so a lot of it doesn’t look like what most folks think it should.”</i>", parse);
+		Text.NL();
+		Text.Add("Your little tour over, he calls over his three assistants and briefly introduces you in turn, then dismisses them with a wave of his hand before turning back to you. <i>“All right, [playername]. Enough talk, let’s have at it. We’ll see what you’re made of.”</i>", parse);
+		
+		aquilius.flags["Talk"] |= Aquilius.Talk.TendToSick;
+	}
+	Text.NL();
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("Today’s job is disgusting, but a daily necessity - taking out the trash. The “trash” to be disposed of is a medley of utter vileness - used bandages, cloth stained with various bodily fluids, cracked potion vials and an assortment of used sharp implements. These are carefully sealed within three sacks of rough cloth to prevent any of the fluids from seeping out, and then tied securely with cord.", parse);
+		Text.NL();
+		Text.Add("Wait, didn’t Aquilius say that he didn’t want anyone doing menial work?", parse);
+		Text.NL();
+		Text.Add("<i>“This isn’t menial work,”</i> he replies as he douses your hands with distilled alcohol. <i>“If I just left this to anyone in the camp, who knows if they might just dump it in the forest and leave it at that. Might happen. Might not happen. But there’s always the possibility that there’s a plague brewing in that bag, and I’d rather not take chances with such a danger. I want someone who can <b>appreciate</b> the risks involved to do the burning and dumping; it’s less likely they’ll do something stupid like bury it near the water table or worse, throw it into the river. Do you understand?”</i>", parse);
+		Text.NL();
+		parse["ess"] = player.mfTrue("", "ess");
+		Text.Add("Aquilius is serious about this; shovel, matches and a small flask of lamp oil aside, he provides you with a smock cut from the same sackcloth his vest is. You look a little silly in the loose outfit - it looks like the sort of thing an impoverished priest[ess] might wear.", parse);
+		Text.NL();
+		Text.Add("<i>“Have fun,”</i> he says dryly. <i>“Reminder as always - the pit’s out around the back. Burn, then dump the ashes and bury the lot.”</i>", parse);
+		Text.NL();
+		Text.Add("The bag isn’t too heavy, but knowing what’s in it is worrying. At least you don’t draw many stares on the way out of the camp - most are smart enough to give you a wide berth, considering what you’re lugging about with you.", parse);
+		Text.NL();
+		Text.Add("The pit Aquilius mentioned is some distance from the gates, but at least the camp is still within sight and you don’t run into any trouble on the way there. Pouring the oil on the lot, you toss a lit match onto the sack, and it lights up nicely with an intense, clean-burning flame. When the lot is reduced to a mess of foul-smelling ashes you shovel all of it into the pit, then take a moment to savor your handiwork before heading back to camp.", parse);
+		
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			//Nothing
+		}, 3.0, function() { return true; });
+		scenes.AddEnc(function() {
+			player.strength.IncreaseStat(35, 1);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			player.spirit.IncreaseStat(35, 1);
+		}, 1.0, function() { return true; });
+		scenes.Get();
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("After some thought, Aquilius sets you to work with the rest of his assistants caring for the ill and injured on the cots. Moving the poor bastards so they don’t get bedsores from lying in one spot for too long, changing bandages, making sure everyone gets enough water, and daubing down the fevered with a thick, cool solution of his own concoction. There are a number of other tasks involved, but they all have one goal: make sure everyone makes a full recovery as quickly as possible. ", parse);
+		if(Jobs.Healer.Master(player))
+			Text.Add("Your profound knowledge of medicine helps you through the tasks as you quickly soothe hurts and ease discomforts, going about your rounds with utmost speed.", parse);
+		else
+			Text.Add("Your knowledge of medicine is sufficient for you to make your rounds without needing supervision or asking too many questions, but you feel obliged to slow down a little and work carefully - Aquilius doesn’t look like the kind to tolerate mistakes.", parse);
+		Text.NL();
+		Text.Add("Despite them being under the weather, most of the injured are surprisingly lucid and good natured - lewd jokes and mild ribbing aside, a couple of the more able-bodied amongst them flail about ineffectually in botched attempts to grope you when they think you’re not looking.", parse);
+		Text.NL();
+		if(party.InParty(kiakai)) {
+			parse["name"] = kiakai.name;
+			parse = kiakai.ParserPronouns(parse);
+			
+			Text.Add("<i>“May I help, too? I do know something of medicine, even without the direct use of Lady Aria’s blessings.”</i>", parse);
+			Text.NL();
+			Text.Add("You turn to find [name] looking up at you intently. The elf’s been so quiet that you’d almost forgotten [heshe] was there, and in turn, you turn to Aquilius. The surgeon looks between the two of you, then shakes his head and sighs.", parse);
+			Text.NL();
+			Text.Add("<i>“Oh, fine. [HeShe] can help out too, so long as [heshe] doesn’t start spreading about mumbo-jumbo in my home. You’re responsible for [himher], [playername].”</i>", parse);
+			Text.NL();
+			Text.Add("[name] is as good as [hisher] word, tagging along behind you and helping out in general, in addition to catching any minor oversights you make. It’s good to have another pair of eyes to go over things just in case.", parse);
+		}
+		Text.NL();
+		Text.Add("Eventually, though, all the infirm are tended to and made comfortable, and you return to the good surgeon for him to assess your work.", parse);
+		
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			//Nothing
+		}, 3.0, function() { return true; });
+		scenes.AddEnc(function() {
+			player.intelligence.IncreaseStat(35, 1);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			player.spirit.IncreaseStat(35, 1);
+		}, 1.0, function() { return true; });
+		scenes.Get();
+	}, 1.0, function() { return true; });
+	scenes.Get();
+	
+	Text.NL();
+	Text.Add("<i>“Decent work, [playername],” Aquilius tells you, noticing your return. “I expected no less from you. Well, I suppose that’ll be all for today - why don’t you go and get some rest and come back tomorrow if you want to have another go at it? I’ll still be needed around these parts for a little while longer, so don’t wait up on me.”</i>", parse);
+	Text.Flush();
+	
+	world.TimeStep({hour: 5});
+	
+	outlaws.relation.IncreaseStat(30, 1);
+	aquilius.relation.IncreaseStat(100, 2);
+	
+	//#Set timer on helping out at infirmary for the rest of the day.
+	aquilius.helpTimer = aquilius.HelpCooldown();
+	
+	Gui.NextPrompt();
+}
+
