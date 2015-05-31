@@ -2504,7 +2504,7 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal) {
 		Text.Add("Grinning back, you reach out and gently pat his head, assuring him that only the best is good enough for your favorite wolf. Your grin widens as you hear an arrhythmic thumping noise; Cale’s tail is wagging so hard he’s drumming on the [log] behind him.", parse);
 	}
 	Text.NL();
-	Text.Add("Now that the foreplay is over with, it’s time to have some real fun. With a final breath, you finish your descent, allowing his cock to close the distance between you and push into your folds. The feeling of him spearing into your needy [vagDesc] sends jolts of both pain and pleasure coursing throughout your body. A groan escapes your throat at the stimulus, only eticing you to sink yourself downward further, refusing to stop until you have reached to just above his knot.", parse);
+	Text.Add("Now that the foreplay is over with, it’s time to have some real fun. With a final breath, you finish your descent, allowing his cock to close the distance between you and push into your folds. The feeling of him spearing into your needy [vagDesc] sends jolts of both pain and pleasure coursing throughout your body. A groan escapes your throat at the stimulus, only enticing you to sink yourself downward further, refusing to stop until you have reached to just above his knot.", parse);
 	Text.NL();
 	
 	Sex.Vaginal(cale, player);
