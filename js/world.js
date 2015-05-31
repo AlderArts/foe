@@ -73,6 +73,8 @@ world.StepToHour = function(hour, minute) {
 		step.hour   += 24;
 	
 	world.TimeStep(step);
+
+	return step;
 }
 
 world.HandleTimers = function() {

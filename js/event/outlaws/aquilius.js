@@ -32,8 +32,9 @@ Aquilius.Met = {
 	Helped : 2
 };
 Aquilius.Talk = {
-	TendToSick : 1,
-	AlchemyHelp : 2
+	TendToSick  : 1,
+	AlchemyHelp : 2,
+	War         : 4
 };
 Aquilius.Herbs = {
 	No       : 0,
@@ -322,12 +323,94 @@ Scenes.Aquilius.Prompt = function() {
 		tooltip : "Give the good surgeon a look-over.",
 		func : Scenes.Aquilius.Appearance, enabled : true
 	});
-	//Player may only help out once a day. Ish.
-	options.push({ nameStr : "Help out",
-		tooltip : "Help out at the infirmary.",
-		func : Scenes.Aquilius.HelpOut, enabled : !aquilius.OnHerbsQuest()
+	// DAYTIME
+	if(world.time.hour < 17) {
+		//Player may only help out once a day. Ish.
+		options.push({ nameStr : "Help out",
+			tooltip : "Help out at the infirmary.",
+			func : Scenes.Aquilius.HelpOut, enabled : !aquilius.OnHerbsQuest()
+		});
+	}
+	// NIGHTTIME
+	else {
+		options.push({ nameStr : "Talk",
+			tooltip : "How about a fireside chat with the good surgeon?",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>“Sure, I wouldn’t mind a little company. You want to open, or let me do it?”</i>", parse);
+				Text.Flush();
+				
+				Scenes.Aquilius.TalkPrompt();
+			}, enabled : true
+		});
+		options.push({ nameStr : "Smoke",
+			tooltip : "Light up with Aquilius and relax a bit.",
+			func : Scenes.Aquilius.Smoke, enabled : true
+		});
+		/* TODO
+		options.push({ nameStr : "Talk",
+			tooltip : "",
+			func : function() {
+				Text.Clear();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Add("", parse);
+				Text.Flush();
+			}, enabled : true
+		});
+		*/
+	}
+	Gui.SetButtonsFromList(options, true, function() {
+		if(world.time.hour < 17) {
+			PrintDefaultOptions();
+			return;
+		}
+		
+		Text.Clear();
+		Text.Add("<i>“Farewell, now,”</i> Aquilius tells you as you get up to leave. <i>“It has gotten quite late, so be careful, wherever you may be going. In fact, I would suggest that you sleep in camp and wait for first light before leaving.”</i>", parse);
+		Text.NL();
+		Text.Add("With that, he sinks back into his chair and closes his eyes contentedly.", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt();
 	});
-	/*
+}
+
+Scenes.Aquilius.TalkPrompt = function() {
+	var parse = {
+		
+	};
+	
+	//[Self][Grind][War][Back]
+	var options = new Array();
+	options.push({ nameStr : "Self",
+		tooltip : "Ask Aquilius about himself.",
+		func : Scenes.Aquilius.TalkSelfPrompt, enabled : true
+	});
+	options.push({ nameStr : "Grind",
+		tooltip : "Make small talk about the daily grind.",
+		func : Scenes.Aquilius.TalkGrind, enabled : true
+	});
+	options.push({ nameStr : "War",
+		tooltip : "Ask Aquilius about the war between the Crown and the guilds.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Aquilius doesn’t reply at first, instead staring intently into the distance just past your shoulder, as if he’s seen a ghost. Maybe he has. It’s a good half-minute before he finally moves again, taking his pipe out of his beak and blowing a slow, long stream of smoke through his nostrils.", parse);
+			Text.NL();
+			if(aquilius.flags["Talk"] & Aquilius.Talk.War) {
+				Text.Add("<i>“You want to hear about it again? Well, it’s important that kids these days learn history, else we’re doomed to repeat it. Come to think of it, learning history doesn’t necessarily mean you aren’t going to repeat it anyway. Bah, what do you want me to tell you about?”</i>", parse);
+			}
+			else {
+				aquilius.flags["Talk"] |= Aquilius.Talk.War;
+				Text.Add("<i>“Yes, I can tell you about the war,”</i> he says. <i>“Brother against brother, parent against child, king against his own. I may be not quite as young as I was then, but I still remember every single moment of it. What would you like to know?”</i>", parse);
+			}
+			Text.Flush();
+			
+			Scenes.Aquilius.TalkWarPrompt();
+		}, enabled : true
+	});
+	/* TODO
+	 *  
 	options.push({ nameStr : "name",
 		tooltip : "",
 		func : function() {
@@ -338,8 +421,419 @@ Scenes.Aquilius.Prompt = function() {
 			Text.Flush();
 		}, enabled : true
 	});
-	*/
-	Gui.SetButtonsFromList(options, true);
+	 */
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“Hm, sure. Let’s just take a moment to relax, then.”</i>", parse);
+		Text.Flush();
+		Scenes.Aquilius.Prompt();
+	});
+}
+
+Scenes.Aquilius.TalkSelfPrompt = function() {
+	var parse = {
+		playername : player.name,
+		boygirl : kiakai.mfTrue("boy", "girl"),
+		manwoman : player.mfTrue("man", "woman"),
+		name : kiakai.name
+	};
+	parse = kiakai.ParserPronouns(parse);
+	
+	//[Past][Surgery][Outlaws][[Kiai]]
+	var options = new Array();
+	options.push({ nameStr : "Past",
+		tooltip : "So, where did he come from, who is he, and where is he going?",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“My boyhood?”</i> Aquilius leans forward, chin in hand, and draws on his pipe as he thinks. <i>“Can’t say it was too special. Lived in Rigard, second of four brats, always hungry, always emptying the larder and then looking for more to eat. Didn’t starve or anything, but that’s just the way kids are. You leave them alone for a moment and they turn up wanting food; I was no exception.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Must’ve been a particularly voracious kid, because next thing I know I’m being apprenticed to a cobbler at the tender age of eight or nine. Maybe my parents were hoping that I’d work enough to earn my keep for all that I ate, and if I didn’t it damn well felt like I did anyway. The cobbler’s was just two streets away, so I didn’t have to leave home or anything, but I scarcely ate another meal at home after that.”</i> Aquilius chuckles at the thought. <i>“Shoe-mending wasn’t so bad. Six months in, my master began letting me work on scraps of old fabric and leather, sewing together shoes to soles, pounding in nails… we had a contract with the city watch to provide them with so many pairs of boots every month, so there was no end of work.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Learn the trade, marry the owner’s daughter, take over the business, work till the day I die. That might have been the long and short of my life, [playername], if the civil war hadn’t happened. I know the saying that every generation must have its own trials and tribulations, but it doesn’t change the fact that the civil war was a particularly bad one.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Once Reywn mobilized the army, the recruiters came marching door to door, dragging out the able-bodied to be drafted; I was no exception. Eventually, someone must’ve noticed that I was better at cutting and stitching than I was swinging a pike around, for the next thing I know I’m being told to report to the surgeon’s office for my new position as his apprentice. The pay was better than my old job at the cobbler’s and I was doing more obviously useful work, so I stayed on even after most of the fighting died down and the draftees were free to go. Never saw the cobbler again, so I don’t know what he thought of my decision.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Eventually, though, I thought I’d set up a practice of my own and did just that with the savings I’d accumulated over the last handful of years. Most of my first customers were still from the army, as they preferred my work to the new surgeon’s, and as word of mouth spread, I managed to get more business.”</i>", parse);
+			Text.NL();
+			Text.Add("How’d he end up with the outlaws, though?", parse);
+			Text.NL();
+			Text.Add("<i>“That’s another story,”</i> Aquilius replies. <i>“If you’re really that interested, I’ll tell you. Anything else, though?”</i>", parse);
+			Text.Flush();
+			
+			world.TimeStep({minute: 30});
+		}, enabled : true
+	});
+	options.push({ nameStr : "Surgery",
+		tooltip : "What does he think of his job?",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“It’s a living.”</i>", parse);
+			Text.NL();
+			Text.Add("That’s all?", parse);
+			Text.NL();
+			Text.Add("Aquilius shrugs. <i>“You think I should say something else? Have greater, more grandiose thoughts? Nah. Sure, I save lives… but so can anyone else. The farmers out on the plains, they do a shitload more work than I do to keep people alive and kicking by way of not starving to death, and you don’t see people expecting them to have great and wonderful insights about their professions.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“[playername], being a sawbones isn’t the most glorious of tasks. You end up thinking of people as pieces of meat while they’re on the table, cuts of beef, pork, or the other white meat, whatever tickles your fancy. So long as it isn’t another living, breathing, thinking person that you’re applying the scalpel or bonesaw to, because that opens the door for other unsettling thoughts to creep into your head.”</i>", parse);
+			Text.NL();
+			Text.Add("Oh.", parse);
+			Text.NL();
+			Text.Add("<i>“Why does anyone choose their particular profession? Most don’t even get the chance to walk away from their parents’ footsteps; if I hadn’t been drafted, I might very well have remained as a cobbler’s apprentice for the rest of my life. I do it because it’s what I’m good at, what I’ve been trained to, and what I know. That’s more than enough reason.”</i>", parse);
+			Text.NL();
+			if(party.InParty(kiakai)) {
+				Text.Add("<i>“But surely - surely there must be some satisfaction that you can take away from seeing the ill made whole again,”</i> [name] interjects. <i>“That the task of healing should bring both parties joy.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Oh sure, [boygirl]. I’m not denying that there’s a sense of satisfaction there. But how’s it supposed to be any different from a cobbler taking pride in a pair of boots he or she mended, or a cook in a meal well done?”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Do not call me ‘[boygirl]’!”</i> [name] exclaims. <i>“I am likely older than you are!”</i>", parse);
+				Text.NL();
+				Text.Add("Aquilius closes his eyes and bows his head. <i>“Yeah. Sure. You definitely have the years on me, elf [boygirl]. But you see, age is up here.”</i> He taps his forehead with his index finger. <i>“I’ve seen middle-aged women in the bodies of girls, and brats wearing the skins of grown men. How long your eyes have stayed open has nothing to do with it.”</i>", parse);
+				Text.NL();
+				Text.Add("Will the two just cut it out already?", parse);
+				Text.NL();
+			}
+			Text.Add("Aquilius cocks his head at you. <i>“It wasn’t so long ago that doctors, surgeons and alchemists weren’t go highly regarded, that there were plenty of quacks, and even if you were the real deal you’d to be careful to not end up doing more harm than good.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“It doesn’t help that with magical healing and potions making the rounds these days, most people are now expecting someone to come up to their sickbed, put their hands on them and mumble some mumbo-jumbo, and then they’re up and about. Then they get all upset and squeamish when I tell them I’m going to use needle and thread on them. Something like… like city folk forgetting where their meat really comes from, and thinking it comes from the butcher’s instead of from inside a pig. You know?</i>", parse);
+			Text.NL();
+			Text.Add("<i>“What I’m trying to get at is that… well, I’m certainly not going to be taking on any airs for what I do. That’s all.”</i>", parse);
+			Text.Flush();
+			
+			world.TimeStep({minute: 30});
+		}, enabled : true
+	});
+	options.push({ nameStr : "Outlaws",
+		tooltip : "How’d he end up with the Outlaws?",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“I knew Zenith from back in the civil war. Lad was with the guilds… that is, on the wrong side of the fence. Young man of fifteen, already known for his work and just itching to make his name even bigger, and the guilds just had to get it into their mind to move against the Crown and start a civil war. He really had no stake in the whole business save holding membership - back in those days, if you weren’t a member of the guilds and did business anyway they’d rough you up and shake you down - but that was enough.”</i>", parse);
+			Text.NL();
+			Text.Add("Aquilius removes his pipe from his beak and rubs his eyes. <i>“So there he was, young man caught up in the first of the morph riots, bleeding out after it was put down. He’d dragged himself into an alley so he wasn’t trampled to death when the inevitable stampede started, but there wasn’t much time left for him. I happened to be there, part of the detachment sent to suppress the riots…”</i>", parse);
+			Text.NL();
+			Text.Add("And?", parse);
+			Text.NL();
+			Text.Add("<i>“Everyone ignored him, [playername]. Both the rioters and those sent to put them down… not that I blame them. It was a hellhole, and he looked pretty much dead, too. Not much reason to bother with a dead man in the heat of things. People were screaming, trying to get away now that the royal guard and city watch had called their bluff and was willing to kill to keep the peace. Rioting’s all fun and games until someone dies, then everyone’s afraid that they’ll be the next in line to croak.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Me, I noticed he was still breathing, and I had to do something about it. I made an excuse to fall behind the others, then did what I could. Staunched the bleeding, tried to make sure the wound wouldn’t get infected… I wasn’t sure back then if he’d pull through, but he did.”</i>", parse);
+			Text.NL();
+			Text.Add("Sounds pretty grim.", parse);
+			Text.NL();
+			Text.Add("<i>“It was,”</i> Aquilius says, refilling his pipe with another pinch of dried herbs. <i>“I’d rather not dwell on it any longer than necessary. Anyway, Zenith came over to the barracks a couple of weeks later to thank me. They wouldn’t let him in, of course, but word got out, and we arranged to meet up for a drink and a smoke on neutral ground.”</i>", parse);
+			Text.NL();
+			Text.Add("It sounds a little odd to hear Aquilius speak of neutral ground, to imagine the entirety of Rigard divided against itself, but you nod and ask him to continue.", parse);
+			Text.NL();
+			Text.Add("<i>“Well, one thing led to another. After I left the army and set up a surgery of my own, Zenith would send in his operatives every now and then when they needed mending by a surgeon who wouldn’t go talking to the city watch. I’d patch them up, keep them under observation for a few days, and Zenith would send someone to bring them back.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“I don’t know how I was found out, though, but I must’ve been, for one fine day about five years back I wake up to Zenith knocking on my door. Seems like I was slated to have an appointment with the royal guard in about two hours for patching up known criminals. Aiding and abetting, I’m not sure what the legalese term is, but essentially I was all signed up for a one-way ride down to the palace square, and there was a signed warrant to have my home and everything in it confiscated as “evidence”. I’d be damned if I let Preston steal my life’s work - I took what I could carry with me, torched the rest, then came along with Zenith and set up shop here.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Get this straight. I don’t trust most of the unruly rabble on either side of this mess. I don’t believe in the slogans and chants. If you want proof that most people are irredeemably stupid, then try doing my job for as long as I have; I’ve lost count of the number of accidentally hacked limbs, near-fatal injuries from people horsing around, and the assortment of odd items I’ve had to extract from within people. You think these people can put two thoughts together, let alone govern themselves effectively? You can’t blame them, that’s how most folks are.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“I’m here because I believe in Zenith, and that he’s a good man. Without him, Maria and a few others giving everyone else direction, it’s very possible this motley crew would never even have gotten off the ground.”</i>", parse);
+			Text.NL();
+			Text.Add("It’s that simple?", parse);
+			Text.NL();
+			Text.Add("Aquilius nods. <i>“Believe it or not, it is that simple.”</i>", parse);
+			Text.Flush();
+			
+			world.TimeStep({minute: 30});
+		}, enabled : true
+	});
+	if(party.InParty(kiakai, true)) { //TODO flags for this!
+		options.push({ nameStr : kiakai.name,
+			tooltip : "So… what DOES he have against the elf, anyway?",
+			func : function() {
+				Text.Clear();
+				Text.Add("Since [name] isn’t with you, you can feel free to ask the question in the open. Not that talking about someone behind his or her back is a good thing, but in this case, it would only create more problems than it would solve.", parse);
+				Text.NL();
+				Text.Add("Aquilius snorts at the elf’s name. <i>“Can’t blame you for asking. You’re responsible for that little do-gooder, so I have only one piece of advice: keep [himher] out of trouble, don’t let [himher] try to help everyone [heshe] comes across, and if you can, try and at least get the little bugger to understand the context of the situation before extending a helping hand.”</i>", parse);
+				Text.NL();
+				Text.Add("That’s three pieces of advice, you point out.", parse);
+				Text.NL();
+				Text.Add("<i>“Now don’t you get smart with me too, young [manwoman].”</i> Aquilius puffs on his pipe, blowing a long stream of smoke through his nostrils. <i>“Point I’m getting at is that the little pointy-eared bugger needs someone watching [hisher] back, lest [heshe] get stabbed in the back by someone [heshe]’s just tried to help. I’ve seen that kind before. Won’t say naive - sometimes that doesn’t help - but so eager. So earnest. I’ll wager two coins that [heshe] believes the world has an order to it, that evil never goes unpunished, and everything will be all right in the end.</i>", parse);
+				Text.NL();
+				Text.Add("<i>“I’ve seen enough people throwing their lives away for that sort of crap, and don’t want another one to join the heap. So much wasted youth. So much wasted life. After all that, what do we have to show for it?”</i>", parse);
+				Text.NL();
+				Text.Add("Silence.", parse);
+				Text.NL();
+				Text.Add("<i>“Look, I went off my head over there,”</i> Aquilius says at last. <i>“I know I can’t stop people from doing stupid things, like they’ve been since the dawn of time. But if they get themselves cut up, at least I can stitch them back together. If they want to charge headlong into death, I can try and talk them out of it. But if they’re really determined… I don’t want to see another freshly dead body if I can help it, especially if it’s still walking and talking. You get me?”</i>", parse);
+				Text.Flush();
+				
+				world.TimeStep({minute: 30});
+			}, enabled : !party.InParty(kiakai)
+		});
+	}
+	Gui.SetButtonsFromList(options, true, Scenes.Aquilius.TalkPrompt);
+}
+
+Scenes.Aquilius.TalkGrind = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("You ask Aquilius about how today’s work went.", parse);
+	Text.NL();
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("<i>“Running an infirmary is a little like running a circus,”</i> he says. <i>“You’ve got to keep everything perfectly balanced, else the whole house of cards comes tumbling down. If you can keep it up, though, you get to see all sorts of hilarious things.”</i>", parse);
+		Text.NL();
+		Text.Add("Such as?", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>“Mostly okay. A bit of this, a bit of that. Honestly nothing I haven’t seen for the past twenty years.”</i>", parse);
+		Text.NL();
+		Text.Add("Well, he might have seen it all, but you haven’t, so if he wouldn’t mind humoring you…?", parse);
+		Text.NL();
+		Text.Add("<i>“Oh, all right.”</i> Aquilius blows a smoke ring from his pipe and watches it vanish into thin air. <i>“Let’s see, now…”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>“Droll and boring, but that’s a good thing. Boring means that you’ll get to live through the day; it’s when your life gets full of excitement and other interesting events that you have to be on your toes.”</i>", parse);
+		Text.NL();
+		Text.Add("So, what kinds of things does he find boring, anyway? Knowing Aquilius, his definition of “boring” is probably very much different from yours.", parse);
+		Text.NL();
+		Text.Add("<i>“Well, for example…”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.Get();
+
+	Text.NL();
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("<i>“So today a new face - bit of a scruffy lass - came in to report sick with a mild fever and chills. Of course, she wasn’t <b>really</b> ill, nor was the acting very convincing. I gave her the talk that I give everyone who tries to pull this crap off on me: first time, you get a warning. Second time, your name gets sent straight to Maria, and she’ll deal with you from there on out.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“I don’t have time to deal with malingerers here, and neither am I going to cover for them. Zenith has made it very clear: if you’re not going to make yourself useful in some fashion, then you don’t get to eat. If you ask me to not just help you skive, but waste my precious time, credibility and resources in doing so, I’m going to turn you straight in.”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>“Potions have their uses, but the way people seem to think they work is hilarious,”</i> Aquilius says, shaking his head. <i>“They imagine I can just run out, pick a handful of grass, throw it into boiling water and ten minutes later - bam! A potion to cure all their ills!</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Let me tell you, if such miracle ‘herbs’ really did exist, they wouldn’t for long, because everyone would promptly pick them straight out of existence. Then there’s the problem of preservation, of compounding, of all the other preparations… how should you administer your medication? Pour it on a wound? Steep bandages in the distillate and let it seep through the skin? Or just throw it down the hatch?”</i>", parse);
+		Text.NL();
+		Text.Add("You pat the good surgeon on his shoulder and tell him you know of his pain.", parse);
+		Text.NL();
+		Text.Add("<i>“It’s cute the first couple of times, that irrational confidence in my abilities, then it starts getting annoying.”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>“Couple of weeks back, we had this fellow who insisted he was fine less than a day after I’d finished setting his bones. Good work ethic, but an absolute idiot - I tried to explain to him that if something stupid happened to him or his splint and the bones healed wrong, I’d have to break them again and set them right once more.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“He wouldn’t be reasonable about it, so I ordered him tied to the bed for the next few days. Some harm done, yes, but not as much as he’d have done to himself if I’d let him go on his merry way. I’m not going to lose any sleep over what I did - it was for his own good.”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("Aquilius leans towards you conspiratorially. <i>“Want to know the fastest-moving item in my inventory?”</i>", parse);
+		Text.NL();
+		Text.Add("Yes? What is it?", parse);
+		Text.NL();
+		Text.Add("<i>“Preventatives. I’m telling you, scarcely have I gone and cooked up a new batch that they’re all gone before the day is out. Which makes sense - a goodly number of folks here are already of the less savory kind. We don’t need more children here than what we already have, do we?”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("<i>“Back in the day, there was only one thing to do if someone had a gut wound.”</i>", parse);
+		Text.NL();
+		Text.Add("That would be?", parse);
+		Text.NL();
+		Text.Add("<i>“We’d brew up a really potent-smelling brew of various grasses, you see. Mix it with a little porridge and get the poor sop to drink it. If we could smell the herbs through the wound… there was no saving him or her, not with a perforated intestine. When the stuff in your guts leaks out and your very lifeblood gets infected, the only thing we can do is make your death as painless as possible.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“I couldn’t take it at first, you know. Wanted to believe that there was something that could be done. But now that I’ve more years on me… sometimes the only decision that you can make is whether you want to tell your patient that they’re going to die and there’s nothing you can do about it.”</i>", parse);
+		Text.NL();
+		Text.Add("And has he?", parse);
+		Text.NL();
+		Text.Add("Aquilius squints at you. <i>“I have always been honest in this regard, even if at first glance it’d be better to lie. People need time to make peace with the spirits, [playername]. Settle their affairs in this world and make preparations for the next.  And if they don’t do that… well, then they won’t be able to claim ignorance.”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.Get();
+	
+	Text.Flush();
+	
+	world.TimeStep({minute: 30});
+}
+
+Scenes.Aquilius.TalkWarPrompt = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	//[Origins][Fighting][Free Cities][Back]
+	var options = new Array();
+	options.push({ nameStr : "Origins",
+		tooltip : "How did the war get started in the first place?",
+		func : function() {
+			Text.Clear();
+			Text.Add("Aquilius is silent for a long time, long enough for you to worry that you’ve sent the good surgeon into the recesses of his own head, but at long last he coughs loudly, sending his pipe clattering to the floor. Shaking his head, he picks it up with unsteady fingers and shoves it back into his beak.", parse);
+			Text.NL();
+			Text.Add("<i>“You want to know how it got started? Listen up then, for it’s going to be a long story.</i>", parse);
+			Text.NL();
+			parse["are"] = gameCache.flags["Portals"] == 0 ? "are" : "used to be";
+			Text.Add("<i>“In my father’s time, so I’m told, portals were very commonplace. People could go through one, come out on another plane and do business, then return to Eden before lunch. As you no doubt know, portals [are] pretty much non-existent these days, but they didn’t disappear all at once. Slowly, they began to get rarer and rarer, opening and closing more and more erratically.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Now, there were merchant guilds who did business between the worlds using the portals, and since Eden had plenty of them, you can imagine they’d grown quite rich and influential. They had a direct voice in the passing of laws, wielded influence in various social circles, that sort of thing - and the new rich were always at loggerheads with the old rich. If the merchants wanted one thing, you’d bet the king and the nobles would want another.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“But the portals got more and more erratic, and no one could explain why. The merchant guilds were bleeding money, barely managing to balancing their books with the goods that still came back through the few portals that popped up, and with the loss of their wealth came the loss of their status in Rigard society.”</i>", parse);
+			Text.NL();
+			Text.Add("Yes, you can see where this is going, but how does it tie to the morphs?", parse);
+			Text.NL();
+			Text.Add("<i>“Patience, I’ll get to that in all good time.”</i> Aquilius takes a long drag on his pipe and grows thoughtful. <i>“Well, those who have power are loathe to give it up; such is the nature of that poisoned sweetmeat. Slowly, the crown got poorer as trade revenues diminished and had to start going local, if you know what I mean, yet the merchant guilds still threw their weight around like nothing had ever happened. Eventually, Rewyn - still a lad at the time - decided enough was enough, and the guilds’ frankly unreasonable demands had to be put down. Before he could move against them, though, they managed to scoop up the queen - not Rhylla, the first queen - up and tried to ransom her for political leverage. You can imagine how well he took to that.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“It… it all got a little messy after that. Somehow, the queen ended up dead - I don’t know how exactly, but rumors were everywhere - and Rewyn blew up, mobilized the army. The guilds had been busy telling us morphs how horrible the king was and all, and how we should fight him, but I was smart enough to know that they were just trying to use us as pawns and stayed out of all that crap until I got drafted. Others didn’t know better, of course, and ended up in riots funded by the guilds, dying by the hundreds while the merchants tried to make an escape.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“For all of that… they didn’t succeed. After absolutely <b>crushing</b> the feeble men the merchants had been able to raise <b>and</b> the morphs in the riots, Rewyn caught every last one of the traitorous merchants still alive and made a very public spectacle of their execution; those which hadn’t participated in the rebellion were cowed into submission. He wasn’t very discriminating either when he started hunting down the morphs who’d supported the rebellion, the fools who’d believed in the crap rhetoric the merchants had fed them, and plenty of innocent people ended up dead.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Eventually, he realized that taking out his anger on us wasn’t the best of ideas, but the damage was done; many morphs had fled, while others were kicked out of the city proper and forced to live in the slums. On whose orders this happened, though, it’s anyone’s guess - events were a little muddy back then. He married Rhylla to stabilize his reign, joining his family with the most powerful of the rivalling noble families, and that brings us to this day. It was a bit of a shock for those who survived, but then they adjusted and the good times that came before all seemed like an idyllic dream, a fevered fancy…</i>", parse);
+			Text.NL();
+			Text.Add("<i>“So there you have it, [playername]. There weren’t any good sides in that mess that was called a civil war, so if anyone tells you that they were the good guys, they’re a lying bucket of warm piss.”</i>", parse);
+			Text.Flush();
+			
+			world.TimeStep({minute: 30});
+		}, enabled : true
+	});
+	options.push({ nameStr : "Fighting",
+		tooltip : "What was the fighting like?",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“What do you think? It was a civil war; those are never pretty.”</i> Aquilius puffs on his pipe. <i>“I’ll be honest; as a surgeon in training, I was in the barracks most of the time, so I didn’t see as much fighting as you’d expect. But the folks they brought in to be put together again, they had tales to tell. Oh, they had plenty to say, mostly to take their mind off the pain while I was sawing and sewing.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Most of the fighting was centered about Rigard itself - a little spilled out into the slums and plains, but the most bloodshed happened within the city walls. I can briefly tell you about the first of the morph riots instigated by the merchants - every hand available got called out to the merchants’ district as backup, and by the time we arrived, there was that milling mass shouting at us.”</i>", parse);
+			Text.NL();
+			Text.Add("Aquilius closes his eyes and resettles himself in his chair, spreading his wings a little. <i>“I was called a… ah, yes. I was called a traitor no less than six times. Probably more. There were a few rocks thrown, nothing too bad, then some fucking fool decides to lob a half-brick at the shield wall we’d formed. I remember… it sailed through the air over the shields, hit another greenhorn in the forehead, a sad-looking lad about fifty paces to my right, cracked his skull open thanks to whoever decided that he should have an open helm that day. Poor bastard died on the spot.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“All hell broke loose.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“No one gave the order to attack, [playername], but we did anyway. The more people are in one spot, the stupider all of them become, until it’s inevitable that shit happens. The moment the mob realized that things had gotten real, that we were going to <b>kill</b> them, most of them either tried to flee and got trampled underfoot by their own people, or tried to put up a fight and got slaughtered by the advancing wall of pikemen. Really, they didn’t have much of a chance - an untrained, unarmed rabble against actual troops - but then the crap the merchants had been feeding them made them, I don’t know, think they were impervious to blades or something. The armor of righteousness and high moral ground, you know? In the end, they bled and died just like anyone else.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“There were more morph riots after that, mostly responses to the first one. Rewyn ordered them put down in much the same fashion - complete slaughter of everyone involved. Didn’t matter if you were an instigator, a participant, or just in the wrong place at the wrong time like Zenith was; with the love of his life butchered at their hands and her body still cooling, he wanted them all dead. Thankfully, I wasn’t there, and neither did I have the stomach to see the street-to-street fighting that came later on, with people being dragged out of their homes and run through on their doorsteps. Nevertheless, I still heard the stories that came in with those I’d to patch up… bring the fight to peoples’ homes, and they get a lot less willing to turn and run. People armed with kitchen knives and meat cleavers, lurking behind walls and on rooftops… burning barricades in the slum streets…</i>", parse);
+			Text.NL();
+			Text.Add("<i>“I don’t want to dwell on it any more,”</i> Aquilius says all of a sudden. <i>“I think you get the general idea by now, yes?”</i>", parse);
+			Text.Flush();
+			
+			world.TimeStep({minute: 30});
+		}, enabled : true
+	});
+	options.push({ nameStr : "Free Cities",
+		tooltip : "Did the Free Cities get involved in the whole mess?",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“Couldn’t rightly say. Zenith’s trying to see if they’ll lend us their support now, but back then… well, that’s anyone’s guess,”</i> Aquilius replies after a moment’s thought. <i>“I know there were a number of mercenary companies hailing from them that worked one side or another - bastards always crop up like flies to a corpse when there’s trouble to make money off. Some of the free cities also proclaimed they were willing to take in refugees from the civil war - some did flee down the King’s Road, although not many were willing or able to make the trip.", parse);
+			Text.NL();
+			Text.Add("<i>“It wouldn’t surprise me if they bankrolled some of the players in the civil war, stir up some trouble to keep the king from noticing them, but that’s just my guess. Anything else?”</i>", parse);
+			Text.Flush();
+			world.TimeStep({minute: 5});
+		}, enabled : true
+	});
+	options.push({ nameStr : "End",
+		tooltip : "So what happened in the end?",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“Well, you can see for yourself,”</i> Aquilius says, his voice completely flat and emotionless. <i>“Full humans don’t like morphs, and vice versa. Here we sit, plotting the overthrow of the Riordain line. The king has grown cold and distant, and confers with shady characters like that Majid fellow. Whispers fly that he can’t love Rhylla like he did with his first wife. The slums are still filled with those who lost their homes during the war, and those who lost their parents in the killing have only just begun to leave the orphanages in the last handful of years.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“You want to find someone to blame? Everyone has blood on their hands, but I think the guilds were the worst of the lot. At least those of the old blood had a place in the system - we knew what duties were expected of the nobles, even if they didn’t follow through, and knew where to place the blame and file our grievances.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“The merchants threw their weight around without any binding responsibilities to go with them, didn’t even think twice about upending the peace between humans and morphs just to save their hides, and when the going got tough, tried to flee through the portals and leave us to deal with the mess their power grab created. No, they couldn’t just accept that the portals were going out and try to do something else with their lives. They just had to pull off that shit. The king was a vicious, cruel bastard in what he did to the morphs, but at least he was grieving and when he snapped out of it, he finally realized he’d fucking gone too far. The guilds?”</i>", parse);
+			Text.NL();
+			Text.Add("Aquilius spits on the ground and grinds the patch of spit with the toe of his boot. <i>“I fucking <b>hate</b> merchants. Give a poor man a fortune and he’ll fritter it away within a year or two because he doesn’t know how to manage the money, give a merchant power and pretty much the same thing happens, only with a whole lot more bloodshed. I’ve stayed awake many nights these past twenty years, [playername], but I’ll fondly remember the day Rewyn had every single one of the remaining rebellious guild masters drawn and quartered in the royal plaza. I like to think I’m not a violent man, but I damn well felt satisfied at their executions.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“If you want me to be honest, we morphs were partly to blame, too. Was life perfect? No, it wasn’t. But it wasn’t too bad, either. All that freedom and equality the merchants tried to sell us - well, look at it this way. We had our own nobles in court to represent us. Now, we don’t. Everyone lived together back in the day, and even if the greetings weren’t completely warm, at least they were polite. Now, a good proportion of Rigard’s morph population is housed in the slums. Eyebrows were raised if a morph got together with a pure human; there’d be some talk and maybe a little shunning, but at least it wasn’t compared to bestiality or forbidden. We could walk in the streets without being harassed.”</i>", parse);
+			Text.NL();
+			Text.Add("The good surgeon blows smoke out of his nostrils. <i>“I’m just an old man yammering away, but it’s much easier to cheat someone when you’re telling him or her what he or she wants to hear, eh? But that’s what you get for trusting people with cash registers for souls. I don’t blame those who were taken in - virtue is more easily thrown away than one’s virginity on a fair summer day - but don’t ask me to do anything more than necessary for a swindler.”</i>", parse);
+			Text.NL();
+			Text.Add("He sighs, taking his pipe out of his beak and staring into the bowl as if it holds the mysteries of the universe. <i>“Nevertheless, Zenith’s going to fight. He’s like that; good boys fight for what they believe is right. When people fight, someone always ends up getting killed. The war produced enough cadavers for me to practice on back in the day, and I’d rather not have more turning up. It’s one of the reasons I’m here.”</i>", parse);
+			Text.Flush();
+			
+			world.TimeStep({minute: 30});
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("Aquilius shrugs. He doesn’t say anything, but it’s clear he’s glad to be free of the weighty subject. <i>“Anything else you’d like to discuss, [playername]?”</i>", parse);
+		Text.Flush();
+		
+		Scenes.Aquilius.TalkPrompt();
+	});
+}
+
+Scenes.Aquilius.Smoke = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("You wonder aloud if Aquilius wouldn’t like some company while he puffs away.", parse);
+	Text.NL();
+	Text.Add("<i>“Sure. A smoke’s always great, but like food, it’s better when shared.”</i>", parse);
+	Text.NL();
+	Text.Add("Removing his pipe from his beak and knocking the ashes out of the bowl, Aquilius pulls out a small pouch from his vest and draws out two pinches of dried herbs. One he refills his pipe with, the other he rolls up in a small slip of paper to make a cigarette, which he offers to you. Taking it from him, you peer at its stuffing, but don’t recognize any of the torn leaves, petals and grasses in the mixture. It’s not tobacco of any sort, that much you’re certain.", parse);
+	Text.NL();
+	Text.Add("<i>“Need a light?”</i>", parse);
+	Text.NL();
+	if(Jobs.Mage.Unlocked(player)) {
+		Text.Add("Nah, you’ve got it covered. You light up the end of your cigarette with a small flame on the tip of your finger; Aquilius does the same for his pipe, and the two of you settle down in your respective chairs to savor the smoke.", parse);
+	}
+	else {
+		Text.Add("Sure. You watch as Aquilius concentrates a moment, then a tiny flame bursts into life on the tip of his index finger, which he holds out to you. You light your cigarette, he lights his pipe, and the two of you settle down in your respective chairs to savor the unique aroma that begins to waft through the tent.", parse);
+		Text.NL();
+		Text.Add("<i>“Not much of a magician myself,”</i> Aquilius explains, <i>“But you’ve got to admit that it’s bloody useful when you haven’t got any matches on hand.”</i>", parse);
+	}
+	Text.NL();
+	Text.Add("Whatever this blend is, it’s a damn sight better than anything one could buy off the streets of Rigard. Light and strangely sweet on the tongue, the warm scent that fills your nose and mouth vaguely reminds you of incense, a stream of cool heat pouring into your lungs and seeping into the rest of your body. It’s not long before the smoke’s effects kick in - you feel calmer, steadier, better able to concentrate with all the nagging doubts lingering on the edges of your mind swept away. Aquilius himself is perfectly relaxed, leaning back in his chair as he puffs away with an air of satisfaction.", parse);
+	Text.NL();
+	Text.Add("Little wonder, then, that he takes this for his nerves. A surgeon needs a steady hand.", parse);
+	Text.NL();
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("Curiosity piqued, you ask him what actually goes into the stuff you’re smoking, knowing full well that he won’t give you a straight answer. As expected, Aquilius scratches his beak and looks thoughtful for a moment.", parse);
+		Text.NL();
+		Text.Add("<i>“Oh, a bit of this and that,”</i> he replies in a lazy drawl. <i>“Pinch of mint for flavor… most of the stuff’s from the forest… some of those yellow-spotted mushrooms, cut and dried, though the spores are the most potent part. I suppose I should pass on the recipe before I croak, although I haven’t found someone worth giving it to yet. Worst comes to worst, I’ll write it down somewhere and let whichever lucky bastard finds it reap the spoils.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Don’t worry, it’s not physically addictive, though you could end up like me.”</i> He lets out a dry chuckle. <i>“Although that’s not the worst that could happen, is it?”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("The smoke is relaxing… perhaps a little too much so, and the incense-like scent - is that jasmine? Sandalwood? Citrus? - has an almost mystical quality to it. You’re aware that you’re in the infirmary tent, and yet the smell - it belongs in a temple, perhaps a museum, or somesuch…", parse);
+		Text.NL();
+		Text.Add("The world swirls and grows blurry before your eyes, spots of colour blossoming in your vision…", parse);
+		Text.NL();
+		Text.Add("You come to some time later, Aquilius gently shaking you on the shoulder. <i>“I know that a smoke can be relaxing, but don’t get <b>too</b> relaxed. The cots here are for those who need them.”</i>", parse);
+		Text.NL();
+		Text.Add("You’re not quite sure what happened in between then and now; bits of dreams and visions cling to the edges of your mind like words on a tongue, their presence undeniable but refusing to reveal themselves in full. Still, whatever you saw while you were out, it certainly wasn’t anything nasty, was it?", parse);
+		Text.NL();
+		Text.Add("<i>“Don’t let it get to your head too much. Back in the day, there were those who were a bit touched in the head. Let them get at a few mushrooms or smoke a handful of leaves, and suddenly they’re seeing demons and spirits coming out of the walls where other folk just get a little buzz.”</i>", parse);
+		Text.NL();
+		Text.Add("You promise to be careful, and settle back to enjoy the rest of the cigarette.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("The two of you are content to just lean back and savor the smoke, letting your worldly cares slip away for a little bit. Oh, you’ll have to deal with them once your cigarette burns down, but a moment’s respite can’t hurt, can it? Aquilius has carefully poised himself in his seat, eyes half-lidded, head nodding a little as he partakes of the nightly ritual that gives order to his life.", parse);
+		Text.NL();
+		Text.Add("Silence save for the snores and murmurs of the injured out front, watching wisps of smoke curl upward and eventually vanish - ah, this is the life.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("Taking a long drag from your cigarette, you relish in the cool taste and wonder aloud how Aquilius managed to figure out this particular blend.", parse);
+		Text.NL();
+		Text.Add("<i>“You like it?”</i>", parse);
+		Text.NL();
+		Text.Add("Why, indeed, you do.", parse);
+		Text.NL();
+		Text.Add("<i>“Don’t buy crap from folks off the streets of Rigard - they cut their tobacco with all sorts of fillers to stretch it as thin as possible, and those do a number on your lungs. The only way to be sure you’re getting a good smoke is to do it all by yourself - from the growing and picking to the drying and mixing and finally to the point where you light up. It takes work, but by Aria’s tits, it’s worth it. It is so worth it.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“As to how I figured it out… I had a lot of time in the war, and plenty of others had their own particular mixes they liked to roll. Being a lad like any other, I decided to experiment; those were hard days, and we draftees would smoke anything to pass the time. It’s been a while since then, but I’m still working on improving the blend.”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.Get();
+	
+	Text.NL();
+	Text.Add("You could sit here forever, just staring off into space, but all good things must come to an end. Slow-burning as it is, your cigarette is eventually reduced to a stub, and Aquilius produces a small metal tray for you to put it out on.", parse);
+	Text.NL();
+	Text.Add("<i>“Enjoyed it?”</i>", parse);
+	Text.NL();
+	Text.Add("You did, thanks.", parse);
+	Text.NL();
+	Text.Add("Aquilius nods, then turns away from you. <i>“Good night, then. I shan’t keep you up - getting enough sleep is important for good health.”</i>", parse);
+	Text.NL();
+	Text.Add("And him?", parse);
+	Text.NL();
+	Text.Add("<i>“Oh, I’ll be turning in soon. Although knowing my luck, chances are that some fool will lop off his or her own arm in the middle of the night and come crying to me to have it sewn back on. Such are the vagaries of life, [playername] - I’ve grown used to them.”</i>", parse);
+	Text.Flush();
+	
+	if(world.time.hour < 22)
+		world.StepToHour(22);
+	else
+		world.TimeStep({hour: 2});
+	
+	aquilius.relation.IncreaseStat(100, 2);
+	Gui.NextPrompt();
 }
 
 Scenes.Aquilius.Appearance = function() {
