@@ -279,7 +279,11 @@ Scenes.Aquilius.Prompt = function() {
 	
 	//[name]
 	var options = new Array();
-	/* TODO
+	options.push({ nameStr : "Appearance",
+		tooltip : "Give the good surgeon a look-over.",
+		func : Scenes.Aquilius.Appearance, enabled : true
+	});
+	/*
 	options.push({ nameStr : "name",
 		tooltip : "",
 		func : function() {
@@ -293,4 +297,28 @@ Scenes.Aquilius.Prompt = function() {
 	*/
 	Gui.SetButtonsFromList(options, true);
 }
+
+Scenes.Aquilius.Appearance = function() {
+	var parse = {};
+	
+	Text.Clear();
+	Text.Add("You give the good surgeon a look-over.", parse);
+	Text.NL();
+	Text.Add("Aquilius is the kind of person who looks comfortable right where he is, in this tent that smells of antiseptic. At just under six feet tall, his shoulders slightly hunched, the eagle-morph is neither here nor there when it comes to build. He’s clearly capable of physical exertion when need be, yet disdainful of it for its own sake.", parse);
+	Text.NL();
+	Text.Add("Dressed in a thick vest of coarse cloth over a plain cotton shirt, he’s a man of simple tastes. Numerous other such vests lie stacked in a shelf near the back of the tent, which suggests that he doesn’t so much wash these as dispose of them when they get too stained. Even with the outlaws being squeezed for supplies most of the time, it stands to reason - he spends much of his time about the sick, after all. Tough cloth pants and leather boots complete the rest of his ensemble, well-worn and showing their age.", parse);
+	Text.NL();
+	Text.Add("Your eyes flicker over his, and he meets your gaze evenly, black pupils set in deep amber sclera. It’s a hard look, and he appears to be staring <i>through</i> you, giving you the impression that he’s not all quite there. With a shake of his head, he breaks the gaze and turns back to his duties. ", parse);
+	if(world.time.hour < 17)
+		Text.Add("The ornate pipe so beloved to him is in its case and wedged in the breast pocket of his shirt, a bulge on his vest betraying its presence. Within easy reach should he need a quick smoke break, a faint scent of aromatic smoke lingers about it, discernable even through the case.", parse);
+	else
+		Text.Add("Aquilius’ precious pipe is firmly clenched in his beak, a thin wisp of aromatic smoke rising from the bowl as he takes drags from it, the eagle-morph sighing in satisfaction each time he inhales.", parse);
+	Text.NL();
+	Text.Add("The rest of him, though, is in what might be charitably called “the prime of his life”. Aquilius’ feathers, while mostly a mixture of brown, gold and black, have begun to grey in patches; it’s most obvious in the wings that he usually keeps folded neatly on his back. Contrasting the usual hustle and bustle of the camp, the good surgeon moves with a relaxed demeanor; his hands - which while covered with feathers, are still humanlike - are steady, his motions deliberate and unhurried as he goes about his tasks with practiced ease. What vitality has left the surgeon as the years wear him down has been replaced with experience, and he’s clearly managed to leverage it to its full extent.", parse);
+	Text.NL();
+	Text.Add("All in all, Aquilius is the very picture of a genial, middle-aged man who’s decided to put down roots, even if they’re not exactly in firm ground.", parse);
+	Text.Flush();
+}
+
+
 
