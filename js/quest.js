@@ -675,6 +675,59 @@ Quests.quests.push(new Quest({
 	]
 }));
 
+
+Quests.quests.push(new Quest({
+	name: function() {
+		return "Helping Aquilius";
+	},
+	desc: function() {
+		return "Help Aquilius gather herbs from the forest.";
+	},
+	active: function() {
+		var status = Quests.Type.NotStarted;
+		if(aquilius.OnHerbsQuest())
+			status |= Quests.Type.Visible;
+		return status;
+	},
+	list: [
+		new QuestItem({
+			desc: function() {
+				return "Gather herbs from the forest for Aquilius. You should be able to find them pretty close to the Outlaws’ camp.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(aquilius.OnHerbsQuestFinished())
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				var item = aquilius.herbIngredient ? aquilius.herbIngredient.sDesc() : "<b>ERROR</b>";
+				return "In addition, Aquilius asked for some " + item + ". While not strictly necessary, you’re sure the old surgeon would appreciate you getting that as well.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(party.Inv().QueryNum(aquilius.herbIngredient))
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Return the herbs to Aquilius in the infirmary.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				return status;
+			}
+		})
+	]
+}));
+
 //TODO Krawitz(?), Burrows, Gwendy
 
 /*

@@ -14,7 +14,7 @@ function Aquilius(storage) {
 	this.SetLevelBonus();
 	this.RestFull();
 	
-	this.flags["Met"] = 0;
+	this.flags["Met"]   = Aquilius.Met.NotMet;
 	this.flags["Herbs"] = Aquilius.Herbs.No;
 	this.herbIngredient = null;
 	
@@ -25,12 +25,26 @@ function Aquilius(storage) {
 Aquilius.prototype = new Entity();
 Aquilius.prototype.constructor = Aquilius;
 
+Aquilius.Met = {
+	NotMet : 0,
+	Met    : 1,
+	Helped : 2
+};
 Aquilius.Herbs = {
 	No       : 0,
 	Known    : 1,
 	OnQuest  : 2,
 	Finished : 3
 };
+Aquilius.ExtraHerbs = function() {
+	return [
+		Items.Lettuce,
+		Items.SnakeOil,
+		Items.FreshGrass,
+		Items.Foxglove,
+		Items.FruitSeed
+	];
+}
 
 Aquilius.prototype.FromStorage = function(storage) {
 	if(storage.herb)
@@ -77,7 +91,18 @@ Aquilius.prototype.OnHerbsQuestFinished = function() {
 	return this.flags["Herbs"] >= Aquilius.Herbs.Finished;
 }
 Aquilius.prototype.HelpCooldown = function() {
-	return new Time(0,0,0,36,0); //TODO
+	return new Time(0,0,0,12,0);
+}
+Aquilius.prototype.QualifiesForAnyJob = function(entity) {
+	return aquilius.QualifiesForHerbs(entity); //TODO
+}
+Aquilius.prototype.QualifiesForHerbs = function(entity) {
+	return Jobs.Ranger.Unlocked(entity);
+}
+Aquilius.prototype.SetHerb = function(override) {
+	var item = override || _.sample(Aquilius.ExtraHerbs());
+	this.herbIngredient = item;
+	return item;
 }
 
 Scenes.Aquilius.FirstMeeting = function() {
@@ -158,6 +183,7 @@ Scenes.Aquilius.Approach = function() {
 		aquilius.helpTimer = aquilius.HelpCooldown();
 		
 		var item = aquilius.herbIngredient;
+		aquilius.herbIngredient = null;
 		
 		if(item && party.Inv().QueryNum(item)) {
 			Text.NL();
@@ -283,6 +309,11 @@ Scenes.Aquilius.Prompt = function() {
 		tooltip : "Give the good surgeon a look-over.",
 		func : Scenes.Aquilius.Appearance, enabled : true
 	});
+	//Player may only help out once a day. Ish.
+	options.push({ nameStr : "Help out",
+		tooltip : "Help out at the infirmary.",
+		func : Scenes.Aquilius.HelpOut, enabled : !aquilius.OnHerbsQuest()
+	});
 	/*
 	options.push({ nameStr : "name",
 		tooltip : "",
@@ -320,5 +351,127 @@ Scenes.Aquilius.Appearance = function() {
 	Text.Flush();
 }
 
+Scenes.Aquilius.HelpOut = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("You ask Aquilius if there’s anything you can do to help out around the infirmary.", parse);
+	Text.NL();
+	if(aquilius.helpTimer.Expired()) {
+		if(aquilius.flags["Met"] < Aquilius.Met.Helped)
+			Text.Add("Aquilius eyes you uncertainly. <i>“I’m not exactly sure, [playername]. After all, I’m ultimately responsible for those under my care, and you’re a bit of an unknown - but on the other hand, it’d be stupid of me to turn away good help. Tell you what - why don’t I get you started on the simple tasks first, then move onto the others when you prove yourself capable of not fouling up?”</i>", parse);
+		else
+			Text.Add("<i>“There’s always work to be done here; I’ll gladly accept any help you’re willing to offer. What did you have in mind, [playername]?”</i>", parse);
+		Text.Flush();
+		Scenes.Aquilius.HelpOutPrompt();
+	}
+	else if(aquilius.QualifiesForAnyJob(player)) {
+		Text.Add("<i>“Your thoughtfulness and enthusiasm are appreciated, but I’d rather not get into the habit of relying on others to do my work for me,”</i> Aquilius tells you. <i>“Come back later if you’d like to continue helping out.”</i>", parse);
+		Text.Flush();
+	}
+	else {
+		Text.Add("<i>“No, no, no. There’re already enough hands helping out with the menial tasks; too many people trying to do the same thing only ends up in everyone getting in each others’ way. I’m sorry, but unless you have a skilled trade to ply, we’re quite well-staffed here. The thought is appreciated - I’m personally overworked - but more hands to a job doesn’t necessarily mean less work.”</i>", parse);
+		Text.Flush();
+	}
+}
 
+//TODO
+Scenes.Aquilius.HelpOutPrompt = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	//[name]
+	var options = new Array();
+	options.push({ nameStr : "Gather herbs",
+		tooltip : "Offer to go herb picking.",
+		func : function() {
+			Text.Clear();
+			if(aquilius.flags["Herbs"] < Aquilius.Herbs.Known) {
+				Text.Add("<i>“This is the first time you’ve offered to go flower picking for me. Do you know what I’m looking for?”</i>", parse);
+				Text.NL();
+				Text.Add("You admit that no, you don’t.", parse);
+				Text.NL();
+				Text.Add("<i>“Canis root, willow bark - I’d rather not strip the trees in camp - feverfew, a few others… if you give me a moment, I’ll have a list written up for you in a flash.”</i>", parse);
+				Text.NL();
+				Text.Add("Aquilius is as good as his word. He retreats to the back of the infirmary tent, and it’s not long before you’re holding a small scrap of paper with a hastily scrawled list of ingredients on it. Seems like the stereotype about doctors and their handwriting also applies to the good surgeon.", parse);
+				Text.NL();
+				Text.Add("<i>“One important thing you must note, [playername]. Please refrain from being overzealous in your gathering. While the forest is very kind in sharing its bounty with us, I’d rather not get too ahead and pick the usual herb patches clean. Space for cultivation is very limited -”</i> he points at the few potted plants and mushroom log in the back - <i>“and a lot of my requirements are met from gathering.”</i>", parse);
+				Text.NL();
+				Text.Add("You reassure Aquilius that you’ll be careful, and prepare to head on out.", parse);
+			}
+			else {
+				Text.Add("<i>“Well, I wouldn’t mind the help. I can’t keep asking Maria to keep an eye out for herbs when she’s supposed to be keeping an eye out for intruders instead; having someone dedicated to the task will take a load off everyone. Since you know what I’m generally after and what precautions to take, I won’t insult your intelligence and will just leave you to it, then.”</i>", parse);
+				Text.NL();
+				Text.Add("You give Aquilius a nod and prepare to head on out.", parse);
+			}
+			Text.NL();
+			
+			parse["ingredient"] = aquilius.SetHerb().sDesc();
+			
+			Text.Add("<i>“There is one thing. Today, I’m looking out for some [ingredient] in particular. If you could get your hands on some before you come back, I’d be glad to give you a little something in return for the extra effort. Happy hunting.”</i>", parse);
+			Text.Flush();
+			
+			aquilius.flags["Herbs"] = Aquilius.Herbs.OnQuest;
+			
+			world.TimeStep({minute: 10});
+			
+			Gui.NextPrompt();
+		}, enabled : aquilius.QualifiesForHerbs(player)
+	});
+	/* TODO
+	options.push({ nameStr : "name",
+		tooltip : "",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Add("", parse);
+			Text.Flush();
+		}, enabled : true
+	});
+	 */
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("On second thought, you’ll have to abstain for now.", parse);
+		Text.NL();
+		Text.Add("<i>“Hrmp, getting my hopes up,”</i> Aquilius grunts surlily.", parse);
+		Text.Flush();
+		
+		Scenes.Aquilius.Prompt();
+	});
+}
 
+// [Herbs] - Go flower picking like Aquilius asked you to.
+Scenes.Aquilius.PickHerbs = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("You set off on your flower hunt, eyes peeled for anything that might interest Aquilius. Happily, your ranger’s training in the lay of the land and its environs serves you well, your sharp gaze roaming from stand to stand and patch to patch as you wander off the beaten trails of the forest in search of the herbs Aquilius needs. ", parse);
+	if(world.time.IsDay())
+		Text.Add("Shafts of sunlight pierce through the forest’s thick canopy, lighting your way as you pick your way over gnarled roots and thick undergrowth, wandering as deep as you dare without running the risk of getting lost.", parse);
+	else
+		Text.Add("Shaded during the day, the forest is pitch-black at night. There’s practically no natural light to be had, and even with your ranger’s training the fear of getting lost amidst the trees lurks in the back of your mind, ready to spring out at you at any moment.", parse);
+	Text.NL();
+	Text.Add("Unseen, things rustle about and above you; you do your best to ignore them and focus on the task at hand. By and large, the task proceeds at a smooth pace - while the forest does not freely give away its treasures, neither is it overly stingy to those who work hard.", parse);
+	if(party.Num() > 1) {
+		parse["comp"] = party.Num() == 2 ? party.Get(1).name :
+		                "your companions";
+		Text.Add(" The fact that you have [comp] around to help doesn’t hurt, either.", parse);
+	}
+	Text.NL();
+	Text.Add("Despite the forest being a dangerous place, you’re fortunate enough that nothing jumps you while you’re preoccupied with digging up roots and pulling mushrooms off tree roots. Still, the heat and humidity are beginning to get to you, and constantly wading through the thick, tangled undergrowth is taxing. Eventually, you decide that you’ve had enough, and call it a day.", parse);
+	Text.NL();
+	Text.Add("With all that nastiness behind you, you sort through today’s pickings - a medley of grasses, roots, bits of bark and the occasional odd mushroom. There’s about enough to fill a hand basket, which should be enough to appease Aquilius for a day’s worth of work; time to head back and see what he has for you.", parse);
+	Text.Flush();
+	
+	world.TimeStep({hour: 5});
+	
+	aquilius.flags["Herbs"] = Aquilius.Herbs.Finished;
+	
+	Gui.NextPrompt();
+}

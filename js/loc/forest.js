@@ -168,3 +168,11 @@ world.loc.Forest.Outskirts.links.push(new Link(
 		MoveToLocation(world.loc.Forest.Glade, {minute: 15});
 	}
 ));
+
+world.loc.Forest.Outskirts.events.push(new Link(
+	"Herbs", function() { return aquilius.OnHerbsQuest() && !aquilius.OnHerbsQuestFinished(); }, true,
+	null,
+	function() {
+		Scenes.Aquilius.PickHerbs();
+	}
+));
