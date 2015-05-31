@@ -1778,194 +1778,198 @@ Scenes.Krawitz.Bathhouse = function() {
 			}, enabled : true,
 			tooltip : "Leave the two alone for now."
 		});
-		options.push({ nameStr : "Wine",
-			func : function() {
-				Text.Clear();
-				Scenes.Krawitz.BathhouseWine();
-				Text.NL();
-				Text.Add("<i>“</i>Why… you are right!”</i></i> Krawitz’ wife, apparently named Marlene, acknowledges you, shooing you away impatiently, her hand never leaving her companions nethers. As you hastily retreat, Gina cries out in pleasure loudly enough to wake the entire neighborhood.", parse);
-				Text.NL();
-				Text.Add("What a family.", parse);
-				Text.Flush();
-				
-				player.AddLustFraction(0.2);
-				Gui.NextPrompt(function() {
-					MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
-					Scenes.Krawitz.AddSuspicion(1, true);
-				});
-			}, enabled : true,
-			tooltip : "Serve them wine."
-		});
-		options.push({ nameStr : "Spiked Wine",
-			func : function() {
-				Text.Clear();
-				Scenes.Krawitz.BathhouseWine();
-				Scenes.Krawitz.stat.BathhouseSpiked = true;
-				Text.NL();
-				Text.Add("<i>“</i>Hah… yes, how… rude of me,”</i></i> Krawitz’ wife, apparently named Marlene, throws a lustful gaze in your direction. It seems that, even diluted, the aphrodisiac is very potent. <i>“</i>Why don’t you come join us?”</i></i> She motions you over seductively, stifling Gina’s protests with a kiss full on the lips. Her hand returns to its previous task, rubbing the inebriated young woman between her legs.", parse);
-				Text.Flush();
-				
-				player.AddLustFraction(0.3);
-				
-				var aftermath = function() {
-					if(!Scenes.Krawitz.stat.ServantOrgySetup) {
-						Text.Add("About half of the neighbourhood ought to be alerted to the semi-incestous coitus happening in Krawitz’ front yard. Better leg it before you attract undue attention.", parse);
-						Text.Flush();
-						Gui.NextPrompt(function() {
-							MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 20});
-							Scenes.Krawitz.AddSuspicion(5, true);
-						});
-					}
-					else {
-						Text.Add("From the sound of it, it seems like the young noblewomen will get exactly what they crave, as you hear a group of carousing servants heading toward the bathhouse. It sure took them a while to find their way across the yard… though this wine is potent stuff, perhaps they had to make a few stops on the way.", parse);
-						Text.NL();
-						
-						Scenes.Krawitz.OrgyEntrypoint();
-					}
-				}
-				
-				//[Sex][Leave]
-				var options = new Array();
-				options.push({ nameStr : "Leave",
-					func : function() {
-						Text.Clear();
-						Text.Add("You respectfully decline her offer. For a brief moment, Marlene looks disappointed, but she’s soon forgotten you were even there, focusing all of her attention on her companion, lavishing her body with kisses as a lusty haze clouds her mind.", parse);
-						Text.NL();
-						Text.Add("The two women are panting heavily, their bodies grinding against each other, dripping water and sweat. Gina has been pushed onto her back in the shallow end of the pool, legs spread invitingly as she lets the older woman take control, sighing languidly as fingers spread her nether lips, probing her depths.", parse);
-						Text.NL();
-						Text.Add("Although you were about to leave, you give in to temptation and settle down to watch the show. The ladies don’t seem to mind either way - if they even notice. Wife and daughter are sinking deeper and deeper into the drug-induced fog of rampant lust, Marlene’s lips closing around one of Gina’s puffy nipples. The young woman’s mouth hangs open in rapture as her stepmother thrusts several digits into her sex, making her legs tremble with pleasure.", parse);
-						Text.NL();
-						Text.Add("The younger woman cries out in ecstasy as she cums, her legs clenching tightly around Marlene’s arm. Impatient to get her own pleasure, ‘Lene climbs on top of Gina, grinding her labia on the limp girl’s face. With no hesitation, the raven-haired girl stick out her tongue, burying it in her stepmother’s folds.", parse);
-						Text.NL();
-						Text.Add("<i>“</i>Haaah… G-Ginny...”</i></i> A throaty moan seems to be all that Lady Krawitz can muster, her muddled mind no longer capable of forming rational thought. It isn’t long before the two of them collapse in each others arms, exhausted for the moment, but raring to have another go.", parse);
-						Text.NL();
-						player.AddLustFraction(0.5);
-						
-						aftermath();
-					}, enabled : true,
-					tooltip : "Decline her offer - you have to keep your cool if you are going to stay out of trouble tonight."
-				});
-				options.push({ nameStr : "Sex",
-					func : function() {
-						Text.Clear();
-						Scenes.Krawitz.stat.SexedGirls = true;
-						Text.Add("Marlene’s clouded gaze is firmly fixed on you as you saunter over to the two inebriated women, hastily removing your gear. She pulls you down into a lusty kiss, and, as your lips lock, you taste a blend of her, Gina, and the alluring taste of the potent wine. This last hits you like a wall of hot air, making your heart skip a beat as it takes effect.", parse);
-						Text.NL();
-						Text.Add("At this point, neither of the Krawitz ladies seem to have a care in the world for who you are, whether you are a servant, a thief[human] or a noble. They both moan eagerly as you let your [hand]s trace their curves, grinding their bodies against each other urgently, pleading for you to join with them quickly. Not one to keep a lady waiting, you present them with your [genDesc], urging them to get to work.", parse);
-						Text.NL();
-						if(player.FirstCock()) {
-							Text.Add("Marlene coos in delight as she comes face to face with your [multiCockDesc], eyes full of need as she basks in the heat emanating from your erect meatstick[s]. Her hands trembling slightly, she leans forward to cradle[oneof] [itThem], eyes fixed on the bead of pre forming on the [cockTip] as if hypnotized.", parse);
-							Text.NL();
-							parse["balls"] = player.HasBalls() ? Text.Parse(" and joyfully fondling your [ballsDesc]", parse) : "";
-							Text.Add("You sigh languidly as the beautiful woman wraps her mouth around your throbbing [cockDesc], her hands busy working the shaft[balls]. She looks like the happiest little slut in the world, eagerly trying to milk you of your seed, craving to have it pour down her throat. ", parse);
-							if(player.NumCocks() > 1)
-								Text.Add("Gina looks desperate to join in, and happily for her, you are well-equipped to handle the needy duo. The young woman eagerly grasps another of your [multiCockDesc], lathering the length in her saliva before greedily closing her lips around its [cockTip2].", parse);
-							else
-								Text.Add("Gina whines piteously at being left out, and Marlene grudgingly concedes, allowing her stepdaughter to offer worship to your [cockDesc]. The two women take turns sucking you off, each throwing jealous looks at the other while waiting for her turn.", parse);
-							Text.NL();
-							
-							player.Fuck(player.FirstCock(), 2);
-							Sex.Blowjob(null, player);
+		if(Scenes.Krawitz.stat.HasWine) {
+			options.push({ nameStr : "Wine",
+				func : function() {
+					Text.Clear();
+					Scenes.Krawitz.BathhouseWine();
+					Text.NL();
+					Text.Add("<i>“</i>Why… you are right!”</i></i> Krawitz’ wife, apparently named Marlene, acknowledges you, shooing you away impatiently, her hand never leaving her companions nethers. As you hastily retreat, Gina cries out in pleasure loudly enough to wake the entire neighborhood.", parse);
+					Text.NL();
+					Text.Add("What a family.", parse);
+					Text.Flush();
+					
+					player.AddLustFraction(0.2);
+					Gui.NextPrompt(function() {
+						MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 10});
+						Scenes.Krawitz.AddSuspicion(1, true);
+					});
+				}, enabled : true,
+				tooltip : "Serve them wine."
+			});
+		}
+		if(Scenes.Krawitz.stat.HasWine && Scenes.Krawitz.stat.LustPotion) {
+			options.push({ nameStr : "Spiked Wine",
+				func : function() {
+					Text.Clear();
+					Scenes.Krawitz.BathhouseWine();
+					Scenes.Krawitz.stat.BathhouseSpiked = true;
+					Text.NL();
+					Text.Add("<i>“</i>Hah… yes, how… rude of me,”</i></i> Krawitz’ wife, apparently named Marlene, throws a lustful gaze in your direction. It seems that, even diluted, the aphrodisiac is very potent. <i>“</i>Why don’t you come join us?”</i></i> She motions you over seductively, stifling Gina’s protests with a kiss full on the lips. Her hand returns to its previous task, rubbing the inebriated young woman between her legs.", parse);
+					Text.Flush();
+					
+					player.AddLustFraction(0.3);
+					
+					var aftermath = function() {
+						if(!Scenes.Krawitz.stat.ServantOrgySetup) {
+							Text.Add("About half of the neighbourhood ought to be alerted to the semi-incestous coitus happening in Krawitz’ front yard. Better leg it before you attract undue attention.", parse);
+							Text.Flush();
+							Gui.NextPrompt(function() {
+								MoveToLocation(world.loc.Rigard.Krawitz.grounds, {minute: 20});
+								Scenes.Krawitz.AddSuspicion(5, true);
+							});
 						}
-						if(player.FirstVag()) {
-							Text.Add("Lady Krawitz gives your [vagDesc] a long lick with her dainty tongue, sighing blissfully as she tastes you. She places her hands on your hips, holding you in place as if she’s afraid you might suddenly run away, unwilling to let as much as a drop of your juices escape her predatory lapping.", parse);
-							Text.NL();
-							if(player.FirstCock()) {
-								Text.Add("With Marlene’s attention focused elsewhere, Gina is quick to monopolize your [multiCockDesc], using both her mouth and soft breasts to pleasure you.", parse);
-							}
-							else {
-								parse["skin"] = player.SkinType() != Race.Human ? Text.Parse(", marvelling at the unfamiliar feel of your [skinDesc]", parse) : "";
-								Text.Add("Gina crawls up behind you, pressing her nude, dripping body against your bare back. Her stiff nipples grind against you insistently as her hands caress and explore your body[skin]. Slowly, she works her way down your body, falling to her knees as she kneads your [buttDesc]. You gasp in surprise as you feel her fingers prying your cheeks apart, her tongue slipping insider your [anusDesc], probing the sensitive passage.", parse);
-							}
+						else {
+							Text.Add("From the sound of it, it seems like the young noblewomen will get exactly what they crave, as you hear a group of carousing servants heading toward the bathhouse. It sure took them a while to find their way across the yard… though this wine is potent stuff, perhaps they had to make a few stops on the way.", parse);
 							Text.NL();
 							
-							player.Fuck(player.FirstCock(), 2);
-							Sex.Cunnilingus(null, player);
+							Scenes.Krawitz.OrgyEntrypoint();
 						}
-						Text.Add("You sigh contentedly as both of the Krawitz ladies work your nethers, hands and tongues exploring every nook and cranny of your aroused body. You lean down and pat their heads, commending them for being such good sluts, telling them how pleased Lord Krawitz would be if he saw them now.", parse);
-						if(Scenes.Krawitz.stat.TFdKrawitz)
-							Text.Add(" Idly, you wonder what the Lord is up to, and if he’s enjoying his dinner.", parse);
-						Text.Flush();
-							
-						Gui.NextPrompt(function() {
-							var playerCock = player.FirstCock() || (player.strapOn ? player.strapOn.cock : Items.StrapOn.LargeStrapon.cock);
+					}
+					
+					//[Sex][Leave]
+					var options = new Array();
+					options.push({ nameStr : "Leave",
+						func : function() {
 							Text.Clear();
-							
-							player.Fuck(playerCock, 10);
-							Sex.Vaginal(player, null);
-							
-							Text.Add("Well, time to move on to the main course.", parse);
-							if(player.FirstCock()) {
-								Text.Add("The ladies have been kind enough to prepare your [multiCockDesc] for penetration, lathering your length[s] generously with their hungry tongues.", parse);
-							}
-							else {
-								parse["cockDesc"] = function() { return playerCock.Short(); };
-								parse["multiCockDesc"] = parse["cockDesc"];
-								if(player.strapOn) {
-									Text.Add("You’ve come well prepared, and the ladies give coos of delight as you equip your [cockDesc], eyeing your artificial member with desire burning in their eyes.", parse);
-								}
-								else {
-									Text.Add("Wordlessly, Gina leaves the pool, staggering slightly as she moves over to a nearby chest, her hands shaking as she opens it. She fetches something from its depths, swaying unsteadily as she returns to your side. The young noblewoman’s eyes are clouded with lust as she presents you with her treasure; a fairly large strapon dildo.", parse);
-									Text.NL();
-									Text.Add("You grin and take her offering, praising her for being such a good, thoughtful girl as you secure the fastenings around your [hipsDesc]. You suspect this won’t be the first time this particular toy has been put to use.", parse);
-								}
-							}
-							if(playerCock.Size() > 150)
-								Text.Add("You are a bit worried that you’ll hurt them with the sheer size of your equipment, but the horny women don’t seem to have a care in the world.", parse);
+							Text.Add("You respectfully decline her offer. For a brief moment, Marlene looks disappointed, but she’s soon forgotten you were even there, focusing all of her attention on her companion, lavishing her body with kisses as a lusty haze clouds her mind.", parse);
 							Text.NL();
-							parse["towering"] = (playerCock.Size() > 150) ? " towering" : "";
-							Text.Add("Gina and Marlene pull you down on your back, rubbing their wet crotches against your stiff [multiCockDesc], each eager to be the first one taken. The younger of the two eventually wins out, her tongue lolling as she eases herself down on[oneof] your[towering] pillar[s].", parse);
+							Text.Add("The two women are panting heavily, their bodies grinding against each other, dripping water and sweat. Gina has been pushed onto her back in the shallow end of the pool, legs spread invitingly as she lets the older woman take control, sighing languidly as fingers spread her nether lips, probing her depths.", parse);
 							Text.NL();
-							if(player.NumCocks() > 1) {
-								player.Fuck(player.AllCocks()[1], 10);
-								Sex.Vaginal(player, null);
-							
-								Text.Add("Krawitz’ wife doesn’t tarry in mounting[oneof2] your remaining cock[s2], hugging her stepdaughter tightly as she impales herself on your [cockDesc2]. The two women moan in ecstasy as they bounce in time on top of you, their breasts mashing against each other as stepmother and stepdaughter lock lips.", parse);
-								Text.NL();
-								Text.Add("Before long, both of the cocks drilling into the noblewomen are glistening with their sweet cuntjuices. Marlene and Gina are seemingly locked in a competition to see who can pleasure you most, their round buttocks jiggling delightfully as they bounce up and down on your stiff rods.", parse);
-							}
-							else {
-								Text.Add("Krawitz’ wife throws her a jealous glare, letting out a moaning complaint at her stepdaughter’s greed. The raven-haired girl is oblivious to them, however, too busy enjoying your [cockDesc] to take notice. Sweat drips from her trembling body as she rides your cock, pushing it into her depths.", parse);
-								Text.NL();
-								if(player.HasBalls()) {
-									Text.Add("Marlene doesn’t let her defeat last long though, as she bows down below the root of your [cockDesc], worshipping your [ballsDesc] with her tongue while Gina bounces up and down on your slick length.", parse);
-								}
-								else {
-									Text.Add("Marlene has to be sated waiting for her turn, glowering sullenly while her younger companion enjoys herself. With a spiteful grin on her lust-filled face, she slips in behind Gina and roughly pinches her nipples, drawing ragged moans from the girl.", parse);
-								}
-							}
+							Text.Add("Although you were about to leave, you give in to temptation and settle down to watch the show. The ladies don’t seem to mind either way - if they even notice. Wife and daughter are sinking deeper and deeper into the drug-induced fog of rampant lust, Marlene’s lips closing around one of Gina’s puffy nipples. The young woman’s mouth hangs open in rapture as her stepmother thrusts several digits into her sex, making her legs tremble with pleasure.", parse);
 							Text.NL();
-							Text.Add("The air is thick with the smell of your copulation. Even if you haven’t ingested any of the aphrodisiac yourself, you can still feel its effects. It is almost possible to taste it in the air, as if the young noblewomen are secreting it from their pores, transformed into living, breathing incarnations of lust. You can no longer reach through to them, so far gone are the ladies, only capable of understanding simple commands from you. Left to their own devices, they merely rut against you mindlessly, desperate to relieve their insatiable desire.", parse);
+							Text.Add("The younger woman cries out in ecstasy as she cums, her legs clenching tightly around Marlene’s arm. Impatient to get her own pleasure, ‘Lene climbs on top of Gina, grinding her labia on the limp girl’s face. With no hesitation, the raven-haired girl stick out her tongue, burying it in her stepmother’s folds.", parse);
 							Text.NL();
-							if(player.FirstCock()) {
-								//TODO CUM
-								Text.Add("You grunt as the two women milk you of your seed, not letting your [multiCockDesc] rest for more than a second before bearing down on you again. ", parse);
-								if(player.CumOutput() > 6)
-									Text.Add("If the ladies are surprised at your unnatural output, they don’t show it - if anything, they seem delighted, moaning excitedly as you pump your plentiful seed into their willing cunts. Excess semen drools from their overfilled orifices, dripping into the pool.", parse);
-								else if(player.CumOutput() > 6)
-									Text.Add("The Krawitz ladies moan as your throbbing member[s] unload[notS], pouring [itsTheir] contents into their eager cock-sheath[s].", parse);
-								else
-									Text.Add("Perhaps they simply didn’t notice it, with you meager cum output, or perhaps they are eager to drain all that they can out of you.", parse);
-							}
-							else {
-								Text.Add("Despite them doing all the work, you feel yourself caught up in their almost continuous body-wracking orgasms. Due to the artificial nature of your [multiCockDesc], you won’t tire from cumming, but you are still having to mount an effort to keep up with the ladies’ boundless energy. Finally, it becomes to much for you, and your body shudders in throes of bliss.", parse);
-							}
+							Text.Add("<i>“</i>Haaah… G-Ginny...”</i></i> A throaty moan seems to be all that Lady Krawitz can muster, her muddled mind no longer capable of forming rational thought. It isn’t long before the two of them collapse in each others arms, exhausted for the moment, but raring to have another go.", parse);
 							Text.NL();
-							Text.Add("Eventually, you manage to disentangle yourself from the two horny young noblewomen, putting some distance between you. They are still breathing heavily, and they look a bit petulant as you retreat from them, finally coming to your senses. You were very close to forgetting your actual purpose here, but, if nothing else, you’ll definitely leave this place with some nice memories.", parse);
-							Text.NL();
-							Text.Add("Gina and Marlene are still under the spell of the drugged wine, though. They seem to have already forgotten about you, eyes and lips locked as they grind against each other.", parse);
-							Text.NL();
-							player.AddLustFraction(-1);
+							player.AddLustFraction(0.5);
 							
 							aftermath();
-						});
-					}, enabled : true,
-					tooltip : "Don’t mind if I do!"
-				});
-				Gui.SetButtonsFromList(options);
-			}, enabled : true,
-			tooltip : "Serve them the wine, but add some of the aphrodisiac you found."
-		});
+						}, enabled : true,
+						tooltip : "Decline her offer - you have to keep your cool if you are going to stay out of trouble tonight."
+					});
+					options.push({ nameStr : "Sex",
+						func : function() {
+							Text.Clear();
+							Scenes.Krawitz.stat.SexedGirls = true;
+							Text.Add("Marlene’s clouded gaze is firmly fixed on you as you saunter over to the two inebriated women, hastily removing your gear. She pulls you down into a lusty kiss, and, as your lips lock, you taste a blend of her, Gina, and the alluring taste of the potent wine. This last hits you like a wall of hot air, making your heart skip a beat as it takes effect.", parse);
+							Text.NL();
+							Text.Add("At this point, neither of the Krawitz ladies seem to have a care in the world for who you are, whether you are a servant, a thief[human] or a noble. They both moan eagerly as you let your [hand]s trace their curves, grinding their bodies against each other urgently, pleading for you to join with them quickly. Not one to keep a lady waiting, you present them with your [genDesc], urging them to get to work.", parse);
+							Text.NL();
+							if(player.FirstCock()) {
+								Text.Add("Marlene coos in delight as she comes face to face with your [multiCockDesc], eyes full of need as she basks in the heat emanating from your erect meatstick[s]. Her hands trembling slightly, she leans forward to cradle[oneof] [itThem], eyes fixed on the bead of pre forming on the [cockTip] as if hypnotized.", parse);
+								Text.NL();
+								parse["balls"] = player.HasBalls() ? Text.Parse(" and joyfully fondling your [ballsDesc]", parse) : "";
+								Text.Add("You sigh languidly as the beautiful woman wraps her mouth around your throbbing [cockDesc], her hands busy working the shaft[balls]. She looks like the happiest little slut in the world, eagerly trying to milk you of your seed, craving to have it pour down her throat. ", parse);
+								if(player.NumCocks() > 1)
+									Text.Add("Gina looks desperate to join in, and happily for her, you are well-equipped to handle the needy duo. The young woman eagerly grasps another of your [multiCockDesc], lathering the length in her saliva before greedily closing her lips around its [cockTip2].", parse);
+								else
+									Text.Add("Gina whines piteously at being left out, and Marlene grudgingly concedes, allowing her stepdaughter to offer worship to your [cockDesc]. The two women take turns sucking you off, each throwing jealous looks at the other while waiting for her turn.", parse);
+								Text.NL();
+								
+								player.Fuck(player.FirstCock(), 2);
+								Sex.Blowjob(null, player);
+							}
+							if(player.FirstVag()) {
+								Text.Add("Lady Krawitz gives your [vagDesc] a long lick with her dainty tongue, sighing blissfully as she tastes you. She places her hands on your hips, holding you in place as if she’s afraid you might suddenly run away, unwilling to let as much as a drop of your juices escape her predatory lapping.", parse);
+								Text.NL();
+								if(player.FirstCock()) {
+									Text.Add("With Marlene’s attention focused elsewhere, Gina is quick to monopolize your [multiCockDesc], using both her mouth and soft breasts to pleasure you.", parse);
+								}
+								else {
+									parse["skin"] = player.SkinType() != Race.Human ? Text.Parse(", marvelling at the unfamiliar feel of your [skinDesc]", parse) : "";
+									Text.Add("Gina crawls up behind you, pressing her nude, dripping body against your bare back. Her stiff nipples grind against you insistently as her hands caress and explore your body[skin]. Slowly, she works her way down your body, falling to her knees as she kneads your [buttDesc]. You gasp in surprise as you feel her fingers prying your cheeks apart, her tongue slipping insider your [anusDesc], probing the sensitive passage.", parse);
+								}
+								Text.NL();
+								
+								player.Fuck(player.FirstCock(), 2);
+								Sex.Cunnilingus(null, player);
+							}
+							Text.Add("You sigh contentedly as both of the Krawitz ladies work your nethers, hands and tongues exploring every nook and cranny of your aroused body. You lean down and pat their heads, commending them for being such good sluts, telling them how pleased Lord Krawitz would be if he saw them now.", parse);
+							if(Scenes.Krawitz.stat.TFdKrawitz)
+								Text.Add(" Idly, you wonder what the Lord is up to, and if he’s enjoying his dinner.", parse);
+							Text.Flush();
+								
+							Gui.NextPrompt(function() {
+								var playerCock = player.FirstCock() || (player.strapOn ? player.strapOn.cock : Items.StrapOn.LargeStrapon.cock);
+								Text.Clear();
+								
+								player.Fuck(playerCock, 10);
+								Sex.Vaginal(player, null);
+								
+								Text.Add("Well, time to move on to the main course.", parse);
+								if(player.FirstCock()) {
+									Text.Add("The ladies have been kind enough to prepare your [multiCockDesc] for penetration, lathering your length[s] generously with their hungry tongues.", parse);
+								}
+								else {
+									parse["cockDesc"] = function() { return playerCock.Short(); };
+									parse["multiCockDesc"] = parse["cockDesc"];
+									if(player.strapOn) {
+										Text.Add("You’ve come well prepared, and the ladies give coos of delight as you equip your [cockDesc], eyeing your artificial member with desire burning in their eyes.", parse);
+									}
+									else {
+										Text.Add("Wordlessly, Gina leaves the pool, staggering slightly as she moves over to a nearby chest, her hands shaking as she opens it. She fetches something from its depths, swaying unsteadily as she returns to your side. The young noblewoman’s eyes are clouded with lust as she presents you with her treasure; a fairly large strapon dildo.", parse);
+										Text.NL();
+										Text.Add("You grin and take her offering, praising her for being such a good, thoughtful girl as you secure the fastenings around your [hipsDesc]. You suspect this won’t be the first time this particular toy has been put to use.", parse);
+									}
+								}
+								if(playerCock.Size() > 150)
+									Text.Add("You are a bit worried that you’ll hurt them with the sheer size of your equipment, but the horny women don’t seem to have a care in the world.", parse);
+								Text.NL();
+								parse["towering"] = (playerCock.Size() > 150) ? " towering" : "";
+								Text.Add("Gina and Marlene pull you down on your back, rubbing their wet crotches against your stiff [multiCockDesc], each eager to be the first one taken. The younger of the two eventually wins out, her tongue lolling as she eases herself down on[oneof] your[towering] pillar[s].", parse);
+								Text.NL();
+								if(player.NumCocks() > 1) {
+									player.Fuck(player.AllCocks()[1], 10);
+									Sex.Vaginal(player, null);
+								
+									Text.Add("Krawitz’ wife doesn’t tarry in mounting[oneof2] your remaining cock[s2], hugging her stepdaughter tightly as she impales herself on your [cockDesc2]. The two women moan in ecstasy as they bounce in time on top of you, their breasts mashing against each other as stepmother and stepdaughter lock lips.", parse);
+									Text.NL();
+									Text.Add("Before long, both of the cocks drilling into the noblewomen are glistening with their sweet cuntjuices. Marlene and Gina are seemingly locked in a competition to see who can pleasure you most, their round buttocks jiggling delightfully as they bounce up and down on your stiff rods.", parse);
+								}
+								else {
+									Text.Add("Krawitz’ wife throws her a jealous glare, letting out a moaning complaint at her stepdaughter’s greed. The raven-haired girl is oblivious to them, however, too busy enjoying your [cockDesc] to take notice. Sweat drips from her trembling body as she rides your cock, pushing it into her depths.", parse);
+									Text.NL();
+									if(player.HasBalls()) {
+										Text.Add("Marlene doesn’t let her defeat last long though, as she bows down below the root of your [cockDesc], worshipping your [ballsDesc] with her tongue while Gina bounces up and down on your slick length.", parse);
+									}
+									else {
+										Text.Add("Marlene has to be sated waiting for her turn, glowering sullenly while her younger companion enjoys herself. With a spiteful grin on her lust-filled face, she slips in behind Gina and roughly pinches her nipples, drawing ragged moans from the girl.", parse);
+									}
+								}
+								Text.NL();
+								Text.Add("The air is thick with the smell of your copulation. Even if you haven’t ingested any of the aphrodisiac yourself, you can still feel its effects. It is almost possible to taste it in the air, as if the young noblewomen are secreting it from their pores, transformed into living, breathing incarnations of lust. You can no longer reach through to them, so far gone are the ladies, only capable of understanding simple commands from you. Left to their own devices, they merely rut against you mindlessly, desperate to relieve their insatiable desire.", parse);
+								Text.NL();
+								if(player.FirstCock()) {
+									//TODO CUM
+									Text.Add("You grunt as the two women milk you of your seed, not letting your [multiCockDesc] rest for more than a second before bearing down on you again. ", parse);
+									if(player.CumOutput() > 6)
+										Text.Add("If the ladies are surprised at your unnatural output, they don’t show it - if anything, they seem delighted, moaning excitedly as you pump your plentiful seed into their willing cunts. Excess semen drools from their overfilled orifices, dripping into the pool.", parse);
+									else if(player.CumOutput() > 6)
+										Text.Add("The Krawitz ladies moan as your throbbing member[s] unload[notS], pouring [itsTheir] contents into their eager cock-sheath[s].", parse);
+									else
+										Text.Add("Perhaps they simply didn’t notice it, with you meager cum output, or perhaps they are eager to drain all that they can out of you.", parse);
+								}
+								else {
+									Text.Add("Despite them doing all the work, you feel yourself caught up in their almost continuous body-wracking orgasms. Due to the artificial nature of your [multiCockDesc], you won’t tire from cumming, but you are still having to mount an effort to keep up with the ladies’ boundless energy. Finally, it becomes to much for you, and your body shudders in throes of bliss.", parse);
+								}
+								Text.NL();
+								Text.Add("Eventually, you manage to disentangle yourself from the two horny young noblewomen, putting some distance between you. They are still breathing heavily, and they look a bit petulant as you retreat from them, finally coming to your senses. You were very close to forgetting your actual purpose here, but, if nothing else, you’ll definitely leave this place with some nice memories.", parse);
+								Text.NL();
+								Text.Add("Gina and Marlene are still under the spell of the drugged wine, though. They seem to have already forgotten about you, eyes and lips locked as they grind against each other.", parse);
+								Text.NL();
+								player.AddLustFraction(-1);
+								
+								aftermath();
+							});
+						}, enabled : true,
+						tooltip : "Don’t mind if I do!"
+					});
+					Gui.SetButtonsFromList(options);
+				}, enabled : true,
+				tooltip : "Serve them the wine, but add some of the aphrodisiac you found."
+			});
+		}
 		Gui.SetButtonsFromList(options);
 	}
 }
