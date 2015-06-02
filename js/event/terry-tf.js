@@ -119,7 +119,7 @@ Terry.JeanneTFCost = function() {
 }
 Scenes.Terry.JeanneTFPrompt = function() {
 	var parse = {
-		
+		playername : player.name
 	};
 	parse = terry.ParserPronouns(parse);
 	
