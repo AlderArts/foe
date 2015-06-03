@@ -850,7 +850,7 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 			Text.NL();
 			Text.Add("Done examining your back, you turn around once more to examine the last lingering remnant of your original gender. Like everything else about you, it’s been enhanced. Your dick is <b>huge</b> compared to what it was; a foot long and it has to be at least three inches thick! To say nothing of the balls swaying beneath it, which are easily three times their former size and feel even heavier than that. With a proud smirk, you realise that you should never have to worry about running out of sacred seed with these new beauties dangling down there.", parse);
 			Text.NL();
-			Text.Add("<i>”Lady Bastet? I take it you’re pleased?”</i>", parse);
+			Text.Add("<i>“Lady Bastet? I take it you’re pleased?”</i>", parse);
 			Text.NL();
 			Text.Add("Your voice is a lilting purr, husky with arousal, as you reply that you are very pleased indeed. You close your eyes, savoring the feelings of power, comfort and arousal as they sweep through you...", parse);
 			Text.NL();
@@ -859,6 +859,7 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 			
 			Scenes.Brothel.Bastet.TFBlock();
 			
+			/*
 			Text.NL();
 			Text.Add("", parse);
 			Text.NL();
@@ -869,6 +870,7 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 			Text.Add("", parse);
 			Text.NL();
 			Text.Add("", parse);
+			*/
 			Text.Flush();
 		});
 	});
