@@ -15,6 +15,7 @@ function Lucille(storage) {
 	this.body.DefFemale();
 	
 	this.flags["buy"] = 0;
+	this.flags["Theme"] = 0; //Been to theme room. Bitmask
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -26,6 +27,15 @@ Lucille.Buy = {
 	First : 1,
 	Deal  : 2
 };
+
+//TODO
+Lucille.Themeroom = {
+	CatDynasty : 1
+};
+
+Lucille.prototype.ThemeroomFirst = function() {
+	return this.flags["Theme"] == 0;
+}
 
 Lucille.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);

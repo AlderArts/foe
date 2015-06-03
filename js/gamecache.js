@@ -70,11 +70,13 @@ InitCache = function() {
 	ravenmother = new RavenMother(gameCache.raven);
 	uru         = new Uru(gameCache.uru);
 	
+	lucille     = new Lucille(gameCache.lucille);
+	bastet      = new Bastet(gameCache.bastet);
+	
 	// Don't load for now
 	aria        = new Aria();
 	sylistraxia = new Sylistraxia();
 	ches        = new Ches(); //TODO
-	lucille     = new Lucille(); //TODO
 	
 	world.EntityStorage = new Array();
 	
@@ -441,11 +443,12 @@ GameToCache = function() {
 	gameCache.raven   = ravenmother.ToStorage();
 	gameCache.uru     = uru.ToStorage();
 	
+	gameCache.lucille = lucille.ToStorage();
+	gameCache.bastet  = bastet.ToStorage();
 	/*
 	gameCache.aria        = aria.ToStorage();
 	gameCache.sylistraxia = sylistraxia.ToStorage();
 	gameCache.ches    = ches.ToStorage();
-	gameCache.lucille = lucille.ToStorage();
 	*/
 	
 	// Current party
