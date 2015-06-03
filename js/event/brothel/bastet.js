@@ -88,14 +88,31 @@ Scenes.Brothel.Bastet.SceneSelect = function(choice) {
 	switch(choice) {
 		default:
 		case 0: Scenes.Brothel.Bastet.Birth(); break;
-		//TODO
+		//TODO new scenes
 	}
+}
+
+Scenes.Brothel.Bastet.TFBlock = function() {
+	var parse = {
+		
+	};
+	
+	Text.Add("Stretching, you take a few moments to check yourself over, getting used to having your real body back.", parse);
+	
+	
+	//TODO TFs
+	
+	Text.NL();
+	Text.Add("", parse);
 }
 
 Scenes.Brothel.Bastet.Birth = function() {
 	var parse = {
 		
 	};
+	
+	if(bastet.flags["State"] < Bastet.State.S1Birth)
+		bastet.flags["State"] = Bastet.State.S1Birth;
 	
 	Text.Add("For a moment you are overcome with a sense of vertigo, as if you were free-falling. And then, as quickly as it happened, it passes, and you open your eyes. Before you lies the image of a cat-morph.", parse);
 	if(player.Race().isRace(Race.Feline))
@@ -817,8 +834,43 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 		Text.Add("<i>“Here, your ladyship,”</i> announces Adala, carrying a full-body mirror. She sets it down, bows reverently, then moves away so that you may inspect yourself.", parse);
 		Text.Flush();
 		
-		//TODO
-		Gui.NextPrompt();
+		Gui.NextPrompt(function() {
+			Text.Clear();
+			Text.Add("Pushing gently against the altar’s surface, you drop lightly to the floor, rising in a single smooth motion. You feel so powerful and graceful now, more than you ever have before. A smile crosses your lips at the thought, and you stare deeply into the mirror to see who you have become.", parse);
+			Text.NL();
+			Text.Add("The Bastet who stares back at you is at once familiar and alien. Those are your features looking back at you, but they’re so feminine now. You’re a true beauty, the kind of woman who gets anyone who likes girls to stare, and that thought fills you with pride. You’ve shrunk a little, and you don’t have the muscles you used to have, but that doesn’t bother you at all. It just makes you look cuter.", parse);
+			Text.NL();
+			Text.Add("And besides - here, you smirk and giggle to yourself at the realisation - whatever inches you’ve lost from your height, you’ve more than gained elsewhere.", parse);
+			Text.NL();
+			Text.Add("With a lechery that betrays your original gender, your hands reach up to possessively caress the huge breasts that bounce enticingly upon your chest. They’re a small DD-cup at the least, but given you only barely stand more than five feet tall, they look enormous on your petite frame. Large nipples jut freely through your fur, and as a finger brushes past one, you have to bite your lip; they’re definitely sensitive.", parse);
+			Text.NL();
+			Text.Add("But you’re not just top-heavy! No, you’re properly curvy all over. Turning partially around, you look back over your shoulder into the mirror to admire the view of the new you from behind. Wide, womanly hips curve sensuously at your sides, inviting the eye to follow as you walk. And once the hips have lured them in, your big, firm, gropeable heart-shaped booty will make sure they can’t take your eyes off you.", parse);
+			Text.NL();
+			Text.Add("Your tail flicks in pride and you toss your head, watching in amusement as your shoulder-length brown hair falls into place to frame your features. Reaching down with your hand, you grope your ass, confirming that it feels just as lovely as it looks, and then you spread your cheeks to get a better look at your two holes. Though you’re not a virgin with either of them, they both look to be really tight, something that you confirm with a carefully probing finger.", parse);
+			Text.NL();
+			Text.Add("Done examining your back, you turn around once more to examine the last lingering remnant of your original gender. Like everything else about you, it’s been enhanced. Your dick is <b>huge</b> compared to what it was; a foot long and it has to be at least three inches thick! To say nothing of the balls swaying beneath it, which are easily three times their former size and feel even heavier than that. With a proud smirk, you realise that you should never have to worry about running out of sacred seed with these new beauties dangling down there.", parse);
+			Text.NL();
+			Text.Add("<i>”Lady Bastet? I take it you’re pleased?”</i>", parse);
+			Text.NL();
+			Text.Add("Your voice is a lilting purr, husky with arousal, as you reply that you are very pleased indeed. You close your eyes, savoring the feelings of power, comfort and arousal as they sweep through you...", parse);
+			Text.NL();
+			Text.Add("And then, when you open your eyes, you are back in the Shadow Lady again, the experience being over.", parse);
+			Text.NL();
+			
+			Scenes.Brothel.Bastet.TFBlock();
+			
+			Text.NL();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Add("", parse);
+			Text.Flush();
+		});
 	});
 	
 	Gui.SetButtonsFromList(options, false, null);
