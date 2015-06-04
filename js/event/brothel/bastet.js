@@ -62,32 +62,42 @@ Scenes.Brothel.Bastet.IntroEntryPoint = function() {
 	});
 	
 	Text.Clear();
+	
+	//TODO
+	//[Birth][Life][Anubis][Drought][Trouble]
+	var options = new Array();
+	options.push({ nameStr : "Birth",
+		tooltip : "“Enjoy life as the avatar of a cat goddess.” Says the poster beside the door.",
+		func : func(Bastet.State.S1Birth), enabled : true
+	});
+	
 	if(bastet.First()) {
 		Text.Add("As the door clicks shut behind you, you cast a brief observatory glance around the room you’re inside of. It’s fairly small - little more than a glorified closet, really - and simply done. The walls are covered in wallpaper printed with the images of rolling sand dunes underneath a clear sky. A few hangers are provided for putting things up on, but other than that, there’s only four things of note. A simple three-legged stool. A full-body mirror against the furthest wall. A small switch. And an ornate magic circle on the floor in front of the mirror, just waiting to be activated.", parse);
 		Text.NL();
 		Text.Add("As you examine the switch, you note what appears to be a selection of chapters within this theme room. You try to move the switch experimentally, but it seems to be locked in the first choice for now. Looks like you’re supposed to experience these in order...", parse);
 		Text.NL();
+		choice = Bastet.State.S1Birth;
+		
 		PrintDefaultOptions();
 	}
 	else {
 		Text.Add("As the door shuts behind you, you take glance at the familiar desert-themed closet. Well, you know the drill. Choose a chapter, get naked and enter the fantasy.", parse);
 		Text.Flush();
-		
-		//TODO
-		//[Birth][Life][Anubis][Drought][Trouble]
-		var options = new Array();
-		options.push({ nameStr : "Birth",
-			tooltip : "“Enjoy life as the avatar of a cat goddess.” Says the poster beside the door.",
-			func : func(0), enabled : true
-		});
 		Gui.SetButtonsFromList(options, false, null);
 	}
 }
 
 Scenes.Brothel.Bastet.SceneSelect = function(choice) {
+	
+	Gui.Callstack.push(function() {
+		if(bastet.flags["State"] < choice)
+			bastet.flags["State"] = choice;
+		PrintDefaultOptions();
+	});
+	
 	switch(choice) {
 		default:
-		case 0: Scenes.Brothel.Bastet.Birth(); break;
+		case Bastet.State.S1Birth: Scenes.Brothel.Bastet.Birth(); break;
 		//TODO new scenes
 	}
 }
@@ -110,9 +120,6 @@ Scenes.Brothel.Bastet.Birth = function() {
 	var parse = {
 		
 	};
-	
-	if(bastet.flags["State"] < Bastet.State.S1Birth)
-		bastet.flags["State"] = Bastet.State.S1Birth;
 	
 	Text.Add("For a moment you are overcome with a sense of vertigo, as if you were free-falling. And then, as quickly as it happened, it passes, and you open your eyes. Before you lies the image of a cat-morph.", parse);
 	if(player.Race().isRace(Race.Feline))
@@ -872,6 +879,8 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 			Text.Add("", parse);
 			*/
 			Text.Flush();
+			
+			Gui.NextPrompt();
 		});
 	});
 	
