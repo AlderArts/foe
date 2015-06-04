@@ -585,7 +585,12 @@ Body.prototype.SoftFeet = function() {
 
 Body.prototype.FeetDesc = function() {
 	var legs = this.legs;
-	if(!legs || legs.count == 0) return "lower body";
+	if(!legs || legs.count == 0) {
+		if(legs.race.isRace(Race.Snake))
+			return "tail";
+		else
+			return "lower body";
+	}
 	
 	if(legs.race.isRace(Race.Cow, Race.Goat, Race.Sheep, Race.Dryad, Race.Horse)) return "hoofs";
 	if(legs.race.isRace(Race.Avian, Race.Reptile, Race.Demon)) return "clawed feet";
@@ -595,7 +600,12 @@ Body.prototype.FeetDesc = function() {
 }
 Body.prototype.FootDesc = function() {
 	var legs = this.legs;
-	if(!legs || legs.count == 0) return "lower body";
+	if(!legs || legs.count == 0) {
+		if(legs.race.isRace(Race.Snake))
+			return "tail";
+		else
+			return "lower body";
+	}
 	
 	if(legs.race.isRace(Race.Cow, Race.Goat, Race.Sheep, Race.Dryad, Race.Horse)) return "hoof";
 	if(legs.race.isRace(Race.Avian, Race.Reptile, Race.Demon)) return "clawed foot";
@@ -607,14 +617,24 @@ Body.prototype.FootDesc = function() {
 // TODO
 Body.prototype.LegDesc = function() {
 	var legs = this.legs;
-	if(!legs || legs.count == 0) return "lower body";
+	if(!legs || legs.count == 0) {
+		if(legs.race.isRace(Race.Snake))
+			return "tail";
+		else
+			return "lower body";
+	}
 	
 	return "leg";
 }
 // TODO
 Body.prototype.LegsDesc = function() {
 	var legs = this.legs;
-	if(!legs || legs.count == 0) return "lower body";
+	if(!legs || legs.count == 0) {
+		if(legs.race.isRace(Race.Snake))
+			return "tail";
+		else
+			return "lower body";
+	}
 	
 	return "legs";
 }
