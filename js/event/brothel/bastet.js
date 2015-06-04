@@ -145,7 +145,7 @@ Scenes.Brothel.Bastet.Birth = function() {
 	Text.NL();
 	Text.Add("Better get started then. You close your eyes and focus for a moment, recalling who you are in this world and what sort of role you’re supposed to play.", parse);
 	Text.NL();
-	Text.Add("You hail from a humble village, about three days south. It’s been a longstanding tradition in your village for the elders to send an envoy to the temple of most holy lady Bastet. Lady Bastet is the Cat Goddess, protector of the people, and lady of love and joy. The envoy is meant to stay at the lady’s temple, living a life of reverence and serving the goddess of love so that she may spread her to all her faithful.", parse);
+	Text.Add("You hail from a humble village, about three days south. It’s been a longstanding tradition in your village for the elders to send an envoy to the temple of most holy Lady Bastet. Lady Bastet is the Cat Goddess, protector of the people, and lady of love and joy. The envoy is meant to stay at the Lady’s temple, living a life of reverence and serving the goddess of love so that she may spread her to all her faithful.", parse);
 	Text.NL();
 	Text.Add("Being chosen as the envoy is a great honor bestowed upon few. The covenant established between your village and the temple is that a cat-morph, one of the people graced by the cat goddess herself, would be sent whenever needed. Usually this happens once every century, though the specific amount of time may vary.", parse);
 	Text.NL();
@@ -168,9 +168,9 @@ Scenes.Brothel.Bastet.Birth = function() {
 		Text.NL();
 		Text.Add("Her skin is pale as the moon, and even from where you stand looks soft as milk to the touch, offset by the luxuriant black hair that adorns her scalp, ears and tail. There is a world-wise maturity in her bearing, not diminished by the loving, yet slightly mischievous, smile that curls her ruby-red lips. From her bearing, and the quality of her apparel, you know that it is no less a figure than the high priestess who stands before you.", parse);
 		Text.NL();
-		Text.Add("As soon as her eyes settle on your form, she smiles at you. <i>“Ah, one of lady Bastet’s holy children. You look tired, please come in,”</i> she says, stepping aside and holding the door open for you.", parse);
+		Text.Add("As soon as her eyes settle on your form, she smiles at you. <i>“Ah, one of Lady Bastet’s holy children. You look tired, please come in,”</i> she says, stepping aside and holding the door open for you.", parse);
 		Text.NL();
-		Text.Add("Obsequiously, you bow at the waist, thanking her ladyship for her generosity. Still lowered into your bow, you scurry through the door, not daring to straighten up until after it has been closed behind you.", parse);
+		Text.Add("Obsequiously, you bow at the waist, thanking Her Ladyship for her generosity. Still lowered into your bow, you scurry through the door, not daring to straighten up until after it has been closed behind you.", parse);
 		Text.NL();
 		Text.Add("<i>“Please have a seat,”</i> she says, motioning at one of the many comfortable-looking cushions that dot the entrance hall. <i>“Rest while I fetch you some water, you must be parched.”</i>", parse);
 		Text.NL();
@@ -190,9 +190,9 @@ Scenes.Brothel.Bastet.Birth = function() {
 		Text.NL();
 		Text.Add("Bowing your head, you share with her your own name.", parse);
 		Text.NL();
-		Text.Add("<i>“It’s a pleasure to meet you,”</i> she says with a gentle smile. <i>“And what business would you have here, at the temple of lady Bastet?”</i>", parse);
+		Text.Add("<i>“It’s a pleasure to meet you,”</i> she says with a gentle smile. <i>“And what business would you have here, at the temple of Lady Bastet?”</i>", parse);
 		Text.NL();
-		Text.Add("The cool air of the temple flows deeply into your lungs as you steel yourself. Once steadied, you explain to her that you have been sent here from your village to fulfill your part the covenant that is owed to lady Bastet herself.", parse);
+		Text.Add("The cool air of the temple flows deeply into your lungs as you steel yourself. Once steadied, you explain to her that you have been sent here from your village to fulfill your part the covenant that is owed to Lady Bastet herself.", parse);
 		Text.NL();
 		Text.Add("She nods in understanding. <i>“I see. So they decided to a send a male this time...”</i>", parse);
 		Text.NL();
@@ -210,11 +210,11 @@ Scenes.Brothel.Bastet.Birth = function() {
 		Text.NL();
 		Text.Add("You shift from foot to foot, an embarrassed smile writing itself across your features. Meekly, you ask if she approves of you.", parse);
 		Text.NL();
-		Text.Add("<i>“I do. You take very good care of your body, and you look very cute too. Your fur, your hair, this toned belly... ”</i> she trails off gently rubbing your belly. A quiet purr rumbles up your throat at the touch. <i>“Your village couldn’t have picked a better envoy. I’m sure lady Bastet is pleased.”</i>", parse);
+		Text.Add("<i>“I do. You take very good care of your body, and you look very cute too. Your fur, your hair, this toned belly... ”</i> she trails off gently rubbing your belly. A quiet purr rumbles up your throat at the touch. <i>“Your village couldn’t have picked a better envoy. I’m sure Lady Bastet is pleased.”</i>", parse);
 		Text.NL();
 		Text.Add("With a sheepish smile, you bow your head and reply that you wish only to please the goddess, whatever that may entail.", parse);
 		Text.NL();
-		Text.Add("<i>“Very well. I’m sure you must be tired, but we mustn't delay. Let’s get you cleaned and prepared for your new life here at the temple. Please, follow me.”</i> She bows softly. <i>“Your ladyship...”</i> she says, turning to lead you down the hall.", parse);
+		Text.Add("<i>“Very well. I’m sure you must be tired, but we mustn't delay. Let’s get you cleaned and prepared for your new life here at the temple. Please, follow me.”</i> She bows softly. <i>“Your Ladyship...”</i> she says, turning to lead you down the hall.", parse);
 		Text.NL();
 		Text.Add("...Ladyship?", parse);
 		Text.Flush();
@@ -222,10 +222,10 @@ Scenes.Brothel.Bastet.Birth = function() {
 		//[Correct][Nevermind]
 		var options = new Array();
 		options.push({ nameStr : "Correct",
-			tooltip : "You’re pretty sure you heard her refer to you as her “ladyship”. But you’re a man! Maybe you should correct her.",
+			tooltip : "You’re pretty sure you heard her refer to you as “Her Ladyship”. But you’re a man! Maybe you should correct her.",
 			func : function() {
 				Text.Clear();
-				Text.Add("You try not to sound too affronted, lest you anger the high priestess, as you gently correct her. She referred to you as “ladyship” but you’re male.", parse);
+				Text.Add("You try not to sound too affronted, lest you anger the high priestess, as you gently correct her. She referred to you as “Ladyship” but you’re male.", parse);
 				Text.NL();
 				Text.Add("She stops in her tracks and turns to face you. For moment you visibly shrink. Maybe you shouldn’t have said anything...", parse);
 				Text.NL();
@@ -239,15 +239,15 @@ Scenes.Brothel.Bastet.Birth = function() {
 				Text.NL();
 				Text.Add("<i>“Very well, then allow me to explain while we head towards the bathing pool,”</i> she says, taking hold of your hand and gently leading you after her.", parse);
 				Text.NL();
-				Text.Add("<i>“The covenant we have with your village, is that they will send one of lady Bastet’s holy children to the temple whenever necessary. The envoy will then give up on their previous life in the village and start a new life here, at the temple, as lady Bastet’s new avatar,”</i> she explains.", parse);
+				Text.Add("<i>“The covenant we have with your village, is that they will send one of Lady Bastet’s holy children to the temple whenever necessary. The envoy will then give up on their previous life in the village and start a new life here, at the temple, as Lady Bastet’s new avatar,”</i> she explains.", parse);
 				Text.NL();
-				Text.Add("Brows furrow in confusion at Adala’s statement. Humbly you ask if that’s really possible, since your physique is... very much the opposite of the lady’s own.", parse);
+				Text.Add("Brows furrow in confusion at Adala’s statement. Humbly you ask if that’s really possible, since your physique is... very much the opposite of the Lady’s own.", parse);
 				Text.NL();
-				Text.Add("Adala laughs in amusement. <i>“Gender is unimportant. All that matters is that you’re a cat-morph. One of lady Bastet’s holy children. Still, you are going to become the avatar of lady Bastet. Everyone will take your words as our goddess’ own. So you should become accustomed to having people refer to you with female honorifics, your ladyship.”</i>", parse);
+				Text.Add("Adala laughs in amusement. <i>“Gender is unimportant. All that matters is that you’re a cat-morph. One of Lady Bastet’s holy children. Still, you are going to become the avatar of Lady Bastet. Everyone will take your words as our goddess’ own. So you should become accustomed to having people refer to you with female honorifics, Your Ladyship.”</i>", parse);
 				Text.NL();
 				Text.Add("That... makes sense, you suppose. Though privately you are still unconvinced as to how well that will work, you politely assure Adala that you will do your best to grow accustomed to it.", parse);
 				Text.NL();
-				Text.Add("<i>“That’s all I could ask for, your ladyship. Now please, follow me to the bathing pool,”</i> she says, tugging you along towards the end of the hallway.", parse);
+				Text.Add("<i>“That’s all I could ask for, Your Ladyship. Now please, follow me to the bathing pool,”</i> she says, tugging you along towards the end of the hallway.", parse);
 				Text.Flush();
 				
 				Scenes.Brothel.Bastet.Birth2();
@@ -283,11 +283,11 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 	Text.NL();
 	Text.Add("At once, your traitorous manhood rises, thrusting boldly out of your sheath and piercing up over your loincloth. Your face burns with shame and you instinctively cup yourself; the priestesses of Bastet are not chaste, but this still feels perverse, a sacrilege against this sacred place.", parse);
 	Text.NL();
-	Text.Add("Her bracelets are next, and just like that, she’s completely naked. She collects her belongings with a smile on her face, diverting her eyes towards you and smiling once she sees you cupping your crotch. <i>“There’s no need to be ashamed, your ladyship,”</i> she says with a soft smile, taking her belonging to a table just inside the hallway.", parse);
+	Text.Add("Her bracelets are next, and just like that, she’s completely naked. She collects her belongings with a smile on her face, diverting her eyes towards you and smiling once she sees you cupping your crotch. <i>“There’s no need to be ashamed, Your Ladyship,”</i> she says with a soft smile, taking her belonging to a table just inside the hallway.", parse);
 	Text.NL();
 	Text.Add("Your gaze lowers itself to the tiles, unable to raise itself to meet Adala’s own.", parse);
 	Text.NL();
-	Text.Add("<i>“It’s nothing I haven’t seen before, plus I’m flattered that you find me attractive, your ladyship,”</i> she says, sashaying towards you and gently hugging you from behind, pressing her soft mounds to your back.", parse);
+	Text.Add("<i>“It’s nothing I haven’t seen before, plus I’m flattered that you find me attractive, Your Ladyship,”</i> she says, sashaying towards you and gently hugging you from behind, pressing her soft mounds to your back.", parse);
 	Text.NL();
 	Text.Add("A shiver runs down your spine at the contact. A pang of lust throbs within you, your traitorous manhood now beginning to drool precum in anticipation.", parse);
 	Text.NL();
@@ -295,7 +295,7 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 	Text.NL();
 	Text.Add("Despite her words, your fingers still grip the loincloth fiercely, refusing to release it.", parse);
 	Text.NL();
-	Text.Add("<i>“Relax your ladyship, move your hands and let me help you undress, so that we can bathe together,”</i> she says, gently touching your hands from behind.", parse);
+	Text.Add("<i>“Relax Your Ladyship, move your hands and let me help you undress, so that we can bathe together,”</i> she says, gently touching your hands from behind.", parse);
 	Text.NL();
 	Text.Add("A lump rises in your throat and threatens to choke you. Fiercely, you swallow it down as trembles ripple beneath your skin. Finally, ashamedly, you nod your head and slowly relax your grip.", parse);
 	Text.NL();
@@ -303,7 +303,7 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 	Text.NL();
 	Text.Add("Tucking your chin into your chest to avoid meeting the priestess’s eyes, you shift restlessly from one foot to the other, tail curled protectively against your legs.", parse);
 	Text.NL();
-	Text.Add("Taking you by your chin, she gently guides you gaze back to her. <i>“You shouldn’t be ashamed, your ladyship. This is a very nice cock that you have,”</i> she says, gripping your shaft.", parse);
+	Text.Add("Taking you by your chin, she gently guides you gaze back to her. <i>“You shouldn’t be ashamed, Your Ladyship. This is a very nice cock that you have,”</i> she says, gripping your shaft.", parse);
 	Text.NL();
 	Text.Add("A timid smile curls across your face, and your muscles soften as the tension begins to drain from you at her kind words.", parse);
 	Text.NL();
@@ -315,7 +315,7 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 	Text.NL();
 	Text.Add("You accept her words with a nod and take a deep breath. Lungs full to bursting, you plunge yourself into the cool water, trying to lay upon the bottom of the spring. Your whole body is enveloped in wetness, permeating your fur, letting the heat of the desert bleed from your being into its welcoming depths. Only when your lungs start to protest do you explode back to the surface, gasping loudly for breath.", parse);
 	Text.NL();
-	Text.Add("<i>“Much better, don’t you agree, your ladyship?”</i> Adala asks.", parse);
+	Text.Add("<i>“Much better, don’t you agree, Your Ladyship?”</i> Adala asks.", parse);
 	Text.NL();
 	Text.Add("You chuckle as you nod.", parse);
 	Text.NL();
@@ -325,7 +325,7 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 	Text.NL();
 	Text.Add("As caught up in the feeling of aching muscles as you are, you don’t even register that Adala is kneeling before you until you feel her fingers closing around your thigh. A groan bubbles up your throat as the catgirl priestess starts to massage your aching flesh, cleaning the dust from your fur and soothing protesting sinews and joints with deft motions of her fingers. From the thigh she continues patiently down your leg, rotating the knee until it clicks softly, then working the kink from your ankle. Finally, she reaches your foot and begins to rub it, kneading the tender pawpads between her palms.", parse);
 	Text.NL();
-	Text.Add("<i>“How do you feel, your ladyship?”</i>", parse);
+	Text.Add("<i>“How do you feel, Your Ladyship?”</i>", parse);
 	Text.NL();
 	Text.Add("Purring luxuriantly, you assure her that you feel wonderful. She is so good with her hands!", parse);
 	Text.NL();
@@ -337,7 +337,7 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 	Text.NL();
 	Text.Add("Adala cleans the rest of your body with the same diligence, ensuring not a speck of dust or sand clings to your short fur. You feel a bit disappointed as her hands leave your body, but this couldn’t last forever...", parse);
 	Text.NL();
-	Text.Add("<i>“Please, wait here for a moment, your ladyship. I’ll go make sure the preparations for the ritual are complete then take you to the ritual chambers. Take this opportunity to reflect upon your new role, or relax if you prefer.”</i>", parse);
+	Text.Add("<i>“Please, wait here for a moment, Your Ladyship. I’ll go make sure the preparations for the ritual are complete then take you to the ritual chambers. Take this opportunity to reflect upon your new role, or relax if you prefer.”</i>", parse);
 	Text.NL();
 	Text.Add("As Adala emerges from the pool and pads quietly away, you lean back and sigh hugely. Resting against the steps, your gaze becomes unfocused as you allow your mind to wander. Just what will life be like, serving as the avatar of Lady Bastet? And will that allow you to spend more time with Lady Adala?", parse);
 	Text.NL();
@@ -381,9 +381,9 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 	
 	Gui.Callstack.push(function() {
 		Text.NL();
-		Text.Add("<i>“Your ladyship?”</i> You nearly jump out of your skin. You were so relaxed that you didn’t even hear Adala approach.", parse);
+		Text.Add("<i>“Your Ladyship?”</i> You nearly jump out of your skin. You were so relaxed that you didn’t even hear Adala approach.", parse);
 		Text.NL();
-		Text.Add("<i>“Forgive me for startling you, your ladyship. But the preparations for the ritual are complete. Shall we go?”</i>", parse);
+		Text.Add("<i>“Forgive me for startling you, Your Ladyship. But the preparations for the ritual are complete. Shall we go?”</i>", parse);
 		Text.Flush();
 		
 		//[Explain][Wait][Ready]
@@ -392,21 +392,21 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 			tooltip : "You don’t feel ready just yet. Why not ask her to explain the ritual while you wait?",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>“Of course, your ladyship,”</i> she replies, bowing in reverence.", parse);
+				Text.Add("<i>“Of course, Your Ladyship,”</i> she replies, bowing in reverence.", parse);
 				Text.NL();
 				Text.Add("<i>“Every envoy must undergo the ritual, it is the most important part of your duties. We will anoint your body with the holy oils and sacred essences to prepare you for your new role as Bastet reincarnate. The oils must cover every inch of your body, and you must allow it to seep inside your very being.”</i>", parse);
 				Text.NL();
 				Text.Add("You nod slowly to show you’re listening.", parse);
 				Text.NL();
-				Text.Add("<i>“Afterwards we will help you clean yourself of the remaining oil and you will be take to your throne, where you shall rule this temple as lady Bastet herself,”</i> she finishes.", parse);
+				Text.Add("<i>“Afterwards we will help you clean yourself of the remaining oil and you will be take to your throne, where you shall rule this temple as Lady Bastet herself,”</i> she finishes.", parse);
 				Text.NL();
 				Text.Add("Letting the high priestess’s words digest, you thank her for explaining them to you. But... what does she mean by ‘letting it seep into your very being’? What do you do actually need to do for that?", parse);
 				Text.NL();
-				Text.Add("<i>“You don’t have to do anything yourself, your ladyship. Just wait and let the changes come naturally. Normally we’d have a small period of training for the envoy, to make sure they’re physically fit for this task, but that won’t be necessary in your case,”</i> she says with a smile.", parse);
+				Text.Add("<i>“You don’t have to do anything yourself, Your Ladyship. Just wait and let the changes come naturally. Normally we’d have a small period of training for the envoy, to make sure they’re physically fit for this task, but that won’t be necessary in your case,”</i> she says with a smile.", parse);
 				Text.NL();
 				Text.Add("Changes? Furrowing your brow, you explain that you thought that this was only ceremonial - this is actually going to change you in some way?", parse);
 				Text.NL();
-				Text.Add("<i>“Yes. Your body will change to a form better fit for the avatar of the Lady. You’re a very handsome male, your ladyship. But I think we can both agree that you still lack a few of the visual qualities of our goddess, Lady Bastet.”</i>", parse);
+				Text.Add("<i>“Yes. Your body will change to a form better fit for the avatar of the Lady. You’re a very handsome male, Your Ladyship. But I think we can both agree that you still lack a few of the visual qualities of our goddess, Lady Bastet.”</i>", parse);
 				Text.NL();
 				Text.Add("...Well, that explains how your gender is of no object. For a moment, a flash of panic ripples through you, demanding that you flee now. But... this is a holy obligation. The goddess has blessed your people for so long; is it really so great a sacrifice?", parse);
 				Text.Flush();
@@ -436,7 +436,7 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 					}, enabled : true
 				});
 				options.push({ nameStr : "No…",
-					tooltip : "...This is but a small sacrifice for the many blessings lady Bastet has granted you and your village.",
+					tooltip : "...This is but a small sacrifice for the many blessings Lady Bastet has granted you and your village.",
 					func : function() {
 						Text.Clear();
 						Text.Add("You inhale deeply, letting your raging emotions still, exhaling softly to expel your doubts. Humbly, you thank Adala for being honest with you about what will happen. You promise her that you will do whatever she asks so that you may fulfil your role.", parse);
@@ -446,11 +446,11 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 				
 				Gui.Callstack.push(function() {
 					Text.NL();
-					Text.Add("<i>“Of course, your ladyship. Never forget that we’re here to serve you. We’ll do our best to make sure you’re comfortable and want for nothing,”</i> she says, bowing reverently.", parse);
+					Text.Add("<i>“Of course, Your Ladyship. Never forget that we’re here to serve you. We’ll do our best to make sure you’re comfortable and want for nothing,”</i> she says, bowing reverently.", parse);
 					Text.NL();
 					Text.Add("Exhaling softly, you ask her to lead the way; there’s no point delaying any longer.", parse);
 					Text.NL();
-					Text.Add("<i>“Yes, your ladyship. Please follow me,”</i> she says, extending her hand.", parse);
+					Text.Add("<i>“Yes, Your Ladyship. Please follow me,”</i> she says, extending her hand.", parse);
 					Text.NL();
 					Text.Add("You take her hand and follow her as she leads you away.", parse);
 					Text.Flush();
@@ -465,7 +465,7 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 			tooltip : "You’re not ready yet. Ask her for a few moments so you can steel yourself.",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>“Of course, your ladyship. We have time, but please try not to delay for too long. The ritual is ready and we are waiting for you.”</i>", parse);
+				Text.Add("<i>“Of course, Your Ladyship. We have time, but please try not to delay for too long. The ritual is ready and we are waiting for you.”</i>", parse);
 				Text.NL();
 				Text.Add("Absently, you nod to the priestess, focusing on trying to slow the beating of your heart. Inhaling and exhaling slowly, you start to feel more in control. After a few moments, you open your eyes and nod to Adala, telling her that you’re ready to go.", parse);
 				Text.NL();
@@ -498,9 +498,9 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 			Text.NL();
 			Text.Add("Dumbstruck, you quietly follow Adala through the doors, trying not to start as they swing shut behind you, without needing to be closed by either of you.", parse);
 			Text.NL();
-			Text.Add("<i>“Your ladyship, let me introduce you to your personal attendants,”</i> she says motioning to the twins. They immediately stop and approach you, bowing reverently.", parse);
+			Text.Add("<i>“Your Ladyship, let me introduce you to your personal attendants,”</i> she says motioning to the twins. They immediately stop and approach you, bowing reverently.", parse);
 			Text.NL();
-			Text.Add("<i>“It’s an honor to finally meet you, your ladyship,”</i> they say in unison.", parse);
+			Text.Add("<i>“It’s an honor to finally meet you, Your Ladyship,”</i> they say in unison.", parse);
 			Text.NL();
 			Text.Add("<i>“My name is Ming,”</i> says one of them. <i>“And I am Ling,”</i> says the other. They both lift their heads to finally get a good look at you.", parse);
 			Text.NL();
@@ -508,13 +508,13 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 			Text.NL();
 			Text.Add("Realising that you are staring, you finally remember your manners enough to say hello and tell them how nice it is to meet them.", parse);
 			Text.NL();
-			Text.Add("<i>“Thank you, your ladyship,”</i> they reply in unison with a grin. Then they walk towards the altar, kneeling besides it and motioning for you to hop on.", parse);
+			Text.Add("<i>“Thank you, Your Ladyship,”</i> they reply in unison with a grin. Then they walk towards the altar, kneeling besides it and motioning for you to hop on.", parse);
 			Text.NL();
 			Text.Add("<i>“As soon as you lay upon the altar, we can begin,”</i> says Adala, patiently waiting for your next move.", parse);
 			Text.NL();
 			Text.Add("Inhaling softly, you approach the altar, tail swishing softly behind you. The altar is more than large enough to let a single person lay down upon its surface, and it has been indented in the shape of a vague humanoid outline. Even through your fur, the marble is cool enough that your skin prickles as you sit atop it, maleness shrinking at the chill suddenly placed against your testes. Steeling yourself, you swing yourself around and lay down within the indent, arms against your sides as you stare up at the ceiling. For lack of anything else to do, you call to the priestesses that you are ready to begin when they are.", parse);
 			Text.NL();
-			Text.Add("<i>“Yes, your ladyship.”</i> Adala moves to pick up one of the jars, while the twins stand beside you. <i>“We’ll start on the top. So, please, close your eyes, your ladyship.”</i>", parse);
+			Text.Add("<i>“Yes, Your Ladyship.”</i> Adala moves to pick up one of the jars, while the twins stand beside you. <i>“We’ll start on the top. So, please, close your eyes, Your Ladyship.”</i>", parse);
 			Text.NL();
 			Text.Add("No sooner have your eyes fallen shut than warm liquid begins gently pouring over your face. With measured hands, a steady flow of oil spatters against your forehead and begins running downwards. It flows into the corners of your eyes, but it doesn’t sting as you might expect, instead welling up there before sliding harmlessly down your cheeks. As the stream moves, more oil flows over your snout, filling your nostrils with its rich scent.", parse);
 			Text.NL();
@@ -524,7 +524,7 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 			Text.NL();
 			Text.Add("You feel a pair of tongues, gently licking your face, a ticklish feeling spreading over your head as they lick your cheeks, chin and snout clear of the oil.", parse);
 			Text.NL();
-			Text.Add("<i>“Open your mouth, your ladyship,”</i> whispers one of twin into your ear.", parse);
+			Text.Add("<i>“Open your mouth, Your Ladyship,”</i> whispers one of twin into your ear.", parse);
 			Text.NL();
 			Text.Add("Without hesitation you part your jaws, letting the oil flow directly onto your tongue. It’s thick and rich, almost like honey in its consistency, and just like honey it tastes wonderfully sweet. You tilt your face to catch more of the wonderful sweetness, letting it glide down your throat.", parse);
 			Text.NL();
@@ -544,15 +544,15 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 			Text.NL();
 			Text.Add("You can feel each comb gliding through and through, and your mind begins to paint a picture. Your brown hair must be much longer now, silken soft to the touch from how easily the twins are able to comb it. You picture yourself with a new hairdo, long, lush and womanly, and you smile dreamily; you’re going to look so pretty.", parse);
 			Text.NL();
-			Text.Add("Adala finally breaks the kiss, pushing herself off your grasp and panting. <i>“The changes have already started. How do you feel, your ladyship?”</i>", parse);
+			Text.Add("Adala finally breaks the kiss, pushing herself off your grasp and panting. <i>“The changes have already started. How do you feel, Your Ladyship?”</i>", parse);
 			Text.NL();
 			Text.Add("Lips curled in a dreamy smile, you reply that you feel pretty good, giggling to yourself. At the sound of your titter, you stop, blinking in confusion. Since when do you giggle? And is that your voice? You sound... girlier, than you remember. It’s such a soft and dainty voice. But it’s melodious, too. Warm and pleasing to the ears, with a lilt to it that sounds full of invitation. It just sounds so... so right, for a goddess.", parse);
 			Text.NL();
 			Text.Add("Still, it’s an alien sound, to be coming from your own mouth. As much as you know that it’s your own voice... it still feels and sounds strange to you.", parse);
 			Text.NL();
-			Text.Add("<i>“I’m glad to hear. We will be moving on to your chest now, lady Bastet.”</i>", parse);
+			Text.Add("<i>“I’m glad to hear. We will be moving on to your chest now, Lady Bastet.”</i>", parse);
 			Text.NL();
-			Text.Add("Lady Bastet... you know that Adala is only trying to honor you, that it is the name that you will go by once they are done... but it still feels wrong to hear them call you that. Your heart squeezes painfully tight inside your chest at that name, and you repress the urge to look around for worshippers angry at such blasphemy. Foolish, you know - these are the lady’s own priestesses, after all", parse);
+			Text.Add("Lady Bastet... you know that Adala is only trying to honor you, that it is the name that you will go by once they are done... but it still feels wrong to hear them call you that. Your heart squeezes painfully tight inside your chest at that name, and you repress the urge to look around for worshippers angry at such blasphemy. Foolish, you know - these are the Lady’s own priestesses, after all", parse);
 			Text.NL();
 			Text.Add("But still... you’re not ready to hear that name for you.", parse);
 			Text.NL();
@@ -560,11 +560,11 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 			Text.NL();
 			Text.Add("The three priestess each grab a pitcher and begin pouring the oil over your chest and belly. Their hands move to massage both your fur and muscles underneath. It feels… divine. Their hands are so soft, yet they move with purpose. Massaging, teasing, molding your body under their touch. You gasp softly as one of the twins, Ming you believe, teases one of your nipples.", parse);
 			Text.NL();
-			Text.Add("<i>“Sorry, your ladyship. I couldn’t resist,”</i> she says with a mischievous smile. You gasp once more as her naughty little twin does the same to your other nipple. <i>“Forgive me, your ladyship,”</i> she says with a mischievous smile of her own.", parse);
+			Text.Add("<i>“Sorry, Your Ladyship. I couldn’t resist,”</i> she says with a mischievous smile. You gasp once more as her naughty little twin does the same to your other nipple. <i>“Forgive me, Your Ladyship,”</i> she says with a mischievous smile of her own.", parse);
 			Text.NL();
 			Text.Add("Feeling your maleness starting to peek out of its sheath, you don’t even try to hide the wicked grin that curls across your features. With your lilting new voice, you coo that maybe they should kiss it better; that would help you to forgive them.", parse);
 			Text.NL();
-			Text.Add("The twins look at you in surprise for a second, but their lips curl into knowing smiles soon after. <i>“Of course, your ladyship. We’re here to serve,”</i> says Ming. <i>“And serve we shall.”</i> says Ling.", parse);
+			Text.Add("The twins look at you in surprise for a second, but their lips curl into knowing smiles soon after. <i>“Of course, Your Ladyship. We’re here to serve,”</i> says Ming. <i>“And serve we shall.”</i> says Ling.", parse);
 			Text.NL();
 			Text.Add("They each take to one of your sides, leaning close to kiss your little nips. You arch your back with a moan of pleasure, trailing off into a delighted purr as the twins kiss and lick, running their tongues around your dainty pink pearls. Blood rushes under your skin, making your nipples swell proud and firm, all the signal that the catgirls need. With the eagerness of hungry babes, the twins slurp each nipple into their mouths, faces pressed side by side in their need to nurse. Your nubs vibrate as they purr eagerly, lips and tongues working to suckle from your flat, boyish chest.", parse);
 			Text.NL();
@@ -588,19 +588,19 @@ Scenes.Brothel.Bastet.Birth2 = function() {
 			Text.NL();
 			Text.Add("If this is what your future holds, then you couldn’t be happier.", parse);
 			Text.NL();
-			Text.Add("<i>“I’m pleased to hear that, your ladyship,”</i> says Adala, stopping her attentions on your midriff. <i>“I’m done with your belly, now it’s time to move to this,”</i> she adds, moving a hand to your sheath and balls. <i>“May I, your ladyship?”</i>", parse);
+			Text.Add("<i>“I’m pleased to hear that, Your Ladyship,”</i> says Adala, stopping her attentions on your midriff. <i>“I’m done with your belly, now it’s time to move to this,”</i> she adds, moving a hand to your sheath and balls. <i>“May I, Your Ladyship?”</i>", parse);
 			Text.NL();
 			Text.Add("A luxuriant purr rumbles out of your belly as you feel soft, dextrous fingers playing lazily around your manhood. Dreamily, you tell her that to go ahead; you’re ready to lose that part of yourself.", parse);
 			Text.NL();
-			Text.Add("<i>“Lose this part? What do you mean, your ladyship?”</i> Adala asks in confusion. The twins stop their ministrations on your chest to look at you in bewilderment, almost as much as Adala herself.", parse);
+			Text.Add("<i>“Lose this part? What do you mean, Your Ladyship?”</i> Adala asks in confusion. The twins stop their ministrations on your chest to look at you in bewilderment, almost as much as Adala herself.", parse);
 			Text.NL();
 			Text.Add("Purring still, wrapped in the blanket of pleasure they so carefully enveloped you in, you clarify that you’ve made your peace with losing your penis. After all, you can hardly be the avatar of the goddess with it, you point out.", parse);
 			Text.NL();
-			Text.Add("The three priestess continue to look at you in confusion, until one of the twins begins laughing. Her sister follows in tow, and even the head priestess herself seems to crack a smile. <i>“Forgive me, your ladyship,”</i> she says, stifling her laughter. <i>“But none of us would <b>dream</b> of removing your penis. It’s such a beautiful cock, after all. So shapely… I have no doubt you’ll bring much pleasure to whomever you deem worthy,”</i> she says.", parse);
+			Text.Add("The three priestess continue to look at you in confusion, until one of the twins begins laughing. Her sister follows in tow, and even the head priestess herself seems to crack a smile. <i>“Forgive me, Your Ladyship,”</i> she says, stifling her laughter. <i>“But none of us would <b>dream</b> of removing your penis. It’s such a beautiful cock, after all. So shapely… I have no doubt you’ll bring much pleasure to whomever you deem worthy,”</i> she says.", parse);
 			Text.NL();
 			Text.Add("A flush of pride makes your cock stretch just that little bit taller, throbbing with need. Still, your mind latches onto Adala’s words and confusion reigns. Puzzled, you ask how it is that you can keep your penis if you are supposed to be the avatar of Bastet - how can you retain that most vital piece and still be called a woman?", parse);
 			Text.NL();
-			Text.Add("<i>“Lady Bastet is the goddess of love, and as such she has many aspects. Some see her ladyship as a mischievous lover, who takes what she wants and makes you love her all the more for it. Some see her as a gentle matron, happy to provide for her children and her faithful. There are those who see her as a protector, defending them and their loved ones. And others simply see her as a gentle lover, bringing comfort and happiness. Tell me, your ladyship, which aspect do believe to be your true aspect?”</i>", parse);
+			Text.Add("<i>“Lady Bastet is the goddess of love, and as such she has many aspects. Some see Her Ladyship as a mischievous lover, who takes what she wants and makes you love her all the more for it. Some see her as a gentle matron, happy to provide for her children and her faithful. There are those who see her as a protector, defending them and their loved ones. And others simply see her as a gentle lover, bringing comfort and happiness. Tell me, Your Ladyship, which aspect do believe to be your true aspect?”</i>", parse);
 			Text.Flush();
 			
 			//[Mischievous][Matron][Protector][Lover]
@@ -636,15 +636,15 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("Adala simply shakes her head. <i>“No, your ladyship. You’re all of them. No artist in this world is capable of representing all that you are, for you are the sum of all that and more. So they just pick one of your many aspects, your ladyship. You are love and joy incarnate. And like a loving mother, you extend your reach to protect us all. But as the goddess of love you must also have the means to show your faithful that you love them, and could you do that if you were not properly equipped to do so?”</i>", parse);
+	Text.Add("Adala simply shakes her head. <i>“No, Your Ladyship. You’re all of them. No artist in this world is capable of representing all that you are, for you are the sum of all that and more. So they just pick one of your many aspects, Your Ladyship. You are love and joy incarnate. And like a loving mother, you extend your reach to protect us all. But as the goddess of love you must also have the means to show your faithful that you love them, and could you do that if you were not properly equipped to do so?”</i>", parse);
 	Text.NL();
 	Text.Add("You blink slowly, digesting what the high priestess has said. Quietly, you assure her that does make sense... but then, why have you always seen her depicted as purely female? And does this mean that those women who have served before you have grown penises as part of their ascension to the role?", parse);
 	Text.NL();
-	Text.Add("The high priestess smiles softly. <i>“Lady Bastet has always had a playful heart. She likes to surprise the more naive petitioners. As for the female envoys, yes. They do grow penises as part of this ritual. Usually it’s a lot of work making sure a worthy penis grows, but in your case, you ladyship. You already have such a beautiful one...”</i>", parse);
+	Text.Add("The high priestess smiles softly. <i>“Lady Bastet has always had a playful heart. She likes to surprise the more naive petitioners. As for the female envoys, yes. They do grow penises as part of this ritual. Usually it’s a lot of work making sure a worthy penis grows, but in your case, Your Ladyship. You already have such a beautiful one...”</i>", parse);
 	Text.NL();
 	Text.Add("With a giggle, you thank her for the compliment; you’re very proud of it. Tilting your head to the side, you ask her what she needs to do with it as part of the ritual, then, if she doesn’t have to remove it?", parse);
 	Text.NL();
-	Text.Add("<i>“Simply anoint it, your ladyship. Unless you don’t mind me playing with it a bit. If I must confess, I’ve had my eye on your cock ever since I saw you in the bath, lady Bastet.”</i>", parse);
+	Text.Add("<i>“Simply anoint it, Your Ladyship. Unless you don’t mind me playing with it a bit. If I must confess, I’ve had my eye on your cock ever since I saw you in the bath, Lady Bastet.”</i>", parse);
 	Text.NL();
 	Text.Add("The beautiful high priestess wants to play with your cock? Well, what else could you say, but ...?", parse);
 	Text.Flush();
@@ -666,11 +666,11 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 	
 	Gui.Callstack.push(function() {
 		Text.Clear();
-		Text.Add("<i>“You honor me, your ladyship,”</i> Adala says with a grin, fetching a small vial of oil and what looks like a small funnel. The twins simply pout in obvious jealousy.", parse);
+		Text.Add("<i>“You honor me, Your Ladyship,”</i> Adala says with a grin, fetching a small vial of oil and what looks like a small funnel. The twins simply pout in obvious jealousy.", parse);
 		Text.NL();
 		Text.Add("A nervous tongue dabs at your lips as you observe the implements she’s taken, and you hesitantly ask what it is that she needs those for.", parse);
 		Text.NL();
-		Text.Add("<i>“The funnel is so we can pour the oil inside your shaft and around your sheath. We need to make sure every inch of your body is anointed, your ladyship.”</i>", parse);
+		Text.Add("<i>“The funnel is so we can pour the oil inside your shaft and around your sheath. We need to make sure every inch of your body is anointed, Your Ladyship.”</i>", parse);
 		Text.NL();
 		Text.Add("Well, that’s a relief. With a sigh, you settle back down, spreading your legs slightly as you wriggle your hips to get more comfortable. You announce that you’re ready to begin when she is.", parse);
 		Text.NL();
@@ -678,7 +678,7 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 		Text.NL();
 		Text.Add("You moan luxuriantly, fighting not to wriggle and make her mess up what she’s doing. It’s so hard to do, though; her touch feels just exquisite, each stroke sending chills dancing along your spine even through the warmth of the oil.", parse);
 		Text.NL();
-		Text.Add("Once she’s satisfied, she moves to your balls, weighing them and rolling them in her palms as she makes sure they’re properly covered in the sacred oils. Your sheath gets a similar treatment. When she’s done with the external part, she takes the funnel in hand and turns to look at you. <i>“I’m going to pour some oil inside your sheath and inside your shaft now, your ladyship.”</i>", parse);
+		Text.Add("Once she’s satisfied, she moves to your balls, weighing them and rolling them in her palms as she makes sure they’re properly covered in the sacred oils. Your sheath gets a similar treatment. When she’s done with the external part, she takes the funnel in hand and turns to look at you. <i>“I’m going to pour some oil inside your sheath and inside your shaft now, Your Ladyship.”</i>", parse);
 		Text.NL();
 		Text.Add("With a shudder and a deep breath, you force yourself to relax. As if sensing your tensions, the twins work themselves around, hands reaching down to caress your shoulders. With expert precision, their fingers attack the stiffness in your muscles, rolling and stroking, their touch rough enough that you can feel every glorious inch, yet not so hard it hurts. Within moments, you are loose as a sodden parchment.", parse);
 		Text.NL();
@@ -690,7 +690,7 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 		Text.NL();
 		Text.Add("Next she takes your shaft in hands, gently rubbing your tip and opening your urethra. Once she does, she inserts the funnel. Just the tip. It still feels uncomfortable… but it also feels kinda good. It’s an interesting feeling having your urethra penetrated. Speaking of penetration, you wonder what it will be like when you have a pussy of your own...", parse);
 		Text.NL();
-		Text.Add("A mewl bubbles out of your throat as the oil starts to glide down the funnel, trickling slowly into your urethra. By the lady, there are no words to describe how alien it feels to have fluid going <b>in</b> when normally it would be coming out!", parse);
+		Text.Add("A mewl bubbles out of your throat as the oil starts to glide down the funnel, trickling slowly into your urethra. By the Lady, there are no words to describe how alien it feels to have fluid going <b>in</b> when normally it would be coming out!", parse);
 		Text.NL();
 		Text.Add("Even as the twins continue their massage, moving along your shoulders and down your arms, you still have to bite your lip to help you keep from pulling away from Adala’s ministrations. Finally, mercifully, the priestess gently removes the funnel and you can unclench your jaw. The coppery tang of blood washes across your tongue and you know that you have broken the skin.", parse);
 		Text.NL();
@@ -722,13 +722,13 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 		Text.NL();
 		Text.Add("The priestess is a natural at this; as you climax, she thrusts you all the way into her throat, relaxing her gullet and letting you simply <i>pour</i> down. Her stomach begins to bulge, violently distending as wave after wave of semen keeps slapping into it.", parse);
 		Text.NL();
-		Text.Add("As it begins to press against your knees, the taut skin deforming from the pressure, it’s clear even she can’t keep up with your sheer volume. She tries - by the lady’s bounty, she tries so hard. ", parse);
+		Text.Add("As it begins to press against your knees, the taut skin deforming from the pressure, it’s clear even she can’t keep up with your sheer volume. She tries - by the Lady’s bounty, she tries so hard. ", parse);
 		Text.NL();
 		Text.Add("But with a choke and a splutter, she is forced to pull herself from your member, belly sloshing as she lets you paint her face white. Her skin is turned creamy as you layer on semen over her breasts and arms and shoulder. Unable to swallow any more, she simply kneels there with dignity, letting your seed coat her.", parse);
 		Text.NL();
 		Text.Add("In what could be an eternity, or only a few seconds, you finally run dry, spurting a final pitiful shot square into the canyon of Adala’s cleavage before you slump back. Though your cock remains achingly hard, you are no longer cumming, instead focusing on gulping for breath as you try to regain your strength from the exhaustive orgasm.", parse);
 		Text.NL();
-		Text.Add("Adala licks her fingers clean, purring in pleasure as she rubs your seed over the skin of her breasts and wipes her face. <i>“Thank you for this boon, your ladyship.”</i>", parse);
+		Text.Add("Adala licks her fingers clean, purring in pleasure as she rubs your seed over the skin of her breasts and wipes her face. <i>“Thank you for this boon, Your Ladyship.”</i>", parse);
 		Text.NL();
 		Text.Add("The twins, having finishes with your hands, move to help their leader clean up. They lick Adala’s breasts with gusto, drawing moans of delight from the head priestess.", parse);
 		Text.NL();
@@ -736,7 +736,7 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 		Text.NL();
 		Text.Add("But from the feelings flowing from your bloated nutsack, you don’t think it’ll be too long before you can change that...", parse);
 		Text.NL();
-		Text.Add("<i>“Ming, Ling, please anoint her ladyship’s legs. I’ll handle her ass.”</i>", parse);
+		Text.Add("<i>“Ming, Ling, please anoint Her Ladyship’s legs. I’ll handle her ass.”</i>", parse);
 		Text.NL();
 		Text.Add("Your ass? You purr at the thought; yes, that sounds wonderful. The twins gave you such wonderful big boobies already. How can you not complement such perfection with a nice round booty? As you muse to yourself, your fingers idly pinch one of your nipples, the spark of stimulus widening the cat-like grin on your face.", parse);
 		Text.NL();
@@ -750,11 +750,11 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 		Text.NL();
 		Text.Add("With more nonchalance than you would have thought, you ask the high priestess what she needs that for.", parse);
 		Text.NL();
-		Text.Add("<i>“For your butt, your ladyship. We must anoint inside you as well,”</i> she explains, rubbing some slick oil on the tip of the dildo.", parse);
+		Text.Add("<i>“For your butt, Your Ladyship. We must anoint inside you as well,”</i> she explains, rubbing some slick oil on the tip of the dildo.", parse);
 		Text.NL();
 		Text.Add("...Oh. That thought hadn’t occurred to you. A little earlier, you might have freaked out at the statement, but you feel so good that, right now, it just sounds like some more kinky fun. With a toothy grin, you nonchalantly ask if that’s all, waving one of your dainty new hands to emphasize your flippant tone.", parse);
 		Text.NL();
-		Text.Add("<i>“Of course not, your ladyship. We haven’t even started molding your pussy. We use the same dildo for both tasks.”</i>", parse);
+		Text.Add("<i>“Of course not, Your Ladyship. We haven’t even started molding your pussy. We use the same dildo for both tasks.”</i>", parse);
 		Text.NL();
 		Text.Add("Interest piqued, you note that sounds like fun, then ask if there’s anything you need to do to help her out. One of the twins tickles the pads of her chosen foot, and you giggle, wriggling an ankle in response.", parse);
 		Text.NL();
@@ -782,7 +782,7 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 		Text.NL();
 		Text.Add("Quivers ripple up and down your spine, your tail going ramrod straight. When Adala decides you are finished and pulls the tool free of your hole, you whimper in disappointment, butthole clenching down in a futile attempt to try and stop her. It doesn’t even slow her down, but the friction makes you squirm, and you promise yourself that you will be able to grip better, one day.", parse);
 		Text.NL();
-		Text.Add("<i>“Any takers for her ladyship’s pussy?”</i> Adala asks, lifting the still dripping dildo up in the air.", parse);
+		Text.Add("<i>“Any takers for Her Ladyship’s pussy?”</i> Adala asks, lifting the still dripping dildo up in the air.", parse);
 		Text.NL();
 		Text.Add("<i>“Me!”</i> they cry in unison, though Ling was just a little bit faster...", parse);
 		Text.NL();
@@ -794,7 +794,7 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 		Text.NL();
 		Text.Add("You titter along with them, smiling in blissful anticipation of what they have in mind.", parse);
 		Text.NL();
-		Text.Add("<i>“Your ladyship, please turn around,”</i> Adala asks.", parse);
+		Text.Add("<i>“Your Ladyship, please turn around,”</i> Adala asks.", parse);
 		Text.NL();
 		Text.Add("Without so much as a nod, you roll over in your incline. It’s a little trickier, what with your new bustline... mmm, but there’s definitely something to be said for the feel of your big tits squishing just so against the warm, oil-slick marble.", parse);
 		Text.NL();
@@ -814,7 +814,7 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 		Text.NL();
 		Text.Add("Unfamiliar muscles ripple as you clench and relax your new orifice experimentally. A hungry grin spreads across your face and you wriggle your hips slightly. Your tail flicks in invitation as you order Ling to just shove it in you, your tone brooking no argument.", parse);
 		Text.NL();
-		Text.Add("<i>“Yes, your ladyship,”</i> she replies. Without any delay, she spears your new vagina, taking your virginity and hilting with you in a single go. Rather than the unbearable pain of a new taking, all you feel is a bothersome little tickle that soon passes.", parse);
+		Text.Add("<i>“Yes, Your Ladyship,”</i> she replies. Without any delay, she spears your new vagina, taking your virginity and hilting with you in a single go. Rather than the unbearable pain of a new taking, all you feel is a bothersome little tickle that soon passes.", parse);
 		Text.NL();
 		Text.Add("The feeling is like when Adala had it up your asshole... but, at the same time, it’s totally different. It feels <b>so</b> much better than that, the sensations washing through your body and leaving you to moan. Muscles go loose as jelly, leaving you slumping in your place, totally at Ling’s mercies and loving every second of it.", parse);
 		Text.NL();
@@ -830,7 +830,7 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 		Text.NL();
 		Text.Add("So... this is it; the first day of the rest of your new life? Well... you don’t think it’s going to be so bad, given how it started. Tittering softly to yourself, you push yourself out of the incline, swiveling as you sit up so that you are facing your priestesses. Absently, you make a vain attempt to brush some of the worst of the cum from your breasts, stomach and thighs.", parse);
 		Text.NL();
-		Text.Add("As soon as she sees you sit up, Adala bows in reverence. <i>“Please, lady Bastet. Wait here, I’ll go fetch a mirror for your ladyship,”</i> she says, hurrying off.", parse);
+		Text.Add("As soon as she sees you sit up, Adala bows in reverence. <i>“Please, Lady Bastet. Wait here, I’ll go fetch a mirror for Your Ladyship,”</i> she says, hurrying off.", parse);
 		Text.NL();
 		Text.Add("<i>“Mistress Bastet, please allow us to clean you up,”</i> the twins say in unison, towels in hand.", parse);
 		Text.NL();
@@ -838,7 +838,7 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 		Text.NL();
 		Text.Add("Finally, they have you as clean as they can hope to get you and they step away, placing the used towels to the side to be cleaned later.", parse);
 		Text.NL();
-		Text.Add("<i>“Here, your ladyship,”</i> announces Adala, carrying a full-body mirror. She sets it down, bows reverently, then moves away so that you may inspect yourself.", parse);
+		Text.Add("<i>“Here, Your Ladyship,”</i> announces Adala, carrying a full-body mirror. She sets it down, bows reverently, then moves away so that you may inspect yourself.", parse);
 		Text.Flush();
 		
 		Gui.NextPrompt(function() {
