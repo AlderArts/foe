@@ -2810,7 +2810,7 @@ Scenes.Kiakai.HealingNice = function() {
 					Text.Add("More than pleased with the dual attention you are given, you decide to help out, grabbing[oneof] your [multiCockDesc] and heartily jerking yourself off while the elf administers [hisher] healing skills on your [vagDesc]. Before long, your trembling [legsDesc] announce your approaching orgasm.", parse);
 					Text.NL();
 					if(kiakai.flags["Sexed"] > 15 && Math.random() > 0.5) {
-						Text.Add("Breathing heavily, [name] abandons your [vagDesc] and eagerly shoves the tip of [one of ]your [multiCockDesc] into [hisher] mouth. While sucking you off, the elf begins pumping two of [hisher] fingers into your clenching [vagDesc], trying to milk you as quickly as possible.", parse);
+						Text.Add("Breathing heavily, [name] abandons your [vagDesc] and eagerly shoves the tip of[oneof] your [multiCockDesc] into [hisher] mouth. While sucking you off, the elf begins pumping two of [hisher] fingers into your clenching [vagDesc], trying to milk you as quickly as possible.", parse);
 						Text.NL();
 						Text.Add("You hardly want to deprive the horny elf of [hisher] meal - not that you can hold back for very long under [hisher] fervent fingering in any case. Groaning, you unleash your load down [name]'s waiting hatch, the elf swallowing as quickly as [heshe] can, trying to keep up with you.", parse);
 						Text.NL();
