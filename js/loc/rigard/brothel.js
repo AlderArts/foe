@@ -46,7 +46,9 @@ world.loc.Rigard.Brothel.brothel.events.push(new Link(
 	}
 ));
 world.loc.Rigard.Brothel.brothel.events.push(new Link(
-	"Lucille", true, false,
+	"Lucille", function() {
+		return lucille.IsAtLocation();
+	}, false,
 	function() {
 		if(lucille.IsAtLocation())
 			Text.Add("Lucille wanders the hall, starting conversations here and there, inserting her charm to subtly urge the customers to spends more, and settling deals, employing her concubines.");
@@ -69,6 +71,15 @@ world.loc.Rigard.Brothel.brothel.events.push(new Link(
 	},
 	function() {
 		Scenes.Roa.BrothelApproach();
+	}
+));
+world.loc.Rigard.Brothel.brothel.events.push(new Link(
+	"Themed rooms", function() {
+		return lucille.ThemeroomOpen();
+	}, true,
+	null,
+	function() {
+		Scenes.Lucille.Themerooms();
 	}
 ));
 

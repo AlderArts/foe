@@ -19,6 +19,9 @@ Bastet.State = {
 	S5Trouble : 5
 };
 
+Bastet.prototype.Cost = function() {
+	return 250;
+}
 Bastet.prototype.First = function() {
 	return this.flags["State"] == Bastet.State.NotViewed;
 }
@@ -133,11 +136,11 @@ Scenes.Brothel.Bastet.Birth = function() {
 	Text.NL();
 	if(lucille.ThemeroomFirst()) {
 		Text.Add("It’s a strange feeling stepping through the mirror. Like entering a pool, but without getting wet.", parse);
-		lucille.flags["Theme"] |= Lucille.Themeroom.CatDynasty;
 	}
 	else {
 		Text.Add("You’ll never get used to the feeling of stepping through the mirror...", parse);
 	}
+	lucille.flags["Theme"] |= Lucille.Themeroom.CatDynasty;
 	Text.NL();
 	Text.Add("You look back and see that the doorway has vanished; you’re left standing in the middle of the desert. At least you’re no longer naked, or not as naked as before anyway. Looking over yourself, you see that you’re clad in a simple loincloth with another piece of cloth over your head to protect you from the oppressive heat of the desert.", parse);
 	Text.NL();
@@ -866,21 +869,13 @@ Scenes.Brothel.Bastet.Birth3 = function() {
 			
 			Scenes.Brothel.Bastet.TFBlock();
 			
-			/*
-			Text.NL();
-			Text.Add("", parse);
-			Text.NL();
-			Text.Add("", parse);
-			Text.NL();
-			Text.Add("", parse);
-			Text.NL();
-			Text.Add("", parse);
-			Text.NL();
-			Text.Add("", parse);
-			*/
+			Text.Add("Once you feel ready to leave, you dress yourself and leave the room, heading for the main area.", parse);
 			Text.Flush();
 			
-			Gui.NextPrompt();
+			Gui.NextPrompt(function() {
+				world.TimeStep({hour: 3});
+				Scenes.Lucille.WhoreAftermath(null, bastet.Cost());
+			});
 		});
 	});
 	

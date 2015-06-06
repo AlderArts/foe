@@ -33,6 +33,9 @@ Lucille.Themeroom = {
 	CatDynasty : 1
 };
 
+Lucille.prototype.ThemeroomOpen = function() {
+	return this.flags["buy"] >= Lucille.Buy.First;
+}
 Lucille.prototype.ThemeroomFirst = function() {
 	return this.flags["Theme"] == 0;
 }
@@ -56,9 +59,119 @@ Lucille.prototype.ToStorage = function() {
 
 // Flags
 
-// Schedule
+// Schedule TODO
 Lucille.prototype.IsAtLocation = function(location) {
 	return true;
+}
+
+Scenes.Lucille.Themerooms = function() {
+	var parse = {
+		playername: player.name,
+		sirmadam: player.mfFem("sir", "madam")
+	};
+	
+	var lucilleFirst = lucille.ThemeroomFirst();
+	var lucillePresent = lucilleFirst || lucille.IsAtLocation();
+	
+	Text.Clear();
+	Text.Add("You make your way toward a billboard of sorts in the back of the main hall, where a set of garish posters proclaim the fabulous experiences one might have in the themed rooms.", parse);
+	if(lucilleFirst) {
+		Text.Add(" You’re still not quite certain what they actually entail - Lucille’s explanation made them sound like some form of elaborate roleplaying, and you can’t deny that you are at least a little bit intrigued.", parse);
+		Text.NL();
+		Text.Add("<i>“Ah, you have an interest in our themed rooms?”</i> You give a startled jump as you hear Lucille’s voice behind you. Absorbed in the lurid descriptions on the board, you must have missed noticing her approach.", parse);
+		Text.NL();
+		Text.Add("<i>“For a meager pouch of coins, we can make your dreams come true,”</i> the hostess purrs, sliding a hand around your waist. <i>“Now, what sort of experience would you like to have? I have heard good things about the Cat Dynasty one, perhaps that one would be good for a beginner?”</i>", parse);
+	}
+	else if(lucillePresent) {
+		Text.Add(" As you ponder, Lucille slides up by your side, sensually placing a hand around your waist that sends shivers of anticipation up your spine.", parse);
+		Text.NL();
+		Text.Add("<i>“What sort of dream would you like to have this time, [playername]?”</i> Lucille murmurs at your side. <i>“Take your time deciding. Here, there are no opening or closing hours.”</i>", parse);
+	}
+	else {
+		Text.NL();
+		Text.Add("<i>“Anything to your liking?”</i> one of the attendants, a pretty young maid, approaches you. <i>“Take as much time as you like in making the choice, I will lead you to your dreams once you’re ready.”</i>", parse);
+	}
+	Text.NL();
+	Text.Add("Nodding, you turn to the board and survey your options.", parse);
+	Text.NL();
+	
+	//#room choice TODO
+	
+	Text.Add("<i><b>The Cat Dynasty:</b> Experience life through the eyes of a young feline chosen by the fates to saddle the mantle of godhood. As the goddess of love, Lady Bastet, how will your judgement change the lives of your adoring worshippers?</i>", parse);
+	Text.NL();
+	Text.Add("The poster shows a sultry, dark-skinned cat-morph reclining on a dias, fanned by her priestesses. Bastet seems to be a hermaphrodite with quite... impressive assets. The poster notes that each use is [coin] coins.", {coin: bastet.Cost()});
+	/*
+	Text.NL();
+	Text.Add("", parse);
+	*/
+	Text.Flush();
+	
+	var selection = function(func) {
+		Text.Clear();
+		if(lucillePresent) {
+			Text.Add("<i>“A wise choice,”</i> Lucille affirms, leading you toward the back. The two of you enter a narrow corridor with a long line of doors, each marked by a small symbol indicating what is inside. Some of the rooms are marked as occupied, and you hear strange noises from inside them.", parse);
+			Text.NL();
+			if(lucilleFirst) {
+				Text.Add("<i>“I’m not sure what sort of impression you have so far, and what your expectations going forward might be, but let me explain a bit about how the rooms work, so as to not startle you.”</i> The beauty leans against you reassuringly, her soft breasts squishing against your arm. <i>“This is not mere roleplay; what you see inside is a manifestation of a different reality, a space where you may freely explore and sate your desires.”</i>", parse);
+				Text.NL();
+				Text.Add("Is it some form of magic?", parse);
+				Text.NL();
+				Text.Add("<i>“You could say that. A glamour, hypnotism, a lucid dream...”</i> she waves her hand dismissively. <i>“Do not think of the details; immerse yourself in the experience as if it was real. Also, know that the procedure is entirely safe for you. No harm will befall you within these walls.”</i>", parse);
+				Text.NL();
+				Text.Add("Noting your lingering uncertainty, the madame gently caresses your cheek. <i>“Worry not. It might be frightening at first, but there are so many possibilities to explore, so much to see and do. I’ve heard it to be healthy to play out your fantasies in a safe space such as this, and see the world through a different lense. My explanation can’t give it justice though, you must experience it yourself. Will you take this leap of faith?”</i>", parse);
+				Text.NL();
+				Text.Add("Well, that is what you came here for, after all. It seems silly to turn back now. You nod, gaining an approving smile from Lucille that makes your heart skip a bit. <i>“Then enter, [playername].”</i> She steps aside, urging you inside the room. <i>“I assure you, it will be worth the price.”</i> You have the strange feeling that she’s not talking about money when she says the word price...", parse);
+			}
+			else {
+				Text.Add("<i>“This is it,”</i> the hostess stops in front of one of the doors, unlocking it. ", parse);
+				var scenes = new EncounterTable();
+				scenes.AddEnc(function() {
+					Text.Add("<i>“Sometime, you must tell me of your experiences,”</i> Lucille eyes you suggestively. <i>“Perhaps in my room, over a bottle of wine.”</i>", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("<i>“Have a pleasant time, [playername].”</i> She smiles, batting her thick eyelashes at you. <i>“This particular room has seen a lot of use lately - it seems to be really popular.”</i>", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("<i>“Remember, your choices inside does affect your unique experience. Feel free to explore any desires or urges that you usually would not.”</i>", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("<i>“Ah… it seems that someone is eager to get started,”</i> Lucille smiles warmly, brushing her hand lightly over your taut clothing and tracing the outline of your [cocks]. <i>“I do so hope that the experience is up to your expectations… if not, perhaps you can come by my chambers afterward?”</i>", {cocks: player.MultiCockDesc()});
+					player.AddLustFraction(1);
+				}, 1.0, function() { return player.FirstCock(); });
+				scenes.Get();
+				Text.NL();
+				Text.Add("With that, she steps aside, allowing you to enter the room.", parse);
+			}
+		}
+		else {
+			Text.Add("<i>“As you wish,”</i> the attendant nods, leading you into the back. She unlocks one of the many doors, gesturing for you to step inside. <i>“I hope you have a pleasant time, [sirmadam].”</i>", parse);
+		}
+		Text.Flush();
+		
+		Gui.NextPrompt(func);
+	};
+	
+	var options = new Array();
+	options.push({ nameStr : "Cat Dynasty",
+		tooltip : "Choose the Cat Dynasty and enter the role of Bastet, the hermaphrodite feline goddess.",
+		func : function() {
+			selection(Scenes.Brothel.Bastet.IntroEntryPoint);
+		}, enabled : true
+	});
+	/* TODO */
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		if(lucillePresent) {
+			Text.Add("<i>“It can be so hard to decide sometimes, can’t it?”</i> Lucille murmurs sympathetically at your side. <i>“Why don’t you mingle for a bit, chat with some of the staff before you’re ready to make your choice?”</i>", parse);
+			Text.NL();
+			Text.Add("You disentangle yourself from the dark beauty, throwing one last glance at the enticing posters.", parse);
+		}
+		else
+			Text.Add("<i>“Please come back when you’ve made your decision.”</i> The attendant gives you a courtesy, leaving you to your thoughts.", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt();
+	});
 }
 
 Scenes.Lucille.WhoreAftermath = function(name, cost) {
@@ -94,7 +207,17 @@ Scenes.Lucille.WhoreAftermath = function(name, cost) {
 		Text.Add("<i>“Here at the Shadow Lady, we value returning customers, so we take good care of our clientele. First time is on the house.”</i> She leans closer, whispering. <i>“Besides, I think [name] would be crushed if you didn’t come back for another visit.”</i>", parse);
 		Text.NL();
 		Text.Add("This isn’t the way you expected this place to run… But hey, why say no to a freebie?", parse);
+		Text.NL();
+		Text.Add("<i>“We offer many other services in this palace of pleasure,”</i> Lucille continues, placing a hand on your arm. <i>“For the right price, your every fantasy can be fulfilled; experiences beyond your wildest imagination can be yours to behold...”</i> You catch yourself drowning in the madame’s eyes, lured by her melodious voice that promises so much more than the mere words she speaks.", parse);
+		Text.NL();
+		Text.Add("<i>“When you are ready, I want you to visit our theme rooms. They are our specialty, experiences that not only satisfy the flesh, but also the spirit. Shards of different possibilities, things that may have been, fantasies beyond the mundane tapestry of our world.”</i> There is a sparkle in her gaze as she speaks of these things, and you find yourself trying to imagine what these mysterious rooms might be like… some form of roleplay, perhaps?", parse);
+		Text.NL();
+		Text.Add("<i>“Speak to me or one of the attendants should you wish to try them out,”</i> Lucille tells you. <i>“They are by far the most expensive luxuries provided in our establishment, but they are well worth the price, I promise you that.”</i>", parse);
+		Text.NL();
+		Text.Add("The voluptuous woman steps back, sensually trailing her finger down your arm almost as if to pull you along into her chambers and whatever unearthly pleasures might await there. You shake yourself back to reality just as she disappears behind a beaded curtain, an unreadable smile playing on her full lips.", parse);
 		Text.Flush();
+
+		player.AddLustFraction(0.5);
 		
 		lucille.flags["buy"] = Lucille.Buy.First;
 		
@@ -106,7 +229,10 @@ Scenes.Lucille.WhoreAftermath = function(name, cost) {
 			payFunc();
 		}
 		else {
-			Text.Add(" She greets you and makes some small talk, asking for bedside gossip. You reach down into your pouch to retrieve the coin to pay for your time with [name]… only to realize that you are short.", parse);
+			if(name)
+				Text.Add("She greets you and makes some small talk, asking for bedside gossip. You reach down into your pouch to retrieve the coin to pay for your time with [name]… only to realize that you’re short.", parse);
+			else
+				Text.Add("<i>“Was the experience satisfactory?”</i> Lucille asks, that mysterious smile playing on her lips. Still a bit shaken by whatever magic that powers the themed rooms, you merely nod. You reach down into your pouch to retrieve the coin for payment, only to realize that you’re short.", parse);
 			Text.NL();
 			Text.Add("<i>“Worry yourself not, [playername],”</i> Lucille waves away your concerns, though her sly grin in no way eases your mind. <i>“We all make the accidental slip once in a while… but do not make this a recurring occasion.”</i> She makes a sweeping gesture to her establishment, drawing your attention to the many whores working under her, to her impressive clientele.", parse);
 			Text.NL();
@@ -140,7 +266,10 @@ Scenes.Lucille.WhoreAftermath = function(name, cost) {
 	}
 	else {
 		Text.NL();
-		Text.Add("<i>“I trust that [name] was to your liking?”</i> she smiles knowingly, winking.", parse);
+		if(name)
+			Text.Add("<i>“I trust that [name] was to your liking?”</i> she smiles knowingly, winking.", parse);
+		else
+			Text.Add("<i>“I trust that the experience was to your liking?”</i> she smiles, winking. <i>“Be aware that the dream might cling for a while, but I assure you that the procedure is completely safe. You may return as many times as you wish.”</i>", parse);
 		Text.Flush();
 		
 		//[Pay][Shark]
