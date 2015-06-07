@@ -1137,6 +1137,8 @@ Entity.prototype.ParserTags = function(parse, prefix) {
 	parse[prefix + "skin"]      = function() { return ent.SkinDesc(); }
 	parse[prefix + "hair"]      = function() { return ent.Hair().Short(); }
 	parse[prefix + "face"]      = function() { return ent.FaceDesc(); }
+	parse[prefix + "ears"]      = function() { return ent.EarDesc(); }
+	parse[prefix + "eyes"]      = function() { return ent.EyeDesc()+'s'; }
 	parse[prefix + "hand"]      = function() { return ent.HandDesc(); }
 	parse[prefix + "hips"]      = function() { return ent.HipsDesc(); }
 	parse[prefix + "thighs"]    = function() { return ent.ThighsDesc(); }
@@ -1644,20 +1646,63 @@ Entity.prototype.UnfertilezedWomb = function() {
 Entity.prototype.NumBreastRows = function() {
 	return this.body.breasts.length;
 }
+Entity.prototype.FirstBreastRow = function() {
+	return this.body.breasts[0];
+}
+Entity.prototype.AllBreastRows = function() {
+	return this.body.breasts;
+}
 Entity.prototype.BiggestBreasts = function() {
-	var c = this.body.breasts[0];
-	var cSize = this.body.breasts[0].size.Get();
-	for(var i=1,j=this.body.breasts.length; i<j; i++) {
-		var newSize = this.body.breasts[i].size.Get();
+	var breasts = this.body.breasts;
+	var c = breasts[0];
+	var cSize = breasts[0].Size();
+	for(var i=1,j=breasts.length; i<j; i++) {
+		var newSize = breasts[i].Size();
 		if(newSize > cSize) {
 			cSize = newSize;
-			c = this.body.breasts[i];
+			c = breasts[i];
 		}
 	};
 	return c;
 }
-Entity.prototype.FirstBreastRow = function() {
-	return this.body.breasts[0];
+Entity.prototype.SmallestBreasts = function() {
+	var breasts = this.body.breasts;
+	var c = breasts[0];
+	var cSize = breasts[0].Size();
+	for(var i=1,j=breasts.length; i<j; i++) {
+		var newSize = breasts[i].Size();
+		if(newSize < cSize) {
+			cSize = newSize;
+			c = breasts[i];
+		}
+	};
+	return c;
+}
+Entity.prototype.BiggestNips = function() {
+	var breasts = this.body.breasts;
+	var c = breasts[0];
+	var cSize = breasts[0].NipSize();
+	for(var i=1,j=breasts.length; i<j; i++) {
+		var newSize = breasts[i].NipSize();
+		if(newSize > cSize) {
+			cSize = newSize;
+			c = breasts[i];
+		}
+	};
+	return c;
+}
+Entity.prototype.SmallestNips = function() {
+	var breasts = this.body.breasts;
+	var c = breasts[0];
+	var cSize = breasts[0].NipSize();
+	for(var i=1,j=breasts.length; i<j; i++) {
+		var newSize = breasts[i].NipSize();
+		if(newSize < cSize) {
+			cSize = newSize;
+			c = breasts[i];
+		}
+	};
+	return c;
 }
 Entity.prototype.NipplesThatFitLen = function(capacity) {
 	var ret = new Array();
@@ -1665,14 +1710,11 @@ Entity.prototype.NipplesThatFitLen = function(capacity) {
 		var row = this.body.breasts[i];
 		if(row.nippleType == NippleType.lipple ||
 			row.nippleType == NippleType.cunt) {
-			if(row.nippleThickness.Get() * row.nippleLength.Get() >= capacity)
+			if(row.NipSize() >= capacity)
 				ret.push(row);
 		}
 	};
 	return ret;
-}
-Entity.prototype.AllBreastRows = function() {
-	return this.body.breasts;
 }
 
 
@@ -1885,8 +1927,14 @@ Entity.prototype.Hair = function() {
 Entity.prototype.HasHair = function() {
 	return this.body.head.hair.Bald() == false;
 }
+Entity.prototype.Face = function() {
+	return this.body.head;
+}
 Entity.prototype.Mouth = function() {
 	return this.body.head.mouth;
+}
+Entity.prototype.Tongue = function() {
+	return this.body.head.mouth.tongue;
 }
 Entity.prototype.Eyes = function() {
 	return this.body.head.eyes;

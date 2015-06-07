@@ -83,6 +83,10 @@ LactationHandler.prototype.Update = function(hours) {
 	}
 }
 
+LactationHandler.prototype.FillMilk = function(fraction) {
+	fraction = fraction || 1;
+	this.milk.IncreaseStat(this.MilkCap(), this.MilkCap() * fraction);
+}
 LactationHandler.prototype.MilkDrained = function() {
 	this.lactating = false;
 }

@@ -15,7 +15,6 @@ function Breasts(race, color) {
 	this.size            = new Stat(1);
 	this.nippleThickness = new Stat(0.5);
 	this.nippleLength    = new Stat(0.5);
-	this.aerolaSize      = new Stat(2);
 }
 Breasts.prototype = new BodyPart();
 Breasts.prototype.constructor = Breasts;
@@ -30,7 +29,6 @@ Breasts.prototype.ToStorage = function(full) {
 		storage.race    = this.race.id.toFixed();
 		storage.nipThk  = this.nippleThickness.base.toFixed(2);
 		storage.nipLen  = this.nippleLength.base.toFixed(2);
-		storage.aerS    = this.aerolaSize.base.toFixed(2);
 		storage.nipType = this.nippleType.toFixed();
 	}
 	return storage;
@@ -44,12 +42,14 @@ Breasts.prototype.FromStorage = function(storage) {
 	this.size.base            = parseFloat(storage.size)   || this.size.base;
 	this.nippleThickness.base = parseFloat(storage.nipThk) || this.nippleThickness.base;
 	this.nippleLength.base    = parseFloat(storage.nipLen) || this.nippleLength.base;
-	this.aerolaSize.base      = parseFloat(storage.aerS)   || this.aerolaSize.base;
 	this.nippleType           = parseInt(storage.nipType)  || this.nippleType;
 }
 
 Breasts.prototype.Size = function() {
 	return this.size.Get();
+}
+Breasts.prototype.NipSize = function() {
+	return this.nippleThickness.Get() * this.nippleLength.Get();
 }
 Breasts.prototype.noun = function() {
 	var size = this.size.Get();

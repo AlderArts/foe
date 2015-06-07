@@ -106,17 +106,185 @@ Scenes.Brothel.Bastet.SceneSelect = function(choice) {
 }
 
 Scenes.Brothel.Bastet.TFBlock = function() {
-	var parse = {
-		
-	};
+	var parse = {};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
 	Text.Add("Stretching, you take a few moments to check yourself over, getting used to having your real body back.", parse);
-	
-	
-	//TODO TFs
-	
 	Text.NL();
-	Text.Add("", parse);
+	
+	var TFapplied = false;
+	
+	var scenes = new EncounterTable();
+	
+	var incompleteCatTF = function() {
+		if(!player.Ears().race.isRace(Race.Feline)) return true;
+		if(player.HasTail() && !player.HasTail().race.isRace(Race.Feline)) return true;
+		if(!player.Eyes().race.isRace(Race.Feline)) return true;
+		if(!player.Tongue().race.isRace(Race.Feline)) return true;
+		if(player.FirstCock() && !player.BiggestCock().race.isRace(Race.Feline)) return true;
+		if(!player.Arms().race.isRace(Race.Feline)) return true;
+		if(!player.Legs().race.isRace(Race.Feline)) return true;
+		if(!player.Race().isRace(Race.Feline)) return true;
+		if(!player.Face().race.isRace(Race.Feline)) return true;
+		return false;
+	};
+	
+	var func = function(obj) {
+		scenes.AddEnc(function() {
+			TFapplied = true;
+			return _.isFunction(obj.tf) ? obj.tf() : "";
+		}, obj.odds || 1, obj.cond);
+	};
+	
+	func({
+		tf: function() {
+			var breasts = player.AllBreastRows();
+			for(var i = 0; i < breasts.length; i++) {
+				breasts[i].size.IncreaseStat(40, 2);
+			}
+			return "Your [breasts] feel a bit heavier. It seems like your [breasts] have increased in size.";
+		},
+		odds: 2,
+		cond: function() { return player.SmallestBreasts().Size() < 40; }
+	});
+	func({
+		tf: function() {
+			var breasts = player.AllBreastRows();
+			for(var i = 0; i < breasts.length; i++) {
+				breasts[i].nippleThickness.IncreaseStat(2, 0.5);
+				breasts[i].nippleLength.IncreaseStat(2, 0.5);
+			}
+			return "Your [nips] feel tingly, and upon closer examination, you realize they have grown bigger.";
+		},
+		cond: function() { return player.SmallestNips().NipSize() < 4; }
+	});
+	func({
+		tf: function() {
+			var ret = player.Lactation();
+			player.lactHandler.lactating = true;
+			player.lactHandler.FillMilk(1);
+			player.lactHandler.milkProduction.IncreaseStat(5, 1);
+			player.lactHandler.lactationRate.IncreaseStat(10, 1);
+			return ret ? "Your breasts feel fuller. Somehow you know you’re producing more milk now." : "Milk begins seeping from your [nips]. Seems like you’re lactating now.";
+		},
+		odds: 2,
+	});
+	func({
+		tf: function() {
+			player.body.femininity.IncreaseStat(1, 0.1);
+			return "Your reflection looks more… feminine than before.";
+		},
+		odds: 1,
+		cond: function() { return player.body.femininity.Get() < 1; }
+	});
+	func({
+		tf: function() {
+			var ret = player.HasBalls();
+			TF.SetBalls(player.Balls(), 2, 2);
+			player.Balls().size.IncreaseStat(6, 1);
+			player.Balls().cumProduction.IncreaseStat(3, 0.25);
+			return ret ? "Your balls feel heavier somehow, and you just know it isn’t just more cum that you’re producing. Your balls have actually gotten bigger." : "You note the addition of a nutsack below your [cocks]. This wasn’t here before...";
+		},
+		odds: 3,
+		cond: function() { return player.FirstCock(); }
+	});
+	func({
+		tf: function() {
+			player.body.cock.push(new Cock(Race.Feline));
+			parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+			return "Looking between your legs, you notice that you seem to have acquired a feline pecker. Much like the one you had in the world beyond the mirror. Although it lacks a sheath, and isn’t nearly as big as the one you had as Bastet.";
+		},
+		odds: 1,
+		cond: function() { return !player.FirstCock(); }
+	});
+	func({
+		tf: function() {
+			player.FirstVag().stretch.IncreaseStat(2, 0.25);
+			return "Your [vag] tingles for some reason. Spreading your nethers to examine yourself, you note that you feel much more stretchy than before. This should let you take bigger cocks than you could before.";
+		},
+		odds: 1,
+		cond: function() { return player.FirstVag() && player.FirstVag().Tightness() < 2; }
+	});
+	func({
+		tf: function() {
+			player.body.vagina.push(new Vagina());
+			return "A tingling between your legs bothers you, and you move to scratch it. A gasp of pleasure escapes you as you unwittingly touch a pair of pussy lips between your legs. It seems that you have grown a new pussy.";
+		},
+		odds: 1,
+		cond: function() { return !player.FirstVag(); }
+	});
+	func({
+		tf: function() {
+			if(!player.Ears().race.isRace(Race.Feline)) {
+				var t = Text.Parse("You hadn’t realized before, but it seems your [ears] have have turned into triangular cat-ears. You twitch them experimentally and reach up to touch them. These are no illusion...", parse);
+				player.Ears().race = Race.Feline;
+				return t;
+			}
+			else if(player.HasTail() && !player.HasTail().race.isRace(Race.Feline)) {
+				var t = "A strange sensation on your lower back makes itself known, and you reach back to check what is it. A gasp escapes your lips as you grasp the source of the discomfort, and feel a light tug. Looking back, it seems you have grown a cat tail.";
+				if(player.HasTail()) {
+					t = Text.Parse("Something feels different with your [tail]. Looking back, you realize that your [tail] has turned into a thin feline tail.", parse);
+					player.HasTail().race = Race.Feline;
+				}
+				else {
+					TF.SetAppendage(player.Back(), AppendageType.tail, Race.Feline, Color.black);
+				}
+				return t;
+			}
+			else if(!player.Eyes().race.isRace(Race.Feline)) {
+				player.Eyes().race = Race.Feline;
+				return "Your vision feels a little different, and looking closely at yourself in the mirror, you realize that your eyes have become slitted feline eyes.";
+			}
+			else if(!player.Tongue().race.isRace(Race.Feline)) {
+				player.Tongue().race = Race.Feline;
+				return "A tingle inside your mouth causes you some discomfort, and when you examine your tongue you realize that it has changed into a rough feline tongue.";
+			}
+			else if(player.FirstCock() && !player.BiggestCock().race.isRace(Race.Feline)) {
+				var t = Text.Parse("Something feels different on your [cocks]. Examining [itThem], you realise[oneof] your [cocks] has changed into a feline pecker, complete with a barbed tip.", parse);
+				player.BiggestCock().race = Race.Feline;
+				return t;
+			}
+			else if(!player.Arms().race.isRace(Race.Feline)) {
+				player.Arms().race = Race.Feline;
+				return "You notice a strange feeling on the tips of your fingers, and upon close inspection, you realize that you have pads on your hands now. Flexing them, you gasp as a sharp feline claw emerges from the tips of your fingers.";
+			}
+			else if(!player.Legs().race.isRace(Race.Feline)) {
+				var t = Text.Parse("You hadn’t even realized, but your [legs] have changed. It felt so natural to walk like this in the illusion that you hadn’t even paid attention to it. Sitting down on the stool you examine your new legs. They look like cat-legs, tipped with cat-paws for feet.", parse);
+				if(player.HasLegs())
+					t = Text.Parse("You shift your stance a little. Your [legs] feel different. Sitting on the stool, you take a closer look. Seems like your legs have changed into feline legs, capped with cat footpaws.", parse);
+				player.Legs().race = Race.Feline;
+				return t;
+			}
+			else if(!player.Race().isRace(Race.Feline)) {
+				player.body.torso.race = Race.Feline;
+				return "You were too worried to realize, but you’re now covered in short cat fur.";
+			}
+			else if(!player.Face().race.isRace(Race.Feline)) {
+				player.Face().race = Race.Feline;
+				return "You don’t know how you hadn’t realized before, but your face has changed to that of a cat. It seems that now you truly are a cat-morph. Complete with every bit and piece that begets the title.";
+			}
+		},
+		odds: 3,
+		cond: function() { return incompleteCatTF(); }
+	});
+	
+	var text = [];
+	_.times(_.random(0, 3), function() {
+		text.push(scenes.Get());
+	});
+	
+	if(TFapplied) {
+		Text.Add("As you check yourself out, you realise that your body has changed! It must be some sort of side effect from the magic used in the mirror...", parse);
+		_.each(text, function(t) {
+			Text.NL();
+			Text.Add(t, parse);
+		});
+	}
+	else {
+		Text.Add("Everything checks out, you were just a little disorientated.", parse);
+	}
+	Text.NL();
 }
 
 Scenes.Brothel.Bastet.Birth = function() {
