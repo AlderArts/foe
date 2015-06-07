@@ -40,6 +40,11 @@ Scenes.Dreams.Entry = function(func) {
 			scenes.AddEnc(Scenes.Dreams.CunnilingusRec, 2.0, function() { return player.sex.rCunn >= 25; }, ravenTrigger);
 			scenes.AddEnc(Scenes.Cveta.DreamRoses, 1.0, function() { return cveta.flags["Met"] >= Cveta.Met.FirstMeeting; }, ravenTrigger);
 			scenes.AddEnc(Scenes.Cveta.DreamBrood, 1.0, function() { return cveta.flags["Met"] >= Cveta.Met.FirstMeeting; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.FragileArmor, 1.0, function() { return rigard.Twopenny["Met"] > 0; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.AscheNighttime, 1.0, function() { return asche.flags["Met"] >= Asche.Met.Met; }, ravenTrigger);
+			scenes.AddEnc(Scenes.Dreams.AscheDance, 1.0, function() { return asche.flags["Magic"] != 0; }, ravenTrigger);
+			//TODO //Must have completed Asche’s first task, be it success or failure.
+			//scenes.AddEnc(Scenes.Dreams.AscheHotSpring, 1.0, function() { return asche.flags["Magic"] != 0; }, ravenTrigger);
 			
 			var end = function() {
 				Scenes.Dreams.RavenAfterDream(ravenTrigger, func);
@@ -945,6 +950,117 @@ Scenes.Dreams.CunnilingusRec = function(ravenTrigger) {
 	
 	player.AddLustFraction(0.5);
 }
+
+Scenes.Dreams.FragileArmor = function(ravenTrigger) {
+	var parse = {
+		raven : Scenes.Dreams.RavenText(ravenTrigger, "A raven perches on an armor stand, watching the argument as it unfolds", "There’s a raven sitting on an armor stand, watching you. You need to remember this")
+	};
+	
+	Text.Add("You’re arguing with Donovan, trying to get the stoat-morph to come around to your point of view. It’s just that his armor was all very nice and gleaming when it was on the shelf, but there’s just something about it… or rather, <i>was</i> something about it.", parse);
+	Text.NL();
+	Text.Add("Donovan just grins that stupid grin of his as he listens to you. [raven].", parse);
+	Text.NL();
+	Text.Add("See, when that monster hit you - and not repeatedly, just once. When that monster hit you <i>once</i>, that armor you bought from him didn’t quite perform as expected.", parse);
+	Text.NL();
+	Text.Add("<i>“Yes, yes,”</i> Donovan replies. <i>“Well, my goods are second-hand, so it’s only expected that some wear and tear’s present - misaligned thaumatheurgeons, shroomite anomalies, that sort of thing-”</i>", parse);
+	Text.NL();
+	Text.Add("No, no, no. You don’t quite think you’re on the same page here. The armor you bought didn’t bend. It didn’t buckle. What it did was quite literally fall apart into its constituent pieces, leaving you in little more than your underwear - it’s a miracle you managed to escape the horde of ghosts and goblins alive. <i>That</i>, you believe, still crosses the line even when one takes the hand-me-down nature of his goods into account.", parse);
+	Text.NL();
+	Text.Add("You don’t quite remember Donovan’s reply to that. What you <i>do</i> remember is giving the weaselly little bastard a good right hook, and the look on his face as your fist connects with it is a small victory for disgruntled customers through all the planes.", parse);
+	Text.NL();
+	Text.Add("Alas, it’s then that you wake up, although you feel very, very satisfied with yourself.", parse);
+}
+
+//Must have met Asche.
+Scenes.Dreams.AscheNighttime = function(ravenTrigger) {
+	var parse = {};
+	
+	Text.Add("The scent of oleander and jasmine tickles your nose as you do your best to relax on the mat that’s been so thoughtfully supplied for you. Clothed in her white sari and bearing a tea set in her hands, Asche sets down her burden on the low table and pours a cup of steaming brew each for the both of you, kneeling on the mat on her side of the table.", parse);
+	Text.NL();
+	Text.Add("<i>“Mm, Asche is enjoying visiting like this,”</i> the jackaless murmurs, raising her cup to her muzzle. <i>”Customer is being having the most vivid dreams, this jackaless is quite impressed. Is also very convenient, not needing to be crossing street to get to customer.”</i>", parse);
+	Text.NL();
+	Text.Add("Indeed. The tea a deep brown, and you can see dried petals floating on its surface - it tastes bland, a hint of bitterness on the edge of your tongue the only taste to it. You polish off the cup, and allow Asche to serve you more.", parse);
+	Text.NL();
+	if(ravenTrigger) {
+		Text.Add("<i>“To be going away, pesky thing!”</i> Surprised at Asche’s sudden outburst, you watch as she draws out a pinch of sulphurous powder and tosses it into the air. A stream of yellow-white flame shoots from her pointed finger, there’s a brief squawk, and a raven flaps away indignantly, leaving the scent of singed feathers in its wake. <i>“To be running back to your mistress, little spy - Asche does not like peepers!”</i>", parse);
+		Text.NL();
+		Text.Add("Satisfied that the raven’s gone, the scowl fades from Asche’s face, and the jackaless settles down at the table once more.", parse);
+		Text.NL();
+	}
+	Text.Add("So, was there something she needed, or is this just a courtesy call?", parse);
+	Text.NL();
+	Text.Add("<i>“Asche is merely desiring to visit, that is all. Maybe share some tea? Is nice to be dropping in from time to time, is it not? Customer is not the only one whom Asche is visiting in this manner, after all.”</i>", parse);
+	Text.NL();
+	Text.Add("The two of you continue talking into the night, the conversation aided along by the liberal application of a seemingly inexhaustible supply of tea and biscuits. While you don’t quite remember the topic of conversation, you do recall the the biscuits were delightfully tasty, and are a bit saddened when you do wake up.", parse);
+}
+
+Scenes.Dreams.AscheDance = function(ravenTrigger) {
+	var parse = {
+		skin : player.SkinDesc()
+	};
+	
+	Text.Add("A light drizzle sprinkles down from the overcast sky - it’s been coming down for most of the spring, with more rainy days than dry ones, let alone the precious few moments when the clouds actually part and let some sunshine through. But such is the nature of life in the highlands, and one learns to put up with it.", parse);
+	Text.NL();
+	Text.Add("You’ve been waiting for her in the circle of standing stones for ten minutes now - she’s never actually tardy, but always just enough to be fashionably late. And indeed, here she comes, stepping into the circle as if she owns the grounds.", parse);
+	Text.NL();
+	Text.Add("<i>“Asche sends her apologies,”</i> the jackalass says as she saunters towards you, blowing you a kiss. <i>“This jackaless hurried over as quickly as she could; it has just been violent sort of day, that is all. ", parse);
+	if(ravenTrigger)
+		Text.Add("Also, Asche had to deal with a little birdy; she does not like spies, no. ", parse);
+	Text.Add("But we are ready to begin?”</i>", parse);
+	Text.NL();
+	Text.Add("You’re the one who’s been standing here waiting for her, not the other way round.", parse);
+	Text.NL();
+	Text.Add("<i>“Very well, then please to be leading, since you are being waiting.”</i>", parse);
+	Text.NL();
+	Text.Add("Asche is as naked as you are, her only clothing being her fur, her jewellery, and the intricate and exquisite patterns of gold painted on her body. You, too, have prepared yourself in much a similar fashion, and take the jackaless’ hand before leading her in the dance.", parse);
+	Text.NL();
+	Text.Add("Where did you learn the steps? You don’t remember. Yet your body moves, the golden paint on your [skin] rippling as your muscles move with fluid grace. Your feet feel astoundingly light - and so does Asche, as you gather her up and twirl her about.", parse);
+	Text.NL();
+	Text.Add("Obsidian, to specifically invoke the land’s heat.", parse);
+	Text.NL();
+	Text.Add("Wood, to represent nature’s permanence.", parse);
+	Text.NL();
+	Text.Add("A small measure of spider’s silk to bind the charm.", parse);
+	Text.NL();
+	Text.Add("The damp grass kisses your toes, while the curves of Asche’s body fill your palms with generous abundance. One, two, three - one, two, three - the memories flow unbidden, you body taking on a life of its own, until the beating of the spell no longer mirrors the beating of your hearts and the dance comes to a stop.", parse);
+	Text.NL();
+	Text.Add("Did it work?", parse);
+	Text.NL();
+	Text.Add("<i>“To be looking,”</i> Asche says, pointing up. Indeed, the drizzle has finally ended, and as you watch, the clouds part ever so slightly to bathe the hilltop and circle with warm sunlight. It’s not much - it covers only a small area, and it’ll only last a few days - but it’s more than enough for your purposes. <i>“To be sure that customer is being very good dancer. Maybe will be asking for help again next time…”</i>", parse);
+	Text.NL();
+	Text.Add("You wake with a start, the feel of hard-won sunshine still warm on your face.", parse);
+}
+
+Scenes.Dreams.AscheHotSpring = function(ravenTrigger) {
+	var parse = {};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
+	Text.Add("Above, a chill wind that snaps at your [skin]. Below, a gentle warmth that feels delightful and soothes aching muscles. It’s little wonder why, given the circumstances, you’re quite unwilling to get out of the hot spring - the rocky highland landscape might be very pretty with its mossy rocks and light dusting of frost, but it’s just not nice and toasty like the water is here. Besides, there’s the jackaless right in the spring with you…", parse);
+	Text.NL();
+	Text.Add("Asche’s sari lies neatly folded on a flat-topped rock, her jewellery similarly in a small heap besides her clothes. Bubbling and steaming ever so slightly, the water swirls about both of you, and instead of the sulphurous smell that you expected, the aroma that greets your nose is actually quite fragrant. Jasmine, to be exact.", parse);
+	Text.NL();
+	Text.Add("<i>“Customer is liking this?”</i> The jackaless’ voice is salacious and suggestive, dripping with honey and unspoken promises. Like you, she’s steeped to her neck in cloudy, mineral-rich water, eyes half-closed with utter bliss written all over her face. <i>“Is taking this jackaless some practice to conjure up proper memory, but she is finding it very useful after long day’s work, almost like real thing. Is also very nice place to entertain others.”</i>", parse);
+	Text.NL();
+	Text.Add("Mmm… if this what a highland hot spring feels like, you need to find one for real when you wake up.", parse);
+	Text.NL();
+	if(ravenTrigger) {
+		Text.Add("<i>“Nice, private location where one is not likely to be interrupted, yes yes,”</i> Asche continues. <i>“There was little bird spy earlier on, but Asche is chasing it away and sending it back to where it is coming from.”</i>", parse);
+		Text.NL();
+	}
+	Text.Add("Out of your half-lidded eyes, you notice Asche rising to her feet, water cascading off her curvaceous contours as she wades towards you. Her blond hair and dark golden fur cling to her body, leaving little to the imagination as the distance between your bodies dwindles. Looking down at you, the jackaless grins. You swear her nipples are swelling and hardening before your eyes - although whether it’s with the cold, or with something else, is anyone’s guess…", parse);
+	Text.NL();
+	Text.Add("Perhaps you ought to do something, but by the time the thought forms in your mind she’s upon you, the firm flesh of her generous dugs rubbing against your [breasts]", parse);
+	if(player.FirstCock())
+		Text.Add(", her fingers curling about your [cocks], quickly stroking [itThem] to painful erection", parse);
+	else if(player.FirstVag())
+		Text.Add(", her fingers nimbly slipping into the wet heat of your snatch", parse);
+	Text.Add(" even as she plants a firm kiss on your lips.", parse);
+	Text.NL();
+	Text.Add("You wake up relaxed, if a little disoriented. Is there a scent of jasmine in the air? No, no, it’s gone now; it must have been your imagination - and yet the final touch of the jackaless’ lips lingers on your own…", parse);
+}
+
+
 /*
 Scenes.Dreams.Ocean = function(ravenTrigger) {
 	var parse = {
