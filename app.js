@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 4;
-VERSION_SUBSCRIPT = "c2";
-VERSION_NAME = "Combat rewrite, pt.2.5";
+VERSION_SUBSCRIPT = "d";
+VERSION_NAME = "Aquilius, Bastet and Equines";
 
 SAVE_VERSION = 26;
 // Save version 1: Initial
