@@ -168,7 +168,7 @@ Scenes.Brothel.Bastet.TFBlock = function() {
 			player.lactHandler.lactationRate.IncreaseStat(10, 1);
 			return ret ? "Your breasts feel fuller. Somehow you know you’re producing more milk now." : "Milk begins seeping from your [nips]. Seems like you’re lactating now.";
 		},
-		odds: 2,
+		odds: 2
 	});
 	func({
 		tf: function() {
