@@ -253,7 +253,7 @@ Scenes.Brothel.Bastet.Birth = function() {
 				Text.Add("<i>“That’s all I could ask for, Your Ladyship. Now please, follow me to the bathing pool,”</i> she says, tugging you along towards the end of the hallway.", parse);
 				Text.Flush();
 				
-				Scenes.Brothel.Bastet.Birth2();
+				Gui.NextPrompt(Scenes.Brothel.Bastet.Birth2);
 			}, enabled : true
 		});
 		options.push({ nameStr : "Nevermind",
@@ -267,7 +267,7 @@ Scenes.Brothel.Bastet.Birth = function() {
 				Text.Add("You look around in wonder, admiring the lavish decor as she leads you away. Gradually, you begin to notice a scent. The scent of greenery and water. When you look ahead, you realize that she’s taken you to a large bathing pool.", parse);
 				Text.Flush();
 				
-				Scenes.Brothel.Bastet.Birth2();
+				Gui.NextPrompt(Scenes.Brothel.Bastet.Birth2);
 			}, enabled : true
 		});
 		Gui.SetButtonsFromList(options, false, null);
