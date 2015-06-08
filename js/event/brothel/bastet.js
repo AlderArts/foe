@@ -223,9 +223,11 @@ Scenes.Brothel.Bastet.TFBlock = function() {
 			}
 			else if(player.HasTail() && !player.HasTail().race.isRace(Race.Feline)) {
 				var t = "A strange sensation on your lower back makes itself known, and you reach back to check what is it. A gasp escapes your lips as you grasp the source of the discomfort, and feel a light tug. Looking back, it seems you have grown a cat tail.";
-				if(player.HasTail()) {
+				var tail = player.HasTail();
+				if(tail) {
+					parse["tail"] = tail.Short();
 					t = Text.Parse("Something feels different with your [tail]. Looking back, you realize that your [tail] has turned into a thin feline tail.", parse);
-					player.HasTail().race = Race.Feline;
+					tail.race = Race.Feline;
 				}
 				else {
 					TF.SetAppendage(player.Back(), AppendageType.tail, Race.Feline, Color.black);
