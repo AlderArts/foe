@@ -323,7 +323,7 @@ Inventory.prototype.CombatInventory = function(encounter, entity, back) {
         //Text.Add(num + "x " + it.name + " - " + it.Short() + "<br/>");
         options.push({
             nameStr: it.name,
-            enabled: true,
+            enabled: it.combat ? it.combat.enabledCondition(encounter, entity) : true,
             //tooltip: it.Long(),
             obj: it,
             func: function(item) {

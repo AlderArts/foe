@@ -97,6 +97,9 @@ Items.Combat.SmokeBomb = new CombatItem("esc0", "S.Bomb");
 Items.Combat.SmokeBomb.price = 100;
 Items.Combat.SmokeBomb.Short = function() { return "A smoke bomb."; }
 Items.Combat.SmokeBomb.Long = function() { return "A glass sphere containing an alchemical concoction that disperses in thick, oily smoke when mixed with air. Smashing the bomb creates instant cover."; }
+Items.Combat.SmokeBomb.combat.enabledCondition = function(encounter, caster) {
+	return encounter.canRun;
+}
 Items.Combat.SmokeBomb.combat.targetMode = TargetMode.Self;
 Items.Combat.SmokeBomb.combat.CastInternal = function(encounter, caster) {
 	var parse = AbilityNode.DefaultParser(caster);

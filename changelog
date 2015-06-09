@@ -7,7 +7,7 @@ CHANGELOG for Fall of Eden
 
 Version 0.4e
 ------------
-* 
+* Fixed the issue that was causing smoke bombs to break certain scenes by escaping unescapable battles. Smoke Bomb is now disabled in those fights.
 
 --------------------------------------------
              PREVIOUS VERSIONS
