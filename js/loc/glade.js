@@ -7,7 +7,7 @@
 function DryadGlade(storage) {
 	this.flags = {};
 	
-	this.flags["Visit"] = DryadGlade.NotVisited;
+	this.flags["Visit"] = DryadGlade.Visit.NotVisited;
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -78,7 +78,7 @@ world.loc.Forest.Glade.events.push(new Link(
 ));
 
 world.loc.Forest.Glade.onEntry = function() {
-	if(glade.flags["Visit"] >= 2) {
+	if(glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid) {
 		PrintDefaultOptions();
 		return;
 	}
@@ -88,11 +88,11 @@ world.loc.Forest.Glade.onEntry = function() {
 	};
 	
 	Text.Clear();
-	if(glade.flags["Visit"] == 0) {
+	if(glade.flags["Visit"] == DryadGlade.Visit.NotVisited) {
 		Text.Add("You’ve never been quite as deep into the forest as this before, and you can’t help but feel uneasy as the trees around you grow larger and larger. By now, you are beneath the canopy of the Great Tree itself, an oppressive shadow looming thousands of feet above you. In comparison, the trees around you seem small, but you have no doubt that they are very old. The deeper you delve, the harder it is to pass through the dense undergrowth, and thick tree trunks seem to be almost cutting off your path. If not for the court magician’s directions, you would have been hopelessly lost long ago.", parse);
 		Text.NL();
 		Text.Add("Just as you are beginning to wonder if Jeanne has sent you on a wild goose chase, you notice the trees thinning ahead.", parse);
-		glade.flags["Visit"] = 1;
+		glade.flags["Visit"] = DryadGlade.Visit.Visited;
 	}
 	else {
 		Text.Add("You begin to recognize the path to the dryad glade that Jeanne told you about. Once again, you approach the clearing deep within the forest.", parse);
@@ -619,7 +619,7 @@ Scenes.DryadGlade.FirstWin = function(enc) {
 			Text.Add("You thank Mother Tree for her help, the warm stone grasped tightly in your hand. You hope the little girl is all right, as you’re still not sure of the properties of the gem. The best person to ask would be Jeanne, and she awaits you near the crossroads.", parse);
 			Text.Flush();
 			
-			glade.flags["Visit"] = 2;
+			glade.flags["Visit"] = DryadGlade.Visit.DefeatedOrchid;
 			
 			Gui.NextPrompt();
 		});

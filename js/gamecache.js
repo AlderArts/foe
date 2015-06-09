@@ -334,7 +334,7 @@ CacheToGame = function() {
 			party.Inv().AddItem(Items.Weapons.MageStaff);
 			party.Inv().AddItem(Items.Armor.MageRobes);
 		}
-		if(glade.flags["Visit"] >= 2) {
+		if(glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid) {
 			party.Inv().AddItem(Items.Weapons.VineWhip);
 			party.Inv().AddItem(Items.Armor.VineBra);
 			party.Inv().AddItem(Items.Armor.VinePanties);

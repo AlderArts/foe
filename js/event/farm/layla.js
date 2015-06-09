@@ -2032,7 +2032,7 @@ Scenes.Layla.PartyRegular = function(switchSpot) {
  */
 
 Scenes.Layla.FarmMeetingTrigger = function(approach) {
-	if(glade.flags["Visit"] < 2) return false; //TODO: change to after portals open?
+	if(glade.flags["Visit"] < DryadGlade.Visit.DefeatedOrchid) return false; //TODO: change to after portals open?
 	if(layla.flags["Met"] == Layla.Met.NotMet) {
 		if(approach) {
 			if(world.time.hour >= 8 && world.time.hour < 18) {

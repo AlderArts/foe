@@ -252,7 +252,7 @@ world.loc.Plains.Portals.description = function() {
 	else {
 		Text.Add("You are standing at its apex, studying the strange stone obelisks standing in a large circle. Each one taller than two men in height, the black slates are covered in intricate magical runes, a few of them glowing faintly. There is an eerie feeling in the air around them.", parse);
 		Text.NL();
-		if(glade.flags["Visit"] >= 2) {
+		if(glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid) {
 			Text.Add("Not far from the strange stone pillars you can see Jeanne standing near a small tent, working on some form of magical device powered by a set of crystals.", parse);
 			if(!world.time.IsDay())
 				Text.Add(" She’s set up some torches to light her way, and that together with the glowing runes gives you just enough illumination to see.", parse);
