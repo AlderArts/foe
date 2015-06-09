@@ -628,14 +628,14 @@ Terry.prototype.Act = function(encounter, activeChar) {
 	this.turnCounter++;
 	
 	if(first) {
-		Items.Combat.DecoyStick.UseCombatInternal(encounter, this);
+		Items.Combat.DecoyStick.combat.Use(encounter, this);
 		return;
 	}
 	
 	var choice = Math.random();
 	
 	if(this.turnCounter > 4 && this.sbombs > 0)
-		Items.Combat.SmokeBomb.UseCombatInternal(encounter, this);
+		Items.Combat.SmokeBomb.combat.Use(encounter, this);
 	else if(Abilities.Physical.Backstab.enabledCondition(encounter, this) && Abilities.Physical.Backstab.enabledTargetCondition(encounter, this, t))
 		Abilities.Physical.Backstab.Use(encounter, this, t);
 	else if(choice < 0.2 && Abilities.Physical.Kicksand.enabledCondition(encounter, this))
@@ -643,9 +643,9 @@ Terry.prototype.Act = function(encounter, activeChar) {
 	else if(choice < 0.4 && Abilities.Physical.Swift.enabledCondition(encounter, this))
 		Abilities.Physical.Swift.Use(encounter, this);
 	else if(choice < 0.6)
-		Items.Combat.PoisonDart.UseCombatInternal(encounter, this, t);
+		Items.Combat.PoisonDart.combat.Use(encounter, this, t);
 	else if(choice < 0.8)
-		Items.Combat.LustDart.UseCombatInternal(encounter, this, t);
+		Items.Combat.LustDart.combat.Use(encounter, this, t);
 	else if(Abilities.Physical.DirtyBlow.enabledCondition(encounter, this))
 		Abilities.Physical.DirtyBlow.Use(encounter, this, t);
 	else

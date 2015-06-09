@@ -99,7 +99,7 @@ Maria.prototype.Act = function(encounter, activeChar) {
 	
 	if(this.HPLevel() < 0.3 && this.pots > 0) {
 		this.pots--;
-		Items.Combat.HPotion.UseCombatInternal(encounter, this, this);
+		Items.Combat.HPotion.combat.Use(encounter, this, this);
 	}
 	else if(choice < 0.2 && Abilities.Physical.SetTrap.enabledCondition(encounter, this) && trap == null)
 		Abilities.Physical.SetTrap.Use(encounter, this);
