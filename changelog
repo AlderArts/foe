@@ -5,9 +5,13 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
-Version 0.4e
-------------
-* Fixed the issue that was causing smoke bombs to break certain scenes by escaping unescapable battles. Smoke Bomb is now disabled in those fights.
+Version 0.4d2
+-------------
+* Fixed several issues connected to the new item system:
+ - Fixed the issue that was causing smoke bombs to break certain scenes by escaping unescapable battles. Smoke Bomb is now disabled in those fights
+ - Fixed Maria and Terry AI so they call the correct functions when they use items. This fixes the skipped turn bugs their fights had
+* Fixed some typos and bugs related to Bastet (Cat Dynasty)
+* Fixed a bugged flag that'd cause the game to not recognize you beating Orchid
 
 --------------------------------------------
              PREVIOUS VERSIONS
