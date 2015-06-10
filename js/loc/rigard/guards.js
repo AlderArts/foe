@@ -12,9 +12,9 @@
 // Gate house
 //
 world.loc.Rigard.Gate.description = function() {
-	Text.Add("The gate area is where most of the merchandise enters the city. It houses a stable for mounts and several checkpoints where you’re supposed to have your cargo inspected, though not everyone is ordered to head there. You wonder if there is an actual process for screening out shady sorts or if the watch simply chooses at random. Overall this place seems well guarded, and you have a slight suspicion that the fact the Watch’s Barracks are located nearby might have something to do with it.");
+	Text.Add("The gate area is where most of the merchandise enters the city. It houses a stable for mounts and several checkpoints where you’re supposed to have your cargo inspected, though not everyone is ordered to head there. You wonder if there is an actual process for screening out shady sorts or if the watch simply chooses at random. Overall, this place seems well guarded, and you have a slight suspicion that the fact the Watch’s Barracks are located nearby might have something to do with it.");
 	Text.NL();
-	Text.Add("Ahead of you the path splits into three. One path leads to the residential district, where most of the citizens live. Another path leads you to the merchant district, where most of the commerce is handled, and the merchant warehouses are located. The last path leads you toward Rigard’s richer areas - toward the Castle, which seems to be even more fortified than the front gates.");
+	Text.Add("Ahead of you, the path splits into three. One path leads to the residential district, where most of the citizens live. Another path leads you to the merchant district, where most of the commerce is handled, and the merchant warehouses are located. The last path leads you toward Rigard’s richer areas - toward the Castle, which seems to be even more fortified than the front gates.");
 	Text.NL();
 	
 	if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry) {
@@ -150,23 +150,16 @@ world.loc.Rigard.Barracks.sparring.links.push(new Link(
 ));
 
 
-
+//TODO
 world.loc.Rigard.Barracks.captains.description = function() {
-	Text.Add("You are at captains quarters.<br/>");
+	Text.Add("PLACEHOLDER: Capt's quarters.");
 }
 
 world.loc.Rigard.Barracks.captains.links.push(new Link(
 	"Commons", true, true,
-	function() {
-		Text.Add("Commons is outside.<br/>");
-	},
+	null,
 	function() {
 		MoveToLocation(world.loc.Rigard.Barracks.common);
 	}
 ));
-
-world.loc.Rigard.Barracks.captains.endDescription = function() {
-	Text.Add("What you do?<br/>");
-}
-
 
