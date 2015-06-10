@@ -24,7 +24,7 @@ world.loc.Rigard.ShopStreet =
 // Shopping street
 //
 world.loc.Rigard.ShopStreet.street.description = function() {
-	Text.Add("This streets in this area of the city are lined with small merchant stalls and shops of all kinds. ");
+	Text.Add("The streets in this area of the city are lined with small merchant stalls and shops of all kinds. ");
 	if(world.time.hour >= 6 && world.time.hour < 9)
 		Text.Add("A few early birds prowl the streets as the merchant district starts to wake up. A few street vendors selling fresh foods are just opening up, and the smells of baked bread and spices fill the morning air.");
 	else if(world.time.hour >= 9 && world.time.hour < 18)
@@ -144,7 +144,7 @@ world.loc.Rigard.ShopStreet.street.links.push(new Link(
 world.loc.Rigard.ShopStreet.street.links.push(new Link(
 	"Odd shop", true, function() { return Scenes.Rigard.OddShop.IsOpen(); },
 	function() {
-		Text.Add("One particular shop catch your eye. A garish sign hanging outside announce it the 'Shoppe of oddities', though from just the exterior it is a bit unclear what is actually on sale.");
+		Text.Add("One particular shop catch your eye. A garish sign hanging outside announce it the 'Shoppe of oddities', though from just the exterior, it is a bit unclear what is actually on sale.");
 		if(!Scenes.Rigard.OddShop.IsOpen())
 			Text.Add(" A small paper stapled to the front door states that the shop is 'Cloosd' at the moment.");
 		Text.Add("<br/>");
