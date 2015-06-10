@@ -11,7 +11,7 @@ Scenes.Rigard.Plaza = {}
 world.loc.Rigard.Plaza.description = function() {
 	Text.Add("You are in a large open square surrounded by posh houses.");
 	Text.NL();
-	Text.Add("In the middle of the plaza there is a large fountain in white marble, full of clear water. In the middle of the fountain on a raised pedestal, stands a stone statue of the Lady Aria, covered in robes of silk that sway in the wind.");
+	Text.Add("In the middle of the plaza is a large fountain in white marble, full of clear water. In the middle of the fountain on a raised pedestal stands a stone statue of the Lady Aria, covered in robes of silk that sway in the wind.");
 	Text.NL();
 	if(rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry) {
 		Text.Add("The place is absolutely swarming with people as frazzled guards, irate merchants and angry residents swarm and flock and mingle in the now surprisingly cramped-feeling square.");
@@ -68,7 +68,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 	"Inn", true, function() { return !rigard.UnderLockdown(); },
 	function() {
 		// TODO
-		Text.Add("Inn is over there. ");
+		Text.Add("There is a large building bustling with the activity, apparently an inn. The sign over the entrance says “The Lady's Blessing”. ");
 	},
 	function() {
 		MoveToLocation(world.loc.Rigard.Inn.common);

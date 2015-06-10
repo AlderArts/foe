@@ -149,7 +149,7 @@ world.loc.Rigard.Inn.common.onEntry = function() {
 	if(busy == Rigard.LB.BusyState.busy)
 		Text.Add("you hear music and snatches of song coming from a group of minstrels playing in the corner, almost lost under the chatter of people in the busy bar. The large room is filled nearly to capacity with easily a hundred patrons sitting, eating, drinking, and playing.");
 	else if(busy == Rigard.LB.BusyState.midbusy)
-		Text.Add("you see that the bar is not very busy right now. The large room seems almost empty with so few people, although there must still be at least a score patrons eating, drinking, and chatting together.");
+		Text.Add("you see that the bar is not very busy right now. The large room seems almost empty with so few people, although there must still be at least a score of patrons eating, drinking, and chatting together.");
 	else
 		Text.Add("you see that the bar is nearly abandoned. Most of the candles are out, and there are only a few patrons scattered around the room eating cold food at this hour.");
 	Text.NL();
