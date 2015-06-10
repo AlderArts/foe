@@ -475,7 +475,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		Text.NL();
 		Text.Add("<i>“Rabbits? Really?”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“Apparently [rheshe]'s seen huge groups of them gathering together and just wandering around. [rHeShe]'s afraid they'll come attack his farm or something.”</i>", parse);
+		Text.Add("<i>“Apparently, [rheshe]'s seen huge groups of them gathering together and just wandering around. [rHeShe]'s afraid they'll come attack his farm or something.”</i>", parse);
 		Text.NL();
 		Text.Add("The [NPC2] half-smiles. <i>“[rHeShe]'s afraid of a rabbit attack? Bizarre.”</i>", parse);
 	}, 1.0, function() { return true; });
@@ -559,7 +559,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 				Text.NL();
 				Text.Add("<i>“So long as it doesn’t mean raised taxes…”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“What do you think are the chances of that? There’s been a lot of road-laying and wall-building this year. Even with just the new paving of the roads leading out of the slums Rewyn’s going through money like a dragon.”</i>", parse);
+				Text.Add("<i>“What do you think are the chances of that? There’s been a lot of road-laying and wall-building this year. Even with just the new paving of the roads leading out of the slums, Rewyn’s going through money like a dragon.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Eh, I wouldn’t know…”</i>", parse);
 				Text.NL();
@@ -590,7 +590,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		}
 		//Success or failure
 		scenes.AddEnc(function() {
-			Text.Add("<i>“I’ve heard that people are disappearing on the King’s Road now. First it was the outlying caravan trails, now it’s the King’s Road.”</i> The [NPC1] looks a little worried. <i>“Soon there won’t be anywhere that’s safe. It won’t be good for business if the Free Cities are cut off from Rigard.”</i>", parse);
+			Text.Add("<i>“I’ve heard that people are disappearing on the King’s Road now. First, it was the outlying caravan trails, now it’s the King’s Road.”</i> The [NPC1] looks a little worried. <i>“Soon, there won’t be anywhere that’s safe. It won’t be good for business if the Free Cities are cut off from Rigard.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Yeah, but look at it this way. At least it’s better to die by bandits than just vanish into the unknown. Leastways there’s a body, right?”</i>", parse);
 			Text.NL();
@@ -603,7 +603,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		scenes.AddEnc(function() {
 			Text.Add("<i>“The royal guard is getting really antsy about this whole outlaw thing.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>“Oh? I didn’t listen to Preston’s public proclamation. Wasn’t it the usual nonsense on how he’s going to eradicate vice and crime in the city? He’s given the same speech a thousand times. Sometimes he doesn’t even change the words.”</i>", parse);
+			Text.Add("<i>“Oh? I didn’t listen to Preston’s public proclamation. Wasn’t it the usual nonsense on how he’s going to eradicate vice and crime in the city? He’s given the same speech a thousand times. Sometimes, he doesn’t even change the words.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“No, it was something else. How he’s taking personal charge of the move against those forest folk, since the regular guard is being completely and utterly worthless when it comes to stopping them.”</i>", parse);
 			Text.NL();
@@ -830,7 +830,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.NL();
 		Text.Add("<i>“Really? That sounds like a pipe dream. Why would any noble give up their own power?”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“I swear ‘tis true! My cousin’s friend’s sister works in the palace, and he tells me she swears whenever she encounters Rumi or Rani, they treat her very well. Obviously they can’t say anything in support of morphs in front of Rewyn, but…”</i>", parse);
+		Text.Add("<i>“I swear ‘tis true! My cousin’s friend’s sister works in the palace, and he tells me she swears whenever she encounters Rumi or Rani, they treat her very well. Obviously, they can’t say anything in support of morphs in front of Rewyn, but…”</i>", parse);
 		Text.NL();
 		// Outro text
 		Scenes.Rigard.ChatterOutro(parse);
@@ -886,7 +886,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.NL();
 		Text.Add("<i>“Ah, figures it’d be something like that,”</i> the [NPC1] says, rolling [hisher1] eyes.", parse);
 		Text.NL();
-		Text.Add("<i>“Someday I’d like him to walk by my window, so I can empty my chamberpot on him. Maybe we could call him Preston the Shithead then. It’d match his character better.”</i>", parse);
+		Text.Add("<i>“Someday, I’d like him to walk by my window, so I can empty my chamber pot on him. Maybe we could call him Preston the Shithead then. It’d match his character better.”</i>", parse);
 		Text.NL();
 		// Outro text
 		Scenes.Rigard.ChatterOutro(parse);
@@ -951,7 +951,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.NL();
 		Text.Add("<i>“Scary? He’s the king…”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“Sure, but have you seen him?”</i> The [NPC2] shivers. <i>“One time I was in the crowd watching him deliver a speech from the balcony, and his eyes looked like he was wondering if it was better if all of us were alive or dead. I can’t help but think that if I submit my petition, he’ll be as like to throw me in the dungeon for temerity as to help me.”</i>", parse);
+		Text.Add("<i>“Sure, but have you seen him?”</i> The [NPC2] shivers. <i>“One time, I was in the crowd watching him deliver a speech from the balcony, and his eyes looked like he was wondering if it was better if all of us were alive or dead. I can’t help but think that if I submit my petition, he’ll be as like to throw me in the dungeon for temerity as to help me.”</i>", parse);
 		Text.NL();
 		Text.Add("The [NPC1] laughs. <i>“Oh come on, you know he doesn’t do that,”</i> [heshe1] says, though the lilt in [hisher1] voices suggests [heshe1] isn’t entirely certain.", parse);
 		Text.NL();
@@ -1283,7 +1283,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		Text.Add("As you’re walking along, a [rmanwoman] suddenly sprints past in front of you, pushing you roughly out of [rhisher] way. ", parse);
 		if(party.Num() > 1) {
 			parse["randomcompanion"] = party.GetRandom().name;
-			Text.Add("[randomcompanion] grabs your arm, preventing you from falling. You grit your teeth in annoyance, glaring at the receding back of the [rmanwoman]", parse);
+			Text.Add("[randomcompanion] grabs your arm, preventing you from falling. You grit your teeth in annoyance, glaring at the receding back of the [rmanwoman].", parse);
 		}
 		else {
 			Text.Add("You barely catch your balance in time to avoid falling, and glare at the receding back of the [rmanwoman] in annoyance.", parse);
