@@ -413,7 +413,7 @@ Scenes.Fera.TouchPrompt = function() {
 					Text.NL();
 				}
 				if(player.HasBalls())
-					Text.Add("Fera's slender hand moves down to your [ballsDesc], cupping them as best she can through your [lowerArmorDesc]. She massages them as firmly as she can, and you squeeze her [fnipsDesc] in return. You give one of her ears a gentle nip as you continue to fondle each other. After a short, while you whisper for her to stop - she is doing a very good job and you don't want to soil your [lowerArmorDesc].", parse);
+					Text.Add("Fera's slender hand moves down to your [ballsDesc], cupping them as best she can through your [lowerArmorDesc]. She massages them as firmly as she can, and you squeeze her [fnipsDesc] in return. You give one of her ears a gentle nip as you continue to fondle each other. After a short while, you whisper for her to stop - she is doing a very good job and you don't want to soil your [lowerArmorDesc].", parse);
 				else if(player.FirstVag())
 					Text.Add("You feel Fera's hand reaching around your [lowerArmorDesc] until she finds the folds of your [vagDesc]. You squeeze her [fbreastDesc] tighter as you feel her fingers rub up and down your [vagDesc]. She responds by trying to force her finger inside you through your [lowerArmorDesc]. The sudden sensation causes you to pinch her [fnipsDesc], which only makes her push harder. You both moan softly as you do your best to please each other.", parse);
 				Text.NL();
