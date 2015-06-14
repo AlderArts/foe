@@ -83,6 +83,81 @@ ZebraShaman.prototype.Act = function(encounter, activeChar) {
 		Abilities.Attack.Use(encounter, this, t);
 }
 
+function ZebraBrave(levelbonus) {
+	Entity.call(this);
+	
+	this.avatar.combat     = Images.zebra_b;
+	this.name              = "Brave";
+	this.monsterName       = "the zebra brave";
+	this.MonsterName       = "The zebra brave";
+	this.body.DefMale();
+	this.FirstCock().thickness.base = 7;
+	this.FirstCock().length.base = 35;
+	this.Balls().size.base = 6;
+	
+	this.maxHp.base        = 450;
+	this.maxSp.base        = 100;
+	this.maxLust.base      = 80;
+	// Main stats
+	this.strength.base     = 35;
+	this.stamina.base      = 35;
+	this.dexterity.base    = 25;
+	this.intelligence.base = 15;
+	this.spirit.base       = 17;
+	this.libido.base       = 18;
+	this.charisma.base     = 17;
+	
+	this.level             = 6 + Math.floor(Math.random() * 4);
+	this.sexlevel          = 2;
+	if(levelbonus)
+		this.level += levelbonus;
+	
+	this.combatExp         = 6 + this.level;
+	this.coinDrop          = 8 + this.level * 4;
+	//TODO
+	this.body.SetRace(Race.Zebra);
+	this.body.SetBodyColor(Color.gray);
+	
+	this.body.SetEyeColor(Color.blue);
+	
+	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Zebra, Color.black);
+
+	// Set hp and mana to full
+	this.SetLevelBonus();
+	this.RestFull();
+}
+ZebraBrave.prototype = new Entity();
+ZebraBrave.prototype.constructor = ZebraBrave;
+
+ZebraBrave.prototype.DropTable = function() {
+	var drops = [];
+	if(Math.random() < 0.05) drops.push({ it: Items.Equinium });
+	if(Math.random() < 0.5)  drops.push({ it: Items.HorseCum });
+	if(Math.random() < 0.5)  drops.push({ it: Items.HorseHair });
+	if(Math.random() < 0.5)  drops.push({ it: Items.HorseShoe });
+	return drops;
+}
+
+ZebraBrave.prototype.Act = function(encounter, activeChar) {
+	// TODO: Very TEMP
+	Text.Add(this.name + " acts!");
+	Text.NL();
+	Text.Flush();
+	
+	// Pick a random target
+	var t = this.GetSingleTarget(encounter, activeChar);
+
+	var choice = Math.random();
+	if(choice < 0.2 && Abilities.Physical.Bash.enabledCondition(encounter, this))
+		Abilities.Physical.Bash.Use(encounter, this, t);
+	else if(choice < 0.4 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
+		Abilities.Physical.CrushingStrike.Use(encounter, this, t);
+	else if(choice < 0.6 && Abilities.Physical.Ensnare.enabledCondition(encounter, this))
+		Abilities.Physical.Ensnare.Use(encounter, this, t);
+	else
+		Abilities.Attack.Use(encounter, this, t);
+}
+
 Scenes.ZebraShaman.LoneEnc = function(levelbonus) {
  	var enemy = new Party();
  	var zebra = new ZebraShaman(levelbonus);

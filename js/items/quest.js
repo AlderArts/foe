@@ -25,3 +25,8 @@ Items.Quest.Violin = new Item("quest4", "Violin", ItemType.Quest);
 Items.Quest.Violin.price = 0;
 Items.Quest.Violin.Short = function() { return "Cveta's Violin"; }
 Items.Quest.Violin.Long  = function() { return "An incredibly expensive instrument you bought from Dio Rintell in Rigard on the behest of Cveta."; }
+
+Items.Quest.Ginseng = new Item("quest5", "Ginseng", ItemType.Quest);
+Items.Quest.Ginseng.price = 0;
+Items.Quest.Ginseng.Short = function() { return "Fresh Ginseng"; }
+Items.Quest.Ginseng.Long  = function() { return "A potent healing herb."; }
