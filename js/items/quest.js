@@ -30,3 +30,8 @@ Items.Quest.Ginseng = new Item("quest5", "Ginseng", ItemType.Quest);
 Items.Quest.Ginseng.price = 0;
 Items.Quest.Ginseng.Short = function() { return "Fresh Ginseng"; }
 Items.Quest.Ginseng.Long  = function() { return "A potent healing herb."; }
+
+Items.Quest.Nightshade = new Item("quest6", "Nightshade", ItemType.Quest);
+Items.Quest.Nightshade.price = 0;
+Items.Quest.Nightshade.Short = function() { return "Nightshade"; }
+Items.Quest.Nightshade.Long  = function() { return "A potent poisonous plant."; }

@@ -147,12 +147,14 @@ Scenes.Asche.Tasks.Ginseng.Highlands = function() {
 			Text.NL();
 			Text.Add("Gritting your teeth, you begin the ascent, trying to gain some height on the steep walls; hopefully the vegetation will break your fall if you happen to tumble. It feels like it takes forever, but you manage to climb to a decent height - about four storeys above the ravine floor - and finally begin the task of edging your way through the vegetation and around the small encampment.", parse);
 			Text.NL();
+			
+			var goal = 80; //TODO
+			
 			if(DEBUG) {
-				Text.NL();
-				Text.Add("Dex check: [dex] (vs [goal])", {dex: dex, goal: 80}, 'bold');
+				Text.Add("Dex check: [dex] (vs [goal])", {dex: dex, goal: goal}, 'bold');
 				Text.NL();
 			}
-			if(dex >= 80) {
+			if(dex >= goal) {
 				var day = world.time.IsDay();
 				parse["day1"] = day ? "the zebras are too focused on their fire to look up" : "the weary zebra shaman doesn’t lift his eyes from the path in front of his post";
 				parse["day2"] = day ? "" : ", thanks to the bright moon";
@@ -549,3 +551,341 @@ Scenes.Asche.Tasks.Ginseng.Complete = function() {
 }
 
 
+
+
+//
+// Second Quest (Nightshade)
+//
+Scenes.Asche.Tasks.Nightshade = {};
+
+//TODO LINK
+//The player should have resolved the first quest, be at an appropriate level, and perhaps have spent x amount of money or bought so many items from Asche before this unlocks.
+Scenes.Asche.Tasks.Nightshade.Initiation = function() {
+	var parse = {
+		heshe : player.mfFem("he", "she")
+	};
+	
+	Text.Clear();
+	Text.Add("<i>“Yes, there is being new task that customer can be doing for Asche, since [heshe] is being nice enough to ask. Asche has just received new special order for candle to be warding off evil. Seems like rich man is being worried that business rival may be trying to be cursing him, so has asked Asche for help in countering black magic. Asche has seen the site, and there is indeed black magic at work - is small thing to remove, but place is needing protections as Asche cannot be there all day, can she?</i>", parse);
+	Text.NL();
+	Text.Add("<i>“For this, amidst other components of spell, Asche is requiring deadly nightshade plant. All parts are okay, but root is being most concentrated; nevertheless, is best to dig up whole plant and be giving it to Asche. Nightshade is being representing harm and death in highland folk magic, and while is most often being used to invoke such evil, can also be used to ward off such.”</i>", parse);
+	Text.NL();
+	Text.Add("All right, so Asche wants you to go flower-picking - sounds like a straightforward enough deal. While you’re out there, though, surely there’s some other reason that she isn’t doing it herself?", parse);
+	Text.NL();
+	Text.Add("The jackaless grins. <i>“While good customer is being in forest looking for herb, Asche is preparing to close up shop and make small trip to Boneyard to gather specimens of dragon bone. When ground into meal to release energies, ancient bones of mighty dragons can be giving spell lasting power it is needing to ward off evil. All ingredients are needing to be mixed at same time, so unless customer is willing to make trip into bone yard, Asche is suggesting [heshe] be looking for herbs instead.”</i>", parse);
+	Text.NL();
+	Text.Add("Yes, you can see her point. The forest it is, then. Are there any particular spots you should be looking in, or should you just wander about until you happen to bump into the plant?", parse);
+	Text.NL();
+	Text.Add("<i>“Asche is not being sure whether customer is joking with her,”</i> the jackaless replies. <i>“But she will answer anyway. It has been some time since this jackaless has been in forest, so while she can tell you general area, details are up to customer to find, yes? Nightshade plant is being growing in deep reaches of forest. Well, not too deep, but is still dangerous enough that is not walk in park. Rest, though, is up to customer, although Asche is sure that person of customer’s resourcefulness will be having no problem. Maybe to be asking locals about it, if is concern.”</i>", parse);
+	Text.NL();
+	Text.Add("Is she trying to flatter you? As you look at her, Asche merrily returns your gaze with a smile and arch of her eyebrows, leaning lazily on the countertop. Seems like you’re not getting <i>that</i> much out of her.", parse);
+	Text.NL();
+	Text.Add("<i>“Maybe customer is to be buying some of my stock if [heshe] is worried, yes? In any case, Asche is needing one whole plant, after which she will be extracting essence of poisons and using to imbue candle with spell. Now, if there is being nothing else, Asche suggests that customer is making haste to be getting reagents, yes yes.”</i>", parse);
+	Text.Flush();
+	
+	//TODO Set flags
+	
+	Gui.NextPrompt();
+}
+
+//TODO LINK
+Scenes.Asche.Tasks.Nightshade.OnQuest = function() {
+	var parse = {
+		hisher : player.mfFem("his", "her")
+	};
+	
+	Text.Add("<i>“Customer is not having nightshade for Asche?”</i> The jackaless flashes her pearly white teeth at you. <i>“Is all right for now, since preparations to be going into bone yard are very long because place is so evil. Customer can be taking [hisher] time… for now.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“If customer is needing reminding, then Asche is needing whole nightshade plant from forest. To be careful when handling the poisonous herb, though - Asche is not wanting customer’s blood on her head. Again, if customer is having trouble finding plant on [hisher] own, maybe she can be asking locals of forest who know something of herbs that are growing there.”</i>", parse);
+}
+
+//TODO LINK
+//While on this quest, add a one-time “nightshade” button to Aquilius’ daytime talk menu.
+Scenes.Asche.Tasks.Nightshade.AskAquiliusForHelp = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("Aquilius frowns at your question. <i>“Whyever would you want some of <b>that</b>? There are lethal poisons that are far safer to handle than deadly nightshade.”</i>", parse);
+	Text.NL();
+	Text.Add("You explain to him that you need the plant not so much as a poison, but for its magical properties. Repeating Asche’s explanation, you point out that it’s not so much for your own purposes, as that you’re collecting samples at that eccentric shopkeeper’s request. Aquilius considers you a moment, then nods and sighs. <i>“I know what shop you’re speaking of, [playername]. The owner wasn’t really my kind - I didn’t, and still don’t, use magic much in my daily work. Nevertheless, I’ve never heard anyone speak ill of her or her goods.", parse);
+	Text.NL();
+	Text.Add("<i>“Very well. I can confirm that deadly nightshade <b>does</b> grow in the forest, although I have never had need to use it; I do know that while it is extremely toxic, trace doses may be used as a hallucinogenic or to relieve pain. The plant grows best in chalky soil, on hillslopes, and in the shade of trees - or so has been my experience on my herb-gathering forays. There’s a stand in the outer reaches of the forest, a little ways to the west of where we outlaws pay our respects to our departed, but I’m not certain if you’ll find any of the plants useable.”</i>", parse);
+	Text.NL();
+	Text.Add("Now that’s some concrete information for once. Is there anything else he can tell you?", parse);
+	Text.NL();
+	Text.Add("<i>“Yes. Get this all down, because I’m not repeating myself. I’d recommend that you at least wear gloves while harvesting the plant, as prolonged contact is enough for mild intoxication.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“That’s about all I have for you, [playername]. I just pray to whatever spirits have your loyalty that you know what you’re doing with that stuff. Now, is there anything else I can help you with?”</i>", parse);
+	Text.Flush();
+	
+	//TODO Set flag
+	Gui.NextPrompt(); //TODO Back to Aquilius
+}
+
+//TODO LINK
+//Add a “nightshade” button in the forest main menu. Click this to get the below scenes.
+//If the player went ahead and asked Aquilius, they can skip ahead to actually finding the stuff instead of risking wandering around the forest and wasting their time.
+//Maybe a success bonus if the player has ranger job mastered?
+
+//Only used if PC is wandering around blind (I.E, didn’t ask Aquilius)
+Scenes.Asche.Tasks.Nightshade.BlindStart = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("Setting out into the forest on your hunt for a specimen of nightshade for Asche, you do your best to get this little flower-picking task done with a minimum of fuss. Keeping your eyes trained on the forest undergrowth and peeled for anything that might look like the herb you’re after, you set off along one of the myriad trails that wind their way through the forest, wandering where your feet will take you.", parse);
+	Text.NL();
+	
+	var rangerBonus = 0;
+	if(Jobs.Ranger.Unlocked(player))
+		rangerBonus += 1;
+	if(Jobs.Ranger.Master(player)) {
+		rangerBonus += 2;
+		Text.Add("At least your mastery of a ranger’s skills and the knowledge of the wilds that comes with the job should help you in your hunt… or so you hope.", parse);
+		Text.NL();
+	}
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("Unfortunately, after half an hour you’re still as empty-handed as you were when you set out, the only thing you’ve gained being an ache in your back and crick in your neck from staring at the forest floor for so long. In a decidedly more sour mood than before, you rub your various sore spots and decide that this wasn’t exactly your lucky day. Maybe you’ll try again later when you’ve made yourself a little more comfortable… or at least, a little less tender.", parse);
+		Text.Flush();
+		
+		world.TimeStep({minute: 30});
+		
+		Gui.NextPrompt();
+	}, 3, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("After half an hour of wandering along the winding and uneven forest trails, you’re about to throw in the towel and take a break when the trail abruptly opens up into a clearing dominated by a small woodland stream at its far end. What’s more important, though, are the numerous dirt and moss-covered rocky outcroppings that dot the area - some of them of considerable height - and perched halfway along one of them is… could it be? Is it? Yes, it <i>is</b> a specimen of nightshade!", parse);
+		Text.NL();
+		Text.Add("Now, to get it down…", parse);
+		
+		world.TimeStep({minute: 30});
+		
+		Scenes.Asche.Tasks.Nightshade.HerbComplications();
+	}, 1 + rangerBonus, function() { return true; });
+	
+	scenes.Get();
+}
+
+//TODO LINK
+//Use this if asked Aquilius for help
+Scenes.Asche.Tasks.Nightshade.FollowAquilius = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("Having directions sure made this simple. Instead of risking wasting hours wandering around the forest with your gaze down and rump in the air - and possibly attracting all sorts of unwanted attention to boot - you head for the spot Aquilius told you about, near the outer reaches of the forest and to the west of the outlaws’ little memorial.", parse);
+	Text.NL();
+	Text.Add("Sure enough, the forest trail opens up into a clearing, one end of which is occupied by a quick-flowing stream. Several rocky outcroppings stick out from the ground, covered in places with dirt and moss. The only problem is, they’re quite tall - almost rising above the shorter trees surrounding them - and the nightshade plants are growing on ledges high up on the towering formations.", parse);
+	Text.NL();
+	Text.Add("Not quite what you’d expected, but there it is. At least, it’s better than dealing with shamans, right?", parse);
+	
+	world.TimeStep({minute: 30});
+	
+	Scenes.Asche.Tasks.Nightshade.HerbComplications();
+}
+
+Scenes.Asche.Tasks.Nightshade.HerbComplications = function() {
+	var parse = {
+		
+	};
+	
+	Text.NL();
+	if(player.HasWings()) {
+		Text.Add("And better it is. Sustained flight may be out of your reach, but you’re able to use your wings to fly up in short hops to the lowest-growing plant on one of the tall, thin stone outcroppings. Once there, you easily uproot the plant from the shallow dirt it’s growing in, being careful not to get any of its sap on yourself in the process, and carefully wrap it before putting it away safely.", parse);
+		Text.NL();
+		Text.Add("All right, now to return to Asche and see what she has to say.", parse);
+		Text.Flush();
+		
+		//TODO Set flag
+		party.Inv().AddItem(Items.Quest.Nightshade);
+		
+		Gui.NextPrompt();
+	}
+	else { // Must climb
+		Text.Add("Well. If only you could fly… but alas, that luxury isn’t within your grasp. A ladder? No, a ladder wouldn’t be long enough. You pace about the monolithic rock formations for a little while - how did they come to be here, any way? Did the stream wear away the ground over the years, exposing them, or were they thrust from the ground by some force from below? Whatever the case, it seems that your only recourse here is to climb.", parse);
+		Text.NL();
+		Text.Add("With nothing better coming to mind, you decide that finding a proper route with plenty of hand and footholds is the best you can do here. You take your time, trying to choose the most easily reached plant, and finally decide on one particular specimen before starting to climb.", parse);
+		Text.NL();
+		
+		var goal = 80; //TODO #make a combined stamina, dex and int check here. Maybe sum the three, make an average, and go for a check that’s suitable for a level 7 or 8 character?
+		
+		var check = Math.floor((player.Dex() + player.Sta() + player.Int()) / 3.0 + Math.random() * 20);
+		
+		if(DEBUG) {
+			Text.Add("(Dex+Sta+Int)/3 test: [val] (vs [goal])", {val: check, goal: goal}, 'bold');
+			Text.NL();
+		}
+		
+		if(check >= goal) {
+			Text.Add("Struggling up the limestone outcropping takes considerable effort, but you manage to spot enough handholds - and nimbly make use of them - to make your ascent. It’s plenty tiring, too, but your stamina holds, and after perhaps fifteen minutes of climbing you’re level with one of the nightshade plants.", parse);
+			Text.NL();
+			Text.Add("Taking a moment to secure yourself on the ledge, you catch your breath before uprooting the plant from the shallow dirt it’s growing in. Careful not to get any sap on your skin in the process, you wrap the whole plant up in whatever’s at hand before stowing it away.", parse);
+			Text.NL();
+			Text.Add("Thankfully, the descent is a little easier, and before too long you’re back on solid ground once more, dropping the last few feet to the soft grass that carpets the forest clearing. Time to head back to Asche with your find, then.", parse);
+		}
+		else { //#else (stat check fails)
+			Text.Add("Wow, you knew this would be hard, but climbing up the limestone outcropping is still taking more out of you than you expected. Maybe it’s poor planning - the handholds are certainly further apart than you’d imagined them to be - or maybe it’s just that you need to exercise a little more, but your breath whistles through your teeth as you struggle onwards, hand over head.", parse);
+			Text.NL();
+			Text.Add("Going forward is hard, but you’ve come too far to turn back now. At least there aren’t any overhangs on this thing that you’d have to navigate - that would just be the icing on the cake. You have to stop a few times on the way up to rest, but at least you make it up to the ledge in the end. Rubbing your aching arms, you take a moment to recover before turning your attentions to the nightshade plant you came all the way up here for, yanking the thing from the shallow soil it’s growing in before stowing it away with your other possessions. You’ll be glad to see the back of this cliff… so long as you make it down, that is.", parse);
+			Text.NL();
+			Text.Add("Well, nothing for it; you don’t intend to stay up here for the rest of your days, do you? Steeling yourself, you begin the laborious descent back to solid ground. After descending a few feet, you find your hand grabbing desperately at thin air - you <i>know</i> there should have been a handhold there, you used it on the way up, but somehow it’s gone missing. The fingers of your other hand strain to hold up your weight, and as a pebble gives way, lose their grip, sending you tumbling head-over-heels to the ground. Thankfully, the soft grass that carpets the clearing cushions your fall somewhat, but the impact of landing is still enough to knock the wind out of you and leave you badly bruised.", parse);
+			Text.NL();
+			Text.Add("Oof. You lie there dazed for a moment, then struggle to your feet. Nothing seems to be broken, but you’ll be smarting all over for a while. Well, let’s hope you don’t have to do <i>that</i> again anytime soon; best to hurry up and get that stupid plant to Asche before something else goes wrong.", parse);
+			
+			//#halve player’s current HP
+			player.AddHPFraction(-player.HPLevel() / 2);
+		}
+		
+		Text.Flush();
+		
+		//TODO Set flag
+		party.Inv().AddItem(Items.Quest.Nightshade);
+		
+		Gui.NextPrompt();
+	}
+}
+
+//TODO LINK
+Scenes.Asche.Tasks.Nightshade.Complete = function() {
+	var parse = {
+		handsomepretty : player.mfFem("handsome", "pretty"),
+		himher : player.mfFem("him", "her"),
+		hisher : player.mfFem("his", "her"),
+		heshe : player.mfFem("he", "she")
+	};
+	parse = player.ParserTags(parse);
+	
+	Text.Clear();
+	Text.Add("<i>“Asche knew customer would come through! And at just right time, too - Asche has just returned from bone yard and ground dragon bones into meal.”</i> There’s a soft click of gold on gold as the jackaless reaches into a nearby shelf and draws out a small bag of fine white powder. <i>“Asche was thinking to herself, ‘Would it not be good thing if [handsomepretty] customer were coming back with nightshade right about now?’ and here you are! Is almost like magic!”</i>", parse);
+	Text.NL();
+	Text.Add("Maybe it <i>is</i> magic, you reply with a grin as you set out the plants on the counter. Asche pulls out a pair of thick cloth gloves from under the counter, slips them on, and begins to examine the specimens you brought back.", parse);
+	Text.NL();
+	Text.Add("<i>“Is wholly adequate,”</i> she says at last. <i>“Asche is thinking that these will be serving her purposes quite nicely.”</i>", parse);
+	Text.NL();
+	Text.Add("Does she mind if you watch her about her business? As part of the reward, that is.", parse);
+	Text.NL();
+	Text.Add("Asche swoons in the most dramatic fashion, looking ready to fall off her seat any moment. <i>“Oh, is customer not trusting Asche? Asche is so hurt by unkind words.”</i> She moans, more than a little lewdly, then snaps back upright and grins maniacally at you. <i>“Oh, Asche is understanding. You are giving her very dangerous thing, and are wanting to be assured that it is not being misused; is perfectly reasonable request. Very well, you may be watching while Asche is working.”</i>", parse);
+	Text.NL();
+	Text.Add("The jackaless bids you pull up a high stool beside the counter, then brings the nightshade over to her alchemy lab.", parse);
+	Text.NL();
+	Text.Add("<i>“To be distilling essence of nightshade is taking some effort.”</i> The jackaless concentrates a moment, and then you feel a stiff breeze blow through the entirety of the shop, sweeping in from the far end and out the window behind Asche. <i>“Fumes are thin, but still very deadly. Now, customer is to be watching very carefully as I am taking large beaker - I am not cutting up nightshade, but steeping entire plant in distilled spirits. Also am heating concoction with hot water, not with open flame. Distilled spirits can be catching fire easily…”</i>", parse);
+	Text.NL();
+	Text.Add("Asche explains each and every step of the extraction process as she works away, and you quickly realize that she’s giving you an impromptu alchemy lesson. Some of the concepts are new to you, others you know well, but it’s always nice to go over the basics one more time.", parse);
+	Text.NL();
+	Text.Add("<i>“Now, watch as Asche uses special metal salts to be extracting poison from plant fibers… keeping on gently warming liquid, but do not be heating to dryness… color change is quite important, as Asche is telling you…”</i> The exotic shopkeeper’s face is a mask of concentration as she conducts the alchemical process with practiced deftness of hand. <i>“Now, strain out remaining plant fibers with sieve, then gently boil off excess spirits to create concentrated essence. Is being very poisonous at this point even to touch, so if customer is unsure of [himher]self then Asche is recommending that [heshe] be wearing smock for this.”</i>", parse);
+	Text.NL();
+	Text.Add("Done at last, the jackaless holds up the beaker for you to examine. With the now colorless plant fibers removed - the remnants of the stems, leaves, roots and berries lie the beaker - what’s left at the bottom is a light green slurry, and it’s this that she pours into a small glass vial, stoppering it tightly with a wooden cork.", parse);
+	Text.NL();
+	Text.Add("<i>“The rest is being simple. All spell components must be mixed at same time with tallow that is forming main body of candle, then spell is cast as tallow is cooling. Alchemical properties of reagents are being interacting with energies of caster and world; bridge is being formed between physical and metaphysical worlds, as Asche’s mother put it. Now, customer is to be observing.”</i>", parse);
+	Text.NL();
+	Text.Add("Putting away the used glassware from the bench, Asche heats a large glob of tallow in a metal basin, letting it render into a gently steaming liquid. One by one, she adds the ingredients into the light yellow mixture, stirring it thoroughly with a wooden rod after each before the next one is introduced. The process takes the better part of an hour, but you find yourself strangely captivated by the sight - and by the scents that rise from the basin.", parse);
+	Text.NL();
+	Text.Add("<i>“Highlander magic is different from lowlander magic; each component is having meaning. Downside is that needing to gather materials for spell to be working properly. Upside is that reagents are being helping caster to wield far more raw energy than caster can alone.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Bone is representing lasting and permanence, and dragon bone even more so, for it harbors remnant of mighty creature’s power. Simple garlic, when being ground and added, is creating protection and being inverting nightshade’s property of harm and death. Eye of newt is representing opening of magician’s inner eye which is allowing magic; Asche notes that customer is having powerful eye. Leaf of mint plant is serving as reminder of purity and clarity; also, to be using three pinches of freshly sliced leaf. How big or small pinch is not important, customer is to be knowing that what is essential is that <b>three</b> pinches are being used.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“All this Asche learned at mother’s knee, and now is imparting to customer.”</i>", parse);
+	Text.NL();
+	Text.Add("At length, Asche brings up a large mold, and it’s into this that she pours the now-discolored tallow. Even as she does so, you feel a pulsating warmth emanating from the jackaless’ person; wisps of golden light curl from her fur and gently fall to the floor, where they vanish without a trace. Satisfied with her handiwork, the exotic shopkeeper lowers a wick into the cooling tallow and frowns a moment before bringing out a smaller mold.", parse);
+	Text.NL();
+	Text.Add("<i>“Hmm, it seems that Asche is having a little left over,”</i> she says. <i>“Maybe she is making small candle for [handsomepretty] customer, too? Is not being big enough for burning, but just holding candle and having it around customer’s person can help ward off poisons.”</i>", parse);
+	Text.NL();
+	Text.Add("That would be very helpful. Even if it ends up worthless to you, you could probably sell the candle for a little money.", parse);
+	Text.NL();
+	Text.Add("<i>“Is very easy thing to be doing, so no need to be thanking me. There, both are done, now just to be waiting for candle to set, and Asche can be bringing it over to client at her leisure. Candle for [handsomepretty] customer is smaller, so should be hardening easily - should be done by time customer is ready to leave.”</i> The jackaless finishes putting away the last of the alchemical apparatus, removes her gloves, and washes her hands in a small basin of water. <i>“Now, am thinking that it is about time customer is being receiving [hisher] well-earned reward, yes?</i>", parse);
+	Text.NL();
+	Text.Add("<i>“As before, customer may be choosing between reward of money or very educational lesson.”</i> Asche smiles slyly, throwing back the hood of her shawl to shake loose her lustrous hair. <i>“Asche does not mind either way, but customer is to be remembering that this is one-time deal. Asche is not liking being in debt, so is best to be clearing everything that is being owed quickly.”</i>", parse);
+	Text.Flush();
+	
+	//[Money][Lesson]
+	var options = new Array();
+	options.push({ nameStr : "Money",
+		tooltip : "The money will be just fine.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Asche looks a little disappointed when you tell her you’ll just have the money, but the jackaless’ usual easygoing demeanor returns in a matter of moments. <i>“Well, Asche is being respecting [handsomepretty] customer’s choice - coin is [hisher] desire, and coin [heshe] will have.”</i>", parse);
+			Text.NL();
+			Text.Add("With that, Asche pulls out a small purse from under the counter. <i>“Was thinking that you would be saying this, so Asche prepared money ahead of time. Please to be taking both it and candle as wages for hard work, and thus settling debt that Asche is owing to you.”</i>", parse);
+			Text.NL();
+			Text.Add("You nod, taking your candle and the purse. Counting the contents, you decide it’s not too bad of a sum for the work you’ve put in.", parse);
+			
+			var coin = 500;
+			
+			party.coin += coin;
+			Text.Add("You recieved [coin] coins.", {coin: Text.NumToText(coin)}, 'bold');
+			
+			//TODO Set flags
+			//TODO #gain green scented candle.
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Lesson",
+		tooltip : "Well, you aren’t the kind to pass up a very educational experience…",
+		func : function() {
+			Text.Clear();
+			
+			//TODO Set flags
+			//TODO #gain green scented candle.
+			
+			Text.Add("Upon hearing your words, Asche’s smile widens into a sultry grin. Leaning forward onto the counter, she jabs a finger at the door. <i>“Is all well and good, but maybe [handsomepretty] customer is to be locking storefront and taking [hisher] candle before Asche is bringing [himher] to back room, yes? Although shop is having protections, Asche still does not want to be dealing with shoplifters when her mind is on… other matters. Giving lesson is being requiring full concentration, after all.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, you asked for it, so you take care of locking up. Once the shop’s front door is locked and secure, Asche beckons you over to the counter with a finger in a clear “come hither” gesture.", parse);
+			Text.NL();
+			Text.Add("<i>“Now, Asche was expecting much from brave and [handsomepretty] customer, and [heshe] has not failed to deliver. Is good to have daring and resourceful adventurer doing tasks for shopkeeper like Asche. It is fair exchange of desires, yes?”</i>", parse);
+			Text.NL();
+			Text.Add("Moving almost of their own accord, the jackaless’ hands wander over to her ripe breasts, her palms cupping their swell as she rubs her milk-makers through the silky smooth fabric of her sari. Seeing your gaze transfixed by the little display she’s putting on, Asche moans lustily and begins unwinding her clothing; inch after inch of white cloth pools on the ground as she pulls her sari away from her bare midriff to reveal more of her deep golden fur. The jackaless wears neither bra nor panties, a fact that’s made more and more obvious the more skin she reveals.", parse);
+			Text.NL();
+			Text.Add("<i>“Mm, Asche is not sure why, but she is feeling all sorts of aroused right now,”</i> the jackaless says with a flirtatious  giggle. <i>“Maybe is side-effect of having worked with spell components… or maybe [handsomepretty] customer is just too much for Asche to bear.”</i>", parse);
+			Text.NL();
+			Text.Add("Flattery isn’t going to get her anywhere - not that there’s much further up to go from here. Nevertheless, you do find yourself stepping closer to the sexy, exotic shopkeeper until you’re right up against the counter, your eyes captivated by Asche’s deep gaze.", parse);
+			Text.NL();
+			Text.Add("<i>“If customer is liking Asche’s breasts so much, [heshe] only has to be saying word. This jackaless is knowing just how valuable each of her assets are, even if they are not being for sale.”</i> With a series of slow, sensual movements, Asche strips off the last curl of her top and and lets her soft, generous melons fall out, bouncing gently as they greet cool, open air. Making sure you’re watching closely, the jackaless snakes her hands over her hips and divests herself of the last of her clothing with a gentle push, folding up her sari neatly and setting it down on the shop counter.", parse);
+			Text.NL();
+			Text.Add("<i>“Is customer approving of Asche?”</i> the exotic shopkeeper asks as she stretches and poses, the clink of golden bracelets ringing in the air as she shows off her full, lovely hourglass figure with unabashed aplomb. <i>“As she is sure customer knows, Asche is working very hard to look pretty over many years.”</i>", parse);
+			Text.NL();
+			Text.Add("You grin. Yes, you approve - you’re still here, aren’t you? How old is she, anyways?", parse);
+			Text.NL();
+			Text.Add("<i>“My, my,”</i> the jackaless chides. <i>“And those words are being coming out of lips which customer is wishing to kiss Asche with? Whatever shall Asche do with such a naughty customer? Maybe she shall be sweetening [himher] such that hurtful words like these are not even forming in customer’s mind, yes?”</i>", parse);
+			Text.NL();
+			parse["armor"] = player.ArmorDesc();
+			Text.Add("Winking and beckoning you to follow, Asche leads you into the shop’s back room with its fine mattress, mint smell and woven mats. Without further ado, she slinks up to you and begins tugging at your [armor], quickly divesting you of them and letting them fall to the floor, where she kicks them out of the way.", parse);
+			Text.NL();
+			Text.Add("<i>“Asche knows from personal experience that being adventurer is very stressful job, so is probably best if [handsomepretty] customer is just relaxing and forgetting about troubles. Asche is very happy to be taking lead and guiding customer in lesson.”</i>", parse);
+			Text.NL();
+			Text.Add("Without waiting for your reply, the jackaless presses her lips to yours in a deep, breathless kiss, her hands reaching for your ", parse);
+			if(player.FirstCock()) {
+				if(player.NumCocks() > 1)
+					Text.Add("[cocks], letting her fingers ply up and down along each of their lengths in turn.", parse);
+				else
+					Text.Add("[cock], letting her fingers ply up and down along its length.", parse);
+				Text.NL();
+				Text.Add("Her touch is as sensual as it is deft, the dancing of her fingertips against man-meat producing bright sparks of pleasure, which pass running through your groin and into the rest of your body.", parse);
+			}
+			else {
+				Text.Add("[vag], her nimble fingers teasing the petals of your womanly flower. Her touch only intensifies as your nether-lips begin to grow flush with damp heat, encouraging the jackaless to toy with your [clit].", parse);
+			}
+			Text.Add(" Although Asche weighs hardly anything, you find yourself sinking back onto the mattress at her insistence, the jackaless leaning her weight on you until your back is firmly pressed against the fabulously smooth sheets. Kneeling above you, straddling you with ease, Asche runs her hands along her curvaceous sides, licking her muzzle as she looks down at you. Carefully, she produces a small pot of golden ointment seemingly from thin air, then makes a show of unscrewing the lid and dipping a finger into the warm mixture.", parse);
+			Text.NL();
+			Text.Add("<i>“Asche shall now paint herself and customer with special concoction to help [himher] better feel and understand sensations,”</i> she explains as she trails a finger down from her forehead and around her eyes. <i>“Is important to be having feedback when in lesson, and pattern to be drawn on bodies is allowing for sharing of touch and feelings. Just to be lying back and trusting Asche to be doing her work, yes?”</i>", parse);
+			Text.NL();
+			Text.Add("You gaze in wonder at the mystical pattern that’s taking shape on both your bodies - Asche’s touch is like warm syrup flowing across your skin, leaving a trail of glowing gold in its wake, hot and cool at the same time on your skin. Stretching from forehead to chin, then down your neck and over your heart before spreading outwards across your limbs, it reminds you of a golden tree with curled branches, with not a single straight line to be found anywhere.", parse);
+			Text.NL();
+			Text.Add("<i>“Please, will [handsomepretty] customer not help a poor little jackaless like Asche out?”</i> Asche says with an evil grin, her fingers lingering on certain parts of your body perhaps a little longer than strictly necessary to get the golden ointment applied. <i>“It has been a while since Asche has had been having a proper fucking from a partner who is not pathetic and limp-wristed.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, you reply with an equally evil glint in your eye, even if you hadn’t been intending to help before, you sure are now.", parse);
+			Text.NL();
+			Text.Add("<i>“Mm, which is just nice,”</i> Asche replies, the jackaless finishing up the pattern by drawing a series of concentric circles about your groin. Done, she screws the lid back on the ointment pot before licking her fingertips with exaggerated relish. <i>“Now, what kind of educational experience was [handsomepretty] customer wanting?”</i>", parse);
+			Text.Flush();
+			
+			Scenes.Asche.Sex.Prompt();
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
