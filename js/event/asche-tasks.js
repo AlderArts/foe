@@ -74,7 +74,7 @@ Scenes.Asche.Tasks.Ginseng.Failed = function() {
 	Text.Clear();
 	Text.Add("You hang your head and tell Asche that the shaman and his entourage drove you away from the spring.", parse);
 	Text.NL();
-	Text.Add("<i>“Oh well,”</i> the jackaless replies, disappointment clear in her voice. <i>“Asche is seeing color of zebra magic on you, so shes sees that you at least tried. Maybe she was overestimating customer’s abilities. Perhaps if customer had some of Asche’s stock with [himher], might not have gone so badly… but is over now. Asche supposes she will have to ask someone else to be getting it for her, yes?”</i>", parse);
+	Text.Add("<i>“Oh well,”</i> the jackaless replies, disappointment clear in her voice. <i>“Asche is seeing color of zebra magic on you, so she sees that you at least tried. Maybe she was overestimating customer’s abilities. Perhaps if customer had some of Asche’s stock with [himher], might not have gone so badly… but is over now. Asche supposes she will have to ask someone else to be getting it for her, yes?”</i>", parse);
 	Text.Flush();
 	
 	//TODO, set flag
@@ -90,15 +90,16 @@ Scenes.Asche.Tasks.Ginseng.Highlands = function() {
 	Text.NL();
 	Text.Add("At least her directions are good: you’ve walked for little more than an hour before you spot the twin moss-covered arches that Asche mentioned, then another hour’s walk west brings the entrance to the ravine into view. As you were told, you see a long, narrow gash in the mountains, as if someone had taken a cleaver and rent a high plateau in two; from where you stand near the bottom, the lower slopes appear thickly forested and the upper slopes strewn with light sprinkles of snow. The woods seem a sanctuary for life in the grass and shrub-dominated highlands. If that’s what the entrance looks like, surely it must be even lusher further inside…", parse);
 	Text.NL();
-	Text.Add("Cautiously, you enter the ravine, eyes peeled for any sign of the zebra-morphs whose territory this is. Your footsteps echoed off the ravine’s towering walls - so high that a narrow slit is all that remains visible of the sky - sounding deafeningly loud to you, yet you attract no attention from anything larger than a few rodents and lizards. The reason for that becomes clear as you near the ravine’s other end: stationed by the entrance - or exit, depending on how you look at it - is a zebra-morph shaman and two savage-looking warriors - you believe you’ve heard such as them referred to as ‘braves’. The marked, hooded robes along with the staff propped up against a rock leave no doubt to the shaman’s identity. Likewise, the braves wear little more than loincloths and have accentuated their natural patterning with streaks and stripes of blue body-paint; the end result is certainly quite fearsome in appearance, especially when one considers their bronze-tipped spears.", parse);
+	parse["footsteps"] = player.HasLegs() ? "footsteps" : "passage";
+	Text.Add("Cautiously, you enter the ravine, eyes peeled for any sign of the zebra-morphs whose territory this is. Your [footsteps] echo off the ravine’s towering walls - so high that a narrow slit is all that remains visible of the sky - sounding deafeningly loud to you, yet you attract no attention from anything larger than a few rodents and lizards. The reason for that becomes clear as you near the ravine’s other end: stationed by the entrance - or exit, depending on how you look at it - is a zebra-morph shaman and two savage-looking warriors - you believe you’ve heard such as them referred to as ‘braves’. The marked, hooded robes along with the staff propped up against a rock leave no doubt to the shaman’s identity. Likewise, the braves wear little more than loincloths and have accentuated their natural patterning with streaks and stripes of blue body-paint; the end result is certainly quite fearsome in appearance, especially when one considers their bronze-tipped spears.", parse);
 	Text.NL();
 	if(world.time.IsDay()) {
-		Text.Add("Seems like you’ve arrived just in time for food. All three zebras are gathered around a cast-iron pot hanging over a firepit, one of the braves stirring the stew. Judging by the smell wafting over to you it’s spiced gruel of some sort.", parse);
+		Text.Add("Seems like you’ve arrived just in time for food. All three zebras are gathered around a cast-iron pot hanging over a fire pit, one of the braves stirring the stew. Judging by the smell wafting over to you, it’s spiced gruel of some sort.", parse);
 		Text.NL();
 		Text.Add("Well, it’s probably for the best - while they’re busy cooking is probably the ideal time for getting the drop on them, if you are so inclined.", parse);
 	}
 	else {
-		Text.Add("Seems like you’ve come at a good time. The two warriors are currently fast asleep on thin bedrolls next to a blazing firepit, leaving the shaman to keep watch. It’s as good a situation as you could hope for sneaking by or getting the jump on them, if you were so minded.", parse);
+		Text.Add("Seems like you’ve come at a good time. The two warriors are currently fast asleep on thin bedrolls next to a blazing fire pit, leaving the shaman to keep watch. It’s as good a situation as you could hope for sneaking by or getting the jump on them, if you were so minded.", parse);
 	}
 	Text.NL();
 	Text.Add("You weigh your options. How best to proceed?", parse);
@@ -143,9 +144,9 @@ Scenes.Asche.Tasks.Ginseng.Highlands = function() {
 			var dex = Math.floor(player.Dex() + Math.random() * 20);
 			
 			Text.Clear();
-			Text.Add("Steeling yourself, you try to plot a path into the basin that’ll get you around the zebras encamped out front - the ravine walls are thickly wooded, and if you climbed high enough and stuck close to the trees you might be able to get through unseen. It’s as good a plan as any; sticking to the path at the bottom isn’t an option, at any rate. ", parse);
+			Text.Add("Steeling yourself, you try to plot a path into the basin that’ll get you around the zebras encamped out front - the ravine walls are thickly wooded, and if you climbed high enough and stuck close to the trees, you might be able to get through unseen. It’s as good a plan as any; sticking to the path at the bottom isn’t an option, at any rate. ", parse);
 			Text.NL();
-			Text.Add("Gritting your teeth, you begin the ascent, trying to gain some height on the steep walls; hopefully the vegetation will break your fall if you happen to tumble. It feels like it takes forever, but you manage to climb to a decent height - about four storeys above the ravine floor - and finally begin the task of edging your way through the vegetation and around the small encampment.", parse);
+			Text.Add("Gritting your teeth, you begin the ascent, trying to gain some height on the steep walls; hopefully the vegetation will break your fall if you happen to tumble. It feels like it takes forever, but you manage to climb to a decent height - about four stories above the ravine floor - and finally begin the task of edging your way through the vegetation and around the small encampment.", parse);
 			Text.NL();
 			
 			var goal = 80; //TODO
@@ -161,7 +162,7 @@ Scenes.Asche.Tasks.Ginseng.Highlands = function() {
 				parse["day3"] = day ? "the shaman and his companions haven’t moved from their fire, and don’t even look up as you slip by them" : "the only thing you hear from the braves is their snores, and the shaman looks on the verge of joining them, letting you slip by easily";
 				Text.Add("By good fortune, [day1]. While there are a few close moments, you manage to slip past them and into the basin without causing any more noise than the wind through the trees. You carefully descend the ravine walls and take a moment to soothe your aching limbs before heading out in search of what you came here for.", parse);
 				Text.NL();
-				Text.Add("The search is quick[day2]: the broad-leaved trees surrounding the clear spring have quite a bit of vegetation surrounding them, and it’s clear that the zebras take considerable care of their sacred grounds, tending to the underbrush and making sure the medicinal plants that grow naturally here aren’t overcrowded. With the same luck that carried you into the basin, you manage to find a decent-looking specimen of ginseng within a half-hour, and dig it out of the earth - root, stem and all -  before stowing it away with your other possessions. Your departure is as smooth as your entrance - [day3] and head back through the ravine.", parse);
+				Text.Add("The search is quick[day2]: the broad-leaved trees surrounding the clear spring have quite a bit of vegetation surrounding them, and it’s clear that the zebras take considerable care of their sacred grounds, tending to the underbrush and making sure the medicinal plants that grow naturally here aren’t overcrowded. With the same luck that carried you into the basin, you manage to find a decent-looking specimen of ginseng within a half-hour, and dig it out of the earth - root, stem and all - before stowing it away with your other possessions. Your departure is as smooth as your entrance - [day3] and head back through the ravine.", parse);
 				Text.NL();
 				Text.Add("All right, now to head back to Asche posthaste - you don’t want to risk the ginseng getting stale and having to head all the way back out here again, do you?", parse);
 				Text.Flush();
@@ -172,7 +173,7 @@ Scenes.Asche.Tasks.Ginseng.Highlands = function() {
 				Gui.NextPrompt();
 			}
 			else { //Fail
-				Text.Add("For a moment everything looks like it’s going smoothly, then you bump into a fist-sized pebble, sending it careening down the steep ravine slope. That in turn knocks into another, rattling down  the thin grass and roots, and another, and another, until a small shower of pebbles, leaves and loose dirt comes cascading down to the ravine floor.", parse);
+				Text.Add("For a moment, everything looks like it’s going smoothly, then you bump into a fist-sized pebble, sending it careening down the steep ravine slope. That in turn knocks into another, rattling down the thin grass and roots, and another, and another, until a small shower of pebbles, leaves and loose dirt comes cascading down to the ravine floor.", parse);
 				Text.NL();
 				Text.Add("So much for stealth! A shout comes up, directed at you - down below, the shaman and his companions are already on their feet, having seized their staff and spears. Scowling in frustration, you narrowly dodge a few beams of magic aimed your way, and slide down the ravine to do battle.", parse);
 				Text.Flush();
@@ -189,7 +190,7 @@ Scenes.Asche.Tasks.Ginseng.Highlands = function() {
 			Text.Add("You decide that force is probably going to be the easiest solution to this quandary, and prepare to do battle. It might cause problems for Asche to march in and start bashing skulls, but you’re a filthy, filthy outsider and you doing so probably won’t cause much of a stir.", parse);
 			Text.NL();
 			if(day)
-				Text.Add("Preoccupied as they are, it’s not too hard to get the drop on the zebras guarding the basin’s entrance. They certainly look surprised enough when you come charging into their camp, scrambling for their staff and spears and putting up a hasty defense.", parse);
+				Text.Add("Preoccupied as they are, it’s not too hard to get the drop on the zebras guarding the basin’s entrance. They certainly look surprised enough when you come charging into their camp, scrambling for their gear and putting up a hasty defense.", parse);
 			else
 				Text.Add("You rush straight for the shaman, who visibly shakes himself to alertness and, his eyes widening, screams for the braves to assist him. The two jolt awake, but still look groggy as they scramble for their spears.", parse);
 			Text.Add(" Best to press your advantage while you still have it.", parse);
@@ -227,7 +228,7 @@ Scenes.Asche.Tasks.Ginseng.Bribe = function() {
 	Text.NL();
 	Text.Add("Hearing your offer, shaman and braves alike glance at each other. <i>“Bide a moment, please. We must confer amongst ourselves.”</i>", parse);
 	Text.NL();
-	Text.Add("Why, sure. They can take all the time they need - it’s not as if anyone’s slated to go anywhere, right? The zebras huddle together in a tight circle, murmuring and whispering, for a few minutes, then the shaman breaks away and returns to you, clearing his throat.", parse);
+	Text.Add("Why, sure. They can take all the time they need - it’s not as if anyone’s slated to go anywhere, right? The zebras huddle together in a tight circle, murmuring and whispering for a few minutes, then the shaman breaks away and returns to you, clearing his throat.", parse);
 	Text.NL();
 	Text.Add("<i>“Well, it <b>has</b> been a good year for the harvesting of various herbs and roots from the spring, outsider. We’re willing to let you have what you seek in exchange for the modest sum of three hundred and fifty coins - you see, we’ll still need to convince the elders that this was a good decision, and you don’t seem like the type who lacks for money.”</i>", parse);
 	Text.NL();
@@ -333,7 +334,7 @@ Scenes.Asche.Tasks.Ginseng.Whore = function() {
 		
 		Text.Add("Your gag reflex protests for a fraction of a second, then is overwhelmed by the sheer amount of dick invading your throat, leaving you barely able to breathe. That’s two, with one more to go - a tiny voice in the back of your mind wonders if whoring yourself out to three horny zebras was the best of ideas. Too late for regrets now, though - you doubt that they’d be able to stop even if they had a mind to do so.", parse);
 		Text.NL();
-		Text.Add("Now that they’re in position, the shaman and brave begin to pump and thrust away - slowly at first as they get used to stuffing your body, then faster and faster as they throw caution to the wind in their rush to slake their desires. Working in tandem to spitroast you, one thrusting while the other withdraws, they grunt and growl like savage animals tearing at a particularly tasty piece of raw meat. That isn’t too far off the mark, too, considering how thoroughly violated you’re currently being, turned into little more than a set of warm, wet holes for the zebras to fill.", parse);
+		Text.Add("Now that they’re in position, the shaman and brave begin to pump and thrust away - slowly at first as they get used to stuffing your body, then faster and faster as they throw caution to the wind in their rush to slake their desires. Working in tandem to spit roast you, one thrusting while the other withdraws, they grunt and growl like savage animals tearing at a particularly tasty piece of raw meat. That isn’t too far off the mark, too, considering how thoroughly violated you’re currently being, turned into little more than a set of warm, wet holes for the zebras to fill.", parse);
 		Text.NL();
 		Text.Add("A moist friction across your [breasts] draws what little attention you have remaining to the third and final zebra - bereft of a good position to get himself off on your breasts, the poor fellow is grinding his equine cock against your [nips], making do with the crumbs that fall from the table of his fellows. ", parse);
 		if(player.FirstBreastRow().Size() > 12) {
@@ -354,7 +355,7 @@ Scenes.Asche.Tasks.Ginseng.Whore = function() {
 		Text.NL();
 		Text.Add("The only replies he gets are pants and moans.", parse);
 		Text.NL();
-		Text.Add("<i>“Hey, you there. If you’re still alive after that, that is.”</i> He has to pause to catch his breath. <i>“We went flower picking yesterday - what a coincidence. Why don’t you just help yourself? I don’t think we’ll be up for doing much for a bit… anyways, left the baskets in the back of the spring grotto-” his voice trails off, to be replaced by a snore.", parse);
+		Text.Add("<i>“Hey, you there. If you’re still alive after that, that is?”</i> He has to pause to catch his breath. <i>“We went flower picking yesterday - what a coincidence. Why don’t you just help yourself? I don’t think we’ll be up for doing much for a bit… anyways, left the baskets in the back of the spring grotto-” his voice trails off, to be replaced by a snore.", parse);
 		Text.NL();
 		Text.Add("You’ll get what you came for… eventually. Or at least, when you can breathe a little better and your limbs actually work right. For now, sleep seems like the best option…", parse);
 		Text.Flush();
@@ -409,7 +410,7 @@ Scenes.Asche.Tasks.Ginseng.FightWin = function() {
 		Text.NL();
 		Text.Add("The search is quick[day]: the broad-leafed trees surrounding the clear spring have quite a bit of vegetation surrounding them, and it’s clear that the zebras take considerable care of their sacred grounds, tending to the underbrush and making sure the medicinal plants that grow naturally here aren’t overcrowded.", parse);
 		Text.NL();
-		Text.Add("Today must be your day; you manage to find a decent-looking specimen of ginseng within the half-hour, and dig it out of the earth, root, stem and all. Stowing it away in a sac with your other possessions, you make your escape before the zebras come to, hurrying through the ravine and legging it away back to the crossroads with all due haste.", parse);
+		Text.Add("Today must be your day; you manage to find a decent-looking specimen of ginseng within the half-hour, and dig it out of the earth, root, stem and all. Stowing it away in a sac with your other possessions, you make your escape before the zebras come to, hurrying through the ravine and back to the crossroads with all due haste.", parse);
 		Text.Flush();
 		
 		party.Inv().AddItem(Items.Quest.Ginseng);
@@ -432,7 +433,7 @@ Scenes.Asche.Tasks.Ginseng.FightLoss = function() {
 	Text.NL();
 	parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
 	parse["c"] = party.Num() > 1 ? Text.Parse(", [comp] by your side and still out cold", parse) : "";
-	Text.Add("You come to some time later face-down in the dirt[c]. That, and the fact that your coin purse is missing, are the only signs that the altercation ever took place - you search around for a bit, and discover that the ravine entrance has been quite thoroughly sealed with fresh-laid stone, no doubt placed there with the shaman’s magics. Seems like the zebras are <i>really</i> determined not to have you back.", parse);
+	Text.Add("You come to some time later face-down in the dirt[c]. That, and the fact that your coin purse is missing, are the only signs that the altercation ever took place - you search around for a bit, and discover that the ravine entrance has been quite thoroughly sealed with fresh-laid stone, no doubt placed there with the shaman’s magic. Seems like the zebras are <i>really</i> determined not to have you back.", parse);
 	Text.NL();
 	Text.Add("There’s not much you can do now but to head back to Asche and tell the jackaless you failed.", parse);
 	Text.Flush();
@@ -463,7 +464,7 @@ Scenes.Asche.Tasks.Ginseng.Complete = function() {
 	Text.NL();
 	Text.Add("<i>“Must be properly preserving the rest of this, far too much to let go to waste. Would be far more effective if boiled forty times until turning into syrup, but no time… maybe later. Everything is almost ready… perhaps is better if Asche closed the shop, Asche doesn’t need other customers walking in during delicate process. Would nice customer be so kind as to lock front door and turn sign over?”</i>", parse);
 	Text.NL();
-	Text.Add("Her request is reasonable enough, and you cross the shop to do just that, the latch setting in place with a satisfying click. By the time you get back, Asche already has a flask full of clear liquid bubbling over a burner, and the jackalass is measuring out the ginseng paste into it with a tiny teaspoon. Once she’s done, she picks up the flask and swirls the heated liquid inside a few times, mixing it evenly before setting it down on the bench to cool.", parse);
+	Text.Add("Her request is reasonable enough, and you cross the shop to do just that, the latch setting in place with a satisfying click. By the time you get back, Asche already has a flask full of clear liquid bubbling over a burner, and the jackaless is measuring out the ginseng paste into it with a tiny teaspoon. Once she’s done, she picks up the flask and swirls the heated liquid inside a few times, mixing it evenly before setting it down on the bench to cool.", parse);
 	Text.NL();
 	Text.Add("You can’t help but ask what she’s making.", parse);
 	Text.NL();
@@ -506,7 +507,7 @@ Scenes.Asche.Tasks.Ginseng.Complete = function() {
 			Text.NL();
 			Text.Add("Her tongue playing across her lips and muzzle, the jackaless begins to disrobe herself, inch after inch of snow-white cloth peeling away to unveil more and more of that dark golden fur. It’s almost like watching a ball of yarn unravel itself - no, a silken cocoon from which the butterfly you helped create is emerging. You soon realize that Asche wears neither panties nor bra, treating you to the unadulterated sight of her ripe, juicy breasts hanging softly from her chest, nipples already stiff and jutting through her fur, just begging to be teased. Or maybe you’d like to start with her blatant mound, her pussy lips thick and swollen with heat…", parse);
 			Text.NL();
-			Text.Add("Asche hangs her clothes up on a hook on the wall, then saunters towards you, flared hips sashaying and jewellery clinking with every step. Does she know how to dance as well? Your thoughts are cut short by soft, seductive words as she places her hands on your chest. <i>“Perhaps it is time brave customer removes clothes before [heshe] embarresses [himher]self, hmm?”</i>", parse);
+			Text.Add("Asche hangs her clothes up on a hook on the wall, then saunters towards you, flared hips sashaying and jewellery clinking with every step. Does she know how to dance as well? Your thoughts are cut short by soft, seductive words as she places her hands on your chest. <i>“Perhaps it is time brave customer removes clothes before [heshe] embarrasses [himher]self, hmm?”</i>", parse);
 			Text.NL();
 			Text.Add("Oh, right. You quickly strip yourself down until you’re as naked as she is, then she bids you lie down on the mattress while she produces a small pot of gold-colored ointment. You can smell the jackaless’ light, slightly musky scent, and the way it melds with the mint perfume of the room is arousing, to say the least.", parse);
 			Text.NL();
@@ -518,7 +519,7 @@ Scenes.Asche.Tasks.Ginseng.Complete = function() {
 			if(player.FirstCock() && player.FirstVag()) gen += " and your";
 			if(player.FirstVag()) gen += " [vag] growing damp";
 			parse["gen"] = Text.Parse(gen, parse);
-			Text.Add("With that, she reaches into the pot and scoops out a fingerful of ointment, carefully tracing it about her eyes. Done with herself, she does the same for you, and so it goes, a bright golden pattern slowly taking shape across both her burnished fur and your [skin], an intricate construction of swirls and waves, with hardly a single straight line to be found. The ointment glistens and glimmers in the muted light, her touch sending sparks dancing across your being. You can’t help but wriggle under the jackaless in response to her ministrations, your[gen].", parse);
+			Text.Add("With that, she reaches into the pot and scoops out a fingerful of ointment, carefully tracing it about her eyes. Done with herself, she does the same for you, and so it goes, a bright golden pattern slowly taking shape across her burnished fur and your [skin], an intricate construction of swirls and waves, with hardly a single straight line to be found. The ointment glistens and glimmers in the muted light, her touch sending sparks dancing across your being. You can’t help but wriggle under the jackaless in response to her ministrations, your[gen].", parse);
 			Text.NL();
 			Text.Add("<i>“To be relaxing, [handsomepretty] one. Not needing to be so tense,”</i> Asche whispers as she smears more golden ointment across your [skin]. The pattern she’s creating is now radiating outwards from the initial swirls she’s drawn on your body, branching towards your arms and [legs] like the limbs of a tree, warm and cool to the touch at the same time regardless of how contradictory that sounds. At last, though, she’s done, and sets the pot down on the table before beaming at you. <i>“Asche can give you so many gifts, teach you so many things… customer will not be regretting it.</i>", parse);
 			Text.NL();
@@ -572,7 +573,7 @@ Scenes.Asche.Tasks.Nightshade.Initiation = function() {
 	Text.NL();
 	Text.Add("All right, so Asche wants you to go flower-picking - sounds like a straightforward enough deal. While you’re out there, though, surely there’s some other reason that she isn’t doing it herself?", parse);
 	Text.NL();
-	Text.Add("The jackaless grins. <i>“While good customer is being in forest looking for herb, Asche is preparing to close up shop and make small trip to Boneyard to gather specimens of dragon bone. When ground into meal to release energies, ancient bones of mighty dragons can be giving spell lasting power it is needing to ward off evil. All ingredients are needing to be mixed at same time, so unless customer is willing to make trip into bone yard, Asche is suggesting [heshe] be looking for herbs instead.”</i>", parse);
+	Text.Add("The jackaless grins. <i>“While good customer is being in forest looking for herb, Asche is preparing to close up shop and make small trip to Boneyard to gather specimens of dragon bone. When ground into meal to release energies, ancient bones of mighty dragons can be giving spell lasting power it is needing to ward off evil. All ingredients are needing to be mixed at same time, so unless customer is willing to make trip into the Boneyard, Asche is suggesting [heshe] be looking for herbs instead.”</i>", parse);
 	Text.NL();
 	Text.Add("Yes, you can see her point. The forest it is, then. Are there any particular spots you should be looking in, or should you just wander about until you happen to bump into the plant?", parse);
 	Text.NL();
@@ -691,7 +692,7 @@ Scenes.Asche.Tasks.Nightshade.FollowAquilius = function() {
 
 Scenes.Asche.Tasks.Nightshade.HerbComplications = function() {
 	var parse = {
-		
+		feet : player.FeetDesc()
 	};
 	
 	Text.NL();
@@ -707,7 +708,7 @@ Scenes.Asche.Tasks.Nightshade.HerbComplications = function() {
 		Gui.NextPrompt();
 	}
 	else { // Must climb
-		Text.Add("Well. If only you could fly… but alas, that luxury isn’t within your grasp. A ladder? No, a ladder wouldn’t be long enough. You pace about the monolithic rock formations for a little while - how did they come to be here, any way? Did the stream wear away the ground over the years, exposing them, or were they thrust from the ground by some force from below? Whatever the case, it seems that your only recourse here is to climb.", parse);
+		Text.Add("Well. If only you could fly… but alas, that luxury isn’t within your grasp. A ladder? No, a ladder wouldn’t be long enough. You pace about the monolithic rock formations for a little while - how did they come to be here, anyway? Did the stream wear away the ground over the years, exposing them, or were they thrust from the ground by some force from below? Whatever the case, it seems that your only recourse here is to climb.", parse);
 		Text.NL();
 		Text.Add("With nothing better coming to mind, you decide that finding a proper route with plenty of hand and footholds is the best you can do here. You take your time, trying to choose the most easily reached plant, and finally decide on one particular specimen before starting to climb.", parse);
 		Text.NL();
@@ -722,7 +723,7 @@ Scenes.Asche.Tasks.Nightshade.HerbComplications = function() {
 		}
 		
 		if(check >= goal) {
-			Text.Add("Struggling up the limestone outcropping takes considerable effort, but you manage to spot enough handholds - and nimbly make use of them - to make your ascent. It’s plenty tiring, too, but your stamina holds, and after perhaps fifteen minutes of climbing you’re level with one of the nightshade plants.", parse);
+			Text.Add("Struggling up the limestone outcropping takes considerable effort, but you manage to spot enough handholds - and nimbly make use of them - to make your ascent. It’s plenty tiring, too, but your stamina holds, and after perhaps fifteen minutes of climbing, you’re level with one of the nightshade plants.", parse);
 			Text.NL();
 			Text.Add("Taking a moment to secure yourself on the ledge, you catch your breath before uprooting the plant from the shallow dirt it’s growing in. Careful not to get any sap on your skin in the process, you wrap the whole plant up in whatever’s at hand before stowing it away.", parse);
 			Text.NL();
@@ -731,11 +732,11 @@ Scenes.Asche.Tasks.Nightshade.HerbComplications = function() {
 		else { //#else (stat check fails)
 			Text.Add("Wow, you knew this would be hard, but climbing up the limestone outcropping is still taking more out of you than you expected. Maybe it’s poor planning - the handholds are certainly further apart than you’d imagined them to be - or maybe it’s just that you need to exercise a little more, but your breath whistles through your teeth as you struggle onwards, hand over head.", parse);
 			Text.NL();
-			Text.Add("Going forward is hard, but you’ve come too far to turn back now. At least there aren’t any overhangs on this thing that you’d have to navigate - that would just be the icing on the cake. You have to stop a few times on the way up to rest, but at least you make it up to the ledge in the end. Rubbing your aching arms, you take a moment to recover before turning your attentions to the nightshade plant you came all the way up here for, yanking the thing from the shallow soil it’s growing in before stowing it away with your other possessions. You’ll be glad to see the back of this cliff… so long as you make it down, that is.", parse);
+			Text.Add("Going forward is hard, but you’ve come too far to turn back now. At least there aren’t any overhangs on this thing that you’d have to navigate - that would just be the icing on the cake. You have to stop a few times on the way up to rest, but at least you make it up to the ledge in the end. Rubbing your aching arms, you take a moment to recover before turning your attention to the nightshade plant you came all the way up here for, yanking the thing from the shallow soil it’s growing in before stowing it away with your other possessions. You’ll be glad to see the back of this cliff… so long as you make it down, that is.", parse);
 			Text.NL();
 			Text.Add("Well, nothing for it; you don’t intend to stay up here for the rest of your days, do you? Steeling yourself, you begin the laborious descent back to solid ground. After descending a few feet, you find your hand grabbing desperately at thin air - you <i>know</i> there should have been a handhold there, you used it on the way up, but somehow it’s gone missing. The fingers of your other hand strain to hold up your weight, and as a pebble gives way, lose their grip, sending you tumbling head-over-heels to the ground. Thankfully, the soft grass that carpets the clearing cushions your fall somewhat, but the impact of landing is still enough to knock the wind out of you and leave you badly bruised.", parse);
 			Text.NL();
-			Text.Add("Oof. You lie there dazed for a moment, then struggle to your feet. Nothing seems to be broken, but you’ll be smarting all over for a while. Well, let’s hope you don’t have to do <i>that</i> again anytime soon; best to hurry up and get that stupid plant to Asche before something else goes wrong.", parse);
+			Text.Add("Oof. You lie there dazed for a moment, then struggle to your [feet]. Nothing seems to be broken, but you’ll be smarting all over for a while. Well, let’s hope you don’t have to do <i>that</i> again anytime soon; best to hurry up and get that stupid plant to Asche before something else goes wrong.", parse);
 			
 			//#halve player’s current HP
 			player.AddHPFraction(-player.HPLevel() / 2);
@@ -775,9 +776,12 @@ Scenes.Asche.Tasks.Nightshade.Complete = function() {
 	Text.NL();
 	Text.Add("<i>“To be distilling essence of nightshade is taking some effort.”</i> The jackaless concentrates a moment, and then you feel a stiff breeze blow through the entirety of the shop, sweeping in from the far end and out the window behind Asche. <i>“Fumes are thin, but still very deadly. Now, customer is to be watching very carefully as I am taking large beaker - I am not cutting up nightshade, but steeping entire plant in distilled spirits. Also am heating concoction with hot water, not with open flame. Distilled spirits can be catching fire easily…”</i>", parse);
 	Text.NL();
-	Text.Add("Asche explains each and every step of the extraction process as she works away, and you quickly realize that she’s giving you an impromptu alchemy lesson. Some of the concepts are new to you, others you know well, but it’s always nice to go over the basics one more time.", parse);
+	Text.Add("Asche explains each and every step of the extraction process as she works away, and you quickly realize that she’s giving you an impromptu alchemy lesson.", parse);
+	if(player.alchemyLevel >= 1) {
+		Text.Add(" Some of the concepts are new to you, others you know well, but it’s always nice to go over the basics one more time.", parse);
+	}
 	Text.NL();
-	Text.Add("<i>“Now, watch as Asche uses special metal salts to be extracting poison from plant fibers… keeping on gently warming liquid, but do not be heating to dryness… color change is quite important, as Asche is telling you…”</i> The exotic shopkeeper’s face is a mask of concentration as she conducts the alchemical process with practiced deftness of hand. <i>“Now, strain out remaining plant fibers with sieve, then gently boil off excess spirits to create concentrated essence. Is being very poisonous at this point even to touch, so if customer is unsure of [himher]self then Asche is recommending that [heshe] be wearing smock for this.”</i>", parse);
+	Text.Add("<i>“Now, watch as Asche uses special metal salts to be extracting poison from plant fibers… keeping on gently warming liquid, but do not be heating to dryness… color change is quite important, as Asche is telling you…”</i> The exotic shopkeeper’s face is a mask of concentration as she conducts the alchemical process with practiced deftness of hand. <i>“Now, strain out remaining plant fibers with sieve, then gently boil off excess spirits to create concentrated essence. Is being very poisonous at this point, even to touch. If customer is unsure of [himher]self, then Asche is recommending that [heshe] be wearing smock for this.”</i>", parse);
 	Text.NL();
 	Text.Add("Done at last, the jackaless holds up the beaker for you to examine. With the now colorless plant fibers removed - the remnants of the stems, leaves, roots and berries lie the beaker - what’s left at the bottom is a light green slurry, and it’s this that she pours into a small glass vial, stoppering it tightly with a wooden cork.", parse);
 	Text.NL();
@@ -842,11 +846,11 @@ Scenes.Asche.Tasks.Nightshade.Complete = function() {
 			Text.NL();
 			Text.Add("Moving almost of their own accord, the jackaless’ hands wander over to her ripe breasts, her palms cupping their swell as she rubs her milk-makers through the silky smooth fabric of her sari. Seeing your gaze transfixed by the little display she’s putting on, Asche moans lustily and begins unwinding her clothing; inch after inch of white cloth pools on the ground as she pulls her sari away from her bare midriff to reveal more of her deep golden fur. The jackaless wears neither bra nor panties, a fact that’s made more and more obvious the more skin she reveals.", parse);
 			Text.NL();
-			Text.Add("<i>“Mm, Asche is not sure why, but she is feeling all sorts of aroused right now,”</i> the jackaless says with a flirtatious  giggle. <i>“Maybe is side-effect of having worked with spell components… or maybe [handsomepretty] customer is just too much for Asche to bear.”</i>", parse);
+			Text.Add("<i>“Mm, Asche is not sure why, but she is feeling all sorts of aroused right now,”</i> the jackaless says with a flirtatious giggle. <i>“Maybe is side-effect of having worked with spell components… or maybe [handsomepretty] customer is just too much for Asche to bear.”</i>", parse);
 			Text.NL();
 			Text.Add("Flattery isn’t going to get her anywhere - not that there’s much further up to go from here. Nevertheless, you do find yourself stepping closer to the sexy, exotic shopkeeper until you’re right up against the counter, your eyes captivated by Asche’s deep gaze.", parse);
 			Text.NL();
-			Text.Add("<i>“If customer is liking Asche’s breasts so much, [heshe] only has to be saying word. This jackaless is knowing just how valuable each of her assets are, even if they are not being for sale.”</i> With a series of slow, sensual movements, Asche strips off the last curl of her top and and lets her soft, generous melons fall out, bouncing gently as they greet cool, open air. Making sure you’re watching closely, the jackaless snakes her hands over her hips and divests herself of the last of her clothing with a gentle push, folding up her sari neatly and setting it down on the shop counter.", parse);
+			Text.Add("<i>“If customer is liking Asche’s breasts so much, [heshe] only has to be saying word. This jackaless is knowing just how valuable each of her assets are, even if they are not being for sale.”</i> With a series of slow, sensual movements, Asche strips off the last curl of her top and lets her soft, generous melons fall out, bouncing gently as they greet cool, open air. Making sure you’re watching closely, the jackaless snakes her hands over her hips and divests herself of the last of her clothing with a gentle push, folding up her sari neatly and setting it down on the shop counter.", parse);
 			Text.NL();
 			Text.Add("<i>“Is customer approving of Asche?”</i> the exotic shopkeeper asks as she stretches and poses, the clink of golden bracelets ringing in the air as she shows off her full, lovely hourglass figure with unabashed aplomb. <i>“As she is sure customer knows, Asche is working very hard to look pretty over many years.”</i>", parse);
 			Text.NL();
@@ -875,9 +879,10 @@ Scenes.Asche.Tasks.Nightshade.Complete = function() {
 			Text.NL();
 			Text.Add("<i>“Asche shall now paint herself and customer with special concoction to help [himher] better feel and understand sensations,”</i> she explains as she trails a finger down from her forehead and around her eyes. <i>“Is important to be having feedback when in lesson, and pattern to be drawn on bodies is allowing for sharing of touch and feelings. Just to be lying back and trusting Asche to be doing her work, yes?”</i>", parse);
 			Text.NL();
-			Text.Add("You gaze in wonder at the mystical pattern that’s taking shape on both your bodies - Asche’s touch is like warm syrup flowing across your skin, leaving a trail of glowing gold in its wake, hot and cool at the same time on your skin. Stretching from forehead to chin, then down your neck and over your heart before spreading outwards across your limbs, it reminds you of a golden tree with curled branches, with not a single straight line to be found anywhere.", parse);
+			parse["skin"] = function() { return player.SkinDesc(); }
+			Text.Add("You gaze in wonder at the mystical pattern that’s taking shape on both your bodies - Asche’s touch is like warm syrup flowing across your [skin], leaving a trail of glowing gold in its wake, hot and cool at the same time. Stretching from forehead to chin, then down your neck and over your heart before spreading outwards across your limbs, it reminds you of a golden tree with curled branches, with not a single straight line to be found anywhere.", parse);
 			Text.NL();
-			Text.Add("<i>“Please, will [handsomepretty] customer not help a poor little jackaless like Asche out?”</i> Asche says with an evil grin, her fingers lingering on certain parts of your body perhaps a little longer than strictly necessary to get the golden ointment applied. <i>“It has been a while since Asche has had been having a proper fucking from a partner who is not pathetic and limp-wristed.”</i>", parse);
+			Text.Add("<i>“Please, will [handsomepretty] customer not help a poor little jackaless like Asche out?”</i> Asche says with an evil grin, her fingers lingering on certain parts of your body, perhaps a little longer than strictly necessary to get the golden ointment applied. <i>“It has been a while since Asche has had been having a proper fucking from a partner who is not pathetic and limp-wristed.”</i>", parse);
 			Text.NL();
 			Text.Add("Well, you reply with an equally evil glint in your eye, even if you hadn’t been intending to help before, you sure are now.", parse);
 			Text.NL();
