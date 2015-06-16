@@ -187,6 +187,20 @@ Scenes.Asche.Prompt = function() {
 			Scenes.Asche.FortuneTellingPrompt();
 		}, enabled : true
 	});
+	options.push({ nameStr : "Sex",
+		tooltip : "Propose a romp in the hay with the exotic shopkeeper.",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“Mm…”</i> Asche licks her muzzle, then leans up close to you. Nonchalantly, she cups her breasts, one in each hand, then pushes her lady lumps forward such that the hand-filling mounds seem even bigger and fuller than they already are - you can practically see them through the fabric of her sari. Making sure you’re looking, the jackaless begins kneading gently, a small whine escaping her muzzle before she stops and grins at you. <i>“Asche thinks… not. Asche is a good girl, a nice girl, and does not give freebies to get others hooked, unlike her big sister.”</i>", parse);
+			Text.NL();
+			Text.Add("She’s such a tease.", parse);
+			Text.NL();
+			Text.Add("<i>“Is merely practical,”</i> the jackaless replies. <i>“Customers are buying more when they are being served by pretty girl; bad hair day for Asche means bad business day, too. But sometimes they are getting ahead of themselves, [handsomepretty] customer is not the first one to have invited Asche to the back room.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Nevertheless, if customer is determined… maybe there may come a time when there are things [heshe] can do that may make Asche change her mind,”</i> she adds with a wink.", parse);
+			Text.Flush();
+		}, enabled : true
+	});
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
 		
