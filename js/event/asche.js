@@ -17,6 +17,9 @@ function Asche(storage) {
 	this.Butt().buttSize.base = 6;
 	this.body.SetRace(Race.Jackal);
 	
+	this.FirstVag().virgin = false;
+	this.Butt().virgin = false;
+	
 	this.flags["Met"]   = Asche.Met.NotMet;
 	this.flags["Talk"]  = 0; //Bitmask
 	this.flags["Magic"] = 0;

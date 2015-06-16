@@ -1973,6 +1973,9 @@ Entity.prototype.LowerBodyType = function() {
 Entity.prototype.NumLegs = function() {
 	return this.body.legs.count;
 }
+Entity.prototype.Humanoid = function() {
+	return this.LowerBodyType() == LowerBodyType.Humanoid;
+}
 Entity.prototype.HasLegs = function() {
 	return (this.body.legs.count >= 2);
 }
