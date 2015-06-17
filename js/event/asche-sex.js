@@ -62,7 +62,7 @@ Scenes.Asche.Sex.FuckHer = function() {
 	Text.NL();
 	Text.Add("A mischievous smirk on her muzzle, the exotic shopkeeper slinks her way on top of you, her bangles clinking softly against her armlets as she ensures you feel every inch of her fine, luscious fur running across your [skin]. Her touch is a lover’s salacious caress, the flow of sunlight across your body, warm and golden; her freshly enhanced breasts bob and sway enticingly as she straddles you. Leaning forward, she plants a light kiss on your lips, the almost innocuous action still enough to make your head spin. You can’t help but wonder if she used any magic there - it felt strangely otherworldly, as if you were kissing and being kissed all at once…", parse);
 	Text.NL();
-	Text.Add("<i>“Of course Asche is being using magic,”</i> the jackaless replies, her eyes twinkling as she points down to the patterns on your bodies, now blazing with golden light. Her motions slow and deliberate, she grinds her wet cunt across your lower body, letting the first drops of her feminine nectar dampen your [skin]. <i>“Customer is going to be seeing things from this jackaless’s perspective… and she yours. Is best way to learn, to get feedback on one’s actions, yes? Now just to be letting self go and be participating as best as one can; maybe can be too much for you to handle.”</i>", parse);
+	Text.Add("<i>“Of course Asche is being using magic,”</i> the jackaless replies, her eyes twinkling as she points down to the patterns on your bodies, now blazing with golden light. Her motions slow and deliberate, she grinds her wet cunt across your lower body, letting the first drops of her feminine nectar dampen your [skin]. <i>“Customer is going to be seeing things from this jackaless’ perspective… and she yours. Is best way to learn, to get feedback on one’s actions, yes? Now just to be letting self go and be participating as best as one can; maybe can be too much for you to handle.”</i>", parse);
 	Text.NL();
 	if(real) {
 		if(player.NumCocks() > 1) {
@@ -105,7 +105,8 @@ Scenes.Asche.Sex.FuckHer = function() {
 		Text.Add("You squirm and shiver under the jackaless as the intense heat of her passage engulfs your shaft, pulsating and squeezing eagerly with the rhythm of her inner workings. Even as your cock explodes in pleasure, rock-hard and trying to get as deep as it can into your canine lover, you <i>feel</i> yourself receiving the pleasure you’re giving her, feel the energies running through the golden conduits painted on your body, feel yourself being penetrated and being well-fucked even as you’re doing the fucking. It’s an unearthly experience.", parse);
 	}
 	else {
-		Text.Add("Even though your shaft isn’t real, you can nevertheless <i>feel</i> what it’s doing to Asche; blazing bright with golden light, the conduits painted on your body bring you pleasure seeping from the jackaless. Seeing - no, feeling - your canine lover giving in to her pleasure like that only arouses you further. Coupled with the heat of her skin on your own, the sensations form an intense wildfire that throbs and pulses against your [skin], inspiring you to work harder. The more you give, the more you get, after all.", parse);
+		parse["pcskin"] = player.HasSkin() ? "s" : " " + player.SkinDesc();
+		Text.Add("Even though your shaft isn’t real, you can nevertheless <i>feel</i> what it’s doing to Asche; blazing bright with golden light, the conduits painted on your body bring you pleasure seeping from the jackaless. Seeing - no, feeling - your canine lover giving in to her pleasure like that only arouses you further. Coupled with the heat of her skin on your[pcskin], the sensations form an intense wildfire that throbs and pulses against your [skin], inspiring you to work harder. The more you give, the more you get, after all.", parse);
 	}
 	Text.NL();
 	parse["c"] = real ? "shaft" : "strap-on";
@@ -115,7 +116,7 @@ Scenes.Asche.Sex.FuckHer = function() {
 	parse["len"] = longCock ? ", feeling your shaft stretch her cervix and begin its invasion of her womb" : "";
 	Text.Add("You instinctively respond in kind, bliss quickly building in your groin as you go at it like rutting beasts[strap]. You piston and pound away furiously, hips bucking away on autopilot even as Asche yips needily[len]. You share in the jackaless’ delight, knowing that each and every movement you make is blowing both your brains out.", parse);
 	Text.NL();
-	Text.Add("Completely addled by now, her eyes rolled back into her head as she pants and yips in pure, unadulterated pleasure, Asche quivers from head to toe, causing her jewelry to clink, as the jackaless comes.", parse);
+	Text.Add("Completely addled by now, her eyes rolled back into her head as she pants and yips in pure, unadulterated pleasure, Asche quivers from head to toe, causing her jewelry to clink, as the jackaless cums.", parse);
 	if(longCock) {
 		parse["c"] = real ? "cock" : "strap-on";
 		Text.Add(" A fresh flow of feminine nectar spurts downward even as her cervix opens up enough to admit the tip of your [c], and the jackaless lets out a low, long howl as you enter the fertile confines of her womb.", parse);
@@ -133,7 +134,7 @@ Scenes.Asche.Sex.FuckHer = function() {
 		Text.NL();
 	}
 	parse["c"] = real ? "softening shaft with a wet pop, your cum still smeared on her pussy" : "slick strap-on";
-	Text.Add("Utterly spent and exhausted, the two of you are content to just lie against each other, Asche slumped on top of you, her ragged breath tickling your neck as she recovers. After what seems like forever, the jackaless finally regains enough strength to push herself off your [c].", parse);
+	Text.Add("Utterly spent and exhausted, the two of you are content to just lie against each other. Asche is slumped on top of you, her ragged breathing tickling your neck as she recovers. After what seems like forever, the jackaless finally regains enough strength to push herself off your [c].", parse);
 	Text.NL();
 	Text.Add("<i>“Asche thanks you for a good time,”</i> she says, a mischievous, though tired, lilt in her voice. <i>“Although experience is not the best she has had, nevertheless is still very good.</i>", parse);
 	Text.Flush();
@@ -146,8 +147,8 @@ Scenes.Asche.Sex.GiveOral = function() {
 		handsomepretty : player.mfFem("handsome", "pretty"),
 		heshe : player.mfFem("he", "she"),
 		himher : player.mfFem("him", "her"),
-		legs : player.LegsDesc(),
-		skin : player.SkinDesc()
+		legs : function() { return player.LegsDesc(); },
+		skin : function() { return player.SkinDesc(); }
 	};
 	
 	Text.Clear();
@@ -180,7 +181,7 @@ Scenes.Asche.Sex.GiveOral = function() {
 	Text.NL();
 	Text.Add("At last, the dam breaks. Rivulets of Asche’s sweet honey rapidly turn into a torrent as the jackaless climaxes with a howl, drenching the mattress beneath the two of you. You keep going, though, and your efforts are rewarded by a second, more intense orgasm, this time powerful enough to send you collapsing to the cum-slick mattress thanks to the sympathetic magic linking you two.", parse);
 	Text.NL();
-	Text.Add("Panting, heaving, both of you just lie there for a time. You feel a coolness on your face as Asche’s sweet honey dries on your skin. At last, the jackaless recovers enough to stand - albeit shakily - and looks down on you with a very satisfied expression on her muzzle.", parse);
+	Text.Add("Panting, heaving, both of you just lie there for a time. You feel a coolness on your face as Asche’s sweet honey dries on your [skin]. At last, the jackaless recovers enough to stand - albeit shakily - and looks down on you with a very satisfied expression on her muzzle.", parse);
 	Text.Flush();
 	
 	Gui.NextPrompt(Scenes.Asche.Sex.Ending);
@@ -196,7 +197,7 @@ Scenes.Asche.Sex.GetOral = function() {
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
 	Text.Clear();
-	Text.Add("Asche snorts, but the gesture of indignation is soon replaced with an evil smirk. <i>“This jackaless will admit… she is not fond of using her mouth, but promise is promise and Asche does not want you to think she is not experienced in this act. Fond or not is one thing, but we are all doing things were are not fond of to be getting through days, yes?”</i>", parse);
+	Text.Add("Asche snorts, but the gesture of indignation is soon replaced with an evil smirk. <i>“This jackaless will admit… she is not fond of using her mouth, but promise is promise and Asche does not want you to think she is not experienced in this act. Fond or not is one thing, but we are all doing things we are not fond of to be getting through days, yes?”</i>", parse);
 	Text.NL();
 	Text.Add("With that, the exotic shopkeeper advances upon you on all fours, breasts swaying slightly as they hang low and ripe from her chest, her tongue lolling out of her maw in an effort to show you just what you’ve signed up for. It’s long and pink, glistening alluringly in the room’s dim light. It doesn’t <i>look</i> out of the ordinary, but you feel a prickle at the base of your spine telling you all is not quite as it seems.", parse);
 	Text.NL();
@@ -228,10 +229,10 @@ Scenes.Asche.Sex.GetOral = function() {
 		}
 		Text.NL();
 		parse["v"] = player.FirstVag() ? " and pussy dripping" : "";
-		Text.Add("With a blur of motion and clink of jewellery, she’s on you. The jackaless’ smooth, golden fur slides against your skin as she settles into place, her maw opening wide to take your shaft. If you weren’t hard before, you are now; there’s something about her touch that you hadn’t noticed before, an unbelievably sensual quality to her that has your cock[s] at attention[v] as muzzle meets man-meat.", parse);
+		Text.Add("With a blur of motion and clink of jewelry, she’s on you. The jackaless’ smooth, golden fur slides against your [skin] as she settles into place, her maw opening wide to take your shaft. If you weren’t hard before, you are now; there’s something about her touch that you hadn’t noticed before, an unbelievably sensual quality to her that has your cock[s] at attention[v] as muzzle meets man-meat.", parse);
 		if(volume > 750) {
 			parse["b"] = player.NumCocks() > 1 ? " the biggest and thickest of" : "";
-			Text.Add("Further and further she impales herself onto[b] your shaft[s], your entire length slipping into her mouth and down her throat without so much as a hitch. It should be impossible. It’s got to be impossible; she couldn’t have swallowed you down to the hilt - and yet the jackaless has. Spirits above, you can <i>feel</i> her marvellously warm and wet insides milking away at your [cock].", parse);
+			Text.Add("Further and further she impales herself onto[b] your shaft[s], your entire length slipping into her mouth and down her throat without so much as a hitch. It should be impossible. It’s got to be impossible; she couldn’t have swallowed you down to the hilt - and yet the jackaless has. Spirits above, you can <i>feel</i> her marvelously warm and wet insides milking away at your [cock].", parse);
 		}
 		Text.NL();
 		
@@ -257,7 +258,7 @@ Scenes.Asche.Sex.GetOral = function() {
 		
 		Text.Add("It’s not long before your pleasure reaches its peak. Despite your best efforts to hold on, you can feel your cum welling up, a hot, sticky geyser ready to blow. ", parse);
 		if(cum > 4) {
-			Text.Add("And blow it does, the entirety of your enormous, hot sticky load pouring down Asche’s throat like water gushing from a freshly broken dam. Asche shakes her head from side to side, her muffled cries growing louder, and as you are treated to the first-hand experience of swallowing so much of your own hot, sticky cum, you sure can sympathise.", parse);
+			Text.Add("And blow it does, the entirety of your enormous, hot sticky load pouring down Asche’s throat like water gushing from a freshly broken dam. Asche shakes her head from side to side, her muffled cries growing louder, and as you are treated to the first-hand experience of swallowing so much of your own hot, sticky cum, you sure can sympathize.", parse);
 			Text.NL();
 			Text.Add("Despite how much cum’s pouring down her throat, though, Asche doesn’t bloat any, her tummy staying nice and flat. More highlander hexing, perhaps - well, all the better, since you’re going to give her all you’ve got. The jackaless convulses with unfettered delight, once, twice, and then one last time as you send your final spurt of slimy seed into her stomach.", parse);
 		}
@@ -274,11 +275,11 @@ Scenes.Asche.Sex.GetOral = function() {
 	else if(player.FirstVag()) {
 		Text.Add("With one swift motion, Asche grabs hold of your inner thighs, one in each hand, and forces them apart to expose your bare muff and the [vag] nestled between your legs. Trailing her hands along your thighs before returning them to her sides, the exotic jackaless begins to rub herself before your eyes, one hand teasing her increasingly damp slit while the other roams around the rest of her body, touching breast and belly alike in long, languid strokes.", parse);
 		Text.NL();
-		Text.Add("The golden paint on both your bodies flares up with light, and then waves of pleasure crash into you, despite the fact that you’re scarcely being touched. Whatever Asche does to herself, it’s as if it’s being done to you as well: when she gives her clit a gentle flick, you feel her invisible fingers against your button, you squirm and moan under her tender caresses - even as she does the same. It’s not long before the jackaless has you dripping all over and panting like a slutty little thing, and the real fun hasn’t even started yet!", parse);
+		Text.Add("The golden paint on both your bodies flares up with light, and then waves of pleasure crash into you, despite the fact that you’re scarcely being touched. Whatever Asche does to herself, it’s as if it’s being done to you as well: when she gives her clit a gentle flick, you feel her invisible fingers against your [clit], you squirm and moan under her tender caresses - even as she does the same. It’s not long before the jackaless has you dripping all over and panting like a slutty little thing, and the real fun hasn’t even started yet!", parse);
 		Text.NL();
 		Text.Add("<i>“Ah-ha, so magic pattern is indeed working very nicely,”</i> Asche manages to choke out in between lust-filled pants. <i>“Customer is feeling everything Asche is feeling, and Asche is getting very important feedback on customer’s pleasure while she is working to service customer as best as she can. Now…”</i>", parse);
 		Text.NL();
-		Text.Add("Without warning, the jackaless dives lightning-quick towards you, her muzzle burying itself in your crotch with a soft squelch of juices. Her nose and tongue share the workload of getting you all nice and lusty; the former grinds against your clit, sending sparks of sensation racing along the golden lines traced on your body, then she tilts her head back and sends the latter probing like a lewd, long tentacle into your heat-filled slit.", parse);
+		Text.Add("Without warning, the jackaless dives lightning-quick towards you, her muzzle burying itself in your crotch with a soft squelch of juices. Her nose and tongue share the workload of getting you all nice and lusty; the former grinds against your [clit], sending sparks of sensation racing along the golden lines traced on your body, then she tilts her head back and sends the latter probing like a lewd, long tentacle into your heat-filled slit.", parse);
 		Text.NL();
 		
 		Sex.Cunnilingus(asche, player);
@@ -289,9 +290,9 @@ Scenes.Asche.Sex.GetOral = function() {
 		Text.NL();
 		Text.Add("How? How is it possible? To your lust-addled eyes, her tongue is as normal as can be, but when it's inside you… you’re wracked with a medley of exquisite sensations once more, and this time you’re almost certain that she hit your cervix. Your inner walls clench down hard on the intrusion they’re certain must be there, but end up catching nothing.", parse);
 		Text.NL();
-		Text.Add("Despite her impressive efforts you’re not one for passively receiving. Gently but firmly, you place a hand between Asche’s shoulderblades and push the jackaless down, low enough that her nipples graze the mattress’ silken fabric as she laps at your cunt. The rocking motions, the rhythmic teasing of her - no, of <i>your</i> teats - getting even stiffer and more swollen by the moment - ", parse);
+		Text.Add("Despite her impressive efforts, you’re not one for passively receiving. Gently but firmly, you place a hand between Asche’s shoulder blades and push the jackaless down, low enough that her nipples graze the mattress’ silken fabric as she laps at your cunt. The rocking motions, the rhythmic teasing of her - no, of <i>your</i> teats - getting even stiffer and more swollen by the moment - ", parse);
 		Text.NL();
-		Text.Add("You can’t hold back any longer. Throwing your head back and crying out in climax, you send a squirm of thick nectar straight into Asche’s face to soak her face and muzzle. Sharing in your orgasm, the exotic shopkeeper collapses onto her belly, landing straight in a pool of her own sexual fluids as she convulses with delight.", parse);
+		Text.Add("You can’t hold back any longer. Throwing your head back and crying out in climax, you send a squirm of thick nectar straight into Asche’s face, soaking her muzzle. Sharing in your orgasm, the exotic shopkeeper collapses onto her belly, landing straight in a pool of her own sexual fluids as she convulses with delight.", parse);
 	}
 	Text.NL();
 	Text.Add("It’s a while before either of you can muster the energy to so much as speak, and a good ten or fifteen minutes before Asche recovers enough to so much as lift her head off the mattress and let out a long, salacious moan.", parse);
@@ -320,7 +321,7 @@ Scenes.Asche.Sex.Titfuck = function() {
 	Text.Add("<i>“Ah, so you are feeling it too,”</i> the jackaless says with a sly grin. <i>“Good to know magic is working right - now maybe customer is wanting a little more?”</i>", parse);
 	Text.NL();
 	parse["c"] = mc ? "her chosen" : "your";
-	Text.Add("Without waiting for your reply, Asche sinks down onto you, leaning the weight of her upper body onto your hips and thighs as she sandwiches [c] shaft well between her generous mounds. Warm boobflesh flows around your cock like scented oil with much the same result - you become distinctly aware of how painfully engorged your penis is, throbbing against the gentle pulsing and heaving of the jackaless’ breasts.", parse);
+	Text.Add("Without waiting for your reply, Asche sinks down onto you, leaning the weight of her upper body onto your hips and [thighs] as she sandwiches [c] shaft well between her generous mounds. Warm boobflesh flows around your cock like scented oil with much the same result - you become distinctly aware of how painfully engorged your penis is, throbbing against the gentle pulsing and heaving of the jackaless’ breasts.", parse);
 	Text.NL();
 	Text.Add("One thing’s for sure: Asche knows how to take charge. The patterns on your bodies blaze with golden light as she begins in earnest, sliding herself up and down along the length of your member in a languid cat stretch, making sure the undersides of her boobs meet the base of your shaft before pushing herself upwards as far as she can go.", parse);
 	if(longCock)
@@ -352,7 +353,9 @@ Scenes.Asche.Sex.Titfuck = function() {
 Scenes.Asche.Sex.MilkHer = function() {
 	var parse = {
 		heshe : player.mfFem("he", "she"),
-		nips : player.NipsDesc()
+		nips : player.NipsDesc(),
+		handsomepretty : player.mfFem("handsome", "pretty"),
+		HandsomePretty : player.mfFem("Handsome", "Pretty")
 	};
 	
 	Text.Clear();
@@ -362,17 +365,17 @@ Scenes.Asche.Sex.MilkHer = function() {
 	Text.NL();
 	Text.Add("Is it your imagination? No, the golden patterns on her fur are flaring to life as she lowers her face to yours, close enough that you can feel her breath. Her nipples graze your own [nips], and you can just catch a glimpse - or so you imagine - of the jackaless’ wide, dark areolae beneath her fur…", parse);
 	Text.NL();
-	Text.Add("<i>“Does pretty customer want to sample Asche’s new tits? Is much deserving of it, since customer helped make them so plump and firm. Asche is not minding if you are taking more than small sample, she is having free flow here.”</i>", parse);
+	Text.Add("<i>“Does [handsomepretty] customer want to sample Asche’s new tits? Is much deserving of it, since customer helped make them so plump and firm. Asche is not minding if you are taking more than small sample, she is having free flow here.”</i>", parse);
 	Text.NL();
 	Text.Add("Yes… yes, you wanted this, else you wouldn’t have said so, right?", parse);
 	Text.NL();
-	Text.Add("<i>“Then just to be closing eyes and feeling the magic, pretty customer.”</i> With that, the jackaless licks her lips, then presses them against yours in a powerful kiss. Her tongue invades your mouth, slipping in with practiced ease and finding your own to wrestle with. The exotic shopkeeper’s breath is so deliciously hot, and the way her scent and breath mix with the mint smell of the room is divine…", parse);
+	Text.Add("<i>“Then just to be closing eyes and feeling the magic, [handsomepretty] customer.”</i> With that, the jackaless licks her lips, then presses them against yours in a powerful kiss. Her tongue invades your mouth, slipping in with practiced ease and finding your own to wrestle with. The exotic shopkeeper’s breath is so deliciously hot, and the way her scent and breath mix with the mint smell of the room is divine…", parse);
 	Text.NL();
 	Text.Add("There’s a faint tension in the air as she finally releases you from her kiss, a sense of magic being worked…", parse);
 	Text.NL();
 	Text.Add("As you watch, Asche’s already generous breasts begin to swell even further, growing even heavier until they begin to overcome even the jackaless’ natural firmness and sag gently. The jackaless squirms atop you, ripples of pleasure coursing through her body as the spell takes hold - then passing into you where the patterns of golden paint on your bodies meet. You begin to gasp and moan, sensing what she senses - your, no, <i>her</i> milk makers filling with rich, nourishing cream. Unable to hold back as the pleasure intensifies, you yowl along with her in pure, unadulterated lust as her areolae and nipples swell, changes far beyond what would normally occur during a full pregnancy taking place in a matter of moments. You can see them plumping, darkening, becoming more prominent - and finally a bead of milk wells up on each fat little nub of flesh as production threatens to exceed capacity.", parse);
 	Text.NL();
-	Text.Add("<i>“Asche is delighted!”</i> the jackaless exclaims, having trouble articulating herself properly as she pants like a bitch in heat. A final shudder runs through her form - and yours too, of course - as the beads come faster and fatter until the dam bursts and she’s got two trickles of milk running down the curve of her breasts. <i>“Pretty customer is a very special person; spell has never worked this well before. Asche is insisting that customer is to be drinking up as reward for being such a willing participant.”</i>", parse);
+	Text.Add("<i>“Asche is delighted!”</i> the jackaless exclaims, having trouble articulating herself properly as she pants like a bitch in heat. A final shudder runs through her form - and yours too, of course - as the beads come faster and fatter until the dam bursts and she’s got two trickles of milk running down the curve of her breasts. <i>“[HandsomePretty] customer is a very special person; spell has never worked this well before. Asche is insisting that customer is to be drinking up as reward for being such a willing participant.”</i>", parse);
 	Text.NL();
 	Text.Add("You don’t need to be told twice. Tilting your head up, you latch onto the exotic jackaless’ left breast with all the thirst and eagerness of a newborn babe, more than willing to relieve her of her burden of delectable cream. Sucking away rhythmically, you elicit soft yips of ecstasy from Asche as your tongue toys with her stiff nipple. Her milk is thick and sweet, and you gladly drink your fill.", parse);
 	Text.NL();
@@ -380,9 +383,9 @@ Scenes.Asche.Sex.MilkHer = function() {
 	Text.NL();
 	Text.Add("Suckling and being suckled yourself in one movement, feeling the pleasure of another… one wonders what other kinds of kinky stuff people get up to in the highlands. Asche’s left breast is far from emptied, but at least it isn’t leaking anymore, having shrunk ever so slightly at being relieved - breaking free with an audible pop, you turn your attentions to her right breast, eliciting another round of delighted yipping and writhing from the jackaless.", parse);
 	Text.NL();
-	Text.Add("Gradually, you become aware of a growing urgency through the relentless assault of touch, taste and smell. You’re not exactly sure what it is, but that question’s answered soon enough when Asche stiffens, and squirt after squirt of girl-cum splatters onto your belly, the golden patterns on both your bodies burning with intense light. Arching her back, the jackaless pulls herself free of you, milk spattering all over the mattress, her, you…", parse);
+	Text.Add("Gradually, you become aware of a growing urgency through the relentless assault of touch, taste and smell. You’re not exactly sure what it is, but that question’s answered soon enough when Asche stiffens, and squirt after squirt of girl-cum splatters onto your belly, the golden patterns on both your bodies burning with intense light. Arching her back, the jackaless pulls herself free of you, milk spattering all over the mattress, her, and you…", parse);
 	Text.NL();
-	Text.Add("You cry out as well, sharing her pleasure and riding her orgasm, and tremble from head to toe before finally going limp, as utterly exhausted as your sexy, exotic lover is. You lie against each other for a few minutes, utterly winded, until Asche shakily pushes herself off you, a big, silly grin on her face.", parse);
+	Text.Add("You cry out as well, sharing her pleasure and riding her orgasm, and tremble from head to [foot] before finally going limp, as utterly exhausted as your sexy, exotic lover is. You lie against each other for a few minutes, utterly winded, until Asche shakily pushes herself off you, a big, silly grin on her face.", parse);
 	Text.Flush();
 	
 	Gui.NextPrompt(Scenes.Asche.Sex.Ending);
@@ -390,22 +393,23 @@ Scenes.Asche.Sex.MilkHer = function() {
 
 Scenes.Asche.Sex.Tribbing = function() {
 	var parse = {
-		
+		heshe : player.mfFem("he", "she"),
+		hisher : player.mfFem("his", "her")
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
 	Text.Clear();
-	Text.Add("<i>“Oh, so customer is being big fan of lady love?”</i> the sexy shopkeeper whispers, her voice sultry and seductive. <i>“Is being all right, Asche is also big fan of many things, so customer is being assured that she is in good hands.”</i>", parse);
+	Text.Add("<i>“Oh, so customer is being big fan of lady love?”</i> the sexy shopkeeper whispers, her voice sultry and seductive. <i>“Is being all right, Asche is also big fan of many things, so customer is being assured that [heshe] is in good hands.”</i>", parse);
 	Text.NL();
 	parse["c"] = player.FirstCock() ? Text.Parse(", pressing your shaft[s] against your stomach and getting them out of the way", parse) : "";
 	Text.Add("Limber as a mongoose, the jackaless practically flows up to you, making extra effort to waggle her broad, breeding-worthy hips as she closes the distance between your bodies. A wide, predatory grin plastered on her muzzle, she presses down on you, pinning you to the mattress with all four limbs while her hips descend squarely upon yours[c]. Stretching like a cat, her back arched, Asche grinds her moist and swollen pussy lips against yours in one fluid movement, making you squirm under her as unexpected sensations rush into your body to join the tingles of pleasure coursing through you.", parse);
 	Text.NL();
-	Text.Add("<i>“Ah, so spell is working right,”</i> Asche says with a giggle. <i>“Customer is feeling this jackaless’ pleasure in addition to her own. Can be learning much from feedback - if you are having hands free maybe I am asking you to be taking notes, yes? Possibly there will be test next time, so Asche is expecting customer to be studying and practicing hard.”</i>", parse);
+	Text.Add("<i>“Ah, so spell is working right,”</i> Asche says with a giggle. <i>“Customer is feeling this jackaless’ pleasure in addition to [hisher] own. Can be learning much from feedback - if you are having hands free, maybe I am asking you to be taking notes, yes? Possibly there will be test next time, so Asche is expecting customer to be studying and practicing hard.”</i>", parse);
 	Text.NL();
 	Text.Add("Slowly, the jackaless lowers her face to yours until the tip of her muzzle is almost touching your nose. The scent of her slightly musky breath is absolutely divine when mixed with the mint scent of the room, and her dark, almond-shaped eyes grow to become the entirety of your world. Flowing from her shoulders and swaying in the room’s dim light, Asche’s dirty blond hair contrasts perfectly with her deep golden fur, as both tickle and tease away, ever at the edge of your touch.", parse);
 	Text.NL();
-	Text.Add("The patterns on both your bodies flare up into brilliant gold as Asche presses her lips to yours in a light kiss. Nothing heavy, just a quick peck, and yet you feel heat growing in your cheeks and just above your [breasts], a liquid heat that throbs and bubbles under your skin. Is this part of the magic?", parse);
+	Text.Add("The patterns on both your bodies flare up into brilliant gold as Asche presses her lips to yours in a light kiss. Nothing heavy, just a quick peck, and yet you feel heat growing in your cheeks and just above your [breasts], a liquid heat that throbs and bubbles under your [skin]. Is this part of the magic?", parse);
 	Text.NL();
 	parse["l"] = player.HasLegs() ? "your thighs apart" : "you into an open position";
 	parse["c"] = player.FirstCock() ? Text.Parse("your cock[s] becoming painfully hard, ", parse) : "";
@@ -414,7 +418,7 @@ Scenes.Asche.Sex.Tribbing = function() {
 	parse["c"] = player.FirstCock() ? Text.Parse(", your cock[s] flopping about and spattering precum all over your belly with all the vigorous motions you’re making", parse) : "";
 	Text.Add("<i>“Customer is having such a tender, delicious body,”</i> Asche says with a grin, her breathing labored. <i>“Asche could be eating her up - in manner of speech, of course.”</i> Wasting no time in taking advantage of your readiness, the jackaless rubs and twists your nipples as she doubly redoubles her efforts. A moan escapes your lips as you feel her engorged clit slipping against your [vag], nudging and teasing your [clit]. Even as you’re being penetrated in this manner, though, tingles of sensation burn along the golden conduits on your body, gathering in your [clit] and letting you know just what Asche is feeling right now. Encouraged by the fact that you know the jackaless is enjoying this just as much as you are, you put in just that much more effort into creating a satisfying ride for her hips[c].", parse);
 	Text.NL();
-	Text.Add("Each time your swollen clit passes Asche’s, a shudder of pleasure runs through your very being, compounded by the empathic magic that the jackaless worked upon both your bodies. The heat flowing from her loins pervades every part of your being, coursing through your veins and setting the petals of your womanly flower alight. The mattress beneath you is already slick with a puddle of your combined girlcum, and trapped as you are under Asche, all you can do is squirm and struggle in the throes of pleasure as the exotic shopkeeper yips and whines atop you, the fur about her crotch and thighs matted with the same glistening mixture. Her grand breasts bounce rhythmically on her chest each time she rocks against you, slapping firmly against her chest - up and down, up and down, the movement almost hypnotic.", parse);
+	Text.Add("Each time your swollen [clit] passes Asche’s, a shudder of pleasure runs through your very being, compounded by the empathic magic that the jackaless worked upon both your bodies. The heat flowing from her loins pervades every part of your being, coursing through your veins and setting the petals of your womanly flower alight. The mattress beneath you is already slick with a puddle of your combined girl-cum, and trapped as you are under Asche, all you can do is squirm and struggle in the throes of pleasure as the exotic shopkeeper yips and whines atop you, the fur about her crotch and thighs matted with the same glistening mixture. Her grand breasts bounce rhythmically on her chest each time she rocks against you, slapping firmly against her chest - up and down, up and down, the movement almost hypnotic.", parse);
 	Text.NL();
 	parse["c"] = player.FirstCock() ? Text.Parse(", your cock[s] releasing their load all over the place in strings and spurts", parse) : "";
 	Text.Add("Slurp. Slurp. Slurp. Each connection made with a satisfyingly wet noise of orgiastic lust, each pull away leaving strands and beads of feminine nectar connecting your bodies. You can’t hold on long, and your orgasm is unexpectedly sudden and intense when it does come, the insides of your [vag] clenching about nothing in painful tightness[c]. The exotic shopkeeper isn’t too far behind you - throwing her head back and letting out a sound between a howl and a snarl, she reaches her peak as well. A squirt of clear juices splatters all across your crotch, dropping down your muff and mixing with your own in the most wonderful mess you’ve made in some time.", parse);
@@ -430,13 +434,13 @@ Scenes.Asche.Sex.Ending = function() {
 	
 	
 	Text.Clear();
-	Text.Add("<i>“So, did customer enjoy lesson?”</i> the jackalass purrs, her voice rich and honeyed as she begins the arduous task of cleaning herself up. <i>“Asche hopes that you found new insights as result of new experience.”</i>", parse);
+	Text.Add("<i>“So, did customer enjoy lesson?”</i> the jackaless purrs, her voice rich and honeyed as she begins the arduous task of cleaning herself up. <i>“Asche hopes that you found new insights as result of new experience.”</i>", parse);
 	Text.NL();
 	Text.Add("You manage to summon just enough strength to nod. Being able to feel your partner’s body that way, each and every part of your body linked together, joined in unison… ", parse);
 	if(player.sexlevel >= 4)
 		Text.Add("as experienced as you are in carnal matters, you still think you’ve gleaned something from being able to see both perspectives at the same time. It’s definitely an educational experience, to say the least.", parse);
 	else
-		Text.Add("yes, you definitely feel like you understand your actions and their results more, and perhaps with a little effort can put that knowledge into giving and receiving pleasure.", parse);
+		Text.Add("yes, you definitely feel like you understand your actions and their results more, and perhaps with a little effort, can put that knowledge into giving and receiving pleasure.", parse);
 	Text.NL();
 	Text.Add("The jackaless smiles, her eyes lighting up with eagerness like an enthusiastic puppy. <i>“Asche is glad she can be helping customer, also is happy she is repaying debt of customer bringing her alchemical reagent. Now, this jackaless is thinking that you may be wanting to be washing self, so there is rain barrel and drain further in the back. Please to be remembering to clean off pattern from self, because while opening self in fashion like this is bringing great pleasure, can also be dangerous when not controlled.”</i>", parse);
 	Text.NL();

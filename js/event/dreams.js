@@ -1003,7 +1003,7 @@ Scenes.Dreams.AscheDance = function(ravenTrigger) {
 	Text.NL();
 	Text.Add("You’ve been waiting for her in the circle of standing stones for ten minutes now - she’s never actually tardy, but always just enough to be fashionably late. And indeed, here she comes, stepping into the circle as if she owns the grounds.", parse);
 	Text.NL();
-	Text.Add("<i>“Asche sends her apologies,”</i> the jackalass says as she saunters towards you, blowing you a kiss. <i>“This jackaless hurried over as quickly as she could; it has just been violent sort of day, that is all. ", parse);
+	Text.Add("<i>“Asche sends her apologies,”</i> the jackaless says as she saunters towards you, blowing you a kiss. <i>“This jackaless hurried over as quickly as she could; it has just been violent sort of day, that is all. ", parse);
 	if(ravenTrigger)
 		Text.Add("Also, Asche had to deal with a little birdy; she does not like spies, no. ", parse);
 	Text.Add("But we are ready to begin?”</i>", parse);
