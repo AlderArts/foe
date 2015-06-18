@@ -176,3 +176,13 @@ world.loc.Forest.Outskirts.events.push(new Link(
 		Scenes.Aquilius.PickHerbs();
 	}
 ));
+world.loc.Forest.Outskirts.events.push(new Link(
+	"Nightshade", function() { return Scenes.Asche.Tasks.Nightshade.IsOn() && !Scenes.Asche.Tasks.Nightshade.IsSuccess(); }, true,
+	null,
+	function() {
+		if(Scenes.Asche.Tasks.Nightshade.HasHelpFromAquilius())
+			Scenes.Asche.Tasks.Nightshade.FollowAquilius();
+		else
+			Scenes.Asche.Tasks.Nightshade.BlindStart();
+	}
+));

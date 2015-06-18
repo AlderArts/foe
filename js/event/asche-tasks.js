@@ -4,9 +4,44 @@
  */
 Scenes.Asche.Tasks = {};
 
+Scenes.Asche.Tasks.Default = function() {
+	var parse = {};
+	
+	//Play this if the player isn’t eligible for a new task at the moment.
+	Text.Clear();
+	Text.Add("You ask the jackal-morph shopkeeper if she has anything for you to do.", parse);
+	Text.NL();
+	Text.Add("<i>“Ah, so adventuring spirit is surging in good customer? Asking shopkeepers and people in bars is time-honored way of receiving important tasks of saving world and such things.”</i>", parse);
+	Text.NL();
+	Text.Add("That, and being bequeathed tasks by mysterious goddesses whom you just met moments before.", parse);
+	Text.NL();
+	Text.Add("<i>“Well, that is being not so common. But still happens, so customer has point.”</i> Asche looks thoughtful for a moment. <i>“Still, Asche is not having anything for you at the moment - she is not wanting other people to be helping with things she can be doing herself, and she is to be avoiding debts if she can help it. Asche is hating being in debt - is possibly one of worst things in world. Maybe to be asking later, yes?”</i>", parse);
+	Text.Flush();
+	
+	Scenes.Asche.TalkPrompt();
+}
+
 Scenes.Asche.Tasks.Ginseng = {};
 
-// TODO LINK
+Scenes.Asche.Tasks.Ginseng.IsEligable = function() {
+	return asche.flags["Tasks"] == 0 &&
+	       rigard.MagicShop.totalBought >= 500 &&
+	       player.level >= 5;
+}
+Scenes.Asche.Tasks.Ginseng.IsOn = function() {
+	return asche.flags["Tasks"] >= Asche.Tasks.Ginseng_Started &&
+	       asche.flags["Tasks"] < Asche.Tasks.Ginseng_Finished;
+}
+Scenes.Asche.Tasks.Ginseng.IsFail = function() {
+	return asche.flags["Tasks"] & Asche.Tasks.Ginseng_Failed;
+}
+Scenes.Asche.Tasks.Ginseng.IsSuccess = function() {
+	return asche.flags["Tasks"] & Asche.Tasks.Ginseng_Succeeded;
+}
+Scenes.Asche.Tasks.Ginseng.IsCompleted = function() {
+	return asche.flags["Tasks"] >= Asche.Tasks.Ginseng_Finished;
+}
+
 //This should have a level requirement such that the PC has a chance at actually beating the enemies involved. Maybe add a money spent or items bought requirement?
 //Maybe a minimum level of 7, the encounter will be 8 or 9.
 Scenes.Asche.Tasks.Ginseng.Initiation = function() {
@@ -49,23 +84,27 @@ Scenes.Asche.Tasks.Ginseng.Initiation = function() {
 	Text.Add("She’s as good as her word - a few moments later, Asche passes you a small slip of paper with some hastily scribbled directions on it: northwest from a certain crossroads, then west and in that direction until the ravine to the crag which houses the spring comes into sight. The shopkeeper’s handwriting is quite atrocious, but at least it’s not illegible. Well, time to be off to this spring and see what you find there.", parse);
 	Text.Flush();
 	
-	//TODO Set flag
+	asche.flags["Tasks"] |= Asche.Tasks.Ginseng_Started;
+	
 	Gui.NextPrompt();
 }
 
-// TODO LINK
 Scenes.Asche.Tasks.Ginseng.OnTask = function() {
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty")
 	};
+	
+	Text.Clear();
 	Text.Add("<i>“Oh? Customer is back already? Surely could not have lost way in highlands - Asche’s directions are very good. Used to play pranks on stuffy old shamans when Asche was a little girl.”</i>", parse);
 	Text.NL();
 	Text.Add("You try to imagine the sexy shopkeeper as a little girl - to say that it’s hard would be an understatement of the greatest degree.", parse);
 	Text.NL();
 	Text.Add("<i>“Nevertheless, potion that is requiring ginseng is very important to Asche, so if [handsomepretty] customer can be hurrying up, she will be most delighted.”</i>", parse);
+	Text.Flush();
+	
+	Scenes.Asche.TalkPrompt();
 }
 
-// TODO LINK
 Scenes.Asche.Tasks.Ginseng.Failed = function() {
 	var parse = {
 		himher : player.mfFem("him", "her")
@@ -77,7 +116,7 @@ Scenes.Asche.Tasks.Ginseng.Failed = function() {
 	Text.Add("<i>“Oh well,”</i> the jackaless replies, disappointment clear in her voice. <i>“Asche is seeing color of zebra magic on you, so she sees that you at least tried. Maybe she was overestimating customer’s abilities. Perhaps if customer had some of Asche’s stock with [himher], might not have gone so badly… but is over now. Asche supposes she will have to ask someone else to be getting it for her, yes?”</i>", parse);
 	Text.Flush();
 	
-	//TODO, set flag
+	asche.flags["Tasks"] |= Asche.Tasks.Ginseng_Finished;
 }
 
 Scenes.Asche.Tasks.Ginseng.Highlands = function() {
@@ -139,7 +178,7 @@ Scenes.Asche.Tasks.Ginseng.Highlands = function() {
 	options.push({ nameStr : "Sneak",
 		tooltip : tooltip,
 		func : function() {
-			//TODO Make a dex check. If success, PC sneaks by and digs one up, else, fail and fight.
+			// Make a dex check. If success, PC sneaks by and digs one up, else, fail and fight.
 			
 			var dex = Math.floor(player.Dex() + Math.random() * 20);
 			
@@ -149,7 +188,7 @@ Scenes.Asche.Tasks.Ginseng.Highlands = function() {
 			Text.Add("Gritting your teeth, you begin the ascent, trying to gain some height on the steep walls; hopefully the vegetation will break your fall if you happen to tumble. It feels like it takes forever, but you manage to climb to a decent height - about four stories above the ravine floor - and finally begin the task of edging your way through the vegetation and around the small encampment.", parse);
 			Text.NL();
 			
-			var goal = 80; //TODO
+			var goal = 40;
 			
 			if(DEBUG) {
 				Text.Add("Dex check: [dex] (vs [goal])", {dex: dex, goal: goal}, 'bold');
@@ -169,7 +208,9 @@ Scenes.Asche.Tasks.Ginseng.Highlands = function() {
 				
 				party.Inv().AddItem(Items.Quest.Ginseng);
 				world.TimeStep({hour: 1});
-				//TODO Set flag
+				
+				asche.flags["Tasks"] |= Asche.Tasks.Ginseng_Succeeded;
+				
 				Gui.NextPrompt();
 			}
 			else { //Fail
@@ -265,7 +306,9 @@ Scenes.Asche.Tasks.Ginseng.Bribe = function() {
 			
 			party.Inv().AddItem(Items.Quest.Ginseng);
 			world.TimeStep({hour: 1});
-			//TODO Set flag
+			
+			asche.flags["Tasks"] |= Asche.Tasks.Ginseng_Succeeded;
+			
 			Gui.NextPrompt();
 		}, enabled : party.coin >= 350
 	});
@@ -362,7 +405,9 @@ Scenes.Asche.Tasks.Ginseng.Whore = function() {
 		
 		party.Inv().AddItem(Items.Quest.Ginseng);
 		world.TimeStep({hour: 4});
-		//TODO set flag
+
+		asche.flags["Tasks"] |= Asche.Tasks.Ginseng_Succeeded;
+
 		Gui.NextPrompt();
 	}
 	else {
@@ -414,7 +459,9 @@ Scenes.Asche.Tasks.Ginseng.FightWin = function() {
 		Text.Flush();
 		
 		party.Inv().AddItem(Items.Quest.Ginseng);
-		//TODO set flag
+
+		asche.flags["Tasks"] |= Asche.Tasks.Ginseng_Succeeded;
+		
 		Gui.NextPrompt();
 	});
 	Encounter.prototype.onVictory.call(enc);
@@ -438,11 +485,11 @@ Scenes.Asche.Tasks.Ginseng.FightLoss = function() {
 	Text.Add("There’s not much you can do now but to head back to Asche and tell the jackaless you failed.", parse);
 	Text.Flush();
 	
+	asche.flags["Tasks"] |= Asche.Tasks.Ginseng_Failed;
+	
 	Gui.NextPrompt();
-	//TODO set flag
 }
 
-//TODO LINK
 Scenes.Asche.Tasks.Ginseng.Complete = function() {
 	var parse = {
 		himher : player.mfFem("him", "her"),
@@ -453,6 +500,8 @@ Scenes.Asche.Tasks.Ginseng.Complete = function() {
 	
 	Text.Clear();
 	party.Inv().RemoveItem(Items.Quest.Ginseng);
+	
+	asche.flags["Tasks"] |= Asche.Tasks.Ginseng_Finished;
 	
 	Text.Add("<i>“Ah! You are having fresh ginseng?”</i>", parse);
 	Text.NL();
@@ -486,7 +535,7 @@ Scenes.Asche.Tasks.Ginseng.Complete = function() {
 	Text.NL();
 	Text.Add("It’s clear what the alluring shopkeeper means by that…", parse);
 	Text.Flush();
-	//TODO Set flags
+	
 	//[Yes][No]
 	var options = new Array();
 	options.push({ nameStr : "Yes",
@@ -544,7 +593,11 @@ Scenes.Asche.Tasks.Ginseng.Complete = function() {
 			party.coin += coin;
 			Text.Add("You recieved [coin] coins.", {coin: Text.NumToText(coin)}, 'bold');
 			Text.Flush();
-			// TODO #all party members present gain a small amount of xp.
+			
+			_.each(party.members, function(member) {
+				member.AddExp(25);
+			});
+			
 			Gui.NextPrompt();
 		}, enabled : true
 	});
@@ -559,7 +612,26 @@ Scenes.Asche.Tasks.Ginseng.Complete = function() {
 //
 Scenes.Asche.Tasks.Nightshade = {};
 
-//TODO LINK
+Scenes.Asche.Tasks.Nightshade.IsEligable = function() {
+	return asche.flags["Tasks"] >= Asche.Tasks.Ginseng_Finished &&
+	       rigard.MagicShop.totalBought >= 1000 &&
+	       player.level >= 8;
+}
+Scenes.Asche.Tasks.Nightshade.IsOn = function() {
+	return asche.flags["Tasks"] >= Asche.Tasks.Nightshade_Started &&
+	       asche.flags["Tasks"] < Asche.Tasks.Nightshade_Finished;
+}
+Scenes.Asche.Tasks.Nightshade.IsSuccess = function() {
+	return asche.flags["Tasks"] & Asche.Tasks.Nightshade_Succeeed;
+}
+Scenes.Asche.Tasks.Nightshade.HasHelpFromAquilius = function() {
+	return asche.flags["Tasks"] & Asche.Tasks.Nightshade_Aquilius;
+}
+Scenes.Asche.Tasks.Nightshade.IsCompleted = function() {
+	return asche.flags["Tasks"] >= Asche.Tasks.Nightshade_Finished;
+}
+
+
 //The player should have resolved the first quest, be at an appropriate level, and perhaps have spent x amount of money or bought so many items from Asche before this unlocks.
 Scenes.Asche.Tasks.Nightshade.Initiation = function() {
 	var parse = {
@@ -584,23 +656,25 @@ Scenes.Asche.Tasks.Nightshade.Initiation = function() {
 	Text.Add("<i>“Maybe customer is to be buying some of my stock if [heshe] is worried, yes? In any case, Asche is needing one whole plant, after which she will be extracting essence of poisons and using to imbue candle with spell. Now, if there is being nothing else, Asche suggests that customer is making haste to be getting reagents, yes yes.”</i>", parse);
 	Text.Flush();
 	
-	//TODO Set flags
+	asche.flags["Tasks"] |= Asche.Tasks.Nightshade_Started;
 	
 	Gui.NextPrompt();
 }
 
-//TODO LINK
-Scenes.Asche.Tasks.Nightshade.OnQuest = function() {
+Scenes.Asche.Tasks.Nightshade.OnTask = function() {
 	var parse = {
 		hisher : player.mfFem("his", "her")
 	};
 	
+	Text.Clear();
 	Text.Add("<i>“Customer is not having nightshade for Asche?”</i> The jackaless flashes her pearly white teeth at you. <i>“Is all right for now, since preparations to be going into bone yard are very long because place is so evil. Customer can be taking [hisher] time… for now.</i>", parse);
 	Text.NL();
 	Text.Add("<i>“If customer is needing reminding, then Asche is needing whole nightshade plant from forest. To be careful when handling the poisonous herb, though - Asche is not wanting customer’s blood on her head. Again, if customer is having trouble finding plant on [hisher] own, maybe she can be asking locals of forest who know something of herbs that are growing there.”</i>", parse);
+	Text.Flush();
+	
+	Scenes.Asche.TalkPrompt();
 }
 
-//TODO LINK
 //While on this quest, add a one-time “nightshade” button to Aquilius’ daytime talk menu.
 Scenes.Asche.Tasks.Nightshade.AskAquiliusForHelp = function() {
 	var parse = {
@@ -621,11 +695,11 @@ Scenes.Asche.Tasks.Nightshade.AskAquiliusForHelp = function() {
 	Text.Add("<i>“That’s about all I have for you, [playername]. I just pray to whatever spirits have your loyalty that you know what you’re doing with that stuff. Now, is there anything else I can help you with?”</i>", parse);
 	Text.Flush();
 	
-	//TODO Set flag
-	Gui.NextPrompt(); //TODO Back to Aquilius
+	asche.flags["Tasks"] |= Asche.Tasks.Nightshade_Aquilius;
+	
+	Scenes.Aquilius.Prompt();
 }
 
-//TODO LINK
 //Add a “nightshade” button in the forest main menu. Click this to get the below scenes.
 //If the player went ahead and asked Aquilius, they can skip ahead to actually finding the stuff instead of risking wandering around the forest and wasting their time.
 //Maybe a success bonus if the player has ranger job mastered?
@@ -671,7 +745,6 @@ Scenes.Asche.Tasks.Nightshade.BlindStart = function() {
 	scenes.Get();
 }
 
-//TODO LINK
 //Use this if asked Aquilius for help
 Scenes.Asche.Tasks.Nightshade.FollowAquilius = function() {
 	var parse = {
@@ -702,7 +775,8 @@ Scenes.Asche.Tasks.Nightshade.HerbComplications = function() {
 		Text.Add("All right, now to return to Asche and see what she has to say.", parse);
 		Text.Flush();
 		
-		//TODO Set flag
+		asche.flags["Tasks"] |= Asche.Tasks.Nightshade_Succeeed;
+		
 		party.Inv().AddItem(Items.Quest.Nightshade);
 		
 		Gui.NextPrompt();
@@ -713,7 +787,7 @@ Scenes.Asche.Tasks.Nightshade.HerbComplications = function() {
 		Text.Add("With nothing better coming to mind, you decide that finding a proper route with plenty of hand and footholds is the best you can do here. You take your time, trying to choose the most easily reached plant, and finally decide on one particular specimen before starting to climb.", parse);
 		Text.NL();
 		
-		var goal = 80; //TODO #make a combined stamina, dex and int check here. Maybe sum the three, make an average, and go for a check that’s suitable for a level 7 or 8 character?
+		var goal = 60; // #make a combined stamina, dex and int check here. Maybe sum the three, make an average, and go for a check that’s suitable for a level 7 or 8 character?
 		
 		var check = Math.floor((player.Dex() + player.Sta() + player.Int()) / 3.0 + Math.random() * 20);
 		
@@ -744,14 +818,14 @@ Scenes.Asche.Tasks.Nightshade.HerbComplications = function() {
 		
 		Text.Flush();
 		
-		//TODO Set flag
+		asche.flags["Tasks"] |= Asche.Tasks.Nightshade_Succeeed;
+		
 		party.Inv().AddItem(Items.Quest.Nightshade);
 		
 		Gui.NextPrompt();
 	}
 }
 
-//TODO LINK
 Scenes.Asche.Tasks.Nightshade.Complete = function() {
 	var parse = {
 		handsomepretty : player.mfFem("handsome", "pretty"),
@@ -761,7 +835,12 @@ Scenes.Asche.Tasks.Nightshade.Complete = function() {
 	};
 	parse = player.ParserTags(parse);
 	
+	asche.flags["Tasks"] |= Asche.Tasks.Nightshade_Finished;
+	
 	Text.Clear();
+	
+	party.Inv().RemoveItem(Items.Quest.Nightshade);
+	
 	Text.Add("<i>“Asche knew customer would come through! And at just right time, too - Asche has just returned from bone yard and ground dragon bones into meal.”</i> There’s a soft click of gold on gold as the jackaless reaches into a nearby shelf and draws out a small bag of fine white powder. <i>“Asche was thinking to herself, ‘Would it not be good thing if [handsomepretty] customer were coming back with nightshade right about now?’ and here you are! Is almost like magic!”</i>", parse);
 	Text.NL();
 	Text.Add("Maybe it <i>is</i> magic, you reply with a grin as you set out the plants on the counter. Asche pulls out a pair of thick cloth gloves from under the counter, slips them on, and begins to examine the specimens you brought back.", parse);
@@ -823,7 +902,6 @@ Scenes.Asche.Tasks.Nightshade.Complete = function() {
 			party.coin += coin;
 			Text.Add("You recieved [coin] coins.", {coin: Text.NumToText(coin)}, 'bold');
 			
-			//TODO Set flags
 			//TODO #gain green scented candle.
 			Text.Flush();
 			
@@ -835,7 +913,6 @@ Scenes.Asche.Tasks.Nightshade.Complete = function() {
 		func : function() {
 			Text.Clear();
 			
-			//TODO Set flags
 			//TODO #gain green scented candle.
 			
 			Text.Add("Upon hearing your words, Asche’s smile widens into a sultry grin. Leaning forward onto the counter, she jabs a finger at the door. <i>“Is all well and good, but maybe [handsomepretty] customer is to be locking storefront and taking [hisher] candle before Asche is bringing [himher] to back room, yes? Although shop is having protections, Asche still does not want to be dealing with shoplifters when her mind is on… other matters. Giving lesson is being requiring full concentration, after all.”</i>", parse);

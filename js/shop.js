@@ -20,6 +20,9 @@ function Shop(opts) {
 	// How to save sold limited stock?
 	this.inventory = [];
 	
+	this.totalBought = 0;
+	this.totalSold = 0;
+	
 	opts = opts || {};
 	this.sellPrice       = opts.sellPrice || 1;
 	this.buyPromptFunc   = opts.buyPromptFunc;
@@ -28,6 +31,19 @@ function Shop(opts) {
 	this.sellPromptFunc  = opts.sellPromptFunc;
 	this.sellSuccessFunc = opts.sellSuccessFunc;
 	this.sellFailFunc    = opts.sellFailFunc;
+}
+
+Shop.prototype.ToStorage = function() {
+	var storage = {};
+	if(this.totalBought != 0) storage.tb = this.totalBought.toFixed();
+	if(this.totalSold   != 0) storage.ts = this.totalSold.toFixed();
+	return storage;
+}
+
+Shop.prototype.FromStorage = function(storage) {
+	storage = storage || {};
+	this.totalBought = !isNaN(parseInt(storage.tb)) ? parseInt(storage.tb) : this.totalBought;
+	this.totalSold   = !isNaN(parseInt(storage.ts)) ? parseInt(storage.ts) : this.totalSold;
 }
 
 Shop.prototype.AddItem = function(item, price, enabled, func, num) {
@@ -70,6 +86,7 @@ Shop.prototype.Buy = function(back, preventClear) {
 				if(shop.buySuccessFunc) shop.buySuccessFunc(obj.it, cost, 1);
 				// Remove cost
 				party.coin -= cost;
+				shop.totalBought += cost;
 				// Add item to inv
 				party.inventory.AddItem(obj.it);
 				buyFunc(obj, true);
@@ -81,6 +98,7 @@ Shop.prototype.Buy = function(back, preventClear) {
 				if(shop.buySuccessFunc) shop.buySuccessFunc(obj.it, cost, 5);
 				// Remove cost
 				party.coin -= cost*5;
+				shop.totalBought += cost*5;
 				// Add item to inv
 				party.inventory.AddItem(obj.it, 5);
 				buyFunc(obj, true);
@@ -92,6 +110,7 @@ Shop.prototype.Buy = function(back, preventClear) {
 				if(shop.buySuccessFunc) shop.buySuccessFunc(obj.it, cost, 10);
 				// Remove cost
 				party.coin -= cost*10;
+				shop.totalBought += cost*10;
 				// Add item to inv
 				party.inventory.AddItem(obj.it, 10);
 				buyFunc(obj, true);
@@ -179,6 +198,7 @@ Shop.prototype.Sell = function(back, preventClear) {
 				if(shop.sellSuccessFunc) shop.sellSuccessFunc(obj.it, cost, 1);
 				// Add cash
 				party.coin += cost;
+				shop.totalSold += cost;
 				// Remove item from inv
 				party.inventory.RemoveItem(obj.it);
 				
@@ -198,6 +218,7 @@ Shop.prototype.Sell = function(back, preventClear) {
 				if(shop.sellSuccessFunc) shop.sellSuccessFunc(obj.it, cost, sold);
 				// Add cash
 				party.coin += cost * sold;
+				shop.totalSold += cost * sold;
 				// Remove item from inv
 				party.inventory.RemoveItem(obj.it, sold);
 				
@@ -216,6 +237,7 @@ Shop.prototype.Sell = function(back, preventClear) {
 				if(shop.sellSuccessFunc) shop.sellSuccessFunc(obj.it, cost, num);
 				// Add cash
 				party.coin += cost * num;
+				shop.totalSold += cost * num;
 				// Remove item from inv
 				party.inventory.RemoveItem(obj.it, num);
 				

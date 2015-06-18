@@ -23,6 +23,7 @@ function Asche(storage) {
 	this.flags["Met"]   = Asche.Met.NotMet;
 	this.flags["Talk"]  = 0; //Bitmask
 	this.flags["Magic"] = 0;
+	this.flags["Tasks"] = 0; //Bitmask
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -48,10 +49,14 @@ Asche.Magic = {
 	Rituals    : 2
 };
 Asche.Tasks = {
-	Started_1  : 1,
-	Finished_1 : 2,
-	Starget_2  : 3,
-	Finished_2 : 4
+	Ginseng_Started : 1,
+	Ginseng_Failed : 2,
+	Ginseng_Succeeded : 4,
+	Ginseng_Finished : 8,
+	Nightshade_Started  : 16,
+	Nightshade_Aquilius : 32,
+	Nightshade_Succeeed : 64,
+	Nightshade_Finished : 128
 };
 
 Asche.prototype.Update = function(step) {
@@ -313,7 +318,7 @@ Scenes.Asche.TalkPrompt = function() {
 				Scenes.Asche.TalkPrompt();
 			}
 			// Lesson two - Ritual
-			else if(asche.flags["Magic"] < Asche.Magic.Rituals && asche.flags["Tasks"] >= Asche.Tasks.Finished_1) {
+			else if(asche.flags["Magic"] < Asche.Magic.Rituals && asche.flags["Tasks"] >= Asche.Tasks.Ginseng_Finished) {
 				Text.Add("<i>“Now that customer has had chance to see shamanistic power for [himher]self, Asche is thinking that maybe [heshe] is ready for deeper explanation. But… really, this jackaless is curious - she cannot be teaching customer to be doing highlander magic, so why is customer being asking so many questions?”</i>", parse);
 				Text.NL();
 				Text.Add("Curiosity, nothing more.", parse);
@@ -439,18 +444,26 @@ Scenes.Asche.TalkPrompt = function() {
 	options.push({ nameStr : "Tasks",
 		tooltip : "Does she perchance need the services of an adventurer?",
 		func : function() {
-			//Play this if the player isn’t eligible for a new task at the moment.
-			Text.Clear();
-			Text.Add("You ask the jackal-morph shopkeeper if she has anything for you to do.", parse);
-			Text.NL();
-			Text.Add("<i>“Ah, so adventuring spirit is surging in good customer? Asking shopkeepers and people in bars is time-honored way of receiving important tasks of saving world and such things.”</i>", parse);
-			Text.NL();
-			Text.Add("That, and being bequeathed tasks by mysterious goddesses whom you just met moments before.", parse);
-			Text.NL();
-			Text.Add("<i>“Well, that is being not so common. But still happens, so customer has point.”</i> Asche looks thoughtful for a moment. <i>“Still, Asche is not having anything for you at the moment - she is not wanting other people to be helping with things she can be doing herself, and she is to be avoiding debts if she can help it. Asche is hating being in debt - is possibly one of worst things in world. Maybe to be asking later, yes?”</i>", parse);
-			Text.Flush();
-			
-			Scenes.Asche.TalkPrompt();
+			if(Scenes.Asche.Tasks.Ginseng.IsEligable())
+				Scenes.Asche.Tasks.Ginseng.Initiation();
+			else if(Scenes.Asche.Tasks.Ginseng.IsOn()) {
+				if(Scenes.Asche.Tasks.Ginseng.IsFail())
+					Scenes.Asche.Tasks.Ginseng.Failed();
+				else if(Scenes.Asche.Tasks.Ginseng.IsSuccess())
+					Scenes.Asche.Tasks.Ginseng.Complete();
+				else
+					Scenes.Asche.Tasks.Ginseng.OnTask();
+			}
+			else if(Scenes.Asche.Tasks.Nightshade.IsEligable())
+				Scenes.Asche.Tasks.Nightshade.Initiation();
+			else if(Scenes.Asche.Tasks.Nightshade.IsOn()) {
+				if(Scenes.Asche.Tasks.Nightshade.IsSuccess())
+					Scenes.Asche.Tasks.Nightshade.Complete();
+				else
+					Scenes.Asche.Tasks.Nightshade.OnTask();
+			}
+			else
+				Scenes.Asche.Tasks.Default();
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, true, function() {
@@ -552,6 +565,7 @@ Scenes.Asche.FortuneTellingPrompt = function() {
 			Text.Flush();
 			
 			party.coin -= cost;
+			rigard.MagicShop.totalBought += cost;
 			
 			Scenes.Asche.FortuneTellingPrompt();
 		}, enabled : party.coin >= cost
@@ -671,6 +685,7 @@ What? Why?
 			scenes.Get();
 			
 			party.coin -= cost;
+			rigard.MagicShop.totalBought += cost;
 			
 			Text.Flush();
 			

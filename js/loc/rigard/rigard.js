@@ -159,10 +159,13 @@ Rigard.prototype.ToStorage = function() {
 	if(this.KrawitzWorkDay)
 		storage.KWork   = this.KrawitzWorkDay.ToStorage();
 	
+	storage.MS = this.MagicShop.ToStorage();
+	
 	return storage;
 }
 
 Rigard.prototype.FromStorage = function(storage) {
+	storage = storage || {};
 	this.LBroomTimer.FromStorage(storage.LBroom);
 	if(storage.KWork) {
 		this.KrawitzWorkDay = new Time();
@@ -183,6 +186,8 @@ Rigard.prototype.FromStorage = function(storage) {
     	this.cwrel.base = parseInt(storage.cwrel) || this.cwrel.base;
 	for(var flag in storage.LB)
 		this.LB[flag] = parseInt(storage.LB[flag]);
+		
+	this.MagicShop.FromStorage(storage.MS);
 }
 
 Rigard.prototype.Update = function(step) {

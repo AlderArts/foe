@@ -326,6 +326,14 @@ Scenes.Aquilius.Prompt = function() {
 		tooltip : "Give the good surgeon a look-over.",
 		func : Scenes.Aquilius.Appearance, enabled : true
 	});
+	if(Scenes.Asche.Tasks.Nightshade.IsOn() &&
+	   !Scenes.Asche.Tasks.Nightshade.IsSuccess() &&
+	   !Scenes.Asche.Tasks.Nightshade.HasHelpFromAquilius()) {
+		options.push({ nameStr : "Nightshade",
+			tooltip : "Ask Aquilius about the herb that Asche sent you to look for.",
+			func : Scenes.Asche.Tasks.Nightshade.AskAquiliusForHelp, enabled : true
+		});
+	}
 	// DAYTIME
 	if(world.time.hour < 17) {
 		//Player may only help out once a day. Ish.
