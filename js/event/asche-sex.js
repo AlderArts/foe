@@ -425,6 +425,8 @@ Scenes.Asche.Sex.Tribbing = function() {
 	Text.NL();
 	Text.Add("Too dazed and addled to so much as move herself for the moment, Asche slumps atop you, the pulse and ebb of your intermeshed cunts setting you both down gently from your climaxes while you catch your breath. Gradually, the light from the golden patterns on your bodies fades away, and Asche manages to summon enough strength to stand, albeit shakily.", parse);
 	Text.Flush();
+	
+	Gui.NextPrompt(Scenes.Asche.Sex.Ending);
 }
 
 Scenes.Asche.Sex.Ending = function() {
