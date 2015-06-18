@@ -86,7 +86,7 @@ Scenes.Asche.Sex.FuckHer = function() {
 	Text.NL();
 	Text.Add("Satisfied that all is in order, Asche licks a fingertip and trails it down the curve of her full breasts, a quiet yip escaping her muzzle as she gently pinches each nipple in turn.", parse);
 	Text.NL();
-	Text.Add("<i>“It has been a while since Asche has had proper companion to play with,” the jackaless says, letting her hands wander across your body in search of a firm grip. <i>“Let us begin, then.”</i>", parse);
+	Text.Add("<i>“It has been a while since Asche has had proper companion to play with,”</i> the jackaless says, letting her hands wander across your body in search of a firm grip. <i>“Let us begin, then.”</i>", parse);
 	Text.NL();
 	parse["c"] = real ? "cock" : "strap-on";
 	parse["knot"] = knotted ? ", swallowing the swell of your knot as if it were nothing" : "";
