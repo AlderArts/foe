@@ -398,7 +398,7 @@ Scenes.Asche.Tasks.Ginseng.Whore = function() {
 		Text.NL();
 		Text.Add("The only replies he gets are pants and moans.", parse);
 		Text.NL();
-		Text.Add("<i>“Hey, you there. If you’re still alive after that, that is?”</i> He has to pause to catch his breath. <i>“We went flower picking yesterday - what a coincidence. Why don’t you just help yourself? I don’t think we’ll be up for doing much for a bit… anyways, left the baskets in the back of the spring grotto-” his voice trails off, to be replaced by a snore.", parse);
+		Text.Add("<i>“Hey, you there. If you’re still alive after that, that is?”</i> He has to pause to catch his breath. <i>“We went flower picking yesterday - what a coincidence. Why don’t you just help yourself? I don’t think we’ll be up for doing much for a bit… anyways, left the baskets in the back of the spring grotto-”</i> his voice trails off, to be replaced by a snore.", parse);
 		Text.NL();
 		Text.Add("You’ll get what you came for… eventually. Or at least, when you can breathe a little better and your limbs actually work right. For now, sleep seems like the best option…", parse);
 		Text.Flush();
