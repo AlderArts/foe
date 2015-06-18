@@ -95,12 +95,12 @@ function ZebraBrave(levelbonus) {
 	this.FirstCock().length.base = 35;
 	this.Balls().size.base = 6;
 	
-	this.maxHp.base        = 450;
-	this.maxSp.base        = 100;
-	this.maxLust.base      = 80;
+	this.maxHp.base        = 350;
+	this.maxSp.base        = 80;
+	this.maxLust.base      = 60;
 	// Main stats
-	this.strength.base     = 35;
-	this.stamina.base      = 35;
+	this.strength.base     = 30;
+	this.stamina.base      = 30;
 	this.dexterity.base    = 25;
 	this.intelligence.base = 15;
 	this.spirit.base       = 17;
