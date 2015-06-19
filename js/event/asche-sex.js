@@ -353,9 +353,10 @@ Scenes.Asche.Sex.Titfuck = function() {
 Scenes.Asche.Sex.MilkHer = function() {
 	var parse = {
 		heshe : player.mfFem("he", "she"),
-		nips : player.NipsDesc(),
+		nips : player.FirstBreastRow().NipsShort(),
 		handsomepretty : player.mfFem("handsome", "pretty"),
-		HandsomePretty : player.mfFem("Handsome", "Pretty")
+		HandsomePretty : player.mfFem("Handsome", "Pretty"),
+		foot : player.FootDesc()
 	};
 	
 	Text.Clear();
