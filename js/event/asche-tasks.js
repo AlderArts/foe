@@ -891,7 +891,7 @@ Scenes.Asche.Tasks.Nightshade.Complete = function() {
 		func : function() {
 			Text.Clear();
 			
-			//TODO #gain green scented candle.
+			party.Inv().AddItem(Items.Accessories.GreenScentedCandle);
 			
 			Text.Add("Upon hearing your words, Asche’s smile widens into a sultry grin. Leaning forward onto the counter, she jabs a finger at the door. <i>“Is all well and good, but maybe [handsomepretty] customer is to be locking storefront and taking [hisher] candle before Asche is bringing [himher] to back room, yes? Although shop is having protections, Asche still does not want to be dealing with shoplifters when her mind is on… other matters. Giving lesson is being requiring full concentration, after all.”</i>", parse);
 			Text.NL();
@@ -962,7 +962,8 @@ Scenes.Asche.Tasks.Nightshade.Complete = function() {
 			party.coin += coin;
 			Text.Add("You recieved [coin] coins.", {coin: Text.NumToText(coin)}, 'bold');
 			
-			//TODO #gain green scented candle.
+			party.Inv().AddItem(Items.Accessories.GreenScentedCandle);
+			
 			Text.Flush();
 			
 			Gui.NextPrompt();

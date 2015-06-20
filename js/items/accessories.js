@@ -70,3 +70,10 @@ Items.Accessories.SimpleCharm.price = 20;
 Items.Accessories.SimpleCharm.Short = function() { return "Simple charm"; }
 Items.Accessories.SimpleCharm.Long = function() { return "A simple charm that disrupts harmful energies."; }
 Items.Accessories.SimpleCharm.effect.spirit = 2;
+
+Items.Accessories.GreenScentedCandle = new Item("charm1", "G.Candle", ItemType.Accessory);
+Items.Accessories.GreenScentedCandle.price = 50;
+Items.Accessories.GreenScentedCandle.Short = function() { return "Green scented candle"; }
+Items.Accessories.GreenScentedCandle.Long = function() { return "A small scented candle fashioned with nightshade, among other ingredients. Protects the holder from poison and other forces of nature."; }
+Items.Accessories.SimpleCharm.effect.spirit = 2;
+Items.Accessories.SimpleCharm.effect.dmNature = 0.5;
