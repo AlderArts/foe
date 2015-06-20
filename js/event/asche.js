@@ -65,7 +65,6 @@ Asche.prototype.Update = function(step) {
 
 Asche.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
-	this.body.FromStorage(storage.body);
 	
 	// Load flags
 	this.LoadFlags(storage);
@@ -76,7 +75,6 @@ Asche.prototype.ToStorage = function() {
 	var storage = {};
 	
 	this.SavePersonalityStats(storage);
-	this.SaveBodyPartial(storage, {ass: true, vag: true});
 	
 	this.SaveFlags(storage);
 	this.SaveSexFlags(storage);
