@@ -734,7 +734,7 @@ Scenes.Asche.Tasks.Nightshade.BlindStart = function() {
 		Gui.NextPrompt();
 	}, 3, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("After half an hour of wandering along the winding and uneven forest trails, you’re about to throw in the towel and take a break when the trail abruptly opens up into a clearing dominated by a small woodland stream at its far end. What’s more important, though, are the numerous dirt and moss-covered rocky outcroppings that dot the area - some of them of considerable height - and perched halfway along one of them is… could it be? Is it? Yes, it <i>is</b> a specimen of nightshade!", parse);
+		Text.Add("After half an hour of wandering along the winding and uneven forest trails, you’re about to throw in the towel and take a break when the trail abruptly opens up into a clearing dominated by a small woodland stream at its far end. What’s more important, though, are the numerous dirt and moss-covered rocky outcroppings that dot the area - some of them of considerable height - and perched halfway along one of them is… could it be? Is it? Yes, it <i>is</i> a specimen of nightshade!", parse);
 		Text.NL();
 		Text.Add("Now, to get it down…", parse);
 		
