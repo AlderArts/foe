@@ -24,7 +24,7 @@ Scenes.Asche.Tasks.Default = function() {
 Scenes.Asche.Tasks.Ginseng = {};
 
 Scenes.Asche.Tasks.Ginseng.IsEligable = function() {
-	return asche.flags["Tasks"] == 0 &&
+	return asche.flags["Tasks"] < Asche.Tasks.Ginseng_Started &&
 	       rigard.MagicShop.totalBought >= 500 &&
 	       player.level >= 5;
 }
@@ -614,6 +614,7 @@ Scenes.Asche.Tasks.Nightshade = {};
 
 Scenes.Asche.Tasks.Nightshade.IsEligable = function() {
 	return asche.flags["Tasks"] >= Asche.Tasks.Ginseng_Finished &&
+	       asche.flags["Tasks"] < Asche.Tasks.Nightshade_Started &&
 	       rigard.MagicShop.totalBought >= 1000 &&
 	       player.level >= 8;
 }
@@ -622,7 +623,7 @@ Scenes.Asche.Tasks.Nightshade.IsOn = function() {
 	       asche.flags["Tasks"] < Asche.Tasks.Nightshade_Finished;
 }
 Scenes.Asche.Tasks.Nightshade.IsSuccess = function() {
-	return asche.flags["Tasks"] & Asche.Tasks.Nightshade_Succeeed;
+	return asche.flags["Tasks"] & Asche.Tasks.Nightshade_Succeeded;
 }
 Scenes.Asche.Tasks.Nightshade.HasHelpFromAquilius = function() {
 	return asche.flags["Tasks"] & Asche.Tasks.Nightshade_Aquilius;
@@ -768,14 +769,14 @@ Scenes.Asche.Tasks.Nightshade.HerbComplications = function() {
 		feet : player.FeetDesc()
 	};
 	
+	asche.flags["Tasks"] |= Asche.Tasks.Nightshade_Succeeded;
+	
 	Text.NL();
 	if(player.HasWings()) {
 		Text.Add("And better it is. Sustained flight may be out of your reach, but you’re able to use your wings to fly up in short hops to the lowest-growing plant on one of the tall, thin stone outcroppings. Once there, you easily uproot the plant from the shallow dirt it’s growing in, being careful not to get any of its sap on yourself in the process, and carefully wrap it before putting it away safely.", parse);
 		Text.NL();
 		Text.Add("All right, now to return to Asche and see what she has to say.", parse);
 		Text.Flush();
-		
-		asche.flags["Tasks"] |= Asche.Tasks.Nightshade_Succeeed;
 		
 		party.Inv().AddItem(Items.Quest.Nightshade);
 		
@@ -817,8 +818,6 @@ Scenes.Asche.Tasks.Nightshade.HerbComplications = function() {
 		}
 		
 		Text.Flush();
-		
-		asche.flags["Tasks"] |= Asche.Tasks.Nightshade_Succeeed;
 		
 		party.Inv().AddItem(Items.Quest.Nightshade);
 		
@@ -887,27 +886,6 @@ Scenes.Asche.Tasks.Nightshade.Complete = function() {
 	
 	//[Money][Lesson]
 	var options = new Array();
-	options.push({ nameStr : "Money",
-		tooltip : "The money will be just fine.",
-		func : function() {
-			Text.Clear();
-			Text.Add("Asche looks a little disappointed when you tell her you’ll just have the money, but the jackaless’ usual easygoing demeanor returns in a matter of moments. <i>“Well, Asche is being respecting [handsomepretty] customer’s choice - coin is [hisher] desire, and coin [heshe] will have.”</i>", parse);
-			Text.NL();
-			Text.Add("With that, Asche pulls out a small purse from under the counter. <i>“Was thinking that you would be saying this, so Asche prepared money ahead of time. Please to be taking both it and candle as wages for hard work, and thus settling debt that Asche is owing to you.”</i>", parse);
-			Text.NL();
-			Text.Add("You nod, taking your candle and the purse. Counting the contents, you decide it’s not too bad of a sum for the work you’ve put in.", parse);
-			
-			var coin = 500;
-			
-			party.coin += coin;
-			Text.Add("You recieved [coin] coins.", {coin: Text.NumToText(coin)}, 'bold');
-			
-			//TODO #gain green scented candle.
-			Text.Flush();
-			
-			Gui.NextPrompt();
-		}, enabled : true
-	});
 	options.push({ nameStr : "Lesson",
 		tooltip : "Well, you aren’t the kind to pass up a very educational experience…",
 		func : function() {
@@ -967,6 +945,27 @@ Scenes.Asche.Tasks.Nightshade.Complete = function() {
 			Text.Flush();
 			
 			Scenes.Asche.Sex.Prompt();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Money",
+		tooltip : "The money will be just fine.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Asche looks a little disappointed when you tell her you’ll just have the money, but the jackaless’ usual easygoing demeanor returns in a matter of moments. <i>“Well, Asche is being respecting [handsomepretty] customer’s choice - coin is [hisher] desire, and coin [heshe] will have.”</i>", parse);
+			Text.NL();
+			Text.Add("With that, Asche pulls out a small purse from under the counter. <i>“Was thinking that you would be saying this, so Asche prepared money ahead of time. Please to be taking both it and candle as wages for hard work, and thus settling debt that Asche is owing to you.”</i>", parse);
+			Text.NL();
+			Text.Add("You nod, taking your candle and the purse. Counting the contents, you decide it’s not too bad of a sum for the work you’ve put in.", parse);
+			
+			var coin = 500;
+			
+			party.coin += coin;
+			Text.Add("You recieved [coin] coins.", {coin: Text.NumToText(coin)}, 'bold');
+			
+			//TODO #gain green scented candle.
+			Text.Flush();
+			
+			Gui.NextPrompt();
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);

@@ -55,7 +55,7 @@ Asche.Tasks = {
 	Ginseng_Finished : 8,
 	Nightshade_Started  : 16,
 	Nightshade_Aquilius : 32,
-	Nightshade_Succeeed : 64,
+	Nightshade_Succeeded : 64,
 	Nightshade_Finished : 128
 };
 
