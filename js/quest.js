@@ -728,6 +728,107 @@ Quests.quests.push(new Quest({
 	]
 }));
 
+
+Quests.quests.push(new Quest({
+	name: function() {
+		return "Fresh Ginseng";
+	},
+	desc: function() {
+		return "Help Asche find some fresh Ginseng.";
+	},
+	active: function() {
+		var status = Quests.Type.NotStarted;
+		if(Scenes.Asche.Tasks.Ginseng.IsCompleted()) {
+			if(Scenes.Asche.Tasks.Ginseng.IsSuccess())
+				status |= Quests.Type.Completed;
+			else if(Scenes.Asche.Tasks.Ginseng.IsFail())
+				status |= Quests.Type.Failed;
+		}
+		else if(Scenes.Asche.Tasks.Ginseng.IsOn())
+			status |= Quests.Type.Visible;
+		return status;
+	},
+	list: [
+		new QuestItem({
+			desc: function() {
+				return "Go to the Highlands on the other side of the plains and search for fresh Ginseng.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(Scenes.Asche.Tasks.Ginseng.IsSuccess())
+					status |= Quests.Type.Completed;
+				else if(Scenes.Asche.Tasks.Ginseng.IsFail())
+					status |= Quests.Type.Failed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Return the Ginseng to Asche in her shop in Rigard.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				return status;
+			}
+		})
+	]
+}));
+
+
+Quests.quests.push(new Quest({
+	name: function() {
+		return "Nightshade";
+	},
+	desc: function() {
+		return "Help Asche find some nightshade.";
+	},
+	active: function() {
+		var status = Quests.Type.NotStarted;
+		if(Scenes.Asche.Tasks.Nightshade.IsCompleted())
+			status |= Quests.Type.Completed;
+		else if(Scenes.Asche.Tasks.Nightshade.IsOn())
+			status |= Quests.Type.Visible;
+		return status;
+	},
+	list: [
+		new QuestItem({
+			desc: function() {
+				return "Maybe find someone knowledgable of forest herbs and ask them where one could find nightshade?";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(Scenes.Asche.Tasks.Nightshade.HasHelpFromAquilius())
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Go to the Forest and find some nightshade.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(Scenes.Asche.Tasks.Nightshade.IsSuccess())
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Return the nightshade to Asche in her shop in Rigard.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				return status;
+			}
+		})
+	]
+}));
 //TODO Krawitz(?), Burrows, Gwendy
 
 /*
