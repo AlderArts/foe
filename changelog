@@ -5,6 +5,14 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.4e
+------------
+* Added Asche's first two tasks, plus reward sex. They have a relatively low level requirement and a "need to buy" limit of 500/1000 coins from Asche before they activate. Written by The Observer.
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.4d2
 -------------
 * Fixed several issues connected to the new item system:
@@ -12,11 +20,6 @@ Version 0.4d2
  - Fixed Maria and Terry AI so they call the correct functions when they use items. This fixes the skipped turn bugs their fights had
 * Fixed some typos and bugs related to Bastet (Cat Dynasty)
 * Fixed a bugged flag that'd cause the game to not recognize you beating Orchid
-* Added Asche's first two tasks, plus reward sex. They have a relatively low level requirement and a "need to buy" limit of 500/1000 coins from Asche before they activate.
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.4d
 ------------
