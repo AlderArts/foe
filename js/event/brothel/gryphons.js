@@ -266,20 +266,20 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 					if(!c.Knot()) {
 						cscenes.AddEnc(function() {
 							c.knot = 1;
-							return Text.Add("A faint throbbing at the base of[oneof] your cock[s] has you grasping at it in surprise. You’ve grown a thick knot at the base of your [cock]!", parse2);
+							return Text.Parse("A faint throbbing at the base of[oneof] your cock[s] has you grasping at it in surprise. You’ve grown a thick knot at the base of your [cock]!", parse2);
 						}, 1.0, function() { return true; });
 					}
 					if(!c.Sheath()) {
 						cscenes.AddEnc(function() {
 							c.sheath = 1;
-							return Text.Add("A faint sucking sound at your groin heralds the development of a sheath in which to hide your [cock]. Rubbing it brings out your man-meat well enough, so there’s no real concern for worry, but it still feels… different.", parse2);
+							return Text.Parse("A faint sucking sound at your groin heralds the development of a sheath in which to hide your [cock]. Rubbing it brings out your man-meat well enough, so there’s no real concern for worry, but it still feels… different.", parse2);
 						}, 1.0, function() { return true; });
 					}
 					if(!c.race.isRace(Race.Gryphon)) {
 						cscenes.AddEnc(function() {
 							c.race = Race.Gryphon;
 							c.color = Color.black;
-							return Text.Add("With a shudder that runs through your groin and up your spine, you notice a dark patch spreading out from the base of[oneof] your cock[s]. Within moments, your [cock] resembles the one you had in the illusion... ", parse2);
+							return Text.Parse("With a shudder that runs through your groin and up your spine, you notice a dark patch spreading out from the base of[oneof] your cock[s]. Within moments, your [cock] resembles the one you had in the illusion...", parse2);
 						}, 1.0, function() { return true; });
 					}
 				});
