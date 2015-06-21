@@ -21,6 +21,7 @@ CreditsScreen = function() {
 	Text.Add("Dreams & ravens: About half of them, Del<br/>");
 	Text.Add("Estevan gay sex: Ben<br/>");
 	Text.Add("Gol: Me and Fenoxo<br/>");
+	Text.Add("Gryphon theme room: The Observer<br/>");
 	Text.Add("Gwendy's farm, sex: Kiro<br/>");
 	Text.Add("Gwendy's farm, market: QB, LD and Alder<br/>");
 	Text.Add("Horse encounter (loss): gber1<br/>");
