@@ -795,7 +795,7 @@ Quests.quests.push(new Quest({
 	list: [
 		new QuestItem({
 			desc: function() {
-				return "Maybe find someone knowledgable of forest herbs and ask them where one could find nightshade?";
+				return "Maybe find someone knowledgeable of forest herbs and ask them where one could find nightshade?";
 			},
 			active: function() {
 				var status = Quests.Type.NotStarted;

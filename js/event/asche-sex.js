@@ -232,7 +232,7 @@ Scenes.Asche.Sex.GetOral = function() {
 		Text.Add("With a blur of motion and clink of jewelry, she’s on you. The jackaless’ smooth, golden fur slides against your [skin] as she settles into place, her maw opening wide to take your shaft. If you weren’t hard before, you are now; there’s something about her touch that you hadn’t noticed before, an unbelievably sensual quality to her that has your cock[s] at attention[v] as muzzle meets man-meat.", parse);
 		if(volume > 750) {
 			parse["b"] = player.NumCocks() > 1 ? " the biggest and thickest of" : "";
-			Text.Add("Further and further she impales herself onto[b] your shaft[s], your entire length slipping into her mouth and down her throat without so much as a hitch. It should be impossible. It’s got to be impossible; she couldn’t have swallowed you down to the hilt - and yet the jackaless has. Spirits above, you can <i>feel</i> her marvelously warm and wet insides milking away at your [cock].", parse);
+			Text.Add(" Further and further she impales herself onto[b] your shaft[s], your entire length slipping into her mouth and down her throat without so much as a hitch. It should be impossible. It’s got to be impossible; she couldn’t have swallowed you down to the hilt - and yet the jackaless has. Spirits above, you can <i>feel</i> her marvelously warm and wet insides milking away at your [cock].", parse);
 		}
 		Text.NL();
 		

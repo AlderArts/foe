@@ -840,7 +840,7 @@ Scenes.Asche.Tasks.Nightshade.Complete = function() {
 	
 	party.Inv().RemoveItem(Items.Quest.Nightshade);
 	
-	Text.Add("<i>“Asche knew customer would come through! And at just right time, too - Asche has just returned from bone yard and ground dragon bones into meal.”</i> There’s a soft click of gold on gold as the jackaless reaches into a nearby shelf and draws out a small bag of fine white powder. <i>“Asche was thinking to herself, ‘Would it not be good thing if [handsomepretty] customer were coming back with nightshade right about now?’ and here you are! Is almost like magic!”</i>", parse);
+	Text.Add("<i>“Asche knew customer would come through! And at just right time, too - Asche has just returned from edge of Boneyard and ground dragon bones into meal.”</i> There’s a soft click of gold on gold as the jackaless reaches into a nearby shelf and draws out a small bag of fine white powder. <i>“Asche was thinking to herself, ‘Would it not be good thing if [handsomepretty] customer were coming back with nightshade right about now?’ and here you are! Is almost like magic!”</i>", parse);
 	Text.NL();
 	Text.Add("Maybe it <i>is</i> magic, you reply with a grin as you set out the plants on the counter. Asche pulls out a pair of thick cloth gloves from under the counter, slips them on, and begins to examine the specimens you brought back.", parse);
 	Text.NL();
