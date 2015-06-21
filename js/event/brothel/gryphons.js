@@ -169,6 +169,30 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 	
 	var scenes = new EncounterTable();
 	
+	var incompleteGryphonFaceTF = function() {
+		if(!player.Ears().race.isRace(Race.Gryphon)) return true;
+		if(!player.Eyes().race.isRace(Race.Gryphon)) return true;
+		if(player.HasAntenna()) return true;
+		if(player.HasHorns()) return true;
+		if(!player.Face().race.isRace(Race.Gryphon)) return true;
+		return false;
+	};
+	
+	var incompleteGryphonTF = function() {
+		var wings = player.HasWings();
+		var tail = player.HasTail();
+		if(!wings || (wings && !wings.race.isRace(Race.Gryphon))) return true;
+		if(tail && !tail.race.isRace(Race.Gryphon)) return true;
+		if(!player.Race().isRace(Race.Gryphon)) return true;
+		if(!player.Arms().race.isRace(Race.Gryphon)) return true;
+		if(!player.Legs().race.isRace(Race.Gryphon)) return true;
+		/* TODO
+		if(player.FirstCock() && !player.BiggestCock().race.isRace(Race.Gryphon)) return true;
+		*/
+		if(incompleteGryphonFaceTF()) return true;
+		return false;
+	};
+	
 	var func = function(obj) {
 		scenes.AddEnc(function() {
 			TFapplied = true;
@@ -177,19 +201,85 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 	};
 	
 	
-	//TODO TFS, use gender == Gender.male/female
-	/*
-	 * 
 	func({
 		tf: function() {
-			var breasts = player.AllBreastRows();
-			for(var i = 0; i < breasts.length; i++) {
-				breasts[i].size.IncreaseStat(40, 2);
+			var wings = player.HasWings();
+			var tail = player.HasTail();
+			if(!wings || (wings && !wings.race.isRace(Race.Gryphon))) {
+				var t = "You feel a strange new weight on your back, a sensation of heaviness and resistance, and to your surprise, you find you’ve grown a pair of wide, powerful wings tipped with white feathers.";
+				if(wings) {
+					t = Text.Parse("A strange sensation between your shoulders has you turning your head. It looks like your wings have changed while you were out in the fantasy - becoming broad, powerful and vaguely scythe-shaped, made for soaring.", parse);
+					wings.race = Race.Gryphon;
+					wings.color = Color.gold;
+				}
+				else {
+					TF.SetAppendage(player.Back(), AppendageType.wing, Race.Gryphon, Color.gold);
+				}
+				player.Ears().race = Race.Feline;
+				return t;
 			}
-			return "Your [breasts] feel a bit heavier. It seems like your [breasts] have increased in size.";
+			else if(tail && !tail.race.isRace(Race.Gryphon)) {
+				var t = "A new weight at your tailbone has you turning around to investigate. Seems like you’ve managed to acquire a tail, long and leonine with a furry tuft on the end. It’s slightly prehensile, but not enough to be useful.";
+				if(tail) {
+					t = Text.Parse("Your tail feels different. A cursory glance behind you reveals that it’s turned long and slender, capped by a furry tuft - just like the gryphon in the fantasy.", parse);
+					tail.race = Race.Gryphon;
+					tail.color = Color.gold;
+				}
+				else {
+					TF.SetAppendage(player.Back(), AppendageType.tail, Race.Gryphon, Color.gold);
+				}
+				return t;
+			}
+			else if(!player.Race().isRace(Race.Gryphon)) {
+				player.body.torso.race = Race.Gryphon;
+				return "Your skin feels different. Warmer… heavier… oh. You’ve grown a coat of tawny golden fur <i>and</i> dark brown feathers - the former covers your body from the chest down, while the latter coats your chest, shoulders, and arms. ";
+			}
+			else if(!player.Arms().race.isRace(Race.Gryphon)) {
+				var t = Text.Parse("Your [hand]s and arms have changed - while still human-like, your fingers are now tipped with a small set of claws. They’re not sharp enough to be useful as a weapon, but nevertheless are still a curiosity.", {hand: player.HandDesc()});
+				player.Arms().race = Race.Gryphon;
+				return t;
+			}
+			else if(!player.Legs().race.isRace(Race.Gryphon)) {
+				var t = Text.Parse("You look down and find that your lower body has changed completely - you now sport a pair of leonine and digitigrade legs and feet, capped with hooked talons. Rippling with muscle, they’re suited for both slow stalking and quick pouncing.", parse);
+				if(player.HasLegs())
+					t = Text.Parse("Your stance seems to be carrying your weight a little differently, and when you look down you realize that your legs and feet have changed. They’re now leonine, digitigrade and capped with talons, rippling with muscle and suited for both slow stalking and quick movement.", parse);
+				player.Legs().race = Race.Gryphon;
+				player.Legs().count = 2;
+				return t;
+			}
+			/* TODO
+			else if(player.FirstCock() && !player.BiggestCock().race.isRace(Race.Gryphon)) {
+				var t = Text.Parse("", parse);
+				player.BiggestCock().race = Race.Gryphon;
+				return t;
+			}
+			else if(!player.Ears().race.isRace(Race.Gryphon)) {
+				var t = Text.Parse("", parse);
+				player.Ears().race = Race.Gryphon;
+				return t;
+			}
+			*/
+			else if(incompleteGryphonFaceTF()) {
+				player.Face().race = Race.Gryphon;
+				player.Eyes().race = Race.Gryphon;
+				player.Ears().race = Race.Gryphon;
+				TF.ItemEffects.RemAntenna(player, {count: 2});
+				TF.ItemEffects.RemHorn(player, {count: 2});
+				return "To top it off, staring back at you in the mirror is a gryphon’s face, eyes, beak and all.";
+			}
 		},
-		odds: 2,
-		cond: function() { return player.SmallestBreasts().Size() < 40; }
+		odds: 3,
+		cond: function() { return incompleteGryphonTF(); }
+	});
+	
+	//TODO TFS, use gender == Gender.male/female
+	/*
+	func({
+		tf: function() {
+			return "";
+		},
+		odds: 1,
+		cond: function() { return true; }
 	});
 	 */
 	

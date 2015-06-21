@@ -80,6 +80,8 @@ RaceDesc.prototype.aqShort = function(gender) {
 	return desc ? (desc.a + " " + desc.noun) : ("ERROR in " + this.name + ".aqShort()");
 }
 
+//TODO Current max 40
+
 //{a:"", noun:""}
 Race.Human = new RaceDesc("human", 0, {
 	desc: [{a:"a", noun:"human"}],
@@ -171,6 +173,9 @@ Race.Dragon = new RaceDesc("dragon", 8, {
 Race.Avian = new RaceDesc("avian", 16, {
 	desc: [{a:"an", noun:"avian"}, {a:"a", noun:"bird"}],
 	quantify: [{a:"an", noun:"avian"}]
+});
+Race.Gryphon = new RaceDesc("gryphon", 40, {
+	desc: [{a:"a", noun:"gryphon"}]
 });
 Race.Insect = new RaceDesc("insect", 23, {
 	desc: [{a:"an", noun:"insect"}],
