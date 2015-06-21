@@ -593,6 +593,7 @@ Body.prototype.FeetDesc = function() {
 	}
 	
 	if(legs.race.isRace(Race.Cow, Race.Goat, Race.Sheep, Race.Dryad, Race.Horse)) return "hoofs";
+	if(legs.race.isRace(Race.Gryphon)) return "taloned feet";
 	if(legs.race.isRace(Race.Avian, Race.Reptile, Race.Demon)) return "clawed feet";
 	if(legs.race.isRace(Race.Musteline, Race.Rabbit, Race.Canine, Race.Feline)) return "paws";
 	
