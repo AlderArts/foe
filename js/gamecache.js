@@ -72,6 +72,7 @@ InitCache = function() {
 	
 	lucille     = new Lucille(gameCache.lucille);
 	bastet      = new Bastet(gameCache.bastet);
+	gryphons    = new Gryphons(gameCache.gryphons);
 	
 	// Don't load for now
 	aria        = new Aria();
@@ -134,8 +135,11 @@ InitCache = function() {
 	world.EntityStorage.push(aria);
 	world.EntityStorage.push(uru);
 	world.EntityStorage.push(sylistraxia);
+	
 	world.EntityStorage.push(ches);
 	world.EntityStorage.push(lucille);
+	world.EntityStorage.push(bastet);
+	world.EntityStorage.push(gryphons);
 	
 	// PARTY
 	party = new Party();
@@ -414,37 +418,38 @@ GameToCache = function() {
 	gameCache.cveta    = cveta.ToStorage();
 	
 	// Other NPCs
-	gameCache.chief   = chief.ToStorage();
-	gameCache.rosalin = rosalin.ToStorage();
-	gameCache.wolfie  = cale.ToStorage();
-	gameCache.estevan = estevan.ToStorage();
-	gameCache.magnus  = magnus.ToStorage();
-	gameCache.patches = patchwork.ToStorage();
+	gameCache.chief    = chief.ToStorage();
+	gameCache.rosalin  = rosalin.ToStorage();
+	gameCache.wolfie   = cale.ToStorage();
+	gameCache.estevan  = estevan.ToStorage();
+	gameCache.magnus   = magnus.ToStorage();
+	gameCache.patches  = patchwork.ToStorage();
 	
-	gameCache.lagon   = lagon.ToStorage();
-	gameCache.ophelia = ophelia.ToStorage();
-	gameCache.vena    = vena.ToStorage();
-	gameCache.roa     = roa.ToStorage();
+	gameCache.lagon    = lagon.ToStorage();
+	gameCache.ophelia  = ophelia.ToStorage();
+	gameCache.vena     = vena.ToStorage();
+	gameCache.roa      = roa.ToStorage();
 	
-	gameCache.gwendy  = gwendy.ToStorage();
-	gameCache.adrian  = adrian.ToStorage();
-	gameCache.danie   = danie.ToStorage();
-	gameCache.layla   = layla.ToStorage();
+	gameCache.gwendy   = gwendy.ToStorage();
+	gameCache.adrian   = adrian.ToStorage();
+	gameCache.danie    = danie.ToStorage();
+	gameCache.layla    = layla.ToStorage();
 	
-	gameCache.fera    = fera.ToStorage();
-	gameCache.asche   = asche.ToStorage();
-	gameCache.kyna    = kyna.ToStorage();
+	gameCache.fera     = fera.ToStorage();
+	gameCache.asche    = asche.ToStorage();
+	gameCache.kyna     = kyna.ToStorage();
 	
-	gameCache.jeanne  = jeanne.ToStorage();
-	gameCache.golem   = golem.ToStorage();
+	gameCache.jeanne   = jeanne.ToStorage();
+	gameCache.golem    = golem.ToStorage();
 	
-	gameCache.orchid  = orchid.ToStorage();
+	gameCache.orchid   = orchid.ToStorage();
 	
-	gameCache.raven   = ravenmother.ToStorage();
-	gameCache.uru     = uru.ToStorage();
+	gameCache.raven    = ravenmother.ToStorage();
+	gameCache.uru      = uru.ToStorage();
 	
-	gameCache.lucille = lucille.ToStorage();
-	gameCache.bastet  = bastet.ToStorage();
+	gameCache.lucille  = lucille.ToStorage();
+	gameCache.bastet   = bastet.ToStorage();
+	gameCache.gryphons = gryphons.ToStorage();
 	/*
 	gameCache.aria        = aria.ToStorage();
 	gameCache.sylistraxia = sylistraxia.ToStorage();
