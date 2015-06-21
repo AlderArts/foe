@@ -127,7 +127,8 @@ Race.Lynx = new RaceDesc("lynx", 29, {
 }, Race.Feline);
 Race.Lion = new RaceDesc("lion", 30, {
 	descMale: [{a:"a", noun:"lion"}],
-	descFemale: [{a:"a", noun:"lioness"}]
+	descFemale: [{a:"a", noun:"lioness"}],
+	quantify: [{a:"a", noun:"leonine"}]
 }, Race.Feline);
 Race.Canine = new RaceDesc("canine", 31, {
 	desc: [{a:"a", noun:"canine"}, {a:"a", noun:"canid"}],
@@ -176,7 +177,7 @@ Race.Avian = new RaceDesc("avian", 16, {
 });
 Race.Gryphon = new RaceDesc("gryphon", 40, {
 	desc: [{a:"a", noun:"gryphon"}]
-});
+}, Race.Avian);
 Race.Insect = new RaceDesc("insect", 23, {
 	desc: [{a:"an", noun:"insect"}],
 	quantify: [{a:"an", noun:"insectoid"}]

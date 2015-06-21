@@ -71,7 +71,7 @@ Vagina.Tightness = {
 }
 Vagina.prototype.HandleStretchOverTime = function(hours) {
 	//TODO rate
-	this.stretch.DecreaseStat(this.minStretch.Get(), hours * 0.05);
+	this.stretch.IdealStat(this.minStretch.Get(), hours * 0.05);
 }
 // Create a clitcock from a vagina
 // Returns the cock

@@ -194,7 +194,7 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 		var wings = player.HasWings();
 		var tail = player.HasTail();
 		if(!wings || (wings && !wings.race.isRace(Race.Gryphon))) return true;
-		if(tail && !tail.race.isRace(Race.Gryphon)) return true;
+		if(tail && !tail.race.isRace(Race.Lion)) return true;
 		if(!player.Race().isRace(Race.Gryphon)) return true;
 		if(!player.Arms().race.isRace(Race.Gryphon)) return true;
 		if(!player.Legs().race.isRace(Race.Gryphon)) return true;
@@ -227,11 +227,11 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 				player.Ears().race = Race.Feline;
 				return t;
 			}
-			else if(tail && !tail.race.isRace(Race.Gryphon)) {
+			else if(tail && !tail.race.isRace(Race.Lion)) {
 				var t = "A new weight at your tailbone has you turning around to investigate. Seems like you’ve managed to acquire a tail, long and leonine with a furry tuft on the end. It’s slightly prehensile, but not enough to be useful.";
 				if(tail) {
 					t = Text.Parse("Your tail feels different. A cursory glance behind you reveals that it’s turned long and slender, capped by a furry tuft - just like the gryphon in the fantasy.", parse);
-					tail.race = Race.Gryphon;
+					tail.race = Race.Lion;
 					tail.color = Color.gold;
 				}
 				else {
@@ -297,15 +297,167 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 		cond: function() { return incompleteGryphonTF(); }
 	});
 	
+	if(gender == Gender.male) {
+		var parse2 = {};
+		parse2 = Text.ParserPlural(parse2, player.NumCocks() > 1);
+		
+		var incompleteCockSizeOne = function(c) {
+			if(c.Len() < 28) return true;
+			if(c.Thickness() < 5) return true;
+			return false;
+		};
+		var incompleteCockSize = function() {
+			var changed = false;
+			_.each(player.AllCocks(), function(c) {
+				changed = incompleteCockSizeOne(c);
+				if(changed) return false; //break
+			});
+			return changed;
+		};
+	
+		func({
+			tf: function() {
+				var scenes = new EncounterTable();
+				_.each(players.AllCocks(), function(c) {
+					scenes.AddEnc(function() {
+						if(c.Len() < 28)
+							c.length.IncreaseStat(28, 4);
+						if(c.Thickness() < 5)
+							c.thickness.IncreaseStat(5, 1);
+						
+						return "Tingles of pleasure run up the length of[oneof] your shaft[s], and when you examine it, your [cock] has definitely grown a bit bigger.";
+					}, 1.0, incompleteCockSizeOne(c));
+				});
+				return scenes.Get();
+			},
+			odds: 1,
+			cond: function() { return incompleteCockSize(); }
+		});
+		func({
+			tf: function() {
+				player.Balls().size.IncreaseStat(7, 1);
+				return "Your scrotum feels heavier and a little tighter, and examination reveals that your balls have grown a little in size.";
+			},
+			odds: 1,
+			cond: function() { return player.HasBalls() && player.Balls().BallSize() < 7; }
+		});
+		func({
+			tf: function() {
+				player.Balls().count.base = 2;
+				player.Balls().size.IncreaseStat(5, 100);
+				return "There’s an extra, slightly dangly weight between your legs. Seems like you’ve grown a nice set of balls when you were out.";
+			},
+			odds: 1,
+			cond: function() { return !player.HasBalls(); }
+		});
+		func({
+			tf: function() {
+				player.Balls().cumCap.IncreaseStat(30, 2);
+				player.Balls().cumProduction.IncreaseStat(4, .75, true);
+				return "A gentle wave of pleasure runs through your balls and up into your groin. While it’s over just as quickly as it began, you can feel your balls churning with increased production.";
+			},
+			odds: 1,
+			cond: function() { return player.HasBalls() && player.Balls().cumProduction.Get() < 3 && player.Balls().cumCap.Get() < 30; }
+		});
+		func({
+			tf: function() {
+				player.Balls().fertility.IncreaseStat(.9, .2);
+				return "You feel a strange tingling in your balls. While they don’t look any different, somehow you know that your seed has grown more powerful, more apt at taking root.";
+			},
+			odds: 1,
+			cond: function() { return player.HasBalls() && player.Balls().fertility.Get() < .9; }
+		});
+	}
+	else { //female
+		var parse2 = {
+			breasts : player.FirstBreastRow().Short()
+		};
+		var incompleteVagSize = function() {
+			var changed = false;
+			_.each(player.AllVags(), function(v) {
+				if(v.capacity.Get() < 10) changed = true;
+				if(v.minStretch.Get() < Capacity.loose) changed = true;
+				if(changed) return false; //break
+			});
+			return changed;
+		};
+		var incompleteBreastSize = function() {
+			var changed = false;
+			_.each(player.AllBreastRows(), function(b) {
+				if(b.size.Get() < 10) changed = true;
+				if(changed) return false; //break
+			});
+			return changed;
+		};
+		var incompleteNipSize = function() {
+			var changed = false;
+			_.each(player.AllBreastRows(), function(b) {
+				if(b.nippleThickness.Get() < 2) changed = true;
+				if(b.nippleLength.Get() < 2) changed = true;
+				if(changed) return false; //break
+			});
+			return changed;
+		};
+		
+		func({
+			tf: function() {
+				_.each(player.AllVags(), function(v) {
+					v.capacity.IncreaseStat(10, 2);
+					v.minStretch.IncreaseStat(Capacity.loose, 1);
+				});
+				return "Feeling the last of the tingles fade in your groin, you examine yourself. While there is no outward change, a discreet check reveals that your snatch has deepened, becoming more elastic and better able to stretch.";
+			},
+			odds: 1,
+			cond: function() { return incompleteVagSize(); }
+		});
+		func({
+			tf: function() {
+				player.body.torso.hipSize.IncreaseStat(14, 3);
+				return "Your stance… it’s shifted. The change is slight but perceptible, changing your figure to be more motherly, giving you some much-needed room to fit things between your legs, regardless of whether they’re going in or coming out.";
+			},
+			odds: 1,
+			cond: function() { return player.body.torso.hipSize.Get() < 14; }
+		});
+		func({
+			tf: function() {
+				_.each(player.AllBreastRows(), function(b) {
+					if(b.Size() < 2) {
+						b.size.IncreaseStat(4, 100);
+						return "A new weight on your chest draws your attention, and you swallow hard. Two small mounds sit upon your chest, the beginning of full, grand breasts…";
+					}
+					else {
+						b.size.IncreaseStat(10, 2);
+						return Text.Parse("An increased weight on your chest prompts you to peer down at your [breasts]. They’ve gotten fuller, firmer, more shapely - just like you had in the fantasy…", parse2);
+					}
+				});
+			},
+			odds: 1,
+			cond: function() { return incompleteBreastSize(); }
+		});
+		func({
+			tf: function() {
+				_.each(player.AllBreastRows(), function(b) {
+					player.FirstBreastRow().nippleThickness.IncreaseStat(2, .5);
+					player.FirstBreastRow().nippleLength.IncreaseStat(2, .5);
+				});
+				return "Your nipples tingle, stiff and erect - no, they’re not stiff, but instead have gotten bigger and perkier. Not by much, perhaps, but still all the better for suckling, tweaking and teasing.";
+			},
+			odds: 1,
+			cond: function() { return incompleteNipSize(); }
+		});
+		
+		//preg
+		func({
+			tf: function() {
+				return "";
+			},
+			odds: preg,
+			cond: function() { return !incompleteGryphonTF(); }
+		});
+	}
+	
 	//TODO TFS, use gender == Gender.male/female
 	/*
-	func({
-		tf: function() {
-			return "";
-		},
-		odds: 1,
-		cond: function() { return true; }
-	});
 	 */
 	
 	var text = [];
