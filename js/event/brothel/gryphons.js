@@ -467,8 +467,10 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 	
 	if(TFapplied) {
 		_.each(text, function(t) {
-			Text.Add(t, parse);
-			Text.NL();
+			if(t) {
+				Text.Add(t, parse);
+				Text.NL();
+			}
 		});
 	}
 	else {

@@ -279,8 +279,10 @@ Scenes.Brothel.Bastet.TFBlock = function() {
 	if(TFapplied) {
 		Text.Add("As you check yourself out, you realise that your body has changed! It must be some sort of side effect from the magic used in the mirror...", parse);
 		_.each(text, function(t) {
-			Text.NL();
-			Text.Add(t, parse);
+			if(t) {
+				Text.NL();
+				Text.Add(t, parse);
+			}
 		});
 	}
 	else {
