@@ -299,7 +299,7 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 		cond: function() { return incompleteGryphonTF(); }
 	});
 	
-	if(gender == Gender.male) {
+	if(gender == Gender.male && player.FirstCock()) {
 		var parse2 = {};
 		parse2 = Text.ParserPlural(parse2, player.NumCocks() > 1);
 		
@@ -370,7 +370,7 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 			cond: function() { return player.HasBalls() && player.Balls().fertility.Get() < .9; }
 		});
 	}
-	else { //female
+	else if(gender == Gender.female && player.FirstVag()) { //female
 		var parse2 = {
 			breasts : player.FirstBreastRow().Short()
 		};
