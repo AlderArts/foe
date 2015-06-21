@@ -200,11 +200,11 @@ Scenes.Brothel.Bastet.TFBlock = function() {
 	});
 	func({
 		tf: function() {
-			player.FirstVag().stretch.IncreaseStat(2, 0.25);
+			player.FirstVag().minStretch.IncreaseStat(Capacity.loose, 0.5);
 			return "Your [vag] tingles for some reason. Spreading your nethers to examine yourself, you note that you feel much more stretchy than before. This should let you take bigger cocks than you could before.";
 		},
 		odds: 1,
-		cond: function() { return player.FirstVag() && player.FirstVag().Tightness() < 2; }
+		cond: function() { return player.FirstVag() && player.FirstVag().Tightness() < Capacity.loose; }
 	});
 	func({
 		tf: function() {

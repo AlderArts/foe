@@ -318,7 +318,7 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 		func({
 			tf: function() {
 				var scenes = new EncounterTable();
-				_.each(players.AllCocks(), function(c) {
+				_.each(player.AllCocks(), function(c) {
 					scenes.AddEnc(function() {
 						if(c.Len() < 28)
 							c.length.IncreaseStat(28, 4);
@@ -445,8 +445,34 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 			odds: 1,
 			cond: function() { return incompleteNipSize(); }
 		});
+		func({
+			tf: function() {
+				var ret = player.Lactation();
+				player.lactHandler.lactating = true;
+				player.lactHandler.FillMilk(1);
+				player.lactHandler.milkProduction.IncreaseStat(5, 1);
+				player.lactHandler.lactationRate.IncreaseStat(10, 1);
+				
+				if(ret) {
+					return Text.Parse("Your milky [breasts] feel fuller and heavier than before, more tender to the touch as they increase in both production and capacity.", parse2);
+				}
+				else {
+					return Text.Parse("Your [breasts] tingle, a delicate sensation that starts from just behind your nipples. Prodding gently as you examine them, you blink in surprise as a bead of milk wells up on one nipple. Seems like you’ve started lactating.", parse2);
+				}
+			},
+			odds: 1,
+			cond: function() { return true; }
+		});
+		func({
+			tf: function() {
+				player.pregHandler.fertility.IncreaseStat(.9, .2, true);
+				return "You squirm, trying to hold back the sudden desire for cum that flares up inside you. More receptive to seed than before, your womb makes it known that it wants to be nice and full with a growing child to occupy it.";
+			},
+			odds: 1,
+			cond: function() { return true; }
+		});
 		
-		//preg
+		//TODO preg
 		func({
 			tf: function() {
 				return "";
