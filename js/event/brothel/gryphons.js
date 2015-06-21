@@ -169,6 +169,18 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 	
 	var scenes = new EncounterTable();
 	
+	var incompleteGryphonCockTF = function() {
+		if(!player.FirstCock()) return false;
+		var change = false;
+		_.each(player.AllCocks(), function(c) {
+			if(!c.Knot()) change = true;
+			if(!c.Sheath()) change = true;
+			if(!c.race.isRace(Race.Gryphon)) change = true;
+			if(change) return false; //break
+		});
+		return change;
+	}
+	
 	var incompleteGryphonFaceTF = function() {
 		if(!player.Ears().race.isRace(Race.Gryphon)) return true;
 		if(!player.Eyes().race.isRace(Race.Gryphon)) return true;
@@ -186,9 +198,7 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 		if(!player.Race().isRace(Race.Gryphon)) return true;
 		if(!player.Arms().race.isRace(Race.Gryphon)) return true;
 		if(!player.Legs().race.isRace(Race.Gryphon)) return true;
-		/* TODO
-		if(player.FirstCock() && !player.BiggestCock().race.isRace(Race.Gryphon)) return true;
-		*/
+		if(incompleteGryphonCockTF()) return true;
 		if(incompleteGryphonFaceTF()) return true;
 		return false;
 	};
@@ -199,7 +209,6 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 			return _.isFunction(obj.tf) ? obj.tf() : "";
 		}, obj.odds || 1, obj.cond);
 	};
-	
 	
 	func({
 		tf: function() {
@@ -247,18 +256,34 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 				player.Legs().count = 2;
 				return t;
 			}
-			/* TODO
-			else if(player.FirstCock() && !player.BiggestCock().race.isRace(Race.Gryphon)) {
-				var t = Text.Parse("", parse);
-				player.BiggestCock().race = Race.Gryphon;
-				return t;
+			else if(incompleteGryphonCockTF()) {
+				var parse2 = {};
+				parse2 = Text.ParserPlural(parse2, player.NumCocks() > 1);
+				var cscenes = new EncounterTable();
+				_.each(player.AllCocks(), function(c) {
+					parse2["cock"] = c.Short();
+					
+					if(!c.Knot()) {
+						cscenes.AddEnc(function() {
+							return Text.Add("A faint throbbing at the base of[oneof] your cock[s] has you grasping at it in surprise. You’ve grown a thick knot at the base of your [cock]!", parse2);
+						}, 1.0, function() { return true; });
+					}
+					if(!c.Sheath()) {
+						cscenes.AddEnc(function() {
+							return Text.Add("A faint sucking sound at your groin heralds the development of a sheath in which to hide your [cock]. Rubbing it brings out your man-meat well enough, so there’s no real concern for worry, but it still feels… different.", parse2);
+						}, 1.0, function() { return true; });
+					}
+					if(!c.race.isRace(Race.Gryphon)) {
+						cscenes.AddEnc(function() {
+							c.race = Race.Gryphon;
+							c.color = Color.black;
+							return Text.Add("With a shudder that runs through your groin and up your spine, you notice a dark patch spreading out from the base of[oneof] your cock[s]. Within moments, your [cock] resembles the one you had in the illusion... ", parse2);
+						}, 1.0, function() { return true; });
+					}
+				});
+				
+				return cscenes.Get();
 			}
-			else if(!player.Ears().race.isRace(Race.Gryphon)) {
-				var t = Text.Parse("", parse);
-				player.Ears().race = Race.Gryphon;
-				return t;
-			}
-			*/
 			else if(incompleteGryphonFaceTF()) {
 				player.Face().race = Race.Gryphon;
 				player.Eyes().race = Race.Gryphon;
@@ -284,7 +309,7 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 	 */
 	
 	var text = [];
-	_.times(_.random(0, 3), function() {
+	_.times(_.random(1, 4), function() {
 		text.push(scenes.Get());
 	});
 	
