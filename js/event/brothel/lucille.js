@@ -30,7 +30,8 @@ Lucille.Buy = {
 
 //TODO
 Lucille.Themeroom = {
-	CatDynasty : 1
+	CatDynasty : 1,
+	Gryphons : 2
 };
 
 Lucille.prototype.ThemeroomOpen = function() {
@@ -100,6 +101,13 @@ Scenes.Lucille.Themerooms = function() {
 	Text.Add("<i><b>The Cat Dynasty:</b> Experience life through the eyes of a young feline chosen by the fates to saddle the mantle of godhood. As the goddess of love, Lady Bastet, how will your judgement change the lives of your adoring worshippers?</i>", parse);
 	Text.NL();
 	Text.Add("The poster shows a sultry, dark-skinned cat-morph reclining on a dias, fanned by her priestesses. Bastet seems to be a hermaphrodite with quite... impressive assets. The poster notes that each use is [coin] coins.", {coin: bastet.Cost()});
+	
+	Text.NL();
+	
+	Text.Add("<i><b>Birth of a Kingdom:</b> Travel back to the dawn of time, when the world and its people were wild and untamed. Witness the rise of a civilization as seen through the eyes of both its founders!</i>", parse);
+	Text.NL();
+	Text.Add("The poster depicts two gryphon-morphs: a muscle-bound, scarred male with a tribal, bestial air about him, and his very pregnant mate in his arms. Both are scantily clad, wearing little more than loincloths and leathers, and set against a backdrop of a lush, tropical valley. The poster notes that each use is [coin] coins.", {coin: gryphons.Cost()});
+	
 	/*
 	Text.NL();
 	Text.Add("", parse);
@@ -156,6 +164,12 @@ Scenes.Lucille.Themerooms = function() {
 		tooltip : "Choose the Cat Dynasty and enter the role of Bastet, the hermaphrodite feline goddess.",
 		func : function() {
 			selection(Scenes.Brothel.Bastet.IntroEntryPoint);
+		}, enabled : true
+	});
+	options.push({ nameStr : "Gryphons",
+		tooltip : "Choose Birth of a Kingdom and step back to the beginning of time, seeing history through the eyes of two gryphon-morphs.",
+		func : function() {
+			selection(Scenes.Brothel.Gryphons.IntroEntryPoint);
 		}, enabled : true
 	});
 	/* TODO */
