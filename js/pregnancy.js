@@ -9,6 +9,7 @@ PregType = {
 	Lagomorph : 3,
 	Lizard    : 4,
 	Naga      : 5,
+	Gryphon   : 6,
 	
 	Terry     : 100,
 	Roa       : 101,

@@ -256,6 +256,8 @@ Scenes.Brothel.Bastet.TFBlock = function() {
 				if(player.HasLegs())
 					t = Text.Parse("You shift your stance a little. Your [legs] feel different. Sitting on the stool, you take a closer look. Seems like your legs have changed into feline legs, capped with cat footpaws.", parse);
 				player.Legs().race = Race.Feline;
+				if(player.Legs().count < 2)
+					player.Legs().count = 2;
 				return t;
 			}
 			else if(!player.Race().isRace(Race.Feline)) {

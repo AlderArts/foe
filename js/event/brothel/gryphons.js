@@ -196,7 +196,7 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 		if(!wings || (wings && !wings.race.isRace(Race.Gryphon))) return true;
 		if(tail && !tail.race.isRace(Race.Lion)) return true;
 		if(!player.Race().isRace(Race.Gryphon)) return true;
-		if(!player.Arms().race.isRace(Race.Gryphon)) return true;
+		if(!player.Arms().race.isRace(Race.Lion)) return true;
 		if(!player.Legs().race.isRace(Race.Gryphon)) return true;
 		if(incompleteGryphonCockTF()) return true;
 		if(incompleteGryphonFaceTF()) return true;
@@ -243,9 +243,9 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 				player.body.torso.race = Race.Gryphon;
 				return "Your skin feels different. Warmer… heavier… oh. You’ve grown a coat of tawny golden fur <i>and</i> dark brown feathers - the former covers your body from the chest down, while the latter coats your chest, shoulders, and arms. ";
 			}
-			else if(!player.Arms().race.isRace(Race.Gryphon)) {
+			else if(!player.Arms().race.isRace(Race.Lion)) {
 				var t = Text.Parse("Your [hand]s and arms have changed - while still human-like, your fingers are now tipped with a small set of claws. They’re not sharp enough to be useful as a weapon, but nevertheless are still a curiosity.", {hand: player.HandDesc()});
-				player.Arms().race = Race.Gryphon;
+				player.Arms().race = Race.Lion;
 				return t;
 			}
 			else if(!player.Legs().race.isRace(Race.Gryphon)) {
@@ -265,11 +265,13 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 					
 					if(!c.Knot()) {
 						cscenes.AddEnc(function() {
+							c.knot = 1;
 							return Text.Add("A faint throbbing at the base of[oneof] your cock[s] has you grasping at it in surprise. You’ve grown a thick knot at the base of your [cock]!", parse2);
 						}, 1.0, function() { return true; });
 					}
 					if(!c.Sheath()) {
 						cscenes.AddEnc(function() {
+							c.sheath = 1;
 							return Text.Add("A faint sucking sound at your groin heralds the development of a sheath in which to hide your [cock]. Rubbing it brings out your man-meat well enough, so there’s no real concern for worry, but it still feels… different.", parse2);
 						}, 1.0, function() { return true; });
 					}
@@ -471,20 +473,29 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 			odds: 1,
 			cond: function() { return true; }
 		});
-		
-		//TODO preg
 		func({
 			tf: function() {
-				return "";
+				if(player.PregHandler().IsPregnant({slot: PregnancyHandler.Slot.Vag})) {
+					player.PregHandler().Womb({slot: PregnancyHandler.Slot.Vag}).litterSize++;
+					return "Your baby bump is considerably bigger than it was before, the extra weight in your womb noticeable. In fact, it looks like you could fit another child in there!";
+				}
+				else {
+					player.PregHandler().Impregnate({
+						slot: PregnancyHandler.Slot.Vag,
+						mother: player,
+						father: gryphons,
+						type: PregType.Gryphon,
+						num: 3,
+						time: 48, //TODO
+						force: true
+					});
+					return "As you examine your midriff, a palpable wave of warmth and contentment ripples through your lower belly, spreading out into the rest of your body. There’s no apparent change, but you have an uneasy feeling…";
+				}
 			},
-			odds: preg,
-			cond: function() { return !incompleteGryphonTF(); }
+			odds: preg*2,
+			cond: function() { return !incompleteGryphonTF() && preg > 0; }
 		});
 	}
-	
-	//TODO TFS, use gender == Gender.male/female
-	/*
-	 */
 	
 	var text = [];
 	_.times(_.random(1, 4), function() {
