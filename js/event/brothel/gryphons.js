@@ -222,7 +222,7 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 					wings.color = Color.gold;
 				}
 				else {
-					TF.SetAppendage(player.Back(), AppendageType.wing, Race.Gryphon, Color.gold);
+					TF.SetAppendage(player.Back(), AppendageType.wing, Race.Gryphon, Color.gold, 2);
 				}
 				player.Ears().race = Race.Feline;
 				return t;
