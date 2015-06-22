@@ -325,6 +325,7 @@ Scenes.Miranda.BarracksPrompt = function() {
 Scenes.Miranda.SparLoss = function() {
 	SetGameState(GameState.Event);
 	var enc = this;
+	enc.Cleanup();
 	
 	var parse = {
 		
@@ -345,6 +346,7 @@ Scenes.Miranda.SparLoss = function() {
 Scenes.Miranda.SparWin = function() {
 	SetGameState(GameState.Event);
 	var enc = this;
+	enc.Cleanup();
 	
 	var parse = {
 		
