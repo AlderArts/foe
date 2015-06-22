@@ -408,7 +408,7 @@ Scenes.Cale.FirstApproach = function() {
 			func : function() {
 				Text.Clear();
 				
-				parse["ears"] = player.HasFlexibleEars() ? " your [earDesc]s flattened against your skull," : "";
+				parse["ears"] = player.HasFlexibleEars() ? Text.Parse(" your [earDesc]s flattened against your skull,", parse) : "";
 				Text.Add("Eyes sinking half closed,[ears] you smile in pleasure and let out a soft coo of delight. You lean deliberately against his hand, stretching slightly to let him touch you however he wants.", parse);
 				Text.NL();
 				
