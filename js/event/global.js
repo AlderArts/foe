@@ -1,8 +1,8 @@
 
 Scenes.Global = {};
 
-Scenes.Global.VisitedRigard = function() {
-	return gameCache.flags["TalkedToTownGuard"] != 0;
+Scenes.Global.VisitedRigardGates = function() {
+	return miranda.Met();
 }
 
 Scenes.Global.PortalsOpen = function() {

@@ -154,10 +154,6 @@ InitCache = function() {
 	// Intro flags
 	gameCache.flags["IntroOutset"]             = gameCache.flags["IntroOutset"] || Intro.Outset.SaveWorld;
 
-	// Controls access to town
-	gameCache.flags["TalkedToTownGuard"]       = gameCache.flags["TalkedToTownGuard"] || 0;
-	
-	
 	gameCache.flags["NagaVenom"]      = gameCache.flags["NagaVenom"] || 0;
 	gameCache.flags["NagaMate"]       = gameCache.flags["NagaMate"] || 0;
 	
