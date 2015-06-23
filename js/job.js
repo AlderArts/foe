@@ -366,7 +366,7 @@ Jobs["Mage"].levels.push(new JobLevel(320,  [{ab: Abilities.Black.Freeze, set: "
 Jobs["Mage"].levels.push(new JobLevel(640,  null, {"int" : 0.1, "spi" : 0.2}));
 Jobs["Mage"].levels.push(new JobLevel(1280, [{ab: Abilities.Black.Bolt, set: "Spells"}, {ab: Abilities.Black.Eruption, set: "Spells"}], {"int" : 0.4, "spi" : 0.1, "sp" : 5}));
 Jobs["Mage"].Unlocked = function(entity) {
-	return gameCache.flags["LearnedMagic"] >= 1;
+	return Scenes.Global.MagicStage1();
 }
 
 Jobs["Mystic"] = new Job("Mystic");
@@ -388,7 +388,7 @@ Jobs["Mystic"].levels.push(new JobLevel(320,  [{ab: Abilities.Black.Spire, set: 
 Jobs["Mystic"].levels.push(new JobLevel(640,  [{ab: Abilities.Black.Gust, set: "Spells"}], {"int" : 0.1, "lib" : 0.2}));
 Jobs["Mystic"].levels.push(new JobLevel(1280, [{ab: Abilities.Black.Venom, set: "Spells"}, {ab: Abilities.Black.Stalagmite, set: "Spells"}], {"spi" : 0.4, "sta" : 0.1}));
 Jobs["Mystic"].Unlocked = function(entity) {
-	return gameCache.flags["LearnedMagic"] >= 1;
+	return Scenes.Global.MagicStage1();
 }
 
 Jobs["Healer"] = new Job("Healer");
@@ -409,7 +409,7 @@ Jobs["Healer"].levels.push(new JobLevel(320,  [{ab: Abilities.White.Warm, set: "
 Jobs["Healer"].levels.push(new JobLevel(640,  null, {"cha" : 0.2, "sta" : 0.1}));
 Jobs["Healer"].levels.push(new JobLevel(1280, [{ab: Abilities.White.Heal, set: "Support"}, {ab: Abilities.White.Recover, set: "Support"}], {"spi" : 0.4, "int" : 0.1, "sp" : 5}));
 Jobs["Healer"].Unlocked = function(entity) {
-	return gameCache.flags["LearnedMagic"] >= 1;
+	return Scenes.Global.MagicStage1();
 }
 
 Jobs["Singer"] = new Job("Singer");
@@ -454,7 +454,7 @@ Jobs["Elementalist"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
 Jobs["Elementalist"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
 Jobs["Elementalist"].levels.push(new JobLevel(2560, null, {"str" : 0.2}));
 Jobs["Elementalist"].Unlocked = function(entity) {
-	return gameCache.flags["LearnedMagic"] >= 3;
+	return Scenes.Global.MagicStage2();
 }
 
 Jobs["Warlock"] = new Job("Warlock");
@@ -475,7 +475,7 @@ Jobs["Warlock"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
 Jobs["Warlock"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
 Jobs["Warlock"].levels.push(new JobLevel(2560, null, {"str" : 0.2}));
 Jobs["Warlock"].Unlocked = function(entity) {
-	return gameCache.flags["LearnedMagic"] >= 3;
+	return Scenes.Global.MagicStage2();
 }
 
 
@@ -498,7 +498,7 @@ Jobs["Hypnotist"].levels.push(new JobLevel(640,  [{ab: Abilities.Seduction.SIllu
 Jobs["Hypnotist"].levels.push(new JobLevel(1280, null, {"int" : 0.1, "cha" : 0.3}));
 Jobs["Hypnotist"].levels.push(new JobLevel(2560, [{ab: Abilities.Seduction.Confuse, set: "Support"}, {ab: Abilities.Seduction.Allure, set: "Support"}], {"cha" : 0.3, "lib" : 0.3, "int" : 0.2, "lp" : 5}));
 Jobs["Hypnotist"].Unlocked = function(entity) {
-	return gameCache.flags["LearnedMagic"] >= 3;
+	return Scenes.Global.MagicStage2();
 }
 
 Jobs["Eromancer"] = new Job("Eromancer");
@@ -520,7 +520,7 @@ Jobs["Eromancer"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
 Jobs["Eromancer"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
 Jobs["Eromancer"].levels.push(new JobLevel(2560, null, {"str" : 0.2}));
 Jobs["Eromancer"].Unlocked = function(entity) {
-	return gameCache.flags["LearnedMagic"] >= 3;
+	return Scenes.Global.MagicStage2();
 }
 
 Jobs["RunicKnight"] = new Job("Runic Knight");
@@ -542,7 +542,7 @@ Jobs["RunicKnight"].levels.push(new JobLevel(640,  null, {"str" : 0.2}));
 Jobs["RunicKnight"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
 Jobs["RunicKnight"].levels.push(new JobLevel(2560, null, {"str" : 0.2}));
 Jobs["RunicKnight"].Unlocked = function(entity) {
-	return gameCache.flags["LearnedMagic"] >= 3;
+	return Scenes.Global.MagicStage2();
 }
 
 Jobs["Bard"] = new Job("Bard");
@@ -565,7 +565,7 @@ Jobs["Bard"].levels.push(new JobLevel(1280, null, {"str" : 0.2}));
 Jobs["Bard"].levels.push(new JobLevel(2560, null, {"str" : 0.2}));
 Jobs["Bard"].Unlocked = function(entity) {
 	if(entity == cveta) return true;
-	return gameCache.flags["LearnedMagic"] >= 3;
+	return Scenes.Global.MagicStage2();
 }
 ////////////
 // TIER 4 //

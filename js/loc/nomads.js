@@ -63,7 +63,7 @@ world.loc.Plains.Nomads.Fireplace.links.push(new Link(
 	}
 ));
 world.loc.Plains.Nomads.Fireplace.switchSpot = function() {
-	return gameCache.flags["Portals"] == 0;
+	return !Scenes.Global.PortalsOpen();
 }
 
 

@@ -13,7 +13,7 @@ world.loc.Plains = {
 	},
 	Crossroads     : new Event("Crossroads"),
 	Portals        : new Event(function() {
-		return gameCache.flags["Portals"] != 0 ? "Nexus" : "Mound";
+		return Scenes.Global.PortalsOpen() ? "Nexus" : "Mound";
 	}),
 	Gate           : new Event("Town gates"),
 	Burrows        :
@@ -40,7 +40,7 @@ world.loc.Plains.Crossroads.description = function() {
 	Text.Add("Crossing this path is a smaller, less travelled one, leading from the deep forest into a dry wasteland in the other direction. [TreeFar]", parse);
 	Text.NL();
 	Text.Add("Nearby, there is a low hill with some strange standing stones on it. ", parse);
-	if(gameCache.flags["Portals"] != 0)
+	if(Scenes.Global.PortalsOpen())
 		Text.Add("The gem glows in the presence of the portals, inexplicably drawn to them. ", parse);
 	else if(jeanne.flags["Met"] != 0)
 		Text.Add("This is probably the place that Jeanne was talking about. ", parse);
@@ -180,7 +180,7 @@ world.loc.Plains.Crossroads.links.push(new Link(
 	}
 ));
 world.loc.Plains.Crossroads.links.push(new Link(
-	function() { return gameCache.flags["Portals"] != 0 ? "Nexus" : "Mound"; }, true, true,
+	function() { return Scenes.Global.PortalsOpen() ? "Nexus" : "Mound"; }, true, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Plains.Portals, {minute: 10});
@@ -247,7 +247,7 @@ world.loc.Plains.Portals.description = function() {
 	var parse = {};
 	
 	Text.Add("Located near the crossroads at the center of the great plains lies a lone hill, visible for miles around. ", parse);
-	if(gameCache.flags["Portals"] != 0)
+	if(Scenes.Global.PortalsOpen())
 		Text.Add("You are standing at its apex, near the portal stones. Each one is taller than two men in height and covered in intricate magical runes glowing brightly. There is an eerie hum in the air, and the gemstone in your pocket pulses in time with your heartbeat. From here, you can reach out and open portals to other realms.", parse);
 	else {
 		Text.Add("You are standing at its apex, studying the strange stone obelisks standing in a large circle. Each one taller than two men in height, the black slates are covered in intricate magical runes, a few of them glowing faintly. There is an eerie feeling in the air around them.", parse);

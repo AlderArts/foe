@@ -119,7 +119,7 @@ Player.prototype.plural = function() {
 }
 
 Player.prototype.Magic = function() {
-	return gameCache.flags["LearnedMagic"] != 0;
+	return Scenes.Global.MagicStage1();
 }
 
 Player.prototype.HandleDrunknessOverTime = function(hours, suppressText) {

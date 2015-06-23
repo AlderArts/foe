@@ -482,7 +482,7 @@ Scenes.RavenMother.TheHuntQuestions = function(back) {
 			Text.NL();
 			Text.Add("Soft side?", parse);
 			Text.NL();
-			parse["mage"] = gameCache.flags["LearnedMagic"] != 0 ? "She must be a natural mage. Apparently capable of shaping the world with her will, even if it is ‘difficult’." : "She pauses for a moment to gather her thoughts.";
+			parse["mage"] = Scenes.Global.MagicStage1() ? "She must be a natural mage. Apparently capable of shaping the world with her will, even if it is ‘difficult’." : "She pauses for a moment to gather her thoughts.";
 			Text.Add("<i>“Here, things are easy to change. On the hard side, it is difficult. Sometimes I forget which is which until I try,”</i> she confides. [mage] <i>“You are usually gone, and only come to the soft side sometimes. But I am always here.”</i>", parse);
 			Text.NL();
 			Text.Add("She is always sleeping?", parse);

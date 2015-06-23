@@ -143,7 +143,7 @@ Quests.quests.push(new Quest({
 		new QuestItem({
 			desc: function() {
 				if((rosalin.flags["Met"] == 0 ||
-				    gameCache.flags["LearnedMagic"] != 0) &&
+				    Scenes.Global.MagicStage1()) &&
 				    jeanne.flags["Met"] == 0)
 					return "Find someone to help you figure out what the gem does.";
 				else

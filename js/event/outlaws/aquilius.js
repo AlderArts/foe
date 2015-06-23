@@ -670,7 +670,7 @@ Scenes.Aquilius.TalkWarPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“You want to know how it got started? Listen up then, for it’s going to be a long story.</i>", parse);
 			Text.NL();
-			parse["are"] = gameCache.flags["Portals"] == 0 ? "are" : "used to be";
+			parse["are"] = !Scenes.Global.PortalsOpen() ? "are" : "used to be";
 			Text.Add("<i>“In my father’s time, so I’m told, portals were very commonplace. People could go through one, come out on another plane and do business, then return to Eden before lunch. As you no doubt know, portals [are] pretty much non-existent these days, but they didn’t disappear all at once. Slowly, they began to get rarer and rarer, opening and closing more and more erratically.</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Now, there were merchant guilds who did business between the worlds using the portals, and since Eden had plenty of them, you can imagine they’d grown quite rich and influential. They had a direct voice in the passing of laws, wielded influence in various social circles, that sort of thing - and the new rich were always at loggerheads with the old rich. If the merchants wanted one thing, you’d bet the king and the nobles would want another.</i>", parse);

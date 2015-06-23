@@ -172,7 +172,7 @@ OpheliaBrute.prototype.Act = function(encounter, activeChar) {
 Scenes.Ophelia.LabDesc = function() {
 	var parse = {
 		old  : ophelia.flags["Met"] != 0 ? " old" : "",
-		camp : gameCache.flags["Portals"] != 0 ? "the gemstead" : "camp"
+		camp : Scenes.Global.PortalsOpen() ? "the gemstead" : "camp"
 	};
 	
 	Text.Add("You are standing in Ophelia’s[old] makeshift laboratory, which is cast in bright light with a strangely greenish hue. Scrolls and books are stacked on narrow shelves alongside earthenware pots containing who-knows-what and odd mixtures boiling in large glass flasks. Grime and smoke have added a permanent patina of grease to everything in the room, which speaks to you of the wisdom of having an alchemical lab without a proper air vent. A handful of lapine guinea-pigs are shackled to one wall, either waiting for new experiments or under observation.", parse);

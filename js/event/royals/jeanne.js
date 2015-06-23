@@ -190,7 +190,7 @@ Scenes.Jeanne.Talk = function() {
 			Text.Add("<i>“Never give the gem to someone else, not even someone you trust, as it could potentially be used to harm you. The stronger the gem becomes, the stronger this connection will be.”</i>", parse);
 			Text.NL();
 			
-			if(gameCache.flags["Portals"] != 0) {
+			if(Scenes.Global.PortalsOpen()) {
 				Text.Add("<i>“After what happened, I can understand if you do not want anything to do with these portals any longer, but it is vital that we are able to find out what caused the portals to disappear in the first place. Lately, I have felt it growing stronger...”</i>", parse);
 			}
 			else if(player.summons.length > 0) {
@@ -213,7 +213,7 @@ Scenes.Jeanne.Talk = function() {
 		func : function() {
 			Text.Clear();
 			
-			if(gameCache.flags["LearnedMagic"] == 0) {
+			if(!Scenes.Global.MagicStage1()) {
 				Text.Add("<i>“It is a lengthy process, but yes, I can help you. Perhaps… the gem you carry will make this easier.”</i> Jeanne instructs you to take out the stone, and hold it in both hands. She places her own slender hands on top of yours, the beautiful elf’s warmth making your heart race a bit faster.", parse);
 				Text.NL();
 				Text.Add("<i>“The fundamentals of magic is focus, knowing how to channel the energies in and around you and mold them to your will,”</i> the magician explains. <i>“Learn to feel the ebb and flow, become the fulcrum upon which the energy spins...”</i>", parse);

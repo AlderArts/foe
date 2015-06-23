@@ -108,7 +108,7 @@ Scenes.Magnus.Interact = function() {
 		
 		Text.Add("You wave at Magnus as you pull up beside the young magician, flopping down on the log. He seems to register that you’re trying to talk to him, and briefly put his book down on his lap.", parse);
 		Text.NL();
-		if(gameCache.flags["LearnedMagic"] == 0)
+		if(!Scenes.Global.MagicStage1())
 			Text.Add("<i>“Yes, [playername]? How can I help you?”</i>", parse);
 		else
 			Text.Add("<i>“[playername]! Great to see you again, how fare your studies?”</i>", parse);
@@ -267,7 +267,7 @@ Scenes.Magnus.Interact = function() {
 					}, enabled : true,
 					tooltip : "Proposition Magnus for a romp in the hay, so to speak."
 				});
-				if(gameCache.flags["LearnedMagic"] != 0) {
+				if(Scenes.Global.MagicStage1()) {
 					options.push({ nameStr : "Gem",
 						func : function() {
 							Text.Clear();
@@ -333,7 +333,7 @@ Scenes.Magnus.Meditation = function() {
 			Text.NL();
 			if(jeanne.flags["Met"] == 0)
 				Text.Add("All you have seen so far has been connected to the gemstone you carry. The more you find out about it, the better. A magician, or an alchemist, may be able to tell you more, if you find one skilled enough.", parse);
-			else if(gameCache.flags["Portals"] == 0)
+			else if(!Scenes.Global.PortalsOpen())
 				Text.Add("You need to find a way to power up the gemstone, and Jeanne seems to have a plan. Following her instructions seems to be the best course of action for now.", parse);
 			else
 				Text.Add("With the activation of the gemstone, the realms lie open for you to explore. Who knows what you might find if you step through one of the portals? Perhaps something that will aid you in your quest, and prepare you for the inevitable confrontation with Uru.", parse);

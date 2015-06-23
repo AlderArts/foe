@@ -103,6 +103,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/loc/outlaws.js \
 	js/loc/glade.js \
 	js/loc/burrows.js \
+	js/event/global.js \
 	js/event/dreams.js \
 	js/event/asche.js \
 	js/event/asche-tasks.js \

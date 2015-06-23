@@ -269,7 +269,7 @@ Scenes.Room69.Discovering69WhatNow = function() {
 				Text.NL();
 				if(player.PAttack() < 75 && player.MAttack() < 75) {
 					Text.Add("You try to kick and batter down the door, but while it rattles slightly, it shows no signs of giving.", parse);
-					if(gameCache.flags["LearnedMagic"] != 0)
+					if(Scenes.Global.MagicStage1())
 						Text.Add(" You attempt to supplement your attack with a few well-placed spells, but they seem to dissolve strangely in the air, as if power is being drained from them before they can fully materialize.", parse);
 					Text.Add(" As you pound fruitlessly, you hear Sixtynine humming to itself. <i>“They can’t even hear you out there, you know,”</i> it remarks idly.", parse);
 					Text.NL();

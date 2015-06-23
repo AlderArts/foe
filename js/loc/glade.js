@@ -726,7 +726,7 @@ Scenes.DryadGlade.MotherTreeTalk = function() {
 	options.push({ nameStr : "Spirit",
 		func : function() {
 			Text.Clear();
-			if(gameCache.flags["Portals"] != 0) {
+			if(Scenes.Global.PortalsOpen()) {
 				Text.Add("<i>“It really surprised me when Spirit said she was going with you. Then again, she’s always been a headstrong child. Though she looks young, she does so because she wishes to; it’s well over two decades since her birth.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“I truly believe she can aid you, though. She is at least as strong as I was before I took root.”</i>", parse);
