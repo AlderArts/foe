@@ -99,11 +99,96 @@ Event.prototype.SleepFunc = function() {
 
 Event.prototype.WaitFunc = function() {
 	SetGameState(GameState.Event);
-	Text.NL();
-	Text.Add("You wait for 1 hour.");
+	Text.Clear();
+	Text.Add("How long do you want to wait?");
 	Text.Flush();
-	Gui.NextPrompt(function() {
-		world.TimeStep({hour: 1});
+	
+	var options = new Array();
+	options.push({ nameStr : "Half hour",
+		tooltip : "Wait for half an hour.",
+		func : function() {
+			world.TimeStep({minute: 30});
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "One hour",
+		tooltip : "Wait for one hour.",
+		func : function() {
+			world.TimeStep({hour: 1});
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Two hours",
+		tooltip : "Wait for two hours.",
+		func : function() {
+			world.TimeStep({hour: 2});
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Four hours",
+		tooltip : "Wait for four hours.",
+		func : function() {
+			world.TimeStep({hour: 4});
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Eight hours",
+		tooltip : "Wait for eight hours.",
+		func : function() {
+			world.TimeStep({hour: 8});
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "A day",
+		tooltip : "Wait for a day.",
+		func : function() {
+			world.TimeStep({day: 1});
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Until 4:00",
+		tooltip : "Wait until early morning.",
+		func : function() {
+			world.StepToHour(4);
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Until 8:00",
+		tooltip : "Wait until morning.",
+		func : function() {
+			world.StepToHour(8);
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Until 12:00",
+		tooltip : "Wait until midday.",
+		func : function() {
+			world.StepToHour(12);
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Until 16:00",
+		tooltip : "Wait until afternoon.",
+		func : function() {
+			world.StepToHour(16);
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Until 20:00",
+		tooltip : "Wait until evening.",
+		func : function() {
+			world.StepToHour(20);
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Until 00:00",
+		tooltip : "Wait until midnight.",
+		func : function() {
+			world.StepToHour(0);
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, true, function() {
 		PrintDefaultOptions();
 	});
 }

@@ -8,6 +8,7 @@ CHANGELOG for Fall of Eden
 Version 0.4f
 ------------
 * Fixed some bugs
+* Expanded on the "wait" menu (hotkey Z) to allow for better control. Sleep still does the regular 8 hours.
 
 --------------------------------------------
              PREVIOUS VERSIONS
