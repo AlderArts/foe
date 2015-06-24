@@ -50,11 +50,11 @@ Gui.Init = function() {
 	Gui.party = Gui.canvas.set();
 	Gui.partyObj = [];
 	for(var i = 0; i < 4; ++i)
-		Gui.SetupPortrait(20, 75+120*i, Gui.party, Gui.partyObj, true);
+		Gui.SetupPortrait(20, 75+120*i, Gui.party, Gui.partyObj, true, i);
 	Gui.enemy = Gui.canvas.set();
 	Gui.enemyObj = [];
 	for(var i = 0; i < 4; ++i)
-		Gui.SetupPortrait(1020, 75+120*i, Gui.enemy, Gui.enemyObj, false);
+		Gui.SetupPortrait(1020, 75+120*i, Gui.enemy, Gui.enemyObj, false, i);
 		
 	// Cavalcade
 	Gui.cavalcade = Gui.canvas.set();
@@ -200,7 +200,7 @@ Gui.PrintShow = function(obj) {
 	obj.glow.show();
 }
 
-Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty) {
+Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty, index) {
 	var barStart   = 85;
 	var barWidth   = Gui.barWidth;
 	var barHeigth  = 30;
@@ -251,6 +251,23 @@ Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty) {
 	charSet.push(statusSet);
 	set.push(charSet);
 	obj.push(local);
+
+	local.portrait.attr({
+		cursor: "pointer"
+	}).click(function() {
+		Gui.HandlePortraitClick(index, isParty);
+	});
+}
+
+Gui.HandlePortraitClick = function(index, isParty) {
+	if(gameState == GameState.Game) {
+		if(isParty) {
+			var character = party.Get(index);
+			if(character) {
+				character.Interact(party.location.switchSpot());
+			}
+		}
+	}
 }
 
 Gui.SetupCavalcadeHand = function(xoffset, yoffset, set, obj) {

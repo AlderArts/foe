@@ -357,7 +357,13 @@ Party.prototype.Interact = function(preventClear, switchSpot, back) {
 		if(i == 1)
 			Text.Add("</tr><tr>");
 		
-		list.push({nameStr: member.name, func: member.Interact, obj: switchSpot, enabled: true, image: Input.imgButtonEnabled2});
+		list.push({
+			nameStr: member.name,
+			func: member.Interact,
+			obj: switchSpot,
+			enabled: true,
+			image: Input.imgButtonEnabled2
+		});
 	}
 	Text.Add("</tr>");
 	Text.Add("</table>");
@@ -365,7 +371,12 @@ Party.prototype.Interact = function(preventClear, switchSpot, back) {
 		// Add reserve too
 		for(var i = 0; i < this.reserve.length; i++) {
 			var member = this.reserve[i];
-			list.push({nameStr: member.name, func: member.Interact, obj: switchSpot, enabled: true});
+			list.push({
+				nameStr: member.name,
+				func: member.Interact,
+				obj: switchSpot,
+				enabled: true
+			});
 		}
 	}
 	// Don't sort, use same order as in menu
