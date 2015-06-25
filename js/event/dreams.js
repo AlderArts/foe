@@ -958,7 +958,7 @@ Scenes.Dreams.FragileArmor = function(ravenTrigger) {
 	
 	Text.Add("You’re arguing with Donovan, trying to get the stoat-morph to come around to your point of view. It’s just that his armor was all very nice and gleaming when it was on the shelf, but there’s just something about it… or rather, <i>was</i> something about it.", parse);
 	Text.NL();
-	Text.Add("Donovan just grins that stupid grin of his as he listens to you. [raven].", parse);
+	Text.Add("Donovan just grins that stupid grin of his as he listens to you. [raven]", parse);
 	Text.NL();
 	Text.Add("See, when that monster hit you - and not repeatedly, just once. When that monster hit you <i>once</i>, that armor you bought from him didn’t quite perform as expected.", parse);
 	Text.NL();
