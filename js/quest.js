@@ -765,11 +765,13 @@ Quests.quests.push(new Quest({
 		}),
 		new QuestItem({
 			desc: function() {
-				return "Return the Ginseng to Asche in her shop in Rigard.";
+				return "Return to Asche in her shop in Rigard.";
 			},
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
+				if(Scenes.Asche.Tasks.Ginseng.IsCompleted())
+					status |= Quests.Type.Completed;
 				return status;
 			}
 		})
@@ -819,11 +821,13 @@ Quests.quests.push(new Quest({
 		}),
 		new QuestItem({
 			desc: function() {
-				return "Return the nightshade to Asche in her shop in Rigard.";
+				return "Return to Asche in her shop in Rigard.";
 			},
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
+				if(Scenes.Asche.Tasks.Nightshade.IsCompleted())
+					status |= Quests.Type.Completed;
 				return status;
 			}
 		})
