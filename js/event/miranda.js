@@ -7057,7 +7057,7 @@ Scenes.Miranda.TavernSexPublicBJ = function() {
 	
 	miranda.OrgasmCum();
 	
-	Text.Add("Miranda grunts loudly as she hilts herself in your throat, pouring her massive load down into your [bellyDesc]. Perhaps feeling merciful, the herm pulls out just as her knots starts to swell, saving you from being stuck on her cock. On the other hand, you gain a messy pearly necklace - more of a pearly ball gown, in truth - in exchange.", parse);
+	Text.Add("Miranda grunts loudly as she hilts herself in your throat, pouring her massive load down into your [bellyDesc]. Perhaps feeling merciful, the herm pulls out just as her knot starts to swell, saving you from being stuck on her cock. On the other hand, you gain a messy pearly necklace - more of a pearly ball gown, in truth - in exchange.", parse);
 	Text.NL();
 	Text.Add("Sated, the guardswoman pats you on the head, scratching you behind your [earDesc] while you clean her up.", parse);
 	Text.NL();
