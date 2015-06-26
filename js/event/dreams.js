@@ -953,12 +953,12 @@ Scenes.Dreams.CunnilingusRec = function(ravenTrigger) {
 
 Scenes.Dreams.FragileArmor = function(ravenTrigger) {
 	var parse = {
-		raven : Scenes.Dreams.RavenText(ravenTrigger, "A raven perches on an armor stand, watching the argument as it unfolds", "There’s a raven sitting on an armor stand, watching you. You need to remember this")
+		raven : Scenes.Dreams.RavenText(ravenTrigger, " A raven perches on an armor stand, watching the argument as it unfolds.", " There’s a raven sitting on an armor stand, watching you. You need to remember this.")
 	};
 	
 	Text.Add("You’re arguing with Donovan, trying to get the stoat-morph to come around to your point of view. It’s just that his armor was all very nice and gleaming when it was on the shelf, but there’s just something about it… or rather, <i>was</i> something about it.", parse);
 	Text.NL();
-	Text.Add("Donovan just grins that stupid grin of his as he listens to you. [raven]", parse);
+	Text.Add("Donovan just grins that stupid grin of his as he listens to you.[raven]", parse);
 	Text.NL();
 	Text.Add("See, when that monster hit you - and not repeatedly, just once. When that monster hit you <i>once</i>, that armor you bought from him didn’t quite perform as expected.", parse);
 	Text.NL();
