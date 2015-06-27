@@ -5,6 +5,14 @@ Scenes.Global.VisitedRigardGates = function() {
 	return miranda.Met();
 }
 
+Scenes.Global.VisitedOutlaws = function() {
+	return outlaws.Rep() > 0;
+}
+
+Scenes.Global.MetJeanne = function() {
+	return jeanne.flags["Met"] != 0;
+}
+
 Scenes.Global.PortalsOpen = function() {
 	return gameCache.flags["Portals"] != 0;
 }

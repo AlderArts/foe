@@ -84,6 +84,7 @@ function Rigard(storage) {
 	// Have accessed town (not necessarily free access)
 	this.flags["Visa"] = 0;
 	this.flags["CityHistory"] = 0;
+	this.flags["Nobles"] = 0; //Bitmask
 	// Have access to royal grounds (not necessarily free access)
 	this.flags["RoyalAccess"] = 0;
 	this.flags["RoyalAccessTalk"] = 0;
@@ -136,6 +137,11 @@ function Rigard(storage) {
 	if(storage) this.FromStorage(storage);
 }
 
+Rigard.Nobles = {
+	MetMajid : 1,
+	Alms     : 2,
+	Elodie   : 4
+};
 Rigard.KrawitzQ = {
 	NotStarted   : 0,
 	Started      : 1,
