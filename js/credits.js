@@ -41,6 +41,7 @@ CreditsScreen = function() {
 	Text.Add("Patches: Me and LD<br/>");
 	Text.Add("Random exploration scenes: Del<br/>");
 	Text.Add("Rigard random scenes: Del<br/>");
+	Text.Add("Rigard royal grounds random scenes: The Observer<br/>");
 	Text.Add("Roa: Me, QB and LD<br/>");
 	Text.Add("Rosalin cock worship scene: Fenoxo<br/>");
 	Text.Add("Silken Delights & Fera: Resar<br/>");
