@@ -18,6 +18,7 @@ world.loc.Rigard.Castle.Grounds.description = function() {
 	Text.NL();
 }
 
+//Random events for royal grounds
 world.loc.Rigard.Castle.Grounds.enc = new EncounterTable();
 world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
 world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.Parkland;});
@@ -29,7 +30,8 @@ world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Nob
 world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.Elodie;}, 1.0, function() { return !Scenes.Global.PortalsOpen() && !(rigard.flags["Nobles"] & Rigard.Nobles.Elodie) && Scenes.Global.VisitedOutlaws() && world.time.IsDay(); });
 world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.RoyalGetaway;});
 world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.MagicalJackal;}, 1.0, function() { return asche.flags["Met"] >= Asche.Met.Met && !world.time.IsDay(); });
-
+world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.PalaceParade;}, 2.0, function() { return terry.Recruited() && !world.time.IsDay() && rigard.ParadeTimer.Expired(); });
+world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.Buns;}, 1.0, function() { return world.time.IsDay(); });
 
 world.loc.Rigard.Castle.Grounds.onEntry = function() {
 	if(Math.random() < 0.2)
@@ -75,9 +77,6 @@ world.loc.Rigard.Castle.Grounds.links.push(new Link(
 		Scenes.Terry.Release();
 	}
 ));
-world.loc.Rigard.Castle.Grounds.endDescription = function() {
-	Text.Flush();
-}
 
 Scenes.Rigard.Noble.Parkland = function() {
 	var parse = {
@@ -113,6 +112,8 @@ Scenes.Rigard.Noble.Parkland = function() {
 	}
 	Text.Flush();
 	
+	world.TimeStep({minute: 15});
+	
 	Gui.NextPrompt();
 }
 
@@ -141,6 +142,8 @@ Scenes.Rigard.Noble.JeannesTower = function() {
 	scenes.Get();
 	
 	Text.Flush();
+	
+	world.TimeStep({minute: 15});
 	
 	Gui.NextPrompt();
 }
@@ -194,6 +197,9 @@ Scenes.Rigard.Noble.TheDistrict = function() {
 	scenes.Get();
 	
 	Text.Flush();
+	
+	world.TimeStep({minute: 15});
+	
 	Gui.NextPrompt();
 }
 
@@ -222,6 +228,8 @@ Scenes.Rigard.Noble.MeetingMajid = function() {
 	
 	rigard.flags["Nobles"] |= Rigard.Nobles.MetMajid;
 	
+	world.TimeStep({minute: 15});
+	
 	Gui.NextPrompt();
 }
 
@@ -249,6 +257,8 @@ Scenes.Rigard.Noble.GuardPatrol = function() {
 	Text.Add("You’re vaguely reminded of some saying or the other, something about effective policing being the lack of crime rather than guards being seen about doing their job, but you don’t quite remember just how it went… nevertheless, though the royal guards are clearly anything but incompetent, it seems like they have a much better life than the overworked city watch.", parse);
 	Text.Flush();
 	
+	world.TimeStep({minute: 15});
+	
 	Gui.NextPrompt();
 }
 
@@ -272,6 +282,8 @@ Scenes.Rigard.Noble.AlmsForThePoor = function() {
 	Text.NL();
 	Text.Add("What an interesting dilemma you’ve stumbled onto. Is there something you ought to do about this? There are a few stances you could take here…", parse);
 	Text.Flush();
+	
+	world.TimeStep({minute: 15});
 	
 	rigard.flags["Nobles"] |= Rigard.Nobles.Alms;
 	
@@ -406,6 +418,8 @@ Scenes.Rigard.Noble.Elodie = function() {
 		Text.Add("Still, there’s nothing else you can do about the strange incident for now, so you might as well not let it get to you too much. Shrugging, you move along on your way.", parse);
 		Text.Flush();
 		
+		world.TimeStep({minute: 15});
+		
 		Gui.NextPrompt();
 	});
 	
@@ -422,6 +436,8 @@ Scenes.Rigard.Noble.RoyalGetaway = function() {
 	Text.NL();
 	Text.Add("Maybe they shouldn’t be skipping their lessons to go out into the city, but who’s going to stop them - and besides, if their teachers are willing to stoop so low as to let the future of the kingdom skive just for the sake for a few coins, they can’t be very good teachers, can they?", parse);
 	Text.Flush();
+	
+	world.TimeStep({minute: 5});
 	
 	Gui.NextPrompt();
 }
@@ -451,5 +467,254 @@ Scenes.Rigard.Noble.MagicalJackal = function() {
 	Text.Add("Well, if she’s sure, then. Asche gives you a small smile, then swooshes past you and is on her way, sauntering down the broad path like she owns the entirety of the castle district. Ah, to be so carefree…", parse);
 	Text.Flush();
 	
+	world.TimeStep({minute: 15});
+	
 	Gui.NextPrompt();
 }
+
+Scenes.Rigard.Noble.PalaceParade = function() {
+	var parse = {
+		
+	};
+	
+	var first = !(rigard.flags["Nobles"] & Rigard.Nobles.Parade);
+	rigard.flags["Nobles"] |= Rigard.Nobles.Parade;
+	
+	Text.Clear();
+	if(first) {
+		Text.Add("Drawing closer to the castle than your usual forays about the grounds, you notice a small crowd of curious onlookers gathered in a small plaza. The commotion only grows greater as you close the distance, joining the impromptu audience of commoner and noblemen alike, only to find about two hundred of the royal guard assembled in a neat rectangular formation on the plaza.", parse);
+		Text.NL();
+		Text.Add("That’s not all, though. A small marching band sits off to one side, drums, brass and all, and they play a suitably martial tune as the royal guards parade in front of the castle district’s population. You have to admit, it all <i>looks</i> very impressive; the audience is clearly in agreement with you as the guards march in lockstep to the drumming. And why not? They’re clearly dressed to impress; the arms and armor each guard bears is more ceremonial than anything else. For goodness’ sake, gold frogging, engraved breastplates, and plenty of swirly grooves on dulled blades -", parse);
+		Text.NL();
+		Text.Add("- There is, after all, that age-old axiom of dressing up a pig in a suit. At the end of the day, while one might be able to make the pig look presentable, it’s still a pig.", parse);
+		Text.NL();
+		Text.Add("At the head of it all is Preston, looking every bit just like the day he burst into the warehouse and stole victory from under your and Miranda’s noses. Well, perhaps even more pretentious, considering the gilded, plumed helmet he’s wearing; mounted on a chestnut thoroughbred, the commander of the royal guard prances in front of both his men and the gathered audience like… like… well, there isn’t a good word that would describe him. He’s far too serious to be a clown, at any rate.", parse);
+		Text.NL();
+		if(party.InParty(miranda)) {
+			Text.Add("<i>“Pompous little shit,”</i> Miranda mutters, though not so loudly that someone besides you might hear her over the music. <i>“Please, you dumb beast, if you have any sense in you, throw that fat sack of potatoes off your back and run for the hills.”</i>", parse);
+			Text.NL();
+		}
+		Text.Add("Up and down, back and forth, all to the time of the music blaring out into the open air and to the intermittent applause of the audience. If the guard wanted everyone in the castle grounds to know they were there, then they couldn’t have done a better job.", parse);
+		Text.NL();
+		Text.Add("It doesn’t look like Preston’s little parade will be ending anytime soon - judging by the smile on his face, he’s clearly enjoying all the attention, perhaps a little too much. Neither are you about to stand here all day - unlike some of those around you, you actually have better things to do with your time than to watch this pompous display. Excusing yourself, you slip your way back through the crowd and leave the way you came.", parse);
+	}
+	else {
+		Text.Add("Passing by the plaza in front of the castle gates, you’re treated to another of Preston’s little parades. The music and crowd begin long before you even catch sight of the royal guards themselves, and you can already guess what Preston’s lined up for the locals: more marching, more meaningless footdrills, more prancing around on his horse. While the man might be high on the pomp and glamor, he’s definitely a little short on imagination.", parse);
+		Text.NL();
+		if(party.InParty(miranda)) {
+			Text.Add("<i>“Still at it, eh?”</i> Miranda mumbles from behind you. <i>“Man never gets tired of preening. Wonder if he does more parading than guarding.”</i>", parse);
+			Text.NL();
+		}
+		Text.Add("Well, there <i>is</i> one upside to this: if Preston and his men are here, then he isn’t out there making life difficult for someone else. By all means, let them continue; there’s absolutely no need to rain on their parade. Smiling at that thought, you quickly turn and leave the scene, leaving those who’re inclined to do so gawk at the scene.", parse);
+	}
+	Text.Flush();
+	
+	rigard.ParadeTimer = new Time(0,0,4,0,0);
+	
+	world.TimeStep({minute: 30});
+	
+	Gui.NextPrompt();
+}
+
+Scenes.Rigard.Noble.Buns = function() {
+	var parse = {
+		
+	};
+	
+	var first = !(rigard.flags["Nobles"] & Rigard.Nobles.Buns);
+	rigard.flags["Nobles"] |= Rigard.Nobles.Buns;
+	
+	Text.Clear();
+	if(first) {
+		Text.Add("Walking through one of the many small parks that dot the castle grounds, you’re suddenly beset by the warm, tantalizing smell of cooking. Turning towards the source of the smell, you quickly discover a small wooden cart by the side of the pathway, a charcoal stove with a hot plate sitting at its side. The proprietor - a young, spindly man - is busy cooking up a storm on the sizzling plate, and hardly notices you as you draw near. It’s only when you clear your throat that he looks up, spatula still in hand.", parse);
+		Text.NL();
+		Text.Add("It’s clear that he’s no resident of the castle district - despite an obvious attempt to dress up under the apron, there’s no way this young man can afford either the attire of the nobility or the livery of their servants. Still, at least his clothes are clean and ironed, even if they’re simple, and that’s more than can be said for most of Rigard’s populace.", parse);
+		Text.NL();
+		Text.Add("<i>“Yes?”</i>", parse);
+		Text.NL();
+		Text.Add("You look between the cart and him a few moments, trying to decide how to get across your point.", parse);
+		Text.NL();
+		Text.Add("<i>“Don’t eyeball me like that,”</i> he says. <i>“I’ve got a special dispensation to do business here, so long as I don’t wander too far from the park. Hobnobs like them so much that they want me close, so they can have them hot off the plate.”</i>", parse);
+		Text.NL();
+		Text.Add("Them?", parse);
+		Text.NL();
+		Text.Add("<i>“Meat-patties-between-two-buns.”</i> As if for emphasis, he drizzles a little fragrant oil onto the hot plate, and a heavenly aroma wafts upwards to you. <i>“It’s not the best name for them, but I’ve yet to come up with a better one. You’ve come at a good time, there’s no queue. Mostly they come out at dawn and dusk. Huge lines then.”</i>", parse);
+		Text.NL();
+		Text.Add("Oh? Not to be skeptical, but are the patties-between-two-buns, as he calls them, <i>that</i> good? Even for the degenerates that call themselves Rigard’s upper crust to bend and actually wait in line for them?", parse);
+		Text.NL();
+		Text.Add("He shrugs his eyebrows. <i>“Why don’t you buy one for yourself and try it?”</i>", parse);
+		Text.NL();
+		Text.Add("Why, is that a challenge?", parse);
+		Text.NL();
+		Text.Add("<i>“Could be.”</i>", parse);
+		Text.NL();
+		Text.Add("Talkative one, isn’t he? Yet, you have to admit, what he’s hawking is certainly setting your mouth to watering.", parse);
+	}
+	else {
+		Text.Add("Passing through the castle grounds today, you happen to chance upon the meat-patty-in-a-bun vendor plying his trade by an empty strip of parkland. Judging by the number of finely dressed folk blissfully munching away on his cylinder-shaped wares, as well as the fresh aroma of hot oil and meat juices that rises from his hot plate, it seems that he’s just finished cooking up yet another storm.", parse);
+		Text.NL();
+		Text.Add("Spotting you, he tips his beret at you and scrapes a bit of burst gristle off the hot plate, expertly flicking it into a bin by his side. <i>“Hey, it’s you again. Feeling like a meat-patty-between-two-buns? I just finished cooking up a batch, but can fire up the plate if you want.”</i> The young vendor waggles a hand at the rest of his customers as they - or more likely, their servants -  drop by to return the plates. <i>“You don’t want to miss out on what they’re enjoying, do you? Twenty coins, and that meat-patty-between-two-buns is all yours.”</i>", parse);
+	}
+	Text.Flush();
+	
+	world.TimeStep({minute: 15});
+	
+	Scenes.Rigard.Noble.BunsChoice();
+}
+
+Scenes.Rigard.Noble.BunsChoice = function() {
+	var parse = {
+		
+	};
+	parse = Text.ParserPlural(parse, party.Num() > 1);
+	parse["comp"] = party.Num() == 2 ? party.Get(1).name :
+	                "your companions";
+	
+	var first = !(rigard.flags["Nobles"] & Rigard.Nobles.BoughtBuns);
+	
+	var options = new Array();
+	if(first) {
+		options.push({ nameStr : "Buy",
+			tooltip : "Sure, you’ll have one of… whatever he’s selling.",
+			func : function() {
+				Text.Clear();
+				
+				rigard.flags["Nobles"] |= Rigard.Nobles.BoughtBuns;
+				
+				Text.Add("Why not? If it tastes as good as it smells, you’re not going to be regretting this purchase. Shelling over the coins, you step back and relax as the young man gets to work, bringing out a meat patty from a sealed basket and setting it on the hot plate. There’s a very satisfying hiss, followed by a cloud of fragrant steam, and you have to admit, there’s quite a bit of flair in his way of doing things. A pinch of what could be lard or butter, some sliced tomatoes and onions, a bit of sauce… layer by layer, he piles on the ingredients in one glorious heap.", parse);
+				Text.NL();
+				Text.Add("At the end of it all, he’s produced his signature patty-between-two-buns, one for you ", parse);
+				if(party.Num() > 1) {
+					Text.Add("and one ", parse);
+					if(party.Num() > 2)
+						Text.Add("each ", parse);
+					Text.Add("for [comp]", parse);
+				}
+				Text.Add(". Everything’s been piled in layers like a sandwich, only it doesn’t quite <i>look</i> like a sandwich, vaguely cylindrical with sauce oozing down the edges and vegetables practically spilling out from between the buns.", parse);
+				Text.NL();
+				Text.Add("<i>“A meat-patty-between-two-buns,”</i> the young cook declares, shoveling [itThem] onto[a] plate[s] for your perusal. <i>“Eat up while [itsTheyre] still hot.”</i>", parse);
+				Text.NL();
+				Text.Add("Well, nothing for it now. You grab hold of the bun in both hands and bite down, and an explosion of flavor meets your tongue. It’s quite indescribable - crisp onion and meat juices pouring out as your teeth sink in, and… and…", parse);
+				Text.NL();
+				Text.Add("It’s just good. One might have expected street food to taste bad, or even worse, taste of nothing at all, but this is a pleasant surprise.", parse);
+				Text.NL();
+				Text.Add("<i>“Quite a mouthful, isn’t it?”</i>", parse);
+				Text.NL();
+				Text.Add("Which does he mean, the name or the snack? Well, does it matter? Both are pretty mouth-filling. You can definitely see how it’s so favored amongst the nobility.", parse);
+				Text.NL();
+				Text.Add("<i>“I do try different flavors from time to time. Mushrooms, a bit of fish oil, that sort of thing, but I’ve always got the ingredients for whipping up the basic recipe on hand.”</i>", parse);
+				Text.NL();
+				Text.Add("Interesting. You finish the rest of the treat in a few bites, then lick your fingers in satisfaction. With something this good, why doesn’t he open a restaurant or something? He could make a killing!", parse);
+				Text.NL();
+				Text.Add("The young man shrugs. <i>“Could do, I suppose, but I rather like this setup. I make enough to get by, I’m a local star amongst the nobs, and I like having plenty of greenery and fresh air about me while I’m cooking. Can’t get that in a stuffy kitchen, plus I get to go where I want and set up shop somewhere different every day.”</i>", parse);
+				Text.NL();
+				Text.Add("Well, you can see his point. Setting the plate back down on the cart, you wipe your mouth and thank him for the treat. Of course, he should get a proper name for his creation sometime…", parse);
+				Text.NL();
+				Text.Add("<i>“Oh, I don’t know. Since people are already calling it that, I’m finding myself warming up to the name of late. Well, maybe I’ll see you around soon, come back when you want another delicious bite.”</i>", parse);
+				Text.NL();
+				Text.Add("One last thing, though… did you get his name?", parse);
+				Text.NL();
+				Text.Add("<i>“It doesn’t matter,”</i> the young man replies with a smile as he sets out another couple of patties to cook. <i>“I don’t know the names of any of the nobs who buy my meat-patties-between-two-buns, and it doesn’t change things one jot. Faces and people are what matters to me.”</i> With that, he waves you off and turns back to his cooking, face furrowed in concentration.", parse);
+				Text.Flush();
+				party.coin -= 20;
+				
+				world.TimeStep({minute: 15});
+				
+				Gui.NextPrompt();
+			}, enabled : party.coin >= 20
+		});
+		options.push({ nameStr : "No",
+			tooltip : "It might smell delicious, but you think you’ll pass this time.",
+			func : function() {
+				Text.Clear();
+				Text.Add("The young man shrugs at your reply, flipping the meat patties with his spatula to brown them evenly. <i>“Suit yourself. If you change your mind, I’m in the castle district most days, although I can’t guarantee I won’t be sold out by the time you get here. These things move really quickly.”</i>", parse);
+				Text.NL();
+				Text.Add("Well, no matter how delicious they might be, those so-called meat-patties-between-two-buns are still just food, no matter how one looks at it. It’s not <i>that</i> much of a loss even if you never manage to sample one, you tell yourself as you walk away.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt();
+			}, enabled : true
+		});
+	}
+	else {
+		options.push({ nameStr : "Yes",
+			tooltip : "Sure, you’ve got nothing better to do with your money.",
+			func : function() {
+				Text.Clear();
+				Text.Add("Sure! If you’re going to burn your money, you might as well do so spending it on overpriced food that’s touted as being wonderfully scrumptious! It’s even better than wasting it at a fancy restaurant - because, let’s face it, doing so means that you probably won’t even be guaranteed that the food will taste good, just be called by some funny name.", parse);
+				Text.NL();
+				Text.Add("You fork over the coins, and a smile creeps across your face as the glorious aroma of cooking meat rises up to you, the young fellow stoking the charcoal fire under the plate until the oil is spitting and sizzling.", parse);
+				Text.NL();
+				
+				var scenes = new EncounterTable();
+				scenes.AddEnc(function() {
+					Text.Add("So… what exactly is it about his meat-patties-between-two-buns that make them so wonderfully tasty, anyway?", parse);
+					Text.NL();
+					Text.Add("<i>“Would you believe me if I said it was a collection of seven herbs and spices?”</i>", parse);
+					Text.NL();
+					Text.Add("Actually, that’s quite plausible. Is it?", parse);
+					Text.NL();
+					Text.Add("<i>“Well, it isn’t, and I’m not about to go and threaten my own business by telling other folks as much,”</i> he replies with a grin. <i>“I know I ought to pass it on eventually, but I’ve still got a lot of time, you know?”</i>", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("<i>“I’m trying something new today,”</i> he tells you as he puts on several different sauces onto the onions. <i>“Tasted it myself, but I’ve only got one tongue on me, you know?”</i>", parse);
+					Text.NL();
+					Text.Add("Mm-hm. Well, it smells delicious as always.", parse);
+					Text.NL();
+					Text.Add("<i>“We’ll find out in a moment, shall we? To be honest, I was rather hoping that you’d show up today. Don’t dare tweak things too much when I’m serving the nobs, but hey, if things taste funny with you… at least you don’t have to keep up appearances, you know what I mean?”</i>", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("So, does he get antsy about all the nobility?", parse);
+					Text.NL();
+					Text.Add("The young fellow shrugs. <i>“Eh, I’m just a filthy commoner, even if I’m allowed into the castle grounds. They don’t expect that much from me, you know? Just like one of their servants, everyone knows that the lower classes sleep around every chance they get. Well, so do the nobs, but at least they try to be a little more discreet about it.”</i>", parse);
+					Text.NL();
+					Text.Add("That’s an interesting tangent…", parse);
+					Text.NL();
+					Text.Add("<i>“You hear things, you know, serving them and all. Folk like to chat while they eat. I mean, just go to the Shadow Lady at a certain time of day at certain rooms, and I’ll wager you’ll find at least a third of the king’s court humping away like rabbits.</i>", parse);
+					Text.NL();
+					Text.Add("<i>“So, no. When you think about it, they’re just people like you or me.”</i>", parse);
+				}, 1.0, function() { return true; });
+				scenes.Get();
+				
+				Text.NL();
+				parse["c"] = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
+				Text.Add("At length, your food is done, and served up to you[c] on[a] small plate[s]. Wasting no time in getting down to work, it’s not long before you’ve reduced the meat-patties-between-two-buns into crumbs and grease.", parse);
+				Text.NL();
+				Text.Add("<i>“Tasted good?”</i>", parse);
+				Text.NL();
+				Text.Add("As always.", parse);
+				Text.NL();
+				Text.Add("<i>“Glad you enjoyed it, then. I know how absolutely horrible street food can be - grew up eating it, myself - so I’m actually trying to put in effort here.”</i>", parse);
+				Text.NL();
+				Text.Add("Well, it seems to be working, you remark dryly as you wave a hand at his surroundings. He’s certainly moving up in the world.", parse);
+				Text.NL();
+				Text.Add("<i>“Not sure I can get any higher than where I am already, but the thought’s appreciated. Come back anytime you want a bite to eat, won’t you?”</i>", parse);
+				Text.Flush();
+				party.coin -= 20;
+				
+				world.TimeStep({minute: 15});
+				
+				Gui.NextPrompt();
+			}, enabled : party.coin >= 20
+		});
+		options.push({ nameStr : "No",
+			tooltip : "Hmm, maybe not today.",
+			func : function() {
+				Text.Clear();
+				Text.Add("Nah. While the smell <i>is</i> appetizing, you’re not that hungry yet. You’ll pass for now.", parse);
+				Text.NL();
+				Text.Add("<i>“Mm-hm,”</i> comes the reply. <i>“You know, I’ve tried selling a number of things in the last few years, but it’s always come back to the meat-patties-between-two-buns for me. I’m sure that you’ll come back, too.”</i>", parse);
+				Text.NL();
+				Text.Add("Maybe you will. The young fellow turns to frying up a batch of onions, and you head off on your way.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt();
+			}, enabled : true
+		});
+	}
+	
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+
+

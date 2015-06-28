@@ -85,6 +85,7 @@ function Rigard(storage) {
 	this.flags["Visa"] = 0;
 	this.flags["CityHistory"] = 0;
 	this.flags["Nobles"] = 0; //Bitmask
+	this.ParadeTimer = new Time();
 	// Have access to royal grounds (not necessarily free access)
 	this.flags["RoyalAccess"] = 0;
 	this.flags["RoyalAccessTalk"] = 0;
@@ -140,7 +141,10 @@ function Rigard(storage) {
 Rigard.Nobles = {
 	MetMajid : 1,
 	Alms     : 2,
-	Elodie   : 4
+	Elodie   : 4,
+	Parade   : 8,
+	Buns     : 16,
+	BoughtBuns : 32
 };
 Rigard.KrawitzQ = {
 	NotStarted   : 0,
@@ -162,6 +166,7 @@ Rigard.prototype.ToStorage = function() {
     	storage.cwrel = this.cwrel.base.toFixed();
 	storage.LB      = this.LB;
 	storage.LBroom  = this.LBroomTimer.ToStorage();
+	storage.PT      = this.ParadeTimer.ToStorage();
 	if(this.KrawitzWorkDay)
 		storage.KWork   = this.KrawitzWorkDay.ToStorage();
 	
@@ -173,6 +178,7 @@ Rigard.prototype.ToStorage = function() {
 Rigard.prototype.FromStorage = function(storage) {
 	storage = storage || {};
 	this.LBroomTimer.FromStorage(storage.LBroom);
+	this.ParadeTimer.FromStorage(storage.PT);
 	if(storage.KWork) {
 		this.KrawitzWorkDay = new Time();
 		this.KrawitzWorkDay.FromStorage(storage.KWork);
@@ -198,6 +204,7 @@ Rigard.prototype.FromStorage = function(storage) {
 
 Rigard.prototype.Update = function(step) {
 	this.LBroomTimer.Dec(step);
+	this.ParadeTimer.Dec(step);
 }
 
 Rigard.prototype.Visa = function() {
