@@ -11,6 +11,7 @@ Version 0.4f
 * Expanded on the "wait" menu (hotkey Z) to allow for better control. Sleep still does the regular 8 hours.
 * Added a shortcut to Party->Member. Just click the portrait of whoever you want to look over.
 * Royal Grounds (Castle) random exploration events added (The Observer)
+* Fixed a bug that would break the racial calculations (introduced by the Race overhaul)
 
 --------------------------------------------
              PREVIOUS VERSIONS
