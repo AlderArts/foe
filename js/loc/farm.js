@@ -1394,10 +1394,7 @@ Scenes.Farm.Market = function(haul, next) {
 		earDesc    : function() { return player.EarDesc(); }
 	};
 	
-	var racescore = new RaceScore(player.body);
-	var humanScore = new RaceScore();
-	humanScore.score[Race.Human] = 1;
-	var humanity = racescore.Compare(humanScore);
+	var humanity = player.Humanity();
 	
 	party.location = world.loc.Rigard.ShopStreet.street;
 	var score = 0;

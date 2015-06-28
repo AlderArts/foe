@@ -1268,10 +1268,7 @@ world.loc.BullTower.Building.Cell.onEntry = function() {
 					Text.Add("Nevertheless, you quickly discover why Alaric was mouthing words instead of speaking directly. Following his gaze, you turn to see a thin, lanky man standing at the far end of the room, applying the contents of a vial onto the cruel barbs of the whip he’s brandishing, no doubt the same weapon that’s been used on Alaric.", parse);
 					Text.NL();
 					
-					var racescore = new RaceScore(player.body);
-					var humanScore = new RaceScore();
-					humanScore.score[Race.Human] = 1;
-					var humanity = racescore.Compare(humanScore);
+					var humanity = player.Humanity();
 					
 					parse["h"] = humanity > 0.95 ? ", not to mention a beast-lover, too" : "";
 					

@@ -97,10 +97,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 				Text.Add("Before you’ve had a chance to as much as open your mouth, you are faced with drawn swords.", parse);
 				Text.NL();
 				
-				var racescore = new RaceScore(player.body);
-				var humanScore = new RaceScore();
-				humanScore.score[Race.Human] = 1;
-				var humanity = racescore.Compare(humanScore);
+				var humanity = player.Humanity();
 				
 				if(humanity < 0.95) {
 					Text.Add("<i>“Stand back, filthy creature!”</i> one of the guards snarl, spitting at your feet.", parse);
@@ -170,10 +167,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 				Text.Add("Once again, you approach the hostile royal guardsmen manning the entrance to the innermost parts of Rigard.", parse);
 				Text.NL();
 				
-				var racescore = new RaceScore(player.body);
-				var humanScore = new RaceScore();
-				humanScore.score[Race.Human] = 1;
-				var humanity = racescore.Compare(humanScore);
+				var humanity = player.Humanity();
 				
 				parse["plebFilth"] = humanity > 0.95 ? "pleb" : "filth";
 				

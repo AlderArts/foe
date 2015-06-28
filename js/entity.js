@@ -1900,6 +1900,12 @@ Entity.prototype.Weigth = function() {
 	return this.body.weigth.Get();
 }
 
+Entity.prototype.Humanity = function() {
+	var racescore = new RaceScore(this.body);
+	var humanScore = new RaceScore();
+	humanScore.score[Race.Human.id] = 1;
+	return racescore.Compare(humanScore);
+}
 Entity.prototype.Femininity = function() {
 	return this.body.femininity.Get();
 }

@@ -363,10 +363,7 @@ Scenes.Gwendy.Talk = function(backfunc) {
 					return;
 				}
 				
-				var racescore = new RaceScore(player.body);
-				var humanScore = new RaceScore();
-				humanScore.score[Race.Human] = 1;
-				var humanity = racescore.Compare(humanScore);
+				var humanity = player.Humanity();
 				
 				Text.Add("<i>“You’d like to help me? Great, but you should know this first. Rigard isn’t a particularly nice city, just warning you. There is a reason I usually do this alone and don’t bring Adrian along.”</i>", parse);
 				Text.NL();

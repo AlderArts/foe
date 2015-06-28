@@ -100,10 +100,7 @@ Scenes.Roaming.KingdomPatrol = function(entering) {
 				Text.Add("<i>“You’re always thinking the whole world is made just for you!”</i> [rheshe] jabs a finger at your chest, glaring. <i>“I’m sorely tempted to have a few men follow you just to make sure you don’t get up to any mischief, but I have none to spare, more’s the pity.”</i>", parse);
 				Text.NL();
 				
-				var racescore = new RaceScore(player.body);
-				var humanScore = new RaceScore();
-				humanScore.score[Race.Human] = 1;
-				var humanity = racescore.Compare(humanScore);
+				var humanity = player.Humanity();
 				
 				parse["human"] = humanity > 0.8 ? " human" : "...";
 				Text.Add("[rHeShe] sigh, lowering [rhisher] hand. <i>“So, I guess you can go. <b>Try</b> to be a decent[human] being, though? Please?”</i>", parse);

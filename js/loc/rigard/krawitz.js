@@ -551,10 +551,7 @@ world.loc.Rigard.Krawitz.Mansion.hall.links.push(new Link(
 			if(Scenes.Krawitz.stat.HasServantClothes) {
 				Text.Add("Upon seeing your servants garb, he visibly sags, his mood turning from startled to irritated.");
 				Text.NL();
-				var racescore = new RaceScore(player.body);
-				var humanScore = new RaceScore();
-				humanScore.score[Race.Human] = 1;
-				var humanity = racescore.Compare(humanScore);
+				var humanity = player.Humanity();
 				parse["human"] = humanity < 0.95 ? ", face contorting in disgust as he sees your non-human features" : "";
 				Text.Add("<i>“</i>I expressly told that oaf I was <b>not</b> to be disturbed tonight!”</i></i> he mutters, more to himself than to you. He gives you a brief glance[human], shaking his head.", parse);
 				Text.NL();
@@ -914,10 +911,7 @@ Scenes.Krawitz.Scouting = function() {
 				Text.Add("Joining the group, you explain that you overheard them, and are currently looking for work. The old man, who seems to be some sort of administrator, eyes you critically.", parse);
 				Text.NL();
 				
-				var racescore = new RaceScore(player.body);
-				var humanScore = new RaceScore();
-				humanScore.score[Race.Human] = 1;
-				var humanity = racescore.Compare(humanScore);
+				var humanity = player.Humanity();
 				
 				if(humanity < 0.5 || player.LowerBodyType() != LowerBodyType.Humanoid) {
 					Text.Add("<i>“</i>Sorry kiddo, no offense, but, with your looks, Krawitz would have my head if I let you on the grounds, twenty years of service or no.”</i></i> The old man shakes his head sadly. <i>“</i>Trust me, it is for the best. Find work elsewhere.”</i></i>", parse);
@@ -1683,10 +1677,7 @@ Scenes.Krawitz.Bathhouse = function() {
 	parse["s2"]     = player.NumCocks() > 2 ? "s" : "";
 	parse["oneof2"] = player.NumCocks() > 2 ? " one of" : "";
 	
-	var racescore = new RaceScore(player.body);
-	var humanScore = new RaceScore();
-	humanScore.score[Race.Human] = 1;
-	var humanity = racescore.Compare(humanScore);
+	var humanity = player.Humanity();
 	
 	parse["human"] = humanity < 0.9 ? ", a non-human" : "";
 	
@@ -2548,10 +2539,7 @@ Scenes.Krawitz.Duel = function() {
 			Text.Clear();
 			Text.Add("You approach Krawitz, placing yourself between him and his servant. He pauses in his tantrum and glares at you. With a sardonic smile, you remark to the lord that he must be paying quite a bonus to his servants so they would let him yell at them. Otherwise, they’d probably just beat him up for being so obnoxious.", parse);
 			Text.NL();
-			var racescore = new RaceScore(player.body);
-			var humanScore = new RaceScore();
-			humanScore.score[Race.Human] = 1;
-			var humanity = racescore.Compare(humanScore);
+			var humanity = player.Humanity();
 			parse["morph"] = humanity < 0.95 ? " filthy morph!" : "";
 			Text.Add("<i>“Why... you...[morph]”</i> he sputters, his faces growing redder with rage. <i>“I will have you pay for this!”</i>", parse);
 			Text.NL();

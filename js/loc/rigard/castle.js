@@ -102,10 +102,7 @@ Scenes.Rigard.Noble.Parkland = function() {
 		Text.Add("At this time of night, the park is lit by a number of lampposts, light within carefully sculpted crystal casting a faint white illumination on the park grounds. The park’s mostly deserted, save for a young couple on another bench, and judging by the rather shameless noises they’re making, they’re having quite a bit of fun.", parse);
 		Text.NL();
 		
-		var racescore = new RaceScore(player.body);
-		var humanScore = new RaceScore();
-		humanScore.score[Race.human] = 1;
-		var humanity = racescore.Compare(humanScore);
+		var humanity = player.Humanity();
 		
 		parse["hum"] = humanity < 0.95 ? ", especially with your appearance being what it is" : "";
 		Text.Add("With that thought in mind, you stand up and move on before the royal guard shows up and makes a fuss. Wouldn’t want to get caught up in the crossfire[hum].", parse);
@@ -244,10 +241,7 @@ Scenes.Rigard.Noble.GuardPatrol = function() {
 	Text.Add("All this, of course, is enforced by the regular patrols of royal guards, all of them clad in gleaming armor as they make their rounds about the district. It’s clear that they’re there for show more than anything else - a lurking criminal would spot them from ridiculously far off - but maybe that’s the point, for the local residents to look out of their windows and be reassured that the guard is doing their job, after a fashion.", parse);
 	Text.NL();
 	
-	var racescore = new RaceScore(player.body);
-	var humanScore = new RaceScore();
-	humanScore.score[Race.human] = 1;
-	var humanity = racescore.Compare(humanScore);
+	var humanity = player.Humanity();
 	
 	if(humanity < 0.95)
 		Text.Add("While you do have a pass, you make sure to avoid the patrols. It’s not a hard task, and it’s more than worth the trouble not to have to answer inconvenient questions about who you might be, where you’re going and what your intentions are.", parse);
@@ -400,10 +394,8 @@ Scenes.Rigard.Noble.Elodie = function() {
 		tooltip : "Just slip away, the last thing you need is a ruckus on the palace grounds.",
 		func : function() {
 			Text.Clear();
-			var racescore = new RaceScore(player.body);
-			var humanScore = new RaceScore();
-			humanScore.score[Race.human] = 1;
-			var humanity = racescore.Compare(humanScore);
+			
+			var humanity = player.Humanity();
 			
 			Text.Add("Deciding that the last thing you need to do is kick up a fuss, ", parse);
 			if(humanity < 0.95)

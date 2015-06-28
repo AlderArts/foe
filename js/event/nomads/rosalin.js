@@ -2543,7 +2543,7 @@ Scenes.Rosalin.SexPrompt = function(state) {
 	var compScore = rosalin.origRaceScore.Compare(racescore);
 	
 	var humanScore = new RaceScore();
-	humanScore.score[Race.Human] = 1;
+	humanScore.score[Race.Human.id] = 1;
 	var rHumanity = racescore.Compare(humanScore);
 	
 	var cocksInVag = player.CocksThatFit(rosalin.FirstVag());
