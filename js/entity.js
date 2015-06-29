@@ -1957,6 +1957,12 @@ Entity.prototype.EarDesc = function() {
 Entity.prototype.HasFlexibleEars = function() {
 	return this.body.HasFlexibleEars();
 }
+Entity.prototype.HasMuzzle = function() {
+	return this.body.HasMuzzle();
+}
+Entity.prototype.HasLongSnout = function() {
+	return this.body.HasLongSnout();
+}
 Entity.prototype.Arms = function() {
 	return this.body.arms;
 }

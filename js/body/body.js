@@ -550,6 +550,20 @@ Body.prototype.HasFlexibleEars = function() {
 	);
 }
 
+Body.prototype.HasMuzzle = function() {
+	return this.head.race.isRace(
+		Race.Horse,
+		Race.Reptile,
+		Race.Cow,
+		Race.Goat,
+		Race.Sheep,
+		Race.Musteline,
+		Race.Canine,
+		Race.Feline,
+		Race.Rabbit
+	);
+}
+
 Body.prototype.HasLongSnout = function() {
 	return this.head.race.isRace(
 		Race.Horse,

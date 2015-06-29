@@ -2833,7 +2833,7 @@ Scenes.Terry.BrushTail = function() {
 						terry.relation.DecreaseStat(30, 3);
 						
 						Gui.NextPrompt();
-					});
+					}, true);
 				}, enabled : true,
 				tooltip : Text.Parse("Come on, [heshe]’s begging for it!", parse)
 			});
@@ -3135,7 +3135,7 @@ Scenes.Terry.CheckFluids = function() {
 				Text.Add("<i>“I knew you couldn’t resist my sexy charms, you big perv,”</i> Terry teases.", parse);
 				Text.Flush();
 				
-				Scenes.Terry.SexPromptChoice(backFunc);
+				Scenes.Terry.SexPromptChoice(backFunc, true);
 			}, enabled : true,
 			tooltip : Text.Parse("[HeShe] wants to play, and you’re in the mood as well; why not?", parse)
 		});
