@@ -5234,10 +5234,12 @@ Scenes.Terry.SexHaveADrink = function() {
 	
 	//[Breasts] [Pussy] [Cock]
 	var options = new Array();
-	options.push({ nameStr : "Breasts",
-		tooltip : Text.Parse("Those yummy [tbreasts] and their sweet milk are calling to you.", parse),
-		func : Scenes.Terry.SexHaveADrinkBreasts, enabled : true
-	});
+	if(terry.Lactation()) {
+		options.push({ nameStr : "Breasts",
+			tooltip : Text.Parse("Those yummy [tbreasts] and their sweet milk are calling to you.", parse),
+			func : Scenes.Terry.SexHaveADrinkBreasts, enabled : true
+		});
+	}
 	/* TODO
 	options.push({ nameStr : "name",
 		tooltip : Text.Parse("", parse),
@@ -5250,7 +5252,20 @@ Scenes.Terry.SexHaveADrink = function() {
 		}, enabled : true
 	});
 	 */
-	Gui.SetButtonsFromList(options, false, null);
+	//TODO back
+	Gui.SetButtonsFromList(options, true, function() {
+		var parse = {
+			
+		};
+		
+		Text.Clear();
+		Text.Add("PLACEHOLDER", parse);
+		Text.NL();
+		Text.Add("", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt();
+	});
 }
 
 Scenes.Terry.SexHaveADrinkBreasts = function() {
