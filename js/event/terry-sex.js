@@ -5494,7 +5494,6 @@ Scenes.Terry.SexHaveADrinkBreasts = function() {
 	});
 }
 
-//TODO
 Scenes.Terry.SexHaveADrinkBreastsMilk = function(parse) {
 	//#Milk quantity block
 	Text.Clear();
