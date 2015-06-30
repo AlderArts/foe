@@ -703,6 +703,18 @@ Body.prototype.HandDesc = function() {
 		Race.Canine)) return "paw";
 	else return "hand";
 }
+// TODO
+Body.prototype.PalmDesc = function() {
+	var arm = this.arms;
+	if(!arm) return "body";
+	
+	if(arm.race.isRace(
+		Race.Musteline,
+		Race.Rabbit,
+		Race.Feline,
+		Race.Canine)) return "paw pad";
+	else return "palm";
+}
 
 //TODO
 Body.prototype.LipsDesc = function() {

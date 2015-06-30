@@ -1140,6 +1140,7 @@ Entity.prototype.ParserTags = function(parse, prefix) {
 	parse[prefix + "ears"]      = function() { return ent.EarDesc(); }
 	parse[prefix + "eyes"]      = function() { return ent.EyeDesc()+'s'; }
 	parse[prefix + "hand"]      = function() { return ent.HandDesc(); }
+	parse[prefix + "palm"]      = function() { return ent.PalmDesc(); }
 	parse[prefix + "hips"]      = function() { return ent.HipsDesc(); }
 	parse[prefix + "thighs"]    = function() { return ent.ThighsDesc(); }
 	parse[prefix + "thigh"]     = function() { return ent.ThighDesc(); }
@@ -2074,6 +2075,9 @@ Entity.prototype.ArmDesc = function() {
 }
 Entity.prototype.HandDesc = function() {
 	return this.body.HandDesc();
+}
+Entity.prototype.PalmDesc = function() {
+	return this.body.PalmDesc();
 }
 Entity.prototype.LegDesc = function() {
 	return this.body.LegDesc();
