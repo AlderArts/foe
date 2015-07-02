@@ -452,7 +452,11 @@ AbilityNode.Run = function(ability, encounter, caster, target, result) {
 	
 	var targets = _.has(target, 'members') ? target.members : [target];
 	
-	var nrAttacks  = that.nrAttacks || 1;
+	var nrAttacks = that.nrAttacks;
+	if(_.isFunction(nrAttacks))
+		nrAttacks = nrAttacks(ability, encounter, caster, target, result);
+	else if(!_.isNumber(nrAttacks))
+		nrAttacks = 1;
 	
 	// For each target
 	_.each(targets, function(e) {
