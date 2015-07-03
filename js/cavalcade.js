@@ -209,11 +209,8 @@ Cavalcade.EvaluateWinnerSorter = function(playerA, playerB) {
 	if(playerA.res.stag != playerB.res.stag)
 		return playerA.res.stag ? 1 : -1;
 	
-	if(playerA.res.score == Cavalcade.Score.Mixed) {
-		playerA.res.draw = true;
-		playerB.res.draw = true;
+	if(playerA.res.score == Cavalcade.Score.Mixed)
 		return 0;
-	}
 	
 	// Else, pick the high val
 	if(playerA.res.high != playerB.res.high)
@@ -224,8 +221,6 @@ Cavalcade.EvaluateWinnerSorter = function(playerA, playerB) {
 		return playerA.res.low < playerB.res.low ? -1 : 1;
 	
 	// Dunno
-	playerA.res.draw = true;
-	playerB.res.draw = true;
 	return 0;
 }
 
@@ -397,9 +392,17 @@ Cavalcade.prototype.CoinGameRound = function() {
 		});
 
 		that.winners.sort(Cavalcade.EvaluateWinnerSorter);
-		var draw = false;
-		if(that.winners[0].res.draw) {
-			draw = true;
+		
+		var winner = that.winners[0];
+		var idx = 1;
+		// Check how many are in a draw position
+		for(; idx < that.winners.length; idx++) {
+			if(Cavalcade.EvaluateWinnerSorter(winner, that.winners[idx]) != 0) break;
+		}
+		// Remove none-draw
+		that.winners = that.winners.slice(0, idx);
+		// Multiple winners
+		if(that.winners.length > 1) {
 			Text.Add("There was a draw! The pot is split between the winners.");
 			that.pot = Math.floor(that.pot/that.winners.length);
 			_.each(that.winners, function(w) {
@@ -411,11 +414,12 @@ Cavalcade.prototype.CoinGameRound = function() {
 				}
 			});
 		}
+		// Single winner
 		else {
 			that.winner = that.winners[0];
-			Text.Add("[name] won the round!", {name: that.winners[0].NameDesc()});
-			that.winners[0].purse.coin += that.pot;
-			if(party.InParty(that.winners[0])) {
+			Text.Add("[name] won the round!", {name: that.winner.NameDesc()});
+			that.winner.purse.coin += that.pot;
+			if(party.InParty(that.winner)) {
 				Text.NL();
 				parse["pot"] = that.pot;
 				Text.Add("The party gains [pot] [token]s!", parse);

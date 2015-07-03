@@ -13,6 +13,7 @@ Version 0.4f
 * Royal Grounds (Castle) random exploration events added (The Observer)
 * Fixed a bug that would break the racial calculations (introduced by the Race overhaul)
 * New Terry sex scene: Have a drink, written by QB and LD
+* Fixed a cavalcade bug (draw would calculate wrong)
 
 --------------------------------------------
              PREVIOUS VERSIONS
