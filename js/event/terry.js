@@ -79,6 +79,7 @@ function Terry(storage) {
 	this.flags["rotPast"] = 0;
 	this.flags["vFirst"] = 0;
 	this.flags["caFirst"] = 0; //Catch anal (terry pitching)
+	this.flags["vengeance"] = Terry.Vengeance.NotTriggered;
 	//TF state
 	this.flags["breasts"] = Terry.Breasts.Flat;
 	this.flags["lact"] = 0;
@@ -119,6 +120,11 @@ Terry.Saved = {
 	TalkedTwins1  : 2,
 	TalkedTwins2  : 3,
 	Saved         : 4
+};
+Terry.Vengeance = {
+	NotTriggered : 0,
+	Triggered    : 1,
+	Pursued      : 2
 };
 Terry.Rogue = {
 	Locked : 0,

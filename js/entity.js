@@ -1148,6 +1148,7 @@ Entity.prototype.ParserTags = function(parse, prefix) {
 	parse[prefix + "leg"]       = function() { return ent.LegDesc(); }
 	parse[prefix + "foot"]      = function() { return ent.FootDesc(); }
 	parse[prefix + "feet"]      = function() { return ent.FeetDesc(); }
+	parse[prefix + "belly"]     = function() { return ent.StomachDesc(); }
 	
 	parse[prefix + "weapon"]    = function() { return ent.WeaponDesc(); }
 	parse[prefix + "armor"]     = function() { return ent.ArmorDesc(); }
