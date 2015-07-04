@@ -5694,7 +5694,7 @@ Scenes.Terry.SexHaveADrinkCock = function() {
 			
 			Gui.NextPrompt();
 		}
-		else if(terry.Horsecock()) {
+		else if(terry.HorseCock()) {
 			if(terry.Relation() < 30) {
 				Text.Add("Terry begins by straddling you, then pushing [hisher] stallionhood down to make it level with your [face].", parse);
 				Text.NL();
@@ -6158,7 +6158,7 @@ Scenes.Terry.SexHaveADrinkCock = function() {
 			Text.NL();
 			Text.Add("You can feel the effects within your mouth. The flow of precum washing down your gullet increases steadily, [hisher] knot bulging ever larger. When you press something particularly soft, Terry practically jumps.", parse);
 			Text.NL();
-			Text.Add("The [foxvixen[ tries to say something, but all that [heshe] manages is an inarticulate moan. The way [hisher] knot spreads to its full growth, pushing your mouth open, says it for [himher].", parse);
+			Text.Add("The [foxvixen] tries to say something, but all that [heshe] manages is an inarticulate moan. The way [hisher] knot spreads to its full growth, pushing your mouth open, says it for [himher].", parse);
 			Text.NL();
 			Text.Add("You can’t really suck [himher] like this. But that’s alright; you’re more creative than that...", parse);
 			Text.NL();
