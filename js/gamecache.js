@@ -73,6 +73,7 @@ InitCache = function() {
 	lucille     = new Lucille(gameCache.lucille);
 	bastet      = new Bastet(gameCache.bastet);
 	gryphons    = new Gryphons(gameCache.gryphons);
+	fireblossom = new Fireblossom(gameCache.fb);
 	
 	// Don't load for now
 	aria        = new Aria();
@@ -140,6 +141,7 @@ InitCache = function() {
 	world.EntityStorage.push(lucille);
 	world.EntityStorage.push(bastet);
 	world.EntityStorage.push(gryphons);
+	world.EntityStorage.push(Fireblossom);
 	
 	// PARTY
 	party = new Party();
@@ -175,6 +177,7 @@ CacheToGame = function() {
 	                      parseInt(gameCache.time.hour),
 	                      parseInt(gameCache.time.minute));
 	
+	// Adjust for old save formats
 	if(gameCache.version < 4) {
 		kiakai.body.SetRace(Race.Elf);
 	}
@@ -446,6 +449,7 @@ GameToCache = function() {
 	gameCache.lucille  = lucille.ToStorage();
 	gameCache.bastet   = bastet.ToStorage();
 	gameCache.gryphons = gryphons.ToStorage();
+	gameCache.fb       = fireblossom.ToStorage();
 	/*
 	gameCache.aria        = aria.ToStorage();
 	gameCache.sylistraxia = sylistraxia.ToStorage();

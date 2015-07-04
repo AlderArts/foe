@@ -29,9 +29,10 @@ Lucille.Buy = {
 };
 
 //TODO
-Lucille.Themeroom = {
+Lucille.Themeroom = { //Bitmask
 	CatDynasty : 1,
-	Gryphons : 2
+	Gryphons : 2,
+	Fireblossom : 4
 };
 
 Lucille.prototype.ThemeroomOpen = function() {
@@ -108,7 +109,12 @@ Scenes.Lucille.Themerooms = function() {
 	Text.NL();
 	Text.Add("The poster depicts two gryphon-morphs: a muscle-bound, scarred male with a tribal, bestial air about him, and his very pregnant mate in his arms. Both are scantily clad, wearing little more than loincloths and leathers, and set against a backdrop of a lush, tropical valley. The poster notes that each use is [coin] coins.", {coin: gryphons.Cost()});
 	
-	/*
+	Text.NL();
+	
+	Text.Add("<i><b>Under the Dragon’s Claw:</b> Live the life of Fireblossom, a princess brought low by her draconic conquerors. Experience the might of a dragon, first-hand!</i>", parse);
+	Text.NL();
+	Text.Add("There is a pale and incredibly beautiful young woman with long blonde hair on the poster. She’s completely nude, her naughty bits covered up by an immense serpentine tail that envelops her body possessively. The poster notes that each use is [coin] coins.", {coin: fireblossom.Cost()});
+	/* TODO
 	Text.NL();
 	Text.Add("", parse);
 	*/
@@ -170,6 +176,12 @@ Scenes.Lucille.Themerooms = function() {
 		tooltip : "Choose Birth of a Kingdom and step back to the beginning of time, seeing history through the eyes of two gryphon-morphs.",
 		func : function() {
 			selection(Scenes.Brothel.Gryphons.IntroEntryPoint);
+		}, enabled : true
+	});
+	options.push({ nameStr : "Fireblossom",
+		tooltip : "Choose Under the Dragon’s Claw, and embody Fireblossom, the princess turned slave.",
+		func : function() {
+			selection(Scenes.Brothel.Fireblossom.IntroEntryPoint);
 		}, enabled : true
 	});
 	/* TODO */
