@@ -244,7 +244,9 @@ Scenes.Terry.SexPromptChoice = function(backPrompt, haveadrink) {
 	});
 	if(haveadrink) {
 		options.push({ nameStr : "Have a drink",
-			func : Scenes.Terry.SexHaveADrink, enabled : true,
+			func : function() {
+				Scenes.Terry.SexHaveADrink(backPrompt);
+			}, enabled : true,
 			tooltip : Text.Parse("You have such a tasty little [foxvixen] here. Why not whet your appetite a little with a taste-test?", parse)
 		});
 	}
@@ -5186,7 +5188,7 @@ Scenes.Terry.SexCatchAnal = function() {
 	});
 }
 
-Scenes.Terry.SexHaveADrink = function() {
+Scenes.Terry.SexHaveADrink = function(back) {
 	var parse = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
 		tbreasts : terry.FirstBreastRow().Short()
@@ -5254,17 +5256,27 @@ Scenes.Terry.SexHaveADrink = function() {
 	 */
 	//TODO back
 	Gui.SetButtonsFromList(options, true, function() {
-		var parse = {
-			
-		};
-		
 		Text.Clear();
-		Text.Add("PLACEHOLDER", parse);
+		Text.Add("You tell Terry that you’ve changed your mind; you want to do something else.", parse);
 		Text.NL();
-		Text.Add("", parse);
+		if(terry.Relation() < 30) {
+			Text.Add("<i>”Oh… okay then.”</i>", parse);
+			Text.NL();
+			Text.Add("Idly eying the attractive [foxvixen], you contemplate just how you want to play with [himher].", parse);
+		}
+		else if(terry.Relation() < 60) {
+			Text.Add("<i>”Aww, you’re going to pussy out on me?”</i> Terry asks teasingly.", parse);
+			Text.NL();
+			Text.Add("No, of course not. You’re just not thirsty - you still want to show [himher] a good time. Just need to decide what you want to do, first.", parse);
+		}
+		else {
+			Text.Add("<i>”And why is that? Too much for you to handle?”</i> Terry teases, posing for your benefit.", parse);
+			Text.NL();
+			Text.Add("Oh, if you were thirsty, you promise you’d be all over [himher]! But, alas, right now you’re just not in that sort of mood. You’re just going to have to rock [hisher] world a different way.", parse);
+		}
 		Text.Flush();
 		
-		Gui.NextPrompt();
+		Scenes.Terry.SexPromptChoice(back, true);
 	});
 }
 
