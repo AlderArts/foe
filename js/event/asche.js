@@ -637,7 +637,7 @@ Scenes.Asche.FortuneTellingPrompt = function() {
 				Text.Add("<i>“Not here. Not on Eden. This desert being different… a red hot forge inhabited by gargantuan metallic beasts… is very odd. Asche has never heard of this place.”</i>", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.Add("<i>“Asche is seeing customer walking amidst ruins belonging to a lost people of the sky. [Heshe] is being flying through clouds, walking on air, carried by wings of wind.”</i> The jackaless concentrates furiously. <i>“There is being a spirit, whispering, pleading. Customer is being piecing together memories belonging to ancient people of sky plane. [Heshe] is being requiring one of their number as companion to do so…”</i>", parse);
+				Text.Add("<i>“Asche is seeing customer walking amidst ruins belonging to a lost people of the sky. [HeShe] is being flying through clouds, walking on air, carried by wings of wind.”</i> The jackaless concentrates furiously. <i>“There is being a spirit, whispering, pleading. Customer is being piecing together memories belonging to ancient people of sky plane. [HeShe] is being requiring one of their number as companion to do so…”</i>", parse);
 			}, 1.0, function() { return true; });
 			/* TODO Jin
 			scenes.AddEnc(function() {
