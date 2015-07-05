@@ -832,7 +832,7 @@ Scenes.Room69.ApologizeTo69ForBeingMean = function() {
 			Text.NL();
 			
 			var racescore = new RaceScore(player.body);
-			var majorRace = racescore.Sorted()[0];
+			var majorRace = RaceDesc.IdToRace[racescore.Sorted()[0]];
 			var undef = false;
 			if(majorRace.isRace(Race.Human)) parse["race"] = " monkeys";
 			else if(majorRace.isRace(Race.Horse)) parse["race"] = " horsies";
