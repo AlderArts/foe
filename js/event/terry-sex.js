@@ -6486,11 +6486,11 @@ Scenes.Terry.SexHaveADrinkBreasts = function() {
 			Text.Add("<i>“Cheeky bastard,”</i> [heshe] replies, showing you [hisher] tongue.", parse);
 		}
 		Text.NL();
-		Text.Add("Shifting slightly atop of Terry, you reach out with both [hand]s, fingers extended. Tenderly, you touch Terry’s areolae and start to trace soft, sensuous circles around the peak of each bulbous breast. You playfully twitch each nipple as you pass, and keeping your strokes smooth and steady to better lull your vulpine partner.", parse);
+		Text.Add("Shifting slightly atop of Terry, you reach out with both [hand]s, fingers extended. Tenderly, you touch Terry’s areolae and start to trace soft, sensuous circles around the peak of each bulbous breast. You playfully twitch each nipple as you pass, keeping your strokes smooth and steady to better lull your vulpine partner.", parse);
 		Text.NL();
-		Text.Add("A croon of pleasure rewards your efforts, bringing a smile to your face. Carefully you glide your fingers down across the broad expanses of titty-flesh, using your thumbs to continue flicking and rubbing Terry’s nipples as you do. Carefully, you start to squeeze and knead what boob-flesh you can reach, creating gentle palpitations that have Terry lolling [hisher] head back with a rumble of pleasure.", parse);
+		Text.Add("A croon of pleasure rewards your efforts, bringing a smile to your face. You carefully glide your fingers down across the broad expanses of titty-flesh, using your thumbs to continue flicking and rubbing Terry’s nipples as you do. You start to squeeze and knead what boob-flesh you can reach, creating gentle palpitations that have Terry lolling [hisher] head back with a rumble of pleasure.", parse);
 		Text.NL();
-		Text.Add("Judging that Terry is ready, you finally slide your hands off to the sides, cupping [hisher] luscious bosom. Without further ado, you lower you mouth to start nursing.", parse);
+		Text.Add("Judging that Terry is ready, you finally slide your hands off to the sides, cupping [hisher] luscious bosom. Without further ado, you lower your mouth to start nursing.", parse);
 	}
 	Text.Flush();
 	
@@ -6509,11 +6509,11 @@ Scenes.Terry.SexHaveADrinkBreastsMilk = function(parse) {
 	terry.MilkDrain(3);
 	
 	if(milk >= Terry.MilkLevel.VeryHigh) {
-		Text.Add("It seems like the moment your lips wrap around Terry’s nipple it squirts milk down your throat. Obviously, the [foxvixen]’s big fat titties are just crammed full of milk, waiting to come out. Poor thing must be so distracted with them so full - you’re doing [himher] a favor by helping [himher] get rid of some.", parse);
+		Text.Add("It seems like the moment your lips wrap around Terry’s nipple, it squirts milk down your throat. Obviously, the [foxvixen]’s big fat titties are just crammed full of milk, waiting to come out. Poor thing must be so distracted with them so full - you’re doing [himher] a favor by helping [himher] get rid of some.", parse);
 		Text.NL();
-		Text.Add("Feeling both thirsty and compassionate, you happily start guzzling down every drop Terry has to give you. At least, until you realise that if [heshe]’s putting out this much milk, you may not be able to handle that much... Best to just take the edge off for [himher], then. You can always come back and drink some more after you’ve digested this liquid meal, after all.", parse);
+		Text.Add("Feeling both thirsty and compassionate, you happily start guzzling down every drop Terry has to give you, at least until you realize that if [heshe]’s putting out this much milk, you may not be able to handle that much... Best to just take the edge off for [himher], then. You can always come back and drink some more after you’ve digested this liquid meal, after all.", parse);
 		Text.NL();
-		Text.Add("As best you can measure, you pop free after draining the worst of the milk from Terry’s breast. It’s so bloated it continues seeping milk, running down onto [hisher] belly, for several seconds after you stop suckling. Ignoring that, you latch your lips onto [hisher] other nipple and resume your nursing.", parse);
+		Text.Add("As best you can measure, you pop free after draining the worst of the milk from Terry’s breast. It’s so bloated that it continues seeping milk, running down onto [hisher] belly for several seconds after you stop suckling. Ignoring that, you latch your lips onto [hisher] other nipple and resume your nursing.", parse);
 		Text.NL();
 		Text.Add("You drink as much as you feel you can hold comfortably, belly softly gurgling as you release [himher]. You wipe your mouth with the back of your arm and sigh softly. That feels so good - and you bet it feels a lot better for your pet, too.", parse);
 		Text.NL();
@@ -6528,9 +6528,9 @@ Scenes.Terry.SexHaveADrinkBreastsMilk = function(parse) {
 			Text.Add("You were happy to help. Sounds like a brave little [foxvixen] deserves some special care...", parse);
 		}
 		else {
-			Text.Add("<i>“Yeah, it feels pretty good now. Y’know you can always count on me to keep you fed, even if our roles should be reversed my dear, [mastermistress],”</i> Terry teases, showing [hisher] tongue.", parse);
+			Text.Add("<i>“Yeah, it feels pretty good now. Y’know you can always count on me to keep you fed, even if our roles should be reversed, my dear [mastermistress],”</i> Terry teases, showing [hisher] tongue.", parse);
 			Text.NL();
-			Text.Add("With a laugh, you admit that you don’t doubt that. But, right now, you’re the [mastermistress], and you’re not quite done playing with [himher] just yet...", parse);
+			Text.Add("With a laugh, you admit that you don’t doubt that, but right now, you’re the [mastermistress], and you’re not quite done playing with [himher] just yet...", parse);
 		}
 	}
 	else if(milk >= Terry.MilkLevel.High) {
@@ -6538,23 +6538,23 @@ Scenes.Terry.SexHaveADrinkBreastsMilk = function(parse) {
 		Text.NL();
 		Text.Add("When you tire of nursing from one teat, you switch your attention to the other, being greeted with the same enthusiasm as the first. Delicious [foxvixen] milk; Terry’s tits seem to be just about overflowing with it, and you could drink [himher] completely dry...", parse);
 		Text.NL();
-		Text.Add("But that’s just being greedy. Not to mention a good way to give yourself a tummyache. You drink heartily, all the same, but when your stomach starts to gurgle in soft protest, you force yourself to stop.", parse);
+		Text.Add("That’s just being greedy - not to mention a good way to give yourself a tummy ache. You drink heartily all the same, but when your stomach starts to gurgle in soft protest, you force yourself to stop.", parse);
 		Text.NL();
 		Text.Add("Beads of white continue to glisten upon the caps of Terry’s nipples, and you allow yourself the luxury of deftly licking them clean, an act that makes Terry wriggle beneath you in quite an amusing fashion.", parse);
 		Text.NL();
 		Text.Add("Feeling very good, and very pleased with yourself, you consider how to properly thank your pet for providing such a delicious treat. Ah, that sounds promising...", parse);
 	}
 	else if(milk >= Terry.MilkLevel.Mid) {
-		Text.Add("After a few seconds of nursing, your reward is a smooth, steady flow of rich creamy [foxivixen] milk. Happily you guzzle it down, gulping each heady mouthful before sucking forth a fresh one. Eventually, the flow becomes a thin trickle, and you turn to Terry’s other breast to fully sate your thirst.", parse);
+		Text.Add("After a few seconds of nursing, your reward is a smooth, steady flow of rich creamy [foxivixen] milk. Happily, you guzzle it down, gulping each heady mouthful before sucking forth a fresh one. Eventually, the flow becomes a thin trickle, and you turn to Terry’s other breast to fully sate your thirst.", parse);
 		Text.NL();
 		Text.Add("After several long, dreamy minutes, your belly grumbles its satiation and you allow Terry’s nipple to fall from your mouth. Sighing in contentment, basking in the feeling of warm fullness that ripples out from your stomach, you cuddle [himher] closer.", parse);
 		Text.NL();
 		Text.Add("It feels so nice to be here, twined about your vulpine pet. Through your milk-induced haze, it dawns on you that perhaps a little thank-you is in order...", parse);
 	}
 	else if(milk >= Terry.MilkLevel.Low) {
-		Text.Add("With slow, patient suckling, a trickle of warm [foxvixen] milk starts to creep over your tongue. Rich and creamy, with a heady bouquet, it glides sluggishly down your gullet and entices you to drink more. When the flow creeps to stop, you switch over to the other breast, intent on getting a proper drink.", parse);
+		Text.Add("With slow, patient suckling, a trickle of warm [foxvixen] milk starts to creep over your tongue. Rich and creamy, with a heady bouquet, it glides sluggishly down your gullet and entices you to drink more. When the flow creeps to a stop, you switch over to the other breast, intent on getting a proper drink.", parse);
 		Text.NL();
-		Text.Add("As Terry sighs and coos above, you lazily drink your fill. A nice glow emanating from your belly as the last trickle of milk slides down your throat. You suck a little harder, but only meagre dribbles escape; it looks like you’ve sucked [himher] dry.", parse);
+		Text.Add("As Terry sighs and coos above, you lazily drink your fill. A nice glow emanates from your belly as the last trickle of milk slides down your throat. You suck a little harder, but only meagar dribbles escape; it looks like you’ve sucked [himher] dry.", parse);
 		Text.NL();
 		Text.Add("Allowing the slickened teat to pop wetly from between your lips, you sigh hugely and thank Terry for [hisher] generosity.", parse);
 		Text.NL();
@@ -6566,12 +6566,13 @@ Scenes.Terry.SexHaveADrinkBreastsMilk = function(parse) {
 		Text.Add("Such a nice [boygirl]. And nice [boygirl]s deserve a special thank you... hmm, you know just how to do it...", parse);
 	}
 	else {
-		Text.Add("No matter how you work Terry’s nipple in your mouth, or what tricks you play with your tongue, nothing comes out. You suckle and swallow and massage [hisher] tit until [heshe] mewls above you, but you can’t get so much as a drop.", parse);
+		parse["sex"] = player.sexlevel > 2 ? " or what tricks you play with your tongue," : "";
+		Text.Add("No matter how you work Terry’s nipple in your mouth,[sex] nothing comes out. You suckle and swallow and massage [hisher] tit until [heshe] mewls above you, but you can’t get so much as a drop.", parse);
 		Text.NL();
-		Text.Add("There’s no denying it, in the end. Terry is completely empty - [heshe] doesn’t have any milk to give. Maybe you should have given [himher] some more time to fill up again.", parse);
+		Text.Add("There’s no denying it: Terry is completely empty - [heshe] doesn’t have any milk to give. Maybe you should have given [himher] some more time to fill up again.", parse);
 		Text.NL();
 		parse["smallFull"] = terry.Cup() < Terry.Breasts.Ccup ? "small" : "full";
-		Text.Add("With that realisation, you open your lips and let Terry’s nipple fall from them, and then rest your head against [hisher] [smallFull] bosom. This is kind of a let down... still, you have a cute little [foxvixen] under you to play with. Surely there’s some way to salvage this?", parse);
+		Text.Add("With that realization, you open your lips and let Terry’s nipple fall from them, and then rest your head against [hisher] [smallFull] bosom. This is kind of a let down... still, you have a cute little [foxvixen] under you to play with. Surely there’s some way to salvage this?", parse);
 		Text.NL();
 		Text.Add("As you reflect on that, a mischievous grin starts to grow on your face. You have some ideas already...", parse);
 	}
@@ -6580,15 +6581,15 @@ Scenes.Terry.SexHaveADrinkBreastsMilk = function(parse) {
 }
 
 Scenes.Terry.SexHaveADrinkBreastsRomance = function(parse) {
-	Text.Add("Leisurely, you wrap your arms around Terry and snuggle in close. Demurely dipping your head down to play a tender kiss on the [foxvixen]’s collarbone, and grinning to yourself as [heshe] shivers in anticipation.", parse);
+	Text.Add("Leisurely, you wrap your arms around Terry and snuggle close, demurely dipping your head down to play a tender kiss on the [foxvixen]’s collarbone, and grinning to yourself as [heshe] shivers in anticipation.", parse);
 	Text.NL();
 	Text.Add("With the same languid ease, you let your [tongue] loll freely from between your lips and start to glide it up Terry’s chest, stopping only when the silky fur gives way to cool leather.", parse);
 	Text.NL();
 	Text.Add("You wriggle forward, nuzzling your head into the crook of Terry’s neck safely above [hisher] ever-present collar. Mercilessly, you kiss [himher], long and deep, feeling the moan that [heshe] voices more than hearing it as you lewdly suckle at [hisher] throat.", parse);
 	Text.NL();
-	Text.Add("Only when you have had your fill do you let [himher] go, lips smacking as you do and certainly leaving quite an impressive hickey under [hisher] fur.", parse);
+	Text.Add("When you have had your fill, you let [himher] go, your lips smacking in satisfaction. Due to your intensity, you leave [himher] with quite an impressive hickey too.", parse);
 	Text.NL();
-	Text.Add("Now at last do you move again, bringing your gaze squarely to meet Terry’s own. Beautiful blue eyes fill your vision, and you lose yourself to them, content with just staring into their shimmering depths.", parse);
+	Text.Add("You begin to move again, bringing your gaze squarely to meet Terry’s own. Beautiful blue eyes fill your vision, and you lose yourself to them, content with just staring into their shimmering depths.", parse);
 	Text.NL();
 	if(terry.Relation() < 30)
 		Text.Add("Terry’s gaze darts away for a moment, but they quickly turn to look back into your own. You can tell [heshe]’s a little confused, but despite that you don’t feel like [heshe]’s rejecting you either.", parse);
