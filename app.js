@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 4;
-VERSION_SUBSCRIPT = "e";
-VERSION_NAME = "Jackals and Gryphons";
+VERSION_SUBSCRIPT = "f";
+VERSION_NAME = "Under the Dragon's Claw";
 
 SAVE_VERSION = 26;
 // Save version 1: Initial
