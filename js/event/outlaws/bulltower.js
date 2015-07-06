@@ -6,15 +6,15 @@
  */
 
 function BullTowerStats() {
-	this.suspicion = new Stat(0);
+	this.suspicion       = new Stat(0);
 	this.suspicion.debug = function() { return "Suspicion"; };
 	
-	this.stoleLantern = false;
-	this.guardsDown = false;
-	this.towerGuardDown = false;
-	this.inspectedSafe = false;
-	this.unlockedSafe = false;
-	this.foughtCorishev = false;
+	this.stoleLantern    = false;
+	this.guardsDown      = false;
+	this.towerGuardDown  = false;
+	this.inspectedSafe   = false;
+	this.unlockedSafe    = false;
+	this.foughtCorishev  = false;
 };
 BullTowerStats.prototype.StoleSomething = function() {
 	if(outlaws.flags["BT"] & Outlaws.BullTower.CaravansSearched) return true;
@@ -38,6 +38,7 @@ BullTowerStats.prototype.IncSuspicion = function(max, inc) {
 	
 	if(newSuspicion >= 100 && oldSuspicion < 100) {
 		Gui.Callstack.push(function() {
+			if(outlaws.flags["BullTower"] >= Outlaws.BullTowerQuest.Completed) return;
 			Text.Clear();
 			Text.Add("Sneaking through the fortress grounds, you suddenly hear a shout echoing across the old courtyard. Hoping that it’s just a fluke, you emerge to investigate, but the shout is quickly followed by the old bell in the tower being sounded, the steady bong-bong-bong of the striker hitting metal breaking the silence of night like a hammer against a window pane. Someone’s finally noticed what you’ve been up to, and the guards’ attention is turning inwards as they realize that the fortress has been infiltrated all this while.", parse);
 			Text.NL();
@@ -50,6 +51,7 @@ BullTowerStats.prototype.IncSuspicion = function(max, inc) {
 	}
 	else if(newSuspicion >= 75 && oldSuspicion < 75) {
 		Gui.Callstack.push(function() {
+			if(outlaws.flags["BullTower"] >= Outlaws.BullTowerQuest.Completed) return;
 			Text.Clear();
 			Text.Add("As you prowl through the shadows of the old fortress, you hear muttering and the distant trampling of boots from the King’s Road outside; it seems that the diversion has nearly run its course, and the game’ll be up once it has. You don’t have that much time left; if you have anything left to do, you’d best be about it - and quickly, too.", parse);
 			Text.NL();
@@ -58,6 +60,7 @@ BullTowerStats.prototype.IncSuspicion = function(max, inc) {
 	}
 	else if(newSuspicion >= 50 && oldSuspicion < 50) {
 		Gui.Callstack.push(function() {
+			if(outlaws.flags["BullTower"] >= Outlaws.BullTowerQuest.Completed) return;
 			Text.Clear();
 			Text.Add("Even as you silently make your way through the old fortress, you sense that the entire compound is growing more and more restless, a collective consciousness, perhaps, becoming aware of your intrusion despite the diversion Zenith created for you. You should not linger any longer than is absolutely necessary to get the job done.", parse);
 			Text.NL();
@@ -66,6 +69,7 @@ BullTowerStats.prototype.IncSuspicion = function(max, inc) {
 	}
 	else if(newSuspicion >= 25 && oldSuspicion < 25) {
 		Gui.Callstack.push(function() {
+			if(outlaws.flags["BullTower"] >= Outlaws.BullTowerQuest.Completed) return;
 			Text.Clear();
 			Text.Add("Moving through the grounds of the old fortress as silently as you can, you catch pieces and snatches of conversation from the front gate guard that Cveta “persuaded” to let the two of you through, carried to you by the wind. You’ve managed to remain undetected so far, but the longer you spend in here, the thinner your luck is going to stretch.", parse);
 			Text.NL();
