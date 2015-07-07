@@ -6671,7 +6671,7 @@ Scenes.Terry.SexHaveADrinkBreastsArousal = function(parse) {
 	}
 	if(terry.FirstVag()) {
 		options.push({ nameStr : "Pussy",
-			tooltip : "A tender pussy rubbing should be just the thing to thank your [handsomebeautiful] [foxvixen].",
+			tooltip : Text.Parse("A tender pussy rubbing should be just the thing to thank your [handsomebeautiful] [foxvixen].", parse),
 			func : function() {
 				Scenes.Terry.SexHaveADrinkBreastsArousalPussy(parse);
 			}, enabled : true
