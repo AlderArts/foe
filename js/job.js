@@ -204,6 +204,10 @@ Jobs["Courtesan"].Long = function(entity) {
 	var parse = {hisher: entity.hisher(), heshe: entity.heshe(), name: entity.nameDesc(), Poss: entity.Possessive()};
 	return Text.Parse("As a playful courtesan, there is a lustful spark stirring within [name], something [heshe] has no qualms about flaunting in combat for [hisher] benefit. [Poss] teasing nature is something that one day might turn into something darker, more primal, should [heshe] give in to [hisher] lust.", parse);
 }
+Jobs["Courtesan"].Unlocked = function(entity) {
+	if(entity == layla) return !layla.Virgin();
+	return true;
+}
 Jobs["Courtesan"].abilities.AddAbility(Abilities.Seduction.Fantasize);
 Jobs["Courtesan"].abilities.AddAbility(Abilities.Seduction.Charm);
 Jobs["Courtesan"].abilities.AddAbility(Abilities.Seduction.Distract);
