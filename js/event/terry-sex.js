@@ -4989,7 +4989,7 @@ Scenes.Terry.SexCatchAnal = function() {
 			Text.NL();
 			Text.Add("You buck and thrash as best you can with the anchor tying you to your vulpine lover. As pleasure washes over your senses, clouding your mind and blurring your vision, you blurt out praise to Terry about how good [heshe] is with [hisher] hands.", parse);
 			Text.NL();
-			Text.Add("If Terry says anything, it’s drowned out by your own cry of ecstasy as he provides the last bits of stimulation you need. In your mind, the metaphorical dam breaks, drowning you in a sea of pleasure. Your nerves spark and your blood sings as you arch your back, shuddering violently in climax.", parse);
+			Text.Add("If Terry says anything, it’s drowned out by your own cry of ecstasy as [heshe] provides the last bits of stimulation you need. In your mind, the metaphorical dam breaks, drowning you in a sea of pleasure. Your nerves spark and your blood sings as you arch your back, shuddering violently in climax.", parse);
 			Text.NL();
 			
 			var cum = player.OrgasmCum();
