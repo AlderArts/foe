@@ -122,6 +122,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/brothel/roa.js \
 	js/event/brothel/ches.js \
 	js/event/brothel/lucille.js \
+	js/event/brothel/belinda.js \
 	js/event/brothel/bastet.js \
 	js/event/brothel/gryphons.js \
 	js/event/brothel/fireblossom.js \

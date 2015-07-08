@@ -71,6 +71,7 @@ InitCache = function() {
 	uru         = new Uru(gameCache.uru);
 	
 	lucille     = new Lucille(gameCache.lucille);
+	belinda     = new Belinda(gameCache.belinda);
 	bastet      = new Bastet(gameCache.bastet);
 	gryphons    = new Gryphons(gameCache.gryphons);
 	fireblossom = new Fireblossom(gameCache.fb);
@@ -139,6 +140,7 @@ InitCache = function() {
 	
 	world.EntityStorage.push(ches);
 	world.EntityStorage.push(lucille);
+	world.EntityStorage.push(belinda);
 	world.EntityStorage.push(bastet);
 	world.EntityStorage.push(gryphons);
 	world.EntityStorage.push(Fireblossom);
@@ -451,6 +453,7 @@ GameToCache = function() {
 	gameCache.uru      = uru.ToStorage();
 	
 	gameCache.lucille  = lucille.ToStorage();
+	gameCache.belinda  = belinda.ToStorage();
 	gameCache.bastet   = bastet.ToStorage();
 	gameCache.gryphons = gryphons.ToStorage();
 	gameCache.fb       = fireblossom.ToStorage();

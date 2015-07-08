@@ -73,7 +73,10 @@ Outlaws.prototype.BullTowerCanGetReward = function() {
 Outlaws.prototype.Rep = function() {
 	return this.relation.Get();
 }
-
+//TODO
+Outlaws.prototype.MetPenPam = function() {
+	return false;
+}
 
 
 
@@ -373,4 +376,229 @@ Scenes.Outlaws.PathIntoRigardInitiation = function() {
 		
 		Gui.NextPrompt();
 	});
+}
+
+// TODO LINK
+//When this phase of the quest is active, add an appropriate button to the gates’ exterior. Grey this out if the time isn’t noon. Maybe “Deliver Letter” or just “Letter”.
+Scenes.Outlaws.PathIntoRigardBelinda = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	parse["season"] = world.time.Season == Season.Winter ? "hot drinks to warm oneself up on a cold day" : "cool drinks to help one beat the noon heat";
+	Text.Add("Realizing it’s nearing noon and remembering the task Zenith sent you off on, you seek out the inn that Zenith mentioned. Close enough to the city but far enough from the gates that it’s not worth the watchmen’s time to go harass them, the road is lined with those seeking the crowds that the city draws, but are unable or unwilling to enter the city to get at the marketplaces proper. Makeshift stands have been set up by the wayside, peddling everything from homemade blankets and fresh fruit to [season], hoping to catch an impulse purchase from those coming to and from Rigard.", parse);
+	Text.NL();
+	Text.Add("What you’re more interested in, though, is this Spitting Lion Inn that Zenith mentioned. The buildings in sight of the road are well-spaced, mostly catering to travelers - these aren’t the slums, after all - and you scan the wayhouses and watering holes as you pass them by, hoping to find your point of contact with a minimum of fuss. Alas, that’s not to be - you’re practically in the shadow of the walls and up against them by the time it draws into view.", parse);
+	Text.NL();
+	Text.Add("The inn’s a little out of the way along the walls and out of sight from the gates - some minutes’ walk along a dirt path from the entrance and around a bend in the wall - which explains why you didn’t notice it before on your earlier approaches to Rigard. A three-story affair of stone and brick, it’s nestled comfortably in Rigard’s shadow like a mushroom on the roots of a tree. As you approach, the first thing that calls your attention to the inn is the miniature lion’s-head fountain by the entrance, no doubt the establishment’s namesake. Water gushes from the figurehead’s bronze maw and into a basin in which patrons wash their hands before entering the building.", parse);
+	Text.NL();
+	Text.Add("Zenith wasn’t wrong, either: business is booming. Courtyard and common room alike are practically packed with people from all walks of life, bustling and jostling against each other; a few caravans stand stabled against the walls while those in the train seek a hot meal, either to celebrate the end of a successful trip or to steel oneself for the road that lies ahead. The tables of the common room may be somewhat clean and the straw and sawdust replaced with reasonable regularity, but it’s nowhere near high-class and frankly, it shouldn’t be.", parse);
+	Text.NL();
+	Text.Add("Ignoring the scent of greasy, heart-stopping food and freshly brewed drink being served, you make your way to the rear where the booths are, standing on a raised platform and offering whatever little privacy they have to afford in a place like this. Only one of them is occupied at the moment, and after a cursory pat to make sure the letter’s still on your person, you slip in and settle yourself down on the cushioned seats to wait for your contact, tying the neckerchief about your collar.", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		Text.Clear();
+		if(belinda.Met()) {
+			Text.Add("<i>“Oh-ho, look at who it is. This is quite the surprise.”</i>", parse);
+			Text.NL();
+			Text.Add("The voice is unmistakably Belinda’s, but the face isn’t - or at least, not the Belinda you know from The Shadow Lady. Perhaps it’s the shadows and dim lighting in the booth, the peasant’s shift that she’s wearing, or the way that she’s done up her lovely long curls in a bun - the Belinda that enters the booth, drink in hand, has put on at least ten years and more than a few blemishes befitting someone who might have spent years working the fields and herding sheep under the hot sun. She looks older, harder, more rough around the edges.", parse);
+			Text.NL();
+			Text.Add("What <i>is</i> she doing here? It can’t be… can it? Your question’s answered when she dips a finger in her glass, draws the outlaws’ symbol on the table, then quickly rubs it out with the heel of her hand.", parse);
+			Text.NL();
+			Text.Add("And you never suspected.", parse);
+			Text.NL();
+			Text.Add("<i>“Oh, don’t look so shocked,”</i> the dobie says, a small smile crossing her muzzle. <i>“Makeup isn’t only used to accentuate one’s looks, you know. Most people rely too heavily on faces, and even then they don’t pay very much attention; all I have to do is give them a few cues on what they ought to be seeing. You didn’t think that I’d be visiting this kind of place straight off work, did you?”</i>", parse);
+			Text.NL();
+			Text.Add("No, admittedly not.", parse);
+			Text.NL();
+			Text.Add("<i>“Now, then. If you knew to find me here and are wearing the badger’s collar to boot, then undoubtedly you have some business with me that’s quite… special. Foreplay’s over, let’s get down to business.”</i>", parse);
+		}
+		else {
+			Text.Add("The dobie woman who enters the booth is… well, not quite Miranda, but close enough. There’s the same cut of the face, chin and muzzle, those striking green eyes, but other than that… no, they’re not the same person, but very definitely related. Perhaps a cousin, close enough to be a sibling if you squint and look at her from the right angle. Clad in a simple peasant’s shift, she holds a glass in her hands; the prim, proper bun she’s done her hair into, coupled with her serious expression and beginnings of wrinkles about her eyes, leads you to guess that she’s probably in her early or mid-thirties, with a life of hard work behind her.", parse);
+			Text.NL();
+			Text.Add("Neither is she built like Miranda - there’s a softer feel about her, although considering Miranda, that isn’t saying much - a little shorter, not obviously so but enough one to notice if one thinks about it.", parse);
+			Text.NL();
+			Text.Add("Eyeing your neckerchief, the dobie woman dips a finger into her mug and draws the outlaws’ symbol on the table, quickly rubbing it out with the heel of her hand as she seats herself. Yes, she’s your contact all right, for better or for worse.", parse);
+			Text.NL();
+			Text.Add("<i>“You’re a new face.”</i>", parse);
+			Text.NL();
+			Text.Add("Odd. There’s something about the dobie’s voice - deep and husky - that doesn’t quite mesh with her appearance, but you can’t quite put your finger on it. Yes, you reply, you’re indeed a new face.", parse);
+			Text.NL();
+			if(miranda.Nice()) {
+				if(party.Num() == 2) {
+					var p1 = party.Get(1);
+					parse["comp"]  = p1.name;
+					parse["heshe"] = p1.heshe();
+					parse["was"]   = p1.plural() ? "were" : "was";
+				}
+				else if(party.Num() > 1) {
+					parse["comp"]  = "your companions";
+					parse["heshe"] = "they";
+					parse["was"]   = "were";
+				}
+				parse["c"] = party.Num() > 1 ? Text.Parse(", ignoring [comp] as if [heshe] [was]… [heshe] [was]… well, something that wasn’t important", parse) : "";
+				Text.Add("<i>“And who might you be?”</i> Her deep green eyes are focused on you[c].", parse);
+				Text.NL();
+				Text.Add("You quickly introduce yourself, and she nods. <i>“Well then, [playername], it’s a pleasure to meet you in the flesh. I’ve been observing you on the side ever since you got to know Miranda. Don’t worry - you’ve done nothing that would give me reason to think ill of you.”</i>", parse);
+				Text.NL();
+				Text.Add("Wait. So your suspicions were right - they <i>are</i> related.", parse);
+				Text.NL();
+				Text.Add("<i>“Oh, my name is Belinda; I’m Miranda’s sister. The resemblance is there, isn’t it?”</i> Belinda raises a hand to her cheek and tests it with her fingers. <i>“Not so much that others can’t tell us apart, but still distinct. Yes, she’s my sister, as… ah… impulsive as she is.”</i>", parse);
+				Text.NL();
+				Text.Add("Well, that’s one way of describing Miranda.", parse);
+				Text.NL();
+				Text.Add("<i>“We don’t really get together anymore, especially since the differences in our chosen professions often keep us apart. Quite different working hours, as you’d imagine. Still, I try to watch out for her when I can, repay what she did for me when we were younger, you know?</i>", parse);
+			}
+			else {
+				Text.Add("<i>“I know about you, too.”</i> The dobie woman’s voice drops several degrees - not quite icy cold, but very definitely chilly. <i>“You didn’t have to be a complete ass to Miranda. She was quite upset about you walking out on her.”</i>", parse);
+				Text.NL();
+				Text.Add("Oh. They’re related.", parse);
+				Text.NL();
+				Text.Add("She nods. <i>“My name’s Belinda, and I’m Miranda’s sister; even if we don’t get together very often anymore, I try to watch out for her from where she’s not looking. You’re not the first one who’s done just that after her confessing her little secret to you. Nor the second. Nor the third. After a while, the sight gets… tiring.</i>", parse);
+				Text.NL();
+				Text.Add("<i>“As the sister with the more level head, I had to talk her out of finding you and beating you to a pulp. In my current capacity however, I’m not about to let my emotions get in the way of my duties. Besides, Zenith must see <b>something</b> in you, or else he wouldn’t have sent you to me.</i>", parse);
+				Text.NL();
+				Text.Add("<i>“All this said, though, don’t imagine that she’s let you off the hook, or that I’ll have any sympathy for what she might do to you.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>Oh.</i>", parse);
+				
+				belinda.relation.DecreaseStat(-100, 5);
+			}
+			Text.NL();
+			Text.Add("<i>“Now,”</i> Belinda continues, <i>“if you’re sitting here, I trust that there’s something you have to hand over.”</i>", parse);
+		}
+		Text.NL();
+		Text.Add("Why yes, you do have business with her. Drawing Zenith’s envelope out from amidst your possessions, you pass it along to Belinda without any further commentary. The doberwoman sets down her drink, peels open the envelope…", parse);
+		Text.NL();
+		Text.Add("…And tips it over to reveal a small sheaf of papers. Your breath catches in your throat as Belinda stretches open the envelope’s mouth to get a better look at what’s inside, the stiff brown paper folding under her fine, delicate fingers, then draws out the lot and rips them to pieces without even so much as looking at them. Tiny scraps of paper float to the floor, dotting the straw-and-sawdust floor like new snow.", parse);
+		Text.NL();
+		
+		party.Inv().RemoveItem(Items.Quest.OutlawLetter);
+		
+		Text.Add("Wait, what’s going on? Wasn’t that supposed to be a missive about -", parse);
+		Text.NL();
+		Text.Add("<i>“Congratulations,”</i> Belinda says dryly, interrupting your thoughts. <i>“You can follow instructions, and therefore pass.”</i>", parse);
+		Text.NL();
+		Text.Add("The doberwoman lowers her voice to a whisper before continuing. <i>“It was a test, and quite a basic one at that. All you had to do was to deliver the missive here in a punctual fashion, while obeying the simple instruction to not tamper with the envelope or its contents. In so doing, you’ve managed to prove some measure of trustworthiness, although exactly how much will be revealed in the days to come.”</i>", parse);
+		Text.NL();
+		Text.Add("And… the papers inside, with all those words and things? And how could she tell, anyway?", parse);
+		Text.NL();
+		Text.Add("<i>“Plausible but utterly false information,”</i> Belinda replies with a smile. <i>“Had you decided to snitch us out to our enemies, you’d be walking whoever acted on your tip-off into quite the nasty trap. Then you’d have to deal with us <i>and</i> whoever you decided to sell us out to. As for how I could tell whether the letter was tampered with… well, that’s for me to know and for you to find out. Maybe you could ask Zenith, although I doubt he’d let that slip either. Perhaps if you prove yourself trustworthy over a long period of time… maybe you’ll be here in my place someday, vetting a new hire.”</i>", parse);
+		Text.NL();
+		Text.Add("Right. So… what happens now? Does she give you something to take back to Zenith?", parse);
+		Text.NL();
+		Text.Add("<i>“By sending you to me, Zenith probably wants you to act as an operative in Rigard for him. While it’s never been formalized, I’m in charge of overseeing most of our agents in the city for the moment, while Elodie sees to the palace.”</i>", parse);
+		Text.NL();
+		if(belinda.Met()) {
+			Text.Add("From the brothel?", parse);
+			Text.NL();
+			Text.Add("The doberwoman nods and takes another sip of her drink. <i>“Why, yes. It’s in quite the central location, all sorts and shapes of people come in and go out from dawn to dusk… bringing in all sorts of gifts for their favorite whores, and departing with keepsakes. Besides, the royal guard never harasses The Shadow Lady, and that’s a very big plus for the likes of us.”</i>", parse);
+			Text.NL();
+			Text.Add("They don’t? Does Lucille pay them off so they leave her alone, or perhaps she gives them special rates or favors? Even if it’s patronized by the well-to-do, a place like The Shadow Lady would at least have garnered some interest from the more zealous royal guards.", parse);
+			Text.NL();
+			Text.Add("Belinda looks thoughtful at this, her eyes drawn into the distance as she scratches her chin. <i>“You by far underestimate the pull Madame Lucille has with Rigard’s upper crust, [playername]. If the royal guard were to raid The Shadow Lady any night of the week, they’d find no less than a dozen important personages rutting away in the upstairs rooms, not to speak of those on the floor. Well, maybe not that many - rutting might be too weak a word for some of the things they get up to - I should know. Trust me, my workplace isn’t going to see a single royal guard, except maybe as customers.</i>", parse);
+		}
+		else {
+			Text.Add("All right, so when you’re in the city on outlaw business, you’re under her thumb.", parse);
+			Text.NL();
+			Text.Add("<i>“That’s more or less right, although it’s less of being under my thumb and more in my view. I don’t dictate how anyone should do something, so long as it doesn’t sully our name and gets the job done to satisfaction. Most operatives in Rigard are given much autonomy to do as they please, and report to me at regular intervals, or when something crops up.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“You, however, are more of a borderline case, since you don’t actually live in the city. Since you can move freely, you’ll likely report back to Zenith and company back at the camp. I think that’s the best arrangement of things as they stand.”</i>", parse);
+			Text.NL();
+			Text.Add("Come to think of it, where is she situated in the city?", parse);
+			Text.NL();
+			Text.Add("<i>“The brothel. I’m a whore.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>What?</i>", parse);
+			Text.NL();
+			Text.Add("<i>“You know, a whore. A hussy, a prostitute, a practitioner of the world’s oldest profession, one who spreads her legs for money, a tag, an escort…”</i> The dobie whistles innocently and flicks her ears. <i>“Why do you look so surprised, [playername]? The names for those in my line of work are endless.”</i>", parse);
+			Text.NL();
+			Text.Add("It’s not that. It’s just that she… well, she doesn’t look like one. Too rough around the edges for that, if she gets your meaning…", parse);
+			Text.NL();
+			Text.Add("<i>“Ah,”</i> Belinda replies, raising a finger to her lips. <i>“How did the saying go again? ‘You only really control something when you can both bestow it on others and take it away, not just one or the other’? Knowing how to dress in order to draw attention and please the eye is considerably well-studied, but less so is the art of dressing in order to avoid notice. Trust me, you won’t find me working the floor with Nikki and the lot of them. My shows and services are only available via…”</i> she pauses a moment for effect, and runs her tongue salaciously across her muzzle; the mask and makeup slip away for a fraction of a second, and you see her as she is. <i>“Special request.”</i>", parse);
+			Text.NL();
+			Text.Add("What kind of special requests would these be?", parse);
+			Text.NL();
+			Text.Add("<i>“Oh, some - admittedly not all - nobles need good, private sex, a place where they can let their deviancy run free without fear of backlash. Can’t have the cream of the city rutting with animals like me, can we? Madame Lucille has her theme rooms, but there’s nothing quite like the pull of actual flesh and blood, especially those who know how to work what they have.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Of course, Madame Lucille assures her patrons utmost privacy when they visit her establishment. Although unsurprising, it does complicate my job somewhat, needing to be careful about how I convey what pillow talk I hear, maintaining a shield of plausible deniability. I rather enjoy what I do, and it’d be a shame if Madame Lucille had to dismiss me for indiscretion.</i>", parse);
+		}
+		Text.NL();
+		Text.Add("<i>“Now, there are a few things you must know about our operations in Rigard. Are you aware of two field mice by the names of Pendrim and Pamela?”</i>", parse);
+		Text.NL();
+		if(outlaws.MetPenPam()) {
+			Text.Add("Yes, you know the owners of the sex shop.", parse);
+			Text.NL();
+			Text.Add("<i>“That makes things easier, then. Hidden on the premises of their shophouse is a tunnel that stretches under the walls and opens up in a grated culvert on the other side; we use this passageway to move materiel and people whom we’d really, really not have the City Watch - or, spirits forbid, the Royal Guard - see.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Since you have a visa, I’d strongly suggest that you not use the passageway unless absolutely necessary. The more we use it, the more likely that route into the city will be discovered, and I’d rather keep it open for our use as long as possible.”</i>", parse);
+		}
+		else {
+			Text.Add("No, you’ve never heard these names before. Who are they?", parse);
+			Text.NL();
+			if(!rigard.Visa()) {
+				Text.Add("Belinda rolls her eyes and slaps her forehead in the most theatrical fashion, then shows you her teeth. <i>“Of course, that’s right. You haven’t managed to enter the city yet, of course you wouldn’t know them.</i>", parse);
+				Text.NL();
+			}
+			Text.Add("<i>“Well, they run what they call ‘the Odde Shoppe’ in the seedier parts of Rigard’s merchant district. They’re selling sex toys and aids, to put it simply. What makes them important is that hidden on the premises of their shophouse is a tunnel that stretches under the walls and opens up in a grated culvert on the other side; we use this passageway to move materiel and people whom we’d really, really not have the City Watch - or, spirits forbid, the Royal Guard - discover.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“However, I’d strongly suggest that you not use the passageway unless absolutely necessary. The more we use it, the more likely that route into the city will be discovered, and I’d rather keep it open for our use as long as possible.”</i>", parse);
+			if(!rigard.Visa()) {
+				Text.NL();
+				Text.Add("But you don’t have a pass to get in through the gates, you explain.", parse);
+				Text.NL();
+				Text.Add("<i>“Oh, that’s a simple matter,”</i> Belinda replies. <i>“Can’t be an operative in the city without a visa, so I’ll just get you one.”</i>", parse);
+				Text.NL();
+				Text.Add("She makes it sound so easy.", parse);
+				Text.NL();
+				Text.Add("Belinda shakes her head. <i>“The laws and ordinances coming out of the palace are becoming more and more inane with each passing year. The longer this goes on, the more likely we’re going to end up with another civil war on our hands, and trust me, no one wants that. But I have a favor or two I can call in.”</i>", parse);
+			}
+		}
+		Text.NL();
+		if(rigard.Visa()) {
+			Text.Add("All right, hidden passage, don’t show anyone, don’t use unless absolutely necessary, got it.", parse);
+			Text.NL();
+			Text.Add("<i>“Very well. Off with you back to Zenith.”</i> The doberwoman dismisses you with a wave of her hand. <i>“I’ll make my own report to him.”</i>", parse);
+			Text.NL();
+			Text.Add("Seems like that’s the end of this, then. Standing from your seat, you extend your hand to Belinda, who ", parse);
+			if(miranda.Nice())
+				Text.Add("grasps it and gives it a half-hearted shake. <i>“I’m sure I’ll be able to get the measure of your fortitude in time to come, [playername].”</i>", parse);
+			else
+				Text.Add("scowls, ignoring it. <i>“Duty demands that I tolerate your presence, [playername], but touching you is not involved in my work for Zenith. You’ll have to pay quite the sum to gain that privilege. Reflect on your churlish actions, apologize to my sister, and we’ll see if she’ll forgive you.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, that’s one way to be dismissed. Easing yourself out of the booth without another word, you make your way out of the inn and back to the gates.", parse);
+		}
+		else {
+			Text.Add("Well, if you can get that visa… why question it too deeply? Eyeing you, Belinda pushes away her drink and stands. <i>“Come along, [playername]. Let’s get you into the city.”</i>", parse);
+			Text.NL();
+			if(miranda.Nasty()) {
+				Text.Add("You can’t help but notice her grinning as she’s saying those words, and wonder aloud just why she’s so eager to help if you offended her sister…", parse);
+				Text.NL();
+				Text.Add("<i>“Oh, you could figure it out if you had a little more sense and conscience, instead of acting as if everyone thinks like you do. You are going to get a gate pass. Miranda is often assigned gate duty. The both of you are going to see each other a <b>lot</b>, and I’m not responsible if a spark or two happens to fly here and there. Come now, didn’t you want that visa?”</i>", parse);
+				Text.NL();
+			}
+			Text.Add("Without further ado, Belinda steps out of the booth and leads you out of the inn, weaving her way through the lunchtime crowd with ease and heading for the gates. She’s a surprisingly fast walker - you have to make a conscious effort to keep up with her - and before long, the two of you are up in front of two bored-looking guards. Thankfully, neither of them happens to be Miranda, and they wave both of you through when Belinda produces her papers and whispers something into one of the guards’ ears.", parse);
+			Text.NL();
+			Text.Add("From there, it’s smooth sailing a little way past the gates to a booth near the wall, manned by a bureaucrat who looks every bit as bored as the gate guards. Without even waiting for you to explain why you’re here, he thrusts a sheaf of paperwork at you from the mountain behind him.", parse);
+			Text.NL();
+			Text.Add("Belinda helps you fill out the necessary paperwork, signing the application and showing her own visa in order to vouch for you. The official takes his time looking through the documents, eventually accepting them and writing out your visa.", parse);
+			Text.NL();
+			if(miranda.Nasty())
+				Text.Add("<i>“Well, you got what you wanted,”</i> the doberwoman says, shrugging her eyebrows at you a few times. <i>“I’d love it if you came in and out of the city every day, maybe twice if you’re feeling up to it. Now, shoo back to Zenith, he’ll take care of you.”</i>", parse);
+			else
+				Text.Add("<i>“And that appears to be that,”</i> the doberwoman says, giving you a nod and wink. <i>“Remember, I’ll be busy most of the time and don’t work the floor, so you probably won’t be able to get to me even if you show up at The Shadow Lady. While I wouldn’t rule out getting my hands involved here and there, it’s likely that you’ll be getting your jobs back at the camp. Now, I think you should head back - getting yourself in order should come before taking in the sights of the city. Believe me, you’ll have plenty of time to look around.”</i>", parse);
+			Text.NL();
+			Text.Add("<b>Citizen’s visa obtained!</b>", parse);
+		}
+		Text.Flush();
+		
+		//Note, don't set Belinda's regular met flag, to get a custom meeting at the brothel
+		outlaws.flags["Met"] = Outlaws.Met.MetBelinda;
+		
+		world.TimeStep({hour: 1});
+		
+		Gui.NextPrompt();
+	});	
 }
