@@ -252,7 +252,7 @@ Gui.SetupPortrait = function(xoffset, yoffset, set, obj, isParty, index) {
 	set.push(charSet);
 	obj.push(local);
 
-	local.portrait.attr({
+	charSet.attr({
 		cursor: "pointer"
 	}).click(function() {
 		Gui.HandlePortraitClick(index, isParty);
