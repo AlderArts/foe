@@ -89,7 +89,7 @@ Outlaws.prototype.MariasBouqetAvailable = function() {
 	//Only when meeting the correct relation requirements TODO
 	if(aquilius.flags["Met"] < Aquilius.Met.Met) return false;
 	//Only when meeting total Outlaws rep
-	return outlaws.Rep() >= 10;
+	return outlaws.Rep() >= 5;
 }
 
 Scenes.Outlaws.MariasBouquet = function() {
@@ -295,7 +295,7 @@ Scenes.Outlaws.MariasBouquetPrompt = function(opts) {
 			Text.Flush();
 			
 			world.TimeStep({hour: 3});
-			outlaws.mainQuestTimer = new Time(0,0,2,0,0);
+			outlaws.mainQuestTimer = new Time(0,0,1,0,0);
 			outlaws.flags["Met"] = Outlaws.Met.Bouqet;
 			
 			Gui.NextPrompt();

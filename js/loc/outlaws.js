@@ -25,7 +25,7 @@ world.loc.Outlaws.Camp.description = function() {
 }
 
 world.loc.Outlaws.Camp.onEntry = function() {
-	if(outlaws.flags["Met"] == Outlaws.Met.Bouqet && outlaws.mainQuestTimer.Expired())
+	if(outlaws.Rep() >= 10 && outlaws.flags["Met"] == Outlaws.Met.Bouqet && outlaws.mainQuestTimer.Expired())
 		Scenes.Outlaws.PathIntoRigardInitiation();
 	else if(outlaws.Rep() >= 15 && rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry && cveta.flags["Met"] < Cveta.Met.MariaTalk)
 		Scenes.Cveta.MariaTalkFirst();
