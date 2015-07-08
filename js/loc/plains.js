@@ -364,7 +364,7 @@ world.loc.Plains.Gate.events.push(new Link(
 	"Letter", function() {
 		return outlaws.flags["Met"] == Outlaws.Met.Letter;
 	}, function() {
-		return world.time.hour >= 10 && world.time.hour > 14;
+		return world.time.hour >= 10 && world.time.hour < 14;
 	},
 	function() {
 		if(outlaws.flags["Met"] == Outlaws.Met.Letter) {

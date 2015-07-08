@@ -87,7 +87,7 @@ Outlaws.prototype.MariasBouqetAvailable = function() {
 	//Only in the initial phase
 	if(outlaws.flags["Met"] != Outlaws.Met.Met) return false;
 	//Only when meeting the correct relation requirements TODO
-	if(aquilius.flags["Met"] >= Aquilius.Met.Met) return false;
+	if(aquilius.flags["Met"] < Aquilius.Met.Met) return false;
 	//Only when meeting total Outlaws rep
 	return outlaws.Rep() >= 10;
 }
