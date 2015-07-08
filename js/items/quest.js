@@ -35,3 +35,8 @@ Items.Quest.Nightshade = new Item("quest6", "Nightshade", ItemType.Quest);
 Items.Quest.Nightshade.price = 0;
 Items.Quest.Nightshade.Short = function() { return "Nightshade"; }
 Items.Quest.Nightshade.Long  = function() { return "A potent poisonous plant."; }
+
+Items.Quest.OutlawLetter = new Item("quest7", "Outlaws' letter", ItemType.Quest);
+Items.Quest.OutlawLetter.price = 0;
+Items.Quest.OutlawLetter.Short = function() { return "Outlaws' letter"; }
+Items.Quest.OutlawLetter.Long  = function() { return "The sealed letter that the Outlaws asked you to deliver to their contact in Rigard."; }

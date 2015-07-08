@@ -36,6 +36,7 @@ SAVE_VERSION = 26;
 // Save version 24: Farm restructuring
 // Save version 25: Layla level pacing
 // Save version 26: Uru intro flags
+// Save version 27: Outlaws flags
 
 
 VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + VERSION_SUBSCRIPT + ": " + VERSION_NAME;

@@ -8,6 +8,7 @@ Scenes.Outlaws = {};
 function Outlaws(storage) {
 	this.flags = {};
 	
+	this.flags["Met"] = 0;
 	this.flags["BT"] = 0; // Bitmask
 	this.flags["BullTower"] = 0;
 	
@@ -17,6 +18,14 @@ function Outlaws(storage) {
 	
 	if(storage) this.FromStorage(storage);
 }
+
+Outlaws.Met = {
+	NotMet     : 0,
+	Met        : 1,
+	Bouqet     : 2,
+	Letter     : 3,
+	MetBelinda : 4
+};
 
 Outlaws.prototype.ToStorage = function() {
 	var storage = {};
@@ -68,7 +77,7 @@ Outlaws.prototype.Rep = function() {
 
 
 
-/* TODO
+/* TODO LINK
  * 
 #Require that PC have introduced self to all outlaws available from start. (Aquilius at present)
 #Trigger upon trying to find Maria in the outlaws’ camp. (I.E, clicking on her button) 
@@ -80,6 +89,8 @@ Scenes.Outlaws.MariasBouquet = function() {
 		playername : player.name,
 		afternoonevening : world.time.hour >= 16 ? "evening" : "afternoon"
 	};
+	
+	outlaws.flags["Met"] = Outlaws.Met.Bouqet;
 	
 	Text.Clear();
 	Text.Add("Odd; Maria isn’t at any of her usual posts today. Although the sentries at the gate are quite clear that her group wasn’t slated to be out on patrol today, you nevertheless can’t seem to find her where you’d normally expect to see the ebony beauty, and the camp is too large to go scouring the place for a single person.", parse);
@@ -277,10 +288,89 @@ Scenes.Outlaws.MariasBouquetPrompt = function(opts) {
 			Text.Add("Nodding, you start on your way out of the glade, a soft rustling echoing in the air as you make your way through the tall grass field. The last sight you have of Maria is that of the archer prostrating herself before the memory of the deceased, her head bowed and eyes closed even as a stiff breeze carries red and white petals through the air.", parse);
 			Text.Flush();
 			
-			//TODO flag
 			world.TimeStep({hour: 3});
 			
 			Gui.NextPrompt();
 		});
 	}
+}
+
+//TODO LINK
+//Trigger this two days after Maria’s Bouquet event.
+//Account for player already having had visa and/or having already met Belinda.
+//What happens if the player drags this out and gets a visa from Miranda or Gwendy, then heads back to finish this? Change ending to acknowledge that fact? Have Zenith chew out the PC for being tardy and end the quest?
+Scenes.Outlaws.PathIntoRigardInitiation = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("As you step over the trench and through the camp gates, you’re about to be on your way into the camp proper when you’re stopped just beyond the walls. It’s the very same fox-morph who was scrutinizing you on the way in when you first arrived. Gone is the greatsword, and he’s wearing a flat, broad-brimmed hat of black felt that matches his vest and leggings, and touches its brim in greeting as he steps forward.", parse);
+	Text.NL();
+	Text.Add("<i>“[playername], was it? Got a bit of business with you on behalf of the boss-man.”</i> He holds out a hand-paw covered in russet fur towards you - or at least, the parts that aren’t covered by his open-fingered leather gloves. <i>“First things first, though; I don’t think we’ve been properly introduced. My name’s Vaughn, no last name, and I’m in charge of keeping this camp safe for everyone living inside these walls.”</i>", parse);
+	Text.NL();
+	Text.Add("You take Vaughn’s hand and shake it; his grip is sturdy and firm, but not crushing. So, if he’s responsible for camp security, you take it that the stake-filled trench and broad walls were his doing?", parse);
+	Text.NL();
+	Text.Add("<i>“More along the lines of patrols, guard rotations and maintenance,”</i> Vaughn replies. <i>“The beginnings of the wall and trench were already there when I first arrived; I just helped out a bit in getting them up to snuff. I was in His Majesty’s first engineering corps, you see.”</i>", parse);
+	Text.NL();
+	Text.Add("Sensing a story in the waiting, you urge him to continue. Vaughn looks appropriately contemplative for a moment or so, then shrugs, an easygoing roll of his shoulders. <i>“Not much of a story, really. Still remember the day - order came down from above to utterly destroy the Merchant’s Guild guildhall through the most vicious means possible, and when you have alchemy at your side, vicious can get pretty much so. Naturally, we protested; you simply don’t do that sort of thing in a place like Rigard where so many people are packed together. That got us threatened with charges of insubordination.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“One-quarter of us, me included, deserted on the spot. Another quarter took the insubordination charge. And even with half of His Majesty’s first and finest combat engineers tying their hands, there’s a reason why no one remembers what the old guildhall looks like. I drifted out and about for a while, tried my hand as a mason and a carpenter, then someone I was working for knew these outlaw people and here I am. That was years ago.”</i>", parse);
+	Text.NL();
+	Text.Add("You wonder just what Vaughn meant by ‘most vicious means possible’; by the sound of it, what went down was a pretty nasty piece of work. First things first, though - you ask the fox-morph just what business he had with you.", parse);
+	Text.NL();
+	Text.Add("<i>“Right.”</i> He perks up. <i>“The boss-man wanted to see you in the map room - that’s the place where you were brought first time you were marched in here by Maria. You still remember how to get there?”</i>", parse);
+	Text.NL();
+	Text.Add("Yes, you do.", parse);
+	Text.NL();
+	Text.Add("<i>“Well then, don’t let me hold you up. I’ll admit that I was a tad leery of you when you first came in, but you can’t be all bad if the boss-man’s taken a shine to you. He’s got a sixth sense that way.”</i> With that, Vaughn gives you a wave, touches the brim of his hat once more, then turns back to the gates.", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		Text.Clear();
+		Text.Add("The trip to the map room, as Vaughn termed it, is short and sweet. Even if you’d forgotten the way - something that’s not likely considering the memories associated with it - it’s not hard to find, being one of the few actual buildings in the camp instead of a tent of some sort. Plain and utilitarian, yet sturdily constructed, it sits amidst a sea of tents, awaiting your approach.", parse);
+		Text.NL();
+		Text.Add("The outlaws’ camp itself is busy at all times - day or night, there’s always someone digging, cooking, cleaning, chopping, singing and eating at any moment. You pass by a couple of lizard-morphs doing their laundry in the river, engrossed in their work and not even giving you a second glance as you pass by the riverbank. Several individuals of various species have gathered in a circle, playing a game of cavalcade as they drink moonshine out of old glass bottles, while at a nearby woodpile, some others split timber and fashion planks. Being an outlaw is a full-time job, it seems, even in one’s leisure time.", parse);
+		Text.NL();
+		Text.Add("At last, though, you arrive in front of the door, and give it a sharp rap with your knuckles. It isn’t long before it swings open, revealing Zenith in the doorway; the outlaw leader eyes you, staring intently at your face as if the mysteries of the planes are etched into your features. At length, his serious expression breaks into a small smile. <i>“Welcome, [playername]. I take it that you’re here about the job?”</i>", parse);
+		Text.NL();
+		Text.Add("Yes, you are. Vaughn told you as much when he stopped you at the gates.", parse);
+		Text.NL();
+		Text.Add("<i>“Well then, do come in. I’ll tell you more about it inside.”</i>", parse);
+		Text.NL();
+		Text.Add("You see no reason to refuse Zenith’s invitation, and allow the outlaw leader to usher you inside, the room dim with shutters and windows drawn. The table is still there, with its map and papers, and Zenith pulls up a seat for you before rummaging about in the mess.", parse);
+		Text.NL();
+		Text.Add("<i>“Ah, here we go,”</i> the badger-morph says, pulling out a small envelope with a grin and flourish. <i>“Maria’s told me that you’ve been putting in the effort to make yourself useful around camp and understand what we’re all about, [playername]. People notice things like that, big and small, and if you want to prove yourself, it’d be wrong of me to not give you an opportunity to do just that.”</i>", parse);
+		Text.NL();
+		Text.Add("He waves the plain, unsealed envelope in the air. <i>“I would like you to deliver this missive to one of our operatives stationed in Rigard - it holds a freshly-prepared set of directives concerning our future movements.”</i>", parse);
+		Text.NL();
+		if(!rigard.Visa()) {
+			Text.Add("There’s a small problem with that, though. You can’t get into Rigard without a visa.", parse);
+			Text.NL();
+			Text.Add("<i>“That shouldn’t be a problem.”</i>", parse);
+			Text.NL();
+		}
+		Text.Add("Oh?", parse);
+		Text.NL();
+		Text.Add("Zenith nods. <i>“You won’t need to get into the city proper. By the gates, there’s a small inn - the Spitting Lion Inn - meant to house poor bastards who get locked out after dark and have to wait to dawn to get into Rigard. Place’s been doing booming business since the latest restrictions on getting in and out of the city came into effect, but that’s beside the point. Every day at noon, one of our operatives comes in to pick up information from those sympathetic to our cause. All you need to do is to deliver this letter to her, a simple task; show it to her and she’ll take it from there. Go into one of the booths, order a drink, and wear this while you’re at it.”</i>", parse);
+		Text.NL();
+		Text.Add("He hands you a white neckerchief, which you stow away in your pocket. <i>“Now, you’ll probably want to know how to recognize her - you won’t. She’ll approach you and give you our symbol.”</i> He then sketches a brief pattern in the air, that of a three-fingered paw; you quickly commit it to memory.", parse);
+		Text.NL();
+		Text.Add("<i>“There is one thing I must stress - the contents are for her eyes only, so I don’t think you need telling as to how you’re to handle the letter.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“That’s all I have for you,”</i> Zenith says, pressing the letter into your hands. <i>“I think I’ve made myself clear enough on what’s to be done; Maria asked if I could give you something to do in order to show that you could be trusted, and here we have it. Now if you’ll excuse me, I have a few disputes to settle in the next hour, so if you’d give me a few moments to myself, that’d be most appreciated.”</i>", parse);
+		Text.NL();
+		Text.Add("All right, you get the hint. Standing from your seat and stowing away the letter with your other possessions, you make to excuse yourself and step out of the building back into fresh, open air. Well, you’ve been assigned a simple courier task, nothing more. How hard could it be? You’ll probably be there and back before too long.", parse);
+		Text.Flush();
+		
+		outlaws.flags["Met"] = Outlaws.Met.Letter;
+		
+		//TODO quest log
+		
+		party.Inv().AddItem(Items.Quest.OutlawLetter);
+		
+		world.TimeStep({hour: 1});
+		
+		Gui.NextPrompt();
+	});
 }

@@ -6,7 +6,7 @@ Scenes.Global.VisitedRigardGates = function() {
 }
 
 Scenes.Global.VisitedOutlaws = function() {
-	return outlaws.Rep() > 0;
+	return outlaws.flags["Met"] >= Outlaws.Met.Met;
 }
 
 Scenes.Global.MetJeanne = function() {

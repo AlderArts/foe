@@ -385,6 +385,10 @@ CacheToGame = function() {
 		uru.flags["Intro"] |= gameCache.flags["IntroFuckedUru"] ? Uru.IntroFlags.FuckedUru : 0;
 		uru.flags["Intro"] |= gameCache.flags["IntroFuckedByUru"] ? Uru.IntroFlags.FuckedByUru : 0;
 	}
+	if(gameCache.version < 27) {
+		// OUTLAWS
+		if(outlaws.Rep() > 0) outlaws.flags["Met"] = Outlaws.Met.Met;
+	}
 }
 
 GameToCache = function() {

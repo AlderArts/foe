@@ -155,7 +155,7 @@ world.loc.Forest.Outskirts.links.push(new Link(
 	}
 ));
 world.loc.Forest.Outskirts.links.push(new Link(
-	"Outlaws", function() { return outlaws.Rep() > 0; }, true,
+	"Outlaws", function() { return Scenes.Global.VisitedOutlaws(); }, true,
 	null,
 	function() {
 		MoveToLocation(world.loc.Outlaws.Camp, {hour: 1});
