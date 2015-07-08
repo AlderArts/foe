@@ -80,7 +80,7 @@ Outlaws.prototype.MetPenPam = function() {
 
 /*
 #Require that PC have introduced self to all outlaws available from start. (Aquilius, Maria at present)
-#Trigger upon trying to find Maria in the outlaws’ camp. (I.E, clicking on her button) 
+#Trigger upon trying to find Maria in the outlaws’ camp. (I.E, clicking on her button)
 #Possibly require some rep with outlaws first (helping Maria/Aquilius for a bit)
  */
 Outlaws.prototype.MariasBouqetAvailable = function() {
