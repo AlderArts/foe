@@ -120,27 +120,32 @@ Maria.prototype.Act = function(encounter, activeChar) {
 
 // Camp interaction
 Scenes.Maria.CampInteract = function() {
-	Text.Clear(); //TODO
-	Text.Add("PLACEHOLDER. Rawr Imma archer.");
-	
-	
-	if(DEBUG) {
-		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: relation: " + maria.relation.Get()));
-		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: subDom: " + maria.subDom.Get()));
-		Text.NL();
-		Text.Add(Text.BoldColor("DEBUG: slut: " + maria.slut.Get()));
-		Text.NL();
+	if(outlaws.MariasBouqetAvailable()) {
+		Scenes.Outlaws.MariasBouquet();
 	}
-	Text.Flush();
-	
-	Scenes.Maria.CampPrompt();
-	/*
-	Gui.NextPrompt(function() {
-		PartyInteraction();
-	});
-	*/
+	else {
+		Text.Clear(); //TODO
+		Text.Add("PLACEHOLDER. Rawr Imma archer.");
+		
+		
+		if(DEBUG) {
+			Text.NL();
+			Text.Add(Text.BoldColor("DEBUG: relation: " + maria.relation.Get()));
+			Text.NL();
+			Text.Add(Text.BoldColor("DEBUG: subDom: " + maria.subDom.Get()));
+			Text.NL();
+			Text.Add(Text.BoldColor("DEBUG: slut: " + maria.slut.Get()));
+			Text.NL();
+		}
+		Text.Flush();
+		
+		Scenes.Maria.CampPrompt();
+		/*
+		Gui.NextPrompt(function() {
+			PartyInteraction();
+		});
+		*/
+	}
 }
 
 Scenes.Maria.CampPrompt = function() {

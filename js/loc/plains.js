@@ -359,5 +359,21 @@ world.loc.Plains.Gate.events.push(new Link(
 	function() {
 		Scenes.Miranda.RigardGatesInteract();
 	}
-))
+));
+world.loc.Plains.Gate.events.push(new Link(
+	"Letter", function() {
+		return outlaws.flags["Met"] == Outlaws.Met.Letter;
+	}, function() {
+		return world.time.hour >= 10 && world.time.hour > 14;
+	},
+	function() {
+		if(outlaws.flags["Met"] == Outlaws.Met.Letter) {
+			Text.NL();
+			Text.Add("Zenith has asked you to deliver a letter to a contact at the Spitting Lion Inn at noon. It should be somewhere in the area.", null, 'bold');
+		}
+	},
+	function() {
+		Scenes.Outlaws.PathIntoRigardBelinda();
+	}
+));
 

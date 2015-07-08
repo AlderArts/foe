@@ -2429,7 +2429,7 @@ Scenes.BullTower.EndingDebrief = function(injured) {
 			
 			Gui.NextPrompt();
 			
-			outlaws.BTRewardTimer = new Time(0,0,3,0,0);
+			outlaws.mainQuestTimer = new Time(0,0,3,0,0);
 		});
 		
 	});
@@ -2508,7 +2508,7 @@ Scenes.BullTower.AftermathAlaric = function() {
 		
 		world.TimeStep({minute: 20});
 		
-		outlaws.BTRewardTimer = new Time(0,0,1,0,0);
+		outlaws.mainQuestTimer = new Time(0,0,1,0,0);
 		
 		outlaws.flags["BullTower"] = Outlaws.BullTowerQuest.AlaricFollowup;
 		

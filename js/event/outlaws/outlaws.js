@@ -14,7 +14,7 @@ function Outlaws(storage) {
 	
 	this.relation = new Stat(0);
 	
-	this.BTRewardTimer = new Time();
+	this.mainQuestTimer = new Time();
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -34,7 +34,7 @@ Outlaws.prototype.ToStorage = function() {
 	if(this.relation.base != 0)
 		storage.rep = this.relation.base.toFixed();
 	
-	storage.BTtime = this.BTRewardTimer.ToStorage();
+	storage.Qtime = this.mainQuestTimer.ToStorage();
 	
 	return storage;
 }
@@ -46,11 +46,11 @@ Outlaws.prototype.FromStorage = function(storage) {
 		this.flags[flag] = parseInt(storage.flags[flag]);
 	this.relation.base = !isNaN(parseInt(storage.rep)) ? parseInt(storage.rep) : this.relation.base;
 	
-	this.BTRewardTimer.FromStorage(storage.BTtime);
+	this.mainQuestTimer.FromStorage(storage.Qtime);
 }
 
 Outlaws.prototype.Update = function(step) {
-	this.BTRewardTimer.Dec(step);
+	this.mainQuestTimer.Dec(step);
 }
 
 
@@ -78,22 +78,25 @@ Outlaws.prototype.MetPenPam = function() {
 	return false;
 }
 
-
-
-/* TODO LINK
- * 
-#Require that PC have introduced self to all outlaws available from start. (Aquilius at present)
+/*
+#Require that PC have introduced self to all outlaws available from start. (Aquilius, Maria at present)
 #Trigger upon trying to find Maria in the outlaws’ camp. (I.E, clicking on her button) 
-#Possibly only trigger in the late morning to early evening, say 11 am to 7 pm.
 #Possibly require some rep with outlaws first (helping Maria/Aquilius for a bit)
  */
+Outlaws.prototype.MariasBouqetAvailable = function() {
+	//Only in the initial phase
+	if(outlaws.flags["Met"] != Outlaws.Met.Met) return false;
+	//Only when meeting the correct relation requirements TODO
+	if(aquilius.flags["Met"] >= Aquilius.Met.Met) return false;
+	//Only when meeting total Outlaws rep
+	return outlaws.Rep() >= 10;
+}
+
 Scenes.Outlaws.MariasBouquet = function() {
 	var parse = {
 		playername : player.name,
 		afternoonevening : world.time.hour >= 16 ? "evening" : "afternoon"
 	};
-	
-	outlaws.flags["Met"] = Outlaws.Met.Bouqet;
 	
 	Text.Clear();
 	Text.Add("Odd; Maria isn’t at any of her usual posts today. Although the sentries at the gate are quite clear that her group wasn’t slated to be out on patrol today, you nevertheless can’t seem to find her where you’d normally expect to see the ebony beauty, and the camp is too large to go scouring the place for a single person.", parse);
@@ -292,16 +295,14 @@ Scenes.Outlaws.MariasBouquetPrompt = function(opts) {
 			Text.Flush();
 			
 			world.TimeStep({hour: 3});
+			outlaws.mainQuestTimer = new Time(0,0,2,0,0);
+			outlaws.flags["Met"] = Outlaws.Met.Bouqet;
 			
 			Gui.NextPrompt();
 		});
 	}
 }
 
-//TODO LINK
-//Trigger this two days after Maria’s Bouquet event.
-//Account for player already having had visa and/or having already met Belinda.
-//What happens if the player drags this out and gets a visa from Miranda or Gwendy, then heads back to finish this? Change ending to acknowledge that fact? Have Zenith chew out the PC for being tardy and end the quest?
 Scenes.Outlaws.PathIntoRigardInitiation = function() {
 	var parse = {
 		playername : player.name
@@ -366,20 +367,19 @@ Scenes.Outlaws.PathIntoRigardInitiation = function() {
 		Text.Add("All right, you get the hint. Standing from your seat and stowing away the letter with your other possessions, you make to excuse yourself and step out of the building back into fresh, open air. Well, you’ve been assigned a simple courier task, nothing more. How hard could it be? You’ll probably be there and back before too long.", parse);
 		Text.Flush();
 		
-		outlaws.flags["Met"] = Outlaws.Met.Letter;
-		
 		//TODO quest log
 		
 		party.Inv().AddItem(Items.Quest.OutlawLetter);
 		
 		world.TimeStep({hour: 1});
 		
+		outlaws.mainQuestTimer = new Time(0,0,2,0,0);
+		outlaws.flags["Met"] = Outlaws.Met.Letter;
+		
 		Gui.NextPrompt();
 	});
 }
 
-// TODO LINK
-//When this phase of the quest is active, add an appropriate button to the gates’ exterior. Grey this out if the time isn’t noon. Maybe “Deliver Letter” or just “Letter”.
 Scenes.Outlaws.PathIntoRigardBelinda = function() {
 	var parse = {
 		playername : player.name

@@ -19,17 +19,15 @@ world.loc.Outlaws.Camp.description = function() {
 }
 
 world.loc.Outlaws.Camp.onEntry = function() {
-	if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry && cveta.flags["Met"] < Cveta.Met.MariaTalk)
-		Scenes.Cveta.MariaTalkFirst();		
-		/* TODO
-		 * #Initiates when Cveta is at 60 rel. (Consider rel requirements for Zenith as well?)
-		 * #Triggers when the player enters the outlaw camp in the evening.
-		 */
-	else if(cveta.Relation() >= 60 && outlaws.flags["BullTower"] < Outlaws.BullTowerQuest.Initiated) //TODO
+	if(outlaws.flags["Met"] == Outlaws.Met.Bouqet && outlaws.mainQuestTimer.Expired())
+		Scenes.Outlaws.PathIntoRigardInitiation();
+	else if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry && cveta.flags["Met"] < Cveta.Met.MariaTalk)
+		Scenes.Cveta.MariaTalkFirst();
+	else if(outlaws.flags["Met"] >= Outlaws.Met.MetBelinda && cveta.Relation() >= 60 && outlaws.flags["BullTower"] < Outlaws.BullTowerQuest.Initiated) //TODO
 		Scenes.BullTower.Initiation();
-	else if(outlaws.AlaricSaved() && outlaws.flags["BullTower"] < Outlaws.BullTowerQuest.AlaricFollowup && outlaws.BTRewardTimer.Expired())
+	else if(outlaws.AlaricSaved() && outlaws.flags["BullTower"] < Outlaws.BullTowerQuest.AlaricFollowup && outlaws.mainQuestTimer.Expired())
 		Scenes.BullTower.AftermathAlaric();
-	else if(outlaws.BullTowerCanGetReward() && outlaws.flags["BullTower"] < Outlaws.BullTowerQuest.ZenithFollowup && outlaws.BTRewardTimer.Expired())
+	else if(outlaws.BullTowerCanGetReward() && outlaws.flags["BullTower"] < Outlaws.BullTowerQuest.ZenithFollowup && outlaws.mainQuestTimer.Expired())
 		Scenes.BullTower.AftermathZenith();
 	else
 		PrintDefaultOptions();
