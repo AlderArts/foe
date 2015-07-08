@@ -297,6 +297,8 @@ Scenes.Cveta.ViolinPrompt = function() {
 			Text.Add("<b>You may now visit Cveta in her tent, accessible from the outlaws’ camp.</b>", parse);
 			Text.Flush();
 			
+			outlaws.relation.IncreaseStat(100, 3);
+			
 			cveta.relation.IncreaseStat(100, 5);
 			cveta.flags["Met"] = Cveta.Met.Available;
 			party.Inv().RemoveItem(Items.Quest.Violin);
@@ -440,6 +442,8 @@ Scenes.Cveta.Teach = function() {
 		
 		cveta.flags["Singer"] = Cveta.Singer.Taught;
 		
+		outlaws.relation.IncreaseStat(100, 2);
+		
 		world.TimeStep({hour : 8});
 		Gui.NextPrompt();
 	}
@@ -470,6 +474,8 @@ Scenes.Cveta.Teach = function() {
 		Text.Flush();
 		
 		cveta.flags["Bard"] = Cveta.Bard.Taught;
+		
+		outlaws.relation.IncreaseStat(100, 2);
 		
 		world.TimeStep({hour: 8});
 		Gui.NextPrompt();
@@ -1749,6 +1755,8 @@ Scenes.Cveta.FirstMeetingCont = function() {
 	Text.Add("With that, the bird-morph retreats into her tent, and you hear the faint shuffling of string being tied from within. Seems like she doesn't want to be disturbed any further, and the reason for that becomes clear once the music begins to pick up again, its faint melody wafting through the air of the outlaws' camp.", parse);
 	Text.Flush();
 	
+	outlaws.relation.IncreaseStat(100, 1);
+	
 	world.TimeStep({hour: 1});
 	
 	Gui.NextPrompt();
@@ -2003,6 +2011,7 @@ Scenes.Cveta.Performance = function() {
 	Text.Flush();
 	
 	cveta.relation.IncreaseStat(25, 2);
+	outlaws.relation.IncreaseStat(25, 1);
 	world.TimeStep({hour : 2});
 	
 	if(cveta.flags["Met"] >= Cveta.Met.ViolinQ && cveta.flags["Met"] < Cveta.Met.Available)

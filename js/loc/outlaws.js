@@ -16,6 +16,12 @@ world.loc.Outlaws.Camp.safe = function() { return true; };
 //TODO
 world.loc.Outlaws.Camp.description = function() {
 	Text.Add("You are in the outlaws' camp.<br/>");
+	
+	if(DEBUG) {
+		Text.NL();
+		Text.Add("DEBUG: Outlaws rep: " + outlaws.Rep(), null, 'bold');
+		Text.NL();
+	}
 }
 
 world.loc.Outlaws.Camp.onEntry = function() {
