@@ -89,7 +89,7 @@ Outlaws.prototype.MariasBouqetAvailable = function() {
 	//Only when meeting the correct relation requirements TODO
 	if(aquilius.flags["Met"] < Aquilius.Met.Met) return false;
 	//Only when meeting total Outlaws rep
-	return outlaws.Rep() >= 5;
+	return outlaws.Rep() >= 0;
 }
 
 Scenes.Outlaws.MariasBouquet = function() {

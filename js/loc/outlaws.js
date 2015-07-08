@@ -29,7 +29,7 @@ world.loc.Outlaws.Camp.onEntry = function() {
 		Scenes.Outlaws.PathIntoRigardInitiation();
 	else if(outlaws.Rep() >= 15 && rigard.Krawitz["Q"] >= Rigard.KrawitzQ.CaughtTerry && cveta.flags["Met"] < Cveta.Met.MariaTalk)
 		Scenes.Cveta.MariaTalkFirst();
-	else if(outlaws.Rep() >= 25 && outlaws.flags["Met"] >= Outlaws.Met.MetBelinda && cveta.Relation() >= 60 && outlaws.flags["BullTower"] < Outlaws.BullTowerQuest.Initiated) //TODO
+	else if(outlaws.Rep() >= 25 && outlaws.flags["Met"] >= Outlaws.Met.MetBelinda && cveta.Relation() >= 60 && outlaws.flags["BullTower"] < Outlaws.BullTowerQuest.Initiated)
 		Scenes.BullTower.Initiation();
 	else if(outlaws.AlaricSaved() && outlaws.flags["BullTower"] < Outlaws.BullTowerQuest.AlaricFollowup && outlaws.mainQuestTimer.Expired())
 		Scenes.BullTower.AftermathAlaric();
