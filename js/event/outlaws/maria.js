@@ -38,12 +38,20 @@ function Maria(storage) {
 	this.RestFull();
 	
 	this.flags["Met"] = 0;
+	this.flags["DD"] = 0; //Dead drops. Bitmask
 
 	if(storage) this.FromStorage(storage);
 }
 Maria.prototype = new Entity();
 Maria.prototype.constructor = Maria;
 
+Maria.DeadDrops = {
+	Alert  : 1,
+	Talked : 2,
+	Completed : 4,
+	PaidKid : 8
+	//TODO flag for repeat, specific things (sex, royals etc.)
+};
 
 Scenes.Maria = {};
 
@@ -644,3 +652,324 @@ Scenes.Maria.ForestEnd = function() {
 	world.TimeStep({hour: 3});
 	Gui.NextPrompt();
 }
+
+//
+//Dead drops
+//
+//TODO LINK
+Scenes.Maria.DeadDropAlert = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("As you’re crossing the drawbridge into the outlaws’ camp, you’re stopped by one of the gate sentries just inside the camp. She looks you up and down, then clears her throat. <i>“[playername], right?”</i>", parse);
+	Text.NL();
+	Text.Add("Yes, that’s you. Something come up?", parse);
+	Text.NL();
+	Text.Add("<i>“Word has it that Maria wants to see you next time you show your face around here; we’ve instructions to let you know to go find her when you come in. Don’t know what you’ve done to excite High Command so much, but keep your head on your shoulders while talking to her, okay?”</i>", parse);
+	Text.NL();
+	Text.Add("That’s silly. When have you never had your head on your shoulders? Nevertheless, you thank the sentry as the drawbridge is pulled up in your wake - if Maria is looking for you, then you shouldn’t keep her waiting. If it’s about what happened last time… well, let’s see if her putting in a good word for you has worked out.", parse);
+	Text.Flush();
+	
+	maria.flags["DD"] |= Maria.DeadDrops.Alert;
+	
+	world.TimeStep({minute: 15});
+	
+	Gui.NextPrompt();
+}
+
+//TODO LINK
+//Trigger this when the player approaches Maria after having witnessed the above scene.
+Scenes.Maria.DeadDropInitiation = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("Taking a deep breath and squaring your shoulders, you step forward and approach Maria. She whirls around the moment you’re within earshot, then loosens up slightly as she realizes it’s you.", parse);
+	Text.NL();
+	Text.Add("<i>“[playername].”</i>", parse);
+	Text.NL();
+	Text.Add("Yes, it’s you. She called for you, and well, here you are. What’s the matter?", parse);
+	Text.NL();
+	Text.Add("<i>“You remember how I mentioned that I’d put in a good word for you with Zenith? Well, turns out that words aren’t enough - you’re still relatively new to us and all, even with you being given more of a head start on this trust thing than most are used to getting from him.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Long story short, if you’re really interested in working as an operative for us, you’ll need to start out like everyone else. Furthermore, since I was the one who stuck her neck out for you, I get the honor of showing you the ropes, at least until you’re capable of finding your way about on your own without walking straight into the guard.”</i>", parse);
+	Text.NL();
+	Text.Add("Maybe it’s better that way than assigning a complete stranger to your case, isn’t it? Best to have someone whom with you’ve got a little history mentor you and get past the whole ice-breaking thing?", parse);
+	Text.NL();
+	Text.Add("Maria rolls her eyes, but a small smile tugs at her lips. <i>“Well, when you put it that way, I guess that’s what Zenith was thinking, too. But trust me, I hope to be out of the babysitting phase as quickly as possible.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“So, here’s what’s going to happen. We’ll get you started on the easy tasks first, and it doesn’t get much easier than dead drops.”</i>", parse);
+	Text.NL();
+	Text.Add("Dead drops?", parse);
+	Text.NL();
+	Text.Add("<i>“The basic idea’s very simple. We have a list of places where our contacts and sympathizers from around the kingdom and beyond drop off things which they want to get to us. Mostly information, but a few gifts here and there both ways aren’t out of the question. They have their people drop off their goods at a spot that we’ve agreed on beforehand, we get our people to pick them up, and the reverse happens when we’ve got something we want to hand over. Following me so far?”</i>", parse);
+	Text.NL();
+	Text.Add("Yeah, that sounds like pretty basic stuff.", parse);
+	Text.NL();
+	Text.Add("<i>“It may sound ‘pretty basic’ to you, but the correspondence contained in some of those drop-offs lets us get a better view of things that’re going on around Eden, and communicate with some of the outlying cells we have out there. They may make most of their own decisions, but still need to check in with Zenith for direction every now and then.”</i>", parse);
+	Text.NL();
+	Text.Add("It does sound serious, when even the lowliest and simplest of jobs carries such weight.", parse);
+	Text.NL();
+	Text.Add("Maria eyes you and folds her arms. <i>“No one misses the outhouse diggers, but believe me, everyone makes noise when shit starts to stink. Anyway, back to the point - we don’t always use the same ones over and over again. That’s just asking for someone to spot whoever’s making the drop-off or pick up, and then cause all sorts of trouble. Sticking to a regular schedule and being predictable in any shape or fashion is stupid, so we go through a rotation with each correspondence, arrange for new drop-off spots, reuse old ones which have been empty for a while now, so on and so forth.”</i>", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		Text.Clear();
+		Text.Add("All right, you think you get the point. When can you get started?", parse);
+		Text.NL();
+		Text.Add("Maria shakes her head at you. <i>“Not so fast, buster. There are a few things you’ve got to know first.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Number one, we go alone. Ideally, this means just you. For now, though, that means you and me. No one makes or picks up a dead drop with too many hands tagging along; that’s just asking for someone to notice you and start asking inconvenient questions. You’re not royalty and don’t need an entourage trailing along behind you everywhere you go waiting to wipe your ass if you crap your pants, so if anyone’s with you at the time, they get to hang back at camp and have some fun while you head out with me.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Next, I hope I’ve impressed upon you that these things are important, so there’s not going to be any dithering around once we set off. If we’re slated to go to the slums to get something from a contact, then that’s where we’re going, and we turn around and make for camp afterwards. No stopping for drinks, no wandering around, and no - well, you get the point. Each moment in between our friends making the drop and us getting to it is a moment some busybody can poke his or her nose into our business.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“And… really, that’s about it. The rest is common sense, which I hope for your own sake you have plenty of. Do you understand me? Zenith wants to see what you can do, and how well you can do it; I stuck my neck out for you, so don’t fail me.”</i>", parse);
+		Text.NL();
+		Text.Add("Of course.", parse);
+		Text.NL();
+		Text.Add("<i>“Good. We get drop-offs all the time, so I’m not going to rush you into this - the worst thing you can do to a greenhorn is to push him or her out the window overenthusiastic and underprepared. Talk to me again when you’re ready to head out, and I’ll check the schedule, see where we can take you. Now, if there’s nothing else, I’ve got a few matters to attend to.”</i>", parse);
+		Text.Flush();
+		
+		maria.flags["DD"] |= Maria.DeadDrops.Talked;
+		
+		//TODO  #Add “Dead-Drop” option to Maria’s talk menu.
+		
+		world.TimeStep({hour: 1});
+		
+		Gui.NextPrompt();
+	});
+}
+
+//TODO LINK
+//TODO  * [Dead-Drop] - So, does she want to go on a little pick-up errand?
+Scenes.Maria.DeadDropFirst = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("All right, you’re ready. You tell Maria as much, and the ebony beauty looks you up and down.", parse);
+	Text.NL();
+	Text.Add("<i>“Are you sure?”</i> she asks. <i>“I don’t want you suddenly remembering midway that you’ve something really important that you need to be doing. Get yourself in the clear first, then we can go.”</i>", parse);
+	Text.NL();
+	Text.Add("Good point. Are you ready?", parse);
+	Text.Flush();
+	
+	//[Yes][No]
+	var options = new Array();
+	options.push({ nameStr : "Yes",
+		tooltip : "You’re about as ready as they come.",
+		func : Scenes.Maria.DeadDropFirst2, enabled : true
+	});
+	options.push({ nameStr : "No",
+		tooltip : "Not just yet.",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“Right.”</i> Is it your imagination, or does Maria look relieved? <i>“Get yourself sorted out, then come find me again when you’re done.”</i>", parse);
+			Text.NL();
+			Text.Add("You nod and back away from her. Whatever it is that you’ve forgotten to do, you should get it out of the way first before returning.", parse);
+			Text.Flush();
+			
+			Scenes.Maria.CampPrompt();
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Maria.DeadDropFirst2 = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("You’ve got everything out of the way. Time to go!", parse);
+	Text.NL();
+	Text.Add("Maria quirks an eyebrow at you, then sighs and shakes her head resignedly. <i>“All right, let’s be off. You came at just the right time - too conveniently so, in fact, since I just got word from Zenith to bring in the latest drop. Place’s down by the slums, I’ll fill you in while we walk.”</i>", parse);
+	Text.NL();
+	if(party.Num() > 1) {
+		var group = party.Num() > 2;
+		var p1 = party.Get(1);
+		parse["comp"] = group ? "your companions" : p1.name;
+		if(group) {
+			parse = p1.ParserPronouns(parse);
+			parse["s"] = p1.plural() ? "" : "s";
+		}
+		else {
+			parse["heshe"] = "they";
+			parse["himher"] = "them";
+			parse["s"] = "";
+		}
+			
+		
+		Text.Add("You take a moment to settle down [comp], telling [himher] to just kick back and relax for a moment in the camp while you run this errand. Watching [himher] trundle off into the camp’s main body to do what [heshe] need[s] to do, you fall in behind Maria, ready to set out.", parse);
+		Text.NL();
+	}
+	Text.Add("Maria wastes no time, immediately setting off for the gates at a brisk pace with you trailing behind her. The sentries manning their positions salute as she approaches, then quickly lower the drawbridge to let the both of you pass.", parse);
+	Text.NL();
+	Text.Add("<i>“The slums by the city walls are where many of our operatives within Rigard proper make their drop-offs,”</i> she explains. <i>“There aren’t as many patrols in the area, we have a fair number of sympathizers, and the generally rough-and-tumble nature of the place makes getting away easy if we need to leg it.”</i>", parse);
+	Text.NL();
+	Text.Add("Yes, you’re getting that all down. So, what exactly is the pick-up this time?", parse);
+	Text.NL();
+	Text.Add("<i>“Just a little pillow talk,”</i> Maria replies as the two of you reach the forest’s edge and step onto open road proper. <i>“We have someone working for us in the local brothel, which is great for intelligence-gathering - people tend to find their tongues rather loose in that place, and in more than one way.”</i>", parse);
+	Text.NL();
+	Text.Add("Hmm. The rest of the journey is uneventful; you come across a couple of passers-by making their trips to and from the city, but the road is otherwise peaceful and deserted until you draw near to the edge of the slums. The tall-peaked roofs of the shanty town’s wooden buildings come into view, and Maria holds up a hand.", parse);
+	Text.NL();
+	Text.Add("<i>“All right, we get off the road here. Now, remember what I told you; when in doubt, just follow my lead. We shouldn’t run into any trouble, but keep your wits about you and your voice down anyway.”</i>", parse);
+	Text.NL();
+	Text.Add("True to her word, Maria veers off the beaten path, circling around the edges of the slums, her eyes trained on the buildings that pass her by. You follow behind her for a minute or so, and then she stops all of a sudden and points out a dilapidated, abandoned hovel to you.", parse);
+	Text.NL();
+	Text.Add("<i>“There,”</i> she whispers to you. <i>“We approach that one; there’s a hole in the side of that hovel in which our people at the docks make their drop-offs. Remember, don’t be nervous. Act as if you have every right to be here, and people usually will just assume that you do - this goes doubly so in the slums. Of course, those who live here are pretty good at sniffing out fakes, so you’d better put on your best show.”</i>", parse);
+	Text.NL();
+	Text.Add("All right. Maria sets off at a brisk, casual walk, and you do your best to mimic her as she crosses the slums’ dirt streets and approaches the hovel. As she turns a corner, though, the archer’s face turns from serious to savage, a scowl parting her full lips.", parse);
+	Text.NL();
+	Text.Add("<i>“You! Drop that!”</i>", parse);
+	Text.NL();
+	Text.Add("You hurry around the corner just as Maria breaks into a sprint, giving chase after a young mouse-morph who can’t be any older than nine or ten. The brat has a small wrapped package under his arm, and given Maria’s reaction, it has to be what you’re after today.", parse);
+	Text.NL();
+	parse["w"] = world.time.season == Season.Winter ? " and slush" : "";
+	Text.Add("Well, nothing for it. You take off after the brat as well, joining Maria in the chase through the muddy streets of the slums. The dirt[w] is slick underfoot, the alleyways narrow, and more than one poor passerby is bowled over by the sheer force of your chase as the two of you pursue the mouse-morph through the shacks and hovels. Dogs bark and chickens flap at the commotion, and though you duck and weave as well as you can, you can’t seem to gain on him - but at least you don’t lose him, either. The streets are long and narrow with few bends, and that helps.", parse);
+	Text.NL();
+	Text.Add("<i>“You don’t want that!”</i> Maria shouts at the fleeing street urchin. <i>“Do you even know what’s in it?”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Dunno!”</i> comes the reply as the little mouse-morph ducks and weaves between angry dockhands and donkey carts. <i>“But if yer willing to chase me for it, yer willing to buy it back, rite?”</i>", parse);
+	Text.NL();
+	Text.Add("Maria mutters something foul not quite under her breath, but the street urchin’s words give you an idea. If you’re really willing to pay for it… then you could end this right now, assuming you’ve the money to do so.", parse);
+	Text.Flush();
+	
+	world.TimeStep({hour: 4});
+	
+	//[Yes][No]
+	var options = new Array();
+	options.push({ nameStr : "Yes",
+		tooltip : "Offer to buy back the package for ten coins.",
+		func : function() {
+			party.coin -= 10;
+			
+			maria.flags["DD"] |= Maria.DeadDrops.PaidKid;
+			
+			Text.Clear();
+			Text.Add("Hey, if he’s willing to sell it back, you have the money to buy it. Doing your best not to lose sight of the little mouse-morph, you dig into your belongings for a handful of coins.", parse);
+			Text.NL();
+			Text.Add("Maria catches sight of what you’re doing, and shakes her head angrily. <i>“Don’t do that!”</i>", parse);
+			Text.NL();
+			Text.Add("Why not? You could end this right now. It’s only a few coins, and you won’t risk the little fellow giving both of you the slip.", parse);
+			Text.NL();
+			Text.Add("<i>“That’s not the p- look out for that stand! The point!”</i> Maria hisses through her teeth. <i>“If you buy him off, every little street urchin’s going to know that they can hold our drop-offs ransom!”</i>", parse);
+			Text.NL();
+			Text.Add("And if the dead drops were truly secure, street rats like him wouldn’t find them in the first place. Besides, the little bastard probably knows the slums better than either of you do, and that he just needs to get lucky once to give you the slip. On the other hand, you have to be lucky all the time, and you don’t feel very blessed today.", parse);
+			Text.NL();
+			Text.Add("Maria mutters something even more foul, but doesn’t stop you as you draw out a handful of coins and call out to the mouse-morph. Hearing the clink of coins and seeing the gleam of metal in your hand, he stops - but not before placing a sizeable stack of crates in between the two of you and him, ready to leap off and resume fleeing at the slightest provocation.", parse);
+			Text.NL();
+			Text.Add("<i>“Yeah, that’s enough. Throw it over.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“We’re not that stupid,”</i> Maria snaps. She glares daggers at you, but seems resigned to the choice you’ve made. <i>“Half up front, and half when you hand it over.”</i>", parse);
+			Text.NL();
+			Text.Add("The street urchin looks down at you from atop his perch, clearly thinking as to what to do next. His whiskers twitch as he considers Maria’s offer, then he looks at Maria and sees something in her face which brings his train of thought screeching to a halt.", parse);
+			Text.NL();
+			Text.Add("<i>”Okay. Half up front, half after it is. Toss it over.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, that’s your cue. You split your handful of coins - ten in total - in half and toss it at the little brat, who tosses the wrapped package back at you in turn. You make good on the other half of your payment, and watch the street urchin scamper down from the heap to pick up his ill-gotten gains - while still keeping a healthy distance from you and Maria, of course.", parse);
+			Text.NL();
+			Text.Add("Thankfully, the chase and commotion haven’t attracted any onlookers; seems like the denizens of the slums are inclined to keep their heads under cover when there’s a ruckus going on near their doorsteps. Still looking like she’s bitten into something sour, Maria bends over and picks up the package, then elbows you as she tucks it away.", parse);
+			Text.NL();
+			Text.Add("<i>“Gah! Don’t just stand there - let’s get out of here before someone gets a close look at our faces!”</i> Without waiting for a reply, she grabs you by the arm and moves to drag you away from the scene, back through the dirt streets and under low rooftops. <i>“That drop point is as good as gone now - would’ve been anyway, but to make such a huge mess of it… and you just had to give in and take the easy way…”</i>", parse);
+			Text.NL();
+			Text.Add("Again, if the locals can’t actually find the drops, they can’t hold them for ransom. Maybe a rethinking of the locations <i>is</i> in order, as this whole debacle showed - had the two of you arrived a minute later,  he’d be long gone and you’d have nothing at all.", parse);
+			Text.NL();
+			Text.Add("<i>“Yes, but now they’ll actually be looking for them since they know there’s money in it - look, I’m not having this argument right now. Let’s get out of here and head back.”</i>", parse);
+			
+			PrintDefaultOptions();
+		}, enabled : party.coin >= 10
+	});
+	options.push({ nameStr : "No",
+		tooltip : "You’re not going to let this little brat hold your goods ransom.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Pay for what’s yours? Oh, the cheek of that little squirt; he’s not ransoming a single coin out of you! Still, there’s got to be some way that you can get the drop on him, and just chasing the little brat like this isn’t going to yield much in the way of results. While you have to keep on getting lucky to continue hounding him, the street urchin just has to get lucky once to give you the slip; if you’re not going to give in to his demands, you’ll need to act fast.", parse);
+			Text.NL();
+			Text.Add("A look at Maria’s face tells you that she concurs, and she motions to the rooftops. <i>“I’ll cut across the roofs,”</i> she tells you, slightly breathless from the chase. <i>“You herd him towards the docks. I’ll cut him off there.”</i>", parse);
+			Text.NL();
+			Text.Add("All right, sounds like a better plan than the one you have right now -  which is none. Maria makes a running leap for one of the low roofs, grabs its edge, and hoists herself up hand-over-foot onto the rooftops; the last sight you have of the archer is that of her dashing across the rickety, closely-spaced shanty town roofs, shortbow in hand.", parse);
+			Text.NL();
+			Text.Add("Alright, time for you to do your job. You can’t have been giving chase for any more than five to ten minutes, but it sure <i>feels</i> like it’s been far longer - and with the uneven roads and dodging you’re having to do, it’s sure taking the wind out of your sails more quickly than you expected. Hopefully, the docks aren’t too far away - with how things are going, you’re going to end up unlucky sooner or later.", parse);
+			Text.NL();
+			Text.Add("<i>“Just give up already, ya big lunkhead!”</i> the mouse-morph yells back at you. <i>“Yer good for a townie, but this thing of yers really worth a stint in the clapper?”</i>", parse);
+			Text.NL();
+			Text.Add("What, is he threatening you with jail? Unless he got drafted into the City Watch in the last few minutes, the only thing that this little brat is giving you is what’s rightfully yours!", parse);
+			Text.NL();
+			Text.Add("<i>“Finders keepers, losers weepers! ‘S the law ‘round these parts! Yer aren’t willing to pay to get this back, I’m sure someone else will!”</i>", parse);
+			Text.NL();
+			Text.Add("The law, that’s a joke. But anything to keep him talking and distracted - already, the dirt roads are giving way to boardwalks as you enter the pier, and you can see the lake ahead of you. Where <i>is</i> Maria? You can’t keep up the chase forever, and if the slums were bad, the docks are even worse - stacks of crates and barrels abound, not to mention all the tar and rope coils lying about, <i>and</i> then there’s the matter of the dockhands -", parse);
+			Text.NL();
+			Text.Add("All of a sudden, the street urchin squeals like a stuck pig, the short, sharp noise sending droves of gulls scattering in all directions. Pinning him to a nearby wooden pillar is the shaft of an arrow, driven through the side of his loose, tattered clothing. No arrowhead, but it’d definitely have caused a bloody bruise had it actually struck him.", parse);
+			Text.NL();
+			Text.Add("Maria!", parse);
+			Text.NL();
+			Text.Add("It’s a small opening, but it’s enough. As the little bastard tugs and tears away in an effort to get himself free, you close the distance and grab him in a flying tackle, tearing his clothes and sending the two of you to the ground. He sure has got quite a bit of fight left in him, biting, kicking and screaming as you pin him to the boardwalks.", parse);
+			Text.NL();
+			Text.Add("<i>“Cough it up and we’ll let you off easy, buster.”</i> Right on cue, Maria turns up on the scene, her shadow falling on the both of you. <i>“That’ll teach you to take things that don’t belong to you. I know living in this place is tough, but you’ve got to understand that there are some things you just don’t touch.”</i>", parse);
+			Text.NL();
+			Text.Add("Faced with no way out, the street urchin whimpers and goes limp, pulling out the package from his clothing. Maria reaches down and takes it from him, then glances at you. <i>“Right, it looks like the genuine article. Let him up, but watch out for any fast moves - on second thought, don’t. I’ve got you covered.”</i>", parse);
+			Text.NL();
+			Text.Add("You nod and get off the mouse-morph, who wastes no time struggling to his feet and legging it - but not before sticking out his tongue at the both of you and making a rude noise.", parse);
+			Text.NL();
+			Text.Add("<i>“Whatever helps him salvage a little of his pride,”</i> Maria says, slinging her bow on her back before folding her arms across her chest. <i>“Good job back there pinning down the little bastard, but we should clear out too before we attract too much attention.”</i>", parse);
+			Text.NL();
+			Text.Add("You don’t know about that - despite the chase and commotion, it looks like not that many of the locals have actually paid attention to the two of you, let alone stopped to stare. It certainly says something about the state of the slums and adjoining dock - but whether it’s that the locals are too used to violence to actually care, too wary to be overly curious about violence, or simply just plain disinterested - well, you have no idea.", parse);
+			Text.NL();
+			Text.Add("<i>“Come on.”</i> Maria’s voice cuts through your thoughts like a heated knife through butter. Right, right. Turning your back on the whole mess, you make do and head back, circling around the slums - you don’t want to be going back in there just yet.", parse);
+			
+			outlaws.relation.IncreaseStat(100, 1);
+			
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	
+	Gui.Callstack.push(function() {
+		Text.NL();
+		Text.Add("The two of you walk in silence side by side along the road for a while, the package still in Maria’s hands. Every now and then, she looks down at it, as if not quite sure if it’s really there; you’re just about to ask her for her two coins when she clears her throat.", parse);
+		Text.NL();
+		Text.Add("<i>“Well. That should put paid to that particular drop-off point. Once we get back, I need to discuss with Zenith just how safe the others are. I don’t want to go through what happened today again - there’re only so many of the City Watch, while brats like that one are everywhere.”</i>", parse);
+		Text.NL();
+		Text.Add("Well. One minute more and it’d be gone for good, one minute earlier and none of this unpleasantness would ever have happened.", parse);
+		Text.NL();
+		Text.Add("<i>“Which isn’t the point, that being whatever goes in should remain safe until we decide to pick it up within a reasonable time frame. But enough of that - let’s see what we’ve got in here.”</i>", parse);
+		Text.NL();
+		Text.Add("With that said, Maria quickly unties the the bundle, nimble fingers teasing apart cord and tearing open waxed paper to reveal a small sheaf of neatly-folded papers. The paper itself appears to be of fairly good quality, and you’re quite sure there’s a lingering scent of perfume of some sort, but it’s too faint to be sure of what the exact scent is. Maria’s lips move as she reads, and at length, she folds the paper back up and pockets it.", parse);
+		Text.NL();
+		Text.Add("What was the message, if you may ask?", parse);
+		Text.NL();
+		Text.Add("<i>“A note from one of our better people in Rigard,”</i> comes the reply. <i>“The City Guard’s onto us, but as expected, they’re still running around like chickens. If I didn’t know better, I’d say they’ve ducked their heads down and are hoping that this will all blow over, but they aren’t <b>completely</b> stupid, either.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“A few more interesting bits here and there, some more pillow talk… this might come in useful later on.”</i> Maria folds up the papers and stuffs them back into her pocket. <i>“Stupid kid, trying to run off with these - if the City Watch got wind of what he was carrying, he’d be in no end of trouble. We work to free them from Rigard, and this is what we get…”</i>", parse);
+		Text.NL();
+		Text.Add("Well, the street urchin couldn’t have known what was in the package or that the both of you were outlaws, right? As far as he knew, he was holding a ticket to a meal, and meals are hard enough to come by in the slums.", parse);
+		Text.NL();
+		Text.Add("Maria sighs and shakes her head as the two of you leave the road for the forest’s edge. <i>“Yes, you’re right. Still. It’s been a long day, we’ve dithered outside for far longer than we should’ve been, and I’m not looking forward to talking to Zenith about this. Still, it’s got to be done, so nose to the grindstone and all.”</i>", parse);
+		Text.NL();
+		Text.Add("The remainder of your trip back passes in silence. At length you’re back within the outlaw camp, the sentries pulling in the drawbridge behind the two of you.", parse);
+		Text.NL();
+		parse["c"] = party.Num() > 1 ? ", gather your people" : "";
+		Text.Add("<i>“All right, that’s it for today,”</i> Maria tells you. <i>“You’re dismissed - go and get a drink[c], take a nap or play some cards, whatever you do for entertainment when no one’s watching. I’ve got a report to make.”</i>", parse);
+		Text.NL();
+		Text.Add("Right. That wasn’t so bad in the end, was it?", parse);
+		Text.NL();
+		Text.Add("<i>“I’d have liked it to go much smoother,”</i> Maria snaps, then catches herself and rubs her face. <i>“Look, if you ever want to do another pick-up, just let me know. You’ve still got a little way to go before you’re skilled and trusted enough to do these on your own, and especially after what happened today…”</i>", parse);
+		Text.NL();
+		Text.Add("She leaves the end of that last sentence hanging and stalks away for the map building, leaving you alone to reflect on today’s events.", parse);
+		Text.Flush();
+		
+		maria.flags["DD"] |= Maria.DeadDrops.Completed;
+		outlaws.relation.IncreaseStat(100, 1);
+		
+		world.TimeStep({hour: 4});
+		
+		Gui.Nextpromt();
+	});
+	
+	Gui.SetButtonsFromList(options, false, null);
+}
+
