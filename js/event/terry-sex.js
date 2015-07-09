@@ -7340,7 +7340,7 @@ Scenes.Terry.SexHaveADrinkBreastsArousalPussy = function(parse) {
 		Text.Add("Oh, you have good reason to feel that way. Let’s show [himher] why...", parse);
 	}
 	else {
-		Text.Add("<i>“Haha, big perv can’t keep [hisher] [hands] off me?”</i>", parse);
+		Text.Add("<i>“Haha, big perv can’t keep [hisher] [hand]s off me?”</i>", parse);
 		Text.NL();
 		Text.Add("Nope. You don’t want to try, either. You’d rather play with your fluffy little [foxvixen] instead.", parse);
 		Text.NL();
@@ -7434,7 +7434,7 @@ Scenes.Terry.SexHaveADrinkBreastsArousalPussy = function(parse) {
 	Text.NL();
 	Text.Add("You carefully run the tip of your finger up along one dainty vulva lip. The smooth, silken flesh crinkles at your touch, reflexively trying to squeeze close and making you retreat to avoid being caught. When Terry relaxes, you move in again, languidly running your digit back and forth along the warm, soft skin. You stroke up and down, slowly tracing the full lengths of [hisher] netherlips.", parse);
 	Text.NL();
-	Text.Add("<i>“Ahn...”</i> the [foxvixen] moans softly. As you stroke, you can feel [himher] becoming wet, slowly leaking and moistening your [hands], making it easier to rub and caress [himher] just the right way. As you continue your ministrations, it doesn’t take long until the air around you is saturated with the scent of horny [foxvixen].", parse);
+	Text.Add("<i>“Ahn...”</i> the [foxvixen] moans softly. As you stroke, you can feel [himher] becoming wet, slowly leaking and moistening your [hand]s, making it easier to rub and caress [himher] just the right way. As you continue your ministrations, it doesn’t take long until the air around you is saturated with the scent of horny [foxvixen].", parse);
 	Text.NL();
 	Text.Add("You close your eyes and inhale, loudly and deliberately, basking in the scent of Terry’s arousal. With a satisfied purr, you note that Terry truly makes the most wonderful perfume.", parse);
 	Text.NL();
