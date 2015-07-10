@@ -13,6 +13,9 @@ Version 0.4f2
  - Get positive rel with the outlaws (help out Aquilius if you pissed people off)
  - Talk to Maria, wait for a day, then return to the camp
  - You should be approached to take on a more important mission...
+* Added a new set of scenes for Maria. You can now help out by doing dead drops for her.
+ - There's an initial mission, you need to have gotten the Bouqet scene for it to trigger
+ - There's a repeatable mission (every two days) with some variations
 * In order to account for these new set of scenes, the Bull Tower scenes have been locked until you finish these. In addition, you need to help out the outlaws to a greater extent.
 * Some of Cveta's non-repeatable interactions now give outlaw rep (violin).
 * Tweaked the GUI so that the entire portrait + bars trigger the select event.
