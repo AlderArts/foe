@@ -130,6 +130,8 @@ Cveta.prototype.IsAtLocation = function(location) {
 }
 
 Cveta.prototype.Update = function(step) {
+	Entity.prototype.Update.call(this, step);
+	
 	this.violinTimer.Dec(step);
 	this.flirtTimer.Dec(step);
 }

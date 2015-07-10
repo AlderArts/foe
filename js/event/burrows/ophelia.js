@@ -63,6 +63,8 @@ Ophelia.prototype.ToStorage = function() {
 }
 
 Ophelia.prototype.Update = function(step) {
+	Entity.prototype.Update.call(this, step);
+	
 	this.burrowsCountdown.Dec(step);
 }
 

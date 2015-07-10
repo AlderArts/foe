@@ -60,7 +60,7 @@ Asche.Tasks = {
 };
 
 Asche.prototype.Update = function(step) {
-	
+	Entity.prototype.Update.call(this, step);
 }
 
 Asche.prototype.FromStorage = function(storage) {

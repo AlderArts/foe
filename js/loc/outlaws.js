@@ -35,6 +35,8 @@ world.loc.Outlaws.Camp.onEntry = function() {
 		Scenes.BullTower.AftermathAlaric();
 	else if(outlaws.BullTowerCanGetReward() && outlaws.flags["BullTower"] < Outlaws.BullTowerQuest.ZenithFollowup && outlaws.mainQuestTimer.Expired())
 		Scenes.BullTower.AftermathZenith();
+	else if(maria.EligableForDeaddropAlert())
+		Scenes.Maria.DeadDropAlert();
 	else
 		PrintDefaultOptions();
 }

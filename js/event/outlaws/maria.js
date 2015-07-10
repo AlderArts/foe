@@ -39,6 +39,8 @@ function Maria(storage) {
 	
 	this.flags["Met"] = 0;
 	this.flags["DD"] = 0; //Dead drops. Bitmask
+	
+	this.DDtimer = new Time();
 
 	if(storage) this.FromStorage(storage);
 }
@@ -46,23 +48,25 @@ Maria.prototype = new Entity();
 Maria.prototype.constructor = Maria;
 
 Maria.DeadDrops = {
-	Alert  : 1,
-	Talked : 2,
+	Alert     : 1,
+	Talked    : 2,
 	Completed : 4,
-	PaidKid : 8
+	PaidKid   : 8
 	//TODO flag for repeat, specific things (sex, royals etc.)
 };
 
 Scenes.Maria = {};
 
 // Add initial event, only trigger 6-20
-world.loc.Forest.Outskirts.enc.AddEnc(function() {
-	return Scenes.Maria.ForestMeeting;
-}, 3.0, function() {
-	return Scenes.Global.VisitedRigardGates() &&
-	       !Scenes.Global.VisitedOutlaws() &&
-	       (world.time.hour >= 6 && world.time.hour < 20);
-   });
+world.loc.Forest.Outskirts.enc.AddEnc(
+	function() {
+		return Scenes.Maria.ForestMeeting;
+	}, 3.0, function() {
+		return Scenes.Global.VisitedRigardGates() &&
+		       !Scenes.Global.VisitedOutlaws() &&
+		       (world.time.hour >= 6 && world.time.hour < 20);
+   	}
+);
 
 
 Maria.prototype.FromStorage = function(storage) {
@@ -73,6 +77,8 @@ Maria.prototype.FromStorage = function(storage) {
 	
 	// Load flags
 	this.LoadFlags(storage);
+	
+	this.DDtimer.FromStorage(storage.DDtime);
 }
 
 Maria.prototype.ToStorage = function() {
@@ -85,7 +91,15 @@ Maria.prototype.ToStorage = function() {
 	
 	this.SaveFlags(storage);
 	
+	storage.DDtime = this.DDtimer.ToStorage();
+	
 	return storage;
+}
+
+
+Maria.prototype.Update = function(step) {
+	Entity.prototype.Update.call(this, step);
+	this.DDtimer.Dec(step);
 }
 
 // Schedule
@@ -96,6 +110,14 @@ Maria.prototype.IsAtLocation = function(location) {
 	return false;
 }
 
+Maria.prototype.EligableForDeaddropAlert = function() {
+	//Only in the initial phase
+	if(maria.flags["DD"] != 0) return false;
+	//Only when meeting the correct conditions
+	if(outlaws.flags["Met"] < Outlaws.Met.Bouqet) return false;
+	//Only when meeting total Outlaws rep
+	return true;
+}
 
 Maria.prototype.Act = function(encounter, activeChar) {
 	// TODO: AI!
@@ -131,6 +153,10 @@ Scenes.Maria.CampInteract = function() {
 	if(outlaws.MariasBouqetAvailable()) {
 		Scenes.Outlaws.MariasBouquet();
 	}
+	else if(maria.flags["DD"] & Maria.DeadDrops.Alert &&
+	      !(maria.flags["DD"] & Maria.DeadDrops.Talked)) {
+		Scenes.Maria.DeadDropInitiation();
+	}
 	else {
 		Text.Clear(); //TODO
 		Text.Add("PLACEHOLDER. Rawr Imma archer.");
@@ -148,11 +174,6 @@ Scenes.Maria.CampInteract = function() {
 		Text.Flush();
 		
 		Scenes.Maria.CampPrompt();
-		/*
-		Gui.NextPrompt(function() {
-			PartyInteraction();
-		});
-		*/
 	}
 }
 
@@ -171,6 +192,20 @@ Scenes.Maria.CampPrompt = function() {
 			tooltip : "You've changed your mind. If Maria really can't sort out this so-called princess, maybe you can."
 		});
 	}
+	
+	if(maria.flags["DD"] & Maria.DeadDrops.Talked)
+	{
+		options.push({ nameStr : "Dead-Drop",
+			tooltip : "So, does she want to go on a little pick-up errand?",
+			func : function() {
+				if(maria.flags["DD"] & Maria.DeadDrops.Completed)
+					Scenes.Maria.DeadDropRepeat();
+				else
+					Scenes.Maria.DeadDropFirst();
+			}, enabled : true
+		});
+	}
+	
 	Gui.SetButtonsFromList(options, true);
 }
 
@@ -656,7 +691,6 @@ Scenes.Maria.ForestEnd = function() {
 //
 //Dead drops
 //
-//TODO LINK
 Scenes.Maria.DeadDropAlert = function() {
 	var parse = {
 		playername : player.name
@@ -679,7 +713,6 @@ Scenes.Maria.DeadDropAlert = function() {
 	Gui.NextPrompt();
 }
 
-//TODO LINK
 //Trigger this when the player approaches Maria after having witnessed the above scene.
 Scenes.Maria.DeadDropInitiation = function() {
 	var parse = {
@@ -735,20 +768,14 @@ Scenes.Maria.DeadDropInitiation = function() {
 		
 		maria.flags["DD"] |= Maria.DeadDrops.Talked;
 		
-		//TODO  #Add “Dead-Drop” option to Maria’s talk menu.
-		
 		world.TimeStep({hour: 1});
 		
 		Gui.NextPrompt();
 	});
 }
 
-//TODO LINK
-//TODO  * [Dead-Drop] - So, does she want to go on a little pick-up errand?
 Scenes.Maria.DeadDropFirst = function() {
-	var parse = {
-		
-	};
+	var parse = {};
 	
 	Text.Clear();
 	Text.Add("All right, you’re ready. You tell Maria as much, and the ebony beauty looks you up and down.", parse);
@@ -780,9 +807,7 @@ Scenes.Maria.DeadDropFirst = function() {
 }
 
 Scenes.Maria.DeadDropFirst2 = function() {
-	var parse = {
-		
-	};
+	var parse = {};
 	
 	Text.Clear();
 	Text.Add("You’ve got everything out of the way. Time to go!", parse);
@@ -971,5 +996,18 @@ Scenes.Maria.DeadDropFirst2 = function() {
 	});
 	
 	Gui.SetButtonsFromList(options, false, null);
+}
+
+//TODO
+Scenes.Maria.DeadDropRepeat = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("", parse);
+	Text.NL();
+	Text.Add("", parse);
+	Text.Flush();
 }
 

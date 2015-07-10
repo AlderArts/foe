@@ -81,6 +81,8 @@ Momo.prototype.IsFollower = function() {
 }
 
 Momo.prototype.Update = function(step) {
+	Entity.prototype.Update.call(this, step);
+	
 	this.wanderTimer.Dec(step);
 }
 

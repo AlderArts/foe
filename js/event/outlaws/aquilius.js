@@ -79,6 +79,8 @@ Aquilius.prototype.ToStorage = function() {
 }
 
 Aquilius.prototype.Update = function(step) {
+	Entity.prototype.Update.call(this, step);
+	
 	this.helpTimer.Dec(step);
 }
 
