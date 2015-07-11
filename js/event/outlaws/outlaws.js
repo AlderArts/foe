@@ -11,10 +11,12 @@ function Outlaws(storage) {
 	this.flags["Met"] = 0;
 	this.flags["BT"] = 0; // Bitmask
 	this.flags["BullTower"] = 0;
+	this.flags["events"] = 0; // Bitmask
 	
 	this.relation = new Stat(0);
 	
 	this.mainQuestTimer = new Time();
+	this.factTimer = new Time();
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -27,6 +29,13 @@ Outlaws.Met = {
 	MetBelinda : 4
 };
 
+Outlaws.Events = { //Bitmask
+	ChowTime : 1,
+	Cavalcade : 2,
+	BeatMaria : 4, //Beat maria at archery
+	FactFind : 8
+};
+
 Outlaws.prototype.ToStorage = function() {
 	var storage = {};
 	
@@ -35,6 +44,7 @@ Outlaws.prototype.ToStorage = function() {
 		storage.rep = this.relation.base.toFixed();
 	
 	storage.Qtime = this.mainQuestTimer.ToStorage();
+	storage.Ftime = this.factTimer.ToStorage();
 	
 	return storage;
 }
@@ -47,6 +57,7 @@ Outlaws.prototype.FromStorage = function(storage) {
 	this.relation.base = !isNaN(parseInt(storage.rep)) ? parseInt(storage.rep) : this.relation.base;
 	
 	this.mainQuestTimer.FromStorage(storage.Qtime);
+	this.factTimer.FromStorage(storage.Ftime);
 }
 
 Outlaws.prototype.Update = function(step) {
@@ -603,4 +614,661 @@ Scenes.Outlaws.PathIntoRigardBelinda = function() {
 		
 		Gui.NextPrompt();
 	});	
+}
+
+
+//
+// RANDOM EVENTS
+//
+
+Scenes.Outlaws.Exploration = {};
+
+Scenes.Outlaws.Exploration.RandName = function() {
+	var text = ["a lanky young man", "a mangy bear-morph", "a well-armed sentry", "a haggard-looking hunter", "an overworked young woman", "a well-maned wolf-morph", "a scarred ruffian", "a bearded, elderly morph", "a one-eyed woman", "a rough-looking outlaw"];
+	return _.sample(text);
+}
+
+
+Scenes.Outlaws.Exploration.ChowTime = function() {
+	var parse = {
+		lad : player.mfFem("laddie", "lassie")
+	};
+	
+	var first = !(outlaws.flags["events"] & Outlaws.Events.ChowTime);
+	
+	outlaws.flags["events"] |= Outlaws.Events.ChowTime;
+	
+	parse["chow"] = world.time.hour < 10 ? "Breakfast" :
+	                world.time.hour < 15 ? "Lunch" : "Dinner";
+	
+	Text.Clear();
+	if(first) {
+		Text.Add("Wandering the camp and trying not to get into anyone’s way, your attention is gradually drawn by the smell of something cooking. Nothing fancy, but it’s definitely broth-based, and the faint scent grows stronger as you draw closer to its source. A little distance by the river where it flows into the camp is a grey-furred wolf-morph tending to a number of large cauldrons. Children flit between the cauldrons and any number of benches, chopping, slicing, scrubbing, scouring, stirring and more. No, the smell rising with the smoke and steam isn’t exactly delicious, but it does promise a full belly and sound sleep.", parse);
+		Text.NL();
+		Text.Add("The wolf-morph turns her head in your direction as you approach, studying you through crinkled eyes even as she continues working at one of the cauldrons with a long wooden stirrer. While she might have once been pretty, perhaps even beautiful, age and hard work haven’t been the kindest to her, nor have the large streaks of white in her hair and fur. The short work shift and apron on her only serve to dull things even more - what a pity.", parse);
+		Text.NL();
+		Text.Add("<i>“[chow] isn’t ready yet.”</i>", parse);
+		Text.NL();
+		Text.Add("No, you weren’t looking for a free meal. All you wanted was to see what was going on…", parse);
+		Text.NL();
+		Text.Add("<i>“Then that’s even worse. I’ve got to play both cook and nanny, and you’re getting in the way of both without a good reason.”</i> She holds your gaze for a moment, and then her expression softens. <i>“Look, you’re new here, aren’t you? It’s the first time I’ve seen you around, at any rate.”</i>", parse);
+		Text.NL();
+		Text.Add("Well yes, you could suppose that you are relatively new in this place.", parse);
+		Text.NL();
+		Text.Add("<i>“Fine. Name here’s Raine. I cook, and mind the children by putting them to work helping me cook. My job’s to take whatever that comes in for the day and figure out how to stretch it thin enough that whoever comes in for a bowl can have some <b>and</b> not complain that it doesn’t taste like burnt flour and salt.”</i>", parse);
+		Text.NL();
+		Text.Add("This, you suppose, involves stretching it thin with water, judging by all the cauldrons around?", parse);
+		Text.NL();
+		Text.Add("<i>“Don’t knock soup, [lad]. There’s more goodness in a pile of broth-bones than what you’ll ever find in a box full of candies. And of course, there’s bread and things and…”</i> Raine’s voice trails off for a moment, then she sighs. <i>“All right, I can’t tell you what the day’s menu will be until we figure out what’s been brought in and what I’ve got to work with for the day. But the point is that most folks are encouraged to do their own meals, and what’s being whipped up here is for those who don’t have the time or ability to do so. And of course, if you don’t work, you don’t eat.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“It’s a job truly worthy of a legendary hero, [lad], so my suggestion to you is if you like fixing things to your taste, then you oughta be seeing to your own chow. Now, I got work to do, so if you’re so minded, I’d like you to leave me alone. And I know your type - don’t go around offering to help me out, because if you want to do that then the best thing you can do for me is to stay out of my way.”</i>", parse);
+		Text.NL();
+		Text.Add("With that, she turns her attention downwards as a girl comes running up with a basketful of chopped spring onions. Grabbing a handful, Raine scatters the lot onto the broth’s bubbling surface, stirring the lot into the uniform white-brown mixture. Yeah, it seems like she’s busy right now - slowly, you back away from the lot and retreat in as hasty a fashion as is polite.", parse);
+	}
+	else {
+		var recipes = ["bone soup", "watery gruel", "cabbage soup", "vegetable stew", "salted porridge", "tough, gamey meat", "the medley of wild vegetables", "floury, overboiled potatoes", "viscous soup", "clear broth"];
+		var recipe = _.sample(recipes);
+		parse["recipe"] = recipe;
+		
+		Text.Add("As you make your way through the camp, your nose leads you to Raine’s little impromptu cookhouse once more. The wolfess is there as usual, stirring, chopping, tasting, stoking - when was the last time you ever saw her sleep or take a rest? Not anytime soon, as far as your memory goes.", parse);
+		Text.NL();
+		Text.Add("Then again, what she’s cooking up would wake the dead. Peering into the nearest of the bubbling cauldrons, you’re rewarded with an eyeful of [recipe] that’s to become the camp’s next public meal.", parse);
+		Text.NL();
+		Text.Add("<i>“Oi!”</i> Raine’s voice rings out from across the clearing. ", parse);
+		if(outlaws.Rep() < 20) {
+			Text.Add("<i>“[chow]’s not done yet, [lad], and if you start pestering me then it’ll never be finished! Clear out, clear out, you’re looking well-to-do enough to be looking after your own meals, anyways.”</i>", parse);
+		}
+		else if(outlaws.Rep() < 50) {
+			Text.Add("<i>“You don’t wanna be here right now, [lad]. Mealtime isn’t going to be coming around for a bit yet, and I’d appreciate it if you didn’t keep on sticking your nose in around these parts. There are children working here, you know. Don’t want to be getting in their way when they’re already accident-prone enough on their own. You want a meal, you wait your turn.”</i>", parse);
+			Text.NL();
+			Text.Add("Just when exactly <i>are</i> mealtimes, anyways?", parse);
+			Text.NL();
+			Text.Add("<i>“When they need to be,”</i> Raine replies without a single shred of irony. <i>“Folk coming back into camp after being out in the forest, they want to eat now, and where the sun is in the sky doesn’t have much to do with it. If you’re wanting regular meals, then my suggestion is that you do them yourself.”</i>", parse);
+		}
+		else {
+			Text.Add("<i>“C’mon, you’re a nice enough [lad], but I’m sure you know enough by now than to go and bother an old woman like me. C’mon, don’t you have some big mission or the other handed down by the boss? Go do that instead of bothering poor old me, and I’ll gladly serve you some of what’s cooking when it’s done.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, yeah… about that, you never seem to be around when she’s actually done cooking and started serving. In fact, you’re starting to wonder if there’s some sort of conspiracy about to never serve you any camp food…", parse);
+			Text.NL();
+			Text.Add("<i>“Don’t be ridiculous,”</i> Raine mutters as she puts her back into her work. <i>“Isn’t any good in doing that, is there? As I said, if you’re so concerned about eating well and regularly, this isn’t the place for you. ‘Sides, you ought to count yourself lucky that you’ve never had to taste anything I’ve cooked.”</i>", parse);
+		}
+		Text.NL();
+		Text.Add("Uh-huh. Well, you’ll leave it at that, then. Slowly, you withdraw, leaving Raine to her culinary matters. No… you don’t really envy those who have to eat her cooking, even if she <i>is</i> doing the best with what she’s got. ", parse);
+	}
+	Text.Flush();
+	
+	world.TimeStep({minute: 30});
+	
+	Gui.NextPrompt();
+}
+
+Scenes.Outlaws.Exploration.Cavalcade = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("<i>“Hey!”</i>", parse);
+	Text.NL();
+	Text.Add("Your stroll through the camp is interrupted by a sudden shout, clearly directed at you. Turning to face whoever’s addressing you, you find a small group gathered ", parse);
+	if(world.time.IsDay())
+		Text.Add("under the shade of a large willow tree", parse);
+	else
+		Text.Add("about a small fire under a large willow tree", parse);
+	Text.Add(", a deck of cards in their midst. Four of them are seated in a circle right in the middle, while the remainder cluster about the players, content to merely spectate for now.", parse);
+	Text.NL();
+	Text.Add("<i>“That’s right, you there!”</i> The speaker’s a lizan, and he waves you over to the group. <i>“Fancy a game of Cavalcade? My luck’s running a bit thin and I’m thinking of calling it quits, but we don’t have another player just yet. You want in?”</i>", parse);
+	Text.NL();
+	Text.Add("You look down at the game in question. Sure, it doesn’t seem like there’s too much of a difference from the version you’ve seen played at the nomads’ camp, but as with games of chance in unfamiliar settings, there’s always that twinge of doubt…", parse);
+	Text.NL();
+	Text.Add("<i>“Don’t worry about cheating. Doesn’t make sense to cheat when you know where the other guy lives, and it’s just a short stroll through the camp. So… you want in, or not?”</i>", parse);
+	Text.Flush();
+	
+	outlaws.flags["events"] |= Outlaws.Events.Cavalcade;
+	
+	//[Yes][No]
+	var options = new Array();
+	options.push({ nameStr : "Yes",
+		tooltip : "Sure, why not?",
+		func : function() {
+			Text.Clear();
+			Text.Add("Yeah, sure. You shrug your shoulders, push through the small crowd and step forward to take the lizan’s place, settling in with a minimum of fuss. One of the other players deals out the hand, and the game begins.", parse);
+			Text.NL();
+			Scenes.OutlawsCavalcade.PrepRandomCoinGame();
+		}, enabled : party.coin >= Scenes.OutlawsCavalcade.Bet()
+	});
+	options.push({ nameStr : "No",
+		tooltip : "Nah, not now.",
+		func : function() {
+			Text.Clear();
+			Text.Add("You shake your head and tell the lizan you’ve got better things to do at the moment.", parse);
+			Text.NL();
+			Text.Add("He shrugs. <i>“Well, we’ve more or less got a game constantly going on here, what with people going off-duty at all times of day. You want in on a game, all you have to do is come back here with a coin or two.”</i>", parse);
+			Text.NL();
+			Text.Add("Assuring the lizan that you will if you ever feel like it, you turn and make to leave.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Outlaws.Exploration.Archery = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("Your journey through the camp eventually brings you to the gates, where a small gathering is taking place. Wandering closer to get a better look, it quickly becomes apparent that there’s some sort of archery event going on - several straw dummies have been set up on the far end of a field, and another line has been marked out on the grass perhaps a hundred and twenty paces away from the dummies.", parse);
+	Text.NL();
+	Text.Add("Behind said line, a number of outlaws are busy either waiting their turn to have a go at the dummies, or busy loosing arrows downrange. Numbering about thirty to forty individuals in total, it certainly looks like quite the lively event, made even more so by the not inconsiderable amount of boasting, bragging and being called on said boasts and brags that’s going on.", parse);
+	Text.NL();
+	Text.Add("Maria and Vaughn are present, too, a little off to one side - the former is keeping score with a wooden board and piece of charcoal, while the latter takes drags on a cigarette in between retrieving fallen arrows from the range and in dummies. The former looks up at you as you approach, and gives you a curt nod.", parse);
+	Text.NL();
+	Text.Add("<i>“Oh, it’s you. We’re having a bit of a friendly competition right now.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“An archery competition,”</i> Vaughn adds. <i>“The lovely lass here is staying out of it, because she’d sweep the competition otherwise, and it’s no fun trying if you already know who’s going to win beforehand.”</i>", parse);
+	Text.NL();
+	Text.Add("Maria nods. <i>“That, and Vaughn and I are the only two whom everyone trusts fully not to try and change everyone’s scores on the sly or do something equally stupid, especially with the prize involved.”</i>", parse);
+	Text.NL();
+	Text.Add("You let your gaze roam around the scene once more - first to the dummies, then to the hopefuls taking potshots at said dummies, then at the small crate of bottled moonshine sitting by Maria’s feet. Ah, that makes more sense now.", parse);
+	Text.NL();
+	Text.Add("<i>“Vaughn’s right, too. Not that I don’t practice myself on my own time - and get plenty of opportunities to use said skills out there - but it would really kill the mood if I did join in. Then again…”</i> you’re suddenly aware of the fact that she’s studying you quite intently. <i>“I’d make an exception if you were to join, too. Just a small competition between us - and Vaughn, too. Isn’t that right, Vaughn?”</i>", parse);
+	Text.NL();
+	Text.Add("The fox-morph pushes up the brim of his hat and coughs up some smoke. <i>“Eh?”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“I said, you’d be more than willing to join in were [playername] willing to take part in our little contest, wouldn’t you?”</i>", parse);
+	Text.NL();
+	Text.Add("Vaughn shrugs. <i>“If you want. Not as if we’ll be needing score kept for us - all eyes are going to be pinned on our butts if we take the plate. All righty then, if [playername]’s in, I’m in. So… are you in, [playername]?”</i>", parse);
+	Text.Flush();
+	
+	//[Yes][No]
+	var options = new Array();
+	options.push({ nameStr : "Yes",
+		tooltip : "Sure, why not? A bit of friendly competition couldn’t hurt.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Sure, why not? Pitting yourself against Maria and Vaughn sounds like a bit of fun.", parse);
+			Text.NL();
+			Text.Add("<i>“Well then,”</i> Maria replies. <i>“Why don’t I just go explain to the boys that there’ll be one more detail after everyone’s done - and that no, we won’t be competing for the moonshine. In the meantime, why don’t you sit tight and let Vaughn explain the rules to you? I’ll be back before it’s your turn.”</i>", parse);
+			Text.NL();
+			Text.Add("With that, the ebony beauty saunters off, leaving you with Vaughn. The fox-morph clears his throat and jabs a furry finger at the targets.", parse);
+			Text.NL();
+			Text.Add("<i>“Yeah, rules are pretty simple; we’re trying to make sure that our people can loose an arrow straight and actually get it to hit something. So, shortbow or longbow’s up to you, you get five arrows, go ahead and stick them into the target. Arrow in the body’s worth one point, arrow through the head’s worth two. Personally found it better myself to aim for the center of mass, but kids these days want to be fancy, and I gotta admit, an arrow to the head’s much more lethal than an arrow to the knee is.”</i>", parse);
+			Text.NL();
+			Text.Add("Okay, five arrows, head two points, body one point. Anything else?", parse);
+			Text.NL();
+			Text.Add("<i>“That’s about it. We’re keeping it as simple as possible so that even an idiot can figure it out, and I’d like to think we all are just a tiny bit smarter than idiots.”</i>", parse);
+			Text.NL();
+			Text.Add("Ah. Right. Well, nothing to do but to wait for your turn; you stick around and watch the competition as it proceeds, various details coming up one after the other to loose their arrows at the targets. Vaughn counts and takes down the hits, Maria records the score; arrows are cleared from the range and pulled from the dummies, and the process repeats itself with the next detail. The outlaws are actually quite good shots - not that you’d expected them to be terrible at aiming, but it’s still quite remarkable, considering that they’ve had not much formal training, if any.", parse);
+			Text.NL();
+			Text.Add("Eventually, though, it’s your turn, and the three of you step forward to the line. Maria and Vaughn look at each other for a moment, then as one, turn to you. Though you’re not facing them, you can <i>feel</i> the collective gaze of everyone else on the back of your neck, more than a little expectant.", parse);
+			Text.NL();
+			Text.Add("<i>“Visitors first,”</i> Maria says, her lips turning upwards in a smile.", parse);
+			Text.NL();
+			Text.Add("Very well. You pick up the bow offered to you, give the string a few test draws, then prepare to nock an arrow in earnest, eyes fixed on your target. What will you aim your arrows for?", parse);
+			Text.Flush();
+			
+			var goal = 50;
+			var goal2 = 70;
+			var dex = player.Dex() + player.Str();
+			if(Jobs.Ranger.Unlocked(player)) dex += 2*player.jobs["Ranger"].level;
+			
+			//[Head][Body]
+			var options = new Array();
+			options.push({ nameStr : "Head",
+				tooltip : "Score high! Show off a bit and aim for the head.",
+				func : function() {
+					dex += _.random(0,20);
+					
+					Text.Clear();
+					Text.Add("Well, you’re feeling like showing off today - why not go for the head? It’d definitely make for an impressive show… hopefully you have the skills to back it up, though.", parse);
+					PrintDefaultOptions();
+				}, enabled : true
+			});
+			options.push({ nameStr : "Body",
+				tooltip : "Go for the more reliable center of mass.",
+				func : function() {
+					dex += _.random(10,25);
+					
+					Text.Clear();
+					Text.Add("Deciding to go for a conservative approach, you decide to aim for the dummy’s centre. One bird in hand is worth two in the bush and all that, right?", parse);
+					PrintDefaultOptions();
+				}, enabled : true
+			});
+			
+			Gui.Callstack.push(function() {
+				Text.NL();
+				Text.Add("Holding your breath, you take aim, and loose the arrows at your target in turn, watching them arc as they whistle through the air. At length, Maria and Vaughn take their turns at the line, loosing their arrows much like you have, and after it’s all over the latter ambles down the range to count the number of hits everyone’s landed.", parse);
+				Text.NL();
+				if(DEBUG) {
+					Text.Add("DEBUG: dex+str [dex] (vs [goal], [goal2])", {dex: dex, goal: goal, goal2: goal2}, 'bold');
+					Text.NL();
+				}
+				if(dex >= goal2) {
+					Text.Add("<i>“[playername] comes in first, with Maria in second. I’m dead last,”</i> Vaughn drawls as he turns back to everyone. <i>“Come up and see for yourself, if you want.”</i>", parse);
+					Text.NL();
+					Text.Add("Maria waves off the offer even as a few more curious outlaws accept Vaughn’s invitation and wander up to the targets. <i>“Well, [playername]. Seems like you managed to beat the both of us fair and square - congratulations.”</i>", parse);
+					Text.NL();
+					Text.Add("Aw, shucks. It could’ve gone any way.", parse);
+					Text.NL();
+					Text.Add("<i>“Well, we’ll see about that next time. We’ll be doing this again in a little while when the next batch of moonshine gets cooked up, so I’d like it if you could turn up again when that happens. I expect Vaughn and I will have improved by then, of course, and I hope you’ll have done the same, too.”</i>", parse);
+					
+					outlaws.flags["events"] |= Outlaws.Events.BeatMaria;
+					
+					maria.relation.IncreaseStat(50, 2);
+					outlaws.relation.IncreaseStat(30, 2);
+				}
+				else if(dex >= goal) {
+					Text.Add("<i>“Maria’s in first, with [playername] second. Naturally, I’m dead last,”</i> Vaughn drawls from down the rage. <i>“Not a big surprise, really; come up and see if you want.”</i>", parse);
+					Text.NL();
+					Text.Add("By and large, a few of the outlaws wander down the range to where Vaughn’s standing, poring over the target dummies. <i>“Maria won?”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Well, of course, nitwit. She wins every time. That’s why she sits out these days and referees.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Sure, but there was that new [guygirl]…”</i>", parse);
+					Text.NL();
+					Text.Add("Coming up to you, Maria punches you lightly on the back of your shoulder. <i>“I wouldn’t feel too off about it if I were you. I am, after all, quite good at this.”</i>", parse);
+					Text.NL();
+					Text.Add("That’s a bit of an understatement, isn’t it?", parse);
+					Text.NL();
+					Text.Add("<i>“There’s a difference between giving credit where it’s due and bragging. Zenith frowns on the latter.”</i> Maria pauses a moment, her lips moving silently, then clears her throat. <i>“Well, at least you’ve demonstrated what you’re capable of. I hope you’ll keep improving - I plan to do so, at any rate.”</i>", parse);
+					
+					maria.relation.IncreaseStat(30, 1);
+					outlaws.relation.IncreaseStat(20, 1);
+				}
+				else {
+					Text.Add("<i>“Maria’s first, I’m next, and [playername] came in last,”</i> Vaughn calls out from down the range. <i>“See for yourself if you want.”</i>", parse);
+					Text.NL();
+					Text.Add("A few outlaws take him up on his offer, ambling down to take a look-see at the target dummies. Maria smiles, shrugs, and pats you on the shoulder. <i>“Hey, at least you were a good sport. That counts for something, so don’t sweat it. Not everyone’s made to draw a bowstring.”</i>", parse);
+					Text.NL();
+					Text.Add("Maybe. Maybe not.", parse);
+					Text.NL();
+					Text.Add("<i>“Well, if you intend to brush up on your archery skills, you’re more than welcome to join in on the next one - we should be having another competition when the next batch of moonshine’s been brewed up. Of course, don’t imagine that I won’t be practicing myself, either.”</i>", parse);
+				}
+				Text.NL();
+				Text.Add("Well, she’ll just have to wait for the next time to find out, won’t she?", parse);
+				Text.NL();
+				Text.Add("<i>“Of course.”</i> She quirks an eyebrow at you. <i>“Hope you enjoyed yourself, because I know I did. I’ll see you around.”</i>", parse);
+				Text.NL();
+				Text.Add("With that, Maria gives you a small wave and departs to join her men, who’ve taken to enthusiastically emptying the moonshine crate of its contents. Well, seems like that wraps this little event up, then - you can see why it’s help, let the poor saps blow off some steam every now and then - but whether you’d like to get rip-roaringly drunk or not, it doesn’t look like the other outlaws are inclined to share.", parse);
+				Text.NL();
+				Text.Add("Oh well, there’s always another time. You take a moment to gather yourself, then turn to leave.", parse);
+				Text.Flush();
+				
+				world.TimeStep({hour: 1});
+				
+				Gui.NextPrompt();
+			});
+			
+			Gui.SetButtonsFromList(options, false, null);
+		}, enabled : true
+	});
+	options.push({ nameStr : "No",
+		tooltip : "You don’t feel like it today. Maybe not.",
+		func : function() {
+			Text.Clear();
+			Text.Add("You shake your head, declining Maria’s offer to join the archery competition - whatever your reasons, you just don’t feel like it today. Maria looks a little surprised at your refusal, but shrugs it off with a little more nonchalance than strictly necessary.", parse);
+			Text.NL();
+			Text.Add("<i>“Suit yourself. Detail three, you’re up next!”</i>", parse);
+			Text.NL();
+			Text.Add("You linger to watch the competition for a little while - despite the varying quantities of watered-down beer being passed around, the outlaws are actually quite competent shots with shortbow and longbow alike, with at least more arrows actually finding their mark rather than going wide. Vaughn counts and takes down the hits, Maria records the score, and the process repeats itself until the last detail’s done.", parse);
+			Text.NL();
+			Text.Add("At the end of it all, the winner’s a three-way tie between a pure human and two morphs, and to the victors, the spoils: the crate of moonshine is quickly divided up and hauled away, presumably to be enjoyed somewhere else. A few of the competitors hang around to gather up the loose arrows and take down the dummies from the range, and out of the corner of your eye you spy Maria coming up to you, a small smile on her face.", parse);
+			Text.NL();
+			Text.Add("<i>“Enjoy yourself?”</i>", parse);
+			Text.NL();
+			Text.Add("Her men certainly did, that’s for sure.", parse);
+			Text.NL();
+			Text.Add("<i>“It’s true that we would like to do these more often, but since we don’t have that much moonshine - and can’t afford that many days where a whole squad can be rip-roaringly drunk - we settle for some measure of regularity. Besides, it’s another reason for everyone to keep their skills sharp.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Maybe you’ll compete next time, won’t you?”</i>", parse);
+			Text.NL();
+			Text.Add("She sure seems set on seeing what you’ve got, doesn’t she?", parse);
+			Text.NL();
+			Text.Add("Maria shrugs and tosses her hair. <i>“You’re officially one of our operatives now, you know. Do you think it strange that I’m interested in seeing what you can do?”</i>", parse);
+			Text.NL();
+			Text.Add("And there’s absolutely no other reason for her pestering you to join in?", parse);
+			Text.NL();
+			Text.Add("<i>“Pestering? I only brought it up twice. If that’s the way you want it, suit yourself; your skills will out in time to come. Me, I’ve got bigger fish to fry.”</i> She gives you a nod and smile. <i>“Enjoy the rest of your day, [playername]. I’ll see you around.”</i>", parse);
+			Text.Flush();
+			
+			world.TimeStep({hour: 1});
+			
+			Gui.NextPrompt();
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Outlaws.Exploration.CampFollowers = function() {
+	var parse = {
+		s : player.sexlevel >= 4 ? "familiar" : "odd"
+	};
+	
+	Text.Clear();
+	Text.Add("As you pick your way through the sea of tents that make up the camp, a rather… [s] noise reaches your ears. Wondering where it’s originating from - the sea of tents is quite terribly packed, after all - you stop and listen for a moment, and yes, there it is again, coming from one of the tents just ahead of you. As you pass it by, perhaps meandering a little closer than what’s strictly required, the grunts and moans coming from within leave little doubt as to the nature of the activity that’s going on inside.", parse);
+	Text.NL();
+	Text.Add("You’ve heard of buildings and thin walls, but a thin sheet of canvas has got to take the cake. Ah well, all camps have their followers, and it seems like the outlaws are no different. Swords have to have sheaths of varying sorts and all that.", parse);
+	Text.NL();
+	Text.Add("Shaking your head, you continue on your way.", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 10});
+	
+	Gui.NextPrompt();
+}
+
+Scenes.Outlaws.Exploration.Feeding = function() {
+	var parse = {
+		outlaw1 : Scenes.Outlaws.Exploration.RandName(),
+		outlaw2 : Scenes.Outlaws.Exploration.RandName()
+	};
+	
+	Text.Clear();
+	Text.Add("Passing by the river, you catch wind of two outlaws chatting away by the stand of willow trees. Since you’re headed in their direction anyway, you can’t help but overhear something of their conversation - not that they’re doing anything to disguise it, of course:", parse);
+	
+	var scenes = new EncounterTable();
+	
+	scenes.AddEnc(function() {
+		Text.Add(" <i>“So, guess what Raine just served up from the cookpot?”</i> [outlaw1] says.", parse);
+		Text.NL();
+		Text.Add("The other outlaw, [outlaw2], sighs. <i>“No. Should I guess?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Don’t bother. Lemongrass boiled with wild cabbage and carrots, then served up as soup.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Ugh. Still, you have to hand it to the old wolf. She does what she can with the things everyone brings in, and let’s face it - eating from her cookpot is supposed to be a punishment of sorts, if you can’t scrape together your own lunch.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“I know. It wasn’t good, but at least I could stomach it. Still…”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“If we could still afford to eat well we’d still be living in Rigard, and you know it.”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add(" <i>“...Well, there’s the food situation,”</i> [outlaw1] says.", parse);
+		Text.NL();
+		Text.Add("<i>“Huh.”</i> The other outlaw, [outlaw2], looks thoughtful at this. <i>“I dunno, if you’re going to be worrying about this all the time, you might as well ask Zenith to be made quartermaster or something and at least get some credit for it.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“This isn’t about me, it’s about what there is to eat. Sure, the forest has given us enough to get by for the moment, but that can’t last forever. Every day pickers are having to go further, while game’s learning to avoid us. And with that slow but steady trickle of people coming in from the slums, we’re going to hit the point where there just isn’t enough to go around.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“The vegetable garden idea worked out kinda well.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“It’s still not enough. Forest soil is pretty poor, to be honest, and if we cleared out the land required to produce enough to feed everyone we might as well head up to the royal guard and tell them where we are. No, what we should do is make some friends out of the plains farmers…”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Only problem is, what do we have that they’d risk associating with folk like us to get?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“I’m still working on that problem…”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add(" One of them, [outlaw1], grins. <i>“Did you see that thing that got built the other day?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“No, what do you mean?”</i> The other outlaw, [outlaw2], looks appropriately skeptical.", parse);
+		Text.NL();
+		Text.Add("<i>“That thing with planters stacked like a stepladder. Idea’s that we can grow a few things on the side, and with them stacked on each other like that they won’t take up that much space. Same principle as mushroom logs, really.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Dunno, I’ll believe it when I see it…”</i>", parse);
+	}, 1.0, function() { return true; });
+	
+	scenes.Get();
+	
+	Text.NL();
+	Text.Add("It’s then that they realize you’re listening in, and quickly pipe down, eyeing you cautiously. Well, you’d heard enough anyway - passing them by, you pace along the riverside in as nonchalant a fashion as you can even as you feel their gazes on the back of your neck.", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 20});
+	
+	Gui.NextPrompt();
+}
+
+Scenes.Outlaws.Exploration.Carpentry = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("Your meanderings through the outlaw camp bring you close to the Map Room this time around. Oddly enough, no one’s in at the moment - there’s no light filtering out from between the window shutters - which is interesting in itself. With how much time Zenith seems to spend in there, he might as well live in the place. Does he? You’ve never really had the chance to peek into any of the adjoining rooms in the building -", parse);
+	Text.NL();
+	Text.Add("<i>“Free time?”</i>", parse);
+	Text.NL();
+	Text.Add("You turn at the familiar voice, and find Vaughn round the back of the building, sanding a plank with a large square of sandpaper. A few beautifully smoothed planks are laid out on the wall beside him, and there’re a couple more waiting to receive the treatment. The fox-morph has shed his hat, having hung it up on a nail on the wall, his kerchief is soaked with sweat, and there’s a distinct smell of sawdust about his person.", parse);
+	Text.NL();
+	Text.Add("Pardon?", parse);
+	Text.NL();
+	Text.Add("<i>“Free time’s precious ‘round these parts,”</i> he grunts as he continues to rub away at the splinters. <i>“Precious, ‘cause you only get it when you’ve finished work. Got a folding table here which needs making, but the planks aren’t going to smooth themselves and a single pair of arms gets tired really easy.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“I guess what I’m saying is that I’m asking for your help, if you’ve got a moment to spare. Just smoothing out a couple of planks and all…”</i>", parse);
+	Text.Flush();
+	
+	//[Yes][No]
+	var options = new Array();
+	options.push({ nameStr : "Yes",
+		tooltip : "Sure, why not? You weren’t doing anything of import, after all.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Nodding, you accept a square of sandpaper and freshly-hewn plank from Vaughn, and set to work. Even though you quickly fall into a steady scrubbing rhythm, using your back rather than your arm to work the plank’s surface, the effort still takes the wind out of your sails surprisingly quickly. Vaughn himself has his head bowed and gaze pinned on his own work, eyes hard and narrow as he sands both sides of the plank in turn.", parse);
+			Text.NL();
+			Text.Add("Eventually, though, he straightens himself and wipes the sweat off his brow with the back of his hand. <i>“Whew. You holding up all right there, [playername]?”</i>", parse);
+			Text.NL();
+			Text.Add("Yeah, you’ll be fine. You have the lingering suspicion that you’ll be sore for a bit later on, but you’re fine for now. Just need to get the other side done.", parse);
+			Text.NL();
+			Text.Add("<i>“Thanks for agreeing to help out. It’s hard work, and you didn’t have to say yes.”</i>", parse);
+			Text.NL();
+			Text.Add("Oh, it’s no bother. It’s a good workout, after all; you feel stronger already!", parse);
+			Text.NL();
+			Text.Add("<i>“Well, glad you’re feeling all great about it. More people could use a dose of hard work with their hands every now and then, I think. It makes for better people.”</i>", parse);
+			Text.NL();
+			Text.Add("Really? That’s an interesting way to put it.", parse);
+			Text.NL();
+			Text.Add("<i>“Yep.”</i> Vaughn flips his plank over and starts sanding the other side. <i>“I think that if all the nobs were required to do an actual hour’s worth of hard work a week, they’d all be in much better shape, and so would we. I mean, Riordane at least held his own sword and did his own killing, now the nobs don’t even lower themselves to do that. No, they’ve got the royal guard for that.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“As I said, it doesn’t have to be a lot, an hour a week to get them sweating. Just enough to impress upon them what hard work’s for. It’s why I make sure my people get a regular dose of working with their hands, and they can’t complain because I’m doing the same thing right by their side.”</i>", parse);
+			Text.NL();
+			Text.Add("Like now?", parse);
+			Text.NL();
+			Text.Add("<i>“Nah, this here’s a more personal project. But you’re right, it’s hard work all the same.”</i> Vaughn wipes off his brow once more, then straightens up and stretches. <i>“I think we’re about done here; thanks for the help. It’s about time I headed indoors and started putting this folding table together.”</i>", parse);
+			Text.NL();
+			Text.Add("Oh. You hand over the plank you were sanding, as well as the sandpaper. While you weren’t really that experienced at the job, at least you did your best. Could he use any help?", parse);
+			Text.NL();
+			Text.Add("<i>“Thanks for the offer, but no. It’s more brains than brawn from here on out. Gotta keep in practice with the carpentry and all, and odd jobs like these are the best for that. You look like you could use a wipe-off, [playername] - why don’t you do that before you catch a chill, and get a drink while you’re about it?”</i>", parse);
+			Text.NL();
+			Text.Add("Yeah, maybe you’ll do that.", parse);
+			Text.NL();
+			Text.Add("<i>“I’ll see you around then,”</i> Vaughn calls out over his shoulder as he heads into the map building, a stack of planks under each arm. <i>“And thanks again for the help.”</i>", parse);
+			Text.Flush();
+			
+			outlaws.relation.IncreaseStat(20, 1);
+			world.TimeStep({hour: 1});
+			
+			Gui.NextPrompt();
+		}, enabled : true
+	});
+	options.push({ nameStr : "No",
+		tooltip : "You’ll pass, thanks. It’s his job, not yours.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Nah, thanks. You were just passing by, anyway.", parse);
+			Text.NL();
+			Text.Add("Vaughn dips his head in acknowledgement. <i>“Yeah, I understand. Folks value their rest time and all, I know my people do. Well, I’ve got to keep on the job if I’m going to get this done before sundown. You just enjoy your time off and don’t drink too much moonshine, all right?”</i>", parse);
+			Text.NL();
+			Text.Add("All right - not that you were planning to drink any of the outlaws’ moonshine, anyway. You return Vaughn’s nod, leave him to his work, and are gone from sight before long.", parse);
+			Text.Flush();
+			
+			world.TimeStep({minute: 20});
+			
+			Gui.NextPrompt();
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Outlaws.Exploration.FactFinding = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	var first = !(outlaws.flags["events"] & Outlaws.Events.FactFind);
+	outlaws.flags["events"] |= Outlaws.Events.FactFind;
+	
+	Text.Clear();
+	if(first) {
+		Text.Add("Deciding to take a quick stroll through the outlaw camp, your ambling brings you to the gates and an interesting sight: Zenith himself is by the camp’s exit, chatting with one of the sentries on duty while Maria waits by his side. A number of morphs are coming up with the drawbridge, so it’s quite clear that the outlaw leader and his aide are planning to make a trip of some sort.", parse);
+		Text.NL();
+		Text.Add("That’s curious in and of itself: as far as you can remember, Zenith doesn’t leave the map building for casual jaunts, let alone a trip out of the camp for pleasure’s sake. Noticing your arrival, he breaks off the conversation and dismisses the sentry, then turns to you.", parse);
+		Text.NL();
+		Text.Add("<i>“[playername]. To what do I owe the honor of your arrival?”</i>", parse);
+		Text.NL();
+		Text.Add("Oh, nothing much. You just noticed that he’s out and about. Something important turn up?", parse);
+		Text.NL();
+		Text.Add("<i>“It’s important all right, but it didn’t just ‘turn up’, as it were,”</i> Zenith replies. <i>“Maria and I are going on what I like to call a fact-finding trip.”</i>", parse);
+		Text.NL();
+		Text.Add("A fact-finding trip?", parse);
+		Text.NL();
+		Text.Add("Zenith doesn’t say anything, but looks down at Maria, who hesitates for a moment before explaining. <i>“It’s where we go out and just observe. Watch the people about their lives, as it were, and take their pulse, as Aquilius would put it. Sometimes we go to the slums, sometimes we go out into the plains and watch the farms, and sometimes we even sneak into Rigard. It’s a bit of a mixed bag.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Maria has the succinct version of events, yes,”</i> Zenith adds. <i>“But there’s more to it than just going and looking. There are a number of reasons for this, but there’re a number of reasons why I’m currently seeking allies who aren’t outlaws in and of themselves, but have reason to resent Rigard and the insanity that comes out of it. Acting in and of ourselves will only bring limited success - we need to cast further abroad for like minds. You’re one such example.”</i>", parse);
+		Text.NL();
+		Text.Add("All right, you understand. But you’re not quite sure why he does this himself.", parse);
+		Text.NL();
+		Text.Add("<i>“Should there be a problem with that?”</i>", parse);
+		Text.NL();
+		Text.Add("Well, he <i>is</i> exposing himself unnecessarily, isn’t he?", parse);
+		Text.NL();
+		Text.Add("<i>“As opposed to Rewyn standing up on a balcony a handful of times a year and giving a twenty-minute speech before disappearing into that castle he calls home? That’s hardly a way to live, is it?”</i> Scratching the stubble on his chin, Zenith smiles wryly at you. <i>“Nor, I think, is it a very useful or persuasive way to rule.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Then, of course, there’s the matter of me liking to see things for myself and making my own judgements based on my own observations, as opposed to overly relying on the reports of others. We all color our thoughts, [playername], but some do it more than others.”</i>", parse);
+		Text.NL();
+		Text.Add("That’s quite the speech.", parse);
+		Text.NL();
+		Text.Add("<i>“I’m quite open about what I intend, [playername]. I find it rather freeing, after a young spent in apprenticeship at the guild. Well then, I hope you understand more about our motivations now, but Maria and I really have to be going if we’re to do anything useful on our little trip. Watch your back if you’re going to heading out there.”</i>", parse);
+		Text.NL();
+		Text.Add("You nod and watch as the gate sentries finally get the drawbridge in place. Zenith and Maria cross and quickly slip into the forest’s dense growth, and the drawbridge is pulled back once more.", parse);
+	}
+	else {
+		Text.Add("Passing by the gates again as you explore the camp, you notice Zenith and Maria preparing to head out once more, presumably on another of their so-called fact-finding excursions. You call out to them as you approach, and they greet you with a nod.", parse);
+		Text.NL();
+		Text.Add("<i>“We’re about to head out again, yes. Was there something you needed?”</i>", parse);
+		Text.NL();
+		Text.Add("Oh no, not really. You were wondering if their trip the last time bore any fruit. Where did they go, and did they learn anything useful?", parse);
+		Text.NL();
+		
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			Text.Add("<i>“We went out with a cart and talked to some farmers on the plains. Bought some grain and preserves in bulk, had a chat about the policies coming out of Rigard,”</i> Zenith taps his chin and chews in silence. <i>“They haven’t reached the tipping point yet, when their anger is greater than their fear of the Crown and its arms. Certainly not enough to want to give our people work as farmhands. They’ve still got enough to lose that they think that if they keep their heads down they’ll come out of the other side unscathed. I’m not so sure about that myself.”</i>", parse);
+			Text.NL();
+			Text.Add("He thinks it’ll get that bad?", parse);
+			Text.NL();
+			Text.Add("<i>“It’s just common sense. The plains are Rigard’s breadbasket, and when things get bad in there, it’ll get bad for the farmers, too. Food confiscations, at the very least.”</i>", parse);
+			Text.NL();
+			Text.Add("Hopefully he’ll be able to talk one or two of them into coming around to his point of view.", parse);
+			Text.NL();
+			Text.Add("Zenith nods. <i>“I don’t blame them. They’ve got roots that they’d rather not see pulled out, and their farms make them an obvious and large target. Not like us scheming vagabonds.”</i> He says it with such a completely straight face that you aren’t sure if he’s joking or not. <i>“For now, though, them being willing to sell to us under the table and look the other way is good enough for us. We can’t live off the forest completely, and they get to avoid taxes on sales. It’s a win-win situation.”</i>", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“We took a day trip down to Orsineau,”</i> Maria tells you. <i>“There’re some interesting developments going on down in that little town which might turn out to be quite significant down the line.”</i>", parse);
+			Text.NL();
+			Text.Add("Oh? Might you ask what these would be, or is this information not for you?", parse);
+			Text.NL();
+			Text.Add("<i>“Not the details,”</i> Zenith grunts. <i>“I don’t want to count my chickens before they’re hatched. But it’s where the estate of the Queen’s family lies, and everyone knows that she’s been more partial to morphs than most, much to her husband’s ire.”</i>", parse);
+			Text.NL();
+			Text.Add("You see.", parse);
+			Text.NL();
+			Text.Add("<i>“If we’re successful, you’ll hear about it. If we’re not… well, you won’t hear about it,” Maria adds. <i>“Fishing for potential allies doesn’t often turn out much success, so we often do those things as an afterthought. There’s something else we still need to do in Orsineau, don’t we?”</i>", parse);
+			Text.NL();
+			Text.Add("Zenith eyes Maria sternly. <i>“We’ll need to speak about that later, yes. But not now.”</i>", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“Down in the slums, of course,”</i> Zenith mutters. <i>“Picking up pieces from our eyes and ears on the ground, and doing what we can for the aggrieved.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Or at least, for those who want to be helped.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Yes. They’ve always been downtrodden, but some just want to give up. It’s been so long since the civil war…I don’t know if it’s for better or for worse that the younger ones haven’t known better times. They don’t have the past to pine for, at the very least, but at the same time, no one should have to live in such conditions unless they really deserved it. I can tell you from experience, at least three quarters of all who live in the slums don’t.”</i>", parse);
+			Text.NL();
+			Text.Add("Ah, you see.", parse);
+			Text.NL();
+			Text.Add("<i>“A stop by the Maiden’s Bane to pick up some goods, and another stop in the Spitting Lion to take stock of who’s going in and out of the city these days.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“He likes to have a proper drink, anything that tastes better than the moonshine brewed up here,”</i> Maria adds, smiling. <i>“But he’ll never admit it.”</i>", parse);
+			Text.NL();
+			Text.Add("Zenith frowns. <i>“Would you rather I sit down nursing a glass of water, and draw unwanted attention to myself?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“See what I mean?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“That’s enough,”</i> Zenith says with a frown, cutting Maria off with a quick slice of his hand.", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<i>“Just some sundry work in Rigard,”</i> Zenith tells you. <i>“Checking in on our operatives in the merchants’ district and in the brothel, hearing the latest news for ourselves…”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Leading the city watch on a silly chase…”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“You did that, not me.” Zenith grunts and rolls his shoulders. “I’m getting a little too old to start wasting my energy for the sake of doing so.”</i>", parse);
+			Text.NL();
+			Text.Add("You know they’ve been doing this a long time, but still, you can’t help but worry.", parse);
+			Text.NL();
+			Text.Add("<i>“And of course, check up on what latest insanity is pouring out from the castle on the hill. The best we can hope for these days is for things not to get worse, but I’m often surprised - and not in a good way,”</i> Zenith continues. <i>“I wouldn’t be surprised if Rewyn suddenly ordered everyone to start wearing red on Tuesdays on pain of a day in the stocks, for example.”</i>", parse);
+			Text.NL();
+			Text.Add("It’s that bad? Mightn’t he be exaggerating just a little?", parse);
+			Text.NL();
+			Text.Add("<i>“It is that bad.”</i>", parse);
+		}, 1.0, function() { return true; });
+		
+		scenes.Get();
+		
+		Text.NL();
+		Text.Add("There’s a brief moment while the both of them look thoughtfully at each other, and at length, Zenith shrugs.", parse);
+		Text.NL();
+		Text.Add("<i>“Well, we ought to be heading on out again. There’re only so many hours in a day, after all. And what do you intend to do with the rest of today, [playername]? Something productive, I hope?”</i>", parse);
+		Text.NL();
+		Text.Add("Without waiting for a reply, he turns and strides for the gates - the drawbridge is already down, and both Zenith and Maria cross before quickly disappearing amidst the trees of the forest, leaving you to consider what was just said.", parse);
+	}
+	Text.Flush();
+	
+	world.TimeStep({hour: 1});
+	
+	outlaws.factTimer = new Time(0,0,3,0,0);
+	
+	Gui.NextPrompt();
+}
+
+Scenes.Outlaws.Exploration.DailyLife = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("The camp’s at peace today, as far as you can tell. Be it day or night, there’s always something to be done, some chore to be taken care of, and of course, someone up and about to do it.", parse);
+	Text.NL();
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("Today, a good proportion of the camp’s involved in preparing fresh game brought in from the forest. Skinning, gutting, butchering take enough hands and are but the first steps in the chain of jobs that goes down the line; meat is set aside to be salted or smoked, bones are collected for soup and meal, and hides and pelts carefully scraped free of flesh, washed, and hung out to dry before heading for the curing tubs.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("You pass by a number of folk busy splitting firewood - green logs and branches, still fresh with moisture from the forest, have to be hacked up into regular, more manageable pieces and laid out to dry. It’s back-breaking labor, but someone has to do it, and with firewood it’s far better to get it chopped in advance than to do so when one actually needs the stuff.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		parse["day"] = world.time.IsDay() ? "in the shade of the willow grove" : "by the light of several large torches";
+		Text.Add("On your trip by the river, you find a number of folk hanging about on the riverbank [day]. A small pond of sorts has been dug into the riverbank with a net stretched across its mouth, and it seems that several large catfish and freshwater prawns are being raised inside, fed scraps from the camp’s meals.", parse);
+		Text.NL();
+		Text.Add("That’s not the only thing going on about these parts, of course. Several fish traps of woven wicker have been set in the river’s fast-flowing current, and as you watch, several morphs go about the business of emptying them of their catch and setting new bait. A little further downstream, a small team of outlaws tends to one of the bridges that spans the stream, ripping out rotted planks and replacing them with fresh, pitch-soaked ones under Vaughn’s watchful eye.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("In a corner of the camp, you find a small kitchen garden tended to by a handful of young, dirty children in patched clothes. They give you suspicious looks as you pass by, but say nothing, being too busy with weeding and watering. Watched over by a bored-looking fox kit, a flock of chickens wanders through the garden, scratching at the soft soil for bugs and worms.", parse);
+		Text.NL();
+		Text.Add("You take stock of the plants - tomatoes, ginger, garlic, carrots, to name a few. Not the sort of vegetables which would make a meal - not in the quantities they’re served in - but at least they’ll give a little flavor to whatever watery broth they’ve the misfortune of being added to.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("Wandering through the sea of tents, you come by a small gaggle of women busy making preserves from sun-dried fruit - small red berries of some sort, it seems. Without the luxuries of salt and sugar, they’ve resorted to vinegar for their pickling needs, and the sharp, acrid tang of such is heavy in the air as they sit on the grass in a circle, sharing the latest gossip.", parse);
+	}, 1.0, function() { return true; });
+	
+	scenes.Get();
+	
+	Text.NL();
+	Text.Add("It seems that no matter where one goes, some things just don’t change, despite the circumstances and surroundings in which they take place in. Almost as if the outlaws are trying to cling to some small part of their former lives and a sense of normalcy, regardless of their current position.", parse);
+	Text.NL();
+	Text.Add("Which makes sense. If you were in their position and kept on thinking about it, it’d be really easy to give in to despair. Shaking your head, you turn from the scene and head back, wondering just how long this can go on.", parse);
+	Text.Flush();
+	
+	world.TimeStep({minute: 30});
+	
+	Gui.NextPrompt();
 }

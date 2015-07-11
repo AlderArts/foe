@@ -108,6 +108,38 @@ world.loc.Outlaws.Camp.events.push(new Link(
 ));
 
 
+world.loc.Outlaws.Camp.enc = new EncounterTable();
+world.loc.Outlaws.Camp.enc.AddEnc(function() {
+	return Scenes.Outlaws.Exploration.ChowTime;
+}, 1.0, function() { return world.time.hour >= 5 && world.time.hour < 22; });
+world.loc.Outlaws.Camp.enc.AddEnc(function() {
+	return Scenes.Outlaws.Exploration.Cavalcade;
+}, 1.0, function() { return Scenes.OutlawsCavalcade.Enabled(); });
+world.loc.Outlaws.Camp.enc.AddEnc(function() {
+	return Scenes.Outlaws.Exploration.Archery;
+}, 1.0, function() { return outlaws.flags["Met"] >= Outlaws.Met.MetBelinda && world.time.IsDay(); });
+world.loc.Outlaws.Camp.enc.AddEnc(function() {
+	return Scenes.Outlaws.Exploration.CampFollowers;
+}, 1.0, function() { return !world.time.IsDay(); });
+world.loc.Outlaws.Camp.enc.AddEnc(function() {
+	return Scenes.Outlaws.Exploration.Feeding;
+}, 1.0, function() { return true; });
+world.loc.Outlaws.Camp.enc.AddEnc(function() {
+	return Scenes.Outlaws.Exploration.Carpentry;
+}, 1.0, function() { return outlaws.flags["Met"] >= Outlaws.Met.MetBelinda; });
+world.loc.Outlaws.Camp.enc.AddEnc(function() {
+	return Scenes.Outlaws.Exploration.FactFinding;
+}, 1.0, function() { return outlaws.factTimer.Expired(); });
+world.loc.Outlaws.Camp.enc.AddEnc(function() {
+	return Scenes.Outlaws.Exploration.DailyLife;
+}, 1.0, function() { return true; });
+/* TODO
+world.loc.Outlaws.Camp.enc.AddEnc(function() {
+	return function() {
+		
+	};
+}, 1.0, function() { return true; });
+*/
 
 world.loc.Outlaws.Infirmary.description = function() {
 	var parse = {

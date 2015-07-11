@@ -9,7 +9,7 @@ VERSION_MINOR = 4;
 VERSION_SUBSCRIPT = "f";
 VERSION_NAME = "Under the Dragon's Claw";
 
-SAVE_VERSION = 26;
+SAVE_VERSION = 27;
 // Save version 1: Initial
 // Save version 2: Added inventory
 // Save version 3: Fixed clitcock restoration + height, weigth

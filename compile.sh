@@ -155,6 +155,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/outlaws/maria-dd.js \
 	js/event/outlaws/cveta.js \
 	js/event/outlaws/bulltower.js \
+	js/event/outlaws/cavalcade.js \
 	js/event/raven.js \
 	js/event/roaming.js \
 	js/event/citywatch.js \
