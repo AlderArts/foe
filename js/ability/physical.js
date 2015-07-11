@@ -441,3 +441,30 @@ Abilities.Physical.Taunt.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("[tName] become[tnotS] agitated, turning more aggressive toward [name]!", parse);
 	}]
 }));
+
+
+Abilities.Physical.Fade = new Ability("Fade");
+Abilities.Physical.Fade.Short = function() { return "Fade from the focus of the enemy."; }
+Abilities.Physical.Fade.cooldown = 3;
+Abilities.Physical.Fade.targetMode = TargetMode.Enemies;
+Abilities.Physical.Fade.cost = { hp: null, sp: 50, lp: null};
+Abilities.Physical.Fade.castTree.push(AbilityNode.Template.Physical({
+	toDamage: null,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster);
+		Text.Add("[Name] fade[notS] from notice.", parse);
+	}],
+	onMiss: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.NL();
+		Text.Add("[tName] [tis] not very impressed.", parse);
+	}],
+	onHit: [function(ability, encounter, caster, target) {
+		var aggroEntry = GetAggroEntry(target.GetCombatEntry(encounter), caster);
+		if(aggroEntry)
+			aggroEntry.aggro /= 2;
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.NL();
+		Text.Add("[tName] become[tnotS] distracted, turning [thisher] attention away from [name]!", parse);
+	}]
+}));

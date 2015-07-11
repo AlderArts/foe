@@ -304,7 +304,7 @@ Jobs["Rogue"].levels.push(new JobLevel(80,   [{ab: Abilities.Physical.Kicksand, 
 Jobs["Rogue"].levels.push(new JobLevel(160,  null, {"dex" : 0.3}));
 Jobs["Rogue"].levels.push(new JobLevel(320,  [{ab: Abilities.Physical.Swift, set: "Support"}], {"dex" : 0.2, "str" : 0.1}));
 Jobs["Rogue"].levels.push(new JobLevel(640,  null, {"dex" : 0.2, "int" : 0.1}));
-Jobs["Rogue"].levels.push(new JobLevel(1280, [{ab: Abilities.Physical.Backstab, set: "Skills"}, {ab: Abilities.Physical.TAttack, set: "Skills"}], {"dex" : 0.3, "int" : 0.1, "cha" : 0.1}));
+Jobs["Rogue"].levels.push(new JobLevel(1280, [{ab: Abilities.Physical.Backstab, set: "Skills"}, {ab: Abilities.Physical.Fade, set: "Skills"}], {"dex" : 0.3, "int" : 0.1, "cha" : 0.1}));
 
 Jobs["Ranger"] = new Job("Ranger");
 Jobs["Ranger"].Long = function(entity) {
