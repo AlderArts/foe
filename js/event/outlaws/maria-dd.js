@@ -882,15 +882,15 @@ Scenes.Maria.DeadDrops.Docks.GuardInspection = function() {
 			Text.Add("Huddling against yourself in the cramped confines, you hold your breath as the guards’ footsteps draw ever closer, their armored boots making quite the racket - no doubt intentionally so. Muffled voices resound about you, followed by the occasional raised voice and barked order - seems like you weren’t by far the only one to try and hide from the eye of the law. Hopefully, they’ll be satisfied with whatever poor sops they’ve already caught and won’t investigate further…", parse);
 			Text.NL();
 			
-			var goal = 45;
-			var dex = player.Dex() + Math.random() * 20;
+			var goal = 50;
+			var dex = (player.Dex()+player.Int())/2 + Math.random() * 20;
 			
 			if(DEBUG) {
-				Text.Add("DEBUG: dex check [dex] (vs [goal])", {dex: dex, goal: goal}, 'bold');
+				Text.Add("DEBUG: (dex+int)/2 check [dex] (vs [goal])", {dex: dex, goal: goal}, 'bold');
 				Text.NL();
 			}
 			
-			if(dex) {
+			if(dex >= goal) {
 				Text.Add("It can’t be more than a handful of minutes, and yet it feels like hours. Someone shifts a load of heavy objects, and there’s yet more arguing - the guard come close to your hiding spot once or twice, but at least they don’t actually uncover you, which is a big relief.", parse);
 				Text.NL();
 				Text.Add("At length, their footsteps fade as they retreat back along the pier, but you elect to remain hidden a little while longer until you’re sure they’re gone. Eventually, though, you can’t stand it anymore and burst back out into the open, sucking in sweet lungfuls of fish-scented air. You’re not the only one to do so - by and large, various members of the docks’ populace who manage to evade the royal guards’ gaze emerge once more into daylight.", parse);

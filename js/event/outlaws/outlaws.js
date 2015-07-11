@@ -591,6 +591,8 @@ Scenes.Outlaws.PathIntoRigardBelinda = function() {
 				Text.Add("<i>“And that appears to be that,”</i> the doberwoman says, giving you a nod and wink. <i>“Remember, I’ll be busy most of the time and don’t work the floor, so you probably won’t be able to get to me even if you show up at The Shadow Lady. While I wouldn’t rule out getting my hands involved here and there, it’s likely that you’ll be getting your jobs back at the camp. Now, I think you should head back - getting yourself in order should come before taking in the sights of the city. Believe me, you’ll have plenty of time to look around.”</i>", parse);
 			Text.NL();
 			Text.Add("<b>Citizen’s visa obtained!</b>", parse);
+			
+			rigard.flags["Visa"] = 1;
 		}
 		Text.Flush();
 		
