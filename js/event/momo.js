@@ -853,8 +853,6 @@ Scenes.Momo.TalkPrompt = function() {
 					tooltip : "You never had any siblings."
 				});
 				Gui.SetButtonsFromList(options, false, null);
-				
-				
 			}
 			else if(momo.flags["tCook"] == Momo.TalkCook.BigFamily) {
 				Text.Add("Momo chuckles and shakes her head. <i>“I tell you, I never had any problems learning to cope with customers; my kitchen back on the farm was busy as any restaurant ever gets,”</i> she declares, sounding perversely proud of that fact. <i>“Breakfast, lunch, dinner, it was like a battle every time, and the washing up... you could have had a bath in the tub we used for all our plates and stuff...”</i>", parse);
@@ -887,6 +885,7 @@ Scenes.Momo.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("She’s smiling wistfully now. <i>“I guess, really, I’m not cut out to be a single child. They bug me sometimes, but I love my brothers and my sisters.”</i>", parse);
 				Text.NL();
+				PrintDefaultOptions();
 			}
 		}, enabled : true,
 		tooltip : "So, what made her so fascinated with cooking, anyway?"
