@@ -5,6 +5,14 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.4h
+------------
+* 
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.4g
 ------------
 * Fixed a mass of typos
@@ -23,10 +31,6 @@ Version 0.4g
 * Some of Cveta's non-repeatable interactions now give outlaw rep (violin).
 * Tweaked the GUI so that the entire portrait + bars trigger the select event.
 * Implemented a new master ability for the Rogue job that reduces enemy aggro toward the caster (ofc, you need to have companions for this to have any effect)
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.4f
 ------------
