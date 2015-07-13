@@ -147,7 +147,7 @@ Scenes.Maria.DeadDrops.First.Start = function() {
 	party.SaveActiveParty();
 	party.ClearActiveParty();
 	party.AddMember(player);
-	party.AddMember(maria);
+	party.AddMember(maria, true);
 	
 	//Set up restore party at the bottom of the callstack, fallthrough
 	Gui.Callstack.push(function() {
