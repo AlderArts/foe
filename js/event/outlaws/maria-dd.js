@@ -128,6 +128,22 @@ Scenes.Maria.DeadDrops.First.Start = function() {
 	
 	maria.RestFull();
 	
+	var group1 = party.Num() > 1;
+	if(party.Num() > 1) {
+		var group = party.Num() > 2;
+		var p1 = party.Get(1);
+		parse["comp"] = group ? "your companions" : p1.name;
+		if(group) {
+			parse = p1.ParserPronouns(parse);
+			parse["s"] = p1.plural() ? "" : "s";
+		}
+		else {
+			parse["heshe"] = "they";
+			parse["himher"] = "them";
+			parse["s"] = "";
+		}
+	}
+	
 	party.SaveActiveParty();
 	party.ClearActiveParty();
 	party.AddMember(player);
@@ -145,21 +161,7 @@ Scenes.Maria.DeadDrops.First.Start = function() {
 	Text.NL();
 	Text.Add("Maria quirks an eyebrow at you, then sighs and shakes her head resignedly. <i>“All right, let’s be off. You came at just the right time - too conveniently so, in fact, since I just got word from Zenith to bring in the latest drop. Place’s down by the slums, I’ll fill you in while we walk.”</i>", parse);
 	Text.NL();
-	if(party.Num() > 1) {
-		var group = party.Num() > 2;
-		var p1 = party.Get(1);
-		parse["comp"] = group ? "your companions" : p1.name;
-		if(group) {
-			parse = p1.ParserPronouns(parse);
-			parse["s"] = p1.plural() ? "" : "s";
-		}
-		else {
-			parse["heshe"] = "they";
-			parse["himher"] = "them";
-			parse["s"] = "";
-		}
-			
-		
+	if(group1) {
 		Text.Add("You take a moment to settle down [comp], telling [himher] to just kick back and relax for a moment in the camp while you run this errand. Watching [himher] trundle off into the camp’s main body to do what [heshe] need[s] to do, you fall in behind Maria, ready to set out.", parse);
 		Text.NL();
 	}
@@ -308,7 +310,7 @@ Scenes.Maria.DeadDrops.First.Start = function() {
 		Text.NL();
 		Text.Add("The remainder of your trip back passes in silence. At length you’re back within the outlaw camp, the sentries pulling in the drawbridge behind the two of you.", parse);
 		Text.NL();
-		parse["c"] = party.Num() > 1 ? ", gather your people" : "";
+		parse["c"] = group1 ? ", gather your people" : "";
 		Text.Add("<i>“All right, that’s it for today,”</i> Maria tells you. <i>“You’re dismissed - go and get a drink[c], take a nap or play some cards, whatever you do for entertainment when no one’s watching. I’ve got a report to make.”</i>", parse);
 		Text.NL();
 		Text.Add("Right. That wasn’t so bad in the end, was it?", parse);
@@ -349,20 +351,6 @@ Scenes.Maria.DeadDrops.Repeat = function() {
 			// PARTY STUFF
 			maria.DDtimer = new Time(0,0,2,0,0);
 			
-			party.SaveActiveParty();
-			party.ClearActiveParty();
-			party.AddMember(player);
-			
-			//Set up restore party at the bottom of the callstack, fallthrough
-			Gui.Callstack.push(function() {
-				party.LoadActiveParty();
-				PrintDefaultOptions();
-			});
-			// PARTY STUFF
-			
-			Text.Clear();
-			Text.Add("<i>“I had a few things in mind, but let me talk to Zenith and see which one’s most urgent. Why don’t you get settled down in the meantime and get ready?”</i>", parse);
-			Text.NL();
 			if(party.Num() == 2) {
 				var p1 = party.Get(1);
 				parse["comp"] = p1.name;
@@ -374,6 +362,20 @@ Scenes.Maria.DeadDrops.Repeat = function() {
 				parse["hisher"] = "their";
 			}
 			parse["c"] = party.Num() > 1 ? Text.Parse(" You dismiss [comp], allowing [himher] to get up to [hisher] own mischief, then settle back to catch a breather.", parse) : "";
+			
+			party.SaveActiveParty();
+			party.ClearActiveParty();
+			party.AddMember(player);
+			
+			//Set up restore party at the bottom of the callstack. Call before trying to look at party again (in ending)
+			Gui.Callstack.push(function() {
+				party.LoadActiveParty();
+			});
+			// PARTY STUFF
+			
+			Text.Clear();
+			Text.Add("<i>“I had a few things in mind, but let me talk to Zenith and see which one’s most urgent. Why don’t you get settled down in the meantime and get ready?”</i>", parse);
+			Text.NL();
 			Text.Add("All right, then.[c] Maria’s off like an arrow in flight and is back before too long, looking marginally more satisfied than she was when she left.", parse);
 			Text.NL();
 			Text.Add("<i>“All right, I’ve had a chat with Zenith and gotten our priorities in order. There <b>is</b> something that needs doing quite urgently, so I’d listen up if I were you.</i>", parse);
@@ -492,6 +494,9 @@ Scenes.Maria.DeadDrops.Docks.Ending = function() {
 	Text.NL();
 	Text.Add("<i>“Well, that wraps up this particular drop,”</i> Maria says, dusting off her hands and picking up the crate. <i>“Thanks for sticking your neck out and helping, [playername]. I’ll take it from here and get these stowed away.”</i>", parse);
 	Text.NL();
+	
+	PrintDefaultOptions();
+	
 	parse["comp"] = party.saved.length == 2 ? party.saved[1].name : "your companions";
 	parse["c"] = party.saved.length > 1 ? Text.Parse(" to fetch [comp]", parse) : "";
 	Text.Add("One last nod, and she’s gone. Well, nothing left for it. Turning, you head off into the camp[c] - maybe a warm bath would be welcome after all this…", parse);
