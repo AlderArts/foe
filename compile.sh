@@ -111,6 +111,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/fera.js \
 	js/event/kyna.js \
 	js/event/miranda.js \
+	js/event/miranda-date.js \
 	js/event/miranda-sex.js \
 	js/event/terry.js \
 	js/event/terry-tf.js \
