@@ -74,6 +74,10 @@ Outlaws.prototype.BullTowerCompleted = function() {
 	return this.flags["BullTower"] >= Outlaws.BullTowerQuest.Completed;
 }
 
+Outlaws.prototype.RetrievedBlueRoses = function() {
+	return this.flags["BT"] & Outlaws.BullTower.BlueRoses;
+}
+
 Outlaws.prototype.AlaricSaved = function() {
 	return this.BullTowerCompleted() && (this.flags["BT"] & Outlaws.BullTower.AlaricFreed);
 }

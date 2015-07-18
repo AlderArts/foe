@@ -1938,6 +1938,9 @@ Entity.prototype.Hair = function() {
 Entity.prototype.HasHair = function() {
 	return this.body.head.hair.Bald() == false;
 }
+Entity.prototype.HasLongHair = function() {
+	return this.body.head.hair.Bald() == false; //TODO
+}
 Entity.prototype.Face = function() {
 	return this.body.head;
 }

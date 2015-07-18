@@ -55,7 +55,7 @@ function Cveta(storage) {
 	this.flags["Singer"]  = Cveta.Singer.No;
 	this.flags["Bard"]    = Cveta.Bard.No;
 	this.flags["Wings"]   = 0;
-	this.flags["BRoses"]  = 0;
+	this.flags["Intimate"] = 0; //Bitmask
 	
 	this.violinTimer = new Time();
 	this.flirtTimer  = new Time();
@@ -91,6 +91,10 @@ Cveta.Singer = {
 	No     : 0,
 	Taught : 1
 };
+Cveta.Intimate = { //Bitmask
+	Introduced : 1, //seen post-bulltower performance
+	Groped : 2
+};
 
 Scenes.Cveta = {};
 
@@ -104,7 +108,7 @@ Cveta.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
 	this.LoadFlags(storage);
 	
-	if(this.flags["BRoses"] != 0)
+	if(outlaws.RetrievedBlueRoses())
 		this.avatar.combat = Images.cveta_b;
 }
 
@@ -333,23 +337,28 @@ Scenes.Cveta.Approach = function() {
 		playername : player.name
 	};
 	
-	Text.Clear();
-	Text.Add("Brushing aside the flaps, you step into Cveta’s tent, leaving behind the hubbub of the rest of the outlaw camp. As always, the songstress is perched on her stool, the picture of elegant composure as she acknowledges your entrance with a dip of her head. The violin you bought for her rests in its case by her trunk, carefully sealed against dust and damp alike.", parse);
-	if(cveta.BlueRoses())
-		Text.Add(" A small pot with the stem cutting the two of you took from the estate sits by the tent’s entrance; the plant obviously well-cared for and wanting for nothing. It’ll be a while before it can bring forth any blossoms, but it certainly isn’t going to wither on Cveta’s watch.", parse);
-	Text.NL();
-	Text.Add("<i>“Welcome, [playername],”</i> she says, toning down the music from her lyre but not stopping, providing a faint musical backdrop to your conversation.", parse);
-	if(cveta.Relation() >= 80)
-		Text.Add(" Noticing your approach, the songstress swiftly and seamlessly changes the tune she’s playing to one she knows is better suited to your tastes.", parse);
-	else if(cveta.Relation() >= 60)
-		Text.Add(" The songstress raises her eyes to meet yours in acknowledgement, lingering a little longer than necessary before turning away in embarrassment.", parse);
-	else if(cveta.Relation() >= 40)
-		Text.Add(" The songstress raises her eyes to meet yours in acknowledgement, then bows her head once more to concentrate on her playing.", parse);
-	Text.NL();
-	Text.Add("<i>“What brings you here to me today?”</i>", parse);
-	Text.Flush();
-	
-	Scenes.Cveta.Prompt();
+	if(outlaws.BullTowerCompleted() && !(cveta.flags["Intimate"] & Cveta.Intimate.Introduced)) {
+		Scenes.Cveta.PostBullTowerPerformance();
+	}
+	else {
+		Text.Clear();
+		Text.Add("Brushing aside the flaps, you step into Cveta’s tent, leaving behind the hubbub of the rest of the outlaw camp. As always, the songstress is perched on her stool, the picture of elegant composure as she acknowledges your entrance with a dip of her head. The violin you bought for her rests in its case by her trunk, carefully sealed against dust and damp alike.", parse);
+		if(cveta.BlueRoses())
+			Text.Add(" A small pot with the stem cutting the two of you took from the estate sits by the tent’s entrance; the plant obviously well-cared for and wanting for nothing. It’ll be a while before it can bring forth any blossoms, but it certainly isn’t going to wither on Cveta’s watch.", parse);
+		Text.NL();
+		Text.Add("<i>“Welcome, [playername],”</i> she says, toning down the music from her lyre but not stopping, providing a faint musical backdrop to your conversation.", parse);
+		if(cveta.Relation() >= 80)
+			Text.Add(" Noticing your approach, the songstress swiftly and seamlessly changes the tune she’s playing to one she knows is better suited to your tastes.", parse);
+		else if(cveta.Relation() >= 60)
+			Text.Add(" The songstress raises her eyes to meet yours in acknowledgement, lingering a little longer than necessary before turning away in embarrassment.", parse);
+		else if(cveta.Relation() >= 40)
+			Text.Add(" The songstress raises her eyes to meet yours in acknowledgement, then bows her head once more to concentrate on her playing.", parse);
+		Text.NL();
+		Text.Add("<i>“What brings you here to me today?”</i>", parse);
+		Text.Flush();
+		
+		Scenes.Cveta.Prompt();
+	}
 }
 
 Scenes.Cveta.Prompt = function() {
@@ -385,6 +394,19 @@ Scenes.Cveta.Prompt = function() {
 			tooltip : "Ask Cveta if she can teach you something of her craft."
 		});
 	}
+	if(outlaws.BullTowerCompleted()) {
+		options.push({ nameStr : "Get Intimate",
+			func : function() {
+				Text.Clear();
+				parse["rel"] = cveta.Relation() >= 80 ? ", although you can tell she’s quite flustered at all the attention, judging from the hint of unease that’s crept into her usual composed demeanor" : "";
+				Text.Add("You remember just how warm and comfortable Cveta’s body felt against yours, and are resolved to have just another taste of that delightful touch again. The songstress is still playing away, pretending not to notice your roving eyes[rel].", parse);
+				Text.Flush();
+				
+				Scenes.Cveta.IntimatePrompt();
+			}, enabled : true,
+			tooltip : "Cveta is such a lonely bird. Things don’t need to be that way…"
+		});
+	}
 	/* TODO
 	options.push({ nameStr : "name",
 		func : function() {
@@ -393,6 +415,7 @@ Scenes.Cveta.Prompt = function() {
 		tooltip : ""
 	});
 	*/
+	
 	Gui.SetButtonsFromList(options, true); //TODO Leave
 }
 
@@ -2072,7 +2095,6 @@ Scenes.Cveta.DreamBrood = function(ravenTrigger) {
 }
 
 
-//TODO LINK
 //Trigger this the next time the player attempts to approach Cveta in her tent after the quest is over, regardless of success or failure.
 Scenes.Cveta.PostBullTowerPerformance = function() {
 	var parse = {
@@ -2243,7 +2265,261 @@ Scenes.Cveta.PostBullTowerPerformance = function() {
 		Text.NL();
 		Text.Add("<b>You may proposition Cveta for more kinds of interactions from now on.</b>", parse);
 		Text.Flush();
+		
+		world.TimeStep({hour: 1});
+		
+		cveta.flags["Intimate"] |= Cveta.Intimate.Introduced;
+		
+		Gui.NextPrompt();
 	});
 	
 	Gui.SetButtonsFromList(options, false, null);
 }
+
+Scenes.Cveta.IntimatePrompt = function() {
+	var parse = {
+		
+	};
+	
+	//[Nuzzle][Cuddle][Grope]
+	var options = new Array();
+	options.push({ nameStr : "Nuzzle",
+		tooltip : "She may not be able to kiss you, but this is pretty good, too.",
+		func : function() {
+			Scenes.Cveta.IntimateNuzzle();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Cuddle",
+		tooltip : "Embrace the beautiful bird’s warmth.",
+		func : function() {
+			Scenes.Cveta.IntimateCuddle();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Grope",
+		tooltip : "Yes, you want to feel more of that flesh under her feathers.",
+		func : function() {
+			Scenes.Cveta.IntimateGrope();
+		}, enabled : true
+	});
+	
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("However, the small flirtation aside, you decide that you’re not quite in the mood for touchy-feely right now. Maybe later.", parse);
+		Text.NL();
+		Text.Add("Is it just you, or does Cveta look relieved? The expression flickers so quickly on her face that you can’t be sure it was even there…", parse);
+		Text.Flush();
+		
+		Scenes.Cveta.Prompt();
+	});
+}
+
+Scenes.Cveta.IntimateNuzzle = function() {
+	var parse = {
+		playername : player.name,
+		hairLong : player.Hair().Long()
+	};
+	parse = player.ParserTags(parse);
+	
+	Text.Clear();
+	Text.Add("Stepping forward, you gently move to ease Cveta’s lyre away from her; the songstress puts up a token resistance, then sighs lightly and allows you to set it by the foot of her bed. The music hasn’t stopped, though; faint as it is, she’s still humming gently in the back of her throat, and the hint of warmth in her music grows as you gather your pretty little pet up in your arms and press her against you.", parse);
+	Text.NL();
+	Text.Add("Cveta chirps, her touch warm and fluffy as she nestles against you, those wide, round eyes of hers closing in contentment, all sense of detached propriety melting away in an instant. The sharp tip of her beak nips and nibbles away instinctively, pinpricks of touch upon your [skin]. You run your hands down the small of her back and along the curves of her hips, feeling the fine fabric of her skirts bunch in your hands; it takes a while, but Cveta eventually does loosen up and nuzzles against your chest with the curved portion of her beak, letting out a childlike, happy chirp.", parse);
+	Text.NL();
+	Text.Add("There, doesn’t that feel much better?", parse);
+	Text.NL();
+	Text.Add("The songstress was never one for words, but her chirping and the faint fluttering of her wings tells you all you need to know. Running your fingers through Cveta’s long, flame-red hair, you press your face against her forehead and repay the favor. How she manages to always smell so clean and fresh while living amongst the outlaws may be one of Eden’s unsolved mysteries, but the warmth that she exudes, her body pressed firmly against yours, needs no explaining.", parse);
+	Text.NL();
+	if(player.HasLongHair()) {
+		Text.Add("A shift of Cveta’s head, and a gentle nibble at your [hairLong] gets your attention - still in your embrace, the songstress has one of your locks in her beak, trying to tuck it away. Is she trying to preen you? She doesn’t seem to realize what she’s doing, though, so you’re more than content to let her continue the harmless gesture.", parse);
+		Text.NL();
+	}
+	Text.Add("At length, Cveta is the first one to pull away, although there’s a little - all right, more than a little - reluctance in her movements. Her feathers and hair are a little mussed, but you’re sure they’ll fall right back into place soon with the kind of neatness magic that seems to happen about her.", parse);
+	Text.NL();
+	Text.Add("<i>“Come now, [playername],”</i> she says, wriggling out of your grasp. <i>“We both have more important things to do. I don’t suppose you would mind showing yourself out, though? I feel a little woozy…”</i>", parse);
+	Text.NL();
+	Text.Add("Really? Because you hadn’t planned for anything else today.", parse);
+	Text.NL();
+	Text.Add("<i>“Yes, you do. Even if you don’t know it. That may have been pleasant, but duty calls, [playername]. Work before pleasure.”</i>", parse);
+	Text.Flush();
+	
+	world.TimeStep({hour: 1});
+	
+	Scenes.Cveta.Prompt();
+	
+	cveta.relation.IncreaseStat(100, 2);
+}
+
+Scenes.Cveta.IntimateCuddle = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("Just a cuddle can’t hurt, can it? Can it?", parse);
+	Text.NL();
+	Text.Add("Well, there’s no way to find out but to try. Slowly, carefully, almost like a cat sneaking up on unsuspecting prey, you inch your way closer to the proud and regal bird-morph, until you’re well into the bubble of personal space that she keeps about her. This close to her, the faint scent of sun-warmed grass and sweet ripe fruit reaches your nose, and you wonder if it’s some kind of perfume that she uses…", parse);
+	Text.NL();
+	Text.Add("Cveta hasn’t leaned in towards you - but she hasn’t shied away, either. That’s got to be a good sign. Sitting down next to her, you snake an arm about her slender waist, feeling the velvety material of her gown slide under your arm. The bird-morph shivers and stiffens under your touch, her music fading away as she stops playing, but eventually a small sigh escapes her beak and she allows you to support her weight. Even through her gown, you can sense the glorious warmth that radiates outwards from her heart - a warmth of which only a fraction reaches her feathers, but even that tiny amount is enough to give you the warm fuzzies just by holding her.", parse);
+	Text.NL();
+	Text.Add("<i>“This is not right,”</i> Cveta murmurs. <i>“It is not proper…”</i>", parse);
+	Text.NL();
+	Text.Add("Well, why not? What one does in public and in private are two completely different things, after all. Cveta chirps a bit, perhaps trying to articulate an answer, but gives up and snuggles up to you, resting her head on your shoulder.", parse);
+	Text.NL();
+	Text.Add("There, isn’t that much better? Even if propriety demands that she be all prim and proper in public, isn’t it good to let one’s hair down for a moment?", parse);
+	Text.NL();
+	Text.Add("Another chirp, and Cveta turns her head away from you this time, taking care to hide her expression. Will she ever be able to get over the hurdle of her self-consciousness? Perhaps she just needs a little encouragement - gently, you slide your hand down to the bird-morph’s skirts to caress her fluffy ass, eliciting an immediate reaction from her. You can imagine soft, silken down giving way under your touch, and although her butt isn’t the most shapely or grabbable you’ve encountered, it nevertheless has its own appeal - that, and you wonder if it might improve with keeping…", parse);
+	Text.NL();
+	Text.Add("<i>“[playername]…”</i>", parse);
+	Text.NL();
+	Text.Add("Yes?", parse);
+	Text.NL();
+	if(cveta.Relation() < 85) {
+		Text.Add("<i>“N-no. Never mind.”</i>", parse);
+	}
+	else {
+		Text.Add("A musical hum emanating from her throat, the songstress finally gives in and snuggles close, her elegance remaining unspoiled as she unabashedly shares all the warmth her body can muster.", parse);
+		Text.NL();
+		Text.Add("It feels very, very nice.", parse);
+		Text.NL();
+		Text.Add("Coming from someone more outgoing, the gesture would have been great in and of itself. Coming from Cveta, knowing she won’t do it for just anyone… well, that just makes it extra special.", parse);
+	}
+	Text.NL();
+	Text.Add("The two of you stay that way for the next few… minutes? Hours? It’s hard to keep track of the passage of time when cuddled up with your beautiful bird, possessing her completely like the petite little thing she is - she was practically <i>made</i> to be held like this. Eventually, though, you become aware of the passage of time, and give Cveta a final pat on the butt before slowly withdrawing your arm, taking care to let it slide against her waist as you do so.", parse);
+	Text.NL();
+	Text.Add("There, wasn’t that better?", parse);
+	Text.NL();
+	Text.Add("<i>“Perhaps…”</i> she won’t look you in the eye while saying it, though. It’s a start, at the very least. Even if Cveta’s not the talkative type, at least she knows she has more than her music with which to express herself; perhaps it would be best to let her work things out for herself for a little while. Standing, you give the songstress one last appreciative pat on the head and tell her not to worry, then excuse yourself from her tent leaving her staring at your retreating form.", parse);
+	Text.NL();
+	Text.Add("After all, just like music, a simple touch can indeed speak so much more than mere words.", parse);
+	Text.Flush();
+	
+	world.TimeStep({hour: 1});
+	
+	Scenes.Cveta.Prompt();
+	
+	cveta.relation.IncreaseStat(100, 2);
+}
+
+Scenes.Cveta.IntimateGrope = function() {
+	var parse = {
+		playername : player.name
+	};
+	parse = player.ParserTags(parse);
+	
+	var first = !(cveta.flags["Intimate"] & Cveta.Intimate.Groped);
+	
+	Text.Clear();
+	if(cveta.Relation() >= 80) {
+		cveta.flags["Intimate"] |= Cveta.Intimate.Groped;
+		
+		if(first) {
+			Text.Add("Cveta looks unsure at your proposition, her playing coming to an abrupt stop as she reaches up to brush away her hair from her eyes. She’s clearly trying to buy time for her to think things through, but all the time in the world won’t save her, not with the jumbled, warring thoughts and desires that must be going through her head.", parse);
+			Text.NL();
+			Text.Add("<i>“I…”</i>", parse);
+			Text.NL();
+			Text.Add("Yes?", parse);
+			Text.NL();
+			Text.Add("She sets down her instrument a little hesitantly. <i>“If this is your desire, [playername], then let us begin posthaste.”</i>", parse);
+			Text.NL();
+			Text.Add("The songstress might be reluctant now, but you’re sure she’ll change her attitude once you’re done with her.", parse);
+		}
+		else {
+			Text.Add("A small, contented chirp escapes Cveta’s throat as she stops playing and sets down her instrument. With a soft flutter of her wings, she closes the short distance between the two of you, then rubs her beak against your shoulder eagerly. You pat Cveta on the head and tousle her hair in return, feeling her breath quicken against your [skin].", parse);
+			Text.NL();
+			Text.Add("Well, she was never the best at expressing herself with words, so this is probably the best way to go about it.", parse);
+		}
+	}
+	else {
+		Text.Add("The moment the words leave your mouth, there’s an uncomfortable silence in the tent, the music coming to an abrupt stop. While Cveta doesn’t get all indignant at you bringing up the idea, she does seem quite reluctant… while you’ve done your best to break down her inhibitions, it’s not quite enough - yet.", parse);
+		Text.NL();
+		Text.Add("After all the two of you have been through together, you’re almost there. All you need to do is to nudge the songstress a little to send her careening over the edge, get a little closer to her. You’ve waited this long; a little more isn’t going to hurt.", parse);
+		Text.Flush();
+		Scenes.Cveta.IntimatePrompt();
+		return;
+	}
+	Text.Add("Yes… this is what you want. Your desire is to hold your fluffy little pet, run your fingers through her feathers and hair… and get to know the flesh that lies underneath. There’s no reason to dawdle any more - a quick twist of your fingers has the clasp that holds up her top undone. Cveta shrugs, a single elegant motion of shoulders and wings alike, and the fabric cascades off her like a waterfall to land in her cot.", parse);
+	Text.NL();
+	Text.Add("The songstress wears no bra - her chest is hardly large enough to warrant any need for support - and so her front is exposed for you to admire, two small mounds of fluff sitting upon her chest, her torso narrowing down to her painfully thin waist. Easing her into your embrace, you reach around her and run an exploratory hand down her skirts. She’s as flat behind as she is in front, and the songstress wriggles in your grasp as you cup her ass through her skirts, fingers tickling the plumage of her tailfeathers through her skirt of her gown.", parse);
+	Text.NL();
+	Text.Add("You have to ask, are all the women in her line so - ah - unendowed?", parse);
+	Text.NL();
+	Text.Add("<i>“Mostly,”</i> Cveta admits, not looking you in the eye. <i>“Although Nana Nadia was the exception. When I was younger, she used to tell me that she practically swelled up when carrying my aunts and uncles, and never quite went down after that.”</i>", parse);
+	Text.NL();
+	Text.Add("Well, you’ll just have to work doubly hard, then. Best to start from familiar territory and ease her in that way - breaking away from Cveta, you place your hands on the sides of your petite pet’s waist, running your palms up and down in wide circles, closing in on her sensitive tummy. She chirps with increasing urgency and hunger as you continue to stroke her, clearly unused to this sort of physical contact. When you think she’s had enough to be nice and pliable, you slide your hands upwards through her warm feathers, your fingers trailing along the rise of her ribs and chest to find her breasts.", parse);
+	Text.NL();
+	Text.Add("With how flat Cveta is, she doesn’t even fill your cupped hands - you have to squeeze down to feel the rigid tips of her nipples brush your palms through her fluff and feathers - but that doesn’t diminish the need with which your petite pet pushes her chest forward, presenting herself in a bid to try and make up for her lack of titflesh.", parse);
+	Text.NL();
+	Text.Add("Soothing her with a hushed murmur, you press down and begin kneading gently, Cveta’s heavy breathing turning into quick pants as she feels your fingers exploring her sensitive mounds. Taking her right nipple between finger and thumb, you tease the small, hard nub of flesh, feeling it stiffen even further under your ministrations.", parse);
+	Text.NL();
+	Text.Add("<i>“A-ah!”</i>", parse);
+	Text.NL();
+	Text.Add("One wonders how she’s meant to feed a hungry brood with these if they’re so sensitive, but here and now, that fact is all the better for you. She’s so waifish and delicately formed, you feel like you could accidentally snap her with a wrong move.", parse);
+	Text.NL();
+	Text.Add("Cveta whimpers, leaning in and craning her head upwards to nip at your neck with the tip of her beak, pinpricks of sensation erupting on your [skin] with each nip and nibble. With her this close to you, you can smell a distinctly floral scent rising from her person - does she use perfume? - as she eagerly presses herself against you. You can’t see it, but you can definitely <i>feel</i> the flush of heat that continues to blossom in her chest, a fruitful warmth that escapes with her breath.", parse);
+	Text.NL();
+	Text.Add("Almost done with her petite bosom, you work away at each breast in turn with one hand, doing your best to milk her like a barn animal. There’s barely enough to grasp there, but barely is the key word here. The songstress is unable to hold back the moan that escapes her beak, rubbing the gentle concave of her midriff against you, desperate to assuage the ache that’s crept into it. It keeps her occupied while you undo the knot that keeps her sash tied, at the very least - the long vermillion ribbon of silk and satin drifts to the ground swimming and twirling, leaving you free to stick the now-free hand past her waistband and into the skirts of her gown.", parse);
+	Text.NL();
+	if(first)
+		Text.Add("Is that silk you feel beneath your fingers? You can’t see it, but you can definitely feel the exquisite fabric, sodden with her feminine honey. Silken panties… well, did you expect anything different? She <i>is</i> who she is, after all.", parse);
+	else
+		Text.Add("Just as you expected, Cveta’s silken panties are sopping wet; you can feel the distinctive slickness of all that pussy juice that’s causing the fabric to stick to her mound.", parse);
+	Text.Add(" At least there’s no doubt she wants it, and badly at that. Gradually, you ease up on Cveta’s chest, sliding that hand down to your pretty bird’s waist while reaching for her crotch with the one already in her skirts. She sings as you rub away, her gloved fingers digging into your back, small breasts heaving…", parse);
+	Text.NL();
+	Text.Add("…Come to think of it, you’re vaguely aware of a faint warmth growing in the songstress’ lower belly, pressed against your [skin]…", parse);
+	Text.NL();
+	Text.Add("You’re half-tempted to finger Cveta, to strip off those delicate silken underclothes and stick your fingers into her oozing gash, but maybe that would be pushing your luck - and besides, it’s not like she’ll be going anywhere in a hurry. Even without making direct contact, you can sense the petals of her womanly flower swelling up in anticipation.", parse);
+	Text.NL();
+	Text.Add("<i>“No… that’s enough,”</i> she moans. <i>“I… I…”</i>", parse);
+	Text.NL();
+	Text.Add("From the way her eyes are practically bulging and unfocused to her trembling legs, it seems she’s on the verge of cumming all over you. All it would take is a gentle touch in the right place to set off your petite pet - but will you do it?", parse);
+	Text.Flush();
+	
+	cveta.relation.IncreaseStat(100, 3);
+	
+	world.TimeStep({minute: 45});
+	
+	//[Yes][No]
+	var options = new Array();
+	options.push({ nameStr : "Yes",
+		tooltip : "Screw that, she’s too far gone. Full steam ahead!",
+		func : function() {
+			Text.Clear();
+			Text.Add("Stop? Screw that, even if you stopped now she’d probably just push herself over the edge anyway. A few deft strokes of your fingers against your broody bird’s pussy is all it takes to send Cveta over the edge, a series of sharp trills rising from her throat as her feminine honey overflows; her pussy lips clench, desperately seeking something to draw into her. Unable to keep standing, Cveta collapses against you, cum stains starting to spread on the skirt of her gown, and you carefully set her down on her bed.", parse);
+			Text.NL();
+			Text.Add("<i>“N-no.”</i> Burying her face in her gloved hands, the songstress begins to sob in shame. You move in to comfort her, but she waves you off. <i>“L-leave me be for now.”</i>", parse);
+			Text.NL();
+			Text.Add("It did feel good, didn’t it?", parse);
+			Text.NL();
+			Text.Add("Her voice trembles. <i>“Just go. Please.”</i>", parse);
+			Text.NL();
+			Text.Add("If she’s acting like this, there’s probably some kind of hang-up she’s having. Maybe it’s just that she’s a prude, but that would be too easy… turning that question over in your mind, you excuse yourself. There’s got to be some way you can break whatever’s holding her back…", parse);
+			Text.Flush();
+			
+			world.TimeStep({minute: 15});
+			
+			Gui.NextPrompt();
+		}, enabled : true
+	});
+	options.push({ nameStr : "No",
+		tooltip : "Let her calm down. Pushing her too far now may make her clam up later.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Carefully, you withdraw your hand from Cveta’s skirts and set her down on her bed, giving her time to calm her thoughts. It takes a good while, but eventually her panting slows as the heat subsides, her gaze becoming focused once more.", parse);
+			Text.NL();
+			Text.Add("<i>“Oh…”</i>", parse);
+			Text.NL();
+			Text.Add("That felt nice, did it not?", parse);
+			Text.NL();
+			Text.Add("<i>“Well, it did. But I was…”</i> she looks down at her top, splayed out beside her on the bed, then at her sash still on the floor. <i>“I made a promise, you see… I need to sort some things out, think some things through. Would you mind leaving for the moment?”</i>", parse);
+			Text.NL();
+			Text.Add("It doesn’t look like Cveta is actually pushing you away, but there’s clearly some kind of hang-up she’s having over this whole thing. There’s got to be some way you can break whatever’s holding her back… even if the opportunity may not be here just yet. Shrugging, you wipe yourself off with a nearby cloth and promise to be back later after she’s calmed herself.", parse);
+			Text.Flush();
+			
+			world.TimeStep({minute: 15});
+			
+			Gui.NextPrompt();
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
