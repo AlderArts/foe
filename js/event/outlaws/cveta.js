@@ -2437,7 +2437,7 @@ Scenes.Cveta.IntimateGrope = function() {
 		Scenes.Cveta.IntimatePrompt();
 		return;
 	}
-	Text.Add("Yes… this is what you want. Your desire is to hold your fluffy little pet, run your fingers through her feathers and hair… and get to know the flesh that lies underneath. There’s no reason to dawdle any more - a quick twist of your fingers has the clasp that holds up her top undone. Cveta shrugs, a single elegant motion of shoulders and wings alike, and the fabric cascades off her like a waterfall to land in her cot.", parse);
+	Text.Add(" Yes… this is what you want. Your desire is to hold your fluffy little pet, run your fingers through her feathers and hair… and get to know the flesh that lies underneath. There’s no reason to dawdle any more - a quick twist of your fingers has the clasp that holds up her top undone. Cveta shrugs, a single elegant motion of shoulders and wings alike, and the fabric cascades off her like a waterfall to land in her cot.", parse);
 	Text.NL();
 	Text.Add("The songstress wears no bra - her chest is hardly large enough to warrant any need for support - and so her front is exposed for you to admire, two small mounds of fluff sitting upon her chest, her torso narrowing down to her painfully thin waist. Easing her into your embrace, you reach around her and run an exploratory hand down her skirts. She’s as flat behind as she is in front, and the songstress wriggles in your grasp as you cup her ass through her skirts, fingers tickling the plumage of her tailfeathers through her skirt of her gown.", parse);
 	Text.NL();
