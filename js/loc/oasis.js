@@ -228,7 +228,7 @@ Scenes.Oasis.DesertCaravanEncounter = function() {
 		Text.NL();
 		oasis.flags["Rakh"] = Oasis.RakhFlag.Seen;
 	}
-	Text.Add("You chat a bit about what brought you here, and [rheshe] tells you a little about [rhisher] work planning the expedition and selecting goods to carry. <i>“We’re always happy to trade with a fellow traveller,”</i> [rheshe] says. <i>“We obviously can’t just unpack everything, but I’ve got a few select things set aside for occasions like these. Or if there’s anything else you need, I’d be happy to help out,”</i> [rheshe] adds with a wink, [rhisher] tail swaying back and forth in interest.", parse);
+	Text.Add("You chat a bit about what brought you here, and [rheshe] tells you a little about [rhisher] work planning the expedition and selecting goods to carry. <i>“We’re always happy to trade with a fellow traveler,”</i> [rheshe] says. <i>“We obviously can’t just unpack everything, but I’ve got a few select things set aside for occasions like these. Or if there’s anything else you need, I’d be happy to help out,”</i> [rheshe] adds with a wink, [rhisher] tail swaying back and forth in interest.", parse);
 	Text.Flush();
 	
 	var busy   = false;

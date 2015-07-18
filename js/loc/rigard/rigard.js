@@ -404,7 +404,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		npcsA.push({noun: "court official", a: "a", gender: Math.random() > 0.2 ? Gender.male : Gender.female});
 		
 		npcsB.push({noun: "plump farmer", a: "a", gender: Math.random() > 0.3 ? Gender.male : Gender.female});
-		npcsB.push({noun: "worn-out traveller", a: "a", gender: Math.random() > 0.5 ? Gender.male : Gender.female});
+		npcsB.push({noun: "worn-out traveler", a: "a", gender: Math.random() > 0.5 ? Gender.male : Gender.female});
 		npcsB.push({noun: "poor merchant", a: "a", gender: Math.random() > 0.5 ? Gender.male : Gender.female});
 		npcsB.push({noun: "wandering bard", a: "a", gender: Gender.male});
 		npcsB.push({noun: "tired messenger", a: "a", gender: Math.random() > 0.4 ? Gender.male : Gender.female});
@@ -473,7 +473,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 		Text.Add("<i>“Nonsense! Everyone knows there haven't been any portals in ten years!”</i> The [NPC2] waves a hand dismissively.", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>“Have you heard? Some merchant caravan came in yesterday from the oasis, and they say lone travellers have been disappearing out there,”</i> the [NPC1] says.", parse);
+		Text.Add("<i>“Have you heard? Some merchant caravan came in yesterday from the oasis, and they say lone travelers have been disappearing out there,”</i> the [NPC1] says.", parse);
 		Text.NL();
 		var opts = [];
 		opts.push("The [NPC2] shakes his head dismissively. <i>“Bah, they probably just wandered off into the dunes like fools and died where their bodies will never be found.”</i>");

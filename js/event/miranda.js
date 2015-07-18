@@ -1831,7 +1831,7 @@ Scenes.Miranda.BarChatOptions = function(options, back) {
 						Text.NL();
 						Text.Add("She giggles at you.", parse);
 						Text.NL();
-						Text.Add("<i>“There are creatures in that forest who stalk unwitting prey and capture travellers for fun and for their own release.”</i> She begins to describe more and more extravagant beasts and how they violate passers by, <i>just like you</i>. You gasp at some of the more lurid ones, making her laugh out loud.", parse);
+						Text.Add("<i>“There are creatures in that forest who stalk unwitting prey and capture travelers for fun and for their own release.”</i> She begins to describe more and more extravagant beasts and how they violate passers by, <i>just like you</i>. You gasp at some of the more lurid ones, making her laugh out loud.", parse);
 						Text.Flush();
 						
 						back();

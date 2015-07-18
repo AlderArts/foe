@@ -422,7 +422,7 @@ Scenes.Lagon.InteractRuler = function() {
 	if(lagon.Relation() < 0)
 		Text.Add("<i>“And what do you want?”</i> Lagon looks annoyed at your approach, seeming far more interested in the blowjob he’s getting.", parse);
 	else if(lagon.Relation() < 25)
-		Text.Add("<i>“Traveller,”</i> Lagon gives you a nod, caressing his daughter’s bobbing head.", parse);
+		Text.Add("<i>“Traveler,”</i> Lagon gives you a nod, caressing his daughter’s bobbing head.", parse);
 	else if(lagon.Relation() < 50)
 		Text.Add("<i>“Welcome back,”</i> Lagon smiles, motioning you to step forward. <i>“I’m almost finished with this one, perhaps you’d like to take her place?”</i> You blush uncertainly.", parse);
 	else
@@ -517,9 +517,9 @@ Scenes.Lagon.RulerPrompt = function() {
 				var options = new Array();
 				options.push({ nameStr : "Do it!",
 					func : function() {Text.Clear();
-						Text.Add("<i>“And what can I do for you today, traveller?”</i> Lagon leisurely regards you with a bored expression. <i>“I believe that you already bought all the needed ingredients to Ophelia; I do not have any further requests for your currently.”</i> He shakes his head. <i>“I feel the girl grows rebellious. Perhaps it’s time to throw her in the Pit together with her mother, as I should have done long ago.”</i>", parse);
+						Text.Add("<i>“And what can I do for you today, traveler?”</i> Lagon leisurely regards you with a bored expression. <i>“I believe that you already bought all the needed ingredients to Ophelia; I do not have any further requests for your currently.”</i> He shakes his head. <i>“I feel the girl grows rebellious. Perhaps it’s time to throw her in the Pit together with her mother, as I should have done long ago.”</i>", parse);
 						Text.NL();
-						Text.Add("He’ll do no such thing. The king’s eyebrows rises in question, as if he doesn’t quite understand what he’s hearing. <i>“I was thinking out loud, not asking for advice, traveller,”</i> he rests his chin on his knuckles, studying you. <i>“Do you presume to tell me what to do? What kind of nonsense has that girl been feeding you?”</i>", parse);
+						Text.Add("He’ll do no such thing. The king’s eyebrows rises in question, as if he doesn’t quite understand what he’s hearing. <i>“I was thinking out loud, not asking for advice, traveler,”</i> he rests his chin on his knuckles, studying you. <i>“Do you presume to tell me what to do? What kind of nonsense has that girl been feeding you?”</i>", parse);
 						Text.NL();
 						Text.Add("You contemptuously tell him that you can see him for what he is; a savage beast that needs to be put down. Fury fills Lagon’s eyes, but before he can reply, your conversation is interrupted by the arrival of Ophelia, flanked by two guards.", parse);
 						Text.NL();
@@ -581,7 +581,7 @@ Scenes.Lagon.RulerSexPrompt = function() {
 			if(lagon.Relation() < 0)
 				Text.Add("<i>“I must say, outsider, despite your reluctance, you adopt very quickly to our ways,”</i> the king smiles. <i>“Very well, I shall grace your request... ”</i> Yawning leisurely, he pushes away his daughter, who tries to get one last taste of his shaft before being chased off.", parse);
 			else if(lagon.Relation() < 50)
-				Text.Add("<i>“As you wish,”</i> Lagon replies languidly. <i>“I’ll grant your request, traveller… but I won’t listen to any last minute change-of-hearts.”</i> The king waves his daughter away, and she reluctantly relinquishes his shaft, throwing you a jealous glare over her shoulder as she hops away.", parse);
+				Text.Add("<i>“As you wish,”</i> Lagon replies languidly. <i>“I’ll grant your request, traveler… but I won’t listen to any last minute change-of-hearts.”</i> The king waves his daughter away, and she reluctantly relinquishes his shaft, throwing you a jealous glare over her shoulder as she hops away.", parse);
 			else
 				Text.Add("<i>“My children are getting jealous; you keep hogging me all to yourself,”</i> Lagon replies, grinning. Sure enough, the daughter that’s giving him a blowjob throws you a dark glare before she reluctantly hops off, in search for some other release. <i>“I’d be a bad host if I didn’t grant such an earnest request, however.”</i>", parse);
 			Text.Add(" You gulp, an excited shiver going through your body.", parse);
@@ -643,7 +643,7 @@ Scenes.Lagon.RulerBlowjob = function() {
 		Text.NL();
 		Text.Add("<i>“A taste,”</i> Lagon chuckles as you cough. <i>“You’ll be getting plenty more of that in a moment. Now, clean me up.”</i> You make a half-hearted effort at cleaning yourself up before you move on to his flaccid shaft, licking up the thick white goo sticking to it. As you work, you can feel the turgid tool twitch under your tongue, engorging back to its full size in a remarkably short time.", parse);
 		Text.NL();
-		Text.Add("<i>“Let’s see if you can match my daughter, traveller,”</i> Lagon grins down at you. <i>“Somehow, I doubt it. Don’t make me fall asleep now.”</i> His cock twitches in your grip as he shifts in his seat.", parse);
+		Text.Add("<i>“Let’s see if you can match my daughter, traveler,”</i> Lagon grins down at you. <i>“Somehow, I doubt it. Don’t make me fall asleep now.”</i> His cock twitches in your grip as he shifts in his seat.", parse);
 		
 		player.subDom.DecreaseStat(-30, 1);
 		messy = true;
@@ -808,7 +808,7 @@ Scenes.Lagon.RulerBlowjobEntrypoint = function() {
 			Text.NL();
 			Text.Add("After what feels like an eternity, Lagon is finally spent. You cautiously open one eye, in time to catch a last large droplet of cum splashing onto you from the cock inches away from your face. At some point, the lagomorph king has hopped to his feet, and he’s now looming above you, panting and heaving. He flashes you a triumphant grin, slumping back onto his throne.", parse);
 			Text.NL();
-			Text.Add("<i>“You should see yourself right now,”</i> Lagon chuckles, lazily waving to one of his daughters to come over and slurp up the last bit of seed drooling from his shaft. <i>“Truly, this new garb befits you, traveller. Did you come straight out of a dip in the Pit?”</i> You can just imagine what you must look like; it feels like there isn’t a square inch of your body not covered in his ejaculate.", parse);
+			Text.Add("<i>“You should see yourself right now,”</i> Lagon chuckles, lazily waving to one of his daughters to come over and slurp up the last bit of seed drooling from his shaft. <i>“Truly, this new garb befits you, traveler. Did you come straight out of a dip in the Pit?”</i> You can just imagine what you must look like; it feels like there isn’t a square inch of your body not covered in his ejaculate.", parse);
 			Text.NL();
 			Text.Add("A group of tittering bunny-girls hop over to you, rubbing themselves against you and greedily licking up their master’s cum. You patiently let them help in cleaning you up, though them constantly grinding their breasts over your body only serves to arouse you even further.", parse);
 			Text.NL();
@@ -1151,7 +1151,7 @@ Scenes.Lagon.RulerGetFuckedEntrypoint2 = function(angry, target, opheliaPresent)
 	else if(lagon.Relation() < 0)
 		Text.Add("<i>“Don’t worry, bitch, I’m only getting started with you,”</i> Lagon grunts, giving your ass a sharp slap. <i>“A few more sessions like this and I’m sure you’ll be more… agreeable.”</i>", parse);
 	else if(lagon.Relation() < 50)
-		Text.Add("<i>“How’s that, am I beginning to convert you to our ways, traveller?”</i> Lagon grunts, grinding against you. <i>“Wouldn’t you rather stay here, where there’s plenty of cock to keep you satisfied?”</i>", parse);
+		Text.Add("<i>“How’s that, am I beginning to convert you to our ways, traveler?”</i> Lagon grunts, grinding against you. <i>“Wouldn’t you rather stay here, where there’s plenty of cock to keep you satisfied?”</i>", parse);
 	else
 		Text.Add("<i>“I’ll be sure to give you all that you wished for, slut,”</i> Lagon grunts, squeezing your ass. <i>“Don’t complain if you can’t walk properly once I’m done with you, though. Maybe you can spend some time in the Pit ‘recovering’.”</i>", parse);
 	Text.Add(" You barely register his words, too busy hanging onto your sanity as the hung lapin attempts to rearrange your insides. One thing is for sure though; now that you’ve managed to get used to his girth, getting fucked feels simply amazing. Time and time again the massive shaft burrows into you, replacing that cursed emptiness with a blissful sense of complete satisfaction.", parse);
@@ -1597,7 +1597,7 @@ Scenes.Lagon.RulerTalkPrompt = function() {
 					Text.Clear();
 					Text.Add("<i>“Your ways may not be ours, but do not presume to judge my mate’s dedication.”</i> There’s a thinly veiled threat in his voice, suggesting that you shouldn’t continue this train of thought. <i>“My mate is mine to treat as I please.”</i>", parse);
 					Text.NL();
-					Text.Add("<i>“Now, if there’s nothing else, be on your way traveller,”</i> Lagon dismisses you curtly, putting a firm hand on his daughter’s head and pressing down until the girl is almost choking on his dick. He seems to be in a bad mood; perhaps it’s best to leave for now.", parse);
+					Text.Add("<i>“Now, if there’s nothing else, be on your way traveler,”</i> Lagon dismisses you curtly, putting a firm hand on his daughter’s head and pressing down until the girl is almost choking on his dick. He seems to be in a bad mood; perhaps it’s best to leave for now.", parse);
 					Text.Flush();
 					lagon.relation.DecreaseStat(0, -2);
 					Gui.NextPrompt();
@@ -1889,7 +1889,7 @@ Scenes.Lagon.PitDefianceLoss = function() {
 	parse["c"] = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
 	Text.Add("You fall to the ground, exhausted from the fight. It’s no use… he’s just too strong. The taste of defeat is all the more palpable here, in the middle of the salty lake of cum fueled by hundreds of rutting rabbits. Any hopes of escape are crushed by a horde of bunnies piling up on top of you[c], the combined weight of their bodies keeping you in place.", parse);
 	Text.NL();
-	Text.Add("<i>“Well, that was amusing for a brief moment,”</i> Lagon chuckles, rolling his shoulders. <i>“But I’m not sure what you hoped to achieve.”</i> He hops over to you, grabbing you roughly by the chin. <i>“Did you consider that in your pitiful rebellion, you tried to deny my daughter her deepest desires? Such an unworthy cause, traveller. See? She’s so much happier without your meddling.”</i>", parse);
+	Text.Add("<i>“Well, that was amusing for a brief moment,”</i> Lagon chuckles, rolling his shoulders. <i>“But I’m not sure what you hoped to achieve.”</i> He hops over to you, grabbing you roughly by the chin. <i>“Did you consider that in your pitiful rebellion, you tried to deny my daughter her deepest desires? Such an unworthy cause, traveler. See? She’s so much happier without your meddling.”</i>", parse);
 	Text.NL();
 	Text.Add("The rabbit king forces your head to the side. Two rabbits come into view - Vena and Ophelia, the former ecstatically pounding the latter - both crying out in joyous orgasm. <i>“See how much fun they are having?”</i> he rasps in your ear. <i>“Perhaps if you are a good little slut, I’ll let you join in.”</i> Lagon effortlessly pulls you out from under the heap of bunnies, holding you by the throat in an iron grip.", parse);
 	Text.NL();
@@ -2192,7 +2192,7 @@ Scenes.Lagon.ReturnToBurrowsAfterScepter = function() {
 				Text.Add("You’ll be fine, you assure her. After beating up the Gol, Lagon shouldn’t be any problems.", parse);
 			Text.Add(" The alchemist doesn’t look convinced, but you have little choice but to continue heading toward the throne room.", parse);
 			Text.NL();
-			Text.Add("<i>“Ah, here we have the both of you,”</i> Lagon greets you as you enter the hall, lounging idly on his throne. <i>“The diligent traveller… and the rebellious daughter. Just what have you two been up to?”</i> He looks like he’s enjoying watching Ophelia squirm. Finally, the smaller bunny gathers her courage.", parse);
+			Text.Add("<i>“Ah, here we have the both of you,”</i> Lagon greets you as you enter the hall, lounging idly on his throne. <i>“The diligent traveler… and the rebellious daughter. Just what have you two been up to?”</i> He looks like he’s enjoying watching Ophelia squirm. Finally, the smaller bunny gathers her courage.", parse);
 			Text.NL();
 			Text.Add("<i>“This can’t go on father, what you are doing to mother! [playername] has been helping me… With the scepter, we can restore her, bring her back to like she was in the old days!”</i> Lagon’s eyes darken, and the alchemist falters.", parse);
 			Text.NL();
@@ -2200,7 +2200,7 @@ Scenes.Lagon.ReturnToBurrowsAfterScepter = function() {
 			Text.NL();
 			Text.Add("<i>“Y-you… evil!”</i> Ophelia gasps, tears in her eyes. Gulping, she steels herself. <i>“I was right after all… I had hoped that you might… but no. There is only one way to end this. You have to be put down.”</i>", parse);
 			Text.NL();
-			Text.Add("For a moment, it’s as if Lagon hasn’t even heard her. So inconceivable are the words that come out of her mouth. <i>“And you, traveller?”</i> he turns your way. <i>“Where do you stand in all this? Are you too caught up in this foolishness, or are you willing to listen to reason?”</i>", parse);
+			Text.Add("For a moment, it’s as if Lagon hasn’t even heard her. So inconceivable are the words that come out of her mouth. <i>“And you, traveler?”</i> he turns your way. <i>“Where do you stand in all this? Are you too caught up in this foolishness, or are you willing to listen to reason?”</i>", parse);
 			Text.NL();
 			Text.Add("What reason?", parse);
 			Text.NL();
@@ -2225,7 +2225,7 @@ Scenes.Lagon.ReturnToBurrowsAfterScepter = function() {
 					parse["comp"] = party.Num() == 2 ? party.Get(1).name :
 					                party.Num() >  2 ? "your companions" : "";
 					parse["c"] = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
-					Text.Add("<i>“Guards, put this pitiful display of misplaced chivalry to rest.”</i> The king leans back in his throne. <i>“The one that takes the traveller down will get sloppy seconds.”</i> The guards close in on you[c], weapons raised.", parse);
+					Text.Add("<i>“Guards, put this pitiful display of misplaced chivalry to rest.”</i> The king leans back in his throne. <i>“The one that takes the traveler down will get sloppy seconds.”</i> The guards close in on you[c], weapons raised.", parse);
 					Text.NL();
 					Text.Add("It’s a fight!", parse);
 					Text.Flush();
@@ -2316,10 +2316,10 @@ Scenes.Lagon.LossToRegularLagon = function() {
 	if(toolate) {
 		parse["HeShe"]  = player.mfFem("He", "She");
 		parse["hisher"] = player.mfFem("his", "her");
-		Text.Add("<i>“Bring the traveller over here, and remove [hisher] clothes,”</i> Lagon gestures to his guards. <i>“[HeShe] won’t be needing them any longer.”</i>", parse);
+		Text.Add("<i>“Bring the traveler over here, and remove [hisher] clothes,”</i> Lagon gestures to his guards. <i>“[HeShe] won’t be needing them any longer.”</i>", parse);
 	}
 	else {
-		Text.Add("<i>“Bring my daughter over here too… and remove her clothes,”</i> Lagon gestures to his guards. <i>“She won’t be needing them any longer. Nor will you, traveller.”</i>", parse);
+		Text.Add("<i>“Bring my daughter over here too… and remove her clothes,”</i> Lagon gestures to his guards. <i>“She won’t be needing them any longer. Nor will you, traveler.”</i>", parse);
 	}
 	if(scepter)
 		Text.Add(" With a sneer, the rabbit king adds: <i>“Oh, and bring me that scepter.”</i>", parse);
@@ -2338,7 +2338,7 @@ Scenes.Lagon.LossToRegularLagon = function() {
 	parse["comp"] = party.Num() == 2 ? party.Get(1).name :
 	                party.Num() >  2 ? "your companions" : "";
 	parse["c"] = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
-	Text.Add("<i>“And now, I must deal with you,”</i> Lagon says as he turns his attention to you[c], ignoring his daughter who’s happily snuggling his leg. <i>“The prodigal traveller turned traitor. I’ll offer you the same out as I gave Ophelia… but first, you need to taste true defeat.”</i> Almost purring, he motions you closer: <i>“Approach, my slut.”</i>", parse);
+	Text.Add("<i>“And now, I must deal with you,”</i> Lagon says as he turns his attention to you[c], ignoring his daughter who’s happily snuggling his leg. <i>“The prodigal traveler turned traitor. I’ll offer you the same out as I gave Ophelia… but first, you need to taste true defeat.”</i> Almost purring, he motions you closer: <i>“Approach, my slut.”</i>", parse);
 	Text.NL();
 	Text.Add("Your mind rebels, but your body moves against your wishes, not wishing to incur his wrath. Joining Ophelia at the foot of the throne, you copy her actions, caressing the king’s feet, his legs, his thighs, licking his fur subserviently. ", parse);
 	if(player.SubDom() >= 30)
@@ -2543,11 +2543,11 @@ Scenes.Lagon.LossToOphelia = function() {
 	player.AddLustFraction(1);
 	
 	Text.Clear();
-	Text.Add("<i>“Why, this is even more entertaining than I first imagined, traveller!”</i> Lagon laughs as you drop to the ground, no longer able to fight. Perceiving this new enemy, Ophelia throws herself at her father with a mighty roar.", parse);
+	Text.Add("<i>“Why, this is even more entertaining than I first imagined, traveler!”</i> Lagon laughs as you drop to the ground, no longer able to fight. Perceiving this new enemy, Ophelia throws herself at her father with a mighty roar.", parse);
 	Text.NL();
 	Text.Add("<i>“Tell me,”</i> the king continues unhurriedly as he dodges a blow from the enraged alchemist, <i>“what use are you to me if you can’t even handle my daughter?”</i> He dodges another blow, then throws a blindingly fast high kick, hitting Ophelia squarely in the jaw. As the confused brute stands there blinking, trying to figure out what just happened, Lagon lands another flurry of blows, throwing her on her back.", parse);
 	Text.NL();
-	Text.Add("<i>“My agent? No, I have a far more appropriate task for you, weak little traveller.”</i> The lagomorph king languidly makes his way over to the two of you as you lie gasping on the ground. He flops down on her chest, legs straddling her sides. <i>“Say aaah!”</i> he encourages her, forcing her jaw open while he pours the contents on a large flask down her throat. Bit by bit the effects of the brutish transformation are reversed, until Ophelia looks much like her old self - except now she’s nude, her old robes mere tatters.", parse);
+	Text.Add("<i>“My agent? No, I have a far more appropriate task for you, weak little traveler.”</i> The lagomorph king languidly makes his way over to the two of you as you lie gasping on the ground. He flops down on her chest, legs straddling her sides. <i>“Say aaah!”</i> he encourages her, forcing her jaw open while he pours the contents on a large flask down her throat. Bit by bit the effects of the brutish transformation are reversed, until Ophelia looks much like her old self - except now she’s nude, her old robes mere tatters.", parse);
 	Text.NL();
 	Text.Add("<i>“Now, this one is for you.”</i> Lagon grins maliciously as he hops over onto your chest, driving the air out of your lungs. As you gasp for air, he forces a thick and sickly sweet liquid into your mouth, and you have no choice but to swallow. <i>“Good girl,”</i> he cheers you on. ", parse);
 	if(!player.FirstVag())
@@ -2608,7 +2608,7 @@ Scenes.Lagon.WinToOphelia = function() {
 		Text.NL();
 		Text.Add("<i>“[stuttername]?”</i> she pants. <i>“W-what happened? Why do I feel so… aah!”</i> She gasps as she hits a particularly sweet spot. Her father traces a finger down her stomach, dipping it into her dripping snatch. Ophelia cries out in pleasure as she rides out her orgasm.", parse);
 		Text.NL();
-		Text.Add("<i>“[playername] is your master now, slut, and you must do anything that [pheshe] says. A much more fitting role for you than your silly experiments, no?”</i> Lagon throws you a heavy bag, clinking heavily with coins. <i>“Your reward, traveller.”</i>", parse);
+		Text.Add("<i>“[playername] is your master now, slut, and you must do anything that [pheshe] says. A much more fitting role for you than your silly experiments, no?”</i> Lagon throws you a heavy bag, clinking heavily with coins. <i>“Your reward, traveler.”</i>", parse);
 		Text.NL();
 		Text.Add("And what now, you ask?", parse);
 		Text.NL();

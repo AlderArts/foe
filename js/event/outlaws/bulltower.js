@@ -483,7 +483,7 @@ Scenes.BullTower.MovingOut = function() {
 			
 			Gui.NextPrompt(function() {
 				Text.Clear();
-				Text.Add("The trip to the King’s Road is uneventful; the two of you slip through the thick undergrowth out of the forest. The road is clear, largely devoid of travellers, and well-lit under the clear, cloudless sky. Off in the distance, the many lights of Rigard flicker and twinkle, the city drowsy but never quite falling asleep.", parse);
+				Text.Add("The trip to the King’s Road is uneventful; the two of you slip through the thick undergrowth out of the forest. The road is clear, largely devoid of travelers, and well-lit under the clear, cloudless sky. Off in the distance, the many lights of Rigard flicker and twinkle, the city drowsy but never quite falling asleep.", parse);
 				Text.NL();
 				Text.Add("The further you get from Rigard, the less maintained and wilder the road becomes; it remains paved, but you notice the occasional pothole and missing flagstone, while the surrounding vegetation becomes coarser and more overgrown. You’d have guessed that the main route connecting Rigard and the Free Cities would be better maintained. Perhaps this is just a neglected patch, with no one living nearby to take responsibility for its upkeep.", parse);
 				Text.NL();

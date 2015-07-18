@@ -869,7 +869,7 @@ Scenes.Room69.ApologizeTo69ForBeingMean = function() {
 		func : function() {
 			Text.NL();
 			if(player.Int() > 40) {
-				Text.Add("<i>“Is <b>that</b> how it works? Then I’m surprised you don’t spend more time thinking about oaks,”</i> you retort. You tap your foot on the floor, regarding it sceptically. <i>“Well, not oaks, clearly. I guess any kind of decent tree would be too dignified for you. Maybe about beetle-chewed pines.”</i>", parse);
+				Text.Add("<i>“Is <b>that</b> how it works? Then I’m surprised you don’t spend more time thinking about oaks,”</i> you retort. You tap your foot on the floor, regarding it skeptically. <i>“Well, not oaks, clearly. I guess any kind of decent tree would be too dignified for you. Maybe about beetle-chewed pines.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“You really do have insects on your mind, don’t you?”</i> the haughty voice responds. <i>“If you are this interested in eating me, you shouldn’t have run away that first time. Or maybe you are just presently incapable of sex, since it’s not housefly mating season...”</i>", parse);
 				Text.NL();

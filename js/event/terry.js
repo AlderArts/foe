@@ -1852,7 +1852,7 @@ Scenes.Terry.TalkPast = function(force) {
 			return true;
 		}
 		
-		Text.Add("<i>“I’ve always been pretty good when picking pockets, or stealthily nabbing a thing or two from a careless traveller. But nothing could’ve prepared me for my master. Not ‘master’ like you, [playername]. I mean… I guess ‘mentor’ would be a more appropriate term.”</i>", parse);
+		Text.Add("<i>“I’ve always been pretty good when picking pockets, or stealthily nabbing a thing or two from a careless traveler. But nothing could’ve prepared me for my master. Not ‘master’ like you, [playername]. I mean… I guess ‘mentor’ would be a more appropriate term.”</i>", parse);
 		Text.NL();
 		Text.Add("Well, trying to rob a thief is one way to get them to teach you, you suppose. How did it happen?", parse);
 		Text.NL();

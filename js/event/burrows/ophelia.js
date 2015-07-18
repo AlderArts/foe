@@ -1504,9 +1504,9 @@ Scenes.Ophelia.PotionsPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“Quite interesting!”</i> Ophelia croons excitedly. <i>“There doesn’t seem to be any traces of a reptilian slit, and his testes are still intact. Good thing too, as he’s likely to need them if he’s to sire a new strain.”</i> A startled whimper diverts the alchemist’s attention to the other rabbit, who is sitting with her hands covering her lap, legs pressed together tightly and blushing fiercely.", parse);
 				Text.NL();
-				Text.Add("<i>“What is wrong girl? Don’t tell me you grew one too. Now then,”</i> the lagomorph scientist tuts, forcing the bunny’s legs apart, <i>“what do we have-”</i> You peek over her shoulder curiously, wondering why she grew silent. It’s quite a sight.", parse);
+				Text.Add("<i>“What is wrong, girl? Don’t tell me you grew one too. Now then,”</i> the lagomorph scientist tuts, forcing the bunny’s legs apart, <i>“what do we have-”</i> You peek over her shoulder curiously, wondering why she grew silent. It’s quite a sight.", parse);
 				Text.NL();
-				Text.Add("Nested between her thighs, there are about a dozen pink eggs, each roughly the size of an apple. Ophelia picks one of them up in wonder. <i>“Never thought I’d see this pop out between someones legs,”</i> she confesses. <i>“So many of them too… no! Down!”</i> The alchemist irritably swats away the girl’s hands, as she possessively reaches for her egg.", parse);
+				Text.Add("Nested between her thighs, there are about a dozen pink eggs, each roughly the size of an apple. Ophelia picks one of them up in wonder. <i>“Never thought I’d see this pop out between someone's legs,”</i> she confesses. <i>“So many of them too… no! Down!”</i> The alchemist irritably swats away the girl’s hands as she possessively reaches for her egg.", parse);
 				Text.NL();
 				Text.Add("<i>“They aren’t fertilized, silly,”</i> Ophelia scoffs, though she relents and returns the egg to the agitated bunny, who cradles it protectively. <i>“That will be the next step of the test.”</i> Rubbing her hands together excitedly, she calls for some guards to escort the new hybrids to a breeding chamber, to see how well the strain will proliferate.", parse);
 				Text.NL();
@@ -1534,7 +1534,7 @@ Scenes.Ophelia.PotionsPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“Down the hatch!”</i> she grins, pouring the concoction down their throats. The effects are gradual, but both of the guinea pigs look like they have gained a fair amount of tone, their bodies athletic but not overtly bulging with muscles. A lush mane grows down their backs, disappearing just above their new long tails, the fine hairs smooth as silk. There is a subtle change in their faces too, the muzzle slightly longer and the nose a bit broader.", parse);
 				Text.NL();
-				Text.Add("None of this seems to faze any of the three lagomorphs however, as their full attention is firmly fixed on the slowly rising monolith between the legs of the male. Most of the rabbits you’ve seen so far have had at least respectable members, especially considering their small stature, but this one is almost intimidating. It’s as thick as his arm, and long enough to reach his chin, looking almost comical on his slight frame. The poor bunny looks like he is about to pass out, though whether from shock or from the massive reallocation of blood to the veiny, flared monster between his legs isn’t clear. The air is heavy with his musk, spreading from the huge, overfilled scrotum at the base of his cock.", parse);
+				Text.Add("None of this seems to faze any of the three lagomorphs however, as their full attention is firmly fixed on the slowly rising monolith between the legs of the male. Most of the rabbits you’ve seen so far have had at least respectable members - especially considering their small stature - but this one is almost intimidating. It’s as thick as his arm, and long enough to reach his chin, looking almost comical on his slight frame. The poor bunny looks like he is about to pass out, though whether from shock or from the massive reallocation of blood to the veiny, flared monster between his legs isn’t clear. The air is heavy with his musk, spreading from the huge, overfilled scrotum at the base of his cock.", parse);
 				Text.NL();
 				Text.Add("<i>“Wow… that is… nice...”</i> Ophelia stammers dreamily, still transfixed by the now fully erect majestic shaft. She is practically drooling, and it looks like she is preventing herself from throwing herself on it by sheer force of will. The female test subject, meanwhile, is prevented by the sheer force of metal chains, though it looks like the jury is still out on which of them will win the battle. The alchemist shakes her head, trying to clear it of sexual thoughts.", parse);
 				Text.NL();
@@ -1546,7 +1546,7 @@ Scenes.Ophelia.PotionsPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“Hey, [playername], have a look at this!”</i> she calls out to you, simultaneously shoving her entire fist inside the bunny-girl. <i>“She can take my entire forearm without even blinking!”</i> Ophelia marvels at the girl’s flexible cunt, <i>“I guess they are meant for each other.”</i> There is a large visible bulge on the lagomorph’s stomach, yet she doesn’t seem to experience any pain or discomfort from the intruding limb, continuing to beg for the tantalizing equine dick just outside her reach. The alchemist pulls out her arm, releasing a waft of musk so heady it feels like a punch in the face. Almost instinctively, she gives the fluid a lick, shaking her head in confusion.", parse);
 				if(burrows.flags["Access"] >= Burrows.AccessFlags.QuestlineComplete)
-					Text.Add(" Her cock is straining against the fabric of her labcoat, aching to be buried in that sweet honeypot.", parse);
+					Text.Add(" Her cock is straining against the fabric of her lab coat, aching to be buried in that sweet honeypot.", parse);
 				Text.NL();
 				Text.Add("The strong secretions reach the male lagomorph-equine hybrid, who groans almost as if in pain, thrashing against his bonds, his cock impossibly stiff and leaking pre like a broken faucet. The rest of the chained test subjects are also stirring, roused and aroused by the strong scents that now permeate the entire lab. Ophelia’s guards pick this moment to step inside to see what all the fuss is about, their jaws dropping in unison as they drink in the scene before them. As one, they jump toward the pair, overcome by their lust.", parse);
 				Text.NL();
@@ -1588,7 +1588,7 @@ Scenes.Ophelia.DeliverCactoids = function() {
 	Text.Clear();
 	Text.Add("<i>“Ah, nice!”</i> Ophelia takes the squirming little creatures, handling them carefully in order to not get stung. You turn your head uncomfortably as she summarily salvages the ingredients she needs from the innocent critters before releasing them again.", parse);
 	Text.NL();
-	Text.Add("<i>“Now, what were the other things I needed...”</i> she muses, browsing through one of her scrolls. <i>“Give me an hour or so, I need to try a few things.”</i> You settle down to wait as the bunny-morph begins to mix the contents of various jars with the ground cactoid needles. After a while, you begin to space out, your gaze dropping down to Ophelia’s cute little butt as it scurries about - barely hidden under her short labcoat - her puffy tail bobbing with excitement.", parse);
+	Text.Add("<i>“Now, what were the other things I needed...”</i> she muses, browsing through one of her scrolls. <i>“Give me an hour or so, I need to try a few things.”</i> You settle down to wait as the bunny-morph begins to mix the contents of various jars with the ground cactoid needles. After a while, you begin to space out, your gaze dropping down to Ophelia’s cute little butt as it scurries about - barely hidden under her short lab coat - her puffy tail bobbing with excitement.", parse);
 	Text.NL();
 	Text.Add("The alchemist curses a few times, brewing up new mixtures as the delicate balance of one of her solutions turns sour. Finally, she swirls around triumphantly, a bottle in hand containing a bubbly concoction with a garish green color.", parse);
 	Text.NL();
@@ -1602,19 +1602,19 @@ Scenes.Ophelia.DeliverCactoids = function() {
 	Text.NL();
 	Text.Add("The most impressive change to his physique, however, lies between his powerful thighs. A bobbing third leg, almost three feet in length and several inches thick, looms like a monument to the bunny’s newfound masculinity. A pair of balls the size of coconuts hang beneath it, swollen with seed.", parse);
 	Text.NL();
-	Text.Add("This last change doesn’t seem to have gone unnoticed by the other volunteers; their gazes are entranced by the monstrous shaft, their mouths watering as globs of precum form on the bulbous tip. Looking in wonder at his new body, the brute doesn’t seem to have missed the attention he’s receiving either.", parse);
+	Text.Add("This last change doesn’t seem to have gone unnoticed by the other volunteers; their gazes are entranced by the monstrous shaft, their mouths watering as globs of pre-cum form on the bulbous tip. Looking in wonder at his new body, the brute doesn’t seem to have missed the attention he’s receiving either.", parse);
 	Text.NL();
 	Text.Add("<i>“Did you see that?”</i> Ophelia pipes at your shoulder, peeking out behind you. <i>“Quite impressive reaction, I’d say!”</i> She frowns as the hulking lagomorph sways his gaze around, fixating on one of the female bunnies.", parse);
 	Text.NL();
 	Text.Add("<i>“Hey, you big lump, are you listening?”</i> the alchemist yips, pouting as the brute ignores her. Instead, he chooses to bodily pick up his fellow test subject, absently breaking her bonds without effort. With a vapid broad smile on his face, the bulky jock cradles the female, placing her astride his erect battering ram. The smaller bunny blushes, her cheeks aflame with arousal. Rivulets of sweet femcum lather the thick pole, her body instinctively preparing to be taken by the powerful male.", parse);
 	Text.NL();
-	Text.Add("<i>“Well, those parts certainly seem to be working,”</i> Ophelia huffs, a slight flush on her cheeks. The brute is surprisingly gentle as he caresses his smaller lover; massaging her pert breasts and fondling her hair with fists the size of her head. With nothing else to support her, the girl is suspended by nothing more than the enormous cock, the male’s arousal seemingly more than enough to uphold her slight frame. <i>“E-even bigger than father’s… will it even be able to fit?”</i> Though she seems a bit sceptical, Ophelia scrambles to get hold of her notepad, her eyes never leaving her test subjects.", parse);
+	Text.Add("<i>“Well, those parts certainly seem to be working,”</i> Ophelia huffs, a slight flush on her cheeks. The brute is surprisingly gentle as he caresses his smaller lover; massaging her pert breasts and fondling her hair with fists the size of her head. With nothing else to support her, the girl is suspended by nothing more than the enormous cock, the male’s arousal seemingly more than enough to uphold her slight frame. <i>“E-even bigger than father’s… will it even be able to fit?”</i> Though she seems a bit skeptical, Ophelia scrambles to get hold of her notepad, her eyes never leaving her test subjects.", parse);
 	Text.NL();
 	Text.Add("<i>“Initial penetration… problematic,”</i> she murmurs beneath her breath as she starts scribbling notes. It’s like she says; even with her snatch wet like an ocean, the bunnygirl has trouble stretching far enough to allow the brute to enter her. After several failed tries, the frustrated jock lifts her up by the waist, bringing his broad tongue to her crotch. His lover relaxes with a shudder, allowing him to ease her folds apart, preparing her for what’s to come.", parse);
 	Text.NL();
-	Text.Add("<i>“Interesting technique,”</i> Ophelia notes, her breath coming short. Glancing down, you see that she’s placed her pad on a table in front of her, writing notes growing scrawlier by the minute as her other hand busies itself under her labcoat. Even a rabbit as smart as she can’t escape her true nature.", parse);
+	Text.Add("<i>“Interesting technique,”</i> Ophelia notes, her breath coming short. Glancing down, you see that she’s placed her pad on a table in front of her, writing notes growing scrawlier by the minute as her other hand busies itself under her lab coat. Even a rabbit as smart as she can’t escape her true nature.", parse);
 	Text.NL();
-	Text.Add("Eager to give it another go, the bulky bunny gets down on his back, motioning for his partner to take a seat on his towering member. She straddles him, her pussylips hesitantly kissing the magnificent pole as she hovers above it. The poor girl has to stand on her tiptoes to even reach the ground, so big is it. Gulping down the last remains of her lingering doubt, the bunny surrenders to her lusts, sinking down on the massive shaft. Her cunt is stretched impossibly wide by the sheer girth of her lover, but by the sound of her ecstatic cries, she’s far from complaining. It’s physically impossible for her to take all of her lover - but you don’t suspect that the bunnies are particularly good at physics. Either way, they both seem more than willing to try, as the girl impales herself deeper with each downward thrust.", parse);
+	Text.Add("Eager to give it another go, the bulky bunny gets down on his back, motioning for his partner to take a seat on his towering member. She straddles him, her pussylips hesitantly kissing the magnificent pole as she hovers above it. The poor girl has to stand on her tiptoes to even reach the ground, so big is it. Gulping down the last remains of her lingering doubt, the bunny surrenders to her lusts, sinking down on the massive shaft. Her cunt is stretched impossibly wide by the sheer girth of her lover, but by the sound of her ecstatic cries, she’s far from complaining. It’s physically impossible for her to take all of her lover - but you don’t suspect that the bunnies are particularly good at physics. Either way, they both seem more than willing to try as the girl impales herself deeper with each downward thrust.", parse);
 	Text.NL();
 	Text.Add("Unable to help himself, the brute starts to rock his hips, mercilessly pounding his monstrous cock into the delirious girl. His initial composed demeanor seems to be eroding by the second as the potion affects not only his body, but also his mind.", parse);
 	Text.NL();
@@ -1656,7 +1656,7 @@ Scenes.Ophelia.DeliverGolHusks = function() {
 	Text.NL();
 	Text.Add("<i>“Who wants to prove themselves for Lagon, perhaps gain his favor?”</i> The chained rabbits clamor for attention, one of the females hopping to the front and opening her mouth expectantly.", parse);
 	Text.NL();
-	Text.Add("<i>“Very well, you shall be the first test subject!”</i> The alchemist hands the eager girl the bottle, ruffling her hair while she greedily drinks it up. At first it seems like nothing has happened, but the bunny suddenly flops over, hugging herself as she moans in delirious pleasure. Her fellow captives gather around in concern, blocking your view, and Ophelia shoves them away again, adjusting her glasses in annoyance. <i>“So, how do you feel?”</i> she asks the bunny, readying her pen.", parse);
+	Text.Add("<i>“Very well, you shall be the first test subject!”</i> The alchemist hands the eager girl the bottle, ruffling her hair while she greedily drinks it up. Nothing seems to happen at first, but the bunny suddenly flops over, hugging herself as she moans in delirious pleasure. Her fellow captives gather around in concern, blocking your view, and Ophelia shoves them away again, adjusting her glasses in annoyance. <i>“So, how do you feel?”</i> she asks the bunny, readying her pen.", parse);
 	Text.NL();
 	Text.Add("Her ears still twitching and her face flushed, the lagomorph pulls herself up to her knees, hands covering her crotch. You look her over - a pretty little thing, to be sure - but the potion doesn’t seem to have had any obvious effects. Ophelia taps her hip impatiently. <i>“Come on now, don’t be shy.”</i>", parse);
 	Text.NL();
@@ -1666,7 +1666,7 @@ Scenes.Ophelia.DeliverGolHusks = function() {
 	Text.NL();
 	Text.Add("His eyes droop, but he accepts the mixture, downing it in one swig. You watch curiously, wondering what effects this concoction will have on a jock. You aren’t disappointed; if anything, the changes are all the more apparent on the male than it was on the female. That, and this time Ophelia is certain that the effects aren’t hidden by any naughty bunny paws.", parse);
 	Text.NL();
-	Text.Add("Not that the unfortunate rabbit would have much luck hiding the changes to his body. Like most males of his race the jock is lithe and athletic, and he expresses some concern as he begins to fill out - a little here, a little there, a broadening and rounding of the hips and thighs, a swelling of the butt. Interesting things are happening to the bunny’s chest too - a pair of modest breasts rising from his former flatness.", parse);
+	Text.Add("Not that the unfortunate rabbit would have much luck hiding the changes to his body. Like most males of his race, the jock is lithe and athletic, and he expresses some concern as he begins to fill out - a little here, a little there, a broadening and rounding of the hips and thighs, a swelling of the butt. Interesting things are happening to the bunny’s chest too - a pair of modest breasts rising from his former flatness.", parse);
 	Text.NL();
 	Text.Add("By now, <i>her</i> would probably be a better way to address the lagomorph. The former male’s balls recede into his crotch, forming a thin gash just below the base of his quivering cock. The transformed bunny gives out a yelp - significantly higher in pitch than before - as Ophelia gives her newly formed pussy an experimental touch. <i>“Not quite what I expected, I must admit,”</i> the alchemist confesses, jotting down a few more notes in her pad.", parse);
 	Text.NL();
@@ -1694,9 +1694,9 @@ Scenes.Ophelia.DeliverAlgae = function() {
 	Text.Clear();
 	Text.Add("<i>“Very good, [playername]! I have great hopes for this one!”</i> Ophelia seems unusually animated as she takes the plants from you, bringing them over to her workbench. You settle down and she begins chopping them into thin strands, putting them into a pot of boiling water. The alchemist goes on to explain that this particular scroll - she waves it in the air enthusiastically - suggests that it describes a potion that sharpen one’s senses.", parse);
 	Text.NL();
-	Text.Add("<i>“I’m not sure if you’ve caught on to it, but most of my siblings aren’t very bright. Enthusiastic, certainly,”</i> she hurries to defend them, <i>“but not the most stimulating conversationalists. They prefer stimulating in different ways.”</i> The bespectacled bunny sighs, absentmindedly stirring the contents of the pot. <i>“I used to be able to talk to mother. Before she changed.”</i> Her ears droop with sadness, before she cheers herself up again.", parse);
+	Text.Add("<i>“I’m not sure if you’ve caught on to it, but most of my siblings aren’t very bright. Enthusiastic, certainly,”</i> she hurries to defend them, <i>“but not the most stimulating conversationalists. They prefer different kinds of stimulation.”</i> The bespectacled bunny sighs, absentmindedly stirring the contents of the pot. <i>“I used to be able to talk to mother… before she changed.”</i> Her ears droop with sadness, before she cheers herself up again.", parse);
 	Text.NL();
-	Text.Add("<i>“Who knows, this might bring her back!”</i> she adds optimistically. You’re a bit more sceptical; having met Vena, you doubt that a mere potion will be enough to bring her back from the depths of perverse decadence she wallows in.", parse);
+	Text.Add("<i>“Who knows, this might bring her back!”</i> she adds optimistically. You’re a bit more skeptical; having met Vena, you doubt that a mere potion will be enough to bring her back from the depths of perverse decadence she wallows in.", parse);
 	Text.NL();
 	Text.Add("Ophelia seems hopeful to the contrary at least, and hums to herself quietly as she prepares the potion, fidgeting with excitement even as she waits for the mixture to reach the correct temperature. Finally, after double-checking everything with the scroll again, she seems to be happy with the results.", parse);
 	Text.NL();
@@ -1731,19 +1731,19 @@ Scenes.Ophelia.DeliverFollowup = function(trait) {
 	party.location = world.loc.Burrows.Pit;
 	
 	Text.Clear();
-	Text.Add("<i>“Thank you for gathering the ingredients for me,”</i> Ophelia nods, satisfied with the results of her new concoction. She fills a large bottle with the substance, adjusting her glasses and smoothing out her labcoat before turning back to you.", parse);
+	Text.Add("<i>“Thank you for gathering the ingredients for me,”</i> Ophelia nods, satisfied with the results of her new concoction. She fills a large bottle with the substance, adjusting her glasses and smoothing out her lab coat before turning back to you.", parse);
 	Text.NL();
 	
 	if(burrows.flags["Access"] < Burrows.AccessFlags.Stage1) {
 		burrows.flags["Access"] = Burrows.AccessFlags.Stage1;
 		
-		Text.Add("<i>“We should take this to father right away, I know he’ll love this!”</i> You have your reservations, but you are interested in the payment offered, so you follow behind the excited bunny. Once in the tunnels, the guards silently close in around you, escorting you toward Lagon’s throneroom.", parse);
+		Text.Add("<i>“We should take this to father right away, I know he’ll love this!”</i> You have your reservations, but you are interested in the payment offered, so you follow behind the excited bunny. Once in the tunnels, the guards silently close in around you, escorting you toward Lagon’s throne room.", parse);
 		Text.NL();
 		Text.Add("The ruler of the burrows seems a tad busy, grunting as he drives himself balls deep into a pretty little lagomorph, impaling her on his massive meatstick. She is moaning incoherently, driven to her limits as her body is wracked by a shattering orgasm - and by the envious looks of Lagon’s harem, it’s far from her first. They keep their voices lowered respectfully, though many can’t resist touching themselves, whimpering quietly as they imagine themselves prone under their mighty leader. Lagon grits his teeth, tensing as he pours his hot seed inside of his latest fucktoy, no doubt impregnating the girl. Her stomach bloats slightly as her womb is filled to the brim, the excess dripping down between her thighs. She passes out, the intense experience finally too much for her.", parse);
 		Text.NL();
 		Text.Add("At last, Lagon notices your arrival. Nonchalantly, he pulls the senseless rabbit off his still erect member, studying you curiously as he deposits her on the floor. A few gallant youths hop forth quickly, taking care of the poor girl - though their lustful gazes and bobbing cocks make you doubt their chivalrous intentions.", parse);
 		Text.NL();
-		Text.Add("<i>“And to what do I owe the pleasure of my daughter’s presence?”</i> the patriarch drawls, eyeing you in passing. <i>“If you want a fuck, you’ll have to get in line.”</i> He mockingly gestures at the needy females surrounding his throne on their knees, each begging to be his next bitch.", parse);
+		Text.Add("<i>“To what do I owe the pleasure of my daughter’s presence?”</i> the patriarch drawls, eyeing you in passing. <i>“If you want a fuck, you’ll have to get in line.”</i> He mockingly gestures at the needy females surrounding his throne on their knees, each begging to be his next bitch.", parse);
 		Text.NL();
 		Text.Add("<i>“N-not now, father,”</i> Ophelia blushes, her eyes flitting over to you for a second. <i>“I-I finished it, with the help of [playername] here! I finished the potion!”</i> Excited, she goes on to describe the effects of the new solution, proudly presenting her test subject to him. Lagon’s eyes are unreadable as he studies the flask.", parse);
 		Text.NL();
@@ -1753,7 +1753,7 @@ Scenes.Ophelia.DeliverFollowup = function(trait) {
 		Text.NL();
 		Text.Add("<i>“What, do you expect our resourceful friend to slaughter monsters for you all day long? You must be offering [himher] quite the favors for such diligence.”</i> Lagon laughs at his colorful joke, enjoying his daughter’s discomfort.", parse);
 		Text.NL();
-		Text.Add("<i>“Never mind that, I have a far more… efficient solution.”</i> With that he hops out of his throne, leading the way out of the chamber, flask in hand. Ophelia shrugs at you, setting out after her father, her guards in tow. Before long, the rhythmic drone makes it apparent that you are heading toward the Pit, the large breeding cavern at the center of the colony. On all sides, the participants of the perpetual orgy quiet down as their leader walks among them. A worshipful silence fills the huge space, as the entire room focuses intently on your small group, paused mid-coitus.", parse);
+		Text.Add("<i>“Never mind that, I have a far more… efficient solution.”</i> With that, he hops out of his throne, leading the way out of the chamber, flask in hand. Ophelia shrugs at you, setting out after her father, her guards in tow. Before long, the rhythmic drone makes it apparent that you are heading toward the Pit, the large breeding cavern at the center of the colony. On all sides, the participants of the perpetual orgy quiet down as their leader walks among them. A worshipful silence fills the huge space as the entire room focuses intently on your small group, paused mid-coitus.", parse);
 		Text.NL();
 		Text.Add("<i>“...Father? What is going on?”</i> Ophelia asks in a small voice, perhaps already suspecting where this is headed. <i>“I… I have plenty of test subjects in the pens of my lab, there is no need-”</i>", parse);
 		Text.NL();
@@ -1827,15 +1827,15 @@ Scenes.Ophelia.DeliverFollowup = function(trait) {
 			func : function() {
 				Scenes.Ophelia.WatchedOphelia = true;
 				Text.Clear();
-				Text.Add("You watch in silence as father and daughter lock gazes. She holds out for a short while, but, after a few moments, she sullenly looks down, admitting defeat.", parse);
+				Text.Add("You watch in silence as father and daughter lock gazes. She holds out for a short while, but after a few moments, she sullenly looks down, admitting defeat.", parse);
 				Text.NL();
 				Text.Add("<i>“Don’t think you’ll get off the hook that easily,”</i> Lagon growls, grabbing hold of her jaw, forcing it open. <i>“A bad girl like you needs to be punished...”</i> He studies her pained expression as she struggles weakly against his iron grip.", parse);
 				Text.NL();
-				Text.Add("<i>“Perhaps you are right, perhaps I shouldn’t use Vena anymore. Perhaps you’d like to take her place? A mindless breeding slut, being fucked and impregnated day in and day out, is that the kind of life you yearn for?”</i> The lagomorph patriarch pries the alchemical draught from Ophelia’s hands, forcing it to her unwilling lips. <i>“Would you like to start right now?”</i>", parse);
+				Text.Add("<i>“Perhaps you are right, maybe I shouldn’t use Vena anymore. Perhaps you’d like to take her place? A mindless breeding slut, being fucked and impregnated day in and day out, is that the kind of life you yearn for?”</i> The lagomorph patriarch pries the alchemical draught from Ophelia’s hands, forcing it to her unwilling lips. <i>“Would you like to start right now?”</i>", parse);
 				Text.NL();
-				Text.Add("She shakes her head vehemently, and he relents, handing the bottle to you. <i>“In that case, your punishment has to be something... different.”</i> Under Lagon’s directions, Ophelia lies down on her back, opening her stained labcoat and spreading her legs wide. The larger male wastes no time on foreplay, soaking his stiff shaft in his daughter’s wet cunt before adjusting his aim, placing the head of his giant cock against Ophelia’s tight rosebud.", parse);
+				Text.Add("She shakes her head vehemently, and he relents, handing the bottle to you. <i>“In that case, your punishment has to be something... different.”</i> Under Lagon’s directions, Ophelia lies down on her back, opening her stained lab coat and spreading her legs wide. The larger male wastes no time on foreplay, soaking his stiff shaft in his daughter’s wet cunt before adjusting his aim, placing the head of his giant cock against Ophelia’s tight rosebud.", parse);
 				Text.NL();
-				Text.Add("There is no love in his ruthless fucking, just a cruel, animalistic lust and the assertion of dominance. Gradually, the girl’s cries of pain turns to pleading, begging for him to finish. His point made, he increases his pace, roaring as he deposits his load in her.", parse);
+				Text.Add("There is no love in his ruthless fucking, just a cruel, animalistic lust and the assertion of dominance. Gradually, the girl’s cries of pain turn to pleading, begging for him to finish. His point made, he increases his pace, roaring as he deposits his load in her.", parse);
 				Text.NL();
 				Text.Add("<i>“Now, we have work to do.”</i> Without further ado, cock still dripping spunk, Lagon heads off, forcing you to keep up. Ophelia pulls up beside you, tugging her coat tightly around herself, avoiding looking in your direction. You trudge along in silence, feeling uncomfortable with yourself.", parse);
 				
@@ -1850,7 +1850,7 @@ Scenes.Ophelia.DeliverFollowup = function(trait) {
 		
 		Gui.Callstack.push(function() {
 			Text.NL();
-			Text.Add("Before long, you’ve reached the large breeding cavern. The heat here is palpable, and a thick musk permeates the air despite the gathered rabbits gradually quieting down in the presence of their master. Lagon ignores the pleading and groveling sex-crazed peons, heading straight for Vena.", parse);
+			Text.Add("Before long, you’ve reached the large breeding cavern. The heat here is palpable, and a thick musk permeates the air, despite the gathered rabbits gradually quieting down in the presence of their master. Lagon ignores the pleading and groveling sex-crazed peons, heading straight for Vena.", parse);
 			Text.NL();
 			Text.Add("<i>“I have another treat for you, my dear,”</i> he grins maliciously, presenting the matriarch with the large flask. Lithely, he springs up on her chest, pouring the volatile fluids down Vena’s gaping maw.", parse);
 			
@@ -1860,7 +1860,7 @@ Scenes.Ophelia.DeliverFollowup = function(trait) {
 	else if(burrows.flags["Access"] < Burrows.AccessFlags.Stage3) {
 		burrows.flags["Access"] = Burrows.AccessFlags.Stage3;
 		
-		Text.Add("<i>“Well… lets go see father.”</i> Ophelia looks a little scared, no doubt reluctant since her last encounter with Lagon, but not daring to disobey him. The two of you head toward the throne room, successful test subject and guard troop in tow. The alchemist looks morose, constantly fidgeting and adjusting her glasses nervously.", parse);
+		Text.Add("<i>“Well… let's go see father.”</i> Ophelia looks a little scared, no doubt reluctant since her last encounter with Lagon, but not daring to disobey him. The two of you head toward the throne room, successful test subject and guard troop in tow. The alchemist looks morose, constantly fidgeting and adjusting her glasses nervously.", parse);
 		Text.NL();
 		Text.Add("After trodding along in silence, you reach the large royal chamber where Lagon holds court. The ruler of the burrows seems to be busy, balls deep inside a pretty little thing, a girl who looks like she could be Ophelia’s younger sister. Upon further consideration, she probably is.", parse);
 		Text.NL();
@@ -1907,7 +1907,7 @@ Scenes.Ophelia.DeliverVena = function(trait) {
 	else if(trait == Burrows.Traits.Herm) {
 		Text.Add("<i>“Going to be interesting to see the effects of this one, it should make things… more efficient.”</i> Lagon chuckles as Vena squirms, crossing her legs feebly as unfamiliar feelings race through her body, focusing to a pinpoint on her clit. The matriarch cries out in surprise as the sensitive organ begins to grow rapidly, gaining inch upon inch and thickening significantly. The bulging new shaft is about nine inches when a cumslit forms on the head, squirting thick white fluids into the air.", parse);
 		Text.NL();
-		Text.Add("In the place of her clit stands a girthy rod that would put most men to shame, swollen in the middle and throbbing slightly. Thick rivulets of girl cum ooze down its length, making the mouths of every female in close vicinity water. It is clear that the matriarch is going to have even more rabbits vying for her attentions from now on.", parse);
+		Text.Add("In the place of her clit stands a girthy rod that would put most men to shame, swollen in the middle and throbbing slightly as thick rivulets of girl-cum ooze down its length, making the mouths of every female in close vicinity water. It is clear that the matriarch is going to have even more rabbits vying for her attentions from now on.", parse);
 		Text.NL();
 		if(burrows.BruteActive()) {
 			Text.Add("Her transformation has barely begun, however, as Vena’s other mutations kick in, her increased body mass reflecting itself on her new organ. Before the massive shaft has finally stopped growing, it is over two feet long and as thick as an arm.", parse);
@@ -1964,9 +1964,9 @@ Scenes.Ophelia.Reward = function() {
 		Text.NL();
 		Text.Add("<i>“As my lady wishes,”</i> he responds amiably, pushing inside her welcoming folds. Vena moans in ecstasy as her mate relentlessly pounds her, driving his footlong cock into her like a jackhammer. There is an almost feral energy to his lovemaking, and you realize that only with the resilient matriarch can he truly go all out without permanently damaging his partner.", parse);
 		Text.NL();
-		Text.Add("The orgy starts to pick up again around you, as the sight of Vena being bred is too much for the simple rabbits to keep back their lust. Beside you, Ophelia is fiddling with her hair and glasses, gaze flitting everywhere but at her rutting parents. Her emotions are mixed to say the least, worry and disgust mixing with a minute hint of envy on her face. You decide that this perhaps isn’t the best time to talk to her.", parse);
+		Text.Add("The orgy starts to pick up again around you as the sight of Vena being bred is too much for the simple rabbits to keep back their lust. Beside you, Ophelia is fiddling with her hair and glasses, gaze flitting everywhere but at her rutting parents. Her emotions are mixed to say the least, worry and disgust mixing with a minute hint of envy on her face. You decide that this perhaps isn’t the best time to talk to her.", parse);
 		Text.NL();
-		Text.Add("Once he has finished with Vena, pumping his potent load inside the breeding slut, Lagon gives her a final caress before pulling out and hopping over to you. Telling you to follow, he heads back toward the throne room, cock still dripping cum. You catch one last glimpse of the pregnant matriarch before you leave the chamber. Seems like she isn’t getting much rest, as she’s already swarmed by curious lagomorphs, eager to see how her body has changed.", parse);
+		Text.Add("Once he has finished with Vena, pumping his potent load inside the breeding slut, Lagon gives her a final caress before pulling out and hopping over to you. Telling you to follow, he heads back toward the throne room, cock still dripping cum. You catch one last glimpse of the pregnant matriarch before you leave the chamber. Seems like she isn’t getting much rest as she’s already swarmed by curious lagomorphs, eager to see how her body has changed.", parse);
 		Text.NL();
 		Text.Add("<i>“Tell me, what would you like for your reward, my dutiful servant?”</i> the king asks you, smoothly jumping into a slouch on his throne, his still half-erect member on full display. <i>“I can offer you some of Ophelia’s fine stock.”</i> He lays a set of vials out in front of you.", parse);
 		Text.NL();
@@ -1991,7 +1991,7 @@ Scenes.Ophelia.Reward = function() {
 		Text.NL();
 		Text.Add("Lagon jumps down from atop the huge woman, motioning for you to join him as he heads back toward the throne room. Ophelia walks beside you without saying a word. Once you are back, the king of the rabbits jumps onto his throne, slouching arrogantly as he waves for some of his subordinates to bring him some refreshments.", parse);
 		Text.NL();
-		Text.Add("<i>“Once again, you have done me good service. What do you wish as your reward this time, traveller? I can offer you some of Ophelia’s fine stock.”</i> He lays out a set of vials in front of you.", parse);
+		Text.Add("<i>“Once again, you have done me good service. What do you wish as your reward this time, traveler? I can offer you some of Ophelia’s fine stock.”</i> He lays out a set of vials in front of you.", parse);
 		Text.NL();
 		
 		Gui.Callstack.push(function() {
@@ -2007,7 +2007,7 @@ Scenes.Ophelia.Reward = function() {
 				Text.NL();
 				Text.Add("The alchemist waves off any further conversation as you reach the lab. <i>“Look… just keep bringing me those ingredients,”</i> Ophelia tells you, deep in thought. <i>“I might have an idea...”</i>", parse);
 				Text.NL();
-				Text.Add("You are not quite sure what she is plotting, but considering her mood you doubt it bodes well for anyone, least of all her father.", parse);
+				Text.Add("You are not quite sure what she is plotting; considering her mood, you doubt it bodes well for anyone, least of all her father.", parse);
 				Text.Flush();
 				
 				party.location = world.loc.Burrows.Lab;
@@ -2040,7 +2040,7 @@ Scenes.Ophelia.Reward = function() {
 				Text.Clear();
 				Text.Add("With a determined look on your face, you spring toward the giant lagomorph, aiming to put yourself in her path. Before you have taken more than three steps, however, there is a blur of white fur, and a stunning pain as Lagon’s foot connects with your temple. You are hurled face-down to the ground, and swiftly immobilized by the rabbit king.", parse);
 				Text.NL();
-				Text.Add("<i>“Now, lets not do anything rash here,”</i> he grunts, securing your arms. For such a small creature he is amazingly strong, and he holds you in place without apparent effort. <i>“Just sit back and enjoy the show.”</i> You bite back an angry retort, as opening your mouth would only let in the turgid accumulated cum that coats the floor of the cavern.", parse);
+				Text.Add("<i>“Now, let's not do anything rash here,”</i> he grunts, securing your arms. For such a small creature, he is amazingly strong, and he holds you in place without apparent effort. <i>“Just sit back and enjoy the show.”</i> You bite back an angry retort; opening your mouth would only let in the turgid accumulated cum that coats the floor of the cavern.", parse);
 				Text.NL();
 				
 				//Set hp to 1
@@ -2120,7 +2120,7 @@ Scenes.Ophelia.Reward = function() {
 				}
 				Text.Add(" The matriarch digs in like one starved for sex, driving the air from your lungs as she sheathes her massive member inside you in one smooth motion, filling you utterly. All you can do is to hold on for dear life as she rails you, accompanied by Lagon’s malicious laughter.", parse);
 				Text.NL();
-				Text.Add("<i>“Do you not feel proud of your mother, Ophelia?”</i> he leers, hugging her close, making sure that she’s watching. <i>“And all of this thanks to you!”</i> The alchemist’s cheeks are burning in shame. Whatever else, she can’t deny the truth of his words. The rabbit king’s hand venture further down, caressing her butt through the fabric of her labcoat. <i>“I think my daughter deserves a reward...”</i>", parse);
+				Text.Add("<i>“Do you not feel proud of your mother, Ophelia?”</i> he leers, hugging her close, making sure that she’s watching. <i>“And all of this thanks to you!”</i> The alchemist’s cheeks are burning in shame. Whatever else, she can’t deny the truth of his words. The rabbit king’s hand ventures further down, caressing her butt through the fabric of her lab coat. <i>“I think my daughter deserves a reward...”</i>", parse);
 				Text.NL();
 				Text.Add("All of this barely registers with your overloaded senses. You have your own problems to deal with - two whole feet of problems currently mercilessly pummeling your [targetDesc]. Vena cries out in ecstasy as she impales you on her massive cock time and time again, fucking you with seemingly endless vigor.", parse);
 				Text.NL();
@@ -2142,12 +2142,12 @@ Scenes.Ophelia.Reward = function() {
 					
 					Gui.NextPrompt(function() {
 						Text.Clear();
-						Text.Add("You don’t know how long you’ve been here in the Pit, and you no longer care to leave your new home. Ever since Vena finished with you, your life has been an endless stream of being fucked over and over again by countless lagomorphs. They come in all shapes and sizes - sometimes the rabbit king even graces you with his presence -  but nothing matches the feeling of Vena taking you.", parse);
+						Text.Add("You don’t know how long you’ve been here in the Pit, and you no longer care to leave your new home. Ever since Vena finished with you, your life has been an endless stream of being fucked over and over again by countless lagomorphs. They come in all shapes and sizes - sometimes the rabbit king even graces you with his presence - but nothing matches the feeling of Vena taking you.", parse);
 						Text.NL();
 						parse["p"] = player.FirstVag() ? "" : ", complete with a fuckable pussy and a fertile womb";
 						Text.Add("Though your mind is dulled, you still vaguely notice that your body has gradually changed. Ophelia has been feeding you all these amazing drinks, slowly turning you into a prefect rabbit breeding slut[p].", parse);
 						Text.NL();
-						Text.Add("These days, you belly is constantly swollen with litter after litter of young - not that this lessens the number of suitors you have. It is, after all, your duty to sate the desires of the colony.", parse);
+						Text.Add("These days, your belly is constantly swollen with litter after litter of young - not that this lessens the number of suitors you have. It is, after all, your duty to sate the desires of the colony.", parse);
 						Text.NL();
 						Text.Add("Sometimes, you think you see someone you know within orgy of the Pit; perhaps a former lover or companion, you can’t be sure. Those days are long past… you just hope that they, like you, find their place here among the rabbits.", parse);
 						Text.NL();
@@ -2162,7 +2162,7 @@ Scenes.Ophelia.Reward = function() {
 				else { // High sex level
 					Text.Add("She worries too much, you can take this… or at least you hope you can. Perhaps it’s due to the mixture of transformatives surging through her veins, but Vena seems even more aroused than usual, relishing in being the one on top for once. Crying out in pleasure, the bloated hermaphrodite bunny unleashes her unrestrained lust upon you, and all you can do is hang on for dear life.", parse);
 					Text.NL();
-					Text.Add("Despite your best efforts, she drives you to orgasm before coming herself. Not that it ends there; there is still a boundless energy flowing through the matriarch, and her cock is still stiff inside you, even as your stomach swells from her last climax. Looks like you are in for the long ride.", parse);
+					Text.Add("Despite your best efforts, she drives you to orgasm before cumming herself. Not that it ends there; there is still a boundless energy flowing through the matriarch, and her cock is still stiff inside you, even as your stomach swells from her last climax. Looks like you are in for the long ride.", parse);
 					Text.NL();
 					Text.Add("You give Ophelia an encouraging smile, returning her faux kiss in earnest. Together, you’ll get through this, and while you’re at it, you might as well enjoy it, right?", parse);
 					Text.NL();
@@ -2193,7 +2193,7 @@ Scenes.Ophelia.Reward = function() {
 				Text.Clear();
 				Text.Add("No. Fuck this. You’re not going to let this go on for any longer. Time to put the self-proclaimed king of the rabbits in his place. Without letting your eyes off Lagon, you tell Ophelia to run away; to trust in you. A look of surprise passes over Lagon’s face, quickly replaced by a contemptuous sneer.", parse);
 				Text.NL();
-				Text.Add("<i>“So this is where you choose to defy me, traveller,”</i> he rumbles, casually rolling his shoulders. <i>“If you won’t take the carrot, I’ll have to use the stick instead. A curious twist of fate that the stage of your little rebellion will be your home from this point forth...”</i>", parse);
+				Text.Add("<i>“So this is where you choose to defy me, traveler,”</i> he rumbles, casually rolling his shoulders. <i>“If you won’t take the carrot, I’ll have to use the stick instead. A curious twist of fate that the stage of your little rebellion will be your home from this point forth...”</i>", parse);
 				Text.NL();
 				Text.Add("If you hadn’t been closely watching out for it, the kick would have caught you right in the temple. As it is, you barely manage to pull out of its trajectory, settling into a combat stance.", parse);
 				Text.NL();
@@ -2243,7 +2243,7 @@ Scenes.Ophelia.Reward = function() {
 			Text.Clear();
 			Text.Add("Once back in the throne room, Lagon hops onto his throne.", parse);
 			Text.NL();
-			Text.Add("<i>“Once again, you have done me good service. What do you wish as your reward, traveller? I can offer you some of Ophelia’s stock.”</i> He lays out a set of vials in front of you, studying your face for reactions. You try to keep your expression neutral, knowing that you are still in the lion’s den.", parse);
+			Text.Add("<i>“Once again, you have done me good service. What do you wish as your reward, traveler? I can offer you some of Ophelia’s stock.”</i> He lays out a set of vials in front of you, studying your face for reactions. You try to keep your expression neutral, knowing that you are still in the lion’s den.", parse);
 			Text.NL();
 			
 			Gui.Callstack.push(function() {
@@ -2258,7 +2258,7 @@ Scenes.Ophelia.Reward = function() {
 					if(Scenes.Ophelia.fuckedByVena)
 						Text.Add("Ophelia tries to aid you on the way back to her lab, supporting as much of your weight as she’s able. She looks very grateful, having narrowly avoided being broken by her own mother.", parse);
 					else
-						Text.Add("Ophelia is still shaking as you lead her from the room back toward her lab. The alchemist is barely able to stand after her fucking, as her legs won’t support her.", parse);
+						Text.Add("Ophelia is still shaking as you lead her from the room back toward her lab. The alchemist is barely able to stand after her fucking; her legs won’t support her.", parse);
 					Text.NL();
 					Text.Add("<i>“T-this time, he has gone too f-far,”</i> she mutters under her breath, clutching your arm wearily. <i>“He leaves me no choice...”</i> You eye your escort warily, but they don’t seem to have noticed Ophelia’s treasonous aspirations. Once you are back at the lab, she shuts the door behind you, collapsing on top of a pile of straw intended for her ‘volunteers’.", parse);
 					Text.NL();
@@ -2289,7 +2289,7 @@ Scenes.Ophelia.ScepterRequest = function(fight) {
 	Text.NL();
 	Text.Add("<i>“I… I overheard my father ordering some of his soldiers to go and hunt down a certain object, a scepter that was previously in his possession.”</i> ", parse);
 	if(fight)
-		Text.Add("Ophelia stares off into the distance, tapping her chin thoughtfully. <i>“Knowing I’d heard about something like it before, I scoured my notes, and found a scavenged document depicting said scepter- or at least the gem mounted in it.”</i>", parse);
+		Text.Add("Ophelia stares off into the distance, tapping her chin thoughtfully. <i>“Knowing I’d heard about something like it before, I scoured my notes, and found a scavenged document depicting said scepter - or at least the gem mounted in it.”</i>", parse);
 	else
 		Text.Add("Ophelia makes her way over to her desk, pulling out a scroll from behind a set of jars. You get the sense that she’s kept it hidden there. <i>“I found this among the stuff scavenged by the patrols.”</i> The parchment depicts a strange rock, and it’s covered in a tiny scrawl.", parse);
 	Text.NL();
@@ -2304,7 +2304,7 @@ Scenes.Ophelia.ScepterRequest = function(fight) {
 	Text.Add("You agree to look for the estranged rabbit and the scepter he may or may not carry. Ophelia looks cheerfully optimistic, but you feel this is probably her last strand of hope.", parse);
 	if(fight) {
 		Text.NL();
-		Text.Add("<i>“You probably shouldn’t return until you have found the scepter; father’s guards are probably heading here as we speak.”</i> The alchemist puts on a brave face, though you see the fear hiding just beneath the surface. <i>“Don’t worry about me, I’ll lay low for a while.”</i>", parse);
+		Text.Add("<i>“You probably shouldn’t return until you have found the scepter; father’s guards are probably heading here as we speak.”</i> The alchemist puts on a brave face, though you see the fear hiding just beneath the surface. <i>“Don’t worry about me; I’ll lay low for a while.”</i>", parse);
 		Text.NL();
 		Text.Add("The hidden meaning behind her words is ‘hurry’.", parse);
 	}
@@ -2315,7 +2315,7 @@ Scenes.Ophelia.WatchVenaEntry = function() {
 		
 	};
 	
-	Text.Add("Ophelia cowers uncertainly in front of the advancing matriarch; wanting to flee but held back by her instincts. No matter how far she’s gone, this is still her mother, she would never harm her, right? Not only that, no matter how refined she wants to present herself, it’s becoming more and more obvious to you that the alchemist cannot escape her innate carnal urges - part of her <i>desires</i> what is coming, <i>craves</i> it.", parse);
+	Text.Add("Ophelia cowers uncertainly in front of the advancing matriarch; wanting to flee but held back by her instincts. No matter how far she’s gone, this is still her mother; she would never harm her, right? Not only that, no matter how refined she wants to present herself, it’s becoming more and more obvious to you that the alchemist cannot escape her innate carnal urges - part of her <i>desires</i> what is coming, <i>craves</i> it.", parse);
 	Text.NL();
 	Text.Add("<i>“Y-you are beautiful, mother,”</i> she stammers, blushing as her eyes drink in the majestic sight of Vena. Like always, the matriarch is pregnant - with Lagon’s seed or one of her own sons, you don’t know - her belly swelling out like a dome, her large breasts heavy with milk. With her newly grown muscle, she doesn’t seem to have any problem carrying the added weight. Jutting out beneath her taut stomach is her stiff, massive girlcock.", parse);
 	Text.NL();
@@ -2324,7 +2324,7 @@ Scenes.Ophelia.WatchVenaEntry = function() {
 	Text.Add("The alchemist moans weakly, smothered between the larger lagomorph’s breasts. Vena has placed her astride the convenient erect pole, sighing happily as Ophelia grinds her hips against the slippery appendage. Her entire body weight is balancing on her mother’s cock, her legs dangling down feebly - too short to reach the ground. The two share another kiss before Vena slowly lowers Ophelia to the ground, laying the bespectacled bunny down on her back.", parse);
 	Text.NL();
 	parse["stop"] = Scenes.Ophelia.stoppedVena ? ", especially with your face in the pool of cum" : "";
-	Text.Add("<i>“Looks like the fun is about to start,”</i> Lagon observes, eyes gleaming. It’s hard to keep your mind focused in the carnal environment of the Pit[stop], but you do your best to keep your eyes on the rabbit king. By this point, it’s clear that he doesn’t give two fucks about either you or Opehlia - daughter or no. He just want’s to douse the flame of rebellion from her heart, and uses the most cruel measure possible to do so, her own mother. That it was through her own efforts - with some aid from you - that Vena is in her current state only serves to twist the knife further.", parse);
+	Text.Add("<i>“Looks like the fun is about to start,”</i> Lagon observes, eyes gleaming. It’s hard to keep your mind focused in the carnal environment of the Pit[stop], but you do your best to keep your eyes on the rabbit king. By this point, it’s clear that he doesn’t give two fucks about either you or Ophelia - daughter or no. He just wants to douse the flame of rebellion from her heart, and uses the most cruel measure possible to do so: her own mother. That it was through her own efforts - with some aid from you - that Vena is in her current state only serves to twist the knife further.", parse);
 	Text.NL();
 	Text.Add("Ophelia cries out in rapture as the matriarch slowly presses her thick, lubed-up shaft into the smaller bunny’s protesting folds. Her frame may be built for breeding, but she’s not accustomed to taking cocks of Vena’s size. The older lagomorph does her best to be gentle, but the sheer girth of her two-foot member is more than a bit intimidating for the gasping scientist.", parse);
 	Text.NL();
@@ -2332,7 +2332,7 @@ Scenes.Ophelia.WatchVenaEntry = function() {
 	Text.NL();
 	Text.Add("You continue to watch as Vena fucks her daughter’s brains out, flipping her over on her stomach and thrusting into her from behind. Bred like a bitch, Ophelia moans as the gathered bunnies unload on her face, her eyes rolled back in ecstasy. The matriarch seems to possess an endless reserve of energy; she relentlessly pounds her daughter’s pussy for what feels like hours on end, not even stopping her rutting when she cums. Were it you there beneath her, you are not sure you could have taken it.", parse);
 	Text.NL();
-	Text.Add("When her fire finally goes down, Lagon walks over to her daughter, mockingly saying: <i>“I wanted you to know that your mother loves the new changes to her body. Without you, she wouldn’t be the same person she is today!”</i> Turning to Vena, he continues: <i>“What do you think, my dear, is our daughter ready to join you here in the Pit, take up her true calling as a breeding slut in my colony?”</i>", parse);
+	Text.Add("When her fire finally goes down, Lagon walks over to Ophelia, mockingly saying: <i>“I wanted you to know that your mother loves the new changes to her body. Without you, she wouldn’t be the same person she is today!”</i> Turning to Vena, he continues: <i>“What do you think, my dear, is our daughter ready to join you here in the Pit, take up her true calling as a breeding slut in my colony?”</i>", parse);
 	Text.NL();
 	Text.Add("Vena is lying on her side, eyes half closed as she caresses her daughter’s bloated, cum-filled stomach. <i>“Breed...”</i> she whispers, smiling contently before falling into sleep. On Lagon’s instructions, her eager sons contain their lust, content to snuggle up to their resting matriarch.", parse);
 	Text.NL();
@@ -2451,7 +2451,7 @@ Scenes.Ophelia.RewardChoices = function() {
 				
 				PrintDefaultOptions();
 			}, enabled : true,
-			tooltip : "Increase your chances of getting pregnant. Additionally it increases your milk capacity and production."
+			tooltip : "Increase your chances of getting pregnant. Additionally, it increases your milk capacity and production."
 		});
 	}
 	if(!player.HasPerk(Perks.Breeder)) {
@@ -2480,7 +2480,7 @@ Scenes.Ophelia.RewardChoices = function() {
 	options.push({ nameStr : "Gold",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>“Just in it for the money eh? I guess, I have little use for it anyways.”</i> Lagon shrugs, clapping his hands sharply. Two of his flunkies drag forth a large sack of money, dumping it on the floor in front of you with a loud clink.", parse);
+			Text.Add("<i>“Just in it for the money, eh? I have little use for it anyways.”</i> Lagon shrugs, clapping his hands sharply. Two of his flunkies drag forth a large sack of money, dumping it on the floor in front of you with a loud clink.", parse);
 			Text.NL();
 			Text.Add("<b>You receive 1500 coins!</b>", parse);
 			Text.Flush();
@@ -2495,7 +2495,7 @@ Scenes.Ophelia.RewardChoices = function() {
 		options.push({ nameStr : "Sex",
 			func : function() {
 				Text.Clear();
-				Text.Add("<i>“You really are quite the slut, aren’t you?”</i> Lagon laughs, amused at your pleading. <i>“I’ll fuck you raw any time you ask, surely you want something more for your reward…?”</i> By his grin, he is toying with you, as he spreads his legs slightly to give you easier access to his groin. You scramble forward eagerly, wrapping your lips around his cock. Inside your mouth, his thick rod grows and stiffens, overpowering your senses of taste and smell, not to mention straining your jaw to its limits.", parse);
+				Text.Add("<i>“You really are quite the slut, aren’t you?”</i> Lagon laughs, amused at your pleading. <i>“I’ll fuck you raw any time you ask. Surely you want something more for your reward…?”</i> By his grin, he is toying with you, as he spreads his legs slightly to give you easier access to his groin. You scramble forward eagerly, wrapping your lips around his cock. Inside your mouth, his thick rod grows and stiffens, overpowering your senses of taste and smell, not to mention straining your jaw to its limits.", parse);
 				Text.NL();
 				Text.Add("<i>“Good job, pet, such a dirty mouth you have...”</i> Lagon encourages you, gently bucking his hips, pushing more of his dick inside you even as it rises to its full glory. Your mouth is crammed so full you can hardly breathe, and there is still so much more of it to take, each inch soaked in the delicious mix of his spunk and Vena’s juices.", parse);
 				Text.NL();
@@ -2522,7 +2522,7 @@ Scenes.Ophelia.RewardChoices = function() {
 				
 				Scenes.Ophelia.RewardChoices();
 			}, enabled : true,
-			tooltip : "The sight of his magnificent cock is such a distraction you can hardly keep your thoughts straight. Perhaps just a quick fuck first…?"
+			tooltip : "The sight of his magnificent cock is such a distraction, you can hardly keep your thoughts straight. Perhaps just a quick fuck first…?"
 		});
 	}
 	/* TODO

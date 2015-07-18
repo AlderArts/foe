@@ -781,7 +781,7 @@ Scenes.Kiakai.TalkEden = function() {
 				if(burrows.flags["Access"] == Burrows.AccessFlags.Unknown) {
 					Text.Add("<i>“Some of the priests at the shrine told me about strange creatures they encountered on the plains, walking upright like humans, but very similar to rabbits in appearance. They are fleet-footed, and ran away before the travelling priests could get a closer look at them.”</i>", parse);
 					Text.NL();
-					Text.Add("<i>“According to the locals, they tend to stay together in small groups, and avoid travellers and larger settlements. As I understand it, they are not very sophisticated or intelligent.”</i>", parse);
+					Text.Add("<i>“According to the locals, they tend to stay together in small groups, and avoid travelers and larger settlements. As I understand it, they are not very sophisticated or intelligent.”</i>", parse);
 				}
 				else {
 					Text.Add("<i>“The more I learn about those lagomorphs, the more worried I become,”</i> [name] frowns. <i>“What if they formed a mob and attacked one of the outlying farms, who knows what they would do?”</i>", parse);
