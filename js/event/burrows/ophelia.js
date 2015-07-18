@@ -270,7 +270,7 @@ Scenes.Ophelia.TraitPrompt = function(options) {
 				Text.Clear();
 				Text.Add("<i>“The Gol are large feral insects, quite dangerous if you are caught unawares. In fact, you should probably run if you come across a live one,”</i> Ophelia cautions you. <i>“Trust me, you’ll know it when you see it - they are larger than horses.”</i> She shows you a picture of a husk from one of her books, so you know what to look for.", parse);
 				Text.NL();
-				Text.Add("<i>“The Gol usually keep to the deep forest, but they sometime stray near the outskirts. I’m going to need three pieces of husk in order to finish my experiments. Just make sure you take them from dead Gols, or find parts that have been shed in their growth process.”</i>", parse);
+				Text.Add("<i>“The Gol usually keep to the deep forest, but they occasionally stray near the outskirts. I’m going to need three pieces of husk in order to finish my experiments. Just make sure you take them from dead Gols, or find parts that have been shed in their growth process.”</i>", parse);
 				Text.Flush();
 				Scenes.Ophelia.LabPrompt();
 			}, enabled : true,
@@ -306,13 +306,13 @@ Scenes.Ophelia.TraitPrompt = function(options) {
 				Text.Flush();
 				Scenes.Ophelia.LabPrompt();
 			}, enabled : true,
-			tooltip : "Ask Ophelia about the red algaes."
+			tooltip : "Ask Ophelia about the red algae."
 		});
 	}
 	else if(burrows.flags["BrainyTrait"] == Burrows.TraitFlags.Gathered) {
 		options.push({ nameStr : "Algae",
 			func : Scenes.Ophelia.DeliverAlgae, enabled : true,
-			tooltip : "Deliver the red algaes."
+			tooltip : "Deliver the red algae."
 		});
 	}
 	else { // turned in
@@ -360,7 +360,7 @@ Scenes.Ophelia.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“It was much smaller. I mean… sex was nothing new. Both father and mother would enjoy themselves with my older siblings, but it was nothing like what you would see in the pits. I remember that I’d always looked forward to the day I would join them.”</i>", parse);
 			Text.NL();
-			Text.Add("There’s a fond, wistful smile on the lagomorph’s face as she says this, and you are starkly reminded of just how alien a life she’s led. But there’s something about her particular choice of words that’s catching your attention.", parse);
+			Text.Add("There’s a fond, wistful smile on the lagomorph’s face as she says this. You are starkly reminded of just how alien a life she’s led, but there’s something about her particular choice of words that’s catching your attention.", parse);
 			Text.NL();
 			Text.Add("Rolling the thought around in your head, you comment that Ophelia describes her anticipation in the past tense. Did something happen, on her first time with her parents? Was it not as good as she’d hoped it would be?", parse);
 			Text.NL();
@@ -383,22 +383,22 @@ Scenes.Ophelia.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“It hurt. It also felt somewhat good, father is pretty big… but it still hurt. I had my first orgasm, felt him fill me for the first time, then he discarded me and went to my sister. He didn’t say a word, didn’t look back, he just dropped me and moved on.”</i>", parse);
 				Text.NL();
-				Text.Add("Another pang of sympathy pierces you, stronger than the one before. You can just see it in your mind’s eye. A young, baffled Ophelia, nethers dripping her father’s seed, watching in pained confusion as her sire discards her like a used condom to fuck a fresh hole.", parse);
+				Text.Add("Another pang of sympathy pierces you, stronger than the one before. You can just see it in your mind’s eye: a young, baffled Ophelia, nethers dripping her father’s seed, watching in pained confusion as her sire discards her like a used condom to fuck a fresh hole.", parse);
 				Text.NL();
-				Text.Add("<i>“I was pretty sore. Couldn’t get up at all. Roa, my brother, was the one who helped me up. He cleaned me up, made me feel better. He’s always been nice to me...”</i>", parse);
+				Text.Add("<i>“I was pretty sore and couldn’t get up at all. Roa, my brother, was the one who helped me. He cleaned me up, made me feel better. He’s always been nice to me...”</i>", parse);
 				Text.NL();
 				Text.Add("Despite everything, a slight smile crosses your lips upon hearing that. Roa truly does sound like he was a good brother to Ophelia.", parse);
 				Text.NL();
-				Text.Add("<i>“Mother was pretty mad at father after that. She scolded him and made him apologise to me. It made me feel a lot better,”</i> she adds, smiling softly.", parse);
+				Text.Add("<i>“Mother was pretty mad at father after that. She scolded him and made him apologize to me. It made me feel a lot better,”</i> she adds, smiling softly.", parse);
 				Text.NL();
-				Text.Add("She clears her throat, recomposing herself. <i>“After that I had other experiences with my brothers, and even my sisters. I learned a lot, and had a good time. I also had a few turns with father after that. He was at least a little gentler the following times. But I didn’t, and still don’t enjoy having sex with him that much.”</i>", parse);
+				Text.Add("She clears her throat, recomposing herself. <i>“After that, I had other experiences with my brothers, and even my sisters. I learned a lot, and had a good time. I also had a few turns with father after that. He was at least a little gentler the following times, but I didn’t, and still don’t enjoy having sex with him that much.”</i>", parse);
 				Text.NL();
 				Text.Add("Well, you can hardly blame her for that, even if her reasonings are a little off compared to why most people wouldn’t enjoy screwing their dad. No wonder she spends so much time cooped up in her lab; best way to avoid getting noticed by him, after all.", parse);
 			}
 			Text.NL();
-			Text.Add("With a sagacious nod, you thank Ophelia for sharing about herself. It’s always interesting to find out more about the people you meet.", parse);
+			Text.Add("With a sagacious nod, you thank Ophelia for sharing her story. It’s always interesting to find out more about the people you meet.", parse);
 			Text.NL();
-			Text.Add("<i>“Sure, anytime [playername].”</i>", parse);
+			Text.Add("<i>“Sure, anytime.”</i>", parse);
 			Text.Flush();
 			
 			ophelia.relation.IncreaseStat(20, 1);
@@ -412,15 +412,15 @@ Scenes.Ophelia.TalkPrompt = function() {
 	options.push({ nameStr : "Her Lab",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>“Sometimes we steal things from passing merchants or wanderers. One time, after a successful picking, we got a few books on alchemy. I got interested, and started researching the subject.”</i>", parse);
+			Text.Add("<i>“We sometimes steal things from passing merchants or wanderers. One time, after a successful picking, we got a few books on alchemy. I got interested, and started researching the subject.”</i>", parse);
 			Text.NL();
 			Text.Add("That makes sense. It’s quite obvious that Lagon and his brood have been thieving for who knows how long, and Ophelia always did strike you as somewhat of a bookworm - if only in comparison to her brothers and sisters. Nodding absently, you ask if Ophelia remembers the first potion she tried to brew.", parse);
 			Text.NL();
-			Text.Add("<i>“Yes, I do actually. My knowledge is somewhat limited, so whatever I learn, I usually do through experimentation. I try many things, but I’m not always successful. A while ago I tried to experiment with a feminising potion on one of my brothers. But all it did was give him budding breasts. He was quite happy with them though.”</i>", parse);
+			Text.Add("<i>“Yes, I do actually. My knowledge is somewhat limited, so whatever I learn, I usually do through experimentation. I try many things, but I’m not always successful. A while ago, I tried to experiment with a feminizing potion on one of my brothers, but all it did was give him budding breasts. He was quite happy with them though.”</i>", parse);
 			Text.NL();
 			Text.Add("Well, that makes sense, from what you’ve seen of her siblings. So, does she rely on trial-and-error exclusively, then?", parse);
 			Text.NL();
-			Text.Add("<i>“We usually look for more alchemy books whenever we can, but they’re hard to come by. So experimentation is the only real way I can make some progress. These days I have many volunteers, but it wasn’t always so. Most of my brothers and sisters are more worried with sex than helping me with new discoveries, so father had to intervene. He’s always had a keen interest in my alchemy.”</i>", parse);
+			Text.Add("<i>“We usually look for more alchemy books whenever we can, but they’re hard to come by, so experimentation is the only real way I can make some progress. These days, I have many volunteers, but it wasn’t always like this. Most of my brothers and sisters are more worried with sex than helping me with new discoveries. Father had to intervene because of it. He’s always had a keen interest in my alchemy.”</i>", parse);
 			Text.NL();
 			Text.Add("Recalling the very first task Lagon set for you upon your being brought here, you just bet he has. Being diplomatic, you ask if that means Ophelia never had to prove herself as an alchemist to her father. He never challenged her to produce a specific potion before he promoted her to the ‘royal alchemist’, so to speak?", parse);
 			Text.NL();
@@ -449,9 +449,9 @@ Scenes.Ophelia.TalkPrompt = function() {
 		func : function() {
 			Text.Clear();
 			if(ophelia.flags["Talk"] & Ophelia.Talk.Sex) {
-				Text.Add("<i>“ I love sex. You should know. You’ve had me.”</i>", parse);
+				Text.Add("<i>“I love sex. You should know. You’ve had me.”</i>", parse);
 				Text.NL();
-				Text.Add("You smile at her and apologise. You simply thought it would be a nice little icebreaker; a girl like her deserves a little more finesse than just ‘hey, wanna fuck?’", parse);
+				Text.Add("You smile at her and apologize. You simply thought it would be a nice little icebreaker; a girl like her deserves a little more finesse than just ‘hey, wanna fuck?’", parse);
 				Text.NL();
 				Text.Add("<i>“Oh...”</i> She smiles. <i>“Thanks. Now that the ice is broken, what are you going to do?”</i>", parse);
 				Text.NL();
@@ -461,11 +461,11 @@ Scenes.Ophelia.TalkPrompt = function() {
 				ophelia.relation.IncreaseStat(30, 1);
 			}
 			else {
-				Text.Add("<i>“I love sex. There’s nothing quite like a big, gentle partner, who knows exactly what you like,”</i> she says, closing her eyes and smiling at the mental picture she conjures for herself.", parse);
+				Text.Add("<i>“I love sex. There’s nothing quite like a big, gentle partner who knows exactly what you like,”</i> she says, closing her eyes and smiling at the mental picture she conjures for herself.", parse);
 				Text.NL();
 				Text.Add("Really? You always thought that she seemed... well, if you’re honest, less obsessed with sex than her siblings. So, she enjoys a nice romp between the sheets too?", parse);
 				Text.NL();
-				Text.Add("<i>“Maybe I am less obsessed. But that doesn’t mean I don’t enjoy it just as much. It’s just that I can’t contain my curiosity. I love discovering new things.”</i>", parse);
+				Text.Add("<i>“Maybe I am less obsessed, but that doesn’t mean I don’t enjoy it just as much. It’s just that I can’t contain my curiosity. I love discovering new things.”</i>", parse);
 				Text.NL();
 				Text.Add("The hook is just too obvious for you to ignore. A knowing grin crosses your lips as you quip that she must surely like discovering new things for the bedroom best of all.", parse);
 				Text.NL();
@@ -477,7 +477,7 @@ Scenes.Ophelia.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("Well, you were wondering if she might be interested in seeing if you can teach her something new or not...", parse);
 				Text.NL();
-				Text.Add("<i>“Well...”</i> She taps her chin in thought. <i>“I’ve only experimented with my siblings, and I’d be lying if I said I don’t wonder what it’d be like to have sex with someone from outside the colony. So, I think I’m up for a little research on the subject,”</i> she concludes, smiling flirtatiously at you.", parse);
+				Text.Add("<i>“Well...”</i> She taps her chin in thought. <i>“I’ve only experimented with my siblings, and I’d be lying if I said I don’t wonder what it’d be like to have sex with someone from outside the colony, so I think I’m up for a little research on the subject,”</i> she concludes, smiling flirtatiously at you.", parse);
 				Text.NL();
 				Text.Add("In that case, you’re happy to oblige her.", parse);
 				ophelia.relation.IncreaseStat(100, 3);
@@ -521,7 +521,7 @@ Scenes.Ophelia.TalkPrompt = function() {
 					Gui.SetButtonsFromList(options, false, null);
 				}
 				else {
-					Text.Add("<i>“I wish I knew of a way to restore her. Then you could ask her yourself. But right now? At most she’ll have the brains to ask for sex...”</i> Ophelia says with a sad face and drooping ears.", parse);
+					Text.Add("<i>“I wish I knew of a way to restore her, then you could ask her yourself... but right now? At most, she’ll have the brains to ask for sex...”</i> Ophelia says with a sad face and drooping ears.", parse);
 					Text.NL();
 					Scenes.Ophelia.TalkVena();
 				}
@@ -554,9 +554,9 @@ Scenes.Ophelia.TalkPrompt = function() {
 				options.push({ nameStr : "Boast",
 					func : function() {
 						Text.Clear();
-						Text.Add("Thrusting out your chin, you fold your arms over your chest and give a triumphant grin. With a firm tone you praise Ophelia for her attentiveness; it’s good to see she, at least, appreciates your efforts in rescuing her and her siblings from Lagon.", parse);
+						Text.Add("Thrusting out your chin, you fold your arms over your chest and give a triumphant grin. With a firm tone, you praise Ophelia for her attentiveness; it’s good to see she, at least, appreciates your efforts in rescuing her and her siblings from Lagon.", parse);
 						Text.NL();
-						Text.Add("<i>“It’s not just me. I know my brothers and sister seem like they don’t care much for what you did. But some of them do. You truly are a hero, [playername].”</i>", parse);
+						Text.Add("<i>“It’s not just me. I know my brothers and sister seem like they don’t care much for what you did, but some of them do. You truly are a hero, [playername].”</i>", parse);
 						PrintDefaultOptions();
 					}, enabled : true,
 					tooltip : "Of course you’re a hero, so why not accept the praise that is your due?"
@@ -564,7 +564,7 @@ Scenes.Ophelia.TalkPrompt = function() {
 				Gui.Callstack.push(function() {
 					Text.NL();
 					if(burrows.VenaRestored()) {
-						Text.Add("<i>“Defeating father was a huge step. But restoring my mother… I don’t think there’ll ever be a way for me to repay you for all you did for us.”</i>", parse);
+						Text.Add("<i>“Defeating father was a huge step, but restoring my mother… I don’t think there’ll ever be a way for me to repay you for all you did for us.”</i>", parse);
 						Text.NL();
 						Text.Add("You’re just happy that the burrows will be making a change for the better, with Lagon out of the picture and a much better ruler taking his place. Of course, that it gave her back her mother is also important, too.", parse);
 					}
@@ -581,11 +581,11 @@ Scenes.Ophelia.TalkPrompt = function() {
 				Gui.SetButtonsFromList(options, false, null);
 			}
 			else if(ophelia.Relation() >= 30) {
-				Text.Add("<i>“My father...”</i> she starts, looking around. Then she takes a deep breath to steel herself. <i>“He’s a tyrant.”</i>", parse);
+				Text.Add("<i>“My father...”</i> she starts, looking around, then she takes a deep breath to steel herself. <i>“He’s a tyrant.”</i>", parse);
 				Text.NL();
 				Text.Add("That’s a... surprisingly harsh assessment.", parse);
 				Text.NL();
-				Text.Add("<i>“You met him. He doesn’t care about his daughters and sons. All he cares about is power. Power and breeding. And he’ll stop at nothing to get what he wants. Just look what he’s done to mother!”</i>", parse);
+				Text.Add("<i>“You met him. He doesn’t care about his daughters and sons. All he cares about is power. Power and breeding. He’ll stop at nothing to get what he wants. Just look what he’s done to mother!”</i>", parse);
 				Text.NL();
 				Text.Add("You never said it wasn’t an accurate assessment. It doesn’t quite look like Ophelia’s listening to you, though. It seems the lapin is building up to quite a passionate tirade.", parse);
 				Text.NL();
@@ -599,11 +599,11 @@ Scenes.Ophelia.TalkPrompt = function() {
 				options.push({ nameStr : "Come with me",
 					func : function() {
 						Text.Clear();
-						Text.Add("There’s a moment of hesitation as the lapin alchemist considers your invitation. But she takes your hand and pushes it off her shoulders. <i>“I’m sorry, [playername]. I’m so sorry. But I can’t leave my mother here to suffer while I run. And that is assuming we could even run in the first place. If we tried, my father would surely hunt us down, and he would find us. It’s… it’s just too dangerous. I’m sorry,”</i> she says in resignation.", parse);
+						Text.Add("There’s a moment of hesitation as the lapin alchemist considers your invitation, but she takes your hand and pushes it off her shoulders. <i>“I’m sorry, [playername]. I’m so sorry, but I can’t leave my mother here to suffer while I run, and that is assuming we could even run in the first place. If we tried, my father would surely hunt us down, and he would find us. It’s… it’s just too dangerous. I’m sorry,”</i> she says in resignation.", parse);
 						Text.NL();
 						Text.Add("She has nothing to apologize for; you just felt you had to make the offer.", parse);
 						Text.NL();
-						Text.Add("<i>“But, for what it’s worth, I do appreciate the invitation,”</i> she smiles weakly.", parse);
+						Text.Add("<i>“For what it’s worth, I do appreciate the invitation,”</i> she smiles weakly.", parse);
 						Text.NL();
 						Text.Add("If she ever changes her mind, you’ll leave it open for her.", parse);
 						Text.Flush();
@@ -629,9 +629,9 @@ Scenes.Ophelia.TalkPrompt = function() {
 			else {
 				Text.Add("<i>“My father?”</i> she repeats hesitantly. <i>“He’s our king, our leader...”</i>", parse);
 				Text.NL();
-				Text.Add("You interrupt, telling her that you know all that already. But you want to know what she thinks of him as a person - as her father. She’s his daughter, after all...", parse);
+				Text.Add("You interrupt, telling her that you know all that already, but you want to know what she thinks of him as a person - as her father. She’s his daughter, after all...", parse);
 				Text.NL();
-				Text.Add("<i>“I... think he’s a wonderful leader,”</i> she says, forcing a smile. <i>“There’s no one else I’d rather rule us.”</i>", parse);
+				Text.Add("<i>“I... think he’s a wonderful leader,”</i> she says, forcing a smile. <i>“There’s no one else I’d rather have rule us.”</i>", parse);
 				Text.NL();
 				Text.Add("She doesn’t sound very convinced of what she’s saying... what’s wrong?", parse);
 				Text.NL();
@@ -665,7 +665,7 @@ Scenes.Ophelia.TalkRoa = function() {
 	
 	Text.Clear();
 	if(burrows.flags["Access"] < Burrows.AccessFlags.Stage4) {
-		Text.Add("<i>“My little brother is not a well versed adventurer like you. I fear he may have fallen prey to some horrible monster, perhaps a bloodthirsty fox, or even a ferret...”</i> The alchemist shudders. <i>“If he made it, he is hiding somewhere that my father’s soldiers cannot enter, like the big city or the deep forest.”</i>", parse);
+		Text.Add("<i>“My little brother is not a well-versed adventurer like you. I fear he may have fallen prey to some horrible monster, perhaps a bloodthirsty fox, or even a ferret...”</i> The alchemist shudders. <i>“If he made it, he is hiding somewhere that my father’s soldiers cannot enter, like the big city or the deep forest.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“I wonder where he is… He could never stand being away from the breeding pit for long. I hope that he has found some nice friends to breed with.”</i> She sighs dejectedly.", parse);
 		Text.NL();
@@ -677,25 +677,25 @@ Scenes.Ophelia.TalkRoa = function() {
 		var first = !(ophelia.flags["Talk"] & Ophelia.Talk.Roa);
 		ophelia.flags["Talk"] |= Ophelia.Talk.Roa;
 		if(first) {
-			Text.Add("<i>“You’ve found my brother? It’s great to know he’s safe, but tell me? How is he?”</i> she asks enthusiastically, grasping your arm.", parse);
+			Text.Add("<i>“You’ve found my brother? It’s great to know he’s safe. Tell me, How is he?”</i> she asks enthusiastically, grasping your arm.", parse);
 			Text.NL();
 			Text.Add("Roa’s just fine, you assure her. You explain that he’s found himself the perfect safe haven for a bunny like him; he’s a whore at the Shadow Lady brothel in Rigard.", parse);
 			Text.NL();
-			Text.Add("<i>“I see. But if you don’t mind me asking, what’s a brothel? And what’s a whore?”</i>", parse);
+			Text.Add("<i>“I see, but if you don’t mind me asking, what’s a brothel? And what’s a whore?”</i>", parse);
 			Text.NL();
-			Text.Add("Oh, yes, you had forgotten that Ophelia doesn’t really know anything about society beyond her burrows. She talks so eloquently compared to her siblings that you tend to assume she knows more than she does.", parse);
+			Text.Add("Oh, yes, you had forgotten that Ophelia doesn’t really know anything about society beyond her burrows. She speaks so eloquently compared to her siblings that you tend to assume she knows more than she does.", parse);
 			Text.NL();
 			Text.Add("After a few moments thought, you explain to Ophelia that a whore is someone who offers sex to people in exchange for them paying him or her back in various ways. And that a brothel is a place where whores live and wait for people to come and have sex with them.", parse);
 			Text.NL();
 			Text.Add("You know this is a rather drastic simplification, but it probably isn’t a good idea to bring up the whole monetary system thing. That would just complicate matters more.", parse);
 			Text.NL();
 			parse["l"] = burrows.LagonDefeated() ? "" : ", if father allows";
-			Text.Add("<i>“That sounds like a nice job for a rabbit. And I would love to visit a brothel sometime[l],”</i> Ophelia muses, her eyes distant as she tries to picture what it would be like. <i>“Brother Roa must be happy then. He could never stay away from the Pit for long, even before I experimented on him.”</i>", parse);
+			Text.Add("<i>“That sounds like a nice job for a rabbit, and I would love to visit a brothel sometime[l],”</i> Ophelia muses, her eyes distant as she tries to picture what it would be like. <i>“Brother Roa must be happy then. He could never stay away from the Pit for long, even before I experimented on him.”</i>", parse);
 			Text.NL();
-			Text.Add("It’s the sort of job that rabbits have an affinity for, you agree. You have little doubt she’d enjoy a visit, too. But, what’s this about her experimenting on Roa? Did she try out some sort of libido booster on him or something?", parse);
+			Text.Add("It’s the sort of job that rabbits have an affinity for, you agree. You have little doubt she’d enjoy a visit, too. What’s this about her experimenting on Roa, anyway? Did she try out some sort of libido booster on him or something?", parse);
 		}
 		else {
-			Text.Add("<i>“I think you’re better off talking to him directly. But I can share a thing or two if you want. What do you want to hear about?”</i>", parse);
+			Text.Add("<i>“I think you’re better off talking to him directly, but I can share a thing or two if you want. What do you want to hear about?”</i>", parse);
 			Text.NL();
 			Text.Add("You’d like her to tell you about her and Roa’s childhood together, and about the experiments she performed on him.", parse);
 			Text.NL();
@@ -726,7 +726,7 @@ Scenes.Ophelia.TalkRoa = function() {
 				var scenes = [];
 				
 				scenes.push(function() {
-					Text.Add("<i>“At first, I just mixed things together at random, just to see what I could get. A lot of my experiments didn’t do very much, some just had Roa complaining about the taste. Thankfully, he has an iron stomach.”</i> Ophelia smiles fondly at the memory, flipping through the pages of her old journal. <i>“We kept at it though, and I gradually started to understand the workings of alchemy, and how to decipher the recipes brought in from outside.”</i>", parse);
+					Text.Add("<i>“At first, I just mixed things together at random, just to see what I could get. A lot of my experiments didn’t do very much; some just had Roa complaining about the taste. Thankfully, he has an iron stomach.”</i> Ophelia smiles fondly at the memory, flipping through the pages of her old journal. <i>“We kept at it though, and I gradually started to understand the workings of alchemy, and how to decipher the recipes brought in from outside.”</i>", parse);
 					Text.NL();
 					Text.Add("What was her first successful experiment?", parse);
 					Text.NL();
@@ -742,7 +742,7 @@ Scenes.Ophelia.TalkRoa = function() {
 						Text.NL();
 						Text.Add("<i>“Roa, experiment nr.84: Studmuffin. Goal: make Larissa shut up. Prepared the ingredients according to recipe - missing cactoids, tried beetles instead. Mixture should take on a teal color, not sure what that is. I think pink is close? Fed the potion to subject, no immediate reaction. Says it tasted like strawberry. Success! Kinda. Subject is experiencing changes to body. Becoming softer and rounder - perhaps it swells up and becomes more defined later? Subject breasts swelling, hips widening. I think something has gone wrong. Subject acting strange. The others should be coming soon...”</i> Ophelia chuckles, shaking her head as she returns the page to the binder.", parse);
 						Text.NL();
-						Text.Add("<i>“I’d invited Larissa and her friends over to meet ‘my new boyfriend’, and I guess they told some of my brothers too. They were going over there to pick on the nerd, but when they got there they found me desperately trying to fend of a hyper-aroused Roa with tits the size of my head.”</i> She smirks. <i>“First thing that happened he threw himself on the poor boys, who were eager to help him out with his itch. Larissa was furious.”</i>", parse);
+						Text.Add("<i>“I’d invited Larissa and her friends over to meet ‘my new boyfriend’, and I guess they told some of my brothers too. They were going over there to pick on the nerd, but when they got there they found me desperately trying to fend off a hyper-aroused Roa with tits the size of my head.”</i> She smirks. <i>“First thing that happened, he threw himself on the poor boys, who were eager to help him out with his itch. Larissa was furious.”</i>", parse);
 						Text.NL();
 						Text.Add("The alchemist shakes her head. <i>“It didn’t exactly pan out the way I had planned, but I guess the end goal was achieved. Roa went back to his usual self a day later, and I apologized profusely for using him in my little plot for vengeance.”</i>", parse);
 					}
@@ -793,7 +793,7 @@ Scenes.Ophelia.TalkRoa = function() {
 					
 					var scenes = new EncounterTable();
 					scenes.AddEnc(function() {
-						Text.Add("<i>“Roa, experiment nr.213: Minotaur. Goal: study the effects of ingredients salvaged from bull-morphs. I’ve made earlier experiments focused on strengthening the body - see nr.84 (failed), nr.118, nr.162-165 - and I think that ingredients gathered from the minotaur could prove useful in this endeavour. Previous experiments suggest that hooves, horns, fur and semen and blood could be tested. Unable to find live specimen, but gatherers have brought back what seems to be a broken horn from a bull.”</i>", parse);
+						Text.Add("<i>“Roa, experiment nr.213: Minotaur. Goal: study the effects of ingredients salvaged from bull-morphs. I’ve made earlier experiments focused on strengthening the body - see nr.84 (failed), nr.118, nr.162-165 - and I think that ingredients gathered from the minotaur could prove useful in this endeavour. Previous experiments suggest that hooves, horns, fur, semen and blood could be tested. Unable to find live specimen, but gatherers have brought back what seems to be a broken horn from a bull.”</i>", parse);
 						Text.NL();
 						Text.Add("<i>“Ground up sample, put in marked jar. Tested mixing substance with rosemary and dried cloves. Together with a sample from experiment nr.164, the effects were increased. Subject experienced expanded muscle mass in torso and leg areas. Effect further enhanced by adding two measures of milk. Side effects: noticed growth of small horns, enlarging of the penis and testes. Further experiments put on hold until subject has calmed down.”</i>", parse);
 					}, 1.0, function() { return true; });
@@ -817,7 +817,7 @@ Scenes.Ophelia.TalkRoa = function() {
 					scenes.push(function() {
 						Text.Add("What’s the most interesting transformation that she’s been able to get from Roa?", parse);
 						Text.NL();
-						Text.Add("<i>“There were some that were… fun, but worrying. If it had been another bunny, I don’t know what the long term effects would have been. Some alchemical compounds seem to affect the mind in addition to the body.”</i> Ophelia sighs, slumping her shoulders. <i>“Some of them, I wish I never tested.”</i>", parse);
+						Text.Add("<i>“There were some that were… fun, but worrying. If it had been another bunny, I don’t know what the long term effects would have been. Some alchemical compounds seem to affect the mind in addition to the body.”</i> Ophelia sighs, her shoulders slumping. <i>“Some of them, I wish I never tested.”</i>", parse);
 						Text.NL();
 						Text.Add("<i>“A certain mixture will push the sexual urges of the one who takes it to the extreme; so much that all other thoughts and desires fade. The problem is that so far, I haven’t found any way to reverse the process. Roa was thankfully fine due to his resistance; I had to put him in the Pit for several days, but eventually he returned to normal.”</i>", parse);
 						Text.NL();
@@ -864,7 +864,7 @@ Scenes.Ophelia.TalkRoa = function() {
 					Text.NL();
 					Text.Add("<i>“Doesn’t everyone?”</i> She looks puzzled. <i>“Sure, he spent a lot of time in the Pit, but so do almost all of my brothers and sisters. I feel the same urges, but I try to not let it get in the way of my research.”</i>", parse);
 					Text.NL();
-					Text.Add("Well, from that the brothel sounds like a perfect place for him.", parse);
+					Text.Add("Well, the brothel sounds like a perfect place for him.", parse);
 					Text.NL();
 					Text.Add("<i>“I’m glad that brother has found somewhere to call home outside!”</i> the alchemist says cheerfully. <i>“Was there something else you wanted to ask?”</i>", parse);
 				});
@@ -881,12 +881,12 @@ Scenes.Ophelia.TalkRoa = function() {
 					Text.NL();
 					Text.Add("How about when he visited the Pit?", parse);
 					Text.NL();
-					Text.Add("<i>“Oh, he was quite popular. With that pink fur he’s very cute, you know. Every now and then, father would take him. Dad’s huge, and he can be very rough, but Roa told me he didn’t mind.”</i>", parse);
+					Text.Add("<i>“Oh, he was quite popular. With that pink fur, he’s very cute, you know. Every now and then, father would take him. Dad’s huge, and he can be very rough, but Roa told me he didn’t mind.”</i>", parse);
 				});
 				scenes.push(function() {
 					Text.Add("What’d Roa make of this new brute strain that Ophelia’s experiments have given rise to? Those giants sound like something that’d be right up his alley.", parse);
 					Text.NL();
-					Text.Add("<i>“Certainly,”</i> she nods. <i>“A cock that size’d keep him happy for hours on end. I’m sure he’d appreciate their stamina as well.”</i>", parse);
+					Text.Add("<i>“Certainly,”</i> she nods. <i>“A cock that size would keep him happy for hours on end. I’m sure he’d appreciate their stamina as well.”</i>", parse);
 					Text.NL();
 					Text.Add("Could he really take someone that big?", parse);
 					Text.NL();
@@ -895,7 +895,7 @@ Scenes.Ophelia.TalkRoa = function() {
 				scenes.push(function() {
 					Text.Add("How about the recent surge of hermaphrodites in the burrows, what’d Roa make of that?", parse);
 					Text.NL();
-					Text.Add("<i>“Might make him a bit more interested in girls, that’s for sure,”</i> Ophelia grins fondly. <i>“Don’t get me wrong; he was before, but with that extra piece of equipment he’d be completely infatuated.”</i>", parse);
+					Text.Add("<i>“Might make him a bit more interested in girls, that’s for sure,”</i> Ophelia grins fondly. <i>“Don’t get me wrong; he was before, but with that extra piece of equipment, he’d be completely infatuated.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“I’m sure my sisters would have a fun time with him too.”</i>", parse);
 				});
