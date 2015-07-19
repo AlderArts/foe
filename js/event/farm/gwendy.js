@@ -548,7 +548,6 @@ Scenes.Gwendy.WorkFeedingDanie = function() {
 }
 
 Scenes.Gwendy.WorkMilking = function() {
-	
 	var parse = {
 		playername : player.name
 	};
@@ -660,8 +659,9 @@ Scenes.Gwendy.WorkMilking = function() {
 		if(numHours > 4) numHours = 4;
 		if(numHours < 1) numHours = 1;
 		parse["numhr"] = Text.NumToText(numHours);
+		parse["s"] = numHours > 1 ? "s" : "";
 		
-		Text.Add("It takes about [numhr] hours, but the two of you manage to milk those in need. Your hands feel a little raw, but it's nothing that'll stop you from performing your everyday tasks.", parse);
+		Text.Add("It takes about [numhr] hour[s], but the two of you manage to milk those in need. Your hands feel a little raw, but it's nothing that'll stop you from performing your everyday tasks.", parse);
 		Text.NL();
 		Text.Add("On the up side, ", parse);
 		

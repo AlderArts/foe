@@ -33,7 +33,7 @@ Scenes.Gwendy.ChallengeSex = function(skillcheck, lose) {
 		else if(gwendy.flags["WonChallenge"] < 6)
 			Text.Add("Seems like she's still going to challenge you, even though you've bested her so far! Her defiance has definitely increased her efforts whenever you challenge her, but the end result is the same: her waiting on your whim.", parse);
 		else
-			Text.Add("At this point, it's hard to call it a challenge. Despite that, Gwendy has definitely given it her all to best you, it just that her best isn't good enough. A shame, but it means you're going to have some fun...", parse);
+			Text.Add("At this point, it's hard to call it a challenge. Despite that, Gwendy has definitely given it her all to best you, it's just that her best isn't good enough. A shame, but it means you're going to have some fun...", parse);
 		Text.Flush();
 		var options = new Array();
 		Scenes.Gwendy.ChallengeSexWonPrompt(false, options);
