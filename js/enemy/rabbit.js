@@ -1241,6 +1241,7 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 	// COMPANION SECTION BEGIN
 	//TODO Miranda
 	
+	var compsJoining = [];
 	
 	var blockKiai = false;
 	
@@ -1280,6 +1281,8 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 			
 			options.push({ nameStr : "Fuck them",
 				func : function() {
+					compsJoining.push(kiakai);
+					
 					Text.Clear();
 					Text.Add("Well, what’s [heshe] waiting for? [HeShe] can have [hisher] pick of any of the lagomorphs… several of them if [heshe] wants, you add slyly.", parse);
 					Text.NL();
@@ -1316,6 +1319,8 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 			});
 			options.push({ nameStr : "Fuck you",
 				func : function() {
+					compsJoining.push(kiakai);
+					
 					Text.Clear();
 					parse["stuttername"] = player.name[0] + "-" + player.name;
 					Text.Add("<i>“[stuttername]!”</i> [name] gasps, blushing as [heshe] tries to inefficiently bat away the rabbits pawing at [hisher] body. ", parse);
@@ -1383,6 +1388,8 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 		}
 		options.push({ nameStr : "Service them",
 			func : function() {
+				compsJoining.push(kiakai);
+				
 				Text.Clear();
 				Text.Add("<i>“W-what, do you mean you want me to- no, [playername]!”</i> [name] gasps, blushing fiercely.", parse);
 				Text.NL();
@@ -1460,6 +1467,8 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 			if(terry.FirstCock()) {
 				options.push({ nameStr : "Fuck",
 					func : function() {
+						compsJoining.push(terry);
+						
 						Text.Clear();
 						if(terry.Relation() < 60) {
 							Text.Add("<i>“Sure! With pleasure!”</i> [heshe] replies, starting to divest [himher]self.", parse);
@@ -1616,6 +1625,8 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 			}
 			options.push({ nameStr : "Get fucked",
 				func : function() {
+					compsJoining.push(terry);
+					
 					Text.Clear();
 					Text.Add("No sooner have you finished speaking, a pair of bunnies immediately pounce on Terry, intent on removing his [tarmorDesc].", parse);
 					Text.NL();
@@ -1648,11 +1659,11 @@ Scenes.Lagomorph.GroupWinOnPlainsFuckM = function(enc, group) {
 				
 				var cum = player.OrgasmCum(2);
 				
-				if(party.Num() == 2) {
-					parse["comp"]  = " and " + party.Get(1).name;
-					parse["comp2"] = party.Get(1).name + " and ";
+				if(compsJoining.length == 1) {
+					parse["comp"]  = " and " + compsJoining[0].name;
+					parse["comp2"] = compsJoining[0].name + " and ";
 				}
-				else if(party.Num() > 2) {
+				else if(compsJoining.length > 1) {
 					parse["comp"]  = " and your companions";
 					parse["comp2"] = "your companions and ";
 				}
