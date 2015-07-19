@@ -2351,15 +2351,16 @@ Scenes.Cveta.IntimateNuzzle = function() {
 
 Scenes.Cveta.IntimateCuddle = function() {
 	var parse = {
-		playername : player.name
+		playername : player.name,
+		skin : function() { return player.SkinDesc(); }
 	};
 	
 	Text.Clear();
 	Text.Add("Just a cuddle can’t hurt, can it? Can it?", parse);
 	Text.NL();
-	Text.Add("Well, there’s no way to find out but to try. Slowly, carefully, almost like a cat sneaking up on unsuspecting prey, you inch your way closer to the proud and regal bird-morph, until you’re well into the bubble of personal space that she keeps about her. This close to her, the faint scent of sun-warmed grass and sweet ripe fruit reaches your nose, and you wonder if it’s some kind of perfume that she uses…", parse);
+	Text.Add("Well, there’s no way to find out but to try. Slowly, carefully - almost like a cat sneaking up on unsuspecting prey - you inch your way closer to the proud and regal bird-morph, until you’re well into the bubble of personal space that she keeps about her. This close to her, the faint scent of sun-warmed grass and sweet ripe fruit reaches your nose, and you wonder if it’s some kind of perfume that she uses…", parse);
 	Text.NL();
-	Text.Add("Cveta hasn’t leaned in towards you - but she hasn’t shied away, either. That’s got to be a good sign. Sitting down next to her, you snake an arm about her slender waist, feeling the velvety material of her gown slide under your arm. The bird-morph shivers and stiffens under your touch, her music fading away as she stops playing, but eventually a small sigh escapes her beak and she allows you to support her weight. Even through her gown, you can sense the glorious warmth that radiates outwards from her heart - a warmth of which only a fraction reaches her feathers, but even that tiny amount is enough to give you the warm fuzzies just by holding her.", parse);
+	Text.Add("Cveta hasn’t leaned in towards you - but she hasn’t shied away, either. That’s got to be a good sign. Sitting down next to her, you snake an arm about her slender waist, feeling the velvety material of her gown slide against your [skin]. The bird-morph shivers and stiffens under your touch, her music fading away as she stops playing, but eventually a small sigh escapes her beak and she allows you to support her weight. Even through her gown, you can sense the glorious warmth that radiates outwards from her heart - a warmth of which only a fraction reaches her feathers, but even that tiny amount is enough to give you the warm fuzzies just by holding her.", parse);
 	Text.NL();
 	Text.Add("<i>“This is not right,”</i> Cveta murmurs. <i>“It is not proper…”</i>", parse);
 	Text.NL();
@@ -2388,7 +2389,7 @@ Scenes.Cveta.IntimateCuddle = function() {
 	Text.NL();
 	Text.Add("There, wasn’t that better?", parse);
 	Text.NL();
-	Text.Add("<i>“Perhaps…”</i> she won’t look you in the eye while saying it, though. It’s a start, at the very least. Even if Cveta’s not the talkative type, at least she knows she has more than her music with which to express herself; perhaps it would be best to let her work things out for herself for a little while. Standing, you give the songstress one last appreciative pat on the head and tell her not to worry, then excuse yourself from her tent leaving her staring at your retreating form.", parse);
+	Text.Add("<i>“Perhaps…”</i> she won’t look you in the eye while saying it, though. It’s a start, at the very least. Even if Cveta’s not the talkative type, at least she knows she has more than her music with which to express herself; perhaps it would be best to let her work things out for herself for a little while. Standing, you give the songstress one last appreciative pat on the head and tell her not to worry, then excuse yourself from her tent, leaving her staring at your retreating form.", parse);
 	Text.NL();
 	Text.Add("After all, just like music, a simple touch can indeed speak so much more than mere words.", parse);
 	Text.Flush();
@@ -2439,7 +2440,7 @@ Scenes.Cveta.IntimateGrope = function() {
 	}
 	Text.Add(" Yes… this is what you want. Your desire is to hold your fluffy little pet, run your fingers through her feathers and hair… and get to know the flesh that lies underneath. There’s no reason to dawdle any more - a quick twist of your fingers has the clasp that holds up her top undone. Cveta shrugs, a single elegant motion of shoulders and wings alike, and the fabric cascades off her like a waterfall to land in her cot.", parse);
 	Text.NL();
-	Text.Add("The songstress wears no bra - her chest is hardly large enough to warrant any need for support - and so her front is exposed for you to admire, two small mounds of fluff sitting upon her chest, her torso narrowing down to her painfully thin waist. Easing her into your embrace, you reach around her and run an exploratory hand down her skirts. She’s as flat behind as she is in front, and the songstress wriggles in your grasp as you cup her ass through her skirts, fingers tickling the plumage of her tailfeathers through her skirt of her gown.", parse);
+	Text.Add("The songstress wears no bra - her chest is hardly large enough to warrant any need for support - and so her front is exposed for you to admire, two small mounds of fluff sitting upon her chest, her torso narrowing down to her painfully thin waist. Easing her into your embrace, you reach around her and run an exploratory hand down her skirts. She’s as flat behind as she is in front, and the songstress wriggles in your grasp as you cup her ass through her skirts, fingers tickling the plumage of her tailfeathers through the skirt of her gown.", parse);
 	Text.NL();
 	Text.Add("You have to ask, are all the women in her line so - ah - unendowed?", parse);
 	Text.NL();
