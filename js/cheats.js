@@ -551,8 +551,8 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		party.inventory.AddItem(Items.FruitSeed);
 		party.inventory.AddItem(Items.Avia);
 		
-		party.inventory.AddItem(Items.MAntenna);
-		party.inventory.AddItem(Items.MWing);
+		party.inventory.AddItem(Items.MFluff);
+		party.inventory.AddItem(Items.MDust);
 		party.inventory.AddItem(Items.FruitSeed);
 		party.inventory.AddItem(Items.Lepida);
 		
