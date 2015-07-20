@@ -169,7 +169,7 @@ Items.Lobos.price = 8;
 Items.Lobos.lDesc = function() { return "a bottle of Lobos"; }
 Items.Lobos.Short = function() { return "A bottle of Lobos"; }
 Items.Lobos.Long = function() { return "A bottle labeled Lobos with the picture of a wolf on it. The fluid within is opaque, and dullish gray."; }
-Items.Lobos.recipe = [{it: Items.CanisRoot}, {it: Items.WolfFang}, {it: Items.WolfPelt}];
+Items.Lobos.recipe = [{it: Items.CanisRoot}, {it: Items.WolfFang}, {it: Items.Wolfsbane}];
 // Effects
 Items.Lobos.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Wolf, str: "a wolf cock"});
 Items.Lobos.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.4, value: true, num: 1});

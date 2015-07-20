@@ -56,7 +56,7 @@ FeralWolf.prototype.DropTable = function() {
 	var drops = [];
 	if(Math.random() < 0.05) drops.push({ it: Items.Lobos });
 	if(Math.random() < 0.5)  drops.push({ it: Items.WolfFang });
-	if(Math.random() < 0.5)  drops.push({ it: Items.WolfPelt });
+	if(Math.random() < 0.5)  drops.push({ it: Items.Wolfsbane });
 	if(Math.random() < 0.5)  drops.push({ it: Items.CanisRoot });
 	return drops;
 }

@@ -189,11 +189,11 @@ Items.WolfFang.sDesc = function() { return "canine fang"; }
 Items.WolfFang.Short = function() { return "A canid fang"; }
 Items.WolfFang.Long = function() { return "A fang from some form of canid predator."; }
 
-Items.WolfPelt = new Item("wolf3", "Wolf pelt", ItemType.Ingredient);
-Items.WolfPelt.price = 3;
-Items.WolfPelt.sDesc = function() { return "wolf pelt"; }
-Items.WolfPelt.Short = function() { return "A wolf pelt"; }
-Items.WolfPelt.Long = function() { return "The rough pelt of a wolf."; }
+Items.Wolfsbane = new Item("wolf3", "Wolfsbane", ItemType.Ingredient);
+Items.Wolfsbane.price = 3;
+Items.Wolfsbane.sDesc = function() { return "wolfsbane"; }
+Items.Wolfsbane.Short = function() { return "A wolfsbane flower"; }
+Items.Wolfsbane.Long = function() { return "Wolfsbane, a poisonous flower."; }
 
 
 

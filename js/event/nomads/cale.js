@@ -60,7 +60,7 @@ function Cale(storage) {
 	this.shopItems.push(Items.DogBone);
 	this.shopItems.push(Items.DogBiscuit);
 	this.shopItems.push(Items.WolfFang);
-	this.shopItems.push(Items.WolfPelt);
+	this.shopItems.push(Items.Wolfsbane);
 	this.shopItems.push(Items.FoxBerries);
 	this.shopItems.push(Items.Foxglove);
 	this.shopItems.push(Items.BlackGem);

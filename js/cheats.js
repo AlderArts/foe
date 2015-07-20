@@ -527,7 +527,7 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		party.inventory.AddItem(Items.Canis);
 		
 		party.inventory.AddItem(Items.WolfFang);
-		party.inventory.AddItem(Items.WolfPelt);
+		party.inventory.AddItem(Items.Wolfsbane);
 		party.inventory.AddItem(Items.Lobos);
 		
 		party.inventory.AddItem(Items.FoxBerries);
