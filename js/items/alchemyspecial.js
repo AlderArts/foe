@@ -206,10 +206,20 @@ Items.Nagazm.PushEffect(function(target) {
 			
 			target.body.legs.count = 0;
 			target.body.legs.race  = Race.Snake;
+			
+			// TODO: Also remove tail(s)
 		}
 	}
 	Text.Flush();
 });
+// TODO: Stats effects: libido++? charisma++?
+// TODO: Remove testicles? (snakes have no external testicles)
+// TODO: Turn into hermaphrodite: if no penis add one, if no vagina add one
+// TODO: Duplicate penis
+// TODO: Increase/decrease bust size?
+// TODO: Naga eyes? From descr in scenes: "faintly glowing" "vivid, angular magenta eyes"
+// TODO: Snake tongue? "a long, forked tongue"
+// TODO: Naga ears? "elongated, pointy ears"
 
 
 Items.Taurico = new TFItem("taur0", "Taurico");
