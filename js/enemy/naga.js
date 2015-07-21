@@ -16,7 +16,7 @@ function Naga() {
 	this.body.vagina.push(new Vagina());
 	if(Math.random() < 0.7)
 	    this.Butt().virgin = false;
-    this.FirstVag().virgin = false;
+	this.FirstVag().virgin = false;
 	this.FirstBreastRow().size.base = 10;
 	
 	this.maxHp.base        = 100;
