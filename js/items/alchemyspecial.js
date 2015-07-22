@@ -200,9 +200,10 @@ Items.Nagazm.PushEffect(function(target) {
 		s : target.body.legs.count > 1 ? "" : "s"
 	};
 	
-	if(Math.random() < 1.0) { //TODO
+	if(Math.random() < 0.4) { //TODO: Standard chance for race body parts TF?
 		if(target.body.legs.count != 0 && target.body.legs.race != Race.Snake) {
 			Text.Add("[Poss] [legsDesc] turn[s] into a long serpentine tail!", parse);
+			Text.NL();
 			
 			target.body.legs.count = 0;
 			target.body.legs.race  = Race.Snake;
