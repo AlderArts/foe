@@ -207,7 +207,13 @@ Items.Nagazm.PushEffect(function(target) {
 			target.body.legs.count = 0;
 			target.body.legs.race  = Race.Snake;
 			
-			// TODO: Also remove tail(s)
+			// RemTail() does not support removing all tails
+			for(var i = 0; i < target.Back().length; i++) {
+				var app = target.Back()[i];
+				if(app.type == AppendageType.tail) {
+					target.Back().remove(i);
+				}
+			}
 		}
 	}
 	Text.Flush();
