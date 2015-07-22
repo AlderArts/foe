@@ -222,7 +222,27 @@ Items.Nagazm.PushEffect(function(target) {
 });
 // TODO: Stats effects: libido++? charisma++?
 // TODO: Remove testicles? (snakes have no external testicles)
-// TODO: Turn into hermaphrodite: if no penis add one, if no vagina add one
+Items.Nagazm.PushEffect(function(target) {
+	var parse = { Name: target.NameDesc(), s: target == player ? "" : "s" };
+	
+	if (Math.random() < 0.5) {
+		var vags  = target.AllVags();
+		var cocks = target.AllCocks();
+		if (vags.length < 1) {
+			vags.push(new Vagina());
+			parse.vag = vags[0].Short();
+			Text.Add("[Name] grow[s] a brand new [vag]!", parse);
+			Text.NL();
+		}
+		else if (cocks.length < 1) {
+			cocks.push(new Cock());
+			parse.cock = cocks[0].Short();
+			Text.Add("[Name] grow[s] a brand new [cock]!", parse);
+			Text.NL();
+		}
+	}
+	Text.Flush();
+});
 Items.Nagazm.PushEffect(function(target) {
 	// TODO: Race check like in Lacertium? What race are Naga penises?
 	// TODO: Other prerequisites? No testicles? Hermaphroditism?
