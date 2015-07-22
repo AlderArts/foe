@@ -222,7 +222,18 @@ Items.Nagazm.PushEffect(function(target) {
 // TODO: Stats effects: libido++? charisma++?
 // TODO: Remove testicles? (snakes have no external testicles)
 // TODO: Turn into hermaphrodite: if no penis add one, if no vagina add one
-// TODO: Duplicate penis
+Items.Nagazm.PushEffect(function(target) {
+	// TODO: Race check like in Lacertium? What race are Naga penises?
+	// TODO: Other prerequisites? No testicles? Hermaphroditism?
+	var cocks = target.AllCocks();
+	if(cocks.length == 1 && Math.random() < 0.1) {
+		var parse = { Poss: target.Possessive(), cockDesc: cocks[0].Short()};
+		cocks.push(cocks[0].Clone());
+		Text.Add("[Poss] [cockDesc] splits in two identical dicks!", parse);
+		Text.NL();
+		Text.Flush();
+	}
+});
 // TODO: Increase/decrease bust size?
 // TODO: Naga eyes? From descr in scenes: "faintly glowing" "vivid, angular magenta eyes"
 // TODO: Snake tongue? "a long, forked tongue"
