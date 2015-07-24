@@ -2048,12 +2048,10 @@ Scenes.Lagomorph.GroupWinInterrorigate = function(enc) {
 					Text.NL();
 					Text.Flush();
 					
-					Gui.Callstack.push(function() {
+					Gui.NextPrompt(function() {
 						Text.Clear();
 						Scenes.Burrows.Arrival(alpha);
 					});
-					
-					Gui.NextPrompt();
 				}, enabled : true,
 				tooltip : "Follow the alpha into the crowd."
 			});
