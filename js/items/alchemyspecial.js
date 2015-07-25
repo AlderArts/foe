@@ -220,14 +220,14 @@ Items.Nagazm.PushEffect(function(target) {
 	}
 	Text.Flush();
 });
-// TODO: Remove testicles? (snakes have no external testicles)
+Items.Nagazm.PushEffect(TF.ItemEffects.RemBalls, {odds: 0.5, ideal: 0, count: 2});
 Items.Nagazm.PushEffect(function(target) {
 	var parse = { Name: target.NameDesc(), s: target == player ? "" : "s" };
 	
 	if (Math.random() < 0.5) {
 		var vags  = target.AllVags();
 		var cocks = target.AllCocks();
-		if (vags.length < 1) {
+		if (vags.length < 1 && !target.HasBalls()) {
 			vags.push(new Vagina());
 			parse.vag = vags[0].Short();
 			Text.Add("[Name] grow[s] a brand new [vag]!", parse);
