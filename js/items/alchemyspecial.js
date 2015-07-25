@@ -200,42 +200,35 @@ Items.Nagazm.PushEffect(function(target) {
 		s : target.body.legs.count > 1 ? "" : "s"
 	};
 	
-	if(Math.random() < 0.4) { //TODO: Standard chance for race body parts TF?
+	if(Math.random() < 0.4) {
 		if(target.body.legs.count != 0 && target.body.legs.race != Race.Snake) {
+			TF.ItemEffects.RemTail(target, {count: -1});
+			
 			Text.Add("[Poss] [legsDesc] turn[s] into a long serpentine tail!", parse);
 			Text.NL();
 			
 			target.body.legs.count = 0;
 			target.body.legs.race  = Race.Snake;
-			
-			// RemTail() does not support removing all tails
-			// TODO: Add text description?
-			for(var i = 0; i < target.Back().length; i++) {
-				var app = target.Back()[i];
-				if(app.type == AppendageType.tail) {
-					target.Back().remove(i);
-				}
-			}
 		}
 	}
 	Text.Flush();
 });
 Items.Nagazm.PushEffect(TF.ItemEffects.RemBalls, {odds: 0.5, ideal: 0, count: 2});
 Items.Nagazm.PushEffect(function(target) {
-	var parse = { Name: target.NameDesc(), s: target == player ? "" : "s" };
+	var parse = { Name: target.NameDesc(), s: target.plural() ? "" : "s" };
 	
 	if (Math.random() < 0.5) {
 		var vags  = target.AllVags();
 		var cocks = target.AllCocks();
 		if (vags.length < 1 && !target.HasBalls()) {
 			vags.push(new Vagina());
-			parse.vag = vags[0].Short();
+			parse["vag"] = vags[0].Short();
 			Text.Add("[Name] grow[s] a brand new [vag]!", parse);
 			Text.NL();
 		}
 		else if (cocks.length < 1) {
 			cocks.push(new Cock());
-			parse.cock = cocks[0].Short();
+			parse["cock"] = cocks[0].Short();
 			Text.Add("[Name] grow[s] a brand new [cock]!", parse);
 			Text.NL();
 		}
@@ -271,7 +264,7 @@ Items.Nagazm.PushEffect(function(target) {
 });
 // TODO: Naga eyes? From descr in scenes: "faintly glowing" "vivid, angular magenta eyes"
 // TODO: Snake tongue? "a long, forked tongue"
-Items.Nagazm.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Snake, str: "elongated, pointy ears"});
+Items.Nagazm.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Elf, str: "elongated, pointy ears"});
 Items.Nagazm.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.4, value: false, num: 1});
 Items.Nagazm.PushEffect(TF.ItemEffects.IncLib, {odds: 0.5, ideal: 40, max: 1});
 Items.Nagazm.PushEffect(TF.ItemEffects.IncCha, {odds: 0.4, ideal: 40, max: 1});

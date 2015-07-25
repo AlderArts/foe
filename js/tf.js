@@ -62,7 +62,8 @@ TF.SetRaceAll = function(bodypart, race) {
 
 // Will create a new appendage or replace an old one
 TF.SetAppendage = function(slots, type, race, color, count) {
-	count = count || 1;
+	if(!_.isNumber(count))
+		count = 1;
 	
 	for(var i = 0; i < slots.length; i++) {
 		var app = slots[i];
@@ -84,11 +85,19 @@ TF.SetAppendage = function(slots, type, race, color, count) {
 }
 
 TF.RemoveAppendage = function(slots, type, count) {
-	count = count || 1;
+	var all = false;
+	if(count < 0)
+		all = true;
+	else if(!_.isNumber(count))
+		count = 1;
+	
 	for(var i = 0; i < slots.length; i++) {
 		var app = slots[i];
 		if(app.type == type) {
-			app.count -= count;
+			if(all)
+				app.count = 0;
+			else
+				app.count -= count;
 			if(app.count > 0)
 				return TF.Effect.Changed;
 			else {
@@ -375,7 +384,9 @@ TF.ItemEffects.SetTail = function(target, opts) {
 // odds, count
 TF.ItemEffects.RemTail = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
+	var tail    = target.HasTail();
 	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
+	parse["s"] = tail && tail.count > 1 ? "s" : "";
 	var odds    = opts.odds || 1;
 	if(Math.random() < odds) {
 		changed = TF.RemoveAppendage(target.Back(), AppendageType.tail, opts.count);
@@ -385,7 +396,7 @@ TF.ItemEffects.RemTail = function(target, opts) {
 				Text.NL();
 				break;
 			case TF.Effect.Removed:
-				Text.Add("[name] lose all trace of [hisher] tail!", parse);
+				Text.Add("[name] lose all trace of [hisher] tail[s]!", parse);
 				Text.NL();
 				break;
 		}
