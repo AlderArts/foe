@@ -169,7 +169,7 @@ Items.Lobos.price = 8;
 Items.Lobos.lDesc = function() { return "a bottle of Lobos"; }
 Items.Lobos.Short = function() { return "A bottle of Lobos"; }
 Items.Lobos.Long = function() { return "A bottle labeled Lobos with the picture of a wolf on it. The fluid within is opaque, and dullish gray."; }
-Items.Lobos.recipe = [{it: Items.CanisRoot}, {it: Items.WolfFang}, {it: Items.WolfPelt}];
+Items.Lobos.recipe = [{it: Items.CanisRoot}, {it: Items.WolfFang}, {it: Items.Wolfsbane}];
 // Effects
 Items.Lobos.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Wolf, str: "a wolf cock"});
 Items.Lobos.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.4, value: true, num: 1});
@@ -243,7 +243,7 @@ Items.Lepida.price = 25;
 Items.Lepida.lDesc = function() { return "a bottle of Lepida"; }
 Items.Lepida.Short = function() { return "A bottle of Lepida"; }
 Items.Lepida.Long = function() { return "A bottle labeled Lepida, with the picture of a moth on it. The fluid within is a deep purple."; }
-Items.Lepida.recipe = [{it: Items.MAntenna}, {it: Items.MWing}, {it: Items.FruitSeed}];
+Items.Lepida.recipe = [{it: Items.MFluff}, {it: Items.MDust}, {it: Items.FruitSeed}];
 // Effects
 Items.Lepida.PushEffect(TF.ItemEffects.SetAntenna, {odds: 0.4, race: Race.Moth, color: Color.purple, count: 2, str: "a pair of moth-like feelers" });
 Items.Lepida.PushEffect(TF.ItemEffects.RemHorn, {odds: 0.2, count: 2});

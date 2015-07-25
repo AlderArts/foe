@@ -560,7 +560,7 @@ TF.ItemEffects.RemBalls = function(target, opts) {
 	var parse   = { name: target.NameDesc(), count: Text.NumToText(opts.count), hisher: target.hisher(), ballsDesc: target.BallsDesc() };
 	var odds    = opts.odds || 1;
 	if(Math.random() < odds) {
-		changed = TF.RemoveAppendage(target.body.balls, opts.ideal, opts.count);
+		changed = TF.RemBalls(target.body.balls, opts.ideal, opts.count);
 		switch(changed) {
 			case TF.Effect.Changed:
 				Text.Add("[name] lose [count] of [hisher] testicles!", parse);

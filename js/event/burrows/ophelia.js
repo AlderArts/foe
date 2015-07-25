@@ -677,7 +677,7 @@ Scenes.Ophelia.TalkRoa = function() {
 		var first = !(ophelia.flags["Talk"] & Ophelia.Talk.Roa);
 		ophelia.flags["Talk"] |= Ophelia.Talk.Roa;
 		if(first) {
-			Text.Add("<i>“You’ve found my brother? It’s great to know he’s safe. Tell me, How is he?”</i> she asks enthusiastically, grasping your arm.", parse);
+			Text.Add("<i>“You’ve found my brother? It’s great to know he’s safe. Tell me, how is he?”</i> she asks enthusiastically, grasping your arm.", parse);
 			Text.NL();
 			Text.Add("Roa’s just fine, you assure her. You explain that he’s found himself the perfect safe haven for a bunny like him; he’s a whore at the Shadow Lady brothel in Rigard.", parse);
 			Text.NL();
@@ -742,7 +742,7 @@ Scenes.Ophelia.TalkRoa = function() {
 						Text.NL();
 						Text.Add("<i>“Roa, experiment nr.84: Studmuffin. Goal: make Larissa shut up. Prepared the ingredients according to recipe - missing cactoids, tried beetles instead. Mixture should take on a teal color, not sure what that is. I think pink is close? Fed the potion to subject, no immediate reaction. Says it tasted like strawberry. Success! Kinda. Subject is experiencing changes to body. Becoming softer and rounder - perhaps it swells up and becomes more defined later? Subject breasts swelling, hips widening. I think something has gone wrong. Subject acting strange. The others should be coming soon...”</i> Ophelia chuckles, shaking her head as she returns the page to the binder.", parse);
 						Text.NL();
-						Text.Add("<i>“I’d invited Larissa and her friends over to meet ‘my new boyfriend’, and I guess they told some of my brothers too. They were going over there to pick on the nerd, but when they got there they found me desperately trying to fend off a hyper-aroused Roa with tits the size of my head.”</i> She smirks. <i>“First thing that happened, he threw himself on the poor boys, who were eager to help him out with his itch. Larissa was furious.”</i>", parse);
+						Text.Add("<i>“I’d invited Larissa and her friends over to meet ‘my new boyfriend’, and I guess they told some of my brothers too. They were going over there to pick on the nerd, but when they got there, they found me desperately trying to fend off a hyper-aroused Roa with tits the size of my head.”</i> She smirks. <i>“First thing that happened, he threw himself on the poor boys, who were eager to help him out with his itch. Larissa was furious.”</i>", parse);
 						Text.NL();
 						Text.Add("The alchemist shakes her head. <i>“It didn’t exactly pan out the way I had planned, but I guess the end goal was achieved. Roa went back to his usual self a day later, and I apologized profusely for using him in my little plot for vengeance.”</i>", parse);
 					}
@@ -793,7 +793,7 @@ Scenes.Ophelia.TalkRoa = function() {
 					
 					var scenes = new EncounterTable();
 					scenes.AddEnc(function() {
-						Text.Add("<i>“Roa, experiment nr.213: Minotaur. Goal: study the effects of ingredients salvaged from bull-morphs. I’ve made earlier experiments focused on strengthening the body - see nr.84 (failed), nr.118, nr.162-165 - and I think that ingredients gathered from the minotaur could prove useful in this endeavour. Previous experiments suggest that hooves, horns, fur, semen and blood could be tested. Unable to find live specimen, but gatherers have brought back what seems to be a broken horn from a bull.”</i>", parse);
+						Text.Add("<i>“Roa, experiment nr.213: Minotaur. Goal: study the effects of ingredients salvaged from bull-morphs. I’ve made earlier experiments focused on strengthening the body - see nr.84 (failed), nr.118, nr.162-165 - and I think that ingredients gathered from the minotaur could prove useful in this endeavor. Previous experiments suggest that hooves, horns, fur, semen and blood could be tested. Unable to find live specimen, but gatherers have brought back what seems to be a broken horn from a bull.”</i>", parse);
 						Text.NL();
 						Text.Add("<i>“Ground up sample, put in marked jar. Tested mixing substance with rosemary and dried cloves. Together with a sample from experiment nr.164, the effects were increased. Subject experienced expanded muscle mass in torso and leg areas. Effect further enhanced by adding two measures of milk. Side effects: noticed growth of small horns, enlarging of the penis and testes. Further experiments put on hold until subject has calmed down.”</i>", parse);
 					}, 1.0, function() { return true; });
@@ -1149,13 +1149,13 @@ Scenes.Ophelia.SexVaginal = function() {
 			
 			Text.Add("<i>“Ah, yes!”</i> Ophelia cries, legs wrapping around your waist as she tries to bring you deeper inside her.", parse);
 			Text.NL();
-			Text.Add("With Ophelia’s encouragement, you push on into her sodden depths, not stopping until she has taken you to the very hilt.", parse);
+			Text.Add("With Ophelia’s encouragement, you push on into her sodden depths, not stopping until she has taken you to the very hilt. ", parse);
 			var lCock = new Cock();
 			lCock.thickness.base = 7;
 			lCock.length.base = 38;
 			var asBigAsLagon = p1cock.Volume() >= lCock.Volume();
 			if(asBigAsLagon) {
-				Text.Add(" Her stomach bulges visibly around the sheer quantity of man-meat crammed inside her snatch, but the distension only seems to arouse her further.", parse);
+				Text.Add("Her stomach bulges visibly around the sheer quantity of man-meat crammed inside her snatch, but the distension only seems to arouse her further.", parse);
 				Text.NL();
 				Text.Add("<i>“Omph! You’re pretty big. Might not have been such a good idea to take all of you like that.”</i>", parse);
 				Text.NL();

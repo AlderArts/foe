@@ -189,11 +189,11 @@ Items.WolfFang.sDesc = function() { return "canine fang"; }
 Items.WolfFang.Short = function() { return "A canid fang"; }
 Items.WolfFang.Long = function() { return "A fang from some form of canid predator."; }
 
-Items.WolfPelt = new Item("wolf3", "Wolf pelt", ItemType.Ingredient);
-Items.WolfPelt.price = 3;
-Items.WolfPelt.sDesc = function() { return "wolf pelt"; }
-Items.WolfPelt.Short = function() { return "A wolf pelt"; }
-Items.WolfPelt.Long = function() { return "The rough pelt of a wolf."; }
+Items.Wolfsbane = new Item("wolf3", "Wolfsbane", ItemType.Ingredient);
+Items.Wolfsbane.price = 3;
+Items.Wolfsbane.sDesc = function() { return "wolfsbane"; }
+Items.Wolfsbane.Short = function() { return "A wolfsbane flower"; }
+Items.Wolfsbane.Long = function() { return "Wolfsbane, a poisonous flower."; }
 
 
 
@@ -301,17 +301,17 @@ Items.PipeLeaf.Long = function() { return "A strong pipeleaf - a mixture of seve
 
 
 
-Items.MAntenna = new Item("moth1", "M.Feeler", ItemType.Ingredient);
-Items.MAntenna.price = 1;
-Items.MAntenna.sDesc = function() { return "moth feeler"; }
-Items.MAntenna.Short = function() { return "A moth feeler"; }
-Items.MAntenna.Long = function() { return "The feeler from some kind of moth."; }
+Items.MFluff = new Item("moth1", "M.Fluff", ItemType.Ingredient);
+Items.MFluff.price = 1;
+Items.MFluff.sDesc = function() { return "moth fluff"; }
+Items.MFluff.Short = function() { return "A wad of moth fluff"; }
+Items.MFluff.Long = function() { return "The soft fluff from a moth."; }
 
-Items.MWing = new Item("moth2", "M.Wing", ItemType.Ingredient);
-Items.MWing.price = 1;
-Items.MWing.sDesc = function() { return "moth wing"; }
-Items.MWing.Short = function() { return "A moth wing"; }
-Items.MWing.Long = function() { return "A flimsy moth wing, looks very fragile."; }
+Items.MDust = new Item("moth2", "M.Dust", ItemType.Ingredient);
+Items.MDust.price = 1;
+Items.MDust.sDesc = function() { return "moth dust"; }
+Items.MDust.Short = function() { return "A measure of moth dust"; }
+Items.MDust.Long = function() { return "A measure of sparkly moth dust."; }
 
 
 

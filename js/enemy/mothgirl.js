@@ -71,9 +71,9 @@ Mothgirl.Sexed = function() {
 Mothgirl.prototype.DropTable = function() {
 	var drops = [];
 	if(Math.random() < 0.05) drops.push({ it: Items.Lepida });
-	if(Math.random() < 0.5)  drops.push({ it: Items.MWing });
+	if(Math.random() < 0.5)  drops.push({ it: Items.MDust });
 	if(Math.random() < 0.5)  drops.push({ it: Items.FruitSeed });
-	if(Math.random() < 0.5)  drops.push({ it: Items.MAntenna });
+	if(Math.random() < 0.5)  drops.push({ it: Items.MFluff });
 	return drops;
 }
 

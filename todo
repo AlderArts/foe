@@ -18,6 +18,8 @@ ROYALS
 
 WATCH
 - City Watch
+- Prison/cell area at guard house
+- Standing with the guard
 - Commander
 - Miranda
  + Restructure talk code
@@ -41,6 +43,9 @@ TSL
  + Punishment sex
 - TSL theme rooms
  + Dragons (cont)
+  - Draxen
+  - Rakkat
+  - Grex (in progress)
 - Roa
 
 
@@ -177,8 +182,6 @@ Feedback:
   * Island
   * Beach
 
- - Flesh out town (descriptions, conditions, stores)
-
 * Combat
  - Enemies [plains]: Generic morphs
  - Enemies [plains]: Kobolds? Goblins? Centaurs?
@@ -201,9 +204,6 @@ Feedback:
 
 * Randomize sentence structure of desc
 * Better complete description
-
-* Prison/cell area at guard house
-* Standing with the guard
 
 
 ------------------------
@@ -374,12 +374,13 @@ PART I:
 -------
 * Miranda (pre-follower)
 * Terry
-* Momo
+* Momo (?)
 * Outlaws
- - Maria
- - Cveta
- - Aquilius
+ - Maria (jobs)
+ - Cveta (pre-follower, tobs)
+ - Aquilius (tobs)
  - Zenith
+ - Vaughn (tobs)
 * Gwendy's farm
  - Gwendy
  - Adrian
@@ -398,11 +399,10 @@ PART I:
  - Belinda
 * Rigard
  - Stores
-  + Armor shop (Obs)
- - Random encounters (Del)
+  + Sex shop
 * Twins & Lei
  - Lei jobs
- - Twins interactions
+ - Twins interactions + jobs
 * Jeanne & Golem
  - Magnus interactions
 * Random enemies
@@ -427,11 +427,12 @@ PART II:
 * Highlands
 * Mountains
 * Elven village
-* Free cities
+* Free cities (Dewynsport, Afaris, Talras)
  - Academy of high arts
  - Arena
 * The temple of Aria
  - Yrissa
+* Oasis
 
 # Worlds
  * Giant world
