@@ -33,6 +33,10 @@ DryadGlade.prototype.Update = function(step) {
 	
 }
 
+//TODO
+DryadGlade.prototype.OrchidSlut = function() {
+	return false;
+}
 
 Scenes.DryadGlade = {};
 

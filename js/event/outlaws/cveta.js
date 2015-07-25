@@ -56,6 +56,7 @@ function Cveta(storage) {
 	this.flags["Bard"]    = Cveta.Bard.No;
 	this.flags["Wings"]   = 0;
 	this.flags["Intimate"] = 0; //Bitmask
+	this.flags["Date"]    = 0; //Bitmask
 	
 	this.violinTimer = new Time();
 	this.flirtTimer  = new Time();
@@ -141,13 +142,13 @@ Cveta.prototype.Update = function(step) {
 }
 
 Cveta.prototype.PerformanceTime = function() {
-	return (world.time.hour >= 6 && world.time.hour < 8) || (world.time.hour >= 18 && world.time.hour < 20);
+	return (world.time.hour >= 6 && world.time.hour < 9) || (world.time.hour >= 17 && world.time.hour < 20);
 }
 Cveta.prototype.WakingTime = function() {
 	return (world.time.hour >= 6 && world.time.hour < 20);
 }
 Cveta.prototype.InTent = function() {
-	return (world.time.hour >= 8 && world.time.hour < 10) || (world.time.hour >= 14 && world.time.hour < 18);
+	return (world.time.hour >= 6 && world.time.hour < 10) || (world.time.hour >= 14 && world.time.hour < 20);
 }
 Cveta.prototype.Violin = function() {
 	return this.flags["Met"] >= Cveta.Met.Available;
@@ -166,7 +167,7 @@ Scenes.Cveta.CampDesc = function() {
 	if(!cveta.WakingTime())
 		Text.Add("The tent flaps are sealed at the moment, the songstress having set with the sun.", parse);
 	else if(cveta.PerformanceTime())
-		Text.Add("However, it is empty at the moment, Cveta herself having ventured out for her twice-daily performances. It's not too late to join in if you want to listen to her play.", parse);
+		Text.Add("However, you figure that Cveta will soon venture out for her twice-daily performances. It's not too late to join in if you want to listen to her play.", parse);
 	else if(cveta.InTent()) {
 		if(cveta.Violin())
 			Text.Add("Music emanates from within, but you know that Cveta is amenable to entertaining your presence should you choose to visit.", parse);
@@ -340,7 +341,7 @@ Scenes.Cveta.Approach = function() {
 	if(outlaws.BullTowerCompleted() && !(cveta.flags["Intimate"] & Cveta.Intimate.Introduced)) {
 		Scenes.Cveta.PostBullTowerPerformance();
 	}
-	else {
+	else if(cveta.InTent()) {
 		Text.Clear();
 		Text.Add("Brushing aside the flaps, you step into Cveta’s tent, leaving behind the hubbub of the rest of the outlaw camp. As always, the songstress is perched on her stool, the picture of elegant composure as she acknowledges your entrance with a dip of her head. The violin you bought for her rests in its case by her trunk, carefully sealed against dust and damp alike.", parse);
 		if(cveta.BlueRoses())
@@ -355,6 +356,17 @@ Scenes.Cveta.Approach = function() {
 			Text.Add(" The songstress raises her eyes to meet yours in acknowledgement, then bows her head once more to concentrate on her playing.", parse);
 		Text.NL();
 		Text.Add("<i>“What brings you here to me today?”</i>", parse);
+		Text.Flush();
+		
+		Scenes.Cveta.Prompt();
+	}
+	else {
+		Text.Clear();
+		Text.Add("While Cveta isn’t in her tent at the moment, you’re pretty sure that she couldn’t have gone far. Indeed, you catch a glimpse of her signature red gown amidst the tents, and walk over to her in a few easy strides. The songstress notices your approach, and dips her head at you. <i>“[playername]. Was there something you needed?”</i>", parse);
+		Text.NL();
+		Text.Add("Does she have a moment? You’d like to talk to her.", parse);
+		Text.NL();
+		Text.Add("<i>“Not out in the open, if that is your wish.”</i> The skirts of her gown swishing, she quickly leads you back to her tent and ushers you in before heading under the shade herself. <i>“Now, was there something you needed?”</i>", parse);
 		Text.Flush();
 		
 		Scenes.Cveta.Prompt();
@@ -406,7 +418,13 @@ Scenes.Cveta.Prompt = function() {
 			}, enabled : true,
 			tooltip : "Cveta is such a lonely bird. Things don’t need to be that way…"
 		});
+		
+		options.push({ nameStr : "Date",
+			func : Scenes.Cveta.Dates.Prompt, enabled : true,
+			tooltip : "Ask Cveta if she’d like to go somewhere with you."
+		});
 	}
+	
 	/* TODO
 	options.push({ nameStr : "name",
 		func : function() {
