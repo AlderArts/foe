@@ -254,7 +254,21 @@ Items.Nagazm.PushEffect(function(target) {
 		Text.Flush();
 	}
 });
-// TODO: Increase/decrease bust size?
+Items.Nagazm.PushEffect(function(target) {
+	var parse = { Poss: target.Possessive() };
+	if (Math.random() < 0.4 && target.FirstVag() && target.BiggestBreasts().Size() < 12){
+		var breasts = target.AllBreastRows();
+		for(var i = 0; i < breasts.length; i++) {
+			var diff = breasts[i].size.IncreaseStat(12, Math.random() * 5);
+			if(diff) {
+				Text.Add("[Poss] breasts grow larger by " + diff + "cm.", parse);
+				Text.NL();
+				Text.Flush();
+				break;
+			}
+		}
+	}
+});
 // TODO: Naga eyes? From descr in scenes: "faintly glowing" "vivid, angular magenta eyes"
 // TODO: Snake tongue? "a long, forked tongue"
 Items.Nagazm.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Snake, str: "elongated, pointy ears"});
