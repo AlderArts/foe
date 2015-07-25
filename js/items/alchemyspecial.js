@@ -220,7 +220,6 @@ Items.Nagazm.PushEffect(function(target) {
 	}
 	Text.Flush();
 });
-// TODO: Stats effects: libido++? charisma++?
 // TODO: Remove testicles? (snakes have no external testicles)
 Items.Nagazm.PushEffect(function(target) {
 	var parse = { Name: target.NameDesc(), s: target == player ? "" : "s" };
@@ -258,7 +257,14 @@ Items.Nagazm.PushEffect(function(target) {
 // TODO: Increase/decrease bust size?
 // TODO: Naga eyes? From descr in scenes: "faintly glowing" "vivid, angular magenta eyes"
 // TODO: Snake tongue? "a long, forked tongue"
-// TODO: Naga ears? "elongated, pointy ears"
+Items.Nagazm.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Snake, str: "elongated, pointy ears"});
+Items.Nagazm.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.4, value: false, num: 1});
+Items.Nagazm.PushEffect(TF.ItemEffects.IncLib, {odds: 0.5, ideal: 40, max: 1});
+Items.Nagazm.PushEffect(TF.ItemEffects.IncCha, {odds: 0.4, ideal: 40, max: 1});
+Items.Nagazm.PushEffect(TF.ItemEffects.IncDex, {odds: 0.4, ideal: 30, max: 1});
+Items.Nagazm.PushEffect(TF.ItemEffects.IncSpi, {odds: 0.4, ideal: 30, max: 1});
+Items.Nagazm.PushEffect(TF.ItemEffects.DecStr, {odds: 0.2, ideal: 20, max: 1});
+Items.Nagazm.PushEffect(TF.ItemEffects.DecSta, {odds: 0.2, ideal: 20, max: 1});
 
 
 Items.Taurico = new TFItem("taur0", "Taurico");
