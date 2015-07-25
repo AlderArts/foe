@@ -118,7 +118,7 @@ TF.SetBalls = function(balls, ideal, count) {
 
 TF.RemBalls = function(balls, ideal, count) {
 	count = count || 2;
-	ideal = ideal || 2;
+	ideal = ideal || 0;
 	
 	var res = balls.count.DecreaseStat(ideal, count);
 	if(res != 0) {
@@ -537,8 +537,9 @@ TF.ItemEffects.SetBalls = function(target, opts) {
 	var parse   = { name: target.NameDesc(), s: target == player ? "" : "s", count: Text.NumToText(opts.count), ballsDesc: function() { return target.BallsDesc(); } };
 	var odds    = opts.odds  || 1;
 	var count   = opts.count || 2;
+	var ideal   = opts.ideal || 2;
 	if(Math.random() < odds) {
-		changed = TF.SetBalls(target.body.balls, opts.ideal, count);
+		changed = TF.SetBalls(target.body.balls, ideal, count);
 		switch(changed) {
 			case TF.Effect.Changed:
 				Text.Add("[name] grow[s] an extra [count] testicles!", parse);
@@ -559,8 +560,10 @@ TF.ItemEffects.RemBalls = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
 	var parse   = { name: target.NameDesc(), count: Text.NumToText(opts.count), hisher: target.hisher(), ballsDesc: target.BallsDesc() };
 	var odds    = opts.odds || 1;
+	var count   = opts.count || 2;
+	var ideal   = opts.ideal;
 	if(Math.random() < odds) {
-		changed = TF.RemBalls(target.body.balls, opts.ideal, opts.count);
+		changed = TF.RemBalls(target.body.balls, ideal, count);
 		switch(changed) {
 			case TF.Effect.Changed:
 				Text.Add("[name] lose [count] of [hisher] testicles!", parse);
