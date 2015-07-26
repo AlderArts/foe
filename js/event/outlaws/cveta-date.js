@@ -362,7 +362,7 @@ Scenes.Cveta.Dates.Spring = function() {
 			Text.Clear();
 			Text.Add("Cveta closes her eyes, and you note her breathing deepen, her music slowing to match. <i>“Hmm… why do you ask?”</i>", parse);
 			Text.NL();
-			if(cveta.Rel() >= 95) {
+			if(cveta.Relation() >= 95) {
 				Text.Add("<i>“Well, you are a definite source of inspiration. Perhaps not to the point where I could see myself composing bawdy ballads about your exploits in the traditional style, but enough that your presence is very much appreciated.”</i>", parse);
 				Text.NL();
 				Text.Add("Very much appreciated?", parse);
@@ -373,7 +373,7 @@ Scenes.Cveta.Dates.Spring = function() {
 				Text.NL();
 				Text.Add("<i>“As I said, it is appreciated.”</i> She looks at you thoughtfully. <i>“You know, you remind me a little of - actually, never mind. Shall we continue?”</i>", parse);
 			}
-			else if(cveta.Rel() >= 70) {
+			else if(cveta.Relation() >= 70) {
 				Text.Add("<i>“You are rather pleasant company,”</i> Cveta replies, <i>“and are possessed of an appreciation for the finer things, which is important. Music reveals much about a person, a people, from a simple shepherd’s flute to a grand concert hall.”</i>", parse);
 				Text.NL();
 				Text.Add("And what does it tell her about you?", parse);
