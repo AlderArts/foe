@@ -1235,7 +1235,7 @@ Intro.UruSexFuckAnal = function() {
 				buttfucked = true;
 				Text.Add("Pausing momentarily, you plant your feet wider and reach back, parting your buttocks to ease entry. Moaning like a slut, you egg the omnibus to push it in. Chuckling at your eagerness, Uru penetrates your waiting " + player.Butt().AnalShort() + " and starts to roughly fuck you with her tail, reaching several inches deep.");
 				Text.NL();
-				Text.Add("<i>Don't forget about doing your part now, slut,”</i> she moans in a sultry voice, encouraging you to start moving again. <i>“Perhaps after you are done, we can switch places, huh?”</i> she grins over her shoulder.");
+				Text.Add("<i>“Don't forget about doing your part now, slut,”</i> she moans in a sultry voice, encouraging you to start moving again. <i>“Perhaps after you are done, we can switch places, huh?”</i> she grins over her shoulder.");
 				Text.Flush();
 				Gui.NextPrompt();
 			}, enabled : true,
