@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 4;
-VERSION_SUBSCRIPT = "g";
-VERSION_NAME = "Outlaws stuff";
+VERSION_SUBSCRIPT = "h";
+VERSION_NAME = "Cveta cuddling";
 
 SAVE_VERSION = 27;
 // Save version 1: Initial
