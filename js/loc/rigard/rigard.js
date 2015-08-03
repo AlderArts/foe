@@ -1631,7 +1631,7 @@ Scenes.Rigard.Lockdown = function() {
 					
 					//[TakeCharge]
 					var options = new Array();
-					options.push({ nameStr : "TakeCharge",
+					options.push({ nameStr : "Take charge",
 						func : function() {
 							Text.Clear();
 							Text.Add("Smirking mischievously at her, you lift a hand to cup her chin and give her a big, wet kiss. Hungrily, you thrust your [tongueDesc] into the warm wetness of her mouth to wrestle with her own.", parse);
@@ -1701,7 +1701,7 @@ Scenes.Rigard.Lockdown = function() {
 				
 				//[TakeCharge] [Submit] [Later]
 				var options = new Array();
-				options.push({ nameStr : "TakeCharge",
+				options.push({ nameStr : "Take charge",
 					func : function() {
 						Text.Clear();
 						Text.Add("Authoritatively, you push your chair back and stand up. Throwing her a proud smirk, you saunter around the tabletop toward her, your gaze never leaving hers as you close the distance. Cupping her chin in your hand, your lips descend to cover hers possessively, hungrily thrusting your [tongueDesc] into the warm wetness of her mouth to wrestle with her own.", parse);
