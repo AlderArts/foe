@@ -2781,8 +2781,9 @@ Kiakai.SexFirstAttitude = {
 
 Scenes.Kiakai.SexPrompt = function(attitude) {
 	// TODO Toys
-	var playerCock = player.FirstCock() || (player.strapOn ? player.strapOn.cock : null);
-	var kiaiCock   = kiakai.FirstCock() || (kiakai.strapOn ? kiakai.strapOn.cock : null);
+	var playerCock = player.BiggestCock();
+	var strapon    = playerCock ? playerCock.isStrapon : false;
+	var kiaiCock   = kiakai.BiggestCock();
 	
 	var parse = {
 		playername   : player.name,
@@ -2811,6 +2812,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 		breastDesc   : function() { return player.FirstBreastRow().Short(); },
 		nipsDesc     : function() { return player.FirstBreastRow().NipsShort(); },
 		cockDesc     : function() { return playerCock.Short(); },
+		cockType     : function() { return strapon ? "strapon" : playerCock.noun(); },
 		cockTip      : function() { return playerCock.TipShort(); },
 		knotDesc     : function() { return playerCock.KnotShort(); },
 		ballsDesc    : function() { return player.BallsDesc(); },
@@ -2855,7 +2857,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 					Text.NL();
 					Text.Add("<i>“Y-yes!”</i> [name] yelps, jumping a little as a rosy blush starts to form on [hisher] behind, striving to match the one spread across [hisher] face.", parse);
 					Text.NL();
-					Text.Add("<i>“To think that you would be that lewd... you really want me to stuff my [cockDesc] up your butt? Spread your cheeks and rail you, fill your insides completely?”</i> As you tease the flustered elf, you hand sneaks in between [hisher] legs, starting to prepare your target for entry.", parse);
+					Text.Add("<i>“To think that you would be that lewd... you really want me to stuff my [cockType] up your butt? Spread your cheeks and rail you, fill your insides completely?”</i> As you tease the flustered elf, you hand sneaks in between [hisher] legs, starting to prepare your target for entry.", parse);
 					Text.NL();
 					Text.Add("<i>“Yes,”</i> the elf murmurs in a small voice. An involuntary shudder runs through [hisher] body as your probing finger pushes its way inside [hisher] pliant hole.", parse);
 					Text.NL();
@@ -2868,7 +2870,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 					Text.Add("<i>“Imagine yourself before we met. Who would have thought you'd be begging to be fucked in the butt?”</i> you quip, throwing in one last mocking tease before striding to action.", parse);
 				}
 				else if(attitude == Kiakai.SexFirstAttitude.Mutual) {
-					Text.Add("<i>“Yeees, my [cockDesc] would fit quite nicely in your butt, wouldn't it?”</i> you purr. To accentuate your point, you give said butt a firm squeeze.", parse);
+					Text.Add("<i>“Yeees, my [cockType] would fit quite nicely in your butt, wouldn't it?”</i> you purr. To accentuate your point, you give said butt a firm squeeze.", parse);
 					Text.NL();
 					Text.Add("<i>“I... I am sure,”</i> [name] yelps, <i>“there is o-only one way to find out, right?”</i>", parse);
 					Text.NL();
@@ -3082,7 +3084,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 					else if(kiakai.subDom.Get() > -40)
 						Text.Add("<i>“More! Give me more!”</i> [heshe] moans, <i>“I love it. Fuck my ass deeper!”</i>", parse);
 					else
-						Text.Add("<i>“D-do me harder, I can take it!”</i> [heshe] begs, <i>“ravage me, fuck me, stuff my ass full of your [cockDesc]!”</i>", parse);
+						Text.Add("<i>“D-do me harder, I can take it!”</i> [heshe] begs, <i>“ravage me, fuck me, stuff my ass full of your [cockType]!”</i>", parse);
 					Text.NL();
 					Text.Add("You are more than happy to oblige, and proceed to give the elf exactly what [heshe] wants, in large, sloppy amounts.", parse);
 					if(kiakai.LustLevel() >= 0.75) {
@@ -3160,7 +3162,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 					}
 					Text.Add("You switch gears, pushing inside the elf with long, firm strokes. [HisHer] tight tunnel caresses every inch of your lube-covered [cockDesc], though it is loosening up noticeably under your insistent buggering.", parse);
 					Text.NL();
-					Text.Add("<i>“Y-yes! Your [cockDesc] feels so good, [playername]!”</i> [name] moans, encouraging you to increase your pace even further. A bead of sweat forms on your forehead as your unrelenting assault begins to take its toll. The elf is practically soaked, [hisher] glistening skin making [himher] look like [heshe]'s oiled up. You are not about to stop before you've given it your all, and you still have plenty to give.", parse);
+					Text.Add("<i>“Y-yes! Your [cockType] feels so good, [playername]!”</i> [name] moans, encouraging you to increase your pace even further. A bead of sweat forms on your forehead as your unrelenting assault begins to take its toll. The elf is practically soaked, [hisher] glistening skin making [himher] look like [heshe]'s oiled up. You are not about to stop before you've given it your all, and you still have plenty to give.", parse);
 					Text.NL();
 					Text.Add("Plunging in and out, your pile of hot meat pummels the tight elf beneath you. Your elven cock-sleeve goes through moaning, begging for more and whimpering for you to slow down. Eventually, [hisher] arms give and [heshe] collapses to the ground, only suspended by your [cockDesc] and your hands on [hisher] [kHipsDesc]. All of [name]'s pleading falls on deaf ears, as you keep up your even, incessant pounding throughout [hisher] moaning.", parse);
 					Text.NL();
