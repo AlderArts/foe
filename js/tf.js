@@ -665,9 +665,11 @@ TF.ItemEffects.SetIdealCockThk = function(target, opts) {
 	Text.Flush();
 }
 
-// odds, ideal, max
+// odds, ideal, max, female
 TF.ItemEffects.IncFem = function(target, opts) {
 	var odds  = opts.odds || 1;
+	var female = target.FirstVag();
+	if(opts.female && !female) return;
 	var parse = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
 	if(Math.random() < odds &&
 		target.body.femininity.IncreaseStat(opts.ideal, opts.max, true)) {
@@ -677,9 +679,11 @@ TF.ItemEffects.IncFem = function(target, opts) {
 	Text.Flush();
 }
 
-// odds, ideal, min
+// odds, ideal, max, male
 TF.ItemEffects.DecFem = function(target, opts) {
 	var odds  = opts.odds || 1;
+	var female = target.FirstVag();
+	if(opts.male && female) return;
 	var parse = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
 	if(Math.random() < odds &&
 		target.body.femininity.DecreaseStat(opts.ideal, opts.max, true)) {
@@ -689,6 +693,24 @@ TF.ItemEffects.DecFem = function(target, opts) {
 	Text.Flush();
 }
 
+// odds, rangeMin, rangeMax, max
+TF.ItemEffects.IdealFem = function(target, opts) {
+	var odds  = opts.odds || 1;
+	var parse = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
+	if(Math.random() < odds) {
+		var ideal = _.random(opts.rangeMin || 0, opts.rangeMax || 0, true);
+		var diff = target.body.femininity.IdealStat(ideal, opts.max, true);
+		if(diff > 0) {
+			Text.Add("[name] become[notS] more feminine!", parse);
+			Text.NL();
+		}
+		else if(diff < 0) {
+			Text.Add("[name] become[notS] more masculine!", parse);
+			Text.NL();
+		}
+	}
+	Text.Flush();
+}
 
 // odds, ideal, max
 TF.ItemEffects.IncTone = function(target, opts) {
