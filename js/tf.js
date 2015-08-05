@@ -736,6 +736,25 @@ TF.ItemEffects.DecTone = function(target, opts) {
 	Text.Flush();
 }
 
+// odds, rangeMin, rangeMax, max
+TF.ItemEffects.IdealTone = function(target, opts) {
+	var odds  = opts.odds || 1;
+	var parse = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
+	if(Math.random() < odds) {
+		var ideal = _.random(opts.rangeMin || 0, opts.rangeMax || 0, true);
+		var diff = target.body.muscleTone.IdealStat(ideal, opts.max, true);
+		if(diff > 0) {
+			Text.Add("[name] become[notS] more muscular!", parse);
+			Text.NL();
+		}
+		else if(diff < 0) {
+			Text.Add("[name] become[notS] less muscular!", parse);
+			Text.NL();
+		}
+	}
+	Text.Flush();
+}
+
 
 // odds, ideal, max
 TF.ItemEffects.IncHips = function(target, opts) {
