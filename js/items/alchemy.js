@@ -365,17 +365,8 @@ Items.Virilium.PushEffect(function(target) {
 	}
 	Text.Flush();
 });
-// TODO: parse
-Items.Virilium.PushEffect(function(target) {
-	var parse = {};
-	if(Math.random() < 0.1) {
-		var res = target.body.muscleTone.IncreaseStat(.7, .1, true);
-	}
-	if(Math.random() < 0.1) {
-		var res = target.body.femininity.DecreaseStat(-1, .1, true);
-	}
-	Text.Flush();
-});
+Items.Virilium.PushEffect(TF.ItemEffects.IncTone, {odds: 0.1, ideal: .7, max: .1});
+Items.Virilium.PushEffect(TF.ItemEffects.DecFem, {odds: 0.1, ideal: -1, max: .1});
 
 
 Items.Fertilium = new TFItem("sex1", "Fertilium");
@@ -428,17 +419,8 @@ Items.Fertilium.PushEffect(function(target) {
 	}
 	Text.Flush();
 });
-// TODO: parse
-Items.Fertilium.PushEffect(function(target) {
-	var parse = {};
-	if(Math.random() < 0.1) {
-		var res = target.body.muscleTone.DecreaseStat(.0, .1, true);
-	}
-	if(Math.random() < 0.1) {
-		var res = target.body.femininity.IncreaseStat(1, .1, true);
-	}
-	Text.Flush();
-});
+Items.Fertilium.PushEffect(TF.ItemEffects.DecTone, {odds: 0.1, ideal: 0, max: .1});
+Items.Fertilium.PushEffect(TF.ItemEffects.IncFem, {odds: 0.1, ideal: 1, max: .1});
 
 
 //TODO Effects
@@ -448,17 +430,8 @@ Items.Testos.lDesc = function() { return "a bottle of Testos"; }
 Items.Testos.Short = function() { return "A bottle of Testos"; }
 Items.Testos.Long = function() { return "A bottle of pure masculinity labled Testos."; }
 Items.Testos.recipe = [{it: Items.Equinium}, {it: Items.Homos}, {it: Items.Canis}];
-// TODO: parse
-Items.Testos.PushEffect(function(target) {
-	var parse = {};
-	if(Math.random() < 0.1) {
-		var res = target.body.muscleTone.IncreaseStat(.7, .1, true);
-	}
-	if(Math.random() < 0.8) {
-		var res = target.body.femininity.DecreaseStat(-1, .1, true);
-	}
-	Text.Flush();
-});
+Items.Testos.PushEffect(TF.ItemEffects.IncTone, {odds: 0.3, ideal: .7, max: .1});
+Items.Testos.PushEffect(TF.ItemEffects.DecFem, {odds: 0.3, ideal: -1, max: .1});
 Items.Testos.PushEffect(function(target) {
 	var parse = {
 		Name: target.NameDesc(),
@@ -556,17 +529,8 @@ Items.Estros.lDesc = function() { return "a bottle of Estros"; }
 Items.Estros.Short = function() { return "A bottle of Estros"; }
 Items.Estros.Long = function() { return "A bottle of pure femininity labled Estros."; }
 Items.Estros.recipe = [{it: Items.Vulpinix}, {it: Items.Homos}, {it: Items.Bovia}];
-// TODO: parse
-Items.Estros.PushEffect(function(target) {
-	var parse = {};
-	if(Math.random() < 0.1) {
-		var res = target.body.muscleTone.DecreaseStat(.0, .1, true);
-	}
-	if(Math.random() < 0.8) {
-		var res = target.body.femininity.IncreaseStat(1, .1, true);
-	}
-	Text.Flush();
-});
+Items.Estros.PushEffect(TF.ItemEffects.DecTone, {odds: 0.2, ideal: 0, max: .1});
+Items.Estros.PushEffect(TF.ItemEffects.IncFem, {odds: 0.8, ideal: 1, max: .1});
 Items.Estros.PushEffect(function(target) {
 	var parse = {
 		Poss: target.Possessive(),
