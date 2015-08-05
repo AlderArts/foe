@@ -591,18 +591,49 @@ TF.ItemEffects.RemBalls = function(target, opts) {
 }
 
 // odds, ideal, max
+TF.ItemEffects.SetIdealBreastSize = function(target, opts) {
+	var parse = { Poss: target.Possessive() };
+	
+	var odds  = opts.odds || 1;
+	var multi = opts.multi;
+	var breasts = target.AllBreastRows();
+	for(var i = 0; i < cocks.length; i++) {
+		if(Math.random() < odds) {
+			var diff = breasts[i].size.IdealStat(opts.ideal, opts.max);
+			if(diff > 0) {
+				Text.Add("[Poss] breasts grows bigger!", parse);
+				Text.NL();
+				if(!multi) break;
+			}
+			else if(diff < 0) {
+				Text.Add("[Poss] breasts become smaller!", parse);
+				Text.NL();
+				if(!multi) break;
+			}
+		}
+	}
+	Text.Flush();
+}
+
+// odds, ideal, max
 TF.ItemEffects.SetIdealCockLen = function(target, opts) {
 	var parse = { Poss: target.Possessive() };
 	
 	var odds  = opts.odds || 1;
+	var multi = opts.multi;
 	var cocks = target.AllCocks();
 	for(var i = 0; i < cocks.length; i++) {
 		if(Math.random() < odds) {
 			var diff = cocks[i].length.IdealStat(opts.ideal, opts.max);
-			if(diff) {
-				Text.Add("[Poss] cock length changes " + diff + "cm.", parse);
+			if(diff > 0) {
+				Text.Add("[Poss] cock grows longer!", parse);
 				Text.NL();
-				break;
+				if(!multi) break;
+			}
+			else if(diff < 0) {
+				Text.Add("[Poss] cock becomes shorter!", parse);
+				Text.NL();
+				if(!multi) break;
 			}
 		}
 	}
@@ -614,16 +645,96 @@ TF.ItemEffects.SetIdealCockThk = function(target, opts) {
 	var parse = { Poss: target.Possessive() };
 	
 	var odds  = opts.odds || 1;
+	var multi = opts.multi;
 	var cocks = target.AllCocks();
 	for(var i = 0; i < cocks.length; i++) {
 		if(Math.random() < odds) {
 			var diff = cocks[i].thickness.IdealStat(opts.ideal, opts.max);
-			if(diff) {
-				Text.Add("[Poss] cock thickness changes " + diff + "cm.", parse);
+			if(diff > 0) {
+				Text.Add("[Poss] cock grows thicker!", parse);
 				Text.NL();
-				break;
+				if(!multi) break;
+			}
+			else if(diff < 0) {
+				Text.Add("[Poss] cock grows thinner!", parse);
+				Text.NL();
+				if(!multi) break;
 			}
 		}
+	}
+	Text.Flush();
+}
+
+// odds, ideal, max
+TF.ItemEffects.IncFem = function(target, opts) {
+	var odds  = opts.odds || 1;
+	var parse = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
+	if(Math.random() < odds &&
+		target.body.femininity.IncreaseStat(opts.ideal, opts.max, true)) {
+		Text.Add("[name] become[notS] more feminine!", parse);
+		Text.NL();
+	}
+	Text.Flush();
+}
+
+// odds, ideal, min
+TF.ItemEffects.DecFem = function(target, opts) {
+	var odds  = opts.odds || 1;
+	var parse = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
+	if(Math.random() < odds &&
+		target.body.femininity.DecreaseStat(opts.ideal, opts.max, true)) {
+		Text.Add("[name] become[notS] more masculine!", parse);
+		Text.NL();
+	}
+	Text.Flush();
+}
+
+
+// odds, ideal, max
+TF.ItemEffects.IncTone = function(target, opts) {
+	var odds  = opts.odds || 1;
+	var parse = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
+	if(Math.random() < odds &&
+		target.body.muscleTone.IncreaseStat(opts.ideal, opts.max, true)) {
+		Text.Add("[name] become[notS] more muscular!", parse);
+		Text.NL();
+	}
+	Text.Flush();
+}
+
+// odds, ideal, min
+TF.ItemEffects.DecTone = function(target, opts) {
+	var odds  = opts.odds || 1;
+	var parse = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
+	if(Math.random() < odds &&
+		target.body.muscleTone.DecreaseStat(opts.ideal, opts.max, true)) {
+		Text.Add("[name] become[notS] less muscular!", parse);
+		Text.NL();
+	}
+	Text.Flush();
+}
+
+
+// odds, ideal, max
+TF.ItemEffects.IncHips = function(target, opts) {
+	var odds  = opts.odds || 1;
+	var parse = { Poss: target.Possessive() };
+	if(Math.random() < odds &&
+		target.body.torso.hipSize.IncreaseStat(opts.ideal, opts.max)) {
+		Text.Add("[Poss] hips widen!", parse);
+		Text.NL();
+	}
+	Text.Flush();
+}
+
+// odds, ideal, min
+TF.ItemEffects.DecHips = function(target, opts) {
+	var odds  = opts.odds || 1;
+	var parse = { Poss: target.Possessive() };
+	if(Math.random() < odds &&
+		target.body.torso.hipSize.DecreaseStat(opts.ideal, opts.max)) {
+		Text.Add("[Poss] hips narrow!", parse);
+		Text.NL();
 	}
 	Text.Flush();
 }
@@ -634,8 +745,8 @@ TF.ItemEffects.SetIdealCockThk = function(target, opts) {
 TF.ItemEffects.IncStr = function(target, opts) {
 	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
-		if(Math.random() < odds &&
-	target.strength.IncreaseStat(opts.ideal, opts.max)) {
+	if(Math.random() < odds &&
+		target.strength.IncreaseStat(opts.ideal, opts.max)) {
 		Text.Add("[name] [is] suddenly a bit stronger!", parse);
 		Text.NL();
 	}
@@ -647,7 +758,7 @@ TF.ItemEffects.IncSta = function(target, opts) {
 	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
 		if(Math.random() < odds &&
-	target.stamina.IncreaseStat(opts.ideal, opts.max)) {
+		target.stamina.IncreaseStat(opts.ideal, opts.max)) {
 		Text.Add("[name] [is] suddenly a bit tougher!", parse);
 		Text.NL();
 	}
@@ -658,8 +769,8 @@ TF.ItemEffects.IncSta = function(target, opts) {
 TF.ItemEffects.IncDex = function(target, opts) {
 	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
-		if(Math.random() < odds &&
-	target.dexterity.IncreaseStat(opts.ideal, opts.max)) {
+	if(Math.random() < odds &&
+		target.dexterity.IncreaseStat(opts.ideal, opts.max)) {
 		Text.Add("[name] [is] suddenly a bit swifter!", parse);
 		Text.NL();
 	}
@@ -670,8 +781,8 @@ TF.ItemEffects.IncDex = function(target, opts) {
 TF.ItemEffects.IncInt = function(target, opts) {
 	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
-		if(Math.random() < odds &&
-	target.intelligence.IncreaseStat(opts.ideal, opts.max)) {
+	if(Math.random() < odds &&
+		target.intelligence.IncreaseStat(opts.ideal, opts.max)) {
 		Text.Add("[name] [is] suddenly a bit smarter!", parse);
 		Text.NL();
 	}
@@ -682,8 +793,8 @@ TF.ItemEffects.IncInt = function(target, opts) {
 TF.ItemEffects.IncSpi = function(target, opts) {
 	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
-		if(Math.random() < odds &&
-	target.spirit.IncreaseStat(opts.ideal, opts.max)) {
+	if(Math.random() < odds &&
+		target.spirit.IncreaseStat(opts.ideal, opts.max)) {
 		Text.Add("[name] [is] suddenly a bit more stoic!", parse);
 		Text.NL();
 	}
@@ -694,8 +805,8 @@ TF.ItemEffects.IncSpi = function(target, opts) {
 TF.ItemEffects.IncLib = function(target, opts) {
 	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
-		if(Math.random() < odds &&
-	target.libido.IncreaseStat(opts.ideal, opts.max)) {
+	if(Math.random() < odds &&
+		target.libido.IncreaseStat(opts.ideal, opts.max)) {
 		Text.Add("[name] [is] suddenly a bit hornier!", parse);
 		Text.NL();
 	}
@@ -706,8 +817,8 @@ TF.ItemEffects.IncLib = function(target, opts) {
 TF.ItemEffects.IncCha = function(target, opts) {
 	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
-		if(Math.random() < odds &&
-	target.charisma.IncreaseStat(opts.ideal, opts.max)) {
+	if(Math.random() < odds &&
+		target.charisma.IncreaseStat(opts.ideal, opts.max)) {
 		Text.Add("[name] [is] suddenly a bit more charming!", parse);
 		Text.NL();
 	}
@@ -720,8 +831,8 @@ TF.ItemEffects.IncCha = function(target, opts) {
 TF.ItemEffects.DecStr = function(target, opts) {
 	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
-		if(Math.random() < odds &&
-	target.strength.DecreaseStat(opts.ideal, opts.max)) {
+	if(Math.random() < odds &&
+		target.strength.DecreaseStat(opts.ideal, opts.max)) {
 		Text.Add("[name] [is] suddenly a bit weaker!", parse);
 		Text.NL();
 	}
@@ -732,8 +843,8 @@ TF.ItemEffects.DecStr = function(target, opts) {
 TF.ItemEffects.DecSta = function(target, opts) {
 	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
-		if(Math.random() < odds &&
-	target.stamina.DecreaseStat(opts.ideal, opts.max)) {
+	if(Math.random() < odds &&
+		target.stamina.DecreaseStat(opts.ideal, opts.max)) {
 		Text.Add("[name] [is] suddenly a bit less tough!", parse);
 		Text.NL();
 	}
@@ -744,8 +855,8 @@ TF.ItemEffects.DecSta = function(target, opts) {
 TF.ItemEffects.DecDex = function(target, opts) {
 	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
-		if(Math.random() < odds &&
-	target.dexterity.DecreaseStat(opts.ideal, opts.max)) {
+	if(Math.random() < odds &&
+		target.dexterity.DecreaseStat(opts.ideal, opts.max)) {
 		Text.Add("[name] [is] suddenly a bit clumsier!", parse);
 		Text.NL();
 	}
@@ -756,8 +867,8 @@ TF.ItemEffects.DecDex = function(target, opts) {
 TF.ItemEffects.DecInt = function(target, opts) {
 	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
-		if(Math.random() < odds &&
-	target.intelligence.DecreaseStat(opts.ideal, opts.max)) {
+	if(Math.random() < odds &&
+		target.intelligence.DecreaseStat(opts.ideal, opts.max)) {
 		Text.Add("[name] [is] suddenly a bit dumber!", parse);
 		Text.NL();
 	}
@@ -768,8 +879,8 @@ TF.ItemEffects.DecInt = function(target, opts) {
 TF.ItemEffects.DecSpi = function(target, opts) {
 	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
-		if(Math.random() < odds &&
-	target.spirit.DecreaseStat(opts.ideal, opts.max)) {
+	if(Math.random() < odds &&
+		target.spirit.DecreaseStat(opts.ideal, opts.max)) {
 		Text.Add("[name] [is] suddenly a bit less stoic!", parse);
 		Text.NL();
 	}
@@ -780,8 +891,8 @@ TF.ItemEffects.DecSpi = function(target, opts) {
 TF.ItemEffects.DecLib = function(target, opts) {
 	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
-		if(Math.random() < odds &&
-	target.libido.DecreaseStat(opts.ideal, opts.max)) {
+	if(Math.random() < odds &&
+		target.libido.DecreaseStat(opts.ideal, opts.max)) {
 		Text.Add("[name] [is] suddenly a bit more composed!", parse);
 		Text.NL();
 	}
@@ -792,8 +903,8 @@ TF.ItemEffects.DecLib = function(target, opts) {
 TF.ItemEffects.DecCha = function(target, opts) {
 	var odds  = opts.odds || 1;
 	var parse = { name: target.NameDesc(), is: target.is() };
-		if(Math.random() < odds &&
-	target.charisma.DecreaseStat(opts.ideal, opts.max)) {
+	if(Math.random() < odds &&
+		target.charisma.DecreaseStat(opts.ideal, opts.max)) {
 		Text.Add("[name] [is] suddenly a bit less charming!", parse);
 		Text.NL();
 	}
