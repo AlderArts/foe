@@ -676,12 +676,19 @@ Body.prototype.TongueTipDesc = function() {
 	return "tip";
 }
 
+HipSize = {
+	Thin     :  2,
+	Medium   :  5,
+	Wide     : 10,
+	VeryWide : 15
+};
+
 // TODO
 Body.prototype.HipsDesc = function(plural) {
 	var size = this.torso.hipSize.Get();
 	
 	var adjs = [];
-	if(size < 2) {
+	if(size < HipSize.Thin) {
 		adjs.push("bony");
 		adjs.push("thin");
 		adjs.push("slender");
@@ -689,19 +696,19 @@ Body.prototype.HipsDesc = function(plural) {
 		if(this.muscleTone.Get() > 0.2)
 			adjs.push("tight");
 	}
-	if(size >= 2 && size < 5) {
+	if(size >= HipSize.Thin && size < HipSize.Medium) {
 		adjs.push("well-proportioned");
 		if(this.femininity.Get() > 0)
 			adjs.push("girly");
 		adjs.push("unnoticable");
 	}
-	if(size >= 5 && size < 10) {
+	if(size >= HipSize.Medium && size < HipSize.Wide) {
 		adjs.push("noticeable");
 		adjs.push("pleasant");
 		adjs.push("waspish");
 		adjs.push("flared");
 	}
-	if(size >= 8 && size < 17) {
+	if(size >= HipSize.Wide-2 && size < HipSize.VeryWide+2) {
 		if(this.femininity.Get() > 0) {
 			adjs.push("womanly");
 			adjs.push("voluptuous");
@@ -709,7 +716,7 @@ Body.prototype.HipsDesc = function(plural) {
 		adjs.push("wide");
 		adjs.push("thick");
 	}
-	if(size >= 15) {
+	if(size >= HipSize.VeryWide) {
 		adjs.push("absurdly wide");
 		adjs.push("cow-like");
 		if(this.femininity.Get() > 0)
