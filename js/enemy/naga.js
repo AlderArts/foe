@@ -71,9 +71,18 @@ Scenes.Naga = {};
 Naga.prototype.DropTable = function() {
 	var drops = [];
 	if(Math.random() < 0.05) drops.push({ it: Items.Nagazm });
+	if(Math.random() < 0.05) drops.push({ it: Items.Lacertium });
 	if(Math.random() < 0.5)  drops.push({ it: Items.SnakeOil });
 	if(Math.random() < 0.5)  drops.push({ it: Items.SnakeFang });
 	if(Math.random() < 0.5)  drops.push({ it: Items.SnakeSkin });
+	
+	if(Math.random() < 0.1)  drops.push({ it: Items.LizardEgg });
+	if(Math.random() < 0.1)  drops.push({ it: Items.LizardScale });
+	if(Math.random() < 0.1)  drops.push({ it: Items.SpringWater });
+	if(Math.random() < 0.1)  drops.push({ it: Items.Trinket });
+	
+	if(Math.random() < 0.01) drops.push({ it: Items.BlackGem });
+	if(Math.random() < 0.01) drops.push({ it: Items.Scorpius });
 	return drops;
 }
 

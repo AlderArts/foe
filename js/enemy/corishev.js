@@ -53,6 +53,12 @@ Corishev.prototype.DropTable = function() {
 	drops.push({ it: Items.Weapons.GolWhip });
 	drops.push({ it: Items.Combat.LustDart });
 	drops.push({ it: Items.Accessories.SimpleCuffs });
+	
+	if(Math.random() < 0.1)  drops.push({ it: Items.Homos });
+	if(Math.random() < 0.1)  drops.push({ it: Items.Letter });
+	if(Math.random() < 0.1)  drops.push({ it: Items.SpringWater });
+	if(Math.random() < 0.1)  drops.push({ it: Items.Hummus });
+	
 	return drops;
 }
 

@@ -91,6 +91,13 @@ Lizard.prototype.DropTable = function() {
 	if(Math.random() < 0.5)  drops.push({ it: Items.SnakeOil });
 	if(Math.random() < 0.5)  drops.push({ it: Items.LizardScale });
 	if(Math.random() < 0.5)  drops.push({ it: Items.LizardEgg });
+	
+	if(Math.random() < 0.1)  drops.push({ it: Items.SnakeFang });
+	if(Math.random() < 0.1)  drops.push({ it: Items.SnakeSkin });
+	if(Math.random() < 0.1)  drops.push({ it: Items.SpringWater });
+	
+	if(Math.random() < 0.01) drops.push({ it: Items.Scorpius });
+	if(Math.random() < 0.01) drops.push({ it: Items.Nagazm });
 	return drops;
 }
 

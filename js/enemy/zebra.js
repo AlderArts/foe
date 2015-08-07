@@ -135,6 +135,24 @@ ZebraBrave.prototype.DropTable = function() {
 	if(Math.random() < 0.5)  drops.push({ it: Items.HorseCum });
 	if(Math.random() < 0.5)  drops.push({ it: Items.HorseHair });
 	if(Math.random() < 0.5)  drops.push({ it: Items.HorseShoe });
+	
+	if(Math.random() < 0.3)  drops.push({ it: Items.FreshGrass });
+	if(Math.random() < 0.3)  drops.push({ it: Items.SpringWater });
+	if(Math.random() < 0.1)  drops.push({ it: Items.Foxglove });
+	if(Math.random() < 0.1)  drops.push({ it: Items.FlowerPetal });
+	if(Math.random() < 0.1)  drops.push({ it: Items.FoxBerries });
+	if(Math.random() < 0.1)  drops.push({ it: Items.TreeBark });
+	if(Math.random() < 0.1)  drops.push({ it: Items.AntlerChip });
+	if(Math.random() < 0.1)  drops.push({ it: Items.SVenom });
+	if(Math.random() < 0.1)  drops.push({ it: Items.MDust });
+	
+	if(Math.random() < 0.05) drops.push({ it: Items.Wolfsbane });
+	if(Math.random() < 0.05) drops.push({ it: Items.Ramshorn });
+	
+	if(Math.random() < 0.01) drops.push({ it: Items.BlackGem });
+	if(Math.random() < 0.01) drops.push({ it: Items.CorruptPlant });
+	if(Math.random() < 0.01) drops.push({ it: Items.CorruptSeed });
+	if(Math.random() < 0.01) drops.push({ it: Items.DemonSeed });
 	return drops;
 }
 

@@ -67,6 +67,17 @@ Scorpion.prototype.DropTable = function() {
 	if(Math.random() < 0.5)  drops.push({ it: Items.Stinger });
 	if(Math.random() < 0.5)  drops.push({ it: Items.SVenom });
 	if(Math.random() < 0.5)  drops.push({ it: Items.SClaw });
+	//Apparently a bone collector...
+	if(Math.random() < 0.1)  drops.push({ it: Items.DogBone });
+	if(Math.random() < 0.1)  drops.push({ it: Items.WolfFang });
+	if(Math.random() < 0.1)  drops.push({ it: Items.SnakeFang });
+	if(Math.random() < 0.1)  drops.push({ it: Items.AntlerChip });
+	if(Math.random() < 0.1)  drops.push({ it: Items.CatClaw });
+	if(Math.random() < 0.1)  drops.push({ it: Items.LizardScale });
+	if(Math.random() < 0.1)  drops.push({ it: Items.LizardEgg });
+	
+	if(Math.random() < 0.01) drops.push({ it: Items.Lacertium });
+	if(Math.random() < 0.01) drops.push({ it: Items.Nagazm });
 	return drops;
 }
 

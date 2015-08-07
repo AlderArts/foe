@@ -58,6 +58,16 @@ FeralWolf.prototype.DropTable = function() {
 	if(Math.random() < 0.5)  drops.push({ it: Items.WolfFang });
 	if(Math.random() < 0.5)  drops.push({ it: Items.Wolfsbane });
 	if(Math.random() < 0.5)  drops.push({ it: Items.CanisRoot });
+	
+	if(Math.random() < 0.1)  drops.push({ it: Items.DogBiscuit });
+	if(Math.random() < 0.1)  drops.push({ it: Items.DogBone });
+	if(Math.random() < 0.1)  drops.push({ it: Items.FoxBerries });
+	if(Math.random() < 0.1)  drops.push({ it: Items.Foxglove });
+	
+	if(Math.random() < 0.01) drops.push({ it: Items.Canis });
+	if(Math.random() < 0.01) drops.push({ it: Items.Vulpinix });
+	if(Math.random() < 0.01) drops.push({ it: Items.Testos });
+	if(Math.random() < 0.01) drops.push({ it: Items.Virilium });
 	return drops;
 }
 

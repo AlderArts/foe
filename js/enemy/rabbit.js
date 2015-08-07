@@ -76,6 +76,20 @@ Lagomorph.prototype.DropTable = function() {
 	if(Math.random() < 0.5)  drops.push({ it: Items.RabbitFoot });
 	if(Math.random() < 0.5)  drops.push({ it: Items.CarrotJuice });
 	if(Math.random() < 0.5)  drops.push({ it: Items.Lettuce });
+	
+	
+	if(Math.random() < 0.1)  drops.push({ it: Items.Whiskers });
+	if(Math.random() < 0.1)  drops.push({ it: Items.HorseHair });
+	if(Math.random() < 0.1)  drops.push({ it: Items.HorseCum });
+	if(Math.random() < 0.1)  drops.push({ it: Items.FruitSeed });
+	if(Math.random() < 0.1)  drops.push({ it: Items.FreshGrass });
+	
+	if(Math.random() < 0.01) drops.push({ it: Items.CorruptSeed });
+	if(Math.random() < 0.01) drops.push({ it: Items.DemonSeed });
+	
+	if(Math.random() < 0.01) drops.push({ it: Items.Felinix });
+	if(Math.random() < 0.01) drops.push({ it: Items.Equinium });
+	if(Math.random() < 0.01) drops.push({ it: Items.Lacertium });
 	return drops;
 }
 

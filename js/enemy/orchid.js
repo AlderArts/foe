@@ -67,6 +67,13 @@ OrchidBoss.prototype.DropTable = function() {
 	drops.push({ it: Items.Armor.VinePanties });
 	drops.push({ it: Items.Armor.VineBra });
 	drops.push({ it: Items.Estros });
+	
+	if(Math.random() < 0.3)  drops.push({ it: Items.Foxglove });
+	if(Math.random() < 0.3)  drops.push({ it: Items.Wolfsbane });
+	if(Math.random() < 0.5)  drops.push({ it: Items.FlowerPetal });
+	if(Math.random() < 0.2)  drops.push({ it: Items.TreeBark });
+	if(Math.random() < 0.2)  drops.push({ it: Items.SpringWater });
+	
 	return drops;
 }
 

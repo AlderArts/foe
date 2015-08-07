@@ -87,6 +87,18 @@ Equine.prototype.DropTable = function() {
 	if(Math.random() < 0.5)  drops.push({ it: Items.HorseHair });
 	if(Math.random() < 0.5)  drops.push({ it: Items.HorseShoe });
 	if(Math.random() < 0.5)  drops.push({ it: Items.HorseCum });
+	
+	if(Math.random() < 0.3)  drops.push({ it: Items.FreshGrass });
+	if(Math.random() < 0.2)  drops.push({ it: Items.Foxglove });
+	if(Math.random() < 0.2)  drops.push({ it: Items.SpringWater });
+	if(Math.random() < 0.1)  drops.push({ it: Items.FlowerPetal });
+	if(Math.random() < 0.1)  drops.push({ it: Items.Feather });
+	
+	if(Math.random() < 0.01) drops.push({ it: Items.Bovia });
+	if(Math.random() < 0.01) drops.push({ it: Items.Ovis });
+	if(Math.random() < 0.01) drops.push({ it: Items.Virilium });
+	if(Math.random() < 0.01) drops.push({ it: Items.Fertilium });
+	
 	return drops;
 }
 

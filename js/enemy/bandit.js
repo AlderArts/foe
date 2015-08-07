@@ -175,6 +175,21 @@ Bandit.prototype.DropTable = function() {
 	if(Math.random() < 0.5)  drops.push({ it: Items.Hummus });
 	if(Math.random() < 0.5)  drops.push({ it: Items.SpringWater });
 	if(Math.random() < 0.5)  drops.push({ it: Items.Letter });
+	
+	if(Math.random() < 0.1)  drops.push({ it: Items.GoatMilk });
+	if(Math.random() < 0.1)  drops.push({ it: Items.CowMilk });
+	if(Math.random() < 0.1)  drops.push({ it: Items.SheepMilk });
+	
+	if(Math.random() < 0.05) drops.push({ it: Items.RabbitFoot });
+	if(Math.random() < 0.05) drops.push({ it: Items.Lettuce });
+	if(Math.random() < 0.05) drops.push({ it: Items.HorseShoe });
+	if(Math.random() < 0.05) drops.push({ it: Items.CowBell });
+	if(Math.random() < 0.05) drops.push({ it: Items.SnakeOil });
+	if(Math.random() < 0.05) drops.push({ it: Items.FreshGrass });
+	if(Math.random() < 0.05) drops.push({ it: Items.DogBiscuit });
+	if(Math.random() < 0.05) drops.push({ it: Items.DogBone });
+	if(Math.random() < 0.05) drops.push({ it: Items.Trinket });
+	
 	return drops;
 }
 

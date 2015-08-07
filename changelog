@@ -14,6 +14,7 @@ Version 0.4i
  - Adjusting hip size
  - More stat adjustments
 * Added some minor scenes for picking up ingredients.
+* Most TF items and ingredients now have more than one source; several mobs has had new items added to their drop tables (low odds).
 
 --------------------------------------------
              PREVIOUS VERSIONS

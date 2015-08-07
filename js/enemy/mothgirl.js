@@ -74,6 +74,20 @@ Mothgirl.prototype.DropTable = function() {
 	if(Math.random() < 0.5)  drops.push({ it: Items.MDust });
 	if(Math.random() < 0.5)  drops.push({ it: Items.FruitSeed });
 	if(Math.random() < 0.5)  drops.push({ it: Items.MFluff });
+	
+	if(Math.random() < 0.1)  drops.push({ it: Items.Hummus });
+	if(Math.random() < 0.1)  drops.push({ it: Items.SpringWater });
+	if(Math.random() < 0.1)  drops.push({ it: Items.Letter });
+	if(Math.random() < 0.1)  drops.push({ it: Items.FreshGrass });
+	
+	if(Math.random() < 0.05) drops.push({ it: Items.FoxBerries });
+	if(Math.random() < 0.05) drops.push({ it: Items.Foxglove });
+	if(Math.random() < 0.05) drops.push({ it: Items.Wolfsbane });
+	if(Math.random() < 0.05) drops.push({ it: Items.Trinket });
+	if(Math.random() < 0.05) drops.push({ it: Items.FlowerPetal });
+	if(Math.random() < 0.05) drops.push({ it: Items.Lettuce });
+	
+	if(Math.random() < 0.01) drops.push({ it: Items.Avia });
 	return drops;
 }
 

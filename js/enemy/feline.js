@@ -12,6 +12,19 @@ Feline.DropTable = function() {
 	if(Math.random() < 0.5)  drops.push({ it: Items.Whiskers });
 	if(Math.random() < 0.5)  drops.push({ it: Items.HairBall });
 	if(Math.random() < 0.5)  drops.push({ it: Items.CatClaw });
+	
+	if(Math.random() < 0.1)  drops.push({ it: Items.GoatMilk });
+	if(Math.random() < 0.1)  drops.push({ it: Items.SheepMilk });
+	if(Math.random() < 0.1)  drops.push({ it: Items.CowMilk });
+	if(Math.random() < 0.05) drops.push({ it: Items.HorseCum });
+	if(Math.random() < 0.05) drops.push({ it: Items.LizardEgg });
+	if(Math.random() < 0.05) drops.push({ it: Items.Trinket });
+	if(Math.random() < 0.05) drops.push({ it: Items.MFluff });
+	
+	if(Math.random() < 0.01) drops.push({ it: Items.Avia });
+	if(Math.random() < 0.01) drops.push({ it: Items.Bovia });
+	if(Math.random() < 0.01) drops.push({ it: Items.Tigris });
+	
 	return drops;
 }
 
