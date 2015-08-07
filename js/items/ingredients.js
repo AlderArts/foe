@@ -108,6 +108,10 @@ Items.GoatMilk.Use = function(target) {
 	return {consume: true};
 }
 
+Items.GoatFleece = new Item("goat2", "Goat fleece", ItemType.Ingredient);
+Items.GoatFleece.price = 1;
+Items.GoatFleece.sDesc = function() { return "goat fleece"; }
+Items.GoatFleece.Long = function() { return "Fleece from a goat, tough and stringy."; }
 
 
 Items.SheepMilk = new Item("ovis1", "S.Milk", ItemType.Ingredient);
@@ -332,4 +336,26 @@ Items.SClaw.price = 2;
 Items.SClaw.sDesc = function() { return "black claw"; }
 Items.SClaw.Short = function() { return "A black claw"; }
 Items.SClaw.Long = function() { return "A black, menacing-looking scorpion claw."; }
+
+
+
+Items.TreeBark = new Item("deer1", "Tree bark", ItemType.Ingredient);
+Items.TreeBark.price = 1;
+Items.TreeBark.sDesc = function() { return "tree bark"; }
+Items.TreeBark.Short = function() { return "Some tree bark"; }
+Items.TreeBark.Long = function() { return "A chip of tough tree bark."; }
+
+Items.AntlerChip = new Item("deer2", "Antler chip", ItemType.Ingredient);
+Items.AntlerChip.price = 1;
+Items.AntlerChip.sDesc = function() { return "antler chip"; }
+Items.AntlerChip.Short = function() { return "An antler chip"; }
+Items.AntlerChip.Long = function() { return "A small chip of an antler, probably from a deer."; }
+
+
+
+Items.FlowerPetal = new Item("plant1", "Flower petal", ItemType.Ingredient);
+Items.FlowerPetal.price = 1;
+Items.FlowerPetal.sDesc = function() { return "flower petal"; }
+Items.FlowerPetal.Short = function() { return "A flower petal"; }
+Items.FlowerPetal.Long = function() { return "A petal from a beautiful flower."; }
 
