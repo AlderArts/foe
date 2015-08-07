@@ -597,7 +597,7 @@ TF.ItemEffects.SetIdealBreastSize = function(target, opts) {
 	var odds  = opts.odds || 1;
 	var multi = opts.multi;
 	var breasts = target.AllBreastRows();
-	for(var i = 0; i < cocks.length; i++) {
+	for(var i = 0; i < breasts.length; i++) {
 		if(Math.random() < odds) {
 			var diff = breasts[i].size.IdealStat(opts.ideal, opts.max);
 			if(diff > 0) {
