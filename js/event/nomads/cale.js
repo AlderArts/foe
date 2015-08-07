@@ -74,6 +74,10 @@ function Cale(storage) {
 	this.shopItems.push(Items.Stinger);
 	this.shopItems.push(Items.SVenom);
 	this.shopItems.push(Items.SClaw);
+	this.shopItems.push(Items.TreeBark);
+	this.shopItems.push(Items.AntlerChip);
+	this.shopItems.push(Items.GoatFleece);
+	this.shopItems.push(Items.FlowerPetal);
 	//TODO: More item ingredientss
 	
 	this.SetLevelBonus();
