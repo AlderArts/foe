@@ -109,6 +109,9 @@ world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	return Scenes.Roaming.FindSomeCoins;
 }, 0.5, function() { return true; });
 
+world.loc.Plains.Crossroads.enc.AddEnc(function() {
+	return Scenes.Roaming.FlowerPetal;
+}, 1.0, function() { return world.time.season != Season.Winter; });
 
 world.loc.Plains.Crossroads.enc.AddEnc(function() {
 	return Scenes.Roaming.KingdomPatrol;

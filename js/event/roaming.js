@@ -1,6 +1,23 @@
 
 Scenes.Roaming = {};
 
+Scenes.Roaming.FlowerPetal = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("You come across a stand of beautiful flowers, hidden in the grass. The color is vibrant and enticing… perhaps they have some alchemical properties?", parse);
+	Text.NL();
+	Text.Add("<b>You picked up some colorful flower petals.</b>", parse);
+	Text.Flush();
+	
+	party.inventory.AddItem(Items.FlowerPetal);
+	
+	world.TimeStep({minute: 15});
+	Gui.NextPrompt();
+};
+
 Scenes.Roaming.FindSomeCoins = function() {
 	var coin = Math.floor(5 + Math.random() * 20);
 	

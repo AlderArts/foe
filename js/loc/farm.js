@@ -108,6 +108,11 @@ world.loc.Farm.Fields.enc.AddEnc(function() {
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return world.time.season != Season.Winter; });
+
+world.loc.Farm.Fields.enc.AddEnc(function() {
+	return Scenes.Roaming.FlowerPetal;
+}, 1.0, function() { return world.time.season != Season.Winter; });
+
 world.loc.Farm.Fields.enc.AddEnc(function() {
 	return function() {
 		Text.Clear();

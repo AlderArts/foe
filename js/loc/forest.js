@@ -89,6 +89,44 @@ world.loc.Forest.Outskirts.enc.AddEnc(function() {
 		Gui.NextPrompt();
 	};
 }, 1.0, function() { return true; });
+world.loc.Forest.Outskirts.enc.AddEnc(function() {
+	return function() {
+		var parse = {
+			
+		};
+		Text.Clear();
+		Text.Add("Something catches your eye as you plod along through the undergrowth: a piece of particularly tough tree bark. It doesn’t seem to belong to any of the trees around you; someone or something must have brought it here. You give it a rap with your knuckle. The thing seems pretty resilient… maybe it has some alchemical properties?", parse);
+		Text.NL();
+		Text.Add("<b>Picked up some tree bark.</b>", parse);
+		Text.Flush();
+		
+		party.inventory.AddItem(Items.TreeBark);
+		
+		world.TimeStep({minute: 15});
+		Gui.NextPrompt();
+	};
+}, 1.0, function() { return true; });
+world.loc.Forest.Outskirts.enc.AddEnc(function() {
+	return function() {
+		var parse = {
+			
+		};
+		Text.Clear();
+		Text.Add("As you walk through the forest, you find a small broken piece of a deer antler, perhaps left there in a clash between two battling studs. Well, they won’t be needing it anymore, and perhaps you can find some use for it...", parse);
+		Text.NL();
+		Text.Add("<b>Picked up part of a deer antler.</b>", parse);
+		Text.Flush();
+		
+		party.inventory.AddItem(Items.AntlerChip);
+		
+		world.TimeStep({minute: 15});
+		Gui.NextPrompt();
+	};
+}, 1.0, function() { return true; });
+world.loc.Forest.Outskirts.enc.AddEnc(function() {
+	return Scenes.Roaming.FlowerPetal;
+}, 1.0, function() { return world.time.season != Season.Winter; });
+
 
 // Temp mothgirl enemy
 world.loc.Forest.Outskirts.AddEncounter({

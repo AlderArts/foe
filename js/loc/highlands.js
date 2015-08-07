@@ -63,6 +63,10 @@ world.loc.Highlands.Hills.enc.AddEnc(function() {
 	return Scenes.Momo.MomoEnc;
 }, 1.0, function() { return momo.Wandering(); });
 
+world.loc.Highlands.Hills.enc.AddEnc(function() {
+	return Scenes.Roaming.FlowerPetal;
+}, 1.0, function() { return world.time.season != Season.Winter; });
+
 world.loc.Highlands.Hills.events.push(new Link(
 	"Ginseng", function() {
 		return asche.flags["Tasks"] == Asche.Tasks.Ginseng_Started;

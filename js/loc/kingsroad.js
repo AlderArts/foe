@@ -57,6 +57,9 @@ world.loc.KingsRoad.Road.enc.AddEnc(function() {
 	return Scenes.Roaming.Bandits;
 }, 5.0, function() { return rigard.bandits; });
 
+world.loc.KingsRoad.Road.enc.AddEnc(function() {
+	return Scenes.Roaming.FlowerPetal;
+}, 1.0, function() { return world.time.season != Season.Winter; });
 
 world.loc.KingsRoad.Road.AddEncounter({
 	nameStr : "Wildcat",
