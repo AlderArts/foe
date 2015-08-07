@@ -61,7 +61,7 @@ SplashScreen = function() {
 	Text.Add(Text.InsertImage("data/avatar_gwendy.png")); // TEMP
 	Text.Add("<i>Game developed by <a href=\"http://www.furaffinity.net/user/aldergames/\">Alder</a></i>");
 	Text.NL();
-	Text.Add("Editors: MrKrampus, Del, Johnathan Roberts, Ryous. Thanks a bunch for your hard work!")
+	Text.Add("Editors: MrKrampus, Del, Johnathan Roberts, Ryous, CalmKhaos. Thanks a bunch for your hard work!")
 	Text.NL();
 	Text.Add("Thanks to <a href=\"http://www.fenoxo.com/\">Fenoxo</a> for hosting this and for the inspiration. This game would never have been created if not for CoC!");
 	Text.NL();
