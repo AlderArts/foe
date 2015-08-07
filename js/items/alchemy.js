@@ -40,6 +40,7 @@ Items.Leporine.PushEffect(TF.ItemEffects.IncDex, {odds: 0.4, ideal: 30, max: 1})
 Items.Leporine.PushEffect(TF.ItemEffects.IncFem, {odds: 0.1, ideal: .5, max: .1});
 Items.Leporine.PushEffect(TF.ItemEffects.DecTone, {odds: 0.2, ideal: 0, max: .1 });
 Items.Leporine.PushEffect(TF.ItemEffects.DecHips, {odds: 0.2, ideal: HipSize.Thin, max: 1});
+Items.Leporine.PushEffect(TF.ItemEffects.DecBreastSize, {odds: 0.4, ideal: 6, max: 2 });
 
 
 Items.Felinix = new TFItem("felin0", "Felinix");
@@ -59,6 +60,7 @@ Items.Felinix.PushEffect(TF.ItemEffects.DecInt, {odds: 0.2, ideal: 8, max: 1});
 Items.Felinix.PushEffect(TF.ItemEffects.IdealFem, {odds: 0.2, rangeMin: -.2, rangeMax: .2, max: .1});
 Items.Felinix.PushEffect(TF.ItemEffects.DecTone, {odds: 0.2, ideal: 0.1, max: .1 });
 Items.Felinix.PushEffect(TF.ItemEffects.DecHips, {odds: 0.2, ideal: HipSize.Thin, max: 1});
+Items.Felinix.PushEffect(TF.ItemEffects.DecBreastSize, {odds: 0.4, ideal: 6, max: 2 });
 
 
 Items.Lacertium = new TFItem("rept0", "Lacertium");
@@ -107,6 +109,7 @@ Items.Ovis.PushEffect(TF.ItemEffects.DecStr, {odds: 0.2, ideal: 15, max: 1});
 Items.Ovis.PushEffect(TF.ItemEffects.DecInt, {odds: 0.2, ideal:  5, max: 1});
 Items.Ovis.PushEffect(TF.ItemEffects.IdealFem, {odds: 0.2, rangeMin: -.2, rangeMax: .2, max: .1});
 Items.Ovis.PushEffect(TF.ItemEffects.IncHips, {odds: 0.2, ideal: HipSize.Wide, max: 1});
+Items.Ovis.PushEffect(TF.ItemEffects.IncBreastSize, {odds: 0.4, ideal: 16, max: 2, female: true });
 
 
 Items.Bovia = new TFItem("bov0", "Bovia");
@@ -123,16 +126,6 @@ Items.Bovia.PushEffect(TF.ItemEffects.SetHorn, {odds: 0.4, race: Race.Cow, color
 Items.Bovia.PushEffect(function(target) {
 	var parse = { Poss: target.Possessive() };
 	if(target.FirstVag() || (target.BiggestBreasts() && target.BiggestBreasts().size.Get() > 5)) {
-		var breasts = target.AllBreastRows();
-		for(var i = 0; i < breasts.length; i++) {
-			var diff = breasts[i].size.IncreaseStat(40, Math.random() * 5);
-			if(diff) {
-				Text.Add("[Poss] breasts grow larger by " + diff + "cm.", parse);
-				Text.NL();
-				break;
-			}
-		}
-		
 		if(Math.random() < 0.5) {
 			var diff = target.lactHandler.lactationRate.IdealStat(10, 1);
 			if(diff) {
@@ -160,6 +153,7 @@ Items.Bovia.PushEffect(TF.ItemEffects.DecDex, {odds: 0.1, ideal: 15, max: 1});
 Items.Bovia.PushEffect(TF.ItemEffects.IncFem, {odds: 0.3, ideal: 1, max: .1});
 Items.Bovia.PushEffect(TF.ItemEffects.IdealTone, {odds: 0.2, rangeMin: 0.1, rangeMax: 0.3, max: .1 });
 Items.Bovia.PushEffect(TF.ItemEffects.IncHips, {odds: 0.3, ideal: HipSize.VeryWide, max: 2});
+Items.Bovia.PushEffect(TF.ItemEffects.IncBreastSize, {odds: 1, ideal: 40, max: 5, female: true });
 
 
 Items.Canis = new TFItem("dog0", "Canis");
@@ -229,6 +223,7 @@ Items.Vulpinix.PushEffect(TF.ItemEffects.DecStr, {odds: 0.2, ideal: 10, max: 1})
 Items.Vulpinix.PushEffect(TF.ItemEffects.DecSpi, {odds: 0.1, ideal: 15, max: 1});
 Items.Vulpinix.PushEffect(TF.ItemEffects.IdealTone, {odds: 0.2, rangeMin: 0.1, rangeMax: 0.4, max: .1 });
 Items.Vulpinix.PushEffect(TF.ItemEffects.DecHips, {odds: 0.2, ideal: HipSize.Thin, max: 2});
+Items.Vulpinix.PushEffect(TF.ItemEffects.DecBreastSize, {odds: 0.4, ideal: 6, max: 2 });
 
 
 Items.Infernum = new TFItem("demon0", "Infernum");
@@ -271,6 +266,7 @@ Items.Avia.PushEffect(TF.ItemEffects.DecCha, {odds: 0.1, ideal: 15, max: 1});
 Items.Avia.PushEffect(TF.ItemEffects.IncDex, {odds: 0.3, ideal: 35, max: 1});
 Items.Avia.PushEffect(TF.ItemEffects.IncInt, {odds: 0.4, ideal: 40, max: 1});
 Items.Avia.PushEffect(TF.ItemEffects.IncSpi, {odds: 0.2, ideal: 30, max: 1});
+Items.Avia.PushEffect(TF.ItemEffects.DecBreastSize, {odds: 0.4, ideal: 2, max: 2 });
 
 
 Items.Lepida = new TFItem("moth0", "Lepida");

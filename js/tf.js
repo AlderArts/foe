@@ -590,28 +590,69 @@ TF.ItemEffects.RemBalls = function(target, opts) {
 	return changed;
 }
 
+// odds, ideal, max, female
+TF.ItemEffects.IncBreastSize = function(target, opts) {
+	var parse = { Poss: target.Possessive() };
+	
+	var odds  = opts.odds || 1;
+	var multi = opts.multi;
+	if(opts.female) {
+		if(!target.FirstVag()) return;
+	}
+	_.each(target.AllBreastRows(), function(breasts) {
+		if(Math.random() < odds) {
+			var diff = breasts.size.IncreaseStat(opts.ideal, opts.max);
+			if(diff) {
+				Text.Add("[Poss] breasts grows bigger!", parse);
+				Text.NL();
+				if(!multi) return false;
+			}
+		}
+	});
+	Text.Flush();
+}
 // odds, ideal, max
+TF.ItemEffects.DecBreastSize = function(target, opts) {
+	var parse = { Poss: target.Possessive() };
+	
+	var odds  = opts.odds || 1;
+	var multi = opts.multi;
+	_.each(target.AllBreastRows(), function(breasts) {
+		if(Math.random() < odds) {
+			var diff = breasts.size.DecreaseStat(opts.ideal, opts.max);
+			if(diff) {
+				Text.Add("[Poss] breasts become smaller!", parse);
+				Text.NL();
+				if(!multi) return false;
+			}
+		}
+	});
+	Text.Flush();
+}
+// odds, ideal, max, female
 TF.ItemEffects.SetIdealBreastSize = function(target, opts) {
 	var parse = { Poss: target.Possessive() };
 	
 	var odds  = opts.odds || 1;
 	var multi = opts.multi;
-	var breasts = target.AllBreastRows();
-	for(var i = 0; i < breasts.length; i++) {
+	if(opts.female) {
+		if(!target.FirstVag()) return;
+	}
+	_.each(target.AllBreastRows(), function(breasts) {
 		if(Math.random() < odds) {
-			var diff = breasts[i].size.IdealStat(opts.ideal, opts.max);
+			var diff = breasts.size.IdealStat(opts.ideal, opts.max);
 			if(diff > 0) {
 				Text.Add("[Poss] breasts grows bigger!", parse);
 				Text.NL();
-				if(!multi) break;
+				if(!multi) return false;
 			}
 			else if(diff < 0) {
 				Text.Add("[Poss] breasts become smaller!", parse);
 				Text.NL();
-				if(!multi) break;
+				if(!multi) return false;
 			}
 		}
-	}
+	});
 	Text.Flush();
 }
 
