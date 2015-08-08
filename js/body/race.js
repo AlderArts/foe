@@ -165,7 +165,7 @@ RaceScore.prototype.Sorted = function() {
 	return sorted;
 }
 
-//TODO Current max 40
+//TODO Current max 41
 
 //{a:"", noun:""}
 Race.Human = new RaceDesc("human", 0, {
@@ -284,6 +284,12 @@ Race.Goat = new RaceDesc("goat", 13, {
 	descMale: [{a:"a", noun:"buck"}],
 	descFemale: [{a:"a", noun:"doe"}],
 	quantify: [{a:"a", noun:"caprine"}]
+});
+Race.Deer = new RaceDesc("deer", 41, {
+	desc: [{a:"a", noun:"deer"}, {a:"a", noun:"cervine"}, {a:"a", noun:"fawn"}],
+	descMale: [{a:"a", noun:"stag"}, {a:"a", noun:"buck"}, {a:"a", noun:"hart"}],
+	descFemale: [{a:"a", noun:"doe"}, {a:"a", noun:"hind"}],
+	quantify: [{a:"a", noun:"cervine"}]
 });
 Race.Satyr = new RaceDesc("satyr", 11, {
 	desc: [{a:"a", noun:"satyr"}, {a:"a", noun:"faun"}],
