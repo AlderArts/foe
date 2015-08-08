@@ -702,7 +702,7 @@ Body.prototype.HipsDesc = function(plural) {
 		adjs.push("well-proportioned");
 		if(this.femininity.Get() > 0)
 			adjs.push("girly");
-		adjs.push("unnoticable");
+		adjs.push("unnoticeable");
 	}
 	if(size >= HipSize.Medium && size < HipSize.Wide) {
 		adjs.push("noticeable");

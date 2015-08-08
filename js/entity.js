@@ -2640,7 +2640,7 @@ Entity.prototype.PrintDescription = function() {
 	
 	// TODO: Arms/Legs
 	if(this.body.legs.count == 2) {
-		Text.Add("[name] [has] arms. You have [legs], ending in [feet].", parse);
+		Text.Add("[name] [has] arms. [name] [has] [legs], ending in [feet].", parse);
 	}
 	else if(this.body.legs.count > 2) {
 		parse["num"] = Text.NumToText(this.body.legs.count);
