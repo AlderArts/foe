@@ -703,15 +703,50 @@ TF.ItemEffects.SetIdealBreastSize = function(target, opts) {
 }
 
 // odds, ideal, max
+TF.ItemEffects.IncCockLen = function(target, opts) {
+	var parse = { Poss: target.Possessive() };
+	
+	var odds  = opts.odds || 1;
+	var multi = opts.multi;
+	_.each(target.AllCocks(), function(cock) {
+		if(Math.random() < odds) {
+			var diff = cock.length.IncreaseStat(opts.ideal, opts.max);
+			if(diff) {
+				Text.Add("[Poss] cock grows longer!", parse);
+				Text.NL();
+				if(!multi) break;
+			}
+		}
+	});
+	Text.Flush();
+}
+// odds, ideal, max
+TF.ItemEffects.DecCockLen = function(target, opts) {
+	var parse = { Poss: target.Possessive() };
+	
+	var odds  = opts.odds || 1;
+	var multi = opts.multi;
+	_.each(target.AllCocks(), function(cock) {
+		if(Math.random() < odds) {
+			var diff = cock.length.DecreaseStat(opts.ideal, opts.max);
+			if(diff) {
+				Text.Add("[Poss] cock becomes shorter!", parse);
+				Text.NL();
+				if(!multi) break;
+			}
+		}
+	});
+	Text.Flush();
+}
+// odds, ideal, max
 TF.ItemEffects.SetIdealCockLen = function(target, opts) {
 	var parse = { Poss: target.Possessive() };
 	
 	var odds  = opts.odds || 1;
 	var multi = opts.multi;
-	var cocks = target.AllCocks();
-	for(var i = 0; i < cocks.length; i++) {
+	_.each(target.AllCocks(), function(cock) {
 		if(Math.random() < odds) {
-			var diff = cocks[i].length.IdealStat(opts.ideal, opts.max);
+			var diff = cock.length.IdealStat(opts.ideal, opts.max);
 			if(diff > 0) {
 				Text.Add("[Poss] cock grows longer!", parse);
 				Text.NL();
@@ -723,20 +758,55 @@ TF.ItemEffects.SetIdealCockLen = function(target, opts) {
 				if(!multi) break;
 			}
 		}
-	}
+	});
 	Text.Flush();
 }
 
+// odds, ideal, max
+TF.ItemEffects.IncCockThk = function(target, opts) {
+	var parse = { Poss: target.Possessive() };
+	
+	var odds  = opts.odds || 1;
+	var multi = opts.multi;
+	_.each(target.AllCocks(), function(cock) {
+		if(Math.random() < odds) {
+			var diff = cock.thickness.IncreaseStat(opts.ideal, opts.max);
+			if(diff) {
+				Text.Add("[Poss] cock grows thicker!", parse);
+				Text.NL();
+				if(!multi) break;
+			}
+		}
+	});
+	Text.Flush();
+}
+// odds, ideal, max
+TF.ItemEffects.DecCockThk = function(target, opts) {
+	var parse = { Poss: target.Possessive() };
+	
+	var odds  = opts.odds || 1;
+	var multi = opts.multi;
+	_.each(target.AllCocks(), function(cock) {
+		if(Math.random() < odds) {
+			var diff = cock.thickness.DecreaseStat(opts.ideal, opts.max);
+			if(diff) {
+				Text.Add("[Poss] cock grows thinner!", parse);
+				Text.NL();
+				if(!multi) break;
+			}
+		}
+	});
+	Text.Flush();
+}
 // odds, ideal, max
 TF.ItemEffects.SetIdealCockThk = function(target, opts) {
 	var parse = { Poss: target.Possessive() };
 	
 	var odds  = opts.odds || 1;
 	var multi = opts.multi;
-	var cocks = target.AllCocks();
-	for(var i = 0; i < cocks.length; i++) {
+	_.each(target.AllCocks(), function(cock) {
 		if(Math.random() < odds) {
-			var diff = cocks[i].thickness.IdealStat(opts.ideal, opts.max);
+			var diff = cock.thickness.IdealStat(opts.ideal, opts.max);
 			if(diff > 0) {
 				Text.Add("[Poss] cock grows thicker!", parse);
 				Text.NL();
@@ -748,7 +818,7 @@ TF.ItemEffects.SetIdealCockThk = function(target, opts) {
 				if(!multi) break;
 			}
 		}
-	}
+	});
 	Text.Flush();
 }
 
