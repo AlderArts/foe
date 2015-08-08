@@ -569,6 +569,10 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		
 		party.inventory.AddItem(Items.FlowerPetal);
 		
+		party.inventory.AddItem(Items.RawHoney);
+		party.inventory.AddItem(Items.BeeChitin);
+		party.inventory.AddItem(Items.HoneyBrew);
+		
 		party.inventory.AddItem(Items.Virilium);
 		party.inventory.AddItem(Items.Fertilium);
 		party.inventory.AddItem(Items.Testos);

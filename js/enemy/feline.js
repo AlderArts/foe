@@ -16,6 +16,7 @@ Feline.DropTable = function() {
 	if(Math.random() < 0.1)  drops.push({ it: Items.GoatMilk });
 	if(Math.random() < 0.1)  drops.push({ it: Items.SheepMilk });
 	if(Math.random() < 0.1)  drops.push({ it: Items.CowMilk });
+	if(Math.random() < 0.1)  drops.push({ it: Items.RawHoney });
 	if(Math.random() < 0.05) drops.push({ it: Items.HorseCum });
 	if(Math.random() < 0.05) drops.push({ it: Items.LizardEgg });
 	if(Math.random() < 0.05) drops.push({ it: Items.Trinket });

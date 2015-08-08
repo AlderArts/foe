@@ -75,6 +75,8 @@ Scorpion.prototype.DropTable = function() {
 	if(Math.random() < 0.1)  drops.push({ it: Items.CatClaw });
 	if(Math.random() < 0.1)  drops.push({ it: Items.LizardScale });
 	if(Math.random() < 0.1)  drops.push({ it: Items.LizardEgg });
+	if(Math.random() < 0.1)  drops.push({ it: Items.RawHoney });
+	if(Math.random() < 0.1)  drops.push({ it: Items.BeeChitin });
 	
 	if(Math.random() < 0.01) drops.push({ it: Items.Lacertium });
 	if(Math.random() < 0.01) drops.push({ it: Items.Nagazm });

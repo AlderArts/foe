@@ -358,6 +358,26 @@ Items.Cerventine.PushEffect(TF.ItemEffects.SetIdealCockLen, {odds: 0.2, ideal: 1
 Items.Cerventine.PushEffect(TF.ItemEffects.SetIdealCockThk, {odds: 0.2, ideal: 4, max: 1});
 
 
+Items.HoneyBrew = new TFItem("bee0", "Honey brew");
+Items.HoneyBrew.price = 25;
+Items.HoneyBrew.lDesc = function() { return "a jar of Honey brew"; }
+Items.HoneyBrew.Short = function() { return "A jar of Honey brew"; }
+Items.HoneyBrew.Long = function() { return "A jar filled with liquid honey, incredibly sweet and potent."; }
+Items.HoneyBrew.recipe = [{it: Items.RawHoney}, {it: Items.FlowerPetal}, {it: Items.BeeChitin}];
+// Effects
+Items.HoneyBrew.PushEffect(TF.ItemEffects.SetAntenna, {odds: 0.4, race: Race.Bee, color: Color.black, count: 2, str: "a pair of bee antenna" });
+Items.HoneyBrew.PushEffect(TF.ItemEffects.SetWings, {odds: 0.4, race: Race.Bee, color: Color.white, count: 2, str: "a pair of bee wings" });
+Items.HoneyBrew.PushEffect(TF.ItemEffects.SetAbdomen, {odds: 0.4, race: Race.Bee, color: Color.yellow, count: 1, str: "a striped bee abdomen" });
+Items.HoneyBrew.PushEffect(TF.ItemEffects.IncDex, {odds: 0.4, ideal: 30, max: 1});
+Items.HoneyBrew.PushEffect(TF.ItemEffects.IncCha, {odds: 0.3, ideal: 25, max: 1});
+Items.HoneyBrew.PushEffect(TF.ItemEffects.IncInt, {odds: 0.4, ideal: 40, max: 1});
+Items.HoneyBrew.PushEffect(TF.ItemEffects.DecStr, {odds: 0.1, ideal: 20, max: 1});
+Items.HoneyBrew.PushEffect(TF.ItemEffects.DecSta, {odds: 0.2, ideal: 15, max: 1});
+Items.HoneyBrew.PushEffect(TF.ItemEffects.IncFem, {odds: 0.4, ideal: .9, max: .1});
+Items.HoneyBrew.PushEffect(TF.ItemEffects.IdealTone, {odds: 0.2, rangeMin: 0, rangeMax: 0.2, max: .1 });
+Items.HoneyBrew.PushEffect(TF.ItemEffects.IncHips, {odds: 0.2, ideal: HipSize.Wide, max: 1});
+
+
 Items.Homos = new TFItem("human0", "Homos");
 Items.Homos.price = 25;
 Items.Homos.lDesc = function() { return "a bottle of Homos"; }
@@ -378,6 +398,7 @@ Items.Homos.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.4, value: false, num: 1}
 Items.Homos.PushEffect(TF.ItemEffects.RemTail, {odds: 0.6, count: 1});
 Items.Homos.PushEffect(TF.ItemEffects.RemWings, {odds: 0.6, count: 2});
 Items.Homos.PushEffect(TF.ItemEffects.RemAntenna, {odds: 0.6, count: 2});
+Items.Homos.PushEffect(TF.ItemEffects.RemAbdomen, {odds: 0.6, count: 1});
 Items.Homos.PushEffect(function(target) {
 	var parse = {
 		Poss : target.Possessive(),

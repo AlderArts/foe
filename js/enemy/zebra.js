@@ -145,6 +145,8 @@ ZebraBrave.prototype.DropTable = function() {
 	if(Math.random() < 0.1)  drops.push({ it: Items.AntlerChip });
 	if(Math.random() < 0.1)  drops.push({ it: Items.SVenom });
 	if(Math.random() < 0.1)  drops.push({ it: Items.MDust });
+	if(Math.random() < 0.1)  drops.push({ it: Items.RawHoney });
+	if(Math.random() < 0.1)  drops.push({ it: Items.BeeChitin });
 	
 	if(Math.random() < 0.05) drops.push({ it: Items.Wolfsbane });
 	if(Math.random() < 0.05) drops.push({ it: Items.Ramshorn });

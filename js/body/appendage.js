@@ -3,7 +3,8 @@ AppendageType = {
 	horn    : 0,
 	antenna : 1,
 	tail    : 2,
-	wing    : 3
+	wing    : 3,
+	abdomen : 4
 }
 
 function Appendage(type, race, color, count) {
@@ -44,6 +45,7 @@ Appendage.prototype.Short = function() {
 		else if(this.type == AppendageType.antenna) noun = "antennas";
 		else if(this.type == AppendageType.tail)    noun = "tails";
 		else if(this.type == AppendageType.wing)    noun = "wings";
+		else if(this.type == AppendageType.abdomen) noun = "abdomen";
 	}
 	else {
 		if     (this.type == AppendageType.horn) {
@@ -55,6 +57,7 @@ Appendage.prototype.Short = function() {
 		else if(this.type == AppendageType.antenna) noun = "antenna";
 		else if(this.type == AppendageType.tail)    noun = "tail";
 		else if(this.type == AppendageType.wing)    noun = "wing";
+		else if(this.type == AppendageType.abdomen) noun = "abdomen";
 	}
 	return noun;
 }
@@ -91,6 +94,9 @@ Appendage.prototype.Long = function() {
 	}
 	else if(this.type == AppendageType.wing) {
 		return count + " of " + desc + " wings";
+	}
+	else if(this.type == AppendageType.abdomen) {
+		return desc + " abdomen";
 	}
 	else return "strange growth";
 }

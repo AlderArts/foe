@@ -76,6 +76,8 @@ GolQueen.prototype.DropTable = function() {
 	drops.push({ it: Items.Trinket, num: 3 });
 	drops.push({ it: Items.HorseShoe, num: 3 });
 	
+	if(Math.random() < 0.1) drops.push({ it: Items.RawHoney });
+	if(Math.random() < 0.1) drops.push({ it: Items.BeeChitin });
 	if(Math.random() < 0.1) drops.push({ it: Items.MFluff });
 	if(Math.random() < 0.1) drops.push({ it: Items.HorseCum });
 	if(Math.random() < 0.1) drops.push({ it: Items.BlackGem });

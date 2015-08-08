@@ -50,6 +50,8 @@ Oasis = function(storage) {
 	this.shopItems.push(Items.AntlerChip);
 	this.shopItems.push(Items.GoatFleece);
 	this.shopItems.push(Items.FlowerPetal);
+	this.shopItems.push(Items.RawHoney);
+	this.shopItems.push(Items.BeeChitin);
 	
 	this.flags["Rakh"] = Oasis.RakhFlag.NotSeen;
 	

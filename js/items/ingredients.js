@@ -359,3 +359,25 @@ Items.FlowerPetal.sDesc = function() { return "flower petal"; }
 Items.FlowerPetal.Short = function() { return "A flower petal"; }
 Items.FlowerPetal.Long = function() { return "A petal from a beautiful flower."; }
 
+
+
+Items.RawHoney = new Item("bee1", "Raw honey", ItemType.Ingredient);
+Items.RawHoney.price = 5;
+Items.RawHoney.sDesc = function() { return "raw honey"; }
+Items.RawHoney.Short = function() { return "Raw honey"; }
+Items.RawHoney.Long = function() { return "A small jar of raw honey."; }
+Items.RawHoney.Use = function(target) {
+	target.AddHPFraction(0.02);
+	var parse = { name: target.NameDesc(), s: target == player ? "" : "s" };
+	Text.Add("[name] eat[s] a small jar of sweet honey. It is slightly invigorating.", parse);
+	Text.NL();
+	Text.Flush();
+	return {consume: true};
+}
+
+Items.BeeChitin = new Item("bee2", "Bee chitin", ItemType.Ingredient);
+Items.BeeChitin.price = 1;
+Items.BeeChitin.sDesc = function() { return "bee chitin"; }
+Items.BeeChitin.Short = function() { return "Some bee chitin"; }
+Items.BeeChitin.Long = function() { return "A small scrap of hard bee chitin."; }
+

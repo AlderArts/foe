@@ -79,6 +79,8 @@ Mothgirl.prototype.DropTable = function() {
 	if(Math.random() < 0.1)  drops.push({ it: Items.SpringWater });
 	if(Math.random() < 0.1)  drops.push({ it: Items.Letter });
 	if(Math.random() < 0.1)  drops.push({ it: Items.FreshGrass });
+	if(Math.random() < 0.1)  drops.push({ it: Items.RawHoney });
+	if(Math.random() < 0.1)  drops.push({ it: Items.BeeChitin });
 	
 	if(Math.random() < 0.05) drops.push({ it: Items.FoxBerries });
 	if(Math.random() < 0.05) drops.push({ it: Items.Foxglove });
@@ -88,6 +90,7 @@ Mothgirl.prototype.DropTable = function() {
 	if(Math.random() < 0.05) drops.push({ it: Items.Lettuce });
 	
 	if(Math.random() < 0.01) drops.push({ it: Items.Avia });
+	if(Math.random() < 0.02) drops.push({ it: Items.HoneyBrew });
 	return drops;
 }
 

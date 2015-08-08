@@ -542,6 +542,52 @@ TF.ItemEffects.RemWings = function(target, opts) {
 	return changed;
 }
 
+// odds, race, str, color, count
+TF.ItemEffects.SetAbdomen = function(target, opts) {
+	var changed = TF.Effect.Unchanged;
+	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == player ? "" : "s", str: opts.str };
+	
+	var odds    = opts.odds  || 1;
+	var count   = opts.count || 2;
+	if(Math.random() < odds) {
+		changed = TF.SetAppendage(target.Back(), AppendageType.abdomen, opts.race, opts.color, count);
+		switch(changed) {
+			case TF.Effect.Changed:
+				Text.Add("[Poss] abdomen changes, turning into [str]!", parse);
+				Text.NL();
+				break;
+			case TF.Effect.Added:
+				Text.Add("[name] suddenly grow[s] [str]!", parse);
+				Text.NL();
+				break;
+		}
+	}
+	Text.Flush();
+	return changed;
+}
+
+// odds, count
+TF.ItemEffects.RemAbdomen = function(target, opts) {
+	var changed = TF.Effect.Unchanged;
+	var parse   = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
+	var odds    = opts.odds || 1;
+	if(Math.random() < odds) {
+		changed = TF.RemoveAppendage(target.Back(), AppendageType.abdomen, opts.count);
+		switch(changed) {
+			case TF.Effect.Changed:
+				Text.Add("[name] lose [count] of [hisher] abdomen!", parse);
+				Text.NL();
+				break;
+			case TF.Effect.Removed:
+				Text.Add("[name] lose all trace of [hisher] abdomen!", parse);
+				Text.NL();
+				break;
+		}
+	}
+	Text.Flush();
+	return changed;
+}
+
 // odds, race, color, ideal, count
 TF.ItemEffects.SetBalls = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
