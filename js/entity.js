@@ -2593,6 +2593,8 @@ Entity.prototype.PrintDescription = function() {
 		gender   : this.body.GenderStr(),
 		skinDesc : this.body.SkinDesc(),
 		faceDesc : this.body.FaceDescLong(),
+		legs     : this.LegsDesc(),
+		feet     : this.FeetDesc(),
 		eyeCount : Text.NumToText(this.body.head.eyes.count.Get()),
 		eyeColor : Color.Desc(this.body.head.eyes.color),
 		eyeDesc  : this.body.EyeDesc(),
@@ -2638,7 +2640,7 @@ Entity.prototype.PrintDescription = function() {
 	
 	// TODO: Arms/Legs
 	if(this.body.legs.count == 2) {
-		Text.Add("[name] [has] arms and legs.", parse);
+		Text.Add("[name] [has] arms. You have [legs], ending in [feet].", parse);
 	}
 	else if(this.body.legs.count > 2) {
 		parse["num"] = Text.NumToText(this.body.legs.count);
