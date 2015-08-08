@@ -636,6 +636,52 @@ TF.ItemEffects.RemBalls = function(target, opts) {
 	return changed;
 }
 
+// odds, ideal, max
+TF.ItemEffects.IncBallSize = function(target, opts) {
+	var odds  = opts.odds || 1;
+	var parse = { Poss: target.Possessive() };
+	if(Math.random() < odds &&
+		target.Balls().size.IncreaseStat(opts.ideal, opts.max)) {
+		if(!target.HasBalls()) return;
+		Text.Add("[Poss] balls have grown in size!", parse);
+		Text.NL();
+	}
+	Text.Flush();
+}
+
+// odds, ideal, max
+TF.ItemEffects.DecBallSize = function(target, opts) {
+	var odds  = opts.odds || 1;
+	var parse = { Poss: target.Possessive() };
+	if(Math.random() < odds &&
+		target.Balls().size.DecreaseStat(opts.ideal, opts.max)) {
+		if(!target.HasBalls()) return;
+		Text.Add("[Poss] balls have shrunk in size!", parse);
+		Text.NL();
+	}
+	Text.Flush();
+}
+
+// odds, rangeMin, rangeMax, max
+TF.ItemEffects.IdealBallSize = function(target, opts) {
+	var odds  = opts.odds || 1;
+	var parse = { Poss: target.Possessive() };
+	if(Math.random() < odds) {
+		var ideal = _.random(opts.rangeMin || 0, opts.rangeMax || 0, true);
+		var diff = target.Balls().size.IdealStat(ideal, opts.max);
+		if(!target.HasBalls()) return;
+		if(diff > 0) {
+			Text.Add("[Poss] balls have grown in size!", parse);
+			Text.NL();
+		}
+		else if(diff < 0) {
+			Text.Add("[Poss] balls have shrunk in size!", parse);
+			Text.NL();
+		}
+	}
+	Text.Flush();
+}
+
 // odds, ideal, max, female
 TF.ItemEffects.IncBreastSize = function(target, opts) {
 	var parse = { Poss: target.Possessive() };
@@ -924,7 +970,6 @@ TF.ItemEffects.IncHips = function(target, opts) {
 	}
 	Text.Flush();
 }
-
 // odds, ideal, min
 TF.ItemEffects.DecHips = function(target, opts) {
 	var odds  = opts.odds || 1;
@@ -933,6 +978,24 @@ TF.ItemEffects.DecHips = function(target, opts) {
 		target.body.torso.hipSize.DecreaseStat(opts.ideal, opts.max)) {
 		Text.Add("[Poss] hips narrow!", parse);
 		Text.NL();
+	}
+	Text.Flush();
+}
+// odds, rangeMin, rangeMax, max
+TF.ItemEffects.IdealHips = function(target, opts) {
+	var odds  = opts.odds || 1;
+	var parse = { Poss: target.Possessive() };
+	if(Math.random() < odds) {
+		var ideal = _.random(opts.rangeMin || 0, opts.rangeMax || 0, true);
+		var diff = target.body.torso.hipSize.IdealStat(ideal, opts.max);
+		if(diff > 0) {
+			Text.Add("[Poss] hips widen!", parse);
+			Text.NL();
+		}
+		else if(diff < 0) {
+			Text.Add("[Poss] hips narrow!", parse);
+			Text.NL();
+		}
 	}
 	Text.Flush();
 }

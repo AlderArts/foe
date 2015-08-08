@@ -310,3 +310,19 @@ Items.Taurico.PushEffect(function(target) {
 	Text.Flush();
 });
 
+
+Items.Androgyn = new TFItem("trap0", "Androgyn");
+Items.Androgyn.price = 25;
+Items.Androgyn.lDesc = function() { return "a bottle of Androgyn"; }
+Items.Androgyn.Short = function() { return "A bottle of Androgyn"; }
+Items.Androgyn.Long  = function() { return "A bottle containing a sparkling pink fluid. It’s glowing slightly."; }
+Items.Androgyn.recipe = [{it: Items.Testos}, {it: Items.Estros}, {it: Items.SpringWater}];
+// Effects
+Items.Androgyn.PushEffect(TF.ItemEffects.IdealFem, {odds: 0.8, minRange: -.1, maxRange: .3, max: .3});
+Items.Androgyn.PushEffect(TF.ItemEffects.DecTone, {odds: 0.8, ideal: 0, max: .3 });
+Items.Androgyn.PushEffect(TF.ItemEffects.IdealHips, {odds: 0.2, ideal: HipSize.Medium-1, max: 3});
+Items.Androgyn.PushEffect(TF.ItemEffects.SetIdealBreastSize, {odds: 0.6, ideal: 3, max: 5});
+Items.Androgyn.PushEffect(TF.ItemEffects.DecCockLen, {odds: 0.8, ideal: 10, max: 4 });
+Items.Androgyn.PushEffect(TF.ItemEffects.DecCockThk, {odds: 0.8, ideal: 3, max: 2 });
+Items.Androgyn.PushEffect(TF.ItemEffects.DecBallSize, {odds: 0.8, ideal: 1, max: 4 });
+
