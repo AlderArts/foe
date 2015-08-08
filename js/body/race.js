@@ -171,7 +171,7 @@ RaceScore.prototype.Sorted = function() {
 	return sorted;
 }
 
-//TODO Current max 41
+//TODO Current max 42
 
 //{a:"", noun:""}
 Race.Human = new RaceDesc("human", 0, {
@@ -279,6 +279,9 @@ Race.Moth = new RaceDesc("moth", 17, {
 Race.Gol = new RaceDesc("gol", 33, {
 	desc: [{a:"a", noun:"Gol"}]
 }, Race.Insect);
+Race.Bee = new RaceDesc("bee", 42, {
+	desc: [{a:"a", noun:"bee"}]
+});
 Race.Cow = new RaceDesc("cow", 14, {
 	desc: [{a:"a", noun:"bovine"}],
 	descMale: [{a:"a", noun:"bull"}],
