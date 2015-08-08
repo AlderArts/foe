@@ -14,7 +14,9 @@ BodyPart.HasFur = function(race) {
 		Race.Goat,
 		Race.Sheep,
 		Race.Musteline,
-		Race.Rabbit);
+		Race.Rabbit)
+		||
+		race.isRaceNotParent(Race.Deer);
 }
 BodyPart.HasScales = function(race) {
 	return race.isRace(Race.Reptile);
@@ -528,7 +530,7 @@ Body.prototype.SoftFeet = function() {
 		Race.Cow,
 		Race.Goat,
 		Race.Sheep,
-		Race.Dryad,
+		Race.Deer,
 		Race.Horse
 	);
 }
@@ -542,7 +544,7 @@ Body.prototype.FeetDesc = function() {
 			return "lower body";
 	}
 	
-	if(legs.race.isRace(Race.Cow, Race.Goat, Race.Sheep, Race.Dryad, Race.Horse)) return "hoofs";
+	if(legs.race.isRace(Race.Cow, Race.Goat, Race.Sheep, Race.Deer, Race.Horse)) return "hoofs";
 	if(legs.race.isRace(Race.Gryphon)) return "taloned feet";
 	if(legs.race.isRace(Race.Avian, Race.Reptile, Race.Demon)) return "clawed feet";
 	if(legs.race.isRace(Race.Musteline, Race.Rabbit, Race.Canine, Race.Feline)) return "paws";
@@ -558,10 +560,10 @@ Body.prototype.FootDesc = function() {
 			return "lower body";
 	}
 	
-	if(legs.race.isRace(Race.Cow, Race.Goat, Race.Sheep, Race.Dryad, Race.Horse)) return "hoof";
+	if(legs.race.isRace(Race.Cow, Race.Goat, Race.Sheep, Race.Deer, Race.Horse)) return "hoof";
 	if(legs.race.isRace(Race.Avian, Race.Reptile, Race.Demon)) return "clawed foot";
 	if(legs.race.isRace(Race.Musteline, Race.Rabbit, Race.Canine, Race.Feline)) return "paw";
-		
+	
 	return "foot";
 }
 

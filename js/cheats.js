@@ -511,6 +511,7 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		
 		party.inventory.AddItem(Items.GoatMilk);
 		party.inventory.AddItem(Items.GoatFleece);
+		party.inventory.AddItem(Items.Caprinium);
 		
 		party.inventory.AddItem(Items.SheepMilk);
 		party.inventory.AddItem(Items.Ramshorn);
@@ -564,6 +565,7 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		
 		party.inventory.AddItem(Items.TreeBark);
 		party.inventory.AddItem(Items.AntlerChip);
+		party.inventory.AddItem(Items.Cerventine);
 		
 		party.inventory.AddItem(Items.FlowerPetal);
 		

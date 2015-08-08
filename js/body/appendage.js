@@ -35,13 +35,23 @@ Appendage.prototype.FromStorage = function(storage) {
 Appendage.prototype.Short = function() {
 	var noun;
 	if(this.count > 1) {
-		if     (this.type == AppendageType.horn)    noun = "horns";
+		if     (this.type == AppendageType.horn) {
+			if(this.race.isRace(Race.Deer))
+				noun = "antlers";
+			else
+				noun = "horns";
+		}
 		else if(this.type == AppendageType.antenna) noun = "antennas";
 		else if(this.type == AppendageType.tail)    noun = "tails";
 		else if(this.type == AppendageType.wing)    noun = "wings";
 	}
 	else {
-		if     (this.type == AppendageType.horn)    noun = "horn";
+		if     (this.type == AppendageType.horn) {
+			if(this.race.isRace(Race.Deer))
+				noun = "antler";
+			else
+				noun = "horn";
+		}
 		else if(this.type == AppendageType.antenna) noun = "antenna";
 		else if(this.type == AppendageType.tail)    noun = "tail";
 		else if(this.type == AppendageType.wing)    noun = "wing";
@@ -62,7 +72,7 @@ Appendage.prototype.Long = function() {
 	var desc = this.race.qShort();
 	if     (this.type == AppendageType.horn) {
 		switch(this.race.id) {
-			case Race.Dryad.id: return count + " of antlers";
+			case Race.Deer.id: return count + " of antlers";
 			default: return count + " of " + desc + " horns";
 		}
 	}

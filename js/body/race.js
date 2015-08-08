@@ -34,11 +34,17 @@ RaceDesc.prototype.Desc = function(gender) {
 	return desc;
 }
 
-// Checks if this race (or any of its )
+// Checks if this race (or any of its parents)
 RaceDesc.prototype.isRace = function() {
 	for(var i = 0; i < arguments.length; ++i)
 		if(this == arguments[i]) return true;
 	if(this.superclass) return RaceDesc.prototype.isRace.apply(this.superclass, arguments);
+	return false;
+}
+// Checks if this race (not parents)
+RaceDesc.prototype.isRaceNotParent = function() {
+	for(var i = 0; i < arguments.length; ++i)
+		if(this == arguments[i]) return true;
 	return false;
 }
 
@@ -330,7 +336,7 @@ Race.Rabbit = new RaceDesc("rabbit", 6, {
 Race.Dryad = new RaceDesc("dryad", 9, {
 	desc: [{a:"a", noun:"dryad"}, {a:"a", noun:"fawn"}],
 	quantify: [{a:"a", noun:"dryad"}, {a:"a", noun:"fawn"}]
-});
+}, Race.Deer);
 Race.Ferret = new RaceDesc("ferret", 36, {
 	desc: [{a:"a", noun:"ferret"}],
 	quantify: [{a:"a", noun:"musteline"}]

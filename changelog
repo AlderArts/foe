@@ -13,6 +13,9 @@ Version 0.4i
  - Adjusting muscle tone (not widely used atm)
  - Adjusting hip size
  - More stat adjustments
+* Added more TF items (can't really get them anywhere yet)
+ - Caprinium: Goat
+ - Cerventine: Deer
 * Added some minor scenes for picking up ingredients.
 * Most TF items and ingredients now have more than one source; several mobs has had new items added to their drop tables (low odds).
 
