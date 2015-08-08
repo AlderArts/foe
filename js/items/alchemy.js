@@ -158,7 +158,7 @@ Items.Bovia.PushEffect(TF.ItemEffects.IncBreastSize, {odds: 1, ideal: 40, max: 5
 
 
 Items.Caprinium = new TFItem("goat0", "Caprinium");
-Items.Caprinium.price = 25;
+Items.Caprinium.price = 8;
 Items.Caprinium.lDesc = function() { return "a bottle of Caprinium"; }
 Items.Caprinium.Short = function() { return "A bottle of Caprinium"; }
 Items.Caprinium.Long = function() { return "A bottle filled with a thick white fluid. It has a picture of a goat on it."; }
@@ -298,7 +298,7 @@ Items.Avia.PushEffect(TF.ItemEffects.DecBreastSize, {odds: 0.4, ideal: 2, max: 2
 
 
 Items.Lepida = new TFItem("moth0", "Lepida");
-Items.Lepida.price = 25;
+Items.Lepida.price = 10;
 Items.Lepida.lDesc = function() { return "a bottle of Lepida"; }
 Items.Lepida.Short = function() { return "A bottle of Lepida"; }
 Items.Lepida.Long = function() { return "A bottle labeled Lepida, with the picture of a moth on it. The fluid within is a deep purple."; }
@@ -322,7 +322,7 @@ Items.Lepida.PushEffect(TF.ItemEffects.DecCockThk, {odds: 0.3, ideal: 3, max: 1 
 
 
 Items.Scorpius = new TFItem("scorp0", "Scorpius");
-Items.Scorpius.price = 25;
+Items.Scorpius.price = 10;
 Items.Scorpius.lDesc = function() { return "a bottle of Scorpius"; }
 Items.Scorpius.Short = function() { return "A bottle of Scorpius"; }
 Items.Scorpius.Long = function() { return "A bottle labeled Scorpius, with the picture of a scorpion on it. The fluid within is a pitch black."; }
@@ -342,7 +342,7 @@ Items.Scorpius.PushEffect(TF.ItemEffects.IncHips, {odds: 0.2, ideal: HipSize.Wid
 
 
 Items.Cerventine = new TFItem("deer0", "Cerventine");
-Items.Cerventine.price = 25;
+Items.Cerventine.price = 10;
 Items.Cerventine.lDesc = function() { return "a bottle of Cerventine"; }
 Items.Cerventine.Short = function() { return "A bottle of Cerventine"; }
 Items.Cerventine.Long = function() { return "A bottle filled with a soft brown liquid. It has a picture of a deer on it."; }
@@ -368,7 +368,7 @@ Items.Cerventine.PushEffect(TF.ItemEffects.SetIdealCockThk, {odds: 0.2, ideal: 4
 
 
 Items.HoneyBrew = new TFItem("bee0", "Honey brew");
-Items.HoneyBrew.price = 25;
+Items.HoneyBrew.price = 10;
 Items.HoneyBrew.lDesc = function() { return "a jar of Honey brew"; }
 Items.HoneyBrew.Short = function() { return "A jar of Honey brew"; }
 Items.HoneyBrew.Long = function() { return "A jar filled with liquid honey, incredibly sweet and potent."; }
@@ -385,6 +385,35 @@ Items.HoneyBrew.PushEffect(TF.ItemEffects.DecSta, {odds: 0.2, ideal: 15, max: 1}
 Items.HoneyBrew.PushEffect(TF.ItemEffects.IncFem, {odds: 0.4, ideal: .9, max: .1});
 Items.HoneyBrew.PushEffect(TF.ItemEffects.IdealTone, {odds: 0.2, rangeMin: 0, rangeMax: 0.2, max: .1 });
 Items.HoneyBrew.PushEffect(TF.ItemEffects.IncHips, {odds: 0.2, ideal: HipSize.Wide, max: 1});
+
+
+Items.Florium = new TFItem("plant0", "Florium");
+Items.Florium.price = 10;
+Items.Florium.lDesc = function() { return "a bottle of Florium"; }
+Items.Florium.Short = function() { return "A bottle of Florium"; }
+Items.Florium.Long = function() { return "A bottle filled with a green fluid. It smells of flowers."; }
+Items.Florium.recipe = [{it: Items.Foxglove}, {it: Items.FlowerPetal}, {it: Items.TreeBark}];
+// Effects
+Items.Florium.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Plant, str: "a veiny tentacle cock"});
+Items.Florium.PushEffect(TF.ItemEffects.IncInt, {odds: 0.3, ideal: 25, max: 1});
+Items.Florium.PushEffect(TF.ItemEffects.IncLib, {odds: 0.4, ideal: 40, max: 1});
+Items.Florium.PushEffect(TF.ItemEffects.IncCha, {odds: 0.4, ideal: 30, max: 1});
+Items.Florium.PushEffect(TF.ItemEffects.IncSpi, {odds: 0.2, ideal: 25, max: 1});
+Items.Florium.PushEffect(TF.ItemEffects.DecStr, {odds: 0.1, ideal: 15, max: 1});
+Items.Florium.PushEffect(TF.ItemEffects.DecSta, {odds: 0.2, ideal: 15, max: 1});
+Items.Florium.PushEffect(TF.ItemEffects.DecDex, {odds: 0.2, ideal: 20, max: 1});
+Items.Florium.PushEffect(TF.ItemEffects.IncFem, {odds: 0.4, ideal: .9, max: .1});
+Items.Florium.PushEffect(TF.ItemEffects.DecTone, {odds: 0.2, ideal: 0, max: .1 });
+Items.Florium.PushEffect(TF.ItemEffects.IncHips, {odds: 0.2, ideal: HipSize.Wide, max: 1});
+Items.Florium.PushEffect(TF.ItemEffects.IncBreastSize, {odds: 0.2, ideal: 20, max: 2, female: true});
+/*
+ * TODO
+
+Effects:
+Plant hair?
+Green eyes
+
+ */
 
 
 Items.Homos = new TFItem("human0", "Homos");
