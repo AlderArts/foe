@@ -281,7 +281,7 @@ Race.Gol = new RaceDesc("gol", 33, {
 }, Race.Insect);
 Race.Bee = new RaceDesc("bee", 42, {
 	desc: [{a:"a", noun:"bee"}]
-});
+}, Race.Insect);
 Race.Cow = new RaceDesc("cow", 14, {
 	desc: [{a:"a", noun:"bovine"}],
 	descMale: [{a:"a", noun:"bull"}],
