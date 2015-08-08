@@ -90,7 +90,8 @@ Items.Lacertium.PushEffect(TF.ItemEffects.IncCha, {odds: 0.3, ideal: 28, max: 1}
 Items.Lacertium.PushEffect(TF.ItemEffects.DecStr, {odds: 0.2, ideal: 16, max: 1});
 Items.Lacertium.PushEffect(TF.ItemEffects.DecSpi, {odds: 0.1, ideal: 20, max: 1});
 Items.Lacertium.PushEffect(TF.ItemEffects.IdealFem, {odds: 0.2, rangeMin: -.2, rangeMax: .2, max: .1});
-
+Items.Lacertium.PushEffect(TF.ItemEffects.SetIdealCockLen, {odds: 0.3, ideal: 20, max: 2 });
+Items.Lacertium.PushEffect(TF.ItemEffects.SetIdealCockThk, {odds: 0.3, ideal: 4, max: 1 });
 
 Items.Ovis = new TFItem("ovis0", "Ovis");
 Items.Ovis.price = 8;
@@ -196,6 +197,8 @@ Items.Canis.PushEffect(TF.ItemEffects.IncSpi, {odds: 0.4, ideal: 30, max: 1});
 Items.Canis.PushEffect(TF.ItemEffects.IncCha, {odds: 0.3, ideal: 25, max: 1});
 Items.Canis.PushEffect(TF.ItemEffects.DecInt, {odds: 0.2, ideal: 10, max: 1});
 Items.Canis.PushEffect(TF.ItemEffects.IdealTone, {odds: 0.2, rangeMin: 0.2, rangeMax: 0.5, max: .1 });
+Items.Canis.PushEffect(TF.ItemEffects.IncCockLen, {odds: 0.4, ideal: 20, max: 2 });
+Items.Canis.PushEffect(TF.ItemEffects.IncCockThk, {odds: 0.4, ideal: 5, max: 1 });
 
 
 Items.Lobos = new TFItem("wolf0", "Lobos");
@@ -221,6 +224,8 @@ Items.Lobos.PushEffect(TF.ItemEffects.DecCha, {odds: 0.1, ideal: 10, max: 1});
 Items.Lobos.PushEffect(TF.ItemEffects.DecFem, {odds: 0.1, ideal: -.7, max: .1, male: true});
 Items.Lobos.PushEffect(TF.ItemEffects.IncTone, {odds: 0.1, ideal: .8, max: .1 });
 Items.Lobos.PushEffect(TF.ItemEffects.DecHips, {odds: 0.2, ideal: HipSize.Medium, max: 1});
+Items.Lobos.PushEffect(TF.ItemEffects.IncCockLen, {odds: 0.4, ideal: 24, max: 2 });
+Items.Lobos.PushEffect(TF.ItemEffects.IncCockThk, {odds: 0.4, ideal: 6, max: 1 });
 
 
 Items.Vulpinix = new TFItem("fox0", "Vulpinix");
@@ -245,6 +250,8 @@ Items.Vulpinix.PushEffect(TF.ItemEffects.DecSpi, {odds: 0.1, ideal: 15, max: 1})
 Items.Vulpinix.PushEffect(TF.ItemEffects.IdealTone, {odds: 0.2, rangeMin: 0.1, rangeMax: 0.4, max: .1 });
 Items.Vulpinix.PushEffect(TF.ItemEffects.DecHips, {odds: 0.2, ideal: HipSize.Thin, max: 2});
 Items.Vulpinix.PushEffect(TF.ItemEffects.DecBreastSize, {odds: 0.4, ideal: 6, max: 2 });
+Items.Vulpinix.PushEffect(TF.ItemEffects.SetIdealCockLen, {odds: 0.3, ideal: 19, max: 2 });
+Items.Vulpinix.PushEffect(TF.ItemEffects.SetIdealCockThk, {odds: 0.3, ideal: 4, max: 1 });
 
 
 Items.Infernum = new TFItem("demon0", "Infernum");
@@ -310,6 +317,8 @@ Items.Lepida.PushEffect(TF.ItemEffects.DecLib, {odds: 0.1, ideal: 15, max: 1});
 Items.Lepida.PushEffect(TF.ItemEffects.IncFem, {odds: 0.1, ideal: .8, max: .1});
 Items.Lepida.PushEffect(TF.ItemEffects.DecTone, {odds: 0.2, ideal: 0, max: .1 });
 Items.Lepida.PushEffect(TF.ItemEffects.IncHips, {odds: 0.2, ideal: HipSize.Wide, max: 1});
+Items.Lepida.PushEffect(TF.ItemEffects.DecCockLen, {odds: 0.3, ideal: 15, max: 2 });
+Items.Lepida.PushEffect(TF.ItemEffects.DecCockThk, {odds: 0.3, ideal: 3, max: 1 });
 
 
 Items.Scorpius = new TFItem("scorp0", "Scorpius");
@@ -417,6 +426,8 @@ Items.Homos.PushEffect(function(target) {
 	}
 	Text.Flush();
 });
+Items.Homos.PushEffect(TF.ItemEffects.SetIdealCockLen, {odds: 0.3, ideal: 20, max: 2 });
+Items.Homos.PushEffect(TF.ItemEffects.SetIdealCockThk, {odds: 0.3, ideal: 4, max: 1 });
 
 
 Items.Virilium = new TFItem("sex0", "Virilium");
