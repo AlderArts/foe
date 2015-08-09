@@ -5679,7 +5679,7 @@ Scenes.Terry.SexHaveADrinkPussy = function() {
 				Text.Add("Why, you’re going to do this!", parse);
 			}
 			Text.NL();
-			Text.Add("With a final squeeze for luck, you lean in closer to Terry’s feminine flower and extend your tongue, leisurely dragging just the [tongueTip] through [hisher] petals. Eyes half-closed, you savor the hints of [hisher] nectar as they dance across your tastebuds.", parse);
+			Text.Add("With a final squeeze for luck, you lean in closer to Terry’s feminine flower and extend your tongue, leisurely dragging just the [tongueTip] through [hisher] petals. Eyes half-closed, you savor the hints of [hisher] nectar as they dance across your taste buds.", parse);
 			Text.NL();
 			Text.Add("You roll your tongue back inside, audibly swallowing as you savor the flavor. Teasingly, you smack your lips before licking [himher] again. Each stroke is slow and deliberate, only just penetrating Terry’s depths. After all, ", parse);
 			if(terry.PussyVirgin())
@@ -5699,7 +5699,7 @@ Scenes.Terry.SexHaveADrinkPussy = function() {
 			Text.NL();
 			Text.Add("Caught up in your enthusiasm, you don’t slow your efforts even when your tongue brushes across the smooth, sensitive skin of Terry’s taint. You start to caress Terry’s slit with your thumbs, carefully trailing over [hisher] netherlips as you start painting the taint with your tongue.", parse);
 			Text.NL();
-			Text.Add("You lick your way steadily upwards, until you are forced to relinquish one hand from Terry’s cunt to pull apart [hisher] buttcheeks. Propelled by your desire, you lick upwards still, running your tongue around Terry’s clenched anus without qualm. The sound of your own wet slurping fills your ears as you busily coat Terry’s back passage with your fluids.", parse);
+			Text.Add("You lick your way steadily upwards, until you are forced to relinquish one hand from Terry’s cunt to pull apart [hisher] butt cheeks. Propelled by your desire, you lick upwards still, running your tongue around Terry’s clenched anus without qualm. The sound of your own wet slurping fills your ears as you busily coat Terry’s back passage with your fluids.", parse);
 			Text.NL();
 			Text.Add("<i>“Huh? [playername], what are y- ah!”</i>", parse);
 			Text.NL();
@@ -5762,7 +5762,7 @@ Scenes.Terry.SexHaveADrinkPussy = function() {
 			else
 				Text.Add("Stimulated as [heshe] is, Terry welcomes your intrusion, walls flexing to try and pull both invaders as deep as they can.", parse);
 			Text.NL();
-			Text.Add("With thumb and tongue, you double-stuff Terry, working both holes in synch and with no mercy. The [foxvixen]’s cries grow louder and higher, the strain building inside of [himher] as you play [himher] like an instrument.", parse);
+			Text.Add("With thumb and tongue, you double-stuff Terry, working both holes in sync and with no mercy. The [foxvixen]’s cries grow louder and higher, the strain building inside of [himher] as you play [himher] like an instrument.", parse);
 			Text.NL();
 			
 			var cum = terry.OrgasmCum();
