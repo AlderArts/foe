@@ -677,8 +677,12 @@ Body.prototype.TongueTipDesc = function() {
 
 Body.prototype.LongTongue = function() {
 	var tongue = this.head.mouth.tongue;
-	if(tongue.race.isRace(Race.Demon, Race.Reptile, Race.Moth)) return true;
-	//TODO length?
+	if(tongue.race.isRace(
+		Race.Demon,
+		Race.Reptile,
+		Race.Moth,
+		Race.Goo,
+		Race.Plant)) return true;
 	return false;
 }
 
