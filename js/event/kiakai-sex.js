@@ -1255,7 +1255,7 @@ Scenes.Kiakai.PleasureElf = function() {
 				Text.NL();
 				Text.Add("Done with foreplay, you let your [tongueDesc] plunge into [name], eliciting a loud yelp from the unprepared elf. As you thrust deeply into [hisher] [kVagDesc], [name] offers cute, encouraging moans, wordlessly egging you on.", parse);
 				Text.NL();
-				if(player.Mouth().tongueLength.Get() > 15) {
+				if(player.LongTongue()) {
 					Text.Add("Your [tongueDesc] was made for this sort of thing. The sheer length of your prehensile appendage allows you to penetrate as deep as any cock, violating [hisher] most private and sacred shrine.", parse);
 					Text.NL();
 					Text.Add("[name] is constantly gasping for air, getting way more than [heshe] bargained for. [HisHer] eyelids flutter rapidly, gaze clouded with pleasure.", parse);
@@ -2099,7 +2099,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 						Text.NL();
 						Text.Add("<i>“Hey, show a little effort,”</i> you complain, withdrawing your fingers from [name]'s [kVagDesc]. The elf opens [hisher] legs wider in response. [HisHer] [kTongueDesc] starting work on your nethers, your submissive companion reaches down between [hisher] legs, meekly spreading [hisher] labia for you. The sight makes your mouth water.", parse);
 						Text.NL();
-						if(player.Mouth().tongueLength.Get() > 15) {
+						if(player.LongTongue()) {
 							parse["virgin"] = kiakai.FirstVag().virgin ? " where no dick has gone before" : "'s deflowered tunnel";
 							Text.Add("Your snake-like tongue dives into [name]'s welcoming snatch, boring deep inside [himher]. The sheer length of your appendage makes it a rival of any cock as far as penetration goes, drilling into the elf[virgin].", parse);
 							Text.NL();
@@ -2206,7 +2206,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 						}, enabled : true,
 						tooltip : "Use your fingers."
 					});
-					if(player.Mouth().tongueLength.Get() > 15) {
+					if(player.LongTongue()) {
 						options.push({ nameStr : "Tongue",
 							func : function() {
 								parse["penDesc"] = function() { return Text.Parse("your [tongueDesc]", parse); };

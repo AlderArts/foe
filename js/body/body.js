@@ -60,8 +60,7 @@ function Body(ent) {
 	this.head = new BodyPart();
 	this.head.mouth = {
 		capacity     : new Stat(30),
-		tongue       : new BodyPart(),
-		tongueLength : new Stat(7)
+		tongue       : new BodyPart()
 	}
 	this.head.hair = new Hair();
 	this.head.eyes = new BodyPart();
@@ -145,8 +144,7 @@ Body.prototype.ToStorage = function() {
 	};
 	storage.head.mouth = {
 		cap  : this.head.mouth.capacity.base.toFixed(2),
-		ton  : {race : this.head.mouth.tongue.race.id.toFixed(), col : this.head.mouth.tongue.color.toFixed()},
-		tonL : this.head.mouth.tongueLength.base.toFixed(2)
+		ton  : {race : this.head.mouth.tongue.race.id.toFixed(), col : this.head.mouth.tongue.color.toFixed()}
 	};
 	storage.head.hair = {
 		race  : this.head.hair.race.id.toFixed(),
@@ -274,7 +272,6 @@ Body.prototype.FromStorage = function(storage) {
 			this.head.mouth.tongue.race       = RaceDesc.IdToRace[parseInt(storage.head.mouth.ton.race)] || this.head.mouth.tongue.race;
 			this.head.mouth.tongue.color      = parseInt(storage.head.mouth.ton.col)  || this.head.mouth.tongue.color;
 			this.head.mouth.capacity.base     = parseFloat(storage.head.mouth.cap)    || this.head.mouth.capacity.base;
-			this.head.mouth.tongueLength.base = parseFloat(storage.head.mouth.tonL)   || this.head.mouth.tongueLength.base;
 		}
 		if(storage.head.hair) {
 			this.head.hair.race        = RaceDesc.IdToRace[parseInt(storage.head.hair.race)]  || this.head.hair.race;
