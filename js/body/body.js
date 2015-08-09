@@ -678,6 +678,13 @@ Body.prototype.TongueTipDesc = function() {
 	return "tip";
 }
 
+Body.prototype.LongTongue = function() {
+	var tongue = this.head.mouth.tongue;
+	if(tongue.race.isRace(Race.Demon, Race.Reptile, Race.Moth)) return true;
+	//TODO length?
+	return false;
+}
+
 HipSize = {
 	Thin     :  2,
 	Medium   :  5,

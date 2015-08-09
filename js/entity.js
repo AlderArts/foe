@@ -1933,6 +1933,9 @@ Entity.prototype.TongueDesc = function() {
 Entity.prototype.TongueTipDesc = function() {
 	return this.body.TongueTipDesc();
 }
+Entity.prototype.LongTongue = function() {
+	return this.body.LongTongue();
+}
 Entity.prototype.Hair = function() {
 	return this.body.head.hair;
 }

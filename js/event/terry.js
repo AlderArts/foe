@@ -382,7 +382,15 @@ Terry.prototype.Interact = function(switchSpot) {
 		Text.Add("The [foxvixen] is always wearing that enchanted collar you gave [himher] when you bailed [himher] out of jail, even though [heshe] technically doesn’t have to wear it anymore. You didn’t think the crafty [foxvixen] would find a way out of it, but [heshe] did. Even so, [heshe] insists on wearing it. “As proof of ownership,” you quote. You didn’t think [heshe] would take to [hisher] station so well, nor that you’d grow this close as you travelled together. When your eyes meet, [heshe] smiles warmly at you.", parse);
 	else
 		Text.Add("[HeShe]’s grown quite close to you as you spent time together, and you gotta admit, the [foxvixen] is not so bad once you get to know [himher]. You’ve found [himher] to be quite amorous when [heshe] wants to, and even a bit clingy at times… but nevertheless you’re glad to have the company of the pretty [foxvixen]. When your eyes meet, [heshe] smiles warmly at you.", parse);
+	
+	if(DEBUG) {
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: relation: " + terry.Relation()));
+		Text.NL();
+		Text.Add(Text.BoldColor("DEBUG: slut: " + terry.Slut()));
+	}
 	Text.Flush();
+	
 	Scenes.Terry.Prompt();
 }
 
