@@ -50,6 +50,7 @@ Items.Felinix.Short = function() { return "A bottle of Felinix"; }
 Items.Felinix.Long = function() { return "A bottle labeled Felinix, with the picture of a cat on it. The fluid within is cloudy."; }
 Items.Felinix.recipe = [{it: Items.Whiskers}, {it: Items.HairBall}, {it: Items.CatClaw}];
 // Effects
+Items.Felinix.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.3, race: Race.Feline, str: "rough, cat-like tongue"});
 Items.Felinix.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Feline, str: "a feline cock"});
 Items.Felinix.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Feline, str: "fluffy cat ears"});
 Items.Felinix.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.Feline, color: Color.orange, str: "an orange, flexible feline tail"});
@@ -70,6 +71,7 @@ Items.Lacertium.Short = function() { return "A bottle of Lacertium"; }
 Items.Lacertium.Long = function() { return "A bottle labeled Lacertium, with the picture of a lizard on it. The fluid within is thick and oily."; }
 Items.Lacertium.recipe = [{it: Items.SnakeOil}, {it: Items.LizardScale}, {it: Items.LizardEgg}];
 // Effects
+Items.Lacertium.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.3, race: Race.Lizard, str: "long, serpentine tongue"});
 Items.Lacertium.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Lizard, str: "a lizard cock"});
 Items.Lacertium.PushEffect(function(target) {
 	var cocks = target.AllCocks();
@@ -92,6 +94,7 @@ Items.Lacertium.PushEffect(TF.ItemEffects.DecSpi, {odds: 0.1, ideal: 20, max: 1}
 Items.Lacertium.PushEffect(TF.ItemEffects.IdealFem, {odds: 0.2, rangeMin: -.2, rangeMax: .2, max: .1});
 Items.Lacertium.PushEffect(TF.ItemEffects.SetIdealCockLen, {odds: 0.3, ideal: 20, max: 2 });
 Items.Lacertium.PushEffect(TF.ItemEffects.SetIdealCockThk, {odds: 0.3, ideal: 4, max: 1 });
+
 
 Items.Ovis = new TFItem("ovis0", "Ovis");
 Items.Ovis.price = 8;
@@ -120,6 +123,7 @@ Items.Bovia.Short = function() { return "A bottle of Bovia"; }
 Items.Bovia.Long = function() { return "A bottle labeled Bovia, with the picture of a cow on it. The fluid within is milky white."; }
 Items.Bovia.recipe = [{it: Items.CowMilk}, {it: Items.CowBell}, {it: Items.FreshGrass}];
 // Effects
+Items.Bovia.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.3, race: Race.Cow, str: "broad, cow-like tongue"});
 Items.Bovia.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Cow, str: "a bovine cock"});
 Items.Bovia.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Cow, str: "bovine ears"});
 Items.Bovia.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.Cow, color: Color.black, str: "a long bovine tail, ending in a tuft of black hair"});
@@ -185,6 +189,7 @@ Items.Canis.Short = function() { return "A bottle of Canis"; }
 Items.Canis.Long = function() { return "A bottle labeled Canis, with the picture of a dog on it. The fluid within is opaque, and slightly reddish."; }
 Items.Canis.recipe = [{it: Items.CanisRoot}, {it: Items.DogBone}, {it: Items.DogBiscuit}];
 // Effects
+Items.Canis.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.3, race: Race.Dog, str: "dog-like tongue"});
 Items.Canis.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Dog, str: "a canid cock"});
 Items.Canis.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.4, value: true, num: 1});
 Items.Canis.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.4, value: true, num: 1});
@@ -261,6 +266,7 @@ Items.Infernum.Short = function() { return "A bottle of Infernum"; }
 Items.Infernum.Long = function() { return "A bottle labeled Infernum, with the picture of a demon on it. The fluid within is a thick red sludge, tainted with black bubbles."; }
 Items.Infernum.recipe = [{it: Items.CorruptPlant}, {it: Items.BlackGem}, {it: Items.CorruptSeed}];
 // Effects
+Items.Infernum.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.3, race: Race.Demon, str: "long and flexible tongue"});
 Items.Infernum.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.2, race: Race.Demon, color: Color.red, str: "plantigrade, demonic legs with clawed feet"});
 Items.Infernum.PushEffect(TF.ItemEffects.SetArms, {odds: 0.2, race: Race.Demon, color: Color.red, str: "demonic arms with clawed hands"});
 Items.Infernum.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Demon, str: "a demon cock"});
@@ -305,6 +311,7 @@ Items.Lepida.Long = function() { return "A bottle labeled Lepida, with the pictu
 Items.Lepida.recipe = [{it: Items.MFluff}, {it: Items.MDust}, {it: Items.FruitSeed}];
 // Effects
 Items.Lepida.PushEffect(TF.ItemEffects.SetAntenna, {odds: 0.4, race: Race.Moth, color: Color.purple, count: 2, str: "a pair of moth-like feelers" });
+Items.Lepida.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.3, race: Race.Moth, str: "long and flexible tongue"});
 Items.Lepida.PushEffect(TF.ItemEffects.RemHorn, {odds: 0.2, count: 2});
 Items.Lepida.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.1, value: false, num: 1});
 Items.Lepida.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.1, value: false, num: 1});
@@ -395,6 +402,7 @@ Items.Florium.Long = function() { return "A bottle filled with a green fluid. It
 Items.Florium.recipe = [{it: Items.Foxglove}, {it: Items.FlowerPetal}, {it: Items.TreeBark}];
 // Effects
 Items.Florium.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Plant, str: "a veiny tentacle cock"});
+Items.Florium.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.3, race: Race.Plant, str: "long, vine-like tentacle tongue"});
 Items.Florium.PushEffect(TF.ItemEffects.IncInt, {odds: 0.3, ideal: 25, max: 1});
 Items.Florium.PushEffect(TF.ItemEffects.IncLib, {odds: 0.4, ideal: 40, max: 1});
 Items.Florium.PushEffect(TF.ItemEffects.IncCha, {odds: 0.4, ideal: 30, max: 1});
@@ -425,6 +433,7 @@ Items.Homos.recipe = [{it: Items.Hummus}, {it: Items.SpringWater}, {it: Items.Le
 // Effects
 Items.Homos.PushEffect(TF.ItemEffects.SetBody, {odds: 0.4, race: Race.Human, str: "human body"});
 Items.Homos.PushEffect(TF.ItemEffects.SetFace, {odds: 0.3, race: Race.Human, str: "human face"});
+Items.Homos.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.3, race: Race.Human, str: "human tongue"});
 Items.Homos.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Human, str: "human ears"});
 Items.Homos.PushEffect(TF.ItemEffects.SetArms, {odds: 0.3, race: Race.Human, str: "human arms"});
 Items.Homos.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.3, race: Race.Human, str: "human legs"});

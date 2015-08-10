@@ -21,6 +21,7 @@ Version 0.4i
 * Added some minor scenes for picking up ingredients.
 * Most TF items and ingredients now have more than one source; several mobs has had new items added to their drop tables (low odds).
 * Removed the tongue length variable (which really wasn't used anywhere, and there was no way to change it). Tongue length will be set by tongue race type from now on.
+* Tongue type added to several TFs
 * Added the final of the trio of Terry "Have a Drink" scenes. Requires that Terry has a pussy.
 
 --------------------------------------------

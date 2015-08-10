@@ -224,6 +224,22 @@ TF.ItemEffects.SetFace = function(target, opts) {
 	return changed;
 }
 
+TF.ItemEffects.SetTongue = function(target, opts) {
+	var changed = TF.Effect.Unchanged;
+	var parse   = { Poss: target.Possessive(), str: opts.str };
+	var odds    = opts.odds || 1;
+	var head    = target.body.head;
+	if(Math.random() < odds) {
+		changed = TF.SetRaceOne(head.mouth.tongue, opts.race);
+		if(changed != TF.Effect.Unchanged) {
+			Text.Add("[Poss] tongue turns into [str]!", parse);
+			Text.NL();
+		}
+	}
+	Text.Flush();
+	return changed;
+}
+
 // odds, race, str
 TF.ItemEffects.SetArms = function(target, opts) {
 	var changed = TF.Effect.Unchanged;
