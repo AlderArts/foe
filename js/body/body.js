@@ -656,22 +656,26 @@ Body.prototype.LipsDesc = function() {
 	return "lips";
 }
 
-// TODO: Color, length
+// TODO: Color, variation
 Body.prototype.TongueDesc = function() {
 	var tongue = this.head.mouth.tongue;
 	if(tongue.race.isRace(Race.Cow, Race.Horse)) return "broad tongue";
 	if(tongue.race.isRace(Race.Reptile, Race.Demon)) return "forked tongue";
 	if(tongue.race.isRace(Race.Canine)) return "animalistic tongue";
 	if(tongue.race.isRace(Race.Feline)) return "barbed tongue";
+	if(tongue.race.isRace(Race.Moth)) return "long tongue";
+	if(tongue.race.isRace(Race.Plant)) return "tentacle-tongue";
 	return "tongue";
 }
 
-// TODO: Color, length
+// TODO: Color
 Body.prototype.TongueTipDesc = function() {
 	var tongue = this.head.mouth.tongue;
 	if(tongue.race.isRace(Race.Canine, Race.Cow, Race.Horse)) return "broad tip";
 	if(tongue.race.isRace(Race.Demon, Race.Reptile)) return "forked tip";
 	if(tongue.race.isRace(Race.Feline)) return "barbed tip";
+	if(tongue.race.isRace(Race.Moth)) return "thin tip";
+	if(tongue.race.isRace(Race.Plant)) return "vine tip";
 	return "tip";
 }
 
