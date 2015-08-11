@@ -57,6 +57,7 @@ InitCache = function() {
 	aquilius = new Aquilius(gameCache.aquilius);
 	maria    = new Maria(gameCache.maria);
 	cveta    = new Cveta(gameCache.cveta);
+	vaughn   = new Vaughn(gameCache.vaughn);
 	
 	fera    = new Fera(gameCache.fera);
 	asche   = new Asche(gameCache.asche);
@@ -122,6 +123,7 @@ InitCache = function() {
 	world.EntityStorage.push(aquilius);
 	world.EntityStorage.push(maria);
 	world.EntityStorage.push(cveta);
+	world.EntityStorage.push(vaughn);
 	
 	world.EntityStorage.push(fera);
 	world.EntityStorage.push(asche);
@@ -421,6 +423,7 @@ GameToCache = function() {
 	gameCache.aquilius = aquilius.ToStorage();
 	gameCache.maria    = maria.ToStorage();
 	gameCache.cveta    = cveta.ToStorage();
+	gameCache.vaughn   = vaughn.ToStorage();
 	
 	// Other NPCs
 	gameCache.chief    = chief.ToStorage();

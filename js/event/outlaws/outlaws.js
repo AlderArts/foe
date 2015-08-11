@@ -88,6 +88,9 @@ Outlaws.prototype.BullTowerCanGetReward = function() {
 Outlaws.prototype.Rep = function() {
 	return this.relation.Get();
 }
+Outlaws.prototype.CompletedPathIntoRigard = function() {
+	return this.flags["Met"] >= Outlaws.Met.MetBelinda;
+}
 //TODO
 Outlaws.prototype.MetPenPam = function() {
 	return false;
