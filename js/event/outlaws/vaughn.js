@@ -82,10 +82,16 @@ Vaughn.prototype.OnTask = function() {
 	return false; //TODO
 }
 
-//TODO link
-//Trigger after having completed either outlaws into Rigard OR after Belindaquest has been done (in the case the PC ignores the outlaws all the way up till then).
+//Trigger after having completed either outlaws into Rigard
+// TODO OR after Belindaquest has been done (in the case the PC ignores the outlaws all the way up till then).
 //Also requires that player have access to castle grounds.
-//#unlock Vaughn in outlaws camp menu. He will be available from 6 pm to 6 am.
+Vaughn.prototype.IntroAvailable = function() {
+	if(this.Met()) return false;
+	if(!outlaws.CompletedPathIntoRigard()) return false;
+	if(!rigard.RoyalAccess()) return false;
+	return true;
+}
+
 Scenes.Vaughn.Introduction = function() {
 	var parse = {
 		playername : player.name
@@ -120,7 +126,6 @@ Scenes.Vaughn.Introduction = function() {
 	Gui.NextPrompt();
 }
 
-//TODO
 Scenes.Vaughn.CampDesc = function() {
 	var parse = {};
 	

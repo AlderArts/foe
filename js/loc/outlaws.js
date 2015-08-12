@@ -37,6 +37,8 @@ world.loc.Outlaws.Camp.onEntry = function() {
 		Scenes.BullTower.AftermathZenith();
 	else if(maria.EligableForDeaddropAlert())
 		Scenes.Maria.DeadDrops.Alert();
+	else if(vaughn.IntroAvailable())
+		Scenes.Vaughn.Introduction();
 	else
 		PrintDefaultOptions();
 }
