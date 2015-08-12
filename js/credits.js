@@ -37,7 +37,7 @@ CreditsScreen = function() {
 	Text.Add("Mothgirl: Savin<br/>");
 	Text.Add("Naga: LonelyRonin<br/>");
 	Text.Add("Ophelia: Me, QB and LD<br/>");
-	Text.Add("Outlaws: Derp wolf<br/>");
+	Text.Add("Outlaws intro: Derp wolf<br/>");
 	Text.Add("Patches: Me and LD<br/>");
 	Text.Add("Random exploration scenes: Del<br/>");
 	Text.Add("Rigard random scenes: Del<br/>");
@@ -46,6 +46,7 @@ CreditsScreen = function() {
 	Text.Add("Rosalin cock worship scene: Fenoxo<br/>");
 	Text.Add("Silken Delights & Fera: Resar<br/>");
 	Text.Add("Terry: LukaDoc and QuietBrowser<br/>");
+	Text.Add("Vaughn: The Observer<br/>");
 	Text.Add("Zebra shaman: Bluebusterman<br/>");
 	
 	Text.NL();
