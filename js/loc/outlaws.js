@@ -81,6 +81,20 @@ world.loc.Outlaws.Camp.events.push(new Link(
 ));
 
 world.loc.Outlaws.Camp.events.push(new Link(
+	"Vaughn", function() {
+		var time = vaughn.IsAtLocation();
+		return time && vaughn.Met();
+	}, true,
+	function() {
+		if(vaughn.Met())
+			Scenes.Vaughn.CampDesc();
+	},
+	function() {
+		Scenes.Vaughn.CampApproach();
+	}
+));
+
+world.loc.Outlaws.Camp.events.push(new Link(
 	"Cveta", function() {
 		var met  = cveta.flags["Met"] >= Cveta.Met.Available;
 		var time = cveta.WakingTime();

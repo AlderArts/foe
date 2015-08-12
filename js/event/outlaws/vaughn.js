@@ -82,7 +82,6 @@ Vaughn.prototype.OnTask = function() {
 	return false; //TODO
 }
 
-
 //TODO link
 //Trigger after having completed either outlaws into Rigard OR after Belindaquest has been done (in the case the PC ignores the outlaws all the way up till then).
 //Also requires that player have access to castle grounds.
@@ -121,7 +120,14 @@ Scenes.Vaughn.Introduction = function() {
 	Gui.NextPrompt();
 }
 
-//TODO LINK
+//TODO
+Scenes.Vaughn.CampDesc = function() {
+	var parse = {};
+	
+	Text.Add("Vaughn should be on watch around this time, if you wish to seek out the fox.", parse);
+	Text.NL();
+}
+
 Scenes.Vaughn.CampApproach = function() {
 	var parse = {
 		playername : player.name
@@ -435,7 +441,7 @@ Scenes.Vaughn.TalkHimself = function() {
 			Scenes.Vaughn.TalkHimself();
 		}, enabled : true
 	});
-	if(vaughn.flags["Talk"] & Vaughn.Talk.Past || vaughn.flags["TWar"] >= Vaughn.TalkWar.Desertion) {
+	if((vaughn.flags["Talk"] & Vaughn.Talk.Past) || (vaughn.flags["TWar"] >= Vaughn.TalkWar.Desertion)) {
 		options.push({ nameStr : "Fiancee",
 			tooltip : "So, he mentioned a fiancee…",
 			func : function() {
