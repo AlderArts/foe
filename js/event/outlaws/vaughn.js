@@ -85,10 +85,6 @@ Vaughn.prototype.IsAtLocation = function(location) {
 	return false;
 }
 
-Vaughn.prototype.OnTask = function() {
-	return false; //TODO
-}
-
 //Trigger after having completed either outlaws into Rigard
 // TODO OR after Belindaquest has been done (in the case the PC ignores the outlaws all the way up till then).
 //Also requires that player have access to castle grounds.
@@ -151,7 +147,7 @@ Scenes.Vaughn.CampApproach = function() {
 		Scenes.Vaughn.ConfrontFollowup();
 		return;
 	}
-	else if(vaughn.OnTask()) {
+	else if(Scenes.Vaughn.Tasks.OnTask()) {
 		//TODO: Need to account for correctly completed tasks
 		//#else (player is currently on a task that hasn’t been resolved, either through success or failure)
 		Text.Add("You consider approaching Vaughn at the moment, but he did quite explicitly say not to bother him on duty until you’ve something to report. Thinking better of it, you turn and pace away - maybe you should just get the job done already, if you need to speak to him that badly.", parse);
@@ -234,6 +230,10 @@ Scenes.Vaughn.Prompt = function() {
 			
 			Scenes.Vaughn.TalkPrompt();
 		}, enabled : true
+	});
+	options.push({ nameStr : "Tasks",
+		tooltip : "Ask him if he has any work for you.",
+		func : Scenes.Vaughn.Tasks.TaskPrompt, enabled : true
 	});
 	options.push({ nameStr : "Sex",
 		tooltip : "Proposition Vaughn for sex.",
