@@ -833,10 +833,54 @@ Quests.quests.push(new Quest({
 		})
 	]
 }));
+
+Quests.quests.push(new Quest({
+	name: function() {
+		return "Tools of the Trade";
+	},
+	desc: function() {
+		return "Deliver thieves' tools to Elodie, the outlaw contact in Rigard.";
+	},
+	active: function() {
+		var status = Quests.Type.NotStarted;
+		if(Scenes.Vaughn.Tasks.Lockpicks.Completed())
+			status |= Quests.Type.Completed;
+		else if(vaughn.flags["Met"] >= Vaughn.Met.OnTaskLockpicks)
+			status |= Quests.Type.Visible;
+		return status;
+	},
+	list: [
+		new QuestItem({
+			desc: function() {
+				return "Meet with Elodie in the castle grounds and deliver Vaughn's tools to her.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(vaughn.flags["Met"] >= Vaughn.Met.LockpicksElodie)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Return to Vaughn and report.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(Scenes.Vaughn.Tasks.Lockpicks.Completed())
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		})
+	]
+}));
+
 //TODO Krawitz(?), Burrows, Gwendy
 
 /*
- * 
+ * : 
 
 Quests.quests.push(new Quest({
 	name: function() {

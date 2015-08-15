@@ -40,3 +40,8 @@ Items.Quest.OutlawLetter = new Item("quest7", "Outlaws' letter", ItemType.Quest)
 Items.Quest.OutlawLetter.price = 0;
 Items.Quest.OutlawLetter.Short = function() { return "Outlaws' letter"; }
 Items.Quest.OutlawLetter.Long  = function() { return "The sealed letter that the Outlaws asked you to deliver to their contact in Rigard."; }
+
+Items.Quest.OutlawLockpicks = new Item("quest8", "Outlaws' tools", ItemType.Quest);
+Items.Quest.OutlawLockpicks.price = 0;
+Items.Quest.OutlawLockpicks.Short = function() { return "Outlaws' tools"; }
+Items.Quest.OutlawLockpicks.Long  = function() { return "A set of odd tools the Outlaws sent you to deliver to Elodie, one of their contacts in Rigard."; }
