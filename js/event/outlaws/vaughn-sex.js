@@ -140,6 +140,8 @@ Scenes.Vaughn.SexTitfuckBig = function() {
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
+	vaughn.flags["Sex"] |= Vaughn.Sex.Titfuck;
+	
 	Text.Clear();
 	Text.Add("It’s a few moments before he’s able to speak again, an edge of raw emotion in his voice. <i>“All right, all right, I give. That <b>is</b> quite the rack you’ve got there, and it <b>would</b> be a pity for the both of us if it went unused. That’ll do, [playername]. That’ll do.”</i>", parse);
 	Text.NL();
@@ -290,6 +292,8 @@ Scenes.Vaughn.SexTitfuckAverage = function() {
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
+	vaughn.flags["Sex"] |= Vaughn.Sex.Titfuck;
 	
 	Text.Clear();
 	Text.Add("The long silence that follows is awkward and anything but encouraging. The blatant way Vaughn is studying you is reminiscent of a housewife watching the scales at market, and you - well, it wouldn’t be wrong to say that you <i>did</i> put yourself on sale in a sense.", parse);

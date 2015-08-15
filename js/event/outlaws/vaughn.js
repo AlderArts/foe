@@ -19,9 +19,10 @@ function Vaughn(storage) {
 	this.SetLevelBonus();
 	this.RestFull();
 	
-	this.flags["Met"] = 0;
+	this.flags["Met"]  = 0;
 	this.flags["Talk"] = 0; //Bitmask
 	this.flags["TWar"] = 0;
+	this.flags["Sex"]  = 0;
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -46,6 +47,9 @@ Vaughn.TalkWar = {
 	Wartime    : 2,
 	Desertion  : 3,
 	Afterwards : 4
+};
+Vaughn.Sex = {
+	Titfuck : 1
 };
 
 Vaughn.prototype.Met = function() {
