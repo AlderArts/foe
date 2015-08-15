@@ -160,6 +160,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/outlaws/cveta-date.js \
 	js/event/outlaws/vaughn.js \
 	js/event/outlaws/vaughn-sex.js \
+	js/event/outlaws/vaughn-tasks.js \
 	js/event/outlaws/bulltower.js \
 	js/event/outlaws/cavalcade.js \
 	js/event/raven.js \
