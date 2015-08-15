@@ -36,7 +36,10 @@ Vaughn.Met = {
 Vaughn.Talk = { //Bitmask
 	Himself : 1,
 	Past    : 2,
-	Fiancee : 4
+	Fiancee : 4,
+	Sex     : 8,
+	Confront : 16,
+	ConfrontFollowup : 32
 };
 Vaughn.TalkWar = {
 	Beginnings : 1,
@@ -139,7 +142,12 @@ Scenes.Vaughn.CampApproach = function() {
 	};
 	
 	Text.Clear();
-	if(vaughn.OnTask()) {
+	// Trigger the one-shot confront scene
+	if(vaughn.flags["Talk"] & Vaughn.Talk.Confront && !vaughn.Confronted()) {
+		Scenes.Vaughn.ConfrontFollowup();
+		return;
+	}
+	else if(vaughn.OnTask()) {
 		//TODO: Need to account for correctly completed tasks
 		//#else (player is currently on a task that hasn’t been resolved, either through success or failure)
 		Text.Add("You consider approaching Vaughn at the moment, but he did quite explicitly say not to bother him on duty until you’ve something to report. Thinking better of it, you turn and pace away - maybe you should just get the job done already, if you need to speak to him that badly.", parse);
@@ -222,6 +230,10 @@ Scenes.Vaughn.Prompt = function() {
 			
 			Scenes.Vaughn.TalkPrompt();
 		}, enabled : true
+	});
+	options.push({ nameStr : "Sex",
+		tooltip : "Proposition Vaughn for sex.",
+		func : Scenes.Vaughn.Sex, enabled : true
 	});
 	/* TODO
 	options.push({ nameStr : "name",

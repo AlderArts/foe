@@ -134,7 +134,7 @@ Lei.prototype.Interact = function() {
 	});
 }
 
-Scenes.Lei.InnPromptRepeatApproach = function() {
+Scenes.Lei.InnApproach = function() {
 	var parse = {
 		
 	};
@@ -156,10 +156,10 @@ Scenes.Lei.InnPromptRepeatApproach = function() {
 		Text.Add("greets you with a smile, evidently pleased to see you.", parse);
 	Text.Flush();
 	
-	Scenes.Lei.InnPromptRepeat();
+	Scenes.Lei.InnPrompt();
 }
 
-Scenes.Lei.InnPromptRepeat = function() {
+Scenes.Lei.InnPrompt = function() {
 	var parse = {
 		
 	};
@@ -243,7 +243,7 @@ Scenes.Lei.InnPromptRepeat = function() {
 	Gui.SetButtonsFromList(options, true);
 }
 
-Scenes.Lei.InnPrompt = function() {
+Scenes.Lei.InnPromptFirst = function() {
 	var parse = {
 		
 	};
@@ -863,10 +863,10 @@ world.loc.Rigard.Inn.common.events.push(new Link(
 	},
 	function() {
 		if(rigard.Krawitz["Q"] < Rigard.KrawitzQ.Started) {
-			Scenes.Lei.InnPrompt();
+			Scenes.Lei.InnPromptFirst();
 		}
 		else {
-			Scenes.Lei.InnPromptRepeatApproach();
+			Scenes.Lei.InnApproach();
 		}
 	}
 ));
