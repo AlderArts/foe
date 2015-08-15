@@ -27,10 +27,23 @@ world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Nob
 world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.MeetingMajid;}, 1.0, function() { return !Scenes.Global.PortalsOpen() && !(rigard.flags["Nobles"] & Rigard.Nobles.MetMajid); });
 world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.GuardPatrol;}, 1.0, function() { return !world.time.IsDay(); });
 world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.AlmsForThePoor;}, 1.0, function() { return !(rigard.flags["Nobles"] & Rigard.Nobles.Alms); });
-world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.Elodie;}, 1.0, function() { return !Scenes.Global.PortalsOpen() && !(rigard.flags["Nobles"] & Rigard.Nobles.Elodie) && Scenes.Global.VisitedOutlaws() && world.time.IsDay(); });
+world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.Elodie;}, 1.0, function() {
+	return !Scenes.Global.PortalsOpen() &&
+		!(rigard.flags["Nobles"] & Rigard.Nobles.Elodie) &&
+		Scenes.Global.VisitedOutlaws() &&
+		world.time.IsDay() &&
+		vaughn.flags["Met"] < Vaughn.Met.OnTaskLockpicks;
+});
 world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.RoyalGetaway;});
-world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.MagicalJackal;}, 1.0, function() { return asche.flags["Met"] >= Asche.Met.Met && !world.time.IsDay(); });
-world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.PalaceParade;}, 2.0, function() { return terry.Recruited() && !world.time.IsDay() && rigard.ParadeTimer.Expired(); });
+world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.MagicalJackal;}, 1.0, function() {
+	return asche.flags["Met"] >= Asche.Met.Met &&
+		!world.time.IsDay();
+});
+world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.PalaceParade;}, 2.0, function() {
+	return terry.Recruited() &&
+		!world.time.IsDay() &&
+		rigard.ParadeTimer.Expired();
+});
 world.loc.Rigard.Castle.Grounds.enc.AddEnc(function() { return Scenes.Rigard.Noble.Buns;}, 1.0, function() { return world.time.IsDay(); });
 
 world.loc.Rigard.Castle.Grounds.onEntry = function() {
@@ -77,6 +90,21 @@ world.loc.Rigard.Castle.Grounds.links.push(new Link(
 		Scenes.Terry.Release();
 	}
 ));
+
+
+world.loc.Rigard.Castle.Grounds.events.push(new Link(
+	"Elodie", function() { return vaughn.flags["Met"] == Vaughn.Met.OnTaskLockpicks; }, true,
+	function() {
+		if(vaughn.flags["Met"] == Vaughn.Met.OnTaskLockpicks) {
+			Text.Add("Somewhere around here, you should look for Elodie, the contact of the outlaws, and hand over the tools you were given. Vaughn said that she has some time off during evenings.");
+			Text.NL();
+		}
+	},
+	function() {
+		Scenes.Vaughn.Tasks.Lockpicks.MeetingElodie();
+	}
+));
+
 
 Scenes.Rigard.Noble.Parkland = function() {
 	var parse = {

@@ -24,6 +24,8 @@ function Vaughn(storage) {
 	this.flags["TWar"] = 0;
 	this.flags["Sex"]  = 0;
 	
+	this.taskTimer = new Time();
+	
 	if(storage) this.FromStorage(storage);
 }
 Vaughn.prototype = new Entity();
@@ -31,7 +33,10 @@ Vaughn.prototype.constructor = Vaughn;
 
 Vaughn.Met = {
 	NotAvailable : 0,
-	Met : 1
+	Met : 1,
+	OnTaskLockpicks : 2,
+	LockpicksElodie : 3,
+	CompletedLockpicks : 4
 	//TODO: tasks
 };
 Vaughn.Talk = { //Bitmask
@@ -61,6 +66,8 @@ Scenes.Vaughn = {};
 Vaughn.prototype.FromStorage = function(storage) {
 	// Load flags
 	this.LoadFlags(storage);
+	
+	this.taskTimer.FromStorage(storage.Ttime);
 }
 
 Vaughn.prototype.ToStorage = function() {
@@ -69,12 +76,16 @@ Vaughn.prototype.ToStorage = function() {
 	
 	this.SaveFlags(storage);
 	
+	storage.Ttime = this.taskTimer.ToStorage();
+	
 	return storage;
 }
 
 
 Vaughn.prototype.Update = function(step) {
 	Entity.prototype.Update.call(this, step);
+	if(Scenes.Vaughn.Tasks.OnTask())
+		this.taskTimer.Dec(step);
 }
 
 // Schedule
@@ -147,8 +158,12 @@ Scenes.Vaughn.CampApproach = function() {
 		Scenes.Vaughn.ConfrontFollowup();
 		return;
 	}
+	else if(vaughn.flags["Met"] == Vaughn.Met.LockpicksElodie) {
+		Scenes.Vaughn.Tasks.Lockpicks.Debrief();
+		return;
+	}
+	//TODO: Need to account for correctly completed tasks
 	else if(Scenes.Vaughn.Tasks.OnTask()) {
-		//TODO: Need to account for correctly completed tasks
 		//#else (player is currently on a task that hasn’t been resolved, either through success or failure)
 		Text.Add("You consider approaching Vaughn at the moment, but he did quite explicitly say not to bother him on duty until you’ve something to report. Thinking better of it, you turn and pace away - maybe you should just get the job done already, if you need to speak to him that badly.", parse);
 		Text.Flush();

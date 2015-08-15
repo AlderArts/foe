@@ -62,6 +62,7 @@ Outlaws.prototype.FromStorage = function(storage) {
 
 Outlaws.prototype.Update = function(step) {
 	this.mainQuestTimer.Dec(step);
+	this.factTimer.Dec(step);
 }
 
 
