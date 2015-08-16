@@ -6,6 +6,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/raphael-min.js \
 	js/pre-loader.js \
 	data/cufon/Kimberley_Bl_900.font.js \
+	js/droidsans.loader.js \
 	app.js \
 	js/assets.js \
 	js/utility.js \

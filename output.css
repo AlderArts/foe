@@ -32,7 +32,7 @@ Toolbar CSS classes
 /*Automatically added to all toolbar inputs*/
 .tbarInput{
     background-repeat: no-repeat;
-    font: bold 14pt Tahoma;
+    font: bold 14pt Tahoma, 'Droid Sans', sans-serif;
     border:0;
     margin: 3px;
 }

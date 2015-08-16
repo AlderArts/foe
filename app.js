@@ -42,7 +42,7 @@ SAVE_VERSION = 27;
 VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + VERSION_SUBSCRIPT + ": " + VERSION_NAME;
 
 HEADER_FONT  = "bold 30pt Calibri";
-BUTTON_FONT  = "bold 14pt Tahoma";
+BUTTON_FONT  = "bold 14pt Tahoma, 'Droid Sans', sans-serif";
 SMALL_FONT   = "16pt Calibri";
 DEFAULT_FONT = "20pt Calibri";
 LARGE_FONT   = "26pt Calibri";
