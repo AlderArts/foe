@@ -7,3 +7,4 @@ build/*
 /docs/Contacts.txt
 *.zip
 *.fenoxo
+**/Thumbs.db

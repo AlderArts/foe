@@ -105,29 +105,7 @@ LimitedDataPrompt = function(backFunc) {
 		});
     }, online);
     
-    Input.buttons[2].Setup("Save file", function() {
-		var filename;
-		if(GenerateFile.canSaveOffline) {
-			filename = prompt("SAVE TO FILE MIGHT NOT WORK IN OFFLINE MODE!\n\n Enter name of save file.");
-		}
-		else {
-			filename = prompt("SAVE TO FILE WILL NOT WORK IN OFFLINE MODE!\n\n Enter name of save file.");
-		}
-    	if(filename && filename != "") {
-    		GameToCache();
-			var seen = [];
-    		GenerateFile({filename: filename, content: JSON.stringify(gameCache,
-    			function(key, val) {
-				   if (typeof val == "object") {
-				        if (seen.indexOf(val) >= 0)
-				            return;
-				        seen.push(val);
-				    }
-				    return val;
-				})
-			});
-		}
-	}, true);
+    Input.buttons[2].Setup("Save file", Saver.SaveToFile, true);
     
     Input.buttons[6].Setup("Save text", function() {
 		GameToCache();
@@ -175,29 +153,7 @@ DataPrompt = function() {
     	Saver.LoadPrompt(DataPrompt);
     }, Saver.HasSaves());
     
-    Input.buttons[2].Setup("Save file", function() {
-		var filename;
-		if(GenerateFile.canSaveOffline) {
-			filename = prompt("SAVE TO FILE MIGHT NOT WORK IN OFFLINE MODE!\n\n Enter name of save file.");
-		}
-		else {
-			filename = prompt("SAVE TO FILE WILL NOT WORK IN OFFLINE MODE!\n\n Enter name of save file.");
-		}
-    	if(filename && filename != "") {
-    		GameToCache();
-			var seen = [];
-    		GenerateFile({filename: filename, content: JSON.stringify(gameCache,
-    			function(key, val) {
-				   if (typeof val == "object") {
-				        if (seen.indexOf(val) >= 0)
-				            return;
-				        seen.push(val);
-				    }
-				    return val;
-				})
-			});
-		}
-	}, safeLocation);
+    Input.buttons[2].Setup("Save file", Saver.SaveToFile, safeLocation);
 	
     Input.buttons[3].Setup("Load file", function() {
     	loadfileOverlay();

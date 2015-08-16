@@ -6,6 +6,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/raphael-min.js \
 	js/pre-loader.js \
 	data/cufon/Kimberley_Bl_900.font.js \
+	js/droidsans.loader.js \
 	app.js \
 	js/assets.js \
 	js/utility.js \
@@ -197,6 +198,7 @@ cp js/excanvas.compiled.js build/excanvas.compiled.js
 cp foe_min.html build/foe.html
 cp style.css build/style.css
 cp output.css build/output.css
+cp droidsans.css build/droidsans.css
 cp download.php build/download.php
 cp changelog build/changelog
 
