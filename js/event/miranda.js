@@ -63,6 +63,9 @@ function Miranda(storage) {
 	this.flags["Forest"]   = 0;
 	this.flags["Floor"]    = 0;
 	
+	this.flags["Snitch"]   = 0;
+	this.snitchTimer = new Time();
+	
 	this.flags["Footjob"]  = 0;
 	
 	this.flags["Bruiser"]  = Miranda.Bruiser.No;
@@ -99,7 +102,7 @@ Miranda.Met = {
 	Met    : 1,
 	Tavern : 2,
 	TavernAftermath : 3
-}
+};
 
 Miranda.Public = {
 	Nothing : 0,
@@ -107,7 +110,13 @@ Miranda.Public = {
 	Sex     : 2,
 	Other   : 3,
 	Orgy    : 4
-}
+};
+
+Miranda.Snitch = { //Bitmask
+	SnitchedOnSnitch : 1,
+	Sexed : 2,
+	RefusedSex : 4
+};
 
 //TODO
 Miranda.prototype.IsFollower = function() {
@@ -141,6 +150,8 @@ Miranda.prototype.FromStorage = function(storage) {
 	this.LoadFlags(storage);
 	this.LoadSexFlags(storage);
 	
+	this.snitchTimer.FromStorage(storage.Stime);
+	
 	this.RecallAbilities();
 	this.SetLevelBonus();
 	this.Equip();
@@ -160,7 +171,14 @@ Miranda.prototype.ToStorage = function() {
 	this.SaveFlags(storage);
 	this.SaveSexFlags(storage);
 	
+	storage.Stime = this.snitchTimer.ToStorage();
+	
 	return storage;
+}
+
+Miranda.prototype.Update = function(step) {
+	Entity.prototype.Update.call(this, step);
+	this.snitchTimer.Dec(step);
 }
 
 // Party interaction
@@ -196,6 +214,7 @@ Miranda.prototype.Interact = function(switchSpot) {
 // Schedule
 Miranda.prototype.IsAtLocation = function(location) {
 	if(party.InParty(miranda)) return false;
+	if(!miranda.snitchTimer.Expired()) return false;
 	location = location || party.location;
 	if(world.time.hour >= 7 && world.time.hour < 19) {
 		//Work
@@ -316,6 +335,9 @@ Scenes.Miranda.BarracksPrompt = function() {
 			tooltip : "Ask her to teach you how to fight."
 		});
 	}
+	
+	Scenes.Vaughn.Tasks.Snitch.MirandaTalk(options, true);
+	
 	Gui.SetButtonsFromList(options, true, function() {
 		//TODO
 		PrintDefaultOptions();
@@ -2438,6 +2460,9 @@ Scenes.Miranda.MaidensBanePrompt = function() {
 	if(miranda.flags["Met"] >= Miranda.Met.TavernAftermath) {
 		Scenes.Miranda.BarSexOptions(options);
 	}
+	
+	Scenes.Vaughn.Tasks.Snitch.MirandaTalk(options);
+	
 	Gui.SetButtonsFromList(options, true);
 }
 

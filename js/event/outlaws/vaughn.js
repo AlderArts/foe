@@ -34,9 +34,17 @@ Vaughn.prototype.constructor = Vaughn;
 Vaughn.Met = {
 	NotAvailable : 0,
 	Met : 1,
+	//Task 1
 	OnTaskLockpicks : 2,
 	LockpicksElodie : 3,
-	CompletedLockpicks : 4
+	CompletedLockpicks : 4,
+	//Task 2
+	OnTaskSnitch : 5,
+	SnitchMirandaSuccess : 6,
+	SnitchWatchhousFail : 7,
+	SnitchWatchhousSuccess : 8,
+	CompletedSnitch : 10
+	
 	//TODO: tasks
 };
 Vaughn.Talk = { //Bitmask
@@ -160,6 +168,14 @@ Scenes.Vaughn.CampApproach = function() {
 	}
 	else if(vaughn.flags["Met"] == Vaughn.Met.LockpicksElodie) {
 		Scenes.Vaughn.Tasks.Lockpicks.Debrief();
+		return;
+	}
+	else if(Scenes.Vaughn.Tasks.Snitch.DebriefAvailable()) {
+		Scenes.Vaughn.Tasks.Snitch.Debrief();
+		return;
+	}
+	else if(Scenes.Vaughn.Tasks.Snitch.OutOfTime()) {
+		Scenes.Vaughn.Tasks.Snitch.DebriefOutOfTime();
 		return;
 	}
 	//TODO: Need to account for correctly completed tasks

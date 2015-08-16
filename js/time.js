@@ -66,6 +66,24 @@ Time.prototype.Leq = function(time) {
 	return true;
 }
 
+Time.prototype.TimeToHour = function(hour, minute) {
+	hour   = hour   || 0;
+	minute = minute || 0;
+	var step = {
+		hour   : hour   - this.hour,
+		minute : minute - this.minute
+	};
+	
+	if(step.minute < 0) {
+		step.minute += 60;
+		step.hour--;
+	}
+	if(step.hour   < 0)
+		step.hour   += 24;
+
+	return step;
+}
+
 Time.prototype.Inc = function(time) {
 	minutes = time.minute || 0;
 	hours   = time.hour   || 0;

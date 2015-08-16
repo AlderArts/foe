@@ -58,19 +58,7 @@ world.TimeStep = function(step) {
 
 // Update function (for internal game time)
 world.StepToHour = function(hour, minute) {
-	hour   = hour   || 0;
-	minute = minute || 0;
-	var step = {
-		hour   : hour   - this.time.hour,
-		minute : minute - this.time.minute
-	};
-	
-	if(step.minute < 0) {
-		step.minute += 60;
-		step.hour--;
-	}
-	if(step.hour   < 0)
-		step.hour   += 24;
+	var step = world.time.TimeToHour(hour, minute);
 	
 	world.TimeStep(step);
 
