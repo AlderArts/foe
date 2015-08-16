@@ -120,6 +120,7 @@ GenerateFile.canSaveOffline = false;
 		}
 		var fl = new File([options.content], options.filename, {"type":"application/json"});
 		lnk.href = URL.createObjectURL(fl);
+		lnk.download = options.filename;
 		lnk.click();
 	}
 	window.GenerateFile.canSaveOffline = true;
