@@ -100,6 +100,7 @@ world.loc.Rigard.Gate.endDescription = function() {
 //
 world.loc.Rigard.Barracks.common.description = function() {
 	Text.Add("There’s always some people around in the dimly lit barracks; a few eating, playing cards or trying to catch a few minutes of shut-eye before returning to their shifts. From the broad variety on display, the city watch consists of both humans and morphs of many kinds.");
+	Text.NL();
 }
 
 world.loc.Rigard.Barracks.common.links.push(new Link(
@@ -127,11 +128,35 @@ world.loc.Rigard.Barracks.common.links.push(new Link(
 world.loc.Rigard.Barracks.common.events.push(new Link(
 	"Miranda", function() { return miranda.IsAtLocation(); }, true,
 	function() {
-		if(miranda.IsAtLocation())
-			Text.Add("You spot Miranda hanging out with a few other guards, sneaking in a few drinks.<br/>");
+		if(miranda.IsAtLocation()) {
+			Text.Add("You spot Miranda hanging out with a few other guards, sneaking in a few drinks.");
+			Text.NL();
+		}
 	},
 	function() {
 		Scenes.Miranda.BarracksApproach();
+	}
+));
+world.loc.Rigard.Barracks.common.events.push(new Link(
+	"Evidence", function() {
+		return Scenes.Vaughn.Tasks.Snitch.OnTask();
+	}, function() {
+		return !vaughn.taskTimer.Expired();
+	},
+	function() {
+		if(Scenes.Vaughn.Tasks.Snitch.OnTask()) {
+			if(vaughn.taskTimer.Expired())
+				Text.Add("You were supposed to plant the evidence in the lockers here for Vaughn, but you weren't quick enough; the inspection has already happened. You should return and report to Vaughn.");
+			else {
+				Text.Add("This is where Vaughn told you to plant the evidence of the snitch.");
+				if(miranda.flags["Snitch"] == 0)
+					Text.Add(" Perhaps you could ask Miranda to help you out, as a less direct way to deal with the issue?");
+			}
+			Text.NL();
+		}
+	},
+	function() {
+		Scenes.Vaughn.Tasks.Snitch.PlantEvidence();
 	}
 ));
 
@@ -139,6 +164,7 @@ world.loc.Rigard.Barracks.common.events.push(new Link(
 
 world.loc.Rigard.Barracks.sparring.description = function() {
 	Text.Add("The sparring yard is used by the city watch to do basic training and drills for new recruits. There are a few strawman targets and an archery range, as well as racks of wooden practice weapons of various kinds.");
+	Text.NL();
 }
 
 world.loc.Rigard.Barracks.sparring.links.push(new Link(
@@ -153,6 +179,7 @@ world.loc.Rigard.Barracks.sparring.links.push(new Link(
 //TODO
 world.loc.Rigard.Barracks.captains.description = function() {
 	Text.Add("PLACEHOLDER: Capt's quarters.");
+	Text.NL();
 }
 
 world.loc.Rigard.Barracks.captains.links.push(new Link(
