@@ -5,6 +5,14 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.4j
+------------
+* 
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.4i
 ------------
 * Fixed a bunch of bugs and typos.
@@ -30,10 +38,6 @@ Version 0.4i
  - He can send you on tasks. Currently only two available
 * Added a fallback font for systems where the regular button font isn't available (thanks coladict on github!)
 * Added a new way of doing save to file that should work for offline play! Tested and works for Chrome and Firefox, I make no promises for IE (thanks coladict on github!)
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.4h
 ------------
