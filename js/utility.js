@@ -87,3 +87,40 @@ GenerateFile = function(options) {
 		form.submit();
 	},50);
 };
+GenerateFile.canSaveOffline = false;
+
+(function(){
+	// calling convention for destroying local variables instead of keeping them in global namespace
+	var lnk;
+	try {
+		new Blob([JSON.stringify({"obj":"discarded"})],{"type":"application/json"});
+		var fl = new File([JSON.stringify({"obj":"discarded"})],"FoE.json",{"type":"application/json"});
+		lnk = document.createElement("a");
+		if (typeof lnk.hidden !== "boolean" || typeof lnk.href !== "string" || typeof lnk.download !== "string" || typeof lnk.click !== "function") {
+			throw 'Anchor element does not support all necessary features';
+		}
+		var url = URL.createObjectURL(fl);
+		URL.revokeObjectURL(url);
+		lnk.hidden = true;
+		lnk.download = "application/json";
+		document.body.appendChild(lnk);
+	}
+	catch(msg) {
+		console.log('Desired features not supported. "Save to file" can only work through server. ', msg);
+		return;
+	}
+	// if no exceptions are thrown, we simply replace the GenerateFile function with this one
+	window.GenerateFile = function(options) {
+		if(!options.filename || !options.content) {
+			throw new Error("Please enter all the required config options!");
+		}
+		if (lnk.href !== "") {
+			// remove any old data from lingering system resources
+			URL.revokeObjectURL(lnk.href);
+		}
+		var fl = new File([options.content], options.filename, {"type":"application/json"});
+		lnk.href = URL.createObjectURL(fl);
+		lnk.click();
+	}
+	window.GenerateFile.canSaveOffline = true;
+})();

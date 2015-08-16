@@ -106,7 +106,13 @@ LimitedDataPrompt = function(backFunc) {
     }, online);
     
     Input.buttons[2].Setup("Save file", function() {
-    	var filename = prompt("SAVE TO FILE WILL NOT WORK IN OFFLINE MODE!\n\n Enter name of save file.");
+		var filename;
+		if(GenerateFile.canSaveOffline) {
+			filename = prompt("SAVE TO FILE MIGHT NOT WORK IN OFFLINE MODE!\n\n Enter name of save file.");
+		}
+		else {
+			filename = prompt("SAVE TO FILE WILL NOT WORK IN OFFLINE MODE!\n\n Enter name of save file.");
+		}
     	if(filename && filename != "") {
     		GameToCache();
 			var seen = [];
@@ -170,7 +176,13 @@ DataPrompt = function() {
     }, Saver.HasSaves());
     
     Input.buttons[2].Setup("Save file", function() {
-    	var filename = prompt("SAVE TO FILE WILL NOT WORK IN OFFLINE MODE!\n\n Enter name of save file.");
+		var filename;
+		if(GenerateFile.canSaveOffline) {
+			filename = prompt("SAVE TO FILE MIGHT NOT WORK IN OFFLINE MODE!\n\n Enter name of save file.");
+		}
+		else {
+			filename = prompt("SAVE TO FILE WILL NOT WORK IN OFFLINE MODE!\n\n Enter name of save file.");
+		}
     	if(filename && filename != "") {
     		GameToCache();
 			var seen = [];
