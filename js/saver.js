@@ -59,6 +59,29 @@ Saver.SaveGame = function(nr, cmt) {
 	Saver.SavePrompt();
 }
 
+Saver.SaveToFile = function() {
+	var filename = prompt("SAVE TO FILE WILL NOT WORK IN OFFLINE MODE!\n\n Enter name of save file.");
+	if(filename && filename != "") {
+		GameToCache();
+		var seen = [];
+		GenerateFile({filename: filename, content: JSON.stringify(gameCache,
+			function(key, val) {
+			   if (typeof val == "object") {
+			        if (seen.indexOf(val) >= 0)
+			            return;
+			        seen.push(val);
+			    }
+			    return val;
+			})
+		});
+	}
+	else {
+		Text.NL();
+		Text.Add("No file saved: Enter a filename!", null, 'bold');
+		Text.Flush();
+	}
+}
+
 // Returns true if there are any saves
 Saver.HasSaves = function() {
 	if(!online) return false;
