@@ -11,14 +11,29 @@ Abilities.Run.enabledCondition = function(encounter, caster) {
 	return encounter.canRun;
 }
 Abilities.Run.CastInternal = function(encounter, caster) {
-	// TODO: Make more flavor text	
-	Text.Add("You try to run away!");
-	Text.NL();
+	var parse = {
+		Name : caster.NameDesc(),
+		y : caster.plural() ? "y" : "ies",
+		was : caster.plural() ? "were" : "was"
+	};
+	// TODO: Make more flavor text
+	Text.Add("[Name] tr[y] to run away... ", parse);
 	
-	// TODO: random chance on success
 	Text.Flush();
-	if(encounter.canRun)
-		encounter.onRun();
+	if(encounter.canRun) {
+		// TODO: random chance on success (more complex)
+		var success = Math.random() < 0.5;
+		if(success) {
+			encounter.onRun();
+		}
+		else {
+			Text.Add("but [was] unable to!", parse);
+			Text.Flush();
+			Gui.NextPrompt(function() {
+				encounter.CombatTick();
+			});
+		}	
+	}
 	else {
 		Gui.NextPrompt(function() {
 			encounter.CombatTick();
