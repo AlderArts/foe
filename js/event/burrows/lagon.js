@@ -2218,7 +2218,7 @@ Scenes.Lagon.ReturnToBurrowsAfterScepter = function() {
 					Text.Clear();
 					Text.Add("No, it’s not going to be that easy. You stand by Ophelia, and the king can take his offers and stuff them. You’ve had enough of his bullshit.", parse);
 					Text.NL();
-					Text.Add("<i>“I was willing to let bygones be bygones,”</i> Lagon sighs, shaking his head. <i>“Some harsh words were raised, perhaps you could have gotten out of it by begging my forgiveness. Or offering yourself as my grateful cock-sleeve. Alas, such rebellious war-mongers have to be put to task for their transgressions.”</i>", parse);
+					Text.Add("<i>“I was willing to let bygones be bygones,”</i> Lagon sighs, shaking his head. <i>“Some harsh words were raised, perhaps you could have gotten out of it by begging my forgiveness. Or offering yourself as my grateful cocksleeve. Alas, such rebellious war-mongers have to be put to task for their transgressions.”</i>", parse);
 					Text.NL();
 					Text.Add("Fuck you!", parse);
 					Text.NL();
