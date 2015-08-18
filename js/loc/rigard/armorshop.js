@@ -136,7 +136,7 @@ Scenes.Rigard.ArmorShop.CreateShop = function() {
 				var scenes = new EncounterTable();
 				scenes.AddEnc(function() { Text.Add("Donovan shrugs. <i>“Sorry we couldn’t do business, but I don’t haggle. My prices are what they are - already cutting my own throat on most of my deals as it is. Sometimes, a man gets tired of eating watery gruel and cabbage for dinner every night, you know? Well, anything else I can do for you?”</i>", parse); });
 				scenes.AddEnc(function() { Text.Add("<i>“Changed your mind? I’m afraid I can’t go any higher on that; I’m already one to two months’ operating expenses from selling sausages in buns at the plaza. Still… is there anything I can do for you, since you’re here?”</i>", parse); });
-				scenes.AddEnc(function() { Text.Add("<i>“Sorry, [sirmadam]. I can’t go any higher on that. Can’t make exceptions, won’t play favourites, gotta treat all customers with respect. You ever change your mind about changing your mind, and I’ll be more than happy to take it off your hands.”</i>", parse); });
+				scenes.AddEnc(function() { Text.Add("<i>“Sorry, [sirmadam]. I can’t go any higher on that. Can’t make exceptions, won’t play favorites, gotta treat all customers with respect. You ever change your mind about changing your mind, and I’ll be more than happy to take it off your hands.”</i>", parse); });
 				scenes.AddEnc(function() { Text.Add("Donovan lets out a small sigh as he pushes your [item] back to you and straightens his tie. <i>“Pity we couldn’t see eye-to-eye, [sirmadam]. Still, I’ll be here if you ever change your mind, so there’s no rush. Can I help you with something else?”</i>", parse); });
 				scenes.Get();
 			}
@@ -330,7 +330,7 @@ Scenes.Rigard.ArmorShop.RegularEntry = function(newStock) {
 			Text.Add("Donovan rolls his gaze upward from the counter as you step in. <i>“Welcome, welcome! What can I do for you today? A good set of boots? A metal codpiece? Something more exotic? Or maybe you’re just here to browse?”</i>", parse);
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
-			Text.Add("<i>“Oh, look! Who should enter but my favourite customer!”</i> You turn to find Donovan looking intently towards you, the stoat-morph wearing a truly ear-splitting grin on his face. <i>“Come in, come in, I’m sure you’ll like the selection we have on the floor today.”</i>", parse);
+			Text.Add("<i>“Oh, look! Who should enter but my favorite customer!”</i> You turn to find Donovan looking intently towards you, the stoat-morph wearing a truly ear-splitting grin on his face. <i>“Come in, come in, I’m sure you’ll like the selection we have on the floor today.”</i>", parse);
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
 			Text.Add("<i>“Oh, marvellous - it’s… um… you again! Have you been adventuring? You certainly look like you’ve been adventuring; you’ve got that marvellous glow about you that says ‘yes! I have been out there taking asses and names alike!’ It’s marvellous, isn’t it?”</i> Donovan pauses a moment to catch his breath. <i>“Well, just don’t forget your old friend Donovan, will you? Take a moment to check out my stock - you’ll need it out there.”</i>", parse);
@@ -389,7 +389,7 @@ Scenes.Rigard.ArmorShop.Prompt = function() {
 				scenes.AddEnc(function() { Text.Add("<i>“Ah! You have something you’d like me to take off your hands? Something too old, a little out of fashion, or maybe you’re outgrowing your first breastplate? Oh, no need to be shy, it happens.”</i> He rubs his paws together.", parse); });
 				scenes.AddEnc(function() { Text.Add("<i>“Oh, in need of a bit of spare change? Well, I’ll be pleased to buy your old bits and pieces for a very fair and reasonable price.”</i> He gives you a nod and grin. <i>“Just let me take a look at it, and I’ll give you a quote.”</i>", parse); });
 				scenes.AddEnc(function() { Text.Add("<i>“You’d like me to have a look at something? Well, we here at Twopenny’s only accept the best. Make sure your goods are in serviceable condition.”</i> Donovan coughs very deliberately.", parse); });
-				scenes.AddEnc(function() { Text.Add("<i>“Looking to sell something? Remember the rules, then; always remember the rules. Don’t want to have to report my favourite customer to the watch, that would be a terrible, horrible thing for me to have to do, but I’d have to do it anyway.”</i>", parse); });
+				scenes.AddEnc(function() { Text.Add("<i>“Looking to sell something? Remember the rules, then; always remember the rules. Don’t want to have to report my favorite customer to the watch, that would be a terrible, horrible thing for me to have to do, but I’d have to do it anyway.”</i>", parse); });
 				scenes.Get();
 				Text.NL();
 				Text.Add("<i>“A word of warning: I’d make sure I really wanted to let go of my stuff, if I were you. Once sold, I don’t do buybacks.”</i>", parse);
@@ -530,7 +530,7 @@ Scenes.Rigard.ArmorShop.Talk = function(backFunc) {
 	}
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
-		Text.Add("<i>“Oh, you'd rather talk business?”</i> Donovan rubs his furry hands together and smiles. <i>“That's my favourite topic, so don't you worry about changing the subject on me!”</i>", parse);
+		Text.Add("<i>“Oh, you'd rather talk business?”</i> Donovan rubs his furry hands together and smiles. <i>“That's my favorite topic, so don't you worry about changing the subject on me!”</i>", parse);
 		Text.Flush();
 		backFunc();
 	});

@@ -296,7 +296,7 @@ Scenes.Lizards.WinMale = function(enc) {
 	Text.Clear();
 	Text.Add("You grin triumphantly, standing over the reptile you just trounced, looking down at him victoriously. He lies there on the ground, his chest heaving and his breath coming as a sibilant hiss. He gazes at your feet, his slitted eyes defeated.", parse);
 	Text.NL();
-	Text.Add("You smirk at him. The creatures are known for abusing those they beat, perhaps you should return the favour?", parse);
+	Text.Add("You smirk at him. The creatures are known for abusing those they beat, perhaps you should return the favor?", parse);
 	
 	Text.NL();
 	if(player.FirstCock() && player.FirstVag()) {

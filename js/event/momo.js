@@ -906,7 +906,7 @@ Scenes.Momo.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“While I was at the chef's guild, I dabbled a little in gastroalchemy. Now, I'm not a proper alchemist,“</i> she hastens to explain to you, <i>“But if you give me an alchemical potion or some other transformative, I can try and cook up a dish from it that should be more likely to cause the effect you want it to cause. I can't guarantee it'll work, this is a tricky business, but the odds will be much better than just taking it naturally,“</i> she assures you earnestly.", parse);
 				Text.NL();
-				Text.Add("<i>“Finally, there's my most favourite thing to do; experiment,“</i> she giggles, rubbing her hands together eagerly. <i>“This world is full of all sorts of weird and magical ingredients, and I'm determined to figure out how they can revolutionise cooking. If you've found anything in your travels that you want to let me try and cook with, I'd be more than happy to see what I can make from it. No guarantees what'll work, but then, that's why it's experimenting!“</i>", parse);
+				Text.Add("<i>“Finally, there's my most favorite thing to do; experiment,“</i> she giggles, rubbing her hands together eagerly. <i>“This world is full of all sorts of weird and magical ingredients, and I'm determined to figure out how they can revolutionise cooking. If you've found anything in your travels that you want to let me try and cook with, I'd be more than happy to see what I can make from it. No guarantees what'll work, but then, that's why it's experimenting!“</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Well... I think that about sums it up,“</i> she notes, pausing thoughtfully. Nodding her head, she looks back at you. <i>“Anything else you wanted?“</i>", parse);
 				Text.Flush();

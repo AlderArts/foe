@@ -1555,7 +1555,7 @@ Scenes.Cale.SexGetBJ = function(outside) {
 		if(cale.sex.gBlow == 0)
 			Text.Add("The wolf starts to protest when you suggest he polish your cock[s] a bit, but he goes quiet when you remind him what the two of you have done before. <i>“Alright, alright! No need to bring up the past. S’pose blowing you is better than taking it up the ass.”</i>", parse);
 		else if(cale.Slut() < 30)
-			Text.Add("<i>“Eh… alright, I guess,”</i> the wolf nods uncertainly, throwing a quick glance at your bulge. <i>“Think you can return the favour later?”</i> he adds hopefully, still not too keen on being on the receiving end. Well, nothing that a little training can’t fix.", parse);
+			Text.Add("<i>“Eh… alright, I guess,”</i> the wolf nods uncertainly, throwing a quick glance at your bulge. <i>“Think you can return the favor later?”</i> he adds hopefully, still not too keen on being on the receiving end. Well, nothing that a little training can’t fix.", parse);
 		else
 			Text.Add("<i>“Mmm, I’m always up for a tasty treat, and perhaps we can put your cock[s] to some other use after, hmm?”</i> the wolf grins, slapping his butt for good measure.", parse);
 		Text.Flush();
@@ -1644,7 +1644,7 @@ Scenes.Cale.SexGetBJSneakyEntry = function(outside, sneaky) {
 				Text.Add("<i>“Who says that isn’t exactly what I want?”</i> he retorts glibly. As fun as that would be...", parse);
 		}
 		Text.NL();
-		Text.Add("<i>“Suck,”</i> you repeat your previous command more forcefully, pinning him down. His will is faltering, and you can feel his tongue moving around uncertainly, inadvertently licking your [cockDesc]. To give him that extra push over the edge, your hand trails down his furry stomach to his stiff, crimson erection, insinuating that if he’s a good boy, maybe you’ll return the favour.", parse);
+		Text.Add("<i>“Suck,”</i> you repeat your previous command more forcefully, pinning him down. His will is faltering, and you can feel his tongue moving around uncertainly, inadvertently licking your [cockDesc]. To give him that extra push over the edge, your hand trails down his furry stomach to his stiff, crimson erection, insinuating that if he’s a good boy, maybe you’ll return the favor.", parse);
 		Text.NL();
 		if(virgin)
 			Text.Add("Cale lets out a muffled sigh as he capitulates, unable to resist the urges of his body. Closing his eyes in defeat as he allows you to have your way with him.", parse);
@@ -1820,7 +1820,7 @@ Scenes.Cale.SexGetEatenEntrypoint = function(outside) {
 		Text.NL();
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("<i>“Ah, my favourite snack, juicy pussy,”</i> Cale teases, caressing your [thighDesc] as he eyes his meal.", parse);
+		Text.Add("<i>“Ah, my favorite snack, juicy pussy,”</i> Cale teases, caressing your [thighDesc] as he eyes his meal.", parse);
 		Text.NL();
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {

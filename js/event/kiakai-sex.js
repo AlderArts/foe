@@ -2258,13 +2258,15 @@ Scenes.Kiakai.HealingAssertive = function() {
 									Text.NL();
 									
 									if(toySize > cap) {
-										Text.Add("[name] looks panicky, but in [hisher] current position, there isn't much that [heshe] can do to stop you. [HeShe] fervently tries to shake [hisher] head, but [heshe] can barely move thanks to your legs trapping [himher] on either side.", parse);
+										parse["legs"] = player.LegsDesc();
+										parse["l"] = player.HasLegs() ? Text.Parse("legs trapping [himher] on either side", parse) : Text.Parse("your [legs] trapping [himher]", parse);
+										Text.Add("[name] looks panicky, but in [hisher] current position, there isn't much that [heshe] can do to stop you. [HeShe] fervently tries to shake [hisher] head, but [heshe] can barely move thanks to your [l].", parse);
 										Text.NL();
 										Text.Add("<i>“Ha... wanna bet?”</i> You smile as you lube up the [toyDesc], preparing [itThem] for entry. You aren't <i>completely</i> heartless after all. Initial penetration is a bit difficult, but your previous probing pays off, allowing [name] to somehow accommodate the [toyDesc]. Without missing a beat, you begin the slow and inexorable process of stuffing [all] inside the submissive elf. A third... half... each time you thrust [itThem] inside, a little more of the huge toy probes [hisher] depths.", parse);
 									}
 									else if(toySize > cap/2) {
 										parse["cuntAss"] = player.FirstVag() ? "cunt" : "ass";
-										Text.Add("[name]'s eyes widen slightly as you brandish the large toy, but, bravely or lustfully, you are not sure, [heshe] doesn't voice any complaints.", parse);
+										Text.Add("[name]'s eyes widen slightly as you brandish the large toy. Bravely or lustfully - you are not sure - [heshe] doesn't voice any complaints.", parse);
 										if(player.FirstCock())
 											Text.Add(" The cock lodged in [hisher] throat might also have something to do with it.", parse);
 										else if(player.FirstVag())
