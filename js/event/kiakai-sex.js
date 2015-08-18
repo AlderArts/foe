@@ -2299,7 +2299,7 @@ Scenes.Kiakai.HealingAssertive = function() {
 					
 					Gui.Callstack.push(function() {
 						Text.NL();
-						Text.Add("It's not long before [name]'s filled [kAnusDesc] constricts, and the elf's entire body shakes in pleasure. With a nudge of your [hipsDesc], you remind [himher] to return the favour. [HeShe] meekly complies, going down on your nethers with renewed vigor.", parse);
+						Text.Add("It's not long before [name]'s filled [kAnusDesc] constricts, and the elf's entire body shakes in pleasure. With a nudge of your [hipsDesc], you remind [himher] to return the favor. [HeShe] meekly complies, going down on your nethers with renewed vigor.", parse);
 						Text.NL();
 						
 						var cum = kiakai.OrgasmCum();
