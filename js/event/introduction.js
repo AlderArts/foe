@@ -1526,7 +1526,7 @@ Intro.UruSexGetFuckedLead = function() {
 		cockDesc = function() { return player.FirstCock().Short(); }
 	
 	if(cockDesc) {
-		Text.Add("Reaching between your legs, your give your " + cockDesc() + " a tug, forming a cocksleeve with the palm of your hand. You time your strokes to match your rise and fall on the demonette's " + uruCockDesc() + ", doubling the intensity of your pleasure.");
+		Text.Add("Reaching between your legs, you give your " + cockDesc() + " a tug, forming a cocksleeve with the palm of your hand. You time your strokes to match your rise and fall on the demonette's " + uruCockDesc() + ", doubling the intensity of your pleasure.");
 	}
 	else {
 		Text.Add("Reaching up to fondle your " + player.FirstBreastRow().Short() + ", you gently cup one of the orbs. You alternate between massaging the breast and teasing the sensitive nipple, pinching and pulling it.");
