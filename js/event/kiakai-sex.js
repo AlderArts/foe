@@ -188,11 +188,6 @@ Scenes.Kiakai.HealingSeducePrompt = function() {
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer(),
 		heatStirring : player.FirstCock() ? "stirring" : "heat",
 		breastDesc   : function() { return player.FirstBreastRow().Short(); },
 		nipsDesc   : function() { return player.FirstBreastRow().NipsShort(); },
@@ -201,6 +196,8 @@ Scenes.Kiakai.HealingSeducePrompt = function() {
 		armor        : function() { return kiakai.ArmorDesc(); },
 		hairDesc     : function() { return kiakai.Hair().Short(); }
 	};
+	
+	parse = kiakai.ParserPronouns(parse);
 	
 	parse.stuttername = player.name[0] + "-" + player.name;
 	parse.genDesc = player.FirstCock() ? function() { return player.MultiCockDesc(); } :
@@ -1025,12 +1022,6 @@ Scenes.Kiakai.PleasureElf = function() {
 	var parse = {
 		playername : player.name,
 		name    : kiakai.name,
-		heshe   : kiakai.heshe(),
-		HeShe   : kiakai.HeShe(),
-		himher  : kiakai.himher(),
-		hisher  : kiakai.hisher(),
-		HisHer  : kiakai.HisHer(),
-		hishers : kiakai.hishers(),
 		heatStirring : player.FirstCock() ? "stirring" : "heat",
 		breastDesc   : function() { return player.FirstBreastRow().Short(); },
 		nipsDesc     : function() { return player.FirstBreastRow().NipsShort(); },
@@ -1061,6 +1052,8 @@ Scenes.Kiakai.PleasureElf = function() {
 		priest       : kiakai.flags["InitialGender"] == Gender.male ? "priest" : "priestess",
 		eyeColor     : Color.Desc(kiakai.Eyes().color)
 	};
+	
+	parse = kiakai.ParserPronouns(parse);
 	
 	parse["kGenDesc"] = kiakai.FirstCock() ? function() { return kiakai.MultiCockDesc(); } :
 					kiakai.FirstVag() ? function() { return kiakai.FirstVag().Short(); } :
@@ -1474,13 +1467,10 @@ Scenes.Kiakai.PleasureElfEnd = function() {
 	
 	var parse = {
 		playername   : player.name,
-		name         : kiakai.name,
-		heshe        : kiakai.heshe(),
-		HeShe        : kiakai.HeShe(),
-		himher       : kiakai.himher(),
-		hisher       : kiakai.hisher(),
-		HisHer       : kiakai.HisHer()
+		name         : kiakai.name
 	};
+	
+	parse = kiakai.ParserPronouns(parse);
 	
 	Text.Add("Completely sated, [name] collapses on [hisher] back, panting from the exertion. You allow [himher] a few minutes of rest before gathering up your gear.", parse);
 	Text.Flush();
@@ -1498,11 +1488,6 @@ Scenes.Kiakai.HealingAssertive = function() {
 	var parse = {
 		playername   : player.name,
 		name         : kiakai.name,
-		heshe        : kiakai.heshe(),
-		HeShe        : kiakai.HeShe(),
-		himher       : kiakai.himher(),
-		hisher       : kiakai.hisher(),
-		HisHer       : kiakai.HisHer(),
 		kCockDesc    : function() { return kiakai.FirstCock().Short(); },
 		kMultiCockDesc : function() { return kiakai.MultiCockDesc(); },
 		kBallsDesc   : function() { return kiakai.BallsDesc(); },
@@ -1532,6 +1517,8 @@ Scenes.Kiakai.HealingAssertive = function() {
 		anusDesc     : function() { return player.Butt().AnalShort(); },
 		analAtt      : kiakai.flags["AnalExp"] > 10 ? "uncertainly" : "eagerly"
 	};
+	
+	parse = kiakai.ParserPronouns(parse);
 	
 	parse.stuttername = player.name[0] + "-" + player.name;
 	parse.genDesc = player.FirstCock() ? function() { return player.MultiCockDesc(); } :
@@ -2525,12 +2512,6 @@ Scenes.Kiakai.Sex = function() {
 	var parse = {
 		playername   : player.name,
 		name         : kiakai.name,
-		heshe        : kiakai.heshe(),
-		HeShe        : kiakai.HeShe(),
-		himher       : kiakai.himher(),
-		hisher       : kiakai.hisher(),
-		hishers      : kiakai.hishers(),
-		HisHer       : kiakai.HisHer(),
 		kCockDesc    : function() { return kiaiCock.Short(); },
 		kCockTip     : function() { return kiaiCock.TipShort(); },
 		kCockDesc2   : function() { return kiakai.AllCocks()[1].Short(); },
@@ -2562,6 +2543,8 @@ Scenes.Kiakai.Sex = function() {
 		anusDesc     : function() { return player.Butt().AnalShort(); },
 		stomachDesc  : function() { return player.StomachDesc(); }
 	};
+	
+	parse = kiakai.ParserPronouns(parse);
 	
 	parse.stuttername = player.name[0] + "-" + player.name;
 	parse.genDesc = player.FirstCock() ? function() { return player.MultiCockDesc(); } :
@@ -3553,12 +3536,6 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 	var parse = {
 		playername   : player.name,
 		name         : kiakai.name,
-		heshe        : kiakai.heshe(),
-		HeShe        : kiakai.HeShe(),
-		himher       : kiakai.himher(),
-		hisher       : kiakai.hisher(),
-		hishers      : kiakai.hishers(),
-		HisHer       : kiakai.HisHer(),
 		kCockDesc    : function() { return kiaiCock.Short(); },
 		kCockTip     : function() { return kiaiCock.TipShort(); },
 		kCockDesc2   : function() { return kiakai.AllCocks()[1].Short(); },
@@ -3595,6 +3572,8 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 		skinDesc     : function() { return player.SkinDesc(); },
 		tailDesc     : function() { return player.HasTail().Short(); }
 	};
+	
+	parse = kiakai.ParserPronouns(parse);
 	
 	parse.stuttername = player.name[0] + "-" + player.name;
 	parse.genDesc = player.FirstCock() ? function() { return player.MultiCockDesc(); } :
@@ -4400,12 +4379,6 @@ Scenes.Kiakai.AnalCatchFinish = function() {
 	var parse = {
 		playername   : player.name,
 		name         : kiakai.name,
-		heshe        : kiakai.heshe(),
-		HeShe        : kiakai.HeShe(),
-		himher       : kiakai.himher(),
-		hisher       : kiakai.hisher(),
-		hishers      : kiakai.hishers(),
-		HisHer       : kiakai.HisHer(),
 		kCockDesc    : function() { return kiaiCock.Short(); },
 		kCockTip     : function() { return kiaiCock.TipShort(); },
 		kCockDesc2   : function() { return kiakai.AllCocks()[1].Short(); },
@@ -4439,6 +4412,7 @@ Scenes.Kiakai.AnalCatchFinish = function() {
 		stomachDesc  : function() { return player.StomachDesc(); }
 	};
 	
+	parse = kiakai.ParserPronouns(parse);
 	/* TODO Player orgasm */
 	
 	Text.NL();
