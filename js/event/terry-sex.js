@@ -4215,7 +4215,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 					world.TimeStep({hour: 1});
 					
 					Gui.NextPrompt();
-				}, enabled : player.sexlevel >= 5 && terry.PregHandler().IsPregnant() == false,
+				}, enabled : (player.HasPerk(Perks.Breeder) || player.sexlevel >= 5) && terry.PregHandler().IsPregnant() == false,
 				tooltip : Text.Parse("Show Terry what that cunt of [hishers] is really for! Breed [himher] like the bitch [heshe] is and fill [himher] full of kits!", parse)
 			});
 			if(terry.Cup() >= Terry.Breasts.Ccup) {
