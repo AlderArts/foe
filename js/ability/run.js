@@ -22,8 +22,11 @@ Abilities.Run.CastInternal = function(encounter, caster) {
 	Text.Flush();
 	if(encounter.canRun) {
 		// TODO: random chance on success (more complex)
-		var success = Math.random() < 0.5;
-		if(success) {
+		var runlevel = encounter.RunLevel();
+		var goal = caster.level / (caster.level + runlevel);
+		if(caster.HasPerk(Perks.Fleetfoot)) goal *= 1.5;
+		
+		if(goal < Math.random() || DEBUG) {
 			encounter.onRun();
 		}
 		else {
@@ -34,7 +37,7 @@ Abilities.Run.CastInternal = function(encounter, caster) {
 			});
 		}	
 	}
-	else {
+	else { //Should never happen (ability locked)
 		Gui.NextPrompt(function() {
 			encounter.CombatTick();
 		});

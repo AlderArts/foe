@@ -15,6 +15,10 @@ function Encounter(enemy)
 	this.Callstack = [];
 }
 
+Encounter.prototype.RunLevel = function() {
+	return this.enemy.Get(0).level;
+}
+
 Encounter.prototype.Start = function() {
 	SetGameState(GameState.Event);
 	

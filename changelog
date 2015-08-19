@@ -9,6 +9,7 @@ Version 0.4j
 ------------
 * Fixed a whole lot of bugs in Kiai
 * Fixed a bug that would lock out strapon action for Kiai
+* Run is no longer 100% certain. It's based on your level and the level of the encounter (ie the first mob). Debug is always 100%
 
 --------------------------------------------
              PREVIOUS VERSIONS
