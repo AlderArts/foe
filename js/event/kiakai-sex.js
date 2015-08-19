@@ -2794,9 +2794,9 @@ Kiakai.SexFirstAttitude = {
 
 Scenes.Kiakai.SexPrompt = function(attitude) {
 	// TODO Toys
-	var playerCock = player.BiggestCock();
+	var playerCock = player.BiggestCock(null, true);
 	var strapon    = playerCock ? playerCock.isStrapon : false;
-	var kiaiCock   = kiakai.BiggestCock();
+	var kiaiCock   = kiakai.BiggestCock(null, true);
 	
 	var parse = {
 		playername   : player.name,
@@ -3530,8 +3530,8 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 	Text.Flush();
 	
 	// TODO Toys
-	var playerCock = player.FirstCock() || (player.strapOn ? player.strapOn.cock : null);
-	var kiaiCock   = kiakai.FirstCock() || (kiakai.strapOn ? kiakai.strapOn.cock : null);
+	var playerCock = player.BiggestCock(null, true);
+	var kiaiCock   = kiakai.BiggestCock(null, true);
 	
 	var parse = {
 		playername   : player.name,
@@ -4374,8 +4374,8 @@ Scenes.Kiakai.AnalCatchPrep = function(choice, assert) {
 }
 
 Scenes.Kiakai.AnalCatchFinish = function() {
-	var playerCock = player.FirstCock() || (player.strapOn ? player.strapOn.cock : null);
-	var kiaiCock   = kiakai.FirstCock() || (kiakai.strapOn ? kiakai.strapOn.cock : null);
+	var playerCock = player.BiggestCock(null, true);
+	var kiaiCock   = kiakai.BiggestCock(null, true);
 	
 	var parse = {
 		playername   : player.name,
