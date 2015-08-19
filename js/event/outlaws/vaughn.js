@@ -43,8 +43,11 @@ Vaughn.Met = {
 	SnitchMirandaSuccess : 6,
 	SnitchWatchhousFail : 7,
 	SnitchWatchhousSuccess : 8,
-	CompletedSnitch : 10
-	
+	CompletedSnitch : 10,
+	//Task 3
+	OnTaskPoisoning : 11,
+	//TODO
+	CompletedPoisoning : 12
 	//TODO: tasks
 };
 Vaughn.Talk = { //Bitmask

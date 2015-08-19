@@ -3,12 +3,14 @@ Scenes.Vaughn.Tasks = {};
 
 Scenes.Vaughn.Tasks.OnTask = function() { //TODO add tasks
 	return Scenes.Vaughn.Tasks.Lockpicks.OnTask() ||
-		Scenes.Vaughn.Tasks.Snitch.OnTask();
+		Scenes.Vaughn.Tasks.Snitch.OnTask() ||
+		Scenes.Vaughn.Tasks.Poisoning.OnTask();
 }
 
 Scenes.Vaughn.Tasks.AnyTaskAvailable = function() { //TODO add tasks
 	return Scenes.Vaughn.Tasks.Lockpicks.Available() ||
-		Scenes.Vaughn.Tasks.Snitch.Available();
+		Scenes.Vaughn.Tasks.Snitch.Available() ||
+		Scenes.Vaughn.Tasks.Poisoning.Available();
 }
 
 Scenes.Vaughn.Tasks.StartTask = function() { //TODO add tasks
@@ -16,6 +18,8 @@ Scenes.Vaughn.Tasks.StartTask = function() { //TODO add tasks
 		Scenes.Vaughn.Tasks.Lockpicks.Start();
 	else if(Scenes.Vaughn.Tasks.Snitch.Available())
 		Scenes.Vaughn.Tasks.Snitch.Start();
+	else if(Scenes.Vaughn.Tasks.Poisoning.Available())
+		Scenes.Vaughn.Tasks.Poisoning.Start();
 }
 
 Scenes.Vaughn.Tasks.TaskPrompt = function() {
@@ -1023,3 +1027,126 @@ Scenes.Vaughn.Tasks.Snitch.DebriefFailure = function(parse) {
 	
 	Gui.NextPrompt();
 }
+
+
+
+
+Scenes.Vaughn.Tasks.Poisoning = {};
+//TODO
+Scenes.Vaughn.Tasks.Poisoning.Available = function() {
+	if(vaughn.flags["Met"] >= Vaughn.Met.CompletedPoisoning) return false;
+	return true;
+}
+//TODO
+Scenes.Vaughn.Tasks.Poisoning.OnTask = function() {
+	return vaughn.flags["Met"] == Vaughn.Met.OnTaskPoisoning;
+}
+Scenes.Vaughn.Tasks.Poisoning.Completed = function() {
+	return vaughn.flags["Met"] >= Vaughn.Met.CompletedPoisoning;
+}
+
+Scenes.Vaughn.Tasks.Poisoning.Start = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("<i>“This one’s a little more dangerous than your previous assignment,”</i> Vaughn tells you after a moment’s contemplation. <i>“You’d be in considerable personal risk - we’re looking at an extended stay inside of a cell if you’re nicked, at least. I wouldn’t blame you if you wanted to back out and leave it to our more experienced operatives.”</i>", parse);
+	Text.NL();
+	Text.Add("Well, what’s the big deal? Or is he telling you this to lure you in with the temptation of forbidden fruit?", parse);
+	Text.NL();
+	Text.Add("Vaughn chuckles. <i>“Please, [playername]. I’m not so devious - Maria or the boss-man might be, but I’m as stiff and straight as a stick in the mud. No, here you’ll actually be committing quite the serious crime, so I’d rather you know what you’re getting yourself into before I send you out to do it.", parse);
+	Text.NL();
+	Text.Add("For the last time, you wouldn’t have said yes if you didn’t mean it. What’s he plotting, anyway? Assassination? Grand robbery? High treason?", parse);
+	Text.NL();
+	Text.Add("The easygoing smile vanishes from Vaughn’s face at those words. <i>“I’ve got that last one covered well enough, so please don’t joke around like that. No, I’d simply like you to poison someone. Want to hear the details?”</i>", parse);
+	Text.NL();
+	Text.Add("Oh. Uh… yeah, sure…", parse);
+	Text.NL();
+	Text.Add("Snorting, Vaughn leads you over to the opposite side of the watchtower and clear his throat. <i>“Right, let’s begin. Are you familiar with a certain Lady Katara Heydrich?”</i>", parse);
+	Text.NL();
+	Text.Add("Can’t say you’ve heard of her before, no. Should you?", parse);
+	Text.NL();
+	Text.Add("<i>“Probably not. Very minor personage in court, according to what Elodie’s passed along to us. Still, we need her out of the way. See, thing is that our good friend the King’s Vizier has drafted a number of rather… disturbing laws regarding morphs and those marked as traitors to the crown, allowing Preston and his little posse to circumvent the usual warrants and due process accorded all of the king’s subjects. As you can imagine, we don’t like this one bit.”</i>", parse);
+	Text.NL();
+	Text.Add("Right. How does the good Lady Heydrich come into play?", parse);
+	Text.NL();
+	Text.Add("<i>“She’s set to present the arguments for those laws at the next court session, when the nobs intend to debate their merits and see if they’re to be passed,”</i> Vaughn replies. <i>“It’s supposed to be the big break Majid’s giving to her, allowing her to speak for him.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“I want you to make sure that she never turns up.”</i>", parse);
+	Text.NL();
+	Text.Add("That sounds… sinister.", parse);
+	Text.NL();
+	Text.Add("Vaughn’s muzzle twists into a sneer. <i>“As it should be. Don’t worry, I’m not going to ask you to kill anyone. That’d put far too much heat on us, and too soon at that. No, I just want you to cause her to be… indisposed, and to that effect, our good surgeon has prepared a couple of options for you.”</i>", parse);
+	Text.NL();
+	Text.Add("As you watch, Vaughn digs about in his pants pockets and draws out a couple of slender vials, one marked with a blue label, the other with a red one. Looking closely at them, their contents may as well have been water, for all you can tell - thin and runny, colorless and likely odorless, too. Vaughn makes a show of waving them in your face and smiles.", parse);
+	Text.NL();
+	Text.Add("<i>“The blue vial, or the red vial? Blue one’s going to give anyone unfortunate to taste a few drops a terrible case of the runs. The good lady won’t die, but she’ll wish she were dead for a couple of days. Red one’s… ah… let’s just say that she’ll jump the bones of the next living, breathing thing and fuck the poor sop silly, then move on to the next until she’s tired out… <b>then</b> continue like that for a day or two.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Care to pick your poison?”</i>", parse);
+	Text.Flush();
+	
+	//[Poison][Aphrodisiac]
+	var options = new Array();
+	options.push({ nameStr : "Poison",
+		tooltip : "The poison sounds cruel enough, thank you very much.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Vaughn nods and hands you the vial. <i>“I’m not going to envy the poor bitch when this gets into her system, but she really ought to have chosen a better bastard to throw her weight behind. I mean, I’ve never seen Majid in the flesh, but what I’ve heard of him makes me glad I’ve never had the chance for such. Well, since she enjoys spending so much time with dirty characters, I’m sure a case of the squealing shits won’t raise any eyebrows. The poison will take effect the following morning, so you’ll have plenty of time to make a getaway without raising too much suspicion.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Now, be careful with that thing. The glass shouldn’t shatter easily, but you don’t want to tempt fate any more than you need to. If you want to open it, just pull hard on the cork and it’ll pop free.", parse);
+			
+			party.Inv().AddItem(Items.Quest.OutlawPoison);
+			
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Aphrodisiac",
+		tooltip : "Why not? It might be fun to watch.",
+		func : function() {
+			Text.Clear();
+			parse["gen"] = player.mfFem("fellow", "girl");
+			Text.Add("Vaughn grins at you and hands you the vial. <i>“Oh, looking to create a roof-raising scene, are we? That should be fun… as well as bring down a whole lot of disrepute upon our good lady. She certainly won’t be doing any speaking at court, then. Maybe some moaning… ha. Seriously, though, you’re quite the naughty [gen], [playername].”</i>", parse);
+			Text.NL();
+			Text.Add("This stuff is strong, isn’t it?", parse);
+			Text.NL();
+			Text.Add("<i>“The base recipe’s illegal, so I hear. Our good surgeon’s made a few additions of his own, some changes here and there, which should make it all the more amusing. When you’re ready to open this, just pull and twist hard on the cork, although I’d recommend holding your breath when you do so. Don’t want to accidentally sniff any of the fumes. This stuff will take effect almost immediately, but it need a couple of hours for the full effects to kick in. That should give you enough time to make a getaway before people start asking inconvenient questions.</i>", parse);
+			
+			party.Inv().AddItem(Items.Quest.OutlawAphrodisiac);
+			
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	
+	Gui.Callstack.push(function() {
+		Text.NL();
+		Text.Add("<i>“Now, as for how much you want to use - just a thimbleful will do, really, but there’s enough in here to spike a full-course meal for a whole bunch of folks, which is what it’ll probably come to.”</i>", parse);
+		Text.NL();
+		Text.Add("Ah, right. Now he’s getting to the details - should you be taking notes?", parse);
+		Text.NL();
+		Text.Add("Vaughn shrugs and tucks away the vial you didn’t pick into his pocket. <i>“Well, if you want to. Fact is, our eyes and ears have learned that Heydrich’s going to be entertaining some of her fellow nobs in one of the suites at the Lady’s Blessing tomorrow evening; it’ll be quite the event, starting at five in the evening up till midnight. Supposedly, it’s for some kind of business deal or the other, but I personally think that they just want an excuse to stuff their faces. Whatever, it’s all the better for us. Suite number’s thirty-three, keep that in mind.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“The entire staff of the Lady’s Blessing is going to be busy with catering to them <b>and</b> their usual clientele, so they’re bound to be overworked and understaffed. Mistakes happen, that sort of thing… there’s your chance. Again, you’ll be on your own for this, but an opportunity should show its face. And if one doesn’t… well, you’ll just have to make things happen, if you get what I mean.”</i>", parse);
+		Text.NL();
+		Text.Add("All right.", parse);
+		Text.NL();
+		Text.Add("<b>To recap - tomorrow from five to midnight at the Lady’s Blessing. Lady Heydrich, suite thirty-three, spike the food and make sure she doesn’t turn up at court.</b>", parse);
+		Text.NL();
+		Text.Add("<i>“That’s the long and short of it,”</i> Vaughn says with a nod. <i>“Remember, we’re counting on you. Don’t. Be. Fucking. Late. The clock’s a-ticking, and as I’m sure you know by now, the world doesn’t stop to wait for you to be ready.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“All right then, [playername]. You’ve your orders - good luck and all that other lovely stuff. Success or failure, I’ll be here when you’re ready to report in.”</i>", parse);
+		Text.Flush();
+		
+		world.TimeStep({hour: 1});
+		
+		vaughn.flags["Met"] = Vaughn.Met.OnTaskPoisoning;
+		
+		var step = world.time.TimeToHour(0);
+		vaughn.taskTimer = new Time(0, 0, 1, step.hour, step.minute);
+		
+		Gui.NextPrompt();
+	});
+	
+	Gui.SetButtonsFromList(options, false, null);
+}
+

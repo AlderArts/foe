@@ -45,3 +45,13 @@ Items.Quest.OutlawLockpicks = new Item("quest8", "Outlaws' tools", ItemType.Ques
 Items.Quest.OutlawLockpicks.price = 0;
 Items.Quest.OutlawLockpicks.Short = function() { return "Outlaws' tools"; }
 Items.Quest.OutlawLockpicks.Long  = function() { return "A set of odd tools the Outlaws sent you to deliver to Elodie, one of their contacts in Rigard."; }
+
+Items.Quest.OutlawPoison = new Item("quest9", "Poison", ItemType.Quest);
+Items.Quest.OutlawPoison.price = 0;
+Items.Quest.OutlawPoison.Short = function() { return "Poison"; }
+Items.Quest.OutlawPoison.Long  = function() { return "A vial of nasty - though non-lethal - poison intended for the lady Katara Heydrich, on behalf of Vaughn."; }
+
+Items.Quest.OutlawAphrodisiac = new Item("quest10", "Aphrodisiac", ItemType.Quest);
+Items.Quest.OutlawAphrodisiac.price = 0;
+Items.Quest.OutlawAphrodisiac.Short = function() { return "Aphrodisiac"; }
+Items.Quest.OutlawAphrodisiac.Long  = function() { return "A vial of potent aphrodisiac intended for the lady Katara Heydrich, on behalf of Vaughn."; }
