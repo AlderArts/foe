@@ -41,7 +41,7 @@ world.loc.Plains.Crossroads.description = function() {
 	Text.NL();
 	Text.Add("Nearby, there is a low hill with some strange standing stones on it. ", parse);
 	if(Scenes.Global.PortalsOpen())
-		Text.Add("The gem glows in the presence of the portals, inexplicably drawn to them. ", parse);
+		Text.Add("The gem glows in the presence of the nearby portals, inexplicably drawn to them. ", parse);
 	else if(jeanne.flags["Met"] != 0)
 		Text.Add("This is probably the place that Jeanne was talking about. ", parse);
 	Text.Add("The Nomad camp where you first arrived on Eden lies on the horizon, one beacon of familiarity in this strange land.", parse);
@@ -269,6 +269,16 @@ world.loc.Plains.Portals.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(world.loc.Plains.Crossroads, {minute: 10});
+	}
+));
+
+world.loc.Plains.Portals.events.push(new Link(
+	"Jeanne", function() {
+		return !Scenes.Global.PortalsOpen() && glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid;
+	}, true,
+	null,
+	function() {
+		Scenes.PortalOpening.Intro();
 	}
 ));
 

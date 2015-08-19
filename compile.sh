@@ -166,6 +166,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/outlaws/cavalcade.js \
 	js/event/raven.js \
 	js/event/roaming.js \
+	js/event/portalopening.js \
 	js/event/citywatch.js \
 	js/enemy/bandit.js \
 	js/enemy/knight.js \
