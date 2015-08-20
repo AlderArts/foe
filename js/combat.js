@@ -216,7 +216,7 @@ Encounter.prototype.onRun = function() {
 	world.TimeStep({hour: 1});
 	
 	Gui.NextPrompt(function() {
-		SetGameState(GameState.Game);
+		SetGameState(GameState.Event);
 		PrintDefaultOptions();
 	});
 }
@@ -243,7 +243,7 @@ Encounter.prototype.onLoss = function() {
 	
 	Text.Flush();
 	Gui.NextPrompt(function() {
-		SetGameState(GameState.Game);
+		SetGameState(GameState.Event);
 		PrintDefaultOptions();
 	});
 }
@@ -303,7 +303,7 @@ Encounter.prototype.onVictory = function() {
 	
 	Text.Flush();
 	Gui.NextPrompt(function() {
-		SetGameState(GameState.Game);
+		SetGameState(GameState.Event);
 		PrintDefaultOptions();
 	});
 }
