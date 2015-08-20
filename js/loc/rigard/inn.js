@@ -20,6 +20,10 @@ Rigard.LB.Busy = function() {
 	else return Rigard.LB.BusyState.notbusy;
 }
 
+Rigard.LB.KnowsOrvin = function() {
+	return rigard.LB["Orvin"] != 0;
+}
+
 Rigard.LB.OrvinIsInnkeeper = function() {
 	if(world.time.hour >= 8) return true;
 	else return false;
@@ -400,8 +404,8 @@ Scenes.Rigard.LB.OrvinPrompt = function() {
 	var parse = {
 		sirmadam : player.mfFem("sir", "madam"),
 		roomPrice : Text.NumToText(Rigard.LB.RoomCost()),
-		IkName   : rigard.LB["Orvin"] == 0 ? "The innkeeper" : "Orvin",
-		ikname   : rigard.LB["Orvin"] == 0 ? "the innkeeper" : "Orvin"
+		IkName   : !Rigard.LB.KnowsOrvin() ? "The innkeeper" : "Orvin",
+		ikname   : !Rigard.LB.KnowsOrvin() ? "the innkeeper" : "Orvin"
 	};
 	
 	var busy = Rigard.LB.Busy();
@@ -426,7 +430,7 @@ Scenes.Rigard.LB.OrvinPrompt = function() {
 		options.push({ nameStr : "Talk",
 			func : function() {
 				Text.Clear();
-				if(rigard.LB["Orvin"] == 0) {
+				if(!Rigard.LB.KnowsOrvin()) {
 					Text.Add("You tell him that you’d like to get to know a bit more about him and the inn.", parse);
 					Text.NL();
 					Text.Add("<i>“How polite of you,”</i> he remarks. <i>“I am Orvin, the proprietor of this inn, and there is not much more to tell. My great-grandmother built the original establishment, and it’s been in my family ever since, although we’ve remodelled the building a few times over the generations. I’ve been dealing with the management of the inn ever since I was little, so I know my way around.”</i>", parse);
@@ -996,8 +1000,8 @@ Scenes.Rigard.LB.EfriPrompt = function() {
 Scenes.Rigard.LB.DrinksPrompt = function(innPrompt) {
 	var parse = {
 		playername : player.name,
-		IkName   : rigard.LB["Orvin"] == 0 ? "The innkeeper" : "Orvin",
-		ikname   : rigard.LB["Orvin"] == 0 ? "the innkeeper" : "Orvin"
+		IkName   : !Rigard.LB.KnowsOrvin() ? "The innkeeper" : "Orvin",
+		ikname   : !Rigard.LB.KnowsOrvin() ? "the innkeeper" : "Orvin"
 	};
 	
 	var options = [];
@@ -1476,8 +1480,8 @@ Scenes.Rigard.LB.GotoRoom = function() {
 	};
 	
 	if(Rigard.LB.OrvinIsInnkeeper()) {
-		parse["IkName"] = rigard.LB["Orvin"] == 0 ? "The innkeeper" : "Orvin";
-		parse["ikname"] = rigard.LB["Orvin"] == 0 ? "the innkeeper" : "Orvin";
+		parse["IkName"] = !Rigard.LB.KnowsOrvin() ? "The innkeeper" : "Orvin";
+		parse["ikname"] = !Rigard.LB.KnowsOrvin() ? "the innkeeper" : "Orvin";
 	}
 	else {
 		parse["IkName"] = rigard.LB["Efri"] == 0 ? "The girl" : "Efri";
@@ -1748,7 +1752,7 @@ world.loc.Rigard.Inn.room.SleepFunc = function() {
 		
 		if(rigard.LBroomTimer.Expired()) {
 			if(Rigard.LB.OrvinIsInnkeeper()) {
-				parse["ikname"] = rigard.LB["Orvin"] == 0 ? "the innkeeper" : "Orvin";
+				parse["ikname"] = !Rigard.LB.KnowsOrvin() ? "the innkeeper" : "Orvin";
 			}
 			else {
 				parse["ikname"] = rigard.LB["Efri"] == 0 ? "the girl" : "Efri";
@@ -1806,7 +1810,7 @@ world.loc.Rigard.Inn.common.events.push(new Link(
 world.loc.Rigard.Inn.common.events.push(new Link(
 	function() {
 		if(Rigard.LB.OrvinIsInnkeeper())
-			return rigard.LB["Orvin"] == 0 ? "Innkeeper" : "Orvin";
+			return !Rigard.LB.KnowsOrvin() ? "Innkeeper" : "Orvin";
 		else
 			return rigard.LB["Efri"] == 0 ? "Girl" : "Efri";
 	},
@@ -1816,7 +1820,7 @@ world.loc.Rigard.Inn.common.events.push(new Link(
 		var busy = Rigard.LB.Busy();
 		
 		if(Rigard.LB.OrvinIsInnkeeper()) {
-			if(rigard.LB["Orvin"] == 0) {
+			if(!Rigard.LB.KnowsOrvin()) {
 				Text.Add("At the bar stands a serious-looking man, dressed more like a wealthy merchant than a purveyor of alcoholic beverages.");
 			}
 			else  { //Know

@@ -324,8 +324,8 @@ Scenes.Room69.Discovering69OrvinRant = function() {
 	var parse = {
 		
 	};
-	parse["IkName"] = rigard.LB["Orvin"] == 0 ? "The innkeeper" : "Orvin";
-	parse["ikname"] = rigard.LB["Orvin"] == 0 ? "the innkeeper" : "Orvin";
+	parse["IkName"] = !Rigard.LB.KnowsOrvin() ? "The innkeeper" : "Orvin";
+	parse["ikname"] = !Rigard.LB.KnowsOrvin() ? "the innkeeper" : "Orvin";
 	
 	Text.Add("You return downstairs, deciding to confront [ikname] about this trap room. ", parse);
 	if(Rigard.LB.OrvinIsInnkeeper())
@@ -350,8 +350,8 @@ Scenes.Room69.Discovering69ForceOutro = function() {
 	var parse = {
 		
 	};
-	parse["IkName"] = rigard.LB["Orvin"] == 0 ? "The innkeeper" : "Orvin";
-	parse["ikname"] = rigard.LB["Orvin"] == 0 ? "the innkeeper" : "Orvin";
+	parse["IkName"] = !Rigard.LB.KnowsOrvin() ? "The innkeeper" : "Orvin";
+	parse["ikname"] = !Rigard.LB.KnowsOrvin() ? "the innkeeper" : "Orvin";
 	
 	Text.Clear();
 	Text.Add("<i>“N-no... why would you do that?”</i> Sixtynine asks, sounding on the edge of tears. <i>“My door... have you ever lost a limb? I have. It’s just like that. Like where I had a hand before, now there is nothing, an emptiness.”</i>", parse);
@@ -412,8 +412,8 @@ Scenes.Room69.Discovering69Sex = function() {
 		stomachDesc     : function() { return player.StomachDesc(); },
 		boygirl         : player.mfTrue("boy", "girl"),
 		isAre           : player.HasScales() ? "are" : "is",
-		IkName          : rigard.LB["Orvin"] == 0 ? "The innkeeper" : "Orvin",
-		ikname          : rigard.LB["Orvin"] == 0 ? "the innkeeper" : "Orvin"
+		IkName          : !Rigard.LB.KnowsOrvin() ? "The innkeeper" : "Orvin",
+		ikname          : !Rigard.LB.KnowsOrvin() ? "the innkeeper" : "Orvin"
 	};
 	
 	if(player.FirstBreastRow().nippleType == NippleType.lipple ||

@@ -24,6 +24,8 @@ function Vaughn(storage) {
 	this.flags["TWar"] = 0;
 	this.flags["Sex"]  = 0;
 	
+	this.flags["T3"] = 0; //Bitmask
+	
 	this.taskTimer = new Time();
 	
 	if(storage) this.FromStorage(storage);

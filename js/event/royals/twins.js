@@ -22,6 +22,10 @@ Twins.Met = {
 	Access : 2
 };
 
+Twins.prototype.Relation = function() {
+	return this.rumi.Relation() + this.rani.Relation();
+}
+
 Twins.prototype.Update = function(step) {
 	this.terryTimer.Dec(step);
 }

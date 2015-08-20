@@ -75,6 +75,10 @@ Lei.Rel = {
 	L4 : 80
 };
 
+Lei.prototype.Reqruited = function() {
+	return false; //TODO Lei.Met >= Reqruited
+}
+
 Lei.prototype.Update = function(step) {
 	Entity.prototype.Update.call(this, step);
 	

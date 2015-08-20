@@ -1030,6 +1030,14 @@ Scenes.Vaughn.Tasks.Snitch.DebriefFailure = function(parse) {
 
 
 
+//Bitmask
+Vaughn.Poisoning = {
+	Poison : 1,
+	Aphrodisiac : 2,
+	LeftItToTerry : 4,
+	LeftItToTwins : 8
+	//TODO
+}
 
 Scenes.Vaughn.Tasks.Poisoning = {};
 //TODO
@@ -1096,6 +1104,7 @@ Scenes.Vaughn.Tasks.Poisoning.Start = function() {
 			Text.NL();
 			Text.Add("<i>“Now, be careful with that thing. The glass shouldn’t shatter easily, but you don’t want to tempt fate any more than you need to. If you want to open it, just pull hard on the cork and it’ll pop free.", parse);
 			
+			vaughn.flags["T3"] |= Vaughn.Poisoning.Poison;
 			party.Inv().AddItem(Items.Quest.OutlawPoison);
 			
 			PrintDefaultOptions();
@@ -1112,6 +1121,7 @@ Scenes.Vaughn.Tasks.Poisoning.Start = function() {
 			Text.NL();
 			Text.Add("<i>“The base recipe’s illegal, so I hear. Our good surgeon’s made a few additions of his own, some changes here and there, which should make it all the more amusing. When you’re ready to open this, just pull and twist hard on the cork, although I’d recommend holding your breath when you do so. Don’t want to accidentally sniff any of the fumes. This stuff will take effect almost immediately, but it need a couple of hours for the full effects to kick in. That should give you enough time to make a getaway before people start asking inconvenient questions.</i>", parse);
 			
+			vaughn.flags["T3"] |= Vaughn.Poisoning.Aphrodisiac;
 			party.Inv().AddItem(Items.Quest.OutlawAphrodisiac);
 			
 			PrintDefaultOptions();
@@ -1148,5 +1158,410 @@ Scenes.Vaughn.Tasks.Poisoning.Start = function() {
 	});
 	
 	Gui.SetButtonsFromList(options, false, null);
+}
+
+
+// TODO LINK (LB ON ENTRY)
+//Trigger this upon stepping into the Lady’s Blessing with this task active (Allotted time, 17-24 the next day, ie timer not expired, and <= 7 hours).
+Scenes.Vaughn.Tasks.Poisoning.ArrivalAtInn = function() {
+	var parse = {
+		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
+	};
+	
+	Text.Clear();
+	Text.Add("Pushing open the door of the Lady’s Blessing, you find the the common room a whirl of activity. Not with patrons - the evening crowd is thin today - but with numerous staff, almost all of them darting between the kitchen and the stairs leading up to the rooms. The few patrons who are present are almost exclusively gathered about the gambling tables, keeping themselves out of the way of the busy waiters darting to and fro.", parse);
+	Text.NL();
+	Text.Add("An organized scene indeed… but teetering on the edge of confusion, an insidious current of chaos under the rushing surface. All it’d take is a push in the right direction to create a situation you could take advantage of… ", parse);
+	Text.NL();
+	if(!lei.Reqruited()) {
+		Text.Add("Lei is sitting in his usual corner, ever faithful to his charge. You meet the mercenary’s eyes, and he gives you a silent nod before turning his gaze away from you. He’s a small circle of calm in the whirlwind of activity, but he wouldn’t be Lei otherwise, you guess.", parse);
+		Text.NL();
+	}
+	Text.Add("Even [Orvin] is working overtime today, helping out with the serving and cooking - just how many people is this Lady Heydrich entertaining today? The weight of the glass vial makes itself known in your pocket, and you focus your thoughts. You’re here on a task, after all… ", parse);
+	Text.NL();
+	Text.Add("Now, how will you go about doing this?", parse);
+	Text.Flush();
+	
+	Scenes.Vaughn.Tasks.Poisoning.InnPrompt({});
+}
+
+Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
+	var parse = {
+		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
+		playername : player.name
+	};
+	
+	//[Orvin][Kitchen][Waiters][Lei][Twins]
+	var options = new Array();
+	if(Rigard.LB.KnowsOrvin() && !opts.Orvin) {
+		options.push({ nameStr : "Orvin",
+			tooltip : "Chat with Orvin and try to find out more about the situation.",
+			func : function() {
+				Text.Clear();
+				Text.Add("You wait for an opening when Orvin doesn’t look <i>too</i> busy, then step in and greet the innkeeper. He hesitates a moment, then returns your greeting with a smile, looking perhaps a little too happy to have an excuse to set down the empty dishes he’s carrying and take a breather.", parse);
+				Text.NL();
+				Text.Add("<i>“Oh, hello, [playername]. I’m afraid that we’re quite busy today - if you’re intending to eat here today, you’ll have to wait a little while for your order. Not too long, of course, since the busy spot’s about to clear up, but we were quite harried for most of the morning and afternoon.", parse);
+				Text.NL();
+				Text.Add("You put on your most innocent face and contrive to look surprised. Busy? What with?", parse);
+				Text.NL();
+				Text.Add("<i>“We’re quite honored to have one of the city’s fine ladies host her events here - the Lady Heydrich is entertaining some business contacts from the farther reaches of the kingdom, and has paid us quite the sum to put on our best face for them. As you can imagine, it’s been quite the endeavor getting ready for fifty-odd people in all of the four suites she’s booked for the occasion. All of my people and I, we’ve been preparing since last night for the big event, even if we’ve tried to not let it affect our usual business any.”</i>", parse);
+				Text.NL();
+				Text.Add("Looking at Orvin, he seems so proud and happy to be doing the catering - it’s almost a pity what you’re going to have to do here. Keeping a straight face, you look towards the kitchen. What was that he said about the busy spot being about to clear up? Does that mean he’s about finished, and you could place an order soon?", parse);
+				Text.NL();
+				Text.Add("<i>“Almost there. Almost there. It’s why I’m letting myself take a quick break, talking to you.”</i> Orvin replies. <i>“It’s just one more round of food and drinks to be sent up to their suites, and our part is done. I’ve served up only the best, and they can enjoy themselves all night long in peace.”</i>", parse);
+				Text.NL();
+				Text.Add("Judging by the wonderful smells coming out of the kitchen’s open door… yeah. You thank Orvin, then suggest that perhaps you’ll order something once the kitchens are less harried. In the meantime, maybe you’ll watch the cavalcade game or something… sorry about troubling him with your questions.", parse);
+				Text.NL();
+				Text.Add("<i>“Oh no, it was my pleasure.”</i> Orvin picks up his burden once more with a grunt, rolling his clearly aching shoulders. <i>“I needed to take a breather, anyway.”</i>", parse);
+				Text.NL();
+				Text.Add("You nod and give Orvin a little wave as the innkeeper disappears. Last round of food and drinks to be brought up, eh? Seems like you’ve arrived in the nick of time, then - you don’t have time to dither around, and will have to act quickly. What do you intend?", parse);
+				Text.Flush();
+				
+				opts.Orvin = true;
+				
+				Scenes.Vaughn.Tasks.Poisoning.InnPrompt(opts);
+			}, enabled : true
+		});
+	}
+	options.push({ nameStr : "Kitchen",
+		tooltip : "Sneak into the kitchen and get up to some mischief.",
+		func : function() {
+			Scenes.Vaughn.Tasks.Poisoning.Kitchen(opts);
+		}, enabled : true
+	});
+	if(!opts.Waiters) {
+		options.push({ nameStr : "Waiters",
+			tooltip : "Waylay one of the waiters with your charm and try to create an opening.",
+			func : function() {
+				Text.Clear();
+				Text.Add("Hmm. If the kitchen’s a no-go, then that leaves you with the only option of waylaying the food en route to its destination. <i>That</i> in turn means having to deal with one of the many waiters plying up and down the staircase leading to the inn’s upper stories, and you get the distinct feeling that whatever shenanigans you’re going to cook up to distract the waiters with, they’re going to have to be good. Really good.", parse);
+				Text.NL();
+				Text.Add("Although heading over to the stairwell and trying your best to get their attention, not a single one stops to give you so much as a moment. ", parse);
+				if(player.Cha() > 45)
+					Text.Add("Some of them do glance in your direction for a bit, but quickly snap back to the task at hand. ", parse);
+				Text.Add("Is Lady Heydrich’s little get-together that important? Sure seems like it, for so many of the staff to be dedicated to serving her. Or maybe there’s something more to it, judging from how nervous they look…", parse);
+				Text.NL();
+				Text.Add("There’s no time to sit around and ponder the issue at length, though. If this isn’t going to work, then you need to find another way to get at the food… maybe someone you know could help? Two minds are better than one, after all.", parse);
+				Text.Flush();
+				
+				opts.Waiters = true;
+				
+				Scenes.Vaughn.Tasks.Poisoning.InnPrompt(opts);
+			}, enabled : true
+		});
+	}
+	/* TODO LEI
+	options.push({ nameStr : "name",
+		tooltip : "",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Add("", parse);
+			Text.Flush();
+		}, enabled : true
+	});
+	 */
+	if(!opts.Twins) {
+		options.push({ nameStr : "Twins",
+			tooltip : "Could the Twins possibly lend a hand here?",
+			func : function() {
+				Text.Clear();
+				
+				opts.Twins = true;
+				
+				Text.Add("A thought strikes you: sure, the task set before you may not be the easiest one, but it’s not as if you’re completely on your own here. You <i>do</i> have friends in high places close by, and you might as well bring all the resources you have to bear, right?", parse);
+				Text.NL();
+				Text.Add("With that thought in mind, you start off towards the stairs leading up. Some of the waiters cast suspicious looks at you when you pass by them, but soon settle down when it becomes clear you’re not heading for the suites, but rather the penthouse up top. The suspicion is a bit off - it’s not as if you’ve done anything just yet, right? - but you nevertheless emerge up into the Twins’ penthouse. Rumi - or at least, this is how the twin that greets you introduced herself - ushers you in, and by the looks of it they were sharing a bottle of wine and a moment of relaxation when you so thoughtlessly barged in on them. Both of them have donned gowns, but there’s no time for cute mind games this evening; there’s work to be done.", parse);
+				Text.NL();
+				Text.Add("<i>“Welcome, [playername].”</i> Rani - or at least, you’re taking Rumi’s word that she’s who she is - says, raising his glass in a small salute. <i>“Decided to drop by? You look quite pale - why don’t you have a little merlot? It’ll do wonders for your complexion.”</i>", parse);
+				Text.NL();
+				Text.Add("No, not right at the moment. You’re busy, and was wondering if the two of them could lend a little assistance.", parse);
+				Text.NL();
+				Text.Add("Rumi glides over behind her brother and places her hands on the chair’s backrest. <i>“Oh? This I must hear.”</i>", parse);
+				Text.NL();
+				Text.Add("Quickly, you summarize the salient details of your mission here, conveniently forgetting to include anything and everything about the outlaws, of course. The twins listen intently as you speak, and when you finish, Rani grins from ear to ear.", parse);
+				Text.NL();
+				Text.Add("<i>“Ah, so that’s what all that fuss was all about, and why it took so long for the wine to arrive. A full half-hour late, if I remember correctly.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Shame,”</i> his sister agrees with a vigorous nod of her head. <i>“Someone of noble blood throws a big party for ‘business ends’, and no one thought to invite the prince and princess?”</i>", parse);
+				Text.NL();
+				Text.Add("What? Haven’t they bothered to look outside their door since afternoon?", parse);
+				Text.NL();
+				Text.Add("<i>“No,”</i> Rumi replies flatly. <i>“We were… preoccupied.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Quite so.”</i> Rani runs his tongue over his lips.", parse);
+				Text.NL();
+				Text.Add("Right. Whatever floats their boat, but now that they’re appraised of the situation, could their royal personages possibly consider lending a hand in your venture? Any ideas would be welcome.", parse);
+				Text.NL();
+				Text.Add("The twins glance at each other, their expressions suddenly serious, and you can practically see the gears turning in their heads. Rumi drums her fingers on the table as she thinks, chewing her lip in the process. <i>“Lady Heydrich, Lady Heydrich… name rings a bell, but can’t quite remember why…”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“She was the one who went up against us on the proposal to start work on expanding the sewerage system last week, remember?”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Ah, that’s it. Come to think of it, she’s been throwing her weight around a little too much of late - having Majid’s patronage would certainly drive someone petty like her into a bout of preening. Give power to the undeserving, and that’s what happens. I wonder just what Majid can get out of a small-timer like Heydrich.”</i> Rumi takes a sip of her drink and thinks for a little longer, eyes staring into empty space.", parse);
+				Text.NL();
+				if(twins.Relation() >= 80) {
+					Text.Add("<i>“Another layer of obfuscation between him and his goals, of course. Lady Heydrich <b>has</b> been a thorn in our side for a while, wouldn’t you say, Sister?”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Yes. Yes, she has. I haven’t forgotten that last time she made a whole fuss about that bill. Quite desperate, if I remember.”</i> A smile breaks out on the princess’ face. <i>“I suppose we could lend a hand, grant a royal favor… within reason, of course. We do have reputations to maintain, and couldn’t be caught dealing with all sorts of shady characters.”</i>", parse);
+					Text.NL();
+					Text.Add("Like you, of course. Right. All you really need to do is to get at the feast before it’s served, so anything they could do to let you get close to the grub before it’s brought into suite thirty-three would be a great help. Or if they’d rather handle the vial themselves…?", parse);
+					Text.NL();
+					Text.Add("Rumi extends her hand. <i>“May I see this potion your friend has prepared?”</i>", parse);
+					Text.NL();
+					Text.Add("Why not, if it means a better chance they’ll help out? Digging through your possessions, you draw out Vaughn’s vial and pass it over to the princess. She turns it over in the light of a lamp, examining it from every angle, but the frown on her face remains where it is.", parse);
+					Text.NL();
+					Text.Add("<i>“I don’t recognize this,”</i> she murmurs, her face serious.", parse);
+					Text.NL();
+					Text.Add("<i>“Let me try, please.”</i> Rani receives the vial from his sister and pulls out the stopper with a flourish before using one hand to waft over the vapors to his nose. Nothing happens for a moment or two, and then he turns his head and sucks in a deep breath of fresh air, coughing to clear his airways.", parse);
+					Text.NL();
+					parse["hisher"] = player.mfFem("his", "her");
+					Text.Add("<i>“Whoo, that’s strong! There’s no smell, as I expected, but… phew. You can <b>feel</b> it. You certainly have quite the talented friend, [playername]. I wouldn’t mind if you introduced me to him sometime.”</i> He turns to Rumi. <i>“It’s all right, sister. I think I know what this is - it’s just been strengthened considerably. No one’s going to die or even hurt really badly, but I think we’re going to see quite some fun if we help [playername] with [hisher] little prank. And if it’ll get Heydrich out of our hair at court… ”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“All right, I’m in. What do we do?”</i>", parse);
+					Text.NL();
+					Text.Add("Actually, you were hoping that since they do open up more options, they’d have an idea of what those options were. Or at least, better options than the one you had.", parse);
+					Text.NL();
+					Text.Add("Rumi arches an eyebrow. <i>“What <b>were</b> you going to ask us to do, then?”</i>", parse);
+					Text.NL();
+					Text.Add("Ideally? Distract one of the waiters with their stunning personalities while you get up to mischief. But…", parse);
+					Text.NL();
+					Text.Add("<i>“But what?”</i> The princess smiles sweetly. <i>“It’s a simple plan, and these things should be no more complicated than they need to be. As for holding someone’s attention, don’t worry about that. We were born to it.”</i>", parse);
+					Text.NL();
+					Text.Add("Rani nods as he hands the vial back to you. <i>“And of course, Father’s education was not completely useless. On top of that, Orvin’s people may not know exactly who we are, but they’ve gathered that we’re people of some import over the course of our extended stay here. After all, with these rates only someone with plenty of money could afford to rent out our penthouse for as long as we have.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Agreed. They may not want to blow this event Heydrich’s had them cater, but there’s no guarantee that she’ll come back to them the next time she throws a party. We, on the other hand… we’re quite the steady source of income. They’ll give us the  time of day. Leave it to my brother and I.”</i>", parse);
+					Text.NL();
+					Text.Add("Good, good. That’s all you needed. How long will they need to be ready?", parse);
+					Text.NL();
+					Text.Add("Rumi smiles sweetly. <i>“Just let us get changed. If you’d wait outside, we’ll be with you in a minute or two.”</i>", parse);
+					Text.NL();
+					Text.Add("The twins are good to their word. Scarcely have a few minutes passed before they emerge into the hallway in their usual clothes, head for the opposite wall, and signal for you to wait in the recently vacated doorway. It doesn’t take too long before another handful of waiters appear in the stairwell with their carts, and the twins quickly round on the last in line, the playful air about them vanishing like mist with the dawn. It’s not too unlike the movements of predators dragging a straggler away from the safety of the herd, and despite the waiter’s fine uniform and prim dress, you can see it’s having much the same effect on the poor sop.", parse);
+					Text.NL();
+					Text.Add("<i>“You. Yes, you!”</i> Rani shouts, beckoning the waiter over with an outstretched finger. He obeys with a bowed head and downcast eyes, and no sooner has he come to a stop in front of the twins that they lay into him with savage abandon. “We want to complain about the quality of service here of late!”</i>", parse);
+					Text.NL();
+					Text.Add("You can’t help but feel a twinge of pity for the poor waiter as the twins maneuver him right in front of the open doorway - right, the placard on the cart denotes that it’s for suite thirty-three. No problems there, then. Still, you wait for the angry barrage of insults to reach its zenith, completely absorbing the waiter’s attention before daring to make a move.", parse);
+					Text.NL();
+					Text.Add("The stony expression on Rumi’s face could stop a charging Rakh - her eyes hard and unflinching, her lips set into a thin, straight line. <i>“Face us when we’re speaking - or have you forgotten your manners? Tell Orvin that we won’t stand for this horrible quality of service here! Half an hour to get up to us - who knows how long it’s been sitting around for? The taste, it’s completely ruined, and…”</i>", parse);
+					Text.NL();
+					Text.Add("You quickly realize what they’re doing - diverting the waiter’s attention further away from the cart in front of him. This is your chance, then - while your mark’s back is turned to you, you quickly creep forward and introduce the vial’s contents into both the pitcher and dessert bowl. The watery fluid rushes in without a sound, mingling with dew and condensation as it creeps down the glassware’s sides.", parse);
+					Text.NL();
+					Text.Add("<i>“And remember, we want the wine properly chilled this time,”</i> Rumi huffs, looking every bit the spoiled princess, right down to the indignant air that’s practically palpable about her. <i>“I mean, half an hour! I know that you folk are busy today, but seriously, half an hour to bring up a bottle and ice bucket? What is this, Rirvale? I’ve half a mind to find better accommodations elsewhere - I hear there’s a new place near the castle grounds. Well, off with you! And don’t be tardy this time!”</i>", parse);
+					Text.NL();
+					Text.Add("Finally released, the poor waiter takes off at a run, his little food cart trundling along at an impressive pace, and both twins give you a wink as you emerge from the doorway to their penthouse.", parse);
+					Text.NL();
+					Text.Add("<i>“So, how were my sister and I?”</i>", parse);
+					Text.NL();
+					Text.Add("Oh, very convincing, you assure Rani. Very indignant indeed.", parse);
+					Text.NL();
+					Text.Add("Rumi smiles and shrugs, hooking an arm about her brother’s waist. <i>“Father did tell us that being overly open with one’s feelings is dangerous for a monarch, and I have to agree with him on that. In any case, should I be expecting lots of noise from downstairs tomorrow morning?”</i>", parse);
+					Text.NL();
+					Text.Add("Perhaps even earlier. Well, you ought to scoot before things get a little too heated up.", parse);
+					Text.NL();
+					Text.Add("<i>“We’ll see you around, then.”</i> With that, the Twins disappear into their room, and the door shuts with a good, solid thump. Time to make like a tree and leave.", parse);
+					Text.Flush();
+					
+					vaughn.flags["T3"] |= Vaughn.Poisoning.LeftItToTwins;
+					
+					world.TimeStep({hour: 1});
+					
+					party.Inv().RemoveItem(Items.Quest.OutlawPoison);
+					party.Inv().RemoveItem(Items.Quest.OutlawAphrodisiac);
+				
+					//TODO LINK, FLAGS
+					// #set encounter as successful.
+					// #If poison, end encounter. If aphrodisiac, go to aphrodisiac entry point.
+				}
+				else {
+					Text.Add("<i>“[playername] <b>has</b> been of quite some help to us of late,”</i> Rani pipes up. <i>“We should really repay [himher] with a favor or two sometime. Money only goes so far, and getting rid of Lady Heydrich’s influence for some time would certainly be a breath of fresh air for once.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“True, but we’ve been extending ourselves quite dangerously of late. Father is beginning to notice something’s up.”</i> Rumi turns away from her brother and to you. <i>“I’m sorry, [playername], but you’ve come at a bad time. If she does show up in court, we’ll fight her to the utmost for you - not as if it wasn’t in our interests to do as much anyway, if she really is fronting for Majid - but asking us to play a direct hand in your rather illegal escapades would bring more scrutiny down upon us than we’d care for at the moment.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Royal rank doesn’t matter much when it’s Father doing the hectoring,”</i> Rani adds. <i>“Sorry, [playername].”</i>", parse);
+					Text.NL();
+					Text.Add("Aah, that’s all right. It’s perfectly understandable - you’ll just have to find a way to deal with Lady Heydrich on your own, and they did say that they’d help you fight her during court if you fail here. Bidding farewell to the twins, you leave their penthouse and wind up back in the common room of the Lady’s Blessing.", parse);
+					Text.Flush();
+					
+					Scenes.Vaughn.Tasks.Poisoning.InnPrompt(opts);
+				}
+			}, enabled : true
+		});
+	}
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Vaughn.Tasks.Poisoning.Kitchen = function() {
+	var parse = {
+		playername: player.name
+	};
+	
+	Text.Clear();
+	Text.Add("The wonderful aroma of the fare to be had in the Lady’s Blessing hits you once more, and your thoughts drift towards the busy kitchens. Getting into the suites is out of the question, so your best bet is to spike the food either after it’s been cooked or when it’s en route to its final destination. Of the two approaches, you decide that the former offers the best chance of success. Sneaking in, spiking the food and then hightailing it out of there - much easier said than done…", parse);
+	Text.NL();
+	if(party.InParty(terry)) {
+		parse = terry.ParserPronouns(parse);
+		
+		Text.Add("…Of course, you do have with you someone who’s uniquely suited to the job of sneaking around, and if Terry can take things from where they belong, then putting things where they <i>don’t</i> belong should be just as easy. Right? Right?", parse);
+		Text.NL();
+		Text.Add("Seriously, though, are you going to ask Terry to do the job for you, or get up to mischief yourself?", parse);
+		Text.Flush();
+		
+		//[Terry][Yourself]
+		var options = new Array();
+		options.push({ nameStr : "Terry",
+			tooltip : Text.Parse("The thief's experience should really pay off here; you doubt [heshe]'ll have any trouble getting it done.", parse),
+			func : function() {
+				Text.Clear();
+				
+				parse["boygirl"] = terry.mfPronoun("boy", "girl");
+				parse["foxvixen"] = terry.mfPronoun("fox", "vixen");
+				
+				vaughn.flags["T3"] |= Vaughn.Poisoning.LeftItToTerry;
+				
+				parse["rel"] = terry.Relation() >= 60 ? ", although you can tell it’s more teasing than indignant" : "";
+				Text.Add("<i>“What?”</i> Terry exclaims[rel]. <i>“I’m to do your dirty work?”</i>", parse);
+				Text.NL();
+				Text.Add("Well, of course. That’s why you keep [himher] around, to do the things that you can’t manage alone. ", parse);
+				if(terry.Sexed()) {
+					Text.Add("Why, did [heshe] think you just kept [himher] around for the petting and fucking?", parse);
+					Text.NL();
+					parse["rel"] = terry.Relation() >= 60 ? Text.Parse(" before sticking [hisher] tongue out at you", parse) : "";
+					Text.Add("<i>“Sometimes it seems that way,”</i> Terry replies[rel].", parse);
+				}
+				else {
+					Text.Add("Why, did [heshe] think you just kept [himher] around for [hisher] charming personality?", parse);
+					Text.NL();
+					Text.Add("<i>“Don’t you try flattery on me,”</i> Terry replies, looking suspicious.", parse);
+				}
+				Text.NL();
+				Text.Add("Hmph. In any case, you’re in need of someone who can do some sneaking, [heshe]’s really good at sneaking, and that should be enough reason. Besides, it’s not like [heshe]’s unfamiliar with the Lady’s Blessing - you have to admit, [heshe] really did look quite fetching in that waitress’ outfit… come to think of it, perhaps you could get your hands on a similar one for [himher] sometime…", parse);
+				Text.NL();
+				Text.Add("Resigned to [hisher] fate, Terry throws [hisher] hands in the air and sighs. <i>“All right, all right. I’ll see what I can do. No promises, though.”</i>", parse);
+				Text.NL();
+				Text.Add("That’s a good [boygirl]. Of course you know that [heshe] will do [hisher] best, right?", parse);
+				Text.NL();
+				Text.Add("Terry just skulks. You give the [foxvixen] an amused pat, and hand over Vaughn’s vial to [himher]. Come on now, it can’t be that hard, right? [HeShe] should be familiar with the kitchens’ layout and how things are run in there… who knows, [heshe] might even bump into an old friend or two. There’s no need to feel guilty - it’s all for a higher cause, yeah?", parse);
+				Text.NL();
+				Text.Add("<i>“All right, all right, all right,”</i> Terry groans. <i>“Let’s just get it over with.”</i>", parse);
+				Text.NL();
+				
+				party.Inv().RemoveItem(Items.Quest.OutlawPoison);
+				party.Inv().RemoveItem(Items.Quest.OutlawAphrodisiac);
+				
+				Text.Add("Without another word, Terry slinks out the front door, leaving you alone to bide your time in the barroom while the [foxvixen] works [hisher] magic. You find an empty table to relax at, order a couple of drinks from a harried-looking waiter, and settle down to nurse it as moments tick by.", parse);
+				Text.NL();
+				Text.Add("At length, Terry reappears at your side, looking positively exhausted and drained. How long has it been? No more than twenty minutes or half an hour, but you’d have thought it’d be more by how hard the [foxvixen]’s breathing. You pull out the chair across you, and Terry gladly slumps into it, eagerly digging into the spare drink on the table.", parse);
+				Text.NL();
+				Text.Add("How’d it go?", parse);
+				Text.NL();
+				Text.Add("<i>“Done,”</i> Terry replies, then wipes [hisher] muzzle with the back of [hisher] hand. <i>“It was very rough, but the job’s done.”</i>", parse);
+				Text.NL();
+				Text.Add("Really? For a master thief like [himher]?", parse);
+				Text.NL();
+				Text.Add("<i>“C’mon, cut me some slack here,”</i> Terry replies in a low hiss. <i>“They were looking out for trouble in the kitchen - I’m not guessing, I <b>know</b> it. Someone tipped them off. The constant looking over shoulders, second-guessing themselves, checking the dishes over and over again… I know Orvin and his people, and they don’t do this unless they’ve good reason to think someone’s going to mess with the food.”</i>", parse);
+				Text.NL();
+				Text.Add("Huh. Now that’s an interesting way of looking at things, and you’re doubly glad you asked Terry to go in your stead, but [heshe]’s absolutely sure?", parse);
+				Text.NL();
+				Text.Add("Terry nods. <i>“You get a feel for these things, and then have to decide whether you want to go through with the heist anyways. Still, it may have taken most of what I had, but hey, I still got the job done. I don’t think they were looking for someone like me, though, so that helped, even if there were so many eyes in the kitchen…”</i>", parse);
+				if(terry.PregHandler().IsPregnant())
+					Text.Add(" The [foxvixen] pats [hisher] rounded tummy. <i>“Didn’t help that I had to lug around this little one too, although I think they enjoyed it.”</i>", parse);
+				Text.NL();
+				Text.Add("The two of you sit around for a few more minutes, then Terry sighs. <i>“We ought to get out of here before the show begins. I don’t want to see the inside of a cell again, and especially not with you beside me.”</i>", parse);
+				Text.NL();
+				Text.Add("You’ve to agree with that - perhaps it’d be best if you reported back to Vaughn and told him about your presence being expected at the inn. Standing, you quickly pay for your drinks and make to leave.", parse);
+				Text.Flush();
+				
+				//TODO FLAG
+				//TODO LINK, #If poison, end encounter. If aphrodisiac, go to aphrodisiac entry point.
+				
+				world.TimeStep({hour: 1});
+				
+				Gui.NextPrompt();
+			}, enabled : true
+		});
+		options.push({ nameStr : "Yourself",
+			tooltip : "If you want something done properly, you’ll have to do it yourself.",
+			func : function() {
+				Text.Clear();
+				Scenes.Vaughn.Tasks.Poisoning.KitchenYourself();
+			}, enabled : true
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+	else {
+		Scenes.Vaughn.Tasks.Poisoning.KitchenYourself();
+	}
+}
+
+Scenes.Vaughn.Tasks.Poisoning.KitchenYourself = function() {
+	var parse = {
+		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
+	};
+	
+	parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
+	parse["c"] = party.Num() > 1 ? Text.Parse(" ask [comp] to wait for you in the barroom, and", parse) : "";
+	Text.Add("Right. No time like the present, then. With the constant stream of staff heading in and out of the kitchen’s main door, just waltzing on in probably isn’t the best of ideas. There doesn’t seem to be any other way of getting into the kitchen from the common room, so you[c] leave the Lady’s Blessing proper and nip around to the back of the building. There ought to be someplace where deliveries are made and the staff enter the inn by, at the very least… it’s too much to imagine that you’d find a pie set out on the windowsill to cool or something of the likes, but at least you might find an alternative approach here.", parse);
+	Text.NL();
+	Text.Add("Indeed, there’s a back door, and a pretty large one at that, clearly made to accept the large quantities of food and drink the Lady’s Blessing must receive every day. It’s locked, but the window beside it isn’t, and you push it open and climb into a back room of sorts. As your eyes adjust to the dim light, you take in the scene that lies before you: silvered trays with cutlery and dishes already laid out on them, pitchers waiting to be filled, small casks of brandy lined up against a wall. Beyond a door set into the far wall, the sounds of the kitchen at work, and it certainly <i>sounds</i> crowded enough that you’d rather not risk entering it at all if possible.", parse);
+	Text.NL();
+	Text.Add("It seems like [Orvin]’s had his people prepare as far ahead as possible for the event - it’s clear that once the food’s cooked, it’ll be ready to go with the minimum of fuss. They’ve even marked out the carts bearing the dishes with small placards numbering thirty-one to thirty five… these must be the suites which Heydrich’s rented for the occasion.", parse);
+	Text.NL();
+	Text.Add("The casks seem like the only reasonable avenue available to you, but try as you might, you can’t see a way of undoing the wax seals without giving away that they’ve been tampered with. Then it strikes you: if you can’t spike the food, then maybe the dishes will do just as well. Vaughn did mention that a few drops would be more than enough for the vial’s contents to take effect, so hopefully that’ll work.", parse);
+	Text.NL();
+	Text.Add("Wasting no time, you uncork the vial and begin tainting the bowls, pitchers and serving dishes slated for suite thirty-three, smearing a few drops on each one in turn.", parse);
+	Text.NL();
+	
+	var check = (player.Dex() + player.Int()) / 2 + Math.random() * 20;
+	var goal = 50;
+	
+	if(DEBUG) {
+		Text.Add("Dex+Int check: [val] vs [goal]", {val: check, goal: goal}, 'bold');
+		Text.NL();
+	}
+	if(check >= goal) {
+		Text.Add("It’s a tiring job, ensuring that everything is as unnoticeable as possible, but the liquid does dry quickly - hopefully that doesn’t reduce its efficacy any. If the cooks or waiters spot it, hopefully they’ll just mistake it for dampness or something and won’t wipe it off… or worse.", parse);
+		Text.NL();
+		Text.Add("It seems like forever, but you finish off the last of the vial’s contents and pop the stopper back in place. And just in time, too - you can hear voices coming to you from beyond the far wall, amidst the din of the kitchen’s activity. Even with the speakers shouting, you can’t quite make out what’s being said, but you know you don’t want to be here when they come in. Sprinting on tiptoe, you vault over the windowsill with a sudden burst of panic-fuelled energy and land in the street outside, just managing to shut the window before the door creaks open and light spills into the back room.", parse);
+		Text.NL();
+		Text.Add("Once you’re sure no alarm has been raised, you cautiously risk sneaking a peek into the back room. Waiters busy themselves amongst the carts, filling soup tureens from a huge pot, loading the casks onto the serving carts, pouring sweet nectar into the pitchers, and arranging chilled cut fruits on small toothpicks upon the platters.", parse);
+		Text.NL();
+		parse["p"] = vaughn.flags["T3"] & Vaughn.Poisoning.Poison ? "poison" : "aphrodisiac";
+		parse["c"] = party.Num() > 1 ? Text.Parse("rejoin [comp] in", parse) : "re-enter";
+		Text.Add("The last course’s coming up, and it promises to be a good one. Hopefully, the [p] takes - with one last glance at the waiters pushing the carts back out through the kitchen’s steamy confines, you slip back to the front entrance and [c] the inn, although you don’t intend to stay long. Best to head back to Vaughn and report your success.", parse);
+		Text.Flush();
+		
+		world.TimeStep({hour: 1});
+		
+		party.Inv().RemoveItem(Items.Quest.OutlawPoison);
+		party.Inv().RemoveItem(Items.Quest.OutlawAphrodisiac);
+		
+		Gui.NextPrompt();
+		//TODO FLAG
+		//TODO LINK, #If poison, end encounter. If aphrodisiac, go to aphrodisiac entry point.
+	}
+	else {
+		Text.Add("You work as fast as you can, but it clearly isn’t quick enough. About halfway through the process, numerous footsteps ring out from amidst the din and clatter of the kitchens, clearly heading for the door on the far end of the room.", parse);
+		Text.NL();
+		Text.Add("Your breath catches in your throat, and you quickly stuff the vial and its contents into your pocket as you make a mad dash for the window. You’ve one hand on the windowsill and are about to vault over when the click of the handle turning sounds out from behind you, followed by shouts of surprise and anger - but more the latter than the former.", parse);
+		Text.NL();
+		Text.Add("No time to look back - and they might see your face if you did. With one hand on the windowsill, you vault through the window and hit the street outside running. While you don’t think whoever it was behind you managed to get a good look at your back before you took off, it’s probably for the best that you don’t show your face about the Lady’s Blessing for a little bit.", parse);
+		Text.NL();
+		Text.Add("Thankfully, whoever it was who discovered your intrusion doesn’t seem too interested in pursuing you, and you slow your pace a little as you circle around to the inn’s front, keeping a wide berth from the actual entrance.", parse);
+		if(party.Num() > 1) {
+			parse["s"] = party.Num() > 2 ? "" : "s";
+			Text.Add(" Presently, [comp] emerge[s] from the inn’s front and rejoins you, having figured out what the sudden hullabaloo was all about.", parse);
+		}
+		Text.NL();
+		Text.Add("It’s not very likely that they’re going to use those dishes which you tainted, so there’s nothing you can do but head back to Vaughn and report your failure.", parse);
+		Text.Flush();
+		
+		//TODO FLAG
+		world.TimeStep({hour: 1});
+		
+		party.Inv().RemoveItem(Items.Quest.OutlawPoison);
+		party.Inv().RemoveItem(Items.Quest.OutlawAphrodisiac);
+		
+		Gui.NextPrompt();
+	}
 }
 
