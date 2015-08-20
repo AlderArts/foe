@@ -359,7 +359,7 @@ Scenes.Vaughn.Tasks.Snitch.Start = function() {
 	Text.NL();
 	Text.Add("<i>“All right, then. You’ve got your orders, don’t come back to me until you’ve got something to report.”</i> Vaughn dismisses you with a wave of a hand. <i>“Oh, and stay out of trouble. Things have been getting worse and worse in Rigard of late, and I’d rather not see you end up on the inside of a cell - or worse. Good luck.”</i>", parse);
 	Text.NL();
-	//TODO: This kinda doesn't work with reqruited Miranda
+	//TODO: This kinda doesn't work with recruited Miranda
 	Text.Add("As you walk away, though, you can’t help but wonder about what Vaughn said. Sure, you may not know many of the watch personally, but you’re pretty sure Miranda’s on the straight and narrow. If the map is as solid evidence as Vaughn claims it is, then you should be able to talk Miranda around to your point of view. The more you consider the idea, the more it sounds like a viable alternative to sneaking into the City Watch headquarters - and probably easier, too, especially if you’re not confident that you’re skilled enough to not get caught in the act.", parse);
 	Text.NL();
 	if(miranda.Nasty()) {
@@ -1173,7 +1173,7 @@ Scenes.Vaughn.Tasks.Poisoning.ArrivalAtInn = function() {
 	Text.NL();
 	Text.Add("An organized scene indeed… but teetering on the edge of confusion, an insidious current of chaos under the rushing surface. All it’d take is a push in the right direction to create a situation you could take advantage of… ", parse);
 	Text.NL();
-	if(!lei.Reqruited()) {
+	if(!lei.Recruited()) {
 		Text.Add("Lei is sitting in his usual corner, ever faithful to his charge. You meet the mercenary’s eyes, and he gives you a silent nod before turning his gaze away from you. He’s a small circle of calm in the whirlwind of activity, but he wouldn’t be Lei otherwise, you guess.", parse);
 		Text.NL();
 	}
@@ -1564,4 +1564,6 @@ Scenes.Vaughn.Tasks.Poisoning.KitchenYourself = function() {
 		Gui.NextPrompt();
 	}
 }
+
+
 
