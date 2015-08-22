@@ -1034,18 +1034,18 @@ Scenes.Vaughn.Tasks.Snitch.DebriefFailure = function(parse) {
 Vaughn.Poisoning = {
 	Poison : 1,
 	Aphrodisiac : 2,
-	LeftItToTerry : 4,
-	LeftItToTwins : 8
-	//TODO
+	Success : 4,
+	LeftItToTerry : 8,
+	LeftItToTwins : 16,
+	JoinedOrgy : 32,
+	Used69 : 64
 }
 
 Scenes.Vaughn.Tasks.Poisoning = {};
-//TODO
 Scenes.Vaughn.Tasks.Poisoning.Available = function() {
 	if(vaughn.flags["Met"] >= Vaughn.Met.CompletedPoisoning) return false;
 	return true;
 }
-//TODO
 Scenes.Vaughn.Tasks.Poisoning.OnTask = function() {
 	return vaughn.flags["Met"] == Vaughn.Met.OnTaskPoisoning;
 }
@@ -1161,8 +1161,14 @@ Scenes.Vaughn.Tasks.Poisoning.Start = function() {
 }
 
 
-// TODO LINK (LB ON ENTRY)
-//Trigger this upon stepping into the Lady’s Blessing with this task active (Allotted time, 17-24 the next day, ie timer not expired, and <= 7 hours).
+Scenes.Vaughn.Tasks.Poisoning.InnAvailable = function() {
+	//Trigger this upon stepping into the Lady’s Blessing with this task active (Allotted time, 17-24 the next day, ie timer not expired, and <= 7 hours).
+	if(!Scenes.Vaughn.Tasks.Poisoning.OnTask()) return false;
+	if(vaughn.taskTimer.Expired()) return false;
+	if(vaughn.taskTimer.ToHours() > 7) return false;
+	return true;
+}
+
 Scenes.Vaughn.Tasks.Poisoning.ArrivalAtInn = function() {
 	var parse = {
 		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
@@ -1363,16 +1369,23 @@ Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
 					
 					vaughn.flags["T3"] |= Vaughn.Poisoning.LeftItToTwins;
 					
-					world.TimeStep({hour: 1});
-					
 					party.Inv().RemoveItem(Items.Quest.OutlawPoison);
 					party.Inv().RemoveItem(Items.Quest.OutlawAphrodisiac);
-				
-					//TODO LINK, FLAGS
-					// #set encounter as successful.
-					// #If poison, end encounter. If aphrodisiac, go to aphrodisiac entry point.
+					
+					vaughn.flags["Met"] = Vaughn.Met.PoisoningSucceed;
+					vaughn.flags["T3"] |= Vaughn.Poisoning.Success;
+					
+					world.TimeStep({hour: 1});
+					
+					if(vaughn.flags["T3"] & Vaughn.Poisoning.Aphrodisiac)
+						Gui.NextPrompt(Scenes.Vaughn.Tasks.Poisoning.AphrodisiacEntry);
+					else
+						Gui.NextPrompt(function() {
+							MoveToLocation(world.loc.Rigard.Plaza);
+						});
 				}
 				else {
+					parse["himher"] = player.mfFem("him", "her");
 					Text.Add("<i>“[playername] <b>has</b> been of quite some help to us of late,”</i> Rani pipes up. <i>“We should really repay [himher] with a favor or two sometime. Money only goes so far, and getting rid of Lady Heydrich’s influence for some time would certainly be a breath of fresh air for once.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“True, but we’ve been extending ourselves quite dangerously of late. Father is beginning to notice something’s up.”</i> Rumi turns away from her brother and to you. <i>“I’m sorry, [playername], but you’ve come at a bad time. If she does show up in court, we’ll fight her to the utmost for you - not as if it wasn’t in our interests to do as much anyway, if she really is fronting for Majid - but asking us to play a direct hand in your rather illegal escapades would bring more scrutiny down upon us than we’d care for at the moment.”</i>", parse);
@@ -1471,12 +1484,17 @@ Scenes.Vaughn.Tasks.Poisoning.Kitchen = function() {
 				Text.Add("You’ve to agree with that - perhaps it’d be best if you reported back to Vaughn and told him about your presence being expected at the inn. Standing, you quickly pay for your drinks and make to leave.", parse);
 				Text.Flush();
 				
-				//TODO FLAG
-				//TODO LINK, #If poison, end encounter. If aphrodisiac, go to aphrodisiac entry point.
+				vaughn.flags["Met"] = Vaughn.Met.PoisoningSucceed;
+				vaughn.flags["T3"] |= Vaughn.Poisoning.Success;
 				
 				world.TimeStep({hour: 1});
 				
-				Gui.NextPrompt();
+				if(vaughn.flags["T3"] & Vaughn.Poisoning.Aphrodisiac)
+					Gui.NextPrompt(Scenes.Vaughn.Tasks.Poisoning.AphrodisiacEntry);
+				else
+					Gui.NextPrompt(function() {
+						MoveToLocation(world.loc.Rigard.Plaza);
+					});
 			}, enabled : true
 		});
 		options.push({ nameStr : "Yourself",
@@ -1530,14 +1548,20 @@ Scenes.Vaughn.Tasks.Poisoning.KitchenYourself = function() {
 		Text.Add("The last course’s coming up, and it promises to be a good one. Hopefully, the [p] takes - with one last glance at the waiters pushing the carts back out through the kitchen’s steamy confines, you slip back to the front entrance and [c] the inn, although you don’t intend to stay long. Best to head back to Vaughn and report your success.", parse);
 		Text.Flush();
 		
-		world.TimeStep({hour: 1});
-		
 		party.Inv().RemoveItem(Items.Quest.OutlawPoison);
 		party.Inv().RemoveItem(Items.Quest.OutlawAphrodisiac);
 		
-		Gui.NextPrompt();
-		//TODO FLAG
-		//TODO LINK, #If poison, end encounter. If aphrodisiac, go to aphrodisiac entry point.
+		vaughn.flags["Met"] = Vaughn.Met.PoisoningSucceed;
+		vaughn.flags["T3"] |= Vaughn.Poisoning.Success;
+		
+		world.TimeStep({hour: 1});
+		
+		if(vaughn.flags["T3"] & Vaughn.Poisoning.Aphrodisiac)
+			Gui.NextPrompt(Scenes.Vaughn.Tasks.Poisoning.AphrodisiacEntry);
+		else
+			Gui.NextPrompt(function() {
+				MoveToLocation(world.loc.Rigard.Plaza);
+			});
 	}
 	else {
 		Text.Add("You work as fast as you can, but it clearly isn’t quick enough. About halfway through the process, numerous footsteps ring out from amidst the din and clatter of the kitchens, clearly heading for the door on the far end of the room.", parse);
@@ -1555,15 +1579,312 @@ Scenes.Vaughn.Tasks.Poisoning.KitchenYourself = function() {
 		Text.Add("It’s not very likely that they’re going to use those dishes which you tainted, so there’s nothing you can do but head back to Vaughn and report your failure.", parse);
 		Text.Flush();
 		
-		//TODO FLAG
-		world.TimeStep({hour: 1});
-		
 		party.Inv().RemoveItem(Items.Quest.OutlawPoison);
 		party.Inv().RemoveItem(Items.Quest.OutlawAphrodisiac);
 		
-		Gui.NextPrompt();
+		vaughn.flags["Met"] = Vaughn.Met.PoisoningFail;
+		
+		world.TimeStep({hour: 1});
+		
+		Gui.NextPrompt(function() {
+			MoveToLocation(world.loc.Rigard.Plaza);
+		});
 	}
 }
 
+Scenes.Vaughn.Tasks.Poisoning.AphrodisiacEntry = function() {
+	var parse = {
+		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
+	};
+	
+	Text.Clear();
+	Text.Add("Mission accomplished, time to leave before the fireworks - uh oh. Passing the stairway leading up to the rooms on your way out, you catch the faint sounds of laughter from suite thirty-three, and more - there’s a clear sexual undertone to it all. Yes, it’s faint, but you’re pretty sure you heard a moan there. At least all the food seems to have been served and you’re sure that the staff are taking a well-deserved break, but it probably isn’t going to be too long before [Orvin] or someone else notices what’s up?", parse);
+	Text.NL();
+	Text.Add("The aphrodisiac wasn’t supposed to take effect this quickly, was it? Or did you add more than you ought to have? Well, what’s done is done. You <i>should</i> leave soon, yes, but then again, there’s the temptation to take in your handiwork and see just what you’ve wrought…", parse);
+	Text.Flush();
+	
+	//[Peek][Leave]
+	var options = new Array();
+	options.push({ nameStr : "Peek",
+		tooltip : "Face it, you just want to know what’s going on inside.",
+		func : function() {
+			Scenes.Vaughn.Tasks.Poisoning.AphrodisiacPeek();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Leave",
+		tooltip : "You don’t want to linger here any more than necessary.",
+		func : function() {
+			Scenes.Vaughn.Tasks.Poisoning.AphrodisiacLeave();
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
 
+Scenes.Vaughn.Tasks.Poisoning.AphrodisiacLeave = function() {
+	var parse = {};
+	
+	Text.Clear();
+	Text.Add("Shaking your head, you turn your back and hurry down and out of the Lady’s Blessing. Things should be getting heated up soon, if Vaughn’s description of the aphrodisiac’s effects were accurate, and since you know for sure that the job’s taken care of, you don’t want to be here any longer than necessary. There’s nothing left for you now but to report back to Vaughn and hear what he has to say.", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt();
+}
 
+Scenes.Vaughn.Tasks.Poisoning.AphrodisiacPeek = function() {
+	var parse = {
+		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
+	
+	var p1cock = player.BiggestCock();
+	
+	Text.Clear();
+	Text.Add("Curiosity gets the better of you, and you can’t help but crack open the suite door and take a little peek. The scene that greets your eyes isn’t quite the roof-roaring orgy yet, but it’s certainly getting more than a little steamy for the occupants of suite thirty-three, numbering about twelve to fifteen in total. While the aphrodisiac hasn’t had enough time to kick in fully, undone clothes and rumpled fabrics are the order of the day, and there’s plenty of making out going on between the various people within.", parse);
+	Text.NL();
+	Text.Add("Of course, some are more enthusiastic than others - in particular, a rather striking woman with the telltale red hair of the nobility lies on her back upon the suite’s plush carpeted floor, her hair making a halo about her head. There’s a huge, throbbing cock in her mouth and one in each of her hands as men in various states of undress cluster about her, eagerly awaiting their turn, and another finely-dressed lady grinds at her mound through her dress in a fit of unbridled lust.", parse);
+	Text.NL();
+	Text.Add("Lady Heydrich, you assume. Well, if this keeps up for as long as the aphrodisiac lasts, she’ll definitely be in no shape to turn up in court anytime soon, let alone debate. You turn your eye to the exquisite dishes arrayed out in the buffet, all in various states of consumption, and shake your head. The only regret, perhaps, is how [Orvin]’s going to take a pretty bad fall for this, what with it happening at his establishment and all.", parse);
+	Text.NL();
+	Text.Add("Even in this short moment, the air’s begun to heat up noticeably - more and more garments are falling discarded to the ground, while whimpers and soft moans turn to grunts and cries of passion, the rustle of addled fingers pawing desperately at fabric clear in the air. Is there more you need to get done here, or should you just get out while you can?", parse);
+	Text.Flush();
+	
+	//[Join][69][Leave]
+	var options = new Array();
+	options.push({ nameStr : "Join",
+		tooltip : "Why let a good orgy go to waste? Join in the fun!",
+		func : function() {
+			Text.Clear();
+			parse["ar"] = player.Armor() ? Text.Parse("[armor] and ", parse) : "";
+			Text.Add("Screw this, you could never resist a good orgy, and the fact that it’s an impromptu one comprised of the upper crust makes it all the more dangerous and appealing. Wading through the mess of fabric and bodies, skin rubbing against skin and hands grasping at your calves and thighs, you allow yourself to embrace the increasingly cloying atmosphere of sweet sex growing in the inn suite, hurriedly stripping off your [ar]clothes as you approach the epicenter of the fuck-pile - Lady Heydrich.", parse);
+			Text.NL();
+			Text.Add("The other merchants and traders can do themselves; you’re going straight for the prize! Without hesitation, you shove the young man currently occupying her face off; his cock emerges with an audible pop, trailing a small string of seed, and you send him on his way with a good slap on his rump. Hazy and unfocused, Heydrich’s eyes roll this way and that, perhaps wondering who you are or where that delicious cock went. What a greedy little slut, considering that she’s still got one rod of man-meat in each hand.", parse);
+			Text.NL();
+			if(p1cock) {
+				parse["mc"] = player.NumCocks() > 1 ? "whole lot of replacements" : "replacement";
+				Text.Add("Well, you’ve got a [mc] right here, so no need to worry about that. Straddling the lusty noblewoman’s chest, you prodigiously apply your elbow to make a little space for yourself and make yourself comfortable.", parse);
+				Text.NL();
+				if(p1cock.Len() > 25) {
+					Text.Add("With how heavy your [cocks] [isAre], you need plenty of space, and waste no time in literally cock-slapping the nearby orgy-goers into clearing a path for your ponderous rod. Heydrich’s eyes widen as she takes in the impressive length and girth of your man-meat[s], but apprehension soon turns to delight as the aphrodisiac’s hold strengthens. With a renewed urgency, she gobbles up[oneof] your [cocks] without hesitation, trying to cram all she can fit into that mouth of hers and leaving barely enough space to breathe.", parse);
+				}
+				else {
+					parse["a"] = player.NumCocks() > 1 ? "a" : "your";
+					Text.Add("While your [cocks] might not be as endowed as it might have been, it doesn’t faze Heydrich any. With all of her other extremities quite occupied, all it takes is an open mouth for you to ram [a] member into it with great gusto. The addled noblewoman’s eyes widen in surprise at first, then resume their usual glazed-over look as the aphrodisiac’s hold strengthens.", parse);
+				}
+				Text.NL();
+				parse["b"] = player.HasBalls() ? " balls slapping at her chin and" : "";
+				Text.Add("Without further ado, you buck your hips forward and start pounding away in a steady, instinctive rhythm,[b] rutting away without a care in the world. Now you’re just another warm body in the midst of the glorious orgy that’s taking place here, flushed and steadily getting slick with sweat as you give in to your desires even without the need of an alchemical aid.", parse);
+				if(player.NumCocks() > 1) {
+					Text.NL();
+					Text.Add("Your other shaft[s2] flop[notS2] and bat[notS2] this way and that, sometimes bumping against Lady Heydrich’s chin, sometimes against other warm things which identity you’re not exactly sure of. At length, you become vaguely aware of other fingers grasping for [itThem2], pumping along [itsTheir2] length with hungry, desperate strokes. It could be any number of the writhing bodies which‘ve drawn closer to the massive pile of copulation since you arrived, but hey, it’s not polite to look a gift horse in the mouth. That mouth’s much better used elsewhere, after all.", parse);
+					Text.NL();
+					Text.Add("Groaning, you lean back and savor the delightful sensations from being sucked and stroked at the same time, the subtle contrast only making the whole that much more pleasurable.", parse);
+				}
+			}
+			else { //Vag
+				Text.Add("While you might not have a shaft, you’ve something even better than that for Heydrich to busy her tongue with. Smirking, you blatantly shove your [vag] into the addled noblewoman’s face, letting her get a good scent of your muff. It takes a few urgent grinds before she finally gets the message and starts licking away, that dainty little tongue of hers darting in and out from between her full lips. It soon becomes clear that Heydrich’s no stranger to eating out another woman, and you briefly wonder where and how she learned as much before the first wave of pleasure hits you and you arch backwards, wrapping your fingers around someone’s - it’s hard to tell exactly whose - shoulders to keep balance.", parse);
+				Text.NL();
+				Text.Add("Aww. It’s so cute, the sight of her lapping at your cunt like a kitten at a saucer of milk, and the way her tongue-tip reaches for your button and runs along it sends tingles arcing down your spine, triggering a fresh flow of feminine nectar to ooze upon her face. Straightening yourself, you reach for your [breasts] and work away, fingers teasing your [nips] while Heydrich works away beneath you and the others in the room jostle against your bodies. Instinctively drawn by the heat and tension in the air that’s the result of sweet, sweet sex, it’s not long before you have a moaning, wriggling mass of limbs all about you, all sorts of things hard at work stuffing various holes.", parse);
+				Text.NL();
+				Text.Add("You’re vaguely aware of a few details about you - a fat, balding merchant being spit roasted by two younger men while his ass is stuffed by a particularly thick and oily sausage, a once stately lady barking like a dog as she’s mounted and reamed on all fours like one - but your attention is always drawn back to slut supreme Heydrich. The more the noblewoman gives into her lusts, the more predatory and urgent her licking becomes, the deeper her tongue thrusts - so vigorous and enthusiastic she is, that she’s moved her hands to your hips, grabbing you as an anchor while she bucks and undulates beneath you.", parse);
+			}
+			Text.NL();
+			Text.Add("While it’d have been nice for this to see the orgy to its end, hurried words reach your ears from downstairs, followed by shouts and footsteps pounding on the staircase leading up. Seems like the inn staff’s caught onto your shenanigans - as upsetting as it is to pull out before due time, you hurriedly stand on shaky legs and do up your clothing as best as you can while dashing for the window.", parse);
+			Text.NL();
+			Text.Add("The plush carpet is already soaking up plenty of sexual fluids, and as you vault over the windowsill and onto the roof tiles outside, you can’t help but pity whoever’s going to have to clean this up afterwards. Shouts erupt from behind you as the door’s flung open, and there’s more than one scream at the sight of glistening, rutting orgy-goers, but you don’t dare look back for fear of risking someone getting a glimpse of your face.", parse);
+			Text.NL();
+			parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
+			parse["c"] = party.Num() > 1 ? Text.Parse(" where [comp] rejoin you", parse) : "";
+			Text.Add("Yeah… maybe staying to partake wasn’t the best of ideas, but it sure <i>felt</i> good while it lasted. Down the roof and round the back[c] - there’s no way you’re heading into the Lady’s Blessing for a while now, not while [Orvin] and his people sort out this mess and are still casting suspicious eyes on everyone and everything. Your nethers still tingling from your rudely interrupted repast, you do your best to clear your head and gather your thoughts. Since there’s nothing left for you to do here, perhaps it’d be best if you headed back to Vaughn and reported in.", parse);
+			Text.Flush();
+			
+			vaughn.flags["T3"] |= Vaughn.Poisoning.JoinedOrgy;
+			
+			player.slut.IncreaseStat(100, 5);
+			
+			world.TimeStep({hour: 1});
+			
+			Gui.NextPrompt(function() {
+				MoveToLocation(world.loc.Rigard.Plaza);
+			});
+		}, enabled : player.FirstCock() || player.FirstVag()
+	});
+	if(room69.flags["Rel"] >= Room69.RelFlags.GoodTerms) {
+		options.push({ nameStr : "69",
+			tooltip : "Come to think of it, you know someone who might keep them occupied for a while…",
+			func : function() {
+				Text.Clear();
+				Text.Add("An idea comes to your mind, and a very nasty grin spreads out on your face as it takes form. Yes… you may need to get out of here soon, but there’s someone else who might do a better job of keeping an eye on these fine people, and you know just who it is.", parse);
+				Text.NL();
+				Text.Add("Quickly, you take a glance down the corridor; now that the buffet’s been served up, the staff are taking a break, and there aren’t any other guests wandering the halls at the moment. Great, this is the opening you need. Quickly throwing open the door of suite thirty-three, you grab the closest sucker - a young man with his undershirt unbuttoned down to his navel and stiff cock hanging out of his trousers - and begin manhandling him in the direction of room 369. Glassy-eyed and in quite the sex-filled pink haze, he’s quite compliant, especially when you give his rod a few encouraging tugs to get him going. Seeing one of their number depart - and with a newcomer at that - the other members of the nascent orgy begin stumbling out after the two of you, perhaps seeking more exhilarating delights.", parse);
+				Text.NL();
+				Text.Add("Well, they’re going to get some soon enough. Slowly, gingerly, your fingers close upon the know of 69’s door, giving it a little stroke with your fingertips as if it were a knob of an entirely different sort.", parse);
+				Text.NL();
+				Text.Add("<i>“Ooh, who is it?”</i> a muffled voice calls out from behind the door. <i>“You’re certainly daring to be visiting a lady-gentleman at this hour, and with such forward behavior, too! I can’t entirely say I dislike it, though. Perhaps you should come inside and let us get to know each other a little better?”</i>", parse);
+				Text.NL();
+				Text.Add("Well, here goes nothing. Throwing open the door, you usher the young man into Sixtynine; the rest of the parade trailing out behind him, smelling perfume and the promise of sating their lusts, quickly follow him in. Lady Heydrich is the last one in, tottering a little from both lust and the rough dogpiling she took, but lets out a more than enthusiastic squeal as you shove her in with a slap on her pert rump. The moment everyone’s in, the door slams of its own accord, and the squeals - first of fear, then of delight - resound through the walls as the room sets to entertaining the delightful playmates you’ve sent along.", parse);
+				Text.NL();
+				Text.Add("It won’t be long before someone <i>does</i> come up to investigate, though. Much as you’d like to stay and savor the fruits of your hard work, you don’t want to be here when inconvenient questions are asked. Ignoring the cries of ecstasy ringing through the walls, you slip out of the Lady’s Blessing and are out the door. Time to head back to Vaughn and get his debrief, then.", parse);
+				Text.Flush();
+				
+				player.subDom.IncreaseStat(100, 2);
+				vaughn.flags["T3"] |= Vaughn.Poisoning.Used69;
+				world.TimeStep({hour: 1});
+				
+				Gui.NextPrompt(function() {
+					MoveToLocation(world.loc.Rigard.Plaza);
+				});
+			}, enabled : true
+		});
+	}
+	options.push({ nameStr : "Leave",
+		tooltip : "All right, you know the the job is done. Get out!",
+		func : function() {
+			Scenes.Vaughn.Tasks.Poisoning.AphrodisiacLeave();
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Vaughn.Tasks.Poisoning.OutOfTime = function() {
+	return Scenes.Vaughn.Tasks.Poisoning.OnTask() && vaughn.taskTimer.Expired();
+}
+
+Scenes.Vaughn.Tasks.Poisoning.DebriefSuccess = function() {
+	var parse = {
+		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("<i>“Ah, you’re back,”</i> Vaughn says as he notices you approach. The fox-morph is taking a small break with a couple of his men, passing a small hip flask amongst the three of them; he dismisses his men and takes a final swig from the flask before pocketing it and turning to you. <i>“How was it? I was quite worried.”</i>", parse);
+	Text.NL();
+	Text.Add("You managed to get it done, yes, and pass the now-empty vial to Vaughn. But worried? You’re flattered, but why was it that he was worried about you?", parse);
+	Text.NL();
+	Text.Add("<i>“Well, you notice anything out of shape while you were there? People extra vigilant, on the edge, that sort of thing?”</i>", parse);
+	Text.NL();
+	Text.Add("Hmm, not really. The waiters did seem rather harried, as did [Orvin] himself, but that was only to be expected with all the catering they had to do. Was there supposed to be something amiss?”</i>", parse);
+	Text.NL();
+	Text.Add("Vaughn shakes his head. <i>“I’ve had word from our eyes and ears that the staff were told to expect someone to try and mess with the food. That they were to be right by their food carts at all times, that no one was allowed to be in the kitchens, and that sort of good stuff. Someone told them we were coming, [playername], and I don’t like that one bit.”</i>", parse);
+	Text.NL();
+	Text.Add("That… yes, it would explain why the waiters wouldn’t stop for anyone, but he’s sure?", parse);
+	Text.NL();
+	Text.Add("<i>“Positive. I don’t like the thought any more than you do, but even the boss-man agrees that there’s got to be a traitor somewhere in our camp.”</i> Vaughn rubs his face. <i>“I suppose it had to happen sooner or later, with some of the shadier folks who nevertheless manage to get in here, but…”</i>", parse);
+	Text.NL();
+	Text.Add("The fox-morph falls silent, and the two of you stare at each other for a few moments until he collects himself once more. <i>“You just ought to keep this in mind. Get your stuff done, and we’ll handle the mole in our midst. In the meantime, we should probably get back to the problem at hand.”</i>", parse);
+	Text.NL();
+	if(vaughn.flags["T3"] & Vaughn.Poisoning.Poison) {
+		Text.Add("Well, you got the poison into the food. You didn’t stop to check if the stuff had actually been eaten, though, and by the Lady herself…", parse);
+		Text.NL();
+		Text.Add("<i>“You did what you could,”</i> Vaughn says with a sigh. <i>“It’s the best we can hope for - if everyone around Heydrich but her comes down with the squealing shits, then it’s just our bad luck. You can’t win them all, as Maria says.”</i>", parse);
+		Text.NL();
+		Text.Add("Right. So, what now?", parse);
+		Text.NL();
+		Text.Add("<i>“What happens now is that you take a good breather and rest up for the inevitable next task the boss-man’s going to hand down sooner or later. Or heck, I might even take up some initiative like he’s been pushing us to do and ask you of my own accord.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Seriously, though. Just take a break, do whatever you do when you’re not with us; I’m sure that you’ve got plenty to be done. You’ll be busy again soon enough.”</i>", parse);
+	}
+	else { // (Success via aphrodisiac)
+		Text.Add("Right. About that - when you left the party, the orgy was still going on in full force, and you doubt that anything less than the direct intervention of a great spirit would bring it to a halt. Well, maybe not that much, but he knows what you mean.", parse);
+		Text.NL();
+		Text.Add("<i>“Hah,”</i> Vaughn replies, a corner of his mouth curling upwards in utter contempt. <i>“I can imagine, all right. Bird-brains there assured me that a reasonable dose’ll last all day, and won’t wear off even after a nap. Worst thing that could happen is that someone finds the orgy and forcibly breaks it up, but it’s not as if Heydrich will be in any shape to attend court for quite some time.”</i>", parse);
+		Text.NL();
+		Text.Add("Great! So… mission accomplished, then?", parse);
+		Text.NL();
+		Text.Add("<i>“That would be it, yes. Go and get some rest, take a breather, do whatever you do when you’re not with us. The boss-man has plenty of ideas in that head of his, and I’m sure it won’t be too long before he thinks another one of them’s good enough to put into action. Or perhaps I might even take initiative like the boss-man’s always pushing us to do and ask something of you myself.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“That’s it for now, [playername]. Good work. Wish I could’ve been there to see it for myself, those nobs rutting up and down like a bunch of beasts, but them’s the breaks.”</i>", parse);
+	}
+	Text.NL();
+	Text.Add("If he says so, then. You half-turn to go, but Vaughn gently catches you by the shoulder and clears his throat. <i>“Ahem. There’s still something I have to give you for your time.”</i>", parse);
+	Text.NL();
+	Text.Add("Why, a reward?", parse);
+	Text.NL();
+	Text.Add("Vaughn nods. <i>“You stuck your neck out for us, so I think it’s fitting. Let me go in and get it.”</i>", parse);
+	Text.NL();
+	Text.Add("Without another word, Vaughn spins on his heel and enters the watchtower, reappearing shortly with a case in his hands. <i>“Here, for you. Came in from upriver. Meant for the boss-man, but he doesn’t hold truck with such things. Maybe you’ll make better use out of it.”</i>", parse);
+	Text.NL();
+	Text.Add("What’s inside, though?", parse);
+	Text.NL();
+	Text.Add("A wink and tip of Vaughn’s hat. <i>“Open it up in a bit and find out, that’s all I’ll say. All right, then - if there’s nothing else, I’ve got to get back on duty. Have a good one, [playername].”</i>", parse);
+	Text.NL();
+	Text.Add("You unwrap the package. It contains a razor sharp but very fragile looking glass sword.", parse, 'bold');
+	Text.Flush();
+	
+	world.TimeStep({hour: 1});
+	
+	vaughn.flags["Met"] = Vaughn.Met.CompletedPoisoning;
+	
+	outlaws.relation.IncreaseStat(100, 3);
+	
+	party.Inv().AddItem(Items.Combat.GlassSword);
+	
+	Gui.NextPrompt();
+}
+
+Scenes.Vaughn.Tasks.Poisoning.DebriefFailure = function() {
+	var parse = {
+		Orvin : Rigard.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("<i>“You’re back,”</i> Vaughn says as he notices you approach. The fox-morph is sharing a small break with a couple of his men, passing a hip flask between the three of them, and he dismisses them with a wave of a hand-paw as you draw close. <i>“I was worried you wouldn’t turn up - our eyes and ears reported of quite the commotion at the Lady’s Blessing a little while ago.”</i>", parse);
+	Text.NL();
+	Text.Add("Yes, yes. Didn’t take him too long to put two and two together, did he?", parse);
+	Text.NL();
+	Text.Add("Vaughn shakes his head and spits on the ground. <i>“Nope, and neither was the news of the good kind. After you set off, I got word that Orvin and his people down at the Lady’s Blessing were particularly on edge. Somehow, someone managed to get across the message that someone would be trying to mess with the catering for Heydrich’s little party, and that they ought to be extra careful.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“You look like shit. Tell me what kind of trouble you ran into.”</i>", parse);
+	Text.NL();
+	Text.Add("Hey, you didn’t think you looked <i>that</i> bedraggled. Still, you do your best to adjust your clothing while you recount to Vaughn what happened in the back room of Lady’s Blessing. The ex-soldier listens intently, his ears twitching under his hat, then eyes you.", parse);
+	Text.NL();
+	Text.Add("<i>“Hah. They made sure that no one could get at the food proper, but failed to consider someone might try to mess with the glassware instead. Linear thinking, as the boss-man would say. Still, seems like they realized their mistake halfway through.”</i>", parse);
+	Text.NL();
+	Text.Add("Come to think of it, you can’t help but feel a little bad for [Orvin]. He was just trying to preserve the good name of his inn, that’s all.", parse);
+	Text.NL();
+	Text.Add("Vaughn looks at you askance. <i>“I’m not going to lie, [playername]. Most peoples’ lives aren’t sticking closely to the straight and narrow already… but what we do is even less peachy keen than that. Orvin’s got a good business going, he’s got a reputation and history, and he’ll recover in time. This isn’t so bad. Who knows what’ll come down the line, though?</i>", parse);
+	Text.NL();
+	Text.Add("<i>“I’ve had to make choices which I’m not exactly proud of, but were necessary back then. You gotta keep that in mind and know what you can do and sleep at night.”</i>", parse);
+	Text.NL();
+	Text.Add("All right, you will.", parse);
+	Text.NL();
+	Text.Add("<i>“Good. If I were you, I’d get some rest. From your tale, you’ve had quite the close shave, and it’s only due to the spirits’ providence that you weren’t recognized.”</i> He claps you on the shoulder. <i>“Watch your back from here on out; there’s a snitch in our midst and it may take some time to root the bastard out just yet. Get a move along, soldier. There’ll be work to be done soon enough, so hold your horses.”</i>", parse);
+	Text.Flush();
+	
+	world.TimeStep({hour: 1});
+	
+	vaughn.flags["Met"] = Vaughn.Met.CompletedPoisoning;
+	
+	Gui.NextPrompt();
+}
+
+Scenes.Vaughn.Tasks.Poisoning.DebriefOutOfTime = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("<i>“You’re back,”</i> Vaughn states dryly as you draw close. <i>“Finally decided to show your face, or did you forget the meaning of the word ‘punctual’? No, I don’t want to hear your excuses. Or did you know to stay away from the Lady’s Blessing?”</i>", parse);
+	Text.NL();
+	Text.Add("What? What’s that about staying away from the Lady’s Blessing?", parse);
+	Text.NL();
+	Text.Add("<i>“Oh, so you were just being tardy. I get it, I get it. And here I was, thinking that you might’ve been a no-show because you know it somehow got leaked that someone was going to try and mess with the food that evening. At least that would’ve been understandable; I would’ve come back and said ‘hey, something unexpected happened, maybe we should call it off’. Well, guess I was wrong.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Give me back the vial. Not as if you’re going to be using it anyway. Guess there’s a small ray of light in all of this - at least you aren’t the bloody traitor. I think.”</i>", parse);
+	Text.NL();
+	Text.Add("Wordlessly, you hand over the vial to Vaughn, who storms away. Best not to talk to him again for a little while, or at least until he’s stopped fuming…", parse);
+	Text.Flush();
+	
+	party.Inv().RemoveItem(Items.Quest.OutlawPoison);
+	party.Inv().RemoveItem(Items.Quest.OutlawAphrodisiac);
+	
+	outlaws.relation.DecreaseStat(0, 5);
+	
+	vaughn.flags["Met"] = Vaughn.Met.CompletedPoisoning;
+	
+	world.TimeStep({hour: 1});
+	
+	Gui.NextPrompt();
+}

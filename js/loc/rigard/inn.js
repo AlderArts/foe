@@ -133,6 +133,11 @@ world.loc.Rigard.Inn.common.DrunkHandler = function() {
 }
 
 world.loc.Rigard.Inn.common.onEntry = function() {
+	if(Scenes.Vaughn.Tasks.Poisoning.InnAvailable()) {
+		Scenes.Vaughn.Tasks.Poisoning.ArrivalAtInn();
+		return;
+	}
+	
 	Text.Clear();
 	var busy = Rigard.LB.Busy();
 	var first = rigard.LB["Visit"] == 0;

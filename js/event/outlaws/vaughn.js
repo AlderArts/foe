@@ -48,8 +48,9 @@ Vaughn.Met = {
 	CompletedSnitch : 10,
 	//Task 3
 	OnTaskPoisoning : 11,
-	//TODO
-	CompletedPoisoning : 12
+	PoisoningFail : 12,
+	PoisoningSucceed : 13,
+	CompletedPoisoning : 14
 	//TODO: tasks
 };
 Vaughn.Talk = { //Bitmask
@@ -181,6 +182,18 @@ Scenes.Vaughn.CampApproach = function() {
 	}
 	else if(Scenes.Vaughn.Tasks.Snitch.OutOfTime()) {
 		Scenes.Vaughn.Tasks.Snitch.DebriefOutOfTime();
+		return;
+	}
+	else if(vaughn.flags["Met"] == Vaughn.Met.PoisoningSucceed) {
+		Scenes.Vaughn.Tasks.Poisoning.DebriefSuccess();
+		return;
+	}
+	else if(vaughn.flags["Met"] == Vaughn.Met.PoisoningFail) {
+		Scenes.Vaughn.Tasks.Poisoning.DebriefFailure();
+		return;
+	}
+	else if(Scenes.Vaughn.Tasks.Poisoning.OutOfTime()) {
+		Scenes.Vaughn.Tasks.Poisoning.DebriefOutOfTime();
 		return;
 	}
 	//TODO: Need to account for correctly completed tasks

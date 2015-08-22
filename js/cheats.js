@@ -604,6 +604,7 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 		party.inventory.AddItem(Items.Combat.LustDart);
 		party.inventory.AddItem(Items.Combat.PoisonDart);
 		party.inventory.AddItem(Items.Combat.SmokeBomb);
+		party.inventory.AddItem(Items.Combat.GlassSword);
 		
 		DEBUG = true;
 		

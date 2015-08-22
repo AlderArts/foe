@@ -189,3 +189,21 @@ Items.Combat.PoisonDart.combat.castTree.push(AbilityNode.Template.Physical({
 	}]
 }));
 
+
+Items.Combat.GlassSword = new CombatItem("glass0", "Glass sword");
+Items.Combat.GlassSword.price = 1000;
+Items.Combat.GlassSword.Short = function() { return "A glass sword, shatters on use."; }
+Items.Combat.GlassSword.Long = function() { return "A razor-sharp glass sword. A fragile but very powerful blade."; }
+Items.Combat.GlassSword.combat.targetMode = TargetMode.Enemy;
+Items.Combat.GlassSword.combat.castTree.push(AbilityNode.Template.Physical({
+	atkMod: 7,
+	hitMod: 2,
+	onCast: [function(ability, encounter, caster, target) {
+		var parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] strike[notS] [tname] with a glass sword. The blade shatters!", parse);
+		Text.NL();
+	}],
+	onMiss: [Abilities.Physical._onMiss],
+	onDamage: [Abilities.Physical._onDamage],
+	onAbsorb: [Abilities.Physical._onAbsorb]
+}));
