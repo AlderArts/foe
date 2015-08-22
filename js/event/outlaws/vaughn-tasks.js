@@ -1063,7 +1063,7 @@ Scenes.Vaughn.Tasks.Poisoning.Start = function() {
 	Text.NL();
 	Text.Add("Well, what’s the big deal? Or is he telling you this to lure you in with the temptation of forbidden fruit?", parse);
 	Text.NL();
-	Text.Add("Vaughn chuckles. <i>“Please, [playername]. I’m not so devious - Maria or the boss-man might be, but I’m as stiff and straight as a stick in the mud. No, here you’ll actually be committing quite the serious crime, so I’d rather you know what you’re getting yourself into before I send you out to do it.", parse);
+	Text.Add("Vaughn chuckles. <i>“Please, [playername]. I’m not so devious - Maria or the boss-man might be, but I’m as stiff and straight as a stick in the mud. No, here you’ll actually be committing quite the serious crime, so I’d rather you know what you’re getting yourself into before I send you out to do it.”</i>", parse);
 	Text.NL();
 	Text.Add("For the last time, you wouldn’t have said yes if you didn’t mean it. What’s he plotting, anyway? Assassination? Grand robbery? High treason?", parse);
 	Text.NL();
