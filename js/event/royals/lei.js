@@ -1323,5 +1323,7 @@ Scenes.Lei.SexPrompt = function() {
 		Text.Clear();
 		Text.Add("<i>“Something else on your mind?”</i>", parse);
 		Text.Flush();
+		
+		Scenes.Lei.InnPrompt();
 	});
 }
