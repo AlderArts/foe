@@ -150,9 +150,9 @@ Intro.ImpsWinUseMale = function() {
 			Text.NL();
 			Text.Add("<i>“Don't think you are getting away that easily, now get sucking!”</i> you taunt the red-skinned creature. The defiance flees from the imp's eyes and he dejectedly starts licking and stroking your member. <i>“Put in a bit more effort,”</i> you murmur, eyes half closed, as the imp swallows your [cockDesc] whole, letting his rough tongue play along the stem.", parse);
 			Text.NL();
-			Text.Add("<i>“Good... unf, you must get a lot of practice to be this good,”</i> you croon as your demonic cum-sleeve really gets down to business. As you feel your release coming closer, the imp pulls out until only the head of your [cockDesc] remains inside his mouth, resting on his tongue. Intent to get you off quickly, the demonic slut starts to lap at your tip while simultaneously jacking you off with both hands.", parse);
+			Text.Add("<i>“Good... unf, you must get a lot of practice to be this good,”</i> you croon as your demonic cocksleeve really gets down to business. As you feel your release coming closer, the imp pulls out until only the head of your [cockDesc] remains inside his mouth, resting on his tongue. Intent to get you off quickly, the demonic slut starts to lap at your tip while simultaneously jacking you off with both hands.", parse);
 			Text.NL();
-			Text.Add("Overcome by pleasure, you lustfully cry out as you unload wad after wad into the mouth of the imp, letting your sticky spunk splatter over his tongue and pour down his throat. The creature dutifully swallows every drop, panting as you pull out, hard with lust himself.");
+			Text.Add("Overcome by pleasure, you lustfully cry out as you unload wad after wad into the mouth of the imp, letting your sticky spunk splatter on his tongue and pour down his throat. The creature dutifully swallows every drop, panting as you pull out, hard with lust himself.");
 			Text.NL();
 			Text.Add("You give the aroused imp a slight snicker, leaving him to his own devices.");
 			
@@ -172,12 +172,12 @@ Intro.ImpsWinUseMale = function() {
 			if(player.FirstCock().length.Get() >= 15)
 				Text.Add("Due to its length, your [cockDesc] is soon prodding at the entrance of the imp's throat and by applying a final push, you force the head inside the tight passage. The imp, not used to such treatment, involuntarily constricts his throat, trying to force out the invader. This only further entices you, milking a few drops of pre from your [cockDesc].", parse);
 			else
-				Text.Add("You are not quite big enough to stuff his throat, but if you push as far as you can, you can just manage to touch his uvula. Taking this as a challenge, you grab the imp's head and, roughly and repeatedly, feed him your length, mashing your hips against his face, bruising his nose in the process. Each time your [cockDesc] brushes against the back of his mouth, you are rewarded with a shuddering moan and a twitching caress from his tongue. Slamming in as far as you can, you insistently rub against the roof of his mouth.", parse);
+				Text.Add("You are not quite big enough to stuff his throat, but if you push as far as you can, you can just manage to touch his uvula. Taking this as a challenge, you grab the imp's head and, roughly and repeatedly, feed him your length, mashing your hips against his face and bruising his nose in the process. Each time your [cockDesc] brushes against the back of his maw, you are rewarded with a shuddering moan and a twitching caress from his tongue. Slamming in as far as you can, you insistently rub against the roof of his mouth.", parse);
 			
 			Text.NL();
 			Text.Add("You rest there, a firm hand keeping the imp in place as his convulsions bring you to your peak. Moaning with pleasure, you release a stream of white semen down the throat of the poor imp, forcing it to swallow.");
 			Text.NL();
-			Text.Add("Spent, you pull out of your cum-dump, only to find that the imp has passed out. Shrugging, you leave it where it is, wheezing and leaking cum.");
+			Text.Add("Spent, you pull out of your cumdump, only to find that the imp has passed out. Shrugging, you leave it where it is, wheezing and leaking cum.");
 			
 			Sex.Blowjob(imp, player);
 			
@@ -189,9 +189,9 @@ Intro.ImpsWinUseMale = function() {
 	options.push({ nameStr : "Anal",
 		func : function() {
 			Text.Clear();
-			Text.Add("You pull out of the imp's mouth, absently rubbing your saliva and pre-covered [cockDesc] against his cheek. The creature takes the opportunity to take a few wheezing breaths, before trying to scramble away from you. Effortlessly grabbing his tail and sweeping his legs away from under him, you chide him.", parse);
+			Text.Add("You pull out of the imp's mouth, absently rubbing your saliva and pre-covered [cockDesc] against his cheek. The creature takes the opportunity to take a few wheezing breaths before trying to scramble away from you. Effortlessly grabbing his tail and sweeping his legs away from under him, you chide him.", parse);
 			Text.NL();
-			Text.Add("<i>“Come on, now, can't have you running away before I get off, can we? If you are going to be such a baby and not allow me to use your mouth, I'm just going to have to find another hole to stuff.”</i> Comprehension slowly dawns on the scrawny imp, and it begins to plead for you to use its mouth again, but your attention is focused on its plump rear. You give the demonic butt a few gentle caresses, keeping the struggling imp in place with a steady grip on its tail.");
+			Text.Add("<i>“Come on now. Can't have you running away before I get off, can we? If you are going to be such a baby and not allow me to use your mouth, I'm just going to have to find another hole to stuff.”</i> Comprehension slowly dawns on the scrawny imp, and it begins to plead for you to use its mouth again, but your attention is focused on its plump rear. You give the demonic butt a few gentle caresses, keeping the struggling imp in place with a steady grip on its tail.");
 			Text.NL();
 			Text.Add("With your other hand, you guide your [cockDesc] up against the struggling runt's taint, sighing with content as the dark red rosebud gives way. The imp yelps in a mix of pain and pleasure as you set your pace, plunging your stiff [cockDesc] deeper and deeper inside him.", parse);
 			Text.NL();
@@ -204,7 +204,7 @@ Intro.ImpsWinUseMale = function() {
 				Text.Add(", your increased length reaching previously untouched depths");
 			Text.Add(". The imp's anal muscles constrict wildly, trying to force the unfamiliar invader out of its body. You hardly have to move at all to bring yourself to your orgasm, but nonetheless you roughly buck against the imp's ass, painting his insides white with your seed.");
 			Text.NL();
-			Text.Add("Planting a slap on the panting imp's behind you pull out and tell it to run off. It tries, but after a few wobbling steps, its knees give out and it drops in a quivering heap, leaking semen.");
+			Text.Add("Planting a slap on the panting imp's behind, you pull out and tell it to run off. It tries, but after a few wobbling steps, its knees give out and it drops in a quivering heap, leaking semen.");
 			
 			Text.Flush();
 			Gui.NextPrompt(Intro.DemonGift);
@@ -212,6 +212,15 @@ Intro.ImpsWinUseMale = function() {
 		tooltip : "If his mouth can't handle your cock, maybe his ass can."
 	});
 	Gui.SetButtonsFromList(options);
+}
+
+Intro.ImpsCuntBlock = function(parse) {
+	Intro.cuntBlocked = true;
+	Text.Add("<i>“Fuah, I... I need more!”</i> Stepping on the imp's shoulder, you push him to the ground. <i>“Now, be a good boy and stay like that,”</i> you breathe lustily, working him to full arousal with the sole of your foot. Straddling the imp's cock, you rub your wet labia against the tip, but when you try to sink down on the impressive tool, something blocks you. Moaning in frustration, you try to press down again, but the imp's [cockDesc] just slides to the side, harmlessly.", parse);
+	Text.NL();
+	Text.Add("<b>YOUR VIRGINITY IS <i>MINE</i>,</b> the demon rumbles maliciously, <b>THESE TRASH CAN MAKE DO WITH YOUR OTHER HOLES.</b>", parse);
+	Text.NL();
+	Text.Add("Grumbling, you give it one more try, but the invisible barrier opposes you once more. Frustrated, you adjust your aim, placing your ass over the raised imp-cock.", parse);
 }
 
 Intro.ImpsWinUseFemale = function() {
@@ -242,11 +251,11 @@ Intro.ImpsWinUseFemale = function() {
 	options.push({ nameStr : "Oral ride",
 		func : function() {
 			Text.Clear();
-			Text.Add("With a rough shove, you push the surprised imp flat on his back. Smirking, you turn around and lower yourself, presenting your nether lips to the confused creature. Licking your lip, you survey the imp's [cockDesc], giving it a friendly squeeze.", parse);
+			Text.Add("With a rough shove, you push the surprised imp flat on his back. Smirking, you turn around and lower yourself, presenting your pussy to the confused creature. Licking your lips, you survey the imp's [cockDesc], giving it a friendly squeeze.", parse);
 			Text.NL();
 			Text.Add("Due to the difference in height, you have to contort yourself quite a bit to be able to suck the little demon's dick, but you are not going to let that stop you. The imp can hardly believe his luck as you suck away at his [cockDesc], and redoubles his efforts to get you off.", parse);
 			Text.NL();
-			Text.Add("The creature may be small, but his cock certainly isn't. Getting the whole thing into your mouth is quite the challenge, but you somehow manage. Juices are streaming freely from your [cuntDesc], and you grind your hips against your demonic lover, your moans muffled by the cock rammed into your mouth.", parse);
+			Text.Add("The creature may be small, but his cock certainly isn't. Getting the whole thing into your mouth is quite the challenge, but you somehow manage. Juices are streaming freely from your [cuntDesc], and you grind your hips against your demonic lover, your moans muffled by the shaft rammed into your mouth.", parse);
 			Text.NL();
 			Text.Add("Both of you cum simultaneously, salty semen lathering your tongue as you ride out your own trembling orgasm. When your legs have finished shaking, you get up, wiping the remains of the imp's ejaculate from your lips.", parse);
 			
@@ -263,12 +272,7 @@ Intro.ImpsWinUseFemale = function() {
 			Text.Clear();
 			
 			if(!Intro.cuntBlocked) {
-				Intro.cuntBlocked = true;
-				Text.Add("<i>“Fuah, I... I need more!”</i> putting a foot on the imp's shoulder, you push him to the ground, <i>“Now, be a good boy and stay like that,”</i> you breathe lustily, working him to full arousal with the sole of your foot. Straddling the imp's cock, you rub your wet labia against the tip, but when you try to sink down on the impressive tool, something blocks you. Moaning in frustration you try to press down again, but the imp's [cockDesc] just slides to the side, harmlessly.", parse);
-				Text.NL();
-				Text.Add("<b>YOUR VIRGINITY IS <i>MINE</i>,</b> the demon rumbles maliciously, <b>THESE TRASH CAN MAKE DO WITH YOUR OTHER HOLES.</b>", parse);
-				Text.NL();
-				Text.Add("Grumbling, you give it one more try, but the invisible barrier opposes you once more. Frustrated, you adjust your aim, placing your ass over the raised imp-cock.", parse);
+				Intro.ImpsCuntBlock(parse);
 			}
 			else {
 				Text.Add("<i>“Mm,”</i> licking your lips, you motion for the excited imp to lie down on his back. He complies, watching expectantly as you fondle yourself, teasing a finger inside your [anusDesc]. You get down on your knees, straddling the imp's erect member and guiding it to your ass.", parse);
@@ -286,19 +290,19 @@ Intro.ImpsWinUseFemale = function() {
 			Text.NL();
 			Text.Add("The imp scrambles to his feet, practically throwing himself over you. Clawed hands grab your raised hips, and you moan lustfully as the imp's [cockDesc] rubs against your [cuntDesc], only for him to plant it squarely against your [anusDesc].", parse);
 			Text.NL();
-			Text.Add("<i>“Th-the fuck do you think you are do-aah!”</i> your protest is rudely cut of by the head of the imp's cock forcing its way inside your rectum. <i>“S-sorry,”</i> the imp squeaks in an embarrassed apology, <i>“The boss won't let me use the front,”</i> he explains, shoving a few inches inside you.", parse);
+			Text.Add("<i>“Th-the fuck do you think you are do-aah!”</i> your protest is rudely cut off by the head of the imp's cock forcing its way inside your rectum. <i>“S-sorry,”</i> the imp squeaks in an embarrassed apology. <i>“The boss won't let me use the front,”</i> he explains, shoving a few inches inside you.", parse);
 			Text.NL();
 			
 			player.FuckAnal(player.Butt(), imp.FirstCock());
 			Sex.Anal(imp, player);
 			
 			Text.Add("Being fucked by the imp is like having an erratic rabbit humping you, no finesse or care, just pure bestial rutting. He probably will not last long at this pace, and you wonder if you are even going to get off at this rate. Without any lubricant, your stretched ass is a flare of pain, ", parse);
-			if(player.Butt().capacity.Get() > 30)
+			if(player.Butt().capacity.Get() >= 6)
 				Text.Add("though your increased capacity makes it much easier.");
 			else
 				Text.Add("forced open to the breaking point by the imp.");
 			Text.NL();
-			Text.Add("... But stretching even further. You yowl in pain as you feel the imp's already considerable [cockName] swelling inexorably, at least doubling in length and gaining considerably in girth.", parse);
+			Text.Add("You yowl in pain as you feel the imp's already impressive [cockName] swelling inexorably, at least doubling in length and gaining considerably in girth.", parse);
 			Text.NL();
 			Text.Add("<b>THE SLUT CAN'T WAIT TO GET FUCKED, ASK AND YE SHALL RECEIVE,</b> the amused voice of the demon rolls over you. <i>“F-fuuuck!”</i> you groan as the imp somehow bottoms out in your butt, filling you completely. Even while growing, the imp does not slow one bit, continuing to rail you like there is no tomorrow.", parse);
 			Text.NL();
@@ -335,12 +339,7 @@ Intro.ImpsWinRide = function() {
 	
 	if(player.body.Gender() == Gender.female) {
 		if(!Intro.cuntBlocked) {
-			Intro.cuntBlocked = true;
-			Text.Add("<i>“Fuah, I... I need more!”</i> putting a foot on the imp's shoulder, you push him to the ground, <i>“Now, be a good boy and stay like that,”</i> you breathe lustily, working him to full arousal with the sole of your foot. Straddling the imp's cock, you rub your wet labia against the tip, but when you try to sink down on the impressive tool, something blocks you. Moaning in frustration you try to press down again, but the imp's [impCockDesc] just slides to the side, harmlessly.", parse);
-			Text.NL();
-			Text.Add("<b>YOUR VIRGINITY IS <i>MINE</i>,<b> the demon rumbles maliciously, <b>THESE TRASH CAN MAKE DO WITH YOUR OTHER HOLES.</b>", parse);
-			Text.NL();
-			Text.Add("Grumbling, you give it one more try, but the invisible barrier opposes you once more. Frustrated, you adjust your aim, placing your ass over the raised imp-cock.", parse);
+			Intro.ImpsCuntBlock(parse);
 		}
 		else // Female repeat
 			Text.Add("Knowing that the demon will just stop you if you try to use your [cuntDesc], you lower your ass down and press your other hole against the still pole the imp is presenting you with.", parse);
@@ -468,7 +467,7 @@ Intro.ImpsWinGroup = function() {
 	options.push({ nameStr : "Imp",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>“You got me messed up like this,”</i> you complain to the tired imps around you, <i>“You get me cleaned up!”</i> The dismayed protests of the imps are quickly cut off by threatening to beat them up again, and they dejectedly get down to business. You lean back and relax, turning around at the appropriate times to give them better access. Eventually, you are as clean as you are likely to become without taking a proper bath.");
+			Text.Add("<i>“You got me messed up like this,”</i> you complain to the tired imps around you, <i>“you get to clean me up!”</i> The dismayed protests of the imps are quickly cut off by threatening to beat them up again, and they dejectedly get down to business. You lean back and relax, turning around at the appropriate times to give them better access. Eventually, you are as clean as you are likely to become without taking a proper bath.");
 			Text.Flush();
 			Gui.NextPrompt(Intro.DemonGift);
 		}, enabled : true,
@@ -480,7 +479,7 @@ Intro.ImpsWinGroup = function() {
 Intro.ImpsLossPrompt = function() {
 	Text.Clear();
 	
-	Text.Add("You carefully approach the snickering imps, a bit daunted by their taunts. <i>“Does little missy want another go?”</i> One of the little devils holler, making rude gestures at you.");
+	Text.Add("You carefully approach the snickering imps, a bit daunted by their taunts. <i>“Does the little missy want another go?”</i> one of the little devils holler, making rude gestures at you.");
 	Text.Flush();
 	
 	//[No][Oral][Get fucked]
@@ -526,9 +525,9 @@ Intro.ImpsLossOral = function() {
 	if(player.FirstVag())
 		Text.Add(" Your wet [cuntDesc] gives your intentions away, even if you awkwardly try to hide it.", parse);
 	Text.NL();
-	Text.Add("<i>“Sure, why don't ya come over here and suck my dick?”</i> one of the imps taunt you, quite surprised when you shuffle over to comply. <i>“Hey, are you seeing this bitch?”</i> he chortles as you get down on your knees, planting a kiss on his hard [impCockDesc]. You go at your task with vigor, any previous embarrassment wiped away by the salty taste of imp precum on your tongue.", parse);
+	Text.Add("<i>“Sure, why don't ya come over here and suck my dick?”</i> one of the imps taunts you, quite surprised when you shuffle over to comply. <i>“Hey, are you seeing this bitch?”</i> he chortles as you get down on your knees, planting a kiss on his hard [impCockDesc]. You go at your task with vigor, any previous embarrassment wiped away by the salty taste of imp pre-cum on your tongue.", parse);
 	Text.NL();
-	Text.Add("You are so focused on your task that you do not notice the other imps closing in on you, not until their cocks grind up against your face, at least, demanding attention. It is a little tricky to split your love among the three - no,  five? - cocks, but you find a rhythm of alternating between sucking and stroking them.", parse);
+	Text.Add("You are so focused on your task that you do not notice the other imps closing in on you, not until their cocks grind up against your face, at least, demanding attention. It is a little tricky to split your love among the three - no, five? - cocks, but you find a rhythm of alternating between sucking and stroking them.", parse);
 	Text.NL();
 	Text.Add("<i>“C'mon slut, you can take more!”</i> To accentuate his proclamation, one of the imps shoves another dick into your mouth, stuffing your cheeks. Sucking enthusiastically, you coax the imps toward your reward, a stomach full of tasty cock-cream.", parse);
 	Text.NL();
@@ -594,7 +593,7 @@ Intro.ImpsLossFucked = function() {
 	
 	Text.Add("Finally, you can take no more and black out, still being fucked by the frenzied imps.", parse);
 	Text.NL();
-	Text.Add("You wake up some time later in a pile of snoring imps. Somehow you seem to have absorbed a ridiculous amount of cum, as your stomach is now relatively normal in size. Carefully disentangling yourself from the imps, you get up.", parse);
+	Text.Add("You wake up some time later in a pile of snoring imps. Somehow, you seem to have absorbed a ridiculous amount of cum, as your stomach is now relatively normal in size. Carefully disentangling yourself from the imps, you get up.", parse);
 	
 	Text.Flush();
 	Gui.NextPrompt(Intro.DemonGift);
@@ -686,7 +685,7 @@ Intro.DemonGift = function() {
 	}
 	options.push({ nameStr : "Anal cap",
 		func : function() {
-			Text.Add("Groaning, you feel your insides shift around, allowing for larger things being to be put in you butt!");
+			Text.Add("Groaning, you feel your insides shift around, allowing for larger things to be put in your butt!");
 			
 			player.Butt().capacity.base++;
 			
@@ -699,7 +698,7 @@ Intro.DemonGift = function() {
 	});
 	options.push({ nameStr : "Big breasts",
 		func : function() {
-			Text.Add("You moan as your chest fill out, gaining at least a few cup sizes. You carefully touch your stiff nipples, apparently they grew a bit too.");
+			Text.Add("You moan as your chest fills out, gaining at least a few cup sizes. You carefully touch your stiff nipples; apparently they grew a bit too.");
 			
 			player.FirstBreastRow().size.base += 5;
 			player.FirstBreastRow().nippleLength.base += 0.5;
