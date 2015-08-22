@@ -9,7 +9,6 @@ function Lei(storage) {
 	// Character stats
 	this.name = "Lei";
 	
-	//TODO: avatar
 	this.avatar.combat     = Images.lei;
 	
 	this.maxHp.base        = 460;
@@ -44,6 +43,10 @@ function Lei(storage) {
 	this.flags["ToldOrvin"] = 0;
 	this.flags["HeardOf"] = 0;
 	this.flags["Fought"] = Lei.Fight.No;
+	this.flags["Talk"] = 0; //Bitmask
+	this.flags["SexOpen"] = 0; //Toggle
+	
+	this.annoyance = new Stat(0);
 	
 	this.timeout = new Time();
 	
@@ -74,6 +77,14 @@ Lei.Rel = {
 	L3 : 60,
 	L4 : 80
 };
+Lei.Talk = { //Bitmask
+	Skills : 1,
+	Sex : 2
+};
+
+Lei.prototype.Annoyance = function() {
+	return this.annoyance.Get();
+}
 
 Lei.prototype.Recruited = function() {
 	return false; //TODO Lei.Met >= Recruited
@@ -87,6 +98,7 @@ Lei.prototype.Update = function(step) {
 
 Lei.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
+	this.annoyance.base = parseInt(storage.ann)  || this.annoyance.base;
 	
 	this.timeout.FromStorage(storage.timeout);
 	
@@ -98,6 +110,7 @@ Lei.prototype.ToStorage = function() {
 	var storage = {};
 	
 	this.SavePersonalityStats(storage);
+	if(this.annoyance.base != 0) storage.ann = this.annoyance.base.toFixed();
 	
 	this.SaveFlags(storage);
 	
@@ -168,19 +181,8 @@ Scenes.Lei.InnPrompt = function() {
 		
 	};
 	
-	//[name]
 	var options = new Array();
-	/* TODO
-	options.push({ nameStr : "name",
-		func : function() {
-			Text.Clear();
-			Text.Add("", parse);
-			Text.NL();
-			Text.Flush();
-		}, enabled : true,
-		tooltip : ""
-	});
-	*/
+	//PRE KRAWITZ
 	if(rigard.Krawitz["Q"] >= Rigard.KrawitzQ.Started && rigard.Krawitz["Q"] < Rigard.KrawitzQ.HeistDone) {
 		options.push({ nameStr : "Krawitz",
 			func : function() {
@@ -243,6 +245,42 @@ Scenes.Lei.InnPrompt = function() {
 			}, enabled : true,
 			tooltip : "Ask for advice for dealing with Krawitz."
 		});
+	}
+	//POST KRAWITZ
+	else {
+		options.push({ nameStr : "Talk",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>“Ask away, though I make no promises of answering.”</i>", parse);
+				Text.Flush();
+				
+				Scenes.Lei.TalkPrompt();
+			}, enabled : true,
+			tooltip : "You want to ask him some things."
+		});
+		if(lei.flags["Talk"] & Lei.Talk.Sex) {
+			options.push({ nameStr : "Sex",
+				func : function() {
+					Text.Clear();
+					Text.Add("<i>“Do go on.”</i> Lei studies you with an unreadable expression.", parse);
+					Text.Flush();
+					
+					Scenes.Lei.SexPrompt();
+				}, enabled : true,
+				tooltip : "Ask the mercenary about matters carnal."
+			});
+		}
+		/* TODO
+		options.push({ nameStr : "name",
+			func : function() {
+				Text.Clear();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Flush();
+			}, enabled : true,
+			tooltip : ""
+		});
+		*/
 	}
 	Gui.SetButtonsFromList(options, true);
 }
@@ -1049,3 +1087,241 @@ Scenes.Lei.BarFight = function() {
 	});
 }
 
+
+Scenes.Lei.TalkPrompt = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	//[name]
+	var options = new Array();
+	//TODO LOCK
+	if(!(lei.flags["Talk"] & Lei.Talk.Skills)) {
+		options.push({ nameStr : "Skills",
+			tooltip : "Ask him how he came to be as powerful as he is.",
+			func : function() {
+				Text.Clear();
+				Text.Add("You ask Lei how he came to be so good at combat.", parse);
+				Text.NL();
+				Text.Add("He ponders for a moment before responding. <i>“There are many factors, but the most important two are that I have always had strength as my goal and that I have survived. With those, all else will come.”</i>", parse);
+				Text.NL();
+				Text.Add("You purse your lips, waiting for him to elaborate.", parse);
+				Text.NL();
+				Text.Add("<i>“Very well,”</i> he resumes, smiling slightly at your impatience, <i>“if you wish to know the details, I do not mind telling you. I started training at a school of combat when I was a child. That training has served as my foundation, though it did not persist long.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Since then, I have fought and I have studied fighting my entire life. Every time when a fight is concluded and danger passed, I play it over in my mind, scrutinizing every action. I consider what I could have done better, and how else my opponent could have acted, and every time I find something I can improve.”</i>", parse);
+				Text.NL();
+				Text.Add("So, if he’s studied so much, he must really know a lot about all sorts of combat styles. Perhaps he could teach you to be better as well?", parse);
+				Text.NL();
+				Text.Add("Lei grins widely in response, his eyes twinkling with amusement. <i>“Yes... yes, I think I could come up with something.”</i> The look on his face briefly makes you wonder if asking him was such a good idea. <i>“Give me a little while to think of the best approach to take, and we shall see if I can make you stronger.”</i>", parse);
+				Text.Flush();
+				
+				lei.flags["Talk"] |= Lei.Talk.Skills;
+				
+				//TODO
+				//#one-off, unlocks [Training]
+				
+				Scenes.Lei.TalkPrompt();
+			}, enabled : true
+		});
+	}
+	options.push({ nameStr : "Twins",
+		tooltip : "Ask him about his relationship with the royal twins.",
+		func : function() {
+			Text.Clear();
+			Text.Add("You ask Lei how he gets along with Rumi and Rani.", parse);
+			Text.NL();
+			Text.Add("<i>“We are getting along well, actually,”</i> he says. <i>“I understand what they want, and they understand what I want. Why do you ask?”</i>", parse);
+			Text.NL();
+			Text.Add("You awkwardly explain that it’s just that their personalities seem so different…", parse);
+			Text.NL();
+			Text.Add("<i>“I don’t believe personalities are of such great import in such matters, so long as both sides are reasonable and strive to understand one another. Relationships, I have found, are a lot like fighting in formation. It doesn’t matter much how skilled the man beside you is - what matters is that he holds up his shield and does not break.”</i> You aren’t quite sure how that metaphor works and can’t help but wonder what Lei imagines when he says ‘relationship’.", parse);
+			Text.NL();
+			Text.Add("<i>“In any case, though they seem flighty at first glance, I think you will find steel if you pry under the façade. And besides,”</i> he adds with a grin, <i>“I must concede that I am not opposed to some flighty fun now and again.”</i>", parse);
+			Text.Flush();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Bodyguarding",
+		tooltip : "Ask what kind of special tasks the royal twins assign him.",
+		func : function() {
+			
+			var first = !(lei.flags["Talk"] & Lei.Talk.Sex);
+			
+			Text.Clear();
+			Text.Add("So, Rumi mentioned that Lei performed some additional duties for the twins. What kind of things do they have him do, exactly?", parse);
+			Text.NL();
+			Text.Add("<i>“Whatever they want for,”</i> he says, and stops there. You glare at Lei in annoyance until finally he decides to relent.", parse);
+			Text.NL();
+			Text.Add("<i>“They are not permitted a servant within the city, as there are none that can be trusted, so they have me perform whatever errands they need.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Shopping for snacks, fetching clothes from the tailor, sending for a carriage, making special purchases… Sometimes they have me fetch particular persons to visit them as well.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, that’s a bit more menial than you had guessed. Isn’t that a bit demeaning?", parse);
+			Text.NL();
+			Text.Add("<i>“Demeaning?”</i> Lei tilts his head, looking puzzled by the word. <i>“What it is is quick and well compensated.”</i>", parse);
+			Text.NL();
+			Text.Add("You’re prying a little, but you can’t help but feel curious - what kind of special purchases do they have, anyway?", parse);
+			Text.NL();
+			Text.Add("<i>“Mostly dildos, strapons, collars, whips,”</i> Lei responds casually, <i>“those sorts of things.”</i>", parse);
+			Text.NL();
+			Text.Add("Well. Now that you consider it, that’s not very surprising, knowing those two, but you can’t help but feel a little curious about Lei’s attitude…", parse);
+			Text.Flush();
+			
+			if(first) {
+				var leaveIt = function() {
+					Text.Clear();
+					Text.Add("You decide you’ve learned all you wanted to know about that line of questioning for now. If you become interested in Lei’s sexual proclivities, you can always come back to the topic later.", parse);
+					Text.Flush();
+					
+					Scenes.Lei.TalkPrompt();
+				}
+				
+				//[Ask][Leave]#1
+				var options = new Array();
+				options.push({ nameStr : "Ask",
+					tooltip : "Ask Lei what he thinks about the twins’ acquisitions.",
+					func : function() {
+						lei.flags["Talk"] |= Lei.Talk.Sex;
+						
+						Text.Clear();
+						Text.Add("You awkwardly inquire if dildos and whips and ‘those sorts of things’ are so commonplace to Lei that they aren’t even worth remarking on.", parse);
+						Text.NL();
+						Text.Add("He grins in response, showing teeth. <i>“I have certainly used them from time to time, but that is not quite it. Rather, nothing human repels me, [playername], unless it is a violation of agreement. And I assure you all of the twins’ playmates agree enthusiastically to the things they do to them. And all my pets had agreed likewise,”</i> he finishes in a low purr, and looks you up and down pointedly.", parse);
+						Text.NL();
+						Text.Add("You can’t help but feel curious. Have there been many such… pets?", parse);
+						Text.NL();
+						Text.Add("<i>“Not so many. I do not like to associate with those who are beneath me, so there are not many I would even consider.”</i> His voice is level, delivering what he sees as a statement of simple fact. <i>“And with those, there still needs to be clear mutual interest. Perhaps even passion,”</i> he says, a note of skepticism creeping into his voice at the last word. <i>“Though, when all of that is present, the encounters have been very enjoyable.”</i>", parse);
+						Text.Flush();
+						
+						if(lei.flags["SexOpen"] == 0) {
+							//[Offer][Leave]#2
+							var options = new Array();
+							options.push({ nameStr : "Offer",
+								tooltip : "And is he interested in you? You’re definitely interested in him.",
+								func : function() {
+									//TODO #set lei_sex_toggle = 1
+									lei.flags["SexOpen"] = 1;
+									
+									Text.Clear();
+									Text.Add("With a smile, you remark that you’re interested in him, so the two of you are at least halfway there.", parse);
+									Text.NL();
+									if(player.level < 7 || lei.Annoyance() > 0) {
+										Text.Add("<i>“I’m not sure,”</i> Lei replies. <i>“There <b>is</b> something curious about you, but you are quite unproven as of yet. Show me that you are strong and reliable and we shall see.”</i>", parse);
+										Text.NL();
+										Text.Add("Well, that was actually about what you expected. Perhaps you should see about working more closely with him and seeing where things go from there.", parse);
+									}
+									else if(lei.Relation() < 75) {
+										Text.Add("<i>“I am pleased to hear that, [playername],”</i> Lei says. <i>“I think I will have quite an enjoyable time exploring just how deep our mutual interest runs.”</i>", parse);
+										Text.NL();
+										Text.Add("That was certainly nice to hear. It seems you’ll have some pleasant exploration in your future when the opportunity arises.", parse);
+									}
+									else {
+										Text.Add("Lei smiles, a fire burning behind his eyes. <i>“Of course I’m interested. I have been interested for quite some time.”</i>", parse);
+										Text.NL();
+										Text.Add("You blush slightly. You suspected, certainly, but that was a bolder declaration than you had guessed. Perhaps you missed out on some fun before, but there is certainly time to make up for that.", parse);
+									}
+									Text.Flush();
+									
+									Scenes.Lei.TalkPrompt();
+								}, enabled : true
+							});
+							options.push({ nameStr : "Drop it",
+								tooltip : "That was very interesting, just not interesting to you right now.",
+								func : leaveIt, enabled : true
+							});
+							Gui.SetButtonsFromList(options, false, null);
+						}
+						else {
+							Scenes.Lei.TalkPrompt();
+						}
+					}, enabled : true
+				});
+				options.push({ nameStr : "Drop it",
+					tooltip : "Best to drop it for now…",
+					func : leaveIt, enabled : true
+				});
+				Gui.SetButtonsFromList(options, false, null);
+			}
+		}, enabled : true
+	});
+	
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“Yes, let us turn to other matters.”</i>", parse);
+		Text.Flush();
+		
+		Scenes.Lei.InnPrompt();
+	});
+}
+
+Scenes.Lei.SexPrompt = function() {
+	var parse = {
+		
+	};
+	
+	//[name]
+	var options = new Array();
+	if(lei.flags["SexOpen"] == 0) {
+		options.push({ nameStr : "Flirt",
+			tooltip : "Flirt with him, and mention you’d like to do more than flirt.",
+			func : function() {
+				Text.Clear();
+				Text.Add("You tell Lei that you’re curious whether his drive for increasing his skill extends beyond his swordplay. Perhaps, to things that few get to see?", parse);
+				Text.NL();
+				Text.Add("<i>“It does, though other abilities are less important to me, so perhaps I am not as advanced in them.”</i>", parse);
+				Text.NL();
+				Text.Add("He seems to not be quite catching what you’re driving at. You ask him if perhaps he’d show you some of them some time. In private. Well, probably in private, you add with a wink.", parse);
+				Text.NL();
+				Text.Add("Lei laughs in amusement. <i>“Eager, are you not? Perhaps I shall, if you really wish to be my pet. Though I think we will have to wait until a special occasion.”</i>", parse);
+				Text.NL();
+				Text.Add("What kind?", parse);
+				Text.NL();
+				Text.Add("<i>“Quite simply, demonstrate your strength, your competence, and I will be pleased to play with you.”</i>", parse);
+				Text.NL();
+				Text.Add("You nod in acquiescence. Perhaps doing well in sparring or succeeding at a job would do the trick.", parse);
+				Text.Flush();
+				
+				lei.flags["SexOpen"] = 1;
+				
+				Scenes.Lei.SexPrompt();
+			}, enabled : true
+		});
+	}
+	else {
+		options.push({ nameStr : "Discuss",
+			tooltip : "Actually, you’d like to return to a non-sexual relationship for now.",
+			func : function() {
+				Text.Clear();
+				Text.Add("Feeling a little awkward, you tell Lei that while you have enjoyed his attention so far, you’d like to keep your relationship a bit more hands off for now.", parse);
+				Text.NL();
+				Text.Add("He tilts his head in puzzlement, before nodding. <i>“Very well.”</i>", parse);
+				Text.NL();
+				Text.Add("His simple acceptance is both a relief and rather infuriating. Shouldn’t he at least ask why? Try to cling a little? That’s not an unreasonable thing to hope for.", parse);
+				Text.NL();
+				Text.Add("Having him beg you to reconsider was probably ever only going to happen in daydreams, though.", parse);
+				Text.Flush();
+				
+				lei.flags["SexOpen"] = 0;
+				
+				Scenes.Lei.SexPrompt();
+			}, enabled : true
+		});
+		/* TODO
+		options.push({ nameStr : "name",
+			tooltip : "",
+			func : function() {
+				Text.Clear();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Add("", parse);
+				Text.Flush();
+			}, enabled : true
+		});
+		*/
+	}
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“Something else on your mind?”</i>", parse);
+		Text.Flush();
+	});
+}
