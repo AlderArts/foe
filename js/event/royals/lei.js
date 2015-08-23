@@ -47,6 +47,7 @@ function Lei(storage) {
 	this.flags["SexOpen"] = 0; //Toggle
 	
 	this.annoyance = new Stat(0);
+	this.pastRotation = 0;
 	
 	this.timeout = new Time();
 	
@@ -1093,9 +1094,7 @@ Scenes.Lei.TalkPrompt = function() {
 		playername : player.name
 	};
 	
-	//[name]
 	var options = new Array();
-	//TODO LOCK
 	if(!(lei.flags["Talk"] & Lei.Talk.Skills)) {
 		options.push({ nameStr : "Skills",
 			tooltip : "Ask him how he came to be as powerful as he is.",
@@ -1139,6 +1138,19 @@ Scenes.Lei.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“In any case, though they seem flighty at first glance, I think you will find steel if you pry under the façade. And besides,”</i> he adds with a grin, <i>“I must concede that I am not opposed to some flighty fun now and again.”</i>", parse);
 			Text.Flush();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Past",
+		tooltip : "Ask him about his past.",
+		func : function() {
+			Text.Clear();
+			Text.Add("You tell Lei you’d like to get to know more about him. What he’s done over the years, where he came from, those sorts of things. ", parse);
+			if(lei.Relation() < 75)
+				Text.Add("He pauses for a moment, looking a bit guarded, before responding. ", parse);
+			Text.Add("<i>“Of course. What specifically would you like to know, [playername]?”</i>", parse);
+			Text.Flush();
+			
+			Scenes.Lei.TalkPastPrompt();
 		}, enabled : true
 	});
 	options.push({ nameStr : "Bodyguarding",
@@ -1247,10 +1259,81 @@ Scenes.Lei.TalkPrompt = function() {
 	
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
-		Text.Add("<i>“Yes, let us turn to other matters.”</i>", parse);
+		Text.Add("<i>“Very well, let us turn to other matters.”</i>", parse);
 		Text.Flush();
 		
 		Scenes.Lei.InnPrompt();
+	});
+}
+
+Scenes.Lei.TalkPastPrompt = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	//[name]
+	var options = new Array();
+	//TODO
+	options.push({ nameStr : "Eden",
+		tooltip : "Ask Lei what he’s been doing around the island, what he thinks of it.",
+		func : function() {
+			Text.Clear();
+			
+			var scenes = [];
+			
+			// Long
+			scenes.push(function() {
+				Text.Add("You ask Lei what sorts of things he’s been been doing in the kingdom and beyond.", parse);
+				Text.NL();
+				Text.Add("<i>“Fulfilling contracts.”</i> The silence after this declaration stretches on, until at last he’s made uncomfortable enough to explain further. <i>“That is a very vague question, [playername]. I do not wish to relate my life to you day by day.”</i> Or maybe he just wanted you to stop frowning at him.", parse);
+				Text.NL();
+				Text.Add("Well, what are some things he’s done that he’s the most proud of, or that others speak about the most?", parse);
+				Text.NL();
+				Text.Add("<i>“There is no great importance to any single event. The source of my pride, and of what respect I have is my consistency. Whenever I accept a task, I complete it in full, without fail, and without deviation.”</i> He smiles slightly. <i>“But I see you will not stop unless I tell you a story. Very well.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“When I had but recently started accepting jobs, I was on the road when a drab man approached me. He said that he had been robbed while only a few miles out of town. Apparently the thieves had struck a deal with the mayor to let them live in town unmolested and to have the guards notify them of new marks they might be interested in.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“He said he’d been carrying several extremely valuable books when he had been ambushed. And of course he’d pay me half their value - five thousand gold - if only I’d fetch them for him,”</i> Lei says, barely containing laughter. <i>“Imagine that, this unshaven man with calloused hands, in his clothes of rough linen, without a bruise or scratch on him, claiming he’d been robbed of ten thousand gold worth of books.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“So, naturally, I bound him and dragged him to the mayor. It turned out I wasn’t the first one he’d attempted to hire, and the others had somehow fallen for his claims. I believe he received a dozen lashes, and several years hard labor for the attempted theft.”</i>", parse);
+				Text.NL();
+				Text.Add("So… surely, that did not make him famous. What was the point of that story?", parse);
+				Text.NL();
+				Text.Add("<i>“It is very simple,”</i> Lei replies. <i>“The point is that I may be trustworthy, but that does not mean I trust without cause.”</i>", parse);
+			});
+			if(lei.Relation() >= 35) {
+				scenes.push(function() {
+					Text.Add("You ask Lei what he thinks of the island.", parse);
+					Text.NL();
+					Text.Add("<i>“What a strange question,”</i> he says, taking a good look at you. <i>“It is the place we are in. On it, there are certain locations, plants, animals, factions…”</i> He trails off, waiting for you to clarify your question.", parse);
+					Text.NL();
+					Text.Add("If he could change anything he wanted about the world, what would it be?", parse);
+					Text.NL();
+					Text.Add("Lei pauses for thought before replying. <i>“You know, I’ve never thought about that. I do not expect such power to fall into my hands soon, so I don’t see the use in planning for it.”</i> He drums his fingers along the tabletop. <i>“I suppose you wish to know about what I consider good and bad, and use this question to elucidate that.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Very well then. I would forbid the nobles from giving their children anything - even their own leisure time - so that they must succeed or fail on their own merits. I would make sure everyone receives a similar amount of training and education, so that they can compete fairly. Hm, and then... once they are trained, I would pit them against each other, in duels to the death to select the best survivalists of the lot.”</i>", parse);
+					Text.NL();
+					Text.Add("You stare at him in shock, as a grin slowly spreads across his face, and he gives a short sonorous laugh. So, he was joking after all. Probably.", parse);
+				});
+			}
+			
+			var sceneId = lei.pastRotation;
+			if(sceneId >= scenes.length) sceneId = 0;
+			
+			lei.pastRotation = sceneId + 1;
+			
+			// Play scene
+			scenes[sceneId]();
+			
+			Text.Flush();
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“Let’s dwell on the past no more. Did you want to talk about anything else?”</i>", parse);
+		Text.Flush();
+		
+		Scenes.Lei.TalkPrompt();
 	});
 }
 
@@ -1327,3 +1410,5 @@ Scenes.Lei.SexPrompt = function() {
 		Scenes.Lei.InnPrompt();
 	});
 }
+
+
