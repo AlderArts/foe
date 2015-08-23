@@ -246,6 +246,15 @@ Scenes.Lei.InnPrompt = function() {
 			}, enabled : true,
 			tooltip : "Ask for advice for dealing with Krawitz."
 		});
+		options.push({ nameStr : "Talk",
+			func : function() {
+				Text.Clear();
+				Text.Add("You try to strike up a conversation with Lei, but he only glances at you, looking bemused, in response. <i>“Let us put off idle words until <b>after</b> you are finished with your task.”</i>
+", parse);
+				Text.Flush();
+			}, enabled : true,
+			tooltip : "You want to ask him some things."
+		});
 	}
 	//POST KRAWITZ
 	else {
