@@ -76,3 +76,14 @@ world.loc.Highlands.Hills.events.push(new Link(
 		Scenes.Asche.Tasks.Ginseng.Highlands();
 	}
 ));
+
+world.loc.Highlands.Hills.events.push(new Link(
+	"Spring", function() {
+		//TODO Isla's string (put as loc rather than event)
+		return Scenes.Asche.Tasks.Spring.IsOn() && !Scenes.Asche.Tasks.Spring.IsSuccess();
+	}, true,
+	null,
+	function() {
+		Scenes.Asche.Tasks.Spring.Highlands();
+	}
+));

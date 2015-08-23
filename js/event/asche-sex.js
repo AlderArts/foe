@@ -457,8 +457,9 @@ Scenes.Asche.Sex.Ending = function() {
 	Gui.NextPrompt();
 }
 
-//TODO LINK
 Scenes.Asche.Sex.MagicalThreesome = function() {
+	var p1cock = player.BiggestCock();
+	
 	var parse = {
 		lowerarmordesc : player.LowerArmorDesc(),
 		upperarmordesc : player.ArmorDesc(),
@@ -497,10 +498,20 @@ Scenes.Asche.Sex.MagicalThreesome = function() {
 	parse["t"] = player.MuscleTone() > .5 ? "toned chest" : Text.Parse("[breasts]", parse);
 	Text.Add("As one, the two Asches give a strong tug, rendering you as naked as they are in one fell swoop. Tossing your things aside, they waste no time in getting to work; one of them presses her lips to yours, hands running up and down your [t] while the other worms her way down to your groin, hands grabbing your [hips] for support as ", parse);
 	parse["biggest"] = player.NumCocks() > 1 ? " biggest" : "";
-	if(player.FirstCock())
+	if(player.FirstCock()) {
 		Text.Add("her muzzle engulfs your[biggest] cock and her head starts pistoning up and down in barely restrained lust.", parse);
-	else //vag
+		
+		Sex.Blowjob(asche, player);
+		asche.FuckOral(asche.Mouth(), p1cock, 0);
+		player.Fuck(p1cock, 0);
+	}
+	else {//vag
 		Text.Add("she noses at your mound, her muzzle probing for your most intimate place, and licking away like a puppy at peanut butter when she does find it.", parse);
+		
+		Sex.Cunnilingus(asche, player);
+		asche.Fuck(null, 0);
+		player.Fuck(null, 0);
+	}
 	Text.NL();
 	Text.Add("Asche’s lips taste inexplicably of honey, a faint flavor lingering on the edge of your senses, and you wonder if this is yet another facet of the illusion you’re being presented with. Well, she’s right in that it’s a damned good illusion - whoever heard of a threesome with only two participants?", parse);
 	Text.NL();
@@ -552,7 +563,9 @@ Scenes.Asche.Sex.MagicalThreesome = function() {
 	Text.Add("A soft snore from beside you tells you she’s fallen asleep, poor thing. You lie back in the mattress, trying to avoid the worst of the cum stains, and soon join her.", parse);
 	Text.Flush();
 	
+	player.AddSexExp(25);
+	
 	world.TimeStep({hour: 3});
 	
-	//TODO FLAG? LINK OUT, SEX EXP
+	Gui.NextPrompt();
 }

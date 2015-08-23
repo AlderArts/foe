@@ -56,7 +56,10 @@ Asche.Tasks = {
 	Nightshade_Started  : 16,
 	Nightshade_Aquilius : 32,
 	Nightshade_Succeeded : 64,
-	Nightshade_Finished : 128
+	Nightshade_Finished : 128,
+	Spring_Started : 256,
+	Spring_Visited : 512,
+	Spring_Finished : 1024
 };
 
 Asche.prototype.Update = function(step) {
@@ -459,6 +462,14 @@ Scenes.Asche.TalkPrompt = function() {
 					Scenes.Asche.Tasks.Nightshade.Complete();
 				else
 					Scenes.Asche.Tasks.Nightshade.OnTask();
+			}
+			else if(Scenes.Asche.Tasks.Spring.IsEligable())
+				Scenes.Asche.Tasks.Spring.Initiation();
+			else if(Scenes.Asche.Tasks.Spring.IsOn()) {
+				if(Scenes.Asche.Tasks.Spring.IsSuccess())
+					Scenes.Asche.Tasks.Spring.Complete();
+				else
+					Scenes.Asche.Tasks.Spring.OnTask();
 			}
 			else
 				Scenes.Asche.Tasks.Default();

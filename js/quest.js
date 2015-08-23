@@ -836,6 +836,49 @@ Quests.quests.push(new Quest({
 
 Quests.quests.push(new Quest({
 	name: function() {
+		return "Spring Time For Asche";
+	},
+	desc: function() {
+		return "Asche would like you to investigate a highland spring and collect some water for her.";
+	},
+	active: function() {
+		var status = Quests.Type.NotStarted;
+		if(Scenes.Asche.Tasks.Spring.IsCompleted())
+			status |= Quests.Type.Completed;
+		else if(Scenes.Asche.Tasks.Spring.IsOn())
+			status |= Quests.Type.Visible;
+		return status;
+	},
+	list: [
+		new QuestItem({
+			desc: function() {
+				return "Find the spring in the highlands and collect a sample of its waters.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(Scenes.Asche.Tasks.Spring.IsSuccess())
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Return to Asche in Rigard with the vial.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(Scenes.Asche.Tasks.Spring.IsCompleted())
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		})
+	]
+}));
+
+Quests.quests.push(new Quest({
+	name: function() {
 		return "Tools of the Trade";
 	},
 	desc: function() {
