@@ -149,7 +149,7 @@ world.loc.Rigard.ShopStreet.MagicShop.description = function() {
 	//TODO Technically not correct. Belongs in a RegularEntry function
 	Text.Add("Stepping into the interior of the brightly-lit shop to the jingle of chimes, you are immediately surrounded by the scent of sandalwood and jasmine. Its source is easily identified: a large, porcelain, pig-shaped incense burner hanging from the ceiling by a trio of stout chains. The smell is jarring at first, but rapidly fades into the background as your nose gets used to it, and you have to admit, it definitely sets the mood of the little store.", parse);
 	Text.NL();
-	Text.Add("A hefty portion of the merchandise on display consists of antiques, knick-knacks, and gewgaws of all shapes, sizes and colors, most of them small pieces of jewellery supposedly charmed for one purpose or another - one to ward off illness, another to bring wealth, and yet another to make one appear more attractive. You doubt that most of them actually work, or at least function in the way that they’re intended to; nevertheless, each item has a small placard in front of it, detailing exactly what it does.", parse);
+	Text.Add("A hefty portion of the merchandise on display consists of antiques, knick-knacks, and gewgaws of all shapes, sizes and colors, most of them small pieces of jewelery supposedly charmed for one purpose or another - one to ward off illness, another to bring wealth, and yet another to make one appear more attractive. You doubt that most of them actually work, or at least function in the way that they’re intended to; nevertheless, each item has a small placard in front of it, detailing exactly what it does.", parse);
 	Text.NL();
 	Text.Add("On display at the front of the shop today is ", parse);
 	
@@ -173,7 +173,7 @@ world.loc.Rigard.ShopStreet.MagicShop.description = function() {
 		Text.Add("a nondescript glass flask touted as absolutely unbreakable under circumstances of normal use. There’s even a placard listing exactly how many times customers have tried to smash this particular piece: nine, apparently.", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
-		Text.Add("a plain talisman of pure silver, without so much as a speck of tarnish. It’s pleasing enough to the eye as an item of jewellery, but there’s no placard on this one. Instead, a small label has been affixed to the talisman’s chain, with <b>“Danger! Unknown properties! Not for sale!”</b> written on it. Probably quite effective for drawing curious customers to the rest of the shop.", parse);
+		Text.Add("a plain talisman of pure silver, without so much as a speck of tarnish. It’s pleasing enough to the eye as an item of jewelery, but there’s no placard on this one. Instead, a small label has been affixed to the talisman’s chain, with <b>“Danger! Unknown properties! Not for sale!”</b> written on it. Probably quite effective for drawing curious customers to the rest of the shop.", parse);
 	}, 1.0, function() { return true; });
 	scenes.AddEnc(function() {
 		Text.Add("an ensemble of attire befitting a wizard - robe, hat, staff and all. Heck, there are even some curly-toed shoes! Reading the placard, this outfit supposedly belonged to the Wizard of Yendor, although to be frank, he can’t be that great of a wizard if you’ve never heard of him, right?", parse);

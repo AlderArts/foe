@@ -96,7 +96,7 @@ Scenes.Asche.FirstEntry = function() {
 	asche.flags["Met"] = Asche.Met.Met;
 	
 	Text.Clear();
-	Text.Add("A gentle jingle of chimes greets you as you push open the hardwood door, followed by a strong, heady aroma of incense that’s practically overpowering. Still, you forge ahead into the small store, and are greeted by the proprietor behind the counter, a jackal-morph of slender build. Her large ears perk up as she sees you, and she adjusts her clothing - an exotic-looking garment consisting of a white drape, mostly wrapped about her waist and with one end hung loosely over a shoulder, baring her furry midriff. Her dark eyes look as if she’s gone way overboard with the eyeliner and shadow, and she’s adorned from head to toe in jewellery - some of it tasteful, but most of it absolutely tacky, with bangles, earrings, and all.", parse);
+	Text.Add("A gentle jingle of chimes greets you as you push open the hardwood door, followed by a strong, heady aroma of incense that’s practically overpowering. Still, you forge ahead into the small store, and are greeted by the proprietor behind the counter, a jackal-morph of slender build. Her large ears perk up as she sees you, and she adjusts her clothing - an exotic-looking garment consisting of a white drape, mostly wrapped about her waist and with one end hung loosely over a shoulder, baring her furry midriff. Her dark eyes look as if she’s gone way overboard with the eyeliner and shadow, and she’s adorned from head to toe in jewelery - some of it tasteful, but most of it absolutely tacky, with bangles, earrings, and all.", parse);
 	Text.NL();
 	Text.Add("<i>“Asche welcomes you to her store, new customer,”</i> she says, flashing you a toothy canine grin. <i>“You have a strange aura about you that Asche cannot quite place. Perhaps you have come seeking a solution to one of your problems? Asche’s shop is here to solve problems for customers, yes.”</i>", parse);
 	Text.NL();
@@ -245,7 +245,7 @@ Scenes.Asche.Appearance = function() {
 	Text.NL();
 	Text.Add("Illuminated by the crystal lamp on the counter, the jackaless’ fur looks absolutely soft and strokable, lustrous, and appropriately mystical. To say it’s practically spun gold wouldn’t be too far off the mark - Asche clearly puts a lot of work into ensuring she’s presentable for her clientele. A faint scent of jasmine hangs about her person, alluring and exotic.", parse);
 	Text.NL();
-	Text.Add("True to her customers’ expectations, Asche wears far too much makeup - particularly in the eyeshadow and liner department - and has adorned herself with gold and silver jewellery to the point that she clinks and clanks when she moves. Bangles line her wrists and ankles, numerous small rings have been set into her large ears, and there’s even an exquisite chain of gold filigree resting on her hips, tiny shards of topaz and amber worked into some of the links.", parse);
+	Text.Add("True to her customers’ expectations, Asche wears far too much makeup - particularly in the eyeshadow and liner department - and has adorned herself with gold and silver jewelery to the point that she clinks and clanks when she moves. Bangles line her wrists and ankles, numerous small rings have been set into her large ears, and there’s even an exquisite chain of gold filigree resting on her hips, tiny shards of topaz and amber worked into some of the links.", parse);
 	Text.NL();
 	Text.Add("<i>“Is [handsomepretty] customer done admiring Asche?”</i> she asks slyly, her muzzle splitting in a canine grin even as her long, fluffy tail begins wagging eagerly. <i>“Asche loves to feel treasured, yes yes, but even though she is magical, she is not for sale.”</i>", parse);
 	Text.Flush();
@@ -790,7 +790,7 @@ What? Why?
 			Text.Clear();
 			Text.Add("Eyeing Asche, you tell the jackaless you’d probably be interested in having your fortune told, but perhaps if you knew a little more about what you were getting yourself into, you could be more enthusiastic about the prospect…", parse);
 			Text.NL();
-			Text.Add("Asche smiles and holds out her hands palms skyward, the movement setting her jewellery clinking. <i>“Certainly. Asche has little to hide.</i>", parse);
+			Text.Add("Asche smiles and holds out her hands palms skyward, the movement setting her jewelery clinking. <i>“Certainly. Asche has little to hide.</i>", parse);
 			Text.NL();
 			Text.Add("<i>“To be starting at beginning, there is belief amongst some clans in highlands that is possible to foretell future of person by seeing length and shape of fingers and palm lines. Each combination is having meaning and way it is impacting bearer’s life and can be used to paint hazy picture of what is to come.”</i>", parse);
 			Text.NL();

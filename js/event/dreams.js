@@ -1012,7 +1012,7 @@ Scenes.Dreams.AscheDance = function(ravenTrigger) {
 	Text.NL();
 	Text.Add("<i>“Very well, then please to be leading, since you are being waiting.”</i>", parse);
 	Text.NL();
-	Text.Add("Asche is as naked as you are, her only clothing being her fur, her jewellery, and the intricate and exquisite patterns of gold painted on her body. You, too, have prepared yourself in much a similar fashion, and take the jackaless’ hand before leading her in the dance.", parse);
+	Text.Add("Asche is as naked as you are, her only clothing being her fur, her jewelery, and the intricate and exquisite patterns of gold painted on her body. You, too, have prepared yourself in much a similar fashion, and take the jackaless’ hand before leading her in the dance.", parse);
 	Text.NL();
 	Text.Add("Where did you learn the steps? You don’t remember. Yet your body moves, the golden paint on your [skin] rippling as your muscles move with fluid grace. Your feet feel astoundingly light - and so does Asche, as you gather her up and twirl her about.", parse);
 	Text.NL();
@@ -1038,7 +1038,7 @@ Scenes.Dreams.AscheHotSpring = function(ravenTrigger) {
 	
 	Text.Add("Above, a chill wind that snaps at your [skin]. Below, a gentle warmth that feels delightful and soothes aching muscles. It’s little wonder why, given the circumstances, you’re quite unwilling to get out of the hot spring - the rocky highland landscape might be very pretty with its mossy rocks and light dusting of frost, but it’s just not nice and toasty like the water is here. Besides, there’s the jackaless right in the spring with you…", parse);
 	Text.NL();
-	Text.Add("Asche’s sari lies neatly folded on a flat-topped rock, her jewellery similarly in a small heap besides her clothes. Bubbling and steaming ever so slightly, the water swirls about both of you, and instead of the sulphurous smell that you expected, the aroma that greets your nose is actually quite fragrant. Jasmine, to be exact.", parse);
+	Text.Add("Asche’s sari lies neatly folded on a flat-topped rock, her jewelery similarly in a small heap besides her clothes. Bubbling and steaming ever so slightly, the water swirls about both of you, and instead of the sulphurous smell that you expected, the aroma that greets your nose is actually quite fragrant. Jasmine, to be exact.", parse);
 	Text.NL();
 	Text.Add("<i>“Customer is liking this?”</i> The jackaless’ voice is salacious and suggestive, dripping with honey and unspoken promises. Like you, she’s steeped to her neck in cloudy, mineral-rich water, eyes half-closed with utter bliss written all over her face. <i>“Is taking this jackaless some practice to conjure up proper memory, but she is finding it very useful after long day’s work, almost like real thing. Is also very nice place to entertain others.”</i>", parse);
 	Text.NL();

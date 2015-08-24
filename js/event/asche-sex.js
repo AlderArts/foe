@@ -480,7 +480,7 @@ Scenes.Asche.Sex.MagicalThreesome = function() {
 	Text.NL();
 	Text.Add("<i>“Sorry to be keeping customer waiting, but this jackaless is being amazed too.”</i>", parse);
 	Text.NL();
-	Text.Add("You turn your head, and draw a sharp breath as not one, but <i>two</i> glorious versions of Asche step into the back room, each one stark naked save for their copious jewellery, glinting in the dim light. Identical too - if you don’t count the fact that only one of the Asches has the jewelled pendant about her neck, the stone nestled snugly in her cleavage.", parse);
+	Text.Add("You turn your head, and draw a sharp breath as not one, but <i>two</i> glorious versions of Asche step into the back room, each one stark naked save for their copious jewelery, glinting in the dim light. Identical too - if you don’t count the fact that only one of the Asches has the jeweled pendant about her neck, the stone nestled snugly in her cleavage.", parse);
 	Text.NL();
 	Text.Add("<i>“Is it being quite odd…”</i>", parse);
 	Text.NL();
@@ -493,7 +493,8 @@ Scenes.Asche.Sex.MagicalThreesome = function() {
 	Text.Add("<i>“…But illusion nonetheless.”</i>", parse);
 	Text.NL();
 	//TODO ARMOR
-	Text.Add("Moving slowly like predators stalking a particularly juicy morsel, the two Asches work in tandem to flank you, one slinking up to your feet to go for your [lowerarmordesc] while the other busies herself with undoing your [upperarmordesc]. You have to admit, one Asche was already good enough, but the possibilities that <i>two</i> of them bring to the table do indeed have some merit to them… well, let’s see if you do indeed get double the enjoyment out of this.", parse);
+	parse["f"] = player.HasLegs() ? " to your feet" : "";
+	Text.Add("Moving slowly like predators stalking a particularly juicy morsel, the two Asches work in tandem to flank you, one slinking up[f] to go for your [lowerarmordesc] while the other busies herself with undoing your [upperarmordesc]. You have to admit, one Asche was already good enough, but the possibilities that <i>two</i> of them bring to the table do indeed have some merit to them… well, let’s see if you do indeed get double the enjoyment out of this.", parse);
 	Text.NL();
 	parse["t"] = player.MuscleTone() > .5 ? "toned chest" : Text.Parse("[breasts]", parse);
 	Text.Add("As one, the two Asches give a strong tug, rendering you as naked as they are in one fell swoop. Tossing your things aside, they waste no time in getting to work; one of them presses her lips to yours, hands running up and down your [t] while the other worms her way down to your groin, hands grabbing your [hips] for support as ", parse);
@@ -525,38 +526,38 @@ Scenes.Asche.Sex.MagicalThreesome = function() {
 	}
 	Text.Add("<i>“Now, maybe to be putting face to good use? As saying goes, is better to be giving than receiving, but now is being no reason why cannot be doing both at same time.”</i>", parse);
 	Text.NL();
-	parse["gen"] = player.FirstCock() ? "more and more of her magical mouth is filled by your ever-stiffening shaft" : "a fresh river of your feminine honey gushes from your pussy and wets her muzzle";
-	Text.Add("Without waiting for your response, top-Asche scoots forward with a sultry glint in her eyes blatantly thrusting her crotch in your face. The overwhelming musk of her slick and puffy pussy lips, framed against her golden-brown fur, soon has you panting and squirming under her; down below, bottom-Asche lets out a urgent moan of ecstasy as [gen].", parse);
+	parse["gen"] = player.FirstCock() ? "more and more of her magical mouth is filled by your ever-stiffening shaft" : "a fresh river of your feminine honey gushes from your slit and wets her muzzle";
+	Text.Add("Without waiting for your response, top-Asche scoots forward with a sultry glint in her eyes blatantly thrusting her crotch toward you. The overwhelming musk of her slick and puffy pussy lips, framed against her golden-brown fur, soon has you panting and squirming under her; down below, bottom-Asche lets out an urgent moan of ecstasy as [gen].", parse);
 	Text.NL();
-	Text.Add("Well, it’s only polite to repay the favor - to be frank, she’s doing you one, allowing you to service that beautiful cunt of hers and all. Without hesitation, you push your face forward, tongue darting out to part the heat-swollen folds of Asche’s womanly flower. Both jackalesses shudder at the motion, and top-Asche begins grinding her pussy lips against your face vigorously, her hips instinctively mashing against you in a bid to take as much of your tongue into her as possible.", parse);
+	Text.Add("Well, it’s only polite to repay the favor - to be frank, she’s doing you one, allowing you to service that beautiful cunt of hers and all. Without hesitation, you push your face forward, tongue darting out to part the heat-swollen folds of Asche’s womanly flower. Both jackalesses shudder at the motion, and top-Asche begins grinding her mound against your face vigorously, her hips instinctively mashing against you in a bid to take as much of your [tongue] into her as possible.", parse);
 	if(player.LongTongue())
-		Text.Add(" Happily, your tongue is currently equipped to do just that - it penetrates her well and deeply, and is quickly rewarded with the squeeze and pull of her inner walls, soft, moist flesh against more of the same.", parse);
+		Text.Add(" Happily, it's well equipped to do just that - it penetrates her well and deeply, and is quickly rewarded with the squeeze and pull of her inner walls, soft, moist flesh against more of the same.", parse);
 	Text.NL();
 	parse["gen"] = player.FirstCock() ? "sucks you off" : "eats you out";
-	Text.Add("With double the pleasure coursing through your bodies, it doesn’t take long for your movements to grow more and more intense. For some reason, bottom-Asche’s golden-brown hair on your [skin] feels positively exquisite - the way it moves on your thighs as she [gen], her head rapidly bobbing back and forth, is beyond words.", parse);
+	Text.Add("With double the pleasure coursing through your bodies, it doesn’t take long for your movements to grow more and more intense. For some reason, bottom-Asche’s golden-brown hair on your [skin] feels positively exquisite - the way it moves on your [thighs] as she [gen], her head rapidly bobbing back and forth, is beyond words.", parse);
 	Text.NL();
-	Text.Add("The excited, pulsing warmth deep within you is writhing, seeking release, and comes dangerously close when you feel bottom-Asche’s fingers work their way between you and the mattress, probing your asscheeks for your back door. They find it soon enough, and you shudder as she slides a furry finger in, your sphincter clenching tight about the welcome intruder.", parse);
+	Text.Add("The excited, pulsing warmth deep within you is writhing, seeking release, and comes dangerously close when you feel bottom-Asche’s fingers work their way between you and the mattress, probing your ass cheeks for your back door. They find it soon enough, and you shudder as she slides a furry digit in, your sphincter clenching tight about the welcome intruder.", parse);
 	Text.NL();
 	
 	var cum = player.OrgasmCum();
 	
-	Text.Add("Time to up the ante yourself. Withdrawing momentarily from top-Asche, you run the tip of your tongue across her outer lips, seeking that tiny nub of flesh you know is there - and when you do find it, giving it a flick with your tongue-tip. That’s enough to push Asche over the edge - with a loud howl, top-Asche throws back her head and grabs at your neck as she convulses atop you, pussy juice squirting from her love-hole as orgasm wracks her body. Bottom-Asche ", parse);
+	Text.Add("Time to up the ante yourself. Withdrawing momentarily from top-Asche, you run the tip of your [tongue] across her outer lips, seeking that tiny nub of flesh you know is there - and when you do find it, giving it a flick with your [tongueTip]. That’s enough to push Asche over the edge - with a loud howl, top-Asche throws back her head and grabs at your neck as she convulses atop you, pussy juice squirting from her love-hole as orgasm wracks her body. Bottom-Asche ", parse);
 	if(player.FirstCock()) {
 		parse["mc"] = player.NumCocks() > 1 ? Text.Parse(", although that which erupts from your other shaft[s2] gets all over her, in her hair and onto the mattress, painting the whole lot in a generous layer of jizz", parse) : "";
-		Text.Add("finishes sucking you off, and as your hips buck and thrust in her throat, easily swallowing all the cum you’ve on offer[mc].", parse);
+		Text.Add("finishes sucking you off, and as your [hips] buck and thrust in her throat, easily swallowing all the cum you’ve on offer[mc].", parse);
 	}
 	else
-		Text.Add("nuzzles aggressively at your cunt once more, and is barely able to keep your legs pinned as you have your own orgasm, femcum practically blasting onto her muzzle in the throes of your pleasure.", parse);
+		Text.Add("nuzzles aggressively at your cunt once more, and is barely able to keep your [legs] pinned as you have your own orgasm, femcum practically blasting onto her muzzle in the throes of your pleasure.", parse);
 	Text.NL();
 	Text.Add("At long last, it’s over. Top-Asche sags, and rolls off you with a groan to lie by your side on the cum-soaked mattress. Bottom-Asche - being the one without the pendant - slowly fades away into nothingness, your cum hitting the mattress with a wet sound. Yep, so that one was the illusion. Pretty powerful magic, eh?", parse);
 	Text.NL();
-	Text.Add("<i>“Yes…”</i> Asche whines. The jackaless is quite clearly thoroughly spent, her generous breasts heaving atop her chest as she lies beside you on the mattress, tongue hanging loosely out of her mouth. <i>“Am thinking most definitely will be going for high price. Also may be offering practical demonstration.”</i>", parse);
+	Text.Add("<i>“Yes…”</i> Asche whines. The jackaless is thoroughly spent, her generous breasts heaving atop her chest as she lies beside you on the mattress, tongue hanging loosely out of her mouth. <i>“Am thinking most definitely will be going for high price. Also may be offering practical demonstration.”</i>", parse);
 	Text.NL();
 	Text.Add("Well, you’re glad to be able to help.", parse);
 	Text.NL();
-	Text.Add("<i>“Not needing to be going to quickly… plenty of time. Maybe [handsomepretty] customer is to be staying a while?”</i>", parse);
+	Text.Add("<i>“Not needing to be going too quickly… plenty of time. Maybe [handsomepretty] customer is to be staying a while?”</i>", parse);
 	Text.NL();
-	Text.Add("Well, all right. But just for a nap. You do need your batteries recharged after that.", parse);
+	Text.Add("Well, all right, but just for a nap. You do need your batteries recharged after that.", parse);
 	Text.NL();
 	Text.Add("<i>“Is long enough.”</i> Slowly, Asche unhooks the pendant from about her neck and tosses it to the ground beside her. <i>“Just am… needing someone to…”</i>", parse);
 	Text.NL();

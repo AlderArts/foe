@@ -1878,7 +1878,7 @@ world.loc.BullTower.Building.Warehouse.events.push(new Link(
 		};
 		
 		Text.Clear();
-		Text.Add("You look at all the crates with their contents clearly marked - finely aged wines, horrendously ostentatious fabrics, bits and bobs of extravagant jewellery are merely commonplace here. The crates are far too large and heavy for you to sneak out with, but you decide to pilfer the most valuable thing you see - a small bag of assorted gemstones the size of your fist, presumably destined to be set into some trinket or gewgaw. Surely the outlaws can use some extra funding, and they should have access to a fence…", parse);
+		Text.Add("You look at all the crates with their contents clearly marked - finely aged wines, horrendously ostentatious fabrics, bits and bobs of extravagant jewelery are merely commonplace here. The crates are far too large and heavy for you to sneak out with, but you decide to pilfer the most valuable thing you see - a small bag of assorted gemstones the size of your fist, presumably destined to be set into some trinket or gewgaw. Surely the outlaws can use some extra funding, and they should have access to a fence…", parse);
 		Text.NL();
 		Text.Add("Cveta nods, clearly approving of your decision, but doesn’t pick out anything herself. Stowing away your acquisition with your other possessions, you return your attention to the task at hand.", parse);
 		Text.Flush();
@@ -2562,8 +2562,8 @@ Scenes.BullTower.AftermathZenith = function() {
 		Text.Add(" There’s little doubt about it; the sword is enchanted. It’s not a very potent spell, but it’s strong enough for you to sense the magical aura, concentrated about the gems and extending through the blade.", parse);
 	Text.NL();
 	
-	//#Gain jewelled mageblade.
-	party.Inv().AddItem(Items.Weapons.JewelledMageblade);
+	//#Gain jeweled mageblade.
+	party.Inv().AddItem(Items.Weapons.JeweledMageblade);
 	
 	Text.Add("<i>“I’d be careful with that, if I were you. All you need to do is to grab its hilt, think hard, and the blade bursts into flame. Then, think hard about it going out, and it does just that. The fence was going to charge us a pretty penny for it - with it being magic and all - but we haggled the price down to something more reasonable. I think you’ve earned that much.”</i>", parse);
 	Text.NL();
