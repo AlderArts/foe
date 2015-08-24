@@ -817,3 +817,66 @@ What? Why?
 	
 	Gui.SetButtonsFromList(options, false, null);
 }
+
+
+
+//TODO LINK
+Scenes.Asche.MagicBoxLoss = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("Something stiff hooks itself around your wrist, and as you pull it out, you find that it’s a perfectly ordinary-looking umbrella. Certainly nothing magical about this - or so you think, up to the point where you open it and a light drizzle comes pouring out of its underside.", parse);
+		Text.NL();
+		Text.Add("You can see how a source of fresh water might be useful to, say, someone stranded in a desert, but the umbrella is utterly useless to you. Sighing, you toss it back into the box and consider your payment lost.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("Your fingers meet a soft and fuzzy object, and feeling curious, you draw it out of the box. It’s a ball of yellow-orange fur tipped with a white tuft on one end, and you’re wondering just how something like that ended up in the box when the ball quivers in your hands.", parse);
+		Text.NL();
+		Text.Add("Was it just your imagination? Your question is answered when the fuzzy ball suddenly unfurls into a small fox. Utterly terrified, the little animal leaps from your hands and scampers for the door, disappearing into the streets outside.", parse);
+		Text.NL();
+		Text.Add("You give Asche a curious look; the jackal-morph replies by way of smiling at you and rolling her eyes. Guess you’re not getting your money back on that one.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("Your fingers catch on something heavy, and you pull out the offending object, revealing an iron medallion. It’s clearly very, very old and the snarling wolf motif is masterfully done, but other than that it doesn’t look very magical or special in any way whatsoever.", parse);
+		Text.NL();
+		Text.Add("Sighing, you toss the medallion back into the box. What a waste - wait, did the wolf’s eyes just glow when it was in the air? Oh well, it’s too late to change your mind - the medallion is gone. Shrugging your shoulders, you write off this attempt as a loss.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("Fumbling around in the chaos that is the box, you pull out something significantly heavy, a statue of some sort - why yes, it <i>is</i> a statuette, and a rather lewd one at that. Fashioned from ebony, it depicts an extremely busty naked woman, and there’s an inscription on the stand: “Mrs. Coffee”.", parse);
+		Text.NL();
+		Text.Add("If the statuette is meant to do anything, though, it doesn’t do it for you. No matter how you poke, prod and shake Mrs. Coffee, the ebony figurine remains as it is. Guess it must be broken or something - shaking your head, you toss it back into the box with a sigh.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("Your hand closes around something cool and hard; drawing it out of the box, you discover that it’s a message in a bottle, still smelling of sea salt. The cork isn’t too hard to remove, and the message within is… perplexing. Sure, you can read the words just fine, but they make no sense: just what <i>is</i> a “dunka dunka”? From the fact that the note seems to be an invitation to one, it’s got to be some kind of event, but why would there be a secret word? And why the insistence that wizards can’t swim? Come to think of it, is that why this bottle ended up in the sea at one point?", parse);
+		Text.NL();
+		Text.Add("Shrugging, you replace the message in the bottle and toss it back into the box. Hopefully the message will get to its intended recipient…", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("Something small and hard brushes against your fingertips: grabbing hold of it, you draw it out of the box. It’s a plain golden ring, but unfortunately far too small to fit on any of your fingers. Though as it sits in your palm, you begin to doubt this last observation, as it appears larger than when you first looked.", parse);
+		Text.NL();
+		Text.Add("There’s something disturbing about it, something that turns the stomach by just looking at the simple gold. While you can’t quite explain the uneasy feeling the ring instills in you, you decide to trust your instincts, and hurriedly throw it back into the box where it vanishes into the dark depths.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("Meeting your grasp is what feels like a stiff piece of card, and when you draw the object from the box -  why indeed, it’s a small card, perhaps just the right size to fit comfortably inside a breast pocket. Blank, save for the words <i>“get ye gone from gaol”</i> written on it in neat cursive, it definitely doesn’t look very magical.", parse);
+		Text.NL();
+		Text.Add("Well, what bad luck. You toss the card back into the box, and it flutters a bit before dipping back into the darkness and vanishing.", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("Your hand closes about something hard and heavy, and drawing it out of the box, you find that you’ve dug up a rather heavy tome of alchemical trivia. Flipping through the pages, you quickly learn that:", parse);
+		Text.Add("<i><ul>", parse);
+		Text.Add("<li>For the purpose of alchemy rooted in magic rather than simple herbal remedies, it is ideal that ginseng be reboiled in distilled water exactly forty times, thus reducing the root into a pungent-smelling syrup.</li>", parse);
+		Text.Add("<li>Only less than one in ten thousand pearls are black, making them exceedingly expensive for use in alchemy.</li>", parse);
+		Text.Add("<li>A good way to harvest mandrake root is to exhume the root while leaving the earth it is planted in intact; invert and bury the plant’s body in the hole you just created, then chop off the root. This procedure will allow the plant to regrow, while protecting you from its deadly shrieks.</li>", parse);
+		Text.Add("<li>The creation of bloodfire, an alchemical component intended to produce explosive concoctions instead of edible potions, involves combining an equal amount of the alchemist’s blood with the base reagents. Doing so renders the reagents active for said alchemist only - if another attempts to use an explosive crafted with the component, it will remain inert.</li>", parse);
+		Text.Add("</ul></i>", parse);
+		Text.Add("Interesting trivia, but nonetheless rather useless. You toss the book back into the box, where it disappears into the dark depths.", parse);
+	}, 1.0, function() { return true; });
+	
+	scenes.Get();
+	Text.Flush();
+}
