@@ -46,7 +46,9 @@ Asche.Talk = {
 };
 Asche.Magic = {
 	Components : 1,
-	Rituals    : 2
+	Rituals    : 2,
+	Authority  : 3,
+	Spirits    : 4
 };
 Asche.Tasks = {
 	Ginseng_Started : 1,
@@ -289,84 +291,7 @@ Scenes.Asche.TalkPrompt = function() {
 	});
 	options.push({ nameStr : "Magic",
 		tooltip : "Discuss Asche’s particular brand of magic with her.",
-		func : function() {
-			Text.Clear();
-			// Lesson one - Components
-			if(asche.flags["Magic"] < Asche.Magic.Components) {
-				Text.Add("You’d like to discuss the nature of magic with her. It seems quite different from what is usually practiced on Eden.", parse);
-				Text.NL();
-				Text.Add("<i>“Oh-ho,”</i> the jackaless replies, eyeing you with a raised eyebrow, her tail swishing from side to side. <i>“Customer is wanting to know the secrets of highlander witch doctors, herb women, and shamans? Is taking many years to truly understand, as well as good memory; Asche spent her whole time as girl learning basics of such magic.”</i>", parse);
-				Text.NL();
-				Text.Add("Well, maybe she could give you a condensed version of the idea?", parse);
-				Text.NL();
-				Text.Add("<i>“Yes, yes. Well, to be simply saying, basics of magic is not too different from that of lowlanders with their staves and fancy clothes and sparkling crystals. Is all about energy. But just as one can be choosing to be carrying water in barrel or bucket, so can these energies be moved in different ways.</i>", parse);
-				Text.NL();
-				Text.Add("<i>“Differences between lowlander and highlander magic are being many, but most important one is this: highlander magic is often - but not always - being employing the use of magical components, as if brewing potion. These components are being items which are representing facets of natural world which is having magic in them; by using these components in casting of spell, shaman is being able to draw much energy to fuel spell.”</i>", parse);
-				Text.NL();
-				Text.Add("So, it’s like brewing a potion… you kind of get it, yet at the same time, there’s something off about Asche’s explanation you can’t quite put a finger on…", parse);
-				Text.NL();
-				Text.Add("<i>“Good point about using magic component in casting of spell is that is allowing skilled herb woman or witch doctor to harness far more magic than self can draw. Bad point is that if caster is not having component, spell is weaker or even worse, not working. In such case, highlander magician is having to fall back on spells which are being not so powerful.”</i>", parse);
-				Text.NL();
-				Text.Add("Yeah, it sounds like an obvious tradeoff to you. So, what are some of these components? You’d imagine they’d be pretty rare and mystical…", parse);
-				Text.NL();
-				Text.Add("Asche shrugs. <i>“It is really being depending on what customer has in mind. For example, best item for drawing forth power of sea is being black pearl, which is being incredibly rare. Pearl is also working, but not as powerful, to be needing more of them as compared to black ones. To be representing life and growth is very simple, just needing pinch of common basil herb. Invoking fire and light is requiring volcanic ash from deep underground, but coal can also be sufficing if simple magic is what is needed.</i>", parse);
-				Text.NL();
-				Text.Add("<i>“Rituals is also being important in working of highlander magic, but maybe is discussion best saved for another time, is it not? Asche’s tongue is getting dry from so much talking, maybe is wanting something to drink.”</i> The jackaless chuckles.", parse);
-				
-				asche.flags["Magic"] = Asche.Magic.Components;
-				
-				Text.Flush();
-				Scenes.Asche.TalkPrompt();
-			}
-			// Lesson two - Ritual
-			else if(asche.flags["Magic"] < Asche.Magic.Rituals && asche.flags["Tasks"] >= Asche.Tasks.Ginseng_Finished) {
-				Text.Add("<i>“Now that customer has had chance to see shamanistic power for [himher]self, Asche is thinking that maybe [heshe] is ready for deeper explanation. But… really, this jackaless is curious - she cannot be teaching customer to be doing highlander magic, so why is customer being asking so many questions?”</i>", parse);
-				Text.NL();
-				Text.Add("Curiosity, nothing more.", parse);
-				Text.NL();
-				Text.Add("Asche considers that a moment, a soft rustle accompanying movements under her snow-white sari. <i>“Well, if it is curiosity that customer is giving as reason, then Asche shall be giving answer that is fitting. Let us be moving onto next portion of highlander magic: ritual.</i>", parse);
-				Text.NL();
-				Text.Add("<i>“You may be already knowing that lowlander magicians may be speaking words to help concentrate their focus; others are being making gestures to same effect. Both are not being strictly necessary, but are helping to sharpen mind and direct intent. Lowlanders is often seeing it as crutch, sign of weakness to be discarded.”</i>", parse);
-				Text.NL();
-				Text.Add("The jackaless looks at you to make sure you’re still listening, then continues. <i>“Ritual being used in highlander magic is same basic idea, to use actions and symbols to be focusing mind. Difference is that is very tricky. Even Asche does not use it much, only when true power is being called for.”</i>", parse);
-				Text.Flush();
-				
-				Gui.NextPrompt(function() {
-					Text.Clear();
-					Text.Add("<i>“Maybe best explanation is being through example. Say there is not being rain for some time, and shaman is asked to summon rain so that crops may have water. First thing shaman does is to retreat into cave and start preparing large amount of woad. During this time, shaman is also fasting from dawn to dusk to prepare mind for ritual, this period is being lasting two days.</i>", parse);
-					Text.NL();
-					Text.Add("<i>“When this is being over, shaman is taking prepared woad to standing stones, which are being arranged in circle. With this, he is to be pouring woad dye and connecting all stones in one unbroken line. Is being very important that stream is unbroken, if shaman is being stopping pouring even once and resuming, ritual is not working. After circle is joined, is time to draw patterns.</i>", parse);
-					Text.NL();
-					Text.Add("<i>“Patterns on stones are to be made in woad, patterns on shaman’s body are to be made in henna. Red of henna is being contrasting with blue of woad to produce opposites between animate and inanimate, which is becoming during dance.”</i>", parse);
-					Text.NL();
-					Text.Add("Wow, that’s quite a speech, and she’s not done yet. Asche brings out a small flask of what looks like milk tea from under the counter and takes a deep, long swig, running her tongue over her muzzle to wet her lips.", parse);
-					Text.NL();
-					Text.Add("<i>“Now where was Asche? Ah, yes, actual dance to be summoning rain. Too complicated for Asche to be describing right here, but is quite intricate and is consisting of many steps. Also, better if many people are watching. Not just many people, but many people whom shaman is knowing and caring for. This is usually meaning tribe.</i>", parse);
-					Text.NL();
-					Text.Add("<i>“To be sure, is not easy thing. Many steps must be done in right order, with right movements, in right place and at right time for magic to be correctly worked. But when it is working, result of ritual can be incredibly powerful. If given three days to prepare, single shaman can summon rain over entire mountain with rain dance. What many people are seeing is end result - dance that is lasting maybe half an hour, but much preparation is going into ritual magic.”</i>", parse);
-					Text.NL();
-					Text.Add("Wow. That certainly is a lot.", parse);
-					Text.NL();
-					Text.Add("Asche shakes her head, soft clinks of gold against gold accompanying the movement. <i>“What Asche has told good customer is being very, very summarised. There is reason why next herb woman is almost certainly being daughter of previous one, as training is beginning from moment child is able to walk and speak. Maybe even before, if customer is seeing it that way.</i>", parse);
-					Text.NL();
-					Text.Add("<i>“Now, Asche has said enough, and has shop to tend to. Maybe you buy something to make up for Asche telling you long grandmother story, yes?”</i>", parse);
-					
-					asche.flags["Magic"] = Asche.Magic.Rituals;
-					
-					Text.Flush();
-					Scenes.Asche.TalkPrompt();
-				});
-			}
-			//TODO more lessons
-			else {
-				Text.Add("The jackaless makes a show of looking contemplative, leaning on the counter as she taps her chin and rolls her eyes in an exaggerated display of thoughtfulness. <i>“Hmm… customer is wanting to be talking more magic with Asche? This jackaless is thinking not so quickly… maybe good customer is getting one step ahead of [himher]self, yes? Perhaps is best to be contemplating and internalizing things which are being told, lessons which are being taught, having some time to be seeing it in action.</i>", parse);
-				Text.NL();
-				Text.Add("<i>“Maybe it is being best for good customer if [heshe] is coming back after Asche is finding opportunity to be sending [himher] to experience it in field.”</i>", parse);
-				Text.Flush();
-				Scenes.Asche.TalkPrompt();
-			}
-			
-		}, enabled : true
+		func : Scenes.Asche.Lessons, enabled : true
 	});
 	options.push({ nameStr : "Herself",
 		tooltip : "Ask the jackaless about herself.",
@@ -484,6 +409,164 @@ Scenes.Asche.TalkPrompt = function() {
 	});
 }
 
+Scenes.Asche.Lessons = function() {
+	var parse = {
+		handsomepretty : player.mfFem("handsome", "pretty"),
+		heshe: player.mfFem("he", "she"),
+		hisher: player.mfFem("his", "her"),
+		himher: player.mfFem("him", "her")
+	};
+	
+	Text.Clear();
+	// Lesson one - Components
+	if(asche.flags["Magic"] < Asche.Magic.Components) {
+		Text.Add("You’d like to discuss the nature of magic with her. It seems quite different from what is usually practiced on Eden.", parse);
+		Text.NL();
+		Text.Add("<i>“Oh-ho,”</i> the jackaless replies, eyeing you with a raised eyebrow, her tail swishing from side to side. <i>“Customer is wanting to know the secrets of highlander witch doctors, herb women, and shamans? Is taking many years to truly understand, as well as good memory; Asche spent her whole time as girl learning basics of such magic.”</i>", parse);
+		Text.NL();
+		Text.Add("Well, maybe she could give you a condensed version of the idea?", parse);
+		Text.NL();
+		Text.Add("<i>“Yes, yes. Well, to be simply saying, basics of magic is not too different from that of lowlanders with their staves and fancy clothes and sparkling crystals. Is all about energy. But just as one can be choosing to be carrying water in barrel or bucket, so can these energies be moved in different ways.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Differences between lowlander and highlander magic are being many, but most important one is this: highlander magic is often - but not always - being employing the use of magical components, as if brewing potion. These components are being items which are representing facets of natural world which is having magic in them; by using these components in casting of spell, shaman is being able to draw much energy to fuel spell.”</i>", parse);
+		Text.NL();
+		Text.Add("So, it’s like brewing a potion… you kind of get it, yet at the same time, there’s something off about Asche’s explanation you can’t quite put a finger on…", parse);
+		Text.NL();
+		Text.Add("<i>“Good point about using magic component in casting of spell is that is allowing skilled herb woman or witch doctor to harness far more magic than self can draw. Bad point is that if caster is not having component, spell is weaker or even worse, not working. In such case, highlander magician is having to fall back on spells which are being not so powerful.”</i>", parse);
+		Text.NL();
+		Text.Add("Yeah, it sounds like an obvious tradeoff to you. So, what are some of these components? You’d imagine they’d be pretty rare and mystical…", parse);
+		Text.NL();
+		Text.Add("Asche shrugs. <i>“It is really being depending on what customer has in mind. For example, best item for drawing forth power of sea is being black pearl, which is being incredibly rare. Pearl is also working, but not as powerful, to be needing more of them as compared to black ones. To be representing life and growth is very simple, just needing pinch of common basil herb. Invoking fire and light is requiring volcanic ash from deep underground, but coal can also be sufficing if simple magic is what is needed.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Rituals is also being important in working of highlander magic, but maybe is discussion best saved for another time, is it not? Asche’s tongue is getting dry from so much talking, maybe is wanting something to drink.”</i> The jackaless chuckles.", parse);
+		
+		asche.flags["Magic"] = Asche.Magic.Components;
+		
+		Text.Flush();
+		Scenes.Asche.TalkPrompt();
+	}
+	// Lesson two - Ritual
+	else if(asche.flags["Magic"] < Asche.Magic.Rituals && asche.flags["Tasks"] >= Asche.Tasks.Ginseng_Finished) {
+		Text.Add("<i>“Now that customer has had chance to see shamanistic power for [himher]self, Asche is thinking that maybe [heshe] is ready for deeper explanation. But… really, this jackaless is curious - she cannot be teaching customer to be doing highlander magic, so why is customer being asking so many questions?”</i>", parse);
+		Text.NL();
+		Text.Add("Curiosity, nothing more.", parse);
+		Text.NL();
+		Text.Add("Asche considers that a moment, a soft rustle accompanying movements under her snow-white sari. <i>“Well, if it is curiosity that customer is giving as reason, then Asche shall be giving answer that is fitting. Let us be moving onto next portion of highlander magic: ritual.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“You may be already knowing that lowlander magicians may be speaking words to help concentrate their focus; others are being making gestures to same effect. Both are not being strictly necessary, but are helping to sharpen mind and direct intent. Lowlanders is often seeing it as crutch, sign of weakness to be discarded.”</i>", parse);
+		Text.NL();
+		Text.Add("The jackaless looks at you to make sure you’re still listening, then continues. <i>“Ritual being used in highlander magic is same basic idea, to use actions and symbols to be focusing mind. Difference is that is very tricky. Even Asche does not use it much, only when true power is being called for.”</i>", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			Text.Clear();
+			Text.Add("<i>“Maybe best explanation is being through example. Say there is not being rain for some time, and shaman is asked to summon rain so that crops may have water. First thing shaman does is to retreat into cave and start preparing large amount of woad. During this time, shaman is also fasting from dawn to dusk to prepare mind for ritual, this period is being lasting two days.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“When this is being over, shaman is taking prepared woad to standing stones, which are being arranged in circle. With this, he is to be pouring woad dye and connecting all stones in one unbroken line. Is being very important that stream is unbroken, if shaman is being stopping pouring even once and resuming, ritual is not working. After circle is joined, is time to draw patterns.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Patterns on stones are to be made in woad, patterns on shaman’s body are to be made in henna. Red of henna is being contrasting with blue of woad to produce opposites between animate and inanimate, which is becoming during dance.”</i>", parse);
+			Text.NL();
+			Text.Add("Wow, that’s quite a speech, and she’s not done yet. Asche brings out a small flask of what looks like milk tea from under the counter and takes a deep, long swig, running her tongue over her muzzle to wet her lips.", parse);
+			Text.NL();
+			Text.Add("<i>“Now where was Asche? Ah, yes, actual dance to be summoning rain. Too complicated for Asche to be describing right here, but is quite intricate and is consisting of many steps. Also, better if many people are watching. Not just many people, but many people whom shaman is knowing and caring for. This is usually meaning tribe.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“To be sure, is not easy thing. Many steps must be done in right order, with right movements, in right place and at right time for magic to be correctly worked. But when it is working, result of ritual can be incredibly powerful. If given three days to prepare, single shaman can summon rain over entire mountain with rain dance. What many people are seeing is end result - dance that is lasting maybe half an hour, but much preparation is going into ritual magic.”</i>", parse);
+			Text.NL();
+			Text.Add("Wow. That certainly is a lot.", parse);
+			Text.NL();
+			Text.Add("Asche shakes her head, soft clinks of gold against gold accompanying the movement. <i>“What Asche has told good customer is being very, very summarised. There is reason why next herb woman is almost certainly being daughter of previous one, as training is beginning from moment child is able to walk and speak. Maybe even before, if customer is seeing it that way.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Now, Asche has said enough, and has shop to tend to. Maybe you buy something to make up for Asche telling you long grandmother story, yes?”</i>", parse);
+			
+			asche.flags["Magic"] = Asche.Magic.Rituals;
+			
+			Text.Flush();
+			Scenes.Asche.TalkPrompt();
+		});
+	}
+	// Lesson three - Authority
+	//TODO Act 1?
+	else if(!Scenes.Global.PortalsOpen() && asche.flags["Magic"] < Asche.Magic.Authority && asche.flags["Tasks"] >= Asche.Tasks.Nightshade_Finished) {
+		Text.Add("<i>“Today, Asche would be liking to be talking about what kinds of magic can be done, and what is to not be done. This jackaless is admitting that maybe she should have been making this her very first lesson to customer, but it was slipping her mind…</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Never mind. She can be making up for lost time right now.”</i>", parse);
+		Text.NL();
+		Text.Add("What does she mean by not done, anyway? Does that mean certain types of magic doesn’t work here on Eden? That they’re illegal? That people use them anyway, but keep it on the low-down?", parse);
+		Text.NL();
+		Text.Add("<i>“By not being done, Asche is meaning that if Inquisition is ever being catching wind of customer trying to do such naughty things, they will be investigating customer. And if they are being having cause, customer shall be dragged off to be standing trial for magical crimes. Is most unpleasant thing - Asche has not had honor of being star of one of Inquisition’s shows, and is being very glad to not be.”</i>", parse);
+		Text.NL();
+		Text.Add("All right. Inquisition, magical authorities. Stay out of their hair. Sounds straightforward enough.", parse);
+		Text.NL();
+		Text.Add("The jackaless narrows her eyes at you. <i>“Somehow, this jackaless is getting feeling that maybe customer is not being taking this seriously enough. Inquisition is being very hard on magical wrongdoers, because they are not wanting to be having time like in past, when common people are being fearing and hating practitioners of the Art. Asche cannot be blaming them, because in those days every simple hedge witch or wizard are being getting up to all sorts of evil. If Inquisition is finding customer using magic to be doing evil things, customer’s life is likely to be forfeit. Please to be keeping that in mind.”</i>", parse);
+		Text.NL();
+		Text.Add("Out of curiosity, what kinds of things does the Inquisition go after people for?", parse);
+		Text.NL();
+		Text.Add("<i>“Dealing with beings of demonic nature,”</i> Asche replies flatly, droning on as if reciting from a list. <i>“Killing, or driving others mad with power. Permanent, irreversible transformation of sapient being into another form against being’s will. Practicing evil magics which are always being causing harm, such as blood magic or necromancy. Need this jackaless be saying more?”</i>", parse);
+		Text.NL();
+		Text.Add("No, no. You get the idea well enough.", parse);
+		Text.NL();
+		Text.Add("<i>“Inquisition is also being investigating natural occurrence of significant magical nature, but maybe that is thing that customer need not be bothering [himher]self with. Most important thing is to be knowing that there <b>are</b> being those who watch over those who are being practising the Art, and <b>will</b> be coming after customer if [heshe] is stepping out of line. Understand?”</i>", parse);
+		Text.NL();
+		Text.Add("You nod.", parse);
+		Text.NL();
+		Text.Add("<i>“Good, that is one thing off this jackaless’ conscience.”</i> Asche huffs, warm breath jetting from her muzzle, and pulls herself away from you. <i>“Do not be saying that Asche is not giving warning… and that is being ending today’s lesson. Is an important one, so Asche is hoping customer is learning it well.”</i>", parse);
+		
+		asche.flags["Magic"] = Asche.Magic.Authority;
+		
+		Text.Flush();
+		Scenes.Asche.TalkPrompt();
+	}
+	// Lesson Four - Spirits
+	else if(asche.flags["Magic"] < Asche.Magic.Spirits && asche.flags["Tasks"] >= Asche.Tasks.Spring_Finished && Scenes.Global.DefeatedOrchid()) {
+		Text.Add("Asche nods and traces a finger on the counter. <i>“For today’s lesson with customer, Asche is wishing to be broaching the subject of spirits.”</i>", parse);
+		Text.NL();
+		Text.Add("Right. Spirits. That’s how you ended up in this mess in the first place - the gem aside, of course. Aria, Uru…", parse);
+		Text.NL();
+		Text.Add("<i>“Asche knows that customer is being harboring at least one spirit with [himher]… she i sensing its power. It is being for customer’s own good that [heshe] is learning some history about power [heshe] is now possessing.", parse);
+		Text.NL();
+		Text.Add("<i>“To be starting with, nature of spirits is beings of power. Of what nature, that is very many - some are being manifestations of natural forces, others are being embodying ideas and otherwise abstract concepts. Earth, water luck, war, destruction, honor, fertility, such are some things which spirits may be representing. Naturally, as with people, so there are being many spirits which are possessing different stations in order of things.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Remember, to not be confusing spirits with magical beings like dragons or nymph or elf. Although they are possessing much magical power compared to customer or this jackaless, even greatest of dragons is only as powerful as lowest of spirits.”</i>", parse);
+		Text.NL();
+		Text.Add("All right, you get her drift. They’re <i>really</i> powerful.", parse);
+		Text.NL();
+		Text.Add("Asche clicks her tongue. <i>“No need for customer to be impatient, just listening carefully as Asche is teaching. Now, grand spirits are being greatest of them all. They are being entities of much power, to be rightly even called gods; very presence of one can be greatly altering the fate of an entire world, not to be saying much if spirit is taking interest in it. Reach of such spirits can be spanning many planes, and much spiritual strength is being needed to even to be standing before them.”</i>", parse);
+		Text.NL();
+		Text.Add("Right. As before, Aria and Uru. You don’t <i>feel</i> as if you have amazing spiritual strength, as Asche put it, but the gem probably did something to you - Aria did say something about you not being able to linger long in her realm.", parse);
+		Text.NL();
+		Text.Add("<i>“Next step down is greater spirits. These are still being very powerful entities, demigods or maybe even gods in own realms - although if so, may also be weaker outside of it. Most common example are being greater elemental spirits - wind, fire, and such - or spirits which are being embodying concepts which many people are being aware of.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Finally, there are existing lesser spirits, those of which common people are most likely to be meeting. These are still being possessing much power in their own spheres, and may be servant to that of spirit above them. For example, highlands is being having many tribes… but only few, like minotaurs, are being having patron spirit to be watching over them. Such spirit is lesser spirit, is often manifesting themselves with the people and interacting with them… not to say that other spirits are all being aloof, but it is just thing Asche has noticed.”</i>", parse);
+		Text.NL();
+		Text.Add("So, to recap: there’re three broad categories of spirits, all of differing power.", parse);
+		Text.NL();
+		Text.Add("Asche nods. <i>“Traditional highland magics are often consorting with many lesser spirits; it is way of doing things which is being handed down for very very long time. Relationship between shaman and spirit has been codified in this way… Asche cannot be saying same for practitioners which are not being trained in highland way of things, they are being only knowing subjugation, and most are being always seeking tricks and loopholes to be making spirits into their servants. Hmph. Not knowing between diverting river’s flow and damming river. Having resentful servant always ends badly.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Of course, if you are being asking them, they are no doubt having their own story, so to be taking what this jackaless is saying with grain of salt.”</i>", parse);
+		Text.NL();
+		Text.Add("You’ll take care to treat Spirit here with respect, then.", parse);
+		Text.NL();
+		Text.Add("<i>“Respect is part of what is being needed, yes. Knowing where lines are drawn, and what may or may not be asking of spirit without special permission… is not something Asche can teach, but customer must be learning for [himher]self. Understand?”</i>", parse);
+		Text.NL();
+		Text.Add("You’ll try and wrap your head about it.", parse);
+		Text.NL();
+		Text.Add("<i>“Is as much as this jackaless can be asking for, and that is concluding today’s lesson. If customer is taking only one thing away from Asche’s words, she is asking customer to remember to be treating accompanying spirits with respect. Much will be owed them in future.”</i>", parse);
+		
+		asche.flags["Magic"] = Asche.Magic.Spirits;
+		
+		Text.Flush();
+		Scenes.Asche.TalkPrompt();
+	}
+	//TODO more lessons
+	else {
+		Text.Add("The jackaless makes a show of looking contemplative, leaning on the counter as she taps her chin and rolls her eyes in an exaggerated display of thoughtfulness. <i>“Hmm… customer is wanting to be talking more magic with Asche? This jackaless is thinking not so quickly… maybe good customer is getting one step ahead of [himher]self, yes? Perhaps is best to be contemplating and internalizing things which are being told, lessons which are being taught, having some time to be seeing it in action.</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Maybe it is being best for good customer if [heshe] is coming back after Asche is finding opportunity to be sending [himher] to experience it in field.”</i>", parse);
+		Text.Flush();
+		Scenes.Asche.TalkPrompt();
+	}
+	
+}
 
 Scenes.Asche.FortuneTellingPrompt = function() {
 	var parse = {

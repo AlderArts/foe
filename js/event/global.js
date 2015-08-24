@@ -13,6 +13,10 @@ Scenes.Global.MetJeanne = function() {
 	return jeanne.flags["Met"] != 0;
 }
 
+Scenes.Global.DefeatedOrchid = function() {
+	return glade.flags["Visit"] >= DryadGlade.Visit.DefeatedOrchid;
+}
+
 Scenes.Global.PortalsOpen = function() {
 	return gameCache.flags["Portals"] != 0;
 }
