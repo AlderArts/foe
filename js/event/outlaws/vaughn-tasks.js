@@ -1102,7 +1102,7 @@ Scenes.Vaughn.Tasks.Poisoning.Start = function() {
 			Text.Clear();
 			Text.Add("Vaughn nods and hands you the vial. <i>“I’m not going to envy the poor bitch when this gets into her system, but she really ought to have chosen a better bastard to throw her weight behind. I mean, I’ve never seen Majid in the flesh, but what I’ve heard of him makes me glad I’ve never had the chance for such. Well, since she enjoys spending so much time with dirty characters, I’m sure a case of the squealing shits won’t raise any eyebrows. The poison will take effect the following morning, so you’ll have plenty of time to make a getaway without raising too much suspicion.</i>", parse);
 			Text.NL();
-			Text.Add("<i>“Now, be careful with that thing. The glass shouldn’t shatter easily, but you don’t want to tempt fate any more than you need to. If you want to open it, just pull hard on the cork and it’ll pop free.", parse);
+			Text.Add("<i>“Now, be careful with that thing. The glass shouldn’t shatter easily, but you don’t want to tempt fate any more than you need to. If you want to open it, just pull hard on the cork and it’ll pop free.</i>", parse);
 			
 			vaughn.flags["T3"] |= Vaughn.Poisoning.Poison;
 			party.Inv().AddItem(Items.Quest.OutlawPoison);
@@ -1206,7 +1206,7 @@ Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
 				Text.Clear();
 				Text.Add("You wait for an opening when Orvin doesn’t look <i>too</i> busy, then step in and greet the innkeeper. He hesitates a moment, then returns your greeting with a smile, looking perhaps a little too happy to have an excuse to set down the empty dishes he’s carrying and take a breather.", parse);
 				Text.NL();
-				Text.Add("<i>“Oh, hello, [playername]. I’m afraid that we’re quite busy today - if you’re intending to eat here today, you’ll have to wait a little while for your order. Not too long, of course, since the busy spot’s about to clear up, but we were quite harried for most of the morning and afternoon.", parse);
+				Text.Add("<i>“Oh, hello, [playername]. I’m afraid that we’re quite busy today - if you’re intending to eat here today, you’ll have to wait a little while for your order. Not too long, of course, since the busy spot’s about to clear up, but we were quite harried for most of the morning and afternoon.”</i>", parse);
 				Text.NL();
 				Text.Add("You put on your most innocent face and contrive to look surprised. Busy? What with?", parse);
 				Text.NL();
@@ -1344,7 +1344,7 @@ Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
 					Text.NL();
 					Text.Add("The twins are good to their word. Scarcely have a few minutes passed before they emerge into the hallway in their usual clothes, head for the opposite wall, and signal for you to wait in the recently vacated doorway. It doesn’t take too long before another handful of waiters appear in the stairwell with their carts, and the twins quickly round on the last in line, the playful air about them vanishing like mist with the dawn. It’s not too unlike the movements of predators dragging a straggler away from the safety of the herd, and despite the waiter’s fine uniform and prim dress, you can see it’s having much the same effect on the poor sop.", parse);
 					Text.NL();
-					Text.Add("<i>“You. Yes, you!”</i> Rani shouts, beckoning the waiter over with an outstretched finger. He obeys with a bowed head and downcast eyes, and no sooner has he come to a stop in front of the twins that they lay into him with savage abandon. “We want to complain about the quality of service here of late!”</i>", parse);
+					Text.Add("<i>“You. Yes, you!”</i> Rani shouts, beckoning the waiter over with an outstretched finger. He obeys with a bowed head and downcast eyes, and no sooner has he come to a stop in front of the twins that they lay into him with savage abandon. <i>“We want to complain about the quality of service here of late!”</i>", parse);
 					Text.NL();
 					Text.Add("You can’t help but feel a twinge of pity for the poor waiter as the twins maneuver him right in front of the open doorway - right, the placard on the cart denotes that it’s for suite thirty-three. No problems there, then. Still, you wait for the angry barrage of insults to reach its zenith, completely absorbing the waiter’s attention before daring to make a move.", parse);
 					Text.NL();
