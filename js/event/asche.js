@@ -522,7 +522,7 @@ Scenes.Asche.Lessons = function() {
 		Text.NL();
 		Text.Add("Right. Spirits. That’s how you ended up in this mess in the first place - the gem aside, of course. Aria, Uru…", parse);
 		Text.NL();
-		Text.Add("<i>“Asche knows that customer is being harboring at least one spirit with [himher]… she i sensing its power. It is being for customer’s own good that [heshe] is learning some history about power [heshe] is now possessing.", parse);
+		Text.Add("<i>“Asche knows that customer is being harboring at least one spirit with [himher]… she i sensing its power. It is being for customer’s own good that [heshe] is learning some history about power [heshe] is now possessing.</i>", parse);
 		Text.NL();
 		Text.Add("<i>“To be starting with, nature of spirits is beings of power. Of what nature, that is very many - some are being manifestations of natural forces, others are being embodying ideas and otherwise abstract concepts. Earth, water luck, war, destruction, honor, fertility, such are some things which spirits may be representing. Naturally, as with people, so there are being many spirits which are possessing different stations in order of things.</i>", parse);
 		Text.NL();
