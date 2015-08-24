@@ -1144,7 +1144,7 @@ Scenes.Lei.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“I don’t believe personalities are of such great import in such matters, so long as both sides are reasonable and strive to understand one another. Relationships, I have found, are a lot like fighting in formation. It doesn’t matter much how skilled the man beside you is - what matters is that he holds up his shield and does not break.”</i> You aren’t quite sure how that metaphor works and can’t help but wonder what Lei imagines when he says ‘relationship’.", parse);
 			Text.NL();
-			Text.Add("<i>“In any case, though they seem flighty at first glance, I think you will find steel if you pry under the façade. And besides,”</i> he adds with a grin, <i>“I must concede that I am not opposed to some flighty fun now and again.”</i>", parse);
+			Text.Add("<i>“In any case, though they seem flighty at first glance, I think you will find steel if you pry under the façade. Besides,”</i> he adds with a grin, <i>“I must concede that I am not opposed to some flighty fun now and again.”</i>", parse);
 			Text.Flush();
 		}, enabled : true
 	});
@@ -1174,15 +1174,15 @@ Scenes.Lei.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“They are not permitted a servant within the city, as there are none that can be trusted, so they have me perform whatever errands they need.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>“Shopping for snacks, fetching clothes from the tailor, sending for a carriage, making special purchases… Sometimes they have me fetch particular persons to visit them as well.”</i>", parse);
+			Text.Add("<i>“Shopping for snacks, fetching clothes from the tailor, sending for a carriage, making special purchases… Sometimes, they have me fetch particular persons to visit them as well.”</i>", parse);
 			Text.NL();
 			Text.Add("Well, that’s a bit more menial than you had guessed. Isn’t that a bit demeaning?", parse);
 			Text.NL();
-			Text.Add("<i>“Demeaning?”</i> Lei tilts his head, looking puzzled by the word. <i>“What it is is quick and well compensated.”</i>", parse);
+			Text.Add("<i>“Demeaning?”</i> Lei tilts his head, looking puzzled by the word. <i>“It is quick and well compensated, that's what it is.”</i>", parse);
 			Text.NL();
 			Text.Add("You’re prying a little, but you can’t help but feel curious - what kind of special purchases do they have, anyway?", parse);
 			Text.NL();
-			Text.Add("<i>“Mostly dildos, strapons, collars, whips,”</i> Lei responds casually, <i>“those sorts of things.”</i>", parse);
+			Text.Add("<i>“Mostly dildos, strap-ons, collars, whips,”</i> Lei responds casually, <i>“those sorts of things.”</i>", parse);
 			Text.NL();
 			Text.Add("Well. Now that you consider it, that’s not very surprising, knowing those two, but you can’t help but feel a little curious about Lei’s attitude…", parse);
 			Text.Flush();
@@ -1206,18 +1206,18 @@ Scenes.Lei.TalkPrompt = function() {
 						Text.Clear();
 						Text.Add("You awkwardly inquire if dildos and whips and ‘those sorts of things’ are so commonplace to Lei that they aren’t even worth remarking on.", parse);
 						Text.NL();
-						Text.Add("He grins in response, showing teeth. <i>“I have certainly used them from time to time, but that is not quite it. Rather, nothing human repels me, [playername], unless it is a violation of agreement. And I assure you all of the twins’ playmates agree enthusiastically to the things they do to them. And all my pets had agreed likewise,”</i> he finishes in a low purr, and looks you up and down pointedly.", parse);
+						Text.Add("He grins in response, showing teeth. <i>“I have certainly used them from time to time, but that is not quite it - rather, nothing human repels me, [playername], unless it is a violation of agreement. I assure you all of the twins’ playmates agree enthusiastically to the things they do to them, and all my pets had agreed likewise,”</i> he finishes in a low purr, and looks you up and down pointedly.", parse);
 						Text.NL();
 						Text.Add("You can’t help but feel curious. Have there been many such… pets?", parse);
 						Text.NL();
-						Text.Add("<i>“Not so many. I do not like to associate with those who are beneath me, so there are not many I would even consider.”</i> His voice is level, delivering what he sees as a statement of simple fact. <i>“And with those, there still needs to be clear mutual interest. Perhaps even passion,”</i> he says, a note of skepticism creeping into his voice at the last word. <i>“Though, when all of that is present, the encounters have been very enjoyable.”</i>", parse);
+						Text.Add("<i>“Not so many. I do not like to associate with those who are beneath me, so there are not many I would even consider.”</i> His voice is level, delivering what he sees as a statement of simple fact. <i>“And with those, there still needs to be clear mutual interest - perhaps even passion,”</i> he says, a note of skepticism creeping into his voice at the last word. <i>“When all of that is present, the encounters have been very enjoyable.”</i>", parse);
 						Text.Flush();
 						
 						if(lei.flags["SexOpen"] == 0) {
 							//[Offer][Leave]#2
 							var options = new Array();
 							options.push({ nameStr : "Offer",
-								tooltip : "And is he interested in you? You’re definitely interested in him.",
+								tooltip : "Is he interested in you? You’re definitely interested in him.",
 								func : function() {
 									//TODO #set lei_sex_toggle = 1
 									lei.flags["SexOpen"] = 1;
@@ -1293,15 +1293,15 @@ Scenes.Lei.TalkPastPrompt = function() {
 			scenes.push(function() {
 				Text.Add("You ask Lei what sorts of things he’s been been doing in the kingdom and beyond.", parse);
 				Text.NL();
-				Text.Add("<i>“Fulfilling contracts.”</i> The silence after this declaration stretches on, until at last he’s made uncomfortable enough to explain further. <i>“That is a very vague question, [playername]. I do not wish to relate my life to you day by day.”</i> Or maybe he just wanted you to stop frowning at him.", parse);
+				Text.Add("<i>“Fulfilling contracts.”</i> The silence after this declaration stretches on, until at last, he’s made uncomfortable enough to explain further. <i>“That is a very vague question, [playername]. I do not wish to relate my life to you day by day.”</i> Or maybe he just wanted you to stop frowning at him.", parse);
 				Text.NL();
 				Text.Add("Well, what are some things he’s done that he’s the most proud of, or that others speak about the most?", parse);
 				Text.NL();
 				Text.Add("<i>“There is no great importance to any single event. The source of my pride, and of what respect I have is my consistency. Whenever I accept a task, I complete it in full, without fail, and without deviation.”</i> He smiles slightly. <i>“But I see you will not stop unless I tell you a story. Very well.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“When I had but recently started accepting jobs, I was on the road when a drab man approached me. He said that he had been robbed while only a few miles out of town. Apparently the thieves had struck a deal with the mayor to let them live in town unmolested and to have the guards notify them of new marks they might be interested in.”</i>", parse);
+				Text.Add("<i>“When I had but recently started accepting jobs, I was on the road when a drab man approached me. He said that he had been robbed while only a few miles out of town. Apparently, the thieves had struck a deal with the mayor to let them live in town unmolested and to have the guards notify them of new marks they might be interested in.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“He said he’d been carrying several extremely valuable books when he had been ambushed. And of course he’d pay me half their value - five thousand gold - if only I’d fetch them for him,”</i> Lei says, barely containing laughter. <i>“Imagine that, this unshaven man with calloused hands, in his clothes of rough linen, without a bruise or scratch on him, claiming he’d been robbed of ten thousand gold worth of books.”</i>", parse);
+				Text.Add("<i>“He said he’d been carrying several extremely valuable books when he had been ambushed, and of course, he’d pay me half their value - five thousand gold - if only I’d fetch them for him,”</i> Lei says, barely containing laughter. <i>“Imagine that, this unshaven man with calloused hands, in his clothes of rough linen, without a bruise or scratch on him, claiming he’d been robbed of ten thousand gold worth of books.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“So, naturally, I bound him and dragged him to the mayor. It turned out I wasn’t the first one he’d attempted to hire, and the others had somehow fallen for his claims. I believe he received a dozen lashes, and several years hard labor for the attempted theft.”</i>", parse);
 				Text.NL();
@@ -1321,7 +1321,7 @@ Scenes.Lei.TalkPastPrompt = function() {
 					Text.NL();
 					Text.Add("<i>“Very well then. I would forbid the nobles from giving their children anything - even their own leisure time - so that they must succeed or fail on their own merits. I would make sure everyone receives a similar amount of training and education, so that they can compete fairly. Hm, and then... once they are trained, I would pit them against each other, in duels to the death to select the best survivalists of the lot.”</i>", parse);
 					Text.NL();
-					Text.Add("You stare at him in shock, as a grin slowly spreads across his face, and he gives a short sonorous laugh. So, he was joking after all. Probably.", parse);
+					Text.Add("You stare at him in shock, as a grin slowly spreads across his face, and he gives a short sonorous laugh. So, he was joking after all... probably.", parse);
 				});
 			}
 			
@@ -1357,13 +1357,13 @@ Scenes.Lei.SexPrompt = function() {
 			tooltip : "Flirt with him, and mention you’d like to do more than flirt.",
 			func : function() {
 				Text.Clear();
-				Text.Add("You tell Lei that you’re curious whether his drive for increasing his skill extends beyond his swordplay. Perhaps, to things that few get to see?", parse);
+				Text.Add("You tell Lei that you’re curious whether his drive for increasing his skill extends beyond his swordplay - perhaps, to things that few get to see?", parse);
 				Text.NL();
 				Text.Add("<i>“It does, though other abilities are less important to me, so perhaps I am not as advanced in them.”</i>", parse);
 				Text.NL();
-				Text.Add("He seems to not be quite catching what you’re driving at. You ask him if perhaps he’d show you some of them some time. In private. Well, probably in private, you add with a wink.", parse);
+				Text.Add("He seems to not be quite catching what you’re driving at. You ask him if perhaps he’d show you some of them some time - in private. Well, probably in private, you add with a wink.", parse);
 				Text.NL();
-				Text.Add("Lei laughs in amusement. <i>“Eager, are you not? Perhaps I shall, if you really wish to be my pet. Though I think we will have to wait until a special occasion.”</i>", parse);
+				Text.Add("Lei laughs in amusement. <i>“Eager, are you not? Perhaps I shall, if you really wish to be my pet, though I think we will have to wait until a special occasion.”</i>", parse);
 				Text.NL();
 				Text.Add("What kind?", parse);
 				Text.NL();
