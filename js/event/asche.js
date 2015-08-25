@@ -468,13 +468,13 @@ Scenes.Asche.Lessons = function() {
 			Text.NL();
 			Text.Add("Wow, that’s quite a speech, and she’s not done yet. Asche brings out a small flask of what looks like milk tea from under the counter and takes a deep, long swig, running her tongue over her muzzle to wet her lips.", parse);
 			Text.NL();
-			Text.Add("<i>“Now where was Asche? Ah, yes, actual dance to be summoning rain. Too complicated for Asche to be describing right here, but is quite intricate and is consisting of many steps. Also, better if many people are watching. Not just many people, but many people whom shaman is knowing and caring for. This is usually meaning tribe.</i>", parse);
+			Text.Add("<i>“Now, where was Asche? Ah, yes, actual dance to be summoning rain. Too complicated for Asche to be describing right here, but is quite intricate and is consisting of many steps. Also, better if many people are watching. Not just many people, but many people whom shaman is knowing and caring for. This is usually meaning tribe.</i>", parse);
 			Text.NL();
 			Text.Add("<i>“To be sure, is not easy thing. Many steps must be done in right order, with right movements, in right place and at right time for magic to be correctly worked. But when it is working, result of ritual can be incredibly powerful. If given three days to prepare, single shaman can summon rain over entire mountain with rain dance. What many people are seeing is end result - dance that is lasting maybe half an hour, but much preparation is going into ritual magic.”</i>", parse);
 			Text.NL();
 			Text.Add("Wow. That certainly is a lot.", parse);
 			Text.NL();
-			Text.Add("Asche shakes her head, soft clinks of gold against gold accompanying the movement. <i>“What Asche has told good customer is being very, very summarised. There is reason why next herb woman is almost certainly being daughter of previous one, as training is beginning from moment child is able to walk and speak. Maybe even before, if customer is seeing it that way.</i>", parse);
+			Text.Add("Asche shakes her head, soft clinks of gold against gold accompanying the movement. <i>“What Asche has told good customer is being very, very summarized. There is reason why next herb woman is almost certainly being daughter of previous one, as training is beginning from moment child is able to walk and speak. Maybe even before, if customer is seeing it that way.</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Now, Asche has said enough, and has shop to tend to. Maybe you buy something to make up for Asche telling you long grandmother story, yes?”</i>", parse);
 			
@@ -491,7 +491,7 @@ Scenes.Asche.Lessons = function() {
 		Text.NL();
 		Text.Add("<i>“Never mind. She can be making up for lost time right now.”</i>", parse);
 		Text.NL();
-		Text.Add("What does she mean by not done, anyway? Does that mean certain types of magic doesn’t work here on Eden? That they’re illegal? That people use them anyway, but keep it on the low-down?", parse);
+		Text.Add("What does she mean by not done, anyway? Does that mean certain types of magic don’t work here on Eden? That they’re illegal? That people use them anyway, but keep it on the low-down?", parse);
 		Text.NL();
 		Text.Add("<i>“By not being done, Asche is meaning that if Inquisition is ever being catching wind of customer trying to do such naughty things, they will be investigating customer. And if they are being having cause, customer shall be dragged off to be standing trial for magical crimes. Is most unpleasant thing - Asche has not had honor of being star of one of Inquisition’s shows, and is being very glad to not be.”</i>", parse);
 		Text.NL();
@@ -505,7 +505,7 @@ Scenes.Asche.Lessons = function() {
 		Text.NL();
 		Text.Add("No, no. You get the idea well enough.", parse);
 		Text.NL();
-		Text.Add("<i>“Inquisition is also being investigating natural occurrence of significant magical nature, but maybe that is thing that customer need not be bothering [himher]self with. Most important thing is to be knowing that there <b>are</b> being those who watch over those who are being practising the Art, and <b>will</b> be coming after customer if [heshe] is stepping out of line. Understand?”</i>", parse);
+		Text.Add("<i>“Inquisition is also being investigating natural occurrence of significant magical nature, but maybe that is thing that customer need not be bothering [himher]self with. Most important thing is to be knowing that there <b>are</b> being those who watch over those who are being practicing the Art, and <b>will</b> be coming after customer if [heshe] is stepping out of line. Understand?”</i>", parse);
 		Text.NL();
 		Text.Add("You nod.", parse);
 		Text.NL();
@@ -522,9 +522,9 @@ Scenes.Asche.Lessons = function() {
 		Text.NL();
 		Text.Add("Right. Spirits. That’s how you ended up in this mess in the first place - the gem aside, of course. Aria, Uru…", parse);
 		Text.NL();
-		Text.Add("<i>“Asche knows that customer is being harboring at least one spirit with [himher]… she i sensing its power. It is being for customer’s own good that [heshe] is learning some history about power [heshe] is now possessing.</i>", parse);
+		Text.Add("<i>“Asche knows that customer is being harboring at least one spirit with [himher]… she is sensing its power. It is being for customer’s own good that [heshe] is learning some history about power [heshe] is now possessing.</i>", parse);
 		Text.NL();
-		Text.Add("<i>“To be starting with, nature of spirits is beings of power. Of what nature, that is very many - some are being manifestations of natural forces, others are being embodying ideas and otherwise abstract concepts. Earth, water luck, war, destruction, honor, fertility, such are some things which spirits may be representing. Naturally, as with people, so there are being many spirits which are possessing different stations in order of things.</i>", parse);
+		Text.Add("<i>“To be starting with, nature of spirits is beings of power. Of what nature, that is very many - some are being manifestations of natural forces, others are being embodying ideas and otherwise abstract concepts. Earth, water, luck, war, destruction, honor, fertility, such are some things which spirits may be representing. Naturally, as with people, so there are being many spirits which are possessing different stations in order of things.</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Remember, to not be confusing spirits with magical beings like dragons or nymph or elf. Although they are possessing much magical power compared to customer or this jackaless, even greatest of dragons is only as powerful as lowest of spirits.”</i>", parse);
 		Text.NL();
@@ -540,7 +540,7 @@ Scenes.Asche.Lessons = function() {
 		Text.NL();
 		Text.Add("So, to recap: there’re three broad categories of spirits, all of differing power.", parse);
 		Text.NL();
-		Text.Add("Asche nods. <i>“Traditional highland magics are often consorting with many lesser spirits; it is way of doing things which is being handed down for very very long time. Relationship between shaman and spirit has been codified in this way… Asche cannot be saying same for practitioners which are not being trained in highland way of things, they are being only knowing subjugation, and most are being always seeking tricks and loopholes to be making spirits into their servants. Hmph. Not knowing between diverting river’s flow and damming river. Having resentful servant always ends badly.</i>", parse);
+		Text.Add("Asche nods. <i>“Traditional highland magics are often consorting with many lesser spirits; it is way of doing things which is being handed down for very, very long time. Relationship between shaman and spirit has been codified in this way… Asche cannot be saying same for practitioners which are not being trained in highland way of things, they are being only knowing subjugation, and most are being always seeking tricks and loopholes to be making spirits into their servants. Hmph. Not knowing between diverting river’s flow and damming river. Having resentful servant always ends badly.</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Of course, if you are being asking them, they are no doubt having their own story, so to be taking what this jackaless is saying with grain of salt.”</i>", parse);
 		Text.NL();
