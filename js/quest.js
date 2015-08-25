@@ -430,7 +430,7 @@ Quests.quests.push(new Quest({
 		return "A guilty conscience";
 	},
 	desc: function() {
-		return "You are feeling a bit guilty about the fox currently imprisoned due to your actions. Who knows, he could end up being executed over this, given how the royal guard regards morphs in Rigard.";
+		return "You are feeling a bit guilty about the fox currently imprisoned due to your actions. Who knows, he could end up being executed over this, given how the Royal Guard regards morphs in Rigard.";
 	},
 	active: function() {
 		var status = Quests.Type.NotStarted;

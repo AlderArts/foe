@@ -522,7 +522,7 @@ Scenes.Burrows.ArrivalOphelia = function() {
 	Text.NL();
 	Text.Add("<i>“Visiting mother is always such a messy business,”</i> Ophelia complains as she fastens the garment, fitting it snugly across her chest. She adjusts her glasses and purses her lips, scrutinizing you. <i>“Now, what do we have here? You said your name was [playername]?”</i>", parse);
 	Text.NL();
-	Text.Add("You nod, and tell her that the rabbits accosted you while you were travelling to the city to visit the market. She doesn’t seem entirely convinced, but nods amiably.", parse);
+	Text.Add("You nod, and tell her that the rabbits accosted you while you were traveling to the city to visit the market. She doesn’t seem entirely convinced, but nods amiably.", parse);
 	Text.NL();
 	Text.Add("<i>“You must have questions of your own...”</i>", parse);
 	Text.Flush();

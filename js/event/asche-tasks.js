@@ -299,7 +299,7 @@ Scenes.Asche.Tasks.Ginseng.Bribe = function() {
 			Text.NL();
 			Text.Add("<i>“The outsider actually paid <b>that</b> much for that ginseng? I can’t believe it!”</i>", parse);
 			Text.NL();
-			Text.Add("<i>“Lowlanders are swimming in money - remember that they aren’t the kind to get only one travelling merchant once a month. With this much dough, we can definitely afford to buy some things for the clan the next time one comes around.”</i>", parse);
+			Text.Add("<i>“Lowlanders are swimming in money - remember that they aren’t the kind to get only one traveling merchant once a month. With this much dough, we can definitely afford to buy some things for the clan the next time one comes around.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Still…”</i>", parse);
 			Text.Flush();

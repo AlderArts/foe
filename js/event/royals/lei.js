@@ -624,7 +624,7 @@ Scenes.Lei.ExplanationMain = function() {
 			Text.NL();
 			Text.Add("<i>“Tell you what, prove that you're worthy of trust, and we'll tell you who we are. And maybe we'll have a few small jobs for you afterward, and, of course, we are always happy to recompense someone who helps us... whether with money, or-”</i> he gives his companion's rump a playful squeeze, and she lets out a squeal, <i>“-favors.”</i>", parse);
 			Text.NL();
-			Text.Add("You have to admit that that sounds intriguing, and ask if one of the favors could include getting into the Castle Grounds past the royal guards.", parse);
+			Text.Add("You have to admit that that sounds intriguing, and ask if one of the favors could include getting into the Castle Grounds past the Royal Guard.", parse);
 			Text.NL();
 			Text.Add("The young man grins. <i>“Of course, that is certainly a possibility. We can do many things for our friends.”</i>", parse);
 			Text.NL();
@@ -852,7 +852,7 @@ Scenes.Lei.InnFirstPrompt = function() {
 				Text.Add("He seems quite strong, and although you don't know much about him, it wouldn't hurt to test the waters. You ask him if he'll accompany you on your travels.", parse);
 				
 				if(player.level >= Lei.PartyStrength.LEVEL_STRONG)
-					Text.Add("He looks at you with apparent interest. <i>“Perhaps... There is a chance that I may be interested in travelling with you. Unfortunately, just now I am preoccupied with other duties,”</i> he tells you, sounding genuinely regretful. <i>“Come and ask me again some time, and we will discuss it if you like.”</i>", parse);
+					Text.Add("He looks at you with apparent interest. <i>“Perhaps... There is a chance that I may be interested in traveling with you. Unfortunately, just now I am preoccupied with other duties,”</i> he tells you, sounding genuinely regretful. <i>“Come and ask me again some time, and we will discuss it if you like.”</i>", parse);
 				else
 					Text.Add("<i>“As I said,”</i> he tells you, sounding bored, <i>“I am interested in but two things. Fortune and strength. I am not sure which it is that you think you can offer me.”</i> He pauses, looking you over again. <i>“Well, I do see some spark of potential within you,”</i> he continues, his tone softening. <i>“Perhaps we can speak of this again some other time. For now, I am preoccupied with other duties.”</i>", parse);
 				Text.NL();

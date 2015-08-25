@@ -622,7 +622,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 					Text.Add("<i>“We’ve had music here ", parse);
 				else
 					Text.Add("<i>“We have music every day here in the evenings. Had it ", parse);
-				Text.Add("ever since the very beginning. Used to just invite travelling bards in whenever they were reasonable about the price. Or so I’m told,”</i> he clarifies, smiling. <i>“Back when my father was still young, however, we started hiring performers to play here full-time.”</i>", parse);
+				Text.Add("ever since the very beginning. Used to just invite traveling bards in whenever they were reasonable about the price. Or so I’m told,”</i> he clarifies, smiling. <i>“Back when my father was still young, however, we started hiring performers to play here full-time.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Sometimes they find something better and move on, other times they stay for decades. The latest group has been here for, oh, almost four years now, and they seem to be doing pretty well. You should go over and listen to them if you have the time.”</i>", parse);
 			});
@@ -665,7 +665,7 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 				Text.NL();
 				Text.Add("<i>“In my youth, many thought the city unsafe, and then there was the war... Compared to that, things have been much more relaxed recently. Well, for everyone who comes to drink here, at least. Rigard has grown safer and quieter over the decades, so far as I can tell.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“Though in the last year or two it’s been going downhill again, I’m afraid to say. Merchants are grumbling that their caravans vanish outside the city, nobles that the king is demanding more and more from them, supposedly to fight the outlaws, and the common people that the royal guard abuses them. Well, they all grumble about more than that, as men ever do, but these things I hear again and again.”</i>", parse);
+				Text.Add("<i>“Though in the last year or two it’s been going downhill again, I’m afraid to say. Merchants are grumbling that their caravans vanish outside the city, nobles that the king is demanding more and more from them, supposedly to fight the outlaws, and the common people that the Royal Guard abuses them. Well, they all grumble about more than that, as men ever do, but these things I hear again and again.”</i>", parse);
 				Text.Flush();
 				
 				rigard.LB["CityTalk"] = 1;
@@ -712,21 +712,21 @@ Scenes.Rigard.LB.OrvinTalkPrompt = function(innPrompt) {
 		options.push({ nameStr : "Royal guards",
 			func : function() {
 				Text.Clear();
-				Text.Add("You ask Orvin what the royal guards are doing.", parse);
+				Text.Add("You ask Orvin what the Royal Guards are doing.", parse);
 				Text.NL();
-				Text.Add("<i>“The royal guards have always been just that - royal. Their place is supposed to be by the king and in his pavilion. Technically, that is the extent of their jurisdiction. Lately, however, they have become more and more full of themselves,”</i> he tells you, frowning.", parse);
+				Text.Add("<i>“The Royal Guards have always been just that - royal. Their place is supposed to be by the king and in his pavilion. Technically, that is the extent of their jurisdiction. Lately, however, they have become more and more full of themselves,”</i> he tells you, frowning.", parse);
 				Text.NL();
-				Text.Add("<i>“It’s the new commander they got a couple years ago - it seems like he forgets the ‘guard’ part of ‘royal guard’ half the time. He’s the second son of the one of the ministers. Seems to think that blood is what makes a man, maybe because it’s the only thing he has going for him.”</i> You’re not sure why, but Orvin looks angrier than you would’ve expected.", parse);
+				Text.Add("<i>“It’s the new commander they got a couple years ago - it seems like he forgets the ‘guard’ part of ‘Royal Guard’ half the time. He’s the second son of the one of the ministers. Seems to think that blood is what makes a man, maybe because it’s the only thing he has going for him.”</i> You’re not sure why, but Orvin looks angrier than you would’ve expected.", parse);
 				Text.NL();
 				Text.Add("<i>“People call him Preston the Shining - I hear that when the nickname reached him, he took it as acknowledgement of his exalted moral character. I suspect no one’s been brave enough to tell him he earned it for the garish silvery armor he always wears. Apparently, he forces his servants to burnish it for hours each day.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“With him in charge, the royal guard has taken to venturing out into the city at large, and has had more and more conflicts with the city guard over authority. They do their best to get the nobles, and anyone else with the coin to pay them off, out of any trouble they land in.”</i>  Orvin wrinkles his nose in disgust. <i>“They offer discounts if the other party’s a morph - half of them seem to think that morphs shouldn’t exist at all, while the other only wants them out of the city.”</i>", parse);
+				Text.Add("<i>“With him in charge, the Royal Guard has taken to venturing out into the city at large, and has had more and more conflicts with the city guard over authority. They do their best to get the nobles, and anyone else with the coin to pay them off, out of any trouble they land in.”</i>  Orvin wrinkles his nose in disgust. <i>“They offer discounts if the other party’s a morph - half of them seem to think that morphs shouldn’t exist at all, while the other only wants them out of the city.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“It’s said some of them take money from nobles to beat up any commoner they’re asked to. Someone in the lower districts had both his arms broken and had to stay in bed for three months to recover. If this keeps up, someone’s bound to end up dead.”</i> He shakes his head in disappointment.", parse);
 				Text.Flush();
 				Scenes.Rigard.LB.OrvinTalkPrompt(innPrompt);
 			}, enabled : true,
-			tooltip : "Ask him about the royal guards."
+			tooltip : "Ask him about the Royal Guards."
 		});
 	}
 	

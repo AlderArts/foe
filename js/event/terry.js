@@ -1157,7 +1157,7 @@ Scenes.Terry.CaughtTheThief = function() {
 		
 		Gui.Callstack.push(function() {
 			Text.NL();
-			Text.Add("You quickly compose yourself and do your best to assess the situation. Beside you, you have a bound prisoner, naked from the waist down, and beside him is standing Miranda, dressed from the top up in a city watch outfit and naked from the waist down, an erection bobbing uneasily before her. In front of you, a detachment of armed and armored figures whose iconography makes it clear they belong to the royal guard. Really not a good scene to be caught in... at least <b>you</b> are still as dressed as you ever are; you look to be the only one acting somewhat professionally here. So, your reputation is probably safe... pity Miranda can't say the same.", parse);
+			Text.Add("You quickly compose yourself and do your best to assess the situation. Beside you, you have a bound prisoner, naked from the waist down, and beside him is standing Miranda, dressed from the top up in a city watch outfit and naked from the waist down, an erection bobbing uneasily before her. In front of you, a detachment of armed and armored figures whose iconography makes it clear they belong to the Royal Guard. Really not a good scene to be caught in... at least <b>you</b> are still as dressed as you ever are; you look to be the only one acting somewhat professionally here. So, your reputation is probably safe... pity Miranda can't say the same.", parse);
 			Text.NL();
 			Text.Add("The guards are led by a man in his mid thirties wearing garish silver armour, polished to a shine. You can tell he is a man very preoccupied with his own appearance, as his short, jet-black hair has been meticulously cut and oiled. Neither his armor nor his makeup does anything to soften the expression of sneering contempt on his face, nor the bile in his voice.", parse);
 			Text.NL();
@@ -1169,7 +1169,7 @@ Scenes.Terry.CaughtTheThief = function() {
 			Text.NL();
 			Text.Add("<i>“Shush dog! We’re here because we received information that the thief was holing up here, now be a good lapdog and go back to the watch. We will handle this since you’re obviously too busy with other issues to do your job. Men, haul this mangy mutt off to the prison.”</i>", parse);
 			Text.NL();
-			Text.Add("The royal guards waste not time in picking up the distraught fox and dragging him off, pants down and all. The ones not carrying the thief pick-up his loot and walk away as well. Once they’re out, the commander closes the door on two of you. Looking at Miranda she looks on the verge of blowing up.", parse);
+			Text.Add("The Royal Guards waste no time in picking up the distraught fox and dragging him off, pants down and all. The ones not carrying the thief pick-up his loot and walk away as well. Once they’re out, the commander closes the door on two of you. Looking at Miranda she looks on the verge of blowing up.", parse);
 			Text.NL();
 			Text.Add("<i>“Goddammit!”</i> she yells as she angrily punches the floor, cracking the boards and sending splinters flying.", parse);
 			Text.Flush();
@@ -1178,7 +1178,7 @@ Scenes.Terry.CaughtTheThief = function() {
 				Text.Clear();
 				party.location = world.loc.Rigard.Tavern.common;
 				world.TimeStep({hour: 1});
-				Text.Add("After Miranda calms down enough, you two somehow find yourselves at the Maidens' Bane. Word that the royal guard had <i>caught</i> the thief has spread and the blockade has been lifted. Miranda looks absolutely dejected, drowning her sorrows in a mugful of ale.", parse);
+				Text.Add("After Miranda calms down enough, you two somehow find yourselves at the Maidens' Bane. Word that the Royal Guard had <i>caught</i> the thief has spread and the blockade has been lifted. Miranda looks absolutely dejected, drowning her sorrows in a mugful of ale.", parse);
 				Text.NL();
 				Text.Add("<i>“Damn that pompous ass, making fun of me and taking credit for <b>my</b> hard work.”</i> She drains the entire mug, and pours herself another mugful. <i>“You’ve just had the pleasure of meeting Preston the Shining, the commander of the Royal Guard. Yes, he’s always that much of an ass.”</i>", parse);
 				Text.NL();
@@ -1190,7 +1190,7 @@ Scenes.Terry.CaughtTheThief = function() {
 				options.push({ nameStr : "Comfort",
 					func : function() {
 						Text.Clear();
-						Text.Add("Shuffling a little close in your seat, you spread your arm over Miranda's shoulders, letting her feel your weight in a show of support. Gently, you assure her that you're on her side; the royal guard are damned fools, and she doesn't deserve what they did. But still, you know how hard she worked and what she did, and you respect her for how well she did. She should be proud of herself; while those puffed-up slugs were polishing their armor, she was out chasing down the thief and capturing him single-handedly - she's a real hero.", parse);
+						Text.Add("Shuffling a little close in your seat, you spread your arm over Miranda's shoulders, letting her feel your weight in a show of support. Gently, you assure her that you're on her side; the Royal Guard are damned fools, and she doesn't deserve what they did. But still, you know how hard she worked and what she did, and you respect her for how well she did. She should be proud of herself; while those puffed-up slugs were polishing their armor, she was out chasing down the thief and capturing him single-handedly - she's a real hero.", parse);
 						Text.NL();
 						Text.Add("Miranda smiles a bit at that and leans into you. ", parse);
 						if(miranda.Attitude() >= Miranda.Attitude.Neutral) {
@@ -1421,7 +1421,7 @@ Scenes.Terry.Release = function() {
 			Text.NL();
 			Text.Add("<i>“W-w-what?! She’s with you? B-but you said-!”</i> Terry swivels this way and that, desperately looking for a way to escape. You tell him to calm down, and remind him of the collar. For a moment, the effeminate fox looks like he’s going to chance it, but then he lowers his head, shuffling to stand behind you.", parse);
 			Text.NL();
-			Text.Add("You explain that Miranda is travelling together with you, and he’ll just have to deal with that.", parse);
+			Text.Add("You explain that Miranda is traveling together with you, and he’ll just have to deal with that.", parse);
 			Text.NL();
 			Text.Add("<i>“You’re asking too much! I’m not going to travel with this stupid bitch!”</i> he protests.", parse);
 			Text.NL();
@@ -1950,7 +1950,7 @@ Scenes.Terry.TalkPast = function(force) {
 			return true;
 		}
 		
-		Text.Add("<i>“We kept avoiding capture by travelling a lot under the pretense of being merchants. Thorn was very pleased with our successful heists. We had a system that worked really well,”</i> Terry smiles softly, but the smile quickly fades.", parse);
+		Text.Add("<i>“We kept avoiding capture by traveling a lot under the pretense of being merchants. Thorn was very pleased with our successful heists. We had a system that worked really well,”</i> Terry smiles softly, but the smile quickly fades.", parse);
 		Text.NL();
 		Text.Add("<i>“About then, we caught wind of a VIP that was visiting the town we were in. Thorn’s eyes were aglow. That was a great mark if there ever was one... and best of all? He had little security with him. It was an opportunity, and if there’s a thing you learn in thievery, it’s that you never miss an opportunity.”</i>", parse);
 		Text.NL();

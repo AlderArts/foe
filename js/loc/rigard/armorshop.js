@@ -458,7 +458,7 @@ Scenes.Rigard.ArmorShop.Talk = function(backFunc) {
 				Text.NL();
 				Text.Add("<i>“Now, even though I don’t make my goods myself - haven’t got the physique for it, really - I know something of what I’m selling, so don’t try to hock stuff that’s only fit for scrap onto me. Well, I’ll still buy it, but I’ll only pay scrap prices. It’s only fair.</i>", parse);
 				Text.NL();
-				Text.Add("<i>“Other thing I won’t buy is stolen goods - no one wants the city watch or royal guard coming around, asking all sorts of inconvenient questions and scaring off the customers. Very bad for business, that sort of unpleasantness is - I’ve had to close the shop after really big heists just so I don’t fall under suspicion. The city watch knows that while I may bend the law a little every now and then, I’m not about to break it through and through, and I’d like to keep it that way.”</i>", parse);
+				Text.Add("<i>“Other thing I won’t buy is stolen goods - no one wants the City Watch or Royal Guard coming around, asking all sorts of inconvenient questions and scaring off the customers. Very bad for business, that sort of unpleasantness is - I’ve had to close the shop after really big heists just so I don’t fall under suspicion. The city watch knows that while I may bend the law a little every now and then, I’m not about to break it through and through, and I’d like to keep it that way.”</i>", parse);
 				Text.Flush();
 				
 				if(rigard.Twopenny["TShop"] < 1)

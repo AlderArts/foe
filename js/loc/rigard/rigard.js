@@ -506,7 +506,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 	}, 1.0, function() { return party.location != world.loc.Rigard.Slums.gate; });
 	scenes.AddEnc(function() {
 		if(poshList) {
-			Text.Add("<i>“I had a chance to visit the royal guard the other day, you know,”</i> the [NPC1] remarks.", parse);
+			Text.Add("<i>“I had a chance to visit the Royal Guard the other day, you know,”</i> the [NPC1] remarks.", parse);
 			Text.NL();
 			Text.Add("<i>“Oh, how did it go?”</i>", parse);
 			Text.NL();
@@ -515,14 +515,14 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 			Text.Add("The [NPC2] smiles in approval. <i>“I'm glad at least some in this city still understand who they're supposed to listen to.”</i>", parse);
 		}
 		else {
-			Text.Add("<i>“Have I told you how I ran into one of those royal guard assholes the other day?”</i> the [NPC1] asks.", parse);
+			Text.Add("<i>“Have I told you how I ran into one of those Royal Guard assholes the other day?”</i> the [NPC1] asks.", parse);
 			Text.NL();
 			Text.Add("<i>“No, what happened?”</i>", parse);
 			Text.NL();
 			
 			var opts = [];
 			opts.push("<i>“He said I was loitering, and my clothes were of a cut not allowed in the city. Ugh...”</i> [heshe1] groans in frustration. <i>“Basically, he was demanding a bribe, and I had no choice but to buy him off.”</i>");
-			opts.push("<i>“He said that I was too non-human, that being so morphed is beyond lady Aria's will. I think he was just looking for an excuse to beat me up, but I managed to run off.”</i>");
+			opts.push("<i>“He said that I was too non-human, that being so morphed is beyond Lady Aria's will. I think he was just looking for an excuse to beat me up, but I managed to run off.”</i>");
 			opts.push("<i>“He said my kind didn't belong here. I think that stupid noble I got into an argument with last week just sent him to harass me.”</i> [HeShe1] sounds disgusted.");
 			opts.push("<i>“He said I had best stay away from my favorite merchant's shop. I think [rheshe]'s in competition with some noble, and they sent the guard to try and drive [rhimher] out of business.”</i>");
 			Text.Add(opts[Rand(opts.length)], parse);
@@ -559,14 +559,14 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 				Text.NL();
 				Text.Add("<i>“Oh? What was it?”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“They believe that the royal guard has taken to doing away with those whom they don’t like.”</i>", parse);
+				Text.Add("<i>“They believe that the Royal Guard has taken to doing away with those whom they don’t like.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“How shocking! Truly, the envy of the poor knows no bounds.”</i>", parse);
 				Text.NL();
 				Text.Add("The [NPC1] shakes [hisher1] head. <i>“They’d rather conjure up stories of oppression than take a long, hard look at their own failings.”</i>", parse);
 			}, 1.0, function() { return posh; });
 			scenes.AddEnc(function() {
-				Text.Add("<i>“I’ve heard talk that the royal guard have been disappearing people the nobles find troublesome,”</i> the [NPC1] says.", parse);
+				Text.Add("<i>“I’ve heard talk that the Royal Guard have been disappearing people the nobles find troublesome,”</i> the [NPC1] says.", parse);
 				Text.NL();
 				Text.Add("<i>“What?! You can’t be serious! I mean, I can see them shaking down someone or just beating them up, but killing them?”</i>", parse);
 				Text.NL();
@@ -590,9 +590,9 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 				Text.NL();
 				Text.Add("<i>“Dangerous? I don’t know, I haven’t seen a single one.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“It’s true! I heard they tried to break one of their fellows out from the clink, but the royal guard stopped them dead cold.”</i>", parse);
+				Text.Add("<i>“It’s true! I heard they tried to break one of their fellows out from the clink, but the Royal Guard stopped them dead cold.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“And where did you hear this from? The royal guard?”</i>", parse);
+				Text.Add("<i>“And where did you hear this from? The Royal Guard?”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Um…”</i>", parse);
 			}, 1.0, function() { return true; });
@@ -619,7 +619,7 @@ Scenes.Rigard.Chatter = function(enteringArea) {
 			Text.Add("<i>“And these aren’t. Rewyn needs to garrison it again.”</i>", parse);
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
-			Text.Add("<i>“The royal guard is getting really antsy about this whole outlaw thing.”</i>", parse);
+			Text.Add("<i>“The Royal Guard is getting really antsy about this whole outlaw thing.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Oh? I didn’t listen to Preston’s public proclamation. Wasn’t it the usual nonsense on how he’s going to eradicate vice and crime in the city? He’s given the same speech a thousand times. Sometimes, he doesn’t even change the words.”</i>", parse);
 			Text.NL();
@@ -898,7 +898,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		// Introductory text
 		Scenes.Rigard.ChatterIntro(parse, enteringArea);
 		Text.NL();
-		Text.Add("<i>“Why do they call that royal guard captain Preston the Shining?”</i> the [NPC1] asks.", parse);
+		Text.Add("<i>“Why do they call that Royal Guard captain Preston the Shining?”</i> the [NPC1] asks.", parse);
 		Text.NL();
 		Text.Add("<i>“Guess you haven’t seen him, or you’d know,”</i> the [NPC2] says. <i>“Keeps his armor burnished till it could be used for a mirror.”</i>", parse);
 		Text.NL();
@@ -915,7 +915,7 @@ Scenes.Rigard.Chatter2 = function(enteringArea) {
 		// Introductory text
 		Scenes.Rigard.ChatterIntro(parse, enteringArea);
 		Text.NL();
-		Text.Add("<i>“...noble idea to uphold morals, but Preston doesn’t understand that debauchery was always here, and it will always be here,”</i> the [NPC1] says. <i>“It is not the place of the royal guard to somehow try to change that.”</i>", parse);
+		Text.Add("<i>“...noble idea to uphold morals, but Preston doesn’t understand that debauchery was always here, and it will always be here,”</i> the [NPC1] says. <i>“It is not the place of the Royal Guard to somehow try to change that.”</i>", parse);
 		Text.NL();
 		Text.Add("The [NPC2] nods. <i>“Heh, I heard before his father became a minister, he managed a cabaret with burlesque, special entertainment in the back, the whole package.”</i>", parse);
 		Text.NL();
@@ -1573,7 +1573,7 @@ Scenes.Rigard.Lockdown = function() {
 		}
 		Text.Add("Clearing your throat, you declare that's quite an extensive list of crimes. But leaving a calling card? What kind of thief does that - surely they must have known it would have given the nobles more reason to send the guards after them?", parse);
 		Text.NL();
-		Text.Add("Miranda takes a long swig of her drink. <i>“Beats me. Probably some sadistic asshole. Like I said, people don’t care much for Krawitz, even the nobles dislike the guy. But if a thief leaves a card mocking the royal guard and the city watch, we just have to go after the prick and make an example out of them,”</i> she downs the rest of her bottle.", parse);
+		Text.Add("Miranda takes a long swig of her drink. <i>“Beats me. Probably some sadistic asshole. Like I said, people don’t care much for Krawitz, even the nobles dislike the guy. But if a thief leaves a card mocking the Royal Guard and the city watch, we just have to go after the prick and make an example out of them,”</i> she downs the rest of her bottle.", parse);
 		Text.NL();
 		Text.Add("You nod in understanding; that sort of logic certainly makes sense to you. This thief clearly has a problem with their ego if they went and stirred up the hornet's nest like this. You feel sorry for them, but they kind of brought this on themselves.", parse);
 		Text.NL();

@@ -274,7 +274,7 @@ Kiakai.prototype.TalkPrompt = function() {
 	// TALK ABOUT EDEN
 	options.push({ nameStr: "Eden",
 		func : Scenes.Kiakai.TalkEden, enabled : true,
-		tooltip : "Ask about the land of Eden and it's people."
+		tooltip : "Ask about the land of Eden and its people."
 	});
 	// TALK ABOUT ELVES
 	options.push({ nameStr: "Elves",
@@ -316,20 +316,16 @@ Scenes.Kiakai = {};
 Scenes.Kiakai.RavenDreams = function() {
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer()
+		name   : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	Text.Clear();
 	Text.Add("You briefly tell [name] about the ravens you’ve noticed watching you in your dreams.", parse);
 	Text.NL();
-	Text.Add("<i>“That is very strange, [playername],”</i> [heshe] responds. <i>“Of course there are legends of demons and spirits appearing in people’s dreams, but I have never thought that anyone but lady Aria could actually do so. Yet I admit that what you say does not sound like a coincidence. It must be some form of powerful magic. You must be careful, [playername]!”</i>", parse);
+	Text.Add("<i>“That is very strange, [playername],”</i> [heshe] responds. <i>“Of course there are legends of demons and spirits appearing in people’s dreams, but I have never thought that anyone but Lady Aria could actually do so. Yet I admit that what you say does not sound like a coincidence - it must be some form of powerful magic. You must be careful, [playername]!”</i>", parse);
 	Text.NL();
-	Text.Add("<i>“As to ravens themselves, there is something peculiar about them. There is a connection that elves feel with almost all life on Eden, with all the plants, and all the animals. Yet, that connection is not present with ravens.”</i> [name] rubs [hisher] chin pensively. <i>“I have heard that in some of our oldest scrolls, a time is mentioned when ravens simply appeared in the world.”</i>", parse);
+	Text.Add("<i>“As to ravens themselves, there is something peculiar about them. There is a connection that elves feel with almost all life on Eden, with all the plants, and all the animals. Somehow, that connection is not present with ravens.”</i> [name] rubs [hisher] chin pensively. <i>“I have heard that in some of our oldest scrolls, a time is mentioned when ravens simply appeared in the world.”</i>", parse);
 	Text.NL();
 	Text.Add("<i>“Where they came from or how they came to be here, even those scrolls do not say. It may be that this is somehow connected with what is happening in your dreams, but I am afraid you will have to find how for yourself.”</i>", parse);
 	Text.NL();
@@ -341,13 +337,9 @@ Scenes.Kiakai.TalkQuest = function() {
 	
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer()
+		name   : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	Text.Clear();
 	// Initial stage
@@ -358,12 +350,12 @@ Scenes.Kiakai.TalkQuest = function() {
 		Text.NL();
 		Text.Add("Couldn't you just ask Aria?", parse);
 		Text.NL();
-		Text.Add("<i>“The lady would no doubt be able to assist, but I have been unable to contact her since you arrived on Eden. We will need to seek out someone knowledgeable about such things - perhaps a powerful magician or a skilled alchemist.”</i>", parse);
+		Text.Add("<i>“The Lady would no doubt be able to assist, but I have been unable to contact her since you arrived on Eden. We will need to seek out someone knowledgeable about such things - perhaps a powerful magician or a skilled alchemist.”</i>", parse);
 	}
 	else {
-		Text.Add("<i>“Our first objective should be to find out more about that gemstone that you are carrying,”</i> [name] suggests. <i>“According to lady Aria, it holds great power. If you are able to wield it, maybe it can be used to stop Uru before it is too late.”</i>", parse);
+		Text.Add("<i>“Our first objective should be to find out more about that gemstone that you are carrying,”</i> [name] suggests. <i>“According to Lady Aria, it holds great power. If you are able to wield it, maybe it can be used to stop Uru before it is too late.”</i>", parse);
 		Text.NL();
-		Text.Add("When you ask [himher] how to best achieve that, the elf frowns thoughtfully. <i>“I know nothing of the magic that powers this artifact, we will need to find either a powerful magician or a skilled alchemist who can study it closer.”</i> [name] lets out a sigh of frustration, <i>“The lady would no doubt be able to assist, but I have been unable to contact her since you arrived on Eden. I am afraid we are on our own.”</i>", parse);
+		Text.Add("When you ask [himher] how to best achieve that, the elf frowns thoughtfully. <i>“I know nothing of the magic that powers this artifact. We will need to find either a powerful magician or a skilled alchemist who can study it closer.”</i> [name] lets out a sigh of frustration. <i>“The Lady would no doubt be able to assist, but I have been unable to contact her since you arrived on Eden. I am afraid we are on our own.”</i>", parse);
 	}
 	Text.NL();
 	
@@ -378,7 +370,7 @@ Scenes.Kiakai.TalkQuest = function() {
 			Text.Add("<i>“Question is, how do we get in?”</i>", parse);
 			
 			Text.NL();
-			Text.Add("<i>“Perhaps we could try to have one of the farmers sneak us in. They must pass inside regularly to sell their produce. We will have to make sure they're friendly enough to let us tag along, however.”</i>", parse);
+			Text.Add("<i>“Perhaps we could try to have one of the farmers sneak us in. They must pass inside regularly to sell their produce. We will have to make sure they are friendly enough to let us tag along, however.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“I am sure we will be able to find other ways of gaining entrance eventually as well.”</i>", parse);
 		}
@@ -399,20 +391,16 @@ Scenes.Kiakai.TalkAria = function() {
 	
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer()
+		name   : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	Text.Clear();
 	// First time
 	if(kiakai.flags["TalkedAria"] == 0) {
 		
 		if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
-			Text.Add("<i>“You may be ignorant of much, [playername], but you have had the honor of standing in her presence yourself.”</i> [name] looks a little angry, perhaps almost jealous. <i>“She is the lady of light, the embodiment of good in the worlds. Surely you must have seen at least that much?”</i>", parse);
+			Text.Add("<i>“You may be ignorant of much, [playername], but you have had the honor of standing in her presence yourself.”</i> [name] looks a little angry, perhaps almost jealous. <i>“She is the Lady of Light, the embodiment of good in the worlds. Surely you must have seen at least that much?”</i>", parse);
 		}
 		else {
 			Text.Add("<i>“I guess things have been dropped on you rather suddenly, [playername],”</i> [name] concedes, looking rather embarrassed. <i>“It was not my intention to keep you in the dark about anything. Please, ask me anything you would like to know.”</i>", parse);
@@ -425,24 +413,24 @@ Scenes.Kiakai.TalkAria = function() {
 			Text.Add("<i>“It is good that you take interest in her.”</i> The elf seems a little relieved that you're interested in [hisher] goddess. ", parse);
 		}
 		else {
-			Text.Add("<i>“Certainly!”</i> The elf looks happy that you brought up this particular topic, it seems that [heshe] definitely is a devout follower. ", parse);
+			Text.Add("<i>“Certainly!”</i> The elf looks happy that you brought up this particular topic. It seems that [heshe] definitely is a devout follower. ", parse);
 		}
-		Text.Add("<i>“Lady Aria is revered by many here on Eden, and with good reason. While it is not common, there have been incidents with portals to other worlds opening up prior to your arrival here,”</i> [name] starts out, <i>“Sometimes through design, sometimes due to happenstance, sometimes due to malice. The times that something... untoward emerged from the other side, the lady exerted her powers to bind it before it could cause significant harm.”</i>", parse);
+		Text.Add("<i>“Lady Aria is revered by many here on Eden, and with good reason. While it is not common, there have been incidents with portals to other worlds opening up prior to your arrival here,”</i> [name] starts out, <i>“sometimes through design, sometimes due to happenstance, sometimes due to malice. The times that something... untoward emerged from the other side, the Lady exerted her powers to bind it before it could cause significant harm.”</i>", parse);
 		Text.NL();
 		Text.Add("You ask how long this has been going on. <i>“The records are not clear on this, and the records of my people go back a long time,”</i> [name] answers you. <i>“These kinds of portals have been opening on Eden for thousands of years, as far as I know.”</i>", parse);
 		Text.NL();
 		
 		if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
-			Text.Add("<i>“Is there anything else that you would like to know about lady Aria, [playername]?”</i>", parse);
+			Text.Add("<i>“Is there anything else that you would like to know about Lady Aria, [playername]?”</i>", parse);
 		else
-			Text.Add("<i>“Tell me, is there anything else that you would like to know about lady Aria, [playername]?”</i>", parse);
+			Text.Add("<i>“Tell me, is there anything else that you would like to know about Lady Aria, [playername]?”</i>", parse);
 		
 		kiakai.relation.IncreaseStat(50, 2);
 		
 		kiakai.flags["TalkedAria"] = 1;
 	}
 	else {
-		Text.Add("<i>“What else would you like to know about lady Aria, [playername]?”</i>", parse);
+		Text.Add("<i>“What else would you like to know about Lady Aria, [playername]?”</i>", parse);
 	}
 	Text.Flush();
 	
@@ -455,9 +443,9 @@ Scenes.Kiakai.TalkAria = function() {
 			Text.NL();
 			
 			if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
-				Text.Add("[name], looking affronted, replies curtly, <i>“She is the caretaker of the worlds, [playername]! It is her very nature to protect those who follow and worship her!”</i> You explain that while she did seem benevolent when you met her, you still need to find out everything you can about your situation. Still a bit huffy, [heshe] goes on, <i>“It is not for us to know exactly what the lady's plans are, we need only trust in her and we will no doubt prevail. I do know that you are instrumental for them, however.”</i>", parse);
+				Text.Add("[name], looking affronted, replies curtly, <i>“She is the caretaker of the worlds, [playername]! It is her very nature to protect those who follow and worship her!”</i> You explain that while she did seem benevolent when you met her, you still need to find out everything you can about your situation. Still a bit huffy, [heshe] goes on, <i>“It is not for us to know exactly what the Lady's plans are, we need only trust in her and we will no doubt prevail. I do know that you are instrumental for them, however.”</i>", parse);
 			else
-				Text.Add("[name], looking affronted, replies curtly, <i>“For the safety of those who follow and worship her, of course!”</i> You calm the elf down, explaining that you meant no offense. Still a bit huffy, [heshe] continues, <i>“It is not for me to know exactly what the lady's plans are, but I do know that you are instrumental for them.”</i>", parse);
+				Text.Add("[name], looking affronted, replies curtly, <i>“For the safety of those who follow and worship her, of course!”</i> You calm the elf down, explaining that you meant no offense. Still a bit huffy, [heshe] continues, <i>“It is not for me to know exactly what the Lady's plans are, but I do know that you are instrumental for them.”</i>", parse);
 			Text.NL();
 			Text.Add("When you ask exactly what [heshe] means by that, [name] only responds that something about you, or perhaps the gem you carry, could greatly change the future of Eden. [HeShe] seems unwilling or unable to explain more details at this point.", parse);
 			Text.Flush();
@@ -474,32 +462,28 @@ Scenes.Kiakai.TalkUru = function() {
 	
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer()
+		name   : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	Text.Clear();
 	
 	if(kiakai.flags["TalkedUru"] == 0) {
-		Text.Add("<i>“I would rather not dwell on the dark one longer than I have to, [playername],”</i> [name] tells you in a pained voice, <i>“But one must know their enemy to stand against it in battle.”</i>", parse);
+		Text.Add("<i>“I would rather not dwell on the dark one longer than I have to, [playername],”</i> [name] tells you in a pained voice, <i>“but one must know their enemy to stand against it in battle.”</i>", parse);
 		Text.NL();
-		Text.Add("The elf clears [hisher] throat, preparing for a longer dissertation. <i>“Uru is a foul and evil creature, utterly selfish and chaotically destructive,”</i> [heshe] begins, <i>“I know very little of the details, but she and lady Aria have battled with each other before, though I do not know where.”</i>", parse);
+		Text.Add("The elf clears [hisher] throat, preparing for a longer dissertation. <i>“Uru is a foul and evil creature, utterly selfish and chaotically destructive,”</i> [heshe] begins, <i>“I know very little of the details, but she and Lady Aria have battled with each other before, though I do not know where.”</i>", parse);
 		Text.NL();
 		
 		if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
-			Text.Add("<i>“I thankfully have not experienced it as you have. I have seen visions of the hellish realm she has been trapped in,”</i> [name] shudders uncomfortably. <i>“The truly terrible thing is that that realm was once lush and filled with life, now it is nothing more than a defiled wasteland, plagued by demons.”</i>", parse);
+			Text.Add("<i>“I thankfully have not experienced it as you have. I have seen visions of the hellish realm she has been trapped in,”</i> [name] shudders uncomfortably. <i>“The truly terrible thing is: that realm was once lush and filled with life. Now, it is nothing more than a defiled wasteland, plagued by demons.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Do not trust her under any circumstances, [playername]! She is treacherous, the very embodiment of evil!”</i> The elf adds, clearly worried.", parse);
 		}
 		else
-			Text.Add("<i>“And though I thankfully have not experienced it as you have, I have seen visions of the hellish realm she has been trapped in,”</i> [name] shudders uncomfortably, <i>“That realm was once lush and filled with life, now it is nothing more than a defiled wasteland, plagued by demons.”</i>", parse);
+			Text.Add("<i>“While I thankfully have not experienced it as you have, I have seen visions of the hellish realm she has been trapped in,”</i> [name] shudders uncomfortably. <i>“That realm was once lush and filled with life, now it is nothing more than a defiled wasteland, plagued by demons.”</i>", parse);
 		
 		Text.NL();
-		Text.Add("<i>“Where she came from, what she is, what her goals are, the lady has yet to see fit to inform me. A kindness, I imagine,”</i> the elf concedes, <i>“I am afraid that you have to ask the lady yourself to find out more. I will try to answer any questions you have to the best of my abilities, though.”</i>", parse);
+		Text.Add("<i>“Where she came from, what she is, what her goals are, the Lady has yet to see fit to inform me - a kindness, I imagine,”</i> the elf concedes. <i>“I am afraid that you have to ask the Lady yourself to find out more. I will try to answer any questions you have to the best of my abilities, though.”</i>", parse);
 		kiakai.relation.IncreaseStat(50, 2);
 		
 		kiakai.flags["TalkedUru"] = 1;
@@ -516,15 +500,15 @@ Scenes.Kiakai.TalkUru = function() {
 		func : function() {
 			Text.Clear();
 			
-			Text.Add("[name] frowns, trying to collect [hisher] thoughts, <i>“All I know is that lady Aria has done battle with the one known as Uru before, and that their last conflict ended in Uru being trapped in the realm you saw but a brief glimpse of.”</i>", parse);
+			Text.Add("[name] frowns, trying to collect [hisher] thoughts, <i>“All I know is that Lady Aria has done battle with the one known as Uru before, and that their last conflict ended in Uru being trapped in the realm you saw but a brief glimpse of.”</i>", parse);
 			Text.NL();
 			Text.Add("What of Aria herself, you ask, did she suffer any consequence from the battle?", parse);
 			Text.NL();
-			Text.Add("<i>“The lady bested her adversary, of course she did, and even showed mercy on the foul creature,”</i> the elf sorrowfully bows [hisher] head, <i>“While she did not suffer any wounds, the encounter drained her, and she has yet to manifest on Eden since.”</i>", parse);
+			Text.Add("<i>“The lady bested her adversary, of course she did, and even showed mercy on the foul creature,”</i> the elf sorrowfully bows [hisher] head. <i>“While she did not suffer any wounds, the encounter drained her, and she has yet to manifest on Eden since.”</i>", parse);
 			Text.NL();
 			Text.Add("In power, would [name] say they are evenly matched?", parse);
 			Text.NL();
-			Text.Add("<i>“No! Of course not!”</i> the elf exclaims, <i>“No mere demon could ever match the lady.”</i>", parse);
+			Text.Add("<i>“No! Of course not!”</i> the elf exclaims. <i>“No mere demon could ever match the Lady.”</i>", parse);
 			Text.Flush();
 			
 			Gui.NextPrompt(Scenes.Kiakai.TalkUru);
@@ -616,7 +600,7 @@ Scenes.Kiakai.TalkUru = function() {
 				kiakai.flags["TalkedUruDA"] = 1;
 			}
 			else {
-				Text.Add("<i>“Though no fault of yours, it seems that safety could now be at an end, but only time will tell,”</i> the elf shudders with unease, <i>“Uru is very, very powerful. Should she ever unleash the full force of her wrath on Eden, we would be as ants before her. It must not come to a direct confrontation.”</i>", parse);
+				Text.Add("<i>“Though no fault of yours, it seems that safety could now be at an end, but only time will tell,”</i> the elf shudders with unease. <i>“Uru is very, very powerful. Should she ever unleash the full force of her wrath on Eden, we would be as ants before her. It must not come to a direct confrontation.”</i>", parse);
 				if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
 					Text.NL();
 					Text.Add("<i>“Please, help us to prevent her coming.”</i>", parse);
@@ -632,7 +616,7 @@ Scenes.Kiakai.TalkUru = function() {
 		func : function() {
 			Text.Clear();
 			
-			Text.Add("<i>“Before Uru was sealed in the dark realm, many worlds fell under her influence,”</i> [name] intones sorrowfully, <i>“Twisted, corrupted, defiled; they all succumbed, until lady Aria intervened.”</i>", parse);
+			Text.Add("<i>“Before Uru was sealed in the dark realm, many worlds fell under her influence,”</i> [name] intones sorrowfully. <i>“Twisted, corrupted, defiled; they all succumbed, until Lady Aria intervened.”</i>", parse);
 			Text.NL();
 			if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral)
 				Text.Add("<i>“Uru's very presence is enough to corrupt those around her. I hope your stay was brief enough that you were not significantly affected,”</i> the elf concludes, sounding a little suspicious.", parse);
@@ -652,13 +636,9 @@ Scenes.Kiakai.TalkEden = function() {
 	
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer()
+		name   : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	Text.Clear();
 	Text.Add("<i>“What would you like to know about Eden, [playername]?”</i>", parse);
@@ -675,7 +655,7 @@ Scenes.Kiakai.TalkEden = function() {
 			scenes.push(function() {
 				Text.Add("You ask about the most prominent aspect of the entire island, the giant tree rising thousands of feet into the air, covering large parts of Eden in the shadow its foliage.", parse);
 				Text.NL();
-				Text.Add("<i>“The tree stands at the center, its roots delve deep,”</i> [name] intones in a reverent voice, <i>“As far as I know, it has always been here. Only the dragons - the oldest beings that live on Eden - have any idea from whence it came and how it came to grow so big. The tree is a symbol of life and the power of nature, and many on Eden worship it, calling it 'The Mother of All'.”</i>", parse);
+				Text.Add("<i>“The tree stands at the center, its roots delve deep,”</i> [name] intones in a reverent voice. <i>“As far as I know, it has always been here. Only the dragons - the oldest beings that live on Eden - have any idea from whence it came and how it came to grow so big. The tree is a symbol of life and the power of nature, and many on Eden worship it, calling it 'The Mother of All'.”</i>", parse);
 				Text.NL();
 				
 				// TODO: VISITED TREE CITY
@@ -696,18 +676,18 @@ Scenes.Kiakai.TalkEden = function() {
 				
 				// TODO: OTHER CITIES
 				
-				Text.Add("<i>“Other than that, there are a few smaller civilized settlements on the plains, and on the far side of the great tree,”</i> [name] concludes [hisher] explanation, <i>“The village I once called my home is located there.”</i>", parse);
+				Text.Add("<i>“Other than that, there are a few smaller civilized settlements on the plains, and on the far side of the Great Tree,”</i> [name] concludes [hisher] explanation. <i>“The village I once called my home is located there.”</i>", parse);
 			});
 			// DANGER
 			scenes.push(function() {
 				Text.Add("You ask about what places one should best avoid.", parse);
 				Text.NL();
 				
-				Text.Add("<i>“The desert, the high mountains, and the deeper reaches of the forest can be very dangerous to unprepared travelers,”</i> the elf confides, <i>“But the place you must be most careful of is the Boneyard, near the highlands. Stay <b>far</b> away from that place, or you will be sorry.”</i>", parse);
+				Text.Add("<i>“The desert, the high mountains, and the deeper reaches of the forest can be very dangerous to unprepared travelers,”</i> the elf confides, <i>“but the place you must be most careful of is the Boneyard, near the highlands. Stay <b>far</b> away from that place, or you will be sorry.”</i>", parse);
 				Text.NL();
 				Text.Add("The Boneyard? Why is it called that?", parse);
 				Text.NL();
-				Text.Add("<i>“The place is named after the bones of the great dragons that went there to die,”</i> the elf shudders in discomfort, <i>“It is crawling with the bastard offspring of the dragons of old, and though no one has seen it in a long time, it is rumored one of the ancient beasts still resides there. If something like that catches you, you would be as good as dead.”</i>", parse);
+				Text.Add("<i>“The place is named after the bones of the great dragons that went there to die,”</i> the elf shudders in discomfort. <i>“It is crawling with the bastard offspring of the dragons of old, and though no one has seen it in a long time, it is rumored one of the ancient beasts still resides there. If something like that catches you, you would be as good as dead.”</i>", parse);
 				Text.NL();
 				Text.Add("[name] frowns a bit, <i>“There have been rumors about people disappearing without a trace while traversing the desert. If you plan to head there, be very careful.”</i>", parse);
 			});
@@ -759,27 +739,27 @@ Scenes.Kiakai.TalkEden = function() {
 			});
 			// MORPHS
 			scenes.push(function() {
-				Text.Add("<i>“Creatures with characteristics resembling animals have been arriving to Eden from their various home realms for ages,”</i> the elf explains, <i>“Now they are a natural part of the population, just as common as pure humans.”</i>", parse);
+				Text.Add("<i>“Creatures with characteristics resembling animals have been arriving to Eden from their various home realms for ages,”</i> the elf explains. <i>“Now, they are a natural part of the population, just as common as pure humans.”</i>", parse);
 				
 				// TODO: EXPAND?
 				
 			});
 			// MAGICAL BEINGS
 			scenes.push(function() {
-				Text.Add("<i>“Well, there are many on Eden you could classify as magical,”</i> the elf ruefully motions to [himher]self, <i>“Some consider my own race as such. You could say that this is a good place to live for beings that depend on magic, as it is very easy to coax tendrils of power from the very land itself.”</i>", parse);
+				Text.Add("<i>“Well, there are many on Eden you could classify as magical,”</i> the elf ruefully motions to [himher]self. <i>“Some consider my own race as such. You could say that this is a good place to live for beings that depend on magic, as it is very easy to coax tendrils of power from the very land itself.”</i>", parse);
 				Text.NL();
 				Text.Add("You ask how [heshe] would know the difference, if [heshe] has been living on Eden for [hisher] whole life.", parse);
 				Text.NL();
-				Text.Add("<i>“Portals to other realms were more commonplace in my youth, and I have made short surveys into a few of them at the behest of the lady. None of them felt quite... right, as if one of my senses had been cut off. It was quite unpleasant.”</i> [name] shudders slightly.", parse);
+				Text.Add("<i>“Portals to other realms were more commonplace in my youth, and I have made short surveys into a few of them at the behest of the Lady. None of them felt quite... right, as if one of my senses had been cut off. It was quite unpleasant.”</i> [name] shudders slightly.", parse);
 				Text.NL();
 				Text.Add("<i>“Getting back to your question, there are many forms of spirits living in the less populated areas, some benign and some hostile. The greatest of the magical beings are the ancient dragons, but no one has seen one of them in a very long time.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“It is best to remain wary if things seem out of the ordinary. Trust your senses, you seem to have an affinity for the magical.”</i>", parse);
+				Text.Add("<i>“It is best to remain wary if things seem out of the ordinary. Trust your senses; you seem to have an affinity for the magical.”</i>", parse);
 			});
 			// RABBITS
 			scenes.push(function() {
 				if(burrows.flags["Access"] == Burrows.AccessFlags.Unknown) {
-					Text.Add("<i>“Some of the priests at the shrine told me about strange creatures they encountered on the plains, walking upright like humans, but very similar to rabbits in appearance. They are fleet-footed, and ran away before the travelling priests could get a closer look at them.”</i>", parse);
+					Text.Add("<i>“Some of the priests at the shrine told me about strange creatures they encountered on the plains, walking upright like humans, but very similar to rabbits in appearance. They are fleet-footed, and ran away before the traveling priests could get a closer look at them.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“According to the locals, they tend to stay together in small groups, and avoid travelers and larger settlements. As I understand it, they are not very sophisticated or intelligent.”</i>", parse);
 				}
@@ -865,13 +845,13 @@ Scenes.Kiakai.TalkFactions = function() {
 	var scenes = [];
 	// KINGDOM
 	scenes.push(function() {
-		Text.Add("<i>“The royal family rules over the largest city on Eden, and a good portion of the plains is under their control. They are purebred humans, and they have a strong distaste for other races. Non-humans and mixed races do best in staying far away from the castle and the royal guard, though the city itself is fine.”</i>", parse);
+		Text.Add("<i>“The royal family rules over the largest city on Eden, and a good portion of the plains is under their control. They are purebred humans, and they have a strong distaste for other races. Non-humans and mixed races do best in staying far away from the castle and the Royal Guard, though the city itself is fine.”</i>", parse);
 		Text.NL();
 		Text.Add("Who is the current king, and why does he hate other races so?", parse);
 		Text.NL();
-		Text.Add("<i>“Rewyn the Second is king, and Rhylla is his queen,”</i> [name] tells you, <i>“As for his hatred for non-humans... it is more a deeply ingrained fear, fueled over the generations. The pure line has been dwindling for years.”</i>", parse);
+		Text.Add("<i>“Rewyn the Second is king, and Rhylla is his queen,”</i> [name] tells you. <i>“As for his hatred for non-humans... it is more a deeply ingrained fear, fueled over the generations. The pure line has been dwindling for years.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“Rewyn has two children; the twins, Rumi and Rani.”</i>", parse);
+		Text.Add("<i>“Rewyn has two children: the twins, Rumi and Rani.”</i>", parse);
 	});
 	// NOMADS
 	scenes.push(function() {
@@ -881,17 +861,17 @@ Scenes.Kiakai.TalkFactions = function() {
 	});
 	// OUTLAWS
 	scenes.push(function() {
-		Text.Add("<i>“All those who oppose the king are branded outlaws,”</i> [name] explains, <i>“There are actually many factions of them, but the largest group hides out in the forest. Thieves and murderers many of them, a rather unsavory group.”</i>", parse);
+		Text.Add("<i>“All those who oppose the king are branded outlaws,”</i> [name] explains. <i>“There are actually many factions of them, but the largest group hides out in the forest. Thieves and murderers many of them, a rather unsavory group.”</i>", parse);
 		Text.NL();
 		Text.Add("What are the laws of the kingdom regarding those outlaws?", parse);
 		Text.NL();
-		Text.Add("<i>“Anyone belonging to an outlaw faction, or being found guilty of helping one, risk imprisonment or, at worst, death at the hand of the royal guard.”</i>", parse);
+		Text.Add("<i>“Anyone belonging to an outlaw faction, or being found guilty of helping one, risk imprisonment or, at worst, death at the hand of the Royal Guard.”</i>", parse);
 	});
 	// SHRINE
 	scenes.push(function() {
-		Text.Add("<i>“The shrine of lady Aria has been my home for many years,”</i> [name] tells you, recalling fond memories, <i>“The priests and priestesses are very kind, and well versed in the arts of healing.”</i>", parse);
+		Text.Add("<i>“The Shrine of Lady Aria has been my home for many years,”</i> [name] tells you, recalling fond memories. <i>“The priests and priestesses are very kind, and well versed in the arts of healing.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“Many on Eden request the services of the shrine, or go on pilgrimages to visit the holy place. High priestess Yrissa welcomes all pure souls within the sacred walls of the lady.”</i>", parse);
+		Text.Add("<i>“Many on Eden request the services of the shrine, or go on pilgrimages to visit the holy place. High Priestess Yrissa welcomes all pure souls within the sacred walls of the Lady.”</i>", parse);
 		Text.NL();
 		Text.Add("Where exactly is the shrine located?", parse);
 		Text.NL();
@@ -899,11 +879,11 @@ Scenes.Kiakai.TalkFactions = function() {
 	});
 	// DESERT OASIS
 	scenes.push(function() {
-		Text.Add("<i>“The desert is a rough place to live, but there is said to be a safe haven hidden among the dunes, a great oasis where water and food is plentiful. I have never visited the place myself though,”</i> [name] reveals, <i>“The kingdom troops do not go there, so it is pretty much under its own laws.”</i>", parse);
+		Text.Add("<i>“The desert is a rough place to live, but there is said to be a safe haven hidden among the dunes, a great oasis where water and food is plentiful. I have never visited the place myself though,”</i> [name] reveals. <i>“The kingdom troops do not go there, so it is pretty much under its own laws.”</i>", parse);
 		Text.NL();
 		Text.Add("How would one go about visiting there?", parse);
 		Text.NL();
-		Text.Add("<i>“Just heading out into the desert is begging for trouble to happen, you would be lost very quickly. The safest way to reach the oasis is to go with one of the trading caravans that pass through there. They sometime make a stop at the crossroads and at the capital.”</i>", parse);
+		Text.Add("<i>“Just heading out into the desert is begging for trouble to happen, you would be lost very quickly. The safest way to reach the oasis is to go with one of the trading caravans that pass through there. They sometimes make a stop at the crossroads and at the capital.”</i>", parse);
 		Text.NL();
 		Text.Add("[name] frowns a bit, <i>“There have been rumors about people disappearing without a trace while traversing the desert, not even leaving bones behind. If you plan to head there, be very careful.”</i>", parse);
 	});
@@ -942,7 +922,7 @@ Scenes.Kiakai.TalkElves = function() {
 		Text.NL();
 		Text.Add("<i>“My people live in small groups, building villages to be as close to nature as possible. Many of them live in the forest, some building villages in the branches of the trees to stay safe from the dangerous animals that occasionally roam below. My own village was on the shore - my people love the life of the sea, as well as strength of the trees. I had spent but ten years of my life there, when a priestess of Aria stopped by, and I decided I needed to go with her and join the priesthood.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“Most Elves worship the Great Tree and try to live fully in tune with nature. When they gather plants, they make sure to spread their seeds, so the plant will continue to grow. They hunt animals only when sure the species is flourishing and no harm will be done by the culling.”</i>", parse);
+		Text.Add("<i>“Most elves worship the Great Tree and try to live fully in tune with nature. When they gather plants, they make sure to spread their seeds, so the plant will continue to grow. They hunt animals only when sure the species is flourishing and no harm will be done by the culling.”</i>", parse);
 		
 		kiakai.relation.IncreaseStat(50, 2);
 		
@@ -964,7 +944,7 @@ Scenes.Kiakai.TalkElves = function() {
 			scenes.push(function() {
 				Text.Add("<i>“One of the biggest differences between elves and humans is how long we live,”</i> [name] tells you. <i>“Where humans live only a few score years, elves' lifetimes are measured in hundreds. The elders of my village were all past their fourth century when I left.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“This difference runs much deeper than the number of years, [playername]. Elves know that they have time to grow, to learn, to act. Though they make quick decisions when they must, they prefer to think and discuss very carefully anything they find important.”</i> [name] smiles fondly. <i>“I have heard a tale that once there was an elf who fell in love with a human. He told his people, and asked for their advice, wondering if they would accept his choice. The tale says they discussed it long and hard, and in the end decided that if that was the way of his heart, there was no ill in it. But when he went to the girl to bring her the joyful news, he found her an old woman, and married besides.”</i> [name] laughs at [hisher] story, and you find it difficult to not join [himher].", parse);
+				Text.Add("<i>“This difference runs much deeper than the number of years, [playername]. Elves know that they have time to grow, to learn, to act. Though they make quick decisions when they must, they prefer to think and discuss very carefully anything they find important.”</i> [name] smiles fondly. <i>“I have heard a tale that once there was an elf who fell in love with a human. He told his people, and asked for their advice, wondering if they would accept his choice. The tale says they discussed it long and hard, and in the end decided that if that was the way of his heart, there was no ill in it. When he finally went to the girl to bring her the joyful news, he found her an old woman, and married besides.”</i> [name] laughs at [hisher] story, and you find it difficult to not join [himher].", parse);
 				Text.NL();
 				if(kiakai.relation.Get() > 25)
 					Text.Add("<i>“Death is also much more terrible for the elves,”</i> [name] tells you, [hisher] eyes looking haunted. <i>“My kind have few children, and there are not many of us, so the loss of even a single life before it reaches its fullness is a great horror to us all.”</i>", parse);
@@ -1025,7 +1005,7 @@ Scenes.Kiakai.TalkElves = function() {
 			scenes.push(function() {
 				Text.Add("Why are elvish children so rare?", parse);
 				Text.NL();
-				Text.Add("<i>“Elvish women are only rarely fertile,”</i> [name] explains, blushing slightly at discussing this topic. <i>“There is a grand cycle of abundance in nature that affects the elves. It runs about twelve years, although it varies a little from one to the next, and it is only when the cycle is at its peak that an elf can be fertile. And even if that condition is satisfied, i-intercourse will only rarely take and result in a child.”</i>", parse);
+				Text.Add("<i>“Elvish women are only rarely fertile,”</i> [name] explains, blushing slightly at discussing this topic. <i>“There is a grand cycle of abundance in nature that affects the elves. It runs about twelve years, although it varies a little from one to the next, and it is only when the cycle is at its peak that an elf can be fertile - and even if that condition is satisfied, i-intercourse will only rarely take and result in a child.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“So you see why children are so precious to my people.”</i>", parse);
 			});
@@ -1033,7 +1013,7 @@ Scenes.Kiakai.TalkElves = function() {
 			scenes.push(function() {
 				Text.Add("Didn't you get lonely without having parents who focus on you?", parse);
 				Text.NL();
-				Text.Add("<i>“Oh, no, not at all,”</i> [name] tells you. <i>“Elves do not feel lonely just because of that. After all we have the entire community to support us. This is how elves have lived as far back as our lore reaches, so it must be a way of living that is comfortable for us...”</i> [name] trails off, sounding a little sad.", parse);
+				Text.Add("<i>“Oh, no, not at all,”</i> [name] tells you. <i>“Elves do not feel lonely just because of that. After all, we have the entire community to support us. This is how elves have lived as far back as our lore reaches, so it must be a way of living that is comfortable for us...”</i> [name] trails off, sounding a little sad.", parse);
 			});
 			
 			var sceneId = kiakai.flags["RotElfParents"];
@@ -1168,7 +1148,7 @@ Scenes.Kiakai.TalkElves = function() {
 				Text.Add("<i>“One day, a priestess came to my village,”</i> [name] tells you, and pauses briefly, clearly deciding what to say next. <i>“Though we did not worship Aria, she was still generous to us, and aided us with healing. I was impressed as much by her as her abilities, and I saw also the goodness of Aria within her. I decided I too wanted to be able to help people as she did, and went with her to join the priesthood.”</i>", parse);
 				Text.NL();
 				if(kiakai.flags["Attitude"] > Kiakai.Attitude.Neutral) {
-					Text.Add("You see pain in the elf's eyes and sense that there's much [heshe]'s not telling you, however you decide not to press the issue. [HeShe] will tell you when [heshe] is ready.", parse);
+					Text.Add("You see pain in the elf's eyes and sense that there's much [heshe]'s not telling you, but you decide not to press the issue. [HeShe] will tell you when [heshe] is ready.", parse);
 					Text.Flush();
 					Gui.NextPrompt(Scenes.Kiakai.TalkElves);
 				}
@@ -1187,7 +1167,7 @@ Scenes.Kiakai.TalkElves = function() {
 								Text.Clear();
 								Text.Add("You tell the elf that you demand to know the whole truth. You're in charge here, and [heshe] <i>will</i> tell you.", parse);
 								Text.NL();
-								Text.Add("<i>“I will not!”</i> [name] shouts at you, clearly furious. <i>“I might be helping you because lady Aria asked it of me, but that gives you no right to my past!”</i>", parse);
+								Text.Add("<i>“I will not!”</i> [name] shouts at you, clearly furious. <i>“I might be helping you because Lady Aria asked it of me, but that gives you no right to my past!”</i>", parse);
 								Text.NL();
 								Text.Add("[HeShe] turns away from you, and stalks a little ways off.", parse);
 								Text.Flush();
@@ -1227,13 +1207,9 @@ Scenes.Kiakai.TalkElves = function() {
 Scenes.Kiakai.TalkDimensionalViolation = function() {
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer()
+		name   : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	Text.Clear();
 	
@@ -1245,7 +1221,7 @@ Scenes.Kiakai.TalkDimensionalViolation = function() {
 			Text.Add("<i>“Very well, I will tell you the story again, if you wish to hear it, [playername],”</i> [name] says, seeming a little more comfortable with the prospect than [heshe] used to be.", parse);
 		}
 		else if(kiakai.flags["TalkedWhyLeaveLongReact"] == 2) { // DISMISS
-			Text.Add("<i>“Didn't you say it was boring?”</i> [name] asks, looking annoyed. <i>“Very well, I will tell you again, but try to pay attention this time.”</i>", parse);
+			Text.Add("<i>“Did you not say it was boring?”</i> [name] asks, looking annoyed. <i>“Very well, I will tell you again, but try to pay attention this time.”</i>", parse);
 		}
 		else {
 			Text.Add("<i>“Thank you for being patient with me, I... I think I will be able to tell the whole story this time.”</i> You nod encouragingly to [name].", parse);
@@ -1266,7 +1242,7 @@ Scenes.Kiakai.TalkDimensionalViolation = function() {
 	
 	Text.Add("<i>“By the time they arrived, the portal had closed, but outside it they found collapsed a peculiar creature. It resembled the dryads of our world, but its skin was blackened and cracked, and a sickly yellow pus oozed from its body. They brought the creature back to the village, thinking it ill, and wishing to heal it, for we have long been friends of the dryads.”</i>", parse);
 	Text.NL();
-	Text.Add("<i>“And it was indeed much weakened, for it lay motionless within the village for three days. When it awoke, however, its skin had not changed, and the pus now flowed from its half-open mouth, and... other parts.”</i> The elf shudders. <i>“I am told that when Treal, one of our elders, came upon it, it assaulted him, and he was barely able to hold it off while shouting for help. It was seen then that the creature was unnatural and it was put down, its body and very bones burned to a fine ash upon a bonfire of deadwood.”</i>", parse);
+	Text.Add("<i>“It was indeed much weakened, for it lay motionless within the village for three days. When it awoke, however, its skin had not changed, and the pus now flowed from its half-open mouth, and... other parts.”</i> The elf shudders. <i>“I am told that when Treal, one of our elders, came upon it, it assaulted him, and he was barely able to hold it off while shouting for help. It was seen then that the creature was unnatural and it was put down, its body and very bones burned to a fine ash upon a bonfire of deadwood.”</i>", parse);
 	Text.NL();
 	
 	if(kiakai.flags["TalkedWhyLeaveLong"] == 0) {
@@ -1308,23 +1284,19 @@ Scenes.Kiakai.TalkDimensionalViolationCont = function() {
 	
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer()
+		name   : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
-	Text.Add("<i>“Though the corrupt creature was dead, its body but ashes on the wind, we soon found that it had already caused grave ill. On the morning after the pyre, I saw a bird I had often seen singing to its mate lying dazed upon the ground under the tree of its nest. When I lifted it, it made little response, its breathing shallow, its tiny heart pounding desperately in its chest. I left it alone, thinking that perhaps it had grown old and its time was coming, for I had been taught that all beings must pass. That evening, however, I recall being dizzy, Treal laying me down on a bed, concern clear in his face.”</i>", parse);
+	Text.Add("<i>“Though the corrupt creature was dead - its body but ashes on the wind - we soon found that it had already caused grave ill. On the morning after the pyre, I saw a bird I had often seen singing to its mate lying dazed upon the ground under the tree of its nest. When I lifted it, it made little response, its breathing shallow, its tiny heart pounding desperately in its chest. I left it alone, thinking that perhaps it had grown old and its time was coming, for I had been taught that all beings must pass. That evening, however, I recall being dizzy, Treal laying me down on a bed, concern clear in his face.”</i>", parse);
 	Text.NL();
-	Text.Add("<i>“After that, I recall little of what occurred,”</i> [name] tells you, looking grim. <i>“I am told that all in the village sickened one by one, until none could care for another. Only a human fisherman, who had come to us the day of the pyre to trade, seemed unaffected. When he saw all around him grow ill, he took great fright and hurried as fast as he could to the shrine of Aria, where he hoped he could be healed.”</i>", parse);
+	Text.Add("<i>“After that, I recall little of what occurred,”</i> [name] tells you, looking grim. <i>“I am told that all in the village sickened one by one, until none could care for another. Only a human fisherman, who had come to us the day of the pyre to trade, seemed unaffected. When he saw all around him grow ill, he took great fright and hurried as fast as he could to the Shrine of Aria, where he hoped he could be healed.”</i>", parse);
 	Text.NL();
 	Text.Add("<i>“At the shrine, they found that he bore no trace of disease, but they sent a young priestess to check up on us. I wish they had chosen to send more than one, but it was our salvation that they responded at all. It was Yrissa who came to us, arriving after the village had been in the throes of plague for two full days. She has told me that she healed all the elves in turn, by herself, leaving me for last, for my illness was the most grievous of all, and she knew that even if she managed to overcome it, she would have no strength to move from the spot.”</i>", parse);
 	Text.NL();
-	Text.Add("<i>“As I say, I know nothing of what occurred myself, for my mind was clouded with dreams. I dreamt of endless forests, rotting where they stood. Of grasslands peeling away like the land's skin, leaving only a bare waste behind.”</i> [name] shudders, but goes on, as if mesmerized by [hisher] own tale. <i>“I dreamt of demons stalking the land, indulging in their vile pleasures. And then, after an eternity of darkness, I remember clearly I felt a tug at my mind. A tug that transformed into a steady pull, and then a swift flight, pulling me from this desolate realm, pulling me through the worlds into the gardens of lady Aria.”</i>", parse);
+	Text.Add("<i>“As I say, I know nothing of what occurred myself, for my mind was clouded with dreams. I dreamt of endless forests, rotting where they stood. Of grasslands peeling away like the land's skin, leaving only a bare waste behind.”</i> [name] shudders, but goes on, as if mesmerized by [hisher] own tale. <i>“I dreamt of demons stalking the land, indulging in their vile pleasures. And then, after an eternity of darkness, I remember clearly I felt a tug at my mind. A tug that transformed into a steady pull, and then a swift flight, pulling me from this desolate realm, pulling me through the worlds into the gardens of Lady Aria.”</i>", parse);
 	Text.NL();
-	Text.Add("<i>“But even in that blessed realm, I...”</i> The elf hesitates before continuing. <i>“Even there my spirit was not freed from taint. I remember looking around me and being disgusted by the life I saw. I remember seeing the lady herself and thinking it would be delightful to tear down her sanctity, to ravish her and make her beg for more.”</i> The elf starts at [hisher] own words, looking frightened by what [heshe] has said. [HeShe] swallows audibly before continuing. <i>“But then, the lady pressed her hand against my forehead, and I felt the fog lift from my thoughts. I felt a vast joy at being within this place of beauty, though it was too tame by elvish standards, at being in the presence of one so vastly good.”</i>", parse);
+	Text.Add("<i>“But even in that blessed realm, I...”</i> The elf hesitates before continuing. <i>“Even there my spirit was not freed from taint. I remember looking around me and being disgusted by the life I saw. I remember seeing the Lady herself and thinking it would be delightful to tear down her sanctity, to ravish her and make her beg for more.”</i> The elf starts at [hisher] own words, looking frightened by what [heshe] has said. [HeShe] swallows audibly before continuing. <i>“But then, the Lady pressed her hand against my forehead, and I felt the fog lift from my thoughts. I felt a vast joy at being within this place of beauty, though it was too tame by elvish standards, at being in the presence of one so vastly good.”</i>", parse);
 	Text.NL();
 	Text.Add("The elf smiles, happy at the bright memory. <i>“There is not much to tell after that. I woke up, fully healed, and saw Yrissa collapsed before me, the elders observing us both. Though I did not know her then, I knew she was the one who healed me and felt connected to her.”</i>", parse);
 	Text.NL();
@@ -1417,7 +1389,7 @@ Scenes.Kiakai.TalkPriest = function() {
 	
 	if(kiakai.flags["TalkedPriest"] == 0) {
 		if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
-			Text.Add("<i>“The priesthood is the instrument of the lady on Eden,”</i> the elf tells you, looking proud. <i>“The order mostly stays at the shrine of Aria, though we sometimes venture out at the request of nearby villages, and some serve as advisers to men of power. Among other things, the priests of Aria are exceptionally skilled healers.”</i>", parse);
+			Text.Add("<i>“The priesthood is the instrument of the Lady on Eden,”</i> the elf tells you, looking proud. <i>“The order mostly stays at the shrine of Aria, though we sometimes venture out at the request of nearby villages, and some serve as advisers to men of power. Among other things, the priests of Aria are exceptionally skilled healers.”</i>", parse);
 			Text.NL();
 			if(kiakai.relation.Get() > 25)
 				Text.Add("<i>“The priesthood is currently headed by high priestess Yrissa. She practically raised me from when I was but a young child,”</i> [name] confides with a fond tone in [hisher] voice.", parse);
@@ -1493,7 +1465,7 @@ Scenes.Kiakai.TalkPriestHierarchy = function() {
 		Text.NL();
 		Text.Add("And then?", parse);
 		Text.NL();
-		Text.Add("<i>“Ah, after that, there are the diviners and the clerics. Both are the key servants of lady Aria, with diviners focusing more on finding out the deep truths and protecting the integrity of the worlds and clerics instead focusing on healing and doing good in the here and now. After that, there are the six order heads, who are in charge of various groups in the priesthood, and above all stands the high priestess, who directs the priesthood as a whole.”</i>", parse);
+		Text.Add("<i>“Ah, after that, there are the diviners and the clerics. Both are the key servants of Lady Aria, with diviners focusing more on finding out the deep truths and protecting the integrity of the worlds and clerics instead focusing on healing and doing good in the here and now. After that, there are the six order heads, who are in charge of various groups in the priesthood, and above all stands the high priestess, who directs the priesthood as a whole.”</i>", parse);
 	});
 	// Order heads
 	scenes.push(function() {
@@ -1528,13 +1500,9 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 	var parse = {
 		playername : player.name,
 		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer(),
 		virg   : kiakai.FirstCock() ? "p-penis has not entered a vagina" : "v-vagina has not felt the touch of a penis"
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	Text.Clear();
 	
@@ -1544,7 +1512,7 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 	// Celibacy1
 	if(kiakai.flags["TalkedSex"] < 2) {
 		scenes.push(function() {
-			Text.Add("<i>“One of the primary restrictions on the priesthood is that all must remain celibate,”</i> [name] tells you, looking stern. <i>“Sex is a distraction from service to the lady Aria, and romantic attachment is a distraction from serving the other people of this world.”</i>", parse);
+			Text.Add("<i>“One of the primary restrictions on the priesthood is that all must remain celibate,”</i> [name] tells you, looking stern. <i>“Sex is a distraction from service to the Lady Aria, and romantic attachment is a distraction from serving the other people of this world.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Many find it difficult at times, but the high priestess has reaffirmed that this is the proper path in serving Aria.”</i>", parse);
 			Text.Flush();
@@ -1656,7 +1624,7 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 	scenes.push(function() {
 		Text.Add("<i>“The priesthood is meant to uphold the highest moral virtues,”</i> [name] tells you proudly. <i>“Though it is acknowledged that it is impossible for mortals to achieve perfection, we must always strive for it.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“We must always show compassion and generosity to those in need, whether it be through healing, or physical aid, or advice, and we must protect those in danger. We also strive to attain spiritual purity to best understand the wishes of our lady Aria, and to serve as a suitable conduit for her power to better the world.”</i>", parse);
+		Text.Add("<i>“We must always show compassion and generosity to those in need, whether it be through healing, or physical aid, or advice, and we must protect those in danger. We also strive to attain spiritual purity to best understand the wishes of our Lady Aria, and to serve as a suitable conduit for her power to better the world.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“And, above all, we must oppose evil wherever we see it, and help to protect the integrity of all worlds as much as we are able.”</i> The elf seems almost to puff up at this recitation of [hisher] calling, clearly determined to do [hisher] utmost to fulfil these goals.", parse);
 		Text.Flush();
@@ -1681,13 +1649,9 @@ Scenes.Kiakai.TalkPriestActivities = function() {
 	
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer()
+		name   : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	Text.Clear();
 	
@@ -1698,7 +1662,7 @@ Scenes.Kiakai.TalkPriestActivities = function() {
 	scenes.push(function() {
 		Text.Add("<i>“There are many chores that need to get done just to keep the shrine running,”</i> [name] tells you. <i>“There is cooking to be done in the kitchens, tending the shrine fields and gardens, cleaning the floors and maintaining the buildings... Although the priesthood employs some full-time staff to assist with these, much of the work falls to novices and apprentices.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“Learning and studying priestly arts naturally come first, but for beginners, a large part of the day is also dedicated to this type of labor. It is said that hard work helps develop character and, by exhausting the body, brings the mind closer to the lady.”</i>", parse);
+		Text.Add("<i>“Learning and studying priestly arts naturally come first, but for beginners, a large part of the day is also dedicated to this type of labor. It is said that hard work helps develop character and, by exhausting the body, brings the mind closer to the Lady.”</i>", parse);
 		Text.NL();
 		if(kiakai.relation.Get() > 25)
 			Text.Add("<i>“Though, to be honest with you, I have found my mind ever closer to oblivion than to Aria after a grueling day of work.”</i>", parse);
@@ -1711,7 +1675,7 @@ Scenes.Kiakai.TalkPriestActivities = function() {
 		Text.NL();
 		Text.Add("And what about [himher]?", parse);
 		Text.NL();
-		Text.Add("[name] blushes slightly. <i>“I have studied both lores quite extensively. I... I wish to serve lady Aria in whatever way she may desire, and thus I wish to be prepared for all eventualities.”</i> ", parse);
+		Text.Add("[name] blushes slightly. <i>“I have studied both lores quite extensively. I... I wish to serve Lady Aria in whatever way she may desire, and thus I wish to be prepared for all eventualities.”</i> ", parse);
 	});
 	// Copying
 	scenes.push(function() {
@@ -1725,11 +1689,11 @@ Scenes.Kiakai.TalkPriestActivities = function() {
 	scenes.push(function() {
 		Text.Add("<i>“Clerics often go out into the world in response to the needs of the people, and sometimes take acolytes with them,”</i> [name] tells you, looking wistful. <i>“They provide succor to the sick, healing everything from terrible wasting diseases to broken bones.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“At the same time, they gather the people to them, and tell them of lady Aria, and teach the people to revere her and aid her in her deeds.”</i>", parse);
+		Text.Add("<i>“At the same time, they gather the people to them, and tell them of Lady Aria, and teach the people to revere her and aid her in her deeds.”</i>", parse);
 		Text.NL();
 		Text.Add("You ask if [name] has gone out with the clerics.", parse);
 		Text.NL();
-		Text.Add("<i>“Sadly, I have had but one chance to venture outside the shrine in this fashion. It seems that most clerics do not wish to have me along with them.”</i> [HeShe] looks momentarily downcast. <i>“Of course, then came the second chance when I was called by lady Aria to come meet you,”</i> [heshe] adds, cheering up.", parse);
+		Text.Add("<i>“Sadly, I have had but one chance to venture outside the shrine in this fashion. It seems that most clerics do not wish to have me along with them.”</i> [HeShe] looks momentarily downcast. <i>“Of course, then came the second chance when I was called by Lady Aria to come meet you,”</i> [heshe] adds, cheering up.", parse);
 	});
 	// Advising
 	scenes.push(function() {
@@ -1738,7 +1702,7 @@ Scenes.Kiakai.TalkPriestActivities = function() {
 		Text.Add("<i>“In return, providing such advice gives them a perfect opportunity to turn the deeds of the mighty to serve the will of Aria, and to help the world. All of them still report to the order heads and the high priestess, and they occasionally come back to the shrine to inform the others of what is going on in the world, or to seek guidance from their peers when they feel they need it.”</i>", parse);
 		if(kiakai.relation.Get() > 25) {
 			Text.NL();
-			Text.Add("<i>“Between you and me,”</i> [name] adds, <i>“I question the piety of such diviners whom I have met. I fear some of them may have become seduced by worldly power and riches, and report to the high priestess, and even serve lady Aria, in name only.”</i>", parse);
+			Text.Add("<i>“Between you and me,”</i> [name] adds, <i>“I question the piety of such diviners whom I have met. I fear some of them may have become seduced by worldly power and riches, and report to the high priestess, and even serve Lady Aria, in name only.”</i>", parse);
 		}
 	});
 	// Rituals
@@ -1768,13 +1732,9 @@ Scenes.Kiakai.TalkPriestYrissa = function() {
 	
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer()
+		name   : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	Text.Clear();
 	
@@ -1791,7 +1751,7 @@ Scenes.Kiakai.TalkPriestYrissa = function() {
 		if(kiakai.relation.Get() > 25 || kiakai.flags["Attitude"] > Kiakai.Attitude.Neutral)
 			Text.Add("She is very precious to me,”</i> [name] confesses. <i>“She was the one who made sure I was accepted even though the leadership back then was still skeptical of admitting an elf, and she has been like an older sister, and sometimes almost a... mother, to me.”</i>", parse);
 		else
-			Text.Add("She has kept watch over me since then, making sure that I am doing well and learning to best serve lady Aria. She has been a great help in guiding me on my path, [playername]. Perhaps she will be able to assist you, as well,”</i> [name] tells you, looking you straight in the eyes.", parse);
+			Text.Add("She has kept watch over me since then, making sure that I am doing well and learning to best serve Lady Aria. She has been a great help in guiding me on my path, [playername]. Perhaps she will be able to assist you, as well,”</i> [name] tells you, looking you straight in the eyes.", parse);
 		Text.NL();
 		Text.Add("<i>“She is generous and kind, but also strict and meticulous in ensuring that Aria's will is done. She, more than anyone, acts for the preservation of the worlds, and to ensure the dominion of our lady's goodness.”</i>", parse);
 	});
@@ -1835,13 +1795,9 @@ Scenes.Kiakai.TalkPriestAria = function() {
 	
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer()
+		name   : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	Text.Clear();
 	
@@ -1850,13 +1806,13 @@ Scenes.Kiakai.TalkPriestAria = function() {
 	
 	// Long
 	scenes.push(function() {
-		Text.Add("<i>“Most in the priesthood speak of conversing with lady Aria almost every day. They pray to her at night, and hear what she wishes of them in response. Sometimes, they even find that small miracles occur, as she lights their way to doing her will.”</i> [name] sounds a little despondent as [heshe] tells you this.", parse);
+		Text.Add("<i>“Most in the priesthood speak of conversing with Lady Aria almost every day. They pray to her at night, and hear what she wishes of them in response. Sometimes, they even find that small miracles occur, as she lights their way to doing her will.”</i> [name] sounds a little despondent as [heshe] tells you this.", parse);
 		Text.NL();
 		Text.Add("<i>“For some reason, she does not speak to me as often. Perhaps even she prefers to communicate with humans rather than with elves. I know for certain that I have heard from her but twice in my life. The first time she spoke to me, I knew that I must leave the village of my birth, and come to aid her at the shrine, and the second, she told me come and find you.”</i> [name] smiles gently. <i>“I suppose I ought not to complain about the lack of communications, when their import is so great.”</i>", parse);
 		
 		if(kiakai.relation.Get() > 40) {
 			Text.NL();
-			Text.Add("The elf pauses, thinking a little, before adding, <i>“To be entirely honest with you, [playername], sometimes I wonder if the other priests hear from lady Aria at all. The two times she spoke to me, I knew I could have no mistake nor illusion about either her message or intent. I beheld her corporeal form, and the beautiful sight of her garden as well. When the other priests speak of conversing with her, however, it is never something so clear or vivid, and often they receive ambiguous or even conflicting messages.”</i> [name] shakes her head. <i>“And yet, I know they are good men and women, and would not invent revelation where there is none. I simply do not know what to make of it.”</i>", parse);
+			Text.Add("The elf pauses, thinking a little, before adding, <i>“To be entirely honest with you, [playername], sometimes I wonder if the other priests hear from Lady Aria at all. The two times she spoke to me, I knew I could have no mistake nor illusion about either her message or intent. I beheld her corporeal form, and the beautiful sight of her garden as well. When the other priests speak of conversing with her, however, it is never something so clear or vivid, and often they receive ambiguous or even conflicting messages.”</i> [name] shakes her head. <i>“And yet, I know they are good men and women, and would not invent revelation where there is none. I simply do not know what to make of it.”</i>", parse);
 		}
 	});
 	
@@ -1879,28 +1835,23 @@ Scenes.Kiakai.TalkPriestMeeting = function() {
 	
 	var parse = {
 		playername : player.name,
-		name   : kiakai.name,
-		heshe  : kiakai.heshe(),
-		HeShe  : kiakai.HeShe(),
-		himher : kiakai.himher(),
-		hisher : kiakai.hisher(),
-		HisHer : kiakai.HisHer()
+		name   : kiakai.name
 	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	Text.Clear();
-	
 	
 	var scenes = [];
 	
 	// Short version
 	scenes.push(function() {
-		Text.Add("<i>“It was a simple thing, [playername]. As I meditated in the gardens, lady Aria entered my mind, and sent me a vision of her wishes. She told me of your arrival, and showed you to me, instructing me in what I need to do for you.”</i>", parse);
+		Text.Add("<i>“It was a simple thing, [playername]. As I meditated in the gardens, Lady Aria entered my mind, and sent me a vision of her wishes. She told me of your arrival, and showed you to me, instructing me in what I need to do for you.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“I set out as soon as I could and after several days of travel, I arrived at the nomad camp,”</i> [name] recalls, smiling. <i>“They were not too welcoming at first, but I was able to aid them with my healing, and we reached an understanding. There, I waited for half a day, and found you after your descent.”</i>", parse);
 		Text.NL();
 		Text.Add("You ask [himher] how it could be possible for [himher] to travel for so long and still get there before you, when your own trip through the worlds felt like it was less than a day.", parse);
 		Text.NL();
-		Text.Add("<i>“That, I do not know,”</i> the elf replies. <i>“It could be that time flows differently in the other worlds, or that your passage through the boundaries was longer than you perceived. Or it could be that lady Aria foresaw your arrival, and knew to send me to wait for you before you had even left your world.”</i>", parse);
+		Text.Add("<i>“That, I do not know,”</i> the elf replies. <i>“It could be that time flows differently in the other worlds, or that your passage through the boundaries was longer than you perceived. Or it could be that Lady Aria foresaw your arrival, and knew to send me to wait for you before you had even left your world.”</i>", parse);
 	});
 	if(kiakai.relation.Get() > 50) {
 		// Detailed version
@@ -1909,9 +1860,9 @@ Scenes.Kiakai.TalkPriestMeeting = function() {
 			Text.NL();
 			Text.Add("You ask what [heshe] means.", parse);
 			Text.NL();
-			Text.Add("<i>“Well, you see, when I received lady Aria's instructions while meditating, I indeed hurried off to my room to pack immediately. However, what I did not tell you is that, in my haste, I spared no time to inform any person in the priesthood of my intent.”</i> The elf looks conflicted saying this. <i>“Not even Yrissa. Now, I do not know how they will welcome me back. <b>Whether</b> they will welcome me back.”</i>", parse);
+			Text.Add("<i>“Well, you see, when I received Lady Aria's instructions while meditating, I indeed hurried off to my room to pack immediately. However, what I did not tell you is that, in my haste, I spared no time to inform any person in the priesthood of my intent.”</i> The elf looks conflicted saying this. <i>“Not even Yrissa. Now, I do not know how they will welcome me back. <b>Whether</b> they will welcome me back.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>“There was nought else I could do, [playername]! How was I to prove that my revelation was genuine, when the only sign of it was in my mind. And if they hesitated or debated, or, worst of all, did not believe me, my purpose would have been ruined. Not telling the priesthood of lady Aria's wishes was the only way I could carry them out!”</i>", parse);
+			Text.Add("<i>“There was nought else I could do, [playername]! How was I to prove that my revelation was genuine, when the only sign of it was in my mind. And if they hesitated or debated, or, worst of all, did not believe me, my purpose would have been ruined. Not telling the priesthood of Lady Aria's wishes was the only way I could carry them out!”</i>", parse);
 			Text.NL();
 			
 			if(kiakai.flags["Attitude"] > Kiakai.Attitude.Neutral)

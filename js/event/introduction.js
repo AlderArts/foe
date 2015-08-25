@@ -2124,7 +2124,7 @@ Intro.MeetingKia = function() {
 	Text.NL();
 	Text.Add("<i>“Ah, you are awake!”</i> the elf announces happily. Confronted with the question as to what exactly " + kiakai.heshe() + " was doing in your beddings, and where your beddings <i>are</i> for that matter, the elf blushes slightly. <i>“L-lets not get hasty, here. I know it might look bad, but really, I am just trying to help.”</i> " + HeShe + " looks a bit distraught.");
 	Text.NL();
-	Text.Add("<i>“My name is " + kiakai.name + ", and I serve lady Aria,”</i> the slender elf tells you, <i>“I have been nursing you here since your arrival to Eden, about a day ago.”</i> You quietly consider the elf before you. " + name + " seems to be very somber and serious, far beyond what you would expect from someone looking as young as " + himher + ". You give your own name, a large number of questions already crowding in your mind.");
+	Text.Add("<i>“My name is " + kiakai.name + ", and I serve Lady Aria,”</i> the slender elf tells you, <i>“I have been nursing you here since your arrival to Eden, about a day ago.”</i> You quietly consider the elf before you. " + name + " seems to be very somber and serious, far beyond what you would expect from someone looking as young as " + himher + ". You give your own name, a large number of questions already crowding in your mind.");
 	
 	Intro.KiaTalkedAboutAria = false;
 	Intro.KiaTalkedAboutEden = false;
@@ -2173,7 +2173,7 @@ Intro.KiaQnA = function() {
 				Text.NL();
 				Text.Add("<i>“Though I do not know where you came from originally, you have passed through at least two different planes of existence on your way here. The first was the burning wasteland that is Uru's domain. Thankfully, my lady saved you from that place before you could succumb to the demons.”</i> The elf seems very uncomfortable talking about what " + heshe + " clearly thinks is place of great evil.");
 				Text.NL();
-				Text.Add("<i>“My lady Aria then brought you into her own realm. Ah, it was long since I saw the sacred gardens last, too long...”</i> " + name + " seems to space out for a bit, focusing when you urge " + himher + " to continue. <i>“You might have noticed that you were losing strength the longer you spent in either of those realms. They are too... spiritual, I guess the word is. Ordinary humans seem to have a hard time surviving there for so long.”</i> " + HeShe + " thoughtfully considers you, <i>“That you were able to do so for such a long time indicates an unusually strong affinity for traversing the planes. I believe this was why the lady chose you.”</i>");
+				Text.Add("<i>“My Lady Aria then brought you into her own realm. Ah, it was long since I saw the sacred gardens last, too long...”</i> " + name + " seems to space out for a bit, focusing when you urge " + himher + " to continue. <i>“You might have noticed that you were losing strength the longer you spent in either of those realms. They are too... spiritual, I guess the word is. Ordinary humans seem to have a hard time surviving there for so long.”</i> " + HeShe + " thoughtfully considers you, <i>“That you were able to do so for such a long time indicates an unusually strong affinity for traversing the planes. I believe this was why the lady chose you.”</i>");
 				Text.NL();
 				Text.Add("<i>“To answer your question, you are on the island of Eden, suspended in an endless sea of clouds. The barriers between the planes of existence are quite thin here, so you could see it as something of a hub, where it is possible for portals to other realms to be opened. Usually, the ability to open such a portal is reserved to beings of great power, unless...”</i> " + HeShe + " pauses and tentatively takes your hand, guiding it to rest on the gemstone in your pocket.");
 				Text.NL();
@@ -2191,7 +2191,7 @@ Intro.KiaQnA = function() {
 			func : function() {
 				Text.Clear();
 				var title = (kiakai.body.Gender() == Gender.male) ? "priest" : "priestess";
-				Text.Add("<i>“I have been in the service of lady Aria for some thirty years, now. I am honored to be a member of her priesthood.”</i>");
+				Text.Add("<i>“I have been in the service of Lady Aria for some thirty years, now. I am honored to be a member of her priesthood.”</i>");
 				Text.NL();
 				Text.Add("Hold on. Thirty years? The slender elf hardly looks more than eighteen.");
 				Text.NL();
@@ -2300,7 +2300,7 @@ Intro.KiaDecideOutset = function() {
 			
 			Text.Add("<i>“Look, I know you mean well, but I just want to go home,”</i> you explain to the disappointed elf, <i>“Saving the world is not my job.”</i>");
 			Text.NL();
-			Text.Add("<i>“I can understand how you feel, believe me,”</i> " + name + " says, <i>“However, that does not change my instructions from lady Aria. I will follow you and try to help you, in any way I can.”</i>");
+			Text.Add("<i>“I can understand how you feel, believe me,”</i> " + name + " says, <i>“However, that does not change my instructions from Lady Aria. I will follow you and try to help you, in any way I can.”</i>");
 			Text.NL();
 			Text.Add("Do you want to bring " + himher + " along? And, if so, what attitude do you take?");
 			Text.NL();
@@ -2364,7 +2364,7 @@ Intro.KiaDecideOutset = function() {
 			Text.NL();
 			Text.Add("<i>“Getting the know-how to use the portals is a good first step, but why not use it to our advantage, eh? If we can amass enough power, a demon or two shouldn't be a problem.”</i>");
 			Text.NL();
-			Text.Add("The elf gives you a long look, reevaluating " + hisher + " opinion of you. <i>“You are underestimating what Uru is capable of,”</i> " + heshe + " says darkly, <i>“And what of me? My orders from lady Aria remain unchanged, will you still let me help you?”</i>");
+			Text.Add("The elf gives you a long look, reevaluating " + hisher + " opinion of you. <i>“You are underestimating what Uru is capable of,”</i> " + heshe + " says darkly, <i>“And what of me? My orders from Lady Aria remain unchanged, will you still let me help you?”</i>");
 			Text.NL();
 			Text.Flush();
 			

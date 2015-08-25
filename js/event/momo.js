@@ -566,7 +566,7 @@ Scenes.Momo.TalkPrompt = function() {
 				Text.Add("You briefly consider interrupting her peach-induced reverie, but you doubt she’s even aware of your presence...", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.Add("<i>“Do I enjoy travelling? Oh, yes, I certainly do!“</i> she gushes, nodding her head for emphasis.  <i>“There's so many fascinating places to go, foods to eat, and people to talk to - that's what I really love about traveling, actually; the food and the people.”</i>", parse);
+				Text.Add("<i>“Do I enjoy traveling? Oh, yes, I certainly do!“</i> she gushes, nodding her head for emphasis.  <i>“There's so many fascinating places to go, foods to eat, and people to talk to - that's what I really love about traveling, actually; the food and the people.”</i>", parse);
 				Text.NL()
 				Text.Add("<i>“Oh, some people might be nasty and horrible - like those savages who wanted to chop off my tail and fry it because they thought it'd be some kind of delicacy,“</i> she indignantly curls her tail around her hip for protection at the thought,  <i>“Or those suspicious people who ran me out of town when I asked about their cake recipe - but for the most part, the people I meet are just lovely to talk to. Like you!“</i> she giggles, grinning you a beaming smile.", parse);
 			}, 1.0, function() { return true; });
@@ -618,7 +618,7 @@ Scenes.Momo.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("Shaking her head, she gives you a winning smile. <i>“So, anyway, yeah! I'm completely all-natural, the one and only Momo - accept no substitutes!“</i> She giggles at her own cheesiness.", parse);
 			Text.NL();
-			Text.Add("<i>“Anywho, I left the farm when I was... ooh, about eighteen, nineteen years old? I went off to the big city and got into one of the chefs’ guilds there. Got my official member’s license and everything!“</i> she brags gleefully. <i>“Ever since then, I've been on a journey, looking for new and unusual recipes and ingredients, travelling all over to hone my skills and be the best chef I can be!“</i>", parse);
+			Text.Add("<i>“Anywho, I left the farm when I was... ooh, about eighteen, nineteen years old? I went off to the big city and got into one of the chefs’ guilds there. Got my official member’s license and everything!“</i> she brags gleefully. <i>“Ever since then, I've been on a journey, looking for new and unusual recipes and ingredients, traveling all over to hone my skills and be the best chef I can be!“</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Well, that's all I can think of when it comes to talking about little old me,“</i> Momo giggles. <i>“Drop on by anytime, [playername].“</i>", parse);
 			Text.Flush();

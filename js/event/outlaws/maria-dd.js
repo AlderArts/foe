@@ -737,7 +737,7 @@ Scenes.Maria.DeadDrops.Docks.GuardInspection = function() {
 			Text.NL();
 			Text.Add("Brr. How long has it been? Surely it can’t be that long - the guards’ footsteps are only just beginning to fade - but you’re shivering pretty badly. Gah, it seems like forever before they finally leave, and you take your cue from some of the dockhands beneath the pier - the moment they’re out of the water, you follow them with all due haste. They may be fine, but you sure don’t feel so, especially with your drenched clothing.", parse);
 			Text.NL();
-			Text.Add("Bah… time to get back to the outlaw camp. Hopefully, you’ll be able to find a fire, and a change of clothes. With the royal guard gone, the waterfront is steadily becoming abuzz with activity once more, and you scoop up the crate and hurry back as quickly as you can, skirting the slums and heading down the road to the forest. The activity does your frozen limbs some good, and by the time you’re over the drawbridge and through the gates, you don’t feel <i>too</i> terrible anymore.", parse);
+			Text.Add("Bah… time to get back to the outlaw camp. Hopefully, you’ll be able to find a fire, and a change of clothes. With the Royal Guard gone, the waterfront is steadily becoming abuzz with activity once more, and you scoop up the crate and hurry back as quickly as you can, skirting the slums and heading down the road to the forest. The activity does your frozen limbs some good, and by the time you’re over the drawbridge and through the gates, you don’t feel <i>too</i> terrible anymore.", parse);
 			Text.NL();
 			Text.Add("<i>“What’ve you gotten yourself into, [playername]? You’re soaking wet. Come with me before you catch a chill, you idiot.”</i>", parse);
 			Text.NL();
@@ -764,7 +764,7 @@ Scenes.Maria.DeadDrops.Docks.GuardInspection = function() {
 		tooltip : "Try to mingle with the crowd and hope you don’t get called out.",
 		func : function() {
 			Text.Clear();
-			Text.Add("Quickly dropping the crate and stowing it back with the others, you make to cross the pier at a brisk pace, hoping to join the crowd fleeing along the waterfront. Sure, you’ll be a little behind considering the late start you’ve had, but once you catch up with the flow, you ought to be able to disappear into the slums and hide out until the royal guards have gone.", parse);
+			Text.Add("Quickly dropping the crate and stowing it back with the others, you make to cross the pier at a brisk pace, hoping to join the crowd fleeing along the waterfront. Sure, you’ll be a little behind considering the late start you’ve had, but once you catch up with the flow, you ought to be able to disappear into the slums and hide out until the Royal Guards have gone.", parse);
 			Text.NL();
 			Text.Add("Keep your head down, don’t look up, slump your shoulders a little, act nonchalant, don’t stand out. Oh, and of course, don’t overdo it, lest you want to make yourself stand out even more than you would’ve were you just being yourself. Or maybe a bit so, since you’re supposed to be a terrified dockworker not wanting to be shaken down for a bit of coin this fine day…", parse);
 			Text.NL();
@@ -779,7 +779,7 @@ Scenes.Maria.DeadDrops.Docks.GuardInspection = function() {
 				Text.NL();
 				Text.Add("No time to waste, though. You duck and weave your way through the crowd until you’re sure you’re out of sight, then slip into the edges of the slums to wait for them to pass.", parse);
 				Text.NL();
-				Text.Add("Eventually, the royal guard do leave, presumably having had their fill of bribes and torments. One by one, the population of the docks peer out from beneath cover, slowly emerging back out into the open now that the storm’s passed. The way they go about returning to their business without so much as blinking, you’d imagine being shaken down for bribes was a way of life for them, like bed bugs, rain or hauling heavy objects around.", parse);
+				Text.Add("Eventually, the Royal Guard do leave, presumably having had their fill of bribes and torments. One by one, the population of the docks peer out from beneath cover, slowly emerging back out into the open now that the storm’s passed. The way they go about returning to their business without so much as blinking, you’d imagine being shaken down for bribes was a way of life for them, like bed bugs, rain or hauling heavy objects around.", parse);
 				Text.NL();
 				Text.Add("Which is probably closer to the truth than you care to think about.", parse);
 				Text.NL();
@@ -852,7 +852,7 @@ Scenes.Maria.DeadDrops.Docks.GuardInspection = function() {
 				scenes.Get();
 				
 				Text.NL();
-				Text.Add("Grr. While it might be tempting, actually getting into a fight with the royal guard here isn’t going to be the best of ideas, and neither is running away. You’re going to have to return here later on  for future drop-offs if nothing else, and you really, <i>really</i> don’t want to end up wanted by this farce that passes for the law in Rigard.", parse);
+				Text.Add("Grr. While it might be tempting, actually getting into a fight with the Royal Guard here isn’t going to be the best of ideas, and neither is running away. You’re going to have to return here later on  for future drop-offs if nothing else, and you really, <i>really</i> don’t want to end up wanted by this farce that passes for the law in Rigard.", parse);
 				Text.NL();
 				parse["b"] = outlaws.flags["BullTower"] >= Outlaws.BullTowerQuest.Completed ? ", considering what you got up to at Bull Tower" : "";
 				Text.Add("On the other hand, there has to be some way of getting rid of them that doesn’t involve you being taken in for further questioning[b]. Any bright ideas?", parse);
@@ -898,7 +898,7 @@ Scenes.Maria.DeadDrops.Docks.GuardInspection = function() {
 			if(dex >= goal) {
 				Text.Add("It can’t be more than a handful of minutes, and yet it feels like hours. Someone shifts a load of heavy objects, and there’s yet more arguing - the guard come close to your hiding spot once or twice, but at least they don’t actually uncover you, which is a big relief.", parse);
 				Text.NL();
-				Text.Add("At length, their footsteps fade as they retreat back along the pier, but you elect to remain hidden a little while longer until you’re sure they’re gone. Eventually, though, you can’t stand it anymore and burst back out into the open, sucking in sweet lungfuls of fish-scented air. You’re not the only one to do so - by and large, various members of the docks’ populace who manage to evade the royal guards’ gaze emerge once more into daylight.", parse);
+				Text.Add("At length, their footsteps fade as they retreat back along the pier, but you elect to remain hidden a little while longer until you’re sure they’re gone. Eventually, though, you can’t stand it anymore and burst back out into the open, sucking in sweet lungfuls of fish-scented air. You’re not the only one to do so - by and large, various members of the docks’ populace who manage to evade the Royal Guard’s gaze emerge once more into daylight.", parse);
 				Text.NL();
 				Text.Add("Well, you’ve wasted enough time here. Without further ado, you grab your prize in both hands - it’s a little weighty, but not actually cumbersome - and book it, skirting the slums until you hit the road and slipping into the forest at the earliest available opportunity. A short stroll later has you waltzing in through the front gates, and when you ask for Maria, the sentries simply direct you to the map building. ", parse);
 				Text.NL();
@@ -906,7 +906,7 @@ Scenes.Maria.DeadDrops.Docks.GuardInspection = function() {
 				Text.NL();
 				Text.Add("<i>“Don’t mind them, got to keep the people on speaking terms with each other,”</i> she says, as if that explains anything. <i>“Well, I see you’re back, and in one piece too. Did you have any trouble?”</i>", parse);
 				Text.NL();
-				Text.Add("You explain to Maria what went down today at the docks, and she shakes her head. <i>“Trawling for bribes as usual, the bastards. The royal guard was never much good, but it’s only gotten worse under Preston.”</i> A sigh. <i>“Well, let’s open this up and see what you brought back, then.”</i>", parse);
+				Text.Add("You explain to Maria what went down today at the docks, and she shakes her head. <i>“Trawling for bribes as usual, the bastards. The Royal Guard was never much good, but it’s only gotten worse under Preston.”</i> A sigh. <i>“Well, let’s open this up and see what you brought back, then.”</i>", parse);
 				Text.Flush();
 				
 				world.TimeStep({hour: 5});
@@ -961,7 +961,7 @@ Scenes.Maria.DeadDrops.Docks.GuardPrompt = function() {
 			Text.NL();
 			Text.Add("The smarmy bastard chuckles as he palms your money. <i>“That’ll do, that’ll do. All right, you’ve paid your fine, you can go now. Move along, nothing to see here.”</i>", parse);
 			Text.NL();
-			Text.Add("You don’t need telling twice - while the guard has moved onto another victim to rough up and shake down, it’s probably for the best that you don’t linger within sight. Wasting no time, you head back down the pier, pick up the goods and hightail it out of there while the royal guards are busy “inspecting” a barge and discovering all manner of goods with improper paperwork.", parse);
+			Text.Add("You don’t need telling twice - while the guard has moved onto another victim to rough up and shake down, it’s probably for the best that you don’t linger within sight. Wasting no time, you head back down the pier, pick up the goods and hightail it out of there while the Royal Guards are busy “inspecting” a barge and discovering all manner of goods with improper paperwork.", parse);
 			Text.NL();
 			Text.Add("From there, it’s a quick trip back past the slums and down the road, and you’re back through the camp gates before too long. Maria is there with a merry band of her own - seems like she’s just returned from patrol herself - and dismisses them before turning her attention to you.", parse);
 			Text.NL();
@@ -1043,13 +1043,13 @@ Scenes.Maria.DeadDrops.Docks.GuardPrompt = function() {
 			Text.NL();
 			Text.Add("<i>”You’re decent at this, I’ll grant you that. All right citizen, your fine’s paid, and we’ll overlook your transgression. Now get lost.”</i> With that, the guard pushes his cum-dripping cock back where it belongs before adjusting his armor and stomping off with his colleague.", parse);
 			Text.NL();
-			Text.Add("You’re left kneeling in the alley to recover, and when you feel well enough, you head back to the docks to get your goods. The sight of your cum-stained face draws a few curious stares, but the general air you’re getting from the docks’ denizens is one of recognition for taking one for the team and getting the royal guards out of their collective hair. At least that’s some small consolation for what you’ve done today…", parse);
+			Text.Add("You’re left kneeling in the alley to recover, and when you feel well enough, you head back to the docks to get your goods. The sight of your cum-stained face draws a few curious stares, but the general air you’re getting from the docks’ denizens is one of recognition for taking one for the team and getting the Royal Guard out of their collective hair. At least that’s some small consolation for what you’ve done today…", parse);
 			Text.NL();
 			Text.Add("Wasting no more time, you pick up the crate and head back, skirting the slums and heading down the road back to the forest. The sentries raise an eyebrow at your current condition, but say nothing as you head to the river and get a quick wash up to make yourself presentable before looking for Maria, crate in tow.", parse);
 			Text.NL();
 			Text.Add("You eventually find her in the willow grove, applying some kind of resin to the wood of her bow, and she gives you a nod as you sit down beside her and lay out the crate.", parse);
 			Text.NL();
-			Text.Add("<i>“Heard there was some trouble down by the docks today. Couple of royal guards came along trawling for bribes. Took someone offering a quickie to lure them away. Heard anything about it?”</i>", parse);
+			Text.Add("<i>“Heard there was some trouble down by the docks today. Couple of Royal Guards came along trawling for bribes. Took someone offering a quickie to lure them away. Heard anything about it?”</i>", parse);
 			Text.NL();
 			Text.Add("You did, but it wasn’t important.", parse);
 			Text.NL();
@@ -1071,13 +1071,13 @@ Scenes.Maria.DeadDrops.Docks.GuardPrompt = function() {
 			tooltip : "You have the Twins’ letter with you, don’t you? Time to turn the tables.",
 			func : function() {
 				Text.Clear();
-				Text.Add("Well, the royal guards mean to throw their authority around, don’t they? Maybe they’ll think twice after seeing this. Grimly, you reach into your possessions and draw out your royal pass, opening the envelope and holding out the contents for the bastard to see, although you make sure to keep it out of his reach.", parse);
+				Text.Add("Well, the Royal Guards mean to throw their authority around, don’t they? Maybe they’ll think twice after seeing this. Grimly, you reach into your possessions and draw out your royal pass, opening the envelope and holding out the contents for the bastard to see, although you make sure to keep it out of his reach.", parse);
 				Text.NL();
 				Text.Add("Why, do they recognize the writing on it, or maybe the seal? Hmm? Hmm?", parse);
 				Text.NL();
 				Text.Add("All of a sudden, the royal guard before you goes very silent. Raising a hand, he waves his colleague over, and together, the two of them pore over every word written on the paper.", parse);
 				Text.NL();
-				Text.Add("For a moment, you wonder if the royal guards are going to double down and accuse your pass of being a forgery, or maybe if they’ll claim you stole it somehow. Fortunately - more for them, than for you - they decide that it’s probably not worth it to press the issue further, and take off the other way. Not quite at a run, perhaps, but brisk enough that you can tell yourself that you just sent them packing.", parse);
+				Text.Add("For a moment, you wonder if the Royal Guards are going to double down and accuse your pass of being a forgery, or maybe if they’ll claim you stole it somehow. Fortunately - more for them, than for you - they decide that it’s probably not worth it to press the issue further, and take off the other way. Not quite at a run, perhaps, but brisk enough that you can tell yourself that you just sent them packing.", parse);
 				Text.NL();
 				
 				var scenes = new EncounterTable();

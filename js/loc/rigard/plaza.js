@@ -109,7 +109,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 				}
 				Text.Add(" No matter how you try, the pair seems unwilling to budge. Seems like you need some form of identification or invitation to get through the checkpoint.", parse);
 				Text.NL();
-				Text.Add("From what you gather these men belong to the royal guard, whose only task is to protect the nobility and the royal family. It seems like you are causing a bit of a scene, and a few curious passersby stop to watch, whispering among themselves. Frustrated, you decide to back down for now.", parse);
+				Text.Add("From what you gather these men belong to the Royal Guard, whose only task is to protect the nobility and the royal family. It seems like you are causing a bit of a scene, and a few curious passersby stop to watch, whispering among themselves. Frustrated, you decide to back down for now.", parse);
 				Text.NL();
 				
 				Text.Add("As you turn to leave, you spot a postern gate open in the wall a few hundred paces to your left, and two people come out. Both of them wear gray cloaks, their hoods drawn, so you cannot make out much of their features. They are of a height, and walk companionably side by side, heading out toward the city. You point them out, and ask the guards who they are, curiously.", parse);
@@ -164,7 +164,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 		else {
 			if(rigard.flags["RoyalAccessTalk"] < 2) {
 				Text.Clear();
-				Text.Add("Once again, you approach the hostile royal guardsmen manning the entrance to the innermost parts of Rigard.", parse);
+				Text.Add("Once again, you approach the hostile Royal Guardsmen manning the entrance to the innermost parts of Rigard.", parse);
 				Text.NL();
 				
 				var humanity = player.Humanity();
@@ -273,13 +273,13 @@ Scenes.Rigard.Plaza.StatueInfo = function() {
 	Text.NL();
 	Text.Add("<i>“Ah, now that is a tale worth telling. You see, it is said that the clothing was actually obtained first, and the statue was made to accommodate it.”</i>", parse);
 	Text.NL();
-	Text.Add("<i>“A long long time ago, when the kingdom was first founded and the castle was just being built, there was a great crisis on Eden. There are many tales of what occurred. Some say dragons came through a portal, attacking humans; others that a devastating disease swept the land; yet others that a massive storm buffeted the Great Tree, threatening to tip it over, sending gigantic branches tumbling across the land. Be that as it may, lady Aria visited the world to aid us, for she appeared more often back then.”</i>", parse);
+	Text.Add("<i>“A long long time ago, when the kingdom was first founded and the castle was just being built, there was a great crisis on Eden. There are many tales of what occurred. Some say dragons came through a portal, attacking humans; others that a devastating disease swept the land; yet others that a massive storm buffeted the Great Tree, threatening to tip it over, sending gigantic branches tumbling across the land. Be that as it may, Lady Aria visited the world to aid us, for she appeared more often back then.”</i>", parse);
 	Text.NL();
 	Text.Add("<i>“And aid us she did, and then, as she rested, Riorbane the trickster came across her. He told the goddess that he had seen a great evil resting in a cave in the roots of the Great Tree, begging for her aid, for, he said, the need was dire. Unfortunately, she had come to the world in giant stature, and her enormous form could not fit inside the small cave. So, she bid Riorbane face away and await her outside.”</i>", parse);
 	Text.NL();
 	Text.Add("<i>“She shrank down to a size that could pass inside, but her dress did not shrink, but instead collapsed where it was. As Aria entered the cave, Riorbane snatched up the dress, and carried it off, hiding it securely. When Aria re-emerged, bemused by the lack of anything but a stream in the grotto, he confronted her in her nakedness, and said he would only return the dress if she spent the night with him.”</i> The old man looks much happier telling the story, than a professed devout follower of Aria really should be.", parse);
 	Text.NL();
-	Text.Add("<i>“Though lady Aria simply cloaked herself in mist and refused, she was still wroth with him. She told him, ‘Though you may keep my dress if you so wish, all clothing of yours shall be stolen or lost again and again.'”</i> The old man's imitation of Aria's voice makes you cringe a little. <i>“Now, Riorbane was none too happy to be denied his lay, though stories tell that he wasn't too upset at the curse that was bestowed upon him. Either way, he found himself in possession the goddess's dress, not knowing what use to put it to.”</i>", parse);
+	Text.Add("<i>“Though Lady Aria simply cloaked herself in mist and refused, she was still wroth with him. She told him, ‘Though you may keep my dress if you so wish, all clothing of yours shall be stolen or lost again and again.'”</i> The old man's imitation of Aria's voice makes you cringe a little. <i>“Now, Riorbane was none too happy to be denied his lay, though stories tell that he wasn't too upset at the curse that was bestowed upon him. Either way, he found himself in possession the goddess's dress, not knowing what use to put it to.”</i>", parse);
 	Text.NL();
 	Text.Add("<i>“It was enormous and impervious to not only wear and water, but also shears and knife. In the end, he could do nothing with it, and traded it to his brother, Riordain, gaining a favor he had desired in exchange. With the dress in hand, before his castle, to show respect for the goddess and ask for her blessing in the establishment of the kingdom, Riordain erected a statue for the goddess in her exact likeness, and adorned it in her garment.”</i> The old man speaks with pride in his voice, and you decide not to disillusion him about how alike the statue is.", parse);
 	Text.NL();
@@ -567,7 +567,7 @@ Scenes.Rigard.Plaza.LetterDelivery = function() {
 				Text.Add("<i>“The servant [Sboygirl] suspects. We may have to deal with [Shimher]. -[letter].[letter].”</i>", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.Add("<i>“Would you believe those royal guards? Paid the usual amount this month, yet they start snooping around the warehouse! Move the stock to a safe location as quickly as possible, or I fear we may be found out. -X”</i>", parse);
+				Text.Add("<i>“Would you believe those Royal Guards? Paid the usual amount this month, yet they start snooping around the warehouse! Move the stock to a safe location as quickly as possible, or I fear we may be found out. -X”</i>", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
 				Text.Add("<i>“The stars are aligning in a peculiar pattern. Had word from the mother superior the other day. She says that strange things are afoot. We might have to leave for another expedition. -[letter].[letter].”</i>", parse);

@@ -133,7 +133,7 @@ Scenes.Rigard.Noble.Parkland = function() {
 		var humanity = player.Humanity();
 		
 		parse["hum"] = humanity < 0.95 ? ", especially with your appearance being what it is" : "";
-		Text.Add("With that thought in mind, you stand up and move on before the royal guard shows up and makes a fuss. Wouldn’t want to get caught up in the crossfire[hum].", parse);
+		Text.Add("With that thought in mind, you stand up and move on before the Royal Guard shows up and makes a fuss. Wouldn’t want to get caught up in the crossfire[hum].", parse);
 	}
 	Text.Flush();
 	
@@ -240,7 +240,7 @@ Scenes.Rigard.Noble.MeetingMajid = function() {
 	Text.NL();
 	Text.Add("<i>“Make way for Majid, the king’s vizier!”</i>", parse);
 	Text.NL();
-	Text.Add("That’s your last warning - scarcely have the words reached your ears that half a dozen royal guards come thundering by on horseback, dressed up in royal livery. The street might be clear, but if it weren’t, there’s little doubt that any unlucky person caught up in the charge would be trampled underfoot.", parse);
+	Text.Add("That’s your last warning - scarcely have the words reached your ears that half a dozen Royal Guards come thundering by on horseback, dressed up in royal livery. The street might be clear, but if it weren’t, there’s little doubt that any unlucky person caught up in the charge would be trampled underfoot.", parse);
 	Text.NL();
 	Text.Add("Even as the dust kicked up by the guards begins to settle, a curious sight greets your eyes: a large, ornate sedan chair follows in its wake, held aloft by a quartet of bare-chested morphs. You’re not the only one whose attention has been drawn by the spectacle - everyone around you, young and old, noble and servant, man and woman alike stares at the strange vehicle as it passes them by. Some with fear at the vehicle itself, others with desire at the half-naked carriers, but for a moment all activity comes to a halt as someone who’s clearly an important personage passes them by.", parse);
 	Text.NL();
@@ -266,7 +266,7 @@ Scenes.Rigard.Noble.GuardPatrol = function() {
 	Text.Clear();
 	Text.Add("Exploring the castle grounds at night is less exciting than one might have hoped. Unlike Rigard proper, which never truly sleeps, a quiet, hazy blanket has settled on the castle grounds, covering nobility and servants alike in quiet slumber. Tall street lamps placed at regular intervals fill wide avenues with gentle white light, and the high walls and solid gates of the residential compounds only add to the sense of security.", parse);
 	Text.NL();
-	Text.Add("All this, of course, is enforced by the regular patrols of royal guards, all of them clad in gleaming armor as they make their rounds about the district. It’s clear that they’re there for show more than anything else - a lurking criminal would spot them from ridiculously far off - but maybe that’s the point, for the local residents to look out of their windows and be reassured that the guard is doing their job, after a fashion.", parse);
+	Text.Add("All this, of course, is enforced by the regular patrols of Royal Guards, all of them clad in gleaming armor as they make their rounds about the district. It’s clear that they’re there for show more than anything else - a lurking criminal would spot them from ridiculously far off - but maybe that’s the point, for the local residents to look out of their windows and be reassured that the guard is doing their job, after a fashion.", parse);
 	Text.NL();
 	
 	var humanity = player.Humanity();
@@ -276,7 +276,7 @@ Scenes.Rigard.Noble.GuardPatrol = function() {
 	else
 		Text.Add("Some of the patrols throw you curious glances as you pass them by, but you act as if you have every right to be here - which you in fact, do - and they let you be on your way without harassing you.", parse);
 	Text.NL();
-	Text.Add("You’re vaguely reminded of some saying or the other, something about effective policing being the lack of crime rather than guards being seen about doing their job, but you don’t quite remember just how it went… nevertheless, though the royal guards are clearly anything but incompetent, it seems like they have a much better life than the overworked city watch.", parse);
+	Text.Add("You’re vaguely reminded of some saying or the other, something about effective policing being the lack of crime rather than guards being seen about doing their job, but you don’t quite remember just how it went… nevertheless, though the Royal Guards are clearly anything but incompetent, it seems like they have a much better life than the overworked city watch.", parse);
 	Text.Flush();
 	
 	world.TimeStep({minute: 15});
@@ -292,7 +292,7 @@ Scenes.Rigard.Noble.AlmsForThePoor = function() {
 	Text.Clear();
 	Text.Add("<i>“It’s just a coin, sonny. It won’t be missed, I can tell you as much. You yourself told me doesn’t bother to count them twice.”</i>", parse);
 	Text.NL();
-	Text.Add("Hmm, interesting. You didn’t think there’d be beggars on the castle grounds - the royal guard should have taken care of most of them - but as you draw closer to the source of the voice, you spy an aging man and a much younger one by the wall. The former’s clearly here uninvited, being much more shabbily dressed than the latter, and is holding out his hand in a pleading fashion.", parse);
+	Text.Add("Hmm, interesting. You didn’t think there’d be beggars on the castle grounds - the Royal Guard should have taken care of most of them - but as you draw closer to the source of the voice, you spy an aging man and a much younger one by the wall. The former’s clearly here uninvited, being much more shabbily dressed than the latter, and is holding out his hand in a pleading fashion.", parse);
 	Text.NL();
 	Text.Add("<i>“I can’t betray the lord’s trust in me, gramps,”</i> the younger man replies. <i>“I’ll have some money for you in a few days’ time when I get paid, but this stuff needs to get back to him whole.”</i>", parse);
 	Text.NL();
@@ -315,16 +315,16 @@ Scenes.Rigard.Noble.AlmsForThePoor = function() {
 		tooltip : "Side with the old man.",
 		func : function() {
 			Text.Clear();
-			Text.Add("Deciding to intervene, you step towards the duo - they freeze and stare at you a moment as you approach, then quickly relax when they realize you aren’t with the royal guard. Quickly explaining that you heard everything, you begin chiding the younger man for his reluctance - it’s just a single coin, after all, and it’s not as if he truly intends to steal it if he intends to replace the missing money once he receives his wages. Does he really intend to put his grandfather through that all over a white lie?", parse);
+			Text.Add("Deciding to intervene, you step towards the duo - they freeze and stare at you a moment as you approach, then quickly relax when they realize you aren’t with the Royal Guard. Quickly explaining that you heard everything, you begin chiding the younger man for his reluctance - it’s just a single coin, after all, and it’s not as if he truly intends to steal it if he intends to replace the missing money once he receives his wages. Does he really intend to put his grandfather through that all over a white lie?", parse);
 			Text.NL();
-			Text.Add("Buckling under your verbal assault, the young man sighs and slumps his shoulders in defeat. <i>“Here, gramps,”</i> he mumbles, drawing out a coin from the bag he’s holding. <i>“Try to make this stretch, okay? I’m sticking out my neck for you - and please, don’t sneak onto the castle grounds any more. There’s no telling what the royal guard will do to you if they find you here.”</i>", parse);
+			Text.Add("Buckling under your verbal assault, the young man sighs and slumps his shoulders in defeat. <i>“Here, gramps,”</i> he mumbles, drawing out a coin from the bag he’s holding. <i>“Try to make this stretch, okay? I’m sticking out my neck for you - and please, don’t sneak onto the castle grounds any more. There’s no telling what the Royal Guard will do to you if they find you here.”</i>", parse);
 			Text.NL();
 			Text.Add("With that, he turns tail and slinks away, more than a little guilt hanging around him.", parse);
 			Text.NL();
 			parse["lad"] = player.mfFem("lad", "lass");
 			Text.Add("Turning his gaze to you, the older man rubs his forehead. <i>“Thanks for stepping in, [lad]. My grandson’s not a bad kid, he’s just kinda… eh… inflexible. Thinks in straight lines. You didn’t have to do that, but I appreciate it nevertheless.”</i>", parse);
 			Text.NL();
-			Text.Add("You nod and point at the wall, suggesting less than a little subtly that he ought to leg it before the royal guard wanders over. The man grins, and wasting no time, scrambles over the barrier with surprising alacrity for someone his age - before you know it, he’s gone, leaving you to be on your way, too.", parse);
+			Text.Add("You nod and point at the wall, suggesting less than a little subtly that he ought to leg it before the Royal Guard wanders over. The man grins, and wasting no time, scrambles over the barrier with surprising alacrity for someone his age - before you know it, he’s gone, leaving you to be on your way, too.", parse);
 			Text.Flush();
 			
 			Gui.NextPrompt();
@@ -334,7 +334,7 @@ Scenes.Rigard.Noble.AlmsForThePoor = function() {
 		tooltip : "Side with the young man.",
 		func : function() {
 			Text.Clear();
-			Text.Add("Deciding to intervene, you step towards the duo - they freeze and stare at you a moment as you approach, then quickly relax when they realize you aren’t with the royal guard. Quickly explaining that you heard everything, you chide the older man for urging his grandson to steal from his lord. Even if the theft wasn’t noticed, one lie tends to lead to another - and if it <i>were</i> noticed, that’d mean his entire livelihood would be at stake. Go hungry for a few days, or go hungry for who knows how long?", parse);
+			Text.Add("Deciding to intervene, you step towards the duo - they freeze and stare at you a moment as you approach, then quickly relax when they realize you aren’t with the Royal Guard. Quickly explaining that you heard everything, you chide the older man for urging his grandson to steal from his lord. Even if the theft wasn’t noticed, one lie tends to lead to another - and if it <i>were</i> noticed, that’d mean his entire livelihood would be at stake. Go hungry for a few days, or go hungry for who knows how long?", parse);
 			Text.NL();
 			Text.Add("<i>“Still the matter of getting by for the next few days…”</i>", parse);
 			Text.Flush();
@@ -363,7 +363,7 @@ Scenes.Rigard.Noble.AlmsForThePoor = function() {
 					Text.Clear();
 					Text.Add("Well then, that’s his problem to solve, isn’t it? What with such short-sightedness in jeopardizing his grandson’s livelihood and his future source of income, maybe that’s something to think about.", parse);
 					Text.NL();
-					Text.Add("With that said, you turn and storm off, leaving the two to get things sorted out on their own - or be thrown out of the castle grounds by the royal guard, whichever comes first.", parse);
+					Text.Add("With that said, you turn and storm off, leaving the two to get things sorted out on their own - or be thrown out of the castle grounds by the Royal Guard, whichever comes first.", parse);
 					Text.Flush();
 					
 					Gui.NextPrompt();
@@ -393,7 +393,7 @@ Scenes.Rigard.Noble.Elodie = function() {
 	};
 	
 	Text.Clear();
-	Text.Add("Walking through the streets of the castle grounds, you’re suddenly aware of a tingling on the nape of your neck, and instinctively turn around. Present about you are a few nobles and their servants out for a stroll, a detachment of royal guards on patrol, and a single young woman dressed in royal colors - it’s the latter who is staring at you unabashedly with hard, narrowed eyes, as if inviting you to return the favor.", parse);
+	Text.Add("Walking through the streets of the castle grounds, you’re suddenly aware of a tingling on the nape of your neck, and instinctively turn around. Present about you are a few nobles and their servants out for a stroll, a detachment of Royal Guards on patrol, and a single young woman dressed in royal colors - it’s the latter who is staring at you unabashedly with hard, narrowed eyes, as if inviting you to return the favor.", parse);
 	Text.NL();
 	Text.Add("Well, you’re not about to decline the challenge, so you yourself get a good look at her in turn. Perhaps about nineteen, give or take a year or so, the young woman’s outfit is indicative of some sort of servant - a long-sleeved blouse clothes her ample chest, while an apron and long skirts complete the ensemble. Fine gloves of simple white linen adorn her arms, and pinned to her breast is a silvered brooch with the royal insignia on it.", parse);
 	Text.NL();
@@ -502,13 +502,13 @@ Scenes.Rigard.Noble.PalaceParade = function() {
 	
 	Text.Clear();
 	if(first) {
-		Text.Add("Drawing closer to the castle than your usual forays about the grounds, you notice a small crowd of curious onlookers gathered in a small plaza. The commotion only grows greater as you close the distance, joining the impromptu audience of commoner and noblemen alike, only to find about two hundred of the royal guard assembled in a neat rectangular formation on the plaza.", parse);
+		Text.Add("Drawing closer to the castle than your usual forays about the grounds, you notice a small crowd of curious onlookers gathered in a small plaza. The commotion only grows greater as you close the distance, joining the impromptu audience of commoner and noblemen alike, only to find about two hundred of the Royal Guard assembled in a neat rectangular formation on the plaza.", parse);
 		Text.NL();
-		Text.Add("That’s not all, though. A small marching band sits off to one side, drums, brass and all, and they play a suitably martial tune as the royal guards parade in front of the castle district’s population. You have to admit, it all <i>looks</i> very impressive; the audience is clearly in agreement with you as the guards march in lockstep to the drumming. And why not? They’re clearly dressed to impress; the arms and armor each guard bears is more ceremonial than anything else. For goodness’ sake, gold frogging, engraved breastplates, and plenty of swirly grooves on dulled blades -", parse);
+		Text.Add("That’s not all, though. A small marching band sits off to one side, drums, brass and all, and they play a suitably martial tune as the Royal Guards parade in front of the castle district’s population. You have to admit, it all <i>looks</i> very impressive; the audience is clearly in agreement with you as the guards march in lockstep to the drumming. And why not? They’re clearly dressed to impress; the arms and armor each guard bears is more ceremonial than anything else. For goodness’ sake, gold frogging, engraved breastplates, and plenty of swirly grooves on dulled blades -", parse);
 		Text.NL();
 		Text.Add("- There is, after all, that age-old axiom of dressing up a pig in a suit. At the end of the day, while one might be able to make the pig look presentable, it’s still a pig.", parse);
 		Text.NL();
-		Text.Add("At the head of it all is Preston, looking every bit just like the day he burst into the warehouse and stole victory from under your and Miranda’s noses. Well, perhaps even more pretentious, considering the gilded, plumed helmet he’s wearing; mounted on a chestnut thoroughbred, the commander of the royal guard prances in front of both his men and the gathered audience like… like… well, there isn’t a good word that would describe him. He’s far too serious to be a clown, at any rate.", parse);
+		Text.Add("At the head of it all is Preston, looking every bit just like the day he burst into the warehouse and stole victory from under your and Miranda’s noses. Well, perhaps even more pretentious, considering the gilded, plumed helmet he’s wearing; mounted on a chestnut thoroughbred, the commander of the Royal Guard prances in front of both his men and the gathered audience like… like… well, there isn’t a good word that would describe him. He’s far too serious to be a clown, at any rate.", parse);
 		Text.NL();
 		if(party.InParty(miranda)) {
 			Text.Add("<i>“Pompous little shit,”</i> Miranda mutters, though not so loudly that someone besides you might hear her over the music. <i>“Please, you dumb beast, if you have any sense in you, throw that fat sack of potatoes off your back and run for the hills.”</i>", parse);
@@ -519,7 +519,7 @@ Scenes.Rigard.Noble.PalaceParade = function() {
 		Text.Add("It doesn’t look like Preston’s little parade will be ending anytime soon - judging by the smile on his face, he’s clearly enjoying all the attention, perhaps a little too much. Neither are you about to stand here all day - unlike some of those around you, you actually have better things to do with your time than to watch this pompous display. Excusing yourself, you slip your way back through the crowd and leave the way you came.", parse);
 	}
 	else {
-		Text.Add("Passing by the plaza in front of the castle gates, you’re treated to another of Preston’s little parades. The music and crowd begin long before you even catch sight of the royal guards themselves, and you can already guess what Preston’s lined up for the locals: more marching, more meaningless footdrills, more prancing around on his horse. While the man might be high on the pomp and glamor, he’s definitely a little short on imagination.", parse);
+		Text.Add("Passing by the plaza in front of the castle gates, you’re treated to another of Preston’s little parades. The music and crowd begin long before you even catch sight of the Royal Guards themselves, and you can already guess what Preston’s lined up for the locals: more marching, more meaningless footdrills, more prancing around on his horse. While the man might be high on the pomp and glamor, he’s definitely a little short on imagination.", parse);
 		Text.NL();
 		if(party.InParty(miranda)) {
 			Text.Add("<i>“Still at it, eh?”</i> Miranda mumbles from behind you. <i>“Man never gets tired of preening. Wonder if he does more parading than guarding.”</i>", parse);

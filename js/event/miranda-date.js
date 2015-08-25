@@ -517,7 +517,7 @@ Scenes.Miranda.TalkBackstory = function(atBar) {
 			scenes.push(function() {
 				Text.Add("<i>“The Black Hounds were a rowdy bunch, both on and off duty. How they still get contracts after some of the shit we did is beyond me. We usually got the job done either way, and it wasn’t like we had much competition in our price class.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“I got to spend a lot of time outside Rigard at the very least, travelling all over Eden. I’ve seen the free cities, visited the desert oasis, spent time among the highland tribes. Wherever there was trouble, the Black Hounds were there. Sometimes even before the fact.”</i>", parse);
+				Text.Add("<i>“I got to spend a lot of time outside Rigard at the very least, traveling all over Eden. I’ve seen the free cities, visited the desert oasis, spent time among the highland tribes. Wherever there was trouble, the Black Hounds were there. Sometimes even before the fact.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“There are a lot of stories I could tell you about that time… We’d occasionally return to Rigard for some RnR, and I’d check in on my sister, drop off some money and so on. The rest of the gang burnt all their money on booze and whores as quickly as they could.”</i>", parse);
 				Text.NL();
@@ -694,7 +694,7 @@ Scenes.Miranda.TalkConquests = function(atBar) {
 					Text.NL();
 					Text.Add("<i>“If you do it in <b>my</b> city, it is <b>my</b> business,”</i> the guardswoman retorts, <i>“and you can expect to be on the receiving end of <b>my</b> cock. Not that I’m sure you’d take it as punishment.”</i>", parse);
 					Text.NL();
-					Text.Add("<i>“Figures that the only thing you’re good for is as a walking prick. You couldn’t even catch me on your own last time, what makes you think you’d have a chance against me? Plus last time I checked, you’re just a lowly watch-dog. The ones really running this town are the royal guards,”</i> Terry shoots back with a defiant glare.", parse);
+					Text.Add("<i>“Figures that the only thing you’re good for is as a walking prick. You couldn’t even catch me on your own last time, what makes you think you’d have a chance against me? Plus last time I checked, you’re just a lowly watch-dog. The ones really running this town are the Royal Guards,”</i> Terry shoots back with a defiant glare.", parse);
 				}
 				Text.NL();
 				Text.Add("<i>“Yip yip says the little pet,”</i> Miranda shrugs. <i>“Run that mouth for long enough and I’ll give it something better to do.”</i>", parse);
@@ -741,7 +741,7 @@ Scenes.Miranda.TalkConquests = function(atBar) {
 		else if(terry.flags["Met"] >= Terry.Met.Caught) {
 			var req = terry.flags["Saved"] >= Terry.Saved.Saved;
 			parse["t"] = req ? " - Terry, was it" : "";
-			Text.Add("<i>“Case in point, remember that thief that we caught[t]?”</i> You nod. <i>“No one really gives a shit about Krawitz; he’s a small time noble without any real influence. He doesn’t exactly have a clear conscience himself, considering the things that were found when searching his mansion. I only intended to show him some… corrective action, perhaps throw him in a cell for a few days as payback for that note. That’d make sure he didn’t stir up trouble in my city again. The little fox would’ve been far better off in my care than in that of the royal guard, believe me.”</i>", parse);
+			Text.Add("<i>“Case in point, remember that thief that we caught[t]?”</i> You nod. <i>“No one really gives a shit about Krawitz; he’s a small time noble without any real influence. He doesn’t exactly have a clear conscience himself, considering the things that were found when searching his mansion. I only intended to show him some… corrective action, perhaps throw him in a cell for a few days as payback for that note. That’d make sure he didn’t stir up trouble in my city again. The little fox would’ve been far better off in my care than in that of the Royal Guard, believe me.”</i>", parse);
 			Text.NL();
 			if(req)
 				Text.Add("You’re not sure Terry would agree with that, but you let it slide. To be sure, he wasn’t in a very happy place when you let him out of prison, but you aren’t sure if he’d be much happier being fucked by Miranda for days on end.", parse);

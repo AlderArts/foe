@@ -289,7 +289,7 @@ Scenes.Gwendy.Talk = function(backfunc) {
 				Text.Add("<i>“D’you know anything about those rabbit people that’ve been showing up lately?”</i> Gwendy asks you. <i>“They come in groups, usually at dusk or dawn when there isn’t anyone on watch. I’ve had to chase them off several times, but they still managed to steal a lot of goods.”</i> The farmer grimaces. <i>“Not to mention they ruin the crops with all their hopping about, the dumb things.”</i>", parse);
 				Text.NL();
 				if(burrows.flags["Access"] == Burrows.AccessFlags.Unknown) {
-					Text.Add("You admit that you don’t know much about them, although you think you’ve seen some of them while travelling.", parse);
+					Text.Add("You admit that you don’t know much about them, although you think you’ve seen some of them while traveling.", parse);
 					Text.NL();
 					Text.Add("<i>“Nasty critters,”</i> the girl mutters.", parse);
 				}

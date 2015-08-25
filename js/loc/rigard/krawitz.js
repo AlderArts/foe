@@ -2493,7 +2493,7 @@ Scenes.Krawitz.TwinsMoreTalk = function() {
 	Text.NL();
 	Text.Add("<i>“As to what you would be asked to do… nothing bad, certainly. You’d pass messages along, bring us certain objects or people… stuff like that. We can talk about the details later.”</i> The princess waves off any further inquiries.", parse);
 	Text.NL();
-	Text.Add("<i>“As a show of our appreciation, we will grant you a favor. Word on the street is that you tried to get past the royal guard and inside the inner walls. We can get you in there.”</i> Rumi hands you a sealed envelope. <i>“This should get you past the guards, though it won’t let you enter the castle unless you have a direct invitation.”</i>", parse);
+	Text.Add("<i>“As a show of our appreciation, we will grant you a favor. Word on the street is that you tried to get past the Royal Guard and inside the inner walls. We can get you in there.”</i> Rumi hands you a sealed envelope. <i>“This should get you past the guards, though it won’t let you enter the castle unless you have a direct invitation.”</i>", parse);
 	Text.NL();
 	Text.Add("<b>Received royal pass.</b>", parse);
 	

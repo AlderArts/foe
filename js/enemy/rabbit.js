@@ -713,7 +713,7 @@ Scenes.Lagomorph.GroupLossOnPlainsToBurrows = function(enc) {
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
-		Text.Add("The rabbits are travelling straight toward a low set of hills in the distance, an air of purpose about them. As you draw closer, you see that there are quite a number of their kind milling about the mounds, with even more passing in and out of large holes leading underground.", parse);
+		Text.Add("The rabbits are traveling straight toward a low set of hills in the distance, an air of purpose about them. As you draw closer, you see that there are quite a number of their kind milling about the mounds, with even more passing in and out of large holes leading underground.", parse);
 		Text.NL();
 		if(burrows.flags["Access"] == Burrows.AccessFlags.Unknown) {
 			Text.Add("<b>You discovered the Burrows.</b>", parse);

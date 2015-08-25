@@ -230,7 +230,7 @@ Scenes.Outlaws.MariasBouquetPrompt = function(opts) {
 				Text.Clear();
 				Text.Add("Trying not to phrase your words too bluntly, you ask Maria if there’s someone here that she remembers.", parse);
 				Text.NL();
-				Text.Add("<i>“Not someone, [playername],”</i> she corrects you. <i>“Someones. My family didn’t know what was going on at the time, and answered a knock at the door. The royal guard dragged them out into the street screaming - my father, mother, and elder brother - and I never saw them again. They searched the place but not very thoroughly, because I got away by hiding under a basket.”</i>", parse);
+				Text.Add("<i>“Not someone, [playername],”</i> she corrects you. <i>“Someones. My family didn’t know what was going on at the time, and answered a knock at the door. The Royal Guard dragged them out into the street screaming - my father, mother, and elder brother - and I never saw them again. They searched the place but not very thoroughly, because I got away by hiding under a basket.”</i>", parse);
 				Text.NL();
 				Text.Add("That must have been horrible for the young girl that she must have been to go through. Are… are their names carved here, too?", parse);
 				Text.NL();
@@ -513,11 +513,11 @@ Scenes.Outlaws.PathIntoRigardBelinda = function() {
 		if(belinda.Met()) {
 			Text.Add("From the brothel?", parse);
 			Text.NL();
-			Text.Add("The doberwoman nods and takes another sip of her drink. <i>“Why, yes. It’s in quite the central location, all sorts and shapes of people come in and go out from dawn to dusk… bringing in all sorts of gifts for their favorite whores, and departing with keepsakes. Besides, the royal guard never harasses The Shadow Lady, and that’s a very big plus for the likes of us.”</i>", parse);
+			Text.Add("The doberwoman nods and takes another sip of her drink. <i>“Why, yes. It’s in quite the central location, all sorts and shapes of people come in and go out from dawn to dusk… bringing in all sorts of gifts for their favorite whores, and departing with keepsakes. Besides, the Royal Guard never harasses The Shadow Lady, and that’s a very big plus for the likes of us.”</i>", parse);
 			Text.NL();
-			Text.Add("They don’t? Does Lucille pay them off so they leave her alone, or perhaps she gives them special rates or favors? Even if it’s patronized by the well-to-do, a place like The Shadow Lady would at least have garnered some interest from the more zealous royal guards.", parse);
+			Text.Add("They don’t? Does Lucille pay them off so they leave her alone, or perhaps she gives them special rates or favors? Even if it’s patronized by the well-to-do, a place like The Shadow Lady would at least have garnered some interest from the more zealous Royal Guards.", parse);
 			Text.NL();
-			Text.Add("Belinda looks thoughtful at this, her eyes drawn into the distance as she scratches her chin. <i>“You by far underestimate the pull Madame Lucille has with Rigard’s upper crust, [playername]. If the royal guard were to raid The Shadow Lady any night of the week, they’d find no less than a dozen important personages rutting away in the upstairs rooms, not to speak of those on the floor. Well, maybe not that many - rutting might be too weak a word for some of the things they get up to - I should know. Trust me, my workplace isn’t going to see a single royal guard, except maybe as customers.</i>", parse);
+			Text.Add("Belinda looks thoughtful at this, her eyes drawn into the distance as she scratches her chin. <i>“You by far underestimate the pull Madame Lucille has with Rigard’s upper crust, [playername]. If the Royal Guard were to raid The Shadow Lady any night of the week, they’d find no less than a dozen important personages rutting away in the upstairs rooms, not to speak of those on the floor. Well, maybe not that many - rutting might be too weak a word for some of the things they get up to - I should know. Trust me, my workplace isn’t going to see a single Royal Guard, except maybe as customers.</i>", parse);
 		}
 		else {
 			Text.Add("All right, so when you’re in the city on outlaw business, you’re under her thumb.", parse);
@@ -1001,7 +1001,7 @@ Scenes.Outlaws.Exploration.Feeding = function() {
 		Text.NL();
 		Text.Add("<i>“The vegetable garden idea worked out kinda well.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“It’s still not enough. Forest soil is pretty poor, to be honest, and if we cleared out the land required to produce enough to feed everyone we might as well head up to the royal guard and tell them where we are. No, what we should do is make some friends out of the plains farmers…”</i>", parse);
+		Text.Add("<i>“It’s still not enough. Forest soil is pretty poor, to be honest, and if we cleared out the land required to produce enough to feed everyone we might as well head up to the Royal Guard and tell them where we are. No, what we should do is make some friends out of the plains farmers…”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Only problem is, what do we have that they’d risk associating with folk like us to get?”</i>", parse);
 		Text.NL();
@@ -1067,7 +1067,7 @@ Scenes.Outlaws.Exploration.Carpentry = function() {
 			Text.NL();
 			Text.Add("Really? That’s an interesting way to put it.", parse);
 			Text.NL();
-			Text.Add("<i>“Yep.”</i> Vaughn flips his plank over and starts sanding the other side. <i>“I think that if all the nobs were required to do an actual hour’s worth of hard work a week, they’d all be in much better shape, and so would we. I mean, Riordane at least held his own sword and did his own killing, now the nobs don’t even lower themselves to do that. No, they’ve got the royal guard for that.</i>", parse);
+			Text.Add("<i>“Yep.”</i> Vaughn flips his plank over and starts sanding the other side. <i>“I think that if all the nobs were required to do an actual hour’s worth of hard work a week, they’d all be in much better shape, and so would we. I mean, Riordane at least held his own sword and did his own killing, now the nobs don’t even lower themselves to do that. No, they’ve got the Royal Guard for that.</i>", parse);
 			Text.NL();
 			Text.Add("<i>“As I said, it doesn’t have to be a lot, an hour a week to get them sweating. Just enough to impress upon them what hard work’s for. It’s why I make sure my people get a regular dose of working with their hands, and they can’t complain because I’m doing the same thing right by their side.”</i>", parse);
 			Text.NL();
