@@ -504,7 +504,7 @@ Scenes.Kiakai.TalkUru = function() {
 			Text.NL();
 			Text.Add("What of Aria herself, you ask, did she suffer any consequence from the battle?", parse);
 			Text.NL();
-			Text.Add("<i>“The lady bested her adversary, of course she did, and even showed mercy on the foul creature,”</i> the elf sorrowfully bows [hisher] head. <i>“While she did not suffer any wounds, the encounter drained her, and she has yet to manifest on Eden since.”</i>", parse);
+			Text.Add("<i>“The Lady bested her adversary, of course she did, and even showed mercy on the foul creature,”</i> the elf sorrowfully bows [hisher] head. <i>“While she did not suffer any wounds, the encounter drained her, and she has yet to manifest on Eden since.”</i>", parse);
 			Text.NL();
 			Text.Add("In power, would [name] say they are evenly matched?", parse);
 			Text.NL();
@@ -816,7 +816,7 @@ Scenes.Kiakai.TalkEden = function() {
 		func : function() {
 			Text.Clear();
 
-			Text.Add("<i>“There is... something about this particular realm that makes it easier for portals to open, sometimes without any apparent reason,”</i> [name] explains, <i>“The lady once explained it to me as reality being thinner here, though I did not quite understand her at the time.”</i>", parse);
+			Text.Add("<i>“There is... something about this particular realm that makes it easier for portals to open, sometimes without any apparent reason,”</i> [name] explains, <i>“The Lady once explained it to me as reality being thinner here, though I did not quite understand her at the time.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Though there are significantly fewer incidents nowadays, once it was commonplace for rifts to several realms to be open at once, with people passing freely through them. It is the reason for there being so many different races living on Eden today.”</i>", parse);
 			Text.NL();
@@ -1294,9 +1294,9 @@ Scenes.Kiakai.TalkDimensionalViolationCont = function() {
 	Text.NL();
 	Text.Add("<i>“At the shrine, they found that he bore no trace of disease, but they sent a young priestess to check up on us. I wish they had chosen to send more than one, but it was our salvation that they responded at all. It was Yrissa who came to us, arriving after the village had been in the throes of plague for two full days. She has told me that she healed all the elves in turn, by herself, leaving me for last, for my illness was the most grievous of all, and she knew that even if she managed to overcome it, she would have no strength to move from the spot.”</i>", parse);
 	Text.NL();
-	Text.Add("<i>“As I say, I know nothing of what occurred myself, for my mind was clouded with dreams. I dreamt of endless forests, rotting where they stood. Of grasslands peeling away like the land's skin, leaving only a bare waste behind.”</i> [name] shudders, but goes on, as if mesmerized by [hisher] own tale. <i>“I dreamt of demons stalking the land, indulging in their vile pleasures. And then, after an eternity of darkness, I remember clearly I felt a tug at my mind. A tug that transformed into a steady pull, and then a swift flight, pulling me from this desolate realm, pulling me through the worlds into the gardens of Lady Aria.”</i>", parse);
+	Text.Add("<i>“As I say, I know nothing of what occurred myself, for my mind was clouded with dreams. I dreamt of endless forests, rotting where they stood. Of grasslands peeling away like the land's skin, leaving only a bare waste behind.”</i> [name] shudders, but goes on, as if mesmerized by [hisher] own tale. <i>“I dreamt of demons stalking the land, indulging in their vile pleasures - and then, after an eternity of darkness, I remember clearly I felt a tug at my mind. A tug that transformed into a steady pull, and then a swift flight, pulling me from this desolate realm, bringing me through the fabric of worlds into the gardens of Lady Aria.”</i>", parse);
 	Text.NL();
-	Text.Add("<i>“But even in that blessed realm, I...”</i> The elf hesitates before continuing. <i>“Even there my spirit was not freed from taint. I remember looking around me and being disgusted by the life I saw. I remember seeing the Lady herself and thinking it would be delightful to tear down her sanctity, to ravish her and make her beg for more.”</i> The elf starts at [hisher] own words, looking frightened by what [heshe] has said. [HeShe] swallows audibly before continuing. <i>“But then, the Lady pressed her hand against my forehead, and I felt the fog lift from my thoughts. I felt a vast joy at being within this place of beauty, though it was too tame by elvish standards, at being in the presence of one so vastly good.”</i>", parse);
+	Text.Add("<i>“But even in that blessed realm, I...”</i> The elf hesitates before continuing. <i>“Even there, my spirit was not freed from taint. I remember looking around me and being disgusted by the life I saw. I remember seeing the Lady herself and thinking it would be delightful to tear down her sanctity, to ravish her and make her beg for more.”</i> The elf starts at [hisher] own words, looking frightened by what [heshe] has said. [HeShe] swallows audibly before continuing. <i>“But then, the Lady pressed her hand against my forehead, and I felt the fog lift from my thoughts. I felt a vast joy at being within this place of beauty, though it was too tame by elvish standards, at being in the presence of one so vastly good.”</i>", parse);
 	Text.NL();
 	Text.Add("The elf smiles, happy at the bright memory. <i>“There is not much to tell after that. I woke up, fully healed, and saw Yrissa collapsed before me, the elders observing us both. Though I did not know her then, I knew she was the one who healed me and felt connected to her.”</i>", parse);
 	Text.NL();
@@ -1389,17 +1389,17 @@ Scenes.Kiakai.TalkPriest = function() {
 	
 	if(kiakai.flags["TalkedPriest"] == 0) {
 		if(kiakai.flags["Attitude"] < Kiakai.Attitude.Neutral) {
-			Text.Add("<i>“The priesthood is the instrument of the Lady on Eden,”</i> the elf tells you, looking proud. <i>“The order mostly stays at the shrine of Aria, though we sometimes venture out at the request of nearby villages, and some serve as advisers to men of power. Among other things, the priests of Aria are exceptionally skilled healers.”</i>", parse);
+			Text.Add("<i>“The priesthood is the instrument of the Lady on Eden,”</i> the elf tells you, looking proud. <i>“The order mostly stays at the Shrine of Aria, though we sometimes venture out at the request of nearby villages, and some serve as advisers to men of power. Among other things, the priests of Aria are exceptionally skilled healers.”</i>", parse);
 			Text.NL();
 			if(kiakai.relation.Get() > 25)
-				Text.Add("<i>“The priesthood is currently headed by high priestess Yrissa. She practically raised me from when I was but a young child,”</i> [name] confides with a fond tone in [hisher] voice.", parse);
+				Text.Add("<i>“The priesthood is currently headed by High Priestess Yrissa. She practically raised me from when I was but a young child,”</i> [name] confides with a fond tone in [hisher] voice.", parse);
 			else
-				Text.Add("<i>“The priesthood is currently headed by high priestess Yrissa. She is a strict woman, but kind and generous as well. You would do well to respect her.”</i> You sense that there is something [name] is not telling you, but decide it's probably not important.", parse);
+				Text.Add("<i>“The priesthood is currently headed by High Priestess Yrissa. She is a strict woman, but kind and generous as well. You would do well to respect her.”</i> You sense that there is something [name] is not telling you, but decide it's probably not important.", parse);
 		}
 		else {
-			Text.Add("<i>“The lady makes her presence on Eden be known through her priesthood,”</i> the elf explains to you. <i>“The order mostly stays at the shrine of Aria, though we sometimes venture out at the request of nearby villages, and some serve as advisers to men of power. Among other things, the priests of Aria are very skilled healers.”</i>", parse);
+			Text.Add("<i>“The Lady makes her presence on Eden be known through her priesthood,”</i> the elf explains to you. <i>“The order mostly stays at the Shrine of Aria, though we sometimes venture out at the request of nearby villages, and some serve as advisers to men of power. Among other things, the priests of Aria are very skilled healers.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>“The priesthood is currently headed by high priestess Yrissa,”</i> [name] confides with a fond tone in [hisher] voice, <i>“She practically raised me from when I was but a young child.”</i>", parse);
+			Text.Add("<i>“The priesthood is currently headed by High Priestess Yrissa,”</i> [name] confides with a fond tone in [hisher] voice. <i>“She practically raised me from when I was but a young child.”</i>", parse);
 		}
 
 		Text.NL();
@@ -1430,7 +1430,7 @@ Scenes.Kiakai.TalkPriest = function() {
 	});
 	options.push({ nameStr : "Yrissa",
 		func : Scenes.Kiakai.TalkPriestYrissa, enabled : true,
-		tooltip : "Ask about the high priestess."
+		tooltip : "Ask about the High Priestess."
 	});
 	options.push({ nameStr : "Aria",
 		func : Scenes.Kiakai.TalkPriestAria, enabled : true,
@@ -1465,19 +1465,19 @@ Scenes.Kiakai.TalkPriestHierarchy = function() {
 		Text.NL();
 		Text.Add("And then?", parse);
 		Text.NL();
-		Text.Add("<i>“Ah, after that, there are the diviners and the clerics. Both are the key servants of Lady Aria, with diviners focusing more on finding out the deep truths and protecting the integrity of the worlds and clerics instead focusing on healing and doing good in the here and now. After that, there are the six order heads, who are in charge of various groups in the priesthood, and above all stands the high priestess, who directs the priesthood as a whole.”</i>", parse);
+		Text.Add("<i>“Ah, after that, there are the diviners and the clerics. Both are the key servants of Lady Aria, with diviners focusing more on finding out the deep truths and protecting the integrity of the worlds and clerics instead focusing on healing and doing good in the here and now. After that, there are the six order heads, who are in charge of various groups in the priesthood, and above all stands the High Priestess, who directs the priesthood as a whole.”</i>", parse);
 	});
 	// Order heads
 	scenes.push(function() {
 		Text.Add("<i>“There are six order heads in total. Four of them are in charge of various ranks - one for novices and apprentices, one for acolytes, one for diviners, and one for clerics. The other two, usually seen as standing a little higher, instead govern the priesthood's chief activities - one of them directs the scholarship of the priesthood, and the other the healing.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“Each of them has a great deal of authority,”</i> [name] tells you, <i>“and many of them are powerful clerics or diviners in their own right. They also play a key role in choosing the high priestess.”</i>", parse);
+		Text.Add("<i>“Each of them has a great deal of authority,”</i> [name] tells you, <i>“and many of them are powerful clerics or diviners in their own right. They also play a key role in choosing the High Priestess.”</i>", parse);
 	});
 	// Long
 	scenes.push(function() {
-		Text.Add("<i>“The high priestess is the head of the priesthood, as you might expect, but more than that, she is its heart. She is chosen every seven years, and has the power to change the direction of the order in whatever way she feels will best serve Aria,”</i> [name] tells you.", parse);
+		Text.Add("<i>“The High Priestess is the head of the priesthood, as you might expect, but more than that, she is its heart. She is chosen every seven years, and has the power to change the direction of the order in whatever way she feels will best serve Aria,”</i> [name] tells you.", parse);
 		Text.NL();
-		Text.Add("<i>“The current high priestess is Yrissa, and everyone acknowledges her beauty and wisdom,”</i> the elf blushes slightly. <i>“She is thoughtful and kind, and has moved the priesthood to focus on helping the people of the land.”</i>", parse);
+		Text.Add("<i>“The current High Priestess is Yrissa, and everyone acknowledges her beauty and wisdom,”</i> the elf blushes slightly. <i>“She is thoughtful and kind, and has moved the priesthood to focus on helping the people of the land.”</i>", parse);
 	});
 	
 	var sceneId = kiakai.flags["RotPrHier"];
@@ -1514,7 +1514,7 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 		scenes.push(function() {
 			Text.Add("<i>“One of the primary restrictions on the priesthood is that all must remain celibate,”</i> [name] tells you, looking stern. <i>“Sex is a distraction from service to the Lady Aria, and romantic attachment is a distraction from serving the other people of this world.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>“Many find it difficult at times, but the high priestess has reaffirmed that this is the proper path in serving Aria.”</i>", parse);
+			Text.Add("<i>“Many find it difficult at times, but the High Priestess has reaffirmed that this is the proper path in serving Aria.”</i>", parse);
 			Text.Flush();
 			
 			if(kiakai.flags["Sexed"] != 0) {
@@ -1525,13 +1525,13 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 						Text.NL();
 						Text.Add("You mention that the two of you have engaged in certain activities.", parse);
 						Text.NL();
-						Text.Add("<i>“Oh, no!”</i> [name] answers, blushing furiously. <i>“Those certainly do not count. After all, m-my [virg],”</i> [heshe] explains, looking at the ground, [hisher] entire face turning beet red. <i>“A-and besides, Aria wouldn't forbid something th-that feels so good.”</i>", parse);
+						Text.Add("<i>“Oh, no!”</i> [name] answers, blushing furiously. <i>“Those certainly don't count. After all, m-my [virg],”</i> [heshe] explains, looking at the ground, [hisher] entire face turning beet red. <i>“A-and besides, Aria wouldn't forbid something th-that feels so good.”</i>", parse);
 						Text.NL();
 						Text.Add("You feel that if you keep asking about it, [name] will pass out from embarrassment.", parse);
 						Text.Flush();
 						Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
 					}, enabled : true,
-					tooltip : "But, you know, you and I..."
+					tooltip : "But... you know, you and I..."
 				});
 				options.push({ nameStr : "Okay",
 					func : function() {
@@ -1552,7 +1552,7 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 							Text.NL();
 							Text.Add("Why is that? How can the deepest expression of love be so repressed?", parse);
 							Text.NL();
-							Text.Add("<i>“I do not claim to know the reason for this, but I cannot disobey the high priestess on this matter.”</i> [name] looks torn, [hisher] emotions pulling [himher] one way, while [hisher] duty holds [himher] back.", parse);
+							Text.Add("<i>“I do not claim to know the reason for this, but I cannot disobey the High Priestess on this matter.”</i> [name] looks torn, [hisher] emotions pulling [himher] one way, while [hisher] duty holds [himher] back.", parse);
 							Text.NL();
 							Text.Add("Frustrated, you tell the elf that [heshe] should move according to [hisher] own heart, not to what others decree for [himher]. You think that this teaching is wrong, and you doubt that it is a belief that is really held by Aria. After all, why would such a benevolent goddess withhold the highest forms of pleasure from her followers?", parse);
 							Text.NL();
@@ -1568,7 +1568,7 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 							Text.NL();
 							Text.Add("Could [heshe] not use contraceptives to avoid getting pregnant?", parse);
 							Text.NL();
-							Text.Add("<i>“I do not know,”</i> the elf looks gloomy, <i>“Neither I nor anyone at the shrine knew much of elven physiology, it may well be that what works for regular humans would not work for me. I simply cannot take the risk.”</i>", parse);
+							Text.Add("<i>“I do not know,”</i> the elf looks gloomy. <i>“Neither I nor anyone at the shrine knew much of elven physiology, it may well be that what works for regular humans would not work for me. I simply cannot take the risk.”</i>", parse);
 							Text.Flush();
 							
 							Gui.NextPrompt(function() {
@@ -1580,11 +1580,11 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 								Text.NL();
 								Text.Add("<i>“C-can you really do that?”</i> [heshe] blushes at a particularly raunchy suggestion. Smiling, you respond by asking [himher] if [heshe]'d like to try.", parse);
 								Text.NL();
-								Text.Add("It is several hours later when you finish your talk, and by now [name] has a very different outlook on things.", parse);
+								Text.Add("It is several hours later when you finish your talk, and by now, [name] has a very different outlook on things.", parse);
 								Text.NL();
 								Text.Add("<i>“Well, would you like to try some of that with me?”</i> you ask in a sultry voice.", parse);
 								Text.NL();
-								Text.Add("<i>“I... umm... I guess I wouldn't mind...”</i> [name] mumbles. You give [himher] a kiss on the cheek before gathering your gear.", parse);
+								Text.Add("<i>“I... umm... I guess I would not mind...”</i> [name] mumbles. You give [himher] a kiss on the cheek before gathering your gear.", parse);
 								Text.Flush();
 								
 								player.AddLustFraction(0.3);
@@ -1610,7 +1610,7 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 		scenes.push(function() {
 			Text.Add("<i>“Although priests are supposed to be celibate, [playername], I suspect that some do not follow the decree,”</i> [name] tells you, looking concerned.", parse);
 			Text.NL();
-			Text.Add("<i>“I have seen some in the priesthood in possession of illicit materials.”</i> [HeShe] blushes slightly. <i>“And I have witnessed some pairs holding hands as they walk! I have even seen one pair enter an empty room, where I knew they could not possibly have any duties.”</i>", parse);
+			Text.Add("<i>“I have seen some in the priesthood in possession of illicit materials.”</i> [HeShe] blushes slightly. <i>“And I have also witnessed some pairs holding hands as they walk! I have even seen one pair enter an empty room, where I knew they could not possibly have any duties.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“W-worst of all, sometimes I... I hear noises...”</i> [name] trails off, clearly too embarrassed to continue on the topic.", parse);
 			Text.NL();
@@ -1624,9 +1624,9 @@ Scenes.Kiakai.TalkPriestDisciplines = function() {
 	scenes.push(function() {
 		Text.Add("<i>“The priesthood is meant to uphold the highest moral virtues,”</i> [name] tells you proudly. <i>“Though it is acknowledged that it is impossible for mortals to achieve perfection, we must always strive for it.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“We must always show compassion and generosity to those in need, whether it be through healing, or physical aid, or advice, and we must protect those in danger. We also strive to attain spiritual purity to best understand the wishes of our Lady Aria, and to serve as a suitable conduit for her power to better the world.”</i>", parse);
+		Text.Add("<i>“We must always show compassion and generosity to those in need - whether it be through healing, physical aid or advice, and we must protect those in danger. We also strive to attain spiritual purity to best understand the wishes of our Lady Aria, and to serve as a suitable conduit for her power to better the world.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“And, above all, we must oppose evil wherever we see it, and help to protect the integrity of all worlds as much as we are able.”</i> The elf seems almost to puff up at this recitation of [hisher] calling, clearly determined to do [hisher] utmost to fulfil these goals.", parse);
+		Text.Add("<i>“Above all, we must oppose evil wherever we see it, and help to protect the integrity of all worlds as much as we are able.”</i> The elf seems almost to puff up at this recitation of [hisher] calling, clearly determined to do [hisher] utmost to fulfill these goals.", parse);
 		Text.Flush();
 		Gui.NextPrompt(Scenes.Kiakai.TalkPriest);
 	});
@@ -1669,7 +1669,7 @@ Scenes.Kiakai.TalkPriestActivities = function() {
 	});
 	// Study
 	scenes.push(function() {
-		Text.Add("<i>“Apprentices and acolytes spend much of their day trying to grasp the mysteries of Aria,”</i> [name] informs you. <i>“We do not have one holy book, but there are many tomes telling tales of other worlds, and of the goodness of Aria in aiding all. There are also spoken verses that all in the priesthood are required to memorize, as their knowledge and recitation help focus the mind on our lady.”</i>", parse);
+		Text.Add("<i>“Apprentices and acolytes spend much of their day trying to grasp the mysteries of Aria,”</i> [name] informs you. <i>“We do not have one holy book, but there are many tomes telling tales of other worlds, and of the goodness of Aria in aiding all. There are also spoken verses that all in the priesthood are required to memorize, as their knowledge and recitation help focus the mind on our Lady.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“In addition to this, many, especially among the acolytes and diviners, choose to study books of knowledge of the world, of nature, and even of the arts of men, so that they may better understand how to serve Aria in Eden and elsewhere. Others eschew arcane study in favor of studying healing, learning of the workings of the bodies of animals and men and others. This study is favored by the clerics and acolytes who wish to join their ranks.”</i>", parse);
 		Text.NL();
@@ -1699,15 +1699,15 @@ Scenes.Kiakai.TalkPriestActivities = function() {
 	scenes.push(function() {
 		Text.Add("<i>“Some among the diviners have largely left the shrine, and taken up residence in the human capital, where they have become advisers. All diviners know much about the world and about human affairs, and as such, many in positions of power see their advice as invaluable.”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“In return, providing such advice gives them a perfect opportunity to turn the deeds of the mighty to serve the will of Aria, and to help the world. All of them still report to the order heads and the high priestess, and they occasionally come back to the shrine to inform the others of what is going on in the world, or to seek guidance from their peers when they feel they need it.”</i>", parse);
+		Text.Add("<i>“In return, providing such advice gives them a perfect opportunity to turn the deeds of the mighty to serve the will of Aria, and to help the world. All of them still report to the order heads and the High Priestess, and they occasionally come back to the shrine to inform the others of what is going on in the world, or to seek guidance from their peers when they feel they need it.”</i>", parse);
 		if(kiakai.relation.Get() > 25) {
 			Text.NL();
-			Text.Add("<i>“Between you and me,”</i> [name] adds, <i>“I question the piety of such diviners whom I have met. I fear some of them may have become seduced by worldly power and riches, and report to the high priestess, and even serve Lady Aria, in name only.”</i>", parse);
+			Text.Add("<i>“Between you and me,”</i> [name] adds, <i>“I question the piety of such diviners whom I have met. I fear some of them may have become seduced by worldly power and riches, and report to the High Priestess, and even serve Lady Aria, in name only.”</i>", parse);
 		}
 	});
 	// Rituals
 	scenes.push(function() {
-		Text.Add("<i>“Once a week, all at the shrine, whether priests or visitors, gather to pray together, [playername],”</i> [name] tells you. <i>“It is an occasion of communal bonding, letting us feel each others' devotion and be strengthened by it. We ask Aria to support us in our deeds and to guide us in fulfilling her will. I have quite missed these in the time I have been traveling,”</i> [heshe] confesses. <i>“They bring a sense of certainty and confidence to all in the priesthood.”</i>", parse);
+		Text.Add("<i>“Once a week, all at the shrine, whether priests or visitors, gather to pray together, [playername],”</i> [name] tells you. <i>“It is an occasion of communal bonding, letting us feel each other's devotion and be strengthened by it. We ask Aria to support us in our deeds and to guide us in fulfilling her will. I have quite missed these in the time I have been traveling,”</i> [heshe] confesses. <i>“They bring a sense of certainty and confidence to all in the priesthood.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“In addition, once every season there is a bigger celebration. It is a wondrous occasion, to which many come from the outlying villages, with patrols going out from the shrine and from the kingdom to help guide those who wish it past the beasts in the woods. Many in the priesthood play beautiful music, candles illuminate the grand hall deep into the night like a myriad of stars, and the kitchens labor day and night to provide food for any who wish it at the gathering.”</i> [name] speaks wistfully, a relaxed smile on [hisher] face, and you tell [himher] you'd like to see this celebration sometime.", parse);
 	});
@@ -1743,7 +1743,7 @@ Scenes.Kiakai.TalkPriestYrissa = function() {
 	
 	// General
 	scenes.push(function() {
-		Text.Add("<i>“The current high priestess of the order is Yrissa. She has held the position for two seven-year cycles in a row now, having assumed it at a young age.”</i>", parse);
+		Text.Add("<i>“The current High Priestess of the order is Yrissa. She has held the position for two seven-year cycles in a row now, having assumed it at a young age.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“She was actually the one who brought me from the village to the order.", parse);
 		Text.NL();
@@ -1753,11 +1753,11 @@ Scenes.Kiakai.TalkPriestYrissa = function() {
 		else
 			Text.Add("She has kept watch over me since then, making sure that I am doing well and learning to best serve Lady Aria. She has been a great help in guiding me on my path, [playername]. Perhaps she will be able to assist you, as well,”</i> [name] tells you, looking you straight in the eyes.", parse);
 		Text.NL();
-		Text.Add("<i>“She is generous and kind, but also strict and meticulous in ensuring that Aria's will is done. She, more than anyone, acts for the preservation of the worlds, and to ensure the dominion of our lady's goodness.”</i>", parse);
+		Text.Add("<i>“She is generous and kind, but also strict and meticulous in ensuring that Aria's will is done. She, more than anyone, acts for the preservation of the worlds, and to ensure the dominion of our Lady's goodness.”</i>", parse);
 	});
 	// Ambition
 	scenes.push(function() {
-		Text.Add("<i>“When Yrissa came for me in my village, she was in her teens, but already the order had recognized her abilities and potential. From there, she rose rapidly through the ranks, and her abilities were seen by all when she rose to the rank of high priestess at the almost unheard-of age of thirty-two,”</i> [name] tells you, pride evident in her voice.", parse);
+		Text.Add("<i>“When Yrissa came for me in my village, she was in her teens, but already the order had recognized her abilities and potential. From there, she rose rapidly through the ranks, and her abilities were seen by all when she rose to the rank of High Priestess at the almost unheard-of age of thirty-two,”</i> [name] tells you, pride evident in her voice.", parse);
 		Text.NL();
 		Text.Add("<i>“She has been skillful in directing the order since then, and ensuring that all our abilities are bent to the service of Aria.”</i>", parse);
 	});
@@ -1767,7 +1767,7 @@ Scenes.Kiakai.TalkPriestYrissa = function() {
 		scenes.push(function() {
 			Text.Add("<i>“To be honest with you, I often wish that Yrissa would simply have me promoted already. I think there are many among the order heads who oppose the promotion of an elf to the full prestige of a diviner or cleric, but she could override them if she wished to. I suspect that she had to override them just to get me to the rank of acolyte.”</i> [name] looks petulant, saying this.", parse);
 			Text.NL();
-			Text.Add("<i>“The last time we spoke of this, she had told me that it is best that I wait, so that the others can reconcile themselves to my skills, and my place in the order. But how much longer must I wait?”</i> The elf exclaims, frustrated. <i>“I am already the equal of most clerics in healing ability, and of most diviners in knowledge! What else do they wish of me before they acknowledge me?”</i> [HeShe] pauses, making a visible effort to calm [himher]self.", parse);
+			Text.Add("<i>“The last time we spoke of this, she had told me that it is best that I wait, so that the others can reconcile themselves to my skills, and my place in the order. How much longer must I wait?”</i> The elf exclaims, frustrated. <i>“I am already the equal of most clerics in healing ability, and of most diviners in knowledge! What else do they wish of me before they acknowledge me?”</i> [HeShe] pauses, making a visible effort to calm [himher]self.", parse);
 			Text.NL();
 			Text.Add("<i>“Ah, forgive me, [playername], I let my pride get the better of me.”</i>", parse);
 			Text.NL();
@@ -1812,7 +1812,7 @@ Scenes.Kiakai.TalkPriestAria = function() {
 		
 		if(kiakai.relation.Get() > 40) {
 			Text.NL();
-			Text.Add("The elf pauses, thinking a little, before adding, <i>“To be entirely honest with you, [playername], sometimes I wonder if the other priests hear from Lady Aria at all. The two times she spoke to me, I knew I could have no mistake nor illusion about either her message or intent. I beheld her corporeal form, and the beautiful sight of her garden as well. When the other priests speak of conversing with her, however, it is never something so clear or vivid, and often they receive ambiguous or even conflicting messages.”</i> [name] shakes her head. <i>“And yet, I know they are good men and women, and would not invent revelation where there is none. I simply do not know what to make of it.”</i>", parse);
+			Text.Add("The elf pauses, thinking a little, before adding, <i>“To be entirely honest with you, [playername], sometimes I wonder if the other priests hear from Lady Aria at all. The two times she spoke to me, I knew I could have no mistake nor illusion about either her message or intent. I beheld her corporeal form, and the beautiful sight of her garden as well. When the other priests speak of conversing with her, however, it is never something so clear or vivid, and often they receive ambiguous or even conflicting messages.”</i> [name] shakes her head. <i>“Despite this, I know they are good men and women, and would not invent revelation where there is none. I simply do not know what to make of it.”</i>", parse);
 		}
 	});
 	
@@ -1851,7 +1851,7 @@ Scenes.Kiakai.TalkPriestMeeting = function() {
 		Text.NL();
 		Text.Add("You ask [himher] how it could be possible for [himher] to travel for so long and still get there before you, when your own trip through the worlds felt like it was less than a day.", parse);
 		Text.NL();
-		Text.Add("<i>“That, I do not know,”</i> the elf replies. <i>“It could be that time flows differently in the other worlds, or that your passage through the boundaries was longer than you perceived. Or it could be that Lady Aria foresaw your arrival, and knew to send me to wait for you before you had even left your world.”</i>", parse);
+		Text.Add("<i>“That, I do not know,”</i> the elf replies. <i>“It could be that time flows differently in the other worlds, or that your passage through the boundaries was longer than you perceived. Perhaps it could be that Lady Aria foresaw your arrival, and knew to send me to wait for you before you had even left your world.”</i>", parse);
 	});
 	if(kiakai.relation.Get() > 50) {
 		// Detailed version
@@ -1860,13 +1860,13 @@ Scenes.Kiakai.TalkPriestMeeting = function() {
 			Text.NL();
 			Text.Add("You ask what [heshe] means.", parse);
 			Text.NL();
-			Text.Add("<i>“Well, you see, when I received Lady Aria's instructions while meditating, I indeed hurried off to my room to pack immediately. However, what I did not tell you is that, in my haste, I spared no time to inform any person in the priesthood of my intent.”</i> The elf looks conflicted saying this. <i>“Not even Yrissa. Now, I do not know how they will welcome me back. <b>Whether</b> they will welcome me back.”</i>", parse);
+			Text.Add("<i>“Well, you see, when I received Lady Aria's instructions while meditating, I indeed hurried off to my room to pack immediately. However, what I did not tell you is that, in my haste, I spared no time to inform any person in the priesthood of my intent.”</i> The elf looks conflicted saying this. <i>“Not even Yrissa. Now, I do not know how they will welcome me back - <b>if</b> they will welcome me back.”</i>", parse);
 			Text.NL();
-			Text.Add("<i>“There was nought else I could do, [playername]! How was I to prove that my revelation was genuine, when the only sign of it was in my mind. And if they hesitated or debated, or, worst of all, did not believe me, my purpose would have been ruined. Not telling the priesthood of Lady Aria's wishes was the only way I could carry them out!”</i>", parse);
+			Text.Add("<i>“There was naught else I could do, [playername]! How was I to prove that my revelation was genuine, when the only sign of it was in my mind. If they hesitated or debated, or, worst of all, did not believe me, my purpose would have been ruined. Not telling the priesthood of Lady Aria's wishes was the only way I could carry them out!”</i>", parse);
 			Text.NL();
 			
 			if(kiakai.flags["Attitude"] > Kiakai.Attitude.Neutral)
-				Text.Add("You hug the agitated elf, telling [himher] that [heshe] chose well. If [heshe] had delayed, you would've been lost, a near-dead stranger in a strange land, and Aria's plan would have been for nought.", parse);
+				Text.Add("You hug the agitated elf, telling [himher] that [heshe] chose well. If [heshe] had delayed, you would've been lost, a near-dead stranger in a strange land, and Aria's plan would have been for naught.", parse);
 			else
 				Text.Add("You pat the agitated elf on the head, telling [himher] that [heshe] did well. You tell [himher] that [heshe] doesn't need to worry about the attitude of the priesthood while [heshe]'s following you. After all, in serving you, [heshe] furthers the will of Aria.", parse);
 		});
