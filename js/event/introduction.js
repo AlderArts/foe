@@ -1277,7 +1277,7 @@ Intro.UruSexFuckAnal = function() {
 					Text.Clear();
 					Text.Add("<i>“I thought so,”</i> she sighs mournfully. ");
 					if(suckeddick)
-						Text.Add("<i>“Still, thanks for sucking me off, before,”</i> she says, smiling back over her shoulder. ");
+						Text.Add("<i>“Still, thanks for sucking me off before,”</i> she says, smiling back over her shoulder. ");
 					Text.Add("Arching her back, she is still, somehow, keeping your [cock] trapped inside her. <i>“Well,”</i> she states, a determinant tone in her voice, <i>“we are just going to have to keep going then, aren't we?”</i>", parse);
 					Text.NL();
 					Text.Add("With that, she starts to push her hips back against you. Surprised, you fall on the ground, with the demon following, the impact almost making you cum again. Moaning, the horny slut starts to gyrate her hips, rising and falling on your [cock], still hard despite your recent climax.", parse);
@@ -2170,7 +2170,7 @@ Intro.KiaQnA = function() {
 		});
 	}
 	if(!Intro.KiaTalkedAboutSelf) {
-		options.push({ nameStr : name,
+		options.push({ nameStr : kiakai.name,
 			func : function() {
 				Text.Clear();
 				parse["title"] = kiakai.mfTrue("priest", "priestess");
