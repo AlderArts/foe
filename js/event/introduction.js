@@ -1159,9 +1159,8 @@ Intro.UruSexFuckAnal = function() {
 			Text.Clear();
 			
 			player.slut.IncreaseStat(100, 5);
-			var suckeddick = true;
+			suckeddick = true;
 			Intro.timesSuckedUru++;
-			var uruCockDesc = function() { return uru.FirstCock().Short(); }
 			
 			Sex.Blowjob(player, uru);
 			player.FuckOral(player.Mouth(), uru.FirstCock(), 2);
@@ -1180,7 +1179,7 @@ Intro.UruSexFuckAnal = function() {
 				Text.Add("Having never done this before, you are a bit uncertain on how to proceed. A combination of sucking on the head and lapping at it with your tongue seems to do the trick, though.");			
 			Text.NL();
 			
-			Text.Add("<i>“Mmm... ooh... suck it deeper,”</i> the quivering omnibus moans, coaxing you to swallow more of her " + uruCockDesc() + ". Try as you might, your gag reflex soon gets the better of you, and you are forced to back off. Changing your tactic, you keep the head inside your mouth and alternate between sucking and blowing, all the while jerking the omnibus off using both of your hands.");
+			Text.Add("<i>“Mmm... ooh... suck it deeper,”</i> the quivering omnibus moans, coaxing you to swallow more of her huge demonic girl-cock. Try as you might, your gag reflex soon gets the better of you, and you are forced to back off. Changing your tactic, you keep the head inside your mouth and alternate between sucking and blowing, all the while jerking the omnibus off using both of your hands.");
 			Text.NL();
 			Text.Add("Eager to get to the real action, you intensify your efforts. Uru, possibly guessing your goal, nudges you on with soft moans, praising your skill. She begins to rock her hips, but the awkward position makes her unable to properly face-fuck you. Still, with your combined efforts, the omnibus is soon panting with need, <i>“G-gonna blow, deep down your throat!”</i> she moans huskily. From the throbbing of her dick and the increasingly erratic movement of her hips, you can tell she isn't joking.");
 			Text.NL();
