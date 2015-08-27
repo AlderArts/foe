@@ -1116,6 +1116,11 @@ Intro.UruSexFuckVagina = function() {
 }
 
 Intro.UruSexFuckAnal = function() {
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	
 	Text.Clear();
 		
 	Text.Add("You motion for the demon to bend over the throne, to which she happily complies, resting her arms on the black stone as she wriggles her expansive booty at you. <i>“Do you see something you like?”</i> she huskily asks, as she gazes up at you with an innocent look on her face. You gulp, transfixed by her slowly gyrating behind, putting all of her assets on display.");
