@@ -1468,20 +1468,19 @@ Intro.UruSexGetFuckedLead = function() {
 	var parse = {
 		playername : player.name
 	};
+	parse = player.ParserTags(parse);
 	
 	Text.Clear();
 	
 	var uruCockDesc = function() { return uru.FirstCock().Short(); }
-	var targetDesc;
 	if(Intro.fuckedTarget == BodyPartType.vagina)
-		targetDesc = function() { return player.FirstVag().Short(); }
+		parse["target"] = function() { return player.FirstVag().Short(); }
 	else
-		targetDesc = function() { return player.Butt().AnalShort(); }
-	var buttDesc = function() { return player.Butt().Short(); }
+		parse["target"] = function() { return player.Butt().AnalShort(); }
 	
 	Text.Add("You shake your head slightly. The demon has been taking charge far too much, it is time to turn this around! Determined, you get back on your feet and push the surprised omnibus back. She lands, ass first, on the throne, cock bouncing up and down excitedly. <i>“Why, [playername]!”</i> she exclaims delighted, <i>“Getting really forward aren't w-”</i>", parse);
 	Text.NL();
-	Text.Add("You cut her off with a deep kiss as you straddle her hips, her perky " + uruCockDesc() + " rubbing against your soft undercarriage. Positioning yourself so that her cock is pointing straight at your " + targetDesc() + ", you sigh with euphoria as you ease yourself down, relishing in the feeling of the omnibus entering you.");
+	Text.Add("You cut her off with a deep kiss as you straddle her hips, her perky " + uruCockDesc() + " rubbing against your soft undercarriage. Positioning yourself so that her cock is pointing straight at your [target], you sigh with euphoria as you ease yourself down, relishing in the feeling of the omnibus entering you.", parse);
 	
 	if(Intro.fuckedTarget == BodyPartType.ass) {
 		Sex.Anal(uru, player);
@@ -1493,44 +1492,39 @@ Intro.UruSexGetFuckedLead = function() {
 		player.FuckVag(player.FirstVag(), uru.FirstCock(), 5);
 		uru.Fuck(uru.FirstCock(), 5);
 	}
+	Text.NL();
 	
 	if(!Intro.lubedFlag) {
-		Text.NL();
 		if(Intro.fuckedTarget == BodyPartType.ass)
-			Text.Add("It isn't long before you are unable to go any further, though. Barely the tip has penetrated, but it is simply too painful to force any more inside. Sensing your predicament, your demonic lover begins to slowly rock her hips, indicating for you to bear with her for a while. In a few slight thrusts, accompanied by increasingly fervent moans from the omnibus, you feel your " + targetDesc() + " relaxing. An unnatural heat spreads from the immense pillar lodged in your behind, and you can feel large globs of sticky fluids being deposited inside your " + targetDesc() + ". It seems the demon can make her own lube at will! ");
+			Text.Add("It isn't long before you are unable to go any further, though. Barely the tip has penetrated, but it is simply too painful to force any more inside. Sensing your predicament, your demonic lover begins to slowly rock her hips, indicating for you to bear with her for a while. In a few slight thrusts, accompanied by increasingly fervent moans from the omnibus, you feel your [target] relaxing. An unnatural heat spreads from the immense pillar lodged in your behind, and you can feel large globs of sticky fluids being deposited inside your [target]. It seems the demon can make her own lube at will!", parse);
 		else
-			Text.Add("The going is pretty rough, but your own juices quickly coat Uru's " + uruCockDesc() + ", quickly turning the burning feeling in your loins from pain to pleasure. ");
+			Text.Add("The going is pretty rough, but your own juices quickly coat Uru's " + uruCockDesc() + ", quickly turning the burning feeling in your loins from pain to pleasure.");
+		Text.NL();
 	}
 	
-	Text.NL();
-	Text.Add("Spreading your legs a bit, you slowly relax, letting gravity do the work for you. You slide down a few inches until you meet resistance again. Giving it a last push, you manage to fit another half of an inch before rising off of her so only the tip remains inside. Repeating the process, you slowly work your way downward, inch by inch. Deciding to give you a hand, Uru plants her hands on your " + buttDesc() + ", adding a bit of extra pressure on the descent.");
+	Text.Add("Spreading your legs a bit, you slowly relax, letting gravity do the work for you. You slide down a few inches until you meet resistance again. Giving it a last push, you manage to fit another half of an inch before rising off of her so only the tip remains inside. Repeating the process, you slowly work your way downward, inch by inch. Deciding to give you a hand, Uru plants her hands on your [butt], adding a bit of extra pressure on the descent.", parse);
 	Text.NL();
 	Text.Add("With the extra hands keeping you stable, you are free to pleasure your other assets.");
 	Text.NL();
 
-	var cockDesc;
-	// Prepare cock desc function
-	if(player.NumCocks() > 0)
-		cockDesc = function() { return player.FirstCock().Short(); }
-	
-	if(cockDesc) {
-		Text.Add("Reaching between your legs, you give your " + cockDesc() + " a tug, forming a cocksleeve with the palm of your hand. You time your strokes to match your rise and fall on the demonette's " + uruCockDesc() + ", doubling the intensity of your pleasure.");
+	if(player.FirstCock()) {
+		Text.Add("Reaching between your legs, you give your [cock] a tug, forming a cocksleeve with the palm of your hand. You time your strokes to match your rise and fall on the demonette's " + uruCockDesc() + ", doubling the intensity of your pleasure.", parse);
 	}
 	else {
-		Text.Add("Reaching up to fondle your " + player.FirstBreastRow().Short() + ", you gently cup one of the orbs. You alternate between massaging the breast and teasing the sensitive nipple, pinching and pulling it.");
+		Text.Add("Reaching up to fondle your [breasts], you gently cup one of the orbs. You alternate between massaging the breast and teasing the sensitive nipple, pinching and pulling it.", parse);
 	}
 	
 	Text.NL();
-	Text.Add("You pick up the pace, forcefully impaling your " + targetDesc() + " on Uru's " + uruCockDesc() + ", moaning as your hips connect. Every inch of your internal passage is thoroughly filled with hot, demonic cock, the veined appendage pushing all your buttons.");
+	Text.Add("You pick up the pace, forcefully impaling your [target] on Uru's " + uruCockDesc() + ", moaning as your hips connect. Every inch of your internal passage is thoroughly filled with hot, demonic cock, the veined appendage pushing all your buttons.", parse);
 	Text.NL();
 	
-	if(cockDesc)
-		Text.Add("Gasping, you finally can't take any more, and unload your " + cockDesc() + " on the hermaphrodite's stomach, covering her red skin with strands of pearly white.");
+	if(player.FirstCock())
+		Text.Add("Gasping, you finally can't take any more, and unload your [cock] on the hermaphrodite's stomach, covering her red skin with strands of pearly white.", parse);
 	else
 		Text.Add("Slamming down to the hilt, your legs give away as you are left quivering, riding out the wave of your orgasm.");
 		
 	Text.NL();
-	Text.Add("The omnibus gently caresses your sensitive skin while you regain your strength. <i>“Not bad, lover,”</i> she purrs contentedly, <i>“Ready for round two?”</i> Before you can mouth an exhausted protest, she lifts your " + buttDesc() + " a few inches, before letting gravity impale you yet again. She starts a fast-paced rhythm, roughly pumping your abused " + targetDesc() + ", pulling your tired body closer to your next climax.");
+	Text.Add("The omnibus gently caresses your sensitive skin while you regain your strength. <i>“Not bad, lover,”</i> she purrs contentedly, <i>“Ready for round two?”</i> Before you can mouth an exhausted protest, she lifts your [butt] a few inches, before letting gravity impale you yet again. She starts a fast-paced rhythm, roughly pumping your abused [target], pulling your tired body closer to your next climax.", parse);
 	Text.NL();
 	Text.Add("Before long, the omnibus cries out in pleasure, hosing a veritable river of hot sperm into you. ");
 	if(Intro.timesSuckedUru >= 3)
@@ -1564,13 +1558,18 @@ Intro.UruSexGetFuckedLead2 = function() {
 Intro.UruSexGetFuckedPassive = function() {
 	Text.NL();
 
-	Text.Add("Faced with the towering manhood, you grow unsure, was this really what you wanted? The omnibus notices your distress and reaches down to fondly caress your " + player.Hair().Short() + ". <i>“Don't worry, pet. Just leave everything to me,”</i> she murmurs reassuringly. She imperiously instructs you to turn around on all fours and rest your torso on the seat of the obsidian throne. You meekly comply, very nervous for what is to come, but also incredibly turned on.");
+	Text.Add("Faced with the towering manhood, you grow unsure, was this really what you wanted? The omnibus notices your distress and reaches down to fondly caress your [hair]. <i>“Don't worry, pet. Just leave everything to me,”</i> she murmurs reassuringly. She imperiously instructs you to turn around on all fours and rest your torso on the seat of the obsidian throne. You meekly comply, very nervous for what is to come, but also incredibly turned on.", {hair: player.Hair().Short()});
 	Text.Flush();
 	Gui.NextPrompt(Intro.UruSexGetFuckedPassive2);
 }
 
 // Get fucked from fuck scenes jump in here
 Intro.UruSexGetFuckedPassive2 = function() {
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	
 	// If target is not already set, set it to ass for males and vagina for females	
 	Intro.fuckedTarget = Intro.fuckedTarget || ((player.body.Gender() == Gender.male) ? BodyPartType.ass : BodyPartType.vagina);	
 	
@@ -1589,12 +1588,6 @@ Intro.UruSexGetFuckedPassive2 = function() {
 		if(player.body.Gender() == Gender.female)
 			notTargetDesc = function() { return player.FirstVag().Short(); }
 	}
-	
-	var buttDesc = function() { return player.Butt().Short(); }
-	var cockDesc;
-	// Prepare cock desc function
-	if(player.NumCocks() > 0)
-		cockDesc = function() { return player.FirstCock().Short(); }
 		
 	Text.Clear();
 	
@@ -1606,9 +1599,9 @@ Intro.UruSexGetFuckedPassive2 = function() {
 	Text.NL();
 	
 	if(!Intro.lubedFlag) {
-		Text.Add("<i>“Not to crush your expectations, but I'd better lube you up first,”</i> the omnibus mentions with a chuckle, <i>“I plan to go aaall the way with you!”</i> Giving you no chance to protest, she leans down and plants a kiss on your " + buttDesc() + ". ");
-		if(cockDesc)
-			Text.Add("Leaning down further, she gives your " + cockDesc() + " a long lick from tip to root, before moving to your " + targetDesc() + ".");
+		Text.Add("<i>“Not to crush your expectations, but I'd better lube you up first,”</i> the omnibus mentions with a chuckle, <i>“I plan to go aaall the way with you!”</i> Giving you no chance to protest, she leans down and plants a kiss on your [butt]. ", parse);
+		if(player.FirstCock())
+			Text.Add("Leaning down further, she gives your [cock] a long lick from tip to root, before moving to your " + targetDesc() + ".", parse);
 		else
 			Text.Add("Leaning down further, she gives your " + notTargetDesc() + " a perfunctory lick before moving to your " + targetDesc() + ".");
 
@@ -1620,12 +1613,12 @@ Intro.UruSexGetFuckedPassive2 = function() {
 			Text.Add("rimming");
 		else
 			Text.Add("cunnilingus");
-		Text.Add(" is almost enough to make you orgasm right then and there, but, to your displeasure, she suddenly withdraws. Stifling your protests with a sharp slap on your " + buttDesc() + ", the amused omnibus announces that you are ready for the main course.");
+		Text.Add(" is almost enough to make you orgasm right then and there, but, to your displeasure, she suddenly withdraws. Stifling your protests with a sharp slap on your [butt], the amused omnibus announces that you are ready for the main course.", parse);
 		Text.NL();
 		Text.Add("Somehow, you don't feel ready.");
 	}
 	else {
-		Text.Add("The omnibus gives your " + buttDesc() + " a playful swat and spreads your cheeks, exposing your eager " + targetDesc() + ". <i>“Since you are all prepared, why don't we skip to the good part right away?”</i> she purrs.");
+		Text.Add("The omnibus gives your [butt] a playful swat and spreads your cheeks, exposing your eager " + targetDesc() + ". <i>“Since you are all prepared, why don't we skip to the good part right away?”</i> she purrs.", parse);
 	}
 	
 	Text.NL();
@@ -1655,7 +1648,7 @@ Intro.UruSexGetFuckedPassive2 = function() {
 	Text.NL();
 	Text.Add("As the demonette explores deeper and deeper within you, waves of pleasure well up, rising and falling like a tide with the tip of her cock directing their flow. You completely lose track of time, your world shrinking to the sensory input of her pumping rod. At some point, you probably cum, but you can't tell exactly when.");
 	Text.NL();
-	Text.Add("After an excruciatingly long time, Uru finally rests her hips against your " + buttDesc() + ". By this point, you are reduced to a panting and moaning mess, riding the edge of your last orgasm. The demon rests a while, enjoying her dominance over you. <i>“You'll be a good slut for me from now on, won't you?”</i> she purrs, accentuating her question by slowly rocking her hips, grinding against your deepest reaches");
+	Text.Add("After an excruciatingly long time, Uru finally rests her hips against your [butt]. By this point, you are reduced to a panting and moaning mess, riding the edge of your last orgasm. The demon rests a while, enjoying her dominance over you. <i>“You'll be a good slut for me from now on, won't you?”</i> she purrs, accentuating her question by slowly rocking her hips, grinding against your deepest reaches", parse);
 	if(Intro.fuckedTarget == BodyPartType.vagina)
 		Text.Add(", the tip of her cock rubbing and teasing the entrance to your womb.");
 	else
@@ -1673,10 +1666,10 @@ Intro.UruSexGetFuckedPassive2 = function() {
 	else
 		Text.Add(".");
 	Text.NL();
-	Text.Add("As you ride the roller coaster of pain and pleasure, you alternate between begging her to stop and begging for more. The demon only answers by slapping your " + buttDesc() + " and by fucking you even harder. During some point in the exchange of fluids, Uru has flipped you on your back, railing your mewling form relentlessly.");
+	Text.Add("As you ride the roller coaster of pain and pleasure, you alternate between begging her to stop and begging for more. The demon only answers by slapping your [butt] and by fucking you even harder. During some point in the exchange of fluids, Uru has flipped you on your back, railing your mewling form relentlessly.", parse);
 	Text.NL();
 	
-	if(cockDesc) {
+	if(player.FirstCock()) {
 		Text.Add("You can only moan helplessly as her thrusts bring you to another orgasm, this time depositing your load all over your chest and face.");
 		Text.NL();
 	}
@@ -1706,6 +1699,11 @@ Intro.UruSexDenied = function() {
 }
 
 Intro.UruSexAftermath = function() {
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	
 	Text.Clear();
 	
 	// Soul-sucking is tiring
@@ -1721,7 +1719,7 @@ Intro.UruSexAftermath = function() {
 	Text.NL();
 	Text.Add("<i>“H-how are you doing this?”</i> you gasp.");
 	Text.NL();
-	Text.Add("She studies you for a while, then simply wiggles her fingers at you. <i>“Magic”</i> she tells you with a grin. Uru crosses her arms over her expansive bust and paces in a circle around your struggling form. Apparently coming to a decision, she gives your " + player.Butt().Short() + " a sharp slap, leaving a stinging hand print. The feeling quickly fades, replaced with... something else.");
+	Text.Add("She studies you for a while, then simply wiggles her fingers at you. <i>“Magic”</i> she tells you with a grin. Uru crosses her arms over her expansive bust and paces in a circle around your struggling form. Apparently coming to a decision, she gives your [butt] a sharp slap, leaving a stinging hand print. The feeling quickly fades, replaced with... something else.", parse);
 	Text.NL();
 	Text.Add("You moan as a long thin tail sprouts from your quivering behind, snaking around wildly before you gain control of your new appendage. Forgetting yourself, you take a moment to study it, noting the dark reddish color and the spaded tip. Even suspended in the air as you are, the thing almost reaches the ground. Touching it sends shivers up your, now extended, spine.");
 	
@@ -2094,25 +2092,23 @@ Intro.NomadsWakingUp = function() {
 }
 
 Intro.MeetingKia = function() {
-	var name   = kiakai.name;
-	var heshe  = kiakai.heshe();
-	var HeShe  = kiakai.HeShe();
-	var hisher = kiakai.hisher();
-	var himher = kiakai.himher();
-	var HisHer = kiakai.HisHer();
+	var parse = {
+		name : kiakai.name
+	};
+	parse = kiakai.ParserPronouns(parse);
 	
 	Text.Clear();
 	
 	Text.Add("You gently dislodge yourself from the horny elf, pushing yourself into sitting position. Your chest is bare, but someone has managed to get you into a comfortable pair of pants. A better look at your bedmate confirms that ");
-	if(kiakai.body.Gender() == Gender.female)
+	if(kiakai.Gender() == Gender.female)
 		Text.Add("she is indeed a she, the soft swell of her small breasts and her slightly widened hips both telltale signs. ");
 	else
 		Text.Add("he is indeed a he, his flat chest, slim figure and the slight bulge between his legs being telltale signs. ");
-	Text.Add(HeShe + " is clad in a pale blue robe, ending a few inches above " + hisher + " bared knees.");
+	Text.Add("[HeShe] is clad in a pale blue robe, ending a few inches above [hisher] bared knees.", parse);
 	Text.NL();
-	Text.Add("<i>“Ah, you are awake!”</i> the elf announces happily. Confronted with the question as to what exactly " + kiakai.heshe() + " was doing in your beddings, and where your beddings <i>are</i> for that matter, the elf blushes slightly. <i>“L-lets not get hasty, here. I know it might look bad, but really, I am just trying to help.”</i> " + HeShe + " looks a bit distraught.");
+	Text.Add("<i>“Ah, you are awake!”</i> the elf announces happily. Confronted with the question as to what exactly [heshe] was doing in your beddings, and where your beddings <i>are</i> for that matter, the elf blushes slightly. <i>“L-lets not get hasty, here. I know it might look bad, but really, I am just trying to help.”</i> [HeShe] looks a bit distraught.", parse);
 	Text.NL();
-	Text.Add("<i>“My name is " + kiakai.name + ", and I serve Lady Aria,”</i> the slender elf tells you, <i>“I have been nursing you here since your arrival to Eden, about a day ago.”</i> You quietly consider the elf before you. " + name + " seems to be very somber and serious, far beyond what you would expect from someone looking as young as " + himher + ". You give your own name, a large number of questions already crowding in your mind.");
+	Text.Add("<i>“My name is [name], and I serve Lady Aria,”</i> the slender elf tells you, <i>“I have been nursing you here since your arrival to Eden, about a day ago.”</i> You quietly consider the elf before you. [name] seems to be very somber and serious, far beyond what you would expect from someone looking as young as [himher]. You give your own name, a large number of questions already crowding in your mind.", parse);
 	
 	Intro.KiaTalkedAboutAria = false;
 	Intro.KiaTalkedAboutEden = false;
@@ -2123,13 +2119,12 @@ Intro.MeetingKia = function() {
 }
 
 Intro.KiaQnA = function() {
-	var boygirl = (kiakai.body.Gender() == Gender.male) ? "boy" : "girl";
-	var name = kiakai.name;
-	var heshe = kiakai.heshe();
-	var HeShe = kiakai.HeShe();
-	var hisher = kiakai.hisher();
-	var himher = kiakai.himher();
-	var HisHer = kiakai.HisHer();
+	var parse = {
+		name : kiakai.name,
+		boygirl : kiakai.mfTrue("boy", "girl")
+	};
+	parse = kiakai.ParserPronouns(parse);
+	
 	Text.Flush();
 	// [Aria][Eden][Kia/Kai]["Healing"]
 	var options = new Array();
@@ -2138,9 +2133,9 @@ Intro.KiaQnA = function() {
 			func : function() {
 				Text.Clear();
 				
-				Text.Add("<i>“The lady informed me of your arrival, and told me to assist you,”</i> " + name + " tells you, <i>“She is the light that wards against the dark, and a great darkness is approaching. You have been granted a great task by her, the outcome of which may decide the fate of this entire realm.”</i>");
+				Text.Add("<i>“The lady informed me of your arrival, and told me to assist you,”</i> [name] tells you, <i>“She is the light that wards against the dark, and a great darkness is approaching. You have been granted a great task by her, the outcome of which may decide the fate of this entire realm.”</i>", parse);
 				Text.NL();
-				Text.Add("What is this " + boygirl + " talking about? <i>“As I understand it, you have already met the dark one,”</i> " + name + " states with a shudder, <i>“It is a blessing you survived that encounter.”</i> " + HisHer + " expression is grim as " + heshe + " looks at you.");
+				Text.Add("What is this [boygirl] talking about? <i>“As I understand it, you have already met the dark one,”</i> [name] states with a shudder, <i>“It is a blessing you survived that encounter.”</i> [HisHer] expression is grim as [heshe] looks at you.", parse);
 				Text.NL();
 				Text.Add("<i>“Uru seeks total conquest of all the planes, and if she manages to reach Eden, that goal will be within her reach. You have seen the destruction the demon brings, she must be stopped before it is too late. We have no time to waste.”</i>");
 				Intro.KiaTalkedAboutAria = true;
@@ -2155,15 +2150,15 @@ Intro.KiaQnA = function() {
 			func : function() {
 				Text.Clear();
 	
-				Text.Add("You ask how it is exactly that you came to this place, and where it is. " + HeShe + " mentioned Eden? " + name + " looks surprised.");
+				Text.Add("You ask how it is exactly that you came to this place, and where it is. [HeShe] mentioned Eden? [name] looks surprised.", parse);
 				Text.NL();
-				Text.Add("<i>“The lady must not have had much time to tell you about this place,”</i> " + heshe + " muses, settling down on the bedding next to you, <i>“Very well, I will tell you.”</i>");
+				Text.Add("<i>“The lady must not have had much time to tell you about this place,”</i> [heshe] muses, settling down on the bedding next to you, <i>“Very well, I will tell you.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“Though I do not know where you came from originally, you have passed through at least two different planes of existence on your way here. The first was the burning wasteland that is Uru's domain. Thankfully, my lady saved you from that place before you could succumb to the demons.”</i> The elf seems very uncomfortable talking about what " + heshe + " clearly thinks is place of great evil.");
+				Text.Add("<i>“Though I do not know where you came from originally, you have passed through at least two different planes of existence on your way here. The first was the burning wasteland that is Uru's domain. Thankfully, my lady saved you from that place before you could succumb to the demons.”</i> The elf seems very uncomfortable talking about what [heshe] clearly thinks is place of great evil.", parse);
 				Text.NL();
-				Text.Add("<i>“My Lady Aria then brought you into her own realm. Ah, it was long since I saw the sacred gardens last, too long...”</i> " + name + " seems to space out for a bit, focusing when you urge " + himher + " to continue. <i>“You might have noticed that you were losing strength the longer you spent in either of those realms. They are too... spiritual, I guess the word is. Ordinary humans seem to have a hard time surviving there for so long.”</i> " + HeShe + " thoughtfully considers you, <i>“That you were able to do so for such a long time indicates an unusually strong affinity for traversing the planes. I believe this was why the lady chose you.”</i>");
+				Text.Add("<i>“My Lady Aria then brought you into her own realm. Ah, it was long since I saw the sacred gardens last, too long...”</i> [name] seems to space out for a bit, focusing when you urge [himher] to continue. <i>“You might have noticed that you were losing strength the longer you spent in either of those realms. They are too... spiritual, I guess the word is. Ordinary humans seem to have a hard time surviving there for so long.”</i> [HeShe] thoughtfully considers you, <i>“That you were able to do so for such a long time indicates an unusually strong affinity for traversing the planes. I believe this was why the lady chose you.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“To answer your question, you are on the island of Eden, suspended in an endless sea of clouds. The barriers between the planes of existence are quite thin here, so you could see it as something of a hub, where it is possible for portals to other realms to be opened. Usually, the ability to open such a portal is reserved to beings of great power, unless...”</i> " + HeShe + " pauses and tentatively takes your hand, guiding it to rest on the gemstone in your pocket.");
+				Text.Add("<i>“To answer your question, you are on the island of Eden, suspended in an endless sea of clouds. The barriers between the planes of existence are quite thin here, so you could see it as something of a hub, where it is possible for portals to other realms to be opened. Usually, the ability to open such a portal is reserved to beings of great power, unless...”</i> [HeShe] pauses and tentatively takes your hand, guiding it to rest on the gemstone in your pocket.", parse);
 				Text.NL();
 				Text.Add("<i>“Unless they have access to a key.”</i>");
 
@@ -2178,14 +2173,14 @@ Intro.KiaQnA = function() {
 		options.push({ nameStr : name,
 			func : function() {
 				Text.Clear();
-				var title = (kiakai.body.Gender() == Gender.male) ? "priest" : "priestess";
+				parse["title"] = kiakai.mfTrue("priest", "priestess");
 				Text.Add("<i>“I have been in the service of Lady Aria for some thirty years, now. I am honored to be a member of her priesthood.”</i>");
 				Text.NL();
 				Text.Add("Hold on. Thirty years? The slender elf hardly looks more than eighteen.");
 				Text.NL();
-				Text.Add("<i>“As you can see, I am of elfin descent,”</i> " + name + " concedes, touching one of " + hisher + " pointed ears, <i>“We tend to age slower than is usual. Even though I look hardly more than a child to you, I am almost fifty years old, as they count it in these lands.”</i>");
+				Text.Add("<i>“As you can see, I am of elfin descent,”</i> [name] concedes, touching one of [hisher] pointed ears, <i>“We tend to age slower than is usual. Even though I look hardly more than a child to you, I am almost fifty years old, as they count it in these lands.”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“My lady instructed me to help you out in your quest in any way I could,”</i> " + name + " assures you. <i>“Let us get along as fellow servants of our lady!”</i> You look at the sincere " + title + " dubiously. It seems like " + heshe + " has already decided on how this relationship is going to work out.");
+				Text.Add("<i>“My lady instructed me to help you out in your quest in any way I could,”</i> [name] assures you. <i>“Let us get along as fellow servants of our lady!”</i> You look at the sincere [title] dubiously. It seems like [heshe] has already decided on how this relationship is going to work out.", parse);
 
 				Intro.KiaTalkedAboutSelf = true;
 				
@@ -2199,16 +2194,16 @@ Intro.KiaQnA = function() {
 			func : function() {
 				Text.Clear();
 				
-				Text.Add("You ask how what " + heshe + " was doing was in any way a form of healing. The elf looks indignant, but at least has the shame to blush a bit.");
+				Text.Add("You ask how what [heshe] was doing was in any way a form of healing. The elf looks indignant, but at least has the shame to blush a bit.", parse);
 				Text.NL();
-				Text.Add("<i>“I-I'll have you know that it is a sacred form of healing only taught to a select few within the temple,”</i> " + heshe + " blurts out, fidgeting uncomfortably as you raise an eyebrow skeptically, <i>“The lady may have healed your spirit and cleansed you of corruption before sending you here, but your body was at the brink of death when I found you. I have had to use everything I know about healing in order to bring you back, even stooping to acts you may consider lewd.”</i>");
+				Text.Add("<i>“I-I'll have you know that it is a sacred form of healing only taught to a select few within the temple,”</i> [heshe] blurts out, fidgeting uncomfortably as you raise an eyebrow skeptically, <i>“The lady may have healed your spirit and cleansed you of corruption before sending you here, but your body was at the brink of death when I found you. I have had to use everything I know about healing in order to bring you back, even stooping to acts you may consider lewd.”</i>", parse);
 				Text.NL();
-				Text.Add("Looks like " + name + " is really embarrassed about the whole thing, but you grudgingly concede that " + heshe + " probably saved your life, whatever " + hisher + " methods.");
+				Text.Add("Looks like [name] is really embarrassed about the whole thing, but you grudgingly concede that [heshe] probably saved your life, whatever [hisher] methods.", parse);
 
 				Intro.KiaTalkedAboutHealing = true;
 				Intro.KiaQnA();
 			}, enabled : true,
-			tooltip : Text.Parse("Just what was [heshe] <i>doing</i> when you woke up? <i>Healing?</i> Really now...", {heshe : kiakai.heshe()})
+			tooltip : Text.Parse("Just what was [heshe] <i>doing</i> when you woke up? <i>Healing?</i> Really now...", parse)
 		});
 	}
 	if(options.length > 0)
@@ -2218,14 +2213,16 @@ Intro.KiaQnA = function() {
 }
 
 Intro.KiaSurroundings = function() {
-	var name = kiakai.name;
+	var parse = {
+		name : kiakai.name
+	}
 	Text.Clear();
 	
 	Text.Add("Your most immediate questions answered, you start to explore your surroundings a bit. The tent you are in seems to be only one of many, all gathered in a small circle. In the middle of the camp there is a large fire pit, most likely serving as a gathering place of some sort. Right now, there does not seem to be very many people around. You spot an old man smoking a pipe, and a strange-looking woman with what looks like a pair of cat ears poking out of her hair.");
 	Text.NL();
 	Text.Add("In the distance, across the plains and past a few small farmsteads, you can see a large dense forest. At its center, an impossibly tall tree raises its branches, covering a good part of the sky above and dwarfing everything around it.");
 	Text.NL();
-	Text.Add("<i>“This campground belongs to the nomads. It tends to move around a bit, but it is neutral ground. Their chief has agreed to let us borrow this tent,”</i> " + name + " tells you, indicating the old man. <i>“You can return here if you ever need to rest.”</i>");
+	Text.Add("<i>“This campground belongs to the nomads. It tends to move around a bit, but it is neutral ground. Their chief has agreed to let us borrow this tent,”</i> [name] tells you, indicating the old man. <i>“You can return here if you ever need to rest.”</i>", parse);
 	Text.Flush();
 	Gui.NextPrompt(function() {
 		Text.Clear();
