@@ -1685,7 +1685,7 @@ Intro.UruSexGetFuckedPassive2 = function() {
 	Text.NL();
 	Text.Add("With a desperate burst of willpower you didn't know you possessed, you plant your feet on the omnibus' chest and push her back with all of your might. Struggling and flailing, your movements slow and sluggish, you try to crawl away, only to flop to the ground exhausted. Gallons of demon seed seeps from your abused " + targetDesc() + ".");
 	Text.NL();
-	Text.Add("Uru, a bit surprised at first, regains her composure and gaily strides over to you,  fully reinvigorated.");
+	Text.Add("Uru, a bit surprised at first, regains her composure and gaily strides over to you, fully reinvigorated.");
 	Text.Flush();
 	
 	Gui.NextPrompt(Intro.UruSexAftermath);
@@ -1737,11 +1737,10 @@ Intro.UruSexAftermath = function() {
 	Text.NL();
 	Text.Add("Before you have a chance to escape - not that there is anywhere to escape <i>to</i> - the omnibus rounds on you with a happy grin on her face. <i>“Do you know what this is?”</i> she asks, hopping around in a little excited dance, <i>“This is my key out of here!”</i>");
 	Text.NL();
-	Text.Add("She goes on to excitedly explain, at length, how manipulating the ethereal winds <i>just so</i>, combined with the right place and time, would enable gates to other realms to be opened. <i>“And it was all hidden in this key right here!”</i> she exults, <i>“Whoever made this was a genius!”</i> Bewildered, you are once again forced to reevaluate the fickle demon. She acts like an airhead, unable to keep her thoughts on any one thing for an extended period of time, but you could hardly follow anything of what she just said");
-	if(player.intelligence.growth > 1) Text.Add(", your newfound smarts notwithstanding.");
-	else Text.Add(".");
+	parse["Int"] = (player.intelligence.growth > 1) ? ", your newfound smarts notwithstanding" : "";
+	Text.Add("She goes on to excitedly explain, at length, how manipulating the ethereal winds <i>just so</i>, combined with the right place and time, would enable gates to other realms to be opened. <i>“And it was all hidden in this key right here!”</i> she exults. <i>“Whoever made this was a genius!”</i> Bewildered, you are once again forced to re-evaluate the fickle demon. She acts like an airhead, unable to keep her thoughts on any one thing for an extended period of time, but you could hardly follow anything of what she just said[Int].", parse);
 	Text.NL();
-	Text.Add("<i>“You know... maybe I should reward you for this,”</i> she muses to herself. You instinctively jerk back, not sure if you want any more 'gifts' from the demon. <i>“Oh tut, don't be like that,”</i> she chides, <i>“With some work, you could be someone with power. You've got good foundation, you've survived here this long, after all.”</i> Bewildered as to what she is talking about, you consider her offer.");
+	Text.Add("<i>“You know... maybe I should reward you for this,”</i> she muses to herself. You instinctively jerk back, not sure if you want any more 'gifts' from the demon. <i>“Oh tut, don't be like that,”</i> she chides. <i>“With some work, you could be someone with power. You've got good foundation; you've survived here this long, after all.”</i> Bewildered as to what she is talking about, you consider her offer.");
 	Text.NL();
 	Text.Add("<i>“And what if I refuse?”</i> you guardedly answer.");
 	Text.NL();
@@ -1829,9 +1828,9 @@ world.loc.LightAspect.Garden.events.push(new Link(
 	function() {
 		Text.Clear();
 		
-		Text.Add("You examine the strange bird wading in a nearby shallow pond. Looking closer at it you realize that it is of a species you have never seen before, a ball of fluffy blue feathers on long graceful legs, the head on its long thin neck topped by a bright orange plume. In height, it's just about reaches your knees.");
+		Text.Add("You examine the strange bird wading in a nearby shallow pond. Looking closer at it you realize that it is of a species you have never seen before; a ball of fluffy blue feathers on long graceful legs, the head on its long, thin neck topped by a bright orange plume. In height, it's just about reaches your knees.");
 		Text.NL();
-		Text.Add("You skeptically eye the creature, attracting its attention. For a while the two of you silently observe each other. Feeling slightly awkward, you quip, <i>“I don't suppose it was you who spoke just now?”</i>");
+		Text.Add("You skeptically eye the creature, attracting its attention. For a while the two of you silently observe each other. Feeling slightly awkward, you quip: <i>“I don't suppose it was you who spoke just now?”</i>");
 		Text.NL();
 		Text.Add("The bird throws a glance toward the marble building, then turns back to you. Tilting its head slightly to the side, it gravely proclaims in a musical voice, <i>“No.”</i> You are left with a bewildered expression as the bird takes to the air and flies off.");
 		Text.NL();
@@ -1864,9 +1863,9 @@ world.loc.LightAspect.Garden.links.push(new Link(
 			Text.Clear();
 			Text.Say("data/aria.png", "", "left");
 			
-			Text.Add("There is no doubt in your mind that she is indeed a goddess; the heartachingly beautiful woman before you stands by a fountain, a worried expression on her perfect face. She is clad in a long white dress that seem to almost float above the ground, as if it were underwater. The skin on her smooth limbs is fair and unblemished, and an expanse of golden locks falls to her waist in a mass of curls. She carries herself with regal composure and is well over six feet tall.");
+			Text.Add("There is no doubt in your mind that she is indeed a goddess; the heartachingly beautiful woman before you stands by a fountain, a worried expression on her perfect face. She is clad in a long white dress that seems to almost float above the ground, as if it were underwater. The skin on her smooth limbs is fair and unblemished, and an expanse of golden locks falls to her waist in a mass of curls. She carries herself with regal composure and is well over six feet tall.");
 			Text.NL();
-			Text.Add("Her dress - while tastefully chaste - expose part of her generous bosom. Realizing that you are ogling her, your eyes rise to study her face instead. Her eyes, rather than having regular pupils, are pools of shining light, partly obscured under thick lashes. As she speaks to you once more, her full red lips do not move.");
+			Text.Add("Her dress - while tastefully chaste - exposes part of her generous bosom. Realizing that you are ogling her, your eyes rise to study her face instead. Her eyes, rather than having regular pupils, are pools of shining light, partly obscured under thick lashes. As she speaks to you once more, her full red lips do not move.");
 			Text.NL();
 			Text.Add("<i>Welcome, young one.</i>");
 			Text.NL();
@@ -1939,7 +1938,7 @@ Intro.AriaTalk = function() {
 	
 	Text.Add("The whole purification process was unexpectedly tiring, leaving you weak at the knees.");
 	Text.NL();
-	Text.Add("<i>Now then,</i> she gestures to a marble bench nearby, <i>Please allow me to answer your questions.</i> The two of you get seated. What do you want to ask the goddess?");
+	Text.Add("<i>Now then,</i> she gestures to a marble bench nearby. <i>Please allow me to answer your questions.</i> The two of you get seated. What do you want to ask the goddess?");
 	
 	Intro.AriaTalkedAboutAria = false;
 	Intro.AriaTalkedAboutUru = false;
@@ -1957,11 +1956,11 @@ Intro.AriaQnA = function() {
 			func : function() {
 				Text.Clear();
 				
-				Text.Add("<i>“You... I guess you saved me back there. How? Why? And who are you, exactly... are you a goddess?”</i> you ask, feeling self-conscious.");
+				Text.Add("<i>“You... I guess you saved me back there. How? Why? Who <b>are</b> you, exactly... are you a goddess?”</i> you ask, feeling self-conscious.");
 				Text.NL();
-				Text.Add("<i>I am Aria. I am who I am.</i> The radiant woman gazes off into the distance. <i>Before, it was simpler... fewer worlds to care for, fewer people to protect. But seeing the widespread destruction, and calamity after calamity sweeping across the planes... I had to act.</i> Aria sighs. <i>I am the one who protects against the taint, and tries to abate the tides of darkness through the ages. But it grows hard, so hard. Sometimes, I feel old and powerless, as I watch another world fall...</i>");
+				Text.Add("<i>I am Aria. I am who I am.</i> The radiant woman gazes off into the distance. <i>Before, it was simpler... fewer worlds to care for, fewer people to protect. After seeing the widespread destruction, calamity after calamity sweeping across the planes... I had to act.</i> Aria sighs. <i>I am the one who protects against the taint, and tries to abate the tides of darkness through the ages, but it grows hard, so hard. Sometimes, I feel old and powerless, as I watch another world fall...</i>");
 				Text.NL();
-				Text.Add("She falls silent. <i>“Old?”</i> you protest, surely she could not be older than twenty-five! She gives you a weak smile, suddenly looking vulnerable, tired, even.");
+				Text.Add("She falls silent. <i>“Old?”</i> you protest, surely she could not be older than twenty-five! She gives you a weak smile, suddenly looking vulnerable, perhaps even tired.");
 				Text.NL();
 				Text.Add("<i>Yes, it was I who saved you and brought you to this place, though, not entirely of my own power. As to why... I will get to that, but there is more to talk about. Suffice to say, I wish to ask a favor of you.</i>");
 				Intro.AriaTalkedAboutAria = true;
@@ -1976,9 +1975,9 @@ Intro.AriaQnA = function() {
 			func : function() {
 				Text.Clear();
 	
-				Text.Add("<i>“That demon... who was she?”</i> As you ask, you realize that you want to know more about the tempting, but fickle, hermaphrodite, but you cannot quite pinpoint the reason. Are you just interested because of the threat she represents, or do you have some other, darker motive?");
+				Text.Add("<i>“That demon... who was she?”</i> As you ask, you realize that you want to know more about the tempting yet fickle hermaphrodite, but you cannot quite pinpoint the reason. Are you just interested because of the threat she represents, or do you have some other, darker motive?");
 				Text.NL();
-				Text.Add("<i>Uru,</i> the goddess frowns, looking disconcerted, <i>Beware of that one, she is very, very dangerous. Unpredictable, chaotic and - as I am sure you noticed - very powerful. The plane she inhabits... that place was once a vibrant world, full of life. All reduced to ashes, by her hand and by those who serve her.</i>");
+				Text.Add("<i>Uru,</i> the goddess frowns, looking disconcerted. <i>Beware of that one, she is very, very dangerous. Unpredictable, chaotic and - as I am sure you noticed - very powerful. The plane she inhabits... that place was once a vibrant world, full of life. All reduced to ashes, by her hand and by those who serve her.</i>");
 				Text.NL();
 				Text.Add("<i>Thankfully, she is unable to make portals herself, leaving her effectively sealed in that place. Who knows what harm she could do, were she to break free...</i>");
 				Text.NL();
