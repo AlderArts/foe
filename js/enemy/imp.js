@@ -216,7 +216,7 @@ Intro.ImpsWinUseMale = function() {
 
 Intro.ImpsCuntBlock = function(parse) {
 	Intro.cuntBlocked = true;
-	Text.Add("<i>“Fuah, I... I need more!”</i> Stepping on the imp's shoulder, you push him to the ground. <i>“Now, be a good boy and stay like that,”</i> you breathe lustily, working him to full arousal with the sole of your foot. Straddling the imp's cock, you rub your wet labia against the tip, but when you try to sink down on the impressive tool, something blocks you. Moaning in frustration, you try to press down again, but the imp's [cockDesc] just slides to the side, harmlessly.", parse);
+	Text.Add("<i>“Fuah, I... I need more!”</i> Stepping on the imp's shoulder, you push him to the ground. <i>“Now, be a good boy and stay like that,”</i> you breathe lustily, working him to full arousal with the sole of your foot. Straddling the imp's cock, you rub your wet labia against the tip, but when you try to sink down on the impressive tool, something blocks you. Moaning in frustration, you try to press down again, but the imp's [impCockDesc] just slides to the side, harmlessly.", parse);
 	Text.NL();
 	Text.Add("<b>YOUR VIRGINITY IS <i>MINE</i>,</b> the demon rumbles maliciously, <b>THESE TRASH CAN MAKE DO WITH YOUR OTHER HOLES.</b>", parse);
 	Text.NL();
@@ -337,15 +337,16 @@ Intro.ImpsWinRide = function() {
 	Text.Add("You walk over to one of the prone imps and prod it into a wakeful state. <i>“On your back,”</i> you imperiously order it, <i>“I have need of your cock.”</i> The imp is quick to follow your command, its [impCockDesc] rising to attention as he looks up at you expectantly.", parse);
 	Text.NL();
 	
-	if(player.body.Gender() == Gender.female) {
+	if(player.FirstVag()) {
 		if(!Intro.cuntBlocked) {
 			Intro.ImpsCuntBlock(parse);
 		}
 		else // Female repeat
 			Text.Add("Knowing that the demon will just stop you if you try to use your [cuntDesc], you lower your ass down and press your other hole against the still pole the imp is presenting you with.", parse);
 	}
-	else // Male
+	else {// Male
 		Text.Add("Licking your lips hungrily, you give your own [cockDesc] a few strokes before lowering yourself to straddle the imp, rubbing your taint against his [impCockDesc].", parse);
+	}
 	Text.NL();
 	
 	Intro.ImpsWinRideEntrypoint();
