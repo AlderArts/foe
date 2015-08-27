@@ -87,7 +87,7 @@ Intro.ImpsWinPrompt = function() {
 	
 	var imp = new Imp();
 	
-	var genDesc = (player.body.Gender() == Gender.male) ?
+	var genDesc = (player.Gender() == Gender.male) ?
 		function() { return player.FirstCock().Short(); } :
 		function() { return player.FirstVag().Short(); };
 		
@@ -106,7 +106,7 @@ Intro.ImpsWinPrompt = function() {
 	});
 	options.push({ nameStr : "Use",
 		func : function() {
-			if(player.body.Gender() == Gender.male)
+			if(player.Gender() == Gender.male)
 				Intro.ImpsWinUseMale();
 			else
 				Intro.ImpsWinUseFemale();
@@ -404,7 +404,7 @@ Intro.ImpsWinGroup = function() {
 		//Imp
 		impCockDesc : function() { return imp.FirstCock().Short(); },
 		
-		another     : (player.body.Gender() == Gender.male) ? "a" : "another"
+		another     : (player.Gender() == Gender.male) ? "a" : "another"
 	};
 	
 	Text.Clear();
@@ -412,7 +412,7 @@ Intro.ImpsWinGroup = function() {
 	Text.NL();
 	
 	// Male/female split
-	if(player.body.Gender() == Gender.male) {
+	if(player.Gender() == Gender.male) {
 		Text.Add("<i>“You, on all fours,”</i> you point to one of the imps, grinning widely. The chosen imp whimpers, but complies with your order, drawing amused snickers from the other imps. They quickly quiet down when you add, <i>“And you two, get my cock ready.”</i>", parse);
 		Text.NL();
 		Text.Add("The two reluctant imps take turns sucking your [cockDesc], coating it with saliva, preparing it for penetration. Enjoying your power over the defeated imps, you lick a few of your fingers and grab hold of the prone imp in front of you, shoving three fingers up to the knuckles in his butt.", parse);
@@ -443,7 +443,7 @@ Intro.ImpsWinGroup = function() {
 	Text.NL();
 	
 	// Male/female split
-	if(player.body.Gender() == Gender.male)
+	if(player.Gender() == Gender.male)
 		Text.Add("You can feel your release building up, as your [cockDesc] excitedly twitches, pumping the imp at the end of the butt-fuck train full of sticky spunk.", parse);
 	else // female
 		Text.Add("The multiple penetration finally becomes too much for you, and you buck your hips into the face of the imp buried in your crotch, dripping the juices from your release all over him.", parse);
@@ -612,8 +612,8 @@ Intro.DemonGift = function() {
 	}
 	
 	var parse = {
-		msmr        : (player.body.Gender() == Gender.male) ? "MISTER" : "MISS",
-		hisher      : (player.body.Gender() == Gender.male) ? "HIS" : "HER",
+		msmr        : (player.Gender() == Gender.male) ? "MISTER" : "MISS",
+		hisher      : (player.Gender() == Gender.male) ? "HIS" : "HER",
 		cuntDesc    : function() { return player.FirstVag().Short(); },
 		cockDesc    : function() { return player.FirstCock().Short(); },
 		cockLen     : function() { return player.FirstCock().Desc().len; },
@@ -638,7 +638,7 @@ Intro.DemonGift = function() {
 		}, enabled : true,
 		tooltip : "No way you are letting that demon play around with your parts!"
 	});
-	if(player.body.Gender() == Gender.female) {
+	if(player.Gender() == Gender.female) {
 		options.push({ nameStr : "Vaginal cap",
 			func : function() {
 				Text.Add("You let out a shuddering gasp as you feel your insides shift around. You feel you could probably take a lot bigger cocks now...");
@@ -653,7 +653,7 @@ Intro.DemonGift = function() {
 			tooltip : "Increasing your capacity would allow you to take even bigger dicks..."
 		});
 	}
-	if(player.body.Gender() == Gender.male) {
+	if(player.Gender() == Gender.male) {
 		options.push({ nameStr : "Bigger load",
 			func : function() {
 				Text.Add("Before you even utter the words, you can feel your sack churning, growing larger and more virile. You are filled with an urge to deposit your seed in something, anything.");
