@@ -1181,17 +1181,17 @@ Intro.UruSexFuckAnal = function() {
 			
 			Text.Add("<i>“Mmm... ooh... suck it deeper,”</i> the quivering omnibus moans, coaxing you to swallow more of her huge demonic girl-cock. Try as you might, your gag reflex soon gets the better of you, and you are forced to back off. Changing your tactic, you keep the head inside your mouth and alternate between sucking and blowing, all the while jerking the omnibus off using both of your hands.");
 			Text.NL();
-			Text.Add("Eager to get to the real action, you intensify your efforts. Uru, possibly guessing your goal, nudges you on with soft moans, praising your skill. She begins to rock her hips, but the awkward position makes her unable to properly face-fuck you. Still, with your combined efforts, the omnibus is soon panting with need, <i>“G-gonna blow, deep down your throat!”</i> she moans huskily. From the throbbing of her dick and the increasingly erratic movement of her hips, you can tell she isn't joking.");
+			Text.Add("Eager to get to the real action, you intensify your efforts. Uru, possibly guessing your goal, nudges you on with soft moans, praising your skill. She begins to rock her hips, but the awkward position makes her unable to properly facefuck you. Still, with your combined efforts, the omnibus is soon panting with need. <i>“G-gonna blow, deep down your throat!”</i> she moans huskily. From the throbbing of her dick and the increasingly erratic movement of her hips, you can tell she isn't joking.");
 			Text.NL();
 			Text.Add("Planting her feet wide, she shoves as much of her dick down your throat as she can, ignoring your protests. As she reaches her climax, wave after wave of hot spunk is pumped down your gullet, making your throat sticky with demon jizz. Overwhelmed by the first few blasts, you almost forget your true purpose, opting instead to swallow as much of the delicious fluid as you can.");
 			Text.NL();
 			Text.Add("You realize that you don't have to worry, though, as the steady stream of cum doesn't let up. Soon, you pull away for air, allowing the demon to paint not only your face white, but also your front. Fumbling a bit, you easily manage to fill your mouth with hot jizm, fighting back the urge to swallow it immediately.");
 			Text.NL();
-			Text.Add("Finally, the omnibus seems to have slowed down, the stream of spunk turning into a slow trickle. You fondly caress her member one last time, before straightening and depositing your sticky cargo between her butt cheeks. You eagerly coat your [cock] from root to crown in the makeshift lube, before firmly pressing the tip against Uru's coated anus.", parse);
+			Text.Add("Finally, the omnibus seems to have slowed down, the stream of spunk turning into a slow trickle. You fondly caress her member one last time, before straightening and depositing your sticky cargo between her butt cheeks. You eagerly coat your [cock] from root to crown in the makeshift lube before firmly pressing the tip against Uru's coated anus.", parse);
 			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : "One way to acquire some lube could be to suck it from Uru's cock. No, that is way to lewd! Isn't it?"
+		tooltip : "One way to acquire some lube could be to suck it from Uru's cock. No, that is way too lewd! ...Isn't it?"
 	});
 	Gui.SetButtonsFromList(options);
 	
@@ -1209,7 +1209,7 @@ Intro.UruSexFuckAnal = function() {
 		if(player.Gender() == Gender.male)
 			Text.Add(" Your swelling balls slap against her full bottom, eager to deposit their load into the willing omnibus.");
 		Text.NL();
-		Text.Add("Biting your lip, you start to move, hips thrusting back and forth. Her tight tunnel is gripping like a vice, yet you can move in and out of her with ease. After a few minutes of intensly ass-fucking the demon, you feel her tail curling up around one of your legs and gasp as the tip brushes against your own back door. How do you react? Ignore it, eagerly accept it or firmly deny it?");
+		Text.Add("Biting your lip, you start to move, hips thrusting back and forth. Her tight tunnel is gripping like a vice, yet you can move in and out of her with ease. After a few minutes of intensely ass-fucking the demon, you feel her tail curling up around one of your legs and gasp as the tip brushes against your own back door. How do you react? Ignore it, eagerly accept it or firmly deny it?");
 		Text.Flush();
 		
 		var buttfucked = false;
@@ -1238,7 +1238,7 @@ Intro.UruSexFuckAnal = function() {
 				Text.Flush();
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : "If that makes her happy, why not? You got other things on your mind. Like fucking her brains out."
+			tooltip : "If that makes her happy, why not? You got other things on your mind - like fucking her brains out."
 		});
 		options.push({ nameStr : "Deny",
 			func : function() {
@@ -1253,7 +1253,7 @@ Intro.UruSexFuckAnal = function() {
 		
 		Gui.Callstack.push(function() {
 			Text.NL();
-			Text.Add("Inexperienced as you are, it is not long before your erratic thrusting brings you to your climax, basting the omnibus's anal tunnel with your white, hot spunk. Panting, you attempt to withdraw from her, only to find that you can't. <i>“Oh, you can't be done already, can you?”</i> the omnibus complains petulantly, <i>“I was just getting into it!”</i>");
+			Text.Add("Inexperienced as you are, it is not long before your erratic thrusting brings you to your climax, basting the omnibus' anal tunnel with your white, hot spunk. Panting, you attempt to withdraw from her, only to find that you can't. <i>“Oh, you can't be done already, can you?”</i> the omnibus complains petulantly, <i>“I was just getting into it!”</i>");
 			Text.NL();
 			Text.Add("She sighs hopefully, <i>“I guess you wouldn't be interested in switching places?”</i>");
 			if(buttfucked)
@@ -1275,10 +1275,10 @@ Intro.UruSexFuckAnal = function() {
 			options.push({ nameStr : "Nope",
 				func : function() {
 					Text.Clear();
-					Text.Add("<i>“I thought so,”</i> she sighs mournfully");
+					Text.Add("<i>“I thought so,”</i> she sighs mournfully. ");
 					if(suckeddick)
-						Text.Add(", <i>“Still, thanks for sucking me of, before,”</i> she says, smiling back over her shoulder");
-					Text.Add(". Arching her back, she is still, somehow, keeping your [cock] trapped inside her. <i>“Well,”</i> she states, a determinant tone in her voice, <i>“We are just going to have to keep going then, aren't we?”</i>", parse);
+						Text.Add("<i>“Still, thanks for sucking me off, before,”</i> she says, smiling back over her shoulder. ");
+					Text.Add("Arching her back, she is still, somehow, keeping your [cock] trapped inside her. <i>“Well,”</i> she states, a determinant tone in her voice, <i>“we are just going to have to keep going then, aren't we?”</i>", parse);
 					Text.NL();
 					Text.Add("With that, she starts to push her hips back against you. Surprised, you fall on the ground, with the demon following, the impact almost making you cum again. Moaning, the horny slut starts to gyrate her hips, rising and falling on your [cock], still hard despite your recent climax.", parse);
 					Text.Flush();
@@ -1303,7 +1303,7 @@ Intro.UruSexFuckAnal2 = function() {
 	Gui.NextPrompt(function() {
 		player.AddSexExp(5);
 		
-		Text.Add("How many times has she made you climax, pumping her full of hot seed? You have completely lost both count, riding on the brink of exhaustion from one orgasm to the next. ");
+		Text.Add("How many times has she made you climax, pumping her full of hot seed? You have completely lost count, riding on the brink of exhaustion from one orgasm to the next. ");
 		if(player.Gender() == Gender.male)
 			Text.Add("Your balls feel completely both numb and drained, though another load seems to be building.");
 		else
@@ -1368,7 +1368,7 @@ Intro.UruSexGetFuckedPrep = function() {
 	Text.NL();
 	Text.Add("Dropping your eyes to Uru's rigid appendage, you get a sinking feeling that, maybe, you didn't think this through. Staring you right in the face is sixteen inches of stiff demon cock. Very close to your face, in fact, as you have unconsciously dropped to your knees in front of the omnibus. Licking your lips, you consider how to prepare yourself for this.");
 	Text.NL();
-	Text.Add("Sucking her off could provide some much needed lubrication for your upcoming reaming. Or you could just get right to the action.");
+	Text.Add("Sucking her off could provide some much needed lubrication for your upcoming reaming... or you could just get right to the action.");
 	Text.Flush();
 
 	//[Suck her][Lead][Passive]
@@ -1402,11 +1402,11 @@ Intro.UruSexGetFuckedSuck = function() {
 	Text.Clear();
 	
 	if(Intro.timesSuckedUru == 0)
-		Text.Add("<i>“Oh, probably a wise move to get me lubed up,”</i> she praises you, <i>“Then again, you were probably just hungry for cock, weren't you? Just don't forget about the main course.”</i>");
+		Text.Add("<i>“Oh, probably a wise move to get me lubed up,”</i> she praises you. <i>“Then again, you were probably just hungry for cock, weren't you? Just don't forget about the main course.”</i>");
 	else if(Intro.timesSuckedUru == 1)
-		Text.Add("<i>“Mnn...”</i> the omnibus sighs contentedly, <i>“Just can't get enough, can you?”</i> Dutifully, you lap up the remains of her last ejaculation before getting down to business.");
+		Text.Add("<i>“Mmm...”</i> the omnibus sighs contentedly. <i>“Just can't get enough, can you?”</i> Dutifully, you lap up the remains of her last ejaculation before getting down to business.");
 	else {
-		Text.Add("<i>“You know what is coming,”</i> the omnibus purrs, <i>“Perhaps your plan is to lube yourself up from the other direction, hm?");
+		Text.Add("<i>“You know what is coming,”</i> the omnibus purrs. <i>“Perhaps your plan is to lube yourself up from the other direction, hm?");
 		if(Intro.fuckedTarget == BodyPartType.vagina)
 			Text.Add(" You <b>do</b> know those holes aren't connected, right?");
 		Text.Add("”</i> Dutifully, you lap up the remains of her last ejaculation before getting down to business.");
@@ -1478,7 +1478,7 @@ Intro.UruSexGetFuckedLead = function() {
 	else
 		parse["target"] = function() { return player.Butt().AnalShort(); }
 	
-	Text.Add("You shake your head slightly. The demon has been taking charge far too much, it is time to turn this around! Determined, you get back on your feet and push the surprised omnibus back. She lands, ass first, on the throne, cock bouncing up and down excitedly. <i>“Why, [playername]!”</i> she exclaims delighted, <i>“Getting really forward aren't w-”</i>", parse);
+	Text.Add("You shake your head slightly. The demon has been taking charge far too much, it is time to turn this around! Determined, you get back on your feet and push the surprised omnibus back. She lands, ass first, on the throne, cock bouncing up and down excitedly. <i>“Why, [playername]!”</i> she exclaims delighted. <i>“Getting really forward aren't w-”</i>", parse);
 	Text.NL();
 	Text.Add("You cut her off with a deep kiss as you straddle her hips, her perky " + uruCockDesc() + " rubbing against your soft undercarriage. Positioning yourself so that her cock is pointing straight at your [target], you sigh with euphoria as you ease yourself down, relishing in the feeling of the omnibus entering you.", parse);
 	
