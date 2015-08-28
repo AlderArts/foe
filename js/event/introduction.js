@@ -2611,7 +2611,7 @@ Intro.KiaNaughtySex = function() {
 				Text.NL();
 				Text.Add("<i>“W-what?”</i> [name] looks bewildered. Slowly, you touch one of your fingers to [hisher] soft lips, trailing a drop of saliva as you point down to your crotch, patting the bulge in your pants meaningfully. <i>“[stutterName]! Really, that is not appropriate!”</i> the flustered elf blurts out, blushing and fidgeting with the hem of [hisher] robe, trying to hide [hisher] own arousal, <i>“We need to-”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“[name],”</i> you cut [himher] off, <i>“If we're going to work together, we'll have to get to know each other, and know each other intimately.”</i> You gently caress the elf's feminine cheek, looking deep into [hisher] eyes, <i>“Why not take this opportunity to... get to know me better?”</i>", parse);
+				Text.Add("<i>“[name],”</i> you cut [himher] off. <i>“If we're going to work together, we'll have to get to know each other, and know each other intimately.”</i> You gently caress the elf's feminine cheek, looking deep into [hisher] eyes, <i>“Why not take this opportunity to... get to know me better?”</i>", parse);
 				Text.NL();
 				Text.Add("Conflicting emotions race through the elf's eyes, but [heshe] dutifully gets down on [hisher] knees in front of you. You undo your pants and pull out your stiff [cock]. Free from its confines, the rigid rod springs out to slap [name] against [hisher] cheek, causing [himher] to wince slightly.", parse);
 				Text.NL();
@@ -2649,7 +2649,7 @@ Intro.KiaNaughtySex = function() {
 				Text.NL();
 				Text.Add("<i>“W-what?”</i> [name] looks bewildered. Slowly, you touch one of your fingers to [hisher] soft lips, trailing a drop of saliva as you point down to your crotch, pointing at the damp patch in your pants meaningfully. <i>“[stutterName]! Really, that is not appropriate!”</i> the flustered elf blurts out, blushing and fidgeting with the hem of [hisher] robe, trying to hide [hisher] own arousal, <i>“We need to-”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“[name],”</i> you cut [himher] off, <i>“If we're going to work together, we'll have to get to know each other, and know each other intimately.”</i> You gently caress the elf's feminine cheek, looking deep into [hisher] eyes, <i>“Why not take this opportunity to... get to know me better?”</i>", parse);
+				Text.Add("<i>“[name],”</i> you cut [himher] off. <i>“If we're going to work together, we'll have to get to know each other, and know each other intimately.”</i> You gently caress the elf's feminine cheek, looking deep into [hisher] eyes, <i>“Why not take this opportunity to... get to know me better?”</i>", parse);
 				Text.NL();
 				Text.Add("Conflicting emotions race through the elf's eyes, but [heshe] dutifully gets down on [hisher] knees in front of you. You undo your pants, exposing your moist netherlips", parse);
 				if(player.FirstCock()) Text.Add(", and freeing your stiff [cock] in the process", parse);
