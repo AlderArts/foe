@@ -2401,7 +2401,7 @@ Intro.KiaNiceSex = function() {
 	Text.Clear();
 	player.AddLustFraction(1);
 	
-	Text.Add("You are just about ready to head out, when a stirring in your nether regions makes itself known. You could ask [name] for some help with that, or try to deal with it later, yourself.", arse);
+	Text.Add("You are just about ready to head out, when a stirring in your nether regions makes itself known. You could ask [name] for some help with that, or try to deal with it later, yourself.", parse);
 	Text.NL();
 	Text.Flush();
 	
