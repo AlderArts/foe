@@ -2407,7 +2407,7 @@ Intro.KiaNiceSex = function() {
 	
 	// [Male][Female]
 	var options = new Array();
-	options.push({ nameStr : name,
+	options.push({ nameStr : kiakai.name,
 		tooltip : Text.Parse("How about asking [name] to finish [hisher] healing session, you could use some release.", parse),
 		func : function() {
 			kiakai.flags["Sexed"]++;
@@ -2597,7 +2597,7 @@ Intro.KiaNaughtySex = function() {
 	Text.Flush();
 	
 	var options = new Array();
-	if(cockDesc) {
+	if(player.FirstCock()) {
 		options.push({ nameStr : "Blowjob",
 			tooltip : Text.Parse("Your cock needs release, and [name] looks like [heshe] has the perfect mouth to provide it.", parse),
 			func : function() {
@@ -2635,7 +2635,7 @@ Intro.KiaNaughtySex = function() {
 			}, enabled : true
 		});
 	}
-	if(vagDesc) {
+	if(player.FirstVag()) {
 		options.push({ nameStr : "Get eaten",
 			tooltip : Text.Parse("Your cunt is itching for release. Staddling [name]'s face and letting [himher] eat you out should do it.", parse),
 			func : function() {
