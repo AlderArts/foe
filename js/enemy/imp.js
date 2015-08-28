@@ -233,7 +233,7 @@ Intro.ImpsWinUseFemale = function() {
 		clitDesc   : function() { return player.FirstVag().ClitShort(); },
 		anusDesc   : function() { return player.Butt().AnalShort(); },
 		//Imp
-		cockDesc   : function() { return imp.FirstCock().Short(); },
+		impCockDesc   : function() { return imp.FirstCock().Short(); },
 		cockName   : function() { return imp.FirstCock().noun(); }
 	};
 	
@@ -251,9 +251,9 @@ Intro.ImpsWinUseFemale = function() {
 	options.push({ nameStr : "Oral ride",
 		func : function() {
 			Text.Clear();
-			Text.Add("With a rough shove, you push the surprised imp flat on his back. Smirking, you turn around and lower yourself, presenting your pussy to the confused creature. Licking your lips, you survey the imp's [cockDesc], giving it a friendly squeeze.", parse);
+			Text.Add("With a rough shove, you push the surprised imp flat on his back. Smirking, you turn around and lower yourself, presenting your pussy to the confused creature. Licking your lips, you survey the imp's [impCockDesc], giving it a friendly squeeze.", parse);
 			Text.NL();
-			Text.Add("Due to the difference in height, you have to contort yourself quite a bit to be able to suck the little demon's dick, but you are not going to let that stop you. The imp can hardly believe his luck as you suck away at his [cockDesc], and redoubles his efforts to get you off.", parse);
+			Text.Add("Due to the difference in height, you have to contort yourself quite a bit to be able to suck the little demon's dick, but you are not going to let that stop you. The imp can hardly believe his luck as you suck away at his [impCockDesc], and redoubles his efforts to get you off.", parse);
 			Text.NL();
 			Text.Add("The creature may be small, but his cock certainly isn't. Getting the whole thing into your mouth is quite the challenge, but you somehow manage. Juices are streaming freely from your [cuntDesc], and you grind your hips against your demonic lover, your moans muffled by the shaft rammed into your mouth.", parse);
 			Text.NL();
@@ -288,7 +288,7 @@ Intro.ImpsWinUseFemale = function() {
 			Text.Clear();
 			Text.Add("You step back from the eager imp's cunnilingus and twirl around. Getting down on your knees, you spread your legs, exposing your bare crotch. <i>“Come on, big boy, spear me on that impaler!”</i>", parse);
 			Text.NL();
-			Text.Add("The imp scrambles to his feet, practically throwing himself over you. Clawed hands grab your raised hips, and you moan lustfully as the imp's [cockDesc] rubs against your [cuntDesc], only for him to plant it squarely against your [anusDesc].", parse);
+			Text.Add("The imp scrambles to his feet, practically throwing himself over you. Clawed hands grab your raised hips, and you moan lustfully as the imp's [impCockDesc] rubs against your [cuntDesc], only for him to plant it squarely against your [anusDesc].", parse);
 			Text.NL();
 			Text.Add("<i>“Th-the fuck do you think you are do-aah!”</i> your protest is rudely cut off by the head of the imp's cock forcing its way inside your rectum. <i>“S-sorry,”</i> the imp squeaks in an embarrassed apology. <i>“The boss won't let me use the front,”</i> he explains, shoving a few inches inside you.", parse);
 			Text.NL();

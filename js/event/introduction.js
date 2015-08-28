@@ -456,6 +456,11 @@ world.loc.DarkAspect.Mountains.links.push(new Link(
 ));
 
 Intro.DemonFight = function() {
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	
 	Intro.lubedFlag = false;
 	
 	Text.Clear();
@@ -501,18 +506,15 @@ Intro.DemonFight = function() {
 			impPlural = (numImps > 1) ? "One of the imps" : "The imp";
 			Text.Add(impPlural + " proudly present you with its "
 			+ imps[1].FirstCock().Short()
-			+ ", rubbing the hard shaft in your face before forcing it into your protesting mouth. The imp proceeds to roughly face-fuck you, ignoring your garbled protests. He pulls at your "
-			+ player.Hair().Short()
-			+ " until he has pushed his shaft as far down your throat as it'll go, then pulls out and repeats the process.");
+			+ ", rubbing the hard shaft in your face before forcing it into your protesting mouth. The imp proceeds to roughly face-fuck you, ignoring your garbled protests. He pulls at your [hair] until he has pushed his meatstick as far down your throat as it'll go, then pulls out and repeats the process.", parse);
 			Text.NL();
 			
 			if(numImps >= 2) {
 				impPlural = (numImps == 2) ? "the other imp" : "another of the imps";
 				Text.Add("Meanwhile, " + impPlural
-				 + " has moved behind you and grabs hold of your " 
-				 + player.Butt().Short() + " and pushes his " 
+				 + " has moved behind you and grabs hold of your [butt] and pushes his " 
 				 + imps[2].FirstCock().Short() 
-				 + " against your tight back door. The going is pretty rough, but soon, he is pistoning all his length inside you, setting your poor colon on fire.");
+				 + " against your tight back door. The going is pretty rough, but soon, he is pistoning all his length inside you, setting your poor colon on fire.", parse);
 				Text.NL();
 				
 				player.FuckAnal(player.Butt(), imps[2].FirstCock(), 2);
@@ -1226,7 +1228,7 @@ Intro.UruSexFuckAnal = function() {
 				player.AddSexExp(2);
 				player.slut.IncreaseStat(100, 5);
 				buttfucked = true;
-				Text.Add("Pausing momentarily, you plant your feet wider and reach back, parting your buttocks to ease entry. Moaning like a slut, you egg the omnibus to push it in. Chuckling at your eagerness, Uru penetrates your waiting [anus] and starts to roughly fuck you with her tail, reaching several inches deep.");
+				Text.Add("Pausing momentarily, you plant your feet wider and reach back, parting your buttocks to ease entry. Moaning like a slut, you egg the omnibus to push it in. Chuckling at your eagerness, Uru penetrates your waiting [anus] and starts to roughly fuck you with her tail, reaching several inches deep.", parse);
 				Text.NL();
 				Text.Add("<i>“Don't forget about doing your part now, slut,”</i> she moans in a sultry voice, encouraging you to start moving again. <i>“Perhaps after you are done, we can switch places, huh?”</i> she grins over her shoulder.");
 				Text.Flush();
