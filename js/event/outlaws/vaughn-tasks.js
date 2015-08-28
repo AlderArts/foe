@@ -1038,7 +1038,8 @@ Vaughn.Poisoning = {
 	LeftItToTerry : 8,
 	LeftItToTwins : 16,
 	JoinedOrgy : 32,
-	Used69 : 64
+	Used69 : 64,
+	LeftItToLei : 128
 }
 
 Scenes.Vaughn.Tasks.Poisoning = {};
@@ -1256,18 +1257,157 @@ Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
 			}, enabled : true
 		});
 	}
-	/* TODO LEI
-	options.push({ nameStr : "name",
-		tooltip : "",
-		func : function() {
-			Text.Clear();
-			Text.Add("", parse);
-			Text.NL();
-			Text.Add("", parse);
-			Text.Flush();
-		}, enabled : true
-	});
-	 */
+	if(!opts.Lei) {
+		options.push({ nameStr : "Lei",
+			tooltip : "Ask Lei and see if you can learn more about the situation.",
+			func : function() {
+				opts.Lei = true;
+				
+				Text.Clear();
+				Text.Add("You settle down across the table from Lei, and he inclines his head at you ever so slightly in acknowledgement.", parse);
+				Text.NL();
+				Text.Add("That gives you an idea. Lei is quite the skilled mercenary, isn’t he? Perhaps you could hire him to do a small side job, since his current one isn’t that demanding? Subcontract your work out, in a manner of speaking? It <i>is</i> an option, one that you needn’t automatically quash out of hand… nothing ventured, nothing gained, right?", parse);
+				Text.NL();
+				Text.Add("Well, will you ask, or not?", parse);
+				Text.Flush();
+				
+				//[Yes][No]
+				var options = new Array();
+				options.push({ nameStr : "Yes",
+					tooltip : "Ask Lei if he’s willing to moonlight for you.",
+					func : function() {
+						Text.Clear();
+						Text.Add("<i>“Yes, [playername]? What is it?”</i>", parse);
+						Text.NL();
+						Text.Add("You quickly explain the situation to him, leaving out the obviously illicit bits regarding your information about the outlaws - he’s a mercenary, surely he’ll understand the whole ‘discretion’ thing. Lei doesn’t so much as move a muscle, but you can tell he’s listening intently to each and every one of your words.", parse);
+						Text.NL();
+						Text.Add("When you finish, there’s what seems like a long silence, and Lei finally speaks again. <i>“So, you wish to subcontract out the job to me.”</i>", parse);
+						Text.NL();
+						Text.Add("That’s the idea, yes. Will he do it?", parse);
+						Text.NL();
+						if(lei.Relation() >= Lei.Rel.L3) {
+							Text.Add("Lei closes his eyes and thinks a moment. <i>“Hmm. An interesting proposal. As luck would have it, I am certain that my employers will not be in need of my services for the next couple of hours, and the cause your task is serving seems to be a worthy one. I am full aware of the disturbing nature of some of the laws passed of late. Some of them may even be bad for my continued employment.</i>", parse);
+							Text.NL();
+							Text.Add("<i>“Show me this vial of yours.”</i>", parse);
+							Text.NL();
+							Text.Add("You do so, palming it as you pull it out of your possessions and carefully hand it over to Lei. He turns it over in his fingers for a couple of moments, studying the flow of the liquid within, then nods at you.", parse);
+							Text.NL();
+							Text.Add("<i>“A most appropriate choice. I haven’t seen this for some time. Very well, I will do it - for a price.”</i>", parse);
+							Text.NL();
+							Text.Add("And what’s his asking fee?", parse);
+							Text.NL();
+							Text.Add("<i>“First, that you sit here in my stead until I return, lest someone attempt to take advantage of my absence. I should not be long, but vigilance is demanded. Secondly, a small fee of two hundred and fifty coins.”</i>", parse);
+							Text.NL();
+							Text.Add("Huh.", parse);
+							Text.NL();
+							Text.Add("Lei shows you a small smile. <i>“I can’t quite let word get out that I work for free, can I? There’d be no end to the line of those seeking favors from me. No, [playername], two hundred and fifty coins is a very reasonable price for a few minutes of my time.”</i>", parse);
+							Text.NL();
+							Text.Add("Well, it’s come to this. He’s a mercenary, what did you expect? Will you pay Lei or not?", parse);
+							Text.Flush();
+							
+							//[Yes][No]
+							var options = new Array();
+							options.push({ nameStr : "Yes",
+								tooltip : "Pay his asking price.",
+								func : function() {
+									Text.Clear();
+									Text.Add("<i>“Delightful.”</i> Lei’s expression doesn’t change as he counts your money, then without warning, he stands from his seat.", parse);
+									Text.NL();
+									Text.Add("He’s got all the details, right?", parse);
+									Text.NL();
+									Text.Add("<i>“I have. Don’t worry. Keep watch over the approach to my proteges’ suite for me, and I will return shortly.”</i> He passes a few coins back to you. <i>“Purchase a drink for yourself, such that you do not appear obtrusive.”</i>", parse);
+									Text.NL();
+									Text.Add("With that, Lei vanishes into the milling crowd of busy inn staff, leaving you all alone at his table. You do as he says, quickly ordering a drink from one of the few less busy-looking waiters, then sit down to savor it and look alert. True to his word, perhaps fifteen minutes have passed before Lei returns to your table and takes his seat once more.", parse);
+									Text.NL();
+									Text.Add("<i>“It is done.”</i>", parse);
+									Text.NL();
+									Text.Add("Wow. He must be really good at his job.", parse);
+									Text.NL();
+									Text.Add("<i>“A small matter of sleight of hand, nothing more,”</i> Lei replies matter-of-factly. <i>“When another’s attention is on your face, he or she often scarcely notices what the hands are doing. Similarly, drawing attention to one hand means the other is often overlooked. My only concern is that my proteges’ sleep will be disturbed tonight with the effects of your clever concoction.”</i>", parse);
+									Text.NL();
+									Text.Add("Well, that seems to be that. Thanking Lei one last time, you make to take your leave. Best to head back to Vaughn and report your success.", parse);
+									Text.Flush();
+									
+									party.coin -= 250;
+									
+									vaughn.flags["T3"] |= Vaughn.Poisoning.LeftItToLei;
+									
+									party.Inv().RemoveItem(Items.Quest.OutlawPoison);
+									party.Inv().RemoveItem(Items.Quest.OutlawAphrodisiac);
+									
+									vaughn.flags["Met"] = Vaughn.Met.PoisoningSucceed;
+									vaughn.flags["T3"] |= Vaughn.Poisoning.Success;
+									
+									world.TimeStep({hour: 1});
+									
+									if(vaughn.flags["T3"] & Vaughn.Poisoning.Aphrodisiac)
+										Gui.NextPrompt(Scenes.Vaughn.Tasks.Poisoning.AphrodisiacEntry);
+									else
+										Gui.NextPrompt(function() {
+											MoveToLocation(world.loc.Rigard.Plaza);
+										});
+								}, enabled : party.coin >= 250
+							});
+							options.push({ nameStr : "No",
+								tooltip : "You can’t or won’t pay.",
+								func : function() {
+									Text.Clear();
+									Text.Add("You shake your head and say that on second thought, maybe you’ll do it yourself. Lei shows no displeasure at your words, but simply nods.", parse);
+									Text.NL();
+									Text.Add("<i>“I wish you the best of luck, [playername]. If there is nothing else, I must return to my duties.”</i>", parse);
+									Text.NL();
+									Text.Add("You push out your chair, stand, and survey the room as you consider your remaining options. What now? The clock’s a-ticking if you want to have any chance at success here.", parse);
+									Text.Flush();
+									
+									Scenes.Vaughn.Tasks.Poisoning.InnPrompt(opts);
+								}, enabled : true
+							});
+							Gui.SetButtonsFromList(options, false, null);
+						}
+						else {
+							Text.Add("Lei shakes his head slowly. <i>As you know full well, my services are currently engaged. I will wish you the best of luck, for the cause your task is serving seems to be a worthy one - I am full aware of the disturbing nature of some of the laws passed of late - but I’m sure you understand that I cannot simply abandon my post to aid you. That would be highly remiss of me.”</i>", parse);
+							Text.NL();
+							Text.Add("Oh well. You thought you’d ask, anyway.", parse);
+							Text.NL();
+							Text.Add("<i>“Asking is all well and good. I’ve witnessed many an agreement which could be reached had one party thought to simply open his or her mouth and put forward the proposal. Of course, one must consider the current circumstances in which the question is framed - something which you neglected to attend to.</i>", parse);
+							Text.NL();
+							Text.Add("<i>“Now, if that is all, I must return to my vigil.”</i>", parse);
+							Text.NL();
+							Text.Add("You nod, and rise from the seat. Seems like enlisting Lei’s help didn’t work out - you’ll have to find another avenue to achieve your goals here.", parse);
+							Text.Flush();
+							
+							Scenes.Vaughn.Tasks.Poisoning.InnPrompt(opts);
+						}
+					}, enabled : true
+				});
+				options.push({ nameStr : "No",
+					tooltip : "Nah, you’ll pass.",
+					func : function() {
+						Text.Clear();
+						Text.Add("Lei glances at you as you make yourself comfortable in the seat. <i>“[playername]. What brings you to me today?”</i>", parse);
+						Text.NL();
+						Text.Add("The inn seems busy today, doesn’t it?", parse);
+						Text.NL();
+						Text.Add("<i>“Some event or the other, hosted by someone small trying to make herself look bigger,”</i> Lei replies drolly. <i>“A common enough strategy amongst both animals and people, but wholly ineffective against someone who easily sees through the illusion. It is of little consequence, since it does not interfere in my ability to carry out my charge, although I will admit that the extended delay in getting a drink once ordered is turning quite intolerable.”</i>", parse);
+						Text.NL();
+						Text.Add("Quite the situation indeed. What did he say about not interfering, though? Wouldn’t the crowd of harried staff provide cover for anyone trying to sneak upstairs, or something on those lines?", parse);
+						Text.NL();
+						Text.Add("<i>“With those uniforms? No, anyone not dressed as the staff would stand out, and I daresay the good innkeeper’s people all know each other. All I need to do is watch.”</i>", parse);
+						Text.NL();
+						Text.Add("Hmm…", parse);
+						Text.NL();
+						Text.Add("<i>“I’m not in the mood to make small talk today, [playername]. If there’s no particular reason for you to seek me out, I request that you please leave me be for now.”</i>", parse);
+						Text.NL();
+						Text.Add("Lei’s voice distinctly implies that this isn’t open to negotiation, and you decide that it’s probably best not to pester him any further, lest he take it as provocation. You rise from your seat, nod, and start weighing your remaining options.", parse);
+						Text.Flush();
+						
+						Scenes.Vaughn.Tasks.Poisoning.InnPrompt(opts);
+					}, enabled : true
+				});
+				Gui.SetButtonsFromList(options, false, null);
+			}, enabled : true
+		});
+	}
 	if(!opts.Twins) {
 		options.push({ nameStr : "Twins",
 			tooltip : "Could the Twins possibly lend a hand here?",
