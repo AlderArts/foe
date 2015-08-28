@@ -2291,9 +2291,9 @@ Intro.KiaDecideOutset = function() {
 			
 			Text.Add("<i>“Look, I know you mean well, but I just want to go home,”</i> you explain to the disappointed elf. <i>“Saving the world is not my job.”</i>");
 			Text.NL();
-			Text.Add("<i>“I can understand how you feel, believe me,”</i> [name] says, <i>“However, that does not change my instructions from Lady Aria. I will follow you and try to help you, in any way I can.”</i>", parse);
+			Text.Add("<i>“I can understand how you feel, believe me,”</i> [name] says. <i>“However, that does not change my instructions from Lady Aria. I will follow you and try to help you, in any way I can.”</i>", parse);
 			Text.NL();
-			Text.Add("Do you want to bring [himher] along? And, if so, what attitude do you take?", parse);
+			Text.Add("Do you want to bring [himher] along? And if so, what attitude do you take?", parse);
 			Text.NL();
 			Text.Flush();
 			
@@ -2355,7 +2355,7 @@ Intro.KiaDecideOutset = function() {
 			Text.NL();
 			Text.Add("<i>“Getting the know-how to use the portals is a good first step, but why not use it to our advantage, eh? If we can amass enough power, a demon or two shouldn't be a problem.”</i>");
 			Text.NL();
-			Text.Add("The elf gives you a long look, reevaluating [hisher] opinion of you. <i>“You are underestimating what Uru is capable of,”</i> [heshe] says darkly. <i>“And what of me? My orders from Lady Aria remain unchanged, will you still let me help you?”</i>", parse);
+			Text.Add("The elf gives you a long look, re-evaluating [hisher] opinion of you. <i>“You are underestimating what Uru is capable of,”</i> [heshe] says darkly. <i>“And what of me? My orders from Lady Aria remain unchanged, will you still let me help you?”</i>", parse);
 			Text.NL();
 			Text.Flush();
 			
@@ -2419,7 +2419,7 @@ Intro.KiaNiceSex = function() {
 			Text.Add("The elf gives you a long gaze through [hisher] thick lashes, then shifts [himher]self to be propped against your side", parse);
 			if(kiakai.Gender() == Gender.male)
 				Text.Add(", his rising erection bumping against your thigh");
-			Text.Add(". Moving [hisher] hands slowly over your stomach and toward your crotch, [name] leans over to plant a series of kisses around your navel. The elf trails kisses lower and lower, reaching the waistline of your pants, [heshe] ceremoniously undoes them using only [hisher] teeth, then slowly pulls them off your legs.", parse);
+			Text.Add(". Moving [hisher] hands slowly over your stomach and toward your crotch, [name] leans over to plant a series of kisses around your navel. The elf trails lower and lower, reaching the waistline of your pants, [heshe] ceremoniously undoes them using only [hisher] teeth, then slowly pulls them off your legs.", parse);
 			Text.NL();
 			
 			if(player.Gender() == Gender.female) {
@@ -2430,13 +2430,13 @@ Intro.KiaNiceSex = function() {
 				player.Fuck(null, 2);
 			}
 			else if(player.Gender() == Gender.male) {
-				Text.Add("Your stiff [cock] springs to attention as it is bared, almost slapping the elf in the face. Using careful touches and light kisses, [name] gently nurses it to full stiffness.", parse);
+				Text.Add("Your stiff [cock] springs to attention as it is bared, almost slapping the elf in the face. Using careful touches and light pecks, [name] gently nurses it to full stiffness.", parse);
 				Sex.Blowjob(kiakai, player);
 				kiakai.FuckOral(kiakai.Mouth(), player.FirstCock(), 2);
 				player.Fuck(player.FirstCock(), 2);
 			}
 			else {
-				Text.Add("Your [cock] springs to attention as it is bared, almost slapping the elf in the face. <i>“W-woah, I wasn't expecting it to be so... big,”</i> [name] reverently whispers. Apparently the elf got [himher]self a good look at your unusual genitalia when clothing you, though it did not seem to prepare [himher] for your full erection. [HeShe] teases your female parts with one hand while planting hot kisses and licks on your [cock].", parse);
+				Text.Add("Your [cock] springs to attention as it is bared, almost slapping the elf in the face. <i>“W-wow, I wasn't expecting it to be so... big,”</i> [name] reverently whispers. Apparently, the elf got [himher]self a good look at your unusual genitalia when clothing you, though it did not seem to prepare [himher] for your full erection. [HeShe] teases your female parts with one hand while planting hot kisses and licks on your [cock].", parse);
 				
 				Sex.Cunnilingus(kiakai, player);
 				kiakai.Fuck(null, 2);
@@ -2545,10 +2545,10 @@ Intro.KiaNiceSex69 = function() {
 			Text.Add("The elf bobs [hisher] head up and down on your rigid [cock], alternating between lapping at your sensitive cockhead and burying [hisher] nose in your sack. This new healing session of yours continues for another twenty minutes or so, until a tightening in your balls announce the arrival of your climax. You let out a[muffled] cry as your cum floods the elf's mouth, pouring your seed into [hisher] throat.", parse);
 		}
 		else if(player.Gender() == Gender.female) {
-			Text.Add("The elf uses [hisher] tongue to gently probe your nether lips, burying it so your lips connect. [HeShe] explores your depths hungrily, sometimes poking [hisher] nose against your sensitive clit. This new healing session of yours continues for another twenty minutes or so, until a hot rush in your nether announce the arrival of your climax. You let out a[muffled] cry as your girly fluids spill into the elf's waiting mouth.", parse);
+			Text.Add("The elf uses [hisher] tongue to gently probe your netherlips, burying it so your lips connect. [HeShe] explores your depths hungrily, sometimes poking [hisher] nose against your sensitive clit. This new healing session of yours continues for another twenty minutes or so, until a hot rush in your nethers announce the arrival of your climax. You let out a[muffled] cry as your girly fluids spill into the elf's waiting mouth.", parse);
 		}
 		else {
-			Text.Add("The elf bobs [hisher] head up and down on your rigid [cock], alternating between lapping at the sensitive tip and burying your rod deep in [hisher] throat. Meanwhile, [hisher] hands are busy pleasuring your feminine parts, probing you slick depths. This new healing session of yours continues for another twenty minutes or so, until a rush in your nether regions announce the arrival of your climax. You let out a[muffled] cry as your cum floods the elf's mouth, pouring your seed into [hisher] throat. At the same time, your feminine juices flow out of your slippery slit, coating [hisher] fingers in clear liquid.", parse);
+			Text.Add("The elf bobs [hisher] head up and down on your rigid [cock], alternating between lapping at the sensitive tip and burying your rod deep in [hisher] throat. Meanwhile, [hisher] hands are busy pleasuring your feminine parts, probing your slick depths. This new healing session of yours continues for another twenty minutes or so, until a rush in your nether regions announce the arrival of your climax. You let out a[muffled] cry as your cum floods the elf's mouth, pouring your seed into [hisher] gullet. At the same time, your feminine juices flow out of your slippery slit, coating [hisher] fingers in clear liquid.", parse);
 		}
 		
 		Text.NL();
@@ -2556,7 +2556,7 @@ Intro.KiaNiceSex69 = function() {
 		if(sucking) {
 			Text.Add("Your own sensual licks also bear fruit, ");
 			if(kiakai.Gender() == Gender.male) Text.Add("as your tongue is splattered in salty cream from the elf's quivering cock. ");
-			else Text.Add("as your tongue is battered with sweet-tasting girlcum. ");
+			else Text.Add("as your tongue is battered with sweet-tasting girl-cum. ");
 			Text.Add("[HisHer] head buried between your legs, [name] lets out a shuddering sigh, utterly spent.", parse);
 			Text.NL();
 		}
@@ -2617,7 +2617,7 @@ Intro.KiaNaughtySex = function() {
 				Text.NL();
 				Text.Add("<i>“Yes, just like that,”</i> you purr as the elf almost immediately begins to suck on your [cock], succumbing to [hisher] lust. Softly trailing your fingers through [name]'s short silky hair, you moan in approval as [heshe] lathers your length with slick saliva. [HisHer] mouth feels so good... but you are just getting started. Taking a firm grip on the back of the elf's head, you insistently push [hisher] head forward until your entire length is lodged in [hisher] throat.", parse);
 				Text.NL();
-				Text.Add("You close your eyes and almost forget yourself for a while, relishing in the tight velvety cocksleeve, only returning to reality when the elf's gurgling protests grow desperate, and [hisher] hands weakly push against your thighs. Relenting a little, you allow [name] enough leeway to draw a ragged breath before burying yourself in [hisher] throat again. You repeat the slow process several times over the next twenty minutes, the elf  moving in and out of consciousness.", parse);
+				Text.Add("You close your eyes and almost forget yourself for a while, relishing in the tight velvety cocksleeve, only returning to reality when the elf's gurgling protests grow desperate, and [hisher] hands weakly push against your thighs. Relenting a little, you allow [name] enough leeway to draw a ragged breath before burying yourself in [hisher] throat again. You repeat the slow process several times over the next twenty minutes, the elf moving in and out of consciousness.", parse);
 				Text.NL();
 				Text.Add("As you feel the rising surge of your approaching orgasm, you increase your speed, roughly pumping in and out of your companion's throat. With a final cry, you unleash your seed down the abused passage, coating the elf white from the inside. [name] coughs as you vacate your cumdump, desperately drawing gasps of air again for the first time in a long while.", parse);
 				Text.NL();
@@ -2651,7 +2651,7 @@ Intro.KiaNaughtySex = function() {
 				Text.NL();
 				Text.Add("<i>“[name],”</i> you cut [himher] off, <i>“If we're going to work together, we'll have to get to know each other, and know each other intimately.”</i> You gently caress the elf's feminine cheek, looking deep into [hisher] eyes, <i>“Why not take this opportunity to... get to know me better?”</i>", parse);
 				Text.NL();
-				Text.Add("Conflicting emotions race through the elf's eyes, but [heshe] dutifully gets down on [hisher] knees in front of you. You undo your pants, exposing your moist nether lips", parse);
+				Text.Add("Conflicting emotions race through the elf's eyes, but [heshe] dutifully gets down on [hisher] knees in front of you. You undo your pants, exposing your moist netherlips", parse);
 				if(player.FirstCock()) Text.Add(", and freeing your stiff [cock] in the process", parse);
 				Text.Add(". [HeShe] immediately gets to work, diving between your legs, tongue teasing and prodding.", parse);
 				Text.NL();
@@ -2708,7 +2708,7 @@ Intro.Finalizing = function() {
 	Text.NL();
 	Text.Add("<i>“You said that you are a <b>[job]</b>, yes?”</i> You nod, confirming the statement. ", parse);
 	if(player.flags["startJob"] == JobEnum.Scholar)
-		Text.Add("<i>“Very interesting!”</i> [name] lights up, excited in finding a fellow knowledge seeker. <i>“There is always more to learn, and regarding this I may be able to help you. These scrolls can also aid you, perhaps broaden your horizons?”</i> ", parse);
+		Text.Add("<i>“Very interesting!”</i> [name] lights up, excited in finding a fellow knowledge seeker. <i>“There is always more to learn, and regarding this, I may be able to help you. These scrolls can also aid you, perhaps broaden your horizons?”</i> ", parse);
 	else if(player.flags["startJob"] == JobEnum.Courtesan)
 		Text.Add("<i>“I... cannot say I understand your way of fighting.”</i> [name]’s cheek blossom, slightly embarrassed. <i>“Should you reconsider your ways, please study these scrolls.”</i> ", parse);
 	else // Fighter
