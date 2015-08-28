@@ -2637,7 +2637,7 @@ Intro.KiaNaughtySex = function() {
 	}
 	if(player.FirstVag()) {
 		options.push({ nameStr : "Get eaten",
-			tooltip : Text.Parse("Your cunt is itching for release. Staddling [name]'s face and letting [himher] eat you out should do it.", parse),
+			tooltip : Text.Parse("Your cunt is itching for release. Straddling [name]'s face and letting [himher] eat you out should hit the spot.", parse),
 			func : function() {
 				kiakai.flags["Sexed"]++;
 				
