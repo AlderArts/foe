@@ -2234,7 +2234,7 @@ Intro.KiaSurroundings = function() {
 		Text.Clear();
 		Text.Add("<i>“Now then, we must discuss how to proceed from here,”</i> the elf announces, suddenly more serious. <i>“If we are to stop Uru, we need to know how she plans to get to Eden. I think we should get that gem you carry identified by a skilled magician.”</i>");
 		Text.NL();
-		Text.Add(name + " paces about thoughtfully. <i>“My specialty is healing, so this is unfortunately beyond me. I know the court magician at the castle could probably help us... but that raises problems of its own. You'll understand once we get there.”</i>");
+		Text.Add("[name] paces about thoughtfully. <i>“My specialty is healing, so this is unfortunately beyond me. I know the court magician at the castle could probably help us... but that raises problems of its own. You'll understand once we get there.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Once we know how the portals work, perhaps we can find a way to block her entry. Additionally, we may find a way for you to return home!”</i> The elf looks at you expectantly.");
 		Text.Flush();
