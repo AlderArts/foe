@@ -13,7 +13,8 @@ Gryphons.prototype.constructor = Gryphons;
 Gryphons.State = {
 	NotViewed : 0,
 	S1WorldsEdge : 1,
-	S2Pasts : 2
+	S2Pasts : 2,
+	S3Building : 3
 };
 
 Gryphons.prototype.Cost = function() {
@@ -120,6 +121,12 @@ Not that it changes too much about you, since you were already one, but the fine
 			func : func(Gryphons.State.S2Pasts, Gender.female), enabled : true
 		});
 	}
+	if(gryphons.flags["State"] >= Gryphons.State.S2Pasts) {
+		options.push({ nameStr : "Building",
+			tooltip : "",
+			func : func(Gryphons.State.S3Building, Gender.male), enabled : true
+		});
+	}
 	
 	if(gryphons.First()) {
 		Text.Add("Carefully closing and latching the door behind you, you take a moment to examine the room you’ve stepped into. It’s not very large - perhaps the size of two combined broom closets - and various pictures of mountain vistas and rolling valleys have been hung on the walls. In what is perhaps an attempt to try and fit the room’s theme, someone’s dragged in a small boulder for you to sit on if need be.", parse);
@@ -149,6 +156,7 @@ Scenes.Brothel.Gryphons.SceneSelect = function(choice) {
 		default:
 		case Gryphons.State.S1WorldsEdge: Scenes.Brothel.Gryphons.WorldsEdge(); break;
 		case Gryphons.State.S2Pasts: Scenes.Brothel.Gryphons.Pasts(); break;
+		case Gryphons.State.S3Building: Scenes.Brothel.Gryphons.Building(); break;
 		//TODO new scenes
 	}
 }
@@ -1509,5 +1517,276 @@ Scenes.Brothel.Gryphons.PastsSexytimes2 = function(preg) {
 	
 	Gui.NextPrompt(function() {
 		Scenes.Brothel.Gryphons.Outro(Gender.female, preg);
+	});
+}
+
+Scenes.Brothel.Gryphons.Building = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("The days are growing shorter.", parse);
+	Text.NL();
+	Text.Add("You turn your eyes from the setting sun and back to your tools. Back while you were with the tribe, the days grew longer and shorter too, following the succession of the moons, but they were more abrupt about it. Here in the valley, the deep orange sun hangs long in the sky, sharing its space with the moon as it reluctantly slips behind the horizon; its dying rays illuminate the sharp, jagged peaks-", parse);
+	Text.NL();
+	Text.Add("-That’s enough. Time to turn your mind to matters more pressing. Carefully, you clean the blood off your flint knife on the grass, then put it away with the others under the skins. There will be more work tomorrow - there will always be more work, but tonight is a time of rest.", parse);
+	Text.NL();
+	Text.Add("With that thought in mind, you head in to gather your mate.", parse);
+	Text.NL();
+	Text.Add("Aurora has grown big, too. Your mate sports a gravid belly large enough to grace a mother carrying a full-grown gryphlet, and she’s only just barely entered the last phases of her pregnancy, if your counting of the moons is right. It’s plain to see that you’ve seeded more than one life in her womb, an auspicious start to what will hopefully be many, many more sons and daughters to come. Curled up upon the sleeping shelf, she cradles her life-laden belly with both hands, eyes closed, wings fluttering and tail swaying as she feels for the movements of her growing gryphlets.", parse);
+	Text.NL();
+	Text.Add("You certainly chose well; Father would be proud of you.", parse);
+	Text.NL();
+	Text.Add("<i>“Aurora.”</i> You reach down and take hold of your mate, fingers sinking into her luxurious, light fur and feathers. Ooh, she’s grown considerably heavier than you remember her being. Her muscles tense, then relax when she realizes it’s you. <i>“It’s almost time to eat. Want to watch me cook?”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Yes.”</i> She purrs deeply, sleepily, warm limbs wrapping about your body as you carry her out and lay her on the dry dirt outside, a little way by the fire pit.", parse);
+	Text.NL();
+	Text.Add("<i>“Want to try lighting it this time?”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“No.”</i> She emphasizes her answer with a flick of a wing, then lays her head between her hands to watch you. You chuckle and give her a pat on the head, then reach for the flint and tinder, blowing on the sparks you strike. The tinder smolders well, and it’s not too long before you have a small fire going with the logs you split today. Aurora returns with the skewered pieces of the hog you butchered earlier this afternoon, then watches the fire intently as you turn the skewers on the spit and allow the meat to roast in its own juices.", parse);
+	Text.NL();
+	Text.Add("<i>“Still don’t like fire, eh?”</i>", parse);
+	Text.NL();
+	Text.Add("She gives you a disaffected click of her beak. <i>“No.”</i> Nevertheless, her movements, her eyes - they give her thoughts away with the way they flicker, her muscles twitch impatiently, poised to spring into action. Aurora may have changed much since you strode into her life and began rearranging it to your liking, but there’s a part of your mate that’ll always be a wild thing.", parse);
+	Text.NL();
+	Text.Add("<i>“You don’t have to lie to me, you know,”</i> you tell her, looking smug.", parse);
+	Text.NL();
+	Text.Add("She huffs. <i>“I can never understand how you can always tell. What gives me away? My scent? I’ve always wondered if it’s my scent…”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“And I can never understand why you keep on trying, despite the fact that you know it’s pointless. Cheeky little thing.”</i>", parse);
+	Text.NL();
+	Text.Add("She sticks her tongue out at you, then goes back to fussing over her pregnancy. Snorting, you turn from the fire to see the last rays of amber light die from the horizon, allowing darkness to complete its conquest across the valley. The soft light of your fire caresses your fur, the spitting and hissing of melted fat plays its own faint music amidst the chilly night wind, and the scent that rises from the ashes is simply wonderful. No grasses, no bulbs, no spices of any sort… there’s something, one supposes, to be said for eating with someone else. You check the meat, still browning over the fire, and breathe in the wonderful scents of Aurora and hot fat.", parse);
+	Text.NL();
+	Text.Add("<i>“I want you to get over your fear of fire, Aurora. You’re almost there - do you remember when I first lit one? You practically ran up the mountain screaming, and I had to go and get you down.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Don’t remind me of that!”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“And once you’re done with that… you can start learning how to cook.”</i> Seems like the first of the skewers is about done; you take it off the fire, still glistening with melted fat, and wave it in front of her face. Raw is fine, but cooked is divine… and you pull the wooden skewer away just as she lunges for it, leaving her to snap her beak on empty air. <i>“You sure you don’t want to learn, or would you prefer to just stuff yourself on the results?”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“You incorrigible tease!”</i> she cries.", parse);
+	Text.NL();
+	Text.Add("Whipping out your free hand, you catch Aurora by the chin and press down firmly with thumb and forefinger. <i>“Oh, but I am. What do you plan to do about it? Hmm? Hmm? You’ll learn to do both, then you can sneak morsels from your cooking and I’ll pretend not to notice. Well, not unless you take too much, then I’ll have punish you.”</i>", parse);
+	Text.NL();
+	Text.Add("She screams in mock outrage; you only laugh and shove the skewer in her hands. <i>“Careful now, it’s hot. Eat slowly and don’t burn your throat.”</i>", parse);
+	Text.NL();
+	Text.Add("She waves the skewer around before taking an experimental nibble. <i>“It’s tough.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“An old sow. Only to be expected.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“The piglets taste better, and you can fit a whole one on a stick like you do.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Yes, they do, but you don’t want to kill them - not if you want more hogs tomorrow.”</i> You tear off a morsel of roasted flesh with your beak. Simple yet filling, food fit for a king. <i>“That’s another thing that separates us gryphons from wild beasts: the ability to think of tomorrow, and prepare for it by working hard or going without today.”</i>", parse);
+	Text.NL();
+	Text.Add("She still seems confused by such concepts, and you have to remind yourself that she was a wild thing not that long ago. Though she learns fast, there’s also the matter of her having to unlearn that bestial mentality… or do you want it completely gone? A certain feral nature - hidden, of course - in your heirs might not be a completely bad thing… one can certainly see how it might be put to use.", parse);
+	Text.NL();
+	Text.Add("While you were thinking, Aurora’s gone after the organs, blood and meat juices, inevitably staining her lovely white feathers. You shake your head. Your mate eats so much but is tired all the time; it’s as if her unborn gryphlets are draining her energy in order to grow as quickly as they can. With each morning that passes, you’re sure that her belly is slightly bigger than it was the night before, and it shows no sign of slowing.", parse);
+	Text.NL();
+	Text.Add("<i>“Here, have these.”</i> You hold out the sow’s heart and liver to her, dangling the tantalizing morsels before her eyes like a piece of bait. <i>“You’ll need to enrich your blood.”</i>", parse);
+	Text.NL();
+	Text.Add("She reaches for it, taking the bait like the silly little thing that she is, and you grab her outstretched hand and yank her over with a firm pull. Her gravid body scuffles on the ground a little as you guide her body against yours, her back landing against your breast with a faint “oomph” and a flutter of wings. Grinning, you wrap your hands about your mate and let her have her prize even as you savor yours.", parse);
+	Text.NL();
+	Text.Add("<i>“Silly little thing,”</i> you whisper, cupping her swollen, milk-laden breasts with your hands and giving the sensitive dugs a gentle squeeze. She squirms a little, and nestles closer against you. <i>“Lured into my dastardly trap by food, of all things.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“It was worth it,”</i> she replies, her voice slightly muffled. By the tone of her voice, she actually meant it, too.", parse);
+	Text.NL();
+	Text.Add("<i>“Don’t talk while you’re eating. It’s impolite.”</i>", parse);
+	Text.NL();
+	Text.Add("Her beak is too occupied for a reply, and you take the opportunity to let your hands flow downwards, your palms running down the round, stretched curve of Aurora’s pregnancy. Her womb is full and warm, proof positive of your considerable virility, and you have to admit, there’s something very satisfying about having claimed a mate so thoroughly.", parse);
+	Text.NL();
+	Text.Add("Aurora purrs, instinctively pushing out her tummy so you can appreciate it more. Yes, you can feel the gryphlets in her squirming as they grow strong, but you have other ideas, too. Returning your hands to her swollen breasts, you feel through the soft layer of fluff and stroke her dark areolae, moving your fingertips in slow circles. Her purring is broken as her breath grows short, and she squirms against you, wings fluttering.", parse);
+	Text.NL();
+	Text.Add("<i>“Not now…”</i> she mutters, but you continue anyway, feeling the already swollen nipples growing stiff under your fingers. Your palms work away, stroking the full and firm boobflesh of your mate’s breasts, feeling a flush of heat creep into their teardrop-shaped confines even as her breath starts to come in small gasps.", parse);
+	Text.NL();
+	Text.Add("Why, is she that sensitive already?", parse);
+	Text.NL();
+	Text.Add("<i>“I don’t think so,”</i> you reply. <i>“You’ve fallen into my dastardly trap, remember? Now you’ll just have to submit to my nasty, evil demands… unless you can break free, that is.”</i>", parse);
+	Text.NL();
+	Text.Add("Of course, her pride demands that she put up a token struggle, but her heart clearly isn’t in it - all you have to do is hold onto her for a bit, and it’s over sooner than you expected.", parse);
+	Text.NL();
+	Text.Add("<i>“Well, looks like I couldn’t escape you. I’ll just have to - ah!”</i>", parse);
+	Text.NL();
+	Text.Add("Whoops, seems like that last squeeze made Aurora leak a little. You slow your ministrations a little, watching a bead of delicious cream well up on each nipple before seeping into her glorious feathers… ah, the little pleasures of life, soon to become big pleasures. Gently, you apply a little more pressure with your palms, and are rewarded with a shiver that runs the length of your mate’s body from head to tail-tip. Wonderful.", parse);
+	Text.NL();
+	Text.Add("<i>“No need to be so flighty,”</i> you tell her, nipping at the nape of her neck, making sure she feels the light pricking of your sharp beak-tip. <i>“You’re well and caught now; all you have to do is enjoy it…”</i>", parse);
+	Text.NL();
+	Text.Add("A soft wail escapes Aurora’s beak as you pull down gently on her breasts, fingers gentle but firm as they work up and down with rhythmic motions. Her nipples resist for a second or two, then she chirps as a warm trickle of rich cream oozes forth, wetting your hands with its thick goodness. The last vestiges of resistance give way to contented bliss, her body so much shivering, warm putty in your hands. Bit by bit, you increase the pressure, your movements growing more vigorous until the trickles turn into gentle streams of white, spurting forth from her engorged nipples with wanton abandon. Aurora cries, thrusting her torso against your hands, her body begging you to milk her down to the last drop.", parse);
+	Text.NL();
+	Text.Add("What a bounty it is! The sweet smell of your mate’s milk blends with the spicy scent of her arousal, made only more intense by her gravid state. Your cock stirs in its sheath, ready for duty at any moment, but you still your mind and focus on the task of milking your mate. Firm boobflesh pulses and flows under your hands as you squeeze and pull, and finally, finally does the flow begin to thin, heavy streams slowing to a trickle once more. Even so, it takes a good while for the flow to finally cease, the last few whitish droplets swelling forth from her nipples and rolling down to soak her already soggy feathers.", parse);
+	Text.NL();
+	Text.Add("Your mate whimpers and chirps pathetically, and it’s only then that you let go of her bountiful baby feeders, slightly smaller now that they’ve been drained. Addled from the sheer joy of being milked to the last drop, Aurora collapses into your embrace, her big, round belly heaving in and out as she pants heavily. It’s sorely tempting to take her there and then, to do your best and see if she can bear yet more gryphlets while already stuffed with a clutch, but you stay yourself with no small amount of willpower.", parse);
+	Text.NL();
+	Text.Add("<i>“So, were the delicious morsels still worth it?”</i>", parse);
+	Text.NL();
+	Text.Add("Your mate croons, lost in the absolute bliss of being hand-milked. She’ll make a good mother.", parse);
+	Text.NL();
+	Text.Add("<i>“I’ll take that as a yes, then.”</i> You give her a nip on the neck. <i>“Don’t forget to wash yourself off before you head to bed. Clean up well enough, and I might just take you properly.”</i>", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		Text.Clear();
+		Text.Add("The next morning dawns, golden light pouring into your valley as the sun shows its face from behind the mountains. Aurora is always a pleasure to wake to, especially with her firm, voluptuous form snuggled in yours - a form that’s only grown more curvaceous with her advancing pregnancy.", parse);
+		Text.NL();
+		Text.Add("As the waking world looms, you claim your morning’s share of your mate, running your hands through her fur and feathers, delighting in her warmth. Her breasts are deliciously full and milky once more after being drained so soon, and she squeals and chirps, wriggling in your grasp as you squeeze them gently.", parse);
+		Text.NL();
+		Text.Add("<i>“All right, sleepyhead,”</i> you whisper to her. <i>“I’m off.”</i>", parse);
+		Text.NL();
+		Text.Add("She murmurs, and you swat her on her furry rump before stepping out into daylight. The days may have shortened, but the list of daily tasks has lengthened - and with Aurora reserving all her energy to grow her gryphlets, an ever greater proportion of the work falls on your shoulders. You look around you - your workbench, tools, even your spear - and feel…", parse);
+		Text.Flush();
+		
+		//[Satisfied][Dissatisfied]
+		var options = new Array();
+		options.push({ nameStr : "Satisfied",
+			tooltip : "It’s not much, but it’s the best you could do under these circumstances.",
+			func : function() {
+				Text.Clear();
+				Text.Add("Satisfied. Sure, what you have to work with is really crude, but more importantly, it works. Of course, you’re not going to lie to yourself and this is the best you can do, but one step at a time - you’ve got only two pairs of hands to deal with things, and one pair is still learning.", parse);
+				Text.NL();
+				Text.Add("Surveying your handiwork once more, you allow yourself a little chirrup of contentment. Onwards and upwards, as the old saying goes.", parse);
+				PrintDefaultOptions();
+			}, enabled : true
+		});
+		options.push({ nameStr : "Dissatisfied",
+			tooltip : "These are really crude, you ought to have done much better.",
+			func : function() {
+				Text.Clear();
+				Text.Add("Discontent. Yes, you’ve done what you can on your own, without a whole tribe at your back aiding you, but even then you can’t silence the little voice in your head that keeps on telling you more could have been done. What would your father have said if he saw this? Maybe he <i>is</i> looking down at you with as much disapproval as you’re feeling right now…", parse);
+				Text.NL();
+				Text.Add("There’s always more to do. More to do… and not enough time in which to do it. you need a sharper blade for your axe, and that in turn means finding suitable quantities and forms of stone for sharpening. Better vines and resin with which to cure them. So much of the valley’s bounty lies unused; oh, if only you’d lived here as long as Aurora did - only in a less bestial fashion.", parse);
+				Text.NL();
+				Text.Add("Heavy hangs the head on which the crown lies.", parse);
+				PrintDefaultOptions();
+			}, enabled : true
+		});
+		
+		Gui.Callstack.push(function() {
+			Text.NL();
+			Text.Add("As you look up from your workbench, though, something catches your eye amidst the golden dawn, and your gaze turns to the sky. Something aloft amongst the wispy clouds, but too large to be simple birds… two of them.", parse);
+			Text.NL();
+			Text.Add("Your heart hardens, and you can feel fire stir in your blood as your muscles instinctively tense. Could it be? Is it? The silhouettes are still too distant to make out what exactly they are, but there’s no time to lose. Reaching for your spear, you bellow for Aurora.", parse);
+			Text.NL();
+			Text.Add("<i>“What’s the matter?”</i> her sleepy voice mewls from within.", parse);
+			Text.NL();
+			Text.Add("<i>“Danger.”</i> You jab a finger up at the sky and the rapidly growing silhouettes. <i>“Hide yourself while I deal with it.”</i>", parse);
+			Text.NL();
+			Text.Add("Sleepy though your mate may be, the urgency and sharpness of your voice cuts through the fog of drowsiness. She follows your finger to the approaching figures, nods mutely and then spreads her wings to descend into the forest below. Only when she’s gone from sight do you return your gaze to the interlopers, your fingers clenched so tightly about the shaft of your spear that you can sense the blood pumping through them, a small mirror of your heart’s pounding.", parse);
+			Text.NL();
+			Text.Add("This is your home now - you have taken a mate, and she is about to bear your young. Killing to defend something is nothing new to you, but now you have more reason to do it.", parse);
+			Text.NL();
+			Text.Add("Moments pass, and by and large both silhouettes become clearer - furred and feathered like you are. You’re tempted to relax your guard, but the fact that the interlopers are gryphons like you doesn’t necessarily mean there’s less danger to be had. Yes, they’ve clearly caught your scent, and are heading straight for you - you should decide how you want to make your first impressions.", parse);
+			Text.Flush();
+			
+			//[Aggressive][Diplomatic][Thoughtful]
+			var options = new Array();
+			options.push({ nameStr : "Aggressive",
+				tooltip : "Make it clear that if they’re here to cause trouble, you’re more than willing to fight.",
+				func : function() {
+					Text.Clear();
+					Text.Add("Best to meet the newcomers with a bit of deterrence, then. Planting your feet firmly on the ground, you broaden your stance, ready your spear and watch them close the distance with a stony gaze. Two of them, yes, and with a distinct deep blue color to their fur and plumage - from the northern tribes, then. Unarmed, but that doesn’t have to mean anything. They land on the shelf a little distance away from you, eyes darting between your gaze and the point of your spear.", parse);
+					Text.NL();
+					Text.Add("Guess it’s up to you to break the ice, then. <i>“This is my land, my valley. Who are you and what is your purpose here?”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“We don’t mean any harm,”</i> one of them - the male - replies. <i>“We were fleeing, you see, and scented gryphons on the wind and wondered…”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“This is the edge of the world. There is not much life here - as far as you are concerned, I am the only one of our kind in this valley.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“You have a mate.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>What of it? Why, do you wish to challenge me for her? Is one not enough for you?”</i>", parse);
+					Text.NL();
+					Text.Add("Both of them take an involuntary step back, and a rush of grim satisfaction courses through your body. Were you that imposing? <i>“N-no.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Good. Maybe now we can talk reasonably.", parse);
+					PrintDefaultOptions();
+				}, enabled : true
+			});
+			options.push({ nameStr : "Diplomatic",
+				tooltip : "Go for a peaceful approach, but make it clear there’s an iron fist in that velvet glove.",
+				func : function() {
+					Text.Clear();
+					Text.Add("They’re gryphons like you, even if from another tribe. Though the tribes have never quite agreed on much for most of their existence, maybe things can be different on a more personal level. At the very least, you think you can give them the benefit of the doubt - until they make a single false move, that is.", parse);
+					Text.NL();
+					Text.Add("Planting the base of your spear on the ground, you watch as both newcomers close the distance between you and land on the shelf, a male and his mate, by their scents. Their distinct deep blue fur and feathers mark them as from the northern tribes, and you hold out a hand palm outward by way of greeting.", parse);
+					Text.NL();
+					Text.Add("<i>“I greet you, one of the northern tribes.”</i> The formal words feel oddly stiff on your tongue, but you’ve had whole moons of speaking to no one but Aurora. <i>“Will you cry friend?”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“I return your greeting, one of the plains,”</i> the male replies, instinctively stepping forward to place himself between his mate and your spear, showing you his hand in return. <i>“I choose to cry friend.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Then you are welcome on my territory, at my providence. Cause no trouble.”</i> No matter how friendly they might be, though, you keep a firm hand on your spear. The formalities done with, you give both blue gryphons a nod. Still, you keep your wording stiff and careful, as is always best when dealing with those from other tribes. <i>“Why have you come? This is the edge of the world.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“We are fleeing, and scented gryphons on the wind,”</i> the female pipes up. <i>“You have claimed a mate?”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“I have instructed her to hide until it is certain there is no danger.", parse);
+					PrintDefaultOptions();
+				}, enabled : true
+			});
+			options.push({ nameStr : "Thoughtful",
+				tooltip : "Maybe you can make use of this situation and turn it to your advantage.",
+				func : function() {
+					Text.Clear();
+					Text.Add("They’re gryphons like you are, even if they’re from another tribe - at the very least, they’re not bloodthirsty wyverns out for pillage and territory. While the need for caution doesn’t escape you, there still can be some way you can turn this chance happenstance to your advantage; at the very least, some news of the remaining tribes and their fight against the wyverns would be welcome. Life is idyllic here in the valley, and it would be good to have a reminder of why you’re here in the first place.", parse);
+					Text.NL();
+					Text.Add("With that thought in mind, you plant the base of your spear firmly in the ground, test its shaft in your hand, and wait for the newcomers’ arrival. Their scent heralds their coming; you don’t have to look at their deep blue fur and feathers to realize they’re a mated pair from the northern tribes, and you dredge the depths of your mind, doing your best to recall what you’d been taught of them. They land on the ledge, a safe distance from you, and eye you warily even though you’re holding out a hand, empty palm outstretched.", parse);
+					Text.NL();
+					Text.Add("You don’t blame them. Were you faced with yourself - and while unarmed to boot, like they are - you’d be wary, too. Maybe a little reassurance is in order.", parse);
+					Text.NL();
+					Text.Add("<i>“I greet you, one of the northern tribes.”</i> The formal words feel oddly stiff on your tongue, but you’ve had whole moons of speaking to no one but Aurora; it’s a small wonder that they came as easily as they did. <i>“Do you come peacefully? Will you cry friend?”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“I return your greeting, one of the plains,”</i> the male replies, instinctively stepping forward to place himself between his mate and your spear, showing you out his empty hand in return. <i>I shall cry friend.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Then you are welcome on my territory, at my providence. Cause no trouble.”</i> All right, now that the formalities are over, it’s time to see what they’re willing to tell you. Nevertheless, it’s clear from how the pair’s looking around that they’re aware of Aurora’s existence - and yes, if you’d been in their position, you might have suspected a trap, too… <i>“I sent my mate away to hiding; I did not wish to unnecessarily expose her to danger in her current condition. You are not in danger.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“I understand. I would do the same for mine, were she heavy with young, too. Although then we might not have fled this far.”</i>", parse);
+					Text.NL();
+					Text.Add("Hm. Interesting. <i>“You were fleeing?”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“Yes.”</i> It’s the female’s turn to pipe up. <i>“We have traveled far and scented another mated pair on the wind, and thought it - well, we have not seen another gryphon for a while.”</i>", parse);
+					Text.NL();
+					Text.Add("You shake your head. Oh, you know how that feels well enough, but fleeing? That bears further questioning. <i>“", parse);
+					PrintDefaultOptions();
+				}, enabled : true
+			});
+			
+			Gui.Callstack.push(function() {
+				Text.Add(" Now, what is your business here? There are not many of our kind at the edge of the world.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“No, but there will be more in the days to come,”</i> the male replies wearily. <i>“The wyverns grow greedier by the day, as does their queen. With the plains tribes scattered, they have come after us in search of plunder.”</i>", parse);
+				Text.NL();
+				Text.Add("You snort. <i>“So, they still do not grow, do not build, and do not create.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Why, when it is so much easier to take from those who must do so in order to live?”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“If the tribes could have worked together, they might have had a chance - but such is wishful thinking. It has been tried and failed, the divisions simply run too deep.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Are we, then, to be scattered to the winds like a handful of feathers?”</i>", parse);
+				Text.NL();
+				Text.Add("You shake your head and click your beak. <i>“I will not have talk of such. My mate and I, we have a plan - one that will take many years, but it is still a plan. For now, this is the edge of the world; both of you will be safe here a while as I have been. This valley may be my territory, but there is much unclaimed land to be had. Find somewhere else nearby.”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“We will. Thank you.”</i>", parse);
+				Text.NL();
+				Text.Add("You dismiss them with an easy, almost contemptuous wave of your hand and watch the pair take off, steadily receding into the distance. It’s only when they’ve gone that Aurora clambers back into your view, brushing a few leaves out of her fur.", parse);
+				Text.NL();
+				Text.Add("<i>“Those were others,”</i> she states flatly.", parse);
+				Text.NL();
+				Text.Add("<i>“Yes,”</i> you reply. <i>“I think we’ll be seeing more in the future as the tribes are broken. Slowly, perhaps, and one at a time, but they will be. They won’t - can’t - unite, and alone, they’re no match for the wyvern hordes.”</i>", parse);
+				Text.NL();
+				Text.Add("Aurora looks at you blankly, and you remember that she’s lived in this valley for the entirety of her existence, that she knows absolutely nothing about the outside world - it’s odd, some days you can just forget these things about her.", parse);
+				Text.NL();
+				Text.Add("You’d known this day would come eventually. She might not have been interested in the world beyond her valley, but it’s interested in her - and you, of course.", parse);
+				Text.NL();
+				Text.Add("<i>“Don’t worry about it,”</i> you rumble, pulling her close with a strong arm and patting her reassuringly. <i>“It won’t help matters. I’ll handle it when need be.”</i>", parse);
+				Text.NL();
+				Text.Add("Or die trying. This is the edge of the world, after all; there’s nowhere left to run.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					Scenes.Brothel.Gryphons.Outro(Gender.male);
+				});
+			});
+			
+			Gui.SetButtonsFromList(options, false, null);
+		})
+		
+		Gui.SetButtonsFromList(options, false, null);
 	});
 }
