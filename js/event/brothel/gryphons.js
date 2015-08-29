@@ -1700,7 +1700,7 @@ Scenes.Brothel.Gryphons.Building = function() {
 					Text.NL();
 					Text.Add("<i>“You have a mate.”</i>", parse);
 					Text.NL();
-					Text.Add("<i>What of it? Why, do you wish to challenge me for her? Is one not enough for you?”</i>", parse);
+					Text.Add("<i>“What of it? Why, do you wish to challenge me for her? Is one not enough for you?”</i>", parse);
 					Text.NL();
 					Text.Add("Both of them take an involuntary step back, and a rush of grim satisfaction courses through your body. Were you that imposing? <i>“N-no.”</i>", parse);
 					Text.NL();
