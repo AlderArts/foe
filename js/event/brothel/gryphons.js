@@ -1740,7 +1740,7 @@ Scenes.Brothel.Gryphons.Building = function() {
 					Text.NL();
 					Text.Add("<i>“I greet you, one of the northern tribes.”</i> The formal words feel oddly stiff on your tongue, but you’ve had whole moons of speaking to no one but Aurora; it’s a small wonder that they came as easily as they did. <i>“Do you come peacefully? Will you cry friend?”</i>", parse);
 					Text.NL();
-					Text.Add("<i>“I return your greeting, one of the plains,”</i> the male replies, instinctively stepping forward to place himself between his mate and your spear, showing you out his empty hand in return. <i>I shall cry friend.”</i>", parse);
+					Text.Add("<i>“I return your greeting, one of the plains,”</i> the male replies, instinctively stepping forward to place himself between his mate and your spear, showing you out his empty hand in return. <i>“I shall cry friend.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“Then you are welcome on my territory, at my providence. Cause no trouble.”</i> All right, now that the formalities are over, it’s time to see what they’re willing to tell you. Nevertheless, it’s clear from how the pair’s looking around that they’re aware of Aurora’s existence - and yes, if you’d been in their position, you might have suspected a trap, too… <i>“I sent my mate away to hiding; I did not wish to unnecessarily expose her to danger in her current condition. You are not in danger.”</i>", parse);
 					Text.NL();
