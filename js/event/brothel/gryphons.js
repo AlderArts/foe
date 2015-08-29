@@ -14,7 +14,8 @@ Gryphons.State = {
 	NotViewed : 0,
 	S1WorldsEdge : 1,
 	S2Pasts : 2,
-	S3Building : 3
+	S3Building : 3,
+	S4NewLife : 4
 };
 
 Gryphons.prototype.Cost = function() {
@@ -127,6 +128,12 @@ Not that it changes too much about you, since you were already one, but the fine
 			func : func(Gryphons.State.S3Building, Gender.male), enabled : true
 		});
 	}
+	if(gryphons.flags["State"] >= Gryphons.State.S3Building) {
+		options.push({ nameStr : "New life",
+			tooltip : "",
+			func : func(Gryphons.State.S4NewLife, Gender.female), enabled : true
+		});
+	}
 	
 	if(gryphons.First()) {
 		Text.Add("Carefully closing and latching the door behind you, you take a moment to examine the room you’ve stepped into. It’s not very large - perhaps the size of two combined broom closets - and various pictures of mountain vistas and rolling valleys have been hung on the walls. In what is perhaps an attempt to try and fit the room’s theme, someone’s dragged in a small boulder for you to sit on if need be.", parse);
@@ -157,6 +164,7 @@ Scenes.Brothel.Gryphons.SceneSelect = function(choice) {
 		case Gryphons.State.S1WorldsEdge: Scenes.Brothel.Gryphons.WorldsEdge(); break;
 		case Gryphons.State.S2Pasts: Scenes.Brothel.Gryphons.Pasts(); break;
 		case Gryphons.State.S3Building: Scenes.Brothel.Gryphons.Building(); break;
+		case Gryphons.State.S4NewLife: Scenes.Brothel.Gryphons.NewLife(); break;
 		//TODO new scenes
 	}
 }
@@ -1788,5 +1796,358 @@ Scenes.Brothel.Gryphons.Building = function() {
 		})
 		
 		Gui.SetButtonsFromList(options, false, null);
+	});
+}
+
+Scenes.Brothel.Gryphons.NewLife = function() {
+	var parse = {
+		
+	};
+	
+	var preg = 0;
+	
+	Text.Clear();
+	Text.Add("You are so <i>heavy</i>.", parse);
+	Text.NL();
+	Text.Add("You can’t get away from it anymore; the enormous, elongated dome of your belly constantly threatens to enter your field of view - if it’s not already there in the first place. Low and heavy, its weight is always on your mind, and even when you close your eyes and lie down on your side - something which you seem to be doing more and more of these days - the never-ending shifting and squirming of your unborn gryphlets keeps you awake. Several moons ago, you would’ve laughed at the thought of you like this; now, you’re not finding it that funny anymore.", parse);
+	Text.NL();
+	Text.Add("So swollen are you that you can’t even fly properly; the most you can manage is an awkward glide, constantly having to adjust for your life-laden midriff. As a result, you spend most of the days on the cliffside, doing what work you can while you wait for him to return.", parse);
+	Text.NL();
+	Text.Add("And there is much work to be done. Despite your condition, the rest of your body is still perfectly functional, your muscles lean and trim; besides, lying down all day isn’t going to suit you. The things you have learned from him are many, and yet each day he still manages to surprise you with something new, something that the creature that you were could have never even begun to consider on her own.", parse);
+	Text.NL();
+	Text.Add("A short, sharp kick from within your heavily swollen womb knocks the breath out of you, and you set down the knife blade that you’d been sharpening before rubbing the stretched, taut skin of your baby bump in a bid to calm the gryphlets within. He’s told you that where he came from, there would be other females who would take care of those who were about to bear gryphlets, help them through the process, but you have not the privilege of such. Not when your own mother has left.", parse);
+	Text.NL();
+	Text.Add("It’s not going to be long now, you’re sure of that. You can’t help but wonder how holding and caring for a tiny version of you is going to work out.", parse);
+	Text.Flush();
+	
+	//[Fulfilled][Calm][Frustrated]
+	var options = new Array();
+	options.push({ nameStr : "Fulfilled",
+		tooltip : "",
+		func : function() {
+			Text.Clear();
+			Text.Add("Cooing and chirping, you pat the prodigious swell of your pregnancy, and feel the gryphlets within respond to your touch through fur and flesh. Perhaps you should be worried, but you just feel so full, so <i>right</i>. The sense of warm bliss that spreads out from your belly and suffuses the entirety of your being leaves no doubt in your mind that this is your destiny, what you were made for. Good thing, then, that you love it so much; even after the gryphlets have been born, you can’t wait to go through it all over again. Sure, it’s not all good, but it’s so worth it.", parse);
+			Text.NL();
+			Text.Add("Besides, you’re not alone in this. He’s there to guide you, like he always has been.", parse);
+			Text.NL();
+			Text.Add("And of course, the very act which started it all… each time you think back to that night by your pool, you can’t help but fantasize about him, the way he took you by the water’s edge. The sensations of being plowed and bred like that for the first time…", parse);
+			Text.NL();
+			Text.Add("It’s a little while before you realize that your tongue is hanging out of your beak and your fingers wet with your own juices, and you quickly move to clean yourself up. If he catches you like this, he’ll tease you about it to no end… although maybe it isn’t so bad, considering what the teasing almost always ends up in.", parse);
+			
+			player.slut.IncreaseStat(75, 1);
+			preg = 2;
+			
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Calm",
+		tooltip : "",
+		func : function() {
+			Text.Clear();
+			Text.Add("Sighing, you lean back and close your eyes, wings fluttering a little as you settle down on your side. You’re not lazing around, you’re just… just taking a much needed rest. While being so swollen has had its downsides - you do miss soaring through the skies - it hasn’t been all too bad, either. He’s taken good care of you, you’ve to admit as much; and besides, lying down like this on your side, hands just holding your swollen midriff, you feel at peace.", parse);
+			Text.NL();
+			Text.Add("So at peace, in fact, that when you finally wake up, the sun is much higher in the sky and beats down upon you mercilessly. Oh no… what if he caught you like this? Him teasing you is one thing, but him being disappointed is another, and that’s much worse than the first… your mind reels for a bit until you finally get hold of your mood and thoughts. It’ll be fine. You just have to… just have to…", parse);
+			
+			preg = 1;
+			
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Frustrated",
+		tooltip : "",
+		func : function() {
+			Text.Clear();
+			Text.Add("Well, at least it’ll be easier to deal with than the condition you’re stuck in right now. Swollen, heavy, unable to fly, always hungry - and while those are the least of your problems, it doesn’t help that they’re practically always there, nudging at the edges of your thoughts. To make it all worse, you’ve been feeling utterly sullen for no good reason at all - he just smacks you on the tush and teases your impotent broodiness, and that just makes it… urgh! You want him, and yet you don’t want him.", parse);
+			Text.NL();
+			Text.Add("Sighing, you reach for your massively milk-swollen breasts and try to knead a little of the tenderness out of them. Unfortunately, all you manage to knead out is a little milk from your engorged nipples, which doesn’t help matters at all.", parse);
+			Text.NL();
+			Text.Add("Ooh… maybe you’ll grow into this, maybe you won’t. In the meantime, though, you need to put aside your frustrations so that you can get this job done. A monumental task - the heavier with gryphlets you become, the wilder your mood swings are - but after a few deep breaths, you think that you might just be able to keep your head on straight until he comes back. It’s always easier to think when he’s around - you don’t understand why, but it just <i>is</i>.", parse);
+			
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	
+	Gui.Callstack.push(function() {
+		Text.NL();
+		Text.Add("Your thoughts back in order, you’re about to reach for the blade and sharpening stone once more when a sharp jab of pain lances through your lower belly, one unlike anything you’ve ever experienced before. Gasping, you squeeze your eyes shut and begin to pant heavily, cursing the day he made you like this. Maybe you should just endure his teasing and lie down for the rest of the day…", parse);
+		Text.NL();
+		Text.Add("Alas, your body doesn’t seem to want to go along with your plans - there it is again, strong enough to knock the wind out of you, followed shortly by an outpouring of fluid that soaks your fur and runs down your thighs. Clutching your gravid womb, you let out an involuntary whimper and mewl as the aftershocks fade, leaving you utterly drained.", parse);
+		Text.NL();
+		Text.Add("Where is he? Where is he? It must be beginning - it’s as he said - and yet he’s not here! Fine. You’ll just have to handle this by yourself. Painful as it is, it won’t kill you. He’s told you about how his mother and aunts did it - it still feels strange to imagine so many others of your kind - but this is something only you can do. As soon as you’ve regained enough sense to move, you make for the safety of the cave - you’re barely able to get into the shade before the birthing starts in earnest.", parse);
+		Text.NL();
+		Text.Add("What happens next is the greatest effort of your life.", parse);
+		Text.NL();
+		Text.Add("You’re not entirely sure how long you spend flat against the wall, huffing and groaning, squirming and shifting as the weight in your swollen belly descends lower and lower. What you do know, in those brief moments between the pains and contractions, is that the sun’s moved steadily across the sky.", parse);
+		Text.NL();
+		Text.Add("Crying and panting, a grunt of effort accompanying each contraction, the large, round dome of your belly visibly squeezing down as you feel parts you didn’t know you had stretch and dilate to admit new life into the world - although the pain gets better, the exhaustion only worsens. He’s told you to keep upright for as long as you can, to let the weight of the gryphlets help with the birth, that lying down will only make it harder - but knowing this is one thing, and actually doing it is another.", parse);
+		Text.NL();
+		Text.Add("At last, though, it’s finally over: with an outpouring of clear, sticky fluid, one weight passes from between your legs, followed swiftly by another. Panting and utterly drained, yet gloriously relieved, you gather up the tiny infants - one in each arm - and examine them. Truly, they are versions of you and him wrought in miniature - tiny beaks and wings, a soft, thin coat of fur and feathers still wet with fluid. They’re so small and soft and warm; you pull them close, pressing them against your now-smaller belly, and can’t help but feel a surge of pride at what you’ve accomplished today.", parse);
+		Text.NL();
+		Text.Add("Now this’ll be a surprise for him to come back to.", parse);
+		Text.NL();
+		Text.Add("What do you do now, though? Just as you’re considering that question, you hear a flutter of wings from outside, and pause. Has he returned? You still need to rest awhile, clean up the mess you’ve made, and -", parse);
+		Text.NL();
+		Text.Add("- No, the scent is all wrong. Though you can’t see whatever this thing is yet, you can perceive its shadow, and it’s not his. Too sharp, too many edges. The scent - it’s not a comforting one of fur and feathers, but smooth and dry, like that of sand…", parse);
+		Text.NL();
+		Text.Add("You can hear it, whatever this thing is, rummaging about outside on the shelf, methodically searching through his tools, your things. It’s no simple beast, then, but a creature possessed of some measure of thought and intelligence. If you can smell it, then it no doubt can do the same for you and the newborns; why isn’t it going after you yet? Caution, or does it know that you’re trapped in here, with no other exit?", parse);
+		Text.NL();
+		Text.Add("A cold hand grips your heart, and then it’s swiftly replaced with burning rage. No. It’s not going to harm you. It’s not going to harm your <i>children</i>. He’s not home at the moment, which means <i>you</i> are next in line.", parse);
+		Text.NL();
+		Text.Add("The creature outside is as alien as it is repulsive to your instincts: rummaging as it is through his workbench and tools, you can only see its back, but it’s more than enough for you to quickly size up what you’re dealing with. Rough, leathery hide, wings that stretch from its forearms to its torso, horns that curve backwards from its head. Its legs are bent, its feet clawed, and it moves with an unnatural, loping gait that would have been comical - if it was not obviously a predator.", parse);
+		Text.NL();
+		Text.Add("But you are, too. Weak from birthing and body still twinging with afterpains, you’re still a predator.", parse);
+		Text.NL();
+		Text.Add("Can it not sense you, or does it just not care? Either way, the end result is the same. The stone blade you were sharpening earlier today is still on the ground where you left it; the creature’s back is turned to you. What comes next couldn’t have been any other way: one movement to take the blade in hand, another to bring it down at the creature’s back, right between its shoulder blades. It notices you at the last moment, half-turns such that your blow misses its spine and instead turns on the creature’s leathery hide, sinking deep into flesh and sending a spurt of reddish-black blood into the air.", parse);
+		Text.NL();
+		Text.Add("It screams and whips around, its ridged tail lashing out, sweeping across the ground in an attempt to catch on your feet. You sidestep the blow and meet the face of your enemy - black, beady eyes set above elongated jaws and protruding teeth. Completely ignoring the knife blade sticking out of its back, the creature rounds on you even as you seek to open the distance, to give you more space to maneuver. Jabbering in a language - it has to be a language - you don’t understand, it readies long claws tied to hide straps on its wrists, claws carved from bone, sharpened to cruel points and fitted over its thick fingers.", parse);
+		Text.NL();
+		Text.Add("No, you did the right thing in doing this. If you’d merely waited inside, it’d just have entered the cave and killed you and the gryphlets when it was done outside. At least out here you have some space… and weapons, should the situation call for it. Now, though, the two of you watch each other, waiting for the other to make the first move.", parse);
+		Text.NL();
+		Text.Add("Which it does, feinting left first, then following up by raking its right claws through the spot where you’d been moments ago, catching little but a handful of fur and feathers. Folding your wings against your body, you duck in and deliver a savage blow to its belly. Shrieking in outrage, the creature recovers with startling speed and falls upon you before you can react, pressing you down onto your knees with its weight. You’ve got to resist, but… don’t seem to have the… strength…", parse);
+		Text.NL();
+		Text.Add("You realize your mistake too late: you’d been fighting this thing like you would an animal when out hunting. However, it’s no animal.", parse);
+		Text.NL();
+		Text.Add("It screams and jabbers some more in its own language, then to your horror, speaks words you recognize: <i>“Stupid female. Eat you, eat your babies, then bring your feathers and bones back as trophies.”</i>", parse);
+		Text.NL();
+		Text.Add("Never! With a desperate surge of strength, you shove it hard enough for it to lose its grip on you, then claw at its face, drawing blood. Enraged and bleeding, the creature hisses and raises its gleaming talons to deal a killing blow. You raise your arms to shield yourself, see a shadow fall over you, shudder as warmth and wetness blossoms just above your heart -", parse);
+		Text.NL();
+		Text.Add("<i>“Aurora.”</i>", parse);
+		Text.NL();
+		Text.Add("Whimpering, you open your eyes and find that the blood on your breast isn’t yours - instead, it drips off the tip of his spear, which has found its way into the horrid creature’s back and out its front, neatly spearing its heart in the process. Your gaze follows the shaft of the bloodied spear all the way up to his face, and behold the sheer intensity of the pure hatred set in his face and lingering in his eyes - instinctively, you cry out and shrink back before realizing that his anger isn’t directed at you.", parse);
+		Text.NL();
+		Text.Add("<i>“Get up, Aurora.”</i> His voice is strong, even and comforting, completely contrasting his expression. <i>“It’s dead. It can’t hurt you any more.”</i>", parse);
+		Text.NL();
+		Text.Add("Finally managing to summon what strength you have left, you scooting backwards and away from the gruesome sight. You watch as he expertly flicks the shaft of his spear, sending the creature’s body slumping to the ground before kicking it aside like a hunk of cooling meat.", parse);
+		Text.NL();
+		Text.Add("It’s… it’s finally over.", parse);
+		Text.NL();
+		Text.Add("You stare up at him; in the blink of an eye, his anger has turned to a grim and impassive mood. <i>“So soon,”</i> he mutters. <i>“Why did it have to be so soon? Not even a single turning of the seasons… ”</i> At last, he heaves a sigh, and turns his attention to you, then to the darkness of the sleeping cave where the smells and scents of birthing still linger.", parse);
+		Text.NL();
+		Text.Add("<i>“What a mess,”</i> he grunts. Without hesitation, he sets down his spear and scoops you up over his shoulder like a fresh kill; you don’t mind the gesture one bit as he carries you into the shade. It’s nice to be able to let go and allow him to take control of matters from here on out. <i>“I’ll get this all cleared away. Just sleep, and let me do the thinking.”</i>", parse);
+		Text.NL();
+		Text.Add("With that, he dumps you on the sleeping shelf; you’re too exhausted to protest the rough treatment even if you wanted to, and the last thing you’re aware of before you doze off is him placing the newborn gryphlets by your side to snuggle against your warm body and soft fur.", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt(function() {
+			Text.Clear();
+			Text.Add("The two of you spend the rest of the day gathering fragrant windflowers. To mask the scent of its blood when he gets around to burning the creature’s corpse, he explains. You help out where you can, insisting that being out in the air and sun will help you recover far better than being cooped up in the darkness. Besides, now that he’s back, you don’t want to be away from his side for a little while.", parse);
+			Text.NL();
+			Text.Add("Well, to be honest, he does most of the work. The gryphlets want constant care and the occasional feeding, and he leaves you to your own devices for the most part - you suspect he gets considerable amusement out of seeing you struggle with learning how to care the tiny lives in your arms. Sure, he could tell you, but you already know what he’d say if you asked: “where’d be the fun in that, and how would you learn?”</i>", parse);
+			Text.NL();
+			Text.Add("So it is as it is. The creature that appeared, he explains to you as he gathers stems and petals, was a wyvern. The things which he came here to avoid - that was but one, and a scout at that. Sooner or later, more will follow on its tail, seeking it, which is why he labors at gathering windflowers, to bury the carcass, and with it, the scent.", parse);
+			Text.NL();
+			Text.Add("Better later than sooner, after all. It means more time to prepare, which might make all the difference.", parse);
+			Text.NL();
+			Text.Add("Since he cannot be around all the time, he will teach you to kill them. His mother and aunts all could, and so will you - but only as a last resort. He will protect you, but you in turn must be ready to protect the gryphlets. That is the way of things. That is the way of nature, and also the way of the tribes.", parse);
+			Text.NL();
+			Text.Add("You think back to the brutal struggle just earlier today, and shiver both with fear and anticipation. Up till today, you’ve never killed anything you didn’t intend to eat. This is a new feeling.", parse);
+			Text.NL();
+			Text.Add("One of the gryphlets snuffles and nips at one of your breasts with her tiny beak; you sigh in satisfaction, cuddle the little one close, and allow her to drink her fill. Earlier on, you’d asked him if he wanted to name the gryphlets, but he declined. Unfortunate things happened to the very young, he explained. Disease. Weakness. Accidents. There were many things that could happen despite the best of efforts, and it was bad luck to bestow a name upon a new life while it was too young.", parse);
+			Text.NL();
+			Text.Add("You wonder how he can be so cold and unfeeling, then remember that he’s seen far more of the world beyond the valley walls. How many… no!", parse);
+			Text.NL();
+			Text.Add("Your gryphlets squirm and shift in your arms, and you press them close to you, savoring the warmth of their tiny bodies. There, that feels so much better.", parse);
+			Text.NL();
+			Text.Add("<i>“I’m done,”</i> he announces. Indeed he is, a large bushel of freshly picked windflowers in his hands, all reds and oranges and yellows as the broad petals wave in the breeze. Carefully, he sets them down and picks up his flat-bladed shovel. <i>“No time to rest. We need a hole, and a fire. Aurora, please prepare the materials while I dig.”</i>", parse);
+			Text.NL();
+			Text.Add("But he looks so tired. Won’t he just rest for a moment? The sun is beginning to set, but all of you are safe here. There’ll be time enough to-", parse);
+			Text.NL();
+			Text.Add("<i>“There’ll be time enough for me to rest when I’m dead. Now get out the tinder.”</i> There’s that face to him when he uses that tone of voice with you, and your body moves to obey unthinkingly almost of its own accord; you set down the gryphlets, make sure they’re comfortable nestled on the grass, then move to fetch the dried moss and bark shavings. Even so, you can’t help but eye him as he digs, piling up shovelful of shovelful of dirt by his side, lean, hard muscles flexing and moving with considerable vigor…", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				Text.Clear();
+				Text.Add("<i>“Aurora. Pay attention.”</i>", parse);
+				Text.NL();
+				Text.Add("You look up, and are met with a resounding slap to your face that brings tears to your eyes. He’s pulled the blow, but it still stings terribly, and your breast is filled with equal parts anger and fear. His face is cold and straight, and somehow, that is immensely more terrifying than if he were plainly angry.", parse);
+				Text.NL();
+				Text.Add("<i>“Let me make this clear, Aurora. That thing which came today was a wyvern. It was a scout; there will be others of its kind wondering where it’d gotten to, and start searching for it. There will be more of them than we can fight off. They will come.</i>", parse);
+				Text.NL();
+				Text.Add("<i>“We must burn the body, then mask the scent and bury the smoke. You don’t seem to have grasped the seriousness of the situation. Everything that you have ever known is at stake here, and I don’t know if we have any time, or if it’s already too late. Today may have been quite a day for you, and I understand that your life has hardly prepared you for such, but show some sense of urgency instead of fantasizing about me here and now!</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Now, I’m almost done with the pit. Prepare the tinder while I do so, and if you can get a fire going, that would be appreciated.”</i>", parse);
+				Text.NL();
+				Text.Add("You hang your head in shame, and don’t look up until you’re sure he’s turned back to his digging. Rubbing your face a few times to soothe the worst of the stinging, you settle back and do your best to follow his instructions. The fire, though, you have trouble with - you <i>know</i> what needs to be done, it’s just that your body doesn’t seem to want to obey. There’ll be the slightest whiff of smoke, or flashes from the sparks you struck from flint, and then you find your body instinctively recoiling despite you knowing better…", parse);
+				Text.NL();
+				Text.Add("<i>“Let me.”</i> His voice enters your world again, and then he is kneeling next to you, one wing draped about your form, gently nudging you closer to him. A few strikes of the flint, followed by a little blowing, and he’s got a small fire going - and your cheeks are burning with shame. You <i>will</i> learn to do this thing as flawlessly and easily as he does. Slowly, you watch as he transfers the flames into the pyre that he’s built in the dug hole, then together you wait for the flames to grow, their light replacing that of the setting sun.", parse);
+				Text.NL();
+				Text.Add("<i>“All right, then,”</i> he says when the flames have grown strong enough. <i>“Take the windflowers, Aurora. Scatter them over the fire while I throw this beast in.”</i>", parse);
+				Text.NL();
+				Text.Add("You obey, and soon a fragrant aroma rises with the cinders and smoke, rising up and away into the night sky to scatter into the winds. The moment the wyvern’s body meets the roaring flames, though, you’re quickly thankful for the windflowers: the stench that the creature’s body makes as it burns is horrible. Oily blood sputters and hisses as the flames devour leathery hide and tough sinew, and you step back from the foul smell, still casting handfuls of petals into the pit. He stands on the other side, his arms crossed across his chest, his expression blank as he watches the carcass burn.", parse);
+				Text.NL();
+				Text.Add("He is hiding his feelings, you realize, or perhaps he truly does not have any at the moment, for he has blotted them out.", parse);
+				Text.NL();
+				Text.Add("At last, all the windflowers are spent, and he gives you a quick, businesslike nod. Without further ado, he picks up the shovel once more and begins filling in the hole, trapping the smoke beneath soft clods of freshly turned dirt. You sit down beside the gryphlets and watch him awhile, barely daring to breathe as he works like someone possessed under the wan, silvery light of the risen moon.", parse);
+				Text.NL();
+				Text.Add("<i>“Go and get some rest, Aurora,”</i> he says at last. <i>“Tomorrow will be the start of another day.”</i>", parse);
+				Text.NL();
+				Text.Add("But what about him?", parse);
+				Text.NL();
+				Text.Add("<i>“As I said, there’ll be time enough to sleep when I’m dead.”</i>", parse);
+				Text.NL();
+				Text.Add("Does he <i>have</i> to be so grim?", parse);
+				Text.NL();
+				Text.Add("<i>“Do you think I’m grim?”</i>", parse);
+				Text.NL();
+				Text.Add("To be honest, you don’t know what you’re thinking at the moment. Each and every part of you is pulling in a different direction at the moment - one part of you just wants to curl up on the spot and sleep, the other is seething with anger and frustration, another is upset with him and yourself that he has to slap you, another wants to be fucked thoroughly to get all that tightness out of your mind and body, and yet one more is amazed at the fact that you made it through this day and now have two little gryphlets by your side -", parse);
+				Text.NL();
+				Text.Add("You don’t know if he’s grim or not, but whatever he does, you’d like to follow.", parse);
+				Text.NL();
+				Text.Add("He looks at you with his head tilted for a moment or so, then nods. <i>“Suit yourself, Aurora.”</i>", parse);
+				Text.NL();
+				Text.Add("Personally, you imagine he looks glad to have your company, but he’d never admit as much. For a long while, the two of you stare down at the steaming, baking earth, the gentle fragrance of windflowers hiding the fact that anything’s buried under the earth here. All you need to do tomorrow is move some grass over the freshly turned dirt, and hopefully that’ll be the end of things.", parse);
+				Text.NL();
+				Text.Add("So many things to think about and consider, so much that the days when you lived simply from day to day without a care in the world seem so distant. You’ve never really thought about it, but now, sitting on the ground at his side, it hits you: that night by the pool, one world ended and another began.", parse);
+				Text.NL();
+				Text.Add("Is that how these things work?", parse);
+				Text.NL();
+				Text.Add("His face is inscrutable, his movements calm and measured. You wonder if he feels otherwise…", parse);
+				Text.Flush();
+				
+				//[Comfort][Hug][Watch]
+				var options = new Array();
+				options.push({ nameStr : "Comfort",
+					tooltip : "Comfort him in the way you know he likes most.",
+					func : function() {
+						Text.Clear();
+						Text.Add("You turn to take one last look at the gryphlets - and let your worries rest once you see them sleeping by the remains of the fire, huddled together in a tight, warm bundle. They’re sleeping very well; now to help your mate do the same.", parse);
+						Text.NL();
+						Text.Add("A low purr forming in the back of your throat, you slink forward and embrace him, your hands wandering down his sides until they meet in front of his hard, muscular midriff, your beak nipping and grooming the feathers of his wings and shoulders. You chirp softly, urging, no, <i>begging</i> him to relax just a little. It’s over. He’s done all that he can. There are other things which need his attention…", parse);
+						Text.NL();
+						Text.Add("<i>“Aurora, you shouldn’t.”</i>", parse);
+						Text.NL();
+						Text.Add("You soundly ignore him and push your face more aggressively against his skin and feathers, rubbing your beak all over his skin, nipping away with its sharp tip. He gently makes to pry your fingers off him, but you hold firm, and he relents.", parse);
+						Text.NL();
+						Text.Add("<i>“It’s not good for you. You just had your gryphlets this morning.”</i>", parse);
+						Text.NL();
+						Text.Add("Oh? You press your head against his chest and listen to the deep bass thumping of his heart. Sure, his words may say one thing, and he may even mean them, but his heart is saying another.", parse);
+						Text.NL();
+						Text.Add("Hey, you’re getting better at this “sniff out lies” thing he does so easily. Besides, when did you say you wanted to mate? Maybe you just wanted to fool around a little? Really, he shouldn’t jump to conclusions so easily.", parse);
+						Text.NL();
+						Text.Add("<i>“Hrrmph. You just can’t wait, can you? Why, did you enjoy being stuffed full of life so badly that you can’t bear to be empty once more, can you? Don’t worry, all in due time - I’ll put plenty of gryphlets into you when you next go into heat, so don’t be hasty.”</i>", parse);
+						Text.NL();
+						Text.Add("Mmm… that certainly is a nice thought, but it’s not what you’re after. Cooing softly, you let your fingers wander of their own accord down to his sheath, idly tickling the sensitive folds of skin in a bid to get his delicious cock out in the air where it belongs. If you were going to be completely frank, you need this more than he does - what with all the death and burial and burning and birthing… it’s good to have someone to cling to when you’re falling.", parse);
+						Text.NL();
+						Text.Add("Ha-<i>ha</i>. Seems like it’s working just fine, all right - once enough of his cock is out for you to get a grip on, you quickly and easily stroke your fingers up and down its rapidly expanding length. Watching that delicious, thick-set member lengthen and engorge before your very eyes - no, getting to <i>feel</i> it do so, pushing apart your fingers with ease, staining your palm with his strong, masculine musk…", parse);
+						Text.NL();
+						Text.Add("You can’t help but take a sniff, and the scent of his growing arousal is enough to send shivers racing down your spine and your insides to squirming and tying themselves into knots. Greedily, you run your fingers along his glans, taking care to roll your fingertips back and forth along the sensitive ridge. He draws a sudden, sharp breath, and satisfaction blossoms in your heart.", parse);
+						Text.NL();
+						Text.Add("<i>“Again, Aurora, you’ve just had-”</i>", parse);
+						Text.NL();
+						Text.Add("No, you’re going to heed his sage advice and don’t intend to take him inside you. Even so, there are other ways in which the two of you can satisfy each other…", parse);
+						Text.NL();
+						Text.Add("You can see his eyes dart this way and that as he thinks, than at last he sighs, his depressed demeanor dissipating just a little. <i>“You know what? I’m thinking that maybe I’ve been worrying too much about the future to appreciate the time I’ve got with you right now. Just this once, alright?”</i>", parse);
+						Text.NL();
+						Text.Add("Just this once? Well, that’s a small victory for you, at the very least. You can’t help but feel all smug and satisfied as his strong hands reach for the top of your head and guide you into a kneeling position before his cock, a most suitable position for worshipping such a heavenly thing as it is. Naturally, you don’t let go, instead clinging onto it throughout the whole process - has it actually gotten <i>bigger</i> since the last time you looked? Your tongue hangs out of your beak for a moment as you fantasize about what it’dt be like to take that pulsing, throbbing life-rod into you again and be plowed utterly and thoroughly, but you made a promise…", parse);
+						Text.NL();
+						Text.Add("A powerful twitch of his cock against your fingers has your thoughts racing back to reality, and without further ado, you begin stroking him off in earnest, feeling the wonder of the huge, sheath-slick cock in every drop of pre and bulging vein you feel in your palms. The stickiness, the musk, the way it feels so rock-<i>hard</i> beneath your fingertips, the beating of his heart, the slow, rhythmic motions as he begins to thrust into your grasp, gaining in strength and quickness with each buck of his hips.", parse);
+						Text.NL();
+						Text.Add("In turn, you feel your arms respond in kind, tugging him towards you even as he pulls away. The firm grasp that you usually use to catch prey is now put to great use in pleasuring him; even though your hands and wrists are not utterly coated with a thin sheen of pre, you nevertheless hold unwaveringly onto his cock with one hand while you cup and fondle his massive balls with the other.", parse);
+						Text.NL();
+						Text.Add("<i>“No need to be so eager,”</i> he whispers with a certain nasty playfulness - no mean feat, considering what his body must be feeling. With a broad sweep of an arm, he reaches down to pat the top of your head, ever reminding that you’re his, and as such he’s responsible for you. <i>“Even if I bred you right here and now, it wouldn’t take - not until you go into heat again.”</i>", parse);
+						Text.NL();
+						Text.Add("Heat…half-idle, half-stupefied, you think back to all those lonely nights, all those sleepless evenings spent tossing and turning in your bed, rubbing your thighs together and feeling warmth roil within you, sloughing off you in waves. That night, you’d been at the pool to try and cool the heat by bathing, to quench the desire by drowning it… and while it was finally silenced, it didn’t happen quite the way you expect…", parse);
+						Text.NL();
+						Text.Add("With a powerful roar, he thrusts into your hands one last time, wriggling in your grasp as primal instincts seize his body in a desperate urge to knot whatever he’s fucking at the moment. In that split second, you <i>feel</i> his load as it rushes up the length of his big black cock, and then it’s all over you - onto your face, dripping from your beak, sliding down your neck and pooling in the feathers of your cleavage. He grunts and growls as he spends himself upon you, utterly draining his balls in response to the scent of his mate; the small geyser of gryphon sperm that continues to blast from his cock-tip is an unending, overflowing font that covers you in his seed and scent.", parse);
+						Text.NL();
+						Text.Add("You feel practically giddy with how much cum there is, and wonder if there’ll be just as much when it’s time for you to be bred. All that life-force rushing into you, invading your insides utterly before taking root within your fecund confines to grow into gryphlets…", parse);
+						Text.NL();
+						Text.Add("At last, the stream blasting from his manhood turns to spurts, and finally dribbles before coming to a stop. He looks utterly spent - and you’d be surprised if he weren’t, judging by the sheer size of the cum puddles on the grass. Turning his gaze from side to side, he surveys the devastation that he’s wrought on his surroundings, then looks down at you and snorts.", parse);
+						Text.NL();
+						Text.Add("<i>“My,”</i> he says. <i>“I guess I was pent-up after all.”</i>", parse);
+						Text.NL();
+						Text.Add("See, isn’t that so much better? Doesn’t he feel that much more comfortable?", parse);
+						Text.NL();
+						Text.Add("He makes a show of considering his answer, clicking his beak and tapping his chin as he eyes you. <i>“I suppose I do, yes.”</i>", parse);
+						Text.NL();
+						Text.Add("Then you were very glad to have been of service. Slowly, you stand up and give him a warm generous hug, spreading the cum on your body all over him and savoring the sensation of his thick black cock pressed against your lower belly. He sighs, returns your embrace, then ruffles your fur before bringing you down to the grass with him.", parse);
+						Text.NL();
+						Text.Add("<i>“Be sure to wash up tomorrow before handling the gryphlets.”</i>", parse);
+						Text.NL();
+						Text.Add("You nod enthusiastically, then snuggle into his warm arms, wanting as much of his steady breathing and the powerful beating of his heart as you can get. Who cares if there is danger to be had, if these horrible leathery-skinned, furless monsters wait beyond the mountains. Together, him and you, you will destroy those who would threaten the sanctity of your valley.", parse);
+						Text.Flush();
+						
+						player.slut.IncreaseStat(100, 2);
+						
+						Gui.NextPrompt(function() {
+							Scenes.Brothel.Gryphons.Outro(Gender.female, preg);
+						});
+					}, enabled : true
+				});
+				options.push({ nameStr : "Hug",
+					tooltip : "Give him a nice, long hug. Let him know you’re still around.",
+					func : function() {
+						Text.Clear();
+						Text.Add("A soft chirp escapes your beak, followed by a gentle purr in the back of your throat as you step forward and wrap your arms around him in a hug from behind, closing your eyes to better appreciate the scents and sensations of being so close to him. Besides, you know he enjoys your sleek body, too, and want him to appreciate it as much as he wants.", parse);
+						Text.NL();
+						Text.Add("For a moment, he stands caught, neither accepting nor rejecting you, and then he, too, closes his eyes and let his spear fall, quickly easing your embrace apart and swinging you around to his front so <i>he</i> can hug you better. And hug you he does, just tight enough such that you feel all warm and protected, but also tight enough to let you know he could easily crush you if he so desired. Somehow, you find that thought… arousing, especially when you know that strength isn’t going to be directed at you.", parse);
+						Text.NL();
+						Text.Add("Now is not the time for that - all this is supposed to be is a simple hug, fur against fur, feathers against feathers, breath against breath. Bit by bit, you feel the tension in his muscles loosen, and chirp out loud, nuzzling your face all over the crook of his chin.", parse);
+						Text.NL();
+						Text.Add("You’re glad he’s here. For all that’s happened since he came, and all that will happen in the future, you’re glad he’s here.", parse);
+						Text.NL();
+						Text.Add("He doesn’t say anything by word of reply, but lets out a contented rumble. That’ll have to do, you guess. You reach up with your beak to nip and nibble at his chin, savoring his touch, and he in turn gives you a gentle pat on the head.", parse);
+						Text.NL();
+						Text.Add("While you wouldn’t have minded remaining like this for the rest of the night, he breaks the embrace at last, easing your arms from around him, sliding them across his well-built form as he pulls away from you. There’s much that remains unspoken, but even though he’s the one who’s taught you to speak properly, it’s odd that the longer you’ve been together, the more gets across without the need for words.", parse);
+						Text.NL();
+						Text.Add("Maybe one day you’ll even be able to read him as easily as he reads you.", parse);
+						
+						Scenes.Brothel.Gryphons.NewLifeHugEnding();
+					}, enabled : true
+				});
+				options.push({ nameStr : "Watch",
+					tooltip : "If he doesn’t want to be touched, then you’ll respect that for now…  but you’re here.",
+					func : function() {
+						Text.Clear();
+						Text.Add("Slowly, you shuffle closer to him, settling down on the lush, soft grass at his feet - not quite touching him but nevertheless entering his little circle of personal space, letting him <i>feel</i> your presence. Well, it’s the first time you’ve actually tried doing it on purpose, and it’s a different way from how he does it, but you think you’ve got it all figured out. Chirping softly, you gather the gryphlets into your lap, and the little ones make small, mewling noises as they snuggle into your fur, seeking warmth and comfort.", parse);
+						Text.NL();
+						Text.Add("Just sitting down like this, watching the last cinders of the fire go out and the fragrant smoke rise, it’s hard to believe you’re in the mortal danger that he says everyone’s in. It’s simply too <i>peaceful</i> for that, and your instincts simply shrug and tell you there’s nothing to worry about.", parse);
+						Text.NL();
+						Text.Add("Yet… you believe him, more than you believe your instincts. He has a way of seeing into the future, something which the back of your mind is not the best at. If he can see it, and you haven’t, then it’s as simple as that. He’s never deceived you.", parse);
+						Text.NL();
+						Text.Add("He’s leaning his weight on the shaft of his spear, you can see that. Maybe he should at least sit down, if he’s going to keep vigil.", parse);
+						Text.NL();
+						Text.Add("He looks down at you for a long time, then wordlessly does so, setting down his spear beside him and tucking in his feet to assume a cross-legged pose. After some thought, he reaches out and pulls you against him, letting out a gentle, contented rumble as your bodies meet. You’re content to leave it at that.", parse);
+						Text.NL();
+						Text.Add("<i>“I knew they would eventually come,”</i> he says slowly. <i>“They won’t rest until they’ve eaten everything. I should have been more careful after the northlanders brought us their tidings, but I thought we had more time.”</i>", parse);
+						Text.NL();
+						Text.Add("Worrying about it won’t help any. He’s done all he can.", parse);
+						Text.NL();
+						Text.Add("<i>“I’ve tried at every point, every place I could make a difference, but it’s so hard…”</i> ", parse);
+						
+						Scenes.Brothel.Gryphons.NewLifeHugEnding();
+					}, enabled : true
+				});
+				Gui.SetButtonsFromList(options, false, null);
+			});
+		});
+	});
+	
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Brothel.Gryphons.NewLifeHugEnding = function() {
+	var parse = {
+		
+	};
+	
+	Text.NL();
+	Text.Add("With a definite reluctance, he pulls away from you and sprawls out on the grass. <i>“It’s too late to get back home. We should be safe here; getting some sleep is probably a good idea. Today’s been a long day, and tomorrow will be even longer.”</i>", parse);
+	Text.NL();
+	Text.Add("Why? Does he expect more trouble?", parse);
+	Text.NL();
+	Text.Add("<i>“No, but today’s events have made it such that I need to move things along more quickly.”</i> Flapping his wings a few times, he yawns, then rolls over onto his back. <i>“You don’t need to concern yourself with that much. Focus on taking care of the gryphlets now - they’re your responsibility.”</i>", parse);
+	Text.NL();
+	Text.Add("Of course they are.", parse);
+	Text.NL();
+	Text.Add("<i>“Good. Now let’s sleep.”</i>", parse);
+	Text.NL();
+	Text.Add("The gryphlets have already dozed off; small, warm bodies tucked against each other in a heap, and once you’re sure they’re safe, you move to snuggle up to him. He doesn’t reject you, instead allowing you to press your head against him while he idly strokes the feathers on the back of your neck.", parse);
+	Text.NL();
+	Text.Add("Before you know it, you’ve drifted off into darkness, the last thing on your mind his hands in your fur and feathers.", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		Scenes.Brothel.Gryphons.Outro(Gender.female, 0);
 	});
 }
