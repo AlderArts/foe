@@ -197,7 +197,7 @@ Scenes.Asche.Prompt = function() {
 		tooltip : "Do you feel lucky? Well, do you?",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>“Ah, customer is interested in magic box?”</i> There’s a soft clink of metal as Asche shifts slightly in her seat. <i>“What is it that good customer desires? Fee is [coin] voins.”</i>", {coin: Text.NumToText(asche.MagicBoxCost()) });
+			Text.Add("<i>“Ah, customer is interested in magic box?”</i> There’s a soft clink of metal as Asche shifts slightly in her seat. <i>“What is it that good customer desires? Fee is [coin] coins.”</i>", {coin: Text.NumToText(asche.MagicBoxCost()) });
 			Text.Flush();
 			
 			Scenes.Asche.MagicBoxPrompt();
