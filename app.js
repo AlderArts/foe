@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 4;
-VERSION_SUBSCRIPT = "i";
-VERSION_NAME = "Vaughn, TF revamp pt1";
+VERSION_SUBSCRIPT = "j";
+VERSION_NAME = "Vaughn, Asche and Gryphons";
 
 SAVE_VERSION = 27;
 // Save version 1: Initial
