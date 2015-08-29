@@ -125,11 +125,77 @@ Scenes.Rigard.MagicShop.CreateShop = function() {
 			Text.NL();
 		}
 	});
+	
+	//For magic box
+	shop.potions = [
+		Items.Combat.HPotion,
+		Items.Combat.EPotion,
+		Items.Combat.SpeedPotion
+	];
+	shop.consumables = [
+		Items.Combat.DecoyStick,
+		Items.Combat.SmokeBomb,
+		Items.Combat.PoisonDart,
+		Items.Combat.LustDart
+	];
+	shop.ingredients = [
+		Items.HorseHair,
+		Items.HorseShoe,
+		Items.HorseCum,
+		Items.RabbitFoot,
+		Items.CarrotJuice,
+		Items.Lettuce,
+		Items.Whiskers,
+		Items.HairBall,
+		Items.CatClaw,
+		Items.SnakeOil,
+		Items.LizardScale,
+		Items.LizardEgg,
+		Items.SnakeFang,
+		Items.SnakeSkin,
+		Items.GoatMilk,
+		Items.GoatFleece,
+		Items.SheepMilk,
+		Items.Ramshorn,
+		Items.CowMilk,
+		Items.CowBell,
+		Items.FreshGrass,
+		Items.CanisRoot,
+		Items.DogBone,
+		Items.DogBiscuit,
+		Items.WolfFang,
+		Items.Wolfsbane,
+		Items.FoxBerries,
+		Items.Foxglove,
+		Items.CorruptPlant,
+		Items.BlackGem,
+		Items.CorruptSeed,
+		Items.DemonSeed,
+		Items.Hummus,
+		Items.SpringWater,
+		Items.Letter,
+		Items.Feather,
+		Items.Trinket,
+		Items.FruitSeed,
+		Items.PipeLeaf,
+		Items.MFluff,
+		Items.MDust,
+		Items.Stinger,
+		Items.SVenom,
+		Items.SClaw,
+		Items.TreeBark,
+		Items.AntlerChip,
+		Items.FlowerPetal,
+		Items.RawHoney,
+		Items.BeeChitin
+	];
 
+	//Actual inventory
 	shop.AddItem(Items.Combat.HPotion, 5);
 	shop.AddItem(Items.Combat.EPotion, 5);
 	shop.AddItem(Items.Combat.SpeedPotion, 5);
 	shop.AddItem(Items.Combat.DecoyStick, 5);
+	shop.AddItem(Items.Combat.SmokeBomb, 5);
 	shop.AddItem(Items.Accessories.CrudeBook, 5);
 	shop.AddItem(Items.Accessories.GoldEarring, 5);
 	shop.AddItem(Items.Accessories.SimpleCharm, 5);

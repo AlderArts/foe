@@ -93,8 +93,6 @@ Items.SnakeSkin.Long = function() { return "The shed skin from a large snake."; 
 
 
 
-// TODO: GOAT TF
-
 Items.GoatMilk = new Item("goat1", "G.Milk", ItemType.Ingredient);
 Items.GoatMilk.price = 2;
 Items.GoatMilk.sDesc = function() { return "goat milk"; }
