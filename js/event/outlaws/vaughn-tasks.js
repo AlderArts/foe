@@ -1286,7 +1286,7 @@ Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
 						Text.Add("That’s the idea, yes. Will he do it?", parse);
 						Text.NL();
 						if(lei.Relation() >= Lei.Rel.L3) {
-							Text.Add("Lei closes his eyes and thinks a moment. <i>“Hmm. An interesting proposal. As luck would have it, I am certain that my employers will not be in need of my services for the next couple of hours, and the cause your task is serving seems to be a worthy one. I am full aware of the disturbing nature of some of the laws passed of late. Some of them may even be bad for my continued employment.</i>", parse);
+							Text.Add("Lei closes his eyes and thinks a moment. <i>“An interesting proposal. As luck would have it, I am certain that my employers will not be in need of my services for the next couple of hours. It appears a suitable opportunity to practice some of my more subtle skills.</i>", parse);
 							Text.NL();
 							Text.Add("<i>“Show me this vial of yours.”</i>", parse);
 							Text.NL();
@@ -1300,7 +1300,7 @@ Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
 							Text.NL();
 							Text.Add("Huh.", parse);
 							Text.NL();
-							Text.Add("Lei shows you a small smile. <i>“I can’t quite let word get out that I work for free, can I? There’d be no end to the line of those seeking favors from me. No, [playername], two hundred and fifty coins is a very reasonable price for a few minutes of my time.”</i>", parse);
+							Text.Add("Lei shows you a small smile. <i>“I can’t let word get out that I work for free, can I? There would be no end to the line of those seeking favors from me. I assure you, [playername], two hundred and fifty coins is a very reasonable price for a few minutes of my time.”</i>", parse);
 							Text.NL();
 							Text.Add("Well, it’s come to this. He’s a mercenary, what did you expect? Will you pay Lei or not?", parse);
 							Text.Flush();
@@ -1315,7 +1315,7 @@ Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
 									Text.NL();
 									Text.Add("He’s got all the details, right?", parse);
 									Text.NL();
-									Text.Add("<i>“I have. Don’t worry. Keep watch over the approach to my proteges’ suite for me, and I will return shortly.”</i> He passes a few coins back to you. <i>“Purchase a drink for yourself, such that you do not appear obtrusive.”</i>", parse);
+									Text.Add("<i>“I have. Don’t worry. Keep watch over the approach to my wards’ suite for me, and I will return shortly.”</i> He passes a few coins back to you. <i>“Purchase a drink for yourself, such that you do not appear obtrusive.”</i>", parse);
 									Text.NL();
 									Text.Add("With that, Lei vanishes into the milling crowd of busy inn staff, leaving you all alone at his table. You do as he says, quickly ordering a drink from one of the few less busy-looking waiters, then sit down to savor it and look alert. True to his word, perhaps fifteen minutes have passed before Lei returns to your table and takes his seat once more.", parse);
 									Text.NL();
@@ -1323,7 +1323,7 @@ Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
 									Text.NL();
 									Text.Add("Wow. He must be really good at his job.", parse);
 									Text.NL();
-									Text.Add("<i>“A small matter of sleight of hand, nothing more,”</i> Lei replies matter-of-factly. <i>“When another’s attention is on your face, he or she often scarcely notices what the hands are doing. Similarly, drawing attention to one hand means the other is often overlooked. My only concern is that my proteges’ sleep will be disturbed tonight with the effects of your clever concoction.”</i>", parse);
+									Text.Add("<i>“A small matter of sleight of hand, nothing more,”</i> Lei replies matter-of-factly. <i>“When another’s attention is on your face, he or she scarcely notices what the hands are doing. Similarly, drawing attention to one hand means the other is often overlooked. My only concern is that my wards’ sleep will be disturbed tonight with the effects of your clever concoction.”</i>", parse);
 									Text.NL();
 									Text.Add("Well, that seems to be that. Thanking Lei one last time, you make to take your leave. Best to head back to Vaughn and report your success.", parse);
 									Text.Flush();
@@ -1442,7 +1442,7 @@ Scenes.Vaughn.Tasks.Poisoning.InnPrompt = function(opts) {
 				Text.NL();
 				Text.Add("The twins glance at each other, their expressions suddenly serious, and you can practically see the gears turning in their heads. Rumi drums her fingers on the table as she thinks, chewing her lip in the process. <i>“Lady Heydrich, Lady Heydrich… name rings a bell, but can’t quite remember why…”</i>", parse);
 				Text.NL();
-				Text.Add("<i>“She was the one who went up against us on the proposal to start work on expanding the sewerage system last week, remember?”</i>", parse);
+				Text.Add("<i>“She was the one who went up against us on the proposal to start work on expanding the sewage system last week, remember?”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Ah, that’s it. Come to think of it, she’s been throwing her weight around a little too much of late - having Majid’s patronage would certainly drive someone petty like her into a bout of preening. Give power to the undeserving, and that’s what happens. I wonder just what Majid can get out of a small-timer like Heydrich.”</i> Rumi takes a sip of her drink and thinks for a little longer, eyes staring into empty space.", parse);
 				Text.NL();
