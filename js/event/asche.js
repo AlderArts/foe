@@ -882,7 +882,10 @@ Scenes.Asche.MagicBoxGrab = function() {
 		
 	};
 	
-	party.coin -= asche.MagicBoxCost();
+	var cost = asche.MagicBoxCost();
+	
+	party.coin -= cost;
+	rigard.MagicShop.totalBought += cost;
 	
 	Text.Clear();
 	Text.Add("You slide the coins across the counter to Asche, who nods and waves you on. Stepping up to the large wooden box, you stick your hand into the swirling darkness. It’s cool to the touch and there’s a vaguely sticky sensation as you waggle your fingers about, but you’re otherwise fine. Now to see what you can find…", parse);
