@@ -462,7 +462,7 @@ Scenes.Asche.Lessons = function() {
 		Scenes.Asche.TalkPrompt();
 	}
 	// Lesson two - Ritual
-	else if(asche.flags["Magic"] < Asche.Magic.Rituals && asche.flags["Tasks"] >= Asche.Tasks.Ginseng_Finished) {
+	else if((asche.flags["Magic"] < Asche.Magic.Rituals) && (asche.flags["Tasks"] >= Asche.Tasks.Ginseng_Finished)) {
 		Text.Add("<i>“Now that customer has had chance to see shamanistic power for [himher]self, Asche is thinking that maybe [heshe] is ready for deeper explanation. But… really, this jackaless is curious - she cannot be teaching customer to be doing highlander magic, so why is customer being asking so many questions?”</i>", parse);
 		Text.NL();
 		Text.Add("Curiosity, nothing more.", parse);
@@ -502,7 +502,7 @@ Scenes.Asche.Lessons = function() {
 	}
 	// Lesson three - Authority
 	//TODO Act 1?
-	else if(!Scenes.Global.PortalsOpen() && asche.flags["Magic"] < Asche.Magic.Authority && asche.flags["Tasks"] >= Asche.Tasks.Nightshade_Finished) {
+	else if(!Scenes.Global.PortalsOpen() && (asche.flags["Magic"] < Asche.Magic.Authority) && (asche.flags["Tasks"] >= Asche.Tasks.Nightshade_Finished)) {
 		Text.Add("<i>“Today, Asche would be liking to be talking about what kinds of magic can be done, and what is to not be done. This jackaless is admitting that maybe she should have been making this her very first lesson to customer, but it was slipping her mind…</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Never mind. She can be making up for lost time right now.”</i>", parse);
@@ -533,7 +533,7 @@ Scenes.Asche.Lessons = function() {
 		Scenes.Asche.TalkPrompt();
 	}
 	// Lesson Four - Spirits
-	else if(asche.flags["Magic"] < Asche.Magic.Spirits && asche.flags["Tasks"] >= Asche.Tasks.Spring_Finished && Scenes.Global.DefeatedOrchid()) {
+	else if((asche.flags["Magic"] < Asche.Magic.Spirits) && (asche.flags["Tasks"] >= Asche.Tasks.Spring_Finished) && Scenes.Global.DefeatedOrchid()) {
 		Text.Add("Asche nods and traces a finger on the counter. <i>“For today’s lesson with customer, Asche is wishing to be broaching the subject of spirits.”</i>", parse);
 		Text.NL();
 		Text.Add("Right. Spirits. That’s how you ended up in this mess in the first place - the gem aside, of course. Aria, Uru…", parse);
