@@ -2098,7 +2098,7 @@ Scenes.Ophelia.Reward = function() {
 					Text.NL();
 				}
 				parse["legs"] = player.LowerBodyType() != LowerBodyType.Single ? Text.Parse(", lifting your [legsDesc] out of the way", parse) : "";
-				Text.Add("A momentary glimmer of simmering intelligence in the brain of the aroused matriarch saves you from being crushed under her humping form. Vena rolls you over on your side[legs], the warm weight of her pregnant belly heavy on you. She’s quick to press the broad tip of her enormous girlcock against your [targetDesc], quickly impaling your unprepared nethers.", parse);
+				Text.Add("A momentary glimmer of simmering intelligence in the brain of the aroused matriarch saves you from being crushed under her humping form. Vena rolls you over on your side[legs], the warm weight of her pregnant belly heavy on you. She’s quick to press the broad tip of her enormous girl-cock against your [targetDesc], quickly impaling your unprepared nethers.", parse);
 				Text.NL();
 				
 				if(target == BodyPartType.vagina) {
@@ -2317,7 +2317,7 @@ Scenes.Ophelia.WatchVenaEntry = function() {
 	
 	Text.Add("Ophelia cowers uncertainly in front of the advancing matriarch; wanting to flee but held back by her instincts. No matter how far she’s gone, this is still her mother; she would never harm her, right? Not only that, no matter how refined she wants to present herself, it’s becoming more and more obvious to you that the alchemist cannot escape her innate carnal urges - part of her <i>desires</i> what is coming, <i>craves</i> it.", parse);
 	Text.NL();
-	Text.Add("<i>“Y-you are beautiful, mother,”</i> she stammers, blushing as her eyes drink in the majestic sight of Vena. Like always, the matriarch is pregnant - with Lagon’s seed or one of her own sons, you don’t know - her belly swelling out like a dome, her large breasts heavy with milk. With her newly grown muscle, she doesn’t seem to have any problem carrying the added weight. Jutting out beneath her taut stomach is her stiff, massive girlcock.", parse);
+	Text.Add("<i>“Y-you are beautiful, mother,”</i> she stammers, blushing as her eyes drink in the majestic sight of Vena. Like always, the matriarch is pregnant - with Lagon’s seed or one of her own sons, you don’t know - her belly swelling out like a dome, her large breasts heavy with milk. With her newly grown muscle, she doesn’t seem to have any problem carrying the added weight. Jutting out beneath her taut stomach is her stiff, massive girl-cock.", parse);
 	Text.NL();
 	Text.Add("<i>“Ophelia... daughter… pretty.”</i> Vena’s words are halting, surprising even Lagon. The alchemist’s eyes are big as saucers as she’s swept up in her mother’s arms, held close in a gentle hug. <i>“Gratitude… love,”</i> the matriarch beams, giving Ophelia a deep kiss, thanking her for the new body her daughter has granted her.", parse);
 	Text.NL();

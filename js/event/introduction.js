@@ -1918,7 +1918,7 @@ Intro.AriaPurification = function() {
 		});
 		options.push({ nameStr : "Keep",
 			func : function() {
-				Text.Add("You thoughtfully bite your lower lip, studying your erect girlcock. Deciding that you rather like it the way it is, you shake your head at the goddess, causing her to raise an eyebrow at you but letting it pass.");
+				Text.Add("You thoughtfully bite your lower lip, studying your erect girl-cock. Deciding that you rather like it the way it is, you shake your head at the goddess, causing her to raise an eyebrow at you but letting it pass.");
 				Text.NL();
 				Text.Add("Aria gives her head a quick shake, clearing her thoughts.");
 				Text.Flush();

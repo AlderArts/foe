@@ -1998,7 +1998,7 @@ Scenes.Miranda.TakeHome = function() {
 		if(dom < -25) {
 			Text.Add("A smirk curling your lips, you reach around the table and run your hand appreciatively over the firmly toned cheeks of Miranda's ass, reaching through the hole in her pants to scratch at the base of her tail, eliciting a moan from the doberherm. Sliding yourself closer to her, your thigh touching hers, your other hand reaches up to her chest, caressing her tits as best you can through the studded leather armor she wears. An appreciative growl rumbles out of her throat, but it's not the reaction you're after.", parse);
 			Text.NL();
-			Text.Add("Your hand traces its way down her belly, to a much more vulnerable target. Her maleness is far less protected as you cup her between her legs, stroking and fondling her sheath and her bulging balls with abandon. Miranda's ears flick as she fidgets in her seat, and you can feel her bulging through her pants as her foot-long girlcock begins poking forth and tenting her pants.", parse);
+			Text.Add("Your hand traces its way down her belly, to a much more vulnerable target. Her maleness is far less protected as you cup her between her legs, stroking and fondling her sheath and her bulging balls with abandon. Miranda's ears flick as she fidgets in her seat, and you can feel her bulging through her pants as her foot-long girl-cock begins poking forth and tenting her pants.", parse);
 			Text.NL();
 			Text.Add("With a playful smile, you coyly scold your naughty bitch for getting so hot and bothered in a place like this. But, since you're such a nice [guyGirl], you'll take her home and let her have some fun. To emphasize your last word, you squeeze her, firmly but gently, through her pants.", parse);
 			Text.NL();

@@ -449,9 +449,9 @@ Scenes.Layla.SexFirstTime = function() {
 			options.push({ nameStr : "Yes",
 				func : function() {
 					Text.Clear();
-					Text.Add("<i>“Okay,”</i> she replies with a smile, wrapping her digits around her tailcock and gently stroking it.", parse);
+					Text.Add("<i>“Okay,”</i> she replies with a smile, wrapping her digits around her tail-cock and gently stroking it.", parse);
 					Text.NL();
-					Text.Add("You watch as she continue to caress the smaller penis, observing as her cheeks turn a slightly purplish hue. Finally, after a few more moments, she grunts, and you watch as a rope of clear-looking fluid shoots out of her tailcock’s head and lands on the floor.", parse);
+					Text.Add("You watch as she continue to caress the smaller penis, observing as her cheeks turn a slightly purplish hue. Finally, after a few more moments, she grunts, and you watch as a rope of clear-looking fluid shoots out of her tail-cock’s head and lands on the floor.", parse);
 					Text.NL();
 					PrintDefaultOptions();
 				}, enabled : true,
@@ -477,7 +477,7 @@ Scenes.Layla.SexFirstTime = function() {
 					else
 						Text.Add("you’re pretty confident that this isn’t what her main cock tastes like at all.", parse);
 					Text.NL();
-					Text.Add("<i>“Hng!”</i> Layla grunts, as her tailcock spasms inside your maw, spewing a few ropes of spicy, mint tasting juice.", parse);
+					Text.Add("<i>“Hng!”</i> Layla grunts, as her tail-cock spasms inside your maw, spewing a few ropes of spicy, mint tasting juice.", parse);
 					Text.NL();
 					Text.Add("The thick gelatinous goo floods your mouth, forcing you to swallow. It tastes... quite enticing, actually. It burns all the way down to your stomach, but it’s a pleasant burn, like a fine liquor. It fills your belly with warmth, a surge of heat that spreads along your body.", parse);
 					Text.NL();
@@ -676,7 +676,7 @@ Scenes.Layla.SexFirstTime = function() {
 							Text.NL();
 							Text.Add("The chimera has one last trick up her sleeve, or so it seems. As you watch, her erection falters, her cock going limp between her thighs. Like a fat wet noodle, it is slurped back up inside her slit. Once it’s fully in, her slit presses together and vanishes until she is as smooth-groined as any human woman.", parse);
 							Text.NL();
-							Text.Add("Her tail swishes, drawing your attention, and you watch as her tailcock vanishes once more. Like a bud opening into a flower, only in reverse. Once it is gone, her tail drops back down to the ground.", parse);
+							Text.Add("Her tail swishes, drawing your attention, and you watch as her tail-cock vanishes once more. Like a bud opening into a flower, only in reverse. Once it is gone, her tail drops back down to the ground.", parse);
 							Text.NL();
 							Text.Add("Layla looks at you inquisitively. <i>“Something wrong?”</i>", parse);
 							Text.NL();
@@ -738,21 +738,21 @@ Scenes.Layla.SexCatchAnal = function() {
 				Text.NL();
 				Text.Add("Somehow, the sound of Layla’s tail splitting open to disgorge its hidden secret is audible even over your racing heartbeat. A quiver runs along your spine, tingling under your [skin] as the first drops of warm pseudo-pre splash upon your sensitive pucker.", parse);
 				Text.NL();
-				Text.Add("You can feel the touch of her tailcock’s mushroom-shaped tip, wet and warm. A jolt runs up your spine, but you force yourself to relax as another drop of her warm juices falls on your [anus]. The moment she feels you’ve relaxed a bit, she presses on.", parse);
+				Text.Add("You can feel the touch of her tail-cock’s mushroom-shaped tip, wet and warm. A jolt runs up your spine, but you force yourself to relax as another drop of her warm juices falls on your [anus]. The moment she feels you’ve relaxed a bit, she presses on.", parse);
 				Text.NL();
 				
 				Sex.Anal(layla, player);
 				player.FuckAnal(player.Butt(), layla.FirstCock(), 1);
 				layla.Fuck(layla.FirstCock(), 1);
 				
-				Text.Add("A groan of pleasure wrings itself from your throat as you feel your [anus] spreading itself wide to receive the chimera’s alien cock. Thick juices ooze over your interior, drooling from her tailcock like a leaky faucet, and each inch pushed inside sends them cascading down into your bowels.", parse);
+				Text.Add("A groan of pleasure wrings itself from your throat as you feel your [anus] spreading itself wide to receive the chimera’s alien cock. Thick juices ooze over your interior, drooling from her tail-cock like a leaky faucet, and each inch pushed inside sends them cascading down into your bowels.", parse);
 				Text.NL();
 				Text.Add("From deep inside you, a warmth begins to bloom, swelling in your belly and flowing out into your limbs. Your whole body trembles with need, quivers with desire. There is no pain, only a wondrous, intoxicating sensation of being filled. Even as Layla hilts herself, the fleshy lips of her tail perversely kissing your anus, her cock pouring its juices inside of you, you plead for her to give you more.", parse);
 				Text.NL();
 				Text.Add("Without missing a beat, your chimeric lover begins to pump herself into you, twisting and turning in the way only she can to grant you maximum pleasure. Looking over your shoulder, you watch as she massages her breasts, sticking her fingers inside her own nipples and moaning in pleasure.", parse);
 				Text.NL();
 				parse["c"] = player.FirstCock() ? " grinding against your prostate and" : "";
-				Text.Add("In what feels like mere heartbeats, Layla has you moaning like a whore. Each thrust and pump stirs your innards,[c] overwhelming you with pleasure. You thrust your [hips] back, anxious to be filled, and do your best to thank Layla by milking her tailcock for all you’re worth.", parse);
+				Text.Add("In what feels like mere heartbeats, Layla has you moaning like a whore. Each thrust and pump stirs your innards,[c] overwhelming you with pleasure. You thrust your [hips] back, anxious to be filled, and do your best to thank Layla by milking her tail-cock for all you’re worth.", parse);
 				Text.NL();
 				Text.Add("Layla grunts and moans quietly as she ploughs you relentlessly. A strangled whimper of pleasure precedes a particularly fierce thrust into your ass. She cums in a great jet of hot wetness, the sensation making you squeal in delight. Thick gouts of lubing goo fill your belly, packing you deliciously full and yet leaving you aching for more.", parse);
 				Text.NL();
@@ -794,7 +794,7 @@ Scenes.Layla.SexCatchAnal = function() {
 				
 				Scenes.Layla.SexCatchAnalCont(parse);
 			}, enabled : true,
-			tooltip : "That sweet little tailcock of hers is just made for delivering its own special brand of lube. You want her to put it to work."
+			tooltip : "That sweet little tail-cock of hers is just made for delivering its own special brand of lube. You want her to put it to work."
 		});
 		if(layla.sexlevel >= 5) {
 			options.push({ nameStr : "Lick’n suck",
@@ -1144,7 +1144,7 @@ Scenes.Layla.SexCatchAnalCont2 = function(parse, kiss, tailcock) {
 		
 		Text.Add("The taste of Layla’s tail floods your mouth, searing its way down your throat as you swallow. You nurse like a starving baby at its mother’s teat, working with lips and tongue to pleasure her quasi-phallus.", parse);
 		Text.NL();
-		Text.Add("From down below, you are aware of her cock as it ploughs away at your ass, and the feeling of her own lips wrapped around your [nip], nursing with equal fervor. But your own attentions remain wrapped around her tailcock, feeling it throbbing and pulsing in your mouth as you lavish it with your oral affections.", parse);
+		Text.Add("From down below, you are aware of her cock as it ploughs away at your ass, and the feeling of her own lips wrapped around your [nip], nursing with equal fervor. But your own attentions remain wrapped around her tail-cock, feeling it throbbing and pulsing in your mouth as you lavish it with your oral affections.", parse);
 		Text.NL();
 		Text.Add("It squirms and wriggles, writhing past your lips and bucking in and out of your mouth. It tenses suddenly, and you draw it deeper, allowing it to explode around your tongue. Thick gushes of warm, minty goo cascade down your throat, burning deliciously inside your stomach.", parse);
 		Text.NL();

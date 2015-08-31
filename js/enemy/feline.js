@@ -1886,7 +1886,7 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 			if(player.FirstVag())
 				Text.Add(" Your neglected [vagDesc] pours its fluids into the thirsty earth below you.", parse);
 			if(cat.FirstCock())
-				Text.Add(" Ignored between you, her girlcock sprays a thick, hot, sticky splash of jism across your stomach, smearing you both with dickcream.", parse);
+				Text.Add(" Ignored between you, her girl-cock sprays a thick, hot, sticky splash of jism across your stomach, smearing you both with dickcream.", parse);
 			Text.Add(" Finally, inevitably, the electric thrill of ejaculation fades away and is replaced by the warmth of your afterglow.", parse);
 			if(player.OrgasmCum() > 4)
 				Text.Add(" You can feel her seed-distended stomach pushing against your own [stomachDesc], visibly bloated by the sheer volume of your climax.", parse);

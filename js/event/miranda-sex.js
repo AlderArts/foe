@@ -3263,7 +3263,7 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 	else
 		Text.Add("<i>“Okay, slut. Your best friend is ready for some action, so be a good bitch and roll that carpet out, cuz I’m going in,”</i> Miranda says, slapping your face with her cock before forcefully shoving her pointed tip against your lips.", parse);
 	Text.NL();
-	Text.Add("You open your mouth to grant the dobie-dick access, extending your [tongueDesc] and gently lapping at the underside of Miranda's cock as you envelop it in your mouth. Closing your lips around the intruder, the taste of salty-sweet precum and flesh washing over your senses, you start to suckle, caressing her with your lips and tongue, bobbing your head slightly as you swallow further inches of girlcock into your mouth.", parse);
+	Text.Add("You open your mouth to grant the dobie-dick access, extending your [tongueDesc] and gently lapping at the underside of Miranda's cock as you envelop it in your mouth. Closing your lips around the intruder, the taste of salty-sweet precum and flesh washing over your senses, you start to suckle, caressing her with your lips and tongue, bobbing your head slightly as you swallow further inches of girl-cock into your mouth.", parse);
 	Text.NL();
 	
 	Sex.Blowjob(player, miranda);
@@ -3433,7 +3433,7 @@ Scenes.Miranda.TavernSexDommyBJ = function() {
 					Text.Add("To emphasize your point, you bend your head back down and slowly lick her cock from knot to glans, running your tongue up and down in slow, tantalizing strokes but never actually engulfing it again.", parse);
 				}
 				else {
-					Text.Add("You can't resist coping a quick squeeze of Miranda's tits whilst you lay atop her, but do so in passing, already spinning yourself around on her stomach so that you are both pressed face to groin with each other, Miranda's girlcock practically glowing against your face. Wriggling your hips enticingly in the doberherm's face, you coyly comment on how Miranda is so very full of energy. Perhaps, if she thinks you're doing such a good job, she can return the favor, hmm? She likes what you're doing down here, doesn't she?", parse);
+					Text.Add("You can't resist coping a quick squeeze of Miranda's tits whilst you lay atop her, but do so in passing, already spinning yourself around on her stomach so that you are both pressed face to groin with each other, Miranda's girl-cock practically glowing against your face. Wriggling your hips enticingly in the doberherm's face, you coyly comment on how Miranda is so very full of energy. Perhaps, if she thinks you're doing such a good job, she can return the favor, hmm? She likes what you're doing down here, doesn't she?", parse);
 					Text.NL();
 					Text.Add("For emphasis, you place a soft, tender kiss right on the swollen bulge of her knot, then trace a trail of featherlight kisses up to her glans before licking your way back down. With lips and tongue you tease her shaft, caressing the sensitive dickflesh but never deigning to start properly sucking it.", parse);
 				}
