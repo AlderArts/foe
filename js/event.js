@@ -79,6 +79,10 @@ MoveToLocation = function(location, timestep, preventClear) {
 	location.onEntry(preventClear, oldLocation);
 }
 
+Event.prototype.MoveTo = function(timestep, preventClear) {
+	MoveToLocation(this, timestep, preventClear);
+}
+
 Event.prototype.SleepFunc = function() {
 	SetGameState(GameState.Event);
 	Text.NL();
