@@ -6,12 +6,22 @@ function Maze(opts) {
 	opts = opts || {};
 	
 	this.map = [];
+	this.xMax = 0;
+	this.yMax = 0;
 }
 
-Maze.prototype.AddRoom = function(room, x, y) {
-	room = room || new Maze.Room({maze: this, x: x, y: y});
+Maze.prototype.AddRoom = function(x, y, room) {
 	x = x || 0;
 	y = y || 0;
+	room = room || new Maze.Room();
+	room.maze = this;
+	room.x = x;
+	room.y = y;
+	
+	if(this.xMax < x)
+		this.xMax = x;
+	if(this.yMax < y)
+		this.yMax = y;
 	
 	if(_.isUndefined(this.map[x])) {
 		this.map[x] = [];
@@ -22,17 +32,33 @@ Maze.prototype.GetRoom = function(x, y) {
 	if(this.map[x])
 		return this.map[x][y];
 }
+Maze.prototype.Print = function(room) {
+	var maze = this;
+	//TODO TEMP
+	Text.Add("<table class='party'>");
+	_.times(maze.yMax+1, function(y) {
+		Text.Add("<tr>");
+		_.times(maze.xMax+1, function(x) {
+			Text.Add("<td>");
+			var img = "";
+			var r = maze.GetRoom(x, y);
+			if(r == room) img = "Player";
+			else if(r) img = "Room";
+			Text.Add(img);
+			Text.Add("</td>");
+		});
+		Text.Add("</tr>");
+	});
+	Text.Add("</table>");
+	Text.Flush();
+}
 
 /*
  * Describes a maze room. A maze room is an event location, with special controls
  */
-Maze.Room = function(opts) {
-	Event.call(this);
-	
+Maze.Room = function(nameFunc, opts) {
 	opts = opts || {};
-	this.maze = opts.maze;
-	this.x = opts.x;
-	this.y = opts.y;
+	Event.call(this, nameFunc, opts);
 }
 Maze.Room.prototype = new Event();
 Maze.Room.prototype.constructor = Maze.Room;
@@ -58,4 +84,12 @@ Maze.Room.prototype.SetButtons = function(links) {
 	
 	Input.buttons[10].enabledImage = Images.imgButtonEnabled2;
 	Input.buttons[10].Setup("East", MoveToLocation, east, east, null, GameState.Event);
+}
+
+Maze.Room.prototype.PrintDesc = function() {
+	Event.prototype.PrintDesc.call(this);
+	
+	if(DEBUG) {
+		this.maze.Print(this);
+	}
 }

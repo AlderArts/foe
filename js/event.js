@@ -10,22 +10,23 @@
 
 var Scenes = {};
 
-function Event(nameFunc) {
+function Event(nameFunc, opts) {
+	opts = opts || {};
 	// Returns the name of the location/event
 	this.nameFunc = nameFunc;
 	// A function describing the event (alternatively unconditional strings)
-	this.description = null;
-	this.endDescription = null;
+	this.description = opts.description;
+	this.endDescription = opts.endDescription;
 	// When at the location, these possible exploration options are available
-	this.links = new Array();
+	this.links = opts.links || [];
 	// When at the location, these persons/events are available
-	this.events = new Array();
+	this.events = opts.events || [];
 	// When at the location, you can try hunting for these enemies
-	this.hunt = new Array();
+	this.hunt = opts.hunt || [];
 	// Function footprint: function(unused, oldLocation)
-	this.onEntry = PrintDefaultOptions;
+	this.onEntry = opts.onEntry || PrintDefaultOptions;
 	// Encounter table
-	this.enc = null;
+	this.enc = opts.enc || null;
 }
 
 Event.prototype.AddEncounter = function(opts) {
@@ -310,9 +311,9 @@ function Link(name, visibleCondition, enabledCondition, print, func, tooltip) {
 function EncounterTable() {
 	// encounter { func, odds }
 	// Random encounters
-	this.encounters = new Array();
+	this.encounters = [];
 	// TODO: Hunting
-	this.hunt = new Array();
+	this.hunt = [];
 }
 
 /*

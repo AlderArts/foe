@@ -32,6 +32,42 @@ world.loc.Plains.Nomads.Tent.links.push(new Link(
 ));
 
 
+//TODO TEST --------------
+Scenes.MazeTest = new Maze();
+Scenes.MazeTest.AddRoom(3,3);
+Scenes.MazeTest.AddRoom(3,4);
+Scenes.MazeTest.AddRoom(3,5);
+Scenes.MazeTest.AddRoom(2,5);
+Scenes.MazeTest.AddRoom(4,5);
+Scenes.MazeTest.AddRoom(5,5);
+Scenes.MazeTest.GetRoom(5,5).description = function() {
+	var parse = {};
+	
+	Text.Add("Sample desc", parse);
+	Text.NL();
+}
+Scenes.MazeTest.GetRoom(5,5).events.push(new Link(
+	"Escape", true, true,
+	function() {
+		Text.Add("Here's the exit.");
+	},
+	function() {
+		MoveToLocation(world.loc.Plains.Nomads.Tent);
+	}
+));
+Scenes.MazeTest.AddRoom(1,1);
+
+//TODO TEST
+world.loc.Plains.Nomads.Tent.links.push(new Link(
+	"Maze", function() { return DEBUG; }, true,
+	null,
+	function() {
+		MoveToLocation(Scenes.MazeTest.GetRoom(3,3));
+	}
+));
+//TODO /TEST --------------
+
+
 world.loc.Plains.Nomads.Fireplace.description = function() {
 	Text.Add("The nomad camp is currently set up in the middle of a wide grassland spreading out in all directions. [TreeFar] In the middle of the gathering of disparate tents that make up the nomad camp - about twenty in total - is a large fire pit.", {TreeFar: world.TreeFarDesc()});
 	Text.NL();

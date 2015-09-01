@@ -68,8 +68,8 @@ function Button(rect, text, func, enabled, image, disabledImage, glow) {
 Button.Shadow = false;
 
 Button.prototype.HandleClick = function() {
-	if(this.enabled == false) return;
-	if(this.visible == false) return;
+	if(!this.enabled) return;
+	if(!this.visible) return;
 
 	if(this.func) {
 		if(this.state && gameState != GameState.Combat)
@@ -172,8 +172,8 @@ Button.prototype.SetFromAbility = function(encounter, caster, ability, backPromp
 }
 
 Button.prototype.HandleKeydown = function(key) {
-	if(this.enabled == false) return;
-	if(this.visible == false) return;
+	if(!this.enabled) return;
+	if(!this.visible) return;
 	
 	if(key != this.key) return;
 	
