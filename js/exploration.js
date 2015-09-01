@@ -227,17 +227,7 @@ Explore = function(preventClear) {
 		return;
 	}
 	
-	var arr = [];
-	for(var i = 0; i < party.location.links.length; i++) {
-		var evt = party.location.links[i];
-		evt.image = Images.imgButtonEnabled2;
-		arr.push(evt);
-	}
-	for(var i = 0; i < party.location.events.length; i++) {
-		arr.push(party.location.events[i]);
-	}
-	
-	Event.SetButtons(arr);
+	party.location.SetButtons();
 	party.location.PrintDesc();
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Explore];
 	
@@ -329,7 +319,7 @@ ShowHunting = function(preventClear) {
 		Text.Clear();
 	Gui.ClearButtons();
 	
-	Event.SetButtons(party.location.hunt);
+	party.location.SetButtons(party.location.hunt);
 	party.location.PrintDesc();
 	
 	LastSubmenu = Input.exploreButtons[ExploreButtonIndex.Hunt];

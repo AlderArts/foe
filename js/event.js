@@ -213,8 +213,19 @@ Event.prototype.DrunkHandler = function() {
 	Gui.NextPrompt();
 }
 
-Event.SetButtons = function(links) {
-	var list = new Array();
+Event.prototype.SetButtons = function(links) {
+	var list = [];
+	
+	if(!links) {
+		links = [];
+		_.each(this.links, function(link) {
+			link.image = Images.imgButtonEnabled2;
+			links.push(link);
+		});
+		_.each(this.events, function(evt) {
+			links.push(evt);
+		});
+	}
 	
 	for(var i = 0; i < links.length; i++) {
 		var link = links[i];
