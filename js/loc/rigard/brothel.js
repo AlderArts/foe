@@ -83,10 +83,6 @@ world.loc.Rigard.Brothel.brothel.events.push(new Link(
 	}
 ));
 
-world.loc.Rigard.Brothel.brothel.endDescription = function() {
-	Text.Flush();
-}
-
 world.loc.Rigard.Brothel.brothel.onEntry = function() {
 	if(rigard.Brothel["Visit"] == 0)
 		Scenes.Brothel.First();

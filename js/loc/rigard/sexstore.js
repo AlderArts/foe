@@ -26,10 +26,6 @@ world.loc.Rigard.ShopStreet.OddShop.events.push(new Link(
 	}
 ));
 
-world.loc.Rigard.ShopStreet.OddShop.endDescription = function() {
-	Text.Add("Where you go?<br/>");
-}
-
 Scenes.Rigard.OddShop.Prompt = function() {
 	var parse = {
 		

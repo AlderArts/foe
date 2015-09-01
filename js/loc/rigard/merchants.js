@@ -327,10 +327,6 @@ world.loc.Rigard.ShopStreet.street.events.push(new Link(
 	}
 ));
 
-world.loc.Rigard.ShopStreet.street.endDescription = function() {
-	Text.Flush();
-}
-
 Scenes.Rigard.ShopStreet.Speculate = function() {
 	
 	var stalls = ["stall", "booth", "stand"];

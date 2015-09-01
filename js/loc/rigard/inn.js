@@ -1787,9 +1787,6 @@ world.loc.Rigard.Inn.room.links.push(new Link(
 		MoveToLocation(world.loc.Rigard.Inn.common, {minute: 5});
 	}
 ));
-world.loc.Rigard.Inn.room.endDescription = function() {
-	Text.Add("You weigh your options.");
-}
 
 // SET UP EVENTS/LINKS
 world.loc.Rigard.Inn.common.events.push(new Link(

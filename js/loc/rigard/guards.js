@@ -88,9 +88,6 @@ world.loc.Rigard.Gate.links.push(new Link(
 	}
 ));
 
-world.loc.Rigard.Gate.endDescription = function() {
-	Text.Flush();
-}
 
 
 

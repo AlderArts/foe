@@ -412,10 +412,6 @@ world.loc.DarkAspect.Barrens.links.push(new Link(
 		});
 	}
 ));
-world.loc.DarkAspect.Barrens.endDescription = function() {
-	Text.Add("What do you do?");
-	Text.NL();
-}
 
 world.loc.DarkAspect.Mountains.description = function() {
 	Text.Add("You are at the base of a towering mountain range, rising like massive black pillars toward the chaotic sky. Below, on the wasteland, you can see the demon striding toward you in long steps. Behind it, fire is spreading out, the cracks from the demon's heavy footsteps opening up into an endless abyss.");
@@ -578,11 +574,6 @@ Intro.DemonFight = function() {
 	});
 }
 
-world.loc.DarkAspect.Mountains.endDescription = function() {
-	Text.Add("What do you do?");
-	Text.NL();
-}
-
 Intro.DemonAftermath = function() {
 	Text.Clear();
 	
@@ -643,10 +634,6 @@ world.loc.DarkAspect.Cliff.links.push(new Link(
 		});
 	}
 ));
-world.loc.DarkAspect.Cliff.endDescription = function() {
-	Text.Add("What do you do?");
-	Text.NL();
-}
 
 Intro.UruAppears = function() {
 	Text.Clear();
@@ -782,10 +769,6 @@ world.loc.DarkAspect.Peak.events.push(new Link(
 		}, "Demon");
 	}
 ));
-world.loc.DarkAspect.Peak.endDescription = function() {
-	Text.Add("What do you do?");
-	Text.NL();
-}
 
 Intro.UruGift = function() {
 	Text.Clear();
@@ -1879,10 +1862,6 @@ world.loc.LightAspect.Garden.links.push(new Link(
 		});
 	}
 ));
-world.loc.LightAspect.Garden.endDescription = function() {
-	Text.NL();
-	Text.Add("What do you do?");
-}
 
 Intro.AriaPurification = function() {
 	Text.Clear();

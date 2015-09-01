@@ -27,7 +27,7 @@ world.loc.DragonDen.Entry.links.push(new Link(
 ));
 
 world.loc.DragonDen.Entry.endDescription = function() {
-	Text.Add("This is likely a very bad place to be, you should leave for now.<br/>");
+	Text.Add("This is likely a very bad place to be, you should leave for now.");
 }
 
 world.loc.DragonDen.Entry.enc = new EncounterTable();

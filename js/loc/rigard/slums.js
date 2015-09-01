@@ -108,6 +108,3 @@ world.loc.Rigard.Slums.gate.events.push(new Link(
 		Scenes.Miranda.RigardGatesInteract();
 	}
 ));
-world.loc.Rigard.Slums.gate.endDescription = function() {
-	Text.Add("Nothing else to see here.<br/>");
-}

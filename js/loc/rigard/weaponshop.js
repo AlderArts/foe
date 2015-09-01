@@ -26,10 +26,6 @@ world.loc.Rigard.ShopStreet.WeaponShop.events.push(new Link(
 	}
 ));
 
-world.loc.Rigard.ShopStreet.WeaponShop.endDescription = function() {
-	Text.Add("Where you go?<br/>");
-}
-
 Scenes.Rigard.WeaponShop.Prompt = function() {
 	var parse = {
 		

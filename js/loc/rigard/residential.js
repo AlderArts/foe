@@ -104,7 +104,3 @@ world.loc.Rigard.Residental.street.links.push(new Link(
 		MoveToLocation(world.loc.Rigard.Residental.miranda);
 	}
 ));
-
-world.loc.Rigard.Residental.street.endDescription = function() {
-	Text.Flush();
-}

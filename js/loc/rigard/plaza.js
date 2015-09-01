@@ -241,10 +241,6 @@ world.loc.Rigard.Plaza.events.push(new Link(
 	}
 ));
 
-world.loc.Rigard.Plaza.endDescription = function() {
-	Text.Flush();
-}
-
 Scenes.Rigard.Plaza.StatueInfo = function() {
 	var parse = {
 		playername : player.name,
