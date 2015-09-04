@@ -621,7 +621,7 @@ Scenes.Lizards.WinTailpeg = function(enc) {
 			Text.Add("[m1Name] seems to be getting decidedly into it, and you feel her start to <i>wriggle</i> her tail inside of you. Like a living, thrashing creature it writhes inside of you, grinding against your heated walls deviously. You feel her whip-like tail-tip tickle spots deep inside of you, and your cunt clamps down around her again. Leaning forward, you grind yourself on her tail, your cunt stretched wide as it can go...", parse);
 			if(player.FirstVag().Tightness() < Vagina.Tightness.gaping) {
 				Text.NL();
-				Text.Add("...and then she shoves in even <i>more</i>. You cry out in shock as you feel yourself stretch beyond your limits, going cross-eyed.", parse);
+				Text.Add("...And then she shoves in even <i>more</i>. You cry out in shock as you feel yourself stretch beyond your limits, going cross-eyed.", parse);
 				player.FirstVag().stretch.IncreaseStat(Vagina.Tightness.gaping, 1);
 				player.AddLustFraction(0.2);
 			}

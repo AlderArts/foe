@@ -647,7 +647,7 @@ Intro.UruAppears = function() {
 	Text.NL();
 	Text.Add("<b>FUCK.</b>");
 	Text.NL();
-	Text.Add("...sixteen inch demonic cock, resting just above her cunt. Just your luck.");
+	Text.Add("...Sixteen inch demonic cock, resting just above her cunt. Just your luck.");
 	Text.NL();
 	Text.Add("<i>“Well? It is impolite to keep a lady waiting like that you know. Also, it is rude to stare,”</i> the omnibus quips with a wicked smile.");
 	Text.Flush();

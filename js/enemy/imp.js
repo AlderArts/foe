@@ -166,7 +166,7 @@ Intro.ImpsWinUseMale = function() {
 	options.push({ nameStr : "Rough",
 		func : function() {
 			Text.Clear();
-			Text.Add("... Who cares about imps, anyway? Ignoring the creature's increasingly desperate pleas, you resume your skull-fucking with undiminished vigor, only occasionally letting the imp draw air to keep it from passing out.");
+			Text.Add("...Who cares about imps, anyway? Ignoring the creature's increasingly desperate pleas, you resume your skull-fucking with undiminished vigor, only occasionally letting the imp draw air to keep it from passing out.");
 			Text.NL();
 			
 			if(player.FirstCock().length.Get() >= 15)
