@@ -985,7 +985,7 @@ Quests.quests.push(new Quest({
 		new QuestItem({
 			desc: function() {
 				var poison = vaughn.flags["T3"] & Vaughn.Poisoning.Aphrodisiac ? "aphrodisiac" : "poison";
-				return "Somehow feed Lady Heydrich the " + poison + ".";
+				return "Somehow feed Lady Heydrich the " + poison + ". She can be found in the Lady's Blessing inn in Rigard.";
 			},
 			active: function() {
 				var status = Quests.Type.NotStarted;
