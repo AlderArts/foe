@@ -938,7 +938,7 @@ Quests.quests.push(new Quest({
 	list: [
 		new QuestItem({
 			desc: function() {
-				return "Find a way to deal with the crooked guardsman, Terrell.";
+				return "Find a way to deal with the crooked guardsman, Terrell. Vaughn has given you some incriminating evidence that he wants you to plant in the City Watch barracks in Rigard.";
 			},
 			active: function() {
 				var status = Quests.Type.NotStarted;
