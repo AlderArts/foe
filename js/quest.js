@@ -130,7 +130,7 @@ Quests.Print = function() {
 // MAIN QUESTS
 
 Quests.quests.push(new Quest({
-	name: "Dark agenda",
+	name: "Dark Agenda",
 	desc: function() {
 		return "Prepare Eden against the coming of Uru.";
 	},
@@ -188,7 +188,7 @@ Quests.quests.push(new Quest({
 
 Quests.quests.push(new Quest({
 	name: function() {
-		return "The nomads";
+		return "The Nomads";
 	},
 	desc: function() {
 		return "Explore the nomads' camp and talk to it's inhabitants.";
@@ -285,7 +285,7 @@ Quests.quests.push(new Quest({
 
 
 Quests.quests.push(new Quest({
-	name: "Big city",
+	name: "Big City",
 	desc: function() {
 		if(rigard.Access())
 			return "Get access to the royal grounds.";
@@ -336,7 +336,7 @@ Quests.quests.push(new Quest({
 
 Quests.quests.push(new Quest({
 	name: function() {
-		return "Seeking favor";
+		return "Seeking Favor";
 	},
 	desc: function() {
 		return "Investigate the noble couple you saw sneaking out of the inner district. You probably ought to figure out why they were followed.";
@@ -381,7 +381,7 @@ Quests.quests.push(new Quest({
 
 Quests.quests.push(new Quest({
 	name: function() {
-		return "Shifting the blame";
+		return "Shifting the Blame";
 	},
 	desc: function() {
 		return "Crap, they are on to you. If you don't want to spend the rest of your short life in a cell, you'd better help Miranda catch the thief called the 'Masked Fox'. Before you do, you're not likely to get out of Rigard.";
@@ -427,7 +427,7 @@ Quests.quests.push(new Quest({
 
 Quests.quests.push(new Quest({
 	name: function() {
-		return "A guilty conscience";
+		return "A Guilty Conscience";
 	},
 	desc: function() {
 		return "You are feeling a bit guilty about the fox currently imprisoned due to your actions. Who knows, he could end up being executed over this, given how the Royal Guard regards morphs in Rigard.";
@@ -550,7 +550,7 @@ Quests.quests.push(new Quest({
 
 Quests.quests.push(new Quest({
 	name: function() {
-		return "Breeding bunnies";
+		return "Breeding Bunnies";
 	},
 	desc: function() {
 		return "Help Ophelia with her alchemical experiments in the Burrows. You are not sure this is really a good idea, but Lagon promised to pay you handsomely for your services.";
@@ -620,7 +620,7 @@ Quests.quests.push(new Quest({
 
 Quests.quests.push(new Quest({
 	name: function() {
-		return "Search for the scepter";
+		return "Search for the Scepter";
 	},
 	desc: function() {
 		return "Ophelia has asked you to search for Lagon's scepter, possibly the only thing that can help her mother.";
@@ -913,6 +913,98 @@ Quests.quests.push(new Quest({
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
 				if(Scenes.Vaughn.Tasks.Lockpicks.Completed())
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		})
+	]
+}));
+
+Quests.quests.push(new Quest({
+	name: function() {
+		return "The Snitch";
+	},
+	desc: function() {
+		return "Deal with the crooked guardsman that has been giving the outlaws trouble.";
+	},
+	active: function() {
+		var status = Quests.Type.NotStarted;
+		if(Scenes.Vaughn.Tasks.Snitch.Completed())
+			status |= Quests.Type.Completed;
+		else if(vaughn.flags["Met"] >= Vaughn.Met.OnTaskSnitch)
+			status |= Quests.Type.Visible;
+		return status;
+	},
+	list: [
+		new QuestItem({
+			desc: function() {
+				return "Find a way to deal with the crooked guardsman, Terrell.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(vaughn.flags["Met"] >= Vaughn.Met.SnitchMirandaSuccess)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Return to Vaughn and report.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(Scenes.Vaughn.Tasks.Snitch.Completed())
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		})
+	]
+}));
+
+Quests.quests.push(new Quest({
+	name: function() {
+		return "The Lady is Indisposed";
+	},
+	desc: function() {
+		return "Make sure the Lady Heydrich doesn't appear in court.";
+	},
+	active: function() {
+		var status = Quests.Type.NotStarted;
+		
+		if(Scenes.Vaughn.Tasks.Poisoning.Completed() && !(vaughn.flags["T3"] & Vaughn.Poisoning.Success))
+			status |= Quests.Type.Failed;
+		else if(Scenes.Vaughn.Tasks.Poisoning.Completed())
+			status |= Quests.Type.Completed;
+		else if(vaughn.flags["Met"] >= Vaughn.Met.OnTaskPoisoning)
+			status |= Quests.Type.Visible;
+		return status;
+	},
+	list: [
+		new QuestItem({
+			desc: function() {
+				var poison = vaughn.flags["T3"] & Vaughn.Poisoning.Aphrodisiac ? "aphrodisiac" : "poison";
+				return "Somehow feed Lady Heydrich the " + poison + ".";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if((vaughn.flags["Met"] >= Vaughn.Met.PoisoningFail) && !(vaughn.flags["T3"] & Vaughn.Poisoning.Success))
+					status |= Quests.Type.Failed;
+				else if(vaughn.flags["Met"] >= Vaughn.Met.PoisoningFail)
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Return to Vaughn and report.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(Scenes.Vaughn.Tasks.Poisoning.Completed())
 					status |= Quests.Type.Completed;
 				return status;
 			}
