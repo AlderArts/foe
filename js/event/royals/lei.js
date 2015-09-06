@@ -67,7 +67,8 @@ Lei.Met = {
 	SeenGates : 2,
 	KnowName  : 3,
 	OnTaskEscort : 4,
-	CompletedTaskEscort : 5
+	EscortFinished : 5,
+	CompletedTaskEscort : 6
 }
 Lei.Fight = {
 	No         : 0,

@@ -198,7 +198,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 ));
 
 world.loc.Rigard.Plaza.links.push(new Link(
-	"Mansion", function() { return rigard.Krawitz["Q"] == 1; }, true,
+	"Krawitz", function() { return rigard.Krawitz["Q"] == 1; }, true,
 	function() {
 		if(rigard.Krawitz["Q"] == 1) {
 			Text.Add("Krawitz's estate is nearby.");
@@ -210,6 +210,25 @@ world.loc.Rigard.Plaza.links.push(new Link(
 	}
 ));
 
+world.loc.Rigard.Plaza.links.push(new Link(
+	"Orellos", function() {
+		return Scenes.Lei.Tasks.Escort.OnTask();
+	}, function() {
+		var t = true;
+		if(world.time.hour < 10 || world.time.hour >= 17) t = false;
+		if(lei.taskTimer.ToHours() > 7) t = false;
+		return t;
+	},
+	function() {
+		if(Scenes.Lei.Tasks.Escort.OnTask()) {
+			Text.Add("Ventos Orellos' estate is nearby.");
+			Text.NL();
+		}
+	},
+	function() {
+		
+	}
+));
 
 world.loc.Rigard.Plaza.events.push(new Link(
 	"Goldsmith", function() { return room69.flags["Hinges"] == Room69.HingesFlags.Asked; }, function() { return world.time.hour >= 9 && world.time.hour < 18; },
