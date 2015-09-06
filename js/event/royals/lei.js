@@ -50,6 +50,7 @@ function Lei(storage) {
 	this.pastRotation = 0;
 	
 	this.timeout = new Time();
+	this.taskTimer = new Time();
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -64,7 +65,9 @@ Lei.Met = {
 	NotMet    : 0,
 	SeenInn   : 1,
 	SeenGates : 2,
-	KnowName  : 3
+	KnowName  : 3,
+	OnTaskEscort : 4,
+	CompletedTaskEscort : 5
 }
 Lei.Fight = {
 	No         : 0,
@@ -95,6 +98,7 @@ Lei.prototype.Update = function(step) {
 	Entity.prototype.Update.call(this, step);
 	
 	this.timeout.Dec(step);
+	this.taskTimer.Dec(step);
 }
 
 Lei.prototype.FromStorage = function(storage) {
@@ -102,6 +106,7 @@ Lei.prototype.FromStorage = function(storage) {
 	this.annoyance.base = parseInt(storage.ann)  || this.annoyance.base;
 	
 	this.timeout.FromStorage(storage.timeout);
+	this.taskTimer.FromStorage(storage.tt);
 	
 	// Load flags
 	this.LoadFlags(storage);
@@ -116,6 +121,7 @@ Lei.prototype.ToStorage = function() {
 	this.SaveFlags(storage);
 	
 	storage.timeout = this.timeout.ToStorage();
+	storage.tt = this.taskTimer.ToStorage();
 	
 	return storage;
 }
@@ -267,6 +273,12 @@ Scenes.Lei.InnPrompt = function() {
 			}, enabled : true,
 			tooltip : "You want to ask him some things."
 		});
+		if(lei.flags["Talk"] & Lei.Talk.Skills) {
+			options.push({ nameStr : "Jobs",
+				func : Scenes.Lei.Tasks.TaskPrompt, enabled : true,
+				tooltip : "Ask Lei if he has any jobs you could do."
+			});
+		}
 		if(lei.flags["Talk"] & Lei.Talk.Sex) {
 			options.push({ nameStr : "Sex",
 				func : function() {

@@ -142,6 +142,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/uru.js \
 	js/event/aria.js \
 	js/event/royals/lei.js \
+	js/event/royals/lei-tasks.js \
 	js/event/royals/twins.js \
 	js/event/royals/jeanne.js \
 	js/event/royals/golem.js \

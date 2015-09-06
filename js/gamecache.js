@@ -393,6 +393,10 @@ CacheToGame = function() {
 		// OUTLAWS
 		if(outlaws.Rep() > 0) outlaws.flags["Met"] = Outlaws.Met.Met;
 	}
+	if(gameCache.version < 28) {
+		// LEI TASKS
+		if(lei.flags["Met"] > Lei.Met.KnowName) lei.flags["Met"] = Lei.Met.KnowName;
+	}
 }
 
 GameToCache = function() {

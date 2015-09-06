@@ -9,7 +9,7 @@ VERSION_MINOR = 4;
 VERSION_SUBSCRIPT = "j";
 VERSION_NAME = "Vaughn, Asche and Gryphons";
 
-SAVE_VERSION = 27;
+SAVE_VERSION = 28;
 // Save version 1: Initial
 // Save version 2: Added inventory
 // Save version 3: Fixed clitcock restoration + height, weigth
@@ -37,6 +37,7 @@ SAVE_VERSION = 27;
 // Save version 25: Layla level pacing
 // Save version 26: Uru intro flags
 // Save version 27: Outlaws flags
+// Save version 28: Lei flags fix
 
 
 VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + VERSION_SUBSCRIPT + ": " + VERSION_NAME;
