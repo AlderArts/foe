@@ -40,6 +40,11 @@ Scenes.Lei.Tasks.TaskPrompt = function() {
 	Text.Flush();
 }
 
+Lei.EscortTask = {
+	OnTime    : 1,
+	Flirted   : 2,
+	WonCombat : 4
+};
 
 Scenes.Lei.Tasks.Escort = {};
 Scenes.Lei.Tasks.Escort.Available = function() {
@@ -109,6 +114,8 @@ Scenes.Lei.Tasks.Escort.Start = function() {
 		Text.NL();
 		Text.Add("<b>You should meet Ventor Orellos at his home in the Plaza between ten and seventeen tomorrow for an escort job. Don’t be late!</b>", parse);
 		
+		world.TimeStep({minute: 15});
+
 		lei.flags["Met"] = Lei.Met.OnTaskEscort;
 		
 		var step = world.time.TimeToHour(17);
@@ -122,6 +129,8 @@ Scenes.Lei.Tasks.Escort.Start = function() {
 		Text.Add("<b>This job requires level 6 to unlock.</b>", parse);
 	}
 	Text.Flush();
+	
+	
 	Scenes.Lei.InnPrompt();
 }
 
@@ -132,6 +141,10 @@ Scenes.Lei.Tasks.Escort.Estate = function() {
 	};
 	
 	var late = lei.taskTimer.Expired();
+	var prof = 0;
+	
+	if(!late)
+		lei.flags["T1"] |= Lei.EscortTask.OnTime;
 	
 	parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
 	
@@ -208,6 +221,8 @@ Scenes.Lei.Tasks.Escort.Estate = function() {
 	Text.Add("The older man’s stern face melts into a smile. <i>“Of course, you know I can’t refuse you.”</i> He looks at you over her shoulder. <i>“I will trust you to protect my daughter above all else, [playername]. Do not disappoint me.”</i>", parse);
 	Text.Flush();
 	
+	world.TimeStep({minute: 30});
+	
 	Gui.NextPrompt(function() {
 		Text.Clear();
 		parse["c"] = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
@@ -215,6 +230,8 @@ Scenes.Lei.Tasks.Escort.Estate = function() {
 		Text.NL();
 		Text.Add("Aliana, on the other hand, went in the opposite direction. Her outfit hugs her body tightly, emphasizing her cute breasts and curvy butt, drawing the eye to all the right places.", parse);
 		Text.Flush();
+		
+		world.TimeStep({minute: 30});
 		
 		//[Flirt][Don’t]
 		var options = new Array();
@@ -228,8 +245,8 @@ Scenes.Lei.Tasks.Escort.Estate = function() {
 				Text.NL();
 				Text.Add("Ventor coughs audibly, looking annoyed with you. <i>“We shall be on our way now. Follow me.”</i>", parse);
 				
-				//TODO
-				//#aliana rel +3
+				rigard.alianaRel.IncreaseStat(100, 3);
+				lei.flags["T1"] |= Lei.EscortTask.Flirted;
 				
 				PrintDefaultOptions();
 			}, enabled : true
@@ -242,8 +259,7 @@ Scenes.Lei.Tasks.Escort.Estate = function() {
 				Text.NL();
 				Text.Add("He inclines his head in acknowledgement to you. <i>“Come, we should be on our way,”</i> he says, motioning for you to follow.", parse);
 				
-				//TODO
-				//#professionalism +1
+				prof += 1;
 				
 				PrintDefaultOptions();
 			}, enabled : true
@@ -256,7 +272,7 @@ Scenes.Lei.Tasks.Escort.Estate = function() {
 			Text.NL();
 			Text.Add("<i>“No,”</i> Ventor says. Both look a little dejected at that.", parse);
 			Text.NL();
-			//TODO
+			
 			party.SaveActiveParty();
 			var comp = party.Get(1);
 			
@@ -305,7 +321,7 @@ Scenes.Lei.Tasks.Escort.Estate = function() {
 				
 				if(check >= goal) {
 					Text.Add(". It’s not something you know much about, but you manage to get a few remarks in, pulling yourself into the discussion. Ventor regards you with renewed interest after a particularly astute comment.", parse);
-					//TODO #professionalism +0.5?
+					prof += 0.5;
 				}
 				else
 					Text.Add(", thoroughly excluding you from the discussion by force of expertise.", parse);
@@ -333,15 +349,31 @@ Scenes.Lei.Tasks.Escort.Estate = function() {
 				Text.Add("It’s time to do your job.", parse);
 				Text.Flush();
 				
-				//TODO
-				
+				world.TimeStep({minute: 20});
+
 				/*
 #combat encounter
 4x enemies, level 6-7, scrapper style (probably tuned to require some decent decision making to win at level 6 with Kiai)
 disable submit/run option?
 #end combat
 				 */
+				var enemy = new Party();
+				enemy.AddMember(new Bandit(Gender.male, 2));
+				enemy.AddMember(new Equine(Gender.male, 2));
+				enemy.AddMember(new Bandit(Gender.female));
+				enemy.AddMember(new Equine(Gender.female, 2));
+				var enc = new Encounter(enemy);
 				
+				enc.late = late;
+				enc.prof = prof;
+				
+				enc.canRun = false;
+				enc.onLoss = Scenes.Lei.Tasks.Escort.CombatLoss;
+				enc.onVictory = Scenes.Lei.Tasks.Escort.CombatWin;
+				
+				Gui.NextPrompt(function() {
+					enc.Start();
+				});
 			});
 			
 			if(party.Num() > 2) {
@@ -377,18 +409,214 @@ disable submit/run option?
 	});
 }
 
-/*
+Scenes.Lei.Tasks.Escort.CombatLoss = function() {
+	SetGameState(GameState.Event);
+	Text.Clear();
+	
+	var enc = this;
+	
+	var parse = {
+		
+	};
+	
+	Gui.Callstack.push(function() {
+		Text.Clear();
+		parse["l"] = player.HasLegs() ? "your foot" : "you";
+		Text.Add("Damn, [l] slipped on a loose cobblestone, or that last attack would not have landed. You glare up at your winded opponents. They seem torn between going through your pockets and chasing after Ventor and the others, who have disappeared up the street. You attempt to shout up at the brigands that you won’t let them past you even if you are down, but your ribs ache a bit with the effort, and it really comes out as more of a wheeze.", parse);
+		Text.NL();
+		parse["comp"] = party.Num() > 1 ? (" and " + party.Get(1).name) : "";
+		Text.Add("They seem to falter, no doubt frozen in fear by your fierce challenge, before turning and running full tilt back down the street, clambering over their crude barricade. Why couldn’t they do that while you were still standing? A moment later, you see a trio of guards running up the street. One of them stops to check on you[comp], while the other pair continues after the retreating robbers.", parse);
+		Text.NL();
+		Text.Add("Apparently, your employers ran into them and asked them to assist you. You take a helping hand up and thank the woman, though you’re sure you would’ve managed somehow with a last moment burst of strength even if they had not come.", parse);
+		Text.NL();
+		Text.Add("You tell her the details of the ambush, and she assures you they’ll do their best to catch the men. She releases you to go on your way, as she sets off to catch up with her companions. Accepting her word, you head back toward the mansion, where, from the guard’s", parse);
+		Scenes.Lei.Tasks.Escort.PostCombat(enc);
+	});
+	
+	Encounter.prototype.onLoss.call(enc);
+}
 
-TODO TIME
+Scenes.Lei.Tasks.Escort.CombatWin = function() {
+	SetGameState(GameState.Event);
+	Text.Clear();
+	
+	var enc = this;
+	
+	var parse = {
+		
+	};
+	
+	lei.flags["T1"] |= Lei.EscortTask.WonCombat;
+	
+	Gui.Callstack.push(function() {
+		enc.prof += 2;
+		
+		Text.Clear();
+		parse["l"] = player.HasLegs() ? "at your feet" : "before you";
+		Text.Add("Your enemies lie [l], your victory complete. You’re catching your breath, wondering what to do next, when you see a trio of the City Guard jogging toward you from up the street.", parse);
+		Text.NL();
+		parse["comp"] = party.Num() > 1 ? " the two of" : "";
+		Text.Add("Apparently, your employer ran into them and asked them to assist you. You tell the guards that for opponents of this caliber[comp] you were quite enough, though they are welcome to apprehend the attackers. Ventor would probably appreciate knowing how they knew to set the ambush here.", parse);
+		Text.NL();
+		Text.Add("The guards roll their eyes at your bravado, but set to work securing their incapacitated captives. You leave them to it and set out back toward the mansion, where, from the guards’", parse);
+		Scenes.Lei.Tasks.Escort.PostCombat(enc, true);
+	});
+	
+	Encounter.prototype.onVictory.call(enc);
+}
 
- */
-
-/*
- * TODO Combat Win/Loss
- * 
- * 
- */
-
+Scenes.Lei.Tasks.Escort.PostCombat = function(enc, won) {
+	var parse = {
+		armor : player.ArmorDesc()
+	};
+	
+	Text.Add(" words, you expect Ventor and Aliana have arrived by now.", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		Text.Clear();
+		
+		//Restore active party
+		party.LoadActiveParty();
+		var comp = [];
+		for(var i = 1; i < party.Num(); ++i) {
+			var p = party.Get(i);
+			if(p == enc.comp) continue;
+			comp.push(p);
+		}
+		parse["comp"] = comp.length == 1 ? comp[0].name : "the companions you left at the estate";
+		parse["c"] = comp.length > 0 ? Text.Parse(", [comp] close behind her", parse) : "";
+		Text.Add("You walk back to the estate. Now that you are no longer weaving through the streets from store to store, the route feels much shorter. As you draw near the gates, an anxious Aliana rushes out to greet you[c].", parse);
+		Text.NL();
+		Text.Add("<i>“Are you alright?”</i> she asks. Without waiting for a response, she circles around you, ", parse);
+		if(player.HPLevel() > 0.9)
+			Text.Add("marveling that you came out of the fight with nothing more than a few smudges on your [armor].", parse);
+		else
+			Text.Add("looking in dismay at each of your cuts and bruises, muttering words of sympathy at each one.", parse);
+		Text.NL();
+		Text.Add("You interrupt her inspection, telling her that you’re okay, though being ambushed always leaves you a bit jumpy. You’re glad to see that she’s well.", parse);
+		Text.NL();
+		Text.Add("<i>“Oh, we were in no danger! I saw you bravely fighting those robbers, and I just knew there’s no way they could’ve gotten past you.”</i> She rubs your arm appreciatively. <i>“But come, you should tell Father how things went.”</i>", parse);
+		Text.NL();
+		Text.Add("She escorts you inside, back to the study, where you find Ventor pacing back and forth, deep in thought. He turns toward you as you enter. <i>“Tell me what happened,”</i> he instructs curtly.", parse);
+		Text.NL();
+		Text.Add("You recount your fight in detail, ", parse);
+		if(won) {
+			Text.Add("concluding with your grand victory and handover of prisoners to the guards.", parse);
+			Text.NL();
+			Text.Add("He smiles at you in approval. <i>“Ah, well done! ", parse);
+			if(enc.late)
+				Text.Add("I finally understand why Lei recommended you. Though you proved lacking in punctuality, your abilities, at least, are superlative.", parse);
+			else
+				Text.Add("I can see why Lei recommended you - you performed flawlessly.", parse);
+			Text.Add(" Let us hope the guards’ investigation goes well.”</i>", parse);
+		}
+		else {
+			Text.Add("admitting that despite your valorous efforts, the villains managed to escape, though, you point out, the guards may yet get them.", parse);
+			Text.NL();
+			Text.Add("He frowns, looking concerned. <i>“Ah, that is quite unfortunate. Still, you fulfilled the crucial goal at least - Aliana escaped safely, and we did not lose any of the gold we had collected. As for the robbers, we must hope the guards prove fortunate.”</i>", parse);
+		}
+		Text.NL();
+		Text.Add("The wooden floor creaks outside the room. <i>“It is concerning that they were able to set up an ambush so neatly in our path. Not only must they have known where we would go, but also what route we would take.”</i> He taps his chin thoughtfully.", parse);
+		Text.NL();
+		Text.Add("<i>“I asked Manel - that’s our driver - if he had noticed anything unusual, and he told me a passerby had approached him to verify who we were.”</i> He glances over at you, and you confirm that you remember that happening at one of the stops. <i>“However, that’s not enough information for something like this. I’ll have Manel investigated, of course, but he looked bewildered enough while we were escaping… I can only wish it will turn out to be something that simple.”</i>", parse);
+		Text.Flush();
+		
+		var assist = false;
+		
+		var prompt = function() {
+			//[Assist][Payment]
+			var options = new Array();
+			if(!assist) {
+				options.push({ nameStr : "Assist",
+					tooltip : "Offer your assistance in the investigation.",
+					func : function() {
+						assist = true;
+						Text.Clear();
+						Text.Add("You tell Ventor that you’re not sure who arranged that ambush, but you’re prepared to look into the matter for him if he wants.", parse);
+						Text.NL();
+						Text.Add("He waves your suggestion aside. <i>“No, no. Though I appreciate the offer, I have contacts who are proficient in such things,”</i> he says. <i>“Besides, bringing you up to speed on all the people who wish me ill or would like to get my money would take days,”</i> he adds with a belly laugh.", parse);
+						Text.NL(); //TODO
+						Text.Add("The door is thrust open, and the young man you saw through a window when first arriving at the mansion stalks into the room. His eyes scan over [you]/[your party] and Aliana before fixing on Ventor.", parse);
+						Text.NL();
+						Text.Add("<i>“I’ll take care of this investigation,”</i> he declares. <i>“I will not allow our family name to be disregarded so.”</i>", parse);
+						Text.NL();
+						Text.Add("Aliana and Ventor exchange glances, prompting the young man to glare even more intensely. <i>“Certainly, Alten, if you wish,”</i> Ventor says. <i>“I will provide you with references for my usual contacts.”</i>", parse);
+						Text.NL();
+						Text.Add("<i>“I have my own men, Father. They are more than capable of taking care of the matter.”</i> He pauses, glancing around the room again. <i>“Fear not, I shall find the perpetrators and ensure they are dealt with appropriately.”</i>", parse);
+						Text.NL();
+						Text.Add("<i>“Please come to me first,”</i> Ventor asks. <i>“Please.”</i>", parse);
+						Text.NL();
+						Text.Add("Alten nods vaguely. <i>“Very well then. Father. Aliana. Contractor.”</i> He fractionally inclines his head in your direction at this last. He stalks out of the room, looking as haughty as when he entered.", parse);
+						Text.NL();
+						Text.Add("Ventor sighs and Aliana looks bemused.", parse);
+						Text.Flush();
+						prompt();
+					}, enabled : true
+				});
+			}
+			options.push({ nameStr : "Payment",
+				tooltip : "Your job here is done. Get your payment and go.",
+				func : function() {
+					Text.Clear();
+					Text.Add("You ask Ventor if he’s planning to visit the final store as well.", parse);
+					Text.NL();
+					Text.Add("He shakes his head. <i>“I think I will let that one wait until this matter is resolved.”</i> He narrows his eyes. <i>“Or, no, I will send an agent. It would not do to have them deter me from my purpose, however trivial that deterrence may seem.”</i>", parse);
+					Text.NL();
+					Text.Add("He focuses on you. <i>“Regardless, you have performed well, achieving ", parse);
+					if(won) {
+						Text.Add("exceptional results in hazardous conditions. ", parse);
+						if(late)
+							Text.Add("I know we agreed that your payment was forfeit for lateness, but I would not leave you unpaid after performing such service.”</i>", parse);
+						else
+							Text.Add("Your performance leaves nothing to be desired - naturally, this merits a significant bonus.”</i>", parse);
+					}
+					else {
+						Text.Add("adequate results in hazardous conditions. ", parse);
+						if(enc.late)
+							Text.Add("I know I said your payment was forfeit for your lateness, but I would not have you go unpaid after fighting on my behalf.”</i>", parse);
+						else
+							Text.Add("Naturally, this merits additional pay.”</i>", parse);
+					}
+					//TODO
+					Text.Add(" Ventor pulls out a neat leather purse from one of the drawers in the desk, and counts out your payment, handing over [pay] coins. <i>“I believe with that, our business is settled. Perhaps I will be in touch regarding future opportunities[... at least if they do not require punctuality].”</i>", parse);
+					Text.NL();
+					Text.Add("You thank him for the bonus, and say your goodbyes to both him and Aliana. Perhaps you’ll see her again sometime as well - she certainly seems interested in seeing you.", parse);
+					Text.NL();
+					if(!assist) {
+						Text.Add("As you step out the door of the study, you come face to face with the young man you saw through the window when you first arrived at the mansion. He inclines his head towards the exit in curt dismissal and, taking the door from your hands, stalks into the room.", parse);
+						Text.NL();
+						Text.Add("Your curiosity gets the better of you and you linger for a few minutes by the door, listening. The thick wood blocks most sounds of the conversation, but you do manage to make out snatches of the young man’s heated words. <i>“Father… family name through the mud… investigation.”</i>", parse);
+						Text.NL();
+						Text.Add("You notice the familiar footman round the corner, heading in your direction, and step away from the door. You doubt Lei would approve if he heard you had been caught eavesdropping. ", parse);
+						
+						var check = player.Int() + _.random(1, 20);
+						var goal = 30;
+						
+						if(check >= goal)
+							Text.Add("Besides, you think you caught the gist of the conversation anyway. The young man - Ventor’s son, Alten - wants to take charge of investigating today’s events, and judging by his tone, Ventor is probably not thrilled by the prospect. Nothing to do with you anyway.", parse);
+						else
+							Text.Add("It’s nothing to do with you anyway.", parse);
+						Text.NL();
+					}
+					parse["won"] = won ? ", and quite a grand success at that" : "";
+					Text.Add("You follow the footman back out over the lavish carpets, past the flowerbeds, and out the gates back to the Plaza. You stretch, sighing contentedly. Your first job was a success[won].", parse);
+					Text.NL();
+					Text.Add("You should return to Lei to make your report.", parse);
+					Text.Flush();
+					
+					world.TimeStep({hour: 1});
+					
+					lei.flags["Met"] = Lei.Met.EscortFinished;
+					
+					Gui.NextPrompt();
+				}, enabled : true
+			});
+			Gui.SetButtonsFromList(options, false, null);
+		}
+		prompt();
+	});
+}
 
 
 /*

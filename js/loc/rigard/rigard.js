@@ -135,6 +135,8 @@ function Rigard(storage) {
 	this.CW["Visit"] = 0;
 	this.cwrel = new Stat(0);
 	
+	this.alianaRel = new Stat(0);
+	
 	if(storage) this.FromStorage(storage);
 }
 
@@ -172,6 +174,9 @@ Rigard.prototype.ToStorage = function() {
 	
 	storage.MS = this.MagicShop.ToStorage();
 	
+    if(this.alianaRel.base != 0)
+    	storage.alrel = this.alianaRel.base.toFixed();
+	
 	return storage;
 }
 
@@ -200,6 +205,9 @@ Rigard.prototype.FromStorage = function(storage) {
 		this.LB[flag] = parseInt(storage.LB[flag]);
 		
 	this.MagicShop.FromStorage(storage.MS);
+	
+    if(storage.alrel)
+    	this.alianaRel.base = parseInt(storage.alrel) || this.alianaRel.base;
 }
 
 Rigard.prototype.Update = function(step) {

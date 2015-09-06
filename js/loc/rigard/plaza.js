@@ -226,7 +226,7 @@ world.loc.Rigard.Plaza.links.push(new Link(
 		}
 	},
 	function() {
-		
+		Scenes.Lei.Tasks.Escort.Estate();
 	}
 ));
 

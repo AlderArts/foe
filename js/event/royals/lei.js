@@ -46,6 +46,8 @@ function Lei(storage) {
 	this.flags["Talk"] = 0; //Bitmask
 	this.flags["SexOpen"] = 0; //Toggle
 	
+	this.flags["T1"] = 0; //Bitmask, job 1
+	
 	this.annoyance = new Stat(0);
 	this.pastRotation = 0;
 	
