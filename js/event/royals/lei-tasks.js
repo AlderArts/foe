@@ -386,16 +386,16 @@ disable submit/run option?
 					var p = party.Get(i);
 					options.push({ nameStr : p.name,
 						tooltip : Text.Parse("Take [name] with you.", {name: p.name}),
-						func : function() {
+						func : function(obj) {
 							Text.Clear();
 							
 							party.ClearActiveParty();
 							party.AddMember(player);
-							party.AddMember(p);
-							comp = p;
+							party.AddMember(obj);
+							comp = obj;
 							
 							PrintDefaultOptions();
-						}, enabled : true
+						}, obj : p, enabled : true
 					});
 				}
 				Gui.SetButtonsFromList(options, false, null);
@@ -470,6 +470,8 @@ Scenes.Lei.Tasks.Escort.PostCombat = function(enc, won) {
 		armor : player.ArmorDesc()
 	};
 	
+	var late = enc.late;
+	
 	Text.Add(" words, you expect Ventor and Aliana have arrived by now.", parse);
 	Text.Flush();
 	
@@ -505,7 +507,7 @@ Scenes.Lei.Tasks.Escort.PostCombat = function(enc, won) {
 			Text.Add("concluding with your grand victory and handover of prisoners to the guards.", parse);
 			Text.NL();
 			Text.Add("He smiles at you in approval. <i>“Ah, well done! ", parse);
-			if(enc.late)
+			if(late)
 				Text.Add("I finally understand why Lei recommended you. Though you proved lacking in punctuality, your abilities, at least, are superlative.", parse);
 			else
 				Text.Add("I can see why Lei recommended you - you performed flawlessly.", parse);
@@ -536,8 +538,9 @@ Scenes.Lei.Tasks.Escort.PostCombat = function(enc, won) {
 						Text.Add("You tell Ventor that you’re not sure who arranged that ambush, but you’re prepared to look into the matter for him if he wants.", parse);
 						Text.NL();
 						Text.Add("He waves your suggestion aside. <i>“No, no. Though I appreciate the offer, I have contacts who are proficient in such things,”</i> he says. <i>“Besides, bringing you up to speed on all the people who wish me ill or would like to get my money would take days,”</i> he adds with a belly laugh.", parse);
-						Text.NL(); //TODO
-						Text.Add("The door is thrust open, and the young man you saw through a window when first arriving at the mansion stalks into the room. His eyes scan over [you]/[your party] and Aliana before fixing on Ventor.", parse);
+						Text.NL();
+						parse["c"] = party.Num() > 1 ? "your party" : "you";
+						Text.Add("The door is thrust open, and the young man you saw through a window when first arriving at the mansion stalks into the room. His eyes scan over [c] and Aliana before fixing on Ventor.", parse);
 						Text.NL();
 						Text.Add("<i>“I’ll take care of this investigation,”</i> he declares. <i>“I will not allow our family name to be disregarded so.”</i>", parse);
 						Text.NL();
@@ -573,13 +576,24 @@ Scenes.Lei.Tasks.Escort.PostCombat = function(enc, won) {
 					}
 					else {
 						Text.Add("adequate results in hazardous conditions. ", parse);
-						if(enc.late)
+						if(late)
 							Text.Add("I know I said your payment was forfeit for your lateness, but I would not have you go unpaid after fighting on my behalf.”</i>", parse);
 						else
 							Text.Add("Naturally, this merits additional pay.”</i>", parse);
 					}
-					//TODO
-					Text.Add(" Ventor pulls out a neat leather purse from one of the drawers in the desk, and counts out your payment, handing over [pay] coins. <i>“I believe with that, our business is settled. Perhaps I will be in touch regarding future opportunities[... at least if they do not require punctuality].”</i>", parse);
+					
+					var pay = Scenes.Lei.Tasks.Escort.Coin() + 50;
+					pay += enc.prof * 50;
+					if(late)
+						pay /= 2;
+					pay = Math.floor(pay);
+					
+					party.coin += pay;
+					
+					parse["pay"] = Text.NumToText(pay);
+					parse["late"] = late ? "... at least if they do not require punctuality" : "";
+					
+					Text.Add(" Ventor pulls out a neat leather purse from one of the drawers in the desk, and counts out your payment, handing over [pay] coins. <i>“I believe with that, our business is settled. Perhaps I will be in touch regarding future opportunities[late].”</i>", parse);
 					Text.NL();
 					Text.Add("You thank him for the bonus, and say your goodbyes to both him and Aliana. Perhaps you’ll see her again sometime as well - she certainly seems interested in seeing you.", parse);
 					Text.NL();
@@ -618,6 +632,139 @@ Scenes.Lei.Tasks.Escort.PostCombat = function(enc, won) {
 	});
 }
 
+Scenes.Lei.Tasks.Escort.Debrief = function() {
+	var parse = {
+		
+	};
+	
+	if(party.Num() == 2) {
+		var p1 = party.Get(1);
+		parse["comp"] = p1.name;
+		parse["heshe"] = p1.heshe();
+	}
+	else {
+		parse["comp"] = "your companions";
+		parse["heshe"] = "they";
+	}
+	
+	var won = lei.flags["T1"] & Lei.EscortTask.WonCombat;
+	var ontime = lei.flags["T1"] & Lei.EscortTask.OnTime;
+	var flirted = lei.flags["T1"] & Lei.EscortTask.Flirted;
+	
+	world.TimeStep({hour: 1});
+	lei.flags["Met"] = Lei.Met.CompletedTaskEscort;
+	
+	Text.Clear();
+	Text.Add("You tell Lei that you’d like to talk about the last job with him.", parse);
+	Text.NL();
+	Text.Add("He inclines his head. <i>“I have received feedback from Ventor. Let’s talk somewhere more private.”</i> He stands, motioning for you to follow, and leads you up the flights of stairs to the Twins’ penthouse suite.", parse);
+	Text.NL();
+	parse["lt"] = world.time.LightStr("but well-lit room", "room, lighting several candles on the way in");
+	Text.Add("Sounds of the royals having fun come from a room further along, but Lei instead takes a left from the entrance, leading you into a small [lt]. It seems like this was intended to be a small guest room - there’s a bed, a narrow desk with a single chair, and a wardrobe opposite it, but no other furniture.", parse);
+	if(party.Num() > 1)
+		Text.Add(" With you and Lei in, there’s not really any space for [comp], and [heshe] decide to wait in the lounge deeper in the suite.", parse);
+	Text.NL();
+	Text.Add("Lei pulls out the chair. <i>“Sit.”</i> You do as indicated, and he himself hops on top of the desk, one foot resting on the edge, and looks down at you expectantly.", parse);
+	Text.NL();
+	Text.Add("After a moment’s thought, you decide there’s no point in lying or trying to conceal anything. Not only does he have Ventor’s account of events, but if you’re caught, you suspect the consequences could be rather dire.", parse);
+	Text.NL();
+	Text.Add("You tell him of your arrival, the mansion, your reception. Lei interrupts with a question about what the patterns of the carpets were, and follows up with others about things that you can’t imagine could possibly be relevant, and you try your best to answer.", parse);
+	Text.NL();
+	if(!ontime) { //Were late
+		Text.Add("You explain how despite your lateness, you still got to do the job, albeit at reduced pay. Lei frowns. <i>“You failed at the simplest part.”</i> He sighs. <i>“Understand that if it is known that you fail to appear or are badly late for jobs, you will not be hired. Reliability is paramount - one would rather have someone who is half as skilled but comes every time than someone who misses one job in five.”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“It is good that on this job you had a chance to show your worth, but if you persist in this, you will ruin your reputation, and tarnish mine.”</i> He waves for you to proceed.", parse);
+		Text.NL();
+		lei.relation.DecreaseStat(0, 1);
+	}
+	if(flirted) {
+		Text.Add("You admit that Ventor’s daughter had seemed attracted to you, and you flirted with her. Lei shrugs. <i>“It is not very professional, but not a big thing as long as it does not jeopardize your decision-making. If she had been the employer, I would have even commended it.”</i>", parse);
+	}
+	else {
+		Text.Add("You mention that Ventor’s daughter flirted with you, but you stayed professional, and Lei nods in approval.", parse);
+		lei.relation.IncreaseStat(100, 1);
+	}
+	Text.Add("You summarize the trip and talk about the stops at each of the stores. Lei presses you for details of what you saw, and seems disappointed when you cannot recall too much.", parse);
+	Text.NL();
+	Text.Add("<i>“The time you wait is for observation and planning, not chatter,”</i> he explains. <i>“They must have had someone watching you, and had you been more attentive, you may have known about them before you ran head first into an ambush.”</i>", parse);
+	Text.NL();
+	parse["won"] = won ? "proudly describing how you won" : "sheepishly explaining your loss";
+	Text.Add("From there, there is not much left. You go through the ambush and subsequent fight in detail, [won], and finish up with the appearance of the guards, your return to the estate, and the appearance of the young man.", parse);
+	Text.NL();
+	if(won) {
+		Text.Add("Lei gives you a rare smile. <i>“Well done! I thought you would be able to handle something of this level. Of course, you will have to improve your skills to handle more challenging - and rewarding - tasks, but it is good that you were well prepared for your first one.”</i>", parse);
+		Text.NL();
+		Text.Add("You nod in acknowledgement. There are certainly still heights you haven’t reached, and enemies you would have trouble with.", parse);
+		Text.NL();
+		Text.Add("<i>“You exceeded your obligations on this job. Such actions will make your reputation grow, and a reputation is a useful thing to have.”</i>", parse);
+	}
+	else { //Lost
+		Text.Add("Lei narrows his eyes. <i>“Perhaps I had underestimated the danger of this mission. Had the guards been delayed in their appearance, you may have died,”</i> he says, his tone flat. He shakes his head. <i>“This is not a level of risk you should encounter. I apologize.”</i>", parse);
+		Text.NL();
+		Text.Add("That was not quite the reaction you had been expecting. You tell him that it’s you who made the mistakes by being underprepared for such mediocre opponents, and Lei smiles up at your determination to get stronger.", parse);
+		Text.NL();
+		Text.Add("<i>“Regardless, you did not back down when outnumbered and fulfilled your obligations. That was well done.”</i>", parse);
+	}
+	Text.NL();
+	
+	parse["c"] = party.Num() > 1 ? Text.Parse("collect [comp] before heading", parse) : "head";
+	
+	if(!ontime) {
+		Text.Add("<i>“If only you had arrived punctually, this could be called a success and an excellent start. As is, it remains a disappointment,”</i> he sums up. He drums his fingers along the desk. <i>“If you do not remedy that failing in the future, I will have no more dealings with you.”</i>", parse);
+		Text.NL();
+		Text.Add("Well, he looks quite annoyed with you. Setting aside the threat about the future, you’ll probably need to do something to appease him before he’ll even give you another job. Perhaps proving your skill in sparring will do the trick?", parse);
+		Text.NL();
+		Text.Add("Lei turns away from you, apparently contemplating the room - looks like that’s all he has to say on this topic.", parse);
+		Text.NL();
+		Text.Add("Feeling a little uncomfortable, you exit the room and [c] back to the common room.", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt();
+	}
+	else {
+		if(lei.SexOpen()) {
+			Text.Add("<i>“Overall, there are things you could improve on, but you did well.”</i> His voice goes lower, almost purring. <i>“Very well, even. I think you deserve a little reward.”</i> His lips curl into a smile, and he looks at you as if examining a particularly delectable morsel.", parse);
+			Text.Flush();
+			
+			//[Reward][Refuse]
+			var options = new Array();
+			options.push({ nameStr : "Reward",
+				tooltip : "Rewards are nice. You’d like a reward.",
+				func : function() {
+					Scenes.Lei.Sex.Petting(false);
+				}, enabled : true
+			});
+			options.push({ nameStr : "Refuse",
+				tooltip : "No reward for you.",
+				func : function() {
+					Text.Clear();
+					Text.Add("You tell Lei that actually, you’d rather not right now.", parse);
+					Text.NL();
+					Text.Add("You jerk back in instinctive response, as for an instant, you see anger flash across his face, and his muscles tense in readiness, before his features return to a mask of serenity. <i>“You are being misleading. We had spoken and you had indicated interest,”</i> he says. <i>“Very well, go then. It is, in the end, your loss. Rewards that are forfeited must be earned again if you wish them.”</i>", parse);
+					Text.NL();
+					Text.Add("He motions at the door, and you step out, feeling an uncomfortable prickling sensation on your back as you walk past.", parse);
+					Text.NL();
+					parse["c"] = party.Num() > 1 ? Text.Parse("You collect [comp] and", parse) : "Your report complete, you";
+					Text.Add("[c] head back to the common room.", parse);
+					Text.Flush();
+					
+					Gui.NextPrompt();
+				}, enabled : true
+			});
+			Gui.SetButtonsFromList(options, false, null);
+		}
+		else {
+			Text.Add("<i>“The contract has been a success and an excellent start for you on the whole,”</i> he sums up. <i>“Certainly, there are some things you could improve on, but it’s far better than most do on their first time out.”</i>", parse);
+			Text.NL();
+			Text.Add("He inclines his head in acknowledgement, before turning back to the room at large. Looks like that’s all he has to say on the matter.", parse);
+			Text.NL();
+			Text.Add("You say your goodbyes, and [c] back to the common room.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		}
+	}
+}
 
 /*
 Scenes.Lei.Tasks.Escort = {};

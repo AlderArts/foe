@@ -217,7 +217,7 @@ Time.prototype.IsDay = function() {
 
 // TODO: possible variations for location
 Time.prototype.LightStr = function(light, dark) {
-	return this.hour >= 6  && this.hour < 21 ? light : dark;
+	return this.hour >= 6 && this.hour < 21 ? light : dark;
 }
 
 Time.prototype.ToDays = function() {

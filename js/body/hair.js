@@ -22,6 +22,9 @@ Hair.prototype.Bald = function() {
 Hair.prototype.IsLong = function() {
 	return this.length.Get() >= 10;
 }
+Hair.prototype.IsLongerThan = function(x) {
+	return this.length.Get() >= x;
+}
 Hair.prototype.Short = function() {
 	if(this.length == 0) return "bald scalp";
 	else return Color.Desc(this.color) + " hair";

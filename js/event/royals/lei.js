@@ -97,6 +97,10 @@ Lei.prototype.Recruited = function() {
 	return false; //TODO Lei.Met >= Recruited
 }
 
+Lei.prototype.SexOpen = function() {
+	return this.flags["SexOpen"] != 0;
+}
+
 Lei.prototype.Update = function(step) {
 	Entity.prototype.Update.call(this, step);
 	
@@ -166,24 +170,29 @@ Scenes.Lei.InnApproach = function() {
 		
 	};
 	
-	if(party.Two())
-		parse["comp"] = ", motioning for "+party.Get(1).name+" to take a seat nearby";
-	else if(!party.Alone())
-		parse["comp"] = ", motioning for your companions to take seats nearby";
-	else
-		parse["comp"] = "";
+	if(lei.flags["Met"] == Lei.Met.EscortFinished)
+		Scenes.Lei.Tasks.Escort.Debrief();
+	//TODO More job debriefs
+	else {
+		if(party.Two())
+			parse["comp"] = ", motioning for "+party.Get(1).name+" to take a seat nearby";
+		else if(!party.Alone())
+			parse["comp"] = ", motioning for your companions to take seats nearby";
+		else
+			parse["comp"] = "";
+			
+		Text.Clear();
+		Text.Add("You walk over to Lei’s table, and pull up a chair[comp]. He ", parse);
+		if(lei.Relation() < Lei.Rel.L2)
+			Text.Add("glances at you for a moment, and inclines his head fractionally before resuming his survey of the room.", parse);
+		else if(lei.Relation() < Lei.Rel.L4)
+			Text.Add("looks over at you and nods, the hint of a smile on his lips.", parse);
+		else
+			Text.Add("greets you with a smile, evidently pleased to see you.", parse);
+		Text.Flush();
 		
-	Text.Clear();
-	Text.Add("You walk over to Lei’s table, and pull up a chair[comp]. He ", parse);
-	if(lei.Relation() < Lei.Rel.L2)
-		Text.Add("glances at you for a moment, and inclines his head fractionally before resuming his survey of the room.", parse);
-	else if(lei.Relation() < Lei.Rel.L4)
-		Text.Add("looks over at you and nods, the hint of a smile on his lips.", parse);
-	else
-		Text.Add("greets you with a smile, evidently pleased to see you.", parse);
-	Text.Flush();
-	
-	Scenes.Lei.InnPrompt();
+		Scenes.Lei.InnPrompt();
+	}
 }
 
 Scenes.Lei.InnPrompt = function() {
