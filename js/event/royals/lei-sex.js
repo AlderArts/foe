@@ -8,7 +8,8 @@ Scenes.Lei.Sex.Petting = function(repeat) {
 	var parse = {
 		boygirl : player.mfFem("boy", "girl"),
 		hair : function() { return player.Hair().Short(); },
-		ear : function() { return player.EarDesc(); }
+		ear : function() { return player.EarDesc(); },
+		leg : function() { return player.LegDesc(); }
 	};
 	
 	var p1 = party.Get(1);
@@ -31,9 +32,9 @@ Scenes.Lei.Sex.Petting = function(repeat) {
 		Text.Add("You incline your head in acknowledgement, and Lei hops down from the desk. With him looming over you, you stand up almost involuntarily, knocking over your chair in the process, which only makes him smile the wider.", parse);
 	}
 	Text.NL();
-	Text.Add("Your breath catches as Lei's fingers trace slowly along your cheek, before he moves his hand further up, stroking your hair. The motion of his fingers is gentle; they barely press against your [hair], tickling more than brushing. You wonder what he'll do next, but once he reaches your neck, he simply shifts his hand back to the top, and starts over.", parse);
+	Text.Add("Your breath catches as Lei's fingers trace slowly along your cheek, before he moves further up, stroking your hair. The motion of his fingers is gentle; they barely press against your [hair], tickling more than brushing. You wonder what he'll do next, but once he reaches your neck, he simply shifts his hand back to the top, and starts over.", parse);
 	Text.NL();
-	Text.Add("You're a little disappointed at first, but gradually, as his fingers trace stroke after stroke over your scalp, you feel a warmth spread through you. The steady movements are pleasant, almost hypnotic, and you drift into a pleased daze as Lei pets you.", parse);
+	Text.Add("You're a little disappointed at first, but gradually, as his digits trace stroke after stroke over your scalp, you feel a warmth spread through you. The steady movements are pleasant, almost hypnotic, and you drift into a pleased daze as Lei pets you.", parse);
 	Text.NL();
 	Text.Add("An involuntary sigh of pleasure escapes your mouth, causing your eyes to flicker open in surprise for an instant, only to find that you're leaning close against Lei, your bodies pressing together. When did that happen? Well, that doesn't matter, it's warm here, and you're enjoying the feeling of closeness.", parse);
 	Text.NL();
@@ -66,13 +67,13 @@ Scenes.Lei.Sex.Petting = function(repeat) {
 			if(catty)
 				Text.Add("Purring comes naturally to you. If anything, it's a bit of a surprise you weren't purring already. You take a deep breath, and slowly push it out, letting a deep, low purr cascade out from your stomach.", parse);
 			else
-				Text.Add("Feeling rather awkward, you try to purr, imitating the sound you've heard cats make. You don't get it quite right at first, but after a few more attempts you're purring well enough that you could trick a cat.", parse);
+				Text.Add("Feeling rather awkward, you try to purr, imitating the sound you've heard cats make. You don't get it quite right at first, but after a few more attempts, you're purring well enough that you could trick a cat.", parse);
 			Text.Add(" It feels peculiarly good, a release of tension from the center of your being, as your muscles relax and your world narrows to his hand on your hair, and this sound of pleasure coming from inside you.", parse);
 			Text.NL();
 			parse["h"] = !player.Hair().IsLongerThan(4) ? ", shifting your hair aside," : "";
 			Text.Add("<i>“Good [boygirl],”</i> Lei says quietly. His hand moves down a little, and[h] scratches behind your [ear], and you tilt your head towards him in pleasure.", parse);
 			Text.NL();
-			Text.Add("Lei smiles, and with a turn, moves towards the bed, and sits down, pulling you after him into his lap. You look up at him, wondering what he’s planning, but he only holds you.", parse);
+			Text.Add("Lei smiles, and with a turn, moves towards the bed and sits down, pulling you after him into his lap. You look up at him, wondering what he’s planning, but he only holds you.", parse);
 			PrintDefaultOptions();
 		}, enabled : true
 	});
@@ -84,11 +85,11 @@ Scenes.Lei.Sex.Petting = function(repeat) {
 			Text.NL();
 			Text.Add("To your surprise, you see him grinning, and after a moment he bursts into laughter, the sounds of his mirth filling the room. You tilt your head in puzzlement, inadvertently shifting his hand along with it.", parse);
 			Text.NL();
-			Text.Add("Apparently undeterred, Lei strokes your hair with his other hand. <i>“I didn’t know I had such a selfish, playful kitten,”</i> he says. <i>“How about this, then?”</i> He grabs you around the waist with his free arm, and with a twist tumbles both of you onto his bed. You let out a startled yelp as you fall, releasing his hand from your jaws, as you fall down on top of him.", parse);
+			Text.Add("Apparently undeterred, Lei strokes your hair with his other hand. <i>“I didn’t know I had such a selfish, playful kitten,”</i> he says. <i>“How about this, then?”</i> He grabs you around the waist with his free arm, and with a twist, tumbles both of you onto his bed. You let out a startled yelp as you fall, releasing his hand from your jaws, as you fall down on top of him.", parse);
 			Text.NL();
 			Text.Add("You feel his chest stir beneath your back, as he chuckles at the result of your resistance. Lying on top of him, in his arms, you can’t help but join in as well, and soon both of you are laughing together, tears of merriment springing to your eyes.", parse);
 			Text.NL();
-			Text.Add("After a minute, you quiet down, and Lei sits up, pulling you along with him, leaving you sitting in his lap, held tight in his arms. You look up at him, wondering if he’s plotting something else, but he only holds you.", parse);
+			Text.Add("After a minute, you quiet down. Lei sits up, pulling you along with him, leaving you sitting in his lap, held tight in his arms. You look up at him, wondering if he’s plotting something else, but he only holds you.", parse);
 			PrintDefaultOptions();
 		}, enabled : true
 	});
@@ -100,7 +101,7 @@ Scenes.Lei.Sex.Petting = function(repeat) {
 		Text.NL();
 		Text.Add("Feeling his warm body pressed against you, you can’t help but nod. With his arms wrapped around you, you feel safe. Safe from immediate danger, yes, but also safe from having to be cautious, from doubting people, from having your guard up.", parse);
 		Text.NL();
-		Text.Add("The two of you stay entwined for a long time, and you begin to feel drowsy in the small dark room, with candles flickering around you. Your leg feels like it’s falling asleep too, and you move it, shifting position a little awkwardly.", parse);
+		Text.Add("The two of you stay entwined for a long time, and you begin to feel drowsy in the small dark room, with candles flickering around you. Your [leg] feels like it’s falling asleep too, and you move it, shifting position a little awkwardly.", parse);
 		Text.NL();
 		if(player.Hair().IsLongerThan(6))
 			Text.Add("Lei leans down over you, and gently brushes a strand of hair away from your eyes.", parse);
