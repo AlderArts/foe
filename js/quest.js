@@ -1012,6 +1012,49 @@ Quests.quests.push(new Quest({
 	]
 }));
 
+Quests.quests.push(new Quest({
+	name: function() {
+		return "Escort Service";
+	},
+	desc: function() {
+		return "Follow Lei's directions and perform a job for Ventor Orellos.";
+	},
+	active: function() {
+		var status = Quests.Type.NotStarted;
+		if(Scenes.Lei.Tasks.Escort.Completed())
+			status |= Quests.Type.Completed;
+		else if(lei.flags["Met"] >= Lei.Met.OnTaskEscort)
+			status |= Quests.Type.Visible;
+		return status;
+	},
+	list: [
+		new QuestItem({
+			desc: function() {
+				return "Meet with Ventor Orellos at his mansion near the Plaza in Rigard between ten and seventeen. According to Lei, he has a job for you.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(rigard.Access())
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		}),
+		new QuestItem({
+			desc: function() {
+				return "Return to Lei and report.";
+			},
+			active: function() {
+				var status = Quests.Type.NotStarted;
+				status |= Quests.Type.Visible;
+				if(Scenes.Lei.Tasks.Escort.Completed())
+					status |= Quests.Type.Completed;
+				return status;
+			}
+		})
+	]
+}));
+
 //TODO Krawitz(?), Burrows, Gwendy
 
 /*
