@@ -258,35 +258,35 @@ Body.prototype.ToStoragePartial = function(opts) {
 Body.prototype.FromStorage = function(storage) {
 	storage = storage || {};
 	
-	this.muscleTone.base = parseFloat(storage.tone)   || this.muscleTone.base;
-	this.bodyMass.base   = parseFloat(storage.mass)   || this.bodyMass.base;
-	this.height.base     = parseFloat(storage.height) || this.height.base;
-	this.weigth.base     = parseFloat(storage.weigth) || this.weigth.base;
-	this.femininity.base = parseFloat(storage.fem)    || this.femininity.base;
+	this.muscleTone.base = (storage.tone === undefined) ? this.muscleTone.base : parseFloat(storage.tone);
+	this.bodyMass.base   = (storage.mass === undefined) ? this.bodyMass.base : parseFloat(storage.mass);
+	this.height.base     = (storage.height === undefined) ? this.height.base : parseFloat(storage.height);
+	this.weigth.base     = (storage.weigth === undefined) ? this.weigth.base : parseFloat(storage.weigth);
+	this.femininity.base = (storage.fem === undefined) ? this.femininity.base : parseFloat(storage.fem);
 	
 	if(storage.head) {
-		this.head.race   = RaceDesc.IdToRace[parseInt(storage.head.race)] || this.head.race;
-		this.head.color  = parseInt(storage.head.col)  || this.head.color;
+		this.head.race   = (storage.head.race === undefined) ? this.head.race : RaceDesc.IdToRace[parseInt(storage.head.race)];
+		this.head.color  = (storage.head.col === undefined) ? this.head.color : parseInt(storage.head.col);
 		
 		if(storage.head.mouth) {
-			this.head.mouth.tongue.race       = RaceDesc.IdToRace[parseInt(storage.head.mouth.ton.race)] || this.head.mouth.tongue.race;
-			this.head.mouth.tongue.color      = parseInt(storage.head.mouth.ton.col)  || this.head.mouth.tongue.color;
-			this.head.mouth.capacity.base     = parseFloat(storage.head.mouth.cap)    || this.head.mouth.capacity.base;
+			this.head.mouth.tongue.race       = (storage.head.mouth.ton.race === undefined) ? this.head.mouth.tongue.race : RaceDesc.IdToRace[parseInt(storage.head.mouth.ton.race)];
+			this.head.mouth.tongue.color      = (storage.head.mouth.ton.col === undefined) ? this.head.mouth.tongue.color : parseInt(storage.head.mouth.ton.col);
+			this.head.mouth.capacity.base     = (storage.head.mouth.cap === undefined) ? this.head.mouth.capacity.base : parseFloat(storage.head.mouth.cap);
 		}
 		if(storage.head.hair) {
-			this.head.hair.race        = RaceDesc.IdToRace[parseInt(storage.head.hair.race)]  || this.head.hair.race;
-			this.head.hair.color       = parseInt(storage.head.hair.col)   || this.head.hair.color;
-			this.head.hair.length.base = parseInt(storage.head.hair.len)   || this.head.hair.length.base;
-			this.head.hair.style       = parseInt(storage.head.hair.style) || this.head.hair.style;
+			this.head.hair.race        = (storage.head.hair.race === undefined) ? this.head.hair.race : RaceDesc.IdToRace[parseInt(storage.head.hair.race)];
+			this.head.hair.color       = (storage.head.hair.col === undefined) ? this.head.hair.color : parseInt(storage.head.hair.col);
+			this.head.hair.length.base = (storage.head.hair.len === undefined) ? this.head.hair.length.base : parseInt(storage.head.hair.len);
+			this.head.hair.style       = (storage.head.hair.style === undefined) ? this.head.hair.style : parseInt(storage.head.hair.style);
 		}
 		if(storage.head.eyes) {
-			this.head.eyes.race        = RaceDesc.IdToRace[parseInt(storage.head.eyes.race)]  || this.head.eyes.race;
-			this.head.eyes.color       = parseInt(storage.head.eyes.col)   || this.head.eyes.color;
-			this.head.eyes.count.base  = parseInt(storage.head.eyes.count) || this.head.eyes.count.base;
+			this.head.eyes.race        = (storage.head.eyes.race === undefined) ? this.head.eyes.race : RaceDesc.IdToRace[parseInt(storage.head.eyes.race)];
+			this.head.eyes.color       = (storage.head.eyes.col === undefined) ? this.head.eyes.color : parseInt(storage.head.eyes.col);
+			this.head.eyes.count.base  = (storage.head.eyes.count === undefined) ? this.head.eyes.count.base : parseInt(storage.head.eyes.count);
 		}
 		if(storage.head.ears) {
-			this.head.ears.race        = RaceDesc.IdToRace[parseInt(storage.head.ears.race)]  || this.head.ears.race;
-			this.head.ears.color       = parseInt(storage.head.ears.col)   || this.head.ears.color;
+			this.head.ears.race        = (storage.head.ears.race === undefined) ? this.head.ears.race : RaceDesc.IdToRace[parseInt(storage.head.ears.race)];
+			this.head.ears.color       = (storage.head.ears.col === undefined) ? this.head.ears.color : parseInt(storage.head.ears.col);
 		}
 		
 		if(storage.head.app) {
@@ -300,9 +300,9 @@ Body.prototype.FromStorage = function(storage) {
 	}
 	
 	if(storage.torso) {
-		this.torso.race         = RaceDesc.IdToRace[parseInt(storage.torso.race)] || this.torso.race;
-		this.torso.color        = parseInt(storage.torso.col)  || this.torso.color;
-		this.torso.hipSize.base = parseFloat(storage.torso.hip)  || this.torso.hipSize.base;
+		this.torso.race         = (storage.torso.race === undefined) ? this.torso.race : RaceDesc.IdToRace[parseInt(storage.torso.race)];
+		this.torso.color        = (storage.torso.col === undefined) ? this.torso.color : parseInt(storage.torso.col);
+		this.torso.hipSize.base = (storage.torso.hip === undefined) ? this.torso.hipSize.base : parseFloat(storage.torso.hip);
 	}
 	
 	if(storage.back) {
@@ -361,17 +361,17 @@ Body.prototype.FromStorage = function(storage) {
 	if(storage.arms) {
 		this.arms = new BodyPart();
 		var a = storage.arms;
-		this.arms.race  = RaceDesc.IdToRace[parseInt(a.race)]  || this.torso.race;
-		this.arms.color = parseInt(a.col)   || this.torso.color;
-		this.arms.count = parseInt(a.count) || 2;
+		this.arms.race  = (a.race === undefined) ? this.torso.race : RaceDesc.IdToRace[parseInt(a.race)];
+		this.arms.color = (a.col === undefined) ? this.torso.color : parseInt(a.col);
+		this.arms.count = (a.count === undefined) ? 2 : parseInt(a.count);
 	}
 	
 	if(storage.legs) {
 		this.legs = new BodyPart();
 		var a = storage.legs;
-		this.legs.race  = RaceDesc.IdToRace[parseInt(a.race)]  || this.torso.race;
-		this.legs.color = parseInt(a.col)   || this.torso.color;
-		this.legs.count = parseInt(a.count) || 2;
+		this.legs.race  = (a.race === undefined) ? this.torso.race : RaceDesc.IdToRace[parseInt(a.race)];
+		this.legs.color = (a.col === undefined) ? this.torso.color : parseInt(a.col);
+		this.legs.count = (a.count === undefined) ? 2 : parseInt(a.count);
 	}
 }
 
