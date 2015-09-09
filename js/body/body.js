@@ -57,17 +57,7 @@ function Body(ent) {
 	
 	// BODYPARTS
 	// Head
-	this.head = new BodyPart();
-	this.head.mouth = {
-		capacity     : new Stat(30),
-		tongue       : new BodyPart()
-	}
-	this.head.hair = new Hair();
-	this.head.eyes = new BodyPart();
-	this.head.eyes.count = new Stat(2);
-	this.head.ears = new BodyPart();
-	// Appendages (antenna etc)
-	this.head.appendages = new Array();
+	this.head = new Head();
 	
 	// Torso
 	this.torso         = new BodyPart();
@@ -97,10 +87,7 @@ function Body(ent) {
 
 
 Body.prototype.SetRace = function(race) {
-	this.head.race              = race;
-	this.head.mouth.tongue.race = race;
-	this.head.eyes.race         = race;
-	this.head.ears.race         = race;
+	this.head.SetRace(race);
 	this.torso.race             = race;
 	for(var i = 0; i < this.cock.length; i++)
 		this.cock[i].race = race;
@@ -111,10 +98,7 @@ Body.prototype.SetRace = function(race) {
 
 Body.prototype.NumAttributes = function(race) {
 	var sum = 0;
-	if(this.head.race == race)              sum++;
-	if(this.head.mouth.tongue.race == race) sum++;
-	if(this.head.eyes.race == race)         sum++;
-	if(this.head.ears.race == race)         sum++;
+	sum += this.head.NumAttributes(race);
 	if(this.torso.race == race)             sum++;
 	if(this.arms.race == race)              sum++;
 	if(this.legs.race == race)              sum++;
@@ -123,8 +107,6 @@ Body.prototype.NumAttributes = function(race) {
 	if(this.balls.race == race && this.balls.count.Get() > 0) sum++;
 	for(var i = 0; i < this.backSlots.length; i++)
 		if(this.backSlots[i].race == race) sum++;
-	for(var i = 0; i < this.head.appendages.length; i++)
-		if(this.head.appendages[i].race == race) sum++;
 	return sum;
 }
 
@@ -138,30 +120,8 @@ Body.prototype.ToStorage = function() {
 		fem    : this.femininity.base.toFixed(2)
 	};
 	
-	storage.head = {
-		race : this.head.race.id.toFixed(),
-		col  : this.head.color.toFixed()
-	};
-	storage.head.mouth = {
-		cap  : this.head.mouth.capacity.base.toFixed(2),
-		ton  : {race : this.head.mouth.tongue.race.id.toFixed(), col : this.head.mouth.tongue.color.toFixed()}
-	};
-	storage.head.hair = this.head.hair.ToStorage();
-	storage.head.eyes = {
-		race  : this.head.eyes.race.id.toFixed(),
-		col   : this.head.eyes.color.toFixed(),
-		count : this.head.eyes.count.base.toFixed()
-	};
-	storage.head.ears = {
-		race : this.head.ears.race.id.toFixed(),
-		col  : this.head.ears.color.toFixed()
-	};
-	if(this.head.appendages.length > 0) {
-		storage.head.app = new Array();
-		for(var i = 0; i < this.head.appendages.length; i++) {
-			storage.head.app.push(this.head.appendages[i].ToStorage());
-		}
-	}
+	storage.head = this.head.ToStorage();
+	
 	storage.torso = {
 		race : this.torso.race.id.toFixed(),
 		col  : this.torso.color.toFixed(),
@@ -259,37 +219,7 @@ Body.prototype.FromStorage = function(storage) {
 	this.weigth.base     = (storage.weigth === undefined) ? this.weigth.base : parseFloat(storage.weigth);
 	this.femininity.base = (storage.fem === undefined) ? this.femininity.base : parseFloat(storage.fem);
 	
-	if(storage.head) {
-		this.head.race   = (storage.head.race === undefined) ? this.head.race : RaceDesc.IdToRace[parseInt(storage.head.race)];
-		this.head.color  = (storage.head.col === undefined) ? this.head.color : parseInt(storage.head.col);
-		
-		if(storage.head.mouth) {
-			this.head.mouth.tongue.race       = (storage.head.mouth.ton.race === undefined) ? this.head.mouth.tongue.race : RaceDesc.IdToRace[parseInt(storage.head.mouth.ton.race)];
-			this.head.mouth.tongue.color      = (storage.head.mouth.ton.col === undefined) ? this.head.mouth.tongue.color : parseInt(storage.head.mouth.ton.col);
-			this.head.mouth.capacity.base     = (storage.head.mouth.cap === undefined) ? this.head.mouth.capacity.base : parseFloat(storage.head.mouth.cap);
-		}
-		if(storage.head.hair) {
-			this.head.hair.FromStorage(storage.head.hair);
-		}
-		if(storage.head.eyes) {
-			this.head.eyes.race        = (storage.head.eyes.race === undefined) ? this.head.eyes.race : RaceDesc.IdToRace[parseInt(storage.head.eyes.race)];
-			this.head.eyes.color       = (storage.head.eyes.col === undefined) ? this.head.eyes.color : parseInt(storage.head.eyes.col);
-			this.head.eyes.count.base  = (storage.head.eyes.count === undefined) ? this.head.eyes.count.base : parseInt(storage.head.eyes.count);
-		}
-		if(storage.head.ears) {
-			this.head.ears.race        = (storage.head.ears.race === undefined) ? this.head.ears.race : RaceDesc.IdToRace[parseInt(storage.head.ears.race)];
-			this.head.ears.color       = (storage.head.ears.col === undefined) ? this.head.ears.color : parseInt(storage.head.ears.col);
-		}
-		
-		if(storage.head.app) {
-			this.head.appendages = new Array();
-			for(var i = 0; i < storage.head.app.length; i++) {
-				var newApp = new Appendage();
-				newApp.FromStorage(storage.head.app[i]);
-				this.head.appendages.push(newApp);
-			}
-		}
-	}
+	this.head.FromStorage(storage.head);
 	
 	if(storage.torso) {
 		this.torso.race         = (storage.torso.race === undefined) ? this.torso.race : RaceDesc.IdToRace[parseInt(storage.torso.race)];

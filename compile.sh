@@ -30,6 +30,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/body/cock.js \
 	js/body/vagina.js \
 	js/body/hair.js \
+	js/body/head.js \
 	js/defbody.js \
 	js/pregnancy.js \
 	js/lactation.js \
