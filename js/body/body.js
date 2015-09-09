@@ -146,12 +146,7 @@ Body.prototype.ToStorage = function() {
 		cap  : this.head.mouth.capacity.base.toFixed(2),
 		ton  : {race : this.head.mouth.tongue.race.id.toFixed(), col : this.head.mouth.tongue.color.toFixed()}
 	};
-	storage.head.hair = {
-		race  : this.head.hair.race.id.toFixed(),
-		col   : this.head.hair.color.toFixed(),
-		len   : this.head.hair.length.base.toFixed(2),
-		style : this.head.hair.style.toFixed()
-	};
+	storage.head.hair = this.head.hair.ToStorage();
 	storage.head.eyes = {
 		race  : this.head.eyes.race.id.toFixed(),
 		col   : this.head.eyes.color.toFixed(),
@@ -274,10 +269,7 @@ Body.prototype.FromStorage = function(storage) {
 			this.head.mouth.capacity.base     = (storage.head.mouth.cap === undefined) ? this.head.mouth.capacity.base : parseFloat(storage.head.mouth.cap);
 		}
 		if(storage.head.hair) {
-			this.head.hair.race        = (storage.head.hair.race === undefined) ? this.head.hair.race : RaceDesc.IdToRace[parseInt(storage.head.hair.race)];
-			this.head.hair.color       = (storage.head.hair.col === undefined) ? this.head.hair.color : parseInt(storage.head.hair.col);
-			this.head.hair.length.base = (storage.head.hair.len === undefined) ? this.head.hair.length.base : parseInt(storage.head.hair.len);
-			this.head.hair.style       = (storage.head.hair.style === undefined) ? this.head.hair.style : parseInt(storage.head.hair.style);
+			this.head.hair.FromStorage(storage.head.hair);
 		}
 		if(storage.head.eyes) {
 			this.head.eyes.race        = (storage.head.eyes.race === undefined) ? this.head.eyes.race : RaceDesc.IdToRace[parseInt(storage.head.eyes.race)];

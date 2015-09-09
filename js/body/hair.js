@@ -15,6 +15,25 @@ function Hair(color) {
 }
 Hair.prototype = new BodyPart();
 Hair.prototype.constructor = Hair;
+
+Hair.prototype.ToStorage = function(full) {
+	var storage = {
+		race  : this.race.id.toFixed(),
+		col   : this.color.toFixed(),
+		len   : this.length.base.toFixed(2),
+		style : this.style.toFixed()
+	};
+	return storage;
+}
+
+Hair.prototype.FromStorage = function(storage) {
+	storage = storage || {};
+	this.race        = (storage.race === undefined) ? this.race : RaceDesc.IdToRace[parseInt(storage.race)];
+	this.color       = (storage.col === undefined) ? this.color : parseInt(storage.col);
+	this.length.base = (storage.len === undefined) ? this.length.base : parseInt(storage.len);
+	this.style       = (storage.style === undefined) ? this.style : parseInt(storage.style);
+}
+
 // TODO: Length and style
 Hair.prototype.Bald = function() {
 	return this.length.Get() == 0;
