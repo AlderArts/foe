@@ -1035,7 +1035,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				var status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(rigard.Access())
+				if(lei.flags["Met"] >= Lei.Met.EscortFinished)
 					status |= Quests.Type.Completed;
 				return status;
 			}
