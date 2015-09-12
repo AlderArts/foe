@@ -1638,7 +1638,6 @@ Scenes.Lei.SparWin = function() {
 		Text.Add("Lei regards you with a serious expression. <i>“It seems you can be reliable at times after all.”</i>", parse);
 		Text.NL();
 		Text.Add("You wait for a moment, but it seems he doesn’t plan to say anything else, as he walks past you and heads inside. Hardly a ringing endorsement, but you suspect you’ve done enough to make up for ", parse);
-		Text.NL();
 		if(lei.Annoyance() > 1)
 			Text.Add("at least some part of your mistakes on the last job.", parse);
 		else
