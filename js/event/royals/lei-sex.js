@@ -1,6 +1,33 @@
 
 Scenes.Lei.Sex = {};
 
+Scenes.Lei.Sex.Prompt = function(options) {
+	var parse = {
+		
+	};
+	
+	if(Scenes.Lei.Sex.PettingUnlocked()) {
+		options.push({ nameStr : "Petting",
+			tooltip : "Ask him to pet you.",
+			func : function() {
+				Scenes.Lei.Sex.Petting(true);
+			}, enabled : true
+		});
+	}
+	/* TODO
+	options.push({ nameStr : "name",
+		tooltip : "",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Add("", parse);
+			Text.Flush();
+		}, enabled : true
+	});
+	*/
+}
+
 Scenes.Lei.Sex.PettingUnlocked = function() {
 	return lei.flags["Met"] >= Lei.Met.CompletedTaskEscort;
 }

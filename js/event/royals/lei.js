@@ -53,6 +53,7 @@ function Lei(storage) {
 	
 	this.timeout = new Time();
 	this.taskTimer = new Time();
+	this.sparTimer = new Time();
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -106,6 +107,7 @@ Lei.prototype.Update = function(step) {
 	
 	this.timeout.Dec(step);
 	this.taskTimer.Dec(step);
+	this.sparTimer.Dec(step);
 }
 
 Lei.prototype.FromStorage = function(storage) {
@@ -114,6 +116,7 @@ Lei.prototype.FromStorage = function(storage) {
 	
 	this.timeout.FromStorage(storage.timeout);
 	this.taskTimer.FromStorage(storage.tt);
+	this.sparTimer.FromStorage(storage.st);
 	
 	// Load flags
 	this.LoadFlags(storage);
@@ -129,9 +132,77 @@ Lei.prototype.ToStorage = function() {
 	
 	storage.timeout = this.timeout.ToStorage();
 	storage.tt = this.taskTimer.ToStorage();
+	storage.st = this.sparTimer.ToStorage();
 	
 	return storage;
 }
+
+// COMBAT STATS
+// TODO: FIX STATS
+Lei.Spar = function(levelbonus) {
+	Entity.call(this);
+	// Character stats
+	this.name = "Lei";
+	
+	this.avatar.combat     = Images.lei;
+	
+	this.maxHp.base        = 460;
+	this.maxSp.base        = 200;
+	this.maxLust.base      = 220;
+	// Main stats
+	this.strength.base     = 35;
+	this.stamina.base      = 31;
+	this.dexterity.base    = 44;
+	this.intelligence.base = 28;
+	this.spirit.base       = 30;
+	this.libido.base       = 19;
+	this.charisma.base     = 35;
+	
+	this.level    = 15 + levelbonus;
+	this.sexlevel = 5;
+	
+	this.combatExp         = this.level + 5;
+	
+	this.body.DefMale();
+	this.body.height.base      = 181;
+	this.body.weigth.base      = 80;
+	this.body.head.hair.color  = Color.black;
+	this.body.head.hair.length.base = 20;
+	this.body.head.hair.style  = HairStyle.ponytail;
+	this.body.head.eyes.color  = Color.black;
+	
+	this.Butt().virgin = true;
+	
+	this.SetLevelBonus();
+	this.RestFull();
+}
+Lei.Spar.prototype = new Entity();
+Lei.Spar.prototype.constructor = Lei.Spar;
+
+Lei.Spar.prototype.Act = function(encounter, activeChar) {
+	// TODO: Very TEMP
+	Text.Add(this.name + " acts! Chop chop!");
+	Text.NL();
+	
+	// Pick a random target
+	var targets = this.GetPartyTarget(encounter, activeChar);
+	var t = this.GetSingleTarget(encounter, activeChar);
+
+	var choice = Math.random();
+	if(choice < 0.2)
+		Abilities.Attack.CastInternal(encounter, this, t);
+	else if(choice < 0.3 && Abilities.Physical.Kicksand.enabledCondition(encounter, this))
+		Abilities.Physical.Kicksand.Use(encounter, this, t);
+	else if(choice < 0.5 && Abilities.Physical.Bash.enabledCondition(encounter, this))
+		Abilities.Physical.Bash.Use(encounter, this, t);
+	else if(choice < 0.7 && Abilities.Physical.DirtyBlow.enabledCondition(encounter, this))
+		Abilities.Physical.DirtyBlow.Use(encounter, this, t);
+	else if(choice < 0.9 && Abilities.Physical.TAttack.enabledCondition(encounter, this))
+		Abilities.Physical.TAttack.Use(encounter, this, t);
+	else
+		Abilities.Attack.Use(encounter, this, t);
+}
+
 
 Scenes.Lei = {};
 
@@ -286,6 +357,27 @@ Scenes.Lei.InnPrompt = function() {
 			tooltip : "You want to ask him some things."
 		});
 		if(lei.flags["Talk"] & Lei.Talk.Skills) {
+			options.push({ nameStr : "Training",
+				func : function() {
+					Text.Clear();
+					Text.Add("You ask Lei if he can help you get stronger.", parse);
+					Text.NL();
+					if(player.level < 7)
+						Text.Add("<i>“There are many things I can teach you,”</i> he replies, <i>“though I am not sure how much you can learn.”</i>", parse);
+					else if(player.level < 13)
+						Text.Add("<i>“There are many things I can teach you,”</i> he replies, <i>“and I believe you can benefit from my instruction.”</i>", parse);
+					else if(player.level < 19)
+						Text.Add("<i>“You have come far since first I saw you,”</i> he remarks, <i>“still, I believe there are a few things I can yet show you.”</i>", parse);
+					else
+						Text.Add("<i>“Truly, you have grown strong already,”</i> he says, <i>“but perhaps we can help each other.”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“What would you like to do today?”</i>", parse);
+					Text.Flush();
+					
+					Scenes.Lei.SparPrompt();
+				}, enabled : true,
+				tooltip : "Ask him to help you improve your skills."
+			});
 			options.push({ nameStr : "Jobs",
 				func : Scenes.Lei.Tasks.TaskPrompt, enabled : true,
 				tooltip : "Ask Lei if he has any jobs you could do."
@@ -1443,4 +1535,196 @@ Scenes.Lei.SexPrompt = function() {
 	});
 }
 
+Scenes.Lei.SparPrompt = function() {
+	var parse = {
+		
+	};
+	
+	var options = new Array();
+	options.push({ nameStr : "Spar",
+		tooltip : "Ask Lei to spar with you.",
+		func : function() {
+			Text.Clear();
+			Text.Add("You ask Lei if he would like to spar.", parse);
+			Text.NL();
+			if(lei.sparTimer.Expired()) { //If haven't sparred today
+				lei.sparTimer = new Time(0,0,0,20,0);
+				
+				Text.Add("Lei nods. <i>“Of course. It’s important to keep up with practice.”</i> He motions for you to follow, and leads you to the stables behind the inn. In front of the stalls is a sizable enclosure for outfitting horses and unloading wagons. <i>“It’s a little cramped, but it will serve.”</i>", parse);
+				Text.NL();
+				Text.Add("Lei does a few stretches before turning to face you.", parse);
+				Text.NL();
+				
+				party.SaveActiveParty();
+				
+				var levelbonus = 0;
+				
+				if(levelbonus > 15) {
+					Text.Add("<i>“Come. You are powerful enough that it will be good practice for us to fight one on one.”</i>", parse);
+					
+					levelbonus = 8;
+					
+					party.ClearActiveParty();
+					party.AddMember(player);
+				}
+				else if(party.Num() > 1) {
+					if(player.level > 10) {
+						parse["partycount"] = Text.NumToText(party.Num());
+						Text.Add("<i>“All of you come face me. The [partycount] of you against me should be reasonable odds.”</i>", parse);
+						levelbonus = 5;
+					}
+					else {
+						parse["bothAll"] = party.Num() == 2 ? "both" : "all";
+						Text.Add("<i>“Hm,”</i> Lei looks you and your companions over, <i>“I feel I will have to hold back to have this be any sort of practice for any of us. So be it - [bothAll] of you come at me at once!”</i>", parse);
+					}
+				}
+				else {
+					Text.Add("Lei frowns. <i>“It will be a tough fight for you alone, but perhaps you can still learn something. Come!”</i>", parse);
+					if(player.level >= 12)
+						levelbonus = 3;
+				}
+				Text.Flush();
+				
+				Gui.NextPrompt(function() {
+					var enemy = new Party();
+					var l = new Lei.Spar(levelbonus);
+					enemy.AddMember(l);
+					var enc = new Encounter(enemy);
+					enc.lei = l;
+					enc.canRun = false;
+					enc.onLoss = Scenes.Lei.SparLoss;
+					enc.onVictory = Scenes.Lei.SparWin;
+					
+					enc.Start();
+				});
+			}
+			else {
+				Text.Add("<i>“We have already fought today,”</i> Lei replies. <i>“Once per day is enough.”</i>", parse);
+				Text.NL();
+				Text.Add("That seems a little arbitrary, but you can see he’s not going to budge on this.", parse);
+				Text.Flush();
+			}
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“Never stop improving.”</i>", parse);
+		Text.Flush();
+		
+		Scenes.Lei.InnPrompt();
+	});
+}
 
+Scenes.Lei.SparWin = function() {
+	var enc = this;
+	
+	SetGameState(GameState.Event);
+	enc.Cleanup();
+	Text.Clear();
+	
+	var parse = {
+		
+	};
+	
+	for(var i = 0; i < party.Num(); ++i) {
+		party.Get(i).AddExp(enc.lei.combatExp);
+	}
+	
+	world.TimeStep({hour: 1});
+	
+	party.LoadActiveParty();
+	
+	if(lei.Annoyance() > 0) {
+		Text.Add("Lei regards you with a serious expression. <i>“It seems you can be reliable at times after all.”</i>", parse);
+		Text.NL();
+		Text.Add("You wait for a moment, but it seems he doesn’t plan to say anything else, as he walks past you and heads inside. Hardly a ringing endorsement, but you suspect you’ve done enough to make up for ", parse);
+		Text.NL();
+		if(lei.Annoyance() > 1)
+			Text.Add("at least some part of your mistakes on the last job.", parse);
+		else
+			Text.Add("your mistakes on the last job.", parse);
+		Text.Flush();
+		
+		lei.annoyance.DecreaseStat(0, 1);
+		
+		Scenes.Lei.InnPrompt();
+	}
+	else {
+		Text.Add("Lei grins, looking bruised and winded, but clearly pleased. <i>“Very well done!”</i> he says. <i>“It is rare for me to get such good practice.”</i>", parse);
+		Text.NL();
+		if(lei.SexOpen()) {
+			parse["hair"] = player.Hair().Short();
+			Text.Add("He holds your eyes for a long moment, his smile slowly growing wider. You are the one to look away first, and Lei moves towards you, closing the distance in a few strides. He runs his hand down your [hair] before cupping your chin in his palm, turning your face so your eyes meet.", parse);
+			Text.NL();
+			if(lei.flags["Met"] >= Lei.Met.CompletedTaskEscort) {
+				Text.Add("<i>“Did you want a reward for your performance?”</i> he asks.", parse);
+				Text.Flush();
+				
+				//[name]
+				var options = new Array();
+				
+				Scenes.Lei.Sex.Prompt(options);
+				
+				Gui.SetButtonsFromList(options, true, function() {
+					Text.NL();
+					Text.Add("You look up at Lei with a smile of your own, and tell him that you’re happy to beat him for free any time.", parse);
+					Text.NL();
+					Text.Add("Lei bursts out laughing, releasing your chin. <i>“I like that spirit about you. Very well, another time then.”</i>", parse);
+					Text.Flush();
+					
+					Scenes.Lei.InnPrompt();
+				});
+			}
+			else {
+				Text.Add("<i>“You have my interest, but you will have to do something more before I can be certain of you.”</i> Lei says, his voice low. He plants a soft kiss at the corner of your mouth before tracing his lips up your cheek and gently nibbling on your ear. <i>“Then, we can have a lot more fun.”</i>", parse);
+				Text.NL();
+				Text.Add("It seems you’ll have to prove yourself at a larger job before he’ll take this any further.", parse);
+				Text.Flush();
+				
+				Scenes.Lei.InnPrompt();
+			}
+		}
+		else {
+			Text.Add("You suppose that counts as high praise coming from him, and he certainly seems happy with you.", parse);
+			Text.Flush();
+			
+			Scenes.Lei.InnPrompt();
+		}
+	}
+}
+
+Scenes.Lei.SparLoss = function() {
+	var enc = this;
+	
+	SetGameState(GameState.Event);
+	enc.Cleanup();
+	Text.Clear();
+	
+	var parse = {
+		
+	};
+	
+	for(var i = 0; i < party.Num(); ++i)
+		party.Get(i).AddExp(5);
+	
+	if(enc.lei.HPLevel() >= 0.5) {
+		Text.Add("Lei regards you calmly. <i>“I hope you have learned from that. You will need to improve to make this useful for me.”</i>", parse);
+		Text.NL();
+		Text.Add("You tell him that you have. You’ll make this quite interesting for him before too long!", parse);
+		Text.NL();
+		Text.Add("Unfortunately, your words are less impressive than they could be as you’re gingerly rubbing at a bruise on your butt.", parse);
+	}
+	else {
+		Text.Add("Lei shows you just a hint of a smile. <i>“Not bad. You’ll have to do better to make this truly interesting, but you got close.”</i>", parse);
+		Text.NL();
+		Text.Add("You give him a small smile in return. You’ll get him next time!", parse);
+		lei.annoyance.DecreaseStat(0, 0.5);
+	}
+	Text.Flush();
+	
+	world.TimeStep({hour: 1});
+	
+	party.LoadActiveParty();
+	
+	Scenes.Lei.InnPrompt();
+}

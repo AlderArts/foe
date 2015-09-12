@@ -73,7 +73,6 @@ Encounter.prototype.PrepCombat = function() {
 			var e = party.members[i];
 			// Ressurect fallen
 			if(e.curHp < 1) e.curHp = 1;
-			if(e.curSp < 1) e.curSp = 1;
 		}
 		PrintDefaultOptions();
 	});

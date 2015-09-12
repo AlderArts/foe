@@ -354,6 +354,9 @@ Scenes.Miranda.SparLoss = function() {
 	};
 	
 	Text.Clear();
+	
+	player.AddExp(3);
+	
 	Text.Add("<i>“Not a surprising conclusion,”</i> Miranda boasts, wiping the sweat off her brow. <i>“Now… to the victor goes the spoils, no?”</i> A smile is playing on her lips as she awaits your response.", parse);
 	Text.Flush();
 	
@@ -375,6 +378,9 @@ Scenes.Miranda.SparWin = function() {
 	};
 	
 	Text.Clear();
+	
+	player.AddExp(10);
+	
 	Text.Add("Miranda looks baffled as she falls to her knees, breathing heavily.", parse);
 	Text.NL();
 	Text.Add("<i>“N-not bad,”</i> the dobie gasps, struggling back to her feet. <i>“Guess I underestimated you. I’ll have to get serious next time.”</i> She tries to play it down, but both of you know that you beat her fair and square.", parse);

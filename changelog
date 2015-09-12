@@ -10,8 +10,10 @@ Version 0.4k
 * Asche's magic box now counts toward purchases for tasks
 * Added quest log entries for Vaughn's second and third task
 * Added Lei's first task + reward (you need to have talked to him about bodyguarding and offered first to get the sexy reward)
+* Added a sparring option to Lei. He's quite tough
 * Did some body format restructuring, making the code more structured
 * Fixed a bug which would remove your naga body on loading a save
+* Sparring against Miranda actually gives you a slight xp boost now
 
 --------------------------------------------
              PREVIOUS VERSIONS

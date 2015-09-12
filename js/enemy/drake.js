@@ -88,12 +88,6 @@ Drake.prototype.Act = function(encounter, activeChar) {
 	var targets = this.GetPartyTarget(encounter, activeChar);
 	var t = this.GetSingleTarget(encounter, activeChar);
 
-	var parseVars = {
-		name   : this.name,
-		hisher : this.hisher(),
-		tName  : t.name
-	};
-
 	var choice = Math.random();
 	if(choice < 0.2)
 		Abilities.Attack.CastInternal(encounter, this, t);
