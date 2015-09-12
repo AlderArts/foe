@@ -1559,7 +1559,7 @@ Scenes.Lei.SparPrompt = function() {
 				
 				var levelbonus = 0;
 				
-				if(levelbonus > 15) {
+				if(player.level > 15) {
 					Text.Add("<i>“Come. You are powerful enough that it will be good practice for us to fight one on one.”</i>", parse);
 					
 					levelbonus = 8;
