@@ -5,6 +5,14 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.4l
+------------
+* 
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.4k
 ------------
 * Asche's magic box now counts toward purchases for tasks
@@ -14,10 +22,6 @@ Version 0.4k
 * Did some body format restructuring, making the code more structured
 * Fixed a bug which would remove your naga body on loading a save
 * Sparring against Miranda actually gives you a slight xp boost now
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.4j
 ------------
