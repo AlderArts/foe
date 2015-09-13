@@ -20,25 +20,26 @@ function Halloween() {
 }
 
 Halloween.Flags = {
-	Elder : 1
+	Elder : 1,
+	Kiai : 2,
+	Werewolf : 4
 };
 
 Halloween.prototype.Restore = function() {
 	// Restore player/oarty
 	player.FromStorage(this.player);
 	party.FromStorage(this.party);
-	
-	world.TimeStep({hour: 8});
-	
-	party.location = world.loc.Plains.Nomads.Tent;
-	
-	party.RestFull();
+}
+
+Halloween.prototype.Werewolf = function() {
+	return this.flags & Halloween.Flags.Werewolf;
 }
 
 Halloween.Loc = {
 	Tent : new Event("Tent?"),
 	Camp : new Event("Nomads' camp?"),
-	Path : new Event("Beaten path")
+	Path : new Event("Beaten path"),
+	Graveyard : new Event("Graveyard")
 };
 
 // gameCache.flags["HW"]
@@ -309,7 +310,7 @@ Scenes.Halloween.EnterDream = function(first) {
 		parse["fem"] = player.Gender() == Gender.male ? "thong" : "bra and panties";
 		Text.Add("Hey, did you do something you’ll regret later? Where’s everyone? Usually there’s always some kind of bustle in the nomads’ camp, but all you get from beyond the canvas confines of your tent is deathly silence. And why’s there this skimpy-looking costume lying on the ground beside you? Shrugging, you pick it up - looks like a leather [fem] and a tattered cloak, all in garish shades of black. You must’ve gotten into some real kinky stuff last night… just what’s going on here?", parse);
 		Text.NL();
-		Text.Add("Taking a deep breath and squaring your shoulders, you peer out of the tent flaps, and blink at the scene that meets your eyes. It’s still the nomad’s camp after a fashion, it’s just that... well, everything is spookier, for lack of a better word to describe it. The light of the fire pit is still visible in the distance against a thick carpet of milky-white fog, maybe that should be your first stop once you get started.", parse);
+		Text.Add("Taking a deep breath and squaring your shoulders, you peer out of the tent flaps, and blink at the scene that meets your eyes. It’s still the nomad’s camp after a fashion, it’s just that… well, everything is spookier, for lack of a better word to describe it. The light of the fire pit is still visible in the distance against a thick carpet of milky-white fog, maybe that should be your first stop once you get started.", parse);
 		Text.NL();
 		Text.Add("Maybe you’ll stay in here a little while longer, though. Gather yourself, maybe get dressed before venturing out into whatever you’ve managed to land yourself in this time…", parse);
 	}
@@ -418,7 +419,7 @@ Halloween.Loc.Camp.events.push(new Link(
 			Text.NL();
 			Text.Add("<i>“I’m afraid there isn’t much I can say about this place, young one. As old as I am, I have only been outside this camp a handful of times.”</i>", parse);
 			Text.NL();
-			Text.Add("You see... still, if he can tell you anything, that would be much appreciated. You have to try and find a way back where you belong.", parse);
+			Text.Add("You see… still, if he can tell you anything, that would be much appreciated. You have to try and find a way back where you belong.", parse);
 			Text.NL();
 			Text.Add("<i>“There is a legend that says that the ravens flock together where reality is at its weakest. Perhaps if you’re trying to go home, it would be worth a shot trying to find this place.”</i>", parse);
 			Text.NL();
@@ -507,6 +508,13 @@ Halloween.Loc.Path.links.push(new Link(
 		MoveToLocation(Halloween.Loc.Camp);
 	}
 ));
+Halloween.Loc.Path.links.push(new Link(
+	"Graveyard", true, true,
+	null,
+	function() {
+		MoveToLocation(Halloween.Loc.Graveyard);
+	}
+));
 /* TODO Ronnie
 Halloween.Loc.Path.events.push(new Link(
 	"", true, true,
@@ -539,7 +547,7 @@ Halloween.Loc.Path.events.push(new Link(
 				Text.Clear();
 				Text.Add("Yeah, you’re getting out of here. One, two, three more steps, and a light suddenly grows, engulfing the world around you, blotting out even the ravens’ cawing…", parse);
 				Text.NL();
-				Text.Add("…The last thing you remember is a single black raven feather floating down in a world of white...", parse);
+				Text.Add("…The last thing you remember is a single black raven feather floating down in a world of white…", parse);
 				Text.Flush();
 				
 				Gui.NextPrompt(function() {
@@ -561,6 +569,315 @@ Halloween.Loc.Path.events.push(new Link(
 	}
 ));
 
+Halloween.Loc.Graveyard.description = function() {
+	Text.Add("The graveyard you’re standing in right now is appropriately grim. Surrounded by a low, moss-covered stone wall, the only sign of life in this forsaken place are the handful of ravens perched on the remains of old, scraggly trees - the branches bare, the wood dead and dry. They caw angrily at you, then flap off to join the other ravens to wherever they’re going.");
+	Text.NL();
+	Text.Add("The wall aside, the construction of this graveyard is quite haphazard. Tombstones and graves lie hither and thither, some of them with freshly turned earth before them. Others have bouquets set before them, but the flowers are long dead and rotting. A few lamps would have provided illumination, no one’s been here to light them, so all you have to go on by is moonlight.");
+	Text.NL();
+	Text.Add("Deep in the heart of the graveyard lies a sinister-looking mausoleum. You can see a faint light flickering from within. A stone path leads to a nearby chapel, although there’s not much of it left.");
+}
+
+Halloween.Loc.Graveyard.links.push(new Link(
+	"Path", true, true,
+	null,
+	function() {
+		MoveToLocation(Halloween.Loc.Path);
+	}
+));
+
+/* TODO
+Halloween.Loc.Graveyard.events.push(new Link(
+	"", true, true,
+	null,
+	function() {
+		
+	}
+));
+
+Halloween.Loc.Graveyard.enc = new EncounterTable();
+Halloween.Loc.Graveyard.enc.AddEnc(function() {
+	return function() {
+		
+	};
+}, 1.0, function() { return true; });
+*/
+
+//TODO LINK
+//TODO //Have Kiai show up as a random encounter when entering the graveyard from any direction.
+Scenes.Halloween.Kiai = function() {
+	var parse = {
+		name : kiakai.name
+	};
+	var gender = kiakai.flags["InitialGender"];
+	parse = kiakai.ParserPronouns(parse, "", gender);
+	
+	var werewolf = Scenes.Halloween.HW.Werewolf();
+	
+	var first = !(Scenes.Halloween.HW.flags & Halloween.Flags.Kiai);
+	Scenes.Halloween.HW.flags |= Halloween.Flags.Kiai;
+	
+	Text.Clear();
+	if(first) {
+		Text.Add("Pacing through a graveyard tends to be disturbing even during the day, but nighttime turns it downright sinister, especially with a graveyard as run-down as this one. It’s clear that the grounds have been neglected for some time - out of the corner of your eye, you spy an abandoned shack by the wall that might have once housed a groundskeeper, but nothing lives there now save for spiders and the occasional bat. Ravens perched on tombstones croak at you as you move down the path through the graveyard, their beady little eyes watching every step of your progress.", parse);
+		Text.NL();
+		Text.Add("Then, without warning, they take flight, rising into the moonlit sky in a dark cloud of wings and feathers. The sudden alarm puts you on guard - what could have startled the birds so?", parse);
+		Text.NL();
+		Text.Add("The answer comes not from around you, but rather, <i>under</i> you. It begins as a soft scrabbling at first, then grows louder and louder until the earth atop the graves parts to reveal hands. And attached to them are arms, which are attached to shoulders, which are attached to… well, you get the point. One by one, elven zombies emerge from the cold, sodden earth, what looks like tens, no, hundreds of them possessed of an unearthly hunger…", parse);
+		Text.NL();
+		Text.Add("…Except, well, they don’t really <i>look</i> like zombies. The stitches are drawn on their skin in pencil and crayon, and what you originally took for the discoloration of rot is just a smattering of paint. Are you really in such a low-budget production that you can’t even get a proper cast of zombies to attack you? At least some expense could have gone towards getting some tattered rags for them to wear, lend the scene some ambience, but no… apparently, you’ve bummed out on getting a lazy writer and an equally worthless production cast, leading to every single one of the elf zombies being completely and utterly naked.", parse);
+		if(player.Slut() >= 50)
+			Text.Add(" Or maybe that’s not such a bad thing, when you think about it a little more…", parse);
+		Text.NL();
+		Text.Add("As one, the elven zombies take up a bone-chilling moan as they begin shambling towards you, arms outstretched and reaching for you in the classical pose of the living dead.", parse);
+		Text.NL();
+		Text.Add("<i>“…Sex…”</i>", parse);
+		Text.NL();
+		if(player.Slut() >= 50) {
+			Text.Add("Hey, that doesn’t sound like too bad of an idea, to be honest. It’s not as if they actually <i>look</i> dead, anyway - in fact, some of the elves are quite sexy, and the others… well, you can’t get everything you want in a gangbang. Or maybe you can, but there aren’t enough holes in you to take them all.", parse);
+			Text.NL();
+			Text.Add("Still, maybe this would be better somewhere more comfortable. You vaguely remember hearing somewhere that having fun in a graveyard leads to all sorts of things growing in all sorts of places, and that’d put a crimp on future fun.", parse);
+		}
+		else {
+			Text.Add("All right, now <i>that’s</i> disturbing. Zombies moaning and groaning in hunger for the flesh of the living is one thing, but them moaning and groaning for an entirely different sort of hunger is just <i>wrong</i>, no matter how you slice it.", parse);
+		}
+		Text.NL();
+		Text.Add("Try as you might, though, you can’t seem to find a way out of the circle of zombies that’s erupted all around you; while they might be slow, there’re simply so many of them that evading all the zombies might be problematic.", parse);
+		Text.NL();
+		Text.Add("To make things worse, at their head is [name]. You’d recognize [himher] anywhere, the poor elf’s violet eyes soulless and empty, devoid of personality, thrall to the hunger that animates [hisher] husk of a body.", parse);
+		Text.NL();
+		Text.Add("<i>“…Brains…”</i>", parse);
+		Text.NL();
+		Text.Add("Well, it’s nice to know that <i>someone</i> has [hisher] priorities right.", parse);
+		Text.NL();
+		Text.Add("<i>“…Fuck out… brains…”</i>", parse);
+		Text.NL();
+		parse["gen"] = gender == Gender.male ? "massive boner" : "oozing cunt and engorged clit";
+		parse["w"] = werewolf ? " even with your werewolf strength" : "";
+		Text.Add("Oh-kay. Well, that’s nice. Judging by the [gen] [name]’s sporting, looks like [heshe] means it, too. Right - with the zombies closing in and looking to force you into sating their uh, hunger, you’d probably be best looking for a way out of this. It’s clear that there’s too many of them for you to fight directly[w], so you’d better actually use your brains for once.", parse);
+	}
+	else {
+		Text.Add("As you enter the graveyard once more, you look around cautiously for signs of zombie elves. Right, no sign of the lustful undead in sight - maybe you can get to where you’re going without -", parse);
+		Text.NL();
+		Text.Add("<i>“…Fuck?”</i>", parse);
+		Text.NL();
+		Text.Add("Oh, fuck. How <i>do</i> the things manage to get so close without you noticing? With all the slow shambling they do, you’d have imagined you’d have heard them coming a long way away, but nooooo…", parse);
+		Text.NL();
+		Text.Add("As you look on, more and more of those damned elf zombies are popping up from places you thought impossible - under the eaves of old buildings, behind trees, from behind low gravestones and more. Why, it’s almost as if they were waiting for you to return and render yourself vulnerable…", parse);
+		Text.NL();
+		Text.Add("Ugh. Fine. How are you going to get rid of these pests this time?", parse);
+	}
+	Text.Flush();
+	
+	//[Run][Item]
+	var options = new Array();
+	options.push({ nameStr : "Run",
+		tooltip : "Come on, they’re slow, shambling things. If you can’t outrun them, you need to cut back on the carbs.",
+		func : Scenes.Halloween.KiaiRun, enabled : true
+	});
+	options.push({ nameStr : "Item",
+		tooltip : "Maybe there’s something on you that could help.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Right, right. You rummage about in your possessions, seeing if there’s anything you could use in order to get you out of this bind. Alternatively, if you don’t have anything on you to your liking, there are other things you could do…", parse);
+			Text.Flush();
+			
+			//[Stake][Holy Water][Garlic][Shades][Dog Bone][Run]
+			var options = new Array();
+			options.push({ nameStr : "Stake",
+				tooltip : "Put the weapon you received to good use!",
+				func : function() {
+					Text.Clear();
+					Text.Add("Right, the stake! You draw out the stake the Elder gave you, complete with its rubber fixing, and advance upon the nearest zombie - a rather buxom specimen of a young elf woman, had she not been a zombie. Gathering all your strength, you thrust your blessed weapon straight for the vile creature’s heart -", parse);
+					Text.NL();
+					Text.Add("- And end up slightly embarrassed as it catches in the zombie’s cleavage, a perfect fit for the length and breadth of your stake. Grunting, you do your best to extricate it from its current predicament, but with not much success; all you manage to do is to wiggle your “stake” around quite a bit, eliciting whorish moans from the zombie in question. Seeing as how they’re missing out on a good bit of fun, that only encourages the other zombies to redouble their pace, practically creeping up on you while you continue your efforts to retrieve your weapon.", parse);
+					Text.NL();
+					Text.Add("Alas, it dawns on you too late that stakes are supposed to be used against vampires, not zombies. Sure, they’re both undead, but that’s like saying that cats are dogs because they both walk on all fours.", parse);
+					Scenes.Halloween.KiaiGangrape();
+				}, enabled : true
+			});
+			if(party.Inv().QueryNum(Items.Halloween.HolyWater)) {
+				options.push({ nameStr : "Holy Water",
+					tooltip : "Holy water’s supposed to be good against the undead, isn’t it?",
+					func : function() {
+						Text.Clear();
+						Text.Add("Rummaging about in your possessions, you feel your fingers close about the canteen of holy water in your possession. Or is that “holee”? When the walking dead are advancing upon you, who cares? Unscrewing the top off the canteen, you hurl the holy water at the nearest zombie at hand.", parse);
+						Text.NL();
+						Text.Add("What happens next wasn’t exactly what you expected of water: the moment the clear liquid comes into contact with the zombie in question, it erupts in a sheen of deep blue flames.", parse);
+						Text.NL();
+						Text.Add("<i>“… Melting! Melting!”</i> And sure enough, the zombie <i>is</i> melting, leaving little more than a small puddle of bubbling goo where it once stood. Well, that was disturbing - or downright comical, depending on how you look at it. It also seems that the few hundred other zombies immediately surrounding you found the sight as morbid as you did, for they now begin swarming you with renewed determination - and oh, hey, look! You only had one canteen of “Holee water”, and you just spent it all on that one zombie!", parse);
+						Text.NL();
+						Text.Add("Well, that was pretty silly, you can’t help but think as the zombies close in on you. Sure, if there’d been just that one zombie you might’ve gotten off scot-free, but against a whole horde?", parse);
+						Text.NL();
+						Text.Add("Naaaah. Oh well, it’s something to remember for next time.", parse);
+						Scenes.Halloween.KiaiGangrape();
+					}, enabled : true
+				});
+			}
+			if(party.Inv().QueryNum(Items.Halloween.Garlic)) {
+				options.push({ nameStr : "Garlic",
+					tooltip : "Maybe the garlic can help you here. It repels evil, right?",
+					func : function() {
+						Text.Clear();
+						Text.Add("Thinking quickly, you draw the string of garlic out from the pack and hang it around your neck. While its reputation for warding off evil is most commonly associated with vampires, you’re pretty sure it extends to zombies as well - or so you hope. The string of bulbs isn’t just heavy - it stinks to high heaven with you just wearing it, and already you can see the zombies nearest to you shrinking back from the overpowering stench.", parse);
+						Text.NL();
+						Text.Add("<i>“…Ew…”</i>", parse);
+						Text.NL();
+						Text.Add("<i>“Stinks…”</i>", parse);
+						Text.NL();
+						Text.Add("And by the looks of it, a potent libido-killer, too. The formerly sex-crazed fiends can’t back away from you quickly enough, boners going limp and cunts drying out as they scramble over each other in their haste to get away from you. If nothing else, this proves that bad smells are a certain turn-off - not that anyone with a smidgen of common sense needed that proven. Within a handful of minutes, the zombies are gone, turned neatly away by the power of root vegetables.", parse);
+						Text.NL();
+						Text.Add("That seems to handle that, then. You’re not going to spend the rest of the night with this thing around your neck, so you slip it off and replace it in your bag - but nevertheless keep it within easy reach if the zombies ever decide to get frisky again.", parse);
+						Text.Flush();
+						
+						Gui.NextPrompt();
+					}, enabled : true
+				});
+			}
+			if(party.Inv().QueryNum(Items.Halloween.Shades)) {
+				options.push({ nameStr : "Shades",
+					tooltip : "The shades! You're not sure how they will work against the zombies, but perhaps it's time to try your luck...",
+					func : function() {
+						Text.Clear();
+						Text.Add("You slip on the shades, and instantly feel cooler. About twenty percent cooler, to be exact. Zombies are so dumb that if you can’t see them, they think they can’t see you… that’s how the invisibility charm works, right?", parse);
+						Text.NL();
+						Text.Add("It works. Or at least, it seems to work. Instead of all their moaning and wobbling about, every single zombie in the graveyard suddenly stands stiffly stock-still, as if suddenly possessed by some dread force. Great, you can deal with that, so long as they’re not trying to violate you.", parse);
+						Text.NL();
+						Text.Add("You take a step back, and your breath catches in your throat as every single zombie on the cold earth takes a step back. A step forward, and so do they follow. A few more experimental movements later, and you’re pretty sure that so long as you keep these things on, the zombies are compelled to mirror your every movement. Now that’s something that you weren’t told… although it does give you an idea. Still a little unsure about this whole thing - you know, just in case the zombies are trying to lull you into a false sense of security with their behavior - you break into the first steps of a dance number.", parse);
+						Text.NL();
+						Text.Add("Against all common sense, it works. It really works. As one, the elven zombies act as your literal horde of backup dancers, and even better, a horde of backup dancers that won’t complain if you miss a beat or two. Or twenty, for that matter. Arms swinging, head swaying, you start towards the cemetery's exit, each and every one of the naked elf zombies falling in position behind you; you can’t help but wonder just what someone actually seeing you at this point would think. Sure, whether you’re actually any <i>good</i> at your improvised dance steps is another matter, but the fact that you have a horde of stepping, swinging zombie elf dancers in your wake should earn you some points, right?", parse);
+						Text.NL();
+						Text.Add("Out the cemetery gates, and onto the beaten path. When you reach the crossroads, you stop, and let the dancing horde of zombies tromp on their merry way to who-knows-where, you don’t know. So long as they’re not in your hair anymore - and they’re <i>probably</i> not heading in the direction of the camp - you couldn’t care where they ended up. Still dancing and shaking away, the zombies recede into the mists; the last you see of them is zombie [name] looking back and giving you a wink from [hisher] “rotting” face, before the lot is gone.", parse);
+						Text.NL();
+						Text.Add("Now <i>that</i> was a thriller.", parse);
+						Text.NL();
+						Text.Add("All right, enough play, time to get back to work. Once you’re absolutely sure the zombies aren’t going to be coming back, you slip off the shades and return to the now zombie-free cemetery to ponder your next move.", parse);
+						Text.Flush();
+						
+						Gui.NextPrompt();
+					}, enabled : true
+				});
+			}
+			if(party.Inv().QueryNum(Items.Halloween.SqueakyToy)) {
+				options.push({ nameStr : "Dog Bone",
+					tooltip : "Do zombies like to play fetch?",
+					func : function() {
+						Text.Clear();
+						Text.Add("Picking out the squeaky toy bone from your possessions, you brandish it aloft and press on it a few times. Ringing in the emptiness of the moonlit night, the squeaky noise sure gets the attention of every single zombie in the cemetery. Moaning angrily, the elf zombies redouble their efforts to get to you; you sure caught their attention well enough.", parse);
+						Text.NL();
+						Text.Add("All right, then. Straining, you wind back your arm and give the bone a good, hefty throw, sending the squeaky toy arcing through the air where it lands in the long grass amongst the headstones. However, the zombies seem less interested in the squeaky bone toy, than they do in you.", parse);
+						Text.NL();
+						Text.Add("You know, maybe that wasn’t the best of ideas. Zombies aren’t especially known for their love of playing fetch.", parse);
+						Text.NL();
+						Text.Add("Those just happen to be your last thoughts before the first of the shamblers sneaks up on you and lunges with arms outstretched, followed by five, ten, fifteen of its undead brethren.", parse);
+						Scenes.Halloween.KiaiGangrape();
+					}, enabled : true
+				});
+			}
+			options.push({ nameStr : "Run",
+				tooltip : "Uhh... on second thought, just run away.",
+				func : Scenes.Halloween.KiaiRun, enabled : true
+			});
+			Gui.SetButtonsFromList(options, false, null);
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Halloween.KiaiRun = function() {
+	var parse = {
+		
+	};
+	var werewolf = Scenes.Halloween.HW.Werewolf();
+	
+	Text.Clear();
+	Text.Add("Oh, come on - this particular brand of zombie isn’t particularly fast, and it’s not as if you’re <i>completely</i> surrounded yet. Quickly, you look for an opening in the elven undead closing in on you, and make a run for it.", parse);
+	Text.NL();
+	parse["w"] = werewolf ? ", especially when you move that quickly on all fours" : "";
+	Text.Add("As you expected, the slow-witted and bodied things don’t manage to catch up with you[w]. A few of them make a grab for you as you barrel by, but they’re too slow and you easily push them out of the way, breaking through the circle of zombies about you.", parse);
+	Text.NL();
+	Text.Add("It’s only when you’re sure that you’re in the clear that you slow down to catch your breath and look behind you. The elf zombies are still milling about amongst the gravestones, but at least they aren’t actively pursuing you anymore. They’re still down there, though, so it’s more than likely you’ll have to deal with them again at some point if you do head down amongst the headstones again later on.", parse);
+	Text.Flush();
+	
+	var dest = Halloween.Loc.Path;
+	
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		dest = Halloween.Loc.Path;
+	}, 1.0, function() { return true; });
+	/* TODO #randomly move PC to the mausoleum, burnt chapel or beaten path.
+	scenes.AddEnc(function() {
+		dest = Halloween.Loc.Mausoleum;
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		dest = Halloween.Loc.Chapel;
+	}, 1.0, function() { return true; });
+	*/
+	scenes.Get();
+	
+	Gui.NextPrompt(function() {
+		party.location = dest;
+		PrintDefaultOptions();
+	});
+}
+
+Scenes.Halloween.KiaiGangrape = function() {
+	var parse = {
+		name : kiakai.name
+	};
+	var gender = kiakai.flags["InitialGender"];
+	parse = kiakai.ParserPronouns(parse, "", gender);
+	parse = player.ParserTags(parse);
+	
+	var vag = player.FirstVag();
+	
+	var werewolf = Scenes.Halloween.HW.Werewolf();
+	
+	Text.NL();
+	parse["w"] = werewolf ? " despite your werewolf strength" : "";
+	parse["w2"] = werewolf ? "" : ", easily ripping apart your stripperiffic costume with their cold fingers";
+	Text.Add("The first of the zombies comes into contact with you, and you shiver. The whole scene seems so comical - what with the zombies and their penciled-on stitches and makeup discoloration - but the fact that their numerous elfin hands are grabbing at your body, dragging you down to the ground[w] with their sheer numbers. You fight back as best as you can, but despite their individual frailness and lithe forms, the zombie elves easily overpower you and hold you prone[w2].", parse);
+	Text.NL();
+	Text.Add("<i>“…So horny… must fuck…”</i>", parse);
+	Text.NL();
+	Text.Add("Like water parting before a ship’s prow, the zombie horde flows apart to admit an undead [name], who promptly shambles up to you and comes to a stop at your [feet]. Now that you can see [himher] a little more clearly, the elf is actually…", parse);
+	Text.NL();
+	Text.Add("…Grinning? That’s not quite like -", parse);
+	Text.NL();
+	parse["l"] = player.HasLegs() ? " and force your legs apart" : "";
+	Text.Add("Your thoughts are brought to a quick halt as zombie elves on either side of you grab your [thighs] with cold, rough hands[l], presenting you to their leader. A chill runs down your spine as [heshe] sizes you up with cold, unseeing eyes, so very different from that of the [name] you know.", parse);
+	Text.NL();
+	parse["v"] = vag ? "" : Text.Parse(" has the zombies turn you over and spread your ass cheeks before [heshe]", parse);
+	parse["gen"] = vag ? parse["vag"] : parse["anus"];
+	Text.Add("<i>“Prepare… ass…”</i> zombie [name] moans in a deathly, sepulchral voice. The other zombie elves are more than willing to echo the motion, those not involved in holding you down groaning and lurching all about. You swallow hard as [name] gets down on [hisher] knees, sizes you up, then[v] rams [hisher] fist straight into your [gen] without so much as spreading it apart with [hisher] fingers first. Not that the thickness of [hisher] fist and forearm makes any difference with the unnatural strength the usually frail-looking elf possesses in this form; your [gen] barely resists [hisher] intrusion, putting up a token twinge of complaint before giving up and allowing the intrusive appendage free entrance.", parse);
+	Text.NL();
+	Text.Add("Ugh! No lube is bad enough, but zombie [name]’s touch - well, it isn’t exactly <i>life</i>-draining, but with how cold it is it may as well have been as such. You gasp as [name]’s brutally violates your warm innards with [hisher] clammy fist, squirming and struggling instinctively against the <i>thing</i> that’s sucking all the heat out of your body.] It’s clear that [heshe]’s doing this in the most humiliating way possible, perhaps to make a lesson out of you to all the watching zombies - who by this time are openly fondling themselves to the spectacle of [name]’s arm pumping in and out of you with ruthless efficiency.", parse);
+	Text.NL();
+	if(vag)
+		Text.Add("The friction of the undead elf’s wrist and forearm against your love-button sends a pleasant shiver down your spine, warmth blossoming in your nethers - before it’s quickly sucked away by [name]’s ice-cold touch. Still, the momentary flicker of pleasure is only heightened by the rough nature of the intrusion, your inner walls desperately trying to produce enough lube to keep up with the brutal fist-fucking you’re getting.", parse);
+	else
+		Text.Add("[name]’s wrist and forearm scrape against your sphincter as [heshe] rams in and out of you, and you wriggle and rock your hips in time to [hisher] brutal fist-fucking, trying to find a rhythm that will minimize the pain and sensations of having your anal walls stretched so wide. In response, [name] grins that evil grin of [hishers] again and breaks up the rhythm, twisting and turning inside your ass, sending you writhing in both ecstasy and agony, tears running down your cheeks as [heshe] spreads [hisher] fingers inside you, literally hollowing you out with [hisher] icy touch.", parse);
+	Text.NL();
+	Text.Add("<i>“…Share… suffering…”</i> zombie [name] gasps, roiling, icy mist starting to pour from [hisher] jaws. The chant is quickly taken up by the other zombie elves, who press in on you; you’re keenly aware of the fact that you’re about to be… well, whatever these cartoonish zombies have planned for you, it can’t be very good.", parse);
+	Text.NL();
+	Text.Add("Well, what a way to go.", parse);
+	Text.NL();
+	Text.Add("You nearly choke on the massive cock that your gullet suddenly finds itself stuffed with - in your current position, you can’t be sure exactly which of the milling elf zombies it belongs to, but it’s as bitterly cold as the fist currently lodged in your [gen], perhaps even more so. Stiff and rigid as an icicle, all nine inches of icy cockflesh begin pumping in and out of your throat and mouth with inhuman strength, numbing your innards from this side, too. Perfectly spit roasted in this manner, the last vestiges of resistance give in even as the rest of the zombie horde lays their deathly hands on you.", parse);
+	Text.NL();
+	Text.Add("Bereft of any extra holes or protrusions, the horny dead have to settle for grinding their sexual organs against any part of you that they can get ahold of; cocks and cunts rub back and forth against your [skin], leaving it slick with cold cum in a matter of moments. The deathly rattles of these so-called undead ring in your ears even as cock and fist alike work in tandem on either side of your body, one thrusting as the other pulls out, making sure that you’re always experiencing some form of icy suffering. Perhaps you would scream, but as always there’s the problem of all that elf cock between your lips. Oh well.", parse);
+	Text.NL();
+	Text.Add("Then it begins: streams of spunk arc through the air to land on you, splattering on your [skin] as the zombies reach climax. Clear female nectar squirts upon your form, mixing in with masculine seed; the flow is never ending, never abating. When the elf zombies by your side are spent, there’re always more jostling for their turn at you, grinding against the slick, cum-coated effigy you soon become. The cock in your mouth explodes, sending bitterly cold semen dribbling out of your mouth and into the grass below; it’s quickly replaced by a new one all fresh and eager to pick up where the last one left off.", parse);
+	Text.NL();
+	Text.Add("The only constant throughout this whole ordeal is [name]’s fist ramming into your [gen], ever faithful, ever… well, it’s not agonizing. In fact, you don’t think you feel much of anything anymore.", parse);
+	Text.NL();
+	Text.Add("Zombies: if they fuck you, you turn into one of them. Basic monster knowledge, that. You last sight before you pass out is that of [name]’s innocent yet downright cruel face, welcoming you into the ranks of the horny dead.", parse);
+	Text.Flush();
+	
+	//BAD END
+	Gui.NextPrompt(function() {
+		Scenes.Halloween.WakingUp(true);
+	});
+}
+
 Scenes.Halloween.WakingUp = function(badend) {
 	var parse = {
 		
@@ -580,6 +897,11 @@ Scenes.Halloween.WakingUp = function(badend) {
 	Text.Flush();
 	
 	Scenes.Halloween.HW.Restore();
+	//Sleep
+	world.TimeStep({hour: 8});
+	party.RestFull();
+	//Return to Eden
+	party.location = world.loc.Plains.Nomads.Tent;
 	
 	Gui.NextPrompt();
 }

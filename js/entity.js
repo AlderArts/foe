@@ -1038,50 +1038,50 @@ Entity.prototype.PossessivePlural = function() {
 	var name = this.GroupName || this.name || "The entities";
 	return name + "'";
 }
-Entity.prototype.heshe = function() {
-	var gender = this.body.Gender();
+Entity.prototype.heshe = function(forcegender) {
+	var gender = forcegender ? forcegender : this.body.Gender();
 	if(gender == Gender.male) return "he";
 	else if(gender == Gender.female) return "she";
 	else if(gender == Gender.herm) return "she";
 	else return "they";
 }
-Entity.prototype.HeShe = function() {
-	var gender = this.body.Gender();
+Entity.prototype.HeShe = function(forcegender) {
+	var gender = forcegender ? forcegender : this.body.Gender();
 	if(gender == Gender.male) return "He";
 	else if(gender == Gender.female) return "She";
 	else if(gender == Gender.herm) return "She";
 	else return "They";
 }
-Entity.prototype.himher = function() {
-	var gender = this.body.Gender();
+Entity.prototype.himher = function(forcegender) {
+	var gender = forcegender ? forcegender : this.body.Gender();
 	if(gender == Gender.male) return "him";
 	else if(gender == Gender.female) return "her";
 	else if(gender == Gender.herm) return "her";
 	else return "them";
 }
-Entity.prototype.HimHer = function() {
-	var gender = this.body.Gender();
+Entity.prototype.HimHer = function(forcegender) {
+	var gender = forcegender ? forcegender : this.body.Gender();
 	if(gender == Gender.male) return "Him";
 	else if(gender == Gender.female) return "Her";
 	else if(gender == Gender.herm) return "Her";
 	else return "Them";
 }
-Entity.prototype.hisher = function() {
-	var gender = this.body.Gender();
+Entity.prototype.hisher = function(forcegender) {
+	var gender = forcegender ? forcegender : this.body.Gender();
 	if(gender == Gender.male) return "his";
 	else if(gender == Gender.female) return "her";
 	else if(gender == Gender.herm) return "her";
 	else return "their";
 }
-Entity.prototype.HisHer = function() {
-	var gender = this.body.Gender();
+Entity.prototype.HisHer = function(forcegender) {
+	var gender = forcegender ? forcegender : this.body.Gender();
 	if(gender == Gender.male) return "His";
 	else if(gender == Gender.female) return "Her";
 	else if(gender == Gender.herm) return "Her";
 	else return "Their";
 }
-Entity.prototype.hishers = function() {
-	var gender = this.body.Gender();
+Entity.prototype.hishers = function(forcegender) {
+	var gender = forcegender ? forcegender : this.body.Gender();
 	if(gender == Gender.male) return "his";
 	else if(gender == Gender.female) return "hers";
 	else if(gender == Gender.herm) return "hers";
@@ -1112,16 +1112,16 @@ Entity.prototype.Race = function() {
 	return this.body.torso.race;
 }
 
-Entity.prototype.ParserPronouns = function(parse, prefix) {
+Entity.prototype.ParserPronouns = function(parse, prefix, forcegender) {
 	parse  = parse  || {};
 	prefix = prefix || "";
-	parse[prefix + "HeShe"]   = this.HeShe();
-	parse[prefix + "heshe"]   = this.heshe();
-	parse[prefix + "HisHer"]  = this.HisHer();
-	parse[prefix + "hisher"]  = this.hisher();
-	parse[prefix + "HimHer"]  = this.HimHer();
-	parse[prefix + "himher"]  = this.himher();
-	parse[prefix + "hishers"] = this.hishers();
+	parse[prefix + "HeShe"]   = this.HeShe(forcegender);
+	parse[prefix + "heshe"]   = this.heshe(forcegender);
+	parse[prefix + "HisHer"]  = this.HisHer(forcegender);
+	parse[prefix + "hisher"]  = this.hisher(forcegender);
+	parse[prefix + "HimHer"]  = this.HimHer(forcegender);
+	parse[prefix + "himher"]  = this.himher(forcegender);
+	parse[prefix + "hishers"] = this.hishers(forcegender);
 	return parse;
 }
 
