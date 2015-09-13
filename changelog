@@ -7,7 +7,10 @@ CHANGELOG for Fall of Eden
 
 Version 0.4l
 ------------
-* 
+* Added Halloween content. You can access it either by playing during the time period 14 oct-14 nov, or by enabling debug
+ - Go to the Nomad camp between 8-22 and you should get a one-time scene to start things off
+ - After the one-time, the option "Pumpkin Pie" should be available to you between 17-22. The option is only available during the season or in debug
+ - Each "playthrough" resets the event state, so you can test out multiple paths
 
 --------------------------------------------
              PREVIOUS VERSIONS
