@@ -11,6 +11,7 @@ Version 0.4l
  - Go to the Nomad camp between 8-22 and you should get a one-time scene to start things off
  - After the one-time, the option "Pumpkin Pie" should be available to you between 17-22. The option is only available during the season or in debug
  - Each "playthrough" resets the event state, so you can test out multiple paths
+* Fixed a bug regarding companions in Lei's task
 
 --------------------------------------------
              PREVIOUS VERSIONS

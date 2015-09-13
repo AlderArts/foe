@@ -133,6 +133,9 @@ Party.prototype.Get = function(num) {
 		else return null;
 	}
 }
+Party.prototype.GetInParty = function(num) {
+	if(num < this.members.length) return this.members[num];
+}
 Party.prototype.GetSlot = function(member) {
 	for(var i=0; i < this.members.length; ++i) {
 		if(this.members[i] == member) return i;

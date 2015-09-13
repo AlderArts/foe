@@ -274,7 +274,7 @@ Scenes.Lei.Tasks.Escort.Estate = function() {
 			Text.NL();
 			
 			party.SaveActiveParty();
-			var comp = party.Get(1);
+			var comp = party.GetInParty(1);
 			
 			Gui.Callstack.push(function() {
 				parse["f"] = player.HasLegs() ? " between your feet" : "";
