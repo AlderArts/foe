@@ -674,6 +674,17 @@ Entity.prototype.Equip = function() {
 	this.BalanceStats();
 }
 
+Entity.prototype.Strip = function() {
+	// Remove all equipment (discards it completely and destroys it)
+	this.weaponSlot   = null;
+	this.topArmorSlot = null;
+	this.botArmorSlot = null;
+	this.acc1Slot     = null;
+	this.acc2Slot     = null;
+
+	this.strapOn      = null;
+}
+
 Entity.prototype.ItemUsable = function(item) {
 	if(item.isTF)
 		return false;

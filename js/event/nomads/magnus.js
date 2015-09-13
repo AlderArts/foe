@@ -46,6 +46,10 @@ Magnus.Confront = {
 	Condemn  : 3
 };
 
+Magnus.prototype.Met = function() {
+	return this.flags["Met"] != 0;
+}
+
 Magnus.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
 	

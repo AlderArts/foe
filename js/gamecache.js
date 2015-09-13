@@ -165,6 +165,9 @@ InitCache = function() {
 	
 	gameCache.flags["Moth"]      = gameCache.flags["Moth"] || 0;
 	
+	//Halloween event
+	gameCache.flags["HW"] = gameCache.flags["HW"] || 0;
+	
 	if(burrows.flags["Access"] >= Burrows.AccessFlags.Stage5) rigard.flags["Scepter"] = 0;
 }
 

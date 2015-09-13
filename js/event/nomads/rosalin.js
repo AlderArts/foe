@@ -62,6 +62,10 @@ Rosalin.PastDialog = {
 	TreeCity : 3
 }
 
+Rosalin.prototype.Met = function() {
+	return this.flags["Met"] != 0;
+}
+
 Rosalin.prototype.FromStorage = function(storage) {
 	storage = storage || {};
 

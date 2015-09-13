@@ -119,6 +119,10 @@ Cale.Rogue = {
 	Taught : 3
 }
 
+Cale.prototype.Met = function() {
+	return this.flags["Met2"] >= Cale.Met2.Talked;
+}
+
 Cale.prototype.FromStorage = function(storage) {
 	this.Butt().virgin       = parseInt(storage.virgin) == 1;
 	

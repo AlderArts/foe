@@ -47,6 +47,10 @@ Estevan.GaySex = {
 	FuckedHim : 8
 }
 
+Estevan.prototype.Met = function() {
+	return this.flags["Met"] != 0;
+}
+
 Estevan.prototype.FromStorage = function(storage) {
 	this.LoadPersonalityStats(storage);
 	this.body.FromStorage(storage.body);

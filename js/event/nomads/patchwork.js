@@ -59,8 +59,11 @@ Patchwork.Met = {
 	Met2       : 2,
 	KnowGender : 3
 };
+Patchwork.prototype.KnowGender = function() {
+	return this.flags["Met"] >= Patchwork.Met.KnowGender;
+}
 Patchwork.prototype.Met = function() {
-	return this.flags["Met"];
+	return this.flags["Met"] >= Patchwork.Met.Met;
 }
 
 Patchwork.prototype.FromStorage = function(storage) {
@@ -295,7 +298,7 @@ world.loc.Plains.Nomads.Fireplace.events.push(new Link(
 		};
 		parse = patchwork.ParserPronouns(parse);
 		
-		if(patchwork.Met() < Patchwork.Met.Met)
+		if(!patchwork.Met())
 			Text.Add("A strange individual wearing a patchwork robe has set up shop close to the campfire. ");
 		else
 			Text.Add("Patchwork the peddler is standing by the campfire. You have the distinct feeling [heshe] know[notS] you’re here, even if [heshe] [dont] seem to be moving at the moment. ", parse);

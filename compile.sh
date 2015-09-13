@@ -70,6 +70,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/items/armor.js \
 	js/items/strapon.js \
 	js/items/weapons.js \
+	js/items/halloween.js \
 	js/shop.js \
 	js/alchemy.js \
 	js/quest.js \
@@ -172,6 +173,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/roaming.js \
 	js/event/portalopening.js \
 	js/event/citywatch.js \
+	js/event/halloween.js \
 	js/enemy/bandit.js \
 	js/enemy/knight.js \
 	js/enemy/imp.js \
