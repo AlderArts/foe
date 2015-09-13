@@ -28,6 +28,22 @@ Halloween.Flags = {
 	Lenka     : 32
 };
 
+//Note: checks real time date
+Halloween.IsSeason = function() {
+	// Always allow debug
+	if(DEBUG) return true;
+	
+	// Halloween season is 14 oct - 14 nov
+	var date  = new Date(); //Get current datetime
+	var month = date.getMonth(); //month, 0-11
+	var day   = date.getDate(); //day, 1-31
+	
+	if((month ==  9) && (day >= 14)) return true;
+	if((month == 10) && (day <  14)) return true;
+	
+	return false;
+}
+
 Halloween.prototype.Restore = function() {
 	// Restore player/oarty
 	player.FromStorage(this.player);
@@ -49,13 +65,11 @@ Halloween.Loc = {
 // gameCache.flags["HW"]
 Halloween.State = { //Bitmask for globally tracked flag
 	Intro : 1,
-	Pie : 2
+	Pie   : 2
 };
 
 Scenes.Halloween = {};
 
-//TODO Kind of odd req.
-//TODO Possibly clear flag?
 //Trigger this on stepping into the Nomads’ for the first time when season is active.
 Scenes.Halloween.PieIntro = function() {
 	var parse = {
@@ -89,10 +103,21 @@ Scenes.Halloween.PieIntro = function() {
 	Gui.NextPrompt();
 }
 
-/* TODO
- * #add “pie” option to nomads’ camp from 17-22 pm when Halloween season/debug is active.
-[Pumpkin Pie]
- */
+//#add “pie” option to nomads’ camp from 17-22 pm when Halloween season/debug is active.
+world.loc.Plains.Nomads.Fireplace.events.push(new Link(
+	"Pumpkin Pie", function() {
+		if(!(gameCache.flags["HW"] & Halloween.State.Intro)) return false;
+		// Correct time of day
+		if((world.time.hour < 17) || (world.time.hour >= 22)) return false;
+		
+		return Halloween.IsSeason();
+	}, true,
+	null,
+	function() {
+		Scenes.Halloween.PumpkinPie();
+	}
+));
+
 Scenes.Halloween.PumpkinPie = function() {
 	var parse = {
 		playername : player.name
@@ -600,8 +625,8 @@ Halloween.Loc.Graveyard.links.push(new Link(
 ));
 
 Halloween.Loc.Graveyard.onEntry = function() {
-	var repeat = Scenes.Halloween.HQ.flags & Halloween.Flags.Graveyard;
-	Scenes.Halloween.HQ.flags |= Halloween.Flags.Graveyard;
+	var repeat = Scenes.Halloween.HW.flags & Halloween.Flags.Graveyard;
+	Scenes.Halloween.HW.flags |= Halloween.Flags.Graveyard;
 	
 	if(repeat && (Math.random() < 0.5))
 		PrintDefaultOptions();

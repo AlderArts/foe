@@ -68,6 +68,17 @@ world.loc.Plains.Nomads.Tent.links.push(new Link(
 //TODO /TEST --------------
 
 
+//Trigger this on stepping into the Nomads’ for the first time when season is active.
+world.loc.Plains.Nomads.Fireplace.onEntry = function() {
+	if(!(gameCache.flags["HW"] & Halloween.State.Intro) &&
+		(DEBUG || Halloween.IsSeason()) &&
+		(world.time.hour >= 8) &&
+		(world.time.hour < 22))
+		Scenes.Halloween.PieIntro();
+	else
+		PrintDefaultOptions();
+}
+
 world.loc.Plains.Nomads.Fireplace.description = function() {
 	Text.Add("The nomad camp is currently set up in the middle of a wide grassland spreading out in all directions. [TreeFar] In the middle of the gathering of disparate tents that make up the nomad camp - about twenty in total - is a large fire pit.", {TreeFar: world.TreeFarDesc()});
 	Text.NL();
