@@ -6,8 +6,8 @@ windowHeight = 700;
 APP_NAME = "Fall of Eden";
 VERSION_MAJOR = 0;
 VERSION_MINOR = 4;
-VERSION_SUBSCRIPT = "j";
-VERSION_NAME = "Vaughn, Asche and Gryphons";
+VERSION_SUBSCRIPT = "k";
+VERSION_NAME = "Lei";
 
 SAVE_VERSION = 28;
 // Save version 1: Initial
@@ -54,7 +54,7 @@ Unit = {
 }
 
 var MEASUREUNIT = Unit.metric;
-//var MEASUREUNIT = Unit.american;
+//var MEASUREUNIT = Unit.american; TODO
 
 var DEBUG = false;
 
