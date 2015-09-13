@@ -99,6 +99,10 @@ Cveta.Intimate = { //Bitmask
 
 Scenes.Cveta = {};
 
+Cveta.prototype.Met = function() {
+	return this.flags["Met"] & Cveta.Met.FirstMeeting;
+}
+
 Cveta.prototype.FromStorage = function(storage) {
 	this.FirstVag().virgin   = parseInt(storage.virgin) == 1;
 	this.Butt().virgin       = parseInt(storage.avirgin) == 1;

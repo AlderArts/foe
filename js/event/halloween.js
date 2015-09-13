@@ -20,9 +20,12 @@ function Halloween() {
 }
 
 Halloween.Flags = {
-	Elder : 1,
-	Kiai : 2,
-	Werewolf : 4
+	Elder     : 1,
+	Kiai      : 2,
+	Werewolf  : 4,
+	Graveyard : 8,
+	Chapel    : 16,
+	Lenka     : 32
 };
 
 Halloween.prototype.Restore = function() {
@@ -39,7 +42,8 @@ Halloween.Loc = {
 	Tent : new Event("Tent?"),
 	Camp : new Event("Nomads' camp?"),
 	Path : new Event("Beaten path"),
-	Graveyard : new Event("Graveyard")
+	Graveyard : new Event("Graveyard"),
+	Chapel : new Event("Burned chapel")
 };
 
 // gameCache.flags["HW"]
@@ -446,6 +450,9 @@ Halloween.Loc.Camp.events.push(new Link(
 			Text.Add("You thank him for all the help he’s given you. It looks like it’s time you started looking for those ravens. Lantern clutched tightly in your hand, you start to walk away from the campfire.", parse);
 			Text.NL();
 			Text.Add("<i>“Remember, I know of many myths and legends that may contain answers to questions that may arise in your journeys. If you come across challenges and questions to which you desire knowledge, seek me out and I will tell you what I can. Stay safe, young one.”</i> And with that, he returns to tending to the dying embers of the campfire.", parse);
+			
+			party.Inv().AddItem(Items.Halloween.Lantern);
+			party.Inv().AddItem(Items.Halloween.Stake);
 		}
 		else {
 			Text.Add("Crouching down so that you’re on level with the robed figure, you ask if he’s any advice to dispense forthwith. He thinks a moment, then replies:", parse);
@@ -584,26 +591,24 @@ Halloween.Loc.Graveyard.links.push(new Link(
 		MoveToLocation(Halloween.Loc.Path);
 	}
 ));
-
-/* TODO
-Halloween.Loc.Graveyard.events.push(new Link(
-	"", true, true,
+Halloween.Loc.Graveyard.links.push(new Link(
+	"Chapel", true, true,
 	null,
 	function() {
-		
+		MoveToLocation(Halloween.Loc.Chapel);
 	}
 ));
 
-Halloween.Loc.Graveyard.enc = new EncounterTable();
-Halloween.Loc.Graveyard.enc.AddEnc(function() {
-	return function() {
-		
-	};
-}, 1.0, function() { return true; });
-*/
+Halloween.Loc.Graveyard.onEntry = function() {
+	var repeat = Scenes.Halloween.HQ.flags & Halloween.Flags.Graveyard;
+	Scenes.Halloween.HQ.flags |= Halloween.Flags.Graveyard;
+	
+	if(repeat && (Math.random() < 0.5))
+		PrintDefaultOptions();
+	else
+		Scenes.Halloween.Kiai();
+}
 
-//TODO LINK
-//TODO //Have Kiai show up as a random encounter when entering the graveyard from any direction.
 Scenes.Halloween.Kiai = function() {
 	var parse = {
 		name : kiakai.name
@@ -808,10 +813,10 @@ Scenes.Halloween.KiaiRun = function() {
 	scenes.AddEnc(function() {
 		dest = Halloween.Loc.Mausoleum;
 	}, 1.0, function() { return true; });
+	*/
 	scenes.AddEnc(function() {
 		dest = Halloween.Loc.Chapel;
 	}, 1.0, function() { return true; });
-	*/
 	scenes.Get();
 	
 	Gui.NextPrompt(function() {
@@ -876,6 +881,477 @@ Scenes.Halloween.KiaiGangrape = function() {
 	Gui.NextPrompt(function() {
 		Scenes.Halloween.WakingUp(true);
 	});
+}
+
+Halloween.Loc.Chapel.description = function() {
+	var first = !(Scenes.Halloween.HW.flags & Halloween.Flags.Chapel);
+	Scenes.Halloween.HW.flags |= Halloween.Flags.Chapel;
+	
+	if(first) {
+		Text.Add("Curious, you follow the stone path up to the chapel, and as you draw closer, you quickly realize why it’s in its current crumbling state. There’s clearly been a fire here at some point in time - charred timbers and blackened stone lie exposed amongst the ruins, and half the roof is missing, allowing bright moonlight to pour in from above. Nevertheless, you still need your lantern to light up the darker corners, especially towards the chapel’s interior.");
+		Text.NL();
+		Text.Add("Well, at least it doesn’t look like the place will collapse in on you anytime soon, despite its decrepit state, so you could explore a little if you choose to do so.");
+	}
+	else {
+		Text.Add("Following the stone path to the burnt-out chapel once more, you step through the doorway and survey the area again.");
+	}
+	Text.NL();
+	Text.Add("Regardless of who or what was once worshipped here, the sanctity of this place has most certainly been fouled. It’s not so much an actual smell than an aura of oppression that presses against you and makes you instinctively want to cringe - the burned pews and broken, grimy remains of the windows don’t help, either. As for the smell, it’s all old soot and ashes, another reminder of what must have happened here long ago.");
+	Text.NL();
+	Text.Add("There seem to be a couple of options open to you here: press on ahead and towards the chapel’s altar, or duck into the sacristy, which appears relatively intact.");
+}
+
+Halloween.Loc.Chapel.links.push(new Link(
+	"Graveyard", true, true,
+	null,
+	function() {
+		MoveToLocation(Halloween.Loc.Graveyard);
+	}
+));
+/* TODO Laggoth
+Halloween.Loc.Chapel.events.push(new Link(
+	"", true, true,
+	null,
+	function() {
+		
+	}
+));
+*/
+Halloween.Loc.Chapel.events.push(new Link(
+	"Sacristy", true, function() {
+		return !(Scenes.Halloween.HW.flags & Halloween.Flags.Lenka);
+	},
+	null,
+	function() {
+		Scenes.Halloween.Sacristy();
+	}
+));
+
+Scenes.Halloween.Sacristy = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("Cautiously, you approach the charred doorway that leads into the chapel’s sacristy and take a look around. Whatever treasures might have been stored here have mostly been looted - there are a couple of paintings on the wall, smeared into obscurity with soot and ash, their frames blackened from heat. Shelves and cupboards stand empty gathering dust, and thin beams of bright moonlight filter in through the windows of multicolored stained glass. There’s a chill draft in the room, too, although you can’t quite figure where it’s coming from.", parse);
+	Text.NL();
+	Text.Add("The smell of old ash and soot ends here, though, replaced by a sickly sweet smell - as your eyes adjust to the dim, colored light of the room, you realize that the walls and parts of the ceiling are covered with roses. Large, black roses that grow from vicious-looking, thorny stems have found purchase in the chapel’s old masonry, each and every one of the sinisterly beautiful blossoms in full bloom. The woody stems that they grow from are an extremely deep shade of brown, tinged with red; their thorns glisten with some kind of disquieting liquid as they spread outwards throughout the room. It’s almost as if they’re - well, they <i>are</i> alive, just in a different way than most roses are…", parse);
+	Text.NL();
+	Text.Add("Slowly, you follow the roses to their origin, the one point from which they fan out: a stately four-poster bed that definitely looks utterly out of place in the sacristy. You’re pretty sure that definitely wasn’t here when this place burned down. Not only does it look utterly and irreverently out of place in this once sacred place, there’s also not a single mark on the rich ebony bedframe - nor on the heavy crimson drapes that obscure your view of anyone or anything that might be inside.", parse);
+	Text.NL();
+	Text.Add("Coupled with the sweet, alluring scent coming from the roses, the sight of this elegant, stately bed evokes a certain feeling of apprehension in you. Something tells you that approaching the bed without a plan would a bad idea…", parse);
+	Text.NL();
+	Text.Add("Will you do so anyway?", parse);
+	Text.Flush();
+	
+	//[Yes][No]
+	var options = new Array();
+	options.push({ nameStr : "Yes",
+		tooltip : "Time to face whatever lurks here.",
+		func : Scenes.Halloween.Lenka, enabled : true
+	});
+	options.push({ nameStr : "No",
+		tooltip : "This isn’t something you want to get tangled up with.",
+		func : function() {
+			Text.Clear();
+			Text.Add("The roses, the thorns, the scent, the bed… you’re not quite sure that you’ll be able to handle whatever it is that’s hidden behind the drapes. Not just yet, anyway - you’re not running away, it’s merely a tactical retreat that you’re beating here. Slowly, you back away from the defiled, overgrown sacristy and once you’re out of sight of the doorway, make a dash for the pews.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Halloween.Lenka = function() {
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
+	
+	var werewolf = Scenes.Halloween.HW.Werewolf();
+	var p1cock = player.BiggestCock();
+	
+	Scenes.Halloween.HW.flags |= Halloween.Flags.Lenka;
+	
+	Text.Clear();
+	Text.Add("Right. You get the better of your instinctive aversions, and force yourself to move towards the bed; a shiver crawls down your skin as you swear the roses turn to follow your path through the room. Taking hold of the gold-trimmed velvet drapes in one hand, you draw them aside to reveal -", parse);
+	Text.NL();
+	if(cveta.Met()) {
+		Text.Add("- Well. She may <i>look</i> like Cveta, but it clearly isn’t her. ", parse);
+		/* TODO Cveta Brood levels
+		if() //#if brood level = 6 - same line
+			Text.Add("It’s true that their bodies are equally curvaceous, but there’s definitely something off about the way this one carries herself. This bird’s acting far more forward and suggestive as opposed to Cveta’s usual reserved nature, as evidenced by the ‘come hither’ look she’s giving you.", parse);
+		else if() //#else if brood level >=3 - same line
+			Text.Add("Her body is far more… ah, developed than Cveta’s currently is, but perhaps it’s a hint of what the songstress might look like in the future when her maternal nature’s fully blossomed. Still, her attitude and demeanor are completely off, her pose far more forward and suggestive as opposed to Cveta’s usual reserved nature. Slowly, she turns her gaze upon you and beckons you forward with a finger.", parse);
+		else
+		*/
+			Text.Add("For one, instead of Cveta’s thin and waifish form, the avian woman lounging on the plush pillows and downy mattress is extremely voluptuous. It’s almost as if everything you knew about the songstress was inverted to create an evil twin of her - a very sexy evil twin, judging by the nasty grin and sultry “come hither” look she’s giving you.", parse);
+	}
+	else {
+		Text.Add("- A young avian woman, by all appearances in the rich blossom of her womanhood, lounging on the bed’s rich trimmings. With her voluptuous form and the maternal airs that surround her, she cuts quite the figure - a sentiment that’s only reinforced as she looks directly at you and let out a husky, sultry hum from the back of her throat.", parse);
+	}
+	Text.NL();
+	Text.Add("As she lies belly down on the mattress, you can make out a goodly number of details about her shamelessly advertised body. Her almost absurd hourglass figure is shaped by the swell of her hefty breasts - somewhere in the region of a high D or low DD - and more importantly, the wide, curvaceous hips and large, firm rump which blatantly advertise her prodigious fertility for all who care to look. By the looks of her, If she’s not already a mother, then it won’t take much effort to make her one. Stretching along the contours of her waist, the avian woman’s hair reaches in a river of bloody crimson all the way to her deliciously rounded rump, where the job’s taken over by her long, elegant tailfeathers.", parse);
+	Text.NL();
+	Text.Add("The feathers which coat her body are just a slightly lighter shade of the same color to differentiate them from her hair, save for the wide expanse of her powerful wings which lie splayed out to either side of the bed - each and every one of her flight feathers is a deep, glossy black. Jagged veins of burning purple stretch out from the shaft of each feather, lending her wings a soft, unholy glow.", parse);
+	Text.NL();
+	Text.Add("Noticing you taking her in, the avian woman reclines further into the soft, comfortable bed and stretches out on the sheets, displaying herself for you. Once she’s sure she has your undivided attention, she reaches down with a gloved hand - her black, arm-length velvet gloves being the only clothing she’s wearing - and traces a finger across the prominent line of her gash, swollen with heat and fecundity. To top it all off, a lopsided halo of infernal blood-red flames circles her brow, flickering away merrily with the occasional crackle. A demoness of some sort, then, you realize with shock; a fallen angel.", parse);
+	Text.NL();
+	Text.Add("<i>“Mm,”</i> she says with a chirp as she fixes deep emerald eyes on you, her voice as sultry and cloyingly sweet as the roses which surround her bed. <i>“What do we have here? How fortuitous; I was actually thinking I might have to get up to find a nice big cock for my purposes, and one delivers itself to my bedside! You brave the dead and demons alike to reach this place; surely your bravery must be rewarded! Why don’t you show me what you’ve got?”</i>", parse);
+	Text.NL();
+	if(!player.FirstCock()) {
+		Text.Add("Surely she must be mistaken. You don’t have a cock, let alone a nice big one like she looks like she’s expecting.", parse);
+		Text.NL();
+		Text.Add("<i>“Oh, I can fix that,”</i> she drawls lazily. <i>“Now, get up here and don’t keep me waiting.”</i>", parse);
+		Text.NL();
+	}
+	parse["c"] = werewolf ? "" : " strip off your costume and";
+	Text.Add("Try as you might, there’s something about the avian demoness’ words that makes you really, <i>really</i> want to obey her. Part of you instinctively screams danger about this, but the greater part is consumed by a slavish need to cater to her every whim and desire. Not quite understanding what you’re doing, you[c] approach the bedside for her inspection.", parse);
+	Text.NL();
+	Text.Add("<i>“Allow me to introduce myself, my beautiful cum-pump. I am Lenka, Mother of Shadows - or at least, I will be once I can get some seed into me to create a lovely brood.”</i> She rolls over on her back and rubs her flat, slightly concave midriff for emphasis. <i>“Been quite busy settling in, you know…no time to go out and procure a male’s vital essence…”</i>", parse);
+	Text.NL();
+	Text.Add("Hey, you’re not a -", parse);
+	Text.NL();
+	Text.Add("Lenka snaps her gloved fingers, and your mouth feels like it’s been stuffed with a large hairball, effectively preventing you from saying another word. <i>“I don’t remember asking you to speak, cum-pump. I need you for breeding, not for talking - now let’s cut to the chase and see what we’re dealing with here.”</i> She turns her gaze to your exposed groin.", parse);
+	Text.NL();
+	if(p1cock) {
+		if((p1cock.Len() >= 40) && (p1cock.Thickness() >= 5)) {
+			Text.Add("<i>“Ooh.”</i> Lenka chirps and whistles appreciatively, rubbing her soft, full palms against your shaft in a bid to grasp as much cock as she can hold at once. <i>“That’s big, but there isn’t a dick so big that Mama Lenka can’t handle, so you’re not getting out of your duties that way, my dear.”</i>", parse);
+			Text.NL();
+			Text.Add("You’re pretty sure you didn’t have <i>that</i> in mind when you decided to make your tackle that impressive. Unfortunately, your protests go unnoticed by the avian demoness, who has her tongue hanging out her beak, practically giddy with anticipation of the dicking she’s dreaming of receiving from you.", parse);
+		}
+		else if((p1cock.Len() >= 20) && p1cock.Thickness() >= 5) {
+			Text.Add("<i>“Ah, very satisfactory,”</i> she says with a giggle, <i>“but I’d like to appraise the goods in full.”</i>", parse);
+			Text.NL();
+			Text.Add("Wait, what does she mean?", parse);
+			Text.NL();
+			Text.Add("<i>“You’re really horny right now,”</i> the avian demoness whispers. <i>“Really, really horny.”</i>", parse);
+			Text.NL();
+			Text.Add("Just saying it in that sweet syrupy voice of hers somehow makes it real - in a moment, your [cocks] [isAre] achingly erect, straining at their tethers to reach the hand Lenka is snaking towards [itThem].", parse);
+			Text.NL();
+			parse["mc"] = player.NumCocks() > 1 ? "each shaft’s" : "your";
+			parse["k"] = p1cock.Knot() ? ", then moves to gather your swollen knot in a hand, rubbing her palm all over it and making you dream of sticking that knot in her and filling her full of seed" : "";
+			Text.Add("<i>“Ah, so eager,”</i> she whispers, running thumb and finger over the ridge of [mc] glans[k]. <i>“So obedient. That’ll do, my darling cum-pump. That’ll do just fine.”</i>", parse);
+		}
+		else {
+			parse["biggest"] = player.NumCocks() > 1 ? " biggest" : "";
+			Text.Add("<i>“Tch, is that all you’ve got? Good thing Mama Lenka’s here to give you a hand.”</i> Lazily, the avian demoness reaches out with a gloved hand and takes hold of your[biggest] [cock], her delicate-looking digits wrapping themselves about the shaft of man-meat with surprising strength. Once she has a firm grip, she presses fingers and thumb ever so slightly into your manflesh, running them across its contours.", parse);
+			Text.NL();
+			parse["all"] = player.NumCocks() > 1 ? " all" : "";
+			Text.Add("The effect is instantaneous, with your [cocks][all] becoming fully engorged promptly. Lenka giggles before rewarding you with a few rapid strokes of her hand, fingers pumping up and down your length. <i>“Stay standing.”</i>", parse);
+			Text.NL();
+			Text.Add("Despite you shaking and shuddering, weakness creeping into your form, there’s something in the avian demoness’ honeyed voice that compels your body to obey. You can only gasp in pleasure, wonder - and a little fear - as she grabs you by the glans and begins tugging on the shaft in question, each gentle yank coaxing more and more manflesh out of your groin to be added to your phallus.", parse);
+			if(player.NumCocks() > 1)
+				Text.Add(" It’s a bit of a shame she didn’t do the same for your other shaft[s]...", parse);
+			Text.NL();
+			Text.Add("Nevertheless, Lenka doesn’t stop until you’re measuring a whole seven inches from base to tip, whereupon she croons and takes a moment to admire her handiwork.", parse);
+			
+			p1cock.length.IncreaseStat(18, 100);
+			p1cock.thickness.IncreaseStat(5, 100);
+		}
+	}
+	else {
+		Text.Add("Ha! Joke’s on her; you don’t have any man-meat to speak of. This revelation doesn’t faze Lenka any, though, as the avian woman - or perhaps more correctly, avian demoness - simply chuckles and runs a fingertip in a small circle about the smooth skin of your groin.", parse);
+		Text.NL();
+		Text.Add("<i>“Oh dear. Well, no issue there; you’ll be producing issue just fine before long.”</i>", parse);
+		Text.NL();
+		parse["v"] = player.FirstVag() ? Text.Parse(" just above your [vag]", parse) : "";
+		var canine = player.Race().isRace(Race.Canine);
+		parse["k"] = canine ? ", complete with a knot at the base" : "";
+		Text.Add("You have just enough time to wonder what she means before the lingering sensation of her touch grows red hot, dark magics gathering in your nethers. Your groin clenches, internal changes beginning and soon pushing out of your body[v] to form a brand new cock[k]. You groan and shudder as blood rushes to your new appendage, filling it as thick and straight as a ramrod even as it grows before your eyes. ", parse);
+		Text.NL();
+		Text.Add("Three inches, four, five… it’s only when your brand new shaft is a whole seven inches long and one and a half across that its development stops, leaving it twitching and aching to be used.", parse);
+		
+		p1cock = new Cock();
+		p1cock.length.IncreaseStat(18, 100);
+		p1cock.thickness.IncreaseStat(5, 100);
+		if(canine) p1cock.knot = 1;
+		
+		player.body.cock.push(p1cock);
+		
+		// Reset tags
+		parse = player.ParserTags(parse);
+	}
+	Text.NL();
+	Text.Add("That dealt with, the avian demoness turns her attentions just a little lower. ", parse);
+	if(player.HasBalls()) {
+		var size = player.Balls().BallSize();
+		if(size >= 12) {
+			Text.Add("Crooning in delight, she palms each of your [balls] in turn, her nipples stiff and protruding from her chest feathers in response to her mounting excitement. <i>“Yes… yes, these will be very adequate. So much seed… such big broods these will create. You want it, don’t you? To feel your cum flooding my womb and thoroughly impregnating me? To blast off every last drop of your seed and have it all sucked up to create plenty of chicks?”</i>", parse);
+			Text.NL();
+			Text.Add("You feel like smiling and nodding is the right thing to do, so you do just that. Lenka chirps in approval, the avian demoness reaching up to caress your cheek with the back of a hand.", parse);
+			Text.NL();
+			Text.Add("<i>“There, you’re learning. There’s no reason to deny yourself what you want, to fuck silly a perfectly breedable female who explicitly wants to bear your spawn. Isn’t that every red-blooded man’s dream?”</i>", parse);
+		}
+		else if(size >= 8) {
+			Text.Add("She takes her time appraising your seed factories, humming to herself and toying with your ballsack from time to time. Gentle strokes, quick caresses… they shouldn’t have been much, but even the lightest touch from the avian demoness is enough to set your [balls] churning in anticipation. Unbidden, lewd thoughts begin to invade your mind, thoughts of emptying your balls into her baby-making hole, of seeing her belly swell and ripen with pregnancy…", parse);
+			Text.NL();
+			Text.Add("This place <i>is</i> having an effect on you, and it’s not just the heavy floral scent in the air.", parse);
+			Text.NL();
+			Text.Add("Purring to herself, Lenka rolls your [balls] about in her hands, gently kneading and testing away. You’d never really thought about how <i>heavy</i> they were before now, or just how <i>full</i> they are… and come to think of it, they’re feeling even fuller as she continues her ministrations.", parse);
+			Text.NL();
+			Text.Add("<i>“Oh, you poor thing,”</i> Lenka purrs. <i>“All pent-up like that - how long has it been since you last had any release? Far too long, it looks like. Don’t worry, Mama Lenka will make sure that from now on, your balls will be drained on a regular basis. Isn’t that wonderful?”</i>", parse);
+		}
+		else {
+			Text.Add("Upon seeing your [balls], the avian demoness clicks her tongue and shakes her head. <i>“Oh, no no no no,”</i> she says with a sultry sigh that sends her bountiful chest heaving. <i>“These simply will not do; I simply can’t have any cum-pump of mine running dry before the fun’s even halfway done. Happily, Mama Lenka can improve those for you. Wouldn’t you like your balls to be improved, cum-pump?”</i>", parse);
+			Text.NL();
+			Text.Add("Dreamily, you reply that you indeed agree with her most wholeheartedly, although you’re not quite sure what it is that you’re agreeing with…", parse);
+			Text.NL();
+			Text.Add("Lenka practically purrs in delight. <i>“Let’s begin, then. No point wasting time.”</i>", parse);
+			Text.NL();
+			Text.Add("Reaching out, the avian demoness takes your seed factories in the palm of her hand, curling her fingers just so that she’s firmly cupping your balls. The feel of black velvet against scrotal skin is heavenly, no, almost orgasmic, and you can’t help but dribble a little pre from your [cockTip] at her touch. Dark tendrils of energy rise from Lenka’s fingertips, curling as they rise and penetrate your nutsack, seeping into your [balls].", parse);
+			Text.NL();
+			Text.Add("If her touch was heavenly, feeling her rolls your balls in her hand is divine altogether. Soon, your scrotum is feeling uncomfortably taut as your balls begun to swell; you can <i>feel</i> them growing weightier, stronger, more virile. You can practically imagine your little swimmers getting more and more agitated as they start running out of room, desperately seeking release…", parse);
+			Text.NL();
+			Text.Add("<i>“Mm… more seed for me to suck out and grow my brood with,”</i> Lenka croons melodiously as she looks upon your inflating testicles with undisguised approval. Her simpering shouldn’t fool you, you know it’s an act - and yet it works anyway. At least you’re not the only one getting turned on by all this - Lenka herself is openly caressing her lower belly with a free hand, the avian demoness panting heavily as she dreams of being impregnated with your sperm.", parse);
+			Text.NL();
+			Text.Add("It’s only when your balls are amply sized that she deigns to let the growth stop, giving them one last affectionate caress before moving on.", parse);
+			
+			player.Balls().size.IncreaseStat(8, 100);
+		}
+	}
+	else {
+		Text.Add("<i>“Tch, lacking in the most important department,”</i> Lenka says sourly. <i>“Well, I’ll just have to fix that.”</i>", parse);
+		Text.NL();
+		Text.Add("Without warning, her fingers snake out, running along the underside of your [cocks] down to [itsTheir] base to draw some sort of symbol on your skin. Nothing happens at first, then an ominous squirming begins in your groin as internal changes begin. Skin and flesh quickly loosen to form a brand new scrotum, then you’re wracked from head to toe in spasms of sheer pleasure.", parse);
+		Text.NL();
+		if(player.FirstVag()) {
+			Text.Add("You can’t be completely certain, but you swear you can <i>feel</i> your ovaries swelling, growing as internal pressure mounts, then… dividing and changing…", parse);
+			Text.NL();
+		}
+		Text.Add("Moments later, a fresh pair of amply-sized balls pops out beneath your [cocks], already churning with seed as they prepare themselves for business.", parse);
+		Text.NL();
+		Text.Add("<i>“Much better,”</i> Lenka says, cupping your newfound assets in the palm of a hand and rolling them about as she tests their weight. The feel of velvet against stretched, sensitive skin is practically divine, and the avian demoness titters and giggles. <i>“Much, much better. Don’t you agree, cum-pump?”</i>", parse);
+		
+		player.Balls().size.IncreaseStat(8, 100);
+		player.Balls().count.IncreaseStat(2, 100);
+	}
+	Text.NL();
+	if(player.HasPerk(Perks.Breeder)) {
+		Text.Add("<i>“And so exceptionally virile, too.”</i> Sniffing at you and letting out a long, appreciative sigh, Lenka trails her fingers over her lower belly, just above where her cum-hungry womb lies, then lets her fingers run down to her cunt. Eyes trained on your [balls], the avian demoness openly caresses her wet slit in front of you, then moans lewdly, her breathing growing harder and faster by the moment.", parse);
+		Text.NL();
+		Text.Add("<i>“Fuck this, I can’t take it any more! It’s time for your reward, cum-pump!”</i> ", parse);
+	}
+	Text.Add("Greedily, Lenka rolls over to make space for you on the expansive bed. <i>“Get in here, you. I command you to breed me, to fertilize each one of my eagerly waiting eggs and create monsters to terrorize the world with. You’ll love me, and nothing else; you’ll have the honor of fathering the first of my many, many lovely children.</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Stay here, and be my breeding stud for the rest of eternity; stay here, and watch the fruit of my womb bring all of existence to its knees.”</i>", parse);
+	Text.NL();
+	parse["w"] = werewolf ? " animal" : "";
+	Text.Add("Between the magic of her voice and the cloying, captivating scent of the black roses that fill the former sacristy, you can feel the last vestiges of resistance crumbling away. The fact that Lenka is oh-so-perfectly breedable doesn’t help, either; your[w] hindbrain is screaming at you to go and make babies with this glorious specimen of formerly heavenly fecundity. The bed, it’s so firm, soft and comfortable, surpassed only by your mistress-wife’s presence beside you.", parse);
+	Text.NL();
+	Text.Add("A last, tiny voice in your mind screams that this fallen symbol of feminine, fertile perfection isn’t your mistress or your wife, but is quickly snuffed out when Lenka pulls you into her embrace. Her feathers, gloriously hot - each one burns with the infernal fires of the Dark Aspect, and you lovingly reach up to straighten her flaming halo, only to have it fall back into its original lopsided position once your fingers leave it.", parse);
+	Text.NL();
+	Text.Add("<i>“Don’t bother, silly,”</i> Lenka chides. <i>“It’s been like that since forever; I’ve never been able to set it straight. Now, come here and let Mama Lenka give you a very special hug.”</i>", parse);
+	Text.NL();
+	Text.Add("Yes, yes… you want this. Anything that magical voice commands of you. The avian demoness shoves you back into the mattress, then pounces on you, nuzzling you aggressively with her beak. Her scent - practically indistinguishable from that of the roses - fills the world, and her soft, teardrop-shaped breasts push against your body, warm with promise, her nipples stiff and erect. You can <i>feel</i> her heat-filled breeding hole grind against your stomach, leaving a trail of slick moistness, wet feathers spreading her girl-cum like a paintbrush. Butterflies erupt in your stomach, and in this moment, you want nothing more than to have the honor of servicing this fertility goddess kneeling on the mattress in front of you.", parse);
+	Text.NL();
+	Text.Add("Lenka giggles, then her deep emerald eyes gleam with predatory hunger. Before you know it, she’s atop you, pinning you on your back to the mattress while your throbbing, engorged cock pokes up between her perfectly shaped thighs. With deliberate slowness and no small restraint on her part, the avian demoness grinds the thick, prominent lips of her pussy against your glans. You can’t help but cry out as pre-cum oozes from your [cockTip], triggered by the hot moistness of her baby-making hole.", parse);
+	Text.NL();
+	Text.Add("Lazily, Lenka leans forwards and plants her hands on your collarbone, letting you get a good look at just how her ample assets jiggle and sway under her. <i>“You want to be my cum-pump, don’t you? A good little source of seed for my hungry womb.”</i>", parse);
+	Text.NL();
+	Text.Add("Oh yes, yes, that’s what you want.", parse);
+	Text.NL();
+	Text.Add("<i>“Beg for it.”</i>", parse);
+	Text.NL();
+	Text.Add("Please, won’t she let you be her cum-pump?", parse);
+	Text.NL();
+	Text.Add("She slaps you, but you barely feel it. <i>“Beg harder!”</i>", parse);
+	Text.NL();
+	Text.Add("Tears come unbidden to your eyes at the fury of that commanding voice. Please… will she let you be her breeding stud?", parse);
+	Text.NL();
+	Text.Add("<i>“That’s much better. Now, fertilize me.”</i>", parse);
+	Text.NL();
+	Text.Add("With a trill of pleasure, Lenka leans her weight forward and guides your cock into her.", parse);
+	if(player.NumCocks() > 1)
+		Text.Add(" Your remaining shaft[s2] get[notS2] pushed to the side, unloved and unwanted, but who cares? You’d get rid of them this moment if that’s what your mistress commanded.", parse);
+	Text.NL();
+	parse["knot"] = p1cock.Knot() ? "knot" : "groin";
+	Text.Add("Lenka’s glorious pussy stretches wide and devours the entirety of your man-meat, slurping and sucking as she impales herself upon your member with wanton glee, not stopping until her mound is grinding against your [knot].", parse);
+	Text.NL();
+	if((p1cock.Len() >= 40) || (p1cock.Thickness() >= 8)) {
+		Text.Add("How… how did she fit all of that inside her without so much as a bump on her slim belly? It defies all logic!", parse);
+		Text.NL();
+		Text.Add("Lenka sneers. <i>“I told you there’s no cock that Mama Lenka can’t take, my dear cum-pump. Now just lie back and enjoy the ride while I suck out all your semen.”</i>", parse);
+		Text.NL();
+	}
+	Text.Add("She starts off slow at first, hands caressing, hips gyrating, but the pace soon picks up and your avian lover is soon riding you with passion and energy - perhaps too much. The bed creaks under her vigorous efforts to force your cum out of you, and she leans forward to nibble at your neck with the cruel hooked tip of her beak - perhaps it’s a the equivalent of a kiss, or perhaps it’s a warning.", parse);
+	Text.NL();
+	Text.Add("You couldn’t care less what she does. There is something about the avian demoness’ walls and womb that’s utterly unlike any other female. The squelching noises as she rides you are only to be expected, but what isn’t is the way her cunt greedily and actively milks you with a life of its own, pressing against the shaft in its grasp, throbbing and pulsing about every ridge and vein of your manhood. Even your pre-cum isn’t spared - every last drop is channeled up her pulsing, flexing cunt into her.", parse);
+	Text.NL();
+	if(p1cock.Len() >= 20) {
+		Text.Add("All of a sudden, you hit something, but whatever it is, the obstruction soon gives way, allowing your [cock] to sink even further into Lenka’s depths. Dimly, you’re aware that you must’ve hit her cervix - and that she easily opened it up to allow you direct access to her baby bag. All the better to put that cum directly where it’s needed, after all.", parse);
+		Text.NL();
+	}
+	Text.Add("You can’t take much more of this, not with your avian lover’s pussy holding your shaft in a dead stranglehold. Already, your cock is twitching inside her, your balls swollen and churning as they approach their moment of release. It’s practically a given that you’re going to cum now, one way or the other…", parse);
+	Text.NL();
+	Text.Add("But some small portion of your senses return to you. You look up to find Lenka’s face contorted in a mixture of equal parts ecstasy, anticipation and sheer, orgasmic pleasure at the thought of being pregnant. Seems like her hold on your mind has slipped just a little, enough for you to consider resisting.", parse);
+	Text.NL();
+	Text.Add("At this point, though, will it make any difference? You don’t know…", parse);
+	Text.Flush();
+	
+	//[Submit][Resist]
+	var options = new Array();
+	options.push({ nameStr : "Submit",
+		tooltip : "It’s hopeless. Might as well just lie back and enjoy your new life as a fallen angel’s breeding slave.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Oh, what’s the use. Lying here in this oh-so-comfortable bed, having your cock milked by someone both skilled and eager, for the express purpose of bearing as many of your offspring as possible… and for all eternity, too. There are far worse fates than this, you realize as the gentle haze descends upon your senses once more and snuffs out your last spark or resistance. Far worse fates…", parse);
+			Text.NL();
+			if(player.FirstBreastRow().Size() >= 2)
+				Text.Add("Lenka steadies herself by grabbing your [breasts], greedily and roughly fondling the soft, sensitive flesh. Perhaps a bit too roughly - you whimper and mewl in protest as she squeezes down hard in a bid to get at your [nips], but that only seems to encourage the avian demoness’ lusts.", parse);
+			else
+				Text.Add("Lenka steadies herself by planting her hands on your chest, ostensibly for support but unabashedly taking the chance to get a feel for your body. The avian demoness makes a pleasant, humming noise in the back of her throat - she must like what she feels.", parse);
+			Text.NL();
+			parse["knot"] = p1cock.Knot() ? "knot" : "cock";
+			Text.Add("All of a sudden, you groan, a shudder running through the entirety of your body, and realize that you’re about to blow. Lenka’s body seems to recognize this as well, and her cunt clenches tightly about your swollen [knot], determined not to let a single drop of seed go to waste. This in turn sends you careening over the edge, and you cry out as you feel your cum rise through your shaft, ready to explode into the avian demoness.", parse);
+			Text.NL();
+			if(player.NumCocks() > 1) {
+				Text.Add("Your other shaft[s2] throb[notS2] and pulsate[notS2] too, but nothing comes out despite the overwhelming pleasure you’re experiencing. She really <i>is</i> serious about taking in <i>all</i> your seed.", parse);
+				Text.NL();
+			}
+			parse["len"] = p1cock.Len() >= 20 ? "womb" : "cunt";
+			Text.Add("With a cry of pleasure that sends you writhing under your avian lover, you throw your head back and begin blowing your load straight into her heated [len]. Quickly realizing what’s happening, her body draws you into her as far as you will go, encouraging your seed to go where it’s most needed. Your groins mash and grind together, hips moving frantically with the effort of mating.", parse);
+			Text.NL();
+			Text.Add("Your orgasm seems to last forever, your cock pumping more and more seed into Lenka even as she sings out in triumphant victory at the sensation of hot, slippery baby batter flooding her warm, receptive oven, ready to be baked into delicious little buns. How long does this go on? How long do you ride this wave of pleasure? You can’t tell, not through the fog that clouds your mind; there’s no sign that your shaft is softening as she continues to ride you brutally. Despite the absurd amounts of cum you must’ve forced into her at this point, Lenka’s womb swallows it all without missing a beat, her belly remaining flat and trim throughout the whole process, her lush inner walls amazingly tight about your erection.", parse);
+			Text.NL();
+			Text.Add("At last, you fire off your last few spurts of cum, feeling utterly drained and lifeless from the exertions you’ve just been through. It’s only when she’s sure that you’re utterly spent that Lenka lifts herself off you, both her cervix and cunt lips sealing themselves ironshod-tight to prevent so much a single drop of your seed escaping. Surveying your panting, moaning form and slowly softening dick, the avian demoness croons and leans down on all fours over you to nuzzle you in the crook of your chin.", parse);
+			Text.NL();
+			Text.Add("<i>“Mm, that wasn’t so bad, cum-pump,”</i> she croons. <i>“I sensed the very moment your seed took root, and it was glorious. You’ll do just fine, don’t worry.”</i>", parse);
+			Text.NL();
+			Text.Add("Already? You glance down at the avian demoness’ heavy breasts, swaying slightly under her. Unchanged, her midriff retains its gentle concave, but her milk-makers are ever so slightly fuller, firmer, <i>bigger</i>, the nipples jutting through her feathers ever so slightly darkened. Slowly, Lenka shifts her weight back to her knees, arching her back to better show off her sensuous body, and as she runs her gloved hands across her sides you notice that her belly’s no longer concave, but flat instead.", parse);
+			Text.NL();
+			Text.Add("She may not be showing yet, but her breasts are definitely starting up milk production. Panting softly, her breasts heaving, Lenka caresses her lower belly, and when she’s done, she’s sporting the slightest of baby bumps, the fruit of your coupling beginning to make itself known.", parse);
+			Text.NL();
+			parse["v"] = player.FirstVag() ? "" : " grow a pussy on you and";
+			Text.Add("The avian demoness gathers locks of her long, blood-red hair and toys idly with them. <i>“It’s a shame you can’t feel what I’m feeling, but perhaps that doesn’t matter. Maybe when I get more cum-pumps, I’ll[v] let you have a go, too. Then you can have a nice, rounded belly like me.”</i>", parse);
+			Text.NL();
+			Text.Add("You moan like a whore in heat. When put forward by that tantalizing, honeyed voice, the idea is the most arousing you’ve ever come across. To be like your mistress-wife, your belly big and round, bearing young for her… it’s more than you could ever have hoped for.", parse);
+			Text.NL();
+			Text.Add("A peal of soft song emanating from her throat, Lenka settles back and concentrates on the task of incubating your seed. The going is slow at first, but the process quickly speeds up; the slight swell of her midriff rapidly expands into an undeniable baby bump, jutting slightly forward as the fruit of her womb swells forth with gusto. Crooning, she slowly passes her hands along her pregnant tummy, fingers reaching through crimson feathers to touch increasingly stretched skin, and with each loving stroke you can <i>see</i> her belly rounding and filling with unholy life.", parse);
+			Text.NL();
+			Text.Add("<i>“You have strong seed,”</i> she whispers. <i>“I’ll show you why they call me <b>Mama</b> Lenka.”</i>", parse);
+			Text.NL();
+			Text.Add("Her belly isn’t just growing forward now; it’s also growing outwards until she’s looking about six or seven months along, her breasts swelling and filling with milk to match, her nipples darkening as they bulge and become fat ready to be used for feeding. On any other woman, such sudden growth would be alarming, but the avian demoness takes an intense, perverse pleasure in her unearthly fecundity; her breath comes in ragged gasps, her body hot and flushed with excitement. Without warning, she’s all over you again, thrusting the fertile swell of her pregnancy in your face.", parse);
+			Text.NL();
+			Text.Add("<i>“Show some appreciation for what you made, will you?”</i> she says with a wicked grin. <i>“It is your seed growing in there, after all.”</i>", parse);
+			Text.NL();
+			Text.Add("Yes… anything to make her happy. Reaching up, you sink your fingers through Lenka’s feathers and make contact with the rounded curves of her swollen womb. It feels so warm and good to the touch… perfectly suited for your planted seed to sprout and ripen into full, large fruit. Her baby bag pulses rhythmically as it works away at shaping new life, and your heart overflows with joy at the flutters of motion that come from within.", parse);
+			Text.NL();
+			Text.Add("Of course, the fact that you’re rubbing your hands all over her baby bump doesn’t mean it stops growing; on the contrary, your touch seems to accelerate the process even more than her own does. Before your very eyes, Lenka’s belly swells out to the size of a full-term pregnancy, her belly button first rising into line with the fertile, womanly swell of her tummy, then popping out from the sheer pressure of the numerous chicks within.", parse);
+			Text.NL();
+			Text.Add("<i>“Oof,”</i> she croons as small bumps rise on the stretched skin of her heavily pregnant belly. There’s a short pause, and then her face settles in a look of pure pleasure as the squirming and shifting within becomes stronger as your young mature before your eyes. <i>“They’re really active.”</i>", parse);
+			Text.NL();
+			Text.Add("They’re? Oh… you stop your touching and caressing for a moment to let that sink in, even as Lenka’s full belly balloons to the point that she’s undeniably pregnant with multiples. Low and heavy, her pregnancy rests on her knees, a fleshy shelf for her heavily engorged breasts, and your avian lover closes her eyes and hums a few notes of a wordless tune as she gleefully hugs her stuffed baby bag. Demoness or no, you have to admit that she looks really maternal at this point, her tender, gently leaking nipples making her even more so. Her protruding tummy already looks like it’s full term with twins, and showing no signs of slowing.", parse);
+			Text.NL();
+			Text.Add("Consumed by the sheer joy of impending motherhood, Lenka cries out and sings gloriously as she feels the lives within her continue to mature and develop. With her this big, her belly and breasts have settled into rhythmic pulsing growth: With each breath she draws, the avian demoness’ curves swell; with each exhalation, they shrink, but end up a little bigger than they were before. In and out, in and out; slowly, Lenka’s overstuffed uterus grows to the size of being overdue with twins, then is well on her way to looking full term with triplets. She’s practically panting and wailing, unable to think of anything but the babies growing inside her, feeling their constant kicking and squirming and revelling in her incredible sense of maternity.", parse);
+			Text.NL();
+			Text.Add("But… just how big is she going to get? Your question is answered as Lenka’s growth slowly comes to a stop, leaving her moaning and breathless, seemingly overdue with triplets, constantly squirming and kicking with and eagerness to be unleashed upon the world. With how massive and inhumanly gravid her midsection is, she makes the bed look more like a nest than a bed proper, and can’t seem to get enough of you rubbing her pregnancy. Her breasts leak constantly, a steady stream of milk pouring from her nipples as her breasts kick into overdrive in preparation for all the feeding they’ll have to do.", parse);
+			Text.NL();
+			Text.Add("<i>“Ohhh… it’s time. I can feel the shells hardening.”</i>", parse);
+			Text.NL();
+			Text.Add("Uh-oh.", parse);
+			Text.NL();
+			Text.Add("<i> “Help me get into position, cum-pump,”</i> Lenka commands. You’re only too happy to be given the chance to obey your mistress-wife’s orders, and although her belly makes her ungainly, you’re able to do a she wishes. Just as with her pregnancy, the avian demoness takes a perverse, almost orgasmic amount of pleasure from the process of birthing her brood. She gets into a comfortable position on the bed, legs spread and then... puts her hand between her thighs and starts masturbating.", parse);
+			Text.NL();
+			Text.Add("The laying is an easy affair, but not surprising considering Lenka’s broodmother-worthy hips; it happens almost as soon as she sets her mind to it. First, her belly visibly drops as her young prepare to enter the world, their weight settling on her hips even as her usually tight cervix begins to give way. Gradually, the contents of her womb shift lower and lower with each contraction, accompanied by her lustful moans and pants; her netherlips bulge and part with the egg rapidly crowning, then slipping out of her as she orgasms, leaving a sticky mess on the sheets.", parse);
+			Text.NL();
+			Text.Add("Wow. Looking at the sheer size of that womb-straining egg… and she’s got more of those in her? You can’t help but feel elated that you were part of this process, that this incredible fertility goddess picked you, out of all who could have stumbled upon this place, to father her firstborn spawn.", parse);
+			Text.NL();
+			Text.Add("Two more orgasms later, an equal number of huge matte-black eggs are resting beside their sibling, smelling faintly of that same, sickly, cloying sweet scent that pervades the room. Chirping tenderly, Lenka pats the eggs as they begin to hatch, cracks running along their surface until the shells break open and small, dark vaguely bird-like shapes spill out from within, still damp with egg fluids. Mother of Shadows indeed…", parse);
+			Text.NL();
+			Text.Add("A satisfied smile on her face, Lenka takes her brood into her arms and sets them against her breast one by one, giving each their turn to suckle as much as they want.", parse);
+			Text.NL();
+			Text.Add("Before your eyes, the dark shapes grow in leaps and bounds, soon sitting on their demon mother’s lap instead of being held by her. Baby fluff falls to the ground, dissolving in wisps of vile smoke as proper flight feathers and plumage emerge; they empty eyes and dark wings blaze a deep violet with unholy energy. For some reason, you can’t help but notice that the black roses have started to creep beyond the sacristy’s confines, the blossoms ever so much more deadly and beautiful, the thorns they hide so much more vicious…", parse);
+			Text.NL();
+			Text.Add("<i>“Go,”</i> Lenka whispers to her trio of firstborn, the seething masses of vaguely bird-shaped shadow now fully grown. Already, the remnants of her pregnant belly are fading away, her midriff rapidly returning to its old slender shape, her womb preparing itself to be seeded again. <i>“You’ll soon have many brothers and sisters to join you.”</i>", parse);
+			Text.NL();
+			Text.Add("A soft flutter of wings, and they are gone, melding seamlessly into the darkness. Humming to herself, Lenka takes her time cleaning up; removing both eggshell fragments and messy fluids with a snap of her gloved fingers, making sure to move her goddess-worthy body just so to inflame your addled desires. At long last, though, she’s done, and the avian demoness settles back on the bed, eyes gleaming predatorily as she turns her gaze on you.", parse);
+			Text.NL();
+			Text.Add("<i>“Giddy up, cum-pump. We’ve still got lots of work to do.”</i>", parse);
+			Text.NL();
+			Text.Add("Time moves in a blur of breeding, your balls never seeming to run dry despite each massive load you shoot off into your lascivious mistress-wife. Time and time again her womb grows monstrously heavy with child; time and time again more of her dark offspring are sent out into the world, masses of shadow and energy poised to terrorize and destroy. Sometimes, they return bearing gifts for their loving mother; others bring slaves for breeding, but no matter how many others offer up their seed to her, you know that you’re your mistress-wife’s first and favorite.", parse);
+			Text.NL();
+			Text.Add("Around you, the black roses grow from their heart under the elegant bed; you dimly realize that they’ve already consumed the entirety of the burnt-out chapel in their vicious, thorny grip. In your more lucid moments, when your mistress-wife’s voice isn’t present to command your attention and demand that she be bred, you dimly wonder if they’ll eventually spread to consume everything in the world…", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				Scenes.Halloween.WakingUp(true);
+			});
+		}, enabled : true
+	});
+	options.push({ nameStr : "Resist",
+		tooltip : "No! You’ve got to fight this!",
+		func : function() {
+			Text.Clear();
+			Text.Add("No! The realization that this demoness was somehow screwing with your mind only fuels the sudden spark of anger that flares in your breast, and… and…", parse);
+			Text.NL();
+			Text.Add("…You just have to summon up enough strength to actually do anything through the haze of exquisite pleasure that saps your will to do anything useful…", parse);
+			Text.NL();
+			Text.Add("There!", parse);
+			Text.NL();
+			Text.Add("With every last ounce of strength you can muster against the chains binding your will, you grab this so-called “Mother of Shadows” and shove her off-balance, hoping to pry your shaft free of the vice-like grip her pussy has on it.", parse);
+			Text.NL();
+			Text.Add("To your surprise, it works. There’s no small amount of resistance, but she was clearly distracted with all the fucking that’s going on, and your [cock] pops free with a wet, disquieting noise. Happily, your balls decide that this is the moment to discharge their load, and they do so with great gusto. Rope after rope of thick white semen erupts from your [cockTip], splattering all over Lenka. It gets onto her face, between her breasts, into her feathers - hosing her down everywhere except where it needs to go, really.", parse);
+			Text.NL();
+			Text.Add("A shriek sounds from the avian demoness, but it’s not one of anger, but rather, desperation. Denied the satisfaction of having warm cum pumped directly into her baby bag, Lenka is desperately trying to save the spilled seed, scraping it off her, scooping it in her hands, thrusting her cum-coated fingers into herself, perhaps hoping to have much the same effect as a turkey baster…", parse);
+			Text.NL();
+			Text.Add("Now’s your chance! There’s no time to lose - you tear down one of the heavy velvet drapes from the bed and while Lenka’s distracted, grab the avian demoness by the collarbone and wind the fabric tightly about her beak, capping off the binding with a good, solid knot. It amazes you how frail she seems now - just how much of the demoness’ strength was in your own mind?", parse);
+			Text.NL();
+			Text.Add("Finally realizing what’s happening, Lenka makes muffled squawks of protest, but you’re done binding her wrists together with the drapes. Ugh… you can’t believe you came <i>that</i> close to expelling your seed directly into her - and who knows what might have happened then?", parse);
+			Text.NL();
+			Text.Add("Now, the only question is: what do you do?", parse);
+			Text.Flush();
+			
+			//[Flee][Turn Tables]
+			var options = new Array();
+			options.push({ nameStr : "Flee",
+				tooltip : "You don’t want to push your luck. Get out of here!",
+				func : function() {
+					Text.Clear();
+					Text.Add("Screw this, you’ve had just about enough of this demoness and her insidious way of affecting one’s mind. Taking care not to tread on any of the thorny rose vines, you nip on out of the former sacristy as quickly as you can while Lenka struggles against her bonds. You’d do well not to return here, because she’s going to be furious when she finally gets free… ", parse);
+					Text.Flush();
+					
+					Gui.NextPrompt();
+				}, enabled : true
+			});
+			options.push({ nameStr : "Turn Tables",
+				tooltip : "Seeing the demoness tied up like this gives you an idea… if she wants your cum so badly, she can take it in her butt.",
+				func : function() {
+					Text.Clear();
+					Text.Add("A grin spreads across your [face] as a particularly nasty thought comes to mind: since this lusty hussy wants your seed so much, you’re more than willing to give it to her - in the entirely wrong place, of course. Besides, her bird-butt is jiggling so prettily as she squirms about on the sheets, trying to free herself from her bonds; it’d be a shame not to get a good, firm handful of those.", parse);
+					Text.NL();
+					Text.Add("Another muffled squawk of protest comes from Lenka as you force her face-down into the plush bed, but it seems that so long as the avian demoness can’t sing or speak, you’re free from whatever hold her voice has on you. Good, all you need to do is to make sure the bindings don’t slip. Thus reassured, you place one hand on each of her ample ass cheeks and spread them apart, brushing aside tailfeathers to get an unobstructed view of that tight and likely virgin butthole. Lenka’s vigorous wiggling only strengthens your resolve to pay her back for almost managing to turn you into her breeding slave, and with great deliberation, you insert a finger into her pucker, wiggling it about just a little.", parse);
+					Text.NL();
+					Text.Add("The reaction is immediate. A muffled wail sounds from the avian demoness’ beak as her wriggling grows stronger - she’s clearly unused to the intrusion - but the luxurious drapes are very well-made and hold fast. Her loss, your gain. Still, maybe you’ll be a <i>little</i> merciful; her feathers are still slick with your cum, and you gather a little of it on your fingertips and spread it about her asshole. Just a tiny bit of lube to avoid <i>completely</i> ruining her butthole.", parse);
+					Text.NL();
+					Text.Add("Just a little…", parse);
+					Text.NL();
+					Text.Add("Okay, that’s enough.", parse);
+					Text.NL();
+					Text.Add("Lenka positively <i>squeals</i> as you ram your sizeable shaft into her pucker with brutal force, her sphincter no longer virgin. It strains to accommodate your [cockTip], then finally gives way as you squeeze and push your way into her back door. Piteous noises, perhaps for mercy, come from the avian demoness’ throat, but you’re determined to show her as much as she was willing to show you.", parse);
+					Text.NL();
+					Text.Add("Which is none, of course.", parse);
+					Text.NL();
+					parse["c"] = player.NumCocks() > 1 ? Text.Parse(" and loose cock[s2]", parse) : "";
+					Text.Add("The resultant fucking is short, sharp and brutal - made even more so by Lenka’s attempts to fight you off. Your balls[c] slapping against the avian demoness’ lush rump, you pound her asshole ruthlessly, mashing yourself with such force and energy that beads of sweat begin collecting on your [skin]. The orgasm, when it comes, is as explosive as the first, with surprising results - Lenka practically screams into her gag and her once seductive eyes practically pop out from her head as you empty your load into her. Slowly, her stomach begins to swell as you flood her digestive system with your cum, rounding out her tummy into a noticeable paunch.", parse);
+					Text.NL();
+					if(player.NumCocks() > 1) {
+						Text.Add("Your other shaft[s2] explode[notS2] as well, covering her in a second coating of baby batter to join the first, slick and gloriously sticky. She’s going to need a lot of effort to get that all out of her feathers.", parse);
+						Text.NL();
+					}
+					Text.Add("With a final wail, Lenka’s eyes roll back into her head, and she collapses insensate on the bed, worn out by the savaging of her asshole. You extract your shaft with a pop, then turn and hurry out of the former sacristy as quickly as you can manage, careful not to tread on any of the thorns on your way out. Best not to return here, considering the close shave that you had this time round - if you hadn’t seized the moment, you might have still been in there, a slavish breeding stud to a demoness’ whims…", parse);
+					Text.Flush();
+					
+					Gui.NextPrompt();
+				}, enabled : true
+			});
+			Gui.SetButtonsFromList(options, false, null);
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
 }
 
 Scenes.Halloween.WakingUp = function(badend) {
