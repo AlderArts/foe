@@ -25,7 +25,12 @@ Halloween.Flags = {
 	Werewolf  : 4,
 	Graveyard : 8,
 	Chapel    : 16,
-	Lenka     : 32
+	Lenka     : 32,
+	WitchHut  : 64,
+	Jenna     : 128,
+	Broomfuck : 256,
+	PatchesPW : 512,
+	Carepack  : 1024
 };
 
 //Note: checks real time date
@@ -59,7 +64,8 @@ Halloween.Loc = {
 	Camp : new Event("Nomads' camp?"),
 	Path : new Event("Beaten path"),
 	Graveyard : new Event("Graveyard"),
-	Chapel : new Event("Burned chapel")
+	Chapel : new Event("Burned chapel"),
+	WitchHut : new Event("Witch's hut")
 };
 
 // gameCache.flags["HW"]
@@ -538,6 +544,15 @@ Halloween.Loc.Path.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(Halloween.Loc.Camp);
+	}
+));
+Halloween.Loc.Path.links.push(new Link(
+	function() {
+		return Scenes.Halloween.HW.flags & Halloween.Flags.WitchHut ? "Witch's hut" : "Hut?";
+	}, true, true,
+	null,
+	function() {
+		MoveToLocation(Halloween.Loc.WitchHut);
 	}
 ));
 Halloween.Loc.Path.links.push(new Link(
@@ -1377,6 +1392,489 @@ Scenes.Halloween.Lenka = function() {
 		}, enabled : true
 	});
 	Gui.SetButtonsFromList(options, false, null);
+}
+
+Halloween.Loc.WitchHut.description = function() {
+	var first = !(Scenes.Halloween.HW.flags & Halloween.Flags.WitchHut);
+	Scenes.Halloween.HW.flags |= Halloween.Flags.WitchHut;
+	
+	if(first) {
+		Text.Add("The path you’ve chosen eventually ends at a small hut nestled amidst the twisted trees. Built from wood planks and roofed with thatch, it doesn’t look much bigger than the size of a single bedroom; the window shutters might be stuck with grime and age, but thin shafts of bright light manage to worm their way through anyway. A squat stone chimney pours a steady stream of smoke into the air, and you waste no time in stepping up and knocking on the door.");
+		Text.NL();
+		Text.Add("<i>“Come in! Open, locks, whoever knocks!”</i>");
+		Text.NL();
+		Text.Add("Well, that’s an invitation if you ever had one. You take hold of the handle, push open the door, and step into a different world altogether.");
+		Text.NL();
+		Text.Add("The first thing that strikes you about the hut’s interior is how big it is - plainly more so than its outside. It’s certainly enough to hold a massive hearth and equally impressive cauldron bubbling and frothing over the fire, racks upon racks of strange specimens in jars, and a good amount of homely furnishing.");
+	}
+	else {
+		Text.Add("You head up to the witch’s hut once more, and knowing you’re invited, push open the door and step into light and warmth.");
+	}
+	Text.NL();
+	Text.Add("Seated at a rich mahogany table in the middle of the room are two figures: the first being an elf with pink hair, dressed from head to toe in quite the stereotypical witch’s costume, complete with a pointy hat. The second is… well, you can’t quite tell what he, she or it is under the dark, swarthy garments the figure’s clothed itself in. The two of them are sharing some tea at the table, but only one of them’s actually drinking anything…");
+	Text.NL();
+	Text.Add("Curled up in the witch’s lap, a black cat looks up at you and caws angrily, leaping to the floor and scampering for the safety of the shadows. Huh. Then again, it’s a cat; antisocialness is only expected of the creature.");
+	Text.NL();
+	Text.Add("What do you do now?");
+}
+
+Halloween.Loc.WitchHut.links.push(new Link(
+	"Outside", true, true,
+	null,
+	function() {
+		MoveToLocation(Halloween.Loc.Path);
+	}
+));
+
+/* TODO Patches
+
+Halloween.Loc.WitchHut.events.push(new Link(
+	"Trader", true, true,
+	null,
+	function() {
+		
+	}
+));
+*/
+
+Halloween.Loc.WitchHut.events.push(new Link(
+	function() {
+		return (Scenes.Halloween.HW.flags & Halloween.Flags.Jenna) ? "Jenna" : "Witch";
+	}, true, true,
+	null,
+	function() {
+		Scenes.Halloween.Jenna();
+	}
+));
+
+Scenes.Halloween.Jenna = function() {
+	var parse = {
+		playername : player.name,
+		heshe : player.mfTrue("he", "she")
+	};
+	
+	var first = !(Scenes.Halloween.HW.flags & Halloween.Flags.Jenna);
+	Scenes.Halloween.HW.flags |= Halloween.Flags.Jenna;
+	
+	Text.Clear();
+	if(first) {
+		Text.Add("<i>“By the pricking of my thumbs, something sexy this way comes.”</i>", parse);
+		Text.NL();
+		Text.Add("As you approach, the witch sets down her tea and smiles at you. Despite the traditional witch’s garb, she actually looks quite stunning: a tall, pointy hat sits atop a full head of thick, curly pink hair, coupled with a figure-hugging robe of black silk that shows off her motherly form and patched, tattered cloak to keep her warm. At a first glance, there’s a wart on her nose, but on further inspection, it turns out to be a glued-on fake. The pointed tips of her ears suggest that she’s an elf of some sort - it’d definitely explain why she appears to be so young, at the very least.", parse);
+		Text.NL();
+		Text.Add("Oh, sexy, are you?", parse);
+		Text.NL();
+		Text.Add("The witch nods, the movement sending her generous bosom jiggling slightly. <i>“Hail, [playername]! Hail, [heshe] who would transverse the dark roads of this realm! Hail, [heshe] who shall confront and vanquish the evil that lies dormant, or else become its servile fucktoy!”</i>", parse);
+		Text.NL();
+		Text.Add("You glance at the cloth-wrapped figure across the table, but he, she or it hasn’t moved so much as a muscle in response to the witch’s words. For all you know, it might very well be a statue under there. The teacup set before it hasn’t been so much as touched in the slightest, its contents cold and stale, although that in turn doesn’t bother the witch any.", parse);
+		Text.NL();
+		parse["slut"] = player.Slut() >= 50 ? " like something you could get behind! Or under, depending on where evil likes it." : "… um…";
+		Text.Add("Vanquish evil, or else become its servile fucktoy? That sounds[slut]", parse);
+		Text.NL();
+		Text.Add("The witch nods. <i>“So has the great and powerful Jenna spoken. Which is of course, me. Come now, parched my throat is from the speaking, and tea is much desired for the drinking. Join us, please, in our elegant repose, such that we can study the one whom fate has chose.”</i>", parse);
+		Text.NL();
+		Text.Add("While you take a seat at the table, the witch rises and saunters over to a small kitchenette against the wall. Try as you might, you can’t help but notice that she walks with a sexy, swinging gait thanks to her curvaceous form, her hair swaying to and fro as it brushes against her ripe, grabbable ass. Wonder if that’s the way all witches around these parts look like… it’d certainly make sense for one to use magic to spruce up one’s appearance a little.", parse);
+		Text.NL();
+		Text.Add("Your thoughts are interrupted by the clink of china and smell of hot water, and before long, the witch’s returned with a freshly-brewed pot of tea, with two cups already poured. One of these she sets before you, another she reserves for herself, and she’s about to take her seat once more when a look of alarm crosses her face.", parse);
+		Text.NL();
+		Text.Add("<i>“The cauldron, alack! It does overboil! I must see to it, lest I waste many nights of toil!”</i>", parse);
+		Text.NL();
+		Text.Add("Without wasting another moment, the witch hurries off to the hearth and cauldron - letting you get yet another good look at her ample assets, but more importantly, leaving the tea unattended. Hm…", parse);
+		Text.NL();
+		Text.Add("Do you trust the witch and drink from your own cup, or play it safe and switch yours with hers? They look identical, after all.", parse);
+		Text.Flush();
+		
+		Scenes.Halloween.JennaSwitchPrompt({});
+	}
+	else if(Scenes.Halloween.HW.flags & Halloween.Flags.Broomfuck) {
+		Text.Add("Looking up from her tea, Jenna shakes her head, the elven witch’s long, pink bangs swaying in time with the motions of her head.", parse);
+		Text.NL();
+		Text.Add("<i>“Nothing’s left for you in this place<br/>", parse);
+		Text.Add("Countless terrors you tonight will face<br/>", parse);
+		Text.Add("Go forth, bold one! Make utmost haste<br/>", parse);
+		Text.Add("For there is scarce time for you to waste.”</i>", parse);
+		Text.NL();
+		Text.Add("With that, she returns to her tea. Yeah, you ought to be making a move.", parse);
+		Text.Flush();
+		
+		Gui.NextPrompt();
+	}
+	else { // REPEAT, not fucked
+		Text.Add("You approach the great and powerful Jenna once more, and the witch raises her head to look you in the eye.", parse);
+		Text.NL();
+		Text.Add("<i>“My earlier offer that you spurned;<br/>", parse);
+		Text.Add("Have you reconsidered and thus returned?”</i>", parse);
+		Text.Flush();
+		
+		//[Sure][Nah]
+		var options = new Array();
+		options.push({ nameStr : "Sure",
+			tooltip : "Yeah, you changed your mind.",
+			func : function() {
+				Text.Clear();
+				Scenes.Halloween.JennaBroomfuck();
+			}, enabled : true
+		});
+		options.push({ nameStr : "Nah",
+			tooltip : "Answer’s still no, sorry.",
+			func : function() {
+				Text.Clear();
+				Text.Add("Thanks for the offer, but you’ll still decline.", parse);
+				Text.NL();
+				Text.Add("Jenna tilts her head at you and looks as if she’s about to say something, but returns to her tea. You don’t blame her - speaking in rhyme must be tough on the elven witch.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt();
+			}, enabled : true
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+}
+
+Scenes.Halloween.JennaSwitchPrompt = function(opts) {
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	
+	//[Switch][Don’t Switch][Trader]
+	var options = new Array();
+	
+	options.push({ nameStr : "Switch",
+		tooltip : "The witch’s up to no good. Switch the teacups.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Yeaah… you don’t trust this Jenna witch one bit. She probably messed with your tea or something… just to be on the safe side, you’ll switch the drinks. If she isn’t trying to pull any shenanigans, no harm done, and if she is… well.", parse);
+			Text.NL();
+			Text.Add("You cast a guilty glance at the trader in their colorful patchwork clothes, but as always, there’s neither sound nor motion from the many folds of cloth. Is there even something in there, or is it just a dummy?", parse);
+			Text.NL();
+			Text.Add("Bah…", parse);
+			Text.NL();
+			Text.Add("One last look to make sure the witch is properly preoccupied - she’s currently bent over her cauldron, that ripe, juicy ass of hers straining against her black dress, begging, yearning to be free. Hah. A quick movement, and the exchange is made; you sit back and wait for the show to begin.", parse);
+			Text.NL();
+			Text.Add("Indeed, at length, Jenna returns, adjusting her hat on her head as she casts a glance at the table.<i>“I observe you haven’t touched your tea. Might it be you’re waiting for me?”</i>", parse);
+			Text.NL();
+			Text.Add("Naturally. It would be impolite otherwise, wouldn’t it?", parse);
+			Text.NL();
+			Text.Add("Perhaps you’d been expecting more of a reaction from the witch, but she simply takes her seat and raises her teacup to her lips. You do the same, of course, trying to watch her discreetly out of the corner of your eye. The tea definitely tastes like it wasn’t brewed with any simple tea leaves - there’s a slightly spicy aftertaste you just can’t place…", parse);
+			Text.NL();
+			Text.Add("Without warning, a sudden, immense wave of lust crashes into you, making it hard to so much as sit up straight. Moaning aloud as fire blossoms in your chest and nethers, you barely feel yourself slump to the ground as ", parse);
+			if(player.FirstCock())
+				Text.Add("your [cocks] engorge to the point of painfulness fully erect and twitching in the air", parse);
+			if(player.FirstCock() && player.FirstVag())
+				Text.Add(", and ", parse);
+			if(player.FirstVag())
+				Text.Add("your [vag] becomes flush with heat, your insides squirming and churning in their desire to take in a nice big cock within your heated depths", parse);
+			Text.Add(". There’s a sigh, and you become briefly aware of someone standing above you, watching you pant and mewl in desire.", parse);
+			Text.NL();
+			Text.Add("<i>“Let that be a lesson learned<br/>", parse);
+			Text.Add("To know that although trust is earned<br/>", parse);
+			Text.Add("Doubting others with needless cause<br/>", parse);
+			Text.Add("Often results in friendships lost<br/>", parse);
+			Text.Add("Take only what is truly yours<br/>", parse);
+			Text.Add("Lest a punishment is par for the course<br/>", parse);
+			Text.Add("As it happens, you’re in luck<br/>", parse);
+			Text.Add("I need someone for my broomstick to fuck.”</i>", parse);
+			Text.NL();
+			
+			Scenes.Halloween.JennaBroomfuck();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Don’t Switch",
+		tooltip : "Trust the witch and drink your own tea.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Eh, it doesn’t do to be suspicious of everyone all the time. Picking up your cup, you drain it of its contents - the tea is sweet and refreshing, although you’re fairly sure that this wasn’t brewed from your run-of-the-mill tea leaves.", parse);
+			Text.NL();
+			Text.Add("Hey, that wasn’t so bad after all. You pour yourself another cup from the teapot, with much the same effect. At length, the witch returns from her cauldron, notices her cup, and picks it up to dump the contents into the sink.", parse);
+			Text.NL();
+			Text.Add("Hey, isn’t she going to drink that? Seems like a bit of a waste.", parse);
+			Text.NL();
+			Text.Add("<i>“Suffer not a cup of tea gone cold: the taste, the smell, they be stale and old,”</i> comes the muttered reply. At length, she returns with a new china cup and pours herself another serving from the pot. The two of you finish your drinks, and you thank the witch for the tea.", parse);
+			Text.NL();
+			Text.Add("<i>“The tea was good, that did you say? Then my hospitality you can repay. Traveler, of you I must ask a boon; I must finish my brew before the new moon.”</i>", parse);
+			Text.NL();
+			Text.Add("Uh…", parse);
+			Text.NL();
+			Text.Add("A frown creases the witch’s lovely face. <i>“Damn it, I just need to get a potion done before the month is out and need your help. There, understand that?”</i>", parse);
+			Text.NL();
+			Text.Add("Much better, thank you.", parse);
+			Text.NL();
+			Text.Add("<i>“Seriously, talking in rhyme all the time tires me out, that I can say without a doubt. Well?”</i>", parse);
+			Text.NL();
+			Text.Add("Just what does the great and powerful Jenna need you to do, anyway?", parse);
+			Text.NL();
+			Text.Add("<i>“You ask, then close in and harken<br/>", parse);
+			Text.Add("Of my task before the moon darkens<br/>", parse);
+			Text.Add("Of my task before the moon darkens<br/>", parse);
+			Text.Add("Of dark and dire straits<br/>", parse);
+			Text.Add("Of the impending doom which awaits.<br/>", parse);
+			Text.Add("Approaching soon is the witching hour<br/>", parse);
+			Text.Add("Of the darkest day, when evil’s power<br/>", parse);
+			Text.Add("Surges forth and covers the land<br/>", parse);
+			Text.Add("Wreaks havoc and chaos by its hand.<br/>", parse);
+			Text.Add("Seven nights seven I have woven the threads<br/>", parse);
+			Text.Add("As fine as silk and as heavy as lead<br/>", parse);
+			Text.Add("My enchantment to ward the innocent from the sight<br/>", parse);
+			Text.Add("From the dread horrors poised to stalk the night.<br/>", parse);
+			Text.Add("Alas, there is one last ingredient left<br/>", parse);
+			Text.Add("One essential item of which my spell is bereft<br/>", parse);
+			Text.Add("Distilled essence from a slut<br/>", parse);
+			Text.Add("The juices of one deep in rut<br/>", parse);
+			Text.Add("Gathered fresh while in the throes of pleasure<br/>", parse);
+			Text.Add("Ten thimblefuls, such is the measure<br/>", parse);
+			Text.Add("Of this essence which I need<br/>", parse);
+			Text.Add("Be it a woman’s nectar or a man’s seed<br/>", parse);
+			Text.Add("Yet today you come to my door<br/>", parse);
+			Text.Add("Perhaps you are what I need, and more<br/>", parse);
+			Text.Add("Lay yourself down, and at my behest<br/>", parse);
+			Text.Add("From you this essence my broom will wrest<br/>", parse);
+			Text.Add("In a twisting, turning, orgasmic ride<br/>", parse);
+			Text.Add("Pleasure both without and inside<br/>", parse);
+			Text.Add("For your service, I will handsomely pay<br/>", parse);
+			Text.Add("you with treasures you will need today.<br/>", parse);
+			Text.Add("If agreeable to you is this deal<br/>", parse);
+			Text.Add("Then with a kiss on my lips mark it sealed!”</i>", parse);
+			Text.NL();
+			Text.Add("Well, that’s quite the interesting proposal. To agree or not to agree, that is the question…", parse);
+			Text.Flush();
+			
+			Scenes.Halloween.JennaAgreePrompt({});
+		}, enabled : true
+	});
+	if(!opts.trader) {
+		options.push({ nameStr : "Trader",
+			tooltip : "See if the trader has anything to say.",
+			func : function() {
+				Text.Clear();
+				Text.Add("You turn your eyes questioningly towards the trader at your side and their colorful patchwork robes. Surely there <i>has</i> to be some kind of reaction you can get out of them, right?", parse);
+				Text.NL();
+				Text.Add("Right?", parse);
+				Text.NL();
+				Text.Add("Despite all your staring and even a friendly wave, there’s still no response from the trader. Well, fine. If they’re not talking to you, then they’re not going to be tattling if you get up to any shenanigans, either. No help, no harm - you can deal with that just fine.", parse);
+				Text.NL();
+				Text.Add("Now, what to do?", parse);
+				Text.Flush();
+				
+				opts.trader = true;
+				
+				Scenes.Halloween.JennaSwitchPrompt(opts);
+			}, enabled : true
+		});
+	}
+	
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Halloween.JennaAgreePrompt = function(opts) {
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	
+	var werewolf = Scenes.Halloween.HW.Werewolf();
+	
+	//[Agree][Don’t Agree][...What?]
+	var options = new Array();
+	options.push({ nameStr : "Agree",
+		tooltip : "Yeah, sure. You suppose you could agree to that...",
+		func : function() {
+			Text.Clear();
+			Text.Add("You know what? That sure sounds kinky. Yeah, one for broomstick fuckings, please. Without hesitation, you lunge forward and plant a deep kiss on Jenna’s lips with such force that her witch’s hat falls off her head and floats to the ground. She doesn’t care as she leans into you and returns the kiss with equal vigor, your tongues wrestling, her ample milk cans pressing against your [breasts] as her weight presses against you. After what seems like forever, she pulls away with an audible pop and whispers into your ear.", parse);
+			Text.NL();
+			if(werewolf) {
+				Text.Add("<i>“I’ve got a treat just made for a mutt<br/>", parse);
+				Text.Add("Get down on the ground and prepare your butt.”</i>", parse);
+			}
+			else {
+				Text.Add("<i>“I’ll bespell this place to prevent a mess<br/>", parse);
+				Text.Add("You, in the meantime, can go and undress.”</i>", parse);
+			}
+			Text.NL();
+			parse["w"] = werewolf ? "" : " stripping yourself of your clothing before";
+			Text.Add("You’re only more than eager to do as Jenna asks,[w] getting down on the wooden floor, head down and ass high in the air, ripe for the taking.", parse);
+			Text.NL();
+			
+			Scenes.Halloween.JennaBroomfuck();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Don’t Agree",
+		tooltip : "That doesn’t sound like something you’d like to engage in.",
+		func : function() {
+			Text.Clear();
+			Text.Add("No, nein, nope, nada. This place is weird enough, but you’re drawing the line here.", parse);
+			Text.NL();
+			Text.Add("<i>“I’d reward you, you know; they’re quite good pickings. It’s not as if you’ll be avoiding a whole bunch of dickings. Take your chances, if you will; I’ll see you later when you’ve had your fill.”</i>", parse);
+			Text.NL();
+			Text.Add("Uh, yeah.", parse);
+			Text.NL();
+			Text.Add("<i>“I’ll still be here if you reconsider, but I’d suggest that you not dither. Your time with us grows direly short; you will see what your choices begot.”</i> With that, the witch settles back in her seat and stares into her teacup, as if trying to read the future in the dregs.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		}, enabled : true
+	});
+	if(!opts.what) {
+		options.push({ nameStr : "...What?",
+			tooltip : "Uh, you don’t quite get what was said.",
+			func : function() {
+				Text.Clear();
+				Text.Add("Wait wait wait wait wait. She wants to <b>what</b>?", parse);
+				Text.NL();
+				Text.Add("<i>“Have my broom fuck you and collect your sexual fluids for use in my spell,”</i> Jenna replies matter-of-factly.", parse);
+				Text.NL();
+				Text.Add("That’s so much better than that convoluted poem she just did. Not that it was much of a poem, of course, there’s no meter to it at all.", parse);
+				Text.NL();
+				Text.Add("<i>“Well, will you do it?”</i>", parse);
+				Text.Flush();
+				
+				opts.what = true;
+				
+				Scenes.Halloween.JennaAgreePrompt(opts);
+			}, enabled : true
+		});
+	}
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Halloween.JennaBroomfuck = function() {
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
+	Scenes.Halloween.HW.flags |= Halloween.Flags.Broomfuck;
+	
+	var werewolf = Scenes.Halloween.HW.Werewolf();
+	
+	Text.Add("Jenna appraises you with a critical eye, then dances over to her cauldron.", parse);
+	Text.NL();
+	Text.Add("<i>“Thrice has the horsecock expended itself.<br/>", parse);
+	Text.Add("Thrice and once the bitch has been bred.<br/>", parse);
+	Text.Add("The slut moans, ‘I’m coming, I’m coming!’”</i>", parse);
+	Text.NL();
+	Text.Add("At a beckon of the elven witch’s finger, an old broom flies over from behind the door you entered by, a faint pink glow about its length as her magic animates it. The pink glow only grows brighter as Jenna takes it in her hands, rubbing her palms across its tip; slowly, the ordinary-looking handle changes like putty under her fingers to resemble… why yes, it’s a massive horsecock, almost as thick as your arm and complete with flared tip. Jenna runs her hands up and down the shaft a few times, and ridges and veins surface on the makeshift dildo; guess she’s going all the way and making sure you’re going to have a <i>good</i> time.", parse);
+	Text.NL();
+	Text.Add("<i>“Lubus Maximus,”</i> Jenna mutters. Great gouts of scented liquid shoot from the elven witch’s fingertips, utterly drenching the shaft of her broomstick; the rest splatters on your ass and rolls down your skin in the most disconcerting fashion, eventually pooling on the ground. Without further ado, Jenna mutters another phrase, and her broomstick rushes forward, forcefully planting its tip squarely in your [anus] with a wet squelch of conjured lube. The force of its entry is more than enough to knock the air out of your lungs, and you can feel your ass clench as the magical phallus adjusts its size to fit you snugly. As the pumping and thrusting begins, your [hips] forced back and forth by the horsecock handle’s vigorous assault, Jenna begins chanting by the cauldron’s side:", parse);
+	Text.NL();
+	Text.Add("<i>“Round about the cauldron go;<br/>", parse);
+	Text.Add("In the anal beads throw.<br/>", parse);
+	Text.Add("Hairball of vulgar, oversexed feline<br/>", parse);
+	Text.Add("Days and nights has ten and nine<br/>", parse);
+	Text.Add("Lain unloved, lustful and hot,<br/>", parse);
+	Text.Add("Boil thou first in the charmed pot.”</i>", parse);
+	Text.NL();
+	Text.Add("You try to keep up, but the horsecock handle pounding away into your ass has you gasping for breath and your eyes rolling back into your head. It’s thick enough for you to feel like you’re fit to burst any moment, but not <i>actually</i> end up that way, thank goodness. Eventually, though, the broom handle settles into something of a rhythm, pressing every last inch of itself that you can take into your ass while your butt contracts powerfully about the intrusion - whether to better feel it, or in a desperate bid to prevent it from going further into your ass, that’s anyone’s guess. All this time, Jenna has been adding some more reagents to her spell:", parse);
+	Text.NL();
+	Text.Add("<i>“Three hairs from a puppyslut’s cooch,<br/>", parse);
+	Text.Add("Into the cauldron to simmer and poach;<br/>", parse);
+	Text.Add("Blood of ant-girl red and gold,<br/>", parse);
+	Text.Add("Dark liquid bearing strength untold,<br/>", parse);
+	Text.Add("Adder's fork and gol queen’s sting,<br/>", parse);
+	Text.Add("Lizan’s egg and moth-girl’s wing,<br/>", parse);
+	Text.Add("Bring forth power fit for lording<br/>", parse);
+	Text.Add("Into my charm of potent warding.”</i>", parse);
+	Text.NL();
+	parse["w"] = werewolf ? " your already bestial muzzle" : "";
+	Text.Add("The gathered arousal is spreading through the rest of your body, sweat beading on your [skin] as you pant and whine,[w] unable to articulate words but knowing what you desperately want more of. Already, your hands feel weak, but you nevertheless move a hand to your [nips] and start rubbing away - it just feels so <i>good</i>, and it’s not fair that only your back half is getting any attention…", parse);
+	Text.NL();
+	Text.Add("Off in what seems like the far distance, Jenna continues to stir her cauldron, which is now frothing violently:", parse);
+	Text.NL();
+	Text.Add("<i>“Scale of dragon, tooth of wolf,<br/>", parse);
+	Text.Add("Demonic draft, maw and gulf<br/>", parse);
+	Text.Add("Of a freshly-fed fat cunt snake<br/>", parse);
+	Text.Add("Doomed with eternal thirst to slake.<br/>", parse);
+	Text.Add("The load of a vixen cumslut<br/>", parse);
+	Text.Add("Drug-addled and lost in rut,<br/>", parse);
+	Text.Add("Slippery and slimy, sweet and slick,<br/>", parse);
+	Text.Add("Make my magic brew nice and thick.”</i>", parse);
+	Text.NL();
+	parse["gen"] = player.FirstCock() ? parse["cocks"] : parse["vag"];
+	var gen = "";
+	if(player.FirstCock()) gen += "milking your [cocks]";
+	if(player.FirstCock() && player.FirstVag()) gen += " and ";
+	if(player.FirstVag()) gen += "thrusting into your [vag]";
+	parse["gen2"] = Text.Parse(gen, parse);
+	Text.Add("Out of nowhere, something brushes against your [gen], and you gasp at the sudden, unexpected sensation, arching your back out of instinct. Then it’s there again, and again, until invisible hands are [gen2] with brutal efficiency, determined to extract every last drop of fresh love-juice that your body can offer up. Working in tandem with the enchanted broomstick pounding away at your sphincter, the ghostly force quickly ignites the fire in your belly into a raging inferno of hot excitement that consumes every inch of your being.", parse);
+	Text.NL();
+	Text.Add("You can’t take it anymore, moaning like the needy whore that you are. One last strangled cry of pleasure escapes your lips, and then sweet, sweet release, your lower body shuddering and buckling under your weight from the exhilaration of it all.", parse);
+	Text.NL();
+	if(player.NumCocks() > 1) {
+		Text.Add("Your [cocks] blast[s] gout after gout of fresh spunk from [itsTheir] [cockTip], an overflowing fountain that gushes forth, borne of your ecstasy. The invisible hands milking you don’t let up, instead doubly redoubling their stroking in an effort to drain you as dry as hay, not stopping until the last drop of your semen has been wrung from your [cockTip].", parse);
+		Text.NL();
+	}
+	if(player.FirstVag()) {
+		Text.Add("Shortly after, the invisible forces working at your cunt fall into time with the broomstick pounding at your ass, one pushing in while the other pulls away. You close your eyes and mewl as it nudges at your cervix, threatening to force it apart and invade your womb, but that’s not all; it’s spreading outwards, running across the petals of your womanly flower and teasing them as it goes. At last, it finds your clit, and you dig your fingers into the floor and scream aloud as you feel a gentle back-and-forth motion run across that moist nub of sensitive flesh.", parse);
+		Text.NL();
+		Text.Add("It’s too much for you to bear. If you weren’t already on the ground, you’d have been knocked flat onto it, but as you are you settle for squirting a delicious stream of clear girl-cum onto the ground beneath you, a stream that’s soon joined by another as a second orgasm wracks your body, leaving you weak and breathless.", parse);
+		Text.NL();
+	}
+	Text.Add("At a simple hand gesture from Jenna, the sexual fluids pooled on the ground gather themselves into orbs, rising off the ground and floating over to the elven witch before disappearing into her cauldron. All of a sudden, the bubbling intensifies, and the flames heating the witch’s cauldron turn a ghostly shade of pale blue as the froth comes in contact with them, hissing and spitting all the way.", parse);
+	Text.NL();
+	Text.Add("<i>“Honey from twenty horny zil<br/>", parse);
+	Text.Add("Add to crushed pussyblossom pill<br/>", parse);
+	Text.Add("Finally, fresh essence of desire<br/>", parse);
+	Text.Add("Burning fiercer than raging fire,<br/>", parse);
+	Text.Add("More potent than the finest rum,<br/>", parse);
+	Text.Add("To this spell I add warm cum.<br/>", parse);
+	Text.Add("Simmer and stir, then boil it all<br/>", parse);
+	Text.Add("Steam and smoke, fill my hall!”</i>", parse);
+	Text.NL();
+	Text.Add("With a <i>fwoosh</i> that fills the entirety of the witch’s hut, a great column of pink smoke rises from the cauldron’s open mouth, spreading outwards before slowly creeping out through the windows and chimney. Slowly, the invisible hands tending to you fade away, and the broomstick pulls itself out of your ass with a slick slurp, leaving a sensation of coolness as chill air invades your gaping asshole.", parse);
+	Text.NL();
+	Text.Add("At last, the smoke fades somewhat - or at least, enough for you to make out Jenna coming up to you. She’s doused the flame under the cauldron, and stops by your side to give you a pat on the head. You note that the broomstick’s in her hand once more, with absolutely no trace of it ever having been a gigantic wooden horsecock. Maybe that’s for the better.", parse);
+	Text.NL();
+	Text.Add("<i>“Oh, well done! I commend your pains;<br/>", parse);
+	Text.Add("And everyone shall share in the gains;<br/>", parse);
+	Text.Add("For I shall now weave my spell<br/>", parse);
+	Text.Add("Pulling threads and fixing well<br/>", parse);
+	Text.Add("Power to fight this dark hell.”</i>", parse);
+	Text.NL();
+	Text.Add("Ugh. What just happened?", parse);
+	Text.NL();
+	Text.Add("<i>“A deed without a name,”</i> Jenna declares proudly. <i>“Come now, then, can you stand, or shall I have to lend you a hand?”</i>", parse);
+	Text.NL();
+	Text.Add("Right, right. A hand it is. You accept the proffered limb gratefully, and stagger upright with Jenna’s help. Ugh - you’re probably not going to be sitting down for a bit after this. Maybe walk funny a little.", parse);
+	Text.NL();
+	if(Scenes.Halloween.HW.flags & Halloween.Flags.Carepack) {
+		Text.Add("<i>“I’d be the first to offer recompense, but you’ve already claimed your reward - hence; your sole reward this night shall this be: the joy of being buttfucked, and a limp for all to see.”</i>", parse);
+		Text.NL();
+		Text.Add("What? That’s kinda cheap.", parse);
+		Text.NL();
+		Text.Add("<i>“The chest held all I had to give,”</i> the witch shrugs, gesturing toward her taciturn companion. <i>“Don’t pout, you’ll live.”</i>", parse);
+		Text.NL();
+		Text.Add("Fine...", parse);
+	}
+	else {
+		Text.Add("<i>“And now, remuneration for your help. Speak these words to our friend by the table, and they’ll give you what you need.”</i>", parse);
+		Text.NL();
+		Text.Add("You’re all ears, then. What’re the magic words?", parse);
+		Text.NL();
+		Text.Add("<b><i>“Klaatu Barada Nikto.”</i></b>", parse);
+		Text.NL();
+		if(Scenes.Halloween.HW.flags & Halloween.Flags.PatchesPW) {
+			Text.Add("H-hold on... you've heard that before. <i>That's</i> what it was?!", parse);
+		}
+		else {
+			Text.Add("<b>(You should probably write this down somewhere for future reference, so you don’t have to do this again. Unless you really want to, that is.)</b>", parse);
+			Text.NL();
+			Text.Add("Right, got it.", parse);
+		}
+	}
+	Text.NL();
+	Text.Add("<i>“Now go! Go forth and face the terrors of the night! Bring to them your noble, righteous fight! Or you can fuck them silly until the beasts give in; it’s the same thing in the end, really.”</i>", parse);
+	Text.NL();
+	if(player.Slut() >= 50)
+		Text.Add("Why, that sounds like quite the entrancing and exhilarating adventure that lies ahead of you! One full of ghosts and goblins… can you fuck a ghost? Won’t be from lack of trying, that’s for sure!", parse);
+	else
+		Text.Add("Um, okay. You’ll keep that in mind if all else fails.", parse);
+	Text.Add(" Welp, there’s nothing left for you here, unless you still have yet to receive your reward. Besides, your ass has recovered enough for you to at least duckwalk to the door without too much grimacing… you really ought to be on your way, if you don’t have any more business in this place.", parse);
+	Text.Flush();
+	
+	Scenes.Halloween.HW.flags |= Halloween.Flags.PatchesPW;
+		
+	Gui.NextPrompt();
 }
 
 Scenes.Halloween.WakingUp = function(badend) {
