@@ -1426,16 +1426,13 @@ Halloween.Loc.WitchHut.links.push(new Link(
 	}
 ));
 
-/* TODO Patches
-
 Halloween.Loc.WitchHut.events.push(new Link(
 	"Trader", true, true,
 	null,
 	function() {
-		
+		Scenes.Halloween.Patches();
 	}
 ));
-*/
 
 Halloween.Loc.WitchHut.events.push(new Link(
 	function() {
@@ -1875,6 +1872,178 @@ Scenes.Halloween.JennaBroomfuck = function() {
 	Scenes.Halloween.HW.flags |= Halloween.Flags.PatchesPW;
 		
 	Gui.NextPrompt();
+}
+
+Scenes.Halloween.Patches = function() {
+	var knowsPatches = patchwork.Met();
+	var patchesGender = patchwork.KnowGender();
+	var gotCarepack = Scenes.Halloween.HW.flags & Halloween.Flags.Carepack;
+	var hasPassword = Scenes.Halloween.HW.flags & Halloween.Flags.PatchesPW;
+	
+	var parse = {
+		Patches : knowsPatches ? "Patches" : "the trader",
+		harpymerchant : patchesGender ? "harpy" : "merchant",
+		playername : player.name
+	};
+	parse = patchwork.ParserPronouns(parse);
+	
+	Text.Clear();
+	if(gotCarepack) {
+		Text.Add("You try to strike up another conversation with [Patches], but [heshe] ignores you, [hisher] mind somewhere else… possibly in another world altogether.", parse);
+		Text.Flush();
+		Gui.NextPrompt();
+		return;
+	}
+	
+	parse["pshe"] = patchesGender ? "she’s" : "they’re";
+	parse["s"] = patchesGender ? "s" : "";
+	
+	if(knowsPatches) {
+		Text.Add("You’re not sure at first, but after a moment, you’re convinced; it’s Patches! What’s that crazy [harpymerchant] doing here? ", parse);
+		Text.NL();
+		Text.Add("[HeShe] incline[s] [hisher] head as you greet [himher], offering you a quiet, <i>“[playername]”</i> in acknowledgement. When you ask [himher] what [pshe] doing here, though, [heshe] just stare[s] back at you silently.", parse);
+		Text.NL();
+		if(patchesGender)
+			Text.Add("You don’t know why she’s being so standoffish, but eventually you give up. You know how stubborn this silly harpy can be, especially about her mysterious character. Once you’ve stopped trying, she tilts her head and says something to you.", parse);
+		else
+			Text.Add("Looks like the usually tight-lipped merchant is feeling even less talkative than usual. Seeing that you’re getting nowhere, you reluctantly give in, mentally cursing eccentric peddlers. You’re so caught up in your private grousing that you almost miss it when they finally say something to you.", parse);
+	}
+	else {
+		Text.Add("You turn to the figure in its colorful patchwork robes, and wonder if there’s actually anyone in there or not. For all you know, it could be a stand. Or a scarecrow. Or… well, anything that’s stands rigidly upright.", parse);
+		Text.NL();
+		Text.Add("Hello?", parse);
+		Text.NL();
+		Text.Add("No response.", parse);
+		Text.NL();
+		Text.Add("Anyone in there?", parse);
+		Text.NL();
+		Text.Add("The robed figure suddenly moves to <i>look</i> at you… though you don’t think he, or she, or whatever it is can see you when their entire face is covered by the patched robes...", parse);
+	}
+	Text.NL();
+	Text.Add("<i>“Password?”</i> a feminine voice asks.", parse);
+	Text.Flush();
+	
+	//[Give Password][Say anything][Leave]
+	var options = new Array();
+	options.push({ nameStr : "Give Password",
+		tooltip : Text.Parse("Alright, you found a password. Let’s try it and see what [heshe] think[s].", parse),
+		func : function() {
+			Text.Clear();
+			Text.Add("Well... lets see how this goes... Klaatu Barada Nikto?", parse);
+			Text.NL();
+			Text.Add("<i>“Correct,”</i> [heshe] says, shuffling to move out of the way.", parse);
+			Text.NL();
+			Text.Add("Out from under [hisher] robes, you see a chest she seemed to have been perched on. Well, it seems remembering that weird password paid off after all! Let’s see what you got...", parse);
+			Text.NL();
+			Text.Add("The first thing to emerge from the chest as you start enthusiastically rummaging amongst its contents is a canteen. It’s an old-fashioned circular thing made out of what looks like tin; so battered, dinged, and scratched that it’s honestly a minor miracle it still holds water. Somebody has attempted to write on it, smeared ink just managing to spell out the words <i>Holee Water</i> on its front. Sure enough, when you give it a shake, you can hear water sloshing around inside.", parse);
+			Text.NL();
+			Text.Add("Okay… not the most promising start, but maybe it’ll come in handy somewhere. Worst comes to the worst, you can always drink it when you’re thirsty, right?", parse);
+			Text.NL();
+			Text.Add("<i>“That’s all I have, use it with care,”</i> the trader comments.", parse);
+			Text.NL();
+			Text.Add("Putting it aside, you resume fishing through the chest’s contents again... ah, now here’s something a little more promising; a necklace of garlic bulbs on thick, knotted string. Phew! The smell is enough to make <i>you</i> gag, never mind what it’s supposed to do to vampires and other evil spirits.", parse);
+			Text.NL();
+			parse["witch"] = Scenes.Halloween.HW.flags & Halloween.Flags.Jenna ? "Jenna" : "the witch";
+			Text.Add("<i>“A garlic a day helps keep the salesmen at bay; their offerings disgust me and I don’t want to pay,”</i> you hear [witch] chime in.", parse);
+			Text.NL();
+			Text.Add("You tuck that away <i>very</i> carefully and keep looking.", parse);
+			Text.NL();
+			Text.Add("The next item you bring forth is a set of glasses, with very wide lenses of smoked glass. These would block out most of the light were you to wear them, and would certainly make your eyes impossible to see. Still, what possible use could these have?", parse);
+			Text.NL();
+			Text.Add("<i>“It’s an invisibility charm, but only works on zombies,”</i> the robed figure explains.", parse);
+			Text.NL();
+			Text.Add("...Okay. Well, you guess zombies aren’t exactly known for their intelligence. You tuck the glasses away and keep looking, only to turn up a sizeable loaf of bread. Very <i>old</i> bread. It’s not moldy, but it’s so stale you could probably knock someone out by hitting them with it, it’s that hard.", parse);
+			Text.NL();
+			Text.Add("Looking at [witch] or [Patches] only earns you a shrug from both.", parse);
+			Text.NL();
+			Text.Add("Since you are getting this stuff for free, you can’t complain too much. Pushing it aside, you resume looking. The next item to emerge from the depths of the chest is a small book - a diary, with the name “Jenna” written on the front and a rather tacky amount of pink love hearts and XOXO’s scribbled across its cover.", parse);
+			Text.NL();
+			Text.Add("<i>“I’ll be taking that,”</i> [witch] says, immediately grabbing the diary from your hands and hugging it close to her chest. <i>“This wasn’t meant for mortal eyes...”</i>", parse);
+			Text.NL();
+			Text.Add("...You are starting to feel less than confident in what they’ve decided to give you. It’s looking more and more like they just threw in random junk. Holding your tongue, you start looking for something else; you have a feeling you’ve almost seen everything now.", parse);
+			Text.NL();
+			Text.Add("One more item brushes your fingers, and you pull it into the light; a sizable fake rubber bone. When your fingers tighten on it, it squeaks plaintively.", parse);
+			Text.NL();
+			
+			var werewolf = Scenes.Halloween.HW.Werewolf();
+			
+			if(werewolf) {
+				Text.Add("Squeaky bone! Get it-get it-get it-get it!", parse);
+				Text.NL();
+				Text.Add("Your prey squeaks and squeals, drowning out the growls that rumble from your throat as you bite and gnaw it for all you’re worth, shaking your head with such ferocity that your ears audibly flap in the wind.", parse);
+				Text.NL();
+				Text.Add("Triumphant over your enemy, you chew it contentedly, the bone squeaking meekly in your ears.", parse);
+				Text.NL();
+				Text.Add("And then you realize just what you’re doing. Blushing under the fur of your lupine muzzle, you gingerly extract the doggy toy from between your teeth and tuck it away, unable to look Jenna or [Patches] in the face.", parse);
+				Text.NL();
+				Text.Add("Desperately trying to cover it up, you return to digging through the chest once more.", parse);
+			}
+			else {
+				Text.Add("Baffled by its inclusion, you squeak it a few times, as if doing so might reveal some hidden magic. But no, it’s just a doggy toy. Maybe there’s something else left in here...", parse);
+			}
+			Text.NL();
+			Text.Add("One final item remains, brushing against your fingertips before you pull it into the light of the cabin. It’s a small pocket notebook, with silver letters against an unadorned black leather cover. The title reads “Practical Guide to Monster Slaying”.", parse);
+			Text.NL();
+			Text.Add("Now <b>this</b> sounds useful! Eager for advice, you flick it open. Spread across the first two pages, in huge, bold letters, are the words <b>DON’T PANIC!</b>.", parse);
+			Text.NL();
+			Text.Add("Well, that’s fairly reasonable advice. Eager to see what else is in here, you flick to the next page. And then the next. And the next. You skim through the book until you have gone from cover to cover, and all you find are blank pages. Baffled, you turn to the cabin’s occupants and ask where the rest of the advice is.", parse);
+			Text.NL();
+			Text.Add("<i>“That’s the only tip the writer had time to write before he was engulfed by a swarm of rabid bats,”</i> [Patches] explains.", parse);
+			Text.NL();
+			Text.Add("Jenna nods. <i>“Such a pity, an end most raw, to succumb to neither specter nor monster, but to nature’s dread claw.”</i>", parse);
+			Text.NL();
+			Text.Add("Oh. Well... that’s depressing. Still, it’s pretty good advice, all things considered.", parse);
+			Text.NL();
+			parse["w"] = werewolf ? "you’re wearing nothing save your furry birthday suit" : "your skimpy outfit";
+			Text.Add("How did you manage to pocket all of this considering [w]? The world may never know, but you do so anyway.", parse);
+			Text.Flush();
+			
+			Scenes.Halloween.HW.flags |= Halloween.Flags.Carepack;
+			
+			party.Inv().AddItem(Items.Halloween.HolyWater);
+			party.Inv().AddItem(Items.Halloween.Garlic);
+			party.Inv().AddItem(Items.Halloween.Shades);
+			party.Inv().AddItem(Items.Halloween.Bread);
+			party.Inv().AddItem(Items.Halloween.SqueakyToy);
+			party.Inv().AddItem(Items.Halloween.Guide);
+			
+			Gui.NextPrompt();
+		}, enabled : hasPassword
+	});
+	options.push({ nameStr : "Say Anything",
+		tooltip : knowsPatches ? "Patches never changes; same old game. Just make something up and you know she’ll buy it." : "They can’t seriously expect you to know some cockamamie password. Just try spouting some gibberish, that ought to satisfy them.",
+		func : function() {
+			Text.Clear();
+			Text.Add("You spout some random gibberish... [pw]?", { pw : Scenes.Patchwork.PW() });
+			Text.NL();
+			Text.Add("<i>“Wrong.”</i>", parse);
+			Text.NL();
+			if(patchwork.flags["Met"] >= Patchwork.Met.Met2) {
+				Text.Add("Wait, <b>what</b>!? Patches <i>never</i> cared about the specifics of the password before - so long as you at least made the effort of humoring [himher], [heshe] would always let you off the hook for trying. ", parse);
+				Text.NL();
+				parse["isare"] = patchesGender ? "is" : "are";
+				Text.Add("From the way [heshe] [isare] looking at you, it’s clear that won’t be the case this time. You’ll have to find the ‘real’ password somewhere if you expect to do business.", parse);
+			}
+			else {
+				Text.Add("Well, that accomplished nothing. Obviously, whoever this weirdo is, they’re serious about this whole password nonsense. If you want to see what they have to offer you, you’ll have to find this password of theirs somewhere out there.", parse);
+			}
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Leave",
+		tooltip : "There’s nothing more you can do here, you might as well get going.",
+		func : function() {
+			Text.Clear();
+			parse["p"] = knowsPatches ? ", beyond a nod of the head" : "";
+			Text.Add("You say goodbye to [Patches], even though you don’t get a response in return[p], and leave [himher] be.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
 }
 
 Scenes.Halloween.WakingUp = function(badend) {

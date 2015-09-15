@@ -61,3 +61,19 @@ Items.Halloween.SqueakyToy.sDesc = function() { return "squeaky bone"; }
 Items.Halloween.SqueakyToy.lDesc = function() { return "a squeaky bone"; }
 Items.Halloween.SqueakyToy.Short = function() { return "Squeaky bone"; }
 Items.Halloween.SqueakyToy.Long = function() { return Scenes.Halloween.HW.Werewolf() ? "It takes all your willpower to avoid giving in and chewing on this stupid toy every time it squeaks..." : "It squeaks when you squeeze it… kinda useless, though you suppose it could be useful when distracting a dog?"; }
+
+
+Items.Halloween.Bread = new Item("hw7", "Stale bread", ItemType.Quest);
+Items.Halloween.Bread.price = 0;
+Items.Halloween.Bread.sDesc = function() { return "stale bread"; }
+Items.Halloween.Bread.lDesc = function() { return "a loaf of stale bread"; }
+Items.Halloween.Bread.Short = function() { return "Stale bread"; }
+Items.Halloween.Bread.Long = function() { return "So hard it could be used as a blunt weapon. When was this made anyway? How come it’s not moldy yet?"; }
+
+
+Items.Halloween.Guide = new Item("hw8", "M.Guide", ItemType.Quest);
+Items.Halloween.Guide.price = 0;
+Items.Halloween.Guide.sDesc = function() { return "monsterslaying guide"; }
+Items.Halloween.Guide.lDesc = function() { return "a monsterslaying guide"; }
+Items.Halloween.Guide.Short = function() { return "Monsterslaying guide"; }
+Items.Halloween.Guide.Long = function() { return "The first two pages say, in big, bold letters: <i>DON’T PANIC!</i> That’s very sound advice, considering the predicament the writer found themselves in moments later..."; }
