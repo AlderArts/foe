@@ -1992,6 +1992,7 @@ Scenes.Layla.SexPitchVaginalCont3 = function(opts, p1cock, parse) {
 				Text.NL();
 				
 				//#PC cums inside Layla
+				var cum = layla.OrgasmCum();
 				var cum = player.OrgasmCum();
 				
 				Text.Add("Underneath you, the chimera writhes in the throes of her own pleasure, crying out as the feel of your cum pouring into her waiting tunnel triggers her to climax in turn.", parse);
@@ -2075,7 +2076,6 @@ Scenes.Layla.SexPitchVaginalCont3 = function(opts, p1cock, parse) {
 				Text.NL();
 				
 				var cum = layla.OrgasmCum();
-				
 				var cum = player.OrgasmCum();
 				
 				var multiplier = 1;
