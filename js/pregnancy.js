@@ -11,6 +11,7 @@ PregType = {
 	Naga      : 5,
 	Gryphon   : 6,
 	
+	Player    : 99,
 	Terry     : 100,
 	Roa       : 101,
 	Lagon     : 102,

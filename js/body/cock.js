@@ -76,6 +76,9 @@ Cock.prototype.Knot = function() {
 Cock.prototype.Sheath = function() {
 	return this.sheath != 0;
 }
+Cock.prototype.Strapon = function() {
+	return this.isStrapon;
+}
 
 Cock.prototype.noun = function() {
 	var noun;
