@@ -109,7 +109,7 @@ Layla.prototype.FromStorage = function(storage) {
 Layla.prototype.ToStorage = function() {
 	var storage = {};
 	
-	this.SaveBodyPartial(storage, {ass: true, vag: true});
+	this.SaveBodyPartial(storage, {ass: true, vag: true, balls: true});
 	this.SavePersonalityStats(storage);
 	this.SaveFlags(storage);
 
