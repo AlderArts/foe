@@ -1564,7 +1564,7 @@ Scenes.Layla.SexPitchVaginalCont = function(opts, p1cock, parse) {
 	//[Finger][Eat her out]
 	var options = new Array();
 	options.push({ nameStr : "Finger",
-		tooltip : "Why get fancy for this? Your fingers should be just fine for getting her all fired up",
+		tooltip : "Why get fancy for this? Your fingers should be just fine for getting her all fired up.",
 		func : function() {
 			Text.Clear();
 			Text.Add("Decision made, you close the distance between yourself and the chimera. You reach out with one arm, draping it over Layla’s shoulders before pulling her into a kiss. With her usual innocence, Layla melts into your mouth, gently parting her lips to let your tongue sneak inside her mouth. Her taste washes over your senses, making your [skin] prickle with anticipation.", parse);
