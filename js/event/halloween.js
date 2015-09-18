@@ -354,7 +354,7 @@ Scenes.Halloween.EnterDream = function(first) {
 		Text.Add("Maybe you’ll stay in here a little while longer, though. Gather yourself, maybe get dressed before venturing out into whatever you’ve managed to land yourself in this time…", parse);
 	}
 	else {
-		Text.Add("You open your eyes and have a distinct sense of deja vu. There’s something familiar about this tent that you can’t quite place, about the strange sense of weightiness that pervades the air, but you can’t quite figure out what. A draft of chill air dances in from the tent flaps and caresses your [skin], and you realize that you’re stark naked.", parse);
+		Text.Add("You open your eyes and have a distinct sense of déjà vu. There’s something familiar about this tent that you can’t quite place, about the strange sense of weightiness that pervades the air, but you can’t quite figure out what. A draft of chill air dances in from the tent flaps and caresses your [skin], and you realize that you’re stark naked.", parse);
 		Text.NL();
 		Text.Add("Well, good thing that someone’s left some clothes here, even if they look more like pieces of a costume, rather than any practical clothing. Shrugging, you grab them from the ground where they lie - <i>some</i> clothing’s better than no clothing at beating the cold, at any rate.", parse);
 		Text.NL();
@@ -1177,7 +1177,7 @@ Scenes.Halloween.Lenka = function() {
 	if(player.HasPerk(Perks.Breeder)) {
 		Text.Add("<i>“And so exceptionally virile, too.”</i> Sniffing at you and letting out a long, appreciative sigh, Lenka trails her fingers over her lower belly, just above where her cum-hungry womb lies, then lets her fingers run down to her cunt. Eyes trained on your [balls], the avian demoness openly caresses her wet slit in front of you, then moans lewdly, her breathing growing harder and faster by the moment.", parse);
 		Text.NL();
-		Text.Add("<i>“Fuck this, I can’t take it any more! It’s time for your reward, cum-pump!”</i> ", parse);
+		Text.Add("<i>“Fuck this, I can’t take it anymore! It’s time for your reward, cum-pump!”</i> ", parse);
 	}
 	Text.Add("Greedily, Lenka rolls over to make space for you on the expansive bed. <i>“Get in here, you. I command you to breed me, to fertilize each one of my eagerly waiting eggs and create monsters to terrorize the world with. You’ll love me, and nothing else; you’ll have the honor of fathering the first of my many, many lovely children.</i>", parse);
 	Text.NL();
@@ -1553,7 +1553,7 @@ Scenes.Halloween.JennaSwitchPrompt = function(opts) {
 			Text.NL();
 			Text.Add("One last look to make sure the witch is properly preoccupied - she’s currently bent over her cauldron, that ripe, juicy ass of hers straining against her black dress, begging, yearning to be free. Hah. A quick movement, and the exchange is made; you sit back and wait for the show to begin.", parse);
 			Text.NL();
-			Text.Add("Indeed, at length, Jenna returns, adjusting her hat on her head as she casts a glance at the table.<i>“I observe you haven’t touched your tea. Might it be you’re waiting for me?”</i>", parse);
+			Text.Add("Indeed, at length, Jenna returns, adjusting her hat on her head as she casts a glance at the table. <i>“I observe you haven’t touched your tea. Might it be you’re waiting for me?”</i>", parse);
 			Text.NL();
 			Text.Add("Naturally. It would be impolite otherwise, wouldn’t it?", parse);
 			Text.NL();
