@@ -1021,10 +1021,9 @@ Scenes.Halloween.Lenka = function() {
 	Scenes.Halloween.HW.flags |= Halloween.Flags.Lenka;
 	
 	Text.Clear();
-	Text.Add("Right. You get the better of your instinctive aversions, and force yourself to move towards the bed; a shiver crawls down your skin as you swear the roses turn to follow your path through the room. Taking hold of the gold-trimmed velvet drapes in one hand, you draw them aside to reveal -", parse);
-	Text.NL();
+	Text.Add("Right. You get the better of your instinctive aversions, and force yourself to move towards the bed; a shiver crawls down your skin as you swear the roses turn to follow your path through the room. Taking hold of the gold-trimmed velvet drapes in one hand, you draw them aside to reveal", parse);
 	if(cveta.Met()) {
-		Text.Add("- Well. She may <i>look</i> like Cveta, but it clearly isn’t her. ", parse);
+		Text.Add("... well. She may <i>look</i> like Cveta, but it clearly isn’t her. ", parse);
 		/* TODO Cveta Brood levels
 		if() //#if brood level = 6 - same line
 			Text.Add("It’s true that their bodies are equally curvaceous, but there’s definitely something off about the way this one carries herself. This bird’s acting far more forward and suggestive as opposed to Cveta’s usual reserved nature, as evidenced by the ‘come hither’ look she’s giving you.", parse);
@@ -1035,7 +1034,7 @@ Scenes.Halloween.Lenka = function() {
 			Text.Add("For one, instead of Cveta’s thin and waifish form, the avian woman lounging on the plush pillows and downy mattress is extremely voluptuous. It’s almost as if everything you knew about the songstress was inverted to create an evil twin of her - a very sexy evil twin, judging by the nasty grin and sultry “come hither” look she’s giving you.", parse);
 	}
 	else {
-		Text.Add("- A young avian woman, by all appearances in the rich blossom of her womanhood, lounging on the bed’s rich trimmings. With her voluptuous form and the maternal airs that surround her, she cuts quite the figure - a sentiment that’s only reinforced as she looks directly at you and let out a husky, sultry hum from the back of her throat.", parse);
+		Text.Add(" a young avian woman, by all appearances in the rich blossom of her womanhood, lounging on the bed’s rich trimmings. With her voluptuous form and the maternal airs that surround her, she cuts quite the figure - a sentiment that’s only reinforced as she looks directly at you and let out a husky, sultry hum from the back of her throat.", parse);
 	}
 	Text.NL();
 	Text.Add("As she lies belly down on the mattress, you can make out a goodly number of details about her shamelessly advertised body. Her almost absurd hourglass figure is shaped by the swell of her hefty breasts - somewhere in the region of a high D or low DD - and more importantly, the wide, curvaceous hips and large, firm rump which blatantly advertise her prodigious fertility for all who care to look. By the looks of her, If she’s not already a mother, then it won’t take much effort to make her one. Stretching along the contours of her waist, the avian woman’s hair reaches in a river of bloody crimson all the way to her deliciously rounded rump, where the job’s taken over by her long, elegant tailfeathers.", parse);
