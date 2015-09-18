@@ -100,7 +100,7 @@ Cveta.Intimate = { //Bitmask
 Scenes.Cveta = {};
 
 Cveta.prototype.Met = function() {
-	return this.flags["Met"] & Cveta.Met.FirstMeeting;
+	return this.flags["Met"] >= Cveta.Met.FirstMeeting;
 }
 
 Cveta.prototype.FromStorage = function(storage) {
