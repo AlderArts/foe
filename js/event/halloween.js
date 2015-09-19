@@ -30,7 +30,8 @@ Halloween.Flags = {
 	Jenna     : 128,
 	Broomfuck : 256,
 	PatchesPW : 512,
-	Carepack  : 1024
+	Carepack  : 1024,
+	Laggoth   : 2048
 };
 
 Halloween.PW = function() {
@@ -952,15 +953,691 @@ Halloween.Loc.Chapel.links.push(new Link(
 		MoveToLocation(Halloween.Loc.Graveyard);
 	}
 ));
-/* TODO Laggoth
 Halloween.Loc.Chapel.events.push(new Link(
-	"", true, true,
-	null,
+	"Altar", true, function() {
+		return !(Scenes.Halloween.HW.flags & Halloween.Flags.Laggoth);
+	},
 	function() {
-		
+		if(!(Scenes.Halloween.HW.flags & Halloween.Flags.Laggoth)) {
+			Text.NL();
+			Text.Add("The altar up ahead is lit up by a hellish glow. The source of the evil plaguing the chapel must be there!");
+		}
+	},
+	function() {
+		Scenes.Halloween.Laggoth();
 	}
 ));
-*/
+
+Scenes.Halloween.Laggoth = function() {
+	var parse = {
+		
+	};
+	
+	Scenes.Halloween.HW.flags |= Halloween.Flags.Laggoth;
+	
+	var werewolf = Scenes.Halloween.HW.Werewolf();
+	
+	Text.Clear();
+	Text.Add("Steeling yourself, you creep up through the charred pews towards the altar, taking advantage of what little cover the remains of the burned chapel afford to conceal your approach. The closer you draw to your destination, the stronger the stink of sulfur and brimstone becomes, until it’s thick in the air and your throat feels like it’s being seared with hellfire each time you draw a breath. Doubts begin to creep into your mind as to whether you’re doing the right thing in confronting this evil - no sense in throwing your life away needlessly - but you cautiously raise your head just above the barrier of blackened wood you’re behind to take in the situation.", parse);
+	Text.NL();
+	Text.Add("It’s certainly a hellish one, that’s for sure. Most of the high arched windows have been smashed into pieces, although there’s no sign of the glass debris that one would have expected. Perhaps they were shattered outwards, instead of inwards? If the pews were charred, there’s practically no furniture left standing, save perhaps the occasional pile of ash. In the place of the altar is a garish throne of a thousand skulls, each of them vaguely human. That can’t be very comfortable to sit on, especially when you can see the paint peeling and no one’s bothered to remove the price tags from most of them.", parse);
+	Text.NL();
+	Text.Add("Nevertheless, it doesn’t seem to bother the hulking figure sprawled out lazily on it. You squint a little, trying to make out who it is through the heat-hazed air, and it looks to be… ", parse);
+	if(burrows.Access()) //#if Lagon met - same line
+		Text.Add("Lagon? There <i>is</i> something similar about this figure and the lagomorph despot you know, something about the face that strikes you as too similar for comfort. Still, there’s little doubt that this <i>isn’t</i> the ruler of the burrows himself - the reddish orange fur should have tipped you off, let alone the crown that sits on his head or the stubby little horns that jut from his brow. He clutches a pitchfork in his right hand, and by the looks of it, he knows how to use it.", parse);
+	else
+		Text.Add("some sort of anthropomorphic rabbit demon, as far as you can tell. The crown perched on his head suggests that he’s a monarch of some sort, held in place by the twin horns which jut out from either side of his brow. Burning orange-red fur covers much of his body, and in his right hand, he clutches a rather impressive-looking and dangerously pointy pitchfork.", parse);
+	Text.NL();
+	Text.Add("Of course, that’s not to mention the massive two foot long cock and grapefruit-sized balls that this demonic monarch is sporting… or the hulking, muscle-bound body the aforementioned are attached to. You’re just about to duck back into hiding and plan what to do next when the demon king raises his head and sniffs the air.", parse);
+	Text.NL();
+	Text.Add("<i>“Fee, fi, fo, fum!<br/>", parse);
+	Text.Add("“I sense an ass for my cum!<br/>", parse);
+	Text.Add("“Be it alive, or be it dead,<br/>", parse);
+	Text.Add("“I’ll… um… uh…”</i>", parse);
+	Text.NL();
+	Text.Add("Pausing in the middle of his impromptu rhyme, the demon king looks thoughtful and scratches his head with a finger. You can practically <i>see</i> the gears turning in his head - the only way things could have been more obvious would be if he’d gone completely cross-eyed. At last, he eventually gives up and rams the base of his pitchfork against the chapel’s floor, creating a terrible racket that echoes through the chapel’s empty halls.", parse);
+	Text.NL();
+	Text.Add("<i>“Get up! Get up, you lazy bastards! Your master demands you get up!”</i>", parse);
+	Text.NL();
+	Text.Add("As you watch, tiny rabbit-like imps - each one no taller than your knee - start swarming out from a pit in the chapel’s floor just behind and a little to the left of the demon king’s throne. There must be at least a couple hundred of them, perhaps more, and they all move with a certain reluctance that suggests that they aren’t quite happy to respond to their lord’s summons.", parse);
+	Text.NL();
+	Text.Add("<i>“How may we serve you, oh Lord?”</i> they chorus.", parse);
+	Text.NL();
+	Text.Add("Another smash of the pitchfork against the ground. <i>“That’s Super Ultra Delicious Wonderful Sexy Lord to you, wimps.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“How may we serve you, oh Super Ultra Delicious Wonderful Sexy Lord?”</i>", parse);
+	Text.NL();
+	Text.Add("The demon king roars, casting his burning visage across the terrified imps. <i>“No, no! You got it wrong! It’s Super DoublePlus Good Handsome Studly Lord! Why do I surround myself with idiots like you?”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Because you’re our Supercalifragilisticexpialidocious ruler, oh Lord?”</i>", parse);
+	Text.NL();
+	Text.Add("A snort. <i>“Well, at least you chumps got it right on the third try, so perhaps you aren’t completely useless. All right, I smell a mortal ass somewhere in here, and it’s been three days since you lot brought in the last one! Your king demands that you bring it back so that I may engage in c… hmm… coterie? Cunninglus? Cotton? C-uh…”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Coitus?”</i> one of the bunny-imps pipes up nervously.", parse);
+	Text.NL();
+	parse["HeShe"] = player.mfFem("He", "She");
+	parse["hisher"] = player.mfFem("his", "her");
+	Text.Add("<i>“Yes, that’s the word. Bring the mortal to me! Now! [HeShe]’s hiding right over there! I <b>smell</b> [hisher] fear! A bit like chocolate, come to think of it.”</i>", parse);
+	Text.NL();
+	Text.Add("Busted! Your heart sinks like a stone as the demon king points a finger right at you. Dismissed by their master, the imp bunnies move like a horde of fire ants, swarming over the blackened floor and charred pews to get at you. There’s no hope of escape - for such small creatures, they certainly move fast, a number of them breaking off from the main body of imps to cut off your path to the exit. ", parse);
+	if(werewolf)
+		Text.Add("You howl and claw at the imps in bestial fury, but to little avail; the more of the little bastards you shake off from your fur, the more clamber onto you while your attention is occupied elsewhere. They’re just like ticks… only without the bloodsucking. ", parse);
+	Text.Add("The remainder of the tiny imp lagomorphs quickly encircle your position, not quite touching you, but quickly herding you out of the pews and forward to where their king is waiting.", parse);
+	Text.NL();
+	Text.Add("<i>“So, what do we have here? Another mortal, it seems!”</i>", parse);
+	Text.NL();
+	Text.Add("Another? There were others here before?", parse);
+	Text.NL();
+	Text.Add("<i>“Naturally.”</i> The demon king sniffs. <i>“Allow me to introduce myself,”</i> he begins, moving a hand to his breast in what you think is supposed to be a dignified manner. <i>“I am His Highness Laggoth the Super Great Limited-Edition Superlative Risque, Ruler of The Pit - or this one, anyway - and Prince of the Aspect of Insufficient Light.”</i>", parse);
+	Text.NL();
+	Text.Add("Wait, that’s Laggoth the Super Great… what was it again?", parse);
+	Text.NL();
+	Text.Add("<i>“Hmph. If my full name and title are too much for your puny mortal in - uh, in, in in something…”</i>", parse);
+	Text.NL();
+	Text.Add("Intellect?", parse);
+	Text.NL();
+	Text.Add("<i>“Yes!”</i> Laggoth roars, sending the imps to cringing. <i>“If my full name and title are too much for your puny mortal intellect, then you may simply address me as Lord Laggoth.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“He never gets the super bit of his title right,”</i> one of the imps nearest to you whispers. <i>“Just play along with whatever he makes up on the spot and you’ll probably be all right. Probably.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“Now! What business brings you to the seat of my throne on this plane?”</i>", parse);
+	Text.Flush();
+	
+	//[Curiosity][Treasure][Fight Evil][Don’t Answer]
+	var options = new Array();
+	options.push({ nameStr : "Curiosity",
+		tooltip : "You were just wandering about, no biggie.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Oh, no particular reason. You were just out here in the middle of the night, saw this burned chapel and thought to yourself that it might just be a nice place to do a little exploring.", parse);
+			Text.NL();
+			Text.Add("To your mild surprise, the demon king buys it lock, stock and barrel. <i>“Exploring? Exploring? How typical of you mortals to stick your noses into places where you don’t belong. Well, your curiosity has only led you to your doom!”</i>", parse);
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Treasure",
+		tooltip : "You were here in hopes of nabbing some sweet loot.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Laggoth sneers at your answer. <i>“Not once in my long captivity in the Pit did I doubt that the greed of mortals would free me from my prison. Even after that, it seems that this particular trait will be downfall of your kind. No! You will not find any treasure remaining in this place, fool. Instead, all you will find is your doom!”</i>", parse);
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Fight Evil",
+		tooltip : "You’re here to vanquish the forces of insufficient light!",
+		func : function() {
+			Text.Clear();
+			Text.Add("You answer that you’re here to fight the evil lurking in the chapel - that is, Laggoth himself.", parse);
+			Text.NL();
+			Text.Add("The demon king’s laughter is loud and raucous. <i>“AH HA HA HA HA! HO HO HO HO! Ha! Ha! Ha!”</i> A few moments to catch his breath and more than a little wheezing, followed by much thumping of his furry, barrel-like chest. <i>“Oh dear. Oh dear. Oh dear.”</i>", parse);
+			Text.NL();
+			Text.Add("What’s so funny?", parse);
+			Text.NL();
+			Text.Add("<i>“Pitiful mortals, always running around with their stupid little toys. I’ve seen it all - holy water, daggers, whips with the souls of dead females in them, axes.”</i> The demon king strikes a pose on his throne, flexing his enormous muscles to show them off to you. There’s little doubt that he’s quite proud of his appearance, perhaps even vain. <i>“There is <b>nothing</b> that can hurt me, fool, so don’t even try! Here before my throne, you are at my mercy! Mine!”</i>", parse);
+			Text.NL();
+			Text.Add("Absolutely nothing?", parse);
+			Text.NL();
+			Text.Add("<i>“None except my only weakness, but you’ll never discover it. I’ll take delight in your pitiful attempts to figure it out before I’m done with you.”</i>", parse);
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Don’t Answer",
+		tooltip : "Just keep mum, you don’t want to let on more than you already have.",
+		func : function() {
+			Text.Clear();
+			Text.Add("Not intending to let on any more than you absolutely have to, you stare at the demon king in stony silence - or at least, as stony as you can muster while having to endure the sulfurous reek coming off him.", parse);
+			Text.NL();
+			Text.Add("<i>“Not one for answering questions, are we?”</i> the demon king continues with a sneer.", parse);
+			Text.NL();
+			Text.Add("No, you’re not one for answering questions.", parse);
+			Text.NL();
+			Text.Add("<i>“Struggle all you want against my magnificent presence, mortal! It will all be in vain in the end, for there is nothing that can harm me! Well, save for my only weakness, but you’ll never discover that in a thousand years!”</i>", parse);
+			PrintDefaultOptions();
+		}, enabled : true
+	});
+	
+	Gui.Callstack.push(function() {
+		Text.NL();
+		Text.Add("He really does have a penchant for the melodramatic, doesn’t he?", parse);
+		Text.NL();
+		Text.Add("<i>“What’s that?”</i>", parse);
+		Text.NL();
+		Text.Add("What’s what?", parse);
+		Text.NL();
+		Text.Add("<i>“That word you used. Melo-something or the other.”</i>", parse);
+		Text.NL();
+		Text.Add("You fight the urge to hold your head in your hands. You don’t have the time for this nonsense; if he’s going to be this thick, this conversation is going to take all night. It might be played to your advantage - there might be some way you could trick this “Super Amazing Incredible One-Time-Offer Low-Cost” demon lord into at least letting you off, but that won’t do much if you die of frustration and boredom beforehand.", parse);
+		Text.NL();
+		Text.Add("So… just what does he want anyway?", parse);
+		Text.NL();
+		Text.Add("Laggoth glowers at you. <i>“A proper handjob, for starters.”</i>", parse);
+		Text.NL();
+		Text.Add("What?", parse);
+		Text.NL();
+		Text.Add("The demon king points at his two foot long cock. <i>“You wouldn’t believe how worthless these imps are. Until I start my conquest and actually get my hands on some more of you mortals, I’m stuck with them… and they can’t do a fuck worth a fuck. Isn’t that right?”</i>", parse);
+		Text.NL();
+		Text.Add("<i>“Yes, oh Super Marvelous Fascinating Unbelievable Lurid one,”</i> the rabbit-imps chorus morosely.", parse);
+		Text.NL();
+		Text.Add("<i>“What was that? I didn’t quite hear you. Something about boiling the lot of you in hot oil?”</i>", parse);
+		Text.NL();
+		Text.Add("The imps mumble their answer yet again, louder this time. By now, it’s quite plain to you that they don’t follow their tyrannical leader out of any love for him… hm. That could be an interesting tidbit of information that might come in useful later.", parse);
+		Text.NL();
+		Text.Add("<i>“That’ll do. That’ll do.”</i> Despite his words, though, it doesn’t sound like Laggoth is very satisfied with his minions’ response. <i>“Now, since what I require of you is to spread word of the impending terror and conquest that is about to befall this world, as well as of my sexy physique, I shall permit you to ask a few questions.”</i>", parse);
+		Text.NL();
+		Text.Add("You are most utterly and completely bowled over by his great magnanimity.", parse);
+		Text.NL();
+		Text.Add("<i>“That. Whatever… that is.”</i> It seems like your sarcasm went completely over Laggoth’s head, kept on sailing, and eventually vanished into the great beyond.", parse);
+		Text.Flush();
+		
+		Scenes.Halloween.LaggothQnA({});
+	});
+	
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Halloween.LaggothQnA = function(opts) {
+	var parse = {
+		
+	};
+	
+	//[Preferences][Conquest][Imps]
+	var options = new Array();
+	if(!opts.pref) {
+		options.push({ nameStr : "Preferences",
+			tooltip : "So, what’s he into anyway?",
+			func : function() {
+				Text.Clear();
+				Text.Add("Laggoth looks a little startled at the question, the demon king narrowing his burning eyes. <i>“What’s it to you?”</i>", parse);
+				Text.NL();
+				Text.Add("Whoa, seems like he got all defensive at the question. Since you’re not going to get out of this without servicing the demon king in some manner, you thought that you might as well cater to his tastes a bit, give him more reason to be merciful with you. It’s not a very convincing lie - or at least, not to you, but you doubt that you need to be amazingly convincing when it comes to Laggoth.", parse);
+				Text.NL();
+				Text.Add("<i>“Hmph. As I said, you could give me a proper handjob.”</i>", parse);
+				Text.NL();
+				Text.Add("Surely that’s not the <i>only</i> thing he’s ever had in his existence, though. You can definitely see how that man-muscle of his might have trouble fitting in most orifices, but there are other things he could have done. Sure, he probably can’t have his cock sucked by most, but how about licked? Or maybe a little giving of oral on his part? Does he have a lady fiend friend to have some fun with? How about some catching?", parse);
+				Text.NL();
+				Text.Add("Lagon scowls, clearly suppressing a wince. <i>“Are you trying to say that I’m inexperienced, foolish mortal? You tread dangerously close to the edge of doom with your reckless tongue.”</i>", parse);
+				Text.NL();
+				Text.Add("Oh no no no no no, you’re sure that a big studly brute like him has plenty of experience. Perhaps you could put it in a nicer way - could he stand to be more adventurous?", parse);
+				Text.NL();
+				Text.Add("<i>“I am a Lord of the Pit!”</i> Laggoth roars, his long ears flopping about in his fury. <i>“A Prince of Insufficient Light! I do not give; I receive my due tribute from those who grovel at my feet! Grovel! Grovel!”</i>", parse);
+				Text.NL();
+				Text.Add("Oh, so that means he <b>does</b> catch anal after all? After all, it <i>is</i> counted as receiving, isn’t it?", parse);
+				Text.NL();
+				Text.Add("<i>“No!”</i> The ferocity of Laggoth’s roar sends a few of his imp minions scrambling for cover and almost blows you over. Guess you’ve bruised his particularly tender ego one too many times - or is there something more to it?", parse);
+				Text.NL();
+				Text.Add("<i>“You’re not going to speak any more of this.”</i>", parse);
+				Text.NL();
+				Text.Add("Fine, fine. Time to move on…", parse);
+				Text.Flush();
+				
+				opts.pref = true;
+				Scenes.Halloween.LaggothQnA(opts);
+			}, enabled : true
+		});
+	}
+	if(!opts.conq) {
+		options.push({ nameStr : "Conquest",
+			tooltip : "He really means to rule the entirety of this plane, eh? Any particular reason why?",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>“Because,”</i> Laggoth replies with full confidence, <i>“that’s what we Lords of the Pit do.”</i>", parse);
+				Text.NL();
+				Text.Add("Is that right? So, it’s something demon kings do, just like how salmon swim upstream to mate, puppies always end up as sluts, and mysterious rings always get found by entirely the wrong people?", parse);
+				Text.NL();
+				Text.Add("<i>“Yes, that is right! Cower, brief mortal! Cower in fear of your inevitable demise before my invincible, immortal and invulnerable power. The entirety of this world shall be plunged into insufficient light, and I will… uh… um…”</i>", parse);
+				Text.NL();
+				Text.Add("Look, you get the point. It’s not his fault really, if he hasn’t thought things through, it’s only because he’s a doer, not a thinker.", parse);
+				Text.NL();
+				Text.Add("<i>“…Do something about it! That’s right, I will do something about it! And then the world will pros… prostitute itself before my feet!”</i>", parse);
+				Text.NL();
+				Text.Add("Maybe the word he’s looking for is ‘prostrate’.", parse);
+				Text.NL();
+				Text.Add("Laggoth scowls. <i>“Yes. That. The armies of Insufficient Light shall sweep across this puny plane, and none shall be able to stand in our path! Go forth and herald my coming to your fellow mortals, and let them know that their only hope is to die, or live on as my slaves!”</i>", parse);
+				Text.NL();
+				Text.Add("That’s a nice thought, but why should you do it?", parse);
+				Text.NL();
+				Text.Add("<i>“Else they might get it into their minds to try something heroic, and the price of real estate goes down really fast if there aren’t enough slaves for everyone. You know, it’s not just location, location, location. So yes. My torments may spare your kind for a little while just yet.”</i>", parse);
+				Text.Flush();
+				
+				opts.conq = true;
+				Scenes.Halloween.LaggothQnA(opts);
+			}, enabled : true
+		});
+	}
+	if(!opts.imps) {
+		options.push({ nameStr : "Imps",
+			tooltip : "If he’s really that great and powerful, why’s all he got at his command a handful of imps?",
+			func : function() {
+				Text.Clear();
+				Text.Add("<i>“Why? Are you trying to tell me that my underlings are somehow inferior?”</i>", parse);
+				Text.NL();
+				Text.Add("Aw, come on. <i>Everyone</i> knows that imps are pretty much the punching bag of demonkind.", parse);
+				Text.NL();
+				Text.Add("<i>“We can settle this right now, you know,”</i> Laggoth replies, a nasty smile on the demonic bunny’s face. <i>“Hey, you lot down there! This mortal says that you’re inferior and pathetic! Surely you’re not going to take that insult lying down!”</i>", parse);
+				Text.NL();
+				Text.Add("The assembled imps glance at each other.", parse);
+				Text.NL();
+				Text.Add("<i>“Eh, I don’t know…”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“I’d rather not do it…”</i>", parse);
+				Text.NL();
+				Text.Add("<i>“Will I get hazard pay for this?”</i>", parse);
+				Text.NL();
+				Text.Add("Bah. If you’d known the little buggers would be such reluctant minions, you’d have just pushed through them and made a break for it. Still, it just goes to confirm your suspicions that they’ve no love for their master.", parse);
+				Text.NL();
+				Text.Add("<b><i>“I said, you’re not going to take that insult lying down!”</i></b>", parse);
+				Text.NL();
+				Text.Add("<i>“No, oh Super Gracious Hyper Hung Happy Lord. We weren’t going to take it lying down; in fact, after you’ve sent the mortal off, we’re going to write a very strongly-worded letter to the nearest mortal leader.”</i>", parse);
+				Text.NL();
+				Text.Add("Laggoth’s face twists, and you wonder if the demon king is going to start bellowing again, but he instead slumps in his throne and plants his head straight onto his hands. <i>“All right, all right, you win, mortal. I got this bunch of useless idiots because Phil took all the succubi and I lost the coin toss for the bruisers, so I got these fellows as the last pick. They’re not the best, but they’re what I’ve got to work with.”</i>", parse);
+				Text.NL();
+				Text.Add("Aww. You could almost feel sorry for the poor bastard - then you remember that he’s an egoistic tyrannical asshole bent on conquering the world, and not too smart a one at that.", parse);
+				Text.Flush();
+				
+				opts.imps = true;
+				Scenes.Halloween.LaggothQnA(opts);
+			}, enabled : true
+		});
+	}
+	if(options.length > 0)
+		Gui.SetButtonsFromList(options, false, null);
+	else {
+		Gui.NextPrompt(function() {
+			Text.Clear();
+			Text.Add("<i>“Enough talk!”</i> Laggoth suddenly roars, slapping a meaty hand down on the armrest of his throne. <i>“Have at you - oh, wait, that’s the wrong one, I was reserving that for the guy with the whip. Enough talk! I tire of this; minions, it is time! Prepare my cock!”</i>", parse);
+			Text.NL();
+			Text.Add("Showing a spark of enthusiasm for the first time, the imps quickly take up the call, echoing their master as a half-dozen of the demonic bunnies clamber atop his knees and begin stroking off his immense shaft. Working away like… like… to be honest, you don’t really want to give too much thought as to what a bunch of imps stroking off a huge demonic dick looks like. Or maybe you do, in which cause you’re quite the morbid fellow, aren’t you?", parse);
+			Text.NL();
+			Text.Add("Long story short, Laggoth’s already third leg-esque pole grows ever stiffer and larger, veins as thick as your fingers starting to rise on its surface. One knows what they say about bunnies and sex, but this is practically ridiculous - it’s not hard to see why the poor bastard is stuck with shitty handjobs. Hard to find a sleeve for a monster that large, especially when it twitches and quivers in that most unsettling fashion.", parse);
+			Text.NL();
+			Text.Add("<i>“The cock is prepared, oh Super Awesome Prodigious Extraordinary Unique Lord! We -”</i>", parse);
+			Text.NL();
+			Text.Add("The imp in question is shut up by a literal cockslap to the face as Laggoth rises from his throne, his ponderous pounder swaying from side to side as he approaches you, the flared tip of his shaft less than a hand’s span from your face.", parse);
+			Text.NL();
+			Text.Add("<i>“Now, mortal! Get to it! You shall have the honor of being amongst the first to sample the terror which awaits this puny plane!”</i>", parse);
+			Text.NL();
+			Text.Add("Gee… talk about a large ham. Or a big dick, as it were. It doesn’t look like there’s any running from your potentially sticky situation, so what do you do now?", parse);
+			Text.Flush();
+			
+			//[Comfort][Resign][Distract]
+			var options = new Array();
+			options.push({ nameStr : "Comfort",
+				tooltip : "It’s clear that Laggoth’s clearly trying a bit too hard at this demon king gig. He must be having a hard time to be overcompensating this much.",
+				func : function() {
+					Text.Clear();
+					Text.Add("Look, you know this must be hard on him.", parse);
+					Text.NL();
+					Text.Add("<i>“Hard?!”</i> Laggoth roars, his cock and balls practically bouncing up and down from how… vigorous his motions are. <i>“I’ll have you know that I’m hard all over! I am hardness exam… examination!”</i>", parse);
+					Text.NL();
+					Text.Add("Exemplified.", parse);
+					Text.NL();
+					Text.Add("<i>“What you just said, brief mortal! And now for your insolence, I will crush you and -”</i>", parse);
+					Text.NL();
+					Text.Add("Yes, yes, you get the point. But you didn’t mean hard as in solid, you meant hard as in not easy. Or perhaps being inclined to be miserable would be more accurate. Come to think of it, how long has it been since he’s had a break? A day off from this whole “crush, kill and destroy” thing he does as a lord of the Pit?", parse);
+					Text.NL();
+					Text.Add("<i>“Uh… um…”</i> Laggoth practically goes cross-eyed as he tries to recall that little bit of trivia. <i>“I don’t quite remember…”</i>", parse);
+					Text.NL();
+					Text.Add("<i>“One thousand, two hundred and seventy-four years, o Super Amazing Fascinating Desirable Provocative Lord,”</i> one of the imps pipes up from behind you. <i>“And two hundred and four days, three hours, and twenty-seven minutes.”</i>", parse);
+					Text.NL();
+					Text.Add("See? He hasn’t had a vacation for so long - that just proves your point. It’s great that he takes his work seriously and really puts his back into it, but all this overtime is killing his productivity. Sure, his imps may be too terrified to be frank with him, but he really does need to shape up, lest he ship out. The first step to solving a problem is admitting it exists in the first place - and if he looks at himself in a serious light, he’s in far from the best situation he could be in at the moment. Off on a backwater plane like this, with a bunch of minions that no one else wanted, lurking around in a burned shell in the middle of a graveyard instead of some dark and foreboding fortress - seriously, now. Pathetic doesn’t even begin to describe how terrible his current situation is. He needs to stop covering up for his inadequacies so he can work at bettering himself.", parse);
+					Text.NL();
+					Text.Add("Deathly silence reigns in the chapel’s scorched halls, and the imps fidget uncomfortably. The stench of brimstone and sulfur grows a little, then dies down. At long last, Laggoth tears his gaze from you, the demonic bunny king burying his face in his palms.", parse);
+					Text.NL();
+					Text.Add("There’s something sobering about seeing an eight-foot beast hunched over on his throne like that. Heavy is the head who wears the crown, as the saying goes.", parse);
+					Text.NL();
+					Text.Add("<i>“All right, all right. It’s… it’s no use trying to deny it any more. I <b>am</b> pretty much hopeless. Can’t do anything right… I try so hard, and still nothing seems to work out.”</i>", parse);
+					Text.NL();
+					Text.Add("As you said, you can see that he’s putting effort into this whole demon lord business. His main problem is that he needs to work smarter, not harder - at the very least, he could stand to be less of a large ham.", parse);
+					Text.NL();
+					Text.Add("Laggorth frowns, looking genuinely puzzled. <i>“But I’m not made of pork.”</i>", parse);
+					Text.NL();
+					Text.Add("Not <i>that</i> kind of ham. He just needs to tone it down a little - just like his cock, bigger isn’t always better. No point having a dick that massive when no one can accommodate its length or girth, or if it gets in the way all the time. There are potions for that these days.", parse);
+					Text.NL();
+					Text.Add("But yes. Take for example, his title. No point having a large mouthful like that when he can’t even keep it straight. Best to have something short and simple like “the doomed”, “the wrathful”, or somesuch. Something which people can easily remember and pass along. It’s just hard to take a self-professed demon lord seriously when he’s being this overblown, and the first step to being a true terror is being taken seriously.", parse);
+					Text.NL();
+					Text.Add("<i>“Huh. So that’s what Phil’s been going on about all the time.”</i>", parse);
+					Text.NL();
+					Text.Add("That, and he could also stand to have a better relationship with his underlings. Maybe they’d be more inclined to stick their necks out for him if he’d try and cultivate some sort of rapport with them. You’re not asking him to be all chummy with the imps - that’d just be playing peasant and obviously contrived - but a more paternalistic outlook towards those he has responsibility for and power over wouldn’t be a bad start. The whole “lord it over your minions with an iron fist” thing may be perceived as common, but there’s a reason why such dark overlords tend to become hero fodder in the end.", parse);
+					Text.NL();
+					Text.Add("There’s a long silence as the demon king mulls this over.", parse);
+					Text.NL();
+					Text.Add("<i>“Look, mortal,”</i> Laggoth says at last, his voice a low rumble. <i>“I know I’m not the brightest torch in the box, even if people don’t tend to say it out to my face. It’s not as if I haven’t at least heard some of what you just told me. But the way you put it… well, I’ve got to think about it for some time, and got some questions to ask of my own people. Maybe try again and put my best foot forward the next time.”</i>", parse);
+					Text.NL();
+					Text.Add("That’s nice to hear.", parse);
+					Text.NL();
+					Text.Add("<i>“Yeah…”</i> the demon king hefts his ponderous member up with both hands. <i>“Not much point in this schlong of mine being so big if it keeps on dragging me down. It’s when you said that, then it all clicked together.”</i>", parse);
+					Text.NL();
+					Text.Add("Well… he <i>is</i> a bunny, even if he’s a burning, hellish one. In hindsight, it shouldn’t have been that much of a surprise, but you’re glad that you got through to him.", parse);
+					Text.NL();
+					Text.Add("<i>“I ought to take a break,”</i> Laggoth continues. <i>“Spend a couple years in one of the lower planes, think this through, make some changes to my life and try again with a bigger goal in mind than some little backwater plane. Stop trying to prove myself and actually go out and do it.”</i>", parse);
+					Text.NL();
+					Text.Add("Yes, yes, that’s the ticket. If he wouldn’t mind?", parse);
+					Text.NL();
+					Text.Add("Supporting his dangling schlong with a hand, the demon king stands and kicks his throne, which promptly crumbles into a pile of foul-smelling dust. <i>“Guess I oughta thank you.”</i>", parse);
+					Text.NL();
+					Text.Add("The pleasure’s yours, but whatever for?", parse);
+					Text.NL();
+					Text.Add("Laggoth begins to make for the pit in the back of the chapel, then stops and thinks a moment. <i>“I guess it’s because no one’s ever bothered talking to me like this before. It’s all either terrified cowering on the part of you mortals, or sneering when I go to those cocktail parties the others throw… I guess I just needed a voice of reason.”</i>", parse);
+					Text.NL();
+					Text.Add("Well, if he figured that out for himself, he can’t be <i>completely</i> dumb.", parse);
+					Text.NL();
+					Text.Add("<i>“Anyway! I ought to be going. Should get started on that vacation.”</i> For the first time since you’ve met him, Laggoth seems truly pleased. <i>“Don’t think we’ll be seeing each other again, but if we do, you’ll be seeing a newer, better me.”</i>", parse);
+					Text.NL();
+					Text.Add("Yeah, hope it works out for him. You watch as Demonic bunny king and minions all file straight into the burning pit, which then closes up with a grinding of earth and brick. The hellish light eventually fades, and then you’re standing all alone by the altar’s remains, the last of the brimstone-and-sulfur smell beginning to fade.", parse);
+					Text.NL();
+					Text.Add("Welp, that’s one great evil dealt with, even if it was in a rather unorthodox manner. Laggoth wasn’t such a bad guy, after all… although you don’t envy whoever’s going to have to deal with him after his makeover.", parse);
+					Text.Flush();
+					
+					Gui.NextPrompt();
+				}, enabled : true
+			});
+			options.push({ nameStr : "Resign",
+				tooltip : "Yeah… when you look at it, a handjob isn’t that big of a deal. You shouldn’t have come here without properly preparing yourself, anyway.",
+				func : function() {
+					Text.Clear();
+					Text.Add("Eh, a handjob isn’t too bad a thing. He could’ve demanded to stick that monster of his into you, and that would’ve been something else altogether, but Laggoth seems to be a reasonable fellow - for a demon king, anyway. ", parse);
+					Text.NL();
+					Text.Add("Stepping up to the throne, you kneel down and get to work, shifting Laggoth’s schlong so it’s supported by his thigh. Three feet long and perhaps eight inches across, the demon king’s massive member provides ample space for you to start stroking away, moving your gentle touch along the entire length of his shaft from hilt to base. Reclining in his throne, Laggoth grunts and shifts, doing his best to keep his imposing and dignified airs. The poor bastard’s definitely got a serious case of overfilled balls, though, and you have no doubt he won’t be able to hold back for too long.", parse);
+					Text.NL();
+					Text.Add("With that thought in mind, you begin to increase the pace of your stroking, your palms moving in a zigzag fashion in a bid to cover as much ground as possible. Doing your best, you rub the sensitive points, you tickle the urethra and give gentle squeezes to the ridge of his glans with your palm as your hand slowly works its way up and down the massive cock it's grinding against. Before long, bubbles of pre start working their way up from the demon king’s balls, a viscous, steaming liquid that sizzles in the most disquieting fashion as it hits the ground. Instinctively, you cup a little between your fingers to serve as lubricant - it’s hot, but not painfully so - and soon Laggoth is sinking back into his throne, hips thrust forward in a bid to give you complete access to his shaft.", parse);
+					Text.NL();
+					Text.Add("That’s awfully nice of him! Soft squelches arise from your fingers as you continue working away at the mountain of manflesh that is Laggoth’s cock, feeling his pulse distinct under your fingers and veins bulging with pressure. As impossible as it might seem, his cock is trying to become even harder, <i>more</i> engorged, and you’re faintly aware that the stench of burning brimstone is only getting stronger in the air. When you’re done here, maybe a recommendation of some good cologne would help… surely as a demon king he’d be able to get some on his hands.", parse);
+					Text.NL();
+					Text.Add("Laggoth moans, and you smile in victory as the demon king gives in to the pleasure radiating outwards from his cock, dropping all pretense to airs as you continue stroking him off. Even the imp bunnies are just standing around, unsure how to deal with the sight of their lord and master so… so… <i>vulnerable</i>. Bubbling has turned to beading where his pre-cum is concerned, and you gather a little more in a hand before starting to work on his weighty balls. One hand still running along his shaft, the other moving down to his ballsack, you heft each of the demon king’s weighty nuts in turn, jiggling them up and down while you caress the head of his cock, bringing all his pent-up frustrations closer and closer to release.", parse);
+					Text.NL();
+					Text.Add("<i>“No! This isn’t… possible… how…”</i>", parse);
+					Text.NL();
+					Text.Add("His muscle-bound chest heaving, Laggoth groans and twists in his throne, pumping his cum-slick stiffy back and forth in your grip. All three feet of demonic bunny-dick forms a magical rod from which you control the demon king, and you can practically feel his balls churning with anticipation of release, his scrotum drawing taut about their sizeable weight. The squelching noises from your lewd act only grow louder and louder as your hands become a blur, thanks to the pre-cum that’s openly drooling from his tip, streamers of hellish seed hanging from his bloated cockhead and oozing to the ground below.", parse);
+					Text.NL();
+					Text.Add("He likes it, doesn’t he?", parse);
+					Text.NL();
+					Text.Add("<i>“Yes! I mean, no… how can I be reduced to thus by a mere mortal?”</i> Laggoth pants. <i>“Even my imps… even my imps can’t manage this, and they have so many hands…”</i>", parse);
+					Text.NL();
+					Text.Add("The point is to work smarter, not harder. More doesn’t always mean better; in fact, like his cock, there can actually be a point where it gets in the way. Doesn’t he know about diminishing returns?", parse);
+					Text.NL();
+					Text.Add("<i>“Dimi… what?”</i>", parse);
+					Text.NL();
+					Text.Add("Oh, right. You shouldn’t have expected him to be able to think, especially now of all times. Time to turn him into a blubbering fool - and you do this by bending your head down to his shaft and run your tongue along the length of the swollen, bulging veins that crisscross his cock. Laggoth whines wordlessly as you lick his massive dick like a massive lollipop, and while the thin coating of pre you’re using as lubricant isn’t exactly the most delicious thing you’ve ever tasted, it’s nonetheless bearable enough for you to hold your nose and get the job done.", parse);
+					Text.NL();
+					Text.Add("Well, time to finish up, then. Your body swaying in time with Laggoth’s furious, rhythmic thrusts, you give him a few more jerks - once, twice, thrice - and then there’s the unmistakable welling up of cum at the base of his shaft, the audible wet churning from within his balls as seed readies itself for imminent release. You barely have time to step back and out of the way before Laggoth roars and blows his load; you can practically see the cum-slit on the tip of his towering rod open up before a voluminous geyser of steaming seed fountains out onto the floor. The imp bunnies scream as gobs upon gobs of demonic sperm pelt down upon them like a rain of fire, gallons of the stuff blasting forth from their king’s cock and rendering them awash with jizz; some of them practically end up swimming in the stuff before it sloughs off thickly and flows away into the burnt pews.", parse);
+					Text.NL();
+					Text.Add("Panting and moaning like the stud in rut that he is, Laggoth twists to and fro in his throne, convulsing with pleasure and sending the spray of semen from his shaft arcing from side to side. Grinning, you doubly redouble your efforts, firmly encircling his shaft as best as you can with your hands and pumping up and down, desperately trying to milk the demon king for all he’s worth. The way Laggoth’s cock twitches and throbs in your hand, the feel of his cum rising through his man-meat - you’re going to give him the best handjob he’s ever had in all of the planes.", parse);
+					Text.NL();
+					Text.Add("Laggoth may be a bunny, but even he has his limits. Slowly, the gushing cum dies down to streamers, and from there to an oozing dribble. When he’s finally done, he’s turned the entirety of the burned chapel to a mess - even with all of his sperm spread out evenly on the floor, it’s high enough for his imp minions to wade through, and you’re only spared from having to squelch through it by standing on the base of his throne. A number of walls have suffered the wrath of his explosive cumshots, seed oozing down them like ghostly ectoplasm, and for a moment or two, the stench of brimstone is drowned out by the salty smell of jizm.", parse);
+					Text.NL();
+					Text.Add("At last, the demon king slumps in his throne, his erection visibly softening even as it leaks like an old faucet, his balls utterly spent. He tries to look at you, then groans and rolls his eyes skyward, his lungs heaving.", parse);
+					Text.NL();
+					Text.Add("<i>“Fuuuuuck.”</i>", parse);
+					Text.NL();
+					Text.Add("Yes, that’s what he just did. How was it?", parse);
+					Text.NL();
+					Text.Add("<i>“Good, good. Not bad for a mortal.”</i>", parse);
+					Text.NL();
+					Text.Add("Oh come on, you know you’re better than that.", parse);
+					Text.NL();
+					Text.Add("Laggoth raises a finger and look like he’s about to say something, but must’ve forgotten what it was, for he opens and shuts his mouth several times before groaning and giving up. <i>“Fuck. You know what? A place that gives handjobs as good as this should continue to give them out. I’m going back and asking for a reassignment - it’s not as if I shouldn’t be asking for somewhere more suited to stretch my wings, instead of some podunk backwater no-name plane.”</i>", parse);
+					Text.NL();
+					Text.Add("Yeah, he should do just that, move on with life. Seek greater heights!", parse);
+					Text.NL();
+					Text.Add("Laggoth grunts in reply, and tries to heft himself out of his throne. It doesn’t work - he’s simply too spent for that, the load he blew too great. Even the imp bunnies are groaning and simply lying down in the sea of cum their magnificent monarch has created, unable to do much else. Sure, the lot’ll eventually drain into the pit in the back, but it’ll probably take a long, long time.", parse);
+					Text.NL();
+					Text.Add("Anything else he has to say before you go?", parse);
+					Text.NL();
+					Text.Add("<i>“I… you have my permission to depart, mortal! Fear my… um… graciousness and feel my tender mercy at… sparing your plane… uggh… fuck…”</i>", parse);
+					Text.NL();
+					Text.Add("A final, pained gasp escapes Laggoth’s lungs, and the demon king collapses into his throne, utterly insensate. A cursory examination reveals that he’s not dead, just out of it… still, if he <i>had</i> died, what a way to go!", parse);
+					Text.NL();
+					Text.Add("Welp, that’s one point for you, and none for the evil demonic lagomorphs out of the pit. You’d call this quite the victory… as soon as you can find someplace to wash up. Turning on your heel, you wade through the sticky cum coating the floor and are off.", parse);
+					Text.Flush();
+					
+					Gui.NextPrompt();
+				}, enabled : true
+			});
+			options.push({ nameStr : "Distract",
+				tooltip : "You’re pretty sure you’ve figured out Laggoth’s weakness and think you can get him to look away for a moment.",
+				func : Scenes.Halloween.LaggothDistract, enabled : true
+			});
+			Gui.SetButtonsFromList(options, false, null);
+		});
+	}
+}
+
+Scenes.Halloween.LaggothDistract = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("Right. You step up to Laggoth, but have absolutely no intention of servicing the demon king’s tool in any way, shape or form. Despite his boasting to the contrary, you’re pretty sure you’ve figured out Laggoth’s weakness, and all you have to do is to get him to drop his guard for a moment or two while you put your plan into action. Given how vain he is, that shouldn’t be a problem…", parse);
+	Text.NL();
+	Text.Add("<i>“Stroke it, mortal,”</i> Laggoth grunts, leaning back in his throne. The demonic bunny king thrusts his hips forward to jab the three foot engorged shaft between his legs at you, and you can swear that the foul brimstone smell is coming directly from his long, glistening length.", parse);
+	Text.NL();
+	Text.Add("Well, fuck that. You’re not going to touch that monster, let alone give him a handjob. A nasty glint in your eye, you step up a little closer than intended, reach up, and knock Laggoth’s silly little crown clean off his head and onto the floor. The demon king clearly wasn’t expecting such an audacious move, for he makes no more to stop you - until it’s too late to do so. Time seems to slow as the little golden crown teeters, falls, and bounces off the foot of Laggoth’s throne before clattering to the floor and coming to a stop.", parse);
+	Text.NL();
+	Text.Add("There’s a sharp whistle in the room as every single imp present simultaneously draws breath.", parse);
+	Text.NL();
+	Text.Add("<i>“My crown!”</i> Laggoth roars, fury in his eyes. Bending forward - albeit with some difficulty owing to his massive prick - the demon king scrambles for his crown, his eyes completely off you. Now’s your chance to do what you need to do and help yourself defeat the enemy!", parse);
+	Text.NL();
+	Text.Add("…You hope. Now, let’s see as to whether your guess as to Laggoth’s weakness was right…", parse);
+	Text.Flush();
+	
+	//[Holy Water][Stake][Garlic][Bread]
+	var options = new Array();
+	if(party.Inv().QueryNum(Items.Halloween.HolyWater)) {
+		options.push({ nameStr : "Holy Water",
+			tooltip : "Holy water should be effective against demons. Splash it on him!",
+			func : function() {
+				Text.Clear();
+				Text.Add("Pulling the canteen of “Holee Water” out of your possessions, you quickly unscrew the top while Laggoth’s attention is occupied and upend it all over the demon king. The clear liquid washes its way over the demon king’s body, erupting into large plumes of blue holy flame that consume his entire form.", parse);
+				Text.NL();
+				Text.Add("<i>“Nooo!”</i> he cries, flailing about in a futile bid to put out the flames. <i>“What have you done!”</i>", parse);
+				Text.NL();
+				Text.Add("What have you done, indeed. Why, you’ve discovered his only weakness. You know, the one which he was so certain you wouldn’t be able to figure out. How does it feel now?", parse);
+				Text.NL();
+				Text.Add("<i>“Fool! Imbecile! That was most assuredly <b>not</b> my weakness!”</i>", parse);
+				Text.NL();
+				Text.Add("So, it was something else altogether?", parse);
+				Text.NL();
+				Text.Add("<i><b>“Yes!”</b></i>", parse);
+				Text.NL();
+				Text.Add("Well, it seems like he doesn’t very much like what’s happening to him at the moment, so you’ll just leave it at that.", parse);
+				Text.NL();
+				Text.Add("<i>“Curse you, mortal! Curse youuuuuu!”</i>", parse);
+				Text.NL();
+				Text.Add("Is it just you, or is Laggoth’s voice getting higher? Yes, it definitely is, and that’s not the only thing that’s changing about the demon king: as the flames continue to consume him, an interesting change gradually comes over his form. Hard edges begin to soften and fill out even as his defined musculature begins to vanish, replaced by a smooth, toned form. Panting and moaning with lust, the demon king drops to his knees and moans as he squirms on the ground, unable to withstand the sheer desire that’s rushing through his system.", parse);
+				Text.NL();
+				Text.Add("As you watch, the transformation begins rippling outwards from the demon king’s core, ramping up in speed as the process begins to get going. Muscle melts away from his midsection, chiseled abs sinking into his stomach as his midsection reforms itself into a curvaceous, toned waist. That extra mass is pushed both away in both directions: upwards into his chest, and downward towards his legs.", parse);
+				Text.NL();
+				Text.Add("You can’t believe your eyes, and lick your lips appreciatively as the demon king’s hips slowly begin plump up, his thighs parting as they’re forced apart by his now child-bearing hips. More and more of the mass from his waist flows into his buttocks, bringing with them a firm jiggle; you can see their solid, rounded shapes wobble ever so slightly as he wriggles on the floor. All in all, he’s definitely looking a lot more fecund now, what with all the fertile preparation.", parse);
+				Text.NL();
+				Text.Add("<i>“Noooo…”</i> Laggoth wails in between lustful pants and moans. He grabs his chest with his hands, desperately pushing down, but to no avail: more and more of his masculine features are melting away under the holy water’s influence as his firm pectorals grow soft and begin to rise with extra mass, the nipples capping them swelling to keep in proportion with his new breasts. Bigger and bigger his newfound lady lumps swell, from a B to a C and then jumping in a surge of growth straight to DDs. Yet - perhaps in a nod to the rock-solid muscle they grew from - his large, sumptuous breasts remain firm and perky, seemingly unencumbered by their prodigious size. Tentatively, Laggoth tests one of his swollen, puffy nipples between thumb and forefinger, and practically convulses on the floor in a fit of insatiable craving, his libido gone off the charts.", parse);
+				Text.NL();
+				Text.Add("Why, you think he - or rather, she - looks a lot better like this. If she’s going to be so bitchy, then she might as well look the part, yes?", parse);
+				Text.NL();
+				Text.Add("<i>“Curse you! How dare…”</i> the former demon king mewls, but you cut her off with a lazy wave of your hand. Your lecherous grin only widens as Laggoth’s face begins to change too, the once-strong masculine features becoming gentle and feminine while long locks of dark hair flow from her head. Square jaw and adam’s apple vanish, to be replaced with a smooth, pointed chin, wide eyes and long eyelashes.", parse);
+				Text.NL();
+				Text.Add("Not that down below has been spared, either. As the ghostly blue flames shift to Laggoth’s legs, you watch in satisfaction as her thighs begin to round out and soften to match her hips and butt, her calves and feet becoming daintier. But most of all is the spot that the transformation has saved for last: her nethers. One twitch, two twitches, three, and Laggoth’s enormous three-foot shaft begins to shrink into his body, vanishing away at a slow but steady pace.", parse);
+				Text.NL();
+				Text.Add("<i>“No! Noo…”</i> Laggoth pants out as she grabs her receding dick. For all her stroking and rubbing, though, there’s no way that she can stop it from withdrawing into her body, all three feet of erect manflesh withering away without a care in the world. At the same time, her balls draw tight against her groin, the hefty orbs disappearing into her lower belly one by one - you can actually see the bumps move upwards before finally vanishing, their virility no doubt converted to fertility as they become the ovaries for the demon queen’s freshly-grown womb. Laggoth is poised on the brink, and the tiny nudge required to tip her over comes from a fresh bulge in her lower belly that extends into groin. Moaning like a whore in heat, the demon queen sticks a furry hand between her legs and rubs away furiously as the bulge continues to grow, and finally, all that pent up vaginal flesh breaks out into the world. A squirt of fresh juices and an orgasm - the newly-minted doe’s very first - accompanies the blossoming of Laggoth’s womanly flower, and you can see the tiny remnants of her once-proud rod peek out from under her hood, now reduced to a perky and sensitive love-button.", parse);
+				Text.NL();
+				Text.Add("Finally, the last of the flames die down, and you step back to appreciate what you’ve made. Mm… she looks perfectly breedable, and doubly so considering she’s a bunny. All of Laggoth’s once-proud virility has been converted by the holy water to delicious, lush fertility, and a look back at the imps and their massive erections tells you that the cohorts are in agreement with you.", parse);
+				Text.NL();
+				Text.Add("<i>“Minions!”</i> Laggoth’s voice doesn’t travel very well, alas, on account of the mewls and moans she’s making as she explores her sensitive new femininity. <i>“I command you to… oooooh… avenge your master!”</i>", parse);
+				Text.NL();
+				Text.Add("The imps don’t move. Instead, their gazes are transfixed on Laggoth, and as one, the horde of demonic bunnies starts moving towards the throne.", parse);
+				Text.NL();
+				Text.Add("<i>“Minions?”</i>", parse);
+				Text.NL();
+				Text.Add("The little buggers don’t waste any time. Scampering up and onto their former master, each and every one of the imps jostle and shove against each other, vying for the best spot on this sweet chunk of female flesh. Well, best to leave them to it - smiling at a job well-done, you turn your back on the rather one-sided orgy and make to leave the chapel. The last sight you have of the now demon queen is that of two of her imps trying to fit their shafts into her tight, elastic cunt at once, one sliding his entire body through her bountiful breasts and several just grinding against her soft, hellish fur. There’s no doubt that after tonight, Laggoth will no doubt have a very different outlook on life.", parse);
+				
+				party.Inv().RemoveItem(Items.Halloween.HolyWater);
+				
+				Text.Flush();
+				
+				Gui.NextPrompt();
+			}, enabled : true
+		});
+	}
+	options.push({ nameStr : "Stake",
+		tooltip : "That “stake” of yours is your only hope! Nail the demon king with your holy stake!",
+		func : function() {
+			Text.Clear();
+			Text.Add("That’s it - the stake! Pulling the holy weapon out from your pack, you seize the opportunity by the throat and plunge the blessed dildo deep into Laggoth’s waiting pucker, putting all of your strength into the blow and ramming it in as far as it’ll go. There’s a brief moment of silence as time seems to slow to a crawl… and then the demon king roars and flails as he bursts into an enormous plume of sickly orange-green flames and acrid smoke. Groaning, he slumps to the floor face down with his ass raised high in the air, the blessed dildo still sticking up from between his butt cheeks, untouched by the flames and unsullied by ash.", parse);
+			Text.NL();
+			Text.Add("<i>“Curse you, mortal!”</i> Laggoth rasps, clawing at the ground with his hands in naked desperation. <i>“How did you know my only weakness?”</i>", parse);
+			Text.NL();
+			Text.Add("Well, when you think about it, it’s simple, really. He let off enough clues as to what it was… you weren’t exactly sure, but you did know that it involved anal sex. And since that “stake” of yours was the only thing that could do the job with any modicum of efficacy…", parse);
+			Text.NL();
+			Text.Add("Laggoth opens his mouth to speak, but what emerges from his lips is a hair-raising, hellish roar. A giant cloud of strange dark gas rises from the demon king’s prone form, leaching outwards from his fur, and then dissipates into the night air. Finally able to command some form of sense into his limbs, Laggoth reaches between his butt cheeks, wrenches the dildo from his asshole, and flings it onto the throne.", parse);
+			Text.NL();
+			Text.Add("<i>“Now you pay, mortal! For this insult, you meet your end in my crucible of hellfire!”</i> With an appropriately dramatic gesture - made somewhat less so by the fact that he’s still walking funny thanks to a stretched asshole - Laggoth raises his hands and waggles his fingers.", parse);
+			Text.NL();
+			Text.Add("Nothing happens.", parse);
+			Text.NL();
+			Text.Add("Looking more than a little concerned, the demon king raises his hands and tries again. <i>“Meet your end in my crucible of hellfire!”</i>", parse);
+			Text.NL();
+			Text.Add("Nope, nothing, nada.", parse);
+			Text.NL();
+			Text.Add("Raising his arms - a gesture which requires a bit of effort - Laggoth turns his gaze to the sky, fingers clawed as if reaching up to milk a giant cow. <i>“Noooooooo! My power! This cannot be!”</i>", parse);
+			Text.NL();
+			Text.Add("Well, seems like it is. Whatever he was expecting to do, he isn’t doing it - seems like he’s pretty impotent at the moment. Guess hitting him the vulnerables really stripped him of his powers, didn’t it?", parse);
+			Text.NL();
+			Text.Add("<i>“You haven’t bested me yet, mortal!”</i> Laggoth snarls, slapping his crown back on his head. <i>“Minions! Your Super Ultra Delicious Wonderful Good Lord and master demands that you rend the flesh off this puny mortal this instant!”</i>", parse);
+			Text.NL();
+			parse["heshe"] = player.mfFem("he", "she");
+			Text.Add("<i>“Eh, I dunno,”</i> one of the imps pipes up. <i>“If [heshe]’s so puny, then why aren’t you doing the smiting yourself?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“If he can’t smite the puny mortal, doesn’t that mean he’s even weaker than one?”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“No!”</i> Laggoth roars. <i>“I will not countenance such treasonous talk here before my throne! I command you - that’s right, all of you - to deal with this troublemaker right n- hey, what are you doing -”</i>", parse);
+			Text.NL();
+			Text.Add("The imps sure can move quickly when they put their mind to it, that’s for sure. Like fire ants up a tree, they now swarm the powerless demon king with much the same effect; while Laggoth roars and kicks away, sending imps flying, there’re simply too many of them for him to handle all at once. Despite the considerable size difference between master and minions, the former is quickly brought to his knees by the latter.", parse);
+			Text.NL();
+			Text.Add("<i>“Wow,”</i> an imp chitters as Laggoth topples to the ground with a crash. <i>“Never thought it’d be this simple.”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Well, he doesn’t have his dark powers any more. We’ve got the mortal to thank for that.”</i>", parse);
+			Text.NL();
+			Text.Add("As one, the imps turn to you and start clapping. It’s a little weird, being congratulated in this manner, but you can understand it - they can’t have had a very pleasant existence in Laggoth’s eternal servitude. Finished, the imps turn their attention as one to a struggling Laggoth, and get to work.", parse);
+			Text.NL();
+			Text.Add("Yeah, they were definitely faking their incompetence earlier on. Quickly dividing a portion of their number into four groups of six, they work together to pin down the demon king’s limbs, their combined strength more than a match for the now-powerless Laggoth.", parse);
+			Text.NL();
+			Text.Add("<i>“No! Let me go! I command you to let me go! Treasonous scoundrels! Worms! You will be nothing without me! Do you understand? Nothing!”</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Eh, we’ll take that chance.”</i> With that, an imp wanders up to you. <i>“Y’know, mortal… mind if we borrow that stake of yours? We’ll return it once we’re done; you can watch if you like.”</i>", parse);
+			Text.NL();
+			Text.Add("Oh, most certainly. You hand the imp the “stake”, then stand back to watch the fun. Brandishing it aloft, the little fellow hurries back to his fellows, and you barely conceal your glee as three of them heft the “stake” aloft, take aim, and ram it with all their might into Laggoth’s already stretched anus.", parse);
+			Text.NL();
+			Text.Add("The demon king roars, but is it from pain? All the same, his mutineering minions set about violating his asshole in the most thorough fashion possible; for someone who looks like he can dish it out very well, Laggoth sure can’t take it. Your so-called stake’s nowhere near the size of his massive member, but he roars and claws at the ground like a beast in agony, knuckles turning white. At least the other imps soon shut him up by stuffing their cocks into his mouth - three of them vying for the dubious honor of having their former despot suck them off all at once.", parse);
+			Text.NL();
+			Text.Add("It certainly is a group effort, if nothing else; the groups of imps rotate themselves, alternating between holding Laggoth down, reaming his ass, getting sucked off, or just standing there and jerking themselves off while playing the voyeur. Faster and faster your holy stake goes, deeper and deeper into his ass, and Laggoth’s cries grow less pained and more impassioned as his asshole adjusts to its new conformations. Despite his best efforts to hide it, his body betrays him: his hips start to gyrate in rhythm with the imps’ thrusts, his eyes rolling back in his head as pain slowly gives way to pleasure and reluctance gives way to eagerness.", parse);
+			Text.NL();
+			Text.Add("Well, well! You didn’t know the demon king was such an enthusiastic buttslut. Laggoth’s shaft bulges under him, desperately trying to attain its full length and girth while squashed under his weight, its straining and heaving a testament to his arousal. His cries are growing louder and louder through the gag of cocks in his mouth, his butt pounding away at the “stake” mashing itself against his prostate - more and more imps are required to hold down his form as it convulses with pleasure. With a final aching groan of release, the demon king cums vigorously - while you can’t see much of what’s happening, the rapidly growing pool of cum expanding outwards from his prone form is good enough for you. Considering the size of his balls, it’s little wonder that it only stops when it’s completely encircled the throne, slowly draining into the pit round the back.", parse);
+			Text.NL();
+			Text.Add("Chittering to themselves, the imp bunnies heave, and the “stake” pops out from Laggoth’s well-used asshole, smelling distinctly more of brimstone and sulfur than it was before it went in. Two of their number squelch through the thick cum puddle to return it to you, then go on their merry way.", parse);
+			Text.NL();
+			Text.Add("<i>“Don’t worry about us, mortal. We’ll handle this bastard and make sure he gets it good for aeons of keeping us down. This is a pretty nice plane, really, and you locals make good booze. We don’t want to conquer it - there’s something about not being conquered and trod under burning hooves that make people really want to knock out the good drinks.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, once the word gets around that they stopped their master from going out and reducing this place to a hellish wasteland, you’re sure the locals will be more than willing to ply them with drink. Giving the imps one final wave, you turn and leave the altar, secure in the knowledge of a job well done.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt();
+		}, enabled : true
+	});
+	if(party.Inv().QueryNum(Items.Halloween.Garlic)) {
+		options.push({ nameStr : "Garlic",
+			tooltip : "Garlic is supposed to ward off evil… let’s see if it’s strong enough to ward off this evil.",
+			func : function() {
+				Text.Clear();
+				Text.Add("A determined glint in your eye, you bring out the string of garlic from your pack and wave it about. Gah, it stinks, almost as bad as the sulfurous stench that pervades the air! Nevertheless, you hold it out, hoping that it’ll… well… do something. Anything?", parse);
+				Text.NL();
+				Text.Add("Grumbling, Laggoth retrieves his crown the ground and plonks it back on his head, his gaze burning through you. <i>“Wretch! What is this? Hey, it actually smells pretty good.”</i>", parse);
+				Text.NL();
+				Text.Add("As you watch in equal parts amazement and horror, Laggoth yanks the string of garlic from your hands, tears a bulb off the end and pops it into his mouth raw. A loud crunching sound echoes in the chapel’s ruined halls as he chews away furiously and thoughtfully before swallowing.", parse);
+				Text.NL();
+				Text.Add("<i>“Hmm. Not bad, if a little on the light side, if I may say so. Perhaps this plane is not completely unworthy; I think I’ll subjugate instead of crush it. Perhaps find out where this plant is grown. However, this offering will not save you, mortal. For subjecting me to such a humiliation in front of my subjects, you deserve the most terrible of punishments, reserved only for those who dare cross me, the Super Delicious Amazing Wonderful Hot Lord of the Pit! Normally, I would fuck my way straight through you and into the next slut beyond, but there is an even worse fate… I sentence you to be cast into the Pit!”</i>", parse);
+				
+				Scenes.Halloween.LaggothPit();
+			}, enabled : true
+		});
+	}
+	if(party.Inv().QueryNum(Items.Halloween.Bread)) {
+		options.push({ nameStr : "Bread",
+			tooltip : "That stick of bread you have… it’s perfectly useable as a club. Go to town!",
+			func : function() {
+				Text.Clear();
+				Text.Add("Yes! That stick of hard, stale bread in your hands… it looks like the sort of thing which could brain a minotaur and then go for seconds on anyone nearby. For goodness’ sake, the thing’s practically fossilized!", parse);
+				Text.NL();
+				Text.Add("Wielding it on one end like a club, you heave with all your might to raise the stale loaf over your head and bring it down on the demon king’s. Time slows for a moment as the bread sails down in a majestic arc, blurring through the air as it hurtles towards its unprotected target. Occupied with the task of retrieving his fallen crown, Laggoth doesn’t even begin to notice the inevitable…", parse);
+				Text.NL();
+				Text.Add("With a loud crack, the end of the stale loaf lands squarely on the demon king’s noggin and shatters into several chunks and a lot of stale, moldy breadcrumbs. You’re left holding the remains of the broken baguette in your hands and feeling rather silly about yourself. Come on, what did you expect was going to happen? A stale loaf of bread against a demon king? That was a rather poor choice in retrospect.", parse);
+				Text.NL();
+				Text.Add("Brushing his fur free of stray breadcrumbs, Laggoth plonks his crown back on his head and rounds on you, looking absolutely bestial at the moment. <i>“How <b>dare</b> you, mortal! You dare bring bread into my lair? You must fry! Not to mention the whole humiliating the Super Duper Ultra Wonderful Prominent Lord at the same time… I was going to let you off with a simple cock-stroking and maybe a little licking, but such insolence calls for extreme measures! To the Pit with this wretch!”</i>", parse);
+				
+				Scenes.Halloween.LaggothPit();
+			}, enabled : true
+		});
+	}
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Halloween.LaggothPit = function() {
+	var parse = {
+		skin : player.SkinDesc()
+	};
+	
+	var werewolf = Scenes.Halloween.HW.Werewolf();
+	
+	Text.NL();
+	Text.Add("<i>“The Pit! The Pit!”</i> The imps chant.", parse);
+	Text.NL();
+	Text.Add("<i>“Yes!”</i> Laggoth roars, pausing in between each word for dramatic effect, and raising his hands as if reaching up to milk a giant cow. <i><b>“TO. THE. PIT!”</i></b>", parse);
+	Text.NL();
+	Text.Add("Before you can react, the horde of imp bunnies has already swarmed you, quite literally sweeping you off your feet. ", parse);
+	if(werewolf) {
+		Text.Add("You howl and struggle against your captors, knocking away a few of the imps with your unnatural strength, but the imps are like a liquid, flowing and bending around your attacks while coming back around on the other side.", parse);
+		Text.NL();
+		Text.Add("Of course, even if you’d managed to extract yourself from the imps’ hold, there’s always the matter of the demon king himself. Strong as you might be as a werewolf, there’s no way you’re outmatching the brutish demon king.", parse);
+	}
+	else {
+		Text.Add("You struggle against your captors, but to little avail. Individually the imp bunnies might be weak, but together they’re quite the formidable force and clearly used to working together against larger opponents. Quickly splitting off into groups, they work at pinning your limbs into immobility while the others hoist you aloft.", parse);
+	}
+	Text.NL();
+	Text.Add("While all this is happening, Laggoth is jerking himself off, the demon king clearly taking no small amount of perverse pleasure in your helplessness. <i>“Your pathetic struggles are no match against even the lowliest of my minions, mortal. Perhaps you should have thought of that before you chose to defy me in so pathetic a manner. The Pit shall disabuse of that notion quickly enough!”</i>", parse);
+	Text.NL();
+	Text.Add("Right. The Pit. That thing right in the back of the chapel, the thing with the burning orange light and reeking stench? Don’t mind if you give it a pass, please.", parse);
+	Text.NL();
+	Text.Add("<i>“I revel in your misery, mortal! But first, could you please take this customer satisfaction survey so that we can better provide better service to the yet-to-be terrorized?”</i>", parse);
+	Text.NL();
+	Text.Add("What?", parse);
+	Text.NL();
+	Text.Add("<i>“On a scale of one to ten, how helpless do you feel at the moment?”</i>", parse);
+	Text.NL();
+	Text.Add("Well, you’ve just been surrounded and made at the mercy of a bunch of what are purportedly the punching bags of demonkind, so… maybe a seven or eight? A little on the high side, since this is being served with a side dish of humiliation.", parse);
+	Text.NL();
+	Text.Add("<i>“And how terrified are you?”</i>", parse);
+	Text.NL();
+	Text.Add("Well, you’re lying here quite peacefully, and not a gibbering wreck. In fact, you’re still giving coherent answers to stupid questions like these, so no, you aren’t very terrified. Maybe a two or three out of ten.", parse);
+	Text.NL();
+	Text.Add("<i>“If you could change anything about your experience about being conquered by a demon horde from the depths of the lower planes, what would you choose to change, aside from not being conquered, of course.”</i>", parse);
+	Text.NL();
+	Text.Add("Now that’s a tricky one, since the obvious question’s been taken out. Maybe tone down the obvious evil just a little? At least to the point where it isn’t becoming hilariously overblown?", parse);
+	Text.NL();
+	Text.Add("<i>“What do you mean? I did everything by the book! See?”</i> With a flourish, Laggoth pulls out a rather thick, dusty tome out from behind him and waves it in your face. On closer inspection, it’s got a large unhappy smiley on the cover, followed by the title “Evil made easy in twelve steps.” Yep that would explain things. <i>“The company manual is never wrong.”</i>", parse);
+	Text.NL();
+	Text.Add("Nah, there’s this “discretion” thing one needs to take into account. Right now, he’s being pretty overblown, and that’s working against him.", parse);
+	Text.NL();
+	Text.Add("<i>“We’ll take your feedback into careful consideration. Now…”</i> Laggoth clears his throat.  <i>“No more delays! <b>TO. THE. PIT!”</b></i>", parse);
+	Text.NL();
+	Text.Add("Squealing with delight, the imps waste no time hoisting you over to the edge of the infernal chasm. Laggoth follows you all the way, taking his time and grinning like a madman as he continues jerking himself off to the sight of you being carried to the Pit’s edge and tossed down in the most unceremonious fashion. As you fall, the demon king unloads a torrent of spooge down after you, splattering you in a heavy stream of burning spunk. It burns at your flesh and sears your [skin] as you tumble further and further down into the bottomless abyss, Laggoth’s mocking laughter echoing clearly in the walls of the Pit…", parse);
+	Text.NL();
+	Text.Add("Now… that was pretty anticlimactic. But then again, everything about Laggoth wasn’t all it was made out to be.", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		Scenes.Halloween.WakingUp(true); 
+	});
+}
+
 Halloween.Loc.Chapel.events.push(new Link(
 	"Sacristy", true, function() {
 		return !(Scenes.Halloween.HW.flags & Halloween.Flags.Lenka);
