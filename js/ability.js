@@ -293,7 +293,7 @@ Ability.Damage = function(atk, def, casterLvl, targetLvl) {
 	casterLvl = casterLvl || 1;
 	targetLvl = targetLvl || 1;
 	
-	var maxDefense = (2+growthPerPoint*growthPointsPerLevel*(targetLvl-1)) * (targetLvl+9)*2 + 100;
+	var maxDefense = (2+Stat.growthPerPoint*Stat.growthPointsPerLevel*(targetLvl-1)) * (targetLvl+9)*2 + 100;
 	var modRatio = Math.pow(maxDefense/def, 1.3);
 	var logistics = 1/(1+Math.exp(-1*modRatio));
 	var defFactor = 2*logistics-1;

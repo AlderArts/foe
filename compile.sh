@@ -18,7 +18,9 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/saver.js \
 	js/statuseffect.js \
 	js/ability.js \
+	js/stat.js \
 	js/entity.js \
+	js/entity-desc.js \
 	js/body/gender.js \
 	js/body/color.js \
 	js/body/race.js \
