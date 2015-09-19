@@ -204,6 +204,24 @@ Entity.prototype.PrintDescription = function() {
 	Text.Flush();
 }
 
+// TODO: affect with lust/perks?
+Entity.prototype.SubDom = function() {
+	return this.subDom.Get();
+}
+Entity.prototype.Relation = function() {
+	return this.relation.Get();
+}
+Entity.prototype.Slut = function() {
+	return this.slut.Get();
+}
+
+Entity.prototype.Gender = function() {
+	return this.body.Gender();
+}
+Entity.prototype.Race = function() {
+	return this.body.torso.race;
+}
+
 Entity.prototype.MuscleTone = function() {
 	return this.body.muscleTone.Get();
 }
@@ -333,6 +351,9 @@ Entity.prototype.Balls = function() {
 }
 Entity.prototype.BallsDesc = function() {
 	return this.Balls().Short();
+}
+Entity.prototype.Virility = function() {
+	return this.body.balls.fertility.Get();
 }
 Entity.prototype.HasFur = function() {
 	return this.body.HasFur();

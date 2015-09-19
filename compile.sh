@@ -20,7 +20,12 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/ability.js \
 	js/stat.js \
 	js/entity.js \
+	js/entity-combat.js \
 	js/entity-desc.js \
+	js/entity-grammar.js \
+	js/entity-menu.js \
+	js/entity-save.js \
+	js/entity-sex.js \
 	js/body/gender.js \
 	js/body/color.js \
 	js/body/race.js \

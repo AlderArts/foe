@@ -13,6 +13,7 @@ Version 0.4l
  - Each "playthrough" resets the event state, so you can test out multiple paths
 * Fixed a bug regarding companions in Lei's task
 * Layla has a new sex scene written by QB/LD. You need a cock/toy to trigger it
+* Restructured the "Entity" class and split it up into multiple files. This shouldn't cause wierdness, but report if it does
 
 --------------------------------------------
              PREVIOUS VERSIONS
