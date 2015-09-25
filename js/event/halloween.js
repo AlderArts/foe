@@ -17,6 +17,7 @@ function Halloween() {
 	party.location = Halloween.Loc.Tent;
 	// Set up internal flags
 	this.flags = 0;
+	this.ronnie = Halloween.Ronnie.NotMet;
 }
 
 Halloween.Flags = {
@@ -32,6 +33,12 @@ Halloween.Flags = {
 	PatchesPW : 512,
 	Carepack  : 1024,
 	Laggoth   : 2048
+};
+Halloween.Ronnie = {
+	NotMet  : 0,
+	Removed : 1,
+	PCBeta  : 2,
+	PCAlpha : 3
 };
 
 Halloween.PW = function() {
@@ -62,6 +69,9 @@ Halloween.prototype.Restore = function() {
 
 Halloween.prototype.Werewolf = function() {
 	return this.flags & Halloween.Flags.Werewolf;
+}
+Halloween.prototype.RonnieAvailable = function() {
+	return this.ronnie != Halloween.Ronnie.Removed;
 }
 
 Halloween.Loc = {
@@ -540,8 +550,15 @@ Halloween.Loc.Path.description = function() {
 	};
 	
 	Text.Add("This dry, dusty path winds its way through the trees, twisting and turning under gnarled branches and over knobbly roots as it leads… well, somewhere. You’re not quite sure <i>exactly</i> where, but your [feet] seem to have taken on a life of their own, ferrying you down the path to your fate. Come to think of it, you’re not even sure where all the trees came from - they just seem to have sprung up all of a sudden to block out as much moonlight as they can with their twisted, thinly-leafed branches.", parse);
-	Text.NL(); //TODO Ronnie
+	Text.NL();
 	Text.Add("Off in the distance, you hear a raven caw, and a faint sigh echoes through the sickly forest. Still, you press on, and eventually the trees and thorny undergrowth thin a little as you near a crossroads, one with many, many paths branching out from its heart like the spokes of a wheel. From here, you can also make out some landmarks in the distance - perhaps you’re meant to be headed to one of these?", parse);
+}
+
+Halloween.Loc.Path.onEntry = function() {
+	if(Scenes.Halloween.HW.RonnieAvailable() && Math.random() < 0.5)
+		Scenes.Halloween.Ronnie();
+	else
+		PrintDefaultOptions();
 }
 
 Halloween.Loc.Path.links.push(new Link(
@@ -567,15 +584,845 @@ Halloween.Loc.Path.links.push(new Link(
 		MoveToLocation(Halloween.Loc.Graveyard);
 	}
 ));
-/* TODO Ronnie
+
 Halloween.Loc.Path.events.push(new Link(
-	"", true, true,
+	"Beta", function() {
+		return Scenes.Halloween.HW.ronnie == Halloween.Ronnie.PCAlpha;
+	}, true,
 	null,
 	function() {
+		var parse = {
+			
+		};
+		parse = player.ParserTags(parse);
 		
+		Text.Clear();
+		Text.Add("Feeling the urge for your beta’s attendance, you throw back your head and utter a piercing howl, which echoes off into the wilderness. Your ears prick up, listening intently, and a few moments later you are rewarded by a softer howl of acknowledgement.", parse);
+		Text.NL();
+		Text.Add("You fold your arms across your chest and wait patiently. Within a minute or less, excited barking and a chorus of cracking branches and rustling undergrowth heralds the arrival of Ronnie. Your cute little white-furred beta bounds into the road and skids to a halt in the dust at your feet, panting lightly as he looks up at you with expectant eyes.", parse);
+		Text.NL();
+		Text.Add("Of course, now that you have him... what do you want to do with him?", parse);
+		Text.Flush();
+		
+		//[Fuck][Dismiss]
+		var options = new Array();
+		options.push({ nameStr : "Fuck",
+			tooltip : "Time to scratch an itch.",
+			func : function() {
+				Text.Clear();
+				Text.Add("Grinning lustfully, you present your half-erect cock to your beta, gesturing towards it.", parse);
+				Text.NL();
+				Text.Add("Ronnie wags his tail and barks his acknowledgement. He strides forth to sniff your male musk, reveling in the scent for a moment before he licks his lips and gets to work.", parse);
+				Text.NL();
+				Text.Add("He starts by lapping your balls, moistening each orb as he lets your shaft drape across his muzzle.", parse);
+				Text.NL();
+				Text.Add("You moan appreciatively, feeling your lupine cock jump at his touch. Growling softly, you reach down and scratch his ears, eager to see what he’ll do next.", parse);
+				Text.NL();
+				Text.Add("Sensing your approval, he moves onto your [cock], first licking the base where your knot still has to fully form, then lapping his way up your shaft until the tip.", parse);
+				Text.NL();
+				Text.Add("Your breath comes in short, sharp pants as he works, pleasure slowly growing as his tongue coats your cock in warm saliva, making the slightest breeze tickle you wonderfully.", parse);
+				Text.NL();
+				Text.Add("He focuses on your pointed tip, circling your cumvein and lapping any dollops of pre that form. His panting breath washes over your member, getting increasingly more erratic as he draws nearer, until you feel his lips gently close around your cock.", parse);
+				Text.NL();
+				Text.Add("You hiss softly, feeling yourself growing almost painfully hard. Your muscles flex and tense as Ronnie suckles at your cock, slowly bobbing his head back and forth along your length. When your whole body starts to tremble with pleasure, you finally act.", parse);
+				Text.NL();
+				Text.Add("Reaching down, you gently but firmly push Ronnie free of your dick. The bemused beta looks up at you, a strand of glistening saliva still linking his bottom lip to your cocktip, but you have your reasons. With a few commanding barks and some gestures, you indicate for him to get into position, like a good little bitch.", parse);
+				Text.NL();
+				Text.Add("Ronnie wags his tail and barks his acknowledgement, turning around to present you with his rear and raising it as high as he can.", parse);
+				Text.NL();
+				Text.Add("Such a good boy. Your fingers run down his spine, affectionately scratching him, and grinning as he shudders like a pet dog at your touch. You grab his girlish, wide hips and kneel behind him, letting your [cock] rest on his taint.", parse);
+				Text.NL();
+				Text.Add("Ronnie’s tail wags as he grinds back at you, eager to be of use to his alpha like the good boy-slut he is.", parse);
+				Text.NL();
+				
+				Scenes.Halloween.RonniePitch();
+			}, enabled : true
+		});
+		options.push({ nameStr : "Dismiss",
+			tooltip : "You don’t actually need him. Give him a pat and then send him off again.",
+			func : function() {
+				Text.Clear();
+				Text.Add("You reach down and playfully tussle Ronnie’s ears, the beta werewolf groaning luxuriantly as you pet his head. Graciously, you allow Ronnie a chance to catch his breath, leisurely petting and stroking him until he’s calmed down, and then indicate the woods, telling him that he’s free to go.", parse);
+				Text.NL();
+				Text.Add("Ronnie barks in acknowledgement, wagging his tail as he turns and heads out into the woods.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt();
+			}, enabled : true
+		});
+		Gui.SetButtonsFromList(options, false, null);
 	}
 ));
-*/
+
+Scenes.Halloween.Ronnie = function() {
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	
+	Text.Clear();
+	Text.Add("This dry, dusty path winds its way through the trees, twisting and turning under gnarled branches and over knobbly roots as it leads… well, somewhere. You’re not quite sure <i>exactly</i> where, but your [feet] seem to have taken on a life of their own, ferrying you down the path to your fate. Come to think of it, you’re not even sure where all the trees came from - they just seem to have sprung up all of a sudden to block out as much moonlight as they can with their twisted, thinly-leafed branches.", parse);
+	// Check out what's going on with Ronnie and select correct path
+	var first = Scenes.Halloween.HW.ronnie == Halloween.Ronnie.NotMet;
+	
+	if(first) {
+		Scenes.Halloween.RonnieFirst();
+	}
+	else if(Scenes.Halloween.HW.ronnie == Halloween.Ronnie.PCBeta) {
+		Text.Add("Your ears perk up as a familiar sound echoes to you out of the wilderness; your cute little alpha is calling to you! Unable to resist his need for you, you howl back to let him know that you heard, and then lope off into the wilderness to find him.", parse);
+		Text.NL();
+		Text.Add("It doesn’t take long for you to find Ronnie, the white werewolf waiting impatiently in a small glade. He gives you a bared-teeth grin, and you obediently kneel before him in submission, getting down on all fours.", parse);
+		Text.NL();
+		Text.Add("Your alpha walks over, gently scratching you behind the ears as he drops on fours himself, circling you to sniff and nose your butt.", parse);
+		Text.NL();
+		Text.Add("You growl contentedly as he scratches that little itch, and can’t help but shake your [butt] in his face as Ronnie sniffs your butt. You know this is just a little foreplay; he’s going to fuck your ass like an alpha, regardless of how you might feel on the matter.", parse);
+		Text.NL();
+		Text.Add("Still, you can’t escape the thought that it doesn’t have to be this way. You’re bigger, stronger and faster than he is. If you wanted to, you could easily overthrow him, take over as alpha. It is a rather tempting thought.", parse);
+		Text.NL();
+		parse["v"] = player.FirstVag() ? " and glossing over your cunt" : "";
+		Text.Add("A yip escapes your lips as Ronnie’s warm, wet tongue slathers a wad of spittle over your asscrack, slurping up your taint[v] before it starts to drill its way into your [anus]. Even if you were of a mind to stop him, Ronnie’s too good at this, giving you a thorough coating of natural lube both inside and out.", parse);
+		Text.NL();
+		Text.Add("Satisfied with his work, Ronnie mounts you, grabbing your hips and pulling you against him as he leans over your back, pointy cock-tip nested on your [anus].", parse);
+		Text.NL();
+		Text.Add("As he starts to grind, teasing your opening, you realize that if you were of a mind to take charge, now would be the moment to strike...", parse);
+		Text.Flush();
+		
+		//[Fight!][Submit!]
+		var options = new Array();
+		options.push({ nameStr : "Submit!",
+			tooltip : "Let alpha Ronnie fuck your ass!",
+			func : function() {
+				Text.Clear();
+				Text.Add("With a soft, lupine churr, you eagerly grind your ass back against Ronnie’s teasing cock. You’re happy here, as Ronnie’s beta, and right now, you want your ass full of his magnificent shaft.", parse);
+				if(player.PregHandler().MPregEnabled())
+					Text.Add(" The thought of presenting your alpha with your belly bulging full of his pups makes a warm glow fill your body, and you tremble in anticipation of the seeding he’s about to give you.", parse);
+				Text.NL();
+				Text.Add("The white werewolf licks the nape of your neck and begins pushing inside you.", parse);
+				Text.NL();
+				Scenes.Halloween.RonnieCatch();
+			}, enabled : true
+		});
+		options.push({ nameStr : "Fight!",
+			tooltip : "It’s time for a new alpha!",
+			func : Scenes.Halloween.RonnieReversal, enabled : true
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+	else { // Alpha
+		Text.Add("Shuffling from the bushes nearby catches your attention. As your head flicks towards the source, a deliciously familiar scent fills your nostrils. Grinning heartily, you call for Ronnie to come out, like a good little beta.", parse);
+		Text.NL();
+		Text.Add("The white-furred werewolf immediately thrusts his way into the cleared path, a shy but hopeful expression on his face. He meekly lopes over to you, and you reward him by scratching him behind the ear. You want to laugh at the silly grin on his face as his tongue lolls out between slack jaws.", parse);
+		Text.NL();
+		Text.Add("He nuzzles your hand for an instant, before turning to lick it affectionately.", parse);
+		Text.NL();
+		Text.Add("You smile and pet his head with the other hand. Such a good boy... now, what do you want to do with him? Since he sought you out, it’s clear he’s in need of a good fuck, but do you want to scratch an itch yourself?", parse);
+		Text.Flush();
+		
+		//[Yes] [No]
+		var options = new Array();
+		options.push({ nameStr : "Yes",
+			tooltip : "He’s here, you’re both horny, why fight it?",
+			func : function() {
+				Text.Clear();
+				Scenes.Halloween.RonniePitch();
+			}, enabled : true
+		});
+		options.push({ nameStr : "No",
+			tooltip : "He’ll have to go and take care of himself, you don’t have time to play.",
+			func : function() {
+				Text.Clear();
+				Text.Add("With a sharp bark and a few gestures, you convey to Ronnie that you’re not interested in ‘playtime’ at the moment.", parse);
+				Text.NL();
+				Text.Add("Ronnie whines, ears drooping and tail tucked between his legs.", parse);
+				Text.NL();
+				Text.Add("You lightly cuff him over the ear and point towards the wilderness, telling him to leave.", parse);
+				Text.NL();
+				Text.Add("He barks his obedience, like a good beta, but doesn’t hide the disappointed tone as he trots out back into the wood from whence he came.", parse);
+				Text.Flush();
+				
+				Gui.NextPrompt();
+			}, enabled : true
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	}
+}
+
+Scenes.Halloween.RonnieFirst = function() {
+	var parse = {
+		playername : player.name
+	};
+	parse = player.ParserTags(parse);
+	
+	Text.Add("As you make your way along the path, your [skin] begins to crawl. Faintly, you can hear the sound of heavy breathing, underscored by leaves rustling underfoot. Someone else is out there... and they’re getting closer.", parse);
+	Text.NL();
+	Text.Add("For lack of a better option, you pull out the ‘stake’ that the Elder gave you and brandish it like a makeshift sword, wielding it defensively as best you can and wishing you had something better.", parse);
+	Text.NL();
+	Text.Add("A bush nearby shakes and shudders, audibly crunching as something forces its way through its depths. You bite your lip and hold your breath; this is it! ...And then you exhale quietly, putting down your ‘stake’ as you see who it is that’s just come blundering through the undergrowth.", parse);
+	Text.NL();
+	if(roa.Met())
+		Text.Add("It’s... Roa! Surprisingly overdressed by his standards, the effeminate little bunnyboi has covered his girlishly pretty frame with a simple, homespun tunic and a pair of much-patched blue overalls. His bunny-like feet stick out at the tattered ends of his pants, clearly unable or unwilling to go to the extent of wearing shoes, and a small rucksack sits on his back.", parse);
+	else
+		Text.Add("It’s a rabbit-morph - either a very pretty boy, or a very flat girl. Probably the former, given the typically lapine ampleness of the bulge in his much-patched blue overalls. Surprisingly, despite wearing pants and a simple homespun tunic, he goes barefoot. A small rucksack filled with who-knows-what sits on his back.", parse);
+	Text.NL();
+	Text.Add("<i>“Waah! Pleasedon’tkillme! I’m not even tasty!”</i> He cries out, cowering in fear.", parse);
+	Text.NL();
+	Text.Add("You snort in amused disdain, tucking your ‘stake’ away again before assuring the pitiful morph that you’re not going to hurt him.", parse);
+	Text.NL();
+	Text.Add("Still shaking, the lagomorph looks at you through a gap in his fingers. <i>“Y-you aren’t?”</i>", parse);
+	Text.NL();
+	Text.Add("Smiling gently, you assure him that you aren’t - you’re just a traveler, and you have a suspicion that’s what he is, too.", parse);
+	Text.NL();
+	Text.Add("<i>“Oh, that’s a relief!”</i> he says, allowing himself to take a deep breath. <i>“I’m Ronnie.”</i>", parse);
+	Text.NL();
+	Text.Add("You’re [playername].", parse);
+	Text.NL();
+	Text.Add("<i>“Pleased to meet you, [playername],”</i> he says, offering a hand.", parse);
+	Text.NL();
+	Text.Add("Reaching out and taking it, you help him to his feet and gently shake it, telling him that it’s nice to meet him too.", parse);
+	Text.NL();
+	Text.Add("<i>“If it’s not too bothersome, can I trouble you for a second?”</i>", parse);
+	Text.NL();
+	Text.Add("Curious, you ask him what the matter is.", parse);
+	Text.NL();
+	Text.Add("<i>“I’m not actually a traveler. I’m just a farmhand, and I lost a sheep; she ran into this scary forest… you haven’t seen her, by any chance?”</i>", parse);
+	Text.NL();
+	Text.Add("A lost sheep? No, you haven’t seen anything on this road except him.", parse);
+	
+	var beenAround = false;
+	if(Scenes.Halloween.HW.flags & Halloween.Flags.Graveyard) beenAround = true;
+	if(Scenes.Halloween.HW.flags & Halloween.Flags.WitchHut) beenAround = true;
+	
+	if(beenAround)
+		Text.Add(" You’ve been around, too, but you’ve never come across a sheep in your travels.", parse);
+	Text.NL();
+	Text.Add("<i>“Oh… well, that’s a bummer.”</i> He sighs.", parse);
+	Text.NL();
+	Text.Add("Before you can make a comment on the matter, you hear something echoing from deeper in the forest: the long, lonely, echoing howl of a wolf. When you look back at Ronnie, the bunny is visibly shaking, almost on the verge of tears in his fear.", parse);
+	Text.NL();
+	Text.Add("<i>“Wolves! I hate wolves! I hate this damn forest!”</i> he exclaims. <i>“Oh, Dory! Why didn’t you run for the plains!”</i>", parse);
+	Text.NL();
+	Text.Add("Looking at the whimpering farmer, you wonder if maybe you should offer him a hand - he’s clearly in <i>way</i> over his head. On the other hand, do you <i>really</i> want to be tramping around a creepy forest with a total stranger, looking for some brainless bit of undercooked mutton?", parse);
+	Text.Flush();
+	
+	//[Help] [Wish luck]
+	var options = new Array();
+	options.push({ nameStr : "Help",
+		tooltip : "How can you possibly ignore someone in need?",
+		func : function() {
+			Text.Clear();
+			Text.Add("Smiling warmly, you reach out and give the bunny a friendly clasp on the shoulder, offering him your help in finding his missing animal.", parse);
+			Text.NL();
+			Text.Add("<i>“R-really!?”</i>", parse);
+			Text.NL();
+			Text.Add("Yes, really. Now, does he have any idea where to start looking? It’s not really a good idea to just go wandering into the woods at random, after all.", parse);
+			Text.NL();
+			Text.Add("<i>“I-I have no idea. I just saw her entering the forest, and when I came running, she was already gone!”</i>", parse);
+			Text.NL();
+			Text.Add("Okay, then, does he have any idea the sort of places she might go? Does he know anything about this forest?", parse);
+			Text.NL();
+			Text.Add("<i>“Uh… well… I know it’s pretty dangerous, and no one comes here. They say this forest is cursed.”</i>", parse);
+			Text.NL();
+			Text.Add("Not very helpful... well, looks like the two of you will just have to pick a direction and start walking. Does he have any suggestions?", parse);
+			Text.NL();
+			Text.Add("The lagomorph simply shrugs helplessly.", parse);
+			Text.NL();
+			Text.Add("Alright then... looking around, you pick a direction at random and start walking, Ronnie meekly following along behind you.", parse);
+			Text.Flush();
+			
+			Gui.NextPrompt(function() {
+				Text.Clear();
+				Text.Add("You don’t know how long it’s been since the two of you have started out. You’ve just walked on and on through these dark, creepy woods in search of Ronnie’s missing Dory, but haven’t found so much as a scrap of torn wool to prove the sheep was ever here.", parse);
+				Text.NL();
+				Text.Add("You shoulder aside some dense underbrush, barging your way through and stumbling into a small open pocket in the forest. Although you look around instinctively, there’s no sign of Dory here, either. Just some relatively short, soft grass and a fallen tree - a pretty standard clearing.", parse);
+				Text.NL();
+				Text.Add("<i>“S-sorry, [playername], but can we please stop for a moment? My feet are killing me...”</i>", parse);
+				Text.NL();
+				Text.Add("You’re feeling a little worn down yourself. You nod and tell Ronnie to go ahead and sit down.", parse);
+				Text.NL();
+				Text.Add("<i>“Thanks,”</i> he says, dropping his rucksack and sitting on the soft grass. He takes a moment to massage his feet.", parse);
+				Text.NL();
+				Text.Add("You take this opportunity to settle yourself against the fallen tree for a moment, enjoying the chance to take a load off and catch your breath. Idly, you look back at your lapine traveling companion, then realize he’s staring up at the sky for some reason.", parse);
+				Text.NL();
+				Text.Add("Following his gaze, you find yourself staring at the biggest, roundest full moon you can ever recall seeing: a great round orb of beautiful snow white that hangs in the sky, casting its own unearthly light to the ground below. It’s quite a pretty sight, and you enjoy it for a few long moments before looking back at Ronnie.", parse);
+				Text.NL();
+				Text.Add("To your bemusement, the rabbit is staring fixedly at the moon, trembling as if caught by a fever. Concerned, you call out to him, asking if he’s alright.", parse);
+				Text.NL();
+				Text.Add("The lagomorph doesn’t give even the slightest sign that he heard you, instead remaining locked onto the sight of the moon. Worried, you push yourself upright and hurry over to him, reaching out and placing a hand on his shoulder.", parse);
+				Text.NL();
+				Text.Add("Now he snaps around to face you, and you almost stumble back at the sight of those eyes - red as blood, empty and hungry. He just stares at you, blank and empty, even as he rises to his feet.", parse);
+				Text.NL();
+				Text.Add("And then he starts to change...", parse);
+				Text.NL();
+				Text.Add("His rabbit-like muzzle begins to stretch and narrow, as if invisible hands were roughly pulling on his nose. His lips curl back, revealing teeth that are twisting in their gums; growing longer, sharper, and more like fangs. His ears shrink, sharpening at their points, whilst his tail grows longer and thinner.", parse);
+				Text.NL();
+				Text.Add("He starts to swell, visibly growing before your eyes. You can hear fabric ripping, seams popping as his formerly petite, girlish frame puts on muscle and mass. His shirt bursts into tatters as he literally grows out of it, his pants legs tearing from the cuffs up, until his expanding waistline breaks it open.", parse);
+				Text.NL();
+				Text.Add("Incongruously, his boxers remain clinging to his loins, letting you see it deform as his maleness grows increasingly large. His underwear tears, but not fast enough; he fastens newly clawed fingers on the obstructive garment and tears it into shreds, letting a foot-long and throbbingly erect canine cock and sizable balls flop into the cool night air.", parse);
+				Text.NL();
+				Text.Add("Nearly double his former size, and several times his original weight, the cute little bunnyboi is gone now. Instead, what’s facing you is a hulking, feral-looking wolf-morph, with only its white fur hinting at its origins. Ronnie has turned into a werewolf!", parse);
+				Text.NL();
+				Text.Add("The rabbit-turned-wolf sniffs the air before sinking to the floor, bracing himself on fours as he growls menacingly, his eyes set on his prey… <i>you</i>.", parse);
+				Text.NL();
+				Text.Add("You only have a moment to figure out a course of action - what can you do to save yourself?!", parse);
+				Text.Flush();
+				
+				//[Fight!] [Flee!] [Squeaky Bone!]
+				var options = new Array();
+				options.push({ nameStr : "Fight!",
+					tooltip : "He’d catch you in a heartbeat, you have to fight!",
+					func : function() {
+						Text.Clear();
+						Text.Add("With no better weapon available to you, you grab the dildo-stake that the Elder gave you and brandish it like a club, waiting for the werewolf to make the first move. Your every sinew tenses, readying your body to defend itself against a coming attack.", parse);
+						Text.NL();
+						Text.Add("Ronnie pounces on you, claws ready to strike as he growls ferociously.", parse);
+						Text.NL();
+						Text.Add("You lunge forward, trying to weave between the werewolf’s flailing paws as you smack him over the head with your dildo. You put every bit of strength into the blow that you can muster, the sex-toy audibly clonking off of Ronnie’s lupine skull.", parse);
+						Text.NL();
+						Text.Add("He visibly staggers at the impact, but it’s not enough to stop him. The white-furred wolfman crashes into you hard enough to knock you off your feet. The two of you hit the ground in a flailing fumble of limbs, pain screaming through your brain as his claws rake over your sides.", parse);
+						Text.NL();
+						parse["l"] = player.HasLegs() ? "" : " the equivalent of";
+						Text.Add("As best you can, you deliver[l] a sound kick to his nuts. Yelping sharply in pain, Ronnie rolls off of you, giving you a chance to scramble back upright again.", parse);
+						Text.NL();
+						Text.Add("Stumbling and whining in pain, the werewolf holds his sore nads, too busy with the pain to pay any attention to you.", parse);
+						Text.NL();
+						Text.Add("Seizing this opportunity, you tighten your grip on your ‘stake’ and charge at him, shouting at the top of your lungs.", parse);
+						Text.NL();
+						Text.Add("Looking up at you, Ronnie swipes the air, growling threateningly as he half-runs, half-limps his way into the woods.", parse);
+						Text.NL();
+						Text.Add("You watch the werewolf flee, letting the triumph wash over you like a soothing balm; that wasn’t so hard after all! You should have known that ", parse);
+						if(roa.Met())
+							Text.Add("Roa is just a wimp, even in a wolf’s body.", parse);
+						else
+							Text.Add("a rabbit-turned-wolf is still a rabbit at heart.", parse);
+						Text.Add(" Your sides still hurt a little where he clawed you, but considering how that could have ended up, it’s not so bad.", parse);
+						Text.NL();
+						Text.Add("As you think that, your brow furrows at a sudden stab of pain from your sides. Your vision starts to blur as your hand clasps the slowly bleeding furrows in your [skin]. A sickly heat washes over your body, a fever that springs out of nowhere - what... what’s happening to you?", parse);
+						Text.NL();
+						Text.Add("You try to step forward, staggering like a dying elk, before your treacherous [feet] trip you over and you fall to the ground. Sweat beads your skin as you claw fitfully at the ground, trembles wracking your frame. Your body is... changing, shifting around you, but in your dizzy, delirious state, you can’t tell what’s happening to you...", parse);
+						Text.NL();
+						
+						var hasCock = player.FirstCock();
+						
+						Scenes.Halloween.WerewolfTF();
+						
+						Text.NL();
+						Text.Add("The blood rushes through your veins, coursing through your limbs; you’ve never felt so alive! Unable to hold back your joy, you throw back your head, baying your wonder to the beautiful moon above until it feels like the trees around you are trembling from the vibrancy of your cry.", parse);
+						Text.NL();
+						Text.Add("Panting with the effort, you rise to your feet, licking your chops as you take in the clearing - so clear and bright, to your new eyes! As you scan your surroundings, you realize that you can <i>smell</i> Ronnie’s passage - to your new senses, he might as well leave a glowing trail that snakes off into the undergrowth.", parse);
+						Text.NL();
+						parse["new"] = hasCock ? "" : " new";
+						Text.Add("For a moment, you wonder if you ought to hunt down the white werewolf and... thank him properly for your magnificent new body. Your[new] cock throbs eagerly at the thought. Still, maybe you should just leave him be; there’s so much else you could hunt for in these woods!", parse);
+						Text.Flush();
+						
+						//[Chase] [Leave]
+						var options = new Array();
+						options.push({ nameStr : "Chase",
+							tooltip : "To the hunt! You need a new bitch!",
+							func : function() {
+								Text.Clear();
+								Text.Add("With a howl of joy and anticipation, you bound off after the transformed rabbit, crashing through the wilderness in hot pursuit.", parse);
+								Text.NL();
+								Text.Add("The scent trail leads you on through the darkness, under bushes and over stumps, growing stronger and stronger all the while. You race through the woods until the scent becomes overpowering, forcing you to halt as your keen ears pick up sounds from ahead. Your quarry!", parse);
+								Text.NL();
+								Text.Add("Slowly and carefully, with the patience of a born predator, you creep through the undergrowth until you can see your prey. Ronnie is hunkered down on some soft moss, a low squat with his legs splayed so he can massage his still tender balls. The wind blows from him to you, keeping your scent from his nose, and he’s so busy that he hasn’t heard you yet.", parse);
+								Text.NL();
+								Text.Add("A wolfish grin spreads across your face as you coil, ready to lunge forward. Ronnie’s ears twitch, and you pounce! Charging out of the undergrowth and howling, you hurl through the air, knocking Ronnie to the ground.", parse);
+								Text.NL();
+								Text.Add("The smaller werewolf growls and struggles, but he’s no match for your superior strength, and you quickly have him pinned.", parse);
+								Text.NL();
+								Text.Add("You growl softly in response, baring your teeth in a predatory smile. Hungrily, you reach down and grab his balls - the white wolf immediately settles down at that, fearful of what you might do to his tender maleness. Staring into his eyes, still grinning, you gently knead his balls, then reach up to stroke his sheath.", parse);
+								Text.NL();
+								Text.Add("Your grin only widens as you feel his shaft slowly slide out of hiding, wet, soft and vulnerable under your palm. You tenderly stroke it, feeling it harden in excitement as Ronnie starts to relax. That’s a good boy... but you’re not the one playing the bitch this time.", parse);
+								Text.NL();
+								Text.Add("Confident that Ronnie’s not going to run, you ease yourself off of him. His confused whine gives way to a surprised yip as you flip him over onto his belly and then pin him down again. You growl huskily in the depths of your throat, authoritatively nipping the back of his ear as you pull his hips, letting you grind your cock against his ass.", parse);
+								Text.NL();
+								Text.Add("Much to your surprise, Ronnie grinds back rather than struggle, what a slut!", parse);
+								Text.NL();
+								Text.Add("Well, you’ll not look a gift bitch in the ass. Time to show who’s the <b>real</b> alpha around here...", parse);
+								Text.Flush();
+								
+								Gui.NextPrompt(function() {
+									Text.Clear();
+									Scenes.Halloween.RonniePitch();
+								});
+							}, enabled : true
+						});
+						options.push({ nameStr : "Leave",
+							tooltip : "Let’s see what else is out there, waiting to be chased!",
+							func : function() {
+								Text.Clear();
+								Text.Add("Shaking your head, you turn and head back the way you came - with your new nose, it’s easy to find your path. Let Ronnie go; you have other places to explore.", parse);
+								Text.Flush();
+								
+								Scenes.Halloween.HW.ronnie = Halloween.Ronnie.Removed;
+								
+								Gui.NextPrompt();
+							}, enabled : true
+						});
+						Gui.SetButtonsFromList(options, false, null);
+					}, enabled : true
+				});
+				options.push({ nameStr : "Flee!",
+					tooltip : "Run away! Run, run, run!",
+					func : function() {
+						Text.Clear();
+						Text.Add("Unthinkingly, you spin around and sprint for your life, fleeing your transformed companion as fast as you possibly can. From behind you, that awful sound of a wolf on the hunt splits the air and you can hear him bounding after you.", parse);
+						Text.NL();
+						Text.Add("Try as you might, you just don’t stand a chance; with a flying leap, the werewolf slams into you, knocking you to the ground in a tangle of limbs. You try to wriggle free, but the big, bad wolf atop you has you well and truly pinned for the moment.", parse);
+						Text.NL();
+						Text.Add("Ronnie wastes no time; he shreds your skimpy clothes with his sharp claws in an instant, tossing the remains aside without a care.", parse);
+						Text.NL();
+						Text.Add("Sparks of pain prickling across your skin where his claws drew blood in their enthusiasm, you try to crawl away across the ground whilst Ronnie is distracted with the remnants of your clothes, but he quickly returns his attentions to you.", parse);
+						Text.NL();
+						Text.Add("Those big, clawed hands grab your [hips] roughly, prickling you with their sharp tips and he pulls you back towards him.", parse);
+						Text.NL();
+						Text.Add("Struggle as you might, he easily manhandles you into position. He doesn’t stop until he has you truly pinned under him, your [butt] thrust into the air as if you were a bitch in heat offering yourself to an alpha dog.", parse);
+						Text.NL();
+						Text.Add("...Which is almost certainly what he thinks you are, come to think of it...", parse);
+						Text.NL();
+						Text.Add("Your [skin] crawls as his hot breath gusts over the back of your neck, saliva dripping messily onto your back as he pants atop you. You are all too aware of his arms gripping your wrists, and of his throbbing slab of wolfmeat sandwiching your buttcheeks.", parse);
+						Text.NL();
+						Text.Add("You start and let out a gasp of shocked disgust as Ronnie’s warm, wet tongue laps the back of your neck. He nips you, just hard enough that you can feel it break the skin. He pulls back atop you, his furry mass hot on your back as he starts to shift around, clearly ready to penetrate.", parse);
+						Text.NL();
+						if(player.FirstVag()) {
+							Text.Add("You can feel his long, pointy cock rubbing against your folds, and the touch of it makes you clench down instinctively. However, although he does grind your labia a little, he moves on - it seems he has a different target in mind.", parse);
+							Text.NL();
+							Text.Add("Ronnie’s cock drags up your taint, gliding through your butt-crack until you can feel it poking at your [anus], confirming your sneaking suspicions.", parse);
+						}
+						else {
+							Text.Add("You can feel his cock, hard and wet and pointy-tipped, butting insistently against your ass. It grinds against your taint before worming its way through your butt cleavage, not stopping until he’s gotten himself aligned with the only hole you have to penetrate back there.", parse);
+						}
+						Text.NL();
+						Text.Add("He growls when he finally feels your pucker on the pointy tip of his canine member, adjusting himself to softly thrust against your hole - not yet penetrating, just pushing his tip against your [anus] as he tests its elasticity.", parse);
+						Text.NL();
+						Text.Add("A wave of heat washes through your body, making your senses swim as you swoon. You feel so... dizzy; the world is spinning around you, a feverish heat burning through your veins...", parse);
+						Text.NL();
+						Text.Add("In its wake, it leaves a strange sort of numbness; you can barely feel Ronnie as he ardently pokes at your ass, teasing his way inside your slackened anus. Your head feels so heavy that you can barely hold it up, your gaze falling to your hands laying spread-fingered on the ground.", parse);
+						Text.NL();
+						Text.Add("...Are your nails growing?", parse);
+						Text.NL();
+						Text.Add("Waves of... something; pain? Pleasure? You can’t tell. They overwhelm you with their intensity as you feel your whole body shifting, warping, <i>changing</i> on you. You’re so lost in the sensations, you can’t pinpoint what is happening to you; all that you know is that it feels <b>good</b>...", parse);
+						Text.NL();
+						
+						Scenes.Halloween.WerewolfTF();
+						
+						Text.NL();
+						Text.Add("Warm wetness splashes against your [anus], trickling down your taint to drool onto your swaying, apple-sized balls, and jars you back to your senses. Atop you, Ronnie has been eagerly grinding away, too lost in his own pleasure to notice your transformation.", parse);
+						Text.NL();
+						Text.Add("He feels so light and dainty now; hardly a burden at all. If you wanted, you could easily throw him off of your back... maybe even turn the tables.", parse);
+						Text.NL();
+						Text.Add("Then again, maybe you don’t want to. Maybe you’re happy to let him claim you as his bitch; this beautiful new body is his gift to you, after all, you don’t want to be ungrateful...", parse);
+						Text.Flush();
+						
+						//[Fight] [Submit]
+						var options = new Array();
+						options.push({ nameStr : "Fight",
+							tooltip : "You’re no runt’s bitch! It’s time you teach that pup his place in this pack.",
+							func : Scenes.Halloween.RonnieReversal, enabled : true
+						});
+						options.push({ nameStr : "Submit",
+							tooltip : "There’s a certain thrill in being taken by the smaller wolf, and you do owe him for your current form… Maybe it wouldn’t hurt to be his beta.",
+							func : function() {
+								Text.Clear();
+								Text.Add("Whining softly, you lower your head meekly to the ground, hungrily grinding your hips back on your beautiful white alpha’s cock, ready and eager to be marked as belonging to him.", parse);
+								Text.NL();
+								Text.Add("The smaller wolf leans over your back to gently lick the back of your neck, pressing his shaft harder into your puckered hole.", parse);
+								Text.NL();
+								
+								Scenes.Halloween.RonnieCatch();
+							}, enabled : true
+						});
+						Gui.SetButtonsFromList(options, false, null);
+					}, enabled : true
+				});
+				if(party.Inv().QueryNum(Items.Halloween.SqueakyToy)) {
+					options.push({ nameStr : "Squeaky Bone!",
+						tooltip : "It’s a long shot, but maybe you can distract him with a doggie toy.",
+						func : function() {
+							Text.Clear();
+							Text.Add("Without a second thought, you pull the squeaking rubber bone from your possessions and hold it aloft before giving it a sharp squeeze, to see what will happen.", parse);
+							Text.NL();
+							Text.Add("Much to your surprise, the transformed Ronnie immediately drops his threatening stance, jumping happily from one side to the other as his tail wags happily. He barks at you for a moment, before sitting on his haunches, eyeing the squeaky toy as if it was the most interesting thing in the world.", parse);
+							Text.NL();
+							Text.Add("You can’t help the grin that spreads across your features at the sight. Well now, he likes this, does he?", parse);
+							Text.NL();
+							Text.Add("Ronnie barks happily, panting excitedly.", parse);
+							Text.NL();
+							Text.Add("Alright then, catch! And with that, you toss the toy past him.", parse);
+							Text.NL();
+							Text.Add("The werewolf barks and immediately turns to chase after the toy; he pounces it and bites it, the squeaky noises only seem to make his tail wag faster. He shakes the toy in his mouth a bit, gnawing and enjoying the noises for a moment, before he spins and brings the toy back to you.", parse);
+							Text.NL();
+							Text.Add("The sight is just too amusing; the fearsome predator reduced to an overgrown puppy dog. You happily pick it up and spin it off across the glade again, watching Ronnie’s lupine legs blur as he scrambles off after it again, only to return it to you.", parse);
+							Text.NL();
+							Text.Add("A surprisingly enjoyable few minutes whizz past as you play fetch with the transformed Ronnie. On your next throw, you get a bit too enthusiastic, and the toy goes whistling out of the glade and into the woods beyond. Ronnie goes racing off after it, barking his heart out... and never comes back.", parse);
+							Text.NL();
+							Text.Add("You can hear him, crashing around and barking, but he just doesn’t come back. Instead, the sound of him fades into the distance - you think he startled a squirrel or something, and is busy chasing it. Looks like he’s gone for good, now.", parse);
+							Text.NL();
+							Text.Add("With a shrug of your shoulders, you turn and start making your way back to the road proper. Ronnie should be just fine out there on his own, no need to worry.", parse);
+							Text.Flush();
+							
+							party.Inv().RemoveItem(Items.Halloween.SqueakyToy);
+							
+							Scenes.Halloween.HW.ronnie = Halloween.Ronnie.Removed;
+							
+							Gui.NextPrompt();
+						}, enabled : true
+					});
+				}
+				Gui.SetButtonsFromList(options, false, null);
+			});
+		}, enabled : true
+	});
+	options.push({ nameStr : "Wish luck",
+		tooltip : "Let him find his own damn sheep, you have more important things to do.",
+		func : function() {
+			Text.Clear();
+			Text.Add("As politely as you can, you wish Ronnie luck in finding his Dory. You’d like to help, but you have problems of your own to handle.", parse);
+			Text.NL();
+			Text.Add("<i>“Oh! Of course! Sorry for taking your time, and thank you.”</i>", parse);
+			Text.NL();
+			Text.Add("It’s alright. Good luck finding that sheep.", parse);
+			Text.NL();
+			Text.Add("<i>“Okay, Ronnie… you can do this,”</i> he says, taking a deep breath and bounding away through the forest.", parse);
+			Text.NL();
+			Text.Add("You watch him vanish into the darkness, and then turn and start walking your own path.", parse);
+			Text.Flush();
+			
+			Scenes.Halloween.HW.ronnie = Halloween.Ronnie.Removed;
+			
+			Gui.NextPrompt();
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Halloween.WerewolfTF = function() {
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+	
+	//TODO
+	var blessed = false; //Scenes.Halloween.HW.flags & Halloween.Flags.Nadirmasomething...
+	
+	if(player.FirstCock()) {
+		Text.Add("Your [cocks] [isAre] hard and throbbing against your belly, aching with the fire that is burning through you. ", parse);
+		if(player.HasBalls()) {
+			Text.Add("You can feel your [balls] throbbing, churning up seed with an almost painful urgency.", parse);
+			if(player.Balls().BallSize() < 5)
+				Text.Add(" They seem to be growing bigger, literally bloating up with sperm.", parse);
+		}
+		else
+			Text.Add("There’s a strange pressure below your cock[s], a feeling of something swelling and growing beneath you. You shuffle your legs to give it room; it feels like a pair of apples swaying down between your legs. It’s heavy and a little awkward, but it also feels really good...", parse);
+	}
+	else {
+		Text.Add("Pleasure washes through your belly as once-flat flesh stretches and grows. You can’t think of the words to describe how it feels as something long and hard, yet soft, forces its way out of your body. You can feel the breeze gusting across it, making your nerves sing at the touch. Two heavy, round things fall from your loins, making you spread your legs to give them room, bringing with them a strange feeling of liquid weight.", parse);
+	}
+	Text.NL();
+	
+	if(player.Femininity() > 0.3 || blessed) {
+		if(player.FirstVag()) {
+			Text.Add("Your [vag] flutters and ripples, clenching wetly around an invisible partner, burning with the desire to be used.", parse);
+		}
+		else {
+			Text.Add("Behind your balls, you can feel yourself opening up, stretching into something wet and warm, but which feels so good. You feel yourself aching with the need to be filled by something, and to fill something in kind.", parse);
+			player.body.vagina.push(new Vagina());
+		}
+		Text.NL();
+		if(blessed && player.FirstBreastRow().Size() < 10) { // E-Cup
+			Text.Add("You swear you can hear a voice in your head whispering, <i>“Yes, come on, bigger; we can do better than this,”</i>, but all you can really focus on is the glorious warmth enveloping your [breasts]. You thrust your chest out with a moan as you feel them swell and bulge, blossoming into a truly spectacular display of womanhood.", parse);
+			
+			//Grow breasts
+			_.each(player.AllBreastRows(), function(breast) {
+				if(breast.size.base < 10) breast.size.base = 10;
+			});
+		}
+		else if(player.FirstBreastRow().Size() < 7.5) { // D-Cup
+			Text.Add("Warmth centers on your chest, like ghostly fingers caressing your [breasts], and the feeling makes you moan joyfully. You can feel yourself growing, your [breasts] swelling into a glorious set of ripe womanly melons.", parse);
+			
+			//Grow breasts
+			_.each(player.AllBreastRows(), function(breast) {
+				if(breast.size.base < 7.5) breast.size.base = 7.5;
+			});
+		}
+		else {
+			Text.Add("Tingles of warmth dance along your [breasts], making you groan luxuriantly as your [nips] stiffen.", parse);
+		}
+		Text.NL();
+		Text.Add("As swiftly as it came to you, the dizziness fades away. The world snaps back into place with glorious quality; you feel better than ever before, more alive.", parse);
+		Text.NL();
+		Text.Add("It seems Ronnie was a little too careless with his fangs and claws; he’s passed his glorious condition on to you!", parse);
+		Text.NL();
+		Text.Add("You have turned into a magnificent specimen of a she-wolf; covered from head to toe in long, sleek, glossy black fur, your lithe frame is built for speed, but still visibly ripples with power. You can feel the strength twitching in every limb, curling under your belly. The night, once so dark and frightening, has opened up to you; your sense of smell heightened, revealing secrets once obscured to you, and your eyes piercing the darkness that once left you fit and frail.", parse);
+		Text.NL();
+		Text.Add("You are a gorgeous specimen of female wolfdom... although, in your own opinion, rather improved by the addition of the massive turgid wolf-cock pulsing between your legs.", parse);
+		Text.NL();
+		Text.Add("Your whole body is just seething with power - feral and sensual all at the same time - and for a moment, you allow yourself to be lost in its embrace.", parse);
+	}
+	else {
+		if(player.FirstVag()) {
+			Text.Add("Your [vag] squeezes itself tightly, clenching harder than it’s ever done before. You... you’re not sure, but you think that it’s <b>shrinking</b>. There’s a strange tightening sensation behind your taint, and then... nothing. It’s gone now.", parse);
+			Text.NL();
+			Text.Add("Strange... you don’t really miss it.", parse);
+			Text.NL();
+		}
+		if(player.FirstBreastRow().Size() > 2) {
+			Text.Add("A weird prickling feeling comes from your chest, a tingling that runs over your [breasts]. The weight you’ve become so accustomed to feeling hanging from your front is dwindling... are they shrinking?", parse);
+			Text.NL();
+		}
+		Text.Add("As swiftly as it came to you, the dizziness fades away. The world snaps back into place with glorious quality; you feel better than ever before, more alive.", parse);
+		Text.NL();
+		Text.Add("It seems Ronnie was a little too careless with his fangs and claws; he’s passed his glorious condition on to you!", parse);
+		Text.NL();
+		Text.Add("You have turned into a truly intimidating specimen of a werewolf. Muscles visibly bulge along your limbs and midriff, rippling with the slightest tweaking of your sinews. You are stacked to make any fan of male muscle drool, and the mighty bitch-breaker you can feel swaying under your hips is sure to knock ‘em dead.", parse);
+		Text.NL();
+		Text.Add("Covered from head to toe in sleek, glossy black fur, you are one gorgeous hunk of wolf, and you feel even more powerful than you look. Confidence burns within you, your new senses opening up a world that you couldn’t have dreamed of before. The slightest noise, the faintest scent, these speak volumes to you now.", parse);
+		Text.NL();
+		Text.Add("Your rapture in your new body is overwhelming, and you allow yourself to be lost in the fog of bliss, for the moment.", parse);
+		
+		//Body stuff, remove vag
+		player.body.vagina = [];
+		_.each(player.AllCocks(), function(cock) {
+			cock.vag = null;
+		});
+		//Shrink breasts
+		_.each(player.AllBreastRows(), function(breast) {
+			if(breast.size.base > 2) breast.size.base = 2;
+		});
+	}
+	
+	//Items/clothes
+	party.Inv().RemoveItem(Items.Halloween.SkimpyCostume); //Temp measure
+	player.topArmorSlot = Items.Halloween.WerewolfHide;
+	player.weaponSlot = Items.Halloween.WerewolfClaw;
+	player.Equip();
+	
+	//Werewolf TF
+	//===========
+	
+	// Size
+	player.body.height.base = 210;
+	player.body.weigth.base = 120;
+	player.body.muscleTone.IncreaseStat(0.8, 1);
+	
+	// Regular body
+	player.body.legs.count = 2;
+	player.body.arms.count = 2;
+	
+	// Fix cock/s
+	var cocks = player.AllCocks();
+	if(cocks.length == 0) {
+		var cock = new Cock(Race.Wolf, Color.red);
+		cocks.push(cock);
+	}
+	_.each(cocks, function(cock) {
+		if(cock.Len() < 25) cock.length.base    = 25;
+		if(cock.Thickness() < 7) cock.thickness.base = 7;
+		cock.knot = 1;
+		cock.color = Color.red;
+	});
+	
+	// Fix balls
+	var balls = player.Balls();
+	if(balls.count < 2) balls.count = 2;
+	if(balls.size.base < 5) balls.size.base = 5;
+	
+	// Add/modify tail
+	TF.SetAppendage(player.Back(), AppendageType.tail, Race.Wolf, Color.black);
+	// Set skin and eye color
+	player.SetSkinColor(Color.black);
+	player.SetEyeColor(Color.yellow);
+	
+	// Set race (sets everything)
+	player.body.SetRace(Race.Wolf);
+	
+	// Set flags
+	Scenes.Halloween.HW.flags |= Halloween.Flags.Werewolf;
+}
+
+Scenes.Halloween.RonniePitch = function() {
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	
+	var first = Scenes.Halloween.HW.ronnie != Halloween.Ronnie.PCAlpha;
+	Scenes.Halloween.HW.ronnie = Halloween.Ronnie.PCAlpha;
+	
+	Text.Add("As slowly and patiently as you can bring yourself to go, you grind your massive throbbing wolfhood between your beta’s round buttcheeks. Each stroke rubs around the wrinkled opening of his tailhole, working the very tip of your cock against his opening, but never quite penetrating.", parse);
+	Text.NL();
+	Text.Add("Ronnie bucks back in excitement, trying his best to push you inside. He whines pitifully when he fails to impale himself.", parse);
+	Text.NL();
+	Text.Add("Growling softly in your excitement, you deem that both of you have had enough foreplay. One powerful hand closes on his shoulder for a little extra leverage as you lean over, drawing him closer so that you can thrust yourself into his ass.", parse);
+	Text.NL();
+	Text.Add("A high-pitched whimper escapes Ronnie’s lips as you penetrate him; his backdoor opens to you with surprising grace, almost effortlessly swallowing the first few inches of your massive cock. He’s warm and tight around you, muscles twitching and wrinkling in ways that stoke your excitement, but when you push inside, there’s so much <i>give</i> in him...", parse);
+	Text.NL();
+	if(first)
+		Text.Add("Well, well; it looks like this isn’t Ronnie’s first ride on a cock - no wonder your beta was so eager to have you inside of him! Well, since he wants this so badly, you’re happy to oblige; you wonder how much of you that he can take...", parse);
+	else
+		Text.Add("Such a slutty little puppy; how could he have ever thought to pretend to be an alpha, when he’s so in love with getting stuffed up the butt? Well, you’re a loving alpha, so you’ll give him what he wants: your [cock] to the very hilt, right up his ass and filling him with a breeder’s delight of semen!", parse);
+	Text.NL();
+	Text.Add("Driven by that thought, you surge forward, thrusting yourself more than halfway inside of him in a single powerful jerk of your hips. Ronnie yips loudly in pleasure, whining deliciously as you fill his ass, and the sound of your bitchboi beta’s pleasure stokes your inner alpha.", parse);
+	Text.NL();
+	Text.Add("With an ardent growl, you wrap your arms around Ronnie’s waist and hoist the startled wolf into the air, pulling him into your lap as you hold him up by the knees. Gravity does its work, roughly pulling your beta completely down your shaft, making him squirm deliciously against you as he is filled to the brim.", parse);
+	Text.NL();
+	Text.Add("Almost purring in lust, you thrust your hips, your mighty lupine body hoisting Ronnie into the air before gravity pulls him back, each thrust roughly battering his prostate. Meek as you please, Ronnie whimpers and wriggles, but makes no effort to try and struggle free. You can see his cock, over his shoulder; it’s harder than ever before, spurting pre-cum each time he lands in your lap.", parse);
+	Text.NL();
+	Text.Add("What a delicious little bitchboi; he was just born for this, wasn’t he? To have an alpha wolf pounding his ass, making him writhe and squirm like the bitch in heat he is at heart...", parse);
+	Text.NL();
+	Text.Add("Ronnie pants and growls in pleasure, unable to do much more than hold onto your arms for support, face contorted into a silly smile as he basks in delirious pleasure.", parse);
+	Text.NL();
+	Text.Add("Eager little bitch... well, if he’s enjoying this so much, then he can do some of the work himself. With that thought in mind, and holding your puppy tightly so he doesn’t fall off, you settle down on the ground, shuffling on the soft leaf litter for a comfortable position. Leaning forward, you growl into Ronnie’s ear, telling him to start bouncing. You want to see just how badly he wants your cum.", parse);
+	Text.NL();
+	Text.Add("The white werewolf doesn’t hesitate, following your orders eagerly, like a good beta. He places a hand on your muscular thighs, rising and falling awkwardly at first, but quickly settling into a more comfy position for the both you.", parse);
+	Text.NL();
+	Text.Add("You growl approvingly, warmth dancing along your dick as Ronnie bucks away. Through the haze of pleasure clouding your vision, you can see your beta’s hands pumping away eagerly at his own cock, and your lip curls in disapproval. As long as you lead this pack, then Ronnie’s first duties should be to <i>your</i> pleasure.", parse);
+	Text.NL();
+	Text.Add("With a chiding snarl, you grab Ronnie’s wrists and pull them behind his back; not hard enough to hurt him, but with a roughness that lets him know you won’t tolerate dissent.", parse);
+	Text.NL();
+	Text.Add("Ronnie yelps and stops in an instant.", parse);
+	Text.NL();
+	Text.Add("You tell him that if he wants to cum, he’ll have to make the most of your cock, the words rumbling up from the depths of your chest.", parse);
+	Text.NL();
+	Text.Add("When your words finally sink in, he whines in reply and tries to pull his wrists away from your grasp.", parse);
+	Text.NL();
+	Text.Add("You just tighten your grip until he can feel your fingers squeezing his bones, snarling in warning.", parse);
+	Text.NL();
+	Text.Add("Having no choice but to obey, the smaller werewolf adjusts himself as best as he can. Without his arms to support himself, he’s forced to put all his weight in his legs and knees. You doubt that’ll be a problem for the white werewolf, but his position is still very awkward.", parse);
+	Text.NL();
+	Text.Add("His legs shake with effort as he tries his best to rise and fall on your canine mast; this causes his own hips to shake, which sends wonderful vibrations coursing through your shaft. In addition, the effort also forces him to clench his ass, making his insides feel tighter than ever.", parse);
+	Text.NL();
+	Text.Add("You have no doubt that he’d probably perform better if you’d let him go, but you’re enjoying the added pleasure of the smaller werewolf doing all he can to pleasure you as he’s punished for his misbehavior, plus you can just catch the faintest glimpse of his own cock, now harder than ever. Seems like he’s enjoying his predicament way too much… you might have to come up with a better punishment sometime, but for now you resolve to just lie back and enjoy your beta’s tight, vibrating butthole.", parse);
+	Text.NL();
+	Text.Add("Long, blissful minutes pass as you lie back and allow your bitchboi to hump and grind away atop your cock. Tingles of pleasure crackle across your skin, making your fur stand on end. Your heart hammers in your chest, breath coming in short, sharp pants as the sensations grow stronger and stronger still - oh, you’re getting close...", parse);
+	Text.NL();
+	Text.Add("And that’s when Ronnie’s ecstatic howl jars you back to your senses. You can feel his ass clamping down on your cock like a velvet-lined vice, the sensation almost - but not quite enough - to bring you to climax in turn as he messily cums in front of you.", parse);
+	Text.NL();
+	Text.Add("What a naughty beta, cumming before his alpha - what, does he think he’s going to get away with not getting you off as well? Time to show him how wrong he is...", parse);
+	Text.NL();
+	Text.Add("With a lustful roar, you violently throw yourself forward. The startled beta barely has time to yelp as you pitch him to the ground, roughly pinning him to the ground so firmly that his face is forced into the grass. Growling in your lust, you start to thrust your hips with all your might, forcefully pounding Ronnie’s ass as you grind your swollen knot against his too-tight pucker.", parse);
+	Text.NL();
+	Text.Add("Ronnie whines in pure enjoyment, bucking back at you with as much force as his tired muscles are able to.", parse);
+	Text.NL();
+	Text.Add("Inevitably, through sheer determination, you manage to push hard enough that your slutty beta’s ass stretches around and engulfs your knot, sucking the bloated bulb of flesh completely inside. The feeling of warm, tight flesh clamping down around it, mercilessly squeezing it in its vice-like grip, makes spots dance in front of your eyes. With a great howl of pleasure, the dam inside of you breaks and you empty yourself into Ronnie’s ass.", parse);
+	Text.NL();
+	Text.Add("The smaller werewolf goes slack, whining and trembling as he enjoys your liquid load filling him.", parse);
+	Text.NL();
+	Text.Add("Lost in the bliss of emptying your aching, overstuffed balls, you squeeze Ronnie tight against you, grinding your crotch to his ass as you fill him fuller and fuller yet. Pleasure sweeps through you, drowning you in a tide of pure carnal satiation, and only when the flood recedes and leaves the warmth of afterglow to keep you company do you come back to your senses.", parse);
+	Text.NL();
+	Text.Add("Ronnie looks well and truly filled at this point; with your oversized knot held tight in his trained slutty ass, not so much as a drop has escaped, leaving him with a belly like a pregnant woman’s. The round jism-filled orb brushes against the ground, smeared with Ronnie’s own cum at having been violated so thoroughly.", parse);
+	Text.NL();
+	Text.Add("Sighing in release, you loosen your hold. With an affectionate smile, you gently scratch Ronnie behind the ears. He may be a naughty beta at times, but you love him all the more when he behaves himself.", parse);
+	Text.NL();
+	Text.Add("Ronnie’s tail begins wagging, softly hitting your side.", parse);
+	Text.NL();
+	Text.Add("Tired and satisfied, you gently topple the pair of you to the grass, spooning your smaller white beta as you wait for your knot to shrink down.", parse);
+	Text.NL();
+	Text.Add("Long, pleasant minutes pass, until finally you can pull your slumping dick from Ronnie’s asshole; buttslut that he is, Ronnie still can’t hope to just spring back in the face of your assault. His hole gapes in an almost perfect mold of your impressive wolfhood, a river of thick semen seeping from his stretched opening.", parse);
+	Text.NL();
+	parse["v"] = player.FirstVag() ? " and still slick-lipped cunt" : "";
+	Text.Add("Stretching stiff joints, you pad silently around to Ronnie’s face and present your wet, musky, half-erect maleness[v] to him. With a rumble in the back of your throat, you curtly order him to clean you up.", parse);
+	Text.NL();
+	Text.Add("The white werewolf lifts his head off the ground, tail wagging tiredly as he crawls over to you and begins gently lapping your shaft.", parse);
+	Text.NL();
+	Text.Add("You growl softly in pleasure; that’s a good boy, get it all off...", parse);
+	Text.NL();
+	Text.Add("With your beta’s diligence, you soon find yourself clean as a whistle. You pull your cock free of his lapping tongue, watching as his panting face droops back to the ground. Reaching down to ruffle his ears affectionately one last time, you turn and set off on your way again, happily leaving him to digest his titanic liquid repast.", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt();
+}
+
+Scenes.Halloween.RonnieCatch = function() {
+	var parse = {
+		
+	};
+	parse = player.ParserTags(parse);
+	
+	Scenes.Halloween.HW.ronnie = Halloween.Ronnie.PCBeta;
+	
+	Text.Add("You moan deep and low as your alpha gently but firmly penetrates you; his thick, throbbing cock slowly spreading you open as it glides deeper and deeper inside. You can feel every vein, every ridge and crinkle as it pushes inside of you. Your tail wags in pure bliss, absently thudding against his middle as you push back against him, trying to guide him further inside.", parse);
+	Text.NL();
+	Text.Add("Ronnie hilts himself, all the way to the knot, then stops to give you time to adjust. While waiting, he bends over and begins gently licking the nape of your neck.", parse);
+	Text.NL();
+	Text.Add("Shivers race across your skin, your glossy black fur standing on end at your alpha’s touch. You groan appreciatively, arching your back in an instinctive effort to expose more of your neck to his hungry caresses. Your own cock is starting to throb with need beneath you, the first drops of pre-cum spattering on the thirsty ground below.", parse);
+	if(player.FirstVag())
+		Text.Add(" Even your neglected cunt is tingling with desire, flushing wet as it squeezes down in sympathy with your ass.", parse);
+	Text.NL();
+	Text.Add("Your alpha growls softly, gently biting your neck where he’d been licking a few moments ago. It doesn’t hurt even if you can feel the pressure of his sharp teeth, but even if it did you have no reason for alarm; your instincts tell you all you need to know: this is a mating bite.", parse);
+	Text.NL();
+	Text.Add("You stretch yourself out, tingling all over as your alpha begins to thrust away, truly mating with you. His cock slides back and forth through your stretched ring, the friction gnawing away at your mind, his own heavy seed-laden balls gently batting against your even-larger orbs. Ronnie’s arms tighten themselves possessively around your body, his hands starting to stroke through the fur of your stomach as he blindly explores his beta.", parse);
+	Text.NL();
+	Text.Add("Without hesitation, Ronnie gropes for your chest.", parse);
+	if(player.FirstBreastRow().Size() >= 2)
+		Text.Add(" You hear a faint growl of approval as his hands find the lush roundness of your breasts, fingers greedily cupping each round, fluffy orb. You purr in approval as he eagerly squeezes and kneads your [breasts], luxuriating in his ardor before he gives them a final squeeze and moves on.", parse);
+	Text.NL();
+	Text.Add("With surprising dexterity, his long claws begin to stroke your [nips], their sharp tips just forceful enough that their pinprick sends shudders of pleasure along your spine. You whimper quietly as he teases you, the gentle touch the perfect counterpoint to his efforts on your ass.", parse);
+	Text.NL();
+	Text.Add("Ronnie’s thrusts grow more intense, his cock throbs inside you, and you can tell that his knot is rapidly growing to its full size. His hands leave your nipples and he releases your neck, licking where he bit you affectionately as he positions himself to thrust into you more forcefully. It seems your alpha is just about ready to try and knot his bitch.", parse);
+	Text.NL();
+	Text.Add("Lost in the throes of lust, you arch your back and growl enticingly, thrusting your ass back in blatant invitation. You want to be filled - you <b>need</b> to be filled, like the bitch you are! Cock and cum, you want to be <b>stuffed</b> with everything your alpha can give you!", parse);
+	Text.NL();
+	Text.Add("The smaller werwolf pushes against your [anus] with each powerful pump of his hips, trying his best to knot his beta. He tries again and again, and with every attempt you feel yourself being pried open just a little wider, his knot pushing just a little harder. You continue to push back, until he bites the nape of your neck once more, his hold on your hips tighten to stop all movement, and he thrusts with all his might one last time.", parse);
+	Text.NL();
+	Text.Add("You yelp in pleasured pain as your ass is forced open, Ronnie’s glorious knot finally managing to squeeze inside your gaping hole. Your body is awash in the fires of passion, lust all consuming, but it’s not enough to cum!", parse);
+	Text.NL();
+	Text.Add("Dimly, you are aware of Ronnie clambering atop your back in his eagerness, his hips thrusting desperately in his need. And then, your wonderful, generous alpha’s hands close around the straining, drooling length of your own cock, vigorously pumping away to help you to cum.", parse);
+	Text.NL();
+	parse["v"] = player.FirstVag() ? " mixed" : "";
+	parse["v2"] = player.FirstVag() ? " as your cunt adds its own spray to the mixture" : "";
+	Text.Add("That does it for both of you; your howls of ecstasy ring out in unison as both of you erupt. Your own seed spatters across the thirsty ground, forming a great sodden puddle of[v] sexual fluids[v2]. But Ronnie’s cum has nowhere to go but inside of you, pouring furiously into your bowels and swirling up into your stomach.", parse);
+	Text.NL();
+	Text.Add("By the time Ronnie grunts and sighs softly, you feel so very full... it’s glorious. You’re panting with the exertion of your climax, almost steaming in the cool night air, held aloft mostly because Ronnie hasn’t deigned to let you down yet.", parse);
+	Text.NL();
+	Text.Add("But your alpha... he doesn’t seem to be finished with you yet. Maybe it’s the rabbit in him, but you can feel him in your ass, still hard and throbbing as if he hadn’t ever climaxed.", parse);
+	Text.NL();
+	Text.Add("With a grunt of effort, Ronnie clambers off of you. Like a dog, he pivots as he hits the ground, leaving the pair of you still ass to ass, held together by his knot. He growls, deep and soft, grinding his ass back against your own.", parse);
+	Text.NL();
+	Text.Add("A second surge of liquid warmth erupts inside of you as he cums again. Thick jets of seed spray through your guts, joining those of his last climax. And then he spews forth his seed a third time, trembling so violently it almost sends both of you to the ground. You can feel your belly bulging, your alpha’s generous deposits of semen sloshing around as you sway.", parse);
+	Text.NL();
+	Text.Add("For a moment, you wonder just how much more he’s going to give you... and then you realize that he’s fallen still. You can feel him going soft inside of you, his knot slowly deflating... it looks like he’s had enough.", parse);
+	Text.NL();
+	Text.Add("Ronnie takes a step forward, pulling away from your used backdoor. A huge cascade of white werewolf semen falls from your abused hole, and your alpha turns to look at the scene with a proud air of satisfaction. He has mated his beta and filled his bitch.", parse);
+	Text.NL();
+	Text.Add("Weak at the knees, you allow yourself to slide to the ground, rolling slightly to the side in order to spare your sensitive, over-stuffed stomach. Your tongue lolls freely from your jaws as you pant tiredly, the silly grin of the truly fucked senseless painted broadly across your lupine face.", parse);
+	Text.NL();
+	Text.Add("Looking at your alpha, you see the white werewolf bent over himself, casually licking his half-erect cock clean. Once he’s finished, he bounds over and nuzzles you affectionately for a moment, before dashing away towards the woods.", parse);
+	Text.NL();
+	Text.Add("You sigh tiredly, closing your eyes and letting the strength creep back into your limbs. When you feel ready to go, you pick yourself up, shake yourself off, and slowly lope back towards the dusty road from whence you came, feeling quite satisfied yourself.", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt();
+}
+
+Scenes.Halloween.RonnieReversal = function() {
+	var parse = {
+		
+	};
+	
+	Text.Clear();
+	Text.Add("With a ferocious growl, you spring up from the ground, catapulting the unwitting white wolf from your back. He hits the ground with a dainty yelp, further cementing his unfitness to command. You loom over him, noting that for all his increased stature, he’s still the puny, delicate little girly-boy in comparison to you.", parse);
+	Text.NL();
+	Text.Add("Ronnie’s eyes widen as he gazes at your new form. Though he growls threateningly at you in a pitiful show of dominance, you can smell the fear and apprehension emanating from the smaller werewolf, as well as his lust.", parse);
+	Text.NL();
+	Text.Add("Unhesitatingly, you stride towards him, reaching down to grab the scruff of his neck with one powerful hand and hoist him clearly into the air to look you in the eye. Your hackles rise as you growl in command, a deep baritone rumble that just <b>dares</b> him to try and oppose you.", parse);
+	Text.NL();
+	Text.Add("His ears immediately flatten on his skull, any thought of challenging you immediately leaving him, and he whines plaintively.", parse);
+	Text.NL();
+	Text.Add("That’s a good bitch. Now, you think it was time you cemented your new role...", parse);
+	Text.NL();
+	Text.Add("You lower Ronnie back to the ground and then roughly push his shoulders, throwing him to all fours. The sight of his ass up in the air makes your cock throb harder and you lick your lips, growling softly as you grab him by the hips and grind your massive wolfhood between his surprisingly pert, perky buttcheeks.", parse);
+	Text.NL();
+	Text.Add("The smaller werewolf whines softly and grinds back, much to your surprise. It seems you didn’t even need to <i>mark him</i> to make it clear who runs this little pack of yours… but still, it would set a bad example if you just let him off the hook now, and from the looks of it, he wants this too!", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		Text.Clear();
+		Scenes.Halloween.RonniePitch();
+	});
+}
+
 Halloween.Loc.Path.events.push(new Link(
 	"Ravens", true, true,
 	null,

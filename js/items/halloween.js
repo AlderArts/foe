@@ -77,3 +77,21 @@ Items.Halloween.Guide.sDesc = function() { return "monsterslaying guide"; }
 Items.Halloween.Guide.lDesc = function() { return "a monsterslaying guide"; }
 Items.Halloween.Guide.Short = function() { return "Monsterslaying guide"; }
 Items.Halloween.Guide.Long = function() { return "The first two pages say, in big, bold letters: <i>DON’T PANIC!</i> That’s very sound advice, considering the predicament the writer found themselves in moments later..."; }
+
+
+Items.Halloween.WerewolfHide = new Item("hw9", "Hide", ItemType.Armor);
+Items.Halloween.WerewolfHide.price = 0;
+Items.Halloween.WerewolfHide.sDesc = function() { return "werewolf hide"; }
+Items.Halloween.WerewolfHide.lDesc = function() { return "a werewolf hide"; }
+Items.Halloween.WerewolfHide.Short = function() { return "Werewolf hide"; }
+Items.Halloween.WerewolfHide.Long = function() { return "Your natural, furry hide. You feel much warmer than you did in your previous skimpy clothes plus cloak combo, and your new muscles ripple with power whenever you flex them. All that combined with the fact that you still retain your ability to reason and think straight, maybe getting turned into a werewolf wasn’t so bad… It also feels great to feel the wind ruffling your fur with your junk dangling below.<br/><b>+3 Muscles, +2 Howling, +10 Nakedness, +2 Static generation, +1 Fluffy tail.</b>"; }
+Items.Halloween.WerewolfHide.subtype = ItemSubtype.FullArmor;
+
+
+Items.Halloween.WerewolfClaw = new Item("hw10", "Claws", ItemType.Weapon);
+Items.Halloween.WerewolfClaw.price = 0;
+Items.Halloween.WerewolfClaw.sDesc = function() { return "werewolf claws"; }
+Items.Halloween.WerewolfClaw.lDesc = function() { return "a set of werewolf claws"; }
+Items.Halloween.WerewolfClaw.Short = function() { return "Werewolf claws"; }
+Items.Halloween.WerewolfClaw.Long = function() { return "Razor-sharp claws, ideal for defending yourself against any threat you meet in your way. Just not that great when you want to <i>not</i> rip and shred stuff apart… but it’s universally agreed that ripping the clothes off someone is way faster than stripping them anyway.<br/><b>-3 Stripping, +10 Ripping clothes apart, +2 Back scratching power, +3 Holding bitches down for mating, +4 Badass.</b>"; }
+
