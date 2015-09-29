@@ -22,7 +22,6 @@ Items.EquiniumPlus.PushEffect(function(target) {
 		var cock = new Cock(Race.Horse, Color.pink);
 		cock.length.base    = 25;
 		cock.thickness.base = 7;
-		cock.sheath = 1;
 		cocks.push(cock);
 		Text.Add("[name] grow[s] a huge horsecock!", parse);
 		Text.NL();
@@ -33,11 +32,6 @@ Items.EquiniumPlus.PushEffect(function(target) {
 		else
 			Text.Add("[Possessive] cock turns into a horsecock!", parse);
 		Text.NL();
-		//Add sheaths
-		for(var i = 0; i < cocks.length; i++) {
-			var cock = cocks[i];
-			cock.sheath = 1;
-		}
 	}
 	var len = false, thk = false;
 	for(var i = 0; i < cocks.length; i++) {
@@ -112,15 +106,16 @@ Items.Tigris.PushEffect(function(target) {
 		Possessive: target.Possessive()
 	};
 	var cocks = target.AllCocks();
+	/* TODO
 	for(var i = 0; i < cocks.length; i++) {
 		var cock = cocks[i];
 		if(cock.sheath == 0 && Math.random() < 0.4) {
 			parse["cock"] = cock.Short();
 			Text.Add("[Possessive] [cock] is encased in a soft, furry sheath!", parse);
 			Text.NL();
-			cock.sheath = 1;
 		}
 	}
+	*/
 	Text.Flush();
 });
 Items.Tigris.PushEffect(TF.ItemEffects.DecFem, {odds: 0.2, ideal: -.7, max: .1, male: true});

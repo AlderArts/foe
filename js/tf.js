@@ -345,6 +345,7 @@ TF.ItemEffects.SetKnot = function(target, opts) {
 
 // odds, value, num
 TF.ItemEffects.SetSheath = function(target, opts) {
+	/* TODO
 	var parse = { Poss: target.Possessive(), poss: target.possessive() };
 	var odds  = opts.odds || 1;
 	var num   = opts.num || 1;
@@ -372,6 +373,7 @@ TF.ItemEffects.SetSheath = function(target, opts) {
 		}
 	}
 	Text.Flush();
+	*/
 }
 
 // odds, race, str, color

@@ -1417,7 +1417,6 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					Text.Add("Both of you look at the huge throbbing erection in awe. Rosalin looks at [hisher] cock. Then at you. Then at the cock. Then at you.", parse);
 					
 					var cock = new Cock(Race.Horse, Color.pink);
-					cock.sheath = 1;
 					cock.length.base    = 25;
 					cock.thickness.base = 7;
 					rosalin.AllCocks().push(cock);
@@ -1478,7 +1477,6 @@ Scenes.Rosalin.CombineCallback = function(item) {
 					var cock = new Cock(Race.Horse, Color.pink);
 					cock.length.base    = 25;
 					cock.thickness.base = 7;
-					cock.sheath = 1;
 					rosalin.AllCocks().push(cock);
 				}
 				
@@ -3197,7 +3195,7 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	parse["ballsCunt"] = rosalin.HasBalls() ? Text.Parse("[rBallsDesc]", parse) : "cunt";
 	parse["type"] = cock.race.qShort();
 	Text.Add("[HeShe] cups [hisher] [ballsCunt] lewdly and hefts [hisher] [type] endowment with the other, unashamedly jacking [himher]self off in your direction, the [rCockTip] expanding ever-so-slightly under [hisher] ministration. ", parse);
-	if(cock.sheath == 1)
+	if(cock.Sheath())
 		Text.Add("Rosalin sighs and digs a digit into [hisher] sheath, massaging [himher]self under the folds of concealing skin to further fuel [hisher] ardor. Gathering some of the moisture from inside, the [raceDesc] works it across [hisher] glistening shaft, moaning a little whenever [hisher] hands pass the ring of prepuce in the middle and pushing [himher]self toward greater pleasure.", parse);
 	else
 		Text.Add("Rosalin happily jerks off [hisher] [rCockDesc], [hisher] hands rapidly pumping the erect shaft.", parse);
@@ -3228,7 +3226,7 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 	parse["anim"] = cock.race != Race.Human ? " and animalistic" : "";
 	Text.Add("The alchemist's marvellous genitalia are so potent[anim] that you unwittingly find yourself pushing forward, trying to cram [himher] further into your throat. It's difficult to resist, but you endure in order to more properly worship [hisher] wonderful tool. There will be time to deepthroat it when [heshe]'s about to climax.", parse);
 	Text.NL();
-	if(cock.sheath == 1)
+	if(cock.Sheath())
 		Text.Add("Slipping a hand into [hisher] sheath to tenderly hold [himher], you push yourself back, allowing [hisher] dong to slide out of your mouth, covered in your saliva. ", parse);
 	Text.Add("A spurt of overly anxious jism escapes the tumescent prick, smearing neatly across your lips and chin as you shift positions.", parse);
 	Text.NL();
@@ -3257,7 +3255,7 @@ Scenes.Rosalin.CockWorship = function(sexState) {
 		Text.Add(" [HisHer] flare is getting so large that it nearly catches on your teeth, but you wrangle it in, gulping noisily as it slides into the back of your throat to keep yourself from gagging.", parse);
 	Text.NL();
 	Text.Add("[HisHer] rigid [rCockDesc] is just soft and spongy enough to bend and slide into your throat, stretching you uncomfortably.", parse);
-	if(cock.sheath == 1)
+	if(cock.Sheath())
 		Text.Add(" You carry on, not satisfied until [hisher] sheath is bunching up underneath your nose, sandwiched between your lips and [hisher] wonderful crotch.", parse);
 	Text.NL();
 	if(sexState == RosalinSexState.Rut)

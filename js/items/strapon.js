@@ -35,7 +35,6 @@ Items.StrapOn.EquineStrapon.cock = new Cock();
 Items.StrapOn.EquineStrapon.cock.thickness.base = 7;
 Items.StrapOn.EquineStrapon.cock.length.base    = 40;
 Items.StrapOn.EquineStrapon.cock.race           = Race.Horse;
-Items.StrapOn.EquineStrapon.cock.sheath         = 1;
 Items.StrapOn.EquineStrapon.cock.isStrapon      = true;
 
 Items.StrapOn.CanidStrapon = new Item("strapon3", "Canid strapon", ItemType.Toy);
@@ -63,6 +62,5 @@ Items.StrapOn.ChimeraStrapon.cock = new Cock();
 Items.StrapOn.ChimeraStrapon.cock.thickness.base = 11;
 Items.StrapOn.ChimeraStrapon.cock.length.base    = 60;
 Items.StrapOn.ChimeraStrapon.cock.race           = Race.Feline;
-Items.StrapOn.ChimeraStrapon.cock.sheath         = 1;
 Items.StrapOn.ChimeraStrapon.cock.knot           = 1;
 Items.StrapOn.ChimeraStrapon.cock.isStrapon      = true;

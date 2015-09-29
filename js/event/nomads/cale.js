@@ -2750,7 +2750,7 @@ Scenes.Cale.SexCatchVagEntrypoint = function(outside, fromAnal) {
 				Text.Add("He moves under your [multiCockDesc] to lap at your [ballsDesc], sucking on them until they’re nice and plump. Then he moves back to your [cockDesc], returning to his mission.", parse);
 				Text.NL();
 			}
-			parse["sh"] = p1cock.sheath != 0 ? "your sheath" : "the base of your cock";
+			parse["sh"] = p1cock.Sheath() ? "your sheath" : "the base of your cock";
 			Text.Add("Cale nuzzles your [cockDesc] giving it an amorous nuzzle, kissing [sh] in the process. Under such treatment, it doesn’t take long for your erection to become as hard as it can get, throbbing and ready for some wolfie ass. <i>“Now ain’t that a sight for sore eyes?”</i> Cale chuckles.", parse);
 			Text.NL();
 			Text.Add("You simply grin back, happy to let Cale make his bad jokes when you know what’s coming to you. Besides, you have to agree with him a little anyway.", parse);

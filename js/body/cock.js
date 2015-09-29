@@ -13,7 +13,6 @@ function Cock(race, color) {
 	this.type      = CockType.ordinary;
 	this.vag       = null; // For clitcock
 	this.knot      = 0;
-	this.sheath    = 0;
 	this.isStrapon = false;
 }
 Cock.prototype = new BodyPart();
@@ -27,12 +26,8 @@ Cock.prototype.ToStorage = function(full) {
 	if(full) {
 		storage.race = this.race.id.toFixed();
 		storage.col  = this.color.toFixed();
-		if(this.type != CockType.ordinary)
-			storage.type = this.type.toFixed();
-		if(this.knot != 0)
-			storage.knot = this.knot.toFixed();
-		if(this.sheath != 0)
-			storage.sheath = this.sheath.toFixed();
+		if(this.type != CockType.ordinary) storage.type = this.type.toFixed();
+		if(this.knot != 0) storage.knot = this.knot.toFixed();
 	}
 	return storage;
 }
@@ -45,7 +40,6 @@ Cock.prototype.FromStorage = function(storage) {
 	this.length.base    = parseFloat(storage.len)  || this.length.base;
 	this.thickness.base = parseFloat(storage.thk)  || this.thickness.base;
 	this.knot           = parseInt(storage.knot)   || this.knot;
-	this.sheath         = parseInt(storage.sheath) || this.sheath;
 }
 
 Cock.prototype.Clone = function() {
@@ -53,7 +47,6 @@ Cock.prototype.Clone = function() {
 	cock.thickness.base = this.thickness.base;
 	cock.length.base    = this.length.base;
 	cock.knot           = this.knot;
-	cock.sheath         = this.sheath;
 	return cock;
 }
 
@@ -74,7 +67,15 @@ Cock.prototype.Knot = function() {
 	return this.knot != 0;
 }
 Cock.prototype.Sheath = function() {
-	return this.sheath != 0;
+	return this.race.isRace(
+		Race.Horse,
+		Race.Cow,
+		Race.Sheep,
+		Race.Goat,
+		Race.Feline,
+		Race.Canine,
+		Race.Musteline,
+		Race.Rabbit);
 }
 Cock.prototype.Strapon = function() {
 	return this.isStrapon;
@@ -164,8 +165,8 @@ Cock.prototype.Desc = function() {
 Cock.prototype.Short = function() {
 	var desc = this.Desc();
 	var noun = this.noun();
-	var knotted = ((this.knot   != 0) && (Math.random() < 0.5)) ? ", knotted"  : "";
-	var sheath  = ((this.sheath != 0) && (Math.random() < 0.5)) ? ", sheathed" : "";
+	var knotted = (this.Knot() && (Math.random() < 0.5)) ? ", knotted"  : "";
+	var sheath  = (this.Sheath() && (Math.random() < 0.5)) ? ", sheathed" : "";
 	var race = " ";
 	if((this.race == Race.Human) && (Math.random() < 0.1)) race += this.race.Short(Gender.male);
 	if((this.race != Race.Human) && (Math.random() < 0.5)) race += this.race.Short(Gender.male);
@@ -195,15 +196,15 @@ Cock.prototype.KnotShort = function() {
 Cock.prototype.aLong = function() {
 	var desc    = this.Desc();
 	var noun    = this.noun();
-	var knotted = (this.knot   != 0) ? ", knotted" : "";
-	var sheath  = (this.sheath != 0) ? ", sheathed" : "";
+	var knotted = this.Knot() ? ", knotted" : "";
+	var sheath  = this.Sheath() ? ", sheathed" : "";
 	return desc.a + " " + desc.adj + knotted + sheath + " " + this.race.Short(Gender.male) + " " + noun + ", " + desc.len + " long and " + desc.thickness + " thick";
 }
 // TODO: Better descriptions
 Cock.prototype.Long = function() {
 	var desc    = this.Desc();
 	var noun    = this.noun();
-	var knotted = (this.knot   != 0) ? ", knotted" : "";
-	var sheath  = (this.sheath != 0) ? ", sheathed" : "";
+	var knotted = this.Knot() ? ", knotted" : "";
+	var sheath  = this.Sheath() ? ", sheathed" : "";
 	return desc.adj + knotted + sheath + " " + this.race.Short(Gender.male) + " " + this.noun() + ", " + desc.len + " long and " + desc.thickness + " thick";
 }
