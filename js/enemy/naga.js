@@ -589,8 +589,8 @@ Scenes.Naga.DesertLossUseCock = function(enc) {
 		Text.Add("The snake’s mouth muffles your whorish moan as the sensation of your [nipsDesc] rubbing against hers adds yet another stimulus to the list of overwhelming pleasures you’re receiving.", parse);
 	}
 	Text.NL();
-	parse["tightLooseGaping"] = player.Butt().Tightness() < Butt.Tightness.tight ? "tight" :
-	                            player.Butt().Tightness() < Butt.Tightness.loose ? "loose" : "gaping";
+	parse["tightLooseGaping"] = player.Butt().Tightness() < Orifice.Tightness.tight ? "tight" :
+	                            player.Butt().Tightness() < Orifice.Tightness.loose ? "loose" : "gaping";
 	Text.Add("You feel a shifting sensation in the sand beneath your legs as you realize the naga is moving her tail. A few seconds later in your ongoing sexual overload, you feel a tickle on your [anusDesc]. Realizing with shock what’s about to happen, you moan into your lover’s lips, half of you pleading for mercy and the other half craving ever more pleasure. As the scaly tip of the naga’s tail breaches your [tightLooseGaping] pucker, your moan turns into a muffled scream.", parse);
 	Text.NL();
 	Text.Add("The serpentine tail has a relatively thin point, but the scales themselves make the penetration somewhat unique. You can feel each scale at first, the naga sliding her tail in slowly and purposefully, swirling around the tip to feel your inner walls. As her snake tail enters deeper into your anal passage, the thickness increases, becoming far thicker than most cocks in short order.", parse);

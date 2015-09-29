@@ -407,7 +407,7 @@ Scenes.Estevan.SexGay = function() {
 				Text.NL();
 				Text.Add("When you tell him that you’ve never taken a cock before you can hear the smile split his face. He replies, <i>“I’m a lucky boy!”</i>", parse);
 			}
-			else if(player.Butt().Tightness() >= Butt.Tightness.loose)
+			else if(player.Butt().Tightness() >= Orifice.Tightness.loose)
 				Text.Add("<i>“Nice and sloppy. I don’t mind being second or third or fiftieth.”</i>", parse);
 			else
 				Text.Add("<i>“Almost ready. Just a little bit…”</i> He continues pushing his finger inside you. <i>“...further.”</i>", parse);
@@ -426,7 +426,7 @@ Scenes.Estevan.SexGay = function() {
 					Text.NL();
 					Text.Add("He presses his dick up against your [anusDesc] and pushes the head into your lubed-up butt. The pressure is intense as the satyr works his thick cock into your asshole.", parse);
 					Text.NL();
-					if(player.Butt().Tightness() >= Butt.Tightness.loose)
+					if(player.Butt().Tightness() >= Orifice.Tightness.loose)
 						Text.Add("<i>“Mmm...I don’t need to hold back with you, do I? I could fuck your loose hole all day and you’d probably just beg for more,”</i> he growls in your ear.", parse);
 					else
 						Text.Add("<i>“I have to take it easy on you, but you’re so tight that I just want to wreck your hole,”</i> he says, between grunts.", parse);

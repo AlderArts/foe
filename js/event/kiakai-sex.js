@@ -3148,7 +3148,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 
 						Text.Flush();
 						
-						kiakai.Butt().stretch.IncreaseStat(Butt.Tightness.loose, 0.5);
+						kiakai.Butt().stretch.IncreaseStat(Orifice.Tightness.loose, 0.5);
 						kiakai.subDom.DecreaseStat(0, 1);
 						world.TimeStep({hour: 1});
 						player.AddLustFraction(-1);
@@ -3239,7 +3239,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 						
 						Text.Flush();
 						
-						kiakai.Butt().stretch.IncreaseStat(Butt.Tightness.loose, 0.5);
+						kiakai.Butt().stretch.IncreaseStat(Orifice.Tightness.loose, 0.5);
 						kiakai.subDom.DecreaseStat(-50, 2);
 						
 						world.TimeStep({hour: 1});
@@ -3343,7 +3343,7 @@ Scenes.Kiakai.SexPrompt = function(attitude) {
 							Text.Flush();
 							
 							kiakai.AddSPFraction(-1);
-							kiakai.Butt().stretch.IncreaseStat(Butt.Tightness.gaping, 1);
+							kiakai.Butt().stretch.IncreaseStat(Orifice.Tightness.gaping, 1);
 							kiakai.subDom.DecreaseStat(-75, 10);
 							kiakai.Butt().capacity.IncreaseStat(len, 5);
 							

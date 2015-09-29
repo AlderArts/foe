@@ -275,17 +275,17 @@ Entity.prototype.FuckAnal = function(butt, cock, expMult) {
 		var cap = butt.Cap();
 		var ratio = thk / cap;
 		if(ratio < 0.5)
-			butt.stretch.IncreaseStat(Butt.Tightness.flexible, 0.25);
+			butt.stretch.IncreaseStat(Orifice.Tightness.flexible, 0.25);
 		else if(ratio < 1)
-			butt.stretch.IncreaseStat(Butt.Tightness.loose, 0.5);
+			butt.stretch.IncreaseStat(Orifice.Tightness.loose, 0.5);
 		else
-			butt.stretch.IncreaseStat(Butt.Tightness.gaping, 0.75);
+			butt.stretch.IncreaseStat(Orifice.Tightness.gaping, 0.75);
 		var stretch2 = butt.Tightness();
-		if(stretch < Butt.Tightness.flexible && stretch2 >= Butt.Tightness.flexible) {
+		if(stretch < Orifice.Tightness.flexible && stretch2 >= Orifice.Tightness.flexible) {
 			Text.Add("<b>[poss] butt has become loose.</b>", parse);
 			Text.NL();
 		}
-		if(stretch < Butt.Tightness.loose && stretch2 >= Butt.Tightness.loose) {
+		if(stretch < Orifice.Tightness.loose && stretch2 >= Orifice.Tightness.loose) {
 			Text.Add("<b>[poss] butt has become gaping.</b>", parse);
 			Text.NL();
 		}
@@ -318,17 +318,17 @@ Entity.prototype.FuckVag = function(vag, cock, expMult) {
 		var cap = vag.Cap();
 		var ratio = thk / cap;
 		if(ratio < 0.5)
-			vag.stretch.IncreaseStat(Vagina.Tightness.flexible, 0.25);
+			vag.stretch.IncreaseStat(Orifice.Tightness.flexible, 0.25);
 		else if(ratio < 1)
-			vag.stretch.IncreaseStat(Vagina.Tightness.loose, 0.5);
+			vag.stretch.IncreaseStat(Orifice.Tightness.loose, 0.5);
 		else
-			vag.stretch.IncreaseStat(Vagina.Tightness.gaping, 0.75);
+			vag.stretch.IncreaseStat(Orifice.Tightness.gaping, 0.75);
 		var stretch2 = vag.Tightness();
-		if(stretch < Vagina.Tightness.flexible && stretch2 >= Vagina.Tightness.flexible) {
+		if(stretch < Orifice.Tightness.flexible && stretch2 >= Orifice.Tightness.flexible) {
 			Text.Add("<b>[poss] pussy has become loose.</b>", parse);
 			Text.NL();
 		}
-		if(stretch < Vagina.Tightness.loose && stretch2 >= Vagina.Tightness.loose) {
+		if(stretch < Orifice.Tightness.loose && stretch2 >= Orifice.Tightness.loose) {
 			Text.Add("<b>[poss] pussy has become gaping.</b>", parse);
 			Text.NL();
 		}

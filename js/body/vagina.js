@@ -1,78 +1,27 @@
 
-Capacity = {
-	tight  : 2,
-	loose  : 5,
-	gaping : 10
-};
-
 function Vagina() {
-	this.color         = Color.pink;
-	
-	this.capacity      = new Stat(5);
-	this.minStretch    = new Stat(1);
-	this.stretch       = new Stat(1);
-	this.wetness       = new Stat(1);
-	this.clitThickness = new Stat(0.5);
-	this.clitLength    = new Stat(0.5);
+	Orifice.call(this);
+	this.clit          = new Stat(0.5);
 	this.clitCock      = null;
-	
-	this.womb          = new Womb();
-	
-	this.virgin        = true;
 }
+Vagina.prototype = new Orifice();
+Vagina.prototype.constructor = Vagina;
+
 
 Vagina.prototype.ToStorage = function(full) {
-	var storage = {
-		cap    : this.capacity.base.toFixed(2),
-		str    : this.stretch.base.toFixed(2),
-		wet    : this.wetness.base.toFixed(2),
-		virgin : this.virgin ? 1 : 0
-	};
+	var storage = Orifice.prototype.ToStorage.call(this, full);
 	if(full) {
-		storage.col   = this.color.toFixed();
-		storage.clitT = this.clitThickness.base.toFixed(2);
-		storage.clitL = this.clitLength.base.toFixed(2);
-		storage.mstr  = this.minStretch.base.toFixed(2);
+		storage.clit = this.clit.base.toFixed(2);
 	}
 	return storage;
 }
 
 Vagina.prototype.FromStorage = function(storage) {
 	storage = storage || {};
-	this.color              = parseInt(storage.col)     || this.color;
-	this.capacity.base      = parseFloat(storage.cap)   || this.capacity.base;
-	this.minStretch.base    = parseFloat(storage.mstr)  || this.minStretch.base;
-	this.stretch.base       = parseFloat(storage.str)   || this.stretch.base;
-	this.wetness.base       = parseFloat(storage.wet)   || this.wetness.base;
-	this.clitThickness.base = parseFloat(storage.clitT) || this.clitThickness.base;
-	this.clitLength.base    = parseFloat(storage.clitL) || this.clitLength.base;
-	this.virgin             = storage.hasOwnProperty("virgin") ? parseInt(storage.virgin) == 1 : this.virgin;
+	Orifice.prototype.FromStorage.call(this, storage);
+	this.clit.base    = parseFloat(storage.clit) || this.clit.base;
 }
 
-Vagina.prototype.Cap = function() {
-	return this.capacity.Get() * this.stretch.Get();
-}
-Vagina.prototype.Pregnant = function() {
-	return this.womb.pregnant;
-}
-// TODO
-Vagina.prototype.Fits = function(cock, extension) {
-	extension = extension || 0;
-	return cock.Thickness() <= (this.Cap() + extension);
-}
-Vagina.prototype.Tightness = function() {
-	return this.stretch.Get();
-}
-Vagina.Tightness = {
-	tight    : 1,
-	flexible : 2,
-	loose    : 3,
-	gaping   : 4
-}
-Vagina.prototype.HandleStretchOverTime = function(hours) {
-	//TODO rate
-	this.stretch.IdealStat(this.minStretch.Get(), hours * 0.05);
-}
 // Create a clitcock from a vagina
 // Returns the cock
 Vagina.prototype.CreateClitcock = function() {

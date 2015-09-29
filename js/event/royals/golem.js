@@ -312,7 +312,7 @@ Scenes.Golem.OnLoss = function() {
 		Text.Add("Finally finding her target, the animated stone statue plunges her oily tongue into your [vagDesc], gently probing your insides.", parse);
 	}
 	else {
-		parse["tightLoose"] = player.Butt().Tightness() > Butt.Tightness.loose ? "loose" : "tight";
+		parse["tightLoose"] = player.Butt().Tightness() > Orifice.Tightness.loose ? "loose" : "tight";
 		Text.Add("Pausing for a bit, as if her limited intelligence is unable to process the concept of you not having a pussy, the golem apparently comes to a decision and returns her attention to your [anusDesc], thrusting her tongue into the [tightLoose] hole.", parse);
 	}
 	Text.Add(" There is a low creaking, and you gasp as her tongue changes form, growing in length in order to reach even deeper inside you. Every square inch of the inside of your [targetDesc] is soon coated in the tingly oil, making it very difficult for you to form coherent thoughts. You moan despite yourself, unable to deny the pleasure you are getting from this any longer.", parse);

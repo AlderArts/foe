@@ -2164,9 +2164,9 @@ Scenes.Miranda.HomeSubbySexTakeAnal = function(location, Loc) {
 		Text.NL();
 		Text.Add("<i>“Mm, good [boyGirl]! Clench down on my cock!”</i> the dobie growls. ", parse);
 		var bt = player.Butt().Tightness();
-		if(bt < Butt.Tightness.loose)
+		if(bt < Orifice.Tightness.loose)
 			Text.Add("<i>“Fuck you are tight! I love breaking in a new ass!”</i>", parse);
-		else if(bt < Butt.Tightness.gaping)
+		else if(bt < Orifice.Tightness.gaping)
 			Text.Add("<i>“Heh, this isn’t the first time you’ve received a good fucking, is it?”</i>", parse);
 		else
 			Text.Add("<i>“Fuck, just what have you stuffed in here? You probably spend all your time as the town mount if you’re gaping as wide as this!”</i>", parse);

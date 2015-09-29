@@ -19,6 +19,23 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/statuseffect.js \
 	js/ability.js \
 	js/stat.js \
+	js/pregnancy.js \
+	js/lactation.js \
+	js/body/gender.js \
+	js/body/color.js \
+	js/body/race.js \
+	js/body/bodypart.js \
+	js/body/appendage.js \
+	js/body/balls.js \
+	js/body/breasts.js \
+	js/body/orifice.js \
+	js/body/butt.js \
+	js/body/cock.js \
+	js/body/vagina.js \
+	js/body/hair.js \
+	js/body/head.js \
+	js/body/body.js \
+	js/defbody.js \
 	js/entity.js \
 	js/entity-combat.js \
 	js/entity-desc.js \
@@ -26,21 +43,6 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/entity-menu.js \
 	js/entity-save.js \
 	js/entity-sex.js \
-	js/body/gender.js \
-	js/body/color.js \
-	js/body/race.js \
-	js/body/body.js \
-	js/body/appendage.js \
-	js/body/balls.js \
-	js/body/breasts.js \
-	js/body/butt.js \
-	js/body/cock.js \
-	js/body/vagina.js \
-	js/body/hair.js \
-	js/body/head.js \
-	js/defbody.js \
-	js/pregnancy.js \
-	js/lactation.js \
 	js/event/player.js \
 	js/party.js \
 	js/effect.js \

@@ -1,62 +1,25 @@
 
 function Butt() {
-	this.capacity   = new Stat(4);
-	this.minStretch = new Stat(1);
-	this.stretch    = new Stat(1);
-	this.buttSize   = new Stat(1); // TODO: Default
-	// This is a special case for anal pregnancy
-	// Only appliable for incubation/eggs
-	this.womb       = new Womb();
-	
-	this.virgin     = true;
+	Orifice.call(this);
+	this.buttSize   = new Stat(1);
 }
+Butt.prototype = new Orifice();
+Butt.prototype.constructor = Butt;
 
 Butt.prototype.ToStorage = function(full) {
-	var storage = {
-		cap    : this.capacity.base.toFixed(2),
-		str    : this.stretch.base.toFixed(2),
-		virgin : this.virgin ? 1 : 0
-	};
+	var storage = Orifice.prototype.ToStorage.call(this, full);
 	if(full) {
 		storage.size = this.buttSize.base.toFixed(2);
-		storage.mstr = this.minStretch.base.toFixed(2);
 	}
 	return storage;
 }
 
 Butt.prototype.FromStorage = function(storage) {
 	storage = storage || {};
-	this.capacity.base   = parseFloat(storage.cap)  || this.capacity.base;
-	this.minStretch.base = parseFloat(storage.mstr) || this.minStretch.base;
-	this.stretch.base    = parseFloat(storage.str)  || this.stretch.base;
+	Orifice.prototype.FromStorage.call(this, storage);
 	this.buttSize.base   = parseFloat(storage.size) || this.buttSize.base;
-	this.virgin          = storage.hasOwnProperty("virgin") ? parseInt(storage.virgin) == 1 : this.virgin;
 }
 
-Butt.prototype.Cap = function() {
-	return this.capacity.Get() * this.stretch.Get();
-}
-Butt.prototype.Pregnant = function() {
-	return this.womb.pregnant;
-}
-// TODO
-Butt.prototype.Fits = function(cock, extension) {
-	extension = extension || 0;
-	return cock.Thickness() <= (this.Cap() + extension);
-}
-Butt.prototype.Tightness = function() {
-	return this.stretch.Get();
-}
-Butt.Tightness = {
-	tight    : 1,
-	flexible : 2,
-	loose    : 3,
-	gaping   : 4
-}
-Butt.prototype.HandleStretchOverTime = function(hours) {
-	//TODO rate
-	this.stretch.DecreaseStat(this.minStretch.Get(), hours * 0.05);
-}
 Butt.prototype.noun = function() {
 	var size = this.buttSize.Get();
 	var nouns = new Array();
