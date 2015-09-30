@@ -613,8 +613,7 @@ Scenes.Asche.Tasks.Ginseng.Complete = function() {
 Scenes.Asche.Tasks.Nightshade = {};
 
 Scenes.Asche.Tasks.Nightshade.IsEligable = function() {
-	return asche.flags["Tasks"] >= Asche.Tasks.Ginseng_Finished &&
-	       asche.flags["Tasks"] < Asche.Tasks.Nightshade_Started &&
+	return asche.flags["Tasks"] < Asche.Tasks.Nightshade_Started &&
 	       rigard.MagicShop.totalBought >= 1000 &&
 	       player.level >= 8;
 }
@@ -980,7 +979,7 @@ Scenes.Asche.Tasks.Spring = {};
 Scenes.Asche.Tasks.Spring.IsEligable = function() {
 	return asche.flags["Tasks"] < Asche.Tasks.Spring_Started &&
 	       rigard.MagicShop.totalBought >= 1500 &&
-	       player.level >= 5;
+	       player.level >= 8;
 }
 Scenes.Asche.Tasks.Spring.IsOn = function() {
 	return asche.flags["Tasks"] >= Asche.Tasks.Spring_Started &&
