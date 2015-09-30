@@ -5,6 +5,14 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.4m
+------------
+* Fixed a bug in Halloween which would cause your party to duplicate
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.4l
 ------------
 * Added Halloween content. You can access it either by playing during the time period 14 oct-14 nov, or by enabling debug
@@ -14,10 +22,6 @@ Version 0.4l
 * Fixed a bug regarding companions in Lei's task
 * Layla has a new sex scene written by QB/LD. You need a cock/toy to trigger it
 * Restructured the "Entity" class and split it up into multiple files. This shouldn't cause wierdness, but report if it does
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.4k
 ------------

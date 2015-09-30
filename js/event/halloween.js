@@ -12,7 +12,7 @@ function Halloween() {
 	party.inventory = new Inventory();
 	// Set up temp party
 	party.ClearActiveParty();
-	party.AddMember(player);
+	party.SwitchIn(player);
 	// Move to Halloween world
 	party.location = Halloween.Loc.Tent;
 	// Set up internal flags
@@ -63,8 +63,8 @@ Halloween.IsSeason = function() {
 
 Halloween.prototype.Restore = function() {
 	// Restore player/oarty
-	player.FromStorage(this.player);
-	party.FromStorage(this.party);
+	player = new Player(this.player);
+	party = new Party(this.party);
 }
 
 Halloween.prototype.Werewolf = function() {
