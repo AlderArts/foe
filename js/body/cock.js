@@ -82,60 +82,48 @@ Cock.prototype.Strapon = function() {
 }
 
 Cock.prototype.noun = function() {
-	var noun;
+	var noun = [];
 	if(this.vag) {
-		var r = Rand(2);
-		if     (r == 0) noun = "clit-cock";
-		else if(r == 1) noun = "girl-cock";
+		noun.push("clit-cock");
+		noun.push("girl-cock");
 	}
-	else if(this.type == CockType.tentacle) {
-		var r = Rand(2);
-		if     (r == 0) noun = "tentacle";
-		else if(r == 1) noun = "tentacle-cock";
+	if(this.type == CockType.tentacle) {
+		noun.push("tentacle");
+		noun.push("tentacle-cock");
 	}
 	else if(this.type == CockType.ovipositor) {
-		var r = Rand(2);
-		if     (r == 0) noun = "ovipositor";
-		else if(r == 1) noun = "egg-layer";
+		noun.push("ovipositor");
+		noun.push("egg-layer");
 	}
 	else {
-		var r = Rand(11);
-		if     (r == 0) noun = "cock";
-		else if(r == 1) noun = "dick";
-		else if(r == 2) noun = "manhood";
-		else if(r == 3) noun = "member";
-		else if(r == 4) noun = "slab of meat";
-		else if(r == 5) noun = "penis";
-		else if(r == 6) noun = "phallus";
-		else if(r == 7) noun = "prick";
-		else if(r == 8) noun = "rod";
-		else if(r == 9) noun = "shaft";
-		else            noun = "dong";	
+		noun.push("cock");
+		noun.push("dick");
+		noun.push("manhood");
+		noun.push("member");
+		noun.push("slab of meat");
+		noun.push("penis");
+		noun.push("phallus");
+		noun.push("prick");
+		noun.push("rod");
+		noun.push("shaft");
+		noun.push("dong");	
 	}
-	return noun;
+	return _.sample(noun);
 }
 Cock.prototype.nounPlural = function() {
-	var noun;
-	if(this.vag) {
-		var r = Rand(2);
-		if     (r == 0) noun = "clit-cocks";
-		else if(r == 1) noun = "girl-cocks";
-	}
-	else {
-		var r = Rand(11);
-		if     (r == 0) noun = "cocks";
-		else if(r == 1) noun = "dicks";
-		else if(r == 2) noun = "manhoods";
-		else if(r == 3) noun = "members";
-		else if(r == 4) noun = "slabs of meat";
-		else if(r == 5) noun = "penises";
-		else if(r == 6) noun = "phalluses";
-		else if(r == 7) noun = "pricks";
-		else if(r == 8) noun = "rods";
-		else if(r == 9) noun = "shafts";
-		else            noun = "dongs";
-	}
-	return noun;
+	var noun = [];
+	noun.push("cocks");
+	noun.push("dicks");
+	noun.push("manhoods");
+	noun.push("members");
+	noun.push("slabs of meat");
+	noun.push("penises");
+	noun.push("phalluses");
+	noun.push("pricks");
+	noun.push("rods");
+	noun.push("shafts");
+	noun.push("dongs");
+	return _.sample(noun);
 }
 Cock.prototype.Desc = function() {
 	var ret;
