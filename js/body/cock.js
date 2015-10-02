@@ -1,7 +1,7 @@
 
 CockType = {
 	ordinary : 0,
-	clitcock : 1,
+//	clitcock : 1,
 	tentacle : 2,
 	ovipositor : 3
 }
@@ -83,7 +83,7 @@ Cock.prototype.Strapon = function() {
 
 Cock.prototype.noun = function() {
 	var noun;
-	if(this.type == CockType.clitcock) {
+	if(this.vag) {
 		var r = Rand(2);
 		if     (r == 0) noun = "clit-cock";
 		else if(r == 1) noun = "girl-cock";
@@ -116,7 +116,7 @@ Cock.prototype.noun = function() {
 }
 Cock.prototype.nounPlural = function() {
 	var noun;
-	if(this.type == CockType.clitcock) {
+	if(this.vag) {
 		var r = Rand(2);
 		if     (r == 0) noun = "clit-cocks";
 		else if(r == 1) noun = "girl-cocks";

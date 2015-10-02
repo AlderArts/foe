@@ -26,7 +26,6 @@ Vagina.prototype.FromStorage = function(storage) {
 // Returns the cock
 Vagina.prototype.CreateClitcock = function() {
 	var cc = new Cock();
-	cc.type = CockType.clitcock;
 	this.clitCock = cc;
 	cc.vag = this;
 	return cc;

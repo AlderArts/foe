@@ -34,6 +34,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/body/vagina.js \
 	js/body/hair.js \
 	js/body/head.js \
+	js/body/genitalia.js \
 	js/body/body.js \
 	js/defbody.js \
 	js/entity.js \

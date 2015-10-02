@@ -32,6 +32,7 @@ function Body(ent) {
 	this.backSlots     = new Array();
 	
 	// Genetalia
+	this.gen = new Genitalia(this);
 	this.cock = new Array();
 	this.balls = new Balls();
 	
@@ -46,8 +47,6 @@ function Body(ent) {
 	this.arms.count = 2;
 	this.legs = new BodyPart();
 	this.legs.count = 2;
-	
-	// TODO: Hands/Feet?
 }
 
 
@@ -99,6 +98,7 @@ Body.prototype.ToStorage = function() {
 		}
 	}
 	// Genetalia
+	storage.gen = this.gen.ToStorage();
 	if(this.cock.length > 0) {
 		storage.cock = new Array();
 		for(var i = 0; i < this.cock.length; i++) {
@@ -200,6 +200,8 @@ Body.prototype.FromStorage = function(storage) {
 			this.backSlots.push(newApp);
 		}
 	}
+	
+	this.gen.FromStorage(storage.gen);
 	
 	if(storage.cock) {
 		this.cock = new Array();

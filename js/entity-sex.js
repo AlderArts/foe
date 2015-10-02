@@ -27,7 +27,7 @@ Entity.prototype.FirstCock = function() {
 Entity.prototype.FirstClitCockIdx = function() {
 	for(var i=0,j=this.body.cock.length; i<j; i++) {
 		var c = this.body.cock[i];
-		if(c.type == CockType.clitcock)
+		if(c.vag)
 			return i;
 	}
 	return -1;
