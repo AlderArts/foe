@@ -56,8 +56,13 @@ Womb.prototype.FromStorage = function(storage) {
 }
 
 Womb.prototype.IsEgg = function() {
-	//TODO
-	return false;
+	//TODO Should be a better way to do this
+	if( this.pregType == PregType.Lizard ||
+		this.pregType == PregType.Naga ||
+		this.pregType == PregType.Gryphon)
+		return true;
+	else
+		return false;
 }
 
 Womb.prototype.Short = function() {
