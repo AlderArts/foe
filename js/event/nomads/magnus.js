@@ -5,6 +5,7 @@
  */
 function Magnus(storage) {
 	Entity.call(this);
+	this.uniqueName = "magnus";
 	
 	
 	this.name         = "Magnus";

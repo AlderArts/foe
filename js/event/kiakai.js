@@ -5,6 +5,7 @@
  */
 function Kiakai(storage) {
 	Entity.call(this);
+	this.uniqueName = "kiakai";
 	// Character stats
 	this.name = "Kia";
 	

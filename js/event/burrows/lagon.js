@@ -10,6 +10,8 @@ Scenes.Lagon = {};
 
 function Lagon(storage) {
 	Entity.call(this);
+	this.uniqueName = "lagon";
+	
 	this.name = "Lagon";
 	
 	this.sexlevel          = 8;

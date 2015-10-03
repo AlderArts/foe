@@ -6,11 +6,9 @@
 
 Scenes.Layla = {};
 
-/*TODO
- * Avatar
- */
 function Layla(storage) {
 	Entity.call(this);
+	this.uniqueName = "layla";
 
 	// Character stats
 	this.name = "Layla";

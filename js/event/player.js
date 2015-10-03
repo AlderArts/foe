@@ -5,6 +5,7 @@
  */
 function Player(storage) {
 	Entity.call(this);
+	this.uniqueName = "player";
 	this.name = "???";
 	
 	this.abilities["Special"].name = "Summon";

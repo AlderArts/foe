@@ -8,6 +8,7 @@ Scenes.FeralWolf = {};
 
 function FeralWolf(levelbonus) {
 	Entity.call(this);
+	this.uniqueName = "wolf";
 	
 	this.avatar.combat     = Images.wolf;
 	this.name              = "Wolf";

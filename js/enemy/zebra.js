@@ -8,6 +8,7 @@ Scenes.ZebraShaman = {};
 
 function ZebraShaman(levelbonus) {
 	Entity.call(this);
+	this.uniqueName = "zebra";
 	
 	this.avatar.combat     = Images.zebra;
 	this.name              = "Shaman";

@@ -5,6 +5,7 @@
  */
 function Sylistraxia(storage) {
 	Entity.call(this);
+	this.uniqueName = "sylistraxia";
 	
 	// Character stats
 	this.name = "Sylistraxia";

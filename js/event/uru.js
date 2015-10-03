@@ -5,7 +5,7 @@
  */
 function Uru(storage) {
 	Entity.call(this);
-	
+	this.uniqueName = "uru";
 	
 	// Character stats
 	this.name = "Uru";

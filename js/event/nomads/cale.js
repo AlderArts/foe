@@ -5,6 +5,7 @@
  */
 function Cale(storage) {
 	Entity.call(this);
+	this.uniqueName = "cale";
 	
 	// Character stats
 	this.name = "Wolfie";

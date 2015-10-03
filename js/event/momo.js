@@ -8,6 +8,7 @@ Scenes.Momo = {};
 
 function Momo(storage) {
 	Entity.call(this);
+	this.uniqueName = "momo";
 	
 	// Character stats
 	this.name = "Momo";

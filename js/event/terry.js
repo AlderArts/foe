@@ -8,6 +8,7 @@ Scenes.Terry = {};
 
 function Terry(storage) {
 	Entity.call(this);
+	this.uniqueName = "terry";
 	
 	// Character stats
 	this.name = "Thief";

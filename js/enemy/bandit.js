@@ -6,6 +6,7 @@
 
 function StreetUrchin() {
 	Entity.call(this);
+	this.uniqueName = "urchin";
 	this.name              = "Street urchin";
 	this.monsterName       = "the bandit";
 	this.MonsterName       = "The bandit";
@@ -92,6 +93,7 @@ StreetUrchin.prototype.constructor = StreetUrchin;
 
 function Bandit(gender, levelbonus) {
 	Entity.call(this);
+	this.uniqueName = "bandit";
 	this.monsterName       = "the bandit";
 	this.MonsterName       = "The bandit";
 	

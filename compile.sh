@@ -44,6 +44,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/entity-menu.js \
 	js/entity-save.js \
 	js/entity-sex.js \
+	js/entity-dict.js \
 	js/event/player.js \
 	js/party.js \
 	js/effect.js \

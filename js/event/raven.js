@@ -8,6 +8,7 @@ Scenes.RavenMother = {};
 
 function RavenMother(storage) {
 	Entity.call(this);
+	this.uniqueName = "ravenmother";
 	
 	this.name              = "RavenMother";
 	this.maxHp.base        = 3000;

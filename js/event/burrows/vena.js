@@ -8,6 +8,7 @@ Scenes.Vena = {};
 
 function Vena(storage) {
 	Entity.call(this);
+	this.uniqueName = "vena";
 	
 	this.name              = "Vena";
 	

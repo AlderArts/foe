@@ -6,6 +6,7 @@
 
 function Naga() {
 	Entity.call(this);
+	this.uniqueName = "naga";
 	
 	this.avatar.combat     = Images.naga;
 	this.name              = "Naga";

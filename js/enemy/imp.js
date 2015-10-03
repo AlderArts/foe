@@ -6,6 +6,7 @@
 
 function Imp() {
 	Entity.call(this);
+	this.uniqueName = "imp";
 	
 	this.avatar.combat     = Images.imp;
 	

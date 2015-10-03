@@ -8,6 +8,7 @@ Scenes.Roa = {};
 
 function Roa(storage) {
 	Entity.call(this);
+	this.uniqueName = "roa";
 	
 	// Character stats
 	this.name = "Roa";

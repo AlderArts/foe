@@ -66,6 +66,7 @@ Twins.prototype.IsAtLocation = function(location) {
 
 function Rumi() {
 	Entity.call(this);
+	this.uniqueName = "rumi";
 	
 }
 Rumi.prototype = new Entity();
@@ -91,6 +92,7 @@ Rumi.prototype.ToStorage = function() {
 
 function Rani() {
 	Entity.call(this);
+	this.uniqueName = "rani";
 	
 	
 }

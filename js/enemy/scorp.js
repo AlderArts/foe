@@ -8,6 +8,7 @@ Scenes.Scorpion = {};
 
 function Scorpion() {
 	Entity.call(this);
+	this.uniqueName = "scorpion";
 	
 	this.avatar.combat     = Images.scorp;
 	this.name              = "Scorpion";

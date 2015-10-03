@@ -56,6 +56,7 @@ Scenes.Felines = {};
 
 function Wildcat(gender, levelbonus) {
 	Entity.call(this);
+	this.uniqueName = "wildcat";
 	
 	this.monsterName       = "the wildcat";
 	this.MonsterName       = "The wildcat";
@@ -156,6 +157,7 @@ Scenes.Felines.WildcatEnc = function(levelbonus) {
 
 function Puma(gender, levelbonus) {
 	Wildcat.call(this, gender, levelbonus);
+	this.uniqueName = "puma";
 	
 	this.monsterName = "the puma";
 	this.MonsterName = "The puma";
@@ -217,6 +219,7 @@ Scenes.Felines.PumaEnc = function(levelbonus) {
 
 function Jaguar(gender, levelbonus) {
 	Wildcat.call(this, gender, levelbonus);
+	this.uniqueName = "jaguar";
 	
 	this.monsterName = "the jaguar";
 	this.MonsterName = "The jaguar";
@@ -278,6 +281,7 @@ Scenes.Felines.JaguarEnc = function(levelbonus) {
 
 function Lynx(gender, levelbonus) {
 	Wildcat.call(this, gender, levelbonus);
+	this.uniqueName = "lynx";
 	
 	this.monsterName = "the lynx";
 	this.MonsterName = "The lynx";
@@ -340,6 +344,7 @@ Scenes.Felines.LynxEnc = function(levelbonus) {
 // TODO
 function Lion(gender, levelbonus) {
 	Wildcat.call(this, gender, levelbonus);
+	this.uniqueName = "lion";
 	
 	this.monsterName = "the lion";
 	this.MonsterName = "The lion";

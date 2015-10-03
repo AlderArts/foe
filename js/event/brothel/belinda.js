@@ -5,6 +5,7 @@
  */
 function Belinda(storage) {
 	Entity.call(this);
+	this.uniqueName = "belinda";
 
 	// Character stats
 	this.name = "Belinda";

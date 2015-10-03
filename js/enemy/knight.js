@@ -6,6 +6,8 @@
 
 function Footman(levelbonus) {
 	Entity.call(this);
+	this.uniqueName = "footman";
+	
 	this.monsterName       = "the footman";
 	this.MonsterName       = "The footman";
 	

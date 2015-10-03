@@ -7,6 +7,7 @@ Scenes.Jeanne = {};
 
 function Jeanne(storage) {
 	Entity.call(this);
+	this.uniqueName = "jeanne";
 	
 	// Character stats
 	this.name = "Jeanne";

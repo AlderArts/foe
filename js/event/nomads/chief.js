@@ -5,6 +5,7 @@
  */
 function Chief(storage) {
 	Entity.call(this);
+	this.uniqueName = "chief";
 	
 	this.name         = "Chief";
 	this.body.DefMale();
