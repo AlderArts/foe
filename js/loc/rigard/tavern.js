@@ -23,14 +23,3 @@ world.loc.Rigard.Tavern.common.links.push(new Link(
 		MoveToLocation(world.loc.Rigard.Slums.gate, {minute: 10});
 	}
 ));
-
-
-world.loc.Rigard.Tavern.common.onEntry = function() {
-	// TODO Remove
-	if(DEBUG && kyna.flags["Met"] == Kyna.MetFlags.NotMet && world.time.hour > 17 && Math.random() < 0.2) {
-		Scenes.Kyna.Intro();
-	}
-	else {
-		PrintDefaultOptions();
-	}
-}

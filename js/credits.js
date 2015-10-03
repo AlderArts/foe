@@ -28,7 +28,6 @@ CreditsScreen = function() {
 	Text.Add("Horse encounter (win): Jo Rhade<br/>");
 	Text.Add("Much of Kiakai's dialogue: Del<br/>");
 	Text.Add("Kingdom patrol: Del<br/>");
-	Text.Add("Kyna Moran: Reaper<br/>");
 	Text.Add("Lady's Blessing and Room 69: Del<br/>");
 	Text.Add("Lei: Del<br/>");
 	Text.Add("Lizard encounter: Salrith<br/>");

@@ -42,6 +42,12 @@ Genitalia.prototype.Slit = function() {
 	return this.cover == Genitalia.Cover.Slit;
 }
 
+//TODO use in scenes (might need a lot of rewriting in places)
+Genitalia.prototype.InternalBalls = function() {
+	//TODO other factors?
+	return this.cover == Genitalia.Cover.Slit;
+}
+
 //TODO logic specific to changing cover?
 Genitalia.prototype.SetCover = function(cover) {
 	if     (cover == Genitalia.Cover.NoCover) {
