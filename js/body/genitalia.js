@@ -29,4 +29,35 @@ Genitalia.prototype.FromStorage = function(storage) {
 	this.cover = parseInt(storage.c) || this.cover;
 }
 
+Genitalia.prototype.NoCover = function() {
+	if(this.body.NumCocks() == 0) return true;
+	return this.cover == Genitalia.Cover.NoCover;
+}
+Genitalia.prototype.Sheath = function() {
+	if(this.body.NumCocks() == 0) return false;
+	return this.cover == Genitalia.Cover.Sheath;
+}
+Genitalia.prototype.Slit = function() {
+	if(this.body.NumCocks() == 0) return false;
+	return this.cover == Genitalia.Cover.Slit;
+}
 
+//TODO logic specific to changing cover?
+Genitalia.prototype.SetCover = function(cover) {
+	if     (cover == Genitalia.Cover.NoCover) {
+		
+	}
+	else if(cover == Genitalia.Cover.Sheath) {
+		
+	}
+	else if(cover == Genitalia.Cover.Slit) {
+		
+	}
+	else {
+		//Invalid type
+		return;
+	}
+	this.cover = cover;
+}
+
+//TODO functions for clitcock growth

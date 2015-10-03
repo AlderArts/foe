@@ -187,10 +187,10 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 	
 	var incompleteGryphonCockTF = function() {
 		if(!player.FirstCock()) return false;
+		if(!player.Genitalia().Sheath()) return true;
 		var change = false;
 		_.each(player.AllCocks(), function(c) {
 			if(!c.Knot()) change = true;
-			if(!c.Sheath()) change = true;
 			if(!c.race.isRace(Race.Gryphon)) change = true;
 			if(change) return false; //break
 		});
@@ -285,14 +285,6 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 							return Text.Parse("A faint throbbing at the base of[oneof] your cock[s] has you grasping at it in surprise. You’ve grown a thick knot at the base of your [cock]!", parse2);
 						}, 1.0, function() { return true; });
 					}
-					/* TODO
-					if(!c.Sheath()) {
-						cscenes.AddEnc(function() {
-							c.sheath = 1;
-							return Text.Parse("A faint sucking sound at your groin heralds the development of a sheath in which to hide your [cock]. Rubbing it brings out your man-meat well enough, so there’s no real concern for worry, but it still feels… different.", parse2);
-						}, 1.0, function() { return true; });
-					}
-					*/
 					if(!c.race.isRace(Race.Gryphon)) {
 						cscenes.AddEnc(function() {
 							c.race = Race.Gryphon;
@@ -301,6 +293,12 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 						}, 1.0, function() { return true; });
 					}
 				});
+				if(!player.Genitalia().Sheath()) {
+					cscenes.AddEnc(function() {
+						player.Genitalia.SetCover(Genitalia.Cover.Sheath);
+						return Text.Parse("A faint sucking sound at your groin heralds the development of a sheath in which to hide your [cock]. Rubbing it brings out your man-meat well enough, so there’s no real concern for worry, but it still feels… different.", parse2);
+					}, 1.0, function() { return true; });
+				}
 				
 				return cscenes.Get();
 			}

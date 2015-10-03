@@ -11,7 +11,7 @@ Items.Equinium.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Horse, 
 Items.Equinium.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Horse, str: "equine ears"});
 Items.Equinium.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.Horse, color: Color.brown, str: "a brown, bushy horse tail"});
 Items.Equinium.PushEffect(TF.ItemEffects.RemAntenna, {odds: 0.2, count: 2});
-Items.Equinium.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.4, value: true, num: 1});
+Items.Equinium.PushEffect(TF.ItemEffects.SetCover, {odds: 0.4, value: Genitalia.Cover.Sheath});
 Items.Equinium.PushEffect(TF.ItemEffects.SetIdealCockLen, {odds: 0.5, ideal: 30, max: 1});
 Items.Equinium.PushEffect(TF.ItemEffects.SetIdealCockThk, {odds: 0.5, ideal: 6, max: 1});
 Items.Equinium.PushEffect(TF.ItemEffects.IncStr, {odds: 0.4, ideal: 30, max: 1});
@@ -85,7 +85,7 @@ Items.Lacertium.PushEffect(function(target) {
 Items.Lacertium.PushEffect(TF.ItemEffects.RemAntenna, {odds: 0.2, count: 2});
 Items.Lacertium.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Lizard, str: "lizard nubs"});
 Items.Lacertium.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.Lizard, color: Color.green, str: "a green, flexible reptilian tail"});
-Items.Lacertium.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.2, value: false, num: 1});
+Items.Lacertium.PushEffect(TF.ItemEffects.SetCover, {odds: 0.2, value: Genitalia.Cover.Slit});
 Items.Lacertium.PushEffect(TF.ItemEffects.IncInt, {odds: 0.4, ideal: 30, max: 1});
 Items.Lacertium.PushEffect(TF.ItemEffects.IncDex, {odds: 0.2, ideal: 25, max: 1});
 Items.Lacertium.PushEffect(TF.ItemEffects.IncCha, {odds: 0.3, ideal: 28, max: 1});
@@ -105,7 +105,7 @@ Items.Ovis.recipe = [{it: Items.SheepMilk}, {it: Items.Ramshorn}, {it: Items.Fre
 // Effects
 Items.Ovis.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Sheep, str: "sheep ears"});
 Items.Ovis.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.Sheep, color: Color.white, str: "a short ovine tail"});
-Items.Ovis.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.2, value: false, num: 1});
+Items.Ovis.PushEffect(TF.ItemEffects.SetCover, {odds: 0.2, value: Genitalia.Cover.NoCover});
 Items.Ovis.PushEffect(TF.ItemEffects.SetHorn, {odds: 0.4, race: Race.Sheep, color: Color.black, count: 2, str: "a pair of sheep horns" });
 Items.Ovis.PushEffect(TF.ItemEffects.IncSpi, {odds: 0.4, ideal: 30, max: 1});
 Items.Ovis.PushEffect(TF.ItemEffects.IncCha, {odds: 0.3, ideal: 30, max: 1});
@@ -192,7 +192,7 @@ Items.Canis.recipe = [{it: Items.CanisRoot}, {it: Items.DogBone}, {it: Items.Dog
 Items.Canis.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.3, race: Race.Dog, str: "dog-like tongue"});
 Items.Canis.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Dog, str: "a canid cock"});
 Items.Canis.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.4, value: true, num: 1});
-Items.Canis.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.4, value: true, num: 1});
+Items.Canis.PushEffect(TF.ItemEffects.SetCover, {odds: 0.4, value: Genitalia.Cover.Sheath});
 Items.Canis.PushEffect(TF.ItemEffects.RemHorn, {odds: 0.2, count: 2});
 Items.Canis.PushEffect(TF.ItemEffects.RemAntenna, {odds: 0.2, count: 2});
 Items.Canis.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Dog, str: "canid ears"});
@@ -215,7 +215,7 @@ Items.Lobos.recipe = [{it: Items.CanisRoot}, {it: Items.WolfFang}, {it: Items.Wo
 // Effects
 Items.Lobos.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Wolf, str: "a wolf cock"});
 Items.Lobos.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.4, value: true, num: 1});
-Items.Lobos.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.4, value: true, num: 1});
+Items.Lobos.PushEffect(TF.ItemEffects.SetCover, {odds: 0.4, value: Genitalia.Cover.Sheath});
 Items.Lobos.PushEffect(TF.ItemEffects.RemHorn, {odds: 0.2, count: 2});
 Items.Lobos.PushEffect(TF.ItemEffects.RemAntenna, {odds: 0.2, count: 2});
 Items.Lobos.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Wolf, str: "wolf ears"});
@@ -242,7 +242,7 @@ Items.Vulpinix.recipe = [{it: Items.CanisRoot}, {it: Items.FoxBerries}, {it: Ite
 // Effects
 Items.Vulpinix.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Fox, str: "a vulpine cock"});
 Items.Vulpinix.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.4, value: true, num: 1});
-Items.Vulpinix.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.4, value: true, num: 1});
+Items.Vulpinix.PushEffect(TF.ItemEffects.SetCover, {odds: 0.4, value: Genitalia.Cover.Sheath});
 Items.Vulpinix.PushEffect(TF.ItemEffects.RemHorn, {odds: 0.2, count: 2});
 Items.Vulpinix.PushEffect(TF.ItemEffects.RemAntenna, {odds: 0.2, count: 2});
 Items.Vulpinix.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Fox, str: "vulpine ears"});
@@ -290,7 +290,7 @@ Items.Avia.recipe = [{it: Items.Feather}, {it: Items.Trinket}, {it: Items.FruitS
 Items.Avia.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Avian, str: "an avian cock"});
 Items.Avia.PushEffect(TF.ItemEffects.RemHorn, {odds: 0.2, count: 2});
 Items.Avia.PushEffect(TF.ItemEffects.RemTail, {odds: 0.2, count: 1});
-Items.Avia.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.2, value: false, num: 1});
+Items.Avia.PushEffect(TF.ItemEffects.SetCover, {odds: 0.2, value: Genitalia.Cover.NoCover});
 Items.Avia.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.2, value: false, num: 1});
 Items.Avia.PushEffect(TF.ItemEffects.SetWings, {odds: 0.4, race: Race.Avian, color: Color.brown, count: 2, str: "a pair of avain wings" });
 Items.Avia.PushEffect(TF.ItemEffects.IdealFem, {odds: 0.2, rangeMin: -.2, rangeMax: .2, max: .1});
@@ -313,7 +313,7 @@ Items.Lepida.recipe = [{it: Items.MFluff}, {it: Items.MDust}, {it: Items.FruitSe
 Items.Lepida.PushEffect(TF.ItemEffects.SetAntenna, {odds: 0.4, race: Race.Moth, color: Color.purple, count: 2, str: "a pair of moth-like feelers" });
 Items.Lepida.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.3, race: Race.Moth, str: "long and flexible tongue"});
 Items.Lepida.PushEffect(TF.ItemEffects.RemHorn, {odds: 0.2, count: 2});
-Items.Lepida.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.1, value: false, num: 1});
+Items.Lepida.PushEffect(TF.ItemEffects.SetCover, {odds: 0.1, value: Genitalia.Cover.NoCover});
 Items.Lepida.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.1, value: false, num: 1});
 Items.Lepida.PushEffect(TF.ItemEffects.SetWings, {odds: 0.4, race: Race.Moth, color: Color.purple, count: 2, str: "a pair of insect wings" });
 Items.Lepida.PushEffect(TF.ItemEffects.IncSpi, {odds: 0.4, ideal: 35, max: 1});
@@ -336,7 +336,7 @@ Items.Scorpius.Long = function() { return "A bottle labeled Scorpius, with the p
 Items.Scorpius.recipe = [{it: Items.Stinger}, {it: Items.SVenom}, {it: Items.SClaw}];
 // Effects
 Items.Scorpius.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.Scorpion, color: Color.black, str: "a black, segmented scorpion tail"});
-Items.Scorpius.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.1, value: false, num: 1});
+Items.Scorpius.PushEffect(TF.ItemEffects.SetCover, {odds: 0.1, value: Genitalia.Cover.NoCover});
 Items.Scorpius.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.1, value: false, num: 1});
 Items.Scorpius.PushEffect(TF.ItemEffects.RemWings, {odds: 0.6, count: 2});
 Items.Scorpius.PushEffect(TF.ItemEffects.IncDex, {odds: 0.4, ideal: 35, max: 1});
@@ -355,7 +355,7 @@ Items.Cerventine.Short = function() { return "A bottle of Cerventine"; }
 Items.Cerventine.Long = function() { return "A bottle filled with a soft brown liquid. It has a picture of a deer on it."; }
 Items.Cerventine.recipe = [{it: Items.FreshGrass}, {it: Items.TreeBark}, {it: Items.AntlerChip}];
 // Effects
-Items.Cerventine.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.1, value: true, num: 1});
+Items.Cerventine.PushEffect(TF.ItemEffects.SetCover, {odds: 0.1, value: Genitalia.Cover.Sheath});
 Items.Cerventine.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.1, value: false, num: 1});
 Items.Cerventine.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Deer, str: "a cervine cock"});
 Items.Cerventine.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Deer, str: "cervine ears"});
@@ -440,7 +440,7 @@ Items.Homos.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.3, race: Race.Human, str
 Items.Homos.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Human, str: "a human cock"});
 Items.Homos.PushEffect(TF.ItemEffects.RemHorn, {odds: 0.6, count: 2});
 Items.Homos.PushEffect(TF.ItemEffects.SetEars, {odds: 0.6, race: Race.Human, str: "human ears"});
-Items.Homos.PushEffect(TF.ItemEffects.SetSheath, {odds: 0.4, value: false, num: 1});
+Items.Homos.PushEffect(TF.ItemEffects.SetCover, {odds: 0.4, value: Genitalia.Cover.NoCover});
 Items.Homos.PushEffect(TF.ItemEffects.SetKnot, {odds: 0.4, value: false, num: 1});
 Items.Homos.PushEffect(TF.ItemEffects.RemTail, {odds: 0.6, count: 1});
 Items.Homos.PushEffect(TF.ItemEffects.RemWings, {odds: 0.6, count: 2});

@@ -343,37 +343,49 @@ TF.ItemEffects.SetKnot = function(target, opts) {
 	Text.Flush();
 }
 
-// odds, value, num
-TF.ItemEffects.SetSheath = function(target, opts) {
-	/* TODO
-	var parse = { Poss: target.Possessive(), poss: target.possessive() };
-	var odds  = opts.odds || 1;
-	var num   = opts.num || 1;
-	var cocks = target.AllCocks();
-	for(var i = 0; i < cocks.length; i++) {
-		if(Math.random() < odds) {
-			parse["cockDesc"] = cocks[i].Short();
-			if(opts.value) {
-				if(cocks[i].sheath == 0) {
-					cocks[i].sheath = 1;
-					Text.Add("[Poss] [cockDesc] grows a sheath!", parse);
-					Text.NL();
-					num--;
-				}
+// odds, value
+TF.ItemEffects.SetCover = function(target, opts) {
+	var odds  = opts.odds  || 1;
+	var value = opts.value || Genitalia.Cover.NoCover;
+	
+	if(!target.FirstCock()) return TF.Effect.Unchanged;
+	
+	var gen = target.Genitalia();
+	if(Math.random() < odds) {
+		if(gen.cover != value) {
+			var parse = {
+				Poss: target.Possessive(),
+				poss: target.possessive(),
+				cocks: target.MultiCockDesc(),
+				notS: target.NumCocks() > 1 ? "" : "s",
+				is: target.NumCocks() > 1 ? "are" : "is"
+			};
+			if(value == Genitalia.Cover.NoCover) {
+				if(gen.cover == Genitalia.Cover.Sheath)
+					Text.Add("The sheath protecting [poss] [cocks] disappears!", parse);
+				else if(gen.cover == Genitalia.Cover.Slit)
+					Text.Add("[Poss] genital slit slowly closes up, pushing [poss] [cocks] into the open!", parse);
 			}
-			else {
-				if(cocks[i].sheath == 1) {
-					cocks[i].sheath = 0;
-					Text.Add("The sheath protecting [poss] [cockDesc] disappears!", parse);
-					Text.NL();
-					num--;
-				}
+			else if(value == Genitalia.Cover.Sheath) {
+				if(gen.cover == Genitalia.Cover.NoCover)
+					Text.Add("[Poss] [cocks] grow[notS] a sheath!", parse);
+				else if(gen.cover == Genitalia.Cover.Slit)
+					Text.Add("[Poss] genital slit coarsens into a sheath, covering [poss] [cocks]!", parse);
 			}
-			if(num <= 0) break;
+			else if(value == Genitalia.Cover.Slit) {
+				if(gen.cover == Genitalia.Cover.NoCover)
+					Text.Add("[Poss] [cocks] [is] enveloped in a protective genital slit!", parse);
+				else if(gen.cover == Genitalia.Cover.Sheath)
+					Text.Add("[Poss] sheath morphs into a protective genital slit, covering [poss] [cocks]!", parse);
+			}
+			gen.SetCover(value);
+			Text.NL();
+			Text.Flush();
+			
+			return TF.Effect.Changed;
 		}
 	}
-	Text.Flush();
-	*/
+	return TF.Effect.Unchanged;
 }
 
 // odds, race, str, color

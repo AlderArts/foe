@@ -72,6 +72,7 @@ Womb.prototype.Desc = function() {
 	
 }
 Womb.prototype.Size = function() {
+	//TODO Should be a better way to do this
 	var geneSize = 1;
 	switch(this.pregType) {
 		case PregType.Feline:    geneSize = 0.8; break;

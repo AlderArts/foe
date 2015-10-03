@@ -1,4 +1,8 @@
 
+Entity.prototype.Genitalia = function() {
+	return this.body.gen;
+}
+
 // TODO: affect with things such as stretch, lust, perks etc
 Entity.prototype.VagCap = function() {
 	return this.FirstVag().capacity.Get();
