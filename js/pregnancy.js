@@ -21,7 +21,7 @@ PregType = {
 // Progress
 PregnancyLevel = {
 	Level1 : 0.1,
-	Level2 : 0.3,
+	Level2 : 0.4,
 	Level3 : 0.5,
 	Level4 : 0.7,
 	Level5 : 0.9

@@ -49,32 +49,6 @@ function Body(ent) {
 	this.legs.count = 2;
 }
 
-
-Body.prototype.SetRace = function(race) {
-	this.head.SetRace(race);
-	this.torso.race             = race;
-	for(var i = 0; i < this.cock.length; i++)
-		this.cock[i].race = race;
-	this.balls.race = race;
-	this.arms.race = race;
-	this.legs.race = race;
-}
-
-Body.prototype.NumAttributes = function(race) {
-	var sum = 0;
-	sum += this.head.NumAttributes(race);
-	if(this.torso.race == race)             sum++;
-	if(this.arms.race == race)              sum++;
-	if(this.legs.race == race)              sum++;
-	for(var i = 0; i < this.cock.length; i++)
-		if(this.cock[i].race == race) sum++;
-	if(this.balls.race == race && this.balls.count.Get() > 0) sum++;
-	for(var i = 0; i < this.backSlots.length; i++)
-		if(this.backSlots[i].race == race) sum++;
-	return sum;
-}
-
-
 Body.prototype.ToStorage = function() {
 	var storage = {
 		tone   : this.muscleTone.base.toFixed(2),
@@ -264,6 +238,30 @@ Body.prototype.FromStorage = function(storage) {
 	}
 }
 
+Body.prototype.SetRace = function(race) {
+	this.head.SetRace(race);
+	this.torso.race = race;
+	for(var i = 0; i < this.cock.length; i++)
+		this.cock[i].race = race;
+	this.balls.race = race;
+	this.arms.race  = race;
+	this.legs.race  = race;
+}
+
+Body.prototype.NumAttributes = function(race) {
+	var sum = 0;
+	sum += this.head.NumAttributes(race);
+	if(this.torso.race == race)             sum++;
+	if(this.arms.race == race)              sum++;
+	if(this.legs.race == race)              sum++;
+	for(var i = 0; i < this.cock.length; i++)
+		if(this.cock[i].race == race) sum++;
+	if(this.balls.race == race && this.balls.count.Get() > 0) sum++;
+	for(var i = 0; i < this.backSlots.length; i++)
+		if(this.backSlots[i].race == race) sum++;
+	return sum;
+}
+
 Body.prototype.HandleStretchOverTime = function(hours) {
 	for(var i = 0; i < this.vagina.length; i++)
 		this.vagina[i].HandleStretchOverTime(hours);
@@ -296,6 +294,7 @@ Body.prototype.GenderStr = function() {
 	return Gender.Desc(this.Gender());
 }
 
+
 // TODO: Calculate race
 Body.prototype.Race = function() {
 	return this.torso.race;
@@ -310,7 +309,6 @@ Body.prototype.FaceDesc = function() {
 	return "face";
 }
 
-
 BodyPart.prototype.Feathered = function() {
 	return this.race.isRace(Race.Avian);
 }
@@ -320,10 +318,10 @@ Body.prototype.SkinDesc = function(part) {
 	part = part ? part.race : this.torso.race;
 	
 	if(part.isRace(Race.Reptile)) return col + " scales";
-	if(part.isRace(Race.Avian)) return col + " feathers";
+	if(part.isRace(Race.Avian))   return col + " feathers";
 	if(part.isRace(Race.Cow, Race.Horse)) return col + " hide";
 	if(part.isRace(Race.Canine, Race.Feline, Race.Goat, Race.Sheep, Race.Musteline, Race.Rabbit)) return col + " fur";
-	if(part.isRace(Race.Goo)) return col + " slime";
+	if(part.isRace(Race.Goo))     return col + " slime";
 	return col + " skin";
 }
 
@@ -355,8 +353,8 @@ Body.prototype.EarDesc = function() {
 	var ears = this.head.ears.race;
 	if(ears.isRace(Race.Reptile)) return "pointed, scaled ears";
 	if(ears.isRace(Race.Elf, Race.Dryad, Race.Demon)) return "pointed elfin ears";
-	if(ears.isRace(Race.Rabbit)) return "floppy rabbit ears";
-	if(ears.isRace(Race.Human)) return "ears";
+	if(ears.isRace(Race.Rabbit))  return "floppy rabbit ears";
+	if(ears.isRace(Race.Human))   return "ears";
 	return ears.qShort() + " ears";
 }
 
@@ -552,8 +550,8 @@ Body.prototype.TongueDesc = function() {
 	if(tongue.race.isRace(Race.Reptile, Race.Demon)) return "forked tongue";
 	if(tongue.race.isRace(Race.Canine)) return "animalistic tongue";
 	if(tongue.race.isRace(Race.Feline)) return "barbed tongue";
-	if(tongue.race.isRace(Race.Moth)) return "long tongue";
-	if(tongue.race.isRace(Race.Plant)) return "tentacle-tongue";
+	if(tongue.race.isRace(Race.Moth))   return "long tongue";
+	if(tongue.race.isRace(Race.Plant))  return "tentacle-tongue";
 	return "tongue";
 }
 
@@ -563,8 +561,8 @@ Body.prototype.TongueTipDesc = function() {
 	if(tongue.race.isRace(Race.Canine, Race.Cow, Race.Horse)) return "broad tip";
 	if(tongue.race.isRace(Race.Demon, Race.Reptile)) return "forked tip";
 	if(tongue.race.isRace(Race.Feline)) return "barbed tip";
-	if(tongue.race.isRace(Race.Moth)) return "thin tip";
-	if(tongue.race.isRace(Race.Plant)) return "vine tip";
+	if(tongue.race.isRace(Race.Moth))   return "thin tip";
+	if(tongue.race.isRace(Race.Plant))  return "vine tip";
 	return "tip";
 }
 
@@ -625,28 +623,86 @@ Body.prototype.HipsDesc = function(plural) {
 		if(this.femininity.Get() > 0)
 			adjs.push("broodmother");
 	}
-	var adj = adjs[Rand(adjs.length)];
+	var adj = Math.random() < 0.5 ? _.sample(adjs) + " " : "";
 	
-	return adj + (plural ? " hips" : " hip");
+	return adj + (plural ? "hips" : "hip");
 }
 
-// TODO: Preggo belly (use bellysize)
 Body.prototype.StomachDesc = function(bellysize) {
 	var nouns = [];
-	
-	var size = 0;
-	if(this.entity) {
-		size = this.entity.PregHandler().BellySize();
-	}
-	
-	//TODO use belly size
 	
 	nouns.push("belly");
 	nouns.push("stomach");
 	nouns.push("tummy");
 	if(this.muscleTone.Get() > 0.5)
 		nouns.push("abs");
-	var noun = nouns[Rand(nouns.length)];
+	var noun = _.sample(nouns);
+	
+	// Belly size
+	var adjs = [];
+	if(this.entity) {
+		var size = this.entity.PregHandler().BellySize();
+		
+		if(size < 0.2) {
+			adjs.push("flat");
+			adjs.push("trim");
+			adjs.push("even");
+		}
+		else if(size < 0.5) {
+			adjs.push("gently rounded");
+			adjs.push("slightly swollen");
+			adjs.push("noticeable");
+		}
+		else if(size < 0.8) {
+			adjs.push("increasingly pregnant");
+			adjs.push("showing");
+			adjs.push("growing");
+		}
+		else if(size < 1.2) {
+			adjs.push("generous");
+			adjs.push("full");
+			adjs.push("cradleable");
+			adjs.push("gravid");
+		}
+		else if(size < 1.6) {
+			adjs.push("huggable");
+			adjs.push("burgeoning");
+			adjs.push("overdue-looking");
+		}
+		else if(size < 2.0) {
+			adjs.push("weighty");
+			adjs.push("bulging");
+			adjs.push("bloated");
+			adjs.push("heavy");
+		}
+		else if(size < 3.0) {
+			adjs.push("massive");
+			adjs.push("immense");
+			adjs.push("very heavy");
+			adjs.push("considerably gravid");
+		}
+		else {
+			adjs.push("monstrous");
+			adjs.push("gargantuan");
+			adjs.push("impossibly pregnant");
+			adjs.push("almost immobilizing");
+		}
+		
+		var adj = _.sample(adjs) + " ";
+		if(size < 0.2) {
+			if(Math.random() < 0.2) noun = adj + noun;
+		}
+		else if(size < 0.8) {
+			if(Math.random() < 0.5) noun = adj + noun;
+		}
+		else if(size < 1.6) {
+			if(Math.random() < 0.8) noun = adj + noun;
+		}
+		else {
+			noun = adj + noun;
+		}
+	}
+	
 	return noun;
 }
 
