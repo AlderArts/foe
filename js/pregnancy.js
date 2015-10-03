@@ -27,13 +27,11 @@ PregnancyLevel = {
 	Level5 : 0.9
 };
 
-// TODO: Needs some timers/callbacks
 function Womb() {
 	// In progress offspring
 	this.litterSize = 0;
 	this.pregType   = PregType.Undefined;
 	this.pregnant   = false;
-	// TODO: TIMER
 	this.progress     = 0;
 	this.hoursToBirth = 0;
 	this.triggered    = false;
@@ -55,6 +53,11 @@ Womb.prototype.FromStorage = function(storage) {
 	this.pregnant     = true;
 	this.hoursToBirth = parseFloat(storage.hour) || this.hoursToBirth;
 	this.progress     = parseFloat(storage.prog) || this.progress;
+}
+
+Womb.prototype.IsEgg = function() {
+	//TODO
+	return false;
 }
 
 Womb.prototype.Short = function() {

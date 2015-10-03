@@ -184,36 +184,44 @@ Player.prototype.Drink = function(drink, suppressText) {
 	return (this.drunkLevel > DrunkLevel.Drunk);
 }
 
-//TODO Preg description
 Player.prototype.PregnancyProgess = function(womb, slot, oldProgress, progress) {
 	if(!womb) return;
-	var parse = {
-		
-	};
+	var num = womb.litterSize;
+	var breasts = player.FirstBreastRow().Size() >= 2;
 	
-	if(progress > PregnancyLevel.Level1 && oldProgress <= PregnancyLevel.Level1) {
+	var parse = {};
+	parse["belly"] = player.StomachDesc();
+	
+	if(progress > PregnancyLevel.Level5 && oldProgress <= PregnancyLevel.Level5) {
 		Gui.Callstack.unshift(function() {
 			Text.Clear();
-			Text.Add("PLACEHOLDER: You are noticably pregnant.", parse);
-			Text.NL();
-			Text.Flush();
-			Gui.NextPrompt();
-		});
-	}
-	if(progress > PregnancyLevel.Level2 && oldProgress <= PregnancyLevel.Level2) {
-		Gui.Callstack.unshift(function() {
-			Text.Clear();
-			Text.Add("PLACEHOLDER: Your belly is swelling with your offspring.", parse);
-			Text.NL();
-			Text.Flush();
-			Gui.NextPrompt();
-		});
-	}
-	if(progress > PregnancyLevel.Level3 && oldProgress <= PregnancyLevel.Level3) {
-		Gui.Callstack.unshift(function() {
-			Text.Clear();
-			Text.Add("PLACEHOLDER: Your belly is swollen with your offspring.", parse);
-			Text.NL();
+			
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("Out of nowhere, your [belly] squeezes down hard, the motion causing it to visibly contract and sending you huffing for breath. While there aren’t any follow-up contractions, it’s still a sign that you should probably get yourself somewhere safe… ", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("Your womb suddenly shifts and pulses, your offspring dropping further into and pressing harder against your pelvis. Birth can’t be far away…", parse);
+			}, 1.0, function() { return true; });
+			if(num >= 3) {
+				scenes.AddEnc(function() {
+					Text.Add("Shifting and pulsing, your womb complains about the sheer amount of life it’s having to hold. Birth is practically imminent now…", parse);
+				}, 1.0, function() { return true; });
+			}
+			if(womb.IsEgg()) {
+				scenes.AddEnc(function() {
+					Text.Add("The constant weight of your clutch weighs on your mind, distracting you from your thoughts. You should really just lay and be done with it already…", parse);
+				}, 1.0, function() { return true; });
+			}
+			else {
+				scenes.AddEnc(function() {
+					parse["yIes"] = num > 1 ? "ies" : "y";
+					parse["notS"] = num > 1 ? "" : "s";
+					Text.Add("The constant squirming and shifting within your [belly] has you a little worried. It’s clear that your bab[yIes] want[notS] out at this point, and all that’s required is for your body to cooperate…", parse);
+				}, 1.0, function() { return true; });
+			}
+			
+			scenes.Get();
 			Text.Flush();
 			Gui.NextPrompt();
 		});
@@ -221,17 +229,173 @@ Player.prototype.PregnancyProgess = function(womb, slot, oldProgress, progress) 
 	if(progress > PregnancyLevel.Level4 && oldProgress <= PregnancyLevel.Level4) {
 		Gui.Callstack.unshift(function() {
 			Text.Clear();
-			Text.Add("PLACEHOLDER: It's becoming difficult to move due to your pregnancy.", parse);
-			Text.NL();
+			
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("Rubbing your [belly] gently, you’re made distinctly aware of the fact that your pregnancy is approaching its end.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				parse["breasts"] = player.FirstBreastRow().Short();
+				Text.Add("The pressure within your [breasts] is starting to get a little intense - you’d probably leak if someone squeezed them…", parse);
+			}, 1.0, function() { return breasts; });
+			scenes.AddEnc(function() {
+				Text.Add("You take a moment to savor your burgeoning pregnancy, rubbing your hands all over the sensitive skin of your [belly].", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("You’ve noticed that you’re now carrying the weight of your pregnancy a little differently, more of its weight now focused on your hips.", parse);
+			}, 1.0, function() { return true; });
+			if(num >= 3) {
+				scenes.AddEnc(function() {
+					Text.Add("The sensations of warmth and fullness radiating from your womb make it a little hard to think straight. All right, more than a little hard.", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("Pausing a moment to catch your breath, you close your eyes and bask in the warm glow of fulfillment that inexplicably fills your world. Yes… this is what you were made for.", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("Weighty as it can be, your [belly] is throwing off your center of gravity, forcing you to adjust your posture to compensate.", parse);
+				}, 1.0, function() { return true; });
+			}
+			if(womb.IsEgg()) {
+				scenes.AddEnc(function() {
+					Text.Add("The clutch growing inside you is quite prominent now, the eggs shifting and knocking against each other as they roll around in your womb. You have to be careful how you lie down, lest the hard shells jab at your tender insides.", parse);
+				}, 1.0, function() { return true; });
+			}
+			else {
+				scenes.AddEnc(function() {
+					Text.Add("A powerful kick against your insides knocks the breath out of you, leaving you gasping and winded while you recover. Hey… there was no need for that!", parse);
+				}, 1.0, function() { return true; });
+			}
+			
+			scenes.Get();
 			Text.Flush();
 			Gui.NextPrompt();
 		});
 	}
-	if(progress > PregnancyLevel.Level5 && oldProgress <= PregnancyLevel.Level5) {
+	if(progress > PregnancyLevel.Level3 && oldProgress <= PregnancyLevel.Level3) {
 		Gui.Callstack.unshift(function() {
 			Text.Clear();
-			Text.Add("PLACEHOLDER: Your pregnancy is almost to term.", parse);
-			Text.NL();
+			
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("You have a sudden urge to cradle your [belly].", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				parse["breasts"] = player.FirstBreastRow().Short();
+				Text.Add("Your [breasts] are starting to feel fuller, though not overly so yet.", parse);
+			}, 1.0, function() { return breasts; });
+			scenes.AddEnc(function() {
+				Text.Add("Your belly has gotten to the size that you’ve taken to sleeping on your side most, if not all of the time now.", parse);
+			}, 1.0, function() { return true; });
+			if(num >= 3) {
+				scenes.AddEnc(function() {
+					Text.Add("The weight of your pregnancy is starting to get to you. You’re starting to feel a little awkward and clumsy.", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("The skin about your midsection is starting to get quite stretched. You’ve heard they sell oils for that… not that you’d be able to get your hands on some with any regularity while on the road.", parse);
+				}, 1.0, function() { return true; });
+			}
+			if(womb.IsEgg()) {
+				scenes.AddEnc(function() {
+					parse["s"]        = num > 1 ? "s" : "";
+					Text.Add("You can distinctly feel the egg[s] in your womb now, hard shells pressing against your soft insides.", parse);
+				}, 1.0, function() { return true; });
+			}
+			else {
+				scenes.AddEnc(function() {
+					Text.Add("The movement within your [belly] is getting stronger and more distinct, a sure sign of your unborn progeny’s good health.", parse);
+				}, 1.0, function() { return true; });
+			}
+			
+			scenes.Get();
+			Text.Flush();
+			Gui.NextPrompt();
+		});
+	}
+	if(progress > PregnancyLevel.Level2 && oldProgress <= PregnancyLevel.Level2) {
+		Gui.Callstack.unshift(function() {
+			Text.Clear();
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("You put your hands on the gentle swell of your pregnancy and feel content.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("Your breasts tingle and churn, working to prepare themselves for feeding your offspring.", parse);
+			}, 1.0, function() { return breasts; });
+			scenes.AddEnc(function() {
+				Text.Add("Your growing pregnancy fills your womb with a gentle warmth and gives you a positively radiant glow.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("There’s no mistaking the firm swell on your midriff - you’re pregnant.", parse);
+			}, 1.0, function() { return true; });
+			if(num >= 3) {
+				scenes.AddEnc(function() {
+					Text.Add("The swell of your pregnancy’s a little bigger than what you’ve expected, considering what impregnated you. Should you be worried?", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("Your moods have been really all over the place lately. Animated, frustrated, then melancholy - and all before lunchtime, too!", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("A sudden wave of fulfilled contentment radiates outwards from your lower belly, causing you to stop and savor it before it passes.", parse);
+				}, 1.0, function() { return true; });
+			}
+			if(womb.IsEgg()) {
+				scenes.AddEnc(function() {
+					Text.Add("You can faintly feel your eggs inside of you, a small hardness like marbles of a sort.", parse);
+				}, 1.0, function() { return true; });
+			}
+			else {
+				scenes.AddEnc(function() {
+					Text.Add("A faint flutter of movement from within your lower belly draws your attention, and you gently rub the swell of your midriff.", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					parse["ren"]      = num > 1 ? "ren" : "";
+					parse["s"]        = num > 1 ? "s" : "";
+					parse["notS"]     = num > 1 ? "" : "s";
+					parse["ItsTheir"] = num > 1 ? "Their" : "Its";
+					Text.Add("You stop and hold your [belly] as your unborn child[ren] stir[notS] within. [ItsTheir] movement[s] may be faint now, but promises to grow stronger, much to your delight.", parse);
+				}, 1.0, function() { return true; });
+			}
+			
+			scenes.Get();
+			Text.Flush();
+			Gui.NextPrompt();
+		});
+	}
+	if(progress > PregnancyLevel.Level1 && oldProgress <= PregnancyLevel.Level1) {
+		Gui.Callstack.unshift(function() {
+			Text.Clear();
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("Ugh, you feel nauseous and a little dizzy.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("You feel positively sick to your stomach.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("Are you getting fatter?", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("You feel strangely peaceable with the world at large.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("You feel nice and warm all over.", parse);
+			}, 1.0, function() { return true; });
+			if(num >= 3) {
+				scenes.AddEnc(function() {
+					Text.Add("A particularly powerful wave of nausea hits you, and you barely manage to prevent yourself from throwing up on the spot.", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("A strange warm pressure emanates from your lower belly, pushing outwards insistently.", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("You’ve been feeling extra hungry as of late. Maybe you should watch what you eat lest you put on weight…", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("For some reason, you feel irrationally cheerful today. Let the world beware, lest it risk suffering from your hugs!", parse);
+				}, 1.0, function() { return true; });
+			}
+			
+			scenes.Get();
 			Text.Flush();
 			Gui.NextPrompt();
 		});
