@@ -61,7 +61,7 @@ RaceDesc.prototype.aShort = function(gender) {
 	return desc ? (desc.a + " " + desc.noun) : ("ERROR in " + this.name + ".aShort()");
 }
 
-RaceDesc.prototype.Quantifier = function(aAn, gender) {
+RaceDesc.prototype.Quantifier = function(gender) {
 	var quantify = this.quantify;
 	if(_.isNumber(gender)) {
 		if(gender == Gender.male)
@@ -69,7 +69,7 @@ RaceDesc.prototype.Quantifier = function(aAn, gender) {
 		else
 			quantify = quantify.concat(this.quantifyFemale);
 	}
-	if(this.superclass) quantify = quantify.concat(this.superclass.Quantifier(aAn, gender));
+	if(this.superclass) quantify = quantify.concat(this.superclass.Quantifier(gender));
 	return quantify;
 }
 
