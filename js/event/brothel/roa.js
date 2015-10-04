@@ -106,7 +106,7 @@ Scenes.Roa.Impregnate = function(mother, load) {
 		slot   : PregnancyHandler.Slot.Vag,
 		mother : mother,
 		father : roa,
-		type   : PregType.Roa,
+		race   : Race.Rabbit,
 		num    : 3,
 		time   : 24,
 		load   : 2 * load

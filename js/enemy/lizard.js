@@ -130,7 +130,7 @@ Scenes.Lizards.Impregnate = function(mother, father) {
 		slot   : PregnancyHandler.Slot.Vag,
 		mother : mother,
 		father : father,
-		type   : PregType.Lizard,
+		race   : Race.Lizard,
 		num    : 1,
 		time   : 16
 	});

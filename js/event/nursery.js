@@ -62,6 +62,22 @@ Nursery.prototype.TotalKids = function(person) {
 	return this.kids.length;
 }
 
+Nursery.prototype.AddKid = function(newkid) {
+	if(!newkid) return; //Shouldn't happen
+	
+	var found = false;
+	_.each(this.kids, function(kid) {
+		if(kid.SameType(newkid)) {
+			kid.num += newkid.num;
+			found = true;
+			return false;
+		}
+	});
+	
+	if(!found)
+		this.kids.push(newkid);
+}
+
 
 Nursery.Kid = function(storage) {
 	this.mother = null;
@@ -89,6 +105,13 @@ Nursery.Kid.prototype.FromStorage = function(storage) {
 	this.race = (storage.r === undefined) ? this.race : RaceDesc.IdToRace[parseInt(storage.r)];
 }
 
+Nursery.Kid.prototype.SameType = function(kid) {
+	if(kid.mother != this.mother) return false;
+	if(kid.father != this.father) return false;
+	if(kid.race   != this.race)   return false;
+	return true;
+}
+
 Scenes.Nursery = {};
 
 Scenes.Nursery.PrintPCbirthed = function() {
@@ -100,8 +123,8 @@ Scenes.Nursery.PrintPCbirthed = function() {
 		Text.Add("<b>You’ve given birth to:</b>", parse);
 		Text.NL();
 		_.each(kids, function(kid) {
-			parse["Num"] = _.capitalize(Text.NumToText(kid.num));
-			parse["ren"] = kid.num > 1 ? "ren" : "";
+			parse["Num"]  = _.capitalize(Text.NumToText(kid.num));
+			parse["ren"]  = kid.num > 1 ? "ren" : "";
 			parse["race"] = kid.race.qShort()
 			Text.Add("[Num] [race] child[ren]", parse);
 			var father = Entity.IdToEntity(kid.father);
@@ -111,7 +134,7 @@ Scenes.Nursery.PrintPCbirthed = function() {
 			Text.Add(".<br/>", parse);
 		});
 		parse["number"] = Text.NumToText(kids.length);
-		parse["ren"] = kids.length > 1 ? "ren" : "";
+		parse["ren"]    = kids.length > 1 ? "ren" : "";
 		Text.Add("<br/>For a total of [number] child[ren].", parse);
 		Text.NL();
 	}
@@ -124,8 +147,8 @@ Scenes.Nursery.PrintPCfathered = function() {
 		Text.Add("<b>You’ve fathered:</b>", parse);
 		Text.NL();
 		_.each(kids, function(kid) {
-			parse["Num"] = _.capitalize(Text.NumToText(kid.num));
-			parse["ren"] = kid.num > 1 ? "ren" : "";
+			parse["Num"]  = _.capitalize(Text.NumToText(kid.num));
+			parse["ren"]  = kid.num > 1 ? "ren" : "";
 			parse["race"] = kid.race.qShort()
 			Text.Add("[Num] [race] child[ren]", parse);
 			var mother = Entity.IdToEntity(kid.mother);
@@ -135,7 +158,7 @@ Scenes.Nursery.PrintPCfathered = function() {
 			Text.Add(".<br/>", parse);
 		});
 		parse["number"] = Text.NumToText(kids.length);
-		parse["ren"] = kids.length > 1 ? "ren" : "";
+		parse["ren"]    = kids.length > 1 ? "ren" : "";
 		Text.Add("<br/>For a total of [number] child[ren].", parse);
 		Text.NL();
 	}
@@ -146,7 +169,7 @@ Scenes.Nursery.PrintPCfathered = function() {
 Scenes.Nursery.Nomads = function() {
 	var num = nursery.TotalKids();
 	var parse = {
-		ren : num > 1 ? "ren" : "",
+		ren   : num > 1 ? "ren" : "",
 		isAre : num > 1 ? "are" : "is"
 	};
 	

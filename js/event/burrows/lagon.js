@@ -118,12 +118,12 @@ Lagon.Usurp = {
 	JailSec    : 16
 }
 
-Scenes.Lagon.LagonImpregnate = function(mother, father, slot) {
+Scenes.Lagon.LagonImpregnate = function(mother, slot) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother : mother,
-		father : father,
-		type   : PregType.Lagomorph,
+		father : lagon,
+		race   : Race.Rabbit,
 		num    : 5,
 		time   : 24,
 		load   : 4
@@ -1311,7 +1311,7 @@ Scenes.Lagon.RulerGetFuckedEntrypoint2 = function(angry, target, opheliaPresent)
 			Text.Add("<i>“As expected from you, slut,”</i> he grins, prodding at you playfully with his foot. <i>“Come back when you want another serving.”</i>", parse);
 		Text.NL();
 		
-		Scenes.Lagon.LagonImpregnate(player, lagon, pussy ? PregnancyHandler.Slot.Vag : PregnancyHandler.Slot.Butt);
+		Scenes.Lagon.LagonImpregnate(player, pussy ? PregnancyHandler.Slot.Vag : PregnancyHandler.Slot.Butt);
 		
 		if(player.sexlevel >= 5) {
 			Text.Add("After you regain your breath, you get up and stretch, working out the kinks in your sore muscles. There are few men who can fuck like that, you grudgingly admit. Lagon seems quite impressed by the fact that you can even walk, and you blow him a taunting kiss. He was rough… but by the spirits that felt amazing. Who knows, perhaps you’ll ask him for another round later.", parse);

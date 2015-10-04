@@ -1188,7 +1188,7 @@ Scenes.Layla.SexCatchAnalCont2 = function(parse, kiss, tailcock) {
 					slot   : PregnancyHandler.Slot.Butt,
 					mother : player,
 					father : layla,
-					type   : PregType.Layla,
+					race   : Race.Chimera,
 					num    : 1,
 					time   : 24,
 					load   : 3
@@ -1268,7 +1268,7 @@ Scenes.Layla.SexCatchAnalCont3 = function(parse) {
 		slot   : PregnancyHandler.Slot.Butt,
 		mother : player,
 		father : layla,
-		type   : PregType.Layla,
+		race   : Race.Chimera,
 		num    : 1,
 		time   : 24,
 		load   : 1
@@ -2016,7 +2016,7 @@ Scenes.Layla.SexPitchVaginalCont3 = function(opts, p1cock, parse) {
 					slot   : PregnancyHandler.Slot.Vag,
 					mother : layla,
 					father : player,
-					type   : PregType.Player,
+					race   : Race.Chimera,
 					num    : 1,
 					time   : 24,
 					load   : cum
@@ -2278,7 +2278,7 @@ Scenes.Layla.SexPitchVaginalCont3 = function(opts, p1cock, parse) {
 					slot   : PregnancyHandler.Slot.Vag,
 					mother : player,
 					father : layla,
-					type   : PregType.Layla,
+					race   : Race.Chimera,
 					num    : 1,
 					time   : 24,
 					load   : cum

@@ -500,7 +500,7 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 						slot: PregnancyHandler.Slot.Vag,
 						mother: player,
 						father: gryphons,
-						type: PregType.Gryphon,
+						race: Race.Gryphon,
 						num: 3,
 						time: 48, //TODO
 						force: true

@@ -2,22 +2,6 @@
  * Pregnancy handler
  */
 
-PregType = {
-	Undefined : 0,
-	Feline    : 1,
-	Equine    : 2,
-	Lagomorph : 3,
-	Lizard    : 4,
-	Naga      : 5,
-	Gryphon   : 6,
-	
-	Player    : 99,
-	Terry     : 100,
-	Roa       : 101,
-	Lagon     : 102,
-	Layla     : 103
-};
-
 // Progress
 PregnancyLevel = {
 	Level1 : 0.1,
@@ -30,7 +14,10 @@ PregnancyLevel = {
 function Womb() {
 	// In progress offspring
 	this.litterSize = 0;
-	this.pregType   = PregType.Undefined;
+	this.father = null;
+	this.mother = null;
+	this.race = Race.Human;
+	
 	this.pregnant   = false;
 	this.progress     = 0;
 	this.hoursToBirth = 0;
@@ -40,26 +27,32 @@ function Womb() {
 Womb.prototype.ToStorage = function() {
 	var storage = {
 		litS : this.litterSize.toFixed(),
-		type : this.pregType.toFixed(),
 		hour : this.hoursToBirth.toFixed(2),
 		prog : this.progress.toFixed(4)
 	};
+	if(this.father) storage.f = this.father;
+	if(this.mother) storage.m = this.mother;
+	if(this.race != Race.Human) storage.r = this.race.id.toFixed();
 	return storage;
 }
 
 Womb.prototype.FromStorage = function(storage) {
 	this.litterSize   = parseInt(storage.litS)   || this.litterSize;
-	this.pregType     = parseInt(storage.type)   || this.pregType;
 	this.pregnant     = true;
 	this.hoursToBirth = parseFloat(storage.hour) || this.hoursToBirth;
 	this.progress     = parseFloat(storage.prog) || this.progress;
+	
+	if(storage.m)  this.mother = storage.m;
+	if(storage.f)  this.father = storage.f;
+	this.race = (storage.r === undefined) ? this.race : RaceDesc.IdToRace[parseInt(storage.r)];
 }
 
 Womb.prototype.IsEgg = function() {
-	//TODO Should be a better way to do this
-	if( this.pregType == PregType.Lizard ||
-		this.pregType == PregType.Naga ||
-		this.pregType == PregType.Gryphon)
+	if(this.race.isRace(
+		Race.Reptile,
+		Race.Avian,
+		Race.Gryphon
+	))
 		return true;
 	else
 		return false;
@@ -72,22 +65,8 @@ Womb.prototype.Desc = function() {
 	
 }
 Womb.prototype.Size = function() {
-	//TODO Should be a better way to do this
-	var geneSize = 1;
-	switch(this.pregType) {
-		case PregType.Feline:    geneSize = 0.8; break;
-		case PregType.Equine:    geneSize = 1.3; break;
-		case PregType.Lagomorph: geneSize = 0.6; break;
-		case PregType.Lizard:    geneSize = 1.0; break;
-		case PregType.Naga:      geneSize = 1.8; break;
-		
-		case PregType.Undefined:
-		default:
-			geneSize = 1;
-			break;
-	}
+	var geneSize = this.race.GeneSize();
 	
-	//TODO: adjust for gene size
 	return this.progress * geneSize * Math.sqrt(this.litterSize);
 }
 
@@ -220,7 +199,7 @@ PregnancyHandler.prototype.MPregEnabled = function() {
  * 	slot   := PregnancyHandler.Slot
  * 	mother := Entity
  * 	father := Entity
- *  type   := PregType
+ *  race   := RaceDesc
  * 	num    := 1,2,3...
  * 	time   := time to birth in hours
  *  force  := [optional], bypass fertility
@@ -229,7 +208,8 @@ PregnancyHandler.prototype.MPregEnabled = function() {
 PregnancyHandler.prototype.Impregnate = function(opts) {
 	opts = opts || {};
 	var mother = opts.mother || this.entity;
-	var father = opts.father;
+	var father = opts.father; //TODO Potential fallback needed
+	var race = opts.race || Race.Human;
 	
 	var slot = opts.slot || PregnancyHandler.Slot.Vag;
 	var womb = null;
@@ -262,7 +242,7 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 	
 	if(opts.force || (chance < fertility)) {
 		
-		// TODO: Adjust litterSize
+		// Adjust litterSize
 		var litterSize = opts.num || 1;
 		
 		if(mother.HasPerk(Perks.Breeder) && Math.random() < 0.3)
@@ -272,8 +252,6 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 		
 		litterSize = Math.floor(litterSize);
 		litterSize = Math.max(litterSize, 1);
-
-		var pregType = opts.type || PregType.Undefined;
 
 		var gestationPeriod = opts.time || 24; //TODO TEMP
 		
@@ -286,10 +264,12 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 		womb.progress     = 0;
 		womb.hoursToBirth = gestationPeriod;
 		womb.litterSize   = litterSize;
-		womb.pregType     = pregType;
+		if(father) womb.father = father.ID;
+		womb.mother = mother.ID;
+		womb.race = opts.race;
 		
 		parse["size"] = litterSize;
-		parse["type"] = pregType;
+		parse["type"] = race.name;
 		parse["time"] = gestationPeriod;
 		
 		if(DEBUG) {

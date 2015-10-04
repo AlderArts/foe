@@ -413,12 +413,12 @@ Player.prototype.PregnancyTrigger = function(womb, slot) {
 			
 		};
 		var num  = womb.litterSize;
-		var type = womb.pregType;
+		var race = womb.race;
 		
 		parse = Text.ParserPlural(parse, num > 1);
 		
 		parse["num"] = Text.NumToText(num);
-		parse["type"] = type;
+		parse["type"] = race.name;
 		
 		Text.Clear();
 		
@@ -428,17 +428,8 @@ Player.prototype.PregnancyTrigger = function(womb, slot) {
 			Text.Add("Type: [type]</b>", parse);
 			Text.NL();
 		}
-		
-		if(type == PregType.Feline)
-			Text.Add("You birth [num] kitten[s].", parse);
-		else if(type == PregType.Equine)
-			Text.Add("You birth [num] equine bab[yIes].", parse);
-		else if(type == PregType.Lagomorph)
-			Text.Add("You birth [num] bunn[yIes].", parse);
-		else if(type == PregType.Lizard)
-			Text.Add("You birth [num] lizard bab[yIes].", parse);
-		else
-			Text.Add("You birth undefined offspring! BUG!", parse);
+		//TODO
+		Text.Add("[PLACEHOLDER BIRTH]");
 		Text.Flush();
 		Gui.NextPrompt();
 	});

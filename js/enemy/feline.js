@@ -58,6 +58,8 @@ function Wildcat(gender, levelbonus) {
 	Entity.call(this);
 	this.ID = "wildcat";
 	
+	this.race = Race.Feline;
+	
 	this.monsterName       = "the wildcat";
 	this.MonsterName       = "The wildcat";
 		
@@ -159,6 +161,8 @@ function Puma(gender, levelbonus) {
 	Wildcat.call(this, gender, levelbonus);
 	this.ID = "puma";
 	
+	this.race = Race.Puma;
+	
 	this.monsterName = "the puma";
 	this.MonsterName = "The puma";
 	this.desc        = "lithe puma";
@@ -221,6 +225,8 @@ function Jaguar(gender, levelbonus) {
 	Wildcat.call(this, gender, levelbonus);
 	this.ID = "jaguar";
 	
+	this.race = Race.Jaguar;
+	
 	this.monsterName = "the jaguar";
 	this.MonsterName = "The jaguar";
 	this.desc        = "swift jaguar";
@@ -282,6 +288,8 @@ Scenes.Felines.JaguarEnc = function(levelbonus) {
 function Lynx(gender, levelbonus) {
 	Wildcat.call(this, gender, levelbonus);
 	this.ID = "lynx";
+	
+	this.race = Race.Lynx;
 	
 	this.monsterName = "the lynx";
 	this.MonsterName = "The lynx";
@@ -346,6 +354,8 @@ function Lion(gender, levelbonus) {
 	Wildcat.call(this, gender, levelbonus);
 	this.ID = "lion";
 	
+	this.race = Race.Lion;
+	
 	this.monsterName = "the lion";
 	this.MonsterName = "The lion";
 	this.desc        = "hulking lion";
@@ -376,7 +386,7 @@ Scenes.Felines.Impregnate = function(mother, father) {
 		slot   : PregnancyHandler.Slot.Vag,
 		mother : mother,
 		father : father,
-		type   : PregType.Feline,
+		race   : father.race,
 		num    : 3,
 		time   : 24
 	});

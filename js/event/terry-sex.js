@@ -3747,7 +3747,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 						slot   : PregnancyHandler.Slot.Vag,
 						mother : terry,
 						father : player,
-						type   : PregType.Terry,
+						race   : Race.Fox,
 						num    : 1,
 						time   : 24,
 						load   : cum
@@ -4149,7 +4149,7 @@ Scenes.Terry.SexPitchVaginal = function(cocks) {
 						slot   : PregnancyHandler.Slot.Vag,
 						mother : terry,
 						father : player,
-						type   : PregType.Terry,
+						race   : Race.Fox,
 						num    : 1,
 						time   : 24,
 						load   : cum * 3

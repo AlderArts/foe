@@ -316,7 +316,7 @@ Scenes.Lagomorph.Impregnate = function(mother, father) {
 		slot   : PregnancyHandler.Slot.Vag,
 		mother : mother,
 		father : father,
-		type   : PregType.Lagomorph,
+		race   : Race.Rabbit,
 		num    : 4,
 		time   : 20
 	});

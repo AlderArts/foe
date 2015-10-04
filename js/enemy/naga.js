@@ -119,7 +119,7 @@ Scenes.Naga.Impregnate = function(mother, father) {
 		slot   : PregnancyHandler.Slot.Vag,
 		mother : mother,
 		father : father,
-		type   : PregType.Naga,
+		race   : Race.Snake,
 		num    : 1,
 		time   : 24,
 		load   : 3

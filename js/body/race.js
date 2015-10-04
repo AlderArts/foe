@@ -2,6 +2,8 @@
 // Contains references to descriptors
 Race = {};
 
+// TODO Need to fix numbering to something automatic, or at least ordered
+
 function RaceDesc(name, id, opts, superclass) {
 	opts = opts || {};
 	this.name = name || 'RACE';
@@ -13,6 +15,7 @@ function RaceDesc(name, id, opts, superclass) {
 	this.quantify       = opts.quantify       || [];
 	this.quantifyMale   = opts.quantifyMale   || [];
 	this.quantifyFemale = opts.quantifyFemale || [];
+	this.geneSize       = opts.geneSize;
 	
 	this.id = id;
 	RaceDesc.Num++;
@@ -21,6 +24,15 @@ function RaceDesc(name, id, opts, superclass) {
 // Contains a set of Id,RaceDesc pairs
 RaceDesc.IdToRace = {};
 RaceDesc.Num = 0;
+
+RaceDesc.prototype.GeneSize = function() {
+	if(this.geneSize)
+		return this.geneSize;
+	else if(this.superclass)
+		return this.superclass.GeneSize();
+	else
+		return 1;
+}
 
 RaceDesc.prototype.Desc = function(gender) {
 	var desc = this.desc;
@@ -180,13 +192,15 @@ Race.Human = new RaceDesc("human", 0, {
 	descFemale: [{a:"a", noun:"woman"}],
 	quantify: [{a:"a", noun:"human"}],
 	quantifyMale: [{a:"a", noun:"male"}],
-	quantifyFemale: [{a:"a", noun:"female"}]
+	quantifyFemale: [{a:"a", noun:"female"}],
+	geneSize : 1
 });
 Race.Horse = new RaceDesc("horse", 1, {
 	desc: [{a:"a", noun:"horse"}, {a:"an", noun:"equine"}],
 	descMale: [{a:"a", noun:"stallion"}],
 	descFemale: [{a:"a", noun:"mare"}],
-	quantify: [{a:"an", noun:"equine"}]
+	quantify: [{a:"an", noun:"equine"}],
+	geneSize : 1.3
 });
 Race.Zebra = new RaceDesc("zebra", 39, {
 	desc: [{a:"a", noun:"zebra"}]
@@ -195,12 +209,14 @@ Race.Feline = new RaceDesc("feline", 2, {
 	desc: [{a:"a", noun:"cat"}, {a:"a", noun:"feline"}],
 	descMale: [{a:"a", noun:"tom"}],
 	descFemale: [{a:"a", noun:"pussy"}],
-	quantify: [{a:"a", noun:"feline"}]
+	quantify: [{a:"a", noun:"feline"}],
+	geneSize : 0.8
 });
 Race.Tiger = new RaceDesc("tiger", 25, {
 	desc: [{a:"a", noun:"tiger"}],
 	descFemale: [{a:"a", noun:"tigress"}],
-	quantify: [{a:"a", noun:"tigrine"}]
+	quantify: [{a:"a", noun:"tigrine"}],
+	geneSize : 1
 }, Race.Feline);
 Race.Panther = new RaceDesc("panther", 26, {
 	desc: [{a:"a", noun:"panther"}],
@@ -219,7 +235,8 @@ Race.Lynx = new RaceDesc("lynx", 29, {
 Race.Lion = new RaceDesc("lion", 30, {
 	descMale: [{a:"a", noun:"lion"}],
 	descFemale: [{a:"a", noun:"lioness"}],
-	quantify: [{a:"a", noun:"leonine"}]
+	quantify: [{a:"a", noun:"leonine"}],
+	geneSize : 1
 }, Race.Feline);
 Race.Canine = new RaceDesc("canine", 31, {
 	desc: [{a:"a", noun:"canine"}, {a:"a", noun:"canid"}],
@@ -251,7 +268,8 @@ Race.Reptile = new RaceDesc("reptile", 32, {
 });
 Race.Snake = new RaceDesc("snake", 21, {
 	desc: [{a:"a", noun:"snake"}, {a:"a", noun:"serpent"}, {a:"a", noun:"naga"}],
-	quantify: [{a:"a", noun:"serpentine"}, {a:"a", noun:"naga"}]
+	quantify: [{a:"a", noun:"serpentine"}, {a:"a", noun:"naga"}],
+	geneSize : 1.8 //Naga
 }, Race.Reptile);
 Race.Lizard = new RaceDesc("lizard", 5, {
 	desc: [{a:"a", noun:"lizard"}]
@@ -260,14 +278,16 @@ Race.Dragon = new RaceDesc("dragon", 8, {
 	desc: [{a:"a", noun:"dragon"}],
 	descMale: [{a:"a", noun:"drake"}],
 	descFemale: [{a:"a", noun:"dragoness"}],
-	quantify: [{a:"a", noun:"draconic"}]
+	quantify: [{a:"a", noun:"draconic"}],
+	geneSize : 2
 }, Race.Reptile);
 Race.Avian = new RaceDesc("avian", 16, {
 	desc: [{a:"an", noun:"avian"}, {a:"a", noun:"bird"}],
 	quantify: [{a:"an", noun:"avian"}]
 });
 Race.Gryphon = new RaceDesc("gryphon", 40, {
-	desc: [{a:"a", noun:"gryphon"}]
+	desc: [{a:"a", noun:"gryphon"}],
+	geneSize : 1.2
 }, Race.Avian);
 Race.Insect = new RaceDesc("insect", 23, {
 	desc: [{a:"an", noun:"insect"}],
@@ -277,16 +297,19 @@ Race.Moth = new RaceDesc("moth", 17, {
 	desc: [{a:"a", noun:"moth"}]
 }, Race.Insect);
 Race.Gol = new RaceDesc("gol", 33, {
-	desc: [{a:"a", noun:"Gol"}]
+	desc: [{a:"a", noun:"Gol"}],
+	geneSize : 2
 }, Race.Insect);
-Race.Bee = new RaceDesc("bee", 42, {
-	desc: [{a:"a", noun:"bee"}]
+Race.Bee = new RaceDesc("bee", 36, {
+	desc: [{a:"a", noun:"bee"}],
+	geneSize : 0.1
 }, Race.Insect);
 Race.Cow = new RaceDesc("cow", 14, {
 	desc: [{a:"a", noun:"bovine"}],
 	descMale: [{a:"a", noun:"bull"}],
 	descFemale: [{a:"a", noun:"cow"}],
-	quantify: [{a:"a", noun:"bovine"}]
+	quantify: [{a:"a", noun:"bovine"}],
+	geneSize : 1.4
 });
 Race.Goat = new RaceDesc("goat", 13, {
 	desc: [{a:"a", noun:"goat"}, {a:"a", noun:"caprine"}],
@@ -298,7 +321,8 @@ Race.Deer = new RaceDesc("deer", 41, {
 	desc: [{a:"a", noun:"deer"}, {a:"a", noun:"cervine"}, {a:"a", noun:"fawn"}],
 	descMale: [{a:"a", noun:"stag"}, {a:"a", noun:"buck"}, {a:"a", noun:"hart"}],
 	descFemale: [{a:"a", noun:"doe"}, {a:"a", noun:"hind"}],
-	quantify: [{a:"a", noun:"cervine"}]
+	quantify: [{a:"a", noun:"cervine"}],
+	geneSize : 0.9
 });
 Race.Satyr = new RaceDesc("satyr", 11, {
 	desc: [{a:"a", noun:"satyr"}, {a:"a", noun:"faun"}],
@@ -318,11 +342,13 @@ Race.Demon = new RaceDesc("demon", 7, {
 	desc: [{a:"a", noun:"demon"}],
 	descMale: [{a:"an", noun:"incubus"}],
 	descFemale: [{a:"a", noun:"demoness"}, {a:"a", noun:"succubus"}],
-	quantify: [{a:"a", noun:"demonic"}, {a:"an", noun:"infernal"}]
+	quantify: [{a:"a", noun:"demonic"}, {a:"an", noun:"infernal"}],
+	geneSize : 1.5
 });
 Race.Arachnid = new RaceDesc("arachnid", 34, {
 	desc: [{a:"an", noun:"arachnid"}],
-	quantify: [{a:"an", noun:"arachnoid"}, {a:"an", noun:"arachnine"}]
+	quantify: [{a:"an", noun:"arachnoid"}, {a:"an", noun:"arachnine"}],
+	geneSize : 0.1
 });
 Race.Spider = new RaceDesc("spider", 35, {
 	desc: [{a:"a", noun:"spider"}]
@@ -334,24 +360,23 @@ Race.Rabbit = new RaceDesc("rabbit", 6, {
 	desc: [{a:"a", noun:"rabbit"}, {a:"a", noun:"bunny"}, {a:"a", noun:"lapin"}],
 	descMale: [{a:"a", noun:"jack"}],
 	descFemale: [{a:"a", noun:"jill"}],
-	quantify: [{a:"a", noun:"leporine"}, {a:"a", noun:"lapine"}]
+	quantify: [{a:"a", noun:"leporine"}, {a:"a", noun:"lapine"}],
+	geneSize : 0.6
 });
 Race.Dryad = new RaceDesc("dryad", 9, {
 	desc: [{a:"a", noun:"dryad"}, {a:"a", noun:"fawn"}],
 	quantify: [{a:"a", noun:"dryad"}, {a:"a", noun:"fawn"}]
 }, Race.Deer);
-Race.Ferret = new RaceDesc("ferret", 36, {
-	desc: [{a:"a", noun:"ferret"}],
-	quantify: [{a:"a", noun:"musteline"}]
-});
 Race.Musteline = new RaceDesc("musteline", 37, {
 	quantify: [{a:"a", noun:"musteline"}]
 });
 Race.Ferret = new RaceDesc("ferret", 19, {
-	desc: [{a:"a", noun:"ferret"}]
+	desc: [{a:"a", noun:"ferret"}],
+	geneSize : 0.8
 }, Race.Musteline);
 Race.Badger = new RaceDesc("badger", 38, {
-	desc: [{a:"a", noun:"badger"}]
+	desc: [{a:"a", noun:"badger"}],
+	geneSize : 1.1
 }, Race.Musteline);
 Race.Plant = new RaceDesc("plant", 20, {
 	desc: [{a:"a", noun:"plant"}],
@@ -360,4 +385,8 @@ Race.Plant = new RaceDesc("plant", 20, {
 Race.Goo = new RaceDesc("goo", 22, {
 	desc: [{a:"a", noun:"goo"}],
 	quantify: [{a:"a", noun:"gelatinous"}]
+});
+Race.Chimera = new RaceDesc("chimera", 42, {
+	desc: [{a:"a", noun:"chimera"}],
+	quantify: [{a:"a", noun:"chimerous"}]
 });

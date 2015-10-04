@@ -132,7 +132,7 @@ Scenes.Equine.StallionImpregnate = function(mother, father) {
 		slot   : PregnancyHandler.Slot.Vag,
 		mother : mother,
 		father : father,
-		type   : PregType.Equine,
+		race   : Race.Horse,
 		num    : 1,
 		time   : 24,
 		load   : 3
