@@ -166,6 +166,7 @@ java -jar compiler.jar --compilation_level SIMPLE_OPTIMIZATIONS --js \
 	js/event/nomads/rosalin.js \
 	js/event/nomads/estevan.js \
 	js/event/nomads/cale.js \
+	js/event/nomads/cale-sex.js \
 	js/event/nomads/magnus.js \
 	js/event/nomads/cavalcade.js \
 	js/event/outlaws/outlaws.js \
