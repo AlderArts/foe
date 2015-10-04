@@ -109,6 +109,22 @@ world.loc.Plains.Nomads.Fireplace.links.push(new Link(
 		MoveToLocation(world.loc.Plains.Nomads.Tent, {minute: 5});
 	}
 ));
+world.loc.Plains.Nomads.Fireplace.links.push(new Link(
+	"Nursery", function() {
+		if(Scenes.Global.PortalsOpen()) return false;
+		return nursery.TotalKids() > 0;
+	}, true,
+	function() {
+		if(Scenes.Global.PortalsOpen()) return;
+		if(nursery.TotalKids() > 0) {
+			Text.Add("The nursery, where your kids are being taken care of, is nearby.");
+			Text.NL();
+		}
+	},
+	function() {
+		Scenes.Nursery.Nomads();
+	}
+));
 world.loc.Plains.Nomads.Fireplace.switchSpot = function() {
 	return !Scenes.Global.PortalsOpen();
 }

@@ -37,21 +37,28 @@ Nursery.prototype.FromStorage = function(storage) {
 		this.flags[flag] = parseInt(storage.flags[flag]);
 }
 
-Nursery.prototype.PCbirthed = function() {
+Nursery.prototype.BirthedBy = function(mother) {
 	var ret = [];
 	_.each(this.kids, function(kid) {
-		if(kid.mother == "player") ret.push(kid);
+		if(kid.mother == mother) ret.push(kid);
 	});
 	return ret;
 }
-Nursery.prototype.PCfathered = function() {
+Nursery.prototype.FatheredBy = function(father) {
 	var ret = [];
 	_.each(this.kids, function(kid) {
-		if(kid.father == "player") ret.push(kid);
+		if(kid.father == father) ret.push(kid);
 	});
 	return ret;
 }
-Nursery.prototype.TotalKids = function() {
+Nursery.prototype.TotalKids = function(person) {
+	if(person) {
+		var num = 0;
+		num += this.BirthedBy(person).length;
+		num += this.FatheredBy(person).length;
+		return num;
+	}
+	//Default to all
 	return this.kids.length;
 }
 
@@ -85,7 +92,7 @@ Nursery.Kid.prototype.FromStorage = function(storage) {
 Scenes.Nursery = {};
 
 Scenes.Nursery.PrintPCbirthed = function() {
-	var kids = nursery.PCbirthed();
+	var kids = nursery.BirthedBy(player.ID);
 	
 	var parse = {};
 	
@@ -111,7 +118,7 @@ Scenes.Nursery.PrintPCbirthed = function() {
 }
 
 Scenes.Nursery.PrintPCfathered = function() {
-	var kids = nursery.PCfathered();
+	var kids = nursery.FatheredBy(player.ID);
 	
 	if(kids.length > 0) {
 		Text.Add("<b>You’ve fathered:</b>", parse);
@@ -135,7 +142,48 @@ Scenes.Nursery.PrintPCfathered = function() {
 }
 
 
-// Pre gemstead
-
+// Pre gemstead (only available if actually you have kids, and only in act 1)
+Scenes.Nursery.Nomads = function() {
+	var num = nursery.TotalKids();
+	var parse = {
+		ren : num > 1 ? "ren" : "",
+		isAre : num > 1 ? "are" : "is"
+	};
+	
+	party.location = world.loc.Plains.Nomads.Nursery;
+	
+	Text.Clear();
+	Text.Add("Since you’re at the nomads’, you decide to take a moment and visit the child[ren]. It’s but a brief stroll to the nursery, a small group of sturdy tents where a number of matronly-looking women are caring for the camp’s younglings.", parse);
+	if(num >= 5)
+		Text.Add(" Some of them shoot you exasperated looks at your arrival, but quickly manage to rein it in after realizing that you’re not here to drop off yet another squalling infant for them to care for.", parse);
+	Text.NL();
+	Text.Add("At length, one of them shows you over to where your child[ren] [isAre], and you sigh, relax a little, and take stock of your offspring.", parse);
+	Text.NL();
+	
+	Scenes.Nursery.PrintPCbirthed();
+	Scenes.Nursery.PrintPCfathered();
+	
+	Text.Add("What will you do now?", parse);
+	Text.Flush();
+	
+	//[name]
+	var options = new Array();
+	/* TODO Interactions
+	options.push({ nameStr : "name",
+		tooltip : "",
+		func : function() {
+			Text.Clear();
+			Text.Add("", parse);
+			Text.NL();
+			Text.Add("", parse);
+			Text.Flush();
+		}, enabled : true
+	});
+	*/
+	Gui.SetButtonsFromList(options, true, function() {
+		party.location = world.loc.Plains.Nomads.Fireplace;
+		Gui.NextPrompt();
+	});
+}
 
 // TODO Post gemstead

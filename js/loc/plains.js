@@ -9,7 +9,8 @@ world.loc.Plains = {
 	Nomads         :
 	{
 		Tent       : new Event("Tent"), // Start area
-		Fireplace  : new Event("Fireplace")
+		Fireplace  : new Event("Fireplace"),
+		Nursery    : new Event("Nursery")
 	},
 	Crossroads     : new Event("Crossroads"),
 	Portals        : new Event(function() {
