@@ -5,7 +5,7 @@ Scenes.Aquilius = {};
 
 function Aquilius(storage) {
 	Entity.call(this);
-	this.uniqueName = "aquilius";
+	this.ID = "aquilius";
 
 	// Character stats
 	this.name = "Aquilius";

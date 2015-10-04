@@ -1,6 +1,6 @@
 
 Entity.prototype.UniqueId = function() {
-	return this.uniqueName;
+	return this.ID;
 }
 
 Entity.IdToEntity = function(id) {

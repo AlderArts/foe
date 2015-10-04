@@ -5,7 +5,7 @@
  */
 function Ches(storage) {
 	Entity.call(this);
-	this.uniqueName = "ches";
+	this.ID = "ches";
 	
 	// Character stats
 	this.name = "Ches";

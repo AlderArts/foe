@@ -7,7 +7,7 @@ Scenes.Drake = {};
 
 function Drake() {
 	Entity.call(this);
-	this.uniqueName = "drake";
+	this.ID = "drake";
 	
 	this.avatar.combat     = Images.drake;
 	this.name              = "Drake";

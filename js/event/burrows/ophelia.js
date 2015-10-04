@@ -8,7 +8,7 @@ Scenes.Ophelia = {};
 
 function Ophelia(storage) {
 	Entity.call(this);
-	this.uniqueName = "ophelia";
+	this.ID = "ophelia";
 	
 	this.name              = "Ophelia";
 	this.body.DefFemale();

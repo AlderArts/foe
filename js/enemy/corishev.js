@@ -4,7 +4,7 @@
 
 function Corishev(storage) {
 	BossEntity.call(this);
-	this.uniqueName = "corishev";
+	this.ID = "corishev";
 	
 	this.avatar.combat     = Images.corishev;
 	

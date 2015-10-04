@@ -5,7 +5,7 @@
  */
 function Patchwork(storage) {
 	Entity.call(this);
-	this.uniqueName = "patchwork";
+	this.ID = "patchwork";
 	
 	this.name = "Patches";
 	

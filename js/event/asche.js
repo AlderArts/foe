@@ -8,7 +8,7 @@ Scenes.Asche = {};
 
 function Asche(storage) {
 	Entity.call(this);
-	this.uniqueName = "asche";
+	this.ID = "asche";
 	
 	// Character stats
 	this.name = "Asche";

@@ -5,7 +5,7 @@
  */
 function Rosalin(storage) {
 	Entity.call(this);
-	this.uniqueName = "rosalin";
+	this.ID = "rosalin";
 	
 	this.ResetBody();
 	this.origRaceScore = new RaceScore(this.body);

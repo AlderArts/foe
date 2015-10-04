@@ -6,7 +6,7 @@
 
 function Lizard(gender) {
 	Entity.call(this);
-	this.uniqueName = "lizard";
+	this.ID = "lizard";
 	
 	if(gender == Gender.male) {
 		this.avatar.combat     = Images.lizard_male;

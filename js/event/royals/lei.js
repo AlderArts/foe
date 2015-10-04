@@ -6,7 +6,7 @@
 // TODO: FIX STATS
 function Lei(storage) {
 	Entity.call(this);
-	this.uniqueName = "lei";
+	this.ID = "lei";
 	// Character stats
 	this.name = "Lei";
 	

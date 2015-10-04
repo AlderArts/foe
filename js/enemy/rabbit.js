@@ -8,7 +8,7 @@
 
 function Lagomorph(gender) {
 	Entity.call(this);
-	this.uniqueName = "lagomorph";
+	this.ID = "lagomorph";
 	
 	this.name              = "Lagomorph";
 	this.monsterName       = "the lagomorph";

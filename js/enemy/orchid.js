@@ -8,7 +8,7 @@ Scenes.Orchid = {};
 
 function OrchidBoss(storage) {
 	BossEntity.call(this);
-	this.uniqueName = "orchid";
+	this.ID = "orchid";
 	
 	this.avatar.combat     = Images.corr_orchid;
 	

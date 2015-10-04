@@ -17,7 +17,7 @@ Scenes.Golem.State = {
 
 function GolemBoss(storage) {
 	BossEntity.call(this);
-	this.uniqueName = "golem";
+	this.ID = "golem";
 	
 	this.avatar.combat     = Images.golemboss;
 	

@@ -10,7 +10,7 @@ function Entity() {
 	this.MonsterName  = undefined;
 	this.groupName    = undefined;
 	this.GroupName    = undefined;
-	this.uniqueName   = undefined;
+	this.ID           = undefined;
 	// Titles are achieved by performing feats or by achieving great strength
 	this.title        = new Array();
 	

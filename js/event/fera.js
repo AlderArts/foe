@@ -5,7 +5,7 @@
  */
 function Fera(storage) {
 	Entity.call(this);
-	this.uniqueName = "fera";
+	this.ID = "fera";
 
 	// Character stats
 	this.name = "Fera";

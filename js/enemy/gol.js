@@ -8,7 +8,7 @@ Scenes.Gol = {};
 
 function GolQueen() {
 	BossEntity.call(this);
-	this.uniqueName = "gol";
+	this.ID = "gol";
 	
 	this.avatar.combat     = Images.gol;
 	

@@ -8,7 +8,7 @@ Scenes.Mothgirl = {};
 
 function Mothgirl() {
 	Entity.call(this);
-	this.uniqueName = "lusina";
+	this.ID = "lusina";
 	
 	this.avatar.combat     = Images.mothgirl;
 	this.name              = "Mothgirl";

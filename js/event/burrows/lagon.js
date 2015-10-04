@@ -10,7 +10,7 @@ Scenes.Lagon = {};
 
 function Lagon(storage) {
 	Entity.call(this);
-	this.uniqueName = "lagon";
+	this.ID = "lagon";
 	
 	this.name = "Lagon";
 	

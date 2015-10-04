@@ -6,7 +6,7 @@
 
 function Danie(storage) {
 	Entity.call(this);
-	this.uniqueName = "danie";
+	this.ID = "danie";
 	
 	
 	// Character stats

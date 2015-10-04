@@ -6,7 +6,7 @@
 // TODO: FIX STATS
 function Gwendy(storage) {
 	Entity.call(this);
-	this.uniqueName = "gwendy";
+	this.ID = "gwendy";
 	// Character stats
 	this.name = "Gwendy";
 	

@@ -6,7 +6,7 @@
 
 function Equine(gender, levelbonus) {
 	Entity.call(this);
-	this.uniqueName = "equine";
+	this.ID = "equine";
 	
 	if(gender == Gender.male) {
 		this.avatar.combat     = Images.stallion;

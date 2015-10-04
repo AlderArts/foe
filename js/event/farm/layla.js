@@ -8,7 +8,7 @@ Scenes.Layla = {};
 
 function Layla(storage) {
 	Entity.call(this);
-	this.uniqueName = "layla";
+	this.ID = "layla";
 
 	// Character stats
 	this.name = "Layla";
