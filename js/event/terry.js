@@ -1404,8 +1404,7 @@ Scenes.Terry.Release = function() {
 		
 		terry.name = "Terry";
 		terry.avatar.combat = Images.terry_c;
-		terry.monsterName = null;
-		terry.MonsterName = null;
+		terry.uniqueName = null;
 		party.SwitchIn(terry);
 		
 		if(party.InParty(miranda)) {
