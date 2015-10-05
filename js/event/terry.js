@@ -1218,7 +1218,6 @@ Scenes.Terry.CaughtTheThief = function() {
 						Text.Add("You watch her go before getting up and leaving yourself.", parse);
 						Text.NL();
 						
-						party.RemoveMember(miranda);
 						party.LoadActiveParty();
 						party.location = world.loc.Rigard.Inn.common;
 						world.TimeStep({hour: 1});
@@ -1243,7 +1242,6 @@ Scenes.Terry.CaughtTheThief = function() {
 					func : function() {
 						Text.Clear();
 						
-						party.RemoveMember(miranda);
 						party.LoadActiveParty();
 						party.location = world.loc.Rigard.Inn.common;
 						world.TimeStep({hour: 1});
@@ -1408,7 +1406,7 @@ Scenes.Terry.Release = function() {
 		terry.avatar.combat = Images.terry_c;
 		terry.monsterName = null;
 		terry.MonsterName = null;
-		party.AddMember(terry);
+		party.SwitchIn(terry);
 		
 		if(party.InParty(miranda)) {
 			var dom = player.SubDom() - miranda.SubDom();

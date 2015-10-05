@@ -236,7 +236,7 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 					var options = new Array();
 					options.push({ nameStr : "Nice",
 						func : function() {
-							party.AddMember(kiakai);
+							party.SwitchIn(kiakai);
 							kiakai.flags["Attitude"] = Kiakai.Attitude.Nice;
 							ElfSmith();
 						}, enabled : true,
@@ -244,7 +244,7 @@ world.loc.Plains.Nomads.Tent.events.push(new Link(
 					});
 					options.push({ nameStr : "Naughty",
 						func : function() {
-							party.AddMember(kiakai);
+							party.SwitchIn(kiakai);
 							kiakai.flags["Attitude"] = Kiakai.Attitude.Naughty;
 							ElfSmith();
 						}, enabled : true,

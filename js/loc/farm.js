@@ -1564,7 +1564,6 @@ Scenes.Farm.GoToMarketFirstFinale = function() {
 	Text.Add("<i>“I… I need to think a bit,”</i> Gwendy muses as she looks up at the sky. <i>“This place could use some better security, perhaps a guard dog or something. I just feel that sleeping alone is going to be difficult for a while, with those sorts hanging around...”</i> she trails off, the invitation clear.", parse);
 	Text.Flush();
 	
-	party.RemoveMember(gwendy);
 	party.LoadActiveParty();
 	party.location = world.loc.Farm.Fields;
 	world.TimeStep({hour: 2});

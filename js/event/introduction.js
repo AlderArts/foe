@@ -10,7 +10,7 @@ Intro = {};
  * Introductory scene (start of game). Entry into the attic
  */
 Intro.Start = function() {
-	party.AddMember(player);
+	party.SwitchIn(player);
 	
 	Intro.active = true;
 	
@@ -2258,7 +2258,7 @@ Intro.KiaDecideOutset = function() {
 			Text.NL();
 			Text.Add("<b>[name] joins your party!</b>", parse);
 			
-			party.AddMember(kiakai);
+			party.SwitchIn(kiakai);
 			Text.Flush();
 			Gui.NextPrompt(Intro.KiaNiceSex);
 		}, enabled : true
@@ -2288,7 +2288,7 @@ Intro.KiaDecideOutset = function() {
 					Text.NL();
 					Text.Add("<b>[name] joins your party!</b>", parse);
 					
-					party.AddMember(kiakai);
+					party.SwitchIn(kiakai);
 					Text.Flush();
 					Gui.NextPrompt(Intro.KiaNiceSex);
 				}, enabled : true
@@ -2303,7 +2303,7 @@ Intro.KiaDecideOutset = function() {
 					Text.NL();
 					Text.Add("<b>[name] joins your party!</b>", parse);
 					
-					party.AddMember(kiakai);
+					party.SwitchIn(kiakai);
 					Text.Flush();
 					Gui.NextPrompt(Intro.KiaNaughtySex);
 				}, enabled : true
@@ -2348,7 +2348,7 @@ Intro.KiaDecideOutset = function() {
 					Text.NL();
 					Text.Add("<b>[name] joins your party!</b>", parse);
 					
-					party.AddMember(kiakai);
+					party.SwitchIn(kiakai);
 					Text.Flush();
 					Gui.NextPrompt(Intro.KiaNaughtySex);
 				}, enabled : true

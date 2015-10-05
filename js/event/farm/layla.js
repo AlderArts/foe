@@ -1235,7 +1235,7 @@ Scenes.Layla.LaylaLeavesGwendy = function() {
 	Text.NL();
 	Text.Add("Layla has joined your party.", parse, "bold");
 	
-	party.AddMember(layla);
+	party.SwitchIn(layla);
 	
 	Text.Flush();
 	

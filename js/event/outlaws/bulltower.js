@@ -2178,7 +2178,6 @@ Scenes.BullTower.EndingSlipOut = function() {
 	
 	var stole = outlaws.BT.StoleSomething();
 	
-	party.RemoveMember(cveta);
 	party.LoadActiveParty();
 	
 	Text.Clear();
@@ -2203,7 +2202,6 @@ Scenes.BullTower.EndingFailure = function() {
 	
 	var stole = outlaws.BT.StoleSomething();
 	
-	party.RemoveMember(cveta);
 	party.LoadActiveParty();
 	
 	Text.Add("Making a mad dash for the gates before someone has the chance to draw them shut, the [two] of you bowl past the gate guards. Fortunately, you take them by surprise and are out of reach before they can gather their senses enough to give pursuit; thankfully, the cover of night is deep, and the woods by the King’s Road close enough for you to slip between the trees and vanish into their shadows. A few minutes later, you hear the detachment of Royal Guards return, their lanterns lighting up the road as you watch from the treeline.", parse);
@@ -2239,7 +2237,6 @@ Scenes.BullTower.EndingInjured = function() {
 		name : kiakai.name
 	};
 	
-	party.RemoveMember(cveta);
 	party.LoadActiveParty();
 	
 	world.TimeStep({hour: 6});
