@@ -295,7 +295,7 @@ Scenes.Brothel.Gryphons.Outro = function(gender, preg) {
 				});
 				if(!player.Genitalia().Sheath()) {
 					cscenes.AddEnc(function() {
-						player.Genitalia.SetCover(Genitalia.Cover.Sheath);
+						player.Genitalia().SetCover(Genitalia.Cover.Sheath);
 						return Text.Parse("A faint sucking sound at your groin heralds the development of a sheath in which to hide your [cock]. Rubbing it brings out your man-meat well enough, so there’s no real concern for worry, but it still feels… different.", parse2);
 					}, 1.0, function() { return true; });
 				}
