@@ -16,7 +16,8 @@ function Party(storage) {
 	if(storage) this.FromStorage(storage);
 }
 
-Party.prototype.SaveMember = function(storage, entity, str) {
+Party.prototype.SaveMember = function(storage, entity) {
+	var str = entity.ID;
 	if(this.InParty(entity))   storage["members"].push(str);
 	if(this.InReserve(entity)) storage["reserve"].push(str);
 	if(this.InSaved(entity))   storage["saved"].push(str);
@@ -30,11 +31,14 @@ Party.prototype.ToStorage = function() {
 	storage["saved"]   = [];
 	storage["temp"]    = [];
 	
-	this.SaveMember(storage, player, "player");
-	this.SaveMember(storage, kiakai, "kiakai");
-	this.SaveMember(storage, miranda, "miranda");
-	this.SaveMember(storage, terry, "terry");
-	this.SaveMember(storage, layla, "layla");
+	this.SaveMember(storage, player);
+	this.SaveMember(storage, kiakai);
+	this.SaveMember(storage, miranda);
+	this.SaveMember(storage, terry);
+	this.SaveMember(storage, layla);
+	this.SaveMember(storage, lei);
+	this.SaveMember(storage, cveta);
+	this.SaveMember(storage, gwendy);
 	
 	storage["coin"] = this.coin;
 	storage["loc"]  = this.location.SaveSpot;
@@ -43,11 +47,12 @@ Party.prototype.ToStorage = function() {
 	return storage;
 }
 
-Party.prototype.LoadMember = function(storage, entity, str) {
+Party.prototype.LoadMember = function(storage, entity) {
+	var str = entity.ID;
 	if(storage["members"].indexOf(str) != -1) this.AddMember(entity);
 	if(storage["reserve"].indexOf(str) != -1) this.AddReserve(entity);
-	if(storage["saved"].indexOf(str)   != -1) this.AddReserve(entity);
-	if(storage["temp"].indexOf(str)    != -1) this.AddReserve(entity);
+	if(storage["saved"].indexOf(str)   != -1) this.saved.push(entity);
+	if(storage["temp"].indexOf(str)    != -1) this.temp.push(entity);
 }
 
 Party.prototype.FromStorage = function(storage) {
@@ -57,11 +62,14 @@ Party.prototype.FromStorage = function(storage) {
 	storage["saved"]   = storage["saved"]   || [];
 	storage["temp"]    = storage["temp"]    || [];
 	
-	this.LoadMember(storage, player, "player");
-	this.LoadMember(storage, kiakai, "kiakai");
-	this.LoadMember(storage, miranda, "miranda");
-	this.LoadMember(storage, terry, "terry");
-	this.LoadMember(storage, layla, "layla");
+	this.LoadMember(storage, player);
+	this.LoadMember(storage, kiakai);
+	this.LoadMember(storage, miranda);
+	this.LoadMember(storage, terry);
+	this.LoadMember(storage, layla);
+	this.LoadMember(storage, lei);
+	this.LoadMember(storage, cveta);
+	this.LoadMember(storage, gwendy);
 	
 	
 	this.coin = parseInt(storage["coin"]) || this.coin;

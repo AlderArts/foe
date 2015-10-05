@@ -310,7 +310,7 @@ Scenes.Miranda.BarracksPrompt = function() {
 			
 			party.SaveActiveParty();
 			party.ClearActiveParty();
-			party.AddMember(player);
+			party.SwitchIn(player);
 			
 			var enemy = new Party();
 			enemy.AddMember(miranda);

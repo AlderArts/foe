@@ -1566,7 +1566,7 @@ Scenes.Lei.SparPrompt = function() {
 					levelbonus = 8;
 					
 					party.ClearActiveParty();
-					party.AddMember(player);
+					party.SwitchIn(player);
 				}
 				else if(party.Num() > 1) {
 					if(player.level > 10) {

@@ -100,7 +100,7 @@ Scenes.Cveta.Dates.PartySetup = function() {
 	
 	party.SaveActiveParty();
 	party.ClearActiveParty();
-	party.AddMember(player);
+	party.SwitchIn(player);
 	party.AddMember(cveta, true);
 	
 	//Set up restore party at the bottom of the callstack, fallthrough

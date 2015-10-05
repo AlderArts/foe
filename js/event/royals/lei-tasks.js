@@ -390,8 +390,8 @@ disable submit/run option?
 							Text.Clear();
 							
 							party.ClearActiveParty();
-							party.AddMember(player);
-							party.AddMember(obj);
+							party.SwitchIn(player);
+							party.SwitchIn(obj);
 							comp = obj;
 							
 							PrintDefaultOptions();

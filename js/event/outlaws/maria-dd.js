@@ -146,7 +146,7 @@ Scenes.Maria.DeadDrops.First.Start = function() {
 	
 	party.SaveActiveParty();
 	party.ClearActiveParty();
-	party.AddMember(player);
+	party.SwitchIn(player);
 	party.AddMember(maria, true);
 	
 	//Set up restore party at the bottom of the callstack, fallthrough
@@ -365,7 +365,7 @@ Scenes.Maria.DeadDrops.Repeat = function() {
 			
 			party.SaveActiveParty();
 			party.ClearActiveParty();
-			party.AddMember(player);
+			party.SwitchIn(player);
 			
 			//Set up restore party at the bottom of the callstack. Call before trying to look at party again (in ending)
 			Gui.Callstack.push(function() {
