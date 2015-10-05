@@ -1113,6 +1113,9 @@ Scenes.Naga.DesertWinGetFuckedVag = function(enc, hypno) {
 			                sens >= 1 ? " duo of" : "";
 			Text.Add("Your intense tryst with the naga intensifies until you’re both nearly insensate with pleasure. The[sens] sensations bring you over the edge and you feel your pet’s cocks throb with impending release. Letting yourself go with an animalistic cry of passion, your vaginal muscles clench, squeezing the turgid, throbbing erection in you as if to milk it dry of its precious seed. For her part, the naga bucks her hips, hilting herself inside you as her pricks swell with her imminent ejaculation. You grab your lover’s supple, bountiful breasts and squeeze her nipples tightly as you lose yourself, cumming hard.", parse);
 			Text.NL();
+			
+			Scenes.Naga.Impregnate(player, naga);
+			
 			Text.Add("Your [vagDesc]’s orgasm wracks your body, and your upper body curves backward from your [hipsDesc] to your head, your spasming muscles locking you into a crescent shape. The naga screams in delight as your fingers, still locked around her nipples, pull roughly on her breasts, adding to her own overflowing pleasure. You feel long, intense surges of warmth travel through the cock lodged inside your cunt, the snake-slut pumping a huge amount of her cum straight into your welcoming tunnel.", parse);
 			Text.NL();
 			
@@ -1243,6 +1246,8 @@ Scenes.Naga.DesertNagaMating = function(naga) {
 		Text.NL();
 		Text.Add("The naga grunts and hilts herself a final time, her body pressed as closely as possible to you in every place she can. Your mate trembles and quivers as her cocks erupt, hot, sticky snake-cum spraying into your [vag] and up onto your [breast] and further, some even reaching the joining of your lips. Your inner walls are painted with rapid, repeated bursts of spunk, filling you and warming you from the core as your womb is filled with jizz. Meanwhile, the space between your chest and the snake’s is spattered, smeared, and lubricated with more of her spooge, letting your [skin] slide against her body with blissful smoothness and lewd, slippery noises.", parse);
 		Text.NL();
+		
+		Scenes.Naga.Impregnate(player, naga);
 		
 		var cum = player.OrgasmCum();
 		
