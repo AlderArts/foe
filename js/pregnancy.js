@@ -290,6 +290,7 @@ PregnancyHandler.prototype.Impregnate = function(opts) {
 	}
 }
 
+//TODO Redo this clusterfuck
 PregnancyHandler.prototype.Update = function(hours) {
 	hours = hours || 0;
 	hours *= this.gestationRate.Get();
@@ -304,7 +305,8 @@ PregnancyHandler.prototype.Update = function(hours) {
 			womb.progress     += (1-womb.progress) * hours / womb.hoursToBirth;
 			womb.hoursToBirth -= hours;
 			// Check for completion
-			if(womb.hoursToBirth <= 0) {
+			// Added the clause that you need to be in a safe spot
+			if(womb.hoursToBirth <= 0 && party.location.safe()) {
 				womb.triggered = true;
 				ent.PregnancyTrigger(womb, PregnancyHandler.Slot.Vag);
 			}
@@ -318,7 +320,8 @@ PregnancyHandler.prototype.Update = function(hours) {
 		womb.progress     += (1-womb.progress) * hours / womb.hoursToBirth;
 		womb.hoursToBirth -= hours;
 		// Check for completion
-		if(womb.hoursToBirth <= 0) {
+		// Added the clause that you need to be in a safe spot
+		if(womb.hoursToBirth <= 0 && party.location.safe()) {
 			womb.triggered = true;
 			ent.PregnancyTrigger(womb, PregnancyHandler.Slot.Butt);
 		}

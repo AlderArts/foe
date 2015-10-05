@@ -193,32 +193,37 @@ Player.prototype.PregnancyProgess = function(womb, slot, oldProgress, progress) 
 	var parse = {};
 	parse["belly"] = player.StomachDesc();
 	
-	if(progress > PregnancyLevel.Level5 && oldProgress <= PregnancyLevel.Level5) {
+	if(progress > PregnancyLevel.Level1 && oldProgress <= PregnancyLevel.Level1) {
 		Gui.Callstack.unshift(function() {
 			Text.Clear();
-			
 			var scenes = new EncounterTable();
 			scenes.AddEnc(function() {
-				Text.Add("Out of nowhere, your [belly] squeezes down hard, the motion causing it to visibly contract and sending you huffing for breath. While there aren’t any follow-up contractions, it’s still a sign that you should probably get yourself somewhere safe… ", parse);
+				Text.Add("Ugh, you feel nauseous and a little dizzy.", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.Add("Your womb suddenly shifts and pulses, your offspring dropping further into and pressing harder against your pelvis. Birth can’t be far away…", parse);
+				Text.Add("You feel positively sick to your stomach.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("Are you getting fatter?", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("You feel strangely peaceable with the world at large.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("You feel nice and warm all over.", parse);
 			}, 1.0, function() { return true; });
 			if(num >= 3) {
 				scenes.AddEnc(function() {
-					Text.Add("Shifting and pulsing, your womb complains about the sheer amount of life it’s having to hold. Birth is practically imminent now…", parse);
+					Text.Add("A particularly powerful wave of nausea hits you, and you barely manage to prevent yourself from throwing up on the spot.", parse);
 				}, 1.0, function() { return true; });
-			}
-			if(womb.IsEgg()) {
 				scenes.AddEnc(function() {
-					Text.Add("The constant weight of your clutch weighs on your mind, distracting you from your thoughts. You should really just lay and be done with it already…", parse);
+					Text.Add("A strange warm pressure emanates from your lower belly, pushing outwards insistently.", parse);
 				}, 1.0, function() { return true; });
-			}
-			else {
 				scenes.AddEnc(function() {
-					parse["yIes"] = num > 1 ? "ies" : "y";
-					parse["notS"] = num > 1 ? "" : "s";
-					Text.Add("The constant squirming and shifting within your [belly] has you a little worried. It’s clear that your bab[yIes] want[notS] out at this point, and all that’s required is for your body to cooperate…", parse);
+					Text.Add("You’ve been feeling extra hungry as of late. Maybe you should watch what you eat lest you put on weight…", parse);
+				}, 1.0, function() { return true; });
+				scenes.AddEnc(function() {
+					Text.Add("For some reason, you feel irrationally cheerful today. Let the world beware, lest it risk suffering from your hugs!", parse);
 				}, 1.0, function() { return true; });
 			}
 			
@@ -227,91 +232,7 @@ Player.prototype.PregnancyProgess = function(womb, slot, oldProgress, progress) 
 			Gui.NextPrompt();
 		});
 	}
-	if(progress > PregnancyLevel.Level4 && oldProgress <= PregnancyLevel.Level4) {
-		Gui.Callstack.unshift(function() {
-			Text.Clear();
-			
-			var scenes = new EncounterTable();
-			scenes.AddEnc(function() {
-				Text.Add("Rubbing your [belly] gently, you’re made distinctly aware of the fact that your pregnancy is approaching its end.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
-				parse["breasts"] = player.FirstBreastRow().Short();
-				Text.Add("The pressure within your [breasts] is starting to get a little intense - you’d probably leak if someone squeezed them…", parse);
-			}, 1.0, function() { return breasts; });
-			scenes.AddEnc(function() {
-				Text.Add("You take a moment to savor your burgeoning pregnancy, rubbing your hands all over the sensitive skin of your [belly].", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
-				Text.Add("You’ve noticed that you’re now carrying the weight of your pregnancy a little differently, more of its weight now focused on your hips.", parse);
-			}, 1.0, function() { return true; });
-			if(num >= 3) {
-				scenes.AddEnc(function() {
-					Text.Add("The sensations of warmth and fullness radiating from your womb make it a little hard to think straight. All right, more than a little hard.", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
-					Text.Add("Pausing a moment to catch your breath, you close your eyes and bask in the warm glow of fulfillment that inexplicably fills your world. Yes… this is what you were made for.", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
-					Text.Add("Weighty as it can be, your [belly] is throwing off your center of gravity, forcing you to adjust your posture to compensate.", parse);
-				}, 1.0, function() { return true; });
-			}
-			if(womb.IsEgg()) {
-				scenes.AddEnc(function() {
-					Text.Add("The clutch growing inside you is quite prominent now, the eggs shifting and knocking against each other as they roll around in your womb. You have to be careful how you lie down, lest the hard shells jab at your tender insides.", parse);
-				}, 1.0, function() { return true; });
-			}
-			else {
-				scenes.AddEnc(function() {
-					Text.Add("A powerful kick against your insides knocks the breath out of you, leaving you gasping and winded while you recover. Hey… there was no need for that!", parse);
-				}, 1.0, function() { return true; });
-			}
-			
-			scenes.Get();
-			Text.Flush();
-			Gui.NextPrompt();
-		});
-	}
-	if(progress > PregnancyLevel.Level3 && oldProgress <= PregnancyLevel.Level3) {
-		Gui.Callstack.unshift(function() {
-			Text.Clear();
-			
-			var scenes = new EncounterTable();
-			scenes.AddEnc(function() {
-				Text.Add("You have a sudden urge to cradle your [belly].", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
-				parse["breasts"] = player.FirstBreastRow().Short();
-				Text.Add("Your [breasts] are starting to feel fuller, though not overly so yet.", parse);
-			}, 1.0, function() { return breasts; });
-			scenes.AddEnc(function() {
-				Text.Add("Your belly has gotten to the size that you’ve taken to sleeping on your side most, if not all of the time now.", parse);
-			}, 1.0, function() { return true; });
-			if(num >= 3) {
-				scenes.AddEnc(function() {
-					Text.Add("The weight of your pregnancy is starting to get to you. You’re starting to feel a little awkward and clumsy.", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
-					Text.Add("The skin about your midsection is starting to get quite stretched. You’ve heard they sell oils for that… not that you’d be able to get your hands on some with any regularity while on the road.", parse);
-				}, 1.0, function() { return true; });
-			}
-			if(womb.IsEgg()) {
-				scenes.AddEnc(function() {
-					parse["s"]        = num > 1 ? "s" : "";
-					Text.Add("You can distinctly feel the egg[s] in your womb now, hard shells pressing against your soft insides.", parse);
-				}, 1.0, function() { return true; });
-			}
-			else {
-				scenes.AddEnc(function() {
-					Text.Add("The movement within your [belly] is getting stronger and more distinct, a sure sign of your unborn progeny’s good health.", parse);
-				}, 1.0, function() { return true; });
-			}
-			
-			scenes.Get();
-			Text.Flush();
-			Gui.NextPrompt();
-		});
-	}
+	
 	if(progress > PregnancyLevel.Level2 && oldProgress <= PregnancyLevel.Level2) {
 		Gui.Callstack.unshift(function() {
 			Text.Clear();
@@ -362,37 +283,120 @@ Player.prototype.PregnancyProgess = function(womb, slot, oldProgress, progress) 
 			Gui.NextPrompt();
 		});
 	}
-	if(progress > PregnancyLevel.Level1 && oldProgress <= PregnancyLevel.Level1) {
+	
+	if(progress > PregnancyLevel.Level3 && oldProgress <= PregnancyLevel.Level3) {
 		Gui.Callstack.unshift(function() {
 			Text.Clear();
+			
 			var scenes = new EncounterTable();
 			scenes.AddEnc(function() {
-				Text.Add("Ugh, you feel nauseous and a little dizzy.", parse);
+				Text.Add("You have a sudden urge to cradle your [belly].", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.Add("You feel positively sick to your stomach.", parse);
-			}, 1.0, function() { return true; });
+				parse["breasts"] = player.FirstBreastRow().Short();
+				Text.Add("Your [breasts] are starting to feel fuller, though not overly so yet.", parse);
+			}, 1.0, function() { return breasts; });
 			scenes.AddEnc(function() {
-				Text.Add("Are you getting fatter?", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
-				Text.Add("You feel strangely peaceable with the world at large.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
-				Text.Add("You feel nice and warm all over.", parse);
+				Text.Add("Your belly has gotten to the size that you’ve taken to sleeping on your side most, if not all of the time now.", parse);
 			}, 1.0, function() { return true; });
 			if(num >= 3) {
 				scenes.AddEnc(function() {
-					Text.Add("A particularly powerful wave of nausea hits you, and you barely manage to prevent yourself from throwing up on the spot.", parse);
+					Text.Add("The weight of your pregnancy is starting to get to you. You’re starting to feel a little awkward and clumsy.", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
-					Text.Add("A strange warm pressure emanates from your lower belly, pushing outwards insistently.", parse);
+					Text.Add("The skin about your midsection is starting to get quite stretched. You’ve heard they sell oils for that… not that you’d be able to get your hands on some with any regularity while on the road.", parse);
+				}, 1.0, function() { return true; });
+			}
+			if(womb.IsEgg()) {
+				scenes.AddEnc(function() {
+					parse["s"]        = num > 1 ? "s" : "";
+					Text.Add("You can distinctly feel the egg[s] in your womb now, hard shells pressing against your soft insides.", parse);
+				}, 1.0, function() { return true; });
+			}
+			else {
+				scenes.AddEnc(function() {
+					Text.Add("The movement within your [belly] is getting stronger and more distinct, a sure sign of your unborn progeny’s good health.", parse);
+				}, 1.0, function() { return true; });
+			}
+			
+			scenes.Get();
+			Text.Flush();
+			Gui.NextPrompt();
+		});
+	}
+	
+	if(progress > PregnancyLevel.Level4 && oldProgress <= PregnancyLevel.Level4) {
+		Gui.Callstack.unshift(function() {
+			Text.Clear();
+			
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("Rubbing your [belly] gently, you’re made distinctly aware of the fact that your pregnancy is approaching its end.", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				parse["breasts"] = player.FirstBreastRow().Short();
+				Text.Add("The pressure within your [breasts] is starting to get a little intense - you’d probably leak if someone squeezed them…", parse);
+			}, 1.0, function() { return breasts; });
+			scenes.AddEnc(function() {
+				Text.Add("You take a moment to savor your burgeoning pregnancy, rubbing your hands all over the sensitive skin of your [belly].", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("You’ve noticed that you’re now carrying the weight of your pregnancy a little differently, more of its weight now focused on your hips.", parse);
+			}, 1.0, function() { return true; });
+			if(num >= 3) {
+				scenes.AddEnc(function() {
+					Text.Add("The sensations of warmth and fullness radiating from your womb make it a little hard to think straight. All right, more than a little hard.", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
-					Text.Add("You’ve been feeling extra hungry as of late. Maybe you should watch what you eat lest you put on weight…", parse);
+					Text.Add("Pausing a moment to catch your breath, you close your eyes and bask in the warm glow of fulfillment that inexplicably fills your world. Yes… this is what you were made for.", parse);
 				}, 1.0, function() { return true; });
 				scenes.AddEnc(function() {
-					Text.Add("For some reason, you feel irrationally cheerful today. Let the world beware, lest it risk suffering from your hugs!", parse);
+					Text.Add("Weighty as it can be, your [belly] is throwing off your center of gravity, forcing you to adjust your posture to compensate.", parse);
+				}, 1.0, function() { return true; });
+			}
+			if(womb.IsEgg()) {
+				scenes.AddEnc(function() {
+					Text.Add("The clutch growing inside you is quite prominent now, the eggs shifting and knocking against each other as they roll around in your womb. You have to be careful how you lie down, lest the hard shells jab at your tender insides.", parse);
+				}, 1.0, function() { return true; });
+			}
+			else {
+				scenes.AddEnc(function() {
+					Text.Add("A powerful kick against your insides knocks the breath out of you, leaving you gasping and winded while you recover. Hey… there was no need for that!", parse);
+				}, 1.0, function() { return true; });
+			}
+			
+			scenes.Get();
+			Text.Flush();
+			Gui.NextPrompt();
+		});
+	}
+	
+	if(progress > PregnancyLevel.Level5 && oldProgress <= PregnancyLevel.Level5) {
+		Gui.Callstack.unshift(function() {
+			Text.Clear();
+			
+			var scenes = new EncounterTable();
+			scenes.AddEnc(function() {
+				Text.Add("Out of nowhere, your [belly] squeezes down hard, the motion causing it to visibly contract and sending you huffing for breath. While there aren’t any follow-up contractions, it’s still a sign that you should probably get yourself somewhere safe… ", parse);
+			}, 1.0, function() { return true; });
+			scenes.AddEnc(function() {
+				Text.Add("Your womb suddenly shifts and pulses, your offspring dropping further into and pressing harder against your pelvis. Birth can’t be far away…", parse);
+			}, 1.0, function() { return true; });
+			if(num >= 3) {
+				scenes.AddEnc(function() {
+					Text.Add("Shifting and pulsing, your womb complains about the sheer amount of life it’s having to hold. Birth is practically imminent now…", parse);
+				}, 1.0, function() { return true; });
+			}
+			if(womb.IsEgg()) {
+				scenes.AddEnc(function() {
+					Text.Add("The constant weight of your clutch weighs on your mind, distracting you from your thoughts. You should really just lay and be done with it already…", parse);
+				}, 1.0, function() { return true; });
+			}
+			else {
+				scenes.AddEnc(function() {
+					parse["yIes"] = num > 1 ? "ies" : "y";
+					parse["notS"] = num > 1 ? "" : "s";
+					Text.Add("The constant squirming and shifting within your [belly] has you a little worried. It’s clear that your bab[yIes] want[notS] out at this point, and all that’s required is for your body to cooperate…", parse);
 				}, 1.0, function() { return true; });
 			}
 			
@@ -412,15 +416,20 @@ Player.prototype.PregnancyTrigger = function(womb, slot) {
 		var parse = {
 			
 		};
+		parse = player.ParserTags(parse);
+		
 		var num  = womb.litterSize;
 		var race = womb.race;
+		var egg  = womb.IsEgg();
+		var lact = player.FirstBreastRow().Size() >= 2;
 		
 		parse = Text.ParserPlural(parse, num > 1);
 		
+		Text.Clear();
+		
 		parse["num"] = Text.NumToText(num);
 		parse["type"] = race.name;
-		
-		Text.Clear();
+		parse["newborn"] = egg ? "egg" : "newborn";
 		
 		if(DEBUG) {
 			Text.Add("<b>Preg-debug:<br/>", parse);
@@ -428,12 +437,126 @@ Player.prototype.PregnancyTrigger = function(womb, slot) {
 			Text.Add("Type: [type]</b>", parse);
 			Text.NL();
 		}
+		
+		// #Initiation block
+		
+		Text.Add("All of a sudden, a warm trickle of fluid erupts from your [vag] and runs down your [thighs], followed by a sharp pain in your lower belly.", parse);
+		Text.NL();
+		
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			Text.Add("<b>You’ve gone into labor!</b>", parse);
+		}, 1.0, function() { return true; });
+		scenes.AddEnc(function() {
+			Text.Add("<b>It’s time to give birth!</b>", parse);
+		}, 1.0, function() { return true; });
+		scenes.Get();
+		
+		Text.NL();
+		Text.Add("Even as the first contractions grip your womb and you feel its contents descend ever lower, you hurriedly find a place to settle down and do the deed, clearing a spot for your progeny to safely enter the world.", parse);
+		
+		var partynum = party.location.switchSpot() ? party.NumTotal() : party.Num();
+		var comp = party.Get(1);
+		
+		if(partynum == 2 && comp) {
+			parse["comp"] = comp.name;
+			parse = comp.ParserTags(parse);
+			Text.Add(" [comp] is more than willing to give you your space, excusing [himher]self as [heshe] waits nearby anxiously.", parse);
+		}
+		else if(partynum > 2) {
+			Text.Add(" Your companions are more than willing to give you your space, excusing themselves as they wait nearby anxiously.", parse);
+		}
+		Text.NL();
+		
+		// #Labour block (Birthsize comes into play here)
+		var birthsize = player.body.torso.hipSize.Get() / 4;
+		birthsize /= womb.geneSize || 1;
+		if(player.HasPerk(Perks.Breeder)) birthsize *= 1.5;
+		
+		Text.Add("It’s not long before labor begins in earnest. Even as you pant and puff, you can feel your contractions coming on more strongly and at quicker intervals, picking up the pace even as your cervix begins to dilate to allow new life to enter the world.", parse);
+		Text.NL();
+		if(birthsize < 0.75) { //difficult
+			Text.Add("Goddess forbid, the birth is agonizing! With such a big baby and small hips on you for it to fit through, your womb is working overtime, straining with all its might to bring your child into the world. Beads of sweat drip from your forehead and gather on your [skin] as you alternate between gritting your teeth and groaning with effort - try as you might, you can’t help but think of horror stories involving women dying in childbed…", parse);
+			Text.NL();
+			Text.Add("Thankfully, though, you don’t fall to that most ignoble end. Bit by painful bit, your pregnant womb works to birth your offspring, nudging it gradually through your tunnel over the course of many hours. It’s almost enough for you to swear to never have sex again, but by and large your child emerges, still slick with birth fluids. Panting and delirious with the trial you’ve just undergone, you collapse back to the ground for a moment, barely having enough presence of mind to gather the newborn in your arms. If you’re ever going to go through this again, maybe you should consider a potion or two to make the process easier…", parse);
+		}
+		else if(birthsize < 1.25) { //normal
+			Text.Add("It’s nothing that you didn’t expect, but the birth pangs wracking your body are still enough for you to squeeze your eyes shut and try to put your mind elsewhere while your body does what it has to.", parse);
+			Text.NL();
+			Text.Add("It doesn’t work.", parse);
+			Text.NL();
+			Text.Add("Groaning and panting, your [breasts] heaving with effort, you place your hands on your [belly] as it contracts visibly with each push. Like it or not, you can <i>feel</i> your insides stretching as your child slowly descends through your tunnel, slowly making its way into the outside world. It’s all you can do to grit your teeth and go with the flow, and you don’t even manage that as you feel your child crown, bringing the whole experience to a peak.", parse);
+			Text.NL();
+			Text.Add("Thankfully, your labor’s much easier from there on out. Gasping and sweating, you push the rest of your child out of you with a few more furious contractions, and gently gather the newborn in your arms before settling back to rest a moment.", parse);
+		}
+		else if(birthsize < 2) { //easy
+			Text.Add("You clench your teeth and lie back as you feel the baby’s head drop into your birth canal, your cervix fully dilated and stretched to admit your offspring into the world. While the effort is tiring and your womb visibly pulses with each set of contractions that seizes your [belly], it doesn’t feel <i>that</i> painful or discomfiting, but more exhausting than anything else.", parse);
+			Text.NL();
+			Text.Add("Faster and faster the contractions come, each one smoothly pushing the contents of your womb further downwards and towards the light of day. You breathe deeply and steadily, and the eventual delivery comes with surprising speed - one moment you’re feeling your child passing through your hips, and the next moment you’re picking up a tiny newborn from amidst a small puddle of afterbirth and fluids, marveling at the small miracle that’s taken place.", parse);
+		}
+		else { //very easy
+			Text.Add("Ha! Your wide, fertile hips laugh at the notion of birth. With ample space for your baby to pass through and a powerful womb to match, your labor lacks the barest smidgen of pain and isn’t even that tiring. Sure, it’s not <i>effortless</i> - you can see your [belly] pulsing and squeezing away with each set of contractions that passes through your body, but it’s hardly the screaming affair that so many other mothers have to go through.", parse);
+			Text.NL();
+			Text.Add("No, the predominant feeling that you’re getting throughout this whole process is a sensation of wondrous satisfaction, growing stronger as you feel your child pass through your fully dilated cervix and begin slipping through your birthing canal. Breathing deeply, you cradle the swell of your [belly] and coo softly, feeling the weight in your pelvis drop lower and lower with each set of contractions. Before long, you feel the pressure give as your child crowns; another tremendous push on your part, and warm wetness spills out to the floor in the form of a puddle of afterbirth and fluids.", parse);
+			Text.NL();
+			Text.Add("Gloriously relieved, you gather up the latest addition to your family, resting the newborn on your slightly smaller belly as you take a moment to catch your breath.", parse);
+		}
+		Text.Add(" Congratulations, you’re now the mother of a young [type]!", parse);
+		Text.NL();
+		if(num > 1) {
+			Text.Add("It’s not over yet, though! Just as you’re about to take a breather, another set of contractions grips you, and you feel another baby begin its descent through your hips and into the world. Your face taut with effort, you gently set down your child, and begin the arduous process of birthing your little one’s brothers and sisters, no matter how many they may be.", parse);
+			Text.NL();
+			Text.Add("At least the birthing isn’t as tiring this time around - the first child out of your womb has eased the way for the rest to follow. Still by the time you’re done with it all, you’re absolutely exhausted and left holding a total of [num] [newborn]s.", parse);
+			Text.NL();
+		}
+		
+		/* TODO
+		#Mob-specific block
+		//Use this in lieu of nursing block, if present.
+		//Mostly going to be used for egg pregnancies.
+		
+		(mob specific block goes here)
+		(If mammal, suckle. If egg… um… do something?)
+		(Define this in the mob’s doc itself, or in a separate section below?)
+		*/
+		
+		//#Nursing block - fallback
+		// else if TODO
+		if(!egg && lact) {
+			var milk = player.Milk();
+			
+			parse["m"] = num > 1 ? " one at a time" : "";
+			parse["ren"] = num > 1 ? "ren" : "";
+			Text.Add("When you feel you’ve recovered enough from the birth, you raise your bab[yIes] to your breasts[m], letting the new addition[s] to your family suckle from your milky teats. Sighing softly, you lean back and let the simple, wonderful sensations of having your nipples worked and feeling your milk let down wash over you. ", parse);
+			if(milk < 5) { //less milk
+				Text.Add("While there isn’t much to go around, you nevertheless have enough milk to satiate your child[ren] before you run dry. For now, that is. Still, it’s a bit worrying, especially if you’re planning to do this more often in the future…", parse);
+			}
+			else if(milk < 15) { //much milk
+				Text.Add("Delicious mouthfuls of rich cream pour out of your nipples, and you bite back the temptation to moan as your [breasts] are put to the purpose they were made for. Your child[ren] suckle[notS] greedily at your breast, and all you need to do is bask in the warm glow of motherhood while nature takes its course.", parse);
+				Text.NL();
+				Text.Add("Eventually, though, you do run dry, but a faint tingling at the base of your [breasts] lets you know that your breasts will be more than full and ready for the next feeding…", parse);
+			}
+			else { //mega milk
+				Text.Add("With your [breasts] being as bountiful as they are, there’s no worry about you not being able to feed your new brood. No matter how much your nipples are squeezed, milked and suckled, there’s a seemingly inexhaustible supply of nourishment to be had, an overflowing font of rich cream. While your [breasts] are a little less tender now, you have a feeling they’ll probably fill right back up soon… ", parse);
+			}
+			
+			player.MilkDrain(15);
+			
+			Text.NL();
+			Text.Add("Hugging your newborn[s], you burp the little one[s] and turn your attention to what needs to be done next.", parse);
+			Text.NL();
+		}
+		
 		//TODO
-		Text.Add("[PLACEHOLDER BIRTH]");
-		Text.Flush();
-		Gui.NextPrompt();
+		// #Follower father talk block. Use only if specified, else ignore. (Defined in follower documents)
+		
+		world.TimeStep({hour: 4});
+		
+		//#Post-partum care block
+		Scenes.Nursery.CareBlock(womb);
 	});
 }
+
 
 // Party interaction
 Player.prototype.Interact = function(switchSpot) {
