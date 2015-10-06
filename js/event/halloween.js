@@ -105,11 +105,11 @@ Scenes.Halloween.PieIntro = function() {
 	Text.NL();
 	Text.Add("Is there any special reason the nomads do this?", parse);
 	Text.NL();
-	Text.Add("<i>“It’s an old custom I once had from where I came from… to have pumpkin and sweets at this time of year, often so much that you get sick of it. Pumpkin pie does both quite well, especially when you spike it a little. Well, more than a little.”</i> He grins, a rare sight. <i>“Point being, you’re more than welcome to join us - there’s a slice with your name on it if you care to show up on time.”</i>", parse);
+	Text.Add("<i>“It’s an old custom they had where I came from… to have pumpkin and sweets at this time of year, often so much that you get sick of it. Pumpkin pie does both quite well, especially when you spike it a little. Well, more than a little.”</i> He grins - a rare sight. <i>“Point being, you’re more than welcome to join us - there’s a slice with your name on it if you care to show up on time.”</i>", parse);
 	Text.NL();
 	Text.Add("That’s very kind of him. You’ll consider taking him up on his offer.", parse);
 	Text.NL();
-	Text.Add("<i>“Good.”</i> The chief draws on his pipe, and blows out a long plume of smoke. <i>“We all get sick of it by the end of the season, but it’s not proper to waste perfectly good food, you know? Considering the size of our pumpkin patch, another mouth to feed is actually welcome at this point. Remember, turn up around dinnertime. Too early or too late, and there’ll be no pie for you.”</i>", parse);
+	Text.Add("<i>“Good.”</i> The chief draws on his pipe, and blows out a long plume of smoke. <i>“We all get sick of it by the end of the season, but it’s not proper to waste perfectly good food, you know? Considering the size of our pumpkin patch, another mouth to feed is actually welcome at this point. Remember: turn up around dinnertime. Too early or too late, and there’ll be no pie for you.”</i>", parse);
 	Text.NL();
 	Text.Add("Okay, okay, you’ll show up on time. Anything else?", parse);
 	Text.NL();
@@ -151,6 +151,7 @@ Scenes.Halloween.PumpkinPie = function() {
 		cale.Met() ? "Cale" : "A wolf morph";
 	parse["Momo2"] = momo.AtCamp() ? "Momo" :
 		cale.Met() ? "Cale" : "the wolf";
+	parse["hisher"] = momo.AtCamp() ? "her" : "his";
 	
 	var p1 = party.Get(1);
 	parse["comp"] = party.Num() == 2 ? p1.name : "your companions";
@@ -159,7 +160,7 @@ Scenes.Halloween.PumpkinPie = function() {
 	if(first) {
 		Text.Add("You’re about to head into the nomads’ when the delicious scent of baked treats wafts over to you, sweet and enticing. Yep, like the chief said - that’s definitely the smell of pumpkin pie - warm honey, baked flour, melted butter and thick pumpkin all mixed together in a delectable aroma, topped with… whatever it is that they’ve spiked the pie filling with. It’s enough to make one’s mouth water, and you find yourself drawn by some inexorable magnetism towards the source of the scent.", parse);
 		Text.NL();
-		Text.Add("As it turns out, that happens to be a small brick oven which has been set up near the fire pit in the middle of camp. [Momo] is bent over the thing, pulling out a trio of pies from its innards - already, two sit atop the oven cooling while the last one is in [Momo2]’s hands. Each one bears thick, crumbly crust; orange-golden filling, a perfectly smooth, tantalizing surface… that, and each one is absolutely massive. Chief wasn’t lying when he said that you were more than welcome to have a slice - there’s definitely more than enough for every single one of the nomads to have some and still run the risk of ending up with leftovers.", parse);
+		Text.Add("As it turns out, that happens to be a small brick oven which has been set up near the fire pit in the middle of camp. [Momo] is bent over the thing, pulling out a trio of pies from its innards - already, two sit atop the oven cooling while the last one is in [hisher] hands. Each one bears thick, crumbly crust; orange-golden filling, a perfectly smooth, tantalizing surface… that, and each one is absolutely massive. Chief wasn’t lying when he said that you were more than welcome to have a slice - there’s definitely more than enough for every single one of the nomads to have some and still run the risk of ending up with leftovers.", parse);
 		Text.NL();
 		Text.Add("<i>“Come to join us, youngster?”</i>", parse);
 		Text.NL();
@@ -200,7 +201,7 @@ Scenes.Halloween.PumpkinPie = function() {
 			Text.Add("<i>“Hmm. Decent.”</i> He spoons another forkful of crust and pumpkin filling into his mouth, careful not to get any on his beard. <i>“No, in fact, I’ll say it’s pretty good.[cook]”</i>", parse);
 			Text.NL();
 			parse["Estevan"] = estevan.Met() ? "Estevan" : "The satyr";
-			Text.Add("[Estevan] chuckles. <i>“Shucks, that’s high praise coming from him, but I guess it was expected. Good ingredients, good cook…the outcome was never truly in doubt. A good pie.”</i>", parse);
+			Text.Add("[Estevan] chuckles. <i>“Shucks, that’s high praise coming from him, but I guess it was expected. Good ingredients, good cook… the outcome was never truly in doubt. A good pie.”</i>", parse);
 			Text.NL();
 			Text.Add("With a nod and grin, the chief brandishes both knife and fork. <i>“Very well. Come and get it, you youngsters! I can’t eat all of this on my own at my age, you know.”</i>", parse);
 			Text.Flush();
@@ -238,7 +239,7 @@ Scenes.Halloween.PumpkinPie = function() {
 					Text.NL();
 				}
 				if(party.InParty(gwendy, true)) {
-					Text.Add("<i>“Huh, maybe I should plant a patch of this back home,”</i> Gwendy ponders, chewing thoughtfully. <i>“I can see turning a fine profit from this!”</i>", parse);
+					Text.Add("<i>“Huh, maybe I should plant a patch back home,”</i> Gwendy ponders, chewing thoughtfully. <i>“I can see turning a fine profit from this!”</i>", parse);
 					Text.NL();
 				}
 				if(party.InParty(layla, true)) {
@@ -355,7 +356,7 @@ Scenes.Halloween.EnterDream = function(first) {
 		Text.NL();
 		Text.Add("Groaning, you flick open your eyes. How long have you been out? They sure put a lot of wine into that pie filling, it feels like… the inside of your mouth tastes like dry fur, and there’s a difference in the air. Hmm, it’s chillier than you expected…", parse);
 		Text.NL();
-		Text.Add("…And you realize that you’re absolutely stark naked.", parse);
+		Text.Add("…And you realize that you’re stark naked.", parse);
 		Text.NL();
 		parse["fem"] = player.Gender() == Gender.male ? "thong" : "bra and panties";
 		Text.Add("Hey, did you do something you’ll regret later? Where’s everyone? Usually there’s always some kind of bustle in the nomads’ camp, but all you get from beyond the canvas confines of your tent is deathly silence. And why’s there this skimpy-looking costume lying on the ground beside you? Shrugging, you pick it up - looks like a leather [fem] and a tattered cloak, all in garish shades of black. You must’ve gotten into some real kinky stuff last night… just what’s going on here?", parse);
@@ -441,13 +442,13 @@ Halloween.Loc.Camp.events.push(new Link(
 		if(first) {
 			Text.Add("Your eyes still adjusting to the dim light and head still pounding, you stagger towards the fire pit. There’s something familiar about the figure seated on the log, poking at the embers of the dying fire with a cane.", parse);
 			Text.NL();
-			Text.Add("As you approach, the figure slowly turns to look at you, and a dry, raspy voice sounds out from under the hood.", parse);
+			Text.Add("As you approach, the figure slowly turns to look at you, and a dry, raspy voice sounds from under the hood.", parse);
 			Text.NL();
 			Text.Add("<i>“Hello, my friend! Stay awhile and listen.”</i>", parse);
 			Text.NL();
 			Text.Add("Poor fellow sounds like he could use a drink, but he seems friendly enough. Presented with so obvious an invitation, you greet him and ask him who he is.", parse);
 			Text.NL();
-			Text.Add("<i>“I’m afraid I don’t have a name, young one, but you may call me Elder. I’m the last remnant of this camp.”</i> He motions to the abandoned tents around you. <i>“And I’m afraid I don’t have much to offer, save for advice from an old man, and what little hospitality I can muster.”</i>", parse);
+			Text.Add("<i>“I don’t have a name, young one, but you may call me... Elder. I’m the last remnant of this camp.”</i> He motions to the abandoned tents around you. <i>“And I’m afraid I don’t have much to offer, save for advice from an old man, and what little hospitality I can muster.”</i>", parse);
 			Text.NL();
 			Text.Add("You thank him for his hospitality, and make yourself comfortable on the log beside him. Once you have settled down, the hooded figure speaks again.", parse);
 			Text.NL();
@@ -527,7 +528,7 @@ Halloween.Loc.Camp.events.push(new Link(
 				Text.Add("<i>“Demons are powerful creatures, and as such going up against one directly is a fool’s errand. However, they all have a point of weakness somewhere in their persona… deducing that weakness and exploiting it to its fullest is key, perhaps even the only way to defeating them.”</i>", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
-				Text.Add("<i>“As I mentioned earlier, there is an elven witch who lives in a hut in the woods who may or may not help you in your quest. Even though she is my friend, she is quite the temperamental creature, and deciding whether to trust her can be a good idea or not, depending on how fickle she is…”</i>", parse);
+				Text.Add("<i>“As I mentioned earlier, there is an elven witch who lives in a hut in the woods who may or may not help you in your quest. Even though she is my friend, she is quite the temperamental creature, and deciding whether to trust her can be a good idea or not, considering how fickle she is…”</i>", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
 				Text.Add("<i>“The rank and file of the undead are really slow-witted, I hear. I know of some creatures that believe you can’t see them if they can’t see you, but they believe that they can’t see you if you can’t see them! I know it sounds rather absurd, but truth is stranger than fiction.”</i>", parse);
