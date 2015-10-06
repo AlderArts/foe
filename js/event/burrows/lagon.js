@@ -1007,8 +1007,10 @@ Scenes.Lagon.RulerGetFuckedEntrypoint = function(opheliaPresent) {
 			var size = p1cock.Size();
 			parse["l"] = player.HasLegs() ? "Between your legs" : "In the valley of your crotch";
 			Text.Add("[l], your [cocks] [isAre] jutting out proudly, a clear sign of your arousal. Biting your lip, you caress [itThem] from tip to root, letting out a faint moan as a pleasurable shiver runs down your spine. ", parse);
-			if(size * 2 < lagonSize)
-				Text.Add("<i>“Such[ a] pretty little clit[s] you have, slut,”</i> Lagon grins. <i>“I wonder if [itThey] will leak when I fuck you.”</i> With a girth like that, you doubt you could restrain yourself even if you wanted to.", parse);
+			if(size * 2 < lagonSize) {
+				parse["a"] = player.NumCocks() > 1 ? "" : " a";
+				Text.Add("<i>“Such[a] pretty little clit[s] you have, slut,”</i> Lagon grins. <i>“I wonder if [itThey] will leak when I fuck you.”</i> With a girth like that, you doubt you could restrain yourself even if you wanted to.", parse);
+			}
 			else if(size < lagonSize)
 				Text.Add("<i>“I’m sure you’re very proud of [thatThose] little pecker[s],”</i> Lagon mocks you. <i>“I think you’ll find you are a bit… outmatched in that department.”</i> That much is true… you don’t hold much when put up against the king’s massive shaft. That same massive shaft that will soon impale you, you are reminded.", parse);
 			else
