@@ -98,6 +98,8 @@ Entity.prototype.PrintDescription = function() {
 	else {
 		Text.Add("[name] have a featureless smooth chest.", parse);
 	}
+	if(breasts.length > 0)
+		this.LactationDesc(parse);
 	Text.NL();
 	
 	// Genetalia
@@ -365,6 +367,9 @@ Entity.prototype.HasScales = function() {
 	return this.body.HasScales();
 }
 
+Entity.prototype.LactationDesc = function(parse) {
+	
+}
 Entity.prototype.StomachDesc = function() {
 	var bellysize = this.pregHandler.BellySize();
 	return this.body.StomachDesc(bellysize);
