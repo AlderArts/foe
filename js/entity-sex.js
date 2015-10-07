@@ -240,6 +240,9 @@ Entity.prototype.Milk = function() {
 Entity.prototype.MilkCap = function() {
 	return this.lactHandler.MilkCap();
 }
+Entity.prototype.LactationProgress = function(oldMilk, newMilk, lactationRate) {
+	//Placeholder, implement in each entity if applicable
+}
 
 Entity.prototype.Fuck = function(cock, expMult) {
 	expMult = expMult || 1;

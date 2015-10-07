@@ -45,6 +45,8 @@ LactationHandler.prototype.Lactation = function() {
 	var body = this.entity.body;
 	if(body.breasts.length == 0)
 		return false;
+	else if(body.breasts[0].Size() < 2)
+		return false;
 	else
 		return this.lactating;
 }
@@ -60,19 +62,28 @@ LactationHandler.prototype.MilkCap = function() {
 	}
 	return cap;
 }
+LactationHandler.prototype.MilkLevel = function() {
+	var cap = this.MilkCap();
+	if(cap != 0)
+		return this.Milk() / cap;
+	else
+		return 0;
+}
 
-//TODO
 LactationHandler.prototype.Update = function(hours) {
 	var inc = this.milkProduction.Get() * hours;
 	if(this.Lactation())
 		inc -= this.lactationRate.Get() * hours;
 	
+	var oldMilk = this.MilkLevel();
 	if(inc > 0) {
 		this.milk.IncreaseStat(this.MilkCap(), inc, true);
+		
 	}
 	else if(inc < 0) {
 		this.milk.DecreaseStat(0, -inc, true);
 	}
+	var newMilk = this.MilkLevel();
 	
 	if(this.Milk() >= this.MilkCap()) {
 		this.entity.MilkFull();
@@ -81,6 +92,8 @@ LactationHandler.prototype.Update = function(hours) {
 		if(this.Milk() <= 0)
 			this.entity.MilkDrained();
 	}
+	
+	this.entity.LactationProgress(oldMilk, newMilk, this.lactationRate.Get());
 }
 
 LactationHandler.prototype.FillMilk = function(fraction) {

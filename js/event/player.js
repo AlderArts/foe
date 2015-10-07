@@ -185,6 +185,78 @@ Player.prototype.Drink = function(drink, suppressText) {
 	return (this.drunkLevel > DrunkLevel.Drunk);
 }
 
+Player.prototype.LactationProgress = function(oldMilk, newMilk, lactationRate) {
+	if(oldMilk < 0.5 && newMilk >= 0.5) {
+		Gui.Callstack.unshift(function() {
+			var parse = {
+				breasts : player.FirstBreastRow().Short()
+			};
+			Text.Clear();
+			Text.Add("A new weight in your [breasts] draws your attention, and you gently test them with a finger. While they haven’t actually <i>grown</i> that much, they’re definitely fuller, perkier and more tender than before; if you close your eyes and lay a palm across the curve of one, you can feel the faint pulsing of your baby feeders hard at production. At least you’ve still got some way to go until they’re full up.", parse);
+			Text.Flush();
+			Gui.NextPrompt();
+		});
+	}
+	if(oldMilk < 0.9 && newMilk >= 0.9) {
+		Gui.Callstack.unshift(function() {
+			var parse = {
+				breasts : function() { return player.FirstBreastRow().Short(); },
+				nips: player.FirstBreastRow().NipsShort()
+			};
+			
+			Text.Clear();
+			Text.Add("The weight and pressure in your [breasts] is considerable now, your [nips] stiff from the constant tingling just behind them. Their rich, delicious contents wobbling and sloshing with each step you take, your [breasts] remind you that they’re approaching their limit on how much they can hold - you ought to drain yourself somehow if you don’t want to start leaking all over the place.", parse);
+			Text.Flush();
+			Gui.NextPrompt();
+		});
+	}
+	// Trigger start of lactation
+	if(oldMilk < 1 && newMilk >= 1 && lactationRate != 0) {
+		Gui.Callstack.unshift(function() {
+			var parse = {
+				breasts : function() { return player.FirstBreastRow().Short(); },
+				nips: player.FirstBreastRow().NipsShort()
+			};
+			
+			Text.Clear();
+			if(lactationRate < 1) {
+				Text.Add("At last, the pressure is too much for your nipples to bear. Moaning softly, you grab your [breasts] as a thin thread of warmth works its way out of your [nips] and bursts out into open air. Since you haven’t bothered to drain your breasts of their milky load, your body’s decided to do it for you, and it doesn’t much care for silly things like propriety.", parse);
+				Text.NL();
+				Text.Add("Or did you let it build up to this point on purpose?", parse);
+				Text.NL();
+				Text.Add("Either way, you’ve begun to visibly lactate, and are likely to stay that way until your breasts have drained themselves to a more acceptable level - or you get more storage space.", parse);
+			}
+			else if(lactationRate < 3) {
+				Text.Add("Seems like your [breasts] are quite the productive things. With your latest increase in milky goodness, you’re definitely starting to feel like quite the cow-morph; two steady streams of white trickle gently from your [nips] and running down the curve of your breasts before finally seeping into your clothes.", parse);
+				Text.NL();
+				Text.Add("You have to admit, it’s quite arousing - especially now that you can feel the pulsing pumping with which fresh cream pours from you. Of course, it comes at the cost of propriety…", parse);
+				Text.NL();
+				Text.Add("In any case, you’re getting quite overfull now - maybe some release would be a nice relief, especially with how weighty you’re getting.", parse);
+			}
+			else { // > 3
+				Text.Add("Okay, now maybe this is getting just a <i>little</i> over the top. With how much milk your [breasts] are producing, there’s a veritable river of white cream gushing from each of your [nips], the constant pressure within driving the streams a considerable and embarrassing distance. The constant stimulation weighs heavily on your mind, and the slightest touch on your fat, engorged breasts only worsens the situation, in addition to causing no small end of discomfort.", parse);
+				Text.NL();
+				Text.Add("You really ought to get yourself milked… or at least find a place until all of this passes.", parse);
+			}
+			Text.Flush();
+			Gui.NextPrompt();
+		});
+	}
+	// Trigger end of lactaction
+	if(oldMilk > 0 && newMilk <= 0) {
+		Gui.Callstack.unshift(function() {
+			var parse = {
+				nips: player.FirstBreastRow().NipsShort()
+			};
+			
+			Text.Clear();
+			Text.Add("With a few final drops, the pressure behind your [nips] eases, and the warm flow finally stops. Seems like you’ve dried up - you’ll either need to get pregnant or use a little alchemical help if you want to turn your mammaries milky once more.", parse);
+			Text.Flush();
+			Gui.NextPrompt();
+		});
+	}
+}
+
 Player.prototype.PregnancyProgess = function(womb, slot, oldProgress, progress) {
 	if(!womb) return;
 	var num = womb.litterSize;

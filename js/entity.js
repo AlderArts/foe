@@ -356,7 +356,6 @@ Entity.prototype.MilkDrained = function() {
 }
 Entity.prototype.MilkFull = function() {
 	this.lactHandler.MilkFull();
-	// TODO Output
 }
 Entity.prototype.MilkDrain = function(drain) {
 	return this.LactHandler().milk.DecreaseStat(0, drain);
