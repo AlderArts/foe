@@ -74,6 +74,7 @@ OrchidBoss.prototype.DropTable = function() {
 	if(Math.random() < 0.5)  drops.push({ it: Items.FlowerPetal });
 	if(Math.random() < 0.2)  drops.push({ it: Items.TreeBark });
 	if(Math.random() < 0.2)  drops.push({ it: Items.SpringWater });
+	if(Math.random() < 0.2) drops.push({ it: Items.Gestarium });
 	
 	return drops;
 }

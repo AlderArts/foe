@@ -85,6 +85,7 @@ GolQueen.prototype.DropTable = function() {
 	
 	if(Math.random() < 0.2) drops.push({ it: Items.Estros });
 	if(Math.random() < 0.2) drops.push({ it: Items.Fertilium });
+	if(Math.random() < 0.2) drops.push({ it: Items.Gestarium });
 	
 	return drops;
 }

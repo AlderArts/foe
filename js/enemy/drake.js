@@ -69,6 +69,7 @@ Drake.prototype.DropTable = function() {
 	if(Math.random() < 0.1)  drops.push({ it: Items.Lacertium });
 	if(Math.random() < 0.1)  drops.push({ it: Items.Taurico });
 	if(Math.random() < 0.1)  drops.push({ it: Items.Nagazm });
+	if(Math.random() < 0.1) drops.push({ it: Items.Gestarium });
 	
 	if(Math.random() < 0.1)  drops.push({ it: Items.BlackGem });
 	if(Math.random() < 0.1)  drops.push({ it: Items.DemonSeed });
@@ -76,6 +77,7 @@ Drake.prototype.DropTable = function() {
 	if(Math.random() < 0.1)  drops.push({ it: Items.SnakeOil });
 	if(Math.random() < 0.3)  drops.push({ it: Items.LizardEgg });
 	if(Math.random() < 0.3)  drops.push({ it: Items.LizardScale });
+	
 	
 	return drops;
 }

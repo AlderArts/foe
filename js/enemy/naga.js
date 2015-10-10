@@ -84,6 +84,7 @@ Naga.prototype.DropTable = function() {
 	
 	if(Math.random() < 0.01) drops.push({ it: Items.BlackGem });
 	if(Math.random() < 0.01) drops.push({ it: Items.Scorpius });
+	if(Math.random() < 0.01) drops.push({ it: Items.Gestarium });
 	return drops;
 }
 

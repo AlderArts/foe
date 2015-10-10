@@ -99,6 +99,7 @@ Lizard.prototype.DropTable = function() {
 	
 	if(Math.random() < 0.01) drops.push({ it: Items.Scorpius });
 	if(Math.random() < 0.01) drops.push({ it: Items.Nagazm });
+	if(Math.random() < 0.01) drops.push({ it: Items.Gestarium });
 	return drops;
 }
 

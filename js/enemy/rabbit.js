@@ -91,6 +91,7 @@ Lagomorph.prototype.DropTable = function() {
 	if(Math.random() < 0.01) drops.push({ it: Items.Felinix });
 	if(Math.random() < 0.01) drops.push({ it: Items.Equinium });
 	if(Math.random() < 0.01) drops.push({ it: Items.Lacertium });
+	if(Math.random() < 0.01) drops.push({ it: Items.Gestarium });
 	return drops;
 }
 

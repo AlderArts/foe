@@ -164,6 +164,26 @@ PregnancyHandler.prototype.Womb = function(opts) {
 }
 
 /*
+ * Returns an array of pregnant wombs
+ */
+PregnancyHandler.prototype.PregnantWombs = function() {
+	var ret = [];
+	
+	var ent = this.entity;
+	
+	_.each(ent.AllVags(), function(vag) {
+		var womb = vag.womb;
+		if(womb.pregnant)
+			ret.push(womb);
+	});
+	var womb = ent.Butt().womb;
+	if(womb.pregnant)
+		ret.push(womb);
+	
+	return ret;
+}
+
+/*
  * opts:
  * 	slot   := PregnancyHandler.Slot
  */

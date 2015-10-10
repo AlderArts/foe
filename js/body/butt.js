@@ -20,6 +20,10 @@ Butt.prototype.FromStorage = function(storage) {
 	this.buttSize.base   = parseFloat(storage.size) || this.buttSize.base;
 }
 
+Butt.prototype.Size = function() {
+	return this.buttSize.Get();
+}
+
 Butt.prototype.noun = function() {
 	var size = this.buttSize.Get();
 	var nouns = new Array();

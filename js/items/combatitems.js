@@ -20,7 +20,7 @@ function CombatItem(id, name) {
 	this.consume = true;
 	this.combat = new CombatItemAbility(this);
 }
-CombatItem.prototype = new Item();
+CombatItem.prototype = new Item("_combat");
 CombatItem.prototype.constructor = CombatItem;
 
 

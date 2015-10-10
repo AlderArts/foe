@@ -584,9 +584,13 @@ HipSize = {
 	VeryWide : 15
 };
 
+Body.prototype.HipSize = function() {
+	return this.torso.hipSize.Get();
+}
+
 // TODO
 Body.prototype.HipsDesc = function(plural) {
-	var size = this.torso.hipSize.Get();
+	var size = this.HipSize();
 	
 	var adjs = [];
 	if(size < HipSize.Thin) {

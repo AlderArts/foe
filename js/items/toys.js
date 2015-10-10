@@ -116,7 +116,7 @@ Items.Toys.CanidDildo.cock.length.base    = 30;
 Items.Toys.CanidDildo.cock.race           = Race.Canine;
 Items.Toys.CanidDildo.cock.knot           = 1;
 
-Items.Toys.ChimeraDildo = new Item("dildo8", "Chimera", ItemType.Toy);
+Items.Toys.ChimeraDildo = new Item("dildo10", "Chimera", ItemType.Toy);
 Items.Toys.ChimeraDildo.price = 300;
 Items.Toys.ChimeraDildo.sDesc = function() { return "monstrous dildo"; }
 Items.Toys.ChimeraDildo.lDesc = function() { return "a monstrous dildo"; }

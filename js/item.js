@@ -65,6 +65,12 @@ function Item(id, name, type) {
 	 */
 	this.effect = {};
 	
+	if(!id) {
+		console.log("Item '" + name + "' has no id.");
+	}
+	if(ItemIds[id]) {
+		console.log("Item '" + id + "' is already registered.");
+	}
 	ItemIds[id] = this;
 }
 

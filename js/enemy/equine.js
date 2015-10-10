@@ -99,6 +99,7 @@ Equine.prototype.DropTable = function() {
 	if(Math.random() < 0.01) drops.push({ it: Items.Ovis });
 	if(Math.random() < 0.01) drops.push({ it: Items.Virilium });
 	if(Math.random() < 0.01) drops.push({ it: Items.Fertilium });
+	if(Math.random() < 0.01) drops.push({ it: Items.Gestarium });
 	
 	return drops;
 }

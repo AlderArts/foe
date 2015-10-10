@@ -153,7 +153,7 @@ function TFItem(id, name) {
 	this.effects = [];
 	this.isTF    = true;
 }
-TFItem.prototype = new Item();
+TFItem.prototype = new Item("_tf");
 TFItem.prototype.constructor = TFItem;
 
 TFItem.prototype.PushEffect = function(func, opts) {
