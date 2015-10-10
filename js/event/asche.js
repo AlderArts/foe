@@ -970,7 +970,7 @@ Scenes.Asche.MagicBoxWin = function() {
 		Scenes.Asche.MagicBoxRepeat();
 	}, 1.0, function() { return !(asche.flags["Talk"] & Asche.Talk.BoxDoll); });
 	scenes.AddEnc(function() {
-		Text.Add("You dig around for a bit in the darkness, not really finding anything to your liking, but eventually, your fingers close about something cold and slender, and you pull it out. It’s a thin glass vial of bluish liquid labelled “Lewton’s Concentrate”, but the potion is clearly old and stale; who knows what might have happened to it after sitting around for so long. Best to decide what to do with it while there’s trained help on hand - do you drink it?", parse);
+		Text.Add("You dig around for a bit in the darkness, not really finding anything to your liking, but eventually, your fingers close about something cold and slender, and you pull it out. It’s a thin glass vial of bluish liquid labeled “Lewton’s Concentrate”, but the potion is clearly old and stale; who knows what might have happened to it after sitting around for so long. Best to decide what to do with it while there’s trained help on hand - do you drink it?", parse);
 		Text.Flush();
 		
 		//[Yes][No]
