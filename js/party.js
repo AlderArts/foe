@@ -141,6 +141,18 @@ Party.prototype.Get = function(num) {
 		else return null;
 	}
 }
+Party.prototype.CloneParty = function(reserve) {
+	var ret = [];
+	_.each(this.members, function(m) {
+		ret.push(m);
+	});
+	if(reserve) {
+		_.each(this.reserve, function(m) {
+			ret.push(m);
+		});
+	}
+	return ret;
+}
 Party.prototype.GetInParty = function(num) {
 	if(num < this.members.length) return this.members[num];
 }

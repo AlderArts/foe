@@ -88,7 +88,8 @@ Lei.Rel = {
 };
 Lei.Talk = { //Bitmask
 	Skills : 1,
-	Sex : 2
+	Sex : 2,
+	GuardBeating : 4
 };
 
 Lei.prototype.Annoyance = function() {
@@ -1727,4 +1728,404 @@ Scenes.Lei.SparLoss = function() {
 	party.LoadActiveParty();
 	
 	Scenes.Lei.InnPrompt();
+}
+
+// #random one-off explore event in Slums/Residential at night (say 10pm-5am or whatever)
+Scenes.Lei.GuardStalkingApplicable = function() {
+	return lei.flags["Met"] >= Lei.Met.KnowName && !(lei.flags["Talk"] & Lei.Talk.GuardBeating) && ((world.time.hour >= 22) || (world.time.hour < 5));
+}
+
+Scenes.Lei.GuardStalking = function() {
+	var parse = {
+		race : player.Eyes().race.qShort(),
+		playername : player.name,
+		name : kiakai.name
+	};
+	
+	var nv = player.HasNightvision();
+	
+	lei.flags["Talk"] |= Lei.Talk.GuardBeating;
+	
+	Text.Clear();
+	Text.Add("The road shambles forward before you, ", parse);
+	if(nv)
+		Text.Add("dotted with potholes. Decrepit houses line both sides, their state speaking more of wilful neglect than of poverty. The moon is hidden by clouds and there is but little illumination from the rare intact lantern, but your [race] eyes let you make out your surroundings well enough.", parse);
+	else
+		Text.Add("the near complete darkness shrouding the ramshackle houses around you from sight. The face of a building you do make out in the dim glow of a rare intact lantern speaks of wilful neglect as much as poverty.", parse);
+	Text.Add(" From somewhere behind you, you hear the squelch of a heavy boot becoming markedly less clean. A quiet curse follows, carrying well in the still air, and you turn to have a look at the man. In this area, and especially at night, it’s best to watch anyone within bowshot distance of you.", parse);
+	Text.NL();
+	parse["nv"] = nv ? ", his city watch armor glinting in the lamplight" : " - at least as far as you can make out from the glint of lamplight on armor";
+	Text.Add("To your surprise, it seems to be a solitary guard[nv]. You didn’t think even larger patrols came here at this hour, but the man’s posture shows no sign of concern - aside from examining his boots with evident irritation.", parse);
+	Text.NL();
+	Text.Add("<i>“Oy, slag!”</i> a slightly slurred voice calls out from further down the street, behind the guard. <i>“Yeh, I’m talkin’ to ya, brassmonkey.”</i>", parse);
+	Text.NL();
+	Text.Add("It might be wiser to continue on your way… but you can’t help but feel curious about where this is going, and decide to watch.", parse);
+	Text.NL();
+	Text.Add("<i>“Are you drunk, man?”</i> The guard turns to face the man, his hand firm on his sword hilt. <i>“It is a long walk to the cells, so I will give you precisely one chance to speak your apologies.”</i>", parse);
+	Text.NL();
+	Text.Add("<i>“How ‘bout ye apologize for shittin’ on my view with yer malformed mug?”</i> the man replies. You shift for a better look and see that he is swathed in a dark cloak, the hood drawn. His figure is a silhouette of deeper shadow in the dark street. <i>“I ken y’want to save on whores ‘cause they charge ye triple, but don’t ye come ‘round here looking for ‘em. Wouldn’t do for yer ugliness to rub off.”</i>", parse);
+	Text.NL();
+	Text.Add("You see the guard’s shoulders rise and fall as he takes a steady breath, and then he draws his sword in one fluid motion, raising the tip to the cloaked man’s throat. You don’t see the movement that follows, but there is the ring of metal on metal, and the cloaked man holds a shortsword, pressing inside his opponent’s guard.", parse);
+	Text.NL();
+	
+	var fLevel = player.jobs["Fighter"].level + player.jobs["Rogue"].level + player.jobs["Bruiser"].level;
+	
+	parse["nv"] = nv ? "" : " in the dark";
+	Text.Add("To the guard’s credit, he responds remarkably well to what you can only assume was a major surprise. He hops back out of reach, trying to reestablish a suitable range for his longer weapon. Blades clash again and again[nv], ", parse);
+	if(fLevel >= 10) {
+		Text.Add("almost too quick to follow, but your well-trained eyes pick out the movements as much from the shifts of shoulders and posture as from the glint of swords. The assailant pursues the guard’s retreat, denying the longsword’s range. Threatening, over-broad strokes with the longsword are answered with efficient, almost demure movements of the smaller blade. After two or three steps back, you judge from the guard’s tense neck that he longs to glance behind him, to see where the holes lie in the pitted pavement, but he does not dare look away.", parse);
+		Text.NL();
+		Text.Add("The man is cornered, far too disadvantaged in position and range to have a chance, even though the two could perhaps have been evenly matched on a training ground. And indeed, at such close range, the parry for the shortsword’s next lunge comes just slightly late, and the weapon tears a gash across the guard’s left arm. As he’s distracted by the hit, his assailant lands a kick on his right calf, setting him off-balance.", parse);
+	}
+	else {
+		parse["nv"] = nv ? " despite your night vision," : "";
+		Text.Add("too quick to follow, and[nv] you make out little. The guard retreats, while his assailant pursues, though the two seem evenly matched as far as you can tell. They exchange furious strikes for a few moments, before the assailant flies out with a kick to the guard’s right leg, setting him off-balance.", parse);
+	}
+	Text.Add(" Unable to catch himself, the guard tumbles backward, his helmeted head banging forcefully against a loose cobble.", parse);
+	Text.Flush();
+	
+	//[Observe][Assist]
+	var options = new Array();
+	options.push({ nameStr : "Observe",
+		tooltip : "This <i>still</i> has nothing to do with you. Keep watching.",
+		func : function() {
+			Text.Clear();
+			Text.Add("You shrug. Well, the situation’s unfortunate for the forces of law and order, but then, the forces of law and order in this area have never been much to begin with.", parse);
+			Text.NL();
+			if(party.InParty(miranda)) {
+				Text.Add("From your side, Miranda glares at you. <i>“Are you really going to just stand there and watch? That bastard could be about to kill that idiot!”</i> She shakes her head, her eyes narrowed, and sets off at a run toward the former combatants.", parse);
+				Text.NL();
+				Text.Add("Sighing, you run after her. The situation involves you now.", parse);
+				Text.NL();
+				
+				miranda.relation.DecreaseStat(-100, 5);
+				
+				Scenes.Lei.GuardStalkingEntry(parse, nv);
+			}
+			else {
+				Text.Add("The cloaked man presses his blade against the guard’s throat while he examines him. Apparently satisfied that his former adversary is unconscious, he withdraws the sword, and in a moment it vanishes back beneath his cloak.", parse);
+				Text.NL();
+				Text.Add("He bends over and picks up his opponent’s longsword, before slowly walking toward the entrance of the nearest alleyway. Just as he’s about to pass into deeper shadow, the man half-turns, momentarily catching your eyes from beneath the hood of his cloak, and beckons for you to follow him.", parse);
+				Text.NL();
+				if(party.InParty(kiakai)) {
+					Text.Add("<i>“I do not know if you should follow him, [playername],”</i> [name] says, <i>“but I know that <b>my</b> duty lies here. I must assist the guard, to ensure that he does not suffer lasting injury from this encounter.”</i>", parse);
+					Text.NL();
+					Text.Add("Well, that just makes your own decision harder. ", parse);
+				}
+				Text.Add("You hesitate for a long moment. Following an aggressive, ill-mannered stranger into a dark alley certainly does not seem like the greatest of ideas… but he seemed somehow different at the end there. Almost familiar. Finally, your curiosity gets the better of you, and you follow his steps into the deeper shadows.", parse);
+				Text.NL();
+				
+				Scenes.Lei.GuardStalkingConverge(parse, nv);
+			}
+		}, enabled : true
+	});
+	options.push({ nameStr : "Assist",
+		tooltip : "You’d better help the unconscious guard. Who knows what your conscience might do if he’s killed in front of you...",
+		func : function() {
+			Text.Clear();
+			parse["nv"] = nv ? "you pace yourself, carefully avoiding the many potholes in your way" : "you’re forced to pace yourself as you stumble on a pothole in the darkness";
+			Text.Add("You set off at a run toward the fallen guard, though [nv].", parse);
+			Text.NL();
+			if(party.InParty(miranda)) {
+				Text.Add("<i>“I knew I could count on you,”</i> Miranda says, easily keeping up with you. <i>“We can’t let that bastard do as he pleases!”</i>", parse);
+				Text.NL();
+				
+				miranda.relation.IncreaseStat(100, 5);
+			}
+			
+			Scenes.Lei.GuardStalkingEntry(parse, nv);
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Lei.GuardStalkingEntry = function(parse, nv) {
+	Text.Add("Although the distance is short, the cloaked man moves with remarkable agility. The shortsword vanishes back inside his cloak, and he snatches up the guard’s longer weapon. Before you’re more than halfway to the scene, he reaches the mouth of the nearest alleyway, and pauses for a moment at the lip of deeper shadows. The man half-turns, momentarily meeting your eyes from beneath the hood of his cloak, and beckons for you to come before disappearing into darkness.", parse);
+	Text.NL();
+	if(party.InParty(miranda)) {
+		Text.Add("As you reach the unconscious guard, Miranda drops to one knee beside him. She looks intently at the dark alley entrance. <i>“You go after him, [playername],”</i> she says hesitantly. <i>“Can’t leave an unconscious guardsman alone with the locals. It’d be a shame if a slashed throat was added to his wounds, even if he is incompet-”</i> She cuts off as she notices the guard’s face beneath his helmet.", parse);
+		Text.NL();
+		Text.Add("<i>“Damn. This one’s actually one of the better fighters in the Guard. Be careful. Scream like a little girl if you need help.”</i>", parse);
+		Text.NL();
+		if(party.InParty(kiakai)) {
+			Text.Add("<i>“I will assist you, Miranda,”</i> [name] says. <i>“The injuries do not appear severe, but I will need to ensure that the concussion does not lead to internal bleeding.”</i>", parse);
+			Text.NL();
+		}
+	}
+	else if(party.InParty(kiakai)) {
+		Text.Add("<i>“You must be careful if you follow him, [playername],”</i> [name] says. <i>“I cannot accompany you, for my duty lies here. I must assist the guard, to ensure that he does not suffer lasting injury from this encounter.”</i>", parse);
+		Text.NL();
+	}
+	
+	var comps = party.CloneParty();
+	comps = _.without(comps, miranda, kiakai);
+	//#if non-Kiai/non-Miranda companions are present
+	if(comps.length > 0) {
+		parse["nv"] = nv ? "deep shadows" : "blank darkness";
+		parse["nv2"] = nv ? " There is so little light that despite your night vision, you can barely make out what’s inside." : ""
+		
+		var c1 = comps[0];
+		var km = party.InParty(miranda) || party.InParty(kiakai);
+		
+		parse["o"] = km ? " other" : "";
+		parse["c"] = comps.length > 1 ? Text.Parse("your[o] companions", parse) : c1.name;
+		parse["km"] = km ? "help with" : "watch over";
+		parse["heshe"] = comps.length > 1 ? "they" : c1.heshe();
+		parse["himher"] = comps.length > 1 ? "them" : c1.himher();
+		
+		Text.Add("You stare into the [nv] of the narrow alleyway.[nv2] Even if you brought [c] with you, [heshe] would be as likely to stumble over you as to be of any help. You tell [himher] to [km] the injured guard while you investigate.", parse);
+		Text.NL();
+	}
+	parse["nv"] = nv ? "where the man went" : "shapes";
+	Text.Add("You hesitate for a moment, trying to make out [nv] in the darkness of the alley. Chasing an aggressive, ill-mannered stranger into the dark certainly seems rather dangerous… but he seemed somehow different at the end there. Almost familiar. You decide you can’t let this drop here - for the sake of your curiosity as much as any sort of revenge for the guard - and follow the stranger’s steps into the deeper shadows.", parse);
+	Text.NL();
+	Scenes.Lei.GuardStalkingConverge(parse, nv);
+}
+
+Scenes.Lei.GuardStalkingConverge = function(parse, nv) {
+	Text.Add("You gingerly take a few steps inside. ", parse);
+	if(nv) {
+		Text.Add("Blank walls loom to your left and right - the residents apparently preferring to do without windows. Your pupils widen to their widest. The sky above and reflected light from distant lanterns give you barely enough illumination to see, but even for you the alley is filled with obscuring shadow. Broken timber and other rubbish are piled high in places, providing cover and tricky terrain both.", parse);
+		Text.NL();
+		Text.Add("You proceed slowly, scanning the walls around you carefully, staring intently into shadows. At the corner of your eye, you see one shadow move, jumping out from a doorway, and darting toward you. You spin, and desperately jump backward, as a shortsword stops where you had been standing, pointing at your chest.", parse);
+		Text.NL();
+		parse["eyecolor"] = Color.Desc(player.Eyes().color);
+		Text.Add("<i>“Oh, that is mighty nice, poppet.”</i> You stand facing the man. Beneath his drawn hood, his orange glint with reflections of distant light, as you know your own [eyecolor] ones must be. <i>“I dinnae think ye could see in ‘ere. Still, that was an awful close dodge, wa’n’t it? And can ye defend yeself now? Don’t seem wise to follow me in ‘ere.”</i>", parse);
+	}
+	else {
+		Text.Add("To your left and right, you feel as much as see walls looming, blocking what little light there was from reaching further. The narrow strip of cloudy sky above is a slightly lighter darkness in your vision. Bare hints of outlines in front suggest boxes or perhaps piles of rubbish. If the man just chose to stand pressed against a wall somewhere, you’re not sure you’d be able to find him.", parse);
+		Text.NL();
+		Text.Add("Hoping that your eyes will be able to adjust to the dark a little more, you walk in further, and stare intently into the shadow. There is the muffled sound of a step, and in the next instant, you feel a cold steel pressing against the side of your neck and a woosh of air from the sword’s passage.", parse);
+		Text.NL();
+		Text.Add("<i>“Well, ain’t this silly? Ye may be strong, poppet, but what does that strength matter if ye let yerself be ambushed and lose yer head ‘fore ye can do a thing?”</i>", parse);
+	}
+	Text.NL();
+	if(player.Int() >= 40)
+		Text.Add("There is definitely something off here. The man’s accent is the same as before, but his diction has definitely changed.", parse);
+	else if(nv)
+		Text.Add("It’s possible you could, but as when he faced the guard, the range again favors him. He also seemed faster than before…", parse);
+	else
+		Text.Add("You can’t decide whether you’re frustrated by the fact that he can evidently see better than you or glad of it. He managed to stop that blade awfully close.", parse);
+	Text.NL();
+	parse["nv"] = nv ? "the sword vanishes as if it were never there" : "you feel the steel disappear from your neck";
+	parse["nv2"] = nv ? "man" : "voice";
+	Text.Add("<i>“Or perhaps you felt there was something unnatural about the situation. Perhaps your instincts told you there was no danger? It is risky to rely on such instincts-”</i> [nv] <i>“-but I shall not condemn them when they were correct. Hello, [playername],”</i> the [nv2] almost purrs.", parse);
+	Text.NL();
+	Text.Add("Hi, Lei. Fancy meeting you here.", parse);
+	Text.Flush();
+	
+	Gui.NextPrompt(function() {
+		Text.Clear();
+		parse["nv"] = nv ? "the relief of being out of danger" : "relief at being alive";
+		parse["nv2"] = nv ? "" : "the shadow that apparently contains ";
+		Text.Add("You take a few deep breaths to steady yourself. Instincts or no, your muscles still tremble in tension, and [nv] washes through you. You tell [nv2]Lei that this is the sort of joke that gives people nightmares.", parse);
+		Text.NL();
+		parse["nv"] = nv ? "have a chance to examine him, the stature, and his precise way of holding himself give him away completely, cloak or no" : "look closely, you can see a glint of light reflecting off orange eyes in the shadows";
+		Text.Add("<i>“Certainly, but are nightmares such a bad thing?”</i> Now that you [nv]. <i>“Consider the guardsman you saw me fight, for example. When I saw him take part in sparring matches two years ago, I thought he had the potential to become strong. That potential has, however, gone untapped. I see some small improvements in him, but he has also become predictable.”</i>", parse);
+		Text.NL();
+		Text.Add("So, does that have something to do with nightmares and why Lei attacked him?", parse);
+		Text.NL();
+		parse["nv"] = nv ? "Lei nods." : "The orange eyes tilt down for a moment in what you suspect is a nod.";
+		Text.Add("[nv] <i>“One who has nightmares does not stagnate. He either struggles to overcome his fears and grows stronger, or lets them break him.”</i>", parse);
+		Text.Flush();
+		
+		//[Approve][Demur][Chastise]
+		var options = new Array();
+		options.push({ nameStr : "Approve",
+			tooltip : "Lei provided a free, useful lesson to the guard. Certainly praiseworthy.",
+			func : function() {
+				Text.Clear();
+				Text.Add("That’s generous of Lei - going to all the trouble of providing the guard with motivation, and taking just a sword in return.", parse);
+				Text.NL();
+				Scenes.Lei.GuardStalkingApprove(parse, nv);
+			}, enabled : true
+		});
+		options.push({ nameStr : "Demur",
+			tooltip : "What do you care what Lei does in his free time? It doesn’t concern you.",
+			func : function() {
+				Text.Clear();
+				parse["nv"] = nv ? ". If" : "before remembering that he probably can’t see the movement. Or, given his handling of the sword earlier, perhaps he can… In any case, you tell him that if";
+				Text.Add("You shrug [nv] that’s how he wants to pass his time, that’s his decision. You’re a little curious, however - why does he bother with this?", parse);
+				Text.NL();
+				Scenes.Lei.GuardStalkingApprove(parse, nv);
+			}, enabled : true
+		});
+		options.push({ nameStr : "Chastise",
+			tooltip : "The fact that Lei is harming others just because he feels like it is quite horrible, and you’re going to tell him as much.",
+			func : function() {
+				Text.Clear();
+				
+				lei.relation.DecreaseStat(0, 2);
+				
+				Text.Add("And what if the fears do break him? Or if there are long-term effects from the concussion he received? Why is it Lei who get to choose that the guard needs this to become stronger?", parse);
+				Text.NL();
+				parse["nv"] = nv ? "Lei closes his eyes" : "The orange eyes disappear";
+				Text.Add("[nv], and all is silent for half a minute. ", parse);
+				if(nv)
+					Text.Add("You begin to feel tempted to walk over and poke him when he finally reopens them.", parse);
+				else
+					Text.Add("You begin to wonder if the asshole has snuck off, when the eyes reappear where they had been.", parse);
+				Text.NL();
+				Text.Add("<i>“I do not decide what <b>he</b> needs. I only do,”</i> Lei says, his voice colder than usual. <i>“If he wished to stop me, he needed only to be stronger. That is the only way one obtains the right to choose.”</i> He takes several steps toward you, drawing close enough that you feel the heat of his body in front of yours in the cool night air. <i>“If you wish to stop me, you need only become stronger as well. I will no longer need to cultivate all these little sprouts if you grow high enough to touch the sky.”</i>", parse);
+				Text.Flush();
+				
+				//[Flirt][Move on][Confront]
+				var options = new Array();
+				options.push({ nameStr : "Flirt",
+					tooltip : "And what kind of reward is he offering for your growth?",
+					func : function() {
+						Text.Clear();
+						Text.Add("Well, if he selfishly wants something like that, he’s going to have to pay up when you accomplish it for him, isn’t he?", parse);
+						Text.NL();
+						parse["nv"] = nv ? "Lei chuckles softly" : "There’s a soft chuckle from the darkness";
+						Text.Add("[nv]. <i>“Selfishly? I think being strong enough to not die is in your interest as well. Though in any case, I do not believe in work for free, and I pay my dues. If you grow as high as I hope, I will be sure to give you any treat you like.”</i>", parse);
+						Text.NL();
+						Text.Add("Ha, if you make it there, who says you’ll wait for him to give you anything? You just might grow impatient - and take it.", parse);
+						Text.NL();
+						Text.Add("<i>“You are most certainly welcome to try anytime.”</i> He pauses. <i>“Well, preferably not right at this moment.", parse);
+						Scenes.Lei.GuardStalkingOutro(parse, nv);
+					}, enabled : true
+				});
+				options.push({ nameStr : "Move on",
+					tooltip : "It doesn’t look like you’re going to make much progress in this argument. You’ve got other things to do.",
+					func : function() {
+						Scenes.Lei.GuardStalkingMoveOn(parse, nv);
+					}, enabled : true
+				});
+				options.push({ nameStr : "Confront",
+					tooltip : "There are other ways he can be stopped too…",
+					func : function() {
+						Text.Clear();
+						Text.Add("You could always just report what he did to the guards. That would stop him - or at least slow him down.", parse);
+						Text.NL();
+						Text.Add("<i>“Whom do you imagine that would help? This man would likely see your help as further humiliation. And were you to succeed in restoring his confidence, he may resume patrolling here, and be killed for his arrogance and lack of skills.”</i>", parse);
+						Text.NL();
+						Text.Add("<i>“In any case, I assure you that I have connections enough in this city that even if you were to be believed, it would cause me but a little trouble.”</i>", parse);
+						Text.NL();
+						Text.Add("Then, it may be difficult, but you could stop him yourself.", parse);
+						Text.NL();
+						Text.Add("<i>“Now, now. There is no need to be so dramatic. If you are so confident in yourself, you need only show me the fruits of your growth in any case.”</i> His voice grows lower. <i>“You can come play with me at Lady’s Blessing any time you like.”</i>", parse);
+						Text.NL();
+						parse["nv"] = nv ? " - it’s probably not going anywhere" : " - well, with the dark, you’re pretty sure it’s there anyway";
+						Text.Add("That does sound more appealing than fighting in this dark and smelly alley. You can wait a little while to beat that smugness off his face[nv].", parse);
+						Text.NL();
+						parse["nv"] = nv ? " " : "”</i> Yes, it’s definitely there. <i>“";
+						Text.Add("<i>“As you say.[nv]But for now it would be best to part ways here.", parse);
+						Scenes.Lei.GuardStalkingOutro(parse, nv);
+					}, enabled : true
+				});
+				Gui.SetButtonsFromList(options, false, null);
+			}, enabled : true
+		});
+		Gui.SetButtonsFromList(options, false, null);
+	});
+}
+
+Scenes.Lei.GuardStalkingApprove = function(parse, nv) {
+	Text.Add("<i>“I but water a young sprout. If it becomes strong, perhaps I can use it to grow myself.”</i> He pauses, and his next words are quieter. <i>“This one is not as promising as some I wish to cultivate, but one cannot rely overmuch on a single crop.”</i>", parse);
+	Text.Flush();
+	
+	lei.relation.IncreaseStat(100, 2);
+	
+	//[Flirt][Move on]
+	var options = new Array();
+	options.push({ nameStr : "Flirt",
+		tooltip : "Does he think these crops are so delicious?",
+		func : function() {
+			Text.Clear();
+			parse["juicyfirm"] = player.mfTrue("firm", "juicy");
+			Text.Add("You take a small step toward him. Is he looking forward to tasting the ripe, [juicyfirm] fruits of his cultivation so very much?", parse);
+			Text.NL();
+			if(lei.SexOpen() && lei.Relation() > Lei.Rel.L3) {
+				Text.Add("Lei closes the rest of the distance to you, his steps confident in the darkness. He cups your chin in his hand, his thumb tracing slowly along your cheekbone. <i>“Oh yes, so very much indeed. It is already quite delicious-”</i> his thumb descends, brushing over your lips, parting them gently, <i>“-so I can barely imagine what it will be like fully ripe.”</i>", parse);
+				Text.NL();
+				Text.Add("You give his thumb a little kiss and promise that you’ll ensure he gets a good, full taste.", parse);
+				Text.NL();
+				parse["nv"] = nv ? "" : ", rejoining the darkness";
+				Text.Add("Lei gives your cheek a last lingering caress and takes a step back[nv].", parse);
+			}
+			else if(lei.SexOpen() && lei.Relation() > Lei.Rel.L1) {
+				var bald = player.Hair().Bald() ? "taking care to scratch behind your [ears]" : "gently running his fingers through your [hair]";
+				parse["bald"] = Text.Parse(bald, {ears: player.EarDesc(), hair: player.Hair().Short()});
+				Text.Add("Lei closes the rest of the distance to you, his steps confident in the darkness. You feel his hand rest on your head, and he begins to stroke it, [bald]. <i>“And I see I have found a crop that is quite eager for the harvest.”</i>", parse);
+				Text.NL();
+				Text.Add("This metaphor is feeling stranger by the minute. What kind of plant does he imagine you are anyway?", parse);
+				Text.NL();
+				Text.Add("His hand pauses, as he apparently ponders the question for a moment. <i>“Everlure, I think. One of the most dangerous plants from a land far away. It looks beautiful, and the fruits are delicious, but eating too many of them brings addiction, forcing one to keep coming back to taste it again and again.”</i>", parse);
+				Text.NL();
+				Text.Add("You’ll make sure his addiction is a pleasant one, then. You reach out to pull him closer, but with a last lingering touch, Lei pulls back, stepping out of reach.", parse);
+			}
+			else { // (very low rel, or sex off)
+				Text.Add("The glittering eyes narrow. <i>“Much as one ever looks forward to one’s dream. There is hope, desire, a wanton wishfulness that is difficult to curb…”</i> The words trail off, and when he continues, the voice is warmer. <i>“Though once in a long time, reality surpasses even dreams, and it is that possibility that spurs all longing on.”</i>", parse);
+				Text.NL();
+				Text.Add("So all you have to do is to exceed his wildest expectations then? Sounds easy enough.", parse);
+				Text.NL();
+				Text.Add("There’s a soft laugh from Lei at your remark.", parse);
+			}
+			Text.Add(" <i>“Though this is a pleasant discussion, I believe such a conversation would be better suited to some place that is less malodorous.”</i>", parse);
+			Text.NL();
+			parse["comp"] = party.Num() == 2 ? party.Get(1).name + " is" : "your companions are";
+			parse["c"] = party.Num() > 1 ? Text.Parse("how [comp] doing with the guard", parse) : "on the guard";
+			Text.Add("Ah, yes, now that you are reminded, there does seem to be a smell of stale urine that you had managed to filter out. Shall the two of you check [c] and then be on your ways?", parse);
+			Text.NL();
+			Text.Add("<i>“I have no objections. Though it is best not to take overlong.", parse);
+			Scenes.Lei.GuardStalkingOutro(parse, nv);
+		}, enabled : true
+	});
+	options.push({ nameStr : "Move on",
+		tooltip : "Well, time to get going. Maybe you’ll check on the guard along the way.",
+		func : function() {
+			Scenes.Lei.GuardStalkingMoveOn(parse, nv);
+		}, enabled : true
+	});
+	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Lei.GuardStalkingMoveOn = function(parse, nv) {
+	Text.Clear();
+	parse["comp"] = party.Num() == 2 ? party.Get(1).name + " is" : "your companions are";
+	parse["c"] = party.Num() > 1 ? Text.Parse("how [comp] doing with the guard", parse) : "on the guard";
+	Text.Add("Probably best not to stay too long in a smelly, dirty, dark alley. Besides, it’d be best to check [c] - it wouldn’t be surprising for unplanned violence to break out in this neighborhood.", parse);
+	Text.NL();
+	Text.Add("<i>“Perhaps, but it is best not to linger.", parse);
+	Scenes.Lei.GuardStalkingOutro(parse, nv);
+}
+
+Scenes.Lei.GuardStalkingOutro = function(parse, nv) {
+	Text.Add(" Before coming here, I had a summons delivered to a guard patrol to the west of here, notifying them of the injury of one of their own. They will arrive any minute, and likely be none too happy,”</i> Lei says, sounding quite pleased for his part. He motions for you to follow, as he starts walking toward the mouth of the alleyway. <i>“Did you think I would leave him to lie here all night? If he died, giving the lesson would have been a waste of my time, after all.”</i>", parse);
+	Text.NL();
+	Text.Add("He stops on the border of shadow and the relative light of the street outside. <i>“A small extra reminder…”</i> Lei twirls the guard’s longsword for a moment, apparently thinking, before ramming it into the wall at the corner of the building with a squeal of wood and metal. When he pulls back his hand, little more than the sword’s hilt is visible sticking out of the wood.", parse);
+	Text.NL();
+	parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
+	parse["is"] = party.Num() == 2 ? "is" : "are";
+	parse["c"] = party.Num() > 1 ? Text.Parse(", indicating [comp], who [is] looking at Lei in surprise", parse) : "";
+	Text.Add("He motions at you[c]. <i>“Go. I will watch over him until the patrol arrives. You do not want to be explaining things to angry guards, even if you are innocent.”</i>", parse);
+	Text.NL();
+	Text.Add("And he probably doesn’t want you explaining things to them either, you remark.", parse);
+	Text.NL();
+	Text.Add("Lei inclines his head slightly.", parse);
+	Text.NL();
+	parse["c"] = party.Num() == 2 ? " and " + party.Get(1).name :
+		party.Num() > 2 ? " gather your companions, and" : "";
+	Text.Add("Sighing in resignation, you[c] head out to the east.", parse);
+	Text.NL();
+	if(party.InParty(miranda)) {
+		Text.Add("Miranda glares in your direction as you walk. <i>“So it was that Lei asshole, then? <b>Please</b> let me arrest him?”</i>", parse);
+		Text.NL();
+		Text.Add("You tell her that as interesting as that idea sounds, it would probably be best not to try.", parse);
+		Text.NL();
+	}
+	if(party.InParty(kiakai)) {
+		parse["name"] = kiakai.name;
+		Text.Add("<i>“The Lady blessed that man with such strength,”</i> [name] says, <i>“I only wish that he had put it to better use.”</i>", parse);
+		Text.NL();
+		Text.Add("You shrug. Convincing him to use [name]’s definition of “better” would probably be a greater challenge than besting him.", parse);
+		Text.NL();
+	}
+	Text.Add("After a few minutes walking, you hear raised angry voices in the distance, signalling the arrival of the patrol.", parse);
+	Text.Flush();
+	
+	world.TimeStep({hour: 1});
+	
+	Gui.NextPrompt();
 }

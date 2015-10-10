@@ -22,6 +22,7 @@ world.loc.Rigard.Residental.street.enc.AddEnc(function() { return Scenes.Rigard.
 world.loc.Rigard.Residental.street.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
 world.loc.Rigard.Residental.street.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
 world.loc.Rigard.Residental.street.enc.AddEnc(function() { return Scenes.Terry.ExploreResidential; }, 1000000.0, function() { return rigard.Krawitz["Q"] == Rigard.KrawitzQ.HuntingTerry; });
+world.loc.Rigard.Residental.street.enc.AddEnc(function() { return Scenes.Lei.GuardStalking; }, 3.0, function() { return Scenes.Lei.GuardStalkingApplicable(); });
 world.loc.Rigard.Residental.street.onEntry = function() {
 	
 	// TODO

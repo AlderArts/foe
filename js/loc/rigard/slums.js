@@ -34,6 +34,7 @@ world.loc.Rigard.Slums.gate.enc = new EncounterTable();
 world.loc.Rigard.Slums.gate.enc.AddEnc(function() { return Scenes.Rigard.Chatter;});
 world.loc.Rigard.Slums.gate.enc.AddEnc(function() { return Scenes.Rigard.Chatter2;});
 world.loc.Rigard.Slums.gate.enc.AddEnc(function() { return Scenes.Rigard.CityHistory;}, 1.0, function() { return rigard.flags["CityHistory"] == 0; });
+world.loc.Rigard.Slums.gate.enc.AddEnc(function() { return Scenes.Lei.GuardStalking; }, 3.0, function() { return Scenes.Lei.GuardStalkingApplicable(); });
 world.loc.Rigard.Slums.gate.onEntry = function() {
 	if(Math.random() < 0.15)
 		Scenes.Rigard.Chatter(true);
