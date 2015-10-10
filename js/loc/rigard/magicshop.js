@@ -130,7 +130,8 @@ Scenes.Rigard.MagicShop.CreateShop = function() {
 	shop.potions = [
 		Items.Combat.HPotion,
 		Items.Combat.EPotion,
-		Items.Combat.SpeedPotion
+		Items.Combat.SpeedPotion,
+		Items.Gestarium
 	];
 	shop.consumables = [
 		Items.Combat.DecoyStick,
@@ -194,6 +195,7 @@ Scenes.Rigard.MagicShop.CreateShop = function() {
 	shop.AddItem(Items.Combat.HPotion, 5);
 	shop.AddItem(Items.Combat.EPotion, 5);
 	shop.AddItem(Items.Combat.SpeedPotion, 5);
+	shop.AddItem(Items.Gestarium, 5);
 	shop.AddItem(Items.Combat.DecoyStick, 5);
 	shop.AddItem(Items.Combat.SmokeBomb, 5);
 	shop.AddItem(Items.Accessories.CrudeBook, 5);

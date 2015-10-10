@@ -12,7 +12,9 @@ Version 0.4m
 * Fixed a bug where Terry would be named Thief [1] upon recruiting
 * Belly size description, according to pregnancy
 * Added proper pregnancies (sorta). There's a birth scene, written by The Observer, and a nursery in the camp you can visit (though there's not much to do there)
-* Added a pregnancy potion (Gestarium). Available through the usual item debug for now, plus some drop tables
+* Added a pregnancy potion (Gestarium)
+ - Available through the usual item debug for now, plus some drop tables
+ - It can also be bought from Asche
  - To be specific, what this does is push an already started pregnancy. It won't make you pregnant
 * Adjusted the zebra shaman's drop table. Mistakenly put all the alchemy drops on the brave's drop table
 * Removed Kyna from the game (no longer available even in debug)
