@@ -134,12 +134,10 @@ world.loc.Highlands.Spring.links.push(new Link(
 	}
 ));
 
-/* TODO
 world.loc.Highlands.Spring.events.push(new Link(
 	"Isla", true, true,
 	null,
 	function() {
-		
+		Scenes.Isla.Approach();
 	}
 ));
-*/

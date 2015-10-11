@@ -16,7 +16,8 @@ function Isla(storage) {
 	this.body.SetRace(Race.Ferret);
 	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Ferret, Color.brown);
 	
-	this.flags["Met"] = 0;
+	this.flags["Met"] = Isla.Met.NotMet;
+	this.flags["Figure"] = Isla.Figure.Girly;
 
 	if(storage) this.FromStorage(storage);
 }
@@ -28,6 +29,12 @@ Isla.Met = {
 	Met    : 1
 };
 
+Isla.Figure = {
+	Girly      : 0,
+	Womanly    : 1,
+	Voluptuous : 2
+};
+
 /* TODO
 Isla.prototype.Update = function(step) {
 	Entity.prototype.Update.call(this, step);
@@ -36,6 +43,16 @@ Isla.prototype.Update = function(step) {
 
 Isla.Available = function() {
 	return asche.flags["Tasks"] & Asche.Tasks.Spring_Visited;
+}
+
+// Number of kids Isla birthed by the PC
+Isla.prototype.Kids = function() {
+	//TODO Use flag
+	return 0;
+}
+
+Isla.prototype.Figure = function() {
+	return this.flags["Figure"];
 }
 
 Isla.prototype.FromStorage = function(storage) {
@@ -217,4 +234,225 @@ Scenes.Isla.Introduction = function() {
 	});
 	
 	Gui.SetButtonsFromList(options, false, null);
+}
+
+Scenes.Isla.Approach = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	Text.Clear();
+	Text.Add("You step towards the shelter in the north face of the mountainside. Isla’s temporary home consists of a shallow cleaned-out cave, extended out front by means of a few simple wooden structures and stretched-out hides to provide shelter. A small fire pit out front provides heat and warmth, and there’s a simple sleeping mat laid out in the back. Considering the spartan living conditions and remote location, it’s little wonder why the job of spring guardian doesn’t have people lining up to fill it.", parse);
+	Text.NL();
+	Text.Add("As you draw close, you note that Isla is ", parse);
+	
+	var kids = isla.Kids();
+
+	var scenes = new EncounterTable();
+	scenes.AddEnc(function() {
+		Text.Add("sitting cross-legged out front, doing a bit of fletching. A number of finished arrows lie by her side, tipped with flint heads and guided with large, white feathers from a bird of some sort, and it’s clear that she’s very serious about this job, if nothing else.", parse);
+		Text.NL();
+		Text.Add("Noticing your approach, Isla puts down her flint knife and places the finished arrows into a nearby quiver. <i>“Oh, it’s you, [playername]. Come up all the way to see me?”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("halfway up a rock face leading off the trail, hot in pursuit of the nest of some mountain bird or the other. As you watch, the sable-morph agilely pulls herself hand over foot to the nest and pockets the eggs with ease, then makes the descent with half the difficulty with which she went up.", parse);
+		Text.NL();
+		Text.Add("Seeing you standing up on the plateau, she nods at you and comes over. <i>“Don’t mind me, was just getting tomorrow’s breakfast. Came to visit?”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("boiling some water in a small iron pot over the fire pit. She’s mostly done and the fire is but embers now, and as you watch, she covers the pot with a stone lid and stands to face you.", parse);
+		Text.NL();
+		Text.Add("<i>“Sure, the spring’s usually good enough to drink from, but I’m not one to be taking chances, especially when I can’t count on anyone else sticking around to look after me if I eat anything bad. Now, was there something you needed, or did you just come to visit?”</i>", parse);
+	}, 1.0, function() { return true; });
+	scenes.AddEnc(function() {
+		Text.Add("skinning and gutting a rabbit with deadly efficiency. Whistling a merry tune to herself, the sable-morph works away with flint knife and bloody hands, preparing her latest catch for the pot. It’s only when she’s finally done that she deigns to notice you, putting aside both pelt and carcass and washing her hands to get the blood out of her fur.", parse);
+		Text.NL();
+		Text.Add("<i>“Well, if it isn’t you. It’s nice to have company on a day like this - you <b>are</b> just visiting, aren’t you?”</i>", parse);
+	}, 1.0, function() { return true; });
+	//only use if she’s actually had at least one of your kids.
+	scenes.AddEnc(function() {
+		parse["latest"] = kids > 1 ? " latest" : "";
+		Text.Add("taking care of the[latest] child you’ve fathered on her, the tiny fluffy ball dozing away quietly in her arms. She may not have been very maternal at the outset, but it looks like she’s learning quickly, and without too many hiccups, too.", parse);
+		Text.NL();
+		Text.Add("<i>“Cute little ‘un, don’t you think?”</i> she whispers, careful not to wake the sleeping infant. <i>“Probably have to send the little tyke back to the rest of the clan before too long… but until it happens, I’ll enjoy this time together.”</i>", parse);
+	}, 1.0, function() { return kids > 0; });
+	scenes.Get();
+	Text.Flush();
+	
+	Scenes.Isla.Prompt();
+}
+
+//TODO
+Scenes.Isla.Prompt = function() {
+	var parse = {
+		
+	};
+	
+	//[name]
+	var options = new Array();
+	options.push({ nameStr : "Appearance",
+		tooltip : "Take a once over of the sable-girl.",
+		func : Scenes.Isla.Appearance, enabled : true
+	});
+	/* TODO
+	options.push({ nameStr : "name",
+		tooltip : "",
+		func : Scenes.Isla.Appearance, enabled : true
+	});
+	*/
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“Well, see you around!”</i>", parse);
+		Text.Flush();
+		Gui.NextPrompt();
+	});
+}
+
+Scenes.Isla.Appearance = function() {
+	var parse = {
+		
+	};
+	
+	var figure = isla.Figure();
+	
+	Text.Clear();
+	if(figure == Isla.Figure.Girly) {
+		Text.Add("Seeing your eyes rove over her, Isla folds her arms across her flat chest and snorts. <i>“You looking at me?”</i>", parse);
+		Text.NL();
+		parse["dom"] = player.SubDom() >= 20 ? "Does she have a problem with that" : "Why, does it bother her";
+		Text.Add("Yeah, you are. [dom]?", parse);
+		Text.NL();
+		Text.Add("She doesn’t reply and turns her head away from you, clearly acting fed up with you. Though she doesn’t look like she cares - you do spot her stealing glances at you out from the corner of her eyes. Fine, you can live with that.", parse);
+	}
+	else if(figure == Isla.Figure.Womanly) {
+		Text.Add("Noticing you looking at her, Isla shakes her head and turns her gaze skyward, but there’s a small smile on her muzzle as she does so. <i>“Really? You’re gonna ogle me? I’m still not anything special, you know.”</i>", parse);
+		Text.NL();
+		Text.Add("Well, if she’s not anything special, then she certainly can’t object to you taking a look-see, can she?", parse);
+		Text.NL();
+		Text.Add("<i>“Weeeellllll…”</i>", parse);
+		Text.NL();
+		Text.Add("Silence means consent; she knows that.", parse);
+		Text.NL();
+		Text.Add("Isla makes an exasperated noise, which you take as a go-ahead. You look her up and down, making sure she feels your eyes on her soft, silky fur, then start paying attention to the details.", parse);
+	}
+	else {
+		Text.Add("Catching you eyeing her, Isla smirks and plants her hands on her now generous hips. She’s still not very good at posing, not having had many opportunities to practice, but she’s definitely getting better at it.", parse);
+		Text.NL();
+		Text.Add("<i>“Look away, you bastard. I haven’t got anything to hide.”</i>", parse);
+		Text.NL();
+		Text.Add("Now that’s an invitation if you ever heard one. Well, don’t mind if you do!", parse);
+	}
+	Text.NL();
+	Text.Add("Isla is a sable-morph - related to the more common ferret-morphs, and as you continue to look over her, you have to admit she could be mistaken for one at a distance. Save for two patches of brown about her eyes and cheeks, her form is clothed in a glossy, luxuriant coat of blue-black fur that just begs to stroked and petted - assuming she’s in the mood for such, of course. A short, rounded muzzle juts out the front of her face, capped with an absolutely adorable black button of a nose, and black, beady eyes and a pair of triangular, round-tipped ears complete her visage. The latter are constantly on the alert for sounds, swiveling this way and that - it doesn’t seem to be a conscious thing on Isla’s part, though.", parse);
+	Text.NL();
+	Text.Add("The only true clothing on her consists of a short skirt of tough fabric, designed to allow for some amount of modesty while allowing for a free range of movement - a huntress’ garb, and a crude string belt to hold it all in place. No, what actually clothes her is the body paint that’s been smeared on much of her fur in intricate patterns that resemble knotwork, equal parts vibrant hues of red and blue. This is accentuated by the string of the same color she’s tied into her fur and the plaited braid of dark black hair that runs down to the small of her back.", parse);
+	Text.NL();
+	Text.Add("She’s not that tall - perhaps five foot three, give or take an inch - but judging from the way she moves, there’s certainly a lot of energy in that short frame of hers. ", parse);
+	if(figure == Isla.Figure.Girly) {
+		Text.Add("Slender and lithe, her form moves with the sure-footed grace that comes with a mustelid’s natural flexibility, tempered by years upon years of navigating treacherous highland trails. Her natural thinness, flat ass and narrow hips - for a girl, at least - make her furry arms and legs look a little too long for her body, resulting in a somewhat gangly look to her; while her chest fur is pretty fluffy, you’re also quite sure that she’s either flat-chested, or almost so.", parse);
+		Text.NL();
+		Text.Add("The movements of Isla’s wiry muscles under her skin are clear when she leaps and jumps, and you faintly wonder if that same athleticism and flexibility could be put to better use elsewhere.", parse);
+	}
+	else if(figure == Isla.Figure.Womanly) {
+		Text.Add("Improved by the extended soak she took in the spring, Isla’s figure is now easier on the eyes than before. While her body is still wiry and athletic - simply watching her slinking, stalking movements leave little doubt as to that - the spring’s mystical power has filled out her form, rendering her much more like the traditional concept of a woman. She’s still a little abashed by the attention, but doesn’t resist as you step up and place your hands on the sides of her waist, sliding your palms down to the noticeable curves of her hips and taking pleasure in the sleek feel of her lovely fur.", parse);
+		Text.NL();
+		Text.Add("<i>“Oy! There’s no need to get all touchy-feely…”</i>", parse);
+		Text.NL();
+		Text.Add("Need is one thing, but want is another, isn’t it? She should know that by now. She does <i>want</i> plenty of things that she doesn’t <i>need</i>, right?", parse);
+		Text.NL();
+		Text.Add("<i>“Maybe…”</i>", parse);
+		Text.NL();
+		Text.Add("Rising gently from her chest, two rolling mounds of glossy fur mark the spots where her baby feeders are hidden, perky bumps that amount to large B-cups or thereabouts. They’re still not large enough to push through the veil of fur that shrouds her chest, but at least you don’t have to guess if you wanted to grab ahold of them.", parse);
+	}
+	else {
+		Text.Add("Now that Isla’s hourglass figure is truly voluptuous, she has no hang-ups about flaunting it in your face. Despite the apparent softness she’s gained as her body’s filled out, the muscles under her skin and fur are just as powerful as ever - a fact which becomes evident as she pushes her hips against your hands.", parse);
+		Text.NL();
+		Text.Add("<i>“There, doesn’t that feel good?”</i>", parse);
+		Text.NL();
+		Text.Add("Indeed, it does - you take your own sweet time exploring Isla’s delicious bubble butt and wide, fertile hips, so different from the assets she started out with. No regrets, eh?", parse);
+		Text.NL();
+		Text.Add("<i>“Aye, none,”</i> the sable-morph replies with a small smile. <i>“Seriously, I dunno why I waited so long to take the plunge… I guess I was more afraid of what might happen than what I was, you know?”</i>", parse);
+		Text.NL();
+		Text.Add("Well, that’s all in the past now. Slowly, you slide your hands upwards past Isla’s waist to her chest and the band of tough fabric that she uses to support her now-generous baby feeders. For all their firm perkiness, at a low D-cup, they still need all the support they can get in her active lifestyle. That said, maybe she <i>is</i> tying the cloth a little too tight - you can clearly see the outline of Isla’s nipples against the fabric, fat little nubs of sensitive flesh.", parse);
+	}
+	Text.NL();
+	
+	
+	var womb = isla.PregHandler().Womb();
+	var preg = womb && womb.pregnant;
+	var stage = preg ? womb.progress : 0;
+	var num = womb.litterSize;
+	
+	//Belly +pregnancy block
+	Text.Add("Her overall figure dealt with, you sweep your eyes down to her belly. ", parse);
+	if(!preg || stage < 0.2) {
+		Text.Add("Isla’s tummy is flat and trim, the result of the active lifestyle her vocation as the spring’s guardian demands of her. Not that she has abs, but there’s a certain muscularity to her midsection that’s hidden away underneath her skin, and a good amount of ticklishness too - you catch her stifling a giggle or two as your fingertips run through her fur. No extra fat on this sable, that’s for sure.", parse);
+		if(preg) {
+			Text.NL();
+			Text.Add("There’s something about the feel of her tummy, though… carefully, you probe at Isla’s lower belly some more, ignoring her giggles and twitching. Yes, it’s meant to be hard, but that little hard bump right there… you might be wrong, but it’s not likely. Isla’s going to be a mommy, and it’s you who made her one.", parse);
+		}
+	}
+	else if(stage < 0.4) {
+		Text.Add("Isla’s now sporting a small baby bump, proof of your virility and recent coupling. It wouldn’t have been that obvious on another woman, but her lean form only makes it stick out all the more; a gentle rise in her midsection that can’t be ignored, marking her beyond all doubt as an impending mother.", parse);
+		Text.NL();
+		Text.Add("Maybe it’s her proximity to the spring or just her fit body, but she doesn’t seem too adversely affected by her pregnancy - if anything, she seems to be in a slightly better mood than her usual terse self. All the better for you, then.", parse);
+	}
+	else if(stage < 0.6) {
+		Text.Add("Isla’s pregnancy is growing just nicely, her tummy rounded and protruding from her front in quite the obvious manner, her breasts ever so slightly swollen as they prepare themselves for their intended purpose. ", parse);
+		if(num <= 1)
+			Text.Add("If she’s having cravings, at least she knows better than to trouble you with them, and you have to admit that having undeniable proof of her fertility only serves to make her look more womanly and attractive. She may be pregnant, but that’s no reason not to have some fun…", parse);
+		else if(num <= 2)
+			Text.Add("Odd, though… you’re no expert on these matters, but it seems to you that her belly’s a little bigger that it ought to be. Maybe this cub of hers is just growing extra large and healthy in her, or maybe there’s a bit more fluid than usual. Nothing to worry about.", parse);
+		else //triplets
+			Text.Add("It’s obvious by now that more than one cub has taken root within the fertile confines of Isla’s womb - the swell of her pregnancy is far too big too soon to be anything but multiples, although it’s too early to tell just how many are in there by sight alone. The proof of both her fertility and your virility combined causes no end of delight in her, and she’s always sneaking in a belly rub or two when she thinks you’re not looking.", parse);
+	}
+	else if(stage < 0.8) {
+		Text.Add("It’s been getting bigger and bigger, filling steadily with new life as the moment of birthing draws closer with each day. Her lean body only makes her big belly even more pronounced - she’s drawn an intricate pattern of body-paint on it centered about her navel, ostensibly to help the cubs inside grow big and healthy. As hormones have flooded her body, so have her nipples darkened, and you find yourself wondering just how her milk tastes like…", parse);
+		Text.NL();
+		if(num <= 1)
+			Text.Add("All in all, though, you know that it’s not going to be too long before Isla’s fully ripened and ready to bear fruit. Before that happens, though, her tummy’s only going to get bigger, her cub more vigorous…", parse);
+		else if(num <= 2)
+			Text.Add("Besides, there’s little doubt now that she’s carrying more than one cub inside her - with how big she is, she’d be ready to pop soon if she were carrying but one. Instead of being grouchy or resentful, Isla seems to take a certain glee in this proof of her above-average fertility, a smug smile on her muzzle as she tenderly caresses the tender girth of her burgeoning belly.", parse);
+		else {
+			Text.Add("Isla is starting to get really heavy - her belly’s bigger than that of a full-term singleton pregnancy, and the fur about her midsection is starting to thin out due to all the area it has to cover now. It’s a good thing that she usually has plenty of energy to spare, because her tummy is only going to get even bigger before she finally pops out her cubs.", parse);
+			Text.NL();
+			Text.Add("She’s even had to loosen her makeshift bra with how milky and jiggly her swelling tits are becoming, jostling for space on her chest.", parse);
+		}
+	}
+	else { // progress > 0.8
+		Text.Add("She’s now in the final stages of her pregnancy; her tummy enormously swollen and rounded, ready to pop any moment, her belly button turned into an outie from the sheer pressure within her overstuffed womb. Her nipples have darkened into a rich brown, just waiting for the opportunity to be put to good use.", parse);
+		Text.NL();
+		Text.Add("More and more patterns have been added to the one on Isla’s big belly, deep reds and ochres of body paint - to ensure an easy birth, or so she tells you. It’s an easy birth that she’ll be needing, considering how active the life within her is - constantly squirming and shifting, causing bumps to rise on the rounded surface of her pregnancy. She certainly makes a far better mother than a guardian.", parse);
+		Text.NL();
+		if(num <= 1) {
+			Text.Add("Heavy with new life, Isla’s the very picture of a radiant mother-to-be. Smiling at you, she runs a hand across the thin fur of her stretched belly and shakes her head.", parse);
+			Text.NL();
+			Text.Add("<i>“Gotta admit, it feels like I’m lugging around a bag of rocks, but a bag of rocks isn’t going to slow me down none.”</i>", parse);
+		}
+		else if(num <= 2) {
+			Text.Add("You have to admit, she’s doing very well considering how the cubs inside her have stretched her tummy to the point it’s turned into an elongated dome. As energetic and athletic as she is, she can’t help but walk with a waddle now.", parse);
+			Text.NL();
+			Text.Add("<i>“They’re big and strong, all right. Can’t stop kicking me at night.”</i>", parse);
+			Text.NL();
+			Text.Add("They certainly take after their mother, don’t they?", parse);
+			Text.NL();
+			Text.Add("<i>“Aye, it’s true.”</i>", parse);
+		}
+		else {
+			Text.Add("With how massively swollen Isla’s tummy is by way of harboring three full-grown cubs inside her, it’s a small wonder that she hasn’t popped already. Even with the sable-morph’s abundant vitality, she’s finding herself running out of breath and having to sit down and rest often - it’s almost as if she’s giving her excess energy to help her little ones grow.", parse);
+			Text.NL();
+			Text.Add("Still, that doesn’t stop her from being happy about the whole thing, especially since she’s a figure to match. Every so often, you find her hugging her bare, massive belly, basking in the glow of maternity - and you yourself can’t help but feel proud at having concrete proof of your considerable virility in knocking her up so thoroughly.", parse);
+		}
+	}
+	Text.NL();
+	Text.Add("Finished with surveying the generalities, you shift your attention to the details. Although graced with long, flexible fingers, Isla’s hands look more like an animal’s than a human’s, her palms possessed to paw-pads of sorts, each digit capped with a small, hooked claw instead of nails. Her toes aren’t too different, too, and you can see how such would be an advantage in the rough, uneven terrain of the highlands, considering she goes about barefoot with no problems at all. Of course, that long fluffy tail of hers has a practical use in helping her keep balance, but that doesn’t stop you from wanting to pet and stroke it.", parse);
+	Text.NL();
+	Text.Add("<i>“You done? Standing still is so tiring.”</i>", parse);
+	Text.NL();
+	Text.Add("Well, actually you weren’t, but if you asked her to hold her place any longer she might just get bored and leave anyway. Reluctantly, you nod, and Isla immediately rolls back onto the balls of her feet, her body sagging slightly with released effort.", parse);
+	Text.NL();
+	Text.Add("<i>“Phew! So now that that’s over with, what you want to get done today?”</i>", parse);
+	Text.Flush();
+	
+	Scenes.Isla.Prompt();
 }
