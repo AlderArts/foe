@@ -517,3 +517,150 @@ Items.Gestarium.BellyGrowth = function(target, wombs, parse) {
 	}
 }
 
+
+Items.Anusol = new TFItem("anal0", "Anusol");
+Items.Anusol.price = 25;
+Items.Anusol.lDesc = function() { return "a bottle of Anusol"; }
+Items.Anusol.Short = function() { return "A bottle of Anusol"; }
+Items.Anusol.Long  = function() { return "A bottle labeled Anusol, filled with an oily-looking dark green fluid. It increases anal sensitivity."; }
+Items.Anusol.recipe = [{it: Items.SnakeOil}, {it: Items.SpringWater}, {it: Items.FruitSeed}];
+// Effects
+Items.Anusol.PushEffect(function(target) {
+	var parse = {
+		botArmor : target.LowerArmorDesc(),
+		Poss : target.Possessive()
+	};
+	parse = target.ParserTags(parse);
+	
+	var cum = target.OrgasmCum();
+	
+	if(target == player) {
+		Text.Add("You raise the bottle to your lips and tip the contents down your throat. The oily green elixir disappears smoothly enough, leaving behind a somewhat greasy aftertaste and a lingering taste of sweetness.", parse);
+		Text.NL();
+		Text.Add("A quivering sensation erupts from your [anus], and you moan despite yourself, feeling your pucker wrinkle and flex as if it were being stretched by some ethereal phallus.", parse);
+		
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			Text.NL();
+			Text.Add("You can feel yourself stretching wider than ever before, and with an ease you previously lacked. You just know that your ass can take bigger insertions now than it could before.", parse);
+			
+			target.Butt().capacity.IncreaseStat(10, 1);
+		}, 1.0, function() { return target.Butt().capacity.Get() < 10; });
+		scenes.AddEnc(function() {
+			Text.NL();
+			Text.Add("Around it, you can feel your butt beginning to grow, swelling out slightly. You now have a [butt]!", parse);
+			
+			target.Butt().buttSize.IncreaseStat(10, 1);
+		}, 1.0, function() { return target.Butt().Size() < 10; });
+		scenes.Get();
+		
+		Text.NL();
+		Text.Add("The sensation just keeps growing stronger and stronger, pleasure washing over your whole body as your [anus] is stimulated without mercy.", parse);
+		if(target.FirstCock())
+			Text.Add(" Your [cocks] grows painfully erect, stiff and throbbing within your [botArmor] as your prostate is twitched and rolled by the magic washing through your body.", parse);
+		if(target.FirstVag())
+			Text.Add(" Your [vag] starts to water in sympathy, drooling fluids down your [legs] as the pleasure sets it flowing.", parse);
+		Text.NL();
+		Text.Add("Eventually, the sensations grow beyond your ability to resist. Your whole body quakes and you cry out as climax washes through you, barely able to keep from falling over at the sharpness of your pleasure. When it flows away, you are left panting for breath, your [botArmor] stained with your juices.", parse);
+	}
+	else {
+		parse["name"] = target.name;
+		parse = target.ParserPronouns(parse);
+		
+		Text.Add("[name] drinks down the oily elixir with a slight grimace, flicking [hisher] tongue at the aftertaste. [HeShe] pauses for a second, eyes narrowing in surprise, only to then widen in shock. [HeShe] lets out a startled gasp, nearly pitching [himher]self into your arms, and then [heshe] moans, arching [hisher] back.", parse);
+		Text.NL();
+		parse["c"] = target.FirstCock() ? Text.Parse(", [hisher] own [cocks] growing visibly erect from the stimulation", parse) : "";
+		Text.Add("[HisHer] [butt] starts to thrust and shake, as if grinding back against some ethereal cock[c]. Faster and faster [heshe] goes, picking up the pace, whimpering in abstract pleasure.", parse);
+		Text.NL();
+		Text.Add("After a few moments of this show, [heshe] cries out, arching [hisher] back as [heshe] visibly climaxes, staining [hisher] [botArmor] and the ground beneath with sexual fluids. Eventually, [heshe] runs dry and shudders to a stop, panting for breath.", parse);
+		Text.NL();
+		
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			Text.Add("[Poss] butt swells out, gaining a bit in size.", parse);
+			target.Butt().buttSize.IncreaseStat(10, 1);
+		}, 1.0, function() { return target.Butt().Size() < 10; });
+		scenes.AddEnc(function() {
+			Text.Add("Curious to see if it worked, you approach [name] and pull [hisher] [botArmor] aside, reaching in with your hand to examine [hisher] [anus].", parse);
+			Text.NL();
+			Text.Add("Your probing touch reveals that [hisher] ass is much stretchier than it was before. It looks like the potion has increased [name]’s anal capacity.", parse);
+			target.Butt().capacity.IncreaseStat(10, 1);
+		}, 1.0, function() { return target.Butt().capacity.Get() < 10; });
+		
+		scenes.Get();
+	}
+});
+
+
+
+Items.AnusolPlus = new TFItem("anal1", "Anusol+");
+Items.AnusolPlus.price = 25;
+Items.AnusolPlus.lDesc = function() { return "a bottle of Anusol+"; }
+Items.AnusolPlus.Short = function() { return "A bottle of Anusol+"; }
+Items.AnusolPlus.Long  = function() { return "A bottle labled Anusol+, filled with a thick and slimy-looking blue fluid. It’s supposed to make anal sex out of this world for the drinker."; }
+Items.AnusolPlus.recipe = [{it: Items.SnakeOil}, {it: Items.SpringWater}, {it: Items.Fertilium}];
+// Effects
+Items.AnusolPlus.PushEffect(function(target) {
+	var parse = {
+		botArmor : target.LowerArmorDesc(),
+		Poss : target.Possessive()
+	};
+	parse = target.ParserTags(parse);
+	/* TODO
+#if (!Mpreg enabled)
+Increase Anal capacity (100%)
+Increase Anal wetness (100%)
+Mpreg enabled (100%)
+Trigger heat (10%)
+#else
+Increase Anal capacity (65%)
+Increase Anal wetness (65%)
+Trigger heat (10%)
+#converge
+	 */
+	var mpreg = target.pregHandler.MPregEnabled();
+	
+	if(target == player) {
+		Text.Add("The potion is just as thick and slimy as it looks; it flows down your throat like drinking blue custard, practically thick enough to chew. But you persist and eventually the last drop disappears down your gullet. With a sigh of relief, you wipe your lips, feeling a tingling in your belly.", parse);
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			Text.NL();
+			Text.Add("Prickling erupts in your [anus], and you moan unthinkingly at the sensation. Your anus flexes and clenches uncontrollably, as if stretching to wrap itself around some phantasmal phallus. You can feel yourself stretching wider, and wider, a sensation that isn’t painful as you’d expect. When the prickling fades away, the stretched feeling remains, and you just know you’re more elastic now.", parse);
+			target.Butt().capacity.IncreaseStat(15, 3);
+		}, 1.0, function() { return target.Butt().capacity.Get() < 15; });
+		scenes.AddEnc(function() {
+			Text.NL();
+			Text.Add("Your butt swells out, gaining a bit in size.", parse);
+			target.Butt().buttSize.IncreaseStat(15, 3);
+		}, 1.0, function() { return target.Butt().buttSize.Get() < 15; });
+		scenes.AddEnc(function() {
+			Text.NL();
+			Text.Add("A strange warmth suddenly blossoms in the pit of your stomach. Instinctively, you wrap your hands around your belly, feeling the warmth growing hotter with each breath. A strange bloating sensation fills you, but it’s not entirely unpleasant... in fact, when it fades away as suddenly as it appeared, you find yourself idly wishing for its return.", parse);
+			target.pregHandler.mpreg = true;
+		}, 1.0, function() { return !mpreg; });
+		scenes.Get();
+	}
+	else {
+		parse["name"] = target.name;
+		parse = target.ParserPronouns(parse);
+		
+		Text.Add("[name] takes the vial and chugs it down, visibly struggling to swallow the near-gelatinous potion. When [heshe] is done, [heshe] wipes [hisher] mouth with a grimace.", parse);
+		var scenes = new EncounterTable();
+		scenes.AddEnc(function() {
+			Text.NL();
+			Text.Add("[name] groans suddenly, hands flying back to clap over [hisher] [butt], shaking [hisher] hips and thrusting backwards as if responding to the thrusts of some ethereal lover.", parse);
+			target.Butt().capacity.IncreaseStat(15, 3);
+		}, 1.0, function() { return target.Butt().capacity.Get() < 15; });
+		scenes.AddEnc(function() {
+			Text.NL();
+			Text.Add("[Poss] butt swells out, gaining a bit in size.", parse);
+			target.Butt().buttSize.IncreaseStat(15, 3);
+		}, 1.0, function() { return target.Butt().buttSize.Get() < 15; });
+		scenes.AddEnc(function() {
+			Text.NL();
+			Text.Add("[name] groans, deep and longing, [hisher] arms wrapping themselves protectively around [hisher] stomach, hands brushing protectively over [hisher] belly.", parse);
+			target.pregHandler.mpreg = true;
+		}, 1.0, function() { return !mpreg; });
+		scenes.Get();
+	}
+});

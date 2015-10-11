@@ -76,6 +76,7 @@ function PregnancyHandler(entity, storage) {
 	
 	this.gestationRate = new Stat(1);
 	this.fertility     = new Stat(0.3);
+	this.mpreg         = false;
 	
 	if(storage) this.FromStorage(storage);
 }
@@ -90,6 +91,8 @@ PregnancyHandler.prototype.ToStorage = function() {
 		gr : this.gestationRate.base.toFixed(2),
 		f  : this.fertility.base.toFixed(2)
 	};
+	if(this.mpreg)
+		storage.mpreg = "on";
 	
 	var womb = [];
 	
@@ -119,6 +122,7 @@ PregnancyHandler.prototype.FromStorage = function(storage) {
 	storage = storage || {};
 	if(storage.gr) this.gestationRate.base = parseFloat(storage.gr);
 	if(storage.f)  this.fertility.base     = parseFloat(storage.f);
+	if(storage.mpreg) this.mpreg = true;
 	
 	if(storage.womb) {
 		var vags = this.entity.AllVags();
@@ -210,7 +214,7 @@ PregnancyHandler.prototype.IsPregnant = function(opts) {
 }
 
 PregnancyHandler.prototype.MPregEnabled = function() {
-	return false; //TODO
+	return this.mpreg;
 }
 
 
