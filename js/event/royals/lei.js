@@ -1929,7 +1929,7 @@ Scenes.Lei.GuardStalkingConverge = function(parse, nv) {
 		Text.Add("[nv] <i>“One who has nightmares does not stagnate. He either struggles to overcome his fears and grows stronger, or lets them break him.”</i>", parse);
 		Text.Flush();
 		
-		//[Approve][Demur][Chastise]
+		//[Approve][Indifferent][Chastise]
 		var options = new Array();
 		options.push({ nameStr : "Approve",
 			tooltip : "Lei provided a free, useful lesson to the guard. Certainly praiseworthy.",
@@ -1940,7 +1940,7 @@ Scenes.Lei.GuardStalkingConverge = function(parse, nv) {
 				Scenes.Lei.GuardStalkingApprove(parse, nv);
 			}, enabled : true
 		});
-		options.push({ nameStr : "Demur",
+		options.push({ nameStr : "Indifferent",
 			tooltip : "What do you care what Lei does in his free time? It doesn’t concern you.",
 			func : function() {
 				Text.Clear();
