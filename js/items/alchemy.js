@@ -130,7 +130,8 @@ Items.Bovia.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.Cow, color
 Items.Bovia.PushEffect(TF.ItemEffects.SetHorn, {odds: 0.4, race: Race.Cow, color: Color.black, str: "a pair of strong bovine horns!", count: 2});
 Items.Bovia.PushEffect(function(target) {
 	var parse = { Poss: target.Possessive() };
-	if(target.FirstVag() || (target.BiggestBreasts() && target.BiggestBreasts().size.Get() > 5)) {
+	var breasts = target.BiggestBreasts();
+	if(target.FirstVag() || (breasts && breasts.size.Get() > 5)) {
 		if(Math.random() < 0.5) {
 			var diff = target.lactHandler.lactationRate.IdealStat(10, 1);
 			if(diff) {

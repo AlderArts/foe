@@ -50,6 +50,12 @@ LactationHandler.prototype.Lactation = function() {
 	else
 		return this.lactating;
 }
+LactationHandler.prototype.Rate = function() {
+	return this.lactationRate.Get();
+}
+LactationHandler.prototype.Production = function() {
+	return this.milkProduction.Get();
+}
 LactationHandler.prototype.Milk = function() {
 	return this.milk.Get();
 }
@@ -96,6 +102,13 @@ LactationHandler.prototype.Update = function(hours) {
 	this.entity.LactationProgress(oldMilk, newMilk, this.lactationRate.Get());
 }
 
+LactationHandler.prototype.MilkDrain = function(drain) {
+	return this.milk.DecreaseStat(0, drain);
+}
+LactationHandler.prototype.MilkDrainFraction = function(fraction) {
+	fraction = fraction || 1;
+	return this.milk.DecreaseStat(0, this.MilkCap() * fraction);
+}
 LactationHandler.prototype.FillMilk = function(fraction) {
 	fraction = fraction || 1;
 	this.milk.IncreaseStat(this.MilkCap(), this.MilkCap() * fraction);

@@ -464,7 +464,8 @@ Items.Gestarium.BellyGrowth = function(target, wombs, parse) {
 		var breasts = target.FirstBreastRow();
 		var hipSize = target.body.HipSize();
 		var buttSize = target.Butt().Size();
-		var lact = target.lactHandler.lactationRate.Get();
+		var lact = target.LactHandler().Rate();
+		var production = target.LactHandler().Production();
 		
 		var scenes = new EncounterTable();
 		scenes.AddEnc(function() {
@@ -482,16 +483,20 @@ Items.Gestarium.BellyGrowth = function(target, wombs, parse) {
 				parse["cups"] = breasts.ShortCup();
 				Text.Add("When the sudden breast expansion fades, [name] [isAre] sporting a pair of [cups], [hisher] mammaries now more capable of nourishing the brood growing within [himher].", parse);
 			}
-			
-			if(lact < 3 && Math.random() < 0.5) { //#if Lactation rate increase occurs
+			if(production < 3 && Math.random() < 0.5) {
+				Text.NL();
+				Text.Add("[Poss] can feel [hisher] breasts swelling slightly, as [heshe] become[notS] able to produce milk at a quicker rate.", parse);
+				target.lactHandler.milkProduction.IncreaseStat(3, 1);
+			}
+			if(lact < 5 && Math.random() < 0.5) { //#if Lactation rate increase occurs
 				Text.NL();
 				if(growth)
 					Text.Add("The changes aren’t done, though. ");
 				Text.Add("Gentle heat gathers just behind [poss] nipples, sending tendrils of warmth into the breasts beneath. Boobflesh trembles and nipples stiffen as milk ducts mature and multiply within [poss] milk-makers, increasing the rate at which [heshe] can produce baby food.", parse);
 				
-				target.lactHandler.lactationRate.IncreaseStat(3, 0.5);
+				target.lactHandler.lactationRate.IncreaseStat(5, 1);
 			}
-		}, 1.0, function() { return (lact < 3) || (breasts.Size() < 12.5); });
+		}, 1.0, function() { return (lact < 5) || (production < 3) || (breasts.Size() < 12.5); });
 		scenes.AddEnc(function() {
 			Text.NL();
 			Text.Add("As [poss] baby bump finishes its growth, though, another change is taking place. With a faint creaking and shifting, [name] find[notS] [hisher] stance widening as [hisher] hips widen and butt plumps up, the comforting warmth moving downwards from [hisher] lower belly and working its magic there.", parse);

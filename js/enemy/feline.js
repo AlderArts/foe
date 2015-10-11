@@ -1411,8 +1411,6 @@ Scenes.Felines.LossRegular = function() {
 			Text.Add("The felines bicker among themselves, though their argument seems to be less about what they are going to do with you than about who gets to do it first. All you can do is wait for them to decide.", parse);
 		else
 			Text.Add("Victorious, the feline settles down licking [hisher] fur thoughtfully, [hisher] fierce, unblinking eyes fixed on your prone form. After a tentative effort to crawl away is easily rebuked by your captor hopping over to place [himher]self in your path, you settle down and wait for what the feline will do to you. You don’t have to wait for long.", parse);
-		Text.Flush();
-		
 		
 		var scenes = new EncounterTable();
 		if(male) {
@@ -1437,10 +1435,14 @@ Scenes.Felines.LossRegular = function() {
 				return Scenes.Felines.LossPitchVaginal(herm, group, enc, cocksInVag);
 			}, 1.0, function() { return cocksInVag.length > 0; });
 		}
+		scenes.AddEnc(function() {
+			return Scenes.Felines.LossDrainMilk(mainCat, group, enc);
+		}, 1.0, function() { return player.Lactation(); });
 		
 		var ret = scenes.Get();
 		
 		if(!ret) {
+			Text.Flush();
 			Gui.NextPrompt();
 		}
 	});
@@ -1758,7 +1760,7 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 	
 	var dom    = player.SubDom() > 0;
 	
-	Text.Clear();
+	Text.NL();
 	Text.Add("<i>“Let’s see what you’re hiding behind this [armorDesc].”</i> [Name] doesn’t wait for a reply before stripping you down to your birthday suit, tossing the pieces of your [armorDesc] about. Once done, she takes a step back to examine what you have to offer.", parse);
 	Text.NL();
 	parse["pushingRolling"] = player.LowerBodyType() == LowerBodyType.Single ? "rolling" : "pushing";
@@ -1995,6 +1997,103 @@ Scenes.Felines.LossPitchVaginal = function(cat, group, enc, cocksInVag) {
 	Gui.SetButtonsFromList(options);
 	
 	return true;
+}
+
+Scenes.Felines.LossDrainMilk = function(mainCat, group, enc) {
+	var parse = {
+		name : mainCat.nameDesc()
+	};
+	parse = player.ParserTags(parse);
+	parse = mainCat.ParserPronouns(parse);
+	parse = Text.ParserPlural(parse, group);
+	
+	var rate = player.LactHandler().Rate();
+	var milk = player.Milk();
+	var size = player.FirstBreastRow().Size();
+	
+	Text.NL();
+	parse["l"] = group ? "The leader" : mainCat.HeShe();
+	Text.Add("Satisfied that the fight’s been knocked out of you, the big cat[s] lunge[notS] at you, knocking you onto your back. [l] drops to all fours in one graceful movement, mewling softly. [HeShe] circles you a few times, sniffing the air as if trying to scent something. Exactly what is soon revealed when the feline starts nosing eagerly at your [armor]", parse);
+	if(rate >= 1)
+		Text.Add(" and the damp spots on it", parse);
+	Text.Add(", tugging at the material until it finally gives way.", parse);
+	if(group)
+		Text.Add(" The other cats spread out and form a circle about you, preventing your escape - if you even had the strength to make an attempt in the first place, that is.", parse);
+	Text.NL();
+	if(size < 10)
+		Text.Add("With your [breasts] exposed to the open air, the feline noses at them, clearly taking delight in feeling how full and firm they are with milky goodness.", parse);
+	else
+		Text.Add("Freed of their constraints, your [breasts] flop out, made even heavier and more turgid by their milky load. Leaning in, the feline sniffs at them a moment, then lets out a purr of satisfaction and nuzzles [hisher] cheek against the large, pillowy mound.", parse);
+	Text.NL();
+	Text.Add("<i>“That smell!”</i> [name] purrs, licking [hisher] lips eagerly. <i>“You’re backed up… let me help you with that...”</i> ", parse);
+	if(rate >= 3) {
+		Text.Add("[HisHer] delight is only made all the more clear as [heshe] stares at the milk flowing freely from your [nips], all of that delicious cream going to waste, just flowing away into nothingness. Wasting no time, [heshe] pads over and latches onto a nipple eagerly, sucking for all [heshe]’s worth, and you cry out as your nerves sing in pleasure and being simulated thus.", parse);
+	}
+	else if(rate >= 1) {
+		Text.Add("Slowly, the feline moves [hisher] mouth to your [breasts], eyes greedily drinking in the sight of your slowly leaking [nips]. [HeShe] meows softly, once, twice, then begins lapping at the leakage like a good little kitten, [hisher] little pink tongue darting in and out of [hisher] mouth in a blur. The little jabs of pressure against your breastflesh only serve to make you gasp in pleasure and stimulates even more milk to ooze from your nips, and before long the big cat’s suckling from you.", parse);
+	}
+	else {
+		Text.Add("Happily, the feline meows as [heshe] takes in your full milk-jugs, licking [hisher] lips in anticipation of a good meal. Easing a paw onto the mounds of your [breasts], [heshe] presses down gently but firmly, and is rewarded with a small squirt of white cream jetting forth.", parse);
+		Text.NL();
+		Text.Add("<i>“Looks tasty,”</i> the big cat muses to [himher]self, taking [hisher] time to drag [hisher] tongue across your mounds before finishing with a smack of [hisher] lips. <i>“I wonder just how much milk you’re worth.”</i>", parse);
+		Text.NL();
+		Text.Add("Before you can reply, the feline is upon you, head bowed as [heshe] sucks furiously at your [nips] in turn. You throw your head back with a gasp as warm wetness wells up behind your nipples, and then you’re being drained in earnest.", parse);
+	}
+	Text.NL();
+	Text.Add("You gasp as the warmth of the big cat’s mouth engulfs your [nip], then again as [heshe] begins teasing the rapidly stiffening nub of flesh with [hisher] tongue. The moist, sandpapery feel of meat against meat has you groaning wantonly, body going limp as you succumb to the pleasure of being suckled by the eager feline. Without knowing it, you’re pushing your [breasts] into the big cat’s face, eager to have more of that wondrous sensation against your skin; at the same time, you reach up with a tender arm, holding the feline’s head in place while [heshe] continues to suckle.", parse);
+	Text.NL();
+	var gen = "";
+	if(player.FirstCock()) gen += "[cocks] stiffen";
+	if(player.FirstCock() && player.FirstVag()) gen += " and ";
+	if(player.FirstVag()) gen += "cunt lips throb with moist heat";
+	parse["gen"] = Text.Parse(gen, parse);
+	Text.Add("On [hisher] part, the big cat increases the forcefulness of [hisher] pressure at your nipple, eagerly goading out its delicious contents. Tingles of electricity run down your spine and into your groin as you feel your milk let down from all the stimulation your [breasts] are getting, and you can’t help but feel your [gen] as the feline continues [hisher] tender ministrations. Not to be outdone, you can feel a distinctive heat growing in your ribs - seems like a flush of arousal is making itself well-known…", parse);
+	Text.NL();
+	Text.Add("The feline’s cheeks hollow and fill, hollow and fill as [heshe] continues sampling your milk bar, alternating between each breast in turn so your [nips] don’t get sore. ", parse);
+	if(size < 10) {
+		Text.Add("Despite your [breasts] steadily losing their turgid, firm texture as their load is drained from them, the feline simply lifts and supports each of them in turn by pressing both mounds of boobflesh between [hisher] paws, rubbing small circles on your skin in a bid to coax out every last drop of milk that you’re worth.", parse);
+	}
+	else {
+		Text.Add("There’s simply so much of your bountiful mounds that the poor kitty just can’t get enough of them. Mewling and purring, [heshe] brushes [hisher] whiskers back and forth against firm boobflesh, the soft tickling leaving tingles lingering on your skin. As more and more milk is drained, the firmness of your [breasts] starts to sag a little, so [heshe] steadies each ample rise with [hisher] paws as [heshe] works at coaxing that last bit of delicious cream out of you.", parse);
+	}
+	Text.NL();
+	parse["g"] = mainCat.FirstVag() ? "huskily" : "deeply";
+	Text.Add("At length, the feline breaks free with an audible pop and purrs [g], [hisher] eyes roving over your now almost-empty milk bar. <i>“You’re a delicious one,”</i> [heshe] says with a soft sigh of contentment. <i>“I wish I could bring you back and have you for breakfast every day, but I’m afraid the others probably wouldn’t stand for it. Guess I’ll just have to catch you out here and keep you all to myself.”</i>", parse);
+	Text.NL();
+	Text.Add("Why, is [heshe] not the kind to share?", parse);
+	Text.NL();
+	Text.Add("<i>“No,”</i> the feline says with a huff. <i>“I want to keep you <b>all</b> to myself.”</i>", parse);
+	Text.NL();
+	Text.Add("Well, then. [HeShe]’d better finish up every last drop you’ve still left to give if [heshe] wants to keep you all to [himher]self; don’t want all that milk going to waste, does [heshe]? That’d make [himher] a very wasteful cat indeed, a very wasteful and naughty cat.", parse);
+	Text.NL();
+	Text.Add("<i>“As you wish,”</i> the feline purrs, and dips [hisher] head a final time, nuzzling aggressively at your breasts, pressing down hard and feeling heated boobflesh squash against [hisher] cheeks. A look of pure bliss spreads across [hisher] face and [hisher] eyelids begin to droop dangerously, but [heshe] does manage to drain you of the last of your milk. After that, [heshe] pushes [himher]self off you, satiated.", parse);
+	Text.NL();
+	if(milk > 20) {
+		Text.Add("It takes quite a bit of effort for the big cat to do so, and you realize why when you get a good glimpse of [hisher] underbelly. It’s massively swollen to the point that you can’t quite believe <i>all</i> of that is your milk - just how did all that manage to fit inside of you? Is your milk secretly condensed while in your [breasts], and then rapidly expanded when it leaks out your [nips]? The world may never know.", parse);
+		Text.NL();
+		Text.Add("Wobbling and trembling all over, the feline curls up beside you, [hisher] stomach massively swollen with nourishment. [HisHer] steps are unsteady, [hisher] gaze dreamy; as you watch, [heshe] lets out a massive burp and groans in satisfaction.", parse);
+		Text.NL();
+		Text.Add("<i>“I’ve never had so much of something that was so good,”</i> [heshe] purrs woozily. <i>“I’d love to see you again… once I’ve found somewhere to sleep this off.”</i>", parse);
+	}
+	else if(milk > 10) {
+		Text.Add("Now that you can get a good look at the feline’s underbelly, you note that [heshe]’s grown a nice protruding potbelly, soft and wobbly as your milk sloshes about inside [hisher] stomach. Guess you were more productive than you thought… and perhaps more delicious, too.", parse);
+		Text.NL();
+		Text.Add("<i>“You’re very definitely a tasty treat,”</i> the feline declares with a purr and a big smile on [hisher] face, looking distinctly like the cat which got the… well, technically [heshe] <i>is</i> the cat which got the cream. As you watch, [heshe] lets out a big burp and sighs dreamily. <i>“I hope to see you soon.”</i>", parse);
+	}
+	else {
+		Text.Add("At length, the feline finishes up with a burp, then moves to wipe off [hisher] whiskers on you. Purring [g], the big cat rubs [hisher] flank against you affectionately, then lets [hisher] tail linger on you.", parse);
+		Text.NL();
+		Text.Add("<i>“Satisfying, very much so. I hope to see you again.”</i>", parse);
+	}
+	Text.NL();
+	parse["group"] = group ? Text.Parse(" with the rest of [hisher] pride", parse) : "";
+	Text.Add("With that, the feline stalks off[group], leaving you to lie back and wonder if it wouldn’t be so much easier to make a living by selling your own delicious milk. At length, you recover enough to at least sit up and redress yourself, wiping the worst of the milk stains from your [skin] and [armor], then heave yourself back on your feet.", parse);
+	Text.Flush();
+	
+	player.MilkDrain(15);
+	player.AddLustFraction(0.5);
+	
+	Gui.NextPrompt();
 }
 
 /*
