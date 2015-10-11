@@ -54,6 +54,8 @@ InitCache = function() {
 	adrian  = new Adrian(gameCache.adrian);
 	layla   = new Layla(gameCache.layla);
 	
+	isla    = new Isla(gameCache.isla);
+	
 	outlaws  = new Outlaws(gameCache.outlaws);
 	aquilius = new Aquilius(gameCache.aquilius);
 	maria    = new Maria(gameCache.maria);
@@ -121,6 +123,8 @@ InitCache = function() {
 	world.EntityStorage.push(danie);
 	world.EntityStorage.push(adrian);
 	world.EntityStorage.push(layla);
+	
+	world.EntityStorage.push(isla);
 	
 	world.EntityStorage.push(aquilius);
 	world.EntityStorage.push(maria);
@@ -451,6 +455,8 @@ GameToCache = function() {
 	gameCache.adrian   = adrian.ToStorage();
 	gameCache.danie    = danie.ToStorage();
 	gameCache.layla    = layla.ToStorage();
+	
+	gameCache.isla     = isla.ToStorage();
 	
 	gameCache.fera     = fera.ToStorage();
 	gameCache.asche    = asche.ToStorage();

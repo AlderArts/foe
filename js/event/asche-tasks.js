@@ -1049,6 +1049,8 @@ Scenes.Asche.Tasks.Spring.Highlands = function() {
 		feet : player.FeetDesc()
 	};
 	
+	party.location = world.loc.Highlands.Spring;
+	
 	Text.Clear();
 	parse["season"] = world.time.season == Season.Summer ? ", even for summer" : "";
 	Text.Add("Following Asche’s directions, you leave the beaten trail and head out into the rough, rocky terrain of Eden’s highlands. The air is cool[season], the ground uneven with stony outcroppings thrusting through the mountain meadows, and small wildflowers poke through the grass, reaching for the sky. Barely half an hour into your hike, you’re already starting to feel the toll the off-trail journey is taking on you, but you forge on anyway - the open nature of your surroundings has you confident that you’ll be able to see any danger coming from far away.", parse);
@@ -1135,7 +1137,10 @@ Scenes.Asche.Tasks.Spring.Highlands = function() {
 		
 		asche.flags["Tasks"] |= Asche.Tasks.Spring_Visited;
 		
-		Gui.NextPrompt();
+		Gui.NextPrompt(function() {
+			party.location = world.loc.Highlands.Hills;
+			PrintDefaultOptions();
+		});
 	});
 	
 	Gui.SetButtonsFromList(options, false, null);
