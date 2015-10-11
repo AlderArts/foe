@@ -1749,12 +1749,12 @@ Scenes.Lei.GuardStalking = function() {
 	Text.Clear();
 	Text.Add("The road shambles forward before you, ", parse);
 	if(nv)
-		Text.Add("dotted with potholes. Decrepit houses line both sides, their state speaking more of wilful neglect than of poverty. The moon is hidden by clouds and there is but little illumination from the rare intact lantern, but your [race] eyes let you make out your surroundings well enough.", parse);
+		Text.Add("dotted with potholes. Decrepit houses line both sides, their state speaking more of willful neglect than of poverty. The moon is hidden by clouds and there is but little illumination from the rare intact lantern, but your [race] eyes let you make out your surroundings well enough.", parse);
 	else
-		Text.Add("the near complete darkness shrouding the ramshackle houses around you from sight. The face of a building you do make out in the dim glow of a rare intact lantern speaks of wilful neglect as much as poverty.", parse);
+		Text.Add("the near complete darkness shrouding the ramshackle houses around you from sight. The face of a building you do make out in the dim glow of a rare intact lantern speaks of willful neglect as much as poverty.", parse);
 	Text.Add(" From somewhere behind you, you hear the squelch of a heavy boot becoming markedly less clean. A quiet curse follows, carrying well in the still air, and you turn to have a look at the man. In this area, and especially at night, it’s best to watch anyone within bowshot distance of you.", parse);
 	Text.NL();
-	parse["nv"] = nv ? ", his city watch armor glinting in the lamplight" : " - at least as far as you can make out from the glint of lamplight on armor";
+	parse["nv"] = nv ? ", his City Watch armor glinting in the lamplight" : " - at least as far as you can make out from the glint of lamplight on armor";
 	Text.Add("To your surprise, it seems to be a solitary guard[nv]. You didn’t think even larger patrols came here at this hour, but the man’s posture shows no sign of concern - aside from examining his boots with evident irritation.", parse);
 	Text.NL();
 	Text.Add("<i>“Oy, slag!”</i> a slightly slurred voice calls out from further down the street, behind the guard. <i>“Yeh, I’m talkin’ to ya, brassmonkey.”</i>", parse);
@@ -1803,7 +1803,7 @@ Scenes.Lei.GuardStalking = function() {
 				Scenes.Lei.GuardStalkingEntry(parse, nv);
 			}
 			else {
-				Text.Add("The cloaked man presses his blade against the guard’s throat while he examines him. Apparently satisfied that his former adversary is unconscious, he withdraws the sword, and in a moment it vanishes back beneath his cloak.", parse);
+				Text.Add("The cloaked man presses his blade against the guard’s throat while he examines him. Apparently satisfied that his former adversary is unconscious, he withdraws the sword, and in a moment, it vanishes back beneath his cloak.", parse);
 				Text.NL();
 				Text.Add("He bends over and picks up his opponent’s longsword, before slowly walking toward the entrance of the nearest alleyway. Just as he’s about to pass into deeper shadow, the man half-turns, momentarily catching your eyes from beneath the hood of his cloak, and beckons for you to follow him.", parse);
 				Text.NL();
@@ -1944,8 +1944,8 @@ Scenes.Lei.GuardStalkingConverge = function(parse, nv) {
 			tooltip : "What do you care what Lei does in his free time? It doesn’t concern you.",
 			func : function() {
 				Text.Clear();
-				parse["nv"] = nv ? ". If" : "before remembering that he probably can’t see the movement. Or, given his handling of the sword earlier, perhaps he can… In any case, you tell him that if";
-				Text.Add("You shrug [nv] that’s how he wants to pass his time, that’s his decision. You’re a little curious, however - why does he bother with this?", parse);
+				parse["nv"] = nv ? ". If" : " before remembering that he probably can’t see the movement. Or, given his handling of the sword earlier, perhaps he can… In any case, you tell him that if";
+				Text.Add("You shrug[nv] that’s how he wants to pass his time, that’s his decision. You’re a little curious, however - why does he bother with this?", parse);
 				Text.NL();
 				Scenes.Lei.GuardStalkingApprove(parse, nv);
 			}, enabled : true
@@ -2010,7 +2010,7 @@ Scenes.Lei.GuardStalkingConverge = function(parse, nv) {
 						Text.Add("That does sound more appealing than fighting in this dark and smelly alley. You can wait a little while to beat that smugness off his face[nv].", parse);
 						Text.NL();
 						parse["nv"] = nv ? " " : "”</i> Yes, it’s definitely there. <i>“";
-						Text.Add("<i>“As you say.[nv]But for now it would be best to part ways here.", parse);
+						Text.Add("<i>“As you say.[nv]But for now, it would be best to part ways here.", parse);
 						Scenes.Lei.GuardStalkingOutro(parse, nv);
 					}, enabled : true
 				});
@@ -2122,7 +2122,7 @@ Scenes.Lei.GuardStalkingOutro = function(parse, nv) {
 		Text.Add("You shrug. Convincing him to use [name]’s definition of “better” would probably be a greater challenge than besting him.", parse);
 		Text.NL();
 	}
-	Text.Add("After a few minutes walking, you hear raised angry voices in the distance, signalling the arrival of the patrol.", parse);
+	Text.Add("After a few minutes walking, you hear raised angry voices in the distance, signaling the arrival of the patrol.", parse);
 	Text.Flush();
 	
 	world.TimeStep({hour: 1});
