@@ -74,7 +74,7 @@ Fera.prototype.ToStorage = function() {
 	storage.fonTim  = this.fondleTimer.ToStorage();
 	storage.timeout = this.timeout.ToStorage();
 	
-	storage.flags   = this.flags;
+	this.SaveFlags(storage);
 	
 	return storage;
 }
