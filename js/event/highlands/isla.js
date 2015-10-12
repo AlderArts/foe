@@ -16,7 +16,11 @@ function Isla(storage) {
 	this.body.SetRace(Race.Ferret);
 	TF.SetAppendage(this.Back(), AppendageType.tail, Race.Ferret, Color.brown);
 	
+	this.FirstVag().virgin = false;
+	this.Butt().virgin = false;
+	
 	this.flags["Met"] = Isla.Met.NotMet;
+	this.flags["Talk"] = 0;
 	this.flags["Figure"] = Isla.Figure.Girly;
 
 	if(storage) this.FromStorage(storage);
@@ -33,6 +37,11 @@ Isla.Figure = {
 	Girly      : 0,
 	Womanly    : 1,
 	Voluptuous : 2
+};
+
+Isla.Talk = { //Bitmask
+	Spring : 1,
+	Sex : 2 //First time fucked
 };
 
 /* TODO
@@ -56,7 +65,8 @@ Isla.prototype.Figure = function() {
 }
 
 Isla.prototype.FromStorage = function(storage) {
-	//this.LoadPersonalityStats(storage); TODO
+	this.LoadPregnancy(storage);
+	this.LoadPersonalityStats(storage);
 	
 	// Load flags
 	this.LoadFlags(storage);
@@ -66,9 +76,9 @@ Isla.prototype.ToStorage = function() {
 	var storage = {
 	};
 	
-	//this.SavePersonalityStats(storage); TODO
-	
-	storage.flags   = this.flags;
+	this.SavePregnancy(storage);
+	this.SavePersonalityStats(storage);
+	this.SaveFlags(storage);
 	
 	return storage;
 }
@@ -294,6 +304,16 @@ Scenes.Isla.Prompt = function() {
 		tooltip : "Take a once over of the sable-girl.",
 		func : Scenes.Isla.Appearance, enabled : true
 	});
+	
+	options.push({ nameStr : "Talk",
+		tooltip : "Have a chat with Isla.",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“Yes?”</i>", parse);
+			Text.Flush();
+			Scenes.Isla.TalkPrompt();
+		}, enabled : true
+	});
 	/* TODO
 	options.push({ nameStr : "name",
 		tooltip : "",
@@ -456,3 +476,305 @@ Scenes.Isla.Appearance = function() {
 	
 	Scenes.Isla.Prompt();
 }
+
+Scenes.Isla.TalkPrompt = function() {
+	var parse = {
+		
+	};
+	
+	//[name]
+	var options = new Array();
+	options.push({ nameStr : "Herself",
+		tooltip : "Ask Isla about herself.",
+		func : function() {
+			Text.Clear();
+			Text.Add("<i>“About me? I can’t really say much. I guess I’ve had a pretty good life so far… peaceful childhood, was sometimes a bit hungry but never actually starved, the neighboring tribes never actually bothered us… that’s how it is in the highlands. Little scattered tribes of morphs living beyond the reach of the kingdom in the mountains, just doing their own thing and staying out of peoples’ way.”</i>", parse);
+			Text.NL();
+			Text.Add("You weren’t asking about the polity of the highlands, you were asking her about herself.", parse);
+			Text.NL();
+			Text.Add("<i>“What <i>is</i> there to say? My tribe may once have had a patron spirit like the minotaurs do with Horkan, but that’s so many generations ago that even the stories are faded. We were so small that everyone tended to do a bit of everything, so that’s what I did, too. We don’t have the luxury of having, say, the village shaman sit in a dank cave and smoke strange herbs all day long - no, fellow’s out there catching fish and drying beans from dawn to dusk with the rest of us.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“I suppose that’s how I’d have lived, much like my mother and grandmother and great-grandma and… well, you get the point. There was always the option of heading out, I suppose, but if you think it through, going out for no better reason than to seek your fortune is a really stupid and irresponsible thing to do.”</i>", parse);
+			Text.NL();
+			Text.Add("Huh. You’ll have to ask her to explain that later, maybe. For now, though, you indicate that she should go on.", parse);
+			Text.NL();
+			Text.Add("<i>“I was about sixteen when my parents decided it was about time for me to help do my part in perpetuating the tribe, if you know what I mean. That first time didn’t go around too well, all of the eligible fellows already were paired up with womenfolk who were more eligible than I was.”</i> Her small, beady eyes stare straight ahead unblinkingly. <i>“Hey, it was just a setback; we’d try again next year… with much the same result. It’s not that I was against it or anything - I mean, I’ve been raised my entire life to expect as such. And to be fair, when it didn’t happen, I did feel kinda disappointed… maybe, what’s the word for it…”</i>", parse);
+			Text.NL();
+			Text.Add("Unwanted?", parse);
+			Text.NL();
+			Text.Add("Isla winces. <i>“Not quite, but I guess it’s close enough. My parents were thinking of actually seeing if there was anyone reputable from our neighbors who’d take me, then the shaman, bless him, says maybe it’s better if I take a few years off and play the part of spring guardian, since the position’s been vacant for a bit too long for comfort. And well, here I am while they decide what to do with my future marriage prospects.”</i>", parse);
+			Text.NL();
+			Text.Add("Hmm. You don’t know… she just seems like the kind of girl who would protest such a thing.", parse);
+			Text.NL();
+			Text.Add("<i>“Why, am I too mellow about it? Maybe it seems that way to a lowlander, but I’ve a bit more common sense than to kick up a fuss for its own sake. Things could be better, sure, but they could always be worse. I really wouldn’t mind this spring guardian job on a permanent basis if it didn’t mean I’d to be all by myself most of the time. Just a visit every now and then would be fine…”</i> she glances at you. <i>“It’s a little - well, more than a little ironic that a lowlander would be visiting me more than my own folks.”</i>", parse);
+			Text.NL();
+			Text.Add("You grin. Probably because you don’t know how important her job is and hence cheerfully disturbs her seclusion, eh? ", parse);
+			Text.NL();
+			Text.Add("Isla looks you up and down, then returns the grin. “Yeah, I guess. But there we have it. I like to think I’m a pretty down-to-earth girl, so there we have it.”</i>", parse);
+			Text.Flush();
+			
+			Scenes.Isla.TalkPrompt();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Spring",
+		tooltip : "So, what’s so special about this spring, anyway?",
+		func : function() {
+			isla.flags["Talk"] |= Isla.Talk.Spring;
+			
+			Text.Clear();
+			Text.Add("<i>“Well, all we have are legends and hearsay… no one from that time’s still alive, so that’s what we’ve got to work on.”</i>", parse);
+			Text.NL();
+			Text.Add("That’s fine with you - there’s a grain of truth in every story, after all. You just need to tease it out and see if it’s useful.", parse);
+			Text.NL();
+			Text.Add("Isla shrugs. <i>“Well, if you say so; as I said, dunno how much truth there is to it. As the tale goes - thousand years ago or so, there was this really big war on Eden that ate up most of the land, leaving us with what we have today. During that time, there was this spirit who looked after ferrets, otters, weasels, and of course, sables… we’d go out, do battle with the demons, and inevitably come back with an odd arm or leg if we were lucky.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“That kinda upset my people of the time, so the spirit was nice enough to give us a way to get our bodies back to what they were for free - this spring, that is. You’d go in with tentacles and creepy limbs and whatnot from the demons’ magics, and come out without all that nonsense sticking to you. It was a small gesture, but it did wonders for morale.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Nowadays, that spirit is gone, and so is much of Eden, but this here spring remains,”</i> Isla continues. <i>“And that’s how the story goes. How much of it is real, and how much of it is hearsay passed down from old, I dunno. Only thing I know for sure is that if ya go for a dip, you start changing into a must- musta - something like me. Longer you sit in the water, more you change, although as with all hot springs it’s probably not a good idea to stay in too long lest ya pass out and drown. Now that’d be downright embarrassing - to drown in a pool you can stand in.”</i>", parse);
+			Text.NL();
+			Text.Add("Changing into a mustelid aside, is there anything else you ought to know about it?", parse);
+			Text.NL();
+			Text.Add("Isla reaches up and scratches her ears as she thinks. <i>“Well… what exactly you turn into is different for different folks. If ya were born a morph like me, then you’d turn into your old self. If you weren’t, then it’s a toss-up what you’ll end up as. And if you’re already fully one…", parse);
+			if(isla.Figure() == Isla.Figure.Girly) {
+				Text.Add("”</i>", parse);
+				Text.NL();
+				Text.Add("Yes? She was about to say something?", parse);
+				Text.NL();
+				Text.Add("<i>“Well, then some other things can happen,”</i> she replies, before breaking into a rather severe coughing fit. <i>“Sorry. It’s just not really something that you say out loud in public.”</i>", parse);
+				Text.NL();
+				Text.Add("Aah, you see. <i>That</i> kind of transformation.", parse);
+				Text.NL();
+				Text.Add("Isla has another coughing fit, although it’s not as strong as the first one. <i>“It’s not very… extreme, but still quite noticeable nonetheless. Would have gotten me out of being spring guardian, but that’s kinda an extreme step to take.”</i>", parse);
+				Text.NL();
+				Text.Add("It’d have gotten her out of this gig? You might have to ask her about that sometime, but for now you just nod and let it go.", parse);
+			}
+			else {
+				Text.Add(" well, ya can see the effects for yourself right here,”</i> she says with a grin, jabbing a finger that stops just shy of her ample chest.", parse);
+			}
+			Text.NL();
+			Text.Add("Hmm. So if there were ever the need to, she wouldn’t mind if you had a soak in the spring?", parse);
+			Text.NL();
+			Text.Add("<i>“So long as you’re serious about it and don’t take it for a toy like those three brats do? Knock yourself out - Eden could do with more of us running about with their heads screwed on the right way.”</i>", parse);
+			Text.NL();
+			Text.Add("What does she mean by that?", parse);
+			Text.NL();
+			Text.Add("<i>“Think about it for a moment. Eden’s a pretty small place, or at least that’s what I’ve been told; there’s not much of it left after what happened ‘bout a thousand years ago. Unless you’re a fox or wolf or one of the more populous morphs, there’s not that much chance of you finding someone who looks like you…”</i>", parse);
+			Text.NL();
+			Text.Add("Does that really matter?", parse);
+			Text.NL();
+			Text.Add("<i>“Sorta. Coulda. Woulda. Shoulda. Just forget I said anything, right? Let’s move on.”</i>", parse);
+			Text.Flush();
+			
+			Scenes.Isla.TalkPrompt();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Guardian",
+		tooltip : "Ask her about her job as the spring’s guardian.",
+		func : function() {
+			Text.Clear();
+			Text.Add("So… what exactly <i>does</i> she do as the spring’s guardian, anyway?", parse);
+			Text.NL();
+			Text.Add("Isla’s lips stretch into a long, thin line. <i>“Well, as it was explained to me, I’m supposed to keep the place clear of anyone or anything that might have designs on fouling the spring’s waters. Do anything that’s required of me to keep it clean and flowing, that kind of thing. Protect it, and make sure everyone who comes in to use it isn’t going to pull any shenanigans.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Me myself, I mostly think of it as an extended camping trip. It’s not an actual exile - I still head back to leave off these pelts and get some of the things I can’t make myself up here, but it still does get pretty lonely. You aside, the only people who come visit me are those three brats - and more often than not they’re up to some sort of mischief.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“So yes, it’s a whole lot of nothing. The spring cleans itself out pretty well, and it’s not like it’s used very often in this day and age… so it wouldn’t be wrong to say that it looks after itself pretty well.”</i>", parse);
+			Text.NL();
+			Text.Add("Huh. Sounds like a pretty boring job.", parse);
+			Text.NL();
+			Text.Add("<i>“Boring, maybe, but not idle. Keeping myself fed and warm is more than enough to keep me busy for most of the day. Before I got stuck with this post, I never quite realized just how much work being by myself would be.”</i> She looks around for a bit, then heaves a sigh. <i>“I know, I know. It’s just a ceremonial position nowadays… there’s a reason why it’s the last of the leftovers who ends up chosen for the spot. Can we talk about something else, please? ", parse);
+			if(isla.Figure() == Isla.Figure.Girly)
+				Text.Add("This is getting to me. I know I should count my blessings, that having a plain face isn’t by far the worst thing that could’ve happened to me, but still…”</i>", parse);
+			else
+				Text.Add("I don’t like to look back on things behind me that’re done and over with - rather move ahead, y’know?”</i>", parse);
+			Text.NL();
+			Text.Add("That’s a surprisingly stark admission, and you agree to drop the issue.", parse);
+			Text.Flush();
+			
+			Scenes.Isla.TalkPrompt();
+		}, enabled : true
+	});
+	options.push({ nameStr : "Tribe",
+		tooltip : "So, what are her people like, anyway?",
+		func : function() {
+			Text.Clear();
+			Text.Add("So, what are her people like, anyway? With all the small tribes that dot the highlands, it’s hard to run into any particular one, whether it be intentional or by accident.", parse);
+			Text.NL();
+			Text.Add("<i>“Y’know, that word always trips me up. ‘Like’. Sure, a lowlander like you’s probably seen much, but when walking anywhere either means going ‘round a mountain or climbing it, you don’t tend to see much.”</i> She thinks a moment. <i>“Don’t know if I’m rightly answering your question, but we’re doing as we’ve always done, so long as anyone can remember. Couple hundred folks living in a hidey-hole between two hills out of the wind and rain, digging out land good dirt won’t wash off from during the rains and finding spots to graze the herds.”</i>", parse);
+			Text.NL();
+			Text.Add("It sounds like the rather idyllic life.", parse);
+			Text.NL();
+			Text.Add("<i>“I didn’t like it.”</i> Isla continues. <i>“Thought it was too boring - the only thing that really happened was the twice yearly clan get-together where folks would pair off, prevent blood from getting too stale? There were times when I thought I’d have a better life if I snuck down to the lowlands and went to ‘seek my fortune’, as some would put it.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“Of course, now that I’ve been here a while, I’ve been rethinking things,”</i> she finishes with a small sigh. <i>“Long stretches of absolutely nothing punctuated with moments of sheer terror - it’s enough to make me think that once all this is over and I head back, I should be just grateful to be tending to the herds. If I want excitement, a spot of gossip will do just fine.”</i>", parse);
+			Text.NL();
+			Text.Add("Right. Coming back to the point, though, so her tribe is mostly like the others in the highlands?", parse);
+			Text.NL();
+			Text.Add("<i>“Most are, to be honest. What we are aside, this place has a tendency to mold people into its liking. The old stories had it that when many of the peoples first arrived, they brought with them their own ways of doing things from the places they’d come from. Over time, though, living up in these mountains, they changed to suit the land rather than the other way around.</i>", parse);
+			Text.NL();
+			Text.Add("<i>“My tribe, we’ve got a stone circle. The zebras, they’ve got a spring. We mustelids dance to bring the rain, and the jackals dance to drive it away. I’m sure the minotaur do their own rituals and have their own sacred places, too, although I’ve never stopped to ask those three whelps about it. Point I’m getting at, though, is that all the highland tribes are quite the same in what we do. It’s the what it do it <b>with</b> and why we do it that’s the important difference.”</i>", parse);
+			Text.NL();
+			Text.Add("Ah.", parse);
+			Text.NL();
+			Text.Add("<i>“I guess I haven’t really answered your question,”</i> Isla continues. <i>“But what <b>do</b> you expect me to say about us? Anything you’ve heard about the highland tribes that’s true, you could probably apply it to mine and you wouldn’t be too far off the mark.”</i>", parse);
+			Text.NL();
+			Text.Add("Well, while she may think it completely mundane, perhaps others who aren’t so familiar with the highlands and the local cultures might think otherwise. You can see where she’s coming from, though - familiarity breeds contempt, as the saying goes, and maybe she’s too close to things to see them clearly. Guess you’ll just have to wander the highlands some more and hope you bump into the locals to be able to judge for yourself.", parse);
+			Text.NL();
+			Text.Add("Isla sniffs, wrinkling her nose. <i>“Well, if you really want to. I don’t know if I’d feel the same way if I were in your place, but I’m obviously not you. Can we move onto something else, please?”</i>", parse);
+			Text.Flush();
+			
+			Scenes.Isla.TalkPrompt();
+		}, enabled : true
+	});
+	if(isla.flags["Talk"] & Isla.Talk.Spring &&
+		!isla.PregHandler().IsPregnant() &&
+		isla.flags["Talk"] & Isla.Talk.Sex) {
+		
+		var figure = isla.Figure();
+		
+		var enabled = true;
+		if(figure == Isla.Figure.Womanly)
+			enabled = isla.Relation() >= 50;
+		
+		options.push({ nameStr : "Figure",
+			tooltip : "Propose that Isla should use the spring herself, to enhance her womanly figure.",
+			func : function() {
+				Text.Clear();
+				
+				if(figure == Isla.Figure.Girly) {
+					isla.flags["Figure"] = Isla.Figure.Womanly;
+					
+					Text.Add("You have to admit, you’re curious. Since Isla knows what the spring does, why doesn’t she just use it herself?", parse);
+					Text.NL();
+					Text.Add("<i>“Much good it’ll do me <b>after</b> I got thrust with the job of guardian, will it? So what if I turned into a looker, when there’s no one to look at me save those three troublemakers?”</i>", parse);
+					Text.NL();
+					Text.Add("And you, of course.", parse);
+					Text.NL();
+					Text.Add("<i>“And you, of course…”</i>", parse);
+					Text.NL();
+					Text.Add("It’s not so much showing off for others than a show of strength on her part, you explain. If she resents being so bony -", parse);
+					Text.NL();
+					Text.Add("<i>“Wouldn’t say bony’s the right word,”</i> Isla cuts in with a twitch of her nose. <i>“Not like I’m underfed.”</i>", parse);
+					Text.NL();
+					Text.Add("Well, lithe. Slender. This isn’t really the time to get caught up in euphemisms and semantics. This spring guardian gig <i>is</i> going to end in a handful of years, and what then? She doesn’t get picked again, and then ends up here again until she’s an old maid? She ought to think towards the future. If she <i>does</i> end up changing herself, then the more time to get used to her new proportions, the better.", parse);
+					Text.NL();
+					Text.Add("<i>“We’ve had this talk before, right? I told you why I don’t want to use it. Besides, it’s too easy to end up in there for too long and wind up changing in ways I’d rather not have… dicks are all fine and lovely, just not on me, thank you very much.”</i>", parse);
+					Text.NL();
+					Text.Add("If that’s her problem, you’ll stand by to make sure she doesn’t pass out from the heat. <i>Maybe</i> it’s just your imagination, but is she just making excuses for herself?", parse);
+					Text.NL();
+					Text.Add("Isla scowls, her beady black eyes flashing. <i>“I-I’m not making excuses, I’m just -”</i>", parse);
+					Text.NL();
+					Text.Add("Yes? She’s what?", parse);
+					Text.NL();
+					Text.Add("<i>“Well, I can’t be sure what’s going to happen, and whether this is going to end up well or not…”</i>", parse);
+					Text.NL();
+					Text.Add("Ah, she’s afraid of change and what it might bring. Better the demon you know that the dark road ahead - even though you know the demon is making you miserable, and the dark road only <i>might</i> do the same?", parse);
+					Text.NL();
+					Text.Add("<i>“Oh, all right,”</i> she says at last, moving to lean her spear against a nearby boulder. Her face might be perfectly straight, but you can hear the edge of relief in her voice, a sound like a soft sigh punctuating her words. <i>“I’ll do it.”</i> ", parse);
+					Text.NL();
+					Text.Add("She won’t regret it.", parse);
+					Text.NL();
+					Text.Add("Isla doesn’t reply, instead focusing in untying the knots bound into her hair and fur. Small pieces of thick, colored string fall into her paw-like hands to be carefully set aside, then she undoes her braid. Sure, it looked tightly knotted and compact, but you just hadn’t realized how much so until the sable-morph tosses her head and dark waterfall of glossy hair cascades down to her butt.", parse);
+					Text.NL();
+					Text.Add("<i>“Only thing I’d going for me was my hair and fur,”</i> Isla admits sheepishly when she notices you watching. <i>“Had to play up to my strengths, as Mama told me, but even that wasn’t enough.”</i>", parse);
+					Text.NL();
+					Text.Add("Mm, yes. Sure, you can understand why it’s necessary for her to keep it tied up, but she should really let it down more.", parse);
+					Text.NL();
+					Text.Add("Isla sniffs as she pulls off her loincloth, then steps into the steaming spring, pausing a moment to let the waters lap at her feet. <i>“I’ll think ‘bout it. Gotten better at it over the years, but it still can be a bitch to do up on a bad fur day.”</i> At least it seems that the banter’s taking her mind off what she’s about to do… she doesn’t seem that nervous anymore.", parse);
+					Text.NL();
+					Text.Add("With a single, nimble movement, Isla slips her body under the water’s surface, everything from her chin down submerged in the spring’s magic. Her soft fur clings to her skin, outlining her somewhat boyish figure for a clean and clear appraisal; with any luck, it won’t be boyish for very much longer. Now it’s just a waiting game - you settle down on the pool’s edge to wait… and watch, of course.", parse);
+					Text.NL();
+					Text.Add("Not that you have too long to wait, of course. Scarcely a handful of minutes have passed before Isla’s breathing grows hot and heavy, and then the sable-morph’s openly panting, her little pink tongue hanging out of her muzzle as she’s stricken by a sudden wave of lust. A soft whimper escapes her lips as her hands rise to her dainty tits, rubbing away shamelessly, her fingers digging into her chest fur to get at the small hard nipples beneath.", parse);
+					Text.NL();
+					Text.Add("Looks like the spring’s magic is starting to take hold. As you watch, Isla’s soft A-cup breasts begin to swell outwards like buns left to leaven, each stroke of her fingers across firm breastflesh evoking soft mewls of pleasure from her lips and a small surge of growth in her chest. The accompanying arousal only encourages her to grope her own rapidly maturing breasts even more eagerly, beginning the cycle anew. Every now and then, she brushes her fur aside to let you get a glimpse of the pink pearl of a nipple, ever so elusive.", parse);
+					Text.NL();
+					Text.Add("While this is going on, you note the other changes that’re taking place, too: your eye trails down Isla’s body to her mound and the pink gash of her sex, starkly outlined against her dark fur. Could it…? Is it…? Why yes, it’s swelling, the lips getting puffier, stretchier, more prominent by the second, her love-button stiff, erect and peeking out of the hood where it usually remains hidden. It’s so tempting, you can’t help but reach down and give it a light caress.", parse);
+					Text.NL();
+					Text.Add("The effect is immediate. Gritting her teeth, Isla bites back the wanton cry of pleasure bubbling in her throat. Her hips, though, betray her as she thrusts them towards your probing fingers, causing her heat-filled folds to momentarily slide around your fingertips. Yes, she’s definitely stretchier down there… and it looks like there’s more on her that’s maturing, too. Her hips, her ass, her thighs - all of them are filling out into firm, delicious curves worthy of the woman she ought to be.", parse);
+					Text.NL();
+					Text.Add("All right, that’s probably enough. Isla is practically half-delirious with pleasure, her flexible body splashing about in the water as she masturbates furiously, and you wonder why the spring is having a particularly strong effect on her. Maybe it’s because she’s its guardian? Nevertheless, it’s time for you to get her out, and hooking your hands under her shoulders, proceed to do just that, dragging a panting Isla out of the steamy water and onto dry land. The spring’s waters have washed the sable-morph clean of her body paint, leaving behind nothing but her birthday suit.", parse);
+					Text.NL();
+					Text.Add("<i>“Hee… hoo…”</i> A few lungfuls of chill highland air, and Isla groans. It’s no cold shower, but at least she looks a little more coherent now. <i>“Ugh. I’ve seen people in the pool before, but I wasn’t quite expecting <b>that</b>.”</i>", parse);
+					Text.NL();
+					Text.Add("It does seem to have paid a little more attention to her transformation, yes. You reach down with a hand, which Isla gratefully accepts, and once she’s standing, she gives herself a gentle pat-down all over, as if not quite believing the transformation she’s undergone. Well, you can help with that - with a well-placed pinch on the rear. Acceptably juicy, yet firm; Isla yelps, then glowers at you with no small amount of embarrassment.", parse);
+					Text.NL();
+					Text.Add("Yeah, you’d say she’s looking quite fine. So long as she keeps this up, she’ll be scooped up once this spring guardian gig is done.", parse);
+					Text.NL();
+					Text.Add("<i>“I guess I just needed that push to take the plunge,”</i> Isla replies as she studies her reflection in the spring, her ire fading into contentment at the sight, perhaps even a little surprise at how effective the changes were. Slowly, the sable-morph cups one furry breast in the palm of her hand and gives it a gentle squeeze, sighing softly at the pressure. <i>“Suppose I should thank you.”</i>", parse);
+					Text.NL();
+					Text.Add("No worries. If she ever feels the need to… ah, explore her improved figure, you’ll be more than happy to help.", parse);
+					//TODO Rel
+				}
+				else if(figure == Isla.Figure.Womanly) {
+					isla.flags["Figure"] = Isla.Figure.Voluptuous;
+					
+					Text.Add("Isla grins at your suggestion, and cocks her head at you. <i>“Heh… I honestly think I don’t look too bad like this. But you’ve got a point… and it’d be worth it to see the look on their faces when they discover how favored I’ve been by the spirits.”</i>", parse);
+					Text.NL();
+					Text.Add("Of course.", parse);
+					Text.NL();
+					Text.Add("<i>“Hah, don’t think I don’t know that you’ll be getting something out of this,”</i> Isla replies, wrinkling that tiny black button-nose of hers. <i>“Not that I mind, I suppose. Come along, then - should get started soon. Still remember how it felt the last time…”</i>.", parse);
+					Text.NL();
+					parse["day"] = world.time.LightStr("sunshine", "moonlight");
+					parse["skin"] = player.SkinDesc();
+					Text.Add("Ha, yeah. Together, the two of you step out into the [day] and make a beeline for the spring, its aura of warmth hitting your [skin] from quite the distance. Without hesitation, Isla sets aside her spear and quiver, setting them down on a nearby boulder, then makes a show of pulling off her loincloth. Flexible sable thumbs slide into the string waistband of her loincloth, and a gentle tug has her sliding the garment over her ample hips and down her legs. Isla doesn’t say anything, but makes sure you’re watching as she sends away her loincloth with a lazy kick and takes a step toward the spring. Although the body-paint patterns are identical to the ones she’d been wearing on her once-girlish figure, the way they interact with her now more ample physique are much more pleasing to the eye.", parse);
+					Text.NL();
+					Text.Add("<i>“I will say,”</i> she says with a sigh of pleasure as she removes her strings and undoes her braid, <i>“it does feel very good to be wanted, as opposed to the alternative.”</i>", parse);
+					Text.NL();
+					Text.Add("Indeed, indeed. You find a nearby rock to seat yourself upon, and wait for Isla to saunter up to the spring. She toes the steaming water twice, then slinks in with a purr of contentment, her luxurious dark fur clinging wetly to her womanly curves as the waters close in up to her neck.", parse);
+					Text.NL();
+					Text.Add("How does she feel?", parse);
+					Text.NL();
+					Text.Add("<i>“All warm and wet. Wonder if that’s how cubs feel when they’re in mommy’s tummy.”</i>", parse);
+					Text.NL();
+					Text.Add("You’re about to give your reply when a soft moan escapes Isla’s muzzle, and her tiny pink tongue runs over her lips. She draws in a deep breath, moans louder this time, and shudders from head to toe. Looks like it’s starting!", parse);
+					Text.NL();
+					Text.Add("As with her previous dip in the spring, the first changes begin in Isla’s breasts. Already a large B, they begin ballooning outwards, hemispherical lady lumps turning teardrop-shaped as more and more mass flows into them, the growth occurring in small spurts. Stiff and erect, her nipples peek out from her chest fur, followed quickly by deep pink areolae. Cupping the generous amounts of breastflesh she’s gained - now maybe a low D, large enough for her hands to cover but not fully engulf - Isla begins fondling her nipples eagerly, her fingers seeming to move of their own accord. Small whines escape the sable-morph’s muzzle as she teases the sensitive nubs of flesh, reveling in the enhancements that the spring’s magic is giving her.", parse);
+					Text.NL();
+					Text.Add("Slowly, the changes sweep over Isla’s body, accentuating her hourglass figure and rendering it even more blatant. Centered about her womanhood, the magic runs its course - it wasn’t that obvious the last time, but it seems like her body is transforming much more earnestly now. As you watch in rapt fascination, Isla’s cleft grows more pronounced and defined, her feminine folds thickening before puffing up with heat, advertising her fertility and sexual readiness. She closes her eyes and throws her head back as her hips widen again, giving her room to take much thicker cocks - and birth bigger, healthier cubs, if it comes to that. They were womanly before, but coupled with her swelling ass, they’re now truly juicy and voluptuous.", parse);
+					Text.NL();
+					Text.Add("Even her face is changing, her eyes growing wider and rounder, her cheeks and jaw more delicate, her muzzle and lips softer. They look just perfect for kissing… or sucking and licking, for that matter.", parse);
+					Text.NL();
+					Text.Add("Panting, Isla gazes down at her cunt needily, but doesn’t seem quite willing to let go of her newly enhanced rack. You’re only more than willing to take over breast duty, leaving the sable-morph’s fingers free to slip between her lush thighs and explore her most intimate place. Mm, her boobs sure are still firm and perky, but she’s now got enough heft to her chest that she’s definitely going to be needing some form of support now.", parse);
+					Text.NL();
+					Text.Add("Her face is heated, her eyes glazed, her body trembling, and she cries out loud in orgasm as the most important changes begin taking place - the internal ones. You can’t rightly tell what’s going on inside the sable-morph, but she is desperately pumping her fingers to the hilt into her snatch at a furious pace. Then, without warning, her normally concave belly swells slightly, leaving you to wonder what just happened back there.", parse);
+					Text.NL();
+					Text.Add("Still, it looks like this is a good enough point to get her out of there. Though riddled with lust, Isla still responds to your urging, and shakily steps out of the steamy waters - with more than a little help from you, of course. She’s still unused to her new stance and proportions, and leans against the boulder with her spear as she gets a hold on her new form. Her recovery is a lot quicker this time around, and before long she’s her old self.", parse);
+					Text.NL();
+					Text.Add("Does she like it?", parse);
+					Text.NL();
+					Text.Add("Isla takes her time in replying, instead running her hands across her lush, childbearing hips, over her narrow waist and ending up at cupping her luscious breasts. Slowly, she bends over and picks up her loincloth, testing her full range of motion and showing off to you while about it. <i>“Oh, aye. Very much indeed. Although I’ll need something to hold these puppies up, and it seems like this won’t fit my bottom any more…”</i> She stretches out the fabric between her fingers for emphasis. <i>“Guess I’ll just have to learn a lot more needlework fast.”</i>", parse);
+					Text.NL();
+					Text.Add("Well, if she ever needs help adjusting to her new body…", parse);
+					Text.NL();
+					Text.Add("Isla’s muzzle splits into a grin. <i>“Yeah, yeah, I know. Don’t worry.”</i>", parse);
+					//TODO Rel
+				}
+				else { //Curvies
+					Text.Add("<i>“Heh. Much as I’d like to be the best looker on the whole of Eden, the spring does have its limits, you know,”</i> Isla says with a chuckle and sultry grin. <i>“‘Sides, I’m already pretty smashing like this. Can’t improve on a figure of perfection, can ya? Being balanced and all that.”</i>", parse);
+					Text.NL();
+					Text.Add("Looking over Isla again, you have to admit that she’s already where she needs to be - the spring isn’t going to be “enhancing” her any further. Well, on the bright side, it does mean she’ll be able to enjoy a relaxing soak without having to worry about waking up to a new body.", parse);
+					Text.NL();
+					Text.Add("<i>“Right, and I don’t have to trek down all the way to bathe, which makes dealing with my hair and fur quite a bit easier. Hey, maybe <b>you</b> should have a go instead.”</i>", parse);
+					Text.NL();
+					Text.Add("You’ll consider it deeply.", parse);
+				}
+				Text.Flush();
+				
+				Scenes.Isla.TalkPrompt();
+			}, enabled : enabled
+		});
+	}
+	Gui.SetButtonsFromList(options, true, function() {
+		Text.Clear();
+		Text.Add("<i>“Something else on your mind?”</i>", parse);
+		Text.Flush();
+		Scenes.Isla.Prompt();
+	});
+}
+
+
+
+
+/* TODO Rel boosts
+
+ */
