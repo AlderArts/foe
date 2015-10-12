@@ -309,11 +309,22 @@ Scenes.Isla.Prompt = function() {
 		tooltip : "Have a chat with Isla.",
 		func : function() {
 			Text.Clear();
-			Text.Add("<i>“Yes?”</i>", parse);
+			Text.Add("<i>“Aye?”</i>", parse);
 			Text.Flush();
 			Scenes.Isla.TalkPrompt();
 		}, enabled : true
 	});
+	
+	var womb = isla.PregHandler().Womb();
+	var preg = womb && womb.pregnant;
+	var stage = preg ? womb.progress : 0;
+	
+	if(stage >= 0.4) {
+		options.push({ nameStr : "Tummy Rub",
+			tooltip : "Is that big tummy of hers weighing her down? Maybe you can help out with that.",
+			func : Scenes.Isla.TummyRub, enabled : true
+		});
+	}
 	/* TODO
 	options.push({ nameStr : "name",
 		tooltip : "",
@@ -327,6 +338,14 @@ Scenes.Isla.Prompt = function() {
 		Gui.NextPrompt();
 	});
 }
+
+
+/*
+ * 
+[] - 
+//Requires Isla to be visibly pregnant. Else, hide.
+
+ */
 
 Scenes.Isla.Appearance = function() {
 	var parse = {
@@ -772,7 +791,251 @@ Scenes.Isla.TalkPrompt = function() {
 	});
 }
 
-
+Scenes.Isla.TummyRub = function() {
+	var parse = {
+		playername : player.name
+	};
+	
+	var figure = isla.Figure();
+	
+	var womb = isla.PregHandler().Womb();
+	var preg = womb && womb.pregnant;
+	var stage = preg ? womb.progress : 0;
+	var num = womb.litterSize;
+	
+	Text.Clear();
+	Text.Add("Cuddling up to the sable-morph, you wrap one arm about her back, easing the both of you into a half-sitting, half-lying position with your backs to the mountainside. She instinctively tenses at the touch, but soon relaxes as you trail one finger down the fertile swell of her midriff.", parse);
+	Text.NL();
+	Text.Add("Heh, she’s starting to get big, isn’t she? How’s she holding up under that weight?", parse);
+	Text.NL();
+	if(stage < 0.6) {
+		Text.Add("<i>“Doing quite well,”</i> Isla replies with a sigh as your finger lingers by her belly button, drawing small circles in her luxuriant fur. <i>“Hey, that feels tingly.”</i>", parse);
+		Text.NL();
+		Text.Add("Tingly? Why, does that mean you should do more of it?", parse);
+		Text.NL();
+		Text.Add("<i>“Wouldn’t mind if ya did. It feels really good. All satisfying-like, what with being knocked up and all… actually, come to think of it, I’ve been feeling a little stretched round those parts lately.”</i>", parse);
+		Text.NL();
+		Text.Add("Well, if she’s in need of a little relief, you’ll just go ahead and make her feel comfortable, then.", parse);
+		Text.NL();
+		Text.Add("<i>“Yeah, I could use as much. Go ahead, warrior. Let’s see what you’ve got.”</i>", parse);
+	}
+	else if(num <= 1) {
+		Text.Add("<i>“Starting to get a little weighed down here,”</i> Isla replies, a little huff of breath escaping her small nose. <i>“Still holding up pretty good, though.”</i>", parse);
+		Text.NL();
+		Text.Add("As she should be, you reply as you slowly caress her burgeoning baby bump, feeling the gentle throbbing and pulsing of her womb at work. The fact that your fingers are running through her luxuriant fur at the same time only makes things better for you, and you linger for a little while on the rounded peak of her belly, teasing her popped-out belly button for a bit.", parse);
+		Text.NL();
+		Text.Add("How <i>does</i> she keep her fur like that, anyway? With all the running around she does, you’d have expected tangles and snarls to run rampant in it.", parse);
+		Text.NL();
+		Text.Add("<i>“By being very careful. Now, hold that spot for me - right, ah. That one was particularly sore…”</i>", parse);
+	}
+	else { //twins/triplets
+		Text.Add("<i>“Oof. I get around okay, but at times the skin feels so stretched that I wonder if I’m going to actually pop. Like really, just burst…”</i>", parse);
+		Text.NL();
+		Text.Add("Psh, she knows she doesn’t need to worry about that. Such a silly sable she is.", parse);
+		Text.NL();
+		Text.Add("Isla pouts. <i>“Yeah, I know, but that doesn’t stop me from <b>feeling</b> that way. Thought you said you were going to give me a hand with that?”</i>", parse);
+		Text.NL();
+		Text.Add("But of course. Digging your fingers deep into Isla’s warm fur, you slide your fingers across the full, fertile swell of her baby bump, feeling the shifting and squirming of the cubs within. Her skin’s stretched over her womb, taut as a drum, and Isla closes her eyes and murmurs under her breath as you pet away with extreme prejudice.", parse);
+		Text.NL();
+		Text.Add("<i>“Spirits above, that’s much better,”</i> she breathes. <i>“I’m certainly looking forward to being able to see my feet again, for one. It’s been a while since they vanished, and I wouldn’t mind knowing where they are. Come to think of it, I wouldn’t mind being able to see my tummy button again, too.”</i>", parse);
+	}
+	Text.NL();
+	Text.Add("Back and forth, back and forth, your fingers ply up and down the rise of Isla’s growing pregnancy, sidling up to just beneath her cleavage to stopping mere inches from her mound. You pay a little extra attention to the underside of her lower belly, feeling for the spot where the heat of her womb is the most intense, then apply pressure and start rubbing in circles.", parse);
+	Text.NL();
+	Text.Add("It’s not long before you’re rewarded with a kick from within, faint but distinctly present. Isla squeaks in surprise, then looks up at you.", parse);
+	Text.NL();
+	Text.Add("<i>“Oi! Don’t do that!”</i>", parse);
+	Text.NL();
+	Text.Add("You raise your eyebrows and whistle innocently. Don’t do what?", parse);
+	Text.NL();
+	Text.Add("<i>“That!”</i> Breathing deeply, Isla reaches for her bump, soothingly rubbing the firm, swollen swell, but winces again when another kick comes from within, this time strong enough to cause a distinct, if momentary bump on her midriff.", parse);
+	Text.NL();
+	Text.Add("<i>“Oy, it’s not fair! You’re not supposed to gang up on me like that, one on the inside, one on the outside…”</i>", parse);
+	Text.NL();
+	Text.Add("Oh ho ho, it certainly wasn’t intentional, but you’ll take what you can get. Moving your hands to the sides of Isla’s baby bump, you start off with a number of smooth, easy strokes, but change those to tickles without warning. It certainly catches Isla by surprise; she squeals and kicks feebly in a mock attempt to fight you off, giggling all the while.", parse);
+	Text.NL();
+	if(stage < 0.6) {
+		Text.Add("To be honest, she puts up a pretty good fight even while play-acting - her tummy isn’t <i>that</i> weighty to the point of being severely cumbersome yet, especially for someone like her. Nevertheless, you decide to leave nothing to chance, clambering atop her and pinning her down with your weight even as you shower her delicate midriff with tickles.", parse);
+		Text.NL();
+		Text.Add("<i>“Hee hee!”</i> she manages to blurt out between giggles. <i>“C’mon, [playername]… ya can stop now, please? Please?”</i>", parse);
+		Text.NL();
+		Text.Add("As Isla wriggles about under you, she definitely puts on quite the show of slinky slipperiness that her kind’s so famed for. There’s little doubt that had she been really trying, she’d have had no problem getting out from under you, but it looks like she’s having too much fun for that.", parse);
+	}
+	else if(num <= 1) {
+		Text.Add("Her large tummy does get in the way some, but she nevertheless remains quite agile as you continue eliciting fits of laughter from her. Of course, you’re not alone in the endeavor - little bumps rise on the surface of Isla’s stretched womb, helpfully letting you know that your cub’s decided to join in the fun by tickling his or her mother from the other side, too.", parse);
+		Text.NL();
+		Text.Add("<i>“Hee hee!”</i> Isla wheezes breathlessly, gasping for air between giggles. <i>“C’mon, double teaming me like this isn’t fair, you’re already tiring me out…”</i>", parse);
+		Text.NL();
+		Text.Add("Of course it’s not fair. It’s not remotely supposed to be fair. Wherever did she get that quaint idea that this was supposed to be so-called fair, whatever that word means? Another series of noogies and tickles to the sable-morph’s sensitive belly has her utterly in your power, squealing and giggling away; seems like her hair trigger nature isn’t only reserved for sex.", parse);
+	}
+	else { //twins/triplets
+		Text.Add("<i>“‘S not fair!”</i> she mewls again, feebly trying to slap away your hands as you assault her prodigiously swollen baby bump with tickly fingers. <i>“You lot, you’re ganging up on me!”</i>", parse);
+		Text.NL();
+		Text.Add("Why, indeed you are. How perceptive she is!", parse);
+		Text.NL();
+		Text.Add("Isla squeals, then breaks out into another giggling fit as you pet and tickle her tummy. With how big her pregnancy has become, there’s a lot of tummy for you to tend to - it’s a good thing that your cubs are helping out, nudging and squirming from the other side with enough force that bumps and bulges emerge on the taut, rounded surface of her midriff.", parse);
+		Text.NL();
+		Text.Add("Isla moans softly, her mouth hanging open loosely to reveal sharp little teeth as she gasps for breath. Her breasts heave, her huge pregnancy rises and falls, and yet she can’t stop giggling thanks to your naughty, ticklish fingers. Seems like the bigger her tummy gets, the more sensitive it becomes, which would only make sense.", parse);
+		Text.NL();
+		Text.Add("<i>“Okay, okay, you win. You’re tirin’ me out in no time flat at all.”</i> She stops to catch her breath a moment, then continues. <i>“Just you wait till I don’t have this in the way, I’ll make you squeal like a pig. Squeal, y’ hear me?”</i>", parse);
+		Text.NL();
+		Text.Add("You’ll hold her to that, then.", parse);
+	}
+	Text.NL();
+	Text.Add("<i>“Spirits above,”</i> Isla sighs as you finally stop the tickling, slumping back and letting her head loll on the plateau’s soft grass. <i>“You’ve gone and tired me out good…”</i>", parse);
+	Text.NL();
+	Text.Add("Wasn’t it fun, though, and doesn’t her tummy feel better now?", parse);
+	Text.NL();
+	Text.Add("<i>“Yeah, but I’m not letting you off like that.”</i> ", parse);
+	Text.NL();
+	Text.Add("Well, maybe you could pay that debt with a backrub, too. Now that you’ve dealt with her front, why not her behind, too?", parse);
+	Text.NL();
+	if(stage < 0.6) {
+		Text.Add("<i>“Eh… sure wouldn’t mind someone taking the knots out of my back. Been losing a bit of sleep lately because of them - nothing to worry too much about, though. Y’ gotta promise one thing, though.”</i>", parse);
+		Text.NL();
+		Text.Add("What would that be?", parse);
+		Text.NL();
+		Text.Add("<i>“No more surprise tickles, ‘kay? That last bout just about did me in.”</i>", parse);
+		Text.NL();
+		Text.Add("Hah, is that what she’s worried about? Well, she needn’t have worried; any surprise tickles you might deliver will be very, <i>veeery</i> gentle so as not to exhaust her. Heh.", parse);
+		Text.NL();
+		Text.Add("<i>“Oy, I mean it!”</i> she begins, but you’ve already laid your hands on her back and gotten to work.", parse);
+	}
+	else if(num <= 1) {
+		Text.Add("Isla looks a little uncertain, no doubt with the memory of your relentless tickle assault still fresh in her mind, but she finally gives in and rolls onto her side, presenting her back to you. <i>“If ya don’t mind, then. Hey, you made me like this; least ya can do is to help me feel a little better.”</i>", parse);
+		Text.NL();
+		Text.Add("It’ll be your pleasure, then. Laying your hands on the firm muscles of Isla’s back, you push your fingers in and begin.", parse);
+	}
+	else { //twins/triplets
+		Text.Add("<i>“Oh, tryin’ to make up for running poor old me out of breath? You’re more than welcome t’ do so.”</i> That said, the sable-morph eagerly thrusts her back out at you. <i>“Not that I’m resenting these little ones, but at times they can get so damned heavy… yer more than welcome to work out the knots in my back, they’re driving me crazy.”</i>", parse);
+		Text.NL();
+		Text.Add("She’s really very eager for that backrub, isn’t she?", parse);
+		Text.NL();
+		Text.Add("Isla looks at you over her shoulder, smiles, and rolls her eyes at you. <i>“What part of ‘driving me crazy’ did you not understand back there? Now put your effort where your mouth is an’ get to it!”</i>", parse);
+		Text.NL();
+		Text.Add("As she wishes. Positioning your hands along either side of Isla’s back, you dig your fingers in, getting a good feel for the firm muscles.", parse);
+	}
+	Text.Add(" Slowly, you begin kneading away, putting your back into it as you roll your knuckles into the small of Isla’s back. A small sigh of relief escapes her muzzle, the sable-morph clearly enjoying the amateur massage you’re delivering to her. Her soft, furry tail swings from side to side, idly batting at you as you continue working away; it’s not a wholly unpleasant feeling, much like being dusted by a very soft feather duster.", parse);
+	Text.NL();
+	Text.Add("How does she feel?", parse);
+	Text.NL();
+	Text.Add("<i>“Much better, thank ye.”</i>", parse);
+	Text.NL();
+	Text.Add("Good, good. You’ll get to the rest of her in good time. For now, she should just lie back and relax.", parse);
+	Text.NL();
+	Text.Add("<i>“So long’s you don’t start anything funny…”</i>", parse);
+	Text.NL();
+	Text.Add("Who, you? Whatever would give her that idea? Spirits forbid, you’re so hurt that she would accuse you of such a thing!", parse);
+	Text.NL();
+	Text.Add("<i>“Hah.”</i>", parse);
+	Text.NL();
+	Text.Add("Bit by bit, you start moving away from the small of her back, alternating between kneading and pounding as you soothe the muscles to either side of her spine. Isla squeaks happily and appreciatively as you work away, and pushes her back against your touch, eager to be rid of the tenderness the weight of her cubs has imposed on her. It’s cute - once you know which buttons to push, you can play her like a fiddle, but then again isn’t that the same of most people anyway?", parse);
+	Text.NL();
+	Text.Add("<i>“Ah, that sure feels great…”</i>", parse);
+	Text.NL();
+	Text.Add("Isn’t it? Smiling, you push her braid aside and roll your knuckles against her shoulders, eliciting a few small, happy noises from the back of her throat, then slide them down her back until they’re just above her tailbone.", parse);
+	Text.NL();
+	if(figure != Isla.Figure.Girly) {
+		Text.Add("Your eyes are drawn to the pert, rounded form of Isla’s butt, so much more improved than the flat ass cheeks she’d started out with when you first met her. On impulse, you give one of them a light smack, watching with no small amount of satisfaction the firm jiggle that ripples outward from your touch.", parse);
+		Text.NL();
+		Text.Add("<i>“Eep! Oy!”</i>", parse);
+		Text.NL();
+		Text.Add("Aww. She was just so tempting and womanly that you couldn’t help yourself.", parse);
+		Text.NL();
+		Text.Add("She looks over her shoulder at you. <i>“Y-ya really mean it?”</i>", parse);
+		Text.NL();
+		Text.Add("Of course. Now, why doesn’t she just relax so you can finish up?", parse);
+		Text.NL();
+	}
+	Text.Add("You run your fingers down Isla’s back in one last pass, focusing your efforts on her waist and sides, then move up to her shoulders once more. When you’re finally done, the sable-morph heaves a huge sigh of relief and rolls her shoulders in satisfaction.", parse);
+	Text.NL();
+	Text.Add("How does she feel?", parse);
+	Text.NL();
+	Text.Add("<i>“Much better now, thank ye. I’ll be sleeping much better t’night.”</i>", parse);
+	Text.NL();
+	Text.Add("Glad you could help. Is there any other part of her body which’s still aching?", parse);
+	Text.NL();
+	Text.Add("<i>“Well, these dugs o’ mine have been getting all heavy of late…”</i>", parse);
+	Text.NL();
+	Text.Add("What, is that an invitation you hear? Does she need some relief for those aching jugs of hers?", parse);
+	Text.NL();
+	Text.Add("<i>“Wait, I never said -”</i> Isla begins, but her words are cut off by a soft squeal as you embrace her from behind, wrapping your arms around her squarely to cup her breasts with your hands. She wriggles a little, but you soon put a stop to that by rubbing your thumbs against her nipples, coaxing a soft moan from her mouth. ", parse);
+	if(figure == Isla.Figure.Girly) {
+		Text.Add("Mm, wonderful. Her breasts may be nothing to look at normally, but their milky swelling has caused them to grow into perfectly palmable orbs that fit snugly into your cupped hands. As you begin your gentle massaging, beads of pearly white milk begin leaking from her nipples, slowly seeping into her fur.", parse);
+	}
+	else if(figure == Isla.Figure.Womanly) {
+		Text.Add("Now that’s more like it; all she has to do is lie back and enjoy things as they happen. Not too much to ask, is it? The effects of the spring on Isla’s physique are readily apparent - engorged with production in preparation for the eventual birth, the sable-morph’s baby feeders are large enough such that your hands can’t engulf all of their warm, slightly jiggly goodness.", parse);
+		Text.NL();
+		Text.Add("Another moan, more impassioned this time, sounds in the air as you apply pressure to her tender boobflesh. Slowly but surely, heat rises into her chest as her nipples harden even further, and a steady dribble of warm milk flows into your palm.", parse);
+	}
+	else { //curvy
+		Text.Add("<i>“Ngh… oh! Oh!”</i>", parse);
+		Text.NL();
+		Text.Add("Did that feel good? Sure sounds like it did.", parse);
+		Text.NL();
+		Text.Add("Isla pants and moans whorishly, her little pink tongue hanging out of her maw as you slide your fingers off her nipples and work on circling her fat areolae. The spring’s certainly worked a wonderful magic on her body - large and warm, the load of baby food within causing just a bit of sag, Isla’s milk-jugs have matured to the point where you can hardly hope to hold all of her breastflesh in your hands alone. Even just trying as you are, cupping the rounded ends of her boobs with your palms, you can <i>feel</i> her firm cans and the payload within roll about in your grasp, desperate to get out.", parse);
+		Text.NL();
+		Text.Add("That’s just the beginning, though. You can definitely feel a flush of heat welling up in Isla’s chest, delightfully warm as it firms up her breastflesh and causes her nipples to protrude even further, but the best part of it all are the twin streams of thick pearly milk which erupt from her nipples, squirting into the grass.", parse);
+		Text.NL();
+		Text.Add("Mm… delicious.", parse);
+	}
+	Text.NL();
+	Text.Add("Once you’re sure you have a firm hold on Isla’s breasts, you begin to milk her by hand, gently pulling on each boob in a rhythmic up-down motion. Your efforts are soon paid off: gentle squirts of milk start flowing freely from each darkened nipple as you massage her baby feeders, relieving the aching things of their excess milk.", parse);
+	Text.NL();
+	Text.Add("On her part, Isla cringes and closes her eyes, instinctively thrusting her chest out so you can get complete, unfettered access to the entirety of her chest, oh-so-eager to have her tenderness soothed. You’re only more than willing to comply, and soon the air is heavy with the sweet smell of warm, fresh milk, growing ever stronger as her milk lets down in earnest.", parse);
+	Text.NL();
+	Text.Add("<i>“Ngh! Oh! Ohhhh…”</i>", parse);
+	Text.NL();
+	Text.Add("You stop your milking for a moment to turn Isla’s head and gaze into her eyes, unfocused and addled with a mixture of pleasure and wonder. She mewls plaintively, clearly wondering why you’ve stopped, then starts panting again as you start up your efforts once more.", parse);
+	Text.NL();
+	if(figure == Isla.Figure.Girly) {
+		Text.Add("With how enthusiastically you’re milking her, it doesn’t take long for Isla’s small breasts to be completely drained. Small streams quickly dry up to dribbles, and then into drops.", parse);
+		Text.NL();
+		Text.Add("Nevertheless, you make sure that you give her a full massage, else she’ll be complaining about an aching chest again before long. You wouldn’t want that, would you? Or maybe you do…", parse);
+	}
+	else if(figure == Isla.Figure.Womanly) {
+		Text.Add("Enthusiastic as you are, it still takes a little while for Isla’s milkiness to start tapering off. The magical spring’s certainly done its job, that’s for sure - not just outside, but inside as well. By the time you’re done draining her tits with a full massage, the grass and ground underneath her are absolutely sodden with sweet-smelling milk - streams slowly become dribbles, and from there drops until the she’s well and truly emptied.", parse);
+		Text.NL();
+		Text.Add("Not that your efforts weren’t welcome, of course. Isla’s body readily betrays her arousal, her breasts having perked up even more, the flush in her chest burning away, her breath heated and heavy. Savoring the last of the experience, you shower every last square inch of breastflesh with light, tender caresses, making sure that all her tensions are soothed and her stresses relieved.", parse);
+		Text.NL();
+		Text.Add("You finish up by drawing small circles about her slightly bulging areolae, fingertips moistened with milk, then flick her nipples a final time before letting go of that firm deliciousness.", parse);
+	}
+	else { //curvy
+		Text.Add("Isla’s milk makers are as productive as their size would suggest. Fat and prominent as they stick out stiffly from her chest fur, her nipples cap bulging areolae and breasts that are completely unrecognizable from the practically flat chest she once had, testament to the transformative spring’s power. Rivers of milk stream from her milk cans, practically bursting forth from the sheer pressure within, their flow seemingly without end.", parse);
+		Text.NL();
+		Text.Add("Unable to hold back any longer, the sable-morph lets out a whorish wail as you pull and squeeze away, crying out and bucking against you as an orgasm washes through her body. Messy sexual fluids stain her crotch fur and loincloth, and you let her catch her breath for a moment or two before continuing.", parse);
+		Text.NL();
+		Text.Add("<i>“Ngh… oh. Ah!”</i>", parse);
+		Text.NL();
+		Text.Add("Why, did you hit a particularly tender spot?", parse);
+		Text.NL();
+		Text.Add("She just pants in reply, breath heated thanks to her flushed, burning chest.", parse);
+		Text.NL();
+		Text.Add("Slowly but methodically, you drain Isla of what milk remains in her baby feeders. Firm yet heavy, her breastflesh is a delight to touch, and you play your fingers all over them, feeling just the slightest bit of give form as more and more milk is drained from her. It soaks her fur, wets your fingers - which is just perfect for you to caress her bulging areolae and engorged teats with, drawing small circles in them until her breathing grows quick and she looks like another climax’s coming on her.", parse);
+		Text.NL();
+		Text.Add("For better or for worse, it doesn’t happen, though. When she does run dry, it happens all of a sudden - gushing rivers of white cream easing up into dribbles and dying out within moments. Slowly, you give her ample chest one last squeeze, then turn to survey your handiwork.", parse);
+		Text.NL();
+		Text.Add("Emptied from their reserves, all that mustelid milk hasn’t just soaked the ground sodden, it’s actually pooled into puddles of considerable size. Wow, generous as they were, you didn’t think that Isla’s milk jugs could be filled to that extent. She’ll have no problem feeding the cubs when she finally pops, that’s for sure.", parse);
+	}
+	Text.NL();
+	Text.Add("Groaning and squirming, Isla slinks out of your grasp and collapses to the ground, still panting away like a bitch in heat. Your run your fingers through one of the few spots in her fur that’re still relatively dry, and ask her if she’s still sore anywhere.", parse);
+	Text.NL();
+	Text.Add("<i>“No, but you’ve done gone and tired me out…”</i>", parse);
+	Text.NL();
+	Text.Add("So she’s not sore any more, eh? It looks like your full-body massage was a rousing success, then. Would she mind if - your thoughts are stopped halfway by a gentle snore coming from the ground. Oh. Looks like she’s curled up in on herself and gone to sleep, hugging her baby bump protectively, soft mountain grass pillowing her head.", parse);
+	Text.NL();
+	Text.Add("Well, if that isn’t the cutest thing ever…", parse);
+	Text.NL();
+	Text.Add("Still, guess that leaves you to your own devices. You give Isla a pat on her brow, and after making sure that the plateau is safe, head on back down the trail. Best to give her a little alone time, yes?", parse);
+	Text.Flush();
+	
+	world.TimeStep({hour: 4});
+	//TODO REL
+	
+	Gui.NextPrompt(function() {
+		MoveToLocation(world.loc.Highlands.Hills);
+	});
+}
 
 
 /* TODO Rel boosts
