@@ -703,7 +703,7 @@ Scenes.DryadGlade.MotherTreeTalk = function() {
 		playername : player.name
 	};
 	
-	//[Herself][Orchid][Spirit][Lifebringer]
+	//[Herself][Orchid][Spirit][Lifegiver]
 	var options = new Array();
 	options.push({ nameStr : "Herself",
 		func : function() {
@@ -745,7 +745,7 @@ Scenes.DryadGlade.MotherTreeTalk = function() {
 		}, enabled : true,
 		tooltip : "Ask her about her younger daughter, Spirit, who resides in your Gem."
 	});
-	options.push({ nameStr : "Lifebringer",
+	options.push({ nameStr : "Lifegiver",
 		func : function() {
 			Text.Clear();
 			Text.Add("<i>“It is who you are and who you will be,”</i> she replies. <i>“All will be revealed in time, if you persevere. Much rests on you, according to the sage.”</i>", parse);

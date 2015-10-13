@@ -178,7 +178,7 @@ Scenes.Cveta.Dates.DryadGlade = function() {
 		Text.NL();
 		Text.Add("<i>“Well…”</i> Cveta glances about her, at the flowers, at the spring, and finally back to Mother Tree herself. <i>“All right, great mother. Your home has a certain inspiring quality to it. Besides, which performer could resist a captive audience?”</i>", parse);
 		Text.NL();
-		Text.Add("<i>“Thank you, child. And thank you, Lifebringer.”</i>", parse);
+		Text.Add("<i>“Thank you, child. And thank you, Lifegiver.”</i>", parse);
 	}
 	else {
 		Text.Add("Scarcely have you and Cveta entered the glade when the nymphs frolicking in the pool notice the two of you. Squealing with glee, they take off to tell the glade’s other inhabitants of your arrival.", parse);

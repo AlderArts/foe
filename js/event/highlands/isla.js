@@ -1038,6 +1038,6 @@ Scenes.Isla.TummyRub = function() {
 }
 
 
-/* TODO Rel boosts
+/* TODO Rel boosts + time (talks)
 
  */
